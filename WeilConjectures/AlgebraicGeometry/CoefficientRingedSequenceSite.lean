@@ -29,6 +29,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.RingTheory.WContractibleGeometricCriterion
+public import Mathlib.CategoryTheory.Products.Basic
+public import Mathlib.CategoryTheory.Sites.Grothendieck
+public import Mathlib.Order.Category.Preord
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteTopology
 
 /-! # The coefficient ringed sequence site and canonical functors
 
@@ -65,11 +69,10 @@ def coefficientSequenceCovering {C : Type c} [Category.{v} C]
   S.functorPullback (Prod.sectR X.1 C) ∈ J X.2
 
 /-- The vertical covering condition satisfies the topology axioms.
-Source: Stacks 0941 (auxiliary; not a blueprint node).
-Proof: the slice of the maximal sieve is maximal. For pullback along (h,f), the
-vertical slice contains the pullback along f of the old vertical slice, so covering
-stability and upward closure apply. For local character, test the supplied condition
-on every vertical arrow in the covering slice and apply local character in J. -/
+Source: Stacks 0941 (blueprint: lem-pur-vertical-sequence-topology).
+Proof: specialize the already proved vertical product-site construction to ℕ.
+Its covering predicate is definitionally the displayed vertical-slice condition,
+so its maximal-sieve, pullback-stability and local-character axioms give the result. -/
 theorem coefficientSequenceTopologyAxioms {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) :
     (∀ X : ℕ × C, coefficientSequenceCovering J X ⊤) ∧
@@ -80,27 +83,10 @@ theorem coefficientSequenceTopologyAxioms {C : Type c} [Category.{v} C]
         (∀ {Y : ℕ × C} {f : Y ⟶ X}, S f →
           coefficientSequenceCovering J Y (R.pullback f)) →
         coefficientSequenceCovering J X R) := by
-  refine ⟨?_, ?_, ?_⟩
-  · intro X
-    change (⊤ : Sieve X.2) ∈ J X.2
-    exact J.top_mem X.2
-  · intro X Y S f hS
-    apply J.superset_covering _ (J.pullback_stable f.2 hS)
-    intro Z g hg
-    change S ((Prod.sectR Y.1 C).map g ≫ f)
-    have hs := S.downward_closed hg (Prod.mkHom f.1 (𝟙 Z))
-    have he : (Prod.sectR Y.1 C).map g ≫ f =
-        Prod.mkHom f.1 (𝟙 Z) ≫ (Prod.sectR X.1 C).map (g ≫ f.2) := by
-      ext <;> simp
-    exact he.symm ▸ hs
-  · intro X S hS R hR
-    apply J.transitive hS
-    intro Y f hf
-    have hr := hR (f := (Prod.sectR X.1 C).map f) hf
-    change (R.functorPullback (Prod.sectR X.1 C)).pullback f ∈ J Y
-    change (R.pullback ((Prod.sectR X.1 C).map f)).functorPullback
-      (Prod.sectR X.1 C) ∈ J Y at hr
-    rwa [Sieve.functorPullback_pullback] at hr
+  let K := verticalDiagramSiteTopology ℕ C J
+  exact ⟨fun X ↦ K.top_mem X,
+    fun {_ _ _} f hS ↦ K.pullback_stable f hS,
+    fun {_ _} hS R hR ↦ K.transitive hS R (fun {_ _} hf ↦ hR hf)⟩
 
 /-- The actual sequence topology, with covering determined by the vertical slice.
 Source: Stacks 0941 (auxiliary; not a blueprint node). -/

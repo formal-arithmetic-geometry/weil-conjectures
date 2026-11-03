@@ -11,6 +11,8 @@ import WeilConjectures.AlgebraicGeometry.IntegralSectionMemberModels
 import WeilConjectures.WeilObject.Sheaf.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 
 /-! # Finite scalar models under the normalized integral section comparison
 
@@ -183,49 +185,39 @@ private theorem stratifiedModels_transport
   intro hf
   exact hQ _ U
 
-/-- The normalized section comparison preserves and reflects the stratified finite
-scalar models of an individual module sheaf.
+/-- Finite constant local models can be expressed on covering sieves on the same
+finite stratification, entirely over the pulled-back condensed coefficient ring.
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), coefficient
-comparison in step 7 of lem-sfb-integral-constructible-completion-bridge.
-(auxiliary; not a blueprint node).
+Source: the integral-criterion paragraph of the proof of
+`lem-sfb-dc-lower-star-preserves`, and the definition of constructible modules.
+(blueprint: lem-sfb-integral-section-local-models).
 
-Proof: identify the two completed coefficient rings by their positive quotient
-projections. The section-action equivalence retains the underlying abelian sheaf,
-sections and restrictions. A finite presentation on the condensed point is a finite
-matrix of global scalar sections. Evaluation at the point identifies these scalars
-with the lifted valuation ring PbcIntegralRing; the chosen coefficient comparisons
-send each scalar to its image in every quotient, so they preserve that matrix.
-Exactness carries its cokernel to the completed constant realization of the same
-finitely presented scalar module. Conversely, a finite scalar presentation gives a
-finite presentation on the condensed point and hence that same local model.
-The section-action equivalence and restriction of scalars along the normalized ring
-isomorphism commute with inverse image to a stratum and with localization to a
-pro-etale object. Replace each pro-etale cover by its generated covering sieve on
-the terminal object to obtain the completed-model convention. In the reverse
-direction, the covering sieve contains a generating pro-etale cover. Transport the
-local cokernel isomorphisms on these members in the inverse equivalence. Keep the
-same finite constructible stratification in both directions. Since X is Noetherian,
-it is qcqs, so IsConstantModelConstructible selects exactly this stratified branch.
-Zero modules, empty covers on the empty scheme and zero-rank presentations are
-preserved by the same exact functors, so no nonemptiness assumption is needed. -/
-theorem integralSectionLocalModels (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (X : Scheme.{u}) [IsNoetherian X]
-    (M : AdicCompletion.Modules l E X) :
-    IsConstantModelConstructible (DerivedNakayama.integerRing l E) X M ↔
-      Scheme.IsIntegralStratifiedFinitelyPresented X (Scheme.pbcIntegralDatum l E)
-        ((SheafOfModules.restrictScalars.{u + 1}
-          (Scheme.integralDetailedCoefficientComparison X l E).hom).obj
-            ((integralSectionFunctor l E X).obj M)) := by
+Proof: Noetherianity selects the finite-stratification branch. On each stratum,
+compose pullbacks to identify local models with point models along the composite
+map to X. Such a model remains a model after any further pullback, by the
+composition and point-pullback isomorphisms. A pro-etale cover therefore generates
+a covering sieve all of whose members admit models. Conversely, choose a covering
+presieve inside the given sieve, identify the terminal pro-etale object with X,
+and restrict the resulting cover to a small subfamily. Keep the same point modules,
+finite presentations and stratification in both directions. Empty covers and
+rank-zero presentations are included. -/
+theorem integralSectionLocalModels
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [IsNoetherian X]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    IsConstantModelConstructible Λ X M ↔
+      ∃ s : Scheme.Stratification X, ∀ i : Fin s.n,
+        ∃ V : Sieve (⊤_ (s.domain i).ProEt),
+          V ∈ Scheme.ProEt.topology (s.domain i) (⊤_ (s.domain i).ProEt) ∧
+            ∀ (U : (s.domain i).ProEt) (f : U ⟶ ⊤_ (s.domain i).ProEt), V f →
+              sectionPointModelAlong Λ (s.immersion i) M U.hom := by
   classical
   have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-  have hbranch : IsConstantModelConstructible (DerivedNakayama.integerRing l E) X M ↔
-      IsFiniteConstantStratified (DerivedNakayama.integerRing l E) X M := by
+  have hbranch : IsConstantModelConstructible Λ X M ↔
+      IsFiniteConstantStratified Λ X M := by
     simp only [IsConstantModelConstructible, if_pos hqc]
   apply hbranch.trans
-  exact stratifiedModels_transport (DerivedNakayama.integerRing l E) X M
-    (fun g U ↦ integralSectionMemberModel l E g U M)
-    (fun g U ↦ integralSectionMemberModels l E g U M)
+  exact stratifiedModels_transport Λ X M
+    (fun g U ↦ sectionPointModelAlong Λ g M U.hom) (fun _ _ ↦ Iff.rfl)
 
 end AlgebraicGeometry.ProEtale

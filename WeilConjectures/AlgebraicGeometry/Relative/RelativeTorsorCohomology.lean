@@ -336,6 +336,30 @@ private lemma coneMap_fst
       HomologicalComplex.homotopyCofiber.mapArrowHom,
       HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom r' _ (i + 1) i rfl]
 
+private lemma sectionMap_forget (T : Scheme.{u}) (U : T.Etale)
+    {I J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
+    (a : I ⟶ J) :
+    relativeSectionMap T U a ≫ relativeForgetComplex T U J =
+      relativeForgetComplex T U I ≫ HomologicalComplex.extendMap
+        (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex _).map a)
+        ComplexShape.embeddingUpNat := by
+  let e := (shiftFunctorAdd' (CochainComplex AddCommGrpCat.{u + 1} ℤ)
+      (1 : ℤ) (-1 : ℤ) 0 (by decide)).symm ≪≫
+    shiftFunctorZero (CochainComplex AddCommGrpCat.{u + 1} ℤ) ℤ
+  let f := HomologicalComplex.extendMap
+    (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex _).map a)
+    ComplexShape.embeddingUpNat
+  change relativeSectionMap T U a ≫
+      ((shiftFunctor _ (-1 : ℤ)).map _ ≫ e.hom.app _) =
+    ((shiftFunctor _ (-1 : ℤ)).map _ ≫ e.hom.app _) ≫ f
+  unfold relativeSectionMap relativeFiberMap
+  rw [← Category.assoc, ← Functor.map_comp]
+  erw [coneMap_fst]
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  congr 1
+  exact e.hom.naturality f
+
 set_option backward.isDefEq.respectTransparency false in
 private lemma resolutionTransfer_comp_square {T T' : Scheme.{u}} (h : T' ⟶ T)
     {I J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}

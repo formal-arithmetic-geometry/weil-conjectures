@@ -90,6 +90,13 @@ Source: Stacks Project, Derived Categories, Tag 06XU
 def Classes (V U : A) (i : ℕ) : Type (max u v) :=
   Quot (Equivalent (A := A) (V := V) (U := U) (i := i))
 
+/-- The class of an actual sequence in the Yoneda quotient.
+
+Source: Stacks Project, Derived Categories, Tag 06XU
+(blueprint: lem-coef-yoneda-derived-ext-comparison). -/
+def classOf {V U : A} {i : ℕ} (E : YonedaExtension A V U i) : Classes V U i :=
+  Quot.mk _ E
+
 end YonedaExtension
 
 namespace YonedaExtension

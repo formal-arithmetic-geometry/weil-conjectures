@@ -16,6 +16,10 @@ import all WeilConjectures.AlgebraicGeometry.NoetherianGlobalConstructibility
 import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 import WeilConjectures.CategoryTheory.RingedCocontinuousMonoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonPresentationSupplement
+public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
+public import WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
+public import WeilConjectures.SixFunctors.ProEtale.InternalCompletionSectionTransport
 
 /-! # Normalized models for discrete constant coefficients
 
@@ -178,7 +182,7 @@ private theorem scalar_restriction_equivalence
 
 /-- The specified discrete model is an equivalence for every coefficient ring isomorphism.
 Source: section reconstruction, site equivalence and restriction along a ring isomorphism
-(auxiliary; not a blueprint node).
+(blueprint: lem-sfb-discrete-coefficient-model).
 Proof: compose the existing section-action equivalence, the pushforward equivalence of the
 small and original sites, and the inverse scalar-restriction equivalence. -/
 instance discreteCoefficientModel_isEquivalence (X : Scheme.{u}) (A : Type u) [CommRing A]
@@ -187,7 +191,7 @@ instance discreteCoefficientModel_isEquivalence (X : Scheme.{u}) (A : Type u) [C
       smallRing X (condensedRingObj (discreteObj A) X)) :
     (discreteCoefficientModel X A k c).IsEquivalence := by
   let : (smallModules X (condensedRingObj (discreteObj A) X)).IsEquivalence :=
-    smallModules_equivalence X (condensedRingObj (discreteObj A) X)
+    InternalCompletionTransport.smallModules_equivalence X (condensedRingObj (discreteObj A) X)
   let : (ConstantCompletion.res c.hom).IsEquivalence := scalar_restriction_equivalence
     ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c)
   exact inferInstanceAs
@@ -196,7 +200,7 @@ instance discreteCoefficientModel_isEquivalence (X : Scheme.{u}) (A : Type u) [C
 
 /-- Discrete coefficient transport is additive, since all its maps retain the section maps.
 Source: section-action and scalar restriction
-(auxiliary; not a blueprint node).
+(blueprint: lem-sfb-discrete-coefficient-model).
 Proof: section reconstruction and site precomposition are additive sectionwise, and scalar
 restriction changes only the action, so their composite preserves sums of morphisms. -/
 instance discreteCoefficientModel_additive (X : Scheme.{u}) (A : Type u) [CommRing A]
@@ -204,7 +208,7 @@ instance discreteCoefficientModel_additive (X : Scheme.{u}) (A : Type u) [CommRi
     (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅
       smallRing X (condensedRingObj (discreteObj A) X)) :
     (discreteCoefficientModel X A k c).Additive := by
-  have := smallModules_additive X (condensedRingObj (discreteObj A) X)
+  have := InternalCompletionTransport.smallModules_additive X (condensedRingObj (discreteObj A) X)
   exact inferInstanceAs
     (smallModules X (condensedRingObj (discreteObj A) X) ⋙
       ConstantCompletion.res c.hom).Additive

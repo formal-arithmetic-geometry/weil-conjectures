@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePre
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalars
 
 /-! # Local triviality of the finite coefficient line
 Source: Stacks Project, Tag 03PK. (auxiliary; not a blueprint node).
@@ -22,7 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Extending scalars from a `ZMod N`-module agrees with extending its underlying
 abelian group: all additive maps between `ZMod N`-modules are automatically linear. -/
-private noncomputable def zmodScalarExtensionIso
+noncomputable def zmodScalarExtensionIso
     (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     ModuleCat.extendScalars (finiteEtaleTwistScalar N A hA) ≅
       forget₂ (ModuleCat.{u + 1} (ZMod N)) AddCommGrpCat ⋙
@@ -57,7 +59,7 @@ private noncomputable def zmodScalarExtensionIso
   exact (ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} f).leftAdjointUniq adj'
 
 /-- The published finite twist line is the existing abelian-sheaf scalar extension. -/
-private noncomputable def finiteEtaleLineAbIso
+noncomputable def finiteEtaleLineAbIso
     (T : Scheme.{u}) (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     finiteEtaleTateLine T N A hA ≅
       (AlgebraicGeometry.Etale.extendScalars A T).obj (T.rootsOfUnitySheaf N) :=

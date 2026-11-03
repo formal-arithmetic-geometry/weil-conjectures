@@ -182,6 +182,16 @@ theorem ringModuleResolution_isKInjective_quasiIso {X : Scheme.{u}}
     change QuasiIso (_ ≫ B.map s)
     exact quasiIso_comp _ (B.map s)
 
+/-- K-injective resolutions on the original site, with the explicit transported witness.
+Source: Stacks Tag 079P (blueprint: lem-pe-bounded-complex-direct-image-presheaf). -/
+noncomputable abbrev boundedRingModuleDirectImage_hasKInjectiveResolutions {X : Scheme.{u}}
+    (R : Sheaf (topology X) RingCat.{u + 1}) :
+    ∀ K : CochainComplex (SheafOfModules.{u + 1} R) ℤ,
+      ∃ (I : CochainComplex (SheafOfModules.{u + 1} R) ℤ) (s : K ⟶ I),
+        I.IsKInjective ∧ QuasiIso s :=
+  fun K ↦ ⟨(ringModuleResolutionFunctor R).obj K, ringModuleResolutionMap R K,
+    ringModuleResolution_isKInjective_quasiIso R K⟩
+
 /-- Evaluation on the model, forgetting only the sectionwise module action.
 Source: Stacks Tag 03D1 (blueprint: lem-pe-bounded-complex-direct-image-presheaf). -/
 noncomputable def ringModuleModelEvaluation {X : Scheme.{u}}

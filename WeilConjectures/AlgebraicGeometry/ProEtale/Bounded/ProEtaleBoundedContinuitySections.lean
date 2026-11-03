@@ -154,4 +154,125 @@ private noncomputable def moduleModelEquiv (X : Scheme.{u})
       change (R.obj.map (𝟙 (op (ULift.down V.unop)))) x = x
       simp)
 
+private noncomputable def derivedSectionsUnit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive]
+    (h : ∀ K : CochainComplex C ℤ,
+      ∃ (I : CochainComplex C ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s) :
+    F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ F.rightDerivedFunctorOfQuasiIsoResolutions h where
+  app K := (DerivedCategory.quotientCompQhIso D).inv.app _ ≫
+    (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj K) ≫
+    (F.rightDerivedFunctorOfQuasiIsoResolutions h).map
+      ((DerivedCategory.quotientCompQhIso C).hom.app K)
+  naturality K L f := by
+    have hn := (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).naturality
+      ((HomotopyCategory.quotient C (.up ℤ)).map f)
+    simp only [Functor.comp_map, Functor.mapHomotopyCategory_map] at hn
+    simp only [Functor.comp_map, DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
+      Category.assoc]
+    rw [reassoc_of% hn, ← Functor.map_comp, ← Functor.map_comp,
+      DerivedCategory.quotientCompQhIso_hom_naturality]
+
+private theorem derivedSectionsUnit_isIso
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive]
+    (h : ∀ K : CochainComplex C ℤ,
+      ∃ (I : CochainComplex C ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s)
+    (K : CochainComplex C ℤ) [K.IsKInjective] :
+    IsIso ((derivedSectionsUnit F h).app K) := by
+  have := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso h K
+  dsimp only [derivedSectionsUnit]
+  infer_instance
+
+private noncomputable def resolutionDerivedIso
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive]
+    (h : ∀ K : CochainComplex C ℤ,
+      ∃ (I : CochainComplex C ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s)
+    (J : CochainComplex C ℤ ⥤ CochainComplex C ℤ) (s : 𝟭 _ ⟶ J)
+    (hJ : ∀ K, (J.obj K).IsKInjective) (hs : ∀ K, QuasiIso (s.app K)) :
+    DerivedCategory.Q ⋙ F.rightDerivedFunctorOfQuasiIsoResolutions h ≅
+      J ⋙ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q := by
+  let v := Functor.whiskerLeft J (derivedSectionsUnit F h)
+  have : ∀ K, IsIso (v.app K) := fun K ↦ by
+    have := hJ K
+    exact derivedSectionsUnit_isIso F h (J.obj K)
+  have : IsIso v := NatIso.isIso_of_isIso_app _
+  let t := Functor.whiskerRight (Functor.whiskerRight s DerivedCategory.Q)
+    (F.rightDerivedFunctorOfQuasiIsoResolutions h)
+  have : ∀ K, IsIso (t.app K) := fun K ↦ by
+    have := hs K
+    change IsIso ((F.rightDerivedFunctorOfQuasiIsoResolutions h).map
+      (DerivedCategory.Q.map (s.app K)))
+    infer_instance
+  have : IsIso t := NatIso.isIso_of_isIso_app _
+  exact asIso t ≪≫ (asIso v).symm
+
+private noncomputable def ringHypercohomologyDerivedIso (X : Scheme.{u})
+    (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) (q : ℤ)
+    [HasDerivedCategory (ringedSiteModules.{u + 1} R)]
+    [HasDerivedCategory AddCommGrpCat.{u + 1}] :
+    ringHypercohomology X R U q ≅ DerivedCategory.Q ⋙
+      Functor.rightDerivedFunctorOfQuasiIsoResolutions
+        (hypercoverAbelianEvaluation.{u, u + 1, 0} X R U)
+        (moduleQuasiIsoKInjectiveResolutions.{u, u + 1, 0} X R) ⋙
+      DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} q := by
+  let S := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
+    RingCat.{u + 1} (proEtaleModelTopology X) (topology X)).obj R
+  letI := SheafOfModules.isGrothendieckAbelian S
+  let e := moduleModelEquiv X R
+  have : e.functor.Additive := ⟨by intros; rfl⟩
+  have : e.inverse.Additive := ⟨by intros; rfl⟩
+  let A := e.functor.mapHomologicalComplex (.up ℤ)
+  let B := e.inverse.mapHomologicalComplex (.up ℤ)
+  let J := A ⋙ CochainComplex.kInjectiveResolutionFunctor.{u + 1}
+    (ringedSiteModules.{u + 1} S) ⋙ B
+  let s : 𝟭 _ ⟶ J := (e.mapHomologicalComplex (.up ℤ)).unitIso.hom ≫
+    Functor.whiskerRight (Functor.whiskerLeft A
+      (CochainComplex.toKInjectiveResolution.{u + 1} (ringedSiteModules.{u + 1} S))) B
+  have hJ (K) : CochainComplex.IsKInjective (J.obj K) := by
+    change CochainComplex.IsKInjective ((e.inverse.mapHomologicalComplex (.up ℤ)).obj
+      ((CochainComplex.kInjectiveResolutionFunctor.{u + 1}
+        (ringedSiteModules.{u + 1} S)).obj (A.obj K)))
+    infer_instance
+  have hs (K) : QuasiIso (s.app K) := by
+    have : QuasiIso ((CochainComplex.toKInjectiveResolution.{u + 1}
+        (ringedSiteModules.{u + 1} S)).app (A.obj K)) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1}
+        (ringedSiteModules.{u + 1} S) (A.obj K)).2
+    have : QuasiIso (B.map ((CochainComplex.toKInjectiveResolution.{u + 1}
+        (ringedSiteModules.{u + 1} S)).app (A.obj K))) := by
+      change QuasiIso ((e.inverse.mapHomologicalComplex (.up ℤ)).map _)
+      infer_instance
+    change QuasiIso ((e.mapHomologicalComplex (.up ℤ)).unitIso.hom.app K ≫
+      B.map ((CochainComplex.toKInjectiveResolution.{u + 1}
+        (ringedSiteModules.{u + 1} S)).app (A.obj K)))
+    infer_instance
+  let E := hypercoverAbelianEvaluation.{u, u + 1, 0} X R U
+  have : E.Additive := ⟨by intros; rfl⟩
+  let c := resolutionDerivedIso E
+    (moduleQuasiIsoKInjectiveResolutions.{u, u + 1, 0} X R) J s hJ hs
+  let cH := Functor.isoWhiskerRight c
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} q)
+  let cQ := Functor.isoWhiskerLeft (J ⋙ E.mapHomologicalComplex (.up ℤ))
+    (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{u + 1} q)
+  let smallE := SheafOfModules.evaluation S (op (AsSmall.up.obj U)) ⋙
+    forget₂ (ModuleCat.{u + 1} (S.obj.obj (op (AsSmall.up.obj U))))
+      AddCommGrpCat.{u + 1}
+  have : smallE.Additive := ⟨by intros; rfl⟩
+  let ee : e.inverse ⋙ E ≅ smallE := Iso.refl _
+  let ec := Functor.mapHomologicalComplexCompIso ee (.up ℤ)
+  let cE : J ⋙ E.mapHomologicalComplex (.up ℤ) ⋙
+      HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (.up ℤ) q ≅
+      ringHypercohomology X R U q := Functor.isoWhiskerRight
+    (Functor.isoWhiskerLeft (A ⋙ CochainComplex.kInjectiveResolutionFunctor.{u + 1}
+      (ringedSiteModules.{u + 1} S)) ec)
+    (HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (.up ℤ) q)
+  exact cE.symm ≪≫ cQ.symm ≪≫ cH.symm
+
 end AlgebraicGeometry.Scheme.ProEt

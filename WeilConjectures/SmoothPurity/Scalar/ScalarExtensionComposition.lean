@@ -122,7 +122,7 @@ noncomputable def integralOrdinaryTensorSection
     ((integralOrdinaryScalar l E L ι Y).obj N).val.obj U :=
   (eqToHom ((integralOrdinaryScalarWitness l E L ι Y).choose_spec.choose N).symm).val.app U
     ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (SheafOfModules.changeOfRingsPresheaf
+      (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1}
         (integralCompletedScalarMap l E L ι Y) N).presheaf).app U
           (s ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U,
             ((integralCompletedScalarMap l E L ι Y).hom.app U).hom] x))

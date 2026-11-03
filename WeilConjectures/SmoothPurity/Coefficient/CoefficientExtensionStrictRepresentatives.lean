@@ -39,6 +39,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 
 /-! # Strict representatives for finite coefficient extension
 
@@ -89,80 +91,67 @@ private theorem coefficientSequenceNormalized_of_iso
     exact hs
 
 private theorem coefficientExtensionGoodRepresentative
-    (K : DerivedCategory (scalarReductionSource l E W)) :
-    ∃ P : (integralOperationsGoodComplex l E W).FullSubcategory,
+    (K : DerivedCategory (Mod C R)) :
+    ∃ P : ((HomologicalComplex.quasiIso (Mod C R) (.up ℤ)).kFlat).FullSubcategory,
       Nonempty (DerivedCategory.Q.obj P.obj ≅ K) := by
   classical
-  obtain ⟨P, q, hP, hf, hq, _⟩ :=
-    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
-      (R := completedIntegralCommRingSheafUnrestricted l E W)
-      (DerivedCategory.Q.objPreimage K)
-  have hgood : (integralOperationsGoodComplex l E W) P := by
-    refine ⟨hP, fun i ↦ ?_⟩
-    exact (exactFunctor _ _).prop_of_iso
-      (SheafOfModules.siteSheafTensorRightIso
-        (completedIntegralCommRingSheafUnrestricted l E W) (P.X i)).symm (hf i)
-  have : IsIso (DerivedCategory.Q.map q) :=
-    Localization.inverts DerivedCategory.Q (HomologicalComplex.quasiIso _ _) q hq
-  exact ⟨⟨P, hgood⟩, ⟨asIso (DerivedCategory.Q.map q) ≪≫
+  obtain ⟨P, q, hq, _, hP⟩ :=
+    CochainComplex.exists_quasiIso_flat_kFlat (DerivedCategory.Q.objPreimage K)
+  have : QuasiIso q := hq
+  exact ⟨⟨P, hP⟩, ⟨asIso (DerivedCategory.Q.map q) ≪≫
     DerivedCategory.Q.objObjPreimageIso K⟩⟩
 
 variable (A : CoefficientExtensionSystems l E L ι W)
 
-/-- Simultaneous strict finite quotient representatives of derived coefficient extension.
-Source: integral operations, Stacks 06YY, 07A6 and 0941
+/-- Native scalar extension has simultaneous strict representatives on K-flat complexes.
+Source: current blueprint, `det-def-sfb-derived-extension-of-scalars`, K-flat computation
 (blueprint: stage3-pur-extension-strict-representatives).
-Proof: use the ringed sequence projection to form the ordinary strict system whose
-nth term is tensor with the nth target quotient. Its tensor generators determine
-its quotient transitions. Apply it degreewise to flat-term K-flat complexes.
-The given balanced associations identify the evaluated complexes with the iterated
-finite scalar models. Transpose the ordinary units, using the reduction unit and
-scalar evaluation formulas, to obtain a natural comparison from the specified
-derived extension. At each level this is the composite of the two universal
-K-flat comparisons and the given association. Both scalar extensions preserve
-K-flatness, so these comparisons are invertible. The jointly conservative
-evaluations make the system comparison invertible. For m at least n, scalar
-extension of the mth term to the nth quotient is identified with the nth term by
-balanced tensor association. Its adjoint is precisely the specified quotient
-transition. Thus the universal Hom criterion gives normalization, first on good
-representatives and then on every derived object by a K-flat resolution. -/
-theorem coefficientExtensionStrictRepresentative_exists
-    (SE : CoefficientDerivedSystemCalculus l E W)
-    (association : ∀ n : ℕ,
-      scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
-        integralScalarReduction l E L ι W n)
-    (hassociation : IsCoefficientExtensionAssociation l E L ι W A association) :
-    ∃ (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
-        CochainComplex (coefficientSequenceModules l L W) ℤ)
-      (directEvaluation : ∀ n : ℕ,
-        direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅
-          (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)
-      (model : integralOperationsGoodLocalization l E W ⋙
-        coefficientExtensionSystem l E L ι W SE A ≅ direct ⋙ DerivedCategory.Q),
-      IsCoefficientExtensionStrictTransition l E L ι W direct directEvaluation ∧
-      IsCoefficientExtensionModelEvaluation l E L ι W SE A association direct
-        directEvaluation model ∧
-      ∀ K : DerivedCategory (scalarReductionSource l E W),
-        IsNormalizedCoefficientSequence l L W
-          ((coefficientExtensionSystem l E L ι W SE A).obj K) := by
+Proof: apply ordinary extension of scalars degreewise to the full subcategory of K-flat
+complexes. The universal left-derived counit is natural on complexes and invertible on
+this subcategory, hence gives the displayed natural isomorphism. For an arbitrary derived
+object choose a K-flat resolution of a complex representing it. Invert its localized
+quasi-isomorphism, apply derived extension, and compose with the same counit component.
+The isomorphism cancellation identity gives the final equation. This includes the zero
+complex and identity scalar maps and requires no flatness of the ring morphism. -/
+theorem coefficientExtensionStrictRepresentative_exists :
+    let good := (HomologicalComplex.quasiIso (Mod C R) (.up ℤ)).kFlat
+    ∃ model :
+        (good.ι ⋙ DerivedCategory.Q) ⋙ (Mod.extendScalars φ).leftDerivedFunctor ≅
+          (good.ι ⋙ (Mod.extendScalars φ).mapHomologicalComplex (.up ℤ)) ⋙
+            DerivedCategory.Q,
+      (∀ P, model.hom.app P =
+        (Mod.extendScalars φ).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).obj P.obj)) ∧
+      ∀ K : DerivedCategory (Mod C R),
+        ∃ (P : good.FullSubcategory) (eP : DerivedCategory.Q.obj P.obj ≅ K)
+          (e : (Mod.extendScalars φ).leftDerivedFunctor.obj K ≅
+            DerivedCategory.Q.obj
+              (((Mod.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P.obj)),
+          (Mod.extendScalars φ).leftDerivedFunctor.map eP.hom ≫ e.hom =
+            model.hom.app P := by
   classical
-  obtain ⟨direct, directEvaluation, htransition⟩ :=
-    coefficientExtensionOrdinaryStrictTensor_exists l E L ι W
-  obtain ⟨model, hmodel⟩ := coefficientExtensionStrictDerivedComparison
-    l E L ι W A SE association hassociation direct directEvaluation htransition
-  refine ⟨direct, directEvaluation, model, htransition, hmodel, ?_⟩
+  let good := (HomologicalComplex.quasiIso (Mod C R) (.up ℤ)).kFlat
+  let ε : (good.ι ⋙ DerivedCategory.Q) ⋙ (Mod.extendScalars φ).leftDerivedFunctor ⟶
+      (good.ι ⋙ (Mod.extendScalars φ).mapHomologicalComplex (.up ℤ)) ⋙
+        DerivedCategory.Q :=
+    { app := fun P ↦ (Mod.extendScalars φ).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).obj P.obj)
+      naturality := fun P P' f ↦ by
+        exact (Mod.extendScalars φ).leftDerivedFunctorCounit.naturality
+          ((HomotopyCategory.quotient (Mod C R) (.up ℤ)).map f.hom) }
+  have hi (P : good.FullSubcategory) : IsIso (ε.app P) :=
+    (Mod.extendScalars φ).isIso_leftDerivedFunctorCounit_app_of_kFlat P.obj P.property
+  have : IsIso ε := (NatTrans.isIso_iff_isIso_app ε).2 hi
+  let model := asIso ε
+  refine ⟨model, fun _ ↦ rfl, ?_⟩
   intro K
-  obtain ⟨P, ⟨e⟩⟩ := coefficientExtensionGoodRepresentative l E W K
-  have hP : IsNormalizedCoefficientSequence l L W
-      (DerivedCategory.Q.obj (direct.obj P)) :=
-    coefficientExtensionStrictTensor_normalized
-      l E L ι W direct directEvaluation htransition P
-  have hC : IsNormalizedCoefficientSequence l L W
-      ((coefficientExtensionSystem l E L ι W SE A).obj
-        ((integralOperationsGoodLocalization l E W).obj P)) :=
-    coefficientSequenceNormalized_of_iso l L W (model.app P).symm hP
-  intro m n h Z
-  exact coefficientSequenceNormalized_of_iso l L W
-    ((coefficientExtensionSystem l E L ι W SE A).mapIso e) hC h Z
+  obtain ⟨P, ⟨eP⟩⟩ := coefficientExtensionGoodRepresentative K
+  refine ⟨P, eP, (Mod.extendScalars φ).leftDerivedFunctor.mapIso eP.symm ≪≫
+    model.app P, ?_⟩
+  change (Mod.extendScalars φ).leftDerivedFunctor.map eP.hom ≫
+      ((Mod.extendScalars φ).leftDerivedFunctor.map eP.inv ≫ model.hom.app P) =
+    model.hom.app P
+  rw [← Category.assoc, ← (Mod.extendScalars φ).leftDerivedFunctor.map_comp,
+    eP.hom_inv_id, (Mod.extendScalars φ).leftDerivedFunctor.map_id, Category.id_comp]
 
 end WeilConjectures

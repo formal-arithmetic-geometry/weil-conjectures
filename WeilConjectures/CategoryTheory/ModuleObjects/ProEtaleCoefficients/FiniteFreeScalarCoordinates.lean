@@ -145,6 +145,25 @@ private lemma scalarTensorIso_hom (M : Mod H R) :
   dsimp only [scalarTensorIso]
   exact extendπ_extendDescHom φ _ _
 
+private lemma tensorUnit_hom (M : Mod H R) :
+    tensorObjπ (regular R) M ≫ (λ_ M).hom.hom = γ[R,M.X] := by
+  change tensorObjπ (regular R) M ≫
+    (Bimod.whiskerRight (toBimodRegularIso (R := R)).hom ((toBimod R).obj M)).hom ≫
+      Bimod.LeftUnitorBimod.hom ((toBimod R).obj M) = _
+  dsimp only [tensorObjπ]
+  rw [Bimod.whiskerRight_hom]
+  erw [ι_colimMap_assoc]
+  simp only [parallelPairHom_app_one]
+  erw [toBimodRegularIso_hom_hom, id_whiskerRight, Category.id_comp]
+  exact coequalizer.π_desc _ _
+
+private lemma tensorUnit_inv (M : Mod H R) :
+    (λ_ M).inv.hom = (λ_ M.X).inv ≫ η[R] ▷ M.X ≫ tensorObjπ (regular R) M := by
+  apply (cancel_mono (λ_ M).hom.hom).1
+  rw [Category.assoc, Category.assoc, tensorUnit_hom, ModObj.one_smul_self,
+    Iso.inv_hom_id]
+  exact congrArg Hom.hom (λ_ M).inv_hom_id
+
 omit [Abelian H] [MonoidalPreadditive H] in
 private lemma scalarTensorIso_naturality {M N : Mod H R} (f : M ⟶ N) :
     (comap φ).map ((extendScalars φ).map f) ≫ (scalarTensorIso φ N).hom =

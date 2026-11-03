@@ -164,7 +164,7 @@ private theorem ambientScalarNormalized
   let a : A.scalar.T ≅ integralComparisonDerivedSequenceScalar l E L ι Y :=
     scalarModelIso hφ A.scalar.model (integralComparisonSequenceScalarModel l E L ι Y)
   obtain ⟨association⟩ := coefficientExtensionFiniteAssociation_exists l E L ι Y A
-  obtain ⟨_, _, _, _, _, hn⟩ := coefficientExtensionStrictRepresentative_exists
+  obtain ⟨_, _, _, _, _, hn⟩ := transportedScalarLegacy_strictRepresentative_exists
     l E L ι Y A SY association.association association.association_section
   intro K
   exact coefficientSequenceNormalized_of_iso l L Y (a.app (SY.reduction.obj K))

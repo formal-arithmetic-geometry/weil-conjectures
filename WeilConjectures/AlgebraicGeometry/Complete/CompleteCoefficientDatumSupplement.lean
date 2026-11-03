@@ -675,4 +675,23 @@ noncomputable def adicTransitionComplex (X : Scheme.{t}) {Λ : Type t} [CommRing
       (adicChange X (Ideal.Quotient.mk (I ^ (a : ℕ))) P) :=
   Classical.choose (adicTransitionComplex_exists X I P b a hab)
 
+/-- The direct and composite quotient homomorphisms coincide.
+Source: blueprint order 1255, steps 2 and 4.
+Proof: quotient induction reduces both maps to the identical map on representatives.
+(blueprint: def-weil-pbc-complete-coefficient-datum) -/
+theorem adicQuotientMap_comp {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
+    (c b a : ℕ+) (hab : a ≤ b) (hbc : b ≤ c) :
+    (adicQuotientMap I b a hab).comp (adicQuotientMap I c b hbc) =
+      adicQuotientMap I c a (le_trans hab hbc) := by
+  exact Ideal.Quotient.factor_comp _ _
+
+/-- The equal-index quotient homomorphism is identity.
+Source: blueprint order 1255, steps 2 and 4.
+Proof: its defining quotient factor sends each class to itself, so quotient induction
+proves equality to the identity homomorphism.
+(blueprint: def-weil-pbc-complete-coefficient-datum) -/
+theorem adicQuotientMap_id {Λ : Type t} [CommRing Λ] (I : Ideal Λ) (a : ℕ+) :
+    adicQuotientMap I a a (le_refl a) = RingHom.id (Λ ⧸ I ^ (a : ℕ)) := by
+  exact Ideal.Quotient.factor_eq
+
 end AlgebraicGeometry.Scheme

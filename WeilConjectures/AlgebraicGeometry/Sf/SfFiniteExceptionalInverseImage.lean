@@ -197,4 +197,37 @@ noncomputable def sfDerivedComparisonPullbackIso (A : Type u) [CommRing A]
     Functor.mapDerivedCategoryNatIso (sfComparisonPullbackIso A j) ≪≫
     Functor.mapDerivedCategoryCompIso _ _
 
+/-- The specified open base-change map of the constructible exceptional inverse image.
+Its factors are the comparison-pullback square, the canonical etale exceptional mate,
+and the comparison-direct-image localization square. Thus it is a map of the actual
+transported etale functors, without an ambient pro-etale adjunction or an arbitrary map.
+Source: blueprint, sk-prop-sf-existence, open base change; Stacks Tags 0F7B and 099R
+(blueprint: def-weil-exceptional-inverse-image). -/
+noncomputable def sfFiniteExceptionalOpenComparison (A : Type u) [CommRing A] [Finite A]
+    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (sq : IsPullback g' f' f g) [IsOpenImmersion g] [QuasiCompact f']
+    (c : Compactification f)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :
+    (sfFixedDerivedPullback A g').obj ((sfFiniteExceptionalFixed A c).obj K) ⟶
+      (sfFiniteExceptionalFixed A (c.ofIsPullback sq)).obj
+        ((sfFixedDerivedPullback A g).obj K) :=
+  letI := c.hasCompactification
+  letI := (c.ofIsPullback sq).hasCompactification
+  (sfDerivedComparisonPullbackIso A g').hom.app
+      ((Etale.rightDerivedUpperShriek (ULift.{u + 1, u} A) f).obj
+        ((comparisonLowerStar
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y).rightDerivedFunctor.obj K)) ≫
+    (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X').mapDerivedCategory.map
+      ((Etale.leftDerivedUpperStarIsoMapDerivedCategory _ g').inv.app _ ≫
+        (Etale.rightDerivedUpperShriekBaseChangeMap
+          (ULift.{u + 1, u} A) sq).app
+            ((comparisonLowerStar
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y).rightDerivedFunctor.obj K) ≫
+        (Etale.rightDerivedUpperShriek (ULift.{u + 1, u} A) f').map
+          ((Etale.leftDerivedUpperStarIsoMapDerivedCategory _ g).hom.app _)) ≫
+    (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X').mapDerivedCategory.map
+      ((Etale.rightDerivedUpperShriek (ULift.{u + 1, u} A) f').map
+        ((sfDerivedComparisonOpenRestrictionIso A g).hom.app K))
+
 end AlgebraicGeometry.ProEtale

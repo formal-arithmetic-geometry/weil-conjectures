@@ -180,6 +180,27 @@ private theorem scalar_unit_directImage
   dsimp +instances only [scalarExtension, ProEtale.pbcFixedScalarExtension, Functor.comp_obj]
   exact Category.comp_id _
 
+private theorem directImage_comparison_plus
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
+    _root_.DerivedCategory.Plus.ι.map ((rightDerivedLowerStarRestrictScalars φ f).app L) ≫
+        (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlusCompatibility.hom.app
+          ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj L) =
+      (Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ).map
+          ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctorPlusCompatibility.hom.app L) ≫
+        (scalarRestrictionDirectImageMap φ f).app L.obj := by
+  have h := restriction_plus_mate φ f L
+  change (scalarRestrictionDirectImageMap φ f).app L.obj =
+    (Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ).map
+        ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctorPlusCompatibility.inv.app L) ≫
+      _root_.DerivedCategory.Plus.ι.map
+        ((rightDerivedLowerStarRestrictScalars φ f).app L) ≫
+      (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlusCompatibility.hom.app
+        ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj L) at h
+  erw [h, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+
 attribute [local irreducible] upperStar
 
 end AlgebraicGeometry.Etale

@@ -10,6 +10,7 @@ public import WeilConjectures.SmoothPurity.IntegralScalarOperations.IntegralOper
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConstructible
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
+public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConstructibleIntrinsic
 
 /-! # The normalized integral scalar-completion comparison
 
@@ -84,102 +85,6 @@ theorem normalizedIntegralScalarCompletion (l : ℕ) [Fact l.Prime]
           (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.obj ≫
             DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι W).app P.obj)) ∧
       (∀ K, IsSfDerivedComplete l E W K → IsIso (χ.app K)) := by
-  let G := integralOrdinaryScalar l E L ι W
-  let q := HomologicalComplex.quasiIso (integralTowerModules l E W) (.up ℤ)
-  let D := completedScalarCochainModel.{u, u} l E L ι W
-  let T := completedDerivedScalarExtension.{u, u} l E L ι W
-  let t := NatIso.mapHomologicalComplex (ordinaryScalarModelIso l E L ι W) (.up ℤ)
-  let ε : DerivedCategory.Q ⋙ T ⟶
-      completedOrdinaryScalarComplex l E L ι W ⋙ DerivedCategory.Q := D.ε
-  let : T.IsLeftDerivedFunctor ε q := D.universal
-  let : G.mapDerivedCategory.IsLeftDerivedFunctor G.mapDerivedCategoryFactors.hom q :=
-    Functor.isLeftDerivedFunctor_of_inverts q _ G.mapDerivedCategoryFactors
-  let e : integralOrdinaryDerivedScalar l E L ι W ≅ T :=
-    Functor.leftDerivedNatIso G.mapDerivedCategory T G.mapDerivedCategoryFactors.hom
-      ε q (Functor.isoWhiskerRight t DerivedCategory.Q)
-  have he (P : CochainComplex (integralTowerModules l E W) ℤ) :
-      e.hom.app (DerivedCategory.Q.obj P) ≫ completedScalarCounit.{u, u} l E L ι W P =
-        G.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map (t.hom.app P) := by
-    have h : e.hom.app (DerivedCategory.Q.obj P) ≫ ε.app P =
-        G.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map (t.hom.app P) :=
-      Functor.leftDerivedNatTrans_app G.mapDerivedCategory T
-        G.mapDerivedCategoryFactors.hom ε q
-        (Functor.isoWhiskerRight t DerivedCategory.Q).hom P
-    have hε : ε.app P = completedScalarCounit.{u, u} l E L ι W P :=
-      completedScalarCochainModel_counit l E L ι W P
-    exact (congrArg (e.hom.app (DerivedCategory.Q.obj P) ≫ ·) hε).symm.trans h
-  let c : T ⟶ integralScalarExtension l E L ι W := by
-    unfold integralScalarExtension
-    exact completedScalarComparison.{u, u} l E L ι W
-  let r (P : (integralOperationsGoodComplex l E W).FullSubcategory) :
-      (integralScalarExtension l E L ι W).obj (DerivedCategory.Q.obj P.obj) ⟶
-        DerivedCategory.Q.obj ((integralScalarComplexFunctor l E L ι W).obj P.obj) :=
-    (integralScalarExtensionComparison l E L ι W).hom.app P
-  have hc (P : (integralOperationsGoodComplex l E W).FullSubcategory) :
-      c.app (DerivedCategory.Q.obj P.obj) ≫ r P =
-        completedScalarCounit.{u, u} l E L ι W P.obj ≫
-          DerivedCategory.Q.map ((completedScalarChainComparison.{u, u} l E L ι W).app P.obj) := by
-    with_unfolding_all exact completedScalarComparison_spec.{u, u} l E L ι W P
-  let χ : integralOrdinaryDerivedScalar l E L ι W ⟶ integralScalarExtension l E L ι W :=
-    e.hom ≫ c
-  have hχ : ∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,
-      χ.app (DerivedCategory.Q.obj P.obj) ≫
-          (integralScalarExtensionComparison l E L ι W).hom.app P =
-        G.mapDerivedCategoryFactors.hom.app P.obj ≫
-          DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι W).app P.obj) := by
-    intro P
-    change (e.hom.app _ ≫ c.app _) ≫ r P = _
-    calc
-      _ = e.hom.app _ ≫ (c.app _ ≫ r P) :=
-        Category.assoc _ _ _
-      _ = e.hom.app _ ≫ (completedScalarCounit.{u, u} l E L ι W P.obj ≫
-          DerivedCategory.Q.map ((completedScalarChainComparison.{u, u} l E L ι W).app P.obj)) :=
-        congrArg (e.hom.app (DerivedCategory.Q.obj P.obj) ≫ ·) (hc P)
-      _ = (e.hom.app _ ≫ completedScalarCounit.{u, u} l E L ι W P.obj) ≫
-          DerivedCategory.Q.map ((completedScalarChainComparison.{u, u} l E L ι W).app P.obj) :=
-        (Category.assoc _ _ _).symm
-      _ = (G.mapDerivedCategoryFactors.hom.app P.obj ≫
-          DerivedCategory.Q.map (t.hom.app P.obj)) ≫
-          DerivedCategory.Q.map ((completedScalarChainComparison.{u, u} l E L ι W).app P.obj) :=
-        congrArg (· ≫ DerivedCategory.Q.map
-          ((completedScalarChainComparison.{u, u} l E L ι W).app P.obj)) (he P.obj)
-      _ = G.mapDerivedCategoryFactors.hom.app P.obj ≫ DerivedCategory.Q.map
-          (t.hom.app P.obj ≫ (completedScalarChainComparison.{u, u} l E L ι W).app P.obj) :=
-        (Category.assoc _ _ _).trans (congrArg
-          (G.mapDerivedCategoryFactors.hom.app P.obj ≫ ·)
-          (DerivedCategory.Q.map_comp _ _).symm)
-      _ = _ := congrArg (fun z ↦ G.mapDerivedCategoryFactors.hom.app P.obj ≫
-        DerivedCategory.Q.map z)
-          (NatTrans.congr_app (integralScalarCompletionChain_model l E L ι W) P.obj).symm
-  refine ⟨χ, ⟨hχ, ?_⟩, ?_⟩
-  · intro K hK
-    obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
-    let : Fact p.Prime := ⟨hp⟩
-    let Δ : FiniteFieldDatum.{0} :=
-      { p := p
-        a := 1
-        q := p
-        prime := hp
-        exponent_pos := le_refl 1
-        cardinality_eq := (pow_one p).symm
-        k₀ := ZMod p
-        card_base := by simp [Nat.card_eq_fintype_card]
-        k := AlgebraicClosure (ZMod p) }
-    have hl : l ≠ Δ.p := by change l ≠ p; omega
-    have hlegacy : IsDerivedCompleteUnrestricted l E W K :=
-      ⟨Δ, hl, (sfDerivedComplete_iff_legacy l E W Δ hl K).mp hK⟩
-    let : IsIso (c.app K) := by
-      with_unfolding_all
-        exact (finiteFreeCompletedScalarComparison.{u, u} l E L ι W).2.1 K hlegacy |>.1
-    change IsIso (e.hom.app K ≫ c.app K)
-    infer_instance
-  · intro χ' hχ'
-    let Λ := integralOperationsGoodLocalization l E W
-    let qg := q.inverseImage (integralOperationsGoodComplex l E W).ι
-    let : Λ.IsLocalization qg := integralOperationsGoodLocalization_isLocalization l E W
-    apply Localization.natTrans_ext Λ qg
-    intro P
-    apply (cancel_mono ((integralScalarExtensionComparison l E L ι W).hom.app P)).mp
-    exact (hχ'.1 P).trans (hχ P).symm
+  exact archivedIntegralScalarCompletion l E L ι W
 
 end WeilConjectures

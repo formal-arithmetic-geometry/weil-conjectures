@@ -30,6 +30,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 
 /-! # Computing the projection mate on mixed tensor representatives
 
@@ -315,14 +316,18 @@ private theorem projection_counit
     (L : C ⥤ D) (R : D ⥤ C) (adj : L ⊣ R)
     (T : C × C ⥤ C) (U : D × D ⥤ D)
     (b : T ⋙ L ≅ L.prod L ⋙ U) (I : D) (F : C) :
-    L.map (derivedProjectionFormulaMate L R adj T U b I F) ≫
+    L.map (((adj.rightAdjointProjectionMap
+      (T_C := Functor.curry.obj U) (T_D := Functor.curry.obj T)
+      (Functor.curry.map b.hom ≫ (Functor.curryObjProdComp L L U).hom)).app I).app F) ≫
         adj.counit.app (U.obj (I, L.obj F)) =
       b.hom.app (R.obj I, F) ≫
         U.map (Prod.mkHom (adj.counit.app I) (𝟙 (L.obj F))) := by
   have h := adj.map_rightAdjointProjectionMap_app_app_comp_counit
     (T_C := Functor.curry.obj U) (T_D := Functor.curry.obj T)
     (Functor.curry.map b.hom ≫ (Functor.curryObjProdComp L L U).hom) I F
-  change L.map (derivedProjectionFormulaMate L R adj T U b I F) ≫
+  change L.map (((adj.rightAdjointProjectionMap
+      (T_C := Functor.curry.obj U) (T_D := Functor.curry.obj T)
+      (Functor.curry.map b.hom ≫ (Functor.curryObjProdComp L L U).hom)).app I).app F) ≫
       adj.counit.app (U.obj (I, L.obj F)) =
     (b.hom.app (R.obj I, F) ≫ 𝟙 _) ≫
       U.map (Prod.mkHom (adj.counit.app I) (𝟙 (L.obj F))) at h
@@ -337,7 +342,11 @@ private theorem proEtale_projection_counit
     (I : DerivedCategory (proEtaleRingModules X S))
     (F : DerivedCategory (proEtaleRingModules Y R)) :
     (proEtaleRingDerivedPullback f R S c).map
-        (proEtaleProjectionFormulaMate f R S c a b I F) ≫
+        ((((proEtaleRingDerivedAdjunction f R S c).rightAdjointProjectionMap
+          (T_C := Functor.curry.obj b.tensor) (T_D := Functor.curry.obj a.tensor)
+          (Functor.curry.map (proEtaleCanonicalTensorComparison f R S c a b).hom ≫
+            (Functor.curryObjProdComp (proEtaleRingDerivedPullback f R S c)
+              (proEtaleRingDerivedPullback f R S c) b.tensor).hom)).app I).app F) ≫
       (proEtaleRingDerivedAdjunction f R S c).counit.app
         (b.tensor.obj (I, (proEtaleRingDerivedPullback f R S c).obj F)) =
     (proEtaleCanonicalTensorComparison f R S c a b).hom.app
@@ -567,13 +576,17 @@ theorem proEtaleMixedProjectionMate
     let G := (L.mapHomologicalComplex (.up ℤ)).obj F
     let J := CochainComplex.mapBifunctor I G (proEtaleOrdinaryTensor X S)
     let hG := (proEtaleCanonicalTensorPullback f R S c a b).1 F hF
+    let pi := (proEtaleRingDerivedAdjunction f R S c).rightAdjointProjectionMap
+      (T_C := Functor.curry.obj b.tensor) (T_D := Functor.curry.obj a.tensor)
+      (Functor.curry.map (proEtaleCanonicalTensorComparison f R S c a b).hom ≫
+        (Functor.curryObjProdComp (proEtaleRingDerivedPullback f R S c)
+          (proEtaleRingDerivedPullback f R S c) b.tensor).hom)
     let eta (C : CochainComplex (proEtaleRingModules X S) ℤ) :
         DerivedCategory.Q.obj ((V.mapHomologicalComplex (.up ℤ)).obj C) ⟶
           (proEtaleRingDerivedDirectImage f R S c).obj (DerivedCategory.Q.obj C) :=
       V.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj C)
     a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫
-        proEtaleProjectionFormulaMate f R S c a b
-          (DerivedCategory.Q.{u + 2}.obj I) (DerivedCategory.Q.{u + 2}.obj F) ≫
+        ((pi.app (DerivedCategory.Q.{u + 2}.obj I)).app (DerivedCategory.Q.{u + 2}.obj F)) ≫
         (proEtaleRingDerivedDirectImage f R S c).map
           (b.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.{u + 2}.obj I))
             ((proEtaleRingDerivedPullbackFactors f R S c).hom.app F)) ≫
@@ -589,6 +602,11 @@ theorem proEtaleMixedProjectionMate
   let LD := proEtaleRingDerivedPullback f R S c
   let VD := proEtaleRingDerivedDirectImage f R S c
   let adj := proEtaleRingDerivedAdjunction f R S c
+  let pi := (proEtaleRingDerivedAdjunction f R S c).rightAdjointProjectionMap
+    (T_C := Functor.curry.obj b.tensor) (T_D := Functor.curry.obj a.tensor)
+    (Functor.curry.map (proEtaleCanonicalTensorComparison f R S c a b).hom ≫
+      (Functor.curryObjProdComp (proEtaleRingDerivedPullback f R S c)
+        (proEtaleRingDerivedPullback f R S c) b.tensor).hom)
   let am := proEtaleRingModuleAdjunction f R S c
   let A := (V.mapHomologicalComplex (.up ℤ)).obj I
   let G := (L.mapHomologicalComplex (.up ℤ)).obj F
@@ -603,8 +621,7 @@ theorem proEtaleMixedProjectionMate
   let epsc := (am.mapHomologicalComplex (.up ℤ)).counit.app I
   let total := proEtaleProjectionTotal f R S c I F
   change a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.obj F))) ≫
-      proEtaleProjectionFormulaMate f R S c a b
-        (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F) ≫
+      ((pi.app (DerivedCategory.Q.obj I)).app (DerivedCategory.Q.obj F)) ≫
       VD.map (b.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj I)) (eps.app F)) ≫
         (proEtaleMixedTensor S b I G hG).hom) =
     (proEtaleMixedTensor R a A F hF).hom ≫ DerivedCategory.Q.map total ≫ eta J
@@ -668,8 +685,7 @@ theorem proEtaleMixedProjectionMate
     rw [← Category.assoc, hn, Category.assoc, ← b.tensor.map_comp]
     simp only [prod_comp, LD.map_id, hcv]
     erw [Category.id_comp]
-  have hpi : LD.map (proEtaleProjectionFormulaMate f R S c a b
-        (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F)) ≫
+  have hpi : LD.map (((pi.app (DerivedCategory.Q.obj I)).app (DerivedCategory.Q.obj F))) ≫
       adj.counit.app (b.tensor.obj
         (DerivedCategory.Q.obj I, LD.obj (DerivedCategory.Q.obj F))) =
       beta.hom.app (VD.obj (DerivedCategory.Q.obj I), DerivedCategory.Q.obj F) ≫
@@ -735,8 +751,7 @@ theorem proEtaleMixedProjectionMate
   have hleft : LD.map
       (a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p ≫ eta I)
         (𝟙 (DerivedCategory.Q.obj F))) ≫
-        proEtaleProjectionFormulaMate f R S c a b
-          (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F) ≫ VD.map B) ≫
+        ((pi.app (DerivedCategory.Q.obj I)).app (DerivedCategory.Q.obj F)) ≫ VD.map B) ≫
         adj.counit.app (DerivedCategory.Q.obj J) =
       LD.map (representativeInv Y R a P F hP hF) ≫
         eps.app (CochainComplex.mapBifunctor P F (proEtaleOrdinaryTensor Y R)) ≫
@@ -744,8 +759,7 @@ theorem proEtaleMixedProjectionMate
     have hh := mate_calculation LD VD adj a.tensor b.tensor
       (a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p ≫ eta I)
         (𝟙 (DerivedCategory.Q.obj F))))
-      (proEtaleProjectionFormulaMate f R S c a b
-        (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F))
+      (((pi.app (DerivedCategory.Q.obj I)).app (DerivedCategory.Q.obj F)))
       (beta.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj F))
       (beta.hom.app (VD.obj (DerivedCategory.Q.obj I), DerivedCategory.Q.obj F))
       (eps.app P) (eps.app F) (DerivedCategory.Q.map v)
@@ -795,8 +809,7 @@ theorem proEtaleMixedProjectionMate
   change a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p)
       (𝟙 (DerivedCategory.Q.obj F))) ≫
     a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.obj F))) ≫
-    proEtaleProjectionFormulaMate f R S c a b
-      (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F) ≫ VD.map B = _
+    ((pi.app (DerivedCategory.Q.obj I)).app (DerivedCategory.Q.obj F)) ≫ VD.map B = _
   have hx : a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p)
       (𝟙 (DerivedCategory.Q.obj F))) ≫
       a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.obj F))) =

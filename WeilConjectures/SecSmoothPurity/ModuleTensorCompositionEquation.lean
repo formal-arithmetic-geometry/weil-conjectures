@@ -126,4 +126,51 @@ private noncomputable def compositeComparison
         ((generator h kh x).hom.app W t) ((generator h kh y).hom.app W t)
     exact hh''
 
+/-- The tensor square for ordinary module pullback and its normalized composite.
+Source: Stacks 03EL and 0D6D, scalar association for composite pullbacks.
+(blueprint: lem-pur-module-tensor-composition-equation).
+
+Proof: precompose with generalized inverse-image pure tensors of M tensor N.
+The scalarAssociation field of the composite presentation identifies the
+adjunction conjugate with insertion of the two scalar units. Apply the pure
+field of each of the three normalized comparisons. Both sides send a tensor
+with outside scalar t to (t tensor (1 tensor x)) tensor
+(1 tensor (1 tensor y)). Scalars move across by the balanced tensor relation;
+associativity of multiplication identifies their products. Scalar-extension
+linearity, the sheaf tensor universal property and sheafification extend the
+equality to all module sections. Generalized elements are required, so this
+argument does not assume enough points or a continuous site functor. It uses
+no invertibility of a coefficient map and applies to zero modules and rings. -/
+theorem cochainModuleTensorComposition
+    {E : Type uE} [Category.{vE} E] [EssentiallySmall.{w} E]
+    {H : GrothendieckTopology E}
+    [H.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
+    {T : Sheaf H CommRingCat.{w}} (f : RingedPullback R S)
+    (g : RingedPullback S T) (h : RingedPullback R T)
+    (kf : Comparison f) (kg : Comparison g) (kh : Comparison h)
+    (a : CompositePresentation f g h kf kg kh)
+ :
+    ∀ M N : Modules R,
+      (kh.mu M N).hom ≫
+          ((compositionModule f g h a.rightModules).hom.app M ⊗ₘ
+            (compositionModule f g h a.rightModules).hom.app N) =
+        (compositionModule f g h a.rightModules).hom.app (M ⊗ N) ≫
+          g.L.map (kf.mu M N).hom ≫ (kg.mu (f.L.obj M) (f.L.obj N)).hom  := by
+  let := h.finiteLimits
+  let := (SheafOfModules.CochainTensorComparison.canonicalRingedTensorComparison_existsUnique
+    R T h.RI h.uInv h.I h.coefficient h.L h.hobj h.uPush h.adj h.hmap).2
+  have he : compositeComparison f g h kf kg kh a = kh := Subsingleton.elim _ _
+  intro M N
+  have hm := congrArg (fun k : Comparison h ↦ (k.mu M N).hom) he
+  have hh := congrArg (fun z ↦ z ≫
+    ((compositionModule f g h a.rightModules).hom.app M ⊗ₘ
+      (compositionModule f g h a.rightModules).hom.app N)) hm.symm
+  simp only [compositeComparison, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    tensorIso_inv, Iso.app_inv, Category.assoc, tensorHom_comp_tensorHom,
+    Iso.inv_hom_id_app, id_tensorHom_id, Iso.app_hom] at hh
+  exact hh.trans (congrArg (fun z ↦
+    (compositionModule f g h a.rightModules).hom.app (M ⊗ N) ≫
+      g.L.map (kf.mu M N).hom ≫ z)
+        (Category.comp_id (kg.mu (f.L.obj M) (f.L.obj N)).hom))
+
 end CategoryTheory.CochainPullback

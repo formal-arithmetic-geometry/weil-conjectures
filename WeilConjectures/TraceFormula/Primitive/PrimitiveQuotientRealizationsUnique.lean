@@ -175,7 +175,8 @@ theorem primitiveQuotientRealizations_unique
           Category.comp_id] using h
       rw [← heq] at hα'
       exact (cancel_normalized _ _ _ _ hα hα').symm
-    apply (cancel_epi ((integralDerivedPullback l E f).map d.hom)).1
+    apply (Iso.cancel_iso_hom_left ((integralDerivedPullback l E f).mapIso d) _ _).1
+    simp only [Functor.mapIso_hom]
     rw [α'.realization.hom.naturality, α.realization.hom.naturality]
     exact congrArg (fun z ↦ z ≫ _) hP
   · intro β'
@@ -221,7 +222,9 @@ theorem primitiveQuotientRealizations_unique
           Category.comp_id] using h
       rw [← heq] at hβ'
       exact (cancel_normalized _ _ _ _ hβ hβ').symm
-    apply (cancel_epi ((integralScalarExtensionOfUniverses l E L ι Y).map d.hom)).1
+    apply (Iso.cancel_iso_hom_left
+      ((integralScalarExtensionOfUniverses l E L ι Y).mapIso d) _ _).1
+    simp only [Functor.mapIso_hom]
     rw [β'.realization.hom.naturality, β.realization.hom.naturality]
     exact congrArg (fun z ↦ z ≫ _) hP
 

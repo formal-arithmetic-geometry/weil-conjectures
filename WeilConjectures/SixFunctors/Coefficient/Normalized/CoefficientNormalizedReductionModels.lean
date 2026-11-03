@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerived
 public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedReductionCore
 import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedReductionNormalizations
+public import WeilConjectures.SixFunctors.Coefficient.Finite.CoefficientFiniteQuotientCalculusExistence
+public import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedReductionModelExistence
 
 /-! # Normalized coefficient reduction and quotient tensors
 
@@ -47,6 +49,32 @@ def CoefficientDerivedSystemTensorCoherence (T : CoefficientDerivedSystemTensors
       _ (T.finiteClosed n).monoidal,
     Nonempty (RingedDerivedTensorCoherence.{t+1, t, u} (Scheme.ProEt.topology W)
       (integralCoefficientCommRingSheaf l E W n) (T.finiteClosed n) (T.finiteTensorModel n) β)
+
+/--
+The sequence projection and scalar-extension constructions produce the core reduction
+record with its prescribed tensor subrecord and finite quotient calculus.  This is the
+construction part of the normalized reduction argument; the four representative
+normalization identities are recorded separately.
+Source: Stacks 06YS, 06YY, 07A6 and 0941; the first and third proof steps of
+`lem-coef-normalized-reduction-models`.
+
+Proof plan: apply the sequence projection derived adjunction to the completed
+coefficient ring and its quotient tower, transport it across the strict-system
+sequence equivalence, and use the actual derived scalar-extension pairs at each
+finite level.  The transported unit and counit give the projection equations and
+one-flat-term K-flat models.  Apply the same change-of-rings construction to every
+finite quotient and retain its ordinary unit, derived counit and tensor comparison;
+these data form the finite quotient calculus.
+(blueprint: lem-coef-normalized-reduction-models-core)
+-/
+private theorem coefficientNormalizedReductionCore_legacy
+    (T : CoefficientDerivedSystemTensors l E W) :
+    ∃ R : CoefficientDerivedSystemReduction l E W,
+      R.toCoefficientDerivedSystemTensors = T ∧
+      Nonempty (CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors) := by
+  obtain ⟨R, hR⟩ := coefficientNormalizedReductionModel_exists l E W T
+  obtain ⟨Q⟩ := coefficientFiniteQuotientCalculus_exists l E W T
+  exact ⟨R, hR, ⟨hR.symm ▸ Q⟩⟩
 
 attribute [local irreducible] CoefficientDerivedSystemTensorCoherence
 
@@ -87,7 +115,7 @@ theorem coefficientNormalizedReductionModels (T : CoefficientDerivedSystemTensor
       CoefficientReductionTensorEvaluation l E W R ∧
       Nonempty (CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors) :=
   by
-  obtain ⟨R, hRT, hQ⟩ := coefficientNormalizedReductionCore l E W T
+  obtain ⟨R, hRT, hQ⟩ := coefficientNormalizedReductionCore_legacy l E W T
   obtain ⟨S, hSR, hR, hF, hE, hRE⟩ :=
     coefficientNormalizedReductionNormalizations l E W R
   have hST : S.toCoefficientDerivedSystemTensors = R.toCoefficientDerivedSystemTensors :=
