@@ -29,6 +29,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+public import WeilConjectures.SmoothPurity.Section.ProEtaleSectionInvariant
 import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalSmoothnessFiniteComparison
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
@@ -42,7 +43,8 @@ Source: blueprint sec-smooth-purity/sk-def-purity-conv/def-pur-section-invariant
 
 Its data are the actual derived inverse image of the relative dualizing object.
 No orientation or Tate identification is chosen. The finite coefficient stage is
-used here, as stipulated by the purity conventions.
+used here, as stipulated by the purity conventions. It is the general pro-étale section
+invariant `AlgebraicGeometry.ProEtale.sectionInvariant` at the coefficient ring `O_E/ϖ^n`.
 -/
 
 @[expose] public section
@@ -59,12 +61,21 @@ namespace WeilConjectures.PurityFiniteSetting
 /-- The section invariant C(g,s) = Ls* Rg! A_B on the small pro-etale site.
 The definition makes sense for any map s; its geometric and invertibility
 properties below apply to closed sections of smooth separated finite-type maps.
+It is the general pro-étale section invariant at the coefficient ring `O_E/ϖ^n`.
 Source: blueprint def-pur-section-invariant, displayed definition
 (blueprint: def-pur-section-invariant). -/
 noncomputable def sectionInvariant (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}}
     (g : V ⟶ B) [HasCompactification g] (aB : B ⟶ Spec (.of P.field.k))
     [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V) :=
-  (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) s).leftDerivedFunctor.obj
-    (P.dualizing g aB)
+  ProEtale.sectionInvariant P.Coefficient g s
+
+/-- The section invariant is `Ls^*` of the relative dualizing object `P.dualizing g aB`. -/
+theorem sectionInvariant_eq (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}}
+    (g : V ⟶ B) [HasCompactification g] (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V) :
+    P.sectionInvariant g aB s =
+      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) s).leftDerivedFunctor.obj
+        (P.dualizing g aB) :=
+  rfl
 
 end WeilConjectures.PurityFiniteSetting
