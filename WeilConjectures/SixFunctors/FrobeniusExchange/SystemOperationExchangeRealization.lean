@@ -27,6 +27,7 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTenso
 
 import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import WeilConjectures.SixFunctors.FrobeniusExchange.SystemOpenScalarPullbackMate
+import WeilConjectures.SmoothPurity.Derived.DerivedCompleteFiniteReductionDetection
 import all WeilConjectures.SixFunctors.FrobeniusExchange.IntegralSystemEvaluationNormalization
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.OrdinaryOpenFiniteEvaluation
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralSystemOpenEvaluation
@@ -1343,6 +1344,46 @@ theorem compactRealization_existsUnique (c : Compactification f) :
   -- total derived limit. Over an arbitrary field `K₀` such phantom maps need not vanish
   -- objectwise (the relevant `lim¹` of finite `Ext⁻¹` groups can be nonzero).
   sorry
+
+/-- Uniqueness of the projection-normalized identification, given that each value of
+`compactImage` is derived complete and that the shifted Hom groups from the recorded Rf_!
+into its finite restricted reductions are finite. Over a finite field `K₀` the finiteness is
+the finiteness of étale cohomology of constructible complexes (SGA 4½, Th. finitude); over an
+arbitrary field it can fail, which is why `compactRealization_existsUnique` is open.
+Source: Stacks, Lemma map-into-Rlim
+(blueprint: def-weil-system-operation-exchange-realization).
+Proof: both normalizations give the same reduction of each component, after cancelling the
+composite of the inverse reduction evaluation, the operation reduction and the finite
+evaluation, which is invertible since the reduction of `τ` is. Reductions detect maps into a
+derived-complete object with finite shifted reduction Hom groups. -/
+theorem compactRealization_unique_of_finite (c : Compactification f)
+    (hQ : ∀ K : sfIntegralConstructibleCategory l E X,
+      IsSfDerivedComplete l E Y ((compactImage l E f c).obj K.obj))
+    (hfin : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ), Finite
+      (((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K).obj⟦(1 : ℤ)⟧ ⟶
+        (sfDerivedReductionRestricted l E Y n).obj ((compactImage l E f c).obj K.obj)))
+    (τ τ' : sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
+        (sfIntegralConstructible l E Y).ι ≅
+      (sfIntegralConstructible l E X).ι ⋙ compactImage l E f c)
+    (hτ : CompactRealizationSpec l E K₀ hl f c τ)
+    (hτ' : CompactRealizationSpec l E K₀ hl f c τ') : τ' = τ := by
+  ext K
+  refine derivedComplete_finiteReduction_ext l E Y (hQ K) (hfin K) _ _ fun n ↦ ?_
+  have h := hτ K n
+  have h' := hτ' K n
+  rw [← h] at h'
+  have : IsIso ((scalarReductionDerivedExtension l E Y n).map (τ.hom.app K)) :=
+    inferInstanceAs (IsIso ((scalarReductionDerivedExtension l E Y n).mapIso
+      (τ.app K)).hom)
+  have : IsIso ((((models l E).system Y).reductionEvaluation n).inv.app
+        ((compactImage l E f c).obj K.obj) ≫
+      (coefficientSequenceDerivedEvaluation l E Y n).map
+        ((operationReduction l E (systemDerivedOpen l E c.i ⋙
+          systemDirect l E c.g)).app K.obj) ≫
+      (compactFiniteEvaluation l E c n).hom.app K.obj) := by
+    rw [(IsIso.eq_inv_comp _).2 h]
+    infer_instance
+  exact (cancel_mono _).1 h'
 
 /-- The identification determined by the actual integral compact-support projections.
 Source: Bhatt--Scholze 6.7.6 (blueprint: def-weil-system-operation-exchange-realization). -/
