@@ -171,19 +171,20 @@ theorem openScalar_mate_pasting_of_eq
     sZ.map (δE.app N) ≫ βZ.app (JE.obj N) =
       α.app (eA.obj N) ≫ JfL.map (βX.app N) ≫ δL.app (SX.obj N) ≫ eB'.map (γ.app N) := by
   subst hδE hδL hβX hβZ hα hγ
-  exact openScalar_mate_pasting adjJE adjJL adjfE adjfL σX σZ τX τZ eA eB eA' eB' pE pL ρX ρZ q
-    φ hcube N
+  exact openScalar_mate_pasting adjJE adjJL adjfE adjfL σX σZ τX τZ eA eB eA' eB'
+    pE pL ρX ρZ q φ hcube N
 
 /-- Rearranging the pasted mate equation into the inverse-component form. -/
 theorem openScalar_rearrange {C : Type*} [Category C] {U V W T S U' : C} (a : U ⟶ V)
-    (i₁ : W ≅ V) (i₂ : T ≅ W) (x : T ≅ S) (k₁ : U' ≅ U) (k₂ : S ≅ U')
-    (h : k₁.inv ≫ k₂.inv = a ≫ i₁.inv ≫ i₂.inv ≫ x.hom) :
-    i₂.hom ≫ i₁.hom = x.hom ≫ k₂.hom ≫ k₁.hom ≫ a := by
-  have ha : a = k₁.inv ≫ k₂.inv ≫ x.inv ≫ i₂.hom ≫ i₁.hom := by
-    rw [reassoc_of% h]
-    simp
-  rw [ha]
-  simp
+    (f₁ : W ⟶ V) (g₁ : V ⟶ W) (f₂ : T ⟶ W) (g₂ : W ⟶ T) (x : T ⟶ S) (y : S ⟶ T)
+    (m₁ : U' ⟶ U) (n₁ : U ⟶ U') (m₂ : S ⟶ U') (n₂ : U' ⟶ S)
+    (e₁ : g₁ ≫ f₁ = 𝟙 V) (e₂ : g₂ ≫ f₂ = 𝟙 W) (ex : x ≫ y = 𝟙 T)
+    (em₁ : m₁ ≫ n₁ = 𝟙 U') (em₂ : m₂ ≫ n₂ = 𝟙 S)
+    (h : n₁ ≫ n₂ = a ≫ g₁ ≫ g₂ ≫ x) :
+    f₂ ≫ f₁ = x ≫ m₂ ≫ m₁ ≫ a := by
+  have ha : a = n₁ ≫ n₂ ≫ y ≫ f₂ ≫ f₁ := by
+    rw [reassoc_of% h, reassoc_of% ex, reassoc_of% e₂, e₁, Category.comp_id]
+  rw [ha, reassoc_of% em₁, reassoc_of% em₂, reassoc_of% ex]
 
 section EvaluationMate
 
@@ -536,6 +537,26 @@ private theorem systemScalarPullback_hom_eq_finiteMate (l : ℕ) [Fact l.Prime]
     (integralComparisonSystemScalarPullback_existsUnique l E L ι j).exists.choose_spec
 
 end ExplicitMate
+
+set_option maxHeartbeats 1000000 in
+-- unfolding the open scalar mate compares large derived functor composites
+/-- The inverse open scalar mate is the iterated mate of the derived restriction/pullback
+square along the open and fixed scalar adjunctions. -/
+private theorem systemOpenScalarInv_eq_iteratedMate (l : ℕ) [Fact l.Prime]
+    (E L : Type u) [Field E] [Field L]
+    [Algebra (Padic l) E] [Algebra (Padic l) L]
+    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]
+    (ι : E →ₐ[Padic l] L) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
+    systemOpenScalarInv l E L ι j = ((mateEquiv (systemDerivedOpenAdjunction l E j)
+      (systemDerivedOpenAdjunction l L j)).symm
+      ((mateEquiv (finiteEvaluationSystemScalarAdjunction l E L ι Z)
+        (finiteEvaluationSystemScalarAdjunction l E L ι X)).symm (TwoSquare.mk _ _ _ _
+          (Functor.mapDerivedCategorySquareIso
+            (@asIso _ _ _ _ (sequenceRestrictionPullbackInv l E L ι j)
+              (sequenceRestrictionPullbackInv_isIso l E L ι j)).symm).inv))).natTrans := by
+  unfold systemOpenScalarInv
+  rw [systemScalarPullback_hom_eq_finiteMate l E L ι j]
+  rfl
 
 /-- The inverse open scalar mate evaluates to the finite open scalar transpose.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 07A6
