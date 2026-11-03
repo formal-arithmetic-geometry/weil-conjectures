@@ -38,23 +38,4 @@ namespace AlgebraicGeometry.FiniteQuotientReduction
 
 variable {ell : ℕ} [Fact ell.Prime]
 
-/-- The ordinary pure scalar tensor, inserted through the actual sheafification unit.
-Source: Stacks 03EL, blueprint flat-model computation
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-def pureExtension (T : Scheme.{u}) {r m : ℕ}
-    (f : Ring.{u} ell r →+* Ring.{u} ell m)
-    (M : Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T (Ring ell r)))
-    (V : T.ProEtᵒᵖ)
-    (s : (Scheme.proEtaleConstantRing T (Ring ell m)).obj.obj V) (x : M.val.obj V) :
-    ((Scheme.siteScalarChange T (Scheme.proEtaleConstantRingMap (T := T) f)).obj M).val.obj V :=
-  (eqToHom (Scheme.siteScalarChange_obj_eq T
-    (Scheme.proEtaleConstantRingMap (T := T) f) M).symm).val.app V
-      (((PresheafOfModules.sheafificationAdjunction.{u + 1}
-        (R := (sheafCompose (Scheme.ProEt.topology T)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-            (Scheme.proEtaleConstantRing T (Ring ell m))) (𝟙 _)).unit.app
-        (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1}
-          (Scheme.proEtaleConstantRingMap (T := T) f) M)).app V
-            (s ⊗ₜ[_, ((Scheme.proEtaleConstantRingMap (T := T) f).hom.app V).hom] x))
-
 end AlgebraicGeometry.FiniteQuotientReduction
