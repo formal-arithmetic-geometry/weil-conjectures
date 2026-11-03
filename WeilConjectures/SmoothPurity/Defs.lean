@@ -11,6 +11,27 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SmoothPurity.OrientationCanonical
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
+public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationModels
+public import WeilConjectures.AlgebraicGeometry.ExplicitSmoothComparison.ComparisonBrownExplicit
+public import WeilConjectures.AlgebraicGeometry.PurityIntegralTower.CondensedTateIntegralTower
+public import WeilConjectures.AlgebraicGeometry.PurityIntegralTower.FinitePuritySourceUnitReduction
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedSmoothTraceUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.DetSfCompBaseChangeDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.PoincareTateBoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.RepresentingTraceClassification
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.TraceNonuniqueness
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.WeilObject.Sheaf.StalkUnit
 
 /-!
 
@@ -115,33 +136,27 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
 omit [SmoothOfRelativeDimension d f.left] in
-/-- Blueprint `sk-thm-purity-transport` (`γ_{f,ℚ̄_ℓ}(ℚ̄_ℓ,Y)`, used in `def-pur-smooth-trace`): the
-**orientation** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension
-`d`, the datum the smooth trace is built from. It is `smoothOrientationOfSmooth`: the canonical
-orientation (`IsCanonicalSmoothOrientation`, the extension of scalars of the integral lift of the
-finite orientations `Rf^! Λ_Y ≅ Λ_X(d)[2d]` of the diagonal argument) when an isomorphism with
-this property is known to exist, and otherwise a non-canonical isomorphism
-(`nonempty_iso_tateTwist_upperShriekUnit`). The canonical orientation always exists
-mathematically (SGA 4, Exposé XVIII: the finite orientations are compatible under change of
-coefficients, blueprint `det-sp-purity-coefficient-change`), but the existence of the compatible
-lift is not formalised. It is an isomorphism (`isIso_smoothOrientation`).
-The signature does not carry `[SmoothOfRelativeDimension d f.left]`: for `f` not smooth of pure
-relative dimension `d` the value is `0`, and the datum is meaningful only for `f` smooth of pure
-relative dimension `d`. -/
+/-- Blueprint `def-pur-smooth-trace` (`γ_{f,Λ_Y}`, `sk-prop-sp-orientation`): the **orientation**
+`ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension `d`, the purity
+isomorphism normalized by integration on the affine line (the canonical orientation of
+`𝔸¹_Y ⟶ Y`). Take the explicit smooth adjunction counit constructed from the finite
+orientations, integral tower and scalar extension. Identify its source with the published
+Tate complex and take its adjunct under the bounded constructible adjunction. -/
 @[no_expose]
 noncomputable def smoothOrientation :
     boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
       (boundedConstructibleUpperShriek ℓ f).obj
-        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) := by
-  classical
-  exact if _ : SmoothOfRelativeDimension d f.left then
-    haveI := neZero_natCast_of_ringChar_ne ℓ (k := k)
-    smoothOrientationOfSmooth ℓ f d
-  else 0
+        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
+  by
+    classical
+    exact if h : SmoothOfRelativeDimension d f.left then
+      letI := h
+      (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _
+        ⟨(boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ
+            (compactificationOverField f)).hom.app _ ≫
+          NormalizedUnitTrace.closureTrace ℓ f d⟩
+    else 0
 
--- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
--- instance-implicit section variables, even under `include`. The elaborated signature has it
--- once; the linter also counts the section variable in scope.
 set_option linter.overlappingInstances false in
 /-- The orientation of a morphism smooth of pure relative dimension `d` is an isomorphism: both
 the canonical and the non-canonical orientations are (`isIso_smoothOrientationOfSmooth`). -/
@@ -173,6 +188,28 @@ theorem smoothTrace_eq :
   unfold smoothTrace
   rfl
 
+/-- The smooth trace recovers the specified explicit counit used to construct
+its orientation. This is the adjunction inverse law, with the bounded-to-ambient
+compact-support comparison retained. -/
+private theorem smoothTrace_eq_normalizedCounit :
+    (smoothTrace ℓ f d).hom =
+      (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ
+        (compactificationOverField f)).hom.app (boundedConstructibleTateTwist ℓ X d (2 * d)) ≫
+        NormalizedUnitTrace.closureTrace ℓ f d := by
+  let t : (boundedConstructibleLowerShriek ℓ f).obj
+      (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶ 𝟙_ _ :=
+    ⟨(boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ
+        (compactificationOverField f)).hom.app _ ≫
+      NormalizedUnitTrace.closureTrace ℓ f d⟩
+  have ho : smoothOrientation ℓ f d =
+      (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ t := by
+    dsimp only [smoothOrientation]
+    rw [dif_pos (inferInstance : SmoothOfRelativeDimension d f.left)]
+  have h := ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _).symm_apply_apply t
+  rw [(boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv_counit] at h
+  rw [smoothTrace_eq, ho]
+  exact congrArg (fun q ↦ q.hom) h
+
 /-- The **purity map** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`: the adjoint of the trace `Tr_f` for
 `Rf_! ⊣ Rf^!`. -/
 noncomputable def smoothPurityMap :
@@ -188,14 +225,66 @@ theorem smoothPurityMap_eq_smoothOrientation :
     smoothPurityMap ℓ f d = smoothOrientation ℓ f d := by
   change (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d) = _
   rw [smoothTrace_eq]
-  exact (congrArg ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _)
-    ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv_counit _ _
-      (smoothOrientation ℓ f d))).symm.trans
-    (((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _).apply_symm_apply _)
+  rw [← (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv_counit _ _
+    (smoothOrientation ℓ f d)]
+  exact ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _).apply_symm_apply _
+
+/-- Taking the adjunct of the explicit counit composite recovers its input morphism.
+Source: `lem-route-is-iso-smooth-purity-map`, Step 4. Apply the adjunction Hom equivalence
+and its inverse law; this does not assume that the input is invertible. -/
+private theorem smoothPurityMap_eq_of_trace_formula
+    (a : boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
+      (boundedConstructibleUpperShriek ℓ f).obj
+        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
+    (htrace : smoothTrace ℓ f d =
+      (boundedConstructibleLowerShriek ℓ f).map a ≫
+        (boundedConstructibleUpperShriekAdjunction
+          ℓ f).counit.app (𝟙_ _)) :
+    smoothPurityMap ℓ f d = a := by
+  change (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _
+    (smoothTrace ℓ f d) = a
+  rw [htrace, ← (boundedConstructibleUpperShriekAdjunction
+    ℓ f).homEquiv_counit _ _ a]
+  exact ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _).apply_symm_apply _
+
+/-- Lift the specified ambient Tate realization through the full constructible inclusion,
+then compose it with the reconstructed exceptional comparison. Its counit transpose
+has exactly that adjunct, and its inverse is the ambient reconstruction formula.
+Source: `lem-route-is-iso-smooth-purity-map`, Steps 3--5, and
+`def-pur-condensed-smooth-purity-iso`. The reconstruction and trace formula are supplied
+explicitly; no isomorphism or trace is selected by a mere existence theorem. -/
+private theorem smoothPurityMap_of_reconstructed_trace
+    {M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (a : M.obj ≅ (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d))
+    (c : M ≅ (boundedConstructibleUpperShriek
+      ℓ f).obj (𝟙_ _))
+    (htrace : smoothTrace ℓ f d =
+      (boundedConstructibleLowerShriek ℓ f).map
+          (((ObjectProperty.ι _).preimageIso
+            (X := M) (Y := boundedConstructibleTateTwist ℓ X d (2 * d)) a).inv ≫ c.hom) ≫
+        (boundedConstructibleUpperShriekAdjunction
+          ℓ f).counit.app (𝟙_ _)) :
+    ∃ e : boundedConstructibleTateTwist ℓ X d (2 * d) ≅
+        (boundedConstructibleUpperShriek ℓ f).obj
+          (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)),
+      smoothPurityMap ℓ f d = e.hom ∧
+        (ObjectProperty.ι _).mapIso e.symm = (ObjectProperty.ι _).mapIso c.symm ≪≫ a := by
+  let A : M ≅ boundedConstructibleTateTwist ℓ X d (2 * d) :=
+    (ObjectProperty.ι _).preimageIso a
+  let e := A.symm ≪≫ c
+  have he : smoothPurityMap ℓ f d = e.hom :=
+    smoothPurityMap_eq_of_trace_formula ℓ f d e.hom htrace
+  have hinv : (ObjectProperty.ι _).mapIso e.symm =
+      (ObjectProperty.ι _).mapIso c.symm ≪≫ a := by
+    apply Iso.ext
+    simp only [e, Iso.symm_hom, Iso.symm_inv, Iso.trans_inv, Functor.mapIso_hom,
+      Iso.trans_hom, Functor.map_comp, A, Functor.preimageIso_hom, Functor.map_preimage]
+  exact ⟨e, he, hinv⟩
 
 -- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
 -- instance-implicit section variables, even under `include`. The elaborated signature has it
 -- once; the linter also counts the section variable in scope.
+
 set_option linter.overlappingInstances false in
 /-- Blueprint `sk-thm-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
 adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism, for `f` smooth of
