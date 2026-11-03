@@ -7959,6 +7959,7 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeCoefficientsSu
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeReducedOpen
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseNormalizedTowerLocalModels
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseOpenRelativeLineConstructibility
+public import WeilConjectures.AlgebraicGeometry.Lisse.LisseProjectiveConstantModels
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseRationalScalarFiberMaps
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseScalarFiberMaps
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseScalarFiberReductions
@@ -14996,6 +14997,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.KFlatScalarTower.InternalKFlatScalarTowerRealizationSupplement
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapModFiniteFree
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModIhom
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModLimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
@@ -22838,6 +22840,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Rational
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Rational.RationalLocalizingTwist
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Rational.RationalRestrictionGlue
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.FiniteComparisonConstantRealization
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarProjectionShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarProjectionTensorUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarProjectionTransformation
@@ -22845,7 +22848,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.S
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixCtfGenerators
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDerivedPullbackNormalization
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleExtensionIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleLisseComparisonModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleLisseData
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleLisseModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleLisseTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixImmersionComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixImmersionComparisonExistence
