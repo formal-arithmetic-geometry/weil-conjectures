@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteFi
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.DetSfCompBaseChangeDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DetPropSfCbc
 public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteGeometricInternalHom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteGeometricVerdierCore
 
 /-!
 # Finite-coefficient geometric Verdier comparison
@@ -30,6 +32,34 @@ open AlgebraicGeometry Scheme
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Naturality of the canonical comparison follows from naturality of beta and pre. -/
+private theorem geometric_comparison_natural
+    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalClosed C] [MonoidalClosed D]
+    (G : C ⥤ D) [G.Monoidal] (W : C) (Wbar : D) (w : G.obj W ≅ Wbar)
+    {K L : C} (f : L ⟶ K) :
+    G.map ((MonoidalClosed.pre f).app W) ≫
+        finiteFieldDualizingHomComparison G L W Wbar w =
+      finiteFieldDualizingHomComparison G K W Wbar w ≫
+        (MonoidalClosed.pre (G.map f)).app Wbar := by
+  unfold finiteFieldDualizingHomComparison
+  rw [← Category.assoc,
+    Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app, Category.assoc]
+  simp only [Category.assoc]
+  exact congrArg (_ ≫ ·) ((MonoidalClosed.pre (G.map f)).naturality w.hom).symm
+
+/-- The evaluation equation uses the specified tensorator and the actual chosen w. -/
+private theorem geometric_comparison_evaluation
+    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalClosed C] [MonoidalClosed D]
+    (G : C ⥤ D) [G.Monoidal] (K W : C) (Wbar : D) (w : G.obj W ≅ Wbar) :
+    G.obj K ◁ finiteFieldDualizingHomComparison G K W Wbar w ≫
+        (ihom.ev (G.obj K)).app Wbar =
+      Functor.LaxMonoidal.μ G K _ ≫ G.map ((ihom.ev K).app W) ≫ w.hom := by
+  unfold finiteFieldDualizingHomComparison
+  rw [MonoidalCategory.whiskerLeft_comp, Category.assoc, ihom.ev_naturality,
+    ← Category.assoc, Functor.LaxMonoidal.ihomComparison_ev, Category.assoc]
 
 /-- Finite-coefficient geometric pullback over an algebraic closure preserves the
 constructible finite-Tor category, reflects isomorphisms, and carries the dualizing
@@ -90,11 +120,10 @@ categories, compact-support exchange and the exceptional adjunction identify the
 two representing Hom functors across the purely inseparable step. This yields
 the normalized dualizing isomorphism there. Compose with step 9; exchange pasting
 and naturality give exactly the asserted normalization over kbar.
-12. Along the affine ind-etale projection to k_s, internal-Hom comparison is
-invertible for constructible finite-Tor first argument and bounded second argument.
-Along the universal homeomorphism it is invertible by the monoidal equivalence.
-Evaluation-preserving site comparisons identify their composite with precisely
-the transpose beta for G, proving its invertibility.
+12. Both alternatives for k make it perfect, so kbar/k is separable algebraic and
+ind-etale. The geometric projection is weakly etale. The native weakly-etale
+closed-comparison theorem applies directly to the actual internal-module derived
+pullback and proves invertibility of its canonical evaluation-transpose beta.
 13. Compose beta with Hom(1,w). Both factors are invertible. Naturality of the
 closed adjunction gives contravariant naturality. Its transpose identity followed
 by naturality of evaluation in the second argument is the displayed evaluation
@@ -140,6 +169,38 @@ theorem finite_geometric_verdier_comparison_current
         (Spec.map (CommRingCat.ofHom (algebraMap k kbar))) c
         (compactSupportOpenBaseChangeIso (cartesianFinitePointRing A) a
           (Spec.map (CommRingCat.ofHom (algebraMap k kbar))) c))) := by
-  sorry
+  obtain ⟨core⟩ := finite_geometric_verdier_core_exists
+    p ell hple k hk A hA kbar X a c
+  refine ⟨inferInstance, ⟨{
+    W := core.W
+    Wbar := core.Wbar
+    W_ctf := core.W_ctf
+    Wbar_ctf := core.Wbar_ctf
+    counit := core.counit
+    counitBar := core.counitBar
+    represents := core.represents
+    representsBar := core.representsBar
+    symmetry := core.symmetry
+    preserves_ctf := core.preserves_ctf
+    conservative := core.conservative
+    exchange_iso := core.exchange_iso
+    dualizingIso := core.dualizingIso
+    counit_normalization := core.counit_normalization
+    beta_iso := ?_
+    comparison_iso := ?_
+    comparison_natural := ?_
+    evaluation := ?_ }⟩⟩
+  · intro K
+    exact finite_geometric_internalHom_comparison
+      p ell hple k hk A hA kbar X a K ⟨core.W, core.W_ctf⟩
+  · intro K
+    have := finite_geometric_internalHom_comparison
+      p ell hple k hk A hA kbar X a K ⟨core.W, core.W_ctf⟩
+    unfold finiteFieldDualizingHomComparison
+    infer_instance
+  · intro K L f
+    exact geometric_comparison_natural _ core.W core.Wbar core.dualizingIso f
+  · intro K
+    exact geometric_comparison_evaluation _ K.obj core.W core.Wbar core.dualizingIso
 
 end AlgebraicGeometry.ProEtale.CondensedRing

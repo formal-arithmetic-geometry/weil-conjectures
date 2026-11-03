@@ -12,6 +12,8 @@ public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiber
 public import Mathlib.Algebra.CharP.CharAndCard
 public import Mathlib.Algebra.CharP.Algebra
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.DetSfCompCompositionBaseChange
 
 /-!
 # Dualizing objects on the Cartesian self-product
@@ -53,6 +55,257 @@ variable (D : WeilConjectures.FiniteFieldDatum.{u})
 namespace DiagonalBaseChange
 
 variable {D} {X Y : Over (Spec (.of D.k))} (f : X ⟶ Y)
+
+/-- The compact-support exchange for supplied compactifications, followed by a supplied
+comparison on the localizing domain. This is the literal proper/open formalism exchange;
+there is no choice of a new exchange or of a comparison.
+Source: def-pur-co-smoothness (3), specified compact-support base change
+(blueprint: lem-pur-diagonal-base-change). -/
+def compactExchangeComposite
+    {A B A' B' : Scheme.{u}} {q : A ⟶ B} {q' : A' ⟶ B'}
+    {t : A' ⟶ A} {v : B' ⟶ B}
+    (c : Compactification q) (cp c₂ : Compactification q') (h : cp.Z ⟶ c.Z)
+    (hi : IsPullback t cp.i c.i h) (hb : IsPullback h cp.g c.g v)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology A) Ab.{u + 1}) (condensedRingObj Λ A)))
+    (hK : localizingClosureProEtale Λ A' ((moduleObjectDerivedPullback Λ t).obj K))
+    (e : ((localizingClosureProEtale Λ A').ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ cp) ≅
+      ((localizingClosureProEtale Λ A').ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ c₂)) :
+      (moduleObjectDerivedPullback Λ v).obj
+          ((rightDerivedLowerShriekOfCompactification Λ c).obj K) ⟶
+        (rightDerivedLowerShriekOfCompactification Λ c₂).obj
+          ((moduleObjectDerivedPullback Λ t).obj K) :=
+  ((compactSupportCondensedFormalism Λ).shriekBaseChange c cp h hi hb).natTrans.app K ≫
+    e.hom.app ⟨(moduleObjectDerivedPullback Λ t).obj K, hK⟩
+
+private def nativeSquare {A B C T : Scheme.{u}} {t : A ⟶ B} {l : A ⟶ C}
+    {r : B ⟶ T} {v : C ⟶ T} (sq : IsPullback t l r v) :
+    ChosenCartesianSquare t l r v :=
+  { toCommSq := sq.toCommSq
+    isoPullback := sq.isoPullback
+    hom_fst := sq.isoPullback_hom_fst
+    hom_snd := sq.isoPullback_hom_snd }
+
+private theorem properFactor_isIso (ell : ℕ) [Fact ell.Prime]
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    (hΛ : IsLocalizingAdmissibleCoefficient ell Λ)
+    {A B A' B' : Over (Spec (.of k))}
+    [LocallyOfFiniteType A.hom] [QuasiCompact A.hom] [IsSeparated A.hom]
+    [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom]
+    [LocallyOfFiniteType B'.hom] [QuasiCompact B'.hom] [IsSeparated B'.hom]
+    (q : A ⟶ B) (v : B' ⟶ B) (q' : A' ⟶ B')
+    (c : Compactification q.left) (cp : Compactification q'.left)
+    (h : cp.Z ⟶ c.Z) (hb : IsPullback h cp.g c.g v.left)
+    (K : ConstantModelConstructibleFiniteTor Λ A.left) :
+    IsIso ((condensedAmbientExchange Λ (nativeSquare hb)).app
+      ((openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K.obj)) := by
+  let : A.left.Over (Spec (.of k)) := ⟨A.hom⟩
+  let : B.left.Over (Spec (.of k)) := ⟨B.hom⟩
+  let : B'.left.Over (Spec (.of k)) := ⟨B'.hom⟩
+  have : LocallyOfFiniteType (A.left ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType A.hom
+    infer_instance
+  have : QuasiCompact (A.left ↘ Spec (.of k)) := by
+    change QuasiCompact A.hom
+    infer_instance
+  have : IsSeparated (A.left ↘ Spec (.of k)) := by
+    change IsSeparated A.hom
+    infer_instance
+  have : LocallyOfFiniteType (B.left ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType B.hom
+    infer_instance
+  have : QuasiCompact (B.left ↘ Spec (.of k)) := by
+    change QuasiCompact B.hom
+    infer_instance
+  have : IsSeparated (B.left ↘ Spec (.of k)) := by
+    change IsSeparated B.hom
+    infer_instance
+  have : LocallyOfFiniteType (B'.left ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType B'.hom
+    infer_instance
+  have : QuasiCompact (B'.left ↘ Spec (.of k)) := by
+    change QuasiCompact B'.hom
+    infer_instance
+  have : IsSeparated (B'.left ↘ Spec (.of k)) := by
+    change IsSeparated B'.hom
+    infer_instance
+  let : c.Z.Over (Spec (.of k)) := ⟨c.g ≫ B.hom⟩
+  have : LocallyOfFiniteType (c.Z ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType (c.g ≫ B.hom)
+    infer_instance
+  have : QuasiCompact (c.Z ↘ Spec (.of k)) := by
+    change QuasiCompact (c.g ≫ B.hom)
+    infer_instance
+  have : IsSeparated (c.Z ↘ Spec (.of k)) := by
+    change IsSeparated (c.g ≫ B.hom)
+    infer_instance
+  have : c.g.IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : v.left.IsOver (Spec (.of k)) := ⟨v.w⟩
+  have : c.i.IsOver (Spec (.of k)) := ⟨by
+    change c.i ≫ (c.g ≫ B.hom) = A.hom
+    rw [← Category.assoc, ← c.comm]
+    exact q.w⟩
+  have hopen := openImmersionLowerShriek_localizing ell k (ringChar k)
+    (Nat.Prime.pos (Fact.out : (ringChar k).Prime))
+    (Fact.out : ringChar k ≠ ell) Λ hΛ c.i
+  have hJ : localizingClosureProEtale Λ c.Z
+      ((openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K.obj) := by
+    as_aux_lemma => exact fun _ _ hS ↦ hS _ (hopen.1 K)
+  let : cp.Z.Over (Spec (.of k)) := ⟨cp.g ≫ B'.hom⟩
+  have : LocallyOfFiniteType (cp.Z ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType (cp.g ≫ B'.hom)
+    infer_instance
+  have : QuasiCompact (cp.Z ↘ Spec (.of k)) := by
+    change QuasiCompact (cp.g ≫ B'.hom)
+    infer_instance
+  have : IsSeparated (cp.Z ↘ Spec (.of k)) := by
+    change IsSeparated (cp.g ≫ B'.hom)
+    infer_instance
+  have : cp.g.IsOver (Spec (.of k)) := ⟨rfl⟩
+  have hqc (T : Scheme.{u}) [T.Over (Spec (.of k))]
+      [QuasiCompact (T ↘ Spec (.of k))] : CompactSpace T :=
+    QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
+  have hqs (T : Scheme.{u}) [T.Over (Spec (.of k))]
+      [IsSeparated (T ↘ Spec (.of k))] : QuasiSeparatedSpace T :=
+    quasiSeparatedSpace_of_quasiSeparated (T ↘ Spec (.of k))
+  have := hqc c.Z
+  have := hqc B.left
+  have := hqc B'.left
+  have := hqc cp.Z
+  have := hqs c.Z
+  have := hqs B.left
+  have := hqs B'.left
+  have := hqs cp.Z
+  exact properExchange_admissible ell Λ hΛ k c.g v.left (nativeSquare hb)
+    (by as_aux_lemma =>
+      exact properLocalizingHypotheses_admissible ell Λ hΛ k cp.g)
+    (by as_aux_lemma =>
+      exact (pullback_of_constructible Λ v.left (pullback_constructible Λ v.left)).some)
+    (by as_aux_lemma =>
+      exact (pullback_of_constructible Λ h (pullback_constructible Λ h)).some) _ hJ
+
+private theorem formalismSquare_inv (F : CompactSupportFormalism)
+    {A B C T : Scheme.{u}} (t : A ⟶ B) (l : A ⟶ C) (r : B ⟶ T) (b : C ⟶ T)
+    (sq : IsPullback t l r b) :
+    (F.sqIso t l r b sq.w).inv =
+      ((F.pbComp l b).symm ≪≫
+        eqToIso (congrArg (fun h : A ⟶ T ↦ F.pb h) sq.w.symm) ≪≫
+        F.pbComp t r).hom := by
+  simp only [ExchangeFormalism.sqIso, ExchangeFormalism.pbComp',
+    Iso.trans_inv, Iso.symm_inv, Iso.trans_hom, Iso.symm_hom,
+    eqToIso.inv, eqToIso.hom, eqToHom_refl, Category.id_comp,
+    Category.assoc]
+
+private theorem formalismProperExchange_eq
+    {A B C T : Scheme.{u}} (t : A ⟶ B) (l : A ⟶ C) (r : B ⟶ T) (b : C ⟶ T)
+    (sq : IsPullback t l r b) :
+    ((compactSupportCondensedFormalism Λ).pfBaseChange t l r b sq.w).natTrans =
+      condensedAmbientExchange Λ (nativeSquare sq) := by
+  unfold ExchangeFormalism.pfBaseChange condensedAmbientExchange
+  rw [formalismSquare_inv (compactSupportCondensedFormalism Λ) t l r b sq]
+  rfl
+
+private theorem shriekComponent_isIso (F : CompactSupportFormalism) [F.HasBaseChange]
+    {A B A' B' : Scheme.{u}} {q : A ⟶ B} {q' : A' ⟶ B'}
+    {t : A' ⟶ A} {v : B' ⟶ B}
+    (c : Compactification q) (cp : Compactification q') (h : cp.Z ⟶ c.Z)
+    (hi : IsPullback t cp.i c.i h) (hb : IsPullback h cp.g c.g v) (K : F.obj A)
+    (hp : IsIso ((F.pfBaseChange h cp.g c.g v hb.w).natTrans.app
+      ((F.sh c.i).obj K))) :
+    IsIso ((F.shriekBaseChange c cp h hi hb).natTrans.app K) := by
+  have hopen := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) hi
+  rw [CompactSupportFormalism.shriekBaseChange, ExchangeFormalism.shriekBaseChange_app]
+  exact IsIso.comp_isIso' hp (by infer_instance)
+
+private theorem formalismIsIso_iff (S : Scheme.{u})
+    {A B : (compactSupportCondensedFormalism Λ).obj S} (m : A ⟶ B) :
+    @IsIso _ ((compactSupportCondensedFormalism Λ).category S) A B m ↔
+      @IsIso (DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)))
+        (instCategoryDerivedCategory _) A B m := by
+  rfl
+
+private theorem formalismSh_obj_eq {S T : Scheme.{u}} (j : S ⟶ T)
+    [IsOpenImmersion j]
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))) :
+    ((compactSupportCondensedFormalism Λ).sh j).obj K =
+      (openImmersionLowerShriek Λ j).mapDerivedCategory.obj K := by
+  rfl
+
+private theorem properNative_isIso_iff
+    {A B C T S : Scheme.{u}} (t : A ⟶ B) (l : A ⟶ C) (r : B ⟶ T) (b : C ⟶ T)
+    (sq : IsPullback t l r b) (j : S ⟶ B) [IsOpenImmersion j]
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))) :
+    IsIso (((compactSupportCondensedFormalism Λ).pfBaseChange t l r b sq.w).natTrans.app
+      (((compactSupportCondensedFormalism Λ).sh j).obj K)) ↔
+      IsIso ((condensedAmbientExchange Λ (nativeSquare sq)).app
+        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K)) := by
+  rw [formalismIsIso_iff Λ C, formalismProperExchange_eq Λ t l r b sq,
+    formalismSh_obj_eq Λ j K]
+
+private theorem nativeShriek_isIso
+    {A B A' B' : Scheme.{u}} {q : A ⟶ B} {q' : A' ⟶ B'}
+    {t : A' ⟶ A} {v : B' ⟶ B}
+    (c : Compactification q) (cp : Compactification q') (h : cp.Z ⟶ c.Z)
+    (hi : IsPullback t cp.i c.i h) (hb : IsPullback h cp.g c.g v)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology A) Ab.{u + 1}) (condensedRingObj Λ A)))
+    (hp : IsIso ((condensedAmbientExchange Λ (nativeSquare hb)).app
+      ((openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K))) :
+    IsIso (show
+      (moduleObjectDerivedPullback Λ v).obj
+          ((rightDerivedLowerShriekOfCompactification Λ c).obj K) ⟶
+        (rightDerivedLowerShriekOfCompactification Λ cp).obj
+          ((moduleObjectDerivedPullback Λ t).obj K) from
+      ((compactSupportCondensedFormalism Λ).shriekBaseChange c cp h hi hb).natTrans.app K) := by
+  exact (formalismIsIso_iff Λ B' _).1
+    (shriekComponent_isIso (compactSupportCondensedFormalism Λ) c cp h hi hb K
+      ((properNative_isIso_iff Λ h cp.g c.g v hb c.i K).2 hp))
+
+private theorem nativeComposite_isIso
+    {A B A' B' : Scheme.{u}} {q : A ⟶ B} {q' : A' ⟶ B'}
+    {t : A' ⟶ A} {v : B' ⟶ B}
+    (c : Compactification q) (cp c₂ : Compactification q') (h : cp.Z ⟶ c.Z)
+    (hi : IsPullback t cp.i c.i h) (hb : IsPullback h cp.g c.g v)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology A) Ab.{u + 1}) (condensedRingObj Λ A)))
+    (hp : IsIso ((condensedAmbientExchange Λ (nativeSquare hb)).app
+      ((openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K)))
+    (hK : localizingClosureProEtale Λ A' ((moduleObjectDerivedPullback Λ t).obj K))
+    (e : ((localizingClosureProEtale Λ A').ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ cp) ≅
+      ((localizingClosureProEtale Λ A').ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ c₂)) :
+    IsIso (compactExchangeComposite Λ c cp c₂ h hi hb K hK e) := by
+  unfold compactExchangeComposite
+  exact IsIso.comp_isIso'
+    (nativeShriek_isIso Λ c cp h hi hb K hp) (by infer_instance)
+
+private theorem geometricComposite_isIso (ell : ℕ) [Fact ell.Prime]
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    (hΛ : IsLocalizingAdmissibleCoefficient ell Λ)
+    {A B A' B' : Over (Spec (.of k))}
+    [LocallyOfFiniteType A.hom] [QuasiCompact A.hom] [IsSeparated A.hom]
+    [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom]
+    [LocallyOfFiniteType B'.hom] [QuasiCompact B'.hom] [IsSeparated B'.hom]
+    (q : A ⟶ B) (t : A' ⟶ A) (q' : A' ⟶ B') (v : B' ⟶ B)
+    (c : Compactification q.left) (cp c₂ : Compactification q'.left)
+    (h : cp.Z ⟶ c.Z) (hi : IsPullback t.left cp.i c.i h)
+    (hb : IsPullback h cp.g c.g v.left)
+    (K : ConstantModelConstructibleFiniteTor Λ A.left)
+    (hK : localizingClosureProEtale Λ A'.left
+      ((moduleObjectDerivedPullback Λ t.left).obj K.obj))
+    (e : ((localizingClosureProEtale Λ A'.left).ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ cp) ≅
+      ((localizingClosureProEtale Λ A'.left).ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ c₂)) :
+    IsIso (compactExchangeComposite Λ c cp c₂ h hi hb K.obj hK e) := by
+  exact nativeComposite_isIso Λ c cp c₂ h hi hb K.obj
+    (properFactor_isIso Λ ell k hΛ q v q' c cp h hb K) hK e
 
 /-- The chosen scheme self-product with its induced field structure.
 Source: lem-pur-diagonal-base-change.md, `W = X ×_Y X`
@@ -209,7 +462,15 @@ theorem pullback_mem (g' : X' ⟶ X)
     (K : ConstantModelConstructibleFiniteTor Λ X.left) :
     (constantModelBoundedConstructible Λ X'.left ⊓ DerivedCategory.finiteTorAmplitude _)
       ((moduleObjectDerivedPullback Λ g'.left).obj K.obj) := by
-  sorry
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : CompactSpace X'.left := QuasiCompact.compactSpace_of_compactSpace X'.hom
+  let : QuasiSeparatedSpace X.left :=
+    (quasiSeparated_iff_quasiSeparatedSpace X.hom).mp inferInstance
+  let : QuasiSeparatedSpace X'.left :=
+    (quasiSeparated_iff_quasiSeparatedSpace X'.hom).mp inferInstance
+  exact ⟨pullback_bounded_constructible Λ g'.left
+    (pullback_constructible Λ g'.left) K.obj K.property.1,
+    pullback_tor Λ g'.left K.obj K.property.2⟩
 
 /-- The specified compact-support exchange, followed by the canonical common-refinement
 comparison from the base-changed compactification to the chosen compactification of f'.
@@ -238,22 +499,22 @@ def compactExchange (g' : X' ⟶ X) (f' : X' ⟶ Y') (g : Y' ⟶ Y)
   letI : IsSeparated (Y'.left ↘ Spec (.of D.k)) := ‹IsSeparated Y'.hom›
   let c := compactificationOverField f
   let cp := c.ofIsPullback sq
-  let e := ((compactSupportCondensedFormalism Λ).shriekBaseChange c cp
+  compactExchangeComposite Λ c cp (compactificationOverField f')
     (pullback.fst c.g g.left) (c.isPullback_i_ofIsPullback sq)
-    (c.isPullback_g_ofIsPullback sq).flip).natTrans
-  e.app K.obj ≫
+    (c.isPullback_g_ofIsPullback sq).flip K.obj
+    (fun _ _ hS ↦ hS _ (pullback_mem D Λ g' K))
     (detSfCanonicalCompactificationComparison Λ ell
       (sectionInvariant_admissible D ell hell E n hn Λ hcoeff) D.k f'.left
-      cp (compactificationOverField f')).hom.app
-        ⟨(moduleObjectDerivedPullback Λ g'.left).obj K.obj,
-          fun _ _ hS ↦ hS _ (pullback_mem D Λ g' K)⟩
+      cp (compactificationOverField f'))
 
 /-- The specified compact-support exchange is invertible on ctf objects.
-Proof (postponed): apply compact-support base change to the chosen compactification: its proper
-exchange is invertible on the localizing closure containing every ctf object; its open exchange
-is the canonical arbitrary-base open comparison. Compose with the common-dense-refinement
-normalized compactification comparison, which is also invertible. This proves invertibility of
-this map, rather than the existence of an unrelated isomorphism of its endpoints.
+Proof: extension by zero preserves ctf objects, so its value lies in the localizing closure.
+The existing admissible proper-base-change theorem makes the proper factor invertible there.
+That exchange is the formalism's proper mate, by their common pullback-square compositor.
+The component formula for the formalism's shriek exchange then combines this
+proper mate with its invertible open mate. Finally compose with the canonical comparison
+from the pulled-back compactification to the chosen one. This proves invertibility of the
+specified map.
 Source: def-pur-co-smoothness (3), compact-support base-change mate
 (blueprint: lem-pur-diagonal-base-change). -/
 theorem compactExchange_isIso (g' : X' ⟶ X) (f' : X' ⟶ Y') (g : Y' ⟶ Y)
@@ -261,7 +522,33 @@ theorem compactExchange_isIso (g' : X' ⟶ X) (f' : X' ⟶ Y') (g : Y' ⟶ Y)
     (sq : IsPullback g'.left f'.left f.left g.left)
     (K : ConstantModelConstructibleFiniteTor Λ X.left) :
     IsIso (compactExchange D ell hell E n hn Λ hcoeff f g' f' g sq K) := by
-  sorry
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+    ((Nat.card_eq_fintype_card (α := D.k₀)).symm.trans (D.card_base.trans D.cardinality_eq))
+  let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  let : Fact (ringChar D.k).Prime := ⟨(ringChar.eq D.k D.p).symm ▸ D.prime⟩
+  let : Fact (ringChar D.k ≠ ell) := ⟨(ringChar.eq D.k D.p).symm ▸ hell.symm⟩
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  let hΛ := sectionInvariant_admissible D ell hell E n hn Λ hcoeff
+  let : Y'.left.Over (Spec (.of D.k)) := ⟨Y'.hom⟩
+  let : LocallyOfFiniteType (Y'.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType Y'.hom›
+  let : QuasiCompact (Y'.left ↘ Spec (.of D.k)) := ‹QuasiCompact Y'.hom›
+  let : IsSeparated (Y'.left ↘ Spec (.of D.k)) := ‹IsSeparated Y'.hom›
+  let c := compactificationOverField f
+  let c₂ := compactificationOverField f'
+  change IsIso (compactExchangeComposite Λ c (c.ofIsPullback sq) c₂
+    (pullback.fst c.g g.left) (c.isPullback_i_ofIsPullback sq)
+    (c.isPullback_g_ofIsPullback sq).flip K.obj
+    (fun _ _ hS ↦ hS _ (pullback_mem D Λ g' K))
+    (detSfCanonicalCompactificationComparison Λ ell hΛ D.k f'.left
+      (c.ofIsPullback sq) c₂))
+  exact geometricComposite_isIso Λ ell D.k hΛ f g' f' g c (c.ofIsPullback sq) c₂
+    (pullback.fst c.g g.left) (c.isPullback_i_ofIsPullback sq)
+    (c.isPullback_g_ofIsPullback sq).flip K
+    (fun _ _ hS ↦ hS _ (pullback_mem D Λ g' K))
+    (detSfCanonicalCompactificationComparison Λ ell hΛ D.k f'.left
+      (c.ofIsPullback sq) c₂)
 
 /-- The canonical beta: transpose the inverse compact-support exchange, the pulled-back ctf
 counit for f, and the literal-unit pullback comparison under the ctf adjunction for f'.

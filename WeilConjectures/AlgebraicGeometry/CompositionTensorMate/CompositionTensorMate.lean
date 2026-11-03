@@ -52,6 +52,26 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExchangeProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SmoothPurity.ExceptionalInverseImage
+public import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportComparisonNormalization
+public import WeilConjectures.AlgebraicGeometry.CompositionTensorMate.CompositionTensorRouteTransposes
+public import WeilConjectures.AlgebraicGeometry.CompositionTensorMate.CondensedBridge.CompositionTensorMateData
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.Finite.FiniteSiteCounitProjectionTransport
+public import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTransport
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
+public import WeilConjectures.CategoryTheory.Monoidal.DerivedSymmetric
+public import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Finiteness
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekFiniteness
 
 /-! # Composition and the dualizing tensor mate
 
@@ -860,3 +880,1533 @@ def Assertion (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
 
 end CompositionTensorMate
 end AlgebraicGeometry.ProEtale
+
+namespace WeilConjectures.PurityFiniteSetting
+
+private theorem tensor_source_calculation
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
+    [MonoidalCategory D] [BraidedCategory C] [BraidedCategory D]
+    (V : C ⥤ D) {N O U : C} {A W B Z : D}
+    (p : A ⟶ V.obj N) (v : W ⟶ V.obj O) (c : V.obj N ⟶ B)
+    (r : V.obj U ⟶ Z) (a : O ⟶ U)
+    (tNO : V.obj (N ⊗ O) ≅ V.obj N ⊗ V.obj O)
+    (tNU : V.obj (N ⊗ U) ≅ V.obj N ⊗ V.obj U)
+    (tUN : V.obj (U ⊗ N) ≅ V.obj U ⊗ V.obj N)
+    (hn : V.map (N ◁ a) ≫ tNU.hom = tNO.hom ≫ V.obj N ◁ V.map a)
+    (hb : V.map (β_ N U).hom ≫ tUN.hom =
+      tNU.hom ≫ (β_ (V.obj N) (V.obj U)).hom)
+    (hs : (β_ B Z).hom ≫ (β_ Z B).hom = 𝟙 _) :
+    (p ⊗ₘ v) ≫ tNO.inv ≫ V.map (N ◁ a) ≫ V.map (β_ N U).hom ≫
+        tUN.hom ≫ (r ⊗ₘ c) ≫ (β_ Z B).hom =
+      (p ≫ c) ⊗ₘ (v ≫ V.map a ≫ r) := by
+  have hn' : tNO.inv ≫ V.map (N ◁ a) = V.obj N ◁ V.map a ≫ tNU.inv := by
+    apply (cancel_mono tNU.hom).1
+    simp only [Category.assoc, hn, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+      Category.comp_id]
+  have hb' : tNU.inv ≫ V.map (β_ N U).hom ≫ tUN.hom =
+      (β_ (V.obj N) (V.obj U)).hom := by
+    rw [hb, Iso.inv_hom_id_assoc]
+  rw [reassoc_of% hn']
+  rw [reassoc_of% hb']
+  rw [← reassoc_of% (BraidedCategory.braiding_naturality c r)]
+  simp only [hs, Category.comp_id]
+  rw [← id_tensorHom]
+  simp only [tensorHom_comp_tensorHom, Category.id_comp]
+
+private theorem inverse_square_eq
+    {C : Type*} [Category C] {A B U V : C}
+    (a : A ≅ B) (b : U ≅ V) (p : A ⟶ U) (q : B ⟶ V)
+    [IsIso p] [IsIso q] (h : a.hom ≫ q = p ≫ b.hom) :
+    b.hom ≫ inv q = inv p ≫ a.hom := by
+  apply (cancel_epi p).1
+  simp only [← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
+  rw [← h]
+  simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+
+private theorem invert_projection_square
+    {C : Type*} [Category C] {A B Q S T U : C}
+    (p : A ⟶ B) (q : U ⟶ S) [IsIso p] [IsIso q]
+    (b : Q ≅ B) (i : Q ≅ S) (t : A ≅ T) (w : T ≅ U)
+    (h : p ≫ b.inv ≫ i.hom = t.hom ≫ w.hom ≫ q) :
+    i.hom ≫ inv q = b.hom ≫ inv p ≫ t.hom ≫ w.hom := by
+  have h' := congrArg (fun z ↦ b.hom ≫ inv p ≫ z ≫ inv q) h
+  simpa only [Category.assoc, IsIso.inv_hom_id_assoc, Iso.hom_inv_id_assoc,
+    IsIso.hom_inv_id, Category.comp_id] using h'
+
+private theorem projection_tail_calculation
+    {C : Type*} [Category C] {P Q R S T U V W X Y : C}
+    (c : P ⟶ Q) (b : Q ⟶ R) (qi : R ⟶ S) (pi : Q ⟶ T)
+    (a : T ⟶ S) (ε : S ⟶ U) (l : U ⟶ V)
+    (i : P ⟶ W) (vi : W ⟶ X) (t : X ⟶ Y) (w : Y ⟶ T) (z : X ⟶ V)
+    (h₁ : b ≫ qi = pi ≫ a) (h₂ : c ≫ pi = i ≫ vi ≫ t ≫ w)
+    (h₃ : t ≫ w ≫ a ≫ ε ≫ l = z) :
+    c ≫ b ≫ qi ≫ ε ≫ l = i ≫ vi ≫ z := by
+  rw [reassoc_of% h₁, reassoc_of% h₂, h₃]
+
+private theorem derived_tensor_source_calculation
+    (V : _root_.DerivedCategory C ⥤ _root_.DerivedCategory D)
+    {N O U : _root_.DerivedCategory C} {A W B Z : _root_.DerivedCategory D}
+    (p : A ⟶ V.obj N) (v : W ⟶ V.obj O) (c : V.obj N ⟶ B)
+    (r : V.obj U ⟶ Z) (a : O ⟶ U)
+    (tNO : V.obj (N ⊗ O) ≅ V.obj N ⊗ V.obj O)
+    (tNU : V.obj (N ⊗ U) ≅ V.obj N ⊗ V.obj U)
+    (tUN : V.obj (U ⊗ N) ≅ V.obj U ⊗ V.obj N)
+    (hn : V.map (N ◁ a) ≫ tNU.hom = tNO.hom ≫ V.obj N ◁ V.map a)
+    (hb : V.map (derivedTensorKoszulSymmetry C N U).hom ≫ tUN.hom =
+      tNU.hom ≫ (derivedTensorKoszulSymmetry D (V.obj N) (V.obj U)).hom)
+    (hs : (derivedTensorKoszulSymmetry D B Z).hom ≫
+      (derivedTensorKoszulSymmetry D Z B).hom = 𝟙 _) :
+    (p ⊗ₘ v) ≫ tNO.inv ≫ V.map (N ◁ a) ≫
+        V.map (derivedTensorKoszulSymmetry C N U).hom ≫
+        tUN.hom ≫ (r ⊗ₘ c) ≫ (derivedTensorKoszulSymmetry D Z B).hom =
+      (p ≫ c) ⊗ₘ (v ≫ V.map a ≫ r) := by
+  let bC := _root_.DerivedCategory.braidedCategory' C
+  let bD := _root_.DerivedCategory.braidedCategory' D
+  have h := tensor_source_calculation V p v c r a tNO tNU tUN hn hb hs
+  simpa only [bC, bD, derivedTensorKoszulSymmetry, BraidedCategory.braiding,
+    _root_.DerivedCategory.braidedCategory', DerivedMonoidal.braidedCategory'] using h
+
+@[local tactic startMateProof] private meta def elabStartMateProof : Tactic := fun _ => do
+  withMainContext do
+    let g ← getMainGoal
+    let h ← mkFreshExprSyntheticOpaqueMVar (← g.getType)
+    g.setTag h.mvarId!.name
+    replaceMainGoal [h.mvarId!, g]
+
+@[local tactic finishMateProof] private meta def elabFinishMateProof : Tactic := fun _ => do
+  withMainContext do
+    let g ← getMainGoal
+    let h : MVarId := ⟨← g.getTag⟩
+    let proof ← instantiateMVars (mkMVar h)
+    if proof.hasMVar then
+      throwError "The mate proof has unresolved goals"
+    let helpers := #[``transport_tensor_hom, ``transport_braiding,
+      ``derived_comparison_tensor, ``derived_comparison_koszul, ``derived_comparison_braiding,
+      ``tensor_source_calculation, ``projection_tail_calculation,
+      ``inverse_square, ``inverse_square_eq,
+      ``invert_projection_square]
+    let proof ← Meta.transform proof (skipConstInApp := true) (pre := fun e => do
+      if let .const n us := e.getAppFn then
+        if helpers.contains n then
+          let ci ← getConstInfo n
+          return .visit ((← instantiateValueLevelParams ci us (allowOpaque := true)).beta
+            e.getAppArgs)
+      return .continue)
+    let proof ← zetaReduce proof
+    if proof.hasSorry then
+      throwError "The mate proof contains an unfinished proof"
+    g.assign proof
+    replaceMainGoal []
+
+private theorem proEtale_derived_symmetry
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u})
+    (J K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    (derivedTensorKoszulSymmetry (Sheaf (Scheme.ProEt.topology X) A) J K).hom ≫
+      (derivedTensorKoszulSymmetry (Sheaf (Scheme.ProEt.topology X) A) K J).hom = 𝟙 _ := by
+  exact _root_.DerivedCategory.braiding_hom_braiding_hom
+    (Sheaf (Scheme.ProEt.topology X) A) (fun _ _ ↦ SymmetricCategory.symmetry _ _) J K
+
+private theorem comparison_factors_eq
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u})
+    (K : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) :
+    let C := ProEtale.comparisonUpperStar A X
+    C.mapDerivedCategoryFactorsh.hom.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj K) =
+      C.mapDerivedCategoryFactors.hom.app K := by
+  start_mate_proof
+  · let C := ProEtale.comparisonUpperStar A X
+    change C.mapDerivedCategoryFactorsh.hom.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj K) =
+      C.mapDerivedCategoryFactors.hom.app K
+    erw [C.mapDerivedCategoryFactorsh_hom_app]
+    have h₁ : ∀ K, (_root_.DerivedCategory.quotientCompQhIso
+        (Sheaf X.smallEtaleTopology A)).hom.app K = 𝟙 _ := fun _ ↦ rfl
+    have h₂ : ∀ K, (_root_.DerivedCategory.quotientCompQhIso
+        (Sheaf (Scheme.ProEt.topology X) A)).inv.app K = 𝟙 _ :=
+      fun _ ↦ rfl
+    have h₃ : ∀ K, (C.mapHomotopyCategoryFactors (.up ℤ)).inv.app K = 𝟙 _ := fun _ ↦ rfl
+    erw [h₁, h₂, h₃, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+      Category.id_comp, Category.id_comp, Category.comp_id]
+  · finish_mate_proof
+
+private theorem comparison_Qh_map
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u})
+    {K L : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ}
+    (g : K ⟶ L) :
+    _root_.DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map g) =
+      _root_.DerivedCategory.Q.map g := by
+  start_mate_proof
+  · have h := _root_.DerivedCategory.quotientCompQhIso_hom_naturality g
+    have hi : ∀ K, (_root_.DerivedCategory.quotientCompQhIso
+        (Sheaf (Scheme.ProEt.topology X) A)).hom.app K = 𝟙 _ :=
+      fun _ ↦ rfl
+    rw [hi, hi] at h
+    exact (Category.comp_id _).symm.trans (h.trans (Category.id_comp _))
+  · finish_mate_proof
+
+private theorem comparison_oplax_unit_formula
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(ProEtale.comparisonUpperStar A X).PreservesFlat] :
+    let C := ProEtale.comparisonUpperStar A X
+    letI := C.mapDerivedCategoryOplaxMonoidal
+    Functor.OplaxMonoidal.η C.mapDerivedCategory =
+      C.mapDerivedCategory.map
+          (_root_.DerivedCategory.singleFunctorObjUnitIso
+            (Sheaf X.smallEtaleTopology A)).inv ≫
+        (C.mapDerivedCategorySingleFunctor 0).hom.app (𝟙_ _) ≫
+        (_root_.DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology X) A) 0).map
+          (Functor.OplaxMonoidal.η C) ≫
+        (_root_.DerivedCategory.singleFunctorObjUnitIso
+          (Sheaf (Scheme.ProEt.topology X) A)).hom := by
+  start_mate_proof
+  · let C := ProEtale.comparisonUpperStar A X
+    let := C.mapDerivedCategoryOplaxMonoidal
+    have h₁ : Functor.LaxMonoidal.ε
+        (_root_.DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology
+          A)) = 𝟙 _ := rfl
+    have h₂ : Functor.LaxMonoidal.ε
+        (_root_.DerivedCategory.Qh (C := Sheaf (Scheme.ProEt.topology X)
+          A)) = 𝟙 _ := rfl
+    change _ ≫ _ ≫ _ ≫ inv (Functor.LaxMonoidal.ε _) = _
+    have hi : inv (Functor.LaxMonoidal.ε
+        (_root_.DerivedCategory.Qh (C := Sheaf (Scheme.ProEt.topology X)
+          A))) = 𝟙 _ := by
+      apply (cancel_epi (Functor.LaxMonoidal.ε _)).1
+      rw [IsIso.hom_inv_id, Category.comp_id]
+      exact h₂.symm
+    rw [h₁, CategoryTheory.Functor.map_id, Category.id_comp, hi, Category.comp_id,
+      C.mapHomotopyCategory_η]
+    have hq₁ : ∀ K, (_root_.DerivedCategory.quotientCompQhIso
+        (Sheaf X.smallEtaleTopology A)).hom.app K = 𝟙 _ := fun _ ↦ rfl
+    have hq₂ : ∀ K, (_root_.DerivedCategory.quotientCompQhIso
+        (Sheaf (Scheme.ProEt.topology X) A)).inv.app K = 𝟙 _ :=
+      fun _ ↦ rfl
+    have he₁ : (Functor.Monoidal.εIso (HomotopyCategory.quotient
+        (Sheaf X.smallEtaleTopology A) (.up ℤ))).hom = 𝟙 _ := rfl
+    have he₂ : (Functor.Monoidal.εIso (HomotopyCategory.quotient
+        (Sheaf (Scheme.ProEt.topology X) A) (.up ℤ))).inv = 𝟙 _ := rfl
+    simp only [_root_.DerivedCategory.singleFunctorObjUnitIso,
+      Functor.mapDerivedCategorySingleFunctor, Iso.trans_hom, Iso.trans_inv,
+      Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv,
+      Functor.mapIso_hom, Functor.mapIso_inv,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.isoWhiskerLeft_inv, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      NatTrans.comp_app, _root_.DerivedCategory.singleFunctorIsoCompQ,
+      Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, asIso_hom, asIso_inv,
+      h₁, hi, hq₁, hq₂, he₁, he₂, Functor.associator_hom_app,
+      Functor.associator_inv_app, CategoryTheory.Functor.map_id,
+      Category.id_comp, Category.comp_id]
+    erw [comparison_factors_eq A X, comparison_Qh_map A X]
+    simp only [Functor.mapCochainComplex_η, Functor.mapCochainComplexεIso,
+      Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv,
+      Functor.Monoidal.εIso_inv, Functor.map_comp,
+      Category.assoc]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp,
+      Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
+    rfl
+  · finish_mate_proof
+
+private def derivedComparisonUnitIso
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u})
+    (e : (ProEtale.comparisonUpperStar A X).obj (𝟙_ _) ≅ 𝟙_ _) :
+    (ProEtale.comparisonUpperStar A X).mapDerivedCategory.obj (𝟙_ _) ≅ 𝟙_ _ :=
+  (ProEtale.comparisonUpperStar A X).mapDerivedCategory.mapIso
+      (_root_.DerivedCategory.singleFunctorObjUnitIso _).symm ≪≫
+    ((ProEtale.comparisonUpperStar A X).mapDerivedCategorySingleFunctor 0).app _ ≪≫
+    (_root_.DerivedCategory.singleFunctor _ 0).mapIso e ≪≫
+    _root_.DerivedCategory.singleFunctorObjUnitIso _
+
+private theorem comparison_oplax_unit_iso
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(ProEtale.comparisonUpperStar A X).PreservesFlat]
+    (e : (ProEtale.comparisonUpperStar A X).obj (𝟙_ _) ≅ 𝟙_ _)
+    (hη : Functor.OplaxMonoidal.η (ProEtale.comparisonUpperStar A X) = e.hom) :
+    letI := (ProEtale.comparisonUpperStar A X).mapDerivedCategoryOplaxMonoidal
+    Functor.OplaxMonoidal.η (ProEtale.comparisonUpperStar A X).mapDerivedCategory =
+      (derivedComparisonUnitIso A X e).hom := by
+  simpa only [derivedComparisonUnitIso, Iso.trans_hom, Iso.symm_hom,
+    Iso.app_hom, Functor.mapIso_hom, hη] using comparison_oplax_unit_formula A X
+
+private theorem comparison_underived_unit
+    (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
+    Functor.OplaxMonoidal.η (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X) =
+      (ProEtale.comparisonUpperStarUnitIso A X).hom := by
+  simp only [ProEtale.comparisonUpperStarUnitIso, asIso_hom]
+  rfl
+
+private theorem comparison_oplax_unit
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u}) :
+    let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X
+    letI := C.mapDerivedCategoryOplaxMonoidal
+    Functor.OplaxMonoidal.η C.mapDerivedCategory =
+      (ProEtale.DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso A X).hom := by
+  exact comparison_oplax_unit_iso (ModuleCat.{u + 1} A) X
+    (ProEtale.comparisonUpperStarUnitIso A X) (comparison_underived_unit A X)
+
+private theorem comparison_left_unitor_oplax
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(ProEtale.comparisonUpperStar A X).PreservesFlat]
+    (J : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    let C := ProEtale.comparisonUpperStar A X
+    letI := C.mapDerivedCategoryOplaxMonoidal
+    (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso A (𝟙_ _)).hom.app J ≫
+      Functor.OplaxMonoidal.η C.mapDerivedCategory ▷ C.mapDerivedCategory.obj J ≫
+      (λ_ (C.mapDerivedCategory.obj J)).hom = C.mapDerivedCategory.map (λ_ J).hom := by
+  start_mate_proof
+  · let C := ProEtale.comparisonUpperStar A X
+    let := C.mapDerivedCategoryOplaxMonoidal
+    rw [comparison_tensor_eq]
+    simpa only [Functor.mapDerivedCategoryOplaxMonoidal_δ] using
+      Functor.OplaxMonoidal.left_unitality_hom C.mapDerivedCategory J
+  · finish_mate_proof
+
+private theorem comparison_left_unitor
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
+    (J : Etale.DerivedCategoryModule A X) :
+    (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+      (ModuleCat.{u + 1} A) (𝟙_ _)).hom.app J ≫
+      (ProEtale.DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso A X).hom ▷
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj J ≫
+      (λ_ ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj J)).hom =
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.map
+      (λ_ J).hom := by
+  start_mate_proof
+  · let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X
+    let := C.mapDerivedCategoryOplaxMonoidal
+    have h := comparison_left_unitor_oplax (ModuleCat.{u + 1} A) X J
+    change (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+      (ModuleCat.{u + 1} A) (𝟙_ _)).hom.app J ≫
+        Functor.OplaxMonoidal.η C.mapDerivedCategory ▷ C.mapDerivedCategory.obj J ≫
+        (λ_ (C.mapDerivedCategory.obj J)).hom = C.mapDerivedCategory.map (λ_ J).hom at h
+    erw [comparison_oplax_unit A X] at h
+    exact h
+  · finish_mate_proof
+
+private theorem etaleUnitPlus (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u}) :
+    _root_.DerivedCategory.TStructure.t.plus
+      (𝟙_ (Etale.DerivedCategoryModule A Y)) := by
+  start_mate_proof
+  · exact ⟨0, _root_.DerivedCategory.TStructure.t.isGE_of_iso
+      (_root_.DerivedCategory.singleFunctorObjUnitIso _) 0⟩
+  · finish_mate_proof
+
+private theorem proUnitPlus (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u}) :
+    _root_.DerivedCategory.TStructure.t.plus (𝟙_ (D A Y)) := by
+  start_mate_proof
+  · exact ((ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) Y).prop_of_iso
+      (ProEtale.DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso A Y)
+      (ProEtale.DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj
+        (etaleUnitPlus A Y))).plus
+  · finish_mate_proof
+
+private def standingUnitComparison
+    (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] :
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj
+      (Etale.dualizingComplex A f) ≅ omega A f :=
+  letI := ProEtale.isIso_derivedComparisonAdjunction_unit_app
+    (ModuleCat.{u + 1} A) Y (𝟙_ _) (etaleUnitPlus A Y)
+  (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.mapIso
+    ((Etale.rightDerivedUpperShriek A f).mapIso
+      (asIso ((ProEtale.derivedComparisonAdjunction
+        (ModuleCat.{u + 1} A) Y).unit.app (𝟙_ _)))) ≪≫
+    (G A f).mapIso
+      (ProEtale.DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso A Y)
+
+private def etaleMateSource
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    [ProEtale.UpperStarPreservesFlat (ModuleCat.{u + 1} A)]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (J : Etale.DerivedCategoryModule A Y) (M : D A Y)
+    (e : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj J ≅ M) :
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj
+      (Etale.dualizingComplex A f ⊗
+        (Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj J) ≅
+        (S A f).obj M ⊗ omega A f :=
+  ProEtale.comparisonOpenTensorIso A f (Etale.dualizingComplex A f) J ≪≫
+    tensorIso (standingUnitComparison A f) ((S A f).mapIso e) ≪≫
+    derivedTensorKoszulSymmetry (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))
+      (omega A f) ((S A f).obj M)
+
+private def normalizedStandingCounit
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (K : D A Y) (hK : _root_.DerivedCategory.TStructure.t.plus K) :
+    (F A f).obj ((G A f).obj K) ⟶ K :=
+  (ProEtale.fixedCompactSupportComparisonIso A
+    (HasCompactification.compactification f)).hom.app
+      ⟨_, ProEtale.plus_etaleRightDerivedUpperShriek_obj f hK⟩ ≫
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map
+      ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app _) ≫
+    (ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).counit.app K
+
+private theorem standingHom_symm
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    {M : D A X} (hM : ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X M)
+    {K : D A Y} (hK : _root_.DerivedCategory.TStructure.t.plus K)
+    (b : M ⟶ (G A f).obj K) :
+    (ProEtale.standingExceptionalHomEquiv A f hM hK).symm b =
+      (F A f).map b ≫ normalizedStandingCounit A f K hK := by
+  start_mate_proof
+  · classical
+    let hex : ∃ J : Etale.DerivedCategoryModule A X,
+        _root_.DerivedCategory.TStructure.t.plus J ∧
+          Nonempty ((ProEtale.comparisonUpperStar
+            (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj J ≅ M) := hM
+    let J := Classical.choose hex
+    let hJ := (Classical.choose_spec hex).1
+    let e := Classical.choice (Classical.choose_spec hex).2
+    let VX := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+    let VY := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory
+    let UY := (ProEtale.comparisonLowerStar (ModuleCat.{u + 1} A) Y).rightDerivedFunctor
+    let H := Etale.rightDerivedUpperShriek A f
+    let ad := Etale.rightDerivedUpperShriekAdjunction A f
+    let av := ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y
+    let B := ProEtale.fixedCompactSupportComparisonIso A
+      (HasCompactification.compactification f)
+    let hHK := ProEtale.plus_etaleRightDerivedUpperShriek_obj f hK
+    obtain ⟨q, hq⟩ :=
+      (ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map J
+        (H.obj (UY.obj K)) hHK).surjective (e.hom ≫ b)
+    change VX.map q = e.hom ≫ b at hq
+    have hn := B.inv.naturality (ObjectProperty.homMk q :
+      (⟨J, hJ⟩ : _root_.DerivedCategory.Plus _) ⟶ ⟨H.obj (UY.obj K), hHK⟩)
+    change VY.map ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map q) ≫
+        B.inv.app ⟨H.obj (UY.obj K), hHK⟩ =
+      B.inv.app ⟨J, hJ⟩ ≫ (F A f).map (VX.map q) at hn
+    apply (ProEtale.standingExceptionalHomEquiv A f hM hK).injective
+    rw [Equiv.apply_symm_apply]
+    symm
+    change e.inv ≫ VX.map (ad.homEquiv J (UY.obj K)
+      (av.homEquiv _ K (B.inv.app ⟨J, hJ⟩ ≫
+        (F A f).map e.hom ≫ (F A f).map b ≫
+          normalizedStandingCounit A f K hK))) = b
+    have hz : B.inv.app ⟨J, hJ⟩ ≫
+        (F A f).map e.hom ≫ (F A f).map b ≫
+          normalizedStandingCounit A f K hK =
+      VY.map ((ad.homEquiv J (UY.obj K)).symm q) ≫ av.counit.app K := by
+      rw [← Functor.map_comp_assoc, ← hq, ← Category.assoc, ← hn]
+      simp only [normalizedStandingCounit, Category.assoc]
+      change VY.map ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map q) ≫
+          B.inv.app ⟨H.obj (UY.obj K), hHK⟩ ≫
+            B.hom.app ⟨H.obj (UY.obj K), hHK⟩ ≫
+              VY.map (ad.counit.app (UY.obj K)) ≫ av.counit.app K = _
+      rw [Iso.inv_hom_id_app_assoc]
+      simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+    rw [hz]
+    change e.inv ≫ VX.map (ad.homEquiv J (UY.obj K)
+      (av.homEquiv _ K ((av.homEquiv _ K).symm
+        ((ad.homEquiv J (UY.obj K)).symm q)))) = b
+    rw [Equiv.apply_symm_apply, Equiv.apply_symm_apply, hq]
+    simp
+  · finish_mate_proof
+
+private theorem standingHom_left
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    {M N : D A X}
+    (hM : ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X M)
+    (hN : ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X N)
+    {K : D A Y} (hK : _root_.DerivedCategory.TStructure.t.plus K)
+    (a : M ⟶ N) (z : (F A f).obj N ⟶ K) :
+    ProEtale.standingExceptionalHomEquiv A f hM hK ((F A f).map a ≫ z) =
+      a ≫ ProEtale.standingExceptionalHomEquiv A f hN hK z := by
+  start_mate_proof
+  · apply (ProEtale.standingExceptionalHomEquiv A f hM hK).symm.injective
+    rw [Equiv.symm_apply_apply, standingHom_symm, Functor.map_comp, Category.assoc,
+      ← standingHom_symm A f hN hK, Equiv.symm_apply_apply]
+  · finish_mate_proof
+
+private theorem standingHom_comparison
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (Q : Etale.DerivedCategoryModule A X)
+    (hQ : _root_.DerivedCategory.TStructure.t.plus Q)
+    (J : Etale.DerivedCategoryModule A Y) (M : D A Y)
+    (e : (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj J ≅ M)
+    (hM : _root_.DerivedCategory.TStructure.t.plus M)
+    (z : (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj Q ⟶ J) :
+    ProEtale.standingExceptionalHomEquiv A f ⟨Q, hQ, ⟨Iso.refl _⟩⟩ hM
+      ((ProEtale.fixedCompactSupportComparisonIso A
+        (HasCompactification.compactification f)).hom.app ⟨Q, hQ⟩ ≫
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map z ≫
+          e.hom) =
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.map
+      ((Etale.rightDerivedUpperShriekAdjunction A f).homEquiv Q J z) ≫
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.map
+        ((Etale.rightDerivedUpperShriek A f).map
+          ((ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).unit.app J ≫
+            (ProEtale.comparisonLowerStar (ModuleCat.{u + 1} A) Y).rightDerivedFunctor.map
+              e.hom)) := by
+  start_mate_proof
+  · let VX := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+    let VY := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory
+    let UY := (ProEtale.comparisonLowerStar (ModuleCat.{u + 1} A) Y).rightDerivedFunctor
+    let H := Etale.rightDerivedUpperShriek A f
+    let ad := Etale.rightDerivedUpperShriekAdjunction A f
+    let av := ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y
+    let B := ProEtale.fixedCompactSupportComparisonIso A
+      (HasCompactification.compactification f)
+    let q := ad.homEquiv Q J z ≫ H.map (av.unit.app J ≫ UY.map e.hom)
+    have hn := B.hom.naturality (ObjectProperty.homMk q :
+      (⟨Q, hQ⟩ : _root_.DerivedCategory.Plus _) ⟶
+      ⟨_, ProEtale.plus_etaleRightDerivedUpperShriek_obj f hM⟩)
+    change (F A f).map (VX.map q) ≫
+        B.hom.app ⟨H.obj (UY.obj M),
+          ProEtale.plus_etaleRightDerivedUpperShriek_obj f hM⟩ =
+      B.hom.app ⟨Q, hQ⟩ ≫ VY.map
+        ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map q) at hn
+    apply (ProEtale.standingExceptionalHomEquiv A f ⟨Q, hQ, ⟨Iso.refl _⟩⟩ hM).symm.injective
+    rw [Equiv.symm_apply_apply, standingHom_symm]
+    change B.hom.app ⟨Q, hQ⟩ ≫ VY.map z ≫ e.hom =
+      (F A f).map (VX.map (ad.homEquiv Q J z) ≫
+        VX.map (H.map (av.unit.app J ≫ UY.map e.hom))) ≫
+        normalizedStandingCounit A f M hM
+    rw [← VX.map_comp]
+    change _ = (F A f).map (VX.map q) ≫ normalizedStandingCounit A f M hM
+    unfold normalizedStandingCounit
+    rw [← Category.assoc, ← Category.assoc, hn]
+    simp only [Category.assoc]
+    change B.hom.app ⟨Q, hQ⟩ ≫ VY.map z ≫ e.hom =
+      B.hom.app ⟨Q, hQ⟩ ≫
+        VY.map ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map q) ≫
+          VY.map (ad.counit.app (UY.obj M)) ≫ av.counit.app M
+    rw [← VY.map_comp_assoc]
+    have hq : (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map q ≫
+        ad.counit.app (UY.obj M) = z ≫ (av.unit.app J ≫ UY.map e.hom) := by
+      change (ad.homEquiv Q (UY.obj M)).symm q = _
+      dsimp only [q]
+      rw [Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply]
+    rw [hq]
+    simp only [VY.map_comp, Category.assoc]
+    erw [av.counit.naturality]
+    erw [reassoc_of% (av.left_triangle_components J)]
+    rfl
+  · finish_mate_proof
+
+private theorem epsilon_eq_normalized
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (K : D A Y) (hK : _root_.DerivedCategory.TStructure.t.plus K) :
+    epsilon A f K = normalizedStandingCounit A f K hK := by
+  start_mate_proof
+  · classical
+    simp only [epsilon, dif_pos hK]
+    rw [standingHom_symm, CategoryTheory.Functor.map_id, Category.id_comp]
+  · finish_mate_proof
+
+private theorem standingUnitComparison_counit
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y] :
+    (F A f).map (standingUnitComparison A f).hom ≫ epsilon A f (𝟙_ _) =
+    (ProEtale.fixedCompactSupportComparisonIso A
+      (HasCompactification.compactification f)).hom.app
+        ⟨Etale.dualizingComplex A f,
+          Etale.plus_rightDerivedUpperShriek_obj A f (𝟙_ _) (etaleUnitPlus A Y)⟩ ≫
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map
+        ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _)) ≫
+      (ProEtale.DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso A Y).hom := by
+  start_mate_proof
+  · let hΩ := Etale.plus_rightDerivedUpperShriek_obj A f (𝟙_ _) (etaleUnitPlus A Y)
+    have h := standingHom_comparison A f (Etale.dualizingComplex A f) hΩ
+      (𝟙_ _) (𝟙_ _)
+      (ProEtale.DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso A Y)
+      (proUnitPlus A Y) ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _))
+    have hid : (Etale.rightDerivedUpperShriekAdjunction A f).homEquiv
+        (Etale.dualizingComplex A f) (𝟙_ _)
+          ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _)) = 𝟙 _ := by
+      rw [← Adjunction.homEquiv_symm_id]
+      exact Equiv.apply_symm_apply _ _
+    rw [hid, CategoryTheory.Functor.map_id, Category.id_comp] at h
+    apply_fun (ProEtale.standingExceptionalHomEquiv A f
+      ⟨Etale.dualizingComplex A f, hΩ, ⟨Iso.refl _⟩⟩ (proUnitPlus A Y)).symm at h
+    rw [Equiv.symm_apply_apply, standingHom_symm] at h
+    rw [epsilon_eq_normalized A f (𝟙_ _) (proUnitPlus A Y)]
+    symm
+    simpa only [standingUnitComparison, Iso.trans_hom, Functor.mapIso_hom,
+      asIso_hom, Functor.map_comp, G, ProEtale.rightDerivedUpperShriek,
+      Functor.comp_map] using h
+  · finish_mate_proof
+
+private theorem projection_iso_naturality
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    [ProEtale.UpperStarPreservesFlat A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    {N N' : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    {K K' : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    (r : N ≅ N') (e : K ≅ K') :
+    let Fp := ProEtale.rightDerivedLowerShriek A f
+    let Sp := (ProEtale.upperStar A f).leftDerivedFunctor
+    let pp := ProEtale.projectionMap A f
+    (tensorIso (Fp.mapIso r) e).hom ≫ (pp.app N').app K' =
+      (pp.app N).app K ≫ (Fp.mapIso (tensorIso r (Sp.mapIso e))).hom := by
+  dsimp only
+  let Fp := ProEtale.rightDerivedLowerShriek A f
+  let Sp := (ProEtale.upperStar A f).leftDerivedFunctor
+  let pp := ProEtale.projectionMap A f
+  have hn₁ := congr_app (pp.naturality r.hom) K
+  have hn₂ := (pp.app N').naturality e.hom
+  change Fp.map r.hom ▷ K ≫ (pp.app N').app K =
+    (pp.app N).app K ≫ Fp.map (r.hom ▷ Sp.obj K) at hn₁
+  change Fp.obj N' ◁ e.hom ≫ (pp.app N').app K' =
+    (pp.app N').app K ≫ Fp.map (N' ◁ Sp.map e.hom) at hn₂
+  simp only [tensorIso_hom, Functor.mapIso_hom, MonoidalCategory.tensorHom_def,
+    Category.assoc]
+  rw [hn₂, ← Category.assoc, hn₁]
+  simp only [Category.assoc, ← Fp.map_comp]
+  rfl
+
+private theorem tensor_source_cancel
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    [ProEtale.UpperStarPreservesFlat A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    {Q N N' : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    {K K' : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    (c : Q ≅ N ⊗ (ProEtale.upperStar A f).leftDerivedFunctor.obj K)
+    (r : N ≅ N') (e : K ≅ K') :
+    let Fp := ProEtale.rightDerivedLowerShriek A f
+    let Sp := (ProEtale.upperStar A f).leftDerivedFunctor
+    Fp.map (c ≪≫ tensorIso r (Sp.mapIso e) ≪≫
+      derivedTensorKoszulSymmetry _ N' (Sp.obj K')).hom ≫
+        Fp.map (derivedTensorKoszulSymmetry _ (Sp.obj K') N').hom =
+      Fp.map c.hom ≫ (Fp.mapIso (tensorIso r (Sp.mapIso e))).hom := by
+  dsimp only
+  let Fp := ProEtale.rightDerivedLowerShriek A f
+  let Sp := (ProEtale.upperStar A f).leftDerivedFunctor
+  have hs := proEtale_derived_symmetry A X N' (Sp.obj K')
+  simp only [Iso.trans_hom, Functor.map_comp, Category.assoc]
+  rw [← Fp.map_comp, hs, Fp.map_id, Category.comp_id]
+  rfl
+
+private theorem genericTensorTranspose_expansion
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    [ProEtale.UpperStarPreservesFlat A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (N : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A))
+    (ε : (ProEtale.rightDerivedLowerShriek A f).obj N ⟶ 𝟙_ _) :
+    genericTensorTranspose A f N M ε =
+      (ProEtale.rightDerivedLowerShriek A f).map
+        (derivedTensorKoszulSymmetry (Sheaf (Scheme.ProEt.topology X) A)
+          ((ProEtale.upperStar A f).leftDerivedFunctor.obj M) N).hom ≫
+        inverseOnDomain (((ProEtale.projectionMap A f).app N).app M) ≫
+          ε ▷ M ≫ (λ_ M).hom := by
+  rfl
+
+private theorem tensorTranspose_of_projection_square
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    [ProEtale.UpperStarPreservesFlat (ModuleCat.{u + 1} A)]
+    (J : Etale.DerivedCategoryModule A Y) (M : D A Y)
+    (e : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj J ≅ M)
+    [IsIso (((Etale.projectionMap (ModuleCat.{u + 1} A) f).app
+      (Etale.dualizingComplex A f)).app J)]
+    [IsIso (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj
+        (Etale.dualizingComplex A f))).app
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj J))]
+    (hΩplus : _root_.DerivedCategory.TStructure.t.plus (Etale.dualizingComplex A f))
+    (hQ : _root_.DerivedCategory.TStructure.t.plus
+      (((Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj (Etale.dualizingComplex A f)).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj J)))
+    (hs :
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map
+          (((Etale.projectionMapOfCompactification (ModuleCat.{u + 1} A)
+            (HasCompactification.compactification f)).app (Etale.dualizingComplex A f)).app J) ≫
+        (ProEtale.fixedCompactSupportComparisonIso A
+          (HasCompactification.compactification f)).inv.app ⟨_, hQ⟩ ≫
+        (ProEtale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
+          (HasCompactification.compactification f)).map
+            (ProEtale.comparisonOpenTensorIso A f (Etale.dualizingComplex A f) J).hom =
+      (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+        (ModuleCat.{u + 1} A)
+        ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
+          (HasCompactification.compactification f)).obj (Etale.dualizingComplex A f))).hom.app J ≫
+        ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).map
+          ((ProEtale.fixedCompactSupportComparisonIso A
+            (HasCompactification.compactification f)).inv.app
+              ⟨Etale.dualizingComplex A f, hΩplus⟩)).app
+                ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj J) ≫
+        ((ProEtale.projectionMapOfCompactification (ModuleCat.{u + 1} A)
+          (HasCompactification.compactification f)).app
+            ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj
+              (Etale.dualizingComplex A f))).app
+                ((ProEtale.comparisonUpperStar
+                  (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj J)) :
+    (F A f).map (etaleMateSource A f J M e).hom ≫
+      genericTensorTranspose (ModuleCat.{u + 1} A) f
+        (omega A f) M (epsilon A f (𝟙_ _)) =
+    (ProEtale.fixedCompactSupportComparisonIso A
+      (HasCompactification.compactification f)).hom.app
+      ⟨_, hQ⟩ ≫
+      (ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map
+        (inv (((Etale.projectionMap (ModuleCat.{u + 1} A) f).app
+          (Etale.dualizingComplex A f)).app J) ≫
+          (Etale.rightDerivedUpperShriekAdjunction A f).counit.app
+            (𝟙_ _) ▷ J ≫ (λ_ J).hom) ≫ e.hom := by
+  let : IsIso (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (((ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj (Etale.dualizingComplex A f))).app
+      (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J)) :=
+      inferInstance
+  have hn : (tensorIso ((F A f).mapIso (standingUnitComparison A f)) e).hom ≫
+      (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (omega A f)).app M) =
+      (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (((ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj (Etale.dualizingComplex A f))).app
+      (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J)) ≫ ((F A
+      f).mapIso (tensorIso (standingUnitComparison A f) ((S A f).mapIso e))).hom := by
+    exact projection_iso_naturality (ModuleCat.{u + 1} A) f (standingUnitComparison A f) e
+  let : IsIso (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (omega A f)).app M) :=
+      inverse_square (tensorIso ((F A f).mapIso (standingUnitComparison A f)) e) ((F A f).mapIso
+      (tensorIso (standingUnitComparison A f) ((S A f).mapIso e))) (((ProEtale.projectionMap
+      (ModuleCat.{u + 1} A) f).app (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A)
+      X).mapDerivedCategory).obj (Etale.dualizingComplex A f))).app (((ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J)) (((ProEtale.projectionMap (ModuleCat.{u +
+      1} A) f).app (omega A f)).app M) hn
+  have hn' := inverse_square_eq (tensorIso ((F A f).mapIso (standingUnitComparison A f)) e) ((F A
+      f).mapIso (tensorIso (standingUnitComparison A f) ((S A f).mapIso e)))
+      (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (((ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj (Etale.dualizingComplex A f))).app
+      (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J))
+      (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (omega A f)).app M) hn
+  have hi := invert_projection_square
+    (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+        (((Etale.projectionMap (ModuleCat.{u + 1} A) f).app (Etale.dualizingComplex A f)).app J))
+        (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj (Etale.dualizingComplex A f))).app
+        (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J))
+        ((ProEtale.fixedCompactSupportComparisonIso A (HasCompactification.compactification f)).app
+        ⟨_, hQ⟩) ((F A f).mapIso (ProEtale.comparisonOpenTensorIso A f (Etale.dualizingComplex A f)
+        J))
+    ((ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+      (ModuleCat.{u + 1} A) ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+          (Etale.dualizingComplex A f))).app J)
+    (tensorIso ((ProEtale.fixedCompactSupportComparisonIso A (HasCompactification.compactification
+        f)).app ⟨(Etale.dualizingComplex A f), hΩplus⟩).symm (Iso.refl
+        (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J))) (by
+      simpa only [F,
+        ProEtale.projectionMap, Etale.projectionMap,
+        ProEtale.rightDerivedLowerShriek, Etale.rightDerivedLowerShriek,
+        ProEtale.rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar,
+        Etale.rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar,
+        ProEtale.derivedTensorRightDerivedLowerShriek,
+        Etale.derivedTensorRightDerivedLowerShriek, ProEtale.derivedTensor,
+        Etale.derivedTensor, curriedTensor_map_app, curriedTensor_obj_map,
+        curriedTensor_obj_obj, Functor.comp_obj, Iso.app_hom, Iso.app_inv,
+        Functor.mapIso_hom, tensorIso_hom, Iso.symm_hom, Iso.refl_hom,
+        tensorHom_id] using hs)
+  have hc := standingUnitComparison_counit A f
+  have hc' : ((ProEtale.fixedCompactSupportComparisonIso A (HasCompactification.compactification
+      f)).app ⟨(Etale.dualizingComplex A f), hΩplus⟩).inv ≫ (F A f).map (standingUnitComparison A
+      f).hom ≫ epsilon A f (𝟙_ _) =
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+          ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _)) ≫
+        (ProEtale.DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso A Y).hom := by
+    simp only [hc, Iso.app_inv]
+    erw [Iso.inv_hom_id_app_assoc]
+  have ht₀ := congr_app ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A)
+      Y).mapDerivedCategoryTensorComparison.naturality
+    ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _))) J
+  have ht : ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+      ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _) ▷ J) ≫
+        (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+          (ModuleCat.{u + 1} A) (𝟙_ _)).hom.app J =
+      (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+        (ModuleCat.{u + 1} A) ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+            (Etale.dualizingComplex A f))).hom.app J ≫
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+            ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _)) ▷
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J := by
+    rw [comparison_tensor_eq, comparison_tensor_eq]
+    change ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+      ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _) ▷ J) ≫
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A)
+            Y).mapDerivedCategoryTensorComparison.app (𝟙_ _)).app J =
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategoryTensorComparison.app
+          ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj (Etale.dualizingComplex A
+          f))).app J ≫
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+            ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _)) ▷
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J at ht₀
+    exact ht₀
+  have htail :
+      (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+        (ModuleCat.{u + 1} A) ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+            (Etale.dualizingComplex A f))).hom.app J ≫
+        ((ProEtale.fixedCompactSupportComparisonIso A (HasCompactification.compactification f)).app
+            ⟨(Etale.dualizingComplex A f), hΩplus⟩).inv ▷ ((ProEtale.comparisonUpperStar
+            (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J ≫ (tensorIso ((F A f).mapIso
+            (standingUnitComparison A f)) e).hom ≫
+        epsilon A f (𝟙_ _) ▷ M ≫ (λ_ M).hom =
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+          ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app
+        (𝟙_ _) ▷ J ≫ (λ_ J).hom) ≫ e.hom := by
+    change _ ≫ _ ≫ ((F A f).map (standingUnitComparison A f).hom ⊗ₘ e.hom) ≫ _ ≫ _ = _
+    rw [← tensorHom_id, ← tensorHom_id,
+      tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom_assoc]
+    simp only [Category.id_comp, Category.comp_id, Category.assoc]
+    rw [hc', MonoidalCategory.tensorHom_def, comp_whiskerRight, Category.assoc,
+      leftUnitor_naturality, ← Category.assoc, ← Category.assoc]
+    rw [← reassoc_of% ht]
+    simp only [Category.assoc]
+    erw [reassoc_of% (comparison_left_unitor A Y J)]
+    simp only [Functor.map_comp, Category.assoc]
+  have hcancel : (F A f).map (etaleMateSource A f J M e).hom ≫
+      (F A f).map (derivedTensorKoszulSymmetry _ ((S A f).obj M) (omega A f)).hom =
+      (F A f).map (ProEtale.comparisonOpenTensorIso A f (Etale.dualizingComplex A f) J).hom ≫ ((F A
+          f).mapIso (tensorIso (standingUnitComparison A f) ((S A f).mapIso e))).hom := by
+    exact tensor_source_cancel (ModuleCat.{u + 1} A) f (ProEtale.comparisonOpenTensorIso A f
+        (Etale.dualizingComplex A f) J) (standingUnitComparison A f) e
+  rw [genericTensorTranspose_expansion]
+  change (F A f).map (etaleMateSource A f J M e).hom ≫
+    ((F A f).map (derivedTensorKoszulSymmetry _ ((S A f).obj M) (omega A f)).hom ≫
+      inverseOnDomain (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (omega A f)).app M) ≫
+          epsilon A f (𝟙_ _) ▷ M ≫ (λ_ M).hom) = _
+  rw [← Category.assoc, hcancel]
+  simp only [inverseOnDomain, dif_pos (inferInstance : IsIso (((ProEtale.projectionMap (ModuleCat.{u
+      + 1} A) f).app (omega A f)).app M)), Category.assoc]
+  simp only [Functor.mapIso_hom, Iso.app_hom, tensorIso_hom,
+    Iso.symm_hom, Iso.refl_hom, Iso.app_inv] at hi
+  have htailTensor :
+      (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+        (ModuleCat.{u + 1} A) ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+            (Etale.dualizingComplex A f))).hom.app J ≫
+        (((ProEtale.fixedCompactSupportComparisonIso A (HasCompactification.compactification f)).app
+            ⟨(Etale.dualizingComplex A f), hΩplus⟩).inv ⊗ₘ 𝟙 (((ProEtale.comparisonUpperStar
+            (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J)) ≫ (tensorIso ((F A f).mapIso
+            (standingUnitComparison A f)) e).hom ≫
+        epsilon A f (𝟙_ _) ▷ M ≫ (λ_ M).hom =
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+          ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app
+        (𝟙_ _) ▷ J ≫ (λ_ J).hom) ≫ e.hom := by
+    rw [tensorHom_id]
+    exact htail
+  have hcalc := projection_tail_calculation
+    ((F A f).map (ProEtale.comparisonOpenTensorIso A f (Etale.dualizingComplex A f) J).hom) ((F A
+        f).mapIso (tensorIso (standingUnitComparison A f) ((S A f).mapIso e))).hom (inv
+        (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (omega A f)).app M)) (inv
+        (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj (Etale.dualizingComplex A f))).app
+        (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J)))
+        (tensorIso ((F A f).mapIso (standingUnitComparison A f)) e).hom
+    (epsilon A f (𝟙_ _) ▷ M) (λ_ M).hom
+    ((ProEtale.fixedCompactSupportComparisonIso A (HasCompactification.compactification f)).app ⟨_,
+        hQ⟩).hom (inv (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A)
+        Y).mapDerivedCategory).map (((Etale.projectionMap (ModuleCat.{u + 1} A) f).app
+        (Etale.dualizingComplex A f)).app J)))
+    ((ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+      (ModuleCat.{u + 1} A) ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+          (Etale.dualizingComplex A f))).hom.app J)
+    (((ProEtale.fixedCompactSupportComparisonIso A (HasCompactification.compactification f)).app
+        ⟨(Etale.dualizingComplex A f), hΩplus⟩).inv ⊗ₘ 𝟙 (((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} A) Y).mapDerivedCategory).obj J))
+    (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory).map
+        ((Etale.rightDerivedUpperShriekAdjunction A f).counit.app
+      (𝟙_ _) ▷ J ≫ (λ_ J).hom) ≫ e.hom) hn' hi htailTensor
+  change (F A f).map (ProEtale.comparisonOpenTensorIso A f (Etale.dualizingComplex A f) J).hom ≫ ((F
+      A f).mapIso (tensorIso (standingUnitComparison A f) ((S A f).mapIso e))).hom ≫ inv
+      (((ProEtale.projectionMap (ModuleCat.{u + 1} A) f).app (omega A f)).app M) ≫
+    epsilon A f (𝟙_ _) ▷ M ≫ (λ_ M).hom = _
+  rw [hcalc]
+  simp only [Functor.map_comp, Functor.map_inv, Category.assoc]
+  rfl
+
+private theorem comparison_square_replace
+    {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
+    (B B' : F ≅ G) (hB : B = B') (Q Ω : C) {P T U V : D}
+    (p : P ⟶ G.obj Q) (i : F.obj Q ⟶ T) (t : P ⟶ U)
+    (δ : (G.obj Ω ⟶ F.obj Ω) → (U ⟶ V)) (q : V ⟶ T)
+    (h : p ≫ B'.inv.app Q ≫ i = t ≫ δ (B'.inv.app Ω) ≫ q) :
+    p ≫ B.inv.app Q ≫ i = t ≫ δ (B.inv.app Ω) ≫ q := by
+  cases hB
+  exact h
+
+private theorem tensorTranspose_comparison
+    (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] [CompactSpace Y]
+    [ProEtale.UpperStarPreservesFlat (ModuleCat.{u + 1} P.Coefficient)]
+    (hf : f ≫ aY = aX)
+    (J : Etale.DerivedCategoryModule P.Coefficient Y) (M : D P.Coefficient Y)
+    (e : (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj J ≅ M)
+    (hJ : finiteTorConstructibleEtale P.coefficients.l P.extension
+      P.level P.level_pos Y J) :
+    (F P.Coefficient f).map (etaleMateSource P.Coefficient f J M e).hom ≫
+      genericTensorTranspose (ModuleCat.{u + 1} P.Coefficient) f
+        (omega P.Coefficient f) M (epsilon P.Coefficient f (𝟙_ _)) =
+    (ProEtale.fixedCompactSupportComparisonIso P.Coefficient
+      (HasCompactification.compactification f)).hom.app
+      ⟨_, ProEtale.finiteSiteProjectionInput_plus P f
+        (Etale.dualizingComplex P.Coefficient f) J
+        (dualizing_boundedConstructible P aY f) hJ⟩ ≫
+      (ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.map
+        (inv (((Etale.projectionMap (ModuleCat.{u + 1} P.Coefficient) f).app
+          (Etale.dualizingComplex P.Coefficient f)).app J) ≫
+          (Etale.rightDerivedUpperShriekAdjunction P.Coefficient f).counit.app
+            (𝟙_ _) ▷ J ≫ (λ_ J).hom) ≫ e.hom := by
+  let Ω := Etale.dualizingComplex P.Coefficient f
+  let hΩ := dualizing_boundedConstructible P aY f
+  let hΩplus := ProEtale.finiteSiteProjectionInput_plus_source P X Ω hΩ
+  let hQ := ProEtale.finiteSiteProjectionInput_plus P f Ω J hΩ hJ
+  have hp := ProEtale.finiteSiteProjections_isIso P aX aY f hf
+    (HasCompactification.compactification f) Ω J hΩ hJ
+  let : IsIso (((Etale.projectionMap (ModuleCat.{u + 1} P.Coefficient) f).app Ω).app J) := hp.1
+  let : IsIso (((ProEtale.projectionMap (ModuleCat.{u + 1} P.Coefficient) f).app
+    ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj
+        Ω)).app
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj J))
+          := hp.2
+  have hs := ProEtale.finiteSiteCounitProjectionTransport P aX aY f hf
+    (HasCompactification.compactification f) Ω J hΩ hJ
+  have hs' := comparison_square_replace
+    (ProEtale.fixedCompactSupportComparisonIso P.Coefficient
+      (HasCompactification.compactification f))
+    (ProEtale.compactSupportSiteComparison P.Coefficient
+      (HasCompactification.compactification f))
+    (ProEtale.compactSupportComparisonNormalization P.Coefficient
+      (HasCompactification.compactification f))
+    ⟨_, hQ⟩ ⟨Ω, hΩplus⟩ _ _ _
+    (fun z ↦ ((ProEtale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) Y).map z).app
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj J))
+    _ hs
+  exact tensorTranspose_of_projection_square P.Coefficient f J M e hΩplus hQ hs'
+
+private theorem etaleTheta_mate
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (J : Etale.DerivedCategoryModule A Y) :
+    (Etale.rightDerivedUpperShriekAdjunction A f).homEquiv _ J
+      (inv (((Etale.projectionMap (ModuleCat.{u + 1} A) f).app
+        (Etale.dualizingComplex A f)).app J) ≫
+        (Etale.rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _) ▷ J ≫
+          (λ_ J).hom) = Etale.dualizingComplexTensorMap A f J := by
+  start_mate_proof
+  · simp only [Etale.dualizingComplexTensorMap,
+      Etale.lowerShriekRightAdjointUnitTensorMap, Etale.lowerShriekRightAdjointTensorMap,
+      Adjunction.projectionTensorMap]
+    erw [← Adjunction.homEquiv_naturality_right]
+    simp only [Category.assoc]
+    rfl
+  · finish_mate_proof
+
+private theorem standingTheta_comparison
+    (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] [CompactSpace Y]
+    [ProEtale.UpperStarPreservesFlat (ModuleCat.{u + 1} P.Coefficient)]
+    (hf : f ≫ aY = aX)
+    (J : Etale.DerivedCategoryModule P.Coefficient Y) (M : D P.Coefficient Y)
+    (e : (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj J ≅ M)
+    (hJ : finiteTorConstructibleEtale P.coefficients.l P.extension
+      P.level P.level_pos Y J) :
+    (etaleMateSource P.Coefficient f J M e).hom ≫ theta P.Coefficient f M =
+      (ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.map
+        (Etale.dualizingComplexTensorMap P.Coefficient f J) ≫
+      (ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.map
+        ((Etale.rightDerivedUpperShriek P.Coefficient f).map
+          ((ProEtale.derivedComparisonAdjunction
+            (ModuleCat.{u + 1} P.Coefficient) Y).unit.app J ≫
+            (ProEtale.comparisonLowerStar
+              (ModuleCat.{u + 1} P.Coefficient) Y).rightDerivedFunctor.map e.hom)) := by
+  start_mate_proof
+  · let A := P.Coefficient
+    let Ω := Etale.dualizingComplex A f
+    let Q := Ω ⊗ (Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj J
+    let hQ := ProEtale.finiteSiteProjectionInput_plus P f Ω J
+      (dualizing_boundedConstructible P aY f) hJ
+    let hJplus := ProEtale.finiteSiteProjectionInput_plus_source P Y J hJ.1
+    have hM : _root_.DerivedCategory.TStructure.t.plus M :=
+      (show ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) Y M from
+        ⟨J, hJplus, ⟨e⟩⟩).plus
+    let hVQ : ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj Q) :=
+      ⟨Q, hQ, ⟨Iso.refl _⟩⟩
+    let hW : ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X
+        ((S A f).obj M ⊗ omega A f) := ⟨Q, hQ, ⟨etaleMateSource A f J M e⟩⟩
+    have hn := standingHom_left A f hVQ hW hM
+      (etaleMateSource A f J M e).hom
+      (genericTensorTranspose (ModuleCat.{u + 1} A) f (omega A f) M
+        (epsilon A f (𝟙_ _)))
+    erw [tensorTranspose_comparison P aX aY f hf J M e hJ,
+      standingHom_comparison A f Q hQ J M e hM, etaleTheta_mate] at hn
+    symm
+    convert hn using 1
+    unfold theta genericTheta
+    simp only [epsilon, dif_pos hM, dif_pos (show
+      _root_.DerivedCategory.TStructure.t.plus (𝟙_ (D A Y)) from proUnitPlus A Y)]
+    erw [dif_pos hW]
+    rfl
+  · finish_mate_proof
+
+private theorem etaleCtfPresentation (P : PurityFiniteSetting.{u}) (Y : Scheme.{u})
+    (M : D P.Coefficient Y)
+    (hM : ProEtale.DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} P.Coefficient) Y M) :
+    ∃ J : Etale.DerivedCategoryModule P.Coefficient Y,
+      finiteTorConstructibleEtale P.coefficients.l P.extension P.level P.level_pos Y J ∧
+      Nonempty ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj J ≅ M) := by
+  obtain ⟨⟨J, hJ, ⟨e⟩⟩, a, b, ht⟩ := hM
+  have hJ' : Etale.DerivedCategory.isBoundedConstructible P.Coefficient Y J := by
+    refine ⟨fun i ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+      (hJ.2 i), ?_⟩
+    obtain ⟨r, hr⟩ := hJ.1.1
+    obtain ⟨s, hs⟩ := hJ.1.2
+    refine ⟨min r s, max r s, min_le_max, fun i hi ↦ ?_⟩
+    rcases hi with hi | hi
+    · exact (_root_.DerivedCategory.isGE_iff J r).mp hr i
+        (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (_root_.DerivedCategory.isLE_iff J s).mp hs i
+        (lt_of_le_of_lt (le_max_right _ _) hi)
+  have htor : Etale.DerivedCategory.torAmplitudeIn
+      (ModuleCat.{u + 1} P.Coefficient) Y a b J :=
+    (ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b J).1
+      ((ProEtale.DerivedCategory.torAmplitudeIn _ Y a b).prop_of_iso e.symm ht)
+  exact ⟨J, ⟨hJ', min a b, max a b, min_le_max,
+    Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr
+      (htor.mono (min_le_left _ _) (le_max_right _ _))⟩, ⟨e⟩⟩
+
+private theorem standingTheta_isIso (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
+    [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]
+    [QuasiCompact (X ↘ Spec (.of P.field.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]
+    [QuasiCompact (Y ↘ Spec (.of P.field.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] [CompactSpace Y]
+    [ProEtale.UpperStarPreservesFlat (ModuleCat.{u + 1} P.Coefficient)]
+    (d : ℕ) [SmoothOfRelativeDimension d f] (M : D P.Coefficient Y)
+    (hM : ProEtale.DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} P.Coefficient) Y M) : IsIso (theta P.Coefficient f M) := by
+  classical
+  obtain ⟨J, hJ, ⟨e⟩⟩ := etaleCtfPresentation P Y M hM
+  have ht := (ProEtale.isCohomologicallySmooth_of_smooth P f d).1.2.1 J
+    ((ProEtale.DerivedCategory.constructibleFiniteTor _ Y).prop_of_iso e.symm hM)
+  let V := (ProEtale.comparisonUpperStar
+    (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory
+  have hJplus : _root_.DerivedCategory.TStructure.t.plus J := by
+    obtain ⟨a, b, _, hv⟩ := hJ.1.2
+    exact ⟨a, (_root_.DerivedCategory.isGE_iff J a).mpr fun i hi ↦ hv i (.inl hi)⟩
+  have hunit : IsIso ((ProEtale.derivedComparisonAdjunction
+      (ModuleCat.{u + 1} P.Coefficient) Y).unit.app J) :=
+    ProEtale.isIso_derivedComparisonAdjunction_unit_app _ Y J hJplus
+  have heq := standingTheta_comparison P (X ↘ Spec (.of P.field.k))
+    (Y ↘ Spec (.of P.field.k)) f (CategoryTheory.comp_over f _) J M e hJ
+  apply (isIso_comp_left_iff (etaleMateSource P.Coefficient f J M e).hom _).mp
+  rw [heq]
+  infer_instance
+
+/-- Composite exceptional adjunction and tensor-map mate identity.
+Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-sp-grp-trace/sec-base-change-and-composition/sk-prop-sp-composition/
+thm-pur-composition-coherence.proof.md,
+Steps 1--2 (blueprint: lem-pur-composition-tensor-mate).
+
+Proof of the coefficient bridge: use the recorded normalized section-action encoding,
+its specified encodingMonoidal tensorator and unit, and encodingDerivedPull. The balanced
+pure-tensor description fixes these data and preserves the constructibility and Tor
+predicates. Transpose the encoded evaluation by the recorded tensor-Hom adjunction; the
+inverse encoding gives its inverse. This proves invertibility of the specific internal-Hom
+comparison in Objects, without choosing an isomorphism. Use compactEncoding for the same
+proper/open factors. The derived identity-on-sections proper comparison and the open
+adjunction mate identify the actual projection components. Transport the normalized
+standing finite Hom bijection by that compact-support comparison and the coefficient
+adjunction: this is exceptionalHomEquiv, with the Hom equation in Arrow. Apply its inverse
+to the identity to obtain nativeEpsilon. The Hom equation gives exactly Arrow.counit.
+Apply the same Hom equation to the symmetry/inverse-projection/counit/unit composite;
+monoidality and the projection equation give exactly Arrow.theta, with omegaComparison
+including the monoidal unit comparison. Finally transpose nativeAlpha followed by the
+native counit successively through g and f. The same two Hom equations identify this
+nativeC with c, giving the displayed exceptional-composition transport equation. Thus
+faithfulness of the encoding transports the following calculation, its unit specialization,
+and its common transpose to the native Lambda_T categories.
+
+Proof, following the complete twelve-step DAG split:
+
+1. Apply [lem-sbc-smooth-relative-dimension-permanence](2) to $f,g$: $h=gf$ is smooth of pure
+relative dimension $d+e$. Separatedness follows from [lem-weil-pbc-proper-fp-permanence](e), and
+finite type from [lem-sfb-finite-type-composition-base-change](1). Thus all three morphisms
+satisfy the hypotheses of the finite-coefficient operations and smooth tensor theorem. None of
+these assertions requires $X,Y,Z$ to be separated over $k$.
+
+2. The coefficient unit $\Lambda_T$ is a constant finite free rank-one sheaf in degree zero, hence
+is bounded constructible with Tor interval $[0,0]$ by [def-weil-finite-tor-amplitude]. Apply
+[cor-pur-general-admissibility-datum](2) to each of $f,g,h$: its hypotheses are exactly separated
+finite type between finite-type $k$-schemes, so each $Rh^!$ preserves $D^b_{ctf}$. In particular
+$\omega_f,\omega_g,\omega_h$ and $Rg^!K$ are in their stated finite-Tor categories. The first
+clause of [thm-pur-cohomological-smoothness], applied separately to $f,g,h$, gives invertibility
+of the specified $\theta_{a,M}$ for finite-Tor $M$. We do not use that theorem's composition
+clause to prove the present identity.
+
+3. By [lem-sf-pullback-tor-amplitude] and [lem-sf-tensor-ctf](ii), $W$, $Lh^*K\otimes^LW$ and
+$Lf^*(Lg^*K\otimes^L\omega_g)\otimes^L\omega_f$ are bounded constructible of finite Tor amplitude.
+The same applies to the sources formed with $Rg^!K$ and $Rf^!Rg^!K$. Every bounded constructible
+source has an etale-origin witness by [lem-sf-proetale-constructible-origin](ii). Its
+compact-support image is bounded constructible by [prop-finite-compact-support-constructibility],
+and bounded below of etale origin by [thm-sf-comp-composition]. Consequently all successive Hom
+bijections in [def-weil-exceptional-inverse-image] apply to the displayed objects, including the
+intermediate $Rf_!$-images; no unrestricted ambient pro-etale adjunction is needed.
+
+4. Use the two Hom bijections and [def-weil-pbc-composite-adjunction]. Their composite has counit
+$\epsilon^c_M=\varepsilon_{g,M}\circ Rg_!(\varepsilon_{f,Rg^!M})$. By
+[pur9-def-upper-shriek-composition], $c_M$ is exactly the transpose of
+$\varepsilon_{h,M}\circ\alpha_{R h^!M}$, so $$\epsilon^c_M\circ
+Rg_!Rf_!(c_M)=\varepsilon_{h,M}\circ\alpha_{Rh^!M}.$$ The isomorphism $\alpha$ identifies the left
+functors. Apply [det-sp-unique-right-adjoint] on the bounded constructible categories (compact
+support preserves them by Step 3). It makes this specified, counit-compatible $c$ a natural
+isomorphism, rather than an arbitrary comparison of the same objects.
+
+5. Step 2 applies to $M=\omega_g$ and to $M=Rg^!K$ for $f$, as well as to $K$ for $g,h$. Thus
+every tensor map in the assertion is an isomorphism. Since $c_\Lambda$ and tensor symmetry are
+isomorphisms, their composite $\sigma=c_\Lambda^{-1}\theta_{f,\omega_g}\mathrm{sym}$ is an
+isomorphism. This proves the isomorphism assertions without choosing any purity orientation.
+
+6. Write $q=\theta_{f,\omega_g}\mathrm{sym}:W\to Rf^!\omega_g$. Then $c_\Lambda\sigma=q$. Its
+transpose through $f$ is exactly
+$\mathrm{unitor}\circ(T_f\otimes1)\circ\operatorname{PF}_{f,\omega_f,\omega_g}^{-1}$ by
+[def-pur-co-smoothness]; the two source symmetries cancel. Transposing once more through $g$
+composes $Rg_!$ of that map with $\varepsilon_{g,\Lambda}=T_g$, by
+[def-weil-pbc-composite-adjunction]. This is the displayed map $t$, including its unit constraint.
+In particular $\epsilon^c_\Lambda\,Rg_!Rf_!(q)=t$.
+
+7. Put $P_a=Ra_!$, $S_a=La^*$ and $G_a=Ra^!$ for $a=f,g,h$. Use the canonical symmetric monoidal
+derived tensors of [lem-sf-ringed-derived-closed-symmetric-monoidal] and the canonical
+pullback/tensor comparisons of [def-weil-derived-pullback-tensor-hom]; their pullback compositor
+is [lem-weil-pbc-proetale-derived-pullback-composition]. For $B\in D^b_{ctf}$ on the target of $a$
+and $M\in D^b_c$ on its source set
+$$\pi^a_{B,M}=\mathrm{sym}\circ\operatorname{PF}_{a,M,B}^{-1}\circ P_a(\mathrm{sym}),$$
+where $\operatorname{PF}$ is the specified projection transformation of [def-exchange-projection].
+With the compactification and dimension-bound choices of Step 8 and the hypotheses verified in
+Step 2 ($\omega_f,\omega_g\in D^b_{ctf}$, and $\theta_{f,B}$, $\theta_{g,B}$ invertible for
+finite-Tor $B$), [lem-pur-compact-support-composite-transpose-domains] states that these inverses
+exist on every object, arrow and naturality instance occurring in the two expressions
+$\theta_{f,G_gK}(S_f\theta_{g,K}\otimes1)$ and $c_K\theta_{h,K}(1\otimes q)$, and that they
+satisfy there the unit and coefficient-associativity equations, with the canonical monoidal
+pullback comparisons. In particular no separate finite-Tor reflection to etale representatives is
+needed here: invertibility on these domains is part of the cited statement. Their naturality is
+that of the transformation [def-exchange-projection], restricted to these full domains. Thus these
+are projection formulas on the full domains needed by the restricted-domain clause of
+[lem-pur-composite-tensor-transpose].
+
+8. The schemes $X,Y,Z$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over
+the Noetherian scheme $\operatorname{Spec}k$, hence quasi-compact and quasi-separated by
+[lem-weil-pbc-locally-noetherian-quasi-separated]. By Step 1, $f$, $g$ and $h=gf$ are separated of
+finite type, so [thm-nagata-compactification] supplies compactifications of $f$, $g$ and $h$. Each
+proper ambient scheme is of finite type over the target ([def-weil-proper-morphism]), hence of
+finite type over $k$ by [lem-sfb-finite-type-composition-base-change](1);
+[lem-kun-dimension-finite-type] gives it finite Krull dimension, and we choose a nonnegative
+integer bound (zero for an empty ambient scheme). These are exactly the choices required by
+[lem-pur-compact-support-composite-transpose-domains]; its other hypotheses are the finite
+coefficient datum and the Step 2 facts $\omega_f,\omega_g\in D^b_{ctf}$ and invertibility of
+$\theta_{f,B},\theta_{g,B}$ for finite-Tor $B$. Its composite-projection clause says that for
+$K\in D^b_{ctf}(Z,\Lambda)$ and $M\in D^b_c(X,\Lambda)$, identifying source and target through the
+canonical compact-support compositor $\alpha$ of [thm-sf-comp-composition] and the pullback
+compositor,
+$$\pi^h_{K,M}=\pi^g_{K,P_fM}\circ P_g(\pi^f_{S_gK,M}).$$
+Writing $\pi^c_{K,M}=\pi^g_{K,P_fM}\,P_g(\pi^f_{S_gK,M})$ for the composite inverse projection of
+$P_gP_f$, this reads
+$$(1_K\otimes\alpha_{M})\pi^c_{K,M}=\pi^h_{K,M}\;\alpha_{S_hK\otimes M},$$
+with tensor symmetries and the pullback compositor inserted. This identifies the inverse composite
+projection with the successive inverses for $f,g$, for the actual compact-support compositor;
+since $\alpha$ is the canonical compositor, the identity does not depend on the chosen
+compactifications. It is asserted only for finite-Tor $K$ and bounded constructible $M$, which
+covers every instance used in Steps 9--11.
+
+9. Apply the restricted-domain clause of [lem-pur-composite-tensor-transpose] to
+$S_f,S_g,P_f,P_g,G_f,G_g$ and the projection formulas of Step 7. Step 3 checks every Hom-bijection
+domain, including each compact-support image; Steps 7–8 supply the tensor and projection coherence
+equations. Its maps $\tau^f_B,\tau^g_B$ are exactly $\theta_{f,B},\theta_{g,B}$ by
+[def-pur-co-smoothness]: the coefficient-left convention for $\pi$ simply writes the same counit
+transpose using symmetry. Set $V=\omega_g$, $U=S_fV\otimes\omega_f$ and $q'=\theta_{f,V}:U\to
+G_fV$. The lemma gives $$\theta_{f,G_gK}(S_f\theta_{g,K}\otimes1)=\tau^c_K(1\otimes q')$$ and
+identifies both inverse transposes as $$P_gP_fN\xrightarrow{P_g\pi^f_{S_gK\otimes
+V,\omega_f}}P_g((S_gK\otimes V)\otimes P_f\omega_f)\xrightarrow{P_g(1\otimes T_f)}P_g(S_gK\otimes
+V)\xrightarrow{\pi^g_{K,V}}K\otimes P_gV\xrightarrow{1\otimes T_g}K,$$ where $N=S_f(S_gK\otimes
+V)\otimes\omega_f$ and unitors are understood. Here $\tau^c$ is formed from $G_fG_g\Lambda$ and
+the composite counit, not from an independently chosen dualizing comparison.
+
+10. Identify $S_h=S_fS_g$ by the pullback compositor, and put $W_c=G_fG_g\Lambda$. Steps 4 and 8
+show directly that $$c_K\theta_{h,K}(1\otimes c_\Lambda^{-1})=\tau^c_K:S_hK\otimes
+W_c\longrightarrow G_fG_gK.$$ Indeed transpose the left side through the composite Hom bijection:
+Step 4 replaces the final $c_K$ by $\varepsilon_{h,K}\alpha$, naturality of $\alpha$ moves
+$1\otimes c_\Lambda^{-1}$ to its source, and Step 8 replaces the projection by $\pi^c$. Naturality
+of $\pi^c$ in its source factor then leaves $\varepsilon_{h,\Lambda}\alpha
+P_gP_f(c_\Lambda^{-1})=\epsilon^c_\Lambda$, which is precisely the defining transpose of $\tau^c$.
+This is an equality by the injectivity of the Hom bijection. Finally
+$c_\Lambda\sigma=q'\mathrm{sym}$. Precomposing Step 9 with $r_K$ therefore gives exactly $(*)$,
+with the displayed order of all three factors.
+
+11. To identify the more precise transpose in the statement, use the source order $N\cong
+S_hK\otimes U$ and define
+$$b=(1_V\otimes T_f)\pi^f_{V,\omega_f}:P_fU\longrightarrow V.$$
+The coefficient-associativity equation for $\pi^f$ supplied by
+[lem-pur-compact-support-composite-transpose-domains], at $(S_gK,V,\omega_f)$, rewrites Step 9's
+first two arrows as $P_g(1_{S_gK}\otimes b)P_g\pi^f_{S_gK,U}$. Naturality of $\pi^g$ in its source
+factor moves $P_g(b)$ past $\pi^g_{K,-}$, giving
+$$(1_K\otimes T_gP_gb)\,\pi^g_{K,P_fU}\,P_g\pi^f_{S_gK,U}=(1_K\otimes T_gP_gb)\pi^c_{K,U}.$$
+Through $U\cong W$ the morphism $T_gP_gb$ is $t$ by Step 6. Tensor symmetry and the unit
+constraints of [lem-sf-ringed-derived-closed-symmetric-monoidal] change coefficient-left order to
+$P_gP_fW\otimes K$ and $t\otimes1_K$. Step 8 says that this $\pi^c$ is precisely the successive
+inverse projections specified in the assertion. This proves the claimed common transpose, without
+any assertion that compact support preserves finite Tor amplitude.
+
+12. All constituent projections, pullback compositors, tensor constraints and counits are natural.
+The defining Hom bijections are natural as well, so Steps 9–11 give the identity and the stated
+common transpose naturally in $K$. For $K=\Lambda$ the unit equation reduces the calculation to
+Step 6. Identities and relative dimension zero require no change; for empty schemes all source
+objects and arrows in the calculation are zero. Thus no positive-dimension, nonemptiness or
+absolute separatedness assumption has entered the proof.
+-/
+theorem composition_tensor_mate (P : WeilConjectures.PurityFiniteSetting.{u})
+    {X Y Z : Scheme.{u}}
+    [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
+    [Z.Over (Spec (.of P.field.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]
+    [QuasiCompact (X ↘ Spec (.of P.field.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]
+    [QuasiCompact (Y ↘ Spec (.of P.field.k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))]
+    [QuasiCompact (Z ↘ Spec (.of P.field.k))]
+    (f : X ⟶ Y) (g : Y ⟶ Z)
+    [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] :
+    Assertion P f g d e := by
+  classical
+  let : IsNoetherianRing P.Coefficient := isNoetherian_of_finite _ _
+  let : UpperStarPreservesFlat (ModuleCat.{u + 1} P.Coefficient) :=
+    upperStarPreservesFlat_moduleCat P.Coefficient
+  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of P.field.k))
+  let : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace
+    (Z ↘ Spec (.of P.field.k))
+  let := (P.finiteComparedCompactification f (Y ↘ Spec (.of P.field.k))).hasCompactification
+  let := (P.finiteComparedCompactification g (Z ↘ Spec (.of P.field.k))).hasCompactification
+  let := (P.finiteComparedCompactification (f ≫ g)
+    (Z ↘ Spec (.of P.field.k))).hasCompactification
+  let : IsNoetherian Y :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian
+        (Y ↘ Spec (.of P.field.k))
+      toCompactSpace := inferInstance }
+  let : IsNoetherian Z :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian
+        (Z ↘ Spec (.of P.field.k))
+      toCompactSpace := inferInstance }
+  let : HasInvertibleExponent P.Coefficient (Spec (.of P.field.k)) :=
+    P.finiteComparedInvertibleExponent (𝟙 _)
+  let : HasInvertibleExponent P.Coefficient Y :=
+    P.finiteComparedInvertibleExponent (Y ↘ Spec (.of P.field.k))
+  let : HasInvertibleExponent P.Coefficient Z :=
+    P.finiteComparedInvertibleExponent (Z ↘ Spec (.of P.field.k))
+  let : SmoothOfRelativeDimension (d + e) (f ≫ g) := inferInstance
+  have huf := unitCtf P.Coefficient Y
+  have hug := unitCtf P.Coefficient Z
+  have hwf := omegaCtf P.Coefficient (Y ↘ Spec (.of P.field.k)) f
+  have hwg := omegaCtf P.Coefficient (Z ↘ Spec (.of P.field.k)) g
+  have hwh := omegaCtf P.Coefficient (Z ↘ Spec (.of P.field.k)) (f ≫ g)
+  have htf := tensorClause P.Coefficient f hwf
+    (WeilConjectures.PurityFiniteSetting.standingTheta_isIso P f d)
+  have htg := tensorClause P.Coefficient g hwg
+    (WeilConjectures.PurityFiniteSetting.standingTheta_isIso P g e)
+  have hth := tensorClause P.Coefficient (f ≫ g) hwh
+    (WeilConjectures.PurityFiniteSetting.standingTheta_isIso P (f ≫ g) (d + e))
+  have hW : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} P.Coefficient) X
+      (W P.Coefficient f g) := tensorCtf P.Coefficient X hwf (pullCtf P.Coefficient f hwg)
+  have hFf := boundedConstructible_rightDerivedLowerShriek P.Coefficient f
+    (X ↘ Spec (.of P.field.k)) (Y ↘ Spec (.of P.field.k))
+    (CategoryTheory.comp_over f (Spec (.of P.field.k)))
+  have hFg := boundedConstructible_rightDerivedLowerShriek P.Coefficient g
+    (Y ↘ Spec (.of P.field.k)) (Z ↘ Spec (.of P.field.k))
+    (CategoryTheory.comp_over g (Spec (.of P.field.k)))
+  have hGf := fun K hK ↦ boundedConstructible_rightDerivedUpperShriek P.Coefficient
+    (Y ↘ Spec (.of P.field.k)) f (L := K) hK
+  have hGg := fun K hK ↦ boundedConstructible_rightDerivedUpperShriek P.Coefficient
+    (Z ↘ Spec (.of P.field.k)) g (L := K) hK
+  have hGgK := fun (K : D P.Coefficient Z)
+      (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} P.Coefficient) Z K) =>
+    upperShriekCtf P.Coefficient (Z ↘ Spec (.of P.field.k)) g hK
+  have hFfW := hFf (W P.Coefficient f g) hW.1
+  have hdomains := fun (K : D P.Coefficient Z)
+      (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} P.Coefficient) Z K) ↦
+    domains P.Coefficient f g hK hwf hwg (hGgK K hK) hFfW
+  obtain ⟨hm, hunit, hroute⟩ := compositionTensorRouteTransposes P.Coefficient f g
+    huf hug htf htg hth hdomains
+  have hinput : ∀ K : D P.Coefficient Z,
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} P.Coefficient) Z K →
+      InputClause P.Coefficient f g K := by
+    intro K hK
+    exact ⟨htf.2 _ (hGgK K hK), hdomains K hK, hroute K hK⟩
+  obtain ⟨hbridge, hstanding⟩ := compositionTensorCoefficientBridge P f g hinput
+  refine ⟨hbridge, inferInstance, inferInstance, inferInstance, inferInstance,
+    hstanding, ?_⟩
+  · exact packageAssembly P.Coefficient f g
+      (adjunctionClause P.Coefficient f g hFf hGf hFg hGg)
+      htf htg hth hug hW hm hunit hinput
+
+private theorem packageAssembly (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
+    (ha : AdjunctionClause A f g)
+    (htf : TensorClause A f) (htg : TensorClause A g) (hth : TensorClause A (f ≫ g))
+    (hu : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) Z (unit A Z))
+    (hW : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X (W A f g))
+    (hm : MateClause A f g) (hunit : UnitTransposeClause A f g)
+    (hinput : ∀ K : D A Z,
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) Z K →
+      InputClause A f g K) : Package A f g := by
+  exact ⟨ha, originClause A f, originClause A g, originClause A (f ≫ g),
+    htg, hth, htf.1, htf.2 _ htg.1, hW, hm,
+    sigmaIso A f g (htf.2 _ htg.1).2.2 (hm.2 _ hu.1).1, hunit, hinput⟩
+
+private theorem sigmaIso (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
+    (htheta : IsIso (theta A f (omega A g)))
+    (hc : IsIso (c A f g (unit A Z))) : SigmaIsoClause A f g := by
+  have := inverse_isIso (c A f g (unit A Z))
+  unfold SigmaIsoClause genericSigmaIso genericSigma
+  infer_instance
+
+private theorem inverse_isIso {C : Type*} [Category C] [HasZeroMorphisms C]
+    {U V : C} (a : U ⟶ V) [IsIso a] : IsIso (inverseOnDomain a) := by
+  classical
+  simp only [inverseOnDomain, dif_pos (inferInstance : IsIso a)]
+  infer_instance
+
+private theorem adjunctionClause (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [CompactSpace Y] [CompactSpace Z]
+    (hFf : ∀ M : D A X, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X M →
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Y ((F A f).obj M))
+    (hGf : ∀ K : D A Y, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Y K →
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X ((G A f).obj K))
+    (hFg : ∀ M : D A Y, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Y M →
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Z ((F A g).obj M))
+    (hGg : ∀ K : D A Z, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Z K →
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Y ((G A g).obj K)) :
+    AdjunctionClause A f g := by
+  refine ⟨hFf, hGf, hFg, hGg, fun K ↦ ?_⟩
+  rw [Adjunction.comp_counit_app]
+  change (F A g).map
+    (((restrictedAdjunction A f hFf hGf).counit.app
+      (((DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Y).lift
+        ((DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Z).ι ⋙ G A g)
+        (fun K ↦ hGg K.obj K.property)).obj K)).hom) ≫
+      ((restrictedAdjunction A g hFg hGg).counit.app K).hom = _
+  rw [restrictedCounit, restrictedCounit]
+  rfl
+
+private theorem restrictedCounit (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (hF : ∀ M : D A X, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X M →
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Y ((F A f).obj M))
+    (hG : ∀ K : D A Y, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Y K →
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X ((G A f).obj K))
+    (K : DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} A) Y) :
+    ((restrictedAdjunction A f hF hG).counit.app K).hom = epsilon A f K.obj := by
+  rw [epsilon_eq A f K.property.plusEtaleOrigin.plus]
+  change (rightDerivedUpperShriekHomEquiv f _ _).symm (𝟙 _) = _
+  exact rightDerivedUpperShriekHomEquiv_symm_id f K.property.plusEtaleOrigin.plus
+
+private theorem originClause (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] : OriginClause A f := by
+  intro M hM
+  exact ⟨hM.plusEtaleOrigin, hM.plusEtaleOrigin.rightDerivedLowerShriek_obj f⟩
+
+private theorem tensorClause (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (hw : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X (omega A f))
+    (ht : ∀ K : D A Y, DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} A) Y K → IsIso (theta A f K)) : TensorClause A f := by
+  exact ⟨hw, fun K hK ↦ tensorInput A f hw hK (ht K hK)⟩
+
+private theorem epsilon_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] [CompactSpace Y] {K : D A Y}
+    (hK : _root_.DerivedCategory.TStructure.t.plus K) :
+    epsilon A f K = rightDerivedUpperShriekCounit f K hK := by
+  classical
+  rw [epsilon, dif_pos hK, standingHom_eq, rightDerivedUpperShriekHomEquiv_symm_id]
+
+private theorem standingHom_eq (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    {M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))}
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X M)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))}
+    (hK : _root_.DerivedCategory.TStructure.t.plus K) :
+    standingExceptionalHomEquiv A f hM hK = rightDerivedUpperShriekHomEquiv f hM hK := by
+  apply (Equiv.symm_bijective).injective
+  ext a
+  let M' := Classical.choose hM
+  let hM' := (Classical.choose_spec hM).1
+  let e := Classical.choice (Classical.choose_spec hM).2
+  let ν := (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+  let b := (Equiv.ofBijective (fun b ↦ ν.map b)
+    (bijective_comparisonUpperStar_mapDerivedCategory_map M' _
+      (plus_etaleRightDerivedUpperShriek_obj f hK))).symm (e.hom ≫ a)
+  have hb : ν.map b = e.hom ≫ a := by
+    exact (Equiv.ofBijective (fun b ↦ ν.map b)
+      (bijective_comparisonUpperStar_mapDerivedCategory_map M' _
+        (plus_etaleRightDerivedUpperShriek_obj f hK))).apply_symm_apply _
+  rw [rightDerivedUpperShriekHomEquiv_symm_apply]
+  have ht := rightDerivedLowerShriek_map_mapDerivedCategory_map_comp_counit f hM' hK b
+  change (rightDerivedLowerShriek _ f).map e.inv ≫
+    ((fixedCompactSupportComparisonIso A (HasCompactification.compactification f)).app
+      ⟨M', hM'⟩).hom ≫
+    ((derivedComparisonAdjunction _ Y).homEquiv _ _).symm
+      (((Etale.rightDerivedUpperShriekAdjunction A f).homEquiv _ _).symm b) = _
+  rw [supportComparison]
+  calc
+    _ = (rightDerivedLowerShriek _ f).map e.inv ≫
+        ((rightDerivedLowerShriek _ f).map (ν.map b) ≫
+          rightDerivedUpperShriekCounit f K hK) :=
+      congrArg (fun z ↦ (rightDerivedLowerShriek _ f).map e.inv ≫ z) ht.symm
+    _ = _ := by
+      rw [hb]
+      simp only [← Category.assoc, ← Functor.map_comp, e.inv_hom_id, Category.id_comp]
+
+private theorem supportComparison (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    fixedCompactSupportComparisonIso A (HasCompactification.compactification f) =
+      rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} A) f := by
+  have hproper : rightDerivedLowerStarComparisonIso (ModuleCat.{u + 1} A)
+      (HasCompactification.compactification f).g =
+      (fixedDirectImageComparisonIso A (HasCompactification.compactification f).g).symm := by
+    apply Iso.ext
+    ext M
+    simp [rightDerivedLowerStarComparisonIso, fixedDirectImageComparisonIso,
+      fixedComparisonDirectImageMatePlus]
+  apply Iso.ext
+  ext K
+  simp [rightDerivedLowerShriekComparisonIso,
+    rightDerivedLowerShriekOfCompactificationComparisonIso,
+    fixedCompactSupportComparisonIso, hproper]
+
+private theorem domains {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
+    {K : D Λ Z}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z K)
+    (hf : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (omega Λ f))
+    (hg : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y (omega Λ g))
+    (hGK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((G Λ g).obj K))
+    (hFW : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+      ((F Λ f).obj (W Λ f g))) :
+    genericDomains (ModuleCat.{u + 1} Λ) f g (omega Λ f) (W Λ f g) (omega Λ g)
+      (G Λ g) (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X)
+      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y) K := by
+  have hW : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (W Λ f g) :=
+    tensorCtf Λ X hf (pullCtf Λ f hg)
+  refine ⟨hGK, tensorCtf Λ X (pullCtf Λ (f ≫ g) hK) hW,
+    tensorCtf Λ X (pullCtf Λ f (tensorCtf Λ Y (pullCtf Λ g hK) hg)) hf, ?_, ?_, ?_⟩
+  · unfold genericR
+    infer_instance
+  · exact hasProjectionFormula_of_constructibleFiniteTor Λ f hW (pullCtf Λ g hK)
+  · exact hasProjectionFormula_of_boundedConstructible Λ g hFW hK
+
+private theorem tensorInput {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] [CompactSpace Y] {K : D Λ Y}
+    (hw : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (omega Λ f))
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K)
+    (ht : IsIso (theta Λ f K)) : TensorInputClause Λ f K := by
+  exact ⟨tensorCtf Λ X (pullCtf Λ f hK) hw,
+    hasProjectionFormula_of_constructibleFiniteTor Λ f hw hK, ht⟩
+
+private theorem upperShriekCtf {k : Type u} [Field k] {Y Z : Scheme.{u}}
+    (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ]
+    (g : Y ⟶ Z) [HasCompactification g] [QuasiCompact g] [CompactSpace Z]
+    [HasInvertibleExponent Λ Z]
+    {K : D Λ Z}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z K) :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((G Λ g).obj K) := by
+  have : IsNoetherian Z :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian aZ
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace aZ }
+  exact constructibleFiniteTor_rightDerivedUpperShriek Λ aZ g hK
+
+private theorem omegaCtf {k : Type u} [Field k] {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f]
+    [QuasiCompact f] [CompactSpace Y] :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (omega Λ f) := by
+  have : IsNoetherian Y :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian aY
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace aY }
+  exact constructibleFiniteTor_rightDerivedUpperShriek Λ aY f (unitCtf Λ Y)
+
+private theorem pullCtf {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      ((S Λ f).obj K) := by
+  exact constructibleFiniteTor_leftDerivedFunctor_upperStar_obj f hK
+
+private theorem unitCtf (T : Scheme.{u}) [IsNoetherian T] :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T
+      (𝟙_ (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)))) := by
+  exact DerivedCategory.constructibleFiniteTor_of_isDualizable Λ
+    ⟨inferInstance⟩
+
+private theorem tensorCtf (T : Scheme.{u})
+    {K M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T K)
+    (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T M) :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T (K ⊗ M) := by
+  obtain ⟨⟨K', hK', ⟨a⟩⟩, c, d, hKt⟩ := hK
+  obtain ⟨⟨M', hM', ⟨b⟩⟩, e, f, hMt⟩ := hM
+  have hKctf : Etale.DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} Λ) T K' :=
+    ⟨hK', c, d, (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff c d K').1
+      ((DerivedCategory.torAmplitudeIn _ T c d).prop_of_iso a.symm hKt)⟩
+  have hMctf : Etale.DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} Λ) T M' :=
+    ⟨hM', e, f, (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff e f M').1
+      ((DerivedCategory.torAmplitudeIn _ T e f).prop_of_iso b.symm hMt)⟩
+  exact (DerivedCategory.constructibleFiniteTor _ T).prop_of_iso
+    (((derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+      (ModuleCat.{u + 1} Λ) K').app M') ≪≫ tensorIso a b)
+    (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ
+      (Etale.constructibleFiniteTor_tensor Λ T hKctf hMctf))
+
+end WeilConjectures.PurityFiniteSetting

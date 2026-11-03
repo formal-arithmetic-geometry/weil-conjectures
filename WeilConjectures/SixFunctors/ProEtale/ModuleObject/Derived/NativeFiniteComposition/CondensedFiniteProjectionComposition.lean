@@ -13,6 +13,9 @@ public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiber
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
 public import WeilConjectures.AlgebraicGeometry.SepFinType
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteProjectionComposition.CondensedFiniteCompositorGeometry
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteProjectionComposition.CondensedFiniteForwardProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NativeFiniteComposition.CondensedFiniteCompositionCoordinates
 
 /-! # Finite projection composition and inverse-compositor associativity
 
@@ -112,35 +115,58 @@ abbrev coefficient (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) :=
   cartesianFinitePointRing (Padic.coefficientExtensionRing ell E n)
 
+private theorem comparisonInverse_eq_inv
+    {C : Type*} [Category C] [HasZeroMorphisms C] {A B : C}
+    (f : A ⟶ B) [IsIso f] :
+    AlgebraicGeometry.ProEtale.CondensedRing.CondensedOpenProper.comparisonInverse f =
+      inv f := by
+  classical
+  exact dif_pos (inferInstance : IsIso f)
+
+private theorem inverse_composition_square
+    {C : Type*} [Category C] {A B D E Q : C}
+    (a : A ⟶ B) (b : D ⟶ E) [IsIso a] [IsIso b]
+    (e : Q ≅ D) (p : A ⟶ Q) (q : B ⟶ E)
+    (h : p ≫ e.hom ≫ b = a ≫ q) :
+    inv a ≫ p = q ≫ inv b ≫ e.inv := by
+  apply (cancel_mono (e.hom ≫ b)).1
+  calc
+    (inv a ≫ p) ≫ (e.hom ≫ b) = inv a ≫ (p ≫ e.hom ≫ b) := by
+      simp only [Category.assoc]
+    _ = inv a ≫ (a ≫ q) := by rw [h]
+    _ = q := by simp
+    _ = (q ≫ inv b ≫ e.inv) ≫ (e.hom ≫ b) := by simp
+
+private theorem inverse_pentagon
+    {C : Type*} [Category C] {A B D E : C}
+    (a : A ⟶ B) (b : B ⟶ E) (c : A ⟶ D) (d : D ⟶ E)
+    [IsIso a] [IsIso b] [IsIso c] [IsIso d]
+    (h : a ≫ b = c ≫ d) : inv b ≫ inv a = inv d ≫ inv c := by
+  have he : asIso a ≪≫ asIso b = asIso c ≪≫ asIso d := Iso.ext h
+  exact congrArg Iso.inv he
+
 /-- The projection composition square and the inverse-compositor pentagon, in the ambient
 ordinary derived categories of modules over the pulled-back finite condensed ring.
 Source: fix-prop-projection-formula.proof.md, coherence sentence, and
 prop-sf-pf-coherence.proof.md, pentagon paragraph
 (blueprint: lem-sf-finite-projection-composition-transport).
 
-Proof plan:
-1. Choose bounded constructible etale origins M,N of K,L. Finite Noetherian coefficient
-comparison preserves the Tor interval of N, as does pullback. A bounded flat model of N
-makes M tensor P(N) bounded. F_f(M) tensor P_g(N) is bounded below, since open extension
-is exact and proper derived direct image preserves the lower bound.
-2. The counit-normalized proper comparison commutes with the proper projection map by
-ringed exchange/tensor coherence. The canonical open comparison commutes with the open
-tensor map. Compose the equations and use naturality at the open tensor map. This
-identifies the specified proper-then-open projection under site comparison.
-3. Apply the etale shriek/tensor composition equation. Conjugate by tensor symmetries
-since that equation places the factors in the other order. Pullback compositors respect
-these symmetries and their compositions.
-4. First use a compatible compactification tower. The unbounded etale compositor restricts
-to the bounded-below one. Apply site comparison, substitute the projection equation and
-the binary compositor normalization, and cancel internal comparisons. Pullback comparison
-coherence identifies chi. Cancel the endpoint isomorphisms and conjugate by the origin
-isomorphisms. Inverting alpha gives the first displayed equality. Common proper
-refinements transport it to all supplied compactifications, since both projections and
-compositors respect the normalized refinement maps.
-5. Invert canonical compositor associativity. Functors preserve inverses and inverses
-reverse composites. The copied final compactification inserts exactly Category.assoc.
-This proves the second equality. K is never required to have finite Tor amplitude, and
-no projection component is inverted. -/
+Proof:
+1. The forward geometry theorem gives preservation of bounded constructibility,
+invertibility of each specified forward compositor, and their forward associativity.
+The forward projection theorem gives bounded constructibility of the tensor input
+and the forward projection square, with no Tor assumption on K.
+2. Let a be the forward compositor at K tensored with L, let b be the compositor at
+K tensor P_fg L, and let e be F_g F_f applied to K tensor chi inverse. The forward
+square is p followed by e.hom and b equals a followed by q. Cancel e.hom followed by
+b; the result is inv a followed by p equals q followed by inv b and e.inv. Functors
+and tensor whiskering preserve inverses. On these objects the total inverses in the
+statement are categorical inverses, proving its first clause.
+3. Preservation puts F_f K in the domain of the other two forward compositors.
+Invert the equality of the two composites in forward associativity. Inversion
+reverses the two factors, and functors preserve inverses, giving the stated inverse
+pentagon with exactly the same copied final compactification. No projection component
+is inverted in either argument. -/
 theorem finite_projection_composition
     (B : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
     (_hell : ell ≠ B.p) (E : Type u) [Field E] [Algebra (Padic ell) E]
@@ -181,6 +207,69 @@ theorem finite_projection_composition
             (cfgh.copy (Category.assoc f.hom.left g.hom.left h.hom.left).symm) K ≫
           NativeFiniteComposition.inverse (coefficient ell E n) cg ch cgh
             ((F (coefficient ell E n) cf).obj K)) := by
-  sorry
+  classical
+  obtain ⟨hpres, hiso, hassoc⟩ := finite_compositor_geometry B ell _hell E n _hn
+  constructor
+  · intro X Y Z f g _ _ _ _ _ _ cf cg cfg K hK L
+    obtain ⟨hT, hforward⟩ := finite_forward_projection B ell _hell E n _hn
+      f g cf cg cfg K hK L
+    let := hiso f g cf cg cfg K hK
+    let := hiso f g cf cg cfg
+      (K ⊗ (P (coefficient ell E n) (f.hom.left ≫ g.hom.left)).obj L.obj) hT
+    let e := (F (coefficient ell E n) cg).mapIso
+      ((F (coefficient ell E n) cf).mapIso
+        (whiskerLeftIso K
+          ((leftDerivedUpperStarComp (coefficient ell E n)
+            f.hom.left g.hom.left).app L.obj).symm))
+    have he := inverse_composition_square
+      (NativeFiniteComposition.forward (coefficient ell E n) cf cg cfg K ▷ L.obj)
+      (NativeFiniteComposition.forward (coefficient ell E n) cf cg cfg
+        (K ⊗ (P (coefficient ell E n) (f.hom.left ≫ g.hom.left)).obj L.obj))
+      e
+      (pf (coefficient ell E n) cg ((F (coefficient ell E n) cf).obj K) L.obj ≫
+        (F (coefficient ell E n) cg).map
+          (pf (coefficient ell E n) cf K ((P (coefficient ell E n) g.hom.left).obj L.obj)))
+      (pf (coefficient ell E n) cfg K L.obj)
+      (by simpa only [e, Functor.mapIso_hom, whiskerLeftIso_hom,
+        Iso.symm_hom, Iso.app_inv, Category.assoc] using hforward)
+    simpa only [NativeFiniteComposition.inverse, comparisonInverse_eq_inv,
+      inv_whiskerRight, e, Functor.mapIso_inv, whiskerLeftIso_inv,
+      Iso.symm_inv, Iso.app_hom, Category.assoc] using he
+  · intro X Y Z W f g h _ _ _ _ _ _ _ _ _ cf cg ch cfg cgh cfgh K hK
+    let : IsSeparated (f ≫ g).hom.left := by
+      change IsSeparated (f.hom.left ≫ g.hom.left)
+      infer_instance
+    let : LocallyOfFiniteType (f ≫ g).hom.left := by
+      change LocallyOfFiniteType (f.hom.left ≫ g.hom.left)
+      infer_instance
+    let : QuasiCompact (f ≫ g).hom.left := by
+      change QuasiCompact (f.hom.left ≫ g.hom.left)
+      infer_instance
+    let : IsSeparated (g ≫ h).hom.left := by
+      change IsSeparated (g.hom.left ≫ h.hom.left)
+      infer_instance
+    let : LocallyOfFiniteType (g ≫ h).hom.left := by
+      change LocallyOfFiniteType (g.hom.left ≫ h.hom.left)
+      infer_instance
+    let : QuasiCompact (g ≫ h).hom.left := by
+      change QuasiCompact (g.hom.left ≫ h.hom.left)
+      infer_instance
+    let := hiso f g cf cg cfg K hK
+    let := hiso (f ≫ g) h cfg ch cfgh K hK
+    let := hiso g h cg ch cgh ((F (coefficient ell E n) cf).obj K)
+      (hpres f cf K hK)
+    let := hiso f (g ≫ h) cf cgh
+      (cfgh.copy (Category.assoc f.hom.left g.hom.left h.hom.left).symm) K hK
+    have he := inverse_pentagon
+      ((F (coefficient ell E n) ch).map
+        (NativeFiniteComposition.forward (coefficient ell E n) cf cg cfg K))
+      (NativeFiniteComposition.forward (coefficient ell E n) cfg ch cfgh K)
+      (NativeFiniteComposition.forward (coefficient ell E n) cg ch cgh
+        ((F (coefficient ell E n) cf).obj K))
+      (NativeFiniteComposition.forward (coefficient ell E n) cf cgh
+        (cfgh.copy (Category.assoc f.hom.left g.hom.left h.hom.left).symm) K)
+      (hassoc f g h cf cg ch cfg cgh cfgh K hK)
+    simpa only [NativeFiniteComposition.inverse, comparisonInverse_eq_inv,
+      ← Functor.map_inv] using he
 
 end AlgebraicGeometry.ProEtale.CondensedRing.FiniteProjectionComposition

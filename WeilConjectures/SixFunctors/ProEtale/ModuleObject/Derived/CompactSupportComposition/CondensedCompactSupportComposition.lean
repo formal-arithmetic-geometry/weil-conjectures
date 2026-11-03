@@ -60,6 +60,7 @@ import WeilConjectures.Compactification.BaseChange
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compact.CompactSupportRefinementBaseChange
 import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.CategoryTheory.RingedDerivedComparisons.RingedDerivedMonoidalComparisons
+public import WeilConjectures.AlgebraicGeometry.CondensedPullIsoBalancedComparison
 
 /-! # Coherent composition and arbitrary base change for condensed compact supports
 
@@ -297,6 +298,47 @@ def Coherent (k : Type u) [Field k] : Prop :=
   ∃ (pullback_preserves : PullbackPreservationFamily Λ k),
   ∃ (exchange : ExchangeFamily Λ k),
   ComparisonLawsFor Λ k preserves comparison comp openIso pullback_preserves exchange
+
+/-- Composition and arbitrary scheme base change for condensed compact supports, with the
+canonical refinement and proper/open normalizations and all coherence equations.
+Source: blueprint latest, sk-thm-sf-comp-composition, clauses (1)--(2)
+(blueprint: sk-thm-sf-comp-composition).
+
+Proof plan, following the seven DAG steps:
+1. Choose compactifications using thm-nagata-compactification and
+lem-sfb-over-compactification-composite-cartesian. The theorems
+det-sf-comp-coherence-single and det-proper-image-localizing-open preserve Dctf and Loc.
+2. Interchange the middle proper and open factors using the unique identity-on-the-open
+map (det-sf-comp-composition-interchange, lem-zl-condensed-open-proper-pasting). Apply the
+last proper image and the canonical compositors (lem-weil-derived-direct-image-composition).
+3. Compare all compactification models by common dense refinements. Mixed horizontal and
+vertical mate-pasting commute with refinement; the compactification cocycle cancels the
+intermediate comparisons (det-nagata-refinement-common-dense,
+det-sf-comp-coherence-refinement, det-sf-comp-coherence-cocycle,
+lem-zl-condensed-open-proper-pasting). This gives simultaneous independence.
+4. Expand both threefold bracketings. Disjoint moves commute; overlapping moves are the
+mixed-pasting equations or the proper/open compositor associativity laws. Identity models
+give both unit equations. These are equations of actual ambient arrows on every Loc object.
+5. Arbitrary scheme pullback preserves Dctf and sums. Proper exchange is invertible on Dctf
+by lem-zl-condensed-arbitrary-proper-generators and lem-weil-pbc-proper-base-change, and on
+Loc by det-proper-image-localizing-proper, lem-sfb-ambient-qcqs-exchange-canonical-shifts and
+det-sf-determination-localizing. Pullback preservation is lem-zl-condensed-arbitrary-pullback.
+No vertical map is required to respect the ground field.
+6. Pull back each compactification literally, allowing nondense models. Compose proper
+exchange with the inverse of the open-adjunction mate and the normalized compactification
+comparison (lemma-nagata-compactification-base-change). The theorem
+lem-sfb-compact-support-refinement-base-change and the cocycle prove choice independence.
+7. Expand composition/exchange into these proper and open mates. Mate-pasting, the mixed
+cube equation and open composition give the displayed equation, with canonical associators
+(lem-zl-condensed-open-proper-pasting, lem-weil-pbc-mate-pasting,
+lem-sfb-ringed-derived-monoidal-comparisons).
+Fullness and the preservation clauses restrict every comparison and equation to Dctf. -/
+theorem coherent_exists (ℓ p : ℕ) [Fact ℓ.Prime] [Fact p.Prime]
+    (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) :
+    Coherent Λ k := by
+  sorry
 
 end CompactSupportComposition
 end AlgebraicGeometry.ProEtale.CondensedRing

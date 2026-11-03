@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RankOneDivisorClassIntegral
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RankOneCompactCohomologyConcentration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RankOneCompactTwistCancellation
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RankOneTopClassNormalization
 
 /-! # Rank-one Thom isomorphism
 
@@ -44,13 +48,14 @@ Proof:
 1. The zero section is a smooth Cartier divisor over the base. Apply the global
    frame-independent divisor-class construction; the local class is the positive
    Kummer boundary. The recorded proper-section comparison defines exactly tau.
-2. Pull back to each geometric point and trivialize the fibre line. The full derived
-   arrow is the supported-origin arrow followed by the specified forget-support map.
-   The supported-origin normalization and support-to-compact comparison make both
-   arrows invertible for each admissible coefficient. The Tate line is locally free
-   of rank one, and compact support preserves bounded constructible finite-Tor objects.
-   Thus the cone is bounded constructible. Geometric-point detection makes it zero,
-   so tau is invertible.
+2. Use the independent P1 Kummer/Picard-degree decomposition and infinity
+   localization to calculate the compact-support cohomology of the geometric line.
+   Retain the actual supported-to-compact counit: the class maps to -h, because
+   cl(0)=-c0, and the trace takes h to one. Thus H0 of the specified tau is invertible;
+   all other cohomology groups of its target vanish. Compact exchange and geometric
+   detection give the finite relative assertions. Canonical coefficient comparisons,
+   completeness and the compatible integral calculation give all admissible coefficients.
+   Isomorphisms in the ordinary derived category are detected on every homology object.
 3. Pullback preserves the zero-divisor pair and its positive Kummer class. Naturality
    of proper-section composition and compact exchange gives the displayed base-change
    law for the actual arrows, including identity maps. Define the trace as the inverse;
@@ -89,7 +94,27 @@ theorem rank_one_thom
        let negativeLine := (DerivedCategory.singleFunctor (Modules Λ B) 0).obj
           (coefficientSignedTwist B (condensedRingObj Λ.X B) (line P Λ hΛ B) (-1))
        Nonempty (Rπ ≅ negativeLine ⟦(-2 : ℤ)⟧)) := by
-  sorry
+  have : IsIso (canonicalTau P b V Λ hΛ c) := by
+    apply (DerivedCategory.isIso_iff (Modules Λ B) _).mpr
+    intro q
+    by_cases hq : q = 0
+    · subst q
+      exact rankOne_top_class_normalization P b V Λ hΛ c
+    · have hsource : IsZero ((DerivedCategory.homologyFunctor (Modules Λ B) q).obj
+          ((DerivedCategory.singleFunctor (Modules Λ B) 0).obj (unit Λ B))) := by
+        rcases lt_or_gt_of_ne hq with hlt | hgt
+        · exact DerivedCategory.isZero_of_isGE _ 0 q hlt
+        · exact DerivedCategory.isZero_of_isLE _ 0 q hgt
+      exact hsource.isIso (rankOne_compact_cohomology_concentration P b V Λ hΛ c q hq) _
+  refine ⟨rankOne_zero_ideal P b V, inferInstance, ?_, ?_, ?_⟩
+  · intro B' b' _ _ _ V' g gV sq hz hb
+    exact (rank_one_divisor_class_integral P b V Λ hΛ).base_change c b' V' g gV hb sq hz
+  · exact ⟨inv (canonicalTau P b V Λ hΛ c), IsIso.hom_inv_id _, IsIso.inv_hom_id _⟩
+  · obtain ⟨e⟩ := rankOne_compact_twist_cancellation P b V Λ hΛ c
+    exact ⟨e.symm ≪≫
+      whiskerRightIso (asIso (canonicalTau P b V Λ hΛ c)).symm _ ≪≫
+      whiskerRightIso (DerivedCategory.singleFunctorObjUnitIso (Modules Λ B)) _ ≪≫
+      λ_ _⟩
 
 /-- The rank-one vector-bundle trace is the inverse of the specified positive Thom map.
 Source: latest blueprint, `thm-pur-rank-one-thom`, inverse-trace sentence

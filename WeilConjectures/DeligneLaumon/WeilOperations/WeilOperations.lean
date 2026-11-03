@@ -47,6 +47,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.Compactification.Triangle
+public import WeilConjectures.AlgebraicGeometry.Exact.ExactCondensedExchangeComparison
+public import WeilConjectures.CategoryTheory.AdjunctionUnitCounitNormalization
+public import WeilConjectures.CategoryTheory.Endofunctor.FixedPairDerivedSingleStructure
+public import WeilConjectures.SixFunctors.FrobeniusSquareExchange.FrobeniusCompactExchangeInvertible
+public import WeilConjectures.SixFunctors.FrobeniusSquareExchange.FrobeniusSquareExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExchangeProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.DerivedOpenRestrictionNormalization
+public import WeilConjectures.SmoothPurity.CurrentExceptionalAdjointAdmissibility
 
 /-! # Canonical Weil structures on operations and their algebraic maps
 
@@ -179,6 +187,26 @@ structure OrdinaryModel (f₀ : X₀ ⟶ Y₀)
         (D.geometricFiberMap f₀)).map (comparison.pullForget.inv.app K) ≫
       comparison.pushForget.inv.app ((nativeWeilPullback D ell c f₀).obj K)
 
+/-- The ordinary-operation model needs no separate unit compatibility input: the
+normalized counit already determines it.
+
+Source: lem-fix-weil-operations.proof.md, paragraph 3, ordinary adjunction
+(blueprint: lem-fix-weil-operations). -/
+def OrdinaryModel.ofComparisonData (f₀ : X₀ ⟶ Y₀)
+    (tX : TensorModel (D := D) (ell := ell) (c := c) X₀)
+    (tY : TensorModel (D := D) (ell := ell) (c := c) Y₀)
+    (d : CondensedWeilProjection.ComparisonData (WeilCoefficient.ab c)
+      (D.geometricFrobenius X₀) (D.geometricFrobenius Y₀)
+      (D.geometricFiberMap f₀) (nativeWeilGeometricSquare D f₀)
+      (tZ := tX.presentation) (tY := tY.presentation)) : OrdinaryModel f₀ tX tY where
+  comparison := d
+  unit_normalization := by
+    let := tX.presentation
+    let := tY.presentation
+    intro K
+    exact adjunction_unit_of_counit_normalization d.adjunction
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (WeilCoefficient.ab c)
+        (D.geometricFiberMap f₀)) d.pullForget d.pushForget d.counit_normalization K
 
 /-- Native Frobenius after the canonical exact/left-derived comparison.
 Source: lem-fix-weil-operations.proof.md, paragraph 1
@@ -194,6 +222,16 @@ Source: lem-fix-weil-operations.proof.md, paragraph 1
 def directFrobenius (f₀ : X₀ ⟶ Y₀) :=
   CondensedRing.moduleObjectDerivedExchange (WeilCoefficient.ab c)
     (nativeWeilGeometricSquare D f₀)
+
+/-- Frobenius exchange for compact support is invertible. The direct exchange is
+invertible for the proper factor because both vertical arrows are isomorphisms; the
+open factor is a composite of whiskered isomorphisms. No constructibility assumption
+is required for this calculation.
+Source: lem-fix-weil-operations.proof.md, paragraph 1, inverse-square argument
+(blueprint: lem-fix-weil-operations). -/
+theorem compactFrobenius_isIso (f₀ : X₀ ⟶ Y₀) (c₀ : Compactification f₀.left) :
+    IsIso (compactFrobenius (D := D) (c := c) f₀ c₀) := by
+  exact FrobeniusSquareExchange.compact_isIso _ _ _ _
 
 /-- Canonical forgetting of compact support, assembled from exact open forgetting and
 unit-normalized proper forgetting in the displayed order. Source:
@@ -232,7 +270,20 @@ theorem triangleExchange_isIso
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (T : Compactification.Triangle f g) :
     IsIso (CondensedRing.moduleObjectDerivedExchange Λ T.isPullback.flip.toCommSq) := by
-  sorry
+  apply (NatTrans.isIso_iff_isIso_app _).mpr
+  intro K
+  obtain ⟨e⟩ := totalDerivedExchange_exact_comparisonFor Λ T.isPullback.flip.toCommSq K
+  have hi := (CondensedRing.derivedOpenRestrictionNormalization Λ T.isPullback.flip).derived_isIso
+  have h : exactCondensedExchangeFor Λ T.isPullback.flip.toCommSq =
+      CondensedRing.derivedDirectImageOpenRestriction Λ T.isPullback.flip.toCommSq := by
+    unfold exactCondensedExchangeFor CondensedRing.derivedDirectImageOpenRestriction
+      CondensedRing.derivedOpenCoherencePullbackSquare condensedPullbackSquareFor
+      CondensedRing.openCoherencePullbackSquare
+    rfl
+  have : IsIso ((exactCondensedExchangeFor Λ T.isPullback.flip.toCommSq).app K) := by
+    rw [h]
+    infer_instance
+  exact (Arrow.isIso_iff_isIso_of_isIso e.hom).mpr this
 
 /-- The canonical compact-support compositor on a triangle: transpose the inverse
 restriction exchange, compose the two opens, then compose the proper direct images.

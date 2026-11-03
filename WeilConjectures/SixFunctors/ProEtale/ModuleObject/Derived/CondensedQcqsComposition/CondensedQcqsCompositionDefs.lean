@@ -25,6 +25,7 @@ public import WeilConjectures.CategoryTheory.Shift.RestrictFullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.IdIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOpenProper.CondensedProperOpenQcqsCalculus
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedQcqsComposition.QcqsTowerNormalizationLaw
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.QcqsExchangeShiftWord
 /-! # Condensed compact-support composition over quasi-separated bases
 
 Definition interface (blueprint: def-zl-qcqs-composition-defs).
@@ -104,6 +105,48 @@ abbrev pull {X : Scheme.{u}} (a : X ≅ X) : C ℓ X ⥤ C ℓ X :=
   (bc ℓ X).lift ((bc ℓ X).ι ⋙ StrictWeilCondensed.action (Profinite.padicAlgClRingObj ℓ) a)
     (fun K ↦ ((StrictWeilCondensed.action_preserves (Profinite.padicAlgClRingObj ℓ) a K.obj).1).2
       K.property)
+
+/-- The canonical exchange as a natural transformation on the constructible source.
+Source: latest blueprint, automorphism exchange in lem-fix-weil-operations.proof, paragraph 1
+(blueprint: def-zl-qcqs-composition-defs).
+
+Construction: whisker the inverse exact-to-total pullback identification for b, the proper/open
+square exchange, the image of the identification for a, and the prescribed system comparison.
+Their composite is natural by composition of natural transformations; its component at K is
+the specified four-factor exchange morphism. -/
+@[irreducible] def exchangeTransformation
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (S : System ℓ f)
+    (a : X ≅ X) (b : Y ≅ Y) (sq : IsPullback a.hom f f b.hom)
+    (c : Compactification f) :
+    (S.support ℓ c ⋙ pull ℓ b) ⋙ (bc ℓ Y).ι ⟶
+      (pull ℓ a ⋙ S.support ℓ c) ⋙ (bc ℓ Y).ι :=
+  ObjectProperty.exchangeWord
+    (catC₀ :=
+          inferInstanceAs (Category
+            (CompactificationReindexing.D (Profinite.padicAlgClRingObj ℓ) X)))
+    (catD₀ :=
+          inferInstanceAs (Category
+            (CompactificationReindexing.D (Profinite.padicAlgClRingObj ℓ) Y)))
+    (bc ℓ X) (bc ℓ Y)
+    (CompactificationReindexing.F (Profinite.padicAlgClRingObj ℓ) c)
+    (CompactificationReindexing.F (Profinite.padicAlgClRingObj ℓ) (c.ofIsPullback sq))
+    (StrictWeilCondensed.action (Profinite.padicAlgClRingObj ℓ) a)
+    (CompactificationReindexing.P (Profinite.padicAlgClRingObj ℓ) a.hom)
+    (StrictWeilCondensed.action (Profinite.padicAlgClRingObj ℓ) b)
+    (CompactificationReindexing.P (Profinite.padicAlgClRingObj ℓ) b.hom)
+    (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj ℓ) a.hom)
+    (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj ℓ) b.hom)
+    (S.preserves c)
+    (fun K ↦ ((StrictWeilCondensed.action_preserves
+      (Profinite.padicAlgClRingObj ℓ) a K.obj).1).2 K.property)
+    (fun K ↦ ((StrictWeilCondensed.action_preserves
+      (Profinite.padicAlgClRingObj ℓ) b K.obj).1).2 K.property)
+    (CompactificationReindexing.squareExchange (Profinite.padicAlgClRingObj ℓ)
+      (c := c) (c' := c.ofIsPullback sq) (w := a.hom) (v := b.hom)
+      { middle := pullback.fst c.g b.hom
+        openSquare := c.isPullback_i_ofIsPullback sq
+        properSquare := (c.isPullback_g_ofIsPullback sq).flip.toCommSq })
+      (S.comparison (c.ofIsPullback sq) c)
 
 /-- The specified compositor on a compatible compactification tower. Its middle map
 is the unique identity-on-open normalized proper/open interchange, not an arbitrary map.

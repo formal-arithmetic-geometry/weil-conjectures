@@ -51,6 +51,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationCoherenceCocycle
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationRefinementLocalizing
 import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoverRestrictionConservative
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
 
 /-! # Canonical compatibilities of the localizing exceptional inverse image
 
@@ -277,6 +281,192 @@ def compactificationIso {X Y : SepFinType k} (f : X ⟶ Y)
           (c (compactificationProper k d)))))
     (compactificationLeftComparison Λ k H c f d)
 
+private theorem conjugate_transport
+    {A B M : Type*} [Category A] [Category B]
+    (L : M → A ⥤ B) (R : M → B ⥤ A) (a : ∀ m, L m ⊣ R m)
+    {f g : M} (h : f = g) :
+    conjugateIsoEquiv (a g) (a f) (eqToIso (congrArg L h)) =
+      (eqToIso (congrArg R h)).symm := by
+  cases h
+  ext : 1
+  exact conjugateEquiv_id _
+
+private theorem conjugate_unit_left
+    {A B : Type*} [Category A] [Category B]
+    {I : A ⥤ A} {J : A ⥤ A} (aI : I ⊣ J)
+    {L T : A ⥤ B} {R S : B ⥤ A} (aL : L ⊣ R) (aT : T ⊣ S)
+    (e : I ≅ 𝟭 A) (α : I ⋙ L ≅ T) (t : T ≅ L)
+    (ht : α ≪≫ t = Functor.isoWhiskerRight e L ≪≫ Functor.leftUnitor L) :
+    conjugateIsoEquiv aT (aI.comp aL) α ≪≫
+        Functor.isoWhiskerLeft R (conjugateIsoEquiv aI Adjunction.id e.symm) ≪≫
+        Functor.rightUnitor R = (conjugateIsoEquiv aL aT t).symm := by
+  have hh := congrArg (conjugateIsoEquiv aL (aI.comp aL)) ht
+  rw [conjugateIsoEquiv_trans aL aT (aI.comp aL),
+    conjugateIsoEquiv_trans aL (Adjunction.id.comp aL) (aI.comp aL),
+    conjugateIsoEquiv_leftUnitor,
+    conjugateIsoEquiv_isoWhiskerRight] at hh
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  have hk := congrArg (fun z ↦ z.hom.app K) hh
+  simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+    Functor.rightUnitor_inv_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Category.id_comp] at hk
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.rightUnitor_hom_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
+  rw [← cancel_epi ((conjugateIsoEquiv aL aT t).hom.app K), ← Category.assoc, hk]
+  simp only [conjugateIsoEquiv_iso_symm, Iso.symm_hom, Iso.hom_inv_id_app_assoc,
+    Iso.hom_inv_id_app]
+
+private theorem conjugate_unit_right
+    {A B : Type*} [Category A] [Category B]
+    {I : B ⥤ B} {J : B ⥤ B} (aI : I ⊣ J)
+    {L T : A ⥤ B} {R S : B ⥤ A} (aL : L ⊣ R) (aT : T ⊣ S)
+    (e : I ≅ 𝟭 B) (α : L ⋙ I ≅ T) (t : T ≅ L)
+    (ht : α ≪≫ t = Functor.isoWhiskerLeft L e ≪≫ Functor.rightUnitor L) :
+    conjugateIsoEquiv aT (aL.comp aI) α ≪≫
+        Functor.isoWhiskerRight (conjugateIsoEquiv aI Adjunction.id e.symm) R ≪≫
+        Functor.leftUnitor R = (conjugateIsoEquiv aL aT t).symm := by
+  have hh := congrArg (conjugateIsoEquiv aL (aL.comp aI)) ht
+  rw [conjugateIsoEquiv_trans aL aT (aL.comp aI),
+    conjugateIsoEquiv_trans aL (aL.comp Adjunction.id) (aL.comp aI),
+    conjugateIsoEquiv_rightUnitor,
+    conjugateIsoEquiv_isoWhiskerLeft] at hh
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  have hk := congrArg (fun z ↦ z.hom.app K) hh
+  simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+    Functor.leftUnitor_inv_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Category.id_comp] at hk
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.leftUnitor_hom_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app]
+  rw [← cancel_epi ((conjugateIsoEquiv aL aT t).hom.app K), ← Category.assoc, hk]
+  simp only [conjugateIsoEquiv_iso_symm, Iso.symm_hom]
+  rw [← Category.assoc, ← R.map_comp, Iso.hom_inv_id_app, R.map_id]
+  simp only [Iso.hom_inv_id_app]
+  exact Category.id_comp _
+
+private theorem lower_congr_hom {X Y : SepFinType k} {f g : X ⟶ Y} (h : f = g)
+    (K : (localizingClosureProEtale Λ X.obj.left).FullSubcategory) :
+    ((eqToIso (congrArg (fun t ↦ lower Λ k H t (c t)) h)).hom.app K).hom =
+      (H.comparison f (c f) ((c g).copy (congrArg (fun t ↦ t.hom.left) h))).hom.app K := by
+  cases h
+  exact (congrArg (fun e ↦ e.hom.app K) (H.laws.2.1 f (c f))).symm
+
+private theorem lower_congr_hom' {X Y : SepFinType k} {f g : X ⟶ Y} (h : f = g)
+    (K : (localizingClosureProEtale Λ X.obj.left).FullSubcategory) :
+    ((eqToIso (congrArg (fun t ↦ lower Λ k H t (c t)) h)).hom.app K).hom =
+      (H.comparison g ((c f).copy (congrArg (fun t ↦ t.hom.left) h).symm) (c g)).hom.app K := by
+  cases h
+  exact (congrArg (fun e ↦ e.hom.app K) (H.laws.2.1 f (c f))).symm
+
+private theorem lower_assoc {X Y Z W : SepFinType k}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) :
+    Functor.isoWhiskerRight (lowerComposition Λ k H f g (c f) (c g) (c (f ≫ g)))
+        (lower Λ k H h (c h)) ≪≫
+      lowerComposition Λ k H (f ≫ g) h (c (f ≫ g)) (c h) (c ((f ≫ g) ≫ h)) ≪≫
+      eqToIso (congrArg (fun t ↦ lower Λ k H t (c t)) (Category.assoc f g h)) =
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (lower Λ k H f (c f))
+        (lowerComposition Λ k H g h (c g) (c h) (c (g ≫ h))) ≪≫
+      lowerComposition Λ k H f (g ≫ h) (c f) (c (g ≫ h)) (c (f ≫ g ≫ h)) := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp]
+  apply ObjectProperty.hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom]
+  change
+    (rightDerivedLowerShriekOfCompactification Λ (c h)).map
+        ((H.comp f g (c f) (c g) (c (f ≫ g))).hom.app K) ≫
+      ((H.comp (f ≫ g) h (c (f ≫ g)) (c h) (c ((f ≫ g) ≫ h))).hom.app K ≫
+        ((eqToIso (congrArg (fun t ↦ lower Λ k H t (c t))
+          (Category.assoc f g h))).hom.app K).hom) =
+    (H.comp g h (c g) (c h) (c (g ≫ h))).hom.app
+        ⟨_, (H.preserves f (c f)).1 K.obj K.property⟩ ≫
+      (H.comp f (g ≫ h) (c f) (c (g ≫ h)) (c (f ≫ g ≫ h))).hom.app K
+  erw [lower_congr_hom' Λ k H c (Category.assoc f g h) K]
+  have ha := H.laws.2.2.2.2.2.2.2.1 f g h (c f) (c g) (c h)
+    (c (f ≫ g)) (c (g ≫ h)) (c ((f ≫ g) ≫ h)) K
+  have ha' := congrArg (fun t ↦ t ≫
+    (H.comparison (f ≫ g ≫ h)
+      ((c ((f ≫ g) ≫ h)).copy (Category.assoc _ _ _).symm)
+      (c (f ≫ g ≫ h))).hom.app K) ha
+  refine (Category.assoc _ _ _).symm.trans (ha'.trans ?_)
+  refine (Category.assoc _ _ _).trans ?_
+  have hi := H.laws.2.2.2.2.1 f (g ≫ h) (c f) (c f) (c (g ≫ h)) (c (g ≫ h))
+    ((c ((f ≫ g) ≫ h)).copy (Category.assoc _ _ _).symm) (c (f ≫ g ≫ h)) K
+  simp only [H.laws.2.1, Iso.refl_hom, NatTrans.id_app] at hi
+  erw [CategoryTheory.Functor.map_id] at hi
+  erw [Category.id_comp
+    ((H.comp f (g ≫ h) (c f) (c (g ≫ h)) (c (f ≫ g ≫ h))).hom.app K)] at hi
+  simpa only [Category.id_comp] using congrArg
+      (fun t ↦ (H.comp g h (c g) (c h) (c (g ≫ h))).hom.app
+        ⟨_, (H.preserves f (c f)).1 K.obj K.property⟩ ≫ t) hi
+
+private theorem lower_unit_left {X Y : SepFinType k} (f : X ⟶ Y) :
+    lowerComposition Λ k H (𝟙 X) f (c (𝟙 X)) (c f) (c (𝟙 X ≫ f)) ≪≫
+        eqToIso (congrArg (fun t ↦ lower Λ k H t (c t)) (Category.id_comp f)) =
+      Functor.isoWhiskerRight (lowerIdentity Λ k H c X) (lower Λ k H f (c f)) ≪≫
+        Functor.leftUnitor _ := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app]
+  refine Eq.trans ?_ (Category.comp_id _).symm
+  apply ObjectProperty.hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom]
+  change (H.comp (𝟙 X) f (c (𝟙 X)) (c f) (c (𝟙 X ≫ f))).hom.app K ≫
+      ((eqToIso (congrArg (fun t ↦ lower Λ k H t (c t))
+        (Category.id_comp f))).hom.app K).hom =
+    (rightDerivedLowerShriekOfCompactification Λ (c f)).map
+      ((H.comparison (𝟙 X) (c (𝟙 X))
+          (Compactification.ofIsProper (𝟙 X.obj.left))).hom.app K ≫
+        (CompactSupportComposition.identity Λ X.obj.left).hom.app K.obj)
+  erw [lower_congr_hom Λ k H c (Category.id_comp f) K]
+  have hi := H.laws.2.2.2.2.1 (𝟙 X) f (c (𝟙 X))
+    (Compactification.ofIsProper (𝟙 X.obj.left)) (c f) (c f)
+    (c (𝟙 X ≫ f)) ((c f).copy (Category.id_comp f.hom.left)) K
+  simp only [H.laws.2.1, Iso.refl_hom, NatTrans.id_app,
+    H.laws.2.2.2.2.2.1] at hi
+  erw [Category.id_comp
+    ((rightDerivedLowerShriekOfCompactification Λ (c f)).map
+      ((CompactSupportComposition.identity Λ X.obj.left).hom.app K.obj))] at hi
+  simpa only [CategoryTheory.Functor.map_comp] using hi
+
+private theorem lower_unit_right {X Y : SepFinType k} (f : X ⟶ Y) :
+    lowerComposition Λ k H f (𝟙 Y) (c f) (c (𝟙 Y)) (c (f ≫ 𝟙 Y)) ≪≫
+        eqToIso (congrArg (fun t ↦ lower Λ k H t (c t)) (Category.comp_id f)) =
+      Functor.isoWhiskerLeft (lower Λ k H f (c f)) (lowerIdentity Λ k H c Y) ≪≫
+        Functor.rightUnitor _ := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app]
+  refine Eq.trans ?_ (Category.comp_id _).symm
+  apply ObjectProperty.hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom]
+  change (H.comp f (𝟙 Y) (c f) (c (𝟙 Y)) (c (f ≫ 𝟙 Y))).hom.app K ≫
+      ((eqToIso (congrArg (fun t ↦ lower Λ k H t (c t))
+        (Category.comp_id f))).hom.app K).hom =
+    (H.comparison (𝟙 Y) (c (𝟙 Y))
+        (Compactification.ofIsProper (𝟙 Y.obj.left))).hom.app
+          ⟨_, (H.preserves f (c f)).1 K.obj K.property⟩ ≫
+      (CompactSupportComposition.identity Λ Y.obj.left).hom.app
+        ((rightDerivedLowerShriekOfCompactification Λ (c f)).obj K.obj)
+  erw [lower_congr_hom Λ k H c (Category.comp_id f) K]
+  have hi := H.laws.2.2.2.2.1 f (𝟙 Y) (c f) (c f) (c (𝟙 Y))
+    (Compactification.ofIsProper (𝟙 Y.obj.left))
+    (c (f ≫ 𝟙 Y)) ((c f).copy (Category.comp_id f.hom.left)) K
+  simp only [H.laws.2.1, Iso.refl_hom, NatTrans.id_app] at hi
+  erw [CategoryTheory.Functor.map_id] at hi
+  simpa only [Category.id_comp, H.laws.2.2.2.2.2.2.1] using hi
+
 /-- The comparisons above are associative and unital. Together with sourceOpenIso and
 targetOpenIso, detection of isomorphisms by arbitrary open covers says precisely that
 f! can be computed locally on both source and target.
@@ -327,7 +517,77 @@ theorem coherence_and_locality
     (∀ (X : SepFinType k) (I : Type w) (U : I → X.obj.left.Opens), iSup U = ⊤ →
       ∀ {K L : (localizingClosureProEtale Λ X.obj.left).FullSubcategory} (b : K ⟶ L),
         (∀ i, IsIso ((upperStar Λ (U i).ι).mapDerivedCategory.map b.hom)) → IsIso b) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro X Y Z W f g h
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    have hl (M : (localizingClosureProEtale Λ X.obj.left).FullSubcategory) :=
+      congrArg (fun e ↦ e.inv.app M) (lower_assoc Λ k H c f g h)
+    have hinv (M : (localizingClosureProEtale Λ X.obj.left).FullSubcategory) :
+        (lowerComposition Λ k H (f ≫ g) h
+          (c (f ≫ g)) (c h) (c ((f ≫ g) ≫ h))).inv.app M ≫
+          (lower Λ k H h (c h)).map
+            ((lowerComposition Λ k H f g (c f) (c g) (c (f ≫ g))).inv.app M) =
+        eqToHom (congrArg (fun t ↦ (lower Λ k H t (c t)).obj M)
+            (Category.assoc f g h)) ≫
+          (lowerComposition Λ k H f (g ≫ h)
+            (c f) (c (g ≫ h)) (c (f ≫ g ≫ h))).inv.app M ≫
+          (lowerComposition Λ k H g h (c g) (c h) (c (g ≫ h))).inv.app
+            ((lower Λ k H f (c f)).obj M) := by
+      have hm := hl M
+      simp only [Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_inv,
+        Functor.whiskerRight_app, Functor.associator_inv_app,
+        Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Category.comp_id] at hm
+      have hh := congrArg
+        (fun z ↦ (eqToIso (congrArg (fun t ↦ lower Λ k H t (c t))
+          (Category.assoc f g h))).hom.app M ≫ z) hm
+      simpa only [eqToIso.hom, eqToIso.inv, eqToHom_app, ← Category.assoc,
+        eqToHom_trans, eqToHom_refl, NatTrans.id_app, Category.id_comp] using hh
+    simpa only [composition, congr, Iso.symm_symm_eq, Iso.trans_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Category.comp_id, eqToIso.hom, eqToHom_app] using
+      conjugateIsoEquiv_assoc_aux
+        (fun t ↦ lower Λ k H t (c t)) G adj (Category.assoc f g h)
+        (adj f) (adj g) (adj h) (adj (f ≫ g)) (adj (g ≫ h))
+        (lowerComposition Λ k H f g (c f) (c g) (c (f ≫ g))).symm
+        (lowerComposition Λ k H g h (c g) (c h) (c (g ≫ h))).symm
+        (lowerComposition Λ k H (f ≫ g) h
+          (c (f ≫ g)) (c h) (c ((f ≫ g) ≫ h))).symm
+        (lowerComposition Λ k H f (g ≫ h)
+          (c f) (c (g ≫ h)) (c (f ≫ g ≫ h))).symm hinv K
+  · intro X Y f
+    have ht := conjugate_unit_left (adj (𝟙 X)) (adj f) (adj (𝟙 X ≫ f))
+      (lowerIdentity Λ k H c X)
+      (lowerComposition Λ k H (𝟙 X) f (c (𝟙 X)) (c f) (c (𝟙 X ≫ f)))
+      (eqToIso (congrArg (fun t ↦ lower Λ k H t (c t)) (Category.id_comp f)))
+      (lower_unit_left Λ k H c f)
+    rw [conjugate_transport (fun t ↦ lower Λ k H t (c t)) G adj
+      (Category.id_comp f)] at ht
+    exact ht
+  · intro X Y f
+    have ht := conjugate_unit_right (adj (𝟙 Y)) (adj f) (adj (f ≫ 𝟙 Y))
+      (lowerIdentity Λ k H c Y)
+      (lowerComposition Λ k H f (𝟙 Y) (c f) (c (𝟙 Y)) (c (f ≫ 𝟙 Y)))
+      (eqToIso (congrArg (fun t ↦ lower Λ k H t (c t)) (Category.comp_id f)))
+      (lower_unit_right Λ k H c f)
+    rw [conjugate_transport (fun t ↦ lower Λ k H t (c t)) G adj
+      (Category.comp_id f)] at ht
+    exact ht
+  · intro X I U hcover K L b hb
+    let C : Scheme.Cover.{w} Scheme.proetalePrecoverage X.obj.left :=
+      { I₀ := I
+        X i := (U i).toScheme
+        f i := (U i).ι
+        mem₀ := ofArrows_opens_ι_mem_proetalePrecoverage U (by
+          intro x
+          have hx : x ∈ iSup U := by rw [hcover]; trivial
+          exact TopologicalSpace.Opens.mem_iSup.mp hx) }
+    have hi : IsIso b.hom :=
+      ((condensed_cover_restriction_conservative (Mon.mk Λ) X.obj.left C).1
+        K.obj L.obj b.hom).2 hb
+    exact (ObjectProperty.isIso_hom_iff b).1 hi
 
 end LocalizingExceptionalCompatibilities
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -91,4 +91,74 @@ noncomputable def exchangeProjectionData {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
     simpa only [pf] using
       (exceptionalProjectionMorphismOfCompactification_natural_right Λ c K ψ)
 
+/-- Independence of the specified compact-support exchange from compactification.
+
+The two comparison families are normalized by every common refinement, before
+and after the same arbitrary base change.  The last equation therefore compares
+exactly the constructed exchange maps, rather than unspecified isomorphisms.
+
+Source: blueprint `def-exchange-projection`, compactification-independence
+sentence; repair note, Wei Yang #1412 item 2 (blueprint: def-exchange-projection).
+
+Proof: for a refinement, the open-adjunction transpose of the identity on the
+common open defines its canonical morphism.  Restriction to the complementary
+closed subscheme is zero by the original-coefficient boundary-vanishing lemma;
+joint open/closed detection makes the refinement morphism invertible.  The two
+base-change/refinement composites both restrict to the same identity on the
+common open.  Open adjunction equates them, and proper direct image together
+with mate pasting gives refinement-exchange compatibility.  Choose a common
+refinement for each pair.  The refinement identity and composition laws, after
+passing to a common further refinement, give independence of choices and
+naturality.  Apply the compatibility to both common-refinement arrows and
+cancel their invertible images.  This gives the final equality without changing
+coefficients or inverting the exchange map.
+-/
+theorem exchangeProjection_compactification_independent
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]
+    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]
+    (n : ℕ) (_hn : 1 ≤ n)
+    (_hcoeff :
+      Nonempty (Mon.mk Λ ≅ Mon.mk (properOpenFiniteCoefficient ℓ E n)) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (properOpenIntegralCoefficient ℓ E)) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (properOpenFieldCoefficient ℓ E)) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))
+    (S : Scheme.{u}) (_hℓ : ∀ s : S, IsUnit (ℓ : S.residueField s))
+    {X Y Y' : Scheme.{u}}
+    [X.Over S] [Y.Over S] [Y'.Over S]
+    [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)]
+    [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)]
+    [LocallyOfFiniteType (Y' ↘ S)] [QuasiCompact (Y' ↘ S)]
+    (f : X ⟶ Y) [f.IsOver S] [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f]
+    (v : Y' ⟶ Y) [v.IsOver S] [IsSeparated v]
+    [LocallyOfFiniteType v] [QuasiCompact v] :
+    ∃ τ : ∀ c₁ c₂ : Compactification f,
+        (boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c₁ ≅
+          (boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c₂,
+      ∃ τ' : ∀ c₁ c₂ : Compactification f,
+        (boundedConstructible (condensedRingObj Λ X)).ι ⋙
+            P Λ (pullback.fst f v) ⋙ F Λ (c₁.baseChange v) ≅
+          (boundedConstructible (condensedRingObj Λ X)).ι ⋙
+            P Λ (pullback.fst f v) ⋙ F Λ (c₂.baseChange v),
+        (∀ (c₁ c₂ d : Compactification f) (h₁ : d.Refinement c₁)
+            (h₂ : d.Refinement c₂)
+            (K : BoundedConstructible (condensedRingObj Λ X)),
+          (τ c₁ c₂).hom.app K ≫ (refinement Λ h₂).app K.obj =
+            (refinement Λ h₁).app K.obj) ∧
+        (∀ (c₁ c₂ d : Compactification f) (h₁ : d.Refinement c₁)
+            (h₂ : d.Refinement c₂)
+            (K : BoundedConstructible (condensedRingObj Λ X)),
+          (τ' c₁ c₂).hom.app K ≫
+              (refinement Λ (refinementBaseChange h₂ v)).app
+                ((P Λ (pullback.fst f v)).obj K.obj) =
+            (refinement Λ (refinementBaseChange h₁ v)).app
+              ((P Λ (pullback.fst f v)).obj K.obj)) ∧
+        (∀ (c₁ c₂ : Compactification f)
+            (K : BoundedConstructible (condensedRingObj Λ X)),
+          (P Λ v).map ((τ c₁ c₂).hom.app K) ≫
+              (exchangeProjectionData Λ c₂ v).compact.app K.obj =
+            (exchangeProjectionData Λ c₁ v).compact.app K.obj ≫
+              (τ' c₁ c₂).hom.app K) := by
+  sorry
+
 end AlgebraicGeometry.ProEtale.CondensedRing

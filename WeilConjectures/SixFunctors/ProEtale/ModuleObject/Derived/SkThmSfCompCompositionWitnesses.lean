@@ -220,6 +220,27 @@ theorem sk_thm_sf_comp_composition_witnesses
     hp.elim fun c hc => hc.elim fun m hm => hm.elim fun o ho => ho.elim fun b hb =>
       hb.elim fun e h => ⟨⟨p, c, m, o, b, e⟩, h⟩
 
+/-- The comparison cocycle for the same single selected compact-support witness package.
+Source: sk-thm-sf-comp-composition, comparison_cocycle clause, and
+det-sf-comp-coherence-cocycle (blueprint: lem-sf-comp-witness-cocycle).
+
+Proof: apply Exists.choose_spec to sk_thm_sf_comp_composition_witnesses and project
+its third conjunct. The selected witness is definitionally compCompositionWitnesses.
+The private proof above performs this projection literally, without re-elaborating
+the large choice predicate. -/
+theorem compCompositionWitnesses_comparison_cocycle
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hk : Finite k ∨ IsAlgClosed k)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
+    {X Y : SepFinType k} (f : X ⟶ Y) (c d e : Compactification f.hom.left) :
+    (compCompositionWitnesses ℓ k hk Λ hΛ).comparison f c d ≪≫
+      (compCompositionWitnesses ℓ k hk Λ hΛ).comparison f d e =
+        (compCompositionWitnesses ℓ k hk Λ hΛ).comparison f c e := by
+  exact _private.Sheaf.SixFunctorsBasics.SkThmSfCompCompositionWitnesses.comparisonCocycle
+    ℓ k hk Λ hΛ f c d e
+
 /- The lawful witness package of `sk_thm_sf_comp_composition`, chosen once: the kernel
 declaration `compCompositionWitnesses := fun params ↦
 Exists.choose (sk_thm_sf_comp_composition_witnesses params)`. It is added directly, with

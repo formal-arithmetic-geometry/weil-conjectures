@@ -75,4 +75,19 @@ noncomputable def openWeilExtension (j₀ : U₀ ⟶ X₀) [IsOpenImmersion j₀
       condensedWeilModules (Profinite.padicAlgClRingObj l)
         (D.geometricFrobenius X₀).hom := IsoAlgebra.mapOfNatIso e
 
+/-- Inverse image `f^*` on Weil modules along a Frobenius square: the Weil structure of
+`f^*M` is `f^*(θ) ∘ (g_S^* f^* ≅ f^* g_T^*)`, the canonical pullback-composition comparison.
+Source: thm-zl-real-mixed-by-curves.md, final open–closed gluing paragraph ("every …
+inverse image is Weil-equivariant")
+(blueprint: lem-zl-condensed-open-closed-localization-maps-core). -/
+noncomputable def weilRestriction (f₀ : U₀ ⟶ X₀)
+    (sq : CommSq (D.geometricFrobenius U₀).hom (extensionGeometricMap D f₀)
+      (extensionGeometricMap D f₀) (D.geometricFrobenius X₀).hom) :
+    condensedWeilModules (Profinite.padicAlgClRingObj l)
+      (D.geometricFrobenius X₀).hom ⥤
+      condensedWeilModules (Profinite.padicAlgClRingObj l)
+        (D.geometricFrobenius U₀).hom :=
+  IsoAlgebra.mapOfNatIso (CondensedRing.upperStarSquareComparison
+    (Profinite.padicAlgClRingObj l) sq).symm
+
 end WeilConjectures.CondensedWeil

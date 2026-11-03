@@ -159,6 +159,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsC
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import WeilConjectures.AlgebraicGeometry.CompatibleKummerCoefficients.CompatibleKummerCoefficientData
+public import WeilConjectures.AlgebraicGeometry.CondensedCartier.CondensedCartierCompactExchange
 
 /-! # The compatible-root pro-etale Kummer boundary
 
@@ -236,6 +237,24 @@ Source: Stacks 03PL and the blueprint compatible-root construction
 noncomputable def compatibleUnitsProjection (T : Scheme.{u}) :
     compatibleUnits ell T ⟶ Scheme.proEtaleUnitsSheaf T :=
   limit.π (compatibleUnitsTower ell T) (op 0)
+
+/-- The finite pro-etale Kummer short complex at a positive exponent.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+abbrev finiteKummerComplex (T : Scheme.{u}) (r : ℕ) :=
+  AlgebraicGeometry.ProEtale.cartierProKummerComplex T (ell ^ r)
+
+/-- The positive connecting map of a finite Kummer short exact complex.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+noncomputable def finiteKummerBoundary (T : Scheme.{u}) (r : ℕ)
+    (h : (finiteKummerComplex ell T r).ShortExact) :
+    (DerivedCategory.singleFunctor (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}) 0).obj
+        (Scheme.proEtaleUnitsSheaf T) ⟶
+      ((DerivedCategory.singleFunctor
+          (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}) 0).obj
+          (Scheme.proEtaleRootsOfUnitySheaf T (ell ^ r))) ⟦(1 : ℤ)⟧ :=
+  h.singleδ
 
 /-- The canonical inclusion of compatible roots into compatible units.
 Source: Stacks 03PL and the blueprint compatible-root construction
@@ -337,6 +356,57 @@ Proof: this is the zeroth-coordinate normalization of `compatibleRootInclusion`.
 theorem compatibleRootZero (T : Scheme.{u}) :
     (compatibleRootInclusion ell T).hom ≫ compatibleUnitsProjection ell T = 0 := by
   exact (compatibleRootInclusion ell T).zeroth
+
+/-- The compatible-root Kummer short complex.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+noncomputable def compatibleKummerComplex (T : Scheme.{u}) :
+    ShortComplex (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}) :=
+  ShortComplex.mk (compatibleRootInclusion ell T).hom
+    (compatibleUnitsProjection ell T) (compatibleRootZero ell T)
+
+/-- The canonical positive boundary of the compatible-root complex.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+noncomputable def compatibleKummerBoundary (T : Scheme.{u})
+    (h : (compatibleKummerComplex ell T).ShortExact) :
+    (DerivedCategory.singleFunctor (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}) 0).obj
+        (Scheme.proEtaleUnitsSheaf T) ⟶
+      ((DerivedCategory.singleFunctor
+          (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}) 0).obj
+          (compatibleRoots ell T)) ⟦(1 : ℤ)⟧ :=
+  h.singleδ
+
+/-- Canonical maps on the units and root sheaves under geometric inverse image.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+structure CompatiblePullback (T' T : Scheme.{u}) (f : T' ⟶ T) where
+  unitMap :
+    (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj
+        (Scheme.proEtaleUnitsSheaf T) ⟶ Scheme.proEtaleUnitsSheaf T'
+  unitMap_canonical : unitMap = (SpTowerClasses.unitsPull f).app (op 0)
+  rootMap (n : ℕ) :
+    (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj
+        (Scheme.proEtaleRootsOfUnitySheaf T (ell ^ (n + 1))) ⟶
+      Scheme.proEtaleRootsOfUnitySheaf T' (ell ^ (n + 1))
+  rootMap_canonical (n : ℕ) :
+    rootMap n = Scheme.proEtaleRootsOfUnityInverseImageMap f (ell ^ (n + 1))
+
+/-- Projection of the delivered positive boundary to a finite root target.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+noncomputable def compatibleBoundaryAt (T : Scheme.{u}) (n : ℕ)
+    (h : (compatibleKummerComplex ell T).ShortExact) :
+    (DerivedCategory.singleFunctor (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}) 0).obj
+        (Scheme.proEtaleUnitsSheaf T) ⟶
+      ((DerivedCategory.singleFunctor
+          (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}) 0).obj
+          (Scheme.proEtaleRootsOfUnitySheaf T (ell ^ (n + 1)))) ⟦(1 : ℤ)⟧ :=
+  compatibleKummerBoundary ell T h ≫
+    (shiftFunctor (DerivedCategory (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1})) 1).map
+      ((DerivedCategory.singleFunctor
+        (Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}) 0).map
+        (compatibleRootsCoordinate ell T n))
 
 /-- The componentwise root inclusion is uniquely determined by its zeroth and positive coordinates.
 Source: Stacks Project, Tag 03PK (blueprint: `lem-pur-proetale-kummer-limit-boundary`).

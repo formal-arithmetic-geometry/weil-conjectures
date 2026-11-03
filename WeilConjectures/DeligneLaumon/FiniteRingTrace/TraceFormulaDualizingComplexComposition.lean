@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SmoothPurity.FiniteRingTrace.FiniteRingTraceDualizingComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportComposition.CurrentCompactSupportComposition
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportComposition.CondensedCompactSupportCompositionData
 
 /-! # Composition for dualizing complexes with arbitrary finite primary coefficients
 
@@ -193,6 +196,336 @@ def compositionExceptionalIdentity :
   conjugateIsoEquiv (compositionData A D ell hell hA (𝟙 X)).adjunction
     (Adjunction.id) (compositionSupportIdentity A D ell hell hA).symm
 
+-- Keep the ambient functor folded while simplifying its dependent comparison maps.
+
+private theorem compositionSupport_hom (f : X ⟶ Y) (g : Y ⟶ Z) (K : Ctf A X.left) :
+    (constantModelBoundedConstructible (coefficient A) Z.left ⊓
+        DerivedCategory.finiteTorAmplitude _).ι.map
+          ((compositionSupport A D ell hell hA f g).hom.app K) ≫
+        (eqToIso (compositionData A D ell hell hA (f ≫ g)).lower_eq).hom.app K =
+      (eqToIso (compositionData A D ell hell hA g).lower_eq).hom.app
+          ((compositionData A D ell hell hA f).lower.obj K) ≫
+        (rightDerivedLowerShriekOfCompactification (coefficient A)
+          (compactificationOverField g)).map
+            ((eqToIso (compositionData A D ell hell hA f).lower_eq).hom.app K) ≫
+          (compositionAmbient A D ell hell hA f g).hom.app K := by
+  simp only [compositionSupport,
+    Functor.FullyFaithful.preimageIso_hom, Functor.FullyFaithful.whiskeringRight,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    ObjectProperty.ι_map, ObjectProperty.homMk_hom,
+    Iso.trans_hom, Iso.symm_hom, Category.id_comp, Category.assoc,
+    Iso.inv_hom_id_app, Category.comp_id]
+  erw [Category.id_comp]
+
+private theorem compositionLower_transport (f g : X ⟶ Y) (h : f = g) (K : Ctf A X.left) :
+    (constantModelBoundedConstructible (coefficient A) Y.left ⊓
+        DerivedCategory.finiteTorAmplitude _).ι.map
+          (eqToHom (congrArg (fun t : X ⟶ Y ↦
+            (compositionData A D ell hell hA t).lower.obj K) h)) ≫
+        (eqToIso (compositionData A D ell hell hA g).lower_eq).hom.app K =
+      (eqToIso (compositionData A D ell hell hA f).lower_eq).hom.app K ≫
+        eqToHom (congrArg (fun t : X ⟶ Y ↦
+          (rightDerivedLowerShriekOfCompactification (coefficient A)
+            (compactificationOverField t)).obj K.obj) h) := by
+  subst g
+  simp
+
+private theorem compositionComparison_transport_inv (f g : X ⟶ Y) (h : f = g)
+    (K : (localizingClosureProEtale (coefficient A) X.left).FullSubcategory) :
+    ((compositionCoherence A D ell hell hA).comparison (SepFinType.homMk f)
+        ((compactificationOverField g).copy (congrArg Over.Hom.left h))
+        (compactificationOverField f)).hom.app K =
+      eqToHom (congrArg (fun t : X ⟶ Y ↦
+        (rightDerivedLowerShriekOfCompactification (coefficient A)
+          (compactificationOverField t)).obj K.obj) h.symm) := by
+  subst g
+  change ((compositionCoherence A D ell hell hA).comparison (SepFinType.homMk f)
+    (compactificationOverField f) (compactificationOverField f)).hom.app K = 𝟙 _
+  exact congrArg (fun e ↦ e.hom.app K)
+    ((compositionCoherence A D ell hell hA).laws.2.1
+      (SepFinType.homMk f) (compactificationOverField f))
+
+private def compositionAmbientImage (f : X ⟶ Y) (K : Ctf A X.left) : Ctf A Y.left :=
+  ⟨(rightDerivedLowerShriekOfCompactification (coefficient A)
+      (compactificationOverField f)).obj K.obj,
+    ((compositionCoherence A D ell hell hA).preserves (SepFinType.homMk f)
+      (compactificationOverField f)).2 K.obj K.property⟩
+
+private theorem compositionAmbient_assoc (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+    (K : Ctf A X.left) :
+    (rightDerivedLowerShriekOfCompactification (coefficient A)
+        (compactificationOverField h)).map
+          ((compositionAmbient A D ell hell hA f g).hom.app K) ≫
+        (compositionAmbient A D ell hell hA (f ≫ g) h).hom.app K ≫
+          eqToHom (congrArg (fun t : X ⟶ W ↦
+            (rightDerivedLowerShriekOfCompactification (coefficient A)
+              (compactificationOverField t)).obj K.obj) (Category.assoc f g h)) =
+      (compositionAmbient A D ell hell hA g h).hom.app
+          (compositionAmbientImage A D ell hell hA f K) ≫
+        (compositionAmbient A D ell hell hA f (g ≫ h)).hom.app K := by
+  let H := compositionCoherence A D ell hell hA
+  let i : Ctf A X.left ⥤
+      (localizingClosureProEtale (coefficient A) X.left).FullSubcategory :=
+    ObjectProperty.ιOfLE (fun K hK P _ hP ↦ hP K hK)
+  have ha := H.laws.2.2.2.2.2.2.2.1
+    (SepFinType.homMk f) (SepFinType.homMk g) (SepFinType.homMk h)
+    (compactificationOverField f) (compactificationOverField g)
+    (compactificationOverField h) (compactificationOverField (f ≫ g))
+    (compactificationOverField (g ≫ h)) (compactificationOverField ((f ≫ g) ≫ h))
+    (i.obj K)
+  have hi := H.laws.2.2.2.2.1 (SepFinType.homMk f)
+    (SepFinType.homMk g ≫ SepFinType.homMk h)
+    (compactificationOverField f) (compactificationOverField f)
+    (compactificationOverField (g ≫ h)) (compactificationOverField (g ≫ h))
+    ((compactificationOverField ((f ≫ g) ≫ h)).copy
+      (Category.assoc f.left g.left h.left).symm)
+    (compactificationOverField (f ≫ g ≫ h)) (i.obj K)
+  rw [H.laws.2.1, H.laws.2.1] at hi
+  simp only [Iso.refl_hom, NatTrans.id_app] at hi
+  dsimp only [Functor.comp_obj, ObjectProperty.ι_obj] at hi
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp] at hi
+  have ht := compositionComparison_transport_inv A D ell hell hA
+    (f ≫ g ≫ h) ((f ≫ g) ≫ h) (Category.assoc f g h).symm (i.obj K)
+  erw [ht] at hi
+  dsimp only [compositionAmbient, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, compositionAmbientImage]
+  calc
+    _ = _ := (Category.assoc _ _ _).symm
+    _ = _ := congrArg (fun v ↦ v ≫ _) ha
+    _ = _ := Category.assoc _ _ _
+    _ = _ := congrArg (fun v ↦ _ ≫ v) hi
+
+private theorem compositionSupport_assoc (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+    (K : Ctf A X.left) :
+    (compositionData A D ell hell hA h).lower.map
+        ((compositionSupport A D ell hell hA f g).hom.app K) ≫
+      (compositionSupport A D ell hell hA (f ≫ g) h).hom.app K ≫
+        eqToHom (congrArg (fun t : X ⟶ W ↦
+          (compositionData A D ell hell hA t).lower.obj K) (Category.assoc f g h)) =
+    (compositionSupport A D ell hell hA g h).hom.app
+        ((compositionData A D ell hell hA f).lower.obj K) ≫
+      (compositionSupport A D ell hell hA f (g ≫ h)).hom.app K := by
+  let sf := (eqToIso (compositionData A D ell hell hA f).lower_eq).hom.app K
+  let Mg := rightDerivedLowerShriekOfCompactification (coefficient A)
+    (compactificationOverField g)
+  let Mh := rightDerivedLowerShriekOfCompactification (coefficient A)
+    (compactificationOverField h)
+  let Mgh := rightDerivedLowerShriekOfCompactification (coefficient A)
+    (compactificationOverField (g ≫ h))
+  let Jz := (constantModelBoundedConstructible (coefficient A) Z.left ⊓
+    DerivedCategory.finiteTorAmplitude _).ι
+  let Jw := (constantModelBoundedConstructible (coefficient A) W.left ⊓
+    DerivedCategory.finiteTorAmplitude _).ι
+  have hn :
+      Jw.map ((compositionData A D ell hell hA h).lower.map
+          ((compositionSupport A D ell hell hA f g).hom.app K)) ≫
+        (eqToIso (compositionData A D ell hell hA h).lower_eq).hom.app
+          ((compositionData A D ell hell hA (f ≫ g)).lower.obj K) =
+      (eqToIso (compositionData A D ell hell hA h).lower_eq).hom.app
+          ((compositionData A D ell hell hA g).lower.obj
+            ((compositionData A D ell hell hA f).lower.obj K)) ≫
+        Mh.map (Jz.map ((compositionSupport A D ell hell hA f g).hom.app K)) :=
+    (eqToIso (compositionData A D ell hell hA h).lower_eq).hom.naturality
+      ((compositionSupport A D ell hell hA f g).hom.app K)
+  have hn' : Mh.map (Mg.map sf) ≫
+        (compositionAmbient A D ell hell hA g h).hom.app
+          (compositionAmbientImage A D ell hell hA f K) =
+      (compositionAmbient A D ell hell hA g h).hom.app
+          ((compositionData A D ell hell hA f).lower.obj K) ≫ Mgh.map sf :=
+    (compositionAmbient A D ell hell hA g h).hom.naturality
+      (ObjectProperty.homMk sf :
+        (compositionData A D ell hell hA f).lower.obj K ⟶
+          compositionAmbientImage A D ell hell hA f K)
+  apply Jw.map_injective
+  rw [← cancel_mono
+    ((eqToIso (compositionData A D ell hell hA (f ≫ g ≫ h)).lower_eq).hom.app K)]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [compositionLower_transport A D ell hell hA ((f ≫ g) ≫ h) (f ≫ g ≫ h)
+    (Category.assoc f g h) K]
+  rw [reassoc_of% (compositionSupport_hom A D ell hell hA (f ≫ g) h K)]
+  rw [compositionSupport_hom A D ell hell hA f (g ≫ h) K]
+  rw [reassoc_of% hn]
+  rw [reassoc_of% (compositionSupport_hom A D ell hell hA g h
+    ((compositionData A D ell hell hA f).lower.obj K))]
+  erw [← Functor.map_comp_assoc, compositionSupport_hom]
+  simp only [Functor.map_comp, Category.assoc]
+  have : IsIso (Mh.map ((eqToIso (compositionData A D ell hell hA g).lower_eq).hom.app
+      ((compositionData A D ell hell hA f).lower.obj K))) := Functor.map_isIso _ _
+  erw [cancel_epi, cancel_epi]
+  rw [← reassoc_of% hn', compositionAmbient_assoc]
+
+private theorem compositionExceptional_assoc (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+    (K : Ctf A W.left) :
+    (compositionData A D ell hell hA f).right.map
+        ((compositionExceptional A D ell hell hA g h).hom.app K) ≫
+      (compositionExceptional A D ell hell hA f (g ≫ h)).hom.app K =
+    (compositionExceptional A D ell hell hA f g).hom.app
+        ((compositionData A D ell hell hA h).right.obj K) ≫
+      (compositionExceptional A D ell hell hA (f ≫ g) h).hom.app K ≫
+        eqToHom (congrArg (fun t : X ⟶ W ↦
+          (compositionData A D ell hell hA t).right.obj K) (Category.assoc f g h)) := by
+  have hL (M : Ctf A X.left) :
+      (compositionSupport A D ell hell hA (f ≫ g) h).inv.app M ≫
+        (compositionData A D ell hell hA h).lower.map
+          ((compositionSupport A D ell hell hA f g).inv.app M) =
+      eqToHom (congrArg (fun t : X ⟶ W ↦
+          (compositionData A D ell hell hA t).lower.obj M) (Category.assoc f g h)) ≫
+        (compositionSupport A D ell hell hA f (g ≫ h)).inv.app M ≫
+          (compositionSupport A D ell hell hA g h).inv.app
+            ((compositionData A D ell hell hA f).lower.obj M) := by
+    let IL := (compositionData A D ell hell hA h).lower.mapIso
+        ((compositionSupport A D ell hell hA f g).app M) ≪≫
+      (compositionSupport A D ell hell hA (f ≫ g) h).app M ≪≫
+        eqToIso (congrArg (fun t : X ⟶ W ↦
+          (compositionData A D ell hell hA t).lower.obj M) (Category.assoc f g h))
+    let IR := (compositionSupport A D ell hell hA g h).app
+        ((compositionData A D ell hell hA f).lower.obj M) ≪≫
+      (compositionSupport A D ell hell hA f (g ≫ h)).app M
+    have hs : IL = IR := Iso.ext (compositionSupport_assoc A D ell hell hA f g h M)
+    have hi := congrArg Iso.inv hs
+    apply (cancel_epi (eqToHom (congrArg (fun t : X ⟶ W ↦
+      (compositionData A D ell hell hA t).lower.obj M) (Category.assoc f g h).symm))).mp
+    simpa only [IL, IR, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv,
+      eqToIso.inv, Category.assoc, eqToHom_trans_assoc, eqToHom_refl,
+      Category.id_comp] using hi
+  have he := conjugateIsoEquiv_assoc_aux
+    (fun t : X ⟶ W ↦ (compositionData A D ell hell hA t).lower)
+    (fun t : X ⟶ W ↦ (compositionData A D ell hell hA t).right)
+    (fun t ↦ (compositionData A D ell hell hA t).adjunction) (Category.assoc f g h)
+    (compositionData A D ell hell hA f).adjunction
+    (compositionData A D ell hell hA g).adjunction
+    (compositionData A D ell hell hA h).adjunction
+    (compositionData A D ell hell hA (f ≫ g)).adjunction
+    (compositionData A D ell hell hA (g ≫ h)).adjunction
+    (compositionSupport A D ell hell hA f g).symm
+    (compositionSupport A D ell hell hA g h).symm
+    (compositionSupport A D ell hell hA (f ≫ g) h).symm
+    (compositionSupport A D ell hell hA f (g ≫ h)).symm hL K
+  let IL := (compositionData A D ell hell hA f).right.mapIso
+      ((compositionExceptional A D ell hell hA g h).app K) ≪≫
+    (compositionExceptional A D ell hell hA f (g ≫ h)).app K
+  let IR := (compositionExceptional A D ell hell hA f g).app
+      ((compositionData A D ell hell hA h).right.obj K) ≪≫
+    (compositionExceptional A D ell hell hA (f ≫ g) h).app K ≪≫
+      eqToIso (congrArg (fun t : X ⟶ W ↦
+        (compositionData A D ell hell hA t).right.obj K) (Category.assoc f g h))
+  have hi : IR.inv = IL.inv := by
+    dsimp only [IR, IL, Iso.trans_inv, Iso.app_inv, Functor.mapIso_inv, eqToIso.inv]
+    change (compositionExceptional A D ell hell hA (f ≫ g) h).inv.app K ≫
+        (compositionExceptional A D ell hell hA f g).inv.app
+          ((compositionData A D ell hell hA h).right.obj K) =
+      eqToHom (congrArg (fun t : X ⟶ W ↦
+          (compositionData A D ell hell hA t).right.obj K) (Category.assoc f g h)) ≫
+        (compositionExceptional A D ell hell hA f (g ≫ h)).inv.app K ≫
+          (compositionData A D ell hell hA f).right.map
+            ((compositionExceptional A D ell hell hA g h).inv.app K) at he
+    rw [Category.assoc, he]
+    simp only [eqToHom_refl, Category.id_comp]
+  exact (congrArg Iso.hom (Iso.ext_inv hi)).symm
+
+private theorem compositionExceptional_terminalTransport (f : X ⟶ Y)
+    (a b : Y ⟶ compositionBase D) (hab : a = b)
+    (K : Ctf A (Spec (.of D.k))) :
+    (compositionData A D ell hell hA f).right.map
+        (eqToHom (congrArg (fun t : Y ⟶ compositionBase D ↦
+          (compositionData A D ell hell hA t).right.obj K) hab)) ≫
+      (compositionExceptional A D ell hell hA f b).hom.app K =
+    (compositionExceptional A D ell hell hA f a).hom.app K ≫
+      eqToHom (congrArg (fun t : Y ⟶ compositionBase D ↦
+        (compositionData A D ell hell hA (f ≫ t)).right.obj K) hab) := by
+  subst b
+  simp
+
+private theorem compositionComparison_transport (f g : X ⟶ Y) (h : f = g)
+    (K : (localizingClosureProEtale (coefficient A) X.left).FullSubcategory) :
+    ((compositionCoherence A D ell hell hA).comparison (SepFinType.homMk f)
+        (compactificationOverField f)
+        ((compactificationOverField g).copy (congrArg Over.Hom.left h))).hom.app K =
+      eqToHom (congrArg (fun t : X ⟶ Y ↦
+        (rightDerivedLowerShriekOfCompactification (coefficient A)
+          (compactificationOverField t)).obj K.obj) h) := by
+  subst g
+  change ((compositionCoherence A D ell hell hA).comparison (SepFinType.homMk f)
+    (compactificationOverField f) (compactificationOverField f)).hom.app K = 𝟙 _
+  exact congrArg (fun e ↦ e.hom.app K)
+    ((compositionCoherence A D ell hell hA).laws.2.1
+      (SepFinType.homMk f) (compactificationOverField f))
+
+private theorem compositionAmbient_unitLeft (f : X ⟶ Y) (K : Ctf A X.left) :
+    (compositionAmbient A D ell hell hA (𝟙 X) f).hom.app K ≫
+      eqToHom (congrArg (fun t : X ⟶ Y ↦
+        (rightDerivedLowerShriekOfCompactification (coefficient A)
+          (compactificationOverField t)).obj K.obj) (Category.id_comp f)) =
+    (rightDerivedLowerShriekOfCompactification (coefficient A)
+      (compactificationOverField f)).map
+        (((compositionCoherence A D ell hell hA).comparison (𝟙 (SepFinType.mk X))
+          (compactificationOverField (𝟙 X))
+          (Compactification.ofIsProper (𝟙 X.left))).hom.app
+            ((ObjectProperty.ιOfLE (fun K hK _P _ hP ↦ hP K hK)).obj K) ≫
+          (CompactSupportComposition.identity (coefficient A) X.left).hom.app K.obj) := by
+  let H := compositionCoherence A D ell hell hA
+  let i : Ctf A X.left ⥤
+      (localizingClosureProEtale (coefficient A) X.left).FullSubcategory :=
+    ObjectProperty.ιOfLE (fun K hK P _ hP ↦ hP K hK)
+  have hi := H.laws.2.2.2.2.1 (𝟙 (SepFinType.mk X)) (SepFinType.homMk f)
+    (compactificationOverField (𝟙 X)) (Compactification.ofIsProper (𝟙 X.left))
+    (compactificationOverField f) (compactificationOverField f)
+    (compactificationOverField (𝟙 X ≫ f))
+    ((compactificationOverField f).copy (Category.id_comp f.left)) (i.obj K)
+  rw [H.laws.2.1] at hi
+  simp only [Iso.refl_hom, NatTrans.id_app] at hi
+  rw [H.laws.2.2.2.2.2.1] at hi
+  dsimp only [Functor.comp_obj, ObjectProperty.ι_obj] at hi
+  simp only [Category.id_comp] at hi
+  have hi' := hi.trans (Functor.map_comp _ _ _).symm
+  have ht := compositionComparison_transport A D ell hell hA (𝟙 X ≫ f) f
+    (Category.id_comp f) (i.obj K)
+  erw [ht] at hi'
+  exact hi'
+
+private theorem compositionSupport_unitLeft (f : X ⟶ Y) (K : Ctf A X.left) :
+    (compositionSupport A D ell hell hA (𝟙 X) f).hom.app K ≫
+        eqToHom (congrArg (fun t : X ⟶ Y ↦
+          (compositionData A D ell hell hA t).lower.obj K) (Category.id_comp f)) =
+      (compositionData A D ell hell hA f).lower.map
+        ((compositionSupportIdentity A D ell hell hA).hom.app K) := by
+  apply (constantModelBoundedConstructible (coefficient A) Y.left ⊓
+    DerivedCategory.finiteTorAmplitude _).ι.map_injective
+  rw [← cancel_mono ((eqToIso (compositionData A D ell hell hA f).lower_eq).hom.app K)]
+  rw [Functor.map_comp, Category.assoc,
+    compositionLower_transport A D ell hell hA (𝟙 X ≫ f) f (Category.id_comp f) K]
+  have hn := (eqToIso (compositionData A D ell hell hA f).lower_eq).hom.naturality
+    ((compositionSupportIdentity A D ell hell hA).hom.app K)
+  dsimp only [Functor.comp_map] at hn
+  erw [hn]
+  simp only [compositionSupport, compositionSupportIdentity,
+    Functor.FullyFaithful.preimageIso_hom, Functor.FullyFaithful.whiskeringRight,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.leftUnitor_inv_app,
+    Functor.rightUnitor_hom_app, ObjectProperty.ι_map, ObjectProperty.homMk_hom,
+    ObjectProperty.FullSubcategory.id_hom,
+    Iso.trans_hom, Iso.symm_hom, Category.id_comp, Category.comp_id]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  rw [compositionAmbient_unitLeft]
+  simp only [Functor.map_comp]
+  erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id]
+  rfl
+
+private theorem compositionExceptional_transport (f g : X ⟶ Y) (h : f = g)
+    (K : Ctf A Y.left) :
+    (conjugateIsoEquiv (compositionData A D ell hell hA f).adjunction
+      (compositionData A D ell hell hA g).adjunction
+      (eqToIso (congrArg (fun t : X ⟶ Y ↦
+        (compositionData A D ell hell hA t).lower) h.symm))).hom.app K =
+      eqToHom (congrArg (fun t : X ⟶ Y ↦
+        (compositionData A D ell hell hA t).right.obj K) h) := by
+  subst g
+  simp [conjugateIsoEquiv_apply_hom]
+
 /-- Further-composition functoriality of the canonical dualizing comparisons.
 Source: composition proof, Steps 4--5
 (blueprint: thm-trf-dualizing-complex-composition).
@@ -210,7 +543,22 @@ theorem dualizingComposition_comp (f : X ⟶ Y) (g : Y ⟶ Z) :
     (compositionExceptional A D ell hell hA f g).hom.app
         (compositionOmega A D ell hell hA Z) ≫
       (dualizingComposition A D ell hell hA (f ≫ g)).hom := by
-  sorry
+  let az : Z ⟶ compositionBase D := Over.mkIdTerminal.from Z
+  let ay : Y ⟶ compositionBase D := Over.mkIdTerminal.from Y
+  let ax : X ⟶ compositionBase D := Over.mkIdTerminal.from X
+  let U : Ctf A (Spec (.of D.k)) :=
+    ⟨constantCoefficientObject (coefficient A) (Spec (.of D.k)),
+      constantCoefficientObject_mem (coefficient A) (Spec (.of D.k))⟩
+  have ht := compositionExceptional_terminalTransport A D ell hell hA f
+    (g ≫ az) ay (Over.mkIdTerminal.hom_ext _ _) U
+  have hc := compositionExceptional_assoc A D ell hell hA f g az U
+  dsimp only [dualizingComposition, Iso.trans_hom, Iso.app_hom, eqToIso.hom]
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% ht, ← Category.assoc, hc]
+  simp only [Category.assoc, eqToHom_trans_assoc]
+  congr 1
+  rw [eqToHom_trans]
 
 /-- Identity functoriality with the actual unit-normalized exceptional identity.
 Source: composition proof, Steps 6--8
@@ -226,7 +574,43 @@ theorem dualizingComposition_id :
     dualizingComposition A D ell hell hA (𝟙 X) =
       (compositionExceptionalIdentity A D ell hell hA).app
         (compositionOmega A D ell hell hA X) := by
-  sorry
+  let t : X ⟶ compositionBase D := Over.mkIdTerminal.from X
+  let U : Ctf A (Spec (.of D.k)) :=
+    ⟨constantCoefficientObject (coefficient A) (Spec (.of D.k)),
+      constantCoefficientObject_mem (coefficient A) (Spec (.of D.k))⟩
+  let e := eqToIso (congrArg (fun a : X ⟶ compositionBase D ↦
+    (compositionData A D ell hell hA a).lower) (Category.id_comp t))
+  have hc (K : Ctf A X.left) :
+      (compositionSupport A D ell hell hA (𝟙 X) t).inv.app K ≫
+          (compositionData A D ell hell hA t).lower.map
+            ((compositionSupportIdentity A D ell hell hA).hom.app K) = e.hom.app K := by
+    rw [← compositionSupport_unitLeft A D ell hell hA t K]
+    simp only [Iso.inv_hom_id_app_assoc, e, eqToIso.hom, eqToHom_app]
+  have he := conjugateIsoEquiv_comp_left_hom_app
+    (compositionData A D ell hell hA (𝟙 X ≫ t)).adjunction
+    (compositionData A D ell hell hA t).adjunction
+    (compositionData A D ell hell hA (𝟙 X)).adjunction
+    (compositionSupport A D ell hell hA (𝟙 X) t).symm
+    (compositionSupportIdentity A D ell hell hA) e hc U
+  have he' :
+      (compositionExceptional A D ell hell hA (𝟙 X) t).inv.app U ≫
+          (compositionExceptionalIdentity A D ell hell hA).hom.app
+            ((compositionData A D ell hell hA t).right.obj U) =
+        eqToHom (congrArg (fun a : X ⟶ compositionBase D ↦
+          (compositionData A D ell hell hA a).right.obj U) (Category.id_comp t)) := by
+    exact he.trans
+      (compositionExceptional_transport A D ell hell hA (𝟙 X ≫ t) t
+        (Category.id_comp t) U)
+  apply Iso.ext
+  dsimp only [dualizingComposition, Iso.trans_hom, Iso.app_hom, eqToIso.hom]
+  rw [← he']
+  change (compositionExceptional A D ell hell hA (𝟙 X) t).hom.app U ≫
+      (compositionExceptional A D ell hell hA (𝟙 X) t).inv.app U ≫
+        (compositionExceptionalIdentity A D ell hell hA).hom.app
+          ((compositionData A D ell hell hA t).right.obj U) =
+      (compositionExceptionalIdentity A D ell hell hA).hom.app
+        ((compositionData A D ell hell hA t).right.obj U)
+  rw [Iso.hom_inv_id_app_assoc]
 
 /-- Canonical Rd! omega_X = omega_F for every finite commutative ell-primary ring.
 The equality pins the ambient isomorphism to the explicitly constructed conjugate.
@@ -251,6 +635,8 @@ theorem dualizingComplexComposition (d : X ⟶ Y) :
       e = (constantModelBoundedConstructible (coefficient A) X.left ⊓
         DerivedCategory.finiteTorAmplitude _).ι.mapIso
           (dualizingComposition A D ell hell hA d) := by
-  sorry
+  exact ⟨(constantModelBoundedConstructible (coefficient A) X.left ⊓
+    DerivedCategory.finiteTorAmplitude _).ι.mapIso
+      (dualizingComposition A D ell hell hA d), rfl⟩
 
 end WeilConjectures.FiniteRingTrace

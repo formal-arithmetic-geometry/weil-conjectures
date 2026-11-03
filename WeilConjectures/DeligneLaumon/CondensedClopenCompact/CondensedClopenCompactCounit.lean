@@ -38,6 +38,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedConse
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
 import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Finite
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+public import WeilConjectures.ProEtaleCoefficients.BoundedConstructibleCounterexample.NonFiniteMultiplicationKernel
 
 /-! # Finite clopen counit decomposition
 (blueprint: lem-zl-condensed-clopen-compact-counit).
@@ -216,6 +218,10 @@ theorem compact_clopen_counit_decomposition
   let G (i : I) := pull ell (j i) ⋙ extension ell (j i)
   let H (i : I) := pull ell (j i) ⋙
     condensedQbarCompactSections ell k (c.precomp (j i))
+  have : F.Additive := by
+    dsimp [F, condensedQbarCompactSections,
+      ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification]
+    infer_instance
   let W := (Functor.whiskeringRight (DMod ell X) (DMod ell X) _).obj F
   let e (i : I) : G i ⋙ F ≅ H i :=
     Functor.isoWhiskerLeft (pull ell (j i))

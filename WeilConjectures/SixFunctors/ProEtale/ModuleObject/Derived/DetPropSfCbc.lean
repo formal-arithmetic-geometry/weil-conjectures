@@ -135,6 +135,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NoetherianProperFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.RationalIntegralGenerators
+public import WeilConjectures.ProEtaleCoefficients.BoundedConstructibleCounterexample.NonFiniteMultiplicationKernel
 
 /-!
 # Compact-support base change
@@ -326,6 +327,125 @@ Source: `det-prop-sf-cbc`, proof steps 8--9 (blueprint: det-prop-sf-cbc). -/
       (compactSupportOpenPullbackTransport Λ sq).symm ≪≫
       Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory Λ t).symm (J Λ l)
   exact isIso_open_baseChange_of_comparison F sq beta
+
+/-- The formalism's exchange is the existing specified proper-then-open composite.
+Proof steps: expand the generic compact-support exchange. Its proper factor is the mate of
+the published pullback-square compositor, hence `detSfProperBaseChangeMap`. The inverse open
+factor is beta: the arbitrary-base comparison is normalized by the same open unit and counit.
+Cancel the exact/total comparison factors. Functor associators have identity components, so
+the result is exactly `detSfCompactSupportBaseChangeComposite`, as natural transformations.
+Source: `det-prop-sf-cbc`, exchange definition and proof steps 8--9
+(blueprint: det-prop-sf-cbc). -/
+theorem compactSupportCondensedFormalism_exchange {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
+    (c : Compactification f) :
+    ((compactSupportCondensedFormalism Λ).shriekBaseChange c (c.baseChange g) (pullback.fst c.g g)
+      (c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f g))
+      (c.isPullback_g_ofIsPullback (IsPullback.of_hasPullback f g)).flip).natTrans =
+    detSfCompactSupportBaseChangeComposite Λ f g c
+      (compactSupportOpenBaseChangeIso Λ f g c) := by
+  sorry
+
+/-- Identity-square law for the actual condensed compact-support exchange.
+Proof steps: proper mate normalization gives the proper identity square. The open mate has
+the open identity normalization. Their composite cancels the intermediate identity comparison;
+the surviving factors are exactly the two displayed pullback identity comparisons and unitors.
+`compactSupportCondensedFormalism_exchange` identifies this exchange with the specified
+proper/open composite for the literal pullback realization.
+Source: `det-prop-sf-cbc`, identity clause and proof step 9 (blueprint: det-prop-sf-cbc). -/
+theorem condensed_compactSupportBaseChange_id
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
+    ((compactSupportCondensedFormalism Λ).shriekBaseChange c c (𝟙 c.Z)
+      (IsPullback.of_id_fst) (IsPullback.of_id_fst)).natTrans =
+      Functor.whiskerLeft ((compactSupportCondensedFormalism Λ).shriek c)
+        ((compactSupportCondensedFormalism Λ).pbId Y).hom ≫
+        (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫
+        Functor.whiskerRight ((compactSupportCondensedFormalism Λ).pbId X).inv
+          ((compactSupportCondensedFormalism Λ).shriek c) := by
+  exact CompactSupportFormalism.shriekBaseChange_id
+    (compactSupportCondensedFormalism Λ) c _ _
+
+/-- Cartesian pasting for the actual condensed compact-support exchange.
+Proof steps: expand each exchange as proper mate followed by inverse open mate. Proper
+mate-pasting identifies the proper factors; normalized open pasting identifies the open
+factors. Naturality interchanges the two middle factors. The surviving endpoint factors are
+precisely the displayed pullback compositors. This is an equation of natural transformations
+on all ordinary unbounded complexes, before any constructibility restriction.
+Source: `det-prop-sf-cbc`, Cartesian-pasting clause and proof step 9
+(blueprint: det-prop-sf-cbc). -/
+theorem condensed_compactSupportBaseChange_paste_cartesian
+    {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {f'' : X'' ⟶ Y''}
+    {a' : X'' ⟶ X'} {a : Y'' ⟶ Y'} {b' : X' ⟶ X} {b : Y' ⟶ Y}
+    (c : Compactification f) (c' : Compactification f') (c'' : Compactification f'')
+    (h₁ : c''.Z ⟶ c'.Z) (h₂ : c'.Z ⟶ c.Z)
+    (hi₁ : IsPullback a' c''.i c'.i h₁) (hp₁ : IsPullback h₁ c''.g c'.g a)
+    (hi₂ : IsPullback b' c'.i c.i h₂) (hp₂ : IsPullback h₂ c'.g c.g b)
+    (hi : IsPullback (a' ≫ b') c''.i c.i (h₁ ≫ h₂))
+    (hp : IsPullback (h₁ ≫ h₂) c''.g c.g (a ≫ b)) :
+    (compactSupportCondensedFormalism Λ).shriekBaseChange c c'' (h₁ ≫ h₂) hi hp =
+      (((compactSupportCondensedFormalism Λ).shriekBaseChange c c' h₂ hi₂ hp₂ ≫ᵥ
+        (compactSupportCondensedFormalism Λ).shriekBaseChange c' c'' h₁ hi₁ hp₁).whiskerLeft
+          ((compactSupportCondensedFormalism Λ).pbComp' a' b' (a' ≫ b') rfl).inv).whiskerRight
+          ((compactSupportCondensedFormalism Λ).pbComp' a b (a ≫ b) rfl).hom := by
+  exact CompactSupportFormalism.shriekBaseChange_paste_horiz
+    (compactSupportCondensedFormalism Λ) c c' c'' h₁ h₂ hi₁ hp₁ hi₂ hp₂ hi hp
+
+/-- The canonical forward Gamma_Q comparison for a compactification triangle. The square is the
+triangle's normalized Cartesian square, and `CondensedOpenProper.gamma` is the published forward
+comparison; only the specified `OpenUnits` datum is bound, with no proper-exchange invertibility.
+Source: `det-prop-sf-cbc`, proof step 10 (blueprint: det-prop-sf-cbc). -/
+noncomputable def compactSupportCanonicalGamma
+    (units : CondensedOpenProper.OpenUnits Λ)
+    {X Y S : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ S}
+    (T : Compactification.Triangle f g) :
+    (compactSupportCondensedFormalism Λ).shriek T.cf ⋙
+        (compactSupportCondensedFormalism Λ).shriek T.cg ⟶
+      (compactSupportCondensedFormalism Λ).shriek T.cfg := by
+  let F : CompactSupportFormalism := compactSupportCondensedFormalism Λ
+  let sq : CommSq T.q T.cf.g T.p T.cg.i := CommSq.mk T.isPullback.w.symm
+  exact
+    (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (F.sh T.cf.i)
+        ((Functor.associator _ _ _).inv ≫
+          Functor.whiskerRight (CondensedOpenProper.gamma Λ units sq)
+            (CondensedOpenProper.R Λ T.cg.g) ≫
+          (Functor.associator _ _ _).hom) ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight
+        (CondensedOpenProper.jComp Λ T.cf.i T.q).hom
+        (CondensedOpenProper.R Λ T.p ⋙ CondensedOpenProper.R Λ T.cg.g) ≫
+      Functor.whiskerRight (CondensedOpenProper.jCongr Λ T.i_q).hom
+        (CondensedOpenProper.R Λ T.p ⋙ CondensedOpenProper.R Λ T.cg.g) ≫
+      Functor.whiskerLeft (CondensedOpenProper.J Λ T.cfg.i)
+        ((CondensedOpenProper.rComp Λ T.p T.cg.g).hom ≫
+          eqToHom (by rw [T.p_g]; rfl))
+
+/-- Pasting in the compact-support direction through supplied compatible triangles.
+The theorem uses the canonical forward Gamma_Q comparisons built from the supplied normalized
+`OpenUnits` datum; these are transformations, so no invertibility of proper exchange is asserted.
+Proof steps: apply the arbitrary-base mixed proper/open cube of
+`lem-zl-condensed-open-proper-pasting` to the triangles' middle squares. The equations `hq` and
+`hp` identify the common cube and its outer square; proper mate-pasting, open compositor pasting,
+and naturality give the displayed equation.
+Source: `det-prop-sf-cbc`, compact-support-direction clause and proof step 10
+(blueprint: det-prop-sf-cbc). -/
+theorem condensed_compactSupportBaseChange_paste_compactSupport
+    {X Y S X' Y' S' : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ S}
+    {f' : X' ⟶ Y'} {g' : Y' ⟶ S'} {gX : X' ⟶ X} {gY : Y' ⟶ Y} {gS : S' ⟶ S}
+    (T : Compactification.Triangle f g) (T' : Compactification.Triangle f' g')
+    (a : T'.cf.Z ⟶ T.cf.Z) (c : T'.cg.Z ⟶ T.cg.Z) (b : T'.cfg.Z ⟶ T.cfg.Z)
+    (hfi : IsPullback gX T'.cf.i T.cf.i a) (hfp : IsPullback a T'.cf.g T.cf.g gY)
+    (hgi : IsPullback gY T'.cg.i T.cg.i c) (hgp : IsPullback c T'.cg.g T.cg.g gS)
+    (hfgi : IsPullback gX T'.cfg.i T.cfg.i b) (hfgp : IsPullback b T'.cfg.g T.cfg.g gS)
+    (hq : IsPullback a T'.q T.q b) (hp : b ≫ T.p = T'.p ≫ c)
+    (units : CondensedOpenProper.OpenUnits Λ) :
+    Functor.whiskerRight (compactSupportCanonicalGamma Λ units T)
+        ((compactSupportCondensedFormalism Λ).pb gS) ≫
+        ((compactSupportCondensedFormalism Λ).shriekBaseChange T.cfg T'.cfg b hfgi hfgp).natTrans =
+      ((compactSupportCondensedFormalism Λ).shriekBaseChange T.cf T'.cf a hfi hfp ≫ₕ
+        (compactSupportCondensedFormalism Λ).shriekBaseChange T.cg T'.cg c hgi hgp).natTrans ≫
+        Functor.whiskerLeft ((compactSupportCondensedFormalism Λ).pb gX)
+          (compactSupportCanonicalGamma Λ units T') := by
+  sorry
 
 /-- The proper exchange on the extension-by-zero of a bounded-constructible object.
 The proof reduces the proper mate to finite scalar models, lifts through derived Nakayama, and
