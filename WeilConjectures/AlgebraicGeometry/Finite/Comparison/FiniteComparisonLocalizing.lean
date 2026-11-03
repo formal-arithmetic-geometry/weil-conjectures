@@ -555,6 +555,92 @@ private theorem closureEquivalence (S : ObjectProperty C) (T : ObjectProperty D)
     exact ⟨⟨L, hL⟩, ⟨ObjectProperty.isoMk _ e⟩⟩
   exact { }
 
+<<<<<<< /tmp/tmp56mv04hg/a
+=======
+/-- The finite-Tor constructible generators correspond under the comparison functor.
+Source: blueprint finite comparison, opening paragraph
+(blueprint: lem-ctf-finite-comparison-generators).
+
+Proof: apply the finite Noetherian coefficient comparison to the coefficient-sized small
+site models, then transport its restricted equivalence through the constant-scalar
+presentations, site equivalences, and the specified finite discrete scheme-ring
+isomorphism. These transports preserve constructibility, finite Tor amplitude, and the
+ambient derived comparison, yielding both generator inclusions. The empty scheme and
+zero ring are included by the same equivalence argument. -/
+theorem finiteComparisonGenerators_identification (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] :
+    (∀ K : Etale.DerivedCategoryModule (ULift.{u + 1} B) X,
+      finiteComparisonEtaleGenerators B X K →
+        finiteComparisonProEtaleGenerators B eR X
+          ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B))
+            X).mapDerivedCategory.obj K)) ∧
+    (∀ K : _root_.DerivedCategory
+        (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B))),
+      finiteComparisonProEtaleGenerators B eR X K →
+        (finiteComparisonEtaleGenerators B X).map
+          (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B))
+            X).mapDerivedCategory K) := by
+  let A := ULift.{u + 1} B
+  let : IsNoetherianRing A := inferInstance
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=
+    HasDerivedCategory.standard _
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=
+    HasDerivedCategory.standard _
+  let E := (finiteComparisonEtaleModelRealization X A).mapDerivedCategory
+  let G := (finiteComparisonProEtaleModelRealization X A).mapDerivedCategory
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+  obtain ⟨D, hD, _, H, ⟨hH⟩⟩ := finiteTorComparisonNoetherian.{u, u + 1} X A
+  obtain ⟨hE, hG⟩ := finiteComparisonPresentation B X eR
+  obtain ⟨esquare⟩ := finiteComparisonModelDerivedSquare X A D hD
+  constructor
+  · intro K hK
+    rw [← hE] at hK
+    obtain ⟨L, hL, ⟨eL⟩⟩ := hK
+    rw [← hG]
+    let L' := H.functor.obj ⟨L, hL⟩
+    refine ⟨L'.obj, L'.property, ⟨?_⟩⟩
+    exact G.mapIso (hH.app ⟨L, hL⟩) ≪≫
+      (esquare.app L).symm ≪≫ F.mapIso eL
+  · intro K hK
+    rw [← hG] at hK
+    obtain ⟨M, hM, ⟨eM⟩⟩ := hK
+    let M' := H.inverse.obj ⟨M, hM⟩
+    refine ⟨E.obj M'.obj, ?_, ⟨?_⟩⟩
+    · rw [← hE]
+      exact ⟨M'.obj, M'.property, ⟨Iso.refl _⟩⟩
+    · exact esquare.app M'.obj ≪≫ G.mapIso (hH.app M').symm ≪≫
+        G.mapIso (ObjectProperty.ι _ |>.mapIso (H.counitIso.app ⟨M, hM⟩)) ≪≫ eM
+
+/-- For the chosen open/proper factorization, the compact-support comparison is exactly
+alpha at j_! K followed by Rp_* of the open comparison. All values are ambient.
+Source: blueprint finite comparison, final paragraph of proof
+(blueprint: det-ctf-finite-comparison-localizing). -/
+def finiteComparisonCompactSupportMap {X P Y : Scheme.{u}} (j : X ⟶ P) (p : P ⟶ Y)
+    [IsOpenImmersion j]
+    (K : Etale.DerivedCategoryModule (ULift.{u + 1} B) X) :=
+  unboundedDirectImageComparisonMap (ULift.{u + 1} B) p
+      ((Etale.openImmersionLowerShriek
+        (ModuleCat.{u + 1} (ULift.{u + 1} B)) j).mapDerivedCategory.obj K) ≫
+    (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) p).rightDerivedFunctor.map
+      ((finiteComparisonOpenIso B j).hom.app K)
+
+/-- The canonical open-extension comparison, applied termwise and localized.
+Source: blueprint finite comparison, Operations; Stacks Tag 09AF
+(blueprint: det-ctf-finite-comparison-localizing). -/
+def finiteComparisonOpenIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} B)) j).mapDerivedCategory ⋙
+        (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory ≅
+      (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) U).mapDerivedCategory ⋙
+        (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} B)) j).mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (openImmersionLowerShriekComparisonUpperStarIso
+        (ModuleCat.{u + 1} (ULift.{u + 1} B)) j) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _
+
+>>>>>>> /tmp/tmp56mv04hg/c
 end CategoryTheory
 end LocalizingArgument
 

@@ -540,6 +540,7 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupp
 import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteConstructibleEncoding
 import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
+public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 
 /-! # Coefficient presentation of the finite comparison predicates
 
@@ -693,6 +694,68 @@ private def proSites (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
   exact (e.sheafCongr (Scheme.ProEt.topology X)
     (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) (ModuleCat.{u + 1} A)).symm
 
+private theorem etale_localFinite_iff
+    (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+    localFinite X.smallEtaleTopology A F ↔
+      ∃ d : Scheme.LocallyConstantDatum F, ∀ i : d.cover.I₀,
+        ∃ M : ModuleCat.{u + 1} A, Finite M ∧
+          Nonempty (F.over (d.cover.etalePrecoverageToEtale i) ≅
+            (constantSheaf (X.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i))
+              (ModuleCat.{u + 1} A)).obj M) := by
+  classical
+  rw [localFinite_iff_sieve X.smallEtaleTopology A F]
+  let T : X.Etale := Scheme.Etale.mk (𝟙 X)
+  let S := finiteModelSieve X.smallEtaleTopology A F T
+  have hmem : finiteModelSieve X.smallEtaleTopology A F (⊤_ X.Etale) ∈
+      X.smallEtaleTopology (⊤_ X.Etale) ↔ S ∈ X.smallEtaleTopology T := by
+    let e := (Scheme.Etale.isTerminalMkId X).uniqueUpToIso terminalIsTerminal
+    change _ ↔ (finiteModelSieve X.smallEtaleTopology A F (⊤_ X.Etale)).pullback
+      e.hom ∈ X.smallEtaleTopology T
+    exact GrothendieckTopology.pullback_mem_iff_of_isIso.symm
+  rw [hmem]
+  constructor
+  · intro hS
+    have hx := (Scheme.mem_smallEtaleTopology_iff S).mp hS
+    choose V g hg hx using hx
+    have hc : ∀ x : X, ∃ i y, (V i).hom y = x := by
+      intro x
+      obtain ⟨y, hy⟩ := hx x
+      refine ⟨x, y, ?_⟩
+      have hw : (g x).left = (V x).hom :=
+        (Category.comp_id _).symm.trans (MorphismProperty.Over.w (g x))
+      change (g x).left y = x at hy
+      exact (congrArg (fun f : (V x).left ⟶ X ↦ f y) hw.symm).trans hy
+    let C : Scheme.Cover.{u} Scheme.etalePrecoverage X :=
+      Scheme.Cover.mkOfCovers X (fun x ↦ (V x).left) (fun x ↦ (V x).hom) hc
+    have hm (i : C.I₀) : ∃ M : ModuleCat.{u + 1} A, Finite M ∧
+        Nonempty (F.over (C.etalePrecoverageToEtale i) ≅
+          (constantSheaf (X.smallEtaleTopology.over (C.etalePrecoverageToEtale i))
+            (ModuleCat.{u + 1} A)).obj M) := by
+      obtain ⟨M, hM, ⟨e⟩⟩ := hg i
+      have he := e ≪≫ (X.smallEtaleTopology.overPullbackConstantSheafIso
+        (ModuleCat.{u + 1} A) (V i)).app M
+      exact ⟨M, (Module.finite_iff_finite (R := A)).mp hM, ⟨he⟩⟩
+    refine ⟨⟨C, fun i ↦ ?_⟩, hm⟩
+    obtain ⟨M, _, ⟨e⟩⟩ := hm i
+    exact Sheaf.isConstant_of_iso _ e
+  · rintro ⟨d, hd⟩
+    let V := d.cover.etalePrecoverageToEtale
+    let t (i : d.cover.I₀) : V i ⟶ T := MorphismProperty.Over.homMk (d.cover.f i)
+    have hcover : Sieve.ofArrows V t ∈ X.smallEtaleTopology T := by
+      apply (Scheme.ofArrows_mem_smallEtaleTopology_iff t).mpr
+      apply Set.eq_univ_of_forall
+      intro x
+      obtain ⟨i, y, hy⟩ := d.cover.exists_eq x
+      exact Set.mem_iUnion.mpr ⟨i, Set.mem_range.mpr ⟨y, hy⟩⟩
+    apply X.smallEtaleTopology.superset_covering _ hcover
+    rw [Sieve.ofArrows, Sieve.generate_le_iff]
+    rintro U f ⟨i⟩
+    obtain ⟨M, hM, ⟨e⟩⟩ := hd i
+    let := hM
+    exact ⟨M, Module.Finite.of_finite, ⟨e ≪≫
+      ((X.smallEtaleTopology.overPullbackConstantSheafIso (ModuleCat.{u + 1} A) (V i)).app M).symm⟩⟩
+
 private local instance proSites_monoidal (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     (proSites X A).functor.Monoidal := by
   let G : Scheme.coefficientProEtaleSiteModel.{u, u + 1} X ⥤ X.ProEt := AsSmall.down
@@ -794,6 +857,27 @@ private theorem pro_localFinite_small_cover
     · rintro ⟨i⟩
       exact ⟨ULift.up i⟩
 
+private theorem coefficient_etale_constructible
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (F : ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :
+    Scheme.IsCoefficientConstructibleEtaleModule.{u, u + 1} X A F ↔
+      Scheme.IsConstructibleEtaleModuleSheaf
+        ((finiteComparisonEtaleModelRealization X A).obj F) := by
+  rw [coefficient_etale_global]
+  change (∃ S : Scheme.Stratification X, _) ↔ ∃ S : Scheme.Stratification X, _
+  apply exists_congr
+  intro S
+  apply forall_congr'
+  intro i
+  rw [etaleSites_localFinite]
+  let e := (etaleSitePullbackSquare (S.immersion i) A).app
+    ((coefficientModelFixedScalars _ A).obj F)
+  exact (show localFinite _ A _ ↔ localFinite _ A _ from
+    ⟨localFinite_iso _ A e, localFinite_iso _ A e.symm⟩).trans
+      (etale_localFinite_iff _ A _)
+
 private theorem etale_constructible_iso
     {X : Scheme.{u}} {A : Type (u + 1)} [CommRing A] [Finite A]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)} (e : F ≅ G)
@@ -802,6 +886,68 @@ private theorem etale_constructible_iso
   have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
   exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mpr
     (Scheme.IsConstructibleSheaf.of_iso e)
+
+private theorem coefficient_etale_bounded
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (K : ConstantCompletion.D (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :
+    Scheme.IsCoefficientBoundedConstructibleEtale.{u, u + 1} X A K ↔
+      Etale.DerivedCategory.isBoundedConstructible A X
+        ((finiteComparisonEtaleModelRealization X A).mapDerivedCategory.obj K) := by
+  let E := finiteComparisonEtaleModelRealization X A
+  unfold Scheme.IsCoefficientBoundedConstructibleEtale
+    Etale.DerivedCategory.isBoundedConstructible
+  apply and_congr _ (bounded_cohomology_transport E K)
+  apply forall_congr'
+  intro q
+  let e := (E.mapDerivedCategoryHomologyFunctorIso q).app K
+  exact (coefficient_etale_constructible X A _).trans
+    ⟨etale_constructible_iso e, etale_constructible_iso e.symm⟩
+
+private theorem coefficient_pro_global
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
+    (F : ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :
+    Scheme.IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf.{u, u + 1} X A F ↔
+      ∃ S : Scheme.Stratification X, ∀ i,
+        IsCoefficientModelLocallyConstantFinite
+          (Scheme.coefficientProEtaleModelTopology.{u, u + 1} (S.domain i)) A
+          ((Scheme.coefficientProEtaleFixedModulePullback.{u, u + 1}
+            (S.immersion i) A).obj ((coefficientModelFixedScalars _ A).obj F)) := by
+  let P : ∀ {Y : Scheme.{u}}, (Y ⟶ X) → Prop := fun {Y} f ↦
+    IsCoefficientModelLocallyConstantFinite
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} Y) A
+      ((Scheme.coefficientProEtaleFixedModulePullback.{u, u + 1} f A).obj
+        ((coefficientModelFixedScalars _ A).obj F))
+  have h := Scheme.affine_local_stratification_iff X P
+    (fun f g h ↦ Scheme.proFinite_comp f g A _ h)
+  have h' : (∀ U : X.Opens, AlgebraicGeometry.IsAffineOpen U →
+      ∃ S : Scheme.Stratification U.toScheme,
+        (∀ i, Topology.IsConstructible (S.stratum i)) ∧
+        ∀ i, P (S.immersion i ≫ U.ι)) ↔
+      ∃ S : Scheme.Stratification X, ∀ i, P (S.immersion i) := by
+    exact h.trans ⟨fun ⟨S, _, hS⟩ ↦ ⟨S, hS⟩,
+      fun ⟨S, hS⟩ ↦ ⟨S, S.isConstructible_stratum, hS⟩⟩
+  simpa only [Scheme.IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf,
+    Scheme.finiteLocalModels_iff_presentation, P] using h'
+
+private theorem coefficient_etale_finiteTor
+    (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
+    (K : ConstantCompletion.D (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :
+    (∃ a b : ℤ, HasCoefficientModelTorAmplitude _ K a b) ↔
+      _root_.DerivedCategory.finiteTorAmplitude _
+        ((finiteComparisonEtaleModelRealization X A).mapDerivedCategory.obj K) := by
+  rw [coefficient_finite_native]
+  let E := finiteComparisonEtaleModelRealization X A
+  let := E.preservesFlat_of_isEquivalence
+  apply exists_congr
+  intro a
+  apply exists_congr
+  intro b
+  exact (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff E a b K).symm
 
 private local instance etale_bounded_iso
     (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] :
@@ -1267,6 +1413,176 @@ private theorem encoding_constructible_iff
       (internalToModule (ULift.{u + 1} B)) rfl X (E.functor.obj F)
       (modelStratifiedConstructible _ X _ h)
     exact isConstructible_of_iso (E.unitIso.app F).symm h'
+
+private theorem realized_constructible_iff
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B))) :
+    IsConstructible (ULift.{u + 1} B) F ↔
+      IsConstantModelConstructible (Profinite.continuousMapRingObj.{u} B) X
+        ((finiteComparisonRealization B X eR).obj F) := by
+  classical
+  let e := (realizedEncodingIso B X eR).app F
+  rw [encoding_constructible_iff B X eR F]
+  have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
+  simp only [IsConstantModelConstructible, if_pos hX]
+  exact ⟨constantConstructible_iso B X e.symm,
+    constantConstructible_iso B X e⟩
+
+private theorem coefficient_pro_constructible
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    (A : Type (u + 1)) [CommRing A] [Finite A] [IsNoetherianRing A]
+    (F : ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :
+    Scheme.IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf.{u, u + 1} X A F ↔
+      IsConstructible A ((finiteComparisonProEtaleModelRealization X A).obj F) := by
+  rw [coefficient_pro_global]
+  change (∃ S : Scheme.Stratification X, _) ↔ ∃ S : Scheme.Stratification X, _
+  apply exists_congr
+  intro S
+  apply forall_congr'
+  intro i
+  rw [proSites_localFinite]
+  let e := (proSitePullbackSquare (S.immersion i) A).app
+    ((coefficientModelFixedScalars _ A).obj F)
+  exact (show localFinite _ A _ ↔ localFinite _ A _ from
+    ⟨localFinite_iso _ A e, localFinite_iso _ A e.symm⟩).trans
+      (pro_localFinite_iff _ A _)
+
+private theorem coefficient_pro_bounded
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
+      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
+        Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom]
+    (K : ConstantCompletion.D (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) (ULift.{u + 1} B))) :
+    coefficientBoundedConstructibleProEtale.{u, u + 1} X (ULift.{u + 1} B) K ↔
+      constantModelBoundedConstructible (Profinite.continuousMapRingObj.{u} B) X
+        ((finiteComparisonRealization B X eR).mapDerivedCategory.obj
+          ((finiteComparisonProEtaleModelRealization X (ULift.{u + 1} B)).mapDerivedCategory.obj
+            K)) := by
+  let F := finiteComparisonProEtaleModelRealization X (ULift.{u + 1} B)
+  let G := finiteComparisonRealization B X eR
+  let : G.IsEquivalence := (finiteComparisonRealization_exact B X eR).1
+  unfold coefficientBoundedConstructibleProEtale constantModelBoundedConstructible
+  change (_ ∧ _) ↔ (_ ∧ _)
+  rw [and_comm (a := DerivedCategory.TStructure.t.bounded _)]
+  apply and_congr
+  · apply forall_congr'
+    intro n
+    let e := (F.mapDerivedCategoryHomologyFunctorIso n).app K
+    let f := (G.mapDerivedCategoryHomologyFunctorIso n).app (F.mapDerivedCategory.obj K)
+    exact (coefficient_pro_constructible X (ULift.{u + 1} B) _).trans
+      ((show IsConstructible _ _ ↔ IsConstructible _ _ from
+        ⟨isConstructible_of_iso e, isConstructible_of_iso e.symm⟩).trans
+        ((realized_constructible_iff B X eR _).trans (by
+          classical
+          have hX : CompactSpace X ∧ QuasiSeparatedSpace X :=
+            ⟨inferInstance, inferInstance⟩
+          simp only [IsConstantModelConstructible, if_pos hX]
+          exact ⟨constantConstructible_iso B X f,
+            constantConstructible_iso B X f.symm⟩)))
+  · rw [bounded_iff_interval]
+    exact (bounded_cohomology_transport F K).trans
+      (bounded_cohomology_transport G (F.mapDerivedCategory.obj K))
+
+private theorem coefficient_pro_finiteTor
+    (X : Scheme.{u})
+    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
+      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
+        Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom]
+    (K : ConstantCompletion.D (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) (ULift.{u + 1} B))) :
+    Scheme.HasFiniteCoefficientProEtaleTorAmplitude.{u, u + 1} X (ULift.{u + 1} B) K ↔
+      _root_.DerivedCategory.finiteTorAmplitude _
+        ((finiteComparisonRealization B X eR).mapDerivedCategory.obj
+          ((finiteComparisonProEtaleModelRealization X (ULift.{u + 1} B)).mapDerivedCategory.obj
+            K)) := by
+  change (∃ a b : ℤ, HasCoefficientModelTorAmplitude _ K a b) ↔ _
+  rw [coefficient_finite_native]
+  let F := finiteComparisonProEtaleModelRealization X (ULift.{u + 1} B)
+  let G := finiteComparisonRealization B X eR
+  let : G.IsEquivalence := (finiteComparisonRealization_exact B X eR).1
+  let := F.preservesFlat_of_isEquivalence
+  let := G.preservesFlat_of_isEquivalence
+  apply exists_congr
+  intro a
+  apply exists_congr
+  intro b
+  exact (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff F a b K).symm.trans
+    (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff G a b
+      (F.mapDerivedCategory.obj K)).symm
+
+/-- The specified model realizations identify the two coefficient presentations of
+bounded finite-Tor constructibility.
+This is a change of coefficient presentation, independently of any equivalence between
+the etale and pro-etale constructible subcategories.
+
+Source: blueprint finite comparison, coefficient paragraph; Stacks Tags 03CY, 09AJ,
+09AL and 08G1 (blueprint: lem-ctf-finite-comparison-presentation).
+
+Proof: restriction to constant scalars is the exact equivalence proved in
+coefficientModelFixedScalars_isEquivalence. Compose with the AsSmall site equivalences,
+as in the definitions of the two model realizations. Their inverses identify the same
+sections and scalar actions. On the etale site finite locally constant modules and
+finite locally closed stratifications are unchanged by these equivalences. For the
+pro-etale site use the finite-discrete coefficient ring isomorphism: a finite matrix
+between regular condensed modules consists of constant scalar entries; its cokernel
+is the constant sheaf of the corresponding finitely presented B-module. Conversely
+any finitely generated B-module has such a finite presentation, since the finite ring
+B is Noetherian. Pullback commutes with these presentations and with scalar transport,
+so local trivializations on each stratum identify the two constructibility predicates.
+The qcqs affine-local and finite global stratification conventions agree by finite
+stratification gluing. Exactness identifies cohomology and reflects zero objects, hence
+preserves the same finite cohomological bounds. These coefficient equivalences are
+strong monoidal: sectionwise tensor products and their sheafifications agree on pure
+tensors. Thus K-flat representatives and tensor tests in degree zero give the same Tor
+interval on either side, including reflection by the inverse equivalence. This proves
+the two replete-image equalities.
+
+Empty schemes, zero rings, and zero complexes are covered by these constructions. -/
+theorem finiteComparisonPresentation (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
+      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
+        Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom] :
+    let A := ULift.{u + 1} B
+    letI : IsNoetherianRing A := inferInstance
+    letI : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+        (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=
+      HasDerivedCategory.standard _
+    letI : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+        (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=
+      HasDerivedCategory.standard _
+    let P : ObjectProperty (ConstantCompletion.D (ConstantCompletion.constant
+        (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=
+      fun K ↦ Scheme.IsCoefficientBoundedConstructibleEtale.{u, u + 1} X A K ∧
+        ∃ a b : ℤ, HasCoefficientModelTorAmplitude _ K a b
+    let Q : ObjectProperty (ConstantCompletion.D (ConstantCompletion.constant
+        (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=
+      fun K ↦ coefficientBoundedConstructibleProEtale.{u, u + 1} X A K ∧
+        Scheme.HasFiniteCoefficientProEtaleTorAmplitude.{u, u + 1} X A K
+    P.map (finiteComparisonEtaleModelRealization X A).mapDerivedCategory =
+        finiteComparisonEtaleGenerators B X ∧
+    Q.map (finiteComparisonProEtaleModelRealization X A).mapDerivedCategory =
+        finiteComparisonProEtaleGenerators B eR X := by
+  dsimp only
+  constructor
+  · let : (finiteComparisonEtaleGenerators B X).IsClosedUnderIsomorphisms := by
+      unfold finiteComparisonEtaleGenerators
+      infer_instance
+    apply FiniteComparisonPresentationSupport.map_eq_of_equivalence
+    intro K
+    exact and_congr (coefficient_etale_bounded X (ULift.{u + 1} B) K)
+      (coefficient_etale_finiteTor X (ULift.{u + 1} B) K)
+  · let : (finiteComparisonProEtaleGenerators B eR X).IsClosedUnderIsomorphisms := by
+      change ((constantModelBoundedConstructible (Profinite.continuousMapRingObj.{u} B) X ⊓
+        _root_.DerivedCategory.finiteTorAmplitude _).inverseImage
+          (finiteComparisonRealization B X eR).mapDerivedCategory).IsClosedUnderIsomorphisms
+      infer_instance
+    apply FiniteComparisonPresentationSupport.map_eq_of_equivalence
+    intro K
+    exact and_congr (coefficient_pro_bounded B X eR K)
+      (coefficient_pro_finiteTor B X eR K)
 
 end InternalRealization
 

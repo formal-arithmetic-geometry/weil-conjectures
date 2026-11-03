@@ -7,6 +7,18 @@ module
 
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompactificationRealizationData
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.ExpressionRecursion.IntegralExpressionRecursion
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Pi.Basic
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionModuleOperationsData
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 
 /-! # Intermediate assembly data for integral realization
 Source: blueprint fix-prop-coherence.
@@ -192,3 +204,32 @@ structure RecursionLaws (D : FiniteFieldDatum.{u}) (o : Operations l E)
             simpa [Expression.admissible] using K.property.2.2.1⟩))
 
 end WeilConjectures.IntegralSystemRealization
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The ambient comparison data are the normalized scalar pullback comparisons, including
+geometric composition and coefficient-tower equations. Open extension and tensor comparison
+are the canonical scalar-adjunction conjugate and tensorator; proper image uses the mate of
+inverse pullback comparison. No strict-system reconstruction or completion is included.
+Source: latest blueprint fix-prop-coherence.proof.md, individual-map coefficient comparisons
+(blueprint: def-sf-integral-realization-assembly-data). -/
+abbrev AmbientModels := ScalarSixPullbackData.{u}
+
+/-- The normalization fixes all ambient comparison data uniquely.
+Source: latest blueprint fix-prop-coherence, comparisons of the individual maps
+(blueprint: def-sf-integral-realization-assembly-data).
+Proof: the two forward pullback maps are equal to the prescribed scalar-adjunction mate.
+An isomorphism is determined by its forward map, so function extensionality identifies
+the pullback comparison families. The remaining fields are proofs and agree by proof
+irrelevance. This is uniqueness only, with no existence choice. -/
+theorem eq (d d' : AmbientModels.{u}) : d = d' := by
+  have h : @ScalarSixPullbackData.theta d = @ScalarSixPullbackData.theta d' := by
+    funext Λ Γ a U V f
+    apply Iso.ext
+    exact (d.thetaNormalization a f).trans (d'.thetaNormalization a f).symm
+  cases d
+  cases d'
+  cases h
+  rfl
+
+end AlgebraicGeometry.ProEtale.CondensedRing
