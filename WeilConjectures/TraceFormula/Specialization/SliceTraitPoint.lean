@@ -17,6 +17,7 @@ import WeilConjectures.RingTheory.StrictHenselizationDimension
 import WeilConjectures.RingTheory.StrictHenselizationLocalMaximalIdeal
 import WeilConjectures.RingTheory.StrictHenselizationRegular
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitDVR
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 
 /-!
 

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.ConstantTensorProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 
 /-!
 # Finite Tor amplitude of the exceptional inverse image along a closed immersion
