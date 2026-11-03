@@ -42,14 +42,14 @@ structure RightEq (P Q : CochainComplex (FiniteModules A X) ℤ)
     let R := (finiteInput A gU j' j g sq).R
     letI : (restrict .ordinary j R).Additive := (restriction_exact .ordinary j R).1
     let fc := (ProEtale.upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)
-    let h := (restrict .ordinary j R).mapHomologicalComplex (.up ℤ)
     let v := NatTrans.mapHomologicalComplex e.open_pin.star.hom (.up ℤ)
     (e.tensorU.hom.app ((finitePull A j).obj M,
           (ProEtale.upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj N) ≫
         o.tensorU.functor.map
           (CategoryTheory.Prod.mkHom (r.hom.app M) (e.openPull.hom.app N)) ≫
         o.tensorComparison.comparison.inv.app
-          (e.realizeX.derived.obj M, e.realizeX.derived.obj N)) ≫ suffix A gU j' j g sq o e P Q hp hq =
+          (e.realizeX.derived.obj M, e.realizeX.derived.obj N)) ≫
+        suffix A gU j' j g sq o e P Q hp hq =
       restrictionTransport% ≫ DerivedCategory.Q.map
         ((e.tensorU_pin.totalIso (fc.obj P) (fc.obj Q)).hom ≫
         (total (restrictRing .ordinary j R)).map

@@ -35,10 +35,12 @@ theorem squareEq_of_halves (P Q : CochainComplex (FiniteModules A X) ℤ)
       ((finiteComplexRealization e.realizeX).obj P))
     (hq : resolving (finiteInput A gU j' j g sq).R
       ((finiteComplexRealization e.realizeX).obj Q))
-    (hL : LeftEq A gU j' j g sq o e P Q hp hq) (hR : RightEq A gU j' j g sq o e P Q hp hq) (ht : TotalEq A gU j' j g sq o e P Q) :
+    (hL : LeftEq A gU j' j g sq o e P Q hp hq) (hR : RightEq A gU j' j g sq o e P Q hp hq)
+    (ht : TotalEq A gU j' j g sq o e P Q) :
     SquareEq A gU j' j g sq o e P Q := by
-  haveI := suffix_isIso A gU j' j g sq o e P Q hp hq
+  have := suffix_isIso A gU j' j g sq o e P Q hp hq
   exact ⟨(cancel_mono (suffix A gU j' j g sq o e P Q hp hq)).1 (hL.eq.trans
-    ((congrArg (fun z ↦ restrictionTransport% ≫ DerivedCategory.Q.map z) ht.eq).trans hR.eq.symm))⟩
+    ((congrArg (fun z ↦ restrictionTransport% ≫ DerivedCategory.Q.map z) ht.eq).trans
+      hR.eq.symm))⟩
 
 end SheafOfModules.OpenTensorNormalization.RestrictionSquare

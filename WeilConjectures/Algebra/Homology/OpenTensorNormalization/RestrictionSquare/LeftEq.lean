@@ -41,7 +41,6 @@ structure LeftEq (P Q : CochainComplex (FiniteModules A X) ℤ)
     let N := DerivedCategory.Q.obj Q
     let R := (finiteInput A gU j' j g sq).R
     letI : (restrict .ordinary j R).Additive := (restriction_exact .ordinary j R).1
-    let fc := (ProEtale.upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)
     let h := (restrict .ordinary j R).mapHomologicalComplex (.up ℤ)
     let v := NatTrans.mapHomologicalComplex e.open_pin.star.hom (.up ℤ)
     (e.realizeU.derived.map
