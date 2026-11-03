@@ -286,6 +286,9 @@ import WeilConjectures.SmoothPurity.PurityFiniteSetting.ChernFlagFormula
 import Mathlib.RingTheory.KrullDimension.Regular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Module.ModuleCohomologyConventions
+public import WeilConjectures.AlgebraicGeometry.SupportedBottomGluing
+public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageComparison
 
 /-!
 # Localized top Chern classes of regular sections
@@ -525,6 +528,33 @@ abbrev LocalizedTopChernClasses (P : PurityFiniteSetting.{u}) :=
     IsRegularSection P T a F r s →
       P.FunctorialCupH true (regularSectionZeroProjection P T a F r s) (2 * (r : ℤ)) r
 
+/-- The zero scheme is closed, and forgetting support gives the existing ordinary
+top Chern class. Source: blueprint (L4) (blueprint: thm-pur-localized-top-chern). -/
+def LocalizedTopChernForgetSupport (P : PurityFiniteSetting.{u})
+    (c : P.LocalizedTopChernClasses) : Prop :=
+  ∀ {T : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k)) [IsSeparated a]
+    [LocallyOfFiniteType a] [QuasiCompact a] (F : T.Modules) (r : ℕ)
+    [F.IsFiniteLocallyFreeOfRank r] (s : F.sections) (hs : IsRegularSection P T a F r s),
+  ∃ hc : IsClosedImmersion (regularSectionZeroProjection P T a F r s),
+    @functorialCupForget P true _ _ (regularSectionZeroProjection P T a F r s)
+      hc (2 * (r : ℤ)) r (c a F r s hs) = P.localizedChernOrdinary a F r
+
+/-- In rank one the class is the normalized relative-torsor Cartier class of s.
+Source: blueprint (L1) (blueprint: thm-pur-localized-top-chern). -/
+def LocalizedTopChernLine (P : PurityFiniteSetting.{u})
+    (c : P.LocalizedTopChernClasses) : Prop :=
+  ∀ {T : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k)) [IsSeparated a]
+    [LocallyOfFiniteType a] [QuasiCompact a] (F : T.Modules)
+    [F.IsFiniteLocallyFreeOfRank 1] (s : F.sections) (hs : IsRegularSection P T a F 1 s),
+  ∃ (hc : IsClosedImmersion (regularSectionZeroProjection P T a F 1 s))
+    (hI : (regularSectionZeroProjection P T a F 1 s).ker.IsInvertible)
+    (D : P.DivisorEtaleClasses T),
+    P.DivisorEtaleNormalized T a D ∧
+      c a F 1 s hs = @divisorProEtale P _ _
+        (regularSectionZeroProjection P T a F 1 s) hc
+        (@DivisorEtaleClasses.homClassOf P T D _
+          (regularSectionZeroProjection P T a F 1 s) hc hI)
+
 /-- Arbitrary base change when the pulled-back section remains regular. The
 canonical Cartesian square is a conclusion, not an additional assumption.
 Source: blueprint (L2) (blueprint: thm-pur-localized-top-chern). -/
@@ -583,5 +613,23 @@ def LocalizedTopChernDirectSum (P : PurityFiniteSetting.{u})
       (regularSectionZeroProjection P T a F r s)
       (regularSectionZeroProjection P T a G e t) hc hd
       (2 * (r : ℤ)) (2 * (e : ℤ)) r e (c a F r s hs) (c a G e t ht))
+
+/-- Exactly the four properties of the localized class, factored as named predicates
+so the kernel checks each geometric law once.
+Source: blueprint localized-top-Chern, (L1)--(L4)
+(blueprint: thm-pur-localized-top-chern). -/
+def LocalizedTopChernLaws (P : PurityFiniteSetting.{u})
+    (c : P.LocalizedTopChernClasses) : Prop :=
+  P.LocalizedTopChernForgetSupport c ∧ P.LocalizedTopChernLine c ∧
+    P.LocalizedTopChernBaseChange c ∧ P.LocalizedTopChernDirectSum c
+
+/-- The line clause of the four localized Chern laws.
+Source: blueprint localized-top-Chern, (L1)--(L4)
+(blueprint: thm-pur-localized-top-chern).
+Proof: project the corresponding conjunct of LocalizedTopChernLaws. -/
+theorem LocalizedTopChernLaws.line (P : PurityFiniteSetting.{u})
+    {c : P.LocalizedTopChernClasses} (h : P.LocalizedTopChernLaws c) :
+    P.LocalizedTopChernLine c := by
+  exact h.2.1
 
 end WeilConjectures.PurityFiniteSetting

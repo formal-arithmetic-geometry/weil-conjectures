@@ -18,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 import WeilConjectures.AlgebraicGeometry.Standing.StandingExceptionalComposition
 import WeilConjectures.AlgebraicGeometry.Standing.StandingExceptionalCompositionInverseRight
+public import WeilConjectures.AlgebraicGeometry.Standing.StandingExceptionalCompositionInverseLeft
 
 /-! # Composition coherence for the specified smooth purity maps
 
@@ -237,6 +238,49 @@ theorem compositionInput_bounded (K : Scheme.proEtaleDerivedCategory Z P.Ring)
     exact (Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).unitIso.app _ ≪≫
       (Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.mapIso
         ((Functor.mapDerivedCategoryCompIso C R).symm.app G.obj ≪≫ e)
+
+/-- The specified counit mate c is invertible on this domain.
+Source: main-20261015 composition statement, composition isomorphism c
+(blueprint: thm-pur-composition-coherence).
+Proof: alpha from thm-sf-comp-composition is invertible and natural on bounded-below
+etale-origin inputs. The standing Hom bijections identify both exceptional objects
+as representatives of the same compact-support Hom functor on bounded constructible
+objects. Transpose alpha inverse for the inverse map. Naturality and the two triangle
+identities give the two inverse equations, by the two adjunction hom bijections.
+Finally realize through the coefficient equivalence and its intermediate unit. -/
+theorem isIso_compositionExceptionalMap (f : X ⟶ Y) (g : Y ⟶ Z)
+    [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring)
+    (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Z K) :
+    IsIso (P.compositionExceptionalMap f g K hK) := by
+  let L : ProEtale.DerivedCategoryBoundedConstructible
+      (ModuleCat.{u + 1} P.Coefficient) Z :=
+    ⟨(Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.obj K,
+      P.compositionInput_bounded K hK⟩
+  have hc : IsIso (ProEtale.standingExceptionalComposition P f g L) :=
+    ⟨⟨ProEtale.standingExceptionalCompositionInverse P f g L,
+      ProEtale.standingExceptionalComposition_inverse_hom P f g L,
+      ProEtale.standingExceptionalComposition_hom_inverse P f g L⟩⟩
+  unfold compositionExceptionalMap
+  refine @Functor.map_isIso _ _ _ _ _ _ _ _ ?_
+  refine IsIso.comp_isIso' hc ?_
+  infer_instance
+
+/-- The inverse of the specified standing composition map.
+Source: main-20261015 composition statement, last arrow c inverse
+(blueprint: thm-pur-composition-coherence). -/
+def compositionExceptionalIso (f : X ⟶ Y) (g : Y ⟶ Z)
+    [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring)
+    (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Z K) :
+    (P.compositionExceptional (f ≫ g)).obj K ≅
+      (P.compositionExceptional f).obj ((P.compositionExceptional g).obj K) :=
+  letI := P.isIso_compositionExceptionalMap f g K hK
+  asIso (P.compositionExceptionalMap f g K hK)
 
 end Geometry
 end WeilConjectures.PurityFiniteSetting

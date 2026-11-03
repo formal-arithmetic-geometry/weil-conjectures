@@ -8,6 +8,13 @@ public import WeilConjectures.SmoothPurity.PurityFiniteSetting.LocalizedTopChern
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Supported.SupportedCupComparisonBasic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFrame
 public import WeilConjectures.SmoothPurity.DivisorClass.DivisorClass
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+public import WeilConjectures.AlgebraicGeometry.Geo.GeoCartierCanonicalEtale
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerLevelIndependence
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.LocalizedTopChernKummerFamily
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.LocalizedTopChernKummerLaws
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.LocalizedTopChernStatementModels
 /-!
 # Localized top Chern classes, with the current divisor and frame interfaces
 
@@ -58,7 +65,13 @@ theorem localizedTopChernSingleTensor_isIso (P : PurityFiniteSetting.{u})
     (T : Scheme.{u}) (a : T ⟶ Spec (.of P.field.k)) (r : ℕ) :
     IsIso (ProEtale.cupSingleTensorMap
       (P.functorialCupTwist false T r) (P.functorialCupTwist false T 1)) := by
-  sorry
+  let inverse : TensorInverse (P.functorialCupTwist false T r) :=
+    { obj := P.functorialCupTwist false T (-(r : ℤ))
+      rightIso := P.functorialCupTwistProduct false T a r (-(r : ℤ)) ≪≫
+        eqToIso (congrArg (P.functorialCupTwist false T) (add_neg_cancel (r : ℤ)))
+      leftIso := P.functorialCupTwistProduct false T a (-(r : ℤ)) r ≪≫
+        eqToIso (congrArg (P.functorialCupTwist false T) (neg_add_cancel (r : ℤ))) }
+  exact localizedTopChernSingleTensorMap_isIso _ _ inverse.flat
 
 /-- Assemble ordered positive-power comparisons in an abstract monoidal category.
 Source: the ordered tensor-power convention of def-coefficient-twists-detailed
@@ -94,7 +107,7 @@ def localizedTopChernTateOneIso (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
       Etale.tateObject P.Coefficient T 1 := by
   letI := P.localizedTopChernInvertibleExponent a
   exact (DerivedCategory.singleFunctor _ 0).mapIso
-      (WeilConjectures.DivisorClass.canonicalFiniteEtaleLineAbIso T
+      (localizedTopChernRootLineAbIso T
         P.diagonalExponent P.Coefficient P.diagonalExponent_annihilates) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso
       (Etale.extendScalarsRootsOfUnityIsoTateTwistSheaf P.Coefficient
@@ -191,9 +204,9 @@ def LocalizedTopChernStatementLine (P : PurityFiniteSetting.{u})
   ∃ hc : IsClosedImmersion (regularSectionZeroProjection P T a F 1 s),
     letI := hc
     ∃ hI : (regularSectionZeroProjection P T a F 1 s).ker.IsInvertible,
-    ∃ cD : WeilConjectures.DivisorClass.supportedHom P.Coefficient
+    ∃ cD : localizedTopChernDivisorHom P.Coefficient
         (regularSectionZeroProjection P T a F 1 s),
-      cD = WeilConjectures.DivisorClass.canonicalCartierSupportedMap P.Coefficient
+      cD = localizedTopChernCartierSupportedMap P.Coefficient
         P.diagonalExponent P.diagonalExponent_annihilates
         (regularSectionZeroProjection P T a F 1 s) (P.localizedTopChernTateIso T a 1)
         (Etale.geoCartierEtaleClass P.Coefficient P.diagonalExponent
@@ -297,6 +310,8 @@ are the negatives of the original roots. The local formula is Step 4.
 -/
 theorem localized_top_chern_statement (P : PurityFiniteSetting.{u}) :
     ∃ c : P.LocalizedTopChernClasses, P.LocalizedTopChernStatementLaws c := by
-  sorry
+  obtain ⟨c, hbase, hframe⟩ := localizedTopChernKummerFamily_exists P
+  obtain ⟨hforget, hline, hsum⟩ := localizedTopChernKummerFamily_laws P c hbase hframe
+  exact ⟨c, hforget, hline, hbase, hsum, hframe⟩
 
 end WeilConjectures.PurityFiniteSetting

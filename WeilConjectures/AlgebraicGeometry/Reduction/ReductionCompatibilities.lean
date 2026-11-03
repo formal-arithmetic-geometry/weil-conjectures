@@ -86,6 +86,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalChart
 public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalConservativity
 public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalRealization
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.CharP.CharAndCard
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteNormalizedOrientationScalar
 
 /-! # Units, composition and purity under finite coefficient change
 
