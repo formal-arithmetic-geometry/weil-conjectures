@@ -12,6 +12,12 @@ import WeilConjectures.AlgebraicGeometry.AbsoluteFrobeniusNatural
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.TopInvariance
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+public import WeilConjectures.AlgebraicGeometry.TraceOperations.GeometricOperationPackage
+public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.SmoothPurity.FiniteFieldDatum.RelativeFrobeniusGeometricFiber
 
 /-!
 # Relative Frobenius comparison using the recorded Weil-complex interface
@@ -242,12 +248,9 @@ macro "pkg_dom" : tactic => `(tactic| first
 
 /-- The specified comparison: package base change, ordinary unit for relative
 Frobenius, inverse package proper comparison, package composition and canonical
-pullback composition. The comparisons are evaluated at `K`, `p_m^*K`, `r_m^*p_m^*K` and
-`Rr_{m!}r_m^*p_m^*K`, which lie in the given operation domains since `K` does (`hK`, supplied
-automatically for finite-Tor constructible inputs) by `Given.star_mem`, `Given.shriek_mem`.
-Source: sk-i-relative-frob (1) (blueprint: sk-i-relative-frob); sk-d-six, opening. -/
-def theta (m : ℕ) (K : TraceOperations.D Λ X.left)
-    (hK : O.dom X K := by pkg_dom) :
+pullback composition. Source: sk-i-relative-frob (1)
+(blueprint: sk-i-relative-frob). -/
+def theta (m : ℕ) (K : TraceOperations.D Λ X.left) :
     (TraceOperations.star Λ (frobeniusPower PhiY m).left).obj ((O.shriek f).obj K) ⟶
       (O.shriek f).obj ((TraceOperations.star Λ (frobeniusPower PhiX m).left).obj K) := by
   let g := frobeniusPower PhiY m
@@ -265,16 +268,13 @@ def theta (m : ℕ) (K : TraceOperations.D Λ X.left)
       isoPullback := sq.isoPullback
       hom_fst := sq.isoPullback_hom_fst
       hom_snd := sq.isoPullback_hom_snd }
-  have hp : O.dom _ ((TraceOperations.star Λ p.left).obj K) := O.star_mem p hK
-  have hr : O.dom _ ((TraceOperations.star Λ r.left).obj
-      ((TraceOperations.star Λ p.left).obj K)) := O.star_mem r hp
-  exact (P.comparisons.baseChange p f' f g chosen).hom.app ⟨K, hK, hp⟩ ≫
+  exact (P.comparisons.baseChange p f' f g chosen).hom.app K ≫
     (O.shriek f').map
       ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ r.left).unit.app
           ((TraceOperations.star Λ p.left).obj K) ≫
         (P.comparisons.proper r).inv.app
-          ⟨(TraceOperations.star Λ r.left).obj ((TraceOperations.star Λ p.left).obj K), hr⟩) ≫
-    (P.comparisons.composition r f').hom.app ⟨_, hr, O.shriek_mem r hr⟩ ≫
+          ((TraceOperations.star Λ r.left).obj ((TraceOperations.star Λ p.left).obj K))) ≫
+    (P.comparisons.composition r f').hom.app _ ≫
     (shriekCongr O (relativeFrobenius_fst f (frobeniusPower PhiX m) g
       (powerCommutation f PhiX PhiY hf m))).hom.app _ ≫
     (O.shriek f).map
@@ -283,17 +283,14 @@ def theta (m : ℕ) (K : TraceOperations.D Λ X.left)
           (powerCommutation f PhiX PhiY hf m))).hom.app K)
 
 omit [LocallyOfFiniteType Y.hom] in
-/-- The specified comparison is invertible at every complex `K` of the given operation domain
-(`hK`, supplied automatically for finite-Tor constructible inputs, sk-i-relative-frob (1) being
-on `D^b_ctf`; sk-d-six, opening).
+/-- The specified comparison is invertible on the entire ordinary derived category.
 Source: sk-i-relative-frob (1), topological invariance (blueprint: sk-i-relative-frob).
 Proof. The relative Frobenius is a universal homeomorphism. Its module pullback
 is an equivalence, hence so is its derived pullback. The specified adjunction unit
 is therefore invertible. Every other factor of theta is an isomorphism, and the
 compact-support functors preserve these isomorphisms. -/
-theorem theta_isIso (m : ℕ) (K : TraceOperations.D Λ X.left)
-    (hK : O.dom X K := by pkg_dom) :
-    IsIso (theta O P f PhiX PhiY hf m K hK) := by
+theorem theta_isIso (m : ℕ) (K : TraceOperations.D Λ X.left) :
+    IsIso (theta O P f PhiX PhiY hf m K) := by
   let g := frobeniusPower PhiY m
   let p := pullback.snd g f
   let r := relativeFrobenius f (frobeniusPower PhiX m) g
@@ -310,20 +307,17 @@ theorem theta_isIso (m : ℕ) (K : TraceOperations.D Λ X.left)
 
 omit [LocallyOfFiniteType Y.hom]
   [IsUniversalHomeomorphism PhiX.left] [IsUniversalHomeomorphism PhiY.left] in
-/-- Naturality of the specified relative Frobenius comparison, for morphisms between
-complexes of the given operation domain (`hK`, `hN`, supplied automatically for finite-Tor
-constructible inputs; sk-d-six, opening).
+/-- Naturality of the specified relative Frobenius comparison, for arbitrary
+ambient complexes and morphisms.
 Source: sk-i-relative-frob (1), naturality (blueprint: sk-i-relative-frob).
 Proof. Express theta as the composite of the package exchange, the ordinary
 adjunction unit, inverse proper comparison, compact-support composition,
 equality transport and pullback composition. Whiskering preserves natural
-transformations on the full subcategory of the given operation domain, so naturality of
-that composite is exactly this equation. -/
-theorem theta_naturality (m : ℕ) (K N : TraceOperations.D Λ X.left) (v : K ⟶ N)
-    (hK : O.dom X K := by pkg_dom) (hN : O.dom X N := by pkg_dom) :
+transformations, so naturality of that composite is exactly this equation. -/
+theorem theta_naturality (m : ℕ) (K N : TraceOperations.D Λ X.left) (v : K ⟶ N) :
     (TraceOperations.star Λ (frobeniusPower PhiY m).left).map ((O.shriek f).map v) ≫
-        theta O P f PhiX PhiY hf m N hN =
-      theta O P f PhiX PhiY hf m K hK ≫
+        theta O P f PhiX PhiY hf m N =
+      theta O P f PhiX PhiY hf m K ≫
         (O.shriek f).map ((TraceOperations.star Λ (frobeniusPower PhiX m).left).map v) := by
   let g := frobeniusPower PhiY m
   let p := pullback.snd g f
@@ -340,44 +334,27 @@ theorem theta_naturality (m : ℕ) (K N : TraceOperations.D Λ X.left) (v : K �
       isoPullback := sq.isoPullback
       hom_fst := sq.isoPullback_hom_fst
       hom_snd := sq.isoPullback_hom_snd }
-  -- The comparisons are natural transformations on the given operation domains; the
-  -- inputs `K`, `p^*K`, `r^*p^*K` stay in them by `Given.star_mem`, `Given.shriek_mem`.
-  let ι := (O.dom X).ι
-  let Lp := (O.pullDom p).lift ι (fun K => ⟨K.2, O.star_mem p K.2⟩)
-  let Lr := (O.dom _).lift (ι ⋙ TraceOperations.star Λ p.left ⋙ TraceOperations.star Λ r.left)
-    (fun K => O.star_mem r (O.star_mem p K.2))
-  let Lc := (O.compDom r).lift
-    (ι ⋙ TraceOperations.star Λ p.left ⋙ TraceOperations.star Λ r.left)
-    (fun K => ⟨O.star_mem r (O.star_mem p K.2), O.shriek_mem r (O.star_mem r (O.star_mem p K.2))⟩)
-  let η := Functor.whiskerLeft (ι ⋙ TraceOperations.star Λ p.left)
-      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ r.left).unit ≫
-    Functor.whiskerLeft Lr (P.comparisons.proper r).inv
-  let t := Functor.whiskerLeft Lp (P.comparisons.baseChange p f' f g chosen).hom ≫
-    Functor.whiskerRight η (O.shriek f') ≫
-    Functor.whiskerLeft Lc
+  let η := (CondensedRing.derivedUpperStarLowerStarAdjunction Λ r.left).unit ≫
+    Functor.whiskerLeft (TraceOperations.star Λ r.left) (P.comparisons.proper r).inv
+  let t := (P.comparisons.baseChange p f' f g chosen).hom ≫
+    Functor.whiskerRight (Functor.whiskerLeft (TraceOperations.star Λ p.left) η) (O.shriek f') ≫
+    Functor.whiskerLeft (TraceOperations.star Λ p.left ⋙ TraceOperations.star Λ r.left)
       ((P.comparisons.composition r f').hom ≫
-        Functor.whiskerLeft (O.compDom r).ι
-          (shriekCongr O (relativeFrobenius_fst f (frobeniusPower PhiX m) g
-            (powerCommutation f PhiX PhiY hf m))).hom) ≫
-    Functor.whiskerLeft ι (Functor.whiskerRight
+        (shriekCongr O (relativeFrobenius_fst f (frobeniusPower PhiX m) g
+          (powerCommutation f PhiX PhiY hf m))).hom) ≫
+    Functor.whiskerRight
       ((pullbackComposition Λ r p).inv ≫
         (starCongr (Λ := Λ) (relativeFrobenius_snd f (frobeniusPower PhiX m) g
-          (powerCommutation f PhiX PhiY hf m))).hom) (O.shriek f))
+          (powerCommutation f PhiX PhiY hf m))).hom) (O.shriek f)
   simpa only [t, η, theta, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.comp_map, Functor.comp_obj, Functor.map_comp, Category.assoc, ι, Lp, Lr, Lc,
-    ObjectProperty.lift, ObjectProperty.lift_obj_obj, ObjectProperty.ι_map,
-    ObjectProperty.ι_obj, ObjectProperty.homMk_hom]
-    using t.naturality (X := (⟨K, hK⟩ : (O.dom X).FullSubcategory)) (Y := ⟨N, hN⟩)
-      (ObjectProperty.homMk v)
+    Functor.comp_map, Functor.comp_obj, Functor.map_comp, Category.assoc] using t.naturality v
 
 /-- The pushforward Weil complex uses the recorded WeilComplex structure and its
 coefficient is theta in degree one followed by Rf_! psi, with the canonical
-power-one identification; `K` lies in the given operation domain (`hK`, supplied
-automatically for finite-Tor constructible inputs). Source: sk-i-relative-frob (2)
+power-one identification. Source: sk-i-relative-frob (2)
 (blueprint: sk-i-relative-frob). -/
 def pushed (K : TraceOperations.D Λ X.left)
-    (psi : (TraceOperations.star Λ PhiX.left).obj K ⟶ K)
-    (hK : O.dom X K := by pkg_dom) : WeilComplex Λ Y where
+    (psi : (TraceOperations.star Λ PhiX.left).obj K ⟶ K) : WeilComplex Λ Y where
   frobenius := PhiY
   complex := (O.shriek f).obj K
   coefficient :=
@@ -391,25 +368,21 @@ def pushed (K : TraceOperations.D Λ X.left)
 /-- Properness needed by the recorded global operator on the pushed complex.
 Source: sk-i-relative-frob (3) (blueprint: sk-i-relative-frob). -/
 instance pushedPowerProper (K : TraceOperations.D Λ X.left)
-    (psi : (TraceOperations.star Λ PhiX.left).obj K ⟶ K) (hK : O.dom X K) (m : ℕ) :
-    IsProper (frobeniusPower (pushed O P f PhiX PhiY hf K psi hK).frobenius m).left := by
+    (psi : (TraceOperations.star Λ PhiX.left).obj K ⟶ K) (m : ℕ) :
+    IsProper (frobeniusPower (pushed O P f PhiX PhiY hf K psi).frobenius m).left := by
   change IsProper (frobeniusPower PhiY m).left
   infer_instance
 
-/-- Canonical structure-map composition from P.comparisons, evaluated at `K` in the given
-operation domain (`hK`, supplied automatically for finite-Tor constructible inputs), so that
-`Rf_!K` is in it as well (`Given.shriek_mem`).
-Source: sk-i-relative-frob (3) (blueprint: sk-i-relative-frob); sk-d-six, opening. -/
-def compactComposition (K : TraceOperations.D Λ X.left)
-    (hK : O.dom X K := by pkg_dom) :
+/-- Canonical structure-map composition from P.comparisons.
+Source: sk-i-relative-frob (3) (blueprint: sk-i-relative-frob). -/
+def compactComposition (K : TraceOperations.D Λ X.left) :
     (TraceOperations.Comparisons.compactlySupported O Y).obj ((O.shriek f).obj K) ≅
       (TraceOperations.Comparisons.compactlySupported O X).obj K := by
   have e : f ≫ TraceOperations.structureMap Y = TraceOperations.structureMap X :=
     Over.OverMorphism.ext f.w
   haveI : HasCompactification (f ≫ TraceOperations.structureMap Y).left :=
     HasCompactification.of_eq (f := X.hom) (congrArg Over.Hom.left e).symm
-  exact (P.comparisons.composition f (TraceOperations.structureMap Y)).app
-      ⟨K, hK, O.shriek_mem f hK⟩ ≪≫
+  exact (P.comparisons.composition f (TraceOperations.structureMap Y)).app K ≪≫
     (shriekCongr O e).app K
 
 /-- The canonical restriction of PhiX^m to a PhiY^m-fixed fibre.
@@ -464,12 +437,10 @@ def fibreComplex (K : TraceOperations.D Λ X.left)
     (TraceOperations.star Λ (pullback.fst f y).left).map
       ((WeilComplex.mk PhiX K psi).iterate m)
 
-/-- Compact-support base change at a fixed point, using the package exchange, evaluated at
-`K` in the given operation domain (`hK`, supplied automatically for finite-Tor constructible
-inputs), so that its pullback to the fibre is in it as well (`Given.star_mem`).
-Source: sk-i-relative-frob (4) (blueprint: sk-i-relative-frob); sk-d-six, opening. -/
+/-- Compact-support base change at a fixed point, using the package exchange.
+Source: sk-i-relative-frob (4) (blueprint: sk-i-relative-frob). -/
 def fibreComparison (y : TraceOperations.base (Spec (.of k)) ⟶ Y)
-    (K : TraceOperations.D Λ X.left) (hK : O.dom X K := by pkg_dom) :
+    (K : TraceOperations.D Λ X.left) :
     (TraceOperations.star Λ y.left).obj ((O.shriek f).obj K) ≅
       (TraceOperations.Comparisons.compactlySupported O (pullback f y)).obj
         ((TraceOperations.star Λ (pullback.fst f y).left).obj K) := by
@@ -478,7 +449,7 @@ def fibreComparison (y : TraceOperations.base (Spec (.of k)) ⟶ Y)
     { w := sq.w
       isoPullback := sq.isoPullback
       hom_fst := sq.isoPullback_hom_fst
-      hom_snd := sq.isoPullback_hom_snd }).app ⟨K, hK, O.star_mem _ hK⟩ ≪≫
+      hom_snd := sq.isoPullback_hom_snd }).app K ≪≫
     (shriekCongr O (fibreStructure f y)).app _
 
 /-- The four clauses, expressed using the recorded coefficient recursion and

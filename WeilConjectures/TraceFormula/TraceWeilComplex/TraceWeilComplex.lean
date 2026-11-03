@@ -11,6 +11,8 @@ public import WeilConjectures.SmoothPurity.FiniteFieldDatum.RelativeFrobeniusGeo
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.AbsoluteFrobeniusNatural
 import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
+public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 
 /-! # Frobenius correspondences, Weil complexes and Weil data
 
@@ -110,16 +112,13 @@ def WeilComplex.iterate {X : Over s} (W : WeilComplex Λ X) :
 /-- The pullback map `(Φ)^* : RΓ_c(X,K) → RΓ_c(X, Φ^*K)` of a proper endomorphism `Φ` of `X`
 over `s`: `Ra_{X!}` of the unit of `Φ^* ⊣ RΦ_*`, then `Ra_{X!}` of the inverse proper
 identification `RΦ_! ≅ RΦ_*`, then the composition isomorphism
-`Ra_{X!}RΦ_! ≅ R(a_XΦ)_! = Ra_{X!}` of the package of sk-d-six. The two package comparisons
-are evaluated at `Φ^*K`, which with `RΦ_!Φ^*K` lies in the given operation domains (`hK`;
-sk-d-six uses the given operations wherever the displayed composites are defined).
+`Ra_{X!}RΦ_! ≅ R(a_XΦ)_! = Ra_{X!}` of the package of sk-d-six.
 Source: "`(Φ_X^m)^* : RΓ_c(X,K) → RΓ_c(X,(Φ_X^m)^*K)` is the pullback map induced by the unit
 of `(Φ_X^m)^* ⊣ R(Φ_X^m)_*`" (blueprint: sk-d-weil); the arrows are the first three arrows of
 `T_c(u)` of sk-d-operator for `c₂ = Φ`. -/
 def frobeniusPullbackCompact (O : TraceOperations.Given Λ s)
     (P : TraceOperations.GeometricOperations O) {X : Over s} [HasCompactification X.hom]
-    (Φ : X ⟶ X) [IsProper Φ.left] (K : TraceOperations.D Λ X.left)
-    (hK : O.compDom Φ ((TraceOperations.star Λ Φ.left).obj K)) :
+    (Φ : X ⟶ X) [IsProper Φ.left] (K : TraceOperations.D Λ X.left) :
     (TraceOperations.Comparisons.compactlySupported O X).obj K ⟶
       (TraceOperations.Comparisons.compactlySupported O X).obj
         ((TraceOperations.star Λ Φ.left).obj K) := by
@@ -132,11 +131,9 @@ def frobeniusPullbackCompact (O : TraceOperations.Given Λ s)
   let η := (CondensedRing.derivedUpperStarLowerStarAdjunction Λ Φ.left).unit.app K
   let r : O.shriek (Φ ≫ TraceOperations.structureMap X) ≅
       O.shriek (TraceOperations.structureMap X) := eqToIso (by simp only [e])
-  exact sX.map
-      (η ≫ (P.comparisons.proper Φ).inv.app ⟨(TraceOperations.star Λ Φ.left).obj K, hK.1⟩) ≫
-    (P.comparisons.composition Φ (TraceOperations.structureMap X)).hom.app
-      ⟨(TraceOperations.star Λ Φ.left).obj K, hK⟩ ≫
-    r.hom.app ((TraceOperations.star Λ Φ.left).obj K)
+  let μ := P.comparisons.composition Φ (TraceOperations.structureMap X) ≪≫ r
+  exact sX.map (η ≫ (P.comparisons.proper Φ).inv.app ((TraceOperations.star Λ Φ.left).obj K)) ≫
+    μ.hom.app ((TraceOperations.star Λ Φ.left).obj K)
 
 /-- The global operator `F_{c,m} = T_{c_m}(φ_m) = RΓ_c(X, φ_m) ∘ (Φ_m)^*` of a Weil complex
 whose power `Φ_m` is proper and whose complex lies in the given operation domain `dom X`
@@ -159,20 +156,20 @@ def WeilComplex.globalOperatorOf (O : TraceOperations.Given Λ s)
     (TraceOperations.Comparisons.compactlySupported O X).map (W.iterate m)
 
 open Classical in
-/-- The global operator `F_{c,m} = T_{c_m}(φ_m)` of a Weil complex whose power `Φ_m` is
-proper. It is the displayed composite `globalOperatorOf` wherever that composite is defined,
-i.e. when the complex lies in the given operation domain `dom X` (`globalOperator_eq`); this
-holds for every finite-Tor constructible complex (`Given.ctf_mem`) and its pullbacks and
-compact-support images. Outside the given operation domains sk-d-six does not define the
-composite, and the value `0` there is a junk convention never used by a target.
-Source: sk-d-weil, global operator (blueprint: sk-d-weil); sk-d-six, opening ("uses the
-given operations wherever the displayed composites are defined"). -/
+/-- The global operator `F_{c,m} = T_{c_m}(φ_m) = RΓ_c(X, φ_m) ∘ (Φ_m)^*` of a Weil complex
+whose power `Φ_m` is proper, for the graph correspondence `c_m = (id_X, Φ_m)` with coefficient
+map `φ_m`.
+Source: "Its operator on cohomology with compact support ... is the endomorphism
+`T_{c_m}(ψ_m) = RΓ_c(X,ψ_m) ∘ (Φ_X^m)^*`" and "The graph correspondence is
+`c_m = (id_X, Φ_m)`, with coefficient map `φ_m`. Write `F_{c,m} = T_{c_m}(φ_m)` for the global
+operator" (blueprint: sk-d-weil). -/
 def WeilComplex.globalOperator (O : TraceOperations.Given Λ s)
     (P : TraceOperations.GeometricOperations O) {X : Over s} [HasCompactification X.hom]
     (W : WeilComplex Λ X) (m : ℕ) [IsProper (frobeniusPower W.frobenius m).left] :
     (TraceOperations.Comparisons.compactlySupported O X).obj W.complex ⟶
       (TraceOperations.Comparisons.compactlySupported O X).obj W.complex :=
-  if hW : O.dom X W.complex then W.globalOperatorOf O P m hW else 0
+  frobeniusPullbackCompact O P (frobeniusPower W.frobenius m) W.complex ≫
+    (TraceOperations.Comparisons.compactlySupported O X).map (W.iterate m)
 
 /-- On the given operation domain the global operator is the displayed composite.
 Source: sk-d-weil, global operator (blueprint: sk-d-weil).
