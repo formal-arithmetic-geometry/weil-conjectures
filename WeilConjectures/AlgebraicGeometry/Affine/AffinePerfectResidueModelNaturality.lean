@@ -21,7 +21,7 @@ Source: Stacks Project, Tags 01IB, 08DW and 06YJ.
 (blueprint: new-affine-perfect-residue-model-naturality)
 -/
 
-@[expose] public section
+public section
 set_option autoImplicit false
 universe v
 open CategoryTheory
@@ -45,7 +45,7 @@ private def zeroMapComplexCompIso {C D E : Type*} [Category C] [Category D] [Cat
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- A reconstruction counit and a termwise comparison give the comparison on a subcategory. -/
-private theorem reconstructionComparison {Z C D E B : Type*}
+private def reconstructionComparison {Z C D E B : Type*}
     [Category Z] [Category C] [Category D] [Category E] [Category B]
     [Limits.HasZeroMorphisms C] [Limits.HasZeroMorphisms D]
     [Limits.HasZeroMorphisms E] [Limits.HasZeroMorphisms B]
@@ -55,23 +55,22 @@ private theorem reconstructionComparison {Z C D E B : Type*}
     [Sh.PreservesZeroMorphisms] [J.PreservesZeroMorphisms] [L.PreservesZeroMorphisms]
     (ρ : F.mapHomologicalComplex (.up ℤ) ⋙ Sh.mapHomologicalComplex (.up ℤ) ⟶ 𝟭 _)
     (hρ : IsIso (Functor.whiskerLeft ι ρ)) (α : Sh ⋙ J ≅ T ⋙ L) :
-    Nonempty (ι ⋙ J.mapHomologicalComplex (.up ℤ) ≅
-      ι ⋙ (F ⋙ T).mapHomologicalComplex (.up ℤ) ⋙ L.mapHomologicalComplex (.up ℤ)) := by
+    ι ⋙ J.mapHomologicalComplex (.up ℤ) ≅
+      ι ⋙ (F ⋙ T).mapHomologicalComplex (.up ℤ) ⋙ L.mapHomologicalComplex (.up ℤ) :=
   let Fc := F.mapHomologicalComplex (.up ℤ)
   let Tc := T.mapHomologicalComplex (.up ℤ)
   let Shc := Sh.mapHomologicalComplex (.up ℤ)
   let Jc := J.mapHomologicalComplex (.up ℤ)
   let Lc := L.mapHomologicalComplex (.up ℤ)
-  let := hρ
   let r : ι ⋙ Fc ⋙ Shc ≅ ι :=
-    asIso (Functor.whiskerLeft ι ρ) ≪≫ Functor.rightUnitor ι
+    @asIso _ _ _ _ (Functor.whiskerLeft ι ρ) hρ ≪≫ Functor.rightUnitor ι
   let s : Shc ⋙ Jc ≅ Tc ⋙ Lc :=
     zeroMapComplexCompIso α ≪≫ (zeroMapComplexCompIso (Iso.refl (T ⋙ L))).symm
   let t : Fc ⋙ Tc ≅ (F ⋙ T).mapHomologicalComplex (.up ℤ) :=
     zeroMapComplexCompIso (Iso.refl (F ⋙ T))
-  exact ⟨Functor.isoWhiskerRight r.symm Jc ≪≫
+  Functor.isoWhiskerRight r.symm Jc ≪≫
     Functor.isoWhiskerLeft (ι ⋙ Fc) s ≪≫
-    Functor.isoWhiskerRight (Functor.isoWhiskerLeft ι t) Lc⟩
+    Functor.isoWhiskerRight (Functor.isoWhiskerLeft ι t) Lc
 
 /-- Paste comparison isomorphisms before and after a common functor. -/
 private def whiskeredComparison {Z C D E S : Type*}
@@ -83,7 +82,7 @@ private def whiskeredComparison {Z C D E S : Type*}
     Functor.isoWhiskerLeft Y η
 
 /-- Transport a derived counit comparison along an exact functor and an ordinary-pullback iso. -/
-private theorem transportedCounitComparison {C D E I : Type*}
+private def transportedCounitComparison {C D E I : Type*}
     [Category C] [Category D] [Category E] [Category I]
     [Abelian C] [Abelian D] [Abelian E]
     [HasDerivedCategory.{v} C] [HasDerivedCategory.{v} D] [HasDerivedCategory.{v} E]
@@ -96,26 +95,36 @@ private theorem transportedCounitComparison {C D E I : Type*}
     (hε : IsIso (Functor.whiskerLeft
       ((ι ⋙ V.mapHomologicalComplex (.up ℤ)) ⋙ HomotopyCategory.quotient D (.up ℤ)) ε))
     (τ : E₀ ≅ PG) :
-    Nonempty (ι ⋙ DerivedCategory.Q.{v} ⋙ V.mapDerivedCategory ⋙ L ≅
-      ι ⋙ (V ⋙ PG).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{v}) := by
+    ι ⋙ DerivedCategory.Q.{v} ⋙ V.mapDerivedCategory ⋙ L ≅
+      ι ⋙ (V ⋙ PG).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{v} :=
   let F := ι ⋙ V.mapHomologicalComplex (.up ℤ)
-  let := hε
-  obtain ⟨c⟩ := counitComparison E₀ L F ε
-  exact ⟨Functor.isoWhiskerLeft ι (Functor.isoWhiskerRight V.mapDerivedCategoryFactors L) ≪≫
+  let c : F ⋙ DerivedCategory.Q.{v} ⋙ L ≅
+      F ⋙ E₀.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{v} :=
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft F (DerivedCategory.quotientCompQhIso _).symm) L ≪≫
+    @asIso _ _ _ _ (Functor.whiskerLeft (F ⋙ HomotopyCategory.quotient _ (.up ℤ)) ε) hε ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft F (E₀.mapHomotopyCategoryFactors (.up ℤ)))
+      DerivedCategory.Qh ≪≫
+    Functor.isoWhiskerLeft (F ⋙ E₀.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso _)
+  Functor.isoWhiskerLeft ι (Functor.isoWhiskerRight V.mapDerivedCategoryFactors L) ≪≫
     c ≪≫ Functor.isoWhiskerRight
       (Functor.isoWhiskerLeft F (NatIso.mapHomologicalComplex τ (.up ℤ))) DerivedCategory.Q ≪≫
     Functor.isoWhiskerRight (Functor.isoWhiskerLeft ι
-      (Functor.mapHomologicalComplexCompIso (Iso.refl (V ⋙ PG)) (.up ℤ))) DerivedCategory.Q⟩
+      (Functor.mapHomologicalComplexCompIso (Iso.refl (V ⋙ PG)) (.up ℤ))) DerivedCategory.Q
 
-private theorem residueTermComparison (W : Scheme.{v}) (w : W) (U : W.Opens)
+/-- The termwise comparison between the ordinary residue pullback of the affine associated
+sheaf and the associated sheaf of the residue extension of sections. -/
+private def residueTermComparison (W : Scheme.{v}) (w : W) (U : W.Opens)
     (hwU : w ∈ U) (hU : IsAffineOpen U) :
     let V : SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U) ⥤
         SheafOfModules.{v} (moduleRings U.toScheme.toRingedSpace) :=
       (Modules.overEquiv U).functor
-    Nonempty (affinePerfectSheafification W U hU ⋙
+    affinePerfectSheafification W U hU ⋙
       (V ⋙ Modules.pullback (openResiduePoint W w U hwU)) ≅
         ModuleCat.extendScalars.{v, v, v} (W.evaluation U w hwU).hom ⋙
-          tilde.functor (W.residueField w)) := by
+          tilde.functor (W.residueField w) := by
   classical
   dsimp only
   let A := W.presheaf.obj (.op U)
@@ -155,9 +164,9 @@ private theorem residueTermComparison (W : Scheme.{v}) (w : W) (U : W.Opens)
   let τ : Modules.tensorPullback f ≅ Modules.pullback f :=
     (Modules.nonempty_tensorPullbackAdjunction f).some.leftAdjointUniq
       (Modules.pullbackPushforwardAdjunction f)
-  obtain ⟨β, _⟩ := Modules.exists_tensorPullback_tilde_iso (CommRingCat.ofHom φ)
-  obtain ⟨δs⟩ := affine_residue_scalar_transport W U hU z
-  exact ⟨(Functor.associator _ _ _).symm ≪≫
+  let β := Classical.choose (Modules.exists_tensorPullback_tilde_iso (CommRingCat.ofHom φ))
+  let δs := Classical.choice (affine_residue_scalar_transport W U hU z)
+  exact (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight δ (Modules.pullback g) ≪≫
     Functor.isoWhiskerRight
       (Functor.isoWhiskerLeft TA (Modules.restrictFunctorIsoPullback hU.isoSpec.hom)) _ ≪≫
@@ -165,7 +174,7 @@ private theorem residueTermComparison (W : Scheme.{v}) (w : W) (U : W.Opens)
     Functor.isoWhiskerLeft TA (Modules.pullbackComp g hU.isoSpec.hom) ≪≫
     Functor.isoWhiskerLeft TA (Modules.pullbackCongr hchart) ≪≫
     Functor.isoWhiskerLeft TA τ.symm ≪≫ β ≪≫
-    Functor.isoWhiskerRight σ L ≪≫ Functor.isoWhiskerRight δs L⟩
+    Functor.isoWhiskerRight σ L ≪≫ Functor.isoWhiskerRight δs L
 
 attribute [local irreducible] Modules.overEquiv affinePerfectSheafification openResiduePoint
 
@@ -179,11 +188,12 @@ set_option maxHeartbeats 500000 in
 -- The natural comparison traverses complex, homotopy and derived localization functors.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Termwise residue extension computes local derived fibre cohomology naturally
-on every strictly perfect complex. Source: Stacks Project, Tags 01IB, 08DW and 06YJ.
+/-- The natural isomorphism by which termwise residue extension of sections computes local
+derived fibre cohomology in degree one on strictly perfect complexes.
+Source: Stacks Project, Tags 01IB, 08DW and 06YJ.
 (blueprint: new-affine-perfect-residue-model-naturality)
 
-Proof: Work in the full subcategory of strictly perfect complexes. Transport each
+Construction: Work in the full subcategory of strictly perfect complexes. Transport each
 complex by the canonical over-site equivalence. Boundedness and finite-free
 retractions imply K-flatness, so the chosen derived-pullback counit is invertible
 on this whole subcategory. Compute its ordinary pullback by the natural affine
@@ -191,9 +201,8 @@ associated-sheaf/base-change formula, using the natural terminal-section
 reconstruction counit. The canonical field transport makes the coefficient map
 exactly section evaluation. Take homology and global sections on the residue
 spectrum; these sections are exact and undo associated sheaves. All factors
-are natural isomorphisms on the full subcategory, giving the stated family and
-its equation for every chain map. -/
-theorem affine_perfect_residue_model_naturality
+are natural isomorphisms on the full subcategory. -/
+def affinePerfectResidueModelIso
     (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U) :
     let F : SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U) ⥤
         ModuleCat.{v} Γ(W, U) := SheafOfModules.evaluation _ (.op (Over.mk (𝟙 U)))
@@ -205,9 +214,9 @@ theorem affine_perfect_residue_model_naturality
     let P : ObjectProperty (CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) :=
       IsStrictlyPerfect W U
-    Nonempty (P.ι ⋙ G ⋙
+    P.ι ⋙ G ⋙
         HomologicalComplex.homologyFunctor (ModuleCat.{v} (W.residueField w)) (.up ℤ) 1 ≅
-      P.ι ⋙ DerivedCategory.Q ⋙ localDerivedFiberCohomologyFunctor W w U hwU 1) := by
+      P.ι ⋙ DerivedCategory.Q ⋙ localDerivedFiberCohomologyFunctor W w U hwU 1 := by
   dsimp only
   classical
   let D := SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)
@@ -226,7 +235,10 @@ theorem affine_perfect_residue_model_naturality
   let Vc := V.mapHomologicalComplex (.up ℤ)
   let g := openResiduePoint W w U hwU
   let Lg : DerivedCategory.{v + 1} A ⥤ DerivedCategory.{v + 1} B := derivedPullback g
-  obtain ⟨hEadd, ε, _, hflat⟩ := tensorDerivedCounit g
+  have hcounit := tensorDerivedCounit g
+  have hEadd := hcounit.fst
+  let ε := Classical.choose hcounit.snd
+  have hflat := (Classical.choose_spec hcounit.snd).2
   let E : A ⥤ B := Modules.tensorPullback g
   have : E.Additive := hEadd
   have hε : IsIso (Functor.whiskerLeft
@@ -241,8 +253,7 @@ theorem affine_perfect_residue_model_naturality
   let τ : E ≅ PG :=
     (Modules.nonempty_tensorPullbackAdjunction g).some.leftAdjointUniq
       (Modules.pullbackPushforwardAdjunction g)
-  obtain ⟨c'⟩ : Nonempty (ι ⋙ QD ⋙ VD ⋙ Lg ≅
-      ι ⋙ J.mapHomologicalComplex (.up ℤ) ⋙ QB) :=
+  let c' : ι ⋙ QD ⋙ VD ⋙ Lg ≅ ι ⋙ J.mapHomologicalComplex (.up ℤ) ⋙ QB :=
     transportedCounitComparison ι V E PG Lg ε hε τ
   let F : D ⥤ ModuleCat.{v} Γ(W, U) :=
     SheafOfModules.evaluation _ (.op (Over.mk (𝟙 U)))
@@ -257,16 +268,16 @@ theorem affine_perfect_residue_model_naturality
     affinePerfectSheafification_preservesZeroMorphisms W U hU
   let L : ModuleCat.{v} (W.residueField w) ⥤ B := tilde.functor (W.residueField w)
   have : L.Additive := ⟨by intros; exact tilde.map_add _ _⟩
-  obtain ⟨ρ, hρ⟩ := affine_perfect_sections_counit W U hU
-  obtain ⟨α'⟩ := residueTermComparison W w U hwU hU
-  let α : Sh ⋙ J ≅ T ⋙ L := α'
-  obtain ⟨a⟩ : Nonempty (ι ⋙ J.mapHomologicalComplex (.up ℤ) ≅
-      ι ⋙ G ⋙ L.mapHomologicalComplex (.up ℤ)) :=
+  have hsections := affine_perfect_sections_counit W U hU
+  let ρ := Classical.choose hsections
+  have hρ := Classical.choose_spec hsections
+  let α : Sh ⋙ J ≅ T ⋙ L := residueTermComparison W w U hwU hU
+  let a : ι ⋙ J.mapHomologicalComplex (.up ℤ) ≅
+      ι ⋙ G ⋙ L.mapHomologicalComplex (.up ℤ) :=
     reconstructionComparison ι F T Sh J L ρ
       ((NatTrans.isIso_iff_isIso_app _).2 (fun K ↦ hρ K.obj K.property)) α
-  obtain ⟨d⟩ : Nonempty (ι ⋙ QD ⋙ VD ⋙
-      Lg ≅ ι ⋙ G ⋙ L.mapHomologicalComplex (.up ℤ) ⋙ QB) :=
-    ⟨c' ≪≫ Functor.isoWhiskerRight a QB⟩
+  let d : ι ⋙ QD ⋙ VD ⋙ Lg ≅ ι ⋙ G ⋙ L.mapHomologicalComplex (.up ℤ) ⋙ QB :=
+    c' ≪≫ Functor.isoWhiskerRight a QB
   let Γ : B ⥤ ModuleCat.{v} (W.residueField w) :=
     moduleSpecΓFunctor (R := W.residueField w)
   let H := DerivedCategory.homologyFunctor B 1
@@ -279,7 +290,7 @@ theorem affine_perfect_residue_model_naturality
     whiskeredComparison (ι ⋙ QD) (VD ⋙ Lg) (ι ⋙ G)
       (L.mapHomologicalComplex (.up ℤ) ⋙ QB) (H ⋙ Γ)
       (localDerivedFiberCohomologyFunctor W w U hwU 1) HM θ d η
-  exact ⟨β.symm⟩
+  exact β.symm
 
 end
 end AlgebraicGeometry.Scheme

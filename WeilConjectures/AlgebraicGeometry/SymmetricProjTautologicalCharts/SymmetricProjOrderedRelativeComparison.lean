@@ -518,26 +518,26 @@ private theorem realizationComparison_chart {S : Scheme.{u}} (A : RelativeProjAl
   ext x
   exact he x
 
-private theorem orderedComparison_mk {S : Scheme.{u}} {E : S.Modules}
-    [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E)
-    (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅
-      RelativeProjectiveSpace.scheme S r)
-    (hbase : eRel.hom ≫ RelativeProjectiveSpace.π S r =
-      (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom)
-    (hcomp : ∀ V : S.affineOpens,
-      ProjectiveBundleQuotientGeometry.AffineFreeComparison r b eRel V) :
-    ∃ eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅
-        RelativeProjectiveSpace.scheme S r,
-      eRel.hom ≫ RelativeProjectiveSpace.π S r =
-        (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ∧
-      ∀ V : S.affineOpens,
-        ProjectiveBundleQuotientGeometry.AffineFreeComparison r b eRel V :=
-  ⟨eRel, hbase, hcomp⟩
-
 attribute [local irreducible] gradedProjIso projectivePolynomial
 
-/-- An ordered free presentation identifies the canonical symmetric relative Proj with
-relative projective space, including its affine polynomial and degree-one twist models.
+/-- An ordered free presentation `b` identifies the canonical symmetric relative Proj with
+relative projective space: the relative-Proj realization of the graded algebra isomorphism
+induced by `b` and the standard ordered basis. -/
+@[no_expose] def orderedRelativeComparison {S : Scheme.{u}} {E : S.Modules}
+    [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E) :
+    (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅
+      RelativeProjectiveSpace.scheme S r :=
+  realizationComparison (orderedGradedAlgebraIso b)
+
+/-- The ordered relative comparison lies over the base. -/
+theorem orderedRelativeComparison_hom_π {S : Scheme.{u}} {E : S.Modules}
+    [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E) :
+    (orderedRelativeComparison b).hom ≫ RelativeProjectiveSpace.π S r =
+      (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom :=
+  realizationComparison_over (orderedGradedAlgebraIso b)
+
+/-- On every affine chart, the ordered relative comparison `orderedRelativeComparison b` is
+compatible with the affine polynomial and degree-one twist models.
 This assertion does not involve a global tautological quotient or standard projective space.
 
 Source: Stacks Project, Constructions, Tags 01OE (lemma-projective-space-bundle),
@@ -565,38 +565,33 @@ the boundary unit comparison with the structure-sheaf map. Maps from the structu
 are determined by their value at 1, so the homogeneous-section formula gives exactly the
 unitToTwist morphism equality. All formulas hold for r=0, zero coefficient rings and empty
 affine charts. No variable is cancelled in the original ring. -/
-theorem exists_ordered_relative_comparison (S : Scheme.{u}) (E : S.Modules)
-    [E.IsQuasicoherent] (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E) :
-    ∃ eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅
-        RelativeProjectiveSpace.scheme S r,
-      eRel.hom ≫ RelativeProjectiveSpace.π S r =
-        (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ∧
-      ∀ V : S.affineOpens, ProjectiveBundleQuotientGeometry.AffineFreeComparison r b eRel V :=
+theorem orderedRelativeComparison_affineFreeComparison {S : Scheme.{u}} {E : S.Modules}
+    [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E)
+    (V : S.affineOpens) :
+    ProjectiveBundleQuotientGeometry.AffineFreeComparison r b (orderedRelativeComparison b) V :=
   let e := orderedGradedAlgebraIso b
-  let eRel := realizationComparison e
-  orderedComparison_mk b eRel (realizationComparison_over e) (fun V ↦
-    let β := orderedGradedPolynomial b V
-    let γ := projectiveGradedPolynomial S r V
-    let hβ := GradedRingHom.irrelevant_le_map_of_surjective (f := β)
-      (orderedPolynomial b V).surjective
-    let hγ := GradedRingHom.irrelevant_le_map_of_surjective (f := γ)
-      (projectivePolynomial S r V).surjective
-    let eC := gradedProjIso _ ((SymmetricAlgebraSheaf.gradedAlgebraData E).grading V)
+  let β := orderedGradedPolynomial b V
+  let γ := projectiveGradedPolynomial S r V
+  let hβ := GradedRingHom.irrelevant_le_map_of_surjective (f := β)
+    (orderedPolynomial b V).surjective
+  let hγ := GradedRingHom.irrelevant_le_map_of_surjective (f := γ)
+    (projectivePolynomial S r V).surjective
+  let eC := gradedProjIso _ ((SymmetricAlgebraSheaf.gradedAlgebraData E).grading V)
+    (orderedPolynomial b V) (orderedPolynomial_mem_iff b V)
+  let eR := gradedProjIso _ ((RelativeProjectiveSpace.algebra S r).sectionGrade V)
+    (projectivePolynomial S r V) (projectivePolynomial_degree S r V)
+  have heC : eC.hom = Proj.map β hβ :=
+    (gradedProjIso_hom _ _ _ _).trans (Proj.map_congr (by ext p; rfl) _ _)
+  have heR : eR.hom = Proj.map γ hγ :=
+    (gradedProjIso_hom _ _ _ _).trans (Proj.map_congr (by ext p; rfl) _ _)
+  affineFreeComparison_mk b (orderedRelativeComparison b) V β (orderedPolynomial b V).bijective
+    (orderedPolynomial b V).commutes (orderedPolynomial_X b V) hβ eC heC
+    (by rw [heC]; exact orderedPolynomial_twist b V hβ) γ hγ eR
+    (projectiveGradedPolynomial_apply S r V) heR
+    (realizationComparison_chart (RelativeProjectiveSpace.algebra S r) e V _
       (orderedPolynomial b V) (orderedPolynomial_mem_iff b V)
-    let eR := gradedProjIso _ ((RelativeProjectiveSpace.algebra S r).sectionGrade V)
       (projectivePolynomial S r V) (projectivePolynomial_degree S r V)
-    have heC : eC.hom = Proj.map β hβ :=
-      (gradedProjIso_hom _ _ _ _).trans (Proj.map_congr (by ext p; rfl) _ _)
-    have heR : eR.hom = Proj.map γ hγ :=
-      (gradedProjIso_hom _ _ _ _).trans (Proj.map_congr (by ext p; rfl) _ _)
-    affineFreeComparison_mk b eRel V β (orderedPolynomial b V).bijective
-      (orderedPolynomial b V).commutes (orderedPolynomial_X b V) hβ eC heC
-      (by rw [heC]; exact orderedPolynomial_twist b V hβ) γ hγ eR
-      (projectiveGradedPolynomial_apply S r V) heR
-      (realizationComparison_chart (RelativeProjectiveSpace.algebra S r) e V _
-        (orderedPolynomial b V) (orderedPolynomial_mem_iff b V)
-        (projectivePolynomial S r V) (projectivePolynomial_degree S r V)
-        (fun _ ↦ rfl)))
+      (fun _ ↦ rfl))
 
 end
 

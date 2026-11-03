@@ -78,6 +78,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.AlgebraicGeometry.ProEtale.Extension.ProEtaleExtensionZeroComparison
 import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparison
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEquivalence
 import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
 import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
@@ -427,16 +428,11 @@ Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-ctf-finite-comp
 sk-prop-ctf-finite-comparison-localizing.md
 (blueprint: det-ctf-finite-comparison-localizing).
 
-## Main definitions
-
-* `finiteComparisonRealization`: the specified finite-discrete coefficient transport.
-* `finiteComparisonEtaleClosure`, `finiteComparisonProEtaleClosure`: the two closures.
-* `finiteComparisonOpenIso`, `finiteComparisonCompactSupportMap`: the canonical arrows.
-
-## Main statements
-
-* `finiteComparisonRealization_exact`: exactness of the specified coefficient transport.
-* `finiteComparisonLocalizing`: the equivalence and its compatibility with operations.
+This file contains the abstract localizing-closure argument used for the comparison: the
+localizing closure of a class of objects is a localizing subcategory, localizing
+subcategories are stable under images along coreflective triangulated functors, and a
+coreflective triangulated functor which sends generators into the closure of the target
+generators (and conversely) induces an equivalence of localizing closures.
 -/
 
 @[expose] public noncomputable section
@@ -497,20 +493,6 @@ private theorem closureLocalizing (S : ObjectProperty C) :
   intro P hP hS
   exact hP.2.2 F hF (fun i ↦ hK i P hP hS)
 
-private theorem inverseImageLocalizing (P : ObjectProperty D) (F : C ⥤ D)
-    [F.CommShift ℤ] [F.IsTriangulated]
-    [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F]
-    (hP : IsLocalizingSubcategory P) :
-    IsLocalizingSubcategory (P.inverseImage F) := by
-  let := hP.1
-  let := hP.2.1
-  refine ⟨inferInstance, inferInstance, ?_⟩
-  intro I G hG hPG
-  let := hG
-  let : HasColimit (G ⋙ F) := ⟨_, isColimitOfPreserves F (colimit.isColimit G)⟩
-  exact P.prop_of_iso (preservesColimitIso F G).symm
-    (hP.2.2 (G ⋙ F) inferInstance hPG)
-
 private theorem imageLocalizing (P : ObjectProperty C) (F : C ⥤ D)
     [F.CommShift ℤ] [F.IsTriangulated]
     [Coreflective F] (hP : IsLocalizingSubcategory P) :
@@ -543,7 +525,8 @@ private theorem closureEquivalence (S : ObjectProperty C) (T : ObjectProperty D)
   have hpres (K : C) (hK : localizingClosure S K) :
       localizingClosure T (F.obj K) := by
     exact hK ((localizingClosure T).inverseImage F)
-      (inverseImageLocalizing _ _ (closureLocalizing T)) hS
+      (AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.inverseImageLocalizing _ _
+        (closureLocalizing T)) hS
   refine ⟨hpres, ?_⟩
   let H := (localizingClosure T).lift ((localizingClosure S).ι ⋙ F)
     (fun K ↦ hpres K.obj K.property)

@@ -366,7 +366,8 @@ private theorem moduleRlim_exists (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     CategoryTheory.RingedStrictTowerProof.tower_grothendieck (DiagonalMod l X)
   exact diagonalRlim_exists (DiagonalMod l X)
 
-private theorem padic_map_smul_target {l : ℕ} [Fact l.Prime]
+/-- An additive map into a module killed by `l ^ n` is `ℤ_[l]`-linear. -/
+theorem padic_map_smul_target {l : ℕ} [Fact l.Prime]
     {M N : Type (u + 1)} [AddCommGroup M] [Module (ULift.{u + 1} ℤ_[l]) M]
     [AddCommGroup N] [Module (ULift.{u + 1} ℤ_[l]) N]
     (n : ℕ) (hN : ∀ y : N, (l ^ n) • y = 0) (f : M →+ N)

@@ -10,10 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackCo
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
-import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSingleAdjunctionTranspose
-import WeilConjectures.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
-import WeilConjectures.AlgebraicGeometry.ProperBaseChange.GlobalLerayUnitSquare
-import WeilConjectures.AlgebraicGeometry.Derived.DerivedAdjunctionTopEdgeLocalCalculation
+public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSingleAdjunctionTranspose
+public import WeilConjectures.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.GlobalLerayUnitSquare
+public import WeilConjectures.AlgebraicGeometry.Derived.DerivedAdjunctionTopEdgeLocalCalculation
+public import WeilConjectures.AlgebraicGeometry.Derived.DerivedAdjunctionTopEdgeData
+public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSquareUnitMap
+public import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
 
 /-! The affine Leray comparison before passing from modules to abelian sheaves.
 
@@ -101,7 +104,8 @@ private theorem identity_presheaf_square (T : Scheme.{v}) (M : T.Modules)
 
 set_option maxHeartbeats 1600000 in
 -- Sheafification comparisons cross several presentations of the module category.
-private theorem identity_edge_isIso
+/-- Over an identity base the truncated top-edge counit is invertible. -/
+instance isIso_topEdgeTruncatedCounit_id
     [∀ X : Scheme.{v},
       HasDerivedCategory.{w} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]
     (T : Scheme.{v}) (q : ℤ) (K : schemeDerivedCategory T) :
@@ -162,10 +166,10 @@ private theorem identity_edge_isIso
           (SheafOfModules.{v} (moduleRings T.toRingedSpace)) q).obj K)))
   exact isIso_of_reflects_iso _ U
 
-private theorem add_bijective_of_isIso {X Y : AddCommGrpCat.{v}} (f : X ⟶ Y) [IsIso f] :
-    Function.Bijective f := ConcreteCategory.bijective_of_isIso _
-
-private noncomputable def affineLerayEquiv
+/-- The affine Leray edge identifies degree-one structure-module cohomology of a proper
+scheme over an affine base with global sections of degree-one cohomology of its derived
+direct image. -/
+noncomputable def affineLerayEquiv
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
     {T X : Scheme.{v}} [IsAffine T] (q : X ⟶ T) [IsProper q] :
@@ -192,10 +196,10 @@ private noncomputable def affineLerayEquiv
   let cm := (forget₂ _ AddCommGrpCat).map
     ((SheafOfModules.evaluation (moduleRings T.toRingedSpace) (.op ⊤)).map c.inv)
   exact (AddEquiv.ofBijective ((eps 1).app _).hom
-    (add_bijective_of_isIso _)).trans
+    (ConcreteCategory.bijective_of_isIso _)).trans
       (AddEquiv.ofBijective cm.hom (ConcreteCategory.bijective_of_isIso _))
 
-private theorem affineLerayEquiv_apply
+theorem affineLerayEquiv_apply
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
     {T X : Scheme.{v}} [IsAffine T] (q : X ⟶ T) [IsProper q]
@@ -242,9 +246,44 @@ private theorem relative_unit_transpose
   simp only [Functor.comp_map]
   rw [← Category.assoc, ← Functor.map_comp, h]
 
+/-- The target-side affine Leray equivalence for a factorisation `j ≫ q = qY`: the
+affine Leray equivalence of `qY`, precomposed with the identity-base edge and the
+comparison `Rid_* Rq_* ≅ RqY_*` coming from the factorisation. -/
+noncomputable def affineLerayTargetEquiv
+    [∀ Y : Scheme.{v},
+      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
+    {T X Y : Scheme.{v}} [IsAffine T] (q : X ⟶ T) (j : Y ⟶ X) {qY : Y ⟶ T} [IsProper qY]
+    (hj : j ≫ q = qY) :
+    ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 1 ⋙
+          SheafOfModules.evaluation (moduleRings T.toRingedSpace) (.op ⊤)).obj
+        ((schemeDerivedDirectImage qY).obj ((DerivedCategory.singleFunctor
+          (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) 0).obj
+            (SheafOfModules.unit Y.ringCatSheaf)))) ≃+
+      (RingedSpace.moduleCohomology Y.toRingedSpace 1).obj
+        (SheafOfModules.unit Y.ringCatSheaf) :=
+  let AY := (DerivedCategory.singleFunctor
+    (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) 0).obj
+      (SheafOfModules.unit Y.ringCatSheaf)
+  let H₁ := DerivedCategory.homologyFunctor
+    (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 1
+  let Γ := SheafOfModules.evaluation (moduleRings T.toRingedSpace) (.op ⊤)
+  let K := (schemeDerivedDirectImage qY).obj AY
+  have hs : j ≫ q = qY ≫ 𝟙 T := by simpa using hj
+  let ψ : (schemeDerivedDirectImage (𝟙 T)).obj K ≅ K :=
+    ((derivedSquareRightComparison q qY (𝟙 T) j hs).app AY).symm ≪≫
+      (relativeMVImageComp j q).app AY ≪≫
+        eqToIso (congrArg (fun t ↦ (schemeDerivedDirectImage t).obj AY) hj)
+  let edgeIso : H₁.obj ((schemeDerivedDirectImage (𝟙 T)).obj K) ≅ H₁.obj K :=
+    asIso (topEdgeTruncatedCounit (𝟙 T) 1 K ≫ (Modules.pushforwardId T).hom.app (H₁.obj K))
+  (((forget₂ _ AddCommGrpCat).mapIso
+    ((H₁ ⋙ Γ).mapIso ψ.symm ≪≫ Γ.mapIso edgeIso)).addCommGroupIsoToAddEquiv).trans
+      (affineLerayEquiv qY).symm
+
 set_option maxHeartbeats 1600000 in
 -- The large comparison square needs extra heartbeats for category transports.
-/-- The affine Leray module equivalence is natural for maps of proper total spaces.
+/-- The affine Leray module equivalences `(affineLerayEquiv q).symm` and
+`affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces.
 Source: Stacks Project, Tags 01XK (affine higher-image vanishing), 01FB (h-maps),
 and 03FD (module cohomology); local classes and sheafification as in Tag 0BKJ.
 (blueprint: new-structure-derived-image-module-naturality).
@@ -255,94 +294,82 @@ isomorphism since its local-class square sheafifies to a square of isomorphisms.
 Naturality of relativeMVImageComp and the canonical single adjunction transpose
 identify the displayed map b with the derived-square unit alpha followed by an
 isomorphism psi. Apply globalLeray_unitSquare with the identity base, then compose
-the target comparison with the identity edge and inverse psi. The same source Leray
-equivalence works for all indices, including an empty family. -/
+the target comparison with the identity edge and inverse psi. -/
 theorem structure_derived_image_module_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
-    {T X : Scheme.{v}} [IsAffine T] (q : X ⟶ T) [IsProper q]
-    {n : ℕ} (Xi : Fin n → Scheme.{v}) (qi : ∀ i, Xi i ⟶ T)
-    [∀ i, IsProper (qi i)] (j : ∀ i, Xi i ⟶ X) (hj : ∀ i, j i ≫ q = qi i) :
+    {T X Y : Scheme.{v}} [IsAffine T] (q : X ⟶ T) [IsProper q]
+    (j : Y ⟶ X) {qY : Y ⟶ T} [IsProper qY] (hj : j ≫ q = qY) :
     let A := (DerivedCategory.singleFunctor
       (SheafOfModules.{v} (moduleRings X.toRingedSpace)) 0).obj
         (SheafOfModules.unit X.ringCatSheaf)
-    let Ai := fun i ↦ (DerivedCategory.singleFunctor
-      (SheafOfModules.{v} (moduleRings (Xi i).toRingedSpace)) 0).obj
-        (SheafOfModules.unit (Xi i).ringCatSheaf)
+    let AY := (DerivedCategory.singleFunctor
+      (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) 0).obj
+        (SheafOfModules.unit Y.ringCatSheaf)
     let H := DerivedCategory.homologyFunctor
       (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 1 ⋙
       SheafOfModules.evaluation (moduleRings T.toRingedSpace) (.op ⊤)
-    let b := fun i ↦ relativeMVUnit (j i) q A ≫
-      (schemeDerivedDirectImage (j i ≫ q)).map
-        (Modules.canonicalSinglePullbackMap (j i) (SheafOfModules.unit X.ringCatSheaf) ≫
-          (DerivedCategory.singleFunctor _ 0).map (Modules.pullbackObjUnitIso (j i)).hom) ≫
-      eqToHom (congrArg (fun t ↦ (schemeDerivedDirectImage t).obj (Ai i)) (hj i))
-    ∃ e : H.obj ((schemeDerivedDirectImage q).obj A) ≃+
-        (RingedSpace.moduleCohomology X.toRingedSpace 1).obj
-          (SheafOfModules.unit X.ringCatSheaf),
-      ∀ i, ∃ ei : H.obj ((schemeDerivedDirectImage (qi i)).obj (Ai i)) ≃+
-          (RingedSpace.moduleCohomology (Xi i).toRingedSpace 1).obj
-            (SheafOfModules.unit (Xi i).ringCatSheaf),
-        ∀ z, ei (H.map (b i) z) =
-          Modules.moduleCohomologyFMap (j i)
-            (SheafOfModules.unitToPushforwardObjUnit (j i).toRingCatSheafHom) 1 (e z) := by
+    let b := relativeMVUnit j q A ≫
+      (schemeDerivedDirectImage (j ≫ q)).map
+        (Modules.canonicalSinglePullbackMap j (SheafOfModules.unit X.ringCatSheaf) ≫
+          (DerivedCategory.singleFunctor _ 0).map (Modules.pullbackObjUnitIso j).hom) ≫
+      eqToHom (congrArg (fun t ↦ (schemeDerivedDirectImage t).obj AY) hj)
+    ∀ z, affineLerayTargetEquiv q j hj (H.map b z) =
+      Modules.moduleCohomologyFMap j
+        (SheafOfModules.unitToPushforwardObjUnit j.toRingCatSheafHom) 1
+          ((affineLerayEquiv q).symm z) := by
   classical
-  intro A Ai H b₀
+  intro A Ai H b₀ z
   let H₁ := DerivedCategory.homologyFunctor
     (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 1
   let Γ := SheafOfModules.evaluation (moduleRings T.toRingedSpace) (.op ⊤)
-  refine ⟨(affineLerayEquiv q).symm, ?_⟩
-  intro i
-  let K := (schemeDerivedDirectImage (qi i)).obj (Ai i)
-  have hs : j i ≫ q = qi i ≫ 𝟙 T := by simpa using hj i
-  let r := derivedSquareRightComparison q (qi i) (𝟙 T) (j i) hs
+  let K := (schemeDerivedDirectImage qY).obj Ai
+  have hs : j ≫ q = qY ≫ 𝟙 T := by simpa using hj
+  let r := derivedSquareRightComparison q qY (𝟙 T) j hs
   let ψ : (schemeDerivedDirectImage (𝟙 T)).obj K ≅ K :=
-    (r.app (Ai i)).symm ≪≫ (relativeMVImageComp (j i) q).app (Ai i) ≪≫
-      eqToIso (congrArg (fun t ↦ (schemeDerivedDirectImage t).obj (Ai i)) (hj i))
-  let c := Modules.canonicalSinglePullbackMap (j i)
+    (r.app Ai).symm ≪≫ (relativeMVImageComp j q).app Ai ≪≫
+      eqToIso (congrArg (fun t ↦ (schemeDerivedDirectImage t).obj Ai) hj)
+  let c := Modules.canonicalSinglePullbackMap j
     (SheafOfModules.unit X.ringCatSheaf) ≫
-      (DerivedCategory.singleFunctor _ 0).map (Modules.pullbackObjUnitIso (j i)).hom
-  let φ := SheafOfModules.unitToPushforwardObjUnit (j i).toRingCatSheafHom
-  let α := derivedSquareUnitMap q (qi i) (𝟙 T) (j i) hs
-    (SheafOfModules.unit X.ringCatSheaf) (SheafOfModules.unit (Xi i).ringCatSheaf) φ
-  let b := relativeMVUnit (j i) q A ≫ (schemeDerivedDirectImage (j i ≫ q)).map c ≫
-    eqToHom (congrArg (fun t ↦ (schemeDerivedDirectImage t).obj (Ai i)) (hj i))
+      (DerivedCategory.singleFunctor _ 0).map (Modules.pullbackObjUnitIso j).hom
+  let φ := SheafOfModules.unitToPushforwardObjUnit j.toRingCatSheafHom
+  let α := derivedSquareUnitMap q qY (𝟙 T) j hs
+    (SheafOfModules.unit X.ringCatSheaf) (SheafOfModules.unit Y.ringCatSheaf) φ
+  let b := relativeMVUnit j q A ≫ (schemeDerivedDirectImage (j ≫ q)).map c ≫
+    eqToHom (congrArg (fun t ↦ (schemeDerivedDirectImage t).obj Ai) hj)
   have hb : b = α ≫ ψ.hom := by
-    have ht := relative_unit_transpose q (j i) (SheafOfModules.unit X.ringCatSheaf)
-      (SheafOfModules.unit (Xi i).ringCatSheaf) (Modules.pullbackObjUnitIso (j i)).hom
-    have ha : (Modules.pullbackPushforwardAdjunction (j i)).homEquiv _ _
-        (Modules.pullbackObjUnitIso (j i)).hom = φ :=
+    have ht := relative_unit_transpose q j (SheafOfModules.unit X.ringCatSheaf)
+      (SheafOfModules.unit Y.ringCatSheaf) (Modules.pullbackObjUnitIso j).hom
+    have ha : (Modules.pullbackPushforwardAdjunction j).homEquiv _ _
+        (Modules.pullbackObjUnitIso j).hom = φ :=
       SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit _
     rw [ha] at ht
     dsimp only [b]
     rw [← Category.assoc]
-    change (relativeMVUnit (j i) q A ≫ (schemeDerivedDirectImage (j i ≫ q)).map c) ≫ _ = _
+    change (relativeMVUnit j q A ≫ (schemeDerivedDirectImage (j ≫ q)).map c) ≫ _ = _
     rw [ht]
     dsimp only [α, derivedSquareUnitMap, ψ, r, Iso.trans_hom, Iso.symm_hom,
       Iso.app_hom, Iso.app_inv]
     dsimp only [Ai]
     simp only [Category.assoc, Iso.hom_inv_id_app_assoc, eqToIso.hom]
-  have heiso : IsIso (topEdgeTruncatedCounit (𝟙 T) 1 K) := identity_edge_isIso T 1 K
   let edge := topEdgeTruncatedCounit (𝟙 T) 1 K ≫
     (Modules.pushforwardId T).hom.app (H₁.obj K)
   let edgeIso : H₁.obj ((schemeDerivedDirectImage (𝟙 T)).obj K) ≅ H₁.obj K := asIso edge
   let θiso := H.mapIso ψ.symm ≪≫ Γ.mapIso edgeIso
   let θ := ((forget₂ _ AddCommGrpCat).mapIso θiso).addCommGroupIsoToAddEquiv
-  refine ⟨θ.trans (affineLerayEquiv (qi i)).symm, ?_⟩
-  intro z
-  apply (affineLerayEquiv (qi i)).injective
-  change affineLerayEquiv (qi i) ((affineLerayEquiv (qi i)).symm
-      (θ (H.map b z))) = affineLerayEquiv (qi i)
-    (Modules.moduleCohomologyFMap (j i) φ 1 ((affineLerayEquiv q).symm z))
+  apply (affineLerayEquiv qY).injective
+  change affineLerayEquiv qY ((affineLerayEquiv qY).symm
+      (θ (H.map b z))) = affineLerayEquiv qY
+    (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z))
   rw [AddEquiv.apply_symm_apply]
-  have hg := globalLeray_unitSquare q (qi i) (𝟙 T) (j i) hs
-    (SheafOfModules.unit X.ringCatSheaf) (SheafOfModules.unit (Xi i).ringCatSheaf)
+  have hg := globalLeray_unitSquare q qY (𝟙 T) j hs
+    (SheafOfModules.unit X.ringCatSheaf) (SheafOfModules.unit Y.ringCatSheaf)
     φ 1 (topEdgeTruncatedCounit (𝟙 T) 1
-      (globalLerayImage (qi i) (SheafOfModules.unit (Xi i).ringCatSheaf)))
+      (globalLerayImage qY (SheafOfModules.unit Y.ringCatSheaf)))
     (topEdgeTruncatedCounit_localClass (𝟙 T) 1 _) ((affineLerayEquiv q).symm z)
-  rw [← affineLerayEquiv_apply (qi i), ← affineLerayEquiv_apply q] at hg
-  have hg' : affineLerayEquiv (qi i)
-      (Modules.moduleCohomologyFMap (j i) φ 1 ((affineLerayEquiv q).symm z)) =
+  rw [← affineLerayEquiv_apply qY, ← affineLerayEquiv_apply q] at hg
+  have hg' : affineLerayEquiv qY
+      (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z)) =
       Γ.map edge (H.map α (affineLerayEquiv q ((affineLerayEquiv q).symm z))) := by
     with_unfolding_all refine hg.trans ?_
     with_unfolding_all simp only [Scheme.Hom.id_base, eqToHom_refl,

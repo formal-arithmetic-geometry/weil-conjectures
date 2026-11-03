@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
+import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalResidueDerivedFactorization
 
 /-! # Exact quotient realization of restricted finite evaluation
 
@@ -19,36 +20,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] diagonalFiniteToPadic
 
-/-- The residue projection is onto by natural representatives.
-Source: PadicInt.toZModPow on natural numbers
-(blueprint: lem-sfb-diagonal-trace-finite-residue-functor). -/
-theorem finiteResidueProjection_surjective (ℓ n : ℕ) [Fact ℓ.Prime] :
-    Function.Surjective (diagonalResidueProjection.{u} ℓ n) := by
-  intro x
-  refine ⟨ULift.up (x.down.val : ℤ_[ℓ]), ?_⟩
-  apply ULift.ext
-  change PadicInt.toZModPow (n + 1) (x.down.val : ℤ_[ℓ]) = x.down
-  rw [map_natCast, ZMod.natCast_zmod_val]
-
-private theorem projection_kernel (ℓ n : ℕ) [Fact ℓ.Prime] :
-    RingHom.ker (diagonalResidueProjection.{u} ℓ n) =
-      Ideal.span {((ℓ ^ (n + 1) : ℕ) : ULift.{u + 1} ℤ_[ℓ])} := by
-  ext x
-  have hx : diagonalResidueProjection.{u} ℓ n x = 0 ↔
-      PadicInt.toZModPow (n + 1) x.down = 0 := by
-    constructor
-    · intro h
-      exact congrArg ULift.down h
-    · intro h
-      exact ULift.ext _ _ h
-  rw [RingHom.mem_ker, hx, ← RingHom.mem_ker, PadicInt.ker_toZModPow,
-    Ideal.mem_span_singleton, Ideal.mem_span_singleton]
-  constructor
-  · rintro ⟨z, hz⟩
-    exact ⟨ULift.up z, ULift.ext _ _ (by simpa using hz)⟩
-  · rintro ⟨z, hz⟩
-    exact ⟨z.down, by simpa using congrArg ULift.down hz⟩
-
 /-- Ordinary residue scalar restriction is fully faithful.
 Source: surjective scalar restriction for module sheaves
 (blueprint: lem-sfb-diagonal-trace-finite-residue-functor). -/
@@ -57,7 +28,7 @@ theorem finiteResidueRestriction_full_faithful (l n : ℕ) [Fact l.Prime]
     (diagonalFiniteToPadic l n T).Full ∧ (diagonalFiniteToPadic l n T).Faithful := by
   constructor
   · unfold diagonalFiniteToPadic
-    exact Sheaf.restrictScalars_full _ _ (finiteResidueProjection_surjective l n)
+    exact Sheaf.restrictScalars_full _ _ (diagonalResidueProjection_surjective l n)
   · unfold diagonalFiniteToPadic
     infer_instance
 
@@ -96,8 +67,8 @@ theorem exactFiniteResidueFunctor_exists (l : ℕ) [Fact l.Prime] (T : Scheme.{u
   let q := diagonalResidueProjection.{u} l n
   let F := diagonalFiniteToPadic l n T
   let a : ULift.{u + 1} ℤ_[l] := (l ^ (n + 1) : ℕ)
-  let rd := Sheaf.reductionDatum J q (finiteResidueProjection_surjective l n) a
-    (projection_kernel l n)
+  let rd := Sheaf.reductionDatum J q (diagonalResidueProjection_surjective l n) a
+    (diagonalResidueProjection_ker l n)
   let G := V ⋙ rd.Φ
   have hzero (M : SpTowerClasses.Systems T
       (SpTowerClasses.Arings l (ULift.{u} (Padic l)) T)) :

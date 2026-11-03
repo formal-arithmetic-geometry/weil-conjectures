@@ -58,26 +58,27 @@ def finiteEvaluationOrdinary (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
         lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f := Iso.refl _
 
 /-- The unit-normalized exact square for evaluation and total direct image.
+Its normalization determines its isomorphism uniquely.
 Source: diagonal tower limit proof (1), evaluation preserves K-injectives because
 its left adjoint is exact; uniqueness of total right derived functors.
 (blueprint: def-sfb-diagonal-trace-finite-evaluation). -/
-theorem finiteEvaluationSquare_nonempty (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
+@[no_expose] def finiteEvaluationSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (f : X ⟶ S)
     (Rt : DiagonalRightDerived (diagonalTraceSystemPush l f))
     (Rf : DiagonalRightDerived
       (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)) (n : ℕ) :
-    Nonempty (ExactSquare (diagonalTraceSystemPush l f)
+    ExactSquare (diagonalTraceSystemPush l f)
       (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)
       ((evaluation ℕᵒᵖ (DiagonalMod l X)).obj (op n))
       ((evaluation ℕᵒᵖ (DiagonalMod l S)).obj (op n))
-      Rt Rf (finiteEvaluationOrdinary l f n)) := by
+      Rt Rf (finiteEvaluationOrdinary l f n) := by
   have : IsGrothendieckAbelian.{u + 1} (DiagonalMod l X) :=
     GrothendieckTopology.isGrothendieckAbelian_sheaf_proEtTopology
       (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) X
   have : IsGrothendieckAbelian.{u + 1} (DiagonalSystems l X) :=
     CategoryTheory.RingedStrictTowerProof.tower_grothendieck (DiagonalMod l X)
-  obtain ⟨e⟩ := squareOfAcyclic (diagonalTraceSystemPush l f)
+  let e := squareOfAcyclic (diagonalTraceSystemPush l f)
     (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)
     ((evaluation ℕᵒᵖ (DiagonalMod l X)).obj (op n))
     ((evaluation ℕᵒᵖ (DiagonalMod l S)).obj (op n))
@@ -85,19 +86,7 @@ theorem finiteEvaluationSquare_nonempty (l : ℕ) [Fact l.Prime] {X S : Scheme.{
       intro I hI
       have := hI
       exact Rf.computation _ (tower_evaluation_isKInjective (DiagonalMod l X) I (op n)))
-  exact ⟨⟨e.iso, e.normalization⟩⟩
-
-/-- The evaluation square chosen from its proved universal construction.
-Its normalization determines its isomorphism uniquely.
-Source: diagonal tower limit proof (1).
-(blueprint: def-sfb-diagonal-trace-finite-evaluation). -/
-def finiteEvaluationSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
-    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
-    (f : X ⟶ S)
-    (Rt : DiagonalRightDerived (diagonalTraceSystemPush l f))
-    (Rf : DiagonalRightDerived
-      (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)) (n : ℕ) :=
-  Classical.choice (finiteEvaluationSquare_nonempty l f Rt Rf n)
+  exact ⟨e.iso, e.normalization⟩
 
 /-- The completed coefficient unit into the ordinary completed direct image.
 Source: diagonal tower trace proof (2), the unital coefficient map for f.

@@ -22,6 +22,7 @@ public import WeilConjectures.SmoothPurity.CompletedCoefficientPushforward.Compl
 public import WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
 
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedEssentialImage
@@ -250,6 +251,34 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+/-- The completed-coefficient direct image is the pro-étale ringed direct image for the
+canonical completed inverse-image identification `PurCompactSupport.completed`.
+Source: Stacks 03D2 (blueprint: lem-sf-integral-ordinary-recollement-realization).
+Proof: both are pushforwards along base change; their ring maps agree since the
+coefficient identification is the adjoint of `sfCompletedCoefficientMap`. -/
+theorem proEtaleRingModuleDirectImage_completed_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleRingModuleDirectImage f (completedIntegralCommRingSheafUnrestricted l E Y)
+        (completedIntegralCommRingSheafUnrestricted l E X)
+        ((PurCompactSupport.completed l E).pull f) =
+      sfCompletedModuleDirectImage l E f := by
+  have he : proEtaleRingDirectImageMap f (completedIntegralCommRingSheafUnrestricted l E Y)
+      (completedIntegralCommRingSheafUnrestricted l E X)
+      ((PurCompactSupport.completed l E).pull f) = sfCompletedCoefficientMap l E f :=
+    ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).apply_symm_apply _
+  unfold proEtaleRingModuleDirectImage sfCompletedModuleDirectImage
+  rw [he]
+
+/-- The exact pro-étale ringed module pullback is left adjoint to the
+completed-coefficient direct image.
+Source: Stacks 03D2 (blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+def sfCompletedModulePullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleRingModulePullback f (completedIntegralCommRingSheafUnrestricted l E Y)
+        (completedIntegralCommRingSheafUnrestricted l E X)
+        ((PurCompactSupport.completed l E).pull f) ⊣ sfCompletedModuleDirectImage l E f :=
+  (proEtaleRingModuleOperations_properties f _ _
+    ((PurCompactSupport.completed l E).pull f)).2.2.2.2.some.ofNatIsoRight
+    (eqToIso (proEtaleRingModuleDirectImage_completed_eq l E f))
+
 /-- Ordinary completed-coefficient direct image is a right adjoint.
 Source: Stacks 03D2; localization proof step 1
 (blueprint: lem-sf-integral-ordinary-recollement-realization).
@@ -258,7 +287,7 @@ Its module tensor inverse image is left adjoint to the specified module direct i
 @[instance] theorem sfOrdinaryModulePush_isRightAdjoint
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (sfCompletedModuleDirectImage l E f).IsRightAdjoint := by
-  sorry
+  exact (sfCompletedModulePullbackAdjunction l E f).isRightAdjoint
 
 /-- The actual ordinary tensor inverse image, as Mathlib's left adjoint to the
 specified completed-coefficient module direct image.
@@ -282,7 +311,7 @@ Proof: the module inverse-image adjunction is additive: its tensor and sheafific
 constructions preserve addition of module maps. -/
 @[instance] theorem sfOrdinaryModulePull_additive
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (sfOrdinaryModulePull l E f).Additive := by
-  sorry
+  exact (sfOrdinaryModuleAdjunction l E f).left_adjoint_additive
 
 /-- Exactness of ordinary immersion inverse image, with completed coefficients.
 Source: Stacks 09AA, 099N; localization proof steps 1--2
@@ -292,7 +321,8 @@ projection. Immersion inverse image is exact, and coefficient transport is exact
 @[instance] theorem sfOrdinaryModulePull_preservesFiniteLimits
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsImmersion f] :
     PreservesFiniteLimits (sfOrdinaryModulePull l E f) := by
-  sorry
+  exact preservesFiniteLimits_of_natIso ((sfOrdinaryModuleAdjunction l E f).leftAdjointUniq
+    (sfCompletedModulePullbackAdjunction l E f)).symm
 
 /-- Ordinary inverse image preserves finite colimits.
 Source: Stacks 03D2; localization proof step 2
@@ -301,7 +331,9 @@ Proof: the specified functor is a left adjoint and therefore preserves colimits.
 @[instance] theorem sfOrdinaryModulePull_preservesFiniteColimits
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (sfOrdinaryModulePull l E f) := by
-  sorry
+  have : PreservesColimitsOfSize.{0, 0} (sfOrdinaryModulePull l E f) :=
+    (sfOrdinaryModuleAdjunction l E f).leftAdjoint_preservesColimits
+  infer_instance
 
 /-- Exact descent of ordinary immersion pullback.
 Source: Stacks 06YY; localization proof step 2

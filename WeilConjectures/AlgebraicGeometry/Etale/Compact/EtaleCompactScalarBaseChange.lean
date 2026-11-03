@@ -37,7 +37,7 @@ private theorem open_scalar_exchange_forward
           (ModuleCat.{u + 1} A) sq).inv.app M) ≫
       (ExceptionalCoefficients.openIso φ j').hom.app
         ((upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory.obj M) := by
-  have hh := etaleOpenScalarExchangeSquare φ sq M
+  have hh := properOpenCoefficientOpenInverse_baseChange φ sq M
   simp only [← compactScalarOpen_normalization] at hh
   have hi := IsIso.inv_eq_inv.mpr hh
   simpa only [IsIso.inv_comp, ← Functor.map_inv, NatIso.inv_inv_app,
@@ -120,7 +120,7 @@ image preserves the two bounded-below inputs. The scalar/pullback comparison sup
 the scalar bound after inverse image. Coefficient refinement coherence then transfers
 the result from the base-changed compactification to the chosen compactification.
 The normalization of exact compact-support exchange supplies the asserted maps. -/
-theorem etaleCompactScalarBaseChange
+theorem compactScalarChosenMap_baseChange
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X X' Y Y' : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y']
@@ -159,7 +159,7 @@ theorem etaleCompactScalarBaseChange
   have hQM' : ∃ N' : _root_.DerivedCategory.Plus
       (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} B)),
       N'.obj = (scalarExtension φ X').obj M'.obj := ⟨⟨_, hpost⟩, rfl⟩
-  have hc := (etaleCompactScalarCoherence φ f' d).2.2 e M' hQM'
+  have hc := (compactScalarMap_coherence φ f' d).2.2 e M' hQM'
   have hn := (rightDerivedLowerShriekIso B d).hom.naturality
     ((properOpenCoefficientPullbackIso φ h).hom.app M.obj)
   dsimp only [Functor.comp_map, Functor.comp_obj] at hn

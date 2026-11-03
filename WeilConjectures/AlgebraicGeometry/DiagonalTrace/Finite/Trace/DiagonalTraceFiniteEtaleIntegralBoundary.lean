@@ -181,6 +181,7 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalEvaluationUnit
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonConstantGenerator
 import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficients
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteEtaleImageSurjective
 import all WeilConjectures.AlgebraicGeometry.ScalarUnitExtComparison
 import all WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorExtension
@@ -596,13 +597,6 @@ private theorem kummerComposite_hom {C : Type*} [Category C] [Abelian C]
     (β.comp hs.extClass (rfl : 1 + 1 = 2)).hom = kummerComposite s hs β.hom := by
   simp only [kummerComposite, Ext.comp_hom, hs.extClass_hom, ShiftedHom.comp,
     Int.natCast_add, Int.natCast_one, shiftFunctorAdd'_eq_shiftFunctorAdd]
-private theorem mapSingleArrow_ext {C D : Type*} [Category C] [Category D]
-    [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
-    [HasExt C] [HasExt D] (F : C ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    {X Y : C} (n : ℕ) (β : Ext X Y n) :
-    (β.mapExactFunctor F).hom = mapSingleArrow F (n : ℤ) β.hom := by
-  simp only [Ext.mapExactFunctor_hom, ShiftedHom.map, mapSingleArrow, Category.assoc]
 
 private def evaluatedTowerBoundary
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n : ℕ)
@@ -628,7 +622,8 @@ private theorem evaluatedIntegralKummerClass_hom
           (cartierProRootMap A (l ^ (n + 1)) hA T
             (pow_pos (Fact.out : l.Prime).pos _) hN))⟦(2 : ℤ)⟧' := by
   unfold evaluatedIntegralKummerClass evaluatedTowerBoundary
-  rw [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.comp_mk₀, mapSingleArrow_ext]
+  rw [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.comp_mk₀,
+    ← SpTowerClasses.FiniteExactArrow.mapSingleArrow_ext]
   have hi : (Ext.homEquiv.symm (lineBundleClass T P) :
       Ext.{u + 2} (integers T) (units T) 1).hom = lineBundleClass T P :=
     Ext.homEquiv.apply_symm_apply _
@@ -725,7 +720,8 @@ theorem diagonalTrace_finiteEtale_integralBoundary
     (mapSingleArrow (cartierForget A T) (2 : ℤ) y.hom) hN hE hb' hd
   rw [← integralImage]
   apply Ext.ext.{u + 1}
-  rw [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp, mapSingleArrow_ext,
+  rw [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp,
+    ← SpTowerClasses.FiniteExactArrow.mapSingleArrow_ext,
     evaluatedIntegralKummerClass_hom]
   simp only [Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_inv,
     ← S.map_comp] at hh

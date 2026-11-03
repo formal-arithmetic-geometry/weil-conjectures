@@ -153,18 +153,15 @@ with every finite projection is the constant-sheaf comparison for that quotient.
 Take adjoints and evaluate at constant sections. Thus the identity on the section
 module over each pulled-back chart is linear. It commutes with chart restrictions
 and maps of sheaves, and its inverse is the same identity. -/
-theorem diagonalTraceCompletedScalarSquare (l : ℕ) [Fact l.Prime]
+@[no_expose] def diagonalTraceCompletedScalarSquare (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :
-    ∃ e : diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅
-        diagonalCompletedRestriction l X ⋙
-          lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f,
-      ∀ (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)
-        (x : ((diagonalTracePush l f ⋙ diagonalCompletedRestriction l S).obj M).obj.obj U),
-        HEq ((e.hom.app M).hom.app U x) x := by
+    diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅
+      diagonalCompletedRestriction l X ⋙
+        lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f :=
   let F := diagonalTracePush l f ⋙ diagonalCompletedRestriction l S
   let G := diagonalCompletedRestriction l X ⋙
     lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f
-  let e : F ≅ G := NatIso.ofComponents (fun M ↦
+  NatIso.ofComponents (fun M ↦
     { hom := { hom :=
         { app := fun U ↦ ModuleCat.ofHom
             (X := (F.obj M).obj.obj U) (Y := (G.obj M).obj.obj U)
@@ -181,6 +178,12 @@ theorem diagonalTraceCompletedScalarSquare (l : ℕ) [Fact l.Prime]
           naturality := by intros; ext x; rfl } }
       hom_inv_id := by ext U x; rfl
       inv_hom_id := by ext U x; rfl }) (by intros; ext U x; rfl)
-  exact ⟨e, fun _ _ _ ↦ HEq.rfl⟩
+
+/-- The completed scalar square is the identity on sections. -/
+theorem diagonalTraceCompletedScalarSquare_hom_app_hom_app (l : ℕ) [Fact l.Prime]
+    {X S : Scheme.{u}} (f : X ⟶ S) (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)
+    (x : ((diagonalTracePush l f ⋙ diagonalCompletedRestriction l S).obj M).obj.obj U) :
+    HEq (((diagonalTraceCompletedScalarSquare l f).hom.app M).hom.app U x) x :=
+  HEq.rfl
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

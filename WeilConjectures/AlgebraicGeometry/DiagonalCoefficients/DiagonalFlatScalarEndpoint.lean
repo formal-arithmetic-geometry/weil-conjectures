@@ -13,6 +13,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
+import all WeilConjectures.CategoryTheory.FlatScalarUnit
 
 /-! # The normalized derived scalar endpoint of a flat internal module
 
@@ -30,54 +31,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
-
-section FlatEndpoints
-
-variable {V W : Type*} [Category V] [Category W] [Abelian V] [Abelian W]
-  (E : V ⥤ W) (U : W ⥤ V) [E.Additive] [U.Additive]
-
-private theorem single_unit_square (a : E ⊣ U) (F : V) :
-    (a.mapHomologicalComplex (.up ℤ)).unit.app
-        ((HomologicalComplex.single V (.up ℤ) 0).obj F) ≫
-      (U.mapHomologicalComplex (.up ℤ)).map
-        ((HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).hom.app F) ≫
-      (HomologicalComplex.singleMapHomologicalComplex U (.up ℤ) 0).hom.app (E.obj F) =
-    (HomologicalComplex.single V (.up ℤ) 0).map (a.unit.app F) := by
-  ext i
-  by_cases hi : i = 0
-  · subst i
-    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-      HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
-      HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
-      CategoryTheory.Functor.map_id, Category.id_comp]
-    change a.unit.app F ≫ U.map (𝟙 (E.obj F)) ≫ 𝟙 (U.obj (E.obj F)) =
-      a.unit.app F ≫ 𝟙 (U.obj (E.obj F))
-    simp only [CategoryTheory.Functor.map_id, Category.comp_id]
-  · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 F i hi).eq_of_src _ _
-
-variable [HasDerivedCategory V] [HasDerivedCategory W]
-  [PreservesFiniteLimits U] [PreservesFiniteColimits U]
-
-private theorem derived_single_unit_square (a : E ⊣ U) (F : V) :
-    DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app
-        ((HomologicalComplex.single V (.up ℤ) 0).obj F)) ≫
-      U.mapDerivedCategoryFactors.inv.app
-        ((E.mapHomologicalComplex (.up ℤ)).obj
-          ((HomologicalComplex.single V (.up ℤ) 0).obj F)) ≫
-      U.mapDerivedCategory.map (DerivedCategory.Q.map
-        ((HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).hom.app F)) =
-    (DerivedCategory.singleFunctor V 0).map (a.unit.app F) ≫
-      (U.mapDerivedCategorySingleFunctor 0).inv.app (E.obj F) := by
-  erw [← U.mapDerivedCategoryFactors.inv.naturality]
-  apply (cancel_mono ((U.mapDerivedCategorySingleFunctor 0).hom.app (E.obj F))).mp
-  simp only [Category.assoc, Iso.inv_hom_id_app]
-  erw [U.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app]
-  dsimp only [Functor.comp_map, Functor.comp_obj]
-  erw [Category.comp_id, ← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp]
-  exact congrArg DerivedCategory.Q.map (single_unit_square E U a F)
-
-end FlatEndpoints
 
 attribute [local irreducible] Functor.leftDerivedFunctor
   Mod.derivedExtendMapDerivedCategoryAdjunction
@@ -128,7 +81,8 @@ theorem diagonal_flat_scalar_endpoint_iso
         ((HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).hom.app M) := by
     rw [← Adjunction.homEquiv_naturality_right_symm]
     apply congrArg (ad.homEquiv _ _).symm
-    simpa only [Category.assoc] using (derived_single_unit_square E U adj M).symm
+    simpa only [Category.assoc] using
+      (SheafExactDegreeZero.derived_single_unit_square E U adj M).symm
   have hP := (CochainComplex.kFlat_single_obj_iff_flat M 0).mpr hM
   have hraw := Adjunction.isIso_cochainTranspose_of_kFlat E U adj ad P hP
   have : IsIso t := by rw [ht]; infer_instance
