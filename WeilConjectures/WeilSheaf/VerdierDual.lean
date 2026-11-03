@@ -76,7 +76,7 @@ has a right adjoint `Rg^!`. The general case
 compactification. -/
 theorem isLeftAdjoint_derivedLowerStar_of_isProper :
     (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
-  sorry
+  isLeftAdjoint_derivedLowerStar_of_isProper' g
 
 end Proper
 
