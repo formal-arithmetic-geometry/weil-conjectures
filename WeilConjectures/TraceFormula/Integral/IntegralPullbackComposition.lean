@@ -253,7 +253,7 @@ The explicit eqToHom below only identifies the two parenthesizations of j >> h >
 The last clause records the whole-system normalization of c used in step 3: its
 reduction composed with the system comparisons beta is the system compositor
 after beta_hk, before any finite evaluation. -/
-theorem integralPullbackComposition_systemNormalized :
+theorem integralPullbackComposition :
     ∃ c : IntegralPullbackCompositionFamily l E,
       (∀ {V W Z : Scheme.{u}}
         [∀ v : V, Invertible (l : V.residueField v)]
@@ -294,12 +294,12 @@ theorem integralPullbackComposition_systemNormalized :
         [∀ z : Z, Invertible (l : Z.residueField z)]
         (h : Z ⟶ W) (k : W ⟶ V) (K : sfIntegralConstructibleCategory l E V),
         (integralSystemReduction l E Z).map ((c h k).hom.app K) ≫
-            ((integralPullbackSystemComparison_realization l E).choose h).hom.app
+            ((integralPullbackSystemComparison l E).choose h).hom.app
               ((constructibleIntegralPullback l E k).obj K) ≫
             (finiteSystemDerivedPullback (integralSystemRings l E)
               (integralSystemTransition l E) h).map
-                (((integralPullbackSystemComparison_realization l E).choose k).hom.app K) =
-          ((integralPullbackSystemComparison_realization l E).choose (h ≫ k)).hom.app K ≫
+                (((integralPullbackSystemComparison l E).choose k).hom.app K) =
+          ((integralPullbackSystemComparison l E).choose (h ≫ k)).hom.app K ≫
             (finiteSystemDerivedComposition (integralSystemRings l E)
               (integralSystemTransition l E) h k).hom.app
                 ((integralSystemReduction l E V).obj K)) := by
@@ -321,8 +321,8 @@ theorem integralPullbackComposition_systemNormalized :
           integralSystemReduction l E Y ⋙
             finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f
               :=
-      (integralPullbackSystemComparison_realization l E).choose
-    have hβ := @(integralPullbackSystemComparison_realization l E).choose_spec.1
+      (integralPullbackSystemComparison l E).choose
+    have hβ := @(integralPullbackSystemComparison l E).choose_spec.1
     have hb {X Y : Scheme.{u}}
         [hX : ∀ x : X, Invertible (l : X.residueField x)]
         [hY : ∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
@@ -442,50 +442,5 @@ theorem integralPullbackComposition_systemNormalized :
             (integralSystemTransition l E) V n).obj ((integralSystemReduction l E V).obj K))
           ((scalarReductionDerivedExtension l E V n).obj K.obj) d₀.hom
     · exact integralSystemPullbackLift_associativity l E β c₀ hc
-
-/-- Integral pullback has natural composition isomorphisms, with their specified
-finite reductions and associative composition law.
-
-Source: Stacks Tags 099N(2),(5), 0D6D, 0941; Bhatt--Scholze, Lemmas 3.5.5 and 3.5.7
-(blueprint: lem-pod-integral-pullback-composition).
-
-Proof: the first two clauses of `integralPullbackComposition_systemNormalized`. -/
-theorem integralPullbackComposition :
-    ∃ c : IntegralPullbackCompositionFamily l E,
-      (∀ {V W Z : Scheme.{u}}
-        [∀ v : V, Invertible (l : V.residueField v)]
-        [∀ w : W, Invertible (l : W.residueField w)]
-        [∀ z : Z, Invertible (l : Z.residueField z)]
-        (h : Z ⟶ W) (k : W ⟶ V) (K : sfIntegralConstructibleCategory l E V)
-        (P : (integralOperationsGoodComplex l E V).FullSubcategory)
-        (e : DerivedCategory.Q.obj P.obj ≅ K.obj)
-        (Q : (integralOperationsGoodComplex l E W).FullSubcategory)
-        (d : DerivedCategory.Q.obj Q.obj ≅ ((constructibleIntegralPullback l E k).obj K).obj)
-        (n : ℕ),
-        (scalarReductionDerivedExtension l E Z n).map ((c h k).hom.app K).hom ≫
-            (integralPullbackReductionIso l E h
-              ((constructibleIntegralPullback l E k).obj K) Q d n).hom ≫
-            (proEtaleConstantRingDerivedPullback
-              (Padic.coefficientExtensionRing l E (n + 1)) h).map
-                (integralPullbackReductionIso l E k K P e n).hom =
-          (integralPullbackReductionIso l E (h ≫ k) K P e n).hom ≫
-            (integralFiniteCanonicalPullbackComposition l E h k n).hom.app
-              ((scalarReductionDerivedExtension l E V n).obj K.obj)) ∧
-      (∀ {V W Z Y : Scheme.{u}}
-        [∀ v : V, Invertible (l : V.residueField v)]
-        [∀ w : W, Invertible (l : W.residueField w)]
-        [∀ z : Z, Invertible (l : Z.residueField z)]
-        [∀ y : Y, Invertible (l : Y.residueField y)]
-        (j : Y ⟶ Z) (h : Z ⟶ W) (k : W ⟶ V)
-        (K : sfIntegralConstructibleCategory l E V),
-        (c j (h ≫ k)).hom.app K ≫
-            (constructibleIntegralPullback l E j).map ((c h k).hom.app K) =
-          eqToHom (congrArg
-            (fun f : Y ⟶ V ↦ (constructibleIntegralPullback l E f).obj K)
-            (Category.assoc j h k).symm) ≫
-            (c (j ≫ h) k).hom.app K ≫
-              (c j h).hom.app ((constructibleIntegralPullback l E k).obj K)) :=
-  ⟨_, (integralPullbackComposition_systemNormalized l E).choose_spec.1,
-    (integralPullbackComposition_systemNormalized l E).choose_spec.2.1⟩
 
 end WeilConjectures

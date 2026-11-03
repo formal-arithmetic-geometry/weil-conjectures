@@ -23,10 +23,8 @@ The former finite-evaluation proof used a false joint-faithfulness assertion.
 representatives before localization: for every compositor whose reduction is the system
 compositor after the whole-system pullback comparisons, the equation reduces to the
 composition law of the coherent system pullback/tensor comparison, which descends from
-the strict cochain law. The compositor of `integralPullbackComposition_systemNormalized`
-has this normalization. The recorded compositor `pullbackTensorIntegralComposition` is
-chosen from `integralPullbackComposition`, whose statement only pins finite evaluations,
-so the named theorem below remains open.
+the strict cochain law. The compositor `pullbackTensorIntegralComposition`, chosen from
+`integralPullbackComposition`, has this normalization by the last clause of that theorem.
 -/
 
 @[expose] public noncomputable section
@@ -55,7 +53,7 @@ Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
 
 Proof: the reductions of the canonical integral pullback/tensor comparisons are the
 system comparisons conjugated by the whole-system pullback comparisons of
-`integralPullbackSystemComparison_realization` and the reduction/tensor comparisons.
+`integralPullbackSystemComparison` and the reduction/tensor comparisons.
 The system comparisons obey the composition law for the system compositor, by descent of
 the strict cochain law. The hypothesis on `c` identifies its reduction with the system
 compositor; `reducedPullbackTensorComposition_of_systemLaw` combines these equations. -/
@@ -68,12 +66,12 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
       constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E h)
     (hc : ∀ K : sfIntegralConstructibleCategory l E Y,
       (integralSystemReduction l E Z).map (c.hom.app K) ≫
-          ((integralPullbackSystemComparison_realization l E).choose h).hom.app
+          ((integralPullbackSystemComparison l E).choose h).hom.app
             ((constructibleIntegralPullback l E f).obj K) ≫
           (finiteSystemDerivedPullback (integralSystemRings l E)
             (integralSystemTransition l E) h).map
-              (((integralPullbackSystemComparison_realization l E).choose f).hom.app K) =
-        ((integralPullbackSystemComparison_realization l E).choose (h ≫ f)).hom.app K ≫
+              (((integralPullbackSystemComparison l E).choose f).hom.app K) =
+        ((integralPullbackSystemComparison l E).choose (h ≫ f)).hom.app K ≫
           (finiteSystemDerivedComposition (integralSystemRings l E)
             (integralSystemTransition l E) h f).hom.app
               ((integralSystemReduction l E Y).obj K))
@@ -103,9 +101,9 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
     (pullbackTensorCalculus l E Y).systemClosed.tensor
     (pullbackTensorCalculus l E X).systemClosed.tensor
     (pullbackTensorCalculus l E Z).systemClosed.tensor
-    ((integralPullbackSystemComparison_realization l E).choose f)
-    ((integralPullbackSystemComparison_realization l E).choose h)
-    ((integralPullbackSystemComparison_realization l E).choose (h ≫ f))
+    ((integralPullbackSystemComparison l E).choose f)
+    ((integralPullbackSystemComparison l E).choose h)
+    ((integralPullbackSystemComparison l E).choose (h ≫ f))
     (integralSystemTensorReduction l E Y) (integralSystemTensorReduction l E X)
     (integralSystemTensorReduction l E Z)
     (integralSystemTensorComparison l E f) (integralSystemTensorComparison l E h)
@@ -123,60 +121,14 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
     rw [← finiteSystemDerivedComposition_eq] at hσ
     exact hσ
 
-/-- The reduced pullback/tensor composition equation holds for the system-normalized
-compositor of `integralPullbackComposition_systemNormalized`.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-Proof: its third clause is the hypothesis of
-`integralPullbackTensorCompositionReduced_of_systemLaw`. -/
-theorem integralPullbackTensorCompositionReduced_systemNormalized {X Y Z : Scheme.{u}}
-    (f : X ⟶ Y) (h : Z ⟶ X)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
-    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]
-    (M N : sfIntegralConstructibleCategory l E Y) :
-    (integralSystemReduction l E Z).map
-        ((canonicalIntegralPullbackTensor l E (h ≫ f) M N).hom ≫
-          (constructibleIntegralTensor l E Z).map
-            (Prod.mkHom
-              (((integralPullbackComposition_systemNormalized l E).choose h f).hom.app M)
-              (((integralPullbackComposition_systemNormalized l E).choose h f).hom.app N))) =
-      (integralSystemReduction l E Z).map
-        (((integralPullbackComposition_systemNormalized l E).choose h f).hom.app
-            ((constructibleIntegralTensor l E Y).obj (M, N)) ≫
-          (constructibleIntegralPullback l E h).map
-            (canonicalIntegralPullbackTensor l E f M N).hom ≫
-          (canonicalIntegralPullbackTensor l E h
-            ((constructibleIntegralPullback l E f).obj M)
-            ((constructibleIntegralPullback l E f).obj N)).hom) :=
-  integralPullbackTensorCompositionReduced_of_systemLaw l E f h _
-    (fun K ↦ (integralPullbackComposition_systemNormalized l E).choose_spec.2.2 h f K) M N
-
 /-- Reduced form of the integral pullback/tensor composition equation.
 Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
 
-Proof plan: resolve the two inputs simultaneously by flat-term K-flat complexes
-and form their strict quotient systems. Use the unit-normalized system pullback
-compositor, before localization. On every total-tensor summand the two routes
-send a pure tensor to the pair of its pulled-back factors; balancing identifies
-these chain maps, including their horizontal transition maps. Localize this
-single equality of whole systems. Transport along the coherent reduction/tensor
-and reduction/pullback comparisons and cancel their invertible components.
-The normalization of the recorded integral compositor must identify it with this
-coherent compositor on representatives; its finite-evaluation formula alone does
-not establish that identification. Expose or repair that normalization before
-using it here. Then the transported equality is precisely the displayed equation.
-No inference from separate finite derived evaluations is used.
-
-This restores the obligation hidden by the invalid extensionality split; it does
-not assert that the required whole-system normalization has already been proved.
-For the system-normalized compositor the equation is
-`integralPullbackTensorCompositionReduced_systemNormalized`. The remaining step is to
-identify `pullbackTensorIntegralComposition`, the compositor chosen from the statement of
-`integralPullbackComposition`, with a system-normalized one: that statement only fixes
-its finite evaluations, which do not determine a map of complete objects (lim¹ terms).
--/
+Proof: the recorded compositor `pullbackTensorIntegralComposition` is the one chosen from
+`integralPullbackComposition`, whose last clause says that its reduction is the system
+compositor after the whole-system pullback comparisons. This is the hypothesis of
+`integralPullbackTensorCompositionReduced_of_systemLaw`. -/
 theorem integralPullbackTensorCompositionReduced {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -195,6 +147,8 @@ theorem integralPullbackTensorCompositionReduced {X Y Z : Scheme.{u}}
             ((@canonicalIntegralPullbackTensor l _ E _ _ _ X Y f hX hY) M N).hom ≫
           ((@canonicalIntegralPullbackTensor l _ E _ _ _ Z X h hZ hX)
             (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj M)
-            (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)).hom) := by sorry
+            (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)).hom) :=
+  integralPullbackTensorCompositionReduced_of_systemLaw l E f h _
+    (fun K ↦ (integralPullbackComposition l E).choose_spec.2.2 h f K) M N
 
 end WeilConjectures

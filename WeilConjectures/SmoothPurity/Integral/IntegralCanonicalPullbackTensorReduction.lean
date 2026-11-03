@@ -17,7 +17,7 @@ Source: Stacks 07A4 and 0941
 
 The coherent reduction of the canonical integral comparison is the transported system
 comparison, conjugated by the whole-system pullback comparison of
-`integralPullbackSystemComparison_realization` and by the reduction/tensor comparison built from the
+`integralPullbackSystemComparison` and by the reduction/tensor comparison built from the
 Roos-normalized tensor realization and the coherent counit.
 -/
 
@@ -119,7 +119,7 @@ def integralPullbackSystemComparisonApp {X Y : Scheme.{u}} (f : X ⟶ Y)
     (pullbackTensorCalculus l E X).reduction.obj ((integralDerivedPullback l E f).obj K.obj) ≅
       (integralComparisonDerivedSequencePullback l E f).obj
         ((pullbackTensorCalculus l E Y).reduction.obj K.obj) :=
-  ((integralPullbackSystemComparison_realization l E).choose f).app K
+  ((integralPullbackSystemComparison l E).choose f).app K
 
 /-- The whole-system pullback comparison is the reduction of the Roos-normalized
 realization followed by the coherent counit.
@@ -137,7 +137,7 @@ theorem integralPullbackSystemComparisonApp_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
         (pullbackTensorCalculus l E X).adjunction.counit.app
           ((integralComparisonDerivedSequencePullback l E f).obj
             ((pullbackTensorCalculus l E Y).reduction.obj K.obj)) := by
-  have hβ := @(integralPullbackSystemComparison_realization l E).choose_spec.2
+  have hβ := @(integralPullbackSystemComparison l E).choose_spec.2
   exact (@hβ X Y hX hY f K).trans
     (congrArg (fun z ↦ (pullbackTensorCalculus l E X).reduction.map z ≫
       (pullbackTensorCalculus l E X).adjunction.counit.app
@@ -151,7 +151,7 @@ reduction/tensor comparisons.
 Source: Stacks 07A4, 0941
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
 Proof: the whole-system pullback comparison is the reduction of the Roos-normalized
-realization followed by the coherent counit (`integralPullbackSystemComparison_realization`). Apply
+realization followed by the coherent counit (`integralPullbackSystemComparison`). Apply
 `reduction_limitConjugate_eq` to the defining composite of
 `canonicalIntegralPullbackTensor`. -/
 theorem canonicalIntegralPullbackTensor_systemReduction {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -159,7 +159,7 @@ theorem canonicalIntegralPullbackTensor_systemReduction {X Y : Scheme.{u}} (f : 
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
     (M N : sfIntegralConstructibleCategory l E Y) :
     (integralSystemReduction l E X).map (canonicalIntegralPullbackTensor l E f M N).hom =
-      ((integralPullbackSystemComparison_realization l E).choose f).hom.app
+      ((integralPullbackSystemComparison l E).choose f).hom.app
           ((constructibleIntegralTensor l E Y).obj (M, N)) ≫
         (finiteSystemDerivedPullback (integralSystemRings l E)
           (integralSystemTransition l E) f).map
@@ -167,8 +167,8 @@ theorem canonicalIntegralPullbackTensor_systemReduction {X Y : Scheme.{u}} (f : 
         (integralSystemTensorComparison l E f).hom.app
           ((integralSystemReduction l E Y).obj M, (integralSystemReduction l E Y).obj N) ≫
         (pullbackTensorCalculus l E X).systemClosed.tensor.map
-          (Prod.mkHom (((integralPullbackSystemComparison_realization l E).choose f).inv.app M)
-            (((integralPullbackSystemComparison_realization l E).choose f).inv.app N)) ≫
+          (Prod.mkHom (((integralPullbackSystemComparison l E).choose f).inv.app M)
+            (((integralPullbackSystemComparison l E).choose f).inv.app N)) ≫
         (integralSystemTensorReduction l E X).inv.app
           ((constructibleIntegralPullback l E f).obj M,
             (constructibleIntegralPullback l E f).obj N) := by
