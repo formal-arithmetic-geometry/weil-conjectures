@@ -734,12 +734,28 @@ private noncomputable def signedOverUnit (X : Scheme.{u})
       (ProEt.topology X) R).functor.obj L)
     U e d
 
+private theorem locallyFree_lfp {X : Scheme.{u}}
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (hP : CondensedRing.LocallyFree R P) : ProEtale.IsLocallyFinitelyPresented R P := by
+  obtain ⟨C, hC⟩ := hP
+  refine ⟨C, fun s ↦ ?_⟩
+  obtain ⟨n, ⟨e⟩⟩ := hC s
+  exact ⟨n, 0, 0, ⟨e ≪≫ Limits.cokernelZeroIsoTarget.symm⟩⟩
+
+private theorem locallyFree_constructible {X : Scheme.{u}}
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (hP : CondensedRing.LocallyFree R P) : ProEtale.IsConstructibleModuleObject R P :=
+  ⟨Scheme.Stratification.trivial X, fun _ ↦
+    locallyFree_lfp (CondensedRing.locallyFree_map _ hP)⟩
+
 private theorem bounded_single_of_locallyFree (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) Ab.{u + 1}) [MonObj R]
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) R)
     (h : CondensedRing.LocallyFree R M) :
     boundedConstructible R ((DerivedCategory.singleFunctor _ 0).obj M) := by
-  have hM := CondensedRing.locallyFree_constructible h
+  have hM := locallyFree_constructible h
   refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
   rcases lt_trichotomy n 0 with hn | rfl | hn
   · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isGE _ 0 n hn)
