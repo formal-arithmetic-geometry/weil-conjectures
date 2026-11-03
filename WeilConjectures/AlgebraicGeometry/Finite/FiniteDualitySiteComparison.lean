@@ -890,7 +890,7 @@ private theorem isIso_siteHom
     have : IsIso (β.app (op C)) := NatTrans.isIso_app_of_iso β e.op
     change IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} Λ) X C M)
     simpa only [hβ] using (inferInstance : IsIso (β.app (op C)))
-  apply etaleThickGeneration X Λ P ?_ K
+  apply boundedConstructible_induction X Λ P ?_ K
     ((WeilConjectures.boundedConstructible_iff_source Λ X K).mpr hK.1) ?_
   · rintro B ⟨str, i, j, hj, L, hji, hL, hf, ⟨e⟩⟩
     let := hj
