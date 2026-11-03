@@ -166,6 +166,7 @@ import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
 
 /-! # The normalized Roos comparison for the actual total inverse limit
 
@@ -187,10 +188,14 @@ namespace CategoryTheory
 
 private instance fixedAbSheafify (W : Scheme.{u}) :
     HasSheafify (ProEt.topology W) AddCommGrpCat.{u + 1} :=
-  WeilConjectures.integralCoefficientAbSheafify.{u, 0} W
+  letI : EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
+
 private instance fixedAbBijective (W : Scheme.{u}) :
     (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} W
+  letI : EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1, u + 1,
+    u + 2, u + 1, u + 1, u + 1} _
 
 variable (W : Scheme.{u}) (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
 
