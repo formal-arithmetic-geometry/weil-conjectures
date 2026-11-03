@@ -38,6 +38,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorCon
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorOriginalSectionsExt
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTransition
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseComparison
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainModuleAdjunction
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
@@ -269,6 +271,7 @@ public import WeilConjectures.Algebra.Homology.ChangeOfRingsAcyclicKFlat
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsComplex
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlat
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatGeneral
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorAcyclic
@@ -824,6 +827,7 @@ public import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorPivot
 public import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorQuotient
 public import WeilConjectures.Algebra.Homology.ResolutionByClass
 public import WeilConjectures.Algebra.Homology.ResolvingTensorSigned.ResolvingTensorSignedCoherence
+public import WeilConjectures.Algebra.Homology.RestrictScalarsIsoKFlat
 public import WeilConjectures.Algebra.Homology.RestrictedComplementaryTruncationComparison
 public import WeilConjectures.Algebra.Homology.RestrictedTowerResolution.RestrictedTowerResolutionAcyclicity
 public import WeilConjectures.Algebra.Homology.RestrictionCompositeHomology
@@ -5771,7 +5775,12 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfec
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicOrdinaryScalarModelBase
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientCoordinateTower
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientDiagram
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientStrictRealization
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientStrictRealizationData
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientStrictRealizationSquare
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransition
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransitionUnique
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransitionUniversal
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicRealization
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicScalarCoherence
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicScalarComponentUnderlying
@@ -5785,6 +5794,7 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfec
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicSourcePresentation
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicStalkModels
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicStalkReduction
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicStrictRealizationComparison
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerData
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerExtraction
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerLimit
@@ -13798,6 +13808,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.GoodTr
 public import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.GrothendieckDerivedCoproductsColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.UnboundedInjectiveModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+public import WeilConjectures.CategoryTheory.DerivedCategory.StrictSquareArrowUniversal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Telescope
 public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
@@ -20944,6 +20955,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.WeilDatum
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalarsQuotient
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalarsStrictArrow
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtensionZeroLimits
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Finiteness
