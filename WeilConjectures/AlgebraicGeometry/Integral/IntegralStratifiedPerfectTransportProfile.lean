@@ -105,6 +105,8 @@ abbrev AdicCoefficientDatum.constantLevelIso (T : Scheme.{u}) (n : ℕ) :
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).mapIso
     (d.quotientRingEquiv d' φ hφ n).toCommRingCatIso
 
+/-- The level isomorphisms are compatible with the constant level comparisons.
+(auxiliary; not a blueprint node). -/
 theorem AdicCoefficientDatum.levelConstant_square (T : Scheme.{u}) (n : ℕ) :
     (pbcLevelConstantComparison T d' n).hom ≫ (d.levelIso d' φ hφ T n).inv =
       (d.constantLevelIso d' φ hφ T n).inv ≫ (pbcLevelConstantComparison T d n).hom := by
@@ -284,24 +286,5 @@ theorem AdicCoefficientDatum.transport_uniformReductionProfile (T : Scheme.{u})
   exact isConstructibleProEtaleCoefficientModuleSheaf_of_iso T _ (i₁ ≪≫ i₂) h₁
 
 end Profile
-
-/-- The implication "intrinsically complete with a uniform reduction profile implies
-stratified perfect" is invariant under isomorphisms of adic coefficient data.
-Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
-Proof: restriction of scalars along the completed isomorphism transports completeness and
-the uniform reduction profile; the hypothesis for `d'` gives stratified perfect models of the
-transported object, and these descend. -/
-theorem isIntegralStratifiedPerfect_of_ringEquiv (T : Scheme.{u})
-    {A A' : Type (u + 1)} [CommRing A] [CommRing A']
-    (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
-    (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
-    (h' : ∀ K' : PbcCompletedDerived T d', PbcIsIntrinsicallyComplete T d' K' →
-      PbcUniformReductionProfile T d' K' → IsIntegralStratifiedPerfect T d' K')
-    (K : PbcCompletedDerived T d) (hc : PbcIsIntrinsicallyComplete T d K)
-    (hp : PbcUniformReductionProfile T d K) :
-    IsIntegralStratifiedPerfect T d K :=
-  d.isIntegralStratifiedPerfect_of_transport d' φ hφ T K
-    (h' _ (d.transport_intrinsicallyComplete d' φ hφ T K hc)
-      (d.transport_uniformReductionProfile d' φ hφ T K hp))
 
 end AlgebraicGeometry.Scheme

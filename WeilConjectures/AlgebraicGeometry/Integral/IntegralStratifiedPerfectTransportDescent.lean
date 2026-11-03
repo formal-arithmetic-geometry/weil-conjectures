@@ -41,11 +41,13 @@ private local instance (priority := 100000) fixedSmall (T : AlgebraicGeometry.Sc
     CategoryTheory.EssentiallySmall.{u + 1} T.ProEt :=
   CategoryTheory.essentiallySmallSelf.{0} _
 
-private noncomputable local instance (priority := 100000) fixedSheafify (T : AlgebraicGeometry.Scheme.{u}) :
+private noncomputable local instance (priority := 100000) fixedSheafify
+    (T : AlgebraicGeometry.Scheme.{u}) :
     CategoryTheory.HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
 
-private local instance (priority := 100000) fixedLocallyBijective (T : AlgebraicGeometry.Scheme.{u}) :
+private local instance (priority := 100000) fixedLocallyBijective
+    (T : AlgebraicGeometry.Scheme.{u}) :
     (AlgebraicGeometry.Scheme.ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
 

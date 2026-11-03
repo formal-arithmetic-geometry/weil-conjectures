@@ -8,6 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectTransportProfile
 public import WeilConjectures.CategoryTheory.Adjunction.TowerTransitionTransport
 import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
+import all WeilConjectures.AlgebraicGeometry.SmoothBaseChange.ActualCompletedReductionReconstruction
+import all WeilConjectures.SmoothPurity.Completed.CompletedCoefficientCompletionRoosTransport
+import all WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulReductionRoosTriangle
+import all WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.IntegralCoefficientPresentationComparison
 
 /-! # Intrinsic completeness along isomorphisms of coefficient data
 
@@ -125,18 +129,22 @@ abbrev AdicCoefficientDatum.transportBack :
     PbcCompletedDerived T d' ⥤ PbcCompletedDerived T d :=
   pbcDerivedRestrict (d.completionIso d' φ hφ T).hom
 
+/-- Restriction along a level isomorphism is an equivalence. (auxiliary; not a blueprint node). -/
 instance (n : ℕ) : (pbcDerivedRestrict (d.levelIso d' φ hφ T n).hom).IsEquivalence :=
   (pbcDerivedRestrictEquivalence (d.levelIso d' φ hφ T n)).isEquivalence_functor
 
+/-- Restriction along the completed isomorphism is an equivalence.
+(auxiliary; not a blueprint node). -/
 instance : (d.transportBack d' φ hφ T).IsEquivalence :=
   (pbcDerivedRestrictEquivalence (d.completionIso d' φ hφ T)).isEquivalence_functor
 
+/-- The level isomorphisms commute with the quotient maps. (auxiliary; not a blueprint node). -/
 theorem AdicCoefficientDatum.levelIso_quotient (n : ℕ) :
     (d.levelIso d' φ hφ T (n + 1)).hom ≫ pbcAdicQuotient T d' (n + 1) n (Nat.le_succ n) =
       pbcAdicQuotient T d (n + 1) n (Nat.le_succ n) ≫ (d.levelIso d' φ hφ T n).hom :=
   ((d.ringSystemHom d' φ hφ T).naturality (homOfLE (Nat.le_succ n)).op).symm
 
-/-- The base change comparison of restrictions to a level. -/
+/-- The base change comparison of restrictions to a level. (auxiliary; not a blueprint node). -/
 def AdicCoefficientDatum.levelRestrictIso (n : ℕ) :
     pbcDerivedRestrict (pbcAdicProjection T d' n) ⋙ d.transportBack d' φ hφ T ≅
       pbcDerivedRestrict (d.levelIso d' φ hφ T n).hom ⋙
@@ -146,7 +154,7 @@ def AdicCoefficientDatum.levelRestrictIso (n : ℕ) :
       (d.completionIso_hom_projection d' φ hφ T n) ≪≫
     (pbcDerivedRestrictComp (pbcAdicProjection T d n) (d.levelIso d' φ hφ T n).hom _ rfl).symm
 
-/-- The base change comparison of quotient restrictions. -/
+/-- The base change comparison of quotient restrictions. (auxiliary; not a blueprint node). -/
 def AdicCoefficientDatum.quotientRestrictIso (n : ℕ) :
     pbcDerivedRestrict (pbcAdicQuotient T d' (n + 1) n (Nat.le_succ n)) ⋙
         pbcDerivedRestrict (d.levelIso d' φ hφ T (n + 1)).hom ≅
@@ -159,7 +167,8 @@ def AdicCoefficientDatum.quotientRestrictIso (n : ℕ) :
     (pbcDerivedRestrictComp (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))
       (d.levelIso d' φ hφ T n).hom _ rfl).symm
 
-/-- The base change map of finite reductions, the mate of the restriction comparison. -/
+/-- The base change map of finite reductions, the mate of the restriction comparison.
+(auxiliary; not a blueprint node). -/
 def AdicCoefficientDatum.levelExtendMap (n : ℕ) :
     d.transportBack d' φ hφ T ⋙ pbcDerivedExtend (pbcAdicProjection T d n) ⟶
       pbcDerivedExtend (pbcAdicProjection T d' n) ⋙
@@ -168,16 +177,19 @@ def AdicCoefficientDatum.levelExtendMap (n : ℕ) :
     (pbcDerivedScalarAdjunction (pbcAdicProjection T d n))).symm
     (TwoSquare.mk _ _ _ _ (d.levelRestrictIso d' φ hφ T n).hom)).natTrans
 
+/-- The base change map of reductions is invertible. (auxiliary; not a blueprint node). -/
 instance (n : ℕ) : IsIso (d.levelExtendMap d' φ hφ T n) :=
   isIso_mateEquiv_symm_of_equivalences _ _ _
 
-/-- The base change isomorphism of finite reductions. -/
+/-- The base change isomorphism of finite reductions. (auxiliary; not a blueprint node). -/
 def AdicCoefficientDatum.levelExtendIso (n : ℕ) :
     d.transportBack d' φ hφ T ⋙ pbcDerivedExtend (pbcAdicProjection T d n) ≅
       pbcDerivedExtend (pbcAdicProjection T d' n) ⋙
         pbcDerivedRestrict (d.levelIso d' φ hφ T n).hom :=
   asIso (d.levelExtendMap d' φ hφ T n)
 
+/-- Unit compatibility of the base change isomorphism of reductions.
+(auxiliary; not a blueprint node). -/
 theorem AdicCoefficientDatum.levelExtendIso_unit (n : ℕ) (K : PbcCompletedDerived T d') :
     (d.transportBack d' φ hφ T).map
         ((pbcDerivedScalarAdjunction (pbcAdicProjection T d' n)).unit.app K) ≫
@@ -251,5 +263,125 @@ theorem AdicCoefficientDatum.tower_baseChange (n : ℕ) (K : PbcCompletedDerived
   erw [Iso.hom_inv_id_app, Category.comp_id]
 
 end Tower
+
+section Complete
+
+variable {A A' : Type (u + 1)} [CommRing A] [CommRing A']
+  (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
+  (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal) (T : Scheme.{u})
+
+private theorem complete_of_iso' {T : Scheme.{u}} {B : Type (u + 1)} [CommRing B]
+    (e : AdicCoefficientDatum B) {M N : PbcCompletedDerived T e} (i : M ≅ N)
+    (hM : PbcIsIntrinsicallyComplete T e M) : PbcIsIntrinsicallyComplete T e N := by
+  obtain ⟨r, a, ha, C, eC, hC⟩ := hM
+  refine ⟨r, a, ha, C,
+    eC ≪≫ (pbcDerivedExtend (pbcCompletedComparison T e).inv).mapIso i, ?_⟩
+  change IsIso (eC.inv ≫ _) at hC
+  have hu := (isIso_comp_left_iff eC.inv _).mp hC
+  change IsIso ((_ ≫ eC.inv) ≫ _)
+  infer_instance
+
+/-- A derived-limit presentation of an object by its reduction tower makes it complete.
+(auxiliary; not a blueprint node). -/
+private theorem complete_of_reduction_derivedLimit {B : Type (u + 1)} [CommRing B]
+    (e : AdicCoefficientDatum B) (K : PbcCompletedDerived T e)
+    [HasProduct (fun n ↦ (WeilConjectures.IntegralCoefficientPresentation.reduction
+      (pbcAdicProjection T e n)).obj K)]
+    (p : K ⟶ ∏ᶜ fun n ↦ (WeilConjectures.IntegralCoefficientPresentation.reduction
+      (pbcAdicProjection T e n)).obj K)
+    (δ : (∏ᶜ fun n ↦ (WeilConjectures.IntegralCoefficientPresentation.reduction
+      (pbcAdicProjection T e n)).obj K) ⟶ K⟦(1 : ℤ)⟧)
+    (h : IsDerivedLimitTriangle (fun n ↦ (reconstructionStep T e n).app K) K p δ) :
+    PbcIsIntrinsicallyComplete T e K := by
+  obtain ⟨hp, p', δ', h', -⟩ := WeilConjectures.pbcNormalizedRoos T e K
+  let T₁ := Pretriangulated.Triangle.mk p
+    (towerTransitionEndomorphism (fun n ↦ (reconstructionStep T e n).app K)) δ
+  let T₂ := Pretriangulated.Triangle.mk p'
+    (towerTransitionEndomorphism (fun n ↦ (reconstructionStep T e n).app K)) δ'
+  obtain ⟨a, ha₁, ha₃⟩ := Pretriangulated.complete_distinguished_triangle_morphism₁ T₁ T₂ h h'
+    (𝟙 _) (𝟙 _) (by simp [T₁, T₂])
+  let ψ : T₁ ⟶ T₂ :=
+    { hom₁ := a
+      hom₂ := 𝟙 _
+      hom₃ := 𝟙 _
+      comm₁ := by simpa using ha₁
+      comm₂ := by simp [T₁, T₂]
+      comm₃ := by simpa using ha₃ }
+  have : IsIso a := Pretriangulated.isIso₁_of_isIso₂₃ ψ h h' (by dsimp [ψ]; infer_instance)
+    (by dsimp [ψ]; infer_instance)
+  exact complete_of_iso' e (asIso a).symm
+    ((ObjectProperty.ι (PbcIsIntrinsicallyComplete T e)).leftAdjoint.obj K).property
+
+/-- Intrinsic completeness transports along an isomorphism of coefficient data.
+Source: Stacks Tags 099M and 099N (auxiliary; not a blueprint node).
+Proof: a complete object is the derived limit of its reduction tower. Restriction along
+the completed isomorphism is a triangulated equivalence, and the base change comparisons
+identify the reduction tower of the transported object with the restricted tower,
+compatibly with the transitions. Reflecting the derived-limit triangle along this
+equivalence presents the transported object as the derived limit of its own reduction
+tower. Comparing with the Roos triangle of its completion shows that it is isomorphic to its
+completion. -/
+theorem AdicCoefficientDatum.transport_intrinsicallyComplete (K : PbcCompletedDerived T d)
+    (hK : PbcIsIntrinsicallyComplete T d K) :
+    PbcIsIntrinsicallyComplete T d' ((d.transportDerived d' φ hφ T).obj K) := by
+  classical
+  let Ψ := d.transportBack d' φ hφ T
+  let K' := (d.transportDerived d' φ hφ T).obj K
+  let K₀ := Ψ.obj K'
+  let r := (pbcDerivedRestrictEquivalence (d.completionIso d' φ hφ T)).counitIso.app K
+  have hK₀ : PbcIsIntrinsicallyComplete T d K₀ := complete_of_iso' d r.symm hK
+  let := WeilConjectures.IntegralCoefficientPresentation.derived_products T
+    (pbcAdicCompletion T d)
+  let := WeilConjectures.IntegralCoefficientPresentation.derived_products T
+    (pbcAdicCompletion T d')
+  have hlim := pbc_actual_completed_reduction_reconstruction T d K₀ hK₀
+  have hlim' : IsDerivedLimit (K := fun n ↦ (pbcCompletedReduction T d n ⋙
+      pbcDerivedRestrict (pbcAdicProjection T d n)).obj K₀)
+      (fun n ↦ (reconstructionStep T d n).app K₀) K₀ := by
+    refine reconstructionLimit_transport _ _ K₀ hlim (fun n ↦ Iso.refl _) (fun n ↦ ?_)
+    simp only [Functor.ofOpSequence_map_homOfLE_succ, Iso.refl_hom, Category.comp_id,
+      Category.id_comp]
+    rfl
+  obtain ⟨p', δ', h'⟩ := hlim'
+  let a (n : ℕ) := Adjunction.towerBaseChange Ψ
+    (pbcDerivedRestrict (d.levelIso d' φ hφ T n).hom)
+    (d.levelRestrictIso d' φ hφ T n) (d.levelExtendIso d' φ hφ T n) K'
+  let F := (pbcRestrict (d.completionIso d' φ hφ T).hom).mapDerivedCategory
+  have : F.IsEquivalence :=
+    (pbcDerivedRestrictEquivalence (d.completionIso d' φ hφ T)).isEquivalence_functor
+  obtain ⟨p, δ, h, -⟩ := reflectNormalizedRoos F
+    (V := fun n ↦ (pbcCompletedReduction T d' n ⋙
+      pbcDerivedRestrict (pbcAdicProjection T d' n)).obj K')
+    (W := fun n ↦ (pbcCompletedReduction T d n ⋙
+      pbcDerivedRestrict (pbcAdicProjection T d n)).obj K₀) a
+    (fun n ↦ (reconstructionStep T d' n).app K') (fun n ↦ (reconstructionStep T d n).app K₀)
+    (fun n ↦ d.tower_baseChange d' φ hφ T n K') (Iso.refl K₀) p' δ' h' (𝟙 K')
+    (fun n ↦ F.preimage (p' ≫ Pi.π _ n ≫ (a n).inv)) (fun n ↦ by
+      rw [Functor.map_preimage]
+      simp only [Iso.refl_hom, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      rw [CategoryTheory.Functor.map_id]
+      exact (Category.id_comp _).trans (Category.id_comp (p' ≫ Pi.π _ n)))
+  exact complete_of_reduction_derivedLimit T d' K' p δ h
+
+end Complete
+
+/-- The implication "intrinsically complete with a uniform reduction profile implies
+stratified perfect" is invariant under isomorphisms of adic coefficient data.
+Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
+Proof: restriction of scalars along the completed isomorphism transports completeness and
+the uniform reduction profile; the hypothesis for `d'` gives stratified perfect models of the
+transported object, and these descend. -/
+theorem isIntegralStratifiedPerfect_of_ringEquiv (T : Scheme.{u})
+    {A A' : Type (u + 1)} [CommRing A] [CommRing A']
+    (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
+    (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
+    (h' : ∀ K' : PbcCompletedDerived T d', PbcIsIntrinsicallyComplete T d' K' →
+      PbcUniformReductionProfile T d' K' → IsIntegralStratifiedPerfect T d' K')
+    (K : PbcCompletedDerived T d) (hc : PbcIsIntrinsicallyComplete T d K)
+    (hp : PbcUniformReductionProfile T d K) :
+    IsIntegralStratifiedPerfect T d K :=
+  d.isIntegralStratifiedPerfect_of_transport d' φ hφ T K
+    (h' _ (d.transport_intrinsicallyComplete d' φ hφ T K hc)
+      (d.transport_uniformReductionProfile d' φ hφ T K hp))
 
 end AlgebraicGeometry.Scheme
