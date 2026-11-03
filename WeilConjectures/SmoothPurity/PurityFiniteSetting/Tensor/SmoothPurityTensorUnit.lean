@@ -16,6 +16,9 @@ Source: smooth-purity model paragraph and projection-purity-agreement normalizat
 (blueprint: lem-route-smooth-purity-theta-unit).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 noncomputable section
 set_option autoImplicit false
 universe u c d e h
@@ -85,9 +88,6 @@ private theorem square_single (s : F ⋙ G ≅ J ⋙ I) (V : C) :
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
 
 end Generic
-
--- After pruning, this module only keeps private declarations.
-set_option linter.privateModule false
 
 @[expose] public section
 

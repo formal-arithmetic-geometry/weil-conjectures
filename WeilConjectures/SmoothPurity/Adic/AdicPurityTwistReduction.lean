@@ -383,7 +383,6 @@ private theorem nonempty_heq_transport {S T : Type x} (h : S = T)
   obtain ⟨t, ht⟩ := hp
   exact ⟨t, ⟨t, ht⟩, HEq.rfl⟩
 
-omit hInvert in
 private theorem finiteTensorIsoType_eq (d : ℕ)
     [_hAdd : (adicPurityFiniteSheafTwist l E n T d).Additive]
     [_hLimits : PreservesFiniteLimits (adicPurityFiniteSheafTwist l E n T d)]
