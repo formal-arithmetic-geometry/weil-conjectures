@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonPasting
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
 /-!
 # Composition of normalized derived reduction comparisons
@@ -21,6 +22,8 @@ Stacks Tags 06YY and 0D6D (blueprint: thm-cbc-complete-proetale).
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+
+universe u
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -205,5 +208,172 @@ theorem derivedReductionTriangle_paste
     Category.assoc, n4]
 
 end Triangle
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+section RestrictionComposition
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+  (RZ SZ : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
+  (RY SY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+  (RX SX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+  (aZ : RZ ⟶ SZ) (aY : RY ⟶ SY) (aX : RX ⟶ SX)
+  (cRg : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj RZ ≅ RY)
+  (cSg : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj SZ ≅ SY)
+  (cRf : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj RY ≅ RX)
+  (cSf : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj SY ≅ SX)
+  (cRfg : (proEtaleSheafInverseImage (f ≫ g) CommRingCat.{u + 1}).obj RZ ≅ RX)
+  (cSfg : (proEtaleSheafInverseImage (f ≫ g) CommRingCat.{u + 1}).obj SZ ≅ SX)
+  (commg : cRg.hom ≫ aY = (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map aZ ≫ cSg.hom)
+  (commf : cRf.hom ≫ aX = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map aY ≫ cSf.hom)
+  (commfg : cRfg.hom ≫ aX =
+    (proEtaleSheafInverseImage (f ≫ g) CommRingCat.{u + 1}).map aZ ≫ cSfg.hom)
+
+include commf in
+/-- The restriction/pullback comparison is the inverse mate of identity on sections. -/
+theorem restrictionPullbackInv_mate :
+    mateEquiv (proEtaleRingModuleAdjunction f SY SX cSf)
+        (proEtaleRingModuleAdjunction f RY RX cRf)
+        (TwoSquare.mk _ _ _ _
+          (proEtaleRingRestrictionPullbackInv f RY SY RX SX aY aX cRf cSf commf)) =
+      TwoSquare.mk _ _ _ _
+        (proEtaleRingRestrictionDirectImage f RY SY RX SX aY aX cRf cSf commf).hom := by
+  rw [← Equiv.eq_symm_apply]
+  apply TwoSquare.ext
+  intro M
+  simp only [mateEquiv_symm_apply, proEtaleRingRestrictionPullbackInv,
+    proEtaleRingRestrictionPullbackApp, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.comp_map,
+    Category.id_comp]
+  simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
+  dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+  simp only [Category.id_comp]
+  exact (Category.comp_id _).symm
+
+
+
+private lemma mateSquare'
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
+    {L₃ L₄ : E ⥤ F} {R₃ R₄ : F ⥤ E}
+    {G : C ⥤ E} {H : D ⥤ F}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (a₃ : L₃ ⊣ R₃) (a₄ : L₄ ⊣ R₄)
+    (q : TwoSquare G L₁ L₃ H) (r : TwoSquare G L₂ L₄ H)
+    (s : L₄ ⟶ L₃) (t : L₂ ⟶ L₁)
+    (h : (mateEquiv a₁ a₃ q).whiskerBottom (conjugateEquiv a₃ a₄ s) =
+      (mateEquiv a₂ a₄ r).whiskerTop (conjugateEquiv a₁ a₂ t)) :
+    q.whiskerRight s = r.whiskerLeft t := by
+  apply (mateEquiv a₁ a₄).injective
+  rw [mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp]
+  exact h
+
+include commf commg commfg in
+/-- Restriction of scalars respects the inverse-image compositors, when both compositors
+are conjugate to the fibre-product pasting maps on sections.
+Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
+-/
+theorem restrictionPullbackInv_comp
+    (κR : proEtaleRingModulePullback (f ≫ g) RZ RX cRfg ≅
+      proEtaleRingModulePullback g RZ RY cRg ⋙ proEtaleRingModulePullback f RY RX cRf)
+    (κS : proEtaleRingModulePullback (f ≫ g) SZ SX cSfg ≅
+      proEtaleRingModulePullback g SZ SY cSg ⋙ proEtaleRingModulePullback f SY SX cSf)
+    (hκR : ∀ (N : proEtaleRingModules X RX) (U : Z.ProEt)
+      (m : ((proEtaleRingModuleDirectImage f RY RX cRf ⋙
+        proEtaleRingModuleDirectImage g RZ RY cRg).obj N).val.obj (Opposite.op U)),
+      ((conjugateEquiv ((proEtaleRingModuleAdjunction g RZ RY cRg).comp
+          (proEtaleRingModuleAdjunction f RY RX cRf))
+          (proEtaleRingModuleAdjunction (f ≫ g) RZ RX cRfg) κR.hom).app N).val.app
+            (Opposite.op U) m =
+        N.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app U).op m)
+    (hκS : ∀ (N : proEtaleRingModules X SX) (U : Z.ProEt)
+      (m : ((proEtaleRingModuleDirectImage f SY SX cSf ⋙
+        proEtaleRingModuleDirectImage g SZ SY cSg).obj N).val.obj (Opposite.op U)),
+      ((conjugateEquiv ((proEtaleRingModuleAdjunction g SZ SY cSg).comp
+          (proEtaleRingModuleAdjunction f SY SX cSf))
+          (proEtaleRingModuleAdjunction (f ≫ g) SZ SX cSfg) κS.hom).app N).val.app
+            (Opposite.op U) m =
+        N.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app U).op m)
+    (M : proEtaleRingModules Z SZ) :
+    κR.hom.app ((proEtaleRingRestrictScalars aZ).obj M) ≫
+        (proEtaleRingModulePullback f RY RX cRf).map
+          ((proEtaleRingRestrictionPullbackInv g RZ SZ RY SY aZ aY cRg cSg commg).app M) ≫
+        (proEtaleRingRestrictionPullbackInv f RY SY RX SX aY aX cRf cSf commf).app
+          ((proEtaleRingModulePullback g SZ SY cSg).obj M) =
+      (proEtaleRingRestrictionPullbackInv (f ≫ g) RZ SZ RX SX aZ aX cRfg cSfg commfg).app M ≫
+        (proEtaleRingRestrictScalars aX).map (κS.hom.app M) := by
+  let q := (TwoSquare.mk _ _ _ _
+      (proEtaleRingRestrictionPullbackInv g RZ SZ RY SY aZ aY cRg cSg commg)).vComp
+    (TwoSquare.mk _ _ _ _
+      (proEtaleRingRestrictionPullbackInv f RY SY RX SX aY aX cRf cSf commf))
+  have h := mateSquare' ((proEtaleRingModuleAdjunction g SZ SY cSg).comp
+      (proEtaleRingModuleAdjunction f SY SX cSf))
+    (proEtaleRingModuleAdjunction (f ≫ g) SZ SX cSfg)
+    ((proEtaleRingModuleAdjunction g RZ RY cRg).comp
+      (proEtaleRingModuleAdjunction f RY RX cRf))
+    (proEtaleRingModuleAdjunction (f ≫ g) RZ RX cRfg) q
+    (TwoSquare.mk _ _ _ _
+      (proEtaleRingRestrictionPullbackInv (f ≫ g) RZ SZ RX SX aZ aX cRfg cSfg commfg))
+    κR.hom κS.hom
+  have hc : q.whiskerRight κR.hom =
+      (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionPullbackInv (f ≫ g) RZ SZ RX SX
+        aZ aX cRfg cSfg commfg)).whiskerLeft κS.hom := by
+    apply h
+    dsimp only [q]
+    rw [mateEquiv_hcomp, restrictionPullbackInv_mate, restrictionPullbackInv_mate,
+      restrictionPullbackInv_mate]
+    apply TwoSquare.ext
+    intro N
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro W
+    ext n
+    simp only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop, TwoSquare.hComp,
+      TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+      Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app]
+    simp only [ModuleCat.comp_apply, TwoSquare.natTrans]
+    have dirApply {U V : Scheme.{u}} (q : U ⟶ V)
+        (RV SV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
+        (RU SU : Sheaf (ProEt.topology U) CommRingCat.{u + 1})
+        (aV : RV ⟶ SV) (aU : RU ⟶ SU)
+        (cR : (proEtaleSheafInverseImage q CommRingCat.{u + 1}).obj RV ≅ RU)
+        (cS : (proEtaleSheafInverseImage q CommRingCat.{u + 1}).obj SV ≅ SU)
+        (comm : cR.hom ≫ aU = (proEtaleSheafInverseImage q CommRingCat.{u + 1}).map aV ≫ cS.hom)
+        (N : proEtaleRingModules U SU) (W : V.ProEtᵒᵖ)
+        (n : N.val.obj ((proEtaleBaseChange q).op.obj W)) :
+        ((proEtaleRingRestrictionDirectImage q RV SV RU SU aV aU cR cS comm).hom.app N).val.app
+          W n = n :=
+      (Classical.choose_spec (proEtaleRingRestrictionDirectImage_existsUnique
+        q RV SV RU SU aV aU cR cS comm)).1 N W n
+    erw [dirApply g RZ SZ RY SY aZ aY cRg cSg commg
+      ((proEtaleRingModuleDirectImage f SY SX cSf).obj N) W n]
+    change ((conjugateEquiv ((proEtaleRingModuleAdjunction g RZ RY cRg).comp
+        (proEtaleRingModuleAdjunction f RY RX cRf))
+        (proEtaleRingModuleAdjunction (f ≫ g) RZ RX cRfg) κR.hom).app
+          ((proEtaleRingRestrictScalars aX).obj N)).val.app W
+        (((proEtaleRingRestrictionDirectImage f RY SY RX SX aY aX cRf cSf commf).hom.app
+          N).val.app ((proEtaleBaseChange g).op.obj W) n) =
+      ((proEtaleRingRestrictionDirectImage (f ≫ g) RZ SZ RX SX aZ aX cRfg cSfg
+        commfg).hom.app N).val.app W
+        (((conjugateEquiv ((proEtaleRingModuleAdjunction g SZ SY cSg).comp
+          (proEtaleRingModuleAdjunction f SY SX cSf))
+          (proEtaleRingModuleAdjunction (f ≫ g) SZ SX cSfg) κS.hom).app N).val.app W n)
+    erw [dirApply f RY SY RX SX aY aX cRf cSf commf N ((proEtaleBaseChange g).op.obj W) n,
+      dirApply (f ≫ g) RZ SZ RX SX aZ aX cRfg cSfg commfg N W _]
+    obtain ⟨W⟩ := W
+    erw [hκR ((proEtaleRingRestrictScalars aX).obj N) W n, hκS N W n]
+    rfl
+  have hm := congrArg (fun z ↦ z.app M) hc
+  simpa only [q, TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id, Category.assoc] using hm
+end RestrictionComposition
 
 end AlgebraicGeometry.Scheme
