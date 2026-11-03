@@ -148,12 +148,12 @@ namespace AlgebraicGeometry.Scheme.ContinuousRational.DirectImage
 packaged in the realization dependency's base type. Source: BS 6.7.2 and 6.8.15
 (blueprint: lem-a1-rational-direct-image-realization). -/
 structure Space (k : Type u) [Field k] (l : ℕ) extends Base.{u} l where
-  [over : scheme.Over (Spec (.of k))]
+  [«over» : scheme.Over (Spec (.of k))]
   [finiteType : LocallyOfFiniteType (scheme ↘ Spec (.of k))]
   [quasiCompact : QuasiCompact (scheme ↘ Spec (.of k))]
   [separated : IsSeparated (scheme ↘ Spec (.of k))]
 
-attribute [instance] Space.over Space.finiteType Space.quasiCompact Space.separated
+attribute [instance] Space.«over» Space.finiteType Space.quasiCompact Space.separated
 
 /-- Ordinary direct image uses the adjunct of the given continuous coefficient map.
 Source: BS 6.8.15 (blueprint: lem-a1-rational-direct-image-realization). -/

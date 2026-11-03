@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Supporting.OperationCoefficientActionData
+import WeilConjectures.SmoothPurity.Compact.CompactSupportScalarExtensionLaws
 
 /-! # A component of the operation coefficient reduction argument -/
 

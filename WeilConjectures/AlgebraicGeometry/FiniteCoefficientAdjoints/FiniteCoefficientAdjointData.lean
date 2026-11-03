@@ -123,12 +123,8 @@ unit balls. The image of t is nonzero of absolute value less than one. The upper
 writes it as a unit times v^e, e positive. Its nth power ideal is (v)^(en), whose
 quotient is finite by lem-weil-valued-dvr-finite-quotients. -/
 @[instance] theorem stageFinite (s : Stage l E) : Finite s.ring := by
-  have hE := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
-  have hF := (Padic.extension_integers_dvr l s.field
-    (Padic.coefficientExtensionAbsoluteValue l s.field)
-    (spectralNorm_extends (K := Padic l) (L := s.field))).choose_spec.choose_spec
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
+  have hF := (Padic.coefficientExtensionIntegers_dvr l s.field).choose_spec
   rcases hE with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hrE, hgenE, _⟩
   have hπE : Padic.coefficientExtensionUniformizer l E ≠ 0 := by
     exact ((hrE.choose_spec.2.2 _).mp hgenE.choose_spec).1
@@ -144,9 +140,7 @@ quotient is finite by lem-weil-valued-dvr-finite-quotients. -/
   have hπF : Ideal.span ({Padic.coefficientExtensionUniformizer l s.field} :
       Set s.integers) = Padic.coefficientExtensionMaximalIdeal l s.field :=
     hgenF.choose_spec
-  have hmax := (Padic.extension_integers_dvr l s.field
-    (Padic.coefficientExtensionAbsoluteValue l s.field)
-    (spectralNorm_extends (K := Padic l) (L := s.field))).choose_spec.choose_spec.2.2.2.2.1
+  have hmax := (Padic.coefficientExtensionIntegers_dvr l s.field).choose_spec.2.2.2.2.1
   have hirr : Irreducible (Padic.coefficientExtensionUniformizer l s.field) := by
     apply (IsDiscreteValuationRing.irreducible_iff_uniformizer _).mpr
     rw [hπF]
@@ -548,12 +542,8 @@ theorem stage_ramification (s : Stage l E) :
       (∀ n : ℕ, Ideal.span ({s.parameter} : Set s.integers) ^ n =
         Padic.coefficientExtensionIdeal l s.field ((e : ℕ) * n)) ∧
       ∀ r : ℕ, ∃ n : ℕ+, r ≤ (e : ℕ) * (n : ℕ) := by
-  have hE := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
-  have hF := (Padic.extension_integers_dvr l s.field
-    (Padic.coefficientExtensionAbsoluteValue l s.field)
-    (spectralNorm_extends (K := Padic l) (L := s.field))).choose_spec.choose_spec
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
+  have hF := (Padic.coefficientExtensionIntegers_dvr l s.field).choose_spec
   have : IsLocalRing s.integers := hF.2.2.2.1
   have : IsDiscreteValuationRing s.integers := hF.2.2.2.2.2.2.2.1
   have hgenE := hE.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

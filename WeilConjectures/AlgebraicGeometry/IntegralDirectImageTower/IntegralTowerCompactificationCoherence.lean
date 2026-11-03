@@ -56,9 +56,7 @@ private theorem integral_coefficient_iso :
     exact (spectralNorm_unique_field_norm_ext ha x).symm
   have hm (x : E) : x ∈ Padic.coefficientExtensionIntegers l E ↔
       e x ∈ PadicAlgCl.integers l F := by
-    have h := (Padic.extension_integers_dvr l E
-      (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x
+    have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.1 x
     rw [hn] at h
     exact h.trans (by
       rw [PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]

@@ -35,7 +35,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15; Stacks Tags
 07A4 and 0D6D (blueprint: def-zl-rational-realization-tensor-structures).
 
-Split from `WeilConjectures.SixFunctors.RationalTensorRealization.RationalRealizationTensorComparison` for compile time.
+Split from
+`WeilConjectures.SixFunctors.RationalTensorRealization.RationalRealizationTensorComparison`
+for compile time.
 
 ## Main definitions
 

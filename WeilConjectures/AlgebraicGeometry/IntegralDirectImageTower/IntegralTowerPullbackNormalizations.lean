@@ -18,9 +18,4 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralDirectImageTower
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-
-CondensedRing.upperStar (spIntegralCondensed l E) f ⋙
-      ordinaryReduction l E s X ≅
-    ordinaryReduction l E s Y ⋙ (s.operations.geometry f).pull
-
 end AlgebraicGeometry.ProEtale.IntegralDirectImageTower

@@ -39,7 +39,8 @@ The functor is the composite of the recorded finite-stage identity equivalence
 and the recorded continuous realization. Its source tensor, unit and structural
 maps are the published completed-integral operations followed by raw localization.
 This module holds the data part, split from
-`WeilConjectures.SixFunctors.RationalTensorRealization.RationalRealizationTensorComparison` for compile time.
+`WeilConjectures.SixFunctors.RationalTensorRealization.RationalRealizationTensorComparison`
+for compile time.
 
 ## Main definitions
 
