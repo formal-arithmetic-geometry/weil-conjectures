@@ -14243,6 +14243,7 @@ public import WeilConjectures.CategoryTheory.LeftDerivedValueMorphism
 public import WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
 public import WeilConjectures.CategoryTheory.LeftModuleDerivedEvaluation.LeftModuleDerivedEvaluationForget
 public import WeilConjectures.CategoryTheory.Limits.CoequalizerOfMonoidQuotient
+public import WeilConjectures.CategoryTheory.Limits.PreservesProductMapIso
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 public import WeilConjectures.CategoryTheory.LocalCoefficientLocalization
 public import WeilConjectures.CategoryTheory.LocalExtendedCechDescription
@@ -14945,6 +14946,7 @@ public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRing
 public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
 public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingMorphism
 public import WeilConjectures.CategoryTheory.Shift.AdjunctionHomEquiv
+public import WeilConjectures.CategoryTheory.Shift.CommShiftEqToIso
 public import WeilConjectures.CategoryTheory.Shift.ConnectingLift
 public import WeilConjectures.CategoryTheory.Shift.RestrictFullyFaithful
 public import WeilConjectures.CategoryTheory.Shift.ShiftDecomposition
@@ -16431,6 +16433,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
@@ -16608,6 +16611,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.Mathlib.CategoryTheory.Enriched.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
+public import WeilConjectures.Mathlib.CategoryTheory.EqToHom
 public import WeilConjectures.Mathlib.CategoryTheory.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
@@ -16720,6 +16724,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcateg
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.LocalizingHomTest
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Orthogonal
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Shift
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.SmallSubobject
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.WeakSerreCoproductClosure
@@ -22725,6 +22730,11 @@ public import WeilConjectures.SmoothPurity.Rational.RationalPullbackShiftLocaliz
 public import WeilConjectures.SmoothPurity.Rational.RationalPullbackStageCoherence
 public import WeilConjectures.SmoothPurity.Rational.RationalPullbackTensorAssociatorNaturality
 public import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShift
+public import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftIntegral
+public import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftLevel
+public import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRational
+public import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRoos
+public import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftScalar
 public import WeilConjectures.SmoothPurity.Rational.RationalRestrictionPullbackFreeMate
 public import WeilConjectures.SmoothPurity.Rational.RationalRestrictionPullbackFreeMateAfterExtension
 public import WeilConjectures.SmoothPurity.Rational.RationalRestrictionPullbackFreeMateCanonical
