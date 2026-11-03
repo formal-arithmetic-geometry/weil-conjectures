@@ -236,8 +236,8 @@ Compose each normalization with the unbounded compact-support compositor for
 j followed by f and i followed by p. The equality j f = i p then gives tA and tB.
 The finite-Tor interval of W is preserved by exact open restriction and scalar
 extension. Hence the input and its scalar extension are bounded below. Apply
-etaleCompactScalarComposition to the two composites on that input and
-etaleCompactScalarCoherence to the changes of compactification. The open
+compactScalarChosenMap_comp to the two composites on that input and
+compactScalarMap_coherence to the changes of compactification. The open
 normalization is openIso, because its scalar comparison is the same exact
 extension-by-zero comparison. The proper normalization is scalarMate, because
 its identity-open comparison is the unit comparison. Pasting these four squares
@@ -311,8 +311,8 @@ theorem openClosedCompactScalar_coherence
   let eB := shriek_congr B (j ≫ f) (i ≫ p) h
   have hno := chosen_open_scalar φ j M hQ
   have hnp := chosen_proper_scalar φ i M hQ
-  have hco := etaleCompactScalarComposition φ j f M hQM
-  have hcp := etaleCompactScalarComposition φ i p M hQM
+  have hco := compactScalarChosenMap_comp φ j f M hQM
+  have hcp := compactScalarChosenMap_comp φ i p M hQM
   have ho := normalized_composition_scalar
     (scalarExtension φ V) (scalarExtension φ X) (scalarExtension φ S)
     (rightDerivedLowerShriek (ModuleCat.{u + 1} A) j) (derivedExtension (A := A) j)

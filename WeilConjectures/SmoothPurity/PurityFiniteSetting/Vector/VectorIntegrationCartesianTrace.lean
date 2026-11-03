@@ -19,6 +19,7 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
+open AlgebraicGeometry.Etale
 
 attribute [local implicit_reducible] Scheme.Modules
   Etale.vectorIntegrationCoefficient Etale.vectorIntegrationSource

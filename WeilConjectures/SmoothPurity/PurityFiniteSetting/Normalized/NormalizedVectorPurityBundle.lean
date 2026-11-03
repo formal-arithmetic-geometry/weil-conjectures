@@ -17,6 +17,7 @@ set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
+open AlgebraicGeometry.Etale
 
 /-- Braiding conjugates the coefficient-first mate to the twist-first mate. -/
 private theorem swap_mate_isIso
