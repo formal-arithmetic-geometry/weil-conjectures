@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
+import WeilConjectures.SmoothPurity.Sf.SfRationalScalarExtensionHomBasisOfIntegral
+import WeilConjectures.SmoothPurity.Rational.RationalScalarIntegralHomBasis
 
 /-! # The finite free Hom formula for rational scalar extension
 
@@ -49,8 +51,10 @@ Source: Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.7.2 and
 Proposition 6.8.14(2), Remark 6.8.15 (finite coefficient extension of `D_cons`).
 (blueprint: def-weil-rationalization-karoubi, lem-sf-rational-scalar-extension-right-adjoint).
 
-This is a cross-section input from the pro-étale coefficient chapter: the project has no
-derived extension--restriction adjunction for the completed coefficient sheaves yet. -/
+Proof: `sfConstructibleIntegralScalarExtension_map_basis_bijective` (the integral formula,
+from the derived extension ⊣ restriction adjunction and the coordinates of
+`integralOrdinaryScalar_coordinates`) and
+`sfRationalScalarExtension_map_basis_bijective_of_integral` (rationalization). -/
 theorem sfRationalScalarExtension_map_basis_bijective (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (W : AlgebraicGeometry.Scheme.{u}) (p : ℕ) (hl : l ≠ p)
@@ -60,7 +64,8 @@ theorem sfRationalScalarExtension_map_basis_bijective (l : ℕ) [Fact l.Prime]
     (N Z : sfRationalConstructibleCategory l E W) :
     Function.Bijective (fun g : Fin d → (N ⟶ Z) ↦
       ∑ i, (sfRationalCoefficientEquiv l F).symm (v i) •
-        (sfRationalScalarExtension l E W p hl F ι).map (g i)) := by
-  sorry
+        (sfRationalScalarExtension l E W p hl F ι).map (g i)) :=
+  sfRationalScalarExtension_map_basis_bijective_of_integral l E W p hl F ι
+    (sfConstructibleIntegralScalarExtension_map_basis_bijective l E F ι W p hl) v hv N Z
 
 end WeilConjectures

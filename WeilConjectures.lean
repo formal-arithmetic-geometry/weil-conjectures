@@ -66,6 +66,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCri
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FrobeniusChangeOfRings
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FrobeniusUnitComp
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
@@ -16968,6 +16969,7 @@ public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IntegrallyClose
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
+public import WeilConjectures.Mathlib.RingTheory.IsTensorProductBasis
 public import WeilConjectures.Mathlib.RingTheory.Kaehler.Basic
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
@@ -17081,6 +17083,7 @@ public import WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModulesSuppleme
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionUniformizerPow
 public import WeilConjectures.NumberTheory.Padics.ContinuousUniformizerDivision
 public import WeilConjectures.NumberTheory.Padics.Exponential
 public import WeilConjectures.NumberTheory.Padics.Extension
@@ -22279,8 +22282,10 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficien
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralFrobeniusSystem
+public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralFrobeniusTrace
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralPrincipalUnitCriterion
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralQuotientModelComparison
+public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralScalarCoordinates
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralScalarData
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorAssociativityRepresentatives
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorCochainAssociativity
@@ -22747,6 +22752,8 @@ public import WeilConjectures.SmoothPurity.Rational.RationalScalarExtensionCouni
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarExtensionReflectsIsomorphisms
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarExtensionRightAdjoint
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarIntegralDenominatorSplit
+public import WeilConjectures.SmoothPurity.Rational.RationalScalarIntegralHomBasis
+public import WeilConjectures.SmoothPurity.Rational.RationalScalarIntegralTraceUnit
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarLocalizationRetract
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarRestrictionComplete
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarRestrictionConstructible
@@ -22832,6 +22839,7 @@ public import WeilConjectures.SmoothPurity.Sf.SfQbarLocalizationShiftDescent
 public import WeilConjectures.SmoothPurity.Sf.SfRationalDirectImageCoefficientCompatibility
 public import WeilConjectures.SmoothPurity.Sf.SfRationalScalarExactOfIntegral
 public import WeilConjectures.SmoothPurity.Sf.SfRationalScalarExtensionHomBasis
+public import WeilConjectures.SmoothPurity.Sf.SfRationalScalarExtensionHomBasisOfIntegral
 public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
 public import WeilConjectures.SmoothPurity.Sf.SfSupportTransitionPresentation
 public import WeilConjectures.SmoothPurity.SfAlgebraicallyClosedCoefficients.SfAlgebraicallyClosedCoefficients

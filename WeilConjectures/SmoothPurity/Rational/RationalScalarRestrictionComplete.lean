@@ -88,4 +88,40 @@ theorem rationalScalarDerivedRestriction_complete
     ((AlgebraicGeometry.Scheme.pbcDerivedRestrict s).mapIso (tF.app K.obj) ≪≫ e₂ ≪≫
       e₁.symm ≪≫ (tE.app _).symm) hE
 
+/-- Completeness is preserved by the specified completed rational restriction, for every
+derived complete object (not necessarily constructible).
+Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15.
+Proof: as for `rationalScalarDerivedRestriction_complete`, which only uses completeness.
+(blueprint: lem-sf-rational-scalar-restriction-complete) -/
+theorem rationalScalarDerivedRestriction_isSfDerivedComplete
+    (K : DerivedCategory (scalarReductionSource l F W)) (hK : IsSfDerivedComplete l F W K) :
+    IsSfDerivedComplete l E W ((rationalScalarDerivedRestriction l E F ι W).obj K) := by
+  let eE := purCoefficientIso l E W
+  let eF := purCoefficientIso l F W
+  let s := AlgebraicGeometry.Scheme.pbcScalarCoefficientMap l E F ι W
+  have hmap : integralCompletedScalarMap l E F ι W =
+      completedCoefficientMap l E F ι W := by
+    apply (completedCoefficientMap_existsUnique l E F ι W).unique
+    · exact (integralCompletedScalarMap_existsUnique l E F ι W).exists.choose_spec
+    · exact (completedCoefficientMap_existsUnique l E F ι W).exists.choose_spec
+  have hsq : eE.hom ≫ completedCoefficientMap l E F ι W = s ≫ eF.hom := by
+    rw [← hmap]
+    exact AlgebraicGeometry.Scheme.scalarComplete_coefficientScalar_square l E F ι W
+  have hF : AlgebraicGeometry.Scheme.PbcIsIntrinsicallyComplete W
+      (AlgebraicGeometry.Scheme.pbcIntegralDatum l F)
+      ((AlgebraicGeometry.Scheme.integralDetailedTransport W l F).obj K) :=
+    (purDetailedTransport_complete_iff l F W K).mp hK
+  have hE := AlgebraicGeometry.Scheme.pbcScalarRestrictionComplete l E F ι W _ hF
+  have := AlgebraicGeometry.Scheme.pbcComplete_iso W
+    (AlgebraicGeometry.Scheme.pbcIntegralDatum l E)
+  let e₁ := (AlgebraicGeometry.Scheme.pbcDerivedRestrictComp eE.hom
+    (completedCoefficientMap l E F ι W) _ hsq).app K
+  let e₂ := (AlgebraicGeometry.Scheme.pbcDerivedRestrictComp s eF.hom _ rfl).app K
+  let tE := integralDetailedTransportIsoPbcDerivedRestrict l E W
+  let tF := integralDetailedTransportIsoPbcDerivedRestrict l F W
+  apply (purDetailedTransport_complete_iff l E W _).mpr
+  exact ObjectProperty.prop_of_iso _
+    ((AlgebraicGeometry.Scheme.pbcDerivedRestrict s).mapIso (tF.app K) ≪≫ e₂ ≪≫
+      e₁.symm ≪≫ (tE.app _).symm) hE
+
 end WeilConjectures

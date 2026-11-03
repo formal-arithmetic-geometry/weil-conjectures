@@ -8,6 +8,10 @@ module
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarRestrictionConstructible
 public import Mathlib.CategoryTheory.Retract
 import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationPureTensor
+import WeilConjectures.SmoothPurity.Rational.RationalScalarIntegralTraceUnit
+import WeilConjectures.SmoothPurity.Rational.RationalScalarAmbientIntegralTrace
+import WeilConjectures.SmoothPurity.Rational.RationalScalarRestrictionComplete
+import WeilConjectures.NumberTheory.Padics.CoefficientExtensionUniformizerPow
 
 /-! # Ambient finite separable trace retraction
 
@@ -41,9 +45,12 @@ Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15; Stacks Project Tag
 02FL (separability idempotent).
 (blueprint: lem-sf-rational-scalar-integral-denominator-split).
 
-This is a cross-section input from the pro-étale coefficient chapter: the project does not
-yet construct the derived extension ⊣ restriction counit for the completed coefficient
-sheaves together with the trace-dual section. -/
+Proof: `rationalScalarIntegral_unit_comp_counit` gives natural maps of module sheaves whose
+composite is multiplication by an integer `N = c ϖ_F ^ n`, `c` a unit (the Frobenius unit of
+the completed coefficient map followed by the multiplication counit, rescaled). Applied
+termwise to a representative complex of `K` they give the composite `N • 𝟙 K`; the exact
+ordinary extension is identified with the completed one on the complete object `Res K`
+(`isIso_completedScalarComparison_app`). Rescaling by `c⁻¹` gives the claim. -/
 theorem rationalScalarIntegral_trace_split
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -56,7 +63,47 @@ theorem rationalScalarIntegral_trace_split
       (μ : (integralScalarExtension l E F ι W).obj
         ((rationalScalarDerivedRestriction l E F ι W).obj K) ⟶ K),
       s ≫ μ = Padic.coefficientExtensionUniformizer l F ^ n • 𝟙 K := by
-  sorry
+  obtain ⟨N, σ, τ, hN, hστ⟩ := rationalScalarIntegral_unit_comp_counit l E F ι W
+  obtain ⟨n, c, hc⟩ := Padic.exists_eq_unit_mul_coefficientExtensionUniformizer_pow l F hN
+  let Res := rationalScalarModuleRestriction l E F ι W
+  let Ord := integralOrdinaryScalar l E F ι W
+  let := (rationalScalarModuleRestriction_exact l E F ι W).1
+  let := (rationalScalarModuleRestriction_exact l E F ι W).2
+  let P := DerivedCategory.Q.objPreimage K
+  let eP : DerivedCategory.Q.obj P ≅ K := DerivedCategory.Q.objObjPreimageIso K
+  let RK := (rationalScalarDerivedRestriction l E F ι W).obj K
+  have := isIso_completedScalarComparison_app l E W F ι RK
+    (rationalScalarDerivedRestriction_isSfDerivedComplete l E F ι W K hK)
+  let χ : (integralOrdinaryDerivedScalar l E F ι W).obj RK ≅
+      (integralScalarExtension l E F ι W).obj RK :=
+    asIso ((integralOrdinaryDerivedScalarIso l E W F ι).hom.app RK ≫
+      (completedScalarComparison l E F ι W).app RK)
+  let eR : RK ≅ DerivedCategory.Q.obj ((Res.mapHomologicalComplex _).obj P) :=
+    (rationalScalarDerivedRestriction l E F ι W).mapIso eP.symm ≪≫
+      Res.mapDerivedCategoryFactors.app P
+  let eO : (integralOrdinaryDerivedScalar l E F ι W).obj RK ≅
+      DerivedCategory.Q.obj ((Ord.mapHomologicalComplex _).obj
+        ((Res.mapHomologicalComplex _).obj P)) :=
+    (integralOrdinaryDerivedScalar l E F ι W).mapIso eR ≪≫
+      Ord.mapDerivedCategoryFactors.app _
+  let σP : P ⟶ (Ord.mapHomologicalComplex _).obj ((Res.mapHomologicalComplex _).obj P) :=
+    { f i := σ.app (P.X i)
+      comm' i j _ := (σ.naturality (P.d i j)).symm }
+  let τP : (Ord.mapHomologicalComplex _).obj ((Res.mapHomologicalComplex _).obj P) ⟶ P :=
+    { f i := τ.app (P.X i)
+      comm' i j _ := (τ.naturality (P.d i j)).symm }
+  have hP : σP ≫ τP = N • 𝟙 P := by
+    ext i : 1
+    rw [HomologicalComplex.comp_f, HomologicalComplex.nsmul_f_apply, HomologicalComplex.id_f]
+    exact hστ (P.X i)
+  refine ⟨n, (↑c⁻¹ : Padic.coefficientExtensionIntegers l F) •
+    (eP.inv ≫ DerivedCategory.Q.map σP ≫ eO.inv ≫ χ.hom),
+    χ.inv ≫ eO.hom ≫ DerivedCategory.Q.map τP ≫ eP.hom, ?_⟩
+  simp only [Linear.smul_comp, Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc]
+  rw [← Functor.map_comp_assoc, hP, Functor.map_nsmul, CategoryTheory.Functor.map_id,
+    Preadditive.nsmul_comp, Category.id_comp, Preadditive.comp_nsmul, Iso.inv_hom_id,
+    ← Nat.cast_smul_eq_nsmul (Padic.coefficientExtensionIntegers l F), smul_smul, hc,
+    Units.inv_mul_cancel_left]
 
 /-- The finite separable trace construction gives an ambient retract after
 restriction of coefficients.  Constructibility is handled separately.
