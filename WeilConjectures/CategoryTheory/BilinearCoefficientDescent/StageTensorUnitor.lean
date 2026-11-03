@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.BilinearCoefficientDescent.BilinearCoefficientDescent
 public import WeilConjectures.CategoryTheory.StageSystem.IsoOfTransport
+public import WeilConjectures.CategoryTheory.BilinearCoefficientDescent.StageTensorBraiding
 
 /-! # Unitor representatives in a directed tensor family
 
@@ -32,45 +33,6 @@ namespace CategoryTheory.BilinearCoefficientDescent
 variable {I : Type w} [Preorder I]
   {C : I → Type u} [∀ i, Category.{v} (C i)]
   (S : StageSystem C) (U : Family S S S)
-
-/-- The endpoint comparison of a tensor family is compatible with enlarging the stage. -/
-theorem endpoint_assoc_tower
-    (join : I → I → I) (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
-    (X Y : S.PairCategory) {L H : I}
-    (h : join X.stage Y.stage ≤ L) (k : L ≤ H) :
-    (S.assoc h k).hom.app (output U join left right (X, Y)).obj ≫
-        (endpoint U join left right (X, Y) (h.trans k)).hom =
-      (S.T k).map (endpoint U join left right (X, Y) h).hom ≫
-        (U.comparison k).hom.app (X.toStage ((left _ _).trans h),
-          Y.toStage ((right _ _).trans h)) ≫
-        (U.U H).map (Prod.mkHom
-          ((S.assoc ((left _ _).trans h) k).hom.app X.obj)
-          ((S.assoc ((right _ _).trans h) k).hom.app Y.obj)) := by
-  dsimp only [endpoint, output, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
-    Iso.app_hom]
-  rw [Functor.map_comp]
-  simp only [Iso.prod_hom, Iso.app_hom, Category.assoc]
-  have hn := (U.comparison k).hom.naturality
-    (Prod.mkHom ((S.assoc (left X.stage Y.stage) h).hom.app X.obj)
-      ((S.assoc (right X.stage Y.stage) h).hom.app Y.obj))
-  dsimp only [Functor.comp_map, Functor.prod_map] at hn
-  rw [reassoc_of% hn]
-  rw [← Functor.map_comp]
-  have he :
-      Prod.mkHom ((S.T k).map ((S.assoc (left X.stage Y.stage) h).hom.app X.obj))
-        ((S.T k).map ((S.assoc (right X.stage Y.stage) h).hom.app Y.obj)) ≫
-        Prod.mkHom ((S.assoc ((left X.stage Y.stage).trans h) k).hom.app X.obj)
-          ((S.assoc ((right X.stage Y.stage).trans h) k).hom.app Y.obj) =
-      Prod.mkHom ((S.assoc h k).hom.app (X.toStage (left _ _)))
-        ((S.assoc h k).hom.app (Y.toStage (right _ _))) ≫
-        Prod.mkHom ((S.assoc (left X.stage Y.stage) (h.trans k)).hom.app X.obj)
-          ((S.assoc (right X.stage Y.stage) (h.trans k)).hom.app Y.obj) := by
-    exact Prod.ext (S.cocycle _ _ _ _) (S.cocycle _ _ _ _)
-  rw [he, Functor.map_comp]
-  simp only [← Category.assoc]
-  have ht := U.tower h k (X.toStage (left _ _)) (Y.toStage (right _ _))
-  simp only [← Category.assoc] at ht
-  rw [ht]
 
 variable (R : ∀ i, C i)
   (lam : ∀ i (X : C i), (U.U i).obj (R i, X) ≅ X)
@@ -218,7 +180,7 @@ theorem leftUnitorAt_transport
   dsimp only [leftUnitorAt, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom]
   simp only [Iso.hom_inv_id_app_assoc, Functor.map_comp, Category.assoc, Iso.prod_hom,
     Iso.refl_hom]
-  rw [reassoc_of% (endpoint_assoc_tower S U join left right ⟨b, R b⟩ M h k)]
+  rw [reassoc_of% (endpoint_tower S U join left right ⟨b, R b⟩ M h k)]
   congr 1
   rw [← hl k (M.toStage ((right _ _).trans h))]
   have hc := (U.comparison k).hom.naturality
@@ -233,7 +195,7 @@ theorem leftUnitorAt_transport
   ext
   · have hk := hcoc ((left b M.stage).trans h) k
     rw [← cancel_epi ((S.assoc ((left b M.stage).trans h) k).inv.app (R b))]
-    simp only [prod_comp, Category.assoc, Iso.inv_hom_id_app_assoc, Category.comp_id]
+    simp only [prod_comp, Iso.inv_hom_id_app_assoc, Category.comp_id]
     simpa using hk
   · simp
 
@@ -255,7 +217,7 @@ theorem rightUnitorAt_transport
   dsimp only [rightUnitorAt, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom]
   simp only [Iso.hom_inv_id_app_assoc, Functor.map_comp, Category.assoc, Iso.prod_hom,
     Iso.refl_hom]
-  rw [reassoc_of% (endpoint_assoc_tower S U join left right M ⟨b, R b⟩ h k)]
+  rw [reassoc_of% (endpoint_tower S U join left right M ⟨b, R b⟩ h k)]
   congr 1
   rw [← hr k (M.toStage ((left _ _).trans h))]
   have hc := (U.comparison k).hom.naturality
@@ -271,12 +233,22 @@ theorem rightUnitorAt_transport
   · simp
   · have hk := hcoc ((right M.stage b).trans h) k
     rw [← cancel_epi ((S.assoc ((right M.stage b).trans h) k).inv.app (R b))]
-    simp only [prod_comp, Category.assoc, Iso.inv_hom_id_app_assoc, Category.comp_id]
+    simp only [prod_comp, Iso.inv_hom_id_app_assoc, Category.comp_id]
     simpa using hk
 
 variable [IsDirectedOrder I]
 
-/-- The left unitor representatives define an isomorphism of the pair category. -/
+/-- The left unitor representatives define an isomorphism of the pair category. Here `hl` is
+the left unit square for `h : i ≤ j` (writing `⊗` for `U.U`, `T` for `S.T h`, `c` for the
+comparison and `s` for the scalar unit comparison)
+```
+T(R_i ⊗ X) --c--> TR_i ⊗ TX --s ⊗ 1--> R_j ⊗ TX
+     |                                   |
+   T λ                                   λ
+     v                                   v
+    TX ================================ TX
+```
+and `hcoc` is the cocycle law of `s`. -/
 theorem leftUnitor_exists
     (lamNat : ∀ i (X X' : C i) (f : X ⟶ X'),
       (U.U i).map (Prod.mkHom (𝟙 (R i)) f) ≫ (lam i X').hom = (lam i X).hom ≫ f)
@@ -295,7 +267,16 @@ theorem leftUnitor_exists
     (Y := M) (fun L h _ ↦ leftUnitorAt S U R lam join left right s b M L h)
     (fun _ _ h _ k ↦ leftUnitorAt_transport S U R lam join left right s lamNat hl hcoc b M h k)
 
-/-- The right unitor representatives define an isomorphism of the pair category. -/
+/-- The right unitor representatives define an isomorphism of the pair category. Here `hr` is
+the right unit square for `h : i ≤ j` (notation as in `leftUnitor_exists`)
+```
+T(X ⊗ R_i) --c--> TX ⊗ TR_i --1 ⊗ s--> TX ⊗ R_j
+     |                                   |
+   T ρ                                   ρ
+     v                                   v
+    TX ================================ TX
+```
+and `hcoc` is the cocycle law of `s`. -/
 theorem rightUnitor_exists
     (rhoNat : ∀ i (X X' : C i) (f : X ⟶ X'),
       (U.U i).map (Prod.mkHom f (𝟙 (R i))) ≫ (rho i X').hom = (rho i X).hom ≫ f)

@@ -26,7 +26,15 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] {C : I → Type u}
   [∀ i, Category.{v} (C i)] {S : StageSystem C}
 
 /-- A transport-compatible family of stage isomorphisms is represented by a single isomorphism
-of the pair category. -/
+of the pair category. Compatibility `hφ` means that for `n ≤ p` the square
+```
+X_n --φ n--> Y_n
+ |            |
+ tr           tr
+ v            v
+X_p --φ p--> Y_p
+```
+commutes, i.e. `S.tr h (φ n).hom = (φ p).hom`. -/
 theorem exists_iso_of_tr {X Y : S.PairCategory}
     (φ : ∀ (n : I) (hX : X.stage ≤ n) (hY : Y.stage ≤ n), X.toStage hX ≅ Y.toStage hY)
     (hφ : ∀ (n p : I) (hX : X.stage ≤ n) (hY : Y.stage ≤ n) (h : n ≤ p),

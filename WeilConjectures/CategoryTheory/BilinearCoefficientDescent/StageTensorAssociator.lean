@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.BilinearCoefficientDescent.BilinearCoefficientDescent
 public import WeilConjectures.CategoryTheory.StageSystem.IsoOfTransport
+public import WeilConjectures.CategoryTheory.BilinearCoefficientDescent.StageTensorBraiding
 
 /-! # Associator representatives in a directed tensor family
 
@@ -40,48 +41,8 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I]
         (U.U j).map (Prod.mkHom ((U.comparison h).hom.app (X, Y)) (𝟙 _)) ≫
         (α j ((S.T h).obj X) ((S.T h).obj Y) ((S.T h).obj Z)).hom)
 
-
 set_option allowUnsafeReducibility true in
 attribute [local reducible] CategoryTheory.BilinearCoefficientDescent.output
-
-omit [IsDirectedOrder I] in
-/-- Transporting a common-stage endpoint identification along `k : L ≤ H`
-(copied from `StageTensorBraiding`). -/
-private theorem endpoint_tower (X Y : S.PairCategory) {L H : I}
-    (h : join X.stage Y.stage ≤ L) (k : L ≤ H) :
-    (S.assoc h k).hom.app (output U join left right (X, Y)).obj ≫
-        (endpoint U join left right (X, Y) (h.trans k)).hom =
-      (S.T k).map (endpoint U join left right (X, Y) h).hom ≫
-        (U.comparison k).hom.app (X.toStage ((left _ _).trans h),
-          Y.toStage ((right _ _).trans h)) ≫
-        (U.U H).map (Prod.mkHom
-          ((S.assoc ((left _ _).trans h) k).hom.app X.obj)
-          ((S.assoc ((right _ _).trans h) k).hom.app Y.obj)) := by
-  dsimp only [endpoint, output, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
-    Iso.app_hom]
-  rw [Functor.map_comp]
-  simp only [Iso.prod_hom, Iso.app_hom, Category.assoc]
-  have hn := (U.comparison k).hom.naturality
-    (Prod.mkHom ((S.assoc (left X.stage Y.stage) h).hom.app X.obj)
-      ((S.assoc (right X.stage Y.stage) h).hom.app Y.obj))
-  dsimp only [Functor.comp_map, Functor.prod_map] at hn
-  rw [reassoc_of% hn]
-  rw [← Functor.map_comp]
-  have he :
-      Prod.mkHom ((S.T k).map ((S.assoc (left X.stage Y.stage) h).hom.app X.obj))
-        ((S.T k).map ((S.assoc (right X.stage Y.stage) h).hom.app Y.obj)) ≫
-        Prod.mkHom ((S.assoc ((left X.stage Y.stage).trans h) k).hom.app X.obj)
-          ((S.assoc ((right X.stage Y.stage).trans h) k).hom.app Y.obj) =
-      Prod.mkHom ((S.assoc h k).hom.app (X.toStage (left _ _)))
-        ((S.assoc h k).hom.app (Y.toStage (right _ _))) ≫
-        Prod.mkHom ((S.assoc (left X.stage Y.stage) (h.trans k)).hom.app X.obj)
-          ((S.assoc (right X.stage Y.stage) (h.trans k)).hom.app Y.obj) := by
-    exact Prod.ext (S.cocycle _ _ _ _) (S.cocycle _ _ _ _)
-  rw [he, Functor.map_comp]
-  simp only [← Category.assoc]
-  have ht := U.tower h k (X.toStage (left _ _)) (Y.toStage (right _ _))
-  simp only [← Category.assoc] at ht
-  rw [ht]
 
 /-- The endpoint identification of the left-nested tensor `(X ⊗ Y) ⊗ Z` at a common stage. -/
 private def leftEndpoint (X Y Z : S.PairCategory) {L : I}
@@ -212,7 +173,17 @@ Source: the common-stage quotient calculation of the constraints node
 (blueprint: lem-pur-derived-pullback-tensor-constraints).
 Proof: conjugate the finite associator by the nested endpoint comparisons. The family tower
 law, the scalar square and naturality show that this representative transports to the same
-formula at every enlargement, so `StageSystem.PairCategory.exists_iso_of_tr` applies. -/
+formula at every enlargement, so `StageSystem.PairCategory.exists_iso_of_tr` applies.
+The scalar square `hc` for `h : i ≤ j` (writing `⊗` for `U.U`, `T` for `S.T h`, `c` for the
+comparison) is the hexagon
+```
+T((X ⊗ Y) ⊗ Z) --T α--> T(X ⊗ (Y ⊗ Z)) --c--> TX ⊗ T(Y ⊗ Z)
+      |                                              |
+      c                                            1 ⊗ c
+      v                                              v
+T(X ⊗ Y) ⊗ TZ --c ⊗ 1--> (TX ⊗ TY) ⊗ TZ --α--> TX ⊗ (TY ⊗ TZ)
+```
+-/
 theorem associator_exists (X Y Z : S.PairCategory) :
     ∃ e : output U join left right (output U join left right (X, Y), Z) ≅
         output U join left right (X, output U join left right (Y, Z)),

@@ -30,7 +30,8 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I]
   (join : I → I → I) (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
 
 omit [IsDirectedOrder I] in
-private theorem endpoint_tower (X Y : S.PairCategory) {L H : I}
+/-- The endpoint comparison of a tensor family is compatible with enlarging the stage. -/
+theorem endpoint_tower (X Y : S.PairCategory) {L H : I}
     (h : join X.stage Y.stage ≤ L) (k : L ≤ H) :
     (S.assoc h k).hom.app (output U join left right (X, Y)).obj ≫
         (endpoint U join left right (X, Y) (h.trans k)).hom =
