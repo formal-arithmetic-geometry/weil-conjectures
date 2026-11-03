@@ -66,6 +66,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCupGodementTensorStalkPairingExis
 import WeilConjectures.AlgebraicGeometry.ModuleCupGodementTensorMapOfPairingExists
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+public import WeilConjectures.ProEtaleCoefficients.ModuleCupGodementBetaExists
+public import WeilConjectures.ProEtaleCoefficients.ModuleCupGodementIteratePairingsCanonicalCollapse
+public import WeilConjectures.ProEtaleCoefficients.ModuleCupGodementPairingsFromBeta
 
 /-! # Augmented cosimplicial Godement maps across a scheme morphism
 
@@ -448,6 +451,26 @@ private theorem modelMap_augmentation {X Y : Scheme.{v}} (f : Y ⟶ X)
   change (𝟙 F ≫ moduleCup_godementUnit X F) ≫ lift f q =
     q ≫ (pushforward f).map (𝟙 G ≫ moduleCup_godementUnit Y G)
   simpa using lift_unit f q
+
+private theorem sections_ext (X : Scheme.{v}) (F : X.Modules) (U : X.Opens)
+    (s t : Γ(moduleCup_godementObject X F, U))
+    (h : ∀ (x : X) (hx : x ∈ U), (proj X F x).app U s ⟨hx⟩ =
+      (proj X F x).app U t ⟨hx⟩) : s = t := by
+  let E := SheafOfModules.evaluation X.ringCatSheaf (op U) ⋙
+    CategoryTheory.forget (ModuleCat.{v} (X.ringCatSheaf.obj.obj (op U)))
+  let e := asIso (piComparison E (fun x : X ↦ skyscraper x (F.presheaf.stalk x))) ≪≫
+    Types.productIso (fun x ↦ E.obj (skyscraper x (F.presheaf.stalk x)))
+  have coord (r : Γ(moduleCup_godementObject X F, U)) (x : X) :
+      e.hom r x = (proj X F x).app U r := by
+    have hh : e.hom ≫ (↾fun t ↦ t x) = E.map (proj X F x) := by
+      dsimp only [e, Iso.trans_hom, asIso_hom]
+      rw [Category.assoc, Types.productIso_hom_comp_eval, piComparison_comp_π]
+      rfl
+    exact ConcreteCategory.congr_hom hh r
+  apply (ConcreteCategory.bijective_of_isIso e.hom).injective
+  funext x
+  rw [coord, coord]
+  exact SkyscraperSections.ext (h x)
 
 end FMap
 

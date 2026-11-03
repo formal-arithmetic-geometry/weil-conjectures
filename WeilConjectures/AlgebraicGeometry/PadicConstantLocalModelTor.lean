@@ -270,7 +270,7 @@ theorem finiteConstantPointAdjunction :
   let a : C ⊣ G := constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
     Profinite.isTerminalPUnit
   let E := ((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence
-  exact ⟨((counitScalarAdjunction a Λ).comp E.toAdjunction).ofNatIsoLeft
+  exact ⟨((a.counitScalarAdjunction Λ).comp E.toAdjunction).ofNatIsoLeft
     (constantExtensionCompIso Λ (Spec (.of k))).symm⟩
 
 end PointAdjunction

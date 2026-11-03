@@ -412,4 +412,13 @@ theorem coefficientHeart_lisse_extension_constructible (ℓ : ℕ) [Fact ℓ.Pri
   rw [IsConstantModelConstructible, if_pos (And.intro hcpt hqs)]
   exact hi
 
+/-- Public wrapper for the zero-object constructibility lemma used by topological
+integral generation. -/
+theorem constantModelConstructible_of_isZero_public
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : IsZero M) : IsConstantModelConstructible Λ X M := by
+  exact constantModelConstructible_of_isZero Λ X M hM
+
 end AlgebraicGeometry.ProEtale

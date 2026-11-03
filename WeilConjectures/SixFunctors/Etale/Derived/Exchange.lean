@@ -197,8 +197,45 @@ is built, and the only one that is not formal; it is what reduces the projection
 level `n` to the projection formula at level `m ≤ n`. -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek (J : Ideal Λ) :
     Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
-      reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=
-  sorry
+      reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) := by
+  let c := HasCompactification.compactification f
+  have : (R((c.g)_*[ModuleCat.{u + 1} Λ])).IsLeftAdjoint :=
+    CompactificationUpperShriek.isLeftAdjoint_rightDerivedLowerStar_of_isProper
+      (ModuleCat.{u + 1} Λ) c.g
+  have (I : Type (u + 1)) :
+      PreservesColimitsOfShape (Discrete I) (R((c.g)_*[ModuleCat.{u + 1} Λ])) :=
+    (Adjunction.ofIsLeftAdjoint _).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  have (I : Type (u + 1)) :
+      PreservesColimitsOfShape (Discrete I) (L((c.g)^*[ModuleCat.{u + 1} Λ])) :=
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.g).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  have h (K : _root_.DerivedCategory (Sheaf c.Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (N : ModuleCat.{u + 1} Λ) : IsIso ((rightDerivedLowerStarProjectionMapApp Λ c.g K).app
+        (constantSingle (ModuleCat.{u + 1} Λ) Y N)) := by
+    let τ := Functor.whiskerLeft (constantFunctor Λ Y)
+      (rightDerivedLowerStarProjectionMapApp Λ c.g K)
+    have e (M : ModuleCat.{u + 1} Λ) :
+        (constantFunctor Λ Y).obj
+            ((_root_.DerivedCategory.singleFunctor (ModuleCat.{u + 1} Λ) 0).obj M) ≅
+          constantSingle (ModuleCat.{u + 1} Λ) Y M :=
+      (Functor.mapDerivedCategorySingleFunctor _ 0).app M
+    have key := _root_.DerivedCategory.isIso_app_singleFunctor_obj τ (by
+      change IsIso ((rightDerivedLowerStarProjectionMapApp Λ c.g K).app _)
+      exact isIso_rightDerivedLowerStarProjectionMapApp_of_iso (e _).symm
+        (isIso_rightDerivedLowerStarProjectionMapApp_constantSingle_self Λ c.g K)) N
+    exact isIso_rightDerivedLowerStarProjectionMapApp_of_iso (e N) key
+  have : IsIso (rightDerivedLowerShriekReductionModIdealMap Λ J c) := by
+    refine isIso_rightDerivedLowerShriekDerivedTensorRightMap (ModuleCat.{u + 1} Λ) c _ fun K ↦ ?_
+    change IsIso (((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app K).app
+      (constantSingle (ModuleCat.{u + 1} Λ) Y (ModuleCat.of Λ (Λ ⧸ J))))
+    rw [projectionMapOfCompactification_app_app]
+    infer_instance
+  exact ⟨Functor.isoWhiskerLeft _
+      (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J Y)) ≪≫
+    asIso (rightDerivedLowerShriekReductionModIdealMap Λ J c) ≪≫
+    Functor.isoWhiskerRight
+      (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J X).symm) _⟩
 
 /-- **`Rf_!` commutes with reduction for a finite coefficient ring.** This is the case of
 `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek` where `Λ` is

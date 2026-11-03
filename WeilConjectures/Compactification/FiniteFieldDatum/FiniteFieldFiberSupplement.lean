@@ -87,6 +87,14 @@ noncomputable def extensionPoints (D : FiniteFieldDatum.{u})
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (n : ℕ) (hn : 1 ≤ n) : Type u :=
   Over.mk (Spec.map (CommRingCat.ofHom (D.extensionEmbedding n hn))) ⟶ Y₀
 
+/-- The number of `F_{q^n}`-valued points, using the dependency's `Nat.card` convention.
+Source: blueprint order 411, `def-weil-finite-field-fiber.md`
+(blueprint: def-weil-finite-field-fiber). -/
+noncomputable def pointCount (D : FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (CommRingCat.of D.k₀)))
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (n : ℕ) (hn : 1 ≤ n) : ℕ :=
+  Nat.card (D.extensionPoints Y₀ n hn)
+
 /-- A single choice of coefficient prime `l ≠ p` and algebraic closure of `ℚ_[l]`.
 The base coefficient field and its valuation ring are the existing `Padic l` and
 `PadicInt l`. Finite extensions use the existing coefficient-extension constructions.

@@ -445,11 +445,13 @@ Use the two pull pin model equations and the restriction parts of the two open
 pin model equations. Naturality moves the realization factor through the
 localized ordinary square. The exact-functor compositor factorization identifies
 the localized fixed-scalar square with the three derived compositors. The
-conclusion is the resulting identity after postcomposition with the model map;
-its invertibility and cancellation are proved by the caller.
-First apply complex-morphism extensionality to `hOrd` in every degree, using
-the definition of `NatTrans.mapHomologicalComplex`. This gives equality of the
-complete two pin-square cochain maps. More explicitly, write `F_j,F_h` for the
+conclusion is the resulting identity after postcomposition with the model map.
+The canonical comparison can be canceled using flatness and then replaced by
+the displayed presentation of that map.
+Use `finite_base_change_restriction_ordinary_pin_mate` uniformly in its finite
+sheaf argument, then apply complex-morphism extensionality in every degree,
+using the definition of `NatTrans.mapHomologicalComplex`. This gives equality
+of the complete two pin-square cochain maps. More explicitly, write `F_j,F_h` for the
 ordinary finite pullbacks along `j,gU`,
 `E` for the U'-realization, `φ` for exact localization factors, and `a` for the
 pullback complex comparison. Append the invertible factor `φ_{I'}(G(P₀))` to
@@ -458,7 +460,7 @@ of `theta.inv` at `φ_{E_X}(P)` and the inverse form of `theta_model P₀ hP`
 replace the left theta tail by `D(H)(φ_I(P₀))`, then `a_H(I(P₀))`, then
 `Q(θ₀⁻¹(P₀))`. The open-pin model at `P`, the pullU-pin model at `F_j(P)`,
 and naturality of `a_H` then turn the entire left route into `C ≫ Q(α_P)`,
-where `α_P` is the complex map whose components are the left side of `hOrd`, and
+where `α_P` is the complex map whose components are the left ordinary route, and
 `C = D(E)(D(F_h)(φ_{F_j}(P)) ≫ φ_{F_h}(F_j(P))) ≫ φ_E(F_h(F_j(P)))`.
 For the right route, the pull-pin model at `P` followed by factor naturality
 moves `I'` through its ordinary comparison; the open'-pin model at `F_g(P)`
@@ -466,10 +468,10 @@ then leaves the exact square compositor. Expand its definition and use
 `mapDerivedCategoryNatIso_fac` and
 `mapDerivedCategoryCompIso_hom_app_factors` on its two routes. They give the
 same prefix `C` followed by `Q(β_P)`, where `β_P` is the right complex map
-in the degreewise hypothesis. Applying `Q.map` to the cochain equality equates
-these tails. Finally cancel
-only the appended exact restriction factor. No flatness cancellation of `B`
-is performed in this lemma.
+in the ordinary identity. Applying `Q.map` to the cochain equality equates
+these tails. Cancel the appended exact restriction factor. The canonical
+comparison is invertible by `gPull.flat` and the exact realization factor.
+Cancel its restriction image, then postcompose with the displayed `B`.
 (blueprint: lem-sf-finite-base-change-restriction-localization-step) -/
 theorem finite_base_change_restriction_localization_step
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -509,6 +511,84 @@ theorem finite_base_change_restriction_localization_step
             (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w)).hom.app M) ≫
         e.openPull'.hom.app ((finitePull A g).obj M) ≫
         o.opens.jStar'.map (e.pull.hom.app M)) ≫
-      o.opens.jStar'.map B := by sorry
+      o.opens.jStar'.map B := by
+  let : (restrict .ordinary j (finiteInput A gU j' j g sq).R).Additive :=
+    (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).1
+  let : PreservesFiniteLimits (restrict .ordinary j (finiteInput A gU j' j g sq).R) :=
+    (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).2.1
+  let : PreservesFiniteColimits (restrict .ordinary j (finiteInput A gU j' j g sq).R) :=
+    (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).2.2
+  let : (restrict .ordinary j' (finiteInput A gU j' j g sq).S).Additive :=
+    (restriction_exact .ordinary j' (finiteInput A gU j' j g sq).S).1
+  let : PreservesFiniteLimits (restrict .ordinary j' (finiteInput A gU j' j g sq).S) :=
+    (restriction_exact .ordinary j' (finiteInput A gU j' j g sq).S).2.1
+  let : PreservesFiniteColimits (restrict .ordinary j' (finiteInput A gU j' j g sq).S) :=
+    (restriction_exact .ordinary j' (finiteInput A gU j' j g sq).S).2.2
+  have h₀ := by
+    as_aux_lemma =>
+      exact localization_of_models
+        (ProEtale.upperStar (ModuleCat.{u + 1} A) j)
+        (ProEtale.upperStar (ModuleCat.{u + 1} A) gU)
+        (ProEtale.upperStar (ModuleCat.{u + 1} A) g)
+        (ProEtale.upperStar (ModuleCat.{u + 1} A) j')
+        e.realizeX.equivalence.functor e.realizeU.equivalence.functor
+        e.realizeX'.equivalence.functor e.realizeU'.equivalence.functor
+        (restrict .ordinary j (finiteInput A gU j' j g sq).R)
+        (restrict .ordinary j' (finiteInput A gU j' j g sq).S)
+  have h₁ := by
+    as_aux_lemma =>
+      exact h₀
+        o.gPull.derived o.gUPull.derived
+        o.gPull.ordinary o.gUPull.ordinary
+        (complexComparison o.gPull.ordinary o.gPull.derived o.gPull.epsilon)
+        (complexComparison o.gUPull.ordinary o.gUPull.derived o.gUPull.epsilon)
+  have h₂ := by
+    as_aux_lemma =>
+      exact h₁
+        e.pull e.pullU
+        (Functor.isoWhiskerRight
+          (ProEtale.upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctorIsoMapDerivedCategory.symm
+          e.realizeU.derived ≪≫ e.openPull)
+        e.openPull' o.theta
+        (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w)
+  have h₃ := by
+    as_aux_lemma =>
+      exact h₂ P
+  have h₄ := by
+    as_aux_lemma =>
+      exact h₃ e.pull_pin.ordinary e.pullU_pin.ordinary e.open_pin.star e.open'_pin.star
+        o.ordinaryTheta
+  -- The uniform ordinary theorem avoids converting the object projections of
+  -- complexes built with different, definitionally equal zero-morphism instances.
+  have h₅ := by
+    as_aux_lemma =>
+      exact h₄ (fun N ↦
+        finite_base_change_restriction_ordinary_pin_mate A gU j' j g sq o e N)
+  have h := by
+    as_aux_lemma =>
+      exact h₅
+        (by as_aux_lemma => exact o.theta_model _ hP)
+        (by as_aux_lemma => exact e.open_pin.models.2 P)
+        (by
+          as_aux_lemma =>
+            exact e.pullU_pin.model
+              (((ProEtale.upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj P))
+        (by as_aux_lemma => exact e.pull_pin.model P)
+        (by
+          as_aux_lemma =>
+            exact e.open'_pin.models.2
+              (((ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapHomologicalComplex (.up ℤ)).obj P))
+  let Bnew := o.gPull.derived.map
+      (e.realizeX.equivalence.functor.mapDerivedCategoryFactors.hom.app P) ≫
+    derivedPullbackComplexComparison o.gPull.ordinary o.gPull.derived o.gPull.epsilon
+      ((e.realizeX.equivalence.functor.mapHomologicalComplex (.up ℤ)).obj P)
+  have : IsIso (derivedPullbackComplexComparison o.gPull.ordinary o.gPull.derived
+      o.gPull.epsilon
+      ((e.realizeX.equivalence.functor.mapHomologicalComplex (.up ℤ)).obj P)) :=
+    o.gPull.flat _ hP
+  have : IsIso Bnew := inferInstance
+  have heq := (cancel_mono (o.opens.jStar'.map Bnew)).1 h
+  dsimp only
+  exact congrArg (fun z ↦ z ≫ _) heq
 
 end SheafOfModules.OpenTensorNormalization

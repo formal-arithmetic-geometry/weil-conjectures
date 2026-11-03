@@ -241,6 +241,187 @@ noncomputable abbrev pulledResolution (T : Scheme.{u})
   ((AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).mapHomologicalComplex
     (.up ℕ)).obj I
 
+/-- The canonical section pullback: the comparison adjunction unit followed by a lift
+of the coefficient map. Neither section arrow is existentially chosen.
+Source: blueprint comparison proof, Step 4 (blueprint: lem-pur-divisor-relative-cone). -/
+noncomputable def pullbackSections (T : Scheme.{u}) (V : T.Etale)
+    {I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
+    {K : CochainComplex (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) ℕ}
+    (β : pulledResolution T I ⟶ K) :
+    sections T.smallEtaleTopology V I ⟶
+      sections (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj V) K :=
+  extendMap (((evaluationFunctor T.smallEtaleTopology V).mapHomologicalComplex (.up ℕ)).map
+    ((NatTrans.mapHomologicalComplex
+      (AlgebraicGeometry.ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T).unit _).app I ≫
+      ((AlgebraicGeometry.ProEtale.comparisonLowerStar
+          AddCommGrpCat.{u + 1} T).mapHomologicalComplex
+        (.up ℕ)).map β)) ComplexShape.embeddingUpNat
+
+/-- An augmented lift, including the arbitrary pro-etale coefficient map of the node's
+last sentence. Source: blueprint comparison proof, Steps 4-5
+(blueprint: lem-pur-divisor-relative-cone). -/
+def IsLift (T : Scheme.{u})
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {F' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+    (γ : (AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F ⟶ F')
+    (I : InjectiveResolution F) (K : InjectiveResolution F')
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex) : Prop :=
+  (AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).map (I.ι.f 0) ≫
+    β.f 0 = γ ≫ K.ι.f 0
+
+/-- The full change-of-topology assertion. In addition to the comparison isomorphism,
+this records its kernel normalization, projection and boundary squares, independence
+of augmented lifts, restriction squares, and postcomposition by an arbitrary coefficient
+morphism. Source: blueprint comparison proof, Steps 4-5
+(blueprint: lem-pur-divisor-relative-cone). -/
+structure TopologyComparison (T : Scheme.{u})
+    (E : System T.smallEtaleTopology (fun {_ _} f ↦ IsOpenImmersion f.left))
+    (P : System (Scheme.ProEt.topology T)
+      (fun {V _} f ↦ IsOpenImmersion f.left ∧ Etale V.hom)) where
+  lift_exists : ∀ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (F' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1})
+    (γ : (AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F ⟶ F')
+    (I : InjectiveResolution F) (K : InjectiveResolution F'),
+    ∃ β : pulledResolution T I.cocomplex ⟶ K.cocomplex, IsLift T γ I K β
+  square : ∀ {V W : T.Etale} (f : W ⟶ V)
+    {I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
+    {K : CochainComplex (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) ℕ}
+    (β : pulledResolution T I ⟶ K),
+    pullbackSections T V β ≫ restrictionComplex (Scheme.ProEt.topology T)
+      ((Scheme.toProEt T).map f) K =
+    restrictionComplex T.smallEtaleTopology f I ≫ pullbackSections T W β
+  sections_isIso : ∀ (V : T.Etale)
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (I : InjectiveResolution F)
+    (K : InjectiveResolution
+      ((AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F))
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex), IsLift T (𝟙 _) I K β →
+    ∀ q : ℕ, IsIso (homologyMap (pullbackSections T V β) (q : ℤ))
+  cone_isIso : ∀ {V W : T.Etale} (f : W ⟶ V) (_hf : IsOpenImmersion f.left)
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (I : InjectiveResolution F)
+    (K : InjectiveResolution
+      ((AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F))
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex), IsLift T (𝟙 _) I K β →
+    ∀ q : ℕ, IsIso (homologyMap (relativeFiberMap _ _
+      (pullbackSections T V β) (pullbackSections T W β) (square f β)) (q : ℤ))
+  support : ∀ {V W : T.Etale} (f : W ⟶ V) (hf : IsOpenImmersion f.left)
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {F' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+    (γ : (AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F ⟶ F')
+    (I : InjectiveResolution F) (K : InjectiveResolution F')
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex), IsLift T γ I K β → ∀ q : ℕ,
+    ((E.realization f hf I).e q).inv ≫
+      homologyMap (relativeFiberMap _ _ (pullbackSections T V β)
+        (pullbackSections T W β) (square f β)) (q : ℤ) ≫
+      ((P.realization ((Scheme.toProEt T).map f)
+        ⟨hf, (by change Etale V.hom; infer_instance)⟩ K).e q).hom =
+    (computation T.smallEtaleTopology
+      (Sheaf.supportedSectionsFunctor T.smallEtaleTopology AddCommGrpCat.{u + 1} f) I q).hom ≫
+    homologyMap (E.realization f hf I).kernelIso.hom (q : ℤ) ≫
+    homologyMap (kernel.map _ _ (pullbackSections T V β) (pullbackSections T W β)
+      (square f β).symm) (q : ℤ) ≫
+    homologyMap (P.realization ((Scheme.toProEt T).map f)
+        ⟨hf, (by change Etale V.hom; infer_instance)⟩ K).kernelIso.inv (q : ℤ) ≫
+    (computation (Scheme.ProEt.topology T)
+      (Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}
+        ((Scheme.toProEt T).map f)) K q).inv
+  projection_boundary : ∀ {V W : T.Etale} (f : W ⟶ V) (_hf : IsOpenImmersion f.left)
+    {I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
+    {K : CochainComplex (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) ℕ}
+    (β : pulledResolution T I ⟶ K),
+    relativeFiberMap _ _ (pullbackSections T V β) (pullbackSections T W β) (square f β) ≫
+      projection (restrictionComplex (Scheme.ProEt.topology T)
+        ((Scheme.toProEt T).map f) K) =
+    projection (restrictionComplex T.smallEtaleTopology f I) ≫ pullbackSections T V β ∧
+    (CategoryTheory.shiftFunctor _ (-1 : ℤ)).map (pullbackSections T W β) ≫
+      boundary (restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K) =
+    boundary (restrictionComplex T.smallEtaleTopology f I) ≫
+      relativeFiberMap _ _ (pullbackSections T V β) (pullbackSections T W β) (square f β)
+  lift_independence : ∀ {V W : T.Etale} (f : W ⟶ V) (_hf : IsOpenImmersion f.left)
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {F' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+    (γ : (AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F ⟶ F')
+    (I : InjectiveResolution F) (K : InjectiveResolution F')
+    (β β' : pulledResolution T I.cocomplex ⟶ K.cocomplex),
+    IsLift T γ I K β → IsLift T γ I K β' → ∀ q : ℕ,
+    homologyMap (relativeFiberMap _ _ (pullbackSections T V β)
+      (pullbackSections T W β) (square f β)) (q : ℤ) =
+    homologyMap (relativeFiberMap _ _ (pullbackSections T V β')
+      (pullbackSections T W β') (square f β')) (q : ℤ)
+  postcomposition : ∀ {V W : T.Etale} (f : W ⟶ V) (_hf : IsOpenImmersion f.left)
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {F' F'' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+    (γ : (AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F ⟶ F')
+    (δ : F' ⟶ F'') (I : InjectiveResolution F)
+    (K : InjectiveResolution F') (K' : InjectiveResolution F'')
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex)
+    (β' : pulledResolution T I.cocomplex ⟶ K'.cocomplex)
+    (φ : K.cocomplex ⟶ K'.cocomplex) (_hφ : K.ι.f 0 ≫ φ.f 0 = δ ≫ K'.ι.f 0)
+    (h : coefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj V) φ ≫
+      restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K'.cocomplex =
+      restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K.cocomplex ≫
+      coefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj W) φ),
+    IsLift T γ I K β → IsLift T (γ ≫ δ) I K' β' → ∀ q : ℕ,
+    homologyMap (relativeFiberMap _ _ (pullbackSections T V β')
+      (pullbackSections T W β') (square f β')) (q : ℤ) =
+    homologyMap (relativeFiberMap _ _ (pullbackSections T V β)
+      (pullbackSections T W β) (square f β)) (q : ℤ) ≫
+    homologyMap (relativeFiberMap _ _
+      (coefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj V) φ)
+      (coefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj W) φ) h) (q : ℤ)
+
+  coefficients : ∀ {V W : T.Etale} (f : W ⟶ V) (_hf : IsOpenImmersion f.left)
+    {F F₁ : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (α : F ⟶ F₁)
+    (I : InjectiveResolution F) (I₁ : InjectiveResolution F₁)
+    (K : InjectiveResolution
+      ((AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F))
+    (K₁ : InjectiveResolution
+      ((AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F₁))
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex)
+    (β₁ : pulledResolution T I₁.cocomplex ⟶ K₁.cocomplex)
+    (φ : I.cocomplex ⟶ I₁.cocomplex) (ψ : K.cocomplex ⟶ K₁.cocomplex)
+    (_hφ : I.ι.f 0 ≫ φ.f 0 = α ≫ I₁.ι.f 0)
+    (_hψ : K.ι.f 0 ≫ ψ.f 0 =
+      (AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).map α ≫
+        K₁.ι.f 0)
+    (h : coefficientMap T.smallEtaleTopology V φ ≫
+      restrictionComplex T.smallEtaleTopology f I₁.cocomplex =
+      restrictionComplex T.smallEtaleTopology f I.cocomplex ≫
+        coefficientMap T.smallEtaleTopology W φ)
+    (hp : coefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj V) ψ ≫
+      restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K₁.cocomplex =
+      restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K.cocomplex ≫
+        coefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj W) ψ),
+    IsLift T (𝟙 _) I K β → IsLift T (𝟙 _) I₁ K₁ β₁ → ∀ q : ℕ,
+    homologyMap (relativeFiberMap _ _ (coefficientMap T.smallEtaleTopology V φ)
+      (coefficientMap T.smallEtaleTopology W φ) h) (q : ℤ) ≫
+      homologyMap (relativeFiberMap _ _ (pullbackSections T V β₁)
+        (pullbackSections T W β₁) (square f β₁)) (q : ℤ) =
+    homologyMap (relativeFiberMap _ _ (pullbackSections T V β)
+      (pullbackSections T W β) (square f β)) (q : ℤ) ≫
+      homologyMap (relativeFiberMap _ _
+        (coefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj V) ψ)
+        (coefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).obj W) ψ) hp) (q : ℤ)
+  objects : ∀ {V W V' W' : T.Etale} (f : W ⟶ V) (f' : W' ⟶ V')
+    (_hf : IsOpenImmersion f.left) (_hf' : IsOpenImmersion f'.left)
+    (v : V' ⟶ V) (w : W' ⟶ W) (_hs : f' ≫ v = w ≫ f)
+    {I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
+    {K : CochainComplex (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) ℕ}
+    (β : pulledResolution T I ⟶ K)
+    (h : restrictionComplex T.smallEtaleTopology v I ≫
+      restrictionComplex T.smallEtaleTopology f' I =
+      restrictionComplex T.smallEtaleTopology f I ≫ restrictionComplex T.smallEtaleTopology w I)
+    (hp : restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map v) K ≫
+      restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f') K =
+      restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K ≫
+        restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map w) K),
+    relativeFiberMap _ _ (restrictionComplex T.smallEtaleTopology v I)
+      (restrictionComplex T.smallEtaleTopology w I) h ≫
+      relativeFiberMap _ _ (pullbackSections T V' β) (pullbackSections T W' β) (square f' β) =
+    relativeFiberMap _ _ (pullbackSections T V β) (pullbackSections T W β) (square f β) ≫
+      relativeFiberMap _ _
+        (restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map v) K)
+        (restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map w) K) hp
+
 private noncomputable def supportedInclusion
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     {V W : C} (f : W ⟶ V)
@@ -604,6 +785,123 @@ private lemma realization_ι
       |>.isZero_extend_X ComplexShape.embeddingUpNat (Int.negSucc n)
         (fun m hm ↦ by change (m : ℤ) = Int.negSucc n at hm; omega)).eq_of_src _ _
 
+@[irreducible]
+private noncomputable def realizationIso
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
+    {V W : C} {f : W ⟶ V} {F : Sheaf J AddCommGrpCat.{u + 1}}
+    {I : InjectiveResolution F} (R : Realization J f I) (q : ℤ) :
+    (supported J f I.cocomplex).homology q ≅ (fiber J f I.cocomplex).homology q := by
+  have : QuasiIso R.κ := R.κ_quasiIso
+  exact (homologyFunctor AddCommGrpCat.{u + 1} (.up ℤ) q).mapIso R.kernelIso ≪≫
+    asIso (homologyMap R.κ q)
+
+private lemma realizationIso_hom
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
+    {V W : C} {f : W ⟶ V} {F : Sheaf J AddCommGrpCat.{u + 1}}
+    {I : InjectiveResolution F} (R : Realization J f I) (q : ℤ) :
+    (realizationIso J R q).hom = homologyMap R.kernelIso.hom q ≫ homologyMap R.κ q := by
+  unfold realizationIso
+  rfl
+
+private lemma realization_homologySquare
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
+    [EnoughInjectives (Sheaf K AddCommGrpCat.{u + 1})]
+    {V W : C} {V' W' : D} (f : W ⟶ V) (f' : W' ⟶ V')
+    {F : Sheaf J AddCommGrpCat.{u + 1}} {F' : Sheaf K AddCommGrpCat.{u + 1}}
+    (I : InjectiveResolution F) (I' : InjectiveResolution F')
+    (R : Realization J f I) (R' : Realization K f' I')
+    (a : sections J V I.cocomplex ⟶ sections K V' I'.cocomplex)
+    (b : sections J W I.cocomplex ⟶ sections K W' I'.cocomplex)
+    (h : a ≫ restrictionComplex K f' I'.cocomplex =
+      restrictionComplex J f I.cocomplex ≫ b)
+    (s : supported J f I.cocomplex ⟶ supported K f' I'.cocomplex)
+    (hs : s ≫ supportedInclusion K f' I'.cocomplex =
+      supportedInclusion J f I.cocomplex ≫ a)
+    (q : ℤ) :
+    homologyMap R.kernelIso.hom q ≫ homologyMap R.κ q ≫
+        homologyMap (relativeFiberMap _ _ a b h) q =
+      homologyMap s q ≫ homologyMap R'.kernelIso.hom q ≫ homologyMap R'.κ q := by
+  have hs' : s ≫ R'.kernelIso.hom =
+      R.kernelIso.hom ≫ kernel.map _ _ a b h.symm := by
+    apply (cancel_mono (kernel.ι (restrictionComplex K f' I'.cocomplex))).1
+    simp only [Category.assoc, kernel.lift_ι]
+    rw [realization_ι, ← Category.assoc, realization_ι, hs]
+  have hh : R.kernelIso.hom ≫ R.κ ≫ relativeFiberMap _ _ a b h =
+      s ≫ R'.kernelIso.hom ≫ R'.κ := by
+    rw [← kernelSquare J K f f' I I' R R' a b h, ← Category.assoc, ← hs']
+    simp only [Category.assoc]
+  simpa only [homologyMap_comp] using congrArg (fun t ↦ homologyMap t q) hh
+
+private lemma realization_modelSquare
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
+    [EnoughInjectives (Sheaf K AddCommGrpCat.{u + 1})]
+    {V W : C} {V' W' : D} (f : W ⟶ V) (f' : W' ⟶ V')
+    {F : Sheaf J AddCommGrpCat.{u + 1}} {F' : Sheaf K AddCommGrpCat.{u + 1}}
+    (I : InjectiveResolution F) (I' : InjectiveResolution F')
+    (R : Realization J f I) (R' : Realization K f' I')
+    (a : sections J V I.cocomplex ⟶ sections K V' I'.cocomplex)
+    (b : sections J W I.cocomplex ⟶ sections K W' I'.cocomplex)
+    (h : a ≫ restrictionComplex K f' I'.cocomplex =
+      restrictionComplex J f I.cocomplex ≫ b)
+    (s : supported J f I.cocomplex ⟶ supported K f' I'.cocomplex)
+    (hs : s ≫ supportedInclusion K f' I'.cocomplex =
+      supportedInclusion J f I.cocomplex ≫ a)
+    (q : ℤ) :
+    (realizationIso J R q).hom ≫ homologyMap (relativeFiberMap _ _ a b h) q =
+      homologyMap s q ≫ (realizationIso K R' q).hom := by
+  rw [realizationIso_hom, realizationIso_hom, Category.assoc]
+  exact realization_homologySquare J K f f' I I' R R' a b h s hs q
+
+private lemma realization_normalization_inv
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
+    {V W : C} (f : W ⟶ V)
+    {F : Sheaf J AddCommGrpCat.{u + 1}} (I : InjectiveResolution F)
+    (R : Realization J f I) (q : ℕ) :
+    (R.e q).inv =
+      (computation J (Sheaf.supportedSectionsFunctor J AddCommGrpCat.{u + 1} f) I q).hom ≫
+        homologyMap R.kernelIso.hom (q : ℤ) ≫ homologyMap R.κ (q : ℤ) := by
+  apply (cancel_mono (R.e q).hom).1
+  simp only [Iso.inv_hom_id, Category.assoc, R.normalization, Iso.hom_inv_id]
+
+private lemma realization_transport
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
+    [EnoughInjectives (Sheaf K AddCommGrpCat.{u + 1})]
+    {V W : C} {V' W' : D} (f : W ⟶ V) (f' : W' ⟶ V')
+    {F : Sheaf J AddCommGrpCat.{u + 1}} {F' : Sheaf K AddCommGrpCat.{u + 1}}
+    (I : InjectiveResolution F) (I' : InjectiveResolution F')
+    (R : Realization J f I) (R' : Realization K f' I')
+    (a : sections J V I.cocomplex ⟶ sections K V' I'.cocomplex)
+    (b : sections J W I.cocomplex ⟶ sections K W' I'.cocomplex)
+    (h : a ≫ restrictionComplex K f' I'.cocomplex =
+      restrictionComplex J f I.cocomplex ≫ b) (q : ℕ) :
+    (R.e q).inv ≫ homologyMap (relativeFiberMap _ _ a b h) (q : ℤ) ≫ (R'.e q).hom =
+      (computation J (Sheaf.supportedSectionsFunctor J AddCommGrpCat.{u + 1} f) I q).hom ≫
+        homologyMap R.kernelIso.hom (q : ℤ) ≫
+        homologyMap (kernel.map _ _ a b h.symm) (q : ℤ) ≫
+        homologyMap R'.kernelIso.inv (q : ℤ) ≫
+        (computation K (Sheaf.supportedSectionsFunctor K AddCommGrpCat.{u + 1} f') I' q).inv := by
+  have hk := congrArg (fun t ↦ homologyMap t (q : ℤ))
+    (kernelSquare J K f f' I I' R R' a b h)
+  simp only [homologyMap_comp] at hk
+  rw [realization_normalization_inv, Category.assoc, Category.assoc,
+    ← reassoc_of% hk]
+  congr 1
+  congr 1
+  congr 1
+  apply (cancel_epi (homologyMap R'.kernelIso.hom (q : ℤ))).1
+  simp only [R'.normalization]
+  rw [← homologyMap_comp_assoc, R'.kernelIso.hom_inv_id, homologyMap_id]
+  simp only [Category.id_comp]
+
 set_option backward.isDefEq.respectTransparency false in
 private lemma realization_natural
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
@@ -705,6 +1003,457 @@ private noncomputable def supportPullback (T : Scheme.{u}) {V W : T.Etale}
   extendMap (((Sheaf.supportedSectionsFunctor T.smallEtaleTopology
     AddCommGrpCat.{u + 1} f).mapHomologicalComplex (.up ℕ)).map (transposeLift T β))
     ComplexShape.embeddingUpNat
+
+private lemma topologySquare (T : Scheme.{u}) {V W : T.Etale} (f : W ⟶ V)
+    {I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
+    {K : CochainComplex (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) ℕ}
+    (β : pulledResolution T I ⟶ K) :
+    pullbackSections T V β ≫
+        restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K =
+      restrictionComplex T.smallEtaleTopology f I ≫ pullbackSections T W β := by
+  dsimp only [pullbackSections, restrictionComplex]
+  rw [← extendMap_comp, ← extendMap_comp]
+  congr 1
+  ext n : 1
+  exact ((transposeLift T β).f n).hom.naturality f.op |>.symm
+
+private lemma supportPullback_inclusion (T : Scheme.{u}) {V W : T.Etale} (f : W ⟶ V)
+    {I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
+    {K : CochainComplex (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) ℕ}
+    (β : pulledResolution T I ⟶ K) :
+    supportPullback T f β ≫
+        supportedInclusion (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K =
+      supportedInclusion T.smallEtaleTopology f I ≫ pullbackSections T V β := by
+  dsimp only [supportPullback, supportedInclusion, pullbackSections]
+  rw [← extendMap_comp, ← extendMap_comp]
+  congr 1
+  exact (NatTrans.mapHomologicalComplex (forgetSupport T.smallEtaleTopology f)
+    (.up ℕ)).naturality (transposeLift T β)
+
+private lemma transposeLift_augmentation (T : Scheme.{u})
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {F' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+    (γ : (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F ⟶ F')
+    (I : InjectiveResolution F) (K : InjectiveResolution F')
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex) (hβ : IsLift T γ I K β) :
+    I.ι.f 0 ≫ (transposeLift T β).f 0 =
+      (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T).unit.app F ≫
+        (ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T).map γ ≫
+        (ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T).map (K.ι.f 0) := by
+  change I.ι.f 0 ≫
+    ((ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T).unit.app (I.cocomplex.X 0) ≫
+      (ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T).map (β.f 0)) = _
+  have hn := (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T).unit.naturality
+    (I.ι.f 0)
+  dsimp only [Functor.id_map, Functor.comp_map] at hn
+  rw [← Category.assoc, hn, Category.assoc, ← Functor.map_comp, hβ]
+  simp only [Functor.map_comp]
+  rfl
+
+@[irreducible]
+private noncomputable def transposeLift_homotopy (T : Scheme.{u})
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {F' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+    (γ : (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F ⟶ F')
+    (I : InjectiveResolution F) (K : InjectiveResolution F')
+    (β β' : pulledResolution T I.cocomplex ⟶ K.cocomplex)
+    (hβ : IsLift T γ I K β) (hβ' : IsLift T γ I K β') :
+    Homotopy (transposeLift T β) (transposeLift T β') := by
+  letI := Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+    (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T)
+  have (n : ℕ) : Injective ((((ProEtale.comparisonLowerStar
+      AddCommGrpCat.{u + 1} T).mapHomologicalComplex (.up ℕ)).obj K.cocomplex).X n) := by
+    change Injective ((ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T).obj
+      (K.cocomplex.X n))
+    infer_instance
+  exact CochainComplex.homotopyOfQuasiIso I.ι _ _
+    ((transposeLift_augmentation T γ I K β hβ).trans
+      (transposeLift_augmentation T γ I K β' hβ').symm)
+
+private lemma mapResolution_f_zero
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    (L : A ⥤ B) [L.Additive] {F : A} {I : CochainComplex A ℕ}
+    (ι : (CochainComplex.single₀ A).obj F ⟶ I) :
+    (L.mapResolution ι).f 0 = L.map (ι.f 0) := by
+  simp [Functor.mapResolution, singleMapHomologicalComplex_inv_app_self,
+    singleObjXSelf, singleObjXIsoOfEq]
+
+private theorem lift_resolution
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    {F : A} {F' : B} (γ : L.obj F ⟶ F')
+    (I : InjectiveResolution F) (K : InjectiveResolution F') :
+    ∃ β : (L.mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K.cocomplex,
+      L.map (I.ι.f 0) ≫ β.f 0 = γ ≫ K.ι.f 0 := by
+  let β := InjectiveResolution.descOfQuasiIso γ K (L.mapResolution I.ι)
+  refine ⟨β, ?_⟩
+  have h := InjectiveResolution.descOfQuasiIso_commutes γ K (L.mapResolution I.ι)
+  simpa only [comp_f, mapResolution_f_zero, CochainComplex.single₀_map_f_zero]
+    using congrArg (fun f ↦ f.f 0) h
+
+private theorem exists_lift (T : Scheme.{u})
+    (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (F' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1})
+    (γ : (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F ⟶ F')
+    (I : InjectiveResolution F) (K : InjectiveResolution F') :
+    ∃ β : pulledResolution T I.cocomplex ⟶ K.cocomplex, IsLift T γ I K β := by
+  exact lift_resolution (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T) γ I K
+
+private lemma adjunction_lift_quasiIso
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasInjectiveResolutions B] (L : A ⥤ B) (G : B ⥤ A)
+    [L.Additive] [G.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (adj : L ⊣ G) [IsIso adj.unit]
+    (hacyc : ∀ (X : A) [Injective X], G.rightAcyclic (L.obj X))
+    {F : A} (I : InjectiveResolution F) (K : InjectiveResolution (L.obj F))
+    (β : (L.mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K.cocomplex)
+    (hβ : L.map (I.ι.f 0) ≫ β.f 0 = K.ι.f 0) :
+    QuasiIso ((NatTrans.mapHomologicalComplex adj.unit _).app I.cocomplex ≫
+      (G.mapHomologicalComplex (.up ℕ)).map β) := by
+  let : G.IsRightAdjoint := adj.isRightAdjoint
+  have hcomm : L.mapResolution I.ι ≫ β = K.ι := by
+    apply HomologicalComplex.from_single_hom_ext
+    simpa only [comp_f, mapResolution_f_zero] using hβ
+  have : QuasiIso (L.mapResolution I.ι ≫ β) := by rw [hcomm]; infer_instance
+  have : QuasiIso β := quasiIso_of_comp_left (L.mapResolution I.ι) β
+  have : QuasiIso ((G.mapHomologicalComplex (.up ℕ)).map β) :=
+    G.quasiIso_map_of_rightAcyclic_nat β (fun n ↦ hacyc (I.cocomplex.X n))
+      (fun n ↦ Functor.rightAcyclic_of_injective (F := G) (K.cocomplex.X n))
+  have : IsIso ((NatTrans.mapHomologicalComplex adj.unit _).app I.cocomplex) := by
+    have (n : ℕ) : IsIso
+        (((NatTrans.mapHomologicalComplex adj.unit _).app I.cocomplex).f n) := by
+      change IsIso (adj.unit.app (I.cocomplex.X n))
+      infer_instance
+    exact HomologicalComplex.Hom.isIso_of_components _
+  infer_instance
+
+private lemma transposeLift_quasiIso (T : Scheme.{u})
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (I : InjectiveResolution F)
+    (K : InjectiveResolution
+      ((ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F))
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex)
+    (hβ : IsLift T (𝟙 _) I K β) : QuasiIso (transposeLift T β) := by
+  have : IsIso (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T).unit :=
+    ProEtale.isIso_comparisonAdjunction_unit AddCommGrpCat.{u + 1} T
+  exact adjunction_lift_quasiIso
+    (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T)
+    (ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T)
+    (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T)
+    (fun X _ ↦ ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective
+      AddCommGrpCat.{u + 1} T X) I K β
+    (by simpa only [IsLift, Category.id_comp] using hβ)
+
+private theorem transposeLift_equivalence (T : Scheme.{u})
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (I : InjectiveResolution F)
+    (K : InjectiveResolution
+      ((ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F))
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex)
+    (hβ : IsLift T (𝟙 _) I K β) :
+    homotopyEquivalences _ (.up ℕ) (transposeLift T β) := by
+  let G := ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T
+  have : G.PreservesInjectiveObjects :=
+    Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+      (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T)
+  have (n : ℕ) : Injective (((G.mapHomologicalComplex (.up ℕ)).obj K.cocomplex).X n) :=
+    G.injective_obj (K.cocomplex.X n)
+  exact (CochainComplex.quasiIso_iff_of_injective (transposeLift T β)).1
+    (transposeLift_quasiIso T I K β hβ)
+
+private lemma map_transposeLift_quasiIso (T : Scheme.{u})
+    {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (I : InjectiveResolution F)
+    (K : InjectiveResolution
+      ((ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj F))
+    (β : pulledResolution T I.cocomplex ⟶ K.cocomplex)
+    (hβ : IsLift T (𝟙 _) I K β)
+    (H : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤ AddCommGrpCat.{u + 1})
+    [H.Additive] :
+    QuasiIso (extendMap ((H.mapHomologicalComplex (.up ℕ)).map (transposeLift T β))
+      ComplexShape.embeddingUpNat) := by
+  obtain ⟨e, he⟩ := transposeLift_equivalence T I K β hβ
+  have : QuasiIso ((H.mapHomologicalComplex (.up ℕ)).map (transposeLift T β)) := by
+    rw [← he]
+    exact (H.mapHomotopyEquiv e).quasiIso_hom
+  infer_instance
+
+private noncomputable def supportedCoefficientMap
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    {V W : C} (f : W ⟶ V)
+    {I I' : CochainComplex (Sheaf J AddCommGrpCat.{u + 1}) ℕ} (φ : I ⟶ I') :
+    supported J f I ⟶ supported J f I' :=
+  extendMap (((Sheaf.supportedSectionsFunctor J AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+     (.up ℕ)).map φ) ComplexShape.embeddingUpNat
+
+private lemma supportedCoefficientMap_inclusion
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    {V W : C} (f : W ⟶ V)
+    {I I' : CochainComplex (Sheaf J AddCommGrpCat.{u + 1}) ℕ} (φ : I ⟶ I') :
+    supportedCoefficientMap J f φ ≫ supportedInclusion J f I' =
+      supportedInclusion J f I ≫ coefficientMap J V φ := by
+  dsimp only [supportedCoefficientMap, supportedInclusion, coefficientMap]
+  rw [← extendMap_comp, ← extendMap_comp]
+  congr 1
+  exact (NatTrans.mapHomologicalComplex (forgetSupport J f) (.up ℕ)).naturality φ
+
+private lemma supportedCoefficientMap_comparison (T : Scheme.{u}) {V W : T.Etale}
+    (f : W ⟶ V)
+    {K K' : CochainComplex (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}) ℕ}
+    (φ : K ⟶ K') :
+    supportedCoefficientMap (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) φ =
+      supportedCoefficientMap T.smallEtaleTopology f
+        (((ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T).mapHomologicalComplex
+          (.up ℕ)).map φ) := by
+  dsimp only [supportedCoefficientMap]
+  congr 1
+
+private lemma coefficient_homologySquare
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
+    {V W : C} (f : W ⟶ V)
+    {F F' : Sheaf J AddCommGrpCat.{u + 1}}
+    (I : InjectiveResolution F) (I' : InjectiveResolution F')
+    (R : Realization J f I) (R' : Realization J f I')
+    (φ : I.cocomplex ⟶ I'.cocomplex)
+    (h : coefficientMap J V φ ≫ restrictionComplex J f I'.cocomplex =
+      restrictionComplex J f I.cocomplex ≫ coefficientMap J W φ) (q : ℤ) :
+    (realizationIso J R q).hom ≫ homologyMap (relativeFiberMap _ _ (coefficientMap J V φ)
+          (coefficientMap J W φ) h) q =
+      homologyMap (supportedCoefficientMap J f φ) q ≫ (realizationIso J R' q).hom :=
+  realization_modelSquare J J f f I I' R R' _ _ h
+    (supportedCoefficientMap J f φ) (supportedCoefficientMap_inclusion J f φ) q
+
+private lemma fiberMap_square
+    {A₀ B₀ A₁ B₁ A₂ B₂ A₃ B₃ : CochainComplex AddCommGrpCat.{u + 1} ℤ}
+    (r₀ : A₀ ⟶ B₀) (r₁ : A₁ ⟶ B₁) (r₂ : A₂ ⟶ B₂) (r₃ : A₃ ⟶ B₃)
+    (a₀₁ : A₀ ⟶ A₁) (b₀₁ : B₀ ⟶ B₁) (a₁₃ : A₁ ⟶ A₃) (b₁₃ : B₁ ⟶ B₃)
+    (a₀₂ : A₀ ⟶ A₂) (b₀₂ : B₀ ⟶ B₂) (a₂₃ : A₂ ⟶ A₃) (b₂₃ : B₂ ⟶ B₃)
+    (h₀₁ : a₀₁ ≫ r₁ = r₀ ≫ b₀₁) (h₁₃ : a₁₃ ≫ r₃ = r₁ ≫ b₁₃)
+    (h₀₂ : a₀₂ ≫ r₂ = r₀ ≫ b₀₂) (h₂₃ : a₂₃ ≫ r₃ = r₂ ≫ b₂₃)
+    (ha : a₀₁ ≫ a₁₃ = a₀₂ ≫ a₂₃) (hb : b₀₁ ≫ b₁₃ = b₀₂ ≫ b₂₃) :
+    relativeFiberMap r₀ r₁ a₀₁ b₀₁ h₀₁ ≫ relativeFiberMap r₁ r₃ a₁₃ b₁₃ h₁₃ =
+      relativeFiberMap r₀ r₂ a₀₂ b₀₂ h₀₂ ≫ relativeFiberMap r₂ r₃ a₂₃ b₂₃ h₂₃ := by
+  unfold relativeFiberMap
+  rw [← Functor.map_comp, ← Functor.map_comp,
+    ← homotopyCofiber.mapArrowHom_comp, ← homotopyCofiber.mapArrowHom_comp]
+  congr 1
+  congr 1
+  exact Arrow.hom_ext _ _ ha hb
+
+private theorem exists_topologyComparison (T : Scheme.{u})
+    (E : System T.smallEtaleTopology (fun {_ _} f ↦ IsOpenImmersion f.left))
+    (P : System (Scheme.ProEt.topology T)
+      (fun {V _} f ↦ IsOpenImmersion f.left ∧ Etale V.hom)) :
+    Nonempty (TopologyComparison T E P) := by
+  have et (V : T.Etale) : Etale ((Scheme.toProEt T).obj V).hom := by
+    change Etale V.hom
+    infer_instance
+  have hh {V W : T.Etale} (f : W ⟶ V) (hf : IsOpenImmersion f.left)
+      {F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
+      {F' : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+      (I : InjectiveResolution F) (K : InjectiveResolution F')
+      (β : pulledResolution T I.cocomplex ⟶ K.cocomplex) (q : ℤ) :=
+    realization_modelSquare T.smallEtaleTopology (Scheme.ProEt.topology T)
+      f ((Scheme.toProEt T).map f) I K (E.realization f hf I)
+      (P.realization ((Scheme.toProEt T).map f) ⟨hf, et V⟩ K)
+      (pullbackSections T V β) (pullbackSections T W β)
+      (topologySquare T f β) (supportPullback T f β)
+      (supportPullback_inclusion T f β) q
+  refine ⟨{
+    lift_exists := exists_lift T
+    square := topologySquare T
+    sections_isIso := ?_
+    cone_isIso := ?_
+    support := ?_
+    projection_boundary := ?_
+    lift_independence := ?_
+    postcomposition := ?_
+    coefficients := ?_
+    objects := ?_ }⟩
+  · intro V F I K β hβ q
+    have : QuasiIso (pullbackSections T V β) :=
+      map_transposeLift_quasiIso T I K β hβ (evaluationFunctor T.smallEtaleTopology V)
+    infer_instance
+  · intro V W f hf F I K β hβ q
+    have : QuasiIso (supportPullback T f β) :=
+      map_transposeLift_quasiIso T I K β hβ
+        (Sheaf.supportedSectionsFunctor T.smallEtaleTopology AddCommGrpCat.{u + 1} f)
+    apply (isIso_comp_left_iff
+      (realizationIso T.smallEtaleTopology (E.realization f hf I) (q : ℤ)).hom _).1
+    rw [hh f hf I K β]
+    infer_instance
+  · intro V W f hf F F' γ I K β hβ q
+    exact realization_transport T.smallEtaleTopology (Scheme.ProEt.topology T)
+      f ((Scheme.toProEt T).map f) I K (E.realization f hf I)
+      (P.realization ((Scheme.toProEt T).map f) ⟨hf, et V⟩ K)
+      (pullbackSections T V β) (pullbackSections T W β) (topologySquare T f β) q
+  · intro V W f hf I K β
+    exact triangleSquare (restrictionComplex T.smallEtaleTopology f I)
+      (restrictionComplex (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K)
+      (pullbackSections T V β) (pullbackSections T W β) (topologySquare T f β)
+  · intro V W f hf F F' γ I K β β' hβ hβ' q
+    have heq : homologyMap (supportPullback T f β) (q : ℤ) =
+        homologyMap (supportPullback T f β') (q : ℤ) :=
+      (((Sheaf.supportedSectionsFunctor T.smallEtaleTopology AddCommGrpCat.{u + 1} f).mapHomotopy
+         (transposeLift_homotopy T γ I K β β' hβ hβ')).extend
+          ComplexShape.embeddingUpNat).homologyMap_eq (q : ℤ)
+    apply (cancel_epi (realizationIso T.smallEtaleTopology (E.realization f hf I) (q : ℤ)).hom).1
+    rw [hh f hf I K β, hh f hf I K β', heq]
+  · intro V W f hf F F' F'' γ δ I K K' β β' φ hφ h hβ hβ' q
+    let G := ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T
+    have hβφ : IsLift T (γ ≫ δ) I K' (β ≫ φ) := by
+      change _ ≫ (β.f 0 ≫ φ.f 0) = (γ ≫ δ) ≫ _
+      rw [← Category.assoc, hβ, Category.assoc, hφ, Category.assoc]
+    have heq₀ :=
+      (((Sheaf.supportedSectionsFunctor T.smallEtaleTopology AddCommGrpCat.{u + 1} f).mapHomotopy
+         (transposeLift_homotopy T (γ ≫ δ) I K' β' (β ≫ φ)
+          hβ' hβφ)).extend ComplexShape.embeddingUpNat).homologyMap_eq (q : ℤ)
+    have heq : homologyMap (supportPullback T f β') (q : ℤ) =
+        homologyMap (supportPullback T f β) (q : ℤ) ≫
+          homologyMap (supportedCoefficientMap (Scheme.ProEt.topology T)
+            ((Scheme.toProEt T).map f) φ) (q : ℤ) := by
+      rw [← homologyMap_comp]
+      refine heq₀.trans ?_
+      congr 1
+      let H := (Sheaf.supportedSectionsFunctor T.smallEtaleTopology
+        AddCommGrpCat.{u + 1} f).mapHomologicalComplex (.up ℕ)
+      change extendMap (H.map (transposeLift T (β ≫ φ))) _ =
+        extendMap (H.map (transposeLift T β)) _ ≫
+          extendMap (H.map ((G.mapHomologicalComplex (.up ℕ)).map φ)) _
+      rw [← extendMap_comp, ← Functor.map_comp]
+      congr 2
+    apply (cancel_epi (realizationIso T.smallEtaleTopology (E.realization f hf I) (q : ℤ)).hom).1
+    rw [hh f hf I K' β', reassoc_of% (hh f hf I K β)]
+    rw [coefficient_homologySquare (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K K'
+      (P.realization ((Scheme.toProEt T).map f) ⟨hf, et V⟩ K)
+      (P.realization ((Scheme.toProEt T).map f) ⟨hf, et V⟩ K') φ h]
+    simpa only [Category.assoc] using congrArg
+      (fun t ↦ t ≫ (realizationIso (Scheme.ProEt.topology T)
+        (P.realization ((Scheme.toProEt T).map f) ⟨hf, et V⟩ K') (q : ℤ)).hom) heq
+  · intro V W f hf F F₁ α I I₁ K K₁ β β₁ φ ψ hφ hψ h hp hβ hβ₁ q
+    let G := ProEtale.comparisonLowerStar AddCommGrpCat.{u + 1} T
+    let η := (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T).unit
+    have : G.PreservesInjectiveObjects :=
+      Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+        (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T)
+    have (n : ℕ) : Injective (((G.mapHomologicalComplex (.up ℕ)).obj K₁.cocomplex).X n) :=
+      G.injective_obj (K₁.cocomplex.X n)
+    have ha : I.ι.f 0 ≫ (transposeLift T β).f 0 = η.app F ≫ G.map (K.ι.f 0) := by
+      calc
+        I.ι.f 0 ≫ (transposeLift T β).f 0 =
+            η.app F ≫ G.map (𝟙 _) ≫ G.map (K.ι.f 0) :=
+          transposeLift_augmentation T (𝟙 _) I K β hβ
+        _ = η.app F ≫ G.map (K.ι.f 0) := by
+          rw [G.map_id]
+          exact congrArg (fun t ↦ η.app F ≫ t) (Category.id_comp (G.map (K.ι.f 0)))
+    have ha₁ : I₁.ι.f 0 ≫ (transposeLift T β₁).f 0 =
+        η.app F₁ ≫ G.map (K₁.ι.f 0) := by
+      calc
+        I₁.ι.f 0 ≫ (transposeLift T β₁).f 0 =
+            η.app F₁ ≫ G.map (𝟙 _) ≫ G.map (K₁.ι.f 0) :=
+          transposeLift_augmentation T (𝟙 _) I₁ K₁ β₁ hβ₁
+        _ = η.app F₁ ≫ G.map (K₁.ι.f 0) := by
+          rw [G.map_id]
+          exact congrArg (fun t ↦ η.app F₁ ≫ t) (Category.id_comp (G.map (K₁.ι.f 0)))
+    have haug : I.ι.f 0 ≫ (φ ≫ transposeLift T β₁).f 0 =
+        I.ι.f 0 ≫ (transposeLift T β ≫ (G.mapHomologicalComplex (.up ℕ)).map ψ).f 0 := by
+      change I.ι.f 0 ≫ (φ.f 0 ≫ (transposeLift T β₁).f 0) =
+        I.ι.f 0 ≫ ((transposeLift T β).f 0 ≫ G.map (ψ.f 0))
+      rw [← Category.assoc, hφ, Category.assoc, ha₁,
+        ← Category.assoc (I.ι.f 0), ha, Category.assoc, ← G.map_comp, hψ, G.map_comp]
+      have hn := η.naturality α
+      dsimp only [Functor.id_map, Functor.comp_map] at hn
+      simpa only [Category.assoc] using
+        congrArg (fun t ↦ t ≫ G.map (K₁.ι.f 0)) hn
+    let ht := CochainComplex.homotopyOfQuasiIso I.ι (φ ≫ transposeLift T β₁)
+      (transposeLift T β ≫ (G.mapHomologicalComplex (.up ℕ)).map ψ) haug
+    have heq₀ :=
+      (((Sheaf.supportedSectionsFunctor T.smallEtaleTopology AddCommGrpCat.{u + 1} f).mapHomotopy
+         ht).extend ComplexShape.embeddingUpNat).homologyMap_eq (q : ℤ)
+    have heq :
+        homologyMap (supportedCoefficientMap T.smallEtaleTopology f φ) (q : ℤ) ≫
+          homologyMap (supportPullback T f β₁) (q : ℤ) =
+        homologyMap (supportPullback T f β) (q : ℤ) ≫
+          homologyMap (supportedCoefficientMap (Scheme.ProEt.topology T)
+            ((Scheme.toProEt T).map f) ψ) (q : ℤ) := by
+      rw [supportedCoefficientMap_comparison]
+      dsimp only [supportedCoefficientMap, supportPullback]
+      simpa only [Functor.map_comp, extendMap_comp, homologyMap_comp] using heq₀
+    apply (cancel_epi (realizationIso T.smallEtaleTopology (E.realization f hf I) (q : ℤ)).hom).1
+    rw [reassoc_of% (coefficient_homologySquare T.smallEtaleTopology f I I₁
+      (E.realization f hf I) (E.realization f hf I₁) φ h (q : ℤ)),
+      hh f hf I₁ K₁ β₁, reassoc_of% (hh f hf I K β)]
+    rw [coefficient_homologySquare (Scheme.ProEt.topology T) ((Scheme.toProEt T).map f) K K₁
+      (P.realization ((Scheme.toProEt T).map f) ⟨hf, et V⟩ K)
+      (P.realization ((Scheme.toProEt T).map f) ⟨hf, et V⟩ K₁) ψ hp]
+    simpa only [Category.assoc] using congrArg
+      (fun t ↦ t ≫ (realizationIso (Scheme.ProEt.topology T)
+        (P.realization ((Scheme.toProEt T).map f) ⟨hf, et V⟩ K₁) (q : ℤ)).hom) heq
+  · intro V W V' W' f f' hf hf' v w hs I K β h hp
+    exact fiberMap_square _ _ _ _ _ _ _ _ _ _ _ _ h (topologySquare T f' β)
+      (topologySquare T f β) hp (topologySquare T v β).symm (topologySquare T w β).symm
+
+/-- The relative cone computes support cohomology on either small site, with canonical
+resolution-independent identifications and the canonical etale--pro-etale comparison.
+
+Source: Stacks, cohomology with support; blueprint main-20261015,
+sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md, first sentence and last paragraph
+(blueprint: lem-pur-divisor-relative-cone).
+
+Proof. Step 1: restriction of every injective sheaf along the open monomorphism is
+surjective (`lem-weil-pbc-injective-sheaf-mono-restriction`); its kernel is the supported
+section functor of `def-pur-support-cohomology`. Step 2: the canonical map `(k,0)` from
+this kernel to the shifted cone is a quasi-isomorphism by
+`CochainComplex.exists_kernel_to_shifted_mappingCone_of_degreewise_epi`; changing a cycle
+`(a,b)` by a boundary coming from a lift of `b` proves this directly.
+Step 3: `InjectiveResolution.isoRightDerivedObj` and extension by zero give the normalized
+identifications. The kernel inclusion gives forgetting support. The theorem
+`CochainComplex.kernelShiftedCone_boundary` identifies the connecting map of the kernel
+sequence with shifted `inr`, hence `(0,-b)` in the signed model. Coordinate uniqueness
+makes every kernel/cone square commute. Naturality of the injective-resolution
+computation gives coefficient and object/support restriction compatibility.
+Step 4: exactness of L makes L(I) a resolution of L(F). Lift it to a pro-etale injective
+resolution K. This lift β is a quasi-isomorphism between complexes of G-acyclic objects:
+L(I^n) is G-acyclic by `lem-cbc-abelian-comparison-injective-acyclicity`, while K^n is
+injective. The acyclic-resolution comparison criterion makes Gβ a quasi-isomorphism.
+Compose with the unit isomorphism of `lem-weil-pbc-comparison-grothendieck-unit` to obtain
+a quasi-isomorphism I→G(K). The right adjoint G preserves injectives because L is exact.
+Thus this map is a homotopy equivalence of nonnegative complexes of injectives. Applying
+any additive functor, in particular evaluation at an etale object or supported sections,
+preserves this equivalence. Its extension by zero is consequently a quasi-isomorphism.
+Step 5: the kernel/cone squares transfer these homology isomorphisms to the cones and
+identify the support maps. For arbitrary coefficient maps, two transposed augmented
+lifts into a complex of injectives are homotopic. Apply supported sections and cancel
+the kernel-to-cone homology isomorphism to obtain lift independence and postcomposition.
+The same argument, using unit naturality on the augmentation, gives coefficient
+compatibility. Object restriction squares commute strictly, and cone functoriality gives
+their composite square. The component formulas give projection and boundary naturality. -/
+theorem relativeConeSupportComparison (T : Scheme.{u}) {Z : Scheme.{u}}
+    (i : Z ⟶ T) [IsClosedImmersion i]
+    (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) :
+    ∃ (E : RelativeCone.System T.smallEtaleTopology
+        (fun {_ _} f ↦ IsOpenImmersion f.left))
+      (P : RelativeCone.System (Scheme.ProEt.topology T)
+        (fun {V _} f ↦ IsOpenImmersion f.left ∧ Etale V.hom))
+      (e : ∀ q : ℕ, relativeCohomology T (Scheme.Etale.mk i.openComplement.ι) I q ≅
+        supportCohomology i q F),
+      Nonempty (RelativeCone.TopologyComparison T E P) ∧
+      ∀ q : ℕ, (e q).hom =
+        ((E.realization (supportRestrictionArrow i)
+          (by change IsOpenImmersion i.openComplement.ι; infer_instance) I).e q).hom := by
+  obtain ⟨E⟩ := RelativeCone.exists_system T.smallEtaleTopology
+    (fun {_ _} f ↦ IsOpenImmersion f.left) (by
+      intro V W f hf
+      let : IsOpenImmersion f.left := hf
+      exact (MorphismProperty.Over.forget @Etale ⊤ T ⋙ Over.forget T).mono_of_mono_map
+         (by change Mono f.left; infer_instance))
+  obtain ⟨P⟩ := RelativeCone.exists_system (Scheme.ProEt.topology T)
+    (fun {V _} f ↦ IsOpenImmersion f.left ∧ Etale V.hom) (by
+      intro V W f hf
+      let : IsOpenImmersion f.left := hf.1
+      exact (MorphismProperty.Over.forget @WeaklyEtale ⊤ T ⋙ Over.forget T).mono_of_mono_map
+         (by change Mono f.left; infer_instance))
+  refine ⟨E, P, fun q ↦ (E.realization (supportRestrictionArrow i)
+    (by change IsOpenImmersion i.openComplement.ι; infer_instance) I).e q,
+    RelativeCone.exists_topologyComparison T E P, fun q ↦ rfl⟩
 
 end RelativeCone
 
