@@ -779,18 +779,6 @@ private noncomputable def scalarDerivedAdjunction {R S : Type (u + 1)}
 -- Keep the scalar adjunction data folded when elaborating the chosen left adjoints.
 attribute [local irreducible] scalarDerivedAdjunction scalarExtension scalarAdjunction
 
-/-- Actual exact derived restriction admits its retained scalar left adjoint.
-Source: Stacks 07A6 (blueprint: def-weil-pbc-constant-coefficient-scalar-extension).
-Proof: the previously proved K-flat preservation for sheafified scalar extension
-allows its ordinary adjunction to descend; exactness identifies the right derived
-functor with restriction applied termwise and localized. This is the existing proof
-with the unused representative-normalization wrapper removed. -/
-@[instance] theorem pbcRestriction_isRightAdjoint {R S : Type (u + 1)}
-    [CommRing R] [CommRing S] (φ : R →+* S) :
-    (Sheaf.derivedRestrictScalars J φ).IsRightAdjoint := by
-  exact ((pbcFixedScalarSheafAdjunction J φ).derivedAdjunction.ofNatIsoRight
-    (Sheaf.restrictScalars J φ).rightDerivedFunctorIsoMapDerivedCategory).isRightAdjoint
-
 /-- Derived scalar extension, fixed by the adjunction to actual restriction of scalars.
 Source: Stacks 06YY (blueprint: def-weil-pbc-witness-compatibility). -/
 noncomputable def pbcFixedScalarExtension {R S : Type (u + 1)} [CommRing R] [CommRing S]
