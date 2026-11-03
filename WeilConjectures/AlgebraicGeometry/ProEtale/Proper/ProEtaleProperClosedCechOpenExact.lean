@@ -37,10 +37,38 @@ Remarks: by the corepresenting property and `b^* ⊣ b_*`, this is equivalent to
 `z^* b_* J` on the closed fibre `P_Z`, an instance of proper base change for the henselian
 pair `(Γ(W), J_W)`; this is why properness, `hW` and `hspecializes` are needed.
 
-Proof plan: as for `closedAffineCech_open_restriction_exact`, use the retained lift
-presentation of the three degrees and contract the lifted nerve locally by insertion of a
-chosen local lift. Properness and `hspecializes` show that every point of `P` specializes
-into the closed fibre, so henselian lifts of a cover of the closed fibre cover `P`. -/
+Status: not proved here. With `j` the open complement of `z` on `P`, it amounts to
+`H^m(P, j_! j^* I) = 0` for `m ≥ 2` and injective `I`. This is proper base change for the
+henselian pair `(Γ(W), J_W)` and arbitrary pro-étale sheaves, not only those coming from the
+étale site. Approaches that do not suffice:
+* dimension shifting with the degree-zero statement `proper_closed_injective_sections_epi`
+  only reproduces this statement;
+* `z^*` does not preserve injectives;
+* the earlier plan compared with the Čech complex of `I` on henselian lifts of the closed
+  fibres. It fails because fibre products over `P` of henselian lifts are not henselian lifts:
+  they acquire clopen parts with empty closed fibre, from distinct branches over the open part;
+* iterating `closedLiftGeneratorAugmentation` needs the higher analogue of
+  `proper_closedLift_relations_generated` and the affine statement
+  `exactAt_closedCechCoefficientFunctor_obj_of_injective`.
+
+The degree-zero companion `proper_closed_injective_sections_epi` is false. Take `D`, `E`, `W` and
+the nodal-cubic family `B` from the warning in `proper_closed_lift_local_chains_nhds`. Let `ω` be
+`Spec` of an algebraic closure of the function field of `B`, and let `I = ω_* A^∨`, where
+`I(Y) = (A^∨)^{Hom_B(ω, Y)}`. Then `Hom(F, I) = Hom_A(F(ω), A^∨)`, so `I` is injective, and
+`I = b_* b^* I`. By Stacks 09BL, a section of `z^* I` on `B_s` is a function of the pairs `(T, a)`.
+Here `T` is an affine weakly contractible object over `B_s` and `a : ω ⟶ T^h`. The function must
+be invariant under maps `T' ⟶ T`. The tower of `n`-gon covers lifts to a pro-finite-étale
+`Ẑ`-torsor `Ŷ ⟶ B`. Its special fibre is a `Ẑ`-gon, whose classes under finite zigzags of
+specializations form `Ẑ/ℤ`. Fix a lift `ω ⟶ Ŷ` and send `(T, a)` to the zigzag class of the
+image in `Ŷ_s` of the unique closed specialization of `(a, ω ⟶ Ŷ)` in `T^h ×_B Ŷ`. This class is
+invariant, and precomposing `a` with Galois elements realizes every class over the node. So
+`z^* I` has nonconstant global sections, while `I(B) = A^∨` only gives constant ones.
+
+The same family does not refute this statement. For `J = ω_* Q` and a cover of `B` by opens,
+positive Čech cohomology is the cokernel of `H_1` of the zigzag graphs of the pieces of the
+normalization `Ỹ_s` of `B_s` in `ω`, mapping to `H_1` of the whole graph. That graph is a forest:
+a finite cycle survives to a finite level, and a finite étale cover of that special fibre,
+trivial on its components, unwinds the cycle. -/
 theorem properClosedCech_open_restriction_exact
     (A : Type u) [CommRing A] [Finite A]
     {B D E : Scheme.{u}} (p : B ⟶ D) (i : E ⟶ D)
