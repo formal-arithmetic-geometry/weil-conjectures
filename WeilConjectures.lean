@@ -16792,6 +16792,7 @@ public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHomTensor
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizing
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizingUnit
 public import WeilConjectures.PoincareDuality.Biduality.GeneralFieldIntegralProperAdjoint
+public import WeilConjectures.PoincareDuality.Biduality.GeneralFieldIntegralProperAdjoint2
 public import WeilConjectures.PoincareDuality.Biduality.Integral
 public import WeilConjectures.PoincareDuality.Biduality.Reduction
 public import WeilConjectures.PoincareDuality.Biduality.ReductionIhom

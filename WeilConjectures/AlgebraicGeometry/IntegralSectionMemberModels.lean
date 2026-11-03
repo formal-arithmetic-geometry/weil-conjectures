@@ -512,6 +512,150 @@ private theorem coefficientRingCompatibility (l : ℕ) [Fact l.Prime]
     (IntegralModelsStacks.pointSectionIso l E X)
     (FiniteDiscreteOrdinary.canonicalRingMap A X) (Scheme.adicDatumScalar X dd) hh
 
+/--
+The two fixed scalar realizations agree on the lifted regular module and on every
+endomorphism given by multiplication by a scalar. This is the rank-one coefficient
+calculation: the normalized section-ring and completed-coefficient projections agree
+on the scalar section, and the completion projections are jointly monic.
+
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the regular
+scalar calculation in the integral constructibility bridge.
+Proof: identify both regular values with the sectionwise unit module using the
+constant-sheaf, scalar-extension, point-pullback, section-action, and coefficient
+restriction unit maps. For a scalar `a`, naturality of each unit map identifies its
+image with multiplication by the corresponding constant section. The fixed
+projection formulas agree at every positive quotient, hence the completion
+projections identify the two maps. The zero scalar and empty scheme are included.
+(blueprint: lem-sfb-integral-section-regular-scalars-scalar).
+-/
+private theorem scalarComparison (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) :
+    let A := Padic.coefficientExtensionIntegers l E
+    let R := ModuleCat.of A (ULift.{u + 1} A)
+    let F :=
+      (letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+       continuousScalarFunctor A) ⋙
+        (upperStarFromPoint X).mapMod (DerivedNakayama.integerRing l E) ⋙
+        integralSectionFunctor l E X ⋙
+        SheafOfModules.restrictScalars.{u + 1}
+          (Scheme.integralDetailedCoefficientComparison X l E).hom
+    let G :=
+      ModuleCat.restrictScalars.{u + 1}
+        (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+* A).toRingHom ⋙
+      Scheme.integralConstantModule X (Scheme.pbcIntegralDatum l E)
+    ∃ e : F.obj R ≅ G.obj R,
+      ∀ a : A,
+        F.map (ModuleCat.ofHom ((ULift.moduleEquiv (R := A) (M := A)).symm.toLinearMap.comp
+          ((LinearMap.mulLeft A a).comp
+            (ULift.moduleEquiv (R := A) (M := A)).toLinearMap))) ≫ e.hom =
+          e.hom ≫ G.map (ModuleCat.ofHom
+            ((ULift.moduleEquiv (R := A) (M := A)).symm.toLinearMap.comp
+              ((LinearMap.mulLeft A a).comp
+                (ULift.moduleEquiv (R := A) (M := A)).toLinearMap))) := by
+  let eF := sectionValueIso l E X
+  let eG := constantValueIso l E X
+  refine ⟨eF ≪≫ eG.symm, ?_⟩
+  intro a
+  let A : Type u := Padic.coefficientExtensionIntegers l E
+  let F :=
+    (letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+     continuousScalarFunctor A) ⋙
+      (upperStarFromPoint X).mapMod (DerivedNakayama.integerRing l E) ⋙
+      integralSectionFunctor l E X ⋙ SheafOfModules.restrictScalars.{u + 1}
+        (Scheme.integralDetailedCoefficientComparison X l E).hom
+  let G := ModuleCat.restrictScalars.{u + 1}
+    (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+* A).toRingHom ⋙
+    Scheme.integralConstantModule X (Scheme.pbcIntegralDatum l E)
+  have h : eF.inv ≫ F.map (scalarEndo A a) ≫ eF.hom =
+      eG.inv ≫ G.map (scalarEndo A a) ≫ eG.hom := by
+    apply (SheafOfModules.unitHomEquiv _).injective
+    apply PresheafOfModules.sections_ext
+    intro U
+    exact (sectionValueIso_scalar l E X a U).trans
+      ((coefficientScalarCompatibility l E X a U).trans
+        (constantValueIso_scalar l E X a U).symm)
+  change F.map (scalarEndo A a) ≫ (eF.hom ≫ eG.inv) =
+    (eF.hom ≫ eG.inv) ≫ G.map (scalarEndo A a)
+  have h' := congrArg (fun z ↦ eF.hom ≫ z ≫ eG.inv) h
+  simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id,
+    Category.comp_id] using h'
+
+/-- The specified continuous-scalar, point-pullback and section-action composite.
+Source: Bhatt--Scholze, Proposition 6.8.11(3), integral scalar models
+(blueprint: lem-sfb-integral-section-regular-scalars). -/
+@[irreducible] private def sectionRealization (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) :
+    ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E) ⥤
+      Scheme.pbcModules X (Scheme.pbcAdicCompletion X (Scheme.pbcIntegralDatum l E)) :=
+  (letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+   continuousScalarFunctor (Padic.coefficientExtensionIntegers l E)) ⋙
+    (upperStarFromPoint X).mapMod (DerivedNakayama.integerRing l E) ⋙
+    integralSectionFunctor l E X ⋙
+    SheafOfModules.restrictScalars.{u + 1}
+      (Scheme.integralDetailedCoefficientComparison X l E).hom
+
+/-- The specified completed-constant realization with the recorded scalar universe change.
+Source: Bhatt--Scholze, Proposition 6.8.11(3), integral scalar models
+(blueprint: lem-sfb-integral-section-regular-scalars). -/
+@[irreducible] private def completedRealization (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) :
+    ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E) ⥤
+      Scheme.pbcModules X (Scheme.pbcAdicCompletion X (Scheme.pbcIntegralDatum l E)) :=
+  ModuleCat.restrictScalars.{u + 1}
+    (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+*
+      Padic.coefficientExtensionIntegers l E).toRingHom ⋙
+    Scheme.integralConstantModule X (Scheme.pbcIntegralDatum l E)
+
+/-- The two fixed scalar realizations agree on the lifted regular module, compatibly
+with every scalar endomorphism. This is a rank-one coefficient calculation; no finite
+presentation, cokernel or arbitrary module is involved.
+
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the regular scalar
+calculation in the integral constructibility bridge
+(blueprint: lem-sfb-integral-section-regular-scalars).
+
+Proof: constant sheafification sends the regular scalar module to the regular constant
+coefficient module. Scalar extension sends it to the regular continuous coefficient
+module by its adjunction, and point inverse image sends it to the regular pulled-back
+coefficient module. Section action identifies this with the unit section module;
+restriction along the prescribed ring isomorphisms identifies it with the completed
+coefficient unit. On the completed-constant side, sheafification and scalar extension
+likewise identify the lifted regular module with that same unit. These give the desired
+isomorphism. A linear endomorphism of the lifted regular module is multiplication by
+its value on the lifted element 1. On each positive uniformizer quotient the normalized
+section-ring comparison and the normalized detailed comparison send this element to
+its constant section. The constant completion map has the identical quotient formula.
+The completion projections are jointly monic, so these scalar sections agree before
+reduction. Naturality of scalar extension's unit and the point-pullback unit then
+identifies the two endomorphisms of the unit module. This proves the displayed square.
+The zero scalar and the empty scheme require no exception. -/
+private theorem regularComparison (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) :
+    ∃ e : (sectionRealization l E X).obj
+        (ModuleCat.of (Padic.coefficientExtensionIntegers l E)
+          (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))) ≅
+      (completedRealization l E X).obj
+        (ModuleCat.of (Padic.coefficientExtensionIntegers l E)
+          (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))),
+      ∀ f : ModuleCat.of (Padic.coefficientExtensionIntegers l E)
+          (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) ⟶
+        ModuleCat.of (Padic.coefficientExtensionIntegers l E)
+          (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)),
+        (sectionRealization l E X).map f ≫ e.hom =
+          e.hom ≫ (completedRealization l E X).map f := by
+  unfold sectionRealization completedRealization
+  obtain ⟨e, he⟩ := scalarComparison l E X
+  refine ⟨e, ?_⟩
+  intro f
+  let a := (f.hom (ULift.up 1)).down
+  have hfa : f = scalarEndomorphism _ a := endomorphism_eq_scalar _ f
+  rw [hfa]
+  exact he a
+
 /-- The explicit scalar model in the localized module category.
 Source: the completed scalar model (auxiliary; not a blueprint node). -/
 def integralSectionMemberModel (l : ℕ) [Fact l.Prime]
@@ -683,6 +827,56 @@ private theorem integerClassification (l : ℕ) [Fact l.Prime]
 
 -- Preserve the established comparison while this consumer awaits its own assigned
 -- condensed route switch. This is the original argument, with only a private name.
+
+/-- The fixed integral section comparison sends a finitely presented ordinary scalar
+module, extended from the condensed point, to its completed constant realization.
+
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the scalar
+comparison in the integral constructibility bridge.
+(blueprint: lem-sfb-integral-section-scalar-models).
+
+Proof: choose a finite presentation of N by free scalar modules. The two realizations
+preserve finite sums and cokernels: constant sheafification, extension of scalars,
+and inverse image do, and section comparison and coefficient restriction are
+equivalences. On the regular scalar module identify both values with the coefficient
+module. At every positive uniformizer quotient, the prescribed coefficient maps send
+an element to its constant section. Joint monicity of the completion projections
+identifies the resulting maps on the completed regular module. This identification
+commutes with scalar endomorphisms: evaluation of a constant function at the singleton
+returns that scalar. The ULift change sends a lifted scalar to the same element.
+Extend the regular-module comparison to the finite free terms by biproducts. Checking
+each matrix entry identifies the two presentation maps. Preservation of their
+cokernels and cokernel uniqueness give the asserted isomorphism on N. Empty matrices,
+torsion modules and empty schemes are included. -/
+private theorem integralSectionScalarModels_legacy (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u})
+    (N : ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))
+    (hN : Module.FinitePresentation (Padic.coefficientExtensionIntegers l E) N) :
+    Nonempty ((SheafOfModules.restrictScalars.{u + 1}
+      (Scheme.integralDetailedCoefficientComparison X l E).hom).obj
+      ((integralSectionFunctor l E X).obj
+        (((upperStarFromPoint X).mapMod (DerivedNakayama.integerRing l E)).obj
+          ((let A := Padic.coefficientExtensionIntegers l E
+            letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+            continuousScalarFunctor A).obj N))) ≅
+      (Scheme.integralConstantModule X (Scheme.pbcIntegralDatum l E)).obj
+        ((ModuleCat.restrictScalars
+          (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+*
+            Padic.coefficientExtensionIntegers l E).toRingHom).obj N)) := by
+  have hF := (finiteColimits l E X).1
+  have hG := (finiteColimits l E X).2
+  have haF : (sectionRealization l E X).Additive :=
+    rightExactFunctor_le_additiveFunctor _ _ _ hF
+  have haG : (completedRealization l E X).Additive :=
+    rightExactFunctor_le_additiveFunctor _ _ _ hG
+  obtain ⟨e, he⟩ := regularComparison l E X
+  have h := scalarPresentationComparison
+    (sectionRealization l E X)
+    (completedRealization l E X) e he N hN
+  unfold sectionRealization
+    completedRealization at h
+  exact h
 
 private theorem scalarModelComparison (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

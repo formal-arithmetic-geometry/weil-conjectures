@@ -438,6 +438,17 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+/-- Projection onto the constant second summand of the canonical decomposition:
+`t_q = pr₂ ∘ b_q⁻¹`. Here `Rq_*` is the total right derived functor of module direct
+image and the finite Tate line is the scalar extension of the roots-of-unity sheaf.
+Source: blueprint def-amb-p1-trace (blueprint: def-amb-p1-trace). -/
+def ordinaryFiniteProjectiveLineTrace (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
+    (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ⟶ ordinaryFiniteUnit A S :=
+  (projectiveLineTraceDatum N hN A hA S hS).decomposition.inv ≫ biprod.snd
+
 /-- The trace sends the scalar Kummer Chern class of O(1) to one.
 Source: blueprint def-amb-p1-trace (blueprint: def-amb-p1-trace).
 Proof: the decomposition's second component is the Chern adjunct h. Thus
@@ -447,7 +458,7 @@ theorem projectiveLineTrace_chern (N : ℕ) (hN : 0 < N)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
     ordinaryFiniteP1ChernPushforward A N hA S
         (projectiveLineTraceDatum N hN A hA S hS).chern ≫
-      projectiveLineTrace N hN A hA S hS = 𝟙 (ordinaryFiniteUnit A S) := by
+      ordinaryFiniteProjectiveLineTrace N hN A hA S hS = 𝟙 (ordinaryFiniteUnit A S) := by
   exact (projectiveLineTraceDatum N hN A hA S hS).trace_chern
 
 /-- The map epsilon for every unbounded complex: inverse of the canonical ordered
@@ -473,7 +484,7 @@ def projectiveLineTraceEpsilon (N : ℕ) (hN : 0 < N)
       ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K
   inv (ordinaryFiniteProjection A (ProjectiveLine S ↘ S)
       ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K) ≫
-    ((ordinaryFiniteTensor A S).obj K).map (projectiveLineTrace N hN A hA S hS) ≫
+    ((ordinaryFiniteTensor A S).obj K).map (ordinaryFiniteProjectiveLineTrace N hN A hA S hS) ≫
       (derivedTensorSingleUnitIso K).hom
 
 end AlgebraicGeometry.Etale
