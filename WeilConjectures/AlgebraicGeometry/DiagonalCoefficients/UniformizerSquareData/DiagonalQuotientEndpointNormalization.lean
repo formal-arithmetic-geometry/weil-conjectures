@@ -57,8 +57,9 @@ def quotientAdjunctionAux
       (Functor.mapDerivedCategoryCompIso q.eW.F.asEquivalence.inverse
         (ScalarCompatibility.compositeRestriction q.route.first q.route.second)).symm
 
-/-- The shift compatibility class of `quotientAdjunctionAux`, named so that the exported signature of
-`quotientAdjunction_commShift` stays small (reducible: instance search sees the class). -/
+/-- The shift compatibility class of `quotientAdjunctionAux`, named so that the exported
+signature of `quotientAdjunction_commShift` stays small (reducible: instance search sees
+the class). -/
 abbrev quotientAdjunction_commShift_stmt
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
