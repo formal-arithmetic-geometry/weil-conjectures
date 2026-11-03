@@ -86,10 +86,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
     (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f]
     (E : DerivedCategoryModule Λ X)
-    (_hbounded : ∃ c d : ℤ, E.IsGE c ∧ E.IsLE d)
-    (a b : ℤ) (_hab : a ≤ b) (_hTor : DerivedCategory.hasTorAmplitudeIn Λ X a b E)
-    (N : ℕ) (_hNpos : 1 ≤ N) (_hN : N • 𝟙 E = 0)
-    (_hNY : IsUnit (N : Γ(Y, ⊤))) (M : ModuleCat.{u + 1} Λ) :
+    (N : ℕ) (hNpos : 1 ≤ N) (hN : N • 𝟙 E = 0) (M : ModuleCat.{u + 1} Λ) :
     IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app E).app
       ((_root_.DerivedCategory.singleFunctor _ 0).obj
         ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))) := by
@@ -111,7 +108,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
   have hT : ∀ P, N • 𝟙 (T.obj P) = 0 := by
     intro P
     let B := (derivedTensor A X).flip.obj P
-    have hh := congrArg B.map _hN
+    have hh := congrArg B.map hN
     have hid : B.map (𝟙 E) = 𝟙 (T.obj P) := B.map_id E
     rwa [Functor.map_nsmul, hid, Functor.map_zero] at hh
   have hR (I : Type (u + 1)) (P : I → _root_.DerivedCategory A) :
@@ -122,7 +119,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
     let := derived_hasCoproducts
       (C := Sheaf Y.smallEtaleTopology A) I
     have : IsIso (sigmaComparison R K) :=
-      isIso_sigmaComparison_rightDerivedLowerStar_of_fixedExponent Λ f hcd N _hNpos I K
+      isIso_sigmaComparison_rightDerivedLowerStar_of_fixedExponent Λ f hcd N hNpos I K
         (fun i ↦ hT _)
     have : PreservesColimit (Discrete.functor K) R :=
       PreservesCoproduct.of_iso_comparison R K

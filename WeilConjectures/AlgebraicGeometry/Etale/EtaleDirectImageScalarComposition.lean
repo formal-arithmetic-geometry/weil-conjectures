@@ -303,7 +303,7 @@ theorem scalarMate_directImage_composition
   simp only [← Functor.map_comp_assoc, kA, Iso.hom_inv_id_app]
   apply ((((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) s).comp
     (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) r)).homEquiv _ _).symm).injective
-  erw [scalarCompositeMateAdjunct φ r s M]
+  erw [scalarMate_comp_homEquiv_symm φ r s M]
   conv_rhs =>
     rw [mapDerivedUpperStarLowerStarAdjunction_eq,
       mapDerivedUpperStarLowerStarAdjunction_eq, transport_iterated_adjunct]
@@ -374,7 +374,7 @@ theorem scalarMate_directImage_identity
       Q.map ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) T).inv.app U) := by
     apply (cancel_mono
       (Q.map ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) T).hom.app U))).1
-    rw [Category.assoc, (etaleScalarPullbackIdentityNormalization φ T).2.2 U]
+    rw [Category.assoc, (leftDerivedUpperStarId_scalarExtension_normalization φ T).2.2 U]
     simp only [Q, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.id_obj]
     exact (scalarExtension φ T).map_id _ |>.symm
   rw [← identity_counit B T (Q.obj M)]

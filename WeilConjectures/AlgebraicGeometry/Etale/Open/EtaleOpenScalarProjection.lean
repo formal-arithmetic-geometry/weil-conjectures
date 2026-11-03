@@ -171,7 +171,7 @@ symmetry/scalar square holds on homogeneous flat K-flat tensors with the same
 Koszul sign on each side and descends by localization. Thus the displayed
 square holds for arbitrary K and M, including zero objects and the empty open;
 no boundedness, flatness, or finite coefficient hypothesis is used. -/
-theorem etaleOpenScalarProjection
+theorem compactOpenProjection_scalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :
