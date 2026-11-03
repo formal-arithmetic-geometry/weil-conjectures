@@ -13,6 +13,7 @@ import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.
 import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.AbstractAssembly
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
+import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.DerivedCompositionFactors
 
 /-! # Forward coherence of the integral scalar comparison
 
@@ -195,9 +196,57 @@ theorem fdIntegralScalarPresentationForward
       (FdIntegralScalarForward.eD_heh l Ω T h (ordinary h))
       (FdIntegralScalarForward.eD_heh l Ω T k (ordinary k))
       (FdIntegralScalarForward.eD_heh l Ω T (h.trans k) (ordinary (h.trans k)))
-      -- `FdIntegralScalarForward.ODcomp_fac l Ω T h k` proves this equation, but its instance
-      -- paths differ from the ones fixed here and the kernel conversion times out.
-      sorry
+      -- The categories, instances and functors are given in the form fixed by this goal, so the
+      -- kernel never compares two instance paths (see `derived_comp_factors`).
+      (fun P ↦ by
+        refine FdIntegralScalarForward.derived_comp_factors
+          (C₁ := scalarReductionSource l (pbcFiniteField.{u} l Ω E) T)
+          (C₂ := scalarReductionSource l (pbcFiniteField.{u} l Ω L) T)
+          (C₃ := scalarReductionSource l (pbcFiniteField.{u} l Ω M) T)
+          (aC₁ := @SheafOfModules.instAbelian _ _ _ _
+            (@GrothendieckTopology.hasSheafify_proEtTopology AddCommGrpCat _ _ _ T)
+            (sfAbBijective T))
+          (aC₂ := @SheafOfModules.instAbelian _ _ _ _
+            (@GrothendieckTopology.hasSheafify_proEtTopology AddCommGrpCat _ _ _ T)
+            (sfAbBijective T))
+          (aC₃ := @SheafOfModules.instAbelian _ _ _ _
+            (@GrothendieckTopology.hasSheafify_proEtTopology AddCommGrpCat _ _ _ T)
+            (sfAbBijective T))
+          (dC₁ := scalarReductionSourceDerived l (pbcFiniteField.{u} l Ω E) T)
+          (dC₂ := scalarReductionSourceDerived l (pbcFiniteField.{u} l Ω L) T)
+          (dC₃ := scalarReductionSourceDerived l (pbcFiniteField.{u} l Ω M) T)
+          (oh := (integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L)
+            (pbcFiniteFieldInclusion l Ω h) T).mapHomologicalComplex (.up ℤ))
+          (ok := (integralOrdinaryScalar l (pbcFiniteField.{u} l Ω L) (pbcFiniteField.{u} l Ω M)
+            (pbcFiniteFieldInclusion l Ω k) T).mapHomologicalComplex (.up ℤ))
+          (ohk := (integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E)
+            (pbcFiniteField.{u} l Ω M) (pbcFiniteFieldInclusion l Ω (h.trans k)) T
+            ).mapHomologicalComplex (.up ℤ))
+          (Oh := integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
+            (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T)
+          (Ok := integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω L)
+            (pbcFiniteField.{u} l Ω M) (pbcFiniteFieldInclusion l Ω k) T)
+          (Ohk := integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
+            (pbcFiniteField.{u} l Ω M) (pbcFiniteFieldInclusion l Ω (h.trans k)) T)
+          (integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L)
+            (pbcFiniteFieldInclusion l Ω h) T)
+          (integralOrdinaryScalar l (pbcFiniteField.{u} l Ω L) (pbcFiniteField.{u} l Ω M)
+            (pbcFiniteFieldInclusion l Ω k) T)
+          (integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω M)
+            ((pbcFiniteFieldInclusion l Ω k).comp (pbcFiniteFieldInclusion l Ω h)) T)
+          (integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω M)
+            (pbcFiniteFieldInclusion l Ω (h.trans k)) T)
+          ?_ ?_ ?_ ?_ ?_ ?_ _ _ _ ?_ ?_ ?_
+          (integralOrdinaryScalarComp l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L)
+            (pbcFiniteFieldInclusion l Ω h) T (pbcFiniteField.{u} l Ω M)
+            (pbcFiniteFieldInclusion l Ω k))
+          (congrArg (fun ι ↦ integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E)
+            (pbcFiniteField.{u} l Ω M) ι T) (FdIntegralScalarForward.inclusion_comp l Ω h k))
+          _ (FdIntegralScalarForward.Ocomp_eq l Ω T h k) _ ?_
+          (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
+            (pbcFiniteField.{u} l Ω M) ι T) (FdIntegralScalarForward.inclusion_comp l Ω h k))
+          _ (heq_of_eq (FdIntegralScalarForward.ODcomp_eq l Ω T h k)) P
+        all_goals rfl)
       (FdIntegralScalarForward.pbcDerivedComp_counit _ _ _
         (pbcCompletedScalarMap_comp l Ω T h k))
       (FdIntegralScalarForward.chain_cocycle l Ω T h k (ordinary h) (ordinary k)
