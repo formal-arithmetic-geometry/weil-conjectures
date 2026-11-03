@@ -355,7 +355,8 @@ theorem carrier_eq (M : WeilModule D l T₀) :
     ((functor D m hm T₀ Y₀ f₀ l).obj M).carrier =
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
         (geometricMap D m hm T₀ Y₀ f₀)).obj M.carrier := by
-  sorry
+  unfold functor
+  rfl
 
 end WeilConjectures.NativeCondensedPullback
 
