@@ -264,7 +264,8 @@ private theorem canonical_origin_properties (A : Type (u + 1)) [CommRing A] [Fin
   have hb := (Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) T).prop_of_iso
     (asIso (adj.unit.app H) ≪≫ U.mapIso e) hH
   obtain ⟨a, b, hab⟩ := hK.2
-  refine ⟨hb, a, b, DerivedCategory.torAmplitudeIn_of_mapDerivedCategory A ?_⟩
+  refine ⟨hb, a, b, DerivedCategory.torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar
+    A ?_⟩
   exact (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) T a b).prop_of_iso
     (asIso (adj.counit.app K)).symm hab
 
