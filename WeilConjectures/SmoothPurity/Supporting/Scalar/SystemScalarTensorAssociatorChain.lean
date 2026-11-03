@@ -9,6 +9,7 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedPullbackTensorFinit
 public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerRealizationData
 import all WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerComparisonData
 import all WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorConstraintCompletion
+import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorCochainAssociativity
 
 /-! # Strict scalar extension commutes with reassociation of total tensors
 
@@ -40,38 +41,6 @@ variable (l : ℕ) [Fact l.Prime]
   [Algebra (Padic l) E] [Algebra (Padic l) L]
   [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (W : Scheme.{u})
-
-/-- Paste a cochain square through an adjunction unit.
-Source: naturality of the adjunction unit
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private theorem adjunction_comparison_paste {B D : Type*} [Category B] [Category D]
-    {F : B ⥤ D} {G : D ⥤ B} (adj : F ⊣ G)
-    {P Q : B} {T V T' V' : D} (a : P ⟶ Q)
-    (b : F.obj Q ⟶ T) (c : T ⟶ V)
-    (b' : F.obj P ⟶ T') (c' : T' ⟶ V') (d : V' ⟶ V)
-    (h : a ≫ adj.unit.app Q ≫ G.map b ≫ G.map c =
-      adj.unit.app P ≫ G.map b' ≫ G.map c' ≫ G.map d) :
-    F.map a ≫ b ≫ c = b' ≫ c' ≫ d := by
-  apply (adj.homEquiv _ _).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  simp only [Functor.map_comp]
-  have hu := adj.unit.naturality a
-  dsimp only [Functor.id_map, Functor.comp_map] at hu
-  rw [← Category.assoc, ← hu]
-  simpa only [Category.assoc] using h
-
-/-- Pasting the six pure-section equations requires only function congruence.
-Source: the pure-tensor calculation of Stacks 07A4
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private theorem associativitySectionSquare
-    {A B C D E F G H : Type*}
-    (σ : A → B) (ηB : B → C) (κB : C → D) (tB : D → H)
-    (ηA : A → E) (κA : E → F) (tA : F → G) (τ : G → H)
-    (x : A) (b : B) (d : D) (h : H) (f : F) (g : G)
-    (hσ : σ x = b) (hκB : κB (ηB b) = d) (htB : tB d = h)
-    (hκA : κA (ηA x) = f) (htA : tA f = g) (hτ : τ g = h) :
-    tB (κB (ηB (σ x))) = τ (tA (κA (ηA x))) := by
-  rw [hσ, hκB, htB, hκA, htA, hτ]
 
 /-- The strict scalar comparison on a generator of arbitrary total degree.
 Source: Stacks 07A4 (blueprint: lem-pur-derived-pullback-tensor-constraints). -/

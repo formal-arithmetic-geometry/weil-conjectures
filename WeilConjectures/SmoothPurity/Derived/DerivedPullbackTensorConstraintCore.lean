@@ -12,6 +12,7 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorAssociat
 import all WeilConjectures.PoincareDuality.Derived.DerivedPullbackTensorFiniteConstraints
 
 import all WeilConjectures.SmoothPurity.Pullback.PullbackTensorReductionCalculus
+import all WeilConjectures.SmoothPurity.Rational.RationalAssociatorScalarExtensionSquare
 import all WeilConjectures.SmoothPurity.Rational.RationalTensorStageCoherence
 import all WeilConjectures.CategoryTheory.BilinearCoefficientDescent.BilinearCoefficientDescent
 import WeilConjectures.CategoryTheory.BilinearCoefficientDescent.StageTensorBraiding
@@ -230,31 +231,6 @@ private theorem braiding_square_of_iso
   simp only [Category.assoc]
   rw [reassoc_of% (e.hom.naturality (β A B).hom), reassoc_of% (hc A B)]
   rw [← hn (e.inv.app A) (e.inv.app B)]
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem scalarMap_integral_local
-    (l : ℕ) [Fact l.Prime] (E F : Type u) [Field E] [Field F]
-    [Algebra (Padic l) E] [Algebra (Padic l) F]
-    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]
-    (ι : E →ₐ[Padic l] F) (X : Scheme.{u})
-    (A B : sfRationalConstructibleCategory l E X)
-    (A₀ B₀ : sfIntegralConstructibleCategory l E X)
-    (hA : A = (sfRationalConstructibleLocalization l E X).obj A₀)
-    (hB : B = (sfRationalConstructibleLocalization l E X).obj B₀)
-    (f : A ⟶ B) (f₀ : A₀ ⟶ B₀)
-    (hf : HEq f ((sfRationalConstructibleLocalization l E X).map f₀)) :
-    HEq ((sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι).map f)
-      ((sfRationalConstructibleLocalization l F X).map
-        ((sfConstructibleIntegralScalarExtension 0 l
-          (Nat.Prime.ne_zero (Fact.out : l.Prime)) E F ι X).map f₀)) := by
-  cases hA
-  cases hB
-  cases hf
-  simpa only [map_one, sfRationalConstructibleLocalization, ScalarLocalization.localization,
-    sfRationalScalarExtension, sfConstructibleIntegralScalarExtension] using
-    sfRationalScalarExtension_map_tmul l E X 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι A₀ B₀ f₀ 1
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

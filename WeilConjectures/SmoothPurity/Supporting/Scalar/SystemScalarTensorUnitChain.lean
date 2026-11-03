@@ -11,6 +11,7 @@ public import WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTensorU
 import all WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerComparisonData
 import all WeilConjectures.SmoothPurity.Scalar.ScalarExtensionTensorUnit
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorUnitRightRepresentatives
+import all WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTensorBraiding
 
 /-! # Strict scalar extension of the coefficient-ring complex
 
@@ -157,22 +158,6 @@ theorem tensorSection_one_zero (M : coefficientSequenceModules l E W) (V : (ℕ 
     integralComparisonSequenceTensorSection l E L ι W M V 1 0 = 0 := by
   have h := tensorSection_one_smul l E L ι W M V 0 0
   rwa [zero_smul, map_zero, zero_smul] at h
-theorem sigmaDegree (P Q : Complex l E W) (p q k : ℤ) (h : p + q = k)
-    (V : (ℕ × W.ProEt)ᵒᵖ) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :
-    ((((comparisons l).sigma E L ι W).hom.app (P, Q)).f k).val.app V (
-      integralComparisonSequenceTensorSection l E L ι W
-        (((tensor l E W).obj (P, Q)).X k) V 1
-        (coefficientTensorGenerator.{u, u + 1, u}
-          (coefficientSequenceTopology (ProEt.topology W))
-          (coefficientSequenceCommRingSheaf l E W) P Q p q k h V x y)) =
-      coefficientTensorGenerator.{u, u + 1, u}
-        (coefficientSequenceTopology (ProEt.topology W))
-        (coefficientSequenceCommRingSheaf l L W)
-        ((scalar l E L ι W).obj P) ((scalar l E L ι W).obj Q) p q k h V
-        (integralComparisonSequenceTensorSection l E L ι W (P.X p) V 1 x)
-        (integralComparisonSequenceTensorSection l E L ι W (Q.X q) V 1 y) := by
-  subst k
-  exact (comparisons l).sigma_formula E L ι W P Q p q V 1 x y
 
 set_option maxHeartbeats 800000 in
 -- Section maps pass through the scalar adjunction and the total-tensor sheafification.

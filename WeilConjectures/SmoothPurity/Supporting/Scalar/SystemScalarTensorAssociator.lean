@@ -9,6 +9,8 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedPullbackTensorFinit
 public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerRealizationData
 import WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTensorAssociatorChain
 import WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluationCalculus
+import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorAssociativityRepresentatives
+import all WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorComparison
 
 /-! # Scalar extension preserves the associator of coherent systems
 
@@ -34,21 +36,6 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 section Helpers
 open MonoidalCategory
-
-/-- The selected calculus retains the system normalization from its resolution model.
-Source: Stacks 07A4 and 0941 (blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private theorem pullbackTensor_systemTensorCoherence (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (W : Scheme.{u}) :
-    ∃ β : @SymmetricCategory (coefficientSequenceDerived l E W) _
-      (pullbackTensorCalculus l E W).systemClosed.monoidal,
-      Nonempty (RingedDerivedTensorCoherence.{u + 1, u, u}
-        (coefficientSequenceTopology (ProEt.topology W))
-        (coefficientSequenceCommRingSheaf l E W)
-        (pullbackTensorCalculus l E W).systemClosed
-        (pullbackTensorCalculus l E W).systemTensorModel β) := by
-  unfold pullbackTensorCalculus
-  exact (coefficientDerivedSystemEvaluationCalculus l E W).choose_spec.some.systemTensorCoherence
 
 /-- Total tensors of flat-term K-flat complexes are again flat-term K-flat.
 Source: Stacks 06YS and 07A2 (blueprint: lem-pur-derived-pullback-tensor-constraints). -/
@@ -81,162 +68,6 @@ private theorem localization_comparison_paste
   rw [he]
   simpa only [Functor.map_comp, Category.assoc] using
     congrArg (fun f ↦ e.app P ≫ G.map f) h
-
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private theorem left_square {B : Type*} [Category B] [MonoidalCategory B]
-    {A : Type*} [Category A] [MonoidalCategory A]
-    (F : B ⥤ A)
-    (μ : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
-    {X Y Z V W : B} {X' Y' Z' V' W' : A}
-    (i : V ⟶ X ⊗ Y) (j : W ⟶ V ⊗ Z)
-    (eX : F.obj X ⟶ X') (eY : F.obj Y ⟶ Y') (eZ : F.obj Z ⟶ Z')
-    (eV : F.obj V ⟶ V') (eW : F.obj W ⟶ W')
-    (i' : V' ⟶ X' ⊗ Y') (j' : W' ⟶ V' ⊗ Z')
-    (hi : F.map i ≫ μ.hom.app (X, Y) ≫ (eX ⊗ₘ eY) = eV ≫ i')
-    (hj : F.map j ≫ μ.hom.app (V, Z) ≫ (eV ⊗ₘ eZ) = eW ≫ j') :
-    F.map (j ≫ (i ▷ Z)) ≫ μ.hom.app (X ⊗ Y, Z) ≫
-        (μ.hom.app (X, Y) ▷ F.obj Z) ≫ ((eX ⊗ₘ eY) ⊗ₘ eZ) =
-      eW ≫ j' ≫ (i' ▷ Z') := by
-  dsimp only [Functor.comp_obj, Functor.prod_obj] at *
-  have hn := μ.hom.naturality (X := (V, Z)) (Y := (X ⊗ Y, Z)) (i, 𝟙 Z)
-  simp only [Functor.comp_map, Functor.prod_map, tensor_map, F.map_id, tensorHom_id] at hn
-  calc
-    _ = F.map j ≫ μ.hom.app (V, Z) ≫
-        ((F.map i ≫ μ.hom.app (X, Y) ≫ (eX ⊗ₘ eY)) ⊗ₘ eZ) := by
-      simp only [F.map_comp, Category.assoc]
-      rw [reassoc_of% hn]
-      simp only [← tensorHom_id, tensorHom_comp_tensorHom,
-        Category.id_comp]
-      erw [Category.id_comp]
-    _ = F.map j ≫ μ.hom.app (V, Z) ≫ ((eV ≫ i') ⊗ₘ eZ) := by rw [hi]
-    _ = (F.map j ≫ μ.hom.app (V, Z) ≫ (eV ⊗ₘ eZ)) ≫ (i' ▷ Z') := by
-      simp only [← tensorHom_id, tensorHom_comp_tensorHom, Category.comp_id, Category.assoc]
-    _ = _ := by rw [hj]; simp only [Category.assoc]
-
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private theorem right_square {B : Type*} [Category B] [MonoidalCategory B]
-    {A : Type*} [Category A] [MonoidalCategory A]
-    (F : B ⥤ A)
-    (μ : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
-    {X Y Z V W : B} {X' Y' Z' V' W' : A}
-    (i : V ⟶ Y ⊗ Z) (j : W ⟶ X ⊗ V)
-    (eX : F.obj X ⟶ X') (eY : F.obj Y ⟶ Y') (eZ : F.obj Z ⟶ Z')
-    (eV : F.obj V ⟶ V') (eW : F.obj W ⟶ W')
-    (i' : V' ⟶ Y' ⊗ Z') (j' : W' ⟶ X' ⊗ V')
-    (hi : F.map i ≫ μ.hom.app (Y, Z) ≫ (eY ⊗ₘ eZ) = eV ≫ i')
-    (hj : F.map j ≫ μ.hom.app (X, V) ≫ (eX ⊗ₘ eV) = eW ≫ j') :
-    F.map (j ≫ (X ◁ i)) ≫ μ.hom.app (X, Y ⊗ Z) ≫
-        (F.obj X ◁ μ.hom.app (Y, Z)) ≫ (eX ⊗ₘ (eY ⊗ₘ eZ)) =
-      eW ≫ j' ≫ (X' ◁ i') := by
-  dsimp only [Functor.comp_obj, Functor.prod_obj] at *
-  have hn := μ.hom.naturality (X := (X, V)) (Y := (X, Y ⊗ Z)) (𝟙 X, i)
-  simp only [Functor.comp_map, Functor.prod_map, tensor_map, F.map_id, id_tensorHom] at hn
-  calc
-    _ = F.map j ≫ μ.hom.app (X, V) ≫
-        (eX ⊗ₘ (F.map i ≫ μ.hom.app (Y, Z) ≫ (eY ⊗ₘ eZ))) := by
-      simp only [F.map_comp, Category.assoc]
-      rw [reassoc_of% hn]
-      simp only [← id_tensorHom, tensorHom_comp_tensorHom,
-        Category.id_comp]
-      erw [Category.id_comp]
-    _ = F.map j ≫ μ.hom.app (X, V) ≫ (eX ⊗ₘ (eV ≫ i')) := by rw [hi]
-    _ = (F.map j ≫ μ.hom.app (X, V) ≫ (eX ⊗ₘ eV)) ≫ (X' ◁ i') := by
-      simp only [← id_tensorHom, tensorHom_comp_tensorHom, Category.comp_id, Category.assoc]
-    _ = _ := by rw [hj]; simp only [Category.assoc]
-
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private theorem associativity_transport
-    {B : Type*} [Category B] [MonoidalCategory B]
-    {A : Type*} [Category A] [MonoidalCategory A]
-    (F : B ⥤ A)
-    (μ : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
-    {X Y Z V W : B} {X' Y' Z' V' W' : A}
-    (l : V ≅ (X ⊗ Y) ⊗ Z) (r : W ≅ X ⊗ (Y ⊗ Z)) (a : V ⟶ W)
-    (l' : V' ⟶ (X' ⊗ Y') ⊗ Z') (r' : W' ⟶ X' ⊗ (Y' ⊗ Z')) (a' : V' ⟶ W')
-    (eX : F.obj X ≅ X') (eY : F.obj Y ≅ Y') (eZ : F.obj Z ≅ Z')
-    (eV : F.obj V ⟶ V') (eW : F.obj W ⟶ W')
-    (hB : l.hom ≫ (α_ X Y Z).hom = a ≫ r.hom)
-    (hA : l' ≫ (α_ X' Y' Z').hom = a' ≫ r')
-    (hL : F.map l.hom ≫ μ.hom.app (X ⊗ Y, Z) ≫
-      (μ.hom.app (X, Y) ▷ F.obj Z) ≫ ((eX.hom ⊗ₘ eY.hom) ⊗ₘ eZ.hom) = eV ≫ l')
-    (hR : F.map r.hom ≫ μ.hom.app (X, Y ⊗ Z) ≫
-      (F.obj X ◁ μ.hom.app (Y, Z)) ≫ (eX.hom ⊗ₘ (eY.hom ⊗ₘ eZ.hom)) = eW ≫ r')
-    (hC : F.map a ≫ eW = eV ≫ a') :
-    F.map (α_ X Y Z).hom ≫ μ.hom.app (X, Y ⊗ Z) ≫
-        (F.obj X ◁ μ.hom.app (Y, Z)) =
-      μ.hom.app (X ⊗ Y, Z) ≫ (μ.hom.app (X, Y) ▷ F.obj Z) ≫
-        (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom := by
-  apply (cancel_epi (F.map l.hom)).1
-  apply (cancel_mono (eX.hom ⊗ₘ (eY.hom ⊗ₘ eZ.hom))).1
-  calc
-    _ = F.map a ≫ F.map r.hom ≫ μ.hom.app (X, Y ⊗ Z) ≫
-        (F.obj X ◁ μ.hom.app (Y, Z)) ≫ (eX.hom ⊗ₘ (eY.hom ⊗ₘ eZ.hom)) := by
-      rw [← F.map_comp_assoc, hB, F.map_comp]
-      simp only [Category.assoc]
-    _ = F.map a ≫ eW ≫ r' := by rw [hR]
-    _ = eV ≫ a' ≫ r' := by rw [reassoc_of% hC]
-    _ = eV ≫ l' ≫ (α_ X' Y' Z').hom := by rw [hA]
-    _ = F.map l.hom ≫ μ.hom.app (X ⊗ Y, Z) ≫
-        (μ.hom.app (X, Y) ▷ F.obj Z) ≫ ((eX.hom ⊗ₘ eY.hom) ⊗ₘ eZ.hom) ≫
-          (α_ X' Y' Z').hom := by rw [reassoc_of% hL]
-    _ = _ := by
-      erw [associator_naturality]
-      simp only [Category.assoc]
-      rfl
-
-/-- Natural transformations out of a functor of three variables agree once they agree on
-triples of objects from a resolving class.
-Source: naturality (blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private theorem tripleNatTrans_ext_resolving
-    {B : Type*} [Category B] {D : Type*} [Category D]
-    {E : Type*} [Category E] (q : B ⥤ D) (P : ObjectProperty B)
-    (res : ∀ X : D, ∃ Y : B, P Y ∧ Nonempty (q.obj Y ≅ X))
-    {F G : D × D × D ⥤ E} (a b : F ⟶ G)
-    (h : ∀ U V W : B, P U → P V → P W →
-      a.app (q.obj U, q.obj V, q.obj W) = b.app (q.obj U, q.obj V, q.obj W)) :
-    a = b := by
-  apply NatTrans.ext
-  funext X
-  obtain ⟨U, hU, ⟨eU⟩⟩ := res X.1
-  obtain ⟨V, hV, ⟨eV⟩⟩ := res X.2.1
-  obtain ⟨W, hW, ⟨eW⟩⟩ := res X.2.2
-  let e := Iso.prod eU (Iso.prod eV eW)
-  apply (cancel_epi (F.map e.hom)).1
-  rw [a.naturality, b.naturality, h U V W hU hV hW]
-
-section Paths
-variable {D : Type*} [Category D] [MonoidalCategory D]
-  {E : Type*} [Category E] [MonoidalCategory E]
-  (F : D ⥤ E) (μ : tensor D ⋙ F ≅ (F.prod F) ⋙ tensor E)
-
-/-- The left side of the associativity square of a tensor comparison, as a transformation.
-Source: naturality (blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private def assocLeftPath :
-    leftAssocTensor D ⋙ F ⟶ (F.prod (F.prod F)) ⋙ rightAssocTensor E :=
-  Functor.whiskerRight (associatorNatIso D).hom F ≫
-    Functor.whiskerLeft ((𝟭 D).prod (tensor D)) μ.hom ≫
-      Functor.whiskerRight (NatTrans.prod (𝟙 F) μ.hom) (tensor E)
-
-/-- The right side of the associativity square of a tensor comparison, as a transformation.
-Source: naturality (blueprint: lem-pur-derived-pullback-tensor-constraints). -/
-private def assocRightPath :
-    leftAssocTensor D ⋙ F ⟶ (F.prod (F.prod F)) ⋙ rightAssocTensor E := by
-  let p₁ := CategoryTheory.Prod.fst D (D × D)
-  let p₂ := CategoryTheory.Prod.snd D (D × D) ⋙ CategoryTheory.Prod.fst D D
-  let p₃ := CategoryTheory.Prod.snd D (D × D) ⋙ CategoryTheory.Prod.snd D D
-  let p₁₂ := p₁.prod' p₂
-  exact Functor.whiskerLeft ((p₁₂ ⋙ tensor D).prod' p₃) μ.hom ≫
-    Functor.whiskerRight
-      (NatTrans.prod' (Functor.whiskerLeft p₁₂ μ.hom) (𝟙 (p₃ ⋙ F))) (tensor E) ≫
-    Functor.whiskerLeft (F.prod (F.prod F)) (associatorNatIso E).hom
-
-end Paths
 
 end Helpers
 
