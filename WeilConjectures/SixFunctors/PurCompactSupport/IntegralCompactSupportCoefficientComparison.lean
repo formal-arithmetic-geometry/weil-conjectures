@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportScalarTensor
+import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportRestrictionComposition
 
 public import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 public import WeilConjectures.SmoothPurity.Integral.IntegralRationalQbarCompactSupport
@@ -423,8 +424,15 @@ theorem comparison_composition {R S T : Coefficients.{u}}
         (comparison b c).app ((pbcDerivedExtend (a.map X)).obj M) ≫
         (image T c).map ((tensorComposition (a.map X) (b.map X) (d.map X) (h X)).hom.app M) =
       (tensorComposition (a.map Y) (b.map Y) (d.map Y) (h Y)).hom.app
-          ((image R c).obj M) ≫ (comparison d c).app M := by
-  sorry
+          ((image R c).obj M) ≫ (comparison d c).app M :=
+  CategoryTheory.mateEquiv_symm_app_comp_leftAdjointUniq (image R c) (image S c) (image T c)
+    (pbcDerivedScalarAdjunction (a.map X)) (pbcDerivedScalarAdjunction (b.map X))
+    (pbcDerivedScalarAdjunction (d.map X)) (pbcDerivedScalarAdjunction (a.map Y))
+    (pbcDerivedScalarAdjunction (b.map Y)) (pbcDerivedScalarAdjunction (d.map Y))
+    (pbcDerivedRestrictComp (a.map X) (b.map X) (d.map X) (h X))
+    (pbcDerivedRestrictComp (a.map Y) (b.map Y) (d.map Y) (h Y))
+    (restriction a c).hom (restriction b c).hom (restriction d c).hom
+    (fun N ↦ restriction_comp a b d h c N) M
 
 /-- Identity scalar restriction has the identity section functions, uniquely.
 Source: Stacks Tag 03DA

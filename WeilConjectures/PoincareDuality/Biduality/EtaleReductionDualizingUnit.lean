@@ -116,21 +116,6 @@ noncomputable def finiteCoefficientDerivedEquivalenceUnitIso :
 
 end FiniteCoefficient
 
-/-- `Rν_*` sends the monoidal unit `Λ` of `D(X_proét, Λ)` to the monoidal unit `Λ` of
-`D(X_ét, Λ)`: the pro-étale unit is `ν^*` of the étale unit
-(`DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso`), and the unit
-`M ⟶ Rν_* ν^* M` of the comparison adjunction is invertible on the bounded below `M = Λ`
-(`isIso_derivedComparisonAdjunction_unit_app`). -/
-noncomputable def rightDerivedComparisonLowerStarUnitIso (X : Scheme.{u}) (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] :
-    (R(ν_*(X)[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _ :=
-  haveI := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) X (𝟙_ _)
-    ⟨0, _root_.DerivedCategory.TStructure.t.isGE_of_iso
-      (_root_.DerivedCategory.singleFunctorObjUnitIso _) 0⟩
-  (R(ν_*(X)[ModuleCat.{u + 1} Λ])).mapIso
-      (DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso Λ X).symm ≪≫
-    (asIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app (𝟙_ _))).symm
-
 namespace CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]

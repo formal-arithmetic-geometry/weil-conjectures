@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOrigin
 
 /-!
@@ -31,12 +31,26 @@ open CategoryTheory
 
 open scoped CategoryTheory.Functor
 
-namespace AlgebraicGeometry.ProEtale.DerivedCategory
+namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+
+/-- For `f` quasi-compact and quasi-separated and a bounded below complex `K'` of étale sheaves,
+the pro-étale direct image of `ν^* K'` is `ν^* Rf_* K'`: the component at `K'` of the comparison
+isomorphism `AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonIso'` (blueprint
+`prop-weil-pbc-comparison-direct-image`). -/
+noncomputable def rightDerivedLowerStarMapDerivedCategoryObjIso
+    (K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (hK' : _root_.DerivedCategory.TStructure.t.plus K') :
+    (R(ProEtale.lowerStar A f)).obj (D(ν^*(X)[A]).obj K') ≅
+      D(ν^*(Y)[A]).obj ((R(Etale.lowerStar A f)).obj K') :=
+  ((rightDerivedLowerStarComparisonIso' f A).app ⟨K', hK'⟩).symm ≪≫
+    D(ν^*(Y)[A]).mapIso ((Etale.lowerStar A f).rightDerivedFunctorPlusCompatibility.app ⟨K', hK'⟩)
+
+namespace DerivedCategory
 
 /-- The pro-étale derived direct image along a quasi-compact quasi-separated morphism preserves
 bounded below complexes of étale origin. -/
@@ -52,4 +66,6 @@ lemma plusEtaleOrigin_rightDerivedLowerStar_obj
     ((Etale.lowerStar A f).rightDerivedFunctorPlusCompatibility.app ⟨K', hK'⟩)
     ((R+(Etale.lowerStar A f)).obj ⟨K', hK'⟩).property
 
-end AlgebraicGeometry.ProEtale.DerivedCategory
+end DerivedCategory
+
+end AlgebraicGeometry.ProEtale
