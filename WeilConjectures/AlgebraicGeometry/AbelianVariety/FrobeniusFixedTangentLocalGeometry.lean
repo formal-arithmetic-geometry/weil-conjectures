@@ -16,6 +16,8 @@ import WeilConjectures.TraceFormula.FiniteFieldDatum.FrobeniusAffineEqualizer.Fr
 import WeilConjectures.PointCount
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.Compactification.FiniteFieldDatum.TraceFormulaSchemeFrobeniusGeometry
+public import WeilConjectures.TraceFormula.FixedSchemeGeometry
 
 /-!
 # Regular local geometry of Frobenius fixed points
@@ -203,7 +205,7 @@ private theorem exists_stable_power_chart (D : FiniteFieldDatum.{u})
     (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     (m : ℕ) (hm : 1 ≤ m) (h : D.geometricFiber X₀ ⟶ D.geometricFiber X₀)
-    (hh : h.left = D.schemeFrobeniusIterate X₀ m)
+    (hh : h.left = D.coefficientFreeSchemeFrobeniusIterate X₀ m)
     (x : (D.geometricFiber X₀).left) :
     ∃ (O : (D.geometricFiber X₀).left.Opens) (_hO : IsAffineOpen O), x ∈ O ∧
       ∃ (hstable : O ≤ h.left ⁻¹ᵁ O) (r : ℕ) (t : Fin r → Γ((D.geometricFiber X₀).left, O)),
@@ -257,7 +259,6 @@ private theorem exists_stable_power_chart (D : FiniteFieldDatum.{u})
   change e ((tensorFrobenius D (A i) m) (t v)) = _
   rw [hpower, map_pow]
   rw [pow_mul, ← D.cardinality_eq]
-
 
 private theorem residue_point_base (k : Type u) [Field k] (X : Scheme.{u})
     (p : X ⟶ Spec (.of k)) (x : X) :
@@ -404,37 +405,37 @@ theorem frobenius_fixed_tangent_local_geometry (D : FiniteFieldDatum.{u})
     (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     (m : ℕ) (hm : 1 ≤ m) (h : D.geometricFiber X₀ ⟶ D.geometricFiber X₀)
-    (hh : h.left = D.schemeFrobeniusIterate X₀ m)
-    (z : trfEndomorphismFixedScheme (D.geometricFiber X₀) h)
-    (r : Spec (.of D.k) ⟶ trfEndomorphismFixedScheme (D.geometricFiber X₀) h)
-    (hrs : r ≫ (trfEndomorphismFixedInclusion (D.geometricFiber X₀) h ≫
+    (hh : h.left = D.coefficientFreeSchemeFrobeniusIterate X₀ m)
+    (z : geometricEndomorphismFixedScheme (D.geometricFiber X₀) h)
+    (r : Spec (.of D.k) ⟶ geometricEndomorphismFixedScheme (D.geometricFiber X₀) h)
+    (hrs : r ≫ (geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h ≫
       (D.geometricFiber X₀).hom) = 𝟙 _)
     (hrz : r (IsLocalRing.closedPoint D.k) = z)
     (hF : Function.Bijective (StructureSheaf.toStalk D.k
-      ((trfEndomorphismFixedInclusion (D.geometricFiber X₀) h ≫
+      ((geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h ≫
         (D.geometricFiber X₀).hom) z) ≫
-      (trfEndomorphismFixedInclusion (D.geometricFiber X₀) h ≫
+      (geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h ≫
         (D.geometricFiber X₀).hom).stalkMap z).hom)
     (U : (D.geometricFiber X₀).left.Opens)
-    (hz : trfEndomorphismFixedInclusion (D.geometricFiber X₀) h z ∈ U)
+    (hz : geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h z ∈ U)
     (hU : Smooth (U.ι ≫ (D.geometricFiber X₀).hom))
     (hx : pullback.diagonal (D.geometricFiber X₀).hom
-        (trfEndomorphismFixedInclusion (D.geometricFiber X₀) h z) =
-      trfFixedGraphMap (D.geometricFiber X₀) h
-        (trfEndomorphismFixedInclusion (D.geometricFiber X₀) h z))
-    (heG : Function.Bijective ((trfFixedGraphMap (D.geometricFiber X₀) h).residueFieldMap
-      (trfEndomorphismFixedInclusion (D.geometricFiber X₀) h z)).hom)
+        (geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h z) =
+      geometricFixedGraphMap (D.geometricFiber X₀) h
+        (geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h z))
+    (heG : Function.Bijective ((geometricFixedGraphMap (D.geometricFiber X₀) h).residueFieldMap
+      (geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h z)).hom)
     (heΔ : Function.Bijective ((pullback.diagonal (D.geometricFiber X₀).hom).residueFieldMap
-      (trfEndomorphismFixedInclusion (D.geometricFiber X₀) h z)).hom) :
+      (geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h z)).hom) :
     let X := D.geometricFiber X₀
-    let x' := trfEndomorphismFixedInclusion X h z
+    let x' := geometricEndomorphismFixedInclusion X h z
     let P := pullback X.hom X.hom
     let pP := pullback.fst X.hom X.hom ≫ X.hom
-    let g := trfFixedGraphMap X h
+    let g := geometricFixedGraphMap X h
     let δ := pullback.diagonal X.hom
       let tG := schemeTangentMap D.k X.left P X.hom pP g
         (by
-          dsimp [g, pP, trfFixedGraphMap]
+          dsimp [g, pP, geometricFixedGraphMap]
           rw [← Category.assoc, pullback.lift_fst]
           exact Category.id_comp _) x' heG
       let tΔ := schemeTangentMap D.k X.left P X.hom pP δ
@@ -473,18 +474,18 @@ theorem frobenius_fixed_tangent_local_geometry (D : FiniteFieldDatum.{u})
     change QuasiCompact (pullback.snd X₀.hom
       (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
     infer_instance
-  let i := trfEndomorphismFixedInclusion X h
+  let i := geometricEndomorphismFixedInclusion X h
   let x : Spec (.of D.k) ⟶ X.left := r ≫ i
   have xs : x ≫ X.hom = 𝟙 _ := by
     simpa only [x, i, Category.assoc] using hrs
   have xh : x ≫ h.left = x :=
-    (trfEndomorphismFixedScheme_equalizer X h (Spec (.of D.k)) x).1 r
+    (geometricEndomorphismFixedScheme_equalizer X h (Spec (.of D.k)) x).1 r
   have hxz : x (IsLocalRing.closedPoint D.k) = i z := by
     change i (r (IsLocalRing.closedPoint D.k)) = i z
     rw [hrz]
   have hLift : fixedLift X.hom h.left (Over.w h) x xh = r := by
     obtain ⟨l, hl, hu⟩ :=
-      (trfEndomorphismFixedScheme_equalizer X h (Spec (.of D.k)) x).2.mpr xh
+      (geometricEndomorphismFixedScheme_equalizer X h (Spec (.of D.k)) x).2.mpr xh
     have h1 : fixedLift X.hom h.left (Over.w h) x xh ≫ i = x :=
       pullback.lift_fst _ _ _
     exact (hu _ h1).trans (hu r rfl).symm
@@ -508,7 +509,7 @@ theorem frobenius_fixed_tangent_local_geometry (D : FiniteFieldDatum.{u})
   have H := powerMap_smooth_graph_local_data D.k D.p D.prime X.left X.hom
     h.left (Over.w h) x xs xh O hO hxO hstable rgen t ht (D.a * m)
       (by have := Nat.mul_le_mul D.exponent_pos hm; simpa using this) hpower
-  have hgraph : graph X.hom h.left (Over.w h) = trfFixedGraphMap X h := by
+  have hgraph : graph X.hom h.left (Over.w h) = geometricFixedGraphMap X h := by
     rfl
   simp only [hgraph] at H
   rw [hxz] at H
@@ -522,7 +523,7 @@ theorem frobenius_fixed_tangent_local_geometry (D : FiniteFieldDatum.{u})
     hWmap, hWmap_eq, gW, dW, hgf, hgs, hdf, hds, hgc, hdc,
     mP, hmf, hms, hmP, hxP, I, J, hI, hJ, hA, hRI, hRJ,
     hrP, hrI, hrJ, hdim, hIdim, hJdim, hIJ, hrest⟩ := hregular'
-  have hI' : I = RingHom.ker ((trfFixedGraphMap X h).stalkMap (i z)).hom := by
+  have hI' : I = RingHom.ker ((geometricFixedGraphMap X h).stalkMap (i z)).hom := by
     simpa [stalkMapAt] using hI
   have hJ' : J = RingHom.ker
       (((pullback X.hom X.hom).presheaf.stalkCongr
@@ -553,7 +554,7 @@ theorem frobenius_fixed_tangent_local_geometry (D : FiniteFieldDatum.{u})
     simpa only [← Category.assoc, he] using hsm''
   · let P := pullback X.hom X.hom
     let pP := pullback.fst X.hom X.hom ≫ X.hom
-    let y := trfFixedGraphMap X h (i z)
+    let y := geometricFixedGraphMap X h (i z)
     let T := schemeTangentSpace D.k X.left X.hom (i z)
     let f := residueStructure D.k P pP y
     let q := residueStructure D.k X.left X.hom (i z)
@@ -569,9 +570,9 @@ theorem frobenius_fixed_tangent_local_geometry (D : FiniteFieldDatum.{u})
       intro v
       apply Subtype.ext
       rw [hEsymm]
-      exact (tangent_map_value_at D.k X.left P X.hom pP (trfFixedGraphMap X h)
+      exact (tangent_map_value_at D.k X.left P X.hom pP (geometricFixedGraphMap X h)
         (by
-          dsimp [pP, trfFixedGraphMap]
+          dsimp [pP, geometricFixedGraphMap]
           rw [← Category.assoc, pullback.lift_fst]
           exact Category.id_comp _) (i z) y rfl heG hr v).trans (hEg v).symm
     · have himage :

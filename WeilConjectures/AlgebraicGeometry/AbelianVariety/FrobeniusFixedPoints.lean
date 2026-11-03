@@ -21,6 +21,8 @@ import WeilConjectures.PointCount
 import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusFactorization
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks
+public import WeilConjectures.Compactification.FiniteFieldDatum.TraceFormulaSchemeFrobeniusGeometry
+public import WeilConjectures.TraceFormula.FixedSchemeGeometry
 
 /-!
 # Frobenius fixed points
@@ -102,7 +104,7 @@ private theorem exists_evaluation_atlas (D : FiniteFieldDatum.{u})
     (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     (m : ℕ) (hm : 1 ≤ m) (h : D.geometricFiber X₀ ⟶ D.geometricFiber X₀)
-    (hh : h.left = D.schemeFrobeniusIterate X₀ m)
+    (hh : h.left = D.coefficientFreeSchemeFrobeniusIterate X₀ m)
     (x : D.extensionPoints X₀ m hm → (Spec (.of D.k) ⟶ (D.geometricFiber X₀).left))
     (hxs : ∀ y, x y ≫ (D.geometricFiber X₀).hom = 𝟙 _)
     (hxp : ∀ y, x y ≫ pullback.fst X₀.hom
@@ -221,20 +223,20 @@ private theorem extension_point_family_fixed (D : WeilConjectures.FiniteFieldDat
     (hxp : ∀ y, x y ≫ pullback.fst X₀.hom
         (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
       Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype) ≫ y.left) :
-    ∀ y, x y ≫ D.schemeFrobeniusIterate X₀ m = x y := by
+    ∀ y, x y ≫ D.coefficientFreeSchemeFrobeniusIterate X₀ m = x y := by
   let X := D.geometricFiber X₀
   let π := pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
-  let P : End X.left := D.schemeFrobenius X₀
+  let P : End X.left := D.coefficientFreeSchemeFrobenius X₀
   let Q : End X₀.left := X₀.left.iterateFrobenius D.prime (D.model_characteristic X₀.hom) D.a
   have hP : P ≫ π = π ≫ Q := (D.relativeFrobenius_projections X₀).1
   have hQ : Q ^ m = X₀.left.iterateFrobenius D.prime
       (D.model_characteristic X₀.hom) (D.a * m) :=
     (absolute_mul X₀.left D.p D.prime (D.model_characteristic X₀.hom) D.a m).symm
-  have hπ : D.schemeFrobeniusIterate X₀ m ≫ π = π ≫
+  have hπ : D.coefficientFreeSchemeFrobeniusIterate X₀ m ≫ π = π ≫
       X₀.left.iterateFrobenius D.prime (D.model_characteristic X₀.hom) (D.a * m) := by
     change (P ^ m) ≫ π = _
     rw [pow_intertwine P Q π hP, hQ]
-  have hs : D.schemeFrobeniusIterate X₀ m ≫ X.hom = X.hom := by
+  have hs : D.coefficientFreeSchemeFrobeniusIterate X₀ m ≫ X.hom = X.hom := by
     have hc : P ≫ X.hom = X.hom := by
       change D.relativeFrobenius X₀ ≫ (D.geometricFiber X₀).hom = (D.geometricFiber X₀).hom
       exact (D.relativeFrobenius_projections X₀).2
@@ -260,9 +262,9 @@ private theorem extension_point_family_fixed (D : WeilConjectures.FiniteFieldDat
           exact (hroot c).symm)
     simpa using h
   apply pullback.hom_ext
-  · change (x y ≫ D.schemeFrobeniusIterate X₀ m) ≫ π = x y ≫ π
+  · change (x y ≫ D.coefficientFreeSchemeFrobeniusIterate X₀ m) ≫ π = x y ≫ π
     rw [Category.assoc, hπ, ← Category.assoc, hxp, Category.assoc, hy]
-  · change (x y ≫ D.schemeFrobeniusIterate X₀ m) ≫ X.hom = x y ≫ X.hom
+  · change (x y ≫ D.coefficientFreeSchemeFrobeniusIterate X₀ m) ≫ X.hom = x y ≫ X.hom
     rw [Category.assoc, hs]
 
 private theorem stalk_iso_of_global_structure (k : Type u) [Field k] (F : Scheme.{u})
@@ -379,7 +381,7 @@ private theorem frobenius_postcomposition (D : WeilConjectures.FiniteFieldDatum.
     (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     (m : ℕ) (hm : 1 ≤ m) (h : D.geometricFiber X₀ ⟶ D.geometricFiber X₀)
-    (hh : h.left = D.schemeFrobeniusIterate X₀ m)
+    (hh : h.left = D.coefficientFreeSchemeFrobeniusIterate X₀ m)
     (x : (D.geometricFiber X₀).left)
     (v : schemeTangentSpace D.k (D.geometricFiber X₀).left (D.geometricFiber X₀).hom x) :
     v.val ≫ h.left = Spec.map (CommRingCat.ofHom
@@ -387,9 +389,9 @@ private theorem frobenius_postcomposition (D : WeilConjectures.FiniteFieldDatum.
         ((D.geometricFiber X₀).left.residueField x))) ≫
           (D.geometricFiber X₀).left.fromSpecResidueField x ≫ h.left := by
   let X := D.geometricFiber X₀
-  let S : End X.left := D.arithmeticGaloisFrobenius X₀
+  let S : End X.left := (D.geometricFrobenius X₀).inv
   have hS : IsIso S := by
-    dsimp [S, WeilConjectures.FiniteFieldDatum.arithmeticGaloisFrobenius]
+    dsimp [S]
     infer_instance
   have : IsIso (S ^ m) :=
     (isUnit_iff_isIso _).mp (((isUnit_iff_isIso S).mpr hS).pow m)
@@ -417,29 +419,30 @@ private theorem section_residue_bijective {X Y : Scheme.{u}} (f : X ⟶ Y) (g : 
 
 private theorem fixed_graph_diagonal_point {D : FiniteFieldDatum.{u}}
     (X : Over (Spec (.of D.k))) (h : X ⟶ X)
-    (z : trfEndomorphismFixedScheme X h) :
-    pullback.diagonal X.hom (trfEndomorphismFixedInclusion X h z) =
-      trfFixedGraphMap X h (trfEndomorphismFixedInclusion X h z) := by
-  let i := trfEndomorphismFixedInclusion X h
-  let d := pullback.snd (trfFixedGraphMap X h) (pullback.diagonal X.hom)
+    (z : geometricEndomorphismFixedScheme X h) :
+    pullback.diagonal X.hom (geometricEndomorphismFixedInclusion X h z) =
+      geometricFixedGraphMap X h (geometricEndomorphismFixedInclusion X h z) := by
+  let i := geometricEndomorphismFixedInclusion X h
+  let d := pullback.snd (geometricFixedGraphMap X h) (pullback.diagonal X.hom)
   have hid : i = d := by
     have hc := congrArg (fun f ↦ f ≫ pullback.fst X.hom X.hom)
-      (pullback.condition (f := trfFixedGraphMap X h) (g := pullback.diagonal X.hom))
-    simpa [i, d, trfEndomorphismFixedInclusion, trfFixedGraphMap, Category.assoc] using hc
-  have hc : i ≫ trfFixedGraphMap X h = i ≫ pullback.diagonal X.hom := by
+      (pullback.condition (f := geometricFixedGraphMap X h) (g := pullback.diagonal X.hom))
+    simpa [i, d, geometricEndomorphismFixedInclusion, geometricFixedGraphMap, Category.assoc]
+      using hc
+  have hc : i ≫ geometricFixedGraphMap X h = i ≫ pullback.diagonal X.hom := by
     calc
-      i ≫ trfFixedGraphMap X h = d ≫ pullback.diagonal X.hom := pullback.condition
+      i ≫ geometricFixedGraphMap X h = d ≫ pullback.diagonal X.hom := pullback.condition
       _ = i ≫ pullback.diagonal X.hom := by rw [hid]
   exact (congrArg
-    (fun f : trfEndomorphismFixedScheme X h ⟶ pullback X.hom X.hom ↦ f z) hc).symm
+    (fun f : geometricEndomorphismFixedScheme X h ⟶ pullback X.hom X.hom ↦ f z) hc).symm
 
 private theorem graph_diagonal_residue_bijective {D : FiniteFieldDatum.{u}}
     (X : Over (Spec (.of D.k))) (h : X ⟶ X) (x : X.left) :
-    Function.Bijective ((trfFixedGraphMap X h).residueFieldMap x).hom ∧
+    Function.Bijective ((geometricFixedGraphMap X h).residueFieldMap x).hom ∧
     Function.Bijective ((pullback.diagonal X.hom).residueFieldMap x).hom := by
   constructor
-  · exact section_residue_bijective (trfFixedGraphMap X h) (pullback.fst X.hom X.hom)
-      (by simp [trfFixedGraphMap]) x
+  · exact section_residue_bijective (geometricFixedGraphMap X h) (pullback.fst X.hom X.hom)
+      (by simp [geometricFixedGraphMap]) x
   · exact section_residue_bijective (pullback.diagonal X.hom) (pullback.fst X.hom X.hom)
       (by simp) x
 
@@ -587,44 +590,44 @@ theorem frobenius_fixed_points
     (m : ℕ) (hm : 1 ≤ m) :
     let X := D.geometricFiber X₀
     let h : X ⟶ X :=
-      Over.homMk (D.schemeFrobeniusIterate X₀ m) (by
+      Over.homMk (D.coefficientFreeSchemeFrobeniusIterate X₀ m) (by
         revert hm
         induction m with
-        | zero => intro hm; simp [FiniteFieldDatum.schemeFrobeniusIterate, X]
+        | zero => intro hm; simp [FiniteFieldDatum.coefficientFreeSchemeFrobeniusIterate, X]
         | succ m ih =>
           intro hm
           cases m with
           | zero =>
-            simpa [FiniteFieldDatum.schemeFrobeniusIterate,
-              FiniteFieldDatum.schemeFrobenius, X] using
+            simpa [FiniteFieldDatum.coefficientFreeSchemeFrobeniusIterate,
+              FiniteFieldDatum.coefficientFreeSchemeFrobenius, X] using
               (FiniteFieldDatum.relativeFrobenius_projections D X₀).2
           | succ m =>
-            let Φ : End X.left := D.schemeFrobenius X₀
+            let Φ : End X.left := D.coefficientFreeSchemeFrobenius X₀
             have ih' : (Φ ^ (Nat.succ m)) ≫ X.hom = X.hom := by
-              simpa [FiniteFieldDatum.schemeFrobeniusIterate, Φ] using ih (by omega)
+              simpa [FiniteFieldDatum.coefficientFreeSchemeFrobeniusIterate, Φ] using ih (by omega)
             have hΦ : Φ ≫ X.hom = X.hom := by
-              simpa [Φ, X, FiniteFieldDatum.schemeFrobenius] using
+              simpa [Φ, X, FiniteFieldDatum.coefficientFreeSchemeFrobenius] using
                 (FiniteFieldDatum.relativeFrobenius_projections D X₀).2
             change (Φ ^ (Nat.succ (Nat.succ m))) ≫ X.hom = X.hom
             rw [pow_succ]
             simp [Category.assoc, ih', hΦ])
-    let F := trfEndomorphismFixedScheme X h
+    let F := geometricEndomorphismFixedScheme X h
     ∃ e : F ≅ ∐ fun _ : D.extensionPoints X₀ m hm => Spec (.of D.k),
       (Finite (D.extensionPoints X₀ m hm) ∧
-        IsFinite (trfEndomorphismFixedInclusion X h ≫ X.hom) ∧
-        Etale (trfEndomorphismFixedInclusion X h ≫ X.hom)) ∧
+        IsFinite (geometricEndomorphismFixedInclusion X h ≫ X.hom) ∧
+        Etale (geometricEndomorphismFixedInclusion X h ≫ X.hom)) ∧
       (∀ y : D.extensionPoints X₀ m hm,
         (Sigma.ι (fun _ : D.extensionPoints X₀ m hm => Spec (.of D.k)) y ≫
-            e.inv ≫ trfEndomorphismFixedInclusion X h ≫ X.hom = 𝟙 (Spec (.of D.k))) ∧
+            e.inv ≫ geometricEndomorphismFixedInclusion X h ≫ X.hom = 𝟙 (Spec (.of D.k))) ∧
         (Sigma.ι (fun _ : D.extensionPoints X₀ m hm => Spec (.of D.k)) y ≫
-            e.inv ≫ trfEndomorphismFixedInclusion X h ≫
+            e.inv ≫ geometricEndomorphismFixedInclusion X h ≫
             pullback.fst X₀.hom
               (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
           Scheme.Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype).op ≫ y.left)) ∧
       (∀ z : F,
         ∃ e₀ : F.presheaf.stalk z ≅ CommRingCat.of D.k,
-          (StructureSheaf.toStalk D.k ((trfEndomorphismFixedInclusion X h ≫ X.hom) z) ≫
-            (trfEndomorphismFixedInclusion X h ≫ X.hom).stalkMap z) ≫ e₀.hom =
+          (StructureSheaf.toStalk D.k ((geometricEndomorphismFixedInclusion X h ≫ X.hom) z) ≫
+            (geometricEndomorphismFixedInclusion X h ≫ X.hom).stalkMap z) ≫ e₀.hom =
               𝟙 (CommRingCat.of D.k) ∧
           Module.length (F.presheaf.stalk z) (F.presheaf.stalk z) = 1) ∧
       (∀ x : X.left, h.left x = x →
@@ -632,18 +635,18 @@ theorem frobenius_fixed_points
           AlgebraicGeometry.schemeTangentMap D.k X.left X.left X.hom X.hom h.left
             (by exact Over.w h) x he = 0) ∧
       (∀ (x : F) (U : X.left.Opens),
-        trfEndomorphismFixedInclusion X h x ∈ U → Smooth (U.ι ≫ X.hom) →
-        let x' := trfEndomorphismFixedInclusion X h x
+        geometricEndomorphismFixedInclusion X h x ∈ U → Smooth (U.ι ≫ X.hom) →
+        let x' := geometricEndomorphismFixedInclusion X h x
         let P := pullback X.hom X.hom
         let pP := pullback.fst X.hom X.hom ≫ X.hom
-        let g := trfFixedGraphMap X h
+        let g := geometricFixedGraphMap X h
         let δ := pullback.diagonal X.hom
         ∃ (hx : δ x' = g x')
           (heG : Function.Bijective (g.residueFieldMap x').hom)
           (heΔ : Function.Bijective (δ.residueFieldMap x').hom),
           let tG := schemeTangentMap D.k X.left P X.hom pP g
             (by
-              dsimp [g, pP, trfFixedGraphMap]
+              dsimp [g, pP, geometricFixedGraphMap]
               rw [← Category.assoc, pullback.lift_fst]
               exact Category.id_comp _) x' heG
           let tΔ := schemeTangentMap D.k X.left P X.hom pP δ
@@ -670,28 +673,28 @@ theorem frobenius_fixed_points
   dsimp only
   let X := D.geometricFiber X₀
   let h : X ⟶ X :=
-    Over.homMk (D.schemeFrobeniusIterate X₀ m) (by
+    Over.homMk (D.coefficientFreeSchemeFrobeniusIterate X₀ m) (by
       revert hm
       induction m with
-      | zero => intro hm; simp [FiniteFieldDatum.schemeFrobeniusIterate, X]
+      | zero => intro hm; simp [FiniteFieldDatum.coefficientFreeSchemeFrobeniusIterate, X]
       | succ m ih =>
         intro hm
         cases m with
         | zero =>
-          simpa [FiniteFieldDatum.schemeFrobeniusIterate,
-            FiniteFieldDatum.schemeFrobenius, X] using
+          simpa [FiniteFieldDatum.coefficientFreeSchemeFrobeniusIterate,
+            FiniteFieldDatum.coefficientFreeSchemeFrobenius, X] using
             (FiniteFieldDatum.relativeFrobenius_projections D X₀).2
         | succ m =>
-          let Φ : End X.left := D.schemeFrobenius X₀
+          let Φ : End X.left := D.coefficientFreeSchemeFrobenius X₀
           have ih' : (Φ ^ (Nat.succ m)) ≫ X.hom = X.hom := by
-            simpa [FiniteFieldDatum.schemeFrobeniusIterate, Φ] using ih (by omega)
+            simpa [FiniteFieldDatum.coefficientFreeSchemeFrobeniusIterate, Φ] using ih (by omega)
           have hΦ : Φ ≫ X.hom = X.hom := by
-            simpa [Φ, X, FiniteFieldDatum.schemeFrobenius] using
+            simpa [Φ, X, FiniteFieldDatum.coefficientFreeSchemeFrobenius] using
               (FiniteFieldDatum.relativeFrobenius_projections D X₀).2
           change (Φ ^ (Nat.succ (Nat.succ m))) ≫ X.hom = X.hom
           rw [pow_succ]
           simp [Category.assoc, ih', hΦ])
-  change ∃ e : trfEndomorphismFixedScheme X h ≅ _, _
+  change ∃ e : geometricEndomorphismFixedScheme X h ≅ _, _
   obtain ⟨x, hxs, hxp⟩ := exists_extension_point_family D X₀ m hm
   have hfixed : ∀ y, x y ≫ h.left = x y :=
     extension_point_family_fixed D X₀ m hm x hxp
@@ -700,28 +703,28 @@ theorem frobenius_fixed_points
   have (j : Fin atlas.n) : Finite (atlas.Pj j) := atlas.finiteLabels j
   obtain ⟨hfinite, q, hq, _hunique, hqiso, _hcharts, hfin, het, hstalk⟩ :=
     equalizer_point_chart_descent D.k X.left X.hom h.left (Over.w h)
-      (trfFixedGraphMap X h)
-      (by simp [trfFixedGraphMap]) (by simp [trfFixedGraphMap])
+      (geometricFixedGraphMap X h)
+      (by simp [geometricFixedGraphMap]) (by simp [geometricFixedGraphMap])
       (Fin atlas.n) (fun j ↦ atlas.B j) atlas.c atlas.covers atlas.overBase
       atlas.φ atlas.commutes atlas.I atlas.differenceIdeal
       (D.extensionPoints X₀ m hm) x hxs hfixed atlas.Pj atlas.labels
       atlas.ε atlas.evaluation
   have : IsIso q := hqiso
   let e := (asIso q).symm
-  have hstalk' (z : trfEndomorphismFixedScheme X h) :
-      ∃ e₀ : (trfEndomorphismFixedScheme X h).presheaf.stalk z ≅ CommRingCat.of D.k,
+  have hstalk' (z : geometricEndomorphismFixedScheme X h) :
+      ∃ e₀ : (geometricEndomorphismFixedScheme X h).presheaf.stalk z ≅ CommRingCat.of D.k,
         (StructureSheaf.toStalk D.k
-          ((trfEndomorphismFixedInclusion X h ≫ X.hom) z) ≫
-          (trfEndomorphismFixedInclusion X h ≫ X.hom).stalkMap z) ≫ e₀.hom = 𝟙 _ :=
+          ((geometricEndomorphismFixedInclusion X h ≫ X.hom) z) ≫
+          (geometricEndomorphismFixedInclusion X h ≫ X.hom).stalkMap z) ≫ e₀.hom = 𝟙 _ :=
     stalk_iso_of_global_structure D.k _ _ z (hstalk z).1
-  have hbij (z : trfEndomorphismFixedScheme X h) :
+  have hbij (z : geometricEndomorphismFixedScheme X h) :
       Function.Bijective (StructureSheaf.toStalk D.k
-        ((trfEndomorphismFixedInclusion X h ≫ X.hom) z) ≫
-        (trfEndomorphismFixedInclusion X h ≫ X.hom).stalkMap z).hom := by
+        ((geometricEndomorphismFixedInclusion X h ≫ X.hom) z) ≫
+        (geometricEndomorphismFixedInclusion X h ≫ X.hom).stalkMap z).hom := by
     obtain ⟨e₀, he₀⟩ := hstalk' z
     have heq : StructureSheaf.toStalk D.k
-        ((trfEndomorphismFixedInclusion X h ≫ X.hom) z) ≫
-        (trfEndomorphismFixedInclusion X h ≫ X.hom).stalkMap z = e₀.inv := by
+        ((geometricEndomorphismFixedInclusion X h ≫ X.hom) z) ≫
+        (geometricEndomorphismFixedInclusion X h ≫ X.hom).stalkMap z = e₀.inv := by
       rw [← cancel_mono e₀.hom, he₀, e₀.inv_hom_id]
     rw [heq]
     exact ConcreteCategory.bijective_of_isIso e₀.inv
@@ -734,14 +737,14 @@ theorem frobenius_fixed_points
   refine ⟨e, ⟨hfinite, hfin, het⟩, ?_, ?_, hzero, ?_⟩
   · intro y
     constructor
-    · simpa only [e, Iso.symm_inv, asIso_hom, trfEndomorphismFixedInclusion,
+    · simpa only [e, Iso.symm_inv, asIso_hom, geometricEndomorphismFixedInclusion,
         Scheme.Spec_map, Quiver.Hom.unop_op, Category.assoc] using
         (congrArg (fun f ↦ f ≫ X.hom) (hq y)).trans (hxs y)
     · change Sigma.ι (fun _ : D.extensionPoints X₀ m hm ↦ Spec (.of D.k)) y ≫
-        e.inv ≫ trfEndomorphismFixedInclusion X h ≫
+        e.inv ≫ geometricEndomorphismFixedInclusion X h ≫
           pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
             Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype) ≫ y.left
-      simpa only [e, Iso.symm_inv, asIso_hom, trfEndomorphismFixedInclusion,
+      simpa only [e, Iso.symm_inv, asIso_hom, geometricEndomorphismFixedInclusion,
         Category.assoc] using
         (congrArg (fun f ↦ f ≫ pullback.fst X₀.hom
           (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) (hq y)).trans (hxp y)
@@ -750,11 +753,11 @@ theorem frobenius_fixed_points
     exact ⟨e₀, he₀, (hstalk z).2⟩
   · intro z U hz hU
     obtain ⟨r, hrs, hrz⟩ := section_of_stalk_bijection D.k
-      (trfEndomorphismFixedScheme X h)
-      (trfEndomorphismFixedInclusion X h ≫ X.hom) z (hbij z)
+      (geometricEndomorphismFixedScheme X h)
+      (geometricEndomorphismFixedInclusion X h ≫ X.hom) z (hbij z)
     have hx := fixed_graph_diagonal_point (D := D) X h z
     obtain ⟨heG, heΔ⟩ := graph_diagonal_residue_bijective (D := D) X h
-      (trfEndomorphismFixedInclusion X h z)
+      (geometricEndomorphismFixedInclusion X h z)
     have hlocal := frobenius_fixed_tangent_local_geometry D X₀ m hm h rfl
       z r hrs hrz (hbij z) U hz hU hx heG heΔ
     obtain ⟨hW, hcomparison, d, hA, hI, hJ, hdim, hIdim, hJdim, hIJ⟩ := hlocal
