@@ -363,6 +363,20 @@ import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Mathlib.CategoryTheory.Limits.Types.ColimitType
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import Mathlib.CategoryTheory.Products.Basic
+public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionRingIsoSupplement
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.CategoryTheory.ConstantRingSectionRigidity
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteModuleEquivalence
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteTopology
+public import WeilConjectures.CategoryTheory.Ringed.RingedEquivalenceSlices
+public import WeilConjectures.ProEtaleCoefficients.RingedStrictTowerHomotopyLimit
+public import WeilConjectures.ProperBaseChange.ConstantCompletionCore
+public import WeilConjectures.ProperBaseChange.ConstantCompletionOrdinaryPullComparison
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
+public import WeilConjectures.SmoothPurity.ConstantCompletionOrdinaryFinitePullExistence
 
 /-!
 # Strict quotient towers and the completed-adjunction mate
@@ -2412,6 +2426,68 @@ def comparisonT {h : Morphism X X'} {k : Morphism Y' X'}
   NatIso.ofComponents (comparisonTComponent A I)
     (fun a ↦ comparisonT_naturality A I _ _ a)
 
+/-- Projection invertibility and finite source normalization for the completed mate.
+Source: Stacks 0944, 0B56, 0941.
+(blueprint: lem-sp-completion-mate-projection-finite).
+
+Proof: realize the four corners on the diagram site of positive quotient levels,
+using one K-flat resolution and the termwise quotient tensor construction. The
+diagonal comparison identifies diagram mates with the ordinary derived mate. Apply
+the finite perfect projection formula at every level, then use exact evaluation and
+the componentwise criterion for isomorphisms of strict towers. Finally evaluate the
+normalized comparison at each level; the canonical finite source isomorphism and
+the finite projection formula give the displayed equation. These are the original
+projection and finite-source steps of the parent argument, isolated as the first
+strict sub-conclusion.
+-/
+theorem completionMateProjectionAndFinite
+    {f : Morphism Y X} {g : Morphism Y Y'} {h : Morphism X X'} {k : Morphism Y' X'}
+    (sq : Square f g h k) (A : Type u) [CommRing A] [IsNoetherianRing A]
+    (I : Ideal A) (_hperfect : PerfectQuotients A I) :
+    (∀ K : X.Complete A I,
+      IsIso (projectionComparison (f := f) (g := g) A I K.obj)) ∧
+    (∀ (K : X.Complete A I) (n : ℕ),
+      (Y'.evaluate A n).map (projectionComparison (f := f) (g := g) A I K.obj) ≫
+          (finiteSourceIso (f := f) (g := g) A I n K.obj).hom =
+        (Y'.finiteEvaluationIso A I n).hom.app ((g.pull A).obj ((f.push A).obj K.obj)) ≫
+          (Y'.finiteRestriction A I n).map
+            (finiteProjectionComparison (f := f) (g := g) A I n K.obj)) := by
+  sorry
+
+/-- Completed mate coherence and finite target normalization.
+Source: Stacks 099M, 099N, 0E48, 0941.
+(blueprint: lem-sp-completion-mate-exchange-finite).
+
+Proof: use the ringed-tower limit comparison to identify the completed direct-image
+map, then apply the exchange tensor coherence on the four diagram sites. Naturality
+of the projection mate gives the normalized completion-unit equation. The universal
+property of completion identifies the resulting transformation with the completed
+mate, and the adjunction transpose calculation yields the first displayed equality.
+For each finite quotient, evaluate the same unit-square-counit formula. Exactness of
+evaluation and scalar restriction, together with the canonical finite pullback and
+direct-image comparisons, identifies it with ordinary exchange over the quotient
+ring. This proves the finite target equation and isolates the remaining strict
+sub-conclusion of the parent argument.
+-/
+theorem completionMateExchangeAndFinite
+    {f : Morphism Y X} {g : Morphism Y Y'} {h : Morphism X X'} {k : Morphism Y' X'}
+    (sq : Square f g h k) (A : Type u) [CommRing A] [IsNoetherianRing A]
+    (I : Ideal A) (_hperfect : PerfectQuotients A I) :
+    (Functor.whiskerRight (completeExchange sq A I) (ObjectProperty.ι (Y'.IsComplete A I)) ≫
+        (comparisonT (h := h) (k := k) A I).hom =
+      comparisonS (f := f) (g := g) A I ≫
+        Functor.whiskerRight
+          (Functor.whiskerLeft (ObjectProperty.ι (X.IsComplete A I) ⋙ X.reduction A I)
+            (towerExchange sq A)) (Y'.rlim A)) ∧
+    (∀ (K : X.Complete A I) (n : ℕ),
+      (Y'.evaluate A n).map ((towerExchange sq A).app ((X.reduction A I).obj K.obj)) ≫
+          (finiteTargetIso (h := h) (k := k) A I n K.obj).hom =
+        (finiteSourceIso (f := f) (g := g) A I n K.obj).hom ≫
+          (Y'.finiteRestriction A I n).map
+            ((ordinaryExchange sq (quotientRing A I n)).app
+              ((X.finiteReduction A I n).obj K.obj))) := by
+  sorry
+
 /-- The whole-diagram mate comparison, including invertibility and the two finite
 coefficient normalization clauses.
 
@@ -2483,6 +2559,8 @@ theorem completionMateComparison
           (Y'.finiteRestriction A I n).map
             ((ordinaryExchange sq (quotientRing A I n)).app
               ((X.finiteReduction A I n).obj K.obj))) := by
-  sorry
+  obtain ⟨h₁, h₂⟩ := completionMateProjectionAndFinite sq A I _hperfect
+  obtain ⟨h₃, h₄⟩ := completionMateExchangeAndFinite sq A I _hperfect
+  exact ⟨h₁, h₂, h₃, h₄⟩
 
 end CategoryTheory.AdicSites
