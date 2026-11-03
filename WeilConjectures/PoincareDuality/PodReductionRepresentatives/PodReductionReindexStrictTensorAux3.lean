@@ -41,7 +41,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 example {X Y : Scheme.{u}} (g : X ⟶ Y) (M : coefficientSequenceModules l E Y) (U : (ℕ × Y.ProEt)ᵒᵖ)
     (x : M.val.obj U) :
     ((pullbackTensorSequenceAdjunction l E g).unit.app M).val.app U x =
-    ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.app M).val.app U x := rfl
+    ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.app M).val.app
+      U x := rfl
 
 section TotalTensor
 
@@ -68,8 +69,10 @@ theorem coefficientTensorGenerator_restrict
   let : EssentiallySmall.{u + 1} C := essentiallySmallSelf.{0, u, u + 1} C
   let := SheafOfModules.isMonoidal_W_independentCoefficients.{u + 1, u, u + 1} A
   let := SheafOfModules.monoidalCategory A
-  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients.{u + 1, u, u + 1} A
-  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients.{u + 1, u, u + 1} A
+  open SheafOfModules in
+  let := preservesZeroMorphisms_curriedTensor_independentCoefficients.{u + 1, u, u + 1} A
+  open SheafOfModules in
+  let := preservesZeroMorphisms_curriedTensor_obj_independentCoefficients.{u + 1, u, u + 1} A
   let ι := HomologicalComplex.ιMapBifunctor P Q (MonoidalCategory.curriedTensor _)
     (.up ℤ) p q k hpq
   let adj := PresheafOfModules.sheafificationAdjunction (𝟙
@@ -124,7 +127,8 @@ theorem systemChain_generator {X Y : Scheme.{u}} (g : X ⟶ Y)
   have hc := (pullbackTensorSequenceCochain_existsUnique l E g).exists.choose_spec A B p q k hpq
     V x y
   unfold systemChain
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, HomologicalComplex.comp_f]
   erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
   let e := NatIso.mapHomologicalComplex (eqToIso (inverse_eq l E g)) (.up ℤ)

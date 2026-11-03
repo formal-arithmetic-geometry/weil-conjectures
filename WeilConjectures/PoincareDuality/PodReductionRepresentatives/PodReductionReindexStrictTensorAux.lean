@@ -57,7 +57,10 @@ theorem reductionEvaluationComplex_hom_f (W : Scheme.{u}) (n : ℕ)
     (C : CochainComplex (integralTowerModules l E W) ℤ) (k : ℤ) :
     ((pullbackTensorReductionEvaluationComplex l E W n).hom.app C).f k =
       (pullbackTensorReductionEvaluation l E W n).hom.app (C.X k) := by
-  simp [pullbackTensorReductionEvaluationComplex]
+  simp only [Functor.comp_obj, pullbackTensorReductionEvaluationComplex, Iso.trans_hom,
+    Iso.symm_hom, NatTrans.comp_app, HomologicalComplex.comp_f,
+    NatIso.mapHomologicalComplex_hom_app_f, Functor.mapHomologicalComplexCompIso_inv_app_f,
+    Iso.refl_inv, NatTrans.id_app]
   exact Category.comp_id _
 
 /-- Degreewise, the inverse complex-level reduction evaluation is the termwise inverse.
@@ -66,7 +69,10 @@ theorem reductionEvaluationComplex_inv_f (W : Scheme.{u}) (n : ℕ)
     (C : CochainComplex (integralTowerModules l E W) ℤ) (k : ℤ) :
     ((pullbackTensorReductionEvaluationComplex l E W n).inv.app C).f k =
       (pullbackTensorReductionEvaluation l E W n).inv.app (C.X k) := by
-  simp [pullbackTensorReductionEvaluationComplex]
+  simp only [Functor.comp_obj, pullbackTensorReductionEvaluationComplex, Iso.trans_inv,
+    Iso.symm_inv, NatTrans.comp_app, HomologicalComplex.comp_f,
+    Functor.mapHomologicalComplexCompIso_hom_app_f, Iso.refl_hom, NatTrans.id_app,
+    NatIso.mapHomologicalComplex_inv_app_f]
   exact Category.id_comp _
 
 set_option maxHeartbeats 2000000 in

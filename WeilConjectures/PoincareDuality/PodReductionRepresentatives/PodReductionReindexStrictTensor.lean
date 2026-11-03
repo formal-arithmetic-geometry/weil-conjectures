@@ -69,7 +69,8 @@ Source: Stacks 0941. -/
 theorem sequence_restrict_injective {X : Scheme.{u}} (N : coefficientSequenceModules l E X)
     (n : ℕ) {U V : X.ProEt} (c : U ⟶ V) [IsIso c] :
     Function.Injective (N.val.map (CategoryTheory.Prod.mkHom (𝟙 n) c).op) := by
-  have : IsIso (CategoryTheory.Prod.mkHom (𝟙 n) c) := (isIso_prod_iff ℕ X.ProEt).2 ⟨inferInstance, inferInstance⟩
+  have : IsIso (CategoryTheory.Prod.mkHom (𝟙 n) c) :=
+    (isIso_prod_iff ℕ X.ProEt).2 ⟨inferInstance, inferInstance⟩
   exact (ConcreteCategory.bijective_of_isIso
     (N.val.presheaf.map (CategoryTheory.Prod.mkHom (𝟙 n) c).op)).1
 
@@ -78,9 +79,11 @@ set_option backward.isDefEq.respectTransparency false in
 Source: Stacks 09A5. -/
 theorem proEtaleIsoCommaArrow_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (U : X.ProEt) :
     IsIso (proEtaleIsoCommaArrow g U) := by
-  have : (MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.WeaklyEtale g)).IsEquivalence :=
+  have : (MorphismProperty.Over.map ⊤
+      (inferInstance : AlgebraicGeometry.WeaklyEtale g)).IsEquivalence :=
     (proEtaleIsoPostcompose_equivalence g).1
-  exact inferInstanceAs (IsIso ((MorphismProperty.Over.mapPullbackAdj @AlgebraicGeometry.WeaklyEtale ⊤ g
+  exact inferInstanceAs (IsIso ((MorphismProperty.Over.mapPullbackAdj
+    @AlgebraicGeometry.WeaklyEtale ⊤ g
     (inferInstance : AlgebraicGeometry.WeaklyEtale g) trivial).unit.app U))
 
 set_option maxHeartbeats 4000000 in
@@ -132,7 +135,8 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q) := by
   apply HomologicalComplex.hom_ext
   intro k
-  apply ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).homEquiv _ _).injective
+  apply ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).homEquiv
+    _ _).injective
   apply reduction_total_hom_ext_postcompose l E g P Q k
   intro n p q hpq U x y
   have := proEtaleIsoCommaArrow_isIso g U
