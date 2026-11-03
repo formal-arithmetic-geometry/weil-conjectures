@@ -58,19 +58,4 @@ def IsNativeExceptionalCoefficient (ℓ : ℕ) [Fact ℓ.Prime]
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-omit [IsCommMonObj Λ] in
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  (hcd : BaseFieldFiniteCD ℓ k)
-  {X Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  (f : X ⟶ Y) (hΛ : IsNativeExceptionalCoefficient ℓ Λ)
-
-section AlgebraicallyClosed
-
-variable [IsAlgClosed k]
-
-end AlgebraicallyClosed
-
 end AlgebraicGeometry.ProEtale.CondensedRing

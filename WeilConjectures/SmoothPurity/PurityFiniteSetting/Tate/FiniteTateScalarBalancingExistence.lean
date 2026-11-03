@@ -17,8 +17,8 @@ Stacks 06YN, 06YY, 07A6 and 07A4.
 
 Degree zero is the oplax monoidal unit of extension of scalars, degree one the
 root-generator normalized ordinary Tate scalar isomorphism of
-`WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalObjects`, and degree `r + 2` the oplax
-tensorator followed by the tensor product of the previous degrees. The generator
+`WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalObjects`, and degree `r + 2`
+the oplax tensorator followed by the tensor product of the previous degrees. The generator
 formula follows by induction from the monoidality of the scalar adjunction.
 -/
 

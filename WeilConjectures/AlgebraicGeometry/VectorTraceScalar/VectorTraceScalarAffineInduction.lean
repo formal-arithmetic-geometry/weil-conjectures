@@ -22,6 +22,9 @@ cor-pur-vector-bundle-purity.proof.md, paragraph 2.
 (blueprint: lem-pur-vector-scalar-affine-induction).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

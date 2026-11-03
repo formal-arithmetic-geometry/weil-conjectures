@@ -25,6 +25,9 @@ presentation used by vector integration and the affine coordinate tower. All com
 support maps are the published proper/open maps for the chosen compactification.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
