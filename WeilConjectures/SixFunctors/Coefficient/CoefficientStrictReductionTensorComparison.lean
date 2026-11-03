@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
+import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionTensor
+import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryStrictTensorNormalization
 
 /-! # Strict reduction tensor comparison and its representative normalization
 
@@ -36,6 +38,12 @@ theorem coefficientStrictReductionTensorNormalization_of
     ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅
       R.reduction.prod R.reduction ⋙ R.systemClosed.tensor,
       CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ } := by
-  sorry
+  obtain ⟨M⟩ := OrdinaryQuotient.ordinaryModel_exists l E W
+  obtain ⟨b, hb⟩ := OrdinaryQuotient.OrdinaryModel.quotientTensor_exists l E W M
+  refine OrdinaryQuotient.reductionTensorNormalization_of_quotientTensor l E W M R b
+    (fun n P Q ↦ ?_) (OrdinaryQuotient.OrdinaryModel.quotient_isKFlat l E W M)
+  have h := hb n P Q
+  unfold CoefficientComparisonEquation at h
+  exact h
 
 end WeilConjectures

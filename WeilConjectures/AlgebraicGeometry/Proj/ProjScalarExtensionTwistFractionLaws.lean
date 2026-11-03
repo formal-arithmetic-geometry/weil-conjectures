@@ -50,22 +50,10 @@ this isomorphism. The argument includes empty opens and noninvertible twists.
 (blueprint: lem-sfb-proj-scalar-extension-twist-fraction-laws). -/
 theorem scalarExtension_twist_fraction_laws
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
-    [Algebra R S] [Algebra R A] [Algebra S B]
+    [Algebra R A] [Algebra S B]
     (𝒜 : ℕ → Submodule R A) (ℬ : ℕ → Submodule S B)
     [GradedRing 𝒜] [GradedRing ℬ]
-    (ρA : R →+* 𝒜 0) (ρB : S →+* ℬ 0)
-    (hρA : ∀ a : R, (ρA a : A) = algebraMap R A a)
-    (hρB : ∀ b : S, (ρB b : B) = algebraMap S B b)
-    (β : TensorProduct R S A ≃ₐ[S] B) (ψ : 𝒜 →+*ᵍ ℬ)
-    (hβψ : ∀ a : A, β (TensorProduct.tmul R (1 : S) a) = ψ a)
-    (hgraded : ∀ n : ℕ, ℬ n = Submodule.span S (ψ '' (𝒜 n : Set A)))
-    (r : Proj ℬ ⟶ Proj 𝒜)
-    (hpre : ∀ (n : ℕ) (f : A), f ∈ 𝒜 n → 0 < n →
-      r ⁻¹ᵁ basicOpen 𝒜 f = basicOpen ℬ (ψ f))
-    (hchart : ∀ (n : ℕ) (f : A) (hf : f ∈ 𝒜 n) (hn : 0 < n),
-      awayι ℬ (ψ f) (ψ.map_mem hf) hn ≫ r =
-        Spec.map (CommRingCat.ofHom (HomogeneousLocalization.Away.map ψ f)) ≫
-          awayι 𝒜 f hf hn)
+    (ψ : 𝒜 →+*ᵍ ℬ) (r : Proj ℬ ⟶ Proj 𝒜)
     (θ : ∀ j : ℤ, (tensorPullback r).obj (twist 𝒜 j) ≅ twist ℬ j)
     (hθ : IsScalarExtensionTwistComparison ψ r θ) :
     (∀ θ' : ∀ j : ℤ, (tensorPullback r).obj (twist 𝒜 j) ≅ twist ℬ j,
@@ -88,12 +76,6 @@ theorem scalarExtension_twist_fraction_laws
 (∀ ι : ∀ j : ℤ, (tensorPullback (𝟙 (Proj 𝒜))).obj (twist 𝒜 j) ≅ twist 𝒜 j,
         IsScalarExtensionTwistComparison (GradedRingHom.id 𝒜) (𝟙 (Proj 𝒜)) ι →
         ∀ j : ℤ, ι j = (tensorPullbackSectionId (Proj 𝒜)).app (twist 𝒜 j)) := by
-  have _ := hρA
-  have _ := hρB
-  have _ := hβψ
-  have _ := hgraded
-  have _ := hpre
-  have _ := hchart
   have huniq := scalarExtension_twist_uniqueness ψ r θ hθ
   have hmul := scalarExtension_twist_multiplication ψ r θ hθ
   have hunit := scalarExtension_twist_unit ψ r θ hθ

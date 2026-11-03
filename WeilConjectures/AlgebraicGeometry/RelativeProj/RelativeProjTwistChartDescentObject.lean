@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.RelativeProjTwistChartDescentCompatibility
 import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedTensor
 import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistCompositionLaw
-import WeilConjectures.AlgebraicGeometry.TraceFormula.DirectedTensorModuleDescent
+import WeilConjectures.AlgebraicGeometry.TraceFormula.DirectedTensorMatchingSections
 
 /-! # Object part of relative Proj twist descent
 
@@ -183,9 +183,9 @@ theorem exists_twist_chart_descent_object :
     exact restriction_comparison_comp A (leOfHom f) (leOfHom g)
       (θ V W (leOfHom g)) (θ U V (leOfHom f)) (θ U W (leOfHom (f ≫ g)))
       (hθ V W (leOfHom g)) (hθ U V (leOfHom f)) (hθ U W (leOfHom (f ≫ g))) 1
-  obtain ⟨L, chart, hchart⟩ := exists_directed_tensor_module_descent 𝒰 M t ht
-  refine ⟨L, chart, ?_⟩
+  refine ⟨tensorMatchingModule 𝒰 M t, tensorMatchingChartIso 𝒰 M t ht, ?_⟩
   intro U V h
-  exact ⟨θ U V h, hθ U V h, hchart (homOfLE (X := S.affineOpens) h)⟩
+  exact ⟨θ U V h, hθ U V h,
+    tensorMatchingChartIso_condition 𝒰 M t ht (homOfLE (X := S.affineOpens) h)⟩
 
 end AlgebraicGeometry.Scheme.GradedAlgebraData

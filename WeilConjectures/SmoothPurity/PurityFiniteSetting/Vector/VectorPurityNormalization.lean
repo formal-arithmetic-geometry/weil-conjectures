@@ -428,7 +428,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 universe u v₁ v₂ w₁ w₂
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
-namespace WeilConjectures.PurityFiniteSetting
+namespace AlgebraicGeometry.Etale
 
 /-- The existing derived monoidal structure, elaborated with the same abstract coefficient
 interface as `Etale.derivedTensor`. This is a cache of the existing structure.
@@ -557,4 +557,4 @@ def VectorPurityGammaNormalized (A : Type (u + 1)) [CommRing A] [Finite A]
       (VectorBundleZeroSection.π B d F)).app
         (Etale.vectorIntegrationCoefficient A N hA B d F)) γ
 
-end WeilConjectures.PurityFiniteSetting
+end AlgebraicGeometry.Etale

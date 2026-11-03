@@ -82,27 +82,8 @@ theorem picard_derived_fibre_naturality
                   (ui i) (hui i))).left) 1 (e z) := by
   classical
   dsimp only
-  obtain ⟨U, hwU, hU, p, hp, hprime, K, C, hK, hC, hE, hCi,
-    eK, eC, eKg, eCg, hfamily⟩ :=
+  obtain ⟨U, hwU, hU, p, hp, hprime, K, C, hK, hC, m, m', φ, e, ei, hfamily⟩ :=
     picard_derived_fibre_residue_bridge f Xi fi ui hui L W k w s hw τ
-  let _ : p.IsPrime := hp
-  refine ⟨eK.symm.trans eKg, ?_⟩
-  intro i
-  obtain ⟨a, φ, hφ, hderived, hgeom⟩ := hfamily i
-  refine ⟨(eC i).symm.trans (eCg i), ?_⟩
-  intro z
-  let zr := (eK.symm) z
-  have hpre : (eC i).symm
-      ((derivedFiberCohomologyFunctor W w 1).map
-        (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) z) =
-      affineResidueCycleHomologyMap φ zr := by
-    apply (eC i).injective
-    rw [AddEquiv.apply_symm_apply, hderived]
-    simp only [zr, AddEquiv.apply_symm_apply]
-  change (eCg i) ((eC i).symm
-      ((derivedFiberCohomologyFunctor W w 1).map
-        (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) z)) = _
-  rw [hpre, hgeom]
-  rfl
+  exact ⟨e, fun i ↦ ⟨ei i, (hfamily i).2.1⟩⟩
 
 end AlgebraicGeometry.Scheme

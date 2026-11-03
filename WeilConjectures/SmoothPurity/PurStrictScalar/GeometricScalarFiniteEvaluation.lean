@@ -6,8 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.PurStrictScalar.StrictScalarFiniteEvaluationTransport
-import WeilConjectures.SmoothPurity.PurStrictScalar.NativeSupportFiniteEvaluation
-import WeilConjectures.SmoothPurity.PurStrictScalar.ConstantScalarFiniteCoordinate
 
 /-! # Finite evaluation of the geometric scalar mate
 

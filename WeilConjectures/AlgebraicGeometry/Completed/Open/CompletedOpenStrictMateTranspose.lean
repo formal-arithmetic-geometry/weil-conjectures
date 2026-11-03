@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CompletedOpenFiniteTranspose.CompletedOpenFiniteTransposeCoherence
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedRingStrictFiniteExchange
-import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenUnitMateDescent
+import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedReductionPullbackSquare
 
 /-! The strict normalized exchange is the transpose of the pulled open unit.
 Source: Stacks Project, Tag 03DI; blueprint finite-exchange paragraph

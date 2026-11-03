@@ -16,7 +16,6 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.AdicBasisLimit
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import WeilConjectures.SmoothPurity.PurStrictScalar.StrictScalarMateFiniteEvaluation
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import WeilConjectures.SmoothPurity.PurStrictScalar.ProperBiproductCoordinate
 import WeilConjectures.SmoothPurity.PurStrictScalar.StrictProperBiproductCoordinate
 
 /-! # Finite scalar proper/open mate on strict compact-support reduction towers

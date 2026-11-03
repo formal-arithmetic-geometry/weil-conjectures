@@ -120,7 +120,7 @@ Compose this equation with the identity unit equation. Cancel the pullback compo
 using its inverse and the composition unit equation. The result is the mapped unit
 of the retraction followed by the unit of the section. This is exactly the canonical
 unit map of the composite pullback. -/
-theorem canonicalDerivedPullbackSectionUnit {X S : Scheme.{u}}
+theorem leftDerivedUpperStarSection_hom_app_unit {X S : Scheme.{u}}
     (g : X ⟶ S) (p : S ⟶ X) (h : g ≫ p = 𝟙 X)
     (s : moduleObjectDerivedPullback Λ p ⋙ moduleObjectDerivedPullback Λ g ≅
       𝟭 (DerivedCategory

@@ -14,9 +14,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.RestrictScala
 import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsTorAmplitude
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDualBound
 
-import WeilConjectures.AlgebraicGeometry.Principal.PrincipalVerdierEstimate
-import WeilConjectures.AlgebraicGeometry.Principal.PrincipalVerdierBidualReduction
-
 /-!
 # Verdier biduality at the integral stage
 

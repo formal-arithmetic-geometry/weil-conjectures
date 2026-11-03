@@ -21,6 +21,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Loc
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.DerivedExactCompositionComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralPullComposition
+import all WeilConjectures.AlgebraicGeometry.System.SystemBlockDerivedComparison
 
 /-! # Proper integral-to-rational coefficient comparison
 
@@ -48,95 +50,9 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
+open WeilConjectures.SemilinearSections (exact_comp)
 
 section ProofHelpers
-
-universe u_1 u_2 u_3 u_4 v_1 v_2 v_3 v_4
-
-section
-variable {C : Type u_1} {D : Type u_2} {C' : Type u_3} {D' : Type u_4}
-  [Category.{v_1} C] [Category.{v_2} D] [Category.{v_3} C'] [Category.{v_4} D']
-  [Abelian C] [Abelian D] [Abelian C'] [Abelian D']
-  [HasDerivedCategory C] [HasDerivedCategory D]
-  [HasDerivedCategory C'] [HasDerivedCategory D']
-  [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
-  [Abelian.HasKInjectiveResolutions C']
-
-private lemma comp_unit_app (F : C ⥤ D) (G : D ⥤ D') [F.Additive] [G.Additive]
-    (K : HomotopyCategory C (.up ℤ)) :
-    (Functor.rightDerivedFunctorCompUnit F G).app K =
-      G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
-        G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app K) := by
-  have hi : (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app K =
-      𝟙 _ := by
-    have h := Iso.inv_hom_id_app
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)) K
-    erw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] at h
-    exact h
-  simp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, hi]
-  erw [DerivedCategory.Qh.map_id]
-  dsimp
-  simp only [Category.id_comp, Category.comp_id]
-
-omit [Abelian.HasKInjectiveResolutions D] in
-private lemma comp_map_fac (F : C ⥤ D) (S : D ⥤ D') [F.Additive] [S.Additive]
-    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
-    (K : HomotopyCategory C (.up ℤ)) :
-    (F ⋙ S).rightDerivedFunctorUnit.app K ≫
-        (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F S).hom.app
-          (DerivedCategory.Qh.obj K) =
-      S.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
-        S.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app K) := by
-  rw [Functor.rightDerivedFunctorCompMapDerivedCategoryIso_hom_fac,
-    Functor.rightDerivedFunctorCompMapDerivedCategoryUnit_app']
-
--- The right-derived restriction square used by derivedComapLowerStarIso.
-private noncomputable def derived_square (F : C ⥤ D) (G : C' ⥤ D')
-    (R : C ⥤ C') (S : D ⥤ D') [F.Additive] [G.Additive] [R.Additive] [S.Additive]
-    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
-    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
-    [R.PreservesKInjectiveComplexes] (e : F ⋙ S ≅ R ⋙ G) :
-    F.rightDerivedFunctor ⋙ S.mapDerivedCategory ≅ R.mapDerivedCategory ⋙ G.rightDerivedFunctor :=
-  (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F S).symm ≪≫
-    Functor.rightDerivedFunctorNatIso e ≪≫ Functor.rightDerivedFunctorCompIso R G ≪≫
-      Functor.isoWhiskerRight R.rightDerivedFunctorIsoMapDerivedCategory G.rightDerivedFunctor
-
-omit [Abelian.HasKInjectiveResolutions D] in
--- Normalize the square by its right-derived unit before composing it.
-private lemma square_fac (F : C ⥤ D) (G : C' ⥤ D')
-    (R : C ⥤ C') (S : D ⥤ D') [F.Additive] [G.Additive] [R.Additive] [S.Additive]
-    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
-    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
-    [R.PreservesKInjectiveComplexes] (e : F ⋙ S ≅ R ⋙ G)
-    (K : HomotopyCategory C (.up ℤ)) :
-    S.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app K) ≫
-        (derived_square F G R S e).hom.app (DerivedCategory.Qh.obj K) =
-      S.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
-        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app K) ≫
-        G.rightDerivedFunctorUnit.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
-        G.rightDerivedFunctor.map (R.mapDerivedCategoryFactorsh.inv.app K) := by
-  apply (cancel_epi (S.mapDerivedCategoryFactorsh.inv.app
-    ((F.mapHomotopyCategory (.up ℤ)).obj K))).1
-  simp only [← Category.assoc, ← comp_map_fac F S K]
-  simp only [derived_square, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.assoc,
-    Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc]
-  simp only [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
-  erw [Functor.rightDerivedNatTrans_app_assoc]
-  have hc : (R ⋙ G).rightDerivedFunctorUnit.app K ≫
-      (Functor.rightDerivedFunctorCompIso R G).hom.app (DerivedCategory.Qh.obj K) =
-      (Functor.rightDerivedFunctorCompUnit R G).app K := by
-    simp [Functor.rightDerivedFunctorCompIso]
-  simp only [Functor.whiskerRight_app]
-  erw [reassoc_of% hc]
-  rw [comp_unit_app]
-  simp only [Category.assoc, ← Functor.map_comp]
-  have hr := congr_app R.rightDerivedFunctorIsoMapDerivedCategory_hom_fac K
-  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hr
-  rw [hr]
-end
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -150,11 +66,6 @@ variable {A B C : Type*} [Category A] [Category B] [Category C]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-
-private noncomputable def exact_comp (e : F ⋙ G ≅ H) :
-    F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
-    Functor.mapDerivedCategoryNatIso e
 
 private lemma exact_comp_hom_fac (e : F ⋙ G ≅ H)
     (K : HomotopyCategory A (.up ℤ)) :
