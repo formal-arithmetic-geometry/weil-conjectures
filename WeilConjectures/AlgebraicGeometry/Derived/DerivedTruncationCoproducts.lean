@@ -77,7 +77,7 @@ private theorem truncLE_preservesCoproducts
   let : ∀ K : I → DerivedCategory A, PreservesColimit (Discrete.functor K) T := hK
   exact preservesColimitsOfShape_of_discrete T
 
-/-- Double good truncation preserves an ambient coproduct cofan.
+/-- Double good truncation preserves small coproducts.
 Source: blueprint main-20261015, sk-lem-proper-unbounded-window-ii general proof,
 paragraph 1 (blueprint: lem-sfb-derived-truncation-coproducts).
 
@@ -92,13 +92,12 @@ of K→τ≥r K constructs the inverse comparison. Reuse the proved generic theo
 preservation statements proves the assertion.
 For an empty family all sums and all their cohomologies are zero, so the same
 argument applies. No boundedness or constructibility is required. -/
-theorem derivedTruncation_coproducts
+theorem derivedTruncation_preservesCoproducts
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (X : Scheme.{u}) (I : Type (u + 1))
-    (K : I → DerivedCategory (pulledBackModuleObjects Λ X)) (c : Cofan K)
-    (hc : IsColimit c) (q r : ℤ) :
-    Nonempty (IsColimit (((DerivedCategory.TStructure.t.truncLE q) ⋙
-      DerivedCategory.TStructure.t.truncGE r).mapCocone c)) := by
+    (X : Scheme.{u}) (I : Type (u + 1)) (q r : ℤ) :
+    PreservesColimitsOfShape (Discrete I)
+      ((DerivedCategory.TStructure.t (C := pulledBackModuleObjects Λ X)).truncLE q ⋙
+        DerivedCategory.TStructure.t.truncGE r) := by
   let A := pulledBackModuleObjects Λ X
   have : HasColimitsOfShape (Discrete I) A :=
     IsGrothendieckAbelian.hasColimitsOfShape_discrete A I
@@ -111,6 +110,6 @@ theorem derivedTruncation_coproducts
     truncLE_preservesCoproducts (A := A) q
   have : PreservesColimitsOfShape (Discrete I) (DerivedCategory.TStructure.t.truncGE r) :=
     CondensedRing.truncGE_preservesCoproducts (A := A) r
-  exact ⟨isColimitOfPreserves _ hc⟩
+  infer_instance
 
 end AlgebraicGeometry.ProEtale

@@ -40,7 +40,8 @@ theorem finiteComparisonOrdinary_fullyFaithful
     [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :
     Nonempty ((comparisonUpperStar
       (ModuleCat.{u + 1} A) X).mapDerivedCategory).FullyFaithful := by
-  obtain ⟨_, ⟨h⟩, _⟩ := unboundedSiteComparison.{u, u + 2} k hbase hℓ A hA X
+  obtain ⟨_, ⟨h⟩, _⟩ :=
+    finiteCoefficientDerivedComparison_fullyFaithful.{u, u + 2} k hbase hℓ A hA X
   let F : Etale.DerivedCategoryModule A X ⥤
       DerivedCategory.{u + 1} (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) :=
     (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory

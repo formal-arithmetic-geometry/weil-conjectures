@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedScalarTensor
 public import WeilConjectures.AlgebraicGeometry.FiniteReduction.System.FiniteReductionConstructibility
-public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothExceptionalBaseChange
+public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothTensorDuality
+public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothDualityBaseChangeCompat
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import WeilConjectures.CategoryTheory.Etale.EtaleUnboundedRestrictionComparison
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import WeilConjectures.AlgebraicGeometry.Pur.PurEtaleScalarMateProjection
@@ -111,7 +113,8 @@ Source: Stacks 0F7L and blueprint compatibilities (2)
 def BaseChangeCompatibility [Finite A] [Finite B] {X Y Y' : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] (g : Y' ⟶ Y)
     (K : DerivedCategoryModule A Y) : Prop :=
-  (scalarExtension φ (pullback f g)).map (smoothExceptionalBaseChangeMap A f g K) ≫
+  (scalarExtension φ (pullback f g)).map
+      ((rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app K) ≫
       mateMap φ (pullback.snd f g)
         ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K) ≫
       (rightDerivedUpperShriek B (pullback.snd f g)).map
@@ -120,7 +123,8 @@ def BaseChangeCompatibility [Finite A] [Finite B] {X Y Y' : Scheme.{u}}
         ((rightDerivedUpperShriek A f).obj K) ≫
       (upperStar (ModuleCat.{u + 1} B) (pullback.fst f g)).leftDerivedFunctor.map
         (mateMap φ f K) ≫
-      smoothExceptionalBaseChangeMap B f g ((scalarExtension φ Y).obj K)
+      (rightDerivedUpperShriekBaseChangeMap B (IsPullback.of_hasPullback f g)).app
+        ((scalarExtension φ Y).obj K)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 private def compactSupportIso [Finite A] [Finite B]
@@ -307,7 +311,7 @@ private theorem compact_scalar_exchange_left [Finite A] [Finite B]
       (scalarExtension φ Y').map ((rightDerivedLowerShriekBaseChangeMap A sq).app M.obj) ≫
       (compactScalarChosenMap φ f').app
         ((upperStar (ModuleCat.{u + 1} A) h).leftDerivedFunctor.obj M.obj) := by
-  have hh := etaleCompactScalarBaseChange φ sq M hQM
+  have hh := compactScalarChosenMap_baseChange φ sq M hQM
   simp only [properOpenCoefficientPullbackIso, unboundedEtaleCompactSupportBaseChange,
     Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Iso.symm_hom, NatTrans.comp_app, Functor.whiskerLeft_app,

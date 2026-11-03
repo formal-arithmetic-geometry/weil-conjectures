@@ -125,6 +125,7 @@ import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 import WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInversePair
 import WeilConjectures.Algebra.Homology.FlatSingleDerivedNormalization.FlatSingleDerivedNormalization
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import all WeilConjectures.AlgebraicGeometry.DiagonalEndpointsProof.DiagonalLimitEndpointsAux
 
 /-!
 # The completed diagonal class
@@ -212,75 +213,12 @@ section DirectImageProof
 
 set_option backward.defeqAttrib.useBackward true
 
-private theorem diagonalRightDerived_exists
-    {A : Type a} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
-    [Abelian.HasKInjectiveResolutions A]
-    {B : Type b} [Category.{u} B] [Abelian B] [HasDerivedCategory.{w} B]
-    (F : A ⥤ B) [F.Additive] : Nonempty (DiagonalRightDerived F) := by
-  obtain ⟨R, η, hu, hc, s, ht⟩ := CategoryTheory.RingedStrictTowerProof.totalDerivedData F
-  let := s
-  exact ⟨⟨R, η, hu, hc, ht⟩⟩
-
-private theorem diagonalRightDerived_shift_exists
-    {A : Type a} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
-    [Abelian.HasKInjectiveResolutions A]
-    {B : Type b} [Category.{u} B] [Abelian B] [HasDerivedCategory.{w} B]
-    (F : A ⥤ B) [F.Additive] :
-    ∃ L : DiagonalRightDerived F, NatTrans.CommShift L.η ℤ := by
-  let π := HomotopyCategory.quotient A (.up ℤ)
-  let H := F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
-  let R := F.rightDerivedFunctor
-  let e : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ≅ π ⋙ H :=
-    Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso B).symm ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).symm _ ≪≫
-      Functor.associator _ _ _
-  let η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
-      DerivedCategory.Q ⋙ R :=
-    e.hom ≫ Functor.whiskerLeft π F.rightDerivedFunctorUnit ≫
-      (Functor.associator _ _ _).inv ≫
-      (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A) R).hom
-  have hi (I : CochainComplex A ℤ) [I.IsKInjective] : IsIso (η.app I) := by
-    dsimp [η]
-    infer_instance
-  have hd : (CochainComplex.KInjectives.localizerMorphism A).Derives
-      (F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) := by
-    intro I J f hf
-    have : IsIso (CochainComplex.KInjectives.toHomotopyCategory.map f) :=
-      (CochainComplex.KInjectives.isIso_toHomotopyCategory_map_iff f).mpr hf
-    have hmap := (HomotopyCategory.KInjectives.ι ⋙ H).map_isIso
-      (CochainComplex.KInjectives.toHomotopyCategory.map f)
-    have hmap' : IsIso ((π ⋙ H).map f.hom) := hmap
-    have heq : (F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q).map f.hom =
-        e.hom.app I.obj ≫ (π ⋙ H).map f.hom ≫ e.inv.app J.obj := by
-      rw [← e.hom.naturality_assoc]
-      simp
-    change IsIso ((F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q).map f.hom)
-    rw [heq]
-    infer_instance
-  let L : DiagonalRightDerived F :=
-    { R := R
-      η := η
-      universal := hd.isRightDerivedFunctor_of_isIso η (fun I ↦ by
-        have := I.property
-        exact hi I.obj)
-      computation I hI := hi I
-      triangulated := inferInstance }
-  refine ⟨L, ?_⟩
-  have := CategoryTheory.canonical_unit_commShift F
-  have : NatTrans.CommShift (DerivedCategory.quotientCompQhIso B).inv ℤ :=
-    NatTrans.CommShift.of_iso_inv _ _
-  have : NatTrans.CommShift (F.mapHomotopyCategoryFactors (.up ℤ)).inv ℤ :=
-    NatTrans.CommShift.of_iso_inv _ _
-  dsimp only [L, η, e, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_hom]
-  infer_instance
-
 private theorem diagonalRlim_exists
     (A : Type a) [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
     [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)] : Nonempty (DiagonalRlim A) := by
-  obtain ⟨L, hshift⟩ := diagonalRightDerived_shift_exists (lim : (ℕᵒᵖ ⥤ A) ⥤ A)
+  obtain ⟨L, hshift⟩ :=
+    DiagonalEndpointsProof.diagonalRightDerived_shift_exists (lim : (ℕᵒᵖ ⥤ A) ⥤ A)
   have := L.universal
   let β (n : ℕ) :
       (lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
@@ -425,8 +363,9 @@ private theorem diagonalDirectImage_of_preservesKInjective
     diagonalDirectImageAssertion F := by
   obtain ⟨LX⟩ := diagonalRlim_exists A
   obtain ⟨LY⟩ := diagonalRlim_exists B
-  obtain ⟨Rf⟩ := diagonalRightDerived_exists F
-  obtain ⟨Rt⟩ := diagonalRightDerived_exists ((Functor.whiskeringRight ℕᵒᵖ A B).obj F)
+  obtain ⟨Rf⟩ := DiagonalEndpointsProof.diagonalRightDerived_exists F
+  obtain ⟨Rt⟩ :=
+    DiagonalEndpointsProof.diagonalRightDerived_exists ((Functor.whiskeringRight ℕᵒᵖ A B).obj F)
   have := LX.universal
   have := LY.universal
   have := Rf.universal
@@ -539,7 +478,7 @@ torsion diagonal class with its positive Cartier/Kummer normalization.
 5. lem-weil-pbc-constant-completion-equivalence identifies constant and completed
 finite reductions and completion units. Both endpoints are derived complete.
 Restriction from completed to constant coefficients is fully faithful on these
-objects by diagonalCompleteScalarRestriction. Hence there is exactly one
+objects by diagonalCompleteScalarRestrictionCore. Hence there is exactly one
 completed-coefficient arrow inducing the whole constant-coefficient completion.
 No assertion of uniqueness from separate finite reductions is used. -/
 theorem diagonalTower_limit (ℓ : ℕ) [Fact ℓ.Prime]

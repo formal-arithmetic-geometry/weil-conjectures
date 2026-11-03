@@ -124,9 +124,8 @@ theorem picard_termwise_model_comparison
         picardDerivedModelRestriction E i t t' ht
             ((a t).hom ≫ DerivedCategory.Q.map f ≫ (b t s hf).inv) =
           (a t').hom ≫ DerivedCategory.Q.map f' ≫ (b t' s' hf').inv := by
-  obtain ⟨a, ha⟩ := picard_termwise_source_coherence W
   obtain ⟨b, hb⟩ := picard_termwise_target_coherence W E U K hK hE
-  refine ⟨a, b, ?_⟩
+  refine ⟨fun t ↦ picardTermwiseSourceIso t, b, ?_⟩
   intro T T' i t t' s s' ht hs hf hf' f
   let : (Modules.tensorPullback i).Additive :=
     (Classical.choose (Modules.exists_tensorPullbackAdjunction i)).left_adjoint_additive
@@ -150,17 +149,18 @@ theorem picard_termwise_model_comparison
   · let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition)))) i t ≪≫
         eqToIso (congrArg (fun g : T' ⟶ W ↦ derivedPullback g) ht)
-    have hu := ha i t t' ht
+    have hu := picard_termwise_source_coherence i t t' ht
     have hw := hb i t t' s s' ht hs hf hf'
-    change (a t').hom ≫ DerivedCategory.Q.map u.hom =
-      c.inv.app _ ≫ (derivedPullback i).map (a t).hom ≫
+    change (picardTermwiseSourceIso t').hom ≫ DerivedCategory.Q.map u.hom =
+      c.inv.app _ ≫ (derivedPullback i).map (picardTermwiseSourceIso t).hom ≫
         (picardTermwiseCounit i).app (picardTermwiseSource t) at hu
     change (b t' s' hf').hom ≫ DerivedCategory.Q.map w.hom =
       c.inv.app E ≫ (derivedPullback i).map (b t s hf).hom ≫
         (picardTermwiseCounit i).app (picardTermwiseModel W U K s) at hw
     exact picard_comparison_transport DerivedCategory.Q DerivedCategory.Q
       (derivedPullback i) F (picardTermwiseCounit i)
-      (c.app _).symm (c.app E).symm (a t) (b t s hf) (a t') (b t' s' hf') u w hu hw f
+      (c.app _).symm (c.app E).symm (picardTermwiseSourceIso t) (b t s hf)
+      (picardTermwiseSourceIso t') (b t' s' hf') u w hu hw f
 
 end
 end AlgebraicGeometry.Scheme

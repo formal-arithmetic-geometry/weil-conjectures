@@ -96,7 +96,7 @@ private theorem decomposition_local_integer {S P : Scheme.{u}} (p : P ⟶ S)
   let coeff : (tensorPullback j).obj ((tensorPullback p).obj N) ≅
       𝟙_ (p ⁻¹ᵁ U).toScheme.Modules :=
     c ≪≫ (tensorPullback (p ∣_ U)).mapIso eN ≪≫ pullbackUnit (p ∣_ U)
-  obtain ⟨tw⟩ := (locallyConstantLineTwist_identities A hA).1
+  let tw := locallyConstantLineTwistRestrictIso A hA
     (d.comap p.base.hom) (d s) (p ⁻¹ᵁ U) (fun x hx ↦ hx.1)
   obtain ⟨tensor, _, _⟩ := module_pullback_tensor j
   exact ⟨U, ⟨rfl, hsV⟩, ⟨(tensorPullback j).mapIso e ≪≫ tensor _ _ ≪≫
@@ -168,7 +168,7 @@ theorem projective_bundle_local_twist_descent (S : Scheme.{u}) (E : S.Modules)
   let T := locallyConstantLineTwist D.line D.invertible (d.comap p.base.hom)
   have localTwist (s : S) : Nonempty ((tensorPullback (p ⁻¹ᵁ U s).ι).obj L ≅
       (tensorPullback (p ⁻¹ᵁ U s).ι).obj T) := by
-    obtain ⟨tw⟩ := (locallyConstantLineTwist_identities D.line D.invertible).1
+    let tw := locallyConstantLineTwistRestrictIso D.line D.invertible
       (d.comap p.base.hom) (m s) (p ⁻¹ᵁ U s)
       (fun x hx ↦ agree s (p.base x) hx)
     exact ⟨(e s).some ≪≫ tw.symm⟩

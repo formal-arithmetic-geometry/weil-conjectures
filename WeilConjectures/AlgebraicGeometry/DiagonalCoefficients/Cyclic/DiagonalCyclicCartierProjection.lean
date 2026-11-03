@@ -77,7 +77,7 @@ private theorem cyclicFrame_nonempty
     unfold cyclicLine cyclicLineMap
     exact flatExtensionEndpoint a (diagonalSurface Y) (zlLine l (diagonalSurface Y))
       (zlLine_flat l (diagonalSurface Y))
-  obtain ⟨integralRoots⟩ := diagonalIntegralRoots_exists l (diagonalSurface Y) (bottomField l)
+  let integralRoots := diagonalIntegralRoots l (diagonalSurface Y) (bottomField l)
   obtain ⟨finiteRoots⟩ := diagonalFiniteRoots_exists (diagonalSurface Y) (l ^ (n + 1))
     (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n)
   obtain ⟨lineEndpoint⟩ := diagonalCyclicRootEndpoint l (diagonalSurface Y) hW n

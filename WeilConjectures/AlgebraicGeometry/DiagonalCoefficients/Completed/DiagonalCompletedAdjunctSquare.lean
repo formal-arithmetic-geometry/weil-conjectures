@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientUnitPush
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.DiagonalCompletedOrdinaryUnit
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFinitePushUnitSeed
-import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestriction
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestrictionCore
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalCompletedLineComplete
 import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
@@ -215,7 +215,7 @@ private theorem completed_map_injective
   let P : ObjectProperty (DerivedCategory (DiagonalCompleted l Y)) := fun M ↦
     ∀ V : DerivedCategory (DiagonalMod l Y),
       IsIso (l • 𝟙 V) → Subsingleton (V ⟶ F.obj M)
-  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestriction l Y
+  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestrictionCore l Y
   let U := SheafOfModules.unit (Scheme.purTwistRing Y (Scheme.purTwistZlCompletion Y l))
   have hunit := DiagonalTrace.diagonalCompletedLine_complete l Y U
     ((SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one U).mp inferInstance)

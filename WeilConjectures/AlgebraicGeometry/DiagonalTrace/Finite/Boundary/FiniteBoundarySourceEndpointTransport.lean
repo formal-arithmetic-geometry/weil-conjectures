@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Boundary.FiniteBoundaryRestrictionUnderlying
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Local.DiagonalLocalFiniteConeChernClass
+import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedCoefficientLimit
+import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteEtaleIntegralBoundary
 
 /-! Source endpoint transport for the finite Chern coordinate. -/
 
@@ -16,7 +18,13 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open SpTowerClasses
+attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
+  CategoryTheory.Abelian.Ext HasDerivedCategory.standard
+  DerivedCategory.singleFunctors DerivedCategory.singleFunctorIsoCompQ
+attribute [local implicit_reducible] spCoefficientCommRings
 
+set_option maxHeartbeats 1000000 in
+-- Matching the concrete evaluation and restriction presentations needs extra reduction.
 /-- Source endpoint transport.  This is the coefficient-one calculation: the
 finite quotient followed by the restricted evaluation comparison is the
 integer coefficient map.  The proof is the coefficient-one section calculation,
@@ -33,6 +41,27 @@ theorem finiteBoundary_source_endpoint
         S.map (e.inv.app (coefficient T (Arings l (ULift.{u} (Padic l)) T))) =
       S.map (diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n) ≫
         k.coefficientForget.inv.app (op n)) := by
-  sorry
+  intro S e
+  rw [← S.map_comp]
+  congr 1
+  rw [← Iso.app_inv k.coefficientForget, Iso.eq_comp_inv]
+  apply constantAb_ext_one
+  let U := op (Scheme.ProEt.mk (𝟙 T))
+  let z := (toSheafify (Scheme.ProEt.topology T)
+    ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U
+      (ULift.up 1)
+  let x' := (finiteQuotient l (ULift.{u} (Padic l)) T n).hom.app U z
+  let x := (e.inv.app (coefficient T (Arings l (ULift.{u} (Padic l)) T))).hom.app U x'
+  have hq := (finiteQuotient_existsUnique l (ULift.{u} (Padic l)) T n).exists.choose_spec
+    U (ULift.up 1)
+  have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
+      (op (n, U.unop))) := by
+    simpa only [x', z, finiteQuotient, Int.cast_one] using hq
+  have hx : HEq x x' := finiteBoundary_cast_heq
+    (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm x'
+  have ha := k.coefficient_one n U x (hx.trans hx')
+  have hi := integerMap_sections T (Scheme.purTwistFiniteRing T l n) U 1
+  change (k.coefficientForget.hom.app (op n)).hom.app U x = _
+  rw [ha, hi, Int.cast_one]
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

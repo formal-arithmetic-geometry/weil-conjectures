@@ -13,7 +13,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 import all WeilConjectures.AlgebraicGeometry.NormedCoefficientRealization.NormedCoefficientRealization
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperHeartUniformBound
 
 set_option linter.privateModule false
 
@@ -34,103 +35,6 @@ open Scheme
 attribute [local irreducible] upperStarFromPoint moduleObjectProjectionMap derivedTensor
   DerivedCategory HasDerivedCategory.standard
 
-private theorem isIso_of_square {C : Type*} [Category* C]
-    {A B D E : C} (a : A ⟶ B) (b : B ⟶ E) (c : A ⟶ D) (d : D ⟶ E)
-    [IsIso a] [IsIso b] [IsIso d] (h : a ≫ b = c ≫ d) : IsIso c := by
-  have : IsIso (c ≫ d) := h ▸ inferInstance
-  exact IsIso.of_isIso_comp_right c d
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem projection_isIso_of_coefficientIso
-    {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
-    (a : R ⟶ S) [IsMonHom a] [IsIso a]
-    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    {X Y : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    (f : X ⟶ Y)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj R X.left)))
-    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
-      (condensedRingObj R Y.left)))
-    (h : IsIso (moduleObjectProjectionMap S f.left
-      ((internalScalarExtension a X.left).obj K)
-      ((internalScalarExtension a Y.left).obj M))) :
-    IsIso (moduleObjectProjectionMap R f.left K M) := by
-  let (Z : Scheme.{u}) : (Mod.comap (coefficientMap a Z)).IsEquivalence :=
-    (inferInstance : (Mod.comapEquivalenceOfIsIso (coefficientMap a Z)).functor.IsEquivalence)
-  let (Z : Scheme.{u}) : (Mod.comap (inv (coefficientMap a Z))).IsEquivalence :=
-    (inferInstance : (Mod.comapEquivalenceOfIsIso (inv (coefficientMap a Z))).functor.IsEquivalence)
-  let (Z : Scheme.{u}) : (Mod.extendScalars (coefficientMap a Z)).IsEquivalence :=
-    by
-      have : (Mod.comap (asIso (coefficientMap a Z)).inv).IsEquivalence :=
-        (inferInstance :
-          (Mod.comapEquivalenceOfIsIso (asIso (coefficientMap a Z)).inv).functor.IsEquivalence)
-      exact Functor.isEquivalence_of_iso
-        (Mod.extendScalarsIsoComapInv (coefficientMap a Z)).symm
-  let (Z : Scheme.{u}) : CategoryTheory.Limits.PreservesFiniteLimits
-      (Mod.extendScalars (coefficientMap a Z)) := inferInstance
-  have : IsIso (derivedPushHom a f.left) := by
-    unfold derivedPushHom Adjunction.pushHomOfComapIso
-    dsimp [mateEquiv, TwoSquare.natTrans, TwoSquare.mk]
-    infer_instance
-  have (Z : Scheme.{u}) : IsIso (internalScalarTensorComparison a Z) := by
-    unfold internalScalarTensorComparison
-    infer_instance
-  have := h
-  have he := coefficientProjectionSquare ℓ k f a K M
-  have := isIso_of_square _ _ _ _ he
-  let : (internalScalarExtension a Y.left).IsEquivalence := by
-    unfold internalScalarExtension
-    infer_instance
-  exact isIso_of_reflects_iso _ (internalScalarExtension a Y.left)
-
-private noncomputable def continuousIso
-    {A B : Type} [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
-    [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
-    (e : A ≃+* B) (he : Continuous e) (hei : Continuous e.symm) :
-    Mon.mk (Profinite.continuousMapRingObj.{u} A) ≅
-      Mon.mk (Profinite.continuousMapRingObj.{u} B) := by
-  let eR : Profinite.continuousMapRingSheaf.{u} A ≅
-      Profinite.continuousMapRingSheaf.{u} B :=
-    { hom := Profinite.continuousMapRingSheafMap e.toRingHom he
-      inv := Profinite.continuousMapRingSheafMap e.symm.toRingHom hei
-      hom_inv_id := by
-        ext S f
-        apply ULift.ext
-        ext x
-        exact e.symm_apply_apply _
-      inv_hom_id := by
-        ext S f
-        apply ULift.ext
-        ext x
-        exact e.apply_symm_apply _ }
-  let eAb := (sheafCompose (coherentTopology Profinite.{u})
-    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
-  have : IsMonHom eAb.hom := Sheaf.isMonHom_sheafCompose_map _ eR.hom
-  have : IsMonHom eAb.inv := Sheaf.isMonHom_sheafCompose_map _ eR.inv
-  exact
-    { hom := Mon.ofHom eAb.hom
-      inv := Mon.ofHom eAb.inv
-      hom_inv_id := Mon.Hom.ext eAb.hom_inv_id
-      inv_hom_id := Mon.Hom.ext eAb.inv_hom_id }
-
-private theorem field_model (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-    [FiniteDimensional ℚ_[ℓ] E] :
-    ∃ F : PadicAlgCl.FiniteIntermediateField ℓ,
-      ∃ σ : E ≃ₐ[ℚ_[ℓ]] F, Isometry σ := by
-  let i : E →ₐ[ℚ_[ℓ]] PadicAlgCl ℓ := IsAlgClosed.lift
-  let F := i.fieldRange
-  let σ := i.equivFieldRange
-  have : FiniteDimensional ℚ_[ℓ] F := σ.toLinearEquiv.finiteDimensional
-  refine ⟨⟨F, inferInstance⟩, σ, ?_⟩
-  exact NormedCoefficientRealization.embedding_isometry ℓ
-    (fun x ↦ norm_algebraMap' E x) (fun x ↦ norm_algebraMap' F x) σ.toAlgHom
-
 private theorem field_realization (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] :
@@ -141,68 +45,6 @@ private theorem field_realization (ℓ : ℕ) [Fact ℓ.Prime]
   have hσi : Isometry σ.symm := fun x y ↦ by
     simpa only [σ.apply_symm_apply] using (hσ (σ.symm x) (σ.symm y)).symm
   exact ⟨F, ⟨continuousIso σ.toRingEquiv hσ.continuous hσi.continuous⟩⟩
-
-private theorem unitBall_realization (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-    [FiniteDimensional ℚ_[ℓ] E]
-    (O : Subring E) (hO : ∀ x : E, x ∈ O ↔ ‖x‖ ≤ 1) :
-    ∃ F : PadicAlgCl.FiniteIntermediateField ℓ,
-      Nonempty (Mon.mk (Profinite.continuousMapRingObj.{u} O) ≅
-        Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ F)) := by
-  obtain ⟨F, σ, hiso⟩ := field_model ℓ E
-  have hmem (x : E) : x ∈ O ↔ σ x ∈ PadicAlgCl.integers ℓ F := by
-    rw [hO, PadicAlgCl.mem_integers_iff]
-    change ‖x‖ ≤ 1 ↔ ‖σ x‖₊ ≤ 1
-    rw [← NNReal.coe_le_coe, NNReal.coe_one, coe_nnnorm]
-    rw [(AddMonoidHomClass.isometry_iff_norm σ).mp hiso x]
-  let ei := σ.toRingEquiv.restrict O (PadicAlgCl.integers ℓ F) hmem
-  have hi : Isometry ei := fun x y ↦ hiso x.val y.val
-  have hii : Isometry ei.symm := fun x y ↦ by
-    simpa only [ei.apply_symm_apply] using (hi (ei.symm x) (ei.symm y)).symm
-  exact ⟨F, ⟨continuousIso ei hi.continuous hii.continuous⟩⟩
-
-private noncomputable def integerIso (ℓ : ℕ) [Fact ℓ.Prime]
-    (F : PadicAlgCl.FiniteIntermediateField ℓ) :
-    Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ F) ≅
-      Mon.mk (DerivedNakayama.integerRing ℓ (ULift.{u} F.val)) := by
-  let eR := integerRingSheafIso.{u} ℓ ⟨F.val, F.property⟩
-  let e := (sheafCompose (coherentTopology Profinite.{u})
-    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
-  have : IsMonHom e.hom := Sheaf.isMonHom_sheafCompose_map _ eR.hom
-  have : IsMonHom e.inv := Sheaf.isMonHom_sheafCompose_map _ eR.inv
-  exact
-    { hom := Mon.ofHom e.hom
-      inv := Mon.ofHom e.inv
-      hom_inv_id := Mon.Hom.ext e.hom_inv_id
-      inv_hom_id := Mon.Hom.ext e.inv_hom_id }
-
-private theorem integer_predicate (ℓ : ℕ) [Fact ℓ.Prime]
-    (F : PadicAlgCl.FiniteIntermediateField ℓ)
-    (Z : Scheme.{u}) [CompactSpace Z] [IsLocallyNoetherian Z] :
-    ∀ K, boundedConstructible (condensedRingObj
-        (DerivedNakayama.integerRing ℓ (ULift.{u} F.val)) Z) K →
-      constantModelBoundedConstructible
-        (DerivedNakayama.integerRing ℓ (ULift.{u} F.val)) Z K := by
-  obtain ⟨e⟩ := integralCoefficientIso.{u} ℓ F.val
-  have hmod := comparison_transport (e ≪≫ integerIso ℓ F) Z
-    (integralLfpConstantModelComparison ℓ (ULift.{u} F.val) Z)
-  intro K hK
-  exact ⟨hK.1, fun n ↦ (hmod _).mp (hK.2 n)⟩
-
-private theorem bounded_scalar
-    {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
-    (e : Mon.mk R ≅ Mon.mk S) (Z : Scheme.{u})
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj R Z))) (hK : boundedConstructible (condensedRingObj R Z) K) :
-    boundedConstructible (condensedRingObj S Z)
-      ((internalScalarExtension e.hom.hom Z).obj K) := by
-  obtain ⟨⟨eT⟩, _, _, _, _, _, _, hbc, _⟩ :=
-    (NormedCoefficientRealization.transport_property e).1 Z
-  have h := (hbc K).mpr hK
-  let eK := eT.symm.app K
-  refine ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso eK h.1, fun n ↦ ?_⟩
-  exact constructible_of_iso ((DerivedCategory.homologyFunctor _ n).mapIso eK) (h.2 n)
 
 private structure BoundedProjectionFormula
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

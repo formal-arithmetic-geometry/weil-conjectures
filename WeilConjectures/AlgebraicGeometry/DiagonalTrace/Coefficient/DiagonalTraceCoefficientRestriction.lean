@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTowerTraceCoefficients
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceNormalizedRootIso
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceResidueRestriction
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Coefficient.DiagonalTraceCoefficientIdentification
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceLineIdentification
@@ -21,59 +22,6 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open SpTowerClasses
-
-private theorem padic_map_smul_target {l : ℕ} [Fact l.Prime]
-    {M N : Type (u + 1)} [AddCommGroup M] [Module (ULift.{u + 1} ℤ_[l]) M]
-    [AddCommGroup N] [Module (ULift.{u + 1} ℤ_[l]) N]
-    (n : ℕ) (hN : ∀ y : N, (l ^ n) • y = 0) (f : M →+ N)
-    (r : ULift.{u + 1} ℤ_[l]) (x : M) : f (r • x) = r • f x := by
-  obtain ⟨a, ha⟩ := Ideal.mem_span_singleton'.1 (r.down.appr_spec n)
-  have hr : r - (r.down.appr n : ULift.{u + 1} ℤ_[l]) =
-      (ULift.up a) * (l : ULift.{u + 1} ℤ_[l]) ^ n := by
-    apply ULift.ext
-    exact ha.symm
-  have split (y : M) :
-      r • y = (l ^ n) • (ULift.up a • y) + r.down.appr n • y := by
-    conv_lhs => rw [← sub_add_cancel r (r.down.appr n : ULift.{u + 1} ℤ_[l]), hr]
-    rw [add_smul, mul_comm (ULift.up a), mul_smul]
-    simp only [← Nat.cast_pow, Nat.cast_smul_eq_nsmul]
-  rw [split, map_add, map_nsmul, hN, zero_add, map_nsmul]
-  conv_rhs => rw [← sub_add_cancel r (r.down.appr n : ULift.{u + 1} ℤ_[l]), hr]
-  rw [add_smul, mul_comm (ULift.up a), mul_smul]
-  simp only [← Nat.cast_pow, Nat.cast_smul_eq_nsmul, hN, zero_add]
-
-private theorem restriction_killed (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
-    (r : Restriction l (ULift.{u} (Padic l)) T)
-    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (n : ℕ)
-    (U : T.ProEtᵒᵖ) (x : ((r.F.obj M).obj (op n)).obj.obj U) :
-    (l ^ (n + 1)) • x = 0 := by
-  have h := r.scalars M n U (l ^ (n + 1)) x
-  have hz : PadicInt.toZModPow (n + 1) ((l : ℤ_[l]) ^ (n + 1)) = 0 := by
-    rw [map_pow, map_natCast, ← Nat.cast_pow, ZMod.natCast_self]
-  change ((l : ULift.{u + 1} ℤ_[l]) ^ (n + 1)) • x =
-    ((PadicInt.toZModPow (n + 1)) ((l : ℤ_[l]) ^ (n + 1))).val • x at h
-  rw [hz, ZMod.val_zero, zero_nsmul] at h
-  simpa only [← Nat.cast_pow, Nat.cast_smul_eq_nsmul] using h
-
-private def liftToRestriction (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
-    (r : Restriction l (ULift.{u} (Padic l)) T)
-    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (n : ℕ)
-    (Q : DiagonalMod l T)
-    (f : (diagonalForget l T).obj Q ⟶
-      (diagonalForget l T).obj ((r.F.obj M).obj (op n))) :
-    Q ⟶ (r.F.obj M).obj (op n) :=
-  ObjectProperty.homMk
-    { app U := by
-        let g : Q.obj.obj U →+ (((r.F.obj M).obj (op n)).obj.obj U) := (f.hom.app U).hom
-        exact ModuleCat.ofHom
-          { toFun := g
-            map_add' := g.map_add
-            map_smul' z x := padic_map_smul_target (n + 1)
-              (restriction_killed l T r M n U) g z x }
-      naturality U V g := by
-        apply (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l]))
-          AddCommGrpCat.{u + 1}).map_injective
-        exact f.hom.naturality g }
 
 private def liftRestrictionCone (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (r : Restriction l (ULift.{u} (Padic l)) T)
@@ -162,13 +110,13 @@ theorem exists_diagonalTraceCoefficientRestriction (l : ℕ) [Fact l.Prime]
     ∃ r : Restriction l (ULift.{u} (Padic l)) T,
       Nonempty (Coefficients l (ULift.{u} (Padic l)) T c r) := by
   obtain ⟨r⟩ := exists_diagonalTraceResidueRestriction l T
-  obtain ⟨e, he⟩ := exists_diagonalTraceCoefficientIdentification l T r
-  obtain ⟨f, hf⟩ := exists_diagonalTraceLineIdentification l T c r
+  let e := diagonalTraceCoefficientIdentification l T r
+  let f := diagonalTraceLineIdentification l T c r
   refine ⟨r, ⟨{
     coefficientForget := e
-    coefficient_one := he
+    coefficient_one := diagonalTraceCoefficientIdentification_hom_app_hom_app_eq_one l T r
     lineForget := f
-    line_tensor := hf
+    line_tensor := diagonalTraceLineIdentification_hom_app_hom_app l T c r
     coefficientProjection := transportRestrictionCone l T r _ _ _ e (coefficientCone l T)
     coefficient_projection := ?_
     lineProjection := transportRestrictionCone l T r _ _ _ f (rootCone l T)
