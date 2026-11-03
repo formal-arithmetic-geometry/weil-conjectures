@@ -98,7 +98,8 @@ theorem diagonalTrace_finiteCartierChern_strict
           L₀ (diagonalCompletedSource l Y) (D.E.obj (diagonalIntegralSource Y)) p.K s p.source ≫
         L₀.R.map p.arrow) :
     finiteChernEquation l Y c r k L n δ := by
-  obtain ⟨e, he⟩ := diagonalTrace_normalizedRootIso l (diagonalSurface Y) c r k H roots
+  let e := diagonalTraceNormalizedRootIso l (diagonalSurface Y) c r k H roots
+  have he := whiskerRight_diagonalTraceNormalizedRootIso_hom l (diagonalSurface Y) c r k H roots
   have hcone := diagonalTrace_normalizedRootCone l (diagonalSurface Y)
     c r k H roots t ht e he
   have hprojection := diagonalTrace_rootProjection l (diagonalSurface Y)

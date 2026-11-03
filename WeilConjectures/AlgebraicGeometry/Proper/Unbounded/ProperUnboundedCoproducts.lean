@@ -142,7 +142,9 @@ theorem properUnbounded_preservesCoproducts
       let : HasExactColimitsOfShape (Discrete I) B :=
         IsGrothendieckAbelian.hasExactColimitsOfShape_discrete B I
       exact ⟨isColimitOfPreserves (DerivedCategory.homologyFunctor B q) hc⟩
-    · exact derivedTruncation_coproducts (Profinite.continuousMapRingObj E) X
+    · intro I K c hc q r
+      have := derivedTruncation_preservesCoproducts (Profinite.continuousMapRingObj E) X I q r
+      exact ⟨isColimitOfPreserves _ hc⟩
     · intro a b I M hM hb
       obtain ⟨c, hc, c', hc', hi⟩ := properUnboundedWindowBounded ℓ E p a b I M hM hb
       refine ⟨c, hc, ?_⟩
@@ -204,7 +206,9 @@ theorem properUnbounded_preservesCoproducts_padicAlgCl
       let : HasExactColimitsOfShape (Discrete I) B :=
         IsGrothendieckAbelian.hasExactColimitsOfShape_discrete B I
       exact ⟨isColimitOfPreserves (DerivedCategory.homologyFunctor B q) hc⟩
-    · exact derivedTruncation_coproducts (Profinite.padicAlgClRingObj ℓ) X
+    · intro I K c hc q r
+      have := derivedTruncation_preservesCoproducts (Profinite.padicAlgClRingObj ℓ) X I q r
+      exact ⟨isColimitOfPreserves _ hc⟩
     · intro a b I M hM hb
       obtain ⟨c, hc, c', hc', hi⟩ := properUnboundedWindowBounded_padicAlgCl ℓ p a b I M hM hb
       refine ⟨c, hc, ?_⟩

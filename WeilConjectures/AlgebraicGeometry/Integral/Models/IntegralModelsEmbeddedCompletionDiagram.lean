@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsEmbedded.IntegralModelsEmbedded
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteSchemeRing
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 import Mathlib.CategoryTheory.Monoidal.Internal.Limits
 import Mathlib.Topology.Algebra.Ring.Compact
@@ -241,50 +242,6 @@ private def discretePullbackIso (X : Scheme.{u}) (A : Type) [CommRing A] :
     (ULift.{u + 1} A) inferInstance
   let eS := (constantSchemeIso.{u} X).app (AddCommGrpCat.of.{u + 1} (ULift.{u + 1} A))
   exact eX.symm ≪≫ eS ≪≫ (upperStarFromPoint X).mapIso eP
-
-private theorem constantRingMonObj {C : Type*} [Category C] (B : Type*) [CommRing B] :
-    (Functor.const C).monObjObj (AddCommGrpCat.of B) =
-      Functor.monObjCompForget₂ ((Functor.const C).obj (RingCat.of B)) := by
-  apply MonObj.ext
-  ext U
-  rfl
-
-attribute [local instance] Sheaf.monoidalCategory in
-private theorem constantSheafRingMonObj {C : Type*} [Category C]
-    (J : GrothendieckTopology C) [HasWeakSheafify J Ab.{w}]
-    [(J.W (A := Ab.{w})).IsMonoidal] (B : Type w) [CommRing B] :
-    (constantSheaf J Ab.{w}).monObjObj (AddCommGrpCat.of B) =
-      Sheaf.monObj_presheafToSheaf_obj J
-        (((Functor.const Cᵒᵖ).obj (RingCat.of B)) ⋙ forget₂ RingCat Ab) := by
-  have h := Functor.monObjObj_comp (Functor.const Cᵒᵖ) (presheafToSheaf J Ab.{w})
-    (AddCommGrpCat.of B)
-  refine h.trans ?_
-  let transfer (m : MonObj ((Functor.const Cᵒᵖ).obj (AddCommGrpCat.of B))) :
-      MonObj ((constantSheaf J Ab.{w}).obj (AddCommGrpCat.of B)) :=
-    @Functor.monObjObj _ _ _ _ _ _ (presheafToSheaf J Ab.{w}) _ _ m
-  exact congrArg transfer (constantRingMonObj (C := Cᵒᵖ) B)
-
-private theorem monHomInvExplicit {C : Type*} [Category C] [MonoidalCategory C]
-    {M N : C} (mM : MonObj M) (mN : MonObj N) (e : M ≅ N)
-    (h : @IsMonHom _ _ _ M N mM mN e.hom) :
-    @IsMonHom _ _ _ N M mN mM e.inv := by
-  let := mM
-  let := mN
-  let := h
-  infer_instance
-
-private theorem monHomCompExplicit {C : Type*} [Category C] [MonoidalCategory C]
-    {M N O : C} (mM : MonObj M) (mN : MonObj N) (mO : MonObj O)
-    (f : M ⟶ N) (g : N ⟶ O)
-    (hf : @IsMonHom _ _ _ M N mM mN f)
-    (hg : @IsMonHom _ _ _ N O mN mO g) :
-    @IsMonHom _ _ _ M O mM mO (f ≫ g) := by
-  let := mM
-  let := mN
-  let := mO
-  let := hf
-  let := hg
-  infer_instance
 
 private instance discretePullbackIso_mon (X : Scheme.{u}) (A : Type) [CommRing A] :
     IsMonHom (discretePullbackIso X A).hom := by
@@ -997,8 +954,127 @@ attribute [instance] integralModel_coefficientMonObj
 attribute [local semireducible] bundledSmallMap bundledSmallRing
 attribute [-instance] pulledMonObj completedMonObj
 
+private theorem completedResidue_finite (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1)) (n : ℕ) :
+    Finite (completedResidue ℓ E π n) :=
+  (completedCondensedIntegral X ℓ E π hπ).2.1 n
+
+private theorem completedResidue_discrete (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1)) (n : ℕ) :
+    DiscreteTopology (completedResidue ℓ E π n) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+  let R := PadicAlgCl.integers ℓ E
+  let : CompactSpace R := PadicAlgCl.compactSpace_integers ℓ E.1
+  apply QuotientAddGroup.discreteTopology
+  change IsOpen (X := R) ↑((Ideal.span {π}) ^ (n + 1))
+  rw [hπ]
+  exact IsLocalRing.isOpen_maximalIdeal_pow R (n + 1)
+
+private def residueTowerIso (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E)
+    [∀ n, Finite (completedResidue ℓ E π n)]
+    [∀ n, DiscreteTopology (completedResidue ℓ E π n)] :
+    continuousTower X ℓ E π ≅ ConstantCompletion.finiteSystem
+      (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+      (ULift.{u + 1} (PadicAlgCl.integers ℓ E)) (Ideal.span {ULift.up π}) :=
+  let τ : continuousTower X ℓ E π ⟶ ConstantCompletion.finiteSystem
+      (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+      (ULift.{u + 1} (PadicAlgCl.integers ℓ E)) (Ideal.span {ULift.up π}) :=
+    NatTrans.ofOpSequence (fun n ↦ (residueSmallIso X ℓ E π n).hom) (by
+      intro n
+      dsimp only [continuousTower]
+      simp only [Functor.ofOpSequence_map_homOfLE_succ,
+        ConstantCompletion.finiteSystem]
+      exact residueSmallIso_transition X ℓ E π n)
+  NatIso.ofComponents (fun n ↦ residueSmallIso X ℓ E π n.unop) (fun f ↦ τ.naturality f)
+
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The prescribed embedded scalar and residue maps identify with the canonical constant
+/-- The embedded discrete coefficient ring is the constant sheaf on the integer ring:
+constant inverse image, the monoidal constant-sheaf comparison, section-ring
+reconstruction and precomposition with `AsSmall`.
+Source: integral-models proof paragraph (1)
+(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+@[no_expose] def integralModelsEmbeddedConstantIso
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) :
+    (Arrow.mk (IntegralModelsStacks.smallMap X
+        (IntegralModelsEmbedded.scalarMap ℓ E X))).left ≅
+      ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+        (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) :=
+  discreteSmallIso X (PadicAlgCl.integers ℓ E)
+
+attribute [-instance] integralModel_coefficientMonObj in
+/-- The embedded completed coefficient ring is the constant completion: the comparison of
+the embedded integral limit cone with the limit of the constant finite system, through the
+finite constant comparisons `residueSmallIso`.
+Source: integral-models proof paragraph (1), the integral coefficient limit comparison
+(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+@[no_expose] def integralModelsEmbeddedCompletedIso
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E.1)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))
+    (X : Scheme.{u}) :
+    (Arrow.mk (IntegralModelsStacks.smallMap X
+        (IntegralModelsEmbedded.scalarMap ℓ E X))).right ≅
+      ConstantCompletion.completed (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+        (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) (Ideal.span {ULift.up π}) :=
+  haveI := completedResidue_finite X ℓ E π hπ
+  haveI := completedResidue_discrete ℓ E π hπ
+  (continuousConeLimit X ℓ E π hπ).some.conePointsIsoOfNatIso
+    (limit.isLimit _) (residueTowerIso X ℓ E π)
+
+attribute [-instance] integralModel_coefficientMonObj in
+/-- The embedded first residue ring is the constant sheaf on the first quotient: the
+discrete comparison followed by the quotient-lift ring isomorphism.
+Source: integral-models proof paragraph (1); Stacks Tag 099L
+(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+@[no_expose] def integralModelsEmbeddedResidueIso
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :
+    (Arrow.mk (IntegralModelsStacks.smallMap X
+        (IntegralModelsEmbedded.residueMap ℓ E π X))).right ≅
+      ConstantCompletion.finite (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+        (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) (Ideal.span {ULift.up π}) 0 :=
+  discreteSmallIso X (completedResidue ℓ E π 0) ≪≫
+    (constantSheaf (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+      CommRingCat.{u + 1}).mapIso (quotientLiftRingIso (PadicAlgCl.integers ℓ E) π 0)
+
+attribute [-instance] integralModel_coefficientMonObj in
+/-- The completed first residue ring is the constant sheaf on the first quotient: the
+finite constant comparison `residueSmallIso` at level zero.
+Source: integral-models proof paragraph (1); Stacks Tag 093M
+(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+@[no_expose] def integralModelsEmbeddedReductionIso
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E.1)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))
+    (X : Scheme.{u}) :
+    (Arrow.mk (IntegralModelsStacks.smallMap X
+        (completedCoefficientMap X (completedReduction ℓ E π 0)).hom)).right ≅
+      ConstantCompletion.finite (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+        (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) (Ideal.span {ULift.up π}) 0 :=
+  haveI := completedResidue_finite X ℓ E π hπ
+  haveI := completedResidue_discrete ℓ E π hπ
+  residueSmallIso X ℓ E π 0
+
+private theorem integralModelsEmbeddedCompletedIso_hom_projection
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E.1)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))
+    (X : Scheme.{u}) [∀ n, Finite (completedResidue ℓ E π n)]
+    [∀ n, DiscreteTopology (completedResidue ℓ E π n)] (n : ℕ) :
+    (integralModelsEmbeddedCompletedIso ℓ E π hπ X).hom ≫
+        ConstantCompletion.projection (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+          (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) (Ideal.span {ULift.up π}) n =
+      bundledSmallMap X (completedCoefficientMap X (completedReduction ℓ E π n)).hom ≫
+        (residueSmallIso X ℓ E π n).hom :=
+  (continuousConeLimit X ℓ E π hπ).some.conePointsIsoOfNatIso_hom_comp
+    (limit.isLimit _) (residueTowerIso X ℓ E π) (op n)
+
+attribute [-instance] integralModel_coefficientMonObj in
+/-- The scalar square of the embedded completion diagram: the prescribed embedded scalar
+and residue maps identify with the canonical constant
 completion diagram. This assertion identifies coefficient rings and maps only; it contains
 no assertion about kernels, generators, surjectivity, flatness, or module categories.
 
@@ -1024,80 +1100,70 @@ c and d, and the constant-sheaf quotient naturality gives the second equation.
 All these identifications preserve the unit and multiplication and include empty
 schemes and empty site objects. No ring isomorphism is chosen without its displayed
 map compatibility. -/
-theorem integralModelsEmbeddedCompletionDiagram
+theorem integralModelsEmbedded_scalar_square
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)
     (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))
-    (X : Scheme.{u}) [IsNoetherian X] :
-    let J := Scheme.coefficientProEtaleModelTopology.{u, u} X
-    let A := ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)
-    let I : Ideal A := Ideal.span {ULift.up π}
-    let φ := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.scalarMap ℓ E X)
-    let q := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.residueMap ℓ E π X)
-    let qB := IntegralModelsStacks.smallMap X
-      (completedCoefficientMap X (completedReduction ℓ E π 0)).hom
-    ∃ (a : (Arrow.mk φ).left ≅ ConstantCompletion.constant J A)
-      (b : (Arrow.mk φ).right ≅ ConstantCompletion.completed J A I)
-      (c : (Arrow.mk q).right ≅ ConstantCompletion.finite J A I 0)
-      (d : (Arrow.mk qB).right ≅ ConstantCompletion.finite J A I 0),
-      φ ≫ b.hom = a.hom ≫ ConstantCompletion.coefficientMap J A I ∧
-      q ≫ c.hom = a.hom ≫ ConstantCompletion.quotient J A I 0 ∧
-      qB ≫ d.hom = b.hom ≫ ConstantCompletion.projection J A I 0 := by
-  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
-  let R := PadicAlgCl.integers ℓ E
-  let : CompactSpace R := PadicAlgCl.compactSpace_integers ℓ E.1
-  let A := ULift.{u + 1} R
-  let I : Ideal A := Ideal.span {ULift.up π}
+    (X : Scheme.{u}) :
+    IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.scalarMap ℓ E X) ≫
+        (integralModelsEmbeddedCompletedIso ℓ E π hπ X).hom =
+      (integralModelsEmbeddedConstantIso ℓ E X).hom ≫
+        ConstantCompletion.coefficientMap (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+          (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) (Ideal.span {ULift.up π}) := by
+  have := completedResidue_finite X ℓ E π hπ
+  have := completedResidue_discrete ℓ E π hπ
   let J := Scheme.coefficientProEtaleModelTopology.{u, u} X
-  have : ∀ n, Finite (completedResidue ℓ E π n) :=
-    (completedCondensedIntegral X ℓ E π hπ).2.1
-  have : ∀ n, DiscreteTopology (completedResidue ℓ E π n) := fun n ↦ by
-    apply QuotientAddGroup.discreteTopology
-    change IsOpen (X := R) ↑((Ideal.span {π}) ^ (n + 1))
-    rw [hπ]
-    exact IsLocalRing.isOpen_maximalIdeal_pow R (n + 1)
-  let T := continuousTower X ℓ E π
-  let c := continuousCone X ℓ E π
-  let τ : T ⟶ ConstantCompletion.finiteSystem J A I :=
-    NatTrans.ofOpSequence (fun n ↦ (residueSmallIso X ℓ E π n).hom) (by
-      intro n
-      dsimp only [T, continuousTower]
-      simp only [Functor.ofOpSequence_map_homOfLE_succ,
-        ConstantCompletion.finiteSystem]
-      exact residueSmallIso_transition X ℓ E π n)
-  let β : T ≅ ConstantCompletion.finiteSystem J A I :=
-    NatIso.ofComponents (fun n ↦ residueSmallIso X ℓ E π n.unop)
-      (fun f ↦ τ.naturality f)
-  let hc := (continuousConeLimit X ℓ E π hπ).some
-  let b : bundledSmallRing X
-      (completedCoefficient X (Profinite.padicIntegersCondensedRing ℓ E)).X ≅
-        ConstantCompletion.completed J A I := hc.conePointsIsoOfNatIso
-    (limit.isLimit (ConstantCompletion.finiteSystem J A I)) β
-  have hb (n : ℕ) : b.hom ≫ ConstantCompletion.projection J A I n =
-      bundledSmallMap X
-        (completedCoefficientMap X (completedReduction ℓ E π n)).hom ≫
-        (residueSmallIso X ℓ E π n).hom :=
-    hc.conePointsIsoOfNatIso_hom_comp
-      (limit.isLimit (ConstantCompletion.finiteSystem J A I)) β (op n)
-  let a := discreteSmallIso X R
-  let e := (constantSheaf J CommRingCat.{u + 1}).mapIso
-    (quotientLiftRingIso R π 0)
-  let d := residueSmallIso X ℓ E π 0
-  let z := discreteSmallIso X (completedResidue ℓ E π 0) ≪≫ e
-  refine ⟨a, b, z, d, ?_, ?_, (hb 0).symm⟩
-  · apply limit.hom_ext
-    intro n
-    change _ ≫ ConstantCompletion.projection J A I n.unop =
-      _ ≫ ConstantCompletion.projection J A I n.unop
-    let φ := bundledSmallMap X (IntegralModelsEmbedded.scalarMap ℓ E X)
-    have hp : ConstantCompletion.coefficientMap J A I ≫
-        ConstantCompletion.projection J A I n.unop =
-        ConstantCompletion.quotient J A I n.unop :=
-      limit.lift_π (ConstantCompletion.quotientCone J A I) n
-    exact (Category.assoc φ b.hom _).trans
-      ((congrArg (φ ≫ ·) (hb n.unop)).trans
-        ((residueSmallIso_scalar X ℓ E π n.unop).trans
-          ((congrArg (a.hom ≫ ·) hp.symm).trans (Category.assoc _ _ _).symm)))
-  · exact discreteSmallIso_quotient X R π 0
+  let A := ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)
+  let I : Ideal A := Ideal.span {ULift.up π}
+  let b := integralModelsEmbeddedCompletedIso ℓ E π hπ X
+  let a := integralModelsEmbeddedConstantIso ℓ E X
+  have hb (n : ℕ) := integralModelsEmbeddedCompletedIso_hom_projection ℓ E π hπ X n
+  apply limit.hom_ext
+  intro n
+  change _ ≫ ConstantCompletion.projection J A I n.unop =
+    _ ≫ ConstantCompletion.projection J A I n.unop
+  let φ := bundledSmallMap X (IntegralModelsEmbedded.scalarMap ℓ E X)
+  have hp : ConstantCompletion.coefficientMap J A I ≫
+      ConstantCompletion.projection J A I n.unop =
+      ConstantCompletion.quotient J A I n.unop :=
+    limit.lift_π (ConstantCompletion.quotientCone J A I) n
+  exact (Category.assoc φ b.hom _).trans
+    ((congrArg (φ ≫ ·) (hb n.unop)).trans
+      ((residueSmallIso_scalar X ℓ E π n.unop).trans
+        ((congrArg (a.hom ≫ ·) hp.symm).trans (Category.assoc _ _ _).symm)))
+
+attribute [-instance] integralModel_coefficientMonObj in
+/-- The residue square of the embedded completion diagram.
+Source: integral-models proof paragraph (1); Stacks Tag 099L
+(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+theorem integralModelsEmbedded_residue_square
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :
+    IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.residueMap ℓ E π X) ≫
+        (integralModelsEmbeddedResidueIso ℓ E π X).hom =
+      (integralModelsEmbeddedConstantIso ℓ E X).hom ≫
+        ConstantCompletion.quotient (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+          (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) (Ideal.span {ULift.up π}) 0 :=
+  discreteSmallIso_quotient X (PadicAlgCl.integers ℓ E) π 0
+
+attribute [-instance] integralModel_coefficientMonObj in
+/-- The reduction square of the embedded completion diagram: level zero of the projection
+equations of `integralModelsEmbeddedCompletedIso`.
+Source: integral-models proof paragraph (1); Stacks Tag 093M
+(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+theorem integralModelsEmbedded_reduction_square
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E.1)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))
+    (X : Scheme.{u}) :
+    IntegralModelsStacks.smallMap X
+        (completedCoefficientMap X (completedReduction ℓ E π 0)).hom ≫
+        (integralModelsEmbeddedReductionIso ℓ E π hπ X).hom =
+      (integralModelsEmbeddedCompletedIso ℓ E π hπ X).hom ≫
+        ConstantCompletion.projection (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+          (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) (Ideal.span {ULift.up π}) 0 := by
+  have := completedResidue_finite X ℓ E π hπ
+  have := completedResidue_discrete ℓ E π hπ
+  exact (integralModelsEmbeddedCompletedIso_hom_projection ℓ E π hπ X 0).symm
 
 end AlgebraicGeometry.ProEtale

@@ -517,19 +517,15 @@ prove the required acyclicity. These data assemble the prescribed `SupportedSour
 theorem diagonalTrace_supportedSource_exists
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]
-    [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))
+    [IsNoetherian (diagonalSurface Y)]
     [DiagonalTraceLocalizations l Y]
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
-    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))
-    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)
-    (hδ : IsDiagonalLimit l Y hY D δ)
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)
     (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨
       f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
     (t : Result l (ULift.{u} (Padic l)) f) :
     Nonempty (SupportedSource l Y f t.Rc) := by
-  have _ := hδ
   have h : diagonalImmersion Y ≫ f = 𝟙 (ProjectiveLine Y) := by
     rcases hf with rfl | rfl
     · exact pullback.diagonal_fst _
