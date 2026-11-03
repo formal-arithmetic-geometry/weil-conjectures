@@ -61,6 +61,18 @@ abbrev qlbarCharacter (ℓ : ℕ) [Fact ℓ.Prime] {G : Type v} [AddMonoid G]
     AddChar G (MonObj.Γ (Profinite.padicAlgClRingObj.{u} ℓ)) :=
   (Profinite.PadicAlgCl.constRingHom ℓ).toMonoidHom.compAddChar χ
 
+/-- The prime-cover projector, with exactly the translations from lem-fd-as-cover.
+This only specializes the existing condensed projector to Qbar coefficients.
+Source: blueprint lem-fd-as-characters, proof Step 3
+(blueprint: lem-fd-as-characters). -/
+abbrev qlbarPrimeProjector (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
+    (X : Scheme.{u}) (f : Γ(X, ⊤))
+    (σ : Multiplicative (ZMod p) →* Aut (artinSchreierCover p X f))
+    (χ : AddChar (ZMod p) (PadicAlgCl ℓ)) :=
+  condensedProjector (Profinite.padicAlgClRingObj ℓ) (ZMod p)
+    (artinSchreierCover p X f) (fun a ↦ (σ (Multiplicative.ofAdd a)).hom)
+    (qlbarCharacter ℓ χ)
+
 /-- The recorded degree-q sheaf of def-fd-artin-schreier-sheaf,
 `ProEtale.condensedArtinSchreierSheafOf`, with its actual condensed Qbar coefficients
 and the character Psi composed with the field trace. This is an abbreviation, not a
