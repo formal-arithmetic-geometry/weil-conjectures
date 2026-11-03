@@ -430,14 +430,11 @@ private theorem pullSquare_base_nat
           (L((i)^*⟦Λ⟧)) (L((u')^*⟦Λ⟧))).inv =
       (pullbackSquareComparison Λ (si.vert_comp sh)).hom ≫
         Functor.whiskerRight (leftDerivedUpperStarComp Λ i h).hom (L((u')^*⟦Λ⟧)) := by
-  exact square_pasting_from_components
-    (L((h)^*⟦Λ⟧)) (L((i)^*⟦Λ⟧))
-    (L((h')^*⟦Λ⟧)) (L((i')^*⟦Λ⟧))
-    (L((vb)^*⟦Λ⟧)) (L((va)^*⟦Λ⟧)) (L((u')^*⟦Λ⟧))
+  exact square_pasting_from_components _ _ _ _ _ _ _
     (leftDerivedUpperStarComp Λ i h) (leftDerivedUpperStarComp Λ i' h')
     (pullbackSquareComparison Λ sh) (pullbackSquareComparison Λ si)
     (pullbackSquareComparison Λ (si.vert_comp sh))
-    (fun M ↦ pullbackSquareComparison_paste_horizontal Λ si sh M)
+    (pullbackSquareComparison_paste_horizontal Λ si sh)
 
 private theorem pullSquare_triangle_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
