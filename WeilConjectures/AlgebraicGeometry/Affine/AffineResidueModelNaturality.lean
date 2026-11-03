@@ -17,40 +17,30 @@ Source: Stacks Project, Tags 01IB, 064K, 06YJ and 010V.
 (blueprint: new-affine-residue-model-naturality)
 -/
 
-@[expose] public section
+public section
 set_option autoImplicit false
 universe v
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 1600000 in
--- The model isomorphisms compare multiple derived and residue-module structures.
+
+variable
+  [∀ Y : Scheme.{v},
+    HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
+  [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}
+    (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The affine model comparison can be chosen naturally for every represented arrow.
+/-- The comparison from the residue cycle homology of a strictly perfect affine model `K` of
+`E` (via the model isomorphism `m`) to the degree-one derived fibre cohomology of `E`.
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 010V.
 (blueprint: new-affine-residue-model-naturality)
 
-Proof: Terminal sections and associated sheaves give an adjunction whose counit
-is invertible on finite free modules and their retracts. Its termwise natural
-counit reconstructs every strictly perfect complex. The section complex is
-bounded and termwise projective, hence K-flat. Factor the residue point through
-U and use the natural derived open-restriction comparison. The K-flat pullback
-counit computes its derived pullback by termwise residue extension. The residue
-field isomorphism obtained from hp identifies this tensor complex with the
-explicit affineResidueTerm complex. The canonical identification of homology
-with cycles modulo incoming boundaries is natural in chain maps. Compose these
-natural comparisons with the specified model isomorphisms m and m'. The source
-comparison is fixed before the target or arrow is chosen. Naturality identifies
-the residue homology map with derivedFiberCohomologyFunctor applied to b when
-Q(phi) is m.inv followed by the restricted b and m'.hom. All terms in this
-identity depend only on Q(phi), so it holds for every such representative.
-No geometric direct-image hypothesis enters this argument. -/
-theorem affine_residue_model_naturality
-    [∀ Y : Scheme.{v},
-      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
-    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}
-      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]
+Construction: identify residue cycle homology with homology of the residue extension of
+sections, apply `affinePerfectResidueModelIso`, transport along `m`, and use the open
+factorization of derived fibre cohomology. -/
+noncomputable def affineResidueModelEquiv
     (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)
     (p : Ideal Γ(W, U)) [p.IsPrime]
     (hp : p = RingHom.ker (W.evaluation U w hwU).hom)
@@ -60,38 +50,62 @@ theorem affine_residue_model_naturality
     (hK : IsStrictlyPerfect W U K)
     (m : (SheafOfModules.overFunctor.{v}
       (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K) :
-    ∃ eK : affineResidueCycleHomology W U p K ≃+ derivedFiberCohomology W E 1 w,
-      ∀ (E' : schemeDerivedCategory W) (b : E ⟶ E')
-        (C : CochainComplex
-          (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
-        (_hC : IsStrictlyPerfect W U C)
-        (m' : (SheafOfModules.overFunctor.{v}
-          (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E' ≅ DerivedCategory.Q.obj C),
-        ∃ eC : affineResidueCycleHomology W U p C ≃+ derivedFiberCohomology W E' 1 w,
-          ∀ (φ : K ⟶ C), DerivedCategory.Q.map φ =
-              m.inv ≫ (SheafOfModules.overFunctor.{v}
-                (moduleRings W.toRingedSpace) U).mapDerivedCategory.map b ≫ m'.hom →
-            ∀ z : affineResidueCycleHomology W U p K,
-              eC (affineResidueCycleHomologyMap φ z) =
-                (derivedFiberCohomologyFunctor W w 1).map b (eK z) := by
+    affineResidueCycleHomology W U p K ≃+ derivedFiberCohomology W E 1 w :=
+  let q := Classical.choose (affine_residue_evaluation_homology_naturality W w U hwU hU p hp)
+  let θ := Classical.choice (derived_fiber_open_factorization W w U hwU 1)
+  let H := localDerivedFiberCohomologyFunctor W w U hwU 1
+  let oK : H.obj (DerivedCategory.Q.obj K) ≅ (derivedFiberCohomologyFunctor W w 1).obj E :=
+    H.mapIso m.symm ≪≫ θ.app E
+  ((q K).trans
+    ((affinePerfectResidueModelIso W w U hwU hU).app ⟨K, hK⟩).toLinearEquiv.toAddEquiv).trans
+    oK.toLinearEquiv.toAddEquiv
+
+set_option maxHeartbeats 1600000 in
+-- The model isomorphisms compare multiple derived and residue-module structures.
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The canonical affine model comparisons are natural: if a chain map `φ : K ⟶ C` represents
+`b : E ⟶ E'` through the model isomorphisms `m` and `m'`, then the residue cycle homology map
+of `φ` corresponds to the derived fibre cohomology map of `b`.
+Source: Stacks Project, Tags 01IB, 064K, 06YJ and 010V.
+(blueprint: new-affine-residue-model-naturality)
+
+Proof: naturality of `affinePerfectResidueModelIso` and of the evaluation comparison give the
+square for `Q(φ)` in local derived fibre cohomology; substituting the hypothesis on `Q(φ)` and
+using naturality of the open factorization gives the square for `b`. -/
+theorem affineResidueModelEquiv_naturality
+    (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)
+    (p : Ideal Γ(W, U)) [p.IsPrime]
+    (hp : p = RingHom.ker (W.evaluation U w hwU).hom)
+    {E E' : schemeDerivedCategory W} (b : E ⟶ E')
+    {K C : CochainComplex
+      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ}
+    (hK : IsStrictlyPerfect W U K) (hC : IsStrictlyPerfect W U C)
+    (m : (SheafOfModules.overFunctor.{v}
+      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)
+    (m' : (SheafOfModules.overFunctor.{v}
+      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E' ≅ DerivedCategory.Q.obj C)
+    (φ : K ⟶ C)
+    (hφ : DerivedCategory.Q.map φ = m.inv ≫ (SheafOfModules.overFunctor.{v}
+      (moduleRings W.toRingedSpace) U).mapDerivedCategory.map b ≫ m'.hom)
+    (z : affineResidueCycleHomology W U p K) :
+    affineResidueModelEquiv W w U hwU hU p hp E' C hC m' (affineResidueCycleHomologyMap φ z) =
+      (derivedFiberCohomologyFunctor W w 1).map b
+        (affineResidueModelEquiv W w U hwU hU p hp E K hK m z) := by
   classical
   let R := (SheafOfModules.overFunctor.{v}
     (moduleRings W.toRingedSpace) U).mapDerivedCategory
   let H := localDerivedFiberCohomologyFunctor W w U hwU 1
   let A := derivedFiberCohomologyFunctor W w 1
-  obtain ⟨θ⟩ := derived_fiber_open_factorization W w U hwU 1
-  obtain ⟨q, hq⟩ := affine_residue_evaluation_homology_naturality W w U hwU hU p hp
-  obtain ⟨t⟩ := affine_perfect_residue_model_naturality W w U hwU hU
-  let oK : H.obj (DerivedCategory.Q.obj K) ≅ A.obj E :=
-    H.mapIso m.symm ≪≫ θ.app E
+  let θ := Classical.choice (derived_fiber_open_factorization W w U hwU 1)
+  have hq := Classical.choose_spec
+    (affine_residue_evaluation_homology_naturality W w U hwU hU p hp)
+  let q := Classical.choose (affine_residue_evaluation_homology_naturality W w U hwU hU p hp)
+  let t := affinePerfectResidueModelIso W w U hwU hU
+  let oK : H.obj (DerivedCategory.Q.obj K) ≅ A.obj E := H.mapIso m.symm ≪≫ θ.app E
+  let oC : H.obj (DerivedCategory.Q.obj C) ≅ A.obj E' := H.mapIso m'.symm ≪≫ θ.app E'
   let eK := (q K).trans (t.app ⟨K, hK⟩).toLinearEquiv.toAddEquiv
-  refine ⟨eK.trans oK.toLinearEquiv.toAddEquiv, ?_⟩
-  intro E' b C hC m'
-  let oC : H.obj (DerivedCategory.Q.obj C) ≅ A.obj E' :=
-    H.mapIso m'.symm ≪≫ θ.app E'
   let eC := (q C).trans (t.app ⟨C, hC⟩).toLinearEquiv.toAddEquiv
-  refine ⟨eC.trans oC.toLinearEquiv.toAddEquiv, ?_⟩
-  intro φ hφ z
   have hlocal : eC (affineResidueCycleHomologyMap φ z) =
       H.map (DerivedCategory.Q.map φ) (eK z) := by
     change (t.app ⟨C, hC⟩).hom (q C (affineResidueCycleHomologyMap φ z)) = _

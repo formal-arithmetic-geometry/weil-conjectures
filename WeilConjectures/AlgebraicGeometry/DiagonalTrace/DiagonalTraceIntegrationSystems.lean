@@ -69,7 +69,7 @@ theorem diagonalTrace_integrationSystems
           (SpTowerClasses.coefficient (ProjectiveLine Y)
             (SpTowerClasses.Arings l (ULift.{u} (Padic l)) (ProjectiveLine Y))) ∧
         s.limitFunctor = t.LS.R := by
-  obtain ⟨a⟩ := diagonalTrace_supportedSource_exists l Y hY D δ hδ f hf t
+  obtain ⟨a⟩ := diagonalTrace_supportedSource_exists l Y f hf t
   obtain ⟨s, hs⟩ := diagonalTrace_limitWitness_exists l Y hY D δ hδ f hf t a
   exact ⟨a, s, hs⟩
 

@@ -85,13 +85,13 @@ They give mutually inverse module maps. Identify tensor-formula pullback along
 an open immersion with restriction using uniqueness of the pullback adjunction.
 This also treats empty V and infinitely many factors; pullback is not asserted
 to preserve an arbitrary product. -/
-theorem disjointOpenProduct_restrict {X : Scheme.{u}} {ι : Type}
+@[no_expose] noncomputable def disjointOpenProductRestrictIso {X : Scheme.{u}} {ι : Type}
     (U : ι → X.Opens)
     (hdisjoint : ∀ (i j : ι) (x : X), x ∈ U i → x ∈ U j → i = j)
     (F : ι → X.Modules) (i : ι) (V : X.Opens) (hV : V ≤ U i) :
-    Nonempty ((tensorPullback V.ι).obj
+    (tensorPullback V.ι).obj
       (∏ᶜ fun j ↦ (pushforward (U j).ι).obj ((tensorPullback (U j).ι).obj (F j))) ≅
-        (tensorPullback V.ι).obj (F i)) := by
+        (tensorPullback V.ι).obj (F i) := by
   classical
   let D (j : ι) :=
     (pushforward (U j).ι).obj ((tensorPullback (U j).ι).obj (F j))
@@ -124,8 +124,8 @@ theorem disjointOpenProduct_restrict {X : Scheme.{u}} {ι : Type}
     c.app (D i) ≪≫
       (restrictFunctor g).mapIso ((restrictFunctorAdjCounitIso (U i).ι).app _ ≪≫
         ((restrictTensorIso (U i).ι).app (F i)).symm) ≪≫ (c.app (F i)).symm
-  exact ⟨((restrictTensorIso V.ι).app _).symm ≪≫
+  exact ((restrictTensorIso V.ι).app _).symm ≪≫
     PreservesProduct.iso R D ≪≫ productSingleIso (fun j ↦ R.obj (D j)) i hz ≪≫
-      ei ≪≫ (restrictTensorIso V.ι).app (F i)⟩
+      ei ≪≫ (restrictTensorIso V.ι).app (F i)
 
 end AlgebraicGeometry.Scheme.Modules

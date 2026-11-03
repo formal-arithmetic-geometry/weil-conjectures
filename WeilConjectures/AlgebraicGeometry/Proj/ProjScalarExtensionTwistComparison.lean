@@ -280,10 +280,8 @@ theorem scalarExtension_twist_comparison
       (∀ ι : ∀ j : ℤ, (tensorPullback (𝟙 (Proj 𝒜))).obj (twist 𝒜 j) ≅ twist 𝒜 j,
         IsScalarExtensionTwistComparison (GradedRingHom.id 𝒜) (𝟙 (Proj 𝒜)) ι →
         ∀ j : ℤ, ι j = (tensorPullbackSectionId (Proj 𝒜)).app (twist 𝒜 j)) := by
-  obtain ⟨θ, hθ⟩ := scalarExtension_twist_exists
-    𝒜 ℬ ρA ρB hρA hρB β ψ hβψ hgraded r hpre hchart
-  obtain ⟨hu, hm, hz, hi⟩ := scalarExtension_twist_fraction_laws
-    𝒜 ℬ ρA ρB hρA hρB β ψ hβψ hgraded r hpre hchart θ hθ
+  obtain ⟨θ, hθ⟩ := scalarExtension_twist_exists 𝒜 ℬ β ψ hβψ hgraded r hchart
+  obtain ⟨hu, hm, hz, hi⟩ := scalarExtension_twist_fraction_laws 𝒜 ℬ ψ r θ hθ
   refine ⟨θ, hθ, hu, hm, hz, ?_, ?_, hi⟩
   · intro n a ha
     exact scalarExtension_twist_homogeneousSection ψ r θ hθ n a ha

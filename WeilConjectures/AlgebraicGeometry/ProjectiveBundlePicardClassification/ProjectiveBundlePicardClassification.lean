@@ -164,7 +164,7 @@ theorem projective_bundle_picard_classification (S : Scheme.{u}) (E : S.Modules)
         ∀ (d' : LocallyConstant S ℤ) (N' : S.Modules),
           Decomposes p D.line D.invertible L d' N' → d' = d ∧ Nonempty (N' ≅ N) :=
     projective_bundle_local_twist_descent S E r hr D L hL (hlocal L hL)
-  obtain ⟨hrestrict, hadd, hpull⟩ := locallyConstantLineTwist_identities D.line D.invertible
+  obtain ⟨hadd, hpull⟩ := locallyConstantLineTwist_identities D.line D.invertible
   refine
     { twist_restrict := ?_
       classification := hclass
@@ -174,7 +174,8 @@ theorem projective_bundle_picard_classification (S : Scheme.{u}) (E : S.Modules)
       base_change := ?_
       field := hfield }
   · intro d m
-    exact hrestrict (d.comap p.base.hom) m (p ⁻¹ᵁ lineDegreeOpen d m) (fun _ hx ↦ hx)
+    exact ⟨locallyConstantLineTwistRestrictIso D.line D.invertible (d.comap p.base.hom) m
+      (p ⁻¹ᵁ lineDegreeOpen d m) (fun _ hx ↦ hx)⟩
   · intro L hL
     constructor
     · intro _

@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedFiberCohomologyFunctor
+public import WeilConjectures.AlgebraicGeometry.Affine.AffineResidueModelNaturality
 import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedFibreResidueGeometricCompatibility
 import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedFibreResidueAffineData
 
@@ -35,7 +36,10 @@ namespace AlgebraicGeometry.Scheme
 
 set_option maxHeartbeats 1600000 in
 -- The fixed-model naturality traverses derived and residue comparisons.
-/-- Fixed affine-model residue naturality data for a finite family.
+/-- For fixed strictly perfect affine models, the coefficient arrows have chain
+representatives, and the canonical affine residue comparisons followed by geometric fibre
+comparisons `e`, `ei` (which intertwine the derived coefficient arrows with structure-sheaf
+pullback) intertwine the residue cycle homology maps with structure-sheaf pullback.
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
 (blueprint: new-picard-derived-fibre-residue-bridge-core) -/
 theorem picard_derived_fibre_residue_bridge_core
@@ -62,56 +66,56 @@ theorem picard_derived_fibre_residue_bridge_core
     (C : Fin n → CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
     (hK : IsStrictlyPerfect W U K) (hC : ∀ i, IsStrictlyPerfect W U (C i))
-    (hE : Nonempty ((SheafOfModules.overFunctor.{v}
+    (m : ((SheafOfModules.overFunctor.{v}
       (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj
       ((schemeDerivedDirectImage (pullback.snd f k)).obj
         ((DerivedCategory.singleFunctor
           (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
           ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅ DerivedCategory.Q.obj K))
-    (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v}
+    (m' : ∀ i, ((SheafOfModules.overFunctor.{v}
       (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj
       ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj
         ((DerivedCategory.singleFunctor
           (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj
           ((Modules.tensorPullback (pullback.fst (fi i) k)).obj
             ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) :
-    ∃ (eK : affineResidueCycleHomology W U p K ≃+
-      derivedFiberCohomology W
+    ∃ (φ : ∀ i, K ⟶ C i)
+      (e : derivedFiberCohomology W
         ((schemeDerivedDirectImage (pullback.snd f k)).obj
           ((DerivedCategory.singleFunctor
             (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
-            ((Modules.tensorPullback (pullback.fst f k)).obj L))) 1 w)
-      (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
-        derivedFiberCohomology W
-          ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj
-            ((DerivedCategory.singleFunctor
-              (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj
-              ((Modules.tensorPullback (pullback.fst (fi i) k)).obj
-                ((Modules.tensorPullback (ui i)).obj L)))) 1 w)
-      (eKg : affineResidueCycleHomology W U p K ≃+
+            ((Modules.tensorPullback (pullback.fst f k)).obj L))) 1 w ≃+
         Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)
-      (eCg : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
+      (ei : ∀ i, derivedFiberCohomology W
+        ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj
+          ((DerivedCategory.singleFunctor
+            (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj
+            ((Modules.tensorPullback (pullback.fst (fi i) k)).obj
+              ((Modules.tensorPullback (ui i)).obj L)))) 1 w ≃+
         Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1),
-      ∀ i, ∃ (a : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i))
-        (φ : K ⟶ C i), DerivedCategory.Q.map φ = a ∧
-        (∀ z : affineResidueCycleHomology W U p K,
-          eC i (affineResidueCycleHomologyMap φ z) =
-            (derivedFiberCohomologyFunctor W w 1).map
-              (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k)
-              (eK z)) ∧
-        (∀ z : affineResidueCycleHomology W U p K,
-          eCg i (affineResidueCycleHomologyMap φ z) =
-            structureSheafCohomologyPullback
-              (((Over.pullback (S.fromSpecResidueField s)).map
-                (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-                  (ui i) (hui i))).left) 1 (eKg z)) := by
+      ∀ i, DerivedCategory.Q.map (φ i) = m.inv ≫ (SheafOfModules.overFunctor.{v}
+          (moduleRings W.toRingedSpace) U).mapDerivedCategory.map
+            (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) ≫ (m' i).hom ∧
+        (∀ z, ei i ((derivedFiberCohomologyFunctor W w 1).map
+          (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) z) =
+          structureSheafCohomologyPullback
+            (((Over.pullback (S.fromSpecResidueField s)).map
+              (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
+                (ui i) (hui i))).left) 1 (e z)) ∧
+        ∀ z, ((affineResidueModelEquiv W w U hwU hU p hp _ (C i) (hC i) (m' i)).trans (ei i))
+            (affineResidueCycleHomologyMap (φ i) z) =
+          structureSheafCohomologyPullback
+            (((Over.pullback (S.fromSpecResidueField s)).map
+              (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
+                (ui i) (hui i))).left) 1
+            ((affineResidueModelEquiv W w U hwU hU p hp _ K hK m).trans e z) := by
   classical
-  obtain ⟨eK, eC, φ, hdata⟩ := picard_derived_fibre_residue_affine_data
-    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K C hK hC hE hCi
-  obtain ⟨eKg, eCg, hgeom⟩ := picard_derived_fibre_residue_geometric_compatibility
-    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K C hK hC hE hCi eK eC φ hdata
-  refine ⟨eK, eC, eKg, eCg, ?_⟩
-  intro i
-  exact ⟨DerivedCategory.Q.map (φ i), φ i, rfl, hdata i, hgeom i⟩
+  obtain ⟨φ, hφ⟩ := picard_derived_fibre_residue_affine_data
+    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K C hK hC m m'
+  obtain ⟨e, ei, he⟩ := picard_derived_fibre_residue_geometric_compatibility
+    f Xi fi ui hui L W k w s hw τ
+  refine ⟨φ, e, ei, fun i ↦ ⟨(hφ i).1, he i, fun z ↦ ?_⟩⟩
+  simp only [AddEquiv.trans_apply]
+  rw [(hφ i).2 z, he i]
 
 end AlgebraicGeometry.Scheme

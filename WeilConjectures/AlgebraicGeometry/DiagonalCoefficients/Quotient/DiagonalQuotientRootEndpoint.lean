@@ -374,7 +374,7 @@ theorem diagonalQuotientRootEndpoint
     (finiteRoots : FiniteRoots X (l ^ (n + 1))) :
     Nonempty (QuotientLineRealization l E π n n hA X e) := by
   have _ := hπ
-  obtain ⟨roots⟩ := diagonalIntegralRoots_exists l X E
+  let roots := diagonalIntegralRoots l X E
   obtain ⟨q, hq⟩ := quotientRootProjection_exists l X E π n hA roots
   have : IsIso q := diagonalQuotientRootProjection_isIso l X hX E π n hA roots q hq
   obtain ⟨endpoint⟩ := endpointFromFree e (l ^ (n + 1)) hA finiteRoots q
