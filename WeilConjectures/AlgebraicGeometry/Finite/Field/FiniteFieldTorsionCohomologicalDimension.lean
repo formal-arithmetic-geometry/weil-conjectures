@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.FiniteStalkSubobjectsCover
 import Mathlib.Order.Shrink
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
+import all WeilConjectures.AlgebraicGeometry.Curve.GenericTorsionFiniteStalk
 
 /-!
 # The all-torsion cohomological dimension of a finite field
@@ -163,44 +164,6 @@ private theorem finite_stalk_vanishing (K : Type u) [Field K] [Finite K]
       apply Finset.sum_eq_zero
       intro i _
       rw [(hz i).eq_of_tgt (T.map (a i)) 0, zero_comp]
-
-private theorem finite_fiber_sup
-    {C : Type*} [Category C] [Abelian C]
-    (Φ : C ⥤ AddCommGrpCat.{u + 1}) [Φ.Additive]
-    [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ]
-    {M : C} (S T : Subobject M)
-    (hS : Finite (Φ.obj (S : C))) (hT : Finite (Φ.obj (T : C))) :
-    Finite (Φ.obj ((S ⊔ T : Subobject M) : C)) := by
-  have : Epi (Subobject.supDesc S T) := Subobject.epi_supDesc S T
-  have : PreservesBinaryBiproducts Φ :=
-    preservesBinaryBiproducts_of_preservesBinaryProducts Φ
-  let e := Φ.mapBiprod (S : C) (T : C) ≪≫
-    AddCommGrpCat.biprodIsoProd (Φ.obj (S : C)) (Φ.obj (T : C))
-  have : Finite (Φ.obj ((S : C) ⊞ (T : C))) :=
-    Finite.of_injective e.hom (ConcreteCategory.bijective_of_isIso e.hom).1
-  exact Finite.of_surjective (Φ.map (Subobject.supDesc S T))
-    ((AddCommGrpCat.epi_iff_surjective _).mp inferInstance)
-
-private theorem torsion_of_mono
-    {X : Scheme.{u}} {N M : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
-    (f : N ⟶ M) [Mono f] (hM : M.IsTorsion) : N.IsTorsion := by
-  intro U s
-  obtain ⟨R, hR, hs⟩ := hM (f.hom.app U s)
-  refine ⟨R, hR, ?_⟩
-  intro V g hg
-  obtain ⟨n, hn, he⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.mp (hs hg)
-  refine isOfFinAddOrder_iff_nsmul_eq_zero.mpr ⟨n, hn, ?_⟩
-  have hinj : Function.Injective (f.hom.app (Opposite.op V)) := by
-    rw [← AddCommGrpCat.mono_iff_injective]
-    exact ((sheafToPresheaf X.smallEtaleTopology _ ⋙
-      (CategoryTheory.evaluation _ _).obj (Opposite.op V)).map_mono f :)
-  apply hinj
-  rw [map_nsmul, map_zero]
-  have hw := ConcreteCategory.congr_hom (f.hom.naturality g.op) s
-  change f.hom.app (Opposite.op V) (N.obj.map g.op s) =
-    M.obj.map g.op (f.hom.app U s) at hw
-  rw [hw]
-  exact he
 
 private theorem finite_stalk_colimit
     (K : Type u) [Field K]

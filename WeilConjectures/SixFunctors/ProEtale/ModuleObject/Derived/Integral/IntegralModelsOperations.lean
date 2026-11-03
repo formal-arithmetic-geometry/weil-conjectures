@@ -32,6 +32,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.CondensedClosedSupportAdjunction
+public import WeilConjectures.AlgebraicGeometry.CondensedPullbackTensorComparison
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedClosedSupportAdjunction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedOpenClosedInternalHomMaps
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSupportProjectionFormula
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
@@ -333,30 +339,33 @@ private theorem tensor_single_noetherian
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek supportPullback
 attribute [local irreducible] closedSupportProjection openSupportProjection
 
-/-- Compose the unbounded open and closed support projection isomorphisms.
-The coefficient is kept abstract so elaboration uses the functor comparison API. -/
-private theorem immersion_projection
+/-- The projection formula for a locally closed immersion `j ≫ i`, with `j` an open
+immersion and `i` a closed immersion of Noetherian schemes: for arbitrary unbounded complexes
+`L` on `S` and `M` on `X`, the natural isomorphism `a_! L ⊗ᴸ M ≅ a_! (L ⊗ᴸ a^* M)`, where
+`a = j ≫ i` and `a_! = Ri_* ∘ j_!`.
+
+It is the closed support projection isomorphism `closedSupportProjection` for `i` (applied to
+`j_! L` and `M`), followed by the inverse of the open support projection isomorphism
+`openSupportProjection` for `j` (applied to `L` and `i^* M`), conjugated by the identifications
+`Ri_* ≅ i_*`, `supportPullback ≅ upperStar` and `(j ≫ i)^* ≅ j^* ∘ i^*`. -/
+noncomputable def immersionLowerShriekProjectionIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     {S Z X : Scheme.{u}} [IsNoetherian Z] [IsNoetherian X]
     (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i]
     (L : DerivedCategory (supportModules Λ S))
     (M : DerivedCategory (supportModules Λ X)) :
-    Nonempty
-      ((((derivedTensor Λ X).obj
+    ((derivedTensor Λ X).obj
         ((lowerStar Λ i).rightDerivedFunctor.obj
-          ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L))).obj M) ≅
-        (lowerStar Λ i).rightDerivedFunctor.obj
-          ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj
-            (((derivedTensor Λ S).obj L).obj
-              ((upperStar Λ (j ≫ i)).mapDerivedCategory.obj M)))) := by
+          ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L))).obj M ≅
+      (lowerStar Λ i).rightDerivedFunctor.obj
+        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj
+          (((derivedTensor Λ S).obj L).obj
+            ((upperStar Λ (j ≫ i)).mapDerivedCategory.obj M))) :=
   have hij : Set.range i.base = (Set.range i.openComplement.ι.base)ᶜ := by
     simp [Scheme.Hom.coe_openComplement]
-  have : PreservesFiniteColimits (lowerStar Λ i) :=
+  letI : PreservesFiniteColimits (lowerStar Λ i) :=
     closedSupport_lowerStarExact Λ i i.openComplement.ι hij
-  have hc := (openClosedSupportProjectionFormula Λ i i.openComplement.ι hij).1
-  have ho := (openClosedSupportProjectionFormula Λ j.closedComplement j
-    j.range_closedComplement).2
   let qi := (lowerStar Λ i).mapDerivedCategory
   let qj := (openImmersionLowerShriek Λ j).mapDerivedCategory
   let pi := (upperStar Λ i).mapDerivedCategory
@@ -365,22 +374,28 @@ private theorem immersion_projection
   let ecomp := Functor.mapDerivedCategoryNatIso (upperStarComp Λ j i) ≪≫
     Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ j)
   let er := (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
-  have : IsIso (closedSupportProjection Λ i (qj.obj L) M) := hc (qj.obj L) M
-  have : IsIso (openSupportProjection Λ j L (pi.obj M)) := ho L (pi.obj M)
-  refine ⟨((derivedTensor Λ X).mapIso (er.app (qj.obj L))).app M ≪≫
+  haveI : IsIso (closedSupportProjection Λ i (qj.obj L) M) :=
+    (openClosedSupportProjectionFormula Λ i i.openComplement.ι hij).1 (qj.obj L) M
+  haveI : IsIso (openSupportProjection Λ j L (pi.obj M)) :=
+    (openClosedSupportProjectionFormula Λ j.closedComplement j
+      j.range_closedComplement).2 L (pi.obj M)
+  ((derivedTensor Λ X).mapIso (er.app (qj.obj L))).app M ≪≫
     asIso (closedSupportProjection Λ i (qj.obj L) M) ≪≫
     qi.mapIso (((derivedTensor Λ Z).obj (qj.obj L)).mapIso (ei.app M)) ≪≫
     qi.mapIso (asIso (openSupportProjection Λ j L (pi.obj M))).symm ≪≫
     qi.mapIso (qj.mapIso (((derivedTensor Λ S).obj L).mapIso
       (ej.app (pi.obj M) ≪≫ (ecomp.app M).symm))) ≪≫
-    (er.app _).symm⟩
+    (er.app _).symm
 
 /-- Inverse image, uncompleted relative derived tensor and locally closed extension by zero
-preserve bounded constructibility over the integral coefficient ring. The projection formula
-holds for arbitrary unbounded complexes. The locally closed functor is written explicitly as
-open extension by zero followed by derived closed direct image; the latter is ordinary direct
-image on Noetherian schemes. Finite coefficient fields are represented inside the fixed
-algebraic closure, with their induced valuation and ring of integers.
+preserve bounded constructibility over the integral coefficient ring. The locally closed functor
+is written explicitly as open extension by zero followed by derived closed direct image; the
+latter is ordinary direct image on Noetherian schemes. Finite coefficient fields are represented
+inside the fixed algebraic closure, with their induced valuation and ring of integers.
+
+This theorem records clauses (1)--(3). Clause (4), the projection formula for arbitrary
+unbounded complexes, is the natural isomorphism `immersionLowerShriekProjectionIso` (applied
+with coefficient `Profinite.padicIntegersRingObj ℓ E.val`).
 
 Source: blueprint main-20261015, sk-lem-integral-models-operations, clauses (1)--(4)
 (blueprint: det-lem-integral-models-operations).
@@ -534,10 +549,10 @@ isomorphism for arbitrary $N,M$.
 i_*u_!(L\otimes^{\mathbf L}u^*i^*M)=a_!(L\otimes^{\mathbf L}a^*M). $$ Here $a^*=u^*i^*$ by
 composition of inverse-image functors [lem-weil-pbc-site-morphism-composition] and the Cartesian
 coefficient identifications already fixed. Both factors are the ambient, exact immersion
-functors from step 3. This proves clause (4) with precisely its stated arbitrary derived objects
-and is natural in both arguments.
+functors from step 3. This gives clause (4), `immersionLowerShriekProjectionIso`, for arbitrary
+derived objects; it is natural in both arguments.
 -/
-theorem integralModelsOperations (ℓ : ℕ) [Fact ℓ.Prime]
+theorem integralModels_operations (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     (∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y)
       (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -560,26 +575,9 @@ theorem integralModelsOperations (ℓ : ℕ) [Fact ℓ.Prime]
       constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X
         (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj
           (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val)
-            j).mapDerivedCategory).obj L))) ∧
-    (∀ {S Z X : Scheme.{u}} [IsNoetherian S] [IsNoetherian Z] [IsNoetherian X]
-      (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i]
-      (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) S)))
-      (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))),
-      Nonempty
-        ((((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj
-          (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj
-            (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val)
-              j).mapDerivedCategory).obj L))).obj M) ≅
-          ((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj
-            (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val)
-              j).mapDerivedCategory).obj
-              (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) S).obj L).obj
-                (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) (j ≫
-                  i)).mapDerivedCategory).obj M))))) := by
+            j).mapDerivedCategory).obj L))) := by
   have hE : FiniteDimensional ℚ_[ℓ] E.val := E.property
-  refine ⟨?_, ?_, ?_, ?_⟩
+  refine ⟨?_, ?_, ?_⟩
   · intro X Y _ _ f K hK
     let Λ := Profinite.padicIntegersRingObj ℓ E.val
     have hX := (adicConstructibilityPredicateComparison ℓ X Λ (.integral E.val)).1
@@ -631,7 +629,5 @@ theorem integralModelsOperations (ℓ : ℕ) [Fact ℓ.Prime]
     exact ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ X)
       (((lowerStar Λ i).rightDerivedFunctorHomologyFunctorIso n).app _)
       (hc.2.2.2.2.2.1 _ (hJ.2 n))
-  · intro S Z X _ _ _ j _ i _ L M
-    exact immersion_projection (Profinite.padicIntegersRingObj ℓ E.val) j i L M
 
 end AlgebraicGeometry.ProEtale.CondensedRing

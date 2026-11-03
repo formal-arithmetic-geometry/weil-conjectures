@@ -640,6 +640,14 @@ theorem etale_flatConstructible_orderedStratification
   have : Module.FinitePresentation A M := Module.finitePresentation_of_finite A M
   exact ⟨inferInstance, Module.Flat.projective_of_finitePresentation⟩
 
+/-- The extension by zero `a_{k!} a_k^* F` of the restriction of `F` to the `k`-th stratum
+of a stratification. -/
+abbrev flatModelStratumExtension {X : Scheme.{u}} [IsNoetherian X] (A : Type (u + 1))
+    [CommRing A] (str : Stratification X) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (k : Fin str.n) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A) :=
+  (flatModelEtaleExtension A (str.immersion k) (str.isImmersion k)).obj
+    ((Etale.upperStar (ModuleCat.{u + 1} A) (str.immersion k)).obj F)
+
 /-- Clause (2) on the etale site: the specified finite sheaf-extension filtration
 and flat constructible degree-zero factors of finite Tor amplitude.
 Source: blueprint det-sf-flat-model-generation
@@ -751,40 +759,34 @@ assuming that S_1→X itself is open. -/
 theorem etale_flatConstructible_extensionFiltration
     (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
-    (_hc : IsConstructibleEtaleModuleSheaf F)
-    (_hf : ObjectProperty.flat F)
-    (str : Stratification X) (_ho : FlatModelOrderedStratification str)
-    (_hp : ∀ k : Fin str.n, FlatModelEtaleLisseProjective A
+    (str : Stratification X) (ho : FlatModelOrderedStratification str)
+    (hp : ∀ k : Fin str.n, FlatModelEtaleLisseProjective A
       ((Etale.upperStar (ModuleCat.{u + 1} A) (str.immersion k)).obj F)) :
-    FlatModelExtensionFiltration
-      (fun k : Fin str.n ↦
-        (flatModelEtaleExtension A (str.immersion k) (str.isImmersion k)).obj
-          ((Etale.upperStar (ModuleCat.{u + 1} A) (str.immersion k)).obj F)) F ∧
+    FlatModelExtensionFiltration (flatModelStratumExtension A str F) F ∧
     ∀ k : Fin str.n,
-      ∃ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A),
-        G = (flatModelEtaleExtension A (str.immersion k) (str.isImmersion k)).obj
-          ((Etale.upperStar (ModuleCat.{u + 1} A) (str.immersion k)).obj F) ∧
-        ObjectProperty.flat G ∧
-        IsConstructibleEtaleModuleSheaf G ∧
-        (∀ q : ℤ, IsConstructibleEtaleModuleSheaf
-          ((_root_.DerivedCategory.homologyFunctor _ q).obj
-            ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) ∧
-        (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
-          IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
-            ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) ∧
-        (∃ a b : ℤ, a ≤ b ∧ Etale.DerivedCategory.hasTorAmplitudeIn A X a b
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) := by
-  refine ⟨flatModel_etale_ordered_filtration X A F str _ho, fun k ↦ ?_⟩
-  let G := (flatModelEtaleExtension A (str.immersion k) (str.isImmersion k)).obj
-    ((Etale.upperStar (ModuleCat.{u + 1} A) (str.immersion k)).obj F)
+      ObjectProperty.flat (flatModelStratumExtension A str F k) ∧
+      IsConstructibleEtaleModuleSheaf (flatModelStratumExtension A str F k) ∧
+      (∀ q : ℤ, IsConstructibleEtaleModuleSheaf
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            (flatModelStratumExtension A str F k)))) ∧
+      (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
+        IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            (flatModelStratumExtension A str F k)))) ∧
+      (∃ a b : ℤ, a ≤ b ∧ Etale.DerivedCategory.hasTorAmplitudeIn A X a b
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          (flatModelStratumExtension A str F k))) := by
+  refine ⟨flatModel_etale_ordered_filtration X A F str ho, fun k ↦ ?_⟩
+  let G := flatModelStratumExtension A str F k
   obtain ⟨hf, hc⟩ := flatModel_etale_extension_properties A (str.immersion k)
-    (str.isImmersion k) _ (_hp k)
+    (str.isImmersion k) _ (hp k)
   have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mp hc
   have hctf : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X
       ((_root_.DerivedCategory.singleFunctor _ 0).obj G) :=
     ⟨Etale.DerivedCategory.boundedConstructible_singleFunctor_obj _ 0,
       0, 0, Etale.torAmplitudeIn_singleFunctor_obj_of_flat A G hf⟩
-  exact ⟨G, rfl, hf, hc, (flatModel_etale_ctf_iff X A _).mpr hctf⟩
+  exact ⟨hf, hc, (flatModel_etale_ctf_iff X A _).mpr hctf⟩
 
 /-- Clause (3) on the etale site: equality with the smallest replete full
 subcategory closed under shifts, cones and direct summands.
@@ -893,7 +895,7 @@ theorem etale_flatConstructible_thickGeneration
       (hc : IsConstructibleEtaleModuleSheaf F) (hf : ObjectProperty.flat F) :
       G.triangEnvelope ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
     obtain ⟨str, ho, hp⟩ := etale_flatConstructible_orderedStratification X A F hc hf
-    have hfil := (etale_flatConstructible_extensionFiltration X A F hc hf str ho hp).1
+    have hfil := (etale_flatConstructible_extensionFiltration X A F str ho hp).1
     refine flatModel_filtration_mem hfil G.triangEnvelope (fun k ↦ ?_)
     exact G.le_triangEnvelope _
       ⟨str.domain k, str.immersion k, str.isImmersion k, _, hp k, ⟨Iso.refl _⟩⟩

@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficien
 import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+import all WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficientRefinement
 
 /-!
 # Scalar extension respects ordinary etale direct-image exchange
@@ -44,7 +45,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-private theorem coefficientMate_counit
+private theorem coefficientMate_mapCounit
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W T : Scheme.{u}} (v : W ⟶ T)
     (M : DerivedCategoryModule A W) :
@@ -80,26 +81,6 @@ private theorem coefficientMate_counit
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc, Functor.map_comp]
   simp [← Functor.map_comp, TwoSquare.mk]
-
-private theorem coefficientPullback_comp
-    {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) {X T₁ T₂ : Scheme.{u}}
-    (v : T₁ ⟶ T₂) (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (h : j₁ ≫ v = j₂)
-    (N : DerivedCategoryModule A T₂) :
-    (Functor.mapDerivedCategoryNatIso
-          (upperStarComp (ModuleCat.{u + 1} B) j₁ v j₂ h.symm) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).hom.app ((scalarExtension φ T₂).obj N) ≫
-      (upperStar (ModuleCat.{u + 1} B) j₁).mapDerivedCategory.map
-        ((properOpenCoefficientPullbackIso φ v).hom.app N) ≫
-      (properOpenCoefficientPullbackIso φ j₁).hom.app
-        ((upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory.obj N) =
-      (properOpenCoefficientPullbackIso φ j₂).hom.app N ≫
-        (scalarExtension φ X).map
-          ((Functor.mapDerivedCategoryNatIso
-              (upperStarComp (ModuleCat.{u + 1} A) j₁ v j₂ h.symm) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom.app N) := by
-  simpa only [properOpenCoefficientPullbackIso] using
-    scalarPullback_composition φ v j₁ j₂ h N
 
 private theorem coefficientPullback_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -212,8 +193,8 @@ theorem exactDerivedBaseChangeMap_scalarExtension
       θB.hom.app (R(lowerStar (ModuleCat.{u + 1} B) f).obj ((QA X).obj M)) ≫
         (PB h).map (afB.counit.app ((QA X).obj M)) :=
     mateEquiv_counit afB afB' (TwoSquare.mk _ _ _ _ θB.hom) ((QA X).obj M)
-  have hf := coefficientMate_counit φ f M
-  have hf' := coefficientMate_counit φ f' ((PA h).obj M)
+  have hf := coefficientMate_mapCounit φ f M
+  have hf' := coefficientMate_mapCounit φ f' ((PA h).obj M)
   have nc := afB'.counit.naturality ((lp h).app M)
   have ns := θB.hom.naturality ((scalarMate φ f).app M)
   have nh := (lp h).naturality (afA.counit.app M)

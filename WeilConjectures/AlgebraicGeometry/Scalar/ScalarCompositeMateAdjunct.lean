@@ -248,7 +248,7 @@ Proof:
    extension expands the remaining composite counit into the two maps below.
 Only the specified isomorphisms are inverted; no scalar mate is inverted, and
 no boundedness, properness or coefficient flatness is used. -/
-theorem scalarCompositeMateAdjunct
+theorem scalarMate_comp_homEquiv_symm
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z)
     (M : DerivedCategoryModule A X) :

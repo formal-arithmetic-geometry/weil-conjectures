@@ -33,6 +33,9 @@ import Mathlib.NumberTheory.Padics.PadicNumbers
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Mathlib.Algebra.Field.ULift
+import all WeilConjectures.AlgebraicGeometry.NormedCoefficientRealization.NormedCoefficientRealization
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
 
 /-! # Boundary vanishing of proper direct image of open extension by zero
 
@@ -110,40 +113,6 @@ private local instance comap_iso_equivalence {Z : Scheme.{u}}
       Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) R).IsEquivalence :=
   (Mod.comapEquivalenceOfIsIso φ).isEquivalence_functor
 
-private theorem constructible_comap_iff {Z : Scheme.{u}}
-    {R S : Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}} [MonObj R] [MonObj S]
-    [IsCommMonObj R] [IsCommMonObj S] (φ : S ⟶ R) [IsMonHom φ] [IsIso φ]
-    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) R) :
-    IsConstructibleModuleObject S ((Mod.comap φ).obj M) ↔
-      IsConstructibleModuleObject R M := by
-  constructor
-  · intro h
-    exact constructible_of_iso ((Mod.comapEquivalenceOfIsIso φ).unitIso.app M).symm
-      (constructible_comap _ h)
-  · exact constructible_comap φ
-
-private theorem bounded_comap_iff {Z : Scheme.{u}}
-    {R S : Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}} [MonObj R] [MonObj S]
-    [IsCommMonObj R] [IsCommMonObj S] (φ : S ⟶ R) [IsMonHom φ] [IsIso φ]
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) R)) :
-    boundedConstructible S ((Mod.comap φ).mapDerivedCategory.obj K) ↔
-      boundedConstructible R K := by
-  rw [mem_boundedConstructible_iff, mem_boundedConstructible_iff]
-  apply and_congr
-  · constructor
-    · rintro ⟨a, b, h⟩
-      exact ⟨a, b, fun i hi ↦
-        (Mod.comap φ).isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
-          (h i hi)⟩
-    · rintro ⟨a, b, h⟩
-      exact ⟨a, b, fun i hi ↦
-        (Mod.comap φ).isZero_homologyFunctor_mapDerivedCategory_obj (h i hi)⟩
-  · apply forall_congr'
-    intro n
-    let e := ((Mod.comap φ).mapDerivedCategoryHomologyFunctorIso n).app K
-    exact ⟨fun h ↦ (constructible_comap_iff φ _).1 (constructible_of_iso e.symm h),
-      fun h ↦ constructible_of_iso e ((constructible_comap_iff φ _).2 h)⟩
-
 private theorem boundaryVanishing_transport
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -169,7 +138,7 @@ private theorem boundaryVanishing_transport
   let K' : ConstantModelConstructibleFiniteTor Λ' W :=
     ⟨(T W).obj K.obj, constantModelCtf_coefficientIso e W K⟩
   have hb : boundedConstructible (condensedRingObj Λ' W) K'.obj :=
-    (bounded_comap_iff (coefficientMap φ W) K.obj).mpr hK
+    (NormedCoefficientRealization.bounded_comap_iff (coefficientMap φ W) K.obj).mpr hK
   have hz' : IsZero
       ((moduleObjectDerivedPullback Λ' (pullback.fst r c)).obj K'.obj) :=
     ((T (pullback r c)).map_isZero hz).of_iso ((pull (pullback.fst r c)).app K.obj).symm
@@ -235,60 +204,6 @@ private theorem boundaryVanishing_rational
     exact ((lowerStar (Profinite.padicAlgClRingObj ℓ) b.left).isZero_rightDerivedFunctor_obj
       hz).of_iso ((ObjectProperty.ι _).mapIso (asIso β))
 
-private noncomputable def continuousIso
-    {A B : Type} [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
-    [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
-    (e : A ≃+* B) (he : Continuous e) (hei : Continuous e.symm) :
-    Mon.mk (Profinite.continuousMapRingObj.{u} A) ≅
-      Mon.mk (Profinite.continuousMapRingObj.{u} B) := by
-  let eR : Profinite.continuousMapRingSheaf.{u} A ≅
-      Profinite.continuousMapRingSheaf.{u} B :=
-    { hom := Profinite.continuousMapRingSheafMap e.toRingHom he
-      inv := Profinite.continuousMapRingSheafMap e.symm.toRingHom hei
-      hom_inv_id := by
-        ext S f
-        apply ULift.ext
-        ext x
-        exact e.symm_apply_apply _
-      inv_hom_id := by
-        ext S f
-        apply ULift.ext
-        ext x
-        exact e.apply_symm_apply _ }
-  let eAb := (sheafCompose (coherentTopology Profinite.{u})
-    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
-  have : IsMonHom eAb.hom := Sheaf.isMonHom_sheafCompose_map _ eR.hom
-  have : IsMonHom eAb.inv := Sheaf.isMonHom_sheafCompose_map _ eR.inv
-  exact
-    { hom := Mon.ofHom eAb.hom
-      inv := Mon.ofHom eAb.inv
-      hom_inv_id := Mon.Hom.ext eAb.hom_inv_id
-      inv_hom_id := Mon.Hom.ext eAb.inv_hom_id }
-
-private theorem norm_spectral (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Type u) [NormedField E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    (hE : ∀ x : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] E x‖ = ‖x‖) (x : E) :
-    ‖x‖ = spectralNorm ℚ_[ℓ] E x :=
-  spectralNorm_unique_field_norm_ext (f := NormedField.toAbsoluteValue E) hE x
-
-private theorem embedding_isometry (ℓ : ℕ) [Fact ℓ.Prime]
-    {E F : Type u} [NormedField E] [NormedField F]
-    [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [Algebra ℚ_[ℓ] F]
-    (hE : ∀ x : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] E x‖ = ‖x‖)
-    (hF : ∀ x : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] F x‖ = ‖x‖) (σ : E →ₐ[ℚ_[ℓ]] F) :
-    Isometry σ := by
-  let v : AbsoluteValue E ℝ :=
-    { toFun := fun x ↦ ‖σ x‖
-      map_mul' := fun x y ↦ by simp only [map_mul, norm_mul]
-      nonneg' := fun x ↦ norm_nonneg _
-      eq_zero' := fun x ↦ by simp only [norm_eq_zero, map_eq_zero]
-      add_le' := fun x y ↦ by simpa only [map_add] using norm_add_le (σ x) (σ y) }
-  have hv (x : E) : ‖σ x‖ = ‖x‖ := by
-    exact (spectralNorm_unique_field_norm_ext (f := v)
-      (fun a ↦ by change ‖σ (algebraMap ℚ_[ℓ] E a)‖ = ‖a‖; rw [σ.commutes]; exact hF a)
-      x).trans (norm_spectral ℓ E hE x).symm
-  exact AddMonoidHomClass.isometry_of_norm σ hv
-
 private theorem field_model (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] :
@@ -299,7 +214,7 @@ private theorem field_model (ℓ : ℕ) [Fact ℓ.Prime]
   let σ := i.equivFieldRange
   have : FiniteDimensional ℚ_[ℓ] F := σ.toLinearEquiv.finiteDimensional
   refine ⟨⟨F, inferInstance⟩, σ, ?_⟩
-  exact embedding_isometry ℓ
+  exact NormedCoefficientRealization.embedding_isometry ℓ
     (fun x ↦ norm_algebraMap' E x) (fun x ↦ norm_algebraMap' F x) σ.toAlgHom
 
 private theorem field_realization (ℓ : ℕ) [Fact ℓ.Prime]
@@ -331,156 +246,6 @@ private theorem unitBall_realization (ℓ : ℕ) [Fact ℓ.Prime]
   have hii : Isometry ei.symm := fun x y ↦ by
     simpa only [ei.apply_symm_apply] using (hi (ei.symm x) (ei.symm y)).symm
   exact ⟨F, ⟨continuousIso ei hi.continuous hii.continuous⟩⟩
-
-private theorem spectral_embedded_norm
-    (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
-    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)] (x : ULift.{u} E.val) :
-    Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val) x =
-      ‖(x.down : PadicAlgCl ℓ)‖ := by
-  let f : ULift.{u} E.val →+* PadicAlgCl ℓ :=
-    E.val.val.toRingHom.comp ULift.ringEquiv.toRingHom
-  let a : AbsoluteValue (ULift.{u} E.val) ℝ :=
-    { toFun := fun x ↦ ‖f x‖
-      map_mul' := fun x y ↦ by rw [map_mul, norm_mul]
-      nonneg' := fun x ↦ norm_nonneg _
-      eq_zero' := fun x ↦ by simp only [norm_eq_zero, map_eq_zero_iff f f.injective]
-      add_le' := fun x y ↦ by rw [map_add]; exact norm_add_le _ _ }
-  have ha : ∀ y : ℚ_[ℓ], a (algebraMap ℚ_[ℓ] (ULift.{u} E.val) y) = ‖y‖ := by
-    intro y
-    change ‖algebraMap ℚ_[ℓ] (PadicAlgCl ℓ) y‖ = ‖y‖
-    exact PadicAlgCl.norm_extends ℓ y
-  exact (spectralNorm_unique_field_norm_ext ha x).symm
-open CategoryTheory.Limits Opposite
-open scoped CategoryTheory.Obj
-private theorem mem_lift_integers
-    (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
-    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)] (x : ULift.{u} E.val) :
-    x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val) ↔
-      x.down ∈ PadicAlgCl.integers ℓ E.val := by
-  have h := (Padic.coefficientExtensionIntegers_dvr ℓ (ULift.{u} E.val)).choose_spec.1 x
-  exact h.trans (by
-    rw [spectral_embedded_norm ℓ E x, PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
-    rfl)
-private noncomputable def integerLiftEquiv
-    (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
-    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)] :
-    PadicAlgCl.integers ℓ E.val ≃+*
-      Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val) where
-  toFun x := ⟨ULift.up x.val, (mem_lift_integers ℓ E _).2 x.property⟩
-  invFun x := ⟨x.val.down, (mem_lift_integers ℓ E _).1 x.property⟩
-  left_inv _x := rfl
-  right_inv _x := rfl
-  map_mul' _x _y := rfl
-  map_add' _x _y := rfl
-private noncomputable def integerLiftHomeo
-    (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
-    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)] :
-    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.val
-    letI nf := (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val)).toNormedField
-    letI : TopologicalSpace (ULift.{u} E.val) :=
-      nf.toMetricSpace.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
-    PadicAlgCl.integers ℓ E.val ≃ₜ
-      Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val) := by
-  letI src := PadicAlgCl.normedFieldOfAlgebra ℓ E.val
-  letI tgt := (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val)).toNormedField
-  letI : TopologicalSpace (ULift.{u} E.val) :=
-    tgt.toMetricSpace.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
-  let e := integerLiftEquiv ℓ E
-  let sm : MetricSpace (PadicAlgCl.integers ℓ E.val) :=
-    @Subtype.metricSpace E.val _ src.toMetricSpace
-  let tm : MetricSpace (Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val)) :=
-    @Subtype.metricSpace (ULift.{u} E.val) _ tgt.toMetricSpace
-  letI : PseudoEMetricSpace (PadicAlgCl.integers ℓ E.val) :=
-    sm.toPseudoMetricSpace.toPseudoEMetricSpace
-  letI : PseudoEMetricSpace
-      (Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val)) :=
-    tm.toPseudoMetricSpace.toPseudoEMetricSpace
-  have hi : @Isometry _ _ sm.toPseudoMetricSpace.toPseudoEMetricSpace
-      tm.toPseudoMetricSpace.toPseudoEMetricSpace e := by
-    apply @Isometry.of_dist_eq _ _ sm.toPseudoMetricSpace tm.toPseudoMetricSpace
-    intro x y
-    change Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val)
-      (-ULift.up x.val + ULift.up y.val) = dist
-        (algebraMap E.val (PadicAlgCl ℓ) x.val)
-        (algebraMap E.val (PadicAlgCl ℓ) y.val)
-    rw [spectral_embedded_norm ℓ E]
-    change ‖-(x.val : PadicAlgCl ℓ) + (y.val : PadicAlgCl ℓ)‖ =
-      dist (x.val : PadicAlgCl ℓ) (y.val : PadicAlgCl ℓ)
-    exact (dist_eq_norm_neg_add _ _).symm
-  exact { e.toEquiv with
-    continuous_toFun := hi.continuous
-    continuous_invFun := (hi.right_inv e.right_inv).continuous }
-
-open CategoryTheory.Limits Opposite
-open scoped CategoryTheory.Obj
-private noncomputable def continuousSheafIso
-    {A : Type} {B : Type u} [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
-    [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
-    (e : A ≃+* B) (hc : Continuous e) (hci : Continuous e.symm) :
-    Profinite.continuousMapRingSheaf.{u} A ≅ Profinite.continuousCoefficientRingSheaf B := by
-  let forward (S : Profinite.{u}ᵒᵖ) :
-      ULift.{u + 1} C(S.unop, A) →+* ULift.{u + 1} C(S.unop, B) :=
-    ULift.ringEquiv.symm.toRingHom.comp
-      ((e.toRingHom.compLeftContinuous _ hc).comp ULift.ringEquiv.toRingHom)
-  let backward (S : Profinite.{u}ᵒᵖ) :
-      ULift.{u + 1} C(S.unop, B) →+* ULift.{u + 1} C(S.unop, A) :=
-    ULift.ringEquiv.symm.toRingHom.comp
-      ((e.symm.toRingHom.compLeftContinuous _ hci).comp ULift.ringEquiv.toRingHom)
-  refine
-    { hom := ⟨{ app := fun S ↦ RingCat.ofHom (forward S)
-                naturality := by intros; ext x; rfl }⟩
-      inv := ⟨{ app := fun S ↦ RingCat.ofHom (backward S)
-                naturality := by intros; ext x; rfl }⟩
-      hom_inv_id := ?_
-      inv_hom_id := ?_ }
-  · ext S x
-    apply ULift.ext
-    ext t
-    exact e.symm_apply_apply _
-  · ext S x
-    apply ULift.ext
-    ext t
-    exact e.apply_symm_apply _
-
-attribute [local irreducible] continuousSheafIso
-
-private noncomputable def integerRingSheafIso
-    (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
-    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)] :
-    Profinite.padicIntegersCondensedRing.{u} ℓ E.val ≅
-      DerivedNakayama.integerRingSheaf ℓ (ULift.{u} E.val) := by
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.val
-  letI nf := (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val)).toNormedField
-  letI : Norm (ULift.{u} E.val) := nf.toNorm
-  letI : MetricSpace (ULift.{u} E.val) := nf.toMetricSpace
-  letI : TopologicalSpace (ULift.{u} E.val) :=
-    nf.toMetricSpace.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
-  let e := integerLiftEquiv ℓ E
-  have hc : Continuous (fun x ↦ e x) := by
-    exact (integerLiftHomeo ℓ E).continuous_toFun
-  have hci : Continuous (fun x ↦ e.symm x) := by
-    exact (integerLiftHomeo ℓ E).continuous_invFun
-  exact continuousSheafIso e hc hci
-
-private noncomputable def integerIso (ℓ : ℕ) [Fact ℓ.Prime]
-    (F : PadicAlgCl.FiniteIntermediateField ℓ) :
-    Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ F) ≅
-      Mon.mk (DerivedNakayama.integerRing ℓ (ULift.{u} F.val)) := by
-  let eR := integerRingSheafIso.{u} ℓ ⟨F.val, F.property⟩
-  let e := (sheafCompose (coherentTopology Profinite.{u})
-    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
-  have : IsMonHom e.hom := Sheaf.isMonHom_sheafCompose_map _ eR.hom
-  have : IsMonHom e.inv := Sheaf.isMonHom_sheafCompose_map _ eR.inv
-  exact
-    { hom := Mon.ofHom e.hom
-      inv := Mon.ofHom e.inv
-      hom_inv_id := Mon.Hom.ext e.hom_inv_id
-      inv_hom_id := Mon.Hom.ext e.inv_hom_id }
 
 private theorem finiteBoundaryCoefficientIso
     (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
