@@ -114,6 +114,15 @@ def systemRestrictionObj (O : Type r) [CommRing O] (α : SystemAlgebra J B τ O)
     ext x
     exact M.val.map_comp_apply f g x
 
+/-- The abelian category of genuine inverse towers of O-modules.
+Source: Stacks 0941 (blueprint: def-sfb-derived-system-mapping-hom). -/
+abbrev ScalarTowers (O : Type r) [CommRing O] := ℕᵒᵖ ⥤ ModuleCat.{max c v r} O
+
+/-- D(Tow(O-Mod)), with the localization universe matching the system category.
+Source: Stacks 05RU (blueprint: def-sfb-derived-system-mapping-hom). -/
+abbrev DScalarTowers (O : Type r) [CommRing O] :=
+  DerivedCategory (ScalarTowers.{c, v, r} O)
+
 set_option maxHeartbeats 1000000 in
 -- Natural-isomorphism assembly unfolds large module-sheaf limits.
 set_option maxHeartbeats 1600000 in

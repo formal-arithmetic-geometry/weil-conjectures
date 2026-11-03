@@ -73,17 +73,29 @@ Source: blueprint, continuous coefficients and inverse image
 abbrev pullback (X : Scheme.{u}) :=
   DerivedNakayama.pullback l (field.{u} l E) X
 
-/-- Exact derived restriction from positive level n+1.
-Source: blueprint, canonical reduction and normalized towers
+/-- The specified one minus shift endomorphism.
+Source: blueprint, canonical reduction and Roos construction
 (blueprint: def-sfb-small-coefficient-derived-completion). -/
-abbrev restrict (X : Scheme.{u}) (n : ℕ) :=
-  AdicCompletion.restrict l (Coefficients.field.{u} l E) X n
+abbrev oneSubShift (X : Scheme.{u}) (P : CochainComplex (Modules.{u} l E X) ℤ) :=
+  AdicCompletion.oneSubShift l (Coefficients.field.{u} l E) X P
 
 /-- The termwise product of the strict reduction tower.
 Source: blueprint, canonical reduction and Roos construction
 (blueprint: def-sfb-small-coefficient-derived-completion). -/
 abbrev product (X : Scheme.{u}) (P : CochainComplex (Modules.{u} l E X) ℤ) :=
   AdicCompletion.product l (Coefficients.field.{u} l E) X P
+
+/-- The strict transition on tensor reductions.
+Source: blueprint, canonical reduction and Roos construction
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev levelStep (X : Scheme.{u}) (P : CochainComplex (Modules.{u} l E X) ℤ) (n : ℕ) :=
+  AdicCompletion.levelStep l (Coefficients.field.{u} l E) X P n
+
+/-- Exact derived restriction from positive level n+1.
+Source: blueprint, canonical reduction and normalized towers
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev restrict (X : Scheme.{u}) (n : ℕ) :=
+  AdicCompletion.restrict l (Coefficients.field.{u} l E) X n
 
 /-- Canonical derived extension to positive level n+1.
 Source: blueprint, canonical reduction and normalized towers

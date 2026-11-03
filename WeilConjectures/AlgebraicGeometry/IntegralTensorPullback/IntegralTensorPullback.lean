@@ -856,3 +856,61 @@ private theorem cbcComapIff
       ((constantModel_comap_iff φ X _).mpr (h.2 n))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.IntegralTensorPullback
+
+/-- The natural completion comparison is invertible on bounded constructible inputs,
+and its scalar restriction is the Stacks completed inverse image with the same unit.
+All K-flat representatives are allowed; they merely compute the fixed derived objects.
+Source: blueprint det-lem-int-tensor-pullback, clauses (1),(2); Stacks 099I, 09C4
+(blueprint: det-lem-int-tensor-pullback).
+
+Proof (the four paragraphs of the current blueprint):
+1. Cartesian coefficients identify inverse image of the integral and finite rings with
+   their pullbacks. Inverse image is exact and commutes with the reduction cones.
+   The quotient augmentation defines c_K, the completion map of g^*K, so it is
+   invertible exactly when g^*K is derived complete. Both functors and c are exact.
+2. For a stratum a = i u and a local model M with bounded finite free scalar
+   complexes on a pro-etale cover, base change for u_! and i_* identifies g^*a_!M
+   with a'_!g_S^*M. The base-changed cover has the same finite free scalar models.
+   The integral criterion gives bounded constructibility on S', and extension by
+   zero gives it on X. The criterion also gives completeness, hence invertibility
+   of c on these generators.
+3. Every bounded constructible K is obtained by finitely many localization
+   extensions from those generators. Exactness and triangulated closure propagate
+   bounded constructibility; the five lemma propagates invertibility of c.
+4. Restriction to constant integral scalars commutes with inverse image, reduction
+   and products, hence with the Roos limit. Its target is the constant-coefficient
+   completed inverse image of Stacks 09C4, with the same quotient augmentation.
+   The final equation expresses this compatibility including the canonical unit.
+The zero complex, empty schemes and identity morphism require no exclusions. -/
+theorem preserves_and_completed
+    (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ l)
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
+    [QuasiCompact (Y ↘ Spec (.of k))] (g : X ⟶ Y) [g.IsOver (Spec (.of k))]
+    (K : DerivedCategory (AdicCompletion.Modules l E Y))
+    (_hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) Y K) :
+    constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X
+      (((CondensedRing.upperStar (DerivedNakayama.integerRing l E) g).mapDerivedCategory).obj K) ∧
+    ∀ (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ)
+      (_hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E Y) (.up ℤ)).kFlat P)
+      (_eP : DerivedCategory.Q.obj P ≅ K),
+      IsIso (DerivedCategory.Q.map (comparison l E g P)) ∧
+      ∃ e : DerivedCategory.Q.obj
+          (((restriction l E X).mapHomologicalComplex (.up ℤ)).obj
+            (WeilConjectures.integralOperationsRoos (pulledTower l E g P))) ≅
+          DerivedCategory.Q.obj (WeilConjectures.integralOperationsRoos
+            (constantPulledTower l E g
+              (((restriction l E Y).mapHomologicalComplex (.up ℤ)).obj P))),
+        DerivedCategory.Q.map
+            (((restriction l E X).mapHomologicalComplex (.up ℤ)).map (comparison l E g P)) ≫
+            e.hom =
+          DerivedCategory.Q.map (restrictionPullbackComplex l E g P).hom ≫
+            DerivedCategory.Q.map (constantComparison l E g
+              (((restriction l E Y).mapHomologicalComplex (.up ℤ)).obj P)) := by
+  sorry
+
+end AlgebraicGeometry.ProEtale.IntegralTensorPullback

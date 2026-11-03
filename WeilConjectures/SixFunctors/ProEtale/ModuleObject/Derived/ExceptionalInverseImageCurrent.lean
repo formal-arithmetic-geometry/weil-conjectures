@@ -91,6 +91,27 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Algebra.DirectSum.Basic
+public import Mathlib.Algebra.FiveLemma
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.ObjectProperty.Retract
+public import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
+public import WeilConjectures.AlgebraicGeometry.Compactification.CompactificationOverField
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientIsoConstructible
+public import WeilConjectures.AlgebraicGeometry.DetIndHeartIISums
+public import WeilConjectures.CategoryTheory.DerivedCategory.CompactOfBoundedExt
+public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
+public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteLocalizingExceptionalPreservation
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingCompactificationCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.AdmissibleBoundedConstructibleTriangulated
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ExceptionalInverseImageExistence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SkPropSfExistence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SkThmRestriction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 
 /-!
 # Exceptional inverse image for the current admissible coefficients
@@ -123,6 +144,141 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 local notation "S(" T ")" =>
   (constantModelBoundedConstructible Λ T ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K)
 local notation "L(" T ")" => localizingClosureProEtale Λ T
+
+/-- The existing constructible finite-Tor predicate is replete. -/
+private instance ctf_replete
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u}) :
+    (shriekCoefficientCtf (Λ := Λ) T).IsClosedUnderIsomorphisms := by
+  let _ := (constantModelConstructibleFiniteTor_wellDefined Λ T).2.1
+  let _ := (constantModelConstructibleFiniteTor_wellDefined Λ T).2.2.2.1
+  exact inferInstanceAs ((constantModelBoundedConstructible Λ T ⊓
+    _root_.DerivedCategory.finiteTorAmplitude _).IsClosedUnderIsomorphisms)
+
+/-- An exact sum-preserving functor carries generators and their localizing closures. -/
+private theorem map_closure
+    {C D : Type v} [Category.{w} C] [Category.{w} D]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
+    [PreservesColimitsOfSize.{v, v} F]
+    (S : ObjectProperty C) (T : ObjectProperty D) (hST : S ≤ T.inverseImage F) :
+    localizingClosure S ≤ (localizingClosure T).inverseImage F := by
+  intro M hM P hP hTP
+  let _ := hP.1
+  let _ := hP.2.1
+  have hPF : IsLocalizingSubcategory (P.inverseImage F) := by
+    refine ⟨inferInstance, inferInstance, ?_⟩
+    intro I H hH hHP
+    let _ := hH
+    have hFH : HasColimit (H ⋙ F) :=
+      ⟨F.mapCocone (colimit.cocone H), isColimitOfPreserves F (colimit.isColimit H)⟩
+    exact P.prop_of_iso (preservesColimitIso F H).symm (hP.2.2 (H ⋙ F) hFH hHP)
+  exact hM _ hPF (fun N hN ↦ hTP _ (hST N hN))
+
+/-- Transport preservation along the recorded coefficient comparison on the actual
+intersection-defined localizing closures. This reuses the coefficient-transport proof
+of det-existence-restriction-right: inverse scalar restriction preserves generators,
+triangles and all sums, so it identifies the closures; conjugate the supplied adjunction
+and use right-adjoint uniqueness. Source: det-existence-restriction.proof.md,
+coefficient-preservation paragraph (blueprint: lem-sfb-shriek-coefficient-isomorphism). -/
+private theorem preservation_of_coefficient_iso
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (e : Mon.mk Λ ≅ Mon.mk Λ') {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification.BoundaryCompactification f)
+    (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y
+      ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
+    (h' : ∀ K, localizingClosureProEtale Λ' X K → localizingClosureProEtale Λ' Y
+      ((rightDerivedLowerShriekOfCompactification Λ' c.obj.obj).obj K))
+    (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤
+      (localizingClosureProEtale Λ X).FullSubcategory)
+    (G' : (localizingClosureProEtale Λ' Y).FullSubcategory ⥤
+      (localizingClosureProEtale Λ' X).FullSubcategory)
+    (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G)
+    (adj' : localizingLowerShriek Λ' c.obj.obj h' ⊣ G')
+    (hp : ∀ K : (localizingClosureProEtale Λ' Y).FullSubcategory,
+      shriekCoefficientCtf (Λ := Λ') Y K.obj →
+        shriekCoefficientCtf (Λ := Λ') X (G'.obj K).obj) :
+    ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory,
+      shriekCoefficientCtf (Λ := Λ) Y K.obj →
+        shriekCoefficientCtf (Λ := Λ) X (G.obj K).obj := by
+  classical
+  let q (T : Scheme.{u}) : condensedRingObj Λ T ≅ condensedRingObj Λ' T :=
+    (upperStarFromPoint T).mapIso ((Mon.forget _).mapIso e)
+  have (T : Scheme.{u}) : IsMonHom (q T).hom :=
+    inferInstanceAs (IsMonHom ((upperStarFromPoint T).map e.hom.hom))
+  have (T : Scheme.{u}) : IsMonHom (q T).inv :=
+    inferInstanceAs (IsMonHom ((upperStarFromPoint T).map e.inv.hom))
+  let H (T : Scheme.{u}) := CategoryTheory.Equivalence.mk
+    (Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (q T).inv)
+    (Mod.comap (q T).hom)
+    ((Mod.comapId _).symm ≪≫ Mod.comapCongr (q T).hom_inv_id.symm ≪≫
+      Mod.comapComp (q T).hom (q T).inv)
+    ((Mod.comapComp (q T).inv (q T).hom).symm ≪≫
+      Mod.comapCongr (q T).inv_hom_id ≪≫ Mod.comapId _)
+  have (T : Scheme.{u}) : (H T).functor.Additive :=
+    inferInstanceAs ((Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (q T).inv).Additive)
+  have (T : Scheme.{u}) : (H T).inverse.Additive :=
+    inferInstanceAs ((Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (q T).hom).Additive)
+  let d (T : Scheme.{u}) := (H T).mapDerivedCategory
+  have hlocal (T : Scheme.{u}) : (localizingClosureProEtale Λ' T).inverseImage
+      (d T).functor = localizingClosureProEtale Λ T := by
+    let S := shriekCoefficientCtf (Λ := Λ) T
+    let S' := shriekCoefficientCtf (Λ := Λ') T
+    obtain ⟨_, htri, hiso, _, _, _⟩ := brownHypotheses_structural Λ T
+    obtain ⟨_, htri', hiso', _, _, _⟩ := brownHypotheses_structural Λ' T
+    let _ := htri
+    let _ := hiso
+    let _ := htri'
+    let _ := hiso'
+    have hf : localizingClosureProEtale Λ T ≤
+        (localizingClosureProEtale Λ' T).inverseImage (d T).functor :=
+      map_closure (H T).functor.mapDerivedCategory S S'
+        (fun K hK ↦ constantModelCtf_coefficientIso e T ⟨K, hK⟩)
+    have hb : localizingClosureProEtale Λ' T ≤
+        (localizingClosureProEtale Λ T).inverseImage (d T).inverse :=
+      map_closure (H T).inverse.mapDerivedCategory S' S
+        (fun K hK ↦ constantModelCtf_coefficientIso e.symm T ⟨K, hK⟩)
+    funext K
+    apply propext
+    exact ⟨fun hK ↦ (localizingClosureProEtale Λ T).prop_of_iso
+      ((d T).unitIso.app K).symm (hb _ hK), hf K⟩
+  obtain ⟨_, htriX, hisoX, _, _, _⟩ := brownHypotheses_structural Λ' X
+  obtain ⟨_, htriY, hisoY, _, _, _⟩ := brownHypotheses_structural Λ' Y
+  let _ := htriX
+  let _ := htriY
+  let _ := hisoX
+  let _ := hisoY
+  let EX := (d X).congrFullSubcategory (hlocal X)
+  let EY := (d Y).congrFullSubcategory (hlocal Y)
+  let F := localizingLowerShriek Λ c.obj.obj h
+  let F' := localizingLowerShriek Λ' c.obj.obj h'
+  let comp : F ⋙ EY.functor ≅ EX.functor ⋙ F' :=
+    ((localizingClosureProEtale Λ' Y).fullyFaithfulι.whiskeringRight _).preimageIso
+      (Functor.isoWhiskerLeft (localizingClosureProEtale Λ X).ι
+        (shriekCoefficientCompactificationIso e c))
+  let left : (EX.inverse ⋙ F) ⋙ EY.functor ≅ F' :=
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft EX.inverse comp ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight EX.counitIso F' ≪≫ F'.leftUnitor
+  let conj := (EX.symm.toAdjunction.comp adj).comp EY.toAdjunction
+  let r := (conj.ofNatIsoLeft left).rightAdjointUniq adj'
+  intro K hK
+  have hp' := hp (EY.functor.obj K) (constantModelCtf_coefficientIso e Y ⟨K.obj, hK⟩)
+  have ht : shriekCoefficientCtf (Λ := Λ') X (EX.functor.obj (G.obj K)).obj := by
+    let i := r.app (EY.functor.obj K)
+    let j := EX.functor.mapIso (G.mapIso (EY.unitIso.app K).symm)
+    exact (shriekCoefficientCtf (Λ := Λ') X).prop_of_iso
+      ((localizingClosureProEtale Λ' X).ι.mapIso (i.symm ≪≫ j)) hp'
+  have hback := constantModelCtf_coefficientIso e.symm X
+    ⟨(EX.functor.obj (G.obj K)).obj, ht⟩
+  exact (shriekCoefficientCtf (Λ := Λ) X).prop_of_iso
+    ((d X).unitIso.app (G.obj K).obj).symm hback
 
 /-- The four assertions of the current exceptional-inverse-image theorem. A small skeleton
 is given by representatives exhausting the isomorphism classes without repetitions.
