@@ -12,6 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedRe
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdinaryComparisons
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
 public import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
+public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
+public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerOperationsSupplement
 import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedReductionPullbackSquare
 import all WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
@@ -518,6 +520,64 @@ theorem AdicCoefficientDatum.pullComp_eq_triangle {X Y Z : Scheme.{u}} (f : X �
   · intro N U m
     rw [Iso.symm_hom, Adjunction.conjugateEquiv_leftAdjointCompIso_inv]
     exact hdS N U m
+
+/-- Restriction to constant coefficients respects the inverse-image compositors on modules.
+Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
+-/
+theorem exchangeOrdinaryResPull_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f)
+    (hκ : ∀ (N : proEtaleRingModules X (d.completedRing X)) (U : Z.ProEt)
+        (m : ((proEtaleRingModuleDirectImage f (d.completedRing Y) (d.completedRing X)
+            (d.integralRingIso f) ⋙ proEtaleRingModuleDirectImage g (d.completedRing Z)
+              (d.completedRing Y) (d.integralRingIso g)).obj N).val.obj (Opposite.op U)),
+        ((conjugateEquiv ((proEtaleRingModuleAdjunction g (d.completedRing Z)
+              (d.completedRing Y) (d.integralRingIso g)).comp
+            (proEtaleRingModuleAdjunction f (d.completedRing Y) (d.completedRing X)
+              (d.integralRingIso f)))
+            (proEtaleRingModuleAdjunction (f ≫ g) (d.completedRing Z) (d.completedRing X)
+              (d.integralRingIso (f ≫ g))) κ.hom).app N).val.app (Opposite.op U) m =
+          N.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app U).op m)
+    (M : proEtaleRingModules Z (d.completedRing Z)) :
+    (proEtaleRingRestrictScalars (exchangeScalar d X)).map (κ.hom.app M) ≫
+        (exchangeOrdinaryResPull d f).hom.app ((stratumModulePull d g).obj M) ≫
+        (ProEtale.StrictTower.modulePullback A f).map ((exchangeOrdinaryResPull d g).hom.app M) =
+      (exchangeOrdinaryResPull d (f ≫ g)).hom.app M ≫
+        (ProEtale.StrictTower.moduleGComp A f g).hom.app
+          ((proEtaleRingRestrictScalars (exchangeScalar d Z)).obj M) := by
+  have hR : ∀ (N : ProEtale.StrictTower.Modules A X) (U : Z.ProEt)
+      (m : ((ProEtale.StrictTower.moduleDirectImage A f ⋙
+        ProEtale.StrictTower.moduleDirectImage A g).obj N).val.obj (Opposite.op U)),
+      ((conjugateEquiv ((proEtaleRingModuleAdjunction g (ProEtale.StrictTower.coefficients A Z)
+            (ProEtale.StrictTower.coefficients A Y) (ProEtale.StrictTower.constantRingIso A g)).comp
+          (proEtaleRingModuleAdjunction f (ProEtale.StrictTower.coefficients A Y)
+            (ProEtale.StrictTower.coefficients A X) (ProEtale.StrictTower.constantRingIso A f)))
+          (proEtaleRingModuleAdjunction (f ≫ g) (ProEtale.StrictTower.coefficients A Z)
+            (ProEtale.StrictTower.coefficients A X)
+            (ProEtale.StrictTower.constantRingIso A (f ≫ g)))
+          (ProEtale.StrictTower.moduleGComp A f g).hom).app N).val.app (Opposite.op U) m =
+        N.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app U).op m := by
+    intro N U m
+    rw [ProEtale.StrictTower.moduleGComp, Iso.symm_hom,
+      Adjunction.conjugateEquiv_leftAdjointCompIso_inv]
+    exact (Classical.choose_spec (ProEtale.StrictTower.moduleRComp_existsUnique A f g)).1 N U m
+  have h := restrictionPullbackInv_comp f g
+    (exchangeConstantRing Z A) (d.completedRing Z) (exchangeConstantRing Y A) (d.completedRing Y)
+    (exchangeConstantRing X A) (d.completedRing X)
+    (exchangeScalar d Z) (exchangeScalar d Y) (exchangeScalar d X)
+    (exchangeConstantIso g A) (d.integralRingIso g) (exchangeConstantIso f A)
+    (d.integralRingIso f) (exchangeConstantIso (f ≫ g) A) (d.integralRingIso (f ≫ g))
+    (exchangeScalar_comm d g) (exchangeScalar_comm d f) (exchangeScalar_comm d (f ≫ g))
+    (ProEtale.StrictTower.moduleGComp A f g) κ hR hκ M
+  rw [← cancel_epi ((exchangeOrdinaryResPull d (f ≫ g)).inv.app M), Iso.inv_hom_id_app_assoc]
+  have h' : (exchangeOrdinaryResPull d (f ≫ g)).inv.app M ≫
+      (proEtaleRingRestrictScalars (exchangeScalar d X)).map (κ.hom.app M) =
+      (ProEtale.StrictTower.moduleGComp A f g).hom.app
+          ((proEtaleRingRestrictScalars (exchangeScalar d Z)).obj M) ≫
+        (ProEtale.StrictTower.modulePullback A f).map
+          ((exchangeOrdinaryResPull d g).inv.app M) ≫
+        (exchangeOrdinaryResPull d f).inv.app ((stratumModulePull d g).obj M) := h.symm
+  rw [reassoc_of% h', Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 end ReductionComposition
 
 end AlgebraicGeometry.Scheme
