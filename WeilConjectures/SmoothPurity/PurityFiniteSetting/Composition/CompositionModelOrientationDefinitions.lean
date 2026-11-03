@@ -120,6 +120,36 @@ def ModelAffineGamma (P : PurityFiniteSetting.{u}) :=
     letI := Dnc.compactifiable P (DiagonalPasting.pr r B) aB
     P.diagonalTwist (DiagonalPasting.A r B) r ≅ P.diagonalDualizing (DiagonalPasting.pr r B)
 
+/-- The orientation of q is the base change of the rank-d Gamma inverse. The
+base-change arrow is the inverse smooth exceptional mate in ordinary coordinates,
+transported to the pro-etale category, followed by canonical Tate pullback.
+Source: composition proof Steps 3--5
+(blueprint: def-pur-composition-model-orientation-coordinates). -/
+def modelAffineQOrientation (P : PurityFiniteSetting.{u}) (G : P.ModelAffineGamma)
+    (B : Scheme.{u}) [IsAffine B] (d e : ℕ)
+    (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] :=
+  letI := (DiagonalPasting.affineGeometry d e B).2.2.2.2.1
+  letI := (DiagonalPasting.affineGeometry d e B).2.2.2.2.2.1
+  letI := (DiagonalPasting.affineGeometry d e B).2.2.2.2.2.2.1
+  letI := (DiagonalPasting.affineGeometry d e B).2.2.2.2.2.2.2.1
+  letI := DiagonalPasting.affineDimension d B
+  letI := Dnc.compactifiable P (DiagonalPasting.pr d B) aB
+  letI := Dnc.compactifiable P (DiagonalPasting.q d e B) (DiagonalPasting.pr e B ≫ aB)
+  P.modelOrientationUnit (DiagonalPasting.q d e B) ≪≫
+    P.diagonalDualizingComparison (DiagonalPasting.q d e B) ≪≫
+    (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) (DiagonalPasting.A (d + e) B)).mapDerivedCategory.mapIso
+        (P.chartOrdinaryBaseChange d (DiagonalPasting.pr d B) aB
+          (DiagonalPasting.pr e B) (DiagonalPasting.q d e B) (DiagonalPasting.first d e B)
+          (DiagonalPasting.affineGeometry d e B).1).symm ≪≫
+    (Dnc.pullComparison P (DiagonalPasting.first d e B)
+      (P.diagonalOrdinaryDualizing (DiagonalPasting.pr d B))).symm ≪≫
+    (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)
+      (DiagonalPasting.first d e B)).leftDerivedFunctor.mapIso
+        ((P.diagonalDualizingComparison (DiagonalPasting.pr d B)).symm ≪≫ (G B aB d).symm) ≪≫
+    P.modelOrientationTwistPullback (DiagonalPasting.first d e B)
+      (DiagonalPasting.pr d B ≫ aB) d
+
 /-- Gamma inverse for the total projection, in the tensor-mate omega coordinates.
 The equality q P_e=P_(d+e) is only a transport of the exceptional target.
 Source: composition proof Step 4

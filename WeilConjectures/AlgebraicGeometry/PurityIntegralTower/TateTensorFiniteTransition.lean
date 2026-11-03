@@ -99,19 +99,19 @@ private theorem scalarSingleCounit_naturality
         scalarExtensionFunctorCounit f T ((HomologicalComplex.single _ (.up ℤ) 0).obj N) ≫
         DerivedCategory.Q.map
           ((HomologicalComplex.singleMapHomologicalComplex
-            (siteScalarChange T (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.app
+            (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.app
               N) =
       scalarExtensionFunctorCounit f T ((HomologicalComplex.single _ (.up ℤ) 0).obj M) ≫
         DerivedCategory.Q.map
           ((HomologicalComplex.singleMapHomologicalComplex
-            (siteScalarChange T (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.app
+            (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.app
               M) ≫
         (DerivedCategory.singleFunctor _ 0).map
-          ((siteScalarChange T (proEtaleConstantRingMap (T := T) f)).map v) := by
+          ((proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)).map v) := by
   have h := scalarExtensionFunctor_map f T
     ((HomologicalComplex.single _ (.up ℤ) 0).map v)
   have hs := (HomologicalComplex.singleMapHomologicalComplex
-    (siteScalarChange T (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.naturality v
+    (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.naturality v
   dsimp only [Functor.comp_map] at hs
   erw [reassoc_of% h]
   erw [← DerivedCategory.Q.map_comp, hs, DerivedCategory.Q.map_comp]

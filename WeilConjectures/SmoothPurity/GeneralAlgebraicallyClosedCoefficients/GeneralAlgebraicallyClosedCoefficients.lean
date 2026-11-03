@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SmoothPurity.SfAlgebraicallyClosedCoefficients.SfAlgebraicallyClosedCoefficients
 public import Mathlib.CategoryTheory.Pi.Basic
 public import WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
+public import WeilConjectures.AlgebraicGeometry.CondensedCoefficientStageNormalization
+public import WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficients.IntrinsicAssociatorShiftSquare
+public import WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficientsCondensed
 
 /-! # Common-stage coefficients over arbitrary schemes
 
@@ -211,6 +214,14 @@ private theorem stage_transport_self
   apply (S.T (le_refl n)).map_injective
   apply (StageSystem.tr_injective (S := S) (le_refl n)).mp
   exact StageSystem.tr_tr (S := S) (le_refl n) (le_refl n) f
+
+private theorem additive_equivalence
+    {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+    [HasZeroObject C] [HasZeroObject D] [HasBinaryProducts C] (e : C ≌ D) :
+    e.functor.Additive := by
+  let : e.functor.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_preserves_initial_object
+  exact Functor.additive_of_preserves_binary_products _
 
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -460,42 +471,6 @@ theorem inclusion_additive
   exact (mkHom_add (l := l) (Ω := Ω) (Y := Y)
     (A := ⟨E, X⟩) (B := ⟨E, Z⟩) le_rfl le_rfl _ _).symm
 
-/-- Every class has a finite representative, and equality is equality at a later stage.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: composita make each common-overfield index nonempty and directed. The normalized
-tensor unit and associator pentagon make transport an actual directed system. Apply
-Mathlib's directed-colimit representation and zero-exactness criteria to the difference
-of two representatives. This gives precisely equality after one further extension. -/
-theorem representatives
-    {l : ℕ} [Fact l.Prime]
-    {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    {Y : AlgebraicGeometry.Scheme.{u}}
-    (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y) :
-    (∀ f : A ⟶ B, ∃ (L : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
-      (u : GeneralAlgebraicallyClosedCoefficients.StageHom A B ⟨L, hA, hB⟩), f =
-          GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB u) ∧
-    (∀ (L M : GeneralAlgebraicallyClosedCoefficients.Common A B) (f :
-        GeneralAlgebraicallyClosedCoefficients.StageHom A B L) (g :
-        GeneralAlgebraicallyClosedCoefficients.StageHom A B M),
-      GeneralAlgebraicallyClosedCoefficients.ofHom A B L.val L.property.1 L.property.2 f =
-          GeneralAlgebraicallyClosedCoefficients.ofHom A B M.val M.property.1 M.property.2 g ↔
-        ∃ (N : GeneralAlgebraicallyClosedCoefficients.Common A B) (hL : L ≤ N) (hM : M ≤ N),
-          GeneralAlgebraicallyClosedCoefficients.transport A B L N hL f =
-              GeneralAlgebraicallyClosedCoefficients.transport A B M N hM g) := by
-  constructor
-  · intro f
-    induction f using StageSystem.PairCategory.hom_induction with
-    | h L hA hB f => exact ⟨L, hA, hB, f, rfl⟩
-  · intro L M f g
-    constructor
-    · intro e
-      obtain ⟨N, hL, hM, he⟩ :=
-        (StageSystem.PairCategory.mkHom_eq_mkHom_iff' f g).mp e
-      exact ⟨⟨N, L.property.1.trans hL, L.property.2.trans hL⟩, hL, hM, he⟩
-    · rintro ⟨N, hL, hM, he⟩
-      exact (StageSystem.PairCategory.mkHom_eq_mkHom_iff' f g).mpr
-        ⟨N.val, hL, hM, he⟩
-
 /-- Stagewise object shift, with the coefficient field unchanged.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
 noncomputable def shiftPair (n : ℤ) (A : Pair l Ω Y) : Pair l Ω Y :=
@@ -611,20 +586,6 @@ noncomputable instance inclusion_exact (E : Index l Ω) :
     (inclusion E : Stage l Ω Y E ⥤ _).IsTriangulated :=
   (StageSystem.commonStage_verdier_existsUnique (stageSystem l Ω Y)).exists.choose_spec.2.2 E
 
-/-- The triangle criterion, exposing the finite-field-of-definition clause.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: this is the distinguished-set clause of commonStage_verdier_existsUnique
-for the actual scalar-extension stage system. -/
-theorem distinguished_iff
-    {l : ℕ} [Fact l.Prime]
-    {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    {Y : AlgebraicGeometry.Scheme.{u}}
-    (T : Triangle (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)) :
-    T ∈ distTriang (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y) ↔
-        GeneralAlgebraicallyClosedCoefficients.Distinguished T := by
-  exact (StageSystem.commonStage_verdier_existsUnique
-    (stageSystem l Ω Y)).exists.choose_spec.1 T
-
 end GeneralAlgebraicallyClosedCoefficients
 
 /-- The algebraically closed coefficient category is the pair category itself.
@@ -636,6 +597,29 @@ noncomputable abbrev generalAlgebraicallyClosedConstructibleCategory
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (Y : AlgebraicGeometry.Scheme.{u}) :=
   GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y
+
+private theorem stage_equality_pairs
+    {I : Type w} [Preorder I] [IsDirectedOrder I]
+    {C : I → Type u} [cC : ∀ i, Category.{v} (C i)]
+    {S R : StageSystem C} (e : S = R) :
+    (∀ (i : I) (x : C i),
+      (Pi.eqToEquivalence (fun T : StageSystem C ↦ T.PairCategory) e).functor.obj
+        ⟨i, x⟩ = ⟨i, x⟩) ∧
+    (∀ (A B : S.PairCategory) (n : I) (hi : A.stage ≤ n) (hj : B.stage ≤ n)
+      (f : (S.T hi).obj A.obj ⟶ (S.T hj).obj B.obj)
+      (g : (R.T hi).obj A.obj ⟶ (R.T hj).obj B.obj),
+      HEq f g → HEq
+        ((Pi.eqToEquivalence (fun T : StageSystem C ↦ T.PairCategory) e).functor.map
+          (StageSystem.PairCategory.mkHom n hi hj f))
+        (StageSystem.PairCategory.mkHom (S := R)
+          (X := ⟨A.stage, A.obj⟩) (Y := ⟨B.stage, B.obj⟩) n hi hj g)) := by
+  subst R
+  constructor
+  · intro i x
+    rfl
+  · intro A B n hi hj f g hfg
+    cases eq_of_heq hfg
+    rfl
 
 namespace GeneralAlgebraicallyClosedCoefficients
 
@@ -748,13 +732,118 @@ theorem specialization_stageSystem :
           exact (hOld.2 E L M h k).trans
             ((specialization_comparisons D l hl Ω Y).1 E L M h k).symm
 
-/-- The canonical identification is equality transport of the normalized systems.
-It preserves all pairs and representative maps; no arbitrary equivalence is chosen.
-Source: blueprint order 1821 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def specialization :
-    Pair l Ω Y ≌ SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y :=
-  Pi.eqToEquivalence (fun S : StageSystem (Stage l Ω Y) ↦ S.PairCategory)
+/-- Specialization is the restriction of actual derived extension of scalars.
+Source: latest blueprint `def-sfb-constructible-extend-to-qlbar.md`.
+(blueprint: lem-pur-general-coefficient-specialization). -/
+abbrev specialization (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
+  constructibleToPadicAlgCl Y ℓ E
+
+/-- Specialization fixes the literal coefficient pair and every representative.
+Source: blueprint order 1821, pair and Hom clauses
+(blueprint: def-weil-algebraically-closed-coefficients).
+Proof: eliminate specialization_stageSystem. Pi.eqToEquivalence then reduces
+to the identity equivalence. The object formula is reflexivity, and the map
+formula is reflexivity after the assumed HEq identifies the finite maps. -/
+theorem specialization_pairs :
+    (∀ (E : AlgebraicallyClosedCoefficients.Index l Ω) (K : Stage l Ω Y E),
+      (specialization D l hl Ω Y).functor.obj ⟨E, K⟩ = ⟨E, K⟩) ∧
+    (∀ (A B : Pair l Ω Y) (L : AlgebraicallyClosedCoefficients.Index l Ω)
+      (hA : A.stage ≤ L) (hB : B.stage ≤ L)
+      (f : StageHom A B ⟨L, hA, hB⟩)
+      (g : SfAlgebraicallyClosedCoefficients.StageHom
+        (⟨A.stage, A.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y)
+        (⟨B.stage, B.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y) ⟨L, hA, hB⟩),
+      HEq f g → HEq ((specialization D l hl Ω Y).functor.map (ofHom A B L hA hB f))
+        (SfAlgebraicallyClosedCoefficients.ofHom
+          (⟨A.stage, A.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y)
+          (⟨B.stage, B.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y) L hA hB g)) := by
+  exact stage_equality_pairs (C := Stage l Ω Y)
+    (cC := fun E ↦ stageCategory l Ω Y E)
     (specialization_stageSystem D l hl Ω Y)
+
+/-- Actual specialization is additive for the inherited ambient Hom laws.
+Source: latest blueprint scalar-extension paragraph of `sk-thm-sfb-qlbar-two-colimit`.
+(blueprint: lem-pur-general-coefficient-specialization).
+Proof: the closure-additivity clause of the uniquely normalized scalar data applies
+to the actual restricted scalar extension, with the ambient preadditive structures. -/
+theorem specialization_additive (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    (specialization ℓ Y E).Additive := by
+  obtain ⟨d, hd, _⟩ := condensedCoefficientStageNormalization_existsUnique Y ℓ
+  let : CondensedCoefficientStageData Y ℓ := d
+  exact hd.1.closureAdditive E
+
+/-- Specialization preserves and reflects the specified distinguished triangles.
+Source: blueprint order 1821, common-stage triangles
+(blueprint: def-weil-algebraically-closed-coefficients).
+Proof: each distinguished triangle is isomorphic to a distinguished finite-stage
+image. specialization_pairs identifies the finite image arrows, and the
+identity-normalized shift comparison identifies its connecting arrow. The same
+argument with inverse equality transport gives reflection. The old and new
+Verdier pretriangulations have precisely these common-stage distinguished sets. -/
+theorem specialization_distinguished (T : Triangle (Pair l Ω Y)) :
+    T ∈ distTriang (Pair l Ω Y) ↔
+      (specialization D l hl Ω Y).functor.mapTriangle.obj T ∈
+        distTriang (SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y) := by
+  sorry
+
+/-- Actual specialization is exact for the tensor-normalized coherent shifts.
+Source: latest blueprint `sk-prop-qlbar-two-colimit.proof.md`, scalar-extension functor.
+(blueprint: lem-pur-general-coefficient-specialization).
+Proof: take the uniquely normalized scalar data. Its closure exactness states that
+the ambient image of the specialized triangle is distinguished. By the definition
+of the intrinsic triangulation this is exactly the required conclusion. -/
+theorem specialization_exact (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    letI := specializationCommShift ℓ Y E
+    (specialization ℓ Y E).IsTriangulated := by
+  let d := (condensedCoefficientStageNormalization_existsUnique Y ℓ).exists.choose
+  have hd : CondensedCoefficientStageNormalized Y ℓ d :=
+    (condensedCoefficientStageNormalization_existsUnique Y ℓ).exists.choose_spec
+  let := specializationCommShift ℓ Y E
+  constructor
+  intro T hT
+  exact hd.2.2.2.closureExact inferInstance E T hT
+
+/-- Every intrinsic algebraically closed coefficient object descends to a finite field.
+Source: latest blueprint `sk-prop-qlbar-two-colimit.proof.md`, first sentence.
+(blueprint: lem-pur-general-coefficient-specialization).
+Proof: use object descent for the existing constructible scalar cocone and reverse
+its supplied isomorphism, as in the intrinsic specialization theorem. -/
+theorem representatives (N : PadicAlgClConstructible Y ℓ) :
+    ∃ (E : PadicAlgCl.FiniteIntermediateField ℓ) (K : PadicSubfieldConstructible Y ℓ E),
+      Nonempty (N ≅ (specialization ℓ Y E).obj K) := by
+  obtain ⟨E, K, ⟨e⟩⟩ := constructibleCocone_essSurjObj Y ℓ N
+  exact ⟨E, K, ⟨e.symm⟩⟩
+
+/-- The full inclusion is exact for its inherited ordinary derived shift.
+Source: latest blueprint `det-def-sfb-bounded-constructible.md`, triangulated clause.
+(blueprint: def-weil-algebraically-closed-coefficients).
+Proof: reuse the exactness constructor of the former interface: the forward direction
+of the distinguishedness characterization is precisely preservation of triangles. -/
+theorem inclusion_exact : (ambientInclusion ℓ Y).IsTriangulated := by
+  constructor
+  intro T hT
+  exact (distinguished_iff ℓ Y T).mp hT
+
+/-- Intrinsic distinguishedness is exactly ambient distinguishedness.
+Source: latest blueprint `det-def-sfb-bounded-constructible.md`, triangulated clause.
+(blueprint: def-weil-algebraically-closed-coefficients).
+Proof: the full triangulated subcategory defines its distinguished set as the inverse
+image of the ambient distinguished set under the inclusion on triangles. -/
+theorem distinguished_iff (T : Triangle (PadicAlgClConstructible Y ℓ)) :
+    T ∈ distTriang (PadicAlgClConstructible Y ℓ) ↔
+      (ambientInclusion ℓ Y).mapTriangle.obj T ∈ distTriang _ := Iff.rfl
+
+/-- The unique tensor-normalized scalar data fixes the coherent specialization shifts.
+Source: latest blueprint scalar-extension paragraph of `sk-thm-sfb-qlbar-two-colimit`.
+(blueprint: lem-general-algebraically-closed-coefficient-stages). -/
+abbrev specializationCommShift (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    (specialization ℓ Y E).CommShift ℤ :=
+  (condensedCoefficientStageNormalization_existsUnique Y ℓ).exists.choose.closureShift E
+
+/-- The full inclusion into the ordinary derived category of coefficient modules.
+Source: latest blueprint `det-def-sfb-bounded-constructible.md`.
+(blueprint: def-weil-algebraically-closed-coefficients). -/
+abbrev ambientInclusion := (boundedConstructible (padicAlgClRingObj Y ℓ)).ι
 
 attribute [local irreducible] specialization pairCategory
   SfAlgebraicallyClosedCoefficients.pairCategory preadditive

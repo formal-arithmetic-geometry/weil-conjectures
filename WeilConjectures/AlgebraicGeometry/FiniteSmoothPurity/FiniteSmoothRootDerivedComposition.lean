@@ -158,6 +158,7 @@ import all WeilConjectures.SixFunctors.Etale.Derived.Shift
 import all WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 import all Mathlib.CategoryTheory.Adjunction.Whiskering
 import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.CoefficientLineComparison.FiniteSmoothRootDerivedNormalization
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
 
 /-! # Composition of normalized ordinary derived root comparisons
 
@@ -211,5 +212,88 @@ private theorem root_comp
     ← pow_add]
   congr 1
   omega
+
+private theorem root_insertion_comp
+    (ell : ℕ) [Fact ell.Prime] (T : Scheme.{u})
+    {r m n : ℕ} (hmr : m ≤ r) (hnm : n ≤ m)
+    (a : CoefficientLineComparison (FiniteReduction.quotient ell hmr)
+      (ell ^ r) (ell ^ m) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)
+    (b : CoefficientLineComparison (FiniteReduction.quotient ell hnm)
+      (ell ^ m) (ell ^ n) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)
+    (c : CoefficientLineComparison (FiniteReduction.quotient ell (hnm.trans hmr))
+      (ell ^ r) (ell ^ n) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T) :
+    (ProEtale.etaleSheafExtendScalarsAdjunction
+        (FiniteReduction.quotient ell (hnm.trans hmr)) T).homEquiv _ _ c.sheafIso.hom =
+      (ProEtale.etaleSheafExtendScalarsAdjunction
+          (FiniteReduction.quotient ell hmr) T).homEquiv _ _ a.sheafIso.hom ≫
+        (Sheaf.restrictScalars T.smallEtaleTopology (FiniteReduction.quotient ell hmr)).map
+          ((ProEtale.etaleSheafExtendScalarsAdjunction
+            (FiniteReduction.quotient ell hnm) T).homEquiv _ _ b.sheafIso.hom) ≫
+        (Sheaf.restrictScalarsCompIso T.smallEtaleTopology
+          (FiniteReduction.quotient ell hmr) (FiniteReduction.quotient ell hnm)
+          (FiniteReduction.quotient ell (hnm.trans hmr)) (quotient_comp ell hmr hnm)).hom.app
+          (Scheme.finiteEtaleTateLine T (ell ^ n) (coefficient ell n)
+            (CharP.cast_eq_zero _ _)) := by
+  apply (Scheme.lineHomEquiv T (ell ^ r) (coefficient ell r)
+    (CharP.cast_eq_zero _ _) _).injective
+  ext W z
+  simp only [Scheme.lineHomEquiv_generator]
+  change _ = ((ProEtale.etaleSheafExtendScalarsAdjunction
+    (FiniteReduction.quotient ell hnm) T).homEquiv _ _ b.sheafIso.hom).hom.app W
+      (((ProEtale.etaleSheafExtendScalarsAdjunction
+        (FiniteReduction.quotient ell hmr) T).homEquiv _ _ a.sheafIso.hom).hom.app W
+          (Scheme.finiteEtaleTateOneGenerator (coefficient ell r) (ell ^ r) T
+            (CharP.cast_eq_zero _ _) W 1 z))
+  rw [a.generators, b.generators, c.generators]
+  simp only [map_one]
+  have hr := congrArg (fun f ↦ f.hom.app W z) (root_comp ell T hmr hnm a b c)
+  exact congrArg (Scheme.finiteEtaleTateOneGenerator (coefficient ell n) (ell ^ n) T
+    (CharP.cast_eq_zero _ _) W 1) hr.symm
+
+private theorem scalar_insertion_comp
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C)
+    (hχ : χ = ψ.comp φ)
+    {M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)}
+    {N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)}
+    {P : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} C)}
+    (η : M ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj N)
+    (θ : N ⟶ (Sheaf.restrictScalars T.smallEtaleTopology ψ).obj P)
+    (ζ : M ⟶ (Sheaf.restrictScalars T.smallEtaleTopology χ).obj P)
+    (hζ : ζ = η ≫ (Sheaf.restrictScalars T.smallEtaleTopology φ).map θ ≫
+      (Sheaf.restrictScalarsCompIso T.smallEtaleTopology φ ψ χ hχ).hom.app P) :
+    (ordinaryScalar ψ T).map
+        (SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology φ η) ≫
+      SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology ψ θ =
+    (ProEtale.pbcFixedScalarExtensionComp T.smallEtaleTopology φ ψ χ hχ).hom.app
+        ((DerivedCategory.singleFunctor _ 0).obj M) ≫
+      SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology χ ζ := by
+  subst χ
+  exact SheafExactDegreeZero.scalarAdjointInsertion_comp T.smallEtaleTopology φ ψ η θ ζ hζ
+
+/-- The normalized root-line comparisons compose in the ordinary derived categories.
+Source: smooth-purity reduction compatibilities (3), root maps and degree-zero normalization.
+(blueprint: lem-pur-finite-smooth-root-derived-composition).
+Proof: compose with the monic root-kernel inclusion and multiply the power exponents.
+The Tate-line universal property detects the ordinary adjuncts on generators.
+The exact scalar insertion formula and its composition law transport this equality
+to the canonical derived scalar associator. -/
+theorem ordinaryRootDerivedComp
+    (ell : ℕ) [Fact ell.Prime] (T : Scheme.{u})
+    {r m n : ℕ} (hmr : m ≤ r) (hnm : n ≤ m)
+    (a : CoefficientLineComparison (FiniteReduction.quotient ell hmr)
+      (ell ^ r) (ell ^ m) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)
+    (b : CoefficientLineComparison (FiniteReduction.quotient ell hnm)
+      (ell ^ m) (ell ^ n) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)
+    (c : CoefficientLineComparison (FiniteReduction.quotient ell (hnm.trans hmr))
+      (ell ^ r) (ell ^ n) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T) :
+    (ordinaryScalar (FiniteReduction.quotient ell hnm) T).map a.derivedIso.hom ≫
+      b.derivedIso.hom =
+    (ordinaryAssociator T ell hmr hnm).hom.app
+      (ordinaryFiniteLine (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _) T) ≫
+      c.derivedIso.hom := by
+  rw [a.derived_eq_scalarInsertion, b.derived_eq_scalarInsertion, c.derived_eq_scalarInsertion]
+  exact scalar_insertion_comp T _ _ _ (quotient_comp ell hmr hnm) _ _ _
+    (root_insertion_comp ell T hmr hnm a b c)
 
 end AlgebraicGeometry.Etale.FiniteSmoothPurity
