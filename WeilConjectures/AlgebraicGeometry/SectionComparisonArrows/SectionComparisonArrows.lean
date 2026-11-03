@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothExceptionalBaseChange
+public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothTensorDuality
+public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothDualityBaseChangeCompat
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps

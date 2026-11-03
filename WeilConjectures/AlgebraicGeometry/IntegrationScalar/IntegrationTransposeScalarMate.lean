@@ -83,7 +83,7 @@ def comparison (φ : A →+* B) (f : X ⟶ Y)
 
 /-- The actual counit mate b, using the canonical inverse of the proper/open scalar map.
 The published comparisonInverse is the inverse on its isomorphism domain, which contains
-every input here by etaleCompactScalarCoherence, including right-adjoint unit inputs.
+every input here by compactScalarMap_coherence, including right-adjoint unit inputs.
 Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2
 (blueprint: lem-pur-integration-transpose-scalar-mate). -/
 def mate (φ : A →+* B) {f : X ⟶ Y} (c : Compactification f)
@@ -188,7 +188,7 @@ theorem integrationTransposeScalarMate
   let P' := compactScalarProjection B c (Q.obj K) W'
   let q := compactScalarMap φ c
   let δ := ExceptionalCoefficients.tensorIso φ Y
-  have hc := etaleCompactScalarCoherence φ f c
+  have hc := compactScalarMap_coherence φ f c
   have (M : DerivedCategoryModule A X) : IsIso (q.app M) := hc.1 M
   have : IsIso P := hP K
   have : IsIso P' := hP' (Q.obj K)

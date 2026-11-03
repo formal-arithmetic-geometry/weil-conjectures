@@ -24,6 +24,7 @@ set_option synthInstance.maxSize 2048
 universe u v₁ v₂ w₁ w₂
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
+open AlgebraicGeometry.Etale
 
 /-- Pullback composition around the specified square, before tensoring with a Tate line.
 Source: sk-prop-an, Step 4 (blueprint: def-pur-vector-purity-base-change). -/

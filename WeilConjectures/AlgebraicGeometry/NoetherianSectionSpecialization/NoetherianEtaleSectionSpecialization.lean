@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothExceptionalBaseChange
+public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothTensorDuality
 public import WeilConjectures.AlgebraicGeometry.VectorBundleZeroSection.VectorBundleZeroSection
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange

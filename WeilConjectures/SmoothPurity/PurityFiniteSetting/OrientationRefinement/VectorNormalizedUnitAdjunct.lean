@@ -17,6 +17,7 @@ set_option synthInstance.maxSize 2048
 universe u uB
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting.OrientationRefinement
+open AlgebraicGeometry.Etale
 
 attribute [local irreducible] VectorBundleZeroSection.scheme VectorBundleZeroSection.π
   VectorBundleZeroSection.over VectorBundleZeroSection.antiEquivalence
