@@ -1180,7 +1180,7 @@ def reductionEtaleTateExtensionMap
     (φ : A →+* B) (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0) :
     (Etale.scalarExtension φ T).obj (Etale.ordinaryFiniteLine A N hA T) ⟶
       Etale.ordinaryFiniteLine B N hB T :=
-  WeilConjectures.PurityFiniteSetting.purityScalarSingleMap φ T
+  AlgebraicGeometry.Etale.purityScalarSingleMap φ T
       (finiteEtaleTateLine T N A hA) ≫
     (DerivedCategory.singleFunctor _ 0).map
       (((etaleSheafExtendScalarsAdjunction φ T).homEquiv _ _).symm
@@ -1289,7 +1289,7 @@ variable {C : Type v} {D : Type w} [Category.{u + 1} C] [Category.{u + 1} D]
   (a : E ⊣ U) {L : DerivedCategory C ⥤ DerivedCategory D}
   (ad : L ⊣ U.mapDerivedCategory) (M : C)
 private theorem reductionFlatSingleAdjunct_isIso (hM : ObjectProperty.flat M) :
-    IsIso (WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap E U L
+    IsIso (AlgebraicGeometry.Etale.purityAdjunctionSingleMap E U L
       U.mapDerivedCategory (DerivedCategory.singleFunctor C 0)
       (DerivedCategory.singleFunctor D 0) a ad (U.mapDerivedCategorySingleFunctor 0) M) := by
   let P := (CochainComplex.singleFunctor C 0).obj M
@@ -1304,7 +1304,7 @@ private theorem reductionFlatSingleAdjunct_isIso (hM : ObjectProperty.flat M) :
         (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 M n hn)
   have hr := Etale.derivedRepresentative_isIso E U a ad P hP
   rw [← Etale.mapComplex_unit_formula] at hr
-  unfold WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap
+  unfold AlgebraicGeometry.Etale.purityAdjunctionSingleMap
   erw [← reductionSingleAdjunct E U a ad M]
   infer_instance
 end FlatSingle
@@ -1400,7 +1400,7 @@ theorem reductionEtaleTateExtensionMap_isIso
     (φ : A →+* B) (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) :
     IsIso (reductionEtaleTateExtensionMap φ T N hA hB) := by
-  have hα : IsIso (WeilConjectures.PurityFiniteSetting.purityScalarSingleMap φ T
+  have hα : IsIso (AlgebraicGeometry.Etale.purityScalarSingleMap φ T
       (finiteEtaleTateLine T N A hA)) := by
     let E := etaleSheafExtendScalars φ T
     let U := Sheaf.restrictScalars T.smallEtaleTopology φ

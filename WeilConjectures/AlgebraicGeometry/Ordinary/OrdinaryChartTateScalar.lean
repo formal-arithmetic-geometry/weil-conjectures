@@ -32,7 +32,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   ProEtale.pbcFixedScalarExtension derivedTensor upperStar lowerStar
   projectiveLineTraceDatum projectiveLineTraceTransport
-  WeilConjectures.PurityFiniteSetting.purityScalarSingleMap
+  AlgebraicGeometry.Etale.purityScalarSingleMap
   WeilConjectures.PurityFiniteSetting.purityScalarUnitMap
   ExceptionalCoefficients.tensorIso ExceptionalCoefficients.unitIso
   singleFunctorObjUnitIso derivedTensorRightUnitor
@@ -60,7 +60,7 @@ private def normalizedCoefficientLine
         (ProEtale.reductionEtaleTateMap_existsUnique φ T N hA hB).exists.choose_spec W a z
     derivedIso := ProEtale.reductionEtaleTateIso φ T N hA hB hT
     derived_normalization := Eq.refl
-      (WeilConjectures.PurityFiniteSetting.purityScalarSingleMap φ T
+      (AlgebraicGeometry.Etale.purityScalarSingleMap φ T
           (Scheme.finiteEtaleTateLine T N A hA) ≫
         (_root_.DerivedCategory.singleFunctor _ 0).map
           (((ProEtale.etaleSheafExtendScalarsAdjunction φ T).homEquiv _ _).symm

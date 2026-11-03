@@ -187,7 +187,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   ProEtale.pbcFixedScalarExtension derivedTensor upperStar lowerStar
   projectiveLineTraceDatum projectiveLineTraceTransport
-  WeilConjectures.PurityFiniteSetting.purityScalarSingleMap
+  AlgebraicGeometry.Etale.purityScalarSingleMap
   WeilConjectures.PurityFiniteSetting.purityScalarUnitMap
   ExceptionalCoefficients.tensorIso ExceptionalCoefficients.unitIso
   singleFunctorObjUnitIso derivedTensorRightUnitor
