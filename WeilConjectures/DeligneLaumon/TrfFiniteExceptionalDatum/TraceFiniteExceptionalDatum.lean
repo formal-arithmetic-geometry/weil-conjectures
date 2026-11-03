@@ -32,6 +32,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactS
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenRestrictionMaps
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedAmbientExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFiniteConstantLocalModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ExceptionalInverseImageExistence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SkPropSfExistence
 
 /-! # The trace-formula exceptional datum at an arbitrary finite ring
 
@@ -85,19 +88,20 @@ abbrev trfFiniteCtf (T : Scheme.{u}) := (trfFiniteCtfProperty A T).FullSubcatego
 
 /-- The datum at a general finite ell-primary ring. The right functors and their
 adjunctions are the specified localizing exceptional adjoints; preservation supplies
-their constructible restriction. The six witnesses in `comparisons`
-are taken by `ofAdmissibility` from the anchor’s specified package, whose theorem
-provides the proper/open and refinement normalizations and twelve coherence laws.
+their constructible restriction. The comparison fields are the published CoherentData,
+including its proper/open, refinement and composition/exchange normalization laws.
+The supplied right adjoint
+and its counit determine its constructible restriction.
 Availability is supplied by sk-thm-existence and sk-prop-sf-rf-shriek-preservation;
 these fields name that datum, not additional geometric hypotheses.
 Source: latest def-trf-admissibility, all finite-A clauses
-(blueprint: lem-sf-etale-shriek-equals-pullback). -/
+(blueprint: def-sf-etale-finite-exceptional-datum). -/
 structure TrfFiniteExceptionalDatum (D : FiniteFieldDatum.{u}) (ell : ℕ)
     [Fact ell.Prime] (A : Type) [CommRing A] [Finite A]
     [TopologicalSpace A] [DiscreteTopology A] [IsTopologicalRing A] where
   different : ell ≠ D.p
   primary : ∃ n : ℕ, 1 ≤ n ∧ (ell : A) ^ n = 0
-  comparisons : CompCompositionWitnesses D.k (trfFiniteCoefficient A)
+  comparisons : CompactSupportComposition.CoherentData (trfFiniteCoefficient A) D.k
   compactification : ∀ {X Y : SepFinType D.k} (f : X ⟶ Y),
     Compactification f.hom.left
   right : ∀ {X Y : SepFinType D.k} (_f : X ⟶ Y),
@@ -159,13 +163,13 @@ def localizingSupport {X Y : SepFinType D.k} (f : X ⟶ Y) :=
 
 /-- Restrict the actual derived pullback to the localizing categories.
 Source: def-trf-admissibility, ordinary operations
-(blueprint: lem-sf-etale-shriek-equals-pullback). -/
+(blueprint: def-sf-etale-finite-exceptional-datum). -/
 def localizingPullback {X Y : SepFinType D.k} (f : X ⟶ Y) :
     trfFiniteLoc A Y.obj.left ⥤ trfFiniteLoc A X.obj.left :=
   (localizingClosureProEtale (trfFiniteCoefficient A) X.obj.left).lift
     ((localizingClosureProEtale (trfFiniteCoefficient A) Y.obj.left).ι ⋙
       moduleObjectDerivedPullback (trfFiniteCoefficient A) f.hom.left)
-    (fun K ↦ (S.comparisons.pullback_preserves X Y f).1 K.obj K.property)
+    (fun K ↦ (S.comparisons.pullback_preserves X Y f.hom.left).1 K.obj K.property)
 
 /-- The constructible compact-support restriction, using the published preservation clause.
 Source: def-trf-admissibility, Rf_! (blueprint: lem-sf-etale-shriek-equals-pullback). -/
@@ -185,12 +189,12 @@ def exceptional {X Y : SepFinType D.k} (f : X ⟶ Y) :
 
 /-- The actual total derived module pullback, restricted to Dctf.
 Source: def-trf-admissibility and def-weil-derived-pullback-tensor-hom
-(blueprint: lem-sf-etale-shriek-equals-pullback). -/
+(blueprint: def-sf-etale-finite-exceptional-datum). -/
 def pullback {X Y : SepFinType D.k} (f : X ⟶ Y) :
     trfFiniteCtf A Y.obj.left ⥤ trfFiniteCtf A X.obj.left :=
   (trfFiniteCtfProperty A X.obj.left).lift
     ((trfFiniteCtfProperty A Y.obj.left).ι ⋙ S.localizingPullback f)
-    (fun K ↦ (S.comparisons.pullback_preserves X Y f).2 K.obj.obj K.property)
+    (fun K ↦ (S.comparisons.pullback_preserves X Y f.hom.left).2 K.obj.obj K.property)
 
 /-- Restrict the same Hom bijections, and therefore the same unit and counit.
 Source: def-trf-admissibility, adjunction (blueprint: lem-sf-etale-shriek-equals-pullback). -/
@@ -260,7 +264,7 @@ def pullbackComposition {X Y Z : SepFinType D.k} (f : X ⟶ Y) (g : Y ⟶ Z) :
 
 /-- The normalized compact-support exchange, with the actual proper/open components.
 Source: def-trf-admissibility, generic compact-support base change
-(blueprint: lem-sf-etale-shriek-equals-pullback). -/
+(blueprint: def-sf-etale-finite-exceptional-datum). -/
 def supportBaseChange {X Y X' Y' : SepFinType D.k}
     {f : X ⟶ Y} {f' : X' ⟶ Y'} (a : X' ⟶ X) (v : Y' ⟶ Y)
     (sq : IsPullback a.hom.left f'.hom.left f.hom.left v.hom.left) :
@@ -268,10 +272,10 @@ def supportBaseChange {X Y X' Y' : SepFinType D.k}
   NatIso.ofComponents
     (fun K ↦ (trfFiniteCtfProperty A Y'.obj.left).isoMk
       ((localizingClosureProEtale (trfFiniteCoefficient A) Y'.obj.left).isoMk
-        ((S.comparisons.exchange (a := a) (v := v) sq (S.compactification f)
+        ((S.comparisons.exchange (a := a.hom.left) (v := v.hom.left) sq (S.compactification f)
           (S.compactification f')).app K.obj)))
     (fun b ↦ ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
-      ((S.comparisons.exchange (a := a) (v := v) sq (S.compactification f)
+      ((S.comparisons.exchange (a := a.hom.left) (v := v.hom.left) sq (S.compactification f)
         (S.compactification f')).hom.naturality b.hom)))
 
 /-- The exceptional exchange isomorphism with direct images, obtained by
