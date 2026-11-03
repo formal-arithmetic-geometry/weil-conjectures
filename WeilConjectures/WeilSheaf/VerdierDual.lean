@@ -12,7 +12,7 @@ public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
-import WeilConjectures.WeilSheaf.DerivedHomConstructible
+import WeilConjectures.WeilSheaf.VerdierBiduality
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -187,7 +187,9 @@ lemma verdierDual_obj_obj (K : (WeilComplex k₀ l X)ᵒᵖ) :
 descend, giving a natural isomorphism `K ≅ D_{X,ℚ̄_ℓ} D_{X,ℚ̄_ℓ} K`"). -/
 theorem nonempty_iso_verdierDual_rightOp_comp_verdierDual :
     Nonempty (𝟭 (WeilComplex k₀ l X) ≅ (verdierDual k₀ l X).rightOp ⋙ verdierDual k₀ l X) :=
-  sorry
+  nonempty_iso_dual_rightOp_comp_dual (dualizingComplex k₀ l X)
+    (nonempty_nativeGeometricForget_obj_iso_of_adjunction
+      (derivedLowerShriekUpperShriekAdjunction _))
 
 open Pretriangulated.Opposite in
 /-- **The Verdier dual is exact** (blueprint: `det-pd-biduality-coefficients`, "an exact
