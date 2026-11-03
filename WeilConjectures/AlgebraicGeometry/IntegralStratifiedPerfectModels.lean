@@ -5,13 +5,15 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
+-- Imported before `FlatConstantTensorProZeroCones`, so that downstream instance searches try
+-- `flatConstantModulesAbelian` before `SemilinearSections.moduleAbelian`, as they did before.
+public import WeilConjectures.AlgebraicGeometry.SemilinearSystemModels
 public import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.AlgebraicGeometry.IntrinsicCompletionCompleted
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 public import WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 public import WeilConjectures.AlgebraicGeometry.RingedProjectionRestrictionData
-public import WeilConjectures.AlgebraicGeometry.SemilinearSystemModels
 public import WeilConjectures.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import WeilConjectures.ConstructibleSheaf.Defs
 
