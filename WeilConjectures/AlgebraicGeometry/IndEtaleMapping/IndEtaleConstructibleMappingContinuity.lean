@@ -109,6 +109,19 @@ def pullback {T S : Over X} (f : T ⟶ S) : value A K M S ⟶ value A K M T :=
         ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f.left S.hom T.hom
           f.w.symm).inv.app M)
 
+/-- The two coefficient variances of the existing global Hom bifunctor.
+Source: Bhatt--Scholze 6.3.16, naturality of RHom
+(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+def coefficientMap {K' M' : DerivedCategoryModule A X}
+    (α : K' ⟶ K) (β : M ⟶ M') (T : Over X) :
+    value A K M T ⟶ value A K' M' T :=
+  ((ExternalRHom.globalHom A T.left).map
+      ((ExternalRHom.pull A T.hom).map α).op).app
+        ((ExternalRHom.pull A T.hom).obj M) ≫
+    ((ExternalRHom.globalHom A T.left).obj
+      (op ((ExternalRHom.pull A T.hom).obj K'))).map
+        ((ExternalRHom.pull A T.hom).map β)
+
 /-- Compatible strict representatives for the global RHom diagram and its
 pullback cocone. The two equations normalize every transition and every leg
 against the canonical pullback of morphisms. This is computational input for an
@@ -297,5 +310,28 @@ theorem constructible_mapping_model_comparison_isIso [Finite A] [IsAffine X]
   have := isIso_localized_desc_of_cohomology A P.diagram P.cocone hcohomology
   dsimp only [comparison]
   infer_instance
+
+/-- A compatible map of strict representatives, including reindexing. The
+scheme maps form a map of inverse systems and its map on the limit cones.
+The strict cocone square and both normalization equations say that the chain
+maps represent those very pullbacks, including their coherence.
+Taking r to be the identity covers system maps. Taking it cofinal covers
+refinements. Taking E to be the base-changed system along an affine etale
+X' → X covers base restriction, with the composition comparisons in pullback.
+Source: Bhatt--Scholze 6.3.16 and the node's proof, Step 7
+(blueprint: lem-per-ind-etale-constructible-mapping-continuity). -/
+structure ModelMap (P : Model A K M D c) (Q : Model A K' M' E d)
+    (η : E ⟶ r ⋙ D) (v : d.pt ⟶ c.pt) where
+  cone_square : ∀ j : J, v ≫ c.π.app (r.obj j) = d.π.app j ≫ η.app j
+  stages : r.op ⋙ P.diagram ⟶ Q.diagram
+  apex : P.cocone.pt ⟶ Q.cocone.pt
+  square : ∀ j : J,
+    P.cocone.ι.app (op (r.obj j)) ≫ apex = stages.app (op j) ≫ Q.cocone.ι.app (op j)
+  stage_normalization : ∀ j : J,
+    DerivedCategory.Q.map (stages.app (op j)) ≫ (Q.stage j).hom =
+      (P.stage (r.obj j)).hom ≫ pullback A K M (η.app j) ≫
+        coefficientMap A K M α β (E.obj j)
+  apex_normalization : DerivedCategory.Q.map apex ≫ Q.apex.hom =
+    P.apex.hom ≫ pullback A K M v ≫ coefficientMap A K M α β d.pt
 
 end AlgebraicGeometry.Etale.IndEtaleMapping

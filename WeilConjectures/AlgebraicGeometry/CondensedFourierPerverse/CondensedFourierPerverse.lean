@@ -154,9 +154,18 @@ variable (ell : ℕ) [Fact ell.Prime]
 Source: geometric category in the source (blueprint: sk-p-dl-a1-perverse). -/
 abbrev category := DerivedCategory (Modules (Profinite.padicAlgClRingObj ell) (line D))
 
+/-- The bounded constructible category from the curve-heart dependency.
+Source: geometric category in the source (blueprint: sk-p-dl-a1-perverse). -/
+abbrev constructible := ConstantModelBoundedConstructible
+  (Profinite.padicAlgClRingObj ell) (line D)
+
 /-- The geometric perverse heart, with the dependency's actual geometric morphisms.
 Source: geometric heart in the source (blueprint: sk-p-dl-a1-perverse). -/
 abbrev perverse := (heart (Profinite.padicAlgClRingObj ell) (line D)).FullSubcategory
+
+/-- The perverse Weil heart is the dependency's fixed-pair heart for geometric Frobenius.
+Source: final clause in the source (blueprint: sk-p-dl-a1-perverse). -/
+abbrev weilPerverse := WeilHeart (Profinite.padicAlgClRingObj ell) (frobenius D)
 
 /-- The ordinary derived Frobenius inverse image used in that fixed-pair heart.
 Source: canonical Frobenius compatibility in the source
@@ -250,6 +259,12 @@ def transform (ψ : AddChar D.k₀ (MonObj.Γ (Profinite.padicAlgClRingObj ell))
     CondensedRing.rightDerivedLowerShriekOfCompactification
       (Profinite.padicAlgClRingObj ell) (compactification D c) ⋙ shiftFunctor _ (1 : ℤ)
 
+/-- The inverse in the node, with precisely the inverse character and positive Tate twist.
+Source: inversion paragraph of the source (blueprint: sk-p-dl-a1-perverse). -/
+def inverseTransform (ψ : AddChar D.k₀ (MonObj.Γ (Profinite.padicAlgClRingObj ell)))
+    (c : Compactification (secondModel D).left) : category D ell ⥤ category D ell :=
+  transform D ell ψ⁻¹ c ⋙ tateTwistFunctor (line D) ell 1
+
 /-- Arithmetic kernel descent on sheaves: the specified structure in `kernelData`.
 The kernel and its descent are projections of the same constructed object.
 Source: canonical Frobenius compatibility in the source
@@ -319,6 +334,99 @@ Source: canonical Frobenius compatibility in the source
                   Λ g.hom).app K))
               ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ h.hom).app L ≪≫
                 kernelDatum D ell ψ)))
+
+/-- Fourier--Deligne is a perverse t-exact equivalence on the geometric affine line.
+The inclusions identify the functors, including morphisms, with the specified integral
+transform and its inverse-character transform followed by the positive Tate twist.
+The last equivalence is induced by the prescribed Frobenius comparison, rather than
+by an unspecified equivalence of the underlying geometric hearts.
+
+Source: latest blueprint, part-weights-riemann-hypothesis/sec-fourier-transform/
+sec-perverse-t-exactness-of-the-fourier-transform/sk-p-dl-a1-perverse/_section.md
+and sk-p-dl-a1-perverse.proof.md; live geometric formulation retained by the
+released stage-1 repair (blueprint: sk-p-dl-a1-perverse).
+
+Proof plan, following the live node's thirteen steps:
+1. Work in the ordinary geometric derived category. Transform well-definedness
+   supplies bounded constructibility and triangulatedness; sk-lem-wft-curve-heart
+   supplies the displayed upper/lower classes and the exact forgetful functor.
+2. Ordinary truncation reduces upper preservation to punctual G and arbitrary G[1].
+   Upper objects are closed under positive shifts and extensions.
+3. The rank-one stalk formula and finite-support compact cohomology put FT(G) in
+   degree -1 when G is punctual. Exact scalar fibres and constructible closed-point
+   detection pass this statement from geometric fibres to cohomology sheaves.
+4. For arbitrary constructible G, the same formula identifies H^j FT(G[1]) at y
+   with H_c^(j+2)(A,G tensor L_(psi(yx))). Geometric curve compact cohomology gives
+   the range [-2,0], without imposing a Weil structure on G or on the parameter y.
+5. Choose a dense lisse open U with finite complement. The localization triangle
+   and finite-support cohomology identify degree-two compact cohomology on A and U.
+6. Tensor monodromy identifies this group with the coinvariants of V tensor chi_y,
+   followed by twist (-1). Use the geometric compact-cohomology lemma for arbitrary
+   G; the middle-extension Weil endpoint applies only when its hypotheses hold.
+7. Nonzero coinvariants are equivalent to a rank-one quotient chi_y inverse of V:
+   compose a nonzero functional with the coinvariant quotient. No semisimplicity.
+8. The trace-character comparison and Artin--Schreier character identities make
+   chi_y pairwise distinct. Dense-open pi_1 surjectivity reduces this to the whole
+   line, where the nontrivial linear character integral vanishes but the constant
+   line has nonzero top compact cohomology.
+9. Quotient functionals for distinct characters are independent: a shortest
+   nonzero relation, precomposed by a separating group element and subtracted
+   from a scalar multiple of itself, would give a shorter relation. Thus there
+   are at most dim V such characters, including when V is zero.
+10. Constructibility converts this finite bound on nonzero closed fibres into
+    punctual H^0 FT(G[1]); a nonzero generic lisse stratum would have infinitely
+    many nonzero closed fibres. This proves upper preservation.
+11. Repeat for psi inverse. Exact invertible Tate tensor preserves both curve
+    classes. Inversion in both orders and base-linearity identify the stated
+    inverse, cancelling the twist (-1) with (1).
+12. The lower-bound Hom test and inversion give lower preservation from upper
+    preservation of the inverse. Restrict both functors to the geometric hearts.
+13. The canonical Fourier Frobenius comparisons and Weil-equivariant inversion
+    give the Weil-heart equivalence. Heart short exact sequences are triangles;
+    triangulatedness makes the geometric heart functors exact. Exactness and
+    exactness reflection of the forgetful functor give Weil-heart exactness.
+    No triangulated structure on the category of strict Weil pairs is used. -/
+theorem fourier_perverse_equivalence
+    (_hEll : ell ≠ D.p)
+    (ψ : AddChar D.k₀ (MonObj.Γ (Profinite.padicAlgClRingObj ell))) (_hψ : ψ ≠ 1)
+    (c : Compactification (secondModel D).left) :
+    let Λ := Profinite.padicAlgClRingObj ell
+    let B := constructible D ell
+    let H := perverse D ell
+    let W := weilPerverse D ell
+    let iB : B ⥤ category D ell := (constantModelBoundedConstructible Λ (line D)).ι
+    let iH : H ⥤ category D ell := (heart Λ (line D)).ι
+    let iW : W ⥤ Endofunctor.IsoAlgebra (action D ell) :=
+      (show ObjectProperty (Endofunctor.IsoAlgebra (action D ell)) from
+        fun K ↦ heart Λ (line D) K.carrier).ι
+    let U : W ⥤ H := CondensedCurvePerverse.forget Λ (frobenius D)
+    (Exists fun [_cs : (transform D ell ψ c).CommShift ℤ] ↦
+      (transform D ell ψ c).IsTriangulated) ∧
+    (Exists fun [_cs : (inverseTransform D ell ψ c).CommShift ℤ] ↦
+      (inverseTransform D ell ψ c).IsTriangulated) ∧
+    ∃ e : B ≌ B,
+      Nonempty (e.functor ⋙ iB ≅ iB ⋙ transform D ell ψ c) ∧
+      Nonempty (e.inverse ⋙ iB ≅ iB ⋙ inverseTransform D ell ψ c) ∧
+      (∀ (K : B) (n : ℤ),
+        (upper Λ (line D) n (e.functor.obj K).obj ↔ upper Λ (line D) n K.obj) ∧
+        (lower Λ (line D) n (e.functor.obj K).obj ↔ lower Λ (line D) n K.obj)) ∧
+      (∀ (K : B) (n : ℤ),
+        (upper Λ (line D) n (e.inverse.obj K).obj ↔ upper Λ (line D) n K.obj) ∧
+        (lower Λ (line D) n (e.inverse.obj K).obj ↔ lower Λ (line D) n K.obj)) ∧
+      Exists fun [_hH : Abelian H] ↦ ∃ h : H ≌ H,
+        Nonempty (h.functor ⋙ iH ≅ iH ⋙ transform D ell ψ c) ∧
+        Nonempty (h.inverse ⋙ iH ≅ iH ⋙ inverseTransform D ell ψ c) ∧
+        PreservesFiniteLimits h.functor ∧ PreservesFiniteColimits h.functor ∧
+        PreservesFiniteLimits h.inverse ∧ PreservesFiniteColimits h.inverse ∧
+        ∃ α : transform D ell ψ c ⋙ action D ell ≅ action D ell ⋙ transform D ell ψ c,
+          (∀ K : category D ell, α.app K = frobeniusComponent D ell ψ c K) ∧
+          Exists fun [_hW : Abelian W] ↦ ∃ w : W ≌ W,
+            Nonempty (w.functor ⋙ iW ≅ iW ⋙ Endofunctor.IsoAlgebra.mapOfNatIso α) ∧
+            Nonempty (w.functor ⋙ U ≅ U ⋙ h.functor) ∧
+            Nonempty (w.inverse ⋙ U ≅ U ⋙ h.inverse) ∧
+            PreservesFiniteLimits w.functor ∧ PreservesFiniteColimits w.functor ∧
+            PreservesFiniteLimits w.inverse ∧ PreservesFiniteColimits w.inverse := by
+  sorry
 
 set_option maxHeartbeats 1200000 in
 -- Elaborate the restrictions and the two canonical forgetful squares in one statement.

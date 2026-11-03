@@ -13,6 +13,20 @@ public import WeilConjectures.CategoryTheory.Native.NativeOpenTensorPresentation
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorOperations
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdjunctionSupplement
 import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.Algebra.Homology.BifunctorHomComplex
+public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
+public import WeilConjectures.CategoryTheory.DerivedCategory.ProEtaleCoefficients.DerivedMonoidalClosed
+public import WeilConjectures.CategoryTheory.Endofunctor.EquivalenceOrbitInduction
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCompIso
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
+public import WeilConjectures.DeligneLaumon.NativeWeilDerivedFramework
+public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedTensorHomModelSupplement
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
 /-! # Native open comparison data
 
@@ -139,3 +153,47 @@ def NativeOpenPresentationCompatibility (s : NativeOpenTensorData k₀ l j)
   HEq c.sheafRestriction s.sheafRestriction ∧ HEq c.restriction d.restriction
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
+
+namespace WeilConjectures
+
+/-- The actual condensed Weil-module open extension.
+Source: `prop-weil-operations` and the native framework
+(blueprint: def-sf-native-open-tensor-presentation-data). -/
+abbrev nativeComparisonExtension :=
+  nativeWeilModuleOpenExtension (WeilCoefficient.ab c)
+    (D.geometricFrobenius U₀) (D.geometricFrobenius Z₀)
+    (D.geometricFiberMap j₀) (nativeWeilGeometricSquare D j₀)
+
+/-- The actual condensed Weil-module restriction.
+Source: `prop-weil-operations` and the native framework
+(blueprint: def-sf-native-open-tensor-presentation-data). -/
+abbrev nativeComparisonRestriction :=
+  nativeWeilModulePullback (WeilCoefficient.ab c)
+    (D.geometricFrobenius U₀) (D.geometricFrobenius Z₀)
+    (D.geometricFiberMap j₀) (nativeWeilGeometricSquare D j₀)
+
+/-- The actual ordinary relative derived tensor of condensed modules.
+Source: the native framework and derived module tensor construction
+(blueprint: def-sf-native-open-tensor-presentation-data). -/
+abbrev nativeComparisonOrdinaryTensor :=
+  MonoidalCategory.tensor (nativeWeilDerivedCategory ell c (D.geometricFiber X₀).left)
+
+/-- Extension and restriction are the actual condensed Weil-module functors.
+Source: the open projection factor in `fix-lem-tensor-adjunction`, Step 1
+(blueprint: def-sf-native-open-tensor-presentation-data). -/
+def NativeOpenFunctorCompatibility : Prop :=
+  HEq p.E (nativeComparisonExtension D ell c j₀) ∧
+  HEq p.R (nativeComparisonRestriction D ell c j₀)
+
+/-- The sheaf and derived comparisons agree with the specified native data.
+Each equality is a field so the kernel checks the dependent projections separately.
+Source: the open projection factor in `fix-lem-tensor-adjunction`, Step 1
+(blueprint: def-sf-native-open-tensor-presentation-data). -/
+structure NativeOpenComparisonCompatibility (s : NativeOpenTensorData D ell c j₀)
+    (d : NativeOpenDerivedTensorData D ell hell c j₀ s) : Prop where
+  sheafGamma : HEq p.sheafGamma s.sheafGamma
+  gamma : HEq p.gamma d.gamma
+  sheafRestriction : HEq p.sheafRestriction s.sheafRestriction
+  restriction : HEq p.restriction d.restriction
+
+end WeilConjectures

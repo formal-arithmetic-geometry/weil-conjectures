@@ -46,6 +46,12 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FormalClosedSupportGeneralField
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.SmoothDivisorNativeBottom
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.ZeroSectionCoefficientSupport
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.ZeroSectionFiniteNativeBound
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.ZeroSectionIntegralLimit
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.ZeroSectionScalarComparison
 
 /-!
 # Bottom-degree zero-section support with native coefficients
@@ -114,12 +120,10 @@ def zeroBottomFree
 Tate-twist construction, applied to the concrete root-tower first line.
 Source: sk-def-sp-tate-twist and the coefficient conventions
 (blueprint: lem-pur-zero-section-bottom-coefficients). -/
-def zeroBottomInput (P : PurityFiniteSetting.{u})
+abbrev zeroBottomInput (P : PurityFiniteSetting.{u})
     (c : PurityTransport.Coefficient P.coefficients.l) (X : Scheme.{u}) (r : ℕ) :
     c.derived P.coefficients.l X :=
-  ((DerivedCategory.singleFunctor _ 0).obj
-    (spInternalSignedTwist X (condensedRingObj (c.obj P.coefficients.l) X)
-      (c.firstLine P.coefficients.l X) (r : ℤ))) ⟦2 * (r : ℤ)⟧
+  nativeZeroInput P c X r
 
 variable {P : PurityFiniteSetting.{u}} {B : Scheme.{u}}
   {hB : B ⟶ Spec (.of P.field.k)}
@@ -128,14 +132,12 @@ variable {P : PurityFiniteSetting.{u}} {B : Scheme.{u}}
 /-- The actual derived support object, using the canonical open complement of z.
 Source: blueprint Step 3 and sk-lem-formal-closed-support
 (blueprint: lem-pur-zero-section-bottom-coefficients). -/
-def zeroBottomSupport {P : PurityFiniteSetting.{u}} {B : Scheme.{u}}
+abbrev zeroBottomSupport {P : PurityFiniteSetting.{u}} {B : Scheme.{u}}
     {hB : B ⟶ Spec (.of P.field.k)}
     [IsSeparated hB] [LocallyOfFiniteType hB] [QuasiCompact hB] {r : ℕ}
     (V : PurityVectorBundle P B hB r) (c : PurityTransport.Coefficient P.coefficients.l) :
     c.derived P.coefficients.l B :=
-  letI := (V.zeroSection_spec).2.1
-  (closedSupport (c.obj P.coefficients.l) V.zeroSection
-    V.zeroSection.openComplement.ι).rightDerivedFunctor.obj (zeroBottomInput P c V.E r)
+  nativeZeroSupport V c
 
 /-- The canonical bottom map: take the closed-support adjunct and apply H^0,
 normalizing H^0 of a module in degree zero by the standard single-object isomorphism.
@@ -196,6 +198,20 @@ def zeroBottomEvaluate
   let g := (PresheafOfModules.sheafificationAdjunction (R := S) (𝟙 _)).homEquiv _ _ h
   exact (PresheafOfModules.freeHomEquiv g).app
     (op ((zeroBottomOpens B).obj U)) (ULift.up (𝟙 _))
+
+/-- The native-coefficient presentations permitted by the fixed purity conventions.
+An algebra embedding expresses a finite extension of the fixed F inside the standard
+coefficient closure; the finite case is exactly the quotient A_n, up to presentation.
+Source: def-pur-conventions and the native coefficient list in Step 3
+(blueprint: lem-pur-zero-section-bottom-coefficients). -/
+def zeroBottomAllowed (P : PurityFiniteSetting.{u}) :
+    PurityTransport.Coefficient P.coefficients.l → Prop
+  | .finite A _ _ _ => Nonempty (A ≃+* P.Ring)
+  | .integers => Nonempty (P.extension →ₐ[ℚ_[P.coefficients.l]] ℚ_[P.coefficients.l])
+  | .rationals => Nonempty (P.extension →ₐ[ℚ_[P.coefficients.l]] ℚ_[P.coefficients.l])
+  | .integral E => Nonempty (P.extension →ₐ[ℚ_[P.coefficients.l]] E.1)
+  | .rational E => Nonempty (P.extension →ₐ[ℚ_[P.coefficients.l]] E.1)
+  | .closure => True
 
 /-- Extension by zero from U, followed by exact closed direct image, in the ordinary
 unbounded derived category. It represents the local supported Hom source.
@@ -420,5 +436,71 @@ private theorem zeroBottomComparison_of_isGE (V : PurityVectorBundle P B hB r)
   have : IsIso η := NatIso.isIso_of_isIso_app η
   exact ⟨hbij, hnat, (Presheaf.isSheaf_of_iso_iff (asIso η)).2
     (zeroBottomSections_isSheaf _ _ _)⟩
+
+/-- Bottom-degree supported classes for every native coefficient in the purity setting.
+Source: latest blueprint, part-duality-trace-formula/sec-smooth-purity/
+sec-the-trace-map-of-affine-space/sk-prop-an/thm-pur-localized-top-chern.proof.md,
+Step 3, universal case,
+with the native coefficient refinement in lem-pur-zero-section-bottom-coefficients
+(blueprint: lem-pur-zero-section-bottom-coefficients).
+
+Proof: Restrict the kernel defining closed support to a Zariski open. Exact open
+restriction has exact extension by zero as left adjoint, hence preserves K-injectives;
+this identifies the actual derived support objects and their cohomology on all opens.
+For finite coefficients, trivialize V and apply affine-space zero-section purity;
+its support-object isomorphism gives vanishing in all negative degrees. Vanishing
+of cohomology sheaves is local, so it descends to B. For integral coefficients the
+continuous coefficient unit is the derived limit of its genuine finite quotients:
+the quotient tower is surjective, and the root-normalized invertible line commutes
+with the sequential derived limit. Closed support, being a right adjoint, preserves
+this limit. Exact scalar restriction identifies this supported tower with the same
+finite support objects in the fixed integral module category, including the units
+in the fiber formula. Exact countable products on the pro-etale site and the Roos
+triangle imply that the derived limit of this connective tower is connective; no
+Mittag-Leffler claim about its supported cohomology is needed. For the fraction
+field and coefficient closure, scalar extension commutes with the open direct image
+on the shifted invertible coefficient line and with its unit. The fiber description
+of closed support therefore identifies scalar extension of the actual support
+objects. These scalar extensions are exact: inversion of ell is flat, and the
+closure is a filtered colimit of finite free field extensions. Thus they preserve
+the lower bound. The same argument applies to every finite extension of F.
+
+For every U, adjunction and open localization identify the displayed Hom group with
+Hom(Lambda_U,K|U). The sheafified free representable used here is precisely extension
+by zero of this unit. Since K is connective, the bottom-degree theorem for the left
+exact sections functor identifies this group with Gamma(U,H^0 K). Its comparison
+is obtained by applying H^0 to the closed-support adjunct and evaluating at the
+identity generator, exactly zeroBottomComparison. All the adjunctions, restriction
+maps and truncations are natural for successive open inclusions, proving the
+stated equality. Sections of H^0 K glue uniquely, and these natural bijections
+transfer sheafhood to the supported Hom presheaf. In rank zero z is an isomorphism
+and this is the usual unit/sections identification. On the empty base both sides
+are zero. No generator or invertible Thom arrow is selected. -/
+theorem zeroSectionBottomCoefficients (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u}) (hB : B ⟶ Spec (.of P.field.k))
+    [IsSeparated hB] [LocallyOfFiniteType hB] [QuasiCompact hB]
+    (r : ℕ) (V : PurityVectorBundle P B hB r)
+    (c : PurityTransport.Coefficient P.coefficients.l) (hc : zeroBottomAllowed P c) :
+    (zeroBottomSupport V c).IsGE 0 ∧
+    (∀ U : B.Opens, Function.Bijective (zeroBottomComparison V c U)) ∧
+    (∀ (U W : B.Opens) (f : U ⟶ W) (a : (zeroBottomHom V c).obj (op W)),
+      zeroBottomComparison V c U ((zeroBottomHom V c).map f.op a) =
+        (zeroBottomSections (c.obj P.coefficients.l) B
+          ((DerivedCategory.homologyFunctor _ 0).obj (zeroBottomSupport V c))).map f.op
+            (zeroBottomComparison V c W a)) ∧
+    Presheaf.IsSheaf (Opens.grothendieckTopology B)
+      (zeroBottomHom V c) := by
+  have _hAllowed := hc
+  cases r with
+  | zero =>
+      have hK : (zeroBottomSupport V c).IsGE 0 := by
+        simpa using (nativeZeroSupport_isGE_neg V c)
+      exact ⟨hK, zeroBottomComparison_of_isGE V c hK⟩
+  | succ r =>
+      have hK : (zeroBottomSupport V c).IsGE 0 := by
+        exact nativeZeroSupport_isGE_of_comparisons V
+          (nativeZeroSupport_finite_bound V) (nativeZeroSupport_integral_limit V)
+          (nativeZeroSupport_scalar_bound V) c
+      exact ⟨hK, zeroBottomComparison_of_isGE V c hK⟩
 
 end WeilConjectures.PurityFiniteSetting

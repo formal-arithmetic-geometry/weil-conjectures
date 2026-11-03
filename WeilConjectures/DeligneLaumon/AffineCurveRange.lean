@@ -12,6 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeart
 public import WeilConjectures.AlgebraicGeometry.CoefficientHeartGeneralStatement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilCondensed
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.DeligneLaumon.AffineCurveRange.AffineCurveLatticeFiltration
+public import WeilConjectures.DeligneLaumon.AffineCurveRange.CurveLatticeCompletionComparison
+public import WeilConjectures.DeligneLaumon.AffineCurveRange.CurveLatticeFiniteLevels
+public import WeilConjectures.DeligneLaumon.AffineCurveRange.FiniteTowerUpperBound
+public import WeilConjectures.DeligneLaumon.CompactSectionsNonnegative
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Cohomological range of an affine curve
@@ -41,12 +47,12 @@ namespace WeilConjectures
 /-- Compact-support cohomology of a constructible coefficient sheaf on a smooth
 affine curve is concentrated in degrees `0`, `1`, and `2`.
 
-Source: `literature/blueprint/latest/blueprint/part-weights-riemann-hypothesis/`
-`sec-fourier-transform/sec-perverse-t-exactness-of-the-fourier-transform/`
+Source: `literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/`
 `sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.md`, statement (order 4206)
 (blueprint: lem-zl-affine-curve-range).
-The proof is postponed and follows the source's ten steps:
-(1) forget the fixed-pair Weil structure, base-change the smooth relative
+The proof follows the source's ten steps, with the finite-level, completion,
+and lattice-filtration comparisons recorded separately:
+(1) forget the Weil structure, base-change the smooth relative
     dimension-one curve, and decompose the affine curve into finitely many
     connected components, with the empty case included;
 (2) descend each component's constructible coefficient to a finite extension
@@ -93,6 +99,39 @@ theorem affineCurve_compactSupport_range
         (ModuleCat.{u + 1} (PadicAlgCl ell)) i).obj
         ((condensedQbarCompactSections ell D.k c).obj
           ((DerivedCategory.singleFunctor _ 0).obj F.carrier))) := by
-  sorry
+  let : HasDerivedCategory.{u + 1} Ab.{u + 1} :=
+    HasDerivedCategory.ofIsGrothendieckAbelian _
+  intro i hi
+  by_cases hneg : i < 0
+  · exact compactSections_nonnegative ell D.k c F.carrier i hneg
+  have htop : 2 < i := by
+    simp only [Set.mem_insert_iff, Set.mem_singleton_iff, not_or] at hi
+    omega
+  have hlattice (d : AffineCurveRange.LatticePiece ell D.k) :
+      IsZero ((DerivedCategory.homologyFunctor
+        (ModuleCat.{u + 1} d.scalarRing) i).obj d.integralComplex) := by
+    obtain ⟨hfinite, hzero⟩ := AffineCurveRange.curveLattice_finiteLevels D ell hEll d
+    have hz := AffineCurveRange.finiteTower_homology_isZero.{u + 1, u + 1}
+      d.abelianTower d.abelianComplex
+      (AffineCurveRange.curveLattice_completionComparison D ell hEll d) i
+      (fun n ↦ hfinite n (i - 1)) (fun n ↦ hzero n i htop)
+    exact d.homology_isZero_of_forget i hz
+  obtain ⟨m, T, hstart, ⟨e⟩, hsteps⟩ :=
+    AffineCurveRange.affineCurve_latticeFiltration D ell hEll C₀ F hF c
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (PadicAlgCl ell)) i
+  have hT : ∀ j : Fin (m + 1), IsZero (H.obj (T j)) := by
+    refine Fin.induction ?_ ?_
+    · exact H.map_isZero hstart
+    · intro j hj
+      obtain ⟨d, r, hexact, f, g, δ, htri⟩ := hsteps j
+      let S : ModuleCat.{u + 1} d.scalarRing ⥤ ModuleCat.{u + 1} (PadicAlgCl ell) :=
+        ModuleCat.extendScalars r
+      have : PreservesFiniteLimits S := hexact
+      have hpiece : IsZero (H.obj (S.mapDerivedCategory.obj d.integralComplex)) :=
+        (S.map_isZero (hlattice d)).of_iso
+          ((S.mapDerivedCategoryHomologyFunctorIso i).app d.integralComplex).symm
+      exact (DerivedCategory.HomologySequence.exact₂
+        (Pretriangulated.Triangle.mk f g δ) htri i).isZero_of_both_isZero hj hpiece
+  exact (hT (Fin.last m)).of_iso (H.mapIso e.symm)
 
 end WeilConjectures

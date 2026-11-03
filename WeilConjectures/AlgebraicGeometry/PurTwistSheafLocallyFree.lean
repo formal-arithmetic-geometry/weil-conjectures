@@ -11,6 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.NativeIntegralTensorTransport.Na
 public import WeilConjectures.AlgebraicGeometry.PurityTransport.Coefficient.TransportCoefficients
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
+public import WeilConjectures.AlgebraicGeometry.PurFiniteRootReductions
+public import WeilConjectures.AlgebraicGeometry.PurIntegralRootComparisons
+public import WeilConjectures.AlgebraicGeometry.PurTwistCanonicalMaps
+public import WeilConjectures.AlgebraicGeometry.PurTwistsCommonRootCover
 
 /-! # Local freeness of the condensed pulled-back Tate twist sheaves
 
@@ -270,6 +274,48 @@ def integralTateComparisonStatement
           apply Mod.hom_ext
           exact (hcompat n).symm))))
 
+private theorem coefficientFiniteRootComparison_zero (S : Scheme.{u}) (ell : ℕ) [Fact ell.Prime]
+    (E : Type u) [Field E] [Algebra (Padic ell) E]
+    [FiniteDimensional (Padic ell) E] (n r : ℕ) :
+    IsIso (coefficientFiniteRootComparison ell E S n r 0) := by
+  have h : (eqToHom (by simp :
+      rootsOfUnitySheaf S (ell ^ (r + 0 + 1)) =
+        rootsOfUnitySheaf S (ell ^ 0 * ell ^ (r + 1))) ≫
+        rootsOfUnitySheafPow S (ell ^ (r + 1)) (ell ^ 0)) = 𝟙 _ := by
+    unfold rootsOfUnitySheafPow
+    let F := presheafToSheaf (Scheme.ProEt.topology S) Ab.{u + 1}
+    let t : rootsOfUnityPresheaf S (ell ^ (r + 0 + 1)) ⟶
+        rootsOfUnityPresheaf S (1 * ell ^ (r + 1)) := eqToHom (by simp)
+    have hcast : (eqToHom (by simp) :
+        rootsOfUnitySheaf S (ell ^ (r + 0 + 1)) ⟶
+          rootsOfUnitySheaf S (1 * ell ^ (r + 1))) = F.map t :=
+      (eqToHom_map F (by simp : rootsOfUnityPresheaf S (ell ^ (r + 0 + 1)) =
+        rootsOfUnityPresheaf S (1 * ell ^ (r + 1)))).symm
+    rw [hcast]
+    change F.map t ≫ F.map _ = 𝟙 _
+    rw [← F.map_comp, ← F.map_id]
+    congr 1
+    ext U a
+    apply ULift.ext
+    apply Additive.toMul.injective
+    apply Subtype.ext
+    apply Units.ext
+    change (t.app U a).down.toMul.val.val ^ 1 = a.down.toMul.val.val
+    have ht : ∀ {a b : ℕ} (he : a = b) (x : (rootsOfUnityPresheaf S a).obj U),
+        (((eqToHom (congrArg (rootsOfUnityPresheaf S) he)).app U x).down.toMul.val.val) =
+          x.down.toMul.val.val := by
+      intro a b he x
+      subst b
+      rfl
+    simpa only [pow_one] using ht (by simp : ell ^ (r + 0 + 1) = 1 * ell ^ (r + 1)) a
+  unfold coefficientFiniteRootComparison
+  rw [h]
+  exact inferInstanceAs (IsIso
+    ((Mod.freeFunctor (condensedRingObj (twistFiniteRing ell E n) S)).map
+      (𝟙 (rootsOfUnitySheaf S (ell ^ (r + 0 + 1))))))
+
+-- Preserve the published, unused proof-binder name hA in the theorem's statement.
+
 /-- The condensed coefficient-ring formulation of the finite Kummer, integral-limit, and
 algebraic-closure Tate-line assertions.  The coefficient objects in every clause are
 `p_S^*` images of the recorded condensed rings.  Level `n` of the finite and integral
@@ -281,20 +327,18 @@ sk-def-sp-tate-twist-locally-free.proof.md (1)-(3)
 (blueprint: lem-pur-twist-sheaf-locally-free).
 
 Proof.
-1. Apply clauses (2) and (3) of det-def-sp-tate-twist-locally-free with `X = S` and
-   `A = A_{E,n}`.  This gives Kummer independence of the finite exponent and one common
-   pro-etale cover trivializing all four coefficient types at every positive level.
-2. On that cover choose the compatible roots `ζ_r` of its clause (1).  The integral
-   coefficient limit (det-prop-sfb-qlbar-colimit-x-integral-limit, `E = ℚ_ℓ`) and sectionwise
-   limits identify `a = (a_r) ∈ R_V` with `(ζ_r^{a_r})_r ∈ T_S|_V`, an `R_V`-linear
-   isomorphism under which `p_r` is reduction.  Tensor restriction identifies the clause-2
-   map with `a ↦ ζ_r^a`, an isomorphism; local detection on the cover proves clause 2.
-3. The clause-3 maps exist globally: balancing holds at each finite coordinate, and
-   `p_{n+1}(t)^ℓ = p_n(t)` gives compatibility of the first map's coordinates.  On the cover
-   the bases `ζ_n ⊗ 1` identify `O_E(1)|_V` with `O_{E,V}` and `q_n` with coefficient
-   reduction, so both maps become multiplication `1 ⊗ b ↦ b` and `b ⊗ a ↦ b̄ a`.  Tensor
-   restriction and local detection prove both are isomorphisms; the transition
-   compatibility holds coordinatewise by the defining formulas. -/
+1. The compatible-root diagram supplies one common cover. The finite cyclic
+   cokernel calculation gives its finite bases. Natural diagram isomorphisms
+   identify both integral limits with their regular coefficient modules. Scalar
+   extension supplies the rational and algebraic-closure bases on the same cover.
+2. The canonical finite root reduction lemma supplies Kummer exponent independence
+   and the scalar-adjoint Tate residue projections.
+3. The coefficient quotient square and the Tate projection equation prove that
+   the globally specified integral scalar-adjoint legs commute with transitions.
+4. Apply the normalized integral comparison lemma to that compatibility proof.
+   It supplies the finite projection adjoints and invertibility of that cone's
+   specified limit lift. A regular basis is free of rank one by the singleton
+   biproduct. Assemble these assertions on the common cover. -/
 theorem pur_twist_sheaf_locally_free
     (S : Scheme.{u}) (ell : ℕ) [Fact ell.Prime]
     (E : Type u) [Field E] [Algebra (Padic ell) E]
@@ -369,6 +413,26 @@ theorem pur_twist_sheaf_locally_free
               (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ell]) S)))) ∧
       (∀ (r : ℕ) (hr : 0 < r), IsIso (tateTensorReduction S ell r hr)) ∧
       (∀ (n : ℕ), IsIso (coefficientFiniteReduction S ell E n)) ∧
-      integralTateComparisonStatement S ell E := by sorry
+      integralTateComparisonStatement S ell E := by
+  obtain ⟨𝒰, hF, hI, hE, hQ, hT⟩ := pur_twists_common_root_cover S ell E
+  obtain ⟨hK, hR⟩ := pur_finite_root_reductions S ell E
+  have hKall : ∀ (n r k : ℕ),
+      (ell ^ (r + 1) : Padic.coefficientExtensionRing ell E (n + 1)) = 0 →
+        IsIso (coefficientFiniteRootComparison ell E S n r k) := by
+    intro n r k hA
+    cases k with
+    | zero => exact coefficientFiniteRootComparison_zero S ell E n r
+    | succ k => exact hK n r k hA
+  have hc := integralTateLeg_compatible S ell E
+  obtain ⟨hA, hC⟩ := pur_integral_root_comparisons S ell E hc
+  have free_of_basis {Y : Scheme.{u}}
+      (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R]
+      (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+      (h : Nonempty (M ≅ Mod.regular R)) : Mod.IsFree R M := by
+    exact ⟨1, ⟨h.some ≪≫ (biproductUniqueIso (fun _ : Fin 1 ↦ Mod.regular R)).symm⟩⟩
+  exact ⟨𝒰, hKall, fun n i ↦ free_of_basis _ _ (hF n i), hF,
+    (fun i ↦ free_of_basis _ _ (hI i)), hI,
+    (fun i ↦ free_of_basis _ _ (hE i)), hE,
+    (fun i ↦ free_of_basis _ _ (hQ i)), hQ, hT, hR, hA, hc, hC⟩
 
 end AlgebraicGeometry.ProEtale

@@ -59,6 +59,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 import WeilConjectures.SixFunctors.FiniteFieldDatum.FrobeniusSquareCartesian
+public import WeilConjectures.ProEtaleCoefficients.BoundedConstructibleCounterexample.NonFiniteMultiplicationKernel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilCondensed
 
 /-! # Condensed compactification and Frobenius data
 
@@ -115,5 +117,27 @@ def open₀ {D : WeilConjectures.FiniteFieldDatum.{u}} (M : Model D)
     change c.i ≫ (c.g ≫ M.Y₀.hom) = M.X₀.hom
     rw [← Category.assoc, ← c.comm]
     exact Over.w M.f₀)
+
+/-- The proper arrow over k0, with the induced structure morphism on its source.
+Source: latest blueprint refinement proof, compactification diagrams
+(blueprint: def-zl-condensed-compactification-data). -/
+def proper₀ {D : WeilConjectures.FiniteFieldDatum.{u}} (M : Model D)
+    (c : Compactification M.f₀.left) : middle₀ M c ⟶ M.Y₀ :=
+  Over.homMk c.g rfl
+
+/-- The specified geometric-Frobenius diagram, using the recorded semilinear action.
+Source: latest blueprint quasi-finite proof, definition over k0
+(blueprint: def-zl-condensed-compactification-data). -/
+def frobeniusSquare {D : WeilConjectures.FiniteFieldDatum.{u}} (M : Model D)
+    (c : Compactification M.f₀.left) :
+    Square (geometricCompactification M c) (geometricCompactification M c)
+      (StrictWeilCondensed.modelFrobenius D M.X₀).hom
+      (StrictWeilCondensed.modelFrobenius D M.Y₀).hom where
+  middle := (StrictWeilCondensed.modelFrobenius D (middle₀ M c)).hom
+  openSquare := by
+    exact IsPullback.of_horiz_isIso
+      ⟨(D.frobenius_square_cartesian _ _ (open₀ M c)).2.2.2.2.1⟩
+  properSquare := by
+    exact ⟨(D.frobenius_square_cartesian _ _ (proper₀ M c)).2.2.2.2.1⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.CompactificationOpenComparison

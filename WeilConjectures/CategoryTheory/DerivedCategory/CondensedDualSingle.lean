@@ -76,6 +76,48 @@ theorem nonempty_ihom_single_unit (E : A) (hE : IsDualizable E) (n : ℤ) :
         ((MonoidalClosed.internalHom).mapIso (HomologicalComplex.singleObjXIsoOfEq
           (ComplexShape.up ℤ) n E (-(-n)) (neg_neg n)).op).symm.app (𝟙_ _))⟩
 
+/-- Ordinary linear duals of native lisse modules are lisse and detect zero.
+Source: the finite-free dual calculation in Step 2 of `thm-a1-curve-perverse-heart`
+(blueprint: lem-per-condensed-dual-single).
+
+Proof: normalized local freeness is equivalent to raw local freeness. Its chosen
+right dual is locally free by pulling its exact pairing to each finite free
+trivialization. In a braided closed category the ordinary internal dual is that
+right dual. Swapping the exact pairing identifies its internal dual back with
+the original module. Internal Hom out of a zero object is zero, so these two
+identifications prove both directions of zero detection, including rank zero.
+-/
+theorem lisse_dual_properties
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    (E : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hE : IsLisseCoefficientModule Λ E) :
+    IsLisseCoefficientModule Λ ((ihom E).obj (𝟙_ _)) ∧
+      (IsZero ((ihom E).obj (𝟙_ _)) ↔ IsZero E) := by
+  have hraw : IsLocallyFree (condensedRingObj Λ X) E :=
+    (isLocallyFree_iff E).mpr hE
+  obtain ⟨_⟩ := hraw.isDualizable
+  let : ExactPairing Eᘁ E := BraidedCategory.exactPairing_swap E Eᘁ
+  let e : (ihom E).obj (𝟙_ _) ≅ Eᘁ := MonoidalClosed.ihomObjUnitIso Eᘁ E
+  have hd : IsLocallyFree (condensedRingObj Λ X) ((ihom E).obj (𝟙_ _)) :=
+    IsLocallyFree.of_iso e.symm hraw.of_exactPairing
+  refine ⟨(isLocallyFree_iff _).mp hd, ?_⟩
+  have hz {F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)} (hF : IsZero F) : IsZero ((ihom F).obj (𝟙_ _)) := by
+    rw [IsZero.iff_id_eq_zero]
+    apply MonoidalClosed.uncurry_injective
+    have ht : IsZero (F ⊗ (ihom F).obj (𝟙_ _)) := by
+      rw [IsZero.iff_id_eq_zero, ← id_whiskerRight, hF.eq_of_src (𝟙 F) 0,
+        MonoidalPreadditive.zero_whiskerRight]
+    exact ht.eq_of_src _ _
+  constructor
+  · intro h
+    let ed : (ihom ((ihom E).obj (𝟙_ _))).obj (𝟙_ _) ≅ E :=
+      ((MonoidalClosed.internalHom).mapIso e.symm.op).app (𝟙_ _) ≪≫
+        MonoidalClosed.ihomObjUnitIso E Eᘁ
+    exact (hz h).of_iso ed.symm
+  · exact hz
+
 end DerivedCategory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing

@@ -30,6 +30,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportFiniteLines
 
 /-! # Strict Weil complexes with actual condensed coefficients
 
@@ -121,6 +122,50 @@ def nativeComparison (ell : ℕ) [Fact ell.Prime] [IsNoetherian T]
       (fun f ↦ ObjectProperty.hom_ext _
         ((cyclicDerivedStructure (upperStar Λ g.hom)).hom.naturality f.hom)))
 
+/-- The ambient dual is the recorded relative derived internal Hom into the coefficient unit.
+Source: latest blueprint, contragredient paragraph (blueprint: sk-def-sf-weil-complexes). -/
+abbrev dual {T : Scheme.{u}} (K : DerivedCategory
+    (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :=
+  (ihom K).obj (𝟙_ _)
+
+/-- The three typed arrows of the contragredient datum, with inverse in the first Hom slot.
+The first arrow is the evaluation-transpose comparison for the monoidal equivalence.
+Source: latest blueprint, displayed contragredient composite
+(blueprint: sk-def-sf-weil-complexes). -/
+def dualDatum {T : Scheme.{u}} (g : T ≅ T)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)))
+    (phi : (action Λ g).obj K ≅ K) : (action Λ g).obj (dual Λ K) ≅ dual Λ K :=
+  Functor.Monoidal.ihomObjIso (action Λ g) K (𝟙_ _) ≪≫
+    (ihom ((action Λ g).obj K)).mapIso (Functor.Monoidal.εIso (action Λ g)).symm ≪≫
+      (MonoidalClosed.internalHom.mapIso phi.symm.op).app (𝟙_ _)
+
+/-- The tensorator is included in the tensor of two ambient Weil data.
+Source: latest blueprint, twisted-dual composite (blueprint: sk-def-sf-weil-complexes). -/
+def tensorDatum {T : Scheme.{u}} (g : T ≅ T)
+    {K L : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))}
+    (phi : (action Λ g).obj K ≅ K) (psi : (action Λ g).obj L ≅ L) :
+    (action Λ g).obj (K ⊗ L) ≅ K ⊗ L :=
+  (Functor.Monoidal.μIso (action Λ g) K L).symm ≪≫ tensorIso phi psi
+
+/-- The existing normalized root coordinates. Their integral component is uniquely
+fixed by every root projection; scalar and power components are fixed by the record's
+normalization equations. No root frame or arbitrary unnormalized map is selected.
+Source: latest blueprint, roots, limits and scalar extensions
+(blueprint: sk-def-sf-weil-complexes). -/
+def tateCoordinates {T : Scheme.{u}} (g : T ≅ T)
+    [∀ x : T, Invertible (ell : T.residueField x)] : LinePullCoordinates ell c g.hom :=
+  Classical.choice (linePullCoordinates_nonempty ell c g.hom)
+
+/-- Positive Tate powers use the specified scalar extension and tensorator maps.
+The coordinates record includes their equality to those canonical constructions.
+Source: latest blueprint, tensor and scalar-extension Tate constructions
+(blueprint: sk-def-sf-weil-complexes). -/
+def positiveTatePull {T : Scheme.{u}} (g : T ≅ T)
+    [∀ x : T, Invertible (ell : T.residueField x)] (n : ℕ) :=
+  (tateCoordinates ell c g).power n
+
 end Native
 
 end AlgebraicGeometry.ProEtale.CondensedRing.StrictWeil
@@ -141,9 +186,55 @@ def tateLine (T : Scheme.{u}) : ℤ →
   | .ofNat n => c.line ell T n
   | .negSucc n => (ihom (c.line ell T (n + 1))).obj (𝟙_ _)
 
+/-- Root-normalized Frobenius on signed ordinary Tate sheaves. The negative case is
+contragredient, using the canonical closed comparison, the unit and the inverse
+positive Tate isomorphism in the contravariant slot.
+Source: latest blueprint, tau_r (blueprint: sk-def-sf-weil-complexes). -/
+def tatePull {T : Scheme.{u}} (g : T ≅ T)
+    [∀ x : T, Invertible (ell : T.residueField x)] :
+    (r : ℤ) → (upperStar (c.obj ell) g.hom).obj (tateLine ell c T r) ≅
+      tateLine ell c T r
+  | .ofNat n => positiveTatePull ell c g n
+  | .negSucc n =>
+      Functor.Monoidal.ihomObjIso (upperStar (c.obj ell) g.hom)
+          (c.line ell T (n + 1)) (𝟙_ _) ≪≫
+        (ihom ((upperStar (c.obj ell) g.hom).obj (c.line ell T (n + 1)))).mapIso
+          (Functor.Monoidal.εIso (upperStar (c.obj ell) g.hom)).symm ≪≫
+        (MonoidalClosed.internalHom.mapIso (positiveTatePull ell c g (n + 1)).symm.op).app
+          (𝟙_ _)
+
+/-- Multiplication by q is invertible on the coefficient unit in every admissible stage.
+Source: latest blueprint, q inverse in Z_ell units (blueprint: sk-def-sf-weil-complexes).
+Proof: ell differs from p and q is a power of p, so q is an ell-adic unit.
+Its inverse passes through each specified integral coefficient map, including a finite
+quotient and the zero ring, and gives a two-sided inverse to scalar multiplication. -/
+theorem cardinal_scalar_isIso (D : WeilConjectures.FiniteFieldDatum.{u})
+    (hEll : ell ≠ D.p) (T : Scheme.{u}) :
+    IsIso (D.q • 𝟙 (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj (c.obj ell) T)))) := by
+  sorry
+
 /-- The actual Tate sheaf placed in degree zero.
 Source: latest blueprint, Tate sheaves in degree zero (blueprint: sk-def-sf-weil-complexes). -/
 def derivedTateLine (T : Scheme.{u}) (r : ℤ) : c.derived ell T :=
   (DerivedCategory.singleFunctor _ 0).obj (tateLine ell c T r)
+
+/-- The termwise root-normalized Tate structure in the ambient derived category.
+At r=0 it is the canonical coefficient-unit isomorphism.
+Source: latest blueprint, tau_r and varphi_Lambda (blueprint: sk-def-sf-weil-complexes). -/
+def tateDatum {T : Scheme.{u}} (g : T ≅ T)
+    [∀ x : T, Invertible (ell : T.residueField x)] (r : ℤ) :
+    (action (c.obj ell) g).obj (derivedTateLine ell c T r) ≅ derivedTateLine ell c T r :=
+  ((upperStar (c.obj ell) g.hom).mapDerivedCategorySingleFunctor 0).app _ ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso (tatePull ell c g r)
+
+/-- The typed twisted-dual datum contains the inverse tensorator before the two structures.
+Source: latest blueprint, final displayed composite (blueprint: sk-def-sf-weil-complexes). -/
+def twistedDualDatum {T : Scheme.{u}} (g : T ≅ T)
+    [∀ x : T, Invertible (ell : T.residueField x)] (K : c.derived ell T)
+    (phi : (action (c.obj ell) g).obj K ≅ K) (r : ℤ) :
+    (action (c.obj ell) g).obj (dual (c.obj ell) K ⊗ derivedTateLine ell c T r) ≅
+      dual (c.obj ell) K ⊗ derivedTateLine ell c T r :=
+  tensorDatum (c.obj ell) g (dualDatum (c.obj ell) g K phi) (tateDatum ell c g r)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.StrictWeil

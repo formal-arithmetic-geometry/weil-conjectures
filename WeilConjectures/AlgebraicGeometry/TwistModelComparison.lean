@@ -248,6 +248,98 @@ theorem podFiniteCoefficient_annihilated (F : PadicAlgCl.FiniteIntermediateField
   apply ULift.down_injective
   exact coefficientFiniteTwist_annihilator l (ULift.{u} F.1) n
 
+/-- The section realization of a signed map into the recorded sketched construction.
+The equivalence counit is part of the encoding identification.
+Source: signed paragraph (blueprint: lem-pod-twist-model-comparison). -/
+def podSignedRealization
+    (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (φ : R ⟶ S) [IsMonHom φ]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S) (m : ℤ)
+    (f : coefficientSignedTwist X R L m ⟶
+      (Mod.comap φ).obj (spInternalSignedTwist X S M m)) :
+    (coefficientSignedTwist X R L m).X ⟶
+      (SheafOfModules.toSheaf _).obj (spSignedTwist X S M m) :=
+  f.hom ≫ (SheafOfModules.toSheaf _).map
+    ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology X) S).counitIso.app (spSignedTwist X S M m)).hom
+
+/-- Exact normalization of all signed comparisons against spInternalSignedTwist.
+Zero is the coefficient identity after scalar identification; one is the degree-one
+map with the harmless source unitor. Positive degrees fix every pure tensor.
+Negative degrees are the inverse transpose, characterized by evaluation.
+Source: final paragraph (blueprint: lem-pod-twist-model-comparison). -/
+structure PodSignedComparisonSpec
+    (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (φ : R ≅ S) [IsMonHom φ.hom]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
+    (e : L ≅ (Mod.comap φ.hom).obj M)
+    (gamma : ∀ m : ℤ, coefficientSignedTwist X R L m ≅
+      (Mod.comap φ.hom).obj (spInternalSignedTwist X S M m)) : Prop where
+  zero : ∀ (U : X.ProEtᵒᵖ) (r : R.obj.obj U),
+    (podSignedRealization X R S φ.hom L M 0 (gamma 0).hom).hom.app U r =
+      φ.hom.hom.app U r
+  one : podSignedRealization X R S φ.hom L M 1 (gamma 1).hom =
+    (λ_ L).hom.hom ≫ e.hom.hom
+  tensor : ∀ (n : ℕ) (U : X.ProEtᵒᵖ)
+      (x : (coefficientTwistNat X R L (n + 1)).X.obj.obj U) (y : L.X.obj.obj U),
+    (podSignedRealization X R S φ.hom L M (n + 2) (gamma (n + 2)).hom).hom.app U
+      (InternalAbelianSheafModule.comparison_internalTmul (Scheme.ProEt.topology X) R
+        (coefficientTwistNat X R L (n + 1)) L U x y) =
+      SheafOfModules.siteSheafTensorTmul (spSignedTwist X S M (n + 1))
+        ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+          (Scheme.ProEt.topology X) S).functor.obj M) U
+        ((podSignedRealization X R S φ.hom L M (n + 1) (gamma (n + 1)).hom).hom.app U x)
+        (e.hom.hom.hom.app U y)
+  dual : ∀ (n : ℕ) (U : X.ProEtᵒᵖ)
+      (d : (coefficientSignedTwist X R L (.negSucc n)).X.obj.obj U)
+      (x : (coefficientTwistNat X R L (n + 1)).X.obj.obj U),
+    (((podSignedRealization X R S φ.hom L M (.negSucc n)
+        (gamma (.negSucc n)).hom).hom.app U d).app (op (Over.mk (𝟙 U.unop))))
+      ((podSignedRealization X R S φ.hom L M (n + 1) (gamma (n + 1)).hom).hom.app U x) =
+      φ.hom.hom.app U
+        (((ihom.ev (coefficientTwistNat X R L (n + 1))).app (𝟙_ _)).hom.hom.app U
+          (InternalAbelianSheafModule.comparison_internalTmul (Scheme.ProEt.topology X) R
+            (coefficientTwistNat X R L (n + 1))
+            ((ihom (coefficientTwistNat X R L (n + 1))).obj (𝟙_ _)) U x d))
+
+/-- The specified signed maps exist uniquely, with the recorded sketched targets.
+Source: final paragraph (blueprint: lem-pod-twist-model-comparison).
+Proof: identify the internal relative tensor with the sheafified balanced section
+tensor, and the internal unit with the section unit. The identity on sections and
+on pure tensors fixes these comparisons. A coefficient-ring isomorphism gives the
+same identifications after restricting scalars. In degree one use e and the unitor;
+iterate the tensor pairing for positive powers. The closed adjunction identifies
+internal Hom with sectionwise sheaf Hom. Send a functional to its composite with
+the inverse positive comparison and the coefficient isomorphism. This is exactly
+the displayed evaluation formula. Its inverse uses e inverse. Unit sections,
+local tensor generators and evaluation respectively give uniqueness in every degree. -/
+theorem podSignedComparison_existsUnique
+    (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (φ : R ≅ S) [IsMonHom φ.hom]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
+    (e : L ≅ (Mod.comap φ.hom).obj M) :
+    ∃! gamma : ∀ m : ℤ, coefficientSignedTwist X R L m ≅
+        (Mod.comap φ.hom).obj (spInternalSignedTwist X S M m),
+      PodSignedComparisonSpec X R S φ L M e gamma := by
+  sorry
+
+/-- Gamma_m itself, selected by the complete tensor, unit and inverse-transpose normalization.
+Source: final paragraph (blueprint: lem-pod-twist-model-comparison). -/
+def podSignedComparison
+    (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (φ : R ≅ S) [IsMonHom φ.hom]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
+    (e : L ≅ (Mod.comap φ.hom).obj M) :=
+  (podSignedComparison_existsUnique X R S φ L M e).exists.choose
+
 /-- The identity coefficient isomorphism preserves the ring operations.
 Source: zero-degree convention (blueprint: lem-pod-twist-model-comparison).
 Proof: the hom of Iso.refl is the identity ring morphism, preserving unit and

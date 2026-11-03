@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.Endofunctor.FixedPairDerivedForgetC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedFiniteTorConstructible
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.DeligneLaumon.FiniteFieldDatum.CondensedFiniteEtaleLissePushforward
+public import WeilConjectures.SixFunctors.FiniteFieldDatum.FrobeniusSquareCartesian
 
 /-! # Native condensed derived Weil framework
 
@@ -41,6 +42,12 @@ abbrev nativeWeilModuleCategory
     (ell : ℕ) [Fact ell.Prime] (c : WeilCoefficient ell) (T : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
     (condensedRingObj (WeilCoefficient.ab c) T)
+
+/-- The ordinary unbounded derived category of native coefficient modules.
+Source: coefficient/category conventions (blueprint: def-sf-native-weil-derived-framework). -/
+abbrev nativeWeilDerivedCategory
+    (ell : ℕ) [Fact ell.Prime] (c : WeilCoefficient ell) (T : Scheme.{u}) :=
+  DerivedCategory (nativeWeilModuleCategory ell c T)
 
 /-- The fixed-pair category of Weil modules on a geometric fibre.
 Source: coefficient/category conventions (blueprint: def-sf-native-weil-derived-framework). -/
@@ -161,7 +168,9 @@ theorem nativeWeilResolutions (C : Type uC) [Category.{vC} C] [Abelian C]
     [Abelian.HasKInjectiveResolutions C] :
     ∀ K : CochainComplex C ℤ,
       ∃ (I : CochainComplex C ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s := by
-  sorry
+  intro K
+  obtain ⟨I, hI, s, _hs, hq⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective K
+  exact ⟨I, s, hI, hq⟩
 
 section DerivedDirectImage
 
@@ -225,7 +234,7 @@ universal property equates them. The argument includes empty schemes and identit
 theorem nativeWeilGeometricSquare (h₀ : X₀ ⟶ Y₀) :
     CommSq (D.geometricFrobenius X₀).hom (D.geometricFiberMap h₀)
       (D.geometricFiberMap h₀) (D.geometricFrobenius Y₀).hom := by
-  sorry
+  exact ⟨(D.frobenius_square_cartesian X₀ Y₀ h₀).2.2.2.2.1⟩
 
 /-- Geometric base change preserves the open-immersion hypothesis by the recorded
 base-change stability of that morphism property.
@@ -275,7 +284,8 @@ This requires no separatedness of either model over the finite field. -/
 theorem nativeWeilCompactificationOpenOver (h₀ : X₀ ⟶ Y₀)
     (c₀ : Compactification h₀.left) :
     c₀.i ≫ (c₀.g ≫ Y₀.hom) = X₀.hom := by
-  sorry
+  rw [← Category.assoc, ← c₀.comm]
+  exact h₀.w
 
 /-- The open map of a compactification as a map over the finite field.
 Source: compactification factorization (blueprint: def-sf-native-weil-derived-framework). -/

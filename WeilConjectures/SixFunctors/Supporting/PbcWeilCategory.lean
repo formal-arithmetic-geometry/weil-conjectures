@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalAutomorphismScalarCohere
 import Mathlib.CategoryTheory.Preadditive.EndoFunctor
 import WeilConjectures.AlgebraicGeometry.FibreDimension
 import Mathlib.Algebra.CharP.CharAndCard
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilCondensed
 
 /-!
 # Completed coefficient transport and Weil categories
@@ -231,23 +232,51 @@ over a noetherian field is noetherian. -/
   change IsNoetherian X
   exact {}
 
-/-- The geometric-Frobenius pullback on the exact PBC rational coefficient category.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
-def weilFrobeniusPullback (E : Padic.FiniteCoefficientFields c.l c.Qbar) :
-    PbcRationalCategory (D.geometricFiber X₀).left
-        (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E) ⥤
-      PbcRationalCategory (D.geometricFiber X₀).left
-        (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E) :=
-  pbcRationalIsoPullback (D.geometricFrobenius X₀)
-    (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E)
+/-- Exact geometric-Frobenius inverse image on the recorded condensed Dctf.
+Source: latest blueprint, P_T paragraph (blueprint: sk-def-sf-weil-complexes). -/
+abbrev weilFrobeniusPullback :=
+  StrictWeilCondensed.smallAction Λ (StrictWeilCondensed.modelFrobenius D X₀)
 
-/-- Weil complexes are fixed pairs in the raw rationalized PBC coefficient category.
-The existing IsoAlgebra category has exactly the pairs (K, phi:P(K)≅K) and all
-maps u with phi_K ≫ u = P(u) ≫ phi_L. Its identities and composites are those
-of the coefficient category; the strict version has these same objects and maps.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
-abbrev WeilD (E : Padic.FiniteCoefficientFields c.l c.Qbar) :=
-  CategoryTheory.Endofunctor.IsoAlgebra (weilFrobeniusPullback D c X₀ E)
+/-- Exact inverse image and its restriction preserve addition of morphisms.
+Source: latest blueprint, exact pullback paragraph
+(blueprint: sk-def-sf-weil-complexes).
+Proof: module inverse image is additive. Termwise application and localization
+preserve addition, and the full-subcategory restriction inherits that same map. -/
+instance weilFrobeniusPullback_additive : (weilFrobeniusPullback D Λ X₀).Additive := by
+  dsimp only [weilFrobeniusPullback, StrictWeilCondensed.smallAction,
+    StrictWeilCondensed.action]
+  infer_instance
+
+/-- The recorded category of strict pairs over the ordinary condensed Dctf.
+An object is K together with an isomorphism Fr* K to K; its morphisms are exactly
+all the underlying derived morphisms commuting with these isomorphisms.
+Source: latest blueprint, strict-pair definition
+(blueprint: sk-def-sf-weil-complexes). -/
+abbrev WeilD := StrictWeilCondensed.Complex Λ (StrictWeilCondensed.modelFrobenius D X₀)
+
+/-- The faithful forgetful functor to the same underlying condensed Dctf.
+Source: latest blueprint, pair category paragraph
+(blueprint: sk-def-sf-weil-complexes). -/
+abbrev weilForget := StrictWeilCondensed.forget Λ (StrictWeilCondensed.modelFrobenius D X₀)
+
+/-- Every Weil morphism satisfies exactly the blueprint's commuting equation.
+Source: latest blueprint, displayed morphism equation
+(blueprint: sk-def-sf-weil-complexes).
+Proof: this is the defining commuting square of an endofunctor-algebra morphism,
+read with Lean's diagrammatic order of composition. -/
+theorem weilHom_comm {K L : WeilD D Λ X₀} (f : K ⟶ L) :
+    K.str.hom ≫ f.hom.f = (weilFrobeniusPullback D Λ X₀).map f.hom.f ≫ L.str.hom :=
+  f.hom.h.symm
+
+/-- Morphisms commuting with Frobenius inherit addition from condensed Dctf.
+Source: latest blueprint, strict-pair category paragraph
+(blueprint: sk-def-sf-weil-complexes).
+Proof: specialize the retained uniqueness theorem for inherited addition on
+invertible endofunctor algebras to the exact condensed Frobenius action. -/
+theorem weilHom_add {K L : WeilD D Λ X₀} (f g : K ⟶ L) :
+    (f + g).hom.f = f.hom.f + g.hom.f :=
+  ((CategoryTheory.Endofunctor.IsoAlgebra.preadditive_exists
+    (weilFrobeniusPullback D Λ X₀)).exists.choose_spec K L f g).1
 
 /-- The underlying coefficient extension, using the geometric fiber's inherited hypotheses.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
@@ -353,12 +382,11 @@ def weilScalarSystem :
   assoc h k := weilScalarAssociator D c X₀ h k
   cocycle h k j K := weilScalarAssociator_cocycle D c X₀ h k j K
 
-/-- The algebraic-closure coefficient category is the common-stage pair category
-of the finite Weil stages. Objects are (E,W). Morphisms are representatives
-(M,u), modulo equality at a common larger coefficient field, transported by the
-specified tensor associators. Composition is at a common stage. In particular
-this is the filtered colimit of the Weil categories themselves.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
-abbrev WeilDQbar := (weilScalarSystem D c X₀).PairCategory
+/-- Algebraic-closure coefficients use the recorded condensed ring itself.
+Source: latest blueprint, field-coefficient complement
+(blueprint: sk-def-sf-weil-complexes). -/
+abbrev WeilDQbar (ell : ℕ) [Fact ell.Prime]
+    (X₀ : Over (Spec (CommRingCat.of D.k₀))) :=
+  WeilD D (Profinite.padicAlgClRingObj.{u} ell) X₀
 
 end WeilConjectures

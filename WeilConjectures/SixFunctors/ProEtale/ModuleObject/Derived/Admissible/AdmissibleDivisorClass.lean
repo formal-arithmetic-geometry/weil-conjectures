@@ -16,6 +16,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.CartierComplementQuasiCompact
+public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PullIsoMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.ClosedImmersion
 
 /-! # The global divisor class for every admissible condensed coefficient
 
@@ -190,6 +197,7 @@ def cartierClass (P : WeilConjectures.PurityFiniteSetting.{u})
     (i : D ⟶ X) [IsClosedImmersion i] (hI : i.ker.IsInvertible) :
     (H Λ i 2).obj ((DerivedCategory.Plus.singleFunctor (Modules Λ X) 0).obj
       (line P Λ hΛ X)) :=
+  let : QuasiCompact i.openComplement.ι := cartierComplement_quasiCompact i hI
   (supportedHom Λ i _ 2).symm (cartierExt P Λ hΛ a i hI).hom
 
 /-- The Cartier arrow is the image of the independently constructed c_D.
@@ -200,6 +208,7 @@ def cartierArrow (P : WeilConjectures.PurityFiniteSetting.{u})
     (hΛ : IsAdmissibleCoefficientFor P.coefficients Λ)
     {D X : Scheme.{u}} (a : X ⟶ Spec (CommRingCat.of P.field.k))
     (i : D ⟶ X) [IsClosedImmersion i] (hI : i.ker.IsInvertible) :=
+  let : QuasiCompact i.openComplement.ι := cartierComplement_quasiCompact i hI
   supportedHom Λ i _ 2 (cartierClass P Λ hΛ a i hI)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.Admissible
@@ -213,7 +222,8 @@ the residue ring is a field, hence that image is a unit. -/
 theorem prime_isUnit (P : WeilConjectures.PurityFiniteSetting.{u})
     (X : Scheme.{u}) (a : X ⟶ Spec (CommRingCat.of P.field.k)) (x : X) :
     IsUnit (P.coefficients.l : X.residueField x) := by
-  sorry
+  simpa only [map_natCast] using
+    (P.coefficientPrime_isUnit_stalk X a x).map (X.residue x).hom
 
 /-- The integral comparison together with its finite-root normalization. The
 finite comparisons are fixed on root generators, and all limit projections fix
@@ -232,6 +242,30 @@ structure RootPullData (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}} (f : X �
       (CondensedRing.upperStar (Profinite.continuousMapRingObj ℤ_[ell]) f).map
         (limit.π (tateModuleSystem Y ell) (op n)) ≫ (level n).hom
 
+private theorem rootPullNormalized_unique
+    (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (e e' : (CondensedRing.upperStar (Profinite.continuousMapRingObj ℤ_[ell]) f).obj
+      (tateModuleLevel Y ell n) ≅ tateModuleLevel X ell n)
+    (h : PurityTransport.PullNormalized (Profinite.continuousMapRingObj ℤ_[ell]) f e
+      (PurityTransport.rootTensorPull ell f n))
+    (h' : PurityTransport.PullNormalized (Profinite.continuousMapRingObj ℤ_[ell]) f e'
+      (PurityTransport.rootTensorPull ell f n)) : e = e' := by
+  apply Iso.ext
+  let a := (Functor.isoWhiskerLeft
+    ((ProEtale.upperStar Ab.{u + 1} f).mapMod
+      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ell]) Y))
+    (Mod.extendScalarsIsoComapInv
+      (condensedPullbackHom (Profinite.continuousMapRingObj ℤ_[ell]) f))).inv.app
+        (tateModuleLevel Y ell n)
+  have heq : (Mod.forget
+      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ell]) X)).map (a ≫ e.hom) =
+    (Mod.forget
+      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ell]) X)).map (a ≫ e'.hom) :=
+    eq_of_heq (h.trans h'.symm)
+  have heq' := (Mod.forget
+    (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ell]) X)).map_injective heq
+  exact (cancel_epi a).mp heq'
+
 /-- The root-generator and projection equations uniquely determine all comparison data.
 Source: the published integralComparison and finite root normalization
 (blueprint: lem-pur-divisor-class).
@@ -244,8 +278,21 @@ theorem rootPullData_existsUnique (ell : ℕ) [Fact ell.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (ell : X.residueField x)]
     [∀ y : Y, Invertible (ell : Y.residueField y)] :
-    ∃! D : RootPullData ell f, True := by
-  sorry
+    ∃! _D : RootPullData ell f, True := by
+  classical
+  obtain ⟨e, he, hunique⟩ := PurityTransport.integralComparison ell f
+  let en := fun n : ℕ ↦ (he n).choose
+  have hn (n : ℕ) := (he n).choose_spec.1
+  have hp (n : ℕ) := (he n).choose_spec.2
+  refine ⟨⟨e, en, hn, hp⟩, trivial, ?_⟩
+  rintro ⟨e', en', hn', hp'⟩ _
+  have he' : e' = e := hunique e' (fun n ↦ ⟨en' n, hn' n, hp' n⟩)
+  have hen : en' = en := by
+    funext n
+    exact rootPullNormalized_unique ell f n (en' n) (en n) (hn' n) (hn n)
+  cases he'
+  cases hen
+  rfl
 
 /-- The comparison fixed by its root generators and every inverse-limit projection.
 Source: Cartesian coefficients (blueprint: lem-pur-divisor-class). -/
@@ -280,6 +327,64 @@ structure ScalarRootPullData (ell : ℕ) [Fact ell.Prime]
         (tateModule Y ell) ≫ (rootPullIso ell f).hom.hom ≫
       Mod.extendUnitHom (coefficientMap a.hom X) (tateModule X ell)
 
+private theorem scalarPull_generator
+    {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj R Y)}
+    {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X)}
+    (e : (CondensedRing.upperStar R f).obj M ≅ N) :
+    (ProEtale.upperStar Ab.{u + 1} f).map
+        (Mod.extendUnitHom (coefficientMap a Y) M) ≫
+      CondensedRing.upperStarUnitHom S f
+        ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫
+          (PurityTransport.scalarPull a f e).hom.hom =
+    CondensedRing.upperStarUnitHom R f M ≫ e.hom.hom ≫
+      Mod.extendUnitHom (coefficientMap a X) N := by
+  have hp := CondensedRing.upperStarUnitHom_extendUnitHom_pullIso_hom_app_hom a f M
+  have hi :
+      (ProEtale.upperStar Ab.{u + 1} f).map
+          (Mod.extendUnitHom (coefficientMap a Y) M) ≫
+        CondensedRing.upperStarUnitHom S f
+          ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫
+            ((CondensedRing.pullIso a f).inv.app M).hom =
+      CondensedRing.upperStarUnitHom R f M ≫
+        Mod.extendUnitHom (coefficientMap a X) ((CondensedRing.upperStar R f).obj M) := by
+    erw [← Category.assoc, ← hp]
+    simp only [Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app, Mod.id_hom']
+    erw [Category.comp_id]
+  have ht := congrArg (fun k ↦ k ≫
+    ((Mod.extendScalars (coefficientMap a X)).map e.hom).hom) hi
+  simpa only [PurityTransport.scalarPull, Iso.trans_hom, Iso.app_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Mod.comp_hom', Category.assoc,
+    Mod.extendUnitHom_comp_extendScalars_map_hom] using ht
+
+private theorem scalarPull_hom_ext
+    {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj R Y))
+    {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X)}
+    {g g' : (CondensedRing.upperStar S f).obj
+      ((Mod.extendScalars (coefficientMap a Y)).obj M) ⟶ N}
+    (h : (ProEtale.upperStar Ab.{u + 1} f).map
+          (Mod.extendUnitHom (coefficientMap a Y) M) ≫
+        CondensedRing.upperStarUnitHom S f
+          ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫ g.hom =
+      (ProEtale.upperStar Ab.{u + 1} f).map
+          (Mod.extendUnitHom (coefficientMap a Y) M) ≫
+        CondensedRing.upperStarUnitHom S f
+          ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫ g'.hom) : g = g' := by
+  apply (cancel_epi ((CondensedRing.pullIso a f).hom.app M)).mp
+  apply Mod.hom_ext_of_extendUnitHom
+  have : IsIso (CondensedRing.upperStarUnitHom R f M) := by
+    dsimp only [CondensedRing.upperStarUnitHom]
+    rw [← CondensedRing.extendScalarsIsoComapInv_inv_app_hom]
+    infer_instance
+  apply (cancel_epi (CondensedRing.upperStarUnitHom R f M)).mp
+  simpa only [Mod.comp_hom', Category.assoc,
+    CondensedRing.upperStarUnitHom_extendUnitHom_pullIso_hom_app_hom_assoc] using h
+
 /-- The actual scalar-extension generators determine the Cartesian comparison uniquely.
 Source: sk-prop-sfb-cartesian-coefficients, canonical scalar comparison
 (blueprint: lem-pur-divisor-class).
@@ -295,8 +400,22 @@ theorem scalarRootPullData_existsUnique (ell : ℕ) [Fact ell.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (ell : X.residueField x)]
     [∀ y : Y, Invertible (ell : Y.residueField y)] :
-    ∃! D : ScalarRootPullData ell Λ a f, True := by
-  sorry
+    ∃! _D : ScalarRootPullData ell Λ a f, True := by
+  let e : (CondensedRing.upperStar Λ.X f).obj
+      ((Mod.extendScalars (coefficientMap a.hom Y)).obj (tateModule Y ell)) ≅
+        (Mod.extendScalars (coefficientMap a.hom X)).obj (tateModule X ell) :=
+    PurityTransport.scalarPull (R := Profinite.continuousMapRingObj.{u} ℤ_[ell])
+      (S := Λ.X) a.hom f (rootPullIso ell f)
+  have hg := scalarPull_generator
+    (R := Profinite.continuousMapRingObj.{u} ℤ_[ell]) (S := Λ.X)
+    a.hom f (rootPullIso ell f)
+  refine ⟨⟨e, hg⟩, trivial, ?_⟩
+  rintro ⟨e', hg'⟩ _
+  have hi : e' = e := Iso.ext (scalarPull_hom_ext
+    (R := Profinite.continuousMapRingObj.{u} ℤ_[ell]) (S := Λ.X)
+    a.hom f _ (hg'.trans hg.symm))
+  cases hi
+  rfl
 
 /-- The generator-normalized scalar comparison, rather than an arbitrary isomorphism.
 Source: Cartesian coefficients (blueprint: lem-pur-divisor-class). -/
@@ -430,7 +549,16 @@ theorem coefficientSequence_zero (Λ : Profinite.CondensedRing.{u}) [IsCommMonOb
     (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ.X (X.basicOpen f).ι
       ).counit.app (unit Λ X) ≫
       unitRestriction Λ (X.zeroLocusSubschemeι {f}) = 0 := by
-  sorry
+  apply ((CondensedRing.upperStarLowerStarAdjunction Λ.X
+    (X.zeroLocusSubschemeι {f})).homEquiv _ _).symm.injective
+  have hz := CondensedRing.isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint
+    Λ.X (X.basicOpen f).ι (X.zeroLocusSubschemeι {f})
+    (by
+      rw [Scheme.Opens.range_ι, Scheme.range_zeroLocusSubschemeι_singleton,
+        Scheme.Opens.range_ι]
+      exact disjoint_compl_right)
+    ((CondensedRing.upperStar Λ.X (X.basicOpen f).ι).obj (unit Λ X))
+  exact hz.eq_of_src _ _
 
 /-- The actual native coefficient localization sequence for V(f), with no regularity assumption.
 Source: open/closed sequence (blueprint: lem-pur-divisor-class). -/
@@ -441,6 +569,122 @@ def coefficientSequence (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
       ).counit.app (unit Λ X))
     (unitRestriction Λ (X.zeroLocusSubschemeι {f})) (coefficientSequence_zero Λ X f)
 
+private theorem localization_shortExact
+    {C : Type*} [Category* C] [Abelian C]
+    {O Z : Type u} [Category.{v} O] [Abelian O] [Category.{v} Z] [Abelian Z]
+    {F : C ⥤ O} {G : C ⥤ Z} {L : O ⥤ C} {R : Z ⥤ C}
+    [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (a : L ⊣ F) (b : G ⊣ R) [IsIso a.unit] [IsIso b.counit]
+    (hd : JointlyReflectIsomorphisms (pairFunctor F G))
+    (hz : ∀ N, IsZero (F.obj (R.obj N)))
+    (hzi : ∀ N, IsZero (G.obj (L.obj N)))
+    (M : C) (hzero : a.counit.app M ≫ b.unit.app M = 0) :
+    (ShortComplex.mk (a.counit.app M) (b.unit.app M) hzero).ShortExact := by
+  let Q := ShortComplex.mk (a.counit.app M) (b.unit.app M) hzero
+  change Q.ShortExact
+  rw [hd.shortExact_iff]
+  rintro (_ | _)
+  · have hgi : IsIso (G.map (b.unit.app M)) := by
+      have h := b.left_triangle_components M
+      rw [← IsIso.inv_eq_of_inv_hom_id h]
+      infer_instance
+    have hfi : (Q.map G).f = 0 := (hzi _).eq_of_src _ _
+    exact
+      { exact := (ShortComplex.exact_iff_mono _ hfi).2
+          (by exact @IsIso.mono_of_iso _ _ _ _ _ hgi)
+        mono_f := ⟨fun _ _ _ ↦ (hzi _).eq_of_tgt _ _⟩
+        epi_g := by exact @IsIso.epi_of_iso _ _ _ _ _ hgi }
+  · have hfj : IsIso (F.map (a.counit.app M)) := by
+      have h := a.right_triangle_components (Y := M)
+      rw [← IsIso.inv_eq_of_hom_inv_id h]
+      infer_instance
+    have hgj : (Q.map F).g = 0 := (hz _).eq_of_tgt _ _
+    exact
+      { exact := (ShortComplex.exact_iff_epi _ hgj).2
+          (by exact @IsIso.epi_of_iso _ _ _ _ _ hfj)
+        mono_f := by exact @IsIso.mono_of_iso _ _ _ _ _ hfj
+        epi_g := ⟨fun _ _ _ ↦ (hz _).eq_of_src _ _⟩ }
+
+private theorem localization_shortExact_normalized
+    {C : Type*} [Category* C] [Abelian C]
+    {O Z : Type u} [Category.{v} O] [Abelian O] [Category.{v} Z] [Abelian Z]
+    {F : C ⥤ O} {G : C ⥤ Z} {L : O ⥤ C} {R : Z ⥤ C}
+    [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (a : L ⊣ F) (b : G ⊣ R) [IsIso a.unit] [IsIso b.counit]
+    (hd : JointlyReflectIsomorphisms (pairFunctor F G))
+    (hz : ∀ N, IsZero (F.obj (R.obj N)))
+    (hzi : ∀ N, IsZero (G.obj (L.obj N)))
+    (M : C) {N : Z} (c : G.obj M ≅ N)
+    (hzero : a.counit.app M ≫ (b.unit.app M ≫ R.map c.hom) = 0) :
+    (ShortComplex.mk (a.counit.app M) (b.unit.app M ≫ R.map c.hom) hzero).ShortExact := by
+  have hzero' : a.counit.app M ≫ b.unit.app M = 0 := by
+    apply (cancel_mono (R.map c.hom)).1
+    simpa only [Category.assoc, zero_comp] using hzero
+  let Q := ShortComplex.mk (a.counit.app M) (b.unit.app M) hzero'
+  have hQ : Q.ShortExact := localization_shortExact a b hd hz hzi M hzero'
+  let S := ShortComplex.mk (a.counit.app M) (b.unit.app M ≫ R.map c.hom) hzero
+  let e : Q ≅ S := ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (R.mapIso c)
+    (by simp [Q, S]) (by simp [Q, S])
+  exact ShortComplex.shortExact_of_iso e hQ
+
+private theorem module_open_unit_isIso
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] :
+    IsIso (CondensedRing.openImmersionLowerShriekUpperStarAdjunction R j).unit := by
+  let ff := (Mod.comapEquivalenceOfIsIso (condensedPullbackHom R j)
+    ).fullyFaithfulFunctor.comp
+      (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j
+        ).fullyFaithfulMapModLeft
+  have : (CondensedRing.openImmersionLowerShriek R j).Full := ff.full
+  have : (CondensedRing.openImmersionLowerShriek R j).Faithful := ff.faithful
+  exact (CondensedRing.openImmersionLowerShriekUpperStarAdjunction R j
+    ).unit_isIso_of_L_fully_faithful
+
+private theorem module_localization_exact
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] {Z U X : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X))
+    {N : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj R Z)}
+    (c : (CondensedRing.upperStar R i).obj M ≅ N)
+    (hSeq :
+      (CondensedRing.openImmersionLowerShriekUpperStarAdjunction R j).counit.app M ≫
+        ((CondensedRing.upperStarLowerStarAdjunction R i).unit.app M ≫
+          (CondensedRing.lowerStar R i).map c.hom) = 0) :
+    (ShortComplex.mk
+      ((CondensedRing.openImmersionLowerShriekUpperStarAdjunction R j).counit.app M)
+      ((CondensedRing.upperStarLowerStarAdjunction R i).unit.app M ≫
+        (CondensedRing.lowerStar R i).map c.hom) hSeq).ShortExact := by
+  have hz (N' : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj R Z)) :
+      IsZero ((CondensedRing.upperStar R j).obj
+        ((CondensedRing.lowerStar R i).obj N')) := by
+    have h := ProEtale.isZero_upperStar_lowerStar_of_disjoint Ab.{u + 1} i j
+      hij.disjoint N'.X
+    rw [← CondensedRing.lowerStar_obj_X R i N'] at h
+    exact CondensedRing.isZero_of_isZero_X R
+      (h.of_iso (CondensedRing.upperStarObjXIso R j _))
+  have hzi (N' : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj R U)) :
+      IsZero ((CondensedRing.upperStar R i).obj
+        ((CondensedRing.openImmersionLowerShriek R j).obj N')) :=
+    CondensedRing.isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint
+      R j i hij.symm.disjoint N'
+  have : IsIso (CondensedRing.openImmersionLowerShriekUpperStarAdjunction R j).unit :=
+    module_open_unit_isIso R j
+  exact localization_shortExact_normalized
+    (CondensedRing.openImmersionLowerShriekUpperStarAdjunction R j)
+    (CondensedRing.upperStarLowerStarAdjunction R i)
+    (CondensedRing.jointlyReflectIsomorphisms_upperStar_of_isCompl R i j hij)
+    hz hzi M c hSeq
+
 /-- Exactness of the specified coefficient localization sequence.
 Source: det-sf-open-closed-sequence-ring-sheaf (blueprint: lem-pur-divisor-class).
 Proof: after forgetting modules, the open and closed restrictions detect exactness.
@@ -448,7 +692,14 @@ On the open the first map is identity and the third object is zero; on the
 closed the first object is zero and the second map is identity. -/
 theorem coefficientSequence_exact (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     (X : Scheme.{u}) (f : Γ(X, ⊤)) : (coefficientSequence Λ X f).ShortExact := by
-  sorry
+  have hij : IsCompl (Set.range (X.zeroLocusSubschemeι {f}).base)
+      (Set.range (X.basicOpen f).ι.base) := by
+    rw [Scheme.range_zeroLocusSubschemeι_singleton, Scheme.Opens.range_ι]
+    exact isCompl_compl.symm
+  exact module_localization_exact Λ.X (X.zeroLocusSubschemeι {f})
+    (X.basicOpen f).ι hij (unit Λ X)
+    (Functor.Monoidal.εIso (CondensedRing.upperStar Λ.X (X.zeroLocusSubschemeι {f}))).symm
+    (coefficientSequence_zero Λ X f)
 
 /-- Extend the native Kummer class of f on X_f by zero and apply the twist counit.
 Source: lem-pur-divisor-class(a),(c) (blueprint: lem-pur-divisor-class). -/
@@ -523,7 +774,8 @@ theorem smoothDivisorPair (P : WeilConjectures.PurityFiniteSetting.{u})
     (hcodim : ∀ z : D, ringKrullDim (X.presheaf.stalk (i z)) =
       ringKrullDim (D.presheaf.stalk z) + (1 : WithBot ℕ∞)) :
     SmoothDivisorPair P (v ≫ b) i := by
-  sorry
+  exact ⟨B, b, v, n, rfl, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, hcodim⟩
 
 /-- The singleton frame class is by definition the actual +∂κ(f) boundary.
 Source: def-pur-frame-class, c=1; lem-pur-divisor-class(a)
@@ -558,6 +810,8 @@ theorem singleton_frame_independent (P : WeilConjectures.PurityFiniteSetting.{u}
 
 /-- Every equation chart restricts to its singleton frame boundary. This
 specification contains no pole extension, Cartier class, or Chern class.
+The comparison has quasi-compact complementary open; the smooth finite-type
+gluing hypotheses imply this scope.
 Source: lem-pur-divisor-class, definition and (a) (blueprint: lem-pur-divisor-class). -/
 def FrameGluingSpec (P : WeilConjectures.PurityFiniteSetting.{u})
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
@@ -566,7 +820,7 @@ def FrameGluingSpec (P : WeilConjectures.PurityFiniteSetting.{u})
     (i : D ⟶ X) [IsClosedImmersion i]
     (c : (H Λ i 2).obj ((DerivedCategory.Plus.singleFunctor (Modules Λ X) 0).obj
       (line P Λ hΛ X))) : Prop :=
-  ∀ (U : Scheme.{u}) (e : U ⟶ X) [Etale e] (f : Γ(U, ⊤))
+  ∀ [QuasiCompact i.openComplement.ι] (U : Scheme.{u}) (e : U ⟶ X) [Etale e] (f : Γ(U, ⊤))
     (d : U.zeroLocusSubscheme {f} ⟶ D)
     (sq : IsPullback d (U.zeroLocusSubschemeι {f}) i e),
     closedSourcePull Λ sq.toCommSq ≫ singletonFrameClass P Λ hΛ U (e ≫ a) f =
@@ -620,6 +874,7 @@ def divisorArrow (P : WeilConjectures.PurityFiniteSetting.{u})
     {D X : Scheme.{u}} (a : X ⟶ Spec (CommRingCat.of P.field.k))
     (i : D ⟶ X) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
     (hpair : SmoothDivisorPair P a i) :=
+  let : QuasiCompact i.openComplement.ι := cartierComplement_quasiCompact i hI
   supportedHom Λ i _ 2 (divisorClass P Λ hΛ a i hI hpair)
 
 /-- The explicit open-chart form of the defining frame-gluing property.
@@ -650,7 +905,26 @@ theorem divisor_class (P : WeilConjectures.PurityFiniteSetting.{u})
     (hpair : SmoothDivisorPair P a i) :
     FrameGluingSpec P Λ hΛ a i (divisorClass P Λ hΛ a i hI hpair) ∧
       LocalEquationLaw P Λ hΛ a i hI hpair := by
-  sorry
+  have : QuasiCompact i.openComplement.ι := cartierComplement_quasiCompact i hI
+  have hc : FrameGluingSpec P Λ hΛ a i (divisorClass P Λ hΛ a i hI hpair) :=
+    (frame_class_glues P Λ hΛ a i hpair).choose_spec.1
+  refine ⟨hc, ?_⟩
+  intro U e _ f hf d sq
+  exact hc U e f d sq
+
+/-- The local-equation law of the specified global divisor arrow, for every smooth
+Cartier pair. Source: lem-pur-divisor-class(a)
+(blueprint: lem-pur-divisor-class-local-equation).
+Proof: take the local-equation component of divisor_class. This retains the
+actual glued class and the specified closed-source and Tate comparisons. -/
+theorem divisor_localEquation (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    (hΛ : IsAdmissibleCoefficientFor P.coefficients Λ)
+    {D X : Scheme.{u}} (a : X ⟶ Spec (CommRingCat.of P.field.k))
+    (i : D ⟶ X) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
+    (hpair : SmoothDivisorPair P a i) :
+    LocalEquationLaw P Λ hΛ a i hI hpair :=
+  (divisor_class P Λ hΛ a i hI hpair).2
 
 end AlgebraicGeometry.ProEtale.CondensedRing.Admissible
 

@@ -115,6 +115,14 @@ def Coefficient.integralMap (c : Coefficient ell) :
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).map (c.fromIntegers ell)
 
+/-- Ring maps stay ring maps after forgetting to abelian sheaves.
+Source: condensed coefficient convention
+(blueprint: def-pur-transport-concrete-coefficients). -/
+instance Coefficient.integralMap_isMonHom (c : Coefficient ell) :
+    IsMonHom (c.integralMap.{u} ell) := by
+  unfold Coefficient.integralMap
+  infer_instance
+
 /-- The root-tower line extended along the actual integral coefficient map.
 For finite A this is A tensor mu at any annihilating positive level; for the
 other coefficients it is the completed line followed by ordinary scalar extension.

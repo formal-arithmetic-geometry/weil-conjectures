@@ -15,6 +15,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFi
 public import WeilConjectures.AlgebraicGeometry.CondensedQbarCoefficientConstruction
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.DeligneLaumon.CondensedWeil.CondensedModuleReturn
 /-! # Ordinary condensed punctual weights
 
 Source: latest blueprint, lem-zl-affine-curve-hc2-purity, second proof paragraph;
@@ -84,18 +86,13 @@ Source: Deligne, Weil II, (1.1.8); blueprint local Frobenius convention
     (h : z ≫ localPositivePower g n = localPositivePower s n ≫ z) :
     End ((CondensedQbarGeometricEvaluation.fieldFiber K l).obj
       ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l) z).obj M)) :=
-  (pointInsertion l K (localPositivePower s n)).hom.app
-      ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l) z).obj M) ≫
-    (CondensedQbarGeometricEvaluation.fieldFiber K l).map
-      (((CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l)
-          (localPositivePower s n) z).inv.app M) ≫
-        eqToHom (congrArg
-          (fun f ↦ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f).obj M)
-          h.symm) ≫
-        (CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l)
-          z (localPositivePower g n)).hom.app M ≫
-        (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) z).map
-          (iterate (Profinite.padicAlgClRingObj l) g M θ n).hom)
+  evaluateModuleReturn (CondensedQbarGeometricEvaluation.fieldFiber K l)
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) (localPositivePower s n))
+    (pointInsertion l K (localPositivePower s n)).hom
+    ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l) z).obj M)
+    (moduleReturnMap (Profinite.padicAlgClRingObj l)
+      (localPositivePower g n) (localPositivePower s n) M
+      (iterate (Profinite.padicAlgClRingObj l) g M θ n).hom z h)
 
 /-- A Weil module has its actual module sheaf and its actual Frobenius isomorphism.
 Source: Deligne, Weil II, (1.1.7)

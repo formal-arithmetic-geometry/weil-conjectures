@@ -18,6 +18,9 @@ import WeilConjectures.AlgebraicGeometry.FourierKernelLisse
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 import WeilConjectures.Compactification.Over
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GeometricFourier.CondensedBaseLinearIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GeometricFourier.CondensedDatumNaturality
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GeometricFourier.CondensedFourierGeometricModel
 
 /-! # Base linearity of the condensed Fourier--Deligne transform
 
@@ -179,4 +182,196 @@ def baseTensor {S V : Over (Spec (.of D.k₀))} (p : V ⟶ S) :
 
 set_option Elab.async false in
 set_option maxHeartbeats 400000 in -- Kernel checking the natural functor comparisons.
+end AlgebraicGeometry.ProEtale.CondensedRing.GeometricFourier
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.GeometricFourier
+
+private theorem unitLinearity
+    {C D B : Type*} [Category C] [Category D] [Category B]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (P : ObjectProperty C) (hP : P (𝟙_ C))
+    (Q : B ⥤ C) (Q' : B ⥤ D) (F : C ⥤ D)
+    (e : Q ⋙ (curriedTensor C).flip ⋙ (Functor.whiskeringRight _ _ _).obj F ⋙
+        (Functor.whiskeringLeft _ _ _).obj P.ι ≅
+      Q' ⋙ (curriedTensor D).flip ⋙ (Functor.whiskeringLeft _ _ _).obj F ⋙
+        (Functor.whiskeringLeft _ _ _).obj P.ι) :
+    Nonempty (Q ⋙ F ≅ Q' ⋙ (curriedTensor D).flip ⋙
+      (evaluation _ _).obj (F.obj (𝟙_ C))) := by
+  let K₀ : P.FullSubcategory := ⟨𝟙_ C, hP⟩
+  let unitIso : (curriedTensor C).flip ⋙ (evaluation _ _).obj (𝟙_ C) ≅ 𝟭 C :=
+    NatIso.ofComponents (fun M ↦ λ_ M) (fun f ↦ leftUnitor_naturality f)
+  exact ⟨Functor.isoWhiskerRight (Functor.isoWhiskerLeft Q unitIso.symm) F ≪≫
+    Functor.isoWhiskerRight e ((evaluation _ _).obj K₀)⟩
+
+private instance fiberLocallyNoetherian (D : WeilConjectures.FiniteFieldDatum.{u})
+    (X : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X.hom] :
+    IsLocallyNoetherian (fiber D X) :=
+  LocallyOfFiniteType.isLocallyNoetherian
+    (pullback.snd X.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
+
+private instance fiberCompactSpace (D : WeilConjectures.FiniteFieldDatum.{u})
+    (X : Over (Spec (.of D.k₀))) [QuasiCompact X.hom] :
+    CompactSpace (fiber D X) :=
+  QuasiCompact.compactSpace_of_compactSpace
+    (pullback.snd X.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
+
+/-- Base linearity, its unit specialization, and every integral Tate twist, with the
+same isomorphism respecting the specified Weil data. The three models and bundle data
+are arithmetic; fiber, map and transform take their geometric base changes. No triviality
+of the bundle, positive rank, nonzero complex, or chosen primitive root is assumed.
+
+Source: literature/blueprint/latest/blueprint/part-weights-riemann-hypothesis/
+sec-fourier-transform/sec-fourier-inversion/sk-thm-inversion/prop-base-linear.md, all clauses
+(blueprint: prop-base-linear).
+
+Proof, following the six DAG steps.
+1. For pi = p p1 = p' p2, monoidal pullback and its compositor identify
+   p1*(K tensor p*N) with p1*K tensor p2*p'*N.
+2. Tensor with the prescribed arithmetic-descent kernel and use associativity and
+   symmetry to place p2*p'*N last. These are the existing derived tensor constraints.
+3. The first factor is bounded constructible, since the kernel is lisse rank one
+   (prop-kernel-lisse). The second factor has finite Tor amplitude, since E is a field.
+   Apply clause (5) of prop-functor-package to the separated finite-type second projection.
+4. Commute the rank shift with tensor. Expanding def-fd-transform identifies the two
+   sides. Each constituent is natural in both arguments, giving the bifunctor isomorphism.
+5. Specialize K to the coefficient unit and compose with its left unitor. This gives
+   the natural isomorphism in clause (1), with no choice of a basis of the unit.
+6. By lem-fd-tate-twist-pullback the specified E(m) on either bundle is the pullback
+   of E_S(m), for all integers m. Nonnegative powers use root-normalized tensor maps;
+   negative powers use inverse transposes under evaluation. Substitute N=E_S(m) in
+   step 4. The root pullback comparisons intertwine the actual Tate Weil data.
+   The coherence/equivariance of prop-functor-package makes reassociation, projection
+   and shift commute with Frobenius. Expanding transformDatum and tensorDatum gives
+   exactly the final displayed morphism equation; hence this same isomorphism is a
+   Weil isomorphism. In the Lean reduction the two unfinished compatibility arguments
+   are fourier_tate_kernel_comparison and fourier_tate_support_comparison. Whisker the
+   first comparison with compact support and shift, use supportPartDatum_natural to
+   transport its Weil square, and compose with the second comparison and its square.
+   The chosen arithmetic compactification gives the actual geometric model. -/
+theorem condensedFourier_base_linear
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (ell : ℕ) [Fact ell.Prime] [Fact (ell ≠ D.p)]
+    (E : PadicAlgCl.FiniteIntermediateField ell)
+    {S V V' : Over (Spec (.of D.k₀))}
+    [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
+    [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+    [LocallyOfFiniteType V'.hom] [QuasiCompact V'.hom] [IsSeparated V'.hom]
+    (p : V ⟶ S) (p' : V' ⟶ S) (r : ℕ)
+    (b : Γ(pullback p.left p'.left, ⊤)) (bundle : DualBundlePairing p.left p'.left r b)
+    (ψ : AddChar D.k₀ (MonObj.Γ (Coefficient.rational E |>.obj ell)))
+    (c : Compactification (pullback.snd p.left p'.left)) :
+    Nonempty (
+      baseTensor D (Coefficient.rational E |>.obj ell) p ⋙
+          (Functor.whiskeringRight _ _ _).obj
+            (transform D (Coefficient.rational E |>.obj ell) p p' ψ b c (r : ℤ)) ⋙
+          (Functor.whiskeringLeft _ _ _).obj
+            (constantModelBoundedConstructible
+              (Coefficient.rational E |>.obj ell) (fiber D V)).ι ≅
+      baseTensor D (Coefficient.rational E |>.obj ell) p' ⋙
+          (Functor.whiskeringLeft _ _ _).obj
+            (transform D (Coefficient.rational E |>.obj ell) p p' ψ b c (r : ℤ)) ⋙
+          (Functor.whiskeringLeft _ _ _).obj
+            (constantModelBoundedConstructible
+              (Coefficient.rational E |>.obj ell) (fiber D V)).ι) ∧
+    Nonempty (
+      (constantModelBoundedConstructible
+          (Coefficient.rational E |>.obj ell) (fiber D S)).ι ⋙
+        (upperStar (Coefficient.rational E |>.obj ell)
+          (map D p)).leftDerivedFunctor ⋙
+        transform D (Coefficient.rational E |>.obj ell) p p' ψ b c (r : ℤ) ≅
+      baseTensor D (Coefficient.rational E |>.obj ell) p' ⋙
+        (evaluation _ _).obj
+          ((transform D (Coefficient.rational E |>.obj ell) p p' ψ b c (r : ℤ)).obj (𝟙_ _))) ∧
+    ∀ m : ℤ, ∃ e :
+      (constantModelBoundedConstructible
+          (Coefficient.rational E |>.obj ell) (fiber D V)).ι ⋙
+        twist D ell E V m ⋙
+        transform D (Coefficient.rational E |>.obj ell) p p' ψ b c (r : ℤ) ≅
+      (constantModelBoundedConstructible
+          (Coefficient.rational E |>.obj ell) (fiber D V)).ι ⋙
+        transform D (Coefficient.rational E |>.obj ell) p p' ψ b c (r : ℤ) ⋙
+        twist D ell E V' m,
+      ∀ (K : ConstantModelBoundedConstructible
+          (Coefficient.rational E |>.obj ell) (fiber D V))
+        (φ : (StrictWeilCondensed.action (Coefficient.rational E |>.obj ell)
+          (StrictWeilCondensed.modelFrobenius D V)).obj K.obj ≅ K.obj),
+        (StrictWeilCondensed.action (Coefficient.rational E |>.obj ell)
+            (StrictWeilCondensed.modelFrobenius D V')).map (e.hom.app K) ≫
+          (StrictWeilCondensed.tensorDatum (Coefficient.rational E |>.obj ell)
+            (StrictWeilCondensed.modelFrobenius D V')
+            (transformDatum D (Coefficient.rational E |>.obj ell)
+              p p' ψ b c (r : ℤ) K.obj φ)
+            (StrictWeilCondensed.tateDatum ell (.rational E)
+              (StrictWeilCondensed.modelFrobenius D V') m)).hom =
+        (transformDatum D (Coefficient.rational E |>.obj ell)
+          p p' ψ b c (r : ℤ) ((twist D ell E V m).obj K.obj)
+          (StrictWeilCondensed.tensorDatum (Coefficient.rational E |>.obj ell)
+            (StrictWeilCondensed.modelFrobenius D V) φ
+            (StrictWeilCondensed.tateDatum ell (.rational E)
+              (StrictWeilCondensed.modelFrobenius D V) m))).hom ≫
+          e.hom.app K := by
+  let := PadicAlgCl.normedFieldOfAlgebra ell E
+  let Λ := (Coefficient.rational E).obj ell
+  obtain ⟨e₀⟩ := baseLinearIso D ell E p p' r b bundle ψ c
+  refine ⟨⟨e₀⟩, ?_, ?_⟩
+  · exact unitLinearity
+      (P := constantModelBoundedConstructible Λ (fiber D V))
+      (hP := by
+        rw [← (adicConstructibilityPredicateComparison ell _ Λ (.continuous E)).2]
+        exact boundedConstructible_tensorUnit Λ (fiber D V))
+      (C := category D Λ V)
+      (D := category D Λ V')
+      (B := (constantModelBoundedConstructible Λ (fiber D S)).FullSubcategory)
+      (Q := (constantModelBoundedConstructible Λ (fiber D S)).ι ⋙
+        (upperStar Λ (map D p)).leftDerivedFunctor)
+      (Q' := (constantModelBoundedConstructible Λ (fiber D S)).ι ⋙
+        (upperStar Λ (map D p')).leftDerivedFunctor)
+      (F := transform D Λ p p' ψ b c (r : ℤ)) e₀
+  · intro m
+    have : LocallyOfFiniteType (p'.left ≫ S.hom) := by rw [p'.w]; infer_instance
+    have : LocallyOfFiniteType p'.left := locallyOfFiniteType_of_comp p'.left S.hom
+    have : QuasiCompact (p'.left ≫ S.hom) := by rw [p'.w]; infer_instance
+    have : QuasiCompact p'.left := QuasiCompact.of_comp p'.left S.hom
+    have : LocallyOfFiniteType (square D p p').hom := by dsimp [square]; infer_instance
+    have : QuasiCompact (square D p p').hom := by dsimp [square]; infer_instance
+    obtain ⟨e₁, h₁⟩ := fourier_tate_kernel_comparison D ell E p p' ψ b m
+    obtain ⟨e₂, h₂⟩ := fourier_tate_support_comparison D ell E p p' ψ b c (r : ℤ) m
+    have hsq : (snd D p p').left = pullback.snd p.left p'.left := by
+      rfl
+    cases hsq
+    let T : category D Λ (square D p p') ⥤ category D Λ V' :=
+      supportPart D Λ (f := snd D p p') c (r : ℤ)
+    let e := Functor.isoWhiskerRight e₁ T ≪≫ e₂
+    refine ⟨e, ?_⟩
+    intro K φ
+    let G : category D Λ V' ⥤ category D Λ V' :=
+      StrictWeilCondensed.action Λ (StrictWeilCondensed.modelFrobenius D V')
+    have hn := supportPartDatum_natural D Λ (f := snd D p p') c (r : ℤ)
+      _ _ (e₁.hom.app K) (h₁ K φ)
+    have hn' := hn
+    simp only [Functor.comp_obj] at hn'
+    dsimp [e]
+    change G.map (T.map (e₁.hom.app K) ≫ e₂.hom.app K) ≫ _ = _
+    have h₂' := h₂ K φ
+    change G.map (e₂.hom.app K) ≫ _ = _ at h₂'
+    rw [Functor.map_comp, Category.assoc, h₂', ← Category.assoc]
+    have hdef :
+        transformDatum D Λ p p' ψ b c (r : ℤ)
+            ((twist D ell E V m).obj K.obj)
+            (StrictWeilCondensed.tensorDatum Λ
+              (StrictWeilCondensed.modelFrobenius D V) φ
+              (StrictWeilCondensed.tateDatum ell (.rational E)
+                (StrictWeilCondensed.modelFrobenius D V) m)) =
+          supportPartDatum D Λ (f := snd D p p') c (r : ℤ)
+            ((kernelPart D Λ p p' ψ b).obj ((twist D ell E V m).obj K.obj))
+            (kernelPartDatum D Λ p p' ψ b ((twist D ell E V m).obj K.obj)
+              (StrictWeilCondensed.tensorDatum Λ
+                (StrictWeilCondensed.modelFrobenius D V) φ
+                (StrictWeilCondensed.tateDatum ell (.rational E)
+                  (StrictWeilCondensed.modelFrobenius D V) m))) := by
+      rfl
+    rw [hdef]
+    simpa [G, T, Category.assoc] using
+      congrArg (fun q ↦ q ≫ e₂.hom.app K) hn'
+
 end AlgebraicGeometry.ProEtale.CondensedRing.GeometricFourier

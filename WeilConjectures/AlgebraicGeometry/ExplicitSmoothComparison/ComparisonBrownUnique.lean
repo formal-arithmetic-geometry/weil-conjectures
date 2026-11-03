@@ -48,77 +48,80 @@ functor on bounded constructible finite-Tor objects, with counit the restricted 
 counit, and the explicit twisted inverse image is identified with it by a unique
 counit-compatible isomorphism.
 
-Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/
+Source: `literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/
 sk-prop-sp-comparison-brown-unique.md`, clauses “Same left adjoint”, “Restriction”, and
 “Uniqueness” (blueprint: det-sp-comparison-brown-unique).
 
-The hypotheses are the situation of the node: `a` is the explicit adjunction of
-`det-sp-comparison-brown-explicit`, `brown` is the ambient Brown adjunction on the
-localizing closures (`det-existence-localizing` (3)) and `hG` says that its right adjoint
-`G` sends `Dctf(Y)` into `Dctf(X)` (`det-existence-restriction`), so that
-`exceptional ell c G hG` is the restricted `f^!`.  Both adjunctions of the conclusion have
-the literal compact-support functor `support ell c s.compactification a.support_closed`.
+The hypotheses are the situation of the node: `f` is the actual smooth morphism of
+pure relative dimension `d`, `c` is a listed admissible coefficient presentation,
+and `a` is the explicit adjunction of `det-sp-comparison-brown-explicit` for the
+literal compactification functor. The ambient Brown adjunction is `brown`
+(`det-existence-localizing` (3)), and `hG` is its preservation of Dctf
+(`det-existence-restriction`). Thus `exceptional ell c G hG` is the restricted
+`f^!`. The old bundled hypotheses are written out without changing their content.
 
 Proof.
-1. Same left adjoint: `det-existence-localizing` (2) identifies the ambient compact-support
-   functor with `R p_* ∘ j_!` for the compactification `s.compactification`; its
-   restriction to `Dctf(X)` is the functor `support` of the explicit adjunction.
-2. Restriction: by `det-existence-restriction` the adjunction `brown` restricts along the
-   fully faithful inclusions `Dctf ⊆ Loc(Dctf)`; the Hom bijection is the restriction of
-   the ambient one, so the restricted adjunction `brownCtf` has counit the restricted
-   Brown counit (the `HEq` clause).
+1. Same left adjoint: both supplied adjunctions use the actual `Rp_* j_!` associated
+   to the same compactification `cf`. Their restrictions have the literal left
+   functor `support ell c cf hSupport`.
+2. Restriction: restrict `brown` along the fully faithful inclusions
+   `Dctf ⊆ Loc(Dctf)`. The Hom bijection is the restriction of the ambient one,
+   and its counit is the restricted Brown counit (the `HEq` clause).
 3. Uniqueness: apply `det-sp-unique-right-adjoint`
-   (`CategoryTheory.Adjunction.rightAdjointUniq`) to `a.adjunction` and `brownCtf`; its
-   components are the `brownCtf`-transposes of the explicit counit, the counit equation is
-   `CounitCompatible`, and injectivity of the Hom bijection gives uniqueness. -/
+   (`CategoryTheory.Adjunction.rightAdjointUniq`) to `a` and the restricted Brown
+   adjunction. Its components are the Brown transposes of the explicit counit;
+   the counit equation is `CounitCompatible`. Injectivity of the Hom bijection
+   proves uniqueness. -/
 theorem comparisonBrownUnique
     (ell : ℕ) [Fact ell.Prime] {k : Type u} [Field k]
-    (c : Coefficient ell) (s : Datum k)
-    (a : ExplicitAdjunction ell c s)
-    (hL : ∀ K, localizing ell c s.X K → localizing ell c s.Y
-      ((CondensedRing.rightDerivedLowerShriekOfCompactification
-        (c.obj ell) s.compactification).obj K))
-    (G : (localizing ell c s.Y).FullSubcategory ⥤
-      (localizing ell c s.X).FullSubcategory)
-    (brown : (localizing ell c s.Y).lift
-      ((localizing ell c s.X).ι ⋙
-        CondensedRing.rightDerivedLowerShriekOfCompactification
-          (c.obj ell) s.compactification)
+    (c : Coefficient ell) {X Y : Scheme.{u}}
+    (base : Y ⟶ Spec (.of k)) [LocallyOfFiniteType base] [QuasiCompact base]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (d : ℕ) [SmoothOfRelativeDimension d f] (cf : Compactification f)
+    (hSupport : ∀ K, property ell c X K → property ell c Y
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification (c.obj ell) cf).obj K))
+    (hSource : ∀ K, property ell c Y K → property ell c X
+      ((c.smoothSource ell f d).obj K))
+    (a : support ell c cf hSupport ⊣ source ell c f d hSource)
+    (hL : ∀ K, localizing ell c X K → localizing ell c Y
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification (c.obj ell) cf).obj K))
+    (G : (localizing ell c Y).FullSubcategory ⥤ (localizing ell c X).FullSubcategory)
+    (brown : (localizing ell c Y).lift
+      ((localizing ell c X).ι ⋙
+        CondensedRing.rightDerivedLowerShriekOfCompactification (c.obj ell) cf)
       (fun K ↦ hL K.obj K.property) ⊣ G)
-    (hG : ∀ K : c.ctf ell s.Y,
-      property ell c s.X (G.obj ((inclusion ell c s.Y).obj K)).obj) :
-    ∃ brownCtf : support ell c s.compactification a.support_closed ⊣
-        exceptional ell c G hG,
-      (∀ K : c.ctf ell s.Y,
+    (hG : ∀ K : c.ctf ell Y,
+      property ell c X (G.obj ((inclusion ell c Y).obj K)).obj) :
+    ∃ brownCtf : support ell c cf hSupport ⊣ exceptional ell c G hG,
+      (∀ K : c.ctf ell Y,
         HEq (brownCtf.counit.app K).hom
-          (brown.counit.app ((inclusion ell c s.Y).obj K)).hom) ∧
-      ∃! gamma : source ell c s.map s.dim a.source_closed ≅ exceptional ell c G hG,
-        CounitCompatible a.adjunction brownCtf gamma := by
-  let iX := inclusion ell c s.X
-  let iY := inclusion ell c s.Y
+          (brown.counit.app ((inclusion ell c Y).obj K)).hom) ∧
+      ∃! gamma : source ell c f d hSource ≅ exceptional ell c G hG,
+        CounitCompatible a brownCtf gamma := by
+  let iX := inclusion ell c X
+  let iY := inclusion ell c Y
   let hiX : iX.FullyFaithful := by
     dsimp only [iX, PurityTransport.inclusion]
     exact ObjectProperty.fullyFaithfulιOfLE _
   let hiY : iY.FullyFaithful := by
     dsimp only [iY, PurityTransport.inclusion]
     exact ObjectProperty.fullyFaithfulιOfLE _
-  let b : support ell c s.compactification a.support_closed ⊣ exceptional ell c G hG :=
+  let b : support ell c cf hSupport ⊣ exceptional ell c G hG :=
     brown.restrictFullyFaithful hiX hiY (Iso.refl _) (Iso.refl _)
-  refine ⟨b, ?_, a.adjunction.rightAdjointUniq b, ?_, ?_⟩
+  refine ⟨b, ?_, a.rightAdjointUniq b, ?_, ?_⟩
   · intro K
     have h := brown.map_restrictFullyFaithful_counit_app hiX hiY
-      (L := support ell c s.compactification a.support_closed)
+      (L := support ell c cf hSupport)
       (R := exceptional ell c G hG) (Iso.refl _) (Iso.refl _) K
     have h' := congrArg (fun f ↦ f.hom) h
     change (b.counit.app K).hom = 𝟙 _ ≫
       (CondensedRing.rightDerivedLowerShriekOfCompactification
-        (c.obj ell) s.compactification).map (𝟙 _) ≫
+        (c.obj ell) cf).map (𝟙 _) ≫
       (brown.counit.app (iY.obj K)).hom at h'
     exact heq_of_eq (by
       simpa only [CategoryTheory.Functor.map_id, CategoryTheory.Category.id_comp] using h')
   · intro K
-    exact a.adjunction.rightAdjointUniq_hom_app_counit b K
+    exact a.rightAdjointUniq_hom_app_counit b K
   · intro gamma hgamma
     apply Iso.ext
     apply NatTrans.ext
