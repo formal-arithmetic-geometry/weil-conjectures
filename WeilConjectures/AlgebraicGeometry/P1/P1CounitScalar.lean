@@ -615,6 +615,9 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 attribute [local instance 10000] SheafExactDegreeZero.scalarWeakSheafify
 set_option backward.defeqAttrib.useBackward true
 
+private theorem cachedModSheafify (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
+    HasSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A) := inferInstance
+
 attribute [local instance] cachedModSheafify
 
 -- Keep the chosen adjoints opaque while elaborating the canonical diagrams.

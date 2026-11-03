@@ -474,7 +474,6 @@ private theorem clopen_composite_localized
     ExactDerivedPasting.Word.comparison, ExactDerivedPasting.Word.ordinary,
     ExactDerivedPasting.Word.derived, Iso.trans_hom, Iso.trans_inv,
     Iso.refl_hom, Iso.refl_inv,
-
     Category.comp_id, Category.id_comp, ExactFunctor.of_fst,
     Functor.isoWhiskerLeft_refl, Functor.isoWhiskerRight_refl,
     localizeSquare, localize, clopenMateComposite_app,
