@@ -13169,6 +13169,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedAdjointCo
 public import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedAdjunctionSingleZero
 public import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedForgetMate
 public import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedIdentityInverseRepresentative
+public import WeilConjectures.CategoryTheory.Adjunction.DualityConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeCube
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
@@ -24282,6 +24283,8 @@ public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
+public import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
+public import WeilConjectures.WeilSheaf.VerdierExchangeNatural
 public import WeilConjectures.WeilSheaf.WeilDescent
 public import WeilConjectures.WeilSheaf.WeilDescentArithmetic
 public import WeilConjectures.WeilSheaf.WeilDescentConstantField
