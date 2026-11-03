@@ -112,7 +112,7 @@ abbrev finiteScalarRealizationHeart (T : Scheme.{u}) :
 the heart-level realization. -/
 def finiteScalarRealizationSingleIso (T : Scheme.{u})
     (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
-    (sfbFiniteScalarRealization A e eR T).obj
+    (finiteScalarRealization A e eR T).obj
         ((DerivedCategory.singleFunctor _ 0).obj M) ≅
       (DerivedCategory.singleFunctor _ 0).obj
         ((finiteScalarRealizationHeart A e eR T).obj M) := by
@@ -237,11 +237,11 @@ def finiteScalarRealizationExtensionIso
     [IsNoetherian X.left]
     (S : Scheme.{u}) (a : S ⟶ X.left) (ha : IsImmersion a)
     (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
-    (sfbFiniteScalarRealization A e eR X.left).obj
+    (finiteScalarRealization A e eR X.left).obj
         ((DerivedCategory.singleFunctor _ 0).obj
           ((flatModelEtaleExtension (ULift.{u + 1} A) a ha).obj L)) ≅
       (sfbLocallyClosedDerivedExtension Λ a ha).obj
-        ((sfbFiniteScalarRealization A e eR S).obj
+        ((finiteScalarRealization A e eR S).obj
           ((DerivedCategory.singleFunctor _ 0).obj L)) := by
   let : IsImmersion a := ha
   let : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
