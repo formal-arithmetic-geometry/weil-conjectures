@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalCategory
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectModelsSupplement
 public import WeilConjectures.RingTheory.QuotientLevelTor
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralLevelConstantRestriction
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
 import all WeilConjectures.AlgebraicGeometry.Perfect.PerfectChartTensorComparison
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCompletedLocalPerfectCriterion
@@ -199,12 +200,9 @@ theorem nonempty_tor_constant_iso (n : ℕ) (M : ModuleCat.{u + 1} (A ⧸ d.idea
 /-- Restricting the constant sheaf of `A/I^{n+1} ⊗ X` to the completed coefficients gives
 the completed realization of `X`, when `I^{n+1}` kills `X`.
 
-Proof sketch: by `restrictionIso` (constant sheaves commute with restriction of scalars) and
-`ordinaryConstantModel`, both sides are `M` and `B ⊗_{A_T} (pbcRestrict c) M` for the
-`B`-module `M` on the left, with `B` the completed ring; the counit of `pbcExtend c ⊣
-pbcRestrict c` compares them. Both sides are right exact in the `A/I^{n+1}`-module, so it
-suffices to treat `A/I^{n+1}` itself, which is the quotient statement of
-`completed_constant_algebra_flat_quotients`. -/
+Proof: since `I^{n+1}` kills `X`, the unit `X → A/I^{n+1} ⊗ X` is an isomorphism, so this is
+`nonempty_integralConstantModule_restrictScalars_iso` for the `A/I^{n+1}`-module
+`A/I^{n+1} ⊗ X`. -/
 theorem nonempty_restrict_level_constant_iso (n : ℕ) (X : ModuleCat.{u + 1} A)
     (hX : ∀ a ∈ d.ideal ^ (n + 1), ∀ x : X, a • x = 0) :
     Nonempty ((pbcRestrict (pbcAdicProjection T d n)).obj
@@ -213,7 +211,17 @@ theorem nonempty_restrict_level_constant_iso (n : ℕ) (X : ModuleCat.{u + 1} A)
             ((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
               (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).obj X))) ≅
       (integralConstantModule T d).obj X) := by
-  sorry
+  let f := Ideal.Quotient.mk (d.ideal ^ (n + 1))
+  let η := (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} f).unit.app X
+  have : Mono η := by
+    obtain ⟨μ, hμ⟩ := ModuleCat.exists_unit_retraction d.ideal (n + 1) X hX
+    exact mono_of_mono_fac hμ
+  have : Epi η := (ModuleCat.epi_iff_surjective η).2 fun t ↦
+    ModuleCat.exists_extendRestrictScalarsAdj_unit_app_eq f Ideal.Quotient.mk_surjective t
+  have : IsIso η := isIso_of_mono_of_epi η
+  obtain ⟨e⟩ := nonempty_integralConstantModule_restrictScalars_iso T d n
+    ((ModuleCat.extendScalars.{u + 1, u + 1, u + 1} f).obj X)
+  exact ⟨e.symm ≪≫ (integralConstantModule T d).mapIso (asIso η).symm⟩
 
 end Sheaf
 
