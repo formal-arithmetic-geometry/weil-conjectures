@@ -41,7 +41,7 @@ def projectiveChern (S : Scheme.{u}) (hS : IsUnit (l : Γ(S, ⊤)))
     (DerivedCategory.singleFunctor _ 0).map
       (Etale.cartierConstantComparison (Scheme.finiteTateCoefficient l E n)
         (ProjectiveLine S) ≫ Etale.cartierSupportedUnit l E n (ProjectiveLine.infinity S)) ≫
-    Etale.cartierKummerMap l E n (ProjectiveLine.infinity S) hI
+    Etale.finiteCartierKummerMap l E n (ProjectiveLine.infinity S) hI
       (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom) ≫
     (twistDerived l E n (ProjectiveLine S)
       (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom) r hA 1 2).inv

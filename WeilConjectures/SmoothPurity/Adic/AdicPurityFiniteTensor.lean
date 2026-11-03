@@ -314,6 +314,7 @@ theorem adicPurityFiniteTensorComposite_zero (d : ℕ) :
   change (adicPurityFiniteSheafTwist l E n T d).map
     ((sfIntrinsicModuleEquivalence T
       (Padic.coefficientExtensionRing l E (n + 1))).functor.map (0 : M ⟶ N)) = 0
+  rw [Functor.map_zero, Functor.map_zero]
 
 attribute [instance] adicPurityFiniteTensorComposite_zero
 

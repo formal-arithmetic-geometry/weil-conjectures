@@ -102,7 +102,7 @@ theorem supportedProjectiveChern_comparison
             (ProjectiveLine S)) ≫
         (DerivedCategory.singleFunctor _ 0).map
           (Etale.cartierSupportedUnit l E n (ProjectiveLine.infinity S)) ≫
-        Etale.cartierKummerMap l E n (ProjectiveLine.infinity S) hI hP =
+        Etale.finiteCartierKummerMap l E n (ProjectiveLine.infinity S) hI hP =
       (comparison (Scheme.finiteTateCoefficient l E n) (ProjectiveLine S)).map d.chern ≫
         (twistDerived l E n (ProjectiveLine S) hP r hA 1 2).hom := by
     exact ht

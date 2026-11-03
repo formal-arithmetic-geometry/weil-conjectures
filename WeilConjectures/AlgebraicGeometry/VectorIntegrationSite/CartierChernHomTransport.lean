@@ -64,7 +64,7 @@ theorem cartierChern_hom_transport
         (DerivedCategory.singleFunctor _ 0).map
           (Etale.cartierConstantComparison (Scheme.finiteTateCoefficient l E n) T) ≫
         (DerivedCategory.singleFunctor _ 0).map (Etale.cartierSupportedUnit l E n i) ≫
-        Etale.cartierKummerMap l E n i hI hT =
+        Etale.finiteCartierKummerMap l E n i hI hT =
       (comparison (Scheme.finiteTateCoefficient l E n) T).map k.hom ≫
         (twistDerived l E n T hT r hA 1 2).hom := by
   have hdata := (Etale.cartier_kummer_map l E).2.exists.choose_spec

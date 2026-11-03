@@ -241,4 +241,13 @@ theorem cartier_kummer_map :
   subst κ'
   exact Prod.ext rfl (hcuniq c' hc')
 
+/-- The canonical supported arrow, selected from its uniquely normalized system.
+Its target is the published pro-etale Tate line; no new twisting object is chosen.
+Source: blueprint, statement (blueprint: lem-amb-cartier-kummer-map). -/
+def finiteCartierKummerMap (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T)
+    [IsClosedImmersion i] (hI : i.ker.IsInvertible) (hT : IsUnit (l : Γ(T, ⊤))) :
+    (DerivedCategory.singleFunctor _ 0).obj (cartierSupported l E n i) ⟶
+      ((DerivedCategory.singleFunctor _ 0).obj (finiteTateProSheaf l E n T 1))⟦(2 : ℤ)⟧ :=
+  ((cartier_kummer_map l E).2.exists.choose.2 n i hI hT).hom
+
 end AlgebraicGeometry.Etale
