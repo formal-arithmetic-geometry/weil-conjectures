@@ -145,6 +145,7 @@ theorem nativeAdicCompactSupport_localizing_preservesCoproducts
     [QuasiCompact (X ↘ Spec (CommRingCat.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of k))]
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) :
