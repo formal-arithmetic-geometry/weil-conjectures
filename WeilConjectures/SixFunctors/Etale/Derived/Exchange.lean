@@ -23,6 +23,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShi
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekTensorRight
+import WeilConjectures.SixFunctors.Etale.Derived.ConstantTensorProjection
 import WeilConjectures.AlgebraicGeometry.CompactificationUpperShriek.CompactificationUpperShriek
 
 /-!
