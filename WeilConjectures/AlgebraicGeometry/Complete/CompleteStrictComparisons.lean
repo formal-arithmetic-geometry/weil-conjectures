@@ -72,25 +72,26 @@ theorem mateEquiv_isIso_of_paste {A B C D E F : Type*} [Category A] [Category B]
 /-- Morphism algebra deriving the comparison of a square from the comparisons of its two
 composites. -/
 theorem Functor.map_comp_eq_of_comp {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
-    {c₀ c₁ c₂ : C} {y z e₁ e₂ e₃ : D} {u : c₀ ⟶ c₂} {mh : c₁ ⟶ c₀} {mi : c₀ ⟶ c₁}
-    {ah : c₂ ⟶ c₁} {ai : c₁ ⟶ c₂} {s : F.obj c₁ ⟶ e₁} {t₁ : F.obj c₂ ⟶ y} {t₂ : y ⟶ e₂}
-    {bh : e₂ ⟶ e₁} {bi : e₁ ⟶ e₂} {w₁ : F.obj c₀ ⟶ z} {w₂ : z ⟶ e₃} {nh : e₁ ⟶ e₃}
-    {ni : e₃ ⟶ e₁} {v : e₃ ⟶ e₂}
-    (e₁' : u = mi ≫ ai) (e₂' : v = ni ≫ bi) (hm : mi ≫ mh = 𝟙 c₀) (ha : ai ≫ ah = 𝟙 c₁)
-    (hb : bh ≫ bi = 𝟙 e₂) (hn : nh ≫ ni = 𝟙 e₁)
+    {c₀ c₁ c₂ c₃ : C} {y z e₁ e₂ e₃ e₄ : D} {u : c₀ ⟶ c₂} {mh : c₁ ⟶ c₀} {mi : c₀ ⟶ c₁}
+    {ah : c₂ ⟶ c₁} {q : c₁ ⟶ c₃} {p : c₃ ⟶ c₂} {s : F.obj c₁ ⟶ e₁} {t₁ : F.obj c₂ ⟶ y}
+    {t₂ : y ⟶ e₂} {bh : e₂ ⟶ e₁} {q' : e₁ ⟶ e₄} {p' : e₄ ⟶ e₂} {w₁ : F.obj c₀ ⟶ z}
+    {w₂ : z ⟶ e₃} {nh : e₁ ⟶ e₃} {ni : e₃ ⟶ e₁} {v : e₃ ⟶ e₂}
+    (e₁' : u = (mi ≫ q) ≫ p) (e₂' : v = (ni ≫ q') ≫ p') (hm : mi ≫ mh = 𝟙 c₀)
+    (ha : (q ≫ p) ≫ ah = 𝟙 c₁) (hb : bh ≫ q' ≫ p' = 𝟙 e₂) (hn : nh ≫ ni = 𝟙 e₁)
     (h₁ : F.map ah ≫ s = t₁ ≫ t₂ ≫ bh) (h₂ : F.map mh ≫ w₁ ≫ w₂ = s ≫ nh) :
     F.map u ≫ t₁ ≫ t₂ = w₁ ≫ w₂ ≫ v := by
   subst e₁' e₂'
-  have ht : t₁ ≫ t₂ = F.map ah ≫ s ≫ bi := by
+  have ht : t₁ ≫ t₂ = F.map ah ≫ s ≫ q' ≫ p' := by
     rw [← Category.assoc, h₁]
-    simp [hb]
+    simp only [Category.assoc, hb, Category.comp_id]
   have hs : F.map mi ≫ s = w₁ ≫ w₂ ≫ ni := by
     calc F.map mi ≫ s = F.map mi ≫ s ≫ nh ≫ ni := by rw [hn, Category.comp_id]
       _ = F.map mi ≫ F.map mh ≫ w₁ ≫ w₂ ≫ ni := by rw [reassoc_of% h₂]
       _ = w₁ ≫ w₂ ≫ ni := by rw [← F.map_comp_assoc, hm, F.map_id, Category.id_comp]
-  rw [ht, F.map_comp, Category.assoc, ← F.map_comp_assoc ai, ha, F.map_id, Category.id_comp,
-    ← Category.assoc, hs]
+  rw [ht, Category.assoc, F.map_comp, Category.assoc, ← F.map_comp_assoc, ← F.map_comp_assoc,
+    Category.assoc, ha, F.map_comp, F.map_id, Category.comp_id, ← Category.assoc, hs]
   simp
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
@@ -200,7 +201,42 @@ theorem cbcStrictPull_square {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
         (ProEtale.StrictTower.G A k).map ((cbcStrictPull d p).hom.app x) ≫
           (ProEtale.StrictTower.squareG A k r p i h).inv.app
             ((cbcStrictReduction d T).obj x) := by
-  sorry
+  have e1a : (cbcSquarePull d k r p i h).inv = ((d.pullComp k p).inv ≫
+      (eqToIso (congrArg (fun f ↦ d.pull f) h.symm)).inv) ≫ (d.pullComp r i).hom := rfl
+  have e1 : (cbcSquarePull d k r p i h).inv.app x = ((d.pullComp k p).inv.app x ≫
+      (eqToIso (congrArg (fun f ↦ d.pull f) h.symm)).inv.app x) ≫ (d.pullComp r i).hom.app x := by
+    rw [e1a, NatTrans.comp_app, NatTrans.comp_app]
+  have ha0 : (eqToIso (congrArg (fun f ↦ d.pull f) h.symm)).inv ≫ (d.pullComp r i).hom =
+      ((d.pullComp r i).symm ≪≫ eqToIso (congrArg (fun f ↦ d.pull f) h.symm)).inv := rfl
+  have ha : ((eqToIso (congrArg (fun f ↦ d.pull f) h.symm)).inv.app x ≫
+      (d.pullComp r i).hom.app x) ≫
+        ((d.pullComp r i).symm ≪≫ eqToIso (congrArg (fun f ↦ d.pull f) h.symm)).hom.app x =
+      𝟙 _ := by
+    rw [← NatTrans.comp_app, ha0, Iso.inv_hom_id_app]
+  have e2a : (ProEtale.StrictTower.squareG A k r p i h).inv =
+      ((ProEtale.StrictTower.gComp A k p).inv ≫
+        (eqToIso (congrArg (ProEtale.StrictTower.G A) h.symm)).inv) ≫
+          (ProEtale.StrictTower.gComp A r i).hom := rfl
+  have e2 : (ProEtale.StrictTower.squareG A k r p i h).inv.app ((cbcStrictReduction d T).obj x) =
+      ((ProEtale.StrictTower.gComp A k p).inv.app ((cbcStrictReduction d T).obj x) ≫
+        (eqToIso (congrArg (ProEtale.StrictTower.G A) h.symm)).inv.app
+          ((cbcStrictReduction d T).obj x)) ≫
+        (ProEtale.StrictTower.gComp A r i).hom.app ((cbcStrictReduction d T).obj x) := by
+    rw [e2a, NatTrans.comp_app, NatTrans.comp_app]
+  have hb0 : (eqToIso (congrArg (ProEtale.StrictTower.G A) h.symm)).inv ≫
+      (ProEtale.StrictTower.gComp A r i).hom =
+      ((ProEtale.StrictTower.gComp A r i).symm ≪≫
+        eqToIso (congrArg (ProEtale.StrictTower.G A) h.symm)).inv := rfl
+  have hb : ((ProEtale.StrictTower.gComp A r i).symm ≪≫
+        eqToIso (congrArg (ProEtale.StrictTower.G A) h.symm)).hom.app
+          ((cbcStrictReduction d T).obj x) ≫
+      (eqToIso (congrArg (ProEtale.StrictTower.G A) h.symm)).inv.app
+          ((cbcStrictReduction d T).obj x) ≫
+        (ProEtale.StrictTower.gComp A r i).hom.app ((cbcStrictReduction d T).obj x) = 𝟙 _ := by
+    rw [← NatTrans.comp_app, hb0, Iso.hom_inv_id_app]
+  exact Functor.map_comp_eq_of_comp (cbcStrictReduction d V) e1 e2 (Iso.inv_hom_id_app _ _)
+    ha hb (Iso.hom_inv_id_app _ _)
+    (cbcStrictPull_comp_hom d r i h.symm x) (cbcStrictPull_comp d k p x)
 
 /-- The mate of the reduction/pullback comparison is the strict projection-formula map, so it
 is invertible. Source: blueprint step 8 (blueprint: thm-cbc-complete-proetale). -/
