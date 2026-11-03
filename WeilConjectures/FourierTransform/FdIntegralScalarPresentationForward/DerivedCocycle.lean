@@ -16,6 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
+set_option linter.flexible false
+set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 universe u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -215,7 +218,8 @@ private theorem chain_cocycle {E L M : Padic.FiniteCoefficientFields l Ω} (h : 
   letI := fdCoefficientTransportAdditive l (pbcFiniteField.{u} l Ω E) T
   letI := fdCoefficientTransportAdditive l (pbcFiniteField.{u} l Ω L) T
   letI := fdCoefficientTransportAdditive l (pbcFiniteField.{u} l Ω M) T
-  exact chain_cocycle_gen _ _ _ _ _ _ _ _ _ (oc l Ω T h oh) (oc l Ω T k ok) (oc l Ω T (h.trans k) ohk)
+  exact chain_cocycle_gen _ _ _ _ _ _ _ _ _ (oc l Ω T h oh) (oc l Ω T k ok)
+    (oc l Ω T (h.trans k) ohk)
     _ _ _ (otc_f l Ω T h oh) (otc_f l Ω T k ok) (otc_f l Ω T (h.trans k) ohk)
     (Ocomp l Ω T h k) (Xcomp l Ω T h k) (oc_cocycle_hom l Ω T h k oh ok ohk) P
 

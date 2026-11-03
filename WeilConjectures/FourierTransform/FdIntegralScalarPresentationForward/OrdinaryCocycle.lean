@@ -20,6 +20,7 @@ compatible with tensor balancing (on both sides) and with the multiplication uni
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 4096
 universe u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -46,7 +47,8 @@ theorem pbcTensor_ext (M : pbcModules T R) (N : pbcModules T S)
   haveI : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
     (WeilConjectures.integralCoefficientAbSheafify.{u, 0} T).isRightAdjoint
   haveI := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
-  haveI := AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionRingHasSheafCompose (ProEt.topology T)
+  haveI := AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionRingHasSheafCompose
+    (ProEt.topology T)
   exact RamifiedPullback.TensorProof.tensorSection_ext.{u + 1, u, u + 1} φ (pbcExtend φ)
     (pbcExtensionExistence φ).choose_spec.choose M N f g h
 
@@ -58,7 +60,8 @@ theorem pbcTensor_map {M N : pbcModules T R} (f : M ⟶ N) (U : T.ProEtᵒᵖ)
   haveI : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
     (WeilConjectures.integralCoefficientAbSheafify.{u, 0} T).isRightAdjoint
   haveI := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
-  haveI := AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionRingHasSheafCompose (ProEt.topology T)
+  haveI := AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.sectionRingHasSheafCompose
+    (ProEt.topology T)
   exact RamifiedPullback.TensorProof.tensorSection_map.{u + 1, u, u + 1} φ (pbcExtend φ)
     (pbcExtensionExistence φ).choose_spec.choose
     (fun f ↦ (pbcExtensionExistence φ).choose_spec.choose_spec.choose f) f U s x
@@ -246,7 +249,8 @@ private theorem gunit_tensor
     (one_smul _ x)
 
 theorem Ocomp_eq {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M) :
-    Ocomp l Ω T h k = integralOrdinaryScalarComp l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L)
+    Ocomp l Ω T h k = integralOrdinaryScalarComp l (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteField.{u} l Ω L)
       (pbcFiniteFieldInclusion l Ω h) T (pbcFiniteField.{u} l Ω M)
       (pbcFiniteFieldInclusion l Ω k) ≪≫
     eqToIso (congrArg (fun ι ↦ integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E)
@@ -254,7 +258,8 @@ theorem Ocomp_eq {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k :
 
 theorem Ocomp_app_eq {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M)
     (N : integralTowerModules l (pbcFiniteField.{u} l Ω E) T) :
-    (Ocomp l Ω T h k).hom.app N = (integralOrdinaryScalarComp l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L)
+    (Ocomp l Ω T h k).hom.app N = (integralOrdinaryScalarComp l (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteField.{u} l Ω L)
       (pbcFiniteFieldInclusion l Ω h) T (pbcFiniteField.{u} l Ω M)
       (pbcFiniteFieldInclusion l Ω k) ≪≫
     eqToIso (congrArg (fun ι ↦ integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E)

@@ -17,6 +17,7 @@ representative by the ordinary tensor balancing and the derived counits.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.flexible false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -157,12 +158,13 @@ private theorem pbcRestrictComp_factors (K : CochainComplex (pbcModules T B) ℤ
         ((Functor.mapHomologicalComplexCompIso (pbcRestrictComp φ ψ χ hc) (.up ℤ)).hom.app K) ≫
       (pbcRestrict χ).mapDerivedCategoryFactors.inv.app K := by
   rw [← cancel_mono ((pbcRestrict χ).mapDerivedCategoryFactors.hom.app K)]
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
   dsimp only [pbcDerivedRestrictComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac]
   have hc' := Functor.mapDerivedCategoryCompIso_hom_app_factors (pbcRestrict ψ) (pbcRestrict φ) K
   have hc2 : ((pbcRestrict ψ).mapDerivedCategoryCompIso (pbcRestrict φ)).inv.app
-      (DerivedCategory.Q.obj K) ≫ (pbcRestrict ψ ⋙ pbcRestrict φ).mapDerivedCategoryFactors.hom.app K =
+      (DerivedCategory.Q.obj K) ≫
+        (pbcRestrict ψ ⋙ pbcRestrict φ).mapDerivedCategoryFactors.hom.app K =
       (pbcRestrict φ).mapDerivedCategory.map ((pbcRestrict ψ).mapDerivedCategoryFactors.hom.app K) ≫
         (pbcRestrict φ).mapDerivedCategoryFactors.hom.app
           (((pbcRestrict ψ).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) := by
