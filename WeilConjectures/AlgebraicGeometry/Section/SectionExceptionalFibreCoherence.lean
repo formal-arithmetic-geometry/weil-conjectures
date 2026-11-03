@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothTensorDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleAmbientAdjointLocality
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
