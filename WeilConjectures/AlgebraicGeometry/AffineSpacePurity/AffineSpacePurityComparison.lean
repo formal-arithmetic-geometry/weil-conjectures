@@ -149,6 +149,23 @@ public import WeilConjectures.AlgebraicGeometry.Support.SupportComparisonPullbac
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 public import WeilConjectures.AlgebraicGeometry.AffineLinePurity.AffineLinePurityComparison
 public import WeilConjectures.AlgebraicGeometry.SfAffineChartPresentation.PurityAffineChartBounds
+public import Mathlib.Algebra.CharP.CharAndCard
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
+public import WeilConjectures.AlgebraicGeometry.GeneralFiniteAffineLinePurity.Fixed.GeneralFiniteAffineLinePurityComparison
+public import WeilConjectures.AlgebraicGeometry.IntegralCtfEqualsBc
+public import WeilConjectures.AlgebraicGeometry.Internal.InternalSignedTateTwist
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModuleIntrinsicComparison
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.Coefficient.TransportCoefficients
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportLinePull
+public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportComposition.CondensedCompactSupportCompositionData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedCoefficientUnitConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExceptionalInverseImageCurrent
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.DetSfCompBaseChangeDefs
+public import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
 
 /-! # The ordered affine-space purity comparison
 
@@ -849,3 +866,270 @@ def affineSpacePurityComparison (P : WeilConjectures.PurityFiniteSetting.{u}) (Y
     (comparisonZero P Y K.obj) (comparisonStep P Y aY K Ke hKe eK) d
 
 end AlgebraicGeometry.ProEtale.AffineSpacePurity
+
+namespace AlgebraicGeometry.ProEtale.GeneralFiniteAffineSpacePurity
+
+/-- Ordered iteration, with literal identity at zero.
+Source: ordered Tate powers (blueprint: def-pur-affine-space-comparison). -/
+def action {C : Type v} [Category.{w} C] (F : C ⥤ C) : ℕ → C ⥤ C
+  | 0 => 𝟭 C
+  | d + 1 => action F d ⋙ F
+
+/-- Pull a specified one-factor comparison through an ordered power.
+Source: the source reassociation (blueprint: def-pur-affine-space-comparison). -/
+def actionPullbackIso {C : Type v} [Category.{w} C]
+    {C' : Type v₁} [Category.{w₁} C']
+    (F : C ⥤ C) (G : C' ⥤ C') (H : C ⥤ C')
+    (e : ∀ M : C, H.obj (F.obj M) ≅ G.obj (H.obj M)) (K : C) :
+    (d : ℕ) → H.obj ((action F d).obj K) ≅ (action G d).obj (H.obj K)
+  | 0 => Iso.refl _
+  | d + 1 => e ((action F d).obj K) ≪≫ G.mapIso (actionPullbackIso F G H e K d)
+
+/-- The fixed coefficient derived category.
+Source: current purity conventions (blueprint: def-pur-affine-space-comparison). -/
+abbrev D (T : Scheme.{u}) := P.derived T
+
+/-- The ordered tower, built by adjoining the last coordinate.
+Source: ordered affine tower (blueprint: def-pur-affine-space-comparison). -/
+def tower (Y : Over (Spec (.of P.field.k))) : ℕ → Over (Spec (.of P.field.k))
+  | 0 => Y
+  | d + 1 => GeneralFiniteAffineLinePurity.affineOver P (tower Y d)
+
+instance tower_finite (Y : Over (Spec (.of P.field.k)))
+    [LocallyOfFiniteType Y.hom] (d : ℕ) : LocallyOfFiniteType (tower P Y d).hom := by
+  induction d with
+  | zero => exact inferInstanceAs (LocallyOfFiniteType Y.hom)
+  | succ d ih =>
+    exact inferInstanceAs
+      (LocallyOfFiniteType (GeneralFiniteAffineLinePurity.affineOver P _).hom)
+
+instance tower_compact (Y : Over (Spec (.of P.field.k)))
+    [QuasiCompact Y.hom] (d : ℕ) : QuasiCompact (tower P Y d).hom := by
+  induction d with
+  | zero => exact inferInstanceAs (QuasiCompact Y.hom)
+  | succ d ih =>
+    exact inferInstanceAs (QuasiCompact (GeneralFiniteAffineLinePurity.affineOver P _).hom)
+
+instance tower_separated (Y : Over (Spec (.of P.field.k)))
+    [IsSeparated Y.hom] (d : ℕ) : IsSeparated (tower P Y d).hom := by
+  induction d with
+  | zero => exact inferInstanceAs (IsSeparated Y.hom)
+  | succ d ih =>
+    exact inferInstanceAs (IsSeparated (GeneralFiniteAffineLinePurity.affineOver P _).hom)
+
+/-- The total ordered projection, with its identity normalization at dimension zero.
+Source: p_d and q_d (blueprint: def-pur-affine-space-comparison). -/
+def projection (Y : Over (Spec (.of P.field.k))) :
+    (d : ℕ) → tower P Y d ⟶ Y
+  | 0 => 𝟙 Y
+  | 1 => GeneralFiniteAffineLinePurity.affineMap P Y
+  | d + 2 => GeneralFiniteAffineLinePurity.affineMap P (tower P Y (d + 1)) ≫ projection Y (d + 1)
+
+/-- One twisted pullback factor, distributing its even shift to the Tate line.
+Source: Lq* (-)(1)[2] (blueprint: def-pur-affine-space-comparison). -/
+def lineSource (Y : Over (Spec (.of P.field.k))) :
+    D P Y.left ⥤ D P (GeneralFiniteAffineLinePurity.affineOver P Y).left :=
+  P.pullback (GeneralFiniteAffineLinePurity.affineMap P Y).left ⋙
+    tensorRight (GeneralFiniteAffineLinePurity.nativeLine P _)
+
+/-- The finite tensor-power presentation of Lp_d* K(d)[2d].
+Source: ordered source (blueprint: def-pur-affine-space-comparison). -/
+def orderedSource (Y : Over (Spec (.of P.field.k))) :
+    (d : ℕ) → D P Y.left ⥤ D P (tower P Y d).left
+  | 0 => 𝟭 _
+  | d + 1 => P.pullback (projection P Y (d + 1)).left ⋙
+      action
+        (tensorRight (GeneralFiniteAffineLinePurity.nativeLine P (tower P Y (d + 1)).left)) (d + 1)
+
+/-- The exceptional functor preserves Dctf because it is the recorded Brown restriction.
+Its dimension-zero normalization is literal identity.
+Source: applicability clause (blueprint: def-pur-affine-space-comparison). -/
+def exceptional : (d : ℕ) → P.constructibleFiniteTor Y.left ⥤
+    P.constructibleFiniteTor (tower P Y d).left
+  | 0 => 𝟭 _
+  | d + 1 => (P.exceptionalData (projection P Y (d + 1))).right
+
+/-- The full inclusion into the localizing category, unchanged on objects and maps.
+Source: constructible composition domain (blueprint: def-pur-affine-space-comparison). -/
+def toLocalizing (T : Scheme.{u}) : P.constructibleFiniteTor T ⥤
+    (localizingClosureProEtale P.ring T).FullSubcategory :=
+  ObjectProperty.ιOfLE (fun K hK _Q _ hQ ↦ hQ K hK)
+
+/-- Compact-support composition for the exact lower functors of the recorded Brown data.
+The displayed iso is obtained by restricting the normalized ambient compositor.
+Source: alpha_r (blueprint: def-pur-affine-space-comparison). -/
+def lowerComposition
+    {X T S : Over (Spec (.of P.field.k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom]
+    [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
+    (f : X ⟶ T) (g : T ⟶ S) :
+    (P.exceptionalData f).lower ⋙ (P.exceptionalData g).lower ≅
+      (P.exceptionalData (f ≫ g)).lower := by
+  let a := P.exceptionalData f
+  let b := P.exceptionalData g
+  let c := P.exceptionalData (f ≫ g)
+  let iX := (constantModelBoundedConstructible P.ring X.left ⊓
+    fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K).ι
+  let iT := (constantModelBoundedConstructible P.ring T.left ⊓
+    fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K).ι
+  let iS := (constantModelBoundedConstructible P.ring S.left ⊓
+    fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K).ι
+  let F := P.compactSupport (compactificationOverField f)
+  let G := P.compactSupport (compactificationOverField g)
+  let H := P.compactSupport (compactificationOverField (f ≫ g))
+  let e := (coherence P).comp (SepFinType.homMk f) (SepFinType.homMk g)
+    (compactificationOverField f) (compactificationOverField g)
+    (compactificationOverField (f ≫ g))
+  exact Functor.fullyFaithfulCancelRight iS
+    (Functor.associator a.lower b.lower iS ≪≫
+      Functor.isoWhiskerLeft a.lower (eqToIso b.lower_eq) ≪≫
+      (Functor.associator a.lower iT G).symm ≪≫
+      Functor.isoWhiskerRight (eqToIso a.lower_eq) G ≪≫
+      Functor.associator iX F G ≪≫
+      Functor.isoWhiskerLeft (toLocalizing P X.left) e ≪≫
+      (eqToIso c.lower_eq).symm)
+
+/-- The exceptional compositor is the adjoint conjugate of the fixed alpha_r.
+Source: c_r (blueprint: def-pur-affine-space-comparison). -/
+def exceptionalComposition
+    {X T S : Over (Spec (.of P.field.k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom]
+    [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
+    (f : X ⟶ T) (g : T ⟶ S) :
+    (P.exceptionalData (f ≫ g)).right ≅
+      (P.exceptionalData g).right ⋙ (P.exceptionalData f).right :=
+  conjugateIsoEquiv (P.exceptionalData (f ≫ g)).adjunction
+    ((P.exceptionalData f).adjunction.comp (P.exceptionalData g).adjunction)
+    (lowerComposition P f g)
+
+/-- Root-normalized transport of the shifted Tate line along a map over k.
+The integral coordinates are determined by their projections to the root tower.
+Source: tau and its tensor powers (blueprint: def-pur-affine-space-comparison). -/
+def shiftedLinePullback
+    {X T : Over (Spec (.of P.field.k))} (f : X ⟶ T) :
+    (P.pullback f.left).obj (GeneralFiniteAffineLinePurity.nativeLine P T.left) ≅
+      GeneralFiniteAffineLinePurity.nativeLine P X.left := by
+  letI : ∀ x : X.left, Invertible (P.coefficients.l : X.left.residueField x) :=
+    fun x ↦ (by
+      simpa only [map_natCast] using
+        (PurityTransport.primeUnit P.field P.coefficients.l P.coefficients.different).map
+          (X.hom.residueFieldAlgebraMap x) :
+            IsUnit (P.coefficients.l : X.left.residueField x)).invertible
+  letI : ∀ x : T.left, Invertible (P.coefficients.l : T.left.residueField x) :=
+    fun x ↦ (by
+      simpa only [map_natCast] using
+        (PurityTransport.primeUnit P.field P.coefficients.l P.coefficients.different).map
+          (T.hom.residueFieldAlgebraMap x) :
+            IsUnit (P.coefficients.l : T.left.residueField x)).invertible
+  let e (Z : Scheme.{u}) : GeneralFiniteAffineLinePurity.nativeLine P Z ≅
+      P.coefficient.derivedLine P.coefficients.l Z 1 :=
+    (shiftFunctor _ (2 : ℤ)).mapIso
+      ((DerivedCategory.singleFunctor _ 0).mapIso
+        (GeneralFiniteAffineLinePurity.signedFirstIso P Z ≪≫
+          (λ_ (P.firstTwist Z)).symm))
+  let c := (linePullCoordinates_nonempty P.coefficients.l P.coefficient f.left).some
+  exact (P.pullback f.left).mapIso (e T.left) ≪≫
+    c.derived P.coefficients.l 1 ≪≫ (e X.left).symm
+
+/-- The four source arrows in ordered tensor-power coordinates. At zero the
+normalized source is literally the one-line source. At a positive stage use the
+pullback compositor, pull the ordered tensor power back factor by factor, and
+leave the last Tate factor on the right. Every factor is the canonical tensorator.
+Source: I_r (blueprint: def-pur-affine-space-comparison). -/
+def sourceReassociation (K : D P Y.left) : (d : ℕ) →
+    (orderedSource P Y (d + 1)).obj K ≅
+      (lineSource P (tower P Y d)).obj ((orderedSource P Y d).obj K)
+  | 0 => Iso.refl _
+  | d + 1 =>
+    let f := GeneralFiniteAffineLinePurity.affineMap P (tower P Y (d + 1))
+    let g := projection P Y (d + 1)
+    let W := GeneralFiniteAffineLinePurity.nativeLine P (tower P Y (d + 1)).left
+    let W' := GeneralFiniteAffineLinePurity.nativeLine P (tower P Y (d + 2)).left
+    let F := tensorRight W
+    let G := tensorRight W'
+    let H := P.pullback f.left
+    tensorIso
+      ((action G (d + 1)).mapIso
+        ((CondensedRing.leftDerivedUpperStarComp P.ring f.left g.left).app K)
+        ≪≫ (actionPullbackIso F G H
+          (fun M ↦ (Functor.Monoidal.μIso H M W).symm ≪≫
+            tensorIso (Iso.refl _) (shiftedLinePullback P f))
+          ((P.pullback g.left).obj K) (d + 1)).symm)
+      (Iso.refl W')
+
+/-- The inverse exceptional compositor, normalized to identity at the first stage.
+At a positive stage this is the inverse conjugate of alpha_r, evaluated at K.
+Source: c_r inverse (blueprint: def-pur-affine-space-comparison). -/
+def exceptionalComposite (K : P.constructibleFiniteTor Y.left) : (d : ℕ) →
+    ((P.exceptionalData (GeneralFiniteAffineLinePurity.affineMap P (tower P Y d))).right.obj
+      ((exceptional P Y d).obj K)).obj ⟶ ((exceptional P Y (d + 1)).obj K).obj
+  | 0 => 𝟙 _
+  | d + 1 => ((exceptionalComposition P
+      (GeneralFiniteAffineLinePurity.affineMap P (tower P Y (d + 1)))
+      (projection P Y (d + 1))).inv.app K).hom
+
+/-- The comparison type on the actual current coefficient module sheaves.
+Source: gamma display (blueprint: def-pur-affine-space-comparison). -/
+abbrev ComparisonHom (K : P.constructibleFiniteTor Y.left) (d : ℕ) :=
+  (orderedSource P Y d).obj K.obj ⟶ ((exceptional P Y d).obj K).obj
+
+/-- The ordered four-arrow successor. The exceptional input is already an object
+of the recorded constructible finite-Tor category, so no origin witness is added.
+Source: recursive display (blueprint: def-pur-affine-space-comparison). -/
+def comparisonStep (K : P.constructibleFiniteTor Y.left) (d : ℕ)
+    (h : ComparisonHom P Y K d) : ComparisonHom P Y K (d + 1) :=
+  (sourceReassociation P Y K.obj d).hom ≫
+    (lineSource P (tower P Y d)).map h ≫
+    lineComparison P (tower P Y d) A n hA hP ((exceptional P Y d).obj K) ≫
+    exceptionalComposite P Y K d
+
+/-- The literal dimension-zero identity.
+Source: gamma_0 = id (blueprint: def-pur-affine-space-comparison). -/
+def comparisonZero (K : P.constructibleFiniteTor Y.left) : ComparisonHom P Y K 0 :=
+  𝟙 K.obj
+
+/-- The current-coefficient ordered affine-space purity comparison. This is the
+specified recursion, not a choice of an isomorphism. The source is the ordered
+finite tensor-power presentation of Lp_d* K(d)[2d], with the even shift carried by
+each Tate factor. The target is the recorded Brown exceptional functor, normalized
+at dimension zero. Every current Dctf input over the finite primary coefficient
+presentation is admitted; no auxiliary etale-origin or comparison data is required.
+Source: ordered recursive composite (blueprint: def-pur-affine-space-comparison). -/
+def intrinsicAffineSpacePurityComparison (K : P.constructibleFiniteTor Y.left) :
+    (d : ℕ) → ComparisonHom P Y K d
+  | 0 => comparisonZero P Y K
+  | d + 1 => comparisonStep P Y A n hA hP K d
+      (intrinsicAffineSpacePurityComparison K d)
+
+/-- The dimension-zero normalization is definitional.
+Source: gamma_0 = id (blueprint: def-pur-affine-space-comparison).
+Proof: unfold the zero branch of the recursion. -/
+theorem intrinsicAffineSpacePurityComparison_zero (K : P.constructibleFiniteTor Y.left) :
+    intrinsicAffineSpacePurityComparison P Y A n hA hP K 0 = 𝟙 K.obj := rfl
+
+/-- The specified successor is definitional, in precisely the blueprint's arrow order.
+Source: recursive display (blueprint: def-pur-affine-space-comparison).
+Proof: unfold the successor branch of the recursion. -/
+theorem intrinsicAffineSpacePurityComparison_succ (K : P.constructibleFiniteTor Y.left)
+    (d : ℕ) : intrinsicAffineSpacePurityComparison P Y A n hA hP K (d + 1) =
+      comparisonStep P Y A n hA hP K d
+        (intrinsicAffineSpacePurityComparison P Y A n hA hP K d) := rfl
+
+/-- At rank one the ordered recursion is the recorded line comparison in the
+same tensor-factor coordinates.
+Source: first successor of the recursive display
+(blueprint: def-pur-affine-space-comparison).
+Proof: the source and exceptional normalizations are identities; functors preserve
+identity maps, and identity composition cancels. -/
+theorem intrinsicAffineSpacePurityComparison_one (K : P.constructibleFiniteTor Y.left) :
+    intrinsicAffineSpacePurityComparison P Y A n hA hP K 1 =
+      lineComparison P Y A n hA hP K := by
+  change (𝟙 _) ≫ (lineSource P Y).map (𝟙 K.obj) ≫
+    lineComparison P Y A n hA hP K ≫ (𝟙 _) = _
+  rw [Category.id_comp, Category.comp_id]
+  exact (congrArg (fun f ↦ f ≫ lineComparison P Y A n hA hP K)
+    ((lineSource P Y).map_id K.obj)).trans (Category.id_comp _)
+
+end AlgebraicGeometry.ProEtale.GeneralFiniteAffineSpacePurity

@@ -185,6 +185,15 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstruc
 import WeilConjectures.SmoothPurity.Supporting.ProjectionFiniteReduction
 import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalOriginCompactSupportComposition
+public import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExchangeProjection
+public import WeilConjectures.SixFunctors.ScalarOpenCompositorCoherence
+
+public import WeilConjectures.SixFunctors.Supporting.FieldTorAmplitude
+import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.ScalarPullbackMateInverseNormalized
 
 /-! # Compact-support projection formula at every coefficient stage
 
@@ -351,7 +360,10 @@ def tensorPair {X : Scheme.{u}} (g : X ⟶ X)
     (K L : CategoryTheory.Endofunctor.IsoAlgebra (upperStar Λ g).mapDerivedCategory) :
     CategoryTheory.Endofunctor.IsoAlgebra (upperStar Λ g).mapDerivedCategory :=
   CategoryTheory.Endofunctor.IsoAlgebra.mk (K.carrier ⊗ L.carrier)
-    (WeilConjectures.CondensedWeilTensor.frobenius Λ g K L)
+    (let ε := leftDerivedUpperStarIsoMapDerivedCategory Λ g
+     (ε.app (K.carrier ⊗ L.carrier)).symm ≪≫
+       ((leftDerivedUpperStarTensorIso Λ g).app K.carrier).app L.carrier ≪≫
+         tensorIso (ε.app K.carrier) (ε.app L.carrier) ≪≫ tensorIso K.str L.str)
 
 /-- The existing geometric fibre bundled as a separated finite-type object.
 Its three structure properties are the existing Mathlib base-change instances for
@@ -448,6 +460,122 @@ def IsCoefficientStage (ell : ℕ) [Fact ell.Prime] (A : ScalarSixRing.{u}) : Pr
     Nonempty (Mon.mk A.X ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
   Nonempty (Mon.mk A.X ≅ Mon.mk (Profinite.padicAlgClRingObj ell))
 
+private theorem finite_source_model (A : Type) [CommRing A] [TopologicalSpace A]
+    [IsTopologicalRing A] [DiscreteTopology A] [Finite A]
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj A) X))
+    (hM : IsConstructibleModuleObject
+      (condensedRingObj (Profinite.continuousMapRingObj A) X) M) :
+    IsConstantModelConstructible (Profinite.continuousMapRingObj A) X M := by
+  obtain ⟨eR, heR⟩ := Profinite.finiteDiscreteCondensedRing_constant.{u} A
+  let := heR
+  let E := finiteDiscreteCoefficientEquivalence A eR
+    (CategoryTheory.internalToModule (ULift.{u + 1} A)) rfl X
+  have hF := finiteDiscreteCoefficient_constructible A eR
+    (CategoryTheory.internalToModule (ULift.{u + 1} A)) rfl X M hM
+  have h := (encoding_constructible_iff A X eR (E.inverse.obj M)).mp hF
+  exact constructible_iso (E.counitIso.app M) h
+
+private theorem admissible_source_model
+    (ell : ℕ) [Fact ell.Prime] (X : Scheme.{u}) [IsNoetherian X]
+    (A : ScalarSixRing.{u}) (hA : IsLocalizingAdmissibleCoefficient ell A.X)
+    (K : BoundedConstructible (condensedRingObj A.X X)) :
+    constantModelBoundedConstructible A.X X K.obj := by
+  have hmod : ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj A.X X),
+      IsConstructibleModuleObject (condensedRingObj A.X X) M ↔
+        IsConstantModelConstructible A.X X M := by
+    have transport (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        [MonObj B] [IsCommMonObj B] (e : Mon.mk A.X ≅ Mon.mk B)
+        (hB : ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj B X),
+          IsConstructibleModuleObject (condensedRingObj B X) M ↔
+            IsConstantModelConstructible B X M) :=
+      comparison_transport e.symm X hB
+    have adic (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        [MonObj B] [IsCommMonObj B] (e : Mon.mk A.X ≅ Mon.mk B)
+        (hB : IsEllAdicCoefficient ell B inferInstance) :=
+      transport B e (adicConstructibilityPredicateComparison ell X B hB).1
+    rcases hA with hA | hA | hA | hA | hA | hA
+    · obtain ⟨B, _, _, _, _, hfin, _, ⟨e⟩⟩ := hA
+      let := hfin
+      apply transport _ e
+      intro M
+      refine ⟨finite_source_model B X M, ?_⟩
+      intro hM
+      have hstrat : IsFiniteConstantStratified (Profinite.continuousMapRingObj B) X M := by
+        simpa only [IsConstantModelConstructible,
+          if_pos (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance,
+            inferInstance⟩)] using hM
+      exact modelStratifiedConstructible _ X M hstrat
+    · obtain ⟨e⟩ := hA
+      obtain ⟨_, _, _, _, _, _, _, _, _, zIso, _⟩ :=
+        Profinite.base_coefficient_condensed_identification.{u} ell
+      exact adic _ (e ≪≫ zIso) (.integral (⊥ : IntermediateField ℚ_[ell] (PadicAlgCl ell)))
+    · exact adic _ hA.some (.continuous ℚ_[ell])
+    · obtain ⟨E, ⟨e⟩⟩ := hA
+      exact adic _ e (.continuous E)
+    · obtain ⟨E, ⟨e⟩⟩ := hA
+      exact adic _ e (.integral E)
+    · exact adic _ hA.some .algebraicClosure
+  exact ⟨K.property.1, fun n ↦ (hmod _).mp (K.property.2 n)⟩
+
+private theorem higher_source_ctf
+    (ell : ℕ) [Fact ell.Prime] (Z : Scheme.{u}) [IsNoetherian Z]
+    (A : ScalarSixRing.{u})
+    (hA : (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      A = ⟨Profinite.padicIntegersRingObj ell E⟩) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        A = ⟨Profinite.continuousMapRingObj E⟩) ∨ A = ⟨Profinite.padicAlgClRingObj ell⟩)
+    (K : BoundedConstructible (condensedRingObj A.X Z)) :
+    constantModelBoundedConstructible A.X Z K.obj ∧
+      _root_.DerivedCategory.finiteTorAmplitude _ K.obj := by
+  rcases hA with hA | hA | rfl
+  · obtain ⟨E, rfl⟩ := hA
+    have hc := (adicConstructibilityPredicateComparison ell Z
+      (Profinite.padicIntegersRingObj ell E) (.integral E)).2
+    have hK : constantModelBoundedConstructible _ Z K.obj :=
+      (congrFun hc K.obj).mp K.property
+    have heq := (integral_ctf_equals_bc ell Z
+      (Mon.mk (Profinite.padicIntegersRingObj ell E))
+      (.inr (.inr (.inl ⟨E, .inl ⟨Iso.refl _⟩⟩)))).2.2.2
+    exact (congrFun heq K.obj).mpr hK
+  · obtain ⟨E, rfl⟩ := hA
+    have hc := (adicConstructibilityPredicateComparison ell Z
+      (Profinite.continuousMapRingObj E) (.continuous E)).2
+    refine ⟨(congrFun hc K.obj).mp K.property, ?_⟩
+    have h := (WeilConjectures.field_tor_amplitude ell Z
+      (Mon.mk (Profinite.continuousMapRingObj E)) (.inl ⟨E, rfl⟩)).2.2
+    exact ((congrFun h K.obj).mpr K.property).2
+  · have hc := (adicConstructibilityPredicateComparison ell Z
+        (Profinite.padicAlgClRingObj ell) .algebraicClosure).2
+    refine ⟨(congrFun hc K.obj).mp K.property, ?_⟩
+    have h := (WeilConjectures.field_tor_amplitude ell Z
+      (Mon.mk (Profinite.padicAlgClRingObj ell)) (.inr rfl)).2.2
+    exact ((congrFun h K.obj).mpr K.property).2
+
+private theorem higher_source_tensor
+    (ell : ℕ) [Fact ell.Prime] (Z : Scheme.{u}) [IsNoetherian Z]
+    (A : ScalarSixRing.{u})
+    (hA : (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      A = ⟨Profinite.padicIntegersRingObj ell E⟩) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        A = ⟨Profinite.continuousMapRingObj E⟩) ∨ A = ⟨Profinite.padicAlgClRingObj ell⟩)
+    (K L : BoundedConstructible (condensedRingObj A.X Z)) :
+    boundedConstructible (condensedRingObj A.X Z) (K.obj ⊗ L.obj) := by
+  rcases hA with hA | hA | rfl
+  · obtain ⟨E, rfl⟩ := hA
+    exact boundedConstructible_tensorObj
+      (PadicIntegersRingObj.lisseHypotheses ell E).toLisseTensorHypotheses
+      K.property L.property
+  · obtain ⟨E, rfl⟩ := hA
+    exact boundedConstructible_tensorObj
+      (tensorHypotheses_continuousMapRingObj ell E).lisseTensorHypotheses
+      K.property L.property
+  · exact boundedConstructible_tensorObj
+      (tensorHypotheses_padicAlgClRingObj ell).lisseTensorHypotheses K.property L.property
+
 end AlgebraicGeometry.ProEtale.CondensedRing.AllCoefficientProjection
 
 namespace AlgebraicGeometry.Etale.AllCoefficientProjection
@@ -504,7 +632,24 @@ theorem finite
     (∀ [IsProper f],
       type_of% (WeilConjectures.sixFunctorProjection_proper (Padic.coefficientExtensionRing ell E
         n) f K L)) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · constructor
+    · exact finiteCompactProjection_etale _ c K L
+    · intro Kp Lp wx wy hx hy
+      have hKb : _root_.DerivedCategory.TStructure.t.bounded K := by
+        obtain ⟨a, b, _, h⟩ := hK.2
+        exact ⟨⟨a, (_root_.DerivedCategory.isGE_iff K a).2
+          (fun q hq ↦ h q (.inl hq))⟩,
+          ⟨b, (_root_.DerivedCategory.isLE_iff K b).2 (fun q hq ↦ h q (.inr hq))⟩⟩
+      exact finiteCompactProjection_proEtale _ c K L hKb hTor Kp Lp wx wy hx hy
+  · intro K' L' a b
+    exact WeilConjectures.sixFunctorProjection_naturality _ c a b
+  · intro d
+    exact WeilConjectures.sixFunctorProjection_compactification _ c d K L
+  · intro hKTor J hJ
+    exact WeilConjectures.sixFunctorProjection_reduction_finite _ c J K L
+  · intro
+    exact WeilConjectures.sixFunctorProjection_proper _ f K L
 
 /-- The finite canonical pentagon in the finite-type geometric setting.
 The local instances below are the existing Mathlib consequences of the structure maps,
@@ -603,7 +748,72 @@ theorem finiteComposition (_hell : ell ≠ D₀.p) {X Y Z T : SepFinType D₀.k}
     (type_of% (WeilConjectures.sixFunctorProjection_composition
       (Padic.coefficientExtensionRing ell E n) f.hom.left g.hom.left d e K L)) ∧
     finitePentagonAssertions (Padic.coefficientExtensionRing ell E n) f g h := by
-  sorry
+  constructor
+  · exact WeilConjectures.sixFunctorProjection_composition _ f.hom.left g.hom.left d e K L
+  · let : IsLocallyNoetherian X.obj.left :=
+      LocallyOfFiniteType.isLocallyNoetherian X.obj.hom
+    let : CompactSpace X.obj.left :=
+      QuasiCompact.compactSpace_of_compactSpace X.obj.hom
+    let : IsNoetherian X.obj.left :=
+      { toIsLocallyNoetherian := inferInstance, toCompactSpace := inferInstance }
+    let : QuasiSeparatedSpace X.obj.left :=
+      quasiSeparatedSpace_of_quasiSeparated X.obj.hom
+    let : IsLocallyNoetherian Y.obj.left :=
+      LocallyOfFiniteType.isLocallyNoetherian Y.obj.hom
+    let : CompactSpace Y.obj.left :=
+      QuasiCompact.compactSpace_of_compactSpace Y.obj.hom
+    let : IsNoetherian Y.obj.left :=
+      { toIsLocallyNoetherian := inferInstance, toCompactSpace := inferInstance }
+    let : QuasiSeparatedSpace Y.obj.left :=
+      quasiSeparatedSpace_of_quasiSeparated Y.obj.hom
+    let : IsLocallyNoetherian Z.obj.left :=
+      LocallyOfFiniteType.isLocallyNoetherian Z.obj.hom
+    let : CompactSpace Z.obj.left :=
+      QuasiCompact.compactSpace_of_compactSpace Z.obj.hom
+    let : IsNoetherian Z.obj.left :=
+      { toIsLocallyNoetherian := inferInstance, toCompactSpace := inferInstance }
+    let : QuasiSeparatedSpace Z.obj.left :=
+      quasiSeparatedSpace_of_quasiSeparated Z.obj.hom
+    let : IsLocallyNoetherian T.obj.left :=
+      LocallyOfFiniteType.isLocallyNoetherian T.obj.hom
+    let : CompactSpace T.obj.left :=
+      QuasiCompact.compactSpace_of_compactSpace T.obj.hom
+    let : IsNoetherian T.obj.left :=
+      { toIsLocallyNoetherian := inferInstance, toCompactSpace := inferInstance }
+    let : QuasiSeparatedSpace T.obj.left :=
+      quasiSeparatedSpace_of_quasiSeparated T.obj.hom
+    let : IsSeparated (f.hom.left ≫ Y.obj.hom) :=
+      (Over.w f.hom).symm ▸ (inferInstance : IsSeparated X.obj.hom)
+    let : LocallyOfFiniteType (f.hom.left ≫ Y.obj.hom) :=
+      (Over.w f.hom).symm ▸ (inferInstance : LocallyOfFiniteType X.obj.hom)
+    let : QuasiCompact (f.hom.left ≫ Y.obj.hom) :=
+      (Over.w f.hom).symm ▸ (inferInstance : QuasiCompact X.obj.hom)
+    let : IsSeparated f.hom.left := IsSeparated.of_comp f.hom.left Y.obj.hom
+    let : LocallyOfFiniteType f.hom.left :=
+      locallyOfFiniteType_of_comp f.hom.left Y.obj.hom
+    let : QuasiCompact f.hom.left := QuasiCompact.of_comp f.hom.left Y.obj.hom
+    let : IsSeparated (g.hom.left ≫ Z.obj.hom) :=
+      (Over.w g.hom).symm ▸ (inferInstance : IsSeparated Y.obj.hom)
+    let : LocallyOfFiniteType (g.hom.left ≫ Z.obj.hom) :=
+      (Over.w g.hom).symm ▸ (inferInstance : LocallyOfFiniteType Y.obj.hom)
+    let : QuasiCompact (g.hom.left ≫ Z.obj.hom) :=
+      (Over.w g.hom).symm ▸ (inferInstance : QuasiCompact Y.obj.hom)
+    let : IsSeparated g.hom.left := IsSeparated.of_comp g.hom.left Z.obj.hom
+    let : LocallyOfFiniteType g.hom.left :=
+      locallyOfFiniteType_of_comp g.hom.left Z.obj.hom
+    let : QuasiCompact g.hom.left := QuasiCompact.of_comp g.hom.left Z.obj.hom
+    let : IsSeparated (h.hom.left ≫ T.obj.hom) :=
+      (Over.w h.hom).symm ▸ (inferInstance : IsSeparated Z.obj.hom)
+    let : LocallyOfFiniteType (h.hom.left ≫ T.obj.hom) :=
+      (Over.w h.hom).symm ▸ (inferInstance : LocallyOfFiniteType Z.obj.hom)
+    let : QuasiCompact (h.hom.left ≫ T.obj.hom) :=
+      (Over.w h.hom).symm ▸ (inferInstance : QuasiCompact Z.obj.hom)
+    let : IsSeparated h.hom.left := IsSeparated.of_comp h.hom.left T.obj.hom
+    let : LocallyOfFiniteType h.hom.left :=
+      locallyOfFiniteType_of_comp h.hom.left T.obj.hom
+    let : QuasiCompact h.hom.left := QuasiCompact.of_comp h.hom.left T.obj.hom
+    unfold finitePentagonAssertions
+    exact WeilConjectures.sixFunctorProjection_pentagon _ f.hom.left g.hom.left h.hom.left
 
 end AlgebraicGeometry.Etale.AllCoefficientProjection
 
@@ -638,6 +848,10 @@ theorem finite (D₀ : WeilConjectures.FiniteFieldDatum.{u})
       (ModuleCat.{u + 1} (Padic.coefficientExtensionRing ell E n)) Y.obj.left a b L) :
     IsIso (((projectionMapOfCompactification
       (ModuleCat.{u + 1} (Padic.coefficientExtensionRing ell E n)) c).app K).app L) := by
-  sorry
+  have hK := DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic _hK
+  have hL := DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic _hL
+  have h := hasProjectionFormulaOfCompactification_of_boundedConstructible _ c hK ⟨hL, _hTor⟩
+  unfold HasProjectionFormulaOfCompactification at h
+  exact h
 
 end AlgebraicGeometry.ProEtale.AllCoefficientProjection
