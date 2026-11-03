@@ -185,6 +185,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Exc
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Rational.RationalExceptionalInverseImageExistence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import Mathlib.CategoryTheory.Adjunction.Restrict
+public import WeilConjectures.ProperBaseChange.CondensedConstructibleSerre
 
 /-! # Cohomological boundedness of the localizing exceptional object
 (blueprint: lem-sfb-adic-localizing-exceptional-bounded)
@@ -800,6 +801,28 @@ private def ExceptionalKey : Prop :=
         (constantModelBoundedConstructible Λ Z.left ⊓
           _root_.DerivedCategory.finiteTorAmplitude _) (H.obj N).obj
 
+/-- An ell-adic coefficient is localizing-admissible. -/
+private theorem ellAdic_admissible (hc : IsEllAdicCoefficient ℓ Λ inferInstance) :
+    IsLocalizingAdmissibleCoefficient ℓ Λ := by
+  cases hc with
+  | continuous E =>
+    obtain ⟨F, he⟩ := continuous_coefficient_iso.{u} ℓ E
+    exact Or.inr (Or.inr (Or.inr (Or.inl ⟨F, he⟩)))
+  | integral E =>
+    obtain ⟨F, he⟩ := integral_coefficient_iso.{u} ℓ E
+    exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨F, he⟩))))
+  | algebraicClosure => exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
+
+/-- The data for every ell-adic coefficient, from the general existence theorem. -/
+private theorem exceptionalKey_general
+    (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k)
+    (hc : IsEllAdicCoefficient ℓ Λ inferInstance) :
+    ExceptionalKey Λ g := by
+  obtain ⟨_, _, _, _, h, _, _, hex⟩ := exceptionalInverseImage_exists (hcd := hcd) Λ ℓ k g
+    (ellAdic_admissible Λ ℓ hc)
+  obtain ⟨_, _, _, _, _, hcomp, ⟨H, _, _, ⟨adjH⟩, hH⟩, _⟩ := hex
+  exact ⟨h, hcomp, H, ⟨adjH⟩, hH⟩
+
 omit [IsProper (Over.Hom.left g)] in
 /-- The data for `E` and `Q̄_ℓ`, from Brown representability and the rational restriction
 theorem alone (blueprint: sk-thm-restriction). -/
@@ -932,6 +955,27 @@ private theorem isBounded_of_key (hkey : ExceptionalKey Λ g)
   let e' := (boundedConstructibleLocalizingClosure Λ Z.left).ι.mapIso
     (e.app ((boundedConstructibleToLocalizing Λ Y.left).obj K))
   exact (hb i hi).of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e'.symm)
+
+/-- The supplied localizing right adjoint has finite cohomological amplitude on a bounded
+constructible input.
+
+Source: blueprint `sk-thm-existence` (4), `det-existence-restriction.proof.md`, Part (2).
+Proof: use the finite affine factorization of the proper map and the boundedness part of
+the rational restriction theorem, or its compatible integral torsion-level analogue.  A
+finite affine cover gives a common pair of cohomological bounds; uniqueness of right
+adjoints transports these bounds from the geometric construction to the supplied `G`.
+(blueprint: lem-sfb-adic-localizing-exceptional-bounded)
+-/
+theorem ellAdic_localizing_rightAdjoint_obj_isBounded
+    (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k)
+    (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
+      (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory)
+    (adj : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G)
+    (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
+    ∃ a b : ℤ, ∀ i : ℤ, (i < a ∨ b < i) →
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj
+        ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) :=
+  isBounded_of_key Λ ℓ g hΛ (exceptionalKey_general (hcd := hcd) Λ ℓ g hΛ) G adj K
 
 /-- The bound of `ellAdic_localizing_rightAdjoint_obj_isBounded` for the coefficients `E`
 and `Q̄_ℓ`, through the rational restriction theorem only.
