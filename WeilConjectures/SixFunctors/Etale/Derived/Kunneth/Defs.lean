@@ -8,6 +8,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 
 
 /-!
