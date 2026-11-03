@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Complete.CompleteProperOpenGamma
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.CategoryTheory.Adjunction.ProperOpenTransport
+public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
+public import WeilConjectures.AlgebraicGeometry.StrictTower.ScalarRestrictionOpenSupport
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
+import all WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
+import all WeilConjectures.AlgebraicGeometry.StrictTower.ScalarRestrictionOpenSupport
+import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenSlicePresentation
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 
 /-!
@@ -27,7 +32,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 
-universe t
+universe t u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
@@ -93,6 +98,108 @@ theorem Functor.map_comp_eq_of_comp {C D : Type*} [Category C] [Category D] (F :
   simp
 
 end CategoryTheory
+
+namespace CategoryTheory.ProperOpenTransport
+
+/-- The open comparison is invertible when both open units are invertible and the target
+lies in the essential image of the second open extension. -/
+theorem openComparison_isIso_of_mem_essImage {U X U₁ X₁ : Type*} [Category U] [Category X]
+    [Category U₁] [Category X₁] {Jj : U ⥤ X} {Pj : X ⥤ U} (adjJ : Jj ⊣ Pj)
+    {Jj₁ : U₁ ⥤ X₁} {Pj₁ : X₁ ⥤ U₁} (adjJ₁ : Jj₁ ⊣ Pj₁) {ΦU : U ⥤ U₁} {ΦX : X ⥤ X₁}
+    (φ : Pj ⋙ ΦU ≅ ΦX ⋙ Pj₁) [IsIso adjJ.unit] [IsIso adjJ₁.unit]
+    (h : ∀ M, Jj₁.essImage (ΦX.obj (Jj.obj M))) :
+    IsIso (openComparison adjJ adjJ₁ φ) := by
+  have ff := adjJ₁.fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  have h1 := unit_openComparison adjJ adjJ₁ φ M
+  have : IsIso (Pj₁.map ((openComparison adjJ adjJ₁ φ).app M)) := by
+    have : IsIso (adjJ₁.unit.app (ΦU.obj M) ≫
+        Pj₁.map ((openComparison adjJ adjJ₁ φ).app M)) := by
+      rw [← h1]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (adjJ₁.unit.app (ΦU.obj M)) _
+  have hc1 : IsIso (adjJ₁.counit.app (Jj₁.obj (ΦU.obj M))) :=
+    adjJ₁.isIso_counit_app_iff_mem_essImage.mpr (Jj₁.obj_mem_essImage _)
+  have hc2 : IsIso (adjJ₁.counit.app (ΦX.obj (Jj.obj M))) :=
+    adjJ₁.isIso_counit_app_iff_mem_essImage.mpr (h M)
+  have hn := adjJ₁.counit.naturality ((openComparison adjJ adjJ₁ φ).app M)
+  dsimp only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] at hn
+  have : IsIso (adjJ₁.counit.app (Jj₁.obj (ΦU.obj M)) ≫
+      (openComparison adjJ adjJ₁ φ).app M) := by
+    rw [← hn]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (adjJ₁.counit.app (Jj₁.obj (ΦU.obj M))) _
+
+end CategoryTheory.ProperOpenTransport
+
+namespace AlgebraicGeometry.ProEtale.StrictTower
+
+set_option backward.defeqAttrib.useBackward true
+
+/-- Restricting the action of a ring extension to constant coefficients preserves
+open support. Source: Stacks 03DI (blueprint: thm-cbc-complete-proetale). -/
+theorem restrictScalars_openExtension_counit_isIso
+    {B : Type (u + 1)} [CommRing B] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    (RX : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (RU : Sheaf (Scheme.ProEt.topology U) CommRingCat.{u + 1})
+    (c : (Scheme.proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj RX ≅ RU)
+    (a : coefficients B X ⟶ RX) (M : Scheme.proEtaleRingModules U RU) :
+    IsIso ((moduleJAdj.{u} B j).counit.app
+      ((Scheme.proEtaleRingRestrictScalars a).obj
+        ((Scheme.proEtaleRingOpenExtension j RX RU c).obj M))) := by
+  obtain ⟨eA, ⟨hA⟩⟩ := Scheme.proEtaleOpen_slicePresentation j RX RU c
+  obtain ⟨eB, ⟨hB⟩⟩ := Scheme.proEtaleOpen_slicePresentation j
+    (coefficients B X) (coefficients B U) (constantRingIso B j)
+  let RB := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients B X)
+  let RA := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX
+  let ar : RB ⟶ RA := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map a
+  let W := Scheme.ProEt.mk j
+  have : IsOpenImmersion W.hom := inferInstanceAs (IsOpenImmersion j)
+  let N := (SheafOfModules.restrictScalars
+    (((Scheme.ProEt.topology X).overPullback RingCat W).map ar)).obj (eA.functor.obj M)
+  have : IsIso (SheafOfModules.localizedModuleAdjunctionIndependent
+      (coefficients B X) W).unit := localizedOpen_unit_isIso W (coefficients B X)
+  let ff := (SheafOfModules.localizedModuleAdjunctionIndependent
+    (coefficients B X) W).fullyFaithfulLOfIsIsoUnit
+  let ffB := ((Functor.FullyFaithful.ofFullyFaithful eB.functor).comp ff).ofIso hB.symm
+  have : (moduleJ B j).Full := ffB.full
+  have : (moduleJ B j).Faithful := ffB.faithful
+  let q := (PresheafOfModules.sheafification.{u + 1} (𝟙 RB.obj)).mapIso
+    (scalarExtensionPresheafIso ar W (eA.functor.obj M)) ≪≫
+      scalarSheafificationIso ar
+        (SheafOfModules.extensionByZeroPresheafObj.{u + 1} RA W (eA.functor.obj M))
+  let t : (Scheme.proEtaleRingRestrictScalars a).obj
+      ((Scheme.proEtaleRingOpenExtension j RX RU c).obj M) ≅
+      (moduleJ B j).obj (eB.inverse.obj N) :=
+    (Scheme.proEtaleRingRestrictScalars a).mapIso (hA.app M) ≪≫ q.symm ≪≫
+      (SheafOfModules.localizedModuleExtension (coefficients B X) W).mapIso
+        (eB.counitIso.app N).symm ≪≫ (hB.app (eB.inverse.obj N)).symm
+  exact (moduleJAdj B j).isIso_counit_app_of_iso t
+
+
+/-- Open extension of constant-coefficient modules has invertible unit. -/
+theorem moduleJAdj_unit_isIso {B : Type (u + 1)} [CommRing B] {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] : IsIso (moduleJAdj.{u} B j).unit := by
+  obtain ⟨eB, ⟨hB⟩⟩ := Scheme.proEtaleOpen_slicePresentation j
+    (coefficients B X) (coefficients B U) (constantRingIso B j)
+  let W := Scheme.ProEt.mk j
+  have : IsOpenImmersion W.hom := inferInstanceAs (IsOpenImmersion j)
+  have : IsIso (SheafOfModules.localizedModuleAdjunctionIndependent
+      (coefficients B X) W).unit := localizedOpen_unit_isIso W (coefficients B X)
+  let ff := (SheafOfModules.localizedModuleAdjunctionIndependent
+    (coefficients B X) W).fullyFaithfulLOfIsIsoUnit
+  let ffB := ((Functor.FullyFaithful.ofFullyFaithful eB.functor).comp ff).ofIso hB.symm
+  have : (moduleJ B j).Full := ffB.full
+  have : (moduleJ B j).Faithful := ffB.faithful
+  infer_instance
+
+end AlgebraicGeometry.ProEtale.StrictTower
 
 namespace AlgebraicGeometry.Scheme
 
@@ -285,12 +392,52 @@ theorem cbcStrictPush_isIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
   exact mateEquiv_isIso_of_paste (cbcPullPushAdjunction d f) (d.towerAdjunction f)
     (ProEtale.StrictTower.adj A f) (d.reductionTowerPullbackIso f) (exchangeResPull d f)
 
+/-- Restriction to constant coefficients commutes with ordinary open extension.
+Source: Stacks 03DI (blueprint: thm-cbc-complete-proetale). -/
+theorem exchangeOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
+    IsIso (ProperOpenTransport.openComparison (cbcEndpointOpenAdj d j)
+      (ProEtale.StrictTower.moduleJAdj A j) (exchangeOrdinaryResPull d j)) := by
+  obtain ⟨hfull, hfaith⟩ := cbcEndpointOpen_fullFaithful d j
+  have : IsIso (cbcEndpointOpenAdj d j).unit := inferInstance
+  have := ProEtale.StrictTower.moduleJAdj_unit_isIso (B := A) j
+  refine ProperOpenTransport.openComparison_isIso_of_mem_essImage _ _ _ fun M ↦ ?_
+  have ff := (ProEtale.StrictTower.moduleJAdj A j).fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  exact (ProEtale.StrictTower.moduleJAdj A j).isIso_counit_app_iff_mem_essImage.mp
+    (ProEtale.StrictTower.restrictScalars_openExtension_counit_isIso j _ _
+      (d.integralRingIso j) (exchangeScalar d X) M)
+
+/-- Restriction to constant coefficients commutes with open extension of derived strict
+towers. Source: Stacks 03DI (blueprint: thm-cbc-complete-proetale). -/
+def exchangeTowerOpenIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
+    exchangeTowerRes d U ⋙ ProEtale.StrictTower.J A j ≅
+      cbcTowerDerived (cbcEndpointOpen d j) ⋙ exchangeTowerRes d X :=
+  have := exchangeOpen_isIso d j
+  Functor.mapDerivedCategorySquareIso
+    (Functor.whiskeringRightObjCompIso (proEtaleRingRestrictScalars (exchangeScalar d U))
+        (ProEtale.StrictTower.moduleJ A j) ≪≫
+      (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso (asIso (ProperOpenTransport.openComparison
+        (cbcEndpointOpenAdj d j) (ProEtale.StrictTower.moduleJAdj A j)
+        (exchangeOrdinaryResPull d j))) ≪≫
+      (Functor.whiskeringRightObjCompIso (cbcEndpointOpen d j)
+        (proEtaleRingRestrictScalars (exchangeScalar d X))).symm)
+
 /-- Strict reduction commutes with extension by zero: the open-extension mate of the
 inverse-image comparison is invertible.
 Source: blueprint step 8; Stacks 03DI (blueprint: thm-cbc-complete-proetale). -/
 theorem cbcStrictOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (CategoryTheory.ProperOpenTransport.openComparison (cbcDerivedOpenAdjunction d j)
       (ProEtale.StrictTower.jAdj A j) (cbcStrictPull d j)) := by
-  sorry
+  have := cbcOpenUnit_isIso d j
+  have := ProEtale.StrictTower.jAdj_unit_isIso A j
+  refine ProperOpenTransport.openComparison_isIso_of_mem_essImage _ _ _ fun M ↦ ?_
+  have hr := (cbcEndpointReductionInv_properties d j).1 M
+  let e₁ := (cbcDerivedOpenAdjunction d j).leftAdjointUniq (cbcEndpointDerivedOpenAdj d j)
+  exact Functor.essImage.ofIso
+    ((exchangeTowerOpenIso d j).app ((completedReductionTower U d).obj M) ≪≫
+      (exchangeTowerRes d X).mapIso ((asIso (cbcEndpointReductionInv d j M)) ≪≫
+        (completedReductionTower X d).mapIso (e₁.app M).symm))
+    (Functor.obj_mem_essImage _ _)
 
 end AlgebraicGeometry.Scheme
