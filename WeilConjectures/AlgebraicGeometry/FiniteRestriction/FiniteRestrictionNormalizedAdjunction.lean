@@ -47,6 +47,10 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Mathlib.AlgebraicGeometry.Over
 import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.NativeFiniteEncodingConstructibility
+public import WeilConjectures.AlgebraicGeometry.SpecifiedExceptionalHomNaturality
+public import WeilConjectures.CategoryTheory.InverseComparisonCoordinates
+public import WeilConjectures.CategoryTheory.NormalizedFullyFaithfulAdjunction
 
 /-! # The normalized finite restriction adjunction
 
@@ -300,6 +304,366 @@ def alternateHomChain [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
   fun M W N => (specifiedExceptionalHomEquiv (ULift.{u + 1} A) c M W N).trans
     ((exceptionalComparison A c JEt ad).app N.obj).symm.homToEquiv
 
+private theorem encodedTriangulated [Finite A] [DiscreteTopology A]
+    (T : Scheme.{u}) (e : Encoding A T) :
+    (boundedConstructible (condensedRingObj (coefficient A) T)).IsTriangulated := by
+  let F := e.fixedDerived.functor
+  let : F.IsTriangulated := by
+    change (e.ordinary.functor ⋙ e.fixed.functor).mapDerivedCategory.IsTriangulated
+    infer_instance
+  let Q := (ProEtale.DerivedCategory.boundedConstructible
+    (ModuleCat.{u + 1} (ULift.{u + 1} A)) T).inverseImage F
+  have heq : boundedConstructible (condensedRingObj (coefficient A) T) = Q :=
+    funext fun K ↦ propext (native_boundedConstructible_encoding_iff A T e K)
+  rw [heq]
+  infer_instance
+
+private instance realizationFull (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) :
+    (realization A E T).Full := by
+  unfold realization
+  infer_instance
+
+private instance realizationFaithful (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) :
+    (realization A E T).Faithful := by
+  unfold realization
+  infer_instance
+
+private instance realizationAdditive (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) :
+    (realization A E T).Additive := by
+  change ((property A T).ι ⋙
+    ((E T).ordinary.functor ⋙ (E T).fixed.functor).mapDerivedCategory).Additive
+  infer_instance
+
+private instance realizationShift (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u})
+    [(property A T).IsTriangulated] : (realization A E T).CommShift ℤ := by
+  unfold realization
+  infer_instance
+
+private instance realizationTriangulated (E : ∀ T : Scheme.{u}, Encoding A T)
+    (T : Scheme.{u}) [(property A T).IsTriangulated] :
+    (realization A E T).IsTriangulated := by
+  have : (E T).fixedDerived.functor.IsTriangulated := by
+    change ((E T).ordinary.functor ⋙ (E T).fixed.functor).mapDerivedCategory.IsTriangulated
+    infer_instance
+  unfold realization
+  infer_instance
+
+private theorem propertyTriangulated [Finite A] [DiscreteTopology A]
+    (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) :
+    (property A T).IsTriangulated := by
+  have := encodedTriangulated A T (E T)
+  unfold property CondensedRing.condensedConstructibleFiniteTor
+  infer_instance
+
+private theorem realizationOrigin [Finite A] [DiscreteTopology A]
+    (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) (K : Category A T) :
+    ∃ h : DerivedCategory.TStructure.t.plus ((realization A E T).obj K),
+      Nonempty (FixedEtaleOriginWitness T (ULift.{u + 1} A)
+        ⟨(realization A E T).obj K, h⟩) := by
+  have hK := (native_boundedConstructible_encoding_iff A T (E T) K.obj).mp K.property.1
+  obtain ⟨L, hL, ⟨j⟩⟩ := hK.plusEtaleOrigin
+  exact ⟨hK.bounded.1, ⟨⟨⟨L, hL⟩, j⟩⟩⟩
+
+private theorem coefficientFormula
+    (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (J : Fixed A Y ⥤ Fixed A X) (Phi : HomChain A c J)
+    (F : Category A X ⥤ Category A Y) (G : Category A Y ⥤ Category A X)
+    (eF : F ⋙ (property A Y).ι = (property A X).ι ⋙ support A c)
+    (eG : G ⋙ (property A X).ι = (property A Y).ι ⋙ conjugate A E J)
+    (adj : F ⊣ G)
+    (hX : ∀ K : Category A X,
+      DerivedCategory.TStructure.t.plus ((realization A E X).obj K))
+    (hY : ∀ L : Category A Y,
+      DerivedCategory.TStructure.t.plus ((realization A E Y).obj L))
+    (origin : ∀ K : Category A X, Nonempty (FixedEtaleOriginWitness X (ULift.{u + 1} A)
+      ⟨(realization A E X).obj K, hX K⟩))
+    (hleft : ∀ M M' W W' N (s : M.obj ⟶ M'.obj)
+      (a : (fixedSupport A c).obj M'.obj ⟶ N.obj),
+      Phi M W N ((fixedSupport A c).map s ≫ a) = s ≫ Phi M' W' N a)
+    (hright : ∀ M W N N' (a : (fixedSupport A c).obj M.obj ⟶ N.obj)
+      (b : N.obj ⟶ N'.obj), Phi M W N' (a ≫ b) = Phi M W N a ≫ J.map b)
+    (hn : ∀ K L W (a : F.obj K ⟶ L),
+      (realization A E X).map (adj.homEquiv K L a) ≫
+          (rightRealization A E J G eG).hom.app L =
+        Phi ⟨(realization A E X).obj K, hX K⟩ W
+          ⟨(realization A E Y).obj L, hY L⟩
+          ((leftRealization A E c F eF).inv.app K ≫ (realization A E Y).map a))
+    (M : DerivedCategory.Plus
+      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} A))))
+    (N : DerivedCategory.Plus
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} A))))
+    (hM : property A X ((E X).fixedDerived.inverse.obj M.obj))
+    (hN : property A Y ((E Y).fixedDerived.inverse.obj N.obj))
+    (W : FixedEtaleOriginWitness X (ULift.{u + 1} A) M)
+    (v : (fixedSupport A c).obj M.obj ⟶ N.obj) :
+    let K : Category A X := ⟨(E X).fixedDerived.inverse.obj M.obj, hM⟩
+    let L : Category A Y := ⟨(E Y).fixedDerived.inverse.obj N.obj, hN⟩
+    (property A X).ι.map (adj.homEquiv K L
+      (ObjectProperty.homMk
+        (eqToHom (congrArg (fun H => H.obj K) eF) ≫
+          (comparison A E c).hom.app M.obj ≫ (E Y).fixedDerived.inverse.map v))) ≫
+      eqToHom (congrArg (fun H => H.obj L) eG) =
+    (E X).fixedDerived.inverse.map
+      (Phi M W N v ≫ J.map ((E Y).fixedDerived.counitIso.inv.app N.obj)) := by
+  let K : Category A X := ⟨(E X).fixedDerived.inverse.obj M.obj, hM⟩
+  let L : Category A Y := ⟨(E Y).fixedDerived.inverse.obj N.obj, hN⟩
+  let a : F.obj K ⟶ L := ObjectProperty.homMk
+    (eqToHom (congrArg (fun H => H.obj K) eF) ≫
+      (comparison A E c).hom.app M.obj ≫ (E Y).fixedDerived.inverse.map v)
+  obtain ⟨W'⟩ := origin K
+  have h := hn K L W' a
+  have ha : (leftRealization A E c F eF).inv.app K ≫ (realization A E Y).map a =
+      (fixedSupport A c).map ((E X).fixedDerived.counitIso.hom.app M.obj) ≫
+        v ≫ (E Y).fixedDerived.counitIso.inv.app N.obj := by
+    have hi := CategoryTheory.inverseComparison_coordinates (E X).fixedDerived (E Y).fixedDerived
+      (support A c) (fixedSupport A c) (comparison A E c) M.obj N.obj v
+    simpa [leftRealization, realization, a, inverseComparison, Functor.map_comp,
+      Category.assoc] using hi
+  rw [ha, hleft _ M W' W _ _ _, hright] at h
+  apply (E X).fixedDerived.functor.map_injective
+  apply (cancel_mono ((E X).fixedDerived.counitIso.hom.app
+    (J.obj ((realization A E Y).obj L)))).mp
+  rw [Functor.map_comp]
+  change _ = (E X).fixedDerived.functor.map
+    ((E X).fixedDerived.inverse.map _) ≫ _
+  have hc := (E X).fixedDerived.counitIso.hom.naturality
+    (Phi M W N v ≫ J.map ((E Y).fixedDerived.counitIso.inv.app N.obj))
+  dsimp only [Functor.comp_map, Functor.id_map] at hc
+  apply Eq.trans ?_ hc.symm
+  simpa [rightRealization, realization, conjugate, Functor.map_comp, Category.assoc] using h
+
+private theorem adjHomUniq
+    {C D : Type*} [Category* C] [Category* D]
+    {F : C ⥤ D} {G G' : D ⥤ C} (ad : F ⊣ G) (ad' : F ⊣ G')
+    (M : C) (N : D) (a : F.obj M ⟶ N) :
+    ad'.homEquiv M N a ≫ (ad.rightAdjointUniq ad').inv.app N =
+      ad.homEquiv M N a := by
+  apply (cancel_mono ((ad.rightAdjointUniq ad').hom.app N)).mp
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  rw [Category.assoc, (ad.rightAdjointUniq ad').hom.naturality,
+    ← Category.assoc, Adjunction.unit_rightAdjointUniq_hom_app]
+
+private theorem chosenHomValue [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]
+    (c : Compactification f)
+    [(Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} (ULift.{u + 1} A)) c).IsLeftAdjoint]
+    (JEt : DerivedCategory (Sheaf Y.smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1} A))) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1} A))))
+    (ad : Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} (ULift.{u + 1} A)) c ⊣ JEt)
+    (M : DerivedCategory.Plus
+      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} A))))
+    (W : FixedEtaleOriginWitness X (ULift.{u + 1} A) M)
+    (N : DerivedCategory.Plus
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} A))))
+    (a : (fixedSupport A c).obj M.obj ⟶ N.obj) :
+    alternateHomChain A c JEt ad M W N a = W.iso.inv ≫
+      (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).mapDerivedCategory.map
+        (ad.homEquiv _ _
+          ((derivedComparisonAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) Y).homEquiv _ _
+            ((fixedCompactSupportComparisonIso (ULift.{u + 1} A) c).inv.app W.complex ≫
+              (fixedSupport A c).map W.iso.hom ≫ a))) := by
+  let U := (comparisonUpperStar
+    (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).mapDerivedCategory
+  change (W.iso.inv ≫ U.map _) ≫ U.map _ = _
+  rw [Category.assoc, ← U.map_comp]
+  apply congrArg (fun z ↦ W.iso.inv ≫ U.map z)
+  simpa only [Iso.homFromEquiv, Equiv.coe_fn_mk, Iso.symm_inv,
+    Iso.app_inv, Functor.mapIso_hom, fixedSupport, ObjectProperty.ι_obj] using
+    adjHomUniq ad (Adjunction.ofIsLeftAdjoint
+      (Etale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (ULift.{u + 1} A)) c)) W.complex.obj _
+      ((derivedComparisonAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) Y).homEquiv _ _
+        ((fixedCompactSupportComparisonIso (ULift.{u + 1} A) c).inv.app W.complex ≫
+          (fixedSupport A c).map W.iso.hom ≫ a))
+
+private theorem completeConclusion [Finite A] [DiscreteTopology A]
+    (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]
+    (c : Compactification f)
+    (JEt : DerivedCategory (Sheaf Y.smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1} A))) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1} A))))
+    (ad : Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} (ULift.{u + 1} A)) c ⊣ JEt)
+    (Phi : HomChain A c (exceptional A JEt))
+    (hvalue : ∀ M W N a, Phi M W N a = W.iso.inv ≫
+      (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).mapDerivedCategory.map
+        (ad.homEquiv _ _
+          ((derivedComparisonAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) Y).homEquiv _ _
+            ((fixedCompactSupportComparisonIso (ULift.{u + 1} A) c).inv.app W.complex ≫
+              (fixedSupport A c).map W.iso.hom ≫ a))))
+    (hleft : ∀ M M' W W' N (s : M.obj ⟶ M'.obj)
+      (a : (fixedSupport A c).obj M'.obj ⟶ N.obj),
+      Phi M W N ((fixedSupport A c).map s ≫ a) = s ≫ Phi M' W' N a)
+    (hright : ∀ M W N N' (a : (fixedSupport A c).obj M.obj ⟶ N.obj)
+      (b : N.obj ⟶ N'.obj), Phi M W N' (a ≫ b) = Phi M W N a ≫ (exceptional A JEt).map b) :
+    let := exceptionalShift A c JEt ad
+    ∀ (F : Category A X ⥤ Category A Y) (G : Category A Y ⥤ Category A X)
+      (eF : F ⋙ (property A Y).ι = (property A X).ι ⋙ support A c)
+      (eG : G ⋙ (property A X).ι = (property A Y).ι ⋙ conjugate A E (exceptional A JEt)),
+      Conclusion A E c (exceptional A JEt) Phi F G eF eG := by
+  dsimp only
+  let := exceptionalShift A c JEt ad
+  intro F G eF eG
+  classical
+  let triX := propertyTriangulated A E X
+  let triY := propertyTriangulated A E Y
+  let RX := realization A E X
+  let RY := realization A E Y
+  let : RX.Full := realizationFull A E X
+  let : RX.Faithful := realizationFaithful A E X
+  let : RY.Full := realizationFull A E Y
+  let : RY.Faithful := realizationFaithful A E Y
+  let : RX.Additive := realizationAdditive A E X
+  let : RY.Additive := realizationAdditive A E Y
+  let : RX.CommShift ℤ := realizationShift A E X
+  let : RY.CommShift ℤ := realizationShift A E Y
+  let : RX.IsTriangulated := realizationTriangulated A E X
+  let : RY.IsTriangulated := realizationTriangulated A E Y
+  let rF := leftRealization A E c F eF
+  let rG := rightRealization A E (exceptional A JEt) G eG
+  let hX (K : Category A X) := (realizationOrigin A E X K).choose
+  let hY (L : Category A Y) := (realizationOrigin A E Y L).choose
+  have origin (K : Category A X) : Nonempty (FixedEtaleOriginWitness X (ULift.{u + 1} A)
+      ⟨RX.obj K, hX K⟩) := (realizationOrigin A E X K).choose_spec
+  let w (K : Category A X) := (origin K).some
+  let phi (K : Category A X) (L : Category A Y) :
+      ((fixedSupport A c).obj (RX.obj K) ⟶ RY.obj L) ≃
+        (RX.obj K ⟶ (exceptional A JEt).obj (RY.obj L)) :=
+    Phi ⟨RX.obj K, hX K⟩ (w K) ⟨RY.obj L, hY L⟩
+  have hl {K K' : Category A X} (s : K ⟶ K') (L : Category A Y)
+      (a : (fixedSupport A c).obj (RX.obj K') ⟶ RY.obj L) :
+      phi K L ((fixedSupport A c).map (RX.map s) ≫ a) = RX.map s ≫ phi K' L a := by
+    exact hleft ⟨RX.obj K, hX K⟩ ⟨RX.obj K', hX K'⟩ (w K) (w K')
+      ⟨RY.obj L, hY L⟩ (RX.map s) a
+  have hr (K : Category A X) {L L' : Category A Y}
+      (a : (fixedSupport A c).obj (RX.obj K) ⟶ RY.obj L) (b : L ⟶ L') :
+      phi K L' (a ≫ RY.map b) = phi K L a ≫ (exceptional A JEt).map (RY.map b) := by
+    exact hright ⟨RX.obj K, hX K⟩ (w K) ⟨RY.obj L, hY L⟩ ⟨RY.obj L', hY L'⟩
+      a (RY.map b)
+  obtain ⟨adj, hn⟩ := CategoryTheory.normalizedFullyFaithfulAdjunction
+    (C := Category A X) (D := Category A Y) (C' := Fixed A X) (D' := Fixed A Y)
+    RX RY (fixedSupport A c) (exceptional A JEt) F G rF rG phi hl hr
+  have hn' (K : Category A X) (L : Category A Y)
+      (W : FixedEtaleOriginWitness X (ULift.{u + 1} A) ⟨RX.obj K, hX K⟩)
+      (a : F.obj K ⟶ L) :
+      RX.map (adj.homEquiv K L a) ≫ rG.hom.app L =
+        Phi ⟨RX.obj K, hX K⟩ W ⟨RY.obj L, hY L⟩ (rF.inv.app K ≫ RY.map a) := by
+    rw [hn]
+    have h := hleft ⟨RX.obj K, hX K⟩ ⟨RX.obj K, hX K⟩ (w K) W
+      ⟨RY.obj L, hY L⟩ (𝟙 _) (rF.inv.app K ≫ RY.map a)
+    rw [(fixedSupport A c).map_id, Category.id_comp, Category.id_comp] at h
+    exact h
+  let : (F ⋙ RY).Additive := Functor.additive_of_iso rF.symm
+  let : F.Additive := Functor.additive_of_comp_faithful F RY
+  let : F.CommShift ℤ := Functor.CommShift.ofComp rF ℤ
+  have : rF.hom.CommShift ℤ := Functor.CommShift.ofComp_compatibility rF ℤ
+  have : F.IsTriangulated := (Functor.isTriangulated_iff_comp_right rF).mpr inferInstance
+  have hrG : let := adj.rightAdjointCommShift ℤ; rG.hom.CommShift ℤ := by
+    let := ad.rightAdjointCommShift ℤ
+    have := ad.commShift_of_leftAdjoint ℤ
+    have := fixedComparison_shift (ULift.{u + 1} A) c
+    have := derivedComparison_shift (ULift.{u + 1} A) Y
+    apply relativeRealization_shift DerivedCategory.Plus.ι
+      (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).mapDerivedCategory
+      (fixedSupport A c) ad
+      (derivedComparisonAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) Y)
+      (fixedCompactSupportComparisonIso (ULift.{u + 1} A) c) RX RY F G adj rF rG
+    · intro K
+      exact ⟨(w K).complex, ⟨(w K).iso⟩⟩
+    · intro K L Z j a
+      rw [hn' K L ⟨Z, j⟩ a, hvalue]
+      dsimp only [relativeHom]
+      rw [Adjunction.comp_homEquiv]
+      simp only [ObjectProperty.ι_obj]
+      rfl
+  refine ⟨triX, triY, inferInstance, inferInstance, adj, inferInstance, inferInstance,
+    hrG, hX, hY, origin, hn', ?_⟩
+  exact coefficientFormula A E c (exceptional A JEt) Phi F G eF eG adj hX hY
+    origin hleft hright hn'
+
+/-- The normalized finite restriction adjunction for every finite discrete commutative
+coefficient ring. The ordinary etale Brown adjunction is the only adjunction used.
+No finite-field datum or DVR presentation is needed for this transport step.
+
+Source: blueprint det-def-sf-operations (vi), finite coefficient exceptional adjunction,
+and sk-thm-sf-tensor-hom, Complement.
+(blueprint: lem-sf-finite-discrete-restriction-adjunction).
+Proof: apply the natural Hom-chain construction through the full realizations. The
+constructibility encoding gives bounded-below realizations and etale origins. Reflect
+additivity, shifts and distinguished triangles along the full faithful target encoding.
+The normalized counit proves right shift compatibility. The coefficient-unit cancellation
+proves the second normalization. For any other ordinary etale right adjoint, its unique
+comparison identifies its Hom chain with the prescribed alternate Hom chain, and the same
+argument uses precisely its adjoint shift structure. The zero ring and empty schemes obey
+the same categorical identities. -/
+theorem normalizedRestrictionAdjunctionOfFinite [Finite A] [DiscreteTopology A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]
+    (c : Compactification f) :
+    letI := Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification
+      (ULift.{u + 1} A) c
+    ∀ encoding : ∀ T : Scheme.{u}, Encoding A T,
+    (let JEt := (Etale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (ULift.{u + 1} A)) c).rightAdjoint
+     let ad := Adjunction.ofIsLeftAdjoint
+       (Etale.rightDerivedLowerShriekOfCompactification
+         (ModuleCat.{u + 1} (ULift.{u + 1} A)) c)
+     letI : (sfFiniteExceptionalAt (ULift.{u + 1} A) c).CommShift ℤ :=
+       exceptionalShift A c JEt ad
+     ∀ (F : Category A X ⥤ Category A Y) (G : Category A Y ⥤ Category A X)
+       (eF : F ⋙ (property A Y).ι = (property A X).ι ⋙ support A c)
+       (eG : G ⋙ (property A X).ι = (property A Y).ι ⋙
+         conjugate A encoding (sfFiniteExceptionalAt (ULift.{u + 1} A) c)),
+       Conclusion A encoding c (sfFiniteExceptionalAt (ULift.{u + 1} A) c)
+         (specifiedExceptionalHomEquiv (ULift.{u + 1} A) c) F G eF eG) ∧
+    (∀ (JEt : DerivedCategory (Sheaf Y.smallEtaleTopology
+          (ModuleCat.{u + 1} (ULift.{u + 1} A))) ⥤
+        DerivedCategory (Sheaf X.smallEtaleTopology
+          (ModuleCat.{u + 1} (ULift.{u + 1} A))))
+       (ad : Etale.rightDerivedLowerShriekOfCompactification
+         (ModuleCat.{u + 1} (ULift.{u + 1} A)) c ⊣ JEt),
+     letI := exceptionalShift A c JEt ad
+     ∀ (F : Category A X ⥤ Category A Y) (G : Category A Y ⥤ Category A X)
+       (eF : F ⋙ (property A Y).ι = (property A X).ι ⋙ support A c)
+       (eG : G ⋙ (property A X).ι = (property A Y).ι ⋙ conjugate A encoding
+         (exceptional A JEt)),
+       Conclusion A encoding c (exceptional A JEt)
+         (alternateHomChain A c JEt ad) F G eF eG) := by
+  let := Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification
+    (ULift.{u + 1} A) c
+  dsimp only
+  intro encoding
+  constructor
+  · exact completeConclusion A encoding c _
+      (Adjunction.ofIsLeftAdjoint (Etale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (ULift.{u + 1} A)) c))
+      (specifiedExceptionalHomEquiv (ULift.{u + 1} A) c)
+      (fun _ _ _ _ ↦ rfl)
+      ((specifiedExceptionalHomEquiv_naturality (ULift.{u + 1} A) c).1)
+      ((specifiedExceptionalHomEquiv_naturality (ULift.{u + 1} A) c).2.1)
+  · intro JEt ad
+    apply completeConclusion A encoding c JEt ad (alternateHomChain A c JEt ad)
+      (chosenHomValue A c JEt ad)
+    · intro M M' W W' N s a
+      dsimp only [alternateHomChain, Equiv.trans_apply, Iso.homToEquiv,
+        Equiv.coe_fn_mk, Iso.symm_hom, Iso.app_inv]
+      rw [(specifiedExceptionalHomEquiv_naturality (ULift.{u + 1} A) c).1
+        M M' W W' N s a, Category.assoc]
+    · intro M W N N' a b
+      dsimp only [alternateHomChain, Equiv.trans_apply, Iso.homToEquiv,
+        Equiv.coe_fn_mk, Iso.symm_hom, Iso.app_inv]
+      rw [(specifiedExceptionalHomEquiv_naturality (ULift.{u + 1} A) c).2.1
+        M W N N' a b, Category.assoc, Category.assoc]
+      congr 1
+      exact (exceptionalComparison A c JEt ad).inv.naturality b
+
 /-- Normalized adjunction for literal restrictions in internal condensed coefficients,
 including both displayed normalizations and every choice of ordinary etale adjoint.
 No preservation assertion is an input or an output, and F and G are universally given.
@@ -373,6 +737,13 @@ theorem normalizedRestrictionAdjunction (D : WeilConjectures.FiniteFieldDatum.{u
          (exceptional A JEt)),
        Conclusion A encoding c (exceptional A JEt)
          (alternateHomChain A c JEt ad) F G eF eG) := by
-  sorry
+  let A := Padic.coefficientExtensionRing ell E n
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := ⟨rfl⟩
+  let : IsTopologicalRing A := inferInstance
+  let : Finite A := Padic.finite_coefficientExtensionRing ell E n hn
+  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of D.k))
+  exact normalizedRestrictionAdjunctionOfFinite A c
 
 end AlgebraicGeometry.ProEtale.FiniteRestriction

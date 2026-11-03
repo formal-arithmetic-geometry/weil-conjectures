@@ -185,6 +185,18 @@ def scalarRestrictionChainTensorNatTrans :
     rw [(G.mapHomologicalComplex (.up ℤ)).map_id, tensorHom_id] at h
     exact h
 
+/-- The summand normalization determines the entire cochain tensorator.
+Source: Stacks 06YS (blueprint: lem-pur-derived-scalar-restriction-tensor).
+Proof: maps out of the signed total are equal if they agree on each summand. -/
+theorem scalarRestrictionChainTensor_unique (r : RestrictionTensorData G ordinary)
+    (K L : CochainComplex C ℤ) :
+    r.chain K L = scalarRestrictionChainTensor G ordinary K L := by
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  rw [r.chain_summand, scalarRestrictionChainTensor_summand]
+
 /-- The normalized lax tensorator on derived restriction of scalars.
 Source: Stacks 06YS and 0F1E (blueprint: lem-pur-derived-scalar-restriction-tensor).
 The universal property is applied to the restricted source tensor, so no assumption

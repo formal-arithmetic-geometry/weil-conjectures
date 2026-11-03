@@ -49,6 +49,16 @@ abbrev condensedConstructibleWeilSheaves
   ObjectProperty.FullSubcategory (fun M : condensedWeilModules Λ g ↦
     IsConstructibleModuleObject (condensedRingObj Λ Y) M.carrier)
 
+/-- A constructible Weil module placed in degree zero, in the recorded bounded
+constructible category. Its carrier is the actual single complex, with no descent input.
+Source: the degree-zero Weil-sheaf clause (blueprint: def-weil-weil-sheaf-complex). -/
+def condensedWeilSingle (l : ℕ) [Fact l.Prime] {Y : Scheme.{u}} (g : Y ⟶ Y)
+    (M : condensedConstructibleWeilSheaves (Profinite.padicAlgClRingObj l) g) :
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l) Y)).FullSubcategory :=
+  ⟨(DerivedCategory.singleFunctor _ 0).obj M.obj.carrier,
+    CondensedRing.boundedConstructible_singleFunctor_obj
+      (Profinite.padicAlgClRingObj l) Y 0 M.obj.carrier M.property⟩
+
 /-- Forget the structure isomorphism of an actual Weil module.
 Source: the forgetful functor in the current definition
 (blueprint: def-weil-weil-sheaf-complex). -/

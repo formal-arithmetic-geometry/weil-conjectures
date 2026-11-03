@@ -18,6 +18,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ten
 public import WeilConjectures.AlgebraicGeometry.Sf.SfOpenExceptionalBaseChange
 import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
 import WeilConjectures.AlgebraicGeometry.SixFunctors.SpecifiedExceptionalRealizationShift
+public import WeilConjectures.AlgebraicGeometry.FiniteRestriction.FiniteRestrictionNormalizedAdjunction
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitudePresentations
+public import WeilConjectures.AlgebraicGeometry.SpecifiedExceptionalHomNaturality
+public import WeilConjectures.CategoryTheory.NormalizedFullyFaithfulAdjunction
 
 /-!
 # Realizations and normalized restricted finite-coefficient adjunctions
@@ -275,17 +279,8 @@ private theorem sfSpecifiedHomLeft
       ((ProEtale.rightDerivedLowerShriekOfCompactification
         (ModuleCat.{u + 1} Λ) c).map s ≫ a) =
       s ≫ ProEtale.specifiedExceptionalHomEquiv Λ c M' W' L a := by
-  obtain ⟨t, ht⟩ := (ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map
-    W.complex.obj W'.complex.obj W'.complex.property).surjective
-      (W.iso.hom ≫ s ≫ W'.iso.inv)
-  have hv := (ProEtale.fixedCompactSupportComparisonIso Λ c).inv.naturality
-    (ObjectProperty.homMk t : W.complex ⟶ W'.complex)
-  rw [sfSpecifiedHomValue, sfSpecifiedHomValue]
-  exact sfTransposeLeft _ _ _ _ _ _
-    (Adjunction.ofIsLeftAdjoint (Etale.rightDerivedLowerShriekOfCompactification
-      (ModuleCat.{u + 1} Λ) c))
-    (ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y)
-    W.iso W'.iso _ _ s a t ht hv
+  exact (ProEtale.specifiedExceptionalHomEquiv_naturality Λ c).1
+    M M' W W' L s a
 
 private theorem sfSpecifiedHomRight
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -300,12 +295,7 @@ private theorem sfSpecifiedHomRight
     ProEtale.specifiedExceptionalHomEquiv Λ c M W L' (a ≫ b) =
       ProEtale.specifiedExceptionalHomEquiv Λ c M W L a ≫
         (ProEtale.sfFiniteExceptionalAt Λ c).map b := by
-  rw [sfSpecifiedHomValue, sfSpecifiedHomValue]
-  simp only [← Category.assoc]
-  rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_naturality_right,
-    Functor.map_comp]
-  simp only [Category.assoc]
-  rfl
+  exact (ProEtale.specifiedExceptionalHomEquiv_naturality Λ c).2.1 M W L L' a b
 
 private theorem sfRestrictHom
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
@@ -320,51 +310,7 @@ private theorem sfRestrictHom
     ∃ adj : F ⊣ G, ∀ K L (a : F.obj K ⟶ L),
       RX.map (adj.homEquiv K L a) ≫ rG.hom.app L =
         e K L (rF.inv.app K ≫ RY.map a) := by
-  let ffX := Functor.FullyFaithful.ofFullyFaithful RX
-  let ffY := Functor.FullyFaithful.ofFullyFaithful RY
-  let ψ (K : C) (L : D) : (F.obj K ⟶ L) ≃ (K ⟶ G.obj L) :=
-    ffY.homEquiv.trans (((rF.app K).homFromEquiv.trans (e K L)).trans
-      (((rG.app L).symm.homToEquiv).trans ffX.homEquiv.symm))
-  have hn (K : C) (L : D) (a : F.obj K ⟶ L) :
-      RX.map (ψ K L a) ≫ rG.hom.app L =
-        e K L (rF.inv.app K ≫ RY.map a) := by
-    dsimp only [ψ, Equiv.trans_apply, Functor.FullyFaithful.homEquiv,
-      Iso.homFromEquiv, Iso.homToEquiv, Equiv.symm, Equiv.coe_fn_mk]
-    rw [ffX.map_preimage]
-    simp only [Category.assoc]
-    change e K L (rF.inv.app K ≫ RY.map a) ≫ rG.inv.app L ≫ rG.hom.app L = _
-    rw [Iso.inv_hom_id_app]
-    exact Category.comp_id _
-  have hl {K K' : C} (s : K ⟶ K') (L : D) (a : F.obj K' ⟶ L) :
-      ψ K L (F.map s ≫ a) = s ≫ ψ K' L a := by
-    apply RX.map_injective
-    apply (cancel_mono (rG.hom.app L)).1
-    rw [hn, RX.map_comp, Category.assoc, hn]
-    have hnat := rF.inv.naturality s
-    dsimp only [Functor.comp_map] at hnat
-    rw [RY.map_comp, ← Category.assoc, ← hnat, Category.assoc]
-    change e K L ((RX ⋙ P).map s ≫ rF.inv.app K' ≫ RY.map a) = _
-    exact hleft s L _
-  have hr (K : C) {L L' : D} (a : F.obj K ⟶ L) (b : L ⟶ L') :
-      ψ K L' (a ≫ b) = ψ K L a ≫ G.map b := by
-    apply RX.map_injective
-    apply (cancel_mono (rG.hom.app L')).1
-    have hnat := rG.hom.naturality b
-    dsimp only [Functor.comp_map] at hnat
-    rw [hn, RX.map_comp, Category.assoc, hnat]
-    change _ = RX.map (ψ K L a) ≫ rG.hom.app L ≫ H.map (RY.map b)
-    rw [← Category.assoc, hn, RY.map_comp, ← Category.assoc, hright]
-  let core : Adjunction.CoreHomEquiv F G :=
-    { homEquiv := ψ
-      homEquiv_naturality_left_symm := by
-        intro K K' L s a
-        apply (ψ K L).injective
-        rw [Equiv.apply_symm_apply, hl, Equiv.apply_symm_apply]
-      homEquiv_naturality_right := fun {_ _ _} a b ↦ hr _ a b }
-  exact ⟨Adjunction.mkOfHomEquiv core, fun K L a ↦ by
-    rw [Adjunction.mkOfHomEquiv_homEquiv]
-    change RX.map (ψ K L a) ≫ rG.hom.app L = _
-    exact hn K L a⟩
+  exact normalizedFullyFaithfulAdjunction RX RY P H F G rF rG e hleft hright
 
 private theorem sfRestrictionOrigin (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)

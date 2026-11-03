@@ -50,6 +50,8 @@ public import WeilConjectures.AlgebraicGeometry.Sf.SfFiniteExceptionalInverseIma
 public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicCompactSupport
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
 import WeilConjectures.AlgebraicGeometry.SixFunctors.SpecifiedExceptionalClassHom
+public import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginAdjointClass
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Chosen-compactification normalization of bounded site adjunction transposes
 
@@ -113,6 +115,43 @@ def boundedSiteRho
           (D(ν^*(Y)[ModuleCat.{u + 1} A]).obj K))) :=
   D(ν^*(X)[ModuleCat.{u + 1} A]).map
     (H.map ((derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).unit.app K))
+
+private theorem boundedSiteTranspose_left
+    (J J' : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)))
+    (b : J'.obj ⟶ J.obj)
+    (z : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj
+      (D(ν^*(X)[ModuleCat.{u + 1} A]).obj J.obj) ⟶ L) :
+    boundedSiteTranspose A c H adj J' L
+        ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+          (D(ν^*(X)[ModuleCat.{u + 1} A]).map b) ≫ z) =
+      D(ν^*(X)[ModuleCat.{u + 1} A]).map b ≫ boundedSiteTranspose A c H adj J L z := by
+  unfold boundedSiteTranspose
+  have hb := (compactSupportSiteComparison A c).inv.naturality
+    (ObjectProperty.homMk b)
+  change D(ν^*(Y)[ModuleCat.{u + 1} A]).map
+      ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map b) ≫
+        (compactSupportSiteComparison A c).inv.app J =
+      (compactSupportSiteComparison A c).inv.app J' ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+          (D(ν^*(X)[ModuleCat.{u + 1} A]).map b) at hb
+  rw [← Category.assoc, ← hb, Category.assoc,
+    Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_left,
+    Functor.map_comp]
+
+private theorem boundedSiteTranspose_right
+    (J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)))
+    (b : L ⟶ L')
+    (z : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj
+      (D(ν^*(X)[ModuleCat.{u + 1} A]).obj J.obj) ⟶ L) :
+    boundedSiteTranspose A c H adj J L' (z ≫ b) =
+      boundedSiteTranspose A c H adj J L z ≫
+        D(ν^*(X)[ModuleCat.{u + 1} A]).map
+          (H.map ((R(ν_*(Y)[ModuleCat.{u + 1} A])).map b)) := by
+  unfold boundedSiteTranspose
+  rw [← Category.assoc, Adjunction.homEquiv_naturality_right,
+    Adjunction.homEquiv_naturality_right, Functor.map_comp]
 
 end Generic
 

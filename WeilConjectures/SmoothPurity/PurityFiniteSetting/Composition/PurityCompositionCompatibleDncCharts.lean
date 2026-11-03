@@ -17,6 +17,8 @@ import WeilConjectures.SmoothPurity.PurityFiniteSetting.Dnc.PurityDncComparisons
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.Dnc.PurityDncInvariance
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonOpenTensorCoherence
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.StandardSectionPastingBaseChange
 
 /-! # Compatible charts for diagonal deformation pasting
 
@@ -42,6 +44,21 @@ def compatibleBifunctorIso {C : Type u₁} {D : Type u₂} {E : Type u₃}
     (F : C ⥤ D ⥤ E) {K K' : C} {L L' : D} (a : K ≅ K') (b : L ≅ L') :
     (F.obj K).obj L ≅ (F.obj K').obj L' :=
   (F.mapIso a).app L ≪≫ (F.obj K').mapIso b
+
+/-- The published tensor bifunctor with the coefficient category fixed once.
+Source: composition proof Step 7
+(blueprint: lem-pur-composition-compatible-dnc-charts). -/
+def compatibleTensor (P : PurityFiniteSetting.{u}) (B : Scheme.{u}) :=
+  ProEtale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) B
+
+/-- Derived tensor of two isomorphisms on the actual finite pro-etale category.
+Source: composition proof Step 7
+(blueprint: lem-pur-composition-compatible-dnc-charts). -/
+def compatibleTensorIso (P : PurityFiniteSetting.{u}) {B : Scheme.{u}}
+    {K K' L L' : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} P.Coefficient))}
+    (a : K ≅ K') (b : L ≅ L') :=
+  compatibleBifunctorIso (P.compatibleTensor B) a b
 
 /-- The canonical comparison-monoidal component checked before fixing its scalar
 category. Source: composition proof Steps 5--7
@@ -73,6 +90,47 @@ def compatibleComparisonTensor (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   letI : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) B).PreservesFlat :=
     ProEtale.preservesFlat_comparisonUpperStar
   compatibleComparisonTensorGeneric (ModuleCat.{u + 1} Λ) B K L
+
+private theorem compatibleBifunctorIso_trans {C : Type u₁} {D : Type u₂} {E : Type u₃}
+    [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E]
+    (F : C ⥤ D ⥤ E) {K K' K'' : C} {L L' L'' : D}
+    (a : K ≅ K') (a' : K' ≅ K'') (b : L ≅ L') (b' : L' ≅ L'') :
+    compatibleBifunctorIso F a b ≪≫ compatibleBifunctorIso F a' b' =
+      compatibleBifunctorIso F (a ≪≫ a') (b ≪≫ b') := by
+  ext
+  simp only [compatibleBifunctorIso, Functor.mapIso_trans, NatIso.trans_app, Iso.trans_hom,
+    Functor.mapIso_hom, Category.assoc]
+  change (F.map a.hom).app L ≫ (F.obj K').map b.hom ≫
+    (F.map a'.hom).app L' ≫ (F.obj K'').map b'.hom =
+      (F.map a.hom).app L ≫ (F.map a'.hom).app L ≫
+        (F.obj K'').map b.hom ≫ (F.obj K'').map b'.hom
+  rw [(F.map a'.hom).naturality_assoc]
+
+private theorem compatibleTensorComparison_naturality
+    {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
+    (T : C ⥤ C ⥤ C) (S : D ⥤ D ⥤ D) (F : C ⥤ D)
+    (m : (Functor.postcompose₂.obj F).obj T ≅
+      (((Functor.whiskeringLeft₂ D).obj F).obj F).obj S)
+    {K K' L L' : C} (a : K ≅ K') (b : L ≅ L') :
+    F.mapIso (compatibleBifunctorIso T a b) ≪≫ (m.app K').app L' =
+      (m.app K).app L ≪≫ compatibleBifunctorIso S (F.mapIso a) (F.mapIso b) := by
+  apply Iso.ext
+  have ha := congr_app (m.hom.naturality a.hom) L
+  have hb := (m.hom.app K').naturality b.hom
+  dsimp at ha hb
+  simp only [compatibleBifunctorIso, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom]
+  rw [F.map_comp, Category.assoc, hb, ← Category.assoc, ha]
+  simp only [Category.assoc]
+
+private theorem compatibleIso_inverse_square {C : Type u₁} [Category.{v₁} C]
+    {W X Y Z : C} (x : W ≅ X) (y : Y ≅ Z) (a : W ≅ Y) (b : X ≅ Z)
+    (h : a ≪≫ y = x ≪≫ b) : x.symm ≪≫ a = b ≪≫ y.symm := by
+  apply Iso.ext
+  change x.inv ≫ a.hom = b.hom ≫ y.inv
+  apply (Iso.inv_comp_eq x).2
+  rw [← Category.assoc]
+  apply (Iso.eq_comp_inv y).2
+  exact congrArg Iso.hom h
 
 /-- The centred neighbourhood data used by the canonical source comparison.
 Source: composition proof Step 5; chart-normalization

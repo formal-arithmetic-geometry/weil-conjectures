@@ -14,6 +14,18 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartSumNormalization
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartCompactTowerScalar
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartCompactScalar
 import all WeilConjectures.AlgebraicGeometry.Affine.AffineCounitScalar
+public import WeilConjectures.AlgebraicGeometry.Abelian.AbelianDerivedExchangePlusCompatibility
+public import WeilConjectures.AlgebraicGeometry.CoefficientCompatibility.EtaleProEtaleCoefficientCompatibility
+public import WeilConjectures.AlgebraicGeometry.Etale.EtaleDirectImageScalarComposition
+public import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensor
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartNormalizationBoundary
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartSumBoundaryScalar
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartSumScalarRepresentative
+public import WeilConjectures.AlgebraicGeometry.OrdinaryChart.OrdinaryChartAdjunctionObjects
+public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackIsoUniqueness
+public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionIdIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Ordinary exceptional coefficient comparison on one coordinate chart
 
@@ -38,6 +50,105 @@ attribute [local implicit_reducible] affineTraceTower
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   derivedTensor upperStar lowerStar
+
+private theorem open_scalar_counit
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j]
+    (K : DerivedCategoryModule A V) :
+    (ExceptionalCoefficients.openIso φ j).hom.app
+        ((ordinaryFinitePullback A j).obj K) ≫
+      (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
+        ((scalarPullbackIso φ j).inv.app K) ≫
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} B) j).ofNatIsoRight
+          (leftDerivedUpperStarIsoMapDerivedCategory
+            (ModuleCat.{u + 1} B) j).symm).counit.app ((scalarExtension φ V).obj K) =
+    (scalarExtension φ V).map
+      (((derivedOpenImmersionLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} A) j).ofNatIsoRight
+          (leftDerivedUpperStarIsoMapDerivedCategory
+            (ModuleCat.{u + 1} A) j).symm).counit.app K) := by
+  let a := (derivedOpenImmersionLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} A) j).ofNatIsoRight
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) j).symm
+  let b := (derivedOpenImmersionLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} B) j).ofNatIsoRight
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) j).symm
+  let x := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ)
+  let v := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)
+  let α := (mateEquiv x v).symm
+    (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ j).hom)
+  have he : α.natTrans = (scalarPullbackIso φ j).inv :=
+    (scalarPullbackIso_inv_mate_restriction φ j).1.symm
+  have h := congrArg TwoSquare.natTrans
+    (iterated_mateEquiv_conjugateEquiv_symm a b v x
+      (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ j).hom))
+  change ((mateEquiv a b).symm α).natTrans = _ at h
+  change ((mateEquiv a b).symm α).natTrans = (ExceptionalCoefficients.openIso φ j).inv at h
+  have hc := mateEquiv_counit_symm a b α K
+  change (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
+      (α.natTrans.app K) ≫ b.counit.app ((scalarExtension φ V).obj K) =
+    ((mateEquiv a b).symm α).natTrans.app _ ≫
+      (scalarExtension φ V).map (a.counit.app K) at hc
+  rw [he, h] at hc
+  have hh := congrArg (fun z ↦ (ExceptionalCoefficients.openIso φ j).hom.app
+    ((ordinaryFinitePullback A j).obj K) ≫ z) hc
+  simpa only [a, b, ordinaryFinitePullback, Category.assoc,
+    Iso.hom_inv_id_app_assoc] using hh
+
+/-- Scalar compatibility of the normalized identity compactification.
+Source: blueprint smooth-purity reduction, Charts.
+(blueprint: lem-pur-ordinary-chart-exceptional-scalar).
+
+Proof: At the sheaf level identify extension by zero and inverse image for the identity by
+left-adjoint uniqueness, and derive its actual counit normalization. The open coefficient mate
+counit square and the normalized identity pullback comparison then determine the coefficient
+square for the derived open-identity isomorphism.
+For the proper identity comparison, use the direct-image scalar identity normalization; exactness
+of the sheaf identity direct image supplies the required derived comparison normalization.
+Expand the identity compactification coefficient arrow as the proper scalar mate followed by
+direct image of the open comparison. Naturality moves the open-identity map across the proper
+scalar mate; substitute the open and proper identity coefficient squares and cancel the identity
+unitors. -/
+private theorem chart_identity_scalar
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (S : Scheme.{u}) (K : DerivedCategoryModule A S) :
+    let eA := Functor.isoWhiskerRight
+      (mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) S) _ ≪≫
+        Functor.leftUnitor _ ≪≫ rightDerivedLowerStarIdIso A S
+    let eB := Functor.isoWhiskerRight
+      (mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} B) S) _ ≪≫
+        Functor.leftUnitor _ ≪≫ rightDerivedLowerStarIdIso B S
+    (compactScalarMap φ (Compactification.ofIsProper (𝟙 S))).app K ≫
+        eB.hom.app ((scalarExtension φ S).obj K) =
+      (scalarExtension φ S).map (eA.hom.app K) := by
+  dsimp only
+  have hn := (scalarMate φ (𝟙 S)).naturality
+    ((mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) S).hom.app K)
+  simp only [Functor.comp_map, Functor.id_obj] at hn
+  have ho := congrArg (fun z ↦ (rightDerivedLowerStar (ModuleCat.{u + 1} B)
+    (𝟙 S)).map z) (identity_open_scalar φ S K)
+  simp only [Functor.map_comp, rightDerivedLowerStar] at ho
+  simp only [compactScalarMap, ExceptionalCoefficients.compactSupportMap,
+    Compactification.ofIsProper, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app,
+    Functor.map_comp, Category.assoc]
+  rw [reassoc_of% ho, ← reassoc_of% hn]
+  change (scalarExtension φ S).map
+      ((rightDerivedLowerStar (ModuleCat.{u + 1} A) (𝟙 S)).map
+        ((mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) S).hom.app K)) ≫
+        (scalarMate φ (𝟙 S)).app K ≫ 𝟙 _ ≫
+          (rightDerivedLowerStarIdIso B S).hom.app ((scalarExtension φ S).obj K) =
+    (scalarExtension φ S).map
+      ((rightDerivedLowerStar (ModuleCat.{u + 1} A) (𝟙 S)).map
+        ((mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) S).hom.app K)) ≫
+          (scalarExtension φ S).map (𝟙 _) ≫
+          (scalarExtension φ S).map ((rightDerivedLowerStarIdIso A S).hom.app K)
+  simp only [Category.id_comp]
+  rw [identity_direct_scalar]
+  erw [CategoryTheory.Functor.map_id]
+  simp only [Category.id_comp]
 
 private theorem rightAdjointUniq_scalar_of_counits
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -171,6 +282,250 @@ private def affineLeftScalar
     (fun r ↦ compactScalarMap φ (affineTraceLineCompactification
       (affineTraceTower S r))) d
 
+/-- Unbounded scalar compatibility of graph-normalized etale compact support.
+Source: blueprint smooth-purity reduction, Charts.
+(blueprint: lem-pur-ordinary-chart-exceptional-scalar).
+
+Proof: Represent the arbitrary derived input by a complex whose terms are flat and which is native
+K-flat: take a K-flat homotopy representative and a termwise flat K-flat quasi-isomorphic
+replacement.
+On this representative paste the scalar graph-boundary square, the exact-derived sum
+representative square and the two graph-normalization boundary equations. Identify the open
+comparison by its prescribed inverse-unit normalization, and cancel the invertible scalar
+representative.
+Cancel the normalization isomorphisms to obtain the forward comparison square on the
+representative. Naturality of both composite natural transformations transports the equation along
+the representative isomorphism to the given derived object. -/
+private theorem chart_sum_normalization
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [Etale f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) (NA : EtaleCompactSupportNormalization A)
+    (NB : EtaleCompactSupportNormalization B) (L : DerivedCategoryModule A X) :
+    (compactScalarMap φ c).app L ≫
+        (NB.comparison f c).hom.app ((scalarExtension φ X).obj L) =
+      (scalarExtension φ Y).map ((NA.comparison f c).hom.app L) ≫
+        (ProEtale.CoefficientCompatibility.sumCoefficientIso φ f).hom.app L := by
+  obtain ⟨H, hH, ⟨eH⟩⟩ := DerivedCategory.exists_kFlat_iso L
+  obtain ⟨H, rfl⟩ := H.quotient_obj_surjective
+  obtain ⟨P, π, hπ, hf, hP⟩ := CochainComplex.exists_quasiIso_flat_kFlat H
+  have := hπ
+  let eP := asIso (DerivedCategory.Q.map π) ≪≫ eH
+  have := scalarRepresentative_isIso φ X P hP
+  have hcalc := ordinaryChartSumBoundaryScalar φ f c P hP hf
+  have hsum := ordinaryChartSumScalarRepresentative φ f P
+  change (scalarExtension φ Y).map _ ≫ _ ≫ _ =
+    (ProEtale.CoefficientCompatibility.sumCoefficientIso φ f).hom.app
+      (DerivedCategory.Q.obj P) ≫ _ ≫ _ at hsum
+  have hNA := ordinaryChartNormalizationBoundary A NA f c P
+  have hNB := ordinaryChartNormalizationBoundary B NB f c
+    (coefficientExtendedComplex φ X P)
+  have hmodel :
+      (Etale.scalarExtension φ Y).map ((NA.comparison f c).inv.app
+          (DerivedCategory.Q.obj P)) ≫ (compactScalarMap φ c).app (DerivedCategory.Q.obj P) =
+        (ProEtale.CoefficientCompatibility.sumCoefficientIso φ f).hom.app
+          (DerivedCategory.Q.obj P) ≫
+          (NB.comparison f c).inv.app
+            ((Etale.scalarExtension φ X).obj (DerivedCategory.Q.obj P)) := by
+    apply (cancel_mono ((Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} B) c).map (Etale.scalarExtensionRepresentative φ X P))).mp
+    have h := congrArg (fun z ↦
+      (Etale.scalarExtension φ Y).map
+        ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) f
+          inferInstance).mapDerivedCategoryFactors.hom.app
+          P) ≫ z) hcalc
+    dsimp only [compactScalarMap, ExceptionalCoefficients.compactSupportMap,
+      properCoefficientMap] at *
+    simp only [Category.assoc] at h ⊢
+    rw [← Functor.map_comp_assoc, hNA] at h
+    rw [reassoc_of% hsum, hNB] at h
+    have hn := (NB.comparison f c).inv.naturality
+      (Etale.scalarExtensionRepresentative φ X P)
+    dsimp only [Functor.comp_map] at hn
+    rw [hn] at h
+    have hopen : (ExceptionalCoefficients.openIso φ c.i).hom.app
+        (DerivedCategory.Q.obj P) =
+        (properOpenCoefficientOpenIso φ c.i (DerivedCategory.Q.obj P)).hom := by
+      have h : ((ExceptionalCoefficients.openIso φ c.i).app
+          (DerivedCategory.Q.obj P)).symm =
+          (properOpenCoefficientOpenIso φ c.i (DerivedCategory.Q.obj P)).symm := by
+        apply Iso.ext
+        exact compactScalarOpen_normalization φ c.i (DerivedCategory.Q.obj P)
+      exact congrArg (fun e ↦ e.inv) h
+    simpa only [hopen, compactScalarMap, Category.assoc,
+      Etale.rightDerivedLowerShriekOfCompactification, Etale.rightDerivedLowerStar,
+      Functor.comp_map] using h
+  have hQP :
+      (compactScalarMap φ c).app (DerivedCategory.Q.obj P) ≫
+          (NB.comparison f c).hom.app
+            ((Etale.scalarExtension φ X).obj (DerivedCategory.Q.obj P)) =
+        (Etale.scalarExtension φ Y).map
+            ((NA.comparison f c).hom.app (DerivedCategory.Q.obj P)) ≫
+          (ProEtale.CoefficientCompatibility.sumCoefficientIso φ f).hom.app
+            (DerivedCategory.Q.obj P) := by
+    apply (cancel_epi ((Etale.scalarExtension φ Y).map
+      ((NA.comparison f c).inv.app (DerivedCategory.Q.obj P)))).mp
+    simp only [← Category.assoc, hmodel]
+    simp only [Category.assoc, Iso.inv_hom_id_app,
+      ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+    exact Category.comp_id _
+  let α := Etale.compactScalarMap φ c ≫
+    Functor.whiskerLeft (Etale.scalarExtension φ X) (NB.comparison f c).hom
+  let β := Functor.whiskerRight (NA.comparison f c).hom (Etale.scalarExtension φ Y) ≫
+    (ProEtale.CoefficientCompatibility.sumCoefficientIso φ f).hom
+  have hQP' : α.app (DerivedCategory.Q.obj P) = β.app (DerivedCategory.Q.obj P) := by
+    simpa only [α, β, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app] using hQP
+  have hL : α.app L = β.app L := by
+    apply (cancel_epi
+      ((Etale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} A) c ⋙ Etale.scalarExtension φ Y).map eP.hom)).mp
+    rw [α.naturality eP.hom, β.naturality eP.hom, hQP']
+  simpa only [α, β, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app] using hL
+
+
+attribute [local irreducible] affineLeftScalar
+
+/- The two exact-derived adjunction presentations have the same counit.
+This is checked on complex representatives using their localization formulas. -/
+private theorem chart_exact_factor
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (P : CochainComplex C ℤ) :
+    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj P) =
+      F.mapDerivedCategoryFactors.hom.app P := by
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  change F.mapDerivedCategory.map (𝟙 (_root_.DerivedCategory.Q.obj P)) ≫
+    F.mapDerivedCategoryFactors.hom.app P ≫
+      𝟙 (_root_.DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+        _root_.DerivedCategory.Qh.map
+          (𝟙 ((HomotopyCategory.quotient D (.up ℤ)).obj
+            ((F.mapHomologicalComplex (.up ℤ)).obj P))) = _
+  have hi : _root_.DerivedCategory.Qh.map
+      (𝟙 ((HomotopyCategory.quotient D (.up ℤ)).obj
+        ((F.mapHomologicalComplex (.up ℤ)).obj P))) =
+      𝟙 (_root_.DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) :=
+    _root_.DerivedCategory.Qh.map_id _
+  rw [hi, CategoryTheory.Functor.map_id]
+  change (𝟙 _ ≫ F.mapDerivedCategoryFactors.hom.app P ≫ 𝟙 _ ≫ 𝟙 _) =
+    F.mapDerivedCategoryFactors.hom.app P
+  simp only [Category.id_comp, Category.comp_id]
+
+private theorem chart_exact_counit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [MonoidalCategory C] [MonoidalPreadditive C]
+    [HasCountableCoproducts C]
+    [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+    [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
+    [∀ (X : C), PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor C).obj X)]
+    [∀ (X : C), PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor C).flip.obj X)]
+    [Abelian.HasFunctorialFlatResolution C]
+    [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions D]
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G) [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (P : CochainComplex D ℤ) :
+    a.mapDerivedCategoryAdjunction.counit.app (_root_.DerivedCategory.Q.obj P) =
+      F.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
+        F.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          _root_.DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).counit.app P) := by
+  have h := a.mapDerivedCategoryAdjunction_counit_app_Qh_obj
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+  rw [Adjunction.mapHomotopyCategory_counit_app_quotient] at h
+  change a.mapDerivedCategoryAdjunction.counit.app (_root_.DerivedCategory.Q.obj P) = _ at h
+  rw [h]
+  change F.mapDerivedCategory.map
+      (G.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj P)) ≫
+      F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj
+        ((G.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      _root_.DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).counit.app P) = _
+  rw [chart_exact_factor, chart_exact_factor]
+
+private theorem chart_derived_adj_eq (A : Type (u + 1)) [CommRing A]
+    {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] :
+    (etaleLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategoryAdjunction =
+      derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance := by
+  apply Adjunction.ext_counit
+  apply Localization.natTrans_ext _root_.DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ))
+  intro P
+  rw [chart_exact_counit]
+  rw [derivedEtaleLowerShriekUpperStarAdjunction, Adjunction.localization_counit_app]
+  rfl
+
+private theorem chart_inverse_mate_transport
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
+    (a : L ⊣ R) (b : L' ⊣ R')
+    {G G' : C ⥤ E} {H H' : D ⥤ F}
+    (x : TwoSquare R H G R') (i : G ≅ G') (j : H ≅ H') :
+    ((mateEquiv a b).symm
+      (TwoSquare.mk R H' G' R'
+        (Functor.whiskerLeft R i.inv ≫ x.natTrans ≫ Functor.whiskerRight j.hom R'))).natTrans =
+      Functor.whiskerRight i.inv L' ≫ ((mateEquiv a b).symm x).natTrans ≫
+        Functor.whiskerLeft L j.hom := by
+  ext z
+  simp only [mateEquiv_symm_apply, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc]
+  dsimp only [Functor.comp_obj, Functor.comp_map]
+  simp only [Functor.map_comp, Category.assoc, Category.id_comp]
+  have hi := i.inv.naturality (a.unit.app z)
+  dsimp only [Functor.comp_obj, Functor.id_obj] at hi
+  rw [← L'.map_comp_assoc, hi, L'.map_comp]
+  simp only [Category.assoc]
+  have hj := b.counit.naturality (j.hom.app (L.obj z))
+  dsimp only [Functor.comp_map, Functor.id_map] at hj
+  erw [Category.comp_id]
+  erw [Category.id_comp]
+  rw [hj]
+
+private theorem chart_exact_pullback_inverse_mate
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {U V : Scheme.{u}} (e : U ⟶ V) :
+    ((mateEquiv
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ))
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ))).symm
+        (TwoSquare.mk _ _ _ _
+          (Functor.mapDerivedCategorySquareIso
+            (upperStarRestrictScalarsIsoSheaf φ e)).hom)).natTrans =
+      (properOpenCoefficientPullbackIso φ e).inv := by
+  let a := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ)
+  let b := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)
+  let x := TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ e).hom
+  let i := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e
+  let j := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) e
+  have heq : TwoSquare.mk _ _ _ _
+      (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ e)).hom =
+      TwoSquare.mk _ _ _ _
+        (Functor.whiskerLeft (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ)
+          i.inv ≫ x.natTrans ≫
+          Functor.whiskerRight j.hom
+            (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)) := by
+    ext M
+    dsimp only [x, i, j, scalarRestrictionPullbackIso, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.trans_hom,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Iso.symm_hom]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
+      ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+    erw [Category.comp_id]
+  rw [heq, chart_inverse_mate_transport a b x i j]
+  have hm : ((mateEquiv a b).symm x).natTrans = (scalarPullbackIso φ e).inv :=
+    (scalarPullbackIso_inv_mate_restriction φ e).1.symm
+  rw [hm]
+  ext M
+  simp only [properOpenCoefficientPullbackIso, Iso.trans_inv,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Iso.symm_inv,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app, i, j,
+    Category.assoc, scalarExtension, ProEtale.pbcFixedScalarExtension]
+
 attribute [local irreducible] affineLeftScalar
 
 private theorem sum_scalar_counit
@@ -189,7 +544,40 @@ private theorem sum_scalar_counit
         (ModuleCat.{u + 1} A) e inferInstance).ofNatIsoRight
           (leftDerivedUpperStarIsoMapDerivedCategory
             (ModuleCat.{u + 1} A) e).symm).counit.app K) := by
-  have h := firstDerived_eq_second φ e K
+  have h :
+      (ProEtale.CoefficientCompatibility.sumCoefficientIso φ e).hom.app
+          ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K) ≫
+        (etaleLowerShriek (ModuleCat.{u + 1} B) e inferInstance).mapDerivedCategory.map
+          ((properOpenCoefficientPullbackIso φ e).inv.app K) ≫
+        (etaleLowerShriekUpperStarAdjunction
+          (ModuleCat.{u + 1} B) e inferInstance).mapDerivedCategoryAdjunction.counit.app
+          ((scalarExtension φ V).obj K) =
+      (scalarExtension φ V).map
+        ((etaleLowerShriekUpperStarAdjunction
+          (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategoryAdjunction.counit.app K) := by
+    let a := (etaleLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategoryAdjunction
+    let b := (etaleLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} B) e inferInstance).mapDerivedCategoryAdjunction
+    let x := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ)
+    let z := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)
+    let α := (mateEquiv x z).symm (TwoSquare.mk _ _ _ _
+      (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ e)).hom)
+    have hm := congrArg TwoSquare.natTrans
+      (iterated_mateEquiv_conjugateEquiv_symm a b z x
+        (TwoSquare.mk _ _ _ _
+          (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ e)).hom))
+    change ((mateEquiv a b).symm α).natTrans =
+      (ProEtale.CoefficientCompatibility.sumCoefficientIso φ e).inv at hm
+    have h := mateEquiv_counit_symm a b α K
+    change (etaleLowerShriek (ModuleCat.{u + 1} B) e inferInstance).mapDerivedCategory.map
+        (α.natTrans.app K) ≫ b.counit.app ((scalarExtension φ V).obj K) =
+      ((mateEquiv a b).symm α).natTrans.app _ ≫
+        (scalarExtension φ V).map (a.counit.app K) at h
+    rw [hm, chart_exact_pullback_inverse_mate φ e] at h
+    have hh := congrArg (fun t ↦ (ProEtale.CoefficientCompatibility.sumCoefficientIso φ e).hom.app
+      ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K) ≫ t) h
+    simpa only [a, b, Category.assoc, Iso.hom_inv_id_app_assoc] using hh
   let jA := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e
   let jB := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) e
   have hn := (ProEtale.CoefficientCompatibility.sumCoefficientIso φ e).hom.naturality
@@ -198,7 +586,7 @@ private theorem sum_scalar_counit
   have hh := congrArg (fun z ↦ (scalarExtension φ V).map
     ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.map
       (jA.hom.app K)) ≫ z) h
-  simp only [etaleCounitScalarFirstDerived, properOpenCoefficientPullbackIso,
+  simp only [properOpenCoefficientPullbackIso,
     Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_inv,
     Functor.whiskerRight_app, Functor.isoWhiskerLeft_inv,
     Functor.whiskerLeft_app, Iso.symm_inv, Functor.map_comp,
@@ -207,7 +595,9 @@ private theorem sum_scalar_counit
   dsimp only [jA, jB] at hh
   simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp] at hh
-  simpa only [Adjunction.ofNatIsoRight_counit, NatTrans.comp_app,
+  simpa only [Adjunction.ofNatIsoRight_counit,
+    chart_derived_adj_eq,
+    NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, ordinaryFinitePullback,
     Iso.symm_inv, Functor.map_comp, Category.assoc, jA, jB] using hh
 
@@ -292,7 +682,7 @@ private theorem affine_scalar_counit
 private theorem affine_left_zero
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] (c : Compactification (affineTraceProjection S 0)) :
-    ProEtale.reductionEtaleAffineLeftIso A S 0 c =
+    OrdinaryChart.affineLeftIso A S 0 c =
       (Functor.isoWhiskerRight
         (mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) S) _ ≪≫
         Functor.leftUnitor _ ≪≫ rightDerivedLowerStarIdIso A S).symm ≪≫
@@ -303,13 +693,13 @@ private theorem affine_left_succ
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (c : Compactification (affineTraceProjection S (d + 1))) :
-    ProEtale.reductionEtaleAffineLeftIso A S (d + 1) c =
+    OrdinaryChart.affineLeftIso A S (d + 1) c =
       let cp := HasCompactification.compactification (affineTraceProjection S d)
       let ce := c.ofComp cp
       Functor.isoWhiskerRight
         (rightDerivedLowerShriekOfCompactificationIso A
           (affineTraceLineCompactification (affineTraceTower S d)) ce.restrict) _ ≪≫
-      Functor.isoWhiskerLeft _ (ProEtale.reductionEtaleAffineLeftIso A S d cp) ≪≫
+      Functor.isoWhiskerLeft _ (OrdinaryChart.affineLeftIso A S d cp) ≪≫
       rightDerivedLowerShriekOfCompactificationCompIso A cp ce ≪≫
       rightDerivedLowerShriekOfCompactificationIso A (cp.comp ce) c := rfl
 
@@ -319,14 +709,14 @@ private theorem affine_left_scalar
     (c : Compactification (affineTraceProjection S d))
     (K : DerivedCategoryModule A (affineTraceTower S d)) :
     (scalarExtension φ S).map
-        ((ProEtale.reductionEtaleAffineLeftIso A S d c).hom.app K) ≫
+        ((OrdinaryChart.affineLeftIso A S d c).hom.app K) ≫
       (compactScalarMap φ c).app K =
     (affineLeftScalar φ S d).app K ≫
-      (ProEtale.reductionEtaleAffineLeftIso B S d c).hom.app
+      (OrdinaryChart.affineLeftIso B S d c).hom.app
         ((scalarExtension φ (affineTraceTower S d)).obj K) := by
   induction d with
   | zero =>
-    have hi := ordinaryChartIdentityCompactScalar φ S K
+    have hi := chart_identity_scalar φ S K
     have hr := ordinaryChartCompactificationScalar φ
       (Compactification.ofIsProper (𝟙 S)) c K
     rw [affine_left_zero, affine_left_zero]
@@ -363,8 +753,8 @@ private theorem affine_left_scalar
       (affineLeftScalar φ S d) (compactScalarMap φ cp)
       (rightDerivedLowerShriekOfCompactificationIso A cl ce.restrict)
       (rightDerivedLowerShriekOfCompactificationIso B cl ce.restrict)
-      (ProEtale.reductionEtaleAffineLeftIso A S d cp)
-      (ProEtale.reductionEtaleAffineLeftIso B S d cp) hl (ih cp) K
+      (OrdinaryChart.affineLeftIso A S d cp)
+      (OrdinaryChart.affineLeftIso B S d cp) hl (ih cp) K
     have hp := congrArg (fun z ↦ z ≫
       (rightDerivedLowerShriekOfCompactificationCompIso B cp ce).hom.app
         ((scalarExtension φ (affineTraceTower S (d + 1))).obj K) ≫
@@ -431,10 +821,10 @@ private theorem chart_scalar_counit
       ((etaleLowerShriek (ModuleCat.{u + 1} B) e inferInstance).mapDerivedCategory ⋙
           affineTraceLeft B S d).map
         (ProEtale.reductionEtaleChartScalarIso φ N hA hB hS d e K).hom ≫
-      (ProEtale.reductionEtaleChartAdjunction B S N hB tB PB hS d e).counit.app
+      (OrdinaryChart.adjunction B S N hB tB PB hS d e).counit.app
         ((scalarExtension φ S).obj K) =
     (scalarExtension φ S).map
-      ((ProEtale.reductionEtaleChartAdjunction A S N hA tA PA hS d e).counit.app K) := by
+      ((OrdinaryChart.adjunction A S N hA tA PA hS d e).counit.app K) := by
   have h := compose_counit_scalar
     ((derivedEtaleLowerShriekUpperStarAdjunction
       (ModuleCat.{u + 1} A) e inferInstance).ofNatIsoRight
@@ -449,7 +839,7 @@ private theorem chart_scalar_counit
     K ((scalarPullbackIso φ e).inv.app ((affineTraceRight A N hA S d).obj K))
     (ProEtale.reductionEtaleAffineScalarIso φ S N hA hB hS d K).hom
     (sum_scalar_counit φ e _) (affine_scalar_counit φ N hN hA hB S hS tA tB PA PB d K)
-  simpa only [scalarComposite, ProEtale.reductionEtaleChartAdjunction,
+  simpa only [scalarComposite, OrdinaryChart.adjunction,
     ProEtale.reductionEtaleChartScalarIso, Iso.trans_hom, Iso.app_hom, Iso.symm_hom,
     Functor.mapIso_hom, Functor.comp_map, Category.assoc, ordinaryFinitePullback,
     affineTraceLeft] using h
@@ -475,7 +865,7 @@ private theorem ambient_left_scalar
   have ht := ordinaryChartCompactTowerScalar φ e f c ce K
   have hn := (compactScalarMap φ c).naturality ((MA.comparison e ce.restrict).inv.app K)
   simp only [Functor.comp_map] at hn
-  have hs := ordinaryChartSumNormalization φ e ce.restrict MA MB K
+  have hs := chart_sum_normalization φ e ce.restrict MA MB K
   have hsi : (scalarExtension φ V).map ((MA.comparison e ce.restrict).inv.app K) ≫
       (compactScalarMap φ ce.restrict).app K =
     (ProEtale.CoefficientCompatibility.sumCoefficientIso φ e).hom.app K ≫
@@ -507,13 +897,13 @@ private theorem chart_left_scalar
     (he : i ≫ g = e ≫ affineTraceProjection S d)
     (K : DerivedCategoryModule A U) :
     (scalarExtension φ S).map
-        ((ProEtale.reductionEtaleChartLeftIso A MA g i d e he
+        ((OrdinaryChart.leftIso A MA g i d e he
           (HasCompactification.compactification g)).hom.app K) ≫
       (scalarComposite (ProEtale.CoefficientCompatibility.sumCoefficientIso φ i).hom
         (compactScalarMap φ (HasCompactification.compactification g))).app K =
     (scalarComposite (ProEtale.CoefficientCompatibility.sumCoefficientIso φ e).hom
         (affineLeftScalar φ S d)).app K ≫
-      (ProEtale.reductionEtaleChartLeftIso B MB g i d e he
+      (OrdinaryChart.leftIso B MB g i d e he
         (HasCompactification.compactification g)).hom.app
           ((scalarExtension φ U).obj K) := by
   have : IsNoetherian (affineTraceTower S d) := affineTraceNoetherian S d
@@ -524,7 +914,7 @@ private theorem chart_left_scalar
   have hj := ambient_left_scalar φ MA MB e (affineTraceProjection S d) cp cg K
   have ha := affine_left_scalar φ S d cp
     ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.obj K)
-  have hn := (ProEtale.reductionEtaleAffineLeftIso B S d cp).hom.naturality
+  have hn := (OrdinaryChart.affineLeftIso B S d cp).hom.naturality
     ((ProEtale.CoefficientCompatibility.sumCoefficientIso φ e).hom.app K)
   simp only [Functor.comp_map] at hn
   dsimp only [cp, cg, cf] at hi hj ha hn ⊢
@@ -533,7 +923,7 @@ private theorem chart_left_scalar
   dsimp only [scalarComposite]
   simp only [Category.assoc]
   erw [← hi]
-  simp only [ProEtale.reductionEtaleChartLeftIso, Iso.trans_hom, Iso.symm_hom,
+  simp only [OrdinaryChart.leftIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     Functor.map_comp, Category.assoc]
   simp only [← Functor.map_comp_assoc]
@@ -546,13 +936,12 @@ attribute [local irreducible] ProEtale.reductionEtaleChartAdjunction
 
 /-- The ordinary exceptional coefficient mate, restricted to one source chart, is
 canonical scalar reassociation for the sum-then-ordered-affine right adjunction.
-Source: blueprint/latest, sec-smooth-purity/sk-lem-sp-reduction/
-sk-lem-sp-reduction-exceptional.proof.md, chart argument, and
-sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md, Proof (2).
+Source: general-ring smooth purity, Proof (2), local adjunctions;
+exceptional coefficient change, Charts.
 (blueprint: lem-pur-ordinary-chart-exceptional-scalar).
 
 Proof: transpose both sides under the B-coefficient chart adjunction. The definition
-of reductionEtaleChartRightIso preserves the counit of the compactified exceptional
+of OrdinaryChart.rightIso preserves the counit of the compactified exceptional
 adjunction. The defining transpose equation for mateMap therefore expresses the
 second path as scalar extension of the A-counit, preceded by the inverse compact
 support comparison. For the first path, the graph normalization of MA and MB
@@ -590,7 +979,7 @@ theorem ordinary_chart_exceptional_scalar
       OrdinaryFiniteP1Datum B N hB tB T hT)
     (K : DerivedCategoryModule A S) :
     (scalarExtension φ U).map
-        ((ProEtale.reductionEtaleChartRightIso A MA g i d e he
+        ((OrdinaryChart.rightIso A MA g i d e he
           (HasCompactification.compactification g)
           (rightDerivedUpperShriek A g)
           (rightDerivedUpperShriekAdjunction A g)
@@ -599,7 +988,7 @@ theorem ordinary_chart_exceptional_scalar
     (scalarPullbackIso φ i).inv.app
         ((rightDerivedUpperShriek A g).obj K) ≫
       (ordinaryFinitePullback B i).map (ExceptionalCoefficients.mateMap φ g K) ≫
-      (ProEtale.reductionEtaleChartRightIso B MB g i d e he
+      (OrdinaryChart.rightIso B MB g i d e he
         (HasCompactification.compactification g)
         (rightDerivedUpperShriek B g)
         (rightDerivedUpperShriekAdjunction B g)
@@ -612,11 +1001,11 @@ theorem ordinary_chart_exceptional_scalar
     (ModuleCat.{u + 1} B) i inferInstance).ofNatIsoRight
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) i).symm).comp
         (rightDerivedUpperShriekAdjunction B g)
-  let hA' := ProEtale.reductionEtaleChartAdjunction A S N hA tA PA hS d e
-  let hB' := ProEtale.reductionEtaleChartAdjunction B S N hB tB PB hS d e
-  let lA := ProEtale.reductionEtaleChartLeftIso A MA g i d e he
+  let hA' := OrdinaryChart.adjunction A S N hA tA PA hS d e
+  let hB' := OrdinaryChart.adjunction B S N hB tB PB hS d e
+  let lA := OrdinaryChart.leftIso A MA g i d e he
     (HasCompactification.compactification g)
-  let lB := ProEtale.reductionEtaleChartLeftIso B MB g i d e he
+  let lB := OrdinaryChart.leftIso B MB g i d e he
     (HasCompactification.compactification g)
   let β := scalarComposite (ProEtale.CoefficientCompatibility.sumCoefficientIso φ i).hom
     (compactScalarMap φ (HasCompactification.compactification g))
@@ -672,6 +1061,6 @@ theorem ordinary_chart_exceptional_scalar
     aB (hB'.ofNatIsoLeft lB) (scalarExtension φ U) (scalarExtension φ S)
     β K q r hq hb hr
   simpa only [aA, aB, hA', hB', lA, lB, q, r,
-    ProEtale.reductionEtaleChartRightIso, Category.assoc] using h
+    OrdinaryChart.rightIso, Category.assoc] using h
 
 end AlgebraicGeometry.Etale

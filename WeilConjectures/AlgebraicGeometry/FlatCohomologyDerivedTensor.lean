@@ -123,4 +123,96 @@ def canonicalCoefficientMap (R : Type u) [CommRing R]
   exact ModuleCat.ofHom (TensorProduct.lift (LinearMap.mk₂ R
     (coefficientActionFunction R K M q) h₁ h₂ h₃ h₄))
 
+/-- The canonical coefficient map has the unit normalization on pure tensors.
+Source: Stacks Project, Tag 0H7Z; blueprint: lem-pur-flat-cohomology-derived-tensor.
+-/
+theorem canonicalCoefficientMap_unit_normalization
+    (R : Type u) [CommRing R]
+    [HasDerivedCategory.{w} (ModuleCat.{u} R)]
+    (K : DerivedCategory (ModuleCat.{u} R)) (M : ModuleCat.{u} R) (q : ℤ)
+    (x : (DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).obj K) (a : M) :
+    (canonicalCoefficientMap R K M q).hom (x ⊗ₜ[R] a) =
+      (coefficientAction R K M q a).hom x := by
+  unfold canonicalCoefficientMap
+  generalize coefficientActionFunction_bilinear R K M q = hb
+  obtain ⟨h₁, h₂, h₃, h₄⟩ := hb
+  exact TensorProduct.lift.tmul x a
+
+/-- The canonical coefficient maps are natural in `K`.
+Source: Stacks Project, Tag 0H7Z; blueprint: lem-pur-flat-cohomology-derived-tensor.
+-/
+theorem canonicalCoefficientMap_natural_K
+    (R : Type u) [CommRing R]
+    [HasDerivedCategory.{w} (ModuleCat.{u} R)]
+    (K K' : DerivedCategory (ModuleCat.{u} R)) (M : ModuleCat.{u} R) (q : ℤ)
+    (g : K ⟶ K') :
+    ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).map g ⊗ₘ 𝟙 M) ≫
+        canonicalCoefficientMap R K' M q =
+      canonicalCoefficientMap R K M q ≫
+        (DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).map
+          (((curriedTensor (DerivedCategory (ModuleCat.{u} R))).map g).app
+            ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj M)) := by
+  apply ModuleCat.hom_ext
+  apply TensorProduct.ext'
+  intro x a
+  change (canonicalCoefficientMap R K' M q).hom
+      (((DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).map g).hom x ⊗ₜ[R] a) =
+    ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).map
+      (((curriedTensor (DerivedCategory (ModuleCat.{u} R))).map g).app
+        ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj M))).hom
+          ((canonicalCoefficientMap R K M q).hom (x ⊗ₜ[R] a))
+  rw [canonicalCoefficientMap_unit_normalization, canonicalCoefficientMap_unit_normalization]
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} R) q
+  have he : H.map g ≫ coefficientAction R K' M q a =
+      coefficientAction R K M q a ≫ H.map
+        (((curriedTensor (DerivedCategory (ModuleCat.{u} R))).map g).app
+          ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj M)) := by
+    dsimp only [coefficientAction, H]
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    congr 1
+    simp only [curriedTensor_obj_map, curriedTensor_map_app]
+    rw [rightUnitor_inv_naturality_assoc, Category.assoc, ← whisker_exchange]
+  exact congrArg (fun f ↦ f.hom x) he
+
+/-- The canonical coefficient maps are natural in `M`.
+Source: Stacks Project, Tag 0H7Z; blueprint: lem-pur-flat-cohomology-derived-tensor.
+-/
+theorem canonicalCoefficientMap_natural_M
+    (R : Type u) [CommRing R]
+    [HasDerivedCategory.{w} (ModuleCat.{u} R)]
+    (K : DerivedCategory (ModuleCat.{u} R)) (M M' : ModuleCat.{u} R) (q : ℤ)
+    (h : M ⟶ M') :
+    ((𝟙 ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).obj K)) ⊗ₘ h) ≫
+        canonicalCoefficientMap R K M' q =
+      canonicalCoefficientMap R K M q ≫
+        (DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).map
+          (((curriedTensor (DerivedCategory (ModuleCat.{u} R))).obj K).map
+            ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).map h)) := by
+  apply ModuleCat.hom_ext
+  apply TensorProduct.ext'
+  intro x a
+  change (canonicalCoefficientMap R K M' q).hom (x ⊗ₜ[R] h.hom a) =
+    ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).map
+      (((curriedTensor (DerivedCategory (ModuleCat.{u} R))).obj K).map
+        ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).map h))).hom
+          ((canonicalCoefficientMap R K M q).hom (x ⊗ₜ[R] a))
+  rw [canonicalCoefficientMap_unit_normalization, canonicalCoefficientMap_unit_normalization]
+  let S := DerivedCategory.singleFunctor (ModuleCat.{u} R) 0
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} R) q
+  have hf : ModuleCat.ofHom (LinearMap.toSpanSingleton R M' (h.hom a)) =
+      ModuleCat.ofHom (LinearMap.toSpanSingleton R M a) ≫ h := by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro r
+    simp [LinearMap.toSpanSingleton_apply]
+  have he : coefficientAction R K M' q (h.hom a) =
+      coefficientAction R K M q a ≫ H.map
+        (((curriedTensor (DerivedCategory (ModuleCat.{u} R))).obj K).map (S.map h)) := by
+    dsimp only [coefficientAction, H, S]
+    rw [← Functor.map_comp]
+    congr 1
+    rw [hf, Functor.map_comp]
+    simp only [curriedTensor_obj_map, Functor.map_comp, whiskerLeft_comp, Category.assoc]
+  exact congrArg (fun f ↦ f.hom x) he
+
 end AlgebraicGeometry.Etale

@@ -106,6 +106,8 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionDirectImage
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SkPropSfRfShriekPreservation
 
 /-!
 # Data for finite-coefficient exceptional realization
@@ -144,7 +146,22 @@ theorem reductionExceptionalGood (T : Scheme.{u}) (A : Type u)
       Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor _ i).obj M)} ∧
         (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf T A
           ((DerivedCategory.homologyFunctor _ i).obj M)) ∧
-        HasFiniteProEtaleTorAmplitude T A M := by sorry
+        HasFiniteProEtaleTorAmplitude T A M := by
+  constructor
+  · rintro ⟨⟨a, b, _hab, hv⟩, hc, ht⟩
+    refine ⟨(Set.finite_Icc a b).subset ?_, hc, ht⟩
+    intro i hi
+    exact ⟨le_of_not_gt (fun h ↦ hi (hv i (Or.inl h))),
+      le_of_not_gt (fun h ↦ hi (hv i (Or.inr h)))⟩
+  · rintro ⟨hs, hc, ht⟩
+    obtain ⟨a, ha⟩ := hs.bddBelow
+    obtain ⟨b, hb⟩ := hs.bddAbove
+    refine ⟨⟨min a b, max a b, min_le_max, ?_⟩, hc, ht⟩
+    intro i hi
+    by_contra hz
+    rcases hi with hi | hi
+    · exact (not_lt_of_ge ((min_le_left a b).trans (ha hz))) hi
+    · exact (not_lt_of_ge ((hb hz).trans (le_max_right a b))) hi
 
 local instance reductionExceptionalDiscreteSpace (A : Type u) : TopologicalSpace A := ⊥
 local instance reductionExceptionalDiscrete (A : Type u) : DiscreteTopology A := ⟨rfl⟩
@@ -224,7 +241,10 @@ theorem counit_formula
       (AdjunctionTransfer.proEtaleLowerShriek (ULift.{u + 1} R) c T.hPro).map
         (T.eX.functor.map (G.map (T.eY.unitIso.inv.app K))) ≫
         T.cf.inv.app (G.obj K) ≫ T.eY.functor.map (a.counit.app K) := by
-  sorry
+  exact (AdjunctionTransfer.etaleProEtaleAdjunctionTransferOfComparison
+    (ULift.{u + 1} R) c T.hX T.hY T.eX T.eY T.heX T.heY
+    T.hEt T.hPro T.cf G a).choose_spec.1 K
+
 end ReductionExceptionalChartTransfer
 
 /-- Coordinate-chart data. Ordinary right adjoints and adjunctions below are
@@ -261,7 +281,6 @@ theorem reductionExceptionalNativeMembership (R : Type u) [CommRing R] [Finite R
     (T : Scheme.{u})
     (K : (AdjunctionTransfer.proEtaleProperty (ULift.{u + 1} R) T).FullSubcategory) :
     spFiniteConstructibleTor T R ((sfIntrinsicDerivedEquivalence T R).functor.obj K.obj) :=
-  by sorry
 
 /-- The actual restricted intrinsic coefficient realization, with fixed forward
 functor. Source: Existence step (blueprint: det-sp-reduction-exceptional). -/
@@ -279,7 +298,24 @@ same constructibility, boundedness and Tor conditions, so every intrinsic Dctf
 object has a preimage in the fixed-scalar Dctf category. -/
 theorem reductionExceptionalNativeFunctor_isEquivalence
     (R : Type u) [CommRing R] [Finite R] (T : Scheme.{u}) :
-    (reductionExceptionalNativeFunctor R T).IsEquivalence := by sorry
+    (reductionExceptionalNativeFunctor R T).IsEquivalence := by
+  let E := sfIntrinsicDerivedEquivalence T R
+  have : (reductionExceptionalNativeFunctor R T).Full := by
+    dsimp [reductionExceptionalNativeFunctor]
+    infer_instance
+  have : (reductionExceptionalNativeFunctor R T).Faithful := by
+    dsimp [reductionExceptionalNativeFunctor]
+    infer_instance
+  have : (reductionExceptionalNativeFunctor R T).EssSurj := by
+    constructor
+    intro M
+    let K := E.inverse.obj M.obj
+    have hgood := (reductionGood_realization_iff T R K).mp
+      (reductionGood_iso (E.counitIso.app M.obj).symm
+        ((reductionExceptionalGood T R M.obj).mp M.property))
+    have hK := (AdjunctionTransfer.proEtaleProperty_iff (ULift.{u + 1} R) T K).mpr hgood
+    exact ⟨⟨K, hK⟩, ⟨(spFiniteConstructibleTor T R).isoMk (E.counitIso.app M.obj)⟩⟩
+  exact {}
 
 /-- The single fixed change from fixed-scalar to intrinsic pro-etale Dctf
 coordinates. Source: Existence step (blueprint: det-sp-reduction-exceptional). -/
@@ -329,7 +365,9 @@ right functor to pullback along p_d, tensor with the finite Tate sheaf and shift
 by 2d. Whisker it on the right with the etale pullback along e. -/
 theorem ordinaryRight_normalForm [IsNoetherian Y] (hpos : 0 < N)
     (hY : IsUnit (N : Γ(Y, ⊤))) : Nonempty (C.ordinaryRight ≅ C.ordinaryTwistedPullback) := by
-  sorry
+  obtain ⟨a⟩ := (Etale.affineTraceRight_normalForm
+    (ULift.{u + 1} R) N hpos hN Y hY d).1
+  exact ⟨Functor.isoWhiskerRight a (Etale.ordinaryFinitePullback (ULift.{u + 1} R) e)⟩
 
 /-- The actual sum/evaluation followed by affine-trace adjunction.
 Source: Charts step, first paragraph (blueprint: det-sp-reduction-exceptional). -/
@@ -342,7 +380,7 @@ Proof: unfold `ordinaryAdjunction`; both sides are the same term. -/
 theorem ordinaryAdjunction_canonical [IsNoetherian Y] (hY : IsUnit (N : Γ(Y, ⊤))) :
     C.ordinaryAdjunction hY =
       reductionEtaleChartAdjunction (ULift.{u + 1} R) Y N hN C.t C.D hY d e := by
-  sorry
+  rfl
 
 /-- On the constant input the chart counit is exactly etale sum/evaluation
 followed by the named ordered affine trace, in that order.
@@ -362,7 +400,7 @@ theorem ordinaryCounit_unit [IsNoetherian Y] (hY : IsUnit (N : Γ(Y, ⊤))) :
           ((Etale.affineTraceRight (ULift.{u + 1} R) N hN Y d).obj
             (Etale.ordinaryFiniteUnit (ULift.{u + 1} R) Y))) ≫
         Etale.affineTraceCounit (ULift.{u + 1} R) N hN C.t C.D Y hY d := by
-  sorry
+  exact Adjunction.comp_counit_app _ _ _
 
 /-- Restrict the ordered chart right functor to the recorded etale Dctf property.
 Source: Charts step, G_d,R (blueprint: det-sp-reduction-exceptional). -/
@@ -424,7 +462,7 @@ theorem proEtaleCounit_formula [IsNoetherian Y] [IsNoetherian U]
           (C.ordinaryRightSmall.map (C.transfer.eY.unitIso.inv.app K))) ≫
         C.transfer.cf.inv.app (C.ordinaryRightSmall.obj K) ≫
         C.transfer.eY.functor.map ((C.ordinarySmallAdjunction hY).counit.app K) := by
-  sorry
+  exact C.transfer.counit_formula C.ordinaryRightSmall (C.ordinarySmallAdjunction hY) K
 
 /-- G_d,R in the intrinsic pro-etale Dctf categories used by the item.
 Source: Charts step, comparison transport (blueprint: det-sp-reduction-exceptional). -/
@@ -441,7 +479,6 @@ compact-support composite for the identical compactification. -/
 theorem compactSupportPreserves :
     ∀ M : spFiniteConstructibleTorCategory U R,
       spFiniteConstructibleTor Y R ((reductionCompactSupport R C.c.i C.c.g).obj M.obj) :=
-  by sorry
 
 /-- The chart's actual intrinsic compact-support functor for its given
 compactification. Source: Charts step (blueprint: det-sp-reduction-exceptional). -/
@@ -493,7 +530,11 @@ quasi-compactness makes the scheme Noetherian. -/
 theorem reductionExceptionalNoetherian (k : Type u) [Field k]
     (T : Scheme.{u}) [T.Over (Spec (.of k))]
     [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] :
-    IsNoetherian T := by sorry
+    IsNoetherian T := by
+  have : IsLocallyNoetherian T :=
+    LocallyOfFiniteType.isLocallyNoetherian (T ↘ Spec (.of k))
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
+  exact ⟨⟩
 
 /-- An open subscheme of a Noetherian scheme is Noetherian.
 Source: det-sp-reduction-exceptional, coordinate-chart setting
@@ -501,7 +542,10 @@ Source: det-sp-reduction-exceptional, coordinate-chart setting
 Proof: local Noetherianity restricts to opens, and every open of a Noetherian
 space is quasi-compact. Apply this to the open immersion's image. -/
 theorem reductionExceptionalOpenNoetherian {T V : Scheme.{u}}
-    [IsNoetherian T] (v : V ⟶ T) [IsOpenImmersion v] : IsNoetherian V := by sorry
+    [IsNoetherian T] (v : V ⟶ T) [IsOpenImmersion v] : IsNoetherian V := by
+  have : IsLocallyNoetherian V := isLocallyNoetherian_of_isOpenImmersion v
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace v
+  exact ⟨⟩
 
 /-- The actual chart trace exponent is invertible in the standing setting.
 Source: det-sp-reduction-exceptional, Charts, finite Tate convention
@@ -512,7 +556,15 @@ the structure morphism to global sections of T. -/
 theorem reductionExceptionalExponentUnit (ell : ℕ) [Fact ell.Prime]
     (k : Type u) [Field k] (hchar : ringChar k ≠ ell)
     (T : Scheme.{u}) [T.Over (Spec (.of k))] (n : ℕ) :
-    IsUnit ((ell ^ n : ℕ) : Γ(T, ⊤)) := by sorry
+    IsUnit ((ell ^ n : ℕ) : Γ(T, ⊤)) := by
+  have hne : (ell : k) ≠ 0 :=
+    CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ell.Prime) hchar
+  have hu : IsUnit ((ell ^ n : ℕ) : k) := by
+    rw [Nat.cast_pow]
+    exact isUnit_iff_ne_zero.mpr (pow_ne_zero n hne)
+  have hs : IsUnit ((ell ^ n : ℕ) : Γ(Spec (.of k), ⊤)) := by
+    simpa only [map_natCast] using hu.map (Scheme.ΓSpecIso (.of k)).inv.hom
+  simpa only [map_natCast] using hs.map (T ↘ Spec (.of k)).appTop.hom
 
 /-- The fixed finite-coefficient scalar and exceptional data used by the reduction
 exceptional construction.  The comparison `b` is the compact-support coefficient

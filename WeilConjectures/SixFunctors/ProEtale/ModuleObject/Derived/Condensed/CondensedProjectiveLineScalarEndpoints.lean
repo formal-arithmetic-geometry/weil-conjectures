@@ -262,7 +262,9 @@ theorem condensed_projectiveLine_scalar_endpoints
   let K := 𝟙_ (DerivedCategory
     (Mod (Sheaf (Scheme.ProEt.topology (ProjectiveLine S)) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ℓ]) (ProjectiveLine S))))
-  obtain ⟨hf, hi⟩ := DiagonalCoefficients.integralScalarComparison_isIso ℓ E q
+  have hfi := DiagonalCoefficients.integralScalarComparison_isIso ℓ E q
+  have hf := hfi.fst
+  have hi := hfi.snd
   let : ∀ T : Scheme.{u}, PreservesFiniteLimits
       (Mod.extendScalars (coefficientMap a T)) := hf
   let : ∀ T : Scheme.{u}, PreservesFiniteLimits
@@ -281,27 +283,28 @@ theorem condensed_projectiveLine_scalar_endpoints
       (Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) T)) :=
     fun T ↦ coefficient_flat_of_eq ((a ≫ b) ≫ c)
       (Profinite.padicIntRingObjToPadicAlgCl ℓ) (coefficient_factor ℓ) T
-  have h0 : IsIso (derivedPushHom a q) := hi
-  have : ((Mod.extendScalars (coefficientMap a (ProjectiveLine S))).leftDerivedFunctor.obj
-      K).IsGE 0 := scalar_unit_isGE a (ProjectiveLine S)
-  have h1 : IsIso ((derivedPushHom b q).app
-      ((Mod.extendScalars (coefficientMap a (ProjectiveLine S))).leftDerivedFunctor.obj K)) :=
-    isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E q _ 0
-  have h2 : IsIso ((derivedPushHom (a ≫ b) q).app K) :=
-    derived_push_comp_pointwise_isIso a b q K
-      (NatIso.isIso_app_of_isIso (derivedPushHom a q) K) h1
-  have : ((Mod.extendScalars (coefficientMap (a ≫ b)
-      (ProjectiveLine S))).leftDerivedFunctor.obj K).IsGE 0 :=
-    scalar_unit_isGE (a ≫ b) (ProjectiveLine S)
-  have h3 : IsIso ((derivedPushHom c q).app
+  have hGE1 : PLift (((Mod.extendScalars (coefficientMap a (ProjectiveLine S))).leftDerivedFunctor.obj
+      K).IsGE 0) := ⟨scalar_unit_isGE a (ProjectiveLine S)⟩
+  have h1 : PLift (IsIso ((derivedPushHom b q).app
+      ((Mod.extendScalars (coefficientMap a (ProjectiveLine S))).leftDerivedFunctor.obj K))) :=
+    ⟨haveI := hGE1.down; isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E q _ 0⟩
+  have h2 : PLift (IsIso ((derivedPushHom (a ≫ b) q).app K)) :=
+    ⟨derived_push_comp_pointwise_isIso a b q K
+      (haveI : IsIso (derivedPushHom a q) := hi
+       NatIso.isIso_app_of_isIso (derivedPushHom a q) K) h1.down⟩
+  have hGE2 : PLift (((Mod.extendScalars (coefficientMap (a ≫ b)
+      (ProjectiveLine S))).leftDerivedFunctor.obj K).IsGE 0) :=
+    ⟨scalar_unit_isGE (a ≫ b) (ProjectiveLine S)⟩
+  have h3 : PLift (IsIso ((derivedPushHom c q).app
       ((Mod.extendScalars (coefficientMap (a ≫ b)
-        (ProjectiveLine S))).leftDerivedFunctor.obj K)) :=
-    isIso_derivedPushHom_padicAlgCl_of_boundedBelow ℓ E q ⟨_, 0, inferInstance⟩
-  have h4 : IsIso ((derivedPushHom ((a ≫ b) ≫ c) q).app K) :=
-    derived_push_comp_pointwise_isIso (a ≫ b) c q K h2 h3
-  have : IsIso ((derivedPushHom (Profinite.padicIntRingObjToPadicAlgCl ℓ) q).app K) :=
-    derived_push_isIso_of_eq ((a ≫ b) ≫ c) (Profinite.padicIntRingObjToPadicAlgCl ℓ)
-      (coefficient_factor ℓ) q K h4
+        (ProjectiveLine S))).leftDerivedFunctor.obj K))) :=
+    ⟨isIso_derivedPushHom_padicAlgCl_of_boundedBelow ℓ E q ⟨_, 0, hGE2.down⟩⟩
+  have h4 : PLift (IsIso ((derivedPushHom ((a ≫ b) ≫ c) q).app K)) :=
+    ⟨derived_push_comp_pointwise_isIso (a ≫ b) c q K h2.down h3.down⟩
+  have h5 : PLift (IsIso ((derivedPushHom (Profinite.padicIntRingObjToPadicAlgCl ℓ) q).app K)) :=
+    ⟨derived_push_isIso_of_eq ((a ≫ b) ≫ c) (Profinite.padicIntRingObjToPadicAlgCl ℓ)
+      (coefficient_factor ℓ) q K h4.down⟩
+  haveI := h5.down
   exact endpoint_from_mate
     (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj ℤ_[ℓ]) q)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) q)

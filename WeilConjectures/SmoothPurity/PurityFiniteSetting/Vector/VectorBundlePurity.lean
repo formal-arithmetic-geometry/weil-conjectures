@@ -99,6 +99,27 @@ import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 import Mathlib.RingTheory.Ideal.Quotient.Index
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.Normalized.NormalizedVectorPurityBundle
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
+public import Mathlib.CategoryTheory.Whiskering
+public import WeilConjectures.AlgebraicGeometry.CompactProjectionExchange
+public import WeilConjectures.AlgebraicGeometry.EtaleEvenLineSelfSymmetry
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+public import WeilConjectures.AlgebraicGeometry.SmoothPurity.ShriekTensorCompositionSupplement
+public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
+public import WeilConjectures.AlgebraicGeometry.Vector.VectorTraceGeometricDescent
+public import WeilConjectures.AlgebraicGeometry.VectorTraceGeometry.VectorTraceGeometry
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Normalized.NormalizedVectorPurityScalarCompatibility
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Normalized.NormalizedVectorPurityScalarLineWitness
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.NormalizedIntegrationTensor
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.OrientationRefinement.VectorNormalizedUnitAdjunct
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Vector.VectorIntegrationCartesianTrace
 
 /-! # Vector-bundle purity
 
@@ -129,5 +150,65 @@ attribute [local irreducible] AlgebraicGeometry.Etale.derivedTensorSymmetry
 attribute [local irreducible] VectorBundleZeroSection.scheme VectorBundleZeroSection.π
   VectorBundleZeroSection.over VectorBundleZeroSection.antiEquivalence
 set_option backward.isDefEq.respectTransparency true
+
+end WeilConjectures.PurityFiniteSetting
+
+namespace WeilConjectures.PurityFiniteSetting
+
+/-- Vector-bundle purity in the ordinary finite-coefficient realization.
+The coefficient ring is arbitrary; in particular this includes every positive finite
+quotient of a coefficient valuation ring. The scalar clause applies to every finite
+coefficient homomorphism, including all quotient reductions and the unit object.
+Source: latest blueprint sk-prop-an/cor-pur-vector-bundle-purity, paragraphs 1--2
+(blueprint: lem-pur-ordinary-vector-bundle-purity-assembly). -/
+def VectorBundlePurityConclusion (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (B : Scheme.{u}) [IsNoetherian B] (hB : IsUnit (N : Γ(B, ⊤)))
+    (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d] : Prop :=
+  letI := (Etale.vectorIntegration_geometry B d F).1
+  letI := (Etale.vectorIntegration_geometry B d F).2.1
+  VectorPurityFunctorConclusion A (VectorBundleZeroSection.π B d F)
+    (Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) B)
+    (Etale.vectorIntegrationCoefficient A N hA B d F)
+    (Etale.vectorBundleIntegration N hN A hA B hB d F ≫
+      (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) B).hom) ∧
+  ∃ γ : VectorPurityGamma A N hA B d F,
+    VectorPurityGammaNormalized A N hN hA B hB d F γ ∧
+    (∀ K : Etale.DerivedCategoryModule A B, IsIso (γ.app K)) ∧
+    PurityBaseChangeEquation A N hN hA B hB d F γ ∧
+    PurityDirectSumEquation A N hN hA B hB d F γ ∧
+    ∀ (A' : Type (u + 1)) [CommRing A'] [Finite A'] (φ : A →+* A'),
+      PurityScalarReductionEquation φ N hN hA B hB d F γ
+
+/-- Integration-normalized purity for arbitrary finite coefficients.
+
+Source: latest blueprint sk-prop-an/cor-pur-vector-bundle-purity.proof.md,
+paragraphs 1--2 (blueprint: lem-pur-ordinary-vector-bundle-purity-assembly).
+
+Proof: the ordinary vector integration theorem gives the invertible normalized
+adjunct and its unique unit orientation. Geometric trace descent, transposed under
+the Brown adjunction, gives base change; the ordered two-block trace and composite
+adjunction give direct sums. For scalar extension choose the uniquely root-normalized
+Tate balancing, construct the target integration-normalized family independently,
+and transpose scalar trace descent using the inverse compact-support comparison.
+This gives the specified scalar mate equation, including its coefficient-unit
+component. No flatness of the coefficient homomorphism is required. -/
+theorem vectorBundlePurity (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (B : Scheme.{u}) [IsNoetherian B] (hB : IsUnit (N : Γ(B, ⊤)))
+    (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d] :
+    VectorBundlePurityConclusion A N hN hA B hB d F := by
+  let := (Etale.vectorIntegration_geometry B d F).1
+  let := (Etale.vectorIntegration_geometry B d F).2.1
+  obtain ⟨hpur, γ, hn, hi⟩ := vectorBundleNormalized A N hN hA B hB d F
+  refine ⟨hpur, γ, hn, hi, ?_, ?_, ?_⟩
+  · exact vectorIntegrationCounit_baseChange A N hN hA B hB d F γ hn hi
+  · exact vectorIntegrationCounit_directSum A N hN hA B hB d F γ hn
+  · intro A' _ _ φ
+    obtain ⟨hA', c, hc⟩ := exists_purityScalarLineNormalization A N hN hA B hB A' φ
+    obtain ⟨_, γm, hnm, hγm⟩ := vectorBundleNormalized A' N hN hA' B hB d F
+    exact ⟨hA', c, γm, hnm, hc,
+      scalarReduction_compatibility_of_witnesses A N hN hA B hB d F γ hn hi
+        A' φ hA' c γm hnm hγm hc⟩
 
 end WeilConjectures.PurityFiniteSetting

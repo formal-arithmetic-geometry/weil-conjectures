@@ -11,6 +11,10 @@ public import WeilConjectures.Algebra.Homology.LinearScalarCone.LinearScalarCone
 import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeAdjoint
 import all WeilConjectures.SmoothPurity.Integral.IntegralPrincipalConeQuotientAugmentation
 import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+public import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeAugmentation
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Normalized adjoints of strict DVR coefficient maps
 
@@ -163,12 +167,29 @@ private theorem coefficient_exact (n : ℕ) :
       (ShortComplex.mk _ _ ht).ShortExact := by
   exact regularExact l E X n
 
-private theorem scalar_eq (n : ℕ)
-    (P : CochainComplex (scalarReductionSource l E X) ℤ) :
-    (SheafOfModules.RegularQuotientCone.complexScalar
-      (completedIntegralCommRingSheafUnrestricted l E X)
-      (powerSection l E X n)).app P =
-        normalizedDVRUniformizer l E X ^ (n + 1) • 𝟙 P := by
+/-- Positive powers of a compatible ring section commute with restriction.
+Source: the two-term coefficient resolution in DVR effectivity.
+(blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint). -/
+theorem principalCoefficientPower_naturality
+    (s : RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (n : ℕ)
+    {U V : Cᵒᵖ} (f : U ⟶ V) :
+    R.obj.map f (s.val U ^ (n + 1)) = s.val V ^ (n + 1) := by
+  rw [map_pow]
+  exact congrArg (fun z : R.obj.obj V ↦ z ^ (n + 1)) (s.property f)
+
+/-- The positive power of a compatible ring section as a section of the unit module.
+Source: the two-term coefficient resolution in DVR effectivity.
+(blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint). -/
+def principalCoefficientPowerSection
+    (s : RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (n : ℕ) :
+    (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections :=
+  ⟨fun U ↦ s.val U ^ (n + 1), by
+    intro U V f
+    exact principalCoefficientPower_naturality s n f⟩
+
+private theorem scalar_eq (n : ℕ) (P : CochainComplex (Modules R) ℤ) :
+    (SheafOfModules.RegularQuotientCone.complexScalar R
+      (principalCoefficientPowerSection s n)).app P = s ^ (n + 1) • 𝟙 P := by
   apply HomologicalComplex.hom_ext
   intro q
   ext U x
@@ -176,29 +197,29 @@ private theorem scalar_eq (n : ℕ)
 
 private def cone_iso (n : ℕ) :
     SheafOfModules.RegularQuotientCone.cone
-      (completedIntegralCommRingSheafUnrestricted l E X)
-      (powerSection l E X n) ≅
+      R
+      (principalCoefficientPowerSection s n) ≅
         CochainComplex.LinearScalarCone.cochain
-          (A := scalarReductionSource l E X)
-          (normalizedDVRUniformizer l E X ^ (n + 1)) := by
-  let a : 𝟭 (CochainComplex (scalarReductionSource l E X) ℤ) ⟶
-      𝟭 (CochainComplex (scalarReductionSource l E X) ℤ) :=
+          (A := Modules R)
+          (s ^ (n + 1)) := by
+  let a : 𝟭 (CochainComplex (Modules R) ℤ) ⟶
+      𝟭 (CochainComplex (Modules R) ℤ) :=
     SheafOfModules.RegularQuotientCone.complexScalar
-    (completedIntegralCommRingSheafUnrestricted l E X) (powerSection l E X n)
-  let H : CochainComplex (scalarReductionSource l E X) ℤ ⥤
-      Arrow (CochainComplex (scalarReductionSource l E X) ℤ) := {
+    R (principalCoefficientPowerSection s n)
+  let H : CochainComplex (Modules R) ℤ ⥤
+      Arrow (CochainComplex (Modules R) ℤ) := {
     obj := fun P ↦ Arrow.mk (a.app P)
     map := fun f ↦ Arrow.homMk f f (by
       simpa only [Functor.id_map, Arrow.mk_hom] using a.naturality f) }
   let e : H ≅ CochainComplex.smulArrow
-      (𝒜 := scalarReductionSource l E X)
-      (normalizedDVRUniformizer l E X ^ (n + 1)) :=
+      (𝒜 := Modules R)
+      (s ^ (n + 1)) :=
     NatIso.ofComponents (fun P ↦ Arrow.isoMk (Iso.refl _) (Iso.refl _)
       (by
-        change (𝟙 P) ≫ (normalizedDVRUniformizer l E X ^ (n + 1) • 𝟙 P) =
+        change (𝟙 P) ≫ (s ^ (n + 1) • 𝟙 P) =
           a.app P ≫ (𝟙 P)
         exact (Category.id_comp _).trans
-          ((scalar_eq l E X n P).symm.trans (Category.comp_id _).symm))) (by
+          ((scalar_eq s n P).symm.trans (Category.comp_id _).symm))) (by
         intro P Q f
         ext <;> simp [H])
   exact Functor.isoWhiskerRight e CochainComplex.ConeCoimage.cone
@@ -369,42 +390,160 @@ local instance completedRestrictionColimits (n : ℕ) :
 local instance normalizedFiniteDerived (n : ℕ) :
     HasDerivedCategory (normalizedDVRModules l E X n) := HasDerivedCategory.standard _
 
-/-- The strict finite-coefficient adjoint formula in the completed-coefficient
-presentation used by normalized DVR towers.
+/-- For a regular principal quotient, restricted derived extension is naturally the
+positive-power scalar cone. Every strict map into a quotient complex is sent by
+adjunction to the cone map with shifted component zero.
 
-Source: Stacks 06YY and 07A6, the regular quotient calculation in DVR effectivity.
+This is the coefficient-resolution sub-step of the current DVR effectivity proof,
+valid on arbitrary ringed sites, hence on section ring sheaves of condensed coefficients.
+The short exact sequence records precisely the regular principal quotient hypothesis.
+Source: Stacks 06YY and 07A6; blueprint lem-coef-normalized-dvr-effectivity, the
+bounded two-term free coefficient resolution and its augmentation.
 (blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint).
 
-Proof: the core calculation uses the identical scalar-reduction source and target
-categories. Its natural comparison is obtained from the normalized regular
-quotient augmentation by localization and uniqueness of adjoints. On a strict map
-f its cone map is (0,f), by the K-flat adjoint calculation and naturality. Unfolding
-the category abbreviations gives the displayed completed-coefficient presentation;
-the completed and scalar-reduction restriction factorizations agree definitionally. -/
+Proof: construct the normalized regular quotient augmentation. The compatible section
+acts on morphisms sectionwise, so its power cone is the linear scalar cone. Descend this
+comparison through localization. Identify exact restriction lifts by localization's
+fully faithful whiskering, and identify their left adjoints by adjoint uniqueness.
+Transport the strict augmentation_adjoint formula through these comparisons; the
+mapping-cone transport preserves the zero shifted component. This reuses the original
+comparison proof without its obsolete coefficient presentation. -/
 theorem normalizedDVR_strict_coefficient_adjoint (n : ℕ)
-    (adj : scalarReductionDerivedExtension l E X n ⊣
-      scalarReductionDerivedRestriction l E X n) :
-    ∃ A : scalarReductionDerivedExtension l E X n ⋙
-        scalarReductionDerivedRestriction l E X n ≅
+    (ht : (scalar R (principalCoefficientPowerSection s n)).app
+      (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ≫
+        ringMap φ = 0)
+    (hexact : (ShortComplex.mk _ _ ht).ShortExact)
+    {L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S)}
+    (adj : L ⊣
+      (restriction φ).mapDerivedCategory) :
+    ∃ A : L ⋙
+        (restriction φ).mapDerivedCategory ≅
       CochainComplex.LinearScalarCone.derived
-        (A := completedIntegralModuleSheaves l E X D hl)
-        (normalizedDVRUniformizer l E X ^ (n + 1)),
-    ∀ (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)
-      (N : CochainComplex (normalizedDVRModules l E X n) ℤ)
-      (f : P ⟶ ((completedIntegralRestrictScalars l E X D hl n).mapHomologicalComplex
+        (A := Modules R)
+        (s ^ (n + 1)),
+    ∀ (P : CochainComplex (Modules R) ℤ)
+      (N : CochainComplex (Modules S) ℤ)
+      (f : P ⟶ ((restriction φ).mapHomologicalComplex
         (.up ℤ)).obj N)
-      (hf : (normalizedDVRUniformizer l E X ^ (n + 1) • 𝟙 P) ≫ f = 0),
-      (scalarReductionDerivedRestriction l E X n).map
+      (hf : (s ^ (n + 1) • 𝟙 P) ≫ f = 0),
+      ((restriction φ).mapDerivedCategory).map
         ((adj.homEquiv (DerivedCategory.Q.obj P)
-          ((@DerivedCategory.Q _ _ _ (HasDerivedCategory.standard _)).obj N)).symm
+          (DerivedCategory.Q.obj N)).symm
           (DerivedCategory.Q.map f ≫
-            (completedIntegralRestrictScalars l E X D hl n).mapDerivedCategoryFactors.inv.app N)) =
+            (restriction φ).mapDerivedCategoryFactors.inv.app N)) =
       A.hom.app (DerivedCategory.Q.obj P) ≫
         (CochainComplex.LinearScalarCone.comparison
-          (normalizedDVRUniformizer l E X ^ (n + 1))).hom.app P ≫
+          (s ^ (n + 1))).hom.app P ≫
         DerivedCategory.Q.map (CochainComplex.mappingCone.desc
-          (normalizedDVRUniformizer l E X ^ (n + 1) • 𝟙 P) 0 f (by simp [hf])) ≫
-        (completedIntegralRestrictScalars l E X D hl n).mapDerivedCategoryFactors.inv.app N := by
-  exact strict_coefficient_adjoint_core l E X n adj
+          (s ^ (n + 1) • 𝟙 P) 0 f (by simp [hf])) ≫
+        (restriction φ).mapDerivedCategoryFactors.inv.app N := by
+  classical
+  obtain ⟨hlim, hcol, _⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
+  let : PreservesFiniteLimits (restriction φ) := hlim
+  let : PreservesFiniteColimits (restriction φ) := hcol
+  obtain ⟨d⟩ := SheafOfModules.nonempty_derivedChangeOfRingsCochainModel φ
+  obtain ⟨b⟩ := SheafOfModules.RegularQuotientCone.nonempty_augmentation
+    (C := C) (J := J)
+    φ (principalCoefficientPowerSection s n) ht hexact d
+  let G := CochainComplex.LinearScalarCone.derived
+    (A := Modules R)
+    (s ^ (n + 1))
+  let comp := CochainComplex.LinearScalarCone.comparison
+    (A := Modules R)
+    (s ^ (n + 1))
+  let e : DerivedCategory.Q ⋙ b.D ≅ DerivedCategory.Q ⋙ G :=
+    b.cone_factor ≪≫ Functor.isoWhiskerRight (cone_iso s n) DerivedCategory.Q ≪≫
+      comp.symm
+  let FF := Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
+    (HomologicalComplex.quasiIso (Modules R) (.up ℤ))
+    (DerivedCategory (Modules R))
+  let e' : b.D ≅ G := FF.preimageIso e
+  have he (P : CochainComplex (Modules R) ℤ) :
+      e'.hom.app (DerivedCategory.Q.obj P) ≫ comp.hom.app P =
+        b.cone_factor.hom.app P ≫ DerivedCategory.Q.map ((cone_iso s n).hom.app P) := by
+    have h : e'.hom.app (DerivedCategory.Q.obj P) = e.hom.app P :=
+      NatTrans.congr_app (FF.map_preimage e.hom) P
+    rw [h]
+    dsimp only [e, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app]
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  let V := (restriction φ).mapDerivedCategory
+  let v0 : DerivedCategory.Q ⋙ b.V ≅ DerivedCategory.Q ⋙ V :=
+    b.restriction_factor ≪≫
+      (restriction φ).mapDerivedCategoryFactors.symm
+  let FV := Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
+    (HomologicalComplex.quasiIso (Modules S) (.up ℤ))
+    (DerivedCategory (Modules R))
+  let v : b.V ≅ V := FV.preimageIso v0
+  have hv (N : CochainComplex (Modules S) ℤ) :
+      v.hom.app (DerivedCategory.Q.obj N) = b.restriction_factor.hom.app N ≫
+        (restriction φ).mapDerivedCategoryFactors.inv.app N := by
+    have h : v.hom.app (DerivedCategory.Q.obj N) = v0.hom.app N :=
+      NatTrans.congr_app (FV.map_preimage v0.hom) N
+    rw [h]
+    rfl
+  let ba : d.T ⊣ V := b.adjunction.ofNatIsoRight v
+  let k := adj.leftAdjointUniq ba
+  let A : L ⋙ V ≅ G :=
+    Functor.isoWhiskerRight k V ≪≫
+      (b.A ≪≫ Functor.isoWhiskerLeft d.T v).symm ≪≫ e'
+  refine ⟨A, ?_⟩
+  intro P N f hf
+  have hreg : (SheafOfModules.RegularQuotientCone.complexScalar
+      R (principalCoefficientPowerSection s n)).app P ≫
+        f = 0 := by
+    rw [scalar_eq s n P]
+    exact hf
+  let z := CochainComplex.mappingCone.desc
+    (s ^ (n + 1) • 𝟙 P) 0 f (by simp [hf])
+  let z' := CochainComplex.mappingCone.desc
+    ((SheafOfModules.RegularQuotientCone.complexScalar
+      R (principalCoefficientPowerSection s n)).app P)
+      0 f (by simp [hreg])
+  have hz : (cone_iso s n).hom.app P ≫ z = z' := by
+    simpa [cone_iso, z, z', SheafOfModules.RegularQuotientCone.cone] using
+      map_desc_eq (scalar_eq s n P) f hf
+  let a : DerivedCategory.Q.obj P ⟶ V.obj (DerivedCategory.Q.obj N) :=
+    DerivedCategory.Q.map f ≫
+    (restriction φ).mapDerivedCategoryFactors.inv.app N
+  have hai : a ≫ v.inv.app (DerivedCategory.Q.obj N) =
+      DerivedCategory.Q.map f ≫ b.restriction_factor.inv.app N := by
+    have hi := inverse_factor (b.restriction_factor.app N)
+      ((restriction φ).mapDerivedCategoryFactors.app N).symm
+      (v.app (DerivedCategory.Q.obj N)) (hv N)
+    exact (Category.assoc _ _ _).trans (congrArg (fun z ↦ DerivedCategory.Q.map f ≫ z) hi)
+  have hb := SheafOfModules.RegularQuotientCone.augmentation_adjoint
+    φ (principalCoefficientPowerSection s n) d b P N f hreg
+  change V.map ((adj.homEquiv _ _).symm a) =
+    A.hom.app (DerivedCategory.Q.obj P) ≫ comp.hom.app P ≫
+      DerivedCategory.Q.map z ≫
+      (restriction φ).mapDerivedCategoryFactors.inv.app N
+  have hr : b.restriction_factor.inv.app N ≫ v.hom.app (DerivedCategory.Q.obj N) =
+      (restriction φ).mapDerivedCategoryFactors.inv.app N :=
+    inv_hom_factor (b.restriction_factor.app N)
+      ((restriction φ).mapDerivedCategoryFactors.app N).symm
+      (v.app (DerivedCategory.Q.obj N)) (hv N)
+  let Q : CochainComplex (Modules R) ℤ ⥤
+      DerivedCategory (Modules R) := DerivedCategory.Q
+  have hmap : Q.map ((cone_iso s n).hom.app P) ≫ Q.map z = Q.map z' :=
+    (Q.map_comp _ _).symm.trans (congrArg (fun w ↦ Q.map w) hz)
+  have hc : e'.hom.app (DerivedCategory.Q.obj P) ≫
+      (comp.hom.app P ≫ DerivedCategory.Q.map z ≫
+        (restriction φ).mapDerivedCategoryFactors.inv.app N) =
+      (b.cone_factor.hom.app P ≫ DerivedCategory.Q.map z' ≫
+        b.restriction_factor.inv.app N) ≫ v.hom.app (DerivedCategory.Q.obj N) :=
+    composition_comparison (e'.hom.app (DerivedCategory.Q.obj P)) (comp.hom.app P)
+      (b.cone_factor.hom.app P) (Q.map ((cone_iso s n).hom.app P))
+      (Q.map z) (Q.map z') (b.restriction_factor.inv.app N)
+      (v.hom.app (DerivedCategory.Q.obj N))
+      ((restriction φ).mapDerivedCategoryFactors.inv.app N)
+      (he P) hmap hr
+  exact comparison_formula adj b.adjunction v b.A e'
+    (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) a
+    (DerivedCategory.Q.map f ≫ b.restriction_factor.inv.app N)
+    (b.cone_factor.hom.app P ≫ DerivedCategory.Q.map z' ≫ b.restriction_factor.inv.app N)
+    (comp.hom.app P ≫ DerivedCategory.Q.map z ≫
+      (restriction φ).mapDerivedCategoryFactors.inv.app N)
+    hai hb hc
 
 end WeilConjectures

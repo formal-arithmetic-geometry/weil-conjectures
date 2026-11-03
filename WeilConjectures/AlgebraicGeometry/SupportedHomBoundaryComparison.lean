@@ -45,6 +45,7 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ModuleAbelianEvaluationCo
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import WeilConjectures.AlgebraicGeometry.Closed.ClosedSupportHomSequence
+public import WeilConjectures.AlgebraicGeometry.SupportedHomIntegralComparison
 
 /-!
 # Evaluation-normalized supported Hom and coefficient boundaries
@@ -210,6 +211,13 @@ complement, the zero coefficient ring, and split coefficient extensions. -/
 theorem supportedHomBoundaryComparison (B : Type (u + 1)) [CommRing B]
     {T Z : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] :
     Nonempty (SupportedHomBoundaryComparisons B i) := by
-  sorry
+  refine ⟨{
+    comparison := supportedHomResolutionComparison B i
+    onCocycle := supportedHomResolutionComparison_normalized B i
+    connecting := supportedHomResolutionComparison_connecting B i
+    integral := ?_ }⟩
+  intro F I J t ht q
+  exact ⟨supportedHomIntegralMap_isIso B i F I J t ht q,
+    supportedHomIntegralComparison B i F I J t ht q⟩
 
 end AlgebraicGeometry.Etale

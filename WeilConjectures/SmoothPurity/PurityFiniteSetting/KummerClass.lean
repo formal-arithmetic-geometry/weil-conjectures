@@ -45,4 +45,25 @@ theorem coefficientHasInvertibleExponent (P : PurityFiniteSetting.{u})
   refine ⟨P.diagonalExponent, ?_, P.diagonalExponent_annihilates, ?_⟩
   · exact pow_pos (Fact.out : P.coefficients.l.Prime).pos P.level
   · exact P.diagonalExponent_isUnit aW
+
+/-- Kummer class of a global unit with the finite coefficient datum. The class is the connecting
+morphism of the Kummer sequence with coefficients inserted into the finite Tate twist.
+Construction: the admissible exponent is N with ell^N = char A. The unit t is a map
+Z_W -> G_m; pulling back the Kummer sequence 1 -> mu_N -> G_m -> G_m -> 1 along it and
+extending scalars to A keeps it exact, since Z_W has projective stalks. Its connecting
+morphism A_W -> (mu_N tensor A)[1] is the image of the abelian boundary of t under
+zeta -> zeta tensor 1, read through the module/abelian comparison c^1_W; the target is
+identified with A_W(1)[1]. A map A_W -> A_W(1)[1] in the derived category is a class in
+H^1 R Gamma(W, A_W(1)).
+Source: blueprint sec-smooth-purity/sk-prop-an/pur9-def-kummer-class
+(blueprint: pur9-def-kummer-class). -/
+noncomputable def kummerClass (P : PurityFiniteSetting.{u}) (W : Scheme.{u})
+    (aW : W ⟶ Spec (.of P.field.k)) (t : Γ(W, ⊤)ˣ) :
+    Etale.constantComplex P.Coefficient W ⟶
+      (@Etale.tateTwistObject P.Coefficient (PurityFiniteSetting.coefficientCommRing P)
+        (coefficientNeZero P) W 1)⟦(1 : ℤ)⟧ := by
+  letI := coefficientNeZero P
+  letI := coefficientHasInvertibleExponent P W aW
+  exact Etale.kummerClassOf W P.Coefficient t
+
 end WeilConjectures.PurityFiniteSetting

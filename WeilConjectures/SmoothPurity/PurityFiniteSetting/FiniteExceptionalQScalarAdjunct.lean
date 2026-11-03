@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Reduction.FiniteReductionComparisons
 public import WeilConjectures.SixFunctors.FiniteExceptional.FiniteExceptionalData
+public import WeilConjectures.SixFunctors.PurCompactSupport.FiniteScalarPresentationCompatibility
 
 /-! # Live finite exceptional comparison interface
 
@@ -52,6 +53,57 @@ theorem finiteExceptionalQ_scalarAdjunct
         P.coefficients.different f (@HasCompactification.compactification X Y f
         (hasCompactification_of_finiteType_over_field P.field.k X Y f)) h).hom.app K) =
       (P.finiteReductionSetting (n + 1) (Nat.succ_pos n)).finiteReductionCompactSupportComparison
-        (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) f K.obj := by sorry
+        (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) f K.obj := by
+  let c := @HasCompactification.compactification X Y f
+    (hasCompactification_of_finiteType_over_field P.field.k X Y f)
+  let a := PurCompactSupport.finiteQuotientChange P.coefficients.l P.extension
+    (n + 1) (m + 1) (Nat.succ_pos n) (Nat.succ_pos m) (Nat.succ_le_succ h)
+  let φ := compactSupportLevelQuotient P.coefficients.l P.extension n m h
+  have hc := PurCompactSupport.finiteScalarPresentationCompatibility
+    P.coefficients.l P.extension P.extension n m a φ (fun T ↦ rfl) c
+  have hc' := eq_of_heq hc
+  have hq : (FiniteExceptional.domain P.coefficients.l P.extension Y m).ι.map
+      ((FiniteExceptional.q P.coefficients.l P.extension P.field
+        P.coefficients.different f c h).hom.app K) =
+      (FiniteExceptional.supportMap P.coefficients.l P.extension f c h).app K.obj := by
+    rfl
+  rw [hq]
+  dsimp only [FiniteExceptional.supportMap]
+  rw [hc']
+  change (Scheme.pbcDerivedExtend (Scheme.proEtaleConstantRingMap (T := Y) φ)).map
+      ((PurCompactSupport.finiteImageIso P.coefficients.l P.extension n c).inv.app K.obj) ≫
+    ((Functor.isoWhiskerRight
+      (PurCompactSupport.finiteImageIso P.coefficients.l P.extension n c)
+      (Scheme.pbcDerivedExtend (Scheme.proEtaleConstantRingMap (T := Y) φ))).hom ≫
+      ExceptionalFiniteScalar.leftScalarMap φ c ≫
+      (Functor.isoWhiskerLeft
+        (Scheme.pbcDerivedExtend (Scheme.proEtaleConstantRingMap (T := X) φ))
+        (PurCompactSupport.finiteImageIso P.coefficients.l P.extension m c).symm).hom).app
+          K.obj ≫
+    (PurCompactSupport.finiteImageIso P.coefficients.l P.extension m c).hom.app
+      ((Scheme.pbcDerivedExtend (Scheme.proEtaleConstantRingMap (T := X) φ)).obj K.obj) = _
+  dsimp only [PurCompactSupport.finite]
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom,
+    Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  change (Scheme.pbcDerivedExtend (Scheme.proEtaleConstantRingMap (T := Y) φ)).map
+      (𝟙 _) ≫ (ExceptionalFiniteScalar.leftScalarMap φ c).app K.obj ≫ 𝟙 _ = _
+  rw [(Scheme.pbcDerivedExtend (Scheme.proEtaleConstantRingMap (T := Y) φ)).map_id]
+  simp only [Category.id_comp, Category.comp_id]
+  change (ExceptionalFiniteScalar.leftScalarMap φ c).app K.obj =
+    ((Scheme.pbcDerivedScalarAdjunction
+      (Scheme.proEtaleConstantRingMap (T := Y) φ)).homEquiv _ _).symm
+      ((Scheme.sfIntrinsicCompactSupport c
+        (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1))).map
+          ((Scheme.pbcDerivedScalarAdjunction
+            (Scheme.proEtaleConstantRingMap (T := X) φ)).unit.app K.obj) ≫
+        (Scheme.sfCompactSupportRestriction c φ).hom.app
+          ((Scheme.pbcDerivedExtend (Scheme.proEtaleConstantRingMap (T := X) φ)).obj K.obj))
+  apply ((Scheme.pbcDerivedScalarAdjunction
+    (Scheme.proEtaleConstantRingMap (T := Y) φ)).homEquiv _ _).eq_symm_apply.mpr
+  exact (unit_mateEquiv_symm
+    (Scheme.pbcDerivedScalarAdjunction (Scheme.proEtaleConstantRingMap (T := X) φ))
+    (Scheme.pbcDerivedScalarAdjunction (Scheme.proEtaleConstantRingMap (T := Y) φ))
+    (TwoSquare.mk _ _ _ _ (Scheme.sfCompactSupportRestriction c φ).hom) K.obj).symm
 
 end WeilConjectures.PurityFiniteSetting

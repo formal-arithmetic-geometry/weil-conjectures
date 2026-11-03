@@ -29,6 +29,7 @@ import Mathlib.CategoryTheory.Monoidal.Internal.FunctorCategory
 import WeilConjectures.CategoryTheory.RingObjects.Ab
 import WeilConjectures.CategoryTheory.Sites.MonObj
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 
 /-!
 # Coefficient sections and localization
@@ -109,6 +110,98 @@ private noncomputable abbrev sectionRing {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (T : X.ProEt) : CommRingCat.{u + 1} :=
   (InternalAbelianSheafModule.sectionRings (Scheme.ProEt.topology X) R).obj (op T)
+
+private lemma graphDiagonal_eq {B : Scheme.{u}} (V : B.ProEt) :
+    sfbSectionGraph V.hom V (𝟙 V.left) (Category.id_comp V.hom) =
+      (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ V.hom V.prop trivial).unit.app
+        (Scheme.ProEt.mk (𝟙 V.left)) ≫
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ V.hom).map
+        (MorphismProperty.Over.homMk (𝟙 V.left) (by simp) :
+          (MorphismProperty.Over.map ⊤ V.prop).obj (Scheme.ProEt.mk (𝟙 V.left)) ⟶ V) := by
+  apply MorphismProperty.Over.Hom.ext
+  simp only [MorphismProperty.Comma.comp_left,
+    MorphismProperty.Over.pullback_map_left,
+    MorphismProperty.Over.mapPullbackAdj_unit_app]
+  apply pullback.hom_ext
+  · simp only [sfbSectionGraph, Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj,
+      Scheme.ProEt.mk_hom, MorphismProperty.Over.homMk_hom, Over.homMk_left,
+      Category.assoc, limit.lift_π, PullbackCone.mk_π_app]
+    change 𝟙 V.left = pullback.lift (f := 𝟙 V.left ≫ V.hom) (g := V.hom)
+      (𝟙 V.left) (𝟙 V.left) _ ≫ pullback.fst (𝟙 V.left ≫ V.hom) V.hom ≫ 𝟙 V.left
+    rw [pullback.lift_fst_assoc, Category.id_comp]
+  · simp only [sfbSectionGraph, Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj,
+      Scheme.ProEt.mk_hom, MorphismProperty.Over.homMk_hom, Over.homMk_left,
+      Category.assoc, limit.lift_π, PullbackCone.mk_π_app]
+    change 𝟙 V.left = pullback.lift (f := 𝟙 V.left ≫ V.hom) (g := V.hom)
+      (𝟙 V.left) (𝟙 V.left) _ ≫ pullback.snd (𝟙 V.left ≫ V.hom) V.hom
+    exact (pullback.lift_snd _ _ _).symm
+
+private lemma objectSectionMap_factor {B : Scheme.{u}} (V : B.ProEt)
+    (F : Sheaf (Scheme.ProEt.topology B) Ab.{u + 1})
+    (G : Sheaf (Scheme.ProEt.topology V.left) Ab.{u + 1})
+    (φ : F ⟶ (lowerStar Ab.{u + 1} V.hom).obj G) :
+    φ.hom.app (op V) ≫ G.obj.map
+        (sfbSectionGraph V.hom V (𝟙 V.left) (Category.id_comp V.hom)).op =
+      F.obj.map
+        (MorphismProperty.Over.homMk (𝟙 V.left) (by simp) :
+          (MorphismProperty.Over.map ⊤ V.prop).obj (Scheme.ProEt.mk (𝟙 V.left)) ⟶ V).op ≫
+      (((localizationRestrictionLowerStarAdjunction Ab.{u + 1} V.hom V.prop).homEquiv
+        F G).symm φ).hom.app (op (Scheme.ProEt.mk (𝟙 V.left))) := by
+  rw [Adjunction.homEquiv_counit]
+  change _ = _ ≫ (φ.hom.app _ ≫ _)
+  rw [← Category.assoc, φ.hom.naturality, Category.assoc]
+  congr 1
+  change G.obj.map _ = G.obj.map _ ≫ G.obj.map _
+  rw [← Functor.map_comp]
+  exact congrArg (fun a ↦ G.obj.map a.op) (graphDiagonal_eq V)
+
+private lemma objectSectionMap_isIso {B : Scheme.{u}} (V : B.ProEt)
+    (F : Sheaf (Scheme.ProEt.topology B) Ab.{u + 1})
+    (G : Sheaf (Scheme.ProEt.topology V.left) Ab.{u + 1})
+    (φ : F ⟶ (lowerStar Ab.{u + 1} V.hom).obj G)
+    [IsIso (((localizationRestrictionLowerStarAdjunction Ab.{u + 1} V.hom V.prop).homEquiv
+      F G).symm φ)] :
+    IsIso (sfbSectionMapOfHom V.hom F G φ V (𝟙 V.left) (Category.id_comp V.hom)) := by
+  dsimp only [sfbSectionMapOfHom]
+  rw [objectSectionMap_factor]
+  have : IsIso (MorphismProperty.Over.homMk (𝟙 V.left) (by simp) :
+      (MorphismProperty.Over.map ⊤ V.prop).obj (Scheme.ProEt.mk (𝟙 V.left)) ⟶ V) := by
+    let e : (MorphismProperty.Over.map ⊤ V.prop).obj
+        (Scheme.ProEt.mk (𝟙 V.left)) ≅ V :=
+      MorphismProperty.Over.isoMk (Iso.refl V.left) (by simp)
+    change IsIso e.hom
+    infer_instance
+  infer_instance
+
+private lemma objectSectionMap_isIso_of_pullback {B : Scheme.{u}} (V : B.ProEt)
+    (F : Sheaf (Scheme.ProEt.topology B) Ab.{u + 1})
+    (G : Sheaf (Scheme.ProEt.topology V.left) Ab.{u + 1})
+    (α : (upperStar Ab.{u + 1} V.hom).obj F ⟶ G) [IsIso α]
+    (φ : F ⟶ (lowerStar Ab.{u + 1} V.hom).obj G)
+    (hφ : (upperStarLowerStarAdjunction Ab.{u + 1} V.hom).homEquiv F G α = φ) :
+    IsIso (sfbSectionMapOfHom V.hom F G φ V (𝟙 V.left) (Category.id_comp V.hom)) := by
+  have hm : ((localizationRestrictionLowerStarAdjunction Ab.{u + 1}
+      V.hom V.prop).homEquiv F G).symm φ =
+      (upperStarIsoLocalizationRestriction Ab.{u + 1} V.hom V.prop).inv.app F ≫ α := by
+    apply ((localizationRestrictionLowerStarAdjunction Ab.{u + 1}
+      V.hom V.prop).homEquiv F G).injective
+    rw [Equiv.apply_symm_apply, Adjunction.homEquiv_naturality_right]
+    rw [upperStarIsoLocalizationRestriction, Adjunction.leftAdjointUniq_inv_app,
+      Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    exact hφ.symm
+  have hi : IsIso (((localizationRestrictionLowerStarAdjunction Ab.{u + 1}
+      V.hom V.prop).homEquiv F G).symm φ) := by
+    rw [hm]
+    infer_instance
+  exact @objectSectionMap_isIso _ V F G φ hi
+
+private lemma sectionMap_isIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+    {B : Scheme.{u}} (V : B.ProEt) : IsIso (sfbCoefficientSectionMap Λ V) := by
+  exact objectSectionMap_isIso_of_pullback V (condensedRingObj Λ B)
+    (condensedRingObj Λ V.left) (condensedPullbackHom Λ V.hom)
+    (condensedPushforwardHom Λ V.hom)
+    (Adjunction.homEquiv_unit _ _ _ _)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

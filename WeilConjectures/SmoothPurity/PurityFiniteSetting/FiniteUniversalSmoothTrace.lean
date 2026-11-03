@@ -455,6 +455,27 @@ import WeilConjectures.SmoothPurity.PurityFiniteSetting.Diagonal.PurityDiagonalB
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.Dnc.PurityDncInvariance
 import WeilConjectures.SmoothPurity.DncCoefficientTransport.PurityDncCoefficientTransport
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.SmoothPurityMap
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarPullbackUnitCoherence
+public import WeilConjectures.AlgebraicGeometry.FiniteCoefficientAdjoints.FiniteCoefficientAdjointData
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompactSupportRestriction
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalChart
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalConservativity
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalRealization
+public import WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
+public import WeilConjectures.SixFunctors.DncCoefficientTransport.SectionScalarBaseChange
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.CoefficientExceptionalGeometryOfCube
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.CoefficientMapClosedGeometry
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.CoefficientMapDirectGeometry
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.CoefficientMapHomGeometry
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.CoefficientMapProClosedGeometry
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.CoefficientMapProHomGeometry
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.CoefficientMapProOmegaGeometry
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.NormalizedProScalarTensorGeometricSquare
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.NormalizedStageCoefficientCalculus
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.ProScalarPullNormalization
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 
 /-! # Finite smooth trace and extension of coefficients
 
@@ -488,5 +509,83 @@ variable (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
   [QuasiCompact (Y ↘ Spec (.of P.field.k))]
   (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+
+end WeilConjectures.PurityFiniteSetting
+
+namespace WeilConjectures.PurityFiniteSetting
+
+/-- The recorded shifted coefficient line in intrinsic constant-ring coordinates.
+Source: purity transport, T_A (blueprint: lem-pur-finite-universal-smooth-trace). -/
+def traceTwist (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (d : ℕ) :=
+  (sfIntrinsicDerivedEquivalence X P.Ring).functor.obj (P.diagonalTwist X d)
+
+/-- Canonical pullback of the unit in the fixed module presentation: use the realization
+unit, the site/pullback comparison and the ordinary constant-object comparison.
+Source: purity transport, T_A (blueprint: lem-pur-finite-universal-smooth-trace). -/
+def tracePulledUnitIso (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (P.smoothPurityPullback f).obj
+        ((sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj (coefficientUnit P Y)) ≅
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj
+        (Etale.ordinaryFiniteUnit P.Coefficient X) :=
+  P.smoothPurityPullbackComparison f
+      ((sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj (coefficientUnit P Y))
+      (Etale.ordinaryFiniteUnit P.Coefficient Y)
+      ((sfIntrinsicDerivedEquivalence Y P.Ring).unitIso.app _) ≪≫
+    (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.mapIso
+        (Etale.ordinaryFiniteUnitPullback P.Coefficient f)
+
+/-- Remove the constant unit in the ordinary presentation using its canonical left unitor.
+Source: purity transport Step 2 (blueprint: lem-pur-finite-universal-smooth-trace). -/
+def traceEtaleUnitIso (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
+    (K : Etale.DerivedCategoryModule A X) :
+    ((Etale.ordinaryFiniteTensor A X).obj (Etale.ordinaryFiniteUnit A X)).obj K ≅ K :=
+  ((Etale.ordinaryFiniteTensor A X).mapIso
+    (smoothPurityUnitIso A X)).app K ≪≫
+    Etale.derivedTensorLeftUnitor (ModuleCat.{u + 1} A) X K
+
+/-- Transport the ordinary left unitor through the canonical site tensor comparison.
+Source: purity transport Step 2 (blueprint: lem-pur-finite-universal-smooth-trace). -/
+def traceComparedUnitIso (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (d : ℕ) :
+    ((smoothPurityTensor P.Coefficient X).obj
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit P.Coefficient X))).obj (P.diagonalTwist X d) ≅
+            P.diagonalTwist X d :=
+  (smoothPurityComparisonTensor P.Coefficient X
+      (Etale.ordinaryFiniteUnit P.Coefficient X) (P.diagonalTwistEtale X d)).symm ≪≫
+    (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.mapIso
+        (traceEtaleUnitIso P.Coefficient X (P.diagonalTwistEtale X d))
+
+/-- Remove the explicit unit factor in the trace's tensor presentation, using the
+site/tensor comparison and the ordinary left unitor. No orientation is chosen.
+Source: purity transport, T_A (blueprint: lem-pur-finite-universal-smooth-trace). -/
+def traceTensorUnitIso (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (d : ℕ) :
+    P.smoothPurityTensorSource f d (coefficientUnit P Y) ≅ P.diagonalTwist X d :=
+  ((smoothPurityTensor P.Coefficient X).mapIso
+      (tracePulledUnitIso P f)).app (P.diagonalTwist X d) ≪≫
+    traceComparedUnitIso P X d
+
+/-- The actual source object of smoothTrace, before removing its shifts and unit.
+Source: recorded smooth trace (blueprint: lem-pur-finite-universal-smooth-trace). -/
+def traceSource (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) :=
+  (sfIntrinsicDerivedEquivalence X P.Ring).functor.obj
+    ((((smoothPurityTensor P.Coefficient X).obj
+      ((P.smoothPurityPullback f).obj
+        ((sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj (coefficientUnit P Y)))).obj
+          ((P.diagonalTwist X d)⟦-(2 * (d : ℤ))⟧))⟦2 * (d : ℤ)⟧)
+
+/-- Canonical identification of the recorded trace source with A_X(d)[2d].
+Source: purity transport, unit-coefficient trace
+(blueprint: lem-pur-finite-universal-smooth-trace). -/
+def traceSourceIso (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) :
+    traceSource P f d ≅ traceTwist P X d :=
+  (sfIntrinsicDerivedEquivalence X P.Ring).functor.mapIso
+    (P.smoothPurityReassociation X d
+        ((P.smoothPurityPullback f).obj
+          ((sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj (coefficientUnit P Y))) ≪≫
+      traceTensorUnitIso P f d)
 
 end WeilConjectures.PurityFiniteSetting

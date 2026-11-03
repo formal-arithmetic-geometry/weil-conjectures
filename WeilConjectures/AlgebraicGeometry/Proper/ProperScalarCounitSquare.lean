@@ -56,6 +56,22 @@ abbrev directImageScalarAdjunction {A B : Type u} [CommRing A] [CommRing B]
     directImageScalarExtension φ T ⊣ directImageScalarRestriction φ T :=
   proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) φ)
 
+/-- The comparison D is the inverse of the normalized ring-sheaf comparison d.
+The coefficient-square proof is the naturality of the constant-section map, so no
+extra coefficient compatibility is assumed. Source: Stacks Tag 0D6E
+(blueprint: lem-sp-proper-scalar-counit-square). -/
+def directImageScalarRestrictionIso {A B : Type u} [CommRing A] [CommRing B]
+    (φ : A →+* B) {Z Y : Scheme.{u}} (h : Z ⟶ Y) :
+    directImageScalarRestriction φ Z ⋙ directImageConstantPush A h ≅
+      directImageConstantPush B h ⋙ directImageScalarRestriction φ Y :=
+  (proEtaleRingRestrictionDerivedDirectImage h
+    (proEtaleConstantRing Y A) (proEtaleConstantRing Y B)
+    (proEtaleConstantRing Z A) (proEtaleConstantRing Z B)
+    (proEtaleConstantRingMap (T := Y) φ) (proEtaleConstantRingMap (T := Z) φ)
+    (proEtaleConstantRingComparison h A) (proEtaleConstantRingComparison h B)
+    (proEtaleConstantInverseImageMap_naturality h
+      (CommRingCat.ofHom (RingHom.ulift φ))).symm).symm
+
 set_option maxHeartbeats 1000000 in
 -- The four adjunctions and representative identifications require substantial elaboration.
 end AlgebraicGeometry.ProEtale

@@ -12,6 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCorners
 public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbackSquare
+public import WeilConjectures.CategoryTheory.MateCube
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientDerivedFunctorAPI
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TensorPullbackMateNormalization
 
 /-! Normalization data for the scalar/open exchange argument. -/
 
@@ -234,5 +238,121 @@ private lemma derivedCube
   exact congr_app h' M
 
 end DerivedCube
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+private theorem restriction_pullback_comp
+    {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W) :
+    NatTrans.SquareCompatible
+      (T := D(Mod.comap (coefficientMap a W)))
+      (T' := D(Mod.comap (coefficientMap a U)))
+      (derivedComapLeftDerivedUpperStarIso a (h ≫ k)).symm
+      (Functor.pasteSquareIso (derivedComapLeftDerivedUpperStarIso a k).symm
+        (derivedComapLeftDerivedUpperStarIso a h).symm)
+      (coefficientDerivedUpperStarComp B h k).hom
+      (coefficientDerivedUpperStarComp A h k).hom := by
+  intro N
+  have hc := derivedComapLeftDerivedUpperStarIso_comp_hom_app a h k N
+  apply (cancel_mono ((Functor.pasteSquareIso
+    (derivedComapLeftDerivedUpperStarIso a k).symm
+    (derivedComapLeftDerivedUpperStarIso a h).symm).inv.app N)).1
+  simp only [Category.assoc, Iso.hom_inv_id_app]
+  simp only [Functor.pasteSquareIso_inv_app, Iso.symm_inv, Iso.symm_hom]
+  change _ = _ ≫ (CondensedRing.leftDerivedUpperStarComp A h k).hom.app _ ≫ _ ≫ _
+  rw [hc]
+  simp only [Iso.inv_hom_id_app_assoc]
+  exact Category.comp_id _
+
+private theorem restriction_pullback_congr
+    {U V : Scheme.{u}} {h k : U ⟶ V} (e : h = k) :
+    NatTrans.SquareCompatible
+      (T := D(Mod.comap (coefficientMap a V)))
+      (T' := D(Mod.comap (coefficientMap a U)))
+      (derivedComapLeftDerivedUpperStarIso a h).symm
+      (derivedComapLeftDerivedUpperStarIso a k).symm
+      (eqToIso (congrArg (coefficientDerivedUpperStar B) e)).hom
+      (eqToIso (congrArg (coefficientDerivedUpperStar A) e)).hom := by
+  subst k
+  simp only [eqToIso_refl, Iso.refl_hom]
+  exact NatTrans.SquareCompatible.id _
+
+private theorem restriction_pullback_square {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g) :
+    NatTrans.SquareCompatible
+      (T := D(Mod.comap (coefficientMap a Y)))
+      (T' := D(Mod.comap (coefficientMap a X')))
+      (Functor.pasteSquareIso (derivedComapLeftDerivedUpperStarIso a g).symm
+        (derivedComapLeftDerivedUpperStarIso a f').symm)
+      (Functor.pasteSquareIso (derivedComapLeftDerivedUpperStarIso a f).symm
+        (derivedComapLeftDerivedUpperStarIso a g').symm)
+      (coefficientAmbientSquare B sq).hom (coefficientAmbientSquare A sq).hom := by
+  rw [coefficientAmbientSquare_eq, coefficientAmbientSquare_eq,
+    coefficientIsoTransThree_eq, coefficientIsoTransThree_eq]
+  exact (restriction_pullback_comp a f' g).inv.comp
+    ((restriction_pullback_congr a sq.w.symm).comp (restriction_pullback_comp a g' f))
+
+private theorem square_inverse
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {U : C ⥤ C'} {V : D ⥤ D'}
+    {F G : C ⥤ D} {F' G' : C' ⥤ D'}
+    (iF : F ⋙ V ≅ U ⋙ F') (iG : G ⋙ V ≅ U ⋙ G')
+    (α : F ⟶ G) (α' : F' ⟶ G')
+    (h : NatTrans.SquareCompatible iF iG α α') (M : C) :
+    α'.app (U.obj M) ≫ iG.inv.app M = iF.inv.app M ≫ V.map (α.app M) := by
+  apply (cancel_epi (iF.hom.app M)).1
+  rw [← Category.assoc, ← h M]
+  simp only [Category.assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc]
+  exact Category.comp_id _
+
+/-- Tensor extension commutes with the specified pullback square for condensed rings.
+Source: the final compatibility paragraph of the latest blueprint's
+`lem-fix-compact-support-coefficient-change`; Stacks Tags 07A4 and 0G7E.
+(blueprint: lem-fix-tensor-pullback-square)
+Proof: restriction of scalars respects the derived pullback compositors. Apply this
+on both paths and their equality transport to get the restriction cube. The four
+extension/restriction adjunctions turn that cube into the tensor cube, by the old
+scalarMateCube proof. The nonflat derived comparison has exactly this mate by
+tensorPullbackMateNormalization. No flatness, nonempty scheme,
+or nonzero coefficient hypothesis is used. -/
+theorem tensorPullbackSquare
+    {U' U X' X : Scheme.{u}}
+    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
+    (sq : OpenImmersionSquare gU j' j g)
+    (N : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj A X))) :
+    let S (T : Scheme.{u}) := L(Mod.extendScalars (coefficientMap a T))
+    let P (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        [MonObj R] [IsCommMonObj R] {V W : Scheme.{u}} (f : V ⟶ W) :=
+      coefficientDerivedUpperStar R f
+    let c (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        [MonObj R] [IsCommMonObj R] := coefficientAmbientSquare R sq.toCommSq
+    let lam {V W : Scheme.{u}} (f : V ⟶ W) := derivedUpperStarExtendScalarsIso a f
+    (S U').map ((c A).inv.app N) ≫
+      (lam j').hom.app ((P A g).obj N) ≫ (P B j').map ((lam g).hom.app N) =
+    (lam gU).hom.app ((P A j).obj N) ≫
+      (P B gU).map ((lam j).hom.app N) ≫ (c B).inv.app ((S X).obj N) := by
+  let q {V W : Scheme.{u}} (f : V ⟶ W) :=
+    (derivedComapLeftDerivedUpperStarIso a f).hom
+  have hc (M : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj B X))) :=
+    square_inverse _ _ _ _ (restriction_pullback_square a sq.toCommSq).inv M
+  simp only [Functor.pasteSquareIso_inv_app, Iso.symm_inv, Category.assoc] at hc
+  let adj (T : Scheme.{u}) :=
+    Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a T)
+  have hm := scalarMateCube (adj X) (adj U) (adj X') (adj U')
+    (q j) (q gU) (q g) (q j')
+    (coefficientAmbientSquare A sq.toCommSq).inv
+    (coefficientAmbientSquare B sq.toCommSq).inv hc N
+  have hmate {V W : Scheme.{u}} (f : V ⟶ W) :
+      ((mateEquiv (adj W) (adj V)).symm (TwoSquare.mk _ _ _ _ (q f))).natTrans =
+        (derivedUpperStarExtendScalarsIso a f).hom := by
+    rw [show TwoSquare.mk _ _ _ _ (q f) =
+      mateEquiv (adj W) (adj V)
+        (TwoSquare.mk _ _ _ _ (derivedUpperStarExtendScalarsIso a f).hom) from
+      (tensorPullbackMateNormalization a f).symm]
+    simp only [Equiv.symm_apply_apply]
+  simpa only [hmate, coefficientDerivedUpperStar] using hm
 
 end AlgebraicGeometry.ProEtale

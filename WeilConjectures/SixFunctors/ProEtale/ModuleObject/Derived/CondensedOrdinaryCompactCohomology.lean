@@ -105,4 +105,9 @@ def condensedRingCompactCohomology
     (c : Compactification a) (n : ℤ) :=
   condensedRingCompactCoefficientComplex Λ c ⋙ DerivedCategory.homologyFunctor _ n
 
+/-- The coefficient field in the universe of sections.
+Source: latest blueprint, coefficient cohomology
+(blueprint: def-weil-ordinary-compact-cohomology). -/
+abbrev CohomologyScalar (ℓ : ℕ) [Fact ℓ.Prime] := ULift.{u + 1} (PadicAlgCl ℓ)
+
 end AlgebraicGeometry.ProEtale.CondensedRing

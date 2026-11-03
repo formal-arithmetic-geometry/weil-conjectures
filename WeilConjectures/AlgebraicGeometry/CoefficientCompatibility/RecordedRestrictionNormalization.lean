@@ -157,6 +157,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantO
 import all WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteRealizationRestrictionCube
 import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicDirectImageUnitNormalization
 import WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarRestrictionUnitNormalization
+public import WeilConjectures.AlgebraicGeometry.Proper.ProperScalarCounitSquare
 
 /-! # Scalar restriction and the recorded direct-image presentation
 
@@ -176,6 +177,49 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   sfIntrinsicModuleEquivalence directImagePresentation
 attribute [local implicit_reducible] proEtaleConstantRingMap scalarExtensionFunctor
   sfIntrinsicDerivedEquivalence Equivalence.mapDerivedCategory Functor.mapHomologicalComplex
+
+private theorem roundtrip
+    {C D : Type*} [Category C] [Category D]
+    {L L' : C ⥤ D} {R R' : D ⥤ C}
+    (a : L ⊣ R) (b : L' ⊣ R') (d : R ≅ R') :
+    (a.ofNatIsoLeft ((a.ofNatIsoRight d).leftAdjointUniq b)).rightAdjointUniq b = d := by
+  let e := (a.ofNatIsoRight d).leftAdjointUniq b
+  apply Iso.ext
+  ext N
+  apply (b.homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_symm_rightAdjointUniq_hom_app]
+  simp only [Adjunction.ofNatIsoLeft_counit, whiskerLeft_app, NatTrans.comp_app]
+  have h := Adjunction.leftAdjointUniq_hom_app_counit (a.ofNatIsoRight d) b N
+  simp only [Adjunction.ofNatIsoRight_counit, whiskerRight_app, NatTrans.comp_app] at h
+  rw [Adjunction.homEquiv_counit]
+  have hn := e.hom.naturality (d.hom.app N)
+  apply (cancel_epi (e.hom.app (R.obj N))).mp
+  rw [← reassoc_of% hn, h]
+  simp only [← L.map_comp_assoc, Iso.hom_inv_id_app, L.map_id, Category.id_comp,
+    e, Iso.hom_inv_id_app_assoc]
+
+private theorem directImageModel_eq (A : Type u) [CommRing A] [Finite A]
+    {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
+    (((proEtaleConstantRingAdjunction A g).ofNatIsoLeft
+        ((openSquarePullbackModel_existsUnique A g).exists.choose)).rightAdjointUniq
+      (sfIntrinsicConstantModuleAdjunction g A)) = openSquare_directImageModel A g := by
+  let a := proEtaleConstantRingAdjunction A g
+  let b := sfIntrinsicConstantModuleAdjunction g A
+  let d := openSquare_directImageModel A g
+  let e := (a.ofNatIsoRight d).leftAdjointUniq b
+  have he : (openSquarePullbackModel_existsUnique A g).exists.choose = e := by
+    apply (openSquarePullbackModel_existsUnique A g).unique
+      (openSquarePullbackModel_existsUnique A g).exists.choose_spec
+    intro M V s
+    have h := (a.ofNatIsoRight d).unit_leftAdjointUniq_hom_app b M
+    have hv := congrArg (fun z ↦ z.val.app (Opposite.op V) s) h
+    change (e.hom.app M).val.app (Opposite.op ((proEtaleBaseChange g).obj V))
+      (((proEtaleConstantRingAdjunction A g).unit.app M).val.app (Opposite.op V) s) =
+        ((sfIntrinsicConstantModuleAdjunction g A).unit.app M).val.app (Opposite.op V) s
+      at hv
+    exact hv
+  rw [he]
+  exact roundtrip a b d
 
 private def ordinaryPresentation (A : Type u) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) :=

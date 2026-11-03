@@ -274,6 +274,41 @@ theorem localClosedPoint_return
   ext a
   exact FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq
     D.k₀ D.k (localClosedPointDegree D Y₀ y) hc ι a
+/-- The return is reparametrization, since geometric Frobenius to the n-th power
+fixes the finite subfield pointwise.
+Source: blueprint return equation (blueprint: def-weil-local-frobenius-trace).
+Proof: lem-weil-unique-subfield-of-closure identifies the subfield with the roots of
+X^(q^n)-X. Arithmetic Frobenius to the n-th power, and hence its inverse, fixes these
+roots. Compare the two pullback projections: the model projection agrees by that
+fixed-field equation; the closure projection is g_s^n on both sides. Pullback uniqueness
+proves the displayed equation. Since hn makes n positive, (n-1)+1=n. -/
+theorem localExtensionPoint_return (n : ℕ) (hn : 1 ≤ n)
+    (x : D.extensionPoints Y₀ n hn) :
+    localExtensionPoint D Y₀ n hn x ≫
+        localPositivePower (D.geometricFrobenius Y₀).hom (n - 1) =
+      localPositivePower (frobeniusPointIso D).hom (n - 1) ≫
+        localExtensionPoint D Y₀ n hn x := by
+  let := Fintype.ofFinite D.k₀
+  have hc : Nat.card (D.extensionSubfield n hn) = D.q ^ n :=
+    (FiniteField.exists_unique_subfield_of_closure D.p D.a D.q D.prime D.exponent_pos
+      D.cardinality_eq D.k₀ D.card_base D.k n hn).choose_spec.2.1
+  have hq : 0 < D.q := by
+    rw [← D.card_base]
+    exact Nat.card_pos
+  have : Finite (D.extensionSubfield n hn) :=
+    (Nat.card_pos_iff.mp (by rw [hc]; exact pow_pos hq n)).2
+  have hc' : Nat.card (D.extensionSubfield n hn) = Fintype.card D.k₀ ^ n := by
+    simpa only [← D.card_base, Nat.card_eq_fintype_card] using hc
+  apply localLift_return D Y₀ (n - 1)
+  rw [← Category.assoc]
+  suffices h : localPositivePower (frobeniusPointIso D).hom (n - 1) ≫
+      Spec.map (CommRingCat.ofHom (D.extensionSubfield n hn).subtype) =
+        Spec.map (CommRingCat.ofHom (D.extensionSubfield n hn).subtype) by rw [h]
+  rw [localPointPower_eq, Nat.sub_add_cancel hn, ← Spec.map_comp]
+  congr 1
+  ext a
+  exact FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq
+    D.k₀ D.k n hc' (D.extensionSubfield n hn).subtype a
 
 set_option linter.unusedSectionVars false in
 end WeilConjectures

@@ -22,6 +22,7 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
 import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 import WeilConjectures.AlgebraicGeometry.Cartier.CartierKummerDescent
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import WeilConjectures.AlgebraicGeometry.RelativeExtensionBoundaryComparison
 
 /-! # The Cartier Kummer arrow and its relative line class
 
@@ -156,7 +157,56 @@ theorem cartier_kummer_relative_class
       (DerivedCategory.singleFunctor _ 0).map α.hom ≫ cartierKummerMap l E n i hI hT =
         (((κ.mapExactFunctor (ProEtale.comparisonUpperStar
           (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T)).comp
-            (Ext.mk₀ q.hom) (add_zero 2)).hom) := by
-  sorry
+            (Ext.mk₀ q.hom) (add_zero 2)).hom)  := by
+  classical
+  unfold cartierKummerMap
+  have hdata := (cartier_kummer_map l E).2.exists.choose_spec
+  generalize (cartier_kummer_map l E).2.exists.choose = data at *
+  obtain ⟨κ, c⟩ := data
+  dsimp only [CartierEtaleKummerFamily] at κ
+  dsimp only [CartierKummerFamily] at c
+  have hκ := hdata.1
+  unfold CartierEtaleKummerNormalization at hκ
+  have hc := hdata.2.2.1
+  unfold CartierKummerRealization at hc
+  obtain ⟨α, q, hq, hα, he⟩ := hc n r hA i hI hT
+  refine ⟨κ n r hA i hI hT, α, q, ?_, hq, hα, ?_⟩
+  · let := hI.isInvertible_dual_toModules
+    let := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible
+      (Scheme.Modules.dual i.ker.toModules)
+    have hbound := hκ n r hA i hI hT
+    unfold SupportedKummerBoundary at hbound
+    obtain ⟨τ, B, u, v, huv, hB, t, hτ, ht, hv, htzero, hext⟩ :=
+      hbound i.openComplement i.coe_openComplement
+    have hτframe : τ = (cartierRelativeFrame i hI).2 := by
+      apply Scheme.Modules.etaleIsoTorsorVal_injective (Scheme.Modules.dual i.ker.toModules)
+      simpa only [cartierRelativeFrame, Scheme.Modules.etaleIsoTorsorVal_mk] using hτ
+    have hrep : RelativeExtensionRepresents i (cartierRelativeFrame i hI) hB.extClass := by
+      refine ⟨B, u, v, huv, hB, t.hom, ?_, ?_, ?_, rfl⟩
+      · intro V g x
+        exact (ht V g x).trans (add_comm _ _)
+      · intro V x
+        have h := integerSectionEquiv_restrict T
+          ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D))
+          (supportedIntegralUnit i) V
+        rw [integerSectionEquiv_eval] at h
+        exact (hv V x).trans h.symm
+      · rw [← hτframe]
+        exact htzero
+    have hβ : hB.extClass = relativeExtension i (cartierRelativeFrame i hI) :=
+      (Classical.choose_spec (relativeExtension_existsUnique i (cartierRelativeFrame i hI))).2
+        _ hrep
+    rw [hext, hβ]
+    rw [relativeExtensionBoundaryComparison i
+      (T.kummerSequence_shortExact (l ^ (r + 1))
+        (by simpa only [Nat.cast_pow] using hT.pow (r + 1))) I J K a b hab _ha _hb hs
+      (ordinaryFiniteRootMap (finiteTateCoefficient l E n) (l ^ (r + 1)) hA T)
+      M f 1 (relativeExtension i (cartierRelativeFrame i hI)),
+      relative_extension_cohomology_normalization]
+    rfl
+  · change (DerivedCategory.singleFunctor _ 0).map α.hom ≫
+      (c n i hI hT).hom = _
+    simpa only [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp] using
+      congrArg Ext.hom he
 
 end AlgebraicGeometry.Etale

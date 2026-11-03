@@ -12,6 +12,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.AlgebraicGeometry.SpCoordinateAdjunction.SmoothPurityCoordinateRightComparisons
 public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalObjects
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalChart
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalConservativity
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalRealization
 
 /-! # Gluing the local tower adjunctions
 
@@ -168,6 +172,14 @@ def openAdjunction {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :
   ((SpTowerCalculus.realization l E b U (q.abelian U)).toAdjunction.comp
     (o.openOp j).derivedAdjunction).comp
     (SpTowerCalculus.realization l E b T (q.abelian T)).symm.toAdjunction
+
+/-- Bundle a source open with its inherited ground-field structure. The properties are
+supplied as conclusions of the chart statement, not as additional hypotheses.
+Source: standing finite-type setting (blueprint: det-sp-tower-gluing). -/
+def openBase {k : Type u} [Field k] (X : Over (Spec (.of k))) (U : X.left.Opens)
+    (h : IsSeparated (U.ι ≫ X.hom) ∧ LocallyOfFiniteType (U.ι ≫ X.hom) ∧
+      QuasiCompact (U.ι ≫ X.hom)) : SpCoordinateAdjunction.Bases k :=
+  ⟨Over.mk (U.ι ≫ X.hom), h⟩
 
 open SpCoordinateAdjunction in
 end AlgebraicGeometry.ProEtale.SpTowerGluing

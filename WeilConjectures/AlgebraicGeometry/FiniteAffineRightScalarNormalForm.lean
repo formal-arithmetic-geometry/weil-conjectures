@@ -17,6 +17,8 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.FiniteAffineScalarChartPresentation
 public import WeilConjectures.AlgebraicGeometry.FiniteAffineScalarNormalFormStep
 public import WeilConjectures.AlgebraicGeometry.FiniteAffineTateScalarNormalization
+public import WeilConjectures.AlgebraicGeometry.FiniteAffineSiteTransportLeft
+public import WeilConjectures.AlgebraicGeometry.FiniteAffineSiteTransportRight
 
 /-! # Ordered affine scalar exchange and its single normal form
 
@@ -343,5 +345,215 @@ theorem finiteAffineRightScalarNormalForm_chart
     (finiteAffineScalar_chartPresentation φ N hN hA hB S hS d e K)
   simpa only [ProEtale.reductionEtaleChartScalarIso, Iso.trans_hom,
     Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc] using h
+
+/-- Identify the chosen pro-etale scalar adjoint with the total left derived
+extension, by the unique comparison of left adjoints to the same restriction.
+Source: Charts, exact site transport (blueprint:
+lem-sp-finite-affine-right-scalar-normal-form). -/
+def finiteAffineProScalarIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (T : Scheme.{u}) :
+    ProEtale.pbcFixedScalarExtension (Scheme.ProEt.topology T) φ ≅
+      L(ProEtale.sheafExtendScalars φ T) :=
+  letI := φ.toAlgebra
+  (Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ)).leftAdjointUniq
+      (ProEtale.leftDerivedSheafExtendScalarsAdjunction A B T)
+
+/-- The canonical scalar/site comparison, with the total left derived extension
+used by the chart reassociation. Source: Charts, exact site transport
+(blueprint: lem-sp-finite-affine-right-scalar-normal-form). -/
+def finiteAffineSiteScalarIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (T : Scheme.{u}) :
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory ⋙
+        L(ProEtale.sheafExtendScalars φ T) ≅
+      scalarExtension φ T ⋙
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) T).mapDerivedCategory :=
+  Functor.isoWhiskerLeft _ (finiteAffineProScalarIso φ T).symm ≪≫
+    ProEtale.pbcComparisonReduction T φ
+
+private theorem shiftedComparison_app
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    (A : C ⥤ D) (P : D ⥤ E) (R : C ⥤ F) (B : F ⥤ E)
+    (S : E ⥤ E) (T : F ⥤ F) (c : A ⋙ P ≅ R ⋙ B) (β : T ⋙ B ≅ B ⋙ S)
+    (K : C) :
+    ((Functor.associator A P S).symm ≪≫ Functor.isoWhiskerRight c S ≪≫
+      Functor.associator R B S ≪≫ Functor.isoWhiskerLeft R β.symm ≪≫
+      (Functor.associator R T B).symm).hom.app K =
+        S.map (c.hom.app K) ≫ β.inv.app (R.obj K) := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id]
+
+private theorem siteChartComparison_shift
+    (R : Type (u + 1)) [CommRing R] [Finite R]
+    (N : ℕ) (hR : (N : R) = 0) {X S : Scheme.{u}} (f : X ⟶ S)
+    (d : ℕ) (b : ℤ) (K : DerivedCategoryModule R S) :
+    (ProEtale.AdjunctionTransfer.chartOperationComparison R N hR f d b).hom.app K =
+      (shiftFunctor _ b).map ((sitePreComparison R N hR f d).hom.app K) ≫
+        (Functor.commShiftIso
+          (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory b).inv.app
+            ((siteEtalePreOperation R N hR f d).obj K) := by
+  exact shiftedComparison_app
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) S).mapDerivedCategory
+    (siteProPreOperation R N hR f d) (siteEtalePreOperation R N hR f d)
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory
+    (shiftFunctor _ b) (shiftFunctor _ b) (sitePreComparison R N hR f d)
+    (Functor.commShiftIso
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory b) K
+
+private theorem siteProOperation_map
+    (R : Type (u + 1)) [CommRing R] (N : ℕ) (hR : (N : R) = 0)
+    {X S : Scheme.{u}} (f : X ⟶ S) (d : ℕ) (b : ℤ)
+    {K L : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} R))} (v : K ⟶ L) :
+    (ProEtale.AdjunctionTransfer.proEtaleChartOperation R N hR f d b).map v =
+      (shiftFunctor _ b).map ((siteProPreOperation R N hR f d).map v) := rfl
+
+private theorem siteProScalar_shift
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [IsNoetherianRing A]
+    (φ : A →+* B) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0)
+    {X S : Scheme.{u}} (f : X ⟶ S) (d : ℕ) (b : ℤ)
+    (K : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} A))) :
+    ProEtale.chartScalarReassociationMap φ N hA hB f d b K =
+      (letI := φ.toAlgebra
+       letI : L(ProEtale.sheafExtendScalars φ X).CommShift ℤ :=
+         (ProEtale.leftDerivedSheafExtendScalarsAdjunction A B X).leftAdjointCommShift ℤ
+       (L(ProEtale.sheafExtendScalars φ X).commShiftIso b).hom.app
+           ((siteProPreOperation A N hA f d).obj K) ≫
+         (shiftFunctor _ b).map (siteProPreScalar φ N hA hB f d K)) := by
+  dsimp only [ProEtale.chartScalarReassociationMap, siteProPreScalar]
+
+private theorem siteEtaleScalar_shift
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0)
+    {X S : Scheme.{u}} (f : X ⟶ S) (d : ℕ) (b : ℤ)
+    (K : DerivedCategoryModule A S) :
+    finiteAffineChartScalarMap φ N hA hB f d b K =
+      (FiniteSmoothPurity.scalarShiftIso φ X b).hom.app
+          ((siteEtalePreOperation A N hA f d).obj K) ≫
+        (shiftFunctor _ b).map (siteEtalePreScalar φ N hA hB f d K) := by
+  dsimp only [finiteAffineChartScalarMap, siteEtalePreScalar, siteEtalePreOperation,
+    ProEtale.AdjunctionTransfer.etaleChartOperation]
+
+private theorem siteScalarShiftPasting
+    {E₁ E₂ P₁ P₂ : Type*} [Category E₁] [Category E₂] [Category P₁] [Category P₂]
+    (F : P₁ ⥤ P₂) (G : E₁ ⥤ E₂) (C : E₁ ⥤ P₁) (D : E₂ ⥤ P₂)
+    (sP₁ : P₁ ⥤ P₁) (sP₂ : P₂ ⥤ P₂) (sE₁ : E₁ ⥤ E₁) (sE₂ : E₂ ⥤ E₂)
+    (a : sP₁ ⋙ F ≅ F ⋙ sP₂) (ca : sE₁ ⋙ C ≅ C ⋙ sP₁)
+    (cb : sE₂ ⋙ D ≅ D ⋙ sP₂) (g : sE₁ ⋙ G ≅ G ⋙ sE₂)
+    (t : C ⋙ F ≅ G ⋙ D)
+    {X : P₁} {Y : E₁} {Z : E₂} {W : P₂}
+    (x : X ⟶ C.obj Y) (y : W ⟶ D.obj Z) (r : F.obj X ⟶ W) (s : G.obj Y ⟶ Z)
+    (h₀ : r ≫ y = F.map x ≫ t.hom.app Y ≫ D.map s)
+    (hshift : F.map (ca.inv.app Y) ≫ t.hom.app (sE₁.obj Y) ≫ D.map (g.hom.app Y) =
+      a.hom.app (C.obj Y) ≫ sP₂.map (t.hom.app Y) ≫ cb.inv.app (G.obj Y)) :
+    a.hom.app X ≫ sP₂.map r ≫ sP₂.map y ≫ cb.inv.app Z =
+      F.map (sP₁.map x ≫ ca.inv.app Y) ≫ t.hom.app (sE₁.obj Y) ≫
+        D.map (g.hom.app Y ≫ sE₂.map s) := by
+  have ha := a.hom.naturality x
+  have hb := cb.inv.naturality s
+  dsimp only [Functor.comp_map] at ha hb
+  calc
+    _ = a.hom.app X ≫ sP₂.map (r ≫ y) ≫ cb.inv.app Z := by
+      simp only [Functor.map_comp, Category.assoc]
+    _ = a.hom.app X ≫ sP₂.map (F.map x ≫ t.hom.app Y ≫ D.map s) ≫
+        cb.inv.app Z := by rw [h₀]
+    _ = F.map (sP₁.map x) ≫ a.hom.app (C.obj Y) ≫ sP₂.map (t.hom.app Y) ≫
+        cb.inv.app (G.obj Y) ≫ D.map (sE₂.map s) := by
+      simp only [Functor.map_comp, Category.assoc]
+      rw [← reassoc_of% ha, hb]
+    _ = _ := by
+      simp only [Functor.map_comp, Category.assoc]
+      rw [← reassoc_of% hshift]
+
+/-- Exact comparison pullback identifies the etale reassociation with the specified
+pro-etale chart reassociation, through its actual scalar, tensor, inverse-image and
+shift comparisons. In particular this is the map rho in the setting of the recorded
+chart-scalar-reassociation node.
+
+Source: Charts, retained Steps 4 and 11 (blueprint:
+lem-sp-finite-affine-right-scalar-normal-form).
+Proof: apply exact comparison inverse image to the chart equation. On flat-term
+K-flat representatives scalar/site and scalar/pullback comparisons are the same
+B-linear balancing map. Their tensor comparison is the signed total tensor map;
+ordinary Tate balancing commutes with comparison inverse image and identifies the
+same ordered root powers. The exact inverse image commutes with shifts. These
+squares paste to the displayed equation with chartOperationComparison. Consequently
+its pro-etale path is precisely chartScalarReassociationMap. For d=0, its Tate,
+identity-pullback and shift maps are the canonical unit comparisons. -/
+theorem finiteAffineRightScalarNormalForm_site
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (N : ℕ) (_hN : 0 < N)
+    (hA : (N : A) = 0) (hB : (N : B) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (_hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    {U : Scheme.{u}} [IsNoetherian U] (e : U ⟶ affineTraceTower S d)
+    [AlgebraicGeometry.Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]
+    (K : DerivedCategoryModule A S)
+    (_hBounded : _root_.DerivedCategory.TStructure.t.bounded K)
+    (_hConstructible : ∀ i : ℤ, Scheme.IsConstructibleEtaleModuleSheaf
+      ((_root_.DerivedCategory.homologyFunctor
+        (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) i).obj K))
+    (_hTor : ∃ a b : ℤ, a ≤ b ∧ _root_.DerivedCategory.torAmplitudeIn
+      (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) a b K) :
+    ProEtale.chartScalarReassociationMap φ N hA hB (e ≫ affineTraceProjection S d)
+        d (2 * (d : ℤ))
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory.obj K) ≫
+      (ProEtale.AdjunctionTransfer.proEtaleChartOperation B N hB
+        (e ≫ affineTraceProjection S d) d (2 * (d : ℤ))).map
+          ((finiteAffineSiteScalarIso φ S).hom.app K) ≫
+      (ProEtale.AdjunctionTransfer.chartOperationComparison B N hB
+        (e ≫ affineTraceProjection S d) d (2 * (d : ℤ))).hom.app
+          ((scalarExtension φ S).obj K) =
+    L(ProEtale.sheafExtendScalars φ U).map
+        ((ProEtale.AdjunctionTransfer.chartOperationComparison A N hA
+          (e ≫ affineTraceProjection S d) d (2 * (d : ℤ))).hom.app K) ≫
+      (finiteAffineSiteScalarIso φ U).hom.app
+        ((ProEtale.AdjunctionTransfer.etaleChartOperation A N hA
+          (e ≫ affineTraceProjection S d) d (2 * (d : ℤ))).obj K) ≫
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) U).mapDerivedCategory.map
+        (finiteAffineChartScalarMap φ N hA hB (e ≫ affineTraceProjection S d)
+          d (2 * (d : ℤ)) K) := by
+  let := φ.toAlgebra
+  let : L(ProEtale.sheafExtendScalars φ U).CommShift ℤ :=
+    (ProEtale.leftDerivedSheafExtendScalarsAdjunction A B U).leftAdjointCommShift ℤ
+  have h := siteScalarShiftPasting
+    L(ProEtale.sheafExtendScalars φ U) (scalarExtension φ U)
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) U).mapDerivedCategory
+    (shiftFunctor _ (2 * (d : ℤ))) (shiftFunctor _ (2 * (d : ℤ)))
+    (shiftFunctor _ (2 * (d : ℤ))) (shiftFunctor _ (2 * (d : ℤ)))
+    (L(ProEtale.sheafExtendScalars φ U).commShiftIso (2 * (d : ℤ)))
+    (Functor.commShiftIso
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory
+      (2 * (d : ℤ)))
+    (Functor.commShiftIso
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) U).mapDerivedCategory
+      (2 * (d : ℤ)))
+    (FiniteSmoothPurity.scalarShiftIso φ U (2 * (d : ℤ)))
+    (finiteAffineSiteScalarIso φ U)
+    ((sitePreComparison A N hA (e ≫ affineTraceProjection S d) d).hom.app K)
+    ((sitePreComparison B N hB (e ≫ affineTraceProjection S d) d).hom.app
+      ((scalarExtension φ S).obj K))
+    (siteProPreScalar φ N hA hB (e ≫ affineTraceProjection S d) d
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory.obj K) ≫
+      (siteProPreOperation B N hB (e ≫ affineTraceProjection S d) d).map
+        ((finiteAffineSiteScalarIso φ S).hom.app K))
+    (siteEtalePreScalar φ N hA hB (e ≫ affineTraceProjection S d) d K)
+    (by
+      simpa only [Category.assoc] using
+        finiteAffineSiteTransportLeft φ N hA hB (e ≫ affineTraceProjection S d) d _hN
+          (affineTracePullbackInvertible N (e ≫ affineTraceProjection S d) _hS) K)
+    (finiteAffineSiteTransportRight φ U (2 * (d : ℤ))
+      ((siteEtalePreOperation A N hA (e ≫ affineTraceProjection S d) d).obj K))
+  set_option maxRecDepth 8192 in
+    simpa only [siteProScalar_shift, siteChartComparison_shift, siteProOperation_map,
+      siteEtaleScalar_shift, ProEtale.AdjunctionTransfer.etaleChartOperation,
+      ProEtale.AdjunctionTransfer.proEtaleChartOperation, siteEtalePreOperation,
+      siteProPreOperation, Functor.comp_obj, Functor.comp_map, Functor.map_comp,
+      Category.assoc] using h
 
 end AlgebraicGeometry.Etale

@@ -417,6 +417,15 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonPresentationSupplement
 import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonFaithful
+public import Mathlib.CategoryTheory.EssentialImage
+public import Mathlib.CategoryTheory.Monad.Limits
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.FiniteAdmissibleGeneration
+public import WeilConjectures.AlgebraicGeometry.FiniteComparisonPresentationSupport
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalDirectImagePreservation
+public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedFiniteTorConstructible
 
 /-!
 # Finite coefficient comparison on localizing closures
@@ -554,6 +563,209 @@ private theorem closureEquivalence (S : ObjectProperty C) (T : ObjectProperty D)
     obtain ⟨L, hL, ⟨e⟩⟩ := himage K.obj K.property
     exact ⟨⟨L, hL⟩, ⟨ObjectProperty.isoMk _ e⟩⟩
   exact { }
+
+/-- The finite-Tor constructible generators correspond under the comparison functor.
+Source: blueprint finite comparison, opening paragraph
+(blueprint: lem-ctf-finite-comparison-generators).
+
+Proof: apply the finite Noetherian coefficient comparison to the coefficient-sized small
+site models, then transport its restricted equivalence through the constant-scalar
+presentations, site equivalences, and the specified finite discrete scheme-ring
+isomorphism. These transports preserve constructibility, finite Tor amplitude, and the
+ambient derived comparison, yielding both generator inclusions. The empty scheme and
+zero ring are included by the same equivalence argument. -/
+theorem finiteComparisonGenerators_identification (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] :
+    (∀ K : Etale.DerivedCategoryModule (ULift.{u + 1} B) X,
+      finiteComparisonEtaleGenerators B X K →
+        finiteComparisonProEtaleGenerators B eR X
+          ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B))
+            X).mapDerivedCategory.obj K)) ∧
+    (∀ K : _root_.DerivedCategory
+        (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B))),
+      finiteComparisonProEtaleGenerators B eR X K →
+        (finiteComparisonEtaleGenerators B X).map
+          (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B))
+            X).mapDerivedCategory K) := by
+  let A := ULift.{u + 1} B
+  let : IsNoetherianRing A := inferInstance
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=
+    HasDerivedCategory.standard _
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=
+    HasDerivedCategory.standard _
+  let E := (finiteComparisonEtaleModelRealization X A).mapDerivedCategory
+  let G := (finiteComparisonProEtaleModelRealization X A).mapDerivedCategory
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+  obtain ⟨D, hD, _, H, ⟨hH⟩⟩ := finiteTorComparisonNoetherian.{u, u + 1} X A
+  obtain ⟨hE, hG⟩ := finiteComparisonPresentation B X eR
+  obtain ⟨esquare⟩ := finiteComparisonModelDerivedSquare X A D hD
+  constructor
+  · intro K hK
+    rw [← hE] at hK
+    obtain ⟨L, hL, ⟨eL⟩⟩ := hK
+    rw [← hG]
+    let L' := H.functor.obj ⟨L, hL⟩
+    refine ⟨L'.obj, L'.property, ⟨?_⟩⟩
+    exact G.mapIso (hH.app ⟨L, hL⟩) ≪≫
+      (esquare.app L).symm ≪≫ F.mapIso eL
+  · intro K hK
+    rw [← hG] at hK
+    obtain ⟨M, hM, ⟨eM⟩⟩ := hK
+    let M' := H.inverse.obj ⟨M, hM⟩
+    refine ⟨E.obj M'.obj, ?_, ⟨?_⟩⟩
+    · rw [← hE]
+      exact ⟨M'.obj, M'.property, ⟨Iso.refl _⟩⟩
+    · exact esquare.app M'.obj ≪≫ G.mapIso (hH.app M').symm ≪≫
+        G.mapIso (ObjectProperty.ι _ |>.mapIso (H.counitIso.app ⟨M, hM⟩)) ≪≫ eM
+
+/-- The finite-coefficient comparison identifies the entire etale derived category
+with the localizing closure of pro-etale constructible finite-Tor objects.
+
+Source: blueprint `sk-prop-ctf-finite-comparison`, proof steps 1--3 and 6
+(blueprint: new-ctf-finite-admissible-restriction).
+
+Proof: identify the two etale constructibility predicates using the equivalence
+between finite-valued and finite-stalk constructible sheaves. The Noetherian finite-Tor
+comparison, transported through the coefficient-model realization equivalences,
+identifies the finite-Tor generator predicates. The unbounded comparison is exact,
+fully faithful, and preserves coproducts. Its inverse image of the target closure
+is localizing and contains the source generators. Its essential image on the
+source closure is also localizing: fullness lifts arrows, exactness identifies
+cones, and preservation of sums identifies coproducts. Minimality of both closures
+therefore gives an equivalence of closures. The generation helper identifies the
+source closure with the entire etale category. The restricted functor is the
+original comparison followed by the subtype factorization, giving the stated
+natural identification after inclusion. -/
+theorem finiteAdmissibleRestriction
+    (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
+    (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))
+    (A : Type u) [CommRing A] [Finite A] (hA : ∃ n : ℕ, (ℓ : A) ^ n = 0)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :
+    (∃ E : Etale.DerivedCategoryModule (ULift.{u + 1} A) X ≌
+        (CategoryTheory.localizingClosure
+          (DerivedCategory.constructibleFiniteTor
+            (ModuleCat.{u + 1} (ULift.{u + 1} A)) X)).FullSubcategory,
+      Nonempty (E.functor ⋙ (CategoryTheory.localizingClosure
+          (DerivedCategory.constructibleFiniteTor
+            (ModuleCat.{u + 1} (ULift.{u + 1} A)) X)).ι ≅
+        (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).mapDerivedCategory)) := by
+  classical
+  let R := ULift.{u + 1} A
+  let C := ModuleCat.{u + 1} R
+  let F := (comparisonUpperStar C X).mapDerivedCategory
+  let S := Etale.DerivedCategory.isBoundedConstructible R X ⊓
+    _root_.DerivedCategory.finiteTorAmplitude _
+  let T := DerivedCategory.constructibleFiniteTor C X
+  let : TopologicalSpace R := ⊥
+  let : DiscreteTopology R := ⟨rfl⟩
+  have hnil : ∃ n : ℕ, (ℓ : R) ^ n = 0 := by
+    obtain ⟨n, hn⟩ := hA
+    refine ⟨n, (ULift.ringEquiv : R ≃+* A).injective ?_⟩
+    simpa only [map_pow, map_natCast, map_zero] using hn
+  have hbc (K : Etale.DerivedCategoryModule R X) :
+      Etale.DerivedCategory.isBoundedConstructible R X K ↔
+        Etale.DerivedCategory.boundedConstructible C X K := by
+    constructor
+    · rintro ⟨hc, a, b, hab, hz⟩
+      refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, ?_⟩
+      · exact (_root_.DerivedCategory.isGE_iff K a).mpr (fun q hq ↦ hz q (.inl hq))
+      · exact (_root_.DerivedCategory.isLE_iff K b).mpr (fun q hq ↦ hz q (.inr hq))
+      · intro q
+        exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hc q)
+    · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
+      refine ⟨fun q ↦
+        (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr (hc q),
+        min a b, b, min_le_right _ _, ?_⟩
+      intro q hq
+      rcases hq with hq | hq
+      · exact (_root_.DerivedCategory.isGE_iff K a).mp ha q
+          (lt_of_lt_of_le hq (min_le_left _ _))
+      · exact (_root_.DerivedCategory.isLE_iff K b).mp hb q hq
+  let : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) R)) :=
+    HasDerivedCategory.standard _
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) R)) :=
+    HasDerivedCategory.standard _
+  let E := (finiteComparisonEtaleModelRealization X R).mapDerivedCategory
+  let G := (finiteComparisonProEtaleModelRealization X R).mapDerivedCategory
+  obtain ⟨D, hD, hmodel, _, _⟩ := finiteTorComparisonNoetherian.{u, u + 1} X R
+  obtain ⟨esquare⟩ := finiteComparisonModelDerivedSquare X R D hD
+  have hpro (M : ConstantCompletion.D (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) R)) :
+      (∃ a b : ℤ, HasCoefficientModelTorAmplitude _ M a b) ↔
+        _root_.DerivedCategory.finiteTorAmplitude _ (G.obj M) := by
+    rw [FiniteComparisonPresentationSupport.coefficient_finite_native]
+    let H := finiteComparisonProEtaleModelRealization X R
+    let : H.Monoidal := proRealization_monoidal X R
+    let := H.preservesFlat_of_isEquivalence
+    apply exists_congr
+    intro a
+    apply exists_congr
+    intro b
+    exact (_root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff H a b M).symm
+  let : (Etale.DerivedCategory.isBoundedConstructible R X).IsClosedUnderIsomorphisms :=
+    etale_bounded_iso X R
+  have htor (K : Etale.DerivedCategoryModule R X)
+      (hc : Etale.DerivedCategory.isBoundedConstructible R X K) :
+      _root_.DerivedCategory.finiteTorAmplitude _ K ↔
+        _root_.DerivedCategory.finiteTorAmplitude _ (F.obj K) := by
+    obtain ⟨M, ⟨eM⟩⟩ := Functor.EssSurj.mem_essImage E K
+    have hcM := (coefficient_etale_bounded X R M).mpr
+      ((Etale.DerivedCategory.isBoundedConstructible R X).prop_of_iso eM.symm hc)
+    have hm : (∃ a b : ℤ, HasCoefficientModelTorAmplitude _ M a b) ↔
+        (∃ a b : ℤ, HasCoefficientModelTorAmplitude _ (D.obj M) a b) := by
+      constructor
+      · rintro ⟨a, b, h⟩
+        exact ⟨a, b, (hmodel M hcM a b h.1).mp h⟩
+      · rintro ⟨a, b, h⟩
+        exact ⟨a, b, (hmodel M hcM a b h.1).mpr h⟩
+    have hleft : _root_.DerivedCategory.finiteTorAmplitude _ (E.obj M) ↔
+        _root_.DerivedCategory.finiteTorAmplitude _ K :=
+      ⟨fun h ↦ (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso eM h,
+        fun h ↦ (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso eM.symm h⟩
+    let e : G.obj (D.obj M) ≅ F.obj K := (esquare.app M).symm ≪≫ F.mapIso eM
+    have hright : _root_.DerivedCategory.finiteTorAmplitude _ (G.obj (D.obj M)) ↔
+        _root_.DerivedCategory.finiteTorAmplitude _ (F.obj K) :=
+      ⟨fun h ↦ (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso e h,
+        fun h ↦ (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso e.symm h⟩
+    exact hleft.symm.trans ((coefficient_etale_finiteTor X R M).symm.trans
+      (hm.trans ((hpro (D.obj M)).trans hright)))
+  obtain ⟨hff⟩ := finiteComparisonOrdinary_fullyFaithful R k hbase hℓ hnil X
+  let : F.Full := hff.full
+  let : F.Faithful := hff.faithful
+  let adj := (comparisonAdjunction C X).mapDerivedCategoryRightDerivedAdjunction
+  let : Coreflective F := { R := _, adj := adj }
+  obtain ⟨hpres, hequiv⟩ := CategoryTheory.closureEquivalence S T F
+    (fun K hK P hP hinc ↦ hinc _
+      ⟨⟨K, (hbc K).mp hK.1, ⟨Iso.refl _⟩⟩, (htor K hK.1).mp hK.2⟩)
+    (fun K hK ↦ by
+      obtain ⟨⟨L, hL, ⟨e⟩⟩, a, b, ht⟩ := hK
+      have hc := (hbc L).mpr hL
+      have hf : _root_.DerivedCategory.finiteTorAmplitude _ (F.obj L) :=
+        (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso e.symm ⟨a, b, ht⟩
+      exact ⟨L, fun P hP hinc ↦ hinc _ ⟨hc, (htor L hc).mpr hf⟩, ⟨e⟩⟩)
+  let H := (CategoryTheory.localizingClosure T).lift
+    ((CategoryTheory.localizingClosure S).ι ⋙ F)
+    (fun K ↦ hpres K.obj K.property)
+  let : H.IsEquivalence := hequiv
+  have hall (K : Etale.DerivedCategoryModule R X) :
+      CategoryTheory.localizingClosure S K := by
+    rw [finiteAdmissibleGeneration k hbase ℓ hℓ A hA X]
+    trivial
+  let L := (CategoryTheory.localizingClosure S).lift (𝟭 _) hall
+  let : L.EssSurj := ⟨fun K ↦ ⟨K.obj, ⟨ObjectProperty.isoMk _ (Iso.refl _)⟩⟩⟩
+  let : L.IsEquivalence := { }
+  let E := L.asEquivalence.trans H.asEquivalence
+  exact ⟨E, ⟨Iso.refl _⟩⟩
 
 end CategoryTheory
 end LocalizingArgument

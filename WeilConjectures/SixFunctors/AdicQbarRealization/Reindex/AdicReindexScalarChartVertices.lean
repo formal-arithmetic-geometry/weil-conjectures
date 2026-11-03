@@ -28,6 +28,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
+public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
 
 /-! # Vertices for scalar reindexing computation charts
 
@@ -240,6 +241,13 @@ private theorem completed_scalar_good (l : ℕ) [Fact l.Prime]
   exact ⟨h.1, fun n ↦ (CategoryTheory.exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso _ _).symm (h.2 n)⟩
 
+/-- Read off invertibility at a chosen natural transformation from its specification. -/
+private theorem isIso_choose_app {K C D : Type*} [Category K] [Category C] [Category D]
+    {F G : C ⥤ D} (q : K ⥤ C) {A B : (F ⟶ G) → Prop} {R : K → Prop}
+    (H : ∃ ε : F ⟶ G, A ε ∧ B ε ∧ ∀ P, R P → IsIso (ε.app (q.obj P))) (P : K) (hP : R P) :
+    IsIso ((Exists.choose H).app (q.obj P)) :=
+  (Exists.choose_spec H).2.2 P hP
+
 private theorem scalar_counit_iso (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]
     [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]
@@ -247,9 +255,9 @@ private theorem scalar_counit_iso (l : ℕ) [Fact l.Prime]
     (P : CochainComplex (integralTowerModules l E W) ℤ)
     (hp : CochainComplex.IsKFlatIndependentCoefficients
       (R := completedIntegralCommRingSheafUnrestricted l E W) P) :
-    IsIso (completedScalarCounit l E L i W P) :=
-  (completedScalarChangeData l E L i W).choose_spec.choose_spec.choose_spec.choose_spec.2.2
-    |>.choose_spec.choose_spec.2.2 P hp
+    IsIso (completedScalarCounit l E L i W P) := by
+  unfold completedScalarCounit
+  exact isIso_choose_app _ _ P hp
 
 private theorem native_counit_iso (W : Scheme.{u})
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)

@@ -402,6 +402,8 @@ private theorem ordinaryBoundary_derived_pullback (P : PurityFiniteSetting.{u}) 
     (ordinaryBoundary P n B aB c i) (ordinaryBoundary P n B' (g ≫ aB) c i)
     (ordinaryBoundary_pullback P n g aB c i p sq))
 
+-- Match the category-instance proofs captured in the recorded derived module category.
+
 set_option maxHeartbeats 8000000 in
 -- Keep site coherence independent of the large specialized coefficient record.
 private theorem realized_boundary_pullback (Q : PurityFiniteSetting.{u})

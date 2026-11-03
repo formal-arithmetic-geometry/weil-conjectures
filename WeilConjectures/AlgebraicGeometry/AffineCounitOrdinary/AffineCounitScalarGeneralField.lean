@@ -12,6 +12,17 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.CoefficientScalarRepresentatives.CoefficientScalarRepresentatives
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ReductionExtendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
+public import Mathlib.Algebra.CharP.Basic
+public import WeilConjectures.AlgebraicGeometry.Affine.AffineCompactificationComparisonNormalization
+public import WeilConjectures.AlgebraicGeometry.Affine.AffineLineCanonicalScalarCounit
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.Etale.EtaleFlatConstructibleModel
+public import WeilConjectures.AlgebraicGeometry.EtalePullbackTwistTorWindowField
+public import WeilConjectures.AlgebraicGeometry.Ordered.OrderedAffineTraceNormalForm
+public import WeilConjectures.AlgebraicGeometry.OrderedCompactificationScalarSquareFiniteCoefficients
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalObjects
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
 # Ordered affine counit under ordinary coefficient extension
@@ -36,95 +47,23 @@ namespace AffineCounitOrdinary
 
 /-- The ordinary scalar tensorator, transported through the unit-compatible uniqueness
 of scalar left adjoints. The middle map is the K-flat derived tensor comparison.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-ladic-summary/sec-change-of-finite-coefficients/sk-lem-sp-reduction/
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/
 sk-lem-sp-reduction-exceptional.proof.md, Charts (blueprint: lem-sp-affine-counit-scalar). -/
 def tensorIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) (M L : DerivedCategoryModule A T) :
     (scalar T.smallEtaleTopology φ).obj (M ⊗ L) ≅
-      (scalar T.smallEtaleTopology φ).obj M ⊗ (scalar T.smallEtaleTopology φ).obj L := by
-  let E := CoefficientScalarRepresentatives.ordinaryExtension T.smallEtaleTopology φ
-  let J := T.smallEtaleTopology
-  letI : E.PreservesKFlatQuasiIso := by
-    classical
-    let E := CoefficientScalarRepresentatives.ordinaryExtension J φ
-    let U := Sheaf.restrictScalars J φ
-    let adj : E ⊣ U :=
-      Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
-    have : E.Additive := adj.left_adjoint_additive
-    let coef := (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).obj (ModuleCat.of B B)
-    let X := (Functor.const T.Etaleᵒᵖ).obj coef
-    let a := presheafToSheaf J (ModuleCat.{u + 1} A)
-    let a' := presheafToSheaf J (ModuleCat.{u + 1} B)
-    let F := sheafToPresheaf J (ModuleCat.{u + 1} A)
-    let W := (Functor.whiskeringRight T.Etaleᵒᵖ _ _).obj
-      (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
-    have : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ) :=
-      Sheaf.preservesSheafification_of_adjunction J
-        (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ)
-    let e : E ⋙ U ≅ MonoidalCategory.tensorRight (a.obj X) :=
-      Functor.associator F (W ⋙ a') U ≪≫
-        Functor.isoWhiskerLeft F (Functor.associator W a' U) ≪≫
-        Functor.isoWhiskerLeft F (Functor.isoWhiskerLeft W
-          (sheafComposeNatIso J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ)
-            (sheafificationAdjunction J (ModuleCat.{u + 1} B))
-            (sheafificationAdjunction J (ModuleCat.{u + 1} A))).symm) ≪≫
-        Functor.isoWhiskerLeft F (Functor.associator W _ a).symm ≪≫
-        Functor.isoWhiskerLeft F (Functor.isoWhiskerRight
-          (Functor.whiskeringRightObjCompIso _ _ ≪≫
-            (Functor.whiskeringRight _ _ _).mapIso
-              (ModuleCat.extendScalarsCompRestrictScalarsIso.{u + 1} φ) ≪≫
-            whiskeringRightTensorRightIso _) a) ≪≫
-        Functor.isoWhiskerLeft F (Sheaf.presheafToSheafCompTensorRightIso X).symm ≪≫
-        (Functor.associator F a (MonoidalCategory.tensorRight (a.obj X))).symm ≪≫
-        Functor.isoWhiskerRight
-          (asIso (sheafificationAdjunction J (ModuleCat.{u + 1} A)).counit)
-          (MonoidalCategory.tensorRight (a.obj X)) ≪≫ Functor.leftUnitor _
-    have hU : U.Faithful := inferInstance
-    have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf J (ModuleCat.{u + 1} A)) :=
-      IsGrothendieckAbelian.hasColimits _
-    have : HasColimitsOfSize.{0, 0} (Sheaf J (ModuleCat.{u + 1} A)) :=
-      hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
-    have : HasCountableCoproducts (Sheaf J (ModuleCat.{u + 1} A)) :=
-      ⟨fun K _ ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete K)⟩
-    have : E.PreservesKFlatQuasiIso := by
-      apply CategoryTheory.Functor.PreservesKFlatQuasiIso.mk'
-      intro K hK hKa
-      have ht := CochainComplex.acyclic_tensorRight_of_kFlat K hK hKa (a.obj X)
-      have hEU := ht.of_iso
-        ((NatIso.mapHomologicalComplex e (.up ℤ)).app K).symm
-      have hUK : ((U.mapHomologicalComplex (.up ℤ)).obj
-          ((E.mapHomologicalComplex (.up ℤ)).obj K)).Acyclic :=
-        hEU.of_iso ((CategoryTheory.Functor.mapHomologicalComplexCompIso
-          (Iso.refl (E ⋙ U)) (.up ℤ)).app K)
-      intro n
-      exact (ShortComplex.exact_map_iff_of_faithful _ U).1 (hUK n)
-    infer_instance
-  let e := (CoefficientScalarRepresentatives.adjunction T.smallEtaleTopology φ).leftAdjointUniq
-    ((CoefficientScalarRepresentatives.ordinaryAdjunction T.smallEtaleTopology φ).derivedAdjunction
-      |>.ofNatIsoRight
-        (Sheaf.restrictScalars T.smallEtaleTopology φ).rightDerivedFunctorIsoMapDerivedCategory)
-  letI : E.Monoidal := Sheaf.monoidal_extendScalars T.smallEtaleTopology φ
-  letI : E.IsLeftAdjoint :=
-    (CoefficientScalarRepresentatives.ordinaryAdjunction T.smallEtaleTopology φ).isLeftAdjoint
-  letI : E.PreservesFlat := Sheaf.preservesFlat_extendScalars T.smallEtaleTopology (f := φ)
-  letI : E.leftDerivedFunctor.Monoidal := E.leftDerivedFunctorMonoidal
-  exact e.app (M ⊗ L) ≪≫ (Functor.Monoidal.μIso E.leftDerivedFunctor M L).symm ≪≫
-    ((e.symm.app M) ⊗ᵢ (e.symm.app L))
+      (scalar T.smallEtaleTopology φ).obj M ⊗ (scalar T.smallEtaleTopology φ).obj L :=
+  (ExceptionalCoefficients.tensorIso φ T).app (M, L)
 
 /-- Inverse-image balancing for the ordinary scalar functor, with the existing exact
 inverse-image identifications at both ends.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-ladic-summary/sec-change-of-finite-coefficients/sk-lem-sp-reduction/
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/
 sk-lem-sp-reduction-exceptional.proof.md, Charts (blueprint: lem-sp-affine-counit-scalar). -/
 def pullbackIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFinitePullback A f ⋙ scalar X.smallEtaleTopology φ ≅
       scalar Y.smallEtaleTopology φ ⋙ ordinaryFinitePullback B f :=
-  Functor.isoWhiskerRight
-      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f) _ ≪≫
-    (etaleIso φ f).symm ≪≫ Functor.isoWhiskerLeft _
-      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) f).symm
+  (scalarPullbackIso φ f).symm
 
 /-- Scalar balancing on the concrete root line. Adjoint uniqueness for the two
 sheafified Z/N extension functors fixes the map on every scalar/root tensor.
@@ -156,19 +95,13 @@ def tateSheafIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
 /-- The derived scalar arrow on one Tate line is the transpose of its ordinary
 root-normalized map, with the exact restriction/single comparison displayed.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-ladic-summary/sec-change-of-finite-coefficients/sk-lem-sp-reduction/
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/
 sk-lem-sp-reduction-exceptional.proof.md, Charts (blueprint: lem-sp-affine-counit-scalar). -/
 def tateMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0) :
     (scalar T.smallEtaleTopology φ).obj (ordinaryFiniteLine A N hA T) ⟶
       ordinaryFiniteLine B N hB T :=
-  ((CoefficientScalarRepresentatives.adjunction T.smallEtaleTopology φ).homEquiv _ _).symm
-    ((_root_.DerivedCategory.singleFunctor _ 0).map
-      ((CoefficientScalarRepresentatives.ordinaryAdjunction T.smallEtaleTopology φ).homEquiv
-        _ _ (tateSheafIso φ T N hA hB).hom) ≫
-      ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategorySingleFunctor 0).inv.app
-        (Scheme.finiteEtaleTateLine T N B hB))
+  ProEtale.reductionEtaleTateExtensionMap φ T N hA hB
 
 /-- Commute ordinary scalar extension with the even shift on the root line.
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
@@ -273,15 +206,337 @@ def counit (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (affineTraceAdjunction A N hA (projectiveLineTraceTransport N hN A hA)
       (fun T _ hT ↦ projectiveLineTraceDatum N hN A hA T hT) S hS d).counit.app K
 
+private theorem ordinary_normalization
+    (A : Type (u + 1)) [CommRing A] [Finite A] (k : Type u) [Field k]
+    (S : Scheme.{u}) [IsNoetherian S] [S.Over (Spec (.of k))]
+    [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))]
+    (d : ℕ) (c : Compactification (affineTraceProjection S d))
+    (M : _root_.DerivedCategory.Plus
+      (Sheaf (affineTraceTower S d).smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (AffineCounitOrdinary.leftIso A S d c).hom.app M.obj =
+      (orderedFiniteCompactificationComparison A k S d c M).hom := by
+  exact affineCompactificationComparison_normalization A k S d c M
+
+private theorem ordinary_tower_scalar
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (hB : (N : B) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (K : DerivedCategoryModule A S) :
+    orderedFiniteAffineCoefficientMap φ S d ((affineTraceRight A N hA S d).obj K) ≫
+      (affineTraceLeft B S d).map (AffineCounitOrdinary.rightMap φ S N hA hB d K) ≫
+      (affineTraceAdjunction B N hB (projectiveLineTraceTransport N hN B hB)
+        (fun T _ hT ↦ projectiveLineTraceDatum N hN B hB T hT) S hS d).counit.app
+          ((scalar S.smallEtaleTopology φ).obj K) =
+    (scalar S.smallEtaleTopology φ).map
+      ((affineTraceAdjunction A N hA (projectiveLineTraceTransport N hN A hA)
+        (fun T _ hT ↦ projectiveLineTraceDatum N hN A hA T hT) S hS d).counit.app K) := by
+  rw [ordered_finite_exchange]
+  have hr : AffineCounitOrdinary.rightMap φ S N hA hB d K =
+      right_exchange
+        (fun r ↦ affineTraceLineRight A N hA (affineTraceTower S r))
+        (fun r ↦ affineTraceLineRight B N hB (affineTraceTower S r))
+        (fun r ↦ scalar (affineTraceTower S r).smallEtaleTopology φ)
+        (fun r M ↦ AffineCounitOrdinary.lineMap φ (affineTraceTower S r) N hA hB M)
+        d K := by
+    induction d with
+    | zero => rfl
+    | succ d ih => simp only [AffineCounitOrdinary.rightMap, right_exchange, ih]
+  rw [hr]
+  unfold affineTraceAdjunction
+  apply tower_counit_scalar
+  intro r
+  have := affineTraceNoetherian S r
+  rw [ordinary_beta_eq, ordinary_line_map_eq φ N hA hB _ (affineTraceInvertible N S hS r)]
+  exact line_scalar_counit φ N hN hA hB _ (affineTraceInvertible N S hS r)
+    (projectiveLineTraceTransport N hN A hA) (projectiveLineTraceTransport N hN B hB)
+    (projectiveLineTraceDatum N hN A hA _ _) (projectiveLineTraceDatum N hN B hB _ _) _
+
+private theorem ordered_finite_exchange
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    (S : Scheme.{u}) (d : ℕ) (M : DerivedCategoryModule A (affineTraceTower S d)) :
+    orderedFiniteAffineCoefficientMap φ S d M =
+      (affineTraceExchangeTower
+        (fun r ↦ affineTraceLineLeft A (affineTraceTower S r))
+        (fun r ↦ affineTraceLineLeft B (affineTraceTower S r))
+        (fun r ↦ scalar (affineTraceTower S r).smallEtaleTopology φ)
+        (fun r ↦ ProEtale.FiniteCompactCoefficients.beta φ
+          (affineTraceLineCompactification (affineTraceTower S r))) d).app M := by
+  induction d with
+  | zero =>
+    simp only [orderedFiniteAffineCoefficientMap, affineTraceExchangeTower_zero]
+    rfl
+  | succ d ih =>
+    rw [orderedFiniteAffineCoefficientMap, affineTraceExchangeTower_succ, ← ih]
+
+private theorem ordinary_line_map_eq
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0)
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (K : DerivedCategoryModule A S) :
+    AffineCounitOrdinary.lineMap φ S N hA hB K =
+      (ProEtale.reductionEtaleLineScalarIso φ S N hA hB hS K).hom := by
+  simp only [AffineCounitOrdinary.lineMap, AffineCounitOrdinary.p1Map,
+    AffineCounitOrdinary.tensorIso, AffineCounitOrdinary.pullbackIso,
+    AffineCounitOrdinary.shiftedLineMap, AffineCounitOrdinary.tateMap,
+    ProEtale.reductionEtaleLineScalarIso, ProEtale.reductionEtaleP1ScalarIso,
+    ProEtale.reductionEtaleShiftedLineIso, ProEtale.reductionEtaleTateIso,
+    Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom,
+    Iso.prod_hom, Functor.uncurry_obj_map, asIso_hom, ordinaryFiniteTensor,
+    MonoidalCategory.tensorHom_def]
+  rfl
+
+private theorem ordinary_beta_eq
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
+    ProEtale.FiniteCompactCoefficients.beta φ c = compactScalarMap φ c := by
+  unfold ProEtale.FiniteCompactCoefficients.beta compactScalarMap
+    ExceptionalCoefficients.compactSupportMap
+  rw [ordinary_gamma_eq, ordinary_open_eq]
+  rfl
+
+private theorem ordinary_open_eq
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
+    ProEtale.FiniteCompactCoefficients.etOpen φ j = ExceptionalCoefficients.openIso φ j := by
+  apply Iso.ext
+  ext M
+  simp [ProEtale.FiniteCompactCoefficients.etOpen, ExceptionalCoefficients.openIso,
+    Adjunction.leftAdjointUniq, conjugateIsoEquiv, conjugateEquiv,
+    Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoRight_counit,
+    Adjunction.comp_unit, Adjunction.comp_counit, scalarRestrictionPullbackIso,
+    derivedOpenImmersionLowerShriekUpperStarAdjunction,
+    Category.assoc, CoefficientScalarRepresentatives.adjunction,
+    CoefficientScalarRepresentatives.extension]
+  rfl
+
+private theorem ordinary_gamma_eq
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    etaleGamma φ f = scalarMate φ f := by
+  unfold etaleGamma scalarMate
+  rw [← exact_geometric_adjunction A f, ← exact_geometric_adjunction B f]
+  ext M
+  have hp := congrArg Iso.hom (scalarPullback_eq φ f)
+  simp only [ProEtale.scalarPullbackEtaleIsoFromMate, Iso.symm_hom] at hp
+  dsimp only [ProEtale.scalarPullbackReverseEtale,
+    CoefficientScalarRepresentatives.adjunction] at hp
+  simp only [etaleIso, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
+    Adjunction.ofNatIsoLeft_counit, Functor.map_comp, Category.assoc,
+    Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp]
+  erw [hp]
+  dsimp only [scalar, scalarExtension, CoefficientScalarRepresentatives.extension,
+    ProEtale.pbcFixedScalarExtension, Functor.comp_obj, Functor.comp_map,
+    TwoSquare.mk, TwoSquare.natTrans]
+  simp only [Category.id_comp]
+  simp only [← Functor.map_comp_assoc, ← Functor.map_comp,
+    Iso.hom_inv_id_app_assoc]
+
+private theorem exact_geometric_adjunction
+    (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).ofNatIsoLeft
+        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f) =
+      mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f := by
+  have hd : derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f =
+      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).ofNatIsoLeft
+        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).symm := by
+    exact Adjunction.derived_eq_ofNatIsoLeft _ _ _ _ _ _
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f)
+      (Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_fac
+        (upperStar (ModuleCat.{u + 1} A) f)).symm
+  rw [hd]
+  apply Adjunction.ext
+  ext M
+  simp [Adjunction.ofNatIsoLeft_unit, ← Functor.map_comp, Category.assoc]
+
+private theorem compactification_counit_transport
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L Lc : C ⥤ D} {R : D ⥤ C} {L' Lc' : E ⥤ F} {R' : F ⥤ E}
+    (a : L ⊣ R) (a' : L' ⊣ R') (U : C ⥤ E) (V : D ⥤ F)
+    (e : L ≅ Lc) (e' : L' ≅ Lc') (K : D)
+    (b : V.obj (L.obj (R.obj K)) ⟶ L'.obj (U.obj (R.obj K)))
+    (bc : V.obj (Lc.obj (R.obj K)) ⟶ Lc'.obj (U.obj (R.obj K)))
+    (r : U.obj (R.obj K) ⟶ R'.obj (V.obj K))
+    (sq : V.map (e.hom.app (R.obj K)) ≫ bc = b ≫ e'.hom.app (U.obj (R.obj K)))
+    (hc : b ≫ L'.map r ≫ a'.counit.app (V.obj K) = V.map (a.counit.app K)) :
+    bc ≫ Lc'.map r ≫ e'.inv.app (R'.obj (V.obj K)) ≫
+      a'.counit.app (V.obj K) = V.map (e.inv.app (R.obj K) ≫ a.counit.app K) := by
+  apply (cancel_epi (V.map (e.hom.app (R.obj K)))).mp
+  simp only [Functor.map_comp]
+  rw [← Category.assoc, sq]
+  have hn := e'.inv.naturality r
+  simp only [Category.assoc]
+  rw [reassoc_of% hn]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  simpa only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id,
+    Category.id_comp] using hc
+
+private theorem affine_right_domain (ell : ℕ) [Fact ell.Prime]
+    (k : Type u) [Field k] (hk : Finite k ∨ IsAlgClosed k) (hchar : ringChar k ≠ ell)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (n : ℕ)
+    (hA : ((ell ^ n : ℕ) : A) = 0) (S : Scheme.{u})
+    [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))]
+    [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))]
+    (hS : IsUnit ((ell ^ n : ℕ) : Γ(S, ⊤))) (d : ℕ)
+    (K : DerivedCategoryModule A S)
+    (hK : ProEtale.FiniteCompactCoefficients.Input A S K) :
+    ProEtale.FiniteCompactCoefficients.Input A (affineTraceTower S d)
+      ((affineTraceRight A (ell ^ n) hA S d).obj K) := by
+  cases d with
+  | zero => exact hK
+  | succ d =>
+    let : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian
+      (S ↘ Spec (.of k))
+    let : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace (S ↘ Spec (.of k))
+    let : IsNoetherian S := ⟨⟩
+    let X := affineTraceTower S (d + 1)
+    let : X.Over (Spec (.of k)) := ⟨affineTraceProjection S (d + 1) ≫ (S ↘ Spec (.of k))⟩
+    let : (affineTraceProjection S (d + 1)).IsOver (Spec (.of k)) := ⟨rfl⟩
+    have : LocallyOfFiniteType (X ↘ Spec (.of k)) := by
+      change LocallyOfFiniteType (affineTraceProjection S (d + 1) ≫ (S ↘ Spec (.of k)))
+      infer_instance
+    have : QuasiCompact (X ↘ Spec (.of k)) := by
+      change QuasiCompact (affineTraceProjection S (d + 1) ≫ (S ↘ Spec (.of k)))
+      infer_instance
+    have : IsSeparated (X ↘ Spec (.of k)) := by
+      change IsSeparated (affineTraceProjection S (d + 1) ≫ (S ↘ Spec (.of k)))
+      infer_instance
+    obtain ⟨a, b, hab, ht⟩ := hK.2
+    obtain ⟨P, hf, hc, hz, eP⟩ :=
+      (hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel A S a b hab K hK.1).1 ht
+    have : IsSeparated (Over.mk (S ↘ Spec (.of k))).hom :=
+      ‹IsSeparated (S ↘ Spec (.of k))›
+    have : LocallyOfFiniteType (Over.mk (S ↘ Spec (.of k))).hom :=
+      ‹LocallyOfFiniteType (S ↘ Spec (.of k))›
+    have : QuasiCompact (Over.mk (S ↘ Spec (.of k))).hom :=
+      ‹QuasiCompact (S ↘ Spec (.of k))›
+    have : IsSeparated (Over.mk (X ↘ Spec (.of k))).hom :=
+      ‹IsSeparated (X ↘ Spec (.of k))›
+    have : LocallyOfFiniteType (Over.mk (X ↘ Spec (.of k))).hom :=
+      ‹LocallyOfFiniteType (X ↘ Spec (.of k))›
+    have : QuasiCompact (Over.mk (X ↘ Spec (.of k))).hom :=
+      ‹QuasiCompact (X ↘ Spec (.of k))›
+    let f : Over.mk (X ↘ Spec (.of k)) ⟶ Over.mk (S ↘ Spec (.of k)) :=
+      Over.homMk (affineTraceProjection S (d + 1)) (comp_over _ _)
+    have h := (etale_pullback_twist_tor_window_finite_or_algClosed k hk ell Fact.out hchar
+      (Over.mk (S ↘ Spec (.of k))) (Over.mk (X ↘ Spec (.of k))) f n A hA a b hab).1
+      K hK.1 ht P eP (fun i ↦ (hf i).tensorRight) hc hz (d + 1)
+      (2 * ((d + 1 : ℕ) : ℤ))
+    let e := (orderedAffineRightIso A (ell ^ n)
+      (pow_pos (Fact.out : ell.Prime).pos n) hA S hS (d + 1)).app K
+    let L := (_root_.DerivedCategory.singleFunctor
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj
+      (Scheme.finiteEtaleTateTwist X (ell ^ n) A hA (d + 1))
+    let e' : (orderedAffineRight A (ell ^ n) hA S (d + 1)).obj K ≅
+        pullbackTwistDerived A (affineTraceProjection S (d + 1)) (ell ^ n) hA K
+          (d + 1) (2 * ((d + 1 : ℕ) : ℤ)) :=
+      (shiftFunctor _ (2 * ((d + 1 : ℕ) : ℤ))).mapIso
+        ((derivedTensorRight (ModuleCat.{u + 1} A) X L).mapIso
+          ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
+            (affineTraceProjection S (d + 1))).app K))
+    let v := e ≪≫ e'
+    have ht' := (_root_.DerivedCategory.torAmplitudeIn _
+      (a - 2 * ((d + 1 : ℕ) : ℤ)) (b - 2 * ((d + 1 : ℕ) : ℤ))).prop_of_iso v.symm
+        (DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 h.2.2.2.2.2.2)
+    refine ⟨?_, a - 2 * ((d + 1 : ℕ) : ℤ), b - 2 * ((d + 1 : ℕ) : ℤ),
+      sub_le_sub_right hab _, DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2 ht'⟩
+    obtain ⟨hc', a', b', hab', hz'⟩ := h.2.2.2.2.2.1
+    refine ⟨?_, a', b', hab', fun q hq ↦ (hz' q hq).of_iso
+      ((_root_.DerivedCategory.homologyFunctor _ q).mapIso v)⟩
+    intro q
+    have : Scheme.IsConstructibleSheaf
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj
+          (pullbackTwistDerived A (affineTraceProjection S (d + 1)) (ell ^ n) hA K
+            (d + 1) (2 * ((d + 1 : ℕ) : ℤ)))) :=
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc' q)
+    exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
+      (Scheme.IsConstructibleSheaf.of_iso
+        ((_root_.DerivedCategory.homologyFunctor _ q).mapIso v).symm)
+
+private theorem tower_counit_scalar {C C' : ℕ → Type*}
+    [∀ d, Category (C d)] [∀ d, Category (C' d)]
+    {L : ∀ d, C (d + 1) ⥤ C d} {L' : ∀ d, C' (d + 1) ⥤ C' d}
+    {R : ∀ d, C d ⥤ C (d + 1)} {R' : ∀ d, C' d ⥤ C' (d + 1)}
+    (a : ∀ d, L d ⊣ R d) (a' : ∀ d, L' d ⊣ R' d)
+    (B : ∀ d, C d ⥤ C' d) (e : ∀ d, L d ⋙ B d ⟶ B (d + 1) ⋙ L' d)
+    (r : ∀ d K, (B (d + 1)).obj ((R d).obj K) ⟶ (R' d).obj ((B d).obj K))
+    (K : C 0)
+    (h : ∀ d, (e d).app ((R d).obj ((affineTraceRightTower R d).obj K)) ≫
+      (L' d).map (r d ((affineTraceRightTower R d).obj K)) ≫
+        (a' d).counit.app ((B d).obj ((affineTraceRightTower R d).obj K)) =
+        (B d).map ((a d).counit.app ((affineTraceRightTower R d).obj K))) (d : ℕ) :
+    (affineTraceExchangeTower L L' B e d).app ((affineTraceRightTower R d).obj K) ≫
+      (affineTraceLeftTower L' d).map (right_exchange R R' B r d K) ≫
+      (affineTraceAdjunctionTower a' d).counit.app ((B 0).obj K) =
+    (B 0).map ((affineTraceAdjunctionTower a d).counit.app K) := by
+  induction d with
+  | zero =>
+    rw [affineTraceExchangeTower_zero]
+    change 𝟙 _ ≫ 𝟙 _ ≫ 𝟙 _ = (B 0).map (𝟙 K)
+    simp
+  | succ d ih =>
+    let M := (affineTraceRightTower R d).obj K
+    let q := right_exchange R R' B r d K
+    have hn := (a' d).counit.naturality q
+    simp only [Functor.comp_map, Functor.id_map] at hn
+    have hi : (e d).app ((R d).obj M) ≫
+        (L' d).map (r d M ≫ (R' d).map q) ≫
+        (a' d).counit.app ((affineTraceRightTower R' d).obj ((B 0).obj K)) =
+        (B d).map ((a d).counit.app M) ≫ q := by
+      rw [Functor.map_comp, Category.assoc, hn]
+      simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ q) (h d)
+    rw [affineTraceExchangeTower_succ, affineTraceAdjunctionTower_counit_succ,
+      affineTraceAdjunctionTower_counit_succ]
+    change (_ ≫ (affineTraceLeftTower L' d).map ((e d).app ((R d).obj M))) ≫
+      (affineTraceLeftTower L' d).map
+        ((L' d).map (r d M ≫ (R' d).map q)) ≫
+      (affineTraceLeftTower L' d).map
+        ((a' d).counit.app ((affineTraceRightTower R' d).obj ((B 0).obj K))) ≫
+      (affineTraceAdjunctionTower a' d).counit.app ((B 0).obj K) = _
+    have hi' := congrArg (fun z ↦ (affineTraceLeftTower L' d).map z) hi
+    simp only [Functor.map_comp, Category.assoc] at hi'
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% hi']
+    have he := (affineTraceExchangeTower L L' B e d).naturality ((a d).counit.app M)
+    simp only [Functor.comp_map] at he
+    change _ ≫ (affineTraceExchangeTower L L' B e d).app M =
+      (affineTraceExchangeTower L L' B e d).app
+        ((L d).obj ((affineTraceRightTower R (d + 1)).obj K)) ≫ _ at he
+    rw [← Category.assoc, ← Category.assoc, ← he]
+    simp only [Category.assoc]
+    rw [ih, ← Functor.map_comp]
+
+private def right_exchange {C C' : ℕ → Type*}
+    [∀ d, Category (C d)] [∀ d, Category (C' d)]
+    (R : ∀ d, C d ⥤ C (d + 1)) (R' : ∀ d, C' d ⥤ C' (d + 1))
+    (B : ∀ d, C d ⥤ C' d)
+    (r : ∀ d K, (B (d + 1)).obj ((R d).obj K) ⟶ (R' d).obj ((B d).obj K)) :
+    (d : ℕ) → (K : C 0) →
+      (B d).obj ((affineTraceRightTower R d).obj K) ⟶
+        (affineTraceRightTower R' d).obj ((B 0).obj K)
+  | 0, _ => 𝟙 _
+  | d + 1, K => r d _ ≫ (R' d).map (right_exchange R R' B r d K)
+
+private theorem base_unit (ell : ℕ) (hell : ell.Prime)
+    (k : Type u) [Field k] (hchar : ringChar k ≠ ell) (n : ℕ)
+    (S : Scheme.{u}) [S.Over (Spec (.of k))] :
+    IsUnit ((ell ^ n : ℕ) : Γ(S, ⊤)) := by
+  have h : IsUnit (ell : k) := isUnit_iff_ne_zero.2
+    (CharP.cast_ne_zero_of_ne_of_prime k hell hchar)
+  let f : k →+* Γ(S, ⊤) :=
+    (S ↘ Spec (.of k)).appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom
+  simpa only [map_pow, map_natCast, Nat.cast_pow] using (h.pow n).map f
+
 end AffineCounitOrdinary
 
 /-- The ordered affine-space counit compatibility over a finite or algebraically closed field.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-ladic-summary/sec-change-of-finite-coefficients/sk-lem-sp-reduction/
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/
 sk-lem-sp-reduction-exceptional.proof.md, Charts: iterated projective-line integration
 (blueprint: lem-sp-affine-counit-scalar).
 
-Proof (the four DAG steps; deferred to stage 3):
+Proof (the four DAG steps):
 1. Transport bounded constructibility and finite Tor amplitude through the ordered right
    normal form and the chart-domain theorem. Finite type over the field makes every
    coordinate scheme Noetherian. Since the characteristic differs from ell, the common
@@ -321,6 +576,36 @@ theorem affine_counit_scalar_general_field (ell : ℕ) [Fact ell.Prime]
           ((scalar S.smallEtaleTopology φ).obj K) =
       (scalar S.smallEtaleTopology φ).map (@AffineCounitOrdinary.counit.{u} (ell ^ n)
         (pow_pos (Fact.out : ell.Prime).pos n) A _ _ hA S hNoeth hS d c K) := by
-  sorry
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian
+    (S ↘ Spec (.of k))
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace (S ↘ Spec (.of k))
+  have : IsNoetherian S := ⟨⟩
+  have hS := base_unit ell Fact.out k _hchar n S
+  refine ⟨inferInstance, hS, ?_⟩
+  let M := (affineTraceRight A (ell ^ n) hA S d).obj K
+  have hM := affine_right_domain ell k _hk _hchar A n hA S hS d K _hK
+  have hplus : _root_.DerivedCategory.TStructure.t.plus M := by
+    obtain ⟨hc, a, b, hab, hz⟩ := hM.1
+    exact ⟨a, (DerivedCategory.isGE_iff _ a).2 (fun i hi ↦ hz i (Or.inl hi))⟩
+  let P : _root_.DerivedCategory.Plus
+      (Sheaf (affineTraceTower S d).smallEtaleTopology (ModuleCat.{u + 1} A)) := ⟨M, hplus⟩
+  obtain ⟨hMB, hs, _⟩ := orderedCompactification_scalar_square_finiteCoefficients
+    ell k _hk _hchar φ n hA hB S d c P hM
+  have hs' : (scalar S.smallEtaleTopology φ).map
+        ((AffineCounitOrdinary.leftIso A S d c).hom.app M) ≫
+      (ProEtale.FiniteCompactCoefficients.beta φ c).app M =
+    orderedFiniteAffineCoefficientMap φ S d M ≫
+      (AffineCounitOrdinary.leftIso B S d c).hom.app
+        ((scalar (affineTraceTower S d).smallEtaleTopology φ).obj M) := by
+    rw [ordinary_normalization A k S d c P,
+      ordinary_normalization B k S d c
+        ⟨(scalar (affineTraceTower S d).smallEtaleTopology φ).obj P.obj, hMB⟩]
+    exact hs
+  unfold AffineCounitOrdinary.counit
+  exact compactification_counit_transport _ _ _ _
+    (AffineCounitOrdinary.leftIso A S d c) (AffineCounitOrdinary.leftIso B S d c)
+    K _ _ _ hs'
+    (ordinary_tower_scalar φ (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n)
+      hA hB S hS d K)
 
 end AlgebraicGeometry.Etale

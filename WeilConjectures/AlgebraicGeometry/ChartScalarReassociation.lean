@@ -34,6 +34,17 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
+/-- The published K-flat preservation instance for an arbitrary displayed ring map.
+The algebra structure is induced by that very map, so no extra hypothesis is added.
+Source: Stacks 06YY, scalar-extension clause (1).
+(blueprint: lem-sp-reduction-exceptional-chart-scalar-reassociation). -/
+instance chartScalarPreservesKFlat
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (T : Scheme.{u}) :
+    (sheafExtendScalars φ T).PreservesKFlatQuasiIso :=
+  letI := φ.toAlgebra
+  preservesKFlatQuasiIso_sheafExtendScalars (R := A) (S := B) T
+
 /-- Ordinary balancing for the first etale Tate line. Both composite left adjoints
 have the same right adjoint, via the actual composition of scalar restrictions.
 Source: Charts, free rank-one summands; Stacks 03EK.
@@ -158,6 +169,32 @@ def chartPullbackScalarIso
     (leftDerivedUpperStarExtendScalarsIso A B f).symm ≪≫
     Functor.isoWhiskerLeft _
       (upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctorIsoMapDerivedCategory
+
+/-- The tensor, Tate and inverse-image part of the prescribed scalar chart map.
+Source: Charts, the canonical reassociation composite
+(blueprint: lem-sp-reduction-exceptional-chart-scalar-reassociation).
+This names the existing composite before its final shift. -/
+def chartPreScalarReassociationMap
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [IsNoetherianRing A]
+    (φ : A →+* B) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0)
+    {U Y : Scheme.{u}} (f : U ⟶ Y) (d : ℕ)
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))) :
+    L(sheafExtendScalars φ U).obj
+        (((derivedTensor (ModuleCat.{u + 1} A) U).obj
+          ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj
+              (Scheme.finiteEtaleTateTwist U N A hA d)))).obj
+          ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K)) ⟶
+      ((derivedTensor (ModuleCat.{u + 1} B) U).obj
+        ((comparisonUpperStar (ModuleCat.{u + 1} B) U).mapDerivedCategory.obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            (Scheme.finiteEtaleTateTwist U N B hB d)))).obj
+        ((upperStar (ModuleCat.{u + 1} B) f).mapDerivedCategory.obj
+          (L(sheafExtendScalars φ Y).obj K)) :=
+  letI := φ.toAlgebra
+  ((sheafExtendScalars φ U).leftDerivedTensorComparison.app _).app _ ≫
+    (chartDerivedTateScalarMap φ U N hA hB d ⊗ₘ
+      (chartPullbackScalarIso φ f).hom.app K)
 
 /-- The prescribed composite: commute with the shift, apply the derived scalar
  tensorator, balance the Tate line, and compare scalar extension with inverse image.

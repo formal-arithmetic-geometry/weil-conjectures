@@ -12,6 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.Supported.SupportedCup
 public import WeilConjectures.AlgebraicGeometry.Support.SupportCohomology
 public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTautologicalGeometry
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
+public import WeilConjectures.AlgebraicGeometry.PurityChernRealizationComparison
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityChernClassAssembly
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityChernCoefficientBijective
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityChernRelationRealization
 
 /-!
 # Ordinary finite-coefficient Chern classes
@@ -186,7 +190,45 @@ theorem existsUniqueOrdinaryFiniteChernClasses (P : PurityFiniteSetting.{u})
     [F.IsFiniteLocallyFreeOfRank r] :
     ∃! c : ∀ i : ℕ, ordinaryFiniteCohomology P T i,
       P.IsOrdinaryFiniteChernClasses a F r c := by
-  sorry
+  classical
+  cases r with
+  | zero => exact P.existsUniqueOrdinaryFiniteChernClasses_rank_zero a F
+  | succ n =>
+    obtain ⟨geometry⟩ := exists_projectiveBundleTautologicalGeometry T n F
+    let G := geometry.system
+    have hF : projectiveBundleRank T n F := by
+      change F.IsFiniteLocallyFreeOfRank (n + 1)
+      infer_instance
+    obtain ⟨roots, line, _, _, hroots, hline, _⟩ :=
+      Scheme.etaleFiniteTwistPullback P.Coefficient P.diagonalExponent
+        (pow_pos P.coefficients.prime.out.pos P.level) P.diagonalExponent_annihilates
+    let t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent
+        P.diagonalExponent_annihilates :=
+      { roots := roots
+        line := fun f hT ↦ line f hT (by simpa using hT.map f.appTop.hom) 1
+        roots_normalization := hroots
+        line_normalization := fun f hT ↦
+          hline f hT (by simpa using hT.map f.appTop.hom) }
+    have hUnsigned : Function.Bijective
+        (P.ordinaryFiniteProjectiveUnsignedCoefficientMap t a
+          (G.bundle T F hF) (G.invertible T F hF) (n + 1)) := by
+      cases n with
+      | zero => exact P.ordinaryFiniteProjectiveUnsignedCoefficientMap_rank_one t G T F hF a
+      | succ n => exact P.ordinaryFiniteProjectiveUnsignedCoefficientMap_bijective t n G T F hF a
+    apply P.existsUniqueOrdinaryFiniteChernClasses_of_coordinates a (n + 1)
+      (Nat.succ_pos n) t (G.bundle T F hF) (G.invertible T F hF)
+      (P.ordinaryFiniteProjectiveCoefficientMap_bijective_of_unsigned t a
+        (G.bundle T F hF) (G.invertible T F hF) (n + 1)
+        hUnsigned)
+    intro c D' hL'
+    let : F.IsLocallyFree :=
+      SheafOfModules.IsFiniteLocallyFreeOfRank.isLocallyFree F (n + 1)
+    let : F.IsQuasicoherent := inferInstance
+    obtain ⟨comparison, hcomparison⟩ :=
+      exists_projectiveBundleRealizationComparison (G.bundle T F hF) D'
+    let : IsIso comparison.map := hcomparison
+    exact (P.ordinaryFiniteProjectiveRelation_realization t a (n + 1)
+      (G.bundle T F hF) D' (G.invertible T F hF) hL' comparison c).1
 
 /-- Ordinary finite-coefficient Chern classes, the uniquely determined signed
 coefficients of the projective-bundle relation, including c_0=1 and c_i=0 for i>r.

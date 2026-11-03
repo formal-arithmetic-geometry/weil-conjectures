@@ -130,6 +130,32 @@ private theorem derive_square_comp
   simp only [NatTrans.comp_app] at hh
   rw [reassoc_of% hh]
 
+-- Invert the square before specializing to derived categories of sheaves.
+
+private theorem inverse_square_comp
+    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    (E₀ : C₀ ⥤ D₀) (E₁ : C₁ ⥤ D₁) (E₂ : C₂ ⥤ D₂)
+    (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₀ ⥤ C₂)
+    (P : D₀ ⥤ D₁) (Q : D₁ ⥤ D₂) (T : D₀ ⥤ D₂)
+    (p : E₀ ⋙ P ≅ F ⋙ E₁) (q : E₁ ⋙ Q ≅ G ⋙ E₂)
+    (t : E₀ ⋙ T ≅ H ⋙ E₂) (a : T ≅ P ⋙ Q) (h : H ≅ F ⋙ G)
+    (ha : Functor.whiskerLeft E₀ a.hom ≫
+        Functor.whiskerRight p.hom Q ≫ Functor.whiskerLeft F q.hom =
+      t.hom ≫ Functor.whiskerRight h.hom E₂)
+    (M : C₀) :
+    E₂.map (h.inv.app M) ≫ t.inv.app M =
+      q.inv.app (F.obj M) ≫ Q.map (p.inv.app M) ≫ a.inv.app (E₀.obj M) := by
+  have he : Functor.isoWhiskerLeft E₀ a ≪≫
+        Functor.isoWhiskerRight p Q ≪≫ Functor.isoWhiskerLeft F q =
+      t ≪≫ Functor.isoWhiskerRight h E₂ := Iso.ext ha
+  have hi := congrArg Iso.inv he
+  have hc := congr_app hi M
+  simpa only [Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
+    Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.assoc] using hc.symm
+
 private theorem derived_rebase_square_comp
     {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
     [Category C₀] [Category C₁] [Category C₂]
@@ -410,31 +436,28 @@ private theorem finite_exact_comp (b : Base l E)
     (comparisonFiniteOrdinaryPull l E b (f ≫ g) n) a
     (upperStarComp (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) f g) ho
   rw [hD] at hd
-  have he :
-      Functor.isoWhiskerLeft (sfIntrinsicModuleEquivalence Z (R l E n)).functor.mapDerivedCategory
-          (proEtaleConstantRingPullbackComposition f g (R l E n)).symm ≪≫
-        Functor.isoWhiskerRight
-          (Functor.mapDerivedCategorySquareIso (comparisonFiniteOrdinaryPull l E b g n))
-          (proEtaleConstantRingPullback (R l E n) f).mapDerivedCategory ≪≫
-        Functor.isoWhiskerLeft
-          (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) g).mapDerivedCategory
-          (Functor.mapDerivedCategorySquareIso (comparisonFiniteOrdinaryPull l E b f n)) =
-      Functor.mapDerivedCategorySquareIso (comparisonFiniteOrdinaryPull l E b (f ≫ g) n) ≪≫
-        Functor.isoWhiskerRight
-          (Functor.mapDerivedCategoryNatIso
-              (upperStarComp (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) f g) ≪≫
-            Functor.mapDerivedCategoryCompIso
-              (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) g)
-              (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) f))
-          (sfIntrinsicModuleEquivalence X (R l E n)).functor.mapDerivedCategory :=
-    Iso.ext hd
-  have hi := congrArg Iso.inv he
-  have hc := congr_app hi L
-  simpa only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc] using hc.symm
+  exact inverse_square_comp
+    (sfIntrinsicModuleEquivalence Z (R l E n)).functor.mapDerivedCategory
+    (sfIntrinsicModuleEquivalence Y (R l E n)).functor.mapDerivedCategory
+    (sfIntrinsicModuleEquivalence X (R l E n)).functor.mapDerivedCategory
+    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) g).mapDerivedCategory
+    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) f).mapDerivedCategory
+    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) (f ≫ g)).mapDerivedCategory
+    (proEtaleConstantRingDerivedPullback (R l E n) g)
+    (proEtaleConstantRingDerivedPullback (R l E n) f)
+    (proEtaleConstantRingDerivedPullback (R l E n) (f ≫ g))
+    (Functor.mapDerivedCategorySquareIso (comparisonFiniteOrdinaryPull l E b g n))
+    (Functor.mapDerivedCategorySquareIso (comparisonFiniteOrdinaryPull l E b f n))
+    (Functor.mapDerivedCategorySquareIso (comparisonFiniteOrdinaryPull l E b (f ≫ g) n))
+    (proEtaleConstantRingPullbackComposition f g (R l E n)).symm
+    (Functor.mapDerivedCategoryNatIso
+        (upperStarComp (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) f g) ≪≫
+      Functor.mapDerivedCategoryCompIso
+        (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) g)
+        (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) f)) hd L
 
 -- Use the named comparisons through their component laws.
+
 attribute [local irreducible] Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
   Functor.leftDerivedFunctorIsoMapDerivedCategory comparisonFinitePull
   comparisonFiniteOrdinaryPull upperStar leftDerivedUpperStarComp

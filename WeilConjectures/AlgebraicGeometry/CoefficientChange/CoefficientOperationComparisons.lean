@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
+public import WeilConjectures.AlgebraicGeometry.PrincipalCoefficient.PrincipalCoefficientUniversalPair
 
 /-!
 # Canonical coefficient comparisons for direct images and internal Hom
@@ -40,7 +41,12 @@ local notation "DP(" X ", " A ")" =>
 /-- The fixed left adjoint of derived coefficient restriction on the small étale site. -/
 noncomputable abbrev etaleExtension {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : Scheme.{u}) : DE(X, A) ⥤ DE(X, B) :=
-  ProEtale.pbcFixedScalarExtension X.smallEtaleTopology φ
+  PrincipalCoefficient.extension X.smallEtaleTopology φ
+
+/-- The fixed left adjoint of derived coefficient restriction on the pro-étale site. -/
+noncomputable abbrev proExtension {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (X : Scheme.{u}) : DP(X, A) ⥤ DP(X, B) :=
+  PrincipalCoefficient.extension (Scheme.ProEt.topology X) φ
 
 /-- The principal quotient coefficient map. -/
 abbrev quotient (A : Type (u + 1)) [CommRing A] (a : A) (n : ℕ) :=

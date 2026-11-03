@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
 public import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportFiniteTorsion
 public import WeilConjectures.AlgebraicGeometry.ConstantTraceLineAutomorphismUnit
+public import WeilConjectures.AlgebraicGeometry.CompactSupportFixedBaseAction
+public import WeilConjectures.AlgebraicGeometry.VectorBundleZeroSection.VectorBundleZeroSection
 
 /-!
 # Translation family on the vector-bundle trace line
@@ -118,7 +120,35 @@ linear maps compose to the identity of `M ⊞ M` and `purityBundleMap` is functo
 theorem vectorTranslationHom_isIso (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
     IsIso (vectorTranslationHom S d M) := by
-  sorry
+  let j : VectorTraceGeometry.sum S M M ≅ VectorTraceGeometry.sum S M M :=
+    { hom := vectorTranslationLinearMap S M
+      inv := vectorTranslationLinearMapInv S M
+      hom_inv_id := by
+        apply biprod.hom_ext <;>
+          simp [vectorTranslationLinearMap, vectorTranslationLinearMapInv,
+            Preadditive.comp_add, Category.assoc]
+      inv_hom_id := by
+        apply biprod.hom_ext <;>
+          simp [vectorTranslationLinearMap, vectorTranslationLinearMapInv,
+            Preadditive.comp_add, Category.assoc] }
+  let a := WeilConjectures.PurityFiniteSetting.puritySymmetricAlgebraMap
+    S (VectorTraceGeometry.sum S M M) (VectorTraceGeometry.sum S M M) j.hom
+  have : IsIso a := ⟨⟨WeilConjectures.PurityFiniteSetting.puritySymmetricAlgebraMap
+    S (VectorTraceGeometry.sum S M M) (VectorTraceGeometry.sum S M M) j.inv,
+    VectorTraceGeometry.symmetricMap_inverse S _ _ j,
+    VectorTraceGeometry.symmetricMap_inverse S _ _ j.symm⟩⟩
+  let b := ObjectProperty.homMk
+    (X := VectorBundleZeroSection.algebraObject S (d + d) (VectorTraceGeometry.sum S M M))
+    (Y := VectorBundleZeroSection.algebraObject S (d + d) (VectorTraceGeometry.sum S M M)) a
+  have : IsIso b := (ObjectProperty.isIso_hom_iff b).mp ‹IsIso a›
+  have : IsIso (WeilConjectures.PurityFiniteSetting.purityBundleMap S (d + d) (d + d)
+      (VectorTraceGeometry.sum S M M) (VectorTraceGeometry.sum S M M)
+      (vectorTranslationLinearMap S M)) := by
+    change IsIso ((ObjectProperty.ι _ ⋙ Over.forget S).map
+      ((VectorBundleZeroSection.antiEquivalence S).inverse.map b).unop)
+    infer_instance
+  dsimp only [vectorTranslationHom]
+  infer_instance
 
 /-- The canonical automorphism `τ(v,w)=(v,w-v)` of the self-product bundle.
 
@@ -152,7 +182,35 @@ theorem vectorTranslation_over (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
         ((Scheme.Modules.tensorPullback (VectorBundleZeroSection.π S d M)).obj M) =
       VectorBundleZeroSection.π (VectorBundleZeroSection.scheme S d M) d
         ((Scheme.Modules.tensorPullback (VectorBundleZeroSection.π S d M)).obj M) := by
-  sorry
+  let H := VectorTraceGeometry.sum S M M
+  let P := VectorBundleZeroSection.π S (d + d) H
+  let j := vectorTranslationLinearMap S M
+  let m := WeilConjectures.PurityFiniteSetting.purityBundleMap S (d + d) (d + d) H H j
+  let q := VectorTraceGeometry.second S d d M M
+  have hm : m ≫ P = P := VectorTraceGeometry.purityBundleMap_comm _ _ _ _ _ _
+  have hq : q ≫ VectorBundleZeroSection.π S d M = P :=
+    VectorTraceGeometry.purityBundleMap_comm _ _ _ _ _ _
+  have hj : (biprod.inr : M ⟶ H) ≫ j = biprod.inr := by
+    apply biprod.hom_ext <;> simp [j, vectorTranslationLinearMap, Category.assoc]
+  have hmq : m ≫ q = q := by
+    apply VectorTraceGeometry.bundle_hom_ext d M P _ _
+      (by rw [Category.assoc, hq, hm]) hq
+    have hml := VectorTraceGeometry.bundleLinear_purityBundleMap (d + d) (d + d)
+      H H j P (𝟙 _) (Category.id_comp P)
+    have hql := VectorTraceGeometry.bundleLinear_purityBundleMap (d + d) d
+      H M biprod.inr P (𝟙 _) (Category.id_comp P)
+    simp only [Category.id_comp] at hml hql
+    dsimp only [q, VectorTraceGeometry.second]
+    erw [VectorTraceGeometry.bundleLinear_purityBundleMap (d + d) d
+      H M biprod.inr P m hm, hml, ← Category.assoc, hj, ← hql]
+  let e := VectorTraceGeometry.sumIso S d d M M
+  have he : e.hom ≫ q = VectorBundleZeroSection.π
+      (VectorBundleZeroSection.scheme S d M) d
+      ((Scheme.Modules.tensorPullback (VectorBundleZeroSection.π S d M)).obj M) :=
+    (VectorTraceGeometry.existsUnique_sumIso S d d M M).exists.choose_spec.2
+  change (e.hom ≫ m ≫ e.inv) ≫ _ = _
+  rw [← he]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc, hmq]
 
 /-- The Cartesian square `(τ,p₁,p₁,1_V)` used for compact-support finite-torsion exchange.
 
@@ -170,7 +228,107 @@ theorem vectorTranslationSquare (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
       (VectorBundleZeroSection.π (VectorBundleZeroSection.scheme S d M) d
         ((Scheme.Modules.tensorPullback
           (VectorBundleZeroSection.π S d M)).obj M)) (𝟙 _) := by
-  sorry
+  let _ := vectorTranslationHom_isIso S d M
+  exact IsPullback.of_horiz_isIso ⟨by
+    simpa only [Category.comp_id] using vectorTranslation_over S d M⟩
+
+private theorem vectorTranslation_zero_square (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
+    let V := VectorBundleZeroSection.scheme S d M
+    let p := VectorBundleZeroSection.π S d M
+    let G := (Scheme.Modules.tensorPullback p).obj M
+    let q := VectorBundleZeroSection.π V d G
+    ∃ v : V ⟶ VectorBundleZeroSection.scheme V d G,
+      IsPullback v p q (VectorBundleZeroSection.zero S d M) ∧
+        v ≫ (vectorTranslation S d M).hom = v := by
+  let V := VectorBundleZeroSection.scheme S d M
+  let p := VectorBundleZeroSection.π S d M
+  let G := (Scheme.Modules.tensorPullback p).obj M
+  let q := VectorBundleZeroSection.π V d G
+  let z := VectorBundleZeroSection.zero S d M
+  let H := VectorTraceGeometry.sum S M M
+  let P := VectorBundleZeroSection.π S (d + d) H
+  let bc := VectorTraceGeometry.baseChange p d M
+  let sq := VectorTraceGeometry.baseChange_isPullback p d M
+  have hz : z ≫ p = 𝟙 S := (VectorBundleZeroSection.zero_spec S d M).1
+  let v := sq.lift (𝟙 V) (p ≫ z) (by
+    change (𝟙 V) ≫ p = (p ≫ z) ≫ p
+    rw [Category.id_comp, Category.assoc, hz, Category.comp_id])
+  have hv₁ : v ≫ bc = 𝟙 V := sq.lift_fst _ _ _
+  have hv₂ : v ≫ q = p ≫ z := sq.lift_snd _ _ _
+  have hs : IsPullback v p q z := by
+    apply IsPullback.of_right (h₁₂ := bc) (h₂₂ := p) ?_ hv₂ sq
+    simpa only [hv₁, hz] using (IsPullback.id_horiz p)
+  refine ⟨v, hs, ?_⟩
+  let e := VectorTraceGeometry.sumIso S d d M M
+  let l := v ≫ e.hom
+  let j := vectorTranslationLinearMap S M
+  let m := WeilConjectures.PurityFiniteSetting.purityBundleMap
+    S (d + d) (d + d) H H j
+  have he₁ : e.hom ≫ VectorTraceGeometry.first S d d M M = bc :=
+    (VectorTraceGeometry.existsUnique_sumIso S d d M M).exists.choose_spec.1
+  have he₂ : e.hom ≫ VectorTraceGeometry.second S d d M M = q :=
+    (VectorTraceGeometry.existsUnique_sumIso S d d M M).exists.choose_spec.2
+  have hl₁ : l ≫ VectorTraceGeometry.first S d d M M = 𝟙 V := by
+    dsimp only [l]
+    rw [Category.assoc, he₁, hv₁]
+  have hl₂ : l ≫ VectorTraceGeometry.second S d d M M = p ≫ z := by
+    dsimp only [l]
+    rw [Category.assoc, he₂, hv₂]
+  have hf : VectorTraceGeometry.first S d d M M ≫ p = P :=
+    VectorTraceGeometry.purityBundleMap_comm S (d + d) d H M biprod.inl
+  have hl : l ≫ P = p := by
+    calc
+      l ≫ P = l ≫ (VectorTraceGeometry.first S d d M M ≫ p) :=
+        congrArg (fun k ↦ l ≫ k) hf.symm
+      _ = (l ≫ VectorTraceGeometry.first S d d M M) ≫ p := (Category.assoc _ _ _).symm
+      _ = p := by rw [hl₁, Category.id_comp]
+  have hzero : (biprod.inr : M ⟶ H) ≫
+      VectorTraceGeometry.bundleLinear (d + d) H p l hl = 0 := by
+    rw [← VectorTraceGeometry.bundleLinear_purityBundleMap (d + d) d H M
+      biprod.inr p l hl]
+    have hc := VectorTraceGeometry.bundleLinear_congr d M p
+      (l ≫ VectorTraceGeometry.second S d d M M) (p ≫ z)
+      (by rw [Category.assoc, VectorTraceGeometry.second,
+        VectorTraceGeometry.purityBundleMap_comm, hl])
+      (by rw [Category.assoc, hz, Category.comp_id]) hl₂
+    exact hc.trans (VectorTraceGeometry.bundleLinear_zero d M p)
+  have hm : l ≫ m = l := by
+    apply VectorTraceGeometry.bundle_hom_ext (d + d) H p _ _
+      (by rw [Category.assoc, VectorTraceGeometry.purityBundleMap_comm, hl]) hl
+    rw [VectorTraceGeometry.bundleLinear_purityBundleMap (d + d) (d + d) H H j p l hl]
+    apply biprod.hom_ext' <;>
+      simp [j, vectorTranslationLinearMap, biprod.lift_eq, Preadditive.add_comp,
+        Category.assoc, hzero]
+  change v ≫ (e.hom ≫ m ≫ e.inv) = v
+  rw [← Category.assoc, ← Category.assoc, hm, Category.assoc, e.hom_inv_id,
+    Category.comp_id]
+
+private theorem bundleLinear_zero {S X : Scheme.{u}} [IsNoetherian S]
+    (d : ℕ) (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] (ρ : X ⟶ S) :
+    bundleLinear d M ρ (ρ ≫ VectorBundleZeroSection.zero S d M)
+      (by rw [Category.assoc, (VectorBundleZeroSection.zero_spec S d M).1,
+        Category.comp_id]) = 0 := by
+  apply Scheme.Modules.hom_ext
+  intro U
+  ext x
+  change (ρ ≫ VectorBundleZeroSection.zero S d M).appLE _ _ _
+    (generator S d M U x) = 0
+  rw [← Scheme.Hom.appLE_comp_appLE ρ (VectorBundleZeroSection.zero S d M)
+    ((VectorBundleZeroSection.π S d M) ⁻¹ᵁ U) U (ρ ⁻¹ᵁ U)
+    (by rw [← Scheme.Hom.comp_preimage, (VectorBundleZeroSection.zero_spec S d M).1]
+        simp) le_rfl, CommRingCat.comp_apply, zero_generator, map_zero]
+
+private theorem zero_generator (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
+    (U : S.Opens) (x : M.val.obj (op U)) :
+    (VectorBundleZeroSection.zero S d M).appLE
+      ((VectorBundleZeroSection.π S d M) ⁻¹ᵁ U) U
+      (by rw [← Scheme.Hom.comp_preimage, (VectorBundleZeroSection.zero_spec S d M).1];
+          simp) (generator S d M U x) = 0 := by
+  have h := congrArg (fun a ↦ a ((SymmetricAlgebraSheaf.inclusion M).val.app (op U) x))
+    (VectorBundleZeroSection.zero_pullback S d M U)
+  exact h.trans ((VectorBundleZeroSection.augmentation_spec S M).1 U x)
 
 /-- The canonical Tate/shift identification `τ^*A_W(d)[2d] ≅ A_W(d)[2d]`: the coefficient
 is the pullback of the base line along `p₁`, and `τ ≫ p₁ = p₁` gives the composition
@@ -193,12 +351,11 @@ def vectorTranslationCoefficientIso (A : Type (u + 1)) [CommRing A]
   let V := VectorBundleZeroSection.scheme S d M
   let p := VectorBundleZeroSection.π S d M
   let G := (Scheme.Modules.tensorPullback p).obj M
-  simpa only [vectorIntegrationCoefficient, ordinaryFinitePullback, Functor.comp_obj] using
-    ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A)
+  dsimp only [vectorIntegrationCoefficient, ordinaryFinitePullback, Functor.comp_obj]
+  exact ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A)
       (vectorTranslation S d M).hom (VectorBundleZeroSection.π V d G)
       (VectorBundleZeroSection.π V d G) (vectorTranslation_over S d M).symm).symm.app
       (affineLinearBaseCoefficient A N hA V d))
-
 
 /-- The compact-support exchange for the canonical translation square.
 
@@ -279,5 +436,57 @@ def vectorTranslationDegreeZeroAutomorphism (N : ℕ) (hN : 0 < N)
     asIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
       (vectorTranslationTraceExchange N hN A hA S hS d M)) ≪≫ e
 
+private theorem pullback_homology_conjugate_eq_id
+    (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (g : Y ⟶ X)
+    {K : DerivedCategoryModule A X}
+    {L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)}
+    (e : (_root_.DerivedCategory.homologyFunctor
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj K ≅ L)
+    (r : K ⟶ K) (hr : (ordinaryFinitePullback A g).map r = 𝟙 _) :
+    (upperStar (ModuleCat.{u + 1} A) g).map
+      (e.inv ≫ (_root_.DerivedCategory.homologyFunctor
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).map r ≫ e.hom) = 𝟙 _ := by
+  let H := _root_.DerivedCategory.homologyFunctor
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) 0
+  let H' := _root_.DerivedCategory.homologyFunctor
+    (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) 0
+  let c : (upperStar (ModuleCat.{u + 1} A) g).obj (H.obj K) ≅
+      H'.obj ((ordinaryFinitePullback A g).obj K) :=
+    (leftDerivedUpperStarHomologyFunctorIso.{u + 2, u}
+      (ModuleCat.{u + 1} A) g 0).app K
+  have hn : (upperStar (ModuleCat.{u + 1} A) g).map (H.map r) ≫ c.hom =
+      c.hom ≫ H'.map ((ordinaryFinitePullback A g).map r) :=
+    (leftDerivedUpperStarHomologyFunctorIso.{u + 2, u}
+      (ModuleCat.{u + 1} A) g 0).hom.naturality r
+  rw [hr, CategoryTheory.Functor.map_id, Category.comp_id] at hn
+  have hh : (upperStar (ModuleCat.{u + 1} A) g).map (H.map r) = 𝟙 _ := by
+    apply (cancel_mono c.hom).mp
+    simpa only [Category.id_comp] using hn
+  change (upperStar (ModuleCat.{u + 1} A) g).map (e.inv ≫ H.map r ≫ e.hom) = 𝟙 _
+  rw [Functor.map_comp, Functor.map_comp, hh, Category.id_comp,
+    ← Functor.map_comp, e.inv_hom_id, CategoryTheory.Functor.map_id]
+
+private theorem vectorTranslationTraceExchange_zero
+    (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
+    (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).map
+      (vectorTranslationTraceExchange N hN A hA S hS d M) = 𝟙 _ := by
+  let V := VectorBundleZeroSection.scheme S d M
+  let p := VectorBundleZeroSection.π S d M
+  let G := (Scheme.Modules.tensorPullback p).obj M
+  let : IsNoetherian V := (vectorIntegration_geometry S d M).2.2
+  let : G.IsFiniteLocallyFreeOfRank d := VectorTraceGeometry.tensorPullbackRank p d M
+  let W := VectorBundleZeroSection.scheme V d G
+  let : IsNoetherian W := (vectorIntegration_geometry V d G).2.2
+  obtain ⟨v, sq, hv⟩ := vectorTranslation_zero_square S d M
+  simpa only [id_eq, Functor.id_obj, V, vectorTranslationTraceExchange,
+    vectorTranslationCoefficientIso,
+    Iso.symm_hom, Iso.app_hom, Iso.app_inv, vectorIntegrationCoefficient,
+    vectorIntegrationSource] using
+    compactSupport_fixed_base_action A sq (vectorTranslation S d M).hom
+      (vectorTranslationSquare S d M) (vectorTranslation_over S d M) hv
+      (affineLinearBaseCoefficient A N hA V d)
 
 end AlgebraicGeometry.Etale

@@ -23,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactScalarBaseCha
 import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.CoefficientExchange
 import Mathlib.CategoryTheory.NatIso
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensorSymmetryInvolutive
+public import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.OrderedTensorCoefficientMate
 
 /-! # Exceptional coefficient comparisons
 
@@ -105,6 +106,18 @@ def tensorDomainMap [Finite A] [Finite B] {X Y : Scheme.{u}}
       ((upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctor.obj
         ((scalarExtension φ Y).obj K))).map
       (dualizingScalarMap φ f)
+
+/-- The smooth tensor-map equation, including the actual scalar-domain transport.
+Source: blueprint compatibilities (3)
+(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+def TensorCompatibility [Finite A] [Finite B] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] (K : DerivedCategoryModule A Y) : Prop :=
+  (scalarExtension φ X).map
+      (smoothTensorDualityMap A f
+        (isIso_projectionMap_of_finite A f) K) ≫ mateMap φ f K =
+    tensorDomainMap φ f K ≫
+      smoothTensorDualityMap B f
+        (isIso_projectionMap_of_finite B f) ((scalarExtension φ Y).obj K)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [-instance] CategoryTheory.catToReflQuiver in
@@ -234,6 +247,201 @@ private theorem mate_cocycle_at
   rw [mateEquiv_counit]
   exact Category.assoc _ _ _
 
+private theorem compactScalarProjection_isIso
+    (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (K : DerivedCategoryModule R Y) (M : DerivedCategoryModule R X) :
+    IsIso (compactScalarProjection R (HasCompactification.compactification f) K M) := by
+  have := isIso_projectionMap_of_finite R f
+  have : IsIso (((projectionMap (ModuleCat.{u + 1} R) f).app M).app K) := inferInstance
+  dsimp only [projectionMap] at this
+  unfold compactScalarProjection
+  infer_instance
+
+private theorem compactScalarProjection_naturality
+    (R : Type (u + 1)) [CommRing R] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f]
+    (K : DerivedCategoryModule R Y) {M N : DerivedCategoryModule R X} (h : M ⟶ N) :
+    ((derivedTensor (ModuleCat.{u + 1} R) Y).obj K).map
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) f).map h) ≫
+        compactScalarProjection R (HasCompactification.compactification f) K N =
+      compactScalarProjection R (HasCompactification.compactification f) K M ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} R) f).map
+          (((derivedTensor (ModuleCat.{u + 1} R) X).obj
+            ((upperStar (ModuleCat.{u + 1} R) f).leftDerivedFunctor.obj K)).map h) := by
+  let P := rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} R)
+    (HasCompactification.compactification f)
+  let F := (upperStar (ModuleCat.{u + 1} R) f).leftDerivedFunctor
+  let sY := derivedTensorSymmetry (ModuleCat.{u + 1} R) Y
+  let sX := derivedTensorSymmetry (ModuleCat.{u + 1} R) X
+  have hY := (sY.hom.app K).naturality (P.map h)
+  let p := projectionMapOfCompactification (ModuleCat.{u + 1} R)
+    (HasCompactification.compactification f)
+  have hP := NatTrans.congr_app (p.naturality h) K
+  have hX := NatTrans.congr_app (sX.hom.naturality h) (F.obj K)
+  dsimp only [Functor.flip_obj_map, Functor.flip_map_app] at hY hX
+  change ((derivedTensor (ModuleCat.{u + 1} R) Y).map (P.map h)).app K ≫
+      (p.app N).app K =
+    (p.app M).app K ≫
+      P.map (((derivedTensor (ModuleCat.{u + 1} R) X).map h).app (F.obj K)) at hP
+  dsimp only [rightDerivedLowerShriek]
+  unfold compactScalarProjection
+  simp only [Category.assoc]
+  change _ ≫ (sY.hom.app K).app (P.obj N) ≫
+      (p.app N).app K ≫
+      P.map ((sX.hom.app N).app (F.obj K)) =
+    (sY.hom.app K).app (P.obj M) ≫
+      (p.app M).app K ≫
+      P.map ((sX.hom.app M).app (F.obj K)) ≫ _
+  rw [reassoc_of% hY, reassoc_of% hP, ← P.map_comp, ← P.map_comp]
+  exact congrArg (fun z ↦ (sY.hom.app K).app (P.obj M) ≫
+    (p.app M).app K ≫ P.map z) hX
+
+private def orderedProjectionIso
+    (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (K : DerivedCategoryModule R Y) (M : DerivedCategoryModule R X) :
+    ((derivedTensor (ModuleCat.{u + 1} R) Y).obj K).obj
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) f).obj M) ≅
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} R) f).obj
+        (((derivedTensor (ModuleCat.{u + 1} R) X).obj
+          ((upperStar (ModuleCat.{u + 1} R) f).leftDerivedFunctor.obj K)).obj M) := by
+  let _ := compactScalarProjection_isIso R f K M
+  exact asIso (compactScalarProjection R (HasCompactification.compactification f) K M)
+
+private theorem orderedProjectionIso_hom
+    (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (K : DerivedCategoryModule R Y) (M : DerivedCategoryModule R X) :
+    (orderedProjectionIso R f K M).hom =
+      compactScalarProjection R (HasCompactification.compactification f) K M := by
+  rfl
+
+private theorem orderedProjectionIso_inv
+    (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (K : DerivedCategoryModule R Y) (M : DerivedCategoryModule R X) :
+    (orderedProjectionIso R f K M).inv =
+      @inv _ _ _ _ (compactScalarProjection R (HasCompactification.compactification f) K M)
+        (compactScalarProjection_isIso R f K M) := by
+  rfl
+
+private theorem orderedProjectionIso_naturality
+    (R : Type (u + 1)) [CommRing R] [Finite R] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f]
+    (K : DerivedCategoryModule R Y) {M N : DerivedCategoryModule R X} (h : M ⟶ N) :
+    ((derivedTensor (ModuleCat.{u + 1} R) Y).obj K).map
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) f).map h) ≫
+        (orderedProjectionIso R f K N).hom =
+      (orderedProjectionIso R f K M).hom ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} R) f).map
+          (((derivedTensor (ModuleCat.{u + 1} R) X).obj
+            ((upperStar (ModuleCat.{u + 1} R) f).leftDerivedFunctor.obj K)).map h) := by
+  simpa only [orderedProjectionIso_hom] using compactScalarProjection_naturality R f K h
+
+private theorem ordered_projection_inverse
+    {C D : Type*} [Category C] [Category D]
+    (P : C ⥤ D) {M N : C} {K L : D}
+    (s : M ⟶ N) (s' : N ⟶ M) [IsIso s] (hs : s ≫ s' = 𝟙 M)
+    (r : K ⟶ L) (r' : L ⟶ K) [IsIso r] (hr : r ≫ r' = 𝟙 K)
+    (q : L ⟶ P.obj M) [IsIso q] :
+    inv (r ≫ q ≫ P.map s) = P.map s' ≫ inv q ≫ r' := by
+  rw [IsIso.inv_comp, IsIso.inv_comp, ← Functor.map_inv]
+  rw [IsIso.inv_eq_of_hom_inv_id hs, IsIso.inv_eq_of_hom_inv_id hr]
+  exact Category.assoc _ _ _
+
+private theorem canonical_symmetry_hom
+    (C : Type*) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
+    [HasDerivedCategory.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [BraidedCategory C] [MonoidalClosed C]
+    [Abelian.HasFunctorialFlatResolution C]
+    (K M : _root_.DerivedCategory C) :
+    ((_root_.DerivedCategory.canonicalTensorSymmetry C).hom.app K).app M =
+      (@BraidedCategory.braiding _ _ _ (smoothTensorCanonicalDerivedBraiding C) K M).hom := by
+  rfl
+
+private theorem smoothTensorDualityMap_expand
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]
+    (hPF : IsIso (projectionMap (ModuleCat.{u + 1} Λ) f))
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    smoothTensorDualityMap Λ f hPF K =
+      (rightDerivedUpperShriekAdjunction Λ f).homEquiv _ K
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map
+          (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app
+            ((upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.obj K)).app
+              (dualizingComplex Λ f)) ≫
+          @inv _ _ _ _ (((projectionMap (ModuleCat.{u + 1} Λ) f).app (dualizingComplex Λ f)).app K)
+            (by let _ := hPF; infer_instance) ≫
+          ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) S).hom.app
+            ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj (dualizingComplex Λ f))).app K ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) S).obj K).map
+            ((rightDerivedUpperShriekAdjunction Λ f).counit.app (𝟙_ _)) ≫
+          (derivedTensorRightUnitor (ModuleCat.{u + 1} Λ) S K).hom) := by
+  simp only [smoothTensorDualityMap, derivedTensorSymmetry, canonical_symmetry_hom]
+
+private theorem smoothTensorDualityMap_ordered_onSite
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]
+    (hPF : IsIso (projectionMap (ModuleCat.{u + 1} Λ) f))
+    (hX : ∀ M N, ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app M).app N ≫
+      ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app N).app M = 𝟙 _)
+    (hY : ∀ M N, ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) S).hom.app M).app N ≫
+      ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) S).hom.app N).app M = 𝟙 _)
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    smoothTensorDualityMap Λ f hPF K =
+      (rightDerivedUpperShriekAdjunction Λ f).homEquiv
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+            ((upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.obj K)).obj
+          (dualizingComplex Λ f)) K
+        (@inv _ _ _ _
+          (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) S).hom.app K).app
+              ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj (dualizingComplex Λ f)) ≫
+            ((projectionMap (ModuleCat.{u + 1} Λ) f).app (dualizingComplex Λ f)).app K ≫
+            (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map
+              (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app (dualizingComplex Λ f)).app
+                ((upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.obj K)))
+          (by let _ := hPF; infer_instance) ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) S).obj K).map
+            ((rightDerivedUpperShriekAdjunction Λ f).counit.app (𝟙_ _)) ≫
+          (derivedTensorRightUnitor (ModuleCat.{u + 1} Λ) S K).hom) := by
+  let P := rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f
+  let F := (upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor
+  let W := dualizingComplex Λ f
+  let _ := hPF
+  have hi : IsIso (((projectionMap (ModuleCat.{u + 1} Λ) f).app W).app K) := inferInstance
+  have hraw := ordered_projection_inverse P
+    (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app W).app (F.obj K))
+    (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app (F.obj K)).app W) (hX W (F.obj K))
+    (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) S).hom.app K).app (P.obj W))
+    (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) S).hom.app (P.obj W)).app K) (hY K (P.obj W))
+    (((projectionMap (ModuleCat.{u + 1} Λ) f).app W).app K)
+  have hc := congrArg (fun z ↦
+    (rightDerivedUpperShriekAdjunction Λ f).homEquiv
+      (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (F.obj K)).obj W) K
+      (z ≫ ((derivedTensor (ModuleCat.{u + 1} Λ) S).obj K).map
+        ((rightDerivedUpperShriekAdjunction Λ f).counit.app (𝟙_ _)) ≫
+        (derivedTensorRightUnitor (ModuleCat.{u + 1} Λ) S K).hom)) hraw.symm
+  simpa only [smoothTensorDualityMap_expand, P, F, W, Category.assoc, Functor.flip_obj_obj] using hc
+
+private theorem smoothTensorDualityMap_ordered
+    (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (K : DerivedCategoryModule R Y) :
+    smoothTensorDualityMap R f
+        (isIso_projectionMap_of_finite R f) K =
+      (rightDerivedUpperShriekAdjunction R f).homEquiv _ K
+        ((orderedProjectionIso R f K (dualizingComplex R f)).inv ≫
+          ((derivedTensor (ModuleCat.{u + 1} R) Y).obj K).map
+            ((rightDerivedUpperShriekAdjunction R f).counit.app
+              (𝟙_ _)) ≫ (derivedTensorRightUnitor (ModuleCat.{u + 1} R) Y K).hom) := by
+  have h := smoothTensorDualityMap_ordered_onSite R f
+    (isIso_projectionMap_of_finite R f)
+    (derivedTensorSymmetry_involutive R X) (derivedTensorSymmetry_involutive R Y) K
+  simpa only [orderedProjectionIso_inv, compactScalarProjection, projectionMap,
+    rightDerivedLowerShriek,
+    Functor.flip_obj_obj] using h
+
 attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [-instance] CategoryTheory.catToReflQuiver in
@@ -299,6 +507,155 @@ private theorem tensor_unit_counit [Finite A] [Finite B]
     (scalarExtension φ X) (scalarExtension φ Y)
     (chosenCompactSupportIso φ f)
     (mateMap φ f) (mateMap_counit φ f) (unitIso φ Y).hom
+
+private theorem scalarMate_square_of_counit_square
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {P : C ⥤ D} {G : D ⥤ C} {P' : C' ⥤ D'} {G' : D' ⥤ C'}
+    (a : P ⊣ G) (a' : P' ⊣ G') (S : C ⥤ C') (T : D ⥤ D')
+    (b : P ⋙ T ≅ S ⋙ P') (c : ∀ K, S.obj (G.obj K) ⟶ G'.obj (T.obj K))
+    (hc : ∀ K, P'.map (c K) ≫ a'.counit.app (T.obj K) =
+      b.inv.app (G.obj K) ≫ T.map (a.counit.app K))
+    (L : C) (L' : C') (K : D) (q : P.obj L ⟶ K) (q' : P'.obj L' ⟶ T.obj K)
+    (d : S.obj L ⟶ L') (t : L ⟶ G.obj K) (t' : L' ⟶ G'.obj (T.obj K))
+    (ht : t = a.homEquiv _ _ q) (ht' : t' = a'.homEquiv _ _ q')
+    (hsq : b.inv.app L ≫ T.map q = P'.map d ≫ q') :
+    S.map t ≫ c K = d ≫ t' := by
+  have ht₀ : P.map t ≫ a.counit.app K = q := by
+    change (a.homEquiv _ _).symm t = q
+    rw [ht]
+    exact (a.homEquiv _ _).symm_apply_apply q
+  have ht₁ : P'.map t' ≫ a'.counit.app (T.obj K) = q' := by
+    change (a'.homEquiv _ _).symm t' = q'
+    rw [ht']
+    exact (a'.homEquiv _ _).symm_apply_apply q'
+  apply (a'.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [hc]
+  have hn := b.inv.naturality_assoc t (T.map (a.counit.app K))
+  dsimp only [Functor.comp_map] at hn
+  rw [hn, ← T.map_comp, ht₀, ht₁]
+  exact hsq
+
+private theorem scalar_tensor_right_unit_component (Y : Scheme.{u})
+    (K : DerivedCategoryModule A Y) :
+    (tensorIso φ Y).hom.app (K, (𝟙_ (DerivedCategoryModule A Y))) ≫
+        ((derivedTensor (ModuleCat.{u + 1} B) Y).obj
+          ((scalarExtension φ Y).obj K)).map (unitIso φ Y).hom ≫
+        (derivedTensorRightUnitor (ModuleCat.{u + 1} B) Y
+          ((scalarExtension φ Y).obj K)).hom =
+      (scalarExtension φ Y).map
+        (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y K).hom := by
+  exact SiteScalarRightUnitLaw.component
+    (ModuleCat.{u + 1} A) (ModuleCat.{u + 1} B) Y
+    (scalarExtension φ Y) (tensorIso φ Y) (unitIso φ Y) (tensorIso_right_unit φ Y) K
+
+private theorem scalar_projection_component [Finite A] [Finite B]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] (K : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :
+    (scalarExtension φ Y).map
+        ((orderedProjectionIso A f K M).hom) ≫
+        (chosenCompactSupportIso φ f).hom.app
+          (((derivedTensor (ModuleCat.{u + 1} A) X).obj
+            ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)).obj M) ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} B) f).map
+          (compactScalarProjectionTarget φ f K M) =
+      (tensorIso φ Y).hom.app
+          (K, (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) ≫
+        ((derivedTensor (ModuleCat.{u + 1} B) Y).obj
+          ((scalarExtension φ Y).obj K)).map ((chosenCompactSupportIso φ f).hom.app M) ≫
+        (orderedProjectionIso B f ((scalarExtension φ Y).obj K)
+          ((scalarExtension φ X).obj M)).hom := by
+  simpa only [orderedProjectionIso_hom, chosenCompactSupportIso_hom,
+    compactScalarChosenMap, rightDerivedLowerShriek] using
+    (etaleCompactScalarCoherence φ f (HasCompactification.compactification f)).2.1 K M
+
+private theorem tensorDomainMap_compact [Finite A] [Finite B] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] (K : DerivedCategoryModule A Y) :
+    tensorDomainMap φ f K =
+      compactScalarProjectionTarget φ f K (dualizingComplex A f) ≫
+        ((derivedTensor (ModuleCat.{u + 1} B) X).obj
+          ((upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctor.obj
+            ((scalarExtension φ Y).obj K))).map
+          (dualizingScalarMap φ f) := by
+  rfl
+
+private theorem tensorCompatibility [Finite A] [Finite B]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] (K : DerivedCategoryModule A Y) : TensorCompatibility φ f K := by
+  unfold TensorCompatibility
+  let FA := (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
+  let FB := (upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctor
+  let SX := scalarExtension φ X
+  let SY := scalarExtension φ Y
+  let πA := orderedProjectionIso A f
+  let πB := orderedProjectionIso B f
+  have hδ (K : DerivedCategoryModule A Y) {L L' : DerivedCategoryModule A Y} (h : L ⟶ L') :
+      SY.map (((derivedTensor (ModuleCat.{u + 1} A) Y).obj K).map h) ≫
+        (tensorIso φ Y).hom.app (K, L') =
+        (tensorIso φ Y).hom.app (K, L) ≫
+          ((derivedTensor (ModuleCat.{u + 1} B) Y).obj (SY.obj K)).map (SY.map h) := by
+    have hn := (tensorIso φ Y).hom.naturality
+      (show (K, L) ⟶ (K, L') from (𝟙 K, h))
+    dsimp only [Functor.comp_map, Functor.prod_map, Functor.prod_obj,
+      Functor.uncurry_obj_map] at hn
+    simpa only [CategoryTheory.Functor.map_id, Functor.comp_obj,
+      Functor.uncurry_obj_obj, Functor.prod_obj, NatTrans.id_app, Category.id_comp,
+      SY] using hn
+  let a := rightDerivedUpperShriekAdjunction A f
+  let a' := rightDerivedUpperShriekAdjunction B f
+  let PA := rightDerivedLowerShriek (ModuleCat.{u + 1} A) f
+  let PB := rightDerivedLowerShriek (ModuleCat.{u + 1} B) f
+  let L := ((derivedTensor (ModuleCat.{u + 1} A) X).obj (FA.obj K)).obj
+    (dualizingComplex A f)
+  let L' := ((derivedTensor (ModuleCat.{u + 1} B) X).obj (FB.obj (SY.obj K))).obj
+    (dualizingComplex B f)
+  let q : PA.obj L ⟶ K :=
+    (πA K (dualizingComplex A f)).inv ≫
+      ((derivedTensor (ModuleCat.{u + 1} A) Y).obj K).map
+        (a.counit.app (𝟙_ (DerivedCategoryModule A Y))) ≫
+      (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y K).hom
+  let q' : PB.obj L' ⟶ SY.obj K :=
+    (πB (SY.obj K) (dualizingComplex B f)).inv ≫
+      ((derivedTensor (ModuleCat.{u + 1} B) Y).obj (SY.obj K)).map
+        (a'.counit.app (𝟙_ (DerivedCategoryModule B Y))) ≫
+      (derivedTensorRightUnitor (ModuleCat.{u + 1} B) Y (SY.obj K)).hom
+  have hu := tensor_unit_counit φ f
+  have hq := Adjunction.orderedTensor_coefficient_arrow_square
+    PA PB SX SY
+    ((derivedTensor (ModuleCat.{u + 1} A) Y).obj K)
+    ((derivedTensor (ModuleCat.{u + 1} B) Y).obj (SY.obj K))
+    (chosenCompactSupportIso φ f)
+    (dualizingComplex A f) L
+    (dualizingComplex B f) L'
+    (((derivedTensor (ModuleCat.{u + 1} B) X).obj (FB.obj (SY.obj K))).obj
+      (SX.obj (dualizingComplex A f)))
+    (𝟙_ (DerivedCategoryModule A Y)) K (𝟙_ (DerivedCategoryModule B Y))
+    (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y K).hom
+    (derivedTensorRightUnitor (ModuleCat.{u + 1} B) Y (SY.obj K)).hom
+    (πA K _) (πB (SY.obj K) (SX.obj (dualizingComplex A f))).hom
+    (πB (SY.obj K) _)
+    (a.counit.app (𝟙_ (DerivedCategoryModule A Y)))
+    (a'.counit.app (𝟙_ (DerivedCategoryModule B Y)))
+    (dualizingScalarMap φ f)
+    (compactScalarProjectionTarget φ f K (dualizingComplex A f))
+    (((derivedTensor (ModuleCat.{u + 1} B) X).obj (FB.obj (SY.obj K))).map
+      (dualizingScalarMap φ f))
+    ((tensorIso φ Y).hom.app (K, PA.obj (dualizingComplex A f)))
+    ((tensorIso φ Y).hom.app (K, (𝟙_ (DerivedCategoryModule A Y)))) (unitIso φ Y).hom
+    (orderedProjectionIso_naturality B f (SY.obj K) _) (hδ K _)
+    (scalar_projection_component φ f K _)
+    (scalar_tensor_right_unit_component φ Y K)
+    hu (tensorDomainMap φ f K) (tensorDomainMap_compact φ f K)
+  exact scalarMate_square_of_counit_square a a' SX SY (chosenCompactSupportIso φ f)
+    (mateMap φ f) (mateMap_counit φ f) L L' K q q' (tensorDomainMap φ f K)
+    (smoothTensorDualityMap A f
+      (isIso_projectionMap_of_finite A f) K)
+    (smoothTensorDualityMap B f
+      (isIso_projectionMap_of_finite B f) (SY.obj K))
+    (smoothTensorDualityMap_ordered A f K)
+    (smoothTensorDualityMap_ordered B f (SY.obj K)) hq
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [-instance] CategoryTheory.catToReflQuiver in

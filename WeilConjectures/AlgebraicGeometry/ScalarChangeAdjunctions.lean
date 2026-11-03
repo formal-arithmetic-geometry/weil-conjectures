@@ -58,6 +58,51 @@ local instance siteCountableCoproducts
     HasColimitsOfSize.{0, 0}
       (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R))).has_colimits_of_shape (Discrete J)⟩
 
+/-- The universal ordinary cochain derived pair admits its normalized scalar adjunction.
+Source: Stacks 06YY, 0FND and 09T5 (blueprint: lem-pur-scalar-change-adjunctions).
+Proof: categorical K-flat left resolutions form a derivability structure. Apply the
+cochain derived-adjunction theorem to this structure and the fixed universal counit.
+It normalizes the derived unit on every cochain complex, hence on K-flat ones. -/
+theorem scalarChangePointAdjunction_exists
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
+    ∃ adj : ModuleCat.ordinaryDerivedExtendScalars φ ⊣
+        (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).mapDerivedCategory,
+      ∀ P : CochainComplex (ModuleCat.{u + 1} A) ℤ,
+      adj.unit.app (DerivedCategory.Q.obj P) ≫
+        (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).mapDerivedCategory.map
+          ((ModuleCat.ordinaryDerivedChangeOfRings φ).counit.app P) ≫
+        (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).mapDerivedCategoryFactors.hom.app
+          (((ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ).mapHomologicalComplex
+            (.up ℤ)).obj P) =
+      DerivedCategory.Q.map
+        (((ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).mapHomologicalComplex
+          (.up ℤ)).unit.app P) := by
+  let d := ModuleCat.ordinaryDerivedChangeOfRings φ
+  let := d.universal
+  let good : ObjectProperty (CochainComplex (ModuleCat.{u + 1} A) ℤ) :=
+    (HomologicalComplex.quasiIso (ModuleCat.{u + 1} A) (.up ℤ)).kFlat
+  have hres : ∀ K : CochainComplex (ModuleCat.{u + 1} A) ℤ,
+      ∃ (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) (p : P ⟶ K),
+        good P ∧ QuasiIso p := by
+    intro K
+    obtain ⟨r⟩ := LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions
+      (Φ := (HomologicalComplex.quasiIso (ModuleCat.{u + 1} A) (.up ℤ)).localizerMorphismKFlat)
+      K
+    exact ⟨r.X₁.obj, r.w, r.X₁.property, r.hw⟩
+  obtain ⟨adj, hunit⟩ := Functor.exists_cochainDerivedAdjunction
+    (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
+    (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ)
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ) d.F d.counit good hres d.computes
+  exact ⟨adj, hunit⟩
+
+/-- The point scalar adjunction, chosen from a proved normalized construction.
+Source: Stacks 06YY and 0FND (blueprint: lem-pur-scalar-change-adjunctions). -/
+def scalarChangePointAdjunction
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
+    ModuleCat.ordinaryDerivedExtendScalars φ ⊣
+      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).mapDerivedCategory :=
+  Classical.choose (scalarChangePointAdjunction_exists φ)
+
 /-- Ordinary scalar extension of module-valued sheaves inverts quasi-isomorphisms
 between categorical K-flat complexes. No flatness of the ring map is assumed.
 Source: Stacks 06YY (blueprint: lem-pur-scalar-change-adjunctions).

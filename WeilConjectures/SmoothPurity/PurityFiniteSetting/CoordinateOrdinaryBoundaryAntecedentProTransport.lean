@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Coordinate.CoordinateLocalizationSplice
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Affine.PurityAffineLineBoundaryRealization
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateOrdinaryBoundaryProCoordinateCancellation
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateOrdinaryBoundaryProCounitNormalization
 
 /-! Pro-etale counit transport for the coordinate ordinary antecedent.
 (blueprint: new-lem-pur-coordinate-ordinary-boundary-antecedent-pro-transport).
@@ -70,6 +72,24 @@ theorem coordinateOrdinary_boundaryAntecedent_proTransport
       (nu P (Line T)).map c.hom ≫
         ((nu P (Line T)).commShiftIso (2 : ℤ)).hom.app
           (P.gysinEtaleInput h T).obj := by
-  sorry
+  let f := Etale.supportedExactDerivedMap
+      (Etale.lowerStar (Modules P) (zeroSection T)) (P.constantEtale T)
+      (P.twistEtale h (Line T)) c
+  have hcoord : P.coordinateOrdinaryToGysin h T f =
+      ((comparisonUpperStar (Modules P) T).mapDerivedCategorySingleFunctor 0).inv.app
+          (P.constantEtale T) ≫
+        (nu P T).map (coordinateOrdinaryTranspose P h T f) ≫
+        (nu P T).map (((Etale.rightDerivedUpperShriek P.Coefficient
+          (zeroSection T)).commShiftIso (2 : ℤ)).hom.app
+            (P.gysinEtaleInput h T).obj) ≫
+        ((nu P T).commShiftIso (2 : ℤ)).hom.app _ ≫
+        (shiftFunctor _ (2 : ℤ)).map
+          (boundedSiteRho P.Coefficient
+            (Etale.rightDerivedUpperShriek P.Coefficient (zeroSection T))
+            (P.gysinEtaleInput h T).obj) := by
+    with_unfolding_all rfl
+  obtain ⟨m, hm⟩ := coordinateOrdinary_boundary_proCounitNormalization P h T aT b
+  simpa [hm] using coordinateOrdinary_boundary_proCoordinateCancellation
+    P h T aT c b m hb hm
 
 end WeilConjectures.PurityFiniteSetting

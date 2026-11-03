@@ -160,6 +160,7 @@ import all WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import all Mathlib.CategoryTheory.Functor.TypeValuedFlat
 import all Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SmoothPurity.ProEtaleFiniteModelStalks
 
 /-!
 # Flat models and generators
@@ -196,6 +197,20 @@ local instance sf_locallyBijective (X : Scheme.{u}) :
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   inferInstance
 
+private theorem sf_comparison_constructible
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
+    (hG : IsConstructibleEtaleModuleSheaf G) :
+    IsConstructibleProEtaleModuleSheaf X A
+      ((ProEtale.finiteCoefficientIntrinsicComparison X A).obj G) := by
+  let R := ProEtale.finiteCoefficientIntrinsicRealization X A
+  let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X
+  obtain ⟨e⟩ := ProEtale.intrinsicRealization_restriction X A
+  rw [proEtaleModuleRestriction_constructible_iff]
+  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G).mp hG
+  exact ProEtale.isConstructible_of_iso (e.app (C.obj G)).symm
+    (ProEtale.isConstructible_comparisonUpperStar_obj G)
+
 /-- The etale closure generators `Rg_*j_!L`: the closed direct image is exact, so the
 ordinary sheaf in degree zero is its derived value. The equation on `j` fixes the open
 factor through the scheme-theoretic image of the stratum immersion. Lisse flat sheaves
@@ -212,6 +227,83 @@ def sfEtaleClosureGenerators (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [F
     Nonempty (K ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj
       ((Etale.lowerStar (ModuleCat.{u + 1} A) (str.immersion i).imageι).obj
         ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).obj L)))
+
+/-- Every finite-Tor bounded constructible pro-etale object in the standing setting has
+an actual bounded complex of flat constructible sheaves as representative.
+Source: blueprint `sk-lem-sf-flat-model`, first paragraph
+(blueprint: sk-lem-sf-flat-model).
+
+Proof plan (the node's steps 1--3): finite type over the standing field makes `X`
+Noetherian (lem-weil-pbc-finite-type-over-noetherian), hence qcqs by
+lem-weil-pbc-locally-noetherian-quasi-separated. The finite ring is Noetherian.
+Use det-pe-finite-tor-comparison-noetherian to descend `K` with its Tor interval to the
+etale site. Apply lem-sf-etale-flat-constructible. Apply the exact comparison pullback
+termwise (lem-sf-comparison-pullback-exact). It preserves zero terms and the representing
+quasi-isomorphism; flatness follows from lem-exc-constant-inverse-image-flat and
+constructibility from lem-weil-pbc-finite-ring-constructible-sheaf-origin. The canonical
+intrinsic coefficient realization identifies the resulting ordinary module sheaves. -/
+theorem proEtaleFlatModel
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (l : ℕ) (hl : l.Prime) (hlp : l ≠ D.p)
+    (A : Type u) [CommRing A] [Finite A]
+    (hA : ∃ n : ℕ, 0 < n ∧ (l ^ n) • (1 : A) = 0)
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    (K : proEtaleDerivedCategory X A)
+    (hbc : (∀ q : ℤ, IsConstructibleProEtaleModuleSheaf X A
+      ((_root_.DerivedCategory.homologyFunctor
+        (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj K)) ∧
+      ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
+        IsZero ((_root_.DerivedCategory.homologyFunctor
+          (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj K))
+    (hTor : HasFiniteProEtaleTorAmplitude X A K) :
+    ∃ (P : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ)
+      (a b : ℤ), a ≤ b ∧
+      (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧
+      (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology X)
+        (R := proEtaleConstantRing X A) (P.X q)) ∧
+      (∀ q : ℤ, IsConstructibleProEtaleModuleSheaf X A (P.X q)) ∧
+      Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P) := by
+  have _ := hl
+  have _ := hlp
+  have _ := hA
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of D.k))
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
+    (X ↘ Spec (.of D.k))
+  have : IsNoetherian X := ⟨⟩
+  let F := ProEtale.finiteCoefficientIntrinsicComparison X A
+  obtain ⟨K₀, ⟨e⟩⟩ := (finiteRing_constructibleDerived_origin X A).2.2.1 K |>.mpr hbc
+  obtain ⟨a, b, ht⟩ := hTor
+  obtain ⟨c, d, _, hbound⟩ := K₀.property.2
+  have hplus : DerivedCategory.TStructure.t.plus K₀.obj :=
+    ⟨c, (DerivedCategory.isGE_iff K₀.obj c).mpr
+      (fun q hq ↦ hbound q (.inl hq))⟩
+  let Kplus : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
+    ⟨K₀.obj, hplus⟩
+  let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X
+  let R := ProEtale.finiteCoefficientIntrinsicRealization X A
+  let ecomp := (Functor.mapDerivedCategoryCompIso C R).app K₀.obj
+  have htcomp : HasProEtaleTorAmplitude X A
+      (R.mapDerivedCategory.obj (C.mapDerivedCategory.obj K₀.obj)) a b := by
+    refine ⟨ht.1, ?_⟩
+    intro L Q hL f hf hQ M i hi
+    obtain ⟨eL⟩ := hL
+    exact ht.2 L Q ⟨eL ≪≫ ecomp.symm ≪≫ e⟩ f hf hQ M i hi
+  have htE := (ProEtale.comparison_torAmplitudeIn_iff A X a b ht.1 Kplus).mpr htcomp
+  obtain ⟨P, hf, hc, hz, ⟨eP⟩⟩ :=
+    (Etale.hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel
+      (ULift.{u + 1, u} A) X a b ht.1 K₀.obj K₀.property).mp htE
+  refine ⟨(F.mapHomologicalComplex (.up ℤ)).obj P, a, b, ht.1,
+    fun q hq ↦ F.map_isZero (hz q hq), ?_, ?_, ?_⟩
+  · intro q
+    exact ProEtale.intrinsicRealization_flat X A _
+      (ProEtale.flat_comparisonUpperStar_obj (hf q))
+  · intro q
+    exact sf_comparison_constructible X A (P.X q) (hc q)
+  · exact ⟨e.symm ≪≫ F.mapDerivedCategory.mapIso eP.symm ≪≫
+      F.mapDerivedCategoryFactors.app P⟩
 
 /-- The Noetherian complement on the etale site, with the recorded finite-value
 constructibility and the recorded Tor tests on every module sheaf in degree zero.

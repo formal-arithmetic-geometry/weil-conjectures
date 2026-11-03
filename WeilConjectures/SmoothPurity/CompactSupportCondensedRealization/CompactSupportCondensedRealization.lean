@@ -50,6 +50,13 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicFiniteTorsionConstructibility
+public import WeilConjectures.ProperBaseChange.CondensedERealization.CondensedEIntegralExchange
+public import WeilConjectures.ProperBaseChange.CondensedERealization.CondensedERationalCondensedExchange
+public import WeilConjectures.ProperBaseChange.CondensedERealizationSystem
+public import WeilConjectures.SixFunctors.Integral.IntegralOperationsPreserveConstructible
+public import WeilConjectures.SmoothPurity.Supporting.BasicOperationCoefficientCoherence
+public import WeilConjectures.SmoothPurity.Supporting.BasicOperationReductionAndEvaluation
 
 /-! # Compact-support condensed realization
 
@@ -704,6 +711,45 @@ structure ComparisonFamily extends ComparisonFamilyCore l k where
   scalar_identity : IsScalarIdentity l k toComparisonFamilyCore
   scalar_composition : IsScalarComposition l k toComparisonFamilyCore
   scalar_refinement : IsScalarRefinement l k toComparisonFamilyCore
+
+/-- The component equation underlying refinement composition.
+Source: Stacks 07A7 and 0F7B; the component form is the strict-system calculation.
+(blueprint: lem-pur-compact-support-condensed-realization).
+(blueprint: lem-pur-compact-support-condensed-realization-system-refinement-comp-component).
+Proof: paste the two clopen-section open squares and use the proper compositor
+cocycle; this is the component calculation before natural-transformation extensionality. -/
+theorem systemRefinement_comp_component (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e)
+    (M : coefficientSequenceDerived.{u, u} l E X.scheme) :
+    (systemRefinement l E k X Y f (r.comp s)).app M =
+      (systemRefinement l E k X Y f s ≫
+        systemRefinement l E k X Y f r).app M := by
+  let := compactification_open_quasiCompact k X Y f c
+  let := compactification_open_quasiCompact k X Y f d
+  let := compactification_open_quasiCompact k X Y f e
+  unfold systemRefinement
+  with_unfolding_all
+    exact SemilinearProperOpen.supportRefinement_comp_app
+      (quotientRings l E) (quotientMaps l E) c.i c.g d.i d.g e.i e.g r.hom s.hom
+      (r.i_hom.trans (Category.id_comp _).symm)
+      (s.i_hom.trans (Category.id_comp _).symm)
+      ((r.comp s).i_hom.trans (Category.id_comp _).symm)
+      r.hom_g s.hom_g (r.comp s).hom_g M
+
+/-- Refinement composition holds before evaluation and before total limit.
+Source: blueprint Step 15; Stacks 07A7 and 0F7B
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: the component calculation is natural in the system object, so extensionality
+packages it as equality of natural transformations. -/
+theorem systemRefinement_comp (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e) :
+    systemRefinement l E k X Y f (r.comp s) =
+      systemRefinement l E k X Y f s ≫ systemRefinement l E k X Y f r := by
+  apply NatTrans.ext
+  funext M
+  exact systemRefinement_comp_component l E k X Y f r s M
 
 end WeilConjectures.CompactSupportCondensedRealization
 

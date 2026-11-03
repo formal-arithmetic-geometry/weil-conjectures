@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PurityIntegralTower.CondensedTateIntegralTowerData
 import WeilConjectures.AlgebraicGeometry.PurityIntegralTower.TateTensorDerivedOrdinaryNormalization
 import WeilConjectures.AlgebraicGeometry.PurityIntegralTower.TateTensorRealizedSingleModel
+public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
 
 /-! The finite Tate transition on ordinary root generators.
 
@@ -80,3 +81,80 @@ private theorem finiteTateTensor_transition_model_core
   exact h
 
 end AlgebraicGeometry.Scheme.PurityIntegralTower
+
+namespace AlgebraicGeometry.ProEtale
+
+/-- The universal derived scalar counit, followed by the canonical single-complex
+comparison, is natural in an ordinary module sheaf.
+
+Source: det-sp-scalar-extension-functor (1), functoriality on representatives.
+(blueprint: lem-sp-finite-tate-transition-derived)
+Proof: apply naturality of the universal complex counit to the single of the map,
+then naturality of the single-complex comparison and functoriality of localization. -/
+private theorem scalarSingleCounit_naturality
+    {A B : Type u} [CommRing A] [CommRing B]
+    (f : A →+* B) (T : Scheme.{u})
+    {M N : proEtaleRingModules T (proEtaleConstantRing T A)} (v : M ⟶ N) :
+    (scalarExtensionFunctor f T).map ((DerivedCategory.singleFunctor _ 0).map v) ≫
+        scalarExtensionFunctorCounit f T ((HomologicalComplex.single _ (.up ℤ) 0).obj N) ≫
+        DerivedCategory.Q.map
+          ((HomologicalComplex.singleMapHomologicalComplex
+            (siteScalarChange T (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.app
+              N) =
+      scalarExtensionFunctorCounit f T ((HomologicalComplex.single _ (.up ℤ) 0).obj M) ≫
+        DerivedCategory.Q.map
+          ((HomologicalComplex.singleMapHomologicalComplex
+            (siteScalarChange T (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.app
+              M) ≫
+        (DerivedCategory.singleFunctor _ 0).map
+          ((siteScalarChange T (proEtaleConstantRingMap (T := T) f)).map v) := by
+  have h := scalarExtensionFunctor_map f T
+    ((HomologicalComplex.single _ (.up ℤ) 0).map v)
+  have hs := (HomologicalComplex.singleMapHomologicalComplex
+    (siteScalarChange T (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).hom.naturality v
+  dsimp only [Functor.comp_map] at hs
+  erw [reassoc_of% h]
+  erw [← DerivedCategory.Q.map_comp, hs, DerivedCategory.Q.map_comp]
+  rfl
+
+/-- The canonical derived Tate comparison commutes with the Kummer exponent
+transition. Both sides use ordinary constant coefficient sheaves on the small
+pro-etale site; scalar extension is the K-flat derived tensor product.
+
+Source: det-sp-scalar-extension-functor (3), exponent independence;
+sk-thm-purity-transport, Step 1.
+(blueprint: lem-sp-finite-tate-transition-derived)
+Proof: the ordinary scalar/Tate square commutes on root tensors, positive tensor
+powers and dual evaluations, by the canonical exponent-naturality theorem.
+Apply the degree-zero single functor to that square. The universal derived
+counit is natural on single complexes, as is the single-complex comparison.
+Compose these two naturality squares with the ordinary square. Expanding the
+specified derived Tate comparison gives the displayed equation. Rank-one
+flatness makes its counit invertible even for a nonflat coefficient quotient. -/
+theorem finiteTateTensor_transition_model
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    [∀ x : T, Invertible (ℓ : T.residueField x)]
+    (m n : ℕ) (hmn : m ≤ n) (a : ZMod (ℓ ^ (m + 1)) →+* A) (r : ℤ) :
+    (scalarExtensionFunctor f T).map
+        ((DerivedCategory.singleFunctor _ 0).map
+          (scalarExtensionTateLevelIso T ℓ A m n hmn a r).hom) ≫
+      (scalarExtensionFunctorTateIso f T ℓ m a r).hom =
+    (scalarExtensionFunctorTateIso f T ℓ n
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1))))) r).hom ≫
+      (DerivedCategory.singleFunctor _ 0).map
+        (scalarExtensionTateLevelIso T ℓ B m n hmn (f.comp a) r).hom := by
+  have h := scalarSingleCounit_naturality f T
+    (scalarExtensionTateLevelIso T ℓ A m n hmn a r).hom
+  have ho := scalarExtensionTateIso_exponent_naturality f T ℓ m n hmn a r
+  have hd := congrArg
+    (fun v ↦ (DerivedCategory.singleFunctor
+      (proEtaleRingModules T (proEtaleConstantRing T B)) 0).map v) ho
+  simp only [Functor.map_comp] at hd
+  simp only [scalarExtensionFunctorTateIso, Iso.trans_hom, asIso_hom,
+    Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+  erw [reassoc_of% h]
+  erw [hd]
+
+end AlgebraicGeometry.ProEtale

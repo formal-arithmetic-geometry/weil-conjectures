@@ -45,6 +45,11 @@ import Mathlib.CategoryTheory.Functor.TypeValuedFlat
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleProEtaleExceptionalTransport
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SmoothPurity.ProEtaleFiniteModelStalks
 
 /-! # Object comparison for exceptional transport
 
@@ -119,6 +124,67 @@ private theorem fixed_constructible_iff
     exact ⟨identityStratification T, Nat.zero_lt_one,
       (identityStratification T).isConstructible_stratum,
       fun i ↦ hlocal _ _ (empty_finiteLocal T A _)⟩
+
+private theorem fixed_constructible_intrinsic
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
+    {K : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))}
+    (hK : exceptionalTransportProEtaleObjects A T K) :
+    AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleIntrinsic A T K := by
+  refine ⟨hK.1, fun i ↦ (fixed_constructible_iff A T _).mp (hK.2.1 i)⟩
+
+/-- A classical origin of an exceptional pro-étale object can be chosen exceptional on the
+étale site, with its comparison isomorphism retained.
+
+Source: literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/
+sk-lem-sf-kunneth-star.proof.md, finite-ring constructible origin and Tor transport
+(blueprint: lem-sf-proetale-exceptional-origin-transfer).
+
+Proof: apply finite-ring derived constructible origin to the intrinsic fixed-module data of the
+pro-etale object. Convert fixed-coefficient constructibility to the intrinsic predicate,
+including the empty-scheme case, and reflect the Tor interval through comparison full
+faithfulness. The resulting etale object is exceptional and retains its comparison isomorphism. -/
+theorem exceptional_etale_origin_of_pro_origin
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (S : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S]
+    {K : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} A))}
+    (hK : exceptionalTransportProEtaleObjects A S K)
+    (_hclassical : ∃ E : Etale.DerivedCategoryModule A S,
+      _root_.DerivedCategory.TStructure.t.plus E ∧
+        Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory.obj E ≅ K)) :
+    ∃ E : Etale.DerivedCategoryModule A S,
+      exceptionalTransportEtaleObjects A S E ∧
+      _root_.DerivedCategory.TStructure.t.plus E ∧
+      Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory.obj E ≅ K) := by
+  have hbcK : AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible
+      (ModuleCat.{u + 1} A) S K :=
+    AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic
+      (fixed_constructible_intrinsic A S hK)
+  obtain ⟨E, hE, ⟨eK⟩⟩ :=
+    (AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible_iff
+      (A := ModuleCat.{u + 1} A) (X := S) K).mp hbcK
+  have hEplus : _root_.DerivedCategory.TStructure.t.plus E := hE.1.1
+  have hEbc : Etale.DerivedCategory.isBoundedConstructible A S E := by
+    refine ⟨fun i ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+      (hE.2 i), ?_⟩
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hE.1
+    refine ⟨min a b, b, min_le_right _ _, ?_⟩
+    intro i hi
+    rcases hi with hi | hi
+    · exact (_root_.DerivedCategory.isGE_iff E a).mp ha i
+        (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (_root_.DerivedCategory.isLE_iff E b).mp hb i hi
+  obtain ⟨a, b, hab, htor⟩ := hK.2.2
+  have htorK : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) S a b K := htor
+  have htorE : Etale.DerivedCategory.torAmplitudeIn
+      (ModuleCat.{u + 1} A) S a b E := by
+    apply AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff
+      (Λ := A) (a := a) (b := b) (K := E) |>.mp
+    exact (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso eK.symm htorK
+  exact ⟨E, ⟨hEbc, a, b, hab,
+    Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr htorE⟩,
+    hEplus, ⟨eK⟩⟩
 
 private theorem etale_boundedConstructible_iff
     (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})

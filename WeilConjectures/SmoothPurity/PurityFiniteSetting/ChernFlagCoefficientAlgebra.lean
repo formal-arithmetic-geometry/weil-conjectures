@@ -7,6 +7,18 @@ module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.ChernFlagFormula
 import Mathlib.CategoryTheory.Linear.FunctorCategory
+public import WeilConjectures.AlgebraicGeometry.KummerAdditivity
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
+public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTautologicalGeometry
+public import WeilConjectures.AlgebraicGeometry.Support.SupportCohomology
+public import WeilConjectures.AlgebraicGeometry.Supported.SupportedCup
+public import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationBaseCoefficientComposition
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
+public import WeilConjectures.SmoothPurity.ProjectiveBundleFormula
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityChernEtaleOrigin
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFiniteSetting
 
 /-!
 # Coefficients of the ordered Chern-root product
@@ -33,17 +45,21 @@ theorem ordinaryFiniteHyperplaneStep_zero
   simp [ordinaryFiniteHyperplaneStep, ordinaryFiniteHyperplaneStepRaw,
     ProEtale.derivedTensor]
 
-/-- Additivity in the class multiplied by a fixed root. -/
-theorem ordinaryFiniteHyperplaneStep_add
-    (x : Etale.ordinaryFiniteUnit P.Coefficient S ⟶
+/-- The ordered cup step is additive in the arbitrary pro-etale input class.
+Source: Stacks Tag 0FI5, bilinear full-support cup product.
+Proof: tensoring is additive in its first variable, then distribute composition.
+(blueprint: lem-pur-chern-coefficient-assembly). -/
+theorem ordinaryFiniteHyperplaneStep_add (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
+    (h : Etale.ordinaryFiniteUnit P.Coefficient T ⟶
       (Etale.ordinaryFiniteLine P.Coefficient P.diagonalExponent
-        P.diagonalExponent_annihilates S)⟦(2 : ℤ)⟧) (i : ℕ)
-    (α β : P.ordinaryFiniteCohomology S i) :
-    P.ordinaryFiniteHyperplaneStep S x i (α + β) =
-      P.ordinaryFiniteHyperplaneStep S x i α + P.ordinaryFiniteHyperplaneStep S x i β := by
-  simp [ordinaryFiniteHyperplaneStep, ordinaryFiniteHyperplaneStepRaw,
-    ProEtale.derivedTensor,
-    Preadditive.comp_add, Preadditive.add_comp]
+        P.diagonalExponent_annihilates T)⟦(2 : ℤ)⟧)
+    (i : ℕ) (α β : ordinaryFiniteCohomology P T i) :
+    P.ordinaryFiniteHyperplaneStep T h i (α + β) =
+      P.ordinaryFiniteHyperplaneStep T h i α + P.ordinaryFiniteHyperplaneStep T h i β := by
+  unfold ordinaryFiniteHyperplaneStep ordinaryFiniteHyperplaneStepRaw
+  dsimp only [ProEtale.derivedTensor]
+  rw [Functor.map_add]
+  simp only [NatTrans.app_add, Preadditive.add_comp, Preadditive.comp_add]
 
 private theorem coeff_zero (r : ℕ)
     (x : Fin r → (Etale.ordinaryFiniteUnit P.Coefficient S ⟶

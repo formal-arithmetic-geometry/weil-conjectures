@@ -10,6 +10,8 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestric
 public import WeilConjectures.Algebra.Homology.LinearScalarCone.LinearScalarCone
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existence
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRStrictCoefficientAdjoint
+public import WeilConjectures.DeligneLaumon.PrincipalKoszulStrictReplacement.PrincipalKoszulStrictReplacement
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Coefficient augmentation of the canonical strict DVR Roos object
 
@@ -59,6 +61,53 @@ local instance roosCompletedRestrictionColimits (n : ℕ) :
   (completedIntegralRestrictScalars_exact l E X D hl n).2
 local instance roosFiniteDerived (n : ℕ) : HasDerivedCategory (normalizedDVRModules l E X n) :=
   HasDerivedCategory.standard _
+
+private theorem coefficientExactForStrictAdjoint (n : ℕ) :
+    let R := completedIntegralCommRingSheafUnrestricted l E X
+    let φ := completedIntegralCommRingProjectionUnrestricted l E X n
+    let s := normalizedDVRUniformizer l E X
+    ∃ ht : (SheafOfModules.RegularQuotientCone.scalar R
+        (principalCoefficientPowerSection (R := R) s n)).app
+        (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients
+          (AlgebraicGeometry.Scheme.ProEt.topology X) R)) ≫
+          SheafOfModules.RegularQuotientCone.ringMap φ = 0,
+      (ShortComplex.mk _ _ ht).ShortExact := by
+  dsimp only
+  have hs : (SheafOfModules.RegularQuotientCone.scalar
+      (completedIntegralCommRingSheafUnrestricted l E X)
+      (principalCoefficientPowerSection
+        (R := completedIntegralCommRingSheafUnrestricted l E X)
+        (normalizedDVRUniformizer l E X) n)).app
+      (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients
+        (AlgebraicGeometry.Scheme.ProEt.topology X)
+        (completedIntegralCommRingSheafUnrestricted l E X))) =
+        PrincipalKoszulStrictReplacement.multiplication l E X n := by
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    change (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj U at x
+    let a : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj U :=
+      (PrincipalKoszulStrictReplacement.uniformizer l E X).val U
+    change a ^ (n + 1) * x = _
+    have h := PrincipalKoszulStrictReplacement.multiplication_apply l E X n U x
+    change _ = x * a ^ (n + 1) at h
+    exact (completedIntegralCoefficient_mul_commUnrestricted l E X U _ x).trans h.symm
+  have hp : SheafOfModules.RegularQuotientCone.ringMap
+      (completedIntegralCommRingProjectionUnrestricted l E X n) =
+        PrincipalKoszulStrictReplacement.projection l E X n := by
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    rfl
+  simp only [hs, hp]
+  exact ⟨PrincipalKoszulStrictReplacement.multiplication_projection l E X n,
+    (PrincipalKoszulStrictReplacement.completed_exact l E X n).1⟩
 
 private theorem zeroSandwich
     {C : Type*} [Category C] [HasZeroMorphisms C] {P K I Z W : C}
@@ -211,7 +260,21 @@ theorem normalizedDVR_roos_augmentation
           (eU n).hom ≫
           (T.evaluationIso n).hom := by
   let := HasDerivedCategory.standard (normalizedDVRModules l E X n)
-  obtain ⟨A, hA⟩ := normalizedDVR_strict_coefficient_adjoint l E X D hl n adj
+  let := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
+    (SheafOfModules.derivedChangeRingIndependentCoefficients
+      (AlgebraicGeometry.Scheme.ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)))
+  obtain ⟨hlim, hcol, _⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction
+    (completedIntegralCommRingProjectionUnrestricted l E X n)
+  let : PreservesFiniteLimits
+      (SheafOfModules.RegularQuotientCone.restriction.{t + 1, t, max u (t + 1)}
+        (completedIntegralCommRingProjectionUnrestricted l E X n)) := hlim
+  let : PreservesFiniteColimits
+      (SheafOfModules.RegularQuotientCone.restriction.{t + 1, t, max u (t + 1)}
+        (completedIntegralCommRingProjectionUnrestricted l E X n)) := hcol
+  obtain ⟨ht, hexact⟩ := coefficientExactForStrictAdjoint l E X n
+  obtain ⟨A, hA⟩ := normalizedDVR_strict_coefficient_adjoint
+    (completedIntegralCommRingProjectionUnrestricted l E X n)
+    (normalizedDVRUniformizer l E X) n ht hexact adj
   let Q := DerivedCategory.Q (C := completedIntegralModuleSheaves l E X D hl)
   let c := CategoryTheory.Pretriangulated.homotopyLimitCone (U ⋙ Q)
   let k := (CategoryTheory.Pretriangulated.addOpFunctor (n + 1)).obj (op 0)

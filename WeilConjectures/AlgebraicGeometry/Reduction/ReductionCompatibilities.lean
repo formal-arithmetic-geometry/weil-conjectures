@@ -80,6 +80,12 @@ import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleExceptional
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothCoefficientArrows
+public import WeilConjectures.AlgebraicGeometry.FiniteFieldPrimePowerUnit
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteNormalizedOrientationScalar
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalChart
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalConservativity
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalRealization
 
 /-! # Units, composition and purity under finite coefficient change
 
@@ -168,6 +174,146 @@ private theorem compatibilityActualOriginCtf
   exact ⟨(DerivedCategory.boundedConstructible (ModuleCat A) T).prop_of_iso q hK₀.1,
     (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso q hK₀.2⟩
 
+private theorem compatibilityAbstractMateNaturality
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory D] [BraidedCategory D]
+    (P : D ⥤ C) {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    (W : C) (eps : F.obj W ⟶ 𝟙_ D)
+    (pi : ∀ K, F.obj (W ⊗ P.obj K) ⟶ F.obj W ⊗ K)
+    (hn : ∀ {K L} (a : K ⟶ L),
+      F.map (W ◁ P.map a) ≫ pi L = pi K ≫ (F.obj W ◁ a))
+    {K L : D} (a : K ⟶ L) :
+    (P.map a ▷ W) ≫
+      adj.homEquiv _ _ (F.map (β_ (P.obj L) W).hom ≫ pi L ≫
+        (β_ (F.obj W) L).hom ≫ (L ◁ eps) ≫ (ρ_ L).hom) =
+    adj.homEquiv _ _ (F.map (β_ (P.obj K) W).hom ≫ pi K ≫
+        (β_ (F.obj W) K).hom ≫ (K ◁ eps) ≫ (ρ_ K).hom) ≫ G.map a := by
+  rw [← adj.homEquiv_naturality_left, ← adj.homEquiv_naturality_right]
+  apply congrArg (adj.homEquiv _ _)
+  rw [← Category.assoc, ← Functor.map_comp,
+    BraidedCategory.braiding_naturality_left, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% (hn a)]
+  rw [BraidedCategory.braiding_naturality_right_assoc,
+    ← whisker_exchange_assoc, rightUnitor_naturality]
+
+private theorem compatibilityDirectNaturality
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]
+    [hPF : IsIso (projectionMap (ModuleCat.{u + 1} A) f)]
+    {K L : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (a : K ⟶ L) :
+    ((derivedTensor (ModuleCat.{u + 1} A) X).map
+        ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.map a)).app
+        (dualizingComplex A f) ≫ smoothTensorDualityMap A f hPF L =
+      smoothTensorDualityMap A f hPF K ≫ (rightDerivedUpperShriek A f).map a := by
+  let := smoothTensorCanonicalDerivedBraiding (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+  let := smoothTensorCanonicalDerivedBraiding (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))
+  apply compatibilityAbstractMateNaturality
+  intro K L a
+  have h := (asIso ((projectionMap (ModuleCat.{u + 1} A) f).app
+    (dualizingComplex A f))).inv.naturality a
+  simpa only [asIso, NatIso.isIso_inv_app,
+    rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar,
+    derivedTensorRightDerivedLowerShriek, Functor.comp_map,
+    Functor.postcompose₂, Functor.whiskeringLeft₂, Functor.whiskeringRight,
+    Functor.whiskeringLeft, Functor.whiskerLeft, Functor.whiskerRight,
+    Functor.comp_obj, Functor.id_obj, Functor.id_map,
+    rightDerivedLowerShriek, rightDerivedLowerShriekOfCompactification,
+    derivedTensor_obj_map] using h
+
+private theorem compatibilityOrdinaryGammaNaturality
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (L : DerivedCategoryModule A X)
+    (alpha : dualizingComplex A f ≅ L)
+    {K K' : DerivedCategoryModule A Y} (a : K ⟶ K') :
+    (puritySource A f L).map a ≫ gamma A f L alpha K' =
+      gamma A f L alpha K ≫ (rightDerivedUpperShriek A f).map a := by
+  change ((derivedTensor (ModuleCat A) X).map
+      ((ordinaryFinitePullback A f).map a)).app L ≫ _ = _
+  unfold gamma
+  have ht := ((derivedTensor (ModuleCat A) X).map
+    ((ordinaryFinitePullback A f).map a)).naturality alpha.inv
+  rw [← Category.assoc, ← ht, Category.assoc]
+  have hn := compatibilityDirectNaturality A f a
+  change ((derivedTensor (ModuleCat A) X).map
+    ((ordinaryFinitePullback A f).map a)).app (dualizingComplex A f) ≫
+      smoothTensorDualityMap A f _ K' =
+      smoothTensorDualityMap A f _ K ≫
+        (rightDerivedUpperShriek A f).map a at hn
+  rw [hn, Category.assoc]
+
+private theorem scalarTargetNaturality
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : DerivedCategoryModule A Y) {L M : DerivedCategoryModule A X} (a : L ⟶ M) :
+    (ordinaryScalar φ X).map
+        (((derivedTensor (ModuleCat A) X).obj ((ordinaryFinitePullback A f).obj K)).map a) ≫
+      compactScalarProjectionTarget φ f K M =
+    compactScalarProjectionTarget φ f K L ≫
+      ((derivedTensor (ModuleCat B) X).obj
+        ((ordinaryFinitePullback B f).obj ((ordinaryScalar φ Y).obj K))).map
+          ((ordinaryScalar φ X).map a) := by
+  have h := (ExceptionalCoefficients.tensorIso φ X).hom.naturality
+    (show (((ordinaryFinitePullback A f).obj K, L) ⟶
+      ((ordinaryFinitePullback A f).obj K, M)) from (𝟙 _, a))
+  have h' := ((derivedTensor (ModuleCat B) X).map
+    ((scalarPullbackIso φ f).inv.app K)).naturality ((ordinaryScalar φ X).map a)
+  dsimp only [Functor.comp_map, Functor.prod_map, Functor.prod_obj,
+    Functor.uncurry_obj_map] at h
+  simp only [CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp] at h
+  unfold compactScalarProjectionTarget
+  erw [← Category.assoc, h, Category.assoc, h']
+  exact (Category.assoc _ _ _).symm
+
+private theorem ordinaryGammaCoefficient
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [HasCompactification f] [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f]
+    (N M : ℕ) (hA : (N : A) = 0) (hB : (M : B) = 0) (d : ℕ)
+    (e : CoefficientLineComparison φ N M hA hB X)
+    (a : dualizingComplex A f ≅ line A N hA X d)
+    (b : dualizingComplex B f ≅ line B M hB X d)
+    (hab : (ordinaryScalar φ X).map a.inv ≫
+      ExceptionalCoefficients.dualizingScalarMap φ f = (e.tensorPower d).hom ≫ b.inv)
+    (K : DerivedCategoryModule A Y) :
+    (ordinaryScalar φ X).map (gamma A f _ a K) ≫ ExceptionalCoefficients.mateMap φ f K =
+      (pullbackTwistComparison f d e K).hom ≫
+        gamma B f _ b ((ordinaryScalar φ Y).obj K) := by
+  have ht := ExceptionalCoefficients.tensorCompatibility φ f K
+  unfold ExceptionalCoefficients.TensorCompatibility at ht
+  simp only [gamma, Functor.map_comp, Category.assoc]
+  erw [ht]
+  unfold ExceptionalCoefficients.tensorDomainMap
+  simp only [Category.assoc]
+  erw [reassoc_of% (scalarTargetNaturality φ f K a.inv)]
+  erw [← Functor.map_comp_assoc, hab, Functor.map_comp_assoc]
+  change compactScalarProjectionTarget φ f K _ ≫
+      ((derivedTensor (ModuleCat B) X).obj _).map (e.tensorPower d).hom ≫ _ = _
+  simp only [compactScalarProjectionTarget, pullbackTwistComparison, Iso.trans_hom,
+    Iso.app_hom, Iso.app_inv, Functor.prod_obj, Functor.mapIso_hom, Iso.symm_hom,
+    Category.assoc]
+  rfl
+
+private theorem sourceFromOrigin_gamma
+    {A : Type (u + 1)} [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (L : DerivedCategoryModule A X)
+    (a : dualizingComplex A f ≅ L) (K : proCategory A Y)
+    [hc : IsIso ((ProEtale.derivedComparisonAdjunction (ModuleCat A) Y).counit.app K)] :
+    sourceFromOrigin A f L K ≫ proGamma A f L a K =
+      (comparison A X).map (gamma A f L a ((origin A Y).obj K)) := by
+  unfold proGamma
+  have hs : sourceFromOrigin A f L K ≫ sourceToOrigin A f L K = 𝟙 _ := by
+    dsimp only [sourceFromOrigin, sourceToOrigin, originInverse]
+    rw [dif_pos hc, Category.assoc, ← (proSource A f L).map_comp_assoc,
+      IsIso.hom_inv_id]
+    erw [(proSource A f L).map_id, Category.id_comp, Iso.hom_inv_id]
+  rw [← Category.assoc, hs, Category.id_comp]
+
 attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem scalarOriginCounit
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
@@ -190,6 +336,153 @@ private theorem scalarOriginCounit
     ((ProEtale.pbcComparisonReduction Y φ).app ((origin A Y).obj K)).symm ≪≫
       (proScalar φ Y).mapIso (asIso (a.counit.app K))
   exact (NatTrans.isIso_app_iff_of_iso b.counit e).mp inferInstance
+
+private theorem proGammaCoefficient
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Y : Scheme.{u}} [IsNoetherian Y]
+    (f : X ⟶ Y) [HasCompactification f]
+    (N M : ℕ) (hA : (N : A) = 0) (hB : (M : B) = 0) (d : ℕ)
+    (e : CoefficientLineComparison φ N M hA hB X)
+    (a : dualizingComplex A f ≅ line A N hA X d)
+    (b : dualizingComplex B f ≅ line B M hB X d)
+    (h : ∀ K : DerivedCategoryModule A Y,
+      (ordinaryScalar φ X).map (gamma A f _ a K) ≫
+          ExceptionalCoefficients.mateMap φ f K =
+        (pullbackTwistComparison f d e K).hom ≫
+          gamma B f _ b ((ordinaryScalar φ Y).obj K))
+    (K : proCategory A Y) (hK : IsCtf A Y K) :
+    (proScalar φ X).map (proGamma A f _ a K) ≫ proCoefficientMap φ f K =
+      proLambda f d e K ≫ proGamma B f _ b ((proScalar φ Y).obj K) := by
+  have := scalarOriginCounit φ Y K hK
+  unfold proLambda
+  simp only [Category.assoc, sourceFromOrigin_gamma]
+  unfold proGamma proCoefficientMap
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := (ProEtale.pbcComparisonReduction X φ).hom.naturality
+    (gamma A f _ a ((origin A Y).obj K))
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn
+  erw [reassoc_of% hn]
+  erw [← (comparison B X).map_comp_assoc, h]
+  simp only [Functor.map_comp, Category.assoc]
+  have hg := compatibilityOrdinaryGammaNaturality B f _ b (originReductionMap φ Y K)
+  have hg' := congrArg (comparison B X).map hg
+  simp only [Functor.map_comp] at hg'
+  erw [hg']
+
+/-- Scalar extension carries the diagonal/DNC-normalized smooth purity map to the
+same map over the new finite ring, under canonical pullback/twist balancing.
+`alphaA` and `alphaB` are precisely the orientations of finiteGeneralRingSmoothPurity:
+OrientationNormalized retains the actual diagonal mate, the t=1-normalized Rees
+comparison and the inverse integration-transposed bundle arrow. `e` retains the
+scalar/root-generator normalization; it is not an arbitrary Tate-line isomorphism.
+Source: sk-lem-sp-reduction-compatibilities, clause (3)
+(blueprint: det-sp-reduction-compatibilities).
+
+Proof (node Steps 1 and 4--8): The scalar monoidal and pullback identifications are
+balanced tensor maps on flat K-flat representatives, respecting symmetry and shifts.
+For the fixed compactification apply ringedExchangeTensorCoherence to its proper part
+and the extension-by-zero tensor comparison to its open part. On the open part both
+orders extend sections by zero and multiply the same B-scalars. Pasting gives the
+projection/scalar square. FiniteRingCompactSupportProjection makes its projection
+maps invertible on the bounded intrinsically constructible inputs omega_A and K.
+Transpose the tensor map h using inverse projection followed by the counit at A_Y.
+The projection square, naturality and the counit equation defining c identify the
+two tensor-map transposes, hence c (h_A)_B = h_B rho. Choose one positive ell-power
+annihilating both A and B. finiteGeneralRingSmoothPurity identifies each orientation
+with extension of the same prime-power diagonal orientation. Clause (2), already
+stated above, gives delta (o_A)_B = o_B; exponent independence permits this common
+choice. Finally gamma_R = h_R (1 tensor o_R). Substitute the two equalities to obtain
+c (gamma_A)_B = gamma_B lambda. Intrinsic finite-ring comparison identifies the fixed
+module presentation used here with the ordinary uncompleted constant-ring category. -/
+theorem reductionCompatibilities_purity
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p)
+    {X Y : Scheme.{u}}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f]
+    (d : ℕ) [SmoothOfRelativeDimension d f]
+    [HasCompactification f]
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (n : ℕ) (_hn : 1 ≤ n)
+    (hA : ((ℓ ^ n : ℕ) : ULift.{u + 1, u} A) = 0)
+    (hB : ((ℓ ^ n : ℕ) : ULift.{u + 1, u} B) = 0)
+    (geometry : Etale.FiniteRingSectionDeformation.Geometry d
+      (pullback.fst f f) (pullback.diagonal f))
+    (alphaA : Etale.dualizingComplex (ULift.{u + 1, u} A) f ≅
+      Etale.FiniteSmoothPurity.line (ULift.{u + 1, u} A) (ℓ ^ n) hA X d)
+    (alphaB : Etale.dualizingComplex (ULift.{u + 1, u} B) f ≅
+      Etale.FiniteSmoothPurity.line (ULift.{u + 1, u} B) (ℓ ^ n) hB X d)
+    (_ha : @Etale.FiniteSmoothPurity.OrientationNormalized (ULift.{u + 1, u} A) _ _
+      (ℓ ^ n) (pow_pos (Fact.out : ℓ.Prime).pos n) hA X Y
+      { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian
+          (X ↘ Spec (.of D.k))
+        toCompactSpace := QuasiCompact.compactSpace_of_compactSpace
+          (X ↘ Spec (.of D.k)) } f _
+      (@quasiCompact_of_compactSpace X Y f
+        (QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of D.k)))
+        (quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of D.k)))) _ d geometry
+      (finiteFieldPrimePower_isUnit D ℓ hℓ n
+        (X ↘ Spec (.of D.k))) alphaA)
+    (_hb : @Etale.FiniteSmoothPurity.OrientationNormalized (ULift.{u + 1, u} B) _ _
+      (ℓ ^ n) (pow_pos (Fact.out : ℓ.Prime).pos n) hB X Y
+      { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian
+          (X ↘ Spec (.of D.k))
+        toCompactSpace := QuasiCompact.compactSpace_of_compactSpace
+          (X ↘ Spec (.of D.k)) } f _
+      (@quasiCompact_of_compactSpace X Y f
+        (QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of D.k)))
+        (quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of D.k)))) _ d geometry
+      (finiteFieldPrimePower_isUnit D ℓ hℓ n
+        (X ↘ Spec (.of D.k))) alphaB)
+    (e : Etale.FiniteSmoothPurity.CoefficientLineComparison
+      (RingHom.ulift.{u + 1, u + 1, u, u} φ) (ℓ ^ n) (ℓ ^ n) hA hB X)
+    (K : Etale.FiniteSmoothPurity.proCategory (ULift.{u + 1, u} A) Y)
+    (_hK : Etale.FiniteSmoothPurity.IsCtf (ULift.{u + 1, u} A) Y K) :
+    (Etale.FiniteSmoothPurity.proScalar (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).map
+        (Etale.FiniteSmoothPurity.proGamma (ULift.{u + 1, u} A) f _ alphaA K) ≫
+        Etale.FiniteSmoothPurity.proCoefficientMap
+          (RingHom.ulift.{u + 1, u + 1, u, u} φ) f K =
+      Etale.FiniteSmoothPurity.proLambda f d e K ≫
+        Etale.FiniteSmoothPurity.proGamma (ULift.{u + 1, u} B) f _ alphaB
+          ((Etale.FiniteSmoothPurity.proScalar
+            (RingHom.ulift.{u + 1, u + 1, u, u} φ) Y).obj K) := by
+  let : IsNoetherian X :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian
+        (X ↘ Spec (.of D.k))
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace
+        (X ↘ Spec (.of D.k)) }
+  let : IsNoetherian Y :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian
+        (Y ↘ Spec (.of D.k))
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace
+        (Y ↘ Spec (.of D.k)) }
+  let : QuasiCompact f :=
+    @quasiCompact_of_compactSpace X Y f
+      (QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of D.k)))
+      (quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of D.k)))
+  have : Smooth f := SmoothOfRelativeDimension.smooth d f
+  have : LocallyOfFiniteType f := inferInstance
+  have ho := Etale.FiniteSmoothPurity.normalizedOrientation_scalar
+    (RingHom.ulift.{u + 1, u + 1, u, u} φ) (ℓ ^ n) (ℓ ^ n)
+    (pow_pos (Fact.out : ℓ.Prime).pos n) (pow_pos (Fact.out : ℓ.Prime).pos n)
+    (dvd_refl _) hA hB
+    (finiteFieldPrimePower_isUnit D ℓ hℓ n
+      (Y ↘ Spec (.of D.k))) f d geometry
+    (finiteFieldPrimePower_isUnit D ℓ hℓ n
+      (X ↘ Spec (.of D.k)))
+    (finiteFieldPrimePower_isUnit D ℓ hℓ n
+      (X ↘ Spec (.of D.k))) alphaA alphaB _ha _hb e
+  apply Etale.FiniteSmoothPurity.proGammaCoefficient
+    (RingHom.ulift.{u + 1, u + 1, u, u} φ) f (ℓ ^ n) (ℓ ^ n) hA hB d e
+      alphaA alphaB _ K _hK
+  intro L
+  exact Etale.FiniteSmoothPurity.ordinaryGammaCoefficient
+    (RingHom.ulift.{u + 1, u + 1, u, u} φ) f (ℓ ^ n) (ℓ ^ n) hA hB d e
+      alphaA alphaB ho L
 
 end AlgebraicGeometry.Etale.FiniteSmoothPurity
 

@@ -90,6 +90,23 @@ def tensorTower (K : CochainComplex (RegularQuotientCone.Modules R) ℤ)
     (P : CochainComplex (ℕᵒᵖ ⥤ RegularQuotientCone.Modules R) ℤ) :=
   koszulTowerComplex R (P.asFunctor ⋙ (total R).obj K)
 
+/-- Change the finite coefficient complex of a strict tensor tower by its actual map.
+Source: Bhatt--Scholze 3.5.5, quotient-change calculation
+(blueprint: def-sp-perfect-reduction-roos-comparison-data). -/
+def tensorTowerMap {K K' : CochainComplex (RegularQuotientCone.Modules R) ℤ}
+    (f : K ⟶ K') (P : CochainComplex (ℕᵒᵖ ⥤ RegularQuotientCone.Modules R) ℤ) :
+    tensorTower R K P ⟶ tensorTower R K' P :=
+  koszulTowerComplexMap R (Functor.whiskerLeft P.asFunctor ((total R).map f))
+
+/-- The degree-zero Koszul inclusion of the unit, with the specified cone normalization.
+Source: Bhatt--Scholze 3.5.5, two-term resolution
+(blueprint: def-sp-perfect-reduction-roos-comparison-data). -/
+def koszulZeroInclusion (m : ℕ) :
+    unit (derivedChangeRingIndependentCoefficients J R) ⟶ (principalKoszul R t m).X 0 :=
+  (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+    (unit (derivedChangeRingIndependentCoefficients J R))).inv ≫
+      (CochainComplex.mappingCone.inr (principalKoszulScalarComplex R t m)).f 0
+
 variable [HasDerivedCategory.{wR} (RegularQuotientCone.Modules R)]
   [HasDerivedCategory.{wR} (ℕᵒᵖ ⥤ RegularQuotientCone.Modules R)]
   [∀ m, HasDerivedCategory.{wA} (RegularQuotientCone.Modules (powerRing R t m))]
@@ -134,6 +151,44 @@ structure ComparisonData
   v : ∀ m, DerivedCategory.Q ⋙ V m ≅
     (restriction (powerProjection R t m)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
 
+/-- The `δ_shifted` condition of the fixed perfect-reduction comparison.
+Source: Bhatt--Scholze 3.5.5 and 3.1.11
+(blueprint: def-sp-perfect-reduction-roos-comparison-data). -/
+@[irreducible] def ComparisonData.δ_shifted
+    (d : ∀ m, DerivedChangeOfRingsCochainModel (powerProjection R t m))
+    (cR : RoosModel (RegularQuotientCone.Modules R))
+    (cA : ∀ m, RoosModel (RegularQuotientCone.Modules (powerRing R t m)))
+    (b : ComparisonData R t d cR cA) : Prop :=
+  ∀ m P i p n (h : p + (i + 1) = n + 1) j,
+    ι R (principalKoszul R t m) (roosF.obj P) p (i + 1) (n + 1) h ≫
+      (b.δ m P).hom.f (n + 1) ≫
+      (roosχ (tensorTower R (principalKoszul R t m) P) n).hom ≫ biprod.fst ≫
+      (Pi.π (fun k : ℕ ↦ (tensorTower R (principalKoszul R t m) P).asFunctor.obj
+        (op k)) j).f n =
+      p.negOnePow • ((tensor R).obj ((principalKoszul R t m).X p)).map
+        ((roosχ P i).hom ≫ biprod.fst ≫
+          (Pi.π (fun k : ℕ ↦ P.asFunctor.obj (op k)) j).f i) ≫
+        ι R (principalKoszul R t m) (P.asFunctor.obj (op j)) p i n (by omega)
+
+/-- The `δ_unshifted` condition of the fixed perfect-reduction comparison.
+Source: Bhatt--Scholze 3.5.5 and 3.1.11
+(blueprint: def-sp-perfect-reduction-roos-comparison-data). -/
+@[irreducible] def ComparisonData.δ_unshifted
+    (d : ∀ m, DerivedChangeOfRingsCochainModel (powerProjection R t m))
+    (cR : RoosModel (RegularQuotientCone.Modules R))
+    (cA : ∀ m, RoosModel (RegularQuotientCone.Modules (powerRing R t m)))
+    (b : ComparisonData R t d cR cA) : Prop :=
+  ∀ m P i p n (h : p + (i + 1) = n + 1) j,
+    ι R (principalKoszul R t m) (roosF.obj P) p (i + 1) (n + 1) h ≫
+      (b.δ m P).hom.f (n + 1) ≫
+      (roosχ (tensorTower R (principalKoszul R t m) P) n).hom ≫ biprod.snd ≫
+      (Pi.π (fun k : ℕ ↦ (tensorTower R (principalKoszul R t m) P).asFunctor.obj
+        (op k)) j).f (n + 1) =
+      ((tensor R).obj ((principalKoszul R t m).X p)).map
+        ((roosχ P i).hom ≫ biprod.snd ≫
+          (Pi.π (fun k : ℕ ↦ P.asFunctor.obj (op k)) j).f (i + 1)) ≫
+        ι R (principalKoszul R t m) (P.asFunctor.obj (op j)) p (i + 1) (n + 1) h
+
 /-- The `finite_free` condition of the fixed perfect-reduction comparison.
 Source: Bhatt--Scholze 3.5.5 and 3.1.11
 (blueprint: def-sp-perfect-reduction-roos-comparison-data). -/
@@ -163,6 +218,20 @@ Source: Bhatt--Scholze 3.5.5 and 3.1.11
       DerivedCategory.Q.map (b.δ m P).hom ≫
       DerivedCategory.Q.map (roosF.map
         (koszulTowerComplexMap R (Functor.whiskerLeft P.asFunctor (b.α m))))
+
+/-- The `koszul_changes` condition of the fixed perfect-reduction comparison.
+Source: Bhatt--Scholze 3.5.5 and 3.1.11
+(blueprint: def-sp-perfect-reduction-roos-comparison-data). -/
+@[irreducible] def ComparisonData.koszul_changes
+    (d : ∀ m, DerivedChangeOfRingsCochainModel (powerProjection R t m))
+    (cR : RoosModel (RegularQuotientCone.Modules R))
+    (cA : ∀ m, RoosModel (RegularQuotientCone.Modules (powerRing R t m)))
+    (b : ComparisonData R t d cR cA) : Prop :=
+  ∀ l m (h : l ≤ m) P,
+    ((total R).map
+      ((principalKoszulTower R t).map (homOfLE h).op)).app (roosF.obj P) ≫ (b.δ l P).hom =
+      (b.δ m P).hom ≫ roosF.map
+        (tensorTowerMap R ((principalKoszulTower R t).map (homOfLE h).op) P)
 
 set_option maxHeartbeats 1000000 in
 -- The kernel checks several independent coefficient-category endpoints here.

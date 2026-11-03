@@ -34,7 +34,7 @@ import all WeilConjectures.AlgebraicGeometry.AffineSpacePurity.AffineSpacePurity
 import all WeilConjectures.AlgebraicGeometry.AffineZeroPurity.AffineSpaceCoordinateBoundaries
 import all WeilConjectures.AlgebraicGeometry.AffineZeroPurity.AffineSpaceThomMap
 import all WeilConjectures.AlgebraicGeometry.AffineZeroPurity.AffineSpaceZeroSectionConstructions
-
+public import WeilConjectures.AlgebraicGeometry.CoordinateDivisorBaseChange
 
 /-! # Pullback of the supported coordinate product -/
 
@@ -116,7 +116,6 @@ private theorem targetPullbackIso_zero (P : PurityFiniteSetting.{u}) (n : ℕ)
   apply Iso.ext
   exact Category.id_comp _
 
-
 private theorem cupZero_base_irrel (Q : PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (aX bX : X ⟶ Spec (.of Q.field.k))
     (i : Z ⟶ X) (j : W ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j]
@@ -177,7 +176,9 @@ private theorem coordinateProduct_pullback (P : PurityFiniteSetting.{u}) (n : �
     with_unfolding_all simpa only [Category.assoc, Iso.hom_inv_id_assoc, List.length_nil,
       targetPullbackIso_zero, target, action, Functor.id_obj] using h
   | cons i is ih =>
-    obtain ⟨p, hp⟩ := divisor_pullback_exists g c i
+    let p := coordinateZeroLocusMap g c i
+    have hp : IsPullback p (inclusion B' c i) (inclusion B c i) (spaceMap g c) := by
+      simpa only [spaceMap] using coordinateZeroLocus_isPullback g c i
     let sq : ChosenCartesianSquare p (inclusion B' c i) (inclusion B c i)
         (spaceMap g c) :=
       ⟨hp.toCommSq, hp.isoPullback, hp.isoPullback_hom_fst, hp.isoPullback_hom_snd⟩

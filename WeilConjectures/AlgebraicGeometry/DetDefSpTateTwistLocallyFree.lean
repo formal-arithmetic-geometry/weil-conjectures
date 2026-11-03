@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Native.NativeIntegralTwistLocalL
 public import WeilConjectures.AlgebraicGeometry.Native.NativeFiniteTwistLocalLine
 public import WeilConjectures.SmoothPurity.Supporting.TwistPreservesFiniteness
 public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.AlgebraicGeometry.Tate.TateTwistIntegralLines
 
 /-! # Tate twists are well defined and locally free of rank one
 
@@ -112,6 +113,6 @@ theorem det_def_sp_tate_twist_locally_free
       (tateTwist X ℓ) := by
   have _ := embedding
   exact ⟨tateTwist_finite_locallyFree X ℓ,
-    AlgebraicGeometry.ProEtale.twist_preserves_native_finiteness ℓ E X⟩
+    AlgebraicGeometry.ProEtale.tateNativeFiniteness ℓ E X⟩
 
 end AlgebraicGeometry.Scheme

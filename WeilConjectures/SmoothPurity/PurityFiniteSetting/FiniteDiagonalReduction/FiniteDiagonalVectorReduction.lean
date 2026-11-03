@@ -123,7 +123,27 @@ theorem diagonalVectorReductionNative :
         proTwistMap d (nativeCoefficientLineComparison P m hm hmn f aY) =
       normalSectionMap P m hm hmn d f aY ≫
         (vectorFactor (P.finiteReductionSetting m hm) d f aY).hom := by
-  sorry
+  let Q := P.finiteReductionSetting m hm
+  letI := P.noetherian (f ≫ aY)
+  letI := (chartDiagonalNormalBundle d f).1
+  have hN : 0 < P.diagonalExponent := by
+    dsimp only [PurityFiniteSetting.diagonalExponent]
+    exact pow_pos P.coefficients.prime.out.pos P.level
+  have hM : 0 < Q.diagonalExponent := by
+    dsimp only [Q, PurityFiniteSetting.diagonalExponent]
+    exact pow_pos Q.coefficients.prime.out.pos Q.level
+  have hMN : Q.diagonalExponent ∣ P.diagonalExponent := by
+    dsimp only [Q, PurityFiniteSetting.diagonalExponent]
+    exact pow_dvd_pow P.coefficients.l hmn
+  have hcore := finiteBundleSectionAdjoint_scalar
+    (quotient P m hm hmn) P.diagonalExponent Q.diagonalExponent hN hM hMN
+    P.diagonalExponent_annihilates Q.diagonalExponent_annihilates X d
+    (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)
+    (P.diagonalExponent_isUnit (f ≫ aY))
+    (Q.diagonalExponent_isUnit (f ≫ aY))
+    (nativeCoefficientLineComparison P m hm hmn f aY)
+  exact (finiteDiagonalPresentationTransport P m hm hmn d f aY
+    (nativeCoefficientLineComparison P m hm hmn f aY)) hcore
 
 end Diagonal
 end WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction

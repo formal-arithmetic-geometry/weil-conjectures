@@ -193,6 +193,107 @@ private theorem etaleBounded_iff (T : Scheme.{u}) (A : Type (u + 1))
       · exact (DerivedCategory.isGE_iff K a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _))
       · exact (DerivedCategory.isLE_iff K b).1 hb i hi
 
+private theorem etaleTorAmplitude_iff (T : Scheme.{u}) (A : Type (u + 1))
+    [CommRing A] (K : Etale.DerivedCategoryModule A T) (a b : ℤ) :
+    Etale.DerivedCategory.hasTorAmplitudeIn A T a b K ↔
+      Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) T a b K := by
+  refine ⟨fun h M ↦ ?_, fun h M i hi ↦ ?_⟩
+  · rw [_root_.DerivedCategory.homologyConcentratedIn_iff]
+    exact ⟨(_root_.DerivedCategory.isGE_iff _ a).2 fun i hi ↦ h M i (.inl hi),
+      (_root_.DerivedCategory.isLE_iff _ b).2 fun i hi ↦ h M i (.inr hi)⟩
+  · obtain ⟨ha, hb⟩ := h M
+    rcases hi with hi | hi
+    · exact (_root_.DerivedCategory.isGE_iff _ a).1 ha i hi
+    · exact (_root_.DerivedCategory.isLE_iff _ b).1 hb i hi
+
+/-- Pullback of a finite-Tor constructible object has the required finite-Tor domain.
+Source: def-pur-smooth-pullback-exchange, domains
+(blueprint: def-pur-smooth-pullback-exchange).
+Proof: inverse image is exact, preserves flat modules, and sends a bounded flat
+model to a bounded flat model in the same Tor interval. Pull back the finite
+constructible stratification and use the canonical finite-coefficient realization.
+This proves the intrinsic finiteTorConstructible predicate without any flatness,
+smoothness or properness requirement on the base morphism. -/
+theorem finiteReductionBaseChangeInput (K : Scheme.proEtaleDerivedCategory Y P.Ring)
+    (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K) :
+    finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y'
+      ((P.finiteReductionPullback v).obj K) := by
+  classical
+  let A := P.Ring
+  let B := P.Coefficient
+  let := Scheme.sfIntrinsicModuleEquivalence_functor_additive A Y
+  let := Scheme.sfIntrinsicModuleEquivalence_functor_additive A Y'
+  let ν := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) Y
+  let E := Scheme.sfIntrinsicDerivedEquivalence Y A
+  obtain ⟨hconstruct, a, b, ht⟩ := hK
+  obtain ⟨c, hc⟩ := hconstruct.1.bddBelow
+  obtain ⟨e, he⟩ := hconstruct.1.bddAbove
+  have hvan : ∀ i : ℤ, (i < min c e ∨ e < i) →
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj K) := by
+    intro i hi
+    by_contra hz
+    rcases hi with hi | hi
+    · exact (not_lt_of_ge (hc hz)) (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (not_lt_of_ge (he hz)) hi
+  obtain ⟨J, ⟨eJ⟩⟩ := ((Scheme.finiteRing_constructibleDerived_origin Y A).2.2.1 K).mpr
+    ⟨hconstruct.2, min c e, e, min_le_right _ _, hvan⟩
+  let ecomp := (Functor.mapDerivedCategoryCompIso ν
+    (Scheme.sfIntrinsicModuleEquivalence Y A).functor).app J.obj
+  let eK : ν.mapDerivedCategory.obj J.obj ≅ E.inverse.obj K :=
+    E.unitIso.app (ν.mapDerivedCategory.obj J.obj) ≪≫
+      E.inverse.mapIso (ecomp.symm ≪≫ eJ)
+  let J' := (Etale.upperStar (ModuleCat.{u + 1} B) v).mapDerivedCategory.obj J.obj
+  have hbc := (etaleBounded_iff Y B J.obj).mp J.property
+  have hbc' : Etale.DerivedCategory.isBoundedConstructible B Y' J' :=
+    (etaleBounded_iff Y' B J').mpr (hbc.mapDerivedCategory_upperStar v)
+  let ν' := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) Y'
+  let E' := Scheme.sfIntrinsicDerivedEquivalence Y' A
+  let square := (Functor.mapDerivedCategoryCompIso
+      (Etale.upperStar (ModuleCat.{u + 1} B) v) ν').symm ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} B) v).symm ≪≫
+    Functor.mapDerivedCategoryCompIso ν (ProEtale.upperStar (ModuleCat.{u + 1} B) v)
+  let eJ' : (ProEtale.finiteCoefficientIntrinsicDerivedComparison Y' A).obj J' ≅
+      (P.finiteReductionPullback v).obj K :=
+    (Functor.mapDerivedCategoryCompIso ν'
+      (Scheme.sfIntrinsicModuleEquivalence Y' A).functor).app J' ≪≫
+      E'.functor.mapIso ((square.app J.obj) ≪≫ (P.smoothPurityPullback v).mapIso eK)
+  have hout := ((Scheme.finiteRing_constructibleDerived_origin Y' A).2.2.1
+    ((P.finiteReductionPullback v).obj K)).mp ⟨⟨J', hbc'⟩, ⟨eJ'⟩⟩
+  have comparison (T : Scheme.{u}) (L : Etale.DerivedCategoryModule B T)
+      (hp : _root_.DerivedCategory.TStructure.t.plus L) :
+      Etale.DerivedCategory.hasTorAmplitudeIn B T a b L ↔
+        Scheme.HasProEtaleTorAmplitude T A
+          ((ProEtale.finiteCoefficientIntrinsicDerivedComparison T A).obj L) a b := by
+    let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) T
+    let R := ProEtale.finiteCoefficientIntrinsicRealization T A
+    let := Scheme.sfIntrinsicModuleEquivalence_functor_additive A T
+    let : R.Additive := ProEtale.finiteCoefficientIntrinsicRealization_additive T A
+    let : PreservesFiniteLimits R :=
+      ProEtale.finiteCoefficientIntrinsicRealization_preservesFiniteLimits T A
+    let : PreservesFiniteColimits R :=
+      ProEtale.finiteCoefficientIntrinsicRealization_preservesFiniteColimits T A
+    let e := (Functor.mapDerivedCategoryCompIso C R).app L
+    exact (ProEtale.comparison_torAmplitudeIn_iff A T a b ht.1 ⟨L, hp⟩).trans
+      ⟨fun h ↦ torAmplitude_of_iso T A e.symm a b h,
+        fun h ↦ torAmplitude_of_iso T A e a b h⟩
+  have htJ := (comparison Y J.obj hbc.1.1).mpr
+    (torAmplitude_of_iso Y A eJ.symm a b ht)
+  have htJ' : Etale.DerivedCategory.hasTorAmplitudeIn B Y' a b J' := by
+    apply (etaleTorAmplitude_iff Y' B J' a b).mpr
+    exact (Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} B) Y' a b).prop_of_iso
+      ((Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) v).app J.obj)
+      (Etale.torAmplitudeIn_leftDerivedUpperStar (ModuleCat.{u + 1} B) v a b
+        ((etaleTorAmplitude_iff Y B J.obj a b).mp htJ))
+  refine ⟨⟨?_, hout.1⟩, a, b, ?_⟩
+  · obtain ⟨c', e', _, hv⟩ := hout.2
+    apply (Set.finite_Icc c' e').subset
+    intro i hi
+    exact ⟨le_of_not_gt (fun h ↦ hi (hv i (.inl h))),
+      le_of_not_gt (fun h ↦ hi (hv i (.inr h)))⟩
+  · exact torAmplitude_of_iso Y' A eJ' a b
+      ((comparison Y' J' ((etaleBounded_iff Y' B J').mp hbc').1.1).mp htJ')
+
 section BaseChange
 variable (P : PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level)
 variable {X X' Y Y' : Scheme.{u}}

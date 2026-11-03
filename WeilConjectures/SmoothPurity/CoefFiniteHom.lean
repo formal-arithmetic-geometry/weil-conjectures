@@ -13,6 +13,14 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ten
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Trace
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarFlatModel
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformationOplax
+public import WeilConjectures.SixFunctors.GeneralFiniteHomConstructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.FiniteSiteInternalHomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SmoothPurity.CoefFiniteHomIsomorphisms
+public import WeilConjectures.SmoothPurity.CoefFiniteHomScalarTensorCoherence
 
 /-! # Finite coefficient internal-Hom comparison
 
@@ -354,28 +362,17 @@ def proEtaleCTF (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u}) :
     (ModuleCat.{u + 1} A) X
 
 /-- The actual Koszul braiding descending from the homotopy category. This merely
-specializes the upstream DerivedMonoidal.braiding', with its required colimit
-instances explicit. Source: Stacks 07A4, thm-coef-finite-hom proof, final paragraph
+specializes the upstream DerivedMonoidal.braiding' through its compact
+abstract-category wrapper. Source: Stacks 07A4, thm-coef-finite-hom proof, final paragraph
 (blueprint: thm-coef-finite-hom). -/
 @[irreducible]
 def finiteHomSymmetry
     {S : Type (u + 1)} [Category.{u} S] [EssentiallySmall.{u + 1} S]
     (J : GrothendieckTopology S) (A : Type (u + 1)) [CommRing A]
-    (K M : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))) :=
-  letI : HasColimitsOfShape ℤ (Sheaf J (ModuleCat.{u + 1} A)) :=
-    HasColimitsOfSize.has_colimits_of_shape ℤ
-  letI : HasExactColimitsOfShape ℤ (Sheaf J (ModuleCat.{u + 1} A)) :=
-    hasExactColimitsOfShape_int _
-  letI : ∀ T : Sheaf J (ModuleCat.{u + 1} A),
-      PreservesColimitsOfShape ℤ (tensorLeft T) := fun T ↦
-    letI : PreservesColimitsOfSize.{0, 0} (tensorLeft T) :=
-      (ihom.adjunction T).leftAdjoint_preservesColimits
-    PreservesColimitsOfSize.preservesColimitsOfShape
-  letI : ∀ T : Sheaf J (ModuleCat.{u + 1} A),
-      PreservesColimitsOfShape ℤ (tensorRight T) := fun T ↦
-    preservesColimitsOfShape_of_natIso (BraidedCategory.tensorLeftIsoTensorRight T)
-  DerivedMonoidal.braiding' DerivedCategory.Qh
-    (HomotopyCategory.quasiIso (Sheaf J (ModuleCat.{u + 1} A)) (.up ℤ)) K M
+    (K M : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))) :
+    K ⊗ M ≅ M ⊗ K := by
+  letI := DerivedCategory.braidedCategory' (Sheaf J (ModuleCat.{u + 1} A))
+  exact β_ K M
 
 /-- Evaluation in the H(K,M) tensor K order used in the blueprint, obtained from
 the upstream left-closed evaluation by the canonical signed symmetry.
@@ -951,6 +948,716 @@ structure FiniteCoefficientHomLaws
   homPro_source_ctf : finiteHomLaw_homPro_source_ctf X φ
   homPro_target_ctf : finiteHomLaw_homPro_target_ctf X φ
 
+private theorem finiteHomComparisonNaturality
+    {V W : Type*} [Category V] [Category W]
+    [MonoidalCategory V] [MonoidalCategory W] [MonoidalClosed V] [MonoidalClosed W]
+    (F : V ⥤ W) [F.Monoidal] {K K' M M' : V} (f : K' ⟶ K) (g : M ⟶ M') :
+    F.map ((MonoidalClosed.pre f).app M ≫ (ihom K').map g) ≫
+        (Functor.LaxMonoidal.ihomComparison F K').natTrans.app M' =
+      (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M ≫
+        (MonoidalClosed.pre (F.map f)).app (F.obj M) ≫
+        (ihom (F.obj K')).map (F.map g) := by
+  simp only [F.map_comp, Category.assoc]
+  have h := (Functor.LaxMonoidal.ihomComparison F K').natTrans.naturality g
+  dsimp only [Functor.comp_map] at h
+  rw [h]
+  simp only [← Category.assoc]
+  rw [Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app]
+
+private theorem finiteHomComparisonTranspose
+    {V W : Type*} [Category V] [Category W]
+    [MonoidalCategory V] [MonoidalCategory W] [MonoidalClosed V] [MonoidalClosed W]
+    (F : V ⥤ W) [F.Monoidal] {T K M : V} (t : T ⟶ (ihom K).obj M) :
+    F.map t ≫ (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M =
+      MonoidalClosed.curry
+        (Functor.LaxMonoidal.μ F K T ≫ F.map (MonoidalClosed.uncurry t)) := by
+  rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry,
+    ← MonoidalClosed.curry_natural_left, MonoidalClosed.uncurry_eq,
+    F.map_comp, ← Functor.LaxMonoidal.μ_natural_right_assoc]
+
+private theorem finiteHomComparisonComposition
+    {V W : Type*} [Category V] [Category W]
+    [MonoidalCategory V] [MonoidalCategory W] [MonoidalClosed V] [MonoidalClosed W]
+    (F : V ⥤ W) [F.Monoidal] (K M N : V) :
+    F.map (MonoidalClosed.comp K M N) ≫
+        (Functor.LaxMonoidal.ihomComparison F K).natTrans.app N =
+      Functor.OplaxMonoidal.δ F ((ihom K).obj M) ((ihom M).obj N) ≫
+        ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app M ⊗ₘ
+          (Functor.LaxMonoidal.ihomComparison F M).natTrans.app N) ≫
+        MonoidalClosed.comp (F.obj K) (F.obj M) (F.obj N) := by
+  rw [← cancel_epi (μ F ((ihom K).obj M) ((ihom M).obj N))]
+  simp only [Functor.Monoidal.μ_δ_assoc]
+  rw [finiteHomComparisonTranspose]
+  apply uncurry_injective
+  dsimp only [Functor.comp_obj]
+  rw [← curry_natural_left, uncurry_curry, uncurry_natural_left,
+    MonoidalClosed.comp_eq, uncurry_curry]
+  simp only [MonoidalClosed.comp_eq, uncurry_curry, compTranspose, F.map_comp]
+  rw [associativity_inv_assoc, ← μ_natural_left_assoc]
+  conv_rhs =>
+    simp only [tensorHom_def', whiskerLeft_comp, Category.assoc,
+      associator_inv_naturality_middle_assoc, associator_inv_naturality_right_assoc]
+    rw [← comp_whiskerRight_assoc, whisker_exchange_assoc]
+    simp only [ihomComparison_ev, comp_whiskerRight, Category.assoc]
+  dsimp only [Functor.id_obj]
+  rw [ihomComparison_ev F M N]
+
+private theorem finiteHomEtaleCTF_iff
+    {R : Type (u + 1)} [CommRing R] [Finite R] (X : Scheme.{u})
+    (K : EtaleDerived R X) :
+    etaleCTF R X K ↔
+      AlgebraicGeometry.Etale.DerivedCategory.constructibleFiniteTor (ModuleCat R) X K := by
+  constructor
+  · intro h
+    obtain ⟨hc, a, b, hab, hz⟩ := h.1
+    refine ⟨⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, ?_⟩, h.2⟩
+    · exact (DerivedCategory.isGE_iff K a).2 fun i hi ↦ hz i (.inl hi)
+    · exact (DerivedCategory.isLE_iff K b).2 fun i hi ↦ hz i (.inr hi)
+    · exact fun i ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1
+        (hc i)
+  · intro h
+    obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := h.1
+    refine ⟨⟨fun i ↦
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc i),
+      min a b, b, min_le_right _ _, ?_⟩, h.2⟩
+    intro i hi
+    exact hi.elim
+      (fun hi ↦ (DerivedCategory.isGE_iff K a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _)))
+      (fun hi ↦ (DerivedCategory.isLE_iff K b).1 hb i hi)
+
+private theorem finiteHomEtaleScalarCTF
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (X : Scheme.{u}) [IsNoetherian X] (φ : A →+* B) (K : EtaleDerived A X)
+    (hK : etaleCTF A X K) : etaleCTF B X ((etaleScalar X φ).obj K) := by
+  obtain ⟨a, b, ht⟩ := hK.2
+  have ht' := DerivedCategory.torAmplitudeIn.mono (min_le_left a b) le_rfl ht
+  obtain ⟨hc, c, d, hcd, hz⟩ := hK.1
+  let Kb : DerivedCategory.Bounded (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
+    ⟨K, ⟨⟨c, (DerivedCategory.isGE_iff K c).2 fun i hi ↦ hz i (.inl hi)⟩,
+      ⟨d, (DerivedCategory.isLE_iff K d).2 fun i hi ↦ hz i (.inr hi)⟩⟩⟩
+  obtain ⟨-, -, ⟨L, ⟨eL⟩⟩, hcons, htor⟩ :=
+    AlgebraicGeometry.Etale.exists_etaleScalarFlatModel X A B φ (min a b) b
+      (min_le_right _ _) Kb hc
+      (AlgebraicGeometry.Etale.hasTorAmplitudeIn_of_torAmplitudeIn ht')
+  let e := (finiteHomScalarAdjunction X.smallEtaleTopology φ).leftAdjointUniq
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))
+  have htor' :=
+    AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 htor
+  have hh := DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn htor'
+  have hfixed : etaleCTF B X
+      ((AlgebraicGeometry.ProEtale.pbcFixedScalarExtension X.smallEtaleTopology φ).obj K) := by
+    refine ⟨⟨hcons, min a b, b, min_le_right _ _, ?_⟩, _, _, htor'⟩
+    intro i hi
+    exact hi.elim
+      (fun hi ↦ (DerivedCategory.isGE_iff _ (min a b)).1 hh.1 i hi)
+      (fun hi ↦ (DerivedCategory.isLE_iff _ b).1 hh.2 i hi)
+  exact (finiteHomEtaleCTF_iff X _).2
+    (ObjectProperty.prop_of_iso
+      (AlgebraicGeometry.Etale.DerivedCategory.constructibleFiniteTor (ModuleCat B) X)
+      (e.app K).symm ((finiteHomEtaleCTF_iff X _).1 hfixed))
+
+private theorem finiteHomProOrigin
+    {A : Type (u + 1)} [CommRing A] [Finite A] (X : Scheme.{u})
+    (K : ProEtaleDerived A X) (hK : proEtaleCTF A X K) :
+    ∃ Ke : EtaleDerived A X, etaleCTF A X Ke ∧ Nonempty ((comparisonNu X).obj Ke ≅ K) := by
+  obtain ⟨⟨Ke, hKe, ⟨eK⟩⟩, a, b, ht⟩ := hK
+  refine ⟨Ke, (finiteHomEtaleCTF_iff X Ke).2 ⟨hKe, a, b, ?_⟩, ⟨eK⟩⟩
+  exact (AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff
+    a b Ke).1 ((DerivedCategory.torAmplitudeIn _ a b).prop_of_iso eK.symm ht)
+
+private theorem finiteHomProScalarCTF
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (X : Scheme.{u}) [IsNoetherian X] (φ : A →+* B) (K : ProEtaleDerived A X)
+    (hK : proEtaleCTF A X K) : proEtaleCTF B X ((proEtaleScalar X φ).obj K) := by
+  obtain ⟨Ke, hKe, ⟨eK⟩⟩ := finiteHomProOrigin X K hK
+  have he := finiteHomEtaleScalarCTF X φ Ke hKe
+  let e := (finiteHomRhoIso X φ).app Ke
+  exact (AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor
+    (ModuleCat B) X).prop_of_iso
+      (e.symm ≪≫ (proEtaleScalar X φ).mapIso eK)
+      (AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_mapDerivedCategory B
+        ((finiteHomEtaleCTF_iff X _).1 he))
+
+private theorem finiteHomComparisonRightEvaluation
+    {V W : Type*} [Category V] [Category W]
+    [MonoidalCategory V] [MonoidalCategory W] [MonoidalClosed V] [MonoidalClosed W]
+    [BraidedCategory V] [BraidedCategory W] (F : V ⥤ W) [F.Monoidal]
+    (hF : ∀ K M, (β_ (F.obj K) (F.obj M)).hom ≫ μ F M K =
+      μ F K M ≫ F.map (β_ K M).hom) (K M : V) :
+    ((ihomComparison F K).natTrans.app M ⊗ₘ 𝟙 (F.obj K)) ≫
+        (β_ ((ihom (F.obj K)).obj (F.obj M)) (F.obj K)).hom ≫
+        (ihom.ev (F.obj K)).app (F.obj M) =
+      μ F ((ihom K).obj M) K ≫ F.map
+        ((β_ ((ihom K).obj M) K).hom ≫ (ihom.ev K).app M) := by
+  dsimp only [Functor.comp_obj]
+  simp only [tensorHom_id, F.map_comp]
+  rw [BraidedCategory.braiding_naturality_left_assoc, ihomComparison_ev]
+  rw [← Category.assoc, hF, Category.assoc]
+
+private theorem finiteHomMonoidalIsoUnit
+    {V W : Type*} [Category V] [Category W]
+    [MonoidalCategory V] [MonoidalCategory W]
+    {F G : V ⥤ W} [F.Monoidal] [G.Monoidal]
+    (e : F ≅ G) [NatTrans.IsMonoidal e.hom] :
+    e.hom.app (𝟙_ V) ≫ η G = η F := by
+  rw [← cancel_epi (ε F), ← Category.assoc, NatTrans.IsMonoidal.unit, ε_η, ε_η]
+
+private theorem finiteHomComparisonIso
+    {V W : Type*} [Category V] [Category W]
+    [MonoidalCategory V] [MonoidalCategory W] [MonoidalClosed V] [MonoidalClosed W]
+    {F G : V ⥤ W} [F.Monoidal] [G.Monoidal]
+    (e : F ≅ G) [NatTrans.IsMonoidal e.hom] (K M : V) :
+    e.hom.app ((ihom K).obj M) ≫ (ihomComparison G K).natTrans.app M =
+      (ihomComparison F K).natTrans.app M ≫
+        (pre (e.inv.app K)).app (F.obj M) ≫
+        (ihom (G.obj K)).map (e.hom.app M) := by
+  have h := ihomComparison_app_comp_map_app e.inv K M
+  have h' := congrArg (fun f ↦ e.hom.app ((ihom K).obj M) ≫ f ≫
+    (ihom (G.obj K)).map (e.hom.app M)) h
+  simp only [← Functor.map_comp, Iso.inv_hom_id_app,
+    Category.assoc, Iso.hom_inv_id_app_assoc] at h'
+  dsimp only [Functor.comp_obj] at h' ⊢
+  simpa only [(ihom (G.obj K)).map_id, Category.comp_id] using h'
+
+private theorem finiteHomComparisonIdentity
+    {V : Type*} [Category V] [MonoidalCategory V] [MonoidalClosed V]
+    (K M : V) : (ihomComparison (𝟭 V) K).natTrans.app M = 𝟙 _ := by
+  dsimp only [Functor.comp_obj, Functor.id_obj]
+  rw [ihomComparison_app_eq_curry]
+  simp only [Functor.LaxMonoidal.id_μ, Functor.id_map, Category.id_comp]
+  simpa only [uncurry_eq, MonoidalCategory.whiskerLeft_id, Category.id_comp] using
+    (curry_uncurry (𝟙 ((ihom K).obj M)))
+
+private theorem tensorEtale_iso : finiteHomLaw_tensorEtale_iso X φ := by
+  unfold finiteHomLaw_tensorEtale_iso
+  intro K M
+  unfold etaleTensor
+  infer_instance
+
+private theorem tensorPro_iso : finiteHomLaw_tensorPro_iso X φ := by
+  letI : (proEtaleScalar X φ).Monoidal := (proCore X φ).toMonoidal
+  unfold finiteHomLaw_tensorPro_iso
+  intro K M
+  unfold proTensor
+  change IsIso ((proCore X φ).μIso K M).inv
+  infer_instance
+
+private theorem tensor_associator_etale : finiteHomLaw_tensor_associator_etale X φ :=
+  by
+    unfold finiteHomLaw_tensor_associator_etale
+    exact (etaleCore X φ).associativity
+
+private theorem tensor_left_unit_etale : finiteHomLaw_tensor_left_unit_etale X φ :=
+  by
+    unfold finiteHomLaw_tensor_left_unit_etale
+    exact (etaleCore X φ).left_unitality
+
+private theorem tensor_right_unit_etale : finiteHomLaw_tensor_right_unit_etale X φ :=
+  by
+    unfold finiteHomLaw_tensor_right_unit_etale
+    exact (etaleCore X φ).right_unitality
+
+private theorem tensor_associator_pro : finiteHomLaw_tensor_associator_pro X φ :=
+  by
+    unfold finiteHomLaw_tensor_associator_pro
+    exact (proCore X φ).associativity
+
+private theorem tensor_left_unit_pro : finiteHomLaw_tensor_left_unit_pro X φ :=
+  by
+    unfold finiteHomLaw_tensor_left_unit_pro
+    exact (proCore X φ).left_unitality
+
+private theorem tensor_right_unit_pro : finiteHomLaw_tensor_right_unit_pro X φ :=
+  by
+    unfold finiteHomLaw_tensor_right_unit_pro
+    exact (proCore X φ).right_unitality
+
+private theorem evaluation_transpose_etale : finiteHomLaw_evaluation_transpose_etale X φ := by
+  letI : (etaleScalar X φ).Monoidal := (etaleCore X φ).toMonoidal
+  unfold finiteHomLaw_evaluation_transpose_etale etaleHomTranspose
+  intro K M
+  unfold etaleHom
+  exact Functor.LaxMonoidal.ihomComparison_app_eq_curry _ _ _
+
+private theorem evaluation_transpose_pro : finiteHomLaw_evaluation_transpose_pro X φ := by
+  letI : (proEtaleScalar X φ).Monoidal := (proCore X φ).toMonoidal
+  unfold finiteHomLaw_evaluation_transpose_pro proHomTranspose
+  intro K M
+  unfold proHom
+  exact Functor.LaxMonoidal.ihomComparison_app_eq_curry _ _ _
+
+private theorem evaluation_etale : finiteHomLaw_evaluation_etale X φ := by
+  unfold finiteHomLaw_evaluation_etale
+  intro K M
+  letI : (etaleScalar X φ).Monoidal := (etaleCore X φ).toMonoidal
+  unfold etaleHom
+  exact Functor.LaxMonoidal.ihomComparison_ev _ _ _
+
+private theorem evaluation_pro : finiteHomLaw_evaluation_pro X φ := by
+  unfold finiteHomLaw_evaluation_pro
+  intro K M
+  letI : (proEtaleScalar X φ).Monoidal := (proCore X φ).toMonoidal
+  unfold proHom
+  exact Functor.LaxMonoidal.ihomComparison_ev _ _ _
+
+private theorem unique_transpose_etale : finiteHomLaw_unique_transpose_etale X φ := by
+  unfold finiteHomLaw_unique_transpose_etale
+  intro K M w hw
+  apply MonoidalClosed.uncurry_injective
+  have h := evaluation_etale X φ
+  unfold finiteHomLaw_evaluation_etale at h
+  exact hw.trans (h K M).symm
+
+private theorem unique_transpose_pro : finiteHomLaw_unique_transpose_pro X φ := by
+  unfold finiteHomLaw_unique_transpose_pro
+  intro K M w hw
+  apply MonoidalClosed.uncurry_injective
+  have h := evaluation_pro X φ
+  unfold finiteHomLaw_evaluation_pro at h
+  exact hw.trans (h K M).symm
+
+private theorem tensor_naturality_etale : finiteHomLaw_tensor_naturality_etale X φ := by
+  letI := (etaleCore X φ).toMonoidal
+  unfold finiteHomLaw_tensor_naturality_etale etaleTensor
+  intro K K' M M' f g
+  exact (Functor.OplaxMonoidal.δ_natural (etaleScalar X φ) f g).symm
+
+private theorem tensor_naturality_pro : finiteHomLaw_tensor_naturality_pro X φ := by
+  letI := (proCore X φ).toMonoidal
+  unfold finiteHomLaw_tensor_naturality_pro proTensor
+  intro K K' M M' f g
+  exact (Functor.OplaxMonoidal.δ_natural (proEtaleScalar X φ) f g).symm
+
+private theorem naturality_etale : finiteHomLaw_naturality_etale X φ := by
+  letI := (etaleCore X φ).toMonoidal
+  unfold finiteHomLaw_naturality_etale etaleHom
+  intro K K' M M' f g
+  exact finiteHomComparisonNaturality (etaleScalar X φ) f g
+
+private theorem naturality_pro : finiteHomLaw_naturality_pro X φ := by
+  letI := (proCore X φ).toMonoidal
+  unfold finiteHomLaw_naturality_pro proHom
+  intro K K' M M' f g
+  exact finiteHomComparisonNaturality (proEtaleScalar X φ) f g
+
+private theorem tensor_hom_adjunction_etale :
+    finiteHomLaw_tensor_hom_adjunction_etale X φ := by
+  letI := (etaleCore X φ).toMonoidal
+  unfold finiteHomLaw_tensor_hom_adjunction_etale etaleHom
+  intro K U M f
+  apply MonoidalClosed.uncurry_injective
+  rw [MonoidalClosed.uncurry_natural_left, MonoidalClosed.uncurry_eq,
+    Functor.LaxMonoidal.ihomComparison_ev,
+    Functor.LaxMonoidal.μ_natural_right_assoc, ← Functor.map_comp,
+    ← MonoidalClosed.uncurry_eq, MonoidalClosed.uncurry_curry,
+    MonoidalClosed.uncurry_curry]
+  rfl
+
+private theorem tensor_hom_adjunction_pro :
+    finiteHomLaw_tensor_hom_adjunction_pro X φ := by
+  letI := (proCore X φ).toMonoidal
+  unfold finiteHomLaw_tensor_hom_adjunction_pro proHom
+  intro K U M f
+  apply MonoidalClosed.uncurry_injective
+  rw [MonoidalClosed.uncurry_natural_left, MonoidalClosed.uncurry_eq,
+    Functor.LaxMonoidal.ihomComparison_ev,
+    Functor.LaxMonoidal.μ_natural_right_assoc, ← Functor.map_comp,
+    ← MonoidalClosed.uncurry_eq, MonoidalClosed.uncurry_curry,
+    MonoidalClosed.uncurry_curry]
+  rfl
+
+private theorem composition_etale : finiteHomLaw_composition_etale X φ := by
+  letI := (etaleCore X φ).toMonoidal
+  unfold finiteHomLaw_composition_etale etaleTensor etaleHom
+  intro K M N
+  exact finiteHomComparisonComposition (etaleScalar X φ) K M N
+
+private theorem composition_pro : finiteHomLaw_composition_pro X φ := by
+  letI := (proCore X φ).toMonoidal
+  unfold finiteHomLaw_composition_pro proTensor proHom
+  intro K M N
+  exact finiteHomComparisonComposition (proEtaleScalar X φ) K M N
+
+private theorem homEtale_source_ctf : finiteHomLaw_homEtale_source_ctf X φ := by
+  haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  haveI : IsNoetherian X :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) }
+  unfold finiteHomLaw_homEtale_source_ctf
+  intro K M hK hM
+  apply finiteHomEtaleScalarCTF X φ
+  exact (finiteHomEtaleCTF_iff X _).2
+    (generalFiniteHomConstructible hbase ell (isUnit_iff_ne_zero.mpr hell) A hA
+      (X ↘ Spec (.of k)) ((finiteHomEtaleCTF_iff X K).1 hK)
+      ((finiteHomEtaleCTF_iff X M).1 hM))
+
+private theorem homEtale_target_ctf : finiteHomLaw_homEtale_target_ctf X φ := by
+  haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  haveI : IsNoetherian X :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) }
+  unfold finiteHomLaw_homEtale_target_ctf
+  intro K M hK hM
+  exact (finiteHomEtaleCTF_iff X _).2
+    (generalFiniteHomConstructible hbase ell (isUnit_iff_ne_zero.mpr hell) B hB
+      (X ↘ Spec (.of k))
+      ((finiteHomEtaleCTF_iff X _).1 (finiteHomEtaleScalarCTF X φ K hK))
+      ((finiteHomEtaleCTF_iff X _).1 (finiteHomEtaleScalarCTF X φ M hM)))
+
+private theorem finiteHomProHomCTF
+    {R : Type (u + 1)} [CommRing R] [Finite R]
+    (hR : ∃ n : ℕ, (ell ^ n : R) = 0) (K M : ProEtaleDerived R X)
+    (hK : proEtaleCTF R X K) (hM : proEtaleCTF R X M) :
+    proEtaleCTF R X ((ihom K).obj M) := by
+  haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  haveI : IsNoetherian X :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) }
+  obtain ⟨Ke, hKe, ⟨eK⟩⟩ := finiteHomProOrigin X K hK
+  obtain ⟨Me, hMe, ⟨eM⟩⟩ := finiteHomProOrigin X M hM
+  have ht : ∃ a b : ℤ,
+      AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn R X a b Ke := by
+    obtain ⟨a, b, ht⟩ := hKe.2
+    exact ⟨a, b, AlgebraicGeometry.Etale.hasTorAmplitudeIn_of_torAmplitudeIn ht⟩
+  haveI : IsIso (comparisonBeta X Ke Me) := by
+    change IsIso (AlgebraicGeometry.ProEtale.siteComparisonEvaluationHom (ModuleCat R) X Ke Me)
+    exact (AlgebraicGeometry.ProEtale.DerivedCategory.isIso_finiteSiteInternalHomComparison
+      R Ke Me hKe.1 ht ((finiteHomEtaleCTF_iff X Me).1 hMe).1.1.1).1
+  let eH := asIso (comparisonBeta X Ke Me) ≪≫
+    ((MonoidalClosed.internalHom.mapIso eK.op.symm).app ((comparisonNu X).obj Me)) ≪≫
+    (ihom K).mapIso eM
+  exact (AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor
+    (ModuleCat R) X).prop_of_iso eH
+      (AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_mapDerivedCategory R
+        (generalFiniteHomConstructible hbase ell (isUnit_iff_ne_zero.mpr hell) R hR
+          (X ↘ Spec (.of k)) ((finiteHomEtaleCTF_iff X Ke).1 hKe)
+          ((finiteHomEtaleCTF_iff X Me).1 hMe)))
+
+private theorem homPro_source_ctf : finiteHomLaw_homPro_source_ctf X φ := by
+  haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  haveI : IsNoetherian X :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) }
+  unfold finiteHomLaw_homPro_source_ctf
+  intro K M hK hM
+  exact finiteHomProScalarCTF X φ _ (finiteHomProHomCTF X k hbase ell hell hA K M hK hM)
+
+private theorem homPro_target_ctf : finiteHomLaw_homPro_target_ctf X φ := by
+  haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  haveI : IsNoetherian X :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) }
+  unfold finiteHomLaw_homPro_target_ctf
+  intro K M hK hM
+  exact finiteHomProHomCTF X k hbase ell hell hB _ _
+    (finiteHomProScalarCTF X φ K hK) (finiteHomProScalarCTF X φ M hM)
+
+private theorem successive_etale
+    (ht : finiteHomLaw_tensor_successive_etale X φ ψ) :
+    finiteHomLaw_unit_successive_etale X φ ψ ∧
+      finiteHomLaw_successive_etale X φ ψ := by
+  unfold finiteHomLaw_tensor_successive_etale etaleTensor at ht
+  letI := (etaleCore X φ).toMonoidal
+  letI := (etaleCore X ψ).toMonoidal
+  letI := (etaleCore X (ψ.comp φ)).toMonoidal
+  let e : etaleScalar X φ ⋙ etaleScalar X ψ ≅ etaleScalar X (ψ.comp φ) :=
+    finiteHomScalarComp X.smallEtaleTopology φ ψ
+  haveI : NatTrans.IsMonoidal e.hom := by
+    apply NatTrans.IsMonoidal.of_isIso_of_δ
+    simpa only [e, Functor.OplaxMonoidal.comp_δ,
+      Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal,
+      Functor.CoreMonoidal.toOplaxMonoidal_δ, Category.assoc, id_eq] using ht
+  constructor
+  · unfold finiteHomLaw_unit_successive_etale
+    simpa only [e, Functor.OplaxMonoidal.comp_η,
+      Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal,
+      Functor.CoreMonoidal.toOplaxMonoidal_η] using finiteHomMonoidalIsoUnit e
+  · unfold finiteHomLaw_successive_etale etaleHom
+    intro K M
+    simpa only [Functor.LaxMonoidal.ihomComparison_comp_app, Functor.comp_obj, Category.assoc] using
+      finiteHomComparisonIso e K M
+
+private theorem identity_etale
+    (ht : finiteHomLaw_tensor_identity_etale (A := A) X) :
+    finiteHomLaw_unit_identity_etale (A := A) X ∧
+      finiteHomLaw_identity_etale (A := A) X := by
+  unfold finiteHomLaw_tensor_identity_etale etaleTensor at ht
+  letI := (etaleCore X (RingHom.id A)).toMonoidal
+  let e : etaleScalar X (RingHom.id A) ≅ 𝟭 (EtaleDerived A X) :=
+    finiteHomScalarId X.smallEtaleTopology A
+  haveI : NatTrans.IsMonoidal e.hom := by
+    apply NatTrans.IsMonoidal.of_isIso_of_δ
+    intro K M
+    simpa only [e, Functor.OplaxMonoidal.id_δ,
+      Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal,
+      Functor.CoreMonoidal.toOplaxMonoidal_δ, Category.comp_id, id_eq] using (ht K M).symm
+  constructor
+  · unfold finiteHomLaw_unit_identity_etale
+    simpa only [e, Functor.OplaxMonoidal.id_η,
+      Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal,
+      Functor.CoreMonoidal.toOplaxMonoidal_η, Category.comp_id] using
+      (finiteHomMonoidalIsoUnit e).symm
+  · unfold finiteHomLaw_identity_etale etaleHom
+    intro K M
+    have h := finiteHomComparisonIso e K M
+    rw [finiteHomComparisonIdentity] at h
+    dsimp only [Functor.comp_obj, Functor.id_obj] at h
+    simpa only [e, Category.comp_id] using h
+
+private theorem successive_pro
+    (ht : finiteHomLaw_tensor_successive_pro X φ ψ) :
+    finiteHomLaw_unit_successive_pro X φ ψ ∧
+      finiteHomLaw_successive_pro X φ ψ := by
+  unfold finiteHomLaw_tensor_successive_pro proTensor at ht
+  letI := (proCore X φ).toMonoidal
+  letI := (proCore X ψ).toMonoidal
+  letI := (proCore X (ψ.comp φ)).toMonoidal
+  let e : proEtaleScalar X φ ⋙ proEtaleScalar X ψ ≅ proEtaleScalar X (ψ.comp φ) :=
+    finiteHomScalarComp (ProEt.topology X) φ ψ
+  haveI : NatTrans.IsMonoidal e.hom := by
+    apply NatTrans.IsMonoidal.of_isIso_of_δ
+    simpa only [e, Functor.OplaxMonoidal.comp_δ,
+      Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal,
+      Functor.CoreMonoidal.toOplaxMonoidal_δ, Category.assoc, id_eq] using ht
+  constructor
+  · unfold finiteHomLaw_unit_successive_pro
+    simpa only [e, Functor.OplaxMonoidal.comp_η,
+      Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal,
+      Functor.CoreMonoidal.toOplaxMonoidal_η] using finiteHomMonoidalIsoUnit e
+  · unfold finiteHomLaw_successive_pro proHom
+    intro K M
+    simpa only [Functor.LaxMonoidal.ihomComparison_comp_app, Functor.comp_obj, Category.assoc] using
+      finiteHomComparisonIso e K M
+
+private theorem identity_pro
+    (ht : finiteHomLaw_tensor_identity_pro (A := A) X) :
+    finiteHomLaw_unit_identity_pro (A := A) X ∧
+      finiteHomLaw_identity_pro (A := A) X := by
+  unfold finiteHomLaw_tensor_identity_pro proTensor at ht
+  letI := (proCore X (RingHom.id A)).toMonoidal
+  let e : proEtaleScalar X (RingHom.id A) ≅ 𝟭 (ProEtaleDerived A X) :=
+    finiteHomScalarId (ProEt.topology X) A
+  haveI : NatTrans.IsMonoidal e.hom := by
+    apply NatTrans.IsMonoidal.of_isIso_of_δ
+    intro K M
+    simpa only [e, Functor.OplaxMonoidal.id_δ,
+      Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal,
+      Functor.CoreMonoidal.toOplaxMonoidal_δ, Category.comp_id, id_eq] using (ht K M).symm
+  constructor
+  · unfold finiteHomLaw_unit_identity_pro
+    simpa only [e, Functor.OplaxMonoidal.id_η,
+      Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal,
+      Functor.CoreMonoidal.toOplaxMonoidal_η, Category.comp_id] using
+      (finiteHomMonoidalIsoUnit e).symm
+  · unfold finiteHomLaw_identity_pro proHom
+    intro K M
+    have h := finiteHomComparisonIso e K M
+    rw [finiteHomComparisonIdentity] at h
+    dsimp only [Functor.comp_obj, Functor.id_obj] at h
+    simpa only [e, Category.comp_id] using h
+
+/-- The etale half of the finite-Hom law package.
+
+This is the devissage and closed-Hom comparison on the ordinary etale site.  It
+is separated from the pro-etale half so that the two site arguments can be
+proved independently and then assembled by the main theorem.
+(blueprint: thm-coef-finite-hom)
+-/
+structure FiniteCoefficientHomEtaleLaws
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C]
+    (X : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C) where
+  tensorEtale_iso : finiteHomLaw_tensorEtale_iso X φ
+  vEtale_iso : finiteHomLaw_vEtale_iso X φ
+  tensor_associator_etale : finiteHomLaw_tensor_associator_etale X φ
+  tensor_left_unit_etale : finiteHomLaw_tensor_left_unit_etale X φ
+  tensor_right_unit_etale : finiteHomLaw_tensor_right_unit_etale X φ
+  tensor_symmetry_etale : finiteHomLaw_tensor_symmetry_etale X φ
+  tensor_naturality_etale : finiteHomLaw_tensor_naturality_etale X φ
+  evaluation_transpose_etale : finiteHomLaw_evaluation_transpose_etale X φ
+  successive_etale : finiteHomLaw_successive_etale X φ ψ
+  identity_etale : finiteHomLaw_identity_etale (A := A) X
+  evaluation_etale : finiteHomLaw_evaluation_etale X φ
+  evaluation_right_etale : finiteHomLaw_evaluation_right_etale X φ
+  unique_transpose_etale : finiteHomLaw_unique_transpose_etale X φ
+  naturality_etale : finiteHomLaw_naturality_etale X φ
+  tensor_hom_adjunction_etale : finiteHomLaw_tensor_hom_adjunction_etale X φ
+  composition_etale : finiteHomLaw_composition_etale X φ
+  tensor_successive_etale : finiteHomLaw_tensor_successive_etale X φ ψ
+  unit_successive_etale : finiteHomLaw_unit_successive_etale X φ ψ
+  tensor_identity_etale : finiteHomLaw_tensor_identity_etale (A := A) X
+  unit_identity_etale : finiteHomLaw_unit_identity_etale (A := A) X
+  homEtale_source_ctf : finiteHomLaw_homEtale_source_ctf X φ
+  homEtale_target_ctf : finiteHomLaw_homEtale_target_ctf X φ
+
+/-- The pro-etale half of the finite-Hom law package.
+
+This is the finite-duality transport and coherence argument on the pro-etale
+site.  It is an independent sub-conclusion of `thmCoefFiniteHom`.
+(blueprint: thm-coef-finite-hom)
+-/
+structure FiniteCoefficientHomProLaws
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C]
+    (X : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C) where
+  tensorPro_iso : finiteHomLaw_tensorPro_iso X φ
+  vPro_iso : finiteHomLaw_vPro_iso X φ
+  tensor_associator_pro : finiteHomLaw_tensor_associator_pro X φ
+  tensor_left_unit_pro : finiteHomLaw_tensor_left_unit_pro X φ
+  tensor_right_unit_pro : finiteHomLaw_tensor_right_unit_pro X φ
+  tensor_symmetry_pro : finiteHomLaw_tensor_symmetry_pro X φ
+  tensor_naturality_pro : finiteHomLaw_tensor_naturality_pro X φ
+  evaluation_transpose_pro : finiteHomLaw_evaluation_transpose_pro X φ
+  successive_pro : finiteHomLaw_successive_pro X φ ψ
+  identity_pro : finiteHomLaw_identity_pro (A := A) X
+  evaluation_pro : finiteHomLaw_evaluation_pro X φ
+  evaluation_right_pro : finiteHomLaw_evaluation_right_pro X φ
+  unique_transpose_pro : finiteHomLaw_unique_transpose_pro X φ
+  naturality_pro : finiteHomLaw_naturality_pro X φ
+  tensor_hom_adjunction_pro : finiteHomLaw_tensor_hom_adjunction_pro X φ
+  composition_pro : finiteHomLaw_composition_pro X φ
+  tensor_successive_pro : finiteHomLaw_tensor_successive_pro X φ ψ
+  unit_successive_pro : finiteHomLaw_unit_successive_pro X φ ψ
+  tensor_identity_pro : finiteHomLaw_tensor_identity_pro (A := A) X
+  unit_identity_pro : finiteHomLaw_unit_identity_pro (A := A) X
+  homPro_source_ctf : finiteHomLaw_homPro_source_ctf X φ
+  homPro_target_ctf : finiteHomLaw_homPro_target_ctf X φ
+
+private theorem finiteHomEtaleLawsOfComparison
+    (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
+    (ell : ℕ) [Fact ell.Prime] (hell : (ell : k) ≠ 0)
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C]
+    (φ : A →+* B) (ψ : B →+* C)
+    (hA : ∃ n : ℕ, (ell ^ n : A) = 0)
+    (hB : ∃ n : ℕ, (ell ^ n : B) = 0)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))]
+    (hi : finiteHomLaw_vEtale_iso X φ)
+    (hbraid : finiteHomLaw_tensor_symmetry_etale X φ)
+    (heval : finiteHomLaw_evaluation_right_etale X φ)
+    (hs : finiteHomLaw_tensor_successive_etale X φ ψ)
+    (hid : finiteHomLaw_tensor_identity_etale (A := A) X) :
+    Nonempty (FiniteCoefficientHomEtaleLaws X φ ψ) := by
+  have hc := successive_etale X φ ψ hs
+  have hci := identity_etale X hid
+  exact ⟨{
+    tensorEtale_iso := tensorEtale_iso X φ
+    vEtale_iso := hi
+    tensor_associator_etale := tensor_associator_etale X φ
+    tensor_left_unit_etale := tensor_left_unit_etale X φ
+    tensor_right_unit_etale := tensor_right_unit_etale X φ
+    tensor_symmetry_etale := hbraid
+    tensor_naturality_etale := tensor_naturality_etale X φ
+    evaluation_transpose_etale := evaluation_transpose_etale X φ
+    evaluation_etale := evaluation_etale X φ
+    evaluation_right_etale := heval
+    unique_transpose_etale := unique_transpose_etale X φ
+    naturality_etale := naturality_etale X φ
+    tensor_hom_adjunction_etale := tensor_hom_adjunction_etale X φ
+    composition_etale := composition_etale X φ
+    successive_etale := hc.2
+    identity_etale := hci.2
+    tensor_successive_etale := hs
+    unit_successive_etale := hc.1
+    tensor_identity_etale := hid
+    unit_identity_etale := hci.1
+    homEtale_source_ctf := homEtale_source_ctf X φ k hbase ell hell hA
+    homEtale_target_ctf := homEtale_target_ctf X φ k hbase ell hell hB }⟩
+
+private theorem finiteHomProLawsOfComparison
+    (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
+    (ell : ℕ) [Fact ell.Prime] (hell : (ell : k) ≠ 0)
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C]
+    (φ : A →+* B) (ψ : B →+* C)
+    (hA : ∃ n : ℕ, (ell ^ n : A) = 0)
+    (hB : ∃ n : ℕ, (ell ^ n : B) = 0)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))]
+    (hi : finiteHomLaw_vPro_iso X φ)
+    (hbraid : finiteHomLaw_tensor_symmetry_pro X φ)
+    (heval : finiteHomLaw_evaluation_right_pro X φ)
+    (hs : finiteHomLaw_tensor_successive_pro X φ ψ)
+    (hid : finiteHomLaw_tensor_identity_pro (A := A) X) :
+    Nonempty (FiniteCoefficientHomProLaws X φ ψ) := by
+  have hc := successive_pro X φ ψ hs
+  have hci := identity_pro X hid
+  exact ⟨{
+    tensorPro_iso := tensorPro_iso X φ
+    vPro_iso := hi
+    tensor_associator_pro := tensor_associator_pro X φ
+    tensor_left_unit_pro := tensor_left_unit_pro X φ
+    tensor_right_unit_pro := tensor_right_unit_pro X φ
+    tensor_symmetry_pro := hbraid
+    tensor_naturality_pro := tensor_naturality_pro X φ
+    evaluation_transpose_pro := evaluation_transpose_pro X φ
+    evaluation_pro := evaluation_pro X φ
+    evaluation_right_pro := heval
+    unique_transpose_pro := unique_transpose_pro X φ
+    naturality_pro := naturality_pro X φ
+    tensor_hom_adjunction_pro := tensor_hom_adjunction_pro X φ
+    composition_pro := composition_pro X φ
+    successive_pro := hc.2
+    identity_pro := hci.2
+    tensor_successive_pro := hs
+    unit_successive_pro := hc.1
+    tensor_identity_pro := hid
+    unit_identity_pro := hci.1
+    homPro_source_ctf := homPro_source_ctf X φ k hbase ell hell hA
+    homPro_target_ctf := homPro_target_ctf X φ k hbase ell hell hB }⟩
+
+/-- Etale finite-Hom devissage and endpoint constructibility.
+
+The proof follows the constructible-stratum filtration, perfect replacement,
+localization triangles, and the finite projective scalar calculation from the
+proof of `thm-coef-finite-hom`; this is the ordinary-site subproblem.
+(blueprint: thm-coef-finite-hom)
+-/
+theorem finiteCoefficientHomEtaleLaws
+    (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
+    (ell : ℕ) [Fact ell.Prime] (hell : (ell : k) ≠ 0)
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C]
+    (φ : A →+* B) (ψ : B →+* C)
+    (hA : ∃ n : ℕ, (ell ^ n : A) = 0)
+    (hB : ∃ n : ℕ, (ell ^ n : B) = 0)
+    (hC : ∃ n : ℕ, (ell ^ n : C) = 0)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] :
+    Nonempty (FiniteCoefficientHomEtaleLaws X φ ψ) := by
+  have hiso := finiteCoefficientHomIsomorphisms k hbase ell hell φ hA hB X
+  have htensor := finiteCoefficientHomScalarTensorCoherence k hbase ell hell φ ψ hA hB hC X
+  exact finiteHomEtaleLawsOfComparison k hbase ell hell φ ψ hA hB X
+    hiso.1 htensor.2.2.2.2.1 htensor.2.2.2.2.2.2.1 htensor.1 htensor.2.1
+
+/-- Pro-etale finite-Hom transport and coherence.
+
+The proof transports the finite-duality comparison through the pro-etale
+scalar extension, then verifies the successive and identity coherence maps.
+This is the pro-etale subproblem of `thmCoefFiniteHom`.
+(blueprint: thm-coef-finite-hom)
+-/
+theorem finiteCoefficientHomProLaws
+    (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
+    (ell : ℕ) [Fact ell.Prime] (hell : (ell : k) ≠ 0)
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C]
+    (φ : A →+* B) (ψ : B →+* C)
+    (hA : ∃ n : ℕ, (ell ^ n : A) = 0)
+    (hB : ∃ n : ℕ, (ell ^ n : B) = 0)
+    (hC : ∃ n : ℕ, (ell ^ n : C) = 0)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] :
+    Nonempty (FiniteCoefficientHomProLaws X φ ψ) := by
+  have hiso := finiteCoefficientHomIsomorphisms k hbase ell hell φ hA hB X
+  have htensor := finiteCoefficientHomScalarTensorCoherence k hbase ell hell φ ψ hA hB hC X
+  exact finiteHomProLawsOfComparison k hbase ell hell φ ψ hA hB X
+    hiso.2 htensor.2.2.2.2.2.1 htensor.2.2.2.2.2.2.2 htensor.2.2.1 htensor.2.2.2.1
+
 /-- Arbitrary finite-primary coefficient change for the ordinary derived Hom.
 Source: latest blueprint thm-coef-finite-hom.md, statement, and
 thm-coef-finite-hom.proof.md, all paragraphs (blueprint: thm-coef-finite-hom).
@@ -983,6 +1690,52 @@ theorem thmCoefFiniteHom
     [LocallyOfFiniteType (X ↘ Spec (.of k))]
     [QuasiCompact (X ↘ Spec (.of k))] :
     Nonempty (FiniteCoefficientHomLaws X φ ψ) := by
-  sorry
+  let e := Classical.choice (finiteCoefficientHomEtaleLaws k hbase ell hell φ ψ hA hB hC X)
+  let p := Classical.choice (finiteCoefficientHomProLaws k hbase ell hell φ ψ hA hB hC X)
+  exact ⟨{
+    tensorEtale_iso := e.tensorEtale_iso
+    tensorPro_iso := p.tensorPro_iso
+    vEtale_iso := e.vEtale_iso
+    vPro_iso := p.vPro_iso
+    tensor_associator_etale := e.tensor_associator_etale
+    tensor_left_unit_etale := e.tensor_left_unit_etale
+    tensor_right_unit_etale := e.tensor_right_unit_etale
+    tensor_associator_pro := p.tensor_associator_pro
+    tensor_left_unit_pro := p.tensor_left_unit_pro
+    tensor_right_unit_pro := p.tensor_right_unit_pro
+    tensor_symmetry_etale := e.tensor_symmetry_etale
+    tensor_symmetry_pro := p.tensor_symmetry_pro
+    tensor_naturality_etale := e.tensor_naturality_etale
+    evaluation_transpose_etale := e.evaluation_transpose_etale
+    tensor_naturality_pro := p.tensor_naturality_pro
+    evaluation_transpose_pro := p.evaluation_transpose_pro
+    successive_etale := e.successive_etale
+    identity_etale := e.identity_etale
+    evaluation_etale := e.evaluation_etale
+    evaluation_right_etale := e.evaluation_right_etale
+    unique_transpose_etale := e.unique_transpose_etale
+    naturality_etale := e.naturality_etale
+    tensor_hom_adjunction_etale := e.tensor_hom_adjunction_etale
+    composition_etale := e.composition_etale
+    tensor_successive_etale := e.tensor_successive_etale
+    unit_successive_etale := e.unit_successive_etale
+    tensor_identity_etale := e.tensor_identity_etale
+    unit_identity_etale := e.unit_identity_etale
+    successive_pro := p.successive_pro
+    identity_pro := p.identity_pro
+    evaluation_pro := p.evaluation_pro
+    evaluation_right_pro := p.evaluation_right_pro
+    unique_transpose_pro := p.unique_transpose_pro
+    naturality_pro := p.naturality_pro
+    tensor_hom_adjunction_pro := p.tensor_hom_adjunction_pro
+    composition_pro := p.composition_pro
+    tensor_successive_pro := p.tensor_successive_pro
+    unit_successive_pro := p.unit_successive_pro
+    tensor_identity_pro := p.tensor_identity_pro
+    unit_identity_pro := p.unit_identity_pro
+    homEtale_source_ctf := e.homEtale_source_ctf
+    homEtale_target_ctf := e.homEtale_target_ctf
+    homPro_source_ctf := p.homPro_source_ctf
+    homPro_target_ctf := p.homPro_target_ctf }⟩
 
 end WeilConjectures

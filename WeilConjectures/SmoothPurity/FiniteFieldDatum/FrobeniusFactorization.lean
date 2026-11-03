@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 public import WeilConjectures.SmoothPurity.FiniteFieldDatum.SchemeFrobenius
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+public import WeilConjectures.Compactification.FiniteFieldDatum.TraceFormulaSchemeFrobeniusGeometry
 
 /-!
 # Factorization of the absolute Frobenius
@@ -115,16 +116,16 @@ theorem absoluteFrobenius_factorization (D : WeilConjectures.FiniteFieldDatum.{u
         (D.model_characteristic
           (pullback.fst X₀.hom
             (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ X₀.hom)) (D.a * m) =
-      D.schemeFrobeniusIterate X₀ m ≫
+      D.coefficientFreeSchemeFrobeniusIterate X₀ m ≫
         (HPow.hPow (α := End (D.geometricFiber X₀).left)
-          (D.arithmeticGaloisFrobenius X₀) m) ∧
+          (D.geometricFrobenius X₀).inv m) ∧
     (D.geometricFiber X₀).left.iterateFrobenius D.prime
         (D.model_characteristic
           (pullback.fst X₀.hom
             (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ X₀.hom)) (D.a * m) =
       (HPow.hPow (α := End (D.geometricFiber X₀).left)
-          (D.arithmeticGaloisFrobenius X₀) m) ≫
-        D.schemeFrobeniusIterate X₀ m := by
+          (D.geometricFrobenius X₀).inv m) ≫
+        D.coefficientFreeSchemeFrobeniusIterate X₀ m := by
   classical
   let := Fintype.ofFinite D.k₀
   have _ := hm
@@ -134,8 +135,8 @@ theorem absoluteFrobenius_factorization (D : WeilConjectures.FiniteFieldDatum.{u
   let s := pullback.snd X₀.hom b
   let hX := D.model_characteristic (π ≫ X₀.hom)
   let F : End X := X.iterateFrobenius D.prime hX D.a
-  let P : End X := D.schemeFrobenius X₀
-  let S : End X := D.arithmeticGaloisFrobenius X₀
+  let P : End X := D.coefficientFreeSchemeFrobenius X₀
+  let S : End X := (D.geometricFrobenius X₀).inv
   let σ := (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).symm
   have hσ : σ = FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ D.k := by
     simp [σ, FiniteField.geometricFrobeniusAlgEquivOfAlgebraic, AlgEquiv.aut_inv]

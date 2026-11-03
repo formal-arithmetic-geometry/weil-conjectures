@@ -54,6 +54,7 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOpenBaseChangeArbitrary
 /-! # Completed open-immersion base change
 
 Source: blueprint order 1587; Stacks Tags 03DI, 09BP, 099N
@@ -1911,3 +1912,53 @@ theorem completedExtensionZeroComparison [QuasiCompact j]
   exact ⟨hβiso, hcomplete⟩
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Extension by zero commutes with arbitrary pullback, including the forward and
+inverse localization formulas on every complex.
+Source: current blueprint `thm-sfb-dc-open-base-change-iso` and
+`def-exchange-projection`.
+(blueprint: lem-route-completed-extension-zero-comparison)
+Proof: use the canonical arbitrary-base condensed comparison, whose complex components
+are the degreewise inverse mate and mate, with both exact-derived factorization equations.
+-/
+theorem completedExtensionZeroComparison_condensed
+    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {U Z Z' : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] (a : Z' ⟶ Z)
+    (K : CochainComplex (condensedModuleCategory U Λ) ℤ) :
+    ∃ c :
+        ((upperStar Λ.X a).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+          (((openImmersionLowerShriek Λ.X j).mapHomologicalComplex
+            (ComplexShape.up ℤ)).obj K) ≅
+        ((openImmersionLowerShriek Λ.X (pullback.snd j a)).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj
+          (((upperStar Λ.X (pullback.fst j a)).mapHomologicalComplex
+            (ComplexShape.up ℤ)).obj K),
+      (∀ n : ℤ, c.hom.f n = (condensedOpenBaseChangeIso Λ j a).hom.app (K.X n)) ∧
+      (∀ n : ℤ, c.inv.f n = (condensedOpenBaseChangeMap Λ j a).app (K.X n)) ∧
+      (condensedOpenBaseChangeDerivedIso Λ j a).hom.app (DerivedCategory.Q.obj K) ≫
+          (openImmersionLowerShriek Λ.X (pullback.snd j a)).mapDerivedCategory.map
+            ((upperStar Λ.X (pullback.fst j a)).mapDerivedCategoryFactors.hom.app K) ≫
+          (openImmersionLowerShriek Λ.X (pullback.snd j a)).mapDerivedCategoryFactors.hom.app
+            (((upperStar Λ.X (pullback.fst j a)).mapHomologicalComplex
+              (ComplexShape.up ℤ)).obj K) =
+        (upperStar Λ.X a).mapDerivedCategory.map
+            ((openImmersionLowerShriek Λ.X j).mapDerivedCategoryFactors.hom.app K) ≫
+          (upperStar Λ.X a).mapDerivedCategoryFactors.hom.app
+            (((openImmersionLowerShriek Λ.X j).mapHomologicalComplex
+              (ComplexShape.up ℤ)).obj K) ≫ DerivedCategory.Q.map c.hom ∧
+      (condensedOpenBaseChangeDerivedIso Λ j a).inv.app (DerivedCategory.Q.obj K) ≫
+          (upperStar Λ.X a).mapDerivedCategory.map
+            ((openImmersionLowerShriek Λ.X j).mapDerivedCategoryFactors.hom.app K) ≫
+          (upperStar Λ.X a).mapDerivedCategoryFactors.hom.app
+            (((openImmersionLowerShriek Λ.X j).mapHomologicalComplex
+              (ComplexShape.up ℤ)).obj K) =
+        (openImmersionLowerShriek Λ.X (pullback.snd j a)).mapDerivedCategory.map
+            ((upperStar Λ.X (pullback.fst j a)).mapDerivedCategoryFactors.hom.app K) ≫
+          (openImmersionLowerShriek Λ.X (pullback.snd j a)).mapDerivedCategoryFactors.hom.app
+            (((upperStar Λ.X (pullback.fst j a)).mapHomologicalComplex
+              (ComplexShape.up ℤ)).obj K) ≫ DerivedCategory.Q.map c.inv := by
+  exact condensed_open_base_change_arbitrary Λ j a K
+
+end AlgebraicGeometry.ProEtale.CondensedRing

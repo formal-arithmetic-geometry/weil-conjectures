@@ -47,6 +47,32 @@ def orderedPower {C : Type v₁} [Category.{w₁} C]
       (T.mapIso (orderedPower T B U L V z t s a n)).app L ≪≫
         (T.obj (U n)).mapIso t ≪≫ a n
 
+/-- The prescribed unit step: the K-flat tensor-shift comparison, followed by the
+shifted right unitor, and the equality `2*n + 2 = 2*(n+1)` of shift degrees.
+Source: finite-reduction proof, Step 2, tensor/shift/unit comparisons
+(blueprint: def-pur-finite-reduction-chart-calculus). -/
+def unitStep (n : ℕ) :
+    ((derivedTensor Λ X).obj ((𝟙_ D) ⟦2 * (n : ℤ)⟧)).obj ((𝟙_ D) ⟦(2 : ℤ)⟧) ≅
+      (𝟙_ D) ⟦2 * ((n + 1 : ℕ) : ℤ)⟧ :=
+  _root_.DerivedCategory.shiftTensorShiftIso M (𝟙_ D) (𝟙_ D) (2 * (n : ℤ)) 2 ≪≫
+    (shiftFunctor D (2 * (n : ℤ) + 2)).mapIso (ρ_ (𝟙_ D)) ≪≫
+      (eqToIso (congrArg (shiftFunctor D)
+        (by simp only [Nat.cast_add, Nat.cast_one, mul_add, mul_one] :
+          2 * (n : ℤ) + 2 = 2 * ((n + 1 : ℕ) : ℤ)))).app (𝟙_ D)
+
+/-- Ordered shifted-root charts in the native condensed derived category. The specified
+zero chart, fixed line chart and successor presentations are retained verbatim, and
+`unitStep` supplies the canonical final factor at every successor.
+Source: finite-reduction proof, Step 2, ordered invertible twists
+(blueprint: def-pur-finite-reduction-chart-calculus). -/
+def powerChart (B : ℕ → D) (L : D)
+    (z : B 0 ≅ (𝟙_ D) ⟦2 * ((0 : ℕ) : ℤ)⟧)
+    (t : L ≅ (𝟙_ D) ⟦(2 : ℤ)⟧)
+    (s : ∀ n : ℕ, B (n + 1) ≅ ((derivedTensor Λ X).obj (B n)).obj L)
+    (n : ℕ) : B n ≅ (𝟙_ D) ⟦2 * (n : ℤ)⟧ :=
+  orderedPower (derivedTensor Λ X) B (fun r ↦ (𝟙_ D) ⟦2 * (r : ℤ)⟧)
+    L ((𝟙_ D) ⟦(2 : ℤ)⟧) z t s (unitStep Λ X) n
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 

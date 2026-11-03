@@ -21,6 +21,7 @@ public import Mathlib.CategoryTheory.Sites.CoverLifting
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import all WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualLocalIso
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseImageRestrictionSupplement
+public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 
 /-! # A normalized basis at one finite coefficient level
 
@@ -125,6 +126,14 @@ private noncomputable instance (priority := 5000) fixedAbLocallyBijective (T : S
     (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} T
 
+-- Fix the module universe before typeclass search through the complex constructors.
+-- The generic abelian instance otherwise leaves a spurious coefficient universe open.
+
+@[instance_reducible] private noncomputable def fixedModuleAbelian (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) RingCat.{u + 1}) :
+    Abelian (SheafOfModules.{u + 1} R) :=
+  SheafOfModules.instAbelian R
+
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (X : Scheme.{u}) (W : X.ProEt) (L : integralTowerModules.{u, u} l E X)
@@ -135,11 +144,17 @@ variable (l : ℕ) [Fact l.Prime]
 /-- The single complex of the given module. Source: Stacks Tag 04J0
 (blueprint: lem-pur-integral-object-finite-basis). -/
 abbrev singleModule :=
+  letI _moduleAbelian (T : Scheme.{u})
+      (R : Sheaf (ProEt.topology T) RingCat.{u + 1}) :
+      Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
   (CochainComplex.singleFunctor (integralTowerModules.{u, u} l E X) 0).obj L
 
 /-- The finite pullback before restriction to the completed coefficient ring.
 Source: Stacks Tag 04J0 (blueprint: lem-pur-integral-object-finite-basis). -/
 noncomputable def finitePullback (n : ℕ) :=
+  letI _moduleAbelian (T : Scheme.{u})
+      (R : Sheaf (ProEt.topology T) RingCat.{u + 1}) :
+      Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
   ((integralOperationsLevelPullback.{u, u} l E W.hom n).mapHomologicalComplex
     (.up ℤ)).obj ((unrestrictedIntegralFiniteComplex.{u, u} l E X n).obj
       (singleModule l E X L))
@@ -147,12 +162,18 @@ noncomputable def finitePullback (n : ℕ) :=
 /-- The finite regular module placed in degree zero. Source: Stacks Tag 04J0
 (blueprint: lem-pur-integral-object-finite-basis). -/
 abbrev finiteRegular (T : Scheme.{u}) (n : ℕ) :=
+  letI _moduleAbelian (T : Scheme.{u})
+      (R : Sheaf (ProEt.topology T) RingCat.{u + 1}) :
+      Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
   (CochainComplex.singleFunctor (integralOperationsFiniteModules.{u, u} l E T n)
     0).obj (SheafOfModules.unit (integralCoefficientSheaf.{u, u} l E T n))
 
 /-- The degree-zero identification for the regular single complex.
 Source: Stacks Tag 04J0 (blueprint: lem-pur-integral-object-finite-basis). -/
 abbrev finiteZero (T : Scheme.{u}) (n : ℕ) :=
+  letI _moduleAbelian (T : Scheme.{u})
+      (R : Sheaf (ProEt.topology T) RingCat.{u + 1}) :
+      Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
   HomologicalComplex.singleObjXSelf (.up ℤ) 0
     (SheafOfModules.unit (integralCoefficientSheaf.{u, u} l E T n))
 
@@ -161,6 +182,9 @@ Source: Stacks Tag 04J0 (blueprint: lem-pur-integral-object-finite-basis). -/
 def basisSection (U : W.left.ProEt) :
     ((singleModule l E X L).X 0).val.obj
       (op ((MorphismProperty.Over.map (f := W.hom) ⊤ W.prop).obj U)) :=
+  letI _moduleAbelian (T : Scheme.{u})
+      (R : Sheaf (ProEt.topology T) RingCat.{u + 1}) :
+      Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
   (HomologicalComplex.singleObjXSelf (.up ℤ) 0 L).inv.val.app _
     (e.inv.val.app (op ((ProEt.sliceFrom X W).obj U))
       (1 : (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X).obj.obj
@@ -171,6 +195,9 @@ unit U → W ×_X U. No inverse-image or tensor comparison is chosen here.
 Source: Stacks Tags 04J0 and 00VC (blueprint: lem-pur-integral-object-finite-basis). -/
 def basisGenerator (n : ℕ) (U : W.left.ProEt) :
     ((finitePullback l E X W L n).X 0).val.obj (op U) :=
+  letI _moduleAbelian (T : Scheme.{u})
+      (R : Sheaf (ProEt.topology T) RingCat.{u + 1}) :
+      Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
   ((finitePullback l E X W L n).X 0).val.presheaf.map
     (((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ W.hom W.prop trivial).unit.app
       U).op)

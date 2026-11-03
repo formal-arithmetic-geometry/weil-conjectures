@@ -36,6 +36,20 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.leftDerivedFunc
   Functor.mapDerivedCategory Functor.mapHomotopyCategory _root_.DerivedCategory.Qh
   Functor.leftAdjoint Adjunction.ofIsRightAdjoint
 
+private theorem postcompose_right_commShiftIso_hom_app
+    (T : C ⥤ C ⥤ C) [T.CommShift₂Int] (F : C ⥤ D) [F.CommShift ℤ] (L U : C) (n : ℤ) :
+    ((((postcompose₂.obj F).obj T).flip.obj L).commShiftIso n).hom.app U =
+      F.map (((T.flip.obj L).commShiftIso n).hom.app U) ≫
+        (F.commShiftIso n).hom.app ((T.obj U).obj L) :=
+  Functor.commShiftIso_comp_hom_app (T.flip.obj L) F n U
+
+private theorem precompose_right_commShiftIso_hom_app
+    (S : D ⥤ D ⥤ D) [S.CommShift₂Int] (F : C ⥤ D) [F.CommShift ℤ] (L U : C) (n : ℤ) :
+    ((((((whiskeringLeft₂ D).obj F).obj F).obj S).flip.obj L).commShiftIso n).hom.app U =
+      (S.flip.obj (F.obj L)).map ((F.commShiftIso n).hom.app U) ≫
+        ((S.flip.obj (F.obj L)).commShiftIso n).hom.app (F.obj U) :=
+  Functor.commShiftIso_comp_hom_app F (S.flip.obj (F.obj L)) n U
+
 private theorem nativeComparison_eq
     {C : Type u₁} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -94,11 +108,8 @@ private theorem scalarModelShiftFirst {A B : Type (u + 1)} [CommRing A] [CommRin
     conjugate_right_commShift G F.leftDerivedFunctor e.symm
       (asIso F.rightExact_leftDerivedTensorComparison) V
   have h := NatTrans.shift_app_comm (τ.hom.flipApp V) n U
-  change ((tensorRight V ⋙ G).commShiftIso n).hom.app U ≫
-      ((τ.hom.app U).app V)⟦n⟧' =
-    (τ.hom.app (U⟦n⟧)).app V ≫
-      ((G ⋙ tensorRight (G.obj V)).commShiftIso n).hom.app U at h
-  simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at h
+  rw [postcompose_right_commShiftIso_hom_app, precompose_right_commShiftIso_hom_app] at h
+  simp only [Category.assoc] at h
   let : F.leftDerivedFunctor.Monoidal := F.leftDerivedFunctorMonoidal
   have hmodel : finiteScalarMonoidalModel φ T =
       Functor.Monoidal.coreMonoidalTransport e := by
@@ -144,7 +155,10 @@ theorem finiteTensorShiftFirst (P : PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 �
       ((((curriedTensor _).flip.obj
           ((P.finiteTensorReduction m hm hmn T).obj V)).commShiftIso n).hom.app
         ((P.finiteTensorReduction m hm hmn T).obj U)) := by
-  let φ := (P.finiteReductionRingHom m hm hmn).ulift.{u + 1, u + 1}
+  -- Specialize at the cached coefficient types, so the kernel compares the derived
+  -- monoidal and shift structures syntactically instead of across `ULift` instances.
+  let φ : P.Coefficient →+* (P.finiteReductionSetting m hm).Coefficient :=
+    (P.finiteReductionRingHom m hm hmn).ulift.{u + 1, u + 1}
   have hm' : P.FiniteTensorCoreNormalized m hm hmn T (finiteScalarMonoidalModel φ T) :=
     fun C D _ _ ↦ finiteScalarMonoidalModel_representative φ T C D
   have he : finiteScalarMonoidalModel φ T = P.finiteTensorCore m hm hmn T :=

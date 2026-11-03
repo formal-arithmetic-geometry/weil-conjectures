@@ -52,4 +52,12 @@ abbrev condensedQbarCompactSections (ell : ℕ) [Fact ell.Prime]
   ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification
     (Profinite.padicAlgClRingObj ell) c ⋙ condensedQbarDerivedPointSections ell k
 
+/-- Ordinary sections are proper-free derived direct image followed by exact point sections.
+Source: the ordinary RΓ formula
+(blueprint: def-weil-ordinary-compact-cohomology). -/
+abbrev condensedQbarOrdinarySections (ell : ℕ) [Fact ell.Prime]
+    (k : Type u) [Field k] [IsAlgClosed k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) :=
+  (ProEtale.CondensedRing.lowerStar (Profinite.padicAlgClRingObj ell) a).rightDerivedFunctor ⋙
+    condensedQbarDerivedPointSections ell k
+
 end WeilConjectures

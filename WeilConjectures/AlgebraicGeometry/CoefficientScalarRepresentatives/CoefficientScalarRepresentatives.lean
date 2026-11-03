@@ -315,6 +315,68 @@ private theorem comparison_restrict_mate (φ : R →+* S) :
     (Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ)
     (Iso.refl _) (𝟙 _) (restrict_coextend_mate T φ)
 
+private theorem ordinary_scalar_mate_isIso (φ : R →+* S) :
+    IsIso (((mateEquiv (ordinaryAdjunction T.smallEtaleTopology φ)
+      (ordinaryAdjunction (Scheme.ProEt.topology T) φ)).symm
+      (TwoSquare.mk _ _ _ _ (comparisonRestriction T φ).inv)).natTrans) := by
+  apply isIso_left_mate_of_iterated
+    (ordinaryAdjunction T.smallEtaleTopology φ)
+    (ordinaryAdjunction (Scheme.ProEt.topology T) φ)
+    (comparisonAdjunction (ModuleCat.{u + 1} R) T)
+    (comparisonAdjunction (ModuleCat.{u + 1} S) T)
+  rw [comparison_restrict_mate]
+  infer_instance
+
+private theorem computed_comparison_mate_isIso (φ : R →+* S) :
+    IsIso (((mateEquiv
+      (G := (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory)
+      (H := (comparisonUpperStar (ModuleCat.{u + 1} S) T).mapDerivedCategory)
+      (scalarDerivedAdjunctionData T.smallEtaleTopology φ).adjunction
+      (scalarDerivedAdjunctionData (Scheme.ProEt.topology T) φ).adjunction).symm
+      (TwoSquare.mk _ _ _ _ (derivedComparisonRestriction T φ).inv)).natTrans) := by
+  have := comparison_preservesFlat T R
+  have := ordinary_scalar_mate_isIso T φ
+  exact derived_mate_isIso_of_flat
+    (A := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R))
+    (B := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} S))
+    (C := Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R))
+    (D := Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} S))
+    (E₁ := ordinaryExtension T.smallEtaleTopology φ)
+    (E₂ := ordinaryExtension (Scheme.ProEt.topology T) φ)
+    (U₁ := Sheaf.restrictScalars T.smallEtaleTopology φ)
+    (U₂ := Sheaf.restrictScalars (Scheme.ProEt.topology T) φ)
+    (ordinaryAdjunction T.smallEtaleTopology φ)
+    (ordinaryAdjunction (Scheme.ProEt.topology T) φ)
+    (scalarDerivedAdjunctionData T.smallEtaleTopology φ)
+    (scalarDerivedAdjunctionData (Scheme.ProEt.topology T) φ)
+    (comparisonUpperStar (ModuleCat.{u + 1} R) T)
+    (comparisonUpperStar (ModuleCat.{u + 1} S) T)
+    (comparisonRestriction T φ)
+
+/-- The specified scalar/site arrow is invertible; no different arrow is chosen.
+Source: Stacks 07A4 and 0G7E (blueprint: def-sp-coefficient-scalar-representatives).
+
+Proof: the ordinary restriction square is conjugate to the sectionwise
+coextension/direct-image identity. Iterated mates identify its inverse scalar
+mate with the ordinary tensor/site comparison. Inverse image preserves flat-term
+K-flat resolutions by the local relation criterion and commutes with tensor
+products. On those representatives the displayed derived mate, computed with
+the scalar unit used in representative, is therefore invertible. Localization
+and the unique unit-compatible scalar adjoint comparison give invertibility
+for the specified fixed functors, on all unbounded objects. -/
+@[instance] theorem comparisonMap_isIso : IsIso (comparisonMap T a) := by
+  have := computed_comparison_mate_isIso T a
+  exact isIso_left_mate_change_adjunction
+    (F := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory)
+    (G := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) T).mapDerivedCategory)
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars T.smallEtaleTopology a))
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) a))
+    (scalarDerivedAdjunctionData T.smallEtaleTopology a).adjunction
+    (scalarDerivedAdjunctionData (Scheme.ProEt.topology T) a).adjunction
+    (derivedComparisonRestriction T a).inv
+
 section ComparisonProof
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S]

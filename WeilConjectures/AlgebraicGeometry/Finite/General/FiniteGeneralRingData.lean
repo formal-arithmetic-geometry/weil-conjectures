@@ -142,6 +142,21 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
 public import Mathlib.CategoryTheory.Abelian.Refinements
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.AlgebraicGeometry.Vector.VectorBundlePurity
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalChart
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalRealization
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalConservativity
 
 /-! # Canonical data for finite general-ring smooth purity
 
@@ -159,6 +174,95 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
+
+/-- Scalar extension of the comparison-origin coefficient unit, using the published
+site/scalar mate and the multiplication-normalized ordinary scalar unit.
+Source: general-ring purity, clause (1) (blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingScalarUnitIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (phi : A →+* B) (T : Scheme.{u}) :
+    (Etale.FiniteSmoothPurity.proScalar phi T).obj
+        ((Etale.FiniteSmoothPurity.comparison A T).obj (Etale.ordinaryFiniteUnit A T)) ≅
+      (Etale.FiniteSmoothPurity.comparison B T).obj (Etale.ordinaryFiniteUnit B T) :=
+  (pbcComparisonReduction T phi).app (Etale.ordinaryFiniteUnit A T) ≪≫
+    (Etale.FiniteSmoothPurity.comparison B T).mapIso
+      ((Etale.scalarExtension phi T).mapIso
+          (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T) ≪≫
+        Etale.ExceptionalCoefficients.unitIso phi T ≪≫
+        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} B) T).symm)
+
+/-- Actual intrinsic derived scalar extension, in fixed-coefficient coordinates.
+This is scalarExtensionFunctor conjugated by the published realization equivalences.
+Source: general-ring purity, (-)_A (blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingScalar {A B : Type u} [CommRing A] [CommRing B]
+    [Finite A] [Finite B] (phi : A →+* B) (T : Scheme.{u}) :
+    Etale.FiniteSmoothPurity.proCategory (ULift.{u + 1, u} A) T ⥤
+      Etale.FiniteSmoothPurity.proCategory (ULift.{u + 1, u} B) T :=
+  (sfIntrinsicDerivedEquivalence T A).functor ⋙ scalarExtensionFunctor phi T ⋙
+    (sfIntrinsicDerivedEquivalence T B).inverse
+
+/-- The scalar-presentation comparison is the inverse realization of the published
+section-normalized scalar mate, followed by the realization unit.
+Source: general-ring purity, coefficient comparison (blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingScalarIso {A B : Type u} [CommRing A] [CommRing B]
+    [Finite A] [Finite B] (phi : A →+* B) (T : Scheme.{u})
+    (K : Etale.FiniteSmoothPurity.proCategory (ULift.{u + 1, u} A) T) :
+    (finiteGeneralRingScalar phi T).obj K ≅
+      (Etale.FiniteSmoothPurity.proScalar
+        (RingHom.ulift.{u + 1, u + 1, u, u} phi) T).obj K :=
+  (sfIntrinsicDerivedEquivalence T B).inverse.mapIso
+      ((reductionRealizationScalarIso phi T).app K) ≪≫
+    (sfIntrinsicDerivedEquivalence T B).unitIso.symm.app _
+
+/-- The comparison-origin unit. This is the actual constant A_T in degree zero.
+Source: general-ring purity, omega=f^!A_Y (blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingUnit (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :=
+  (Etale.FiniteSmoothPurity.comparison A T).obj (Etale.ordinaryFiniteUnit A T)
+
+/-- The map from nu* of the ordinary dualizing complex to f^! of the comparison unit.
+Its formula uses the comparison-adjunction unit, so it is never an arbitrary iso.
+Source: finite exceptional inverse image (blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingDualizingUnitMap (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    (Etale.FiniteSmoothPurity.comparison A X).obj
+        (Etale.dualizingComplex A f) ⟶
+      (Etale.FiniteSmoothPurity.exceptional A f).obj (finiteGeneralRingUnit A Y) :=
+  (Etale.FiniteSmoothPurity.comparison A X).map
+    ((Etale.rightDerivedUpperShriek A f).map
+      ((derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).unit.app
+        (Etale.ordinaryFiniteUnit A Y)))
+
+/-- The actual exceptional scalar comparison evaluated at the unit, followed by the
+canonical scalar unit identification. Its middle factor is the published transpose
+of scalar extension of the compact-support counit after the inverse support comparison.
+Source: det-sp-reduction-exceptional and clause (1)
+(blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingReduction (P : WeilConjectures.PurityFiniteSetting.{u})
+    {A : Type u} [CommRing A] [Finite A] (phi : P.Ring →+* A)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    (finiteGeneralRingScalar phi X).obj (P.diagonalDualizing f) ⟶
+      (Etale.FiniteSmoothPurity.exceptional (ULift.{u + 1, u} A) f).obj
+        (finiteGeneralRingUnit (ULift.{u + 1, u} A) Y) :=
+  letI : (Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} P.Coefficient)
+      (HasCompactification.compactification f)).IsLeftAdjoint :=
+    inferInstanceAs (Etale.rightDerivedLowerShriek
+      (ModuleCat.{u + 1} P.Coefficient) f).IsLeftAdjoint
+  (finiteGeneralRingScalarIso phi X (P.diagonalDualizing f)).hom ≫
+    (Etale.FiniteSmoothPurity.proScalar (RingHom.ulift.{u + 1, u + 1, u, u} phi) X).map
+      ((Etale.FiniteSmoothPurity.comparison P.Coefficient X).map
+        (((Adjunction.ofIsLeftAdjoint (Etale.rightDerivedLowerShriekOfCompactification
+            (ModuleCat.{u + 1} P.Coefficient)
+            (HasCompactification.compactification f))).rightAdjointUniq
+          (Etale.rightDerivedUpperShriekAdjunction P.Coefficient f)).hom.app
+            ((Etale.FiniteSmoothPurity.origin P.Coefficient Y).obj
+              (finiteGeneralRingUnit P.Coefficient Y)))) ≫
+    Etale.FiniteSmoothPurity.proCoefficientMap
+      (RingHom.ulift.{u + 1, u + 1, u, u} phi) f
+      (finiteGeneralRingUnit P.Coefficient Y) ≫
+    (Etale.FiniteSmoothPurity.exceptional (ULift.{u + 1, u} A) f).map
+      (finiteGeneralRingScalarUnitIso
+        (RingHom.ulift.{u + 1, u + 1, u, u} phi) Y).hom
 
 /-- Tensor a normalized Kummer sheaf comparison in the published ordered shifted model.
 The empty power is the identity on the coefficient unit. No orientation is chosen.
@@ -190,5 +294,47 @@ def FiniteGeneralRingKummerComparison (A : Type (u + 1)) [CommRing A]
     ∀ (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf M).obj.obj W),
       e.hom.hom.app W (Scheme.finiteEtaleTateOneGenerator A M T hM W a z) =
         Scheme.finiteEtaleTateOneGenerator A N T hN W a (q.hom.app W z)
+
+/-- Scalar extension of the recorded Q_ell diagonal orientation, followed by the
+actual site/scalar comparison and the generator-normalized Tate comparison.
+Source: clause (1) (blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingOrientationExtension (P : WeilConjectures.PurityFiniteSetting.{u})
+    {A : Type u} [CommRing A] [Finite A] (phi : P.Ring →+* A)
+    (hA : (P.diagonalExponent : ULift.{u + 1, u} A) = 0)
+    {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [SmoothOfRelativeDimension d f]
+    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [HasCompactification f]
+    (t : Etale.FiniteSmoothPurity.CoefficientLineComparison
+      (RingHom.ulift.{u + 1, u + 1, u, u} phi) P.diagonalExponent P.diagonalExponent
+      P.diagonalExponent_annihilates hA X) :
+    (finiteGeneralRingScalar phi X).obj (P.diagonalDualizing f) ≅
+      (Etale.FiniteSmoothPurity.comparison (ULift.{u + 1, u} A) X).obj
+        (Etale.FiniteSmoothPurity.line (ULift.{u + 1, u} A) P.diagonalExponent hA X d) :=
+  (finiteGeneralRingScalar phi X).mapIso (P.diagonalDualizingObject d f aY) ≪≫
+    finiteGeneralRingScalarIso phi X (P.diagonalTwist X d) ≪≫
+    (pbcComparisonReduction X (RingHom.ulift.{u + 1, u + 1, u, u} phi)).app
+      (P.diagonalTwistEtale X d) ≪≫
+    (Etale.FiniteSmoothPurity.comparison (ULift.{u + 1, u} A) X).mapIso (t.tensorPower d)
+
+/-- Invertibility and naturality of the specified projection-formula/counit purity map.
+The coefficient ring is abstract so concrete coefficient structures are elaborated once.
+Source: general-ring purity, clause (3) (blueprint: det-sp-finite-general-ring). -/
+def FiniteGeneralRingTensorFormula (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (L : Etale.DerivedCategoryModule A X)
+    (alpha : Etale.dualizingComplex A f ≅ L) : Prop :=
+  (∀ K : Etale.FiniteSmoothPurity.proCategory A Y,
+    Etale.FiniteSmoothPurity.IsCtf A Y K →
+      Etale.FiniteSmoothPurity.IsCtf A X ((Etale.FiniteSmoothPurity.exceptional A f).obj K) ∧
+      IsIso (Etale.FiniteSmoothPurity.proGamma A f L alpha K)) ∧
+  (∀ (K K' : Etale.FiniteSmoothPurity.proCategory A Y),
+    Etale.FiniteSmoothPurity.IsCtf A Y K →
+    Etale.FiniteSmoothPurity.IsCtf A Y K' → ∀ a : K ⟶ K',
+      (Etale.FiniteSmoothPurity.proSource A f L).map a ≫
+          Etale.FiniteSmoothPurity.proGamma A f L alpha K' =
+        Etale.FiniteSmoothPurity.proGamma A f L alpha K ≫
+          (Etale.FiniteSmoothPurity.exceptional A f).map a)
 
 end AlgebraicGeometry.ProEtale

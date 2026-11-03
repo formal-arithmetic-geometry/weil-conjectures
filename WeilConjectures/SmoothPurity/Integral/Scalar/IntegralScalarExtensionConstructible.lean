@@ -30,6 +30,16 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
+public import Mathlib.Algebra.Field.ULift
+public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleExtendScalars
+public import WeilConjectures.AlgebraicGeometry.IntegralScalarExtensionExactModel
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
+public import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructible
 
 /-! # Constructibility under completed integral scalar extension
 
@@ -494,7 +504,12 @@ theorem integralOrdinaryDerivedScalar_constructible
     (hK : boundedConstructibleDerivedCompleteIntegral D l hl E Y K) :
     boundedConstructibleDerivedCompleteIntegral D l hl L Y
       ((integralOrdinaryDerivedScalar l E L ι Y).obj K) := by
-  sorry
+  obtain ⟨χ, hχ, _⟩ := archivedIntegralScalarCompletion l E L ι Y
+  let : IsIso (χ.app K) := hχ.2 K
+    ((sfDerivedComplete_iff_legacy l E Y D hl K).mpr hK.1)
+  exact (boundedConstructibleDerivedCompleteIntegral D l hl L Y).prop_of_iso
+    (asIso (χ.app K)).symm
+    (integralScalarExtension_constructible D l hl E L ι Y ⟨K, hK⟩)
 
 /-- Restriction of finite free completed tensor to the integral full subcategories.
 On complete objects its ordinary exact tensor model computes completed derived tensor.
@@ -678,7 +693,55 @@ theorem integralConstructibleScalarComparison_existsUnique :
             (integralScalarExtensionComparison l E L ι Y).hom.app P =
           (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫
             DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι Y).app P.obj) := by
-  sorry
+  classical
+  obtain ⟨χ, hχ, _⟩ := archivedIntegralScalarCompletion l E L ι Y
+  let e : integralConstructibleScalarExtension D l hl E L ι Y ≅
+      constructibleIntegralScalarExtension D l hl E L ι Y :=
+    NatIso.ofComponents
+      (fun K ↦ by
+        let : IsIso (χ.app K.obj) := hχ.2 K.obj
+          ((sfDerivedComplete_iff_legacy l E Y D hl K.obj).mpr K.property.1)
+        let eK : (integralOrdinaryDerivedScalar l E L ι Y).obj K.obj ≅
+            (integralScalarExtension l E L ι Y).obj K.obj := asIso (χ.app K.obj)
+        exact (boundedConstructibleDerivedCompleteIntegral D l hl L Y).isoMk eK)
+      (by
+        intro K M f
+        apply ObjectProperty.hom_ext
+        exact χ.naturality f.hom)
+  refine ⟨e, ?_, ?_⟩
+  · intro P hP
+    exact hχ.1 P
+  · intro c hc
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    let X := (DerivedCategory.Q (C := integralTowerModules l E Y)).objPreimage K.obj
+    let eX := (DerivedCategory.Q (C := integralTowerModules l E Y)).objObjPreimageIso K.obj
+    obtain ⟨V, f, hV, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := completedIntegralCommRingSheafUnrestricted l E Y) X
+    have hgood : integralOperationsGoodComplex l E Y V := by
+      refine ⟨hV, fun i ↦ ?_⟩
+      exact (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso
+          (completedIntegralCommRingSheafUnrestricted l E Y) (V.X i)).symm (hf i)
+    let P : (integralOperationsGoodComplex l E Y).FullSubcategory := ⟨V, hgood⟩
+    let : QuasiIso f := hq
+    let eP : DerivedCategory.Q.obj P.obj ≅ K.obj :=
+      asIso (DerivedCategory.Q.map f) ≪≫ eX
+    have hP := (boundedConstructibleDerivedCompleteIntegral D l hl E Y).prop_of_iso
+      eP.symm K.property
+    let K₀ : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y :=
+      ⟨DerivedCategory.Q.obj P.obj, hP⟩
+    let e₀ : K₀ ≅ K :=
+      (boundedConstructibleDerivedCompleteIntegral D l hl E Y).isoMk eP
+    apply (cancel_epi
+      ((integralConstructibleScalarExtension D l hl E L ι Y).map e₀.hom)).mp
+    rw [c.hom.naturality, e.hom.naturality]
+    congr 1
+    apply ObjectProperty.hom_ext
+    apply (cancel_mono ((integralScalarExtensionComparison l E L ι Y).hom.app P)).mp
+    exact (hc P hP).trans (hχ.1 P).symm
 
 /-- The finite-free comparison with the canonical quotient completion normalization.
 Source: Bhatt--Scholze, Proposition 3.5.1
@@ -687,3 +750,219 @@ noncomputable def integralConstructibleScalarComparison :=
   (integralConstructibleScalarComparison_existsUnique D l hl E L ι Y).exists.choose
 
 end WeilConjectures
+
+namespace AlgebraicGeometry.ProEtale
+
+/-- Constant integral sections of the condensed coefficient ring.
+Source: `det-def-sfb-pulled-back-coefficients`; the constants in the continuous-function
+presentation. This is the same construction as the point-fibre constant map, placed
+here without importing point-fibre theorems.
+(blueprint: lem-route-integral-ordinary-derived-scalar-constructible) -/
+noncomputable def integralScalarConstants
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    PadicAlgCl.integers ℓ E.1 →+* Γ (Profinite.padicIntegersRingObj.{u} ℓ E.1) :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+  Profinite.continuousMapConstRingHom (PadicAlgCl.integers ℓ E.1)
+
+/-- The restricted functor is linear for `O_E`. The source action is induced by the
+constant-section map `O_E → Γ(R)`. The target action is induced by the composite
+`O_E → O_L → Γ(S)`, so it is exactly the coefficient action required by the
+statement.
+
+Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-qlbar-two-colimit/
+det-def-sf-operations.md, clause (i), direct derived tensor restricted to the preserved full
+subcategories (blueprint: lem-weil-integral-scalar-extension-constructible).
+
+Proof (node step 3): the coefficient point map sends the constant section `r` to the constant
+section of its image in `O_L` (sectionwise postcomposition on continuous functions), and
+naturality of global sections under `upperStarFromPoint Y` gives `Γ(a_Y) ∘ φE = φF`. Hence
+restriction `Mod.comap a_Y` is `O_E`-linear (`Mod.linear_comap`), so is its left adjoint
+`Mod.extendScalars a_Y` (`sk-def-sfb-change-of-scalars`); the exact functor induces an
+`O_E`-linear functor on derived categories, transported to `T` by
+`leftDerivedFunctorIsoMapDerivedCategory` (`det-def-sfb-derived-extension-of-scalars`). The
+full-subcategory maps on Hom groups are the ambient ones, so `T(c f) = c T(f)` there.
+-/
+theorem integralScalarExtensionFunctor_linear
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
+    (Y : Scheme.{u}) :
+    let φE := (MonObj.Γ.mapFunctor (upperStarFromPoint Y)).comp
+      (integralScalarConstants ℓ E)
+    let φF := (MonObj.Γ.mapFunctor (upperStarFromPoint Y)).comp
+      ((integralScalarConstants ℓ F).comp
+        (finiteCoefficientIntegersMap ℓ h))
+    letI := CategoryTheory.Mod.linearOfRingHom φE
+    letI := CategoryTheory.Mod.linearOfRingHom φF
+    (integralScalarExtensionFunctor ℓ h Y).Linear (PadicAlgCl.integers ℓ E.1) := by
+  dsimp only
+  let φE := (MonObj.Γ.mapFunctor (upperStarFromPoint Y)).comp
+    (integralScalarConstants ℓ E)
+  let φF := (MonObj.Γ.mapFunctor (upperStarFromPoint Y)).comp
+    ((integralScalarConstants ℓ F).comp
+      (finiteCoefficientIntegersMap ℓ h))
+  let := Mod.linearOfRingHom φE
+  let := Mod.linearOfRingHom φF
+  let a := coefficientMap (finiteCoefficientIntegersPointMap ℓ h) Y
+  have hc (r : PadicAlgCl.integers ℓ E.1) : Γ.map a (φE r) = φF r := by
+    have hp : Γ.map (finiteCoefficientIntegersPointMap ℓ h)
+        (integralScalarConstants ℓ E r) =
+        integralScalarConstants ℓ F (finiteCoefficientIntegersMap ℓ h r) := by
+      exact Sheaf.Γ_map_ringHomΓSheafCompose _
+        (Profinite.continuousMapRingSheafMap (finiteCoefficientIntegersMap ℓ h)
+          ((continuous_subtype_val.comp continuous_subtype_val).subtype_mk _ |>.subtype_mk _))
+        (Profinite.continuousMapConstSectionRingHom _) (fun _ _ ↦ rfl)
+        (Profinite.continuousMapConstSectionRingHom _) (fun _ _ ↦ rfl) (fun _ ↦ rfl)
+    change Γ.map ((upperStarFromPoint Y).map (finiteCoefficientIntegersPointMap ℓ h))
+        (Γ.mapFunctor (upperStarFromPoint Y)
+          (integralScalarConstants ℓ E r)) = _
+    have hn (s : Γ (Profinite.padicIntegersRingObj.{u} ℓ E.1)) :
+        Γ.map ((upperStarFromPoint Y).map (finiteCoefficientIntegersPointMap ℓ h))
+            (Γ.mapFunctor (upperStarFromPoint Y) s) =
+          Γ.mapFunctor (upperStarFromPoint Y)
+            (Γ.map (finiteCoefficientIntegersPointMap ℓ h) s) := by
+      ext1
+      rw [Γ.map_hom, Γ.mapFunctor_hom, Γ.mapFunctor_hom, Γ.map_hom,
+        Category.assoc, Functor.map_comp]
+    rw [hn, hp]
+    rfl
+  have : (Mod.comap a).Linear (PadicAlgCl.integers ℓ E.1) :=
+    Mod.linear_comap a φE φF hc
+  have : (Mod.extendScalars a).Linear (PadicAlgCl.integers ℓ E.1) :=
+    (Mod.extendRestrictAdjunction a).left_adjoint_linear
+  have : PreservesFiniteLimits (Mod.extendScalars a) :=
+    ((cartesianCoefficients_finiteFree ℓ h).2.2 Y).1
+  have : (Mod.extendScalars a).mapDerivedCategory.Linear (PadicAlgCl.integers ℓ E.1) :=
+    inferInstance
+  have : (integralScalarExtension ℓ h Y).Linear (PadicAlgCl.integers ℓ E.1) :=
+    Functor.linear_of_iso _ (Mod.extendScalars a).leftDerivedFunctorIsoMapDerivedCategory.symm
+  constructor
+  intro K L f r
+  apply ObjectProperty.hom_ext
+  exact (integralScalarExtension ℓ h Y).map_smul r f.hom
+
+/-- Ordinary exact scalar extension preserves bounded constructibility for condensed
+integral coefficients. Source: `lem-coef-integral-finite-extension`, first paragraph.
+Proof: direct derived tensor preserves bounded constructibility by finite freeness and
+preservation of finite presentations. Transport that result through the canonical
+comparison with the exact functor on complexes. This includes zero complexes, empty
+schemes, the identity extension, and ramified finite extensions.
+(blueprint: lem-route-integral-ordinary-derived-scalar-constructible) -/
+theorem integralOrdinaryDerivedScalar_constructible
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)))
+    (hK : boundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y) K) :
+    boundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ F.1) Y)
+      ((integralOrdinaryDerivedScalar ℓ h Y).obj K) := by
+  exact (boundedConstructible _).prop_of_iso
+    ((integralScalarExactDerivedComparison ℓ h Y).app K)
+    (integralScalarExtension_constructible ℓ h Y K hK)
+
+/-- Restriction of ordinary exact tensor to the bounded constructible categories.
+Source: `lem-coef-integral-finite-extension`, preservation clause.
+(blueprint: lem-route-integral-ordinary-derived-scalar-constructible) -/
+noncomputable def integralConstructibleScalarExtension :
+    (boundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)).FullSubcategory ⥤
+    (boundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ F.1) Y)).FullSubcategory :=
+  ObjectProperty.lift _
+    ((boundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)).ι ⋙
+        integralOrdinaryDerivedScalar ℓ h Y)
+    (fun K ↦ integralOrdinaryDerivedScalar_constructible ℓ h Y K.obj K.property)
+
+/-- The comparison restricted to bounded constructible objects. Its underlying components
+are those of the canonical exact-derived comparison.
+Source: `lem-coef-integral-finite-extension`, first proof paragraph.
+Proof: fullness lifts both components; their inverse and naturality identities are the
+ambient identities.
+(blueprint: lem-route-integral-constructible-scalar-comparison-exists-unique) -/
+noncomputable def integralConstructibleScalarComparison :
+    integralScalarExtensionFunctor ℓ h Y ≅ integralConstructibleScalarExtension ℓ h Y :=
+  NatIso.ofComponents
+    (fun K ↦
+      { hom := ObjectProperty.homMk ((integralScalarExactDerivedComparison ℓ h Y).hom.app K.obj)
+        inv := ObjectProperty.homMk ((integralScalarExactDerivedComparison ℓ h Y).inv.app K.obj)
+        hom_inv_id := by
+          apply ObjectProperty.hom_ext
+          exact (integralScalarExactDerivedComparison ℓ h Y).hom_inv_id_app K.obj
+        inv_hom_id := by
+          apply ObjectProperty.hom_ext
+          exact (integralScalarExactDerivedComparison ℓ h Y).inv_hom_id_app K.obj })
+    (by
+      intro K M f
+      apply ObjectProperty.hom_ext
+      exact (integralScalarExactDerivedComparison ℓ h Y).hom.naturality f.hom)
+
+private theorem natTrans_ext_of_representatives
+    {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
+    (S : C → Prop) (α β : F ⟶ G)
+    (hS : ∀ X, ∃ Y, S Y ∧ Nonempty (Y ≅ X))
+    (h : ∀ Y, S Y → α.app Y = β.app Y) : α = β := by
+  apply NatTrans.ext
+  funext X
+  obtain ⟨Y, hY, ⟨e⟩⟩ := hS X
+  apply (cancel_epi (F.map e.hom)).mp
+  rw [α.naturality, β.naturality, h Y hY]
+
+/-- The comparison is uniquely fixed by the total-derived counit on representatives.
+Source: `lem-coef-integral-finite-extension`, first proof paragraph.
+Proof: the canonical exact-derived comparison satisfies its defining counit equation.
+The exact model's representative comparison is invertible, so the equation determines
+our comparison on representatives. Every constructible object has such a representative;
+transport along its isomorphism and use naturality to obtain uniqueness everywhere.
+(blueprint: lem-route-integral-constructible-scalar-comparison-exists-unique) -/
+theorem integralConstructibleScalarComparison_existsUnique :
+    letI : PreservesFiniteLimits
+        (Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)) :=
+      ((cartesianCoefficients_finiteFree ℓ h).2.2 Y).1
+    ∃! c : integralScalarExtensionFunctor ℓ h Y ≅ integralConstructibleScalarExtension ℓ h Y,
+      ∀ (P : HomotopyCategory
+          (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+            (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)) (.up ℤ))
+        (hP : boundedConstructible
+          (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)
+          (DerivedCategory.Qh.obj P)),
+        (c.hom.app ⟨DerivedCategory.Qh.obj P, hP⟩).hom ≫
+            (Mod.extendScalars
+              (integralConstructibleCoefficientMap ℓ h Y)).mapDerivedCategoryFactorsh.hom.app P =
+          (Mod.extendScalars
+            (integralConstructibleCoefficientMap ℓ h Y)).leftDerivedFunctorCounit.app P := by
+  let : PreservesFiniteLimits
+      (Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)) :=
+    ((cartesianCoefficients_finiteFree ℓ h).2.2 Y).1
+  let T := Mod.extendScalars (integralConstructibleCoefficientMap ℓ h Y)
+  have he P hP :
+      ((integralConstructibleScalarComparison ℓ h Y).hom.app
+          ⟨DerivedCategory.Qh.obj P, hP⟩).hom ≫
+            T.mapDerivedCategoryFactorsh.hom.app P = T.leftDerivedFunctorCounit.app P := by
+    exact NatTrans.congr_app T.leftDerivedFunctorIsoMapDerivedCategory_hom_fac P
+  refine ⟨integralConstructibleScalarComparison ℓ h Y, he, ?_⟩
+  intro c hc
+  apply Iso.ext
+  let S := fun K ↦ ∃ P hP, K =
+    (⟨DerivedCategory.Qh.obj P, hP⟩ :
+      (boundedConstructible
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)).FullSubcategory)
+  apply natTrans_ext_of_representatives S c.hom
+    (integralConstructibleScalarComparison ℓ h Y).hom
+  · intro K
+    let P := (DerivedCategory.Qh (C :=
+      Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))).objPreimage K.obj
+    let eP : DerivedCategory.Qh.obj P ≅ K.obj := DerivedCategory.Qh.objObjPreimageIso K.obj
+    have hP := (boundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)).prop_of_iso
+        eP.symm K.property
+    refine ⟨⟨DerivedCategory.Qh.obj P, hP⟩, ⟨P, hP, rfl⟩, ?_⟩
+    exact ⟨(boundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)).isoMk eP⟩
+  · rintro K ⟨P, hP, rfl⟩
+    apply ObjectProperty.hom_ext
+    apply (cancel_mono (T.mapDerivedCategoryFactorsh.app P).hom).mp
+    exact (hc P hP).trans (he P hP).symm
+
+end AlgebraicGeometry.ProEtale

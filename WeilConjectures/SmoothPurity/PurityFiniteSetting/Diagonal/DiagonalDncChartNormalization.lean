@@ -219,6 +219,8 @@ public import WeilConjectures.RingTheory.SmoothPurity.ReesAssociatedGradedChart
 public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Projection.ProjectionPurityAgreement
 
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.ChartComparisons.ChartExceptionalCounitEquation
+
 /-! # Normalized diagonal/DNC assemblies on affine coordinate charts
 
 Source: main-20261015, sec-smooth-purity/sk-prop-sp-orientation,
@@ -701,6 +703,142 @@ theorem chartOrientation_open_baseChange (P : PurityFiniteSetting.{u})
         (P.chartOrdinaryOrientation d h (v ≫ aY)).hom := by
   sorry
 
+/-- The epsilon used in the coordinate formula is exactly the standing pur9
+composition map followed by the canonical etale identification. This compares
+actual maps, including every comparison unit; it is not an endpoint existence.
+Source: chart proof, Step 4 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: equip the affine trace tower with its canonical affine-space coordinates
+and U with their composite with u. The tower projection agrees with its chart
+projection by homOfVector_over. Apply chart_exceptional_counit_equation to u
+between these two charts. Precompose by chartDiagonalDualizingStanding.hom
+and cancel its inverse. Expanding rho, epsilon and chartEpsilon, functoriality
+and the identity equality-transport give exactly the displayed equation.
+The same construction applies to d=0 and empty sources. -/
+theorem chartEpsilon_standing_composition (P : PurityFiniteSetting.{u})
+    {U V : Scheme.{u}} [IsAffine U] [IsAffine V] (d : ℕ)
+    (aV : V ⟶ Spec (.of P.field.k)) [hft : LocallyOfFiniteType aV] [hqc : QuasiCompact aV]
+    (u : U ⟶ affineTraceTower V d) [Etale u] [IsSeparated u]
+    [huft : LocallyOfFiniteType u] [huqc : QuasiCompact u]
+    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :
+    letI := P.noetherian aV
+    letI := affineTraceNoetherian V d
+    letI := P.noetherian ((u ≫ affineTraceProjection V d) ≫ aV)
+    letI := Dnc.compactifiable P u (affineTraceProjection V d ≫ aV)
+    letI := Dnc.compactifiable P (u ≫ affineTraceProjection V d) aV
+    letI : V.Over (Spec (.of P.field.k)) := ⟨aV⟩
+    letI : (affineTraceTower V d).Over (Spec (.of P.field.k)) :=
+      ⟨affineTraceProjection V d ≫ aV⟩
+    letI : U.Over (Spec (.of P.field.k)) := ⟨u ≫ (affineTraceProjection V d ≫ aV)⟩
+    letI : LocallyOfFiniteType (U ↘ Spec (.of P.field.k)) :=
+      @locallyOfFiniteType_comp _ _ _ u (affineTraceProjection V d ≫ aV) huft
+        (@locallyOfFiniteType_comp _ _ _ (affineTraceProjection V d) aV
+          (affineTraceProjection_locallyOfFiniteType V d) hft)
+    letI : QuasiCompact (U ↘ Spec (.of P.field.k)) :=
+      @quasiCompact_comp _ _ _ u (affineTraceProjection V d ≫ aV) huqc
+        (@quasiCompact_comp _ _ _ (affineTraceProjection V d) aV
+          (affineTraceProjection_quasiCompact V d) hqc)
+    letI : LocallyOfFiniteType (affineTraceTower V d ↘ Spec (.of P.field.k)) :=
+      @locallyOfFiniteType_comp _ _ _ (affineTraceProjection V d) aV
+        (affineTraceProjection_locallyOfFiniteType V d) hft
+    letI : QuasiCompact (affineTraceTower V d ↘ Spec (.of P.field.k)) :=
+      @quasiCompact_comp _ _ _ (affineTraceProjection V d) aV
+        (affineTraceProjection_quasiCompact V d) hqc
+    letI : LocallyOfFiniteType (V ↘ Spec (.of P.field.k)) :=
+      hft
+    letI : QuasiCompact (V ↘ Spec (.of P.field.k)) := hqc
+    letI : u.IsOver (Spec (.of P.field.k)) := ⟨rfl⟩
+    letI : (affineTraceProjection V d).IsOver (Spec (.of P.field.k)) := ⟨rfl⟩
+    (P.diagonalDualizingComparison (u ≫ affineTraceProjection V d)).hom ≫
+      (ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory.map
+          (P.chartEpsilon d (u ≫ affineTraceProjection V d) aV u rfl N).hom ≫
+      (Dnc.pullComparison P u (P.diagonalOrdinaryDualizing
+        (affineTraceProjection V d))).inv ≫
+      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) u).leftDerivedFunctor.map
+        (P.diagonalDualizingComparison (affineTraceProjection V d)).inv =
+      (P.chartDiagonalDualizingStanding (u ≫ affineTraceProjection V d)).hom ≫
+        ProEtale.standingExceptionalComposition P u (affineTraceProjection V d)
+          (P.chartCoefficientUnit V) ≫
+        (ProEtale.rightDerivedUpperShriek P.Coefficient u).map
+          ((P.chartDiagonalDualizingStanding (affineTraceProjection V d)).inv ≫
+            (P.diagonalDualizingComparison (affineTraceProjection V d)).hom) ≫
+        (P.chartEtaleIdentification u N
+          (P.diagonalOrdinaryDualizing (affineTraceProjection V d))
+          (Etale.plus_rightDerivedUpperShriek_obj P.Coefficient
+            (affineTraceProjection V d) _ (P.diagonalUnitPlus V))).hom ≫
+        (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) u).leftDerivedFunctor.map
+          (P.diagonalDualizingComparison (affineTraceProjection V d)).inv := by
+  let := P.noetherian aV
+  let := affineTraceNoetherian V d
+  let := P.noetherian ((u ≫ affineTraceProjection V d) ≫ aV)
+  let := Dnc.compactifiable P u (affineTraceProjection V d ≫ aV)
+  let := Dnc.compactifiable P (u ≫ affineTraceProjection V d) aV
+  let : V.Over (Spec (.of P.field.k)) := ⟨aV⟩
+  let : (affineTraceTower V d).Over (Spec (.of P.field.k)) :=
+    ⟨affineTraceProjection V d ≫ aV⟩
+  let : U.Over (Spec (.of P.field.k)) := ⟨u ≫ (affineTraceProjection V d ≫ aV)⟩
+  let : LocallyOfFiniteType (U ↘ Spec (.of P.field.k)) :=
+    @locallyOfFiniteType_comp _ _ _ u (affineTraceProjection V d ≫ aV) huft
+      (@locallyOfFiniteType_comp _ _ _ (affineTraceProjection V d) aV
+        (affineTraceProjection_locallyOfFiniteType V d) hft)
+  let : QuasiCompact (U ↘ Spec (.of P.field.k)) :=
+    @quasiCompact_comp _ _ _ u (affineTraceProjection V d ≫ aV) huqc
+      (@quasiCompact_comp _ _ _ (affineTraceProjection V d) aV
+        (affineTraceProjection_quasiCompact V d) hqc)
+  let : LocallyOfFiniteType (affineTraceTower V d ↘ Spec (.of P.field.k)) :=
+    @locallyOfFiniteType_comp _ _ _ (affineTraceProjection V d) aV
+      (affineTraceProjection_locallyOfFiniteType V d) hft
+  let : QuasiCompact (affineTraceTower V d ↘ Spec (.of P.field.k)) :=
+    @quasiCompact_comp _ _ _ (affineTraceProjection V d) aV
+      (affineTraceProjection_quasiCompact V d) hqc
+  let : LocallyOfFiniteType (V ↘ Spec (.of P.field.k)) :=
+    hft
+  let : QuasiCompact (V ↘ Spec (.of P.field.k)) := hqc
+  let : u.IsOver (Spec (.of P.field.k)) := ⟨rfl⟩
+  let : (affineTraceProjection V d).IsOver (Spec (.of P.field.k)) := ⟨rfl⟩
+  let : IsAffine (affineTraceTower V d) :=
+    IsAffine.of_isIso (affineTraceAffineSpaceIso V d).hom
+  let B : ChartComparisons.Chart V d :=
+    { X := affineTraceTower V d
+      affine := inferInstance
+      coord := (affineTraceAffineSpaceIso V d).hom
+      etale := inferInstance }
+  let C : ChartComparisons.Chart V d :=
+    { X := U
+      affine := inferInstance
+      coord := u ≫ (affineTraceAffineSpaceIso V d).hom
+      etale := inferInstance }
+  let e : ChartComparisons.Map C B :=
+    { hom := u
+      etale := inferInstance
+      over_eq := (Category.assoc _ _ _).symm }
+  have hB : B.proj = affineTraceProjection V d := by
+    exact AffineSpace.homOfVector_over _ _
+  have counit (g : affineTraceTower V d ⟶ V)
+      [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (hg : B.proj = g) :
+      letI := Dnc.compactifiable P g aV
+      letI := Dnc.compactifiable P u (g ≫ aV)
+      letI := Dnc.compactifiable P (u ≫ g) aV
+      ChartComparisons.composition P g aV u ≫
+          (ProEtale.rightDerivedUpperShriek P.Coefficient u).map
+            (P.chartDiagonalDualizingStanding g).inv ≫
+          (ChartComparisons.rho P g aV u N).hom =
+        (P.chartDiagonalDualizingStanding (u ≫ g)).inv ≫
+          (ChartComparisons.epsilon P g aV u N).hom := by
+    subst g
+    exact ChartComparisons.chart_exceptional_counit_equation P aV e N
+  have he := counit (affineTraceProjection V d) hB
+  have hc := congrArg
+    ((P.chartDiagonalDualizingStanding (u ≫ affineTraceProjection V d)).hom ≫ ·) he
+  simpa only [
+    ChartComparisons.composition, ChartComparisons.rho,
+    ChartComparisons.epsilon, chartEpsilon, diagonalDualizingCongr,
+    Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
+    Category.assoc, Iso.hom_inv_id_assoc, eqToIso_refl, Iso.refl_hom,
+    Iso.refl_trans, Iso.refl_inv, Functor.map_id,
+    Category.id_comp, Category.comp_id] using hc.symm
+
 /-- The actual diagonal normal cone is the symmetric total space of the diagonal
 conormal module, including the empty regular sequence when d=0. Thus it is the
 relative tangent bundle, rather than a separately chosen rank-d bundle.
@@ -1072,6 +1210,64 @@ theorem chartGamma_counit_normalization
   exact (transport _ _ (ht d)).trans
     (chartGamma_eq_inverseOrientation F C E n Y aY d).symm
 
+/-- Inverse-arrow form of theta_h = Lu*(Gamma^-1) epsilon_u, with the
+canonical Tate pullback written explicitly. Locality is the normalized mate of
+compact-support composition and the etale sum/evaluation adjunction.
+Source: chart proof, Step 4 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: apply chartOrdinaryOrientation_spec with the identity source chart and
+coordinate chart u. Normalize identity locality using the adjunction triangle.
+The result is precisely the displayed inverse-arrow equality. The preceding
+counit-normalization theorem identifies its affine mate with the existing
+ordered Gamma. Invert this equality to obtain the formula in the node. -/
+theorem chartOrientation_coordinate_formula (P : PurityFiniteSetting.{u})
+    {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    [SmoothOfRelativeDimension d h]
+    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]
+    (u : U ⟶ affineTraceTower V d) [Etale u] [IsSeparated u]
+    [LocallyOfFiniteType u] [QuasiCompact u]
+    (w : u ≫ affineTraceProjection V d = h)
+    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)
+    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent
+      P.diagonalExponent_annihilates)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]
+      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent
+        P.diagonalExponent_annihilates t T hT) :
+    letI := P.noetherian aV
+    letI := P.noetherian (h ≫ aV)
+    letI := affineTraceNoetherian V d
+    letI := Dnc.compactifiable P h aV
+    letI : HasCompactification (u ≫ affineTraceProjection V d) :=
+      HasCompactification.of_eq w.symm
+    (P.chartOrdinaryOrientation d h aV).inv =
+      (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent
+        P.diagonalExponent_annihilates t u
+          (affineTraceInvertible P.diagonalExponent V (P.diagonalExponent_isUnit aV) d)
+            d).inv ≫
+      (Etale.ordinaryFinitePullback P.Coefficient u).map
+        (P.diagonalAffineMate t D V (P.diagonalExponent_isUnit aV) d) ≫
+      (P.diagonalEtaleLocality N u (affineTraceProjection V d)).hom ≫
+      (P.diagonalDualizingCongr w).hom := by
+  subst h
+  let := P.noetherian aV
+  let := affineTraceNoetherian V d
+  let := chartTraceProjection_smooth V d
+  let := P.noetherian ((u ≫ affineTraceProjection V d) ≫ aV)
+  let := Dnc.compactifiable P (affineTraceProjection V d) aV
+  let := Dnc.compactifiable P (u ≫ affineTraceProjection V d) aV
+  have hr := P.chartOrientation_etale_restriction d (affineTraceProjection V d) aV u N t
+  simp only [diagonalDualizingCongr, eqToIso_refl, Iso.refl_hom,
+    Category.comp_id]
+  rw [← chartProjectionOrientation_inv P V aV d t D]
+  apply (cancel_mono (P.chartOrdinaryOrientation d
+    (u ≫ affineTraceProjection V d) aV).hom).mp
+  rw [Iso.inv_hom_id]
+  simp only [Category.assoc]
+  rw [← hr, ← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id]
+
 /-- Relative Spec of the canonical symmetric comparison, followed by the normalized
 Rees comparison, from the actual cone to its conormal vector bundle. Its homogeneous
 normalization fixes every ideal class, so it contains no arbitrary bundle automorphism.
@@ -1248,6 +1444,27 @@ def chartEpsilon (P : PurityFiniteSetting.{u})
     HasCompactification.of_eq w.symm
   (P.diagonalDualizingCongr w).symm ≪≫
     (P.diagonalEtaleLocality N u (affineTraceProjection V d)).symm
+
+/-- The comparison image of A[0] lies in the actual bounded constructible
+category used by standingExceptionalComposition.
+Source: chart proof, Step 4 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: the ordinary constant coefficient sheaf is finite locally constant,
+hence constructible; its single complex is bounded. The pro-etale bounded
+constructibility predicate is its comparison-image predicate. -/
+theorem chartCoefficientUnit_constructible (P : PurityFiniteSetting.{u}) (V : Scheme.{u}) :
+    ProEtale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} P.Coefficient) V
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) V).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit P.Coefficient V)) := by
+  exact ProEtale.DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
+    (P.chartCoefficientUnit_finiteTor V).1
+
+/-- The coefficient unit in the standing bounded constructible category.
+Source: chart proof, Step 4 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartCoefficientUnit (P : PurityFiniteSetting.{u}) (V : Scheme.{u}) :
+    ProEtale.DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} P.Coefficient) V :=
+  ⟨_, P.chartCoefficientUnit_constructible V⟩
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in

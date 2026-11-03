@@ -154,6 +154,7 @@ import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.Ringe
 import WeilConjectures.AlgebraicGeometry.Direct.DirectImageScalarOperations
 import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
 import WeilConjectures.AlgebraicGeometry.Open.OpenScalarCounitSquare
+public import WeilConjectures.AlgebraicGeometry.Proper.ProperScalarCounitSquare
 
 /-! # Compatibility of actual tower transitions
 
@@ -206,6 +207,96 @@ private theorem coefficientSquare
   rw [reassoc_of% hb] at hh
   rw [← FB.map_comp, hrx] at hh
   exact hh.symm
+
+/-- The actual compact-support transition and its scalar-adjunction transpose.
+Source: blueprint Levels, step 7; Stacks 07A6, 0D6D and 0D6E.
+Proof: write each strict transition as a map to restriction of scalars. The
+semilinear direct-image transition formula and the compact-support restriction
+comparison express the output transition as F(t) followed by that comparison.
+The scalar coordinate unit equation identifies its transpose with the recorded
+reduction map. Paste the proper and open scalar counit equations, then apply
+the adjunction Hom-equivalence calculation to obtain the displayed equality. This
+assertion is about the actual transitions, not only their
+sources and targets or their evaluations. No flatness of the quotient is used.
+Identity, composition and naturality of input reduction are separate formal laws.
+(blueprint: lem-route-reduction-transition-compatibility). -/
+theorem reduction_transition_compatibility
+    (pchar : ℕ) (hp : 0 < pchar) (hne : pchar ≠ l)
+    (k : Type u) [Field k] [CharP k pchar]
+    (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
+    (q : Coordinates l E b) (z : FiniteCoordinates l E)
+    (finiteData : FiniteNormalization l E k b o q z) :
+    (∀ {X Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [Y.Over (Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) (K : C l E b q X) {m n : ℕ} (v : m ≤ n),
+    (scalarExtensionFunctor (quotient l E v) Y).map
+        ((finiteData.evaluation c n).comparison.hom.app K.obj) ≫
+      (reductionDirectImageComparison (quotient l E v) c.i c.g).app
+        ((spDerivedCoefficientEvaluation l E X (q.abelian X) n).obj K.obj) ≫
+      (reductionCompactSupport (SpTowerShriek.R l E m) c.i c.g).map
+        (reduction l E X (q.abelian X) v (q.scalar X v) K.obj) =
+    reduction l E Y (q.abelian Y) v (q.scalar Y v) ((F l E b o q c).obj K.obj) ≫
+      (finiteData.evaluation c m).comparison.hom.app K.obj) := by
+  have _ := hp
+  have _ := hne
+  intro X Y _ _ _ _ _ _ _ _ f _ _ _ _ c K m n v
+  exact coefficientSquare
+    (proEtaleRingDerivedExtensionAdjunction
+      (proEtaleConstantRingMap (T := X) (quotient l E v)))
+    (proEtaleRingDerivedExtensionAdjunction
+      (proEtaleConstantRingMap (T := Y) (quotient l E v)))
+    (reductionCompactSupport (SpTowerShriek.R l E n) c.i c.g)
+    (reductionCompactSupport (SpTowerShriek.R l E m) c.i c.g)
+    (intrinsicCompactSupportRestriction (quotient l E v) c.i c.g)
+    (reductionDirectImageComparison (quotient l E v) c.i c.g)
+    (supportScalarCounit (quotient l E v) c.i c.g)
+    (intrinsicTransition l E X (q.abelian X) v (q.scalar X v) K.obj)
+    (intrinsicTransition l E Y (q.abelian Y) v (q.scalar Y v)
+      ((F l E b o q c).obj K.obj))
+    ((finiteData.evaluation c n).comparison.hom.app K.obj)
+    ((finiteData.evaluation c m).comparison.hom.app K.obj)
+    (reduction l E X (q.abelian X) v (q.scalar X v) K.obj)
+    (reduction l E Y (q.abelian Y) v (q.scalar Y v) ((F l E b o q c).obj K.obj))
+    (reduction_homEquiv_intrinsicTransition l E X (q.abelian X) v (q.scalar X v) K.obj)
+    (reduction_homEquiv_intrinsicTransition l E Y (q.abelian Y) v (q.scalar Y v)
+      ((F l E b o q c).obj K.obj))
+    (compactSupport_intrinsicTransition l E b o q c (finiteData.evaluation c) K.obj v)
+
+private theorem supportScalarCounit
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    (h : Z ⟶ Y) (H : proEtaleDerivedCategory X B) :
+    (scalarExtensionFunctor φ Y).map
+        ((intrinsicCompactSupportRestriction φ j h).hom.app H) ≫
+      (proEtaleRingDerivedExtensionAdjunction
+        (proEtaleConstantRingMap (T := Y) φ)).counit.app
+          ((reductionCompactSupport B j h).obj H) =
+    (reductionDirectImageComparison φ j h).app ((scalarRestriction φ X).obj H) ≫
+      (reductionCompactSupport B j h).map
+        ((proEtaleRingDerivedExtensionAdjunction
+          (proEtaleConstantRingMap (T := X) φ)).counit.app H) := by
+  have hp := ((properScalarCounitSquare φ h).2.2.1
+    ((sfIntrinsicExtensionByZero j B).mapDerivedCategory.obj H)).2
+  have ho := congr_app (openScalarCounitSquare φ j) H
+  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at ho
+  change (scalarExtensionFunctor φ Y).map
+      ((directImageConstantPush A h).map ((sfOpenRestrictionDerived j φ).hom.app H) ≫
+        (directImageScalarRestrictionIso φ h).hom.app _) ≫ _ = _
+  simp only [Functor.map_comp, Category.assoc]
+  erw [hp]
+  have hn := (directImageScalarComparison φ h).naturality
+    ((sfOpenRestrictionDerived j φ).hom.app H)
+  dsimp only [Functor.comp_map] at hn
+  erw [reassoc_of% hn]
+  erw [← (directImageConstantPush B h).map_comp]
+  erw [ho]
+  rw [Functor.map_comp]
+  exact (Category.assoc _ _ _).symm
 
 namespace AlgebraicGeometry.ProEtale.SpTowerCalculus
 

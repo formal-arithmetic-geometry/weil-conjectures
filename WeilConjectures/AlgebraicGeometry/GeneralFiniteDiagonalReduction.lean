@@ -5,6 +5,11 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.GeneralFiniteDiagonalReductionSource
+public import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarFlatModel
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteNormalizedOrientationScalar
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothLevelOfOrientation
+public import WeilConjectures.AlgebraicGeometry.GeneralFiniteExceptionalIdentification
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionCompatibilities
 
 /-! # General-field finite diagonal reduction
 
@@ -34,6 +39,37 @@ namespace AlgebraicGeometry.ProEtale
 
 local instance proEtaleEssentiallySmallMain (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+
+/-- Scalar extension preserves the intrinsic ctf domain: compute it on a bounded
+flat constructible model of the actual etale origin, then transport through the
+specified site/scalar comparison and the invertible comparison counit. -/
+private theorem scalarCtfForDiagonal
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (phi : A →+* B) (Y : Scheme.{u}) [IsNoetherian Y]
+    (K : proCategory A Y) (hK : IsCtf A Y K) :
+    IsCtf B Y ((proScalar phi Y).obj K) := by
+  have ho := actualOriginCtf A Y K hK
+  obtain ⟨a, b, ht⟩ := ho.2
+  have hm := Etale.exists_etaleScalarFlatModel Y A B phi a (max a b) (le_max_left _ _)
+    ⟨(origin A Y).obj K, ho.1.1⟩
+    (fun i ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+      (ho.1.2 i))
+    (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr
+      (ht.mono le_rfl (le_max_right _ _)))
+  obtain ⟨L, ⟨eL⟩⟩ := hm.2.2.1
+  have hb : Etale.DerivedCategory.boundedConstructibleFiniteTor B Y
+        ((ordinaryScalar phi Y).obj ((origin A Y).obj K)) := by
+    refine ⟨⟨(_root_.DerivedCategory.TStructure.t.bounded).prop_of_iso eL L.property,
+      fun i ↦ ?_⟩, a, max a b, ?_⟩
+    · exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp
+        (hm.2.2.2.1 i)
+    · exact Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp hm.2.2.2.2
+  have := intrinsicOriginCounit A Y K hK
+  exact isCtfOfIso B Y
+    (((ProEtale.pbcComparisonReduction Y phi).app ((origin A Y).obj K)).symm ≪≫
+      (proScalar phi Y).mapIso
+        (asIso ((ProEtale.derivedComparisonAdjunction (ModuleCat A) Y).counit.app K)))
+    (comparisonCtf B Y _ hb)
 
 /-- Finite smooth-purity reduction over an arbitrary positive-characteristic field.
 

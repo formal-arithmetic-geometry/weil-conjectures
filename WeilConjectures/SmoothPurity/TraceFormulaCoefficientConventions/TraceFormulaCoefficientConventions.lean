@@ -95,6 +95,14 @@ noncomputable abbrev structureMap (T : TraceFormulaCoefficientConventions.{u}) :
     T.geometricBaseChange ⟶ Spec (CommRingCat.of T.datum.k) :=
   (T.datum.geometricFiber T.X₀).hom
 
+/-- The finite-Tor subcategory `D^b_ctf(X,A)`.
+Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
+noncomputable abbrev boundedConstructibleFiniteTor
+    (T : TraceFormulaCoefficientConventions.{u}) :
+    ObjectProperty (proEtaleDerivedCategory T.geometricBaseChange T.coefficientRing) :=
+  finiteTorConstructible T.coefficients.l T.coefficientField T.level T.level_pos
+    T.geometricBaseChange
+
 /-- The recorded finite-coefficient inverse image along an arbitrary scheme morphism.
 Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
 noncomputable def derivedPullback (T : TraceFormulaCoefficientConventions.{u})
@@ -104,6 +112,17 @@ noncomputable def derivedPullback (T : TraceFormulaCoefficientConventions.{u})
   unfold coefficientRing
   rw [← Nat.sub_add_cancel T.level_pos]
   exact finiteDerivedPullback T.coefficients.l T.coefficientField (T.level - 1) f
+
+/-- The recorded derived tensor on the geometric fibre at the specified positive level.
+Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
+noncomputable def derivedTensor (T : TraceFormulaCoefficientConventions.{u}) :
+    proEtaleDerivedCategory T.geometricBaseChange T.coefficientRing ×
+      proEtaleDerivedCategory T.geometricBaseChange T.coefficientRing ⥤
+        proEtaleDerivedCategory T.geometricBaseChange T.coefficientRing := by
+  unfold coefficientRing
+  rw [← Nat.sub_add_cancel T.level_pos]
+  exact finiteIntrinsicDerivedTensor T.coefficients.l T.coefficientField
+    T.geometricBaseChange (T.level - 1)
 
 /-- Finite type and separation survive the geometric base change used in the conventions.
 These are the usual pullback instances, with no additional geometric hypothesis.

@@ -73,6 +73,19 @@ theorem sixFunctorProjection_proper
   projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar
       (ModuleCat.{u + 1} Λ) f K L
 
+/-- The displayed Cartesian square, including both tensor and pullback-square comparisons.
+Source: current blueprint prop-sf-pf-coherence
+(blueprint: prop-sf-pf-coherence). -/
+theorem sixFunctorProjection_baseChange_finite
+    {X' X Y' Y : Scheme.{u}} [Finite Λ] {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y}
+    [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
+    (sq : IsPullback g' f' f g)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    type_of% (projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq K L) :=
+  projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq K L
+
 /-- All-ideal finite reduction: the square is precisely part (1) of the reduction theorem.
 Source: current blueprint prop-sf-pf-coherence
 (blueprint: prop-sf-pf-coherence). -/

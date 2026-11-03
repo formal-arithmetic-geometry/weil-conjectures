@@ -12,6 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import WeilConjectures.AlgebraicGeometry.Native.NativeFiniteTwistLocalLine
+public import WeilConjectures.AlgebraicGeometry.PoincareDuality.CompatiblePrimitiveRoots
 
 /-! # Primitive-root charts for actual finite reduction
 
@@ -70,7 +72,8 @@ Proof: the quotient is a unital ring homomorphism; applying continuous-function
 sheaves and forgetting to abelian ring objects preserves its multiplication and unit. -/
 theorem coefficientQuotient_isMonHom (n m : ℕ) (h : m ≤ n) :
     IsMonHom (coefficientQuotient P n m h) := by
-  sorry
+  unfold coefficientQuotient
+  infer_instance
 
 attribute [instance] coefficientQuotient_isMonHom
 
@@ -123,6 +126,187 @@ def rootSection (ζ : P.field.k) (hζ : IsPrimitiveRoot ζ (P.coefficients.l ^ (
     (ULift.up (Additive.ofMul ((restrictRootsOfUnity ρ.hom (P.coefficients.l ^ (n + 1)))
       hζ.toRootsOfUnity)))
 
+private def normalizedRootSheafIso (ζ : P.field.k)
+    (hζ : IsPrimitiveRoot ζ (P.coefficients.l ^ (n + 1))) :
+    (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1}).obj
+        (AddCommGrpCat.of (ULift.{u + 1} (ZMod (P.coefficients.l ^ (n + 1))))) ≅
+      rootsOfUnitySheaf T (P.coefficients.l ^ (n + 1)) := by
+  let N := P.coefficients.l ^ (n + 1)
+  let : NeZero N := ⟨pow_ne_zero _ (Fact.out : Nat.Prime P.coefficients.l).ne_zero⟩
+  let φ : P.field.k →+* Γ(T, ⊤) :=
+    ((Scheme.ΓSpecIso (.of P.field.k)).inv ≫
+      (T ↘ Spec (.of P.field.k)).appTop).hom
+  let z : Γ(T, ⊤)ˣ := Units.map φ.toMonoidHom hζ.toRootsOfUnity.val
+  have hzval : (z : Γ(T, ⊤)) = φ ζ := by
+    change φ hζ.toRootsOfUnity.val.val = φ ζ
+    rw [hζ.val_toRootsOfUnity_coe]
+  have hz : z ^ N = 1 := by
+    apply Units.ext
+    simp only [Units.val_pow_eq_pow_val, Units.val_one]
+    rw [hzval, ← map_pow, hζ.pow_eq_one, map_one]
+  apply constantRootsIso N z hz
+  intro i hi j hj hij
+  rw [hzval, ← map_pow, ← map_pow, ← map_sub]
+  apply IsUnit.map
+  exact isUnit_iff_ne_zero.mpr (sub_ne_zero.mpr
+    (fun he ↦ hij (hζ.pow_inj hi hj he)))
+
+private def normalizedRootModuleIso (ζ : P.field.k)
+    (hζ : IsPrimitiveRoot ζ (P.coefficients.l ^ (n + 1))) :
+    (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj (twistFiniteRing P.coefficients.l P.extension n) T))) ≅
+        coefficientFiniteTwistOne P.coefficients.l P.extension T n :=
+  (freeConstantResidueIso _ (P.coefficients.l ^ (n + 1))
+    (finiteRing_nsmul P.coefficients.l P.extension T n)).symm ≪≫
+      (Mod.freeFunctor _).mapIso (normalizedRootSheafIso P n T ζ hζ)
+
+private theorem tensorUnitSection
+    (R M : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+    (b : 𝟙_ _ ⟶ M) (W : T.ProEtᵒᵖ) (a : R.obj.obj W) :
+    (((ρ_ R).inv ≫ R ◁ b).hom.app W) a =
+      (Functor.LaxMonoidal.μ (sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+        R M).app W
+          (a ⊗ₜ[ℤ] (b.hom.app W
+            ((Functor.LaxMonoidal.ε
+              (sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1})).app W (ULift.up 1)))) := by
+  let U := sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1}
+  have he : U.map ((ρ_ R).inv ≫ R ◁ b) =
+      (ρ_ (U.obj R)).inv ≫
+        U.obj R ◁ (Functor.LaxMonoidal.ε U ≫ U.map b) ≫
+          Functor.LaxMonoidal.μ U R M := by
+    rw [Functor.map_comp,
+      ← Functor.LaxMonoidal.right_unitality_inv U R]
+    simp only [Category.assoc, MonoidalCategory.whiskerLeft_comp,
+      Functor.LaxMonoidal.μ_natural_right]
+  exact ConcreteCategory.congr_hom (congr_app he W) a
+
+private def normalizedRootUnitMap (ζ : P.field.k)
+    (hζ : IsPrimitiveRoot ζ (P.coefficients.l ^ (n + 1))) :
+    𝟙_ (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) ⟶
+      rootsOfUnitySheaf T (P.coefficients.l ^ (n + 1)) :=
+  (Functor.Monoidal.εIso
+    (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1})).hom ≫
+      (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1}).map
+        (AddCommGrpCat.intResidue (P.coefficients.l ^ (n + 1))) ≫
+          (normalizedRootSheafIso P n T ζ hζ).hom
+
+private theorem normalizedRootModuleIso_hom (ζ : P.field.k)
+    (hζ : IsPrimitiveRoot ζ (P.coefficients.l ^ (n + 1))) :
+    (normalizedRootModuleIso P n T ζ hζ).hom.hom =
+      (ρ_ (condensedRingObj (twistFiniteRing P.coefficients.l P.extension n) T)).inv ≫
+        (condensedRingObj (twistFiniteRing P.coefficients.l P.extension n) T) ◁
+          normalizedRootUnitMap P n T ζ hζ := by
+  change ((ρ_ _).inv ≫ _ ◁ (Functor.Monoidal.εIso
+    (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1})).hom) ≫
+      _ ◁ (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1}).map
+        (AddCommGrpCat.intResidue (P.coefficients.l ^ (n + 1))) ≫
+          _ ◁ (normalizedRootSheafIso P n T ζ hζ).hom = _
+  simp only [normalizedRootUnitMap, MonoidalCategory.whiskerLeft_comp, Category.assoc]
+  rfl
+
+private theorem constantSheafUnitNormalization :
+    Functor.LaxMonoidal.ε
+        (sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1}) ≫
+      (Functor.Monoidal.εIso
+        (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1})).hom.hom =
+      toSheafify (Scheme.ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (𝟙_ Ab.{u + 1})) := by
+  let L := presheafToSheaf (Scheme.ProEt.topology T) Ab.{u + 1}
+  let U := sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1}
+  have he : (Functor.Monoidal.εIso
+      (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1})).hom =
+        Functor.LaxMonoidal.ε L := by
+    change Functor.LaxMonoidal.ε
+      ((Functor.const T.ProEtᵒᵖ) ⋙ L) = _
+    rw [Functor.LaxMonoidal.comp_ε]
+    change Functor.LaxMonoidal.ε L ≫ L.map (𝟙 _) = _
+    rw [CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [he]
+  change Functor.LaxMonoidal.ε U ≫ U.map (Functor.LaxMonoidal.ε L) = _
+  rw [← (sheafificationAdjunction (Scheme.ProEt.topology T) Ab.{u + 1}).unit_app_unit_comp_map_η]
+  simp only [Category.assoc]
+  rfl
+
+private theorem normalizedRootUnitMap_section (ζ : P.field.k)
+    (hζ : IsPrimitiveRoot ζ (P.coefficients.l ^ (n + 1))) (W : T.ProEtᵒᵖ) :
+    (normalizedRootUnitMap P n T ζ hζ).hom.app W
+        ((Functor.LaxMonoidal.ε
+          (sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1})).app W (ULift.up 1)) =
+      rootSection P n T ζ hζ W := by
+  let N := P.coefficients.l ^ (n + 1)
+  let : NeZero N := ⟨pow_ne_zero _ (Fact.out : Nat.Prime P.coefficients.l).ne_zero⟩
+  let φ : P.field.k →+* Γ(T, ⊤) :=
+    ((Scheme.ΓSpecIso (.of P.field.k)).inv ≫
+      (T ↘ Spec (.of P.field.k)).appTop).hom
+  let z : Γ(T, ⊤)ˣ := Units.map φ.toMonoidHom hζ.toRootsOfUnity.val
+  have hz : z ^ N = 1 := by
+    apply Units.ext
+    simp only [Units.val_pow_eq_pow_val, Units.val_one]
+    change (φ hζ.toRootsOfUnity.val.val) ^ N = 1
+    rw [hζ.val_toRootsOfUnity_coe, ← map_pow, hζ.pow_eq_one, map_one]
+  let σ := zmodToRootsPresheaf T N z hz
+  let J := Scheme.ProEt.topology T
+  let C := constantSheaf J Ab.{u + 1}
+  have he : Functor.LaxMonoidal.ε (sheafToPresheaf J Ab.{u + 1}) ≫
+      (normalizedRootUnitMap P n T ζ hζ).hom =
+        (Functor.const T.ProEtᵒᵖ).map (AddCommGrpCat.intResidue N) ≫
+          σ ≫ toSheafify J (rootsOfUnityPresheaf T N) := by
+    change _ ≫ ((Functor.Monoidal.εIso C).hom.hom ≫
+      (C.map (AddCommGrpCat.intResidue N)).hom ≫
+        (normalizedRootSheafIso P n T ζ hζ).hom.hom) = _
+    rw [← Category.assoc, ← Category.assoc, constantSheafUnitNormalization]
+    change (toSheafify J ((Functor.const T.ProEtᵒᵖ).obj (𝟙_ Ab.{u + 1})) ≫
+      ((presheafToSheaf J Ab.{u + 1}).map
+        ((Functor.const T.ProEtᵒᵖ).map (AddCommGrpCat.intResidue N))).hom) ≫
+          ((presheafToSheaf J Ab.{u + 1}).map σ).hom = _
+    rw [Category.assoc]
+    change toSheafify J _ ≫
+      (((presheafToSheaf J Ab.{u + 1}).map
+        ((Functor.const T.ProEtᵒᵖ).map (AddCommGrpCat.intResidue N))) ≫
+          (presheafToSheaf J Ab.{u + 1}).map σ).hom = _
+    rw [← Functor.map_comp]
+    simpa only [Category.assoc] using (toSheafify_naturality J
+      ((Functor.const T.ProEtᵒᵖ).map (AddCommGrpCat.intResidue N) ≫ σ)).symm
+  have hv := ConcreteCategory.congr_hom (congr_app he W) (ULift.up 1)
+  have h1 : AddCommGrpCat.intResidue N (ULift.up 1) = ULift.up (1 : ZMod N) := by
+    apply ULift.ext
+    change ((1 : ℤ) : ZMod N) = 1
+    exact Int.cast_one
+  simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at hv
+  change _ = (toSheafify J (rootsOfUnityPresheaf T N)).app W
+    (σ.app W (AddCommGrpCat.intResidue N (ULift.up 1))) at hv
+  rw [h1] at hv
+  refine hv.trans ?_
+  change (toSheafify J (rootsOfUnityPresheaf T N)).app W _ =
+    (toSheafify J (rootsOfUnityPresheaf T N)).app W _
+  apply congrArg ((toSheafify J (rootsOfUnityPresheaf T N)).app W)
+  apply ULift.ext
+  apply Additive.toMul.injective
+  apply Subtype.ext
+  apply Units.ext
+  have hh := zmodToRootsPresheaf_app_natCast N z hz W 1
+  simp only [Nat.cast_one, pow_one] at hh
+  exact hh.trans (by rfl)
+
+private theorem normalizedRootModuleIso_section (ζ : P.field.k)
+    (hζ : IsPrimitiveRoot ζ (P.coefficients.l ^ (n + 1)))
+    (W : T.ProEtᵒᵖ)
+    (a : (condensedRingObj (twistFiniteRing P.coefficients.l P.extension n) T).obj.obj W) :
+    (normalizedRootModuleIso P n T ζ hζ).hom.hom.hom.app W a =
+      (Functor.LaxMonoidal.μ (sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj (twistFiniteRing P.coefficients.l P.extension n) T)
+          (rootsOfUnitySheaf T (P.coefficients.l ^ (n + 1)))).app W
+            (a ⊗ₜ[ℤ] rootSection P n T ζ hζ W) := by
+  let R := condensedRingObj (twistFiniteRing P.coefficients.l P.extension n) T
+  let M := rootsOfUnitySheaf T (P.coefficients.l ^ (n + 1))
+  let b := normalizedRootUnitMap P n T ζ hζ
+  have he := congrArg (fun f : R ⟶ R ⊗ M ↦ f.hom.app W a)
+    (normalizedRootModuleIso_hom P n T ζ hζ)
+  refine he.trans ((tensorUnitSection T R M b W a).trans ?_)
+  apply congrArg ((Functor.LaxMonoidal.μ
+    (sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R M).app W)
+  exact congrArg (fun z ↦ a ⊗ₜ[ℤ] z) (normalizedRootUnitMap_section P n T ζ hζ W)
+
 /-- The root-line chart is uniquely determined on every local scalar section by
 `a ↦ a ⊗ ζ`. The tensor comparison here is the canonical lax-monoidal map of
 sheaf-to-presheaf, so this also specifies the formula on constant sections.
@@ -146,7 +330,13 @@ theorem existsUnique_rootChart (ζ : P.field.k)
             (condensedRingObj (twistFiniteRing P.coefficients.l P.extension n) T) (rootsOfUnitySheaf
               T (P.coefficients.l ^ (n + 1)))).app W)
               (a ⊗ₜ[ℤ] rootSection P n T ζ hζ W) := by
-  sorry
+  refine ⟨normalizedRootModuleIso P n T ζ hζ,
+    normalizedRootModuleIso_section P n T ζ hζ, ?_⟩
+  intro t ht
+  apply Iso.ext
+  apply Mod.hom_ext
+  ext W a
+  exact (ht W a).trans (normalizedRootModuleIso_section P n T ζ hζ W a).symm
 
 /-- The uniquely section-normalized coefficient-root chart.
 Source: finite-reduction proof Step 2 (blueprint: def-pur-finite-reduction-root-charts). -/

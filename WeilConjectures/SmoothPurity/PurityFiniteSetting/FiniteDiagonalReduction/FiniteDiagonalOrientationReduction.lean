@@ -34,6 +34,8 @@ public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Diagonal.PurityDi
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Dnc.PurityDncInvariance
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Vector.VectorBundlePurity
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Diagonal.PurityDiagonalDualizingObject
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteDiagonalReduction.FiniteAffineClassReduction
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteDiagonalReduction.FiniteAffineCounitCalculus
 
 /-! # Reduction of the supported and diagonal orientation maps
 
@@ -79,6 +81,28 @@ attribute [local reducible] iteratedAffineLine
   ProEtale.AffineSpacePurity.action Scheme.Hom.toIteratedAffineLine
 
 end EmptyProduct
+
+/-- Reduction of the actual Kummer exceptional adjunct at every positive level.
+Source: node proof Step 2 (blueprint: lem-pur-finite-diagonal-orientation-reduction).
+Proof: transpose the preceding supported equation through the two exceptional
+adjunctions. The reduced counit normalization identifies the intervening mate
+with finiteReductionOrientationExceptionalComparison. The input and unit maps
+are precisely their independent root and scalar-unit normalizations. -/
+theorem affineOrientationReduction (P : PurityFiniteSetting.{u})
+    (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level)
+    (S : Scheme.{u}) [S.Over (Spec (.of P.field.k))]
+    [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))]
+    [QuasiCompact (S ↘ Spec (.of P.field.k))]
+    [IsSeparated (S ↘ Spec (.of P.field.k))] :
+    (P.finiteReduction m hm hmn S).map (P.finiteReductionOrientation S) ≫
+      P.finiteReductionOrientationExceptionalComparison m hm hmn S ≫
+      ((P.finiteReductionSetting m hm).compositionExceptional
+        (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)).map
+          (P.finiteReductionOrientationInputComparison m hm hmn S).hom =
+    P.finiteReductionUnitComparison m hm hmn S ≫
+      (P.finiteReductionSetting m hm).finiteReductionOrientation S := by
+  exact affineOrientationReduction_of_counitSquare P m hm hmn S
+    (affineSupportedClassReduction P m hm hmn S)
 
 private theorem chainSquare {C : Type*} {D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A B E T : C} {A' B' E' T' : D}

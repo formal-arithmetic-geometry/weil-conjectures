@@ -117,6 +117,7 @@ import WeilConjectures.ConstructibleSheaf.EtaleMorphismDescent
 public import WeilConjectures.AlgebraicGeometry.CoefficientCompatibility.EtaleProEtaleCoefficientTransport
 public import WeilConjectures.AlgebraicGeometry.Finite.Compact.FiniteCompactSupportDomains
 public import WeilConjectures.SmoothPurity.EtaleCompactSupportGraphSheafNormalization
+public import WeilConjectures.AlgebraicGeometry.CoefficientScalarRepresentatives.CoefficientScalarRepresentatives
 
 /-! # Etale/pro-etale coefficient compatibility
 
@@ -288,6 +289,19 @@ def sumCoefficientIso
     (Functor.mapDerivedCategorySquareIso
       (Etale.upperStarRestrictScalarsIsoSheaf φ e))).symm
 
+/-- The canonical compactification change on an etale-origin pro-etale input, using
+exactly the specified compact-support site comparison on its two boundaries.
+Source: Stacks 0F7I; blueprint normalized site/refinement square
+(blueprint: lem-sp-et-proet-coefficient-compatibility). -/
+def siteRefinement (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
+    (c d : Compactification f)
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
+  (compactSupportSiteComparison A c).app L ≪≫
+    (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.mapIso
+      ((Etale.rightDerivedLowerShriekOfCompactificationIso A c d).app L.obj) ≪≫
+    ((compactSupportSiteComparison A d).app L).symm
+
 /-- The etale compositor on precisely the three supplied compactifications. The factors
 are the existing canonical compactification changes and the proper/open compositor.
 Source: Stacks 0F7J; blueprint composition square
@@ -432,7 +446,7 @@ theorem etaleProEtaleCoefficientCompatibility
       IsIso ((proEtaleCoefficientMap φ c).app
         ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj
           L.obj)) ∧
-      (@pbcFixedScalarExtension.{u} Y.ProEt inferInstance
+      (@CoefficientScalarRepresentatives.extension.{u} Y.ProEt inferInstance
           (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology Y)
           (ULift.{u + 1, u} A) (ULift.{u + 1, u} B) inferInstance inferInstance (uliftRingHom
             φ)).map
@@ -441,8 +455,8 @@ theorem etaleProEtaleCoefficientCompatibility
           ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
             X).mapDerivedCategory.obj L.obj) ≫
         (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c).map
-          ((pbcComparisonReduction.{u} X (uliftRingHom φ)).hom.app L.obj) =
-      (pbcComparisonReduction.{u} Y (uliftRingHom φ)).hom.app
+          ((CoefficientScalarRepresentatives.comparisonIso.{u} X (uliftRingHom φ)).hom.app L.obj) =
+      (CoefficientScalarRepresentatives.comparisonIso.{u} Y (uliftRingHom φ)).hom.app
           ((Etale.rightDerivedLowerShriekOfCompactification
             (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).obj L.obj) ≫
         (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map
@@ -489,18 +503,18 @@ theorem etaleProEtaleCoefficientCompatibility
       (proEtaleCoefficientMap φ c).app
         ((comparisonUpperStar (ModuleCat.{u + 1} RA) X).mapDerivedCategory.obj L.obj) ≫
       (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).map
-        ((pbcComparisonReduction X ψ).hom.app L.obj)) := by
+        ((CoefficientScalarRepresentatives.comparisonIso X ψ).hom.app L.obj)) := by
       rw [hs]
       infer_instance
     have : IsIso ((proEtaleCoefficientMap φ c).app
         ((comparisonUpperStar (ModuleCat.{u + 1} RA) X).mapDerivedCategory.obj L.obj) ≫
         (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).map
-          ((pbcComparisonReduction X ψ).hom.app L.obj)) :=
+          ((CoefficientScalarRepresentatives.comparisonIso X ψ).hom.app L.obj)) :=
       IsIso.of_isIso_comp_left
         ((liftedScalarExtension φ Y).map ((compactSupportSiteComparison RA c).inv.app L)) _
     exact IsIso.of_isIso_comp_right _
       ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).map
-        ((pbcComparisonReduction X ψ).hom.app L.obj))
+        ((CoefficientScalarRepresentatives.comparisonIso X ψ).hom.app L.obj))
   exact ⟨hLB, he, hp, hs⟩
 
 private theorem coefficientRefinementTransport
@@ -516,6 +530,99 @@ private theorem coefficientRefinementTransport
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   rw [hd, reassoc_of% hc, reassoc_of% hn, reassoc_of% hb]
   simp only [Iso.inv_hom_id_assoc]
+
+/-- Coefficients commute with the canonical compactification change, including a change
+through any common refinement, on both sites. The final delta factors express the
+pro-etale identity at the retained etale origin of the actual scalar-extended object.
+Source: Stacks 0F7I and 0GL6; blueprint Steps 5--7
+(blueprint: lem-sp-et-proet-coefficient-compatibility).
+
+Proof: Step 5 pastes the proper counit mates and open tensor units under composition.
+Step 6 uses lem-sp-refinement-coefficient-mate for the noncartesian refinement arrow;
+its three-constituent theta is the specified canonical refinement. Step 7 applies proper
+pushforward and its compositor, then cancels the inverse comparison to give either
+orientation. For any common refinement substitute its two squares and cancel their
+invertible factors. The canonical cocycle of lem-amb-etale-compact-comparisons proves
+independence of that choice. Apply the same site-mate pasting to obtain the pro-etale
+square through the specified c; delta only changes the retained scalar-extension origin. -/
+theorem etaleProEtaleCoefficientCompatibility_refinement
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell)
+    (k : Type u) [Field k] [CharP k p]
+    (_hA : ∃ n : ℕ, ∀ x : A, (ell ^ n) • x = 0)
+    (_hB : ∃ n : ℕ, ∀ x : B, (ell ^ n) • x = 0) (φ : A →+* B)
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c d : Compactification f)
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))
+    (_hL : AdjunctionTransfer.etaleProperty (ULift.{u + 1, u} A) X L.obj) :
+    ∃ hLB : DerivedCategory.TStructure.t.plus ((Etale.scalarExtension (uliftRingHom φ) X).obj
+      L.obj),
+      ((Etale.scalarExtension (uliftRingHom φ) Y).map
+          ((Etale.rightDerivedLowerShriekOfCompactificationIso (ULift.{u + 1, u} A) c d).hom.app
+            L.obj) ≫
+        etaleCoefficientMap (uliftRingHom φ) d L.obj =
+      etaleCoefficientMap (uliftRingHom φ) c L.obj ≫
+        (Etale.rightDerivedLowerShriekOfCompactificationIso (ULift.{u + 1, u} B) c d).hom.app
+          ((Etale.scalarExtension (uliftRingHom φ) X).obj L.obj)) ∧
+      ((@CoefficientScalarRepresentatives.extension.{u} Y.ProEt inferInstance
+          (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology Y)
+          (ULift.{u + 1, u} A) (ULift.{u + 1, u} B) inferInstance inferInstance (uliftRingHom
+            φ)).map
+          (siteRefinement (ULift.{u + 1, u} A) c d L).hom ≫
+        (proEtaleCoefficientMap φ d).app
+          ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+            X).mapDerivedCategory.obj L.obj) ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) d).map
+          ((CoefficientScalarRepresentatives.comparisonIso.{u} X (uliftRingHom φ)).hom.app L.obj) =
+      (proEtaleCoefficientMap φ c).app
+          ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+            X).mapDerivedCategory.obj L.obj) ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c).map
+          ((CoefficientScalarRepresentatives.comparisonIso.{u} X (uliftRingHom φ)).hom.app L.obj) ≫
+        (siteRefinement (ULift.{u + 1, u} B) c d ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj
+          L.obj, hLB⟩).hom)  := by
+  obtain ⟨hLB, _, _, hc⟩ := etaleProEtaleCoefficientCompatibility
+    ell p _hp _hEll k _hA _hB φ f c L _hL
+  obtain ⟨_, _, _, hd⟩ := etaleProEtaleCoefficientCompatibility
+    ell p _hp _hEll k _hA _hB φ f d L _hL
+  let LB : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) :=
+    ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj L.obj, hLB⟩
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
+    (X ↘ Spec (.of k))
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian
+    (Y ↘ Spec (.of k))
+  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  let : IsNoetherian X := ⟨⟩
+  let : IsNoetherian Y := ⟨⟩
+  have he := (Etale.etaleCompactScalarCoherence (uliftRingHom φ) f c).2.2 d L
+    ⟨LB, rfl⟩
+  simp only [← etaleCoefficientMap_eq_compactScalarMap] at he
+  refine ⟨hLB, he, ?_⟩
+  have hn := (CoefficientScalarRepresentatives.comparisonIso.{u} Y (uliftRingHom φ)).hom.naturality
+    ((Etale.rightDerivedLowerShriekOfCompactificationIso (ULift.{u + 1, u} A) c d).hom.app
+      L.obj)
+  dsimp only [Functor.comp_map] at hn
+  have hb := congrArg
+    ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map) he
+  simp only [Functor.map_comp] at hb
+  have ht := coefficientRefinementTransport
+    ((liftedScalarExtension φ Y).mapIso
+      ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).app L).symm)
+    ((liftedScalarExtension φ Y).mapIso
+      ((compactSupportSiteComparison (ULift.{u + 1, u} A) d).app L).symm)
+    ((compactSupportSiteComparison (ULift.{u + 1, u} B) c).app LB)
+    ((compactSupportSiteComparison (ULift.{u + 1, u} B) d).app LB) hc hd hn hb
+  dsimp only [siteRefinement, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+  simp only [Functor.map_comp, Category.assoc] at ht ⊢
+  exact ht
 
 private theorem compositionSiteBoundary_eq
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -731,7 +838,7 @@ theorem etaleProEtaleCoefficientCompatibility_composition
           (etaleCoefficientMap (uliftRingHom φ) c L.obj) ≫
         (etaleCompositor (ULift.{u + 1, u} B) c d e).hom.app ((Etale.scalarExtension
           (uliftRingHom φ) X).obj L.obj)) ∧
-      ((@pbcFixedScalarExtension.{u} Z.ProEt inferInstance
+      ((@CoefficientScalarRepresentatives.extension.{u} Z.ProEt inferInstance
           (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology Z)
           (ULift.{u + 1, u} A) (ULift.{u + 1, u} B) inferInstance inferInstance (uliftRingHom
             φ)).map
@@ -740,7 +847,7 @@ theorem etaleProEtaleCoefficientCompatibility_composition
           ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
             X).mapDerivedCategory.obj L.obj) ≫
         (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) e).map
-          ((pbcComparisonReduction.{u} X (uliftRingHom φ)).hom.app L.obj) =
+          ((CoefficientScalarRepresentatives.comparisonIso.{u} X (uliftRingHom φ)).hom.app L.obj) =
       (proEtaleCoefficientMap φ d).app
           ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
             c).obj
@@ -753,7 +860,8 @@ theorem etaleProEtaleCoefficientCompatibility_composition
         (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) d).map
           ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B))
             c).map
-            ((pbcComparisonReduction.{u} X (uliftRingHom φ)).hom.app L.obj)) ≫
+            ((CoefficientScalarRepresentatives.comparisonIso.{u} X
+              (uliftRingHom φ)).hom.app L.obj)) ≫
         (siteCompositor (ULift.{u + 1, u} B) c d e ⟨(Etale.scalarExtension (uliftRingHom φ)
           X).obj L.obj, hLB⟩).hom) := by
   let RA := ULift.{u + 1, u} A
@@ -844,15 +952,15 @@ theorem etaleProEtaleCoefficientCompatibility_composition
     (T.mapIso ((compactSupportSiteComparison RA d).app FL).symm)
     ((compactSupportSiteComparison RB d).app FLB) hd
   simp only [Functor.mapIso_inv, Iso.symm_inv, Iso.app_hom] at hc' hd'
-  have hnδ := (pbcComparisonReduction.{u} Z ψ).hom.naturality
+  have hnδ := (CoefficientScalarRepresentatives.comparisonIso.{u} Z ψ).hom.naturality
     ((etaleCompositor RA c d e).hom.app L.obj)
   change T.map
       ((comparisonUpperStar (ModuleCat.{u + 1} RA) Z).mapDerivedCategory.map
         ((etaleCompositor RA c d e).hom.app L.obj)) ≫
-      (pbcComparisonReduction Z ψ).hom.app
+      (CoefficientScalarRepresentatives.comparisonIso Z ψ).hom.app
         ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) e).obj
           L.obj) =
-    (pbcComparisonReduction Z ψ).hom.app
+    (CoefficientScalarRepresentatives.comparisonIso Z ψ).hom.app
         ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) d).obj
           FL.obj) ≫
       N.map ((Etale.scalarExtension ψ Z).map
@@ -868,14 +976,14 @@ theorem etaleProEtaleCoefficientCompatibility_composition
     ((compactSupportSiteComparison RB c).app LB)
     ((compactSupportSiteComparison RB d).app FLB)
     ((compactSupportSiteComparison RB d).app FBL)
-    ((pbcComparisonReduction Y ψ).hom.app FL.obj)
+    ((CoefficientScalarRepresentatives.comparisonIso Y ψ).hom.app FL.obj)
     ((comparisonUpperStar (ModuleCat.{u + 1} RB) Y).mapDerivedCategory.map
       (etaleCoefficientMap ψ c L.obj))
     ((proEtaleCoefficientMap φ c).app
         ((comparisonUpperStar (ModuleCat.{u + 1} RA) X).mapDerivedCategory.obj L.obj) ≫
       (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).map
-        ((pbcComparisonReduction X ψ).hom.app L.obj))
-    ((pbcComparisonReduction Z ψ).hom.app
+        ((CoefficientScalarRepresentatives.comparisonIso X ψ).hom.app L.obj))
+    ((CoefficientScalarRepresentatives.comparisonIso Z ψ).hom.app
         ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) d).obj
           FL.obj) ≫ N.map (etaleCoefficientMap ψ d FL.obj))
     (N.map ((Etale.rightDerivedLowerShriekOfCompactification
@@ -889,7 +997,7 @@ theorem etaleProEtaleCoefficientCompatibility_composition
   have hbA := compositionSiteBoundary_eq RA c d L hFL
   have hbB := compositionSiteBoundary_eq RB c d LB hFBL
   have hv' : T.map (compositionSiteBoundary RA c d L).hom ≫
-      (pbcComparisonReduction Z ψ).hom.app
+      (CoefficientScalarRepresentatives.comparisonIso Z ψ).hom.app
         ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) d).obj
           FL.obj) ≫ N.map (etaleCoefficientMap ψ d FL.obj) ≫
       N.map ((Etale.rightDerivedLowerShriekOfCompactification
@@ -900,13 +1008,13 @@ theorem etaleProEtaleCoefficientCompatibility_composition
       G.map ((proEtaleCoefficientMap φ c).app
         ((comparisonUpperStar (ModuleCat.{u + 1} RA) X).mapDerivedCategory.obj L.obj)) ≫
       G.map ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).map
-        ((pbcComparisonReduction X ψ).hom.app L.obj)) ≫
+        ((CoefficientScalarRepresentatives.comparisonIso X ψ).hom.app L.obj)) ≫
       (compositionSiteBoundary RB c d LB).hom := by
     rw [hbA, hbB]
     simpa only [Functor.map_comp, Category.assoc, Iso.app_hom,
       Functor.comp_obj, ObjectProperty.ι_obj, FL, FBL, LB, G] using hv
   have hv'' : T.map (compositionSiteBoundary RA c d L).hom ≫
-      (pbcComparisonReduction Z ψ).hom.app
+      (CoefficientScalarRepresentatives.comparisonIso Z ψ).hom.app
         ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) d).obj
           FL.obj) ≫ N.map (etaleCoefficientMap ψ d FL.obj) ≫
       N.map ((Etale.rightDerivedLowerShriekOfCompactification
@@ -918,7 +1026,7 @@ theorem etaleProEtaleCoefficientCompatibility_composition
       G.map ((proEtaleCoefficientMap φ c).app
         ((comparisonUpperStar (ModuleCat.{u + 1} RA) X).mapDerivedCategory.obj L.obj)) ≫
       G.map ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).map
-        ((pbcComparisonReduction X ψ).hom.app L.obj)) := by
+        ((CoefficientScalarRepresentatives.comparisonIso X ψ).hom.app L.obj)) := by
     have h := congrArg (fun t ↦ t ≫ (compositionSiteBoundary RB c d LB).inv) hv'
     simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using h
   have ht := coefficientRefinementTransport
@@ -932,8 +1040,8 @@ theorem etaleProEtaleCoefficientCompatibility_composition
       G.map ((proEtaleCoefficientMap φ c).app
         ((comparisonUpperStar (ModuleCat.{u + 1} RA) X).mapDerivedCategory.obj L.obj)) ≫
       G.map ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).map
-        ((pbcComparisonReduction X ψ).hom.app L.obj)))
-    (δc := (pbcComparisonReduction Z ψ).hom.app
+        ((CoefficientScalarRepresentatives.comparisonIso X ψ).hom.app L.obj)))
+    (δc := (CoefficientScalarRepresentatives.comparisonIso Z ψ).hom.app
       ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) d).obj
         FL.obj))
     (βc := N.map (etaleCoefficientMap ψ d FL.obj) ≫
@@ -976,6 +1084,118 @@ def normalizedSumComparison (A : Type (u + 1)) [CommRing A]
     (Y ↘ Spec (.of k))
   letI : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
   N.comparison e c
+
+private theorem coefficientCounitTransport
+    {C : Type*} [Category C] {U V W D E P Q R S F : C}
+    (e : U ≅ V) (c₀ : D ≅ Q) (c₁ : E ≅ R) (z : F ≅ S)
+    {b : V ⟶ W} {d : W ⟶ D} {a : D ⟶ E} {δ : U ⟶ P}
+    {β : P ⟶ Q} {a' : Q ⟶ R} {ε : R ⟶ S} {r : P ⟶ S} {t : U ⟶ F}
+    (hs : e.hom ≫ b ≫ d = δ ≫ β ≫ c₀.inv)
+    (hn : a ≫ c₁.hom = c₀.hom ≫ a')
+    (hc : β ≫ a' ≫ ε = r) (hd : t ≫ z.hom = δ ≫ r) :
+    b ≫ d ≫ a ≫ c₁.hom ≫ ε ≫ z.inv = e.inv ≫ t := by
+  apply (cancel_epi e.hom).mp
+  rw [reassoc_of% hs, reassoc_of% hn]
+  simp only [Iso.inv_hom_id_assoc]
+  rw [reassoc_of% hc, ← reassoc_of% hd]
+  simp
+
+/-- Transport of an actual etale adjunction counit carries its coefficient identity to
+the identity for the named pro-etale coefficient map. The two c-inverses in the paper
+are `compactSupportSiteComparison.hom` with the existing library's opposite orientation.
+The final delta removes only the output coefficient/site identification.
+Source: blueprint Step 11, using det-sp-et-proet-adjunction-transfer's counit formula
+(blueprint: lem-sp-et-proet-coefficient-compatibility).
+
+Proof: solve the site/coefficient square of Steps 1--4 for the b-inverse. Substitute it
+in coefficient extension of the transported A-counit. Naturality of delta moves that
+counit across the tensor/site comparison. Apply the assumed etale coefficient-counit
+identity. Naturality of the B-site comparison moves the right-functor comparison across
+c_B-inverse. What remains is precisely the transported B-counit after compact support of
+the transported right-functor comparison. The displayed form avoids inverses of beta and
+b by precomposing with b; their invertibility is in the first statement. This substitution
+requires no admissibility theorem for arbitrary finite rings. -/
+theorem etaleProEtaleCoefficientCompatibility_counit
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell)
+    (k : Type u) [Field k] [CharP k p]
+    (_hA : ∃ n : ℕ, ∀ x : A, (ell ^ n) • x = 0)
+    (_hB : ∃ n : ℕ, ∀ x : B, (ell ^ n) • x = 0) (φ : A →+* B)
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f)
+    (HA : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) Y ⥤ Etale.DerivedCategoryModule
+      (ULift.{u + 1, u} A) X)
+    (HB : Etale.DerivedCategoryModule (ULift.{u + 1, u} B) Y ⥤ Etale.DerivedCategoryModule
+      (ULift.{u + 1, u} B) X)
+    (adjA : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u}
+      A)) c ⊣ HA)
+    (adjB : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u}
+      B)) c ⊣ HB)
+    (N : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) Y)
+    (hHA : AdjunctionTransfer.etaleProperty (ULift.{u + 1, u} A) X (HA.obj N))
+    (hHB : AdjunctionTransfer.etaleProperty (ULift.{u + 1, u} B) X (HB.obj
+      ((Etale.scalarExtension (uliftRingHom φ) Y).obj N)))
+    (a : (Etale.scalarExtension (uliftRingHom φ) X).obj (HA.obj N) ⟶
+      HB.obj ((Etale.scalarExtension (uliftRingHom φ) Y).obj N))
+    (_hCounit : etaleCoefficientMap (uliftRingHom φ) c (HA.obj N) ≫
+        (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u}
+          B)) c).map a ≫
+        adjB.counit.app ((Etale.scalarExtension (uliftRingHom φ) Y).obj N) =
+      (Etale.scalarExtension (uliftRingHom φ) Y).map (adjA.counit.app N)) :
+    (proEtaleCoefficientMap φ c).app
+        ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj
+          (HA.obj N)) ≫
+      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c).map
+        ((CoefficientScalarRepresentatives.comparisonIso.{u} X (uliftRingHom φ)).hom.app
+            (HA.obj N) ≫
+          (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B))
+            X).mapDerivedCategory.map a) ≫
+      (compactSupportSiteComparison (ULift.{u + 1, u} B) c).hom.app
+        ((AdjunctionTransfer.etaleToPlus (ULift.{u + 1, u} B) X).obj
+          ⟨HB.obj ((Etale.scalarExtension (uliftRingHom φ) Y).obj N), hHB⟩) ≫
+      (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map
+        (adjB.counit.app ((Etale.scalarExtension (uliftRingHom φ) Y).obj N)) ≫
+      (CoefficientScalarRepresentatives.comparisonIso.{u} Y (uliftRingHom φ)).inv.app N =
+    (@CoefficientScalarRepresentatives.extension.{u} Y.ProEt inferInstance
+          (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology Y)
+          (ULift.{u + 1, u} A) (ULift.{u + 1, u} B) inferInstance inferInstance (uliftRingHom
+            φ)).map
+      ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).hom.app
+          ((AdjunctionTransfer.etaleToPlus (ULift.{u + 1, u} A) X).obj ⟨HA.obj N, hHA⟩) ≫
+        (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y).mapDerivedCategory.map
+          (adjA.counit.app N))  := by
+  let LA := (AdjunctionTransfer.etaleToPlus (ULift.{u + 1, u} A) X).obj ⟨HA.obj N, hHA⟩
+  let MB := (AdjunctionTransfer.etaleToPlus (ULift.{u + 1, u} B) X).obj
+    ⟨HB.obj ((Etale.scalarExtension (uliftRingHom φ) Y).obj N), hHB⟩
+  obtain ⟨hLB, _, _, hs⟩ := etaleProEtaleCoefficientCompatibility
+    ell p _hp _hEll k _hA _hB φ f c LA hHA
+  let LB : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) :=
+    ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj (HA.obj N), hLB⟩
+  have hn := (compactSupportSiteComparison (ULift.{u + 1, u} B) c).hom.naturality
+    (ObjectProperty.homMk a : LB ⟶ MB)
+  dsimp only [Functor.comp_map] at hn
+  have hc := congrArg
+    ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map)
+    _hCounit
+  simp only [Functor.map_comp] at hc
+  have hd := (CoefficientScalarRepresentatives.comparisonIso.{u} Y (uliftRingHom φ)).hom.naturality
+    (adjA.counit.app N)
+  dsimp only [Functor.comp_map] at hd
+  have ht := coefficientCounitTransport
+    ((liftedScalarExtension φ Y).mapIso
+      ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).app LA).symm)
+    ((compactSupportSiteComparison (ULift.{u + 1, u} B) c).app LB)
+    ((compactSupportSiteComparison (ULift.{u + 1, u} B) c).app MB)
+    ((CoefficientScalarRepresentatives.comparisonIso.{u} Y (uliftRingHom φ)).app N) hs hn hc hd
+  simp only [Functor.map_comp, Category.assoc]
+  exact ht
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in

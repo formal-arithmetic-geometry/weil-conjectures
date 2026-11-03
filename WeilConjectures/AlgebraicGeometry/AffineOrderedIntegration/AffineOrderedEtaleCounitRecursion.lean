@@ -105,7 +105,6 @@ theorem etaleCounit_recursion
     H.obj (sourceEtale P Y Ke (d + 1)) hJ eH).inv
   let C := (supportedTensorCoordinates P Y aY Ke hKe (d + 1) hJ.1.1.1).hom
   have hpc := congrArg (fun z ↦ A ≫ B ≫ z ≫ C) hp
-  have hmain := hpc.trans ht
-  simpa only [A, B, C, Category.assoc] using hmain
+  simpa only [A, B, C, Category.assoc] using hpc.trans ht
 
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

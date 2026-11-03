@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.Geometric
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SkPropSfExistence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
 import Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.IntegralCoefficientIsomorphism
 
 /-! # Integral tower adjunction and comparison with the Brown exceptional inverse image
 Source: latest blueprint sk-prop-sp-integral-adjunction, opening paragraph and proof.
@@ -35,85 +36,14 @@ set_option maxHeartbeats 800000 in
 -- Check the coefficient topology and continuous finite-subfield transport together.
 set_option synthInstance.maxHeartbeats 100000 in
 /-- Integral coefficients are admissible for sk-prop-sf-existence. This is the
-explicit finite-subfield transport already used by IntegralTowerCompactificationCoherence,
-with the current continuous integer-ring abbreviation. No existence proof is postponed.
+finite-subfield transport of the continuous integer-ring coefficients. The coefficient
+isomorphism is constructed explicitly, with no postponed existence proof.
 Source: the coefficient convention of sk-prop-sf-existence
 (blueprint: sk-prop-sp-integral-adjunction). -/
 abbrev integralAdmissible :
     IsLocalizingAdmissibleCoefficient l (DerivedNakayama.integerRing l E) := by
-  let f : E →ₐ[ℚ_[l]] PadicAlgCl l := IsAlgClosed.lift
-  let F : PadicAlgCl.FiniteIntermediateField l :=
-    ⟨f.fieldRange, f.equivFieldRange.toLinearEquiv.finiteDimensional⟩
-  let : FiniteDimensional ℚ_[l] F := F.property
-  let e : E ≃ₐ[ℚ_[l]] F := f.equivFieldRange
-  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  let := PadicAlgCl.normedFieldOfAlgebra l F
-  have hn (x : E) : Padic.coefficientExtensionAbsoluteValue l E x = ‖f x‖ := by
-    let a : AbsoluteValue E ℝ :=
-      { toFun := fun x ↦ ‖f x‖
-        map_mul' := fun x y ↦ by rw [map_mul, norm_mul]
-        nonneg' := fun x ↦ norm_nonneg _
-        eq_zero' := fun x ↦ by simp only [norm_eq_zero, map_eq_zero_iff f f.injective]
-        add_le' := fun x y ↦ by rw [_root_.map_add]; exact norm_add_le _ _ }
-    have ha (y : ℚ_[l]) : a (algebraMap ℚ_[l] E y) = ‖y‖ := by
-      change ‖f (algebraMap ℚ_[l] E y)‖ = ‖y‖
-      rw [f.commutes]
-      exact PadicAlgCl.norm_extends l y
-    exact (spectralNorm_unique_field_norm_ext ha x).symm
-  have hm (x : E) : x ∈ Padic.coefficientExtensionIntegers l E ↔
-      e x ∈ PadicAlgCl.integers l F := by
-    have h := (Padic.extension_integers_dvr l E
-      (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x
-    rw [hn] at h
-    exact h.trans (by
-      rw [PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
-      rfl)
-  let t : Padic.coefficientExtensionIntegers l E ≃+* PadicAlgCl.integers l F :=
-    { toFun := fun x ↦ ⟨e x.val, (hm x.val).mp x.property⟩
-      invFun := fun x ↦ ⟨e.symm x.val, (hm _).mpr (by
-        simpa only [e.apply_symm_apply] using x.property)⟩
-      left_inv := fun x ↦ Subtype.ext (e.symm_apply_apply x.val)
-      right_inv := fun x ↦ Subtype.ext (e.apply_symm_apply x.val)
-      map_add' := fun x y ↦ Subtype.ext (e.map_add x.val y.val)
-      map_mul' := fun x y ↦ Subtype.ext (e.map_mul x.val y.val) }
-  have ht : Isometry t := by
-    apply Isometry.of_dist_eq
-    intro x y
-    rw [dist_eq_norm, dist_eq_norm]
-    change ‖f x.val - f y.val‖ = Padic.coefficientExtensionAbsoluteValue l E (x.val - y.val)
-    rw [← _root_.map_sub, hn]
-  have hti : Continuous t.symm := (show _ ≃ᵢ _ from ⟨t.toEquiv, ht⟩).symm.continuous
-  let q : DerivedNakayama.integerRingSheaf l E ≅
-      Profinite.padicIntegersCondensedRing.{u} l F :=
-    { hom := ⟨{
-        app := fun _ ↦ RingCat.ofHom
-          (ULift.ringEquiv.symm.toRingHom.comp
-            ((t.toRingHom.compLeftContinuous _ ht.continuous).comp ULift.ringEquiv.toRingHom))
-        naturality := by intros; rfl }⟩
-      inv := ⟨{
-        app := fun _ ↦ RingCat.ofHom
-          (ULift.ringEquiv.symm.toRingHom.comp
-            ((t.symm.toRingHom.compLeftContinuous _ hti).comp ULift.ringEquiv.toRingHom))
-        naturality := by intros; rfl }⟩
-      hom_inv_id := by
-        ext S x
-        apply ULift.ext
-        apply ContinuousMap.ext
-        intro z
-        exact t.symm_apply_apply (x.down z)
-      inv_hom_id := by
-        ext S x
-        apply ULift.ext
-        apply ContinuousMap.ext
-        intro z
-        exact t.apply_symm_apply (x.down z) }
-  let G := sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})
-  have : IsMonHom (G.mapIso q).hom :=
-    Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u}) q.hom
-  exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl
-    ⟨F, ⟨Mon.mkIso' (G.mapIso q)⟩⟩))))
-
+  obtain ⟨F, hF⟩ := integralCoefficientIso l E
+  exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨F, hF⟩))))
 
 /-- The proper coefficient map is the mate of the actual nonflat tensor/pullback
 comparison. No flatness is imposed on the ell-power quotient.

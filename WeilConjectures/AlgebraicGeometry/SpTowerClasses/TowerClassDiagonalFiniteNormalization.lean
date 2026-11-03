@@ -29,6 +29,33 @@ attribute [local implicit_reducible] spCoefficientCommRings SpTowerShriek.tau li
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+/-- Private evaluation wrapper: keeps `abEvaluation` opaque to instance search so the
+kernel checks every `mapSingleArrow` occurrence against the same instance terms. -/
+private def evW (T : Scheme.{u}) (n : ℕ) : Ab T ⥤ DiagonalAb T := abEvaluation T n
+
+private instance evW_additive (T : Scheme.{u}) (n : ℕ) : (evW T n).Additive := by
+  unfold evW; infer_instance
+
+private instance evW_limits (T : Scheme.{u}) (n : ℕ) : PreservesFiniteLimits (evW T n) := by
+  unfold evW; infer_instance
+
+private instance evW_colimits (T : Scheme.{u}) (n : ℕ) :
+    PreservesFiniteColimits (evW T n) := by
+  unfold evW; infer_instance
+
+/-- Private wrapper of `finiteForget`, for the same reason as `evW`. -/
+private def ffW (T : Scheme.{u}) (n : ℕ) := finiteForget l E T n
+
+private instance ffW_additive (T : Scheme.{u}) (n : ℕ) : (ffW l E T n).Additive := by
+  unfold ffW; infer_instance
+
+private instance ffW_limits (T : Scheme.{u}) (n : ℕ) : PreservesFiniteLimits (ffW l E T n) := by
+  unfold ffW; infer_instance
+
+private instance ffW_colimits (T : Scheme.{u}) (n : ℕ) :
+    PreservesFiniteColimits (ffW l E T n) := by
+  unfold ffW; infer_instance
+
 private theorem supported_finite_square
     {T : Scheme.{u}} (c : Chern l E T) (hc : c.Normalized l E)
     (X : Ab T)
@@ -58,20 +85,20 @@ private theorem supported_finite_square
       (c.reduction.forget.F ⋙ abEvaluation T n).map q ≫
       (finiteScalarForgetIso l E c n).hom.app N
     (DerivedCategory.singleFunctor (DiagonalAb T) 0).map source ≫
-        (mapSingleArrow (SpTowerShriek.ev l E T n ⋙ finiteForget l E T n) (2 : ℤ) b ≫
+        (mapSingleArrow (SpTowerShriek.ev l E T n ⋙ ffW l E T n) (2 : ℤ) b ≫
           ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
-            ((finiteForget l E T n).map (lineEvaluation l E c n).hom))⟦(2 : ℤ)⟧') =
-      mapSingleArrow (abEvaluation T n) (2 : ℤ)
+            ((ffW l E T n).map (lineEvaluation l E c n).hom))⟦(2 : ℤ)⟧') =
+      mapSingleArrow (evW T n) (2 : ℤ)
           (kummerComposite (towerKummerComplex l c.kummer)
             (towerKummerShortExact l c.kummer) beta) ≫
         ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
           (finiteRootMap l E T n))⟦(2 : ℤ)⟧' := by
   intro f b source
   let F := c.reduction.forget.F
-  let V := abEvaluation T n
+  let V := evW T n
   let G := WeilConjectures.SemilinearSections.res.{u + 1, u, u + 1}
     (coefficientSystemMap l E T)
-  let H := SpTowerShriek.ev l E T n ⋙ finiteForget l E T n
+  let H := SpTowerShriek.ev l E T n ⋙ ffW l E T n
   let e := finiteScalarForgetIso l E c n
   have had : c.scalar.adjunction.CommShift ℤ := by
     rw [c.scalar.adjunction_eq]
@@ -99,7 +126,7 @@ private theorem supported_finite_square
   have h := finiteBoundary_exact_glue F V G H e
     (V.map (c.reduction.model.adjunction.unit.app X)) q
     (c.scalar.ordinaryAdjunction.unit.app c.rootModule) (V.mapIso c.rootForget)
-    ((finiteForget l E T n).map (lineEvaluation l E c n).hom) b f hscalar'
+    ((ffW l E T n).map (lineEvaluation l E c n).hom) b f hscalar'
   have hi :
       ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
           (V.map (c.reduction.model.adjunction.unit.app X)) ≫
@@ -168,22 +195,24 @@ theorem diagonal_finite_normalization {b : SpTowerShriek.Base l E}
       ← c.scalar.T.map_comp_assoc, Iso.hom_inv_id_assoc]
     rfl
   intro n
-  have heval : mapSingleArrow (finiteForget l E (diagonalSurface S) n) (2 : ℤ)
+  have heval : mapSingleArrow (ffW l E (diagonalSurface S) n) (2 : ℤ)
       (evaluatedDiagonal l E d n) =
     mapSingleArrow
         (SpTowerShriek.ev l E (diagonalSurface S) n ⋙
-          finiteForget l E (diagonalSurface S) n) (2 : ℤ) gamma ≫
+          ffW l E (diagonalSurface S) n) (2 : ℤ) gamma ≫
       ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface S)) 0).map
-        ((finiteForget l E (diagonalSurface S) n).map
+        ((ffW l E (diagonalSurface S) n).map
           (lineEvaluation l E c n).hom))⟦(2 : ℤ)⟧' := by
     rw [hdiag]
     unfold evaluatedDiagonal
     rw [mapSingleArrow_postcompose, mapSingleArrow_composite]
   have h := supported_finite_square l E c hc X a ha N s q hq (diagonalBoundary S) n
-  dsimp only at h
-  rw [hsource n] at h
-  refine ⟨_, _, HEq.rfl, HEq.rfl, ?_⟩
-  rw [heval]
-  exact h
+  refine ⟨mapSingleArrow (ffW l E (diagonalSurface S) n) (2 : ℤ)
+      (evaluatedDiagonal l E d n), mapSingleArrow (evW (diagonalSurface S) n) (2 : ℤ)
+      (kummerComposite (towerKummerComplex l c.kummer)
+        (towerKummerShortExact l c.kummer) (diagonalBoundary S)), HEq.rfl, HEq.rfl, ?_⟩
+  refine Eq.trans ?_ h
+  rw [heval, ← hsource n]
+  all_goals rfl
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses

@@ -19,6 +19,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensor
 public import WeilConjectures.AlgebraicGeometry.Etale.Closed.EtaleClosedAmbientAdjoint
 public import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomThickLocus
+public import WeilConjectures.AlgebraicGeometry.FiniteCoefficientOrdinary.FiniteCoefficientOrdinaryDirectImage
+public import WeilConjectures.AlgebraicGeometry.GeneralCoefficientTensor.GeneralEtaleTensorComparison
 
 /-! # Canonical maps for general étale coefficient pairing change
 
@@ -76,6 +78,37 @@ sec-smooth-purity/sec-sp-grp-ladic-summary/sec-towers-and-integral-coefficients/
 sk-lem-sp-tower/thm-coef-finite-hom.proof.md, paragraph 4
 (blueprint: def-coef-general-etale-pairing-maps). -/
 abbrev directImageMaps := AlgebraicGeometry.FiniteCoefficientOrdinary.directImageMaps
+
+/-- The geometric transpose of the specified ordinary direct-image family.
+Source: thm-coef-finite-hom, paragraph 4, and the scalar-unit normalization
+`directImageMaps.etale_counit` (blueprint: def-coef-general-etale-pairing-maps).
+This construction uses just the two ordinary geometric adjunctions. -/
+def scalarPullComparison {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {Y X : Scheme.{u}} (f : Y ⟶ X) :
+    scalarExtension φ X ⋙ L(upperStar (ModuleCat B) f) ⟶
+      L(upperStar (ModuleCat A) f) ⋙ scalarExtension φ Y :=
+  ((mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat A) f)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat B) f)).symm
+      (TwoSquare.mk _ _ _ _ (directImageMaps.etale φ f))).natTrans
+
+/-- The ordinary open/scalar isomorphism, fixed by uniqueness of the composite
+left adjoints to the actual coefficient restrictions and exact open restrictions.
+Source: Stacks 03EL and 06YY (blueprint: def-coef-general-etale-pairing-maps). -/
+def fixedOpenScalarExtension {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    derivedExtension (A := A) j ⋙ scalarExtension φ X ≅
+      scalarExtension φ U ⋙ derivedExtension (A := B) j :=
+  Adjunction.leftAdjointUniq
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat A) j).comp
+      (FiniteCoefficientOrdinary.scalarAdjunction X.smallEtaleTopology φ))
+    (((FiniteCoefficientOrdinary.scalarAdjunction U.smallEtaleTopology φ).comp
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat B) j)).ofNatIsoRight
+        (openDerivedRestrictScalarsIso φ j))
+
+/-- The normalized fixed-coefficient tensor comparison, computed on K-flat models.
+Source: Stacks 07A4 (blueprint: def-coef-general-etale-pairing-maps). -/
+abbrev tensorComparison {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (T : Scheme.{u}) (φ : A →+* B) := GeneralCoefficientTensor.comparison φ T
 
 /-- Compact support `s_! = g_* j_!` for `s = g j`, `j` open and `g` closed
 (def-amb-etale-compact-support).
@@ -187,7 +220,7 @@ def compactComparison {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (scalarExtension φ X).obj ((shriek A g j).obj L) ⟶
       (shriek B g j).obj ((scalarExtension φ S).obj L) :=
   (directImageMaps.etale φ g).app ((derivedExtension (A := A) j).obj L) ≫
-    R(lowerStar (ModuleCat B) g).map ((openScalarExtension φ j).hom.app L)
+    R(lowerStar (ModuleCat B) g).map ((fixedOpenScalarExtension φ j).hom.app L)
 
 /-- The ordinary direct-image comparison `c_s = R g_*(c_j) ∘ c_g : F_X R s_* Q → R s_* F_S Q`
 of lem-coef-general-finite-direct-image.
@@ -216,7 +249,7 @@ def evaluationComparison {A B : Type (u + 1)} [CommRing A] [CommRing B]
       ((derivedHom (ModuleCat B) T).obj (op ((scalarExtension φ T).obj K))).obj
         ((scalarExtension φ T).obj M) :=
   ((derivedTensorHomAdjunction (ModuleCat B) ((scalarExtension φ T).obj K)).homEquiv _ _)
-    ((etaleHomTensorComparison T φ K _).hom ≫
+    ((tensorComparison T φ K _).hom ≫
       (scalarExtension φ T).map ((derivedTensorHomAdjunction (ModuleCat A) K).counit.app M))
 
 /-- The exceptional counit equation `ε_{s,B} ∘ s_!(b) ∘ q_{s,N} = F_X ε_{s,A}` for

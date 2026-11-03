@@ -7,6 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.IntegralTowerStatement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.GeometricTowerData
+public import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.GeometricTowerRepresentatives
+public import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.GeometricTowerSupport
+public import WeilConjectures.CategoryTheory.EvaluationCounits
+public import WeilConjectures.CategoryTheory.ReductionCounits
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
 
 /-! # The geometric adjunction in the current condensed tower category
 Source: latest blueprint sk-prop-sp-tower-geometric, statement (10.17) and proof.
@@ -242,6 +248,26 @@ structure GeometricAdjunction (DX : Model l E X) (DY : Model l E Y)
       (ctfEvaluation l E Y n).map (adjunction.counit.app C) =
         (finite.support l E n).map ((rightLevels n).hom.app C) ≫
           (finite.adjunction n).counit.app ((ctfEvaluation l E Y n).obj C)
+  /-- Invertibility of the specified exceptional coefficient mate, including identities. -/
+  finiteMateIso : ∀ {m n : ℕ} (h : m ≤ n) (K : FiniteCtf l E Y n),
+    IsIso (finite.mate l E h K)
+  /-- The whole compact-support comparison, normalized by the actual quotient maps.
+  This is constructed before the tower right adjoint and does not assert its normalization. -/
+  integralComparison : ∃ b :
+      (constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X).ι ⋙
+        CondensedRing.rightDerivedLowerShriekOfCompactification
+          (DerivedNakayama.integerRing l E) c ⋙ DY.red ≅
+      (constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X).ι ⋙
+        DX.red ⋙ construction.functor l E c,
+    ∀ (n : ℕ) (M : Dbc l E X)
+      (hM : ConstructibleTowers l E X (DX.red.obj M.obj)),
+      (Ev l E Y n).map (b.hom.app M) ≫
+        (((supportLevels n).hom.app ⟨DX.red.obj M.obj, hM⟩)).hom =
+      (sectionLevels l E Y DY n).hom.app
+          ((CondensedRing.rightDerivedLowerShriekOfCompactification
+            (DerivedNakayama.integerRing l E) c).obj M.obj) ≫
+        (sectionSupportCoefficientMap l E c n).app M.obj ≫
+        (finiteSupport l E c n).map ((sectionLevels l E X DX n).inv.app M.obj)
   /-- The scalar square is the one induced by the actual support-tower transitions. -/
   supportReduction : ∀ {m n : ℕ} (h : m ≤ n) (C : CtfTowers l E X),
     (finite.scalarY l E h).map ((supportLevels n).inv.app C) ≫
@@ -306,6 +332,45 @@ theorem sp_tower_geometric_statement
     (d : ℕ) [SmoothOfRelativeDimension d f] :
     Nonempty (GeometricAdjunction l E (model l E X) (model l E Y)
       (fieldCompactification k X Y f)) := by
-  sorry
+  obtain ⟨B⟩ := geometric_support_exists l E k X Y f d
+  let P := fun C ↦ Classical.choice (geometric_representatives_exist l E k X Y f d B C)
+  let G := representingCounitRightAdjoint (fun C ↦ (P C).pair)
+  obtain ⟨adj, hadj⟩ := representingCounits_adjunction (fun C ↦ (P C).pair)
+  have hc (n : ℕ) (C : CtfTowers l E Y) :
+      (B.supportLevels n).inv.app (G.obj C) ≫
+        (ctfEvaluation l E Y n).map (adj.counit.app C) =
+      (B.finite.support l E n).map ((P C).levels n).hom ≫
+        (B.finite.adjunction n).counit.app ((ctfEvaluation l E Y n).obj C) := by
+    rw [hadj C]
+    exact (P C).counit n
+  let rho := fun n ↦ evaluationCounitComparison adj (B.finite.adjunction n)
+    (ctfEvaluation l E X n) (ctfEvaluation l E Y n) (B.supportLevels n)
+    (fun C ↦ (P C).levels n) (hc n)
+  refine ⟨{ construction := B.construction
+            supportClosed := B.supportClosed
+            right := G
+            adjunction := adj
+            finite := B.finite
+            supportLevels := B.supportLevels
+            rightLevels := rho
+            unit := ?_
+            counit := hc
+            finiteMateIso := B.finiteMateIso
+            integralComparison := B.integralComparison
+            supportReduction := B.supportReduction
+            reduction := ?_ }⟩
+  · intro n C
+    exact evaluationCounitComparison_unit adj (B.finite.adjunction n)
+      (ctfEvaluation l E X n) (ctfEvaluation l E Y n) (B.supportLevels n)
+      (fun C ↦ (P C).levels n) (hc n) C
+  · intro m n h C
+    exact reductionCounits (B.finite.adjunction n) (B.finite.adjunction m)
+      (B.finite.scalarX l E h) (B.finite.scalarY l E h) (B.finite.baseChange h) adj
+      (ctfEvaluation l E X n) (ctfEvaluation l E Y n)
+      (ctfEvaluation l E X m) (ctfEvaluation l E Y m)
+      (B.supportLevels n) (B.supportLevels m) (rho n) (rho m)
+      (ctfReduction l E X (model l E X) h (B.finite.scalarX l E h) rfl)
+      (ctfReduction l E Y (model l E Y) h (B.finite.scalarY l E h) rfl)
+      (hc n) (hc m) (B.supportReduction h) C
 
 end AlgebraicGeometry.ProEtale.CondensedIntegralTower

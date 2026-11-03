@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Affine.PurityAffineLineBoundaryRealization
 public import WeilConjectures.AlgebraicGeometry.SupportedHomAdjunctionClass
+public import WeilConjectures.AlgebraicGeometry.RetractedSupport.RetractedSupportKernelCanonicalEvaluation
+public import WeilConjectures.AlgebraicGeometry.RetractedSupport.RetractedSupportKernelMapNormalizedExt
 
 /-! Evaluation of the canonical support kernel map.
 Source: the closed-adjunction counit transport in
@@ -91,6 +93,13 @@ theorem kernelCounitMap_evaluation
         (lowerStar (Modules P) (zeroSection T)).mapDerivedCategory.map eK.inv ≫
         d.inv ≫ (nu P (Line T)).map (P.boundaryEtaleCounit h T) ≫
         ((nu P (Line T)).commShiftIso (2 : ℤ)).hom.app (P.gysinEtaleInput h T).obj) := by
-  sorry
+  obtain ⟨κ₀, hκ₀, hvalue⟩ := kernelCounitMap_canonical_evaluation P h T first
+    hfirstIso hfirst hb eK d heK hd m
+  have hext := kernelCounitMap_normalized_ext P h T first hfirstIso hfirst κ κ₀ hκ hκ₀
+  have happ := congrArg (fun z =>
+    z.app (P.gysinEtaleInput h T) (P.gysinGlobalClass T 2 m)) hext
+  change κ.app (P.gysinEtaleInput h T) (P.gysinGlobalClass T 2 m) =
+    κ₀.app (P.gysinEtaleInput h T) (P.gysinGlobalClass T 2 m) at happ
+  exact happ.trans hvalue
 
 end AlgebraicGeometry.ProEtale.RetractedSupport

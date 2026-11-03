@@ -26,6 +26,12 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ReductionExtendScalars
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjectionFlat
+public import WeilConjectures.CategoryTheory.UnboundedExactTower.UnboundedExactAdjunctionSquare
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
+public import WeilConjectures.SixFunctors.ExactRightDerivedAdjointKFlatRepresentative
 
 /-! # Normalized scalar/pullback comparisons and bounded-below ambient mate
 
@@ -89,5 +95,73 @@ def proEtaleIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (CoefficientScalarRepresentatives.proEtaleScalarPullbackMate_isIso a f)).symm ≪≫
     Functor.isoWhiskerRight
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f) _
+
+/-- Ordinary etale scalar extension commutes with pullback by the uniqueness of
+left adjoints to the sectionwise restriction/direct-image composite.
+Source: Stacks 03EL (blueprint: lem-sfb-scalar-site-comparison-normalized-data). -/
+def etaleSheafIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    CoefficientScalarRepresentatives.ordinaryExtension Y.smallEtaleTopology a ⋙
+        Etale.upperStar (ModuleCat.{u + 1} B) f ≅
+      Etale.upperStar (ModuleCat.{u + 1} A) f ⋙
+        CoefficientScalarRepresentatives.ordinaryExtension X.smallEtaleTopology a :=
+  ((Sheaf.adjunction Y.smallEtaleTopology
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} a)).comp
+      (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)).leftAdjointUniq
+    ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).comp
+      (Sheaf.adjunction X.smallEtaleTopology
+        (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} a)))
+
+private theorem ordinary_restriction_mate
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+      (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+      (TwoSquare.mk _ _ _ _ (Etale.upperStarRestrictScalarsIsoSheaf a f).hom)).natTrans =
+        𝟙 _ := by
+  apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology a)
+    (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology a)).injective
+  change (mateEquiv (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology a)
+    (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology a)
+    (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+      (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+      (TwoSquare.mk _ _ _ _ (Etale.upperStarRestrictScalarsIsoSheaf a f).hom))).natTrans = _
+  rw [iterated_mateEquiv_conjugateEquiv]
+  simp only [Etale.upperStarRestrictScalarsIsoSheaf, Adjunction.leftAdjointUniq,
+    Iso.symm_hom, conjugateIsoEquiv_symm_apply_inv, Iso.refl_inv, TwoSquare.mk]
+  erw [Equiv.apply_symm_apply]
+  ext M ⟨U⟩ x
+  exact congrArg (fun t ↦ ModuleCat.Hom.hom t x)
+    ((ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} a).right_triangle_components
+      (M.obj.obj (Opposite.op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U)))).symm
+
+private theorem ordinary_scalar_mate
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ((mateEquiv (CoefficientScalarRepresentatives.ordinaryAdjunction Y.smallEtaleTopology a)
+      (CoefficientScalarRepresentatives.ordinaryAdjunction X.smallEtaleTopology a)).symm
+      (TwoSquare.mk _ _ _ _ (Etale.upperStarRestrictScalarsIsoSheaf a f).hom)).natTrans =
+        (etaleSheafIso a f).inv := by
+  let δ := (mateEquiv
+    (CoefficientScalarRepresentatives.ordinaryAdjunction Y.smallEtaleTopology a)
+    (CoefficientScalarRepresentatives.ordinaryAdjunction X.smallEtaleTopology a)).symm
+      (TwoSquare.mk _ _ _ _ (Etale.upperStarRestrictScalarsIsoSheaf a f).hom)
+  apply (conjugateEquiv
+    ((CoefficientScalarRepresentatives.ordinaryAdjunction Y.smallEtaleTopology a).comp
+      (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f))
+    ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).comp
+      (CoefficientScalarRepresentatives.ordinaryAdjunction X.smallEtaleTopology a))).injective
+  have h := iterated_mateEquiv_conjugateEquiv
+    (CoefficientScalarRepresentatives.ordinaryAdjunction Y.smallEtaleTopology a)
+    (CoefficientScalarRepresentatives.ordinaryAdjunction X.smallEtaleTopology a)
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f) δ
+  dsimp only [δ] at h
+  rw [Equiv.apply_symm_apply, ordinary_restriction_mate] at h
+  rw [← h]
+  simp only [etaleSheafIso, Adjunction.leftAdjointUniq,
+    CoefficientScalarRepresentatives.ordinaryAdjunction, conjugateIsoEquiv_symm_apply_hom,
+    Iso.symm_inv, Iso.refl_hom]
+  exact (Equiv.apply_symm_apply _ _).symm
 
 end AlgebraicGeometry.ProEtale.OrdinaryScalarSite

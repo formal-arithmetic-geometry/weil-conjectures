@@ -16,6 +16,10 @@ public import WeilConjectures.AlgebraicGeometry.Sf.SfCompactSupportRestrictionOf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.Compactification.NagataCompactification
+public import Mathlib.Algebra.CharP.CharAndCard
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ReductionExtendScalars
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 
 /-! # Specified finite dualizing coefficient and realization data
 
@@ -115,8 +119,9 @@ def finiteDualizingDataCounit (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime
     (finiteDualizingDataCoeff l E n) (X ↘ Spec (.of D.k))).counit.app
       (Etale.constantComplex (finiteDualizingDataCoeff l E n) (Spec (.of D.k)))
 
-/-- The finite-Tor property needed to put the explicitly chosen ordinary term into `D+`.
-Source: `lem-weil-verdier-preservation-strata`, applied to the constant coefficient sheaf. -/
+/-- The ordinary term `W_n` lies in `D+`: the exceptional inverse image of the bounded-below
+constant coefficient complex is bounded below.
+Source: `lem-sfb-finite-upper-shriek-bounded-below`, applied to the constant coefficient sheaf. -/
 theorem finiteDualizingDataTerm_plus (D : FiniteFieldDatum.{u}) (l : ℕ)
     [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})
@@ -124,7 +129,12 @@ theorem finiteDualizingDataTerm_plus (D : FiniteFieldDatum.{u}) (l : ℕ)
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
     [QuasiCompact (X ↘ Spec (.of D.k))] (n : ℕ) :
     _root_.DerivedCategory.TStructure.t.plus (finiteDualizingDataTerm D l E X n) := by
-  sorry
+  let c := finiteDualizingDataCompactification D X
+  let := c.hasCompactification
+  exact Etale.plus_rightDerivedUpperShriek_obj (finiteDualizingDataCoeff l E n)
+    (X ↘ Spec (.of D.k)) _
+    ⟨0, _root_.DerivedCategory.TStructure.t.isGE_of_iso
+      (_root_.DerivedCategory.singleFunctorObjUnitIso _) 0⟩
 
 set_option maxHeartbeats 4000000 in
 -- reason for change: the derived adjunction's bounded-below universal pair unfolds a large localization term.
@@ -173,10 +183,100 @@ noncomputable def finiteDualizingDataScalarUnit
     (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategory.map
       (Etale.constantComplexIsoSingleFunctor B T).inv
 
+-- Compute the fixed left adjoint on a bounded flat representative. This uses the
+-- native sheafified extension of scalars, independently of legacy scalar packages.
+
+private theorem finiteDualizingDataFixedScalar_plus_of_finiteTor
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
+    (K : Etale.DerivedCategoryModule A T)
+    (hK : Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} A) T K) :
+    _root_.DerivedCategory.TStructure.t.plus
+      ((Sheaf.fixedCoefficientDerivedScalarExtension T.smallEtaleTopology φ).obj K) := by
+  let := φ.toAlgebra
+  let F := Sheaf.extendScalars T.smallEtaleTopology φ
+  have : F.PreservesKFlatQuasiIso := by
+    constructor
+    intro P Q hP hQ f hf
+    exact CochainComplex.quasiIso_map_of_iso_tensorRight _ _
+      (Sheaf.extendScalarsCompRestrictScalarsIso T.smallEtaleTopology A B) f hP hQ
+  let ad := (Sheaf.extendScalarsAdjunction T.smallEtaleTopology φ).derivedAdjunction.ofNatIsoRight
+    (Sheaf.restrictScalars T.smallEtaleTopology φ).rightDerivedFunctorIsoMapDerivedCategory
+  let e := ad.leftAdjointUniq
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))
+  obtain ⟨a, b, ht⟩ := hK
+  obtain ⟨P, hPa, hPb, hP, ⟨eP⟩⟩ :=
+    _root_.DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn ht
+  have := hPa
+  have := hPb
+  have hPk := CochainComplex.kFlat_of_bounded_of_flat P a b hP
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat P hPk
+  let eQ : F.leftDerivedFunctor.obj (_root_.DerivedCategory.Q.obj P) ≅
+      _root_.DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P) :=
+    asIso (F.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P))
+  have hplus : _root_.DerivedCategory.TStructure.t.plus
+      (_root_.DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) :=
+    ⟨a, inferInstance⟩
+  exact _root_.DerivedCategory.TStructure.t.plus.prop_of_iso
+    (eQ.symm ≪≫ F.leftDerivedFunctor.mapIso eP ≪≫ e.app K) hplus
+
+-- The coefficient exponent is invertible on the base when l differs from p.
+
+private theorem finiteDualizingDataCoeff_invertibleExponent
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (n : ℕ) :
+    HasInvertibleExponent (finiteDualizingDataCoeff l E n) (Spec (.of D.k)) := by
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+    ((Nat.card_eq_fintype_card.symm.trans D.card_base).trans D.cardinality_eq)
+  let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hv : Padic.coefficientExtensionAbsoluteValue l E (D.p : E) = 1 := by
+    have he := spectralNorm_extends (K := Padic l) (L := E) (D.p : Padic l)
+    have hn : ‖(D.p : Padic l)‖ = 1 := Padic.norm_natCast_eq_one_iff.2
+      ((Nat.coprime_primes (Fact.out : l.Prime) D.prime).2 hl)
+    change spectralNorm (Padic l) E (D.p : E) = 1
+    simpa only [map_natCast, hn] using he
+  have hu : IsUnit (D.p : Padic.coefficientExtensionIntegers l E) := (h.2.2.1 _).2 hv
+  have hq : IsUnit (D.p : Padic.coefficientExtensionRing l E (n + 1)) := by
+    simpa using hu.map (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)))
+  have hqu : IsUnit (D.p : finiteDualizingDataCoeff l E n) := by
+    exact hq.map ULift.ringEquiv.symm.toRingHom
+  let := hqu.invertible
+  exact HasInvertibleExponent.spec_of_charP _ D.p
+
+private theorem finiteDualizingDataTerm_ctf
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (X : Scheme.{u})
+    [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))] (n : ℕ) :
+    Etale.DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} (finiteDualizingDataCoeff l E n)) X
+      (finiteDualizingDataTerm D l E X n) := by
+  let A := finiteDualizingDataCoeff l E n
+  let S := Spec (.of D.k)
+  let c := finiteDualizingDataCompactification D X
+  let := c.hasCompactification
+  let := finiteDualizingDataCoeff_invertibleExponent D l hl E n
+  have hunit : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) S
+      (𝟙_ _) :=
+    ⟨(Etale.DerivedCategory.boundedConstructible _ S).prop_of_iso
+        (_root_.DerivedCategory.singleFunctorObjUnitIso _)
+        (Etale.DerivedCategory.boundedConstructible_singleFunctor_obj _ 0), 0, 0,
+      (Etale.DerivedCategory.torAmplitudeIn _ S 0 0).prop_of_iso
+        (_root_.DerivedCategory.singleFunctorObjUnitIso _)
+        (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
+          (ObjectProperty.flat_of_isDualizable isDualizable_unit))⟩
+  exact Etale.constructibleFiniteTor_rightDerivedUpperShriek A (𝟙 S) (X ↘ S) hunit
+
 /-- The fixed scalar extension of the ordinary term is bounded below at every quotient level.
 Source: `lem-fix-compact-support-coefficient-change`. -/
 theorem finiteDualizingDataTermFixedScalar_plus
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
@@ -186,12 +286,13 @@ theorem finiteDualizingDataTermFixedScalar_plus
       ((Sheaf.fixedCoefficientDerivedScalarExtension X.smallEtaleTopology
         (finiteDualizingDataQuotient l E h)).obj
         (finiteDualizingDataTerm D l E X m)) := by
-  sorry
+  exact finiteDualizingDataFixedScalar_plus_of_finiteTor _ _ _
+    (finiteDualizingDataTerm_ctf D l hl E X m).2
 
 /-- The fixed scalar extension of compact support of the ordinary term is bounded below.
 Source: `lem-fix-compact-support-coefficient-change`. -/
 theorem finiteDualizingDataCompactSupportFixedScalar_plus
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
@@ -205,12 +306,25 @@ theorem finiteDualizingDataCompactSupportFixedScalar_plus
           (finiteDualizingDataCompactification D X)).obj
           ⟨finiteDualizingDataTerm D l E X m,
             finiteDualizingDataTerm_plus D l E X m⟩).obj) := by
-  sorry
+  let A := finiteDualizingDataCoeff l E m
+  let S := Spec (.of D.k)
+  let c := finiteDualizingDataCompactification D X
+  let := c.hasCompactification
+  let := finiteDualizingDataCoeff_invertibleExponent D l hl E m
+  have hctf := Etale.constructibleFiniteTor_rightDerivedLowerShriek A (𝟙 S) (X ↘ S)
+    (finiteDualizingDataTerm_ctf D l hl E X m)
+  apply finiteDualizingDataFixedScalar_plus_of_finiteTor
+  exact (Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} A) S).prop_of_iso
+    ((Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
+      (ModuleCat.{u + 1} A) c).app
+        ⟨finiteDualizingDataTerm D l E X m, finiteDualizingDataTerm_plus D l E X m⟩).symm
+    hctf.2
 
 /-- The coefficient mate is the adjoint of inverse compact-support comparison, the scalar
 extension of the old counit, and the scalar-unit map.
 Source: `lem-coef-finite-dualizing`. -/
-noncomputable def finiteDualizingDataComparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+noncomputable def finiteDualizingDataComparison
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
@@ -228,11 +342,11 @@ noncomputable def finiteDualizingDataComparison (D : FiniteFieldDatum.{u}) (l : 
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
     ⟨finiteDualizingDataTerm D l E X m, finiteDualizingDataTerm_plus D l E X m⟩
   let M := finiteDualizingDataFixedTensorModel (φ := q) X K
-    (finiteDualizingDataTermFixedScalar_plus D l E X h)
+    (finiteDualizingDataTermFixedScalar_plus D l hl E X h)
   let Kc := (Etale.rightDerivedLowerShriekOfCompactificationPlus
       (ModuleCat.{u + 1} A) c).obj K
   let N := finiteDualizingDataFixedTensorModel (φ := q) (Spec (.of D.k)) Kc
-    (finiteDualizingDataCompactSupportFixedScalar_plus D l E X h)
+    (finiteDualizingDataCompactSupportFixedScalar_plus D l hl E X h)
   let cmp := Etale.compactSupportCoefficientComparisonPlus c M N
   letI : IsIso cmp := Etale.compactSupportCoefficientComparisonPlus_isIso c M N
   let eB := Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
@@ -254,7 +368,9 @@ identity law for the coefficient tower. Source: `lem-coef-finite-dualizing`. -/
 theorem finiteDualizingDataQuotient_id (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :
     finiteDualizingDataQuotient l E (le_refl n) = RingHom.id _ := by
-  sorry
+  ext x
+  change Ideal.Quotient.factor (le_refl _) x.down = x.down
+  simp only [Ideal.Quotient.factor_eq, RingHom.id_apply]
 
 /-- Quotient maps compose on residue representatives. Source: `lem-coef-finite-dualizing`. -/
 theorem finiteDualizingDataQuotient_comp (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -263,7 +379,12 @@ theorem finiteDualizingDataQuotient_comp (l : ℕ) [Fact l.Prime] (E : Type u) [
     finiteDualizingDataQuotient l E (hnm.trans hmr) =
       (finiteDualizingDataQuotient l E hnm).comp
         (finiteDualizingDataQuotient l E hmr) := by
-  sorry
+  ext x
+  change Ideal.Quotient.factor
+      (Ideal.pow_le_pow_right (Nat.add_le_add_right (hnm.trans hmr) 1)) x.down =
+    Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right hnm 1))
+      (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right hmr 1)) x.down)
+  exact (Ideal.Quotient.factor_comp_apply _ _ x.down).symm
 
 /-- The unlifted quotient map is the coefficient map seen by the finite pro-etale
 realization.  Its `RingHom.ulift` is exactly `finiteDualizingDataQuotient`.
@@ -292,7 +413,7 @@ noncomputable def finiteDualizingDataComparisonSiteScalarRestriction_q
     (finiteDualizingDataUnliftedQuotient l E h)
 
 /-- The semilinear adjunct of the coefficient mate. Source: `lem-coef-finite-dualizing`. -/
-def finiteDualizingDataTransition (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+def finiteDualizingDataTransition (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
@@ -305,7 +426,7 @@ def finiteDualizingDataTransition (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.P
   (Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars X.smallEtaleTopology
       (finiteDualizingDataQuotient l E h))).homEquiv _ _
-      (finiteDualizingDataComparison D l E X h)
+      (finiteDualizingDataComparison D l hl E X h)
 
 /-- The exact finite realization functor `S_n`, available on every scheme occurring in the
 ordinary counit square.
@@ -346,26 +467,26 @@ noncomputable def finiteDualizingDataRealizedCounit
 /-- The transport `S_n(u_mn)` of the coefficient mate through the finite realization.
 Source: `lem-coef-finite-dualizing`, final sentence of the proof. -/
 noncomputable def finiteDualizingDataRealizedComparison
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
     [QuasiCompact (X ↘ Spec (.of D.k))] {m n : ℕ} (h : n ≤ m) :=
   (finiteDualizingDataRealization l E X n).map
-    (finiteDualizingDataComparison D l E X h)
+    (finiteDualizingDataComparison D l hl E X h)
 
 /-- The transport `S_m(v_mn)` of the semilinear scalar adjunct through the finite realization.
 Source: `lem-coef-finite-dualizing`, final sentence of the proof. -/
 noncomputable def finiteDualizingDataRealizedTransition
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
     [QuasiCompact (X ↘ Spec (.of D.k))] {m n : ℕ} (h : n ≤ m) :=
   (finiteDualizingDataRealization l E X m).map
-    (finiteDualizingDataTransition D l E X h)
+    (finiteDualizingDataTransition D l hl E X h)
 
 /-- The ordinary finite dualizing coefficient package. Source: `lem-coef-finite-dualizing`. -/
 structure FiniteDualizingCoefficientData
@@ -415,7 +536,7 @@ structure FiniteDualizingCoefficientData
 /-- Canonical ordinary finite data and realization.
 Blueprint: `def-coef-finite-dualizing-data`; source: `lem-coef-finite-dualizing.md`. -/
 noncomputable def finiteDualizingCoefficientData
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
@@ -428,12 +549,12 @@ noncomputable def finiteDualizingCoefficientData
     { compactification := c
       term := finiteDualizingDataTerm D l E X
       counit := fun n ↦ finiteDualizingDataCounit D l E X n
-      comparison := finiteDualizingDataComparison D l E X
-      transition := finiteDualizingDataTransition D l E X
+      comparison := finiteDualizingDataComparison D l hl E X
+      transition := finiteDualizingDataTransition D l hl E X
       realizedTerm := finiteDualizingDataRealizedTerm D l E X
       realizedCounit := finiteDualizingDataRealizedCounit D l E X
-      realizedComparison := finiteDualizingDataRealizedComparison D l E X
-      realizedTransition := finiteDualizingDataRealizedTransition D l E X
+      realizedComparison := finiteDualizingDataRealizedComparison D l hl E X
+      realizedTransition := finiteDualizingDataRealizedTransition D l hl E X
       realization := fun n ↦ by
         letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
         exact ProEtale.finiteCoefficientIntrinsicDerivedComparison X

@@ -304,14 +304,8 @@ private theorem firstComparison_isIso (P : PurityFiniteSetting.{u})
     {X Y : Scheme.{u}} (p : X ⟶ Y) (s : Y ⟶ X) [IsClosedImmersion s]
     (hs : s ≫ p = 𝟙 Y) (B : DerivedCategory.Plus (EtSheaves P X)) :
     IsIso (firstComparison P p s hs B) := by
-  let adj := (comparisonAdjunction (Modules P) X).mapDerivedCategoryRightDerivedAdjunction
-  have hu := isIso_derivedComparisonAdjunction_unit_app (Modules P) X B.obj B.property
-  have hunit := Adjunction.unit_rightAdjointUniq_hom_app
-    (derivedComparisonAdjunction (Modules P) X) adj B.obj
-  have : IsIso (adj.unit.app B.obj) := by
-    rw [← hunit]
-    infer_instance
-  unfold firstComparison
+  change IsIso ((firstComparisonTransformation P p s hs).app B)
+  have := firstComparisonTransformation_isIso P p s hs
   infer_instance
 
 private theorem thirdComparison_isIso (P : PurityFiniteSetting.{u})

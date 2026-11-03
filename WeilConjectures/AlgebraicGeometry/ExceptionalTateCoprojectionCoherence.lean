@@ -41,6 +41,30 @@ noncomputable def shiftedTateObject (T : Scheme.{u}) (r : ℤ) :
     _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (tateObject Λ T r)⟦2 * r⟧
 
+/-- The canonical co-projection for the shifted finite Tate object.
+
+Source: `literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-regular/
+ sk-thm-regular.proof.md`, Steps 2 and 4(iii).  Choose the two-sided inverse supplied by
+`isInvertible_tateObject` and apply the canonical tensor mate
+`derivedTensorRightCompRightDerivedUpperShriekIso`; the final factor is the canonical
+inverse-image comparison `leftDerivedUpperStarTateShiftIso`.
+(blueprint: lem-pur-exceptional-tate-coprojection-coherence) -/
+noncomputable def exceptionalTateCoprojection
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (r : ℤ) :
+    (R(i)^![Λ]).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
+        (shiftedTateObject Λ X r)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj ((R(i)^![Λ]).obj K)).obj
+        (shiftedTateObject Λ Z r) := by
+  let h := (isInvertible_tateObject Λ X r).shift (2 * r)
+  let M := Classical.choose h
+  let e' := Classical.choice (Classical.choose_spec h).1
+  let e := Classical.choice (Classical.choose_spec h).2
+  exact (derivedTensorRightCompRightDerivedUpperShriekIso Λ i _ M e e').app K ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj _).mapIso
+      (leftDerivedUpperStarTateShiftIso Λ i r)
+
 /-- The zero Tate factor identified with the ordinary tensor unit, `T_0^T = A_T(0)[0] ≅ A_T`.
 
 Source: `literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-regular/

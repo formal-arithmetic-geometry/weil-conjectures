@@ -14,6 +14,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionIso
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+public import WeilConjectures.AlgebraicGeometry.RegularDualizingTwistCancellation
 
 /-! # Signed and canonical regular-immersion purity
 
@@ -47,13 +48,49 @@ Source: the coefficient convention in Step 1 (blueprint: sk-thm-regular). -/
 noncomputable def regularTateLineComparison (T : Scheme.{u}) [HasInvertibleExponent Λ T] :
     shiftedTateObject Λ T 1 ≅
       (ordinaryFiniteLine Λ (ringChar Λ) ringChar.Nat.cast_ringChar T)⟦(2 : ℤ)⟧ := by
+  let N := ringChar Λ
+  let hA : (N : Λ) = 0 := ringChar.Nat.cast_ringChar
+  let scalarIso : ModuleCat.extendScalars (Scheme.finiteEtaleTwistScalar N Λ hA) ≅
+      forget₂ (ModuleCat.{u + 1} (ZMod N)) AddCommGrpCat ⋙
+        ModuleCat.extendScalarsAddCommGrp Λ := by
+    let f := Scheme.finiteEtaleTwistScalar N Λ hA
+    let adj := ModuleCat.extendScalarsAddCommGrpAdj Λ
+    let e (M : ModuleCat.{u + 1} (ZMod N)) (P : ModuleCat.{u + 1} Λ) :
+        ((forget₂ (ModuleCat.{u + 1} (ZMod N)) AddCommGrpCat).obj M ⟶
+            (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat).obj P) ≃
+          (M ⟶ (ModuleCat.restrictScalars f).obj P) :=
+      { toFun := fun g ↦ ModuleCat.ofHom (X := M) (Y := (ModuleCat.restrictScalars f).obj P)
+          (AddMonoidHom.toZModLinearMap N (M := M)
+            (M₁ := (ModuleCat.restrictScalars f).obj P) g.hom)
+        invFun := fun g ↦ AddCommGrpCat.ofHom g.hom.toAddMonoidHom
+        left_inv := fun g ↦ rfl
+        right_inv := fun g ↦ by ext; rfl }
+    let adj' : (forget₂ (ModuleCat.{u + 1} (ZMod N)) AddCommGrpCat ⋙
+        ModuleCat.extendScalarsAddCommGrp Λ) ⊣ ModuleCat.restrictScalars f :=
+      Adjunction.mkOfHomEquiv
+        { homEquiv := fun M P ↦ (adj.homEquiv _ _).trans (e M P)
+          homEquiv_naturality_left_symm := by
+            intro M' M P g k
+            change (adj.homEquiv _ _).symm
+              ((forget₂ (ModuleCat.{u + 1} (ZMod N)) AddCommGrpCat).map g ≫
+                (e M P).symm k) = _
+            exact adj.homEquiv_naturality_left_symm _ _
+          homEquiv_naturality_right := by
+            intro M P P' g k
+            change e M P' (adj.homEquiv _ _ (g ≫ k)) = _
+            rw [adj.homEquiv_naturality_right]
+            rfl }
+    exact (ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} f).leftAdjointUniq adj'
+  let lineIso : Scheme.finiteEtaleTateLine T N Λ hA ≅
+      (extendScalars Λ T).obj (T.rootsOfUnitySheaf N) :=
+    (presheafToSheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso
+      (Functor.isoWhiskerLeft (Scheme.finiteEtaleMuModulePresheaf T N) scalarIso)
   let e : tateObject Λ T 1 ≅
       ordinaryFiniteLine Λ (ringChar Λ) ringChar.Nat.cast_ringChar T :=
     tateTwistObjectIsoSingleFunctor Λ T 1 ≪≫
       (_root_.DerivedCategory.singleFunctor _ 0).mapIso
         (tateTwistSheafOneIso T Λ ≪≫
-          (AlgebraicGeometry.Scheme.finiteEtaleLineAbIso T (ringChar Λ) Λ
-            ringChar.Nat.cast_ringChar).symm)
+          lineIso.symm)
   exact (shiftFunctor _ (2 : ℤ)).mapIso e
 
 /-- The ordered tensor comparison from the Tate datum to the published finite root model.

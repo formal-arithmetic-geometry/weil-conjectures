@@ -114,6 +114,56 @@ structure RestrictionTensorData where
           ((G.mapHomologicalComplex (.up ℤ)).obj L) ≫
         DerivedCategory.Q.map (chain K L)
 
+/-- The canonical map from restricted B-valued derived sections to F-valued derived
+sections of the restricted complex. It is the mate of the canonical restriction square
+for constant complexes, fixing its normalization. Source: Stacks 0FPI
+(blueprint: lem-pur-exterior-product-field-restriction). -/
+def fieldRestrictionSectionsMap
+    {F B : Type (u + 1)} [CommRing F] [CommRing B] (φ : F →+* B)
+    (T : Scheme.{u}) :
+    rightDerivedGlobalSections (ModuleCat.{u + 1} B) T ⋙
+        (ModuleCat.restrictScalars φ).mapDerivedCategory ⟶
+      Sheaf.derivedRestrictScalars T.smallEtaleTopology φ ⋙
+        rightDerivedGlobalSections (ModuleCat.{u + 1} F) T :=
+  mateEquiv (derivedConstantSheafAdjunction (ModuleCat.{u + 1} B) T)
+    (derivedConstantSheafAdjunction (ModuleCat.{u + 1} F) T)
+    (Functor.mapDerivedCategorySquareIso
+      (constantSheafCompSheafComposeIso T.smallEtaleTopology
+        (ModuleCat.restrictScalars φ)).symm).hom
+
+/-- Canonical restriction/sections comparison, including its coefficient and retract
+compatibility and reflection of zero objects and isomorphisms. Naturality is part of the
+natural isomorphism; the split equations explicitly record the transported splitting.
+Source: Stacks 0FPI (blueprint: lem-pur-exterior-product-field-restriction). -/
+structure RestrictionSectionsData
+    {F B : Type (u + 1)} [CommRing F] [CommRing B] (φ : F →+* B)
+    (T : Scheme.{u}) where
+  iso : Sheaf.derivedRestrictScalars T.smallEtaleTopology φ ⋙
+      rightDerivedGlobalSections (ModuleCat.{u + 1} F) T ≅
+    rightDerivedGlobalSections (ModuleCat.{u + 1} B) T ⋙
+      (ModuleCat.restrictScalars φ).mapDerivedCategory
+  normalization : iso.inv = fieldRestrictionSectionsMap φ T
+  coefficient : ∀ (H : DerivedCategoryModule B T) (b : B),
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} F) T).map
+        ((Sheaf.derivedRestrictScalars T.smallEtaleTopology φ).map (b • 𝟙 H)) ≫
+        iso.hom.app H =
+      iso.hom.app H ≫ (ModuleCat.restrictScalars φ).mapDerivedCategory.map
+        ((rightDerivedGlobalSections (ModuleCat.{u + 1} B) T).map (b • 𝟙 H))
+  split : ∀ (H Z : DerivedCategoryModule B T) (i : Z ⟶ H) (p : H ⟶ Z),
+    i ≫ p = 𝟙 Z →
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} F) T).map
+        ((Sheaf.derivedRestrictScalars T.smallEtaleTopology φ).map i) ≫
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} F) T).map
+        ((Sheaf.derivedRestrictScalars T.smallEtaleTopology φ).map p) = 𝟙 _ ∧
+    (ModuleCat.restrictScalars φ).mapDerivedCategory.map
+        ((rightDerivedGlobalSections (ModuleCat.{u + 1} B) T).map i) ≫
+      (ModuleCat.restrictScalars φ).mapDerivedCategory.map
+        ((rightDerivedGlobalSections (ModuleCat.{u + 1} B) T).map p) = 𝟙 _
+  detects_zero : ∀ H : DerivedCategoryModule B T,
+    IsZero ((Sheaf.derivedRestrictScalars T.smallEtaleTopology φ).obj H) ↔ IsZero H
+  detects_iso : ∀ (H H' : DerivedCategoryModule B T) (a : H ⟶ H'),
+    IsIso ((Sheaf.derivedRestrictScalars T.smallEtaleTopology φ).map a) ↔ IsIso a
+
 end TensorData
 
 attribute [instance] Sheaf.monoidalCategory Sheaf.symmetricCategory

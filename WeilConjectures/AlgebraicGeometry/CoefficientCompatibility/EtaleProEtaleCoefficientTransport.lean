@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTranspo
 public import WeilConjectures.AlgebraicGeometry.Sf.SfCompactSupportRestrictionOfScalars
 public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+public import WeilConjectures.AlgebraicGeometry.CoefficientScalarRepresentatives.CoefficientScalarRepresentatives
 
 /-! # Transport of the actual recorded reduction comparison
 
@@ -40,9 +41,10 @@ abbrev uliftRingHom {R S : Type u} [CommRing R] [CommRing S] (ψ : R →+* S) :
 Source: Stacks 06YY (blueprint: def-sp-et-proet-coefficient-transport). -/
 abbrev liftedScalarExtension {R S : Type u} [CommRing R] [CommRing S]
     (ψ : R →+* S) (T : Scheme.{u}) :=
-  @pbcFixedScalarExtension.{u} T.ProEt inferInstance
-    (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology T)
-    (ULift.{u + 1, u} R) (ULift.{u + 1, u} S) inferInstance inferInstance (uliftRingHom ψ)
+  @AlgebraicGeometry.CoefficientScalarRepresentatives.extension.{u}
+      T.ProEt inferInstance (essentiallySmallSelf.{0, u, u + 1} _)
+      (Scheme.ProEt.topology T) (ULift.{u + 1, u} R) (ULift.{u + 1, u} S)
+      inferInstance inferInstance (uliftRingHom ψ)
 
 /-- The scalar presentation comparison is the left-adjoint uniqueness isomorphism
 whose right comparison is identity on the underlying sheafified abelian presheaf.

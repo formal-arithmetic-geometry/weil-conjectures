@@ -37,6 +37,8 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProp
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullbackEvaluation
 public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
+public import WeilConjectures.AlgebraicGeometry.LocalizedPullback.LocalizedPullbackComparisonNormalization
+public import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteConstantCoefficientTransport
 
 /-! # Graph summands for arbitrary inverse systems of rings
 
@@ -1219,6 +1221,15 @@ def pushEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       (StrictTower.constantRingIso (C n) f)).mapDerivedCategoryRightDerivedAdjunction
     (pullEvaluation C τ f n).inv
 
+private theorem pro_pull_right (A : Type (u + 1)) [CommRing A]
+    {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :
+    (upperStar (ModuleCat.{u + 1} A) e).IsRightAdjoint := by
+  let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale e))
+    (ModuleCat.{u + 1} A) (ProEt.topology U) (ProEt.topology T)
+  exact (a.ofNatIsoRight
+    (upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A) e inferInstance).symm).isRightAdjoint
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option synthInstance.maxSize 64 in
@@ -1244,16 +1255,99 @@ def siteSumInv {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :
     (@inv _ _ _ _ (StrictTower.hPullbackInv A e A (RingHom.id A))
       (StrictTower.hPullbackInv_isIso A e A (RingHom.id A)))
 
-/-- The localized right-adjoint identification makes this particular sum mate invertible.
-Source: Stacks 04J0, 09AF (blueprint: lem-sp-varying-ring-graph-summand).
-Proof: apply localize_ringed_site_morphism_general to the site comparison and U.
-Its direct-image comparison is the identity on every etale test object. Thus both
-sum/site composites are left adjoint to the same right adjoint. Their unit-preserving
-comparison is invertible. Mate pasting identifies it with siteSumInv. On a summand
-(t,m), its inverse retains t and applies the comparison unit to m. -/
+/-- Identity scalar realization is an equivalence for finite discrete coefficients. -/
+private theorem scalar_identity_equivalence (X : Scheme.{u}) :
+    (StrictTower.C A X A (RingHom.id A)).IsEquivalence := by
+  let J := ProEt.topology X
+  let e : Sheaf.restrictScalars J (RingHom.id A) ≅ 𝟭 _ :=
+    NatIso.ofComponents (fun F ↦ (fullyFaithfulSheafToPresheaf J _).preimageIso
+      (Functor.isoWhiskerLeft F.obj (ModuleCat.restrictScalarsId A))) (by
+        intro F G f
+        apply (fullyFaithfulSheafToPresheaf J _).map_injective
+        ext V m
+        rfl)
+  have : (Sheaf.restrictScalars J (RingHom.id A)).IsEquivalence :=
+    Functor.isEquivalence_of_iso e.symm
+  have : (StrictTower.fixedRestriction A X).IsEquivalence :=
+    StrictTower.fixedRestriction_equivalence A X
+  have : (StrictTower.C A X A (RingHom.id A) ⋙ StrictTower.fixedRestriction A X).IsEquivalence :=
+    Functor.isEquivalence_of_iso (StrictTower.cFixed A X A (RingHom.id A)).symm
+  exact Functor.isEquivalence_of_comp_right _ (StrictTower.fixedRestriction A X)
+
+/-- Localization turns the vertical site-comparison mate into the identity; iterated
+conjugation then gives invertibility of the horizontal sum mate. -/
+private theorem geometric_sum_mate {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :
+    let := pro_pull_right A e
+    IsIso ((mateEquiv
+      (Etale.etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance)
+      (Adjunction.ofIsRightAdjoint (upperStar (ModuleCat.{u + 1} A) e))).symm
+        (supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} A) e).hom).natTrans := by
+  let := pro_pull_right A e
+  let a := Etale.etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance
+  let b := Adjunction.ofIsRightAdjoint (upperStar (ModuleCat.{u + 1} A) e)
+  let r := Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A) e inferInstance
+  let s := upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A) e inferInstance
+  let n := Scheme.proEtaleSiteComparisonModules T A
+  let m := Scheme.proEtaleSiteComparisonModules U A
+  have hχ := (LocalizedPullback.normalization A e).2.2.2.1
+  have : IsIso (mateEquiv n m (LocalizedPullback.chi A e).hom).natTrans := by
+    rw [hχ]
+    infer_instance
+  have hi := WeilConjectures.SequenceModuleEvaluation.inverseMate_isIso_of_iterated
+    (a.ofNatIsoRight r) (b.ofNatIsoRight s) m n (LocalizedPullback.chi A e).hom
+  change IsIso ((mateEquiv a b).symm
+    (supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} A) e).hom).natTrans
+  rw [← StrictTower.inverseMate_ofNatIsoRight a b r.symm s.symm
+    (TwoSquare.mk _ _ _ _
+      (supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} A) e).hom)]
+  exact hi
+
 theorem siteSumInv_isIso {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :
     IsIso (siteSumInv A e) := by
-  sorry
+  let := pro_pull_right A e
+  let CT := StrictTower.C A T A (RingHom.id A)
+  let CU := StrictTower.C A U A (RingHom.id A)
+  have : CT.IsEquivalence := scalar_identity_equivalence A T
+  have : CU.IsEquivalence := scalar_identity_equivalence A U
+  let a := Etale.etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance
+  let b := Adjunction.ofIsRightAdjoint (upperStar (ModuleCat.{u + 1} A) e)
+  let c := levelSumAdjunction A e
+  obtain ⟨j, _, ht, _⟩ := (LocalizedPullback.normalization A e).2.2.2.2.2
+  let d := TwoSquare.mk _ _ _ _
+    (supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} A) e).hom
+  let f := TwoSquare.mk _ _ _ _ j.inv
+  let γ := (mateEquiv a b).symm d
+  let η := (mateEquiv b c).symm f
+  have : IsIso γ.natTrans := geometric_sum_mate A e
+  have : IsIso η.natTrans := StrictTower.inverseMate_isIso_of_equivalences b c f
+  have hδ :
+      (@inv _ _ _ _ (StrictTower.hPullbackInv A e A (RingHom.id A))
+        (StrictTower.hPullbackInv_isIso A e A (RingHom.id A))) =
+      (TwoSquare.vComp d f).natTrans := by
+    apply (cancel_mono (Functor.whiskerLeft
+      (comparisonUpperStar (ModuleCat.{u + 1} A) T) j.hom)).1
+    rw [ht]
+    apply NatTrans.ext
+    funext V
+    simp only [Functor.comp_obj, Functor.whiskerRight_app, NatTrans.comp_app,
+      TwoSquare.vComp_app, Functor.whiskerLeft_app, Category.assoc]
+    all_goals
+      change _ = _ ≫ j.inv.app ((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj V) ≫
+        j.hom.app ((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj V)
+      rw [j.inv_hom_id_app, Category.comp_id]
+  have hp := mateEquiv_vcomp a b c γ η
+  rw [Equiv.apply_symm_apply, Equiv.apply_symm_apply] at hp
+  have he : (mateEquiv a c).symm (TwoSquare.vComp d f) = TwoSquare.hComp γ η := by
+    apply (mateEquiv a c).injective
+    exact (Equiv.apply_symm_apply _ _).trans hp.symm
+  change IsIso ((mateEquiv a c).symm
+    (@inv _ _ _ _ (StrictTower.hPullbackInv A e A (RingHom.id A))
+      (StrictTower.hPullbackInv_isIso A e A (RingHom.id A)))).natTrans
+  rw [hδ]
+  change IsIso ((mateEquiv a c).symm (TwoSquare.vComp d f)).natTrans
+  rw [he]
+  dsimp only [TwoSquare.hComp, TwoSquare.mk]
+  infer_instance
 
 /-- Exact derived descent of the adjunction-preserving sum/site comparison.
 Source: Stacks 09AF (blueprint: lem-sp-varying-ring-graph-summand). -/

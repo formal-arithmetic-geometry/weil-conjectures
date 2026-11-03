@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.SmoothPurity.CompactifiableOverF
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.Finite.Compact.FiniteCompactSiteCoherence
 
 /-! # Finite coefficient compact-support comparison
 
@@ -261,6 +262,275 @@ def identityEt (R : Type (u + 1)) [CommRing R] [Finite R] (T : Scheme.{u})
         (HasCompactification.compactification (𝟙 T)) ≪≫
           Etale.rightDerivedLowerShriekPlusId R T).app L)
 
+private theorem compositor_eq
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F F' : C ⥤ D) (G G' : D ⥤ E) (H H' : C ⥤ E)
+    (a : F ≅ F') (b : G ≅ G') (c : F' ⋙ G' ≅ H) (d : H ≅ H') :
+    coherenceCompositorOfChanges F F' G G' H H' a b c d =
+      Functor.isoWhiskerRight a G ≪≫ Functor.isoWhiskerLeft F' b ≪≫ c ≪≫ d := by
+  ext L
+  rfl
+
+private theorem alphaPlus_eq (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)]
+    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g)) :
+    alphaPlus R c d e = coherenceEtaleCompositor R c d e := by
+  unfold alphaPlus coherenceEtaleCompositor coherenceEtaleChangeIso
+    coherenceChosenEtaleCompositorIso coherenceEtaleFunctor
+  exact (compositor_eq _ _ _ _ _ _ _ _ _ _).symm
+
+private theorem identityPlus_eq (R : Type (u + 1)) [CommRing R] [Finite R]
+    (X : Scheme.{u}) :
+    Etale.rightDerivedLowerShriekOfCompactificationPlusIso R
+        (Compactification.ofIsProper (𝟙 X)) (HasCompactification.compactification (𝟙 X)) ≪≫
+      Etale.rightDerivedLowerShriekPlusId R X =
+      (Etale.derivedPlusFormalism (ModuleCat.{u + 1} R)).shriekOfIsProperIdIso X := by
+  rw [Etale.rightDerivedLowerShriekPlusId, CompactSupportFormalism.lowerShriekId]
+  rw [← Iso.trans_assoc, ← Etale.derivedPlusFormalism_shriekIso,
+    CompactSupportFormalism.shriekIso_trans,
+    CompactSupportFormalism.shriekIso_refl]
+  dsimp only [Etale.derivedPlusFormalism, ExchangeFormalism.shriek]
+  exact Iso.refl_trans _
+
+private theorem alpha_unit_right (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c : Compactification f)
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (alpha R c (Compactification.ofIsProper (𝟙 Y)) (c.copy (Category.comp_id f)) L).hom =
+      (identityEt R Y (plusOut R c L)).hom := by
+  let v : (plusEt R c).obj L ⟶ plusOut R c L :=
+    ObjectProperty.homMk ((plusCompatibility R c).hom.app L)
+  have hn := ((Etale.derivedPlusFormalism (ModuleCat.{u + 1} R)).shriekOfIsProperIdIso
+    Y).hom.naturality v
+  have hn' := congrArg (fun q ↦ DerivedCategory.Plus.ι.map q) hn
+  simp only [Functor.comp_obj, Functor.id_map, Functor.map_comp] at hn'
+  simp only [alpha, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom,
+    alphaPlus_eq, etale_compositor_unit_right, identityEt, identityPlus_eq]
+  have hb := (plusCompatibility R (Compactification.ofIsProper (𝟙 Y))).inv.naturality v
+  simp only [Functor.comp_map, Functor.comp_obj] at hb
+  simp only [v, ObjectProperty.ι_map, ObjectProperty.homMk] at hn' hb
+  dsimp only [coherenceEtaleFunctor, Compactification.copy, Etale.derivedPlusFormalism,
+    ExchangeFormalism.shriek, CompactSupportFormalism.shriek,
+    Functor.comp_obj, Functor.comp_map, Functor.id_obj] at *
+  simp only [ObjectProperty.ι_map]
+  erw [← hn', ← reassoc_of% hb]
+  change (et R (Compactification.ofIsProper (𝟙 Y))).map
+      ((plusCompatibility R c).app L).inv ≫
+    (et R (Compactification.ofIsProper (𝟙 Y))).map
+      ((plusCompatibility R c).app L).hom ≫ _ = _
+  erw [← Category.assoc,
+    ((et R (Compactification.ofIsProper (𝟙 Y))).mapIso
+      ((plusCompatibility R c).app L)).inv_hom_id, Category.id_comp]
+  rfl
+
+private theorem alpha_unit_left (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c : Compactification f)
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (alpha R (Compactification.ofIsProper (𝟙 X)) c (c.copy (Category.id_comp f)) L).hom =
+      (et R c).map (identityEt R X L).hom := by
+  have hn := (plusCompatibility R c).inv.naturality
+    (((Etale.derivedPlusFormalism (ModuleCat.{u + 1} R)).shriekOfIsProperIdIso X).hom.app L)
+  simp only [Functor.comp_map, Functor.comp_obj] at hn
+  simp only [alpha, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom,
+    alphaPlus_eq, etale_compositor_unit_left, identityEt, identityPlus_eq]
+  dsimp only [coherenceEtaleFunctor, Compactification.copy, Etale.derivedPlusFormalism,
+    ExchangeFormalism.shriek, CompactSupportFormalism.shriek,
+    Functor.comp_obj, Functor.comp_map, Functor.id_obj] at *
+  erw [← reassoc_of% hn]
+  erw [(plusCompatibility R c).inv_hom_id_app L, Category.comp_id]
+  exact ((et R c).map_comp _ _).symm
+
+private theorem transport_associativity
+    {A B C D A' B' C' D' : Type*}
+    [Category A] [Category B] [Category C] [Category D]
+    [Category A'] [Category B'] [Category C'] [Category D']
+    (NA : A ⥤ A') (NB : B ⥤ B') (NC : C ⥤ C') (ND : D ⥤ D')
+    (F : A ⥤ B) (G : B ⥤ C) (H : C ⥤ D)
+    (P : A' ⥤ B') (Q : B' ⥤ C') (S : C' ⥤ D')
+    (FG : A ⥤ C) (GH : B ⥤ D) (FGH : A ⥤ D)
+    (PQ : A' ⥤ C') (QS : B' ⥤ D') (PQS : A' ⥤ D')
+    (c : F ⋙ NB ⟶ NA ⋙ P) (d : G ⋙ NC ⟶ NB ⋙ Q)
+    (e : H ⋙ ND ⟶ NC ⋙ S) (cd : FG ⋙ NC ⟶ NA ⋙ PQ)
+    (de : GH ⋙ ND ⟶ NB ⋙ QS) (cde : FGH ⋙ ND ⟶ NA ⋙ PQS)
+    (K : A) [IsIso (c.app K)] [IsIso (d.app (F.obj K))]
+    [IsIso (e.app (G.obj (F.obj K)))]
+    (α : G.obj (F.obj K) ⟶ FG.obj K)
+    (β : H.obj (G.obj (F.obj K)) ⟶ GH.obj (F.obj K))
+    (γ : H.obj (FG.obj K) ⟶ FGH.obj K)
+    (δ : GH.obj (F.obj K) ⟶ FGH.obj K)
+    (a : Q.obj (P.obj (NA.obj K)) ⟶ PQ.obj (NA.obj K))
+    (b : S.obj (Q.obj (NB.obj (F.obj K))) ⟶ QS.obj (NB.obj (F.obj K)))
+    (l : S.obj (PQ.obj (NA.obj K)) ⟶ PQS.obj (NA.obj K))
+    (r : QS.obj (P.obj (NA.obj K)) ⟶ PQS.obj (NA.obj K))
+    (ha : NC.map α ≫ cd.app K =
+      d.app (F.obj K) ≫ Q.map (c.app K) ≫ a)
+    (hb : ND.map β ≫ de.app (F.obj K) =
+      e.app (G.obj (F.obj K)) ≫ S.map (d.app (F.obj K)) ≫ b)
+    (hl : ND.map γ ≫ cde.app K =
+      e.app (FG.obj K) ≫ S.map (cd.app K) ≫ l)
+    (hr : ND.map δ ≫ cde.app K =
+      de.app (F.obj K) ≫ QS.map (c.app K) ≫ r)
+    (h : H.map α ≫ γ = β ≫ δ) :
+    S.map a ≫ l =
+      (S.map (Q.map (inv (c.app K))) ≫ b ≫ QS.map (c.app K)) ≫ r := by
+  let v := e.app (G.obj (F.obj K)) ≫
+    S.map (d.app (F.obj K)) ≫ S.map (Q.map (c.app K))
+  have : IsIso v := by dsimp [v]; infer_instance
+  apply (cancel_epi v).1
+  have hleft : v ≫ S.map a ≫ l =
+      ND.map (H.map α ≫ γ) ≫ cde.app K := by
+    dsimp only [v]
+    simp only [Category.assoc]
+    rw [← S.map_comp_assoc, ← S.map_comp_assoc, Category.assoc, ← ha, S.map_comp_assoc]
+    have hn := e.naturality α
+    dsimp only [Functor.comp_map, Functor.comp_obj] at hn
+    rw [← reassoc_of% hn, ← hl, ← ND.map_comp_assoc]
+  have hright : v ≫ ((S.map (Q.map (inv (c.app K))) ≫ b ≫
+      QS.map (c.app K)) ≫ r) =
+      ND.map (β ≫ δ) ≫ cde.app K := by
+    dsimp only [v]
+    simp only [Category.assoc, ← S.map_comp_assoc, ← Q.map_comp,
+      IsIso.hom_inv_id]
+    erw [Q.map_id, Category.comp_id]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [← reassoc_of% hb, ← hr, ← ND.map_comp_assoc]
+  rw [h] at hleft
+  simpa only [Category.assoc] using hleft.trans hright.symm
+
+private def alphaTransformation (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)]
+    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g)) :
+    DerivedCategory.Plus.ι ⋙ et R c ⋙ et R d ⟶ DerivedCategory.Plus.ι ⋙ et R e :=
+  Functor.whiskerRight (plusCompatibility R c).inv (et R d) ≫
+    Functor.whiskerLeft (plusEt R c) (plusCompatibility R d).inv ≫
+    Functor.whiskerRight (alphaPlus R c d e).hom DerivedCategory.Plus.ι ≫
+    (plusCompatibility R e).hom
+
+private theorem alpha_square (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)]
+    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    DerivedCategory.Plus.ι.map ((alphaPlus R c d e).hom.app L) ≫
+        (plusCompatibility R e).hom.app L =
+      (plusCompatibility R d).hom.app ((plusEt R c).obj L) ≫
+        (et R d).map ((plusCompatibility R c).hom.app L) ≫ (alpha R c d e L).hom := by
+  simp [alpha, ← Functor.map_comp_assoc]
+
+private theorem remove_iso_conjugation
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (S : D ⥤ E) (QS : C ⥤ E)
+    {X Y : C} {Z : E} (i : X ≅ Y)
+    (b : S.obj (Q.obj X) ⟶ QS.obj X) (b' : S.obj (Q.obj Y) ⟶ QS.obj Y)
+    (r : QS.obj Y ⟶ Z) (l : S.obj (Q.obj Y) ⟶ Z)
+    (hn : S.map (Q.map i.hom) ≫ b' = b ≫ QS.map i.hom)
+    (hp : l = (S.map (Q.map i.inv) ≫ b ≫ QS.map i.hom) ≫ r) :
+    l = b' ≫ r := by
+  calc
+    l = S.map (Q.map i.inv) ≫ (b ≫ QS.map i.hom) ≫ r := by
+      simpa only [Category.assoc] using hp
+    _ = S.map (Q.map i.inv) ≫ (S.map (Q.map i.hom) ≫ b') ≫ r := by rw [hn]
+    _ = b' ≫ r := by
+      simp only [← Category.assoc, ← S.map_comp, ← Q.map_comp, Iso.inv_hom_id,
+        Q.map_id, S.map_id, Category.id_comp]
+
+private theorem alphaPlus_assoc (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y Z W : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : Z ⟶ W}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact h]
+    (c : Compactification f) (d : Compactification g) (e : Compactification h)
+    (cd : Compactification (f ≫ g)) (de : Compactification (g ≫ h))
+    (t : Compactification ((f ≫ g) ≫ h))
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (plusEt R e).map ((alphaPlus R c d cd).hom.app L) ≫
+        (alphaPlus R cd e t).hom.app L =
+      (alphaPlus R d e de).hom.app ((plusEt R c).obj L) ≫
+        (alphaPlus R c de (t.copy (Category.assoc f g h).symm)).hom.app L := by
+  have he := etale_compositor_assoc R c d e cd de
+    (t.copy (Category.assoc f g h).symm) L
+  cases t
+  simpa only [alphaPlus_eq, Compactification.copy, coherenceEtaleFunctor] using he
+
+private theorem alpha_pasting (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y Z W : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : Z ⟶ W}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact h]
+    (c : Compactification f) (d : Compactification g) (e : Compactification h)
+    (cd : Compactification (f ≫ g)) (de : Compactification (g ≫ h))
+    (t : Compactification ((f ≫ g) ≫ h))
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (et R e).map (alpha R c d cd L).hom ≫ (alpha R cd e t L).hom =
+      ((et R e).map ((et R d).map (inv ((plusCompatibility R c).hom.app L))) ≫
+        (alpha R d e de ((plusEt R c).obj L)).hom ≫
+        (et R de).map ((plusCompatibility R c).hom.app L)) ≫
+        (alpha R c de (t.copy (Category.assoc f g h).symm) L).hom := by
+  have he := alphaPlus_assoc R c d e cd de t L
+  exact transport_associativity
+    DerivedCategory.Plus.ι DerivedCategory.Plus.ι
+    DerivedCategory.Plus.ι DerivedCategory.Plus.ι
+    (plusEt R c) (plusEt R d) (plusEt R e)
+    (et R c) (et R d) (et R e)
+    (plusEt R cd) (plusEt R de) (plusEt R t)
+    (et R cd) (et R de) (et R t)
+    (plusCompatibility R c).hom (plusCompatibility R d).hom
+    (plusCompatibility R e).hom (plusCompatibility R cd).hom
+    (plusCompatibility R de).hom (plusCompatibility R t).hom
+    L ((alphaPlus R c d cd).hom.app L)
+    ((alphaPlus R d e de).hom.app ((plusEt R c).obj L))
+    ((alphaPlus R cd e t).hom.app L)
+    ((alphaPlus R c de (t.copy (Category.assoc f g h).symm)).hom.app L)
+    (alpha R c d cd L).hom (alpha R d e de ((plusEt R c).obj L)).hom
+    (alpha R cd e t L).hom
+    (alpha R c de (t.copy (Category.assoc f g h).symm) L).hom
+    (alpha_square R c d cd L) (alpha_square R d e de ((plusEt R c).obj L))
+    (alpha_square R cd e t L)
+    (alpha_square R c de (t.copy (Category.assoc f g h).symm) L) he
+
+private theorem alpha_naturality (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y Z W : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : Z ⟶ W}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact h]
+    (c : Compactification f) (d : Compactification g) (e : Compactification h)
+    (_cd : Compactification (f ≫ g)) (de : Compactification (g ≫ h))
+    (_t : Compactification ((f ≫ g) ≫ h))
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (et R e).map ((et R d).map ((plusCompatibility R c).hom.app L)) ≫
+        (alpha R d e de (plusOut R c L)).hom =
+      (alpha R d e de ((plusEt R c).obj L)).hom ≫
+        (et R de).map ((plusCompatibility R c).hom.app L) := by
+  let v : (plusEt R c).obj L ⟶ plusOut R c L :=
+    ObjectProperty.homMk ((plusCompatibility R c).hom.app L)
+  exact (alphaTransformation R d e de).naturality v
+
+private theorem alpha_assoc (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y Z W : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : Z ⟶ W}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact h]
+    (c : Compactification f) (d : Compactification g) (e : Compactification h)
+    (cd : Compactification (f ≫ g)) (de : Compactification (g ≫ h))
+    (t : Compactification ((f ≫ g) ≫ h))
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (et R e).map (alpha R c d cd L).hom ≫ (alpha R cd e t L).hom =
+      (alpha R d e de (plusOut R c L)).hom ≫
+        (alpha R c de (t.copy (Category.assoc f g h).symm) L).hom := by
+  exact remove_iso_conjugation (et R d) (et R e) (et R de)
+    (asIso ((plusCompatibility R c).hom.app L)) _ _ _ _
+    (alpha_naturality R c d e cd de t L) (alpha_pasting R c d e cd de t L)
+
+private theorem proAlpha_square (R : Type (u + 1)) [CommRing R] [Finite R]
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)]
+    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))
+    [IsIso ((site R c).app L.obj)] [IsIso ((site R d).app ((et R c).obj L.obj))] :
+    (nu R Z).map (alpha R c d e L).hom ≫ (site R e).app L.obj =
+      (site R d).app ((et R c).obj L.obj) ≫
+        (pro R d).map ((site R c).app L.obj) ≫ proAlpha R c d e L := by
+  simp [proAlpha]
+
+private theorem cancel_mapped_iso
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X Y : C} (e : X ⟶ Y) [IsIso e] {Z : D} (a b : F.obj Y ⟶ Z)
+    (h : F.map e ≫ a = F.map e ≫ b) : a = b :=
+  (cancel_epi (F.map e)).1 h
+
 section Setting
 variable (ℓ : ℕ) [hℓprime : Fact ℓ.Prime] (k : Type u) [Field k]
   (hk : Finite k ∨ IsAlgClosed k) (hchar : ringChar k ≠ ℓ)
@@ -390,8 +660,8 @@ theorem finiteCoefficientCompactSupport_composition
 /-- Only the transported refinement's identity and cocycle laws are stated here.
 The etale laws and the arbitrary-common-refinement formula are the existing
 PlusIso_refl, PlusIso_trans and PlusIso_eq_refinementIso of the dependency.
-Source: latest blueprint `sk-lem-sp-reduction-exceptional.md`, Locality (blueprint:
-lem-sp-et-proet-coefficient-compatibility).
+Source: latest blueprint `sk-lem-sp-reduction-exceptional.md`, Locality.
+(blueprint: lem-sp-et-proet-coefficient-compatibility).
 
 Proof: substitute proPhi and apply the dependency's D+ identity and cocycle laws
 through PlusιIso. Functoriality and cancellation of the middle site-inverse pairs
@@ -406,12 +676,29 @@ theorem finiteCoefficientCompactSupport_refinement_coherence
     (∀ (hc : IsIso ((site A c).app L.obj)) (hd : IsIso ((site A d).app L.obj)),
       @proPhi A _ _ X Y f _ c d L hc ≫ @proPhi A _ _ X Y f _ d e L hd =
         @proPhi A _ _ X Y f _ c e L hc) := by
-  sorry
+  have hphi : (phi A c d L).hom ≫ (phi A d e L).hom = (phi A c e L).hom := by
+    have ht := congrArg (fun i ↦ DerivedCategory.Plus.ι.map (i.hom.app L))
+      (Etale.rightDerivedLowerShriekOfCompactificationPlusIso_trans A c d e)
+    simp only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp] at ht
+    simp only [phi, Etale.rightDerivedLowerShriekOfCompactificationPlusιIso,
+      Iso.app_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.assoc,
+      Iso.hom_inv_id_app_assoc]
+    rw [reassoc_of% ht]
+  constructor
+  · intro hc
+    let := hc
+    simp [proPhi, phi, Etale.rightDerivedLowerShriekOfCompactificationPlusιIso]
+  · intro hc hd
+    let := hc
+    let := hd
+    simp only [proPhi, Category.assoc, IsIso.hom_inv_id_assoc]
+    rw [← Functor.map_comp_assoc, hphi]
 
 /-- The identity laws for proAlpha transported from the recorded D+ unit laws.
 There is no second assertion of the dependency's etale identity laws.
-Source: latest blueprint `sk-lem-sp-reduction-exceptional.md`, Locality (blueprint:
-lem-sp-et-proet-coefficient-compatibility).
+Source: latest blueprint `sk-lem-sp-reduction-exceptional.md`, Locality.
+(blueprint: lem-sp-et-proet-coefficient-compatibility).
 
 Proof: use PlusCompIso_id_left and _id_right with PlusId, conjugating by the D+
 compactification comparisons. Include via plusCompatibility and substitute
@@ -436,12 +723,28 @@ theorem finiteCoefficientCompactSupport_composition_units
           (c.copy (Category.id_comp f)) L hi hc =
         (pro A c).map (inv ((site A (Compactification.ofIsProper (𝟙 X))).app L.obj) ≫
           (nu A X).map (identityEt A X L).hom)) := by
-  sorry
+  constructor
+  · intro hc hi
+    simp only [proAlpha, alpha_unit_right]
+    rfl
+  · intro hi hc
+    let := hi
+    let := hc
+    have hn : (nu A Y).map ((et A c).map (identityEt A X L).hom) ≫
+        (site A c).app L.obj =
+      (site A c).app ((et A (Compactification.ofIsProper (𝟙 X))).obj L.obj) ≫
+        (pro A c).map ((nu A X).map (identityEt A X L).hom) :=
+      (site A c).naturality (identityEt A X L).hom
+    simp only [proAlpha, alpha_unit_left]
+    rw [Functor.map_comp]
+    dsimp only [Compactification.copy] at *
+    erw [hn]
+    simp only [IsIso.inv_hom_id_assoc]
 
 /-- Associativity only for proAlpha, transported from the recorded PlusCompIso_assoc.
 The final compactification's copy changes only its factorization proof.
-Source: latest blueprint `sk-lem-sp-reduction-exceptional.md`, Locality (blueprint:
-lem-sp-et-proet-coefficient-compatibility).
+Source: latest blueprint `sk-lem-sp-reduction-exceptional.md`, Locality.
+(blueprint: lem-sp-et-proet-coefficient-compatibility).
 
 Proof: the dependency's PlusCompIso_assoc gives etale associativity. Its _hom_eq
 and PlusIso_trans express it at these specified compactifications. Include through
@@ -476,7 +779,28 @@ theorem finiteCoefficientCompactSupport_associativity
           (pro A de).map ((site A c).app L.obj) ≫
           @proAlpha A _ _ X Y W f (g ≫ h) _ _ _ c de
             (t.copy (Category.assoc f g h).symm) L hc hde := by
-  sorry
+  intro hc hd hcd hecd hedc hde
+  let := hc
+  let := hd
+  let := hcd
+  let := hecd
+  let := hedc
+  let := hde
+  let : IsIso ((site A d).app (plusOut A c L).obj) := hd
+  let : IsIso ((site A e).app ((et A d).obj (plusOut A c L).obj)) := hedc
+  simpa only [Category.assoc] using transport_associativity
+    (nu A X) (nu A Y) (nu A Z) (nu A W)
+    (et A c) (et A d) (et A e) (pro A c) (pro A d) (pro A e)
+    (et A cd) (et A de) (et A t) (pro A cd) (pro A de) (pro A t)
+    (site A c) (site A d) (site A e) (site A cd) (site A de) (site A t)
+    L.obj (alpha A c d cd L).hom (alpha A d e de (plusOut A c L)).hom
+    (alpha A cd e t L).hom (alpha A c de (t.copy (Category.assoc f g h).symm) L).hom
+    (proAlpha A c d cd L) (proAlpha A d e de (plusOut A c L))
+    (proAlpha A cd e t L) (proAlpha A c de (t.copy (Category.assoc f g h).symm) L)
+    (proAlpha_square A c d cd L) (proAlpha_square A d e de (plusOut A c L))
+    (proAlpha_square A cd e t L)
+    (proAlpha_square A c de (t.copy (Category.assoc f g h).symm) L)
+    (alpha_assoc A c d e cd de t L)
 
 /-- The canonical etale compact-support-to-sum comparison in the standing setting.
 No local Noetherian or compactness assumption is added: both follow from finite type.
@@ -539,7 +863,27 @@ theorem finiteCoefficientCompactSupport_counit
           inv ((site B c).app N) ≫ (nu B Y).map epsB =
         (scalar (Scheme.ProEt.topology Y) a).map
           (inv ((site A c).app L) ≫ (nu A Y).map epsA) ≫ (delta a Y).hom.app K := by
-  sorry
+  intro hc hn
+  let := hc
+  let := hn
+  let : EssentiallySmall.{u + 1} X.ProEt :=
+    WeilConjectures.scalarReductionSiteSmall.{u, u} X
+  let : EssentiallySmall.{u + 1} Y.ProEt :=
+    WeilConjectures.scalarReductionSiteSmall.{u, u} Y
+  have hs := (etaleProEtaleCoefficientCompatibilitySmooth
+    ℓ k hk hchar hA hB a dim c L hL).2.2.2.2
+  have ht := (site B c).naturality t
+  have hd := (delta.{u} a Y).hom.naturality epsA
+  simp only [Functor.comp_map] at ht hd heps
+  apply cancel_mapped_iso (scalar.{u} (Scheme.ProEt.topology Y) a)
+    ((site A c).app L)
+  simp only [Functor.map_comp, Functor.comp_map, Category.assoc]
+  rw [reassoc_of% hs]
+  rw [← reassoc_of% ht]
+  simp only [IsIso.hom_inv_id_assoc]
+  rw [← Functor.map_comp, ← Functor.map_comp, heps]
+  simp only [← Functor.map_comp_assoc, IsIso.hom_inv_id_assoc]
+  exact hd.symm
 
 /-- The transported refinement is natural in every morphism of D+ etale inputs.
 Beta, b, site, delta and sumScalar are ambient natural transformations/isomorphisms;
@@ -561,8 +905,28 @@ theorem finiteCoefficientCompactSupport_refinement_naturality
           @proPhi A _ _ X Y f _ c d M hcM =
         @proPhi A _ _ X Y f _ c d L hcL ≫
           (pro A d).map ((nu A X).map (DerivedCategory.Plus.ι.map v)) := by
-  sorry
-
+  intro hcL hcM
+  let := hcL
+  let := hcM
+  have hc : (nu A Y).map ((et A c).map (DerivedCategory.Plus.ι.map v)) ≫
+      (site A c).app M.obj = (site A c).app L.obj ≫
+        (pro A c).map ((nu A X).map (DerivedCategory.Plus.ι.map v)) :=
+    (site A c).naturality (DerivedCategory.Plus.ι.map v)
+  have hd : (nu A Y).map ((et A d).map (DerivedCategory.Plus.ι.map v)) ≫
+      (site A d).app M.obj = (site A d).app L.obj ≫
+        (pro A d).map ((nu A X).map (DerivedCategory.Plus.ι.map v)) :=
+    (site A d).naturality (DerivedCategory.Plus.ι.map v)
+  have hp : (et A c).map (DerivedCategory.Plus.ι.map v) ≫ (phi A c d M).hom =
+      (phi A c d L).hom ≫ (et A d).map (DerivedCategory.Plus.ι.map v) :=
+    (Etale.rightDerivedLowerShriekOfCompactificationPlusιIso A c d).hom.naturality v
+  apply (cancel_epi ((site A c).app L.obj)).1
+  dsimp only [proPhi]
+  simp only [← Category.assoc]
+  rw [← hc]
+  simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  rw [← Functor.map_comp_assoc, hp, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [hd]
 
 end Setting
 end AlgebraicGeometry.ProEtale.CoefficientCompatibility

@@ -53,6 +53,136 @@ theorem selfMap_fst {U Y : Scheme.{u}} (d : ℕ) (h : U ⟶ Y)
       (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = pullback.fst h h ≫ e := by
   simp [selfMap]
 
+/-- The intermediate map W_U -> W_A times_A U, with no shrinking or frame choice.
+Source: chart proof Step 1 (blueprint: lem-pur-chart-dnc-vector-factors). -/
+def sourceLift {U Y : Scheme.{u}} (d : ℕ) (h : U ⟶ Y)
+    (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y)
+    (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = h) :=
+  pullback.lift (selfMap d h e w) (pullback.fst h h) (selfMap_fst d h e w)
+
+/-- The intermediate map is etale and takes the diagonal to the pulled-back section.
+Restricting it to the specified neighbourhood O gives the Cartesian centre square.
+Source: chart proof Steps 1--2 (blueprint: lem-pur-chart-dnc-vector-factors).
+Proof: identify W_A times_A U with U times_Y A. The map is 1 times e, a base change
+of e, hence etale. Its separatedness follows from that of h and the affine projection;
+its graph over U is closed since the target projection is separated, and projection
+from the graph is a base change of the quasi-compact p_U. Thus the map is
+quasi-compact. The two projections identify its diagonal composite with the
+base-changed diagonal section. -/
+theorem sourceLift_geometry {U Y : Scheme.{u}} (d : ℕ) (h : U ⟶ Y)
+    [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e]
+    (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = h) :
+    Etale (sourceLift d h e w) ∧ IsSeparated (sourceLift d h e w) ∧
+      QuasiCompact (sourceLift d h e w) ∧
+      pullback.diagonal h ≫ sourceLift d h e w =
+        Scheme.Hom.baseChangeSection
+          (pullback.fst (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)
+            (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y))
+          (pullback.diagonal (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y))
+          (pullback.diagonal_fst _) e := by
+  let p := AffineSpace (ULift.{u} (Fin d)) Y ↘ Y
+  let a := sourceLift d h e w
+  let q := pullback.fst (pullback.fst p p) e ≫ pullback.snd p p
+  have ha : a ≫ q = pullback.snd h h ≫ e := by
+    simp [a, q, p, sourceLift, selfMap]
+  have sq : IsPullback a (pullback.snd h h) q e := by
+    refine IsPullback.of_isLimit (c := PullbackCone.mk _ _ ha) ?_
+    refine PullbackCone.IsLimit.mk _
+      (fun c ↦ pullback.lift (c.fst ≫ pullback.snd (pullback.fst p p) e) c.snd ?_)
+      ?_ ?_ ?_
+    · calc
+        (c.fst ≫ pullback.snd (pullback.fst p p) e) ≫ h =
+            c.fst ≫ pullback.fst (pullback.fst p p) e ≫ pullback.fst p p ≫ p := by
+          simpa only [p, Category.assoc, w] using
+            congrArg (fun f ↦ c.fst ≫ f ≫ p)
+              (pullback.condition (f := pullback.fst p p) (g := e)).symm
+        _ = c.fst ≫ q ≫ p := by rw [pullback.condition]; rfl
+        _ = c.snd ≫ h := by rw [← Category.assoc, c.condition, Category.assoc]; rw [w]
+    · intro c
+      apply pullback.hom_ext
+      · apply pullback.hom_ext
+        · simp [a, p, sourceLift, selfMap]
+        · simpa [a, p, sourceLift, selfMap, q] using c.condition.symm
+      · simp [a, p, sourceLift]
+    · intro c
+      simp
+    · intro c m hm hn
+      apply pullback.hom_ext
+      · simpa [a, p, sourceLift] using hm =≫ pullback.snd (pullback.fst p p) e
+      · simpa using hn
+  have : Etale a := MorphismProperty.of_isPullback sq.flip inferInstance
+  have : IsSeparated (a ≫ pullback.snd (pullback.fst p p) e) := by
+    simpa [a, p, sourceLift] using inferInstanceAs (IsSeparated (pullback.fst h h))
+  have : IsSeparated a := IsSeparated.of_comp a (pullback.snd (pullback.fst p p) e)
+  have : QuasiCompact (a ≫ pullback.snd (pullback.fst p p) e) := by
+    simpa [a, p, sourceLift] using inferInstanceAs (QuasiCompact (pullback.fst h h))
+  have : QuasiCompact a := QuasiCompact.of_comp a (pullback.snd (pullback.fst p p) e)
+  refine ⟨inferInstance, inferInstance, inferInstance, ?_⟩
+  apply pullback.hom_ext
+  · apply pullback.hom_ext <;>
+      simp [sourceLift, selfMap, Scheme.Hom.baseChangeSection]
+  · simp [sourceLift, Scheme.Hom.baseChangeSection]
+
+/-- Canonical ordinary section comparison a, through etale locality and inverse smooth
+base change. Locality composition shows it is exactly open restriction to O followed
+by the exceptional comparison for (e times e)|O. Source: chart proof Step 3
+(blueprint: lem-pur-chart-dnc-vector-factors). -/
+def sourceOrdinary (P : PurityFiniteSetting.{u}) {U Y : Scheme.{u}}
+    (d : ℕ) (h : U ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    [SmoothOfRelativeDimension d h]
+    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e]
+    (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = h)
+    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :=
+  let p := AffineSpace (ULift.{u} (Fin d)) Y ↘ Y
+  letI : SmoothOfRelativeDimension d p := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) Y
+  let pA := pullback.fst p p
+  let g := pullback.snd pA e
+  let s := Scheme.Hom.baseChangeSection pA (pullback.diagonal p)
+    (pullback.diagonal_fst p) e
+  letI := P.noetherian aY
+  letI := P.noetherian (h ≫ aY)
+  letI := P.noetherian (p ≫ aY)
+  letI := P.noetherian (pA ≫ p ≫ aY)
+  letI := P.noetherian (g ≫ h ≫ aY)
+  letI := P.noetherian (pullback.fst h h ≫ h ≫ aY)
+  letI := (sourceLift_geometry d h e w).1
+  letI := (sourceLift_geometry d h e w).2.1
+  letI := (sourceLift_geometry d h e w).2.2.1
+  letI := Dnc.compactifiable P pA (p ≫ aY)
+  letI := Dnc.compactifiable P g (h ≫ aY)
+  letI := Dnc.compactifiable P (pullback.fst h h) (h ≫ aY)
+  letI := Dnc.invertibleExponent P (pA ≫ p ≫ aY)
+  (P.chartSectionEtaleRestriction N (sourceLift d h e w) g (pullback.fst h h)
+    (pullback.lift_snd _ _ _) s (pullback.diagonal h)
+      (sourceLift_geometry d h e w).2.2.2).symm ≪≫
+    (Dnc.sectionBaseChange P.Coefficient d pA (IsPullback.of_hasPullback pA e)
+      (pullback.diagonal p) s (Scheme.Hom.baseChangeSection_fst pA
+        (pullback.diagonal p) (pullback.diagonal_fst p) e)).symm
+
+/-- The same specified a in the pro-etale section coordinates.
+Source: chart proof Step 3 (blueprint: lem-pur-chart-dnc-vector-factors). -/
+def source (P : PurityFiniteSetting.{u}) {U Y : Scheme.{u}}
+    (d : ℕ) (h : U ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    [SmoothOfRelativeDimension d h]
+    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e]
+    (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = h)
+    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :=
+  let p := AffineSpace (ULift.{u} (Fin d)) Y ↘ Y
+  letI : SmoothOfRelativeDimension d p := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) Y
+  Dnc.sourceComparison P d (pullback.fst h h) (h ≫ aY) (pullback.diagonal h) ≪≫
+    (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory.mapIso
+        (sourceOrdinary P d h aY e w N) ≪≫
+    (Dnc.pullComparison P e (Dnc.sourceEtale P d (pullback.fst p p)
+      (p ≫ aY) (pullback.diagonal p))).symm ≪≫
+    (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e).leftDerivedFunctor.mapIso
+      (Dnc.sourceComparison P d (pullback.fst p p) (p ≫ aY) (pullback.diagonal p)).symm
+
 /-- The diagonal ideal pulls into the diagonal ideal under e times e.
 Source: chart proof Steps 1--2 (blueprint: lem-pur-chart-dnc-vector-factors).
 Proof: the diagonal square commutes by the two projections. Pulling a section vanishing

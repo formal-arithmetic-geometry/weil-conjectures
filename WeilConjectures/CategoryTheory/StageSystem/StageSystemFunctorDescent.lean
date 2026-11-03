@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.CategoryTheory.CommonStage.CoherentPairFunctorDescent
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
 import WeilConjectures.CategoryTheory.StageSystem.Functor
+public import WeilConjectures.SmoothPurity.CondensedWeilModules
 
 /-! # Coherent functor descent on the existing StageSystem quotient
 
@@ -104,5 +105,67 @@ Source: sketch32, lines 1291--1338 and 1419--1426
   ((coefficientPairFunctor_exists S T φ b hb).exists.choose).copyObj
     (coefficientPairFunctorObject S T φ)
     (fun P ↦ eqToIso ((coefficientPairFunctor_exists S T φ b hb).exists.choose_spec.1 P))
+
+/-- The specified underlying comparison determines the Weil transformation uniquely.
+Source: prop-weil-operations, comparisons are morphisms of Weil complexes
+(blueprint: lem-sbc-coherent-pair-functor-descent).
+Proof: equality of the underlying components implies equality of algebra morphisms,
+then of both full-subcategory morphisms, then of natural transformations. -/
+theorem condensedWeilNatTrans_unique
+    (τ : condensedWeilFunctor Λ gX gY L e hL ⟶
+      condensedWeilFunctor Λ gX gY L' e' hL')
+    (hτ : ∀ K, (τ.app K).hom.hom.f = η.app K.obj.carrier) :
+    τ = condensedWeilNatTrans Λ gX gY e hL hL' η hη := by
+  apply NatTrans.ext
+  funext K
+  apply ObjectProperty.hom_ext _
+  apply ObjectProperty.hom_ext _
+  exact Endofunctor.Algebra.Hom.ext (hτ K)
+
+/-- No choice or alteration of the specified comparison component occurs.
+Source: prop-weil-operations, comparison maps are morphisms of Weil complexes
+(blueprint: lem-sbc-coherent-pair-functor-descent).
+Proof: both full-subcategory lifts retain the underlying eta component literally. -/
+theorem condensedWeilNatTrans_app (K : condensedStrictWeilComplex Λ gX) :
+    ((condensedWeilNatTrans Λ gX gY e hL hL' η hη).app K).hom.hom.f =
+      η.app K.obj.carrier := rfl
+
+/-- A compatible transformation of operations is a transformation of condensed Weil pairs.
+Source: prop-weil-operations, morphisms and comparison isomorphisms paragraph
+(blueprint: lem-sbc-coherent-pair-functor-descent).
+Proof: native IsoAlgebra.mapOfNatIsoHom combines the exchange square with naturality
+of eta at theta_K. Restrict its components and naturality to the full subcategories. -/
+def condensedWeilNatTrans :
+    condensedWeilFunctor Λ gX gY L e hL ⟶ condensedWeilFunctor Λ gX gY L' e' hL' where
+  app K := ObjectProperty.homMk ((IsoAlgebra.mapOfNatIsoHom η hη).app K.obj)
+  naturality _ _ f := ObjectProperty.hom_ext _
+    ((IsoAlgebra.mapOfNatIsoHom η hη).naturality f.hom)
+
+/-- The operation has exactly the specified carrier, structure and morphism formulas.
+Source: prop-weil-operations, displayed exchange followed by the structure map
+(blueprint: lem-sbc-coherent-pair-functor-descent).
+Proof: the full-subcategory lift leaves the native IsoAlgebra carrier and arrows
+unchanged. The native structure formula is the exchange composed with L(theta). -/
+theorem condensedWeilFunctor_spec :
+    (∀ K : condensedStrictWeilComplex Λ gX,
+      ((condensedWeilFunctor Λ gX gY L e hL).obj K).obj.carrier = L.obj K.obj.carrier) ∧
+    (∀ K : condensedStrictWeilComplex Λ gX,
+      ((condensedWeilFunctor Λ gX gY L e hL).obj K).obj.str =
+        e.app K.obj.carrier ≪≫ L.mapIso K.obj.str) ∧
+    (∀ {K K' : condensedStrictWeilComplex Λ gX} (f : K ⟶ K'),
+      ((condensedWeilFunctor Λ gX gY L e hL).map f).hom.hom.f = L.map f.hom.hom.f) := by
+  refine ⟨fun _ ↦ rfl, fun K ↦ ?_, fun _ ↦ rfl⟩
+  exact IsoAlgebra.mapOfNatIso_obj_str e K.obj
+
+/-- An operation with its specified exchange map acts on the actual condensed Weil pairs.
+Source: prop-weil-operations, induced Weil structures and morphisms paragraph
+(blueprint: lem-sbc-coherent-pair-functor-descent).
+The carrier is L K and its structure is e_K followed by L(theta_K). Preservation of
+bounded constructibility restricts the existing IsoAlgebra construction. -/
+def condensedWeilFunctor :
+    condensedStrictWeilComplex Λ gX ⥤ condensedStrictWeilComplex Λ gY :=
+  ObjectProperty.lift _
+    (ObjectProperty.ι _ ⋙ IsoAlgebra.mapOfNatIso e)
+    (fun K ↦ hL K.obj.carrier K.property)
 
 end CategoryTheory.StageSystem

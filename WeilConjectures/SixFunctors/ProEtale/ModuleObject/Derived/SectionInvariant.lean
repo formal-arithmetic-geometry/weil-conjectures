@@ -212,4 +212,59 @@ noncomputable def sectionInvariant
     ((ctfExceptionalInverseImage Λ ell D.k
       (BaseFieldFiniteCD.of_isAlgClosed ell D.k) g hΛ).obj unit).obj
 
+/--
+The section invariant belongs to `D^b_ctf` and has a two-sided relative derived-tensor inverse.
+The proof is postponed; the statement follows the four blueprint steps:
+
+1. Define `omega_g = Rg^! Lambda_B` using the recorded ctf exceptional inverse image and the
+   literal unit; the coefficient convention supplies its Dctf representative.
+2. Partition the smooth morphism by its finite clopen relative-dimension loci.  Compact-support
+   composition and the exact open-and-closed adjunction identify each exceptional restriction with
+   the constant-dimension exceptional inverse image, whose two-sided Dctf inverse is supplied
+   by clause 2 of the theorem thm-pur-cohomological-smoothness (not the finite-coefficient
+   definition `def-pur-co-smoothness`).
+3. Assemble the finitely many component inverses by the exact product decomposition for a finite
+   clopen partition; tensor and unit comparisons assemble componentwise and give a two-sided
+   inverse in the source Dctf category.
+4. Apply the finite-field ctf pullback stability to the closed section and compose its monoidal
+   pullback comparison with both evaluation maps.  This yields the two displayed tensor
+   isomorphisms to the literal unit.
+
+Source: the definition and invertibility assertion in
+literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-the-orientation-from-the-diagonal/sk-thm-dnc/sk-lem-geometry/
+`def-pur-section-invariant.md` (blueprint: def-pur-section-invariant).
+-/
+theorem sectionInvariant_mem_and_tensor_inverse
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (ell : ℕ) [Fact ell.Prime] (hell : ell ≠ D.p)
+    (E : PadicAlgCl.FiniteIntermediateField ell) (n : ℕ) (hn : 1 ≤ n)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hcoeff :
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj
+        (Padic.coefficientExtensionRing ell E n))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ell E)) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell)))
+    (B V : Over (Spec (.of D.k)))
+    [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom]
+    [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+    (g : V ⟶ B) [Smooth g.left] [IsSeparated g.left]
+    [LocallyOfFiniteType g.left] [QuasiCompact g.left]
+    (s : B ⟶ V) [IsClosedImmersion s.left]
+    (hs : s ≫ g = 𝟙 B) :
+    (constantModelBoundedConstructible Λ B.left ⊓
+        DerivedCategory.finiteTorAmplitude _)
+      (sectionInvariant D ell hell E n hn Λ hcoeff B V g s hs) ∧
+      ∃ P : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology B.left) Ab.{u + 1})
+          (condensedRingObj Λ B.left)),
+        (constantModelBoundedConstructible Λ B.left ⊓
+            DerivedCategory.finiteTorAmplitude _) P ∧
+        Nonempty (((derivedTensor Λ B.left).obj
+          (sectionInvariant D ell hell E n hn Λ hcoeff B V g s hs)).obj P ≅ 𝟙_ _) ∧
+        Nonempty (((derivedTensor Λ B.left).obj P).obj
+          (sectionInvariant D ell hell E n hn Λ hcoeff B V g s hs) ≅ 𝟙_ _) := by
+  sorry
+
 end AlgebraicGeometry.ProEtale.CondensedRing

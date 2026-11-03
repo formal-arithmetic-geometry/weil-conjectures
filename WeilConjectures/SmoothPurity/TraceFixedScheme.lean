@@ -121,6 +121,22 @@ theorem trfEndomorphismFixedScheme_equalizer {F : FiniteFieldDatum.{u}}
       · simpa [trfEndomorphismFixedInclusion] using hg
       · simpa using (hproj g).symm.trans hg
 
+/-- A component as an open subset, for a scheme satisfying the finite clopen convention.
+Source: blueprint def-trf-fixed-scheme, final display
+(blueprint: def-trf-fixed-scheme). -/
+def clopenConnectedComponentOpen (F : Scheme.{u}) (hF : F.HasFiniteClopenConnectedComponents)
+    (β : _root_.ConnectedComponents F) : F.Opens :=
+  ⟨ConnectedComponents.mk ⁻¹' {β}, (hF.2 β).2⟩
+
+/-- Finiteness of the set of all connected components, with every component clopen.
+The fibre of `ConnectedComponents.mk` is a whole connected component, including its
+nonemptiness; this does not select only those components which happen to be open.
+Source: blueprint def-trf-fixed-scheme, component convention
+(blueprint: def-trf-fixed-scheme). -/
+def HasFiniteClopenConnectedComponents (F : Scheme.{u}) : Prop :=
+  Finite (_root_.ConnectedComponents F) ∧
+    ∀ β : _root_.ConnectedComponents F, IsClopen (ConnectedComponents.mk ⁻¹' {β})
+
 end WeilConjectures
 
 namespace AlgebraicGeometry.Scheme

@@ -48,6 +48,8 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Compact.FiniteCompactSupp
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureCtfEqualsBc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExceptionalInverseImageCurrent
 public import WeilConjectures.SmoothPurity.CurrentExceptionalAdjointAdmissibility
+public import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExceptionalAdjunction
 
 /-! # Exceptional inverse image in the current field scope
 
@@ -101,6 +103,129 @@ theorem exceptionalCurrentFieldCD (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Fie
   · let := hk
     exact BaseFieldFiniteCD.of_isAlgClosed ℓ k
 
+private theorem nativeConstructibilityComparison
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
+    (hΛ : IsNativeExceptionalCoefficient ℓ Λ)
+    (T : Scheme.{u}) [CompactSpace T] [IsLocallyNoetherian T] :
+    boundedConstructible (condensedRingObj Λ T) = constantModelBoundedConstructible Λ T := by
+  have transport {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+      [MonObj Λ'] [IsCommMonObj Λ'] (e : Mon.mk Λ ≅ Mon.mk Λ')
+      (h : IsEllAdicCoefficient ℓ Λ' inferInstance) :
+      boundedConstructible (condensedRingObj Λ T) =
+        constantModelBoundedConstructible Λ T := by
+    have hm := comparison_transport e.symm T
+      (adicConstructibilityPredicateComparison ℓ T Λ' h).1
+    funext K
+    apply propext
+    exact and_congr_right fun _ ↦ forall_congr' fun n ↦ hm _
+  rcases hΛ with e | e | ⟨E, e | e⟩ | e
+  · obtain ⟨_, _, _, _, _, _, _, _, _, z, _⟩ :=
+      Profinite.base_coefficient_condensed_identification.{u} ℓ
+    exact transport (e.some ≪≫ z) (.integral
+      (⊥ : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)))
+  · exact transport e.some (.continuous ℚ_[ℓ])
+  · exact transport e.some (.integral E.1)
+  · exact transport e.some (.continuous E.1)
+  · exact transport e.some .algebraicClosure
+
+-- Brown's comparison clause is available for every compactification, not only its choice.
+
+private theorem nativeCompactSupportComparison
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hk : Finite k ∨ IsAlgClosed k) {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y) (hΛ : IsNativeExceptionalCoefficient ℓ Λ)
+    (c : Compactification f.left) :
+    Nonempty ((constantModelBoundedConstructible Λ X.left).ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ (compactificationOverField f) ≅
+      (constantModelBoundedConstructible Λ X.left).ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ c) := by
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : QuasiSeparatedSpace X.left := quasiSeparatedSpace_of_quasiSeparated X.hom
+  have ht : (constantModelBoundedConstructible Λ X.left ⊓
+      DerivedCategory.finiteTorAmplitude _) = constantModelBoundedConstructible Λ X.left :=
+    (AlgebraicGeometry.ProEtale.localizingClosure_ctf_equals_bc ℓ X.left Λ hΛ).1.2.2.1
+  have ha : IsLocalizingAdmissibleCoefficient ℓ Λ := by
+    rcases hΛ with h | h | ⟨E, h | h⟩ | h
+    · exact Or.inr (Or.inl h)
+    · exact Or.inr (Or.inr (Or.inl h))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩))))
+    · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩)))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))
+  obtain ⟨hX, hY, hSX, hSY, h, sX, sY, H⟩ :=
+    exceptionalInverseImage_exists_current Λ ℓ k hk f ha
+  let := hX
+  let := hY
+  let := sX
+  let := sY
+  obtain ⟨F, sF, H⟩ := H
+  let := sF
+  obtain ⟨eF, _, _, _, _, hc, _⟩ := H
+  have iX : constantModelBoundedConstructible Λ X.left ≤
+      localizingClosureProEtale Λ X.left := by
+    rwa [ht] at hSX
+  exact ⟨Functor.isoWhiskerLeft (ObjectProperty.ιOfLE iX)
+    ((eqToIso eF).symm ≪≫ (hc c).some)⟩
+
+-- Transfer the proper native adjunction across the equality of the two predicates.
+
+private theorem nativeProperPushforwardAdjoint
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hk : Finite k ∨ IsAlgClosed k) {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y) (hΛ : IsNativeExceptionalCoefficient ℓ Λ)
+    [IsProper f.left] :
+    ∃ hP : ∀ K : AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj Λ X.left),
+        boundedConstructible (condensedRingObj Λ Y.left)
+          ((lowerStar Λ f.left).rightDerivedFunctor.obj K.obj),
+      ((boundedConstructible (condensedRingObj Λ Y.left)).lift
+        ((boundedConstructible (condensedRingObj Λ X.left)).ι ⋙
+          (lowerStar Λ f.left).rightDerivedFunctor) hP).IsLeftAdjoint := by
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  let : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  let : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  have eX := nativeConstructibilityComparison Λ ℓ hΛ X.left
+  have eY := nativeConstructibilityComparison Λ ℓ hΛ Y.left
+  let iX := ObjectProperty.ιOfLE (le_of_eq eX.symm)
+  let iY := ObjectProperty.ιOfLE (le_of_eq eY.symm)
+  let : iX.IsEquivalence := (ObjectProperty.isEquivalence_ιOfLE_iff _).mpr
+    ((le_of_eq eX).trans (ObjectProperty.le_isoClosure _))
+  let : iY.IsEquivalence := (ObjectProperty.isEquivalence_ιOfLE_iff _).mpr
+    ((le_of_eq eY).trans (ObjectProperty.le_isoClosure _))
+  let F := nativeConstructibleLowerShriek Λ ℓ k (exceptionalCurrentFieldCD ℓ k hk) f hΛ
+  obtain ⟨ec⟩ := nativeCompactSupportComparison Λ ℓ k hk f hΛ
+    (Compactification.ofIsProper f.left)
+  let e : (constantModelBoundedConstructible Λ X.left).ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ (compactificationOverField f) ≅
+      (constantModelBoundedConstructible Λ X.left).ι ⋙
+        (lowerStar Λ f.left).rightDerivedFunctor :=
+    ec ≪≫
+      Functor.isoWhiskerLeft _
+        (Functor.isoWhiskerRight (derivedOpenImmersionLowerShriekId Λ X.left) _ ≪≫
+          Functor.leftUnitor _)
+  have hP (K : AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj Λ X.left)) :
+      boundedConstructible (condensedRingObj Λ Y.left)
+        ((lowerStar Λ f.left).rightDerivedFunctor.obj K.obj) := by
+    let K' : ConstantModelBoundedConstructible Λ X.left :=
+      ⟨K.obj, (congrFun eX K.obj).mp K.property⟩
+    exact (boundedConstructible (condensedRingObj Λ Y.left)).prop_of_iso (e.app K')
+      ((congrFun eY _).mpr (F.obj K').property)
+  let P := (boundedConstructible (condensedRingObj Λ Y.left)).lift
+    ((boundedConstructible (condensedRingObj Λ X.left)).ι ⋙
+      (lowerStar Λ f.left).rightDerivedFunctor) hP
+  let ep : F ⋙ iY ≅ iX ⋙ P :=
+    ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso e
+  have : (iX ⋙ P).IsLeftAdjoint := Functor.isLeftAdjoint_of_iso ep
+  exact ⟨hP, (Functor.isLeftAdjoint_comp_iff_right iX P).mp this⟩
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
@@ -127,6 +252,135 @@ def currentExceptionalAdjunction :
     nativeConstructibleLowerShriek Λ ℓ k (exceptionalCurrentFieldCD ℓ k hk) f hΛ ⊣
       currentExceptionalInverseImage Λ ℓ k hk f hΛ :=
   nativeConstructibleExceptionalAdjunction Λ ℓ k (exceptionalCurrentFieldCD ℓ k hk) f hΛ
+
+/-- The condensed restriction is exact, comes from the single native localizing adjunction,
+and agrees with every right adjoint of the same restricted compact-support functor, uniquely
+when the counit is fixed. In particular this characterizes the compactification construction
+`i^* Rp^!`. The finite-Tor and bounded-constructible predicates coincide at these coefficients.
+
+Source: native Brown restriction paragraph (blueprint: def-weil-exceptional-inverse-image).
+Proof, following steps 2 and 6 of the node: apply Brown existence (3) and preservation (4) to
+these native coefficients on the localizing closures. The independent finite-Tor comparison
+identifies Dctf with Dbc. Restrict both adjoints along the full inclusions. The inherited shift
+on compact support induces the adjoint shift and exactness. A compactification composite is
+right adjoint to the same compact support, so transpose its counit and use the triangle
+identities to obtain the unique counit-compatible comparison. No scalar comparison enters.
+-/
+theorem currentExceptionalInverseImage_properties :
+    ((constantModelBoundedConstructible Λ X.left ⊓ DerivedCategory.finiteTorAmplitude _) =
+      constantModelBoundedConstructible Λ X.left) ∧
+    ((constantModelBoundedConstructible Λ Y.left ⊓ DerivedCategory.finiteTorAmplitude _) =
+      constantModelBoundedConstructible Λ Y.left) ∧
+    (∃ (hX : (constantModelBoundedConstructible Λ X.left).IsTriangulated)
+      (hY : (constantModelBoundedConstructible Λ Y.left).IsTriangulated),
+      (fun [_triX : (constantModelBoundedConstructible Λ X.left).IsTriangulated]
+          [_triY : (constantModelBoundedConstructible Λ Y.left).IsTriangulated] ↦
+        ∃ s : (nativeConstructibleLowerShriek Λ ℓ k
+            (exceptionalCurrentFieldCD ℓ k hk) f hΛ).CommShift ℤ,
+        ∃ t : (currentExceptionalInverseImage Λ ℓ k hk f hΛ).CommShift ℤ,
+          (fun [_s : (nativeConstructibleLowerShriek Λ ℓ k
+              (exceptionalCurrentFieldCD ℓ k hk) f hΛ).CommShift ℤ]
+              [_t : (currentExceptionalInverseImage Λ ℓ k hk f hΛ).CommShift ℤ] ↦
+            (currentExceptionalAdjunction Λ ℓ k hk f hΛ).IsTriangulated)
+            (_s := s) (_t := t)) (_triX := hX) (_triY := hY)) ∧
+    ∀ (G : ConstantModelBoundedConstructible Λ Y.left ⥤
+        ConstantModelBoundedConstructible Λ X.left)
+      (adj : nativeConstructibleLowerShriek Λ ℓ k
+        (exceptionalCurrentFieldCD ℓ k hk) f hΛ ⊣ G),
+      ∃! e : currentExceptionalInverseImage Λ ℓ k hk f hΛ ≅ G,
+        ∀ L, (nativeConstructibleLowerShriek Λ ℓ k
+          (exceptionalCurrentFieldCD ℓ k hk) f hΛ).map (e.hom.app L) ≫ adj.counit.app L =
+            (currentExceptionalAdjunction Λ ℓ k hk f hΛ).counit.app L := by
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  let : QuasiSeparatedSpace X.left := quasiSeparatedSpace_of_quasiSeparated X.hom
+  let : QuasiSeparatedSpace Y.left := quasiSeparatedSpace_of_quasiSeparated Y.hom
+  refine ⟨(localizingClosure_ctf_equals_bc ℓ X.left Λ hΛ).1.2.2.1,
+    (localizingClosure_ctf_equals_bc ℓ Y.left Λ hΛ).1.2.2.1, ?_, ?_⟩
+  · exact nativeConstructibleExceptionalAdjunction_exact Λ ℓ k
+      (exceptionalCurrentFieldCD ℓ k hk) f hΛ
+  · intro G adj
+    exact nativeConstructibleExceptionalInverseImage_unique Λ ℓ k
+      (exceptionalCurrentFieldCD ℓ k hk) f hΛ G adj
+
+/-- Agreement with the dependency's actual compactification composite, through the canonical
+full inclusions of constant-model constructible objects into native bounded constructible
+objects. The preservation and proper-adjoint witnesses are conclusions, not hypotheses.
+Source: non-finite compactification agreement paragraph
+(blueprint: def-weil-exceptional-inverse-image).
+Proof: native constructibility agrees with constant finite local models for the specified
+adic coefficients. Proper pushforward preserves them. Brown representability for the proper
+leg supplies its restricted right adjoint. The open adjunction composes with the proper
+adjunction to give precisely `boundedConstructibleExceptionalAdjunction`. Both left adjoints
+are the restriction of the canonical compact-support functor, compared by the canonical
+compactification independence map. Counit-compatible uniqueness of right adjoints yields
+the displayed isomorphism after the full inclusions. -/
+theorem currentExceptionalInverseImage_compactification :
+    ∃ hP : ∀ K : AlgebraicGeometry.ProEtale.BoundedConstructible
+        (condensedRingObj Λ (exceptionalInverseImageCompactification f).Z),
+      boundedConstructible (condensedRingObj Λ Y.left)
+        ((lowerStar Λ (exceptionalInverseImageCompactification f).g).rightDerivedFunctor.obj
+          K.obj),
+    ∃ _hAdj : (exceptionalInverseImageProperPushforward Λ f hP).IsLeftAdjoint,
+    ∃ (hX : constantModelBoundedConstructible Λ X.left ≤
+        boundedConstructible (condensedRingObj Λ X.left))
+      (hY : constantModelBoundedConstructible Λ Y.left ≤
+        boundedConstructible (condensedRingObj Λ Y.left)),
+      letI := _hAdj
+      Nonempty (currentExceptionalInverseImage Λ ℓ k hk f hΛ ⋙ ObjectProperty.ιOfLE hX ≅
+        ObjectProperty.ιOfLE hY ⋙ boundedConstructibleUpperShriekOfRightAdjoint Λ ℓ f hP) := by
+  classical
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  let : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  let : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  let c := exceptionalInverseImageCompactification f
+  obtain ⟨hP, hAdj⟩ := nativeProperPushforwardAdjoint Λ ℓ k hk c.overG hΛ
+  have eX := nativeConstructibilityComparison Λ ℓ hΛ X.left
+  have eY := nativeConstructibilityComparison Λ ℓ hΛ Y.left
+  let hX := le_of_eq eX.symm
+  let hY := le_of_eq eY.symm
+  refine ⟨hP, hAdj, hX, hY, ?_⟩
+  let : (exceptionalInverseImageProperPushforward Λ f hP).IsLeftAdjoint := hAdj
+  let iX := ObjectProperty.ιOfLE hX
+  let iY := ObjectProperty.ιOfLE hY
+  let : iX.IsEquivalence := (ObjectProperty.isEquivalence_ιOfLE_iff _).mpr
+    ((le_of_eq eX).trans (ObjectProperty.le_isoClosure _))
+  let : iY.IsEquivalence := (ObjectProperty.isEquivalence_ιOfLE_iff _).mpr
+    ((le_of_eq eY).trans (ObjectProperty.le_isoClosure _))
+  let P := exceptionalInverseImageProperPushforward Λ f hP
+  let : P.IsLeftAdjoint := hAdj
+  let F := boundedConstructibleOpenImmersionLowerShriek Λ ℓ c.overI ⋙ P
+  let G := boundedConstructibleUpperShriekOfRightAdjoint Λ ℓ f hP
+  let adj : F ⊣ G :=
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ c.overI).comp
+      (Adjunction.ofIsLeftAdjoint P)
+  let ec : F ⋙ (boundedConstructible (condensedRingObj Λ Y.left)).ι ≅
+      (boundedConstructible (condensedRingObj Λ X.left)).ι ⋙
+        rightDerivedLowerShriekOfCompactification Λ c :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (ObjectProperty.liftCompιIso _ _ _) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        (boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ c.overI) _ ≪≫
+      Functor.associator _ _ _
+  obtain ⟨ecompact⟩ := nativeCompactSupportComparison Λ ℓ k hk f hΛ c
+  let eF : nativeConstructibleLowerShriek Λ ℓ k
+        (exceptionalCurrentFieldCD ℓ k hk) f hΛ ⋙ iY ≅ iX ⋙ F :=
+    ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+      (ecompact ≪≫
+        (Functor.isoWhiskerLeft iX ec).symm)
+  let G' := iY ⋙ G ⋙ iX.asEquivalence.inverse
+  let comm : iY ⋙ G ≅ G' ⋙ iX :=
+    Functor.isoWhiskerLeft (iY ⋙ G) iX.asEquivalence.counitIso.symm
+  let adj' : nativeConstructibleLowerShriek Λ ℓ k
+      (exceptionalCurrentFieldCD ℓ k hk) f hΛ ⊣ G' :=
+    adj.restrictFullyFaithful (ObjectProperty.fullyFaithfulιOfLE hX)
+      (ObjectProperty.fullyFaithfulιOfLE hY) eF.symm comm
+  let eG := (currentExceptionalAdjunction Λ ℓ k hk f hΛ).rightAdjointUniq adj'
+  exact ⟨Functor.isoWhiskerRight eG iX ≪≫
+    Functor.isoWhiskerLeft (iY ⋙ G) iX.asEquivalence.counitIso ≪≫
+    Functor.rightUnitor _⟩
 
 end WeilConjectures
 

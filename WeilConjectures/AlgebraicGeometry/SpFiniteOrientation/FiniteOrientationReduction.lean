@@ -19,6 +19,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import all WeilConjectures.AlgebraicGeometry.Reduction.ReductionCompatibilities
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteNormalizedOrientationScalar
 
 /-! # Finite diagonal orientations at the unit and under reduction
 
@@ -191,6 +192,72 @@ def sourceUnitIso (A : Type (u + 1)) [CommRing A]
     ((Etale.ordinaryFinitePullback A f).mapIso
       (PurityFiniteSetting.smoothPurityUnitIso A Y) ≪≫
       Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f)).app L ≪≫ λ_ L
+
+private def tensorUnitIso
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (F : C ⥤ D) [F.IsEquivalence]
+    (e : tensor C ⋙ F ≅ F.prod F ⋙ tensor D) : F.obj (𝟙_ C) ≅ 𝟙_ D :=
+  let K := F.objPreimage (𝟙_ D)
+  let k := F.objObjPreimageIso (𝟙_ D)
+  (ρ_ _).symm ≪≫ tensorIso (Iso.refl _) k.symm ≪≫
+    (e.app (𝟙_ C, K)).symm ≪≫ F.mapIso (λ_ K) ≪≫ k
+
+private theorem intrinsic_tor_iso (T : Scheme.{u}) (A : Type u) [CommRing A]
+    {K L : proEtaleDerivedCategory T A} (e : K ≅ L) (a z : ℤ)
+    (h : HasProEtaleTorAmplitude T A K a z) : HasProEtaleTorAmplitude T A L a z := by
+  refine ⟨h.1, ?_⟩
+  rintro C P ⟨eC⟩ f hf hP M i hi
+  exact h.2 C P ⟨eC ≪≫ e.symm⟩ f hf hP M i hi
+
+private theorem finite_unit_bounds (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
+    let U := (DerivedCategory.singleFunctor
+      (proEtaleRingModules T (proEtaleConstantRing T A)) 0).obj
+        (SheafOfModules.unit ((sheafCompose (ProEt.topology T)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+            (proEtaleConstantRing T A)))
+    (∀ i : ℤ, (i < 0 ∨ 0 < i) →
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj U)) ∧
+    (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf T A
+      ((DerivedCategory.homologyFunctor _ i).obj U)) ∧
+    HasProEtaleTorAmplitude T A U 0 0 := by
+  let C := Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))
+  let F := finiteCoefficientIntrinsicRealization T A
+  let := (finiteCoefficientIntrinsicRealization_exact T A).1
+  let := SheafOfModules.monoidalCategory (proEtaleConstantRing T A)
+  obtain ⟨t⟩ := intrinsicTensorNatIso T A
+  let eU := tensorUnitIso F t
+  let K := (DerivedCategory.singleFunctor C 0).obj (𝟙_ C)
+  let e : F.mapDerivedCategory.obj K ≅ _ :=
+    (F.mapDerivedCategorySingleFunctor 0).app (𝟙_ C) ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso eU
+  have hz (i : ℤ) (hi : i < 0 ∨ 0 < i) :
+      IsZero ((DerivedCategory.homologyFunctor C i).obj K) := by
+    rcases hi with hi | hi
+    · exact DerivedCategory.isZero_of_isGE K 0 i hi
+    · exact DerivedCategory.isZero_of_isLE K 0 i hi
+  let G := comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) T
+  have hbc : ProEtale.DerivedCategory.boundedConstructible
+      (ModuleCat.{u + 1} (ULift.{u + 1} A)) T K := by
+    refine ⟨(DerivedCategory.singleFunctor _ 0).obj (𝟙_ _),
+      Etale.DerivedCategory.boundedConstructible_singleFunctor_obj _ 0, ⟨?_⟩⟩
+    exact (G.mapDerivedCategorySingleFunctor 0).app (𝟙_ _) ≪≫
+      (DerivedCategory.singleFunctor C 0).mapIso (Functor.Monoidal.εIso G).symm
+  have hc := ProEtale.DerivedCategory.boundedConstructible_le_boundedConstructibleIntrinsic K hbc
+  refine ⟨?_, ?_, ?_⟩
+  · intro i hi
+    exact (F.map_isZero (hz i hi)).of_iso
+      (((F.mapDerivedCategoryHomologyFunctorIso i).app K) ≪≫
+        (DerivedCategory.homologyFunctor _ i).mapIso e).symm
+  · intro i
+    apply intrinsicConstructible_of_iso T A
+      (((F.mapDerivedCategoryHomologyFunctorIso i).app K) ≪≫
+        (DerivedCategory.homologyFunctor _ i).mapIso e)
+    exact (intrinsicRealization_constructible_iff T A _).2 (hc.2 i)
+  · apply intrinsic_tor_iso T A e 0 0
+    apply (intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn A T 0 0 le_rfl K).2
+    exact DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
+      (ObjectProperty.flat_of_isDualizable isDualizable_unit)
 
 attribute [local instance] towerCoefficientCommRing
 

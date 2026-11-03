@@ -8,6 +8,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.Finite.General.FiniteGeneralRingData
 public import WeilConjectures.CategoryTheory.Sites.FixedCoefficientDerivedChangeOfRings
 public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothPurityMaps
+public import WeilConjectures.AlgebraicGeometry.CoefficientScalarRepresentatives.CoefficientScalarRepresentatives
+public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientComparison
+public import WeilConjectures.AlgebraicGeometry.Finite.General.FiniteGeneralRingIntegrationExponent
+public import WeilConjectures.AlgebraicGeometry.Finite.General.FiniteGeneralRingOrientationSupport
+public import WeilConjectures.AlgebraicGeometry.FiniteGeneralRingSiteScalar
+public import WeilConjectures.AlgebraicGeometry.FiniteGeneralRingTensorFormula
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteNormalizedOrientationScalar
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteProCoefficientCounitTransport
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothLevelOfOrientation
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothNormalizedExistence
 
 /-! # Smooth purity over a finite coefficient ring
 
@@ -150,5 +160,146 @@ def generalFieldScalarUnitMap
           (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T) ≪≫
         Etale.ExceptionalCoefficients.unitIso phi T ≪≫
         (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} B) T).symm).hom
+
+private theorem scalarSite_current
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (phi : A →+* B) (T : Scheme.{u}) :
+    generalFieldScalarSiteMap phi T =
+      CoefficientScalarRepresentatives.comparisonMap T phi := by
+  rfl
+
+private instance scalarSite_isIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (phi : A →+* B) (T : Scheme.{u}) : IsIso (generalFieldScalarSiteMap phi T) := by
+  rw [scalarSite_current]
+  infer_instance
+
+private theorem scalarSite_published
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (phi : A →+* B) (T : Scheme.{u}) :
+    generalFieldScalarSiteMap phi T = (pbcComparisonReduction T phi).hom := by
+  rfl
+
+private theorem scalarUnit_published
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (phi : A →+* B) (T : Scheme.{u}) :
+    generalFieldScalarUnitMap phi T = (finiteGeneralRingScalarUnitIso phi T).hom := by
+  rw [generalFieldScalarUnitMap, scalarSite_published]
+  rfl
+
+private theorem dualizingUnit_isIso
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian Y] (f : X ⟶ Y) [HasCompactification f] :
+    IsIso (finiteGeneralRingDualizingUnitMap A f) := by
+  have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} A) Y
+    (Etale.ordinaryFiniteUnit A Y) (show _root_.DerivedCategory.TStructure.t.plus
+      (Etale.ordinaryFiniteUnit A Y) from ⟨0, inferInstance⟩)
+  unfold finiteGeneralRingDualizingUnitMap
+  infer_instance
+
+private theorem compactCoefficient_isIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (phi : A →+* B) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [HasCompactification f] (M : Etale.DerivedCategoryModule A X)
+    (hM : Etale.DerivedCategory.boundedConstructibleFiniteTor A X M) :
+    IsIso (proCompactCoefficientMap phi f ((comparison A X).obj M)) := by
+  have hp : _root_.DerivedCategory.TStructure.t.plus ((ordinaryScalar phi X).obj M) :=
+    Etale.ExceptionalCoefficients.scalar_extension_plus_of_finiteTor phi X M hM.2
+  have ha : IsIso (compactSiteMap A f M) := by
+    unfold compactSiteMap
+    rw [dif_pos hM.1.1.1]
+    infer_instance
+  have hb : IsIso (compactSiteInverse B f ((ordinaryScalar phi X).obj M)) := by
+    unfold compactSiteInverse
+    rw [dif_pos hp]
+    infer_instance
+  rw [compactCoefficientAtOrigin phi f M hM]
+  have := Etale.ExceptionalCoefficients.compactSupport_isIso phi
+    (HasCompactification.compactification f) M
+  infer_instance
+
+private def sourceInLine (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : Etale.FiniteSmoothPurity.proCategory A Y) :
+    Etale.FiniteSmoothPurity.comparison A X ⋙
+        (ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+          ((Etale.FiniteSmoothPurity.proPullback A f).obj K) ⟶
+      (Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+          ((Etale.ordinaryFinitePullback A f).obj
+            ((Etale.FiniteSmoothPurity.origin A Y).obj K)) ⋙
+        Etale.FiniteSmoothPurity.comparison A X := by
+  let : IsNoetherianRing A := isNoetherian_of_finite A A
+  let : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).PreservesFlat :=
+    ProEtale.preservesFlat_comparisonUpperStar
+  exact Functor.whiskerLeft (Etale.FiniteSmoothPurity.comparison A X)
+      ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).map
+        ((Etale.FiniteSmoothPurity.proPullback A f).map
+            (Etale.FiniteSmoothPurity.originInverse A Y K) ≫
+          (Etale.FiniteSmoothPurity.sitePullbackIso A f).hom.app
+            ((Etale.FiniteSmoothPurity.origin A Y).obj K))) ≫
+    (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+      (ModuleCat.{u + 1} A)
+      ((Etale.ordinaryFinitePullback A f).obj
+        ((Etale.FiniteSmoothPurity.origin A Y).obj K))).inv
+
+private theorem sourceInLine_app (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : Etale.FiniteSmoothPurity.proCategory A Y)
+    (L : Etale.DerivedCategoryModule A X) :
+    (sourceInLine A f K).app L = Etale.FiniteSmoothPurity.sourceToOrigin A f L K := by
+  let : IsNoetherianRing A := isNoetherian_of_finite A A
+  let : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).PreservesFlat :=
+    ProEtale.preservesFlat_comparisonUpperStar
+  simp only [sourceInLine, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.map_comp, NatTrans.comp_app, Etale.FiniteSmoothPurity.sourceToOrigin,
+    Etale.FiniteSmoothPurity.proSource, Functor.comp_map,
+    Etale.FiniteSmoothPurity.sourceAtOriginIso, Iso.trans_inv,
+    Category.assoc]
+  rfl
+
+private theorem gammaInLine (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    {L M : Etale.DerivedCategoryModule A X} (b : M ≅ L)
+    (alpha : Etale.dualizingComplex A f ≅ L)
+    (K : Etale.FiniteSmoothPurity.proCategory A Y) :
+    ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+        ((Etale.FiniteSmoothPurity.proPullback A f).obj K)).map
+          ((Etale.FiniteSmoothPurity.comparison A X).map b.hom) ≫
+        Etale.FiniteSmoothPurity.proGamma A f L alpha K =
+      Etale.FiniteSmoothPurity.sourceToOrigin A f M K ≫
+        (Etale.FiniteSmoothPurity.comparison A X).map
+          (((Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+              ((Etale.ordinaryFinitePullback A f).obj
+                ((Etale.FiniteSmoothPurity.origin A Y).obj K))).map
+                  (b.hom ≫ alpha.inv) ≫
+            Etale.smoothTensorDualityMap A f
+              (Etale.isIso_projectionMap_of_finite A f)
+              ((Etale.FiniteSmoothPurity.origin A Y).obj K)) := by
+  have hn := (sourceInLine A f K).naturality b.hom
+  rw [sourceInLine_app, sourceInLine_app] at hn
+  dsimp only [Functor.comp_map] at hn
+  simp only [Etale.FiniteSmoothPurity.proGamma, Etale.FiniteSmoothPurity.gamma,
+    Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn]
+
+private theorem gammaOrientationEquality (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    {L L' M : Etale.DerivedCategoryModule A X} (b : M ≅ L) (b' : M ≅ L')
+    (alpha : Etale.dualizingComplex A f ≅ L)
+    (alpha' : Etale.dualizingComplex A f ≅ L')
+    (h : alpha.hom ≫ b.inv = alpha'.hom ≫ b'.inv)
+    (K : Etale.FiniteSmoothPurity.proCategory A Y) :
+    ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+        ((Etale.FiniteSmoothPurity.proPullback A f).obj K)).map
+          ((Etale.FiniteSmoothPurity.comparison A X).map b.hom) ≫
+        Etale.FiniteSmoothPurity.proGamma A f L alpha K =
+      ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+        ((Etale.FiniteSmoothPurity.proPullback A f).obj K)).map
+          ((Etale.FiniteSmoothPurity.comparison A X).map b'.hom) ≫
+        Etale.FiniteSmoothPurity.proGamma A f L' alpha' K := by
+  have he : b.hom ≫ alpha.inv = b'.hom ≫ alpha'.inv := by
+    have hi := congrArg Iso.inv (Iso.ext h : alpha ≪≫ b.symm = alpha' ≪≫ b'.symm)
+    exact hi
+  rw [gammaInLine, gammaInLine, he]
 
 end AlgebraicGeometry.ProEtale

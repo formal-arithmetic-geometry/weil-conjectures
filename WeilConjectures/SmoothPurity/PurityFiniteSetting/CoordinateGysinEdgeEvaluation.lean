@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Affine.PurityAffineLineOrientationData
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateGysinEdgeCocycle
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateGysinResolutionTransport
 
 /-! # Evaluation through the normalized local-class edge
 
@@ -25,9 +27,9 @@ Source: latest blueprint, lem-pur-gysin-structure.proof.md, second assertion,
 evaluation on one and identification of Hom with sections of cohomology.
 (blueprint: lem-pur-coordinate-gysin-edge-evaluation).
 
-Proof: put K = gysinClosed and choose a bounded-below injective representative I
-of K, using comparison.bounded_closed. Transport m to a map from the constant single
-object to Q(I)[2]. K-injective localization represents it by a chain map into I[2].
+Proof: put K = gysinClosed and choose a K-injective representative I of K using
+Mathlib's existence theorem. Transport m to a map from the constant single object
+to Q(I)[2]. K-injective localization represents it by a chain map into I[2].
 The single-complex and shift comparisons give its sole component f : constant -> I^2,
 with f followed by d^2 equal to zero. Evaluation on the coefficient unit is natural
 for postcomposition, so it gives a cycle y of global sections of I in degree two.
@@ -54,6 +56,19 @@ theorem coordinateGysin_edge_evaluation
         (((DerivedCategory.homologyFunctor (ProSheaves P T) 0).shiftIso
           (2 : ℤ) 0 2 (add_zero 2)).hom.app (P.gysinClosed h T))
         (P.gysinHomToSections h T m) := by
-  sorry
+  obtain ⟨I, hI, ⟨e⟩⟩ :=
+    DerivedCategory.exists_iso_Q_obj_of_isKInjective (P.gysinClosed h T)
+  let _ := hI
+  let f := m ≫ (e.hom⟦(2 : ℤ)⟧')
+  have hf : f = m ≫ (e.hom⟦(2 : ℤ)⟧') := rfl
+  calc
+    _ = (globalSectionsFunctor (Modules P) T).map
+        ((DerivedCategory.homologyFunctor (ProSheaves P T) 2).map e.inv)
+        ((globalSectionsFunctor (Modules P) T).map
+          (((DerivedCategory.homologyFunctor (ProSheaves P T) 0).shiftIso
+            (2 : ℤ) 0 2 (add_zero 2)).hom.app (DerivedCategory.Q.obj I))
+          (resolvedGysinEvaluation P T I f)) :=
+      coordinateGysin_edge_cocycle P h T D m I e f hf
+    _ = _ := coordinateGysin_resolution_transport P h T m I e f hf
 
 end WeilConjectures.PurityFiniteSetting

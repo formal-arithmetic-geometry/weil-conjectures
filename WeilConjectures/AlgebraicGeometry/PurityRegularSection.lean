@@ -45,6 +45,19 @@ def regularSectionEvaluation {T : Scheme.{u}} (F : T.Modules) (s : F.sections) :
     (SheafOfModules.unit T.ringCatSheaf)
     (SheafOfModules.sectionsMap (SheafOfModules.bidual (R := T.sheaf) F) s)
 
+/-- The canonical dual frame on any open: restrict ordinary sheaf Hom, transpose the frame,
+and use the coordinate-projection duality of the finite free module.
+Source: Stacks Tag 01C6; purity dual-frame convention (blueprint: def-pur-regular-section). -/
+def regularSectionDualFrame {T : Scheme.{u}} (F : T.Modules) (r : ℕ) (U : T.Opens)
+    (e : F.over U ≅ SheafOfModules.free
+      (R := T.ringCatSheaf.over U) (ULift.{u} (Fin r))) :
+    (Scheme.Modules.dual F).over U ≅ SheafOfModules.free
+      (R := T.ringCatSheaf.over U) (ULift.{u} (Fin r)) :=
+  SheafOfModules.overHomObjIso F (SheafOfModules.unit T.ringCatSheaf) U ≪≫
+    ((SheafOfModules.homFunctor (T.sheaf.over U)).flip.obj
+      (SheafOfModules.unit _)).mapIso e.symm.op ≪≫
+        SheafOfModules.homObjFreeUnitIso.{u} (ULift.{u} (Fin r))
+
 /-- The ordinary dual has the same constant rank, including rank zero.
 Source: Stacks Tag 01C6 and the dual-frame convention (blueprint: def-pur-regular-section).
 Proof: restrict a frame to each trivializing open. Coordinate projections are the dual basis,

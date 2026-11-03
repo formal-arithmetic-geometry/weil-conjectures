@@ -71,6 +71,8 @@ import WeilConjectures.Algebra.Homology.CochainCompositeConstruction.CochainComp
 import WeilConjectures.SecSmoothPurity.CochainCompositeHom
 import Mathlib.CategoryTheory.Preadditive.LeftExact
 public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
+public import WeilConjectures.SmoothPurity.CochainCompositeHom
+public import WeilConjectures.SmoothPurity.CochainTensoratorExistence
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 
@@ -723,6 +725,28 @@ theorem ringedPullbackPresentation_exists
     exact Functor.additive_of_preservesBinaryBiproducts L
   exact ⟨L, fun _ ↦ rfl, fun _ ↦ rfl, _, ⟨aL⟩, hAdd⟩
 
+/-- The actual naturality, reassociation, Koszul-symmetry and action-unit equations.
+Source: Stacks 03EL and 07A4 (blueprint: def-pur-cochain-tensor-coherence-data). -/
+def IsCoherent (f : RingedPullback R S) (k : Comparison f) : Prop :=
+  (∀ (P Q P' Q' : Complex R) (a : P ⟶ P') (b : Q ⟶ Q'),
+    (pull f).map (a ⊗ₘ b) ≫ (comparison f k P' Q').hom =
+      (comparison f k P Q).hom ≫ ((pull f).map a ⊗ₘ (pull f).map b)) ∧
+  (∀ (P Q H : Complex R),
+    (pull f).map (α_ P Q H).hom ≫ (comparison f k P (Q ⊗ H)).hom ≫
+      (𝟙 _ ⊗ₘ (comparison f k Q H).hom) =
+    (comparison f k (P ⊗ Q) H).hom ≫ ((comparison f k P Q).hom ⊗ₘ 𝟙 _) ≫
+      (α_ ((pull f).obj P) ((pull f).obj Q) ((pull f).obj H)).hom) ∧
+  (∀ (P Q : Complex R),
+    (pull f).map (CochainComplex.Monoidal.braiding P Q).hom ≫
+      (comparison f k Q P).hom = (comparison f k P Q).hom ≫
+      (CochainComplex.Monoidal.braiding ((pull f).obj P) ((pull f).obj Q)).hom) ∧
+  (∀ (P : Complex R), (pull f).map (λ_ P).hom =
+    (comparison f k (𝟙_ _) P).hom ≫ ((unit f k).hom ⊗ₘ 𝟙 _) ≫
+      (λ_ ((pull f).obj P)).hom) ∧
+  (∀ (P : Complex R), (pull f).map (ρ_ P).hom =
+    (comparison f k P (𝟙_ _)).hom ≫ (𝟙 _ ⊗ₘ (unit f k).hom) ≫
+      (ρ_ ((pull f).obj P)).hom)
+
 attribute [local semireducible] SheafOfModules.monoidalCategory
 
 set_option backward.isDefEq.respectTransparency false in
@@ -778,5 +802,23 @@ noncomputable def composition
     (pull h).obj P ≅ (pull g).obj ((pull f).obj P) :=
   (Functor.mapHomologicalComplexCompIso
     (compositionModule f g h a.rightModules).symm (.up ℤ)).symm.app P
+
+/-- The composition equation with the third site and all three comparisons.
+Source: Stacks 0D6D and 07A4
+(blueprint: def-pur-cochain-tensor-coherence-data). -/
+def IsCompatibleWithComposition
+    {E : Type uE} [Category.{vE} E] [EssentiallySmall.{w} E]
+    {H : GrothendieckTopology E}
+    [H.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
+    {T : Sheaf H CommRingCat.{w}} (f : RingedPullback R S)
+    (g : RingedPullback S T) (h : RingedPullback R T)
+    (kf : Comparison f) (kg : Comparison g) (kh : Comparison h)
+    (a : CompositePresentation f g h kf kg kh) : Prop :=
+  ∀ (P Q : Complex R),
+    (comparison h kh P Q).hom ≫
+      ((composition f g h a P).hom ⊗ₘ (composition f g h a Q).hom) =
+    (composition f g h a (P ⊗ Q)).hom ≫
+      (pull g).map (comparison f kf P Q).hom ≫
+        (comparison g kg ((pull f).obj P) ((pull f).obj Q)).hom
 
 end CategoryTheory.CochainPullback

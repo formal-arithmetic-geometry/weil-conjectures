@@ -91,4 +91,17 @@ noncomputable abbrev integralReductionCoefficientMap (X : Scheme.{u})
       condensedRingObj (integralQuotientRingObj ell E π n) X :=
   coefficientMap (integralReductionRingMap ell E π n) X
 
+/-- The `R`-module object underlying the `n`th finite coefficient quotient.
+Source: literature/blueprint/latest/blueprint/part-six-operations/sec-proetale-coefficients/
+sec-pe-localization-completion/sk-def-pe-derived-completion/def-pe-derived-complete.md,
+first paragraph (blueprint: def-weil-integral-reduction-tower).
+-/
+noncomputable abbrev integralReductionModule (X : Scheme.{u})
+    (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ell)]
+    (π : PadicAlgCl.integers ell E) (n : ℕ) :
+    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ell E) X) :=
+  (Mod.comap (integralReductionCoefficientMap X ell E π n)).obj
+    (Mod.regular (condensedRingObj (integralQuotientRingObj ell E π n) X))
+
 end AlgebraicGeometry.ProEtale

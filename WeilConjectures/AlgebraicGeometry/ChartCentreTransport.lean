@@ -14,6 +14,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.AlgebraicGeometry.AffineStructureAlgebraFullyFaithful
+public import WeilConjectures.AlgebraicGeometry.ChartNormalDifferential.ChartNormalDifferential
+public import WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange
 
 /-!
 # Centred diagonal neighbourhood and its differential under an étale source map
@@ -41,6 +44,222 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   RelativeTangentBundle.zeroSection Scheme.Hom.relativeDifferentials
 
 namespace AlgebraicGeometry
+
+private theorem specMap_exists_general {Z Z' N N' : Scheme.{u}}
+    (f : Z ⟶ Z') (B : Z.CommAlgebraSheaf) (B' : Z'.CommAlgebraSheaf)
+    (π : N ⟶ Z) (π' : N' ⟶ Z') [IsAffineHom π']
+    (α : B ≅ structureAlgebra π) (α' : B' ≅ structureAlgebra π')
+    (ρ : B'.right ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj B.right)
+    (hρ : B'.hom ≫ ρ = (⟨f.c⟩ : Z'.sheaf ⟶
+      (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj Z.sheaf) ≫
+      (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).map B.hom) :
+    ∃ ν : N ⟶ N', IsSpecMap f B B' π π' α α' ν
+      (fun V a ↦ ρ.hom.app (op V) a) := by
+  let F := TopCat.Sheaf.pushforward CommRingCat.{u} f.base
+  let θ : B' ⟶ structureAlgebra (π ≫ f) :=
+    Under.homMk (ρ ≫ F.map α.hom.right) (by
+      rw [← Category.assoc, hρ, Category.assoc]
+      change (⟨f.c⟩ : Z'.sheaf ⟶ F.obj Z.sheaf) ≫
+        F.map B.hom ≫ F.map α.hom.right = _
+      rw [← F.map_comp, Under.w α.hom]
+      rfl)
+  let κ := α'.inv ≫ θ
+  obtain ⟨ν, hw, ha⟩ := exists_over_map_of_algebra (π ≫ f) π' κ
+  have hκ : κ = structureAlgebraMap π' (π ≫ f) ν hw := by
+    apply Under.UnderMorphism.ext
+    apply CategoryTheory.Sheaf.hom_ext
+    apply TopCat.Sheaf.hom_ext _ _ (B := fun U : Z'.affineOpens ↦ U.1)
+      (by
+        change TopologicalSpace.Opens.IsBasis (Set.range (fun U : Z'.affineOpens ↦ U.1))
+        convert Z'.isBasis_affineOpens using 1
+        ext U
+        simp)
+    intro U
+    exact (ha U).symm
+  refine ⟨ν, hw, ?_⟩
+  intro V a
+  have he : α'.hom ≫ κ = θ := by simp [κ]
+  rw [hκ] at he
+  exact congrArg (fun q ↦ q.right.hom.app (op V) a) he.symm
+
+-- The identity adjunction turns a tensor-pullback map into its map on sections.
+
+private theorem identityModuleMap {S : Scheme.{u}} (M N : S.Modules)
+    (c : (tensorPullback (𝟙 S)).obj M ≅ N) :
+    ∃ e : M ≅ N, ∀ V a, e.hom.app V a = pullbackSection (𝟙 S) N M c.hom V a := by
+  let adj := Classical.choose (exists_tensorPullbackAdjunction (𝟙 S))
+  let e := adj.unit.app M ≫ (pushforward (𝟙 S)).map c.hom ≫
+    (pushforwardId S).hom.app N
+  have : (tensorPullback (𝟙 S)).IsEquivalence :=
+    Functor.isEquivalence_of_iso (Classical.choice (nonempty_tensorPullbackId S)).symm
+  have : IsIso e := by dsimp only [e]; infer_instance
+  exact ⟨asIso e, fun _ _ ↦ rfl⟩
+
+private theorem differenceRepresentativeOn {X S : Scheme.{u}} (f : X ⟶ S)
+    [IsSeparated f] (V : X.Opens) (T : (pullback f f).Opens)
+    (h₁ : T ≤ (pullback.fst f f) ⁻¹ᵁ V)
+    (h₂ : T ≤ (pullback.snd f f) ⁻¹ᵁ V) (a : Γ(X, V)) :
+    ∃ s : (ConormalGradedAlgebra.power (pullback.diagonal f) 1).val.obj (op T),
+      (ConormalGradedAlgebra.powerInclusion (pullback.diagonal f) 1).app T s =
+        (pullback.snd f f).appLE V T h₂ a - (pullback.fst f f).appLE V T h₁ a := by
+  let δ := pullback.diagonal f
+  let φ := SheafOfModules.unitToPushforwardObjUnit δ.toRingCatSheafHom
+  let b := (pullback.snd f f).appLE V T h₂ a - (pullback.fst f f).appLE V T h₁ a
+  have hb : (SheafOfModules.evaluation (pullback f f).ringCatSheaf (op T)).map φ b = 0 := by
+    change δ.app T b = 0
+    dsimp only [b]
+    rw [map_sub]
+    have hsnd : (pullback.snd f f).appLE V T h₂ ≫ δ.app T =
+        (pullback.fst f f).appLE V T h₁ ≫ δ.app T := by
+      rw [δ.app_eq_appLE, Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_comp_appLE]
+      simp [δ]
+    exact sub_eq_zero.mpr (ConcreteCategory.congr_hom hsnd a)
+  have hb' : b ∈ Set.range
+      ((SheafOfModules.evaluation (pullback f f).ringCatSheaf (op T)).map (kernel.ι φ)) := by
+    rw [Scheme.Modules.range_map_kernelι]
+    exact hb
+  obtain ⟨b', hb'⟩ := hb'
+  obtain ⟨k, hk⟩ := idealKernelIso δ
+  refine ⟨k.inv.app T b', ?_⟩
+  have hki : k.inv ≫ δ.ker.toModulesι = kernel.ι φ := by
+    rw [← hk]
+    exact k.inv_hom_id_assoc _
+  exact (congrArg (fun q ↦ q.app T b') hki).trans hb'
+
+private theorem differenceRestriction {U Y : Scheme.{u}} (h : U ⟶ Y) [IsSeparated h]
+    (O : (pullback h h).Opens) (δ : U ⟶ O.toScheme) [IsClosedImmersion δ]
+    (hδ : δ ≫ O.ι = pullback.diagonal h)
+    (dR : (tensorPullback (𝟙 U)).obj
+      (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ⟶
+        ConormalGradedAlgebra.piece δ 1)
+    (hdR : dR = Classical.choose ((Classical.choose_spec
+      (closedImmersion_conormal_functorial δ (pullback.diagonal h) O.ι (𝟙 U)
+        (by simpa using hδ)).2).2))
+    (e : ConormalGradedAlgebra.piece (pullback.diagonal h) 1 ≅
+      ConormalGradedAlgebra.piece δ 1)
+    (he : ∀ V a, e.hom.app V a = pullbackSection (𝟙 U) _ _ dR V a)
+    (ω : h.relativeDifferentials ≅ ConormalGradedAlgebra.piece (pullback.diagonal h) 1)
+    (hω : IsDifferenceIdentification h (pullback.diagonal h)
+      (pullback.fst h h) (pullback.snd h h) ω) :
+    IsDifferenceIdentification h δ (O.ι ≫ pullback.fst h h)
+      (O.ι ≫ pullback.snd h h) (ω ≪≫ e) := by
+  intro V T h₁ h₂ hV a s hs
+  let W := O.ι ''ᵁ T
+  have hW₁ : W ≤ (pullback.fst h h) ⁻¹ᵁ V := by
+    rintro _ ⟨x, hx, rfl⟩
+    exact h₁ hx
+  have hW₂ : W ≤ (pullback.snd h h) ⁻¹ᵁ V := by
+    rintro _ ⟨x, hx, rfl⟩
+    exact h₂ hx
+  have hVW : V ≤ (pullback.diagonal h) ⁻¹ᵁ W := by
+    rw [← hδ, Scheme.Hom.comp_preimage]
+    exact hV.trans (δ.preimage_mono (O.ι.preimage_image_eq T).ge)
+  obtain ⟨sW, hsW⟩ := differenceRepresentativeOn h V W hW₁ hW₂ a
+  have hδW : V ≤ δ ⁻¹ᵁ (O.ι ⁻¹ᵁ W) := by
+    rw [← Scheme.Hom.comp_preimage, hδ]
+    exact hVW
+  obtain ⟨b, hb, hclass⟩ := conormalRepresentativeLocal δ (pullback.diagonal h) O.ι
+    (𝟙 U) (by simpa using hδ) dR hdR W sW V hδW hVW
+  change e.hom.app V (ω.hom.app V _) = _
+  rw [he]
+  have hw := hω V W hW₁ hW₂ hVW a sW hsW
+  change ω.hom.app V _ = _ at hw
+  rw [hw]
+  erw [pullbackSection_naturality]
+  erw [hclass]
+  symm
+  apply representative_eq_of_inclusion δ (O.ι.preimage_image_eq T).symm s b
+  · rw [hb, hsW]
+    have hmap := Scheme.Hom.appLE_comp_appLE O.ι (pullback.snd h h) V W T
+      hW₂ (O.ι.preimage_image_eq T).ge
+    have hmap' := Scheme.Hom.appLE_comp_appLE O.ι (pullback.fst h h) V W T
+      hW₁ (O.ι.preimage_image_eq T).ge
+    change (O.ι.appLE W T (O.ι.preimage_image_eq T).ge) _ = _
+    rw [map_sub]
+    exact (congrArg₂ (· - ·) (ConcreteCategory.congr_hom hmap a)
+      (ConcreteCategory.congr_hom hmap' a)).trans hs.symm
+
+private theorem differentialFromNormalDirect {U A Y M : Scheme.{u}}
+    (p : A ⟶ Y) (e : U ⟶ A) [Smooth p] [Smooth (e ≫ p)]
+    [IsSeparated p] [IsSeparated (e ≫ p)]
+    (δ : U ⟶ M) [IsClosedImmersion δ]
+    (c : (tensorPullback e).obj
+      (ConormalGradedAlgebra.presentation (pullback.diagonal p)).algebra.toModule ⟶
+      (ConormalGradedAlgebra.presentation δ).algebra.toModule)
+    (ν : PurityNormalBundle.normalCone δ ⟶
+      PurityNormalBundle.normalCone (pullback.diagonal p))
+    (hν : IsSpecMap e (ConormalGradedAlgebra.presentation δ).algebra
+      (ConormalGradedAlgebra.presentation (pullback.diagonal p)).algebra
+      (PurityNormalBundle.projection δ)
+      (PurityNormalBundle.projection (pullback.diagonal p))
+      (normalAlgebraIso δ) (normalAlgebraIso (pullback.diagonal p)) ν
+      (pullbackSection e _ _ c))
+    (ωU : (e ≫ p).relativeDifferentials ≅
+      ConormalGradedAlgebra.piece δ 1)
+    (ωA : p.relativeDifferentials ≅ ConormalGradedAlgebra.piece (pullback.diagonal p) 1)
+    (tU : PurityNormalBundle.normalCone δ ≅
+      RelativeTangentBundle.scheme (e ≫ p))
+    (htU : IsNormalTangentIdentification (e ≫ p) δ ωU tU)
+    (tA : PurityNormalBundle.normalCone (pullback.diagonal p) ≅ RelativeTangentBundle.scheme p)
+    (htA : IsNormalTangentIdentification p (pullback.diagonal p) ωA tA)
+    (hgen : ∀ (V : A.Opens) (a : Γ(A, V)),
+      pullbackSection e _ _ c V
+        (((ConormalGradedAlgebra.presentation (pullback.diagonal p)).inclusion 1).app V
+          (ωA.hom.app V (p.relativeDifferentialsDerivation.d a))) =
+      ((ConormalGradedAlgebra.presentation δ).inclusion 1).app
+        (e ⁻¹ᵁ V) (ωU.hom.app (e ⁻¹ᵁ V)
+          ((e ≫ p).relativeDifferentialsDerivation.d (e.app V a)))) :
+    IsDifferential p e (tU.inv ≫ ν ≫ tA.hom) := by
+  have he : (tU.inv ≫ ν ≫ tA.hom) ≫ RelativeTangentBundle.projection p =
+      RelativeTangentBundle.projection (e ≫ p) ≫ e := by
+    calc
+      _ = tU.inv ≫ PurityNormalBundle.projection δ ≫ e := by
+        simp only [Category.assoc]
+        rw [htA.1, hν.1]
+      _ = RelativeTangentBundle.projection (e ≫ p) ≫ e := by
+        rw [← htU.1]
+        simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  refine ⟨he, ?_⟩
+  intro V a
+  let W := e ⁻¹ᵁ V
+  obtain ⟨βU, hβU, htUspec⟩ := htU.2.2
+  obtain ⟨βA, hβA, htAspec⟩ := htA.2.2
+  have hA := htAspec.2 V
+    ((SymmetricAlgebraSheaf.inclusion p.relativeDifferentials).app V
+      (p.relativeDifferentialsDerivation.d a))
+  have hAgen := congrArg
+    ((normalAlgebraIso (pullback.diagonal p)).hom.right.hom.app (op V))
+    (hβA V (p.relativeDifferentialsDerivation.d a))
+  have hA := hAgen.symm.trans hA
+  have hU := htUspec.2 W
+    ((SymmetricAlgebraSheaf.inclusion (e ≫ p).relativeDifferentials).app W
+      ((e ≫ p).relativeDifferentialsDerivation.d (e.app V a)))
+  have hUgen := congrArg
+    ((normalAlgebraIso δ).hom.right.hom.app (op W))
+    (hβU W ((e ≫ p).relativeDifferentialsDerivation.d (e.app V a)))
+  have hU := hUgen.symm.trans hU
+  have hc := hν.2 V
+    (((ConormalGradedAlgebra.presentation (pullback.diagonal p)).inclusion 1).app V
+      (ωA.hom.app V (p.relativeDifferentialsDerivation.d a)))
+  have hclass := hc.symm.trans
+    (congrArg ((normalAlgebraIso δ).hom.right.hom.app (op W)) (hgen V a))
+  have hid (S : Scheme.{u}) (T : S.Opens) :
+      (𝟙 S : S ⟶ S).appLE T T le_rfl = 𝟙 Γ(S, T) := by
+    simp only [Scheme.Hom.appLE, Scheme.Hom.id_base, Scheme.Hom.id_app]
+    exact S.presheaf.map_id _
+  obtain ⟨_, hx⟩ := conjugate_app e
+    (PurityNormalBundle.projection δ)
+    (PurityNormalBundle.projection δ)
+    (PurityNormalBundle.projection (pullback.diagonal p))
+    (RelativeTangentBundle.projection (e ≫ p)) (RelativeTangentBundle.projection p)
+    (Iso.refl _) tU tA ν (by simp) htU.1 htA.1 hν.1 V _ _ _ _ hA.symm hU.symm
+      (by
+        simp only [Iso.refl_hom, hid]
+        convert hclass using 1
+        rfl)
+  simp only [Iso.refl_inv, Category.id_comp] at hx
+  convert hx using 1
+  rfl
 
 /-- The canonical centred-neighbourhood transport, including its graded and tangent maps.
 Source: current blueprint, `sk-prop-sp-orientation-charts.proof.md`, Steps 1--2;

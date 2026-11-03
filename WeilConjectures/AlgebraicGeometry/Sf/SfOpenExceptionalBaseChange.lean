@@ -38,6 +38,20 @@ import WeilConjectures.AlgebraicGeometry.Ambient.AmbientExceptionalRightAdjoint
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 -- Retained as a step of the comparison unit used by the coefficient realization.
 import WeilConjectures.AlgebraicGeometry.Proper.ProperExceptionalOpenBaseChange
+public import WeilConjectures.AlgebraicGeometry.Clopen.ClopenSectionComponent
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicDerivedOpenAdjunction
+public import WeilConjectures.AlgebraicGeometry.Open.OpenSectionClopen
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleGrothendieckSectionCoproducts
+public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenComparison
+public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenDerivedSupport
+public import WeilConjectures.AlgebraicGeometry.Sf.SfFiniteOpenExtensionBaseChange
+public import WeilConjectures.AlgebraicGeometry.Sf.SfFullCohomologicalDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+public import WeilConjectures.CategoryTheory.Finite.FiniteCohomologicalDimensionInjectiveCoproducts
+public import WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
+public import WeilConjectures.Compactification.Cofiltered
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 
 /-!
 # Exceptional base change along an arbitrary open immersion
@@ -93,6 +107,63 @@ noncomputable def sfIntrinsicCompactSupportComparison (A : Type u) [CommRing A] 
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (sfIntrinsicDerivedDirectImageComparison c.g A) ≪≫
     (Functor.associator _ _ _).symm
+
+/-- The specified compactification support exchange. The first arrow is the proper
+ordinary derived direct-image mate, and the second is the inverse extension-by-zero
+mate, applied degreewise. This defines a map even before its invertibility is proved.
+Source: blueprint order 1815, proof Steps 1-4; Stacks Tags 0F7B and 0F7C
+(blueprint: cor-exc-base-change-open-immersion-general). -/
+noncomputable def sfFixedCompactSupportExchange (A : Type u) [CommRing A] [Finite A]
+    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (sq : IsPullback g' f' f g) (c : Compactification f) :
+    sfFixedCompactSupport A c ⋙ sfFixedDerivedPullback A g ⟶
+      sfFixedDerivedPullback A g' ⋙ sfFixedCompactSupport A (c.ofIsPullback sq) :=
+  (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft _
+      (sfFixedDerivedBaseChange A (c.isPullback_g_ofIsPullback sq).flip.toCommSq) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight
+      (sfFixedDerivedOpenExtensionBaseChangeIso A (c.isPullback_i_ofIsPullback sq)).hom _ ≫
+    (Functor.associator _ _ _).hom
+
+/-- The canonical exceptional comparison is invertible on the bounded-below
+etale-origin class. No unrestricted ambient datum is assumed or constructed.
+
+Source: blueprint `cor-exc-base-change-open-immersion-general.md`, class clause
+(blueprint: cor-exc-base-change-open-immersion-general).
+
+Proof: the canonical comparison is transported from the ordinary etale exceptional
+open base-change map. Install the compactifications of the morphism and its open
+base change. Etale exceptional open base change makes that map invertible; the
+specified comparison-site isomorphisms transport its inverse to the displayed map.
+This works for every bounded-below etale-origin input, including degree-zero sheaves. -/
+theorem sfAmbientExceptionalOpenBaseChange
+    (Dk : WeilConjectures.FiniteFieldDatum.{u})
+    (l : ℕ) [Fact l.Prime] (_hl : l ≠ Dk.p)
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)
+    (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of Dk.k))]
+    [Y.Over (Spec (CommRingCat.of Dk.k))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of Dk.k))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of Dk.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of Dk.k))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of Dk.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of Dk.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) {Y' : Scheme.{u}} (g : Y' ⟶ Y) [IsOpenImmersion g]
+    (K : DerivedCategory (Sheaf (ProEt.topology Y)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))))
+    (_hK : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))
+      Y K) :
+    IsIso (sfFiniteExceptionalOpenComparison (Padic.coefficientExtensionRing l E (n + 1))
+      (IsPullback.of_hasPullback f g) c K) := by
+  let := c.hasCompactification
+  let := (c.ofIsPullback (IsPullback.of_hasPullback f g)).hasCompactification
+  let := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion
+    (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))
+    (IsPullback.of_hasPullback f g)
+  unfold sfFiniteExceptionalOpenComparison
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
