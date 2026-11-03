@@ -129,6 +129,43 @@ Source: Stacks 06YL and 0FPT.
 
 attribute [local semireducible] intrinsicRepresentative
 
+/-- A tensor generator in degree `k` is the transported total pair in degree `i + j`. -/
+private theorem generator_transport (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (P Q : CochainComplex (IntegralHom.Modules.{u, u} X R) ℤ)
+    (i j k : ℤ) (h : i + j = k) (U : X.ProEtᵒᵖ)
+    (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
+    coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X) R P Q i j k h U x y =
+      (eqToHom (congrArg
+        (fun n : ℤ ↦ (((IntegralHom.totalTensor.{u, u} X R).obj P).obj Q).X n)
+          h)).val.app U (IntegralHom.totalPair.{u, u} X R P Q i j U x y) := by
+  subst k
+  rfl
+
+/-- A chain swap with the homogeneous Koszul formula is the native braiding.
+Source: Stacks 0FPQ (blueprint: lem-sf-signed-symmetry-native-representative). -/
+private theorem integralHomSignedNative
+    (X : Scheme.{u}) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (P Q : CochainComplex (IntegralHom.Modules.{u, u} X R) ℤ)
+    (v : ((IntegralHom.totalTensor.{u, u} X R).obj P).obj Q ⟶
+      ((IntegralHom.totalTensor.{u, u} X R).obj Q).obj P)
+    (hv : ∀ (i j : ℤ) (U : X.ProEtᵒᵖ)
+      (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
+      (v.f (i + j)).val.app U (IntegralHom.totalPair.{u, u} X R P Q i j U x y) =
+        (i * j).negOnePow •
+          (eqToHom (congrArg
+            (fun k : ℤ ↦ (((IntegralHom.totalTensor.{u, u} X R).obj Q).obj P).X k)
+              (add_comm j i))).val.app U
+                (IntegralHom.totalPair.{u, u} X R Q P j i U y x)) :
+    v = (totalTensorBraiding P Q).hom := by
+  apply RationalVerdier.signed_chain_unique X R P Q
+  intro i j U x y
+  rw [hv i j U x y]
+  have h := (RingedDerivedNative.complexConstraints.{u + 1, u, u}
+    (ProEt.topology X) R).symmetry P Q i j (i + j) rfl (add_comm j i) U x y
+  rw [← generator_transport X R Q P j i (i + j) (add_comm j i) U y x]
+  exact h.symm
+
 /-- A supplied signed symmetry agrees on K-flat representatives with native braiding.
 Source: Stacks 06YL and 0FPT.
 Proof: choose the representative supplied by the symmetry, identify its chain map
