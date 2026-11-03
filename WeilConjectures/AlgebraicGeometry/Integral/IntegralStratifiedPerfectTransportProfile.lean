@@ -111,8 +111,8 @@ theorem AdicCoefficientDatum.levelConstant_square (T : Scheme.{u}) (n : ℕ) :
     (pbcLevelConstantComparison T d' n).hom ≫ (d.levelIso d' φ hφ T n).inv =
       (d.constantLevelIso d' φ hφ T n).inv ≫ (pbcLevelConstantComparison T d n).hom := by
   rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp]
-  letI := d.quotientFinite
-  letI := d'.quotientFinite
+  let := d.quotientFinite
+  let := d'.quotientFinite
   exact pbcLevelConstantComparison_naturality T d d' n (d.quotientRingEquiv d' φ hφ n).toRingHom
 
 /-- Constant reduction commutes with the transport of coefficient data.
@@ -271,8 +271,8 @@ theorem AdicCoefficientDatum.transport_uniformReductionProfile (T : Scheme.{u})
     R.isLE_mapDerivedCategory_obj Y b
   refine ⟨DerivedCategory.TStructure.t.isGE_of_iso e' a,
     DerivedCategory.TStructure.t.isLE_of_iso e' b, fun m ↦ ?_⟩
-  letI := d.quotientFinite n
-  letI := d'.quotientFinite n
+  let := d.quotientFinite n
+  let := d'.quotientFinite n
   have hY : IsConstructibleProEtaleCoefficientModuleSheaf T (A ⧸ d.ideal ^ (n + 1))
       ((DerivedCategory.homologyFunctor _ m).obj Y) := hc m
   have h₁ := isConstructible_restrict_constantRingIso (d.quotientRingEquiv d' φ hφ n) T _ hY

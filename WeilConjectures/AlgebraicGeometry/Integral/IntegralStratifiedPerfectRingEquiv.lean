@@ -122,8 +122,8 @@ def AdicCoefficientDatum.ringSystemHom (T : Scheme.{u}) :
 /-- The quotient system map is invertible. (auxiliary; not a blueprint node). -/
 instance (T : Scheme.{u}) : IsIso (d.ringSystemHom d' φ hφ T) := by
   have (n : ℕᵒᵖ) : IsIso ((d.ringSystemHom d' φ hφ T).app n) := by
-    letI := d.quotientFinite
-    letI := d'.quotientFinite
+    let := d.quotientFinite
+    let := d'.quotientFinite
     change IsIso (AdicCoefficients.coefficientRingIso T
       (d.quotientRingEquiv d' φ hφ n.unop)).hom
     infer_instance

@@ -124,8 +124,8 @@ theorem AdicCoefficientDatum.completionIso_scalar (T : Scheme.{u}) :
     pbcCompletedScalar_projection, Category.assoc, Category.assoc,
     pbcCompletedScalar_projection, ← Category.assoc _ _ (pbcLevelConstantComparison T d' n).hom,
     ← Functor.map_comp]
-  letI := d.quotientFinite
-  letI := d'.quotientFinite
+  let := d.quotientFinite
+  let := d'.quotientFinite
   change _ ≫ _ ≫ AdicCoefficients.coefficientMap T (d.quotientRingEquiv d' φ hφ n).toRingHom = _
   rw [← pbcLevelConstantComparison_naturality, ← Category.assoc, ← Functor.map_comp]
   rfl
@@ -316,8 +316,8 @@ theorem integralConstantDerived_transport (T : Scheme.{u})
     Nonempty ((integralConstantDerived T d').obj P ≅
       (d.transportDerived d' φ hφ T).obj ((integralConstantDerived T d).obj
         ((ModuleCat.restrictScalars φ.toRingHom).mapDerivedCategory.obj P))) := by
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
   let e := constantModuleTransportIso d d' φ hφ T (⊤_ T.ProEt) terminalIsTerminal
   let := (integralConstantModule_exact T d).1
   let := (integralConstantModule_exact T d).2
@@ -342,8 +342,8 @@ theorem isPerfectRingComplex_restrictScalars
     letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
     DerivedCategory.IsPerfectRingComplex
       ((ModuleCat.restrictScalars φ.toRingHom).mapDerivedCategory.obj P) := by
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
   obtain ⟨Q, a, b, ha, hb, hproj, ⟨e⟩⟩ := hP
   let F := ModuleCat.restrictScalars.{u + 1} φ.toRingHom
   refine ⟨(F.mapHomologicalComplex _).obj Q, a, b, ?_, ?_, fun i ↦ ?_,
@@ -353,10 +353,10 @@ theorem isPerfectRingComplex_restrictScalars
   · rw [CochainComplex.isStrictlyLE_iff] at hb ⊢
     exact fun i hi ↦ F.map_isZero (hb i hi)
   · obtain ⟨h₁, h₂⟩ := hproj i
-    letI i₁ : RingHomInvPair (φ.symm.toRingHom : A' →+* A) (φ.toRingHom : A →+* A') :=
+    let i₁ : RingHomInvPair (φ.symm.toRingHom : A' →+* A) (φ.toRingHom : A →+* A') :=
       { comp_eq := by ext x; exact φ.apply_symm_apply x
         comp_eq₂ := by ext x; exact φ.symm_apply_apply x }
-    letI i₂ : RingHomInvPair (φ.toRingHom : A →+* A') (φ.symm.toRingHom : A' →+* A) :=
+    let i₂ : RingHomInvPair (φ.toRingHom : A →+* A') (φ.symm.toRingHom : A' →+* A) :=
       { comp_eq := by ext x; exact φ.symm_apply_apply x
         comp_eq₂ := by ext x; exact φ.apply_symm_apply x }
     let e₂ : Q.X i ≃ₛₗ[φ.symm.toRingHom] F.obj (Q.X i) :=
@@ -399,8 +399,8 @@ theorem AdicCoefficientDatum.isIntegralStratifiedPerfect_of_transport (T : Schem
     (K : PbcCompletedDerived T d)
     (hK : IsIntegralStratifiedPerfect T d' ((d.transportDerived d' φ hφ T).obj K)) :
     IsIntegralStratifiedPerfect T d K := by
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
   obtain ⟨s, hs⟩ := hK
   refine ⟨s, fun i ↦ ?_⟩
   obtain ⟨V, hV, hw⟩ := hs i
