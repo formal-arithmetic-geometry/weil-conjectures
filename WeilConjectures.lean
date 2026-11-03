@@ -23270,6 +23270,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CurrentV
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DncInvariance.PurityDncInvarianceStage2
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DncInvariance.PurityDncInvarianceStage22
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DncInvariance.PurityDncInvarianceStage23
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DncInvariance.PurityDncInvarianceStage24
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DncSectionInvariantStatement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicBoundedTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicCondensedCoefficient
