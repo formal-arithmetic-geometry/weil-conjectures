@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeCondensedWeil.
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.L2NativePunctualWeights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.NativeComplexUpperWeights
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilCondensed
 
 /-! # Local weights and reality
 

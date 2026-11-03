@@ -11,6 +11,17 @@ public import WeilConjectures.AlgebraicGeometry.CurveMiddleExtension
 public import WeilConjectures.AlgebraicGeometry.CurvePerverseHeartStatement.CurvePerverseHeartStatement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ModuleOpenPasting.ModuleDirectImageOpenPasting
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleInverseImageStalk
+public import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
+public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.CategoryTheory.ProperBaseChange.ExtOneExtensionClassification
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.ProperBaseChange.CondensedConstructibleSerre
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-! # Condensed curve perverse intermediate extension
 
@@ -247,6 +258,220 @@ def IntermediateExtensionAssertion
               (StrictWeilCondensed.action (coeff ell) (frobU D c)).map α.hom ≫
                 shiftedWeilMap D ell c F →
             θP.hom ≫ e.hom = (StrictWeilCondensed.action (coeff ell) (frobC D c)).map e.hom ≫ θA.hom
+
+private theorem lift_aut
+    (h : Function.Bijective (fun f : A ⟶ A ↦ R.map f)) (a : R.obj A ≅ R.obj A) :
+    ∃ b : A ≅ A, R.map b.hom = a.hom := by
+  obtain ⟨b, hb⟩ := h.2 a.hom
+  obtain ⟨c, hc⟩ := h.2 a.inv
+  have hbc : b ≫ c = 𝟙 A := h.1 (by simp [hb, hc])
+  have hcb : c ≫ b = 𝟙 A := h.1 (by simp [hb, hc])
+  exact ⟨⟨b, c, hbc, hcb⟩, hb⟩
+
+private theorem lift_iso
+    (h : Function.Bijective (fun f : A ⟶ A ↦ R.map f))
+    {P : C} (e₀ : P ≅ A) (α : R.obj P ≅ R.obj A) :
+    ∃! e : P ≅ A, R.map e.hom = α.hom := by
+  obtain ⟨b, hb⟩ := lift_aut R h ((R.mapIso e₀).symm ≪≫ α)
+  refine ⟨e₀ ≪≫ b, ?_, ?_⟩
+  · simp only [Iso.trans_hom, Functor.map_comp, hb, Iso.trans_hom, Iso.symm_hom,
+      Functor.mapIso_inv]
+    simp
+  · intro e he
+    apply Iso.ext
+    have hh : e₀.inv ≫ e.hom = b.hom := h.1 (by
+      simp only [Functor.map_comp, he, hb, Iso.trans_hom, Iso.symm_hom,
+        Functor.mapIso_inv])
+    calc
+      e.hom = e₀.hom ≫ (e₀.inv ≫ e.hom) := by simp
+      _ = e₀.hom ≫ b.hom := by rw [hh]
+
+private theorem map_injective_of_iso
+    (h : Function.Injective (fun f : A ⟶ A ↦ R.map f))
+    {P : C} (e : P ≅ A) {f g : P ⟶ A} (hh : R.map f = R.map g) : f = g := by
+  have hx : e.inv ≫ f = e.inv ≫ g := h (by simp only [Functor.map_comp, hh])
+  calc
+    f = e.hom ≫ (e.inv ≫ f) := by simp
+    _ = e.hom ≫ (e.inv ≫ g) := by rw [hx]
+    _ = g := by simp
+
+private theorem normalize_weil
+    (h : Function.Bijective (fun f : A ⟶ A ↦ R.map f))
+    (T : C ⥤ C) (S : E ⥤ E) (ρ : R ⋙ S ≅ T ⋙ R)
+    {B : E} (β : R.obj A ≅ B) (w : S.obj B ≅ B) (θ₀ : T.obj A ≅ A) :
+    ∃ θ : T.obj A ≅ A,
+      ρ.hom.app A ≫ R.map θ.hom ≫ β.hom = S.map β.hom ≫ w.hom ∧
+      ∀ {P : C} (α : R.obj P ≅ B) (θP : T.obj P ≅ P) (e : P ≅ A),
+        R.map e.hom ≫ β.hom = α.hom →
+        ρ.hom.app P ≫ R.map θP.hom ≫ α.hom = S.map α.hom ≫ w.hom →
+        θP.hom ≫ e.hom = T.map e.hom ≫ θ.hom := by
+  let d : R.obj (T.obj A) ≅ R.obj A :=
+    (ρ.app A).symm ≪≫ S.mapIso β ≪≫ w ≪≫ β.symm
+  obtain ⟨θ, hθ, _⟩ := lift_iso R h θ₀ d
+  have hn : ρ.hom.app A ≫ R.map θ.hom ≫ β.hom = S.map β.hom ≫ w.hom := by
+    rw [hθ]
+    simp [d, Category.assoc]
+  refine ⟨θ, hn, ?_⟩
+  intro P α θP e he hP
+  apply map_injective_of_iso R h.1 (θP ≪≫ e)
+  apply (cancel_epi (ρ.hom.app P)).1
+  apply (cancel_mono β.hom).1
+  calc
+    (ρ.hom.app P ≫ R.map (θP.hom ≫ e.hom)) ≫ β.hom =
+        ρ.hom.app P ≫ R.map θP.hom ≫ α.hom := by
+      simp only [Functor.map_comp, Category.assoc, he]
+    _ = S.map α.hom ≫ w.hom := hP
+    _ = S.map (R.map e.hom) ≫ (S.map β.hom ≫ w.hom) := by
+      rw [← he, Functor.map_comp, Category.assoc]
+    _ = S.map (R.map e.hom) ≫ (ρ.hom.app A ≫ R.map θ.hom ≫ β.hom) := by rw [hn]
+    _ = (ρ.hom.app P ≫ R.map (T.map e.hom ≫ θ.hom)) ≫ β.hom := by
+      rw [Functor.map_comp]
+      simp only [← Category.assoc]
+      have hnat := ρ.hom.naturality e.hom
+      change S.map (R.map e.hom) ≫ ρ.hom.app A =
+        ρ.hom.app P ≫ R.map (T.map e.hom) at hnat
+      rw [hnat]
+
+private theorem normalized_hom_bijective (M : C) (F : D) :
+    Function.Bijective (fun f : I.obj M ⟶ I.obj (R.obj F) ↦
+      L'.map f ≫ γ.hom.app (R.obj F) ≫ J.map (adj.counit.app F)) := by
+  let e : (I.obj M ⟶ I.obj (R.obj F)) ≃ (L'.obj (I.obj M) ⟶ J.obj F) :=
+    (Functor.FullyFaithful.ofFullyFaithful I).homEquiv.symm |>.trans
+      ((adj.homEquiv M F).symm.trans
+        ((Functor.FullyFaithful.ofFullyFaithful J).homEquiv.trans
+          (γ.app M).symm.homFromEquiv))
+  have he (f : I.obj M ⟶ I.obj (R.obj F)) :
+      e f = L'.map f ≫ γ.hom.app (R.obj F) ≫ J.map (adj.counit.app F) := by
+    change γ.hom.app M ≫ J.map ((adj.homEquiv M F).symm (I.preimage f)) = _
+    rw [Adjunction.homEquiv_counit, Functor.map_comp]
+    have hn := γ.hom.naturality (I.preimage f)
+    change L'.map (I.map (I.preimage f)) ≫ γ.hom.app (R.obj F) =
+      γ.hom.app M ≫ J.map (L.map (I.preimage f)) at hn
+    rw [Functor.map_preimage] at hn
+    rw [← Category.assoc, ← hn, Category.assoc]
+  exact (show (fun f ↦ L'.map f ≫ γ.hom.app (R.obj F) ≫
+    J.map (adj.counit.app F)) = e from funext fun f ↦ (he f).symm) ▸ e.bijective
+
+private theorem endomorphism_map_bijective (F : D) [IsIso (adj.counit.app F)] :
+    Function.Bijective (fun f : I.obj (R.obj F) ⟶ I.obj (R.obj F) ↦ L'.map f) := by
+  have hb := normalized_hom_bijective L R adj I J L' γ (R.obj F) F
+  have : IsIso (γ.hom.app (R.obj F) ≫ J.map (adj.counit.app F)) := inferInstance
+  constructor
+  · intro f g hfg
+    exact hb.1 (congrArg
+      (fun k ↦ k ≫ γ.hom.app (R.obj F) ≫ J.map (adj.counit.app F)) hfg)
+  · intro g
+    obtain ⟨f, hf⟩ := hb.2 (g ≫ γ.hom.app (R.obj F) ≫ J.map (adj.counit.app F))
+    exact ⟨f, (cancel_mono (γ.hom.app (R.obj F) ≫ J.map (adj.counit.app F))).1 hf⟩
+
+private theorem boundary_ext_zero (adj : L ⊣ R) (F : B) (T : A)
+    (hT : IsZero (L.obj T))
+    (δ : (DerivedCategory.singleFunctor A 0).obj T ⟶
+      ((DerivedCategory.singleFunctor A 0).obj (R.obj F))⟦(1 : ℤ)⟧) : δ = 0 := by
+  let : HasExt A := HasExt.standard A
+  let ξ : Abelian.Ext T (R.obj F) 1 := Abelian.Ext.homAddEquiv.symm δ
+  have hξ : ξ.hom = δ := Abelian.Ext.homAddEquiv.apply_symm_apply δ
+  obtain ⟨M, a, b, hab, h, he⟩ :=
+    (ext_one_extension_classification.{max u v, max u v, t, t, v, v, u, u} (R.obj F) T).1 ξ
+  have ha : IsIso (L.map a) := (h.map_of_exact L).isIso_f_iff.mpr hT
+  let r : M ⟶ R.obj F :=
+    (adj.homEquiv M F) (inv (L.map a) ≫ adj.counit.app F)
+  have har : a ≫ r = 𝟙 _ := by
+    apply (adj.homEquiv (R.obj F) F).symm.injective
+    rw [adj.homEquiv_naturality_left_symm, adj.homEquiv_symm_id]
+    simp [r]
+  have hδ : h.singleδ = δ := by
+    rw [← ShortComplex.ShortExact.extClass_hom, he]
+    exact hξ
+  have hz : δ ≫ ((DerivedCategory.singleFunctor A 0).map a)⟦(1 : ℤ)⟧' = 0 := by
+    rw [← hδ]
+    exact comp_distTriang_mor_zero₃₁ _ h.singleTriangle_distinguished
+  calc
+    δ = (δ ≫ ((DerivedCategory.singleFunctor A 0).map a)⟦(1 : ℤ)⟧') ≫
+        ((DerivedCategory.singleFunctor A 0).map r)⟦(1 : ℤ)⟧' := by
+      simp only [Category.assoc, ← CategoryTheory.Functor.map_comp, har,
+        CategoryTheory.Functor.map_id, Category.comp_id]
+    _ = 0 := by rw [hz, zero_comp]
+
+private theorem shifted_single_to_single_zero (M T : A)
+    (f : ((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧ ⟶
+      (DerivedCategory.singleFunctor A 0).obj T) : f = 0 := by
+  have ht : DerivedCategory.TStructure.t.IsLE
+      (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧) (-1) :=
+    DerivedCategory.TStructure.t.isLE_shift
+      ((DerivedCategory.singleFunctor A 0).obj M) 0 1 (-1) (by lia)
+  exact DerivedCategory.TStructure.t.zero_of_isLE_of_isGE f (-1) 0 (by lia) ht
+    (inferInstanceAs (DerivedCategory.TStructure.t.IsGE
+      ((DerivedCategory.singleFunctor A 0).obj T) 0))
+
+private def shifted_iso
+    (T : A ⥤ A) [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    (M : A) (b : T.obj M ≅ M) :
+    T.mapDerivedCategory.obj (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧) ≅
+      ((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧ :=
+  (T.mapDerivedCategory.commShiftIso (1 : ℤ)).app
+      ((DerivedCategory.singleFunctor A 0).obj M) ≪≫
+    (shiftFunctor _ (1 : ℤ)).mapIso
+      ((T.mapDerivedCategorySingleFunctor 0).app M ≪≫
+        (DerivedCategory.singleFunctor A 0).mapIso b)
+
+private theorem open_counit_isIso : IsIso (upperStarLowerStarAdjunction Λ j).counit := by
+  let aj := ProEtale.openImmersionRestrictionLowerStarAdjunction Ab.{u + 1} j
+  let : (ProEtale.lowerStar Ab.{u + 1} j).Full := aj.fullyFaithfulROfIsIsoCounit.full
+  let : (ProEtale.lowerStar Ab.{u + 1} j).Faithful := aj.fullyFaithfulROfIsIsoCounit.faithful
+  have : IsIso (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} j).counit :=
+    Adjunction.counit_isIso_of_R_fully_faithful _
+  let adj := (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} j).mapModAdjunction
+    (condensedRingObj Λ C)
+  have : IsIso adj.counit := by
+    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun N ↦ ?_
+    have : IsIso ((Mod.forget _).map (adj.counit.app N)) := by
+      rw [Mod.forget_map, Adjunction.mapModAdjunction_counit_app_hom]
+      infer_instance
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  have hf : (lowerStar Λ j).FullyFaithful :=
+    ((Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ j)).fullyFaithfulFunctor.comp
+      adj.fullyFaithfulROfIsIsoCounit).ofIso (comapPullbackHomCompIso Λ j)
+  let := hf.full
+  let := hf.faithful
+  exact Adjunction.counit_isIso_of_R_fully_faithful _
+
+private theorem geometric_open : IsOpenImmersion (geomJ D c) :=
+  MorphismProperty.overPullbackMap (P := @IsOpenImmersion)
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) c.j inferInstance
+
+private def shiftedRestrictionComparison :
+    (DerivedCategory.singleFunctor (Modules D ell (geomC D c)) 0 ⋙
+      shiftFunctor _ (1 : ℤ)) ⋙ restriction D ell c ≅
+    CondensedRing.upperStar (coeff ell) (geomJ D c) ⋙ shiftedSheaf D ell c :=
+  (Functor.associator _ _ _ ) ≪≫
+    Functor.isoWhiskerLeft (DerivedCategory.singleFunctor _ 0)
+      ((restriction D ell c).commShiftIso (1 : ℤ)) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      ((CondensedRing.upperStar (coeff ell) (geomJ D c)).mapDerivedCategorySingleFunctor 0)
+      (shiftFunctor _ (1 : ℤ)) ≪≫
+    Functor.associator _ _ _
+
+private theorem shifted_weil_isIso
+    (F : StrictWeilCondensed.WeilModule (coeff ell) (frobU D c)) :
+    IsIso (shiftedWeilMap D ell c F) := by
+  unfold shiftedWeilMap
+  infer_instance
+
+private theorem boundary_minimal_of_iso (hEll : ell ≠ D.p)
+    (F : StrictWeilCondensed.WeilModule (coeff ell) (frobU D c))
+    {P : DerivedCategory (Modules D ell (geomC D c))}
+    (e : P ≅ shiftedImage D ell c F)
+    (hA : BoundaryMinimal D ell c F (shiftedImage D ell c F) hEll) :
+    BoundaryMinimal D ell c F P hEll := by
+  intro Q hQ hZero
+  obtain ⟨hi, ho⟩ := hA Q hQ hZero
+  constructor
+  · intro f
+    exact (cancel_mono e.hom).1 (by simpa using hi (f ≫ e.hom))
+  · intro f
+    exact (cancel_epi e.inv).1 (by simpa using ho (e.inv ≫ f))
 
 /-- The ordinary direct image shifted by one is the perverse intermediate extension.
 Proof (deferred at stage 2), following the nine DAG steps.  (1) Base change preserves
