@@ -144,4 +144,21 @@ def finiteSmoothDiagonalFactor (A : Type (u + 1)) [CommRing A] [Finite A]
       (upperStar (ModuleCat.{u + 1} A) (pullback.diagonal f)).leftDerivedFunctor.map
         (dualizingComplexBaseChangeMap A (IsPullback.of_hasPullback f f).flip)
 
+/-- Gamma is the canonical smooth tensor map after the inverse three-factor orientation.
+Source: sk-thm-smooth-purity, displayed gamma formula
+(blueprint: lem-pur-finite-smooth-gamma-normalization). -/
+def finiteSmoothGammaMap (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (α : dualizingComplex A f ≅
+      MonoidalCategoryStruct.tensorUnit (DerivedCategoryModule A X))
+    (K : DerivedCategoryModule A Y) :
+    (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K ⟶
+      (rightDerivedUpperShriek A f).obj K :=
+  (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X
+    ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)).inv ≫
+    ((derivedTensor (ModuleCat.{u + 1} A) X).obj
+      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)).map α.inv ≫
+    smoothTensorDualityMap A f
+      (isIso_projectionMap_of_finite A f) K
+
 end AlgebraicGeometry.Etale

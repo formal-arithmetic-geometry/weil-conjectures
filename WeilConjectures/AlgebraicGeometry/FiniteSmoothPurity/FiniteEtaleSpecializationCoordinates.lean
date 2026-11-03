@@ -174,6 +174,19 @@ private theorem derived_pullback_unit_id
   simpa only [η, M, ordinaryFinitePullback, Category.id_comp, Category.assoc] using
     (derived_pullback_unit_comp A (𝟙 S) (𝟙 S) (𝟙 S) (by simp)).symm
 
+private theorem derived_pullback_section_unit
+    (A : Type (u + 1)) [CommRing A]
+    {X S : Scheme.{u}} (s : S ⟶ X) (p : X ⟶ S) (h : s ≫ p = 𝟙 S) :
+    (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) s p h).hom.app (𝟙_ _) =
+      (ordinaryFinitePullback A s).map
+          (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) p).hom ≫
+        (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) s).hom := by
+  apply (cancel_epi ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A)
+    s p (𝟙 S) h.symm).hom.app (𝟙_ _))).mp
+  simp only [leftDerivedUpperStarCompSectionIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Iso.hom_inv_id_app_assoc]
+  rw [derived_pullback_unit_comp, derived_pullback_unit_id]
+
 private theorem section_coordinates_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y X' Y' : Scheme.{u}}
@@ -207,5 +220,108 @@ private theorem section_coordinates_baseChange
   have hu₂ := derived_pullback_unit_comp A b s (b ≫ s) rfl
   dsimp only [ordinaryFinitePullback] at hu₁ hu₂
   rw [hu₁, hu₂]
+
+/-- Specialization for a closed etale section preserves graph-normalized unit coordinates.
+This assertion concerns the Rees comparison alone and has no bundle integration factor.
+Source: sk-prop-sp-orientation.proof.md, second displayed arrow; the proof of
+lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--6.
+(blueprint: lem-pur-finite-etale-specialization-coordinates).
+
+Proof: the section is open and closed. Its ideal is zero on its image and the unit
+ideal on the complement, so the extended Rees algebras are respectively O[t] and
+O[t,t^-1]. The normal projection is the identity on the section component. In the
+coordinates obtained from the graph-normalized etale sum adjunction, each fibre
+mate is the canonical coefficient-unit pullback map: transpose the support exchange
+identity and cancel the two adjunction triangles. The resulting comparison of the
+family with the pullback of the section invariant is normalized at one. Uniqueness
+of a comparison with this normalization identifies it with kappa. Restrict at zero
+and invert; the pullback section compositor cancels, leaving the stated equality.
+All formulas glue on the two clopen pieces, including empty pieces and zero rings. -/
+theorem finiteEtaleSpecialization_coordinates
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    {V S : Scheme.{u}} [IsNoetherian V] [IsNoetherian S]
+    (g : V ⟶ S) [HasCompactification g] [QuasiCompact g] [IsSeparated g] [Etale g]
+    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
+    [FiniteRingSectionDeformation.Geometry 0 g s]
+    [Etale (Scheme.Hom.normalConeProj g s)] [IsSeparated (Scheme.Hom.normalConeProj g s)]
+    (hS : IsUnit (N : Γ(S, ⊤)))
+    (C : FiniteSmoothCompactSupportComparisons A)
+    (hC : FiniteSmoothComparisonNormalized A C)
+    (kappa : NoetherianSectionSpecialization.family A g s ≅
+      (ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj
+        (sectionInvariant A g s))
+    (hKappa : NoetherianSectionSpecialization.Normalized A g s hs kappa) :
+    NoetherianSectionSpecialization.specialization A g s kappa ≫
+        (finiteSmoothSectionCoordinates A C (Scheme.Hom.normalConeProj g s)
+          (Scheme.Hom.normalConeZeroSection s)).hom =
+      (finiteSmoothSectionCoordinates A C g s).hom := by
+  have : Etale (Scheme.Hom.deformationSpaceProj g s) :=
+    (Etale.iff_smoothOfRelativeDimension_zero _).mpr inferInstance
+  let P := ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  let I₁ := ordinaryFinitePullback A (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
+  let I₀ := ordinaryFinitePullback A (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)
+  let J₁ := leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)
+    (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
+    (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S)
+  let J₀ := leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)
+    (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)
+    (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+    (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) S)
+  let F := finiteSmoothSectionCoordinates A C
+    (Scheme.Hom.deformationSpaceProj g s) (Scheme.Hom.deformationSpaceSection s)
+  let G := finiteSmoothSectionCoordinates A C g s
+  let H := finiteSmoothSectionCoordinates A C (Scheme.Hom.normalConeProj g s)
+    (Scheme.Hom.normalConeZeroSection s)
+  let U := leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A)
+    (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  have hOne : NoetherianSectionSpecialization.atOne A g s hs ≫ G.hom =
+      I₁.map F.hom ≫ (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A)
+        (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).hom :=
+    section_coordinates_baseChange A (Scheme.Hom.isPullback_deformationSpaceOneFibre g s)
+      (Scheme.Hom.deformationSpaceSection s) s (Scheme.Hom.comp_deformationSpaceOneFibre hs) C hC
+  have hZero : NoetherianSectionSpecialization.atZero A g s ≫ H.hom =
+      I₀.map F.hom ≫ (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A)
+        (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)).hom :=
+    section_coordinates_baseChange A (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+      (Scheme.Hom.deformationSpaceSection s) (Scheme.Hom.normalConeZeroSection s)
+      Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace C hC
+  let μ := F ≪≫ U.symm ≪≫ P.mapIso G.symm
+  have hμ : NoetherianSectionSpecialization.Normalized A g s hs μ := by
+    change I₁.map μ.hom ≫ J₁.hom.app (sectionInvariant A g s) = _
+    apply (cancel_mono G.hom).mp
+    have hn := J₁.hom.naturality G.hom
+    change I₁.map (P.map G.hom) ≫ J₁.hom.app (𝟙_ _) =
+      J₁.hom.app (sectionInvariant A g s) ≫ G.hom at hn
+    rw [Category.assoc, ← hn, hOne]
+    dsimp only [μ]
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
+      Category.assoc]
+    simp only [← Functor.comp_map, Iso.map_inv_hom_id_assoc]
+    rw [show J₁.hom.app (𝟙_ _) = I₁.map U.hom ≫
+      (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A)
+        (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).hom from
+      derived_pullback_section_unit A _ _ _]
+    simp only [Iso.map_inv_hom_id_assoc]
+  obtain ⟨κ, _, hu⟩ := FiniteRingSectionDeformation.existsUnique_normalized
+    N hN A hA hS 0 g s hs
+  have hEq : kappa = μ := (hu kappa hKappa).trans (hu μ hμ).symm
+  rw [hEq]
+  simp only [NoetherianSectionSpecialization.specialization, Category.assoc]
+  change J₀.inv.app (sectionInvariant A g s) ≫ I₀.map μ.inv ≫
+    NoetherianSectionSpecialization.atZero A g s ≫ H.hom = G.hom
+  rw [hZero]
+  dsimp only [μ]
+  simp only [Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv, Functor.map_comp,
+    Category.assoc, Iso.map_inv_hom_id_assoc]
+  rw [← derived_pullback_section_unit A
+    (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)
+    (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+    (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) S)]
+  have hn := J₀.hom.naturality G.hom
+  change I₀.map (P.map G.hom) ≫ J₀.hom.app (𝟙_ _) =
+    J₀.hom.app (sectionInvariant A g s) ≫ G.hom at hn
+  rw [hn, Iso.inv_hom_id_app_assoc]
 
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

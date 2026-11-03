@@ -219,6 +219,23 @@ Source: latest blueprint fix-prop-coherence.proof.md, individual-map coefficient
 (blueprint: def-sf-integral-realization-assembly-data). -/
 abbrev AmbientModels := ScalarSixPullbackData.{u}
 
+/-- The normalization fixes all ambient comparison data uniquely.
+Source: latest blueprint fix-prop-coherence, comparisons of the individual maps
+(blueprint: def-sf-integral-realization-assembly-data).
+Proof: the two forward pullback maps are equal to the prescribed scalar-adjunction mate.
+An isomorphism is determined by its forward map, so function extensionality identifies
+the pullback comparison families. The remaining fields are proofs and agree by proof
+irrelevance. This is uniqueness only, with no existence choice. -/
+theorem eq (d d' : AmbientModels.{u}) : d = d' := by
+  have h : @ScalarSixPullbackData.theta d = @ScalarSixPullbackData.theta d' := by
+    funext Λ Γ a U V f
+    apply Iso.ext
+    exact (d.thetaNormalization a f).trans (d'.thetaNormalization a f).symm
+  cases d
+  cases d'
+  cases h
+  rfl
+
 /-- The actual geometric adjunction mate, with its normalization inherited from pullback.
 Source: blueprint fix-prop-coherence, units and counits
 (blueprint: def-sf-integral-realization-assembly-data). -/
@@ -239,23 +256,6 @@ def pull {U V : Scheme.{u}} (f : U ⟶ V) :
       (NativeAssemblyCoefficients.scalarSixChange a U) ≪≫ d.theta a f ≪≫
     Functor.isoWhiskerLeft (NativeAssemblyCoefficients.scalarSixChange a V)
       (upperStar Γ.X f).leftDerivedFunctorIsoMapDerivedCategory.symm
-
-/-- The normalization fixes all ambient comparison data uniquely.
-Source: latest blueprint fix-prop-coherence, comparisons of the individual maps
-(blueprint: def-sf-integral-realization-assembly-data).
-Proof: the two forward pullback maps are equal to the prescribed scalar-adjunction mate.
-An isomorphism is determined by its forward map, so function extensionality identifies
-the pullback comparison families. The remaining fields are proofs and agree by proof
-irrelevance. This is uniqueness only, with no existence choice. -/
-theorem eq (d d' : AmbientModels.{u}) : d = d' := by
-  have h : @ScalarSixPullbackData.theta d = @ScalarSixPullbackData.theta d' := by
-    funext Λ Γ a U V f
-    apply Iso.ext
-    exact (d.thetaNormalization a f).trans (d'.thetaNormalization a f).symm
-  cases d
-  cases d'
-  cases h
-  rfl
 
 /-- Change each input by the ordinary derived coefficient functor.
 Source: blueprint fix-prop-coherence, substitution of coefficient comparisons

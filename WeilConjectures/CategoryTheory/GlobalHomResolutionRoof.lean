@@ -673,6 +673,24 @@ structure GlobalHomResolutionRoofCohomologyFields
       DerivedCategory.Q.map a ≫ cohomology X Y R S n z ≫
         (shiftFunctor (DerivedCategory A) n).map (DerivedCategory.Q.map b)
 
+private theorem roof_targetShift_naturality
+    {X X' Y Y' : CochainComplex A ℤ} (a : X' ⟶ X) (b : Y ⟶ Y') (n : ℤ) :
+    globalLinearHomMap B a ((shiftFunctor _ n).map b) ≫
+        (roof_targetShift B X' Y' n).hom =
+      (roof_targetShift B X Y n).hom ≫
+        (shiftFunctor _ n).map (globalLinearHomMap B a b) := by
+  ext s f
+  change ((Cochain.ofHom a).comp
+      (f.comp (Cochain.ofHom ((shiftFunctor _ n).map b)) (add_zero s))
+      (zero_add s)).rightUnshift (s + n) rfl =
+    (Cochain.ofHom a).comp
+      ((f.rightUnshift (s + n) rfl).comp (Cochain.ofHom b) (add_zero (s + n)))
+      (zero_add (s + n))
+  ext p q hpq
+  subst q
+  simp [Cochain.rightUnshift, Category.assoc,
+    HomologicalComplex.XIsoOfEq_hom_naturality]
+
 /-- The shift square holds for every `c` satisfying the roof equation and every `targetShift`
 given by the family identification (both hypotheses of the field).
 Source: Stacks 09L9 and step 7 of lem-sf-global-hom-resolution-roof.
@@ -691,8 +709,37 @@ theorem globalHom_resolution_roof_shift_fields
     (targetShift : ∀ (X Y : CochainComplex A ℤ) (n : ℤ),
       globalLinearHom B X (Y⟦n⟧) ≅ (globalLinearHom B X Y)⟦n⟧) :
     Nonempty (GlobalHomResolutionRoofShiftFields B c targetShift) := by
-  -- The graded shift calculation is isolated in this named interface.
-  sorry
+  refine ⟨⟨?_⟩⟩
+  intro hc ht X Y R S n
+  have ht' (U V : CochainComplex A ℤ) :
+      (targetShift U V n).hom = (roof_targetShift B U V n).hom := by
+    ext s f
+    change (targetShift U V n).hom.f s f = f.rightUnshift (s + n) rfl
+    exact ht U V n s f
+  simp only [ht']
+  haveI := roof_precomp_quasiIso B R.ι (J := S.I)
+  have hnat {U U' V V' : CochainComplex A ℤ} (a : U' ⟶ U) (b : V ⟶ V') :
+      DerivedCategory.Q.map (globalLinearHomMap B a ((shiftFunctor _ n).map b)) ≫
+          DerivedCategory.Q.map (roof_targetShift B U' V' n).hom ≫
+          (DerivedCategory.Q.commShiftIso n).hom.app (globalLinearHom B U' V') =
+        DerivedCategory.Q.map (roof_targetShift B U V n).hom ≫
+          (DerivedCategory.Q.commShiftIso n).hom.app (globalLinearHom B U V) ≫
+          (shiftFunctor (DerivedCategory (ModuleCat B)) n).map
+            (DerivedCategory.Q.map (globalLinearHomMap B a b)) := by
+    rw [← Functor.map_comp_assoc, roof_targetShift_naturality B,
+      Functor.map_comp_assoc, DerivedCategory.Q.commShiftIso_hom_naturality]
+  have hj := hnat R.ι (𝟙 S.I)
+  simp only [Functor.map_id] at hj
+  have hp := hnat (𝟙 X) S.ι
+  apply (cancel_mono ((shiftFunctor (DerivedCategory (ModuleCat B)) n).map
+    (DerivedCategory.Q.map (globalLinearHomMap B R.ι (𝟙 S.I))))).mp
+  simp only [Category.assoc]
+  rw [← Functor.map_comp, hc X Y R S, ← hj, ← Category.assoc]
+  have hroof := hc X (Y⟦n⟧) R (S.shift n)
+  have he := congrArg (fun f ↦ f ≫
+    DerivedCategory.Q.map (roof_targetShift B X S.I n).hom ≫
+    (DerivedCategory.Q.commShiftIso n).hom.app (globalLinearHom B X S.I)) hroof
+  exact he.trans hp
 
 /-- Ordinary composition out of the total tensor exists, and is compatible with every `c`
 satisfying the roof equation and every `comparison` given by conjugation with representing

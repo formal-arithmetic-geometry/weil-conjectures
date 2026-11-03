@@ -54,6 +54,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralProjectionFormulaLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField2
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ModuleObjectProjectionMap
 
 /-! # The finite and condensed pro-etale projection formulas
 
@@ -680,6 +684,138 @@ theorem _root_.WeilConjectures.sf_proetale_projection_formula
         ell c.overG _ L.obj hJ L.property
     unfold CondensedRing.exceptionalProjectionMorphismOfCompactification
     infer_instance
+
+/-- Projection formula on retained finite etale realizations, together with the direct
+condensed proper projection formulas on their localizing domains.
+
+Source: current blueprint, sk-thm-sf-pf-proetale, both paragraphs and its proof
+(blueprint: lem-sf-proetale-comparison-localizing-projection).
+
+Proof: retain the supplied etale antecedents. Exact extension by zero preserves the
+boundedness of the first antecedent. Pullback preserves the Tor interval of the second,
+so their tensor is bounded below. Apply the finite etale proper projection theorem to
+the proper factor of the compactification. The canonical proper projection comparison
+and the open comparison transport this map to the pro-etale compactification map,
+conjugating by the supplied origin isomorphisms. The Tor bound puts its source in D+;
+invertibility puts its target there, and fullness gives an isomorphism in D+.
+For the other coefficients, invoke the integral and field localizing projection formulas
+directly, on their stated proper-morphism domains. No etale origin is imposed there. -/
+theorem sf_proetale_projection_formula_localizing
+    (ell : ℕ) [Fact ell.Prime] {k : Type u} [Field k]
+    (_hk : Finite k ∨ IsAlgClosed k) [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ ell)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y) (c : Compactification f.left) :
+    (∀ (A : Type (u + 1)) [CommRing A] [Finite A]
+        (_hA : ∃ n : ℕ, (ell ^ n : A) = 0)
+        (K : DerivedCategory.Plus
+          (Sheaf (ProEt.topology X.left) (ModuleCat.{u + 1} A)))
+        (L : DerivedCategory.Plus
+          (Sheaf (ProEt.topology Y.left) (ModuleCat.{u + 1} A)))
+        (wK : FixedEtaleOriginWitness X.left A K)
+        (wL : FixedEtaleOriginWitness Y.left A L)
+        (_hK : Etale.DerivedCategory.isBoundedConstructible A X.left wK.complex.obj)
+        (_hL : Etale.DerivedCategory.isBoundedConstructible A Y.left wL.complex.obj)
+        (_tK : ∃ a b : ℤ,
+          Etale.DerivedCategory.hasTorAmplitudeIn A X.left a b wK.complex.obj)
+        (_tL : ∃ a b : ℤ,
+          Etale.DerivedCategory.hasTorAmplitudeIn A Y.left a b wL.complex.obj),
+        ∃ (hS : DerivedCategory.TStructure.t.plus
+            (((derivedTensorRightDerivedLowerShriek (ModuleCat.{u + 1} A) c).obj
+              K.obj).obj L.obj))
+          (hT : DerivedCategory.TStructure.t.plus
+            (((rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
+              (ModuleCat.{u + 1} A) c).obj K.obj).obj L.obj)),
+          IsIso (ObjectProperty.homMk
+            (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app K.obj).app L.obj) :
+            (⟨_, hS⟩ : DerivedCategory.Plus
+              (Sheaf (ProEt.topology Y.left) (ModuleCat.{u + 1} A))) ⟶ ⟨_, hT⟩)) ∧
+    (∀ (E : PadicAlgCl.FiniteIntermediateField ell) (p : X ⟶ Y) [IsProper p.left]
+        (M : DerivedCategory (Mod (Sheaf (ProEt.topology X.left) Ab.{u + 1})
+          (ProEtale.condensedRingObj (Profinite.padicIntegersRingObj ell E) X.left)))
+        (N : DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+          (ProEtale.condensedRingObj (Profinite.padicIntegersRingObj ell E) Y.left)))
+        (_hM : ProEtale.localizingClosureProEtale (Profinite.padicIntegersRingObj ell E) X.left M)
+        (_hN : ProEtale.localizingClosureProEtale (Profinite.padicIntegersRingObj ell E) Y.left N),
+        IsIso (ProEtale.CondensedRing.moduleObjectProjectionMap
+          (Profinite.padicIntegersRingObj ell E) p.left M N)) ∧
+    (∀ (E : PadicAlgCl.FiniteIntermediateField ell) (p : X ⟶ Y) [IsProper p.left]
+        (M : DerivedCategory (Mod (Sheaf (ProEt.topology X.left) Ab.{u + 1})
+          (ProEtale.condensedRingObj (Profinite.continuousMapRingObj E) X.left)))
+        (N : DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+          (ProEtale.condensedRingObj (Profinite.continuousMapRingObj E) Y.left)))
+        (_hM : ProEtale.localizingClosureProEtale (Profinite.continuousMapRingObj E) X.left M)
+        (_hN : ProEtale.localizingClosureProEtale (Profinite.continuousMapRingObj E) Y.left N),
+        IsIso (ProEtale.CondensedRing.moduleObjectProjectionMap
+          (Profinite.continuousMapRingObj E) p.left M N)) ∧
+    (∀  (p : X ⟶ Y) [IsProper p.left]
+        (M : DerivedCategory (Mod (Sheaf (ProEt.topology X.left) Ab.{u + 1})
+          (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj ell) X.left)))
+        (N : DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+          (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj ell) Y.left)))
+        (_hM : ProEtale.localizingClosureProEtale (Profinite.padicAlgClRingObj ell) X.left M)
+        (_hN : ProEtale.localizingClosureProEtale (Profinite.padicAlgClRingObj ell) Y.left N),
+        IsIso (ProEtale.CondensedRing.moduleObjectProjectionMap
+          (Profinite.padicAlgClRingObj ell) p.left M N)) := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro A _ _ _ K L wK wL hK _ _ tL
+    obtain ⟨a, b, _, h⟩ := hK.2
+    have hM : _root_.DerivedCategory.TStructure.t.bounded wK.complex.obj :=
+      ⟨⟨a, (_root_.DerivedCategory.isGE_iff _ a).2 (fun q hq ↦ h q (.inl hq))⟩,
+        ⟨b, (_root_.DerivedCategory.isLE_iff _ b).2 (fun q hq ↦ h q (.inr hq))⟩⟩
+    obtain ⟨aL, bL, htL⟩ := tL
+    have ht := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp htL
+    have hJ := (Etale.openImmersionLowerShriek
+      (ModuleCat.{u + 1} A) c.i).bounded_mapDerivedCategory_obj hM
+    have hML := Etale.plus_derivedTensor_leftDerivedUpperStar c.g hJ ht
+    have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite A c.g
+    have hPF : IsIso
+        (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app K.obj).app L.obj) :=
+      hasProjectionFormulaOfCompactification_of_comparison c wK.iso wL.iso hM hML
+        inferInstance
+    have hR : _root_.DerivedCategory.TStructure.t.plus
+        ((rightDerivedLowerShriekOfCompactification
+          (ModuleCat.{u + 1} A) c).obj K.obj) :=
+      (_root_.DerivedCategory.TStructure.t.plus).prop_of_iso
+        ((rightDerivedLowerShriekOfCompactificationPlusCompatibility
+          (ModuleCat.{u + 1} A) c).app K)
+        ((rightDerivedLowerShriekOfCompactificationPlus
+          (ModuleCat.{u + 1} A) c).obj K).property
+    have hLt : ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) Y.left aL bL L.obj :=
+      (ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) Y.left aL bL).prop_of_iso
+        wL.iso ((DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff aL bL _).mpr ht)
+    obtain ⟨r, hr⟩ := hR
+    have := hr
+    have := _root_.DerivedCategory.isGE_tensor_of_torAmplitudeIn hLt
+      ((rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} A) c).obj K.obj) r
+    let : CategoryTheory.BraidedCategory
+        (_root_.DerivedCategory (Sheaf (ProEt.topology Y.left) (ModuleCat.{u + 1} A))) :=
+      _root_.DerivedCategory.braidedCategory' _
+    have hS : _root_.DerivedCategory.TStructure.t.plus
+        (((derivedTensorRightDerivedLowerShriek (ModuleCat.{u + 1} A) c).obj
+          K.obj).obj L.obj) := by
+      exact ⟨aL + r, _root_.DerivedCategory.TStructure.t.isGE_of_iso
+        (CategoryTheory.BraidedCategory.braiding L.obj
+          ((rightDerivedLowerShriekOfCompactification
+            (ModuleCat.{u + 1} A) c).obj K.obj)) (aL + r)⟩
+    have hT := (_root_.DerivedCategory.TStructure.t.plus).prop_of_iso
+      (asIso (((projectionMapOfCompactification
+        (ModuleCat.{u + 1} A) c).app K.obj).app L.obj)) hS
+    refine ⟨hS, hT, ?_⟩
+    rw [← ObjectProperty.isIso_hom_iff]
+    exact hPF
+  · intro E p _ M N hM hN
+    exact ProEtale.CondensedRing.isIso_integral_projection_formula_localizing
+      ell E k p M N hM hN
+  · intro E p _ M N hM hN
+    exact (ProEtale.CondensedRing.projectionFormulaRational ell _hk
+      (Profinite.continuousMapRingObj E) (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)).2 p M N hM hN
+  · intro p _ M N hM hN
+    exact (ProEtale.CondensedRing.projectionFormulaRational ell _hk
+      (Profinite.padicAlgClRingObj ell) (Or.inr ⟨Iso.refl _⟩)).2 p M N hM hN
 
 attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
   ProjectionRestriction.derived SemilinearSections.abelianSheafify

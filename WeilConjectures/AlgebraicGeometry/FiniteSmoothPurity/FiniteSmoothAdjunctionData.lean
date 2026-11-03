@@ -122,6 +122,58 @@ structure SmoothLevel (A : Type (u + 1)) [CommRing A] [Finite A]
       (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) i).obj
         ((exceptional A f).obj (𝟙_ _)))
 
+/-- All two-level reduction assertions, with the actual b, c, lambda and their traces.
+Source: sk-lem-sp-reduction and its compatibility proof
+(blueprint: def-pur-finite-smooth-adjunction-data). -/
+structure ReductionData {A B : Type (u + 1)} [CommRing A] [Finite A] [CommRing B] [Finite B]
+    (phi : A →+* B) {N M : ℕ} {hN : 0 < N} {hM : 0 < M}
+    {hA : (N : A) = 0} {hB : (M : B) = 0}
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] (d : ℕ)
+    (a : SmoothLevel A N hN hA f d) (b : SmoothLevel B M hM hB f d) where
+  twist : CoefficientLineComparison phi N M hA hB X
+  ordinary_compact : ∀ Q : DerivedCategoryModule A X,
+    DerivedCategory.boundedConstructibleFiniteTor A X Q →
+    IsIso (ExceptionalCoefficients.compactSupportMap phi
+      (HasCompactification.compactification f) Q)
+  ordinary_counit : ∀ K : DerivedCategoryModule A Y,
+    DerivedCategory.boundedConstructibleFiniteTor A Y K →
+    IsIso (ExceptionalCoefficients.mateMap phi f K) ∧
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} B) f).map
+        (ExceptionalCoefficients.mateMap phi f K) ≫
+      (rightDerivedUpperShriekAdjunction B f).counit.app
+        ((ordinaryScalar phi Y).obj K) =
+    ExceptionalCoefficients.comparisonInverse phi (HasCompactification.compactification f)
+        ((rightDerivedUpperShriek A f).obj K) ≫
+      (ordinaryScalar phi Y).map
+        ((rightDerivedUpperShriekAdjunction A f).counit.app K)
+  ordinary_purity : ∀ K : DerivedCategoryModule A Y,
+    DerivedCategory.boundedConstructibleFiniteTor A Y K →
+    (ordinaryScalar phi X).map (gamma A f (line A N hA X d) a.alpha K) ≫
+        ExceptionalCoefficients.mateMap phi f K =
+      (pullbackTwistComparison f d twist K).hom ≫
+        gamma B f (line B M hB X d) b.alpha ((ordinaryScalar phi Y).obj K)
+  reduction_ctf : ∀ (T : Scheme.{u}) (K : proCategory A T), IsCtf A T K →
+    IsCtf B T ((proScalar phi T).obj K)
+  pro_compact : ∀ Q : proCategory A X, IsCtf A X Q →
+    IsIso (proCompactCoefficientMap phi f Q)
+  pro_counit : ∀ K : proCategory A Y, IsCtf A Y K →
+    IsIso (proCoefficientMap phi f K) ∧
+    (proCompact B f).map (proCoefficientMap phi f K) ≫
+        proCounit B f ((proScalar phi Y).obj K) =
+      proCompactCoefficientInverse phi f ((exceptional A f).obj K) ≫
+        (proScalar phi Y).map (proCounit A f K)
+  pro_natural : ∀ (K L : proCategory A Y), IsCtf A Y K → IsCtf A Y L → ∀ v : K ⟶ L,
+    (proScalar phi X).map ((exceptional A f).map v) ≫ proCoefficientMap phi f L =
+      proCoefficientMap phi f K ≫ (exceptional B f).map ((proScalar phi Y).map v)
+  pro_pullback : ∀ K : proCategory A Y, IsCtf A Y K → IsIso (proPullbackMap phi f K)
+  pro_purity : ∀ K : proCategory A Y, IsCtf A Y K →
+    IsIso (proLambda f d twist K) ∧
+    (proScalar phi X).map (proGamma A f (line A N hA X d) a.alpha K) ≫
+        proCoefficientMap phi f K =
+      proLambda f d twist K ≫
+        proGamma B f (line B M hB X d) b.alpha ((proScalar phi Y).obj K)
+
 /-- A positive finite level of the asserted system. The annihilator and the roots
 are literally ell^n; the coefficient type is its harmless universe lift.
 Source: sk-thm-smooth-purity (blueprint: def-pur-finite-smooth-adjunction-data). -/

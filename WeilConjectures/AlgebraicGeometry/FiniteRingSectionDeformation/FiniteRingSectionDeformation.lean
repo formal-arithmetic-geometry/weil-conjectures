@@ -575,6 +575,41 @@ Source: sk-thm-dnc, bundle frames (blueprint: lem-trf-finite-ring-section-deform
 def standardZero (S : Scheme.{u}) (d : ℕ) : S ⟶ affineTraceTower S d :=
   AffineSpace.zeroSection (ULift.{u} (Fin d)) S ≫ (affineTraceAffineSpaceIso S d).inv
 
+/-- The actual full-purity mate at the coefficient unit, expressed on its scalar-unit
+normalized source. Source: vector-bundle purity, displayed gamma
+(blueprint: lem-trf-finite-ring-section-deformation). -/
+abbrev purityUnitMate (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
+    (p : (vectorBundlePurityLower A S d M).obj
+        (vectorBundlePurityTwistedPullback A N hA S d M (ordinaryFiniteUnit A S)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} A) S).obj (ordinaryFiniteUnit A S)).obj
+        (vectorIntegrationSource A N hA S d M)) :
+    vectorIntegrationCoefficient A N hA S d M ⟶
+      (bundleRight A S d M).obj (ordinaryFiniteUnit A S) :=
+  bundleSectionPurityUnitMap N hN A hA S hS d M p
+
+private theorem normalized_adjunct
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G)
+    {X Y : C} (e : X ≅ Y) (c : F.obj Y ⟶ 𝟙_ D)
+    (p : F.obj X ≅ (𝟙_ D) ⊗ F.obj Y)
+    (h : p.inv ≫ F.map e.hom = (λ_ (F.obj Y)).hom) :
+    a.homEquiv _ _ c = e.inv ≫ a.homEquiv _ _
+      (p.hom ≫ (𝟙_ D) ◁ c ≫ (ρ_ (𝟙_ D)).hom) := by
+  rw [← a.homEquiv_naturality_left]
+  apply congrArg (a.homEquiv _ _)
+  have he : F.map e.inv ≫ p.hom = (λ_ (F.obj Y)).inv := by
+    apply (cancel_mono (λ_ (F.obj Y)).hom).1
+    rw [← h]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← F.map_comp, e.inv_hom_id, F.map_id]
+    rw [h, Iso.inv_hom_id]
+  rw [← Category.assoc, he]
+  rw [← leftUnitor_inv_naturality_assoc]
+  rw [← unitors_equal, Iso.inv_hom_id, Category.comp_id]
+
 attribute [local irreducible] VectorBundleZeroSection.trivializationMap
   affineTraceAffineSpaceIso
 
@@ -612,5 +647,41 @@ private theorem bundleAdjoint_eq (N : ℕ) (hN : 0 < N)
         (vectorBundleIntegration N hN A hA S hS d M) := by
   unfold bundleAdjoint
   rfl
+
+/-- Agreement with the inverse purity orientation, whenever the full purity theorem
+supplies its canonical projection inverse. In particular this applies to all the
+valuation-ring quotients in thm-amb-vector-bundle-purity. This records equality of the
+actual maps before taking their inverses and restricting to zero.
+Source: sk-thm-dnc, final comparison with vector-bundle purity
+(blueprint: lem-trf-finite-ring-section-deformation).
+Proof: Step 16 observes that vector-bundle purity uses the same integration, characterized
+by the same affine traces on every frame. At the coefficient unit, naturality of the
+canonical tensor projection map with the unit constraints identifies its normalized
+inverse with the compact-support unit constraint. Transposing gives the equality below.
+Pull to zero and invert to obtain exactly bundleOrientation, so the orientation agrees
+with the zero-section restriction of inverse purity, with no choice of normalization. -/
+theorem bundleOrientation_purity (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
+    (p : (vectorBundlePurityLower A S d M).obj
+        (vectorBundlePurityTwistedPullback A N hA S d M (ordinaryFiniteUnit A S)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} A) S).obj (ordinaryFiniteUnit A S)).obj
+        (vectorIntegrationSource A N hA S d M))
+    (hp : p.inv = vectorBundlePurityProjectionMap A N hA S d M (ordinaryFiniteUnit A S)) :
+    bundleAdjoint N hN A hA S hS d M = purityUnitMate N hN A hA S hS d M p := by
+  let := (vectorIntegration_geometry S d M).1
+  let := (vectorIntegration_geometry S d M).2.1
+  let C := vectorIntegrationCoefficient A N hA S d M
+  let F := vectorBundlePurityLower A S d M
+  let e := bundleSectionPurityUnitIso N A hA S d M
+  let l := derivedTensorLeftUnitor (ModuleCat.{u + 1} A) S (F.obj C)
+  have he : p.inv ≫ F.map e.hom = l.hom := by
+    rw [hp]
+    exact bundleSectionProjection_unit N A hA S d M
+  rw [bundleAdjoint_eq]
+  unfold purityUnitMate bundleSectionPurityUnitMap
+  exact normalized_adjunct (vectorBundlePurityAdjunction A S d M) e
+    (vectorBundleIntegration N hN A hA S hS d M) p he
 
 end AlgebraicGeometry.Etale.FiniteRingSectionDeformation

@@ -556,4 +556,74 @@ private theorem comparison_comp
     Iso.trans_hom, Iso.symm_hom, Iso.app_hom]
   rfl
 
+/-- Section comparisons compose with a source isomorphism over the identity base.
+Source: orientation-charts Step 4, counit-preserving comparison and mate pasting.
+(blueprint: lem-trf-bundle-section-comparison-iso-pasting).
+
+Proof: expand bundleSectionComparison into the section pullback square, exceptional
+base-change mate, and constant-unit comparison. Paste the square of h with the square
+of a. Compact-support base-change pasting identifies the inverse exchange of the pasted
+square with the composite inverse exchanges. Taking mates respects this pasting, by
+mateEquiv_vcomp and the conjugate-equivalence identity law. Pullback compositor
+associativity identifies the two section pullback squares. Naturality moves the unit
+comparison through the exceptional functor; constant-unit pullback composition then
+identifies the two unit comparisons with the one for v. The pullback identity unitor
+cancels the comparison for the identity base. The remaining component equation is the
+one displayed below. This concerns arbitrary section objects and squares, without any
+Tate coefficients, affine frames, purity or normalized orientations. In particular it
+also applies when the schemes are empty or the coefficient ring is zero.
+-/
+theorem bundleSectionComparison_iso_pasting
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X U W S T : Scheme.{u}} (p : X ⟶ S) (q : U ⟶ S) (r : W ⟶ T)
+    [HasCompactification p] [HasCompactification q] [HasCompactification r]
+    [QuasiCompact q] [QuasiCompact r]
+    (h : U ≅ X) (hp : h.hom ≫ p = q) (v : T ⟶ S) (a : W ⟶ U)
+    (sq : IsPullback a r q v) (sq' : IsPullback (a ≫ h.hom) r p v)
+    (z : S ⟶ X) (w : S ⟶ U) (b : T ⟶ W) (hz : w ≫ h.hom = z)
+    (hw : b ≫ a = v ≫ w) (hw' : b ≫ (a ≫ h.hom) = v ≫ z) :
+    (ordinaryFinitePullback A v).map
+        ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) S).inv.app
+            ((ordinaryFinitePullback A z).obj
+              ((rightDerivedUpperShriek A p).obj
+                (ordinaryFiniteUnit A S))) ≫
+          bundleSectionComparison A p q h.hom (𝟙 S)
+            (IsPullback.of_horiz_isIso
+              (CommSq.mk (hp.trans (Category.comp_id _).symm)))
+            z w (hz.trans (Category.id_comp _).symm)) ≫
+        bundleSectionComparison A q r a v sq w b hw =
+      bundleSectionComparison A p r (a ≫ h.hom) v sq' z b hw' := by
+  have : QuasiCompact p := by
+    have he : p = h.inv ≫ q := by
+      rw [← hp, ← Category.assoc, h.inv_hom_id, Category.id_comp]
+    rw [he]
+    infer_instance
+  let sqh := IsPullback.of_horiz_isIso
+    (CommSq.mk (hp.trans (Category.comp_id _).symm))
+  have heh : bundleSectionComparison A p r (a ≫ h.hom) v sq' z b hw' =
+      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) v (𝟙 S) v
+        (Category.comp_id v).symm).hom.app
+          ((ordinaryFinitePullback A z).obj (unit_dualizing A p)) ≫
+        (ordinaryFinitePullback A v).map
+          (bundleSectionComparison A p q h.hom (𝟙 S) sqh z w
+            (hz.trans (Category.id_comp _).symm)) ≫
+        bundleSectionComparison A q r a v sq w b hw := by
+    exact comparison_comp A p q r sqh sq z w b
+      (hz.trans (Category.id_comp _).symm) hw v (Category.comp_id v).symm sq' hw'
+  have hu := leftDerivedUpperStarComp_id_right_hom_app
+    (ModuleCat.{u + 1} A) v
+    ((ordinaryFinitePullback A z).obj (unit_dualizing A p))
+  have hc := congrArg (fun k ↦ k ≫ (ordinaryFinitePullback A v).map
+      ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) S).inv.app
+        ((ordinaryFinitePullback A z).obj (unit_dualizing A p)))) hu
+  simp only [ordinaryFinitePullback, Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id_app, Category.id_comp, CategoryTheory.Functor.map_id] at hc
+  rw [heh]
+  simp only [Functor.map_comp, Category.assoc]
+  have hc' := (Category.comp_id _).symm.trans hc
+  exact congrArg (fun k ↦ k ≫ (ordinaryFinitePullback A v).map
+    (bundleSectionComparison A p q h.hom (𝟙 S) sqh z w
+      (hz.trans (Category.id_comp _).symm)) ≫
+    bundleSectionComparison A q r a v sq w b hw) hc'.symm
+
 end AlgebraicGeometry.Etale

@@ -36,6 +36,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonGlobalCohomologyFiniteNormalized
 
 /-!
 # Comparison of ordinary supported sections between the two sites
@@ -142,6 +143,44 @@ noncomputable def supportComparison :
       (γ := 𝟭 (ModuleCat.{u + 1} A))
       ((Functor.rightUnitor _).hom ≫ supportComparisonUnit A i)
 
+private noncomputable def normalizedBaseChange (e : G ⟶ L ⋙ H) :
+    G.rightDerivedFunctorPlus ⟶ L.mapDerivedCategoryPlus ⋙ H.rightDerivedFunctorPlus :=
+  (Functor.rightUnitor _).inv ≫
+    (Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryPlusIdIso E)).inv ≫
+    Functor.rightDerivedFunctorPlusBaseChange
+      (G := G) (G' := H) (β := L) (γ := 𝟭 E) ((Functor.rightUnitor G).hom ≫ e)
+
+private lemma normalizedBaseChange_fac (e : G ⟶ L ⋙ H) (K : HomotopyCategory.Plus C) :
+    G.rightDerivedFunctorPlusUnit.app K ≫
+      (normalizedBaseChange e).app (DerivedCategory.Plus.Qh.obj K) =
+    DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e).app K) ≫
+      H.rightDerivedFunctorPlusUnit.app (L.mapHomotopyCategoryPlus.obj K) ≫
+      H.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.inv.app K) := by
+  simp only [normalizedBaseChange, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.isoWhiskerLeft_inv, Functor.rightUnitor_inv_app, Category.id_comp]
+  have hi := (Functor.mapDerivedCategoryPlusIdIso E).inv.naturality
+    (G.rightDerivedFunctorPlusUnit.app K)
+  simp only [Functor.id_map] at hi
+  rw [reassoc_of% hi]
+  have hfac := NatTrans.congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac
+    (G := G) (G' := H) (β := L) (γ := 𝟭 E)
+    ((Functor.rightUnitor G).hom ≫ e)) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.comp_id] at hfac
+  rw [hfac]
+  simp only [Functor.rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app,
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  rw [← Functor.mapDerivedCategoryPlusIdIso_hom_app_factorsh]
+  simp only [Iso.inv_hom_id_app_assoc]
+  have hu : (Functor.rightUnitor G).hom ≫ e = e := by
+    ext X
+    exact Category.id_comp _
+  rw [hu]
+  erw [Category.id_comp, Category.id_comp]
+
 private lemma compatibility_fac (F : C ⥤ E) [F.Additive]
     (K : HomotopyCategory.Plus C) :
     DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
@@ -158,6 +197,59 @@ private lemma compatibility_fac (F : C ⥤ E) [F.Additive]
     Functor.rightDerivedFunctorPlusιUnit, Functor.ιRightDerivedFunctorUnit,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     NatTrans.id_app, Category.id_comp] using h
+
+private theorem baseChange_compatibility (e : G ⟶ L ⋙ H)
+    (α : G.rightDerivedFunctor ⟶ L.mapDerivedCategory ⋙ H.rightDerivedFunctor)
+    (hα : ∀ K : HomotopyCategory C (.up ℤ),
+      G.rightDerivedFunctorUnit.app K ≫ α.app (DerivedCategory.Qh.obj K) =
+        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e (.up ℤ)).app K) ≫
+          H.rightDerivedFunctorUnit.app ((L.mapHomotopyCategory (.up ℤ)).obj K) ≫
+          H.rightDerivedFunctor.map (L.mapDerivedCategoryFactorsh.inv.app K)) :
+    Functor.whiskerRight (normalizedBaseChange e) DerivedCategory.Plus.ι ≫
+        Functor.whiskerLeft L.mapDerivedCategoryPlus
+          H.rightDerivedFunctorPlusCompatibility.hom =
+      G.rightDerivedFunctorPlusCompatibility.hom ≫
+        Functor.whiskerLeft DerivedCategory.Plus.ι α := by
+  refine Functor.rightDerived_ext (G.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
+    G.rightDerivedFunctorPlusιUnit (HomotopyCategory.Plus.quasiIso C) _ _ _ ?_
+  ext K : 2
+  simp only [Functor.rightDerivedFunctorPlusιUnit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  rw [← DerivedCategory.Plus.ι.map_comp_assoc, normalizedBaseChange_fac]
+  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  have hn := H.rightDerivedFunctorPlusCompatibility.hom.naturality
+    (L.mapDerivedCategoryPlusFactorsh.inv.app K)
+  dsimp only [Functor.comp_map] at hn
+  erw [hn]
+  erw [reassoc_of% compatibility_fac H, reassoc_of% compatibility_fac G, hα]
+  have hf : DerivedCategory.Plus.ι.map (L.mapDerivedCategoryPlusFactorsh.inv.app K) =
+      L.mapDerivedCategoryFactorsh.inv.app K.obj := by
+    apply (cancel_mono (L.mapDerivedCategoryFactorsh.hom.app K.obj)).mp
+    erw [← L.ι_map_mapDerivedCategoryPlusFactorsh_hom_app K,
+      ← DerivedCategory.Plus.ι.map_comp, Iso.inv_hom_id_app,
+      CategoryTheory.Functor.map_id]
+    erw [L.ι_map_mapDerivedCategoryPlusFactorsh_hom_app K, Iso.inv_hom_id_app]
+    rfl
+  rw [hf]
+  rfl
+
+private theorem rightDerivedPullback_fac (e : G ⟶ L ⋙ H)
+    (K : HomotopyCategory C (.up ℤ)) :
+    G.rightDerivedFunctorUnit.app K ≫
+        (Functor.rightDerivedPullback L e).app (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e (.up ℤ)).app K) ≫
+        H.rightDerivedFunctorUnit.app ((L.mapHomotopyCategory (.up ℤ)).obj K) ≫
+        H.rightDerivedFunctor.map (L.mapDerivedCategoryFactorsh.inv.app K) := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  exact Functor.rightDerivedPullback_fac_app L e K
+
+private theorem baseChange_rightDerivedPullback (e : G ⟶ L ⋙ H) :
+    Functor.whiskerRight (normalizedBaseChange e) DerivedCategory.Plus.ι ≫
+        Functor.whiskerLeft L.mapDerivedCategoryPlus
+          H.rightDerivedFunctorPlusCompatibility.hom =
+      G.rightDerivedFunctorPlusCompatibility.hom ≫
+        Functor.whiskerLeft DerivedCategory.Plus.ι (Functor.rightDerivedPullback L e) :=
+  baseChange_compatibility e _ (rightDerivedPullback_fac e)
 
 private theorem compatibility_naturality
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
@@ -349,6 +441,15 @@ theorem supportKernelEvaluationIso_existsUnique :
 Source: blueprint proof paragraph 1 (blueprint: lem-pur-support-site-comparison). -/
 noncomputable def supportKernelEvaluationIso :=
   Classical.choose (supportKernelEvaluationIso_existsUnique A i)
+
+/-- Terminal evaluation for etale modules, with its explicit additive functor type.
+Source: blueprint full-support normalization (blueprint: lem-pur-support-site-comparison). -/
+noncomputable def supportEtaleGlobalEvaluationIso (T : Scheme.{u}) :
+    Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A) ≅
+      sheafToPresheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⋙
+        (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 T))) :=
+  Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
+    (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types true in

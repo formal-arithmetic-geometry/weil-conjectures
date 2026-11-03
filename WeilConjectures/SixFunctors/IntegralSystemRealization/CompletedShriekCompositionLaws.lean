@@ -419,6 +419,9 @@ private abbrev CompletedShriekPastingData.J
     (_K : CompletedShriekPastingData.{u} Obj R₀ J₀)
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] := J₀ j
 
+private abbrev CompletedShriekPastingData.rId
+    (K : CompletedShriekPastingData.{u} Obj R₀ J₀) (X : Scheme.{u}) := K.1 X
+
 private abbrev CompletedShriekPastingData.pComp
     (K : CompletedShriekPastingData.{u} Obj R₀ J₀) {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (fg : X ⟶ Z) (e : f ≫ g = fg) := K.2.1 f g fg e

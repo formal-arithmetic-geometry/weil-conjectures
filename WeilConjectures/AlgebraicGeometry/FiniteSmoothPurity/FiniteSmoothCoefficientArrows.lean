@@ -397,4 +397,32 @@ def proCompactCoefficientInverse [Finite A] [Finite B] (phi : A →+* B)
     @inv _ _ _ _ (proCompactCoefficientMap phi f M) h
   else 0
 
+/-- Lambda at literal quotient levels, with every ring and annihilator fixed explicitly.
+Source: sk-lem-sp-reduction (blueprint: def-pur-finite-smooth-coefficient-arrows). -/
+def finiteLambda (ell : ℕ) {r m : ℕ} (hmr : m ≤ r) {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (d : ℕ)
+    (e : CoefficientLineComparison (FiniteReduction.quotient ell hmr) (ell ^ r) (ell ^ m)
+      (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) X)
+    (K : DerivedCategoryModule (coefficient ell r) Y) :
+    (ordinaryScalar (FiniteReduction.quotient ell hmr) X).obj ((finiteSource ell r f d).obj K) ⟶
+      (finiteSource ell m f d).obj
+        ((ordinaryScalar (FiniteReduction.quotient ell hmr) Y).obj K) :=
+  (pullbackTwistComparison (A := coefficient ell r) (B := coefficient ell m)
+    (phi := FiniteReduction.quotient ell hmr) (N := ell ^ r) (M := ell ^ m)
+    (hA := CharP.cast_eq_zero _ _) (hB := CharP.cast_eq_zero _ _) f d e K).hom
+
+/-- The actual pro-etale lambda at literal quotient levels, with explicit coefficient data.
+Source: sk-lem-sp-reduction (blueprint: def-pur-finite-smooth-coefficient-arrows). -/
+def finiteProLambda (ell : ℕ) [Fact ell.Prime] {r m : ℕ} (hmr : m ≤ r)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
+    (e : CoefficientLineComparison (FiniteReduction.quotient ell hmr) (ell ^ r) (ell ^ m)
+      (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) X)
+    (K : proCategory (coefficient ell r) Y) :
+    (proScalar (FiniteReduction.quotient ell hmr) X).obj ((finiteProSource ell r f d).obj K) ⟶
+      (finiteProSource ell m f d).obj
+        ((proScalar (FiniteReduction.quotient ell hmr) Y).obj K) :=
+  proLambda (A := coefficient ell r) (B := coefficient ell m)
+    (phi := FiniteReduction.quotient ell hmr) (N := ell ^ r) (M := ell ^ m)
+    (hA := CharP.cast_eq_zero _ _) (hB := CharP.cast_eq_zero _ _) f d e K
+
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

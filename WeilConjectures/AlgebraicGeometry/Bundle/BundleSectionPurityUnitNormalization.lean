@@ -207,3 +207,134 @@ attribute [local irreducible] VectorBundleZeroSection.scheme VectorBundleZeroSec
   VectorBundleZeroSection.over VectorBundleZeroSection.antiEquivalence
 
 end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Etale
+
+private theorem normalized_adjunct_local
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G)
+    {X Y : C} (e : X ≅ Y) (c : F.obj Y ⟶ 𝟙_ D)
+    (p : F.obj X ≅ (𝟙_ D) ⊗ F.obj Y)
+    (h : p.inv ≫ F.map e.hom = (λ_ (F.obj Y)).hom) :
+    a.homEquiv _ _ c = e.inv ≫ a.homEquiv _ _
+      (p.hom ≫ (𝟙_ D) ◁ c ≫ (ρ_ (𝟙_ D)).hom) := by
+  rw [← a.homEquiv_naturality_left]
+  apply congrArg (a.homEquiv _ _)
+  have he : F.map e.inv ≫ p.hom = (λ_ (F.obj Y)).inv := by
+    apply (cancel_mono (λ_ (F.obj Y)).hom).1
+    rw [← h]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← F.map_comp, e.inv_hom_id, F.map_id]
+    rw [h, Iso.inv_hom_id]
+  rw [← Category.assoc, he]
+  rw [← leftUnitor_inv_naturality_assoc]
+  rw [← unitors_equal, Iso.inv_hom_id, Category.comp_id]
+
+private theorem single_unit_hom_generic
+    (B : Type*) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]
+    [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
+    (T : Scheme.{u}) : (singleFunctorObjUnitIso B T).hom = 𝟙 _ := by
+  have h := (singleFunctorObjUnitIso B T).hom_inv_id
+  rw [singleFunctorObjUnitIso_inv] at h
+  exact (Category.comp_id _).symm.trans h
+
+private theorem purity_unit_eq_bundle_adjunct_local (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
+    (p : (vectorBundlePurityLower A S d M).obj
+        (vectorBundlePurityTwistedPullback A N hA S d M (ordinaryFiniteUnit A S)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} A) S).obj (ordinaryFiniteUnit A S)).obj
+        (vectorIntegrationSource A N hA S d M))
+    (hp : p.inv = vectorBundlePurityProjectionMap A N hA S d M (ordinaryFiniteUnit A S)) :
+    bundleSectionPurityUnitMap N hN A hA S hS d M p =
+      (vectorBundlePurityAdjunction A S d M).homEquiv
+        (vectorIntegrationCoefficient A N hA S d M) (ordinaryFiniteUnit A S)
+        (vectorBundleIntegration N hN A hA S hS d M) := by
+  let F := vectorBundlePurityLower A S d M
+  let C := vectorIntegrationCoefficient A N hA S d M
+  let e := bundleSectionPurityUnitIso N A hA S d M
+  let l := derivedTensorLeftUnitor (ModuleCat.{u + 1} A) S (F.obj C)
+  have he : p.inv ≫ F.map e.hom = l.hom := by
+    rw [hp]
+    exact bundleSectionProjection_unit N A hA S d M
+  unfold bundleSectionPurityUnitMap
+  exact (normalized_adjunct_local (vectorBundlePurityAdjunction A S d M) e
+    (vectorBundleIntegration N hN A hA S hS d M) p he).symm
+
+/-- The unit purity mate restricts on every affine linear frame to the prescribed
+coordinate-tower adjunct.
+Source: orientation-charts Step 4; parent proof Steps 3--5 and 9--10.
+(blueprint: lem-trf-bundle-section-purity-unit-normalization).
+
+Proof: the coefficient-first projection map at the unit, conjugated by the pullback
+unit and tensor unitors, is the identity. For the proper factor this is the adjunction
+triangle identity; for open extension it is the sheaf tensor-unit equation. The two
+signed symmetries have sign one at the degree-zero coefficient unit. Its inverse,
+specified by hp, therefore turns the displayed unit purity map into the adjunct of
+the actual vector-bundle integration trace. On a frame, transpose through the open
+compact-support exchange. Mate naturality identifies the resulting arrow with the
+adjunct of the restricted trace. Integration normalization identifies that trace with
+the affine coordinate-tower counit, and the section/pullback compositors identify its
+coefficient source with bundleSectionChartCoefficient. Pulling back by the Cartesian
+lift of the zero section gives precisely the defining normalization equation. This
+uses arbitrary frames and the same normalized t,D throughout; their normalization
+uniqueness removes any dependence on those choices. Empty bases and rank zero use
+the same unit and adjunction equations; no nonzero coefficient is required. -/
+theorem bundleSectionPurityUnit_normalization (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
+    (p : (vectorBundlePurityLower A S d M).obj
+        (vectorBundlePurityTwistedPullback A N hA S d M (ordinaryFiniteUnit A S)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} A) S).obj (ordinaryFiniteUnit A S)).obj
+        (vectorIntegrationSource A N hA S d M))
+    (hp : p.inv = vectorBundlePurityProjectionMap A N hA S d M (ordinaryFiniteUnit A S))
+    (o : bundleSectionObject A S d M ≅ affineLinearBaseCoefficient A N hA S d)
+    (ho : o.inv = (bundleSectionCoefficientIso A N hA S d M).inv ≫
+      (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).map
+        (bundleSectionPurityUnitMap N hN A hA S hS d M p)) :
+    BundleSectionOrientationNormalization N hN A hA S hS d M o := by
+  intro t D V hV e
+  rw [ho, purity_unit_eq_bundle_adjunct_local N hN A hA S hS d M p hp]
+  -- Specialize the unit identity after checking it for general coefficients.
+  have hu := single_unit_hom_generic (ModuleCat.{u + 1} A)
+  have hpull := ordinaryFiniteUnitPullback_hom_unit A V.ι
+  erw [hu, hu, Category.comp_id, CategoryTheory.Functor.map_id, Category.id_comp] at hpull
+  have hm := vectorIntegration_frameAdjoint N hN A hA t D S hS d M V e
+  unfold dualizingComplexBaseChangeMap CoordinateCounitArrows.towerAdjoint at hm
+  erw [← hpull, hu, Category.comp_id] at hm
+  have hc := sectionPullback_coefficient_naturality A V.ι
+    (VectorBundleZeroSection.π S d M) (affineTraceProjection V.toScheme d)
+    (vectorIntegrationChart S d M V e) (VectorBundleZeroSection.zero S d M)
+    (bundleSectionChartZero S d M V e) (vectorIntegrationChart_isPullback S d M V e).w
+    ((vectorIntegrationChart_isPullback S d M V e).lift_fst _ _ _)
+    (VectorBundleZeroSection.zero_spec S d M).1
+    ((vectorIntegrationChart_isPullback S d M V e).lift_snd _ _ _)
+    (affineLinearBaseCoefficient A N hA S d)
+    (affineLinearBaseCoefficient A N hA V.toScheme d)
+    (bundleSectionOmega A S d M)
+    ((rightDerivedUpperShriek A (affineTraceProjection V.toScheme d)).obj
+      (ordinaryFiniteUnit A V.toScheme))
+    (vectorIntegrationBaseCoefficientPullback A N hA t V.ι hS d).hom
+    ((vectorBundlePurityAdjunction A S d M).homEquiv _ _
+      (vectorBundleIntegration N hN A hA S hS d M))
+    ((affineLinearCoefficientDescent A N hA t V.toScheme
+        (affineTracePullbackInvertible N V.ι hS) d).inv ≫
+      bundleSectionAffineAdjunct N hN A hA t D V.toScheme
+        (affineTracePullbackInvertible N V.ι hS) d)
+    ((rightDerivedUpperShriekBaseChangeMap A
+        (vectorIntegrationChart_isPullback S d M V e)).app (ordinaryFiniteUnit A S) ≫
+      (rightDerivedUpperShriek A (affineTraceProjection V.toScheme d)).map
+        (ordinaryFiniteUnitPullback A V.ι).hom) ?_
+  · dsimp only [bundleSectionCoefficientIso, bundleSectionChartComparison,
+      bundleSectionComparison, bundleSectionPullbackSquare, bundleSectionChartCoefficient,
+      Iso.trans_inv, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+      Functor.mapIso_inv, bundleSectionOmega, vectorIntegrationCoefficient,
+      CategoryTheory.Functor.id_obj] at hc ⊢
+    simpa only [Functor.map_comp, Category.assoc] using hc
+  · dsimp only [bundleSectionAffineAdjunct]
+    exact hm
+
+end AlgebraicGeometry.Etale

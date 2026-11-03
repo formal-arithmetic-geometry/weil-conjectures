@@ -74,6 +74,25 @@ private theorem base_normal_form (N : ℕ) (hN : 0 < N)
       eqToIso (congrArg (fun a : ℤ ↦
         ((_root_.DerivedCategory.singleFunctor _ 0).obj (E (d + 1)))⟦a⟧) (by omega))
 
+private theorem exists_affine_frame (S : Scheme.{u}) (d : ℕ) (M : S.Modules)
+    [M.IsFiniteLocallyFreeOfRank d] (x : S) :
+    ∃ V : S.affineOpens, x ∈ V.1 ∧
+      Nonempty (VectorBundleZeroSection.Trivialization S d M V.1) := by
+  classical
+  obtain ⟨I, W, hW, e⟩ :=
+    Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free M (r := d)
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (hW.ge (Set.mem_univ x))
+  obtain ⟨V, hV, hx, hVW⟩ :=
+    TopologicalSpace.Opens.isBasis_iff_nbhd.mp S.isBasis_affineOpens hi
+  have : (Scheme.Modules.restrictFunctor (S.homOfLE hVW)).IsLeftAdjoint :=
+    (Scheme.Modules.restrictAdjunction (S.homOfLE hVW)).isLeftAdjoint
+  refine ⟨⟨V, hV⟩, hx, ⟨?_⟩⟩
+  exact Scheme.Modules.restrictCompIso M (W i).ι (S.homOfLE hVW) (Scheme.Opens.ι V)
+      (Scheme.homOfLE_ι S hVW) ≪≫
+    (Scheme.Modules.restrictFunctor (S.homOfLE hVW)).mapIso (e i).some ≪≫
+    (SheafOfModules.mapFreeIso (Scheme.Modules.restrictFunctor (S.homOfLE hVW))
+      (ULift.{u} (Fin d)) (Scheme.Modules.restrictUnitIso (S.homOfLE hVW)).symm).symm
+
 private theorem map_eq_of_cover (A : Type (u + 1)) [CommRing A]
     {S : Scheme.{u}} {I : Type u} (U : I → S.Opens)
     (hU : ∀ x : S, ∃ i : I, x ∈ U i)
@@ -104,5 +123,62 @@ private theorem map_eq_of_cover (A : Type (u + 1)) [CommRing A]
     ((congrArg (fun z ↦ e.hom.app K ≫ z ≫ e.inv.app L)
       ((_root_.DerivedCategory.homologyFunctor _ n).congr_map hh)).trans
         (NatIso.naturality_2 e g))
+
+/-- Maps from the shifted Tate coefficient to the section dualizing object are detected
+on affine linear frames, even after the specified chart comparison.
+Source: orientation-charts Step 4; parent proof Steps 2--3 and 6.
+(blueprint: lem-trf-bundle-section-orientation-map-ext).
+
+Proof: tensor products of flat finite Tate lines identify the source with the single
+sheaf A(d) shifted by 2d. The coefficient-unit integration mate is invertible, so its
+zero-section pullback identifies the target with that same shifted single sheaf.
+Refine local module frames to an affine cover. The exceptional comparison for each
+frame is invertible by open base change; cancel it from the assumed equations.
+Cohomology in degree -2d is injective on Hom between these concentrated objects.
+Exact restriction commutes with cohomology, and the restrictions to the affine cover
+are jointly faithful on sheaves. Therefore the cohomology maps, and then the original
+maps, agree. Empty bases are covered by the same jointly-surjective-family statement;
+zero coefficients and rank zero require no modification. -/
+theorem bundleSectionOrientation_map_ext (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
+    (f g : affineLinearBaseCoefficient A N hA S d ⟶ bundleSectionObject A S d M)
+    (h : ∀ (V : S.Opens) (_hV : IsAffine V.toScheme)
+      (e : VectorBundleZeroSection.Trivialization S d M V),
+      (ordinaryFinitePullback A V.ι).map f ≫ bundleSectionChartComparison A S d M V e =
+        (ordinaryFinitePullback A V.ι).map g ≫
+          bundleSectionChartComparison A S d M V e) : f = g := by
+  classical
+  obtain ⟨p, hp, hm⟩ := bundleSectionPurityUnit_exists_isIso N hN A hA S hS d M
+  let q := (bundleSectionCoefficientIso A N hA S d M).inv ≫
+    (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).map
+      (bundleSectionPurityUnitMap N hN A hA S hS d M p)
+  have : IsIso q := IsIso.comp_isIso' (Iso.isIso_inv _) (Functor.map_isIso _ _)
+  obtain ⟨e⟩ := base_normal_form N hN A hA S hS d
+  let L := (_root_.DerivedCategory.singleFunctor _ 0).obj
+    (Scheme.finiteEtaleTateSheaf A N S hA (d : ℤ))
+  have hle : _root_.DerivedCategory.TStructure.t.IsLE (L⟦2 * (d : ℤ)⟧)
+      (-(2 * (d : ℤ))) :=
+    _root_.DerivedCategory.TStructure.t.isLE_shift L 0 (2 * (d : ℤ)) _ (by omega)
+  have hge : _root_.DerivedCategory.TStructure.t.IsGE (L⟦2 * (d : ℤ)⟧)
+      (-(2 * (d : ℤ))) :=
+    _root_.DerivedCategory.TStructure.t.isGE_shift L 0 (2 * (d : ℤ)) _ (by omega)
+  have : (affineLinearBaseCoefficient A N hA S d).IsLE (-(2 * (d : ℤ))) :=
+    _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm _
+  have : (bundleSectionObject A S d M).IsGE (-(2 * (d : ℤ))) :=
+    _root_.DerivedCategory.TStructure.t.isGE_of_iso (e.symm ≪≫ asIso q) _
+  choose V hx eV using exists_affine_frame S d M
+  apply map_eq_of_cover A (fun x : S ↦ (V x).1) (fun x ↦ ⟨x, hx x⟩)
+    (-(2 * (d : ℤ))) f g
+  intro x
+  let e := (eV x).some
+  have hc : IsIso (bundleSectionChartComparison A S d M (V x).1 e) := by
+    have hb := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion A
+      (vectorIntegrationChart_isPullback S d M (V x).1 e)
+    dsimp only [bundleSectionChartComparison, bundleSectionComparison]
+    infer_instance
+  exact (cancel_mono (bundleSectionChartComparison A S d M (V x).1 e)).1
+    (h (V x).1 (V x).2 e)
 
 end AlgebraicGeometry.Etale

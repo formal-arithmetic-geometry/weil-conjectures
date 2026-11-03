@@ -60,6 +60,36 @@ def proRootLine (ell n : ℕ) (T : Scheme.{u}) :
   (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (coefficient ell n)) T).obj
     (Scheme.finiteEtaleTateLine T (ell ^ n) (coefficient ell n) (CharP.cast_eq_zero _ _))
 
+/-- The same sheaf after forgetting its canonical Z/(ell^n)-action.
+Source: Stacks 03PK (blueprint: def-pur-finite-smooth-canonical-maps). -/
+def proRootUnderlying (ell n : ℕ) (T : Scheme.{u}) :
+    Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} :=
+  (sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ (ModuleCat.{u + 1} (coefficient ell n)) AddCommGrpCat.{u + 1})).obj
+      (proRootLine ell n T)
+
+/-- Identification with the actual pro-etale kernel of the power map. Its value on
+all roots from all etale tests is prescribed after inclusion in units. These generators
+and the sheafification adjunction determine the map, including its scalar action.
+Source: Stacks 03PK, 099R (blueprint: def-pur-finite-smooth-canonical-maps). -/
+structure RootSiteTransport (ell n : ℕ) (T : Scheme.{u}) where
+  iso : proRootUnderlying ell n T ≅ Scheme.proEtaleRootsOfUnitySheaf T (ell ^ n)
+  normalized : ∀ (U : T.Etaleᵒᵖ) (W : T.ProEtᵒᵖ)
+    (v : W.unop ⟶ (Scheme.toProEt T).obj U.unop)
+    (z : (T.rootsOfUnitySheaf (ell ^ n)).obj.obj U),
+    (Scheme.proEtaleRootsOfUnityInclusion T (ell ^ n)).hom.app W
+        (iso.hom.hom.app W
+          ((proRootLine ell n T).obj.map v.op
+            (((ProEtale.comparisonAdjunction
+              (ModuleCat.{u + 1} (coefficient ell n)) T).unit.app
+                (Scheme.finiteEtaleTateLine T (ell ^ n) (coefficient ell n)
+                  (CharP.cast_eq_zero _ _))).hom.app U
+              (Scheme.finiteEtaleTateOneGenerator (coefficient ell n) (ell ^ n) T
+                (CharP.cast_eq_zero _ _) U 1 z)))) =
+      ULift.up (Additive.ofMul
+        (Units.map v.left.appTop.hom.toMonoidHom
+          (Additive.toMul (((kernel.ι ((ell ^ n) • 𝟙 T.gmSheaf)).hom.app U z).down))))
+
 set_option genSizeOf false in
 set_option genInjectivity false in
 variable (A : Type (u + 1)) [CommRing A]
