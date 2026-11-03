@@ -207,15 +207,14 @@ namespace AlgebraicGeometry.ProEtale
 Source: Stacks Tags 06YY and 06YS; blueprint `det-sp-scalar-extension-functor`.
 
 The functor is computed by a K-flat representative, and the target category carries
-its action through the right tensor factor. Its construction is the universal derived
-pair for arbitrary ring sheaves,
-specialized to the actual constant coefficient map.
+its action through the right tensor factor.  Its construction is the published
+`scalarExtension`; no second tensor or localization is introduced here.
 (blueprint: det-sp-scalar-extension-functor).
 -/
 noncomputable def scalarExtensionFunctor {A B : Type u} [CommRing A] [CommRing B]
     (f : A →+* B) (T : Scheme.{u}) :
     Scheme.proEtaleDerivedCategory T A ⥤ Scheme.proEtaleDerivedCategory T B :=
-  siteScalarDerivedChange T (proEtaleConstantRingMap (T := T) f)
+  scalarExtension f T
 
 /-- Exactness of the published derived tensor functor.
 Source: Stacks 06YS, 06YY; clause (1) (blueprint: det-sp-scalar-extension-functor).
@@ -227,7 +226,7 @@ theorem scalarExtensionFunctor_exact
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u}) :
     ∃ (_ : (scalarExtensionFunctor f T).CommShift ℤ),
       (scalarExtensionFunctor f T).IsTriangulated := by
-  exact (siteScalarDerivedExistence T
+  exact (reductionDerivedExistence T
     (proEtaleConstantRingMap (T := T) f)).choose_spec.choose_spec.2.1
 
 /-- The actual universal counit on a complex, rather than a chosen model comparison.
@@ -235,7 +234,7 @@ Source: Stacks 06YY; clause (1) (blueprint: det-sp-scalar-extension-functor). -/
 def scalarExtensionFunctorCounit
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ) :=
-  siteScalarScalarComplexCounit T (proEtaleConstantRingMap (T := T) f) P
+  reductionScalarComplexCounit T (proEtaleConstantRingMap (T := T) f) P
 
 /-- K-flat computation, including the functor and its target-ring tensor action.
 Source: Stacks 06YS, 06YY; clause (1) (blueprint: det-sp-scalar-extension-functor).
@@ -260,7 +259,7 @@ def scalarExtensionFunctorKFlatIso
       (R := proEtaleConstantRing T A) P) :
     (scalarExtensionFunctor f T).obj (DerivedCategory.Q.obj P) ≅
       DerivedCategory.Q.obj
-        ((siteScalarChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P) :=
+        ((reductionChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P) :=
   @asIso _ _ _ _ (scalarExtensionFunctorCounit f T P)
     (scalarExtensionFunctor_kflat_representation f T P hP)
 
@@ -276,8 +275,8 @@ theorem scalarExtensionFunctor_map
     (scalarExtensionFunctor f T).map (DerivedCategory.Q.map v) ≫
         scalarExtensionFunctorCounit f T Q =
       scalarExtensionFunctorCounit f T P ≫ DerivedCategory.Q.map
-        ((siteScalarChangeComplex T (proEtaleConstantRingMap (T := T) f)).map v) := by
-  let E := siteScalarChange T (proEtaleConstantRingMap (T := T) f)
+        ((reductionChangeComplex T (proEtaleConstantRingMap (T := T) f)).map v) := by
+  let E := reductionChange T (proEtaleConstantRingMap (T := T) f)
   let F := scalarExtensionFunctor f T
   let q := HomotopyCategory.quotient
     (proEtaleRingModules T (proEtaleConstantRing T A)) (.up ℤ)
@@ -291,11 +290,11 @@ theorem scalarExtensionFunctor_map
       E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
     Functor.whiskerRight (DerivedCategory.quotientCompQhIso _).inv F ≫
       (Functor.associator q DerivedCategory.Qh F).hom ≫
-        Functor.whiskerLeft q (siteScalarDerivedCounit T (proEtaleConstantRingMap (T := T) f)) ≫
+        Functor.whiskerLeft q (reductionDerivedCounit T (proEtaleConstantRingMap (T := T) f)) ≫
           j.hom
   simpa [ε, j, E, F, q, scalarExtensionFunctorCounit,
-    siteScalarScalarComplexCounit, siteScalarComplexCounit, scalarExtensionFunctor,
-    siteScalarDerivedChange, siteScalarChangeComplex] using ε.naturality v
+    reductionScalarComplexCounit, reductionComplexCounit, scalarExtensionFunctor,
+    scalarExtension, reductionChangeComplex] using ε.naturality v
 
 section ConstructibilityProof
 attribute [local instance] HasDerivedCategory.standard
@@ -455,13 +454,13 @@ private theorem scalarExtension_tor
   let R := proEtaleConstantRing T A
   let S := proEtaleConstantRing T B
   let φ := proEtaleConstantRingMap (T := T) f
-  let E := siteScalarChange T φ
+  let E := reductionChange T φ
   obtain ⟨P, hf, hb, ⟨e⟩⟩ := (scalarExtension_tor_flat_model T A K a b hTor.1).mp hTor
   have : P.IsStrictlyLE b :=
     (CochainComplex.isStrictlyLE_iff _ _).2 (fun i hi ↦ hb i (Or.inr hi))
   have hP := SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite R P b hf
   have hext := SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
-    φ P E (siteScalarChange_obj_eq T φ) (fun g ↦ siteScalarChange_map_eq T φ g) hP
+    φ P E (reductionChange_obj_eq T φ) (fun g ↦ reductionChange_map_eq T φ g) hP
       (fun i ↦ (SheafOfModules.flat_to_cat R (P.X i) (hf i)).2)
   let Q := (E.mapHomologicalComplex (.up ℤ)).obj P
   have hQ : ∀ i, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
@@ -699,7 +698,7 @@ theorem scalarExtensionFunctor_line
     IsIso (scalarExtensionFunctorCounit f T
       ((HomologicalComplex.single _ (.up ℤ) 0).obj L)) ∧
     SheafOfModules.IsFiniteLocallyFreeOfRank
-      ((siteScalarChange T (proEtaleConstantRingMap (T := T) f)).obj L) 1 := by
+      ((proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)).obj L) 1 := by
   let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
   let R := proEtaleConstantRing T A
   let S := proEtaleConstantRing T B
@@ -734,11 +733,11 @@ theorem scalarExtensionFunctor_line
   have : L.IsInvertible := (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one L).2 hL
   have hext := (SheafOfModules.scalarExtensionDual_localIsomorphism.{u + 1, u, u + 1}
     R S (proEtaleConstantRingMap (T := T) f) L).1
-  have : ((siteScalarChange T (proEtaleConstantRingMap (T := T) f)).obj L).IsInvertible := by
-    rw [siteScalarChange_obj_eq]
+  have : ((proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)).obj L).IsInvertible := by
+    rw [proEtaleRingExtension_obj]
     exact hext
   exact (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one
-    ((siteScalarChange T (proEtaleConstantRingMap (T := T) f)).obj L)).1 inferInstance
+    ((proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)).obj L)).1 inferInstance
 
 /-- The rank-one derived computation as an explicit isomorphism to ordinary scalar tensor.
 Source: blueprint clause (3) (blueprint: det-sp-scalar-extension-functor). -/
@@ -748,13 +747,13 @@ def scalarExtensionFunctorLineIso
     (hL : L.IsFiniteLocallyFreeOfRank 1) :
     (scalarExtensionFunctor f T).obj ((DerivedCategory.singleFunctor _ 0).obj L) ≅
       (DerivedCategory.singleFunctor _ 0).obj
-        ((siteScalarChange T (proEtaleConstantRingMap (T := T) f)).obj L) :=
+        ((proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)).obj L) :=
   @asIso _ _ _ _
       (scalarExtensionFunctorCounit f T ((HomologicalComplex.single _ (.up ℤ) 0).obj L))
       (scalarExtensionFunctor_line f T L hL).1 ≪≫
     DerivedCategory.Q.mapIso
       ((HomologicalComplex.singleMapHomologicalComplex
-        (siteScalarChange T (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).app L)
+        (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).app L)
 
 /-- The finite signed Tate line, using the dependency's roots, powers, unit and duals.
 The index n denotes the positive exponent m=n+1. The quotient map a is unique.
@@ -770,7 +769,7 @@ abbrev ScalarExtensionTateMaps
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u})
     (ℓ : ℕ) [Fact ℓ.Prime] (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) :=
   ∀ r : ℤ, scalarExtensionTateLine T ℓ A n a r ⟶
-    (siteScalarRestrict T (proEtaleConstantRingMap (T := T) f)).obj
+    (proEtaleRingRestrictScalars (proEtaleConstantRingMap (T := T) f)).obj
       (scalarExtensionTateLine T ℓ B n (f.comp a) r)
 
 /-- Root tensors determine degree one; the coefficient map determines degree zero;
@@ -808,23 +807,6 @@ def IsCanonicalScalarExtensionTateMaps
       (proEtaleConstantRingMap (T := T) f).hom.app U
         ((d.app (Opposite.op (Over.mk (𝟙 U.unop)))) x)
 
-private theorem scalarExtension_rank_one_of_cover
-    {T : Scheme.{u}} {R : Sheaf (ProEt.topology T) RingCat.{u + 1}}
-    (M : SheafOfModules.{u + 1} R)
-    (hM : ∃ (I : Type (u + 1)) (U : I → T.ProEt)
-      (f : ∀ i, U i ⟶ ProEt.mk (𝟙 T)),
-      Presieve.ofArrows U f ∈ (ProEt.precoverage T).coverings _ ∧
-      ∀ i, Nonempty (M.over (U i) ≅ (SheafOfModules.unit R).over (U i))) :
-    M.IsFiniteLocallyFreeOfRank 1 := by
-  obtain ⟨I, U, f, hc, ht⟩ := hM
-  have hU : (ProEt.topology T).CoversTop U := by
-    let hT : IsTerminal (ProEt.mk (𝟙 T)) := MorphismProperty.Over.mkIdTerminal _ _
-    rw [GrothendieckTopology.coversTop_iff_of_isTerminal _ _ hT]
-    rw [← Sieve.ofArrows_eq_ofObjects hT U f]
-    exact Precoverage.generate_mem_toGrothendieck hc
-  exact (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one M).mp
-    (SheafOfModules.isInvertible_of_forall_over_unit (M := M) U hU ht)
-
 private theorem scalarExtensionTateLine_rank
     (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : T, Invertible (ℓ : T.residueField x)]
@@ -836,7 +818,7 @@ private theorem scalarExtensionTateLine_rank
   let L := purTwistRootsModule T ℓ n
   have hL : L.IsFiniteLocallyFreeOfRank 1 := by
     obtain ⟨I, U, q, hq, _, he⟩ := ((purTwistRootLocalModels T ℓ).1 n).1
-    exact scalarExtension_rank_one_of_cover L ⟨I, U, q, hq, he⟩
+    exact rank_one_of_cover L ⟨I, U, q, hq, he⟩
   have : L.IsInvertible :=
     (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one L).2 hL
   have hline := (SheafOfModules.scalarExtensionDual_localIsomorphism.{u + 1, u, u + 1}
@@ -866,29 +848,29 @@ private theorem scalarExtension_purSection
 private def scalarExtension_ordinaryIso
     (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (φ : R ⟶ S) (M : proEtaleRingModules T R) :
-    (siteScalarChange T φ).obj M ≅
+    (proEtaleRingExtension φ).obj M ≅
       SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} φ M :=
-  eqToIso (siteScalarChange_obj_eq T φ M) ≪≫
+  eqToIso (proEtaleRingExtension_obj φ M) ≪≫
     SheafOfModules.ScalarHomOrdinary.extensionIso φ M
 
 private theorem scalarExtension_ordinaryIso_one
     (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (φ : R ⟶ S) (M : proEtaleRingModules T R) (V : T.ProEtᵒᵖ) (x : M.val.obj V) :
     (scalarExtension_ordinaryIso T φ M).hom.val.app V
-        (siteScalarTensorSection T φ M V 1 x) =
+        (reductionTensorSection T φ M V 1 x) =
       SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} φ M V 1 x := by
   dsimp only [scalarExtension_ordinaryIso, Iso.trans_hom]
   have h := SheafOfModules.ScalarHomOrdinary.extensionIso_unit φ M V x
   convert h using 1
-  dsimp only [siteScalarTensorSection, scalarSiteChangeTensor]
+  dsimp only [reductionTensorSection, completedAdicChangeTensor]
   change (SheafOfModules.ScalarHomOrdinary.extensionIso φ M).hom.val.app V
-    ((eqToHom (siteScalarChange_obj_eq T φ M)).val.app V
-      ((eqToHom (siteScalarChange_obj_eq T φ M).symm).val.app V _)) = _
+    ((eqToHom (proEtaleRingExtension_obj φ M)).val.app V
+      ((eqToHom (proEtaleRingExtension_obj φ M).symm).val.app V _)) = _
   have hh := congrArg (fun z ↦ z.val.app V
     ((toSheafify (ProEt.topology T)
       (SheafOfModules.changeOfRingsPresheaf φ M).presheaf).app V
         ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] x)))
-    (eqToHom_trans (siteScalarChange_obj_eq T φ M).symm (siteScalarChange_obj_eq T φ M))
+    (eqToHom_trans (proEtaleRingExtension_obj φ M).symm (proEtaleRingExtension_obj φ M))
   exact congrArg (fun z ↦ (SheafOfModules.ScalarHomOrdinary.extensionIso φ M).hom.val.app V z)
     hh
 
@@ -897,7 +879,7 @@ private theorem scalarExtension_ordinaryIso_tmul
     (φ : R ⟶ S) (M : proEtaleRingModules T R) (V : T.ProEtᵒᵖ)
     (s : S.obj.obj V) (x : M.val.obj V) :
     (scalarExtension_ordinaryIso T φ M).hom.val.app V
-        (siteScalarTensorSection T φ M V s x) =
+        (reductionTensorSection T φ M V s x) =
       SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} φ M V s x := by
   have h := tensorSection_smul T φ M V s 1 x
   rw [mul_one] at h
@@ -911,22 +893,21 @@ private theorem scalarExtension_ordinaryIso_inv_tmul
     (s : S.obj.obj V) (x : M.val.obj V) :
     (scalarExtension_ordinaryIso T φ M).inv.val.app V
       (SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} φ M V s x) =
-        siteScalarTensorSection T φ M V s x := by
+        reductionTensorSection T φ M V s x := by
   have h := congrArg (fun y ↦ (scalarExtension_ordinaryIso T φ M).inv.val.app V y)
     (scalarExtension_ordinaryIso_tmul T φ M V s x)
-  have hh := congrArg (fun z : (siteScalarChange T φ).obj M ⟶ (siteScalarChange T φ).obj M ↦
-    z.val.app V (siteScalarTensorSection T φ M V s x))
-      (scalarExtension_ordinaryIso T φ M).hom_inv_id
+  have hh := congrArg (fun z : (proEtaleRingExtension φ).obj M ⟶ (proEtaleRingExtension φ).obj M ↦
+    z.val.app V (reductionTensorSection T φ M V s x)) (scalarExtension_ordinaryIso T φ M).hom_inv_id
   change (scalarExtension_ordinaryIso T φ M).inv.val.app V
     ((scalarExtension_ordinaryIso T φ M).hom.val.app V
-      (siteScalarTensorSection T φ M V s x)) = siteScalarTensorSection T φ M V s x at hh
+      (reductionTensorSection T φ M V s x)) = reductionTensorSection T φ M V s x at hh
   exact h.symm.trans hh
 
 private theorem scalarExtension_semilinear_dual_ext
     (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (α : R ⟶ S) (M P : proEtaleRingModules T R) (Q : proEtaleRingModules T S)
     (e : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} α P ≅ Q)
-    (c d : M ⟶ (siteScalarRestrict T α).obj
+    (c d : M ⟶ (proEtaleRingRestrictScalars α).obj
       ((SheafOfModules.homFunctor (R := S)).obj (Opposite.op Q) |>.obj
         (SheafOfModules.unit _)))
     (h : ∀ (U : T.ProEtᵒᵖ) (φ : M.val.obj U) (x : P.val.obj U),
@@ -977,8 +958,7 @@ private theorem scalarExtension_semilinear_dual_ext
   have hh := congrArg (fun z : _ ⟶ H ↦ z.val.app U
     (SheafOfModules.scalarExtensionSection α M U 1 φ)) hFG
   dsimp only [F, G] at hh
-  simp only [SheafOfModules.scalarExtensionLift_tmul, one_smul] at hh
-  with_unfolding_all exact hh
+  simpa only [SheafOfModules.scalarExtensionLift_tmul, one_smul] using hh
 
 private theorem scalarExtensionTate_degreeOne_unique
     {A B : Type u} [CommRing A] [CommRing B]
@@ -1121,7 +1101,7 @@ theorem scalarExtensionTateMaps_existsUnique
   obtain ⟨e, he⟩ := scalarExtensionTate_comparisons f T ℓ n a
   let c : ScalarExtensionTateMaps f T ℓ n a := fun r ↦
     SheafOfModules.scalarExtensionEmbedding.{u + 1, u, u + 1, u + 1} α _ ≫
-      (siteScalarRestrict T α).map (e r).hom
+      (proEtaleRingRestrictScalars α).map (e r).hom
   refine ⟨c, he, ?_⟩
   intro d hd
   funext r
@@ -1152,13 +1132,13 @@ theorem scalarExtensionTateIso_existsUnique
     (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : T, Invertible (ℓ : T.residueField x)]
     (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) (r : ℤ) :
-    ∃! e : (siteScalarChange T (proEtaleConstantRingMap (T := T) f)).obj
+    ∃! e : (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)).obj
         (scalarExtensionTateLine T ℓ A n a r) ≅
           scalarExtensionTateLine T ℓ B n (f.comp a) r,
       ∀ (U : T.ProEtᵒᵖ) (b : (proEtaleConstantRing T B).obj.obj U)
         (x : (scalarExtensionTateLine T ℓ A n a r).val.obj U),
         e.hom.val.app U
-            (siteScalarTensorSection T (proEtaleConstantRingMap (T := T) f) _ U b x) =
+            (reductionTensorSection T (proEtaleConstantRingMap (T := T) f) _ U b x) =
           b • (@id ((scalarExtensionTateLine T ℓ B n (f.comp a) r).val.obj U)
             ((scalarExtensionTateMaps f T ℓ n a r).val.app U x)) := by
   classical
@@ -1166,20 +1146,20 @@ theorem scalarExtensionTateIso_existsUnique
   obtain ⟨e, he⟩ := scalarExtensionTate_comparisons f T ℓ n a
   let c : ScalarExtensionTateMaps f T ℓ n a := fun r ↦
     SheafOfModules.scalarExtensionEmbedding.{u + 1, u, u + 1, u + 1} α _ ≫
-      (siteScalarRestrict T α).map (e r).hom
+      (proEtaleRingRestrictScalars α).map (e r).hom
   have hc : c = scalarExtensionTateMaps f T ℓ n a :=
     (scalarExtensionTateMaps_existsUnique f T ℓ n a).unique he
       (scalarExtensionTateMaps_existsUnique f T ℓ n a).exists.choose_spec
   let d := scalarExtension_ordinaryIso T α (scalarExtensionTateLine T ℓ A n a r) ≪≫ e r
   have hd : ∀ (U : T.ProEtᵒᵖ) (b : (proEtaleConstantRing T B).obj.obj U)
       (x : (scalarExtensionTateLine T ℓ A n a r).val.obj U),
-      d.hom.val.app U (siteScalarTensorSection T α _ U b x) =
+      d.hom.val.app U (reductionTensorSection T α _ U b x) =
         b • (show (scalarExtensionTateLine T ℓ B n (f.comp a) r).val.obj U from
           (scalarExtensionTateMaps f T ℓ n a r).val.app U x) := by
     intro U b x
     change (e r).hom.val.app U
       ((scalarExtension_ordinaryIso T α _).hom.val.app U
-        (siteScalarTensorSection T α _ U b x)) = _
+        (reductionTensorSection T α _ U b x)) = _
     rw [scalarExtension_ordinaryIso_tmul]
     have hs := SheafOfModules.scalarExtensionSection_smul.{u + 1, u, u + 1, u + 1}
       α (scalarExtensionTateLine T ℓ A n a r) U b 1 x
@@ -1192,7 +1172,7 @@ theorem scalarExtensionTateIso_existsUnique
   intro q hq
   apply Iso.ext
   apply (SheafOfModules.toSheaf _).map_injective
-  apply siteScalarTensor_hom_ext T α _
+  apply reductionTensor_hom_ext T α _
   intro U b x
   exact (hq U b x).trans (hd U b x).symm
 
@@ -1203,7 +1183,7 @@ def scalarExtensionTateIso
     (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : T, Invertible (ℓ : T.residueField x)]
     (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) (r : ℤ) :
-    (siteScalarChange T (proEtaleConstantRingMap (T := T) f)).obj
+    (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)).obj
         (scalarExtensionTateLine T ℓ A n a r) ≅
       scalarExtensionTateLine T ℓ B n (f.comp a) r :=
   (scalarExtensionTateIso_existsUnique f T ℓ n a r).exists.choose
@@ -1248,7 +1228,7 @@ def scalarExtensionFunctorTateIso
       (scalarExtensionFunctor_tate f T ℓ n a r).2.2 ≪≫
     DerivedCategory.Q.mapIso
       ((HomologicalComplex.singleMapHomologicalComplex
-        (siteScalarChange T (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).app
+        (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).app
           (scalarExtensionTateLine T ℓ A n a r)) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (scalarExtensionTateIso f T ℓ n a r)
 
@@ -1460,7 +1440,7 @@ private theorem scalarExtensionTate_positive_square
       (ZMod (ℓ ^ (m + 1))))
     ∀ q : ℕ,
       scalarExtensionTateMaps f T ℓ n aN (.ofNat q) ≫
-          (siteScalarRestrict T (proEtaleConstantRingMap (T := T) f)).map
+          (proEtaleRingRestrictScalars (proEtaleConstantRingMap (T := T) f)).map
             (scalarExtensionTateLevelIso T ℓ B m n hmn (f.comp a) (.ofNat q)).hom =
         (scalarExtensionTateLevelIso T ℓ A m n hmn a (.ofNat q)).hom ≫
           scalarExtensionTateMaps f T ℓ m a (.ofNat q) := by
@@ -1482,7 +1462,7 @@ private theorem scalarExtensionTate_positive_square
       (fun r ↦ (kB r).hom) :=
     scalarExtensionTateLevelIso_spec T ℓ B m n hmn (f.comp a)
   let β := proEtaleConstantRingMap (T := T) f
-  have h1 : cN 1 ≫ (siteScalarRestrict T β).map (kB 1).hom =
+  have h1 : cN 1 ≫ (proEtaleRingRestrictScalars β).map (kB 1).hom =
       (kA 1).hom ≫ cM 1 := by
     let α := tateFiniteScalar T ℓ (ULift.{u + 1, u} A) n
       (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp aN)
@@ -1527,10 +1507,10 @@ private theorem scalarExtensionTate_positive_square
           (A := proEtaleConstantRing T A) _ _ U x y))
     erw [hcN.2.2.1, hkB.2.2.1, hkA.2.2.1, hcM.2.2.1]
     have hx := congrArg (fun z : scalarExtensionTateLine T ℓ A n aN (.ofNat (q + 1)) ⟶
-      (siteScalarRestrict T β).obj
+      (proEtaleRingRestrictScalars β).obj
         (scalarExtensionTateLine T ℓ B m (f.comp a) (.ofNat (q + 1))) ↦ z.val.app U x) ih
     have hy := congrArg (fun z : scalarExtensionTateLine T ℓ A n aN 1 ⟶
-      (siteScalarRestrict T β).obj (scalarExtensionTateLine T ℓ B m (f.comp a) 1) ↦
+      (proEtaleRingRestrictScalars β).obj (scalarExtensionTateLine T ℓ B m (f.comp a) 1) ↦
         z.val.app U y) h1
     change (kB (.ofNat (q + 1))).hom.val.app U
       ((cN (.ofNat (q + 1))).val.app U x) =
@@ -1547,7 +1527,7 @@ private theorem scalarExtensionTate_semilinear_square
     let aN := a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
       (ZMod (ℓ ^ (m + 1))))
     scalarExtensionTateMaps f T ℓ n aN r ≫
-        (siteScalarRestrict T (proEtaleConstantRingMap (T := T) f)).map
+        (proEtaleRingRestrictScalars (proEtaleConstantRingMap (T := T) f)).map
           (scalarExtensionTateLevelIso T ℓ B m n hmn (f.comp a) r).hom =
       (scalarExtensionTateLevelIso T ℓ A m n hmn a r).hom ≫
         scalarExtensionTateMaps f T ℓ m a r := by
@@ -1590,7 +1570,7 @@ private theorem scalarExtensionTate_semilinear_square
       have hn := (scalarExtensionTateIso_existsUnique f T ℓ n aN
         (.ofNat (q + 1))).exists.choose_spec U 1 x
       change (scalarExtensionTateIso f T ℓ n aN (.ofNat (q + 1))).hom.val.app U
-        (siteScalarTensorSection T β P U 1 x) = _ at hn
+        (reductionTensorSection T β P U 1 x) = _ at hn
       exact congrArg ((kB (.ofNat (q + 1))).hom.val.app U)
         (by simpa only [one_smul, id, cN] using hn)
     rw [he]
@@ -1600,7 +1580,7 @@ private theorem scalarExtensionTate_semilinear_square
       ((cM (.negSucc q)).val.app U ((kA (.negSucc q)).hom.val.app U φ)).app
         (Opposite.op (Over.mk (𝟙 U.unop)))
           ((kB (.ofNat (q + 1))).hom.val.app U ((cN (.ofNat (q + 1))).val.app U x))
-    have hp := congrArg (fun z : _ ⟶ (siteScalarRestrict T β).obj Q ↦ z.val.app U x)
+    have hp := congrArg (fun z : _ ⟶ (proEtaleRingRestrictScalars β).obj Q ↦ z.val.app U x)
       (scalarExtensionTate_positive_square f T ℓ m n hmn a (q + 1))
     change (kB (.ofNat (q + 1))).hom.val.app U ((cN (.ofNat (q + 1))).val.app U x) =
       (cM (.ofNat (q + 1))).val.app U ((kA (.ofNat (q + 1))).hom.val.app U x) at hp
@@ -1619,7 +1599,7 @@ theorem scalarExtensionTateIso_exponent_naturality
     (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : T, Invertible (ℓ : T.residueField x)]
     (m n : ℕ) (hmn : m ≤ n) (a : ZMod (ℓ ^ (m + 1)) →+* A) (r : ℤ) :
-    (siteScalarChange T (proEtaleConstantRingMap (T := T) f)).map
+    (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)).map
         (scalarExtensionTateLevelIso T ℓ A m n hmn a r).hom ≫
       (scalarExtensionTateIso f T ℓ m a r).hom =
     (scalarExtensionTateIso f T ℓ n
@@ -1630,21 +1610,21 @@ theorem scalarExtensionTateIso_exponent_naturality
     (ZMod (ℓ ^ (m + 1))))
   let β := proEtaleConstantRingMap (T := T) f
   apply (SheafOfModules.toSheaf _).map_injective
-  apply siteScalarTensor_hom_ext T β (scalarExtensionTateLine T ℓ A n aN r)
+  apply reductionTensor_hom_ext T β (scalarExtensionTateLine T ℓ A n aN r)
   intro U s x
   change (scalarExtensionTateIso f T ℓ m a r).hom.val.app U
-    (((siteScalarChange T β).map
+    (((proEtaleRingExtension β).map
       (scalarExtensionTateLevelIso T ℓ A m n hmn a r).hom).val.app U
-        (siteScalarTensorSection T β _ U s x)) =
+        (reductionTensorSection T β _ U s x)) =
     (scalarExtensionTateLevelIso T ℓ B m n hmn (f.comp a) r).hom.val.app U
       ((scalarExtensionTateIso f T ℓ n aN r).hom.val.app U
-        (siteScalarTensorSection T β _ U s x))
-  erw [siteScalarTensor_map]
+        (reductionTensorSection T β _ U s x))
+  erw [reductionTensor_map]
   erw [(scalarExtensionTateIso_existsUnique f T ℓ m a r).exists.choose_spec,
     (scalarExtensionTateIso_existsUnique f T ℓ n aN r).exists.choose_spec, map_smul]
   exact congrArg (fun y ↦ s • y)
     (congrArg (fun z : scalarExtensionTateLine T ℓ A n aN r ⟶
-      (siteScalarRestrict T β).obj (scalarExtensionTateLine T ℓ B m (f.comp a) r) ↦
+      (proEtaleRingRestrictScalars β).obj (scalarExtensionTateLine T ℓ B m (f.comp a) r) ↦
         z.val.app U x) (scalarExtensionTate_semilinear_square f T ℓ m n hmn a r)).symm
 
 section TateComparisonProof
@@ -1692,7 +1672,7 @@ theorem scalarExtensionFunctor_ringMap_comp
 Source: blueprint proof (4), Stacks 0G7E, 06YY
 (blueprint: det-sp-scalar-extension-functor).
 Proof: lem-pur-kflat-change-of-rings makes P tensor B K-flat, so both counits compute
-successive extension. The published siteScalarBalance sends c tensor (b tensor p)
+successive extension. The published reductionBalance sends c tensor (b tensor p)
 to c*g(b) tensor p, with inverse inserting 1. It is natural on chain maps and
 preserves quasi-isomorphisms between K-flat models. The localization equivalence
 lem-weil-pbc-site-derived-tensor-descent descends it through roofs to the displayed
@@ -1708,8 +1688,8 @@ theorem scalarExtensionFunctor_composition_existsUnique
         α.hom.app (DerivedCategory.Q.obj P) ≫ scalarExtensionFunctorCounit (g.comp f) T P =
           (scalarExtensionFunctor g T).map (scalarExtensionFunctorCounit f T P) ≫
             scalarExtensionFunctorCounit g T
-              ((siteScalarChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P) ≫
-            DerivedCategory.Q.map (siteScalarBalance T
+              ((reductionChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P) ≫
+            DerivedCategory.Q.map (reductionBalance T
               (proEtaleConstantRingMap (T := T) f) (proEtaleConstantRingMap (T := T) g)
               (proEtaleConstantRingMap (T := T) (g.comp f))
               (scalarExtensionFunctor_ringMap_comp f g T) P) := by
@@ -1743,8 +1723,8 @@ private theorem scalarExtensionFunctor_composition_spec
             scalarExtensionFunctorCounit (g.comp f) T P =
           (scalarExtensionFunctor g T).map (scalarExtensionFunctorCounit f T P) ≫
             scalarExtensionFunctorCounit g T
-              ((siteScalarChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P) ≫
-            DerivedCategory.Q.map (siteScalarBalance T
+              ((reductionChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P) ≫
+            DerivedCategory.Q.map (reductionBalance T
               (proEtaleConstantRingMap (T := T) f) (proEtaleConstantRingMap (T := T) g)
               (proEtaleConstantRingMap (T := T) (g.comp f))
               (scalarExtensionFunctor_ringMap_comp f g T) P) :=
@@ -1858,11 +1838,11 @@ theorem scalarExtensionFunctor_identity_existsUnique
     ∃! ε : scalarExtensionFunctor (RingHom.id A) T ≅ 𝟭 _,
       ∀ (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ),
         CochainComplex.IsAcyclicTensorKFlat.{u + 1, u} (R := proEtaleConstantRing T A) P →
-        ∃ v : (siteScalarChangeComplex T
+        ∃ v : (reductionChangeComplex T
             (proEtaleConstantRingMap (T := T) (RingHom.id A))).obj P ⟶ P,
           (∀ (i : ℤ) (U : T.ProEtᵒᵖ)
             (s : (proEtaleConstantRing T A).obj.obj U) (x : (P.X i).val.obj U),
-            (v.f i).val.app U (siteScalarTensorSection T
+            (v.f i).val.app U (reductionTensorSection T
               (proEtaleConstantRingMap (T := T) (RingHom.id A)) (P.X i) U s x) = s • x) ∧
           ε.hom.app (DerivedCategory.Q.obj P) =
             scalarExtensionFunctorCounit (RingHom.id A) T P ≫ DerivedCategory.Q.map v := by
@@ -1887,7 +1867,7 @@ theorem scalarExtensionFunctor_identity_existsUnique
       apply HomologicalComplex.hom_ext
       intro i
       apply (SheafOfModules.toSheaf _).map_injective
-      apply siteScalarTensor_hom_ext T
+      apply reductionTensor_hom_ext T
         (proEtaleConstantRingMap (T := T) (RingHom.id A)) (P.X i)
       intro U s x
       exact (hv i U s x).trans (hw i U s x).symm
@@ -1927,33 +1907,33 @@ private theorem scalarExtensionFunctor_unit_coherence
     apply (scalarExtensionFunctor_composition_existsUnique f (RingHom.id B) T).unique
     · intro P hP
       obtain ⟨v, hv, hev⟩ := he
-        ((siteScalarChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P)
-      change (siteScalarChangeComplex T
+        ((reductionChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P)
+      change (reductionChangeComplex T
         (proEtaleConstantRingMap (T := T) (RingHom.id B))).obj
-          ((siteScalarChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P) ⟶
-            (siteScalarChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P at v
-      have hbal : v = siteScalarBalance T
+          ((reductionChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P) ⟶
+            (reductionChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P at v
+      have hbal : v = reductionBalance T
           (proEtaleConstantRingMap (T := T) f)
           (proEtaleConstantRingMap (T := T) (RingHom.id B))
           (proEtaleConstantRingMap (T := T) ((RingHom.id B).comp f))
           (scalarExtensionFunctor_ringMap_comp f (RingHom.id B) T) P := by
-        apply siteScalarBalance_hom_ext T
+        apply reductionBalance_hom_ext T
           (proEtaleConstantRingMap (T := T) f)
           (proEtaleConstantRingMap (T := T) (RingHom.id B))
           (proEtaleConstantRingMap (T := T) ((RingHom.id B).comp f))
           (scalarExtensionFunctor_ringMap_comp f (RingHom.id B) T) P
         intro i U s r x
-        have hv' := hv i U s (siteScalarTensorSection T
+        have hv' := hv i U s (reductionTensorSection T
           (proEtaleConstantRingMap (T := T) f) (P.X i) U r x)
         apply hv'.trans
-        erw [siteScalarBalance_tmul, tensorSection_smul]
+        erw [reductionBalance_tmul, tensorSection_smul]
         have his : (proEtaleConstantRingMap (T := T) (RingHom.id B)).hom.app U r = r :=
           congrArg (fun z ↦ z.hom.app U r) (scalarExtension_ringMap_id T B)
-        exact congrArg (fun z ↦ siteScalarTensorSection T
+        exact congrArg (fun z ↦ reductionTensorSection T
           (proEtaleConstantRingMap (T := T) f) (P.X i) U (s * z) x) his.symm
       have hn : (scalarExtensionFunctor (RingHom.id B) T).map
           (scalarExtensionFunctorCounit f T P) ≫ e.hom.app (DerivedCategory.Q.obj
-            ((siteScalarChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P)) =
+            ((reductionChangeComplex T (proEtaleConstantRingMap (T := T) f)).obj P)) =
         e.hom.app ((scalarExtensionFunctor f T).obj (DerivedCategory.Q.obj P)) ≫
           scalarExtensionFunctorCounit f T P :=
         e.hom.naturality (scalarExtensionFunctorCounit f T P)
@@ -1969,100 +1949,6 @@ private theorem scalarExtensionFunctor_unit_coherence
   erw [← hc]
   change e.hom.app ((scalarExtensionFunctor f T).obj K) ≫ 𝟙 _ = _
   erw [Category.comp_id, heid]
-
-private theorem scalarExtensionBalance_cocycle
-    (T : Scheme.{u}) {R S U V : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
-    (φ : R ⟶ S) (ψ : S ⟶ U) (θ : U ⟶ V)
-    (χ : R ⟶ U) (ω : S ⟶ V) (ζ : R ⟶ V)
-    (hχ : φ ≫ ψ = χ) (hω : ψ ≫ θ = ω)
-    (hζ : χ ≫ θ = ζ) (hζ' : φ ≫ ω = ζ)
-    (P : CochainComplex (siteScalarModules T R) ℤ) :
-    (siteScalarChangeComplex T θ).map (siteScalarBalance T φ ψ χ hχ P) ≫
-        siteScalarBalance T χ θ ζ hζ P =
-      siteScalarBalance T ψ θ ω hω ((siteScalarChangeComplex T φ).obj P) ≫
-        siteScalarBalance T φ ω ζ hζ' P := by
-  subst χ
-  subst ω
-  subst ζ
-  exact siteScalarBalance_cocycle T φ ψ θ P
-
-private theorem scalarExtensionFunctor_associativity
-    {A B C D : Type u} [CommRing A] [CommRing B] [CommRing C] [CommRing D]
-    (f : A →+* B) (g : B →+* C) (h : C →+* D) (T : Scheme.{u}) :
-    ∀ K : proEtaleDerivedCategory T A,
-      (scalarExtensionFunctor h T).map
-          ((scalarExtensionFunctor_composition f g T).hom.app K) ≫
-        (scalarExtensionFunctor_composition (g.comp f) h T).hom.app K =
-      (scalarExtensionFunctor_composition g h T).hom.app
-          ((scalarExtensionFunctor f T).obj K) ≫
-        (scalarExtensionFunctor_composition f (h.comp g) T).hom.app K := by
-  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-  let F := scalarExtensionFunctor f T
-  let G := scalarExtensionFunctor g T
-  let H := scalarExtensionFunctor h T
-  let α := scalarExtensionFunctor_composition f g T
-  let β := scalarExtensionFunctor_composition (g.comp f) h T
-  let γ := scalarExtensionFunctor_composition g h T
-  let δ := scalarExtensionFunctor_composition f (h.comp g) T
-  let lhs : (F ⋙ G) ⋙ H ⟶ scalarExtensionFunctor (h.comp (g.comp f)) T :=
-    Functor.whiskerRight α.hom H ≫ β.hom
-  let rhs : (F ⋙ G) ⋙ H ⟶ scalarExtensionFunctor (h.comp (g.comp f)) T :=
-    (Functor.associator F G H).hom ≫ Functor.whiskerLeft F γ.hom ≫ δ.hom
-  suffices heq : lhs = rhs by
-    intro K
-    simpa only [lhs, rhs, NatTrans.comp_app, Functor.whiskerRight_app,
-      Functor.whiskerLeft_app, Functor.associator_hom_app, Category.id_comp]
-      using congrArg (fun η ↦ η.app K) heq
-  apply derived_natTrans_ext.{u + 2, u + 1, u + 2, u + 2, u + 2} _ _
-    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-      (R := proEtaleConstantRing T A) P ∧ ∀ i : ℤ, exactFunctor _ _
-        (@MonoidalCategory.tensorRight _ _
-          (SheafOfModules.monoidalCategory (proEtaleConstantRing T A)) (P.X i)))
-  · intro X
-    obtain ⟨P, p, hk, hf, hp, _⟩ :=
-      CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
-        (R := proEtaleConstantRing T A) X
-    exact ⟨P, p, ⟨hk, hf⟩, hp⟩
-  · intro P hP
-    let φ := proEtaleConstantRingMap (T := T) f
-    let ψ := proEtaleConstantRingMap (T := T) g
-    let θ := proEtaleConstantRingMap (T := T) h
-    let E := (siteScalarChangeComplex T φ).obj P
-    have hE := siteScalarChange_isKFlat T φ P hP.1 hP.2
-    have nfg := (scalarExtensionFunctor_composition_spec f g T) P hP.1
-    have ngfh := (scalarExtensionFunctor_composition_spec (g.comp f) h T) P hP.1
-    have nfgh := (scalarExtensionFunctor_composition_spec f (h.comp g) T) P hP.1
-    have ngh := (scalarExtensionFunctor_composition_spec g h T) E hE
-    have hi := scalarExtensionFunctor_kflat_representation (h.comp (g.comp f)) T P hP.1
-    apply (cancel_mono (scalarExtensionFunctorCounit (h.comp (g.comp f)) T P)).1
-    dsimp only [lhs, rhs, NatTrans.comp_app, Functor.whiskerRight_app,
-      Functor.whiskerLeft_app, Functor.associator_hom_app]
-    simp only [Category.id_comp]
-    simp only [Category.assoc]
-    simp only [α, β, γ, δ, H, G, F] at *
-    have nfgH := congrArg (fun z ↦ (scalarExtensionFunctor h T).map z) nfg
-    simp only [Functor.map_comp] at nfgH
-    have nγ := γ.hom.naturality (scalarExtensionFunctorCounit f T P)
-    have nθ := scalarExtensionFunctor_map h T
-      (siteScalarBalance T φ ψ (proEtaleConstantRingMap (T := T) (g.comp f))
-        (scalarExtensionFunctor_ringMap_comp f g T) P)
-    erw [ngfh, nfgh]
-    slice_lhs 1 2 => erw [nfgH]
-    simp only [Category.assoc]
-    slice_rhs 1 2 => erw [← nγ]
-    simp only [Category.assoc]
-    slice_rhs 2 3 => erw [ngh]
-    simp only [Category.assoc]
-    slice_lhs 3 4 => erw [nθ]
-    simp only [Category.assoc]
-    congr 3
-    rw [← Functor.map_comp, ← Functor.map_comp]
-    congr 1
-    exact scalarExtensionBalance_cocycle T φ ψ θ _ _ _
-      (scalarExtensionFunctor_ringMap_comp f g T)
-      (scalarExtensionFunctor_ringMap_comp g h T)
-      (scalarExtensionFunctor_ringMap_comp (g.comp f) h T)
-      (scalarExtensionFunctor_ringMap_comp f (h.comp g) T) P
 
 attribute [local irreducible] scalarExtensionFunctor_composition
 
