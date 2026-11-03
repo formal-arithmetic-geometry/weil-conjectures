@@ -23,6 +23,15 @@ import WeilConjectures.AlgebraicGeometry.Condensed.CondensedLisseProEtaleLocalit
 import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
+public import WeilConjectures.CategoryTheory.Integral.IntegralResidueTensorPresentation
+public import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSupportDerivedLocalization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.ProEtaleFiniteProjectiveDualizable
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.ProEtalePullbackInternalHom
 
 /-!
 # Closed support and sequential derived limits
@@ -95,6 +104,72 @@ structure ClosedSupportLimitFunctorProperties
 
 open CategoryTheory.MonoidalCategory in
 open CategoryTheory.MonoidalCategory in
+
+private theorem coverRetract_dualizable
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (S : Scheme.{u}) (L : FormalSupportModules Λ S)
+    (hL : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S,
+      ∀ c : 𝒰.I₀, ∃ n : ℕ,
+        Nonempty (Retract ((formalSupportPullback Λ (𝒰.f c)).obj L)
+          (Mod.finiteFree (condensedRingObj Λ (𝒰.X c)) n))) :
+    IsDualizable L := by
+  classical
+  obtain ⟨𝒰, h𝒰⟩ := hL
+  let t := MonoidalClosed.ihomUnitTensorToIhom L L
+  have ht : IsIso t := by
+    apply ProEtale.isIso_mapMod_of_cover 𝒰 (condensedRingObj Λ S) t
+    intro c
+    have : WeaklyEtale (𝒰.f c) :=
+      Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ 𝒰.mem₀ (.mk c)
+    obtain ⟨n, ⟨r⟩⟩ := h𝒰 c
+    have hd : IsDualizable ((supportPullback Λ (𝒰.f c)).obj L) :=
+      finiteFree_retract_isDualizable Λ (𝒰.X c) n _ r.i r.r r.retract
+    obtain ⟨hd⟩ := hd
+    let M := (supportPullback Λ (𝒰.f c)).obj L
+    let : ExactPairing Mᘁ M := BraidedCategory.exactPairing_swap M Mᘁ
+    have : IsIso (MonoidalClosed.ihomUnitTensorToIhom M M) :=
+      MonoidalClosed.isIso_ihomUnitTensorToIhom Mᘁ M M
+    have := supportPullback_ihomComparison_isIso Λ (𝒰.f c) L
+    have : IsIso ((supportPullback Λ (𝒰.f c)).map t) :=
+      Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_of_ihomComparison _ _ _
+    have : IsIso ((Mod.comap
+        (asIso (condensedPullbackHom Λ (𝒰.f c))).inv).map
+          (((ProEtale.upperStar Ab.{u + 1} (𝒰.f c)).mapMod _).map t)) := this
+    exact isIso_of_reflects_iso _
+      (Mod.comap (asIso (condensedPullbackHom Λ (𝒰.f c))).inv)
+  let := MonoidalClosed.exactPairingOfIsIso L
+  let := BraidedCategory.exactPairing_swap ((ihom L).obj (𝟙_ _)) L
+  exact ⟨⟨(ihom L).obj (𝟙_ _)⟩⟩
+
+private theorem fiberProducts
+    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (I : Type*) [HasProductsOfShape I C]
+    (G J : C ⥤ C) (a : G ⟶ 𝟭 C) (b : 𝟭 C ⟶ J)
+    (δ : J ⟶ G ⋙ shiftFunctor C (1 : ℤ))
+    (h : ∀ K, Triangle.mk (a.app K) (b.app K) (δ.app K) ∈ distTriang C)
+    [PreservesLimitsOfShape (Discrete I) J] :
+    PreservesLimitsOfShape (Discrete I) G := by
+  have (K : I → C) : IsIso (piComparison G K) := by
+    let T (K : C) := Triangle.mk (a.app K) (b.app K) (δ.app K)
+    let q : T (∏ᶜ K) ⟶ productTriangle (fun t ↦ T (K t)) :=
+      productTriangle.lift _ (fun t ↦ Triangle.homMk _ _
+        (G.map (Pi.π K t)) (Pi.π K t) (J.map (Pi.π K t))
+        (by exact (a.naturality (Pi.π K t)).symm)
+        (by exact (b.naturality (Pi.π K t)).symm)
+        (by exact (δ.naturality (Pi.π K t)).symm))
+    have h₂ : IsIso q.hom₂ := by
+      change IsIso (piComparison (𝟭 C) K)
+      infer_instance
+    have h₃ : IsIso q.hom₃ := by
+      change IsIso (piComparison J K)
+      infer_instance
+    exact isIso₁_of_isIso₂₃ q (h _) (productTriangle_distinguished _ (fun t ↦ h (K t)))
+      h₂ h₃
+  have (K : I → C) : PreservesLimit (Discrete.functor K) G :=
+    PreservesProduct.of_iso_comparison G K
+  exact preservesLimitsOfShape_of_discrete G
+
 /-- Assertions that closed support and finite-free tensoring preserve products,
 fibers, and sequential derived limits. Source: Stacks Project, Tag 09AA;
 blueprint `det-formal-closed-support-ii-limits`.
