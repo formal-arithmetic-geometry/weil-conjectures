@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.style.haveILetI false
-set_option linter.flexible false
 set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 universe u w
@@ -39,6 +38,7 @@ local notation "𝓉 " E:max => fdCoefficientTransport l (pbcFiniteField.{u} l �
 set_option hygiene false in
 local notation "𝒳 " h:max => pbcExtend (pbcCompletedScalarMap l Ω T h)
 
+set_option linter.flexible false in
 private theorem otc_f {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (o : FdOrdinaryScalarTransport l Ω T h)
     (P : CochainComplex (integralTowerModules l (pbcFiniteField.{u} l Ω E) T) ℤ) (n : ℤ) :

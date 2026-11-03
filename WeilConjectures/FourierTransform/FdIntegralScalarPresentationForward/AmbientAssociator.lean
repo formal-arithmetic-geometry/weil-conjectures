@@ -17,7 +17,6 @@ representative by the ordinary tensor balancing and the derived counits.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.flexible false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -135,6 +134,7 @@ private theorem pbcExtendComp_mate (X : pbcModules T R) :
     ((pbcExtendComp φ ψ χ hc).hom.app X) = _ at h
   rw [h, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
+set_option linter.flexible false in
 private theorem pbcExtendCompC_mate (P : CochainComplex (pbcModules T R) ℤ) :
     (((pbcScalarAdjunction φ).mapHomologicalComplex (.up ℤ)).comp
         ((pbcScalarAdjunction ψ).mapHomologicalComplex (.up ℤ))).homEquiv _ _

@@ -26,6 +26,7 @@ Source: trace-definition coefficient-category comparison, integral steps 1--6.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -45,6 +46,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
     FdOrdinaryScalarTransport l Ω T h)
 
+set_option linter.style.haveILetI false in
 /-- On every integral object the comparison is the inverse derived ordinary square followed
 by the normalized ordinary-to-completed comparison. -/
 private theorem lift_formula

@@ -26,6 +26,7 @@ Source: trace-definition coefficient-category comparison, integral steps 1--6.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -45,6 +46,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
     FdOrdinaryScalarTransport l Ω T h)
 
+set_option linter.unusedSectionVars false in
 /-- The normalized derived ordinary square is compatible with the units. -/
 private theorem eD_unit (E : Padic.FiniteCoefficientFields l Ω)
     (o : FdOrdinaryScalarTransport l Ω T (le_refl E))
@@ -84,7 +86,7 @@ private theorem eD_unit (E : Padic.FiniteCoefficientFields l Ω)
     (FdIntegralScalarForward.ordinary_unit_chain l Ω T E o)
     (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
       (pbcFiniteField.{u} l Ω E) ι T) (FdIntegralScalarForward.inclusion_id l Ω E).symm).symm Y
-  all_goals first | rfl | exact HEq.rfl
+  all_goals rfl
 
 end Atoms
 

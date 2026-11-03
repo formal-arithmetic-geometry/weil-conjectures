@@ -46,7 +46,7 @@ theorem map_mateEquiv_app_comp_counit {ΦS : S ⥤ S'} {ΦV : V ⥤ V'}
   mateEquiv_counit adj₁ adj₁' φ.inv y
 
 /-- The components of a mate. -/
-theorem mateEquiv_app_eq {G : S ⥤ T} {H : V ⥤ W} (α : G ⋙ L₂ ⟶ L₁ ⋙ H) (y : V) :
+private theorem mateEquiv_app_eq {G : S ⥤ T} {H : V ⥤ W} (α : G ⋙ L₂ ⟶ L₁ ⋙ H) (y : V) :
     (mateEquiv adj₁ adj₂ α).app y =
       adj₂.unit.app (G.obj (R₁.obj y)) ≫ R₂.map (α.app (R₁.obj y)) ≫
         R₂.map (H.map (adj₁.counit.app y)) := by

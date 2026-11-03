@@ -37,8 +37,6 @@ variable {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
   [HasSheafify J Ab.{u}] [(J.W (A := Ab.{u})).IsMonoidal]
   (R : Sheaf J Ab.{u}) [MonObj R] [IsCommMonObj R]
 
-
-
 /-- Evaluation at the generator of the abelian tensor unit.
 Source: free abelian group universal property and tensor multiplication
 (blueprint: lem-zl-section-ring-global-sections). -/
@@ -57,27 +55,6 @@ def abelianGlobalEval (R : Ab.{u}) [MonObj R] :
     change (μ[R]).hom
       (f.hom.hom (ULift.up 1) ⊗ₜ[ℤ] g.hom.hom (ULift.up 1)) = _
     rfl
-
-/-- A fully faithful strong monoidal additive functor is bijective on global sections.
-Source: tensor-unit comparison and full faithfulness
-(blueprint: lem-zl-global-map-functor-bijective). -/
-theorem globalMapFunctor_bijective
-    {D E : Type*} [Category* D] [Category* E]
-    [MonoidalCategory D] [MonoidalCategory E]
-    [Preadditive D] [MonoidalPreadditive D]
-    [Preadditive E] [MonoidalPreadditive E]
-    (F : D ⥤ E) [F.Monoidal] [F.Additive]
-    (hF : F.FullyFaithful) (R : D) [MonObj R] :
-    Function.Bijective (MonObj.Γ.mapFunctor F (R := R)) := by
-  let e : MonObj.Γ R ≃ MonObj.Γ (F.obj R) :=
-    hF.homEquiv.trans (Iso.homCongr (Functor.Monoidal.εIso F).symm (Iso.refl _))
-  have he : (MonObj.Γ.mapFunctor F (R := R) : MonObj.Γ R → _) = e := by
-    funext s
-    change Functor.LaxMonoidal.ε F ≫ F.map s.hom =
-      (Functor.Monoidal.εIso F).hom ≫ F.map s.hom ≫ 𝟙 _
-    simp
-  rw [he]
-  exact e.bijective
 
 /-- Evaluate a global tensor-unit section at the canonical integer section 1.
 Source: tensor-unit universal property and the constant-sheaf adjunction
