@@ -34,6 +34,4 @@ attribute [local implicit_reducible] sourceWitness rightDerivedLowerShriek
   Etale.affineTraceOpenLeft affineTraceLineCompactification
   affineTraceTower affineTraceProjection
 
-set_option maxHeartbeats 6400000 in
--- The concrete source witness requires the displayed derived functor endpoints.
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

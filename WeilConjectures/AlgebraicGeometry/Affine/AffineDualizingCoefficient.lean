@@ -224,7 +224,6 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     OrdinaryFiniteP1Datum A N hA t T hT)
   (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (r : ℕ)
 
-include hS t in
 end Trace
 
 section Mate

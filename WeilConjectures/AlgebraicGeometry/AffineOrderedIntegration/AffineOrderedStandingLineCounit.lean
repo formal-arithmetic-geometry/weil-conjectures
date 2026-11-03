@@ -33,6 +33,4 @@ attribute [local semireducible] sourceWitness
 attribute [local implicit_reducible] sourceWitness rightDerivedLowerShriek
   Etale.affineTraceOpenLeft affineTraceLineCompactification
 
-set_option maxHeartbeats 1600000 in
--- The comparison contains concrete derived source and compact-support functors.
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

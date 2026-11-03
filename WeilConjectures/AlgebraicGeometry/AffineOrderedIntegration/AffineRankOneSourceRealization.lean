@@ -34,6 +34,4 @@ attribute [local implicit_reducible] sourceWitness rightDerivedLowerShriek
   Etale.affineTraceOpenLeft affineTraceLineCompactification
   affineTraceTower affineTraceProjection
 
-set_option maxHeartbeats 3200000 in
--- Elaborating the concrete derived-source comparison requires the larger limit.
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

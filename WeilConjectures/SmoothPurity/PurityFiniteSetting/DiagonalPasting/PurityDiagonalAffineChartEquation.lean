@@ -46,7 +46,4 @@ private theorem bifunctor_postcomp_congr {C : Type*} [Category C]
   cases hb
   rfl
 
-set_option maxHeartbeats 2000000 in
--- The chart has many canonical compactifications and derived-comparison instances.
-attribute [local irreducible] DerivedCategory instCategoryDerivedCategory in
 end WeilConjectures.PurityFiniteSetting.DiagonalPasting

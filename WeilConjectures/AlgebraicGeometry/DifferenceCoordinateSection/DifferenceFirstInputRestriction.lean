@@ -52,7 +52,4 @@ private theorem dualizing_base_comp_named
   subst b
   exact Etale.dualizing_base_comp A sq₁ sq₂
 
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 1000000 in
--- The factorization conjunction and explicit compositor terms need additional elaboration.
 end AlgebraicGeometry.ProEtale.DifferenceCoordinateSection

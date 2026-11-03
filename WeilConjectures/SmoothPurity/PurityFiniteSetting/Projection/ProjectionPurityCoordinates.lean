@@ -154,6 +154,4 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [local semireducible] AlgebraicGeometry.ProEtale.AffineSpacePurity.exceptional
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end WeilConjectures.PurityFiniteSetting

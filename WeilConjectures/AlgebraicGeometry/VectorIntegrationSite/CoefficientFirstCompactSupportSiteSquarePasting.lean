@@ -97,9 +97,6 @@ private theorem pullback_comparison_eq
   rfl
 
 attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
 private theorem compact_comparison_naturality
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (c : Compactification f)
@@ -115,9 +112,4 @@ private theorem compact_comparison_naturality
   exact (compactSupportSiteComparison A c).inv.naturality
     (ObjectProperty.homMk b : ⟨M, hM⟩ ⟶ ⟨N, hN⟩)
 
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
--- Keep the five local square proofs as lets while matching their object formulas.
-set_option cleanup.letToHave false in
 end AlgebraicGeometry.ProEtale.VectorIntegrationSite

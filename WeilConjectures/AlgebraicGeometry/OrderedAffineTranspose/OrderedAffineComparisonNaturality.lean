@@ -58,6 +58,4 @@ private theorem paste_two {Cat : Type*} [Category* Cat]
     s ≫ (a' ≫ b') = (a ≫ b) ≫ v := by
   rw [← Category.assoc, ha, Category.assoc, hb, ← Category.assoc]
 
-set_option maxHeartbeats 1600000 in
--- Compare the retained origins through the specified Hom equivalence, without unfolding it.
 end AlgebraicGeometry.ProEtale.OrderedAffineTranspose

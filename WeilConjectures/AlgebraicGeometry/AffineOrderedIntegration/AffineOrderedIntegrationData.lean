@@ -973,8 +973,6 @@ def sourceComparison (P : WeilConjectures.PurityFiniteSetting.{u})
         (coefficient P Y d) K :=
   (sourceComparison_existsUnique P Y K d).exists.choose
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 
 section GenericCoefficient
 variable (B : Type v) [Category.{u + 1} B] [Abelian B]
@@ -1170,7 +1168,5 @@ def sourceRealization (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.
   realizeTensorSource (AffineLinePurity.Ring P) (iteratedAffineLineProj Y d)
     K Ke (etaleCoefficient P Y d) eK ≪≫ (sourceComparison P Y K d).symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

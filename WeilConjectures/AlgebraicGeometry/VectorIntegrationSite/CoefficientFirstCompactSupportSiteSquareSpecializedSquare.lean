@@ -25,8 +25,4 @@ attribute [local implicit_reducible] Scheme.Modules
   Etale.rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
   derivedTensorRightDerivedLowerShriek
   rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
 end AlgebraicGeometry.ProEtale.VectorIntegrationSite

@@ -63,8 +63,4 @@ local syntax (name := finishTensorProof) "finish_tensor_proof" : tactic
 
 open Lean Meta Elab Tactic in
 open Lean Meta Elab Tactic in
-set_option linter.style.multiGoal false in
-set_option cleanup.letToHave false in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end AlgebraicGeometry.ProEtale

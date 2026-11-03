@@ -631,7 +631,6 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   _root_.DerivedCategory.singleFunctors
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem tensor_trace_counit_square
     {C D : Type*} [Category C] [Category D]
     (T : C ⥤ D) (TA : C ⥤ C ⥤ C) (TB : D ⥤ D ⥤ D)

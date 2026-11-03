@@ -604,8 +604,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local irreducible] reassociationClause chainReassociationClause
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end
 
 end AlgebraicGeometry.ProEtale.SmoothExceptionalPasting

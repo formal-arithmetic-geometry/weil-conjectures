@@ -812,8 +812,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Hom.relativeDifferentials Scheme.Hom.relativeDifferentialsDerivation
   ConormalGradedAlgebra.piece
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end
 
 section

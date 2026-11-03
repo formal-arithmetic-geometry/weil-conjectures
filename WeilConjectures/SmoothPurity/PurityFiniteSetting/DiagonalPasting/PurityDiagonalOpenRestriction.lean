@@ -77,14 +77,10 @@ variable [Y'.Over (Spec (.of P.field.k))]
 variable [LocallyOfFiniteType (Y' ↘ Spec (.of P.field.k))]
 variable [QuasiCompact (Y' ↘ Spec (.of P.field.k))]
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 end OpenRestrictionBeta
 
 open AlgebraicGeometry.ProEtale.FiniteEtaleNormalization
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 section Factor
 variable (P : PurityFiniteSetting.{u})
     {U X Y X' Y' : Scheme.{u}}
@@ -194,10 +190,6 @@ private theorem restriction_factor (hs : a ≫ f = p ≫ v) :
     (by rw [Category.assoc, Category.assoc, hs])]
   rfl
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 end Factor
 
 section Open
@@ -221,28 +213,8 @@ variable (P : PurityFiniteSetting.{u})
     (u' : X' ⟶ X) [u'.IsOver (Spec (.of P.field.k))] [IsOpenImmersion u']
     (v : Y' ⟶ Y) [v.IsOver (Spec (.of P.field.k))] [IsOpenImmersion v]
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 end Open
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 section Alpha
 variable (P : PurityFiniteSetting.{u})
     {X Y X' Y' : Scheme.{u}}
@@ -266,8 +238,6 @@ variable (P : PurityFiniteSetting.{u})
     (u' : X' ⟶ X) [u'.IsOver (Spec (.of P.field.k))] [IsOpenImmersion u']
     (v : Y' ⟶ Y) [v.IsOver (Spec (.of P.field.k))] [IsOpenImmersion v]
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 end Alpha
 
 section Triple
@@ -305,13 +275,6 @@ variable (P : PurityFiniteSetting.{u})
     [IsOpenImmersion u'] [IsOpenImmersion v] [IsOpenImmersion w]
     (hf : u' ≫ f = f' ≫ v) (hg : v ≫ g = g' ≫ w)
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
-omit [AlgebraicGeometry.IsNoetherian X] in
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 end Triple
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 end WeilConjectures.PurityFiniteSetting.DiagonalPasting

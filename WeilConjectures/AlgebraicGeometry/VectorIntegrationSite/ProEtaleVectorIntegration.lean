@@ -184,5 +184,4 @@ variable (r : ℕ)
   (hA : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)
 variable (d : ℕ) (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale.VectorIntegrationSite

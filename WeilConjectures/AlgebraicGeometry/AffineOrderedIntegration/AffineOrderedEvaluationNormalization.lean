@@ -33,6 +33,4 @@ attribute [local implicit_reducible] ordinarySourceObject
   Etale.rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
   ordinaryLower sourceEtale etaleCategory proCategory
 
-set_option maxHeartbeats 800000 in
--- Identifying the concrete derived source functors needs additional elaboration.
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

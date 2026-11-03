@@ -67,7 +67,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (hΛ : IsNativeExceptionalCoefficient ℓ Λ)
 
-include ℓ hcd hΛ in
 section AlgebraicallyClosed
 
 variable [IsAlgClosed k]

@@ -83,6 +83,4 @@ private theorem ordinaryTensorCoordinates_one_factor
           ⟨_, ordinarySource_plus P Y aY Ke hKe 1⟩).symm := by
   exact ordinaryTensorCoordinatesRaw_factor P Y aY Ke hKe 1
 
-set_option maxHeartbeats 6400000 in
--- The displayed source witness and rank-one derived coordinates need elaboration.
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

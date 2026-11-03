@@ -88,8 +88,6 @@ end Generic
 
 @[expose] public section
 
-set_option maxHeartbeats 1000000 in
--- Normalize the large exact-derived pullback and tensor comparison composites.
 end
 
 end WeilConjectures.PurityFiniteSetting

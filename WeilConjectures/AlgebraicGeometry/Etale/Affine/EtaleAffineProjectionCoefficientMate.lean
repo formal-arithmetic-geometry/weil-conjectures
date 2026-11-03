@@ -224,8 +224,4 @@ attribute [local irreducible] ProEtale.reductionSiteScalarIso
   ProEtale.reductionEtaleAffineScalarIso affineProjectionPurityIso
 
 open ProEtale in
-set_option linter.unusedTactic false in
-set_option linter.unreachableTactic false in
-set_option linter.unusedTactic false in
-set_option linter.unreachableTactic false in
 end AlgebraicGeometry.Etale

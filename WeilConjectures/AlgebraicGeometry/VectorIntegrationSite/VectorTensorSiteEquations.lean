@@ -25,5 +25,4 @@ namespace AlgebraicGeometry.ProEtale.VectorIntegrationSite
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (n : ℕ)
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale.VectorIntegrationSite

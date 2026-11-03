@@ -26,7 +26,6 @@ attribute [local implicit_reducible] Scheme.Modules
 
 -- Elaborate using the standard structures named by the Cartier aliases.
 attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
 private theorem projection_formula
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (c : Compactification f)
@@ -49,5 +48,4 @@ private theorem projection_formula
   unfold projection
   rfl
 
-attribute [-instance] Etale.cartierAbelianPro Etale.cartierAbelianEtale in
 end AlgebraicGeometry.ProEtale.VectorIntegrationSite

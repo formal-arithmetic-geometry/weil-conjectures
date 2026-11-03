@@ -580,5 +580,4 @@ attribute [local irreducible] Etale.OrdinaryAffineCounitTensorNormalization.reas
   Etale.OrdinaryAffineCounitTensorNormalization.counit
   Etale.OrdinaryAffineCounitTensorNormalization.trace
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

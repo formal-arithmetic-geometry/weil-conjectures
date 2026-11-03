@@ -442,8 +442,6 @@ attribute [local implicit_reducible] Etale.vectorBundlePurityLower
 -- This changes only the proof term; the kernel checks the result as usual.
 open Lean Meta in
 open Lean Meta Elab Tactic
-set_option linter.style.multiGoal false in
-set_option linter.unusedVariables false in
 end TensorComparisonProof
 
 /-- Root-normalized twist comparison, arbitrary scheme pullback, and exponent transitions.

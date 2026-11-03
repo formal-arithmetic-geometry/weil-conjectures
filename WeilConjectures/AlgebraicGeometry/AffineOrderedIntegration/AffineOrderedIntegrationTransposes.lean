@@ -659,7 +659,6 @@ attribute [local irreducible] coherenceCompositionDataOfChoice coherenceBoundary
   coherenceCompositionSource coherenceEtaleFunctor coherenceProEtaleFunctor coherenceSiteFunctor
   coherenceBoundedSiteFunctor
 
-set_option linter.style.haveILetI false in
 end
 
 end

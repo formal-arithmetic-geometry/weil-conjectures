@@ -37,5 +37,4 @@ variable (l : ℕ) [Fact l.Prime]
 variable (wE : DualizingDatum l X D hl E) (wL : DualizingDatum l X D hl L)
 
 -- The unchanged statement contains unused HE and DL let bindings.
-set_option linter.unusedVariables false in
 end WeilConjectures.IntegralFiniteExtension

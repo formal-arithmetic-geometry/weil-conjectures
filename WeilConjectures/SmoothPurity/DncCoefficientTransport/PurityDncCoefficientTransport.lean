@@ -65,8 +65,6 @@ theorem geometry (D : FiniteFieldDatum.{u}) {V S : Scheme.{u}}
     (NagataCompactification (Scheme.Hom.normalConeProj g s)).hasCompactification,
     inferInstance⟩
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end DncCoefficientTransport
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end WeilConjectures

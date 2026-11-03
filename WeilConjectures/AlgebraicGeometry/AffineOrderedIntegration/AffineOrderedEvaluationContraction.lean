@@ -31,6 +31,4 @@ attribute [local implicit_reducible] orderedSource exceptional lineSource twistA
 attribute [local implicit_reducible] iteratedAffineLine iteratedAffineLineProj
   etaleCategory proCategory sourceEtale
 
-set_option maxHeartbeats 1600000 in
--- The source and counit comparisons carry large derived-category instances.
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration
