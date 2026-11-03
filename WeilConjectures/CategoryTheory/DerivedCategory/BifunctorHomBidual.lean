@@ -63,12 +63,14 @@ noncomputable def eta (K : CochainComplex C ℤ) :
       (HomotopyCategory.KInjectives.Qh (C := C)).asEquivalence.counitIso.inv.app (Q.obj K))
     |>.choose
 
+omit [HasCountableProducts C] in
 lemma eta_spec (K : CochainComplex C ℤ) :
     Qh.map (eta K) = (quotientCompQhIso C).hom.app K ≫
       (HomotopyCategory.KInjectives.Qh (C := C)).asEquivalence.counitIso.inv.app (Q.obj K) :=
   (CochainComplex.IsKInjective.Qh_map_bijective ((HomotopyCategory.quotient C (.up ℤ)).obj K)
     ((R).obj (Q.obj K)).as).surjective _ |>.choose_spec
 
+omit [HasCountableProducts C] in
 lemma eta_naturality {K L : CochainComplex C ℤ} (a : K ⟶ L) :
     (HomotopyCategory.quotient C (.up ℤ)).map a ≫ eta L = eta K ≫ (R).map (Q.map a) := by
   apply (CochainComplex.IsKInjective.Qh_map_bijective _ ((R).obj (Q.obj L)).as).injective
@@ -184,7 +186,7 @@ noncomputable def bifunctorRHomBidualAux :
         (bifunctorRHomOfComplex H I).map
           (Q.map (bifunctorHomMapLeft (H := H) (Y := I) a)).op :=
       (Iso.comp_inv_eq _).2 (by rw [assoc, h2, Iso.inv_hom_id_assoc])
-    simp only [Functor.id_obj, Functor.comp_obj, Functor.rightOp_obj, Functor.comp_map,
+    simp only [Functor.comp_obj, Functor.rightOp_obj, Functor.comp_map,
       Functor.rightOp_map, assoc]
     rw [← Functor.map_comp_assoc, h1, Functor.map_comp, assoc, reassoc_of% h2',
       ← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp, h3]
@@ -206,8 +208,9 @@ lemma isIso_bifunctorRHomBidual_app_Q_obj_iff (K : CochainComplex C ℤ) :
   dsimp only [bifunctorRHomBidualAux]
   constructor
   · intro h
-    exact IsIso.of_isIso_comp_right _ ((bifunctorRHomOfComplexQObjIso H hI (bifunctorHomObj H K I)).inv ≫
-      (bifunctorRHomOfComplex H I).map (bifunctorRHomOfComplexQObjIso H hI K).hom.op)
+    exact IsIso.of_isIso_comp_right _
+      ((bifunctorRHomOfComplexQObjIso H hI (bifunctorHomObj H K I)).inv ≫
+        (bifunctorRHomOfComplex H I).map (bifunctorRHomOfComplexQObjIso H hI K).hom.op)
   · intro h
     infer_instance
 

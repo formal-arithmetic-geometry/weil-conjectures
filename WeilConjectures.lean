@@ -234,6 +234,7 @@ public import WeilConjectures.Algebra.Homology.BaseTensorLocalizationHomologyNat
 public import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryDegreeIso
 public import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 public import WeilConjectures.Algebra.Homology.BaseTensorUnitCohomologyModel
+public import WeilConjectures.Algebra.Homology.BifunctorHomBidual
 public import WeilConjectures.Algebra.Homology.BifunctorHomComplex
 public import WeilConjectures.Algebra.Homology.BifunctorHomCone
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
@@ -13530,6 +13531,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnitSingl
 public import WeilConjectures.CategoryTheory.DerivedCategory.AlgebraicClosureColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.AsFunctorLocalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHom
+public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomBidual
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomHomotopyExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.Bounded.BoundedBelowCountableHomContinuity
 public import WeilConjectures.CategoryTheory.DerivedCategory.Bounded.BoundedCohomologyConeWitness
@@ -23949,6 +23951,7 @@ public import WeilConjectures.WeilSheaf.CurveTopCohomology
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.DenseOpen
 public import WeilConjectures.WeilSheaf.DerivedHom
+public import WeilConjectures.WeilSheaf.DerivedHomConstructible
 public import WeilConjectures.WeilSheaf.DerivedHomPrecomposition
 public import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 public import WeilConjectures.WeilSheaf.DerivedHomTriangulated
@@ -24101,6 +24104,7 @@ public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorRestrictionF
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorRestrictionForgetKFlat
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorSheafComparisons
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorUnitNormalization
+public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryBiduality
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryCanonicalTensorRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryClosedTensorModels
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryKFlatLocalization
@@ -24279,6 +24283,7 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunctionWeil
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.WeilSheaf.VerdierBiduality
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization

@@ -19,7 +19,8 @@ import WeilConjectures.WeilSheaf.DerivedHomPrecomposition
 
 Let `X` be a separated `k₀`-scheme of finite type and `W` a Weil complex on `X`. The derived
 internal hom into `W` is a duality `D_W = RHom(-, W)` on Weil complexes
-(`AlgebraicGeometry.WeilComplex.dual`, by `AlgebraicGeometry.WeilComplex.objectProperty_derivedHom`).
+(`AlgebraicGeometry.WeilComplex.dual`, by
+`AlgebraicGeometry.WeilComplex.objectProperty_derivedHom`).
 This file constructs the double-dual natural transformation `𝟭 ⟶ D_W D_W`
 (`AlgebraicGeometry.WeilComplex.toDualDual`) and shows that it is an isomorphism when the
 underlying `ℓ`-adic complex of `W` on the geometric fibre `X̄` is the dualizing complex of `X̄`
@@ -74,6 +75,7 @@ namespace ProEtaleWeilSheaf
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
+omit [Fact (ringChar k₀ ≠ l)] in
 /-- The uncurried form of the biduality morphism `A ⟶ [[A, B], B]` is compatible with the Weil
 structures. -/
 lemma bidual_uncurry_str (A B : ProEtaleWeilSheaf k₀ l X) :
@@ -102,6 +104,7 @@ noncomputable def bidual (A B : ProEtaleWeilSheaf k₀ l X) :
   homToIhom A (ProEtaleWeilSheaf.ihom k₀ l X A B) B (Mod.bidual A.carrier B.carrier)
     (bidual_uncurry_str A B)
 
+omit [Fact (ringChar k₀ ≠ l)] in
 @[simp]
 lemma bidual_hom_f (A B : ProEtaleWeilSheaf k₀ l X) :
     (bidual A B).hom.f = Mod.bidual A.carrier B.carrier :=
@@ -113,10 +116,10 @@ variable (k₀ l X)
 noncomputable def bifunctorEvaluation :
     CochainComplex.BifunctorEvaluation (ihomBifunctor k₀ l X) where
   ev A B := bidual A B
-  naturality f B :=
-    ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (Mod.bidual_naturality f.hom.f B.carrier))
-  dinaturality A _ _ g :=
-    ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (Mod.bidual_comp_ihom_map A.carrier g.hom.f))
+  naturality f B := ObjectProperty.hom_ext _
+    (Endofunctor.Algebra.Hom.ext (Mod.bidual_naturality f.hom.f B.carrier))
+  dinaturality A _ _ g := ObjectProperty.hom_ext _
+    (Endofunctor.Algebra.Hom.ext (Mod.bidual_comp_ihom_map A.carrier g.hom.f))
 
 instance (J : Type) : PreservesLimitsOfShape (Discrete J)
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) :=
@@ -148,7 +151,8 @@ lemma bifunctorEvaluation_mapCompatible :
 /-- Precomposition with quasi-isomorphisms is a quasi-isomorphism of hom complexes into a
 K-injective complex of pro-étale Weil sheaves. -/
 lemma precompQuasiIso (I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) [I.IsKInjective] :
-    DerivedCategory.PrecompQuasiIso (ihomBifunctor k₀ l X) I :=
+    DerivedCategory.PrecompQuasiIso
+      (ihomBifunctor k₀ l X) I :=
   fun _ _ a _ ↦ quasiIso_bifunctorHomMapLeft a
 
 end ProEtaleWeilSheaf
