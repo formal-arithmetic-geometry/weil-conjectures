@@ -11,7 +11,7 @@ import WeilConjectures.SixFunctors.Integral.IntegralReductionTorAmplitude
 import WeilConjectures.SixFunctors.Regular.RegularQuotientRestrictionScalars
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleExactClosure
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleRestrictScalars
-import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiveTermExact
+import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Uniform constructibility and Tor bounds for finite quotient restriction

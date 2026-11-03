@@ -16706,7 +16706,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.EssImageKernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
-public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiveTermExact
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.LocalizingHomTest
