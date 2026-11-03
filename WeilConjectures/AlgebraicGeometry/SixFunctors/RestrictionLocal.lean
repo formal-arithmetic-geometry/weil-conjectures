@@ -101,11 +101,11 @@ private theorem composition_iso
     (cb : Compactification.BoundaryCompactification b)
     (cc : Compactification.BoundaryCompactification c)
     (ha : ∀ K, localizingClosureProEtale Λ A K → localizingClosureProEtale Λ B
-      ((rightDerivedLowerShriekOfCompactification Λ ca.obj.obj).obj K))
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ ca.obj.obj).obj K))
     (hb : ∀ K, localizingClosureProEtale Λ B K → localizingClosureProEtale Λ C
-      ((rightDerivedLowerShriekOfCompactification Λ cb.obj.obj).obj K))
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ cb.obj.obj).obj K))
     (hc : ∀ K, localizingClosureProEtale Λ A K → localizingClosureProEtale Λ C
-      ((rightDerivedLowerShriekOfCompactification Λ cc.obj.obj).obj K)) :
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ cc.obj.obj).obj K)) :
     Nonempty (localizingLowerShriek Λ ca.obj.obj ha ⋙
       localizingLowerShriek Λ cb.obj.obj hb ≅ localizingLowerShriek Λ cc.obj.obj hc) := by
   subst c
@@ -193,7 +193,7 @@ private theorem open_adjunction
           (((localizingClosureProEtale Λ X).ι ⋙
             (CondensedRing.upperStar Λ j).leftDerivedFunctor).obj K))
       (ht : ∀ K, localizingClosureProEtale Λ U K → localizingClosureProEtale Λ X
-        ((rightDerivedLowerShriekOfCompactification Λ
+        ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ
           (Compactification.ofIsOpenImmersion j)).obj K)),
       Nonempty (localizingLowerShriek Λ (Compactification.ofIsOpenImmersion j) ht ⊣
         (localizingClosureProEtale Λ U).lift
@@ -327,9 +327,9 @@ private theorem coefficient_preservation
     (e : Mon.mk Λ ≅ Mon.mk Λ') {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification.BoundaryCompactification f)
     (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y
-      ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
     (h' : ∀ K, localizingClosureProEtale Λ' X K → localizingClosureProEtale Λ' Y
-      ((rightDerivedLowerShriekOfCompactification Λ' c.obj.obj).obj K))
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ' c.obj.obj).obj K))
     (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤
       (localizingClosureProEtale Λ X).FullSubcategory)
     (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G)
@@ -387,7 +387,7 @@ private theorem affine_preserves_canonical
       ((AffineSpace.over (ULift.{u} (Fin d)) V).hom))
     (h : ∀ K, localizingClosureProEtale Λ (AffineSpace (ULift.{u} (Fin d)) V) K →
       localizingClosureProEtale Λ V
-        ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
+        ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
     (G : (localizingClosureProEtale Λ V).FullSubcategory ⥤
       (localizingClosureProEtale Λ (AffineSpace (ULift.{u} (Fin d)) V)).FullSubcategory)
     (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) :
@@ -429,7 +429,8 @@ private theorem affine_preserves_canonical
     (AffineSpace.over (ULift.{u} (Fin d)) V).hom
   have eC : localizingLowerShriek Λ c.obj.obj h ⋙ (localizingClosureProEtale Λ V).ι ≅
       (localizingClosureProEtale Λ A).ι ⋙
-        rightDerivedLowerShriekOfCompactification Λ (affineSpaceChosenCompactification k V d) :=
+        CondensedRing.rightDerivedLowerShriekOfCompactification Λ
+          (affineSpaceChosenCompactification k V d) :=
     φ c c₀
   have hi := (constantModelConstructibleFiniteTor_wellDefined Λ A).2.1
   let := hi
@@ -459,7 +460,7 @@ private theorem affine_preserves
       ((AffineSpace.over (ULift.{u} (Fin d)) V).hom))
     (h : ∀ K, localizingClosureProEtale Λ (AffineSpace (ULift.{u} (Fin d)) V) K →
       localizingClosureProEtale Λ V
-        ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
+        ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
     (G : (localizingClosureProEtale Λ V).FullSubcategory ⥤
       (localizingClosureProEtale Λ (AffineSpace (ULift.{u} (Fin d)) V)).FullSubcategory)
     (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) :
@@ -521,7 +522,7 @@ private theorem closed_preserves
     (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]
     (c : Compactification.BoundaryCompactification i)
     (h : ∀ K, localizingClosureProEtale Λ Z K → localizingClosureProEtale Λ X
-      ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
     (G : (localizingClosureProEtale Λ X).FullSubcategory ⥤
       (localizingClosureProEtale Λ Z).FullSubcategory)
     (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) :
@@ -541,7 +542,7 @@ private theorem closed_preserves
   let c₀ : Compactification.BoundaryCompactification i :=
     ⟨⟨Compactification.ofIsProper i, by change QuasiCompact (𝟙 Z); infer_instance⟩⟩
   obtain ⟨φ, _⟩ := compactification_coherence_cocycle Λ ℓ hadm k i
-  let norm : rightDerivedLowerShriekOfCompactification Λ c₀.obj.obj ≅
+  let norm : CondensedRing.rightDerivedLowerShriekOfCompactification Λ c₀.obj.obj ≅
       (CondensedRing.lowerStar Λ i).mapDerivedCategory :=
     Functor.isoWhiskerRight (derivedOpenImmersionLowerShriekId Λ Z)
       (CondensedRing.lowerStar Λ i).rightDerivedFunctor ≪≫
