@@ -20,6 +20,10 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import WeilConjectures.Mathlib.FieldTheory.Finite.GaloisField
+public import Mathlib.FieldTheory.Finite.Basic
+public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import WeilConjectures.Compactification.FiniteFieldDatum.TraceFormulaSchemeFrobeniusGeometry
+public import WeilConjectures.TraceFormula.FixedSchemeGeometry
 
 /-!
 # Affine presentations of the Frobenius equalizer
@@ -343,7 +347,7 @@ private theorem tensorFrobenius_chart (D : FiniteFieldDatum.{u})
     [QuasiCompact (model D A).hom] (m : ℕ) :
     Spec.map (CommRingCat.ofHom (tensorFrobenius D A m).toRingHom) ≫
         (pullbackSpecIso D.k₀ A D.k).inv =
-      (pullbackSpecIso D.k₀ A D.k).inv ≫ D.schemeFrobeniusIterate (model D A) m := by
+      (pullbackSpecIso D.k₀ A D.k).inv ≫ D.coefficientFreeSchemeFrobeniusIterate (model D A) m := by
   classical
   let : Fintype D.k₀ := Fintype.ofFinite D.k₀
   have : LocallyOfFiniteType
@@ -351,9 +355,9 @@ private theorem tensorFrobenius_chart (D : FiniteFieldDatum.{u})
     inferInstanceAs (LocallyOfFiniteType (model D A).hom)
   have hone : Spec.map (CommRingCat.ofHom (tensorFrobenius D A 1).toRingHom) ≫
       (pullbackSpecIso D.k₀ A D.k).inv =
-      (pullbackSpecIso D.k₀ A D.k).inv ≫ D.schemeFrobenius (model D A) := by
+      (pullbackSpecIso D.k₀ A D.k).inv ≫ D.coefficientFreeSchemeFrobenius (model D A) := by
     rw [← cancel_mono (pullbackSpecIso D.k₀ A D.k).hom]
-    simpa [tensorFrobenius, schemeFrobenius, model, Category.assoc] using
+    simpa [tensorFrobenius, coefficientFreeSchemeFrobenius, model, Category.assoc] using
       (D.relativeFrobenius_affine A).symm
   have hzero : tensorFrobenius D A 0 = AlgHom.id D.k₀ _ := by
     apply AlgHom.ext
@@ -382,20 +386,20 @@ private theorem tensorFrobenius_chart (D : FiniteFieldDatum.{u})
       rw [← Spec.map_comp, hsucc]
       rfl
     rw [hs, Category.assoc, ih, ← Category.assoc, hone, Category.assoc]
-    simp only [schemeFrobeniusIterate, pow_succ, End.mul_def]
+    simp only [coefficientFreeSchemeFrobeniusIterate, pow_succ, End.mul_def]
 
 /-- Affine equalizers are spectra of the quotient by all endomorphism differences. -/
 private theorem affine_fixed_iso (D : FiniteFieldDatum.{u})
     (X : Over (Spec (.of D.k))) (h : X ⟶ X) (R : CommRingCat.{u})
     (φ : R →+* R) (j : Spec R ⟶ X.left) [Mono j]
     (hc : Spec.map (CommRingCat.ofHom φ) ≫ j = j ≫ h.left) :
-    ∃ e : pullback (WeilConjectures.trfEndomorphismFixedInclusion X h) j ≅
+    ∃ e : pullback (WeilConjectures.geometricEndomorphismFixedInclusion X h) j ≅
         Spec (.of (R ⧸ Ideal.span (Set.range (fun b ↦ φ b - b)))),
       e.hom ≫ Spec.map (CommRingCat.ofHom
         (Ideal.Quotient.mk (Ideal.span (Set.range (fun b ↦ φ b - b))))) =
-          pullback.snd (WeilConjectures.trfEndomorphismFixedInclusion X h) j := by
+          pullback.snd (WeilConjectures.geometricEndomorphismFixedInclusion X h) j := by
   let J : Ideal R := Ideal.span (Set.range (fun b ↦ φ b - b))
-  let i := WeilConjectures.trfEndomorphismFixedInclusion X h
+  let i := WeilConjectures.geometricEndomorphismFixedInclusion X h
   let P := pullback i j
   let g : P ⟶ Spec R := pullback.snd i j
   let q : Spec (.of (R ⧸ J)) ⟶ Spec R :=
@@ -404,7 +408,7 @@ private theorem affine_fixed_iso (D : FiniteFieldDatum.{u})
   have hg : g ≫ Spec.map (CommRingCat.ofHom φ) = g := by
     apply (cancel_mono j).mp
     rw [Category.assoc, hc, ← Category.assoc, ← pullback.condition]
-    exact (WeilConjectures.trfEndomorphismFixedScheme_equalizer X h P
+    exact (WeilConjectures.geometricEndomorphismFixedScheme_equalizer X h P
       (pullback.fst i j ≫ i)).1 (pullback.fst i j)
   have hJ : J ≤ RingHom.ker ((Scheme.ΓSpecIso R).inv ≫ g.appTop).hom := by
     apply Ideal.span_le.mpr
@@ -427,7 +431,7 @@ private theorem affine_fixed_iso (D : FiniteFieldDatum.{u})
   have ht : (q ≫ j) ≫ h.left = q ≫ j := by
     rw [Category.assoc, ← hc, ← Category.assoc, hq]
   obtain ⟨t, ht, _⟩ :=
-    (WeilConjectures.trfEndomorphismFixedScheme_equalizer X h _ (q ≫ j)).2.mpr ht
+    (WeilConjectures.geometricEndomorphismFixedScheme_equalizer X h _ (q ≫ j)).2.mpr ht
   let b : Spec (.of (R ⧸ J)) ⟶ P := pullback.lift t q ht
   have hb : b ≫ g = q := pullback.lift_snd _ _ _
   refine ⟨⟨a, b, ?_, ?_⟩, ha⟩
@@ -458,22 +462,22 @@ theorem geometry_helper (D : FiniteFieldDatum.{u}) (X₀ : Over (Spec (.of D.k�
     (∀ U : X₀.left.Opens,
       X₀.left.iterateFrobenius D.prime (D.model_characteristic X₀.hom) (D.a * m) ⁻¹ᵁ U = U) ∧
     ∃ h : D.geometricFiber X₀ ⟶ D.geometricFiber X₀,
-      h.left = D.schemeFrobeniusIterate X₀ m ∧
+      h.left = D.coefficientFreeSchemeFrobeniusIterate X₀ m ∧
       ∀ (A : CommAlgCat.{u} D.k₀) (j : model D A ⟶ X₀), IsOpenImmersion j.left →
         (Spec.map (CommRingCat.ofHom (tensorFrobenius D A m).toRingHom) ≫
             chartMap D X₀ A j = chartMap D X₀ A j ≫ h.left) ∧
         (h.left ⁻¹' Set.range (chartMap D X₀ A j) = Set.range (chartMap D X₀ A j)) ∧
-        (∃ e : pullback (WeilConjectures.trfEndomorphismFixedInclusion
+        (∃ e : pullback (WeilConjectures.geometricEndomorphismFixedInclusion
           (D.geometricFiber X₀) h) (chartMap D X₀ A j) ≅
           Spec (.of ((A ⊗[D.k₀] D.k) ⧸ differenceIdeal D A m)),
           e.hom ≫ Spec.map (CommRingCat.ofHom
             (Ideal.Quotient.mk (differenceIdeal D A m))) =
-            pullback.snd (WeilConjectures.trfEndomorphismFixedInclusion
+            pullback.snd (WeilConjectures.geometricEndomorphismFixedInclusion
               (D.geometricFiber X₀) h) (chartMap D X₀ A j)) := by
   classical
   let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
   let B := Over.pullback b
-  let Φ : End (pullback X₀.hom b) := D.schemeFrobenius X₀
+  let Φ : End (pullback X₀.hom b) := D.coefficientFreeSchemeFrobenius X₀
   have hbase (n : ℕ) : (Φ ^ n) ≫ (D.geometricFiber X₀).hom =
       (D.geometricFiber X₀).hom := by
     induction n with
@@ -510,8 +514,8 @@ theorem geometry_helper (D : FiniteFieldDatum.{u}) (X₀ : Over (Spec (.of D.k�
   have hcomm : Spec.map (CommRingCat.ofHom (tensorFrobenius D A m).toRingHom) ≫
       chartMap D X₀ A j = chartMap D X₀ A j ≫ h.left := by
     have hs := (D.frobenius_open_square (model D A) X₀ j m).1.w
-    change D.schemeFrobeniusIterate (model D A) m ≫ J =
-      J ≫ D.schemeFrobeniusIterate X₀ m at hs
+    change D.coefficientFreeSchemeFrobeniusIterate (model D A) m ≫ J =
+      J ≫ D.coefficientFreeSchemeFrobeniusIterate X₀ m at hs
     change _ ≫ ((pullbackSpecIso D.k₀ A D.k).inv ≫ J) =
       ((pullbackSpecIso D.k₀ A D.k).inv ≫ J) ≫ _
     rw [← Category.assoc, tensorFrobenius_chart, Category.assoc, hs, Category.assoc]
@@ -539,7 +543,6 @@ theorem geometry_helper (D : FiniteFieldDatum.{u}) (X₀ : Over (Spec (.of D.k�
   ext x
   exact Iff.of_eq (congrArg (fun z ↦ z ∈ Set.range j.left) (hpow m x))
 
-
 /-- Coordinate and restriction part of the affine equalizer presentation.
 For a polynomial presentation, coefficient extension and the tensor universal
 property construct the scalar-extended polynomial quotient equivalence. Pure
@@ -556,12 +559,12 @@ theorem algebra_helper (D : FiniteFieldDatum.{u})
     [QuasiCompact X₀.hom] (m : ℕ) (_hm : 1 ≤ m)
     (h : D.geometricFiber X₀ ⟶ D.geometricFiber X₀)
     (A : CommAlgCat.{u} D.k₀) (j : model D A ⟶ X₀) (hj : IsOpenImmersion j.left)
-    (e : pullback (WeilConjectures.trfEndomorphismFixedInclusion
+    (e : pullback (WeilConjectures.geometricEndomorphismFixedInclusion
       (D.geometricFiber X₀) h) (chartMap D X₀ A j) ≅
       Spec (.of ((A ⊗[D.k₀] D.k) ⧸ differenceIdeal D A m)))
     (he : e.hom ≫ Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (differenceIdeal D A m))) =
-      pullback.snd (WeilConjectures.trfEndomorphismFixedInclusion
+      pullback.snd (WeilConjectures.geometricEndomorphismFixedInclusion
         (D.geometricFiber X₀) h) (chartMap D X₀ A j)) :
     (∀ (r : ℕ) (a : Ideal (MvPolynomial (Fin r) D.k₀))
       (p : (MvPolynomial (Fin r) D.k₀ ⧸ a) ≃ₐ[D.k₀] A),
@@ -580,7 +583,7 @@ theorem algebra_helper (D : FiniteFieldDatum.{u})
               (p (Ideal.Quotient.mk a f) ⊗ₜ c)) =
               Ideal.Quotient.mk (extendedIdeal D r a ⊔ powerIdeal D m r)
                 (MvPolynomial.map (algebraMap D.k₀ D.k) f * MvPolynomial.C c)) ∧
-          (∃ ep : pullback (WeilConjectures.trfEndomorphismFixedInclusion
+          (∃ ep : pullback (WeilConjectures.geometricEndomorphismFixedInclusion
             (D.geometricFiber X₀) h) (chartMap D X₀ A j) ≅
             Spec (.of (MvPolynomial (Fin r) D.k ⧸
               (extendedIdeal D r a ⊔ powerIdeal D m r))),
@@ -588,12 +591,12 @@ theorem algebra_helper (D : FiniteFieldDatum.{u})
           (∀ (A' : CommAlgCat.{u} D.k₀) (j' : model D A' ⟶ X₀)
             (f : A →ₐ[D.k₀] A'), IsOpenImmersion j'.left →
             Spec.map (CommRingCat.ofHom f.toRingHom) ≫ j.left = j'.left →
-            ∀ e' : pullback (WeilConjectures.trfEndomorphismFixedInclusion
+            ∀ e' : pullback (WeilConjectures.geometricEndomorphismFixedInclusion
               (D.geometricFiber X₀) h) (chartMap D X₀ A' j') ≅
               Spec (.of ((A' ⊗[D.k₀] D.k) ⧸ differenceIdeal D A' m)),
             e'.hom ≫ Spec.map (CommRingCat.ofHom
               (Ideal.Quotient.mk (differenceIdeal D A' m))) =
-              pullback.snd (WeilConjectures.trfEndomorphismFixedInclusion
+              pullback.snd (WeilConjectures.geometricEndomorphismFixedInclusion
                 (D.geometricFiber X₀) h) (chartMap D X₀ A' j') →
             ∃ ρ : ((A ⊗[D.k₀] D.k) ⧸ differenceIdeal D A m) →+*
               ((A' ⊗[D.k₀] D.k) ⧸ differenceIdeal D A' m),
@@ -601,17 +604,17 @@ theorem algebra_helper (D : FiniteFieldDatum.{u})
                 ρ (Ideal.Quotient.mk (differenceIdeal D A m) b) =
                   Ideal.Quotient.mk (differenceIdeal D A' m)
                     (Algebra.TensorProduct.map f (AlgHom.id D.k₀ D.k) b)) ∧
-              ∃ s : pullback (WeilConjectures.trfEndomorphismFixedInclusion
+              ∃ s : pullback (WeilConjectures.geometricEndomorphismFixedInclusion
                 (D.geometricFiber X₀) h) (chartMap D X₀ A' j') ⟶
-                pullback (WeilConjectures.trfEndomorphismFixedInclusion
+                pullback (WeilConjectures.geometricEndomorphismFixedInclusion
                   (D.geometricFiber X₀) h) (chartMap D X₀ A j),
-                s ≫ pullback.fst (WeilConjectures.trfEndomorphismFixedInclusion
+                s ≫ pullback.fst (WeilConjectures.geometricEndomorphismFixedInclusion
                   (D.geometricFiber X₀) h) (chartMap D X₀ A j) =
-                  pullback.fst (WeilConjectures.trfEndomorphismFixedInclusion
+                  pullback.fst (WeilConjectures.geometricEndomorphismFixedInclusion
                     (D.geometricFiber X₀) h) (chartMap D X₀ A' j') ∧
-                s ≫ pullback.snd (WeilConjectures.trfEndomorphismFixedInclusion
+                s ≫ pullback.snd (WeilConjectures.geometricEndomorphismFixedInclusion
                   (D.geometricFiber X₀) h) (chartMap D X₀ A j) =
-                  pullback.snd (WeilConjectures.trfEndomorphismFixedInclusion
+                  pullback.snd (WeilConjectures.geometricEndomorphismFixedInclusion
                     (D.geometricFiber X₀) h) (chartMap D X₀ A' j') ≫
                     Spec.map (CommRingCat.ofHom
                       (Algebra.TensorProduct.map f (AlgHom.id D.k₀ D.k)).toRingHom) ∧
@@ -649,10 +652,10 @@ theorem algebra_helper (D : FiniteFieldDatum.{u})
         pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom T.toRingHom) := by
       rw [← he, ← Category.assoc, hs, Category.assoc, hρ, ← Category.assoc, he']
     refine ⟨ρ, (fun b ↦ rfl), s, ?_, hsnd, hs⟩
-    have : Mono (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) :=
+    have : Mono (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h) :=
       inferInstanceAs (Mono (pullback.fst _ _))
     apply (cancel_mono
-      (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h)).mp
+      (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h)).mp
     rw [Category.assoc, pullback.condition, ← Category.assoc, hsnd, Category.assoc,
       chartMap_natural D X₀ A A' j j' f hf, ← pullback.condition]
 
@@ -697,15 +700,18 @@ theorem presentation (D : FiniteFieldDatum.{u}) (X₀ : Over (Spec (.of D.k₀))
     D.k₀) (j : ∀ i, model D (A i) ⟶ X₀), (∀ i, Algebra.FiniteType D.k₀ (A i) ∧ IsOpenImmersion (j
     i).left) ∧ (∀ x : X₀.left, ∃ i, x ∈ Set.range (j i).left)) ∧ (∀ U : X₀.left.Opens,
     X₀.left.iterateFrobenius D.prime (D.model_characteristic X₀.hom) (D.a * m) ⁻¹ᵁ U = U) ∧ ∃ h :
-    D.geometricFiber X₀ ⟶ D.geometricFiber X₀, h.left = D.schemeFrobeniusIterate X₀ m ∧ ∀ (A :
+    D.geometricFiber X₀ ⟶ D.geometricFiber X₀,
+    h.left = D.coefficientFreeSchemeFrobeniusIterate X₀ m ∧ ∀ (A :
     CommAlgCat.{u} D.k₀) (j : model D A ⟶ X₀), IsOpenImmersion j.left → (∀ a : A, ∀ c : D.k,
     tensorFrobenius D A m (a ⊗ₜ c) = (a ^ (D.q ^ m)) ⊗ₜ c) ∧ (Spec.map (CommRingCat.ofHom
     (tensorFrobenius D A m).toRingHom) ≫ chartMap D X₀ A j = chartMap D X₀ A j ≫ h.left) ∧ (h.left
     ⁻¹' Set.range (chartMap D X₀ A j) = Set.range (chartMap D X₀ A j)) ∧ ∃ e : pullback
-    (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀ A j) ≅
+    (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀ A
+      j) ≅
     Spec (.of ((A ⊗[D.k₀] D.k) ⧸ differenceIdeal D A m)), e.hom ≫ Spec.map (CommRingCat.ofHom
     (Ideal.Quotient.mk (differenceIdeal D A m))) = pullback.snd
-    (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀ A j) ∧ (∀
+    (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀ A
+      j) ∧ (∀
     (r : ℕ) (a : Ideal (MvPolynomial (Fin r) D.k₀)) (p : (MvPolynomial (Fin r) D.k₀ ⧸ a) ≃ₐ[D.k₀]
     A), ∃ θ : (A ⊗[D.k₀] D.k) ≃+* (MvPolynomial (Fin r) D.k ⧸ extendedIdeal D r a), (∀ f :
     MvPolynomial (Fin r) D.k₀, ∀ c : D.k, θ (p (Ideal.Quotient.mk a f) ⊗ₜ c) = Ideal.Quotient.mk
@@ -715,25 +721,33 @@ theorem presentation (D : FiniteFieldDatum.{u}) (X₀ : Over (Spec (.of D.k₀))
     r) D.k ⧸ (extendedIdeal D r a ⊔ powerIdeal D m r)), (∀ f : MvPolynomial (Fin r) D.k₀, ∀ c : D.k,
     ν (Ideal.Quotient.mk (differenceIdeal D A m) (p (Ideal.Quotient.mk a f) ⊗ₜ c)) =
     Ideal.Quotient.mk (extendedIdeal D r a ⊔ powerIdeal D m r) (MvPolynomial.map (algebraMap D.k₀
-    D.k) f * MvPolynomial.C c)) ∧ ∃ ep : pullback (WeilConjectures.trfEndomorphismFixedInclusion
+    D.k) f * MvPolynomial.C c)) ∧ ∃ ep : pullback
+      (WeilConjectures.geometricEndomorphismFixedInclusion
     (D.geometricFiber X₀) h) (chartMap D X₀ A j) ≅ Spec (.of (MvPolynomial (Fin r) D.k ⧸
     (extendedIdeal D r a ⊔ powerIdeal D m r))), ep.hom = e.hom ≫ Spec.map (CommRingCat.ofHom
     ν.symm.toRingHom)) ∧ (∀ (A' : CommAlgCat.{u} D.k₀) (j' : model D A' ⟶ X₀) (f : A →ₐ[D.k₀] A'),
     IsOpenImmersion j'.left → Spec.map (CommRingCat.ofHom f.toRingHom) ≫ j.left = j'.left → ∀ e' :
-    pullback (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀
+    pullback (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h)
+      (chartMap D X₀
     A' j') ≅ Spec (.of ((A' ⊗[D.k₀] D.k) ⧸ differenceIdeal D A' m)), e'.hom ≫ Spec.map
     (CommRingCat.ofHom (Ideal.Quotient.mk (differenceIdeal D A' m))) = pullback.snd
-    (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀ A' j') →
+    (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀
+      A' j') →
     ∃ ρ : ((A ⊗[D.k₀] D.k) ⧸ differenceIdeal D A m) →+* ((A' ⊗[D.k₀] D.k) ⧸ differenceIdeal D A' m),
     (∀ b : A ⊗[D.k₀] D.k, ρ (Ideal.Quotient.mk (differenceIdeal D A m) b) = Ideal.Quotient.mk
     (differenceIdeal D A' m) (Algebra.TensorProduct.map f (AlgHom.id D.k₀ D.k) b)) ∧ ∃ s : pullback
-    (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀ A' j') ⟶
-    pullback (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀
-    A j), s ≫ pullback.fst (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h)
-    (chartMap D X₀ A j) = pullback.fst (WeilConjectures.trfEndomorphismFixedInclusion
+    (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀
+      A' j') ⟶
+    pullback (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h)
+      (chartMap D X₀
+    A j), s ≫ pullback.fst (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber
+      X₀) h)
+    (chartMap D X₀ A j) = pullback.fst (WeilConjectures.geometricEndomorphismFixedInclusion
     (D.geometricFiber X₀) h) (chartMap D X₀ A' j') ∧ s ≫ pullback.snd
-    (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀ A j) =
-    pullback.snd (WeilConjectures.trfEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D
+    (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h) (chartMap D X₀ A
+      j) =
+    pullback.snd (WeilConjectures.geometricEndomorphismFixedInclusion (D.geometricFiber X₀) h)
+      (chartMap D
     X₀ A' j') ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.map f (AlgHom.id D.k₀
     D.k)).toRingHom) ∧ s ≫ e.hom = e'.hom ≫ Spec.map (CommRingCat.ofHom ρ)) := by
   rcases geometry_helper D X₀ m _hm with ⟨hc, hs, h, hh, hall⟩

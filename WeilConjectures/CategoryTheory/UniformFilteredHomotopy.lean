@@ -36,6 +36,13 @@ open Limits
 
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
+/-- The four cochain conditions stable under shifts and mapping cones.
+Source: Stacks, Tags 05S4--05S6
+(blueprint: def-trf-uniform-filtered-homotopy-category). -/
+def IsUniformCochainCondition (P : ObjectProperty (CochainComplex C ℤ)) : Prop :=
+  P = (fun _ ↦ True) ∨ P = CochainComplex.plus C ∨ P = CochainComplex.minus C ∨
+    P = uniformCochainBounded
+
 /-- A chain homotopy preserving every filtration step, including all its components.
 Source: Stacks, Section 13.13, before Tag 05S1
 (blueprint: def-trf-uniform-filtered-homotopy-category). -/
@@ -98,6 +105,25 @@ def uniformFilteredHomotopyQuasiIso (B : Option (ℤ × ℤ))
     MorphismProperty (UniformFilteredHomotopyCategory C B P) := fun {K L} f ↦
   ∃ g : K.as ⟶ L.as, (uniformFilteredHomotopyQ B P).map g = f ∧
     uniformFilteredQuasiIso B P g
+
+/-- The graded quasi-isomorphisms on chain maps are exactly the inverse image of
+those on filtered homotopy classes.
+Source: Stacks, Tag 05S2. One implication uses the same representative. For the
+other, any representative of the class is filtered homotopic to the given map;
+graded homotopy invariance transfers its quasi-isomorphism condition.
+(blueprint: def-trf-uniform-filtered-homotopy-category). -/
+theorem uniformFilteredHomotopyQuasiIso_inverseImage
+    (B : Option (ℤ × ℤ)) (P : ObjectProperty (CochainComplex C ℤ)) :
+    uniformFilteredQuasiIso B P =
+      (uniformFilteredHomotopyQuasiIso B P).inverseImage (uniformFilteredHomotopyQ B P) := by
+  ext K L f
+  constructor
+  · intro hf
+    exact ⟨f, rfl, hf⟩
+  · rintro ⟨g, hg, hgW⟩
+    have h : UniformFilteredHomotopy g.hom f.hom :=
+      (CategoryTheory.Quotient.functor_map_eq_iff _ g f).1 hg
+    exact h.quasiIso_iff.mp hgW
 
 end CategoryTheory
 

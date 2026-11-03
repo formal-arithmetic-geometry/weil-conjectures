@@ -62,4 +62,11 @@ def uniformFilteredQuasiIso (B : Option (ℤ × ℤ))
     MorphismProperty (UniformFilteredComplexes C B P) := fun _ _ f ↦
   ∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps f.hom p)
 
+/-- Bounded cochain support, with the existing bounded-below and bounded-above
+predicates `CochainComplex.plus` and `CochainComplex.minus`.
+Source: Stacks, Tag 05S4
+(blueprint: def-trf-uniform-finite-filtered-localization). -/
+def uniformCochainBounded : ObjectProperty (CochainComplex C ℤ) :=
+  fun K ↦ CochainComplex.plus C K ∧ CochainComplex.minus C K
+
 end CategoryTheory

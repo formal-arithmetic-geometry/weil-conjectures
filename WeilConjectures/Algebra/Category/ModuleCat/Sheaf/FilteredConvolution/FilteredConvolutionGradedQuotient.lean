@@ -129,6 +129,144 @@ theorem graded_quotient
   intro β hβ
   exact huniq β hβ.1
 
+private theorem restriction_arrow {P P' : Complex R}
+    {F : DecreasingFiltration P} {F' : DecreasingFiltration P'}
+    (f : FilteredObject.Hom ⟨P, F⟩ ⟨P', F'⟩) (p : ℤ) :
+    FilteredObject.restrictionSteps f p ≫ (F'.F p).arrow = (F.F p).arrow ≫ f.hom :=
+  Classical.choose_spec (f.preserves p)
+
+private theorem projection_graded {P P' : Complex R}
+    {F : DecreasingFiltration P} {F' : DecreasingFiltration P'}
+    (f : FilteredObject.Hom ⟨P, F⟩ ⟨P', F'⟩) (p : ℤ) :
+    F.complexQuotientπ p (p + 1) (by omega) ≫ FilteredObject.gradedMapSteps f p =
+      FilteredObject.restrictionSteps f p ≫ F'.complexQuotientπ p (p + 1) (by omega) :=
+  Classical.choose_spec (FilteredObject.exists_gradedMap_steps _ _ f p)
+
+private theorem tensor_epi {A B D E : Complex R} (f : A ⟶ B) (g : D ⟶ E)
+    [Epi f] [Epi g] : Epi (f ⊗ₘ g) := by
+  apply HomologicalComplex.epi_of_epi_f
+  intro n
+  constructor
+  intro Z u v huv
+  apply GradedObject.Monoidal.tensorObj_ext
+  intro i j hij
+  have : Epi (f.f i) := (HomologicalComplex.eval _ _ i).map_epi f
+  have : Epi (g.f j) := (HomologicalComplex.eval _ _ j).map_epi g
+  have : Epi (f.f i ▷ D.X j) := (tensorRight (D.X j)).map_epi _
+  have : Epi (B.X i ◁ g.f j) := (tensorLeft (B.X i)).map_epi _
+  have : Epi (f.f i ⊗ₘ g.f j) := by
+    rw [tensorHom_def]
+    infer_instance
+  apply (cancel_epi (f.f i ⊗ₘ g.f j)).1
+  have h := congrArg
+    (fun k ↦ GradedObject.Monoidal.ιTensorObj A.X D.X i j n hij ≫ k) huv
+  change GradedObject.Monoidal.ιTensorObj A.X D.X i j n hij ≫
+      (GradedObject.Monoidal.tensorHom f.f g.f n ≫ u) =
+    GradedObject.Monoidal.ιTensorObj A.X D.X i j n hij ≫
+      (GradedObject.Monoidal.tensorHom f.f g.f n ≫ v) at h
+  simpa only [GradedObject.Monoidal.ι_tensorHom_assoc] using h
+
+private theorem quotient_epi {P : Complex R} (F : DecreasingFiltration P) (p : ℤ) :
+    Epi (F.complexQuotientπ p (p + 1) (by omega)) := by
+  unfold DecreasingFiltration.complexQuotientπ
+  infer_instance
+
+/-- Naturality of the canonical comparison for filtration-preserving maps in both factors.
+All maps in the square are chain maps for the signed total differentials.
+The target convolution and its canonical comparison can be any representatives satisfying
+the displayed defining equalities; in particular those supplied by graded_quotient.
+Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations and Koszul signs
+(blueprint: lem-trf-filtered-convolution-graded-quotient).
+
+Proof: tensoring filtration-preserving maps takes each convolution generator to the
+corresponding target generator. Hence it restricts to a filtered tensor map t.
+On a graded summand, the two routes through the square take the class of x tensor y
+to [f(x) tensor g(y)]. Tensor quotient projections are epimorphic by right exactness,
+and coproduct inclusions jointly detect equality. Cancel these maps to obtain the
+square. Naturality of each quotient differential makes every arrow a chain map.
+No compatibility with a chosen splitting is used. -/
+theorem graded_quotient_naturality
+    {P Q P' Q' : Complex R}
+    {F : DecreasingFiltration P} {G : DecreasingFiltration Q}
+    {F' : DecreasingFiltration P'} {G' : DecreasingFiltration Q'}
+    (f : FilteredObject.Hom ⟨P, F⟩ ⟨P', F'⟩)
+    (g : FilteredObject.Hom ⟨Q, G⟩ ⟨Q', G'⟩)
+    (H : DecreasingFiltration (P ⊗ Q)) (H' : DecreasingFiltration (P' ⊗ Q'))
+    (hH : ∀ r : ℤ, H.F r = level F G r)
+    (hH' : ∀ r : ℤ, H'.F r = level F' G' r) (r : ℤ)
+    (α : gradedSource F G r ⟶ H.gradedPiece r)
+    (α' : gradedSource F' G' r ⟶ H'.gradedPiece r)
+    (hα : IsCanonical F G H r α) (hα' : IsCanonical F' G' H' r α') :
+    ∃ t : FilteredObject.Hom ⟨P ⊗ Q, H⟩ ⟨P' ⊗ Q', H'⟩,
+      t.hom = f.hom ⊗ₘ g.hom ∧
+      Sigma.desc (fun p : ℤ ↦
+        (FilteredObject.gradedMapSteps f p ⊗ₘ FilteredObject.gradedMapSteps g (r - p)) ≫
+          Sigma.ι (fun p : ℤ ↦ F'.gradedPiece p ⊗ G'.gradedPiece (r - p)) p) ≫ α' =
+        α ≫ FilteredObject.gradedMapSteps t r := by
+  classical
+  have preserves (i : ℤ) : ∃ l : (H.F i : Complex R) ⟶ (H'.F i : Complex R),
+      l ≫ (H'.F i).arrow = (H.F i).arrow ≫ (f.hom ⊗ₘ g.hom) := by
+    rw [hH i, hH' i]
+    let k := Sigma.desc (fun p : ℤ ↦
+      (FilteredObject.restrictionSteps f p ⊗ₘ
+        FilteredObject.restrictionSteps g (i - p)) ≫
+      Sigma.ι (fun p : ℤ ↦ (F'.F p : Complex R) ⊗ (G'.F (i - p) : Complex R)) p)
+    have hk : k ≫ Sigma.desc (fun p : ℤ ↦
+        (F'.F p).arrow ⊗ₘ (G'.F (i - p)).arrow) =
+        Sigma.desc (fun p : ℤ ↦ (F.F p).arrow ⊗ₘ (G.F (i - p)).arrow) ≫
+          (f.hom ⊗ₘ g.hom) := by
+      apply Sigma.hom_ext
+      intro p
+      dsimp only [k]
+      simp only [Category.assoc, Sigma.ι_desc_assoc, Sigma.ι_desc,
+        tensorHom_comp_tensorHom, restriction_arrow]
+    exact ⟨imageSubobjectMap (Arrow.homMk k (f.hom ⊗ₘ g.hom) hk),
+      imageSubobjectMap_arrow _⟩
+  let t : FilteredObject.Hom ⟨P ⊗ Q, H⟩ ⟨P' ⊗ Q', H'⟩ :=
+    ⟨f.hom ⊗ₘ g.hom, preserves⟩
+  refine ⟨t, rfl, ?_⟩
+  apply Sigma.hom_ext
+  intro p
+  let πF : (F.F p : Complex R) ⟶ F.gradedPiece p :=
+    F.complexQuotientπ p (p + 1) (by omega)
+  let πG : (G.F (r - p) : Complex R) ⟶ G.gradedPiece (r - p) :=
+    G.complexQuotientπ (r - p) (r - p + 1) (by omega)
+  have : Epi πF := quotient_epi F p
+  have : Epi πG := quotient_epi G (r - p)
+  have : Epi (πF ⊗ₘ πG) := tensor_epi _ _
+  apply (cancel_epi (πF ⊗ₘ πG)).1
+  obtain ⟨l, hl, hla⟩ := hα p
+  obtain ⟨l', hl', hla'⟩ := hα' p
+  have hlt : l ≫ FilteredObject.restrictionSteps t r =
+      (FilteredObject.restrictionSteps f p ⊗ₘ
+        FilteredObject.restrictionSteps g (r - p)) ≫ l' := by
+    apply (cancel_mono (H'.F r).arrow).1
+    rw [Category.assoc, restriction_arrow, ← Category.assoc, hl,
+      Category.assoc, hl']
+    change ((F.F p).arrow ⊗ₘ (G.F (r - p)).arrow) ≫ (f.hom ⊗ₘ g.hom) = _
+    simp only [tensorHom_comp_tensorHom, restriction_arrow]
+  simp only [Category.assoc, Sigma.ι_desc_assoc]
+  change (πF ⊗ₘ πG) ≫
+      (FilteredObject.gradedMapSteps f p ⊗ₘ FilteredObject.gradedMapSteps g (r - p)) ≫
+      Sigma.ι (fun p : ℤ ↦ F'.gradedPiece p ⊗ G'.gradedPiece (r - p)) p ≫ α' =
+    (πF ⊗ₘ πG) ≫ Sigma.ι
+      (fun p : ℤ ↦ F.gradedPiece p ⊗ G.gradedPiece (r - p)) p ≫
+      α ≫ FilteredObject.gradedMapSteps t r
+  rw [← Category.assoc, tensorHom_comp_tensorHom]
+  have hπF : πF ≫ FilteredObject.gradedMapSteps f p =
+      FilteredObject.restrictionSteps f p ≫
+        F'.complexQuotientπ p (p + 1) (by omega) := projection_graded f p
+  have hπG : πG ≫ FilteredObject.gradedMapSteps g (r - p) =
+      FilteredObject.restrictionSteps g (r - p) ≫
+        G'.complexQuotientπ (r - p) (r - p + 1) (by omega) :=
+    projection_graded g (r - p)
+  rw [hπF, hπG, ← tensorHom_comp_tensorHom,
+    Category.assoc, hla', ← Category.assoc, ← hlt, Category.assoc,
+    ← projection_graded]
+  simpa only [Category.assoc] using congrArg
+    (fun k : ((F.F p : Complex R) ⊗ (G.F (r - p) : Complex R)) ⟶ H.gradedPiece r ↦
+      k ≫ FilteredObject.gradedMapSteps t r) hla.symm
+
 set_option maxHeartbeats 800000 in
 -- Elaborating the total-tensor quotient diagram exceeds the default heartbeat limit.
 end FilteredConvolution

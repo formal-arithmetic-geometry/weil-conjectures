@@ -16,6 +16,7 @@ public import Mathlib.FieldTheory.Finite.Basic
 import WeilConjectures.TraceFormula.FiniteFieldDatum.FrobeniusAffineEqualizer.FrobeniusAffineEqualizerPresentation
 public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 public import WeilConjectures.SmoothPurity.FiniteFieldDatum.RelativeFrobeniusGeometricFiber
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Equations of the Frobenius fixed scheme
@@ -41,6 +42,56 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 open scoped TensorProduct
 
 namespace WeilConjectures.FiniteFieldDatum.FrobeniusAffineEqualizer
+
+/-- Quotient transport and the third isomorphism theorem preserve the quotient map. -/
+private theorem quotient_presentation {R S : Type u} [CommRing R] [CommRing S]
+    (J : Ideal R) (I K : Ideal S) (θ : R ≃+* S ⧸ I)
+    (hI : J.map θ.toRingHom = K.map (Ideal.Quotient.mk I)) :
+    ∃ ν : (R ⧸ J) ≃+* (S ⧸ (I ⊔ K)), ∀ b : R,
+      ν (Ideal.Quotient.mk J b) = DoubleQuot.quotLeftToQuotSup I K (θ b) := by
+  let ν := (Ideal.quotientEquiv J (K.map (Ideal.Quotient.mk I)) θ hI.symm).trans
+    (DoubleQuot.quotQuotEquivQuotSup I K)
+  refine ⟨ν, ?_⟩
+  intro b
+  change DoubleQuot.quotQuotEquivQuotSup I K
+    (Ideal.Quotient.mk _ (θ b)) = _
+  obtain ⟨f, hf⟩ := Ideal.Quotient.mk_surjective (θ b)
+  rw [← hf]
+  exact DoubleQuot.quotQuotEquivQuotSup_quotQuotMk I K f
+
+/-- Contravariance sends compatibility of quotient maps to compatibility of inclusions. -/
+private theorem quotient_spectrum {R S T : Type u}
+    [CommRing R] [CommRing S] [CommRing T] (J : Ideal R)
+    (θ : R ≃+* S) (π : S →+* T) (ν : (R ⧸ J) ≃+* T)
+    (hν : ∀ b : R, ν (Ideal.Quotient.mk J b) = π (θ b)) :
+    Spec.map (CommRingCat.ofHom ν.symm.toRingHom) ≫
+        Spec.map (CommRingCat.ofHom π) ≫ Spec.map (CommRingCat.ofHom θ.toRingHom) =
+      Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)) := by
+  rw [← Spec.map_comp, ← Spec.map_comp]
+  congr 1
+  ext b
+  exact ν.injective (by simpa using (hν b).symm)
+
+/-- The graph-diagonal fixed scheme and the categorical equalizer agree over X. -/
+private theorem fixed_equalizer_iso (D : FiniteFieldDatum.{u})
+    (X : Over (Spec (.of D.k))) (h : X ⟶ X) :
+    ∃ e : equalizer h.left (𝟙 X.left) ≅ trfEndomorphismFixedScheme X h,
+      e.hom ≫ trfEndomorphismFixedInclusion X h = equalizer.ι h.left (𝟙 X.left) := by
+  let i := trfEndomorphismFixedInclusion X h
+  have hi : i ≫ h.left = i := by
+    simpa using (trfEndomorphismFixedScheme_equalizer X h _ i).1 (𝟙 _)
+  obtain ⟨a, ha, _⟩ := (trfEndomorphismFixedScheme_equalizer X h _
+    (equalizer.ι h.left (𝟙 X.left))).2.mpr (by simpa using equalizer.condition h.left (𝟙 _))
+  change a ≫ i = equalizer.ι h.left (𝟙 X.left) at ha
+  let b : trfEndomorphismFixedScheme X h ⟶ equalizer h.left (𝟙 X.left) :=
+    equalizer.lift i (by simpa using hi)
+  have hb : b ≫ equalizer.ι h.left (𝟙 X.left) = i := equalizer.lift_ι _ _
+  have : Mono i := inferInstanceAs (Mono (pullback.fst _ _))
+  refine ⟨⟨a, b, ?_, ?_⟩, ha⟩
+  · apply equalizer.hom_ext
+    simp only [Category.assoc, hb, ha, Category.id_comp]
+  · apply (cancel_mono i).mp
+    simp only [Category.assoc, ha, hb, Category.id_comp]
 
 /-- The equations of Fix(Φ^m) in any finite polynomial presentation, including their
 compatibility with restriction to every smaller model affine open.
@@ -127,6 +178,104 @@ theorem fixedPointEquations (D : FiniteFieldDatum.{u})
                           (equalizer.ι h.left (𝟙 (D.geometricFiber X₀).left))
                           (chartMap D X₀ A' j') ≫ e.hom =
                         e'.hom ≫ Spec.map (CommRingCat.ofHom ρ) := by
-  sorry
+  classical
+  rcases presentation D X₀ m _hm with ⟨_, _, h, hh, hcharts⟩
+  refine ⟨h, hh, ?_⟩
+  rcases hcharts A j.hom (by infer_instance) with ⟨_, _, _, e₀, he₀, hpoly, hres⟩
+  rcases hpoly r a p with ⟨θ, hθ, hI, _⟩
+  obtain ⟨ν, hν⟩ := quotient_presentation (differenceIdeal D A m)
+    (extendedIdeal D r a) (powerIdeal D m r) θ hI
+  let π := DoubleQuot.quotLeftToQuotSup (extendedIdeal D r a) (powerIdeal D m r)
+  let i := trfEndomorphismFixedInclusion (D.geometricFiber X₀) h
+  let J := chartMap D X₀ A j.hom
+  let ep := e₀ ≪≫ Scheme.Spec.mapIso ν.toCommRingCatIso.symm.op
+  have hep : ep.hom ≫ Spec.map (CommRingCat.ofHom π) ≫
+      Spec.map (CommRingCat.ofHom θ.toRingHom) = pullback.snd i J := by
+    change (e₀.hom ≫ Spec.map (CommRingCat.ofHom ν.symm.toRingHom)) ≫ _ ≫ _ = _
+    simp only [Category.assoc]
+    rw [quotient_spectrum (differenceIdeal D A m) θ π ν hν]
+    exact he₀
+  obtain ⟨t, ht⟩ := fixed_equalizer_iso D (D.geometricFiber X₀) h
+  have : IsIso J := by
+    dsimp [J, chartMap]
+    infer_instance
+  let k := asIso (pullback.fst i J)
+  let e := t ≪≫ k.symm ≪≫ ep
+  refine ⟨θ, hθ, π, (fun _ ↦ rfl), DoubleQuot.ker_quotLeftToQuotSup _ _, e, ?_, ?_⟩
+  · calc
+      e.hom ≫ Spec.map (CommRingCat.ofHom π) ≫
+          Spec.map (CommRingCat.ofHom θ.toRingHom) ≫ J =
+          t.hom ≫ k.inv ≫ (ep.hom ≫ Spec.map (CommRingCat.ofHom π) ≫
+            Spec.map (CommRingCat.ofHom θ.toRingHom)) ≫ J := by
+              simp only [e, Iso.trans_hom, Iso.symm_hom, Category.assoc]
+      _ = t.hom ≫ k.inv ≫ pullback.snd i J ≫ J := by rw [hep]
+      _ = t.hom ≫ k.inv ≫ pullback.fst i J ≫ i := by rw [pullback.condition]
+      _ = equalizer.ι h.left (𝟙 _) := by
+        change t.hom ≫ k.inv ≫ k.hom ≫ i = _
+        rw [Iso.inv_hom_id_assoc]
+        exact ht
+  · intro A' j' f hj' hf r' a' p'
+    rcases hcharts A' j' hj' with ⟨_, _, _, e₀', he₀', hpoly', _⟩
+    rcases hpoly' r' a' p' with ⟨θ', hθ', hI', _⟩
+    obtain ⟨ν', hν'⟩ := quotient_presentation (differenceIdeal D A' m)
+      (extendedIdeal D r' a') (powerIdeal D m r') θ' hI'
+    let π' := DoubleQuot.quotLeftToQuotSup (extendedIdeal D r' a') (powerIdeal D m r')
+    let J' := chartMap D X₀ A' j'
+    let ep' := e₀' ≪≫ Scheme.Spec.mapIso ν'.toCommRingCatIso.symm.op
+    have hep' : ep'.hom ≫ Spec.map (CommRingCat.ofHom π') ≫
+        Spec.map (CommRingCat.ofHom θ'.toRingHom) = pullback.snd i J' := by
+      change (e₀'.hom ≫ Spec.map (CommRingCat.ofHom ν'.symm.toRingHom)) ≫ _ ≫ _ = _
+      simp only [Category.assoc]
+      rw [quotient_spectrum (differenceIdeal D A' m) θ' π' ν' hν']
+      exact he₀'
+    let g := asIso (pullback.map (equalizer.ι h.left (𝟙 _)) J' i J'
+      t.hom (𝟙 _) (𝟙 _) (by simpa using ht.symm) (by simp))
+    have hgfst : g.hom ≫ pullback.fst i J' =
+        pullback.fst (equalizer.ι h.left (𝟙 _)) J' ≫ t.hom := by simp [g]
+    have hgsnd : g.hom ≫ pullback.snd i J' =
+        pullback.snd (equalizer.ι h.left (𝟙 _)) J' := by simp [g]
+    let e' := g ≪≫ ep'
+    refine ⟨θ', hθ', π', (fun _ ↦ rfl), DoubleQuot.ker_quotLeftToQuotSup _ _, e', ?_, ?_⟩
+    · change (g.hom ≫ ep'.hom) ≫ _ ≫ _ = _
+      simp only [Category.assoc]
+      rw [hep']
+      exact hgsnd
+    · rcases hres A' j' f hj' hf e₀' he₀' with ⟨ρ₀, hρ₀, s, hsfst, _, hs⟩
+      let ρ := ν'.toRingHom.comp (ρ₀.comp ν.symm.toRingHom)
+      refine ⟨ρ, ?_, ?_⟩
+      · intro b
+        change ν' (ρ₀ (ν.symm (π (θ b)))) = _
+        rw [← hν b, RingEquiv.symm_apply_apply, hρ₀, hν']
+      · have hsν : s ≫ ep.hom = ep'.hom ≫ Spec.map (CommRingCat.ofHom ρ) := by
+          change s ≫ (e₀.hom ≫ Spec.map (CommRingCat.ofHom ν.symm.toRingHom)) =
+            (e₀'.hom ≫ Spec.map (CommRingCat.ofHom ν'.symm.toRingHom)) ≫ _
+          rw [← Category.assoc, hs, Category.assoc]
+          have hc : Spec.map (CommRingCat.ofHom ρ₀) ≫
+              Spec.map (CommRingCat.ofHom ν.symm.toRingHom) =
+              Spec.map (CommRingCat.ofHom ν'.symm.toRingHom) ≫
+                Spec.map (CommRingCat.ofHom ρ) := by
+            rw [← Spec.map_comp, ← Spec.map_comp]
+            congr 1
+            apply CommRingCat.hom_ext
+            apply RingHom.ext
+            intro z
+            change ρ₀ (ν.symm z) = ν'.symm (ν' (ρ₀ (ν.symm z)))
+            exact (ν'.symm_apply_apply _).symm
+          simpa only [Category.assoc] using congrArg (fun z ↦ e₀'.hom ≫ z) hc
+        have hg : g.hom ≫ s =
+            pullback.fst (equalizer.ι h.left (𝟙 _)) J' ≫ t.hom ≫ k.inv := by
+          apply (cancel_mono k.hom).mp
+          simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+          change g.hom ≫ s ≫ pullback.fst i J = _
+          erw [hsfst]
+          exact hgfst
+        calc
+          pullback.fst (equalizer.ι h.left (𝟙 _)) J' ≫ e.hom =
+              (pullback.fst (equalizer.ι h.left (𝟙 _)) J' ≫ t.hom ≫ k.inv) ≫ ep.hom := by
+                simp only [e, Iso.trans_hom, Iso.symm_hom, Category.assoc]
+          _ = (g.hom ≫ s) ≫ ep.hom := by rw [hg]
+          _ = e'.hom ≫ Spec.map (CommRingCat.ofHom ρ) := by
+            simpa only [e', Iso.trans_hom, Category.assoc] using
+              congrArg (fun z ↦ g.hom ≫ z) hsν
 
 end WeilConjectures.FiniteFieldDatum.FrobeniusAffineEqualizer

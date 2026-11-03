@@ -74,13 +74,46 @@ structure ExceptionalDomain {X Y : Scheme.{u}} (F : D Λ X ⥤ D Λ Y) where
     (a : F.obj K.obj ⟶ L.obj) (b : L ⟶ L'),
     homEquiv K L' (a ≫ b.hom) = homEquiv K L a ≫ right.map b
 
-/-- Given compact-support operations and their given exceptional adjunction domains.
-The type `exceptional f` indexes the supplied domains, and may be empty when no exceptional
-adjunction is supplied. No existence statement is part of this input record.
-Source: sk-d-six, opening (blueprint: sk-d-six). -/
+/-- Given compact-support operations, their given operation domains, and their given
+exceptional adjunction domains. The comparisons of the package are only used on the given
+operation domain `dom X` of the operations out of `X`, wherever the displayed composites are
+defined. The domains contain the finite-Tor constructible inputs (`ctf_mem`, `unit_mem`) and
+are stable under the two operations `f^*`, `Rf_!` which the displayed composites apply to
+those inputs (`star_mem`, `shriek_mem`); nothing else is assumed. The type `exceptional f` indexes
+the supplied adjunction domains, and may be empty when no exceptional adjunction is supplied.
+No existence statement is part of this input record.
+Source: sk-d-six, opening: "The functors, their domains and the two adjunctions are given ...
+it uses the given operations wherever the displayed composites are defined"
+(blueprint: sk-d-six). -/
 structure Given (s : Scheme.{u}) where
   shriek : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left],
     D Λ X.left ⥤ D Λ Y.left
+  dom : ∀ X : Over s, ObjectProperty (D Λ X.left)
+  /-- The specified finite-Tor constructible inputs lie in the given operation domains.
+  Source: sk-d-six, opening: the package "uses the given operations wherever the displayed
+  composites are defined, and imposes the two final invertibility requirements on the
+  specified finite-Tor constructible inputs" (blueprint: sk-d-six); these requirements and
+  the composites applied to `D^b_ctf` inputs are thus defined on `D^b_ctf(X,A) ⊆ dom X`. -/
+  ctf_mem : ∀ (X : Over s) (K : ConstantModelConstructibleFiniteTor Λ X.left), dom X K.obj
+  /-- The coefficient unit `A_X`, a finite-Tor constructible input, lies in the given
+  operation domain. Source: sk-d-six, opening: the package "imposes the two final
+  invertibility requirements on the specified finite-Tor constructible inputs"
+  (blueprint: sk-d-six). -/
+  unit_mem : ∀ X : Over s, dom X (𝟙_ (D Λ X.left))
+  /-- The given operation domains are stable under the derived pullback `f^*` applied to
+  their objects, so that `Rf'_! g'^* K` and `RΦ_! Φ^* K` are defined for the finite-Tor
+  constructible inputs. Source: sk-d-six, opening: the package "uses the given operations
+  wherever the displayed composites are defined, and imposes the two final invertibility
+  requirements on the specified finite-Tor constructible inputs" (blueprint: sk-d-six). -/
+  star_mem : ∀ {X Y : Over s} (f : X ⟶ Y) {K : D Λ Y.left}, dom Y K →
+    dom X ((star Λ f.left).obj K)
+  /-- The given operation domains are stable under the given compact-support operations
+  `Rf_!`, so that the composites `Rg_! Rf_! K` are defined for the finite-Tor constructible
+  inputs. Source: sk-d-six, opening: the package "uses the given operations wherever the
+  displayed composites are defined, and imposes the two final invertibility requirements on
+  the specified finite-Tor constructible inputs" (blueprint: sk-d-six). -/
+  shriek_mem : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left] {K : D Λ X.left},
+    dom X K → dom Y ((shriek f).obj K)
   exceptional : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left], Type (u + 2)
   domain : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left],
     exceptional f → ExceptionalDomain Λ (shriek f)
@@ -112,6 +145,21 @@ def pushComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).comp
       (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f))
     (CondensedRing.leftDerivedUpperStarComp Λ f g).symm).symm
+
+/-- The inputs on which both sides `g^* Rf_! K` and `Rf'_! g'^* K` of `!`-base change are
+defined: `K` lies in the given operation domain of `X` and `g'^* K` in that of `X'`.
+Source: sk-d-six, opening ("wherever the displayed composites are defined") and third data
+bullet (blueprint: sk-d-six). -/
+def pullDom {X' X : Over s} (g' : X' ⟶ X) : ObjectProperty (D Λ X.left) :=
+  fun K => O.dom X K ∧ O.dom X' ((star Λ g'.left).obj K)
+
+/-- The inputs on which the displayed composite `Rg_! Rf_! K` is defined: `K` lies in the given
+operation domain of `X` and `Rf_! K` in that of `Y`.
+Source: sk-d-six, opening ("wherever the displayed composites are defined") and second data
+bullet (blueprint: sk-d-six). -/
+def compDom {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left] :
+    ObjectProperty (D Λ X.left) :=
+  fun K => O.dom X K ∧ O.dom Y ((O.shriek f).obj K)
 
 variable {Λ}
 
@@ -183,7 +231,10 @@ def ExceptionalDomain.counit {X Y : Scheme.{u}} {F : D Λ X ⥤ D Λ Y}
 
 variable {s : Scheme.{u}} (O : Given Λ s)
 
-/-- The five specified kinds of package data, on the supplied operation domains.
+/-- The five specified kinds of package data, on the supplied operation domains: the
+compact-support comparisons are natural isomorphisms of the given functors restricted to the
+full subcategories of inputs on which the displayed composites are defined, and the projection
+formula is natural in both variables on the given operation domains.
 Here `omega` is ambient, not assumed constructible; tensor and internal Hom are the
 existing derived ones, not freely chosen operations.
 Source: sk-d-six, five data bullets (blueprint: sk-d-six). -/
@@ -198,23 +249,28 @@ structure Comparisons where
     (e : O.exceptional f) (h : (O.domain f e).target (omega Y)),
     (O.domain f e).right.obj ⟨omega Y, h⟩ ≅ omega X
   proper : ∀ {X Y : Over s} (f : X ⟶ Y) [IsProper f.left],
-    O.shriek f ≅ push Λ f.left
+    (O.dom X).ι ⋙ O.shriek f ≅ (O.dom X).ι ⋙ push Λ f.left
   composition : ∀ {X Y Z : Over s} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f.left] [HasCompactification g.left]
-    [HasCompactification (f ≫ g).left], O.shriek f ⋙ O.shriek g ≅ O.shriek (f ≫ g)
-  identity : ∀ X : Over s, O.shriek (𝟙 X) ≅ 𝟭 (D Λ X.left)
+    [HasCompactification (f ≫ g).left],
+    (O.compDom f).ι ⋙ O.shriek f ⋙ O.shriek g ≅ (O.compDom f).ι ⋙ O.shriek (f ≫ g)
+  identity : ∀ X : Over s, (O.dom X).ι ⋙ O.shriek (𝟙 X) ≅ (O.dom X).ι
   baseChange : ∀ {X' X Y' Y : Over s}
     (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y)
     [HasCompactification f.left] [HasCompactification f'.left],
     ChosenCartesianSquare g'.left f'.left f.left g.left →
-      (O.shriek f ⋙ star Λ g.left ≅ star Λ g'.left ⋙ O.shriek f')
+      ((O.pullDom g').ι ⋙ O.shriek f ⋙ star Λ g.left ≅
+        (O.pullDom g').ι ⋙ star Λ g'.left ⋙ O.shriek f')
   projection : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left]
-    (K : D Λ X.left) (L : D Λ Y.left),
+    (K : D Λ X.left) (L : D Λ Y.left) (_hK : O.dom X K)
+    (_hKL : O.dom X (K ⊗ (star Λ f.left).obj L)),
     (O.shriek f).obj K ⊗ L ≅ (O.shriek f).obj (K ⊗ (star Λ f.left).obj L)
   projection_natural : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left]
-    (K K' : D Λ X.left) (L L' : D Λ Y.left) (a : K ⟶ K') (b : L ⟶ L'),
-    ((O.shriek f).map a ⊗ₘ b) ≫ (projection f K' L').hom =
-      (projection f K L).hom ≫ (O.shriek f).map (a ⊗ₘ (star Λ f.left).map b)
+    (K K' : D Λ X.left) (L L' : D Λ Y.left) (hK : O.dom X K) (hK' : O.dom X K')
+    (hKL : O.dom X (K ⊗ (star Λ f.left).obj L))
+    (hKL' : O.dom X (K' ⊗ (star Λ f.left).obj L')) (a : K ⟶ K') (b : L ⟶ L'),
+    ((O.shriek f).map a ⊗ₘ b) ≫ (projection f K' L' hK' hKL').hom =
+      (projection f K L hK hKL).hom ≫ (O.shriek f).map (a ⊗ₘ (star Λ f.left).map b)
   monoidal : ∀ {X Y : Over s} (f : X ⟶ Y), (star Λ f.left).CoreMonoidal
   braided : ∀ {X Y : Over s} (f : X ⟶ Y) (K L : D Λ Y.left),
     (β_ ((star Λ f.left).obj K) ((star Λ f.left).obj L)).hom ≫
@@ -237,9 +293,10 @@ def trace (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     [HasCompactification Y.hom] [HasCompactification px.left]
     (sq : ChosenCartesianSquare py.left px.left Y.hom X.hom)
     (eY : O.exceptional (structureMap Y))
-    (hY : (O.domain (structureMap Y) eY).target (𝟙_ (D Λ s))) :
+    (hY : (O.domain (structureMap Y) eY).target (𝟙_ (D Λ s)))
+    (hω : O.pullDom py (P.omega Y)) :
     (O.shriek px).obj ((star Λ py.left).obj (P.omega Y)) ⟶ 𝟙_ (D Λ X.left) :=
-  (P.baseChange py px (structureMap Y) (structureMap X) sq).inv.app (P.omega Y) ≫
+  (P.baseChange py px (structureMap Y) (structureMap X) sq).inv.app ⟨P.omega Y, hω⟩ ≫
     (star Λ X.hom).map ((O.shriek (structureMap Y)).map (P.dualizing Y eY hY).hom) ≫
     (star Λ X.hom).map ((O.domain (structureMap Y) eY).counit ⟨_, hY⟩) ≫
     (P.monoidal (structureMap X)).εIso.inv
@@ -255,14 +312,16 @@ def alpha (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     (eP : O.exceptional px) (M : D Λ X.left)
     (hM : (O.domain px eP).target M)
     (hJ : (O.domain px eP).source
-      ((star Λ px.left).obj M ⊗ (star Λ py.left).obj (P.omega Y))) :
+      ((star Λ px.left).obj M ⊗ (star Λ py.left).obj (P.omega Y)))
+    (hω : O.pullDom py (P.omega Y))
+    (hP : O.dom Z ((star Λ py.left).obj (P.omega Y) ⊗ (star Λ px.left).obj M)) :
     (star Λ px.left).obj M ⊗ (star Λ py.left).obj (P.omega Y) ⟶
       (O.domain px eP).right.obj ⟨M, hM⟩ :=
   (O.domain px eP).homEquiv ⟨_, hJ⟩ ⟨M, hM⟩
     ((O.shriek px).map
       (β_ ((star Λ px.left).obj M) ((star Λ py.left).obj (P.omega Y))).hom ≫
-    (P.projection px ((star Λ py.left).obj (P.omega Y)) M).inv ≫
-    (P.trace O X Y Z px py sq eY hY ⊗ₘ 𝟙 M) ≫ (λ_ M).hom)
+    (P.projection px ((star Λ py.left).obj (P.omega Y)) M hω.2 hP).inv ≫
+    (P.trace O X Y Z px py sq eY hY hω ⊗ₘ 𝟙 M) ≫ (λ_ M).hom)
 
 /-- The specified Künneth--Verdier arrow, constructed from the supplied comparisons.
 It is not an arbitrary morphism or a bare existence of an isomorphism.
@@ -276,7 +335,9 @@ def kunnethVerdier (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     (eP : O.exceptional px) (M : D Λ X.left) (N : D Λ Y.left)
     (hM : (O.domain px eP).target M)
     (hJ : (O.domain px eP).source
-      ((star Λ px.left).obj M ⊗ (star Λ py.left).obj (P.omega Y))) :
+      ((star Λ px.left).obj M ⊗ (star Λ py.left).obj (P.omega Y)))
+    (hω : O.pullDom py (P.omega Y))
+    (hP : O.dom Z ((star Λ py.left).obj (P.omega Y) ⊗ (star Λ px.left).obj M)) :
     (star Λ px.left).obj M ⊗ (star Λ py.left).obj (dual (P.omega Y) N) ⟶
       (ihom ((star Λ py.left).obj N)).obj ((O.domain px eP).right.obj ⟨M, hM⟩) :=
   (ihom.adjunction ((star Λ py.left).obj N)).homEquiv _ _
@@ -287,7 +348,7 @@ def kunnethVerdier (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     ((star Λ px.left).obj M ◁
       ((P.monoidal py).μIso (dual (P.omega Y) N) N).hom) ≫
     ((star Λ px.left).obj M ◁ (star Λ py.left).map (evaluation (P.omega Y) N)) ≫
-    P.alpha O X Y Z px py sq eY hY eP M hM hJ)
+    P.alpha O X Y Z px py sq eY hY eP M hM hJ hω hP)
 
 /-- The trace mate of the dualizing composition isomorphism. Compatibility of these
 traces is precisely compatibility of the dualizing isomorphisms with the adjoint
@@ -304,46 +365,49 @@ it therefore uses exactly the adjoint composition comparison.
 Source: sk-d-six, coherence paragraph (blueprint: sk-d-six). -/
 structure Coherence : Prop where
   leftUnit : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left]
-    (K : D Λ X.left),
+    (K : D Λ X.left) (hK : O.compDom (𝟙 X) K),
     letI : HasCompactification ((𝟙 X) ≫ f).left :=
       HasCompactification.of_eq (f := f.left)
         (congrArg Over.Hom.left (Category.id_comp f)).symm
-    (P.composition (𝟙 X) f).hom.app K ≫
+    (P.composition (𝟙 X) f).hom.app ⟨K, hK⟩ ≫
       (eqToIso (by simp only [Category.id_comp] :
         O.shriek ((𝟙 X) ≫ f) = O.shriek f)).hom.app K =
-      (O.shriek f).map ((P.identity X).hom.app K)
+      (O.shriek f).map ((P.identity X).hom.app ⟨K, hK.1⟩)
   rightUnit : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left]
-    (K : D Λ X.left),
+    (K : D Λ X.left) (hK : O.compDom f K),
     letI : HasCompactification (f ≫ (𝟙 Y)).left :=
       HasCompactification.of_eq (f := f.left)
         (congrArg Over.Hom.left (Category.comp_id f)).symm
-    (P.composition f (𝟙 Y)).hom.app K ≫
+    (P.composition f (𝟙 Y)).hom.app ⟨K, hK⟩ ≫
       (eqToIso (by simp only [Category.comp_id] :
         O.shriek (f ≫ (𝟙 Y)) = O.shriek f)).hom.app K =
-      (P.identity Y).hom.app ((O.shriek f).obj K)
-  properIdentity : ∀ (X : Over s) (K : D Λ X.left),
-    (P.proper (𝟙 X)).hom.app K =
-      (P.identity X).hom.app K ≫ (pushIdentity Λ X.left).inv.app K
+      (P.identity Y).hom.app ⟨(O.shriek f).obj K, hK.2⟩
+  properIdentity : ∀ (X : Over s) (K : D Λ X.left) (hK : O.dom X K),
+    (P.proper (𝟙 X)).hom.app ⟨K, hK⟩ =
+      (P.identity X).hom.app ⟨K, hK⟩ ≫ (pushIdentity Λ X.left).inv.app K
   baseNormalization : ∀ (e : O.exceptional (structureMap (base s)))
     (hS : (O.domain (structureMap (base s)) e).source (𝟙_ (D Λ s)))
-    (hT : (O.domain (structureMap (base s)) e).target (𝟙_ (D Λ s))),
+    (hT : (O.domain (structureMap (base s)) e).target (𝟙_ (D Λ s)))
+    (hU : O.dom (base s) (𝟙_ (D Λ s))),
     (P.dualizing (base s) e hT).hom = P.normalization.hom ≫
       (O.domain (structureMap (base s)) e).homEquiv ⟨_, hS⟩ ⟨_, hT⟩
-        ((P.identity (base s)).hom.app (𝟙_ (D Λ s)))
+        ((P.identity (base s)).hom.app ⟨𝟙_ (D Λ s), hU⟩)
   dualizingIdentity : ∀ (X : Over s) (e : O.exceptional (𝟙 X))
     (hS : (O.domain (𝟙 X) e).source (P.omega X))
-    (hT : (O.domain (𝟙 X) e).target (P.omega X)),
+    (hT : (O.domain (𝟙 X) e).target (P.omega X))
+    (hω : O.dom X (P.omega X)),
     (P.dualizingComp (𝟙 X) e hT).inv =
       (O.domain (𝟙 X) e).homEquiv ⟨_, hS⟩ ⟨_, hT⟩
-        ((P.identity X).hom.app (P.omega X))
+        ((P.identity X).hom.app ⟨P.omega X, hω⟩)
   monoidalIdentity : ∀ X : Over s,
     (P.monoidal (𝟙 X)).εIso.hom ≫
       (starIdentity Λ X.left).hom.app (𝟙_ (D Λ X.left)) = 𝟙 _
   properComposition : ∀ {X Y Z : Over s} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [IsProper f.left] [IsProper g.left] (K : D Λ X.left),
-    (P.composition f g).hom.app K ≫ (P.proper (f ≫ g)).hom.app K =
-      (O.shriek g).map ((P.proper f).hom.app K) ≫
-        (P.proper g).hom.app ((push Λ f.left).obj K) ≫
+    [IsProper f.left] [IsProper g.left] (K : D Λ X.left) (hK : O.compDom f K)
+    (hfK : O.dom Y ((push Λ f.left).obj K)),
+    (P.composition f g).hom.app ⟨K, hK⟩ ≫ (P.proper (f ≫ g)).hom.app ⟨K, hK.1⟩ =
+      (O.shriek g).map ((P.proper f).hom.app ⟨K, hK.1⟩) ≫
+        (P.proper g).hom.app ⟨(push Λ f.left).obj K, hfK⟩ ≫
         (pushComposition Λ f.left g.left).hom.app K
   dualizingComposition : ∀ {X Y Z : Over s} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f.left] [HasCompactification g.left]
@@ -354,8 +418,9 @@ structure Coherence : Prop where
     (hY' : (O.domain g eg).source (P.omega Y))
     (hZ : (O.domain g eg).target (P.omega Z))
     (hX' : (O.domain (f ≫ g) efg).source (P.omega X))
-    (hZ' : (O.domain (f ≫ g) efg).target (P.omega Z)),
-    (P.composition f g).hom.app (P.omega X) ≫
+    (hZ' : (O.domain (f ≫ g) efg).target (P.omega Z))
+    (hω : O.compDom f (P.omega X)),
+    (P.composition f g).hom.app ⟨P.omega X, hω⟩ ≫
       P.dualizingTrace O (f ≫ g) efg hX' hZ' =
       (O.shriek g).map (P.dualizingTrace O f ef hX hY) ≫
         P.dualizingTrace O g eg hY' hZ
@@ -369,12 +434,13 @@ structure Coherence : Prop where
     (h₁ : ChosenCartesianSquare x.left f'.left f.left y.left)
     (h₂ : ChosenCartesianSquare y.left g'.left g.left z.left)
     (h₃ : ChosenCartesianSquare x.left (f' ≫ g').left (f ≫ g).left z.left)
-    (K : D Λ X.left),
-    (P.baseChange x (f' ≫ g') (f ≫ g) z h₃).hom.app K ≫
-      (P.composition f' g').inv.app ((star Λ x.left).obj K) =
-      (star Λ z.left).map ((P.composition f g).inv.app K) ≫
-        (P.baseChange y g' g z h₂).hom.app ((O.shriek f).obj K) ≫
-        (O.shriek g').map ((P.baseChange x f' f y h₁).hom.app K)
+    (K : D Λ X.left) (hK : O.pullDom x K) (hfK : O.pullDom y ((O.shriek f).obj K))
+    (hxK : O.dom Y' ((O.shriek f').obj ((star Λ x.left).obj K))),
+    (P.baseChange x (f' ≫ g') (f ≫ g) z h₃).hom.app ⟨K, hK⟩ ≫
+      (P.composition f' g').inv.app ⟨(star Λ x.left).obj K, hK.2, hxK⟩ =
+      (star Λ z.left).map ((P.composition f g).inv.app ⟨K, hK.1, hfK.1⟩) ≫
+        (P.baseChange y g' g z h₂).hom.app ⟨(O.shriek f).obj K, hfK⟩ ≫
+        (O.shriek g').map ((P.baseChange x f' f y h₁).hom.app ⟨K, hK⟩)
 
 end Comparisons
 
@@ -382,7 +448,8 @@ end Comparisons
 The specified comparisons satisfy the component equations, biduality is required for
 all bounded constructible finite-Tor inputs, and the canonical Künneth--Verdier arrow is
 invertible over a field for quasi-compact compactifiable schemes, in the supplied
-adjunction domains. The Künneth--Verdier arrow is required on the fibre product
+adjunction domains and wherever its displayed composite is defined on the given operation
+domains. The Künneth--Verdier arrow is required on the fibre product
 `product X Y = X ×_s Y` with its projections `first`, `second`, whose source is
 `externalProduct M (dual ω_Y N)`; the square datum `sq` for this product is unique,
 since its identification with the pullback is fixed by the two projection equations.
@@ -406,9 +473,12 @@ structure GeometricOperations where
     (hM : (O.domain (first X Y) eP).target M.obj)
     (hJ : (O.domain (first X Y) eP).source
       ((star Λ (first X Y).left).obj M.obj ⊗
-        (star Λ (second X Y).left).obj (comparisons.omega Y))),
+        (star Λ (second X Y).left).obj (comparisons.omega Y)))
+    (hω : O.pullDom (second X Y) (comparisons.omega Y))
+    (hP : O.dom (product X Y) ((star Λ (second X Y).left).obj (comparisons.omega Y) ⊗
+      (star Λ (first X Y).left).obj M.obj)),
     IsIso (comparisons.kunnethVerdier O X Y (product X Y) (first X Y) (second X Y) sq
-      eY hY eP M.obj N.obj hM hJ)
+      eY hY eP M.obj N.obj hM hJ hω hP)
 
 /-- The finite commutative primary-coefficient specialization, with no restriction on
 base scheme, coefficient characteristic, or finite ring beyond those in the source.

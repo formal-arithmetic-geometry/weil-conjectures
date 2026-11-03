@@ -9,6 +9,15 @@ public import WeilConjectures.SmoothPurity.GlobalGeometricFrobenius.CondensedGlo
 public import Mathlib.LinearAlgebra.Trace
 public import Mathlib.Algebra.BigOperators.Finprod
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Field.Equiv
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
+public import WeilConjectures.SmoothPurity.GeometricFrobeniusTransport.GeometricFrobeniusCohomologyTransport
+public import WeilConjectures.TraceFormula.WeilUniformTrace.WeilUniformCohomologyFiniteness
+public import WeilConjectures.TraceFormula.WeilUniformTrace.WeilUniformCompactScalarComparison
+public import WeilConjectures.TraceFormula.WeilUniformTrace.WeilUniformDirectTraceWindow
+public import WeilConjectures.TraceFormula.WeilUniformTrace.WeilUniformIterateRecurrence
+public import WeilConjectures.TraceFormula.WeilUniformTrace.WeilUniformLocalScalarComparison
 
 /-! # Grothendieck–Lefschetz for condensed Weil complexes
 
@@ -86,7 +95,14 @@ theorem extensionPoint_square (m : ℕ) (hm : 1 ≤ m)
     (Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype) ≫ y.left) ≫
         X₀.hom =
       (𝟙 (Spec (.of D.k))) ≫ Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)) := by
-  sorry
+  have hbase :=
+    (FiniteField.exists_unique_subfield_of_closure D.p D.a D.q D.prime D.exponent_pos
+      D.cardinality_eq D.k₀ D.card_base D.k m hm).choose_spec.2.2.2.2.2.2.choose_spec
+  rw [Category.assoc, Over.w y, Category.id_comp]
+  change Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype) ≫
+    Spec.map (CommRingCat.ofHom (D.extensionEmbedding m hm)) = _
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+  exact congrArg (fun f ↦ Spec.map (CommRingCat.ofHom f)) hbase
 
 /-- The canonical geometric lift of an extension-valued point, by the fibre product.
 Source: clause (2), y and bar y (blueprint: det-thm-tf-uniform-formula-weil). -/
@@ -123,7 +139,67 @@ theorem point_return (m : ℕ) (hm : 1 ≤ m) (y : D.extensionPoints X₀ m hm) 
     extensionPoint D X₀ m hm y ≫ (End.of (D.geometricFrobenius X₀).hom ^ m) =
       (End.of (GeometricFrobeniusTransport.baseAutomorphism D).hom ^ m) ≫
         extensionPoint D X₀ m hm y := by
-  sorry
+  let _ : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let g := End.of (D.geometricFrobenius X₀).hom
+  let b := End.of (GeometricFrobeniusTransport.baseAutomorphism D).hom
+  let pr := pullback.fst X₀.hom
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+  let a := (D.geometricFiber X₀).hom
+  have h := D.galoisMap_projections X₀.hom
+    (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)
+  have hfst : g ≫ pr = pr := h.1
+  have hsnd : g ≫ a = a ≫ b := h.2
+  have hp (n : ℕ) : (g ^ n) ≫ pr = pr ∧ (g ^ n) ≫ a = a ≫ (b ^ n) := by
+    induction n with
+    | zero => simp [End.one_def]
+    | succ n ih =>
+        constructor
+        · rw [pow_succ', End.mul_def, Category.assoc, hfst, ih.1]
+        · rw [pow_succ', End.mul_def, Category.assoc, hsnd, ← Category.assoc,
+            ih.2, Category.assoc, ← End.mul_def, ← pow_succ']
+  have hb (n : ℕ) : (b ^ n).asHom = Spec.map (CommRingCat.ofHom
+      (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k ^ n).toRingHom) := by
+    induction n with
+    | zero => exact (Spec.map_id _).symm
+    | succ n ih =>
+        change (GeometricFrobeniusTransport.baseAutomorphism D).hom ≫
+          (b ^ n).asHom = _
+        rw [ih]
+        change Spec.map _ ≫ Spec.map _ = _
+        rw [← Spec.map_comp]
+        congr 1
+        ext z
+        change (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)
+          ((FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k ^ n) z) = _
+        rw [pow_succ']
+        rfl
+  have hc : Nat.card (D.extensionSubfield m hm) = D.q ^ m :=
+    (FiniteField.exists_unique_subfield_of_closure D.p D.a D.q D.prime D.exponent_pos
+      D.cardinality_eq D.k₀ D.card_base D.k m hm).choose_spec.2.1
+  have hq : 0 < D.q := by rw [← D.card_base]; exact Nat.card_pos
+  let _ : Finite (D.extensionSubfield m hm) :=
+    (Nat.card_pos_iff.mp (by rw [hc]; exact pow_pos hq m)).2
+  have hc' : Nat.card (D.extensionSubfield m hm) = Fintype.card D.k₀ ^ m := by
+    simpa only [← D.card_base, Nat.card_eq_fintype_card] using hc
+  have hfix : (b ^ m).asHom ≫
+      Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype) =
+      Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype) := by
+    rw [hb, ← Spec.map_comp]
+    congr 1
+    ext z
+    exact FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq
+      D.k₀ D.k m hc' (D.extensionSubfield m hm).subtype z
+  apply pullback.hom_ext
+  · change (extensionPoint D X₀ m hm y ≫ (g ^ m)) ≫ pr =
+      ((b ^ m) ≫ extensionPoint D X₀ m hm y) ≫ pr
+    rw [Category.assoc, (hp m).1, Category.assoc]
+    simp only [extensionPoint, pr, pullback.lift_fst]
+    rw [← Category.assoc, hfix]
+  · change (extensionPoint D X₀ m hm y ≫ (g ^ m)) ≫ a =
+      ((b ^ m) ≫ extensionPoint D X₀ m hm y) ≫ a
+    rw [Category.assoc, (hp m).2, ← Category.assoc]
+    have ha : extensionPoint D X₀ m hm y ≫ a = 𝟙 _ := pullback.lift_snd _ _ _
+    rw [ha, Category.id_comp, Category.assoc, ha, Category.comp_id]
 
 /-- The actual local m-fold return: insert the point reparametrization, apply the
 pullback-square comparison, then pull back the m-fold Weil map.
@@ -164,7 +240,19 @@ theorem global_return_square (m : ℕ) :
     (End.of (D.geometricFrobenius X₀).hom ^ m) ≫ (D.geometricFiber X₀).hom =
       (D.geometricFiber X₀).hom ≫
         (End.of (GeometricFrobeniusTransport.baseAutomorphism D).hom ^ m) := by
-  sorry
+  let _ : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let g := End.of (D.geometricFrobenius X₀).hom
+  let b := End.of (GeometricFrobeniusTransport.baseAutomorphism D).hom
+  let a := (D.geometricFiber X₀).hom
+  have h : g ≫ a = a ≫ b :=
+    (D.galoisMap_projections X₀.hom
+      (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)).2
+  change (g ^ m) ≫ a = a ≫ (b ^ m)
+  induction m with
+  | zero => simp [End.one_def]
+  | succ m ih =>
+      rw [pow_succ', End.mul_def, Category.assoc, h, ← Category.assoc, ih,
+        Category.assoc, ← End.mul_def, ← pow_succ']
 
 /-- The direct m-fold compact-support operator, using normalized exchange along g_X^m
 before applying theta^[m]. It is defined independently of powers of the one-step operator.
@@ -212,7 +300,11 @@ theorem iterate_on_cohomology (c : WeilCoefficient ell)
     (DerivedCategory.homologyFunctor _ i).map (directIterate D ell hEll X₀ c c₀ K m) =
       (DerivedCategory.homologyFunctor _ i).map
         (globalFrobenius D ell hEll X₀ c c₀ K ^ m) := by
-  sorry
+  obtain ⟨hb, hs⟩ := direct_iterate_recurrence D ell hEll X₀ c c₀ K i
+  induction m, _hm using Nat.le_induction with
+  | base => simpa only [pow_one] using hb
+  | succ m hm ih =>
+    rw [hs m hm, ih, pow_succ', End.mul_def, Functor.map_comp]
 
 /-- Trace in an arbitrary degree, with the actual coefficient-global-section scalars.
 Source: clause (2), each cohomological trace
@@ -253,7 +345,10 @@ theorem formula (c : WeilCoefficient ell)
         ∑ j ∈ s, (j.negOnePow : ℤ) • cohomologyTrace c
           (stalkComplex D ell hEll X₀ c K m hm y)
           (localFrobenius D ell hEll X₀ c K m hm y) j := by
-  sorry
+  obtain ⟨hpts, hcf, hsf, s, hvc, hvs⟩ := cohomology_finiteness D ell hEll X₀ c c₀ K m hm
+  refine ⟨hpts, hcf, hsf, s, hvc, hvs, ?_⟩
+  have ht := direct_trace_window D ell hEll X₀ c c₀ K m hm s hvc hvs
+  simpa only [cohomologyTrace, iterate_on_cohomology D ell hEll X₀ c c₀ K m hm] using ht
 
 /-- The inclusion of a finite coefficient field into Qbar on actual constant scalars.
 Source: clause (3), E' → Qbar (blueprint: det-thm-tf-uniform-formula-weil). -/
@@ -272,7 +367,56 @@ theorem finite_model (K : strictWeilComplexCategory D ell hEll X₀ .qbar) :
     ∃ (E : PadicAlgCl.FiniteIntermediateField ell)
       (K' : strictWeilComplexCategory D ell hEll X₀ (.finite E)),
       Nonempty ((weilStrictExtendToQbar D ell hEll X₀ E).obj K'.obj ≅ K.obj) := by
-  sorry
+  obtain ⟨E, K', e, _⟩ := (weilDescent_properties D ell hEll X₀).1 K
+  exact ⟨E, K', e⟩
+
+private theorem constants_injective (T : Type) [TopologicalSpace T] [CommRing T]
+    [IsTopologicalRing T] : Function.Injective (Profinite.continuousMapConstRingHom.{u} T) := by
+  intro x y h
+  have hs := congrArg (fun z : MonObj.Γ (Profinite.continuousMapRingObj.{u} T) ↦
+    Functor.LaxMonoidal.ε (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ≫
+      (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map z.hom) h
+  dsimp only [Profinite.continuousMapConstRingHom] at hs
+  simp only [Sheaf.ε_comp_ringHomΓSheafCompose_hom
+    (coherentTopology Profinite.{u}) (Profinite.continuousMapRingSheaf T)
+    (Profinite.continuousMapConstSectionRingHom T) (fun _ _ ↦ rfl)] at hs
+  have hh := congrArg (fun f ↦
+    f.app (Opposite.op (Profinite.of PUnit.{u + 1})) (ULift.up 1)) hs
+  change ((1 : ℤ) : ULift.{u + 1} C(PUnit.{u + 1}, T)) *
+    ULift.up (ContinuousMap.const PUnit.{u + 1} x) =
+      ((1 : ℤ) : ULift.{u + 1} C(PUnit.{u + 1}, T)) *
+        ULift.up (ContinuousMap.const PUnit.{u + 1} y) at hh
+  simp only [Int.cast_one, one_mul] at hh
+  exact congrArg (fun f ↦ f.down PUnit.unit) hh
+
+private theorem continuous_global_isField (T : Type) [TopologicalSpace T] [Field T]
+    [IsTopologicalRing T] : IsField (MonObj.Γ (Profinite.continuousMapRingObj.{u} T)) := by
+  let e := RingEquiv.ofBijective (Profinite.continuousMapConstRingHom.{u} T)
+    ⟨constants_injective T, Profinite.continuousMapConstRingHom_surjective T⟩
+  exact e.symm.toMulEquiv.isField (Field.toIsField T)
+
+private theorem continuous_global_free (T : Type) [TopologicalSpace T] [Field T]
+    [IsTopologicalRing T] (M : Type (u + 1)) [AddCommGroup M]
+    [Module (MonObj.Γ (Profinite.continuousMapRingObj.{u} T)) M] :
+    Module.Free (MonObj.Γ (Profinite.continuousMapRingObj.{u} T)) M := by
+  let := (continuous_global_isField T).toField
+  infer_instance
+
+private theorem trace_scalar_extension {R S : Type u} [CommRing R] [CommRing S]
+    (ρ : R →+* S) {M : ModuleCat.{v} R} {N : ModuleCat.{max u v} S}
+    [Module.Free R M] [Module.Finite R M]
+    (f : End M) (g : End N) (e : (ModuleCat.extendScalars ρ).obj M ≅ N)
+    (h : (ModuleCat.extendScalars ρ).map f ≫ e.hom = e.hom ≫ g) :
+    ρ (LinearMap.trace R M f.hom) = LinearMap.trace S N g.hom := by
+  let := ρ.toAlgebra
+  have hg : e.toLinearEquiv.conj
+      ((ModuleCat.extendScalars ρ).map f).hom = g.hom := by
+    apply LinearMap.ext
+    intro x
+    have hx := congrArg (fun q ↦ q (e.inv x)) h
+    simpa using hx
+  rw [← hg, LinearMap.trace_conj']
+  exact (LinearMap.trace_baseChange f.hom S).symm
 
 /-- For every finite strict model the cohomology tensor comparisons intertwine all
 specified powers and returns, and every individual trace extends along E' → Qbar.
@@ -321,6 +465,30 @@ theorem finite_model_comparison
         (localFrobenius D ell hEll X₀ (.finite E) K' m hm y) j) =
       cohomologyTrace .qbar (stalkComplex D ell hEll X₀ .qbar K m hm y)
         (localFrobenius D ell hEll X₀ .qbar K m hm y) j) := by
-  sorry
+  obtain ⟨hcf, hc⟩ := finite_model_compact_comparison D ell hEll X₀ c₀ K E K' _e
+  obtain ⟨hsf, hs⟩ := finite_model_local_comparison D ell hEll X₀ K E K' _e
+  refine ⟨hc, hs, ?_, ?_⟩
+  · intro m hm i
+    obtain ⟨e, he⟩ := hc i
+    let := hcf i
+    let : Module.Free (scalars.{u} ell (.finite E))
+        (compactCohomology D ell hEll X₀ (.finite E) c₀ K' i) :=
+      continuous_global_free E _
+    exact trace_scalar_extension (scalarInclusion ell E)
+      ((DerivedCategory.homologyFunctor _ i).map
+        (globalFrobenius D ell hEll X₀ (.finite E) c₀ K' ^ m))
+      ((DerivedCategory.homologyFunctor _ i).map
+        (globalFrobenius D ell hEll X₀ .qbar c₀ K ^ m)) e (he m)
+  · intro m hm y j
+    obtain ⟨e, he⟩ := hs m hm y j
+    let := hsf m hm y j
+    let : Module.Free (scalars.{u} ell (.finite E))
+        (stalkCohomology D ell hEll X₀ (.finite E) K' m hm y j) :=
+      continuous_global_free E _
+    exact trace_scalar_extension (scalarInclusion ell E)
+      ((DerivedCategory.homologyFunctor _ j).map
+        (localFrobenius D ell hEll X₀ (.finite E) K' m hm y))
+      ((DerivedCategory.homologyFunctor _ j).map
+        (localFrobenius D ell hEll X₀ .qbar K m hm y)) e he
 
 end WeilConjectures.WeilUniformTrace
