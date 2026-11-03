@@ -140,7 +140,7 @@ private theorem brownComparison
     (compactification : Compactification.BoundaryCompactification (ProjectiveLine Y ↘ Y))
     (h : ∀ A, localizingClosureProEtale (coefficient l c).X (ProjectiveLine Y) A →
       localizingClosureProEtale (coefficient l c).X Y
-        ((rightDerivedLowerShriekOfCompactification (coefficient l c).X
+        ((CondensedRing.rightDerivedLowerShriekOfCompactification (coefficient l c).X
           compactification.obj.obj).obj A))
     (G : (localizingClosureProEtale (coefficient l c).X Y).FullSubcategory ⥤
       (localizingClosureProEtale (coefficient l c).X (ProjectiveLine Y)).FullSubcategory)
@@ -170,7 +170,7 @@ private theorem brownComparison
   have : (ProjectiveLine Y ↘ Y).IsOver (Spec (.of k)) := ⟨rfl⟩
   obtain ⟨φ, _⟩ := compactification_coherence_cocycle Λ l
     (coefficientAdmissible l c) k (ProjectiveLine Y ↘ Y)
-  let e₀ : rightDerivedLowerShriekOfCompactification Λ c₀.obj.obj ≅
+  let e₀ : CondensedRing.rightDerivedLowerShriekOfCompactification Λ c₀.obj.obj ≅
       moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y) :=
     Functor.isoWhiskerRight (derivedOpenImmersionLowerShriekId Λ (ProjectiveLine Y)) _ ≪≫
       Functor.leftUnitor _
@@ -267,7 +267,7 @@ theorem rationalP1_triangle
     (∀ (compactification : Compactification.BoundaryCompactification (ProjectiveLine Y ↘ Y))
       (h : ∀ A, localizingClosureProEtale (coefficient l c).X (ProjectiveLine Y) A →
         localizingClosureProEtale (coefficient l c).X Y
-          ((rightDerivedLowerShriekOfCompactification (coefficient l c).X
+          ((CondensedRing.rightDerivedLowerShriekOfCompactification (coefficient l c).X
             compactification.obj.obj).obj A))
       (G : (localizingClosureProEtale (coefficient l c).X Y).FullSubcategory ⥤
         (localizingClosureProEtale (coefficient l c).X (ProjectiveLine Y)).FullSubcategory)
