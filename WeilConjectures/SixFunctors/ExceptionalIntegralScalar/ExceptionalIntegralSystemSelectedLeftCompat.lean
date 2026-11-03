@@ -32,9 +32,10 @@ private theorem inverse_coordinates {C : Type*} [Category C] {X Y Z W V : C}
     (f : X ≅ Y) (g : Y ≅ Z) (h : X ≅ W) (i : W ≅ V) (j : V ≅ Z)
     (eqn : f.hom ≫ g.hom = h.hom ≫ i.hom ≫ j.hom) :
     f.inv = g.hom ≫ j.inv ≫ i.inv ≫ h.inv := by
-  have hh := congrArg (fun k ↦ f.inv ≫ k ≫ j.inv ≫ i.inv ≫ h.inv) eqn
-  simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc,
-    Iso.hom_inv_id, Category.comp_id] using hh.symm
+  apply (cancel_epi f.hom).1
+  simp only [Iso.hom_inv_id, ← Category.assoc]
+  rw [eqn]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.id_comp]
 
 /-- The normalized selected comparison intertwines the left scalar mates.
 Source: Zheng, Lemma 5.22 and Proposition 5.26, the coefficient projection square.
