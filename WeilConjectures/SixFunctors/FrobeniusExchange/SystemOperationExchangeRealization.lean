@@ -1317,9 +1317,10 @@ theorem compactRealization_exists (c : Compactification f) :
       rw [compactFiniteEvaluation_hom_app]
       exact_by_kernel hγ K n)
 
-/-- Uniqueness of the projection-normalized identification, given that the shifted Hom groups from the recorded Rf_!
-into its finite restricted reductions are finite. Derived completeness of the target holds since it is isomorphic to a
-constructible object. Over a finite field `K₀` the finiteness is
+/-- Uniqueness of the projection-normalized identification, given that the shifted Hom
+groups from the recorded Rf_! into its finite restricted reductions are finite. Derived
+completeness of the target holds since it is isomorphic to a constructible object.
+Over a finite field `K₀` the finiteness is
 the finiteness of étale cohomology of constructible complexes (SGA 4½, Th. finitude); over an
 arbitrary field it can fail, so no general uniqueness statement is made; `compactRealization`
 takes its witness from `compactRealization_exists`.
