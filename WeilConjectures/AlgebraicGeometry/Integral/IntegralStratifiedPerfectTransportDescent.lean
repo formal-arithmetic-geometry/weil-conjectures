@@ -152,16 +152,20 @@ def pbcRestrictEquivalence {T : Scheme.{u}}
     (pbcRestrictComp e.inv e.hom (𝟙 S) e.inv_hom_id ≪≫ pbcRestrictIdIso S).symm
     (pbcRestrictComp e.hom e.inv (𝟙 R) e.hom_inv_id ≪≫ pbcRestrictIdIso R)
 
-private def constantPF (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
+/-- The constant presheaf of modules, before sheafification.
+(auxiliary; not a blueprint node). -/
+def adicLisseConstantPresheaf (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
     PresheafOfModules.pushforward₀
       ((Functor.const X.ProEt).obj (Discrete.mk (ULift.up ())))
       ((Functor.const (Discrete (ULift.{u + 1} Unit))ᵒᵖ).obj (RingCat.of A))
 
-private def constantPresheafHomEquiv (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
+/-- Maps out of a constant presheaf are maps into sections over a terminal object.
+(auxiliary; not a blueprint node). -/
+def adicLisseConstantPresheafHomEquiv (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) (hT : IsTerminal T) (M : ModuleCat.{u + 1} A)
     (F : _root_.PresheafOfModules.{u + 1} ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of A))) :
-    ((constantPF X A).obj M ⟶ F) ≃ (M ⟶ F.obj (op T)) where
+    ((adicLisseConstantPresheaf X A).obj M ⟶ F) ≃ (M ⟶ F.obj (op T)) where
   toFun f := f.app (op T)
   invFun q :=
     { app U := q ≫ F.map (hT.from U.unop).op
@@ -188,11 +192,13 @@ private def constantPresheafHomEquiv (X : Scheme.{u}) (A : Type (u + 1)) [CommRi
     simp
     rfl
 
-private def constantPFAdj (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
+/-- The constant presheaf is left adjoint to evaluation at a terminal object.
+(auxiliary; not a blueprint node). -/
+def adicLisseConstantPresheafAdjunction (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) (hT : IsTerminal T) :
-    constantPF X A ⊣ PresheafOfModules.evaluation _ (op T) :=
+    adicLisseConstantPresheaf X A ⊣ PresheafOfModules.evaluation _ (op T) :=
   Adjunction.mkOfHomEquiv
-    { homEquiv := constantPresheafHomEquiv X A T hT
+    { homEquiv := adicLisseConstantPresheafHomEquiv X A T hT
       homEquiv_naturality_left_symm := by
         intros
         apply PresheafOfModules.hom_ext
@@ -200,23 +206,26 @@ private def constantPFAdj (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
         rfl
       homEquiv_naturality_right := by intros; rfl }
 
-/-- Global sections over a terminal object, with the constant scalar action. -/
-private def constantGlobalSections (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
+/-- Global sections over a terminal object, with the constant scalar action.
+(auxiliary; not a blueprint node). -/
+def adicLisseConstantGlobalSections (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) :=
   SheafOfModules.forget (adicLisseRing X A) ⋙
     PresheafOfModules.restrictScalars (adicLisseConstantUnit X A) ⋙
       PresheafOfModules.evaluation _ (op T)
 
-private def constantAdj (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
+/-- Constant module sheaves are left adjoint to global sections.
+(auxiliary; not a blueprint node). -/
+def adicLisseConstantModulesAdjunction (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) (hT : IsTerminal T) :
-    adicLisseConstantModules X A ⊣ constantGlobalSections X A T :=
-  (constantPFAdj X A T hT).comp
+    adicLisseConstantModules X A ⊣ adicLisseConstantGlobalSections X A T :=
+  (adicLisseConstantPresheafAdjunction X A T hT).comp
     (PresheafOfModules.sheafificationAdjunction (adicLisseConstantUnit X A))
 
 /-- Global sections of completed modules, with the constant scalar action. -/
 private def integralGlobalSections {A : Type (u + 1)} [CommRing A]
     (X : Scheme.{u}) (d : AdicCoefficientDatum A) (T : X.ProEt) :=
-  pbcRestrict (pbcCompletedScalar X d) ⋙ constantGlobalSections X A T
+  pbcRestrict (pbcCompletedScalar X d) ⋙ adicLisseConstantGlobalSections X A T
 
 /-- The completed constant realization is left adjoint to global sections. -/
 private def integralConstantAdjunction {A : Type (u + 1)} [CommRing A]
@@ -227,7 +236,7 @@ private def integralConstantAdjunction {A : Type (u + 1)} [CommRing A]
       quotientFinite := d.quotientFinite }
   let e := proEtaleScalarEquivalence X
     ((adicLisseForget X).mapIso (pbcCompletedComparison X d).symm)
-  let adj := ((constantAdj X A T hT).comp
+  let adj := ((adicLisseConstantModulesAdjunction X A T hT).comp
     (adicDatumOrdinaryAdjunction X (adicDatumScalar X pd))).comp e.toAdjunction
   exact adj
 
