@@ -38,6 +38,8 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.LocalVanishing
 
 /-!
 # Extension by zero on the small pro-etale site
@@ -61,6 +63,28 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
+
+/-- Geometric stalk as a functor, with the colimit diagram of the recorded geometric stalk.
+Its object is definitionally `Scheme.proEtaleGeometricFixedModuleStalk y A F`.
+Source: Stacks Project, Tag 0F6B
+(blueprint: lem-cbc-proetale-extension-zero). -/
+def geometricModuleStalkFunctor (A : Type (u + 1)) [CommRing A]
+    {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (y : Spec (.of Ω) ⟶ X) :
+    Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A) ⥤ ModuleCat.{u + 1} A :=
+  sheafToPresheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A) ⋙
+    (Functor.whiskeringLeft _ _ _).obj
+      (Scheme.proEtaleGeometricNeighbourhoodForget y).op ⋙ colim
+
+/-- The stalk functor is additive, as a composite of additive evaluation and colimit functors.
+Source: the colimit construction in Stacks Project, Tag 0F6B
+(blueprint: lem-cbc-proetale-extension-zero). -/
+instance geometricModuleStalkFunctor_additive (A : Type (u + 1)) [CommRing A]
+    {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (y : Spec (.of Ω) ⟶ X) : (geometricModuleStalkFunctor A y).Additive :=
+  inferInstanceAs ((sheafToPresheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A) ⋙
+    (Functor.whiskeringLeft _ _ _).obj
+      (Scheme.proEtaleGeometricNeighbourhoodForget y).op ⋙ colim).Additive)
 
 /-- The degreewise extension of the recorded `j_!`: terms are `j_!(K.X n)` and
 its differentials are `j_!(K.d n m)`, including for unbounded complexes.

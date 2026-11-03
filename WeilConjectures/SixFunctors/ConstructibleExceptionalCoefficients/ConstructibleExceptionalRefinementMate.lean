@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.ConstructibleExceptionalAdjunctionCoefficientsData
 import Mathlib.CategoryTheory.Shift.Adjunction
+public import Mathlib.Algebra.Group.Int.Defs
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Shift.CommShift
 
 /-! # Completing a left refinement by its adjunction conjugate -/
 
@@ -18,6 +21,21 @@ open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+
+/-- A left refinement together with its right adjunction comparison and shift equations.
+Source: the adjunction maps of the blueprint tensor--Hom exchange
+(blueprint: def-sf-constructible-exceptional-refinement-mate). -/
+structure RefinementComparison (A : FA ⊣ GA) (B : FB ⊣ GB) where
+  left : FA ≅ FB
+  right : GB ≅ GA
+  counit (L : D) :
+    left.hom.app (GB.obj L) ≫ B.counit.app L =
+      FA.map (right.hom.app L) ≫ A.counit.app L
+  unit (K : C) :
+    B.unit.app K ≫ right.hom.app (FB.obj K) =
+      A.unit.app K ≫ GA.map (left.hom.app K)
+  leftShift : left.hom.CommShift ℤ
+  rightShift : right.hom.CommShift ℤ
 
 /-- Complete a shift-compatible left refinement by the conjugate right isomorphism.
 Source: Mathlib adjunction conjugation; blueprint exceptional construction, refinement step

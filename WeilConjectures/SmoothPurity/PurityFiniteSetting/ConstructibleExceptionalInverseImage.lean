@@ -51,4 +51,19 @@ Source: blueprint sk-def-sf-operations (vi), coefficient universe convention
 noncomputable instance coefficientFinite (P : PurityFiniteSetting.{u}) : Finite P.Coefficient :=
   inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
 
+/-- The published intrinsic exceptional inverse image at the purity setting's actual
+finite quotient. This transparent alias uses the existing construction unchanged.
+Source: blueprint sk-def-sf-operations (vi), order 1489
+(blueprint: def-weil-exceptional-inverse-image). -/
+noncomputable abbrev exceptionalInverseImage (P : PurityFiniteSetting.{u})
+    {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]
+    [QuasiCompact (X ↘ Spec (.of P.field.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]
+    [QuasiCompact (Y ↘ Spec (.of P.field.k))]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    Scheme.proEtaleDerivedCategory Y P.Ring ⥤ Scheme.proEtaleDerivedCategory X P.Ring :=
+  Scheme.finiteExceptionalInverseImage P.coefficients.l P.extension P.level P.level_pos
+    P.field.k X Y f
+
 end WeilConjectures.PurityFiniteSetting

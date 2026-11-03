@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorComparison
 public import WeilConjectures.SmoothPurity.Sf.SfDerivedDirectImage
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSiteSupplement
+public import Mathlib.CategoryTheory.InducedCategory
+public import Mathlib.CategoryTheory.Monoidal.CommMon_
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 
 /-! # Direct image on restricted coefficient towers
 
@@ -277,3 +280,178 @@ theorem integralOrdinaryTowerComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     exact eq_of_heq ((he M n.unop V x).trans h.symm)
 
 end WeilConjectures.IntegralSystemRealization
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- A tower of modules over possibly different condensed coefficient rings, with
+transition maps linear over the common base coefficient ring. Quotient-linear
+transitions are in particular such maps. No cartesianness or completeness is imposed.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison). -/
+structure RestrictedCoefficientTower (X : Scheme.{u}) where
+  /-- The actual module at each coefficient level. -/
+  obj : ∀ n, Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (condensedRingObj (A n).X X)
+  /-- The specified transition maps after restriction to the common base. -/
+  map : ∀ {m n : ℕᵒᵖ}, (m ⟶ n) →
+    ((Mod.comap (coefficientMap (a m).hom.hom X)).obj (obj m) ⟶
+      (Mod.comap (coefficientMap (a n).hom.hom X)).obj (obj n))
+  /-- Identity transitions. -/
+  map_id : ∀ n, map (𝟙 n) = 𝟙 _
+  /-- Composition of the specified transitions. -/
+  map_comp : ∀ {m n p : ℕᵒᵖ} (g : m ⟶ n) (h : n ⟶ p), map (g ≫ h) = map g ≫ map h
+
+/-- Restriction of the given tower, retaining its specified transitions.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison). -/
+def RestrictedCoefficientTower.restriction {X : Scheme.{u}}
+    (M : RestrictedCoefficientTower R A a X) :
+    ℕᵒᵖ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj R.X X) where
+  obj n := (Mod.comap (coefficientMap (a n).hom.hom X)).obj (M.obj n)
+  map g := M.map g
+  map_id := M.map_id
+  map_comp := M.map_comp
+
+/-- Morphisms of restricted towers are natural transformations of their base-linear
+restrictions. Thus the comparison is natural even for base-linear morphisms which
+are not linear over the individual level rings.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison). -/
+abbrev RestrictedCoefficientTowers (X : Scheme.{u}) :=
+  InducedCategory _ (fun M : RestrictedCoefficientTower R A a X ↦ M.restriction R A a)
+
+/-- The functor restricting every coefficient level to the base condensed ring.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison). -/
+def coefficientTowerRestriction (X : Scheme.{u}) :
+    RestrictedCoefficientTowers R A a X ⥤
+      ℕᵒᵖ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj R.X X) :=
+  inducedFunctor _
+
+/-- The published condensed coefficient square at one tower level.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison). -/
+def ordinaryTowerLevelComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : RestrictedCoefficientTower R A a X) (n : ℕᵒᵖ) :
+    ((lowerStar (A n).X f ⋙ Mod.comap (coefficientMap (a n).hom.hom Y)).obj (M.obj n)) ≅
+      (lowerStar R.X f).obj ((M.restriction R A a).obj n) :=
+  (comapLowerStarIso (a n).hom.hom f).app (M.obj n)
+
+private theorem level_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : RestrictedCoefficientTower R A a X) (n : ℕᵒᵖ) :
+    ((ordinaryTowerLevelComparison R A a f M n).hom).hom =
+      𝟙 ((ProEtale.lowerStar Ab.{u + 1} f).obj (M.obj n).X) := by
+  exact Mod.comapMapModComapIso_hom_app_hom _ _ _ _ _ _ _
+
+private theorem level_inv {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : RestrictedCoefficientTower R A a X) (n : ℕᵒᵖ) :
+    ((ordinaryTowerLevelComparison R A a f M n).inv).hom =
+      𝟙 ((ProEtale.lowerStar Ab.{u + 1} f).obj (M.obj n).X) := by
+  have h := congrArg (fun t ↦ t.hom)
+    ((ordinaryTowerLevelComparison R A a f M n).hom_inv_id)
+  change (ordinaryTowerLevelComparison R A a f M n).hom.hom ≫
+    (ordinaryTowerLevelComparison R A a f M n).inv.hom = 𝟙 _ at h
+  rw [level_hom] at h
+  erw [Category.id_comp] at h
+  exact h
+
+/-- First apply ordinary direct image at each coefficient level, then restrict.
+Its transitions are the transported direct images of the specified transitions.
+The comparison factors are identities on underlying sheaves, so these are the
+actual ordinary direct-image maps; see `ordinaryTowerImage_map_hom`.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison). -/
+def ordinaryTowerImage {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : RestrictedCoefficientTower R A a X) :
+    ℕᵒᵖ ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj R.X Y) where
+  obj n := (lowerStar (A n).X f ⋙ Mod.comap (coefficientMap (a n).hom.hom Y)).obj (M.obj n)
+  map {m n} g := (ordinaryTowerLevelComparison R A a f M m).hom ≫
+    (lowerStar R.X f).map (M.map g) ≫ (ordinaryTowerLevelComparison R A a f M n).inv
+  map_id n := by
+    rw [M.map_id]
+    erw [(lowerStar R.X f).map_id]
+    simp
+  map_comp g h := by simp [M.map_comp, Category.assoc]
+
+/-- The image tower uses the actual ordinary direct-image transitions.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison).
+Proof: each coefficient-square factor is the identity on underlying sheaves. -/
+theorem ordinaryTowerImage_map_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : RestrictedCoefficientTower R A a X) {m n : ℕᵒᵖ} (g : m ⟶ n) :
+    ((ordinaryTowerImage R A a f M).map g).hom =
+      (ProEtale.lowerStar Ab.{u + 1} f).map (M.map g).hom := by
+  change (ordinaryTowerLevelComparison R A a f M m).hom.hom ≫ _ ≫
+    (ordinaryTowerLevelComparison R A a f M n).inv.hom = _
+  rw [level_hom, level_inv]
+  erw [Category.id_comp, Category.comp_id]
+  rfl
+
+/-- The objectwise coefficient squares assemble into a comparison of towers.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison). -/
+def ordinaryTowerComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : RestrictedCoefficientTower R A a X) :
+    ordinaryTowerImage R A a f M ≅ M.restriction R A a ⋙ lowerStar R.X f :=
+  NatIso.ofComponents (ordinaryTowerLevelComparison R A a f M) (by
+    intro m n g
+    dsimp [ordinaryTowerImage, RestrictedCoefficientTower.restriction]
+    simp [Category.assoc])
+
+/-- The ordinary image of restricted towers, natural in the input tower.
+Source: `fix-prop-coherence`, coefficient comparison sub-step
+(blueprint: lem-sf-integral-ordinary-tower-comparison). -/
+def ordinaryCoefficientTowerImage {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    RestrictedCoefficientTowers R A a X ⥤
+      ℕᵒᵖ ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj R.X Y) where
+  obj M := ordinaryTowerImage R A a f M
+  map {M N} g :=
+    (ordinaryTowerComparison R A a f M).hom ≫
+      Functor.whiskerRight g.hom (lowerStar R.X f) ≫
+        (ordinaryTowerComparison R A a f N).inv
+  map_id M := by simp
+  map_comp g h := by simp [Category.assoc]
+
+/-- Ordinary direct image commutes with restriction of condensed coefficient towers,
+uniquely with its identity-on-underlying-sheaves normalization. The rings at the
+levels may vary, so this applies to all positive integral quotient levels at once.
+The base ring, the level rings, and the scheme morphism are arbitrary.
+Source: latest blueprint `fix-prop-coherence`, specified coefficient comparisons
+preserving the adjunction maps (blueprint: lem-sf-integral-ordinary-tower-comparison).
+
+Proof: use the published ordinary condensed coefficient square at each level.
+Its components are identities on underlying sheaves. Transport the specified
+transition maps along these squares; their underlying maps are the actual ordinary
+direct images. Naturality in the tower index follows by cancellation of inverse
+comparisons. Naturality in the input tower is inherited from its given natural
+transformation. Assemble the two natural isomorphisms, as in the previous proof.
+Finally any other normalized comparison agrees at every input and every coefficient
+level after forgetting the module structure. Faithfulness and extensionality give
+uniqueness. This includes identity arrows, zero rings and modules, and empty schemes. -/
+theorem integralOrdinaryTowerComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ∃! e : ordinaryCoefficientTowerImage R A a f ≅
+      coefficientTowerRestriction R A a X ⋙
+        (Functor.whiskeringRight ℕᵒᵖ _ _).obj (lowerStar R.X f),
+      ∀ (M : RestrictedCoefficientTowers R A a X) (n : ℕᵒᵖ),
+        (((e.hom.app M).app n).hom) =
+          𝟙 ((ProEtale.lowerStar Ab.{u + 1} f).obj (M.obj n).X) := by
+  let e : ordinaryCoefficientTowerImage R A a f ≅
+      coefficientTowerRestriction R A a X ⋙
+        (Functor.whiskeringRight ℕᵒᵖ _ _).obj (lowerStar R.X f) :=
+    NatIso.ofComponents (ordinaryTowerComparison R A a f) (by
+      intro M N g
+      dsimp [ordinaryCoefficientTowerImage, coefficientTowerRestriction]
+      simp [Category.assoc])
+  refine ⟨e, ?_, ?_⟩
+  · intro M n
+    exact level_hom R A a f M n
+  · intro d hd
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply NatTrans.ext
+    funext n
+    apply Mod.hom_ext
+    exact (hd M n).trans (level_hom R A a f M n).symm
+
+end AlgebraicGeometry.ProEtale.CondensedRing
