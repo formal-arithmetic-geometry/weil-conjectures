@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientDescentTwoColimit
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
+import all WeilConjectures.AlgebraicGeometry.Integral.IntegralIndConstructibleHeartClosure
 
 /-!
 # Constructibility of proper higher direct images with rational coefficients
@@ -29,88 +30,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
-
--- Step 1: use the identity cover and the zero finitely presented condensed module.
-private lemma finiteConstantLocalModel_of_isZero
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (X : Scheme.{u})
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hM : IsZero M) : HasFiniteConstantLocalModel Λ X M := by
-  refine ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun i ↦ ?_⟩
-  refine ⟨HasZeroObject.zero.choose, ?_, ⟨?_⟩⟩
-  · exact ⟨0, 0, 𝟙 _, ⟨(isZero_zero _).iso (isZero_cokernel_of_epi (𝟙 _))⟩⟩
-  · exact ((CondensedRing.upperStar Λ _).map_isZero hM).iso
-      (((upperStarFromPoint _).mapMod Λ).map_isZero (isZero_zero _))
-
--- The one-stratum stratification works also when the scheme is empty.
-private lemma finiteConstantStratified_of_isZero
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (X : Scheme.{u})
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hM : IsZero M) : IsFiniteConstantStratified Λ X M := by
-  let S : Scheme.Stratification X :=
-    { n := 1
-      stratum := fun _ ↦ Set.univ
-      isLocallyClosed_stratum := fun _ ↦ isOpen_univ.isLocallyClosed
-      isConstructible_stratum := fun _ ↦ Topology.IsConstructible.univ
-      iUnion_stratum_eq_univ := Set.iUnion_const _
-      pairwise_disjoint_stratum := fun i j hij ↦ (hij (Subsingleton.elim i j)).elim
-      domain := fun _ ↦ X
-      immersion := fun _ ↦ 𝟙 X
-      range_immersion := fun _ ↦ Set.range_id' }
-  exact ⟨S, fun a ↦ finiteConstantLocalModel_of_isZero Λ _ _
-    ((CondensedRing.upperStar Λ (S.immersion a)).map_isZero hM)⟩
-
-private lemma constantModelConstructible_of_isZero
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (X : Scheme.{u})
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hM : IsZero M) : IsConstantModelConstructible Λ X M := by
-  classical
-  unfold IsConstantModelConstructible
-  split
-  · exact finiteConstantStratified_of_isZero Λ X M hM
-  · exact fun U _ ↦ finiteConstantStratified_of_isZero Λ _ _
-      ((CondensedRing.upperStar Λ U.ι).map_isZero hM)
-
-private lemma constantModelConstructible_of_iso
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (X : Scheme.{u})
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
-    (e : M ≅ N) (hM : IsConstantModelConstructible Λ X M) :
-    IsConstantModelConstructible Λ X N := by
-  have hs (T : Scheme.{u})
-      {A B : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)}
-      (e : A ≅ B) (hA : IsFiniteConstantStratified Λ T A) :
-      IsFiniteConstantStratified Λ T B := by
-    obtain ⟨S, hS⟩ := hA
-    refine ⟨S, fun a ↦ ?_⟩
-    obtain ⟨𝒰, h𝒰⟩ := hS a
-    refine ⟨𝒰, fun i ↦ ?_⟩
-    obtain ⟨P, hP, ⟨eP⟩⟩ := h𝒰 i
-    exact ⟨P, hP, ⟨((CondensedRing.upperStar Λ (𝒰.f i)).mapIso
-      ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e)).symm ≪≫ eP⟩⟩
-  classical
-  unfold IsConstantModelConstructible at *
-  split_ifs at * with h
-  · exact hs X e hM
-  · exact fun U hU ↦ hs U.toScheme ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
-
-private lemma constantModelConstructible_single
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (X : Scheme.{u})
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hM : IsConstantModelConstructible Λ X M) :
-    constantModelBoundedConstructible Λ X ((DerivedCategory.singleFunctor _ 0).obj M) := by
-  refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
-  by_cases hn : n = 0
-  · subst n
-    exact constantModelConstructible_of_iso Λ X
-      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M).symm hM
-  · apply constantModelConstructible_of_isZero
-    rcases lt_or_gt_of_ne hn with hn | hn
-    · exact DerivedCategory.isZero_of_isGE _ 0 n hn
-    · exact DerivedCategory.isZero_of_isLE _ 0 n hn
 
 private lemma constantModelBoundedConstructible_eq_rational
     (ℓ : ℕ) [Fact ℓ.Prime]

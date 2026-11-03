@@ -361,9 +361,9 @@ theorem picard_h1_fixed_model_comparison
     let p := RingHom.ker (W.evaluation U w hwU).hom
     let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
     let τ := Classical.choice (picard_descended_fibre_coefficient_trivial f hO L s hLs)
-    obtain ⟨eK, eC, φ, hmaps⟩ := picard_residue_homology_chosen_geometric_maps
-      f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE C
-      (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2)
+    obtain ⟨φ, e, ei, hmaps⟩ := picard_residue_homology_chosen_geometric_maps
+      f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE.some C
+      (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2.some)
     have hreszero := affine_betti_model_residue_minimality W
       ((schemeDerivedDirectImage (pullback.snd f k)).obj
         ((DerivedCategory.singleFunctor
@@ -378,6 +378,6 @@ theorem picard_h1_fixed_model_comparison
         (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
           (ui i) (hui i))).left) 1
     exact residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
-      (fun i ↦ (hC i).2.2.1) e0 e1 B D g eK eC φ hmaps hreszero
+      (fun i ↦ (hC i).2.2.1) e0 e1 B D g _ _ φ (fun i ↦ (hmaps i).2.2) hreszero
 
 end AlgebraicGeometry.Scheme

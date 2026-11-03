@@ -26,6 +26,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
 
 import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
+import WeilConjectures.SixFunctors.FrobeniusExchange.SystemOpenScalarPullbackMate
 import all WeilConjectures.SixFunctors.FrobeniusExchange.IntegralSystemEvaluationNormalization
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.OrdinaryOpenFiniteEvaluation
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralSystemOpenEvaluation
@@ -904,7 +905,9 @@ obtained by the standard componentwise criterion. -/
 theorem systemOpenScalarInv_app_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] (K : coefficientSequenceDerived l E X) :
     IsIso ((systemOpenScalarInv l E L ι j).app K) := by
-  sorry
+  have := systemScalarPullback_leftMate_isIso l E L ι j
+    (systemDerivedOpenAdjunction l E j) (systemDerivedOpenAdjunction l L j)
+  exact @NatIso.isIso_app_of_isIso _ _ _ _ _ _ (systemOpenScalarInv l E L ι j) this K
 
 /-- Tensor extension commutes with the specified exact open extension.
 Source: Zheng 4.1, 4.10; Stacks 03DI

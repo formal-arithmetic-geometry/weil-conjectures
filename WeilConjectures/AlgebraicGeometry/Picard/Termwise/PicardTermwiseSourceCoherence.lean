@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
-import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
+public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 
 /-! # Coherence of the termwise source single
 Source: Stacks Project, Tags 06YJ and 0D5S.
@@ -22,8 +22,34 @@ noncomputable section
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- The canonical counit comparison for the source singles commutes with successive
-pullback. This assertion concerns only the source, with no local perfect model.
+instance isIso_picardTermwiseSingleMap_unit {W T : Scheme.{v}} (t : T ⟶ W) :
+    IsIso (picardTermwiseSingleMap t (SheafOfModules.unit (moduleRings W.toRingedSpace))) := by
+  have : SheafOfModules.IsInvertible.{v, v, v}
+      (SheafOfModules.unit (moduleRings W.toRingedSpace)) :=
+    SheafOfModules.instIsInvertibleUnit (R := W.ringCatSheaf)
+  have := Modules.isIso_canonicalSinglePullbackMap t
+    (SheafOfModules.unit (moduleRings W.toRingedSpace))
+  unfold picardTermwiseSingleMap
+  infer_instance
+
+/-- The canonical counit comparison for the source single: the derived pullback of the
+degree-zero single of the structure sheaf is the single of its tensor pullback. -/
+def picardTermwiseSourceIso {W T : Scheme.{v}} (t : T ⟶ W) :
+    (derivedPullback t).obj ((DerivedCategory.singleFunctor
+      (SheafOfModules.{v} (moduleRings W.toRingedSpace)) 0).obj
+        (SheafOfModules.unit (moduleRings W.toRingedSpace))) ≅
+      DerivedCategory.Q.obj (picardTermwiseSource t) :=
+  asIso (picardTermwiseSingleMap t (SheafOfModules.unit (moduleRings W.toRingedSpace)))
+
+@[simp]
+theorem picardTermwiseSourceIso_hom {W T : Scheme.{v}} (t : T ⟶ W) :
+    (picardTermwiseSourceIso t).hom =
+      picardTermwiseSingleMap t (SheafOfModules.unit (moduleRings W.toRingedSpace)) :=
+  rfl
+
+/-- The canonical counit comparison `picardTermwiseSourceIso` for the source singles
+commutes with successive pullback. This assertion concerns only the source, with no local
+perfect model.
 Source: Stacks Project, Tags 06YJ and 0D5S.
 (blueprint: lem-sc-picard-termwise-source-coherence)
 
@@ -41,44 +67,21 @@ Proof:
    identifies the two sides of the displayed equation. Transport along ht; proof
    irrelevance identifies all proofs of the equality of the composite maps.
    This calculation also applies to empty schemes and the zero structure sheaf. -/
-theorem picard_termwise_source_coherence (W : Scheme.{v}) :
-    ∃ a : ∀ {T : Scheme.{v}} (t : T ⟶ W),
-        (derivedPullback t).obj ((DerivedCategory.singleFunctor
-          (SheafOfModules.{v} (moduleRings W.toRingedSpace)) 0).obj
-            (SheafOfModules.unit (moduleRings W.toRingedSpace))) ≅
-          DerivedCategory.Q.obj (picardTermwiseSource t),
-      ∀ {T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)
-        (ht : i ≫ t = t'),
-      let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec
-        (Classical.choose_spec exists_derivedPullbackComposition)))) i t ≪≫
-          eqToIso (congrArg (fun g : T' ⟶ W ↦ derivedPullback g) ht)
-      (a t').hom ≫ DerivedCategory.Q.map (picardTermwiseSourceRestrictionIso i t t' ht).hom =
-        c.inv.app _ ≫ (derivedPullback i).map (a t).hom ≫
-          (picardTermwiseCounit i).app (picardTermwiseSource t) := by
-  let M := SheafOfModules.unit (moduleRings W.toRingedSpace)
-  have : SheafOfModules.IsInvertible.{v, v, v} M := by
-    dsimp [M]
-    exact SheafOfModules.instIsInvertibleUnit (R := W.ringCatSheaf)
-  have hIso : ∀ {T : Scheme.{v}} (t : T ⟶ W),
-      IsIso (picardTermwiseSingleMap t M) := by
-    intro T t
-    have := Modules.isIso_canonicalSinglePullbackMap t M
-    unfold picardTermwiseSingleMap
-    infer_instance
-  let a : ∀ {T : Scheme.{v}} (t : T ⟶ W),
-      (derivedPullback t).obj ((DerivedCategory.singleFunctor
-        (SheafOfModules.{v} (moduleRings W.toRingedSpace)) 0).obj M) ≅
-        DerivedCategory.Q.obj (picardTermwiseSource t) := fun t ↦
-    @asIso _ _ _ _ (picardTermwiseSingleMap t M) (hIso t)
-  refine ⟨a, ?_⟩
-  intro T T' i t t' ht
-  let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec
-    (Classical.choose_spec exists_derivedPullbackComposition)))) i t ≪≫
-      eqToIso (congrArg (fun g : T' ⟶ W ↦ derivedPullback g) ht)
-  have h := picardTermwiseSingleMap_composition i t t' ht M
-  change c.hom.app _ ≫ (a t').hom ≫
+theorem picard_termwise_source_coherence {W T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W)
+    (t' : T' ⟶ W) (ht : i ≫ t = t') :
+    let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition)))) i t ≪≫
+        eqToIso (congrArg (fun g : T' ⟶ W ↦ derivedPullback g) ht)
+    (picardTermwiseSourceIso t').hom ≫
+        DerivedCategory.Q.map (picardTermwiseSourceRestrictionIso i t t' ht).hom =
+      c.inv.app _ ≫ (derivedPullback i).map (picardTermwiseSourceIso t).hom ≫
+        (picardTermwiseCounit i).app (picardTermwiseSource t) := by
+  intro c
+  have h := picardTermwiseSingleMap_composition i t t' ht
+    (SheafOfModules.unit (moduleRings W.toRingedSpace))
+  change c.hom.app _ ≫ (picardTermwiseSourceIso t').hom ≫
       DerivedCategory.Q.map (picardTermwiseSourceRestrictionIso i t t' ht).hom =
-    (derivedPullback i).map (a t).hom ≫
+    (derivedPullback i).map (picardTermwiseSourceIso t).hom ≫
       (picardTermwiseCounit i).app (picardTermwiseSource t) at h
   exact (c.app _).eq_inv_comp.mpr h
 

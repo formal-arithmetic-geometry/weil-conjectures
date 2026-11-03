@@ -6,9 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.PurStrictScalar.StrictScalarFiniteEvaluationTransport
-import WeilConjectures.SmoothPurity.PurStrictScalar.RamifiedReductionFiniteEvaluation
-import WeilConjectures.SmoothPurity.PurStrictScalar.NativeSupportFiniteEvaluationCompatibility
-import WeilConjectures.SmoothPurity.PurStrictScalar.ConstantImageReindexEvaluation
 
 /-! # Evaluation of ramified reduction balancing through geometric image
 

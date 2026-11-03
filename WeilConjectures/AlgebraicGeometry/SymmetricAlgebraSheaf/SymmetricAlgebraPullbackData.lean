@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf.CanonicalS
 public import WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackSectionAdjunction
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf.SymmetricAlgebraAffineSectionComparison
 import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 import Mathlib.RingTheory.GradedAlgebra.TensorProduct
 
@@ -167,25 +168,6 @@ private theorem exists_unitSectionEquiv {X S : Scheme.{u}} (g : X ⟶ S)
   rw [ht, unitSection_eq]
   congr 2
   exact Classical.choose_spec (Scheme.Modules.exists_tensorPullbackAdjunction g) E (op U.1) m
-
-private noncomputable def symmetricCongr {R M N : Type u}
-    [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N]
-    (e : M ≃ₗ[R] N) : SymmetricAlgebra R M ≃ₐ[R] SymmetricAlgebra R N := by
-  let f := SymmetricAlgebra.lift ((SymmetricAlgebra.ι R N).comp e.toLinearMap)
-  let g := SymmetricAlgebra.lift ((SymmetricAlgebra.ι R M).comp e.symm.toLinearMap)
-  apply AlgEquiv.ofAlgHom f g
-  · apply SymmetricAlgebra.algHom_ext
-    ext x
-    simp [f, g]
-  · apply SymmetricAlgebra.algHom_ext
-    ext x
-    simp [f, g]
-
-private theorem symmetricCongr_ι {R M N : Type u}
-    [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N]
-    (e : M ≃ₗ[R] N) (m : M) :
-    symmetricCongr e (SymmetricAlgebra.ι R M m) = SymmetricAlgebra.ι R N (e m) := by
-  exact SymmetricAlgebra.lift_ι_apply _ _
 
 private theorem graded_bijective_degree
     {R T A B : Type u} [CommRing R] [CommRing T] [CommRing A] [CommRing B]

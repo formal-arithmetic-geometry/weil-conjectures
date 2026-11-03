@@ -58,7 +58,7 @@ isomorphism. The left adjunction preserves colimits of every requested discrete
 shape; derived E preserves them as an equivalence. The same composition
 isomorphism transfers preservation to finiteCoefficientDerivedComparison.
 -/
-theorem unboundedSiteComparison
+theorem finiteCoefficientDerivedComparison_fullyFaithful
     (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
     {ℓ : ℕ} [Fact ℓ.Prime]
     (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))
@@ -80,8 +80,8 @@ theorem unboundedSiteComparison
   have hA' : ∃ r : ℕ, 1 ≤ r ∧ (ℓ : A) ^ r = 0 := by
     obtain ⟨n, hn⟩ := hA
     exact ⟨n + 1, by omega, by rw [pow_succ, hn, zero_mul]⟩
-  obtain ⟨himage, hcounit, _⟩ :=
-    finiteClassicalUnboundedComparison k hbase ℓ hℓ A hA' X
+  obtain ⟨himage, hcounit⟩ :=
+    comparisonUpperStar_isClassicalComplexFor k hbase ℓ hℓ A hA' X
   have hreflect : L.mapDerivedCategory.ReflectsIsomorphisms := by
     refine ⟨fun f _ ↦ ?_⟩
     rw [DerivedCategory.isIso_iff]

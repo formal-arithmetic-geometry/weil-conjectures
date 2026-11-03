@@ -60,7 +60,7 @@ private theorem ordinary_constant_projection
     (hA : ∃ n : ℕ, (ell ^ n : A) = 0)
     (C : Etale.DerivedCategoryModule A X.left)
     (hC : Etale.DerivedCategory.isBoundedConstructible A X.left C)
-    (a b : ℤ) (hab : a ≤ b)
+    (a b : ℤ)
     (hTor : Etale.DerivedCategory.hasTorAmplitudeIn A X.left a b C)
     (P : ModuleCat.{u + 1} A) :
     ordinaryFiniteCoefficientProjectionIsIso A f.left
@@ -80,22 +80,12 @@ private theorem ordinary_constant_projection
   have : QuasiCompact (f.left ≫ Y.hom) := by rw [f.w]; infer_instance
   have : QuasiCompact f.left := QuasiCompact.of_comp f.left Y.hom
   have : QuasiSeparated f.left := inferInstance
-  obtain ⟨c, d, hcd, hv⟩ := hC.2
+  obtain ⟨c, _, _, hv⟩ := hC.2
   have hc : C.IsGE c := (DerivedCategory.isGE_iff C c).2 fun i hi ↦ hv i (Or.inl hi)
-  have hd : C.IsLE d := (DerivedCategory.isLE_iff C d).2 fun i hi ↦ hv i (Or.inr hi)
   obtain ⟨n, hn⟩ := hA
   let N := ell ^ (n + 1)
   have hN : (N : A) = 0 := by simp [N, pow_succ, hn]
   have hpos : 1 ≤ N := pow_pos (Fact.out : ell.Prime).pos _
-  have hell : (ell : k) ≠ 0 := by
-    intro hz
-    exact (Fact.out : ringChar k ≠ ell)
-      (CharP.ringChar_of_prime_eq_zero (Fact.out : ell.Prime) hz)
-  have hNY : IsUnit (N : Γ(Y.left, ⊤)) := by
-    have hk : IsUnit (N : k) := by
-      simpa only [N, Nat.cast_pow] using (isUnit_iff_ne_zero.mpr hell).pow (n + 1)
-    simpa only [map_natCast] using
-      hk.map ((Scheme.ΓSpecIso (.of k)).inv ≫ Y.hom.appTop).hom
   let D := (DerivedCategory.singleFunctor _ 0).obj
     ((constantSheaf Y.left.smallEtaleTopology (ModuleCat.{u + 1} A)).obj P)
   have hD : D.IsGE 0 := by dsimp [D]; infer_instance
@@ -116,8 +106,8 @@ private theorem ordinary_constant_projection
   have : IsIso (((Etale.rightDerivedLowerStarProjectionMap
       (ModuleCat.{u + 1} A) f.left).app C).app D) :=
     Etale.isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
-      A k f.left C ⟨c, d, hc, hd⟩ a b hab hTor N hpos
-      (Etale.nsmul_id_eq_zero_of_natCast_eq_zero hN C) hNY P
+      A k f.left C N hpos
+      (Etale.nsmul_id_eq_zero_of_natCast_eq_zero hN C) P
   have := ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived
     (ModuleCat.{u + 1} A) f.left C D ⟨c, hc⟩ hTensor
   apply (ordinaryFiniteCoefficientProjectionIsIso_iff A f.left _ _).2
@@ -279,8 +269,6 @@ private def coefficientEncoding_self (T : Scheme.{u}) (e : Encoding A T) :
 
 end SelfEncoding
 
-set_option linter.unusedVariables false in
--- Preserve the original named forall binders, which do not occur in the result type.
 set_option maxHeartbeats 1600000 in
 -- The proof combines several equivalences between large derived module categories.
 /-- Projection for the restricted regular module of a nonflat finite-ring map.
@@ -296,8 +284,8 @@ isomorphisms. Lift the point constant-sheaf adjunction to module objects and app
 counit to the restricted regular B-module. Its underlying counit is invertible, so this
 module comes from a scalar module. Pull the resulting isomorphism to Y and use the
 scalar-constant encoding comparison. Thus its encoded degree-zero complex is a constant
-ordinary A-module in degree zero. This construction works for every coefficient-ring
-homomorphism, so the sectionwise normalization ha need not be used.
+ordinary A-module in degree zero. This construction works for every morphism `a` of
+coefficient rings; no sectionwise normalization is needed.
 
 The fixed-interval finite comparison realizes K as the inverse encoding of nu^* J, where
 J is bounded constructible etale with the same finite Tor interval. If ell^n annihilates
@@ -310,30 +298,23 @@ invertibility to the encoded K and restricted regular module. The normalized pro
 encoding reflects invertibility of the actual internal projection. Its composite with
 Rf_* of the cartesian coefficient-pullback isomorphism is scalarProjection. This uses
 no flatness assumption on B and includes zero rings and empty schemes. -/
-theorem finiteDiscreteScalarProjectionCase
+theorem isIso_scalarProjection_cartesianFinitePointRing
     (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
     {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    (f : X ⟶ Y) :
-    ∀ (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B]
-      (hA : ∃ n : ℕ, ∀ x : A, (ell ^ n) • x = 0)
-      (hB : ∃ n : ℕ, ∀ x : B, (ell ^ n) • x = 0)
-      (φ : A →+* B)
-      (a : (⟨cartesianFinitePointRing A⟩ : ScalarSixRing.{u}) ⟶
-        ⟨cartesianFinitePointRing B⟩)
-      (ha : ∀ (P : Profinite.{u}) (s : (cartesianFinitePointRing A).obj.obj (op P)) (x : P),
-        ((a.hom.hom.hom.app (op P)) s).down x = φ (s.down x)),
-      ∀ K : DerivedCategory (ModuleRingedComparison.internalModules
-          (cartesianFinitePointRing A) X.left),
-      (constantModelBoundedConstructible (cartesianFinitePointRing A) X.left K ∧
-        _root_.DerivedCategory.finiteTorAmplitude _ K) →
-      letI : IsMonHom a.hom.hom := a.hom.isMonHom_hom
-      IsIso (QuotientChange.scalarProjection (Λ := cartesianFinitePointRing A)
-        (Λ' := cartesianFinitePointRing B) a.hom.hom f.left K) := by
+    (f : X ⟶ Y) (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (hA : ∃ n : ℕ, ∀ x : A, (ell ^ n) • x = 0)
+    (a : (⟨cartesianFinitePointRing A⟩ : ScalarSixRing.{u}) ⟶ ⟨cartesianFinitePointRing B⟩)
+    (K : DerivedCategory (ModuleRingedComparison.internalModules
+      (cartesianFinitePointRing A) X.left))
+    (hK : constantModelBoundedConstructible (cartesianFinitePointRing A) X.left K ∧
+      _root_.DerivedCategory.finiteTorAmplitude _ K) :
+    letI : IsMonHom a.hom.hom := a.hom.isMonHom_hom
+    IsIso (QuotientChange.scalarProjection (Λ := cartesianFinitePointRing A)
+      (Λ' := cartesianFinitePointRing B) a.hom.hom f.left K) := by
   classical
-  intro A B _ _ _ _ hA _hB _φ a _ha K hK
   let : TopologicalSpace A := ⊥
   have : DiscreteTopology A := discreteTopology_bot A
   let : TopologicalSpace B := ⊥
@@ -363,7 +344,7 @@ theorem finiteDiscreteScalarProjectionCase
     change (ell ^ n : A) = 0
     simpa only [nsmul_eq_mul, mul_one, Nat.cast_pow] using hn 1
   have hOrd := ordinary_constant_projection ell k f (ULift.{u + 1} A) hA'
-    L.obj L.property.1 lo' hi (min_le_right _ _) L.property.2 P
+    L.obj L.property.1 lo' hi L.property.2 P
   have hEncoded := ordinaryFiniteCoefficientProjectionIsIso_of_iso
     (ULift.{u + 1} A) f.left
     (eK ≪≫ (coefficientEncoding_self A X.left (E X.left)).symm.app K)

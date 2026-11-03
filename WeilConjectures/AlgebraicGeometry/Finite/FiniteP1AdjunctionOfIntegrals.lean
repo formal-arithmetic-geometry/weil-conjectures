@@ -281,7 +281,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 public import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalAlpha
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import WeilConjectures.AlgebraicGeometry.Finite.FiniteP1CoordinateKernel
+public import WeilConjectures.AlgebraicGeometry.Finite.FiniteP1CoordinateKernel
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
@@ -325,25 +325,125 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] rightDerivedLowerShriek
   SfDiagonalKernel.unit SfDiagonalKernel.counit
 
-/-- Assemble a kernel adjunction while keeping its functors abstract. -/
-private theorem kernelAdjunction
+/-- The left triangle identity of a candidate unit and counit, componentwise, as in the field
+`Adjunction.left_triangle_components`. -/
+def _root_.CategoryTheory.Adjunction.LeftTriangleComponents {C D : Type*} [Category C]
+    [Category D] (F : C ⥤ D) (G : D ⥤ C) (η : 𝟭 C ⟶ F ⋙ G) (ε : G ⋙ F ⟶ 𝟭 D) : Prop :=
+  ∀ X : C, F.map (η.app X) ≫ ε.app (F.obj X) = 𝟙 (F.obj X)
+
+/-- The right triangle identity of a candidate unit and counit, componentwise, as in the field
+`Adjunction.right_triangle_components`. -/
+def _root_.CategoryTheory.Adjunction.RightTriangleComponents {C D : Type*} [Category C]
+    [Category D] (F : C ⥤ D) (G : D ⥤ C) (η : 𝟭 C ⟶ F ⋙ G) (ε : G ⋙ F ⟶ 𝟭 D) : Prop :=
+  ∀ Y : D, η.app (G.obj Y) ≫ G.map (ε.app Y) = 𝟙 (G.obj Y)
+
+/-- The adjunction with given unit and counit satisfying both componentwise triangle
+identities. -/
+@[simps]
+def _root_.CategoryTheory.Adjunction.ofTriangleComponents {C D : Type*} [Category C]
+    [Category D] {F : C ⥤ D} {G : D ⥤ C} (η : 𝟭 C ⟶ F ⋙ G) (ε : G ⋙ F ⟶ 𝟭 D)
+    (hl : Adjunction.LeftTriangleComponents F G η ε)
+    (hr : Adjunction.RightTriangleComponents F G η ε) : F ⊣ G where
+  unit := η
+  counit := ε
+  left_triangle_components := hl
+  right_triangle_components := hr
+
+namespace SfDiagonalKernel
+
+/-- The first triangle identity of the diagonal-kernel unit and counit, in the form of the
+corresponding field of `Adjunction`. -/
+theorem left_triangle_components
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [IsProper f]
     {B : DerivedCategoryModule A X} (k : TraceDiagonalDatum A f B)
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
     (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ)
     (e : B ≅ (CoordinateTrace.pull A f).obj (CoordinateTrace.shiftedLine A J n))
-    (h : SfDiagonalKernel.Integrals A k (CoordinateTrace.shiftedLine A J n) e) :
-    Nonempty (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⊣
-      CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B) := by
-  obtain ⟨hl, hr⟩ := SfDiagonalKernel.triangles A k J hJ n e h
-  exact ⟨{ unit := SfDiagonalKernel.unit A k
-           counit := SfDiagonalKernel.counit A k
-           left_triangle_components := hl
-           right_triangle_components := hr }⟩
+    (h : Integrals A k (CoordinateTrace.shiftedLine A J n) e) :
+    Adjunction.LeftTriangleComponents (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+      (CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B)
+      (unit A k) (counit A k) :=
+  (triangles A k J hJ n e h).1
 
-/-- Assemble the projective-line adjunction from a supplied base-compatible
-finite-root splitting and its two supported diagonal integral identities.
+/-- The second triangle identity of the diagonal-kernel unit and counit, in the form of the
+corresponding field of `Adjunction`. -/
+theorem right_triangle_components
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [IsProper f]
+    {B : DerivedCategoryModule A X} (k : TraceDiagonalDatum A f B)
+    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ)
+    (e : B ≅ (CoordinateTrace.pull A f).obj (CoordinateTrace.shiftedLine A J n))
+    (h : Integrals A k (CoordinateTrace.shiftedLine A J n) e) :
+    Adjunction.RightTriangleComponents (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+      (CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B)
+      (unit A k) (counit A k) :=
+  (triangles A k J hJ n e h).2
+
+/-- The adjunction `Rf_! ⊣ f^*(-) ⊗ᴸ B` of a trace-diagonal kernel whose two diagonal
+integrals are identities, for `B` the pullback of an even-shifted lisse rank-one line: its unit is
+`SfDiagonalKernel.unit` and its counit is `SfDiagonalKernel.counit`, the inverse projection map
+followed by the trace and the left unitor. The functors are kept abstract.
+
+Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the unit construction and both
+triangles (blueprint: lem-sp-finite-p1-adjunction-of-integrals). -/
+noncomputable def adjunction
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [IsProper f]
+    {B : DerivedCategoryModule A X} (k : TraceDiagonalDatum A f B)
+    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ)
+    (e : B ≅ (CoordinateTrace.pull A f).obj (CoordinateTrace.shiftedLine A J n))
+    (h : Integrals A k (CoordinateTrace.shiftedLine A J n) e) :
+    rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⊣
+      CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B :=
+  Adjunction.ofTriangleComponents (unit A k) (counit A k)
+    (left_triangle_components A k J hJ n e h) (right_triangle_components A k J hJ n e h)
+
+@[simp]
+theorem adjunction_unit
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [IsProper f]
+    {B : DerivedCategoryModule A X} (k : TraceDiagonalDatum A f B)
+    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ)
+    (e : B ≅ (CoordinateTrace.pull A f).obj (CoordinateTrace.shiftedLine A J n))
+    (h : Integrals A k (CoordinateTrace.shiftedLine A J n) e) :
+    (adjunction A k J hJ n e h).unit = unit A k :=
+  rfl
+
+@[simp]
+theorem adjunction_counit
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [IsProper f]
+    {B : DerivedCategoryModule A X} (k : TraceDiagonalDatum A f B)
+    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ)
+    (e : B ≅ (CoordinateTrace.pull A f).obj (CoordinateTrace.shiftedLine A J n))
+    (h : Integrals A k (CoordinateTrace.shiftedLine A J n) e) :
+    (adjunction A k J hJ n e h).counit = counit A k :=
+  rfl
+
+end SfDiagonalKernel
+
+/-- The finite Tate line `Λ_S(1)` is lisse of rank one when the positive integer `N`, which
+annihilates `Λ`, is invertible on `S`. -/
+theorem isLisseRankOneSheaf_finiteEtaleTateLine
+    (Λ : Type (u + 1)) [CommRing Λ]
+    (N : ℕ) (hN : 0 < N) (hΛ : (N : Λ) = 0)
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
+    Scheme.IsLisseRankOneSheaf (Scheme.finiteEtaleTateLine S N Λ hΛ) := by
+  have hInv (s : S) : IsUnit (N : S.presheaf.stalk s) := by
+    simpa only [map_natCast] using hS.map (S.presheaf.germ ⊤ s (by trivial)).hom
+  obtain ⟨U, hU⟩ := Scheme.finiteEtaleTateLine_localTrivial S N hN hInv Λ hΛ
+  exact ⟨U, hU⟩
+
+/-- The projective-line adjunction assembled from a supplied base-compatible finite-root
+splitting and a supported diagonal class `κ` whose two diagonal integrals are identities: the
+kernel adjunction `SfDiagonalKernel.adjunction` of `finiteP1CoordinateKernel`, read through
+`Rq_! ≅ Rq_*`, with the shift moved outside the right tensor factor.
+
 Source: blueprint `thm-amb-p1-adjunction.proof.md`, the displayed unit and both
 triangle computations, using the arbitrary-base integrals of
 `sk-prop-sp-tower-geometric-p1.proof.md`.
@@ -371,40 +471,93 @@ has even shift two, so moving its two copies past each other gives sign +1.
 The two triangles produce the adjunction on all unbounded complexes. Finally
 move the shift outside right tensor using derivedTensorRightShiftIso. No
 normalized abstract twist, normalization comparison, or new splitting is used. -/
-theorem nonempty_finiteP1AdjunctionOfIntegrals
+noncomputable def finiteP1AdjunctionOfIntegrals
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (N : ℕ) (hN : 0 < N) (hΛ : (N : Λ) = 0)
     (t : OrdinaryFiniteTwistTransport Λ N hΛ)
     (d : ∀ (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))),
       ArbitraryBaseFiniteP1Splitting Λ N hΛ t T hT)
     (hbc : ArbitraryBaseFiniteP1BaseChange Λ N hΛ t d)
-    (hi : ∀ (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))),
-      finiteP1DiagonalProperty Λ N hΛ t d T hT)
-    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
-    Nonempty (R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)_*[ModuleCat.{u + 1} Λ]) ⊣
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))
+    (κ : Abelian.Ext
+      (C := Sheaf
+        (Limits.pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)).smallEtaleTopology
+        (ModuleCat.{u + 1} Λ))
+      ((lowerStar (ModuleCat.{u + 1} Λ)
+        (Z := ProjectiveLine S)
+        (Y := Limits.pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S))
+        (Limits.pullback.diagonal (ProjectiveLine S ↘ S))).obj
+        (ordinaryFiniteConstant Λ (ProjectiveLine S)))
+      (Scheme.finiteEtaleTateLine
+        (Limits.pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N Λ hΛ) 2)
+    (hκ : ∀ a : Bool, ordinaryFiniteP1DiagonalSupportedMap Λ N hΛ S a κ ≫
+        arbitraryBaseFiniteP1DiagonalTrace Λ N hΛ t d S hS a =
+      𝟙 (ordinaryFiniteUnit Λ (ProjectiveLine S))) :
+    R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)_*[ModuleCat.{u + 1} Λ]) ⊣
       L((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)^*[ModuleCat.{u + 1} Λ]) ⋙
         ((derivedTensor (ModuleCat.{u + 1} Λ)
           ℙ(Option (ULift.{u} (Fin 1)); S)).flip.obj
             ((_root_.DerivedCategory.singleFunctor _ 0).obj
               (Scheme.finiteEtaleTateLine ℙ(Option (ULift.{u} (Fin 1)); S) N Λ hΛ)) ⋙
-          shiftFunctor _ (2 : ℤ))) := by
-  obtain ⟨k, e, hik⟩ := finiteP1CoordinateKernel Λ N hΛ t d hbc hi S hS
-  have hJ : Scheme.IsLisseRankOneSheaf (Scheme.finiteEtaleTateLine S N Λ hΛ) := by
-    have hInv (s : S) : IsUnit (N : S.presheaf.stalk s) := by
-      simpa only [map_natCast] using hS.map (S.presheaf.germ ⊤ s (by trivial)).hom
-    obtain ⟨U, hU⟩ := Scheme.finiteEtaleTateLine_localTrivial S N hN hInv Λ hΛ
-    exact ⟨U, hU⟩
-  obtain ⟨adj⟩ := kernelAdjunction Λ k
-    (Scheme.finiteEtaleTateLine S N Λ hΛ) hJ 1 e hik
-  let adj' := adj.ofNatIsoLeft
+          shiftFunctor _ (2 : ℤ)) :=
+  ((SfDiagonalKernel.adjunction Λ (finiteP1CoordinateKernel Λ N hΛ t d hbc S hS κ)
+      (Scheme.finiteEtaleTateLine S N Λ hΛ)
+      (isLisseRankOneSheaf_finiteEtaleTateLine Λ N hN hΛ S hS) 1
+      (finiteP1CoordinateKernelIso Λ N hΛ t S hS)
+      (finiteP1CoordinateKernel_integrals Λ N hΛ t d hbc S hS κ hκ)).ofNatIsoLeft
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
-      (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))
-  let B := (_root_.DerivedCategory.singleFunctor _ 0).obj
-    (Scheme.finiteEtaleTateLine ℙ(Option (ULift.{u} (Fin 1)); S) N Λ hΛ)
-  let symm := ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ)
-    ℙ(Option (ULift.{u} (Fin 1)); S)).app (B⟦(2 : ℤ)⟧))
-  let shift := derivedTensorRightShiftIso (ModuleCat.{u + 1} Λ) B (2 : ℤ)
-  exact ⟨adj'.ofNatIsoRight
-    (Functor.isoWhiskerLeft _ (symm ≪≫ shift))⟩
+      (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))).ofNatIsoRight
+    (Functor.isoWhiskerLeft _
+      ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) ℙ(Option (ULift.{u} (Fin 1)); S)).app
+          (((_root_.DerivedCategory.singleFunctor _ 0).obj
+            (Scheme.finiteEtaleTateLine ℙ(Option (ULift.{u} (Fin 1)); S) N Λ
+              hΛ))⟦(2 : ℤ)⟧) ≪≫
+        derivedTensorRightShiftIso (ModuleCat.{u + 1} Λ)
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            (Scheme.finiteEtaleTateLine ℙ(Option (ULift.{u} (Fin 1)); S) N Λ hΛ)) (2 : ℤ)))
+
+/-- `finiteP1AdjunctionOfIntegrals` is the kernel adjunction `SfDiagonalKernel.adjunction` of
+`finiteP1CoordinateKernel` transported along `Rq_! ≅ Rq_*` and the rearrangement of the shifted
+tensor factor; its unit and counit follow from `SfDiagonalKernel.adjunction_unit`,
+`SfDiagonalKernel.adjunction_counit` and the `Adjunction.ofNatIsoLeft`/`ofNatIsoRight` lemmas. -/
+theorem finiteP1AdjunctionOfIntegrals_eq
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (N : ℕ) (hN : 0 < N) (hΛ : (N : Λ) = 0)
+    (t : OrdinaryFiniteTwistTransport Λ N hΛ)
+    (d : ∀ (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))),
+      ArbitraryBaseFiniteP1Splitting Λ N hΛ t T hT)
+    (hbc : ArbitraryBaseFiniteP1BaseChange Λ N hΛ t d)
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))
+    (κ : Abelian.Ext
+      (C := Sheaf
+        (Limits.pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)).smallEtaleTopology
+        (ModuleCat.{u + 1} Λ))
+      ((lowerStar (ModuleCat.{u + 1} Λ)
+        (Z := ProjectiveLine S)
+        (Y := Limits.pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S))
+        (Limits.pullback.diagonal (ProjectiveLine S ↘ S))).obj
+        (ordinaryFiniteConstant Λ (ProjectiveLine S)))
+      (Scheme.finiteEtaleTateLine
+        (Limits.pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N Λ hΛ) 2)
+    (hκ : ∀ a : Bool, ordinaryFiniteP1DiagonalSupportedMap Λ N hΛ S a κ ≫
+        arbitraryBaseFiniteP1DiagonalTrace Λ N hΛ t d S hS a =
+      𝟙 (ordinaryFiniteUnit Λ (ProjectiveLine S))) :
+    finiteP1AdjunctionOfIntegrals Λ N hN hΛ t d hbc S hS κ hκ =
+    ((SfDiagonalKernel.adjunction Λ (finiteP1CoordinateKernel Λ N hΛ t d hbc S hS κ)
+        (Scheme.finiteEtaleTateLine S N Λ hΛ)
+        (isLisseRankOneSheaf_finiteEtaleTateLine Λ N hN hΛ S hS) 1
+        (finiteP1CoordinateKernelIso Λ N hΛ t S hS)
+        (finiteP1CoordinateKernel_integrals Λ N hΛ t d hbc S hS κ hκ)).ofNatIsoLeft
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
+        (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))).ofNatIsoRight
+      (Functor.isoWhiskerLeft _
+        ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) ℙ(Option (ULift.{u} (Fin 1)); S)).app
+            (((_root_.DerivedCategory.singleFunctor _ 0).obj
+              (Scheme.finiteEtaleTateLine ℙ(Option (ULift.{u} (Fin 1)); S) N Λ
+                hΛ))⟦(2 : ℤ)⟧) ≪≫
+          derivedTensorRightShiftIso (ModuleCat.{u + 1} Λ)
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj
+              (Scheme.finiteEtaleTateLine ℙ(Option (ULift.{u} (Fin 1)); S) N Λ hΛ)) (2 : ℤ))) :=
+  rfl
 
 end AlgebraicGeometry.Etale

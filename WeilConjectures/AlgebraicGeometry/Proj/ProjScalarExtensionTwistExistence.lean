@@ -183,15 +183,10 @@ theorem scalarExtension_twist_exists
     [Algebra R S] [Algebra R A] [Algebra S B]
     (𝒜 : ℕ → Submodule R A) (ℬ : ℕ → Submodule S B)
     [GradedRing 𝒜] [GradedRing ℬ]
-    (ρA : R →+* 𝒜 0) (ρB : S →+* ℬ 0)
-    (hρA : ∀ a : R, (ρA a : A) = algebraMap R A a)
-    (hρB : ∀ b : S, (ρB b : B) = algebraMap S B b)
     (β : TensorProduct R S A ≃ₐ[S] B) (ψ : 𝒜 →+*ᵍ ℬ)
     (hβψ : ∀ a : A, β (TensorProduct.tmul R (1 : S) a) = ψ a)
     (hgraded : ∀ n : ℕ, ℬ n = Submodule.span S (ψ '' (𝒜 n : Set A)))
     (r : Proj ℬ ⟶ Proj 𝒜)
-    (hpre : ∀ (n : ℕ) (f : A), f ∈ 𝒜 n → 0 < n →
-      r ⁻¹ᵁ basicOpen 𝒜 f = basicOpen ℬ (ψ f))
     (hchart : ∀ (n : ℕ) (f : A) (hf : f ∈ 𝒜 n) (hn : 0 < n),
       awayι ℬ (ψ f) (ψ.map_mem hf) hn ≫ r =
         Spec.map (CommRingCat.ofHom (HomogeneousLocalization.Away.map ψ f)) ≫
@@ -199,8 +194,6 @@ theorem scalarExtension_twist_exists
     ∃ θ : ∀ j : ℤ, (tensorPullback r).obj (twist 𝒜 j) ≅ twist ℬ j,
       IsScalarExtensionTwistComparison ψ r θ := by
   classical
-  have _hρA := hρA
-  have _hρB := hρB
   have hψ : HomogeneousIdeal.irrelevant ℬ ≤
       HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜) := by
     change (HomogeneousIdeal.irrelevant ℬ).toIdeal ≤ _
