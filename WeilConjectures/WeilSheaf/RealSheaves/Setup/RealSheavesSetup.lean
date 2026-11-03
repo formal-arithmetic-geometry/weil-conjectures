@@ -70,4 +70,16 @@ Source: blueprint main-20261015, d-real-setup, Frobenius paragraph (blueprint: d
 abbrev Setup.frobenius (D : Setup.{u, v}) : D.k ≃ₐ[D.k₀] D.k :=
   FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k
 
+/-- The chosen finite field has the stated characteristic p.
+Source: blueprint main-20261015, d-real-setup, first paragraph (blueprint: d-real-setup).
+Proof: FiniteField.card writes the cardinality as a positive power of the prime
+ringChar k_0. Compare with card_eq = p^a; both exponents are positive. Unique prime
+factorization forces ringChar k_0 = p. -/
+theorem Setup.ringChar_eq (D : Setup.{u, v}) : ringChar D.k₀ = D.p := by
+  obtain ⟨n, hn, hcard⟩ := FiniteField.card D.k₀ (ringChar D.k₀)
+  apply (Nat.prime_dvd_prime_iff_eq hn D.p_prime).mp
+  apply hn.dvd_of_dvd_pow
+  rw [← D.card_eq, hcard]
+  exact dvd_pow_self _ n.ne_zero
+
 end RealSheaves
