@@ -129,6 +129,26 @@ private theorem homology_constructible_of_key (hkey : ExceptionalKey Λ g)
     (congrFun hX _).mp hJN
   exact hbounded.2
 
+/-- Every cohomology object of the supplied localizing right adjoint on a bounded
+constructible input is constructible.
+
+Source: blueprint `sk-thm-existence` (4), `det-existence-restriction.proof.md`, Part (2).
+Proof: the exceptional inverse image, its compactification comparison and its
+preservation of `D_ctf` (sk-thm-existence) are identified with the supplied right adjoint
+by uniqueness of right adjoints.
+(blueprint: lem-sfb-adic-localizing-exceptional-cohomology)
+-/
+theorem ellAdic_localizing_rightAdjoint_obj_homology_constructible
+    (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k)
+    (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
+      (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory)
+    (adj : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G)
+    (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
+    ∀ n : ℤ, IsConstructibleModuleObject (condensedRingObj Λ Z.left)
+      ((DerivedCategory.homologyFunctor _ n).obj
+        ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) :=
+  homology_constructible_of_key Λ ℓ g hΛ (exceptionalKey_general (hcd := hcd) Λ ℓ g hΛ) G adj K
+
 /-- `ellAdic_localizing_rightAdjoint_obj_homology_constructible` for the coefficients `E` and
 `Q̄_ℓ`: the exceptional inverse image comes from Brown representability and the rational
 restriction theorem alone (blueprint: sk-thm-restriction).
