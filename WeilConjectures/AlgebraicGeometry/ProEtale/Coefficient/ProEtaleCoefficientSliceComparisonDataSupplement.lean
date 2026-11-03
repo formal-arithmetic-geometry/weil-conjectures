@@ -15,6 +15,12 @@ public import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomDataSupplem
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.ProEtale.Scalar.ProEtaleScalarExtensionSliceComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientSliceComparisonData
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackTensorComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
 /-! # Closed slice comparison with transported pro-etale coefficients
 
@@ -49,7 +55,148 @@ theorem proEtaleSliceModuleRestriction_exact {X : Scheme.{u}} (U : X.ProEt)
     (proEtaleSliceModuleRestriction U O).Additive ∧
       PreservesFiniteLimits (proEtaleSliceModuleRestriction U O) ∧
       PreservesFiniteColimits (proEtaleSliceModuleRestriction U O) := by
-  exact proEtaleSliceModules_exact U O
+  let G : U.left.ProEt ⥤ X.ProEt :=
+    MorphismProperty.Over.map (f := U.hom) ⊤ U.prop
+  let : G.IsContinuous (ProEt.topology U.left) (ProEt.topology X) :=
+    ProEt.isContinuous_overMap U.prop
+  let : G.IsCocontinuous (ProEt.topology U.left) (ProEt.topology X) :=
+    ProEt.isCocontinuous_overMap U.prop
+  let : G.IsLeftAdjoint :=
+    (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ U.hom U.prop trivial).isLeftAdjoint
+  let R := (sheafCompose (ProEt.topology U.left)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleSliceRing U O)
+  let T := SheafOfModules.forget.{u + 1} R ⋙ PresheafOfModules.toPresheaf R.obj
+  have : PreservesFiniteLimits (proEtaleSliceModuleRestriction U O ⋙ T) := by
+    change PreservesFiniteLimits
+      ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _) ⋙
+        (Functor.whiskeringLeft _ _ _).obj G.op)
+    infer_instance
+  have : PreservesFiniteLimits (proEtaleSliceModuleRestriction U O) :=
+    preservesFiniteLimits_of_reflects_of_preserves _ T
+  have : (proEtaleSliceModuleRestriction U O).IsLeftAdjoint :=
+    SheafOfModules.isLeftAdjoint_pushforward_of_isIso (F := G) (𝟙 _)
+  refine ⟨?_, inferInstance, inferInstance⟩
+  constructor
+  intro M N f g
+  apply SheafOfModules.hom_ext
+  ext V m
+  rfl
+
+/-- The normalized comparison is contravariantly natural in its first argument.
+Source: HRS Lemma 4.5; naturality of the tensor--Hom mate
+(blueprint: def-zl-proetale-slice-comparison-data).
+Proof: substitute the canonical mates and apply their naturality under precomposition. -/
+theorem Data.hom_naturality_left (d : Data Λ U) (h : Normalized Λ U d)
+    {K K' : DerivedCategory (supportModules Λ X)} (a : K' ⟶ K)
+    (M : DerivedCategory (supportModules Λ X)) :
+    let F := (supportPullback Λ U.hom).mapDerivedCategory
+    F.map ((pre a).app M) ≫ (d.homComparison K').hom.app M =
+      (d.homComparison K).hom.app M ≫ (pre (F.map a)).app (F.obj M) := by
+  let := d.braided
+  dsimp only
+  rw [h.2 K' M, h.2 K M]
+  exact Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app _ a M
+
+/-- The same normalization explicitly gives the transpose of transported evaluation.
+Source: HRS Lemma 4.5; Stacks 08J9
+(blueprint: def-zl-proetale-slice-comparison-data).
+Proof: the canonical mate is the curry of the tensorator followed by evaluation. -/
+theorem Data.transpose (d : Data Λ U) (h : Normalized Λ U d)
+    (K M : DerivedCategory (supportModules Λ X)) :
+    letI := d.braided
+    let F := (supportPullback Λ U.hom).mapDerivedCategory
+    (d.homComparison K).hom.app M =
+      curry (Functor.LaxMonoidal.μ F K _ ≫ F.map ((ihom.ev K).app M)) := by
+  let := d.braided
+  dsimp only
+  rw [h.2 K M]
+  exact Functor.LaxMonoidal.ihomComparison_app_eq_curry _ K M
+
+/-- A normalized closed comparison commutes with evaluation for the specified tensorator.
+Source: HRS Lemma 4.5; the tensor--Hom adjunction mate identity.
+(blueprint: def-zl-proetale-slice-comparison-data).
+Proof: replace the comparison by its normalized canonical mate and apply the counit
+identity for mates. This identity holds for all objects, including zero objects. -/
+theorem Data.evaluation (d : Data Λ U) (h : Normalized Λ U d)
+    (K M : DerivedCategory (supportModules Λ X)) :
+    letI := d.braided
+    let F := (supportPullback Λ U.hom).mapDerivedCategory
+    F.obj K ◁ (d.homComparison K).hom.app M ≫ (ihom.ev (F.obj K)).app (F.obj M) =
+      Functor.LaxMonoidal.μ F K _ ≫ F.map ((ihom.ev K).app M) := by
+  let := d.braided
+  dsimp only
+  rw [h.2 K M]
+  exact Functor.LaxMonoidal.ihomComparison_ev _ K M
+
+/-- The closed comparison is the mate of the specified tensorator, hence is fixed by
+transported evaluation rather than by an arbitrary choice of internal-Hom isomorphism.
+Source: HRS Lemma 4.5; Stacks 08J9
+(blueprint: def-zl-proetale-slice-comparison-data). -/
+def Normalized (d : Data Λ U) : Prop :=
+  letI := d.braided
+  TensorNormalized Λ U d.tensorData ∧
+    ∀ K M, (d.homComparison K).hom.app M =
+      (Functor.LaxMonoidal.ihomComparison
+        (supportPullback Λ U.hom).mapDerivedCategory K).natTrans.app M
+
+/-- Forget only the internal-Hom comparison.
+Source: HRS Lemma 4.5 (blueprint: def-zl-proetale-slice-comparison-data). -/
+def Data.tensorData (d : Data Λ U) : TensorData Λ U := d.toTensorData
+
+/-- Closed slice data for the same native derived tensor and internal Hom.
+The comparison is natural in the second argument; its normalization as the canonical
+mate also fixes its contravariant naturality in the first argument.
+Source: HRS Lemma 4.5
+(blueprint: def-zl-proetale-slice-comparison-data). -/
+structure Data extends TensorData Λ U where
+  /-- The natural internal-Hom comparison on the unbounded derived categories. -/
+  homComparison : ∀ K : DerivedCategory (supportModules Λ X),
+    ihom K ⋙ (supportPullback Λ U.hom).mapDerivedCategory ≅
+      (supportPullback Λ U.hom).mapDerivedCategory ⋙
+        ihom ((supportPullback Λ U.hom).mapDerivedCategory.obj K)
+
+/-- Normalization fixes the action transport, the total-complex localization square,
+and agreement of tensor and unit with the supplied coherent monoidal structure.
+Source: HRS Lemma 4.5; Stacks 06YL and 0G7D
+(blueprint: def-zl-proetale-slice-comparison-data). -/
+def TensorNormalized (d : TensorData Λ U) : Prop :=
+  letI := d.braided
+  d.ordinary = ordinaryComparison Λ U ∧
+    SupportDerivedTensorNormalization Λ U.hom d.tensor ∧
+    (∀ K M, d.tensor K M =
+      (Functor.Monoidal.μIso (supportPullback Λ U.hom).mapDerivedCategory K M).symm) ∧
+    d.unit = (Functor.Monoidal.εIso (supportPullback Λ U.hom).mapDerivedCategory).symm
+
+/-- Monoidal slice data on the native derived category of Λ_X-modules. The tensor
+comparison retains its chain-level normalization in `TensorNormalized`.
+Source: HRS Section 3 and Lemma 4.5
+(blueprint: def-zl-proetale-slice-comparison-data). -/
+structure TensorData where
+  /-- Transport through the fixed coefficient isomorphism α. -/
+  ordinary : CondensedRing.upperStar Λ U.hom ≅ supportPullback Λ U.hom
+  /-- Coherent symmetric monoidality for the existing derived tensor product. -/
+  braided : (supportPullback Λ U.hom).mapDerivedCategory.Braided
+  /-- The derived tensor comparison with the native coefficient endpoints. -/
+  tensor : SupportDerivedTensorComparisonFamily Λ U.hom
+  /-- The tensor unit comparison, from the derived image to Λ_U. -/
+  unit : (supportPullback Λ U.hom).mapDerivedCategory.obj
+    (𝟙_ (DerivedCategory (supportModules Λ X))) ≅
+      𝟙_ (DerivedCategory (supportModules Λ U.left))
+
+/-- The canonical action transport, along α inverse, for the actual condensed coefficient.
+Source: HRS Section 3, pullback paragraph
+(blueprint: def-zl-proetale-slice-comparison-data). -/
+def ordinaryComparison : CondensedRing.upperStar Λ U.hom ≅ supportPullback Λ U.hom :=
+  Functor.isoWhiskerLeft
+    ((ProEtale.upperStar Ab.{u + 1} U.hom).mapMod (condensedRingObj Λ X))
+    (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ U.hom))
+
+/-- The Koszul braiding of the existing native derived relative tensor.
+Source: HRS Section 3; native derived tensor construction
+(blueprint: def-zl-proetale-slice-comparison-data). -/
+@[instance_reducible] def derivedBraiding (Y : Scheme.{u}) :
+    BraidedCategory (DerivedCategory (supportModules Λ Y)) :=
+  DerivedCategory.braidedCategory' _
 
 /-- Ordinary derived restriction; its construction is exact termwise localization.
 Source: Stacks 08JB

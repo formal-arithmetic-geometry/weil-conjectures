@@ -37,6 +37,7 @@ public import Mathlib.CategoryTheory.Category.ULift
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Limits.Preserves.Creates.Finite
+public import WeilConjectures.Algebra.Homology.SixFunctors.WeilSiteDerivedTensorDescent
 
 /-!
 # Oriented nearby cycles and their canonical comparison maps
@@ -439,7 +440,8 @@ def baseChange {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
 Source: Stacks 06YS, 06YT; ILO XI §4.1 (blueprint: def-trf-oriented-nearby-cycles). -/
 abbrev derivedTensor (S : Site.{s}) (A : Type s) [CommRing A] :
     S.derived A × S.derived A ⥤ S.derived A :=
-  SheafOfModules.wfSiteDerivedTensor S.topology (S.ring A)
+  (SheafOfModules.wf_site_derived_tensor_descent.{s, s, _, 0, 0}
+    S.topology (S.ring A)).choose_spec.2.2.1.choose_spec.2.choose
 
 /-- The existing ringed tensor corner for this very tensor functor.
 Source: Stacks 07A4 (blueprint: def-trf-oriented-nearby-cycles). -/

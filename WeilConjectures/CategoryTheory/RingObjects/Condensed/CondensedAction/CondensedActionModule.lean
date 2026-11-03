@@ -17,6 +17,8 @@ public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.CategoryTheory.CondensedActionModule
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
 
 /-! # Internal modules with an action of a profinite condensed group
 
@@ -163,6 +165,14 @@ def trivial : Modules R ⥤ ActionModule R P where
   obj M := { module := M, act := fun _ ↦ 1, naturality := fun _ _ _ _ _ ↦ rfl }
   map f := ⟨f, fun _ _ _ ↦ rfl⟩
 
+/-- Fixed sections quantify over every profinite base change and every section of the kernel.
+Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+def Fixed (M : ActionModule R P) (π : P →ₜ* Q) (S : Profinite.{u})
+    (m : sectionModule R M.module S) : Prop :=
+  ∀ (T : Profinite.{u}) (f : T ⟶ S) (g : C(T, P)),
+    (∀ t : T, π (g t) = 1) →
+      M.act T g ((M.module.X.obj.map f.op).hom m) = (M.module.X.obj.map f.op).hom m
+
 /-- Simultaneous fixed sections, retaining the same quantification over base changes.
 Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
 def FixedAll (M : ActionModule R P) (S : Profinite.{u})
@@ -198,6 +208,42 @@ structure Invariants where
   /-- Inverse transpose composes with the inclusion. -/
   untranspose : ∀ (N : Modules R) (M : ActionModule R P) (f : N ⟶ functor.obj M),
     ((adjunction.homEquiv N M).symm f).val = f ≫ inclusion.app M
+
+/-- Kernel invariants for the first projection retain the induced first-factor action.
+The inclusion, residual action and both transpose formulas specify the canonical functor.
+Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+structure ProductInvariants where
+  /-- Invariants under the second factor. -/
+  functor : ActionModule R (G × H) ⥤ ActionModule R G
+  /-- Restricting sums of maps gives sums. -/
+  additive : functor.Additive
+  /-- Inclusion into the original underlying module. -/
+  inclusion : functor ⋙ forgetAction ⟶ forgetAction
+  /-- The first-projection inflation adjunction. -/
+  adjunction : inflate (ContinuousMonoidHom.fst G H) ⊣ functor
+  /-- Invariant sections embed. -/
+  injective : ∀ (M : ActionModule R (G × H)) (S : Profinite.{u}),
+    Function.Injective (((inclusion.app M).hom.hom.app (op S)).hom)
+  /-- The image is precisely the kernel-fixed sections after all base changes. -/
+  image : ∀ (M : ActionModule R (G × H)) (S : Profinite.{u})
+    (m : sectionModule R M.module S),
+    (∃ x : sectionModule R (functor.obj M).module S,
+      ((inclusion.app M).hom.hom.app (op S)).hom x = m) ↔
+        Fixed M (ContinuousMonoidHom.fst G H) S m
+  /-- The residual action is the action of `(g,1)`. -/
+  residual : ∀ (M : ActionModule R (G × H)) (S : Profinite.{u}) (g : C(S, G))
+    (x : sectionModule R (functor.obj M).module S),
+    ((inclusion.app M).hom.hom.app (op S)).hom ((functor.obj M).act S g x) =
+      M.act S ((ContinuousMonoidHom.inl G H).toContinuousMap.comp g)
+        (((inclusion.app M).hom.hom.app (op S)).hom x)
+  /-- Forward transpose retains the underlying map and restricts its codomain. -/
+  transpose : ∀ (N : ActionModule R G) (M : ActionModule R (G × H))
+    (f : (inflate (ContinuousMonoidHom.fst G H)).obj N ⟶ M),
+    (adjunction.homEquiv N M f).val ≫ inclusion.app M = f.val
+  /-- Inverse transpose composes with the invariant-submodule inclusion. -/
+  untranspose : ∀ (N : ActionModule R G) (M : ActionModule R (G × H))
+    (f : N ⟶ functor.obj M),
+    ((adjunction.homEquiv N M).symm f).val = f.val ≫ inclusion.app M
 
 variable (G H : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
   [TopologicalSpace H] [Group H] [IsTopologicalGroup H]

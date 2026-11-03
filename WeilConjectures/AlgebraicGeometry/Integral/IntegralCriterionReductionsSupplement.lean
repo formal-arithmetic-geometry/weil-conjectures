@@ -240,6 +240,8 @@ public import WeilConjectures.AlgebraicGeometry.AdicCompletion.InternalRoosCompl
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 public import WeilConjectures.CategoryTheory.Grothendieck.GrothendieckTopos
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import WeilConjectures.AlgebraicGeometry.AdicCompletion.InternalRoosCompleteness
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProetaleSiteProperties
 public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 
 /-!
@@ -463,6 +465,20 @@ private theorem restriction_isEquivalence
     (SheafOfModules.restrictScalars.{u + 1} c.hom).IsEquivalence :=
   (restrictionEquivalence c).isEquivalence_functor
 
+/-- Localization of the fixed section-action equivalence on unbounded complexes.
+Its forward functor is the localization of integralSectionFunctor, with Mathlib's
+canonical localization comparison on every complex.
+Source: Stacks 05RU; blueprint integral-criterion proof step 8
+(blueprint: det-prop-integral-criterion-reductions). -/
+def integralSectionDerivedEquivalence (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) :
+    DerivedCategory (AdicCompletion.Modules l E X) ≌
+      DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E X) :=
+  letI : (integralSectionFunctor l E X).asEquivalence.functor.Additive :=
+    (integralSectionFunctor_properties l E X).1
+  (integralSectionFunctor l E X).asEquivalence.mapDerivedCategory
+
 private def integralEncoding (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) : IntegralPresentation.Encoding l E X where
@@ -558,6 +574,246 @@ private theorem finiteEncoding_constructible
   exact (hf.boundedConstructible K).trans
     (finiteBounded_iso A X
       ((Functor.mapDerivedCategoryNatIso (eqToIso h)).app K).symm)
+
+private theorem reflect_roos_complete
+    {C D : Type*} [Category C] [Category D] [HasZeroObject C] [HasZeroObject D]
+    [HasShift C ℤ] [HasShift D ℤ] [Preadditive C] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]
+    [Pretriangulated C] [Pretriangulated D]
+    (F : C ⥤ D) [F.Additive] [F.CommShift ℤ] [F.IsTriangulated] [F.IsEquivalence]
+    {V : ℕ → C} {W : ℕ → D} [HasProduct V] [HasProduct W]
+    (t : ∀ n, V (n + 1) ⟶ V n) (s : ∀ n, W (n + 1) ⟶ W n)
+    (a : ∀ n, F.obj (V n) ≅ W n)
+    (K : C) (p : ∀ n, K ⟶ V n) (q : ∀ n, F.obj K ⟶ W n)
+    (ht : ∀ n, F.map (t n) ≫ (a n).hom = (a (n + 1)).hom ≫ s n)
+    (hp : ∀ n, F.map (p n) ≫ (a n).hom = q n)
+    (δ : (∏ᶜ W) ⟶ (F.obj K)⟦(1 : ℤ)⟧)
+    (hT : IsDerivedLimitTriangle s (F.obj K) (Pi.lift q) δ) :
+    ∃ δ' : (∏ᶜ V) ⟶ K⟦(1 : ℤ)⟧,
+      IsDerivedLimitTriangle t K (Pi.lift p) δ' := by
+  let : HasProduct (fun n ↦ F.obj (V n)) :=
+    hasLimit_of_iso (Discrete.natIso (F := Discrete.functor W)
+      (G := Discrete.functor (fun n ↦ F.obj (V n))) (fun n ↦ (a n.as).symm))
+  let B : F.obj (∏ᶜ V) ≅ ∏ᶜ W := PreservesProduct.iso F V ≪≫
+    { hom := Limits.Pi.map (fun n ↦ (a n).hom)
+      inv := Limits.Pi.map (fun n ↦ (a n).inv)
+      hom_inv_id := by apply Pi.hom_ext; intro n; simp [Category.assoc]
+      inv_hom_id := by apply Pi.hom_ext; intro n; simp [Category.assoc] }
+  have hB (n : ℕ) : B.hom ≫ Pi.π W n = F.map (Pi.π V n) ≫ (a n).hom := by
+    simp [B]
+  have hfirst : F.map (Pi.lift p) ≫ B.hom = Pi.lift q := by
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, hB, Pi.lift_π]
+    rw [← Category.assoc, ← F.map_comp, Pi.lift_π, hp]
+  have hmiddle : F.map (towerTransitionEndomorphism t) ≫ B.hom =
+      B.hom ≫ towerTransitionEndomorphism s := by
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, hB, towerTransitionEndomorphism, towerProductShift,
+      Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
+      Pi.lift_π, Functor.map_sub]
+    simp only [reassoc_of% hB]
+    erw [F.map_id, Category.id_comp]
+    congr 1
+    rw [← F.map_comp_assoc, Pi.lift_π, Functor.map_comp, Category.assoc, ht]
+  let δ' := F.preimage (B.hom ≫ δ ≫ (F.commShiftIso (1 : ℤ)).inv.app K)
+  refine ⟨δ', (F.map_distinguished_iff _).mp ?_⟩
+  apply Pretriangulated.isomorphic_distinguished _ hT _
+  refine Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) B B ?_ ?_ ?_
+  · change F.map (Pi.lift p) ≫ B.hom = 𝟙 _ ≫ Pi.lift q
+    simpa only [Category.id_comp] using hfirst
+  · exact hmiddle
+  · change (F.map δ' ≫ (F.commShiftIso (1 : ℤ)).hom.app K) ≫
+      (shiftFunctor D (1 : ℤ)).map (𝟙 _) = B.hom ≫ δ
+    erw [(shiftFunctor D (1 : ℤ)).map_id]
+    simp only [δ', F.map_preimage, Category.assoc, Iso.inv_hom_id_app]
+    simp only [Functor.comp_obj, Category.comp_id]
+
+private theorem finiteSupport_of_interval
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (K : DerivedCategory C) (a b : ℤ)
+    (h : ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor C q).obj K)) :
+    Set.Finite {q : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor C q).obj K)} := by
+  apply (Set.finite_Icc a b).subset
+  intro q hq
+  by_contra hn
+  exact hq (h q (by simpa only [Set.mem_Icc, not_and_or, not_le] using hn))
+
+private theorem bounded_of_interval
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (K : DerivedCategory C) (a b : ℤ)
+    (h : ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor C q).obj K)) :
+    DerivedCategory.TStructure.t.bounded K := by
+  exact ⟨⟨a, (DerivedCategory.isGE_iff K a).mpr (fun q hq ↦ h q (Or.inl hq))⟩,
+    ⟨b, (DerivedCategory.isLE_iff K b).mpr (fun q hq ↦ h q (Or.inr hq))⟩⟩
+
+private theorem support_subset_iff_interval
+    {X : Scheme.{u}} {A : Type u} [CommRing A]
+    (K : Scheme.proEtaleDerivedCategory X A) (a b : ℤ) :
+    Scheme.proEtaleCohomologicalSupport K ⊆ Set.Icc a b ↔
+      ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj K) := by
+  classical
+  constructor
+  · intro h q hq
+    by_contra hz
+    have hh := h hz
+    rcases hq with hq | hq
+    · exact (not_lt_of_ge hh.1) hq
+    · exact (not_lt_of_ge hh.2) hq
+  · intro h q hq
+    by_contra hn
+    exact hq (h q (by simpa only [Set.mem_Icc, not_and_or, not_le] using hn))
+
+/-- The continuous predicate is the existing integral predicate under the canonical
+coefficient and section-action comparison, rather than an unrelated new notion.
+Source: blueprint integral-criterion final sentence, proof step 8
+(blueprint: det-prop-integral-criterion-reductions).
+Proof: the finite projections of integralSectionRingIso are the specified quotient
+maps by its underlying integral-limit normalization. On a K-flat representative,
+the section-action equivalence identifies tensoring with each quotient with the
+recorded scalarReductionDerivedExtension; this also identifies the quotient units
+and transitions. Exact equivalences preserve products and the augmented Roos
+triangle, so IsDerivedComplete agrees with IsSfDerivedComplete. At each positive
+finite level the continuous ring is constant. Finite constant local models agree
+with locally constant finite modules: finite presentation over a finite ring gives
+a finite module, and a finite module has a finite presentation. The Noetherian
+finite stratifications agree. Finally homology is preserved by the exact
+equivalence, and support in [r,s] means precisely vanishing outside [r,s]. These
+identifications give both implications, including the same uniform interval. -/
+theorem continuousIntegralConstructible_iff_sfIntegralConstructible (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategory (AdicCompletion.Modules l E X)) :
+    continuousIntegralConstructible l E X K ↔
+      WeilConjectures.sfIntegralConstructible l E X
+        ((integralSectionDerivedEquivalence l E X).functor.obj K) := by
+  classical
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let A := integralEncoding l E X
+  obtain ⟨e, a, ha⟩ := IntegralPresentation.fixed_integral_section_squares l E X A
+    (integralLimitAbComparison l E X)
+    (integralLimitAbComparison_existsUnique l E X).exists.choose_spec
+    (integralSectionAbIdentifications l E X).1
+    (integralSectionAbIdentifications l E X).2
+    (integralSectionRingIso_existsUnique l E X).exists.choose_spec
+  have hb (n : ℕ) := IntegralPresentation.finiteComparison_existsUnique l E X A n (e n) (a n)
+  choose b hbu _ using hb
+  have ht := IntegralPresentation.integral_completion_transition_comparison l E X A e a ha b hbu
+  let : A.derived.functor.Additive :=
+    by change A.modules.functor.mapDerivedCategory.Additive; infer_instance
+  let : A.derived.functor.CommShift ℤ :=
+    by change A.modules.functor.mapDerivedCategory.CommShift ℤ; infer_instance
+  let : A.derived.functor.IsTriangulated :=
+    by change A.modules.functor.mapDerivedCategory.IsTriangulated; infer_instance
+  let : HasCountableProducts (DerivedCategory (WeilConjectures.scalarReductionSource l E X)) :=
+    IntegralPresentation.completedProducts l E X
+  let : HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E X)) :=
+    { out := fun I _ ↦ Adjunction.hasLimitsOfShape_of_equivalence A.derived.functor }
+  have hcomplete : IsDerivedComplete l E X K ↔
+      WeilConjectures.IsSfDerivedComplete l E X (A.derived.functor.obj K) := by
+    constructor
+    · intro hK
+      exact (IntegralPresentation.integral_completion_presentation.{u, u} l E X A e a ha K hK).1
+    · rintro ⟨hp, δ, hδ⟩
+      let := hp
+      have ht' (n : ℕ) :
+          A.derived.functor.map (AdicCompletion.integralStep l E X K n) ≫
+              (IntegralPresentation.restrictedComparison l E X A n (e n) (a n)
+                (b n) K).inv =
+            (IntegralPresentation.restrictedComparison l E X A (n + 1) (e (n + 1))
+              (a (n + 1)) (b (n + 1)) K).inv ≫
+                (WeilConjectures.sfDerivedReductionTransition l E X n).app
+                  (A.derived.functor.obj K) := by
+        have h := ht K n
+        change (WeilConjectures.sfDerivedReductionTransition l E X n).app
+            (A.derived.functor.obj K) ≫
+              (IntegralPresentation.restrictedComparison l E X A n (e n) (a n)
+                (b n) K).hom =
+            (IntegralPresentation.restrictedComparison l E X A (n + 1) (e (n + 1))
+              (a (n + 1)) (b (n + 1)) K).hom ≫
+                A.derived.functor.map (AdicCompletion.integralStep l E X K n) at h
+        apply (cancel_epi (IntegralPresentation.restrictedComparison l E X A (n + 1)
+          (e (n + 1)) (a (n + 1)) (b (n + 1)) K).hom).mp
+        simpa only [← Category.assoc, Iso.hom_inv_id, Category.id_comp,
+          Category.assoc, Iso.hom_inv_id_assoc, Category.comp_id] using
+          congrArg (fun f ↦ f ≫
+            (IntegralPresentation.restrictedComparison l E X A n (e n) (a n) (b n) K).inv)
+            h.symm
+      have hu' (n : ℕ) :
+          A.derived.functor.map ((Mod.derivedExtendMapDerivedCategoryAdjunction
+            (AdicCompletion.quotient l E X n)).unit.app K) ≫
+              (IntegralPresentation.restrictedComparison l E X A n (e n) (a n)
+                (b n) K).inv =
+            (WeilConjectures.sfDerivedReductionUnit l E X n).app
+              (A.derived.functor.obj K) := by
+        simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using
+          congrArg (fun f ↦ f ≫
+            (IntegralPresentation.restrictedComparison l E X A n (e n) (a n) (b n) K).inv)
+            (hbu n K).symm
+      obtain ⟨δ', hδ'⟩ := reflect_roos_complete
+        (V := AdicCompletion.integralLevel l E X K)
+        (W := fun n ↦ (WeilConjectures.sfDerivedReductionRestricted l E X n).obj
+          (A.derived.functor.obj K)) A.derived.functor
+        (AdicCompletion.integralStep l E X K)
+        (fun n ↦ (WeilConjectures.sfDerivedReductionTransition l E X n).app
+          (A.derived.functor.obj K))
+        (fun n ↦ (IntegralPresentation.restrictedComparison l E X A n (e n) (a n)
+          (b n) K).symm) K
+        (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction
+          (AdicCompletion.quotient l E X n)).unit.app K)
+        (fun n ↦ (WeilConjectures.sfDerivedReductionUnit l E X n).app
+          (A.derived.functor.obj K))
+        (by simpa only [Iso.symm_hom] using ht')
+        (by simpa only [Iso.symm_hom] using hu') δ hδ
+      exact AdicCompletion.isDerivedComplete_of_roos l E X K δ' hδ'
+  let (n : ℕ) : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
+    Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+  let (n : ℕ) : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) :=
+    finiteTopology_discrete l E n
+  have hmodel (n : ℕ) :
+      constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) X
+          ((AdicCompletion.derivedReduction l E X n).obj K) ↔
+        FiniteDiscreteOrdinary.ordinaryIntrinsicBoundedConstructible
+          (Padic.coefficientExtensionRing l E (n + 1)) X
+          ((WeilConjectures.scalarReductionDerivedExtension l E X n).obj
+            (A.derived.functor.obj K)) := by
+    let := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+    exact (finiteEncoding_constructible (Padic.coefficientExtensionRing l E (n + 1)) X
+      (e n) _).trans (finiteBounded_iso _ X ((b n).app K).symm)
+  have hbounds (n : ℕ) (r s : ℤ) :
+      (∀ q : ℤ, q < r ∨ s < q →
+        IsZero ((DerivedCategory.homologyFunctor _ q).obj
+          ((AdicCompletion.derivedReduction l E X n).obj K))) ↔
+      (∀ q : ℤ, q < r ∨ s < q →
+        IsZero ((DerivedCategory.homologyFunctor _ q).obj
+          ((WeilConjectures.scalarReductionDerivedExtension l E X n).obj
+            (A.derived.functor.obj K)))) := by
+    apply forall_congr'
+    intro q
+    apply imp_congr_right
+    intro _
+    exact (show IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((AdicCompletion.derivedReduction l E X n).obj K)) ↔
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((e n).ordinaryDerived.functor.obj
+          ((AdicCompletion.derivedReduction l E X n).obj K))) from
+      ⟨(e n).ordinary.functor.isZero_homologyFunctor_mapDerivedCategory_obj,
+        Functor.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+          (e n).ordinary.functor⟩).trans
+        ((DerivedCategory.homologyFunctor _ q).mapIso ((b n).app K)).isZero_iff.symm
+  change _ ↔ WeilConjectures.sfIntegralConstructible l E X (A.derived.functor.obj K)
+  constructor
+  · rintro ⟨hK, hcons, r, s, hrs, hv⟩
+    refine ⟨hcomplete.mp hK, r, s, hrs, fun n ↦ ?_⟩
+    have hc := (hmodel n).mp (hcons n)
+    have hz := (hbounds n r s).mp (hv n)
+    exact ⟨⟨finiteSupport_of_interval _ r s hz, hc.2⟩,
+      (support_subset_iff_interval _ r s).mpr hz⟩
+  · rintro ⟨hK, r, s, hrs, h⟩
+    have hv (n : ℕ) := (support_subset_iff_interval _ r s).mp (h n).2
+    refine ⟨hcomplete.mpr hK, fun n ↦ ?_, r, s, hrs, fun n ↦ (hbounds n r s).mpr (hv n)⟩
+    apply (hmodel n).mpr
+    exact ⟨bounded_of_interval _ r s (hv n), (h n).1.2⟩
 
 attribute [local irreducible] WeilConjectures.scalarReductionExistence
   WeilConjectures.scalarReductionDerivedExistence

@@ -201,6 +201,8 @@ public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletion
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLocallyClosedExtension
 public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 public import WeilConjectures.ProperBaseChange.CondensedFiniteFreeTensorExact
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
+public import WeilConjectures.CategoryTheory.ModuleObjects.ProEtaleCoefficients.FiniteFreeScalarCoordinates
 
 /-! # Tensor of locally closed lisse generators
 
@@ -1312,6 +1314,67 @@ private theorem gradedGoodTensor23 [MonoidalClosed D]
     GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := by
   infer_instance
 
+@[reassoc]
+private theorem singleTensor_component (F G : D) :
+    HomologicalComplex.ιTensorObj
+        ((CochainComplex.singleFunctor D 0).obj F)
+        ((CochainComplex.singleFunctor D 0).obj G) 0 0 0 (by omega) ≫
+      (DerivedCategory.moduleCup_singleTensorIso F G).hom.f 0 =
+    ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 F).hom ⊗ₘ
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 G).hom) ≫
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (F ⊗ G)).inv := by
+  dsimp only [DerivedCategory.moduleCup_singleTensorIso, Iso.trans_hom,
+    CochainComplex.map₂HomologicalComplexFlipObjSingleIso, Iso.app,
+    NatIso.ofComponents, CochainComplex.mapBifunctorSingle₂Iso,
+    Iso.symm_hom, HomologicalComplex.comp_f, CochainComplex.singleFunctor]
+  simp only [Category.assoc]
+  erw [HomologicalComplex.ι_mapBifunctorFlipIso_inv_assoc]
+  dsimp only [CochainComplex.mapBifunctorSingle₁Iso, Iso.symm_hom,
+    HomologicalComplex.Hom.isoOfComponents]
+  dsimp only [Iso.symm_inv, CochainComplex.mapBifunctorSingle₁XIso]
+  have hs : (ComplexShape.up ℤ).σ (.up ℤ) (.up ℤ) 0 0 = 1 := by rfl
+  rw [hs, one_smul]
+  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  simp only [and_self, dif_pos,
+    HomologicalComplex.singleMapHomologicalComplex_hom_app_self]
+  dsimp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq]
+  simp only [whiskerLeft_id, id_whiskerRight, Category.comp_id, Category.id_comp, tensorHom_id]
+  exact Category.id_comp _
+
+private theorem singleComplexTensor_natural {F F' G G' : D} (f : F ⟶ F') (g : G ⟶ G') :
+    ((CochainComplex.singleFunctor D 0).map f ⊗ₘ
+      (CochainComplex.singleFunctor D 0).map g) ≫
+      (DerivedCategory.moduleCup_singleTensorIso F' G').hom =
+    (DerivedCategory.moduleCup_singleTensorIso F G).hom ≫
+      (CochainComplex.singleFunctor D 0).map (f ⊗ₘ g) := by
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  by_cases hp : p = 0
+  · subst p
+    by_cases hq : q = 0
+    · subst q
+      obtain rfl : n = 0 := by
+        change (0 : ℤ) + 0 = n at hpq
+        omega
+      simp only [HomologicalComplex.comp_f, MonoidalCategory.tensorHom_def, Category.assoc]
+      erw [CochainComplex.Monoidal.ι_whiskerRight_assoc,
+        CochainComplex.ιTensorObj_whiskerLeft_f_assoc, singleTensor_component_assoc,
+        singleTensor_component]
+      simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+        HomologicalComplex.single_map_f_self]
+      dsimp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq]
+      simp only [Category.id_comp, id_tensorHom_id, Category.assoc]
+      change (f ≫ 𝟙 F') ▷ G ≫ F' ◁ (g ≫ 𝟙 G') ≫ 𝟙 (F' ⊗ G') =
+        𝟙 (F ⊗ G) ≫ f ▷ G ≫ F' ◁ g ≫ 𝟙 (F' ⊗ G')
+      simp only [Category.comp_id, Category.id_comp]
+    · have hz := (tensorLeft (((CochainComplex.singleFunctor D 0).obj F).X 0)).map_isZero
+        (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 G q hq)
+      exact hz.eq_of_src _ _
+  · have hz := (tensorRight (((CochainComplex.singleFunctor D 0).obj G).X q)).map_isZero
+      (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 F p hp)
+    exact hz.eq_of_src _ _
+
 end TensorExistence
 
 attribute [local instance] gradedTensorExists gradedTensorFourExists
@@ -1361,6 +1424,21 @@ private noncomputable def singleTensorIso (F G : D) (hF : ObjectProperty.flat F)
         (DerivedCategory.singleFunctor D 0).obj (F ⊗ G) := by
   have := singleTensorHom_isIso F G hF
   exact asIso (singleTensorHom F G)
+
+@[reassoc]
+private theorem singleTensorHom_natural {F F' G G' : D} (f : F ⟶ F') (g : G ⟶ G') :
+    ((DerivedCategory.singleFunctor D 0).map f ⊗ₘ
+      (DerivedCategory.singleFunctor D 0).map g) ≫ singleTensorHom F' G' =
+      singleTensorHom F G ≫ (DerivedCategory.singleFunctor D 0).map (f ⊗ₘ g) := by
+  have hf := (DerivedCategory.singleFunctorIsoCompQ D 0).hom.naturality f
+  have hg := (DerivedCategory.singleFunctorIsoCompQ D 0).hom.naturality g
+  have hi := (DerivedCategory.singleFunctorIsoCompQ D 0).inv.naturality (f ⊗ₘ g)
+  dsimp only [Functor.comp_map] at hf hg hi
+  simp only [singleTensorHom, Iso.app_hom, Iso.app_inv, Category.assoc]
+  rw [← Category.assoc, tensorHom_comp_tensorHom, hf, hg,
+    ← tensorHom_comp_tensorHom, Category.assoc, Functor.LaxMonoidal.μ_natural_assoc,
+    ← DerivedCategory.Q.map_comp_assoc, singleComplexTensor_natural,
+    DerivedCategory.Q.map_comp, Category.assoc, hi]
 
 private noncomputable def singleTensorIsoComp (F G H : D)
     (hF : ObjectProperty.flat F) (e : F ⊗ G ≅ H) :
@@ -2004,6 +2082,164 @@ private theorem actual_tensor_properties
             (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
               (condensedRingObj Λ X)) 0) TF)).obj L).obj M) e
 
+private noncomputable def liftSupportedNatIso
+    {C : Type uC} {D : Type uD} {B : Type uC}
+    [Category.{vC} C] [Category.{vD₀} D] [Category.{vC} B]
+    (E : C ⥤ D) (R : D ⥤ C) (ff : E.FullyFaithful) (η : E ⋙ R ≅ 𝟭 C)
+    (F : B ⥤ D) (G : B ⥤ C) (σ : F ⋙ R ≅ G)
+    (hF : ∀ L, ∃ Q, Nonempty (F.obj L ≅ E.obj Q)) : F ≅ G ⋙ E := by
+  classical
+  choose e he using fun L ↦ normalized_comparison_of_essImage E R ff η
+    (F.obj L) (G.obj L) (hF L) (σ.app L)
+  refine NatIso.ofComponents e ?_
+  intro L M f
+  apply restrict_hom_injective_of_iso E R ff η (e L) (Iso.refl _)
+  apply (cancel_mono (η.hom.app (G.obj M))).1
+  have hη := η.hom.naturality (G.map f)
+  dsimp only [Functor.comp_map, Functor.id_map] at hη
+  simp only [Functor.map_comp, Category.assoc, Functor.comp_map]
+  rw [he, hη, ← Category.assoc, he]
+  exact σ.hom.naturality f
+
+private noncomputable def supportedProjectionIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}}
+    [IsLocallyNoetherian X] [CompactSpace X] {a : S ⟶ X}
+    (A : GeneratorFactorization a)
+    (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    generatorExtension Λ A ⋙ tensorRight Q ≅
+      tensorRight ((upperStar Λ a).obj Q) ⋙ generatorExtension Λ A := by
+  let E := generatorExtension Λ A
+  let R := upperStar Λ a
+  have := generatorRestriction_isIso Λ A
+  let η := asIso (generatorRestriction Λ A)
+  let σ : (E ⋙ tensorRight Q) ⋙ R ≅ tensorRight (R.obj Q) :=
+    NatIso.ofComponents
+      (fun L ↦ tensorRestrictionIso R (η.app L) (Iso.refl _)) (by
+        intro L M f
+        change R.map (E.map f ▷ Q) ≫ _ = _ ≫ (f ▷ R.obj Q)
+        simpa only [tensorHom_id, Functor.comp_map] using
+          tensorRestrictionIso_natural R (η.app L) (Iso.refl (R.obj Q))
+            (η.app M) (Iso.refl (R.obj Q)) (E.map f) (𝟙 Q) f (𝟙 (R.obj Q))
+            (η.hom.naturality f) (by simp))
+  exact liftSupportedNatIso E R (generatorExtension_fullyFaithful Λ A) η
+    (E ⋙ tensorRight Q) (tensorRight (R.obj Q)) σ (fun L ↦
+      ⟨_, generatorExtension_reconstruct Λ A _
+        (supported_tensor_left Λ a _ Q
+          (fun g hg ↦ generatorExtension_support Λ A g hg L))⟩)
+
+private noncomputable def pointModulePullbackIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}} (a : S ⟶ X) :
+    (upperStarFromPoint X).mapMod Λ ⋙ upperStar Λ a ≅
+      (upperStarFromPoint S).mapMod Λ :=
+  by
+    unfold upperStar
+    exact Functor.mapModCompExtendScalarsIso (upperStarFromPoint X)
+      (ProEtale.upperStar Ab.{u + 1} a) (upperStarFromPointComp a).hom Λ
+
+private noncomputable def lisseSingleTensorIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}}
+    [IsLocallyNoetherian X] [CompactSpace X] {a : S ⟶ X} [IsImmersion a]
+    (A : GeneratorFactorization a)
+    (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    (ObjectProperty.ι (IsLisseCoefficientModule Λ (X := S)) ⋙
+        generatorExtension Λ A ⋙ DerivedCategory.singleFunctor _ 0) ⋙
+      (curriedTensor _).flip.obj ((DerivedCategory.singleFunctor _ 0).obj Q) ≅
+    (ObjectProperty.ι (IsLisseCoefficientModule Λ (X := S)) ⋙
+        generatorExtension Λ A ⋙ tensorRight Q) ⋙ DerivedCategory.singleFunctor _ 0 := by
+  letI := coefficientModule_flatResolution Λ X
+  refine NatIso.ofComponents (fun L ↦ singleTensorIso _ Q
+    (generatorExtension_flat Λ A L.obj L.property)) ?_
+  intro L M f
+  have h := singleTensorHom_natural ((generatorExtension Λ A).map f.hom) (𝟙 Q)
+  simpa only [CategoryTheory.Functor.map_id, tensorHom_id, Functor.comp_map,
+    Functor.flip_obj_map, Functor.flip_obj_obj, curriedTensor_map_app,
+    curriedTensor_obj_obj, Functor.comp_obj, ObjectProperty.ι_obj, ObjectProperty.ι_map,
+    singleTensorIso, asIso_hom] using h
+
+
+-- Tensor with a pulled-back coefficient module is extension then restriction of scalars.
+
+private noncomputable def pointScalarTensorIso
+    (Λ Δ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Δ] [IsCommMonObj Δ]
+    (q : Λ ⟶ Δ) [IsMonHom q] (X : Scheme.{u}) :
+    tensorRight (((upperStarFromPoint X).mapMod Λ).obj
+      ((Mod.comap q).obj (Mod.regular Δ))) ≅
+      Mod.extendScalars ((upperStarFromPoint X).map q) ⋙
+        Mod.comap ((upperStarFromPoint X).map q) := by
+  let qX := (upperStarFromPoint X).map q
+  let e : ((upperStarFromPoint X).mapMod Λ).obj ((Mod.comap q).obj (Mod.regular Δ)) ≅
+      (Mod.comap qX).obj (Mod.regular ((upperStarFromPoint X).obj Δ)) :=
+    (Functor.mapModComapIso (upperStarFromPoint X) q).app (Mod.regular Δ)
+  let d : Mod.extendScalars qX ⋙ Mod.comap qX ≅
+      tensorLeft ((Mod.comap qX).obj (Mod.regular ((upperStarFromPoint X).obj Δ))) :=
+    NatIso.ofComponents (Mod.scalarTensorIso qX)
+      (fun f ↦ Mod.scalarTensorIso_naturality qX f)
+  exact (BraidedCategory.tensorLeftIsoTensorRight _).symm ≪≫
+    (tensoringLeft _).mapIso e ≪≫ d.symm
+
+-- Keep the coefficient ring abstract while transporting the canonical factorization.
+
+private noncomputable def lisseExtensionPointTensorIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}} [IsNoetherian X]
+    (a : S ⟶ X) (ha : IsImmersion a)
+    (Q : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ) :
+    let ι := ObjectProperty.ι (IsLisseCoefficientModule Λ (X := S))
+    let H := coefficientHeartLocallyClosedExtension Λ a ha
+    let J := DerivedCategory.singleFunctor
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) 0
+    let QX := ((upperStarFromPoint X).mapMod Λ).obj Q
+    let QS := ((upperStarFromPoint S).mapMod Λ).obj Q
+    (ι ⋙ H ⋙ J) ⋙ (derivedTensor Λ X).flip.obj (J.obj QX) ≅
+      ((ι ⋙ tensorRight QS) ⋙ H) ⋙ J := by
+  let : IsImmersion a := ha
+  let : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
+  let A : GeneratorFactorization a :=
+    .inr ⟨a.image, a.toImage, a.imageι, a.toImage_imageι, inferInstance, inferInstance⟩
+  let ι := ObjectProperty.ι (IsLisseCoefficientModule Λ (X := S))
+  let H := generatorExtension Λ A
+  let J := DerivedCategory.singleFunctor
+    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) 0
+  let QX := ((upperStarFromPoint X).mapMod Λ).obj Q
+  let QS := ((upperStarFromPoint S).mapMod Λ).obj Q
+  let eQ : (upperStar Λ a).obj QX ≅ QS := (pointModulePullbackIso Λ a).app Q
+  let eOrd : H ⋙ tensorRight QX ≅ tensorRight QS ⋙ H :=
+    supportedProjectionIso Λ A QX ≪≫
+      Functor.isoWhiskerRight ((tensoringRight _).mapIso eQ) H
+  have hH : coefficientHeartLocallyClosedExtension Λ a ha = H := by
+    unfold H generatorExtension A coefficientHeartLocallyClosedExtension
+    rfl
+  dsimp only
+  rw [hH, derivedTensor_eq_curriedTensor]
+  exact lisseSingleTensorIso Λ A QX ≪≫
+    Functor.isoWhiskerRight (Functor.isoWhiskerLeft ι eOrd) J
+
+private noncomputable def lisseExtensionPointQuotientIso
+    (Λ Δ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Δ] [IsCommMonObj Δ]
+    (q : Λ ⟶ Δ) [IsMonHom q]
+    {S X : Scheme.{u}} [IsNoetherian X] (a : S ⟶ X) (ha : IsImmersion a) :
+    let ι := ObjectProperty.ι (IsLisseCoefficientModule Λ (X := S))
+    let H := coefficientHeartLocallyClosedExtension Λ a ha
+    let J := DerivedCategory.singleFunctor
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) 0
+    let Q := (Mod.comap q).obj (Mod.regular Δ)
+    let QX := ((upperStarFromPoint X).mapMod Λ).obj Q
+    let qS := (upperStarFromPoint S).map q
+    (ι ⋙ H ⋙ J) ⋙ (derivedTensor Λ X).flip.obj (J.obj QX) ≅
+      ((ι ⋙ Mod.extendScalars qS ⋙ Mod.comap qS) ⋙ H) ⋙ J := by
+  let ι := ObjectProperty.ι (IsLisseCoefficientModule Λ (X := S))
+  let H := coefficientHeartLocallyClosedExtension Λ a ha
+  let J := DerivedCategory.singleFunctor
+    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) 0
+  exact lisseExtensionPointTensorIso Λ a ha ((Mod.comap q).obj (Mod.regular Δ)) ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerRight (Functor.isoWhiskerLeft ι (pointScalarTensorIso Λ Δ q S)) H) J
+
 /-- Derived reduction of a locally closed lisse lattice extension.
 
 Source: the Reduction paragraph of the proof of `det-proper-heart-bound-torsion`:
@@ -2050,7 +2286,14 @@ theorem locallyClosedGeneratorTensorIntersection
           (S := S.left) (X := X.left) f hf) ⋙
         DerivedCategory.singleFunctor _ 0
     Nonempty (F ≅ G) := by
-  sorry
+  classical
+  let : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : IsNoetherian X.left := ⟨⟩
+  obtain ⟨m, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (show n ≠ 0 by omega)
+  exact ⟨lisseExtensionPointQuotientIso (DerivedNakayama.integerRing ell E)
+    (DerivedNakayama.quotientRing ell E (m + 1))
+    (DerivedNakayama.reductionRing ell E (m + 1)) a.left ha⟩
 
 end TensorComparisonNaturality
 

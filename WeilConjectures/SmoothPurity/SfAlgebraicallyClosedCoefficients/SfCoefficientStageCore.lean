@@ -18,6 +18,7 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 import WeilConjectures.SmoothPurity.Scalar.ScalarShiftNormalization
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import WeilConjectures.SmoothPurity.Rational.RationalAssociatorShiftCompat
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientComparisons
 
 /-! Intrinsic finite coefficient stages and their scalar coherence.
 This file contains the finite-stage part of SfAlgebraicallyClosedCoefficients,
@@ -669,3 +670,157 @@ end
 
 end SfAlgebraicallyClosedCoefficients
 end WeilConjectures
+
+namespace AlgebraicGeometry.ProEtale.SfCoefficientStageCore
+
+private theorem ofComp_normalized
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ]
+    (F : C ⥤ D) (I : D ⥤ E) [I.Full] [I.Faithful] [I.CommShift ℤ]
+    (H : C ⥤ E) [H.CommShift ℤ] (e : F ⋙ I ≅ H) (n : ℤ) (X : C) :
+    HEq (I.map ((Functor.commShiftIso F (self := Functor.CommShift.ofComp e ℤ) n).hom.app X) ≫
+        (I.commShiftIso n).hom.app (F.obj X))
+      (e.hom.app ((shiftFunctor C n).obj X) ≫ (H.commShiftIso n).hom.app X ≫
+        (shiftFunctor E n).map (e.inv.app X)) := by
+  change HEq (I.map ((Functor.CommShift.OfComp.iso e n).hom.app X) ≫
+    (I.commShiftIso n).hom.app (F.obj X)) _
+  simp [Category.assoc]
+
+private theorem iso_shift_existsUnique
+    {C D : Type*} [Category* C] [Category* D]
+    [HasShift C ℤ] [HasShift D ℤ] (F G : C ⥤ D) [G.CommShift ℤ] (e : F ≅ G) :
+    ∃! c : F.CommShift ℤ, ∀ n X,
+      HEq ((Functor.commShiftIso F (self := c) n).hom.app X)
+        (e.hom.app (X⟦n⟧) ≫ (G.commShiftIso n).hom.app X ≫
+          (shiftFunctor D n).map (e.inv.app X)) := by
+  let c : F.CommShift ℤ := Functor.CommShift.ofIso e.symm ℤ
+  have hc (n : ℤ) (X : C) :
+      HEq ((Functor.commShiftIso F (self := c) n).hom.app X)
+        (e.hom.app (X⟦n⟧) ≫ (G.commShiftIso n).hom.app X ≫
+          (shiftFunctor D n).map (e.inv.app X)) := by
+    rfl
+  refine ⟨c, hc, ?_⟩
+  intro c' hc'
+  apply integer_commShift_ext
+  intro n
+  apply Iso.ext
+  apply NatTrans.ext
+  funext X
+  exact eq_of_heq ((hc' n X).trans (hc n X).symm)
+
+/-- Exact ordinary scalar extension along the pulled-back condensed coefficient map.
+Source: flatness before (1) of `sk-thm-sfb-qlbar-two-colimit`.
+(blueprint: lem-route-integral-transition-comm-shift-exists-unique) -/
+noncomputable abbrev condensedOrdinaryTransition
+    {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :=
+  Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)
+
+/-- The actual bounded constructible category of modules over the condensed ring E_X.
+Source: `def-sfb-dcons-subfield`, preceding the two-colimit theorem.
+(blueprint: lem-route-transition-comm-shift-exists-unique) -/
+noncomputable abbrev CondensedCoefficientStage (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
+  PadicSubfieldConstructible X ℓ E
+
+/-- The ambient derived tensor transition, normalized by exact termwise scalar extension.
+Source: `sk-thm-sfb-qlbar-two-colimit`, scalar extensions preceding (1).
+Proof: transport the termwise coherent integer comparisons through the canonical exact
+left-derived comparison. The component formula determines each natural isomorphism and
+therefore the entire coherent structure. This includes the identity field inclusion.
+(blueprint: lem-route-integral-transition-comm-shift-exists-unique) -/
+theorem condensedDerivedTransitionCommShift_existsUnique
+    {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
+    ∃! c : (derivedExtendScalarsSubfield X ℓ h).CommShift ℤ, ∀ n K,
+      HEq ((Functor.commShiftIso (derivedExtendScalarsSubfield X ℓ h)
+          (self := c) n).hom.app K)
+        (((condensedOrdinaryTransition X ℓ h).leftDerivedFunctorIsoMapDerivedCategory.hom.app
+            (K⟦n⟧)) ≫
+          (((condensedOrdinaryTransition X ℓ h).mapDerivedCategory).commShiftIso n).hom.app K ≫
+          (shiftFunctor _ n).map
+            ((condensedOrdinaryTransition X ℓ h).leftDerivedFunctorIsoMapDerivedCategory.inv.app
+              K)) := by
+  exact iso_shift_existsUnique _ _
+    (condensedOrdinaryTransition X ℓ h).leftDerivedFunctorIsoMapDerivedCategory
+
+/-- Scalar extension restricted to the native full bounded constructible categories.
+Source: `def-sfb-constructible-extend-subfield`.
+(blueprint: lem-route-transition-comm-shift-exists-unique) -/
+noncomputable abbrev condensedScalarTransition
+    {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
+    CondensedCoefficientStage X ℓ E ⥤ CondensedCoefficientStage X ℓ F :=
+  constructibleExtendScalars X ℓ h
+
+/-- The defining comparison with ambient derived scalar extension.
+Source: `def-sfb-constructible-extend-subfield`.
+(blueprint: lem-route-transition-comm-shift-exists-unique) -/
+noncomputable def condensedTransitionComparison
+    {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
+    condensedScalarTransition X ℓ h ⋙ (boundedConstructible (padicSubfieldRingObj X ℓ F)).ι ≅
+      (boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙
+        derivedExtendScalarsSubfield X ℓ h :=
+  (boundedConstructible (padicSubfieldRingObj X ℓ F)).liftCompιIso
+    ((boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙
+      derivedExtendScalarsSubfield X ℓ h)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsSubfield_obj X ℓ h K)
+
+/-- The restricted shift is uniquely determined by the ambient tensor shift.
+Source: `sk-thm-sfb-qlbar-two-colimit`, scalar extensions preceding (1).
+Proof: lift the ambient comparisons through the fully faithful inclusion. Naturality and
+coherence lift by faithfulness. Applying that inclusion to two candidate components,
+cancelling its invertible shift comparison and using normalization proves uniqueness.
+(blueprint: lem-route-transition-comm-shift-exists-unique) -/
+theorem condensedTransitionCommShift_existsUnique
+    {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
+    ∃! c : (condensedScalarTransition X ℓ h).CommShift ℤ, ∀ n K,
+      HEq ((boundedConstructible (padicSubfieldRingObj X ℓ F)).ι.map
+          ((Functor.commShiftIso (condensedScalarTransition X ℓ h) (self := c) n).hom.app K) ≫
+        (Functor.commShiftIso
+          (boundedConstructible (padicSubfieldRingObj X ℓ F)).ι n).hom.app
+          ((condensedScalarTransition X ℓ h).obj K))
+        ((condensedTransitionComparison X ℓ h).hom.app (K⟦n⟧) ≫
+          (((boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙
+            derivedExtendScalarsSubfield X ℓ h).commShiftIso n).hom.app K ≫
+          (shiftFunctor _ n).map ((condensedTransitionComparison X ℓ h).inv.app K)) := by
+  exact normalized_shift_existsUnique _ _ _ (condensedTransitionComparison X ℓ h)
+
+/-- The normalized integer shift of the condensed scalar transition: the shift lifted
+through the fully faithful inclusion along the defining comparison, the unique structure of
+`condensedTransitionCommShift_existsUnique`.
+Source: `def-sfb-constructible-extend-subfield`.
+(blueprint: lem-route-transition-comm-shift-exists-unique) -/
+noncomputable instance condensedTransitionCommShift
+    {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
+    (condensedScalarTransition X ℓ h).CommShift ℤ :=
+  Functor.CommShift.ofComp (condensedTransitionComparison X ℓ h) ℤ
+
+/-- The ambient tensor functor preserves distinguished triangles with its specified shift.
+Source: `sk-thm-sfb-qlbar-two-colimit`, flatness preceding (1).
+Proof: exactness of coefficient extension identifies its total left derived functor with
+termwise extension. Its canonical comparison commutes with the transported shifts, so
+preservation of distinguished triangles transports along that comparison.
+(blueprint: lem-route-transition-exact) -/
+theorem condensedDerivedTransitionExact {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
+    (derivedExtendScalarsSubfield X ℓ h).IsTriangulated := by
+  have : NatTrans.CommShift
+      (condensedOrdinaryTransition X ℓ h).leftDerivedFunctorIsoMapDerivedCategory.symm.hom ℤ :=
+    Functor.CommShift.ofIso_compatibility
+      (condensedOrdinaryTransition X ℓ h).leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+  exact Functor.isTriangulated_of_iso
+    (condensedOrdinaryTransition X ℓ h).leftDerivedFunctorIsoMapDerivedCategory.symm
+
+/-- The normalized condensed coefficient transition is exact.
+Source: `sk-thm-sfb-qlbar-two-colimit`, flatness preceding (1).
+Proof: the normalization square is precisely shift compatibility of the comparison with
+ambient tensor. The latter is exact by flatness. The target full-subcategory inclusion
+reflects distinguished triangles, hence the restricted tensor preserves them, including
+the connecting arrow with its prescribed comparison.
+(blueprint: lem-route-transition-exact) -/
+theorem condensedTransitionExact {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
+    (condensedScalarTransition X ℓ h).IsTriangulated := by
+  have := condensedDerivedTransitionExact X ℓ h
+  have : NatTrans.CommShift (condensedTransitionComparison X ℓ h).hom ℤ :=
+    normalized_compatibility _ _ _ (condensedTransitionComparison X ℓ h)
+      (ofComp_normalized _ _ _ (condensedTransitionComparison X ℓ h))
+  exact (Functor.isTriangulated_iff_comp_right (condensedTransitionComparison X ℓ h)).2
+    inferInstance
+
+end AlgebraicGeometry.ProEtale.SfCoefficientStageCore

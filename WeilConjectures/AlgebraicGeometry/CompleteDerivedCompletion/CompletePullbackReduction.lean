@@ -318,4 +318,64 @@ def pullReduction := (pullReduction_existsUnique l E f).exists.choose
 Source: the defining display (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
 def completedPull := red l E T ⋙ dpull l E f ⋙ rlim l E T'
 
+/-- The identification of completed pullback with completion of ordinary pullback.
+Source: assertion (1) (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
+def completedPullIso : completedPull l E f ≅ dpullModule l E f ⋙ completion l E T' :=
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (pullReduction l E f) (rlim l E T') ≪≫
+    Functor.associator _ _ _
+
+/-- The completion map of ordinary pullback, with the preceding identification.
+Source: assertion (3) (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
+def completedPullUnit : dpullModule l E f ⟶ completedPull l E f :=
+  Functor.whiskerLeft (dpullModule l E f) (kappa l E T') ≫
+    (completedPullIso l E f).inv
+
+/-- The canonical reduction-tower map to the reductions of completed pullback.
+Its inverse is the finite-reduction comparison; evaluation gives every level at once.
+Source: assertion (2) (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
+def completedPullReductionMap : red l E T ⋙ dpull l E f ⟶
+    completedPull l E f ⋙ red l E T' :=
+  (pullReduction l E f).hom ≫
+    Functor.whiskerRight (completedPullUnit l E f) (red l E T')
+
+/-- All three assertions for arbitrary M, with the canonical tower map and its unit.
+The reduction at level n is red(M) evaluated at n, hence the finite derived tensor
+reduction by the resolution theorem in CompleteDerivedCompletion. The natural
+isomorphism below is an isomorphism of derived towers; its evaluations commute with
+all transitions, and pullEvaluation identifies them with f*(M_n).
+Source: assertions (1)--(3)
+(blueprint: lemma-weil-pbc-completed-pullback-reduction).
+Proof: use the normalized exact cone comparison for (1), including (π,1) on the
+transitions. Apply Rlim to get completedPullIso. Apply assertion (6) of
+completeDerivedCompletion to f*M: its completion is complete and red(κ) is invertible.
+Transport through completedPullIso to obtain (2), including transition compatibility.
+The same identification transports κ and its completeness criterion, giving (3). -/
+theorem completedPull_reduction :
+    IsPullReduction l E f (pullReduction l E f) ∧
+    IsStrictPullReduction l E f (strictPullReduction l E f) ∧
+    IsIso (completedPullReductionMap l E f) ∧
+    (∀ M : DerivedCategory (AdicCompletion.Modules l E T),
+      IsDerivedComplete l E T' ((completedPull l E f).obj M) ∧
+      (IsIso ((completedPullUnit l E f).app M) ↔
+        IsDerivedComplete l E T' ((dpullModule l E f).obj M))) := by
+  have h := completeDerivedCompletion l E T' T' (𝟙 T')
+  have hfinite := h.2.2.2.2.2.2.1
+  have hcriterion := h.2.2.2.2.2.2.2.1
+  refine ⟨(pullReduction_existsUnique l E f).exists.choose_spec,
+    (strictPullReduction_existsUnique l E f).exists.choose_spec, ?_, ?_⟩
+  · apply (NatTrans.isIso_iff_isIso_app _).2
+    intro M
+    have := (hfinite ((dpullModule l E f).obj M)).2.1
+    change IsIso ((pullReduction l E f).hom.app M ≫
+      (red l E T').map (((kappa l E T').app ((dpullModule l E f).obj M)) ≫
+        (completedPullIso l E f).inv.app M))
+    rw [Functor.map_comp]
+    infer_instance
+  · intro M
+    constructor
+    · obtain ⟨P, hP, ⟨e⟩, hA⟩ := (hfinite ((dpullModule l E f).obj M)).1
+      exact ⟨P, hP, ⟨e ≪≫ ((completedPullIso l E f).app M).symm⟩, hA⟩
+    · simpa [completedPullUnit] using (hcriterion ((dpullModule l E f).obj M)).symm
+
 end AlgebraicGeometry.ProEtale.CompleteDerivedCompletion

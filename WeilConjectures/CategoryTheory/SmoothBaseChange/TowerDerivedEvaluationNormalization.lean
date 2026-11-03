@@ -133,6 +133,7 @@ import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
 
 /-!
 # Normalized evaluation of a total derived tower functor
@@ -344,6 +345,308 @@ private theorem exactDerivedAdjunction
   dsimp only [Functor.comp_map] at hn
   rw [hunit, Category.assoc, ← hn, ← DerivedCategory.Q.map_comp_assoc]
   rfl
+
+private theorem counitOfHomFormula
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B]
+    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    (F : B ⥤ A) (G : A ⥤ B) [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (adj : F ⊣ G)
+    (RG : DerivedCategory A ⥤ DerivedCategory B)
+    (η : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RG)
+    (d : F.mapDerivedCategory ⊣ RG)
+    (hd : ∀ (M : CochainComplex B ℤ) (I : CochainComplex A ℤ)
+      (f : (F.mapHomologicalComplex (.up ℤ)).obj M ⟶ I),
+      d.homEquiv (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj I)
+          (F.mapDerivedCategoryFactors.hom.app M ≫ DerivedCategory.Q.map f) =
+        DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I f) ≫
+          η.app I)
+    (I : CochainComplex A ℤ) :
+    F.mapDerivedCategory.map (η.app I) ≫ d.counit.app (DerivedCategory.Q.obj I) =
+      F.mapDerivedCategoryFactors.hom.app
+          ((G.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).counit.app I) := by
+  let ac := adj.mapHomologicalComplex (.up ℤ)
+  apply (d.homEquiv _ _).injective
+  erw [← d.homEquiv_counit, Equiv.apply_symm_apply, hd,
+    ← ac.homEquiv_symm_id, Equiv.apply_symm_apply, DerivedCategory.Q.map_id,
+    Category.id_comp]
+
+/-- Evaluation of a total right derived tower functor has a unique comparison normalized
+by the universal derived units on K-injective towers. The family respects all transitions
+and the counits of the canonical derived adjunctions. The two Hom formulas specify those
+adjunctions, rather than merely choosing adjunctions with the same underlying functors.
+Source: Stacks Project, Tag 0A07, lemma-Rf-commutes-with-Rlim, diagram-topos proof,
+expanded by Derived Categories, Tags 070I, 070Y and 09T5
+(blueprint: lem-weil-pbc-tower-derived-evaluation-normalization).
+
+Proof plan:
+1. Apply the ordinary adjunction levelwise to obtain the tower adjunction, with
+   levelwise unit and counit. Exactness gives the localized left functors and evaluations
+   (`lem-weil-tower-category-levelwise-abelian`,
+   `lem-weil-pbc-exact-functor-derived-factorization`,
+   `lem-weil-pbc-termwise-adjunction-homotopy`).
+2. A K-injective tower J has K-injective evaluations. The two derived units on J and
+   its evaluations are invertible. Define the comparison on QJ as b(J) a(J)⁻¹
+   (`lem-weil-pbc-kinjective-functorial-existence`,
+   `lem-weil-tower-evaluation-kinjective`, `lem-weil-pbc-kinjective-total-derived`).
+3. Naturality of both units proves naturality of this formula on K-injective homotopy
+   classes (`lem-weil-pbc-kinjective-total-derived`,
+   `lem-weil-pbc-termwise-adjunction-homotopy`).
+4. Represent every derived object M by an isomorphism M ≅ QJ. Conjugate the comparison
+   by this isomorphism. Full faithfulness of localization on K-injectives proves
+   independence, naturality and uniqueness (`lem-weil-pbc-kinjective-hom-derived`,
+   `lem-weil-pbc-kinjective-functorial-existence`).
+5. Naturality of the units with respect to each tower transition gives compatibility
+   on QJ after cancelling a(J); transport along M ≅ QJ gives it on every object.
+6. Apply `lem-sfb-resolving-derived-adjunction-normalization` with the left resolving
+   class of all objects to both adjunctions. Its Hom formula, applied to the ordinary
+   counit, gives εD F(η) = Q(εordinary), including the tower version.
+7. Evaluate the tower equation at J. The ordinary counit is levelwise the ambient one.
+   Unit normalization makes the proposed two counits equal after composition with
+   the invertible F(a(J)); cancellation proves equality on QJ.
+8. Both sides are natural in M. Transport along M ≅ QJ and cancel its evaluation to
+   prove the counit equation for every derived tower object. -/
+theorem exists_unique_towerDerivedEvaluation_normalized
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B]
+    [IsGrothendieckAbelian.{vA} A] [IsGrothendieckAbelian.{vB} B]
+    [IsGrothendieckAbelian.{vA} (ℕᵒᵖ ⥤ A)]
+    [IsGrothendieckAbelian.{vB} (ℕᵒᵖ ⥤ B)]
+    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ B)]
+    (F : B ⥤ A) (G : A ⥤ B) [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (adj : F ⊣ G)
+    (RG : DerivedCategory A ⥤ DerivedCategory B)
+    (RT : DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory (ℕᵒᵖ ⥤ B))
+    (η : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RG)
+    (ηT : ((Functor.whiskeringRight ℕᵒᵖ A B).obj G).mapHomologicalComplex (.up ℤ) ⋙
+      DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RT)
+    [RG.IsRightDerivedFunctor η (HomologicalComplex.quasiIso A (.up ℤ))]
+    [RT.IsRightDerivedFunctor ηT (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (.up ℤ))] :
+    ∃ (d : F.mapDerivedCategory ⊣ RG)
+      (dT : ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ⊣ RT),
+      (∀ (M : CochainComplex B ℤ) (I : CochainComplex A ℤ)
+        (f : (F.mapHomologicalComplex (.up ℤ)).obj M ⟶ I),
+        d.homEquiv (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj I)
+            (F.mapDerivedCategoryFactors.hom.app M ≫ DerivedCategory.Q.map f) =
+          DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I f) ≫
+            η.app I) ∧
+      (∀ (M : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)
+        (f : (((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapHomologicalComplex
+          (.up ℤ)).obj M ⟶ I),
+        dT.homEquiv (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj I)
+            (((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategoryFactors.hom.app M ≫
+              DerivedCategory.Q.map f) =
+          DerivedCategory.Q.map
+              (((adj.whiskerRight ℕᵒᵖ).mapHomologicalComplex (.up ℤ)).homEquiv M I f) ≫
+            ηT.app I) ∧
+      ∃ β : ∀ n : ℕᵒᵖ, RT ⋙ ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ≅
+          ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ⋙ RG,
+        (∀ (n : ℕᵒᵖ) (J : CochainComplex (ℕᵒᵖ ⥤ A) ℤ), J.IsKInjective →
+          ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategoryFactors.inv.app
+                ((((Functor.whiskeringRight ℕᵒᵖ A B).obj G).mapHomologicalComplex
+                  (.up ℤ)).obj J) ≫
+              ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory.map (ηT.app J) ≫
+              (β n).hom.app (DerivedCategory.Q.obj J) ≫
+              RG.map (((evaluation ℕᵒᵖ A).obj n).mapDerivedCategoryFactors.hom.app J) =
+            η.app ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).obj J)) ∧
+        (∀ (n : ℕᵒᵖ)
+          (γ : RT ⋙ ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ≅
+            ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ⋙ RG),
+          (∀ J : CochainComplex (ℕᵒᵖ ⥤ A) ℤ, J.IsKInjective →
+            ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategoryFactors.inv.app
+                  ((((Functor.whiskeringRight ℕᵒᵖ A B).obj G).mapHomologicalComplex
+                    (.up ℤ)).obj J) ≫
+                ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory.map (ηT.app J) ≫
+                γ.hom.app (DerivedCategory.Q.obj J) ≫
+                RG.map (((evaluation ℕᵒᵖ A).obj n).mapDerivedCategoryFactors.hom.app J) =
+              η.app ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).obj J)) →
+            γ = β n) ∧
+        (∀ (m n : ℕᵒᵖ) (t : m ⟶ n) (M : DerivedCategory (ℕᵒᵖ ⥤ A)),
+          (towerDerivedEvaluationTransition B t).app (RT.obj M) ≫ (β n).hom.app M =
+            (β m).hom.app M ≫ RG.map ((towerDerivedEvaluationTransition A t).app M)) ∧
+        (∀ (n : ℕᵒᵖ) (M : DerivedCategory (ℕᵒᵖ ⥤ A)),
+          ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory.map (dT.counit.app M) =
+            (towerDerivedEvaluationInterchange F n).hom.app (RT.obj M) ≫
+              F.mapDerivedCategory.map ((β n).hom.app M) ≫
+              d.counit.app (((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory.obj M)) := by
+  classical
+  let FT := (Functor.whiskeringRight ℕᵒᵖ B A).obj F
+  let GT := (Functor.whiskeringRight ℕᵒᵖ A B).obj G
+  let Gc := G.mapHomologicalComplex (.up ℤ)
+  let GTc := GT.mapHomologicalComplex (.up ℤ)
+  let EA (n : ℕᵒᵖ) := (evaluation ℕᵒᵖ A).obj n
+  let EB (n : ℕᵒᵖ) := (evaluation ℕᵒᵖ B).obj n
+  let κ := CochainComplex.KInjectives.ι (C := ℕᵒᵖ ⥤ A)
+  let L := κ ⋙ DerivedCategory.Q
+  let V := CochainComplex.KInjectives.quasiIso (ℕᵒᵖ ⥤ A)
+  obtain ⟨d, hd⟩ := exactDerivedAdjunction F G adj RG η
+  obtain ⟨dT, hdT⟩ := exactDerivedAdjunction FT GT (adj.whiskerRight ℕᵒᵖ) RT ηT
+  refine ⟨d, dT, hd, hdT, ?_⟩
+  let a (n : ℕᵒᵖ) :
+      κ ⋙ GTc ⋙ (EB n).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+        L ⋙ RT ⋙ (EB n).mapDerivedCategory :=
+    Functor.whiskerLeft κ
+      (Functor.whiskerLeft GTc (EB n).mapDerivedCategoryFactors.inv ≫
+        Functor.whiskerRight ηT (EB n).mapDerivedCategory)
+  let b (n : ℕᵒᵖ) :
+      κ ⋙ GTc ⋙ (EB n).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+        L ⋙ (EA n).mapDerivedCategory ⋙ RG :=
+    Functor.whiskerLeft κ
+      (Functor.whiskerLeft ((EA n).mapHomologicalComplex (.up ℤ)) η ≫
+        Functor.whiskerRight (EA n).mapDerivedCategoryFactors.inv RG)
+  have ha (n : ℕᵒᵖ) : IsIso (a n) := by
+    have : ∀ J, IsIso ((a n).app J) := by
+      intro J
+      have : IsIso (ηT.app J.obj) :=
+        (derives GT).isIso_of_isRightDerivedFunctor ηT J
+      change IsIso ((EB n).mapDerivedCategoryFactors.inv.app (GTc.obj J.obj) ≫
+        (EB n).mapDerivedCategory.map (ηT.app J.obj))
+      infer_instance
+    exact NatIso.isIso_of_isIso_app _
+  have hb (n : ℕᵒᵖ) : IsIso (b n) := by
+    have : ∀ J, IsIso ((b n).app J) := by
+      intro J
+      have hJ : J.obj.IsKInjective := J.property
+      have hE : CochainComplex.IsKInjective
+          (((EA n).mapHomologicalComplex (.up ℤ)).obj J.obj) :=
+        tower_evaluation_isKInjective A J.obj n
+      have : IsIso (η.app (((EA n).mapHomologicalComplex (.up ℤ)).obj J.obj)) :=
+        (derives G).isIso_of_isRightDerivedFunctor η
+          ⟨_, hE⟩
+      change IsIso (η.app (((EA n).mapHomologicalComplex (.up ℤ)).obj J.obj) ≫
+        RG.map ((EA n).mapDerivedCategoryFactors.inv.app J.obj))
+      infer_instance
+    exact NatIso.isIso_of_isIso_app _
+  let β (n : ℕᵒᵖ) : RT ⋙ (EB n).mapDerivedCategory ≅ (EA n).mapDerivedCategory ⋙ RG :=
+    Localization.liftNatIso L V _ _ _ _ ((asIso (a n)).symm ≪≫ asIso (b n))
+  have hβ (n : ℕᵒᵖ) (J : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (hJ : J.IsKInjective) :
+      (a n).app (CochainComplex.KInjectives.mk J) ≫
+        (β n).hom.app (DerivedCategory.Q.obj J) =
+          (b n).app (CochainComplex.KInjectives.mk J) := by
+    change (a n).app (CochainComplex.KInjectives.mk J) ≫
+      (Localization.liftNatIso L V _ _ (RT ⋙ (EB n).mapDerivedCategory)
+        ((EA n).mapDerivedCategory ⋙ RG)
+        ((asIso (a n)).symm ≪≫ asIso (b n))).hom.app
+          (L.obj (CochainComplex.KInjectives.mk J)) = _
+    simp [Localization.liftNatIso_hom, Localization.liftNatTrans_app,
+      Localization.Lifting.iso]
+  have hβ' (n : ℕᵒᵖ) (J : CochainComplex.KInjectives (ℕᵒᵖ ⥤ A)) :
+      (a n).app J ≫ (β n).hom.app (L.obj J) = (b n).app J :=
+    hβ n J.obj J.property
+  refine ⟨β, ?_, ?_, ?_, ?_⟩
+  · intro n J hJ
+    have h := hβ n J hJ
+    dsimp [a, b] at h
+    have h' := congrArg
+      (fun f ↦ f ≫ RG.map ((EA n).mapDerivedCategoryFactors.hom.app J)) h
+    dsimp only [κ, CochainComplex.KInjectives.ι, ObjectProperty.ι_obj,
+      CochainComplex.KInjectives.mk, GTc, GT, EA, EB] at h'
+    simp only [Category.assoc] at h'
+    erw [← RG.map_comp, Iso.inv_hom_id_app, RG.map_id,
+      Category.comp_id] at h'
+    simpa only [Category.assoc] using h'
+  · intro n γ hγ
+    apply Iso.ext
+    apply Localization.natTrans_ext L V
+    intro J
+    apply (cancel_epi ((a n).app J)).mp
+    have h := hγ J.obj J.property
+    have h' := congrArg
+      (fun f ↦ f ≫ RG.map ((EA n).mapDerivedCategoryFactors.inv.app J.obj)) h
+    have hg : (a n).app J ≫ γ.hom.app (L.obj J) = (b n).app J := by
+      dsimp only [EA, EB, GTc, GT] at h'
+      erw [Category.assoc, Category.assoc, Category.assoc, ← RG.map_comp,
+        Iso.hom_inv_id_app, RG.map_id, Category.comp_id] at h'
+      simpa only [a, b, Functor.whiskerLeft_app, NatTrans.comp_app,
+        Functor.whiskerRight_app, Category.assoc, EA, EB, GTc, GT, L, κ,
+        CochainComplex.KInjectives.ι, ObjectProperty.ι_obj, Functor.comp_obj] using h'
+    exact hg.trans (hβ n J.obj J.property).symm
+  · intro m n t M
+    let sA := towerDerivedEvaluationTransition A t
+    let sB := towerDerivedEvaluationTransition B t
+    have heq : Functor.whiskerLeft RT sB ≫ (β n).hom =
+        (β m).hom ≫ Functor.whiskerRight sA RG := by
+      apply Localization.natTrans_ext L V
+      intro J
+      let u := DerivedCategory.Q.map (Gc.map
+        ((NatTrans.mapHomologicalComplex ((evaluation ℕᵒᵖ A).map t) (.up ℤ)).app J.obj))
+      have hna : (a m).app J ≫ sB.app (RT.obj (L.obj J)) = u ≫ (a n).app J := by
+        change ((EB m).mapDerivedCategoryFactors.inv.app (GTc.obj J.obj) ≫
+          (EB m).mapDerivedCategory.map (ηT.app J.obj)) ≫ sB.app _ = _
+        rw [Category.assoc, sB.naturality, ← Category.assoc]
+        rw [towerTransition_inv_fac, Category.assoc]
+        rfl
+      have hnb : (b m).app J ≫ RG.map (sA.app (L.obj J)) = u ≫ (b n).app J := by
+        change (η.app (((EA m).mapHomologicalComplex (.up ℤ)).obj J.obj) ≫
+          RG.map ((EA m).mapDerivedCategoryFactors.inv.app J.obj)) ≫ RG.map _ = _
+        erw [Category.assoc, ← RG.map_comp, towerTransition_inv_fac, RG.map_comp]
+        erw [← Category.assoc, ← η.naturality, Category.assoc]
+        rfl
+      change sB.app _ ≫ (β n).hom.app _ = (β m).hom.app _ ≫ RG.map (sA.app _)
+      apply (cancel_epi ((a m).app J)).mp
+      rw [← Category.assoc, hna, Category.assoc, hβ' n J]
+      rw [← Category.assoc, hβ' m J]
+      exact hnb.symm
+    exact NatTrans.congr_app heq M
+  · intro n M
+    let c := towerDerivedEvaluationInterchange F n
+    have heq : Functor.whiskerRight dT.counit (EA n).mapDerivedCategory =
+        Functor.whiskerLeft RT c.hom ≫ Functor.whiskerRight (β n).hom F.mapDerivedCategory ≫
+          Functor.whiskerLeft (EA n).mapDerivedCategory d.counit := by
+      apply Localization.natTrans_ext L V
+      intro J
+      let I := ((EA n).mapHomologicalComplex (.up ℤ)).obj J.obj
+      let εT := ((adj.whiskerRight ℕᵒᵖ).mapHomologicalComplex (.up ℤ)).counit.app J.obj
+      let ε := (adj.mapHomologicalComplex (.up ℤ)).counit.app I
+      have hε : ((EA n).mapHomologicalComplex (.up ℤ)).map εT = ε := by
+        ext p
+        simp [εT, ε, I, EA, Adjunction.mapHomologicalComplex_counit_app_f]
+      have hcT := counitOfHomFormula FT GT (adj.whiskerRight ℕᵒᵖ) RT ηT dT hdT J.obj
+      have hc := counitOfHomFormula F G adj RG η d hd I
+      have hn : (EB n).mapDerivedCategory.map (ηT.app J.obj) ≫
+          (β n).hom.app (L.obj J) =
+          (EB n).mapDerivedCategoryFactors.hom.app (GTc.obj J.obj) ≫
+            η.app I ≫ RG.map ((EA n).mapDerivedCategoryFactors.inv.app J.obj) := by
+        have h := congrArg
+          (fun f ↦ (EB n).mapDerivedCategoryFactors.hom.app (GTc.obj J.obj) ≫ f)
+          (hβ' n J)
+        dsimp only [a, b, Functor.whiskerLeft_app, NatTrans.comp_app,
+          Functor.whiskerRight_app] at h
+        simp only [Category.assoc] at h
+        erw [Iso.hom_inv_id_app_assoc] at h
+        exact h
+      have : IsIso (ηT.app J.obj) :=
+        (derives GT).isIso_of_isRightDerivedFunctor ηT J
+      change (EA n).mapDerivedCategory.map (dT.counit.app (L.obj J)) =
+        c.hom.app (RT.obj (L.obj J)) ≫ F.mapDerivedCategory.map ((β n).hom.app _) ≫
+          d.counit.app ((EA n).mapDerivedCategory.obj (L.obj J))
+      apply (cancel_epi
+        ((EA n).mapDerivedCategory.map (FT.mapDerivedCategory.map (ηT.app J.obj)))).mp
+      erw [← (EA n).mapDerivedCategory.map_comp, hcT]
+      erw [← Category.assoc, ← Category.assoc, c.hom.naturality]
+      dsimp only [Functor.comp_map]
+      erw [Category.assoc, Category.assoc, ← F.mapDerivedCategory.map_comp_assoc, hn]
+      simp only [F.mapDerivedCategory.map_comp, Category.assoc]
+      erw [d.counit.naturality]
+      dsimp only [Functor.id_map, Functor.comp_map]
+      erw [reassoc_of% hc]
+      erw [reassoc_of% (towerInterchange_fac F n (GTc.obj J.obj))]
+      have hfac := (EA n).mapDerivedCategoryFactors.hom.naturality εT
+      dsimp only [Functor.comp_map, Functor.id_obj] at hfac
+      have hf := congrArg
+        (fun f ↦ f ≫ (EA n).mapDerivedCategoryFactors.inv.app J.obj) hfac
+      simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id] at hf
+      have hq := congrArg
+        (fun f ↦ (EA n).mapDerivedCategoryFactors.hom.app
+            ((FT.mapHomologicalComplex (.up ℤ)).obj (GTc.obj J.obj)) ≫
+          DerivedCategory.Q.map f ≫ (EA n).mapDerivedCategoryFactors.inv.app J.obj) hε
+      exact ((EA n).mapDerivedCategory.map_comp _ _).trans
+        (congrArg
+          (fun f ↦ (EA n).mapDerivedCategory.map
+            (FT.mapDerivedCategoryFactors.hom.app (GTc.obj J.obj)) ≫ f) (hf.trans hq))
+    exact NatTrans.congr_app heq M
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

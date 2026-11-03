@@ -92,6 +92,25 @@ private theorem finiteComparisonConstantRealization_isEquivalence
   have : (L ⋙ H).IsEquivalence := Functor.isEquivalence_of_iso i.symm
   exact Functor.isEquivalence_of_comp_right L H
 
+/-- The etale generators: the recorded bounded constructible property and finite Tor
+amplitude tested against every module sheaf in degree zero.
+Source: blueprint finite comparison, statement
+(blueprint: lem-ctf-finite-comparison-coefficients). -/
+def finiteComparisonEtaleGenerators (X : Scheme.{u}) :
+    ObjectProperty (Etale.DerivedCategoryModule (ULift.{u + 1} B) X) :=
+  Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1} B) X ⊓
+    _root_.DerivedCategory.finiteTorAmplitude _
+
+/-- The pro-etale generators transported from the recorded constant-model definition.
+Source: blueprint finite comparison, coefficient paragraph and definition of Dctf
+(blueprint: lem-ctf-finite-comparison-coefficients). -/
+def finiteComparisonProEtaleGenerators (X : Scheme.{u}) :
+    ObjectProperty (_root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B)))) :=
+  fun K ↦ (constantModelBoundedConstructible (Profinite.continuousMapRingObj.{u} B) X ⊓
+    _root_.DerivedCategory.finiteTorAmplitude _)
+      ((finiteComparisonRealization B X eR).mapDerivedCategory.obj K)
+
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   [DiscreteTopology B] [Finite B]
 

@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.OverSquare
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedQbarComparisons
+public import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedExchange
 
 /-! # The exchange equality for condensed finite-to-Qbar coefficient change -/
 
@@ -140,6 +143,100 @@ private theorem right_normalization (ε : r ⋙ l ⟶ 𝟭 B) (ε' : r' ⋙ l' �
   slice_lhs 2 3 => rw [hδ]
   slice_lhs 1 2 => rw [hn β]
   simp only [Category.assoc]
+
+/-- Apply the mate counit equation through an equality of whole transformations. -/
+private theorem counit_of_mate_eq (a : l ⊣ r) (b : l' ⊣ r')
+    (q : tA ⋙ l' ⟶ l ⋙ tB) (δ : r ⋙ tA ⟶ tB ⋙ r')
+    (hδ : δ = (mateEquiv a b (TwoSquare.mk _ _ _ _ q)).natTrans) (K : B) :
+    l'.map (δ.app K) ≫ b.counit.app (tB.obj K) =
+      q.app (r.obj K) ≫ tB.map (a.counit.app K) := by
+  subst δ
+  exact mateEquiv_counit a b (TwoSquare.mk _ _ _ _ q) K
+
+/-- Right adjunct normalization for the specified condensed exchange mate.
+Source: current blueprint `thm-weil-pbc-qbar.proof.md`, “Forgetting the Weil structure”,
+using the exchange formula of `det-def-sfb-base-change-morphism`
+(blueprint: lem-weil-pbc-qbar-condensed-push-counit).
+
+Proof: counit naturality moves the terminal map to the right of the counit.
+The preceding mate counit equation replaces the adjunct of the exchange map.
+Naturality of the pullback-square comparison moves the initial map to its right.
+Functoriality combines the pulled-back initial map and the counit. This is the
+same right-normalization argument as the original proof, specialized to the
+current condensed module categories, including identity and zero maps. -/
+theorem condensed_exchange_right_adjunct (sq : CommSq g' f' f g)
+    {U : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))}
+    {K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))}
+    {V : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1}) (condensedRingObj Λ X'))}
+    (β : U ⟶ (moduleObjectDerivedPushforward Λ f).obj K)
+    (α : (moduleObjectDerivedPullback Λ g').obj K ⟶ V) :
+    (moduleObjectDerivedPullback Λ f').map
+        ((moduleObjectDerivedPullback Λ g).map β ≫
+          (moduleObjectDerivedExchange Λ sq).app K ≫
+          (moduleObjectDerivedPushforward Λ f').map α) ≫
+      (derivedUpperStarLowerStarAdjunction Λ f').counit.app V =
+    (moduleObjectDerivedPullbackSquareComparison Λ sq).hom.app U ≫
+      (moduleObjectDerivedPullback Λ g').map
+        ((moduleObjectDerivedPullback Λ f).map β ≫
+          (derivedUpperStarLowerStarAdjunction Λ f).counit.app K) ≫ α := by
+  exact right_normalization
+    (l := moduleObjectDerivedPullback Λ f)
+    (r := moduleObjectDerivedPushforward Λ f)
+    (l' := moduleObjectDerivedPullback Λ f')
+    (r' := moduleObjectDerivedPushforward Λ f')
+    (tA := moduleObjectDerivedPullback Λ g)
+    (tB := moduleObjectDerivedPullback Λ g')
+    (derivedUpperStarLowerStarAdjunction Λ f).counit
+    (derivedUpperStarLowerStarAdjunction Λ f').counit
+    (fun M ↦ (moduleObjectDerivedPullbackSquareComparison Λ sq).hom.app M)
+    (fun v ↦ (moduleObjectDerivedPullbackSquareComparison Λ sq).hom.naturality v)
+    β ((moduleObjectDerivedExchange Λ sq).app K) α
+    (condensed_exchange_push_counit Λ sq K)
+
+/-- The counit equation for the specified exchange with actual condensed coefficients.
+Source: current blueprint `thm-weil-pbc-qbar.md`, formula of
+`det-def-sfb-base-change-morphism`, and `thm-weil-pbc-qbar.proof.md`,
+“Forgetting the Weil structure”
+(blueprint: lem-weil-pbc-qbar-condensed-push-counit).
+
+Proof: the exchange is defined as the mate of the canonical pullback-square
+comparison under the specified condensed derived adjunctions. The mate counit
+identity gives the displayed equation. No properness, Cartesianity, constructibility
+or invertibility of exchange is used. In the Frobenius square this is exactly the
+counit compatibility used to lift the adjunction and forget its Weil structure. -/
+theorem condensed_exchange_push_counit (sq : CommSq g' f' f g)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    (moduleObjectDerivedPullback Λ f').map ((moduleObjectDerivedExchange Λ sq).app K) ≫
+        (derivedUpperStarLowerStarAdjunction Λ f').counit.app
+          ((moduleObjectDerivedPullback Λ g').obj K) =
+      (moduleObjectDerivedPullbackSquareComparison Λ sq).hom.app
+          ((moduleObjectDerivedPushforward Λ f).obj K) ≫
+        (moduleObjectDerivedPullback Λ g').map
+          ((derivedUpperStarLowerStarAdjunction Λ f).counit.app K) := by
+  exact counit_of_mate_eq
+    (l := moduleObjectDerivedPullback Λ f)
+    (r := moduleObjectDerivedPushforward Λ f)
+    (l' := moduleObjectDerivedPullback Λ f')
+    (r' := moduleObjectDerivedPushforward Λ f')
+    (tA := moduleObjectDerivedPullback Λ g)
+    (tB := moduleObjectDerivedPullback Λ g')
+    (derivedUpperStarLowerStarAdjunction Λ f)
+    (derivedUpperStarLowerStarAdjunction Λ f')
+    (moduleObjectDerivedPullbackSquareComparison Λ sq).hom
+    (moduleObjectDerivedExchange Λ sq) (condensed_exchange_eq_mate Λ sq) K
+
+/-- Rewrite the whole exchange before taking components, keeping derived constructions folded. -/
+private theorem condensed_exchange_eq_mate (sq : CommSq g' f' f g) :
+    moduleObjectDerivedExchange Λ sq =
+      (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
+        (derivedUpperStarLowerStarAdjunction Λ f')
+        (TwoSquare.mk _ _ _ _
+          (moduleObjectDerivedPullbackSquareComparison Λ sq).hom)).natTrans := rfl
+
 end RightNormalization
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing

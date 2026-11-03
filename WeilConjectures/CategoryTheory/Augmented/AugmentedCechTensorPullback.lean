@@ -183,6 +183,14 @@ import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import WeilConjectures.CategoryTheory.Augmented.AugmentedCechObjectPullback
 import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorComparisonIndependent
+public import WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+public import WeilConjectures.Algebra.Homology.ProperBaseChange.OrdinaryRingedToposPullback
+public import WeilConjectures.Algebra.Homology.Ringed.RingedToposPullbackLocalGenerators
+public import WeilConjectures.CategoryTheory.FiniteTypeRestrictionExact
+public import WeilConjectures.CategoryTheory.Ringed.RingedToposPullbackCoverData
+public import WeilConjectures.ProperBaseChange.ExtendedCechReflectorCore
+public import WeilConjectures.ProperBaseChange.RingedTopoiCanonicalTensorPullbackUnitExistence
+public import WeilConjectures.ProperBaseChange.RingedToposKFlatPullback
 
 /-! # Pullback of augmented extended Cech tensor actions
 
@@ -205,4 +213,42 @@ namespace CategoryTheory
 
 set_option maxHeartbeats 1600000 in
 -- The image ideal interface elaborates several repeated underlying-sheaf functors.
+end CategoryTheory
+
+namespace CategoryTheory
+
+private def tensorRightComparison
+    {D E : Type*} [Category D] [Category E]
+    {HY : Dᵒᵖ × D ⥤ D} {HX : Eᵒᵖ × E ⥤ E}
+    (SY : CoefficientClosedStructure HY) (SX : CoefficientClosedStructure HX)
+    (L : D ⥤ E) (α : SY.tensor ⋙ L ≅ (L.prod L) ⋙ SX.tensor)
+    (KY : D) (KX : E) (d : L.obj KY ≅ KX) :
+    @MonoidalCategory.tensorRight _ _ SY.monoidal KY ⋙ L ≅
+      L ⋙ @MonoidalCategory.tensorRight _ _ SX.monoidal KX :=
+    NatIso.ofComponents
+      (fun T ↦ α.app (T, KY) ≪≫ SX.tensor.mapIso ((Iso.refl (L.obj T)).prod d)) (by
+        intro T T' g
+        have ha := α.hom.naturality (Prod.mkHom g (𝟙 KY))
+        simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom,
+          Functor.comp_map]
+        have hy : (@MonoidalCategory.tensorRight _ _ SY.monoidal KY).map g =
+            SY.tensor.map (Prod.mkHom g (𝟙 KY)) := by
+          let := SY.monoidal
+          exact (MonoidalCategory.tensorHom_id g KY).symm
+        have hx : (@MonoidalCategory.tensorRight _ _ SX.monoidal KX).map (L.map g) =
+            SX.tensor.map (Prod.mkHom (L.map g) (𝟙 KX)) := by
+          let := SX.monoidal
+          exact (MonoidalCategory.tensorHom_id (L.map g) KX).symm
+        rw [hy, hx]
+        change L.map (SY.tensor.map (Prod.mkHom g (𝟙 KY))) ≫
+            (α.hom.app (T', KY) ≫ SX.tensor.map (Prod.mkHom (𝟙 (L.obj T')) d.hom)) =
+          (α.hom.app (T, KY) ≫ SX.tensor.map (Prod.mkHom (𝟙 (L.obj T)) d.hom)) ≫
+            SX.tensor.map (Prod.mkHom (L.map g) (𝟙 KX))
+        change L.map (SY.tensor.map (Prod.mkHom g (𝟙 KY))) ≫ α.hom.app (T', KY) =
+          α.hom.app (T, KY) ≫ SX.tensor.map (Prod.mkHom (L.map g) (L.map (𝟙 KY))) at ha
+        rw [← Category.assoc, ha, Functor.map_id]
+        simp only [Category.assoc, ← SX.tensor.map_comp]
+        congr 2
+        ext <;> simp)
+
 end CategoryTheory

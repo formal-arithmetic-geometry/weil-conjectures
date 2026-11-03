@@ -209,6 +209,10 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 import all WeilConjectures.CategoryTheory.SmoothPurity.AdicBasisLimit
 import WeilConjectures.CategoryTheory.Constant.ConstantSpecifiedBasis
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.RestrictionPullbackScalarComposition
+public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
+public import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Integral compact-support coefficient comparison
 
@@ -1398,6 +1402,68 @@ def finiteTorIntegralInclusion (W : Scheme.{u}) :
 
 set_option linter.unusedSectionVars false in
 set_option linter.unusedVariables false in
+/-- The proper-open comparison is uniquely specified by the open unit and proper counit.
+The restriction map in the normalization is the actual pullback-composition/counit map.
+Source: blueprint prop-compactification-coherence, proof part (a)
+(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
+Proof: proper base change after restriction to the open identifies the proper image
+of extension by zero with M, using the clopen section over X. Off X all finite
+reductions vanish by proper base change. The same assertions for completed coefficients
+follow on the normalized strict towers. The open adjunction determines the displayed
+map uniquely from its transpose; the normalization is the identity over X. Its cone
+has zero reductions everywhere and is complete, so it is zero, proving invertibility. -/
+theorem refinementProperOpen_existsUnique {c d : Compactification f} (r : c.Refinement d)
+    (M : DerivedCategory (scalarReductionSource l E X))
+    (hM : finiteTorConstructibleIntegral l E X M) :
+    ∃! e : (openExtension (completed l E) d.i).mapDerivedCategory.obj M ≅
+        (push (completed l E) r.hom).obj
+          ((openExtension (completed l E) c.i).mapDerivedCategory.obj M),
+      (openDerivedAdjunction (completed l E) d.i).homEquiv _ _ e.hom ≫
+          refinementRestriction (completed l E) r (completedPull_comp l E c.i r.hom) M =
+        (openDerivedAdjunction (completed l E) c.i).unit.app M := by
+  sorry
+
+/-- The normalized proper-open comparison; only its uniqueness-determining proof is delayed.
+Source: blueprint prop-compactification-coherence, proof part (a)
+(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
+def refinementProperOpen {c d : Compactification f} (r : c.Refinement d)
+    (M : DerivedCategory (scalarReductionSource l E X))
+    (hM : finiteTorConstructibleIntegral l E X M) :=
+  (refinementProperOpen_existsUnique l E D hl f r M hM).exists.choose
+
+/-- The specified compact-support refinement: inverse proper composition followed by
+proper pushforward of the inverse proper-open comparison. No arbitrary iso is chosen.
+Source: blueprint prop-compactification-coherence, proof part (b)
+(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
+def refinementComparison {c d : Compactification f} (r : c.Refinement d)
+    (M : DerivedCategory (scalarReductionSource l E X))
+    (hM : finiteTorConstructibleIntegral l E X M) :
+    (image (completed l E) c).obj M ≅ (image (completed l E) d).obj M :=
+  ((geometricPushComposition (completed l E) r.hom d.g
+      (completedPull_comp l E r.hom d.g) ≪≫
+    eqToIso (congrArg (fun g : c.Z ⟶ Y ↦ push (completed l E) g) r.hom_g)).symm.app _) ≪≫
+      (push (completed l E) d.g).mapIso (refinementProperOpen l E D hl f r M hM).symm
+
+/-- Independence of the compactification uses precisely the normalized refinement maps.
+Source: blueprint sk-thm-purity-transport, Step 3
+(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
+Proof: at every finite level paste the canonical proper counit squares and open unit
+squares. Their transposes are the same coefficient pullback map, so the squares commute.
+They are strict tower maps before taking limits. The unit-normalized cofinal Roos
+comparison identifies their total limits with the displayed integral maps, preserving
+both coordinates and the proper-open normalization; it gives the asserted equality. -/
+theorem comparison_refinement {c d : Compactification f} (r : c.Refinement d)
+    (M : DerivedCategory (scalarReductionSource l E X))
+    (hM : finiteTorConstructibleIntegral l E X M) :
+    (pbcDerivedExtend (completedCoefficientMap l E F i Y)).map
+        (refinementComparison l E D hl f r M hM).hom ≫
+        (comparison (completedChange l E F i) d).app M =
+      (comparison (completedChange l E F i) c).app M ≫
+        (refinementComparison l F D hl f r
+          ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)
+          (integralCoefficientComparison l E F i D hl f c M hM).1).hom := by
+  sorry
+
 end Refinements
 
 end WeilConjectures.PurCompactSupport

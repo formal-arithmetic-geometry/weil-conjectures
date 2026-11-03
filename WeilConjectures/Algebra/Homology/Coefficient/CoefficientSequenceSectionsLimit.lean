@@ -49,6 +49,7 @@ import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import all Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 import all Mathlib.Algebra.BigOperators.Ring.Finset
+public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-! # Derived sections and total inverse limit of strict coefficient systems
 
@@ -283,7 +284,7 @@ private theorem sectionsRoosComparisonQuasiIso
         inv_hom_id := by simp } (by simp [S]) (by
           change 𝟙 _ ≫ (-ExactProductsRoos.difference.app I) = _ ≫ (-𝟙 _)
           simp)
-  exact AlgebraicGeometry.ProEtale.cocone_lift_quasiIso S hS
+  exact CategoryTheory.ExactProductsRoos.cocone_lift_quasiIso S hS
     (ExactProductsRoos.comparison_condition I)
 
 omit [HasDerivedCategory E] in

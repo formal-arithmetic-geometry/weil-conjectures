@@ -17,6 +17,14 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleObjectInverseImageRestri
 public import WeilConjectures.AlgebraicGeometry.ResolvingRepresentativeWhiskering
 public import WeilConjectures.CategoryTheory.RingedDerivedRestrictionGeneral
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseImageRestrictionSupplement
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackTensorComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
 /-! # Closed slice comparison with transported pro-etale coefficients
 
@@ -70,12 +78,13 @@ def proEtaleSliceCoefficientIso {X : Scheme.{u}} (U : X.ProEt)
 /-- Termwise scalar transport: underlying abelian sheaves and maps are unchanged,
 and the B-action is restriction along b inverse.
 Source: Stacks 03CZ, 03CY
-(auxiliary; not a blueprint node). -/
+(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
 abbrev proEtaleSliceScalarTransport {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})
     (b : proEtaleSliceRing U O ≅ B) :=
-  SheafOfModules.scalarRestriction.{u + 1, u, u + 1} b.inv
+  SheafOfModules.restrictScalars.{u + 1} ((sheafCompose (ProEt.topology U.left)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map b.inv)
 
 /-- The fixed ordinary derived internal Hom on arbitrary pro-etale coefficients.
 Source: Stacks 08J7 (auxiliary; not a blueprint node). -/

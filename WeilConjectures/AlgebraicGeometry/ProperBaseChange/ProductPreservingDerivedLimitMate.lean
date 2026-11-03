@@ -75,6 +75,9 @@ import all Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import all Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 import all Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import all WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibility
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-! # Product-preserving exact functors commute with the specified derived-limit mate
 
@@ -100,31 +103,34 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbLocallyBijective in
 private def productLimitCochainUnit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
-  derivedCochainRightUnit (completedTowerLimit T R) (completedRlim T R)
-    (completedRlimUnit T R)
+  derivedCochainRightUnit (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _)
+    (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctor
+    ((lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctorUnit)
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
 private theorem productLimitCochainUnit_eq (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1})
-    (X : CochainComplex (ℕᵒᵖ ⥤ reductionModules T R) ℤ) :
-    (productLimitCochainUnit T R).app X = chainDerivedUnit (completedTowerLimit T R) X := by
+    (X : CochainComplex (ℕᵒᵖ ⥤ proEtaleRingModules T R) ℤ) :
+    (productLimitCochainUnit T R).app X =
+      chainDerivedUnit (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _) X := by
   unfold productLimitCochainUnit
   rw [cochainRightUnit_app_eq]
   dsimp only [chainDerivedUnit]
   simp only [quotient_hom_id, quotient_inv_id, Category.id_comp]
-  erw [(completedTowerLimit T R).rightDerivedFunctor.map_id, Category.comp_id]
-  rfl
+  erw [(lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctor.map_id,
+    Category.comp_id]
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
 private def productLimitRoosUnit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
-    roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ completedRlim T R :=
+    roosLimitFunctor ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctor :=
   (Functor.isoWhiskerRight
-    (CategoryTheory.StrictRoosShiftProof.limitModelIso (A := reductionModules T R))
+    (CategoryTheory.StrictRoosShiftProof.limitModelIso (A := proEtaleRingModules T R))
     DerivedCategory.Q).inv ≫ productLimitCochainUnit T R
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -132,19 +138,21 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbLocallyBijective in
 private theorem productLimitRoosUnit_derived (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
-    (completedRlim T R).IsRightDerivedFunctor (productLimitRoosUnit T R)
-      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ reductionModules T R) (.up ℤ)) := by
-  have : (completedRlim T R).IsRightDerivedFunctor (completedRlimUnit T R)
+    ((lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctor).IsRightDerivedFunctor
+      (productLimitRoosUnit T R)
+      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ proEtaleRingModules T R) (.up ℤ)) := by
+  have : ((lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctor).IsRightDerivedFunctor
+      ((lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctorUnit)
       (HomotopyCategory.quasiIso _ (.up ℤ)) := by
-    dsimp only [completedRlim, completedRlimUnit]
     infer_instance
-  have h := cochainRightUnit_universal (completedTowerLimit T R) (completedRlim T R)
-    (completedRlimUnit T R)
+  have h := cochainRightUnit_universal (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _)
+    (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctor
+    ((lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctorUnit)
   apply (Functor.isRightDerivedFunctor_iff_isLeftKanExtension _ _ _).mpr
   exact (Functor.isLeftKanExtension_iff_of_iso₂
     (productLimitCochainUnit T R) (productLimitRoosUnit T R)
     (Functor.isoWhiskerRight
-      (CategoryTheory.StrictRoosShiftProof.limitModelIso (A := reductionModules T R))
+      (CategoryTheory.StrictRoosShiftProof.limitModelIso (A := proEtaleRingModules T R))
       DerivedCategory.Q) (Iso.refl _) (by
         dsimp only [productLimitRoosUnit, Iso.refl_hom]
         rw [Functor.whiskerLeft_id', Category.comp_id,
@@ -233,20 +241,22 @@ shows that lambda intertwines the universal right-derived units with the ordinar
 limit comparison. That ordinary comparison is the constant-tower mate, by its limit
 projections. The derived mate has the same universal-unit equation, so uniqueness
 of the right-derived comparison identifies it with lambda. Hence it is invertible.
-This works for arbitrary unbounded strict towers and arbitrary coefficient sheaves. -/
+The strict Roos fibre agrees with the derived inverse-limit functor on towers, as
+in blueprint `sk-prop-pe-milnor`. This works for arbitrary unbounded strict towers
+and arbitrary coefficient sheaves. -/
 theorem productPreservingDerivedLimitMate_isIso {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}
-    (F : reductionModules T R ⥤ reductionModules S R') [F.Additive]
+    (F : proEtaleRingModules T R ⥤ proEtaleRingModules S R') [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F)]
     [PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F)]
-    (hphi : ∀ N : ℕ → reductionModules T R, IsIso (piComparison F N)) :
+    (hphi : ∀ N : ℕ → proEtaleRingModules T R, IsIso (piComparison F N)) :
     IsIso (mateEquiv
-      (constLimAdj : (Functor.const ℕᵒᵖ : reductionModules T R ⥤ _) ⊣
-        completedTowerLimit T R).mapDerivedCategoryRightDerivedAdjunction
-      (constLimAdj : (Functor.const ℕᵒᵖ : reductionModules S R' ⥤ _) ⊣
-        completedTowerLimit S R').mapDerivedCategoryRightDerivedAdjunction
+      (constLimAdj : (Functor.const ℕᵒᵖ : proEtaleRingModules T R ⥤ _) ⊣
+        (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _)).mapDerivedCategoryRightDerivedAdjunction
+      (constLimAdj : (Functor.const ℕᵒᵖ : proEtaleRingModules S R' ⥤ _) ⊣
+        (lim : (ℕᵒᵖ ⥤ proEtaleRingModules S R') ⥤ _)).mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategorySquareIso (Functor.compConstIso ℕᵒᵖ F)).hom)).natTrans := by
   have := ambient_exact T R
@@ -254,17 +264,22 @@ theorem productPreservingDerivedLimitMate_isIso {T S : Scheme.{t}}
   have : PreservesLimitsOfShape (Discrete ℕ) F := natProducts F hphi
   have : PreservesLimitsOfShape ℕᵒᵖ F := natProducts_preservesTowers F
   obtain ⟨a, _⟩ := CategoryTheory.NormalizedLimitSquare.cornerData
-    (ProEt.topology T) (reductionModuleRing T R) (completedRlim T R) (productLimitRoosUnit T R)
+    (ProEt.topology T) (proEtaleModuleCoefficients R)
+      (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctor
+      (productLimitRoosUnit T R)
       (productLimitRoosUnit_derived T R)
   obtain ⟨b, _⟩ := CategoryTheory.NormalizedLimitSquare.cornerData
-    (ProEt.topology S) (reductionModuleRing S R') (completedRlim S R')
+    (ProEt.topology S) (proEtaleModuleCoefficients R')
+      (lim : (ℕᵒᵖ ⥤ proEtaleRingModules S R') ⥤ _).rightDerivedFunctor
       (productLimitRoosUnit S R') (productLimitRoosUnit_derived S R')
   obtain ⟨c, _⟩ := CategoryTheory.NormalizedLimitSquare.comparisonData a b F hphi
   have hn := CategoryTheory.comparison_normalized F a b c
-  have he := productLimitRoos_normalization F (completedRlim T R) (completedRlim S R')
+  have he := productLimitRoos_normalization F
+    (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _).rightDerivedFunctor
+    (lim : (ℕᵒᵖ ⥤ proEtaleRingModules S R') ⥤ _).rightDerivedFunctor
     (productLimitCochainUnit T R) (productLimitCochainUnit S R') c.lambda hn
-  let aa := (constLimAdj : (Functor.const ℕᵒᵖ : reductionModules T R ⥤ _) ⊣ lim)
-  let bb := (constLimAdj : (Functor.const ℕᵒᵖ : reductionModules S R' ⥤ _) ⊣ lim)
+  let aa := (constLimAdj : (Functor.const ℕᵒᵖ : proEtaleRingModules T R ⥤ _) ⊣ lim)
+  let bb := (constLimAdj : (Functor.const ℕᵒᵖ : proEtaleRingModules S R' ⥤ _) ⊣ lim)
   let s := Functor.compConstIso ℕᵒᵖ F
   let tau := preservesLimitNatIso F (J := ℕᵒᵖ)
   have hm : (mateEquiv aa bb (TwoSquare.mk _ _ _ _ s.hom)).natTrans = tau.hom := by
@@ -280,10 +295,10 @@ theorem productPreservingDerivedLimitMate_isIso {T S : Scheme.{t}}
   have heq : c.lambda.hom = (mateEquiv
       aa.mapDerivedCategoryRightDerivedAdjunction bb.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans := by
-    apply derived_comp_ext (completedTowerLimit T R) F
-      (cbcTowerDerived F ⋙ completedRlim S R')
+    apply derived_comp_ext (lim : (ℕᵒᵖ ⥤ proEtaleRingModules T R) ⥤ _) F
+      (cbcTowerDerived F ⋙ (lim : (ℕᵒᵖ ⥤ proEtaleRingModules S R') ⥤ _).rightDerivedFunctor)
     intro K
-    apply (cancel_mono ((completedRlim S R').map
+    apply (cancel_mono (((lim : (ℕᵒᵖ ⥤ proEtaleRingModules S R') ⥤ _).rightDerivedFunctor).map
       ((cbcTowerFactors F).hom.app K))).mp
     have hh := derived_mate_factors aa bb s K
     rw [hm] at hh

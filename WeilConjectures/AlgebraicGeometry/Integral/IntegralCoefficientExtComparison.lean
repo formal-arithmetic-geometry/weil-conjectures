@@ -168,7 +168,45 @@ private noncomputable def integerRingSheafIso
     ext t
     rfl
 
+private noncomputable def coeffTransport (X : Scheme.{u}) :=
+  Mod.comapEquivalenceOfIsIso ((upperStarFromPoint X).map e.inv)
+
 private noncomputable def pointTransport := Mod.comapEquivalenceOfIsIso e.inv
+
+private noncomputable def freeTransport (n : ℕ) :
+    (pointTransport e).functor.obj (Mod.finiteFree Λ n) ≅ Mod.finiteFree Λ' n :=
+  (pointTransport e).functor.mapBiproduct (fun _ : Fin n ↦ Mod.regular Λ) ≪≫
+    biproduct.mapIso (fun _ ↦ (Mod.comapUnitIso e.inv).symm)
+
+private theorem fpTransport (P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ)
+    (hP : Mod.IsFinitelyPresented Λ P) :
+    Mod.IsFinitelyPresented Λ' ((pointTransport e).functor.obj P) := by
+  let : PreservesFiniteColimits (tensorLeft Λ') := inferInstance
+  obtain ⟨n, m, f, ⟨i⟩⟩ := hP
+  let T := (pointTransport e).functor
+  let g : Mod.finiteFree Λ' m ⟶ Mod.finiteFree Λ' n :=
+    (freeTransport e m).inv ≫ T.map f ≫ (freeTransport e n).hom
+  refine ⟨n, m, g, ⟨T.mapIso i ≪≫ PreservesCokernel.iso T f ≪≫ ?_⟩⟩
+  exact cokernel.mapIso _ _ (freeTransport e m) (freeTransport e n) (by
+    dsimp [g]
+    simp)
+
+private noncomputable def transportPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (coeffTransport e Y).functor ⋙ CondensedRing.upperStar Λ' f ≅
+      CondensedRing.upperStar Λ f ⋙ (coeffTransport e X).functor :=
+  (CondensedRing.comapUpperStarIso e.inv f).symm
+
+private theorem localTransport (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : HasFiniteConstantLocalModel Λ X M) :
+    HasFiniteConstantLocalModel Λ' X ((coeffTransport e X).functor.obj M) := by
+  obtain ⟨U, hU⟩ := hM
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨P, hP, ⟨j⟩⟩ := hU i
+  refine ⟨(pointTransport e).functor.obj P, fpTransport e P hP, ⟨?_⟩⟩
+  exact (transportPullback e (U.f i)).app M ≪≫
+    (coeffTransport e (U.X i)).functor.mapIso j ≪≫
+    ((upperStarFromPoint (U.X i)).mapModComapIso e.inv).symm.app P
 
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

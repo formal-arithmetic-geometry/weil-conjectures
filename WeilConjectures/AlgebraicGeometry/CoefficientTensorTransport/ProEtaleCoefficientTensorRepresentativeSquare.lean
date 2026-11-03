@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanon
 public import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEtaleCoefficientPullback
 public import WeilConjectures.AlgebraicGeometry.CoefficientTensorChain.ProEtaleCoefficientTensorChainData
 import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEtaleTensorRepresentativeNormalization
+public import WeilConjectures.AlgebraicGeometry.CoefficientSection.ProEtaleCanonicalCoefficientSectionIso
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
 /-! # Compatibility on flat K-flat representative pairs
 
@@ -33,17 +35,18 @@ attribute [local irreducible] Functor.mapDerivedCategory
 
 set_option maxHeartbeats 800000 in
 -- Conversion between the specified tensor totalizations uses a large elaboration budget.
+
 /-- Compatibility for a flat K-flat pair, given the normalized restriction comparison.
 
 Source: Stacks Tags 03EL, 07A4 and 07A6.
-(blueprint: lem-pbc-coefficient-restriction-tensor-representative-square)
+(blueprint: lem-pbc-section-ring-tensor-representative-square)
 
 Proof: normalize both geometric tensor maps on representatives. Naturality of their
 factorizations moves the canonical coefficient pullback comparison past the tensor
 representative. The normalization of gamma rewrites the other side. Naturality of
 z's representative and the localized chain square identify the resulting composites.
 Cancel the invertible representative and the two pullback factorizations. -/
-theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
+theorem representative_square_section {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
@@ -57,21 +60,24 @@ theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
       proEtaleFlatRepresentatives X S P →
         proEtaleFlatRepresentatives X
           ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
-          (((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).obj P))
-    (gamma : aX.tensor ⋙ pbcDerivedRestrict c.hom ≅
-      ((pbcDerivedRestrict c.hom).prod (pbcDerivedRestrict c.hom)) ⋙ z.tensor)
+          (((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).obj P))
+    (gamma : aX.tensor ⋙ (proEtaleRingRestrictScalars c.hom).mapDerivedCategory ≅
+      (((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).prod
+        (proEtaleRingRestrictScalars c.hom).mapDerivedCategory) ⋙ z.tensor)
     (hgamma : ∀ (P Q : CochainComplex (proEtaleRingModules X S) ℤ)
       (hp : proEtaleFlatRepresentatives X S P) (hq : proEtaleFlatRepresentatives X S Q),
-      (pbcDerivedRestrict c.hom).map (aX.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫
+      ((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).map
+          (aX.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫
         gamma.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-        z.tensor.map (Prod.mkHom ((pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app P)
-          ((pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app Q)) =
-      (pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app
+        z.tensor.map (Prod.mkHom
+          ((proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app P)
+          ((proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app Q)) =
+      (proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app
         ((CoefficientTensorChain.total X S).obj (P, Q)) ≫
       DerivedCategory.Q.map ((CoefficientTensorChain.tensorIso f R S c o).hom.app (P, Q)) ≫
       z.representative.hom.app
-        (⟨((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).obj P, hU P hp⟩,
-          ⟨((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).obj Q, hU Q hq⟩))
+        (⟨((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).obj P, hU P hp⟩,
+          ⟨((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).obj Q, hU Q hq⟩))
     (P Q : CochainComplex (proEtaleRingModules Y R) ℤ)
     (hp : proEtaleFlatRepresentatives Y R P) (hq : proEtaleFlatRepresentatives Y R Q) :
         (pullback f R S c).hom.app
@@ -79,7 +85,7 @@ theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
             (proEtaleCanonicalTensorComparison f R
               ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
               (Iso.refl _) aY z).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =
-          (pbcDerivedRestrict c.hom).map
+          ((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).map
               ((proEtaleCanonicalTensorComparison f R S c aY aX).hom.app
                 (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
             gamma.hom.app ((proEtaleRingDerivedPullback f R S c).obj (DerivedCategory.Q.obj P),
@@ -88,10 +94,10 @@ theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
               ((pullback f R S c).hom.app (DerivedCategory.Q.obj P))
               ((pullback f R S c).hom.app (DerivedCategory.Q.obj Q))) := by
   let A := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R
-  let U := (pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)
+  let U := (proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)
   let C := (proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)
   let I := (proEtaleRingModulePullback f R A (Iso.refl _)).mapHomologicalComplex (.up ℤ)
-  let UD := pbcDerivedRestrict c.hom
+  let UD := (proEtaleRingRestrictScalars c.hom).mapDerivedCategory
   let CD := proEtaleRingDerivedPullback f R S c
   let ID := proEtaleRingDerivedPullback f R A (Iso.refl _)
   let b := pullback f R S c
@@ -111,7 +117,7 @@ theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
   let T := (CoefficientTensorChain.total Y R).obj (P, Q)
   let eC := (proEtaleRingDerivedPullbackFactors f R S c).hom
   let eI := (proEtaleRingDerivedPullbackFactors f R A (Iso.refl _)).hom
-  let eU := (pbcRestrict c.hom).mapDerivedCategoryFactors.hom
+  let eU := (proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom
   let beta := (CoefficientTensorChain.complexPullback f R S c).hom
   let r : DerivedCategory.Q.obj T ⟶
       aY.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) :=
@@ -200,5 +206,75 @@ theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
   apply (cancel_epi (UD.map (CD.map r))).1
   apply (cancel_mono (z.tensor.map di)).1
   simpa only [Category.assoc] using hleft.trans hright.symm
+
+/-- The representative square for the canonical pulled-back condensed coefficient ring.
+
+The two section-ring sheaves are reconstructed from p_Y^* Λ and p_X^* Λ; their
+identification is the ring-sheaf encoding of alpha_f, fixed by its adjunct eta_f.
+This is an ordinary unbounded derived-category statement, with no tower coefficient
+model. The section-coordinate calculation below applies without additional hypotheses
+on Λ, including the zero ring, and on empty schemes.
+
+Source: current blueprint, prop-weil-pbc-direct-image-limits, proof (2), and Stacks
+Tags 03EL, 07A4 and 07A6.
+(blueprint: lem-pbc-coefficient-restriction-tensor-representative-square)
+
+Proof: instantiate the proved section-ring representative calculation with the
+reconstructed coefficient rings and their canonical coefficient isomorphism. Its
+normalization, naturality and cancellation argument gives the displayed square. -/
+theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] :
+    let R := CategoryTheory.InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+      (ProEt.topology Y) (AlgebraicGeometry.ProEtale.condensedRingObj Λ Y)
+    let S := CategoryTheory.InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+      (ProEt.topology X) (AlgebraicGeometry.ProEtale.condensedRingObj Λ X)
+    let c := AlgebraicGeometry.ProEtale.CoefficientSection.iso f Λ
+    ∀ (aY : ProEtaleTensorModel Y R)
+    (z : ProEtaleTensorModel X
+      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))
+    (aX : ProEtaleTensorModel X S)
+    (o : SheafOfModules.RingIsoTensorTransport (J := ProEt.topology X)
+      (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)
+    (hU : ∀ P : CochainComplex (proEtaleRingModules X S) ℤ,
+      proEtaleFlatRepresentatives X S P →
+        proEtaleFlatRepresentatives X
+          ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
+          (((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).obj P))
+    (gamma : aX.tensor ⋙ (proEtaleRingRestrictScalars c.hom).mapDerivedCategory ≅
+      (((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).prod
+        (proEtaleRingRestrictScalars c.hom).mapDerivedCategory) ⋙ z.tensor)
+    (_hgamma : ∀ (P Q : CochainComplex (proEtaleRingModules X S) ℤ)
+      (hp : proEtaleFlatRepresentatives X S P) (hq : proEtaleFlatRepresentatives X S Q),
+      ((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).map
+          (aX.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫
+        gamma.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+        z.tensor.map (Prod.mkHom
+          ((proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app P)
+          ((proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app Q)) =
+      (proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app
+        ((CoefficientTensorChain.total X S).obj (P, Q)) ≫
+      DerivedCategory.Q.map ((CoefficientTensorChain.tensorIso f R S c o).hom.app (P, Q)) ≫
+      z.representative.hom.app
+        (⟨((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).obj P, hU P hp⟩,
+          ⟨((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).obj Q, hU Q hq⟩))
+    (P Q : CochainComplex (proEtaleRingModules Y R) ℤ)
+    (_hp : proEtaleFlatRepresentatives Y R P) (_hq : proEtaleFlatRepresentatives Y R Q),
+        (pullback f R S c).hom.app
+          (aY.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+            (proEtaleCanonicalTensorComparison f R
+              ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
+              (Iso.refl _) aY z).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =
+          ((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).map
+              ((proEtaleCanonicalTensorComparison f R S c aY aX).hom.app
+                (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+            gamma.hom.app ((proEtaleRingDerivedPullback f R S c).obj (DerivedCategory.Q.obj P),
+              (proEtaleRingDerivedPullback f R S c).obj (DerivedCategory.Q.obj Q)) ≫
+            z.tensor.map (Prod.mkHom
+              ((pullback f R S c).hom.app (DerivedCategory.Q.obj P))
+              ((pullback f R S c).hom.app (DerivedCategory.Q.obj Q))) := by
+  dsimp only
+  intro aY z aX o hU gamma hgamma P Q hp hq
+  exact representative_square_section f _ _ _ aY z aX o hU gamma hgamma P Q hp hq
 
 end AlgebraicGeometry.Scheme.CoefficientTensorTransport

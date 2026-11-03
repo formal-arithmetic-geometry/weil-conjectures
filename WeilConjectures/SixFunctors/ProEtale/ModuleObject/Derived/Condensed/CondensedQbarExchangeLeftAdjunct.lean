@@ -98,6 +98,40 @@ private theorem left_normalization
   have hp := path_exchange hΒ hz hmδ hc.symm hah.symm hmβ.symm
   simpa only [Functor.map_comp, Category.assoc] using hp
 
+/-- Scalar extension's push comparison satisfies the mate counit identity.
+Source: ChangeOfCoefficients.lean, derivedPullIso and derivedPushHom;
+Mathlib/CategoryTheory/Adjunction/Mates.lean, iterated_mateEquiv_conjugateEquiv_symm
+and mateEquiv_counit (blueprint: lem-weil-pbc-qbar-condensed-push-counit).
+
+Proof in words. The two coefficient extension/restriction adjunctions and the two
+geometric pullback/pushforward adjunctions form a square. Iterated mate cancellation
+identifies pushHomOfComapIso with the mate of inverse pullIsoOfComapIso. Apply the
+mate counit equation at the underlying object K. Fully faithful restriction to
+bounded constructible objects preserves counits, and its inclusion is faithful,
+so the ambient equation gives exactly the displayed restricted equation. -/
+private theorem constructibleToQbar_push_counit (K : PadicSubfieldConstructible T ℓ E) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj.{u} ℓ) ℓ
+        (h.asOver (Spec (.of k)))).map
+        (constructibleToQbarPushHom ℓ k E h K) ≫
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ (h.asOver (Spec (.of k)))).counit.app
+            ((constructibleToPadicAlgCl T ℓ E).obj K) =
+      (constructibleToQbarPullIso ℓ k E h
+        ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E
+            (h.asOver (Spec (.of k)))).obj K)).inv ≫
+        (constructibleToPadicAlgCl T ℓ E).map
+          ((ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E
+              (h.asOver (Spec (.of k)))).counit.app K) := by
+  exact lifted_push_counit _ _ _ _
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ (h.asOver (Spec (.of k))) K)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj T ℓ E K)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj U ℓ E K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ (h.asOver (Spec (.of k))) K)
+    _ _
+    (fun K ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E
+      (h.asOver (Spec (.of k))) K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ (h.asOver (Spec (.of k))) K)
+    _ _ _ K
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme

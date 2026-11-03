@@ -28,6 +28,8 @@ import all WeilConjectures.CategoryTheory.GeometricModuleTransport
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import all Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrows
+public import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
+public import WeilConjectures.ProperBaseChange.GeometricModuleTransport
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 
@@ -984,5 +986,32 @@ noncomputable def restrictionTensor {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B
       (restrictComplex a).obj (P ⊗ Q) where
   f := restrictionTensorComponent a P Q
   comm' n m _ := restrictionTensorComponent_comm a P Q n m
+
+/-- The two coefficient equations, with scalar restriction on the semilinear one.
+The first is an equation of S'-linear chain maps; the second is an equation of
+S-linear chain maps into the restriction of the same target. Specializing the
+second equation to every pair m >= n of quotient coefficient maps is precisely
+commutation of the comparisons with all quotient-tower transitions.
+Source: Stacks 03EL and 07A4
+(blueprint: def-pur-cochain-coefficient-arrows). -/
+def IsCompatibleWithCoefficients (f : RingedPullback R S) (k : Comparison f)
+    (d : CoefficientSquare f) (k' : Comparison (changed f d)) : Prop :=
+  (∀ (P Q : Complex R),
+    (pull (changed f d)).map (epsilon d.sourceMap P Q).hom ≫
+        (comparison (changed f d) k'
+          ((extend d.sourceMap).obj P) ((extend d.sourceMap).obj Q)).hom ≫
+          ((kappa f k d k' P).hom ⊗ₘ (kappa f k d k' Q).hom) =
+      (kappa f k d k' (P ⊗ Q)).hom ≫
+        (extend d.targetMap).map (comparison f k P Q).hom ≫
+          (epsilon d.targetMap ((pull f).obj P) ((pull f).obj Q)).hom) ∧
+  (∀ (P Q : Complex R),
+    (comparison f k P Q).hom ≫ (tau f k d k' P ⊗ₘ tau f k d k' Q) ≫
+        restrictionTensor d.targetMap
+          ((pull (changed f d)).obj ((extend d.sourceMap).obj P))
+          ((pull (changed f d)).obj ((extend d.sourceMap).obj Q)) =
+      tau f k d k' (P ⊗ Q) ≫ (restrictComplex d.targetMap).map
+        ((pull (changed f d)).map (epsilon d.sourceMap P Q).hom ≫
+          (comparison (changed f d) k'
+            ((extend d.sourceMap).obj P) ((extend d.sourceMap).obj Q)).hom))
 
 end CategoryTheory.CochainPullback

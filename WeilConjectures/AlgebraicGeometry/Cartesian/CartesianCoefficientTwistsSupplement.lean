@@ -122,6 +122,7 @@ import all WeilConjectures.CategoryTheory.Sites.MonObj
 import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunctionComparisonSupplement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.AlgebraicGeometry.CartesianCoefficientTwists
+public import WeilConjectures.ProperBaseChange.ProEtaleModuleInverseImageCanonicalUnit
 
 /-! # Cartesian coefficients and Tate twists
 
@@ -502,7 +503,17 @@ private instance commRingForgetSheafification (T : Scheme.{u}) :
       (forget CommRingCat.{u + 1}) := inferInstance
 private instance commRingToRingSheafification (T : Scheme.{u}) :
     (Scheme.ProEt.topology T).PreservesSheafification
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := inferInstance
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
+  constructor
+  intro P Q f hf
+  change (Scheme.ProEt.topology T).W
+    (Functor.whiskerRight f (forget₂ CommRingCat RingCat))
+  have : Presheaf.IsLocallyInjective (Scheme.ProEt.topology T) f := hf.isLocallyInjective
+  have : Presheaf.IsLocallySurjective (Scheme.ProEt.topology T) f := hf.isLocallySurjective
+  apply ((Scheme.ProEt.topology T).W_iff_isLocallyBijective _).mpr
+  constructor
+  · exact ⟨fun x y h ↦ Presheaf.equalizerSieve_mem (Scheme.ProEt.topology T) f x y h⟩
+  · exact ⟨fun x ↦ Presheaf.imageSieve_mem (Scheme.ProEt.topology T) f x⟩
 
 private instance integralSystem_hasLimit (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) : HasLimit (spIntegralTwistSystem T ℓ E) :=

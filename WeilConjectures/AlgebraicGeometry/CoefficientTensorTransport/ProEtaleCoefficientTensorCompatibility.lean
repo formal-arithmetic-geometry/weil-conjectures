@@ -11,6 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEt
 import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEtaleCoefficientTensorRepresentativeSquare
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackDescentData
 import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
+public import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
 
 /-! # Compatibility of coefficient restriction with tensor pullback
 
@@ -51,14 +54,15 @@ theorem tensorComparison_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
     (z : ProEtaleTensorModel X
       ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))
     (aX : ProEtaleTensorModel X S) :
-    ∃ rho : ((pbcDerivedRestrict c.hom).prod (pbcDerivedRestrict c.hom)) ⋙ z.tensor ≅
-        aX.tensor ⋙ pbcDerivedRestrict c.hom,
+    ∃ rho : (((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).prod
+        (proEtaleRingRestrictScalars c.hom).mapDerivedCategory) ⋙ z.tensor ≅
+        aX.tensor ⋙ (proEtaleRingRestrictScalars c.hom).mapDerivedCategory,
       ∀ F G : DerivedCategory (proEtaleRingModules Y R),
         (pullback f R S c).hom.app (aY.tensor.obj (F, G)) ≫
             (proEtaleCanonicalTensorComparison f R
               ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
               (Iso.refl _) aY z).hom.app (F, G) =
-          (pbcDerivedRestrict c.hom).map
+          ((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).map
               ((proEtaleCanonicalTensorComparison f R S c aY aX).hom.app (F, G)) ≫
             rho.inv.app ((proEtaleRingDerivedPullback f R S c).obj F,
               (proEtaleRingDerivedPullback f R S c).obj G) ≫
@@ -66,8 +70,8 @@ theorem tensorComparison_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
               ((pullback f R S c).hom.app F)
               ((pullback f R S c).hom.app G)) := by
   let A := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R
-  let U := (pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)
-  let UD := pbcDerivedRestrict c.hom
+  let U := (proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)
+  let UD := (proEtaleRingRestrictScalars c.hom).mapDerivedCategory
   let CD := proEtaleRingDerivedPullback f R S c
   let ID := proEtaleRingDerivedPullback f R A (Iso.refl _)
   let b := pullback f R S c
@@ -81,7 +85,8 @@ theorem tensorComparison_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
     ⟨(o.kflat_iff P).2 hp.1, fun n ↦ (o.flat_iff (P.X n)).2 (hp.2 n)⟩
   obtain ⟨ffU⟩ := tensorRepresentatives_fullyFaithful S A
   obtain ⟨gamma, hgamma, _⟩ := CategoryTheory.tensorComparisonDescent
-    DerivedCategory.Q DerivedCategory.Q U UD (pbcRestrict c.hom).mapDerivedCategoryFactors.hom
+    DerivedCategory.Q DerivedCategory.Q U UD
+    (proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom
     (proEtaleFlatRepresentatives X S) (proEtaleFlatRepresentatives X A) hU ffU
     (CoefficientTensorChain.total X S) (CoefficientTensorChain.total X A)
     aX.tensor z.tensor aX.representative z.representative sigma
@@ -101,6 +106,6 @@ theorem tensorComparison_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
   obtain ⟨⟨P, hp⟩, ⟨Q, hq⟩⟩ := Z
   change left.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =
     right.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)
-  exact representative_square f R S c aY z aX o hU gamma hgamma P Q hp hq
+  exact representative_square_section f R S c aY z aX o hU gamma hgamma P Q hp hq
 
 end AlgebraicGeometry.Scheme.CoefficientTensorTransport

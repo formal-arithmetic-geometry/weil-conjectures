@@ -51,6 +51,12 @@ Source: assertion (2) of prop-weil-pbc-direct-image-limits.
     fun K ↦ (directImage_completion_compatibility l E f).1 K
   exact NatIso.isIso_of_isIso_app _
 
+/-- The specified projection-formula isomorphism of reduction towers, with the mate
+as its forward map; no choice of unrelated levelwise isomorphisms occurs.
+Source: assertion (2) (blueprint: prop-weil-pbc-direct-image-limits). -/
+def pushReductionIso : rpushModule l E f ⋙ red l E Y ≅ red l E X ⋙ rpush l E f :=
+  asIso (pushReductionMap l E f)
+
 /-- The three direct-image assertions, using the actual integral module derived categories.
 The canonical arrow in (1) is pushLimitIso, constructed by the constant/pullback
 conjugacy, and the evaluation arrow is pushEvaluationMap. Its Milnor-cone description:

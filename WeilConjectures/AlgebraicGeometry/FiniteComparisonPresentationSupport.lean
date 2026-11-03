@@ -14,6 +14,16 @@ import all WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.Kernels
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.CategoryTheory.Functor.Flat
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
+public import WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.CoefficientTorFlatModelSupplement
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteEncodedPresentation
 
 /-! # Private support for finite comparison presentation
 
@@ -169,6 +179,67 @@ private theorem ringScalarMonoidal_exists
     {R S : Sheaf J CommRingCat.{w}} (i : R ≅ S) :
     (SheafOfModules.scalarRestriction i.hom).Monoidal :=
   Classical.choice (ringScalarMonoidal_exists i)
+
+private theorem map_eq_of_equivalence {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) [F.IsEquivalence] (P : ObjectProperty C) (Q : ObjectProperty D)
+    [Q.IsClosedUnderIsomorphisms] (h : ∀ K, P K ↔ Q (F.obj K)) : P.map F = Q := by
+  classical
+  funext L
+  apply propext
+  constructor
+  · rintro ⟨K, hK, ⟨e⟩⟩
+    exact Q.prop_of_iso e ((h K).mp hK)
+  · intro hL
+    let K := F.objPreimage L
+    let e := F.objObjPreimageIso L
+    exact ⟨K, (h K).mpr (Q.prop_of_iso e.symm hL), ⟨e⟩⟩
+
+private theorem bounded_cohomology_transport
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [F.Faithful]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (K : DerivedCategory C) :
+    (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((DerivedCategory.homologyFunctor C q).obj K)) ↔
+    (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((DerivedCategory.homologyFunctor D q).obj (F.mapDerivedCategory.obj K))) := by
+  constructor
+  · rintro ⟨a, b, hab, h⟩
+    exact ⟨a, b, hab, fun q hq ↦
+      F.isZero_homologyFunctor_mapDerivedCategory_obj (h q hq)⟩
+  · rintro ⟨a, b, hab, h⟩
+    exact ⟨a, b, hab, fun q hq ↦
+      F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj (h q hq)⟩
+
+private theorem coefficient_finite_native
+    {C : Type w} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{w}) (K : ConstantCompletion.D R) :
+    (∃ a b : ℤ, HasCoefficientModelTorAmplitude R K a b) ↔
+      DerivedCategory.finiteTorAmplitude (ConstantCompletion.Mod R) K := by
+  constructor
+  · rintro ⟨a, b, h⟩
+    exact ⟨a, b, (CategoryTheory.nativeTor_iff R K a b h.1).mpr h⟩
+  · rintro ⟨a, b, h⟩
+    have hh := h.mono (min_le_left a b) le_rfl
+    exact ⟨min a b, b,
+      (CategoryTheory.nativeTor_iff R K _ b (min_le_right a b)).mp hh⟩
+
+private theorem bounded_iff_interval
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (K : DerivedCategory C) :
+    DerivedCategory.TStructure.t.bounded K ↔
+      ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
+        IsZero ((DerivedCategory.homologyFunctor C q).obj K) := by
+  rw [← DerivedCategory.exists_homologyConcentratedIn_iff_bounded]
+  constructor
+  · rintro ⟨a, b, ha, hb⟩
+    exact ⟨min a b, b, min_le_right a b, fun q hq ↦ hq.elim
+      (fun h ↦ (DerivedCategory.isGE_iff K a).mp ha q (h.trans_le (min_le_left a b)))
+      (fun h ↦ (DerivedCategory.isLE_iff K b).mp hb q h)⟩
+  · rintro ⟨a, b, _, hh⟩
+    exact ⟨a, b, (DerivedCategory.isGE_iff K a).mpr (fun q h ↦ hh q (.inl h)),
+      (DerivedCategory.isLE_iff K b).mpr (fun q h ↦ hh q (.inr h))⟩
 
 attribute [local irreducible] ringScalarMonoidal
 
