@@ -20104,6 +20104,7 @@ public import WeilConjectures.SixFunctors.FixProjectionCompactification.Projecti
 public import WeilConjectures.SixFunctors.FrobeniusExchange.IntegralSystemCompositorNormalization
 public import WeilConjectures.SixFunctors.FrobeniusExchange.IntegralSystemEvaluationNormalization
 public import WeilConjectures.SixFunctors.FrobeniusExchange.IntegralSystemSquareNormalization
+public import WeilConjectures.SixFunctors.FrobeniusExchange.SystemNativeEvaluationBridge
 public import WeilConjectures.SixFunctors.FrobeniusExchange.SystemOpenScalarPullbackMate
 public import WeilConjectures.SixFunctors.FrobeniusExchange.SystemOperationExchangeRealization
 public import WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
@@ -22896,6 +22897,7 @@ public import WeilConjectures.Tactic.ExactModProofIrrel
 public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.Tactic.FirstOrderApply
 public import WeilConjectures.Tactic.MatchTactic
+public import WeilConjectures.Tactic.RflByKernel
 public import WeilConjectures.Tactic.TransportExact
 public import WeilConjectures.Tactic.TransportModProofs
 public import WeilConjectures.TateTwist.ComparisonSingle

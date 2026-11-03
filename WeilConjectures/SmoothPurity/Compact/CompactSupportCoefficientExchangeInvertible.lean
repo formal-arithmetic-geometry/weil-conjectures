@@ -76,8 +76,8 @@ theorem sfCompactSupportCoefficientExchange_isIso
   have hc : IsIso ((FrobeniusExchange.operationReduction l E H).app K.obj) := by
     apply (((FrobeniusExchange.models l E).system Y).isIso_iff_evaluations _).2
     intro n
-    have h := (FrobeniusExchange.compactRealization_existsUnique
-      l E K₀ hl f c).exists.choose_spec K n
+    have h := (FrobeniusExchange.compactRealization_exists
+      l E K₀ hl f c).choose_spec K n
     have hi : IsIso
         ((scalarReductionDerivedExtension l E Y n).map
             ((FrobeniusExchange.compactRealization l E K₀ hl f c).hom.app K) ≫

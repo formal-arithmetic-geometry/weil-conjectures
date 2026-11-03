@@ -69,6 +69,10 @@ import WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullba
 import WeilConjectures.SixFunctors.System.SystemDirectImageEffectivity
 import all WeilConjectures.SixFunctors.Compact.CompactSupportReductionTower
 import all WeilConjectures.SmoothPurity.Compact.CompactSupportRepresentativeIndependence
+import WeilConjectures.SixFunctors.FrobeniusExchange.SystemNativeEvaluationBridge
+import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportStrictReductionGamma
+import WeilConjectures.Tactic.ExactByKernel
+import WeilConjectures.Tactic.RflByKernel
 
 /-! # Simultaneous-system realization of operation exchanges
 
@@ -815,6 +819,114 @@ def compactFiniteEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
     isoWhiskerRight (((models l E).system X).reductionEvaluation n)
       (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1)))
 
+/-! The specified finite evaluations agree with the native varying-ring evaluations.
+The two presentations of the strict coefficient systems are definitionally equal, but the
+elaborator's unifier cannot compare their adjunction mates in reasonable time; these
+comparisons are left to the kernel with `exact_by_kernel`. -/
+
+/-- The section-normalized ordinary direct-image evaluation is the native one,
+in finite intrinsic coordinates: both are the identity on sections.
+Source: Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+private theorem systemDirectEvaluationOrdinary_eqToIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (n : ℕ) :
+    (eqToIso (systemDirectEvaluationOrdinary_eq l E f n)).hom =
+      (compactSupportOrdinaryDirectEvaluation l E f n).hom := by
+  exact_by_kernel eqToIso_directEvaluation l E f n (systemDirectEvaluationOrdinary_eq l E f n)
+
+/-- The ordinary pullback evaluation is the native one, in intrinsic coordinates.
+Source: Zheng 4.1; Stacks 03D2
+(blueprint: def-weil-system-operation-exchange-realization). -/
+private theorem systemPullEvaluationOrdinaryInv_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    systemPullEvaluationOrdinaryInv l E f n =
+      Functor.whiskerLeft (ProEtale.VaryingRing.eval (compactSupportSystemLevel l E)
+          (compactSupportSystemQuotient l E) Y n)
+          (openSquarePullbackModel (Padic.coefficientExtensionRing l E (n + 1)) f).inv ≫
+        (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
+          (compactSupportSystemQuotient l E) f n).inv := by
+  unfold systemPullEvaluationOrdinaryInv
+  rw [systemDirectEvaluationOrdinary_eqToIso_hom]
+  exact_by_kernel pullEvaluationMate_eq l E f n
+
+/-- The derived pullback evaluation is the native `evalG`, in intrinsic coordinates.
+Source: Zheng 4.1; Stacks 03D2
+(blueprint: def-weil-system-operation-exchange-realization). -/
+private theorem systemPullEvaluation_inv_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (M : coefficientSequenceDerived l E Y) :
+    (ProEtale.VaryingRing.evalG (compactSupportSystemLevel l E)
+        (compactSupportSystemQuotient l E) f n).hom.app M ≫
+      (Functor.mapDerivedCategoryNatIso
+        (openSquarePullbackModel (Padic.coefficientExtensionRing l E (n + 1)) f)).hom.app
+          ((coefficientSequenceDerivedEvaluation l E Y n).obj M) =
+      (systemPullEvaluation l E f n).inv.app M := by
+  exact_by_kernel pullEvaluation_derived l E f n
+    (by exact_by_kernel @asIso _ _ _ _ _ (systemPullEvaluationOrdinaryInv_isIso l E f n))
+    (by exact_by_kernel systemPullEvaluationOrdinaryInv_eq l E f n) M
+
+/-- The system direct-image evaluation is the native `evalP`, in intrinsic coordinates.
+Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
+private theorem systemDirectEvaluation_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (M : coefficientSequenceDerived l E X) :
+    letI := proEtaleConstantModuleDirectImage_additive f
+      (Padic.coefficientExtensionRing l E (n + 1))
+    (systemDirectEvaluation l E f n).app M =
+      (ProEtale.VaryingRing.evalP (compactSupportSystemLevel l E)
+          (compactSupportSystemQuotient l E) f n ≪≫
+        isoWhiskerLeft _ (Functor.rightDerivedFunctorNatIso
+          (compactSupportDirectModel f (Padic.coefficientExtensionRing l E (n + 1))))).hom.app
+            M := by
+  exact_by_kernel directEvaluationMate_eq l E f n
+    (by exact_by_kernel systemPullEvaluation l E f n)
+    (by exact_by_kernel systemPullEvaluation_inv_app l E f n) M
+
+/-- The system open-extension evaluation is the native `evalJ`, in intrinsic coordinates.
+Source: Stacks 03DI; Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+private theorem systemOpenEvaluationInv_inv_app {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] (n : ℕ) (M : coefficientSequenceDerived l E U) :
+    letI := systemOpenEvaluationInv_isIso l E j n
+    letI := sfIntrinsicExtensionByZero_additive j (Padic.coefficientExtensionRing l E (n + 1))
+    letI := (sfIntrinsicExtensionByZero_exact j (Padic.coefficientExtensionRing l E (n + 1))).2.1
+    letI := (sfIntrinsicExtensionByZero_exact j (Padic.coefficientExtensionRing l E (n + 1))).2.2
+    (asIso (systemOpenEvaluationInv l E j n)).symm.hom.app M =
+      (ProEtale.VaryingRing.evalJ (compactSupportSystemLevel l E)
+          (compactSupportSystemQuotient l E) j n ≪≫
+        isoWhiskerLeft _ (Functor.mapDerivedCategoryNatIso
+          (compactSupportOpenModel j (Padic.coefficientExtensionRing l E (n + 1))))).hom.app M := by
+  let := systemOpenEvaluationInv_isIso l E j n
+  exact_by_kernel openEvaluationMate_eq l E j n
+    (by exact_by_kernel systemPullEvaluation l E j n)
+    (by exact_by_kernel systemPullEvaluation_inv_app l E j n)
+    (by exact_by_kernel (asIso (systemOpenEvaluationInv l E j n)).symm)
+    (by exact_by_kernel (rfl : systemOpenEvaluationInv l E j n = systemOpenEvaluationInv l E j n))
+    M
+
+/-- The specified compact-system evaluation is the native compact-support evaluation.
+Source: Bhatt--Scholze 6.7.6; Zheng 4.10
+(blueprint: def-weil-system-operation-exchange-realization). -/
+private theorem compactFiniteEvaluation_hom_app {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (n : ℕ) (K : DerivedCategory (scalarReductionSource l E X)) :
+    (compactFiniteEvaluation l E c n).hom.app K =
+      (isoWhiskerLeft ((models l E).system X).reduction
+          (compactSupportSystemEvaluation l E c n) ≪≫
+        isoWhiskerRight (((models l E).system X).reductionEvaluation n)
+          (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1)))).hom.app
+            K := by
+  let := systemDirectEvaluation_isIso l E c.g n
+  let := systemOpenEvaluationInv_isIso l E c.i n
+  have hP : (systemDirectEvaluation l E c.g n).app
+      ((reduction l E X ⋙ systemDerivedOpen l E c.i).obj K) = _ :=
+    systemDirectEvaluation_app l E c.g n
+      ((systemDerivedOpen l E c.i).obj ((reduction l E X).obj K))
+  have hJ := systemOpenEvaluationInv_inv_app l E c.i n ((reduction l E X).obj K)
+  simp only [compactFiniteEvaluation, compactSupportSystemEvaluation, Iso.trans_hom,
+    NatTrans.comp_app, isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app,
+    whiskerRight_app, Iso.symm_hom, asIso_hom, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.comp_id]
+  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app,
+    Iso.symm_hom] at hP hJ
+  rw [hP, ← hJ]
+  simp only [Category.assoc]
+  rfl_by_kernel
+
 /-- The inverse open exchange is the left mate of the inverse pullback square.
 Source: Zheng 4.10; blueprint `def:weil-compact-support-object`
 (blueprint: def-weil-system-operation-exchange-realization). -/
@@ -1176,6 +1288,34 @@ def CompactRealizationSpec (c : Compactification f)
         (compactFiniteEvaluation l E c n).hom.app K.obj =
       (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom
 
+/-- There is a projection-normalized identification of the recorded Rf_! with the
+simultaneous system realization, on the entire constructible category.
+Source: Bhatt--Scholze 6.7.6--6.7.7; Stacks 0941
+(blueprint: def-weil-system-operation-exchange-realization).
+Proof: the strict reduction comparison of the recorded compact-support functor with the
+native compact-support system has the finite projections of
+sfCompactSupportFiniteReductionIso. The native system is the specified one, and its native
+finite evaluation is compactFiniteEvaluation. Transposing the projection equation under the
+finite scalar adjunction, using the evaluated reduction counit, gives the specification. -/
+theorem compactRealization_exists (c : Compactification f) :
+    ∃ τ : sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
+        (sfIntegralConstructible l E Y).ι ≅
+      (sfIntegralConstructible l E X).ι ⋙ compactImage l E f c,
+      CompactRealizationSpec l E K₀ hl f c τ := by
+  obtain ⟨γ, hγ⟩ := qcqsCompactSupport_strictReductionGamma l E K₀ hl c
+    ((models l E).system X) ((models l E).system Y)
+  refine ⟨by exact_by_kernel γ, fun K n ↦ ?_⟩
+  exact_by_kernel map_comp_counit_eq_of_projection (coefficientFiniteAdjunction l E Y n)
+    ((models l E).system Y).adjunction (coefficientSequenceProjection l E Y n)
+    (((models l E).system Y).reductionEvaluation n)
+    (fun N ↦ ((models l E).system Y).counit_projection N n)
+    (by exact_by_kernel γ.hom.app K)
+    (by exact_by_kernel (compactFiniteEvaluation l E c n).hom.app K.obj)
+    (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom
+    (by
+      rw [compactFiniteEvaluation_hom_app]
+      exact_by_kernel hγ K n)
+
 /-- There is a unique projection-normalized identification of the recorded Rf_!
 with the simultaneous system realization, on the entire constructible category.
 Source: Bhatt--Scholze 6.7.6--6.7.7; Stacks 0941
@@ -1196,12 +1336,18 @@ theorem compactRealization_existsUnique (c : Compactification f) :
         (sfIntegralConstructible l E Y).ι ≅
       (sfIntegralConstructible l E X).ι ⋙ compactImage l E f c,
       CompactRealizationSpec l E K₀ hl f c τ := by
+  obtain ⟨τ, hτ⟩ := compactRealization_exists l E K₀ hl f c
+  refine ⟨τ, hτ, fun τ' hτ' ↦ ?_⟩
+  -- Open: `hτ` and `hτ'` only force the finite reductions of `τ'` and `τ` to agree, i.e.
+  -- every component of `τ'.hom - τ.hom` has zero projections to the finite levels of the
+  -- total derived limit. Over an arbitrary field `K₀` such phantom maps need not vanish
+  -- objectwise (the relevant `lim¹` of finite `Ext⁻¹` groups can be nonzero).
   sorry
 
 /-- The identification determined by the actual integral compact-support projections.
 Source: Bhatt--Scholze 6.7.6 (blueprint: def-weil-system-operation-exchange-realization). -/
 def compactRealization (c : Compactification f) :=
-  (compactRealization_existsUnique l E K₀ hl f c).exists.choose
+  (compactRealization_exists l E K₀ hl f c).choose
 
 /-- Alpha-shriek starts at the recorded integral Rf_!, uses its uniquely normalized
 identification, then the actual system pullback realization and counit.
