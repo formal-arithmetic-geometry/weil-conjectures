@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchreierCharacters
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierTraceBridge
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
+public import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchreierTraceTensorAdd
 
 /-! Tensor addition clause for the condensed Artin--Schreier sheaf.
 
@@ -40,11 +41,10 @@ open AlgebraicGeometry.ArtinSchreierTrace
 
 /-- Tensor addition for the condensed Artin--Schreier sheaf.
 
-Proof source: lem-fd-as-characters and lem-wft-as-comparison.  The bridge gives
-comparison isomorphisms for `f`, `g`, and `f+g`; compose these with
-`AlgebraicGeometry.ArtinSchreierTrace.qlbar_artinSchreier_trace_tensor_properties`.  The equality
-`a*f+a*g=a*(f+g)` is the elementary scalar distributivity step.
-(blueprint: lem-fd-as-lisse).
+Proof source: lem-fd-as-trace-tensor-add.  Apply the generic condensed theorem
+with the p-adic algebraic closure coefficient ring; its cardinality-unit
+hypothesis follows from the constant-ring equivalence.
+(blueprint: lem-fd-as-lisse-tensor-addition).
 -/
 theorem condensedArtinSchreierSheafOf_tensor_addition
     (k₀ : Type u) [Field k₀] [Fintype k₀] (ℓ : ℕ) [Fact ℓ.Prime]
@@ -59,22 +59,14 @@ theorem condensedArtinSchreierSheafOf_tensor_addition
       condensedArtinSchreierSheafOf
         (Profinite.padicAlgClRingObj ℓ) k₀ X₀ ψ (f + g)) := by
   classical
-  letI : Fact (ringChar k₀).Prime := ⟨CharP.char_is_prime k₀ (ringChar k₀)⟩
-  obtain ⟨Ψ, a, hΨ, hψ', hcmp, hcmpinv⟩ :=
-    condensedArtinSchreier_trace_bridge k₀ ℓ X₀ ψ hψ
-  obtain ⟨e⟩ :=
-    (AlgebraicGeometry.ArtinSchreierTrace.qlbar_artinSchreier_trace_tensor_properties
-      (ringChar k₀) ℓ
-      (Fact.out : ringChar k₀ ≠ ℓ) k₀ Ψ hΨ X₀
-      (scalar k₀ X₀ (a : k₀) * f) (scalar k₀ X₀ (a : k₀) * g)).1
-  obtain ⟨ef⟩ := hcmp f
-  obtain ⟨eg⟩ := hcmp g
-  obtain ⟨efg⟩ := hcmp (f + g)
-  have hadd : scalar k₀ X₀ (a : k₀) * f + scalar k₀ X₀ (a : k₀) * g =
-      scalar k₀ X₀ (a : k₀) * (f + g) := by
-    rw [mul_add]
-  exact ⟨tensorIso ef eg ≪≫ e ≪≫
-    eqToIso (congrArg (fun z ↦ qlbarTraceSheafOf (ringChar k₀) ℓ k₀ Ψ X₀ z)
-      hadd) ≪≫ efg.symm⟩
+  have hq : IsUnit (Fintype.card k₀ : MonObj.Γ
+      (Profinite.padicAlgClRingObj.{u} ℓ)) := by
+    have hq0 : IsUnit (Fintype.card k₀ : PadicAlgCl ℓ) := by
+      apply isUnit_iff_ne_zero.mpr
+      exact_mod_cast (Fintype.card_ne_zero : Fintype.card k₀ ≠ 0)
+    simpa only [map_natCast] using
+      (Profinite.PadicAlgCl.constRingHom ℓ).isUnit_map hq0
+  exact AlgebraicGeometry.ArtinSchreierTrace.condensedArtinSchreier_tensor_add_generic
+    (Profinite.padicAlgClRingObj ℓ) k₀ ψ hψ hq X₀ f g
 
 end AlgebraicGeometry.ProEtale

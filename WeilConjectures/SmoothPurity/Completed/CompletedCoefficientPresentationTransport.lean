@@ -65,6 +65,18 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.Data.Nat.Prime.Infinite
+public import WeilConjectures.AlgebraicGeometry.CondensedCoefficientIsoBoundedConstructible
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCompletedCoefficientTransportSupplement
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.ProEtaleCoefficients.CompletedCoefficientCompletionRoosTransportLegacy
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Completed coefficient presentation and tensor transport
 
@@ -507,6 +519,173 @@ def purScalarModelComplexIso (W : Scheme.{u}) :
       (F := purOrdinaryCoefficientModel l E W)
       (G := integralOrdinaryScalar l E L ι W) (Iso.refl _) (.up ℤ)).symm
 
+private theorem legacyDerivedSquare_factors
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F : A ⥤ B} {H : B ⥤ D} {G : A ⥤ C} {I : C ⥤ D}
+    [F.Additive] [H.Additive] [G.Additive] [I.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    (e : F ⋙ H ≅ G ⋙ I) (P : CochainComplex A ℤ) :
+    (Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj P) ≫
+        I.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
+        I.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P) =
+      H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
+        H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P ≫
+          (Functor.mapHomologicalComplexCompIso
+            (Iso.refl (G ⋙ I)) (.up ℤ)).inv.app P) := by
+  have hi : (Functor.mapDerivedCategoryCompIso F H).inv.app (DerivedCategory.Q.obj P) ≫
+      (F ⋙ H).mapDerivedCategoryFactors.hom.app P =
+    H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
+      H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
+    apply (cancel_epi
+      ((Functor.mapDerivedCategoryCompIso F H).hom.app (DerivedCategory.Q.obj P))).mp
+    rw [Iso.hom_inv_id_app_assoc]
+    exact (Functor.mapDerivedCategoryCompIso_hom_app_factors F H P).symm
+  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc]
+  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
+    Functor.mapDerivedCategoryNatIso_fac]
+  rw [← Category.assoc, hi, Category.assoc]
+  congr 2
+  apply congrArg DerivedCategory.Q.map
+  ext i
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_hom_app_f,
+    Functor.mapHomologicalComplexCompIso_inv_app_f, NatTrans.mapHomologicalComplex_app_f,
+    Iso.refl_inv, NatTrans.id_app]
+  exact (Category.comp_id _).symm
+
+private def ordinaryRestrictionSquare :
+    (Mod.comap b.hom : Mod C S' ⥤ Mod C S) ⋙ Mod.comap f ≅
+      Mod.comap g ⋙ Mod.comap a.hom :=
+  (Mod.comapComp f b.hom).symm ≪≫ Mod.comapCongr sq.symm ≪≫
+    Mod.comapComp a.hom g
+
+private theorem ordinaryRestrictionSquare_hom (N : Mod C S') :
+    ((ordinaryRestrictionSquare a b f g sq).hom.app N).hom = 𝟙 N.X := by
+  simp only [ordinaryRestrictionSquare, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Mod.comp_hom', Mod.comapComp_inv_app_hom, Mod.comapCongr_hom_app_hom,
+    Mod.comapComp_hom_app_hom]
+  change (𝟙 N.X ≫ 𝟙 N.X ≫ 𝟙 N.X : N.X ⟶ N.X) = 𝟙 N.X
+  simp only [Category.id_comp]
+
+/-- The tensor comparison of two isomorphic coefficient presentations is uniquely
+normalized by `1 tensor x`. This is an equality of maps of underlying objects,
+so it applies to sheafified tensors without assuming that sections are pure tensors.
+
+Source: Stacks 03EK; latest blueprint `fix-prop-adjunctions.proof.md`, Step 1.
+(blueprint: def-pur-completed-coefficient-presentation-transport).
+
+Proof: compose the tensor/restriction adjunction with inverse restriction on each
+side. The coefficient square identifies the two right adjoints by identity maps
+on underlying objects. Uniqueness of left adjoints gives the comparison. Its unit
+identity gives the displayed normalization. Conversely, the adjunction Hom
+bijection identifies any two normalized maps; hence the isomorphism is unique. -/
+theorem purCondensedOrdinaryScalarModel_existsUnique :
+    ∃! e : Mod.extendScalars f ⋙ Mod.comap (inv b.hom) ≅
+        Mod.comap (inv a.hom) ⋙ Mod.extendScalars g,
+      ∀ M : Mod C R,
+        Mod.extendUnitHom f M ≫ (e.hom.app M).hom =
+          Mod.extendUnitHom g ((Mod.comap (inv a.hom)).obj M) := by
+  let aG : (Mod.comap (inv a.hom) : Mod C R ⥤ Mod C R') ⊣ Mod.comap a.hom :=
+    (Mod.comapEquivalenceOfIsIso a.hom).symm.toAdjunction
+  let aH : (Mod.comap (inv b.hom) : Mod C S ⥤ Mod C S') ⊣ Mod.comap b.hom :=
+    (Mod.comapEquivalenceOfIsIso b.hom).symm.toAdjunction
+  let r := ordinaryRestrictionSquare a b f g sq
+  let a1 := ((Mod.extendRestrictAdjunction f).comp aH).ofNatIsoRight r
+  let a2 := aG.comp (Mod.extendRestrictAdjunction g)
+  have hG (M : Mod C R) : (aG.unit.app M).hom = 𝟙 M.X :=
+    Mod.comapEquivalenceOfIsIso_counitInv_app_hom a.hom M
+  have hH (N : Mod C S) : (aH.unit.app N).hom = 𝟙 N.X :=
+    Mod.comapEquivalenceOfIsIso_counitInv_app_hom b.hom N
+  have h1 (M : Mod C R) : (a1.unit.app M).hom = Mod.extendUnitHom f M := by
+    have he : a1.unit.app M =
+        ((Mod.extendRestrictAdjunction f).comp aH).unit.app M ≫ r.hom.app _ := by
+      rw [← Adjunction.homEquiv_id, Adjunction.homEquiv_ofNatIsoRight_apply,
+        Adjunction.homEquiv_id]
+    erw [he, Mod.comp_hom', ordinaryRestrictionSquare_hom, Category.comp_id]
+    rw [Adjunction.comp_unit_app, Mod.comp_hom']
+    change ((Mod.extendRestrictAdjunction f).unit.app M).hom ≫
+      (aH.unit.app ((Mod.extendScalars f).obj M)).hom = _
+    rw [hH]
+    exact (Category.comp_id _).trans (Mod.extendRestrictAdjunction_unit_app_hom f M)
+  have h2 (M : Mod C R) : (a2.unit.app M).hom =
+      Mod.extendUnitHom g ((Mod.comap (inv a.hom)).obj M) := by
+    rw [Adjunction.comp_unit_app, Mod.comp_hom', hG, Mod.comap_map_hom]
+    dsimp only [Mod.comap, Functor.id_obj]
+    rw [Category.id_comp, Mod.extendRestrictAdjunction_unit_app_hom]
+  have hAdj (M : Mod C R) (N : Mod C S')
+      (k : (Mod.extendScalars f ⋙ Mod.comap (inv b.hom)).obj M ⟶ N) :
+      (a1.homEquiv M N k).hom = Mod.extendUnitHom f M ≫ k.hom := by
+    rw [Adjunction.homEquiv_unit, Mod.comp_hom', h1]
+    rfl
+  let e := a1.leftAdjointUniq a2
+  have he (M : Mod C R) : Mod.extendUnitHom f M ≫ (e.hom.app M).hom =
+      Mod.extendUnitHom g ((Mod.comap (inv a.hom)).obj M) := by
+    have h := congrArg Mod.Hom.hom
+      (Adjunction.homEquiv_leftAdjointUniq_hom_app a1 a2 M)
+    exact (hAdj M _ (e.hom.app M)).symm.trans (h.trans (h2 M))
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply (a1.homEquiv M _).injective
+  apply Mod.hom_ext
+  rw [hAdj, hAdj, he', he]
+
+/-- The ordinary scalar comparison, fixed by its tensor-unit equation.
+Source: Stacks 03EK
+(blueprint: def-pur-completed-coefficient-presentation-transport). -/
+def purCondensedOrdinaryScalarModel :
+    Mod.extendScalars f ⋙ Mod.comap (inv b.hom) ≅ Mod.comap (inv a.hom) ⋙ Mod.extendScalars g :=
+  (purCondensedOrdinaryScalarModel_existsUnique a b f g sq).exists.choose
+
+/-- The chosen comparison retains its tensor-unit normalization.
+Source: Stacks 03EK
+(blueprint: def-pur-completed-coefficient-presentation-transport).
+Proof: this is the property of the uniquely specified comparison. -/
+theorem purCondensedOrdinaryScalarModel_unit (M : Mod C R) :
+    Mod.extendUnitHom f M ≫ ((purCondensedOrdinaryScalarModel a b f g sq).hom.app M).hom =
+      Mod.extendUnitHom g ((Mod.comap (inv a.hom)).obj M) := by
+  exact (purCondensedOrdinaryScalarModel_existsUnique a b f g sq).exists.choose_spec M
+
+/-- The comparison sends every scalar tensor to the tensor with transported scalar.
+The displayed map is the coequalizer projection from the unbalanced tensor, so
+this statement includes all local pure-tensor formulas on a sheaf site.
+Source: Stacks 03EK
+(blueprint: def-pur-completed-coefficient-presentation-transport).
+
+Proof: write the tensor projection as the scalar action on the tensor unit.
+Linearity of the comparison transports that action along the coefficient
+isomorphism. Its tensor-unit equation then gives the target projection. -/
+theorem purCondensedOrdinaryScalarModel_tensor (M : Mod C R) :
+    Mod.extendπ f M ≫ ((purCondensedOrdinaryScalarModel a b f g sq).hom.app M).hom =
+      b.hom ▷ M.X ≫ Mod.extendπ g ((Mod.comap (inv a.hom)).obj M) := by
+  let k := (purCondensedOrdinaryScalarModel a b f g sq).hom.app M
+  have hk := Mod.act_hom k
+  change ((inv b.hom) ▷ (Mod.extendScalarsObj f M).X ≫
+      Mod.act (Mod.extendScalarsObj f M).X) ≫ k.hom =
+    S' ◁ k.hom ≫ Mod.act ((Mod.extendScalars g).obj
+      ((Mod.comap (inv a.hom)).obj M)).X at hk
+  have h := congrArg (fun t ↦ b.hom ▷ (Mod.extendScalarsObj f M).X ≫ t) hk
+  rw [← Category.assoc, ← Category.assoc, ← comp_whiskerRight, IsIso.hom_inv_id,
+    id_whiskerRight, Category.id_comp] at h
+  rw [← Mod.whiskerLeft_extendUnitHom_smul' f M, Category.assoc, h,
+    ← whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
+    purCondensedOrdinaryScalarModel_unit a b f g sq M]
+  change S ◁ Mod.extendUnitHom g ((Mod.comap (inv a.hom)).obj M) ≫
+    b.hom ▷ (Mod.extendScalarsObj g ((Mod.comap (inv a.hom)).obj M)).X ≫
+    Mod.act (Mod.extendScalarsObj g ((Mod.comap (inv a.hom)).obj M)).X =
+    b.hom ▷ ((Mod.comap (inv a.hom)).obj M).X ≫
+    Mod.extendπ g ((Mod.comap (inv a.hom)).obj M)
+  rw [whisker_exchange_assoc, Mod.whiskerLeft_extendUnitHom_smul']
+
 private theorem derivedSquare_factors
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -547,6 +726,187 @@ private theorem derivedSquare_factors
     Functor.mapHomologicalComplexCompIso_inv_app_f, NatTrans.mapHomologicalComplex_app_f,
     Iso.refl_inv, NatTrans.id_app]
   exact (Category.comp_id _).symm
+
+/-- Termwise transport of the uniquely normalized tensor comparison.
+Source: Stacks 06YY
+(blueprint: def-pur-completed-coefficient-presentation-transport). -/
+def purCondensedScalarModelComplexIso :
+    (Mod.extendScalars f).mapHomologicalComplex (.up ℤ) ⋙
+        (Mod.comap (inv b.hom)).mapHomologicalComplex (.up ℤ) ≅
+      (Mod.comap (inv a.hom)).mapHomologicalComplex (.up ℤ) ⋙
+        (Mod.extendScalars g).mapHomologicalComplex (.up ℤ) :=
+  Functor.mapHomologicalComplexCompIso (purCondensedOrdinaryScalarModel a b f g sq) (.up ℤ) ≪≫
+    (Functor.mapHomologicalComplexCompIso
+      (F := Mod.comap (inv a.hom)) (G := Mod.extendScalars g) (Iso.refl _) (.up ℤ)).symm
+
+/-- The derived scalar comparison is uniquely fixed on every complex representative.
+Source: Stacks 06YY; latest blueprint `fix-prop-adjunctions.proof.md`, Step 1.
+(blueprint: def-pur-completed-coefficient-presentation-transport).
+
+Proof: descend the ordinary comparison through the exact functors and their
+localization factors. The composition-factor equations give the formula on
+complexes. Cancel the invertible factors and use natural-transformation
+extensionality for the localization to prove uniqueness. This is the localization
+argument of the previous proof, with coefficient module objects in place of the
+two old presentations. -/
+theorem purCondensedScalarModelExact_existsUnique :
+    ∃! e : (Mod.extendScalars f).mapDerivedCategory ⋙
+        (Mod.comap (inv b.hom)).mapDerivedCategory ≅
+      (Mod.comap (inv a.hom)).mapDerivedCategory ⋙ (Mod.extendScalars g).mapDerivedCategory,
+      ∀ P : CochainComplex (Mod C R) ℤ,
+        e.hom.app (DerivedCategory.Q.obj P) ≫
+          (Mod.extendScalars g).mapDerivedCategory.map
+            ((Mod.comap (inv a.hom)).mapDerivedCategoryFactors.hom.app P) ≫
+          (Mod.extendScalars g).mapDerivedCategoryFactors.hom.app
+            (((Mod.comap (inv a.hom)).mapHomologicalComplex (.up ℤ)).obj P) =
+        (Mod.comap (inv b.hom)).mapDerivedCategory.map
+            ((Mod.extendScalars f).mapDerivedCategoryFactors.hom.app P) ≫
+          (Mod.comap (inv b.hom)).mapDerivedCategoryFactors.hom.app
+            (((Mod.extendScalars f).mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map ((purCondensedScalarModelComplexIso a b f g sq).hom.app P) := by
+  let e := Functor.mapDerivedCategorySquareIso (purCondensedOrdinaryScalarModel a b f g sq)
+  have he (P : CochainComplex (Mod C R) ℤ) :
+      e.hom.app (DerivedCategory.Q.obj P) ≫
+        (Mod.extendScalars g).mapDerivedCategory.map
+          ((Mod.comap (inv a.hom)).mapDerivedCategoryFactors.hom.app P) ≫
+        (Mod.extendScalars g).mapDerivedCategoryFactors.hom.app
+          (((Mod.comap (inv a.hom)).mapHomologicalComplex (.up ℤ)).obj P) =
+      (Mod.comap (inv b.hom)).mapDerivedCategory.map
+          ((Mod.extendScalars f).mapDerivedCategoryFactors.hom.app P) ≫
+        (Mod.comap (inv b.hom)).mapDerivedCategoryFactors.hom.app
+          (((Mod.extendScalars f).mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map ((purCondensedScalarModelComplexIso a b f g sq).hom.app P) := by
+    exact derivedSquare_factors (purCondensedOrdinaryScalarModel a b f g sq) P
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso (Mod C R) (.up ℤ))
+  intro P
+  exact (cancel_mono ((Mod.extendScalars g).mapDerivedCategory.map
+    ((Mod.comap (inv a.hom)).mapDerivedCategoryFactors.hom.app P) ≫
+    (Mod.extendScalars g).mapDerivedCategoryFactors.hom.app
+      (((Mod.comap (inv a.hom)).mapHomologicalComplex (.up ℤ)).obj P))).mp
+        ((he' P).trans (he P).symm)
+
+/-- The derived balanced-tensor comparison between the coefficient presentations.
+Source: Stacks 06YY
+(blueprint: def-pur-completed-coefficient-presentation-transport). -/
+def purCondensedScalarModelExact :
+    (Mod.extendScalars f).mapDerivedCategory ⋙ (Mod.comap (inv b.hom)).mapDerivedCategory ≅
+      (Mod.comap (inv a.hom)).mapDerivedCategory ⋙ (Mod.extendScalars g).mapDerivedCategory :=
+  (purCondensedScalarModelExact_existsUnique a b f g sq).exists.choose
+
+/-- The actual total left-derived tensor comparison, normalized by the universal
+comparison from total derivation to exact localization.
+Source: latest blueprint `def-weil-derived-pullback-tensor-hom`; Stacks 06YY.
+(blueprint: def-pur-completed-coefficient-presentation-transport).
+
+Proof: compose the universal exact/left-derived comparison on the source,
+the normalized exact square, and the inverse universal comparison on the target.
+The inverse laws give the displayed equation. Conversely that equation determines
+every component after cancellation of its final isomorphism. -/
+theorem purCondensedScalarModel_existsUnique :
+    ∃! e : (Mod.extendScalars f).leftDerivedFunctor ⋙
+        (Mod.comap (inv b.hom)).mapDerivedCategory ≅
+      (Mod.comap (inv a.hom)).mapDerivedCategory ⋙ (Mod.extendScalars g).leftDerivedFunctor,
+      ∀ K : DerivedCategory (Mod C R),
+        e.hom.app K ≫
+          (Mod.extendScalars g).leftDerivedFunctorIsoMapDerivedCategory.hom.app
+            ((Mod.comap (inv a.hom)).mapDerivedCategory.obj K) =
+        (Mod.comap (inv b.hom)).mapDerivedCategory.map
+            ((Mod.extendScalars f).leftDerivedFunctorIsoMapDerivedCategory.hom.app K) ≫
+          (purCondensedScalarModelExact a b f g sq).hom.app K := by
+  let e := isoWhiskerRight
+      (Mod.extendScalars f).leftDerivedFunctorIsoMapDerivedCategory
+      (Mod.comap (inv b.hom)).mapDerivedCategory ≪≫
+    purCondensedScalarModelExact a b f g sq ≪≫
+    isoWhiskerLeft (Mod.comap (inv a.hom)).mapDerivedCategory
+      (Mod.extendScalars g).leftDerivedFunctorIsoMapDerivedCategory.symm
+  have he (K : DerivedCategory (Mod C R)) :
+      e.hom.app K ≫
+          (Mod.extendScalars g).leftDerivedFunctorIsoMapDerivedCategory.hom.app
+            ((Mod.comap (inv a.hom)).mapDerivedCategory.obj K) =
+        (Mod.comap (inv b.hom)).mapDerivedCategory.map
+            ((Mod.extendScalars f).leftDerivedFunctorIsoMapDerivedCategory.hom.app K) ≫
+          (purCondensedScalarModelExact a b f g sq).hom.app K := by
+    simp only [e, Iso.trans_hom, isoWhiskerRight_hom, isoWhiskerLeft_hom,
+      NatTrans.comp_app, whiskerRight_app, whiskerLeft_app, Iso.symm_hom,
+      Category.assoc, Iso.inv_hom_id_app]
+    exact (Category.assoc _ _ _).symm.trans (Category.comp_id _)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  exact (cancel_mono
+    ((Mod.extendScalars g).leftDerivedFunctorIsoMapDerivedCategory.hom.app
+      ((Mod.comap (inv a.hom)).mapDerivedCategory.obj K))).mp
+    ((he' K).trans (he K).symm)
+
+/-- The normalized comparison for actual total left-derived scalar extension.
+Source: latest blueprint `def-weil-derived-pullback-tensor-hom`; Stacks 06YY.
+(blueprint: def-pur-completed-coefficient-presentation-transport). -/
+def purCondensedScalarTransportModel :
+    (Mod.extendScalars f).leftDerivedFunctor ⋙ (Mod.comap (inv b.hom)).mapDerivedCategory ≅
+      (Mod.comap (inv a.hom)).mapDerivedCategory ⋙ (Mod.extendScalars g).leftDerivedFunctor :=
+  (purCondensedScalarModel_existsUnique a b f g sq).exists.choose
+
+/-- Change of presentation of a condensed coefficient ring on the actual pro-etale site.
+Source: latest blueprint `fix-prop-adjunctions.proof.md`, Step 1.
+(blueprint: def-pur-completed-coefficient-presentation-transport). -/
+def purCondensedCoefficientModel :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W)) ≌
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ' W)) :=
+  let E := (Mod.comapEquivalenceOfIsIso (coefficientMap e.hom W)).symm
+  letI : E.functor.Additive := inferInstanceAs
+    (Mod.comap (inv (coefficientMap e.hom W))).Additive
+  letI : E.inverse.Additive := inferInstanceAs
+    (Mod.comap (coefficientMap e.hom W)).Additive
+  E.mapDerivedCategory
+
+/-- The coefficient equivalence preserves and reflects the actual bounded
+constructible predicate, with no additional geometric bounds.
+Source: latest blueprint `fix-prop-adjunctions.proof.md`, Step 1.
+(blueprint: def-pur-completed-coefficient-presentation-transport).
+
+Proof: inverse restriction commutes with cohomology, preserves finite presentations
+and their stratifications, and preserves zero objects. Apply the same argument to
+the inverse isomorphism; the restriction round trip identifies the original object. -/
+theorem purCondensedCoefficientModel_bounded_predicate
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W))) :
+    boundedConstructible (condensedRingObj Λ' W)
+        ((purCondensedCoefficientModel W e).functor.obj K) ↔
+      boundedConstructible (condensedRingObj Λ W) K := by
+  exact boundedConstructible_comap_iso_iff (inv (coefficientMap e.hom W)) K
+
+/-- Specialization to a commutative square of actual condensed coefficient rings.
+The coefficient sheaves are literally `p_W^* Lambda`, and the scalar functors are
+the existing total left-derived extensions on their module-object categories.
+Exactness is required only of the two ordinary scalar functors, as for finite-free
+coefficient extensions; there is no boundedness or flatness condition on an input complex.
+Source: latest blueprint `fix-prop-adjunctions.proof.md`, Step 1, and
+`def-weil-derived-pullback-tensor-hom`.
+(blueprint: def-pur-completed-coefficient-presentation-transport). -/
+def purCondensedScalarModel
+    {Γ Γ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Γ] [IsCommMonObj Γ] [MonObj Γ'] [IsCommMonObj Γ']
+    (b : Γ ≅ Γ') [IsMonHom b.hom]
+    (f : Λ ⟶ Γ) (g : Λ' ⟶ Γ') [IsMonHom f] [IsMonHom g]
+    (sq : e.hom ≫ g = f ≫ b.hom)
+    [PreservesFiniteLimits (Mod.extendScalars (coefficientMap f W))]
+    [PreservesFiniteLimits (Mod.extendScalars (coefficientMap g W))] :
+    (Mod.extendScalars (coefficientMap f W)).leftDerivedFunctor ⋙
+        (Mod.comap (inv (coefficientMap b.hom W))).mapDerivedCategory ≅
+      (Mod.comap (inv (coefficientMap e.hom W))).mapDerivedCategory ⋙
+        (Mod.extendScalars (coefficientMap g W)).leftDerivedFunctor :=
+  purCondensedScalarTransportModel (asIso (coefficientMap e.hom W)) (asIso (coefficientMap b.hom W))
+    (coefficientMap f W) (coefficientMap g W) (by
+      simpa only [asIso_hom, coefficientMap, Functor.map_comp] using
+        congrArg (upperStarFromPoint W).map sq)
 
 private theorem scalarExtension_exact (W : Scheme.{u}) :
     PreservesFiniteLimits (pbcExtend (pbcScalarCoefficientMap l E L ι W)) ∧
@@ -651,7 +1011,7 @@ theorem purScalarModel_existsUnique (W : Scheme.{u}) :
     rw [Category.assoc]
     have h := congrArg
       (fun f ↦ H.mapDerivedCategory.map (d.hom.app (DerivedCategory.Q.obj P)) ≫ f)
-      (derivedSquare_factors (purOrdinaryScalarModel l E L ι W) P)
+      (legacyDerivedSquare_factors (purOrdinaryScalarModel l E L ι W) P)
     refine h.trans ?_
     rw [← Category.assoc, ← H.mapDerivedCategory.map_comp, hd]
     rfl

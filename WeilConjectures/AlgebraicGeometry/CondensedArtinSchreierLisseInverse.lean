@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchreierCharacters
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierTraceBridge
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
+public import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchreierTraceTensorInverse
 
 /-! Inverse and inverse-character clauses for the condensed Artin--Schreier sheaf.
 Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md
@@ -31,10 +32,11 @@ set_option maxHeartbeats 5000000 in
 -- The four-way categorical tensor transport needs extra elaboration heartbeats.
 /-- Tensor inverse and inverse-character identifications.
 
-The comparison bridge reduces to the qlbar trace model, where
-`qlbar_artinSchreier_trace_tensor_properties` gives both tensor orders and the
-inverse-character map.  The only postponed input is the bridge itself.
-(blueprint: lem-fd-as-lisse). -/
+Apply lem-fd-as-trace-tensor-inverse to the p-adic algebraic closure coefficient
+ring. Its cardinality is a unit by the constant-ring homomorphism. The first
+conjunct is the tensor inverse; invert the third isomorphism for the requested
+negative-function-to-inverse-character direction.
+(blueprint: lem-fd-as-lisse-inverse). -/
 theorem condensedArtinSchreierSheafOf_inverse
     (k₀ : Type u) [Field k₀] [Fintype k₀] (ℓ : ℕ) [Fact ℓ.Prime]
     [Fact (ringChar k₀ ≠ ℓ)] (X₀ : Scheme.{u})
@@ -52,22 +54,16 @@ theorem condensedArtinSchreierSheafOf_inverse
       condensedArtinSchreierSheafOf
         (Profinite.padicAlgClRingObj ℓ) k₀ X₀ ψ⁻¹ f) := by
   classical
-  letI : Fact (ringChar k₀).Prime := ⟨CharP.char_is_prime k₀ (ringChar k₀)⟩
-  obtain ⟨Ψ, a, hΨ, hψ', hcmp, hcmpinv⟩ :=
-    condensedArtinSchreier_trace_bridge k₀ ℓ X₀ ψ hψ
-  obtain ⟨⟨eadd⟩, ⟨einv⟩, ⟨einv'⟩, ⟨echar⟩⟩ :=
-    AlgebraicGeometry.ArtinSchreierTrace.qlbar_artinSchreier_trace_tensor_properties (ringChar k₀) ℓ
-      (Fact.out : ringChar k₀ ≠ ℓ) k₀ Ψ hΨ X₀
-      (scalar k₀ X₀ (a : k₀) * f) (scalar k₀ X₀ (a : k₀) * (-f))
-  obtain ⟨ef⟩ := hcmp f
-  obtain ⟨eneg⟩ := hcmp (-f)
-  obtain ⟨einvψ⟩ := hcmpinv f
-  have hneg : scalar k₀ X₀ (a : k₀) * (-f) =
-      -(scalar k₀ X₀ (a : k₀) * f) := by
-    rw [mul_neg]
-  let enegTrace := eqToIso (congrArg
-    (fun z ↦ qlbarTraceSheafOf (ringChar k₀) ℓ k₀ Ψ X₀ z) hneg)
-  refine ⟨⟨tensorIso ef eneg ≪≫ tensorIso (Iso.refl _) enegTrace ≪≫ einv⟩, ?_⟩
-  exact ⟨eneg ≪≫ enegTrace ≪≫ echar.symm ≪≫ einvψ.symm⟩
+  have hq : IsUnit (Fintype.card k₀ : MonObj.Γ
+      (Profinite.padicAlgClRingObj.{u} ℓ)) := by
+    have hq0 : IsUnit (Fintype.card k₀ : PadicAlgCl ℓ) := by
+      apply isUnit_iff_ne_zero.mpr
+      exact_mod_cast (Fintype.card_ne_zero : Fintype.card k₀ ≠ 0)
+    simpa only [map_natCast] using
+      (Profinite.PadicAlgCl.constRingHom ℓ).isUnit_map hq0
+  obtain ⟨hinv, _, ⟨hchar⟩⟩ :=
+    AlgebraicGeometry.ArtinSchreierTrace.condensedArtinSchreier_tensor_inverse_generic
+      (Profinite.padicAlgClRingObj ℓ) k₀ ψ hψ hq X₀ f
+  exact ⟨hinv, ⟨hchar.symm⟩⟩
 
 end AlgebraicGeometry.ProEtale
