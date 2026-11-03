@@ -43,6 +43,31 @@ attribute [instance] Setup.baseField Setup.baseFintype Setup.closureField
   Setup.closureAlgebra Setup.closure Setup.l_prime Setup.coefficientField
   Setup.coefficientAlgebra Setup.coefficientClosure
 
+/-- The field and coefficient choices of the chapter, with a plain field embedding into `ℂ`.
+There is no continuity or surjectivity requirement on this embedding.
+Source: blueprint main-20261015, d-real-setup, first paragraph (blueprint: d-real-setup). -/
+structure Setup where
+  p : ℕ
+  p_prime : p.Prime
+  a : ℕ
+  a_pos : 1 ≤ a
+  k₀ : Type u
+  [baseField : Field k₀]
+  [baseFintype : Fintype k₀]
+  card_eq : Fintype.card k₀ = p ^ a
+  k : Type u
+  [closureField : Field k]
+  [closureAlgebra : Algebra k₀ k]
+  [closure : IsAlgClosure k₀ k]
+  l : ℕ
+  [l_prime : Fact l.Prime]
+  l_ne_p : l ≠ p
+  Qbar : Type v
+  [coefficientField : Field Qbar]
+  [coefficientAlgebra : Algebra ℚ_[l] Qbar]
+  [coefficientClosure : IsAlgClosure ℚ_[l] Qbar]
+  iota : Qbar →+* ℂ
+
 /-- The fixed cardinality `q = p^a`.
 Source: blueprint main-20261015, d-real-setup, first paragraph (blueprint: d-real-setup). -/
 abbrev Setup.q (D : Setup.{u, v}) : ℕ := D.p ^ D.a
