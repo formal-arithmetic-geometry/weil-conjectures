@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
 import all WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
-import WeilConjectures.SmoothPurity.Rational.RationalPullbackTensorAssociatorNaturality
+import WeilConjectures.SmoothPurity.Rational.RationalAssociatorScalarExtensionSquare
 
 /-! # Triangle identity for common-stage tensor
 
