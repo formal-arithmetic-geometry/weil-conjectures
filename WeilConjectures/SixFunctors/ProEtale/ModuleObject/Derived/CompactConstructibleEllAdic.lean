@@ -589,6 +589,14 @@ import WeilConjectures.AlgebraicGeometry.Condensed.CondensedFiniteModelProofAPIS
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteCoefficientLocalization
 import WeilConjectures.AlgebraicGeometry.CondensedConstructibleOpenClosedImages
 import WeilConjectures.AlgebraicGeometry.CondensedStratumModelInductionStepEmpty
+public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
+public import WeilConjectures.AlgebraicGeometry.SixFunctors.QcqsIntegralFiniteModelCompleteness
+public import WeilConjectures.CategoryTheory.Integral.IntegralStratumFiniteCdReductions
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
+public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteConstantModelStrataGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteConstantModelsCommonStratification
 
 /-!
 # Compactness of constructible sheaves with `ℓ`-adic coefficients
@@ -834,9 +842,9 @@ private theorem ellAdicHeartOfCoefficientIso
     constructor
     · intro hM
       apply constructible_of_iso ((Mod.comapEquivalenceOfIsIso φ).unitIso.app M).symm
-      exact constructible_comap (inv φ) hM
+      exact _root_.constructible_comap (inv φ) hM
     · intro hM
-      exact constructible_comap φ hM
+      exact _root_.constructible_comap φ hM
   have hprop : QF.ind.inverseImage G = QE.ind := by
     rw [← ObjectProperty.ind_inverseImage_eq_of_isEquivalence QF G]
     exact congrArg ObjectProperty.ind hbase

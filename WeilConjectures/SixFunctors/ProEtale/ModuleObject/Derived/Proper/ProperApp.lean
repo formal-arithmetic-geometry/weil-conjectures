@@ -15,6 +15,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.Conde
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralReductionConservative
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralExchangeReduction
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousExchangeIntegralModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedQbarExchangeEquality
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
 
 @[expose] public section
 
@@ -77,8 +79,8 @@ theorem isIso_boundedConstructibleBaseChange_continuousMap_app [IsProper f]
 
 /-- Pointwise proper base change for the condensed algebraic-closure coefficient.
 
-Source: the finite-coefficient realization, filtered two-colimit, and proper exchange
-compatibility in the proof of `nt-target-proetale-qbar`
+Source: blueprint det-thm-sfb-proper-base-change-rational, proofs of (1) and (3), algebraic-closure
+scalar transport, with object descent from sk-thm-sfb-qlbar-two-colimit (2)
 (blueprint: new-proper-qbar-basechange-app).
 For every bounded constructible object, descend to a finite coefficient stage, apply finite-stage
 proper base change, and transport the inverse through coefficient-change comparisons and the
@@ -95,27 +97,40 @@ theorem isIso_boundedConstructibleBaseChange_padicAlgCl_app [IsProper f]
   let : TopologicalSpace.NoetherianSpace X := by infer_instance
   obtain ⟨E, K₀, ⟨e⟩⟩ :=
     AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj X ℓ K
-  let csq : AlgebraicGeometry.ChosenCartesianSquare g' f' f g :=
-    { toCommSq := sq.toCommSq
-      isoPullback := sq.isoPullback
-      hom_fst := sq.isoPullback_hom_fst
-      hom_snd := sq.isoPullback_hom_snd }
-  have hcompat := constructibleToQbar_baseChange_compatibility ℓ k E f g f' g' csq
+  have : IsProper f' := by
+    rw [← sq.isoPullback_hom_snd]
+    infer_instance
+  have hpush : IsIso (constructibleToQbarPushHom ℓ k E f K₀) := by
+    obtain ⟨N, hN⟩ := K₀.property.1.1
+    have : K₀.obj.IsGE N := hN
+    have h := isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE
+      ℓ f E K₀.obj N
+    exact (ObjectProperty.isIso_hom_iff _).mp h
+  let K₁ := (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
+    (g'.asOver (Spec (.of k)))).obj K₀
+  have hpush' : IsIso (constructibleToQbarPushHom ℓ k E f' K₁) := by
+    obtain ⟨N, hN⟩ := K₁.property.1.1
+    have : K₁.obj.IsGE N := hN
+    have h := isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE
+      ℓ f' E K₁.obj N
+    exact (ObjectProperty.isIso_hom_iff _).mp h
   have hfinite := isIso_boundedConstructibleBaseChange_continuousMap_app
     ℓ E k sq K₀
-  have hsource : IsIso (constructibleToQbarSourceHom ℓ k E f g K₀) :=
-    (hcompat.2.2 K₀).1
-  have htarget : IsIso (constructibleToQbarTargetHom ℓ k E f' g' K₀) :=
-    (hcompat.2.2 K₀).2.1
-  let : IsIso (constructibleToQbarSourceHom ℓ k E f g K₀ ≫
+  have hsource : IsIso (constructibleToQbarSourceHom ℓ k E f g K₀) := by
+    dsimp [constructibleToQbarSourceHom]
+    infer_instance
+  have htarget : IsIso (constructibleToQbarTargetHom ℓ k E f' g' K₀) := by
+    dsimp [constructibleToQbarTargetHom]
+    infer_instance
+  have : IsIso (constructibleToQbarSourceHom ℓ k E f g K₀ ≫
       (boundedConstructibleBaseChange ℓ (sq.toCommSq.asOver (Spec (.of k)))).app
         ((AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl X ℓ E).obj K₀)) := by
-    rw [(hcompat.2.2 K₀).2.2]
+    rw [constructibleToQbar_exchange_equality ℓ k E f g f' g' sq.toCommSq K₀]
     infer_instance
-  have hcomp : IsIso ((boundedConstructibleBaseChange ℓ (sq.toCommSq.asOver (Spec (.of k)))).app
-        ((AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl X ℓ E).obj K₀)) :=
-    IsIso.of_isIso_comp_left (constructibleToQbarSourceHom ℓ k E f g K₀) _
-  exact (NatTrans.isIso_app_iff_of_iso
-    (boundedConstructibleBaseChange ℓ (sq.toCommSq.asOver (Spec (.of k)))) e).1 hcomp
+  apply (NatTrans.isIso_app_iff_of_iso
+    (boundedConstructibleBaseChange ℓ (sq.toCommSq.asOver (Spec (.of k)))) e).1
+  change IsIso ((boundedConstructibleBaseChange ℓ (sq.toCommSq.asOver (Spec (.of k)))).app
+    ((AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl X ℓ E).obj K₀))
+  exact IsIso.of_isIso_comp_left (constructibleToQbarSourceHom ℓ k E f g K₀) _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

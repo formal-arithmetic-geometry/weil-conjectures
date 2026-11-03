@@ -101,6 +101,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSurjectiveTowerDer
 import all Mathlib.Algebra.Category.ModuleCat.Products
 import all WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 public import WeilConjectures.Algebra.Homology.ExactProductsRoosComparison
+public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-! # The Roos fibre computes total derived inverse limit when products are exact
 
@@ -125,6 +126,74 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 variable [HasDerivedCategory.{w} B]
 
+private theorem cocone_lift_quasiIso
+    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
+    (S : ShortComplex (CochainComplex C ℤ)) (hS : S.ShortExact)
+    (h : CochainComplex.HomComplex.δ (-1) 0
+        (0 : CochainComplex.HomComplex.Cochain S.X₁ S.X₃ (-1)) +
+      CochainComplex.HomComplex.Cochain.ofHom (S.f ≫ S.g) = 0) :
+    QuasiIso (CochainComplex.mappingCocone.lift S.g S.f 0 h) := by
+  have hf (p : ℤ) : Epi (S.g.f p) := by
+    have := hS.epi_g
+    infer_instance
+  obtain ⟨κ, hκ, hqκ, _⟩ :=
+    CochainComplex.exists_kernel_to_shifted_mappingCone_of_degreewise_epi S.g hf
+  let e := hS.fIsKernel.conePointUniqueUpToIso (kernelIsKernel S.g)
+  have he : e.hom ≫ kernel.ι S.g = S.f :=
+    hS.fIsKernel.conePointUniqueUpToIso_hom_comp (kernelIsKernel S.g)
+      WalkingParallelPair.zero
+  have heq : CochainComplex.mappingCocone.lift S.g S.f 0 h = e.hom ≫ κ := by
+    ext p
+    apply (cancel_mono
+      ((CochainComplex.mappingCone S.g).shiftFunctorObjXIso (-1) p (p - 1)
+        (by omega)).hom).mp
+    apply HomologicalComplex.homotopyCofiber.ext_to_X S.g (p - 1) p
+      (by change p - 1 + 1 = p; omega)
+    · simp only [Category.assoc, HomologicalComplex.comp_f, (hκ p).2]
+      rw [show (e.hom).f p ≫ (kernel.ι S.g).f p = S.f.f p from
+        congrArg (fun f ↦ f.f p) he]
+      simp only [Int.reduceNeg, CochainComplex.mappingCocone.lift,
+        CochainComplex.mappingCocone.liftCocycle, CochainComplex.mappingCocone.liftCochain,
+        CochainComplex.mappingCone.liftCochain,
+        CochainComplex.HomComplex.Cocycle.ofHom_coe, CochainComplex.mappingCone.inl,
+        CochainComplex.mappingCone.inr, CochainComplex.HomComplex.Cochain.zero_comp,
+        add_zero, CochainComplex.HomComplex.Cocycle.homOf_f,
+        CochainComplex.HomComplex.Cochain.rightShift_v (n := -1)
+          _ _ _ _ p _ _ (p - 1) (by omega),
+        CochainComplex.HomComplex.Cochain.zero_cochain_comp_v,
+        CochainComplex.HomComplex.Cochain.ofHom_v, CochainComplex.HomComplex.Cochain.mk_v,
+        CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl,
+        Iso.refl_inv, Category.assoc, Iso.refl_hom]
+      erw [Category.id_comp, Category.id_comp]
+      change S.f.f p ≫ HomologicalComplex.homotopyCofiber.inlX S.g p (p - 1) _ ≫
+        HomologicalComplex.homotopyCofiber.fstX S.g (p - 1) p _ = S.f.f p
+      rw [HomologicalComplex.homotopyCofiber.inlX_fstX, Category.comp_id]
+    · simp only [Category.assoc, HomologicalComplex.comp_f, (hκ p).1,
+        comp_zero]
+      simp only [Int.reduceNeg, CochainComplex.mappingCocone.lift,
+        CochainComplex.mappingCocone.liftCocycle, CochainComplex.mappingCocone.liftCochain,
+        CochainComplex.mappingCone.liftCochain,
+        CochainComplex.HomComplex.Cocycle.ofHom_coe, CochainComplex.mappingCone.inl,
+        CochainComplex.mappingCone.inr, CochainComplex.HomComplex.Cochain.zero_comp,
+        add_zero, CochainComplex.HomComplex.Cocycle.homOf_f,
+        CochainComplex.HomComplex.Cochain.rightShift_v (n := -1)
+          _ _ _ _ p _ _ (p - 1) (by omega),
+        CochainComplex.HomComplex.Cochain.zero_cochain_comp_v,
+        CochainComplex.HomComplex.Cochain.ofHom_v, CochainComplex.HomComplex.Cochain.mk_v,
+        CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl,
+        Iso.refl_inv, Category.assoc, Iso.refl_hom]
+      erw [Category.id_comp, Category.id_comp]
+      change S.f.f p ≫ HomologicalComplex.homotopyCofiber.inlX S.g p (p - 1) _ ≫
+        HomologicalComplex.homotopyCofiber.sndX S.g (p - 1) = 0
+      rw [HomologicalComplex.homotopyCofiber.inlX_sndX, comp_zero]
+  rw [heq]
+  have := hqκ
+  infer_instance
+
+-- Main importers that `import all` this module still call the helper by its former
+-- `ProEtaleMilnorEpimorphic` name (CoefficientSequenceSectionsLimit, ExactProductTowerLimitMate);
+-- keep that name reachable until their interface-repository adaptations are ported.
+
 private theorem comparison_quasiIso (I : CochainComplex (ℕᵒᵖ ⥤ B) ℤ)
     [∀ p, Injective (I.X p)] : QuasiIso (comparison.app I) := by
   obtain ⟨h, hS⟩ := complexRoos_shortExact I
@@ -139,7 +208,7 @@ private theorem comparison_quasiIso (I : CochainComplex (ℕᵒᵖ ⥤ B) ℤ)
         inv_hom_id := by simp } (by change 𝟙 _ ≫ inclusion.app I = inclusion.app I ≫ 𝟙 _; simp) (by
         change 𝟙 _ ≫ (-difference.app I) = difference.app I ≫ (-𝟙 _)
         simp only [Category.id_comp, Preadditive.comp_neg, Category.comp_id])
-  exact AlgebraicGeometry.ProEtale.cocone_lift_quasiIso S hs (comparison_condition I)
+  exact cocone_lift_quasiIso S hs (comparison_condition I)
 
 section QuasiIsoHelpers
 
