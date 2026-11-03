@@ -9,6 +9,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarPullbackTensorC
 import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientLeftUnitCoherence
 import WeilConjectures.CategoryTheory.SmoothPurity.CompositeLeftUnitCoherence
 import WeilConjectures.CategoryTheory.Tensor.TensorIsoUnitCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 
 /-! # The coefficient unit is preserved by the normalized scalar/pullback square -/
 @[expose] public noncomputable section

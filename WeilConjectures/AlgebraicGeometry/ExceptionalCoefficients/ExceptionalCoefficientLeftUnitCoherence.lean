@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientMaps
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 import WeilConjectures.CategoryTheory.Scalar.ScalarLeftUnitTransport
 import all WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientMaps
 
