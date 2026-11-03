@@ -140,7 +140,20 @@ not keep track of the branch. Along a chain of branch-adjacent points choose aff
 neighbourhoods, refine them by henselizations of affine weakly contractible covers
 (these are closed-lift tests), and lift the arrows from `V` through the resulting finite
 diagram. The covers of `V` needed for these lifts split on a clopen neighbourhood of `x`
-because `V` is weakly contractible. -/
+because `V` is weakly contractible.
+
+Warning: this statement, and with it `proper_closed_lift_local_chains`, is false as stated.
+Edges preserve the class of a geometric specialization of `y` into the closed fibre only modulo
+*finite* zigzags of specializations, and Stein connectedness gives connectedness, not finite
+zigzags. Counterexample: `D = Spec ℂ[[t]]`, `E = D(t)`, `W = D`, and `B` the projective closure
+of `y² = x³ + x² + t`, whose special fibre is a nodal cubic with `π₁ = Ẑ` (the `n`-gon covers).
+Let `Ω` be a separable closure of the function field and `Ỹ` the normalization of `B` in `Ω`.
+Over the node `p` choose points `q₁, q₂` of `Ỹ` whose node indices in `Ẑ` differ by an element
+of `Ẑ` not in `ℤ`; no finite zigzag in the closed fibre of `Ỹ` joins them. Take the test
+`U = Spec O^{sh}_{B,p}`, `t = s = (U ⟶ P)`, `V = Spec Ω` and `g = (a₁, a₂)`, where `aᵢ` factors
+through `Spec O_{Ỹ,qᵢ}`. Every edge preserves the zigzag class, in the closed fibre of `Ỹ`, of
+the normalization in `Ω` of the closure of the image point. So no chain joins the two vertices
+on the one-point space `V`, nor on any cover. -/
 theorem proper_closed_lift_local_chains_nhds
     {B D E : Scheme.{u}} (p : B ⟶ D) (i : E ⟶ D)
     [IsProper p] [IsOpenImmersion i] [QuasiCompact i]
