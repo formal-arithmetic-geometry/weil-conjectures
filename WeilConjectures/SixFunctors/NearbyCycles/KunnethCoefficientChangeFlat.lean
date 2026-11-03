@@ -46,6 +46,14 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+/- The statements below elaborate many derived functors and derived tensor products of module
+objects, each of which needs the instances `PreservesColimit (Discrete.functor _) (tensorLeft _)`
+of the module objects. These come from their monoidal closed structure: trying first to create the
+colimits, and postponing the instance problems of the implicit categories more than once, take
+about a third of the elaboration time of this file without changing the elaborated terms. -/
+attribute [-instance] preservesColimit_of_createsColimit_and_hasColimit
+set_option maxSynthPendingDepth 1
+
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
@@ -172,7 +180,7 @@ theorem Hom.extendScalars_map_pullbackExchange_app_of_flat (φ : M.Hom N f f')
     ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ M.j)
       (derivedUpperStarLowerStarAdjunction Λ' M.j) (derivedPullIso a M.j).inv).natTrans)
     hi hβ hε (φ.pullbackExchange Λ) rfl (φ.pullbackExchange Λ') rfl A
-  rw [extendScalarsComparisonOfFlat, extendScalarsComparisonOfFlat]
+  unfold extendScalarsComparisonOfFlat
   convert key using 2 <;> rfl
 
 set_option maxHeartbeats 1000000 in

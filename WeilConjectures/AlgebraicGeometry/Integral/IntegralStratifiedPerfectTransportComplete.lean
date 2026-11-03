@@ -131,12 +131,12 @@ abbrev AdicCoefficientDatum.transportBack :
 
 /-- Restriction along a level isomorphism is an equivalence. (auxiliary; not a blueprint node). -/
 instance (n : ℕ) : (pbcDerivedRestrict (d.levelIso d' φ hφ T n).hom).IsEquivalence :=
-  (pbcDerivedRestrictEquivalence (d.levelIso d' φ hφ T n)).isEquivalence_functor
+  (pbcDerivedRestrictIsoEquivalence (d.levelIso d' φ hφ T n)).isEquivalence_functor
 
 /-- Restriction along the completed isomorphism is an equivalence.
 (auxiliary; not a blueprint node). -/
 instance : (d.transportBack d' φ hφ T).IsEquivalence :=
-  (pbcDerivedRestrictEquivalence (d.completionIso d' φ hφ T)).isEquivalence_functor
+  (pbcDerivedRestrictIsoEquivalence (d.completionIso d' φ hφ T)).isEquivalence_functor
 
 /-- The level isomorphisms commute with the quotient maps. (auxiliary; not a blueprint node). -/
 theorem AdicCoefficientDatum.levelIso_quotient (n : ℕ) :
@@ -328,7 +328,7 @@ theorem AdicCoefficientDatum.transport_intrinsicallyComplete (K : PbcCompletedDe
   let Ψ := d.transportBack d' φ hφ T
   let K' := (d.transportDerived d' φ hφ T).obj K
   let K₀ := Ψ.obj K'
-  let r := (pbcDerivedRestrictEquivalence (d.completionIso d' φ hφ T)).counitIso.app K
+  let r := (pbcDerivedRestrictIsoEquivalence (d.completionIso d' φ hφ T)).counitIso.app K
   have hK₀ : PbcIsIntrinsicallyComplete T d K₀ := complete_of_iso' d r.symm hK
   let := WeilConjectures.IntegralCoefficientPresentation.derived_products T
     (pbcAdicCompletion T d)
@@ -348,7 +348,7 @@ theorem AdicCoefficientDatum.transport_intrinsicallyComplete (K : PbcCompletedDe
     (d.levelRestrictIso d' φ hφ T n) (d.levelExtendIso d' φ hφ T n) K'
   let F := (pbcRestrict (d.completionIso d' φ hφ T).hom).mapDerivedCategory
   have : F.IsEquivalence :=
-    (pbcDerivedRestrictEquivalence (d.completionIso d' φ hφ T)).isEquivalence_functor
+    (pbcDerivedRestrictIsoEquivalence (d.completionIso d' φ hφ T)).isEquivalence_functor
   obtain ⟨p, δ, h, -⟩ := reflectNormalizedRoos F
     (V := fun n ↦ (pbcCompletedReduction T d' n ⋙
       pbcDerivedRestrict (pbcAdicProjection T d' n)).obj K')

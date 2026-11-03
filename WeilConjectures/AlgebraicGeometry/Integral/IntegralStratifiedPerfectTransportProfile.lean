@@ -60,7 +60,7 @@ def pbcDerivedRestrictIdIso {T : Scheme.{u}}
 
 /-- Derived restriction along a ring sheaf isomorphism is an equivalence.
 (auxiliary; not a blueprint node). -/
-def pbcDerivedRestrictEquivalence {T : Scheme.{u}}
+def pbcDerivedRestrictIsoEquivalence {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (e : R ≅ S) :
     DerivedCategory (pbcModules T S) ≌ DerivedCategory (pbcModules T R) :=
   CategoryTheory.Equivalence.mk (pbcDerivedRestrict e.hom) (pbcDerivedRestrict e.inv)
@@ -88,10 +88,10 @@ def AdicCoefficientDatum.reductionTransportIso (T : Scheme.{u}) (n : ℕ) :
       pbcCompletedReduction T d n ⋙ pbcDerivedRestrict (d.levelIso d' φ hφ T n).inv :=
   let ρ := d.completionIso d' φ hφ T
   let lv := d.levelIso d' φ hφ T n
-  let adj₁ := (pbcDerivedRestrictEquivalence ρ.symm).toAdjunction.comp
+  let adj₁ := (pbcDerivedRestrictIsoEquivalence ρ.symm).toAdjunction.comp
     (pbcDerivedScalarAdjunction (pbcAdicProjection T d' n))
   let adj₂ := (pbcDerivedScalarAdjunction (pbcAdicProjection T d n)).comp
-    (pbcDerivedRestrictEquivalence lv.symm).toAdjunction
+    (pbcDerivedRestrictIsoEquivalence lv.symm).toAdjunction
   (conjugateIsoEquiv adj₂ adj₁).symm
     (pbcDerivedRestrictComp ρ.hom (pbcAdicProjection T d' n)
         (pbcAdicProjection T d n ≫ lv.hom) (d.completionIso_hom_projection d' φ hφ T n) ≪≫
