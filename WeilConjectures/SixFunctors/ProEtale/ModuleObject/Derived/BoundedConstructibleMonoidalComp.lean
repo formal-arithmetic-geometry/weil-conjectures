@@ -9,7 +9,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 
 /-!
 # The composition isomorphisms of the derived pullbacks of bounded constructible complexes are
@@ -24,9 +23,7 @@ restriction of the corresponding statement on the ambient derived categories
 
 The statements are proved once for a coefficient ring `Λ` that is a variable, and then
 specialised to `ℚ̲̄_ℓ`: unifying them directly at the concrete ring unfolds the restricted
-functors. The braiding statements are in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalCompBraided`,
-which this module imports.
+functors.
 -/
 
 @[expose] public section
