@@ -333,3 +333,102 @@ end WeilConjectures
 namespace WeilConjectures.CondensedCoefficientTransport
 
 end WeilConjectures.CondensedCoefficientTransport
+
+namespace WeilConjectures.CondensedCoefficientTransport
+
+/-- The ordinary section presentation of modules over the pulled-back condensed ring.
+Source: Stacks Tag 00YV; blueprint integral Tate-twist limit.
+(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport). -/
+abbrev purOrdinaryCoefficientModel (W : Scheme.{u}) :=
+  (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology W) (ProEtale.AdicCompletion.ring l E W)).functor
+
+/-- The section equivalence is additive because it preserves finite products.
+Source: Stacks Tag 00YV.
+(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport). -/
+instance purOrdinaryCoefficientModel_additive (W : Scheme.{u}) :
+    (purOrdinaryCoefficientModel l E W).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+/-- The derived section presentation, obtained by exact localization.
+Source: Stacks Tag 00YV and blueprint derived adic completeness.
+(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport). -/
+def purCoefficientModel (W : Scheme.{u}) :=
+  (purOrdinaryCoefficientModel l E W).mapDerivedCategory.asEquivalence
+
+/-- The explicit Roos augmentation after taking ordinary section modules termwise.
+Source: blueprint derived adic completeness, canonical augmentation.
+(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport). -/
+abbrev purSectionAugmentation (W : Scheme.{u})
+    (P : CochainComplex (ProEtale.AdicCompletion.Modules l E W) ℤ) :=
+  ((purOrdinaryCoefficientModel l E W).mapHomologicalComplex (.up ℤ)).map
+    (ProEtale.AdicCompletion.augmentation l E W P)
+
+/-- The section completion map uses the localized termwise augmentation, preceded
+by the representative isomorphism and the exact localization comparison.
+Source: blueprint derived adic completeness, canonical augmentation.
+(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport). -/
+def purSectionCompletionMap (W : Scheme.{u})
+    (K : DerivedCategory (ProEtale.AdicCompletion.Modules l E W))
+    (P : CochainComplex (ProEtale.AdicCompletion.Modules l E W) ℤ)
+    (e : DerivedCategory.Q.obj P ≅ K) :=
+  (purCoefficientModel l E W).functor.map e.inv ≫
+    (purOrdinaryCoefficientModel l E W).mapDerivedCategoryFactors.hom.app P ≫
+      DerivedCategory.Q.map (purSectionAugmentation l E W P)
+
+/-- The actual section augmentation agrees with transport of the actual internal
+augmentation. This is equality of morphisms, before testing their invertibility.
+Source: exact localization naturality; blueprint canonical completion map.
+(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport).
+Proof: the localization factor is natural for the augmentation P -> roos(P).
+Precompose this naturality equation with the mapped representative inverse. -/
+theorem purSectionCompletionMap_eq (W : Scheme.{u})
+    (K : DerivedCategory (ProEtale.AdicCompletion.Modules l E W))
+    (P : CochainComplex (ProEtale.AdicCompletion.Modules l E W) ℤ)
+    (e : DerivedCategory.Q.obj P ≅ K) :
+    purSectionCompletionMap l E W K P e =
+      (purCoefficientModel l E W).functor.map
+        (ProEtale.AdicCompletion.completionMap l E W K P e) ≫
+          (purOrdinaryCoefficientModel l E W).mapDerivedCategoryFactors.hom.app
+            (ProEtale.AdicCompletion.roos l E W P) := by
+  dsimp only [purSectionCompletionMap, ProEtale.AdicCompletion.completionMap,
+    purCoefficientModel, Functor.asEquivalence]
+  rw [Functor.map_comp, Category.assoc]
+  congr 1
+  exact ((purOrdinaryCoefficientModel l E W).mapDerivedCategoryFactors.hom.naturality
+    (ProEtale.AdicCompletion.augmentation l E W P)).symm
+
+/-- Completeness is equivalent to invertibility of the same canonical completion
+map in the exact section presentation. A K-flat representative may be chosen
+arbitrarily; there is no boundedness, constructibility or finiteness assumption.
+Source: blueprint derived adic completeness and integral Tate-twist limit.
+(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport).
+
+Proof: representative independence identifies completeness with invertibility of
+completionMap. Apply the exact section equivalence to that very morphism. A functor
+preserves inverses, and its fully faithful inverse reflects invertibility. This
+reuses the reflection step of the previous coefficient-transport proof without
+introducing a second coefficient ring or altering the augmentation. -/
+theorem purDetailedTransport_complete_iff (W : Scheme.{u})
+    (K : DerivedCategory (ProEtale.AdicCompletion.Modules l E W))
+    (P : CochainComplex (ProEtale.AdicCompletion.Modules l E W) ℤ)
+    (hP : (HomologicalComplex.quasiIso
+      (ProEtale.AdicCompletion.Modules l E W) (.up ℤ)).kFlat P)
+    (e : DerivedCategory.Q.obj P ≅ K) :
+    ProEtale.IsDerivedComplete l E W K ↔ IsIso (purSectionCompletionMap l E W K P e) := by
+  rw [ProEtale.AdicCompletion.isDerivedComplete_iff l E W K P hP e,
+    purSectionCompletionMap_eq]
+  constructor
+  · intro h
+    let := h
+    infer_instance
+  · intro h
+    let := h
+    have : IsIso ((purCoefficientModel l E W).functor.map
+        (ProEtale.AdicCompletion.completionMap l E W K P e)) :=
+      IsIso.of_isIso_comp_right _
+        ((purOrdinaryCoefficientModel l E W).mapDerivedCategoryFactors.hom.app
+          (ProEtale.AdicCompletion.roos l E W P))
+    exact isIso_of_reflects_iso _ (purCoefficientModel l E W).functor
+
+end WeilConjectures.CondensedCoefficientTransport
