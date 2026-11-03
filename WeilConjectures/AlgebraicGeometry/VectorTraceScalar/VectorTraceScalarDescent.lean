@@ -121,8 +121,9 @@ private theorem projective_splitting_square (N : ℕ) (hN : 0 < N) (φ : A →+*
 private theorem projective_trace_square (N : ℕ) (hN : 0 < N) (φ : A →+* B)
     (hA : (N : A) = 0) (hB : (N : B) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
-    projective φ N hN hA hB S hS ≫ projectiveLineTrace N hN B hB S hS =
-      (scalarExtension φ S).map (projectiveLineTrace N hN A hA S hS) ≫ unit φ S := by
+    projective φ N hN hA hB S hS ≫ (projectiveLineTraceDatum N hN B hB S hS).trace =
+      (scalarExtension φ S).map ((projectiveLineTraceDatum N hN A hA S hS).trace) ≫
+        unit φ S := by
   exact trace_square (scalarExtension φ S)
     (projectiveLineTraceDatum N hN A hA S hS).decomposition
     (projectiveLineTraceDatum N hN B hB S hS).decomposition

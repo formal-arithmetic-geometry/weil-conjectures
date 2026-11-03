@@ -520,7 +520,7 @@ def integration : (Etale.affineTraceLineLeft A T).obj (line A N hA T) ⟶
   (Etale.ordinaryFinitePushforward A (ProjectiveLine T ↘ T)).map
     ((Etale.affineTraceOpenAdjunction A T).counit.app
       ((Etale.ordinaryFiniteLine A N hA (ProjectiveLine T))⟦(2 : ℤ)⟧)) ≫
-    Etale.projectiveLineTrace N hN A hA T hT
+    (Etale.projectiveLineTraceDatum N hN A hA T hT).trace
 
 set_option allowUnsafeReducibility true in
 attribute [local implicit_reducible] right

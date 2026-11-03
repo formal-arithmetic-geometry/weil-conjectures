@@ -303,7 +303,8 @@ private theorem integration_line_expansion
     (B : Scheme.{u}) [IsNoetherian B] (hN : 0 < N) (hB : IsUnit (N : Γ(B, ⊤))) :
     integration A N hA B hN hB =
       (Etale.ordinaryFinitePushforward A (ProjectiveLine B ↘ B)).map
-        (open_line_restriction A N hA B) ≫ Etale.projectiveLineTrace N hN A hA B hB := by
+        (open_line_restriction A N hA B) ≫
+          (Etale.projectiveLineTraceDatum N hN A hA B hB).trace := by
   unfold integration open_line_restriction
   rfl
 
