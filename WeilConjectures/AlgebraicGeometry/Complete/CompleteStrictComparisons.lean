@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchange
 public import WeilConjectures.CategoryTheory.Adjunction.ProperOpenTransport
 public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
 public import WeilConjectures.AlgebraicGeometry.StrictTower.ScalarRestrictionOpenSupport
+public import WeilConjectures.AlgebraicGeometry.Complete.CompleteStrictPullComposition
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 import all WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ScalarRestrictionOpenSupport
@@ -97,6 +98,30 @@ theorem Functor.map_comp_eq_of_comp {C D : Type*} [Category C] [Category D] (F :
     Category.assoc, ha, F.map_comp, F.map_id, Category.comp_id, ← Category.assoc, hs]
   simp
 
+
+/-- Morphism algebra combining the reduction and restriction composition coherences. -/
+theorem Functor.strictPull_comp_algebra {T S S' : Type*} [Category T] [Category S]
+    [Category S'] (F : T ⥤ S) (G : S' ⥤ S)
+    {a₀ a₁ a₂ a₃ b : T} {c : S} {e₁ e₂ e₃ : S'}
+    {pc : a₀ ⟶ a₁} {rfgH : b ⟶ a₀} {rfgI : a₀ ⟶ b} {rfH : a₂ ⟶ a₁} {rfI : a₁ ⟶ a₂}
+    {tH : a₃ ⟶ a₂} {tI : a₂ ⟶ a₃} {D : b ⟶ a₃}
+    {εf₁ : F.obj a₂ ⟶ G.obj e₁} {εf₂ : F.obj a₃ ⟶ G.obj e₂} {rg : e₁ ⟶ e₂} {εg : e₂ ⟶ e₃}
+    {εfg : F.obj b ⟶ c} {gC : c ⟶ G.obj e₃}
+    (hfg : rfgI ≫ rfgH = 𝟙 a₀) (hf : rfH ≫ rfI = 𝟙 a₂) (ht : tH ≫ tI = 𝟙 a₃)
+    (hA : rfgH ≫ pc = D ≫ tH ≫ rfH)
+    (nat : F.map tI ≫ εf₂ = εf₁ ≫ G.map rg)
+    (hB : F.map D ≫ εf₂ ≫ G.map εg = εfg ≫ gC) :
+    F.map pc ≫ (F.map rfI ≫ εf₁) ≫ G.map (rg ≫ εg) = (F.map rfgI ≫ εfg) ≫ gC := by
+  have h1 : pc ≫ rfI = rfgI ≫ D ≫ tH := by
+    calc pc ≫ rfI = (rfgI ≫ rfgH) ≫ pc ≫ rfI := by rw [hfg, Category.id_comp]
+      _ = rfgI ≫ (rfgH ≫ pc) ≫ rfI := by simp only [Category.assoc]
+      _ = rfgI ≫ D ≫ tH := by rw [hA]; simp only [Category.assoc, hf, Category.comp_id]
+  have h2 : F.map tH ≫ εf₁ ≫ G.map rg = εf₂ := by
+    rw [← nat, ← F.map_comp_assoc, ht, F.map_id, Category.id_comp]
+  simp only [Category.assoc]
+  rw [← F.map_comp_assoc, h1]
+  simp only [F.map_comp, G.map_comp, Category.assoc]
+  rw [reassoc_of% h2, hB]
 end CategoryTheory
 
 namespace CategoryTheory.ProperOpenTransport
@@ -241,6 +266,16 @@ def cbcStrictPull {U V : Scheme.{t}} (f : U ⟶ V) :
     Functor.isoWhiskerLeft (completedReductionTower V d) (exchangeResPull d f) ≪≫
     (Functor.associator _ _ _).symm
 
+
+theorem cbcStrictPull_hom_app {U V : Scheme.{t}} (f : U ⟶ V) (M : d.derived V) :
+    (cbcStrictPull d f).hom.app M =
+      (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso f).inv.app M) ≫
+        (exchangeResPull d f).hom.app ((completedReductionTower V d).obj M) := by
+  simp only [cbcStrictPull, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+    Functor.associator_inv_app, Functor.associator_hom_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Category.id_comp, Category.comp_id]
+  erw [Category.id_comp]
 /-- Strict reduction commutes with inverse image compatibly with composition: the
 comparison for a composite is the composite of the comparisons, up to the completed and
 strict inverse-image compositors.
@@ -251,7 +286,16 @@ theorem cbcStrictPull_comp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) (M :
           (ProEtale.StrictTower.G A f).map ((cbcStrictPull d g).hom.app M) =
       (cbcStrictPull d (f ≫ g)).hom.app M ≫
         (ProEtale.StrictTower.gComp A f g).hom.app ((cbcStrictReduction d Z).obj M) := by
-  sorry
+  obtain ⟨κ, hκ₁, hκ₂⟩ := d.pullComp_eq_triangle f g
+  have hA := reductionTowerPullbackIso_comp d f g κ hκ₁ M
+  have hB := exchangeResPull_comp d f g κ hκ₂ ((completedReductionTower Z d).obj M)
+  have nat := (exchangeResPull d f).hom.naturality ((d.reductionTowerPullbackIso g).inv.app M)
+  rw [cbcStrictPull_hom_app, cbcStrictPull_hom_app, cbcStrictPull_hom_app,
+    cbcStrictReduction_map]
+  exact Functor.strictPull_comp_algebra (exchangeTowerRes d X)
+    (ProEtale.StrictTower.G A f) (Iso.inv_hom_id_app _ _) (Iso.hom_inv_id_app _ _)
+    (by rw [← Functor.map_comp, Iso.hom_inv_id_app]; erw [CategoryTheory.Functor.map_id]; rfl)
+    hA nat hB
 
 /-- The comparisons for equal morphisms agree up to the equality transports. -/
 theorem cbcStrictPull_eqToHom {X Z : Scheme.{t}} {f₁ f₂ : X ⟶ Z} (e : f₁ = f₂)
