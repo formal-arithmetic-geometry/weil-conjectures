@@ -336,6 +336,54 @@ theorem unboundedOpenCounitSiteTransport (R : Type (u + 1)) [CommRing R]
     erw [E.inv_hom_id_app, Category.comp_id, c.inv_hom_id,
       T.mapDerivedCategory.map_id, Category.comp_id]
 
+/-- The specified canonical restriction comparison, applied degreewise and localized.
+Its sheaf-level input is the recorded pullback comparison in restriction form.
+Source: Stacks Project, Tags 03DI, 03DJ and 09AF
+(blueprint: lem-sp-unbounded-open-counit-site-transport). -/
+noncomputable def unboundedOpenRestrictionComparison (R : Type (u + 1)) [CommRing R]
+    [Finite R] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (Etale.openImmersionRestriction (ModuleCat.{u + 1} R) j).mapDerivedCategory ⋙
+        (comparisonUpperStar (ModuleCat.{u + 1} R) U).mapDerivedCategory ≅
+      (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory ⋙
+        (openImmersionRestriction (ModuleCat.{u + 1} R) j).mapDerivedCategory :=
+  Functor.mapDerivedCategorySquareIso (openComparisonRestrictionIso R j)
+
+-- Identify the specified mate, including both bounded-below inclusion comparisons.
+
+/-- The specified canonical open extension comparison, applied degreewise and localized.
+The composition identifications are the canonical derived-functor identifications.
+Source: Stacks Project, Tags 03DI, 03DJ and 09AF
+(blueprint: lem-sp-unbounded-open-counit-site-transport). -/
+noncomputable def unboundedOpenExtensionComparison (R : Type (u + 1)) [CommRing R]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory ⋙
+        (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory ≅
+      (comparisonUpperStar (ModuleCat.{u + 1} R) U).mapDerivedCategory ⋙
+        (openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory :=
+  Functor.mapDerivedCategorySquareIso
+    (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} R) j)
+
+/-- The actual pro-etale evaluation adjunction on unbounded derived categories. The
+specified sheaf counit evaluates each factorization summand and is zero on an empty sum;
+the exact-adjunction construction localizes this same map.
+Source: Stacks Project, Tags 03DI, 03DJ and 09AF
+(blueprint: lem-sp-unbounded-open-counit-site-transport). -/
+noncomputable def unboundedOpenProEtaleAdjunction (R : Type (u + 1)) [CommRing R]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory ⊣
+      (openImmersionRestriction (ModuleCat.{u + 1} R) j).mapDerivedCategory :=
+  (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} R) j).mapDerivedCategoryAdjunction
+
+/-- The actual etale evaluation adjunction on unbounded derived categories. The existing
+exact-adjunction construction localizes the specified degreewise unit and counit.
+Source: Stacks Project, Tags 03DI, 03DJ and 09AF
+(blueprint: lem-sp-unbounded-open-counit-site-transport). -/
+noncomputable def unboundedOpenEtaleAdjunction (R : Type (u + 1)) [CommRing R]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory ⊣
+      (Etale.openImmersionRestriction (ModuleCat.{u + 1} R) j).mapDerivedCategory :=
+  (Etale.openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} R) j).mapDerivedCategoryAdjunction
+
 private lemma fixedDirectImageComparisonIso_id_hom (R : Type (u + 1)) [CommRing R]
     [Finite R] (X : Scheme.{u})
     (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
@@ -405,53 +453,7 @@ private lemma fixedDirectImageComparisonIso_id_hom (R : Type (u + 1)) [CommRing 
   rw [← hE K]
   erw [← T.mapDerivedCategory.map_comp, Iso.inv_hom_id_app_assoc]
 
-/-- The specified canonical restriction comparison, applied degreewise and localized.
-Its sheaf-level input is the recorded pullback comparison in restriction form.
-Source: Stacks Project, Tags 03DI, 03DJ and 09AF
-(blueprint: lem-sp-unbounded-open-counit-site-transport). -/
-noncomputable def unboundedOpenRestrictionComparison (R : Type (u + 1)) [CommRing R]
-    [Finite R] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (Etale.openImmersionRestriction (ModuleCat.{u + 1} R) j).mapDerivedCategory ⋙
-        (comparisonUpperStar (ModuleCat.{u + 1} R) U).mapDerivedCategory ≅
-      (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory ⋙
-        (openImmersionRestriction (ModuleCat.{u + 1} R) j).mapDerivedCategory :=
-  Functor.mapDerivedCategorySquareIso (openComparisonRestrictionIso R j)
-
 -- Identify the specified mate, including both bounded-below inclusion comparisons.
-
-/-- The specified canonical open extension comparison, applied degreewise and localized.
-The composition identifications are the canonical derived-functor identifications.
-Source: Stacks Project, Tags 03DI, 03DJ and 09AF
-(blueprint: lem-sp-unbounded-open-counit-site-transport). -/
-noncomputable def unboundedOpenExtensionComparison (R : Type (u + 1)) [CommRing R]
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory ⋙
-        (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory ≅
-      (comparisonUpperStar (ModuleCat.{u + 1} R) U).mapDerivedCategory ⋙
-        (openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory :=
-  Functor.mapDerivedCategorySquareIso
-    (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} R) j)
-
-/-- The actual pro-etale evaluation adjunction on unbounded derived categories. The
-specified sheaf counit evaluates each factorization summand and is zero on an empty sum;
-the exact-adjunction construction localizes this same map.
-Source: Stacks Project, Tags 03DI, 03DJ and 09AF
-(blueprint: lem-sp-unbounded-open-counit-site-transport). -/
-noncomputable def unboundedOpenProEtaleAdjunction (R : Type (u + 1)) [CommRing R]
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory ⊣
-      (openImmersionRestriction (ModuleCat.{u + 1} R) j).mapDerivedCategory :=
-  (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} R) j).mapDerivedCategoryAdjunction
-
-/-- The actual etale evaluation adjunction on unbounded derived categories. The existing
-exact-adjunction construction localizes the specified degreewise unit and counit.
-Source: Stacks Project, Tags 03DI, 03DJ and 09AF
-(blueprint: lem-sp-unbounded-open-counit-site-transport). -/
-noncomputable def unboundedOpenEtaleAdjunction (R : Type (u + 1)) [CommRing R]
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory ⊣
-      (Etale.openImmersionRestriction (ModuleCat.{u + 1} R) j).mapDerivedCategory :=
-  (Etale.openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} R) j).mapDerivedCategoryAdjunction
 
 end CategoryTheory.Functor
 

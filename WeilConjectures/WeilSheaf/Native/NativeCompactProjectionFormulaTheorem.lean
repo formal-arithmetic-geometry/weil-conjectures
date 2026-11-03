@@ -20,6 +20,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ModuleObjectProjectionMap
 public import WeilConjectures.WeilSheaf.Native.Proper.NativeProperProjectionModels
 public import WeilConjectures.WeilSheaf.Ordinary.OrdinaryProperProjectionInvertible
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 
 /-! # Compact projection formula theorem
 

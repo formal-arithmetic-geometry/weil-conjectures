@@ -9,6 +9,20 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralComp
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.ExpressionRecursion.IntegralExpressionRecursion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteExpression.NativeIntegralSystemExpressionDomain
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NativeAssemblyCoefficients.ScalarSixCoefficientCore
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Pi.Basic
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionModuleOperationsData
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 
 /-! # Intermediate assembly data for integral realization
 Source: blueprint fix-prop-coherence.
@@ -204,6 +218,44 @@ inverse pullback comparison. No strict-system reconstruction or completion is in
 Source: latest blueprint fix-prop-coherence.proof.md, individual-map coefficient comparisons
 (blueprint: def-sf-integral-realization-assembly-data). -/
 abbrev AmbientModels := ScalarSixPullbackData.{u}
+
+/-- The actual geometric adjunction mate, with its normalization inherited from pullback.
+Source: blueprint fix-prop-coherence, units and counits
+(blueprint: def-sf-integral-realization-assembly-data). -/
+def push {U V : Scheme.{u}} (f : U ⟶ V) :
+    moduleObjectDerivedPushforward Λ.X f ⋙ NativeAssemblyCoefficients.scalarSixChange a V ⟶
+      NativeAssemblyCoefficients.scalarSixChange a U ⋙ moduleObjectDerivedPushforward Γ.X f :=
+  (mateEquiv (derivedUpperStarLowerStarAdjunction Λ.X f)
+    (derivedUpperStarLowerStarAdjunction Γ.X f)
+    (TwoSquare.mk _ _ _ _ (d.pull a f).inv)).natTrans
+
+/-- The specified scalar pullback comparison on the total left derived functors.
+Source: blueprint fix-prop-coherence, adjunction comparison
+(blueprint: def-sf-integral-realization-assembly-data). -/
+def pull {U V : Scheme.{u}} (f : U ⟶ V) :
+    moduleObjectDerivedPullback Λ.X f ⋙ NativeAssemblyCoefficients.scalarSixChange a U ≅
+      NativeAssemblyCoefficients.scalarSixChange a V ⋙ moduleObjectDerivedPullback Γ.X f :=
+  Functor.isoWhiskerRight (upperStar Λ.X f).leftDerivedFunctorIsoMapDerivedCategory
+      (NativeAssemblyCoefficients.scalarSixChange a U) ≪≫ d.theta a f ≪≫
+    Functor.isoWhiskerLeft (NativeAssemblyCoefficients.scalarSixChange a V)
+      (upperStar Γ.X f).leftDerivedFunctorIsoMapDerivedCategory.symm
+
+/-- The normalization fixes all ambient comparison data uniquely.
+Source: latest blueprint fix-prop-coherence, comparisons of the individual maps
+(blueprint: def-sf-integral-realization-assembly-data).
+Proof: the two forward pullback maps are equal to the prescribed scalar-adjunction mate.
+An isomorphism is determined by its forward map, so function extensionality identifies
+the pullback comparison families. The remaining fields are proofs and agree by proof
+irrelevance. This is uniqueness only, with no existence choice. -/
+theorem eq (d d' : AmbientModels.{u}) : d = d' := by
+  have h : @ScalarSixPullbackData.theta d = @ScalarSixPullbackData.theta d' := by
+    funext Λ Γ a U V f
+    apply Iso.ext
+    exact (d.thetaNormalization a f).trans (d'.thetaNormalization a f).symm
+  cases d
+  cases d'
+  cases h
+  rfl
 
 /-- Change each input by the ordinary derived coefficient functor.
 Source: blueprint fix-prop-coherence, substitution of coefficient comparisons
@@ -568,44 +620,6 @@ theorem RecursionLaws.toDomainNatTrans_app (d : AmbientModels.{u})
     {W : Over B} (e : FiniteExpression B I X W)
     (K : (e.domain Λ.X).FullSubcategory) :
     (h.toDomainNatTrans d a e).app K = comparison e K.obj := by
-  rfl
-
-/-- The actual geometric adjunction mate, with its normalization inherited from pullback.
-Source: blueprint fix-prop-coherence, units and counits
-(blueprint: def-sf-integral-realization-assembly-data). -/
-def push {U V : Scheme.{u}} (f : U ⟶ V) :
-    moduleObjectDerivedPushforward Λ.X f ⋙ NativeAssemblyCoefficients.scalarSixChange a V ⟶
-      NativeAssemblyCoefficients.scalarSixChange a U ⋙ moduleObjectDerivedPushforward Γ.X f :=
-  (mateEquiv (derivedUpperStarLowerStarAdjunction Λ.X f)
-    (derivedUpperStarLowerStarAdjunction Γ.X f)
-    (TwoSquare.mk _ _ _ _ (d.pull a f).inv)).natTrans
-
-/-- The specified scalar pullback comparison on the total left derived functors.
-Source: blueprint fix-prop-coherence, adjunction comparison
-(blueprint: def-sf-integral-realization-assembly-data). -/
-def pull {U V : Scheme.{u}} (f : U ⟶ V) :
-    moduleObjectDerivedPullback Λ.X f ⋙ NativeAssemblyCoefficients.scalarSixChange a U ≅
-      NativeAssemblyCoefficients.scalarSixChange a V ⋙ moduleObjectDerivedPullback Γ.X f :=
-  Functor.isoWhiskerRight (upperStar Λ.X f).leftDerivedFunctorIsoMapDerivedCategory
-      (NativeAssemblyCoefficients.scalarSixChange a U) ≪≫ d.theta a f ≪≫
-    Functor.isoWhiskerLeft (NativeAssemblyCoefficients.scalarSixChange a V)
-      (upperStar Γ.X f).leftDerivedFunctorIsoMapDerivedCategory.symm
-
-/-- The normalization fixes all ambient comparison data uniquely.
-Source: latest blueprint fix-prop-coherence, comparisons of the individual maps
-(blueprint: def-sf-integral-realization-assembly-data).
-Proof: the two forward pullback maps are equal to the prescribed scalar-adjunction mate.
-An isomorphism is determined by its forward map, so function extensionality identifies
-the pullback comparison families. The remaining fields are proofs and agree by proof
-irrelevance. This is uniqueness only, with no existence choice. -/
-theorem eq (d d' : AmbientModels.{u}) : d = d' := by
-  have h : @ScalarSixPullbackData.theta d = @ScalarSixPullbackData.theta d' := by
-    funext Λ Γ a U V f
-    apply Iso.ext
-    exact (d.thetaNormalization a f).trans (d'.thetaNormalization a f).symm
-  cases d
-  cases d'
-  cases h
   rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing

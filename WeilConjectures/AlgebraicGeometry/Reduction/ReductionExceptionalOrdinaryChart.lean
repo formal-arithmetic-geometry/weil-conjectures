@@ -13,6 +13,10 @@ import all WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactScalarCoh
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartSumNormalization
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartCompactTowerScalar
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryChartCompactScalar
+public import WeilConjectures.AlgebraicGeometry.Affine.Space.AffineSpaceTopTrace
+public import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportNormalization
+public import WeilConjectures.AlgebraicGeometry.Etale.EtaleAmbientAdjointLocality
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-! # The ordinary chart transpose calculation -/
 
@@ -747,7 +751,8 @@ theorem reductionExceptional_ordinary_chart
     (r ≫ (Etale.affineTraceRight B N hB Y d ⋙ Etale.ordinaryFinitePullback B e).map a)
     hqi hb hr'
   simpa only [aA, aB, hA', hB', lA, lB, qi, r,
-    reductionEtaleChartRightIso, Category.assoc] using h.symm
+    reductionEtaleChartRightIso, OrdinaryChart.rightIso,
+    Category.assoc] using h.symm
 
 attribute [local irreducible] ProEtale.reductionEtaleChartAdjunction
   ProEtale.reductionEtaleChartLeftIso ProEtale.reductionEtaleChartRightIso
