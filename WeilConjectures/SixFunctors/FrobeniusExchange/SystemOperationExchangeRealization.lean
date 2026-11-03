@@ -1317,39 +1317,12 @@ theorem compactRealization_exists (c : Compactification f) :
       rw [compactFiniteEvaluation_hom_app]
       exact_by_kernel hγ K n)
 
-/-- There is a unique projection-normalized identification of the recorded Rf_!
-with the simultaneous system realization, on the entire constructible category.
-Source: Bhatt--Scholze 6.7.6--6.7.7; Stacks 0941
-(blueprint: def-weil-system-operation-exchange-realization).
-Proof: compare the completed proper/open functor with its single coherent quotient
-system. Exact open extension gives the open scalar mate; proper direct image gives
-its right-adjunction mate and commutes with the total derived limit. Evaluate the
-comparison using the actual ordinary section equality and open units defining
-compactFiniteEvaluation. Its projection is exactly the finite scalar mate in
-SfQcqsCompactSupportRealizationSpec. Compose this comparison with the inverse of
-sfQcqsCompactSupportRealization to obtain τ. Its projection equation is the one
-above, since sfCompactSupportFiniteReductionIso is the chosen Roos projection
-adjunct. The same simultaneous resolution identifies both signed Roos coordinates;
-the normalized limit comparison and naturality on roofs determine τ uniquely.
-No isomorphism is chosen from agreement of bare reduction isomorphism classes. -/
-theorem compactRealization_existsUnique (c : Compactification f) :
-    ∃! τ : sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
-        (sfIntegralConstructible l E Y).ι ≅
-      (sfIntegralConstructible l E X).ι ⋙ compactImage l E f c,
-      CompactRealizationSpec l E K₀ hl f c τ := by
-  obtain ⟨τ, hτ⟩ := compactRealization_exists l E K₀ hl f c
-  refine ⟨τ, hτ, fun τ' hτ' ↦ ?_⟩
-  -- Open: `hτ` and `hτ'` only force the finite reductions of `τ'` and `τ` to agree, i.e.
-  -- every component of `τ'.hom - τ.hom` has zero projections to the finite levels of the
-  -- total derived limit. Over an arbitrary field `K₀` such phantom maps need not vanish
-  -- objectwise (the relevant `lim¹` of finite `Ext⁻¹` groups can be nonzero).
-  sorry
-
 /-- Uniqueness of the projection-normalized identification, given that the shifted Hom groups from the recorded Rf_!
 into its finite restricted reductions are finite. Derived completeness of the target holds since it is isomorphic to a
 constructible object. Over a finite field `K₀` the finiteness is
 the finiteness of étale cohomology of constructible complexes (SGA 4½, Th. finitude); over an
-arbitrary field it can fail, which is why `compactRealization_existsUnique` is open.
+arbitrary field it can fail, so no general uniqueness statement is made; `compactRealization`
+takes its witness from `compactRealization_exists`.
 Source: Stacks, Lemma map-into-Rlim
 (blueprint: def-weil-system-operation-exchange-realization).
 Proof: both normalizations give the same reduction of each component, after cancelling the
