@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartTriangulated
 import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.Pullback.PullbackConstantModelConstructible
+import all WeilConjectures.AlgebraicGeometry.Pullback.PullbackConstantModelConstructible
 import WeilConjectures.AlgebraicGeometry.Rational.RationalOpenDirectImageConstructible
 
 /-!
@@ -197,14 +197,14 @@ theorem rationalClosedSupportConstructible
     obtain ⟨hXi, hXt, _⟩ := hXE E
     obtain ⟨hZi, _, _⟩ := hZE E
     have hcoeff : ConstantModelPullbackStatement (Profinite.continuousMapRingObj.{u} E) := by
-      exact pullback_constantModelConstructible (Profinite.padicSubfieldCondensedRing ℓ E)
+      exact constantModelPullback _
     exact constantModel_support_of_localization _ hcoeff i j hij
       (constantModelBoundedConstructible_rational_open_direct_image ℓ k E j).1 K hK
   · intro K hK
     obtain ⟨hXi, hXt, _⟩ := hXbar
     obtain ⟨hZi, _, _⟩ := hZbar
     have hcoeff : ConstantModelPullbackStatement (Profinite.padicAlgClRingObj.{u} ℓ) := by
-      exact pullback_constantModelConstructible (Profinite.padicAlgClCondensedRing ℓ)
+      exact constantModelPullback _
     let E : PadicAlgCl.FiniteIntermediateField ℓ := ⟨⊥, inferInstance⟩
     exact constantModel_support_of_localization _ hcoeff i j hij
       (constantModelBoundedConstructible_rational_open_direct_image ℓ k E j).2 K hK
