@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.KernelPullback
+public import WeilConjectures.TraceFormula.Specialization.BoundedConstructibleNearbyCyclesLaxMonoidal
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
@@ -79,15 +80,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k k' : Type u} [Field k] [Field k'] [Fact
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left}
-
-/-- The lax monoidal structure of nearby cycles on bounded constructible complexes. -/
-@[instance_reducible]
-noncomputable def boundedConstructibleNearbyCyclesLaxMonoidal
-    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ)) :
-    (boundedConstructibleNearbyCycles hP).LaxMonoidal :=
-  @ObjectProperty.laxMonoidalLift _ _ _ _ _ _ (boundedConstructible _) _
-    (boundedConstructible _) _ (M.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
-    (M.nearbyCyclesLaxMonoidal (Profinite.padicAlgClRingObj ℓ)) _
 
 omit [IsSeparated X.hom] [IsSeparated X'.hom] in
 /-- The unit of the lax monoidal structure of nearby cycles on bounded constructible complexes is

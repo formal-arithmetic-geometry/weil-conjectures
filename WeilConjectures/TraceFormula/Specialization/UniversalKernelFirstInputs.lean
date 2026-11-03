@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesBraided
+public import WeilConjectures.TraceFormula.Specialization.KernelPullbackDeformation
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 public import WeilConjectures.Tactic.TransportExact
 

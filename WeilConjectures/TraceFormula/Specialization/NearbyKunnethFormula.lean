@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
