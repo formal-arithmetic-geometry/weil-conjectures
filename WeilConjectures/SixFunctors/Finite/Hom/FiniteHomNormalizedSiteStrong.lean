@@ -34,7 +34,14 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 private theorem smallCache (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{0} _
 attribute [local instance] smallCache
+private theorem abSheafifyCache (X : Scheme.{u}) :
+    HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+  integralCoefficientAbSheafify.{u, u} X
 attribute [local instance] abSheafifyCache
+private theorem abBijectiveCache (X : Scheme.{u}) :
+    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+  integralCoefficientAbLocallyBijective.{u, u} X
+
 attribute [local instance] abBijectiveCache
 @[instance_reducible] private def targetDerivedCache (X : Scheme.{u}) (A : Type u) [CommRing A] :
     HasDerivedCategory.{u + 2}
@@ -46,6 +53,11 @@ attribute [local instance] targetDerivedCache
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
   inferInstance
 attribute [local instance] sourceDerivedCache
+@[instance_reducible] private def nativeTarget (X : Scheme.{u}) (A : Type u) [CommRing A] :
+    MonoidalCategory (DerivedCategory.{u + 2}
+      (Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A))) :=
+  RingedDerivedNative.monoidal.{u + 1, u, u, u + 2} (ProEt.topology X)
+    (Scheme.proEtaleConstantRing X A)
 attribute [local instance] nativeTarget
 private theorem targetGrothCache (X : Scheme.{u}) (A : Type u) [CommRing A] :
     IsGrothendieckAbelian.{u + 1}
@@ -61,6 +73,10 @@ private theorem targetFlatCache (X : Scheme.{u}) (A : Type u) [CommRing A] :
       (Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)) :=
   ConstantScalarRestriction.ringFlatResolutions (ProEt.topology X) (ULift.{u + 1, u} A)
 attribute [local instance] targetFlatCache
+private theorem sourceGrothCache (X : Scheme.{u}) (A : Type u) [CommRing A] :
+    IsGrothendieckAbelian.{u + 1}
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
+  ConstantScalarRestriction.fixedGrothendieck X.smallEtaleTopology (ULift.{u + 1, u} A)
 attribute [local instance] sourceGrothCache
 @[instance_reducible] private def sourceClosedCache (X : Scheme.{u}) (A : Type u) [CommRing A] :
     MonoidalClosed (Sheaf X.smallEtaleTopology
@@ -103,8 +119,14 @@ private theorem gradedRightCache : ∀ (M N P : GradedObject ℤ
     (Scheme.proEtaleConstantRing X A)
 attribute [local instance 10000] gradedCache gradedFourCache gradedLeftCache gradedRightCache
 omit [Finite A] in
+private theorem tensorLeftCache (M : Scheme.proEtaleRingModules X
+    (Scheme.proEtaleConstantRing X A)) : PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+  SheafOfModules.cochainTensorLeftPreservesColimits (Scheme.proEtaleConstantRing X A) M
 attribute [local instance] tensorLeftCache
 omit [Finite A] in
+private theorem tensorRightCache (M : Scheme.proEtaleRingModules X
+    (Scheme.proEtaleConstantRing X A)) : PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
+  SheafOfModules.cochainTensorRightPreservesColimits (Scheme.proEtaleConstantRing X A) M
 attribute [local instance] tensorRightCache
 end
 attribute [local instance] gColimits tensorLeftCache tensorRightCache
