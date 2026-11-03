@@ -28,6 +28,60 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
+/-- Maps into a mapping cocone are determined by their `fst` and `snd` coordinates. -/
+private theorem cone_ext
+    {A : Type*} [Category A] [Preadditive A] [HasBinaryBiproducts A]
+    {X Y P : CochainComplex A ℤ} (δ : X ⟶ Y)
+    (f g : P ⟶ CochainComplex.mappingCocone δ)
+    (hf : f ≫ CochainComplex.mappingCocone.fst δ =
+      g ≫ CochainComplex.mappingCocone.fst δ)
+    (hs : ∀ i : ℤ, f.f i ≫ (CochainComplex.mappingCocone.snd δ).v
+      i (i - 1) (by omega) = g.f i ≫ (CochainComplex.mappingCocone.snd δ).v
+      i (i - 1) (by omega)) : f = g := by
+  ext i : 1
+  have hfi := congrArg (fun f ↦ HomologicalComplex.Hom.f f i) hf
+  dsimp only [HomologicalComplex.comp_f] at hfi
+  calc
+    _ = _ ≫ 𝟙 _ := (Category.comp_id _).symm
+    _ = _ ≫ ((CochainComplex.mappingCocone.fst δ).f i ≫
+        (CochainComplex.mappingCocone.inl δ).v i i (add_zero _) +
+        (CochainComplex.mappingCocone.snd δ).v i (i - 1) (by omega) ≫
+        (CochainComplex.mappingCocone.inr δ).1.v (i - 1) i (by omega)) := by
+      rw [CochainComplex.mappingCocone.id_X]
+    _ = _ := by
+      rw [Preadditive.comp_add, ← Category.assoc, ← Category.assoc, hs i, hfi]
+      conv_rhs => rw [← Category.comp_id (g.f i),
+        ← CochainComplex.mappingCocone.id_X δ i (i - 1) (by omega)]
+      rw [Preadditive.comp_add, ← Category.assoc, ← Category.assoc]
+
+private theorem cast_map
+    {A : Type*} [Category A] {P Q : A ⥤ AddCommGrpCat.{u + 1}} (e : P = Q)
+    {U V : A} (f : U ⟶ V) (x : Q.obj U) :
+    P.map f (cast (congrArg (fun (P : A ⥤ AddCommGrpCat.{u + 1}) ↦ ↥(P.obj U)) e).symm x) =
+      cast (congrArg (fun (P : A ⥤ AddCommGrpCat.{u + 1}) ↦ ↥(P.obj V)) e).symm (Q.map f x) := by
+  subst e
+  rfl
+
+/-- Restricted sections are compatible with restriction maps. -/
+private theorem restrictedSection_naturality
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) (M : coefficientSequenceModules l E X) (n : ℕ)
+    {U V : X.ProEtᵒᵖ} (f : U ⟶ V) (x : M.val.obj (op (n, U.unop))) :
+    (((coefficientSequenceRestriction l E X).obj M).obj (op n)).val.map f
+        (integralComparisonRestrictedSection l E X M n U x) =
+      integralComparisonRestrictedSection l E X M n V
+        (M.val.map (Prod.mkHom (𝟙 n) f.unop).op x) := by
+  have e : (((coefficientSequenceRestriction l E X).obj M).obj (op n)).val.presheaf =
+      (Prod.sectR n X.ProEt).op ⋙ M.val.presheaf := by
+    change (((coefficientSequenceRestriction_exists l E X).exists.choose.obj M).obj
+      (op n)).val.presheaf = _
+    rw [(coefficientSequenceRestriction_exists l E X).exists.choose_spec.1 M n]
+    rfl
+  exact cast_map e f x
+
+set_option maxHeartbeats 400000 in
+-- The sectionwise chase through the tower unit and q needs more than the default.
 /-- The defining Roos lift of the inverse-image comparison is the limit lift of the
 inverse image of a strict quotient presentation, followed by the whole-tower tensor
 unit and the normalized pullback tower identification.
@@ -85,6 +139,106 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
           (NatTrans.mapHomologicalComplex (integralTowerInverseImageUnit l E h).hom
             (.up ℤ)).app C) ≫
         integralComparisonLimitToRoos l E Z _ ≫ integralOperationsRoosFunctor.map q.hom := by
-  sorry
+  let T := ((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).obj
+    (((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ)).obj C)
+  let A := ((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).obj P
+  let c := (NatTrans.mapHomologicalComplex
+      (Functor.compConstIso ℕᵒᵖ (inverseImageIntegralModules l E h)).hom (.up ℤ)).app P ≫
+    ((integralTowerInverseImage l E h).mapHomologicalComplex (.up ℤ)).map b ≫
+    (NatTrans.mapHomologicalComplex (integralTowerInverseImageUnit l E h).hom
+      (.up ℤ)).app C
+  let adj := (constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l E Z)).mapHomologicalComplex
+    (.up ℤ)
+  let a := adj.homEquiv A T c
+  have ha (n : ℕ) (i : ℤ) :
+      a.f i ≫ limit.π (T.X i) (op n) = (c.f i).app (op n) := by
+    have h := (adj.homEquiv A T).symm_apply_apply c
+    rw [Adjunction.homEquiv_counit] at h
+    exact congrArg (fun f ↦ (f.f i).app (op n)) h
+  have hi := (integralComparisonLimitToRoos_existsUnique l E Z T).exists.choose_spec
+  change (∀ n, integralComparisonLimitToRoos l E Z T ≫ _ ≫ _ = _) ∧ _ at hi
+  let δ := scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P)
+  have hfirst : integralOperationsRoosFunctor.map q.hom ≫
+      CochainComplex.mappingCocone.fst δ =
+      CochainComplex.mappingCocone.fst (scalarRoosBoundary T.asFunctor) ≫
+        Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n)) :=
+    (IntegralAmbient.roosMap_coordinates q.hom).1
+  have hi2 (i : ℤ) : (integralComparisonLimitToRoos l E Z T).f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
+        i (i - 1) (by omega) = 0 := hi.2 i (i - 1) (by omega)
+  have hsecond (i : ℤ) : (integralOperationsRoosFunctor.map q.hom).f i ≫
+      (CochainComplex.mappingCocone.snd δ).v i (i - 1) (by omega) =
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
+        i (i - 1) (by omega) ≫ (Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n))).f (i - 1) :=
+    (IntegralAmbient.roosMap_coordinates q.hom).2 i (i - 1) (by omega)
+  change _ = a ≫ integralComparisonLimitToRoos l E Z T ≫
+    integralOperationsRoosFunctor.map q.hom
+  apply cone_ext δ
+  · simp only [Category.assoc]
+    rw [hfirst]
+    unfold inverseImageRoosComparisonComplex
+    rw [CochainComplex.mappingCocone.lift_fst]
+    apply Pi.hom_ext
+    intro n
+    symm
+    calc
+      _ = (a ≫ (NatTrans.mapHomologicalComplex (lim.π (op n))
+            (.up ℤ)).app T) ≫ q.hom.app (op n) := by
+        have hπ : Limits.Pi.map (fun m : ℕ ↦ q.hom.app (op m)) ≫
+            Pi.π (fun m ↦ (integralOperationsPullbackLevel l E h m).obj P) n =
+            Pi.π (fun m ↦ T.asFunctor.obj (op m)) n ≫ q.hom.app (op n) :=
+          Limits.Pi.map_π (f := fun m ↦ T.asFunctor.obj (op m))
+            (fun m ↦ q.hom.app (op m)) n
+        simp only [Category.assoc]
+        rw [hπ]
+        simpa only [Category.assoc] using
+          congrArg (fun z ↦ a ≫ z ≫ q.hom.app (op n)) (hi.1 n)
+      _ = _ := by
+        rw [inverseImageReductionProduct, Pi.lift_π]
+        ext i U x
+        let V := (proEtaleIsoPostcompose h).obj U.unop
+        let t := unrestrictedIntegralTensorSection l E W n (P.X i) (op V) 1 x
+        let y := integralComparisonSequenceSection l E W (C.X i) n (op V)
+          (((κ n).inv.f i).val.app (op V) t)
+        let N := (integralComparisonSequencePullback l E h).obj (C.X i)
+        have hθ := (inverseImageReductionTheta_existsUnique l E h n P).exists.choose_spec
+          i U.unop x
+        have hu := (integralTowerInverseImageUnit_existsUnique l E h).exists.choose_spec
+          (C.X i) n U.unop y
+        have hr := restrictedSection_naturality l E Z N n (proEtaleIsoCommaArrow h U.unop).op
+          (integralComparisonSequenceGenerator l E h (C.X i) n V y)
+        have hn := PresheafOfModules.naturality_apply ((q.hom.app (op n)).f i).val
+          (proEtaleIsoCommaArrow h U.unop).op
+          (integralComparisonRestrictedSection l E Z N n
+            (op ((proEtaleBaseChange h).obj V))
+            (integralComparisonSequenceGenerator l E h (C.X i) n V y))
+        have hk : ((κ n).hom.f i).val.app (op V) (((κ n).inv.f i).val.app (op V) t) = t :=
+          congrArg (fun k ↦ (k.f i).val.app (op V) t) (κ n).inv_hom_id
+        have hbx := hb n i (op V) x
+        have e1 : ((a ≫ (NatTrans.mapHomologicalComplex (lim.π (op n))
+            (.up ℤ)).app T) ≫ q.hom.app (op n)).f i =
+            (c.f i).app (op n) ≫ (q.hom.app (op n)).f i := by
+          rw [HomologicalComplex.comp_f, ← ha]
+          rfl
+        rw [e1]
+        refine Eq.trans ?_ hθ.symm
+        refine Eq.trans ?_ (hn.trans (congrArg _ ((hq n i V y).trans (congrArg _ hk))))
+        exact congrArg (fun z ↦ ((q.hom.app (op n)).f i).val.app U z)
+          ((congrArg (fun z ↦ (((integralTowerInverseImageUnit l E h).hom.app (C.X i)).app
+            (op n)).val.app U z) hbx).trans (hu.trans hr.symm))
+  · intro i
+    calc
+      _ = 0 := by
+        unfold inverseImageRoosComparisonComplex
+        rw [CochainComplex.mappingCocone.lift_f_snd_v]
+        rfl
+      _ = a.f i ≫ ((integralComparisonLimitToRoos l E Z T).f i ≫
+          (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
+            i (i - 1) (by omega)) ≫
+          (Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n))).f (i - 1) := by
+        rw [hi2 i]
+        simp
+      _ = _ := by
+        simp only [HomologicalComplex.comp_f, Category.assoc, hsecond i]
 
 end WeilConjectures
