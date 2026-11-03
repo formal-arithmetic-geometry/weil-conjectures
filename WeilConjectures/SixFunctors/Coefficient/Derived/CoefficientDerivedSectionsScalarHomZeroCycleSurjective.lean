@@ -6,12 +6,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroRepresentativeData
+import all WeilConjectures.SixFunctors.Coefficient.CoefficientHomZeroClass
+import Mathlib.Algebra.Category.Grp.EpiMono
 
 @[expose] public section
 set_option autoImplicit false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
-open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
+open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry SheafOfModules
 namespace WeilConjectures
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -48,6 +50,50 @@ theorem coefficientDerivedSectionsScalarHomZero_cycle_surjective
             (Prod.mkHom (𝟙 (op (DerivedCategory.Q.obj P))) eN.hom))
         (coefficientHomZeroClass.{u, t + 1, t, max (t + 2) (u + 1)} (Scheme.ProEt.topology W)
           (completedIntegralCommRingSheafUnrestricted l E W) P N z) = x := by
-  sorry
+  let J := Scheme.ProEt.topology W
+  let A := completedIntegralCommRingSheafUnrestricted l E W
+  have : IsGrothendieckAbelian.{max u (t + 1)} (scalarReductionSource l E W) :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{t + 1, t, u}
+      J A).1
+  let I := coefficientHomResolution.{u, t + 1, t} J A
+  let H := DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0
+  let Γ := coefficientGlobalSections.{u, t + 1, t} J A
+  let K := coefficientHomSectionComplex.{u, t + 1, t} J A P N
+  let γ := zeroHomSectionsComparisonNatTrans.{u, t + 1, t, max (t + 2) (u + 1)} J A I
+  have hI (L : CochainComplex (scalarReductionSource l E W) ℤ) :
+      (I.obj L).IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj _ L
+  have : IsIso (γ.app (op P, N)) :=
+    zeroHomSectionsComparison_isIso.{u, t + 1, t, max (t + 2) (u + 1)} J A I hI P N
+  let c := coefficientHomResolutionIso.{u, t + 1, t, max (t + 2) (u + 1)} J A P N
+  let f := H.map ((coefficientIntegralGlobalHom l E W).map
+    (Prod.mkHom (𝟙 (op (DerivedCategory.Q.obj P))) eN.hom))
+  have : IsIso f := by
+    let e := (Iso.refl (op (DerivedCategory.Q.obj P))).prod eN
+    change IsIso (H.map ((coefficientIntegralGlobalHom l E W).map e.hom))
+    infer_instance
+  have : IsIso (H.map (Γ.map c.inv)) := (H.mapIso (Γ.mapIso c)).isIso_inv
+  have hπ : Epi (K.homologyπ 0) := inferInstance
+  have hγepi : Epi (γ.app (op P, N)) := IsIso.epi_of_iso _
+  have hcepi : Epi (H.map (Γ.map c.inv)) := IsIso.epi_of_iso _
+  have hfepi : Epi f := IsIso.epi_of_iso _
+  let q := K.homologyπ 0 ≫ γ.app (op P, N) ≫ H.map (Γ.map c.inv) ≫ f
+  have : Epi q := epi_comp' hπ (epi_comp' hγepi (epi_comp' hcepi hfepi))
+  obtain ⟨z, hz⟩ := (AddCommGrpCat.epi_iff_surjective q).mp inferInstance x
+  refine ⟨z, ?_⟩
+  have hγ := ConcreteCategory.congr_hom
+    (zeroHomSectionsComparisonNatTrans_app.{u, t + 1, t, max (t + 2) (u + 1)}
+      J A I P N) (K.homologyπ 0 z)
+  have hβ := zeroSectionsHomologyComparisonNatTrans_site_apply.{u, t + 1, t,
+    max (t + 2) (u + 1)} J A (homComplex (R := A) P (I.obj N))
+      (K.homologyπ 0 z)
+  have hclass : coefficientHomZeroClass.{u, t + 1, t, max (t + 2) (u + 1)}
+      J A P N z = H.map (Γ.map c.inv) (γ.app (op P, N) (K.homologyπ 0 z)) := by
+    rw [hγ.trans hβ]
+    simp only [coefficientHomZeroClass, Functor.map_comp, AddCommGrpCat.comp_apply]
+    rfl
+  change f (coefficientHomZeroClass.{u, t + 1, t, max (t + 2) (u + 1)} J A P N z) = x
+  rw [hclass]
+  exact hz
 
 end WeilConjectures
