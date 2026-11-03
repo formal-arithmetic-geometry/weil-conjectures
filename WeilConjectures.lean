@@ -3721,6 +3721,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredCo
 public import WeilConjectures.AlgebraicGeometry.Curve.ExistsAmpleOfDimLEOne
 public import WeilConjectures.AlgebraicGeometry.Curve.ExistsAmpleOfReducedDimLEOne
 public import WeilConjectures.AlgebraicGeometry.Curve.ExtensionInvariance
+public import WeilConjectures.AlgebraicGeometry.Curve.FLCFiber
 public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
 public import WeilConjectures.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer
 public import WeilConjectures.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore
@@ -5583,6 +5584,8 @@ public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 public import WeilConjectures.AlgebraicGeometry.FiberDegreeOfSplitCofan
 public import WeilConjectures.AlgebraicGeometry.FiberDimension
 public import WeilConjectures.AlgebraicGeometry.Fibre.FibreDimensionAfterBaseChange
+public import WeilConjectures.AlgebraicGeometry.Fibre.FibreFunctorBasepointTransportData
+public import WeilConjectures.AlgebraicGeometry.Fibre.FibreFunctorLinearTransport
 public import WeilConjectures.AlgebraicGeometry.FibreCartierLocal
 public import WeilConjectures.AlgebraicGeometry.FibreCohenMacaulayLocus
 public import WeilConjectures.AlgebraicGeometry.FibreDimension
@@ -6958,6 +6961,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieIdentityTangentEq
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieLocalDimension
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.MixedTranslationCoefficients
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.RealSheaves.Condensed.FilteredRepresentationLibrary
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Reduced
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.TwoParameterTranslationAction
@@ -16444,6 +16448,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion
 public import WeilConjectures.Mathlib.Algebra.Lie.Engel
+public import WeilConjectures.Mathlib.Algebra.Lie.KillingFormOfTrivialRadical
 public import WeilConjectures.Mathlib.Algebra.Lie.LieTheorem
 public import WeilConjectures.Mathlib.Algebra.Lie.Radical
 public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Defs
