@@ -19,6 +19,20 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Constant
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.RepresentationTheory.CompositionSeries
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
+public import Mathlib.Algebra.Field.ULift
+public import Mathlib.Analysis.SpecialFunctions.Log.Base
+public import Mathlib.CategoryTheory.Abelian.Projective.Basic
+public import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
+public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
+public import WeilConjectures.AlgebraicGeometry.Closed.ClosedPointField
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
+public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
+public import WeilConjectures.CategoryTheory.Monoidal.EndTensorUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedProjective
+public import WeilConjectures.WeilObject.Sheaf.StalkFiniteFree
 
 /-! # Elementary operations on condensed Weil weights
 
@@ -61,7 +75,17 @@ theorem pure_mono (_hl : l ≠ D.p) (iota : PadicAlgCl l →+* ℂ)
     (_hN : IsConstantModelConstructible (Profinite.padicAlgClRingObj l)
       (D.geometricFiber X₀).left N.carrier) (w : ℝ)
     (h : Pure D l X₀ M iota w) : Pure D l X₀ N iota w := by
-  sorry
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  intro x i hi α hα
+  let V := nativeWeilFibre D l X₀ (localClosedPoint D X₀ x i hi)
+  have hinj : Function.Injective (V.map f).hom :=
+    (ModuleCat.mono_iff_injective _).mp (inferInstance : Mono (V.map f))
+  apply h x i hi α
+  apply eigenvalue_mem_of_injective (closedOperator D l X₀ N x i hi).hom
+    (closedOperator D l X₀ M x i hi).hom (V.map f).hom hinj _ hα
+  intro v
+  exact (congrArg (fun g ↦ g.hom v)
+    (closedOperator_naturality D l X₀ x i hi f)).symm
 
 /-- Subobjects and quotients retain every mixed upper bound.
 Proof: intersect a mixed filtration with the subobject or take its images in the
@@ -91,7 +115,25 @@ theorem pure_epi (_hl : l ≠ D.p) (iota : PadicAlgCl l →+* ℂ)
     (_hN : IsConstantModelConstructible (Profinite.padicAlgClRingObj l)
       (D.geometricFiber X₀).left N.carrier) (w : ℝ)
     (h : Pure D l X₀ M iota w) : Pure D l X₀ N iota w := by
-  sorry
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  intro x i hi α hα
+  let V := nativeWeilFibre D l X₀ (localClosedPoint D X₀ x i hi)
+  let : FiniteDimensional (ULift.{u + 1} (PadicAlgCl l))
+      (fibre l D M.carrier (localClosedPoint D X₀ x i hi)) :=
+    NativeCondensedModule.constructible_fibre_finiteDimensional D l M.carrier _hM
+      (localClosedPoint D X₀ x i hi)
+  let : FiniteDimensional (ULift.{u + 1} (PadicAlgCl l))
+      (fibre l D N.carrier (localClosedPoint D X₀ x i hi)) :=
+    NativeCondensedModule.constructible_fibre_finiteDimensional D l N.carrier _hN
+      (localClosedPoint D X₀ x i hi)
+  have hsurj : Function.Surjective (V.map f).hom :=
+    (ModuleCat.epi_iff_surjective _).mp (inferInstance : Epi (V.map f))
+  apply h x i hi α
+  apply eigenvalue_mem_of_surjective (closedOperator D l X₀ M x i hi).hom
+    (closedOperator D l X₀ N x i hi).hom (V.map f).hom hsurj _ hα
+  intro v
+  exact (congrArg (fun g ↦ g.hom v)
+    (closedOperator_naturality D l X₀ x i hi f)).symm
 
 /-- Subobjects and quotients retain every mixed upper bound.
 Proof: intersect a mixed filtration with the subobject or take its images in the
@@ -321,7 +363,10 @@ theorem shift_weights (_hl : l ≠ D.p) (iota : PadicAlgCl l →+* ℂ)
     (hK : complexMixedOfWeightsAtMost D l X₀ K iota w) :
     complexMixedOfWeightsAtMost D l X₀
       (shiftComplex D l X₀ K r) iota (w + (r : ℝ)) := by
-  sorry
+  intro n
+  have h := mixed_of_iso D l X₀ (shiftWeilCohomologyIso D l X₀ K r n).symm
+    iota (w + ((r + n : ℤ) : ℝ)) (hK (r + n))
+  simpa only [Int.cast_add, add_assoc] using h
 
 /-- Constant Weil twisting shifts every pure weight.
 Proof: the degree-d local eigenvalue of the constant line is b^d. Tensor
@@ -336,7 +381,9 @@ theorem constant_twist_pure (hl : l ≠ D.p) (iota : PadicAlgCl l →+* ℂ)
     (hM : Pure D l X₀ M.obj iota w) :
     Pure D l X₀ (CondensedRing.ConstantWeil.twist l D X₀ hl b M).obj iota
       (w + AlgebraicGeometry.WeilGroup.frobeniusWeight iota D.q (b : PadicAlgCl l)) := by
-  sorry
+  apply Pure.constantTwist D l hl X₀ M iota w _ hM b
+  simp only [AlgebraicGeometry.WeilGroup.frobeniusWeight, Real.logb, D.card_base]
+  ring
 
 /-- Constant Weil twisting shifts every mixed upper bound.
 Proof: the degree-d local eigenvalue of the constant line is b^d. Tensor

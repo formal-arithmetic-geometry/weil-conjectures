@@ -39,6 +39,23 @@ public import WeilConjectures.RingTheory.ProperBaseChange.NormalRingFieldExtensi
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CurveSupportHeart
 public import WeilConjectures.WeilSheaf.DenseOpen
 public import WeilConjectures.WeilSheaf.RealSheaves.Setup.RealSheavesSetup
+public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.AffineLineConventions.AffineLineConventions
+public import WeilConjectures.AlgebraicGeometry.BaseFieldFiniteCD.FiniteCohomologicalDimensionHypothesis
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstructibleTruncations
+public import WeilConjectures.AlgebraicGeometry.CondensedCurvePerverseStatement.CurveGeometricMiddleSimpleCase
+public import WeilConjectures.AlgebraicGeometry.CondensedCurvePerverseStatement.CurveGeometricPunctualSimpleCase
+public import WeilConjectures.AlgebraicGeometry.CondensedCurvePerverseStatement.CurveWeilMiddleSimpleCase
+public import WeilConjectures.AlgebraicGeometry.CondensedCurvePerverseStatement.CurveWeilPunctualSimpleCase
+public import WeilConjectures.AlgebraicGeometry.CurvePunctual.CurvePunctualSupport
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.SimpleShortExactDichotomy
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedCoefficientUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPerverseSupport
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedSixOperations
 
 /-!
 # Simple perverse sheaves on a smooth curve
@@ -270,7 +287,7 @@ def IsPunctualSimple {k : Type u} [Field k]
     [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
     (P : GeometricPerv ell hk C) : Prop :=
   ∃ (x : C.left), IsClosed ({x} : Set C.left) ∧
-    ∃ (E : CurvePerverseHeartStatement.Modules ell
+    ∃ (E : CondensedCurvePerverse.Modules (Profinite.padicAlgClRingObj ell)
         (Spec (C.left.residueField x)))
       (hE : IsConstructibleModuleObject
         (condensedRingObj (Profinite.padicAlgClRingObj ell)
@@ -292,8 +309,15 @@ def IsMiddleSimple {k : Type u} [Field k]
     (C : Over (Spec (.of k))) [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
     [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
     (P : GeometricPerv ell hk C) : Prop :=
-  CondensedCurvePerverse.IsGeometricSimpleMiddle
-    (Profinite.padicAlgClRingObj ell) C.left P.obj.obj
+  ∃ (U : Scheme.{u}) (j : U ⟶ C.left), IsOpenImmersion j ∧ DenseRange j ∧
+    ∃ (N : CondensedCurvePerverse.Modules (Profinite.padicAlgClRingObj ell) U)
+      (hN : IsLisseCoefficientModule (Profinite.padicAlgClRingObj ell) N),
+      ¬ IsZero N ∧
+      Simple (⟨N, hN⟩ : ObjectProperty.FullSubcategory
+        (IsLisseCoefficientModule (Profinite.padicAlgClRingObj ell))) ∧
+      Nonempty (P.obj.obj ≅
+        ((DerivedCategory.singleFunctor _ 0).obj
+          ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj ell) j).obj N))⟦(1 : ℤ)⟧)
 
 /-- The two geometric alternatives in the classification of simple perverse objects.
 Source: latest blueprint, `prop-a1-curve-perverse-simples.md`, both bullets
@@ -305,24 +329,95 @@ def SimplePerverseKinds {k : Type u} [Field k]
     (P : GeometricPerv ell hk C) : Prop :=
   IsPunctualSimple ell hk C P ∨ IsMiddleSimple ell hk C P
 
-/-- Every simple geometric perverse object is punctual or a shifted ordinary middle extension,
-and every listed object is simple.
-Source: latest blueprint, prop-a1-curve-perverse-simples.md, both bullets and final sentence;
-field scope: thm-a1-curve-perverse-heart, Wei Yang #1441 item 36.
-Proof: Use heart clauses (1)--(5). For a perverse subobject of i_*E, the six-term sequence
-makes H^-1(Q) and H^-1(R) zero; supported subsheaves correspond to submodules of E.
-For P=(j_*N)[1], restrict the six-term sequence to a dense lisse open U' avoiding H^0(Q).
-Dense-open surjectivity preserves irreducibility. In case (a), H^-1(Q)|U'=0, so H^-1(Q)=0.
-The unit H^-1(R) -> j'_*j'^*H^-1(R) is injective since its kernel is punctual. Its
-composite with j_*N is j_* of the lisse unit isomorphism. Thus H^0(Q)=0 and Q=0.
-In case (b), H^-1(Q)|U'=N|U', so H^-1(R) is punctual and zero, giving R=0.
-Conversely, the canonical perverse truncation sequence makes a simple P either G[0]
-with G punctual, or F[1] with F punctual-free. Decomposition of G over its finite
-closed support leaves one irreducible summand. In the other case F -> j_*j^*F is
-monic with punctual cokernel T. Rotation gives 0 -> T[0] -> P -> (j_*N)[1] -> 0,
-so T=0. For a proper nonzero lisse N' in N, form C=coker(j_*N' -> j_*N), remove
-its largest punctual subsheaf C_p, and set F'=ker(j_*N -> C/C_p). The shifted
-sequence has nonzero endpoints restricting to N' and N/N', contradicting simplicity.
+/-- The canonical heart truncation sequence of a simple object has a zero endpoint. -/
+private theorem simple_cohomology_dichotomy
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    (Q : ObjectProperty (DerivedCategory A))
+    (leZero geZero : ObjectProperty Q.FullSubcategory)
+    (P : (leZero ⊓ geZero).FullSubcategory) [Simple P]
+    (S : ShortComplex (leZero ⊓ geZero).FullSubcategory)
+    (hmid : S.X₂ = P) (hS : S.ShortExact)
+    (hB : Nonempty (S.X₁.obj.obj ≅
+      ((DerivedCategory.singleFunctor A 0).obj
+        ((DerivedCategory.homologyFunctor A (-1)).obj P.obj.obj))⟦(1 : ℤ)⟧))
+    (hC : Nonempty (S.X₃.obj.obj ≅ (DerivedCategory.singleFunctor A 0).obj
+      ((DerivedCategory.homologyFunctor A 0).obj P.obj.obj))) :
+    IsZero ((DerivedCategory.homologyFunctor A (-1)).obj P.obj.obj) ∨
+      IsZero ((DerivedCategory.homologyFunctor A 0).obj P.obj.obj) := by
+  obtain ⟨eB⟩ := hB
+  obtain ⟨eC⟩ := hC
+  have : Simple S.X₂ := hmid.symm ▸ inferInstance
+  let I := ObjectProperty.ι (leZero ⊓ geZero) ⋙ ObjectProperty.ι Q
+  obtain hB | hC := hS.isZero_left_or_right
+  · left
+    have hB' := (I.map_isZero hB).of_iso eB.symm
+    have hsingle := IsZero.of_full_of_faithful_of_isZero
+      (shiftFunctor (DerivedCategory A) (1 : ℤ)) _ hB'
+    exact IsZero.of_full_of_faithful_of_isZero (DerivedCategory.singleFunctor A 0) _ hsingle
+  · right
+    exact IsZero.of_full_of_faithful_of_isZero (DerivedCategory.singleFunctor A 0) _
+      ((I.map_isZero hC).of_iso eC.symm)
+
+/-- A punctual presentation has no ordinary cohomology in degree -1. -/
+private theorem punctual_homology_neg_one_zero
+    {k : Type u} [Field k]
+    (hk : Finite k ∨ IsAlgClosed k)
+    (C : Over (Spec (.of k))) [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
+    (P : GeometricPerv ell hk C) (hP : IsPunctualSimple ell hk C P) :
+    IsZero ((DerivedCategory.homologyFunctor _ (-1)).obj P.obj.obj) := by
+  obtain ⟨x, hx, E, hE, hsimple, ⟨e⟩⟩ := hP
+  exact ((DerivedCategory.isGE_iff _ 0).mp inferInstance (-1) (by decide)).of_iso
+    ((DerivedCategory.homologyFunctor _ (-1)).mapIso e)
+
+/-- A shifted ordinary middle-image presentation has no ordinary degree-zero cohomology. -/
+private theorem middle_homology_zero_zero
+    {k : Type u} [Field k]
+    (hk : Finite k ∨ IsAlgClosed k)
+    (C : Over (Spec (.of k))) [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
+    (P : GeometricPerv ell hk C) (hP : IsMiddleSimple ell hk C P) :
+    IsZero ((DerivedCategory.homologyFunctor _ 0).obj P.obj.obj) := by
+  obtain ⟨U, j, hj, hdense, N, hN, hnz, hsimple, ⟨e⟩⟩ := hP
+  let F := (CondensedRing.lowerStar (Profinite.padicAlgClRingObj ell) j).obj N
+  have : ((DerivedCategory.singleFunctor _ 0).obj F)⟦(1 : ℤ)⟧ |>.IsLE (-1) :=
+    DerivedCategory.TStructure.t.isLE_shift _ 0 1 (-1) (by decide)
+  exact ((DerivedCategory.isLE_iff _ (-1)).mp this 0 (by decide)).of_iso
+    ((DerivedCategory.homologyFunctor _ 0).mapIso e)
+
+/-- The ordinary cohomology of a simple support-defined heart object is pure. -/
+private theorem geometric_simple_cohomology_dichotomy
+    {k : Type u} [Field k] [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ ell)]
+    (hk : Finite k ∨ IsAlgClosed k)
+    (C : Over (Spec (.of k))) [LocallyOfFiniteType C.hom] [QuasiCompact C.hom]
+    [IsSeparated C.hom] [Smooth C.hom] (hPure : Scheme.IsPureDimension C.left 1)
+    (P : GeometricPerv ell hk C) [Simple P] :
+    IsZero ((DerivedCategory.homologyFunctor _ (-1)).obj P.obj.obj) ∨
+      IsZero ((DerivedCategory.homologyFunctor _ 0).obj P.obj.obj) := by
+  have h := CondensedRing.curveSupportHeart ell hk C hPure
+  obtain ⟨A, B, S, hA, hP, hB, hS, e₁, e₂, h₁, h₂, hmaps⟩ := h.2.2.2.1 P
+  apply simple_cohomology_dichotomy _ _ _ P S hP hS
+  · simpa only [hA] using h₁
+  · simpa only [hB] using h₂
+
+/-- Every simple geometric perverse object is exactly one of the punctual or
+middle-extension alternatives, and each listed alternative is simple.
+Source: latest blueprint, `prop-a1-curve-perverse-simples.md`, final paragraph.
+Proof: Use heart clauses (1)-(5). Punctual simplicity follows from the six-term
+sequence: H⁻¹Q is zero and H⁻¹R embeds into punctual H⁰Q, hence is zero; the remaining
+subsheaf corresponds to a submodule at x. For a middle extension, restrict the six-term
+sequence to a dense lisse open. The irreducibility dichotomy in
+lem-wf-dense-open-pi1-surjective (4) says the restricted subobject is zero or full.
+In case (a) the restriction unit and its lisse-unit comparison from (3) force Q = 0;
+in case (b) the quotient is punctual and punctual-free, hence R = 0.
+For classification, the canonical truncation sequence forces H⁻¹P = 0 or H⁰P = 0.
+In the first case the finite-support direct sum has exactly one simple summand.
+In the second case the injective unit F → j_*N has punctual cokernel T. Its rotated
+triangle is short exact in the heart by lem-weil-heart-short-exact-triangles (4),
+so simplicity kills T. Finally saturating a proposed nontrivial lisse subobject
+by the maximal punctual subsheaf of its cokernel gives a forbidden short exact
+heart sequence, proving N irreducible. The case lemmas retain precisely these steps.
 (blueprint: prop-a1-curve-perverse-simples). -/
 theorem curve_perverse_simples_statement
     {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
@@ -331,35 +426,40 @@ theorem curve_perverse_simples_statement
     [IsSeparated C.hom] [Smooth C.hom] (_hPure : Scheme.IsPureDimension C.left 1) :
     ∀ P : GeometricPerv ell hk C,
       Simple P ↔ SimplePerverseKinds ell hk C P := by
-  sorry
+  intro P
+  constructor
+  · intro hP
+    have := hP
+    obtain h | h := geometric_simple_cohomology_dichotomy ell hk C _hPure P
+    · exact Or.inl ((geometric_punctual_simple_case ell hk C _hPure P h).mp hP)
+    · exact Or.inr ((geometric_middle_simple_case ell hk C _hPure P h).mp hP)
+  · rintro (hP | hP)
+    · exact (geometric_punctual_simple_case ell hk C _hPure P
+        (punctual_homology_neg_one_zero ell hk C P hP)).mpr hP
+    · exact (geometric_middle_simple_case ell hk C _hPure P
+        (middle_homology_zero_zero ell hk C P hP)).mpr hP
 
-/-- The Weil perverse heart: the full subcategory of Frobenius pairs whose
+/-- The Weil perverse heart: the full subcategory of derived Weil complexes whose
 underlying geometric complexes lie in the support and cosupport classes of
 `thm-a1-curve-perverse-heart`, Weil convention.
 Source: latest blueprint, `prop-a1-curve-perverse-simples.md`, Perv(C) in the Weil case
 (blueprint: prop-a1-curve-perverse-simples). -/
 abbrev WeilPerv (D : WeilConjectures.FiniteFieldDatum.{u})
-    (C₀ : Over (Spec (.of D.k₀))) [Invertible (ell : D.k)]
-    [LocallyOfFiniteType C₀.hom] [QuasiCompact C₀.hom] [IsSeparated C₀.hom] :=
-  ObjectProperty.FullSubcategory
-    (fun K : Endofunctor.IsoAlgebra
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ell)
-        (D.geometricFrobenius C₀).hom).mapDerivedCategory ↦
-      ∃ hK : boundedConstructible
-        (condensedRingObj (Profinite.padicAlgClRingObj ell)
-          (D.geometricFiber C₀).left) K.carrier,
-        CondensedRing.FiniteOrClosedPerverseHeart ell
-          (CurvePerverseHeartStatement.closure_baseField D).1
-          (D.geometricFiber C₀) ⟨K.carrier, hK⟩)
+    (C₀ : Over (Spec (.of D.k₀))) [Fact (ringChar D.k).Prime]
+    [Fact (ringChar D.k ≠ ell)]
+    [LocallyOfFiniteType C₀.hom] [QuasiCompact C₀.hom] [IsSeparated C₀.hom] [Smooth C₀.hom] :=
+  (CondensedRing.CurveWeil.upperZero D ell C₀ ⊓
+    CondensedRing.CurveWeil.lowerZero D ell C₀).FullSubcategory
 
 /-- The punctual Weil alternative, with an irreducible constructible Weil module at a
-closed point and its canonical degree-zero direct image.
+closed point and its canonical degree-zero middle image.
 Source: latest blueprint, `prop-a1-curve-perverse-simples.md`, punctual bullet and
 the Weil convention in `thm-a1-curve-perverse-heart`
 (blueprint: prop-a1-curve-perverse-simples). -/
 def IsWeilPunctualSimple (D : WeilConjectures.FiniteFieldDatum.{u})
-    (C₀ : Over (Spec (.of D.k₀))) [Invertible (ell : D.k)]
-    [LocallyOfFiniteType C₀.hom] [QuasiCompact C₀.hom] [IsSeparated C₀.hom]
+    (C₀ : Over (Spec (.of D.k₀))) [Fact (ringChar D.k).Prime]
+    [Fact (ringChar D.k ≠ ell)]
+    [LocallyOfFiniteType C₀.hom] [QuasiCompact C₀.hom] [IsSeparated C₀.hom] [Smooth C₀.hom]
     (P : WeilPerv ell D C₀) : Prop :=
   ∃ (x : C₀.left) (hx : IsClosed ({x} : Set C₀.left)),
     letI : IsClosedImmersion (C₀.left.fromSpecResidueField x) :=
@@ -376,47 +476,115 @@ def IsWeilPunctualSimple (D : WeilConjectures.FiniteFieldDatum.{u})
           (D.geometricFiber Z₀).left) E.carrier),
       Simple (⟨E, hE⟩ : WeilConjectures.condensedConstructibleWeilSheaves
         (Profinite.padicAlgClRingObj ell) (D.geometricFrobenius Z₀).hom) ∧
-      Nonempty (P.obj ≅
-        (CondensedCurvePerverse.weilPlaced (Profinite.padicAlgClRingObj ell)
-          (D.geometricFrobenius C₀) 0).obj
-            (WeilConjectures.NativeL2.middleWeilImage D ell i₀ E))
+      Nonempty (P.obj.obj ≅
+        (DerivedCategory.singleFunctor _ 0).obj
+          (WeilConjectures.NativeL2.middleWeilImage D ell i₀ E))
 
 /-- A shifted middle extension of a nonzero simple lisse Weil sheaf on a dense open.
 Source: latest blueprint, `prop-a1-curve-perverse-simples.md`, middle-extension bullet
 and the Weil convention in `thm-a1-curve-perverse-heart`
 (blueprint: prop-a1-curve-perverse-simples). -/
 def IsWeilMiddleSimple (D : WeilConjectures.FiniteFieldDatum.{u})
-    (C₀ : Over (Spec (.of D.k₀))) [Invertible (ell : D.k)]
-    [LocallyOfFiniteType C₀.hom] [QuasiCompact C₀.hom] [IsSeparated C₀.hom]
+    (C₀ : Over (Spec (.of D.k₀))) [Fact (ringChar D.k).Prime]
+    [Fact (ringChar D.k ≠ ell)]
+    [LocallyOfFiniteType C₀.hom] [QuasiCompact C₀.hom] [IsSeparated C₀.hom] [Smooth C₀.hom]
     (P : WeilPerv ell D C₀) : Prop :=
-  CondensedCurvePerverse.IsWeilSimpleMiddle D ell C₀ P.obj
+  ∃ U₀ : Over (Spec (.of D.k₀)),
+    Exists fun [_hft : LocallyOfFiniteType U₀.hom] ↦
+      Exists fun [_hqc : QuasiCompact U₀.hom] ↦
+        ∃ (j₀ : U₀ ⟶ C₀), IsOpenImmersion j₀.left ∧ DenseRange j₀.left ∧
+          ∃ (M : WeilConjectures.NativeL2.WeilModule D ell U₀)
+            (hM : IsLisseCoefficientModule (Profinite.padicAlgClRingObj ell) M.carrier),
+            ¬ IsZero M ∧
+            Simple (⟨M, hM⟩ : ObjectProperty.FullSubcategory
+              (fun N : WeilConjectures.NativeL2.WeilModule D ell U₀ ↦
+                IsLisseCoefficientModule (Profinite.padicAlgClRingObj ell) N.carrier)) ∧
+            Nonempty (P.obj.obj ≅
+              ((DerivedCategory.singleFunctor _ 0).obj
+                (WeilConjectures.NativeL2.middleWeilImage D ell j₀ M))⟦(1 : ℤ)⟧)
 
 /-- The two Weil alternatives in the classification.
 Source: latest blueprint, `prop-a1-curve-perverse-simples.md`, both bullets
 (blueprint: prop-a1-curve-perverse-simples). -/
 def WeilSimpleKinds (D : WeilConjectures.FiniteFieldDatum.{u})
-    (C₀ : Over (Spec (.of D.k₀))) [Invertible (ell : D.k)]
-    [LocallyOfFiniteType C₀.hom] [QuasiCompact C₀.hom] [IsSeparated C₀.hom]
+    (C₀ : Over (Spec (.of D.k₀))) [Fact (ringChar D.k).Prime]
+    [Fact (ringChar D.k ≠ ell)]
+    [LocallyOfFiniteType C₀.hom] [QuasiCompact C₀.hom] [IsSeparated C₀.hom] [Smooth C₀.hom]
     (P : WeilPerv ell D C₀) : Prop :=
   IsWeilPunctualSimple ell D C₀ P ∨ IsWeilMiddleSimple ell D C₀ P
+
+/-- A punctual Weil presentation is concentrated in ordinary degree zero. -/
+private theorem weil_punctual_homology_neg_one_zero
+    (D : WeilConjectures.FiniteFieldDatum.{u}) [Fact (ringChar D.k).Prime]
+    [Fact (ringChar D.k ≠ ell)]
+    (C₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType C₀.hom]
+    [QuasiCompact C₀.hom] [IsSeparated C₀.hom] [Smooth C₀.hom]
+    (P : WeilPerv ell D C₀) (hP : IsWeilPunctualSimple ell D C₀ P) :
+    IsZero ((DerivedCategory.homologyFunctor _ (-1)).obj P.obj.obj) := by
+  obtain ⟨x, hx, E, hE, hsimple, ⟨e⟩⟩ := hP
+  exact ((DerivedCategory.isGE_iff _ 0).mp inferInstance (-1) (by decide)).of_iso
+    ((DerivedCategory.homologyFunctor _ (-1)).mapIso e)
+
+/-- A shifted ordinary Weil middle image has no degree-zero ordinary cohomology. -/
+private theorem weil_middle_homology_zero_zero
+    (D : WeilConjectures.FiniteFieldDatum.{u}) [Fact (ringChar D.k).Prime]
+    [Fact (ringChar D.k ≠ ell)]
+    (C₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType C₀.hom]
+    [QuasiCompact C₀.hom] [IsSeparated C₀.hom] [Smooth C₀.hom]
+    (P : WeilPerv ell D C₀) (hP : IsWeilMiddleSimple ell D C₀ P) :
+    IsZero ((DerivedCategory.homologyFunctor _ 0).obj P.obj.obj) := by
+  obtain ⟨U₀, hft, hqc, j₀, hj, hdense, M, hM, hnz, hsimple, ⟨e⟩⟩ := hP
+  let F := WeilConjectures.NativeL2.middleWeilImage D ell j₀ M
+  have : ((DerivedCategory.singleFunctor _ 0).obj F)⟦(1 : ℤ)⟧ |>.IsLE (-1) :=
+    DerivedCategory.TStructure.t.isLE_shift _ 0 1 (-1) (by decide)
+  exact ((DerivedCategory.isLE_iff _ (-1)).mp this 0 (by decide)).of_iso
+    ((DerivedCategory.homologyFunctor _ 0).mapIso e)
+
+/-- The canonical truncation sequence also gives purity before forgetting Weil structure. -/
+private theorem weil_simple_cohomology_dichotomy
+    (D : WeilConjectures.FiniteFieldDatum.{u}) [Fact (ringChar D.k).Prime]
+    [Fact (ringChar D.k ≠ ell)]
+    (C₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType C₀.hom]
+    [QuasiCompact C₀.hom] [IsSeparated C₀.hom] [Smooth C₀.hom]
+    (hPure : Scheme.IsPureDimension C₀.left 1)
+    (P : WeilPerv ell D C₀) [Simple P] :
+    IsZero ((DerivedCategory.homologyFunctor _ (-1)).obj P.obj.obj) ∨
+      IsZero ((DerivedCategory.homologyFunctor _ 0).obj P.obj.obj) := by
+  have h := CondensedRing.CurveWeil.curveSupportWeilHeart D ell C₀ hPure
+  obtain ⟨A, B, S, hA, hP, hB, hS, e₁, e₂, h₁, h₂, hmaps⟩ := h.2.2.2.1 P
+  apply simple_cohomology_dichotomy _ _ _ P S hP hS
+  · simpa only [hA] using h₁
+  · simpa only [hB] using h₂
 
 /-- The same classification for the perverse Weil heart.
 Source: latest blueprint, `prop-a1-curve-perverse-simples.md`, final paragraph and
 the Weil convention of `thm-a1-curve-perverse-heart`.
 Proof: run steps (1)-(7) of the geometric statement on Weil modules. Kernels and
-cokernels of fixed pairs are computed on the underlying sheaves and carry their
-canonical Weil structures, so the punctual radical, the restriction units, the
-sequences and the saturation are Weil morphisms; heart clauses (1)-(5) hold verbatim in
+cokernels of Weil modules carry their canonical Weil structures, so the punctual
+radical, the restriction units, the
+sequences and saturation are Weil morphisms; heart clauses (1)-(5) hold verbatim in
 the Weil case. Irreducibility is taken among Weil-stable lisse (resp. constructible)
 subsheaves, so the dense-open step uses surjectivity on Weil groups.
 (blueprint: prop-a1-curve-perverse-simples). -/
 theorem curve_perverse_weil_simples_statement
-    (D : WeilConjectures.FiniteFieldDatum.{u}) [Invertible (ell : D.k)]
+    (D : WeilConjectures.FiniteFieldDatum.{u}) [Fact (ringChar D.k).Prime]
+    [Fact (ringChar D.k ≠ ell)]
     (C₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType C₀.hom]
     [QuasiCompact C₀.hom] [IsSeparated C₀.hom] [Smooth C₀.hom]
     (_hPure : Scheme.IsPureDimension C₀.left 1) :
     ∀ P : WeilPerv ell D C₀,
       Simple P ↔ WeilSimpleKinds ell D C₀ P := by
-  sorry
+  intro P
+  constructor
+  · intro hP
+    have := hP
+    obtain h | h := weil_simple_cohomology_dichotomy ell D C₀ _hPure P
+    · exact Or.inl ((weil_punctual_simple_case ell D C₀ _hPure P h).mp hP)
+    · exact Or.inr ((weil_middle_simple_case ell D C₀ _hPure P h).mp hP)
+  · rintro (hP | hP)
+    · exact (weil_punctual_simple_case ell D C₀ _hPure P
+        (weil_punctual_homology_neg_one_zero ell D C₀ P hP)).mpr hP
+    · exact (weil_middle_simple_case ell D C₀ _hPure P
+        (weil_middle_homology_zero_zero ell D C₀ P hP)).mpr hP
 
 end AlgebraicGeometry.ProEtale.CondensedCurvePerverseStatement

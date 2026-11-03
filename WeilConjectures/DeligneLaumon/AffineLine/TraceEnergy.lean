@@ -35,6 +35,9 @@ public import WeilConjectures.PointCountFiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.PointCountBound
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.L2Radius
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.L2Series
+public import WeilConjectures.DeligneLaumon.L2Norm
 
 /-!
 # Detecting a weight from the growth of the squared trace sums
@@ -232,8 +235,11 @@ theorem l2Weight_le_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) (F : WeilShe
 /-- The radius of convergence `r_F` of the `L²`-series `φ_F` and the `L²`-weight parameter
 `‖F‖` are related by `r_F = q^{-‖F‖ - 1}`, equivalently `‖F‖ = -1 - log_q r_F`, with the
 conventions `q^{-∞} = 0` and `q^{∞} = ∞`. This is stated as: for every real `β`,
-`β < ‖F‖` if and only if `r_F < q^{-(β + 1)}`. (blueprint: `lem-wf-l2-radius`) -/
-theorem lt_l2Weight_iff (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (β : ℝ) :
+`β < ‖F‖` if and only if `r_F < q^{-(β + 1)}`.
+
+This native-sheaf theorem is preserved separately. The blueprint-route theorem
+`lt_l2Weight_iff` below accepts condensed Weil pairs. -/
+theorem lt_l2Weight_iff_legacy (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (β : ℝ) :
     (β : EReal) < F.l2Weight ι ↔
       (F.l2Series ι).radius < ENNReal.ofReal ((Nat.card k₀ : ℝ) ^ (-(β + 1))) := by
   have hq : 1 < (Nat.card k₀ : ℝ) := by exact_mod_cast Finite.one_lt_card
@@ -253,6 +259,53 @@ theorem lt_l2Weight_iff (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (
     obtain ⟨β', hβ'r, hββ'⟩ := ((hc.eventually (lt_mem_nhds h)).and self_mem_nhdsWithin).exists
     exact (EReal.coe_lt_coe_iff.2 hββ').trans_le (le_iSup₂_of_le β'
       (limsup_pos_of_radius_lt hq (F.traceEnergy_nonneg ι) hβ'r) le_rfl)
+
+private theorem condensedTraceEnergy_nonneg
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    (ι : PadicAlgCl l →+* ℂ)
+    (K : WeilConjectures.condensedStrictWeilComplex (Profinite.padicAlgClRingObj l)
+      (D.geometricFrobenius X₀).hom) (m : ℕ) :
+    0 ≤ WeilConjectures.NativeL2.complexTraceEnergy D l X₀ ι K m := by
+  unfold WeilConjectures.NativeL2.complexTraceEnergy
+  split_ifs
+  · exact le_rfl
+  · apply finsum_nonneg
+    intro x
+    split_ifs
+    · exact mul_nonneg (Nat.cast_nonneg _) (sq_nonneg _)
+    · exact le_rfl
+
+/-- The radius of the L²-series of a bounded constructible condensed Weil pair has the
+exact lower-cut characterization `β < ‖K‖ ↔ r_K < q^(-(β+1))`. This includes radius zero
+and radius infinity, corresponding respectively to weights `+∞` and `-∞`.
+
+Proof: apply the scalar coefficient estimates to the nonnegative squared trace energies.
+Positive rescaled limsup bounds the radius above; a radius strictly below the rescaling
+forces positive limsup. Strict monotonicity and continuity in the exponent then identify
+the lower cuts of the defining supremum.
+
+Source: latest blueprint, `lem-wf-l2-radius`, proof, and `sk-lem-wrp-l2-growth`, step 1.
+(blueprint: lem-wf-l2-radius) -/
+theorem lt_l2Weight_iff
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    [IsAffine X₀.left] [IsSeparated X₀.hom] [SmoothOfRelativeDimension 1 X₀.hom]
+    [GeometricallyConnected X₀.hom]
+    (ι : PadicAlgCl l →+* ℂ)
+    (K : WeilConjectures.condensedStrictWeilComplex (Profinite.padicAlgClRingObj l)
+      (D.geometricFrobenius X₀).hom) (β : ℝ) :
+    (β : EReal) < WeilConjectures.DeligneLaumon.l2Weight D l hl X₀ ι K ↔
+      (WeilConjectures.NativeL2.l2Series D l hl X₀ ι K).radius <
+        ENNReal.ofReal ((D.q : ℝ) ^ (-(β + 1))) := by
+  have hq : 1 < (D.q : ℝ) := by
+    rw [← D.card_base]
+    exact_mod_cast (Finite.one_lt_card (α := D.k₀))
+  simpa only [WeilConjectures.DeligneLaumon.l2Weight,
+    WeilConjectures.NativeL2.complexL2Weight, WeilConjectures.NativeL2.l2Series,
+    PowerSeries.radius, PowerSeries.coeff_mk] using
+      WeilConjectures.NativeL2.lt_weightOfEnergy_iff hq
+        (condensedTraceEnergy_nonneg D l X₀ ι K) β
 
 /-- If the trace energies of `F'` are those of `F` divided by `q^{mw}`, then
 `‖F'‖ = ‖F‖ - w`: the defining ratio of `F'` at `β` is that of `F` at `β + w`. -/
@@ -599,7 +652,7 @@ smooth geometrically connected affine curve `X₀`, punctually `ι`-pure of weig
 The proof in the blueprint writes `φ_G = L'/L` with `L` the ratio of the determinants of the
 Frobenius on `H_c¹` and `H_c²` of `G ⊗ G`; the denominator is pure of weight `2w + 2` by the
 endpoint lemma, positivity of the local factors forces a surviving pole on `|t| = q^{-w-1}`,
-and the radius `q^{-w-1}` gives `‖G‖ = w` by `AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff`.
+and the radius `q^{-w-1}` gives `‖G‖ = w` by `AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff_legacy`.
 (blueprint: `thm-wf-l2-dictionary`) -/
 theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
@@ -680,7 +733,7 @@ theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
   rw [not_le] at hlt
   obtain ⟨β, hβ1, hβ2⟩ := EReal.lt_iff_exists_real_btwn.1 hlt
   have hβw : β < w := EReal.coe_lt_coe_iff.1 hβ2
-  have hβ := (lt_l2Weight_iff ι G β).2 ((hrad1.trans hLR).trans_lt
+  have hβ := (lt_l2Weight_iff_legacy ι G β).2 ((hrad1.trans hLR).trans_lt
     ((ENNReal.ofReal_lt_ofReal_iff (by positivity)).2
       (Real.rpow_lt_rpow_of_exponent_lt hq (by linarith))))
   exact hβ1.not_gt hβ

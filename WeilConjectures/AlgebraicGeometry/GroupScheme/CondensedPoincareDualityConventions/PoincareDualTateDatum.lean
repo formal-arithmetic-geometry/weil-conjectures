@@ -43,6 +43,66 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
 import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeInternalHomExact
 import Mathlib.CategoryTheory.Triangulated.Opposite.Subcategory
 import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.ObjectProperty.Retract
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Data.Finset.Max
+public import Mathlib.RingTheory.Finiteness.Projective
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
+public import WeilConjectures.Algebra.Homology.SixFunctors.OrdinaryDerivedChangeOfRings
+public import WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPackageOfUniverses
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeart
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartGeneration
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartOrderedRefinement
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedPointModuleComparison
+public import WeilConjectures.AlgebraicGeometry.CondensedIntegralCriterion
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralGluing
+public import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedScalarTensor
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleLisseCtfPerfectLocalModel
+public import WeilConjectures.AlgebraicGeometry.EtaleLocallyConstantPerfectComplex
+public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonLocalizing
+public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonPresentationSupplement
+public import WeilConjectures.AlgebraicGeometry.FiniteCondensedCtfEquivalence
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingPullbackFixed
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteScalarConstantModels
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.PadicConstantLocalModelTor
+public import WeilConjectures.AlgebraicGeometry.Pur.PurEtaleScalarMateProjection
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.RefinementPreservesFiniteLisse
+public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.ConstructibleSheaf.Devissage
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.Refinement
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleTorAmplitude
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.EtaleDomainPullbackCalculus
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+public import WeilConjectures.SixFunctors.OpenClosed.Complex
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedClosedSupportAdjunction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralModelsOperations
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.OpenFiltrationSuccessor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.OpenImmersionTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.FieldTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocallyClosedGeneratorTensorIntersection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-! # Dual and Tate data in the condensed Poincare conventions
 
@@ -126,7 +186,15 @@ theorem constantDual_datum :
       (StrictWeilCondensed.action Λ g).map
           (unitNatIso.app (𝟙_ (P.ambient c P.X))).inv ≫
         (P.constantUnitWeil c).str.hom.hom := by
-  sorry
+  have hunit : (ObjectProperty.ι _).mapIso (P.constantUnitWeil c).str =
+      (Functor.Monoidal.εIso (StrictWeilCondensed.action Λ g)).symm := by
+    ext
+    simp [constantUnitWeil]
+  simp only [constantDualWeil, StrictWeilCondensed.dualComplex,
+    Endofunctor.IsoAlgebra.mk_str, ObjectProperty.isoMk, ObjectProperty.homMk_hom]
+  rw [hunit]
+  simpa [constantUnitWeil, StrictWeilCondensed.dualDatum] using
+    unit_dual (StrictWeilCondensed.action Λ g)
 
 /-- The constant-dual global operators identify with the iterated global geometric
 Frobenius operators of the coefficient unit, for ordinary and compact supports.

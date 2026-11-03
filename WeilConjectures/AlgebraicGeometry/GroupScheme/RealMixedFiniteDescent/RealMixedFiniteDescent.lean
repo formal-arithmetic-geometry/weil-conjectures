@@ -141,7 +141,19 @@ theorem pullback_carrier (M : WeilModule D l X₀) :
     ((pullback D m hm X₀ l).obj M).carrier =
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
         (geometricMap D m hm X₀)).obj M.carrier := by
-  sorry
+  let F := NativeCondensedPullback.functor D 1 (Nat.le_refl 1) X₀
+    (model D m hm X₀) (projection D m hm X₀) l
+  let L := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+    (NativeCondensedPullback.geometricMap D 1 (Nat.le_refl 1) X₀
+      (model D m hm X₀) (projection D m hm X₀))
+  have hF : (pullback D m hm X₀ l) = F := pullback.eq_def D m hm X₀ l
+  have hL : CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+      (geometricMap D m hm X₀) = L :=
+    congrArg (CondensedRing.upperStar (Profinite.padicAlgClRingObj l))
+      (geometricMap.eq_def D m hm X₀)
+  rw [hF, hL]
+  exact NativeCondensedPullback.carrier_eq D 1 (Nat.le_refl 1) X₀
+    (model D m hm X₀) (projection D m hm X₀) l M
 
 /-- The direct-image carrier is exactly the ordinary lower-star carrier.
 Source: latest blueprint, paragraph 5 (blueprint: lem-zl-real-mixed-finite-descent).
@@ -153,7 +165,8 @@ theorem directImage_carrier
     ((directImage D m hm X₀ l).obj N).carrier =
       (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
         (geometricMap D m hm X₀)).obj N.carrier := by
-  sorry
+  unfold directImage
+  rfl
 
 /-- The ordinary adjunction unit, transported through the two carrier equalities.
 Source: latest blueprint, paragraph 5 (blueprint: lem-zl-real-mixed-finite-descent). -/
