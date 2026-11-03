@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FrobeniusChangeOfRings
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-!
 # The Frobenius unit followed by multiplication
@@ -64,15 +65,6 @@ set_option hygiene false in
 local notation "𝓡" T => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj T
 set_option hygiene false in
 local notation "𝓻" φ => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ
-
-omit [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-/-- Finite sums of morphisms of sheaves of modules act as sums on sections. -/
-lemma sum_val_app {R : Sheaf J RingCat.{u}} {M N : SheafOfModules.{u} R} {ι : Type*}
-    (s : Finset ι) (f : ι → (M ⟶ N)) (U : Cᵒᵖ) (x : M.val.obj U) :
-    (∑ i ∈ s, f i).val.app U x = ∑ i ∈ s, (f i).val.app U x :=
-  map_sum ({ toFun := fun g : M ⟶ N ↦ g.val.app U x
-             map_zero' := rfl
-             map_add' := fun _ _ ↦ rfl } : (M ⟶ N) →+ N.val.obj U) f s
 
 omit [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 /-- Multiples of a morphism of sheaves of modules act as multiples on sections. -/
@@ -231,7 +223,7 @@ lemma sum_smul_counitHom_unit_smul (F : FrobeniusSystem φ d) {d' : ℕ}
         ← ModuleCat.FrobeniusData.smul_tmulExt, ← ModuleCat.FrobeniusData.smul_tmulExt]
       erw [((toChangeOfRings M).app U).hom.map_smul, ((toChangeOfRings M).app U).hom.map_smul]
       rfl
-    erw [sum_val_app, Finset.sum_congr rfl fun j _ ↦ hterm j, ← map_sum,
+    erw [sum_val_app_apply, Finset.sum_congr rfl fun j _ ↦ hterm j, ← map_sum,
       ← ModuleCat.FrobeniusData.tmulExt_sum_left]
     simp only [mul_one, mul_comm ((F.data U).dual _)]
     erw [(F.data U).sum_trace_mul_dual]
