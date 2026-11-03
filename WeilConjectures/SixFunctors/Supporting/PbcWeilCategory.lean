@@ -364,6 +364,84 @@ def weilCoefficientExtension {E F : Padic.FiniteCoefficientFields c.l c.Qbar}
     (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
     (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 h
 
+private instance condensedScalarRingComm (Λ : ScalarSixRing.{u}) :
+    IsCommMonObj (CommMon.toMon Λ).X :=
+  Λ.comm
+
+private instance condensedScalarMapMonHom {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') :
+    IsMonHom a.hom.hom := a.hom.isMonHom_hom
+
+/-- The current condensed strict-pair Weil category at an admissible coefficient.
+Source: current blueprint (blueprint: def-wf-weil-category). -/
+abbrev condensedWeilD (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+    (X₀ : Over (Spec (CommRingCat.of D.k₀)))
+    (Λ : ScalarSixRing.{u}) (hΛ : IsAdmissibleCoefficient Λ.X) : Type _ :=
+  AlgebraicGeometry.ProEtale.CondensedRing.StrictWeil.modelComplex Λ.X D c.l c.different hΛ X₀
+
+/-- The native algebraically closed condensed coefficient is admissible.
+Source: admissible coefficient list (blueprint: def-wf-weil-category). -/
+theorem qbar_isAdmissibleCoefficient (D : FiniteFieldDatum.{u})
+    (c : D.CoefficientDatum) :
+    IsAdmissibleCoefficient (Profinite.padicAlgClRingObj.{u} c.l) := by
+  unfold IsAdmissibleCoefficient
+  exact ⟨c.l, inferInstance, Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
+    ⟨Iso.refl _⟩))))⟩
+
+/-- The strict Weil category over the native condensed algebraic closure.
+Source: current blueprint (blueprint: def-wf-weil-category). -/
+abbrev condensedWeilDQbar (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+    (X₀ : Over (Spec (CommRingCat.of D.k₀))) :=
+  condensedWeilD D c X₀ (⟨Profinite.padicAlgClRingObj.{u} c.l⟩)
+    (qbar_isAdmissibleCoefficient D c)
+
+variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+  (X₀ : Over (Spec (CommRingCat.of D.k₀)))
+  [hsep : IsSeparated X₀.hom] [hft : LocallyOfFiniteType X₀.hom]
+  [hqc : QuasiCompact X₀.hom]
+
+/- The following three declarations are the coefficient-change part of the
+  condensed Weil construction.  The comparison is the normalized one supplied
+  by `internal_scalar_pullback_normalization`; restricting its components to
+  the finite-Tor constructible subcategories is what makes the construction
+  independent of flatness of the coefficient map. -/
+
+noncomputable def condensedScalarChange
+    (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+    (X₀ : Over (Spec (CommRingCat.of D.k₀)))
+    [hsep : IsSeparated X₀.hom] [hft : LocallyOfFiniteType X₀.hom]
+    [hqc : QuasiCompact X₀.hom]
+    {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
+    (ha : IsListedScalarCoefficientMap c.l a) :
+    ConstantModelConstructibleFiniteTor Λ.X (D.geometricFiber X₀).left ⥤
+      ConstantModelConstructibleFiniteTor Λ'.X (D.geometricFiber X₀).left := by
+  letI : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  letI : Fact D.p.Prime := ⟨D.prime⟩
+  have hcard : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  letI : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hcard
+  letI : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  letI : Fact (ringChar D.k).Prime := ⟨by
+    rw [← Algebra.ringChar_eq D.k₀ D.k, ringChar.eq D.k₀ D.p]
+    exact D.prime⟩
+  letI : Fact (ringChar D.k ≠ c.l) := ⟨by
+    rw [← Algebra.ringChar_eq D.k₀ D.k, ringChar.eq D.k₀ D.p]
+    exact Ne.symm c.different⟩
+  letI : LocallyOfFiniteType (D.geometricFiber X₀).hom := by
+    let f := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+    change LocallyOfFiniteType (pullback.snd X₀.hom f)
+    infer_instance
+  letI : QuasiCompact (D.geometricFiber X₀).hom := by
+    let f := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+    change QuasiCompact (pullback.snd X₀.hom f)
+    infer_instance
+  letI : IsSeparated (D.geometricFiber X₀).hom := by
+    let f := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+    change IsSeparated (pullback.snd X₀.hom f)
+    infer_instance
+  exact ObjectProperty.lift _
+    ((ObjectProperty.ι _ ⋙ scalarSixChange a (D.geometricFiber X₀).left))
+    (fun K ↦ (scalarSixCtf c.l D.k a ha (D.geometricFiber X₀)).2.2 K)
+
 ientExtension D c X₀ h :=
   pbcIsoRationalScalarComparison c.l c.Qbar (D.geometricFrobenius X₀)
     (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
