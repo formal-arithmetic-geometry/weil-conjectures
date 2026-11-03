@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.GaloisLayerStabilizationBoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisLayerAut
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisLayerFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisDegree

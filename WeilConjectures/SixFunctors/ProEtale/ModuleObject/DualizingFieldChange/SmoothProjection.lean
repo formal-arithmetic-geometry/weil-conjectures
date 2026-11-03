@@ -5,12 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Comp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Global
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Smooth
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleIhom
 public import WeilConjectures.TraceFormula.PurityDevissage
 public import WeilConjectures.PoincareDuality.Biduality.Reduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Closed
 
 /-!
 

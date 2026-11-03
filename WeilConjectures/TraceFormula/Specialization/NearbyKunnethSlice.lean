@@ -8,6 +8,7 @@ module
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import WeilConjectures.TraceFormula.Specialization.TraitInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 
 /-!
 

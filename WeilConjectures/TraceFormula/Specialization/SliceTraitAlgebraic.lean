@@ -8,7 +8,6 @@ module
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitPoint
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation
 import WeilConjectures.RingTheory.StrictHenselizationAlgebraic
-public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 
 /-!
 
