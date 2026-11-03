@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousRational.ContinuousRat
 import WeilConjectures.AlgebraicGeometry.Rational.RationalRealizationScalarCoherence
 import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalAdjunctionUnit
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Normalized continuous tensor coherence
 
 Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15

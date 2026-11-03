@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomNativeClosed
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! The complete normalization of the etale closed record. -/
 
 @[expose] public noncomputable section

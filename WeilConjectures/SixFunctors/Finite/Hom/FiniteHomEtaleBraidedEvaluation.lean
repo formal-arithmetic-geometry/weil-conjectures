@@ -46,9 +46,4 @@ attribute [local implicit_reducible]
 
 attribute [local irreducible] DerivedCategory.monoidalClosed
 
-set_option linter.style.haveILetI false in
-set_option maxHeartbeats 1600000 in
--- Instance conversion compares the fixed native derived tensor and closed data.
-set_option maxHeartbeats 1600000 in
--- Instance conversion compares the fixed native derived tensor and closed data.
 end WeilConjectures

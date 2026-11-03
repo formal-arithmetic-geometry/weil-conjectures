@@ -39,6 +39,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralTowerOrdinaryPullback
 import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralTowerDerivedPullback
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Unique normalized scalar/pullback comparison -/
 
 @[expose] public noncomputable section
@@ -121,12 +124,4 @@ private theorem reduction_comparison_isIso (s : Presentation l E) (T : Scheme.{u
   unfold reductionComplexComparison
   infer_instance
 
-set_option maxHeartbeats 1600000 in
--- Comparing the recorded sheaf-module presentations requires additional reduction steps.
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborating the fixed internal/section and sequence-site coordinates needs this budget.
-set_option maxHeartbeats 1600000 in
--- Comparing the recorded sheaf-module presentations requires additional reduction steps.
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborating the fixed internal/section and sequence-site coordinates needs this budget.
 end AlgebraicGeometry.ProEtale.IntegralDirectImageTower

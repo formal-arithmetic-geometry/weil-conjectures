@@ -13,6 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionModuleOpe
 import all WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.TowerOpenAdjunctionEvaluation
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Finite evaluated reduction preserves open support -/
 
 @[expose] public noncomputable section

@@ -13,6 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothComp
 import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactScalarCoherence
 import all WeilConjectures.SixFunctors.Finite.Dualizing.FiniteDualizingCompactSupportIdentity
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Coherence of normalized finite-stage comparisons
 
 Source: current blueprint reduction-exceptional and field-extension towers,

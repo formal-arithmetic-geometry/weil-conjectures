@@ -15,6 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficien
 import WeilConjectures.CategoryTheory.Right.RightDerivedMateIndependence
 import all WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Restriction support comparison existence for normalized etale systems
 
 Source: Zheng, Construction 4.1, Lemma 5.16; Stacks Tag 0GL6.
@@ -245,8 +248,6 @@ private def ordinaryScalarEvaluation (W : Scheme.{u})
     ext U x
     rfl
 
-set_option maxHeartbeats 1200000 in
--- Comparing evaluated carriers unfolds module-sheaf forgetful functors.
 section EvaluationCube
 variable {X Y : Scheme.{u}} {g : X ⟶ Y}
   {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B ⟶ C)
@@ -268,9 +269,6 @@ variable {X Y : Scheme.{u}} {g : X ⟶ Y}
   (hθ : (mateEquiv adC adB (TwoSquare.mk _ _ _ _ θ.hom)).natTrans =
     (lowerStarRestrictScalarsIso (a.app (op n)).hom g).hom)
 
-set_option maxHeartbeats 1200000 in
--- The mate cube compares concrete system and coefficient-level carriers.
-include hθ in
 end EvaluationCube
 
 attribute [local irreducible] ordinaryRestriction ordinaryScalarEvaluation
@@ -313,18 +311,4 @@ private abbrev RestrictionLevel.DerivedMate {X Y : Scheme.{u}} {g : X ⟶ Y}
     r.adjB.mapDerivedCategoryRightDerivedAdjunction
     (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso r.inverseSquare).hom)).natTrans
 
-set_option maxHeartbeats 1200000 in
--- The reflected mate compares functors on the actual sequence sites.
-set_option maxHeartbeats 1200000 in
--- The derived mate cube has six exact functor comparisons.
-set_option maxHeartbeats 1200000 in
--- The exact pullback is instantiated at the coefficient level.
-set_option maxHeartbeats 1200000 in
--- The derived mate uses two exact left-adjoint models.
-set_option maxHeartbeats 1200000 in
--- The sectionwise comparison crosses concrete restriction functors.
-set_option maxHeartbeats 1200000 in
--- The open mate cube uses concrete restriction and extension functors.
-set_option maxHeartbeats 1200000 in
--- The proper and open comparisons instantiate concrete ringed-site records.
 end AlgebraicGeometry.Etale.SystemProjection

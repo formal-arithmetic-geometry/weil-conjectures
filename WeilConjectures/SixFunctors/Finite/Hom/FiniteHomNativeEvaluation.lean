@@ -51,6 +51,4 @@ attribute [local irreducible] ModuleCat.MonoidalCategory.instBraidedCategory
 
 attribute [local irreducible] DerivedCategory.monoidalClosed
 
-set_option maxHeartbeats 1600000 in
--- The derived-instance conversions require additional kernel heartbeats.
 end WeilConjectures

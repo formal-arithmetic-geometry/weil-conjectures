@@ -60,14 +60,12 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-set_option linter.flexible false in
 section HomComparison
 variable {X U Z : Scheme.{u}}
   (J : (stageSystem l Ω U).Morphism (stageSystem l Ω X))
   (I : (stageSystem l Ω Z).Morphism (stageSystem l Ω X))
   (N : Pair l Ω U) (M : Pair l Ω Z) (m : ℤ)
 
-set_option backward.isDefEq.respectTransparency false in
 end HomComparison
 
 section Descent

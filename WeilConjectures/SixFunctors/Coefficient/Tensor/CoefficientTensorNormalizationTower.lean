@@ -13,6 +13,9 @@ import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomIntrinsicTensorCompos
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 import WeilConjectures.SixFunctors.Coefficient.CoefficientActualScalarDerivedPair
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -172,5 +175,4 @@ private theorem exactRestrictionComposition_eq (D : FiniteFieldDatum.{u}) (hl : 
 end CoefficientTensorTowerProof
 
 -- Preserve the original statement's unused intermediate closed structure `SB`.
-set_option linter.unusedVariables false in
 end WeilConjectures

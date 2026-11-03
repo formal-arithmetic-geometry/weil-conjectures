@@ -18,6 +18,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.CohomologyComparisonPasting
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Continuous rational derived realization
 
 Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15

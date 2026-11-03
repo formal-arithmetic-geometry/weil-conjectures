@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.OpenInterchangeReduction.OpenInterchan
 import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAdjunctionReductionSquares
 import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffectivity
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Four-factor ordinary proper/open lambda square
 
 This module isolates the component square for the prescribed four-factor
@@ -132,7 +135,6 @@ attribute [local irreducible] ringedCartesianConjugate ringedPushComp cartesianC
 attribute [local irreducible] getLimitCone limit.cone getColimitCocone colimit.cocone
   sheafificationAdjunction presheafToSheaf eqToIso eqToHom
 
-set_option linter.defProp false in
 end FourFactorProof
 
 end WeilConjectures.OpenInterchangeReduction

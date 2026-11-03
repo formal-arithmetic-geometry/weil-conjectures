@@ -54,6 +54,4 @@ attribute [local irreducible] ModuleCat.MonoidalCategory.instBraidedCategory
 
 attribute [local irreducible] DerivedCategory.monoidalClosed
 
-set_option maxHeartbeats 1600000 in
--- Transport compares the full derived-instance arguments.
 end WeilConjectures

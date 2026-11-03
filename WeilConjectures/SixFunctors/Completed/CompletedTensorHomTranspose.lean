@@ -17,6 +17,9 @@ import WeilConjectures.SixFunctors.Completed.CompletedTensorScalarLinearity
 import WeilConjectures.SixFunctors.Normalized.NormalizedRationalEvaluationNaturality
 import WeilConjectures.SixFunctors.Supporting.Tensor.LocalizedTensorBraidingNaturality
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Completed and rational tensor-Hom transposition
 
 Source: Weil blueprint main-20261015, sec-six-functors/sk-thm-sf-package,

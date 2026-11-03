@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.Integra
 import WeilConjectures.Algebra.Homology.System.SystemScalarGenerators
 import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Ordinary reduction is left adjoint to the restricted tower limit -/
 
 @[expose] public noncomputable section

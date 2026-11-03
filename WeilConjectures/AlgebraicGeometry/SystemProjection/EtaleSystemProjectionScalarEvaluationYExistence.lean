@@ -14,6 +14,9 @@ import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
 import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
 import Mathlib.CategoryTheory.Adjunction.Mates
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Target scalar evaluation comparison existence for normalized etale systems
 
 Source: Zheng, Construction 4.1, Lemma 5.16; Stacks Tag 0GL6.
@@ -44,6 +47,4 @@ private def ordinaryComparison
     Functor.isoWhiskerLeft _ κ ≪≫ (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight cg.symm T
 
-set_option maxHeartbeats 1600000 in
--- Transporting the exact-evaluation squares compares large derived-functor types.
 end AlgebraicGeometry.Etale.SystemProjection

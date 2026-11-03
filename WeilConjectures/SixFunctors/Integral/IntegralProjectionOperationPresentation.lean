@@ -10,6 +10,9 @@ public import WeilConjectures.SixFunctors.SfProEtaleProjection.SfProEtaleProject
 import all WeilConjectures.SixFunctors.SfProEtaleProjection.SfProEtaleProjectionFormula
 import WeilConjectures.SixFunctors.Integral.IntegralProperOperationProjection
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Integral projection in ordinary completed-ring coordinates
 
 Source: fix-prop-projection-formula.proof.md, integral reconstruction, and

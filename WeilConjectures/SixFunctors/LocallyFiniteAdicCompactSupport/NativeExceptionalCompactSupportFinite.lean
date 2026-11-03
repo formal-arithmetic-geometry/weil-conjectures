@@ -222,6 +222,4 @@ def systemIntegralMap [G : NativeGeometry.{u} l]
 
 attribute [local irreducible] systemSectionMap
 
-set_option allowUnsafeReducibility true in
-attribute [local reducible] sfRationalConstructibleLocalization in
 end WeilConjectures.LocallyFiniteAdicCompactSupport

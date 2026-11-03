@@ -13,6 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformCompleteTriangulated
 import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationNaturalIso
 import WeilConjectures.AlgebraicGeometry.ContinuousSlice.ContinuousCoefficientSliceNormalization
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Transport of normalized rational pullback comparisons
 
 Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03EL, 06YY, 099N

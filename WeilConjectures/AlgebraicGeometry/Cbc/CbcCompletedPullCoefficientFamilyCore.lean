@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcQbarCompletedPullback
 import WeilConjectures.AlgebraicGeometry.Rational.RationalScalarCompletionUnitSquare
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformCompleteTriangulated
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Strict completed-pullback coefficient family argument
 
 Source: current blueprint, coefficient coherence.

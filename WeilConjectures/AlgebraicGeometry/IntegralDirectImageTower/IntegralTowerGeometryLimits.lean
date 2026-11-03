@@ -12,6 +12,9 @@ import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralTowerO
 import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralTowerReductionPullback
 import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralTowerFiniteOpenSupport
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Components of the integral direct-image tower argument -/
 
 @[expose] public noncomputable section

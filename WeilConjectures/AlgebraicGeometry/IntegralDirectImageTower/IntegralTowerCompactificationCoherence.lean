@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.Integra
 import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureCtfEqualsBc
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Components of the integral direct-image tower argument -/
 
 @[expose] public noncomputable section

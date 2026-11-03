@@ -58,6 +58,4 @@ attribute [local irreducible] HasDerivedCategory.standard CategoryTheory.Limits.
   ScalarLocalization.category ScalarLocalization.preadditive
   StageSystem.Morphism.descNatTrans
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme

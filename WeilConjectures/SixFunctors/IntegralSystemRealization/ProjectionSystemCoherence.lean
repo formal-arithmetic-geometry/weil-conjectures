@@ -33,6 +33,4 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end WeilConjectures.IntegralSystemRealization

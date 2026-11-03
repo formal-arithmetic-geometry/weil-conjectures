@@ -10,6 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ContinuousRational.ContinuousAmbientGeo
 import WeilConjectures.AlgebraicGeometry.ContinuousRational.ContinuousIntegralScalarTower
 import WeilConjectures.AlgebraicGeometry.ContinuousRational.ContinuousMixedIntegralComponent
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Coherence forced by normalized tensor and completion comparisons
 
 Source: Bhatt--Scholze, Remark 6.8.15; Stacks 0D6D, 0A0E and 0A0G

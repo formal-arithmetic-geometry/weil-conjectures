@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.FiniteCoefficientAdjoints.Finite
 
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifFiniteTor
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Normalized adjunction at one finite coefficient stage
 
 Source: current blueprint reduction-exceptional, Locality and Charts, with the
@@ -177,5 +180,4 @@ private def normalizedAdjunction : restrict (lower A c) hL ⊣ restrict (upper A
 
 end Construction
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.FiniteCoefficientAdjoints

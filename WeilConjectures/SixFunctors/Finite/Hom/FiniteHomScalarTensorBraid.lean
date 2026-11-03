@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomComparisonMode
 import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomScalarTensorNormalization
 import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.EtaleScalarMonoidal
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Scalar tensor comparison and inverse Koszul symmetry
 Source: blueprint thm-coef-finite-hom, evaluation paragraph
 (blueprint: lem-coef-finite-hom-scalar-tensor-braid).
@@ -52,6 +55,4 @@ private theorem inverseSquare {C : Type a} [Category.{b} C]
   rw [Iso.hom_inv_id_assoc, ← Category.assoc, h, Category.assoc, ← F.map_comp]
   rw [Iso.hom_inv_id, F.map_id, Category.comp_id]
 
-set_option maxHeartbeats 1600000 in
--- The derived-instance conversions require additional kernel heartbeats.
 end WeilConjectures

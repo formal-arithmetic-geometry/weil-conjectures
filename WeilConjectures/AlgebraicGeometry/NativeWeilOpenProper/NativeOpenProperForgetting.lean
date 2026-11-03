@@ -340,5 +340,4 @@ abbrev compactificationComparison (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of 
   letI := c.over (k₀ := k₀)
   Functor.associator _ _ _ ≪≫ comparison (k₀ := k₀) (l := l) c.i c.g
 
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.NativeWeilOpenProper

@@ -31,5 +31,4 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
 namespace AlgebraicGeometry.FiniteCoefficientAdjoints
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end AlgebraicGeometry.FiniteCoefficientAdjoints

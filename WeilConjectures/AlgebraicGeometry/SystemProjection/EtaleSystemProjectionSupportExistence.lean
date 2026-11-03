@@ -12,6 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownLevelRealizat
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Support operations for normalized etale systems
 
 Source: Zheng, Constructions 4.1 and 5.14--5.15; Stacks Tag 0GL6

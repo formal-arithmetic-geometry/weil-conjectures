@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.OpenInterchangeReduction.ProperOpenLam
 import WeilConjectures.SixFunctors.GeneratorReduction.ShortWordCompletionIsomorphism
 import Mathlib.CategoryTheory.Adjunction.Mates
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

@@ -12,6 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleIsomorphismInverse
 import WeilConjectures.CategoryTheory.Adjunction.MatesCounit
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Proper counit projection on the integral operation domain
 
 Source: def-exchange-projection, proper projection mate; the integral reconstruction

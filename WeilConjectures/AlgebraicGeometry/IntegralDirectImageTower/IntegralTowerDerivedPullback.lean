@@ -76,6 +76,9 @@ import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 /-! # Normalized IntegralTowerDerivedPullback -/
 
 @[expose] public noncomputable section
@@ -184,10 +187,4 @@ private def good (T : Scheme.{u}) : ObjectProperty (CochainComplex (Modules l E 
       (R := spIntegralSectionRing l E T)
       ((spIntegralModuleEquivalence l E T).functor.obj (P.X i))
 
-set_option maxHeartbeats 1600000 in
--- Elaborating the fixed section equivalence and its tensor structures needs this budget.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1600000 in
--- The descent comparison elaborates the internal and section presentations together.
-set_option synthInstance.maxHeartbeats 200000 in
 end AlgebraicGeometry.ProEtale.IntegralDirectImageTower

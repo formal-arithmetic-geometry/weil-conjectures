@@ -30,6 +30,4 @@ end WeilConjectures.GeneratorReduction
 namespace WeilConjectures.OpenInterchangeReduction
 open GeneratorReduction
 
-set_option maxHeartbeats 800000 in
--- The recursive categorical induction needs a larger heartbeat budget.
 end WeilConjectures.OpenInterchangeReduction
