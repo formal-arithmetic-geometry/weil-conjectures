@@ -9,6 +9,8 @@ public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarDerivedRestriction
 public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtension
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
+import WeilConjectures.Algebra.Homology.HomotopyCategory.MapHomotopyCategoryCongr
+import WeilConjectures.CategoryTheory.Adjunction.HomEquivCompAppOfIsIso
 
 /-! # Integral ambient trace before rational localization
 
@@ -26,28 +28,6 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (W : AlgebraicGeometry.Scheme.{u})
-
-/-- Postcomposing the hom-equivalence of an adjunction `L ⊣ R` with a transformation
-`χ : R ⟶ R'` that is invertible on a full subcategory gives hom-equivalences
-`(L K ⟶ M) ≃ (K ⟶ R' M)`, natural in `M` in that subcategory. -/
-theorem _root_.CategoryTheory.Adjunction.exists_homEquiv_comp_app_of_isIso {C D : Type*}
-    [Category* C] [Category* D] {L : C ⥤ D} {R R' : D ⥤ C} (adj : L ⊣ R) (χ : R ⟶ R')
-    (P : ObjectProperty D) (hχ : ∀ M, P M → IsIso (χ.app M)) (K : C) :
-    ∃ e : ∀ M : P.FullSubcategory, (L.obj K ⟶ M.obj) ≃ (K ⟶ R'.obj M.obj),
-      ∀ (M N : P.FullSubcategory) (f : M ⟶ N) (h : L.obj K ⟶ M.obj),
-        e N (h ≫ f.hom) = e M h ≫ R'.map f.hom := by
-  refine ⟨fun M ↦ (adj.homEquiv K M.obj).trans
-    (Iso.homCongr (Iso.refl K) (@asIso _ _ _ _ (χ.app M.obj) (hχ M.obj M.property))), ?_⟩
-  intro M N f h
-  simp [Adjunction.homEquiv_naturality_right]
-
-/-- Equal additive functors induce equal functors on homotopy categories. -/
-theorem _root_.CategoryTheory.Functor.mapHomotopyCategory_congr {C D : Type*} [Category* C]
-    [Category* D] [Preadditive C] [Preadditive D] {ι : Type*} (c : ComplexShape ι)
-    {F G : C ⥤ D} [F.Additive] [G.Additive] (h : F = G) :
-    F.mapHomotopyCategory c = G.mapHomotopyCategory c := by
-  subst h
-  rfl
 
 /-- The two specified completed coefficient maps `𝒪_E^∧ ⟶ 𝒪_F^∧` coincide: both are
 characterised by their composites with the finite quotient projections.

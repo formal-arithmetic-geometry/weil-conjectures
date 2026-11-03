@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.CocontinuousGenerator
 public import WeilConjectures.Algebra.Category.ModuleCat.CoextendScalarsAdjunction
 public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 public import WeilConjectures.Algebra.Category.ModuleCat.ExtendScalarsInjective
+public import WeilConjectures.Algebra.Category.ModuleCat.ExtendScalarsPushout
 public import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.FinitePresentationCokernel
 public import WeilConjectures.Algebra.Category.ModuleCat.FinitePresentationColimit
@@ -38,6 +39,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorCon
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorOriginalSectionsExt
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsBaseChange
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTransition
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseComparison
@@ -86,6 +88,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPu
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarRestrictedTensorRetractFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SheafificationRestrictScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteFinitePresentationInternalHomColimit
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
@@ -107,6 +110,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitFiniteOfExact
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitFiniteOfReduction
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitInducedMaps
 public import WeilConjectures.Algebra.Category.Ring.FilteredColimitsFiniteData
+public import WeilConjectures.Algebra.Category.Ring.IsPushoutOfSurjective
 public import WeilConjectures.Algebra.Central.ReducedNorm
 public import WeilConjectures.Algebra.ChangeIdealCompletion
 public import WeilConjectures.Algebra.CharpolyLocallyFree
@@ -560,6 +564,7 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.BraidingShift
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.KInjectives.KInjectiveReplacementTriangulated
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapHomotopyCategoryCongr
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalNatTrans
@@ -9677,6 +9682,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModulePullbackComposition
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModulePullbackEncoding
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModulePullbackHomology
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleRestrictScalars
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleRestriction
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleUnit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantOpenSquareExchange
@@ -13178,6 +13184,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.FullyFaithfulCounitLocal
+public import WeilConjectures.CategoryTheory.Adjunction.HomEquivCompAppOfIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.HomEquivCompIso
 public import WeilConjectures.CategoryTheory.Adjunction.IsIsoOfMap
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethMap
@@ -14892,6 +14899,7 @@ public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizati
 public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationLift
 public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationNaturalIso
 public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationPullbackPairIso
+public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationPureTensor
 public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationRestrictedPairIso
 public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationTriangulated
 public import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocalization
@@ -16312,6 +16320,7 @@ public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 public import WeilConjectures.LinearAlgebra.TensorProduct.Kunneth
 public import WeilConjectures.LinearAlgebra.TraceLongExactSequence
 public import WeilConjectures.LinearAlgebra.TraceLongExactSequenceFinsum
+public import WeilConjectures.Mathlib.Algebra.Algebra.Basic
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.Algebra.Pi
 public import WeilConjectures.Mathlib.Algebra.Algebra.Subalgebra.Tower
@@ -18269,6 +18278,7 @@ public import WeilConjectures.RingTheory.LocalTensorQuotientBaseIdealDetection
 public import WeilConjectures.RingTheory.LocalTensorQuotientComponentMap
 public import WeilConjectures.RingTheory.LocalTensorQuotientDetection
 public import WeilConjectures.RingTheory.LocalTensorQuotientPowerBound
+public import WeilConjectures.RingTheory.LocalizationAwaySemilinearTensor
 public import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
 public import WeilConjectures.RingTheory.LocalizationFiniteGlobalDimension
 public import WeilConjectures.RingTheory.LocalizationIdealKernelGenerators

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarRestrictionConstructible
 public import Mathlib.CategoryTheory.Retract
+import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationPureTensor
 
 /-! # Ambient finite separable trace retraction
 
@@ -56,22 +57,6 @@ theorem rationalScalarIntegral_trace_split
         ((rationalScalarDerivedRestriction l E F ι W).obj K) ⟶ K),
       s ≫ μ = Padic.coefficientExtensionUniformizer l F ^ n • 𝟙 K := by
   sorry
-
-/-- In a scalar localization, an integral split up to a power of the inverted element
-gives a retract. -/
-noncomputable def _root_.CategoryTheory.ScalarLocalization.retractOfSmulSplit
-    {R : Type*} [CommRing R] {C : Type*} [Category C] [Preadditive C] [Linear R C]
-    {p : R} {X Y : C} (n : ℕ) (s : X ⟶ Y) (μ : Y ⟶ X)
-    (h : s ≫ μ = p ^ n • 𝟙 X) :
-    Retract (ScalarLocalization.mk (R := R) (C := C) (p := p) X)
-      (ScalarLocalization.mk (R := R) (C := C) (p := p) Y) where
-  i := (1 : Localization.Away p) ⊗ₜ[R] s
-  r := (IsLocalization.Away.invSelf (S := Localization.Away p) p ^ n) ⊗ₜ[R] μ
-  retract := by
-    refine (ScalarLocalization.composition_tmul R C p X Y X μ s _ _).trans ?_
-    rw [h, mul_one, TensorProduct.tmul_smul, TensorProduct.smul_tmul', Algebra.smul_def,
-      map_pow, ← mul_pow, IsLocalization.Away.mul_invSelf, one_pow]
-    rfl
 
 /-- The finite separable trace construction gives an ambient retract after
 restriction of coefficients.  Constructibility is handled separately.
