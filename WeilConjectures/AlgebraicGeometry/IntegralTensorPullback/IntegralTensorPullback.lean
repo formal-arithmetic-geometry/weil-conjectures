@@ -911,6 +911,48 @@ theorem preserves_and_completed
           DerivedCategory.Q.map (restrictionPullbackComplex l E g P).hom ≫
             DerivedCategory.Q.map (constantComparison l E g
               (((restriction l E Y).mapHomologicalComplex (.up ℤ)).obj P)) := by
-  sorry
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of k))
+  have : QuasiSeparatedSpace X :=
+    (quasiSeparated_iff_quasiSeparatedSpace (X ↘ Spec (.of k))).mp inferInstance
+  have : QuasiSeparatedSpace Y :=
+    (quasiSeparated_iff_quasiSeparatedSpace (Y ↘ Spec (.of k))).mp inferInstance
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  let F := CondensedRing.upperStar (DerivedNakayama.integerRing l E) g
+  obtain ⟨hbc, hc⟩ := pullbackDevissage l E k p _hp _hpl g K _hK
+  let φ := (IntegralConstantModel.pointComparison l E).inv.hom
+  let H := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (coefficientMap φ X)
+  have hB := (cbcComapIff φ X (F.mapDerivedCategory.obj K)).mpr hbc
+  have hStacks := stacksConstructibleInterpretation l E X _ hB
+  have hModels := ((IntegralModelsStacks.integral_models_stacks l E X).1
+    (H.mapDerivedCategory.obj (F.mapDerivedCategory.obj K))).mpr hStacks
+  refine ⟨(cbcComapIff φ X _).mp hModels, ?_⟩
+  intro P hP eP
+  have hQ := CondensedRing.kFlat_upperStar_mapHomologicalComplex_obj
+    (DerivedNakayama.integerRing l E) g hP
+  let eQ := (F.mapDerivedCategoryFactors.app P).symm ≪≫ F.mapDerivedCategory.mapIso eP
+  have hu := (AdicCompletion.isDerivedComplete_iff l E X _ _ hQ eQ).mp hc
+  constructor
+  · obtain ⟨e, he⟩ := ordinary_roos_unit l E g P
+    change IsIso (eQ.inv ≫ DerivedCategory.Q.map
+      (AdicCompletion.augmentation l E X
+        ((F.mapHomologicalComplex (.up ℤ)).obj P))) at hu
+    have := hu
+    have : IsIso (DerivedCategory.Q.map (AdicCompletion.augmentation l E X
+        ((F.mapHomologicalComplex (.up ℤ)).obj P))) :=
+      IsIso.of_isIso_comp_left eQ.inv _
+    have : IsIso (DerivedCategory.Q.map (comparison l E g P) ≫
+        DerivedCategory.Q.map e.hom) := by
+      rw [← Functor.map_comp, he]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (DerivedCategory.Q.map e.hom)
+  · obtain ⟨e, he⟩ := constant_roos_unit l E g P
+    refine ⟨DerivedCategory.Q.mapIso e, ?_⟩
+    simpa only [Functor.map_comp, Functor.mapIso_hom] using congrArg DerivedCategory.Q.map he
 
 end AlgebraicGeometry.ProEtale.IntegralTensorPullback
