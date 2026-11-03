@@ -3261,6 +3261,8 @@ public import WeilConjectures.AlgebraicGeometry.CondensedSubfieldBoundedCopowers
 public import WeilConjectures.AlgebraicGeometry.CondensedSurjectiveClosedEquivalence
 public import WeilConjectures.AlgebraicGeometry.CondensedSurjectiveClosedLocalPresentation
 public import WeilConjectures.AlgebraicGeometry.CondensedUnderivedPushforwardContinuity
+public import WeilConjectures.AlgebraicGeometry.CondensedWeilRepresentation.WeilActionIntertwining
+public import WeilConjectures.AlgebraicGeometry.CondensedWeilRepresentation.WeilTensorIntertwining
 public import WeilConjectures.AlgebraicGeometry.ConductorIdealZeroIntersection
 public import WeilConjectures.AlgebraicGeometry.ConductorSections
 public import WeilConjectures.AlgebraicGeometry.ConductorSectionsRestriction
@@ -16703,6 +16705,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.EssImageKernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteLisseFiltration
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
@@ -16988,6 +16991,8 @@ public import WeilConjectures.Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 public import WeilConjectures.Mathlib.RingTheory.Polynomial.Eisenstein.Basic
 public import WeilConjectures.Mathlib.RingTheory.Polynomial.Quotient
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.BoundaryPolynomialEvaluation
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.BoundaryRootWeightBound
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
@@ -18956,6 +18961,7 @@ public import WeilConjectures.RingTheory.TensorBijectiveOfBasis
 public import WeilConjectures.RingTheory.TensorBijectiveOfStages
 public import WeilConjectures.RingTheory.TensorCyclesFlatCokernel
 public import WeilConjectures.RingTheory.TensorFiniteTypeLimit
+public import WeilConjectures.RingTheory.TensorFrobeniusWeightBound
 public import WeilConjectures.RingTheory.TensorLimitOfProZeroKernels
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorLocalizationTowerTransition
@@ -24251,6 +24257,7 @@ public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import WeilConjectures.WeilSheaf.TensorObjPairing
 public import WeilConjectures.WeilSheaf.TensorPower
+public import WeilConjectures.WeilSheaf.TensorPowerWeightLimit
 public import WeilConjectures.WeilSheaf.TorsorPairing
 public import WeilConjectures.WeilSheaf.TraceCupAdicConstant
 public import WeilConjectures.WeilSheaf.TraceFunction
