@@ -880,6 +880,282 @@ theorem integral_scalar
             ((integralPullbackScalarComparison l E L ι g P.obj.2).inv.hom)))) := by
   sorry
 
+section RationalScalarProof
+variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
+  (ι : E →ₐ[ℚ_[l]] L)
+
+private theorem functor_map_heq {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {A B A' B' : C} (ha : A = A') (hb : B = B') {f : A ⟶ B} {f' : A' ⟶ B'}
+    (h : HEq f f') : HEq (F.map f) (F.map f') := by
+  cases ha
+  cases hb
+  cases h
+  rfl
+
+private theorem dep_heq {α : Sort*} {β : α → Sort*} (f : ∀ a, β a) {a a' : α}
+    (h : a = a') : HEq (f a) (f a') := by
+  cases h
+  rfl
+
+private theorem iso_inv_heq {C : Type*} [Category* C] {A B A' B' : C}
+    (e : A ≅ B) (e' : A' ≅ B') (ha : A = A') (hb : B = B') (h : HEq e.hom e'.hom) :
+    HEq e.inv e'.inv := by
+  cases ha
+  cases hb
+  rw [Iso.ext (eq_of_heq h)]
+
+/-- The rational Hom functor on a pair arrow with integral representatives.
+Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+private theorem rationalHom_map_heq (K : Type u) [Field K] [Algebra ℚ_[l] K]
+    [FiniteDimensional ℚ_[l] K] (W : Scheme.{u})
+    (P P' : (constructibleRationalHomPairs l K W).FullSubcategory)
+    (P₀ P₀' : (constructibleIntegralHomPairs l K W).FullSubcategory)
+    (hP : integralPairOfRationalHomPair l K W P = P₀)
+    (hP' : integralPairOfRationalHomPair l K W P' = P₀')
+    (a : P'.obj.1.unop ⟶ P.obj.1.unop) (b : P.obj.2 ⟶ P'.obj.2)
+    (a₀ : P₀'.obj.1.unop ⟶ P₀.obj.1.unop) (b₀ : P₀.obj.2 ⟶ P₀'.obj.2)
+    (ha : HEq a (TensorProduct.tmul (Padic.coefficientExtensionIntegers l K)
+      (1 : Localization.Away (Padic.coefficientExtensionUniformizer l K)) a₀))
+    (hb : HEq b (TensorProduct.tmul (Padic.coefficientExtensionIntegers l K)
+      (1 : Localization.Away (Padic.coefficientExtensionUniformizer l K)) b₀)) :
+    HEq ((rationalDerivedInternalHom l K W).map
+        (ObjectProperty.homMk (X := P) (Y := P') (Prod.mkHom a.op b)))
+      ((sfRationalConstructibleLocalization l K W).map
+        ((constructibleIntegralHom l K W).map
+          (ObjectProperty.homMk (X := P₀) (Y := P₀') (Prod.mkHom a₀.op b₀)))) := by
+  subst hP hP'
+  obtain ⟨β, hβ, hβ'⟩ :=
+    (rationalDerivedInternalHom_existsUnique l K W).exists.choose_spec.2 P P'
+  obtain rfl := eq_of_heq ha
+  obtain rfl := eq_of_heq hb
+  have e := congrArg (fun c : Localization.Away (Padic.coefficientExtensionUniformizer l K) ↦
+    c ⊗ₜ[Padic.coefficientExtensionIntegers l K] ((constructibleIntegralHom l K W).map
+      (ObjectProperty.homMk (X := integralPairOfRationalHomPair l K W P)
+        (Y := integralPairOfRationalHomPair l K W P') (Prod.mkHom a₀.op b₀)))) (one_mul 1)
+  exact ((heq_of_eq (hβ _ _)).trans (hβ' a₀ b₀ 1 1)).trans (heq_of_eq e)
+
+/-- The localized form of integral_scalar: the specified rational comparisons commute
+with the specified rational scalar comparisons.
+Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
+Proof: every arrow is the localization of its integral counterpart; apply the
+localization functor to integral_scalar. -/
+theorem rational_scalar (P : (constructibleRationalHomPairs l E Y).FullSubcategory) :
+    (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map
+        ((rationalComparison l E g).hom.app P) ≫
+      (rationalHomScalarComparison l E L ι X ((rationalPair l E g).obj P)).hom =
+    (rationalPullbackScalarComparison l E L ι g).hom.app
+        ((rationalDerivedInternalHom l E Y).obj P) ≫
+      (rationalDerivedPullback l L g).map (rationalHomScalarComparison l E L ι Y P).hom ≫
+      (rationalComparison l L g).hom.app (rationalHomScalarPair l E L ι Y P) ≫
+      (rationalDerivedInternalHom l L X).map (ObjectProperty.homMk
+        (X := (rationalPair l L g).obj (rationalHomScalarPair l E L ι Y P))
+        (Y := rationalHomScalarPair l E L ι X ((rationalPair l E g).obj P))
+        (Prod.mkHom ((rationalPullbackScalarComparison l E L ι g).hom.app P.obj.1.unop).op
+          ((rationalPullbackScalarComparison l E L ι g).inv.app P.obj.2))) := by
+  let IP := integralPairOfRationalHomPair l E Y P
+  let QL (W : Scheme.{u}) := sfRationalConstructibleLocalization l L W
+  let S (W : Scheme.{u}) := sfConstructibleIntegralScalarExtension 0 l
+    (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W
+  have hr (K : Type u) [Field K] [Algebra ℚ_[l] K] [FiniteDimensional ℚ_[l] K]
+      (A : sfRationalConstructibleCategory l K Y) :
+      (rationalDerivedPullback l K g).obj A =
+        ⟨(constructibleIntegralPullback l K g).obj A.obj⟩ :=
+    (rationalDerivedPullback_existsUnique l K g).exists.choose_spec.2.1 A
+  have hH (K : Type u) [Field K] [Algebra ℚ_[l] K] [FiniteDimensional ℚ_[l] K]
+      (W : Scheme.{u}) (A : (constructibleRationalHomPairs l K W).FullSubcategory) :
+      (rationalDerivedInternalHom l K W).obj A =
+        ⟨(constructibleIntegralHom l K W).obj (integralPairOfRationalHomPair l K W A)⟩ :=
+    (rationalDerivedInternalHom_existsUnique l K W).exists.choose_spec.1 A
+  have hs (W : Scheme.{u}) (A : sfRationalConstructibleCategory l E W) :
+      (sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj A =
+        ⟨(S W).obj A.obj⟩ :=
+    sfRationalScalarExtension_obj l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι A
+  have mr {A B : sfIntegralConstructibleCategory l L Y} (a : A ⟶ B) :
+      HEq ((rationalDerivedPullback l L g).map
+          ((sfRationalConstructibleLocalization l L Y).map a))
+        ((QL X).map ((constructibleIntegralPullback l L g).map a)) :=
+    (rationalDerivedPullback_existsUnique l L g).exists.choose_spec.2.2 A B a 1
+  have ms (W : Scheme.{u}) {A B : sfIntegralConstructibleCategory l E W} (a : A ⟶ B) :
+      HEq ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map
+          ((sfRationalConstructibleLocalization l E W).map a))
+        ((QL W).map ((S W).map a)) := by
+    have h := sfRationalScalarExtension_map_tmul l E W 0
+      (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι A B a 1
+    simp only [map_one] at h
+    exact h
+  have hβ (K : Type u) [Field K] [Algebra ℚ_[l] K] [FiniteDimensional ℚ_[l] K]
+      (A : (constructibleRationalHomPairs l K Y).FullSubcategory) :
+      HEq ((rationalComparison l K g).hom.app A)
+        ((sfRationalConstructibleLocalization l K X).map
+          ((integralComparison l K g).hom.app (integralPairOfRationalHomPair l K Y A))) :=
+    ((rational_comparison_existsUnique l K g
+      (integralComparison l K g)).exists.choose_spec A).1
+  have hρ (A : sfRationalConstructibleCategory l E Y) :
+      HEq ((rationalPullbackScalarComparison l E L ι g).hom.app A)
+        ((QL X).map (integralPullbackScalarComparison l E L ι g A.obj).hom) :=
+    (rationalPullbackScalarComparison_existsUnique l E L ι g).exists.choose_spec A
+  have hh (W : Scheme.{u}) (A : (constructibleRationalHomPairs l E W).FullSubcategory) :
+      HEq (rationalHomScalarComparison l E L ι W A).hom
+        ((QL W).map (integralHomScalarComparison l E L ι W
+          (integralPairOfRationalHomPair l E W A)).hom) :=
+    (rationalHomScalarComparison_existsUnique l E L ι W A).exists.choose_spec
+  -- The integral pairs underlying the four rational pairs.
+  have pe1 : integralPairOfRationalHomPair l E X ((rationalPair l E g).obj P) =
+      (integralPair l E g).obj IP := by
+    apply ObjectProperty.FullSubcategory.ext
+    change (op ((rationalDerivedPullback l E g).obj P.obj.1.unop).obj,
+      ((rationalDerivedPullback l E g).obj P.obj.2).obj) = _
+    rw [hr, hr]
+    rfl
+  have pe2 : integralPairOfRationalHomPair l L Y (rationalHomScalarPair l E L ι Y P) =
+      integralHomScalarPair l E L ι Y IP := by
+    apply ObjectProperty.FullSubcategory.ext
+    change (op ((sfRationalScalarExtension l E Y 0
+      (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P.obj.1.unop).obj,
+      ((sfRationalScalarExtension l E Y 0
+        (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P.obj.2).obj) = _
+    rw [hs, hs]
+    rfl
+  have pe3 : integralPairOfRationalHomPair l L X
+      ((rationalPair l L g).obj (rationalHomScalarPair l E L ι Y P)) =
+      (integralPair l L g).obj (integralHomScalarPair l E L ι Y IP) := by
+    apply ObjectProperty.FullSubcategory.ext
+    change (op ((rationalDerivedPullback l L g).obj
+        ((sfRationalScalarExtension l E Y 0
+          (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P.obj.1.unop)).obj,
+      ((rationalDerivedPullback l L g).obj ((sfRationalScalarExtension l E Y 0
+        (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P.obj.2)).obj) = _
+    rw [hr, hr, hs, hs]
+    rfl
+  have pe4 : integralPairOfRationalHomPair l L X
+      (rationalHomScalarPair l E L ι X ((rationalPair l E g).obj P)) =
+      integralHomScalarPair l E L ι X ((integralPair l E g).obj IP) := by
+    apply ObjectProperty.FullSubcategory.ext
+    change (op ((sfRationalScalarExtension l E X 0
+        (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+          ((rationalDerivedPullback l E g).obj P.obj.1.unop)).obj,
+      ((sfRationalScalarExtension l E X 0
+        (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+          ((rationalDerivedPullback l E g).obj P.obj.2)).obj) = _
+    rw [hs, hs, hr, hr]
+    rfl
+  -- The six vertices.
+  have o1 : (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+      ((rationalDerivedPullback l E g).obj ((rationalDerivedInternalHom l E Y).obj P)) =
+      (QL X).obj ((S X).obj ((constructibleIntegralPullback l E g).obj
+        ((constructibleIntegralHom l E Y).obj IP))) := by
+    rw [hs, hr, hH]
+    rfl
+  have o2 : (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+      ((rationalDerivedInternalHom l E X).obj ((rationalPair l E g).obj P)) =
+      (QL X).obj ((S X).obj ((constructibleIntegralHom l E X).obj
+        ((integralPair l E g).obj IP))) := by
+    rw [hs, hH, pe1]
+    rfl
+  have o3 : (rationalDerivedInternalHom l L X).obj
+      (rationalHomScalarPair l E L ι X ((rationalPair l E g).obj P)) =
+      (QL X).obj ((constructibleIntegralHom l L X).obj
+        (integralHomScalarPair l E L ι X ((integralPair l E g).obj IP))) := by
+    rw [hH, pe4]
+    rfl
+  have o4 : (rationalDerivedPullback l L g).obj
+      ((sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+        ((rationalDerivedInternalHom l E Y).obj P)) =
+      (QL X).obj ((constructibleIntegralPullback l L g).obj
+        ((S Y).obj ((constructibleIntegralHom l E Y).obj IP))) := by
+    rw [hr, hs, hH]
+    rfl
+  have o5 : (rationalDerivedPullback l L g).obj
+      ((rationalDerivedInternalHom l L Y).obj (rationalHomScalarPair l E L ι Y P)) =
+      (QL X).obj ((constructibleIntegralPullback l L g).obj
+        ((constructibleIntegralHom l L Y).obj (integralHomScalarPair l E L ι Y IP))) := by
+    rw [hr, hH, pe2]
+    rfl
+  have o6 : (rationalDerivedInternalHom l L X).obj
+      ((rationalPair l L g).obj (rationalHomScalarPair l E L ι Y P)) =
+      (QL X).obj ((constructibleIntegralHom l L X).obj
+        ((integralPair l L g).obj (integralHomScalarPair l E L ι Y IP))) := by
+    rw [hH, pe3]
+    rfl
+  -- The six arrows are localizations of the integral arrows.
+  have oa : (rationalDerivedPullback l E g).obj ((rationalDerivedInternalHom l E Y).obj P) =
+      (sfRationalConstructibleLocalization l E X).obj ((constructibleIntegralPullback l E g).obj
+        ((constructibleIntegralHom l E Y).obj IP)) := by
+    rw [hr, hH]
+    rfl
+  have ob : (rationalDerivedInternalHom l E X).obj ((rationalPair l E g).obj P) =
+      (sfRationalConstructibleLocalization l E X).obj ((constructibleIntegralHom l E X).obj
+        ((integralPair l E g).obj IP)) := by
+    rw [hH, pe1]
+    rfl
+  have h1 := (functor_map_heq
+    (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι)
+    oa ob (hβ E P)).trans (ms X ((integralComparison l E g).hom.app IP))
+  have h2 := (hh X ((rationalPair l E g).obj P)).trans
+    (functor_map_heq (QL X) (by rw [pe1]) (by rw [pe1])
+      (dep_heq (fun A ↦ (integralHomScalarComparison l E L ι X A).hom) pe1))
+  have hHobj : ((rationalDerivedInternalHom l E Y).obj P).obj =
+      (constructibleIntegralHom l E Y).obj IP := by
+    rw [hH]
+  have h3 := (hρ ((rationalDerivedInternalHom l E Y).obj P)).trans
+    (functor_map_heq (QL X) (by rw [hHobj]) (by rw [hHobj])
+      (dep_heq (fun A ↦ (integralPullbackScalarComparison l E L ι g A).hom) hHobj))
+  have oc : (sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+      ((rationalDerivedInternalHom l E Y).obj P) =
+      (sfRationalConstructibleLocalization l L Y).obj ((S Y).obj
+        ((constructibleIntegralHom l E Y).obj IP)) := by
+    rw [hs, hH]
+    rfl
+  have od : (rationalDerivedInternalHom l L Y).obj (rationalHomScalarPair l E L ι Y P) =
+      (sfRationalConstructibleLocalization l L Y).obj ((constructibleIntegralHom l L Y).obj
+        (integralHomScalarPair l E L ι Y IP)) := by
+    rw [hH, pe2]
+    rfl
+  have h4 := (functor_map_heq (rationalDerivedPullback l L g) oc od (hh Y P)).trans
+    (mr (integralHomScalarComparison l E L ι Y IP).hom)
+  have h5 := (hβ L (rationalHomScalarPair l E L ι Y P)).trans
+    (functor_map_heq (QL X) (by rw [pe2]) (by rw [pe2])
+      (dep_heq (fun A ↦ (integralComparison l L g).hom.app A) pe2))
+  have ha := (hρ P.obj.1.unop).trans (HEq.rfl :
+    HEq ((QL X).map (integralPullbackScalarComparison l E L ι g P.obj.1.unop.obj).hom)
+      (TensorProduct.tmul (Padic.coefficientExtensionIntegers l L)
+        (1 : Localization.Away (Padic.coefficientExtensionUniformizer l L))
+          (integralPullbackScalarComparison l E L ι g P.obj.1.unop.obj).hom))
+  have oe : (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+      ((rationalDerivedPullback l E g).obj P.obj.2) =
+      (QL X).obj ((S X).obj ((constructibleIntegralPullback l E g).obj P.obj.2.obj)) := by
+    rw [hs, hr]
+    rfl
+  have of : (rationalDerivedPullback l L g).obj
+      ((sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+        P.obj.2) =
+      (QL X).obj ((constructibleIntegralPullback l L g).obj ((S Y).obj P.obj.2.obj)) := by
+    rw [hr, hs]
+    rfl
+  have hb := (iso_inv_heq ((rationalPullbackScalarComparison l E L ι g).app P.obj.2)
+    ((QL X).mapIso (integralPullbackScalarComparison l E L ι g P.obj.2.obj))
+    oe of (hρ P.obj.2)).trans (HEq.rfl :
+    HEq ((QL X).map (integralPullbackScalarComparison l E L ι g P.obj.2.obj).inv)
+      (TensorProduct.tmul (Padic.coefficientExtensionIntegers l L)
+        (1 : Localization.Away (Padic.coefficientExtensionUniformizer l L))
+          (integralPullbackScalarComparison l E L ι g P.obj.2.obj).inv))
+  have h6 := rationalHom_map_heq l L X
+    ((rationalPair l L g).obj (rationalHomScalarPair l E L ι Y P))
+    (rationalHomScalarPair l E L ι X ((rationalPair l E g).obj P))
+    ((integralPair l L g).obj (integralHomScalarPair l E L ι Y IP))
+    (integralHomScalarPair l E L ι X ((integralPair l E g).obj IP)) pe3 pe4
+    ((rationalPullbackScalarComparison l E L ι g).hom.app P.obj.1.unop)
+    ((rationalPullbackScalarComparison l E L ι g).inv.app P.obj.2)
+    (integralPullbackScalarComparison l E L ι g P.obj.1.unop.obj).hom
+    (integralPullbackScalarComparison l E L ι g P.obj.2.obj).inv ha hb
+  have hI := congrArg (QL X).map (eq_of_heq (integral_scalar l E g L ι IP))
+  simp only [Functor.map_comp] at hI
+  apply eq_of_heq
+  refine (heq_comp o1 o2 o3 h1 h2).trans ((heq_of_eq hI).trans ?_)
+  exact (heq_comp o1 o4 o3 h3 (heq_comp o4 o5 o3 h4 (heq_comp o5 o6 o3 h5 h6))).symm
+
+end RationalScalarProof
+
 /-- The rational pullback shift is the localization of the termwise reindexing shift,
 conjugated only by the specified ordinary-to-completed pullback maps.
 Source: blueprint Step 5; Stacks 011G, 099B
