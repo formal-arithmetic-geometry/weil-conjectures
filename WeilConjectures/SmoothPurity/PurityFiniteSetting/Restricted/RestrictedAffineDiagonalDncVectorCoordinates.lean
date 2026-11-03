@@ -47,13 +47,27 @@ def vectorModelSectionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
       (IsPullback.of_horiz_isIso ⟨w.trans (Category.comp_id _).symm⟩)
       s (VectorBundleZeroSection.zero B d F) (hz.trans (Category.id_comp _).symm)
 
+private theorem sourceEtaleColimits (P : PurityFiniteSetting.{u}) (B : Scheme.{u})
+    (J : Type v) [Category.{w} J]
+    [HasColimitsOfShape J (ModuleCat.{u + 1} P.Coefficient)] :
+    HasColimitsOfShape J (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) :=
+  Sheaf.instHasColimitsOfShape
+
+private theorem sourceProEtaleColimits (P : PurityFiniteSetting.{u}) (B : Scheme.{u})
+    (J : Type v) [Category.{w} J]
+    [HasColimitsOfShape J (ModuleCat.{u + 1} P.Coefficient)] :
+    HasColimitsOfShape J
+      (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} P.Coefficient)) :=
+  Sheaf.instHasColimitsOfShape
+
 section ProofHelpers
 
 -- `import all` exposes this proved helper under its private numerical name.
 -- Construct that name as in the library's other private proof imports.
 local macro "nativeDncReading" : term =>
   pure <| Lean.mkIdent <|
-    (Lean.Name.num `_private.WeilConjectures.SmoothPurity.PurityFiniteSetting.SectionRestriction.PuritySectionConstantTrivialization 0) ++
+    (Lean.Name.num (`_private.WeilConjectures.SmoothPurity.PurityFiniteSetting ++
+      `SectionRestriction.PuritySectionConstantTrivialization) 0) ++
       `WeilConjectures.PurityFiniteSetting.SectionRestriction.delta_etale_reading
 
 -- Cache the canonical sheaf colimit instances used by the derived functors.

@@ -189,9 +189,7 @@ private theorem affine_space_mate_isIso (hl : l ≠ D.p) {m n : ℕ} (h : n ≤ 
   let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow (by
     rw [← Nat.card_eq_fintype_card, D.card_base, D.cardinality_eq])
   let : CharP D.k D.p := charP_of_injective_algebraMap (algebraMap D.k₀ D.k).injective D.p
-  have hDVR := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hDVR := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     hDVR.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

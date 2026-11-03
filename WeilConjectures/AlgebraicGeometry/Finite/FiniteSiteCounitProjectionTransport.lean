@@ -29,6 +29,9 @@ Stacks Project, Tags 0B65, 07A4, 0GL1 and 0F7F
 (blueprint: lem-pur-finite-site-counit-projection-transport).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false

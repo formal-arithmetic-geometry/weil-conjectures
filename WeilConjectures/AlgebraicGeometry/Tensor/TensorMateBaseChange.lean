@@ -44,7 +44,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 -- These proved helpers generalize the corresponding private calculation in
--- WeilConjectures.AlgebraicGeometry.Smooth.SmoothExceptionalBaseChange to an arbitrary Cartesian square.
+-- WeilConjectures.AlgebraicGeometry.Smooth.SmoothExceptionalBaseChange to an arbitrary
+-- Cartesian square.
 -- The concrete tensor notation and generic monoidal notation unfold to the same structure.
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

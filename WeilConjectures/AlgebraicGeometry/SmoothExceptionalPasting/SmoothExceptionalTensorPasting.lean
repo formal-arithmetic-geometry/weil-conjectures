@@ -598,12 +598,4 @@ def symmetry
     ((Etale.derivedTensor A X).obj K).obj M ≅ ((Etale.derivedTensor A X).obj M).obj K :=
   @BraidedCategory.braiding _ _ _ (_root_.DerivedCategory.braidedCategory' _) K M
 
-section
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
-
-attribute [local irreducible] reassociationClause chainReassociationClause
-
-end
-
 end AlgebraicGeometry.ProEtale.SmoothExceptionalPasting
