@@ -672,102 +672,16 @@ end
 section
 open AlgebraicGeometry.Etale AlgebraicGeometry.Etale.AllCoefficientProjection
 
-/-- Finite projection, naturality, scalar reduction, compactification and proper coincidence.
-Source: fix-prop-coherence, the clause supplied by `finite`
-in `Sheaf.Paper.CondensedAllCoefficientProjectionFormula` (blueprint: fix-prop-coherence). -/
-def finiteProjection : Prop :=
-  ∀ (D₀ : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
-    (hell : ell ≠ D₀.p) (E : Type (u + 1)) [Field E] [Algebra (Padic ell) E]
-    [FiniteDimensional (Padic ell) E] (n : ℕ) [Fact (1 ≤ n)]
-    {X Y : Scheme.{u}}
-    [X.Over (Spec (.of D₀.k))] [Y.Over (Spec (.of D₀.k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of D₀.k))] [QuasiCompact (X ↘ Spec (.of D₀.k))]
-    [LocallyOfFiniteType (Y ↘ Spec (.of D₀.k))] [QuasiCompact (Y ↘ Spec (.of D₀.k))]
-    (f : X ⟶ Y) [f.IsOver (Spec (.of D₀.k))]
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    (c : Compactification f)
-    (K : DerivedCategoryModule (Padic.coefficientExtensionRing ell E n) X) (L :
-        DerivedCategoryModule (Padic.coefficientExtensionRing ell E n) Y)
-    (hK : DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing ell E n) X K)
-    (hL : DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing ell E n) Y L)
-    (hTor : ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing ell E n)
-        Y a b L),
-    (type_of% (isIso_finiteCompactProjection D₀ ell hell E n f c K L hK hL hTor)) ∧
-    (∀ (K' : DerivedCategoryModule (Padic.coefficientExtensionRing ell E n) X) (L' :
-        DerivedCategoryModule (Padic.coefficientExtensionRing ell E n) Y)
-      (a : K ⟶ K') (b : L ⟶ L'),
-      type_of% (WeilConjectures.sixFunctorProjection_naturality (Padic.coefficientExtensionRing
-        ell E n) c a b)) ∧
-    (∀ d : Compactification f,
-      type_of% (WeilConjectures.sixFunctorProjection_compactification
-        (Padic.coefficientExtensionRing ell E n) c d K L)) ∧
-    (∀ (_hKTor : ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn
-      (Padic.coefficientExtensionRing ell E n) X a b K)
-      (J : Ideal (Padic.coefficientExtensionRing ell E n))
-      (_hJ : ∃ m : ℕ, 1 ≤ m ∧ m ≤ n ∧ Nonempty
-        ((Padic.coefficientExtensionRing ell E n ⧸ J) ≃+*
-          Padic.coefficientExtensionRing ell E m)),
-      type_of% (WeilConjectures.sixFunctorProjection_reduction_finite
-        (Padic.coefficientExtensionRing ell E n) c J K L)) ∧
-    (∀ [IsProper f],
-      type_of% (WeilConjectures.sixFunctorProjection_proper (Padic.coefficientExtensionRing ell E
-        n) f K L))
-
 end
 
 section
 open AlgebraicGeometry.Etale AlgebraicGeometry.Etale.AllCoefficientProjection
 open AlgebraicGeometry.ProEtale.CondensedRing.CompactSupportComposition
 
-/-- Finite projection composition and its canonical associativity pentagon.
-Source: fix-prop-coherence, the clause supplied by `finiteComposition`
-in `Sheaf.Paper.CondensedAllCoefficientProjectionFormula` (blueprint: fix-prop-coherence). -/
-def finiteProjectionComposition : Prop :=
-  ∀ (D₀ : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
-    (E : Type (u + 1)) [Field E] [Algebra (Padic ell) E]
-    [FiniteDimensional (Padic ell) E] (n : ℕ) [Fact (1 ≤ n)]
-    (_hell : ell ≠ D₀.p) {X Y Z T : SepFinType D₀.k}
-    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)
-    (d : Compactification g.hom.left)
-    (e : Compactification (f.hom.left ≫ d.i))
-    (K : DerivedCategoryModule (Padic.coefficientExtensionRing ell E n) X.obj.left)
-    (L : DerivedCategoryModule (Padic.coefficientExtensionRing ell E n) Z.obj.left)
-    (_hK : DerivedCategory.isBoundedConstructible
-      (Padic.coefficientExtensionRing ell E n) X.obj.left K)
-    (_hL : DerivedCategory.isBoundedConstructible
-      (Padic.coefficientExtensionRing ell E n) Z.obj.left L)
-    (_hTor : ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn
-      (Padic.coefficientExtensionRing ell E n) Z.obj.left a b L),
-    (type_of% (WeilConjectures.sixFunctorProjection_composition
-      (Padic.coefficientExtensionRing ell E n) f.hom.left g.hom.left d e K L)) ∧
-    finitePentagonAssertions (Padic.coefficientExtensionRing ell E n) f g h
-
 end
 
 section
 open AlgebraicGeometry.ProEtale AlgebraicGeometry.ProEtale.AllCoefficientProjection
-
-/-- The specified finite projection on the intrinsic pro-etale bounded-constructible domain.
-Source: fix-prop-coherence, the clause supplied by `finite`
-in `Sheaf.Paper.CondensedAllCoefficientProjectionFormula` (blueprint: fix-prop-coherence). -/
-def intrinsicFiniteProjection : Prop :=
-  ∀ (D₀ : WeilConjectures.FiniteFieldDatum.{u})
-    (ell : ℕ) [Fact ell.Prime] (_hell : ell ≠ D₀.p)
-    (E : Type (u + 1)) [Field E] [Algebra (Padic ell) E]
-    [FiniteDimensional (Padic ell) E] (n : ℕ) [Fact (1 ≤ n)]
-    {X Y : SepFinType D₀.k} (f : X ⟶ Y) (c : Compactification f.hom.left)
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X.obj.left)
-      (ModuleCat.{u + 1} (Padic.coefficientExtensionRing ell E n))))
-    (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y.obj.left)
-      (ModuleCat.{u + 1} (Padic.coefficientExtensionRing ell E n))))
-    (_hK : DerivedCategory.boundedConstructibleIntrinsic
-      (Padic.coefficientExtensionRing ell E n) X.obj.left K)
-    (_hL : DerivedCategory.boundedConstructibleIntrinsic
-      (Padic.coefficientExtensionRing ell E n) Y.obj.left L)
-    (_hTor : ∃ a b : ℤ, DerivedCategory.torAmplitudeIn
-      (ModuleCat.{u + 1} (Padic.coefficientExtensionRing ell E n)) Y.obj.left a b L),
-    IsIso (((projectionMapOfCompactification
-      (ModuleCat.{u + 1} (Padic.coefficientExtensionRing ell E n)) c).app K).app L)
 
 end
 
@@ -882,59 +796,6 @@ end
 
 section
 open CompactificationReindexing
-
-/-- Canonical common-refinement-normalized comparisons identify the two compact-support exchange
-maps.
-Source: fix-prop-coherence, the clause supplied by `exchangeProjection_compactification_independent`
-in `Sheaf.SmoothPurity.ExchangeProjection` (blueprint: fix-prop-coherence). -/
-def exchangeRefinement : Prop :=
-  ∀ (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
-    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]
-    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]
-    (n : ℕ) (_hn : 1 ≤ n)
-    (_hcoeff :
-      Nonempty (Mon.mk Λ ≅ Mon.mk (properOpenFiniteCoefficient ℓ E n)) ∨
-      Nonempty (Mon.mk Λ ≅ Mon.mk (properOpenIntegralCoefficient ℓ E)) ∨
-      Nonempty (Mon.mk Λ ≅ Mon.mk (properOpenFieldCoefficient ℓ E)) ∨
-      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))
-    (S : Scheme.{u}) (_hℓ : ∀ s : S, IsUnit (ℓ : S.residueField s))
-    {X Y Y' : Scheme.{u}}
-    [X.Over S] [Y.Over S] [Y'.Over S]
-    [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)]
-    [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)]
-    [LocallyOfFiniteType (Y' ↘ S)] [QuasiCompact (Y' ↘ S)]
-    (f : X ⟶ Y) [f.IsOver S] [IsSeparated f]
-    [LocallyOfFiniteType f] [QuasiCompact f]
-    (v : Y' ⟶ Y) [v.IsOver S] [IsSeparated v]
-    [LocallyOfFiniteType v] [QuasiCompact v],
-    ∃ τ : ∀ c₁ c₂ : Compactification f,
-        (boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c₁ ≅
-          (boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c₂,
-      ∃ τ' : ∀ c₁ c₂ : Compactification f,
-        (boundedConstructible (condensedRingObj Λ X)).ι ⋙
-            P Λ (pullback.fst f v) ⋙ F Λ (c₁.baseChange v) ≅
-          (boundedConstructible (condensedRingObj Λ X)).ι ⋙
-            P Λ (pullback.fst f v) ⋙ F Λ (c₂.baseChange v),
-        (∀ (c₁ c₂ d : Compactification f) (h₁ : d.Refinement c₁)
-            (h₂ : d.Refinement c₂)
-            (K : BoundedConstructible (condensedRingObj Λ X)),
-          (τ c₁ c₂).hom.app K ≫ (refinement Λ h₂).app K.obj =
-            (refinement Λ h₁).app K.obj) ∧
-        (∀ (c₁ c₂ d : Compactification f) (h₁ : d.Refinement c₁)
-            (h₂ : d.Refinement c₂)
-            (K : BoundedConstructible (condensedRingObj Λ X)),
-          (τ' c₁ c₂).hom.app K ≫
-              (refinement Λ (refinementBaseChange h₂ v)).app
-                ((P Λ (pullback.fst f v)).obj K.obj) =
-            (refinement Λ (refinementBaseChange h₁ v)).app
-              ((P Λ (pullback.fst f v)).obj K.obj)) ∧
-        (∀ (c₁ c₂ : Compactification f)
-            (K : BoundedConstructible (condensedRingObj Λ X)),
-          (P Λ v).map ((τ c₁ c₂).hom.app K) ≫
-              (exchangeProjectionData Λ c₂ v).compact.app K.obj =
-            (exchangeProjectionData Λ c₁ v).compact.app K.obj ≫
-              (τ' c₁ c₂).hom.app K)
 
 end
 
@@ -1197,43 +1058,5 @@ def directExchangeIdentity : Prop :=
         Functor.whiskerRight (exchangeScalarIdentity R X).inv (F R f)
 
 end
-
-/-- The existing operations and their proved comparison maps satisfy coherence.
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-lefschetz-verdier/sec-trace-classes-and-the-lefschetz-verdier-formula/
-sk-d-proper-pushforward/sk-thm-sf-compatibility/fix-prop-coherence.md and .proof.md
-(blueprint: fix-prop-coherence).
-
-Proof plan, in the six steps of the node:
-1. Use the canonical exchange identity and horizontal/vertical mate-pasting laws.
-   Compact-support composition, common-refinement normalization and the projection
-   formula supply the associativity pentagon, projection diamonds and proper coincidence
-   (fix-lem-exchanges, fix-prop-projection-formula, def-fix-six-functor-datum).
-2. The elementary comparison maps preserve tensor reassociation, evaluation, and
-   adjunction units and counits (lem-fix-operation-reduction). Paste these actual
-   squares, using naturality when a defining factor is mapped by an operation.
-3. The finite-Tor Hom, integral Hom and integral finite-extension comparisons are
-   transposes of the same scalar-extended evaluations. Their unit and scalar tower
-   equations extend the elementary equations on every stated overlap
-   (thm-coef-finite-hom, lem-coef-integral-hom-reduction,
-   lem-coef-integral-finite-extension).
-4. On Dctf the finite exceptional and scalar-six comparisons preserve both adjunction
-   equations (lem-coef-finite-exceptional, sk-prop-scalar-six, sk-thm-existence).
-   The Hom bijection therefore identifies the compared transpose with the transpose
-   of the compared arrow. Apply this to the specified Verdier exchange
-   (fix-cor-verdier-exchange); no ambient exceptional adjoint is assumed.
-5. Retain the normalized purity, affine orientation, trace, composition and base-change
-   squares (thm-pur-finite-reduction-of-purity). Compose with evaluation to obtain the
-   site-perfect pairing equation and its inverse-adjoint square
-   (thm-pod-finite-reduction).
-6. The algebraic operations and duality comparisons are Weil-equivariant
-   (lem-fix-weil-operations, cor-coef-verdier-weil-equivariance). Composition preserves
-   their equivariance equations. Use prop-pur-weil-equivariance-compatibilities for
-   the additional geometric- and scheme-Frobenius purity squares. No new preservation
-   or biduality statement, or triangulated structure on Weil pairs, is inferred.
--/
-theorem coherence : Laws.{u} := by
-  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.ProvedComparisonCoherence
