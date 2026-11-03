@@ -27,6 +27,7 @@ universe u
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
   ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+open AlgebraicGeometry.Etale (purityTwistTransport)
 namespace WeilConjectures.PurityFiniteSetting.OrientationRefinement
 
 set_option backward.isDefEq.respectTransparency false

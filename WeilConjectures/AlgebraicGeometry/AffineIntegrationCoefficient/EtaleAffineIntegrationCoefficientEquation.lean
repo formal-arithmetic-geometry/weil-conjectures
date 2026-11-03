@@ -487,7 +487,7 @@ theorem equation (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell
       (trace _ (pow_pos (Fact.out : ell.Prime).pos _) A hA S hS d)
       (trace _ (pow_pos (Fact.out : ell.Prime).pos _) B hB S hS d)
       ht' hPA hPB K).1
-    have hq := (etaleCompactScalarCoherence φ (affineTraceProjection S d)
+    have hq := (compactScalarMap_coherence φ (affineTraceProjection S d)
       (compactification S d)).1 (IntegrationScalar.object (affineTraceProjection S d)
         (coefficient A _ hA S d) K)
     dsimp only [compactScalarMap] at hq

@@ -172,7 +172,7 @@ private theorem identity_open_scalar
     (open_identity_counit A S) (open_identity_counit B S)
     (open_scalar_counit φ (𝟙 S))
   intro X
-  rw [← (etaleScalarPullbackIdentityNormalization φ S).2.2 X,
+  rw [← (leftDerivedUpperStarId_scalarExtension_normalization φ S).2.2 X,
     Iso.inv_hom_id_app_assoc]
 
 private theorem identity_direct_scalar

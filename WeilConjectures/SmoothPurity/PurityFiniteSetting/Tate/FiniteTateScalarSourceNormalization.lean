@@ -235,6 +235,8 @@ open scoped CategoryTheory.Functor
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory
   ProEtale.pbcFixedScalarExtension Etale.upperStar Etale.lowerStar
+open AlgebraicGeometry.Etale (purityRepresentativeSingleMap purityScalarSingleMap
+  purityScalarUnitMap puritySingleFromRepresentativeMap)
 namespace WeilConjectures.PurityFiniteSetting
 variable {A B : Type (u + 1)} [CommRing A] [CommRing B]
 

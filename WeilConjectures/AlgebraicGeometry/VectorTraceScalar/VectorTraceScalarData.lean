@@ -239,6 +239,7 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open WeilConjectures.PurityFiniteSetting
+open AlgebraicGeometry.Etale (purityScalarUnitMap)
 namespace AlgebraicGeometry.Etale
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory

@@ -627,7 +627,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   ModuleCat.extendScalars
   projectiveLineTraceDatum projectiveLineTraceTransport
   AlgebraicGeometry.Etale.purityScalarSingleMap
-  WeilConjectures.PurityFiniteSetting.purityScalarUnitMap
+  AlgebraicGeometry.Etale.purityScalarUnitMap
   ExceptionalCoefficients.tensorIso ExceptionalCoefficients.unitIso
   singleFunctorObjUnitIso derivedTensorRightUnitor
   HasDerivedCategory.ofIsGrothendieckAbelian HasDerivedCategory.ofHasKInjectiveResolutions

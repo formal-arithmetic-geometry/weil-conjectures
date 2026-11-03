@@ -45,6 +45,7 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Functor
+open AlgebraicGeometry.Etale (purityTwistTransport)
 namespace WeilConjectures.PurityFiniteSetting
 namespace OrientationRefinement
 

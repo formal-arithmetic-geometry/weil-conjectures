@@ -22,6 +22,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+open AlgebraicGeometry.Etale (purityTwistTransport)
 namespace WeilConjectures.PurityFiniteSetting.OrientationRefinement
 
 private theorem integration_mate_square

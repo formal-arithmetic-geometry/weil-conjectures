@@ -32,6 +32,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
   AlgebraicGeometry Opposite
 open AlgebraicGeometry.Scheme.AffineZariskiSite
+open AlgebraicGeometry.Etale (purityTwistTransport)
 namespace WeilConjectures.PurityFiniteSetting.OrientationRefinement
 
 private theorem mapped_adjunct_isIso

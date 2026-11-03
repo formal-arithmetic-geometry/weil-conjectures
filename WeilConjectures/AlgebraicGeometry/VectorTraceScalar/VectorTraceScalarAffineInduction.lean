@@ -33,6 +33,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open WeilConjectures.PurityFiniteSetting
 open scoped CategoryTheory.Functor
+open AlgebraicGeometry.Etale (purityScalarSingleMap purityScalarUnitMap)
 namespace AlgebraicGeometry.Etale.VectorTraceScalar
 set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2

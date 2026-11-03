@@ -21,6 +21,7 @@ set_option Elab.async false
 set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
+open AlgebraicGeometry.Etale (RfPullback RfShriek RfUpper purityTwistTransport)
 namespace WeilConjectures.PurityFiniteSetting.OrientationRefinement
 
 attribute [local implicit_reducible] Scheme.Modules

@@ -178,6 +178,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Functor
+open AlgebraicGeometry.Etale (purityTwistTransport)
 namespace WeilConjectures.PurityFiniteSetting
 
 attribute [local implicit_reducible] Scheme.Modules Etale.dualizingComplex

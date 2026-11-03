@@ -188,7 +188,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   ProEtale.pbcFixedScalarExtension derivedTensor upperStar lowerStar
   projectiveLineTraceDatum projectiveLineTraceTransport
   AlgebraicGeometry.Etale.purityScalarSingleMap
-  WeilConjectures.PurityFiniteSetting.purityScalarUnitMap
+  AlgebraicGeometry.Etale.purityScalarUnitMap
   ExceptionalCoefficients.tensorIso ExceptionalCoefficients.unitIso
   singleFunctorObjUnitIso derivedTensorRightUnitor
   HasDerivedCategory.ofIsGrothendieckAbelian HasDerivedCategory.ofHasKInjectiveResolutions
@@ -209,8 +209,8 @@ theorem ordinaryChartUnitMap_eq
       (scalarExtension φ T).map (ordinaryFiniteSingleUnitIso A T).hom ≫
         (ExceptionalCoefficients.unitIso φ T).hom ≫
         (ordinaryFiniteSingleUnitIso B T).inv := by
-  unfold VectorTraceScalar.unit WeilConjectures.PurityFiniteSetting.purityScalarUnitMap
-    WeilConjectures.PurityFiniteSetting.purityTransportUnitMap
+  unfold VectorTraceScalar.unit AlgebraicGeometry.Etale.purityScalarUnitMap
+    AlgebraicGeometry.Etale.purityTransportUnitMap
   rfl
 
 end AlgebraicGeometry.Etale

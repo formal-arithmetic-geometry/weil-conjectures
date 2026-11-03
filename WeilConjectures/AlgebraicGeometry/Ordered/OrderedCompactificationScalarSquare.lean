@@ -312,7 +312,7 @@ theorem orderedCompactification_scalar_square
     comparison_via B k S d c c' e r s ⟨_, hMB⟩⟩⟩
   rw [comparison_eq A k S d c M, comparison_eq B k S d c ⟨_, hMB⟩,
     etaleCoefficientMap_eq_compactScalarMap, Functor.map_comp, Category.assoc]
-  have hr := (etaleCompactScalarCoherence φ (affineTraceProjection S d)
+  have hr := (compactScalarMap_coherence φ (affineTraceProjection S d)
     (HasCompactification.compactification (affineTraceProjection S d))).2.2 c M
       ⟨⟨_, hMB⟩, rfl⟩
   rw [hr, ← Category.assoc]

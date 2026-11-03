@@ -174,6 +174,7 @@ set_option autoImplicit false
 set_option Elab.async false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
+open AlgebraicGeometry.Etale (purityTwistTransport)
 namespace WeilConjectures.PurityFiniteSetting
 
 attribute [local implicit_reducible] Scheme.Modules

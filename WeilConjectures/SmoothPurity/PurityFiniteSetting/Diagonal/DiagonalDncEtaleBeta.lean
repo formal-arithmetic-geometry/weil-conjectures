@@ -171,6 +171,7 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Functor
+open AlgebraicGeometry.Etale (purityTwistTransport)
 namespace WeilConjectures.PurityFiniteSetting
 
 attribute [local irreducible] OrientationRefinement.vectorBetaInverse Dnc.sectionBaseChange
