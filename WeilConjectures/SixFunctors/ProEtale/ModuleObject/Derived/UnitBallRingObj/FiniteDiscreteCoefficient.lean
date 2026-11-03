@@ -246,6 +246,19 @@ noncomputable def boundedConstructibleLowerShriekOfCompactification :
   boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj T) ℓ c.overI ⋙
     boundedConstructibleLowerStar ℓ T c.overG
 
+/-- `Rf_!^c` on bounded constructible complexes is the restriction of the derived lower shriek
+`Rf_!(c)⟦T̲⟧` on the ambient derived categories. -/
+noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility :
+    boundedConstructibleLowerShriekOfCompactification ℓ T c ⋙ (boundedConstructible _).ι ≅
+      (boundedConstructible _).ι ⋙ Rf_!(c)⟦Profinite.continuousMapRingObj T⟧ :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ T c.overG) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (boundedConstructibleOpenImmersionLowerShriekCompatibility (Profinite.continuousMapRingObj T)
+        ℓ c.overI) _ ≪≫
+    Functor.associator _ _ _
+
 end OfCompactification
 
 variable (f : X ⟶ Y)
@@ -376,6 +389,19 @@ noncomputable def boundedConstructibleLowerShriekOfCompactification :
     Dᵇc(X.left)⟦Profinite.continuousMapRingObj O⟧ ⥤ Dᵇc(Y.left)⟦Profinite.continuousMapRingObj O⟧ :=
   boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj O) ℓ c.overI ⋙
     boundedConstructibleLowerStar ℓ O c.overG
+
+/-- `Rf_!^c` on bounded constructible complexes is the restriction of the derived lower shriek
+`Rf_!(c)⟦O̲⟧` on the ambient derived categories. -/
+noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility :
+    boundedConstructibleLowerShriekOfCompactification ℓ O c ⋙ (boundedConstructible _).ι ≅
+      (boundedConstructible _).ι ⋙ Rf_!(c)⟦Profinite.continuousMapRingObj O⟧ :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ O c.overG) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (boundedConstructibleOpenImmersionLowerShriekCompatibility (Profinite.continuousMapRingObj O)
+        ℓ c.overI) _ ≪≫
+    Functor.associator _ _ _
 
 end OfCompactification
 

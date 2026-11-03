@@ -214,6 +214,13 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientSectionsLocalization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSlice.ProfiniteFreeSliceDerivedData
+public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSlice.ProfiniteFreeSliceFreeGenerators
+public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSlice.ProfiniteFreeSliceGeometricData
+public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSlice.ProfiniteFreeSlicePointComposition
+public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSlice.ProfiniteFreeSliceRepresentable
+public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSlice.ProfiniteFreeSliceRestrictionKInjective
 
 /-! # Profinite free modules and unbounded derived slice Hom
 
@@ -589,5 +596,55 @@ structure Comparison where
       (profinitePointModuleForgetPullbackIso Λ (test X P).hom).hom.app
           ((pointModulePullback Λ X).obj M) ≫
         (upperStarFromPointComp (test X P).hom).hom.app M.X
+
+end AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
+
+namespace AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
+
+/-- Relative profinite free modules and the normalized unbounded derived slice Hom identity.
+
+Source: Stacks Project, Tags 08FI and 08J7; Hemo--Richarz--Scholbach,
+Example 3.1 and (4.1) (blueprint: lem-sfb-profinite-free-slice-derived-hom).
+
+Proof: the represented-parameter and free-module adjunction comparisons
+supply their generator-normalized isomorphisms. The canonical localization
+comparison and adjunction triangle show that sectionToSlice is invertible.
+The source library's exact weakly-etale extension-by-zero adjunction shows
+that actual restriction preserves K-injective complexes.
+The normalized internal/section derived-Hom comparison supplies the closed
+structure, tensor models, and evaluation compatibility. The degree-zero Hom
+projection and the underived free-generator comparison produce a natural
+chain isomorphism. Its normalized derived descent supplies gamma and the
+localization square. Finally, scalar-extension cancellation lifts the
+point compositor with its prescribed underlying abelian map. All fields
+are inserted into the unchanged Comparison structure using the same freeIso
+and homComparison throughout. -/
+theorem exists_comparison : Nonempty (Comparison Λ X P) := by
+  obtain ⟨S, T, t, θ, hθ, _⟩ :=
+    ModuleObjectRingedComparison.moduleObject_ringedSite_derived_comparison Λ X
+  obtain ⟨e, he⟩ := exists_set_comparison X P
+  obtain ⟨c, hc⟩ := exists_point_comparison Λ X P
+  obtain ⟨f, hf⟩ := exists_free_comparison Λ X P
+  obtain ⟨d⟩ := exists_derived_comparison_data Λ X P f
+    (restrictionComplex_isKInjective Λ X P) θ
+  refine ⟨{
+    setIso := e
+    setGenerators := he
+    freeIso := f
+    freeGenerators := hf
+    closedStructure := S
+    tensorModels := T
+    tensorComparison := t
+    homComparison := θ
+    homEvaluation := hθ
+    gamma := d.gamma
+    sectionIdentification := sectionToSlice_isIso Λ X P
+    restrictionKInjective := restrictionComplex_isKInjective Λ X P
+    representative := d.representative
+    evaluation := d.evaluation
+    localization := d.localization
+    pointComposition := c
+    pointComposition_underlying := hc
+  }⟩
 
 end AlgebraicGeometry.ProEtale.ProfiniteFreeSlice

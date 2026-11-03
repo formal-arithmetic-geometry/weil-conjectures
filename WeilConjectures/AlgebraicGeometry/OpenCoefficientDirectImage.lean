@@ -33,6 +33,15 @@ import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolut
 import WeilConjectures.AlgebraicGeometry.Bounded.BoundedComplexDirectImagePresheaf
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Algebra.Field.ULift
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartTriangulated
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelHeartClosureSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
+public import WeilConjectures.AlgebraicGeometry.IntegralOpenDirectImage.IntegralOpenDirectImageGeneral
+public import WeilConjectures.AlgebraicGeometry.OpenCoefficientScalarModels
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.SixFunctors.Integral.IntegralModelsGeneratorsGeneral
 
 /-! # Open direct image for the three ell-adic coefficient rings
 
@@ -54,6 +63,39 @@ open CategoryTheory
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem open_bc_iso
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (e : K ≅ L)
+    (hK : constantModelBoundedConstructible Λ X K) :
+    constantModelBoundedConstructible Λ X L := by
+  exact ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso e hK.1,
+    fun n ↦ constructible_iso (Λ := Λ) ((DerivedCategory.homologyFunctor _ n).mapIso e) (hK.2 n)⟩
+
+private theorem open_bc_transport
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (e : Λ ≅ Λ') [IsMonHom e.hom] (X : Scheme.{u})
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    constantModelBoundedConstructible Λ' X
+      ((Mod.comap (coefficientMap e.inv X)).mapDerivedCategory.obj K) ↔
+      constantModelBoundedConstructible Λ X K := by
+  let F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X) :=
+    Mod.comap (coefficientMap e.inv X)
+  constructor
+  · intro h
+    refine ⟨F.bounded_of_bounded_mapDerivedCategory_obj h.1, fun n ↦ ?_⟩
+    apply (constantModel_comap_iff e.inv X _).1
+    exact constructible_iso (Λ := Λ')
+      ((F.mapDerivedCategoryHomologyFunctorIso n).app K).symm (h.2 n)
+  · intro h
+    refine ⟨F.bounded_mapDerivedCategory_obj h.1, fun n ↦ ?_⟩
+    exact constructible_iso (Λ := Λ') ((F.mapDerivedCategoryHomologyFunctorIso n).app K)
+      ((constantModel_comap_iff e.inv X _).2 (h.2 n))
 
 /-- Direct image along a quasi-compact open immersion preserves bounded constructibility
 for integral, finite-extension and algebraic-closure coefficients.
@@ -116,6 +158,138 @@ theorem constantModelBoundedConstructible_open_coefficient_direct_image
       constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X
         ((CondensedRing.moduleObjectDerivedPushforward
           (Profinite.padicAlgClRingObj ℓ) j).obj K)) := by
-  sorry
+  classical
+  have integral (F : PadicAlgCl.FiniteIntermediateField ℓ)
+      (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ F.val) U)))
+      (hK : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ F.val) U K) :
+      constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ F.val) X
+        ((CondensedRing.moduleObjectDerivedPushforward
+          (Profinite.padicIntegersRingObj ℓ F.val) j).obj K) := by
+    let : FiniteDimensional ℚ_[ℓ] (ULift.{u} F.val) :=
+      (ULift.moduleEquiv (R := ℚ_[ℓ]) (M := F.val)).symm.finiteDimensional
+    let eR := integerRingSheafIso.{u} ℓ ⟨F.val, F.property⟩
+    let e : Profinite.padicIntegersRingObj.{u} ℓ F.val ≅
+        DerivedNakayama.integerRing ℓ (ULift.{u} F.val) :=
+      (sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
+    have : IsMonHom e.hom := Sheaf.isMonHom_sheafCompose_map _ eR.hom
+    have (T : Scheme.{u}) :
+        CategoryTheory.Limits.PreservesFiniteLimits
+          (Mod.extendScalars (coefficientMap e.inv T)) :=
+      CategoryTheory.Limits.preservesFiniteLimits_of_natIso
+        (Mod.extendScalarsIsoComapInv _).symm
+    have h := (IntegralOpenDirectImage.integral_open_direct_image_any_field
+      ℓ (ULift.{u} F.val) j k (Fact.out : ringChar k ≠ ℓ)
+      ((Mod.comap (coefficientMap e.inv U)).mapDerivedCategory.obj K)
+      ((open_bc_transport e U K).2 hK)).2.2.1
+    apply (open_bc_transport e X _).1
+    exact open_bc_iso ((CondensedRing.derivedComapLowerStarIso e.inv j).app K).symm h
+  have : IsLocallyNoetherian U :=
+    LocallyOfFiniteType.isLocallyNoetherian (U ↘ Spec (.of k))
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace (U ↘ Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : QuasiSeparated j := inferInstance
+  have generator_image (F : PadicAlgCl.FiniteIntermediateField ℓ) :
+      ∀ J, WeilConjectures.SixFunctors.integralModelGenerator U ℓ F J →
+        constantModelBoundedConstructible (Profinite.continuousMapRingObj F) X
+          ((CondensedRing.moduleObjectDerivedPushforward
+            (Profinite.continuousMapRingObj F) j).obj J) := by
+    intro J hJ
+    rcases hJ with ⟨S, V, a, b, ha, hb, L, hL, rfl⟩
+    have := ha
+    have := hb
+    obtain ⟨π, hπ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ F.val
+    let M := integralLowerShriek U (Profinite.padicIntegersRingObj ℓ F.val) a b L
+    let C := (DerivedCategory.singleFunctor _ 0).obj M
+    have hC := ((integral_models_generators_general k ℓ U F π hπ.symm).2.2
+      S V a b L hL).1
+    have hH := integral F C hC
+    obtain ⟨n, hn⟩ := hC.1.1
+    have : C.IsGE n := hn
+    have : IsIso ((CondensedRing.derivedPushHom
+        (padicIntegersRingObjToContinuousMapRingObj ℓ F) j).app C) :=
+      CondensedRing.isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ F j C n
+    let A := Mod.extendScalars (padicIntegersToPadicSubfield U ℓ F)
+    let eC := A.singleFunctorCompLeftDerivedFunctorIso.app M
+    have h := (open_rational_scalar_local_models ℓ F X).1 _ hH
+    exact open_bc_iso
+      (asIso ((CondensedRing.derivedPushHom
+        (padicIntegersRingObjToContinuousMapRingObj ℓ F) j).app C) ≪≫
+        (CondensedRing.moduleObjectDerivedPushforward
+          (Profinite.continuousMapRingObj F) j).mapIso eC) h
+  have qlbar_generator_image (F : PadicAlgCl.FiniteIntermediateField ℓ) :
+      ∀ J, WeilConjectures.SixFunctors.qlbarModelGenerator U ℓ F J →
+        constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X
+          ((CondensedRing.moduleObjectDerivedPushforward
+            (Profinite.padicAlgClRingObj ℓ) j).obj J) := by
+    intro J hJ
+    rcases hJ with ⟨S, V, a, b, ha, hb, L, hL, rfl⟩
+    have := ha
+    have := hb
+    obtain ⟨π, hπ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ F.val
+    let M := integralLowerShriek U (Profinite.padicIntegersRingObj ℓ F.val) a b L
+    let C := (DerivedCategory.singleFunctor _ 0).obj M
+    have hC := ((integral_models_generators_general k ℓ U F π hπ.symm).2.2
+      S V a b L hL).1
+    have hH := integral F C hC
+    obtain ⟨n, hn⟩ := hC.1.1
+    have : C.IsGE n := hn
+    have : IsIso ((CondensedRing.derivedPushHom
+        (padicIntegersRingObjToContinuousMapRingObj ℓ F) j).app C) :=
+      CondensedRing.isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ F j C n
+    let AU := Mod.extendScalars (padicIntegersToPadicSubfield U ℓ F)
+    let BU := Mod.extendScalars
+      (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) U)
+    let BX := Mod.extendScalars
+      (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) X)
+    have hCE := (open_rational_scalar_local_models ℓ F U).1 C hC
+    have : IsIso ((CondensedRing.derivedPushHom
+        (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) j).app
+          (AU.leftDerivedFunctor.obj C)) :=
+      CondensedRing.isIso_derivedPushHom_padicAlgCl_of_boundedBelow ℓ F j
+        ⟨AU.leftDerivedFunctor.obj C, hCE.1.1⟩
+    let eE := AU.singleFunctorCompLeftDerivedFunctorIso.app M
+    let eB := BU.leftDerivedFunctor.mapIso eE ≪≫
+      BU.singleFunctorCompLeftDerivedFunctorIso.app ((finiteCoefficientExtension U ℓ F).obj M)
+    have h := (open_rational_scalar_local_models ℓ F X).2.2 _
+      ((open_rational_scalar_local_models ℓ F X).1 _ hH)
+    exact open_bc_iso
+      (BX.leftDerivedFunctor.mapIso (asIso ((CondensedRing.derivedPushHom
+        (padicIntegersRingObjToContinuousMapRingObj ℓ F) j).app C)) ≪≫
+        asIso ((CondensedRing.derivedPushHom
+          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) j).app
+            (AU.leftDerivedFunctor.obj C)) ≪≫
+        (CondensedRing.moduleObjectDerivedPushforward
+          (Profinite.padicAlgClRingObj ℓ) j).mapIso eB) h
+  refine ⟨integral E, ?_, ?_⟩
+  · intro K hK
+    obtain ⟨π, hπ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.val
+    have hgen := (WeilConjectures.SixFunctors.integral_models_generators_general
+      k ℓ U E π hπ.symm).1 K hK
+    let P := constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X
+    have : P.IsTriangulated :=
+      ((constantModelBoundedConstructible_field_triangulated ℓ X).1 E).2.1
+    have : P.IsClosedUnderIsomorphisms :=
+      ((constantModelBoundedConstructible_field_triangulated ℓ X).1 E).1
+    rw [unary_relation_sInf_iff] at hgen
+    exact hgen (P.inverseImage
+      (CondensedRing.lowerStar (Profinite.continuousMapRingObj E) j).rightDerivedFunctor)
+      ⟨generator_image E, inferInstance, inferInstance⟩
+  · intro K hK
+    obtain ⟨π, hπ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.val
+    obtain ⟨F, hgen⟩ := (WeilConjectures.SixFunctors.integral_models_generators_general
+      k ℓ U E π hπ.symm).2.1 K hK
+    let P := constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X
+    have : P.IsTriangulated :=
+      (constantModelBoundedConstructible_field_triangulated ℓ X).2.2.1
+    have : P.IsClosedUnderIsomorphisms :=
+      (constantModelBoundedConstructible_field_triangulated ℓ X).2.1
+    rw [unary_relation_sInf_iff] at hgen
+    exact hgen (P.inverseImage
+      (CondensedRing.lowerStar (Profinite.padicAlgClRingObj ℓ) j).rightDerivedFunctor)
+      ⟨qlbar_generator_image F, inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.ProEtale

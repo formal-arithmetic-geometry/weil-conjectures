@@ -353,4 +353,150 @@ def constantComparison {X Y : Scheme.{u}} (g : X ⟶ Y)
       Functor.whiskerRight (constantTowerUnit l E Y Q)
         ((CondensedRing.upperStar (constantRing l E) g).mapHomologicalComplex (.up ℤ)))
 
+private theorem extensionCollapse_quotient
+    {C : Type a} [Category.{b} C] [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalClosed C] [HasEqualizers C] [HasCoequalizers C]
+    [∀ W : C, PreservesColimitsOfSize.{0, 0} (tensorLeft W)]
+    [∀ W : C, PreservesColimitsOfSize.{0, 0} (tensorRight W)]
+    {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R]
+    (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] (M : Mod C R) :
+    Mod.extendπ φ M ≫ ((Mod.extendScalarsIsoComapInv φ).hom.app M).hom =
+      inv φ ▷ M.X ≫ Mod.act M.X := by
+  rw [← Mod.whiskerLeft_extendUnitHom_smul' φ M, Category.assoc,
+    Mod.act_hom, ← whiskerLeft_comp_assoc,
+    Mod.extendUnitHom_extendScalarsIsoComapInv_hom_app,
+    whiskerLeft_id, Category.id_comp]
+  rfl
+
+private theorem extensionGenerators_epi
+    {C : Type a} [Category.{b} C] [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalClosed C] [HasEqualizers C] [HasCoequalizers C]
+    [∀ W : C, PreservesColimitsOfSize.{0, 0} (tensorLeft W)]
+    [∀ W : C, PreservesColimitsOfSize.{0, 0} (tensorRight W)]
+    {R S A : C} [MonObj R] [MonObj S] [MonObj A] [IsCommMonObj R]
+    (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] (c : A ⟶ S) [IsMonHom c]
+    (M : Mod C R) : Epi (c ▷ M.X ≫ Mod.extendπ φ M) := by
+  have hu := Mod.extendUnitHom_extendScalarsIsoComapInv_hom_app φ M
+  have hinv : Mod.extendUnitHom φ M =
+      ((Mod.extendScalarsIsoComapInv φ).inv.app M).hom := by
+    apply (cancel_mono ((Mod.extendScalarsIsoComapInv φ).hom.app M).hom).1
+    rw [hu]
+    exact (congrArg Mod.Hom.hom
+      (Iso.inv_hom_id_app (Mod.extendScalarsIsoComapInv φ) M)).symm
+  have : Epi (Mod.extendUnitHom φ M) := by rw [hinv]; infer_instance
+  apply epi_of_epi_fac (f := (λ_ M.X).inv ≫ MonObj.one ▷ M.X)
+    (h := Mod.extendUnitHom φ M)
+  simp only [Mod.extendUnitHom, Category.assoc, ← comp_whiskerRight_assoc,
+    IsMonHom.one_hom]
+
+private theorem normalizedRestrictionSquare
+    {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [BraidedCategory C] [MonoidalCategory D] [BraidedCategory D]
+    [MonoidalClosed D] [HasEqualizers D] [HasCoequalizers D]
+    [∀ W : D, PreservesColimitsOfSize.{0, 0} (tensorLeft W)]
+    [∀ W : D, PreservesColimitsOfSize.{0, 0} (tensorRight W)]
+    (F : C ⥤ D) [F.Braided]
+    {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    {R' S' : D} [MonObj R'] [MonObj S']
+    (c : R ⟶ S) [IsMonHom c] (d : R' ⟶ S') [IsMonHom d]
+    (a : F.obj R ⟶ R') [IsMonHom a] [IsIso a]
+    (b : F.obj S ⟶ S') [IsMonHom b] [IsIso b]
+    (sq : F.map c ≫ b = a ≫ d) :
+    ∃! e : (F.mapMod S ⋙ Mod.extendScalars b) ⋙ Mod.comap d ≅
+        Mod.comap c ⋙ (F.mapMod R ⋙ Mod.extendScalars a),
+      ∀ M : Mod C S,
+        d ▷ F.obj M.X ≫ Mod.extendπ b ((F.mapMod S).obj M) ≫
+          (e.hom.app M).hom =
+        Mod.extendπ a ((F.mapMod R).obj ((Mod.comap c).obj M)) := by
+  let e : (F.mapMod S ⋙ Mod.extendScalars b) ⋙ Mod.comap d ≅
+      Mod.comap c ⋙ (F.mapMod R ⋙ Mod.extendScalars a) :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (F.mapMod S)
+        (Mod.extendScalarsComapIsoOfIsIso (F.map c) d a b sq.symm) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (F.mapModComapIso c).symm (Mod.extendScalars a) ≪≫
+      Functor.associator _ _ _
+  have hc (M : Mod C S) : (e.hom.app M).hom ≫
+      ((Mod.extendScalarsIsoComapInv a).hom.app
+        ((F.mapMod R).obj ((Mod.comap c).obj M))).hom =
+      ((Mod.extendScalarsIsoComapInv b).hom.app ((F.mapMod S).obj M)).hom := by
+    have hs := extendSquare_forget (F.map c) d a b sq.symm ((F.mapMod S).obj M)
+    let z := (F.mapModComapIso c).inv.app M
+    have hn := congrArg Mod.Hom.hom
+      ((Mod.extendScalarsIsoComapInv a).hom.naturality z)
+    simp only [Mod.comp_hom', Mod.comap_map_hom] at hn
+    simp only [e, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Mod.comp_hom', Mod.id_hom']
+    erw [Category.id_comp, Category.comp_id, Category.id_comp, Category.assoc, hn]
+    erw [Functor.mapModComapIso_inv_app_hom, Category.comp_id, hs]
+  have he (M : Mod C S) :
+      d ▷ F.obj M.X ≫ Mod.extendπ b ((F.mapMod S).obj M) ≫
+          (e.hom.app M).hom =
+        Mod.extendπ a ((F.mapMod R).obj ((Mod.comap c).obj M)) := by
+    apply (cancel_mono ((Mod.extendScalarsIsoComapInv a).hom.app
+      ((F.mapMod R).obj ((Mod.comap c).obj M))).hom).1
+    rw [Category.assoc, Category.assoc, hc]
+    rw [extensionCollapse_quotient, extensionCollapse_quotient]
+    have hi : d ≫ inv b = inv a ≫ F.map c := by
+      rw [← cancel_epi a, IsIso.hom_inv_id_assoc, ← Category.assoc, ← sq,
+        Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+    change d ▷ F.obj M.X ≫ inv b ▷ F.obj M.X ≫
+        Functor.LaxMonoidal.μ F S M.X ≫ F.map (Mod.act M.X) =
+      inv a ▷ F.obj M.X ≫ Functor.LaxMonoidal.μ F R M.X ≫
+        F.map (c ▷ M.X ≫ Mod.act M.X)
+    rw [← comp_whiskerRight_assoc, hi, comp_whiskerRight_assoc,
+      Functor.map_comp, Functor.LaxMonoidal.μ_natural_left_assoc]
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply Mod.hom_ext
+  have : Epi (d ▷ F.obj M.X ≫ Mod.extendπ b ((F.mapMod S).obj M)) :=
+    extensionGenerators_epi b d ((F.mapMod S).obj M)
+  apply (cancel_epi (d ▷ F.obj M.X ≫ Mod.extendπ b ((F.mapMod S).obj M))).1
+  simpa only [Category.assoc] using (he' M).trans (he M).symm
+
+/-- Scalar restriction commutes with inverse image. The normalization fixes its
+underlying map on the canonical scalar-extension generators.
+Source: blueprint scalar-restriction paragraph
+(blueprint: def-sfb-integral-pullback-comparison-data).
+Proof: naturality of alpha_g for the constant-function coefficient map makes the
+coefficient square commute. Replace extension along each invertible alpha_g by
+restriction along its inverse, use mapModComapIso, and compose restrictions. The
+underlying map sends each constant scalar tensor generator to the same generator.
+Local generation by these tensors and faithfulness prove uniqueness. -/
+theorem restrictionPullback_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    ∃! e : CondensedRing.upperStar (DerivedNakayama.integerRing l E) g ⋙ restriction l E X ≅
+        restriction l E Y ⋙ CondensedRing.upperStar (constantRing l E) g,
+      ∀ M : AdicCompletion.Modules l E Y,
+        ((upperStarFromPoint X).map (constantToIntegral l E) ▷
+            (upperStar Ab.{u + 1} g).obj M.X) ≫
+          Mod.extendπ (condensedPullbackHom (DerivedNakayama.integerRing l E) g)
+            (((upperStar Ab.{u + 1} g).mapMod _).obj M) ≫ (e.hom.app M).hom =
+          Mod.extendπ (condensedPullbackHom (constantRing l E) g)
+            (((upperStar Ab.{u + 1} g).mapMod _).obj ((restriction l E Y).obj M)) := by
+  exact normalizedRestrictionSquare (upperStar Ab.{u + 1} g)
+    ((upperStarFromPoint Y).map (constantToIntegral l E))
+    ((upperStarFromPoint X).map (constantToIntegral l E))
+    (condensedPullbackHom (constantRing l E) g)
+    (condensedPullbackHom (DerivedNakayama.integerRing l E) g)
+    (map_coefficientMap_comp_condensedPullbackHom (constantToIntegral l E) g)
+
+/-- The canonical coefficient-restriction comparison, fixed by its underlying map.
+Source: blueprint scalar-restriction paragraph
+(blueprint: def-sfb-integral-pullback-comparison-data). -/
+def restrictionPullback {X Y : Scheme.{u}} (g : X ⟶ Y) :=
+  (restrictionPullback_existsUnique l E g).exists.choose
+
+/-- Termwise restriction and inverse image commute by the same normalized comparison.
+Source: blueprint scalar-restriction paragraph
+(blueprint: def-sfb-integral-pullback-comparison-data). -/
+def restrictionPullbackComplex {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :=
+  (NatIso.mapHomologicalComplex (restrictionPullback l E g) (.up ℤ)).app P
+
 end AlgebraicGeometry.ProEtale.IntegralTensorPullback

@@ -450,4 +450,30 @@ theorem projectiveLineTrace_chern (N : ℕ) (hN : 0 < N)
       projectiveLineTrace N hN A hA S hS = 𝟙 (ordinaryFiniteUnit A S) := by
   exact (projectiveLineTraceDatum N hN A hA S hS).trace_chern
 
+/-- The map epsilon for every unbounded complex: inverse of the canonical ordered
+proper projection, tensor with the normalized trace, and the tensor unit constraint.
+Properness of q gives finite type, hence its source is Noetherian; these are exactly
+the hypotheses of the recorded arbitrary-complex projection theorem.
+Source: blueprint def-amb-p1-trace (blueprint: def-amb-p1-trace). -/
+def projectiveLineTraceEpsilon (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (K : DerivedCategoryModule A S) :
+    (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj
+      ((ordinaryFiniteP1Right A N hA S).obj K) ⟶ K :=
+  letI : IsLocallyNoetherian (ProjectiveLine S) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
+  letI : CompactSpace (ProjectiveLine S) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
+  letI : IsProper (ProjectiveLine S ↘ S) :=
+    ProjectiveSpace.instIsProper (ULift (Fin 2)) S
+  letI : IsIso (ordinaryFiniteProjection A (ProjectiveLine S ↘ S)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K) :=
+    isIso_proper_projection_formula_reordered A (ProjectiveLine S ↘ S)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K
+  inv (ordinaryFiniteProjection A (ProjectiveLine S ↘ S)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K) ≫
+    ((ordinaryFiniteTensor A S).obj K).map (projectiveLineTrace N hN A hA S hS) ≫
+      (derivedTensorSingleUnitIso K).hom
+
 end AlgebraicGeometry.Etale

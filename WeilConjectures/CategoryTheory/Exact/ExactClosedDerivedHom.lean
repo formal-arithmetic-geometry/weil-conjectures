@@ -53,6 +53,38 @@ private theorem comparison_square :
     Iso.hom_inv_id_app_assoc] at q'
   erw [Functor.map_id, Category.comp_id] at q'
   exact q'.symm
+
+/-- Canonical closed comparisons commute with a monoidal square.
+Source: naturality and composition of the evaluation transpose
+(blueprint: lem-sf-exact-closed-derived-hom). -/
+theorem closedComparison_square :
+    G.map (Functor.closedComparison Q K M) ≫
+        Functor.closedComparison G (Q.obj K) (Q.obj M) ≫
+        (pre (e.inv.app K)).app (G.obj (Q.obj M)) ≫
+        (ihom (R.obj (F.obj K))).map (e.hom.app M) =
+      e.hom.app ((ihom K).obj M) ≫
+        R.map (Functor.closedComparison F K M) ≫
+        Functor.closedComparison R (F.obj K) (F.obj M) := by
+  unfold Functor.closedComparison
+  exact comparison_square Q R F G e K M
+
+private theorem comparison_isIso_of_square
+    [IsIso ((ihomComparison Q K).natTrans.app M)]
+    [IsIso ((ihomComparison F K).natTrans.app M)]
+    [IsIso ((ihomComparison R (F.obj K)).natTrans.app (F.obj M))] :
+    IsIso ((ihomComparison G (Q.obj K)).natTrans.app (Q.obj M)) := by
+  let t := (pre (e.inv.app K)).app (G.obj (Q.obj M)) ≫
+    (ihom (R.obj (F.obj K))).map (e.hom.app M)
+  have : IsIso t := by dsimp [t]; infer_instance
+  have ht : IsIso (G.map ((ihomComparison Q K).natTrans.app M) ≫
+      (ihomComparison G (Q.obj K)).natTrans.app (Q.obj M) ≫ t) := by
+    dsimp only [t]
+    rw [comparison_square Q R F G e K M]
+    infer_instance
+  have := IsIso.of_isIso_comp_left (G.map ((ihomComparison Q K).natTrans.app M))
+    ((ihomComparison G (Q.obj K)).natTrans.app (Q.obj M) ≫ t)
+  exact IsIso.of_isIso_comp_right _ t
+
 include e in
 include e in
 end Square
@@ -70,6 +102,19 @@ variable {C : Type c} [Category.{u + 1} C] [Abelian C]
 private noncomputable def homotopyClosed :
     MonoidalClosed (HomotopyCategory C (.up ℤ)) where
   closed P := ⟨HomotopyCategory.internalHom P, HomotopyCategory.tensorHomAdjunction P⟩
+
+private theorem qh_comparison_isIso (P I : CochainComplex C ℤ) [I.IsKInjective] :
+    IsIso ((Functor.LaxMonoidal.ihomComparison DerivedCategory.Qh
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P)).natTrans.app
+        ((HomotopyCategory.quotient C (.up ℤ)).obj I)) := by
+  rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry]
+  change IsIso (MonoidalClosed.curry (_ ≫ DerivedCategory.Qh.map
+    ((HomotopyCategory.tensorHomAdjunction
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P)).counit.app
+        ((HomotopyCategory.quotient C (.up ℤ)).obj I))))
+  rw [HomotopyCategory.tensorHomAdjunction_counit_app]
+  exact DerivedCategory.isIso_qhInternalHomToIhom P I
+
 attribute [local instance] homotopyClosed
 @[instance_reducible]
 private noncomputable def mapHomotopyMonoidal :
@@ -110,6 +155,24 @@ private theorem mapHomotopyFactors_monoidal :
     erw [tensorHom_id, id_whiskerRight, Category.comp_id]
     rfl
 
+private theorem quotient_comparison_isIso (P I : CochainComplex C ℤ) :
+    IsIso ((Functor.LaxMonoidal.ihomComparison
+      (HomotopyCategory.quotient C (.up ℤ)) P).natTrans.app I) := by
+  rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry]
+  have hμ : Functor.LaxMonoidal.μ (HomotopyCategory.quotient C (.up ℤ)) P
+      ((ihom P).obj I) = 𝟙 _ := rfl
+  rw [hμ, Category.id_comp]
+  change IsIso (MonoidalClosed.curry
+    ((HomotopyCategory.quotient C (.up ℤ)).map
+      ((CochainComplex.tensorHomAdjunction P).counit.app I)))
+  erw [← HomotopyCategory.tensorHomAdjunction_counit_app
+    ((HomotopyCategory.quotient C (.up ℤ)).obj P) I]
+  change IsIso (MonoidalClosed.curry ((ihom.ev
+    ((HomotopyCategory.quotient C (.up ℤ)).obj P)).app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj I)))
+  rw [← MonoidalClosed.uncurry_id_eq_ev, MonoidalClosed.curry_uncurry]
+  infer_instance
+
 attribute [local instance] CochainComplex.monoidalClosed
 omit [Abelian.HasFunctorialFlatResolution C] in
 /-- The canonical strong tensor structure on an exact derived functor, transported from
@@ -147,6 +210,93 @@ private theorem derivedFactorsh_monoidal :
   rw [h]
   dsimp only [Functor.isoWhiskerLeft_hom, Iso.symm_hom]
   apply NatTrans.IsMonoidal.comp
+
+private theorem homotopy_comparison_isIso (P I : CochainComplex C ℤ) :
+    IsIso ((Functor.LaxMonoidal.ihomComparison (F.mapHomotopyCategory (.up ℤ))
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P)).natTrans.app
+        ((HomotopyCategory.quotient C (.up ℤ)).obj I)) := by
+  have := mapHomotopyFactors_monoidal F
+  have := DerivedCategory.isIso_ihomComparison_mapHomologicalComplex F adj P
+  have := quotient_comparison_isIso P I
+  have := quotient_comparison_isIso
+    ((F.mapHomologicalComplex (.up ℤ)).obj P)
+    ((F.mapHomologicalComplex (.up ℤ)).obj I)
+  exact CategoryTheory.comparison_isIso_of_square
+    (HomotopyCategory.quotient C (.up ℤ)) (HomotopyCategory.quotient D (.up ℤ))
+    (F.mapHomologicalComplex (.up ℤ)) (F.mapHomotopyCategory (.up ℤ))
+    (F.mapHomotopyCategoryFactors (.up ℤ)) P I
+
+private theorem derived_comparison_isIso_Qh (P I : CochainComplex C ℤ) [I.IsKInjective] :
+    IsIso ((Functor.LaxMonoidal.ihomComparison F.mapDerivedCategory
+      (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj P))).natTrans.app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj I))) := by
+  have := derivedFactorsh_monoidal F
+  have := CochainComplex.isKInjective_map_of_adjunction F adj I
+  have := qh_comparison_isIso P I
+  have : IsIso ((Functor.LaxMonoidal.ihomComparison DerivedCategory.Qh
+      ((F.mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient C (.up ℤ)).obj P))).natTrans.app
+      ((F.mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient C (.up ℤ)).obj I))) :=
+    qh_comparison_isIso ((F.mapHomologicalComplex (.up ℤ)).obj P)
+      ((F.mapHomologicalComplex (.up ℤ)).obj I)
+  have := homotopy_comparison_isIso F adj P I
+  exact CategoryTheory.comparison_isIso_of_square DerivedCategory.Qh DerivedCategory.Qh
+    (F.mapHomotopyCategory (.up ℤ)) F.mapDerivedCategory
+    F.mapDerivedCategoryFactorsh
+    ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+    ((HomotopyCategory.quotient C (.up ℤ)).obj I)
+
+/-- Exact closed pullback with an exact left adjoint preserves unbounded derived internal Hom.
+Source: Stacks Project, Tags 08JB and 07A4.
+
+Represent the target by a K-injective complex; the exact left adjoint makes its image
+K-injective. The ordinary closed comparison induces an isomorphism on Hom complexes, by
+the degreewise projection formula. The monoidal localization squares identify its image
+with the canonical derived evaluation transpose. Transport along representatives finishes.
+(blueprint: lem-sf-exact-closed-derived-hom) -/
+theorem isIso_ihomComparison_exactDerived (K : DerivedCategory C) :
+    letI := exactClosedDerivedMonoidal F
+    IsIso (Functor.LaxMonoidal.ihomComparison F.mapDerivedCategory K).natTrans := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  let P := DerivedCategory.Q.objPreimage K
+  let eP := (DerivedCategory.quotientCompQhIso C).app P ≪≫
+    DerivedCategory.Q.objObjPreimageIso K
+  obtain ⟨I, hI, ⟨eM⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective M
+  let eI := (DerivedCategory.quotientCompQhIso C).app I
+  have hPM : IsIso ((Functor.LaxMonoidal.ihomComparison F.mapDerivedCategory
+      (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj P))).natTrans.app M) := by
+    rw [NatTrans.isIso_app_iff_of_iso _ (eM ≪≫ eI.symm)]
+    exact derived_comparison_isIso_Qh F adj P I
+  have h := Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app
+    F.mapDerivedCategory eP.hom M
+  have : IsIso ((Functor.LaxMonoidal.ihomComparison F.mapDerivedCategory K).natTrans.app M ≫
+      (pre (F.mapDerivedCategory.map eP.hom)).app (F.mapDerivedCategory.obj M)) := by
+    rw [← h]
+    have : IsIso ((Functor.LaxMonoidal.ihomComparison F.mapDerivedCategory
+        ((HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh).obj P)).natTrans.app M) :=
+      hPM
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    ((pre (F.mapDerivedCategory.map eP.hom)).app (F.mapDerivedCategory.obj M))
+
+private theorem isIso_ihomComparison_exactDerived_app (K M : DerivedCategory C) :
+    letI := exactClosedDerivedMonoidal F
+    IsIso ((Functor.LaxMonoidal.ihomComparison F.mapDerivedCategory K).natTrans.app M) := by
+  exact @NatIso.isIso_app_of_isIso _ _ _ _ _ _
+    (Functor.LaxMonoidal.ihomComparison F.mapDerivedCategory K).natTrans
+    (isIso_ihomComparison_exactDerived F adj K) M
+
+/-- The shared comparison component is invertible for an exact closed derived pullback.
+Source: Stacks 08JB, 07A4; the preceding derived comparison theorem
+(blueprint: lem-sf-exact-closed-derived-hom). -/
+theorem isIso_closedComparison_exactDerived (K M : DerivedCategory C) :
+    letI := exactClosedDerivedMonoidal F
+    IsIso (Functor.closedComparison F.mapDerivedCategory K M) := by
+  unfold Functor.closedComparison
+  exact isIso_ihomComparison_exactDerived_app F adj K M
+
 variable {L : D ⥤ C} [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   (adj : L ⊣ F) [∀ P : C, IsIso (Functor.LaxMonoidal.ihomComparison F P).natTrans]
 omit [PreservesFiniteLimits L] [PreservesFiniteColimits L]

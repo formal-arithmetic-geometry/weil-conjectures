@@ -15,6 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
 
 /-!
 # The exceptional inverse image of a smooth morphism
@@ -139,6 +140,29 @@ def cohsmAffineTraceAdjunction
     Functor.isoWhiskerRight (Etale.leftDerivedUpperStarComp B a.hom g p ha'.symm).symm _
   exact (adjP.ofNatIsoLeft l).ofNatIsoRight rr
 
+/-- Finite type over the standing field gives the Noetherian chart base. -/
+private theorem cohsmNoetherian (k : Type u) [Field k] (T : Scheme.{u})
+    [T.Over (Spec (CommRingCat.of k))]
+    [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k))]
+    [QuasiCompact (T ↘ Spec (CommRingCat.of k))] : IsNoetherian T := by
+  let : IsLocallyNoetherian T :=
+    LocallyOfFiniteType.isLocallyNoetherian (T ↘ Spec (CommRingCat.of k))
+  let : CompactSpace T :=
+    QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (CommRingCat.of k))
+  exact ⟨⟩
+
+/-- The specified prime-power exponent is invertible on every scheme over the field. -/
+private theorem cohsmExponentUnit (ell r : ℕ) [Fact ell.Prime]
+    (k : Type u) [Field k] [Fact (ringChar k ≠ ell)] (T : Scheme.{u})
+    [T.Over (Spec (CommRingCat.of k))] : IsUnit ((ell ^ r : ℕ) : Γ(T, ⊤)) := by
+  have hu : IsUnit (ell : k) := isUnit_iff_ne_zero.mpr
+    (CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ell.Prime) (Fact.out : ringChar k ≠ ell))
+  have hpow : IsUnit ((ell ^ r : ℕ) : k) := by
+    simpa only [Nat.cast_pow] using hu.pow r
+  simpa only [map_natCast] using
+    (hpow.map (Scheme.ΓSpecIso (CommRingCat.of k)).inv.hom).map
+      (T ↘ Spec (CommRingCat.of k)).appTop.hom
+
 variable (ell : ℕ) [hprime : Fact ell.Prime]
 variable (k : Type u) [Field k] [hchar : Fact (ringChar k ≠ ell)]
 variable (hbase : Finite k ∨ IsAlgClosed k)
@@ -219,7 +243,44 @@ theorem cohomologicalSmoothness_chart
             ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj
               ((DerivedCategory.singleFunctor _ 0).obj
                 (Scheme.finiteEtaleTateTwist U (ell ^ r) A hAr d)))⟦2 * (d : ℤ)⟧) := by
-  sorry
+  classical
+  let : IsNoetherian S := cohsmNoetherian k S
+  have hpos : 0 < ell ^ r := pow_pos hprime.out.pos r
+  have hS := cohsmExponentUnit ell r k S
+  obtain ⟨tt, D, -⟩ := Etale.exists_ordinaryFiniteP1Adjunction (ell ^ r) hpos A hAr
+  refine ⟨inferInstance, hpos, hS, tt, D, ?_⟩
+  let B := ModuleCat.{u + 1} A
+  let P := AffineSpace (ULift.{u} (Fin d)) S
+  let p : P ⟶ S := P ↘ S
+  let adj := ((cohsmEtaleAdjunction A u).comp
+    (Etale.rightDerivedUpperShriekAdjunction A f)).ofNatIsoLeft
+      (cohsmChartSupportIso A u f e p h)
+  let adj' := (cohsmEtaleAdjunction A e).comp
+    (cohsmAffineTraceAdjunction A ell r hpos hAr tt D S inferInstance hS d)
+  let t := adj.rightAdjointUniq adj'
+  let V := (comparisonUpperStar B U).mapDerivedCategory
+  refine ⟨t, ?_, ⟨V.mapIso (t.app (CS.equivalence.inverse.obj N))⟩, ?_⟩
+  · apply Adjunction.ext
+    exact Adjunction.unit_rightAdjointUniq_hom adj adj'
+  · let H := (Etale.upperStar B e).leftDerivedFunctor
+    let L := (DerivedCategory.singleFunctor _ 0).obj
+      (Scheme.finiteEtaleTateTwist P (ell ^ r) A hAr d)
+    let J := Etale.derivedTensorRight B P L
+    let tp := Scheme.finiteEtaleTwistPullbackData A (ell ^ r) hpos hAr
+    have hP := affineTracePullbackInvertible (ell ^ r) p hS
+    have hU := affineTracePullbackInvertible (ell ^ r) e hP
+    let a : J.obj ((Etale.upperStar B p).leftDerivedFunctor.obj (𝟙_ _)) ≅ L :=
+      J.mapIso (Etale.leftDerivedUpperStarUnitIso B p) ≪≫
+        Etale.derivedTensorLeftUnitor B P L
+    let b : H.obj L ≅ (DerivedCategory.singleFunctor _ 0).obj
+        (Scheme.finiteEtaleTateTwist U (ell ^ r) A hAr d) :=
+      (Etale.singleFunctorCompLeftDerivedUpperStarIso B e).app _ ≪≫
+        (DerivedCategory.singleFunctor _ 0).mapIso (tp.c e hP hU d)
+    let c := (H.commShiftIso (2 * (d : ℤ))).app (J.obj
+        ((Etale.upperStar B p).leftDerivedFunctor.obj (𝟙_ _))) ≪≫
+      (shiftFunctor _ (2 * (d : ℤ))).mapIso (H.mapIso a ≪≫ b)
+    exact ⟨V.mapIso (t.app (𝟙_ _) ≪≫ c) ≪≫
+      (V.commShiftIso (2 * (d : ℤ))).app _⟩
 
 include hprime hchar hbase hr hAr hXsep hXlft hXqc hSsep hSlft hSqc hfover
   hfsep hflft hfqc hfsmooth in
@@ -292,6 +353,28 @@ theorem cohomologicalSmoothness
             Etale.smoothTensorDualityMap A (pullback.snd f g)
               (Etale.isIso_projectionMap_of_finite A (pullback.snd f g))
               ((Etale.upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))) := by
-  sorry
+  let : IsNoetherian S := cohsmNoetherian k S
+  let : IsNoetherian X := cohsmNoetherian k X
+  have hpos : 0 < ell ^ r := pow_pos hprime.out.pos r
+  have hS := cohsmExponentUnit ell r k S
+  have hs : ∀ s : S, IsUnit ((ell ^ r : ℕ) : S.presheaf.stalk s) := by
+    intro s
+    simpa only [map_natCast] using hS.map (S.presheaf.germ ⊤ s (by trivial)).hom
+  obtain ⟨⟨L, ⟨eL⟩, cover, hcover⟩, ht⟩ :=
+    Etale.smooth_tensor_duality A (ell ^ r) hpos hAr hs f d
+  let V := (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+  refine ⟨⟨L, ⟨(V.commShiftIso (-(2 * (d : ℤ)))).symm.app _ ≪≫
+    V.mapIso eL⟩, cover, hcover⟩, ?_, ?_⟩
+  · have := ht (CS.equivalence.inverse.obj N)
+    exact Functor.map_isIso V _
+  · intro S' _ _ _ _ g _
+    let : IsNoetherian S' := cohsmNoetherian k S'
+    obtain ⟨hb, hw, hc⟩ :=
+      Etale.smooth_exceptional_base_change A (ell ^ r) hpos hAr hs f d g
+    let W := (comparisonUpperStar (ModuleCat.{u + 1} A) (pullback f g)).mapDerivedCategory
+    have := hb (CS.equivalence.inverse.obj N)
+    have := hw
+    exact ⟨Functor.map_isIso W _, Functor.map_isIso W _,
+      congrArg W.map (hc (CS.equivalence.inverse.obj N))⟩
 
 end AlgebraicGeometry.ProEtale

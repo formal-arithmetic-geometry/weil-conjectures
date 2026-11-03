@@ -381,6 +381,75 @@ def finiteCoefficientLocalizingProperties
     (∀ i : I, localizingClosureProEtale Λ X (D.obj ⟨i⟩)) →
       PreservesColimit D F)
 
+/-- Finite rings in any universe have a small discrete model. Postcomposition with the
+ring equivalence induces an isomorphism of continuous-map ring sheaves, hence of their
+ring objects. The annihilating power of `ℓ` transports along this same equivalence.
+Source: blueprint det-ctf-finite-proper-localizing, proof steps 1 and 16, and
+sk-def-localizing-closure, finite-coefficient convention
+(blueprint: det-ctf-finite-proper-localizing). -/
+private theorem finiteDiscreteCoefficient_admissible
+    (ℓ : ℕ) [Fact ℓ.Prime] (A : Type u) [CommRing A] [Finite A]
+    (hA : ∃ n : ℕ, 1 ≤ n ∧ (ℓ ^ n : ℕ) • (1 : A) = 0) :
+    IsLocalizingAdmissibleCoefficient ℓ (finiteDiscreteCondensedCoefficient A) := by
+  classical
+  letI : TopologicalSpace A := ⊥
+  letI : DiscreteTopology A := ⟨rfl⟩
+  letI : IsTopologicalRing A := by infer_instance
+  let B := Shrink.{0} A
+  letI : TopologicalSpace B := ⊥
+  letI : DiscreteTopology B := ⟨rfl⟩
+  letI : IsTopologicalRing B := by infer_instance
+  let e : A ≃+* B := (Shrink.ringEquiv.{0} A).symm
+  let h : Profinite.continuousMapRingSheafOfUniverse.{u, u} A ⟶
+      Profinite.continuousMapRingSheaf.{u} B :=
+    ⟨{ app := fun S ↦ RingCat.ofHom
+        (ULift.ringEquiv.symm.toRingHom.comp
+          ((e.toRingHom.compLeftContinuous S.unop (continuous_of_discreteTopology)).comp
+            ULift.ringEquiv.toRingHom))
+       naturality := by intros; rfl }⟩
+  let v : Profinite.continuousMapRingSheaf.{u} B ⟶
+      Profinite.continuousMapRingSheafOfUniverse.{u, u} A :=
+    ⟨{ app := fun S ↦ RingCat.ofHom
+        (ULift.ringEquiv.symm.toRingHom.comp
+          ((e.symm.toRingHom.compLeftContinuous S.unop (continuous_of_discreteTopology)).comp
+            ULift.ringEquiv.toRingHom))
+       naturality := by intros; rfl }⟩
+  let E : Profinite.continuousMapRingSheafOfUniverse.{u, u} A ≅
+      Profinite.continuousMapRingSheaf.{u} B :=
+    { hom := h
+      inv := v
+      hom_inv_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact e.symm_apply_apply _
+      inv_hom_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact e.apply_symm_apply _ }
+  let E' := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso E
+  letI : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+  let eh := presheaf_enrichedHoms_exist
+    (C := Profinite.{u}) (A := Ab.{u + 1})
+  letI : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}),
+    Enriched.FunctorCategory.HasEnrichedHom Ab.{u + 1} F G := eh.1
+  letI : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}),
+    Enriched.FunctorCategory.HasFunctorEnrichedHom Ab.{u + 1} F G := eh.2
+  letI : ((coherentTopology Profinite.{u}).W (A := Ab.{u + 1})).IsMonoidal :=
+    GrothendieckTopology.W.monoidal
+  letI hmon : IsMonHom E'.hom := Sheaf.isMonHom_sheafCompose_map _ E.hom
+  refine Or.inl ⟨B, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, ?_, ⟨Mon.mkIso' E'⟩⟩
+  obtain ⟨n, _, hn⟩ := hA
+  refine ⟨n, fun b ↦ ?_⟩
+  have hn' : (ℓ ^ n : ℕ) • (1 : B) = 0 := by
+    simpa only [map_nsmul, map_one, map_zero] using congrArg e hn
+  simpa only [nsmul_eq_mul, mul_one, zero_mul] using congrArg (fun x : B ↦ x * b) hn'
+
 open scoped CategoryTheory.MonoidalClosed in
 attribute [local instance] unboundedLocalizingPullbackCommShift
 

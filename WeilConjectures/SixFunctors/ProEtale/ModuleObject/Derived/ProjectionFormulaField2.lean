@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormulaField
 
 /-!
 # Projection formula with rational coefficients
@@ -109,7 +110,7 @@ theorem projectionFormulaRational
       localizingClosureProEtale Λ X.left M →
       localizingClosureProEtale Λ Y.left N →
       IsIso (moduleObjectProjectionMap Λ p.left M N)) := by
-  sorry
+  obtain _ | _ := hk <;> exact projectionFormulaField ℓ Λ hΛ
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 

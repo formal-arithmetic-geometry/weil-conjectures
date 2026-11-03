@@ -10,6 +10,16 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralOpenImageProperFormulas
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelHeartClosureSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
+public import WeilConjectures.AlgebraicGeometry.IntegralOpenDirectImageCurrent
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralModelsOperations
 
 /-!
 # Integral finiteness for the open-complement term of localization
@@ -89,6 +99,87 @@ theorem integralClosedComplementFiniteness
         i.left.openComplement.ι).obj
         ((moduleObjectDerivedPullback (Profinite.padicIntegersRingObj ℓ E.val)
           i.left.openComplement.ι).obj K)) := by
-  sorry
+  -- Exact restriction along a coefficient isomorphism preserves the finite local models.
+  have boundedCoefficientTransport
+      {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+      [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+      (e : Λ ≅ Λ') [IsMonHom e.hom] (X : Scheme.{u})
+      (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X))) :
+      constantModelBoundedConstructible Λ' X
+        ((Mod.comap (coefficientMap e.inv X)).mapDerivedCategory.obj K) ↔
+        constantModelBoundedConstructible Λ X K := by
+    let F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
+        Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X) :=
+      Mod.comap (coefficientMap e.inv X)
+    constructor
+    · intro h
+      refine ⟨F.bounded_of_bounded_mapDerivedCategory_obj h.1, fun n ↦ ?_⟩
+      apply (constantModel_comap_iff e.inv X _).1
+      exact constructible_iso ((F.mapDerivedCategoryHomologyFunctorIso n).app K).symm (h.2 n)
+    · intro h
+      refine ⟨F.bounded_mapDerivedCategory_obj h.1, fun n ↦ ?_⟩
+      exact constructible_iso ((F.mapDerivedCategoryHomologyFunctorIso n).app K)
+        ((constantModel_comap_iff e.inv X _).2 (h.2 n))
+  let Λ := Profinite.padicIntegersRingObj ℓ E.val
+  let : X.left.Over (Spec (.of k)) := ⟨X.hom⟩
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType X.hom)
+  have : QuasiCompact (X.left ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact X.hom)
+  have : IsSeparated (X.left ↘ Spec (.of k)) := inferInstanceAs (IsSeparated X.hom)
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  let U := i.left.openComplement.toScheme
+  let j : U ⟶ X.left := i.left.openComplement.ι
+  let : U.Over (Spec (.of k)) := ⟨j ≫ X.hom⟩
+  have : j.IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : LocallyOfFiniteType (U ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType (j ≫ X.hom)
+    infer_instance
+  have : QuasiCompact (U ↘ Spec (.of k)) := by
+    change QuasiCompact (j ≫ X.hom)
+    infer_instance
+  have : IsSeparated (U ↘ Spec (.of k)) := by
+    change IsSeparated (j ≫ X.hom)
+    infer_instance
+  have : IsLocallyNoetherian U :=
+    LocallyOfFiniteType.isLocallyNoetherian (U ↘ Spec (.of k))
+  have : CompactSpace U :=
+    QuasiCompact.compactSpace_of_compactSpace (U ↘ Spec (.of k))
+  have : IsNoetherian U := ⟨⟩
+  have hpull := (integralModelsOperations ℓ E).1 j K hK
+  let J := (moduleObjectDerivedPullback Λ j).obj K
+  have hJ : constantModelBoundedConstructible Λ U J := by
+    have hclosed := (constantModelConstructibleFiniteTor_wellDefined Λ U).2.1
+    let := hclosed
+    exact (constantModelBoundedConstructible Λ U).prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory Λ j).app K).symm hpull
+  let : FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val) :=
+    (ULift.moduleEquiv (R := ℚ_[ℓ]) (M := E.val)).symm.finiteDimensional
+  let eR := integerRingSheafIso.{u} ℓ ⟨E.val, E.property⟩
+  let e : Λ ≅ DerivedNakayama.integerRing ℓ (ULift.{u} E.val) :=
+    (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
+  have : IsMonHom e.hom := by
+    dsimp only [e]
+    exact Sheaf.isMonHom_sheafCompose_map _ eR.hom
+  have : IsMonHom e.inv := by dsimp only [e]; infer_instance
+  let T : Mod (Sheaf (ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U) ⥤
+      Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
+        (condensedRingObj (DerivedNakayama.integerRing ℓ (ULift.{u} E.val)) U) :=
+    Mod.comap (coefficientMap e.inv U)
+  have hinput := (boundedCoefficientTransport e U J).2 hJ
+  have houtput := (integral_open_direct_image_current ℓ (ULift.{u} E.val)
+    j k hk (Fact.out : ringChar k ≠ ℓ) (T.mapDerivedCategory.obj J) hinput).2.2.1
+  have (W : Scheme.{u}) :
+      PreservesFiniteLimits (Mod.extendScalars (coefficientMap e.inv W)) :=
+    preservesFiniteLimits_of_natIso (Mod.extendScalarsIsoComapInv _).symm
+  let c := (derivedComapLowerStarIso e.inv j).app J
+  exact (boundedCoefficientTransport e X.left _).1
+    ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso c.symm houtput.1,
+      fun n ↦ constructible_iso
+        (Λ := DerivedNakayama.integerRing ℓ (ULift.{u} E.val))
+        ((DerivedCategory.homologyFunctor _ n).mapIso c.symm) (houtput.2 n)⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport

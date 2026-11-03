@@ -95,6 +95,23 @@ theorem properUnboundedWindow_statement
       ProperUnboundedCoproductAssertions (Profinite.continuousMapRingObj.{u} E) p ∧
       ProperUnboundedWindowAssertions (Profinite.padicAlgClRingObj.{u} ℓ) p d ∧
       ProperUnboundedCoproductAssertions (Profinite.padicAlgClRingObj.{u} ℓ) p := by
-  sorry
+  have hdim : ∀ y : Y, topologicalKrullDim
+      (pullback p (Spec.map (CommRingCat.ofHom
+        (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
+          Y.fromSpecResidueField y) : Scheme.{u}) ≤ (d.toNat : WithBot ℕ∞) := by
+    intro y
+    by_contra hle
+    have hsucc : ((d.toNat + 1 : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim
+        (pullback p (Spec.map (CommRingCat.ofHom
+          (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
+            Y.fromSpecResidueField y) : Scheme.{u}) := by
+      simpa only [Nat.cast_add, Nat.cast_one] using
+        (ENat.WithBot.add_one_le_iff).2 (lt_of_not_ge hle)
+    have := hd y (d.toNat + 1) hsucc
+    omega
+  exact ⟨properUnboundedWindow ℓ E k p₀ hp₀ hpℓ X Y p d hd,
+    properUnbounded_preservesCoproducts ℓ E k p₀ hp₀ hpℓ X Y p d.toNat hdim,
+    properUnboundedWindow_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p d hd,
+    properUnbounded_preservesCoproducts_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p d.toNat hdim⟩
 
 end AlgebraicGeometry.ProEtale

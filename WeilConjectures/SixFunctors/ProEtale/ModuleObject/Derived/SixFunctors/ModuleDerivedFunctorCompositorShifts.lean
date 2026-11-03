@@ -154,4 +154,138 @@ def modulePullbackDerivedCompositor :
       moduleObjectDerivedPullback Λ g ⋙ moduleObjectDerivedPullback Λ f :=
   leftDerivedUpperStarComp Λ f g
 
+/-- The derived compositor, under all three canonical exact comparisons, is the
+localization of the ordinary module pullback compositor, followed by the canonical
+termwise derived composition identification.
+Source: Stacks Tags 014X and 05SE; node proof step 4
+(blueprint: lem-sfb-module-derived-functor-compositor-shifts).
+
+Proof: on a complex `M`, let `e_f` be `c_f` followed by the termwise factorization,
+and let `q_M = P_f(e_g,M)` followed by `e_f,C(g*)M`. The compositor is uniquely
+characterized by `m_QM ≫ q_M = e_(fg),M ≫ Q(C(b)_M)`. Existence and uniqueness are
+clauses (2) and (3) of `lem-weil-pbc-localization-universal-property`. The comparison
+respects the universal counits, so this is exactly the specified compositor of
+`prop-sfb-module-left-derived-upper-star-comp`, not another choice. -/
+theorem module_pullback_compositor_exact_normalization :
+    modulePullbackDerivedCompositor Λ f g ≪≫
+        isoWhiskerRight (modulePullbackExactComparison Λ g)
+          (moduleObjectDerivedPullback Λ f) ≪≫
+        isoWhiskerLeft (upperStar Λ g).mapDerivedCategory
+          (modulePullbackExactComparison Λ f) =
+      modulePullbackExactComparison Λ (f ≫ g) ≪≫
+        Functor.mapDerivedCategoryNatIso (upperStarComp Λ f g) ≪≫
+        Functor.mapDerivedCategoryCompIso (upperStar Λ g) (upperStar Λ f) := by
+  have hc (S T : Scheme.{u}) (k : S ⟶ T) : modulePullbackExactComparison Λ k =
+      (upperStar Λ k).leftDerivedFunctorIsoMapDerivedCategory := rfl
+  simp only [modulePullbackDerivedCompositor, hc, leftDerivedUpperStarComp,
+    Functor.leftDerivedFunctorNatIso, Functor.leftDerivedFunctorCompIso]
+  dsimp only [moduleObjectDerivedPullback]
+  ext K
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
+    Category.assoc, Iso.inv_hom_id_app_assoc]
+  rw [← NatTrans.naturality_assoc]
+  simp
+
+/-- The specified compositor and its inverse commute with all integer shifts.
+Source: Stacks Tags 014X and 05SE; node proof steps 5 and 6
+(blueprint: lem-sfb-module-derived-functor-compositor-shifts).
+
+Proof: the `c` comparisons and termwise factorizations commute with shifts. Whiskering
+and composition preserve that property by `lem-weil-pbc-commshift-nattrans-comp-whisker`.
+Evaluate the desired identity at `Q M`, compose with the invertible shifted `q_M` of
+the normalization equation, and reduce to `C(b)_(M[n]) = C(b)_M[n]`, which holds in
+every degree. Cancel and use clause (3) of the localization universal property to
+extend to every derived object. Multiply by the inverse components on both sides
+to obtain the identity for the inverse compositor. -/
+theorem module_pullback_compositor_commShift :
+    NatTrans.CommShift (modulePullbackDerivedCompositor Λ f g).hom ℤ ∧
+      NatTrans.CommShift (modulePullbackDerivedCompositor Λ f g).inv ℤ := by
+  have hc (S T : Scheme.{u}) (k : S ⟶ T) :
+      NatTrans.CommShift (modulePullbackExactComparison Λ k).hom ℤ :=
+    (module_derived_functors_exact_and_comparison_shifts Λ k).2.2.1
+  have he : modulePullbackDerivedCompositor Λ f g =
+      modulePullbackExactComparison Λ (f ≫ g) ≪≫
+        Functor.mapDerivedCategoryNatIso (upperStarComp Λ f g) ≪≫
+        Functor.mapDerivedCategoryCompIso (upperStar Λ g) (upperStar Λ f) ≪≫
+        isoWhiskerLeft (upperStar Λ g).mapDerivedCategory
+          (modulePullbackExactComparison Λ f).symm ≪≫
+        isoWhiskerRight (modulePullbackExactComparison Λ g).symm
+          (moduleObjectDerivedPullback Λ f) := by
+    have hn := module_pullback_compositor_exact_normalization Λ f g
+    have hh := congrArg (fun e ↦ e ≪≫
+      (isoWhiskerLeft (upperStar Λ g).mapDerivedCategory
+        (modulePullbackExactComparison Λ f)).symm ≪≫
+      (isoWhiskerRight (modulePullbackExactComparison Λ g)
+        (moduleObjectDerivedPullback Λ f)).symm) hn
+    simp only [Iso.trans_assoc, Iso.self_symm_id_assoc, Iso.self_symm_id,
+      Iso.trans_refl] at hh
+    simpa only [isoWhiskerLeft_symm, isoWhiskerRight_symm] using hh
+  have hf : NatTrans.CommShift (modulePullbackExactComparison Λ f).hom ℤ := hc X Y f
+  have hg : NatTrans.CommShift (modulePullbackExactComparison Λ g).hom ℤ := hc Y Z g
+  have hfg : NatTrans.CommShift (modulePullbackExactComparison Λ (f ≫ g)).hom ℤ :=
+    hc X Z (f ≫ g)
+  have hm : NatTrans.CommShift (modulePullbackDerivedCompositor Λ f g).hom ℤ := by
+    rw [he]
+    change NatTrans.CommShift (_ ≫ _ ≫ _ ≫
+      whiskerLeft _ (modulePullbackExactComparison Λ f).inv ≫
+      whiskerRight (modulePullbackExactComparison Λ g).inv _) ℤ
+    infer_instance
+  exact ⟨hm, NatTrans.CommShift.of_iso_inv _ ℤ⟩
+
+/-- The square comparison formed from the specified compositors and equality of maps.
+It is defined for every commutative square, without a cartesian assumption.
+Source: Stacks Tag 05SE; node final clause
+(blueprint: lem-sfb-module-derived-functor-compositor-shifts). -/
+def modulePullbackSquareComparison {X' Y' : Scheme.{u}}
+    (p : X ⟶ Y) (a : Y' ⟶ Y) (b : X' ⟶ X) (p' : X' ⟶ Y')
+    (h : p' ≫ a = b ≫ p) :
+    (moduleObjectDerivedPullback Λ a) ⋙ (moduleObjectDerivedPullback Λ p') ≅
+      (moduleObjectDerivedPullback Λ p) ⋙ (moduleObjectDerivedPullback Λ b) :=
+  (modulePullbackDerivedCompositor Λ p' a).symm ≪≫
+    eqToIso (congrArg (fun k ↦ moduleObjectDerivedPullback Λ k) h) ≪≫
+    modulePullbackDerivedCompositor Λ b p
+
+/-- The comparison of any commutative square commutes with each specified shift on
+each derived object. No geometric condition beyond commutativity is assumed.
+Source: Stacks Tag 05SE; node proof step 6
+(blueprint: lem-sfb-module-derived-functor-compositor-shifts).
+
+Proof: the inverse first compositor and the second compositor commute with shifts by
+steps 5 and 6. Transport along equality of the composite scheme maps identifies the
+same specified functor and shift structure. Compose the three identities, using
+`lem-weil-pbc-commshift-nattrans-comp-whisker`. This is precisely the displayed square
+identity, and uses only `p' ≫ a = b ≫ p`. -/
+theorem module_pullback_square_shift {X' Y' : Scheme.{u}}
+    (p : X ⟶ Y) (a : Y' ⟶ Y) (b : X' ⟶ X) (p' : X' ⟶ Y')
+    (h : p' ≫ a = b ≫ p)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)))
+    (n : ℤ) :
+    (modulePullbackSquareComparison Λ p a b p' h).hom.app (K⟦n⟧) ≫
+        (((moduleObjectDerivedPullback Λ p) ⋙
+          (moduleObjectDerivedPullback Λ b)).commShiftIso n).hom.app K =
+      (((moduleObjectDerivedPullback Λ a) ⋙
+        (moduleObjectDerivedPullback Λ p')).commShiftIso n).hom.app K ≫
+        ((modulePullbackSquareComparison Λ p a b p' h).hom.app K) ⟦n⟧' := by
+  have hc (S T U : Scheme.{u}) (k : S ⟶ T) (l : T ⟶ U) :
+      NatTrans.CommShift (modulePullbackDerivedCompositor Λ k l).hom ℤ :=
+    (module_pullback_compositor_commShift Λ k l).1
+  have hpa := hc X' Y' Y p' a
+  have hbp := hc X' X Y b p
+  have hi : NatTrans.CommShift
+      (eqToIso (congrArg (fun k ↦ moduleObjectDerivedPullback Λ k) h)).hom ℤ := by
+    have he (k l : X' ⟶ Y) (e : k = l) : NatTrans.CommShift
+        (eqToIso (congrArg (fun k ↦ moduleObjectDerivedPullback Λ k) e)).hom ℤ := by
+      subst l
+      change NatTrans.CommShift (𝟙 _) ℤ
+      infer_instance
+    exact he _ _ h
+  have hs : NatTrans.CommShift (modulePullbackSquareComparison Λ p a b p' h).hom ℤ := by
+    change NatTrans.CommShift ((modulePullbackDerivedCompositor Λ p' a).inv ≫
+      (eqToIso (congrArg (fun k ↦ moduleObjectDerivedPullback Λ k) h)).hom ≫
+      (modulePullbackDerivedCompositor Λ b p).hom) ℤ
+    infer_instance
+  exact (NatTrans.shift_app_comm (modulePullbackSquareComparison Λ p a b p' h).hom n K).symm
+
 end AlgebraicGeometry.ProEtale.CondensedRing

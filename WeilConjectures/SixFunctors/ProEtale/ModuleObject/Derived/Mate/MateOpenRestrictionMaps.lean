@@ -92,6 +92,25 @@ def mateOpenSourceLowerShriek {U X Y : Scheme.{u}} {f : X ⟶ Y}
     Functor.isoWhiskerRight (mateOpenExtensionComp Λ j c.i)
       (lowerStar Λ c.g).rightDerivedFunctor
 
+/-- The open square identifies the two composites of extensions by zero. Its components
+are fixed by the units of the open adjunctions, including the coefficient actions.
+Source: blueprint det-sf-mate-open-restriction (2)
+(blueprint: def-sfb-mate-open-restriction-maps). -/
+def mateOpenSquareExtension {U X V Y : Scheme.{u}}
+    {a : U ⟶ X} {q : U ⟶ V} {f : X ⟶ Y} {v : V ⟶ Y}
+    [IsOpenImmersion a] [IsOpenImmersion v]
+    (sq : IsPullback a q f v) (c : Compactification f) :
+    (openImmersionLowerShriek Λ a).mapDerivedCategory ⋙
+        (openImmersionLowerShriek Λ c.i).mapDerivedCategory ≅
+      (openImmersionLowerShriek Λ (c.ofIsPullback sq).i).mapDerivedCategory ⋙
+        (openImmersionLowerShriek Λ (pullback.fst c.g v)).mapDerivedCategory :=
+  mateOpenExtensionComp Λ a c.i ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (eqToIso (by
+        congr 1
+        exact (c.ofIsPullback_i_fst sq).symm)) ≪≫
+    (mateOpenExtensionComp Λ (c.ofIsPullback sq).i (pullback.fst c.g v)).symm
+
 /-- The canonical identification of compact-support image for the trivial open
 compactification (j,id) with levelwise extension by zero. The identity direct-image
 identification is the derived one normalized on ordinary module sheaves.

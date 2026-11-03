@@ -65,6 +65,41 @@ private theorem paste_horizontal_aux {C : Type*} [Category C]
   rw [reassoc_of% ha, reassoc_of% hb, reassoc_of% hc, hm]
   simp
 
+private theorem inverse_paste_aux {C : Type*} [Category C] {x y a b c : C}
+    (θ : x ≅ y) (α : x ≅ a) (β : a ≅ b) (γ : b ≅ c) (δ : y ≅ c)
+    (h : θ.inv = δ.hom ≫ γ.inv ≫ β.inv ≫ α.inv) :
+    θ.hom = α.hom ≫ β.hom ≫ γ.hom ≫ δ.inv := by
+  apply (Iso.inv_eq_inv θ (α ≪≫ β ≪≫ γ ≪≫ δ.symm)).mp
+  simpa only [Iso.trans_inv, Iso.symm_inv, Category.assoc] using h
+
+/-- The commuting-square comparison preserves the coefficient unit.
+
+Source: the cited blueprint proof, paragraphs 2–3
+(blueprint: lem-fix-condensed-pullback-coherence).
+Proof: use `pullbackSquareComparison_eq` to expand the comparison as the inverse native
+compositor, the equality transport, and the native compositor. Apply
+`leftDerivedUpperStarComp_hom_app_unit` to each compositor. Transport along the square's
+commutativity identifies their coefficient maps; the middle compositor and its inverse
+cancel. This is valid for every commutative condensed ring and every scheme square. -/
+theorem pullbackSquareComparison_unit {X Y X' Y' : Scheme.{u}}
+    {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
+    (sq : CommSq g' p' p g) :
+    (pullbackSquareComparison Λ sq).hom.app (𝟙_ _) ≫
+        L((g')^*⟦Λ⟧).map (leftDerivedUpperStarUnitIso Λ p).hom ≫
+        (leftDerivedUpperStarUnitIso Λ g').hom =
+      L((p')^*⟦Λ⟧).map (leftDerivedUpperStarUnitIso Λ g).hom ≫
+        (leftDerivedUpperStarUnitIso Λ p').hom := by
+  have transport {f₁ f₂ : X' ⟶ Y} (e : f₁ = f₂) :
+      eqToHom (by rw [e] : L((f₁)^*⟦Λ⟧).obj (𝟙_ _) =
+        L((f₂)^*⟦Λ⟧).obj (𝟙_ _)) ≫ (leftDerivedUpperStarUnitIso Λ f₂).hom =
+      (leftDerivedUpperStarUnitIso Λ f₁).hom := by
+    subst e
+    simp
+  rw [pullbackSquareComparison_hom_app, Category.assoc, Category.assoc,
+    leftDerivedUpperStarComp_hom_app_unit, transport sq.w.symm]
+  rw [← leftDerivedUpperStarComp_hom_app_unit Λ p' g]
+  simp
+
 /-- Identity vertical arrows give the identity pullback comparison after the canonical
 identity-functor comparisons.
 
@@ -121,6 +156,40 @@ theorem pullbackSquareComparison_paste_horizontal
     (hc := pullbackSquareComparison_hom_app_obj Λ sqa b K) (hm := ?_)
   rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
   rfl
+
+/-- Vertical pasting of scheme squares gives the pasted native pullback comparison.
+
+Source: the cited blueprint proof, paragraphs 2–3
+(blueprint: lem-fix-condensed-pullback-coherence).
+Proof: apply horizontal pasting to the two transposed squares. The flip equation identifies
+all three transposed comparisons with the inverses of the original comparisons. Take the
+inverse of this equality of isomorphisms; inverses reverse composition and commute with
+functorial mapping, giving the displayed vertical-pasting formula. Together with
+associativity and the identity equation this gives arbitrary finite pasting. -/
+theorem pullbackSquareComparison_paste_vertical
+    {X Y X' Y' X'' Y'' : Scheme.{u}}
+    {p : X ⟶ Y} {p' : X' ⟶ Y'} {p'' : X'' ⟶ Y''}
+    {g' : X' ⟶ X} {g : Y' ⟶ Y} {h' : X'' ⟶ X'} {h : Y'' ⟶ Y'}
+    (sq : CommSq g' p' p g) (sq' : CommSq h' p'' p' h)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (pullbackSquareComparison Λ (sq'.horiz_comp sq)).hom.app K =
+      L((p'')^*⟦Λ⟧).map ((leftDerivedUpperStarComp Λ h g).hom.app K) ≫
+        (pullbackSquareComparison Λ sq').hom.app (L((g)^*⟦Λ⟧).obj K) ≫
+        L((h')^*⟦Λ⟧).map ((pullbackSquareComparison Λ sq).hom.app K) ≫
+        (leftDerivedUpperStarComp Λ h' g').inv.app (L((p)^*⟦Λ⟧).obj K) := by
+  have hpaste := pullbackSquareComparison_paste_horizontal Λ sq'.flip sq.flip K
+  have hsquare : sq'.flip.vert_comp sq.flip = (sq'.horiz_comp sq).flip :=
+    Subsingleton.elim _ _
+  rw [hsquare] at hpaste
+  rw [pullbackSquareComparison_flip Λ (sq'.horiz_comp sq),
+    pullbackSquareComparison_flip Λ sq', pullbackSquareComparison_flip Λ sq] at hpaste
+  exact inverse_paste_aux
+    ((pullbackSquareComparison Λ (sq'.horiz_comp sq)).app K)
+    (L((p'')^*⟦Λ⟧).mapIso ((leftDerivedUpperStarComp Λ h g).app K))
+    ((pullbackSquareComparison Λ sq').app (L((g)^*⟦Λ⟧).obj K))
+    (L((h')^*⟦Λ⟧).mapIso ((pullbackSquareComparison Λ sq).app K))
+    ((leftDerivedUpperStarComp Λ h' g').app (L((p)^*⟦Λ⟧).obj K)) hpaste
 
 set_option maxHeartbeats 20000000 in
 -- Instantiating the inverse calculation unifies large derived pullback objects.

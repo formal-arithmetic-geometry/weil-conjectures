@@ -211,6 +211,121 @@ private theorem scalarMateRestriction_reflectsIso
       (by rw [Functor.comp_map]; infer_instance)
   exact isIso_of_reflects_iso _ r
 
+/-- The canonical coefficient comparison is an isomorphism in the full subcategory
+of bounded intrinsically constructible complexes of finite Tor amplitude. Membership
+is written out for both endpoints, so no etale-origin hypothesis replaces intrinsic
+constructibility. No flatness or finite-projective-dimension condition is imposed.
+Source: blueprint main-20261015, sk-lem-sp-reduction-direct-image.md
+(blueprint: det-sp-reduction-direct-image).
+
+Proof:
+1. Transfer the intrinsic bounded constructible finite-Tor predicate through the exact
+   fixed-coefficient realization equivalence. Homology commutes with realization, finite
+   support is equivalent to t-structure boundedness, and the Tor transport theorem
+   identifies the two Tor tests. The supported etale tensor-origin theorem supplies
+   bounded K = j_!L and H = K tensor B, together with the canonical comparison to j_!M.
+2. The existing module-sheaf direct-image bound over a field supplies one bound 2d for
+   every coefficient sheaf. The finite ring A is Noetherian and the finite A-module B
+   is finitely presented. Apply the finite-constant projection component theorem to K
+   and B. Its finite-free approximation argument uses a finite cohomological window,
+   without requiring a finite projective resolution of B over A.
+3. The normalized etale-origin scalar projection square identifies the restriction of
+   the specified B-linear proper mate with this projection, conjugated by canonical
+   tensor and direct-image isomorphisms. Cancel the source factors and reflect the
+   resulting isomorphism through restriction. Naturality transports it to j_!M.
+   Proper image of the specified open scalar isomorphism completes the comparison.
+4. The existing compact-support preservation argument in fixed coefficients, transported
+   through the compact realization isomorphism, gives intrinsic Dctf membership.
+   Apply it over A, followed by scalar preservation on Y, for the source. Apply scalar
+   preservation on X, followed by compact support over B, for the target.
+5. The companion cocycle theorem applies a categorical pasting lemma to the existing
+   proper and open cocycles. That lemma uses only functoriality, associativity and
+   naturality of the second proper comparison at the first open comparison.
+-/
+theorem reductionDirectImage_isIso
+    (ℓ pchar : ℕ) [Fact ℓ.Prime] (hp : 0 < pchar) (hℓ : pchar ≠ ℓ)
+    (k : Type u) [Field k] [CharP k pchar]
+    {X Z Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]
+    [IsSeparated (Z ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    (j : X ⟶ Z) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]
+    (p : Z ⟶ Y) [IsProper p] [p.IsOver (Spec (.of k))] (hf : j ≫ p = f)
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0)
+    (hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B)
+    (M : proEtaleDerivedCategory X A)
+    (hbounded : Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor
+      (proEtaleRingModules X (proEtaleConstantRing X A)) i).obj M)})
+    (hconstructible : ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf X A
+      ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules X (proEtaleConstantRing X A)) i).obj M))
+    (hTor : HasFiniteProEtaleTorAmplitude X A M) :
+    IsIso ((reductionDirectImageComparison φ j p).app M) ∧
+    (Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor
+      (proEtaleRingModules Y (proEtaleConstantRing Y B)) i).obj
+        ((scalarExtensionFunctor φ Y).obj ((reductionCompactSupport A j p).obj M)))}) ∧
+    (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf Y B
+      ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules Y (proEtaleConstantRing Y B)) i).obj
+          ((scalarExtensionFunctor φ Y).obj ((reductionCompactSupport A j p).obj M)))) ∧
+    HasFiniteProEtaleTorAmplitude Y B
+      ((scalarExtensionFunctor φ Y).obj ((reductionCompactSupport A j p).obj M)) ∧
+    (Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor
+      (proEtaleRingModules Y (proEtaleConstantRing Y B)) i).obj
+        ((reductionCompactSupport B j p).obj ((scalarExtensionFunctor φ X).obj M)))}) ∧
+    (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf Y B
+      ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules Y (proEtaleConstantRing Y B)) i).obj
+          ((reductionCompactSupport B j p).obj ((scalarExtensionFunctor φ X).obj M)))) ∧
+    HasFiniteProEtaleTorAmplitude Y B
+      ((reductionCompactSupport B j p).obj ((scalarExtensionFunctor φ X).obj M)) := by
+  have hM : ReductionGood X A M := ⟨hbounded, hconstructible, hTor⟩
+  have hRf := reductionGood_compactSupport ℓ pchar hℓ k f j p hf A hA M hM
+  have hsource := reductionGood_scalar ℓ hA hB φ Y _ hRf
+  have hMB := reductionGood_scalar ℓ hA hB φ X M hM
+  have htarget := reductionGood_compactSupport ℓ pchar hℓ k f j p hf B hB _ hMB
+  have hiso : IsIso ((reductionDirectImageComparison φ j p).app M) := by
+    let E := sfIntrinsicDerivedEquivalence X A
+    let K := E.inverse.obj M
+    have hK := reductionGood_iso (E.counitIso.app M).symm hM
+    have hctf := (reductionGood_realization_iff X A K).mp hK
+    have hc := ProEtale.DerivedCategory.boundedConstructible_le_boundedConstructibleIntrinsic
+      _ hctf.1
+    have torsion {R : Type u} [CommRing R]
+        (h : ∃ n : ℕ, ∀ x : R, (ℓ ^ n) • x = 0) : ∃ n : ℕ, (ℓ : R) ^ n = 0 := by
+      obtain ⟨n, hn⟩ := h
+      exact ⟨n, by simpa only [nsmul_eq_mul, mul_one, Nat.cast_pow] using hn 1⟩
+    have hcf (i : ℤ) : IsConstructibleProEtaleFixedModuleSheaf X (ULift.{u + 1} A)
+        ((DerivedCategory.homologyFunctor _ i).obj K) := by
+      exact (fixed_constructible_iff _ X _).mpr (hc.2 i)
+    obtain ⟨L, hL, hLc, e, hJ, hH, hJplus, hHplus, hex⟩ :=
+      SupportedEtaleTensorOrigin.supported_etale_tensor_origin ℓ (Fact.out : ℓ.Prime)
+        φ (torsion hA) (torsion hB) j K hc.1 hcf hK.2.2
+    let ei : (finiteCoefficientIntrinsicDerivedComparison Z A).obj
+          ((SupportedEtaleTensorOrigin.etaleOpen A j).obj L) ≅
+        ((sfIntrinsicExtensionByZero j A).mapDerivedCategory).obj M :=
+      (FiniteCompactScalar.intrinsicSiteFunctorIso A Z).app _ ≪≫
+      (sfIntrinsicDerivedEquivalence Z A).functor.mapIso
+        (SupportedEtaleTensorOrigin.supportedComparison A j L K e) ≪≫
+      (SupportedEtaleTensorOrigin.openPresentation A j).symm.app K ≪≫
+      ((sfIntrinsicExtensionByZero j A).mapDerivedCategory).mapIso (E.counitIso.app M)
+    have hi := reductionProper_isIso φ k p
+      ((SupportedEtaleTensorOrigin.etaleOpen A j).obj L) hJ hH.1
+    have : IsIso ((directImageScalarComparison φ p).app
+        (((sfIntrinsicExtensionByZero j A).mapDerivedCategory).obj M)) :=
+      (NatTrans.isIso_app_iff_of_iso (directImageScalarComparison φ p) ei).mp hi
+    dsimp only [reductionDirectImageComparison, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app]
+    infer_instance
+  exact ⟨hiso, hsource.1, hsource.2.1, hsource.2.2,
+    htarget.1, htarget.2.1, htarget.2.2⟩
+
 set_option maxHeartbeats 18000 in
 -- Diagnose elaboration without unfolding large derived-functor constructions indefinitely.
 set_option maxHeartbeats 12000 in

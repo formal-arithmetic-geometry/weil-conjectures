@@ -93,6 +93,16 @@ Source: blueprint proof, step 1 (blueprint: det-sp-tower-injective-components). 
 instance spTowerHasDerived (T : Scheme.{t}) :
     HasDerivedCategory (spCoefficientTowers l E T) := HasDerivedCategory.standard _
 
+/-- Enough injectives for ring-sheaf modules in the common larger universe.
+Source: Stacks 079H; blueprint proof, step 1
+(blueprint: det-sp-tower-injective-components). -/
+instance spRingModulesEnoughInjectives (T : Scheme.{t})
+    (R : Sheaf (Scheme.ProEt.topology T) RingCat.{max u (t + 1)}) :
+    EnoughInjectives (ringedSiteModules.{max u (t + 1)} R) :=
+  letI := SheafOfModules.isGrothendieckAbelianOfUniverses.{t + 1, t, max u (t + 1), 0}
+    (Scheme.ProEt.topology T) R
+  inferInstance
+
 private theorem presheafPushforward_finiteLimits.{v, w, v₁, w₁, v₂, w₂}
     {C : Type w₁} [Category.{v₁} C] {D : Type w₂} [Category.{v₂} D]
     (F : C ⥤ D) {R : Dᵒᵖ ⥤ RingCat.{w}} {S : Cᵒᵖ ⥤ RingCat.{w}}

@@ -65,6 +65,18 @@ instance modulesLinear [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}
   SheafOfModules.homLinear.{r, v, c, r} R.obj
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).property
 
+/-- Module-valued global sections with the specified coefficient action. The Hom
+module is the existing pointwise section action, restricted along the given ring map.
+Source: Stacks 0B6E (blueprint: lem-sfb-ringed-site-global-rhom-derived-limits). -/
+abbrev sections [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    (R : Sheaf J CommRingCat.{r}) (A : Type a) [CommRing A] (φ : A →+* Scalars.{c, v, r} R) :
+    Modules.{c, v, r} R ⥤ ModuleCat.{max c r} A :=
+  letI := modulesLinear.{c, v, r} R
+  (linearCoyoneda (Scalars.{c, v, r} R) (Modules.{c, v, r} R)).obj
+      (op (SheafOfModules.unit
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ⋙
+    ModuleCat.restrictScalars.{max c r} φ
+
 variable (R : Sheaf J CommRingCat.{max c v r})
 
 variable [HasSheafify J AddCommGrpCat.{max c v r}]

@@ -75,6 +75,28 @@ def operations (s : PodCoefficientStage) :
   | .rational => S.higher.rational
   | .common => S.closure.commonStage
 
+/-- Permitted pairs for the recorded internal Hom, with no replacement Hom functor.
+Source: the restricted tensor-Hom adjunction
+(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+def homPairs (s : PodCoefficientStage) (X : SixFunctorSpace D) :
+    ObjectProperty ((category (_S := S) s X)ᵒᵖ × category (_S := S) s X) :=
+  match s with
+  | .finite => sixFunctorFiniteHomPairs D C E n hn X
+  | .integral => constructibleIntegralHomPairs C.l E X.obj.left
+  | .rational => constructibleRationalHomPairs C.l E X.obj.left
+  | .common => commonStageHomPairs C.l C.Qbar X.obj.left
+
+/-- The dependency's internal Hom restricted to precisely its permitted pair domain.
+Source: the restricted tensor-Hom adjunction
+(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+def internalHom (s : PodCoefficientStage) (X : SixFunctorSpace D) :
+    (homPairs (S := S) s X).FullSubcategory ⥤ category (_S := S) s X :=
+  match s with
+  | .finite => sixFunctorFiniteHom D C E n hn X
+  | .integral => constructibleIntegralHom C.l E X.obj.left
+  | .rational => rationalDerivedInternalHom C.l E X.obj.left
+  | .common => commonStageDerivedInternalHom C.l C.Qbar X.obj.left
+
 /-- The recorded tensor with its second argument restricted to finite Tor.
 At finite coefficients this is the canonical projection module's partial tensor.
 Source: the tensor-Hom domain and projection formula

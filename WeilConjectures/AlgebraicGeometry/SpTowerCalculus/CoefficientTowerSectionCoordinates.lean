@@ -125,6 +125,11 @@ private theorem transport_morphism {R : Type*} [Ring R]
   ext x
   exact congrFun (eq_of_heq hfg) x
 
+private theorem transport_section {R : Type*} [Ring R]
+    {M N : ModuleCat R} (h : M = N) (x : M) : HEq (eqToHom h x) x := by
+  cases h
+  rfl
+
 private def evaluation_object (b : SpTowerShriek.Base l E)
     (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
     (M : spCoefficientTowers l E T) (n : ℕ) :
@@ -176,6 +181,13 @@ private def evaluation_iso (b : SpTowerShriek.Base l E)
       (eq_of_heq (evaluation_sections l E b T D N n U)) _ _
       (evaluation_maps l E b T D f n U))
 
+private theorem evaluation_iso_sections (b : SpTowerShriek.Base l E)
+    (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T) (n : ℕ)
+    (M : spCoefficientTowers l E T) (U : T.ProEtᵒᵖ)
+    (x : ((SpTowerShriek.ev l E T n).obj ((b.realization T).functor.obj M)).val.obj U) :
+    HEq (((evaluation_iso l E b T D n).hom.app M).val.app U x) x := by
+  exact transport_section (eq_of_heq (evaluation_sections l E b T D M n U)) x
+
 private def quotientDiagram : ℕᵒᵖ ⥤ CommRingCat.{u} where
   obj n := CommRingCat.of (SpTowerShriek.R l E n.unop)
   map f := CommRingCat.ofHom (quotient l E (leOfHom f.unop))
@@ -185,6 +197,88 @@ private def quotientDiagram : ℕᵒᵖ ⥤ CommRingCat.{u} where
   map_comp f g := by
     ext x
     rfl
+
+private theorem coefficient_quotient (T : Scheme.{u}) {m n : ℕ} (h : m ≤ n) :
+    (spCoefficientCommRings l E T).map (homOfLE h).op =
+      proEtaleConstantRingMap (T := T) (quotient l E h) := by
+  let : HasSheafify (ProEt.topology T) CommRingCat.{u + 1} :=
+    WeilConjectures.integralCoefficientRingSheafify.{u, u} T
+  let L : CommRingCat.{u} ⥤ CommRingCat.{u + 1} :=
+    { obj := fun A ↦ CommRingCat.of (ULift.{u + 1} A)
+      map := fun f ↦ CommRingCat.ofHom (RingHom.ulift f.hom) }
+  let G : CommRingCat.{u} ⥤ Sheaf (ProEt.topology T) CommRingCat.{u + 1} :=
+    L ⋙ constantSheaf.{u, u + 1, u + 1, u + 2} (ProEt.topology T) CommRingCat.{u + 1}
+  let t : spCoefficientCommRings l E T ⟶ quotientDiagram l E ⋙ G := by
+    refine NatTrans.ofOpSequence (fun n ↦ 𝟙 _) ?_
+    intro n
+    simp only [spCoefficientCommRings, Functor.ofOpSequence_map_homOfLE_succ,
+      Functor.comp_map, Category.comp_id, Category.id_comp]
+    rfl
+  exact (Category.comp_id _).symm.trans
+    ((t.naturality (homOfLE h).op).trans (Category.id_comp _))
+
+private theorem restriction_sections_of_eq
+    {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u}} {φ ψ : R ⟶ S} (e : φ = ψ)
+    (M : SheafOfModules.{u} S) (U : Cᵒᵖ)
+    (x : ((SheafOfModules.restrictScalars φ).obj M).val.obj U) :
+    HEq (((eqToIso (congrArg SheafOfModules.restrictScalars e)).hom.app M).val.app U x) x := by
+  cases e
+  rfl
+
+private theorem scalar_coordinates (T : Scheme.{u}) (a : SpCoefficientTowersAbelian l E T)
+    {m n : ℕ} (h : m ≤ n) : Nonempty (ScalarCoordinates l E T a h) := by
+  let e := coefficient_quotient l E T h
+  let r : systemRestriction l E T h ≅
+      SheafOfModules.restrictScalars
+        ((sheafCompose (Scheme.ProEt.topology T)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+            (proEtaleConstantRingMap (T := T) (quotient l E h))) :=
+    eqToIso (congrArg (fun φ ↦ SheafOfModules.restrictScalars
+      ((sheafCompose (ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)) e)
+  let A := SheafOfModules.systemDerivedTensorAdj.{u + 1, u, u + 1}
+    a.scalar (spCoefficientCommRings l E T) h
+  let B := proEtaleRingDerivedExtensionAdjunction
+    (proEtaleConstantRingMap (T := T) (quotient l E h))
+  let d := Functor.mapDerivedCategoryNatIso r
+  let c : systemScalar l E T a h ≅ scalarExtensionFunctor (quotient l E h) T :=
+    (A.ofNatIsoRight d).leftAdjointUniq B
+  refine ⟨{ restriction := r, restriction_sections := ?_, scalar := c, unit := ?_ }⟩
+  · intro M U x
+    exact restriction_sections_of_eq
+      (congrArg (fun φ ↦ (sheafCompose (ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ) e) M U x
+  · intro M
+    have hunit := (A.ofNatIsoRight d).unit_leftAdjointUniq_hom_app B M
+    have hn := d.hom.naturality (c.hom.app M)
+    dsimp only [Functor.comp_map] at hn
+    change A.unit.app M ≫ _ ≫ d.hom.app _ = B.unit.app M
+    erw [hn]
+    simpa only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Category.assoc] using hunit
+
+/-- Section-normalized coordinates for the strict system presentation.
+Source: blueprint Local pairs, the section-model clause; Stacks 03D1 and 06YY.
+Proof: use the sectionwise uncurrying of the coefficient-tower abelianness theorem.
+Both evaluations have the original module M(n,U), and their restriction and map
+components are those of M. Their identity sections therefore give the ordinary
+natural isomorphism. The strict-system restriction and constant-ring restriction
+use the same iterated quotient homomorphism. Identify them sectionwise and take
+the unique comparison of their left adjoints. Its unit identity is the required
+scalar normalization. No geometric operation or preservation assumption is used.
+(blueprint: lem-sp-tower-section-coordinates). -/
+theorem coordinates_realization (b : SpTowerShriek.Base l E) :
+    Nonempty (Coordinates l E b) := by
+  classical
+  let a (T : Scheme.{u}) := (sp_coefficient_towers_abelian l E T).some
+  refine ⟨{
+    abelian := a
+    ordinaryEvaluation := fun T n ↦ evaluation_iso l E b T (a T) n
+    sections := fun T n M U x ↦ evaluation_iso_sections l E b T (a T) n M U x
+    scalar := ?_ }⟩
+  intro T m n h
+  exact (scalar_coordinates l E T (a T) h).some
 
 end AlgebraicGeometry.ProEtale.SpTowerCalculus
 

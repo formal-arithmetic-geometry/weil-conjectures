@@ -1098,6 +1098,102 @@ private meta def structuralComparisonCongr
       rest := rest ++ (← structuralComparisonCongr cache fixIdentical n h)
     return rest
 
+/-- The local equation before applying the final proper direct image.
+
+Source: blueprint det-sf-comp-composition-base-change, proof (3), the maps from the
+base-changed extension by zero into the direct image from a common refinement.
+(blueprint: lem-sfb-compact-support-open-refinement-pasting).
+
+Proof: the supplied equality esr identifies the two ambient refinement maps into
+c after pullback. Their open triangles identify both restrictions with the same
+map on the source open. The inverses of oc and od are the specified open exchanges,
+so after transposing by the open adjunction their contribution is the canonical
+pullback comparison and the open unit. The refinement maps are, by definition,
+the adjuncts of the inverse restriction isomorphisms followed by the open units.
+Restrict the proper mate for h to that same open: since h is the identity there,
+the two units and counits cancel by the adjunction triangle identities, and the
+remaining pullback comparison is the canonical one on the open. Substituting the
+normalization of each refinement, the adjunct of each side is thus the open unit
+followed by the inverse restriction for hc. Composition of the restriction mates
+uses the derived direct-image compositor normalized on K-injectives, exactly the
+triangle appearing on the left. Injectivity of the open-adjunction Hom equivalence,
+after precomposing with the isomorphism oc, proves the equality. No final direct
+image to Y' is applied in this statement. It uses neither density nor any proper
+base-change isomorphism or localizing condition, and works for empty opens and
+arbitrary unbounded complexes. -/
+theorem compactSupportOpenRefinement_pasting
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] (v : Y' ⟶ Y)
+    (c : Compactification f) (d : Compactification.BoundaryCompactification f)
+    (oc : D((c.i)_!open⟦Λ⟧) ⋙ detSfDerivedPullback Λ (pullback.fst c.g v) ≅
+      detSfDerivedPullback Λ (pullback.fst f v) ⋙ D(((c.baseChange v).i)_!open⟦Λ⟧))
+    (od : D((d.obj.obj.i)_!open⟦Λ⟧) ⋙ detSfDerivedPullback Λ (pullback.fst d.obj.obj.g v) ≅
+      detSfDerivedPullback Λ (pullback.fst f v) ⋙ D(((d.obj.obj.baseChange v).i)_!open⟦Λ⟧))
+    (hoc : oc.inv = detSfOpenBaseChangeMap Λ f v c)
+    (hod : od.inv = detSfOpenBaseChangeMap Λ f v d.obj.obj)
+    (h : d ⟶ detSfBoundaryCompactification c)
+    (w : Compactification.BoundaryCompactification (pullback.snd f v))
+    (hd : w ⟶ detSfBoundaryCompactification (d.obj.obj.baseChange v))
+    (hc : w ⟶ detSfBoundaryCompactification (c.baseChange v))
+    (esr : hd.hom.hom.hom ≫
+        compactSupportTrianglePullback h.hom.hom.hom c.g d.obj.obj.g h.hom.hom.hom_g v =
+      hc.hom.hom.hom)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    (detSfDerivedPullback Λ (pullback.fst c.g v)).map (localizingRefinementMap Λ h K) ≫
+      (condensedAmbientExchange Λ (compactSupportTrianglePullbackSquare
+        h.hom.hom.hom c.g d.obj.obj.g h.hom.hom.hom_g v)).app (D((d.obj.obj.i)_!open⟦Λ⟧).obj K) ≫
+      R((compactSupportTrianglePullback h.hom.hom.hom c.g d.obj.obj.g h.hom.hom.hom_g v)_*⟦Λ⟧).map
+        (od.hom.app K ≫ localizingRefinementMap Λ hd
+          ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)) ≫
+      (compactSupportPushforwardTriangle Λ hd.hom.hom.hom
+        (compactSupportTrianglePullback h.hom.hom.hom c.g d.obj.obj.g h.hom.hom.hom_g v)
+        hc.hom.hom.hom esr).hom.app
+          (D((w.obj.obj.i)_!open⟦Λ⟧).obj
+            ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)) =
+    oc.hom.app K ≫ localizingRefinementMap Λ hc
+      ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)   := by
+  rcases c with ⟨Z, g, i, comm, hg, hi⟩
+  let _ : IsProper g := hg
+  let _ : IsOpenImmersion i := hi
+  have hn := boundary_refinement_pasting_nat Λ f v
+    (detSfBoundaryCompactification (Compactification.mk Z g i comm hg hi)) d oc od hoc hod h w hd hc
+      esr
+  rw [pulledRefinementExchange_eq] at hn
+  dsimp only [detSfBoundaryCompactification, pulledRefinement, Functor.comp_obj] at hn
+  have hEh := refinementNatural_apps Λ h
+  have hEhd := refinementNatural_apps Λ hd
+  have hEhc := refinementNatural_apps Λ hc
+  have hh := coefficient_components_of_natural_pasting
+    (detSfDerivedPullback Λ (pullback.fst (Compactification.mk Z g i comm hg hi).g v))
+    (detSfDerivedPullback Λ (pullback.fst d.obj.obj.g v))
+    (detSfDerivedPullback Λ (pullback.fst f v))
+    D(((Compactification.mk Z g i comm hg hi).i)_!open⟦Λ⟧) D((d.obj.obj.i)_!open⟦Λ⟧)
+    D((((Compactification.mk Z g i comm hg hi).baseChange v).i)_!open⟦Λ⟧) D(((d.obj.obj.baseChange
+      v).i)_!open⟦Λ⟧)
+    D((w.obj.obj.i)_!open⟦Λ⟧) R((h.hom.hom.hom)_*⟦Λ⟧)
+    R((compactSupportTrianglePullback h.hom.hom.hom (Compactification.mk Z g i comm hg hi).g
+      d.obj.obj.g
+      h.hom.hom.hom_g v)_*⟦Λ⟧)
+    R((hd.hom.hom.hom)_*⟦Λ⟧) R((hc.hom.hom.hom)_*⟦Λ⟧)
+    (refinementNatural Λ h) (refinementNatural Λ hd) (refinementNatural Λ hc)
+    oc od
+    (condensedAmbientExchange Λ (compactSupportTrianglePullbackSquare
+      h.hom.hom.hom (Compactification.mk Z g i comm hg hi).g d.obj.obj.g h.hom.hom.hom_g v))
+    (compactSupportPushforwardTriangle Λ hd.hom.hom.hom
+      (compactSupportTrianglePullback h.hom.hom.hom (Compactification.mk Z g i comm hg hi).g
+        d.obj.obj.g h.hom.hom.hom_g v)
+      hc.hom.hom.hom esr)
+    (localizingRefinementMap Λ h) (localizingRefinementMap Λ hd)
+    (localizingRefinementMap Λ hc) hEh hEhd hEhc hn K
+  convert (config := { closePre := false, closePost := false }) hh using 0
+  run_tac
+    let cache ← IO.mkRef #[]
+    let gs ← structuralComparisonCongr cache false 500 (← Lean.Elab.Tactic.getMainGoal)
+    Lean.Elab.Tactic.replaceMainGoal gs
+  all_goals rfl
+
 set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 3000000 in
 -- Specialize natural coherence before taking its component.

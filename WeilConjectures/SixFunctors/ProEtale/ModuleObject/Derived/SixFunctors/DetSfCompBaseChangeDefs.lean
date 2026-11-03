@@ -233,6 +233,24 @@ noncomputable def detSfCompactSupportBaseChangeComposite
         detSfCompactSupport Λ (c.baseChange v)) :=
   (detSfCompactSupportExchangeData Λ f v c o).map
 
+/-- Component API for the specified proper/open exchange composite.
+Source: blueprint beta is the composite of two isomorphisms on the localizing domain.
+(blueprint: def-sfb-compact-support-base-change-maps). -/
+theorem detSfCompactSupportBaseChangeComposite_isIso_app
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (v : Y' ⟶ Y)
+    (c : Compactification f) (o :
+      D((c.i)_!open⟦Λ⟧) ⋙ detSfDerivedPullback Λ (pullback.fst c.g v) ≅
+        detSfDerivedPullback Λ (pullback.fst f v) ⋙
+          D(((c.baseChange v).i)_!open⟦Λ⟧))
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (h : IsIso ((detSfProperBaseChangeMap Λ c.g v).app
+      ((openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K))) :
+    IsIso ((detSfCompactSupportBaseChangeComposite Λ f v c o).app K) :=
+  (detSfCompactSupportExchangeData Λ f v c o).isIso K h
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -121,6 +121,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ListedScalarCoefficientMaps
 
 /-! # The canonical locally closed scalar-perfect generators
 
@@ -160,5 +161,16 @@ def sfbLocallyClosedDerivedExtension (Λ : ScalarSixRing.{u})
   letI : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
   (openImmersionLowerShriek Λ.X a.toImage).mapDerivedCategory ⋙
     (lowerStar Λ.X a.imageι).rightDerivedFunctor
+
+/-- The generators a_!P with locally perfect scalar models, up to derived isomorphism.
+Source: blueprint scalar-six-ctf (1)
+(blueprint: def-sfb-scalar-perfect-generators). -/
+def sfbPerfectScalarGenerator (Λ : ScalarSixRing.{u}) {k : Type u} [Field k]
+    (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] :
+    ObjectProperty (DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left)) :=
+  fun K ↦ ∃ (S : Scheme.{u}) (a : S ⟶ X.left) (ha : IsImmersion a)
+    (P : DerivedCategory (ModuleRingedComparison.internalModules Λ.X S)),
+    IsLocallyPerfectScalarModel Λ.X S P ∧
+      Nonempty (K ≅ (sfbLocallyClosedDerivedExtension Λ a ha).obj P)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -348,6 +348,138 @@ private theorem restrictedUnitCounit_existsUnique (Y : Scheme.{u})
     apply ObjectProperty.hom_ext
     exact counit_normalization_unique Λ Y L d K.obj _ _ (ha.2 K) (hε K)
 
+/-- Exactness of a specified restriction, bundled before specializing its ambient categories.
+This is only the existing shift-commutation structure and Mathlib triangulated-functor
+predicate; no new notion of distinguished triangle or exactness is introduced.
+Source: blueprint rational projective-line unit/counit, exact restricted functors
+(blueprint: lem-sfb-projective-normalized-unit-counit-restriction). -/
+def RestrictionExact
+    {C : Type a} {D : Type b} [Category.{v} C] [Category.{w} D]
+    [Preadditive C] [Preadditive D] [HasZeroObject C] [HasZeroObject D]
+    [HasShift C ℤ] [HasShift D ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]
+    [Pretriangulated C] [Pretriangulated D]
+    (P : ObjectProperty C) (Q : ObjectProperty D)
+    [P.IsTriangulated] [Q.IsTriangulated]
+    (F : P.FullSubcategory ⥤ Q.FullSubcategory) : Prop :=
+  ∃ s : F.CommShift ℤ, letI := s; F.IsTriangulated
+
+/-- The canonical diagonal comparison is a natural isomorphism on the entire unbounded
+category, and the fixed ambient formulas uniquely define the restricted unit/counit pair.
+`F` and `G` name precisely the indicated full-subcategory lifts, as required by their
+specified equalities. Normalization is heterogeneous equality to the fixed formulas.
+
+Source: blueprint rational projective-line unit/counit proof, Well-definedness (1)--(3)
+(blueprint: lem-sfb-projective-normalized-unit-counit-restriction).
+
+Proof plan:
+1. Apply `lem-sfb-noncommutative-ringed-open-closed` to the diagonal and complementary
+open, transporting along the pulled-back coefficient identifications. Exact inverse images
+and the open/closed short exact sequence detect zero cohomology in every integer degree.
+By `lem-sf-exact-functor-derived-triangulated` and `sk-def-sfb-derived-categories` the
+termwise functors descend to the unbounded derived categories. Apply detection to cones to
+obtain joint conservativity there, with invertible derived closed counit.
+2. Transpose the fixed `diagonalTensorMap` under the derived pullback/pushforward adjunction
+of `sk-def-sfb-module-derived-pushpull`. The mate description in
+`def-sfb-proetale-projection-exchange-maps` identifies its transpose with tensor-pullback,
+the prescribed section comparison, the closed counit, and the coefficient unitor. All are
+invertible, so its diagonal restriction is invertible.
+3. Its complementary restriction has zero source and target, by open/closed vanishing
+and the closed tensor structure of `sk-def-sfb-derived-tensor-hom`. Joint conservativity
+makes the actual map invertible. Naturality follows from left-projection naturality
+`lem-sfb-rational-p1-left-projection-naturality`, section naturality and unitor naturality.
+4. The inverse of `pushSectionIso` from `def-sfb-projective-diagonal-composition` gives
+the claimed pushforward-composition isomorphism. The same definition identifies the
+supported degree-zero coefficient source with the derived closed pushforward of the unit.
+5. Tensor the specified diagonal class from `def-sfb-diagonal-coefficient-category` and
+apply the second pushforward. Follow by the inverses of the fixed twisted projection and
+exchange, using `def-sfb-rational-p1-unit-inversion-condition`. This is exactly
+`unitComponent` of `def-sfb-projective-ambient-unit-counit-composites`.
+6. Tensor bifunctoriality, `lem-sfb-rational-p1-tensor-shift-naturality`, section naturality
+and diagonal comparison naturality give naturality before these inverses. The exchange
+is natural by its mate definition in `def-weil-pbc-ambient-ringed-exchange`. The twisted
+projection is natural in the pushed variable by the unit/tensor-comparison/counit
+construction of `def-sfb-proetale-rational-localizing-projection-helpers`, followed by
+tensoring the specified line comparison. Invert these naturality squares and compose.
+7. Use `def-sfb-rational-p1-counit-inversion-condition` to invert the fixed left projection.
+Precede it by inverse tensor-shift and follow by identity tensor the specified trace,
+the coefficient-unit identification and the right unitor. This is `counitComponent`.
+Tensor-shift naturality, left-projection naturality, tensor bifunctoriality and unitor
+naturality give its naturality square.
+8. Preservation puts the endpoints in the full subcategories, so fullness lifts both
+components and faithfulness proves naturality there. The endpoint functors are the given
+exact lifts. Any other normalized pair is heterogeneously equal componentwise to the
+same formulas; transitivity gives equality, and faithful inclusion plus natural
+transformation extensionality gives equality of pairs. No triangle identities enter. -/
+theorem projective_normalized_unit_counit_restriction
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (Y : Scheme.{u}) [IsClosedImmersion (diagonalImmersion Y)]
+    (U : Scheme.{u}) (j : U ⟶ diagonalSurface Y) [IsOpenImmersion j] [QuasiCompact j]
+    (hj : Set.range j.base = (Set.range (diagonalImmersion Y).base)ᶜ)
+    [PreservesFiniteLimits (CondensedRing.upperStar Λ (diagonalImmersion Y))]
+    [PreservesFiniteColimits (CondensedRing.upperStar Λ (diagonalImmersion Y))]
+    [PreservesFiniteLimits (CondensedRing.upperStar Λ j)]
+    [PreservesFiniteColimits (CondensedRing.upperStar Λ j)]
+    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
+    (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
+      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
+        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≅
+      ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj
+        (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
+    (P : ObjectProperty (DerivedCategory (Modules Λ (ProjectiveLine Y))))
+    (Q : ObjectProperty (DerivedCategory (Modules Λ Y)))
+    [P.IsClosedUnderIsomorphisms] [Q.IsClosedUnderIsomorphisms]
+    [P.IsTriangulated] [Q.IsTriangulated]
+    (hF : ∀ M : P.FullSubcategory,
+      Q ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj M.obj))
+    (hG : ∀ K : Q.FullSubcategory,
+      P ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙
+        twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).obj K.obj))
+    (F : P.FullSubcategory ⥤ Q.FullSubcategory)
+    (G : Q.FullSubcategory ⥤ P.FullSubcategory)
+    (hF_eq : F = Q.lift (P.ι ⋙ moduleObjectDerivedPushforward Λ
+      (ProjectiveLine Y ↘ Y)) hF)
+    (hG_eq : G = P.lift (Q.ι ⋙ moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙
+      twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))) hG)
+    (hF_exact : RestrictionExact P Q F) (hG_exact : RestrictionExact Q P G)
+    (hI : ∀ M : P.FullSubcategory, UnitInversionCondition Λ Y L e M.obj)
+    (hJ : ∀ K : Q.FullSubcategory, CounitInversionCondition Λ Y L K.obj) :
+    (∃ a : moduleObjectDerivedPullback Λ (firstProjection Y) ⋙
+        tensorRight ((moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj
+          (unit Λ (ProjectiveLine Y))) ≅
+        moduleObjectDerivedPushforward Λ (diagonalImmersion Y),
+      ∀ M : DerivedCategory (Modules Λ (ProjectiveLine Y)),
+        a.hom.app M = diagonalTensorMap Λ Y M) ∧
+    Nonempty (moduleObjectDerivedPushforward Λ (diagonalImmersion Y) ⋙
+      moduleObjectDerivedPushforward Λ (secondProjection Y) ≅
+        𝟭 (DerivedCategory (Modules Λ (ProjectiveLine Y)))) ∧
+    ∃! a : (𝟭 P.FullSubcategory ⟶ F ⋙ G) × (G ⋙ F ⟶ 𝟭 Q.FullSubcategory),
+      (∀ M : P.FullSubcategory,
+        UnitComponentNormalized Λ Y L d e M.obj (a.1.app M).hom) ∧
+      (∀ K : Q.FullSubcategory,
+        CounitComponentNormalized Λ Y L d K.obj (a.2.app K).hom) := by
+  have _ := hj
+  have _ := hF_exact
+  have _ := hG_exact
+  refine ⟨?_, ⟨(pushSectionIso Λ Y).symm⟩, ?_⟩
+  · let a : moduleObjectDerivedPullback Λ (firstProjection Y) ⋙
+        tensorRight ((moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj
+          (unit Λ (ProjectiveLine Y))) ≅
+        moduleObjectDerivedPushforward Λ (diagonalImmersion Y) :=
+      NatIso.ofComponents (fun M ↦ (diagonalTensorIso Λ Y M).symm) (by
+        intro M N f
+        simpa only [Functor.comp_map, tensorRight, Functor.flip_obj_map,
+          curriedTensor_map_app, Iso.symm_hom, tensorHom_id] using
+          inverse_iso_square (diagonalTensorIso Λ Y M) (diagonalTensorIso Λ Y N)
+            (diagonalTensorIso_naturality Λ Y f))
+    refine ⟨a, ?_⟩
+    intro M
+    have := diagonalTensorMap_isIso Λ Y M
+    simp only [a, NatIso.ofComponents_hom_app, Iso.symm_hom, diagonalTensorIso,
+      Iso.symm_inv, asIso_hom]
+  · exact restrictedUnitCounit_existsUnique Λ Y L d e P Q hF hG hI hJ F G hF_eq hG_eq
+
 end Naturality
 
 end AlgebraicGeometry.ProEtale.RationalP1

@@ -15,6 +15,8 @@ import WeilConjectures.NumberTheory.Padics.FiniteCoefficientFields
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedFlatCoefficientCalculus
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedFiniteModelProofAPISupplement
+public import WeilConjectures.AlgebraicGeometry.CondensedCoefficientComplexColimit
 
 /-!
 # Finite descent of coefficient morphisms over any allowed base field
@@ -135,6 +137,75 @@ theorem coefficient_finite_descent_hom_of_char_ne
       ∃ (H : PadicAlgCl.FiniteIntermediateField ℓ) (hF : F ≤ H) (hG : G ≤ H),
         coefficientDescentHomTransition X ℓ h hF C.obj D.obj r f =
           coefficientDescentHomTransition X ℓ j hG C.obj D.obj r g) := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro F h
+    exact (finiteCoefficientDerivedHomEquiv X ℓ h C.obj _).bijective
+  · exact (finiteCoefficientDerivedAlgClHomEquiv X ℓ E C.obj _).bijective
+  · intro F G h j f
+    exact adjunction_comparison_naturality
+      (finiteCoefficientDerivedAdjunction X ℓ h)
+      (derivedExtendScalarsSubfield X ℓ j)
+      (finiteCoefficientDerivedAdjunction X ℓ (h.trans j))
+      (condensedCoefficientCompIso X ℓ h j) C.obj _ _ f _
+  · intro F h f
+    exact adjunction_comparison_naturality
+      (finiteCoefficientDerivedAdjunction X ℓ h)
+      (derivedExtendScalarsToPadicAlgCl X ℓ F)
+      (finiteCoefficientDerivedAlgClAdjunction X ℓ E)
+      (derivedExtendScalarsCompIso X ℓ h) C.obj _ _ f _
+  · intro K e a b hK
+    let : (coefficientDescentFields ℓ E).Final := by
+      dsimp [coefficientDescentFields]
+      infer_instance
+    refine ⟨?_, ?_, ?_⟩
+    · exact IsFiltered.of_equivalence (AsSmall.equiv (C := Under E))
+    · exact nonempty_isColimit_coefficientComplexCocone X ℓ K
+        (coefficientDescentFields ℓ E) _ _
+    · intro i n hn
+      exact (Mod.comap (padicSubfieldRingObjMap X ℓ
+        (leOfHom (ULift.down i).hom))).map_isZero
+          ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ
+            (leOfHom (ULift.down i).hom))).map_isZero (hK n (Or.inl hn)))
+  · intro f
+    have : (boundedConstructible (padicSubfieldRingObj X ℓ E)).IsTriangulated :=
+      finiteBoundedTriangulated X ℓ E
+    let D' : BoundedConstructible (padicSubfieldRingObj X ℓ E) :=
+      ⟨D.obj⟦r⟧, (boundedConstructible (padicSubfieldRingObj X ℓ E)).le_shift r _ D.property⟩
+    let f' := f ≫ ((derivedExtendScalarsToPadicAlgCl X ℓ E).commShiftIso r).inv.app D.obj
+    obtain ⟨F, h, j, g, hg⟩ := constructibleCocone_homSurj X ℓ E E C D'
+      (ObjectProperty.homMk f')
+    let g' := g.hom ≫ ((derivedExtendScalarsSubfield X ℓ h).commShiftIso r).hom.app D.obj
+    refine ⟨F, h, g', ?_⟩
+    have hh := congrArg (·.hom) hg
+    dsimp only [constructibleCocone] at hh
+    simp only [ObjectProperty.FullSubcategory.comp_hom, tensorComp_inv, tensorComp_hom,
+      constructibleToPadicAlgCl_map_hom] at hh
+    have : NatTrans.CommShift (derivedExtendScalarsCompIso X ℓ h).hom ℤ :=
+      tensorCompShift X ℓ h
+    have hc := NatTrans.shift_app_comm (derivedExtendScalarsCompIso X ℓ h).hom r D.obj
+    simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at hc
+    change f' = (derivedExtendScalarsCompIso X ℓ h).inv.app C.obj ≫
+      (derivedExtendScalarsToPadicAlgCl X ℓ F).map g.hom ≫
+        (derivedExtendScalarsCompIso X ℓ h).hom.app (D.obj⟦r⟧) at hh
+    dsimp only [g', coefficientDescentHomToAlgCl, coefficientDescentDerivedHomMap]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hc]
+    rw [← Category.assoc, ← Category.assoc]
+    rw [← Category.assoc] at hh
+    rw [← hh]
+    simp only [f', Category.assoc, Iso.inv_hom_id_app]
+    exact Category.comp_id f
+  · intro F G h j f g heq
+    let H := IsFiltered.max F G
+    have hF : F ≤ H := leOfHom (IsFiltered.leftToMax F G)
+    have hG : G ≤ H := leOfHom (IsFiltered.rightToMax F G)
+    refine ⟨H, hF, hG, ?_⟩
+    apply descentHomToAlgCl_injective X ℓ (h.trans hF) C.obj D.obj r
+    rw [descentHomToAlgCl_transition, descentHomToAlgCl_transition]
+    exact heq
 
 end AlgebraicGeometry.ProEtale

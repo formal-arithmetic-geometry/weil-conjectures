@@ -357,6 +357,9 @@ import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.Algebra.Field.Shrink
 import Mathlib.Algebra.Module.Shrink
 import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
+public import WeilConjectures.CategoryTheory.SmoothBaseChange.CohomologyInWeakSerreSubcategory
+public import WeilConjectures.ProperBaseChange.CondensedConstructibleSerre
+public import WeilConjectures.ProperBaseChange.IntegralLfpLocallyFreeResolution
 
 /-!
 # Integral constructibility under immersions and generation by strata
@@ -401,6 +404,83 @@ noncomputable def integralTensorShriek_pointComplex
   (Functor.mapHomologicalComplex
     ((upperStarFromPoint X).mapMod (integralModelCondensedCoefficients l E).X)
     (ComplexShape.up ℤ)).obj Q
+
+/-- Open extension by zero, closed direct image, and their locally closed composites
+preserve integral bounded constructibility.
+Source: blueprint det-lem-int-tensor-shriek, clause (1)
+(blueprint: det-lem-int-tensor-shriek).
+
+Proof: use exact derived homology comparison and the existing constructible-image
+results for open extension by zero and closed direct image. The bounded-map theorem
+preserves bounds. For closed direct image, the open complement supplies exactness via
+condensed recollement, and the right-derived/map-derived comparison identifies the image.
+Apply the two assertions successively for a locally closed immersion. -/
+theorem integralTensorShriek_preserves
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ l)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsNoetherian X]
+    : (∀ (U : Scheme.{u}) (j : U ⟶ X) [IsOpenImmersion j]
+        (M : DerivedCategory (pulledBackModuleObjects (integralModelCondensedCoefficients l E).X
+          U)),
+        boundedConstructible (condensedRingObj (integralModelCondensedCoefficients l E).X U) M →
+          boundedConstructible (condensedRingObj (integralModelCondensedCoefficients l E).X X)
+            ((CondensedRing.openImmersionLowerShriek (integralModelCondensedCoefficients l E).X
+              j).mapDerivedCategory.obj M)) ∧
+      (∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i]
+        (M : DerivedCategory (pulledBackModuleObjects (integralModelCondensedCoefficients l E).X
+          Z)),
+        boundedConstructible (condensedRingObj (integralModelCondensedCoefficients l E).X Z) M →
+          boundedConstructible (condensedRingObj (integralModelCondensedCoefficients l E).X X)
+            ((CondensedRing.lowerStar (integralModelCondensedCoefficients l E).X
+              i).rightDerivedFunctor.obj M)) ∧
+      (∀ (S Z : Scheme.{u}) (v : S ⟶ Z) (i : Z ⟶ X)
+        [IsOpenImmersion v] [IsClosedImmersion i]
+        (M : DerivedCategory (pulledBackModuleObjects (integralModelCondensedCoefficients l E).X
+          S)),
+        boundedConstructible (condensedRingObj (integralModelCondensedCoefficients l E).X S) M →
+          boundedConstructible (condensedRingObj (integralModelCondensedCoefficients l E).X X)
+            (((CondensedRing.openImmersionLowerShriek (integralModelCondensedCoefficients l E).X
+              v).mapDerivedCategory ⋙
+              (CondensedRing.lowerStar (integralModelCondensedCoefficients l E).X
+                i).rightDerivedFunctor).obj M)) := by
+  let Λ := (integralModelCondensedCoefficients l E).X
+  have hopen (Y : Scheme.{u}) [IsNoetherian Y] (U : Scheme.{u})
+      (j : U ⟶ Y) [IsOpenImmersion j]
+      (M : DerivedCategory (pulledBackModuleObjects Λ U))
+      (hM : boundedConstructible (condensedRingObj Λ U) M) :
+      boundedConstructible (condensedRingObj Λ Y)
+        ((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory.obj M) := by
+    refine ⟨(CondensedRing.openImmersionLowerShriek Λ j).bounded_mapDerivedCategory_obj
+      hM.1, fun n ↦ ?_⟩
+    exact _root_.constructible_of_iso
+      (((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategoryHomologyFunctorIso
+        n).app M)
+      (CondensedRing.isConstructibleModuleObject_openImmersionLowerShriek Λ j _ (hM.2 n))
+  have hclosed (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i]
+      (M : DerivedCategory (pulledBackModuleObjects Λ Z))
+      (hM : boundedConstructible (condensedRingObj Λ Z) M) :
+      boundedConstructible (condensedRingObj Λ X)
+        ((CondensedRing.lowerStar Λ i).rightDerivedFunctor.obj M) := by
+    let U : X.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+    have hij : Set.range U.ι = (Set.range i)ᶜ := U.range_ι
+    obtain ⟨hex, _⟩ := CondensedRing.condensed_open_closed_recollement Λ i U.ι hij
+    let := hex
+    let e := (CondensedRing.lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory.app M
+    refine ⟨(DerivedCategory.TStructure.t.bounded).prop_of_iso e.symm
+      ((CondensedRing.lowerStar Λ i).bounded_mapDerivedCategory_obj hM.1), fun n ↦ ?_⟩
+    exact _root_.constructible_of_iso ((DerivedCategory.homologyFunctor _ n).mapIso e.symm)
+      (_root_.constructible_of_iso
+        (((CondensedRing.lowerStar Λ i).mapDerivedCategoryHomologyFunctorIso n).app M)
+        ((CondensedRing.constructible_open_closed_images Λ U.ι i hij).2 _ (hM.2 n)))
+  refine ⟨hopen X, hclosed, ?_⟩
+  intro S Z v i hv hi M hM
+  let : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian i
+  let : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace i
+  let : IsNoetherian Z := ⟨⟩
+  exact hclosed Z i _ (hopen Z S v M hM)
 
 attribute [local irreducible] DerivedCategory.monoidalClosed Mod.monoidalClosed
   upperStar lowerStar upperStarFromPoint CondensedRing.upperStarComp upperStarFromPointComp
@@ -521,5 +601,29 @@ private theorem coefficientSmallIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso er
   have : IsMonHom ea.hom := Sheaf.isMonHom_sheafCompose_map _ er.hom
   exact ⟨(Mon.mkIso ea).symm⟩
+
+private theorem triangulatedOfThree
+    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
+    [P.IsTriangulatedClosed₁] [P.IsTriangulatedClosed₂] [P.IsTriangulatedClosed₃] :
+    P.IsTriangulated := by
+  have hup (X : C) (hX : P X) : P (X⟦(1 : ℤ)⟧) :=
+    P.ext_of_isTriangulatedClosed₃ _ (contractible_distinguished₂ X) hX (P.prop_zero)
+  have hdown (X : C) (hX : P X) : P (X⟦(-1 : ℤ)⟧) := by
+    apply P.ext_of_isTriangulatedClosed₁ _ (contractible_distinguished₂ (X⟦(-1 : ℤ)⟧))
+      P.prop_zero
+    exact P.prop_of_iso ((shiftFunctorAdd' C (-1) 1 0 (by omega)).symm.app X ≪≫
+      (shiftFunctorZero C ℤ).app X).symm hX
+  have hs (n : ℤ) (X : C) (hX : P X) : P (X⟦n⟧) := by
+    induction n using Int.induction_on with
+    | zero => exact P.prop_of_iso ((shiftFunctorZero C ℤ).app X).symm hX
+    | succ n ih =>
+      exact P.prop_of_iso ((shiftFunctorAdd C (n : ℤ) 1).symm.app X) (hup _ ih)
+    | pred n ih =>
+      exact P.prop_of_iso ((shiftFunctorAdd C (-(n : ℤ)) (-1)).symm.app X)
+        (hdown _ ih)
+  let : P.IsStableUnderShift ℤ := ⟨fun n ↦ ⟨fun X hX ↦ hs n X hX⟩⟩
+  exact {}
 
 end AlgebraicGeometry.ProEtale

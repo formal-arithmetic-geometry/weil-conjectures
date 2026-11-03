@@ -11,6 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralStratifiedPerfectModels
 import all WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
 import all WeilConjectures.AlgebraicGeometry.IntegralSectionRegularScalars
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import WeilConjectures.CategoryTheory.MapModScalarExtension
+public import WeilConjectures.SixFunctors.ContinuousScalarFinitePresentation
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapComparison
 
 /-! # Scalar realization under the integral section comparison -/
 
@@ -102,54 +105,47 @@ private theorem scalarPresentationComparison
 
 end FinitePresentationComparison
 
-/-- The fixed integral section comparison sends a finitely presented ordinary scalar
-module, extended from the condensed point, to its completed constant realization.
+/-- Pulling a continuous scalar extension from the condensed point to a scheme agrees
+with extending the pulled-back discrete constant module along the pulled-back scalar map.
+In particular this realizes every finitely presented integral scalar module by the
+current coefficient ring `A_X = p_X^* A`, including torsion and the zero module.
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), the scalar
-comparison in the integral constructibility bridge.
-(auxiliary; not a blueprint node).
+Source: latest blueprint, the integral paragraph of `lem-sfb-dc-lower-star-preserves`
+through `sk-prop-integral-criterion` and `sk-lem-integral-models` (1)--(2); the scalar
+realization in Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
+(blueprint: lem-sfb-integral-section-scalar-models).
 
-Proof: choose a finite presentation of N by free scalar modules. The two realizations
-preserve finite sums and cokernels: constant sheafification, extension of scalars,
-and inverse image do, and section comparison and coefficient restriction are
-equivalences. On the regular scalar module identify both values with the coefficient
-module. At every positive uniformizer quotient, the prescribed coefficient maps send
-an element to its constant section. Joint monicity of the completion projections
-identifies the resulting maps on the completed regular module. This identification
-commutes with scalar endomorphisms: evaluation of a constant function at the singleton
-returns that scalar. The ULift change sends a lifted scalar to the same element.
-Extend the regular-module comparison to the finite free terms by biproducts. Checking
-each matrix entry identifies the two presentation maps. Preservation of their
-cokernels and cokernel uniqueness give the asserted isomorphism on N. Empty matrices,
-torsion modules and empty schemes are included. -/
-theorem integralSectionScalarModels (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (X : Scheme.{u})
-    (N : ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))
-    (hN : Module.FinitePresentation (Padic.coefficientExtensionIntegers l E) N) :
-    Nonempty ((SheafOfModules.restrictScalars.{u + 1}
-      (Scheme.integralDetailedCoefficientComparison X l E).hom).obj
-      ((integralSectionFunctor l E X).obj
-        (((upperStarFromPoint X).mapMod (DerivedNakayama.integerRing l E)).obj
-          ((let A := Padic.coefficientExtensionIntegers l E
-            letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-            continuousScalarFunctor A).obj N))) ≅
-      (Scheme.integralConstantModule X (Scheme.pbcIntegralDatum l E)).obj
-        ((ModuleCat.restrictScalars
-          (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+*
-            Padic.coefficientExtensionIntegers l E).toRingHom).obj N)) := by
-  have hF := (IntegralSectionScalars.finiteColimits l E X).1
-  have hG := (IntegralSectionScalars.finiteColimits l E X).2
-  have haF : (IntegralSectionScalars.sectionRealization l E X).Additive :=
-    rightExactFunctor_le_additiveFunctor _ _ _ hF
-  have haG : (IntegralSectionScalars.completedRealization l E X).Additive :=
-    rightExactFunctor_le_additiveFunctor _ _ _ hG
-  obtain ⟨e, he⟩ := IntegralSectionScalars.regularComparison l E X
-  have h := scalarPresentationComparison
-    (IntegralSectionScalars.sectionRealization l E X)
-    (IntegralSectionScalars.completedRealization l E X) e he N hN
-  unfold IntegralSectionScalars.sectionRealization
-    IntegralSectionScalars.completedRealization at h
-  exact h
+Proof: lift the monoidal adjunction for inverse image from the point to module objects
+for the discrete constant ring and the continuous ring. Restriction of scalars commutes
+with its right adjoint by the unit naturality square. Uniqueness of left adjoints gives
+`mapModExtendScalarsIso`. Evaluate it on the sheafified ordinary scalar module. This
+works for arbitrary scalar modules, so no finite presentation or nonzero-rank hypothesis
+is needed. No completion representative or choice of an adic model is used. -/
+theorem integralSectionScalarModels (A : Type u) [CommRing A]
+    [TopologicalSpace A] [IsTopologicalRing A]
+    (X : Scheme.{u}) (N : ModuleCat.{u + 1} A) :
+    Nonempty (((upperStarFromPoint X).mapMod
+      (Profinite.continuousCoefficientRingObj A)).obj ((continuousScalarFunctor A).obj N) ≅
+      (Mod.extendScalars ((upperStarFromPoint X).map
+        (FiniteConstantModel.scalarToContinuous A))).obj
+        (((upperStarFromPoint X).mapMod
+          ((constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
+            (AddCommGrpCat.of (ULift.{u + 1} A)))).obj
+          (((constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMod
+            (AddCommGrpCat.of (ULift.{u + 1} A))).obj
+              ((FiniteConstantModel.scalarModules A).obj N)))) := by
+  let F := upperStarFromPoint X
+  let : F.Braided :=
+    { toMonoidal := inferInstance
+      braided := Functor.LaxBraided.braided }
+  let adj := upperStarFromPointAdjunction X
+  let := adj.rightAdjointLaxMonoidal
+  let : adj.IsMonoidal := by
+    constructor
+    · rfl
+    · intro X Y; rfl
+  let e := Functor.mapModExtendScalarsIso _ _ adj
+    (FiniteConstantModel.scalarToContinuous A)
+  exact ⟨e.app _⟩
 
 end AlgebraicGeometry.ProEtale

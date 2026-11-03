@@ -212,6 +212,55 @@ private theorem mapSingleArrow_id {C : Type*} [Category C] [Abelian C]
   rw [← hβ, ← mapSingleArrow_ext, Ext.mapExactFunctor_id]
   rfl
 
+/-- Bundled exact functor (variant b): the instance arguments are carried as fields. -/
+private structure ExactFunctorB (C D : Type*) [Category C] [Category D]
+    [Preadditive C] [Preadditive D] where
+  F : C ⥤ D
+  [additive : F.Additive]
+  [limits : PreservesFiniteLimits F]
+  [colimits : PreservesFiniteColimits F]
+
+private def mapSingleArrowB {C D : Type*} [Category C] [Category D]
+    [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
+    (E : ExactFunctorB C D) {X Y : C} (n : ℤ)
+    (f : (DerivedCategory.singleFunctor C 0).obj X ⟶
+      ((DerivedCategory.singleFunctor C 0).obj Y)⟦n⟧) :
+    (DerivedCategory.singleFunctor D 0).obj (E.F.obj X) ⟶
+      ((DerivedCategory.singleFunctor D 0).obj (E.F.obj Y))⟦n⟧ :=
+  mapSingleArrow E.F n f
+
+private theorem mapSingleArrowB_comp {C D H : Type*} [Category C] [Category D] [Category H]
+    [Abelian C] [Abelian D] [Abelian H]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory H]
+    (G : C ⥤ D) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (E : ExactFunctorB D H) {X Y : C} (n : ℤ)
+    (f : (DerivedCategory.singleFunctor C 0).obj X ⟶
+      ((DerivedCategory.singleFunctor C 0).obj Y)⟦n⟧) :
+    mapSingleArrowB E n (mapSingleArrow G n f) = mapSingleArrow (G ⋙ E.F) n f :=
+  mapSingleArrow_composite G E.F n f
+
+private theorem mapSingleArrowB_inverseExt
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasExt C] [HasExt D]
+    (E : ExactFunctorB C D) {X Y : C} (n : ℕ)
+    (f : (DerivedCategory.singleFunctor C 0).obj X ⟶
+      ((DerivedCategory.singleFunctor C 0).obj Y)⟦(n : ℤ)⟧) :
+    ((Ext.homEquiv.symm f).mapExactFunctor E.F).hom = mapSingleArrowB E (n : ℤ) f := by
+  rw [mapSingleArrow_ext]
+  exact congrArg (mapSingleArrow E.F (n : ℤ)) (Ext.homEquiv.apply_symm_apply f)
+
+/-- The evaluation at `n`, bundled once with its exactness instances. -/
+private def evB (T : Scheme.{u}) (n : ℕ) : ExactFunctorB (Ab T) (DiagonalAb T) :=
+  ⟨abEvaluation T n⟩
+
+private theorem evaluatedLineBundleArrowB (T : Scheme.{u}) (P : T.Pic) (n : ℕ) :
+    mapSingleArrowB (evB T n) (1 : ℤ) (lineBundleClass T P) =
+      lineBundleEtaleClass T P := by
+  unfold lineBundleClass
+  rw [mapSingleArrowB_comp]
+  change mapSingleArrow (𝟭 (DiagonalAb T)) (1 : ℤ) _ = _
+  exact mapSingleArrow_id 1 _
+
 private theorem evaluatedLineBundleArrow (T : Scheme.{u}) (P : T.Pic) (n : ℕ) :
     mapSingleArrow (abEvaluation T n) (1 : ℤ) (lineBundleClass T P) =
       lineBundleEtaleClass T P := by
@@ -270,9 +319,9 @@ private theorem evaluatedLineBundleExt (T : Scheme.{u}) (P : T.Pic) (n : ℕ) :
           (comparisonUpperStar AddCommGrpCat.{u + 1} T))
         (cartierUnitsComparison T) := by
   apply Ext.ext
-  rw [mapSingleArrow_inverseExt]
+  refine (mapSingleArrowB_inverseExt (evB T n) 1 (lineBundleClass T P)).trans ?_
   simp only [Int.natCast_one]
-  rw [evaluatedLineBundleArrow, extEndpointsHom, mapSingleArrow_ext]
+  rw [evaluatedLineBundleArrowB, extEndpointsHom, mapSingleArrow_ext]
   rfl
 
 private theorem ordinaryKummer_comp (A : Type (u + 1)) [CommRing A]

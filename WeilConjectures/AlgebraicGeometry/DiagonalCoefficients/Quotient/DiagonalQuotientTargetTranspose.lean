@@ -77,6 +77,17 @@ private theorem quotientTarget_shift
   exact scalarRealizedEndpoints_shift q.route.first q.route.second q.eW
     q.lineW.endpoint.iso
 
+/-- The statement of `diagonalQuotientTargetTranspose`,
+named so that the exported signature of the theorem stays small (by definition the
+proposition below). -/
+def diagonalQuotientTargetTranspose_stmt
+    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
+    (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
+    (A : Type (u + 1)) [CommRing A] (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
+    (q : UniformizerSquareData l Y E π n A hA) : Prop :=
+    q.quotientAdjunction.homEquiv _ _ q.quotientTarget =
+      shiftedRootInsertion q.quotientRight q.quotientRootInsertion
+
 end UniformizerSquareData
 
 attribute [local semireducible] UniformizerSquareData.quotientAdjunction
@@ -105,8 +116,8 @@ theorem diagonalQuotientTargetTranspose
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A] (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
     (q : UniformizerSquareData l Y E π n A hA) :
-    q.quotientAdjunction.homEquiv _ _ q.quotientTarget =
-      shiftedRootInsertion q.quotientRight q.quotientRootInsertion := by
+    diagonalQuotientTargetTranspose_stmt l Y E π n A hA q := by
+  unfold diagonalQuotientTargetTranspose_stmt
   change (UniformizerSquareData.quotientAdjunctionAux q).homEquiv _ _
     (finiteTargetMap q.eW
       (ScalarCompatibility.compositeTarget q.route.first q.route.second)

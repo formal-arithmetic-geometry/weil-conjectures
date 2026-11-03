@@ -50,6 +50,11 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFiniteConstantLocalModel
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Constant.ConstantModelStratificationTransportSupplement
+public import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.PadicConstantLocalModelTor
+public import WeilConjectures.AlgebraicGeometry.SmallAdicCompletion.Coefficients.SmallCoefficientDerivedCompletion
 
 /-!
 # Structure of the integral constructible heart
@@ -78,6 +83,150 @@ open MonoidalCategory
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+private def HeartFirst
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u}) : Prop :=
+    ObjectProperty.IsClosedUnderIsomorphisms
+        (constantModelBoundedConstructible Λ X) ∧
+      ObjectProperty.IsTriangulated
+        (constantModelBoundedConstructible Λ X) ∧
+      (∀ K, constantModelBoundedConstructible Λ X K →
+        DerivedCategory.TStructure.t.bounded K ∧
+          ∀ n : ℤ,
+            constantModelBoundedConstructible Λ X
+                ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧
+            constantModelBoundedConstructible Λ X
+                ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧
+      (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+          DerivedCategory.singleFunctor _ 0).Full ∧
+      (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+          DerivedCategory.singleFunctor _ 0).Faithful ∧
+      (∀ K, (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+          DerivedCategory.singleFunctor _ 0).essImage K ↔
+        constantModelBoundedConstructible Λ X K ∧
+          DerivedCategory.TStructure.t.le 0 K ∧
+          DerivedCategory.TStructure.t.ge 0 K) ∧
+      Nonempty (Abelian (ConstantModelConstructible Λ X)) ∧
+      ObjectProperty.IsClosedUnderKernels
+        (IsConstantModelConstructible Λ X) ∧
+      ObjectProperty.IsClosedUnderCokernels
+        (IsConstantModelConstructible Λ X) ∧
+      ObjectProperty.IsClosedUnderExtensions
+        (IsConstantModelConstructible Λ X) ∧
+      EssentiallySmall.{u + 1} (ConstantModelConstructible Λ X)
+
+private def HeartLocal
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u}) : Prop :=
+    ∀ C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj Λ X),
+        IsConstantModelConstructible Λ X C →
+          ∃ S : Scheme.FiniteLocallyClosedStratification X,
+            (∀ a : Fin S.n,
+              HasFiniteConstantLocalModel Λ (S.domain a)
+                ((CondensedRing.upperStar Λ (S.immersion a)).obj C)) ∧
+            (∀ a : Fin S.n,
+              let M := (CondensedRing.upperStar Λ (S.immersion a)).obj C
+              IsDualizable ((DerivedCategory.singleFunctor _ 0).obj M) ∧
+              DerivedCategory.torAmplitudeIn _ (-1) 0
+                ((DerivedCategory.singleFunctor _ 0).obj M) ∧
+              DerivedCategory.torAmplitudeIn _ 0 1
+                (((CondensedRing.derivedHom Λ (S.domain a)).obj
+                    (op ((DerivedCategory.singleFunctor _ 0).obj M))).obj
+                  (𝟙_ _)))
+
+private def IntegralHeartProperty
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u}) : Prop :=
+    ObjectProperty.IsClosedUnderIsomorphisms
+        (constantModelBoundedConstructible Λ X) ∧
+      ObjectProperty.IsTriangulated
+        (constantModelBoundedConstructible Λ X) ∧
+      (∀ K, constantModelBoundedConstructible Λ X K →
+        DerivedCategory.TStructure.t.bounded K ∧
+          ∀ n : ℤ,
+            constantModelBoundedConstructible Λ X
+                ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧
+            constantModelBoundedConstructible Λ X
+                ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧
+      (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+          DerivedCategory.singleFunctor _ 0).Full ∧
+      (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+          DerivedCategory.singleFunctor _ 0).Faithful ∧
+      (∀ K, (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+          DerivedCategory.singleFunctor _ 0).essImage K ↔
+        constantModelBoundedConstructible Λ X K ∧
+          DerivedCategory.TStructure.t.le 0 K ∧
+          DerivedCategory.TStructure.t.ge 0 K) ∧
+      Nonempty (Abelian (ConstantModelConstructible Λ X)) ∧
+      ObjectProperty.IsClosedUnderKernels
+        (IsConstantModelConstructible Λ X) ∧
+      ObjectProperty.IsClosedUnderCokernels
+        (IsConstantModelConstructible Λ X) ∧
+      ObjectProperty.IsClosedUnderExtensions
+        (IsConstantModelConstructible Λ X) ∧
+      EssentiallySmall.{u + 1} (ConstantModelConstructible Λ X) ∧
+      (∀ C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj Λ X),
+        IsConstantModelConstructible Λ X C →
+          ∃ S : Scheme.FiniteLocallyClosedStratification X,
+            (∀ a : Fin S.n,
+              HasFiniteConstantLocalModel Λ (S.domain a)
+                ((CondensedRing.upperStar Λ (S.immersion a)).obj C)) ∧
+            (∀ a : Fin S.n,
+              let M := (CondensedRing.upperStar Λ (S.immersion a)).obj C
+              IsDualizable ((DerivedCategory.singleFunctor _ 0).obj M) ∧
+              DerivedCategory.torAmplitudeIn _ (-1) 0
+                ((DerivedCategory.singleFunctor _ 0).obj M) ∧
+              DerivedCategory.torAmplitudeIn _ 0 1
+                (((CondensedRing.derivedHom Λ (S.domain a)).obj
+                    (op ((DerivedCategory.singleFunctor _ 0).obj M))).obj
+                  (𝟙_ _))))
+
+/-- Assemble the two packages with an abstract coefficient ring and scheme.
+Source: the three clauses of the integral-heart unit (blueprint: sk-lem-int-integral-heart). -/
+private theorem assembleIntegralHeart
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u})
+    (h : HeartFirst Λ X) (hlocal : HeartLocal Λ X) :
+    IntegralHeartProperty Λ X := by
+  rcases h with ⟨h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈, h₉, h₁₀, h₁₁⟩
+  exact ⟨h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈, h₉, h₁₀, h₁₁, hlocal⟩
+
+private theorem enhanceStrata {X : Scheme.{u}}
+    {P Q : ∀ Y : Scheme.{u}, (Y ⟶ X) → Prop}
+    (h : ∃ S : Scheme.Stratification X, ∀ a, P (S.domain a) (S.immersion a))
+    (hq : ∀ Y f, P Y f → Q Y f) :
+    ∃ S : Scheme.FiniteLocallyClosedStratification X,
+      (∀ a, P (S.domain a) (S.immersion a)) ∧ ∀ a, Q (S.domain a) (S.immersion a) := by
+  obtain ⟨S, hS⟩ := h
+  exact ⟨S.toFiniteLocallyClosed, hS, fun a ↦ hq _ _ (hS a)⟩
+
+/-- A constructible continuous PID model has the same strata with the dual/Tor bounds.
+Source: the finite-stratification and length-one resolution paragraphs of the unit proof
+(blueprint: sk-lem-int-integral-heart). -/
+private theorem continuousStratifiedDualTor
+    (A : Type) [CommRing A] [IsDomain A] [IsPrincipalIdealRing A]
+    [TopologicalSpace A] [IsTopologicalRing A]
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
+    HeartLocal (Profinite.continuousMapRingObj.{u} A) X := by
+  intro C hC
+  let Λ := Profinite.continuousMapRingObj.{u} A
+  have hstrat : IsFiniteConstantStratified Λ X C := by
+    simpa only [IsConstantModelConstructible, if_pos
+      (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance, inferInstance⟩)]
+      using hC
+  let Q (Y : Scheme.{u}) (f : Y ⟶ X) : Prop :=
+    let M := (CondensedRing.upperStar Λ f).obj C
+    IsDualizable ((DerivedCategory.singleFunctor _ 0).obj M) ∧
+      DerivedCategory.torAmplitudeIn _ (-1) 0 ((DerivedCategory.singleFunctor _ 0).obj M) ∧
+      DerivedCategory.torAmplitudeIn _ 0 1
+        (((CondensedRing.derivedHom Λ Y).obj
+          (op ((DerivedCategory.singleFunctor _ 0).obj M))).obj (𝟙_ _))
+  exact enhanceStrata
+    (P := fun Y f ↦ HasFiniteConstantLocalModel Λ Y ((CondensedRing.upperStar Λ f).obj C))
+    (Q := Q) hstrat (fun Y f h ↦ continuousModelDualTor A Y _ h)
 
 /-- The integral constructible derived category has the bounded triangulated structure,
 its constructible degree-zero heart, finite scalar local models on a common finite
@@ -164,6 +313,23 @@ theorem integralConstructibleHeart
                 (((CondensedRing.derivedHom Λ (S.domain a)).obj
                     (op ((DerivedCategory.singleFunctor _ 0).obj M))).obj
                   (𝟙_ _)))) := by
-  sorry
+  have _ := hell
+  let : Small.{0} E := Module.Finite.small (Padic ell) E
+  let F := Shrink.{0} E
+  let : FiniteDimensional (Padic ell) F :=
+    (Shrink.algEquiv (Padic ell) E).symm.toLinearEquiv.finiteDimensional
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  refine assembleIntegralHeart _ X (canonicalFieldHeart ell F X) ?_
+  let : NormedField F := spectralNorm.normedField (Padic ell) F
+  let : NormedAlgebra (Padic ell) F := spectralNorm.normedAlgebra (Padic ell) F
+  let A := Padic.coefficientExtensionIntegers ell F
+  have : IsDiscreteValuationRing A :=
+    (Padic.extension_integers_dvr ell F (Padic.coefficientExtensionAbsoluteValue ell F)
+      (spectralNorm_extends (K := Padic ell) (L := F))).choose_spec.choose_spec.2.2.2.2.2.2.2.1
+  exact continuousStratifiedDualTor A X
 
 end AlgebraicGeometry.ProEtale

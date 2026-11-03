@@ -94,34 +94,73 @@ noncomputable def projectionComparisonTensor (A : Type (u + 1)) [CommRing A] [Fi
   (((Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj
     ((Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj H))
 
+/-- The ordinary compactification projection arrow used by the comparison square.
+Source: compactification projection
+(blueprint: def-smooth-purity-projection-comparison-equation). -/
+def projectionComparisonEtaleArrow
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) :=
+  ((Etale.projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app H
+
+/-- The pro-etale compactification projection arrow on comparison inputs.
+Source: compactification projection
+(blueprint: def-smooth-purity-projection-comparison-equation). -/
+def projectionComparisonProEtaleArrow
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) :=
+  ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app
+    ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M)).app
+      ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj H)
+
+/-- Canonical source boundary for the bounded compactification projection square.
+Source: the displayed projection comparison equation
+(blueprint: def-smooth-purity-projection-comparison-equation). -/
+def projectionComparisonSourceBoundary
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (H : Etale.DerivedCategoryModule A Y) :=
+  (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+      (ModuleCat.{u + 1} A)
+      ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj
+        M.obj)).app H ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} A) Y).mapIso
+      ((compactSupportSiteComparison A c).symm.app M)).app
+        ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj H)
+
+/-- Canonical target boundary for the bounded compactification projection square.
+Source: the displayed projection comparison equation
+(blueprint: def-smooth-purity-projection-comparison-equation). -/
+def projectionComparisonTargetBoundary
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (H : Etale.DerivedCategoryModule A Y)
+    (ht : _root_.DerivedCategory.TStructure.t.plus
+      (projectionComparisonTensor A (f := f) M.obj H)) :=
+  (compactSupportSiteComparison A c).symm.app
+      ⟨projectionComparisonTensor A (f := f) M.obj H, ht⟩ ≪≫
+    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).mapIso
+      (projectionComparisonTargetIso A f M.obj H).symm
+
 /-- The asserted equality, with every target identification written explicitly.
 The left route is PF-pro, P of the specified target identification, then C at the tensor.
 The right route is C at M tensor identity, the inverse comparison tensor map, then V(PF-et).
 Source: Stacks Tag 0E48 and the blueprint projection comparison, displayed equation
 (blueprint: def-smooth-purity-projection-comparison-equation). -/
-@[irreducible] def ProjectionComparisonEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+abbrev ProjectionComparisonEquation (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y)
     (hM : _root_.DerivedCategory.TStructure.t.plus M)
     (hD : _root_.DerivedCategory.TStructure.t.plus
       (projectionComparisonTensor A (f := f) M H)) : Prop :=
-  ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app
-      ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M)).app
-        ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj H) ≫
-      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
-        (projectionComparisonTargetIso A f M H).hom ≫
-      (compactSupportSiteComparison A c).hom.app
-        ⟨((Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj
-          ((Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj H), hD⟩ =
-    ((derivedTensor (ModuleCat.{u + 1} A) Y).map
-      ((compactSupportSiteComparison A c).hom.app ⟨M, hM⟩)).app
-        ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj H) ≫
-      ((derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
-        (ModuleCat.{u + 1} A)
-        ((Etale.rightDerivedLowerShriekOfCompactification
-          (ModuleCat.{u + 1} A) c).obj M)).inv.app H) ≫
+  projectionComparisonProEtaleArrow A c M H ≫
+      (projectionComparisonTargetBoundary A c ⟨M, hM⟩ H hD).inv =
+    (projectionComparisonSourceBoundary A c ⟨M, hM⟩ H).inv ≫
       (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map
-        (((Etale.projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app H)
+        (projectionComparisonEtaleArrow A c M H)
 
 /-- The full existential conclusion of the etale-origin comparison statement.
 Source: main-20261015 blueprint, thm-pur-cohomological-smoothness.proof.md
@@ -933,6 +972,9 @@ private theorem projection_equation_of_plus
     ProjectionComparisonEquation A c M H hM hD := by
   start_shared_proof
   · unfold ProjectionComparisonEquation
+    simp only [projectionComparisonSourceBoundary, projectionComparisonTargetBoundary,
+      projectionComparisonEtaleArrow, projectionComparisonProEtaleArrow, Iso.trans_inv,
+      Iso.app_inv, Iso.symm_inv, Functor.mapIso_inv, Category.assoc]
     dsimp only [derivedTensorRightDerivedLowerShriek,
       rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar,
       Etale.derivedTensorRightDerivedLowerShriek,

@@ -42,11 +42,60 @@ namespace Coefficients
 variable (l : ℕ) [Fact l.Prime] (E : Type v) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+/-- The canonical small presentation, in the scheme universe.
+Source: blueprint, finite coefficient presentation
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+def field : Type u :=
+  letI : Small.{0} E := Module.Finite.small (R := Padic l) (M := E)
+  letI : Small.{u} E := small_map (equivShrink.{0} E)
+  Shrink.{u} E
+
+/-- The valuation ring of the small presentation.
+Source: blueprint, finite coefficient presentation
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev integers := Padic.coefficientExtensionIntegers l (field.{u} l E)
+
+/-- The continuous condensed valuation ring, with sections C(S, O).
+Source: blueprint, continuous coefficients and inverse image
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev integerRing :=
+  DerivedNakayama.integerRing l (field.{u} l E)
+
+/-- The internal finite quotient ring.
+Source: blueprint, continuous coefficients and inverse image
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev quotientRing (n : ℕ) :=
+  DerivedNakayama.quotientRing l (field.{u} l E) n
+
 /-- Inverse image from the point on internal modules.
 Source: blueprint, continuous coefficients and inverse image
 (blueprint: def-sfb-small-coefficient-derived-completion). -/
 abbrev pullback (X : Scheme.{u}) :=
   DerivedNakayama.pullback l (field.{u} l E) X
+
+/-- The termwise product of the strict reduction tower.
+Source: blueprint, canonical reduction and Roos construction
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev product (X : Scheme.{u}) (P : CochainComplex (Modules.{u} l E X) ℤ) :=
+  AdicCompletion.product l (Coefficients.field.{u} l E) X P
+
+/-- Exact derived restriction from positive level n+1.
+Source: blueprint, canonical reduction and normalized towers
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev restrict (X : Scheme.{u}) (n : ℕ) :=
+  AdicCompletion.restrict l (Coefficients.field.{u} l E) X n
+
+/-- Canonical derived extension to positive level n+1.
+Source: blueprint, canonical reduction and normalized towers
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev derivedReduction (X : Scheme.{u}) (n : ℕ) :=
+  AdicCompletion.derivedReduction l (Coefficients.field.{u} l E) X n
+
+/-- Internal modules over the pulled-back integral ring.
+Source: blueprint, canonical reduction and normalized towers
+(blueprint: def-sfb-small-coefficient-derived-completion). -/
+abbrev Modules (X : Scheme.{u}) :=
+  AdicCompletion.Modules l (Coefficients.field.{u} l E) X
 
 end Coefficients
 

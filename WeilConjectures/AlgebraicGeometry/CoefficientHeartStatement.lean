@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartSmal
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeart
 public import Mathlib.CategoryTheory.Abelian.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartClosure
 
 /-!
 # Constructible coefficient sheaves
@@ -35,6 +36,46 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+/-- Finite free local charts give finite constant presentations, including rank zero. -/
+private lemma statementHeart_free_model
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {Y : Scheme.{u}}
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (hM : IsLisseCoefficientModule Λ M) : HasFiniteConstantLocalModel Λ Y M := by
+  open MonoidalCategory MonObj Functor.LaxMonoidal Functor.OplaxMonoidal in
+  obtain ⟨U, hU⟩ := hM
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨n, ⟨e⟩⟩ := hU i
+  have : PreservesFiniteColimits (upperStarFromPoint (U.X i)) := by
+    let : pointUpperStar.{u}.IsLeftAdjoint := pointUpperStarLowerStarAdjunction.isLeftAdjoint
+    unfold upperStarFromPoint
+    infer_instance
+  let F := (upperStarFromPoint (U.X i)).mapMod Λ
+  have : PreservesFiniteColimits F := inferInstance
+  have : PreservesBinaryBiproducts F :=
+    preservesBinaryBiproducts_of_preservesBinaryCoproducts F
+  have : F.Additive := Functor.additive_of_preservesBinaryBiproducts F
+  have : PreservesFiniteBiproducts F := inferInstance
+  let en : F.obj (Mod.finiteFree Λ n) ≅ Mod.finiteFree (condensedRingObj Λ (U.X i)) n :=
+    F.mapBiproduct (fun _ : Fin n ↦ Mod.regular Λ) ≪≫
+      biproduct.mapIso (fun _ ↦ Mod.isoMk (Iso.refl _) (by simp [Mod.act]))
+  exact ⟨Mod.finiteFree Λ n, ⟨n, n, 0, ⟨cokernelZeroIsoTarget.symm⟩⟩, ⟨e ≪≫ en.symm⟩⟩
+
+/-- Keep the counit image abstract while assembling its finite filtration. -/
+private def statementHeart_filtrationImage
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {Y : Scheme.{u}}
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (V : Y.Opens) : Subobject M :=
+  imageSubobject (coefficientHeartOpenCounit Λ M V)
+
+private theorem statementHeart_filtrationImage_eq
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {Y : Scheme.{u}}
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (V : Y.Opens) :
+    statementHeart_filtrationImage Λ M V = coefficientHeartFiltrationStep Λ M V := rfl
+
 /-- Constructible coefficient sheaves form an exact essentially small abelian heart and
 admit finite filtrations by canonical locally closed extensions of lisse sheaves.
 
@@ -46,7 +87,7 @@ clauses (1)--(3), and
 `sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/`
 `sk-lem-coefficient-heart.proof.md`,
 steps (1)--(3)
-(blueprint: sk-lem-coefficient-heart).
+(blueprint: lem-sfb-coefficient-heart-positive-characteristic-special-case).
 
 The closure conjuncts render clause (1)'s closure under kernels, cokernels and extensions.
 The `Abelian` witness and finite-limit/finite-colimit preservation render its abelian and
@@ -54,25 +95,21 @@ exact-inclusion conclusions.  The `EssentiallySmall` conjunct is clause (2).  Th
 conjunct is clause (3): its filtration terms are subobjects, successive quotients are
 cokernels of the inclusions, and each quotient is the canonical `a_!` of a lisse module.
 
-Proof plan, following the node's eight steps:
-1. Finite type over k makes X Noetherian. Finite scalar presentations are finite free;
-   choose common adapted strata and use exact restriction to check closure on strata.
-2. For extensions, trivialize the ends and locally lift the quotient basis. The resulting
-   local splitting identifies the middle term with a finite free direct sum.
-3. Over E use the lattice atlas on connected affine etale neighborhoods. The qcqs
-   finitely presented Hom/filtered-colimit calculation clears one common denominator.
-4. Recover the lattices as limits of their finite reductions. The connected pro-etale
-   tower identifies the map with its completed-fibre matrix, whose kernel and cokernel
-   become finite free after inverting the uniformizer and choosing linear algebra bases.
-5. Over Qbar_l descend the two lisse objects and their map to a finite E. Flat scalar
-   extension preserves kernels, and the left adjoint preserves cokernels. Return to strata.
-6. Zero has rank zero and extensions give finite sums. Closure under ambient kernels and
-   cokernels gives the abelian full subcategory and its exact inclusion.
-7. In the fixed universe encode finite stratifications and finite-rank descent/gluing
-   data by a set of representatives, giving essential smallness.
-8. Refine to ordered open prefixes. Their open-extension counit images form a filtration
-   from zero to F, with quotients the canonical locally closed extensions of lisse
-   restrictions. Repeated terms, rank zero and empty schemes are allowed.
+Proof:
+1. Build the Noetherian instance from finite type and quasi-compactness.
+2. Apply the existing coefficientHeart_closure theorem for kernel/cokernel/extension
+   closure, abelianity, exact inclusion and finite lisse stratifications. Apply the
+   existing coefficientHeart_essentiallySmall theorem for the fixed-universe conclusion.
+3. Convert lisse charts to finite constant models: pullback preserves finite biproducts
+   of the regular module, and the finite free scalar module has a zero-map presentation.
+   Refine one adapted stratification to one with ordered open prefixes.
+4. Apply coefficientHeart_filtration and assemble its bottom/top image subobjects,
+   successive inclusions, and cokernel isomorphisms with the lisse quotient witnesses.
+   Rank zero, repeated terms and empty filtrations are included.
+
+This proves the existing positive-characteristic tool interface. It does not certify the
+separate current blueprint unit's finite-or-algebraically-closed-field statement or its
+pending lattice/tower route repair.
 -/
 theorem coefficientHeartStatement (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
@@ -103,6 +140,31 @@ theorem coefficientHeartStatement (ℓ : ℕ) [Fact ℓ.Prime]
             LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
           toCompactSpace :=
             QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) } := by
-  sorry
+  classical
+  have _characteristic_separation := hpℓ
+  have : IsNoetherian X :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) }
+  have hclosure := (coefficientHeart_closure ℓ Λ hΛ).2 X
+  refine ⟨hclosure.1, hclosure.2.1, hclosure.2.2.1, hclosure.2.2.2.1,
+    hclosure.2.2.2.2.1, hclosure.2.2.2.2.2.1,
+    coefficientHeart_essentiallySmall ℓ Λ hΛ X, ?_⟩
+  intro F
+  obtain ⟨S, hS⟩ := (hclosure.2.2.2.2.2.2 F.obj).mp F.property
+  have hcommon := coefficientHeart_commonStratification ℓ Λ X hΛ
+  obtain ⟨R, hR, _, hopen⟩ := hcommon.1 1 (fun _ ↦ S)
+  have hRfree := hcommon.2.1.2 S R F.obj
+    (fun a ↦ statementHeart_free_model (coefficientHeartRingObj Λ) _ (hS a)) (hR 0)
+  let V (a : Fin (R.n + 1)) : X.Opens := ⟨_, hopen a⟩
+  have hfil := coefficientHeart_filtration ℓ Λ hΛ X F.obj F.property R
+    (fun a ↦ statementHeart_free_model (coefficientHeartRingObj Λ) _ (hRfree a))
+    V (fun _ ↦ rfl)
+  simp only [← statementHeart_filtrationImage_eq] at hfil
+  obtain ⟨h, hquot⟩ := hfil.2.2.2
+  refine ⟨R.n, fun a ↦ statementHeart_filtrationImage (coefficientHeartRingObj Λ) F.obj (V a),
+    hfil.2.1, hfil.2.2.1, h, fun a ↦ ?_⟩
+  exact ⟨R.domain a, R.immersion a, R.isImmersion a,
+    (CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion a)).obj F.obj,
+    (hquot a).2, (hquot a).1⟩
 
 end AlgebraicGeometry.ProEtale
