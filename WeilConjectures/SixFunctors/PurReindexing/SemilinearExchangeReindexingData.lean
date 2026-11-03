@@ -374,7 +374,6 @@ prop-pur-weil-equivariance-compatibilities.proof.md
 (blueprint: def-pur-semilinear-exchange-reindexing-data). -/
 @[irreducible] def PurSemilinearFiniteCoefficient (P : PurityFiniteSetting.{u}) : Prop :=
   ∀ (m : ℕ) (hm : 1 ≤ m) (h : m ≤ P.level)
-
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     [X'.Over (Spec (.of P.field.k))]
     [LocallyOfFiniteType (X' ↘ Spec (.of P.field.k))]
