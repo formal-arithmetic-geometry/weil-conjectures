@@ -76,7 +76,7 @@ has a right adjoint `Rg^!`. The general case
 compactification. -/
 theorem isLeftAdjoint_derivedLowerStar_of_isProper :
     (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
-  isLeftAdjoint_derivedLowerStar_of_isProper' g
+  isLeftAdjoint_derivedLowerStar_of_isProper_geometricFiber g
 
 end Proper
 
@@ -237,7 +237,9 @@ finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
 theorem nonempty_verdierDual_derivedLowerShriek_iso (M : WeilComplex k₀ l X) :
     Nonempty ((verdierDual k₀ l Y).obj (op ((derivedLowerShriek k₀ l f).obj M)) ≅
       (derivedLowerStar f).obj ((verdierDual k₀ l X).obj (op M))) :=
-  sorry
+  ⟨(nonempty_verdierDual_derivedLowerShriek_natIso f
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+    (objectProperty_derivedHom_dualizingComplex k₀ l)).some.app (op M)⟩
 
 end Exchange
 

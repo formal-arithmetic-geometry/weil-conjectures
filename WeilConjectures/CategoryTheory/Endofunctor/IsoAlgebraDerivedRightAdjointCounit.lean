@@ -49,7 +49,15 @@ omit [IsGrothendieckAbelian.{v} C] [IsGrothendieckAbelian.{v'} D]
 /-- The right adjoint `R'` of the restriction `P_C ⥤ P_D` of `RL` carries Weil structures: for
 an isomorphism `ψ : G Y ≅ Y`, there is an isomorphism `v : F (R' Y) ≅ R' Y` for which the counit
 `RL (R' Y) ⟶ Y` is equivariant, the Weil structure on `RL (R' Y)` being transported along
-`RL ⋙ G ≅ F ⋙ RL`. -/
+`RL ⋙ G ≅ F ⋙ RL`:
+```
+G (RL (R' Y)) ≅ RL (F (R' Y)) --RL v--> RL (R' Y)
+       |                                       |
+  G (counit)                                 counit
+       v                                       v
+     G Y -----------------ψ-----------------> Y
+```
+-/
 theorem exists_iso_counit_isWeilEquivariant (PC : ObjectProperty (DerivedCategory C))
     (PD : ObjectProperty (DerivedCategory D)) [PC.IsClosedUnderIsomorphisms]
     (hR : ∀ K, PC K → PD (L.rightDerivedFunctor.obj K))
