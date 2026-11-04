@@ -13201,6 +13201,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateOfNatIsoLeft
 public import WeilConjectures.CategoryTheory.Adjunction.MatePasting
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MateTwoColimit
+public import WeilConjectures.CategoryTheory.Adjunction.MateUnitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MatesCounit
 public import WeilConjectures.CategoryTheory.Adjunction.PoincareDuality.ReductionShiftFromLimitMate
@@ -16784,6 +16785,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.NoetherianObject
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CoproductTriangle
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
@@ -24024,6 +24026,10 @@ public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
 public import WeilConjectures.WeilSheaf.HigherLowerStarZero
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.HomotopyInvariance
+public import WeilConjectures.WeilSheaf.HomotopyInvariance.Basic
+public import WeilConjectures.WeilSheaf.HomotopyInvariance.Lisse
+public import WeilConjectures.WeilSheaf.HomotopyInvariance.Restriction
 public import WeilConjectures.WeilSheaf.IhomCurry
 public import WeilConjectures.WeilSheaf.IhomLisse.Comp
 public import WeilConjectures.WeilSheaf.IhomLisse.CompWeil
@@ -24221,6 +24227,7 @@ public import WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryTensorInver
 public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.SixFunctors.UnderlyingStandardHomRepresentatives
 public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibility
+public import WeilConjectures.WeilSheaf.SmoothBaseChange
 public import WeilConjectures.WeilSheaf.SmoothLisseOpen
 public import WeilConjectures.WeilSheaf.SplitTorsor
 public import WeilConjectures.WeilSheaf.Stalk
