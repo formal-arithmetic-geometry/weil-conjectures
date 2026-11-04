@@ -7,8 +7,11 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.FreeComparisonComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjectionFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedAdjunction
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFreeInjective
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarCoproducts
 public import WeilConjectures.WeilSheaf.LowerShriek
 
 /-!
@@ -148,8 +151,50 @@ theorem WeilComplex.isIso_freeComparison_rightDerivedLowerShriek
         (lowerShriekCompactification k₀ f))
       (ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso k₀ l f
         (lowerShriekCompactification k₀ f))
-      ((shiftFunctor _ n).obj (WeilComplex.forget.obj K))) :=
-  sorry
+      ((shiftFunctor _ n).obj (WeilComplex.forget.obj K))) := by
+  let c := lowerShriekCompactification k₀ f
+  let iBar := Scheme.Hom.geometricFiberMap c.i (comp_over c.i (Spec (CommRingCat.of k₀)))
+  let gBar := Scheme.Hom.geometricFiberMap c.g (comp_over c.g (Spec (CommRingCat.of k₀)))
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  -- `Rf_! = Rḡ_* ∘ D(ī_!)`: the free comparison is the composite of those of `D(ī_!)` and `Rḡ_*`
+  refine Adjunction.isIso_freeComparison_comp
+    (IsoAlgebra.freeWeilDerivedAdjunction (WeilSheaf.frobeniusPullback k₀ l X))
+    (IsoAlgebra.freeWeilDerivedAdjunction.{_, _, u + 1} (WeilSheaf.frobeniusPullback k₀ l c.Z))
+    (IsoAlgebra.freeWeilDerivedAdjunction (WeilSheaf.frobeniusPullback k₀ l Y)) _ _ _ ?_ ?_
+  · -- the extension by zero `ī_!` is exact and commutes with direct sums, being a left adjoint
+    have := (ProEtale.adicOpenImmersionLowerShriekAdjunction l iBar).leftAdjoint_preservesColimits
+    exact Adjunction.isIso_freeComparison_mapDerivedCategory _ _ _
+      (fun S ↦ IsoAlgebra.isIso_freeComparison_mapOfNatIso _ S) _
+  · -- `ī_!(For K[n])` is bounded below, so it has a bounded below injective resolution `I`
+    obtain ⟨a, ha⟩ := ((ProEtale.adicOpenImmersionLowerShriek l iBar).bounded_mapDerivedCategory_obj
+      (ObjectProperty.le_shift (P := DerivedCategory.TStructure.t.bounded) n _
+        ((IsoAlgebra.forget _).bounded_mapDerivedCategory_obj K.2.1))).1
+    obtain ⟨T, _, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE (hX := ha) _ a
+    obtain ⟨I, ι, _, _, _⟩ :=
+      CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T a
+    have : I.IsKInjective := CochainComplex.isKInjective_of_injective I a
+    -- `ḡ_*` commutes with direct sums, and the complex `∐ₙ Fⁿ I` is a bounded below complex of
+    -- `ḡ_*`-acyclic objects, so that `Rḡ_*` is computed by `ḡ_*` on it
+    have := ProEtale.preservesColimitsOfShape_discrete_adicLowerStar l gBar ℤ
+    have h := IsoAlgebra.isIso_freeComparison_rightDerivedFunctor
+      (adicLowerStarGeometricFiberMapCompFrobeniusIso l c.g
+        (comp_over c.g (Spec (CommRingCat.of k₀)))) I
+      (Functor.isIso_rightDerivedFunctorUnit_app_of_isStrictlyGE _ _ a fun k ↦
+        ProEtale.rightAcyclic_adicLowerStar_sigma_of_injective l gBar _)
+    -- `freeWeilDerivedAdjunction` is by definition the derived free adjunction
+    exact @Adjunction.isIso_freeComparison_of_iso _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+      (e ≪≫ asIso (DerivedCategory.Q.map ι)) h
 
 end WeilComplex
 

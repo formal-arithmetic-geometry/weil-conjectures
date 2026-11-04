@@ -13916,6 +13916,7 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedHomBij
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchange
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchangeCube
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFreeComparison
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFreeInjective
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraHomology
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraLeftAdjunction
@@ -20751,6 +20752,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantBounded
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantFinitenessStratum
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissage
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissageRegular
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteEtaleAlgClosed
