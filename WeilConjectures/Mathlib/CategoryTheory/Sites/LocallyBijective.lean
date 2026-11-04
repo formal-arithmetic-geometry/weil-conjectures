@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.CategoryTheory.Sites.Subsheaf
 
 /-!
 # Isomorphisms of sheaves which are invertible on a generating family of every object
@@ -29,6 +30,10 @@ refinement.
   types.
 - `CategoryTheory.Sheaf.isIso_of_isIso_app_of_generate_mem`: the criterion for sheaves with
   values in a concrete category.
+- `CategoryTheory.Presheaf.isLocallySurjective_toSheafify_of_types`: the sheafification map of a
+  presheaf of types is locally surjective, in any universe where sheafification exists.
+- `CategoryTheory.Sheaf.isIso_sheafificationAdjunction_homEquiv_symm`: a locally bijective
+  morphism from a presheaf of types to a sheaf induces an isomorphism from the sheafification.
 -/
 
 @[expose] public section
@@ -116,5 +121,58 @@ lemma Sheaf.isIso_of_isIso_app_of_generate_mem (s : A ⥤ Type (max v₁ u₁)) 
     exact isIso_of_reflects_iso _ s
   have : IsIso ((sheafToPresheaf J A).map φ) := NatIso.isIso_of_isIso_app φ.hom
   exact isIso_of_reflects_iso φ (sheafToPresheaf J A)
+
+section SheafifyTypes
+
+variable [HasWeakSheafify J (Type w)]
+
+namespace Presheaf
+
+/-- The sheafification map of a presheaf of types is locally surjective, for presheaves with
+values in an arbitrary universe in which sheafification exists.
+Source: Stacks Project, Tag 00WM (auxiliary; not a blueprint node). -/
+lemma isLocallySurjective_toSheafify_of_types (P : Cᵒᵖ ⥤ Type w) :
+    IsLocallySurjective J (toSheafify J P) := by
+  rw [isLocallySurjective_iff_range_sheafify_eq_top']
+  have hP : Presieve.IsSheaf J (sheafify J P) :=
+    (isSheaf_iff_isSheaf_of_type _ _).1 ((presheafToSheaf J (Type w)).obj P).property
+  let R := (Subfunctor.range (toSheafify J P)).sheafify J
+  have hR : Presheaf.IsSheaf J R.toFunctor :=
+    (isSheaf_iff_isSheaf_of_type _ _).2 (Subfunctor.sheafify_isSheaf _ hP)
+  let s : sheafify J P ⟶ R.toFunctor :=
+    sheafifyLift J (Subfunctor.toRangeSheafify J (toSheafify J P)) hR
+  have hs : s ≫ R.ι = 𝟙 _ := by
+    refine sheafify_hom_ext J _ _ ((presheafToSheaf J (Type w)).obj P).property ?_
+    rw [← Category.assoc, toSheafify_sheafifyLift, Category.comp_id]
+    rfl
+  refine eq_top_iff.2 fun U x _ ↦ ?_
+  have hx : (s ≫ R.ι).app U x = x := by rw [hs]; rfl
+  rw [← hx]
+  exact (s.app U x).2
+
+end Presheaf
+
+namespace Sheaf
+
+/-- A locally bijective morphism `φ : P ⟶ H` from a presheaf of types to a sheaf of types induces
+an isomorphism from the sheafification of `P` to `H`.
+Source: Stacks Project, Tag 00WJ (auxiliary; not a blueprint node). -/
+lemma isIso_sheafificationAdjunction_homEquiv_symm [HasSheafify J (Type w)]
+    {P : Cᵒᵖ ⥤ Type w} {H : Sheaf J (Type w)} (φ : P ⟶ H.obj)
+    [Presheaf.IsLocallyInjective J φ] [Presheaf.IsLocallySurjective J φ] :
+    IsIso (((sheafificationAdjunction J (Type w)).homEquiv P H).symm φ) := by
+  have fac : toSheafify J P ≫ (((sheafificationAdjunction J (Type w)).homEquiv P H).symm φ).hom =
+      φ := by
+    have h := ((sheafificationAdjunction J (Type w)).homEquiv P H).apply_symm_apply φ
+    rwa [Adjunction.homEquiv_unit] at h
+  have := Presheaf.isLocallySurjective_toSheafify_of_types J P
+  have : J.HasSheafCompose (forget (Type w)) := ⟨fun _ hP ↦ hP⟩
+  rw [← Sheaf.isLocallyBijective_iff_isIso (A := Type w)]
+  exact ⟨Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J φ fac,
+    Presheaf.isLocallySurjective_of_isLocallySurjective_fac J fac⟩
+
+end Sheaf
+
+end SheafifyTypes
 
 end CategoryTheory
