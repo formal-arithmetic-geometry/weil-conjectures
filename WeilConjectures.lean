@@ -17298,6 +17298,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
@@ -25194,6 +25195,7 @@ public import WeilConjectures.WeilSheaf.CohomologyResolution
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.CohomologyZero
+public import WeilConjectures.WeilSheaf.CompactProjectionFormula
 public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.CondensedLisseRepresentation
@@ -25490,6 +25492,7 @@ public import WeilConjectures.WeilSheaf.ProperBaseChangeFunctor
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
+public import WeilConjectures.WeilSheaf.ProperProjectionFormula
 public import WeilConjectures.WeilSheaf.RealPurity
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
@@ -25499,6 +25502,7 @@ public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.SixFunctors.UnderlyingStandardHomRepresentatives
 public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibility
 public import WeilConjectures.WeilSheaf.SmoothLisseOpen
+public import WeilConjectures.WeilSheaf.SmoothPurity
 public import WeilConjectures.WeilSheaf.SplitTorsor
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkAtPurity
@@ -25560,6 +25564,7 @@ public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
+public import WeilConjectures.WeilSheaf.VerdierExchange
 public import WeilConjectures.WeilSheaf.WeilDescent
 public import WeilConjectures.WeilSheaf.WeilDescentArithmetic
 public import WeilConjectures.WeilSheaf.WeilDescentConstantField

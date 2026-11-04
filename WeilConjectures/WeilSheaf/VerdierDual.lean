@@ -12,6 +12,8 @@ public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
+import WeilConjectures.WeilSheaf.SmoothPurity
+import WeilConjectures.WeilSheaf.VerdierExchange
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -228,7 +230,9 @@ finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
 theorem nonempty_verdierDual_derivedLowerShriek_iso (M : WeilComplex k₀ l X) :
     Nonempty ((verdierDual k₀ l Y).obj (op ((derivedLowerShriek k₀ l f).obj M)) ≅
       (derivedLowerStar f).obj ((verdierDual k₀ l X).obj (op M))) :=
-  sorry
+  nonempty_iso_derivedLowerStar_of_adjunction f _ _ (comp_over f _)
+    (derivedLowerShriekUpperShriekAdjunction _) (derivedLowerShriekUpperShriekAdjunction _) _ M _ _
+    (Iso.refl _) (Iso.refl _)
 
 end Exchange
 
@@ -248,7 +252,7 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
     Nonempty (dualizingComplex k₀ l X ≅
       ((tateTwist k₀ l X d).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) :=
-  sorry
+  nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth d (derivedLowerShriekUpperShriekAdjunction _)
 
 end Smooth
 
