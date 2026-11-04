@@ -32,10 +32,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 theorem nonempty_point_dualizing_iso_constant :
     Nonempty (dualizingComplex k₀ l (Spec (CommRingCat.of k₀)) ≅
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))) := by
-  let P := Spec (CommRingCat.of k₀)
-  let eL : derivedLowerShriek k₀ l (𝟙 P) ≅ 𝟭 _ :=
-    derivedLowerShriekIsoDerivedLowerStar (𝟙 P) ≪≫ derivedLowerStarIdIso
-  let eR := ((derivedLowerShriekUpperShriekAdjunction (k₀ := k₀) (l := l) (𝟙 P)).ofNatIsoLeft
+  let a := Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)
+  let eL : derivedLowerShriek k₀ l a ≅ 𝟭 _ :=
+    derivedLowerShriekIsoDerivedLowerStar a ≪≫ derivedLowerStarIdIso
+  let eR := ((derivedLowerShriekUpperShriekAdjunction (k₀ := k₀) (l := l) a).ofNatIsoLeft
     eL).rightAdjointUniq (Adjunction.id)
   exact ⟨eR.app _⟩
 

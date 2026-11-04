@@ -241,3 +241,9 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Audit /home/ubuntu/u9/logs/K4-20261105T071238.log finished rc=1, four built/two failed. DescendedWeilUniversality is GREEN (13s), and NativeProperTrace is GREEN: proving the free-Weil universal property in finite-base coordinates removes the native conversion timeout.
 - NativeProperDualizing then hit an import-time collision between generated local instance names in the new file and ProperPointTrace. Assigned explicit unique names to the new local instances.
 - Thom's final trivial-line theorem still times out (18s). Split the compact constant-object computation from the projection-formula application, and gave the base-change component its explicit object-level type. This will identify and shorten the costly conversion. No heartbeat raises or DONE.
+
+## 2026-11-05 07:18 +0800 — Thom reduction GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T071436.log finished rc=1, five built/two failed. SmoothPurityThom is GREEN (14s), including compact base change of the constant object and the full trivial-line Thom functor conditional on affine-line compact constant cohomology. NativeProperTrace remains GREEN; instance-name collision resolved.
+- AffineLineConstant needs the point adjunction written using the structural morphism appearing in its HasUpperShriek hypothesis. Replaced the separately written identity arrow by that structural morphism.
+- NativeProperDualizing could not synthesize the IsIso exceptional-base-change proof across its point-unit coordinates. Made the new native criterion's base-change proof argument explicit and passed the existing proper-point theorem directly. The assigned leaf's statement is unchanged.
+- Next single audit follows; no heartbeat raises or DONE.

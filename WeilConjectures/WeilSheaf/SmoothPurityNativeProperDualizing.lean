@@ -78,9 +78,9 @@ theorem nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso
   let eT := (finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := X)).app P
   let eU := (finiteBaseNativeDescentComparison (k₀ := k₀) (l := l)
     (X := Spec (CommRingCat.of k₀))).app (𝟙_ _)
-  have := CondensedRing.isIso_upperShriekBaseChange_geometricFiber_unit l
+  have hbc := CondensedRing.isIso_upperShriekBaseChange_geometricFiber_unit l
     (properTraceBaseMap (k₀ := k₀) a)
-  have hi := isIso_homEquiv_nativeProperTrace_of_isIso a (𝟙 P) T U eT eU adj
+  have hi := isIso_homEquiv_nativeProperTrace_of_isIso a (𝟙 P) T U eT eU hbc adj
   exact ⟨(asIso (adj.homEquiv T U (nativeProperTrace a (𝟙 P) T U eT eU))).symm⟩
 
 /-- The proper exceptional unit is the native descent of the ordinary dualizing
