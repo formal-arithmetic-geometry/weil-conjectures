@@ -74,9 +74,9 @@ noncomputable def nativeConstructibleTensorTateShiftIso (d n : ℤ) :
       nativeConstructibleTensor k₀ l X ≅ tateTwist k₀ l X d ⋙ shiftFunctor _ n := by
   let G := WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)
   let ι := (objectProperty k₀ l X).ι
-  let e : (ι.obj (G⟦n⟧)) ≅ (ι.obj G)⟦n⟧ := (ι.commShiftIso n).app G
+  let e : (ι.obj (G⟦n⟧)) ≅ (ι.obj G) ⟦n⟧ := (ι.commShiftIso n).app G
   let a : Prod.sectR (G⟦n⟧) _ ⋙ ι.prod ι ≅
-      ι ⋙ Prod.sectR ((ι.obj G)⟦n⟧) _ :=
+      ι ⋙ Prod.sectR ((ι.obj G) ⟦n⟧) _ :=
     NatIso.ofComponents (fun K ↦ e.prod (Iso.refl (ι.obj K))) (fun _ ↦ by simp)
   apply ((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
   exact Functor.isoWhiskerRight a (ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X) ≪≫
