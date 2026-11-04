@@ -16585,6 +16585,7 @@ public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.GroupTheory.TateModuleDual
 public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.WeilGroup
+public import WeilConjectures.LeanEval.WeilConjectures
 public import WeilConjectures.LinearAlgebra.Basis.PowQuotientTower
 public import WeilConjectures.LinearAlgebra.Basis.TowerLift
 public import WeilConjectures.LinearAlgebra.Basis.ULiftPowQuotient
