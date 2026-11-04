@@ -42,6 +42,7 @@ import WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenStrictReduction
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedFiniteExchangeCoordinates
 import all WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportProetale
+import all WeilConjectures.AlgebraicGeometry.Complete.CompleteProperOpenGamma
 
 /-!
 Lower construction API (blueprint: def-cbc-open-exact-adjunction-api).
