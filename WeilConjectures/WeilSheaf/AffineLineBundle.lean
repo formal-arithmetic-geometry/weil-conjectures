@@ -156,7 +156,20 @@ theorem nonempty_adjunction_derivedLowerShriek_of_isPullback :
     rw [← comp_over π]
     infer_instance
   obtain ⟨ε, hε⟩ := exists_weilTrace_of_isPullback π s hπ (l := l)
-  sorry
+  refine ⟨Adjunction.ofBijectiveCounit (L := derivedLowerShriek k₀ l π)
+    (R := (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) ε ?_⟩
+  intro K P
+  have key := bijective_map_comp_derivedLowerShriek (k₀ := k₀) (l := l) π (K := K)
+    (P := ((tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π).obj P)
+    (T := P) (ε.app P)
+  exact key (fun n ↦ isIso_freeComparison_rightDerivedLowerShriek π K n) fun n ↦
+    (Adjunction.bijective_map_comp_iff_of_iso _ _
+      ((CategoryTheory.Endofunctor.IsoAlgebra.forget
+        (WeilSheaf.frobeniusPullback k₀ l Y)).mapDerivedCategory.mapIso
+          (((WeilComplex.objectProperty k₀ l Y).ι.commShiftIso n).app K) ≪≫
+        ((CategoryTheory.Endofunctor.IsoAlgebra.forget
+          (WeilSheaf.frobeniusPullback k₀ l Y)).mapDerivedCategory.commShiftIso n).app K.obj)).1
+      (hε ((shiftFunctor _ n).obj K) P)
 
 include hπ in
 /-- **Homotopy invariance for Weil complexes.** For the trivial line bundle
