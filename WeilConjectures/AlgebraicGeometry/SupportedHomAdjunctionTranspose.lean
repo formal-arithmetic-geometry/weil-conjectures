@@ -15,6 +15,8 @@ import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import WeilConjectures.CategoryTheory.R.RHomDerivedRoof
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import WeilConjectures.AlgebraicGeometry.Support.SupportCohomology
+public import WeilConjectures.AlgebraicGeometry.SupportedHomTransposeAux
+public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 
 /-!
 # The normalized supported-Hom map and the adjunction transpose
@@ -154,6 +156,167 @@ instance purityCoefficientFinite (P : WeilConjectures.PurityFiniteSetting.{u}) :
     P.coefficients.l P.extension P.level P.level_pos
   inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
 
+omit [IsLocallyNoetherian X] in
+/-- Evaluation at `1` on the degree-`a` cohomology of a map `A[-a] ⟶ RΓ_Z(F)` is bijective,
+since `A` is free of rank one. -/
+lemma supportedHomClassOfMorphism_bijective
+    (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (a : ℤ) : Function.Bijective (supportedHomClassOfMorphism A i F a) := by
+  have hev (M : ModuleCat.{u + 1} A) :
+      Function.Bijective (fun φ : ModuleCat.of A A ⟶ M => φ (1 : A)) := by
+    refine ⟨fun φ ψ h => ?_, fun m => ⟨ModuleCat.ofHom (LinearMap.toSpanSingleton A M m), ?_⟩⟩
+    · ext
+      exact h
+    · simp
+  exact (hev _).comp (DerivedCategory.homSingleEquivOfProjective (ModuleCat.of A A) a
+    ((supportedSectionsDerived A i).obj F.obj)).bijective
+
+omit [IsLocallyNoetherian X] in
+/-- The supported cohomology class of a map `A[-a] ⟶ RΓ_Z(F)`, as an additive equivalence. -/
+noncomputable def supportedHomClassAddEquiv
+    (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (a : ℤ) :
+    ((DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) a).obj (ModuleCat.of A A) ⟶
+      (supportedSectionsDerived A i).obj F.obj) ≃+
+      (supportedHomCohomologyFunctor A i a).obj F :=
+  AddEquiv.ofBijective
+    (AddMonoidHom.mk' (supportedHomClassOfMorphism A i F a)
+      (fun _ _ => by simp [supportedHomClassOfMorphism]))
+    (supportedHomClassOfMorphism_bijective A i F a)
+
+omit [IsLocallyNoetherian X] in
+lemma supportedHomClassAddEquiv_apply
+    (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (a : ℤ)
+    (f : (DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) a).obj (ModuleCat.of A A) ⟶
+      (supportedSectionsDerived A i).obj F.obj) :
+    supportedHomClassAddEquiv A i F a f = supportedHomClassOfMorphism A i F a f :=
+  rfl
+
+/-- The shifted transpose is bijective: it is the derived adjunction bijection, followed by
+the shift and the composition with isomorphisms. -/
+lemma supportedHomShiftedTranspose_bijective
+    (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (a : ℤ) : Function.Bijective (supportedHomShiftedTranspose A i F a) := by
+  let e := ((DerivedCategory.singleFunctors
+    (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))).shiftIso a 0 a
+      (add_zero a)).symm.app ((supportedCoefficients A i).obj (ModuleCat.of A A)) ≪≫
+    (shiftFunctor _ a).mapIso
+      (((supportedCoefficients A i).mapDerivedCategorySingleFunctor a).symm.app
+        (ModuleCat.of A A))
+  have h : supportedHomShiftedTranspose A i F a = e.symm.homFromEquiv ∘
+      (fun φ => (shiftFunctor _ a).map φ) ∘
+      ((supportedCoefficientDerivedAdjunction A i).homEquiv _ _).symm := by
+    funext f
+    simp [supportedHomShiftedTranspose, e]
+  rw [h]
+  exact e.symm.homFromEquiv.bijective.comp
+    (((Functor.FullyFaithful.ofFullyFaithful (shiftFunctor _ a)).map_bijective _ _).comp
+    ((supportedCoefficientDerivedAdjunction A i).homEquiv _ _).symm.bijective)
+
+/-- The shifted transpose, as an additive equivalence. -/
+noncomputable def supportedHomShiftedTransposeAddEquiv
+    (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (a : ℤ) :
+    ((DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) a).obj (ModuleCat.of A A) ⟶
+      (supportedSectionsDerived A i).obj F.obj) ≃+
+      (supportedHomMorphismFunctor A i a).obj F :=
+  AddEquiv.ofBijective
+    (AddMonoidHom.mk' (supportedHomShiftedTranspose A i F a)
+      (fun _ _ => by simp [supportedHomShiftedTranspose]))
+    (supportedHomShiftedTranspose_bijective A i F a)
+
+omit [IsLocallyNoetherian X] in
+/-- Naturality of the supported cohomology class of a map `A[-a] ⟶ RΓ_Z(F)`. -/
+lemma supportedHomClassOfMorphism_naturality
+    {F G : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))}
+    (g : F ⟶ G) (a : ℤ)
+    (f : (DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) a).obj (ModuleCat.of A A) ⟶
+      (supportedSectionsDerived A i).obj F.obj) :
+    (supportedHomCohomologyFunctor A i a).map g (supportedHomClassOfMorphism A i F a f) =
+      supportedHomClassOfMorphism A i G a
+        (f ≫ (supportedSectionsDerived A i).map (DerivedCategory.Plus.ι.map g)) := by
+  simp [supportedHomCohomologyFunctor, supportedHomClassOfMorphism]
+
+/-- Naturality of the shifted transpose. -/
+lemma supportedHomShiftedTranspose_naturality
+    {F G : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))}
+    (g : F ⟶ G) (a : ℤ)
+    (f : (DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) a).obj (ModuleCat.of A A) ⟶
+      (supportedSectionsDerived A i).obj F.obj) :
+    (supportedHomMorphismFunctor A i a).map g (supportedHomShiftedTranspose A i F a f) =
+      supportedHomShiftedTranspose A i G a
+        (f ≫ (supportedSectionsDerived A i).map (DerivedCategory.Plus.ι.map g)) := by
+  simp [supportedHomMorphismFunctor, supportedHomShiftedTranspose,
+    Adjunction.homEquiv_naturality_right_symm, preadditiveCoyoneda_obj_map_apply]
+
+/-- The component at `F` of the supported-Hom isomorphism: the inverse of the cohomology class
+of maps `A[-a] ⟶ RΓ_Z(F)`, followed by the shifted transpose. -/
+noncomputable def supportedHomIsoApp (a : ℤ)
+    (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) :
+    (supportedHomCohomologyFunctor A i a).obj F ≅ (supportedHomMorphismFunctor A i a).obj F :=
+  ((supportedHomClassAddEquiv A i F a).symm.trans
+    (supportedHomShiftedTransposeAddEquiv A i F a)).toAddCommGrpIso
+
+lemma supportedHomIsoApp_hom_apply (a : ℤ)
+    (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (f : (DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) a).obj (ModuleCat.of A A) ⟶
+      (supportedSectionsDerived A i).obj F.obj) :
+    (supportedHomIsoApp A i a F).hom (supportedHomClassOfMorphism A i F a f) =
+      supportedHomShiftedTranspose A i F a f :=
+  congrArg (supportedHomShiftedTranspose A i F a)
+    ((supportedHomClassAddEquiv A i F a).symm_apply_apply f)
+
+/-- The supported-Hom isomorphism: the inverse of the cohomology class of maps
+`A[-a] ⟶ RΓ_Z(F)`, followed by the shifted transpose. -/
+noncomputable def supportedHomIso (a : ℤ) :
+    supportedHomCohomologyFunctor A i a ≅ supportedHomMorphismFunctor A i a :=
+  NatIso.ofComponents (supportedHomIsoApp A i a) (fun {F G} g => by
+    ext x
+    obtain ⟨f, rfl⟩ := (supportedHomClassAddEquiv A i F a).surjective x
+    rw [supportedHomClassAddEquiv_apply, AddCommGrpCat.comp_apply, AddCommGrpCat.comp_apply,
+      supportedHomClassOfMorphism_naturality, supportedHomIsoApp_hom_apply,
+      supportedHomIsoApp_hom_apply, supportedHomShiftedTranspose_naturality])
+
+lemma supportedHomIso_hom_app_supportedHomClassOfMorphism (a : ℤ)
+    (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (f : (DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) a).obj (ModuleCat.of A A) ⟶
+      (supportedSectionsDerived A i).obj F.obj) :
+    (supportedHomIso A i a).hom.app F (supportedHomClassOfMorphism A i F a f) =
+      supportedHomShiftedTranspose A i F a f :=
+  supportedHomIsoApp_hom_apply A i a F f
+
+omit [IsLocallyNoetherian X] in
+/-- The class of an abstract cycle `s` of `Γ_Z(I)` is the class of the localized cochain map
+`A[-a] ⟶ Γ_Z(I)` sending `1` to `s`, followed by the derived unit. -/
+lemma supportedHomCycleClass_eq_supportedHomClassOfMorphism
+    (I : CochainComplex.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (a : ℤ)
+    (b : ModuleCat.of A A ⟶
+      (((supportSections i A).mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj).X a)
+    (hb : ∀ k, (ComplexShape.up ℤ).Rel a k →
+      b ≫ (((supportSections i A).mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj).d a k = 0)
+    (s : (((supportSections i A).mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj).cycles a)
+    (hs : (((supportSections i A).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+      I.obj).iCycles a s = b 1) :
+    supportedHomCycleClass A i I a s =
+      supportedHomClassOfMorphism A i (DerivedCategory.Plus.Q.obj I) a
+        (DerivedCategory.Q.map (HomologicalComplex.mkHomFromSingle b hb) ≫
+          supportedHomDerivedUnit A i I.obj) := by
+  have h := DerivedCategory.homSingleToHomology_Q_map_mkHomFromSingle (ModuleCat.of A A) a _ b hb
+  rw [← Iso.app_hom, ← Iso.eq_comp_inv] at h
+  have hs' : (((supportSections i A).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+      I.obj).liftCycles b (a + 1) (by simp) (hb _ rfl) 1 = s := by
+    apply (ModuleCat.mono_iff_injective (HomologicalComplex.iCycles _ a)).1 inferInstance
+    rw [hs, ← ModuleCat.comp_apply, HomologicalComplex.liftCycles_i]
+  have h1 := congrArg (fun φ => φ (1 : A)) h
+  simp only [DerivedCategory.homSingleToHomology, Iso.app_inv, CategoryTheory.comp_apply] at h1
+  rw [hs'] at h1
+  simp only [supportedHomCycleClass, supportedHomClassOfMorphism, Functor.map_comp,
+    CategoryTheory.comp_apply]
+  exact congrArg (fun y => (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) a).map
+    (supportedHomDerivedUnit A i I.obj) y) h1.symm
+
 /-- The canonical, evaluation-normalized supported-Hom isomorphism equals the shifted
 transpose under the supported adjunction. Source: blueprint sk-thm-regular, proof Step 5
 (blueprint: lem-pur-supported-hom-adjunction-transpose).
@@ -192,6 +355,16 @@ theorem supportedHom_adjunction_transpose (P : WeilConjectures.PurityFiniteSetti
           (supportedSectionsDerived P.Coefficient i).obj F.obj),
         χ.hom.app F (supportedHomClassOfMorphism P.Coefficient i F a f) =
           supportedHomShiftedTranspose P.Coefficient i F a f := by
-  sorry
+  refine ⟨supportedHomIso P.Coefficient i a, ?_,
+    supportedHomIso_hom_app_supportedHomClassOfMorphism P.Coefficient i a⟩
+  intro I _ f hf s hs
+  rw [supportedHomCycleClass_eq_supportedHomClassOfMorphism P.Coefficient i I a
+    ((supportedCoefficientAdjunction P.Coefficient i).homEquiv _ _ f) (fun j hj => by
+      obtain rfl : a + 1 = j := hj
+      exact (supportedCoefficientAdjunction P.Coefficient i).homEquiv_comp_eq_zero f _ hf) s hs,
+    supportedHomIso_hom_app_supportedHomClassOfMorphism]
+  exact Adjunction.mapDerivedCategoryRightDerivedAdjunction_shiftedTranspose
+    (supportedCoefficientAdjunction P.Coefficient i)
+    (ModuleCat.of P.Coefficient P.Coefficient) I.obj a f hf
 
 end AlgebraicGeometry.ProEtale
