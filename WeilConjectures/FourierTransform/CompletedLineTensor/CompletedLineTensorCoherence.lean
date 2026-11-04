@@ -760,6 +760,23 @@ private theorem line_localizedIso
   exact ScalarLocalization.existsUnique_iso_of_component_formulas
     t v ψ F₀ G₀ e F G hF hG mF mG
 
+private theorem line_app_heq {C D : Type*} [Category C] [Category D]
+    {F G : C ⥤ D} (α : F ⟶ G) {X X' : C} (h : X = X') :
+    HEq (α.app X) (α.app X') := by
+  cases h
+  rfl
+
+private theorem line_comp_heq {C : Type*} [Category C]
+    {X X' Y Y' Z Z' : C} (hX : X = X') (hY : Y = Y') (hZ : Z = Z')
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y ⟶ Z} {g' : Y' ⟶ Z'}
+    (hf : HEq f f') (hg : HEq g g') : HEq (f ≫ g) (f' ≫ g') := by
+  cases hX
+  cases hY
+  cases hZ
+  cases hf
+  cases hg
+  rfl
+
 section Rational
 
 attribute [local irreducible] sfIntegralConstructible
@@ -1232,6 +1249,95 @@ theorem canonical_restriction :
         (by rw [Iso.app_hom, sfIntegralOrdinaryComparison_hom_app, ← hχ]; rfl)
     · exact (sfRationalScalarComp_existsUnique l E F ι Y p hl G j).exists.choose_spec _
     · exact (sfRationalScalarUnit_existsUnique l E Y p hl).exists.choose_spec _
+
+/-- Evaluation compatibility after rationalization, with exactly the integral components.
+Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
+Proof: restrict the ambient evaluation square by full faithfulness. Rationalization
+sends both integral composites to the corresponding composites. The normalized
+component equations for rationalBeta and rationalEpsilon identify these images
+with the displayed square, including all morphisms tensored with arbitrary scalars. -/
+theorem rational_evaluation (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
+    (hL : PreservesConstructible l E Y L)
+    (N : integralTowerModules l F Y) [N.IsFiniteLocallyFreeOfRank 1]
+    (hN : PreservesConstructible l F Y N)
+    (b : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
+      (completedCoefficientMap l E F ι Y) L ≅ N)
+    (m : ℤ) (K : sfRationalConstructibleCategory l E Y) :
+    (rationalBeta l E F ι Y p hl L hL N hN b (-m)).hom.app
+        ((rationalTwist l E Y L hL m).obj K) ≫
+      (rationalTwist l F Y N hN (-m)).map
+        ((rationalBeta l E F ι Y p hl L hL N hN b m).hom.app K) ≫
+      (rationalEpsilon l F Y N hN m).hom.app
+        ((sfRationalScalarExtension l E Y p hl F ι).obj K) =
+    (sfRationalScalarExtension l E Y p hl F ι).map
+      ((rationalEpsilon l E Y L hL m).hom.app K) := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+    let C := sfConstructibleIntegralScalarExtension p l hl E F ι Y
+    let D := sfRationalScalarExtension l E Y p hl F ι
+    let Q := sfRationalConstructibleLocalization l F Y
+    let T := integralTwist l E Y L hL m
+    let S := integralTwist l F Y N hN m
+    let Sm := integralTwist l F Y N hN (-m)
+    let Smq := rationalTwist l F Y N hN (-m)
+    let bp := integralBeta l E F ι Y p hl L hL N hN b m
+    let bm := integralBeta l E F ι Y p hl L hL N hN b (-m)
+    let eE := integralEpsilon l E Y L hL m
+    let eF := integralEpsilon l F Y N hN m
+    have hi : bm.hom.app (T.obj K.obj) ≫ Sm.map (bp.hom.app K.obj) ≫
+          eF.hom.app (C.obj K.obj) = C.map (eE.hom.app K.obj) := by
+      apply (sfIntegralConstructible l F Y).ι.map_injective
+      have hbp := eq_of_heq
+        ((integralBeta_existsUnique l E F ι Y p hl L hL N hN b m).exists.choose_spec K.obj)
+      have hbm := eq_of_heq
+        ((integralBeta_existsUnique l E F ι Y p hl L hL N hN b (-m)).exists.choose_spec
+          (T.obj K.obj))
+      simp only [ObjectProperty.ι_map]
+      change (bp.hom.app K.obj).hom = _ at hbp
+      change (bm.hom.app (T.obj K.obj)).hom = _ at hbm
+      have heE := (integralEpsilon_existsUnique l E Y L hL m).exists.choose_spec K.obj
+      have heF := (integralEpsilon_existsUnique l F Y N hN m).exists.choose_spec (C.obj K.obj)
+      change (bm.hom.app (T.obj K.obj)).hom ≫
+          (tensor l F Y N (-m)).map (bp.hom.app K.obj).hom ≫
+          (eF.hom.app (C.obj K.obj)).hom =
+        (integralScalarExtensionOfUniverses l E F ι Y).map (eE.hom.app K.obj).hom
+      change (eE.hom.app K.obj).hom = _ at heE
+      change (eF.hom.app (C.obj K.obj)).hom = _ at heF
+      erw [hbm, hbp, heE, heF]
+      exact (beta_natural_evaluation l E Y F ι L N b).2 m K.obj.obj
+        (intrinsic_complete l E Y K.obj)
+    have hD := (sfRationalScalarExtension_existsUnique l E Y p hl F ι).exists.choose_spec
+    have hobj := hD.2.1 K
+    have hbp := (rationalBeta_existsUnique l E F ι Y p hl L hL N hN b m).exists.choose_spec
+      K.obj
+    have hbm := (rationalBeta_existsUnique l E F ι Y p hl L hL N hN b (-m)).exists.choose_spec
+      (T.obj K.obj)
+    have hm := line_map_heq Smq (hD.2.1 ((rationalTwist l E Y L hL m).obj K))
+      (congrArg (rationalTwist l F Y N hN m).obj hobj) hbp
+    have hm' : HEq
+        (Smq.map ((rationalBeta l E F ι Y p hl L hL N hN b m).hom.app K))
+        (Q.map (Sm.map (bp.hom.app K.obj))) :=
+      hm.trans (heq_of_eq (LinearMap.baseChange_tmul _ _ _))
+    have heF := (line_app_heq (rationalEpsilon l F Y N hN m).hom hobj).trans
+      (heq_of_eq ((rationalEpsilon_existsUnique l F Y N hN m).exists.choose_spec
+        (C.obj K.obj)))
+    have hleft := line_comp_heq (hD.2.1
+        ((rationalTwist l E Y L hL m ⋙ rationalTwist l E Y L hL (-m)).obj K))
+      (congrArg Smq.obj (hD.2.1 ((rationalTwist l E Y L hL m).obj K))) hobj hbm
+      (line_comp_heq (congrArg Smq.obj (hD.2.1
+          ((rationalTwist l E Y L hL m).obj K)))
+        (congrArg Smq.obj (congrArg (rationalTwist l F Y N hN m).obj hobj)) hobj hm' heF)
+    have heE := (rationalEpsilon_existsUnique l E Y L hL m).exists.choose_spec K.obj
+    have hright := line_map_heq D rfl rfl (heq_of_eq heE)
+    have hmap : HEq (D.map
+        ((sfRationalConstructibleLocalization l E Y).map (eE.hom.app K.obj)))
+        (Q.map (C.map (eE.hom.app K.obj))) := by
+      simpa only [D, C, Q, sfRationalScalarExtension, sfRationalConstructibleLocalization,
+        ScalarLocalization.localization, map_one] using hD.2.2 _ _ (eE.hom.app K.obj) 1
+    exact eq_of_heq (hleft.trans ((heq_of_eq (by
+      simpa only [Functor.map_comp, Functor.mapIso_inv, Iso.app_inv,
+        Functor.mapLinearMap] using congrArg Q.map hi)).trans
+        (hright.trans hmap).symm))
 
 end Rational
 end CompletedLineTensor

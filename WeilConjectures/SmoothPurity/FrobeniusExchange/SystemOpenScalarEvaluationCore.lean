@@ -186,6 +186,54 @@ theorem openScalar_rearrange {C : Type*} [Category C] {U V W T S U' : C} (a : U 
     rw [reassoc_of% h, reassoc_of% ex, reassoc_of% e₂, e₁, Category.comp_id]
   rw [ha, reassoc_of% em₁, reassoc_of% em₂, reassoc_of% ex]
 
+/-- The abstract open scalar evaluation equation: if the right-adjoint cube commutes, the
+inverse open evaluation mates, the scalar evaluation comparisons, the finite scalar mate and
+the system open scalar mate satisfy the finite-evaluation equation. -/
+theorem openScalar_evaluation_of_cube
+    {A B A' B' a b a' b' : Type*} [Category A] [Category B] [Category A'] [Category B']
+    [Category a] [Category b] [Category a'] [Category b']
+    {jE : B ⥤ A} {JE : A ⥤ B} (adjJE : JE ⊣ jE)
+    {jL : B' ⥤ A'} {JL : A' ⥤ B'} (adjJL : JL ⊣ jL)
+    {jfE : b ⥤ a} {JfE : a ⥤ b} (adjfE : JfE ⊣ jfE)
+    {jfL : b' ⥤ a'} {JfL : a' ⥤ b'} (adjfL : JfL ⊣ jfL)
+    {rX : A' ⥤ A} {SX : A ⥤ A'} (σX : SX ⊣ rX)
+    {rZ : B' ⥤ B} {SZ : B ⥤ B'} (σZ : SZ ⊣ rZ)
+    {rfX : a' ⥤ a} {sX : a ⥤ a'} (τX : sX ⊣ rfX)
+    {rfZ : b' ⥤ b} {sZ : b ⥤ b'} (τZ : sZ ⊣ rfZ)
+    (eA : A ⥤ a) (eB : B ⥤ b) (eA' : A' ⥤ a') (eB' : B' ⥤ b')
+    (pE : jE ⋙ eA ⟶ eB ⋙ jfE) (pL : jL ⋙ eA' ⟶ eB' ⋙ jfL)
+    (ρX : rX ⋙ eA ⟶ eA' ⋙ rfX) (ρZ : rZ ⋙ eB ⟶ eB' ⋙ rfZ)
+    (q : rZ ⋙ jE ⟶ jL ⋙ rX) (φ : rfX ⋙ JfE ⟶ JfL ⋙ rfZ)
+    (hcube : ∀ M : B', eA.map (q.app M) ≫ ρX.app (jL.obj M) ≫ rfX.map (pL.app M) ≫
+      (mateEquiv adjfL adjfE (TwoSquare.mk _ _ _ _ φ)).natTrans.app (eB'.obj M) =
+        pE.app (rZ.obj M) ≫ jfE.map (ρZ.app M))
+    (δE : eA ⋙ JfE ⟶ JE ⋙ eB) [IsIso δE]
+    (hδE : δE = ((mateEquiv adjJE adjfE).symm (TwoSquare.mk _ _ _ _ pE)).natTrans)
+    (δL : eA' ⋙ JfL ⟶ JL ⋙ eB') [IsIso δL]
+    (hδL : δL = ((mateEquiv adjJL adjfL).symm (TwoSquare.mk _ _ _ _ pL)).natTrans)
+    (εX : SX ⋙ eA' ≅ eA ⋙ sX)
+    (hεX : εX.inv = ((mateEquiv σX τX).symm (TwoSquare.mk _ _ _ _ ρX)).natTrans)
+    (εZ : SZ ⋙ eB' ≅ eB ⋙ sZ)
+    (hεZ : εZ.inv = ((mateEquiv σZ τZ).symm (TwoSquare.mk _ _ _ _ ρZ)).natTrans)
+    (α : JfE ⋙ sZ ⟶ sX ⋙ JfL)
+    (hα : α = ((mateEquiv τX τZ).symm (TwoSquare.mk _ _ _ _ φ)).natTrans)
+    (γ : SX ⋙ JL ⟶ JE ⋙ SZ) [IsIso γ]
+    (hγ : γ = ((mateEquiv adjJE adjJL).symm
+      ((mateEquiv σZ σX).symm (TwoSquare.mk _ _ _ _ q))).natTrans)
+    (N : A) :
+    let uE := (asIso δE).symm
+    let uL := (asIso δL).symm
+    uL.hom.app (SX.obj N) ≫ JfL.map (εX.hom.app N) =
+      eB'.map (γ.app N) ≫ εZ.hom.app (JE.obj N) ≫ sZ.map (uE.hom.app N) ≫
+        α.app (eA.obj N) := by
+  intro uE uL
+  have hP := openScalar_mate_pasting_of_eq hcube hδE hδL hεX hεZ hα hγ N
+  refine openScalar_rearrange _ _ (JfL.map (εX.inv.app N)) _ (uL.inv.app _) _
+    (eB'.map (inv (γ.app N))) _ (sZ.map (uE.inv.app N)) _ (εZ.inv.app _)
+    (by simp [← Functor.map_comp]) (by simp) (by simp)
+    (by simp [uE]) (by simp) ?_
+  exact hP
+
 section EvaluationMate
 
 universe c v r
@@ -558,6 +606,111 @@ private theorem systemOpenScalarInv_eq_iteratedMate (l : ℕ) [Fact l.Prime]
   rw [systemScalarPullback_hom_eq_finiteMate l E L ι j]
   rfl
 
+/-- The open scalar evaluation equation, assuming the commuting cube of right-adjoint
+comparisons (restriction/pullback, restriction evaluation, pullback evaluation and the
+finite open restriction mate). -/
+private theorem systemOpenScalarInv_finiteEvaluation_of_cube
+    (l : ℕ) [Fact l.Prime]
+    (E L : Type u) [Field E] [Field L]
+    [Algebra (Padic l) E] [Algebra (Padic l) L]
+    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]
+    (ι : E →ₐ[Padic l] L) {X Z : Scheme.{u}} (j : X ⟶ Z)
+    [IsOpenImmersion j] (n : ℕ) (N : coefficientSequenceDerived l E X)
+    [Finite (Padic.coefficientExtensionRing l E (n + 1))]
+    [Finite (Padic.coefficientExtensionRing l L (n + 1))]
+    (hcube : ∀ (ρX : TwoSquare
+        (SemilinearSections.resD (integralComparisonSequenceScalarMap l E L ι X))
+        (coefficientSequenceDerivedEvaluation l L X n)
+        (coefficientSequenceDerivedEvaluation l E X n)
+        (pbcDerivedRestrict (scalarRingMap (integralScalarQuotientMap l E L ι n) X)))
+      (ρZ : TwoSquare
+        (SemilinearSections.resD (integralComparisonSequenceScalarMap l E L ι Z))
+        (coefficientSequenceDerivedEvaluation l L Z n)
+        (coefficientSequenceDerivedEvaluation l E Z n)
+        (pbcDerivedRestrict (scalarRingMap (integralScalarQuotientMap l E L ι n) Z))),
+      HEq ρX.natTrans (SemilinearSections.restrictionEvaluation (ProEt.topology X)
+        (integralCoefficientCommRingSheaf l E X) (coefficientSequenceCommRingTransition l E X)
+        (integralCoefficientCommRingSheaf l L X) (coefficientSequenceCommRingTransition l L X)
+        (integralScalarQuotientSheafMap l E L ι X)
+        (scalarQuotient_compatible l E L ι X) n).hom →
+      HEq ρZ.natTrans (SemilinearSections.restrictionEvaluation (ProEt.topology Z)
+        (integralCoefficientCommRingSheaf l E Z) (coefficientSequenceCommRingTransition l E Z)
+        (integralCoefficientCommRingSheaf l L Z) (coefficientSequenceCommRingTransition l L Z)
+        (integralScalarQuotientSheafMap l E L ι Z)
+        (scalarQuotient_compatible l E L ι Z) n).hom →
+      ∀ M, (coefficientSequenceDerivedEvaluation l E X n).map
+          ((Functor.mapDerivedCategorySquareIso
+            (@asIso _ _ _ _ (sequenceRestrictionPullbackInv l E L ι j)
+              (sequenceRestrictionPullbackInv_isIso l E L ι j)).symm).inv.app M) ≫
+        ρX.natTrans.app ((integralComparisonDerivedSequencePullback l L j).obj M) ≫
+        (pbcDerivedRestrict (scalarRingMap (integralScalarQuotientMap l E L ι n) X)).map
+          ((systemPullEvaluation l L j n).inv.app M) ≫
+        ((mateEquiv (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
+            (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l L (n + 1)) j))
+          (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
+            (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l E (n + 1)) j)))
+          (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
+            (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom)).natTrans.app
+          ((coefficientSequenceDerivedEvaluation l L Z n).obj M) =
+        (systemPullEvaluation l E j n).inv.app
+          ((SemilinearSections.resD (integralComparisonSequenceScalarMap l E L ι Z)).obj M) ≫
+        (sfIntrinsicPullback (Padic.coefficientExtensionRing l E (n + 1)) j).mapDerivedCategory.map
+          (ρZ.natTrans.app M)) :
+    let uE :=
+      letI := systemOpenEvaluationInv_isIso l E j n
+      (asIso (systemOpenEvaluationInv l E j n)).symm
+    let uL :=
+      letI := systemOpenEvaluationInv_isIso l L j n
+      (asIso (systemOpenEvaluationInv l L j n)).symm
+    let a :=
+      ((mateEquiv (pbcDerivedScalarAdjunction
+          (scalarRingMap (integralScalarQuotientMap l E L ι n) X))
+        (pbcDerivedScalarAdjunction
+          (scalarRingMap (integralScalarQuotientMap l E L ι n) Z))).symm
+        (TwoSquare.mk _ _ _ _
+          ((Functor.mapDerivedCategorySquareIso
+            (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom))).natTrans
+    (uL.hom.app ((integralComparisonDerivedSequenceScalar l E L ι X).obj N)) ≫
+        (sfIntrinsicExtensionByZero j
+          (Padic.coefficientExtensionRing l L (n + 1))).mapDerivedCategory.map
+            ((systemScalarFiniteEvaluation l E L ι X n).hom.app N) =
+      (coefficientSequenceDerivedEvaluation l L Z n).map
+          ((systemOpenScalarInv l E L ι j).app N) ≫
+        (systemScalarFiniteEvaluation l E L ι Z n).hom.app
+          ((systemDerivedOpen l E j).obj N) ≫
+        (pbcDerivedExtend
+          (scalarRingMap (integralScalarQuotientMap l E L ι n) Z)).map
+          (uE.hom.app N) ≫
+        a.app ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by
+  have := systemOpenEvaluationInv_isIso l E j n
+  have := systemOpenEvaluationInv_isIso l L j n
+  have := systemOpenScalarInv_isIso l E L ι j
+  obtain ⟨ρX, hρX, hβX⟩ := systemScalarFiniteEvaluation_inv_eq_mate l E L ι X n
+  obtain ⟨ρZ, hρZ, hβZ⟩ := systemScalarFiniteEvaluation_inv_eq_mate l E L ι Z n
+  exact openScalar_evaluation_of_cube (systemDerivedOpenAdjunction l E j)
+    (systemDerivedOpenAdjunction l L j)
+    (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
+      (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l E (n + 1)) j))
+    (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
+      (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l L (n + 1)) j))
+    (finiteEvaluationSystemScalarAdjunction l E L ι X)
+    (finiteEvaluationSystemScalarAdjunction l E L ι Z)
+    (pbcDerivedScalarAdjunction (scalarRingMap (integralScalarQuotientMap l E L ι n) X))
+    (pbcDerivedScalarAdjunction (scalarRingMap (integralScalarQuotientMap l E L ι n) Z))
+    (coefficientSequenceDerivedEvaluation l E X n) (coefficientSequenceDerivedEvaluation l E Z n)
+    (coefficientSequenceDerivedEvaluation l L X n) (coefficientSequenceDerivedEvaluation l L Z n)
+    (systemPullEvaluation l E j n).inv (systemPullEvaluation l L j n).inv ρX ρZ
+    (Functor.mapDerivedCategorySquareIso
+      (@asIso _ _ _ _ (sequenceRestrictionPullbackInv l E L ι j)
+        (sequenceRestrictionPullbackInv_isIso l E L ι j)).symm).inv
+    (Functor.mapDerivedCategorySquareIso
+      (sfOpenRestriction j (integralScalarQuotientMap l E L ι n))).hom
+    (hcube ρX ρZ hρX hρZ)
+    (systemOpenEvaluationInv l E j n) rfl (systemOpenEvaluationInv l L j n) rfl
+    (systemScalarFiniteEvaluation l E L ι X n) hβX
+    (systemScalarFiniteEvaluation l E L ι Z n) hβZ
+    _ rfl (systemOpenScalarInv l E L ι j) (systemOpenScalarInv_eq_iteratedMate l E L ι j) N
+
 /-- The inverse open scalar mate evaluates to the finite open scalar transpose.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 07A6
 (blueprint: lem-sf-system-open-scalar-evaluation).
@@ -603,6 +756,8 @@ theorem systemOpenScalarInv_finiteEvaluation_core
           (scalarRingMap (integralScalarQuotientMap l E L ι n) Z)).map
           (uE.hom.app N) ≫
         a.app ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by
-  sorry
+  have := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  have := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
+  exact systemOpenScalarInv_finiteEvaluation_of_cube l E L ι j n N (by sorry)
 
 end WeilConjectures.FrobeniusExchange
