@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedEquivariantBarData
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarAction
+public import WeilConjectures.CategoryTheory.InternalActionSite.Condensed.ProfiniteActionAbelian
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZeroUnit
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarInvariants
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionInvariants
@@ -46,7 +47,7 @@ Proof: use the action-site presentation and the internal/sectionwise module equi
 Kernels and sheafified cokernels carry the induced action; normality and finite products
 are computed on underlying internal modules. -/
 theorem actionAbelianData : Nonempty (ActionAbelian A G) := by
-  sorry
+  exact ActionSite.actionAbelian_nonempty A G
 
 /-- Abelian-category structure on the existing action category; its data fields are
 propositions, so this selects no unspecified mathematical object.
@@ -58,7 +59,7 @@ Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: the action-site module equivalence preserves all limits and colimits; apply the
 Grothendieck abelian theorem for modules on a small ringed site. -/
 @[instance] theorem actionGrothendieck : IsGrothendieckAbelian.{u + 1} (Equivariant A G) := by
-  sorry
+  exact ActionSite.isGrothendieckAbelian A G
 
 /-- Forgetting the action creates kernels and cokernels and detects exactness.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
@@ -69,7 +70,7 @@ theorem forgetExact :
     PreservesFiniteColimits (CondensedBar.forgetAction (A := A) (G := G)) ∧
     (∀ S : ShortComplex (Equivariant A G),
       S.Exact ↔ (S.map (CondensedBar.forgetAction (A := A) (G := G))).Exact) := by
-  sorry
+  exact ActionSite.forgetAction_exact A G
 
 private theorem forgetReflects (A : CondensedBar.Ring.{u}) (G : Type u) [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] :
