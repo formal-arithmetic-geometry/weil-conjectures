@@ -692,6 +692,9 @@ abbrev TowerComparison.roos (d : TowerComparison l E j) :
     integralOperationsPullbackComplexFunctor l E j :=
   d.val.2.2.2
 
+private theorem tower_normalized (d : TowerComparison l E j) :
+    TowerNormalization l E j d.finite d.levels d.product d.roos := d.property
+
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors
 
