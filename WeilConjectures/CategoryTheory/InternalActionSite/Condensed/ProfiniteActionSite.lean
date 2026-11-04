@@ -127,6 +127,11 @@ def groupPresheafObjEquiv (X : Model.{u}ᵒᵖ) :
     (groupPresheaf G).obj X ≃* C((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop, G) :=
   MulEquiv.ulift
 
+/-- Continuous maps on a profinite set are sections of the group presheaf at its model. -/
+def groupPresheafUpEquiv (S : Profinite.{u}) :
+    C(S, G) ≃* (groupPresheaf G).obj (op ((AsSmall.up : Profinite.{u} ⥤ Model.{u}).obj S)) :=
+  MulEquiv.ulift.symm
+
 /-- The sheaf of continuous maps to `G` on `Profinite`. -/
 noncomputable abbrev continuousMapSheaf :
     Sheaf (coherentTopology Profinite.{u}) (Type u) :=
