@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
+public import WeilConjectures.WeilSheaf.SmoothPurityDerivedSquareComp
 
 /-!
 # Normalization of the descended proper-image comparison
@@ -69,6 +70,60 @@ lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     Functor.rightDerivedNatTrans_app_assoc, Functor.rightDerivedFunctorNatIso,
     Functor.rightDerivedFunctorNatTrans, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
   rw [rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac]
+
+/-- The derived-unit normalization with the source unit expanded. -/
+lemma traceDescentComparison_inv_fac' (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
+    (K : HomotopyCategory A (.up ℤ)) :
+    S.mapDerivedCategoryFactorsh.inv.app ((L₀.mapHomotopyCategory (.up ℤ)).obj K) ≫
+        S.mapDerivedCategory.map (L₀.rightDerivedFunctorUnit.app K) ≫
+        (traceDescentComparison e T α S β).inv.app (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app K) ≫
+        DerivedCategory.Qh.map
+          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (T ⋙ mapOfNatIso e)) (.up ℤ)).inv.app K) ≫
+        (mapOfNatIso e).rightDerivedFunctorUnit.app ((T.mapHomotopyCategory (.up ℤ)).obj K) ≫
+        (mapOfNatIso e).rightDerivedFunctor.map (T.mapDerivedCategoryFactorsh.inv.app K) := by
+  have h := traceDescentComparison_inv_fac e T α S β K
+  rw [Functor.rightDerivedFunctorCompMapDerivedCategoryUnit_app_eq,
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app, DerivedCategory.Qh.map_id,
+    Category.id_comp, Category.assoc,
+    Functor.mapDerivedCategoryCompRightDerivedFunctorUnit_app] at h
+  exact h
+
+variable {S₀ : B ⥤ D} [S₀.Additive] [PreservesFiniteLimits S₀] [PreservesFiniteColimits S₀]
+  [PreservesFiniteLimits T₀] [PreservesFiniteColimits T₀]
+  (αS : S ⋙ forget G ≅ S₀)
+
+/-- The ordinary square obtained by forgetting a descent square. -/
+noncomputable def ordinaryTraceDescentIso (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e) :
+    L₀ ⋙ S₀ ≅ T₀ ⋙ L :=
+  (Functor.isoWhiskerLeft L₀ αS).symm ≪≫
+    (Functor.associator L₀ S (forget G)).symm ≪≫
+    Functor.isoWhiskerRight β (forget G) ≪≫
+    Functor.associator T (mapOfNatIso e) (forget G) ≪≫
+    Functor.isoWhiskerLeft T (mapOfNatIsoCompForgetIso e) ≪≫
+    (Functor.associator T (forget F) L).symm ≪≫ Functor.isoWhiskerRight α L
+
+/-- Forgetting the derived descent comparison gives the derived ordinary square. -/
+theorem traceDescentComparison_forget (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
+    (K : DerivedCategory A) :
+    (Functor.rightDerivedFunctorCommIso (ordinaryTraceDescentIso e T α S αS β)).hom.app K =
+      ((Functor.mapDerivedCategoryCompIso S (forget G)).symm ≪≫
+        Functor.mapDerivedCategoryNatIso αS).inv.app (L₀.rightDerivedFunctor.obj K) ≫
+      (forget G).mapDerivedCategory.map ((traceDescentComparison e T α S β).inv.app K) ≫
+      (rightDerivedFunctorMapOfNatIsoCompForgetIso F e).hom.app (T.mapDerivedCategory.obj K) ≫
+      L.rightDerivedFunctor.map
+        (((Functor.mapDerivedCategoryCompIso T (forget F)).symm ≪≫
+          Functor.mapDerivedCategoryNatIso α).hom.app K) := by
+  apply Functor.traceDerivedSquare_comp (mapOfNatIsoCompForgetIso e) β
+    (ordinaryTraceDescentIso e T α S αS β)
+    (rightDerivedFunctorMapOfNatIsoCompForgetIso F e)
+    (traceDescentComparison e T α S β).symm
+    (Functor.rightDerivedFunctorCommIso (ordinaryTraceDescentIso e T α S αS β))
+  · exact Functor.rightDerivedFunctorCommIso_fac_app' (mapOfNatIsoCompForgetIso e)
+  · exact traceDescentComparison_inv_fac' e T α S β
+  · exact Functor.rightDerivedFunctorCommIso_fac_app _
+  · intro M
+    simp [ordinaryTraceDescentIso]
 
 end CategoryTheory.Endofunctor.IsoAlgebra
 
