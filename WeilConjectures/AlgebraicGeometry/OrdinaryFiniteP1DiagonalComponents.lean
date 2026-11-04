@@ -8,9 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
 import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalPicard
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
-import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
 import WeilConjectures.AlgebraicGeometry.OrdinarySupportedChernNormalization
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerSystemSupplement
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
 
 /-! # The Chern-component formula for the supported diagonal boundary
 
@@ -253,10 +256,134 @@ attribute [local semireducible] ordinaryFiniteSupportedRealization
   ordinaryFiniteLinePullbackMap ordinaryFiniteP1DiagonalChartMap
   ordinaryFiniteP1Unit ordinaryFiniteP1ChernPushforward ordinaryFiniteP1DiagonalSupportedMap
 
+/-- The diagonal component formula with the base hyperplane Chern arrow specified.
+Source: blueprint lem-amb-p1-diagonal-integrals, Chern additivity and adjunct steps.
+(blueprint: lem-amb-p1-diagonal-chern-fixed-base)
+
+Proof: the supported Chern equation identifies the unsupported diagonal class with
+its divisor line. The chart Picard identity factors this line into the relative
+hyperplane and the pullback of the base hyperplane. Chern additivity and pullback
+naturality give their sum. The chart adjunction pasting transports the supported
+map to its adjunct; unit naturality sends the base summand to its Chern arrow
+followed by the twisted unit, while the relative summand is the Chern pushforward.
+-/
+theorem ordinaryFiniteP1_diagonal_kummer_component_formula_fixed (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))
+    (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))
+    (hPP : IsUnit (N : Γ(ProjectiveLine (ProjectiveLine S), ⊤)))
+    (hW : IsUnit (N : Γ(pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S), ⊤)))
+    (c : ordinaryFiniteUnit A (ProjectiveLine (ProjectiveLine S)) ⟶
+      (ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧)
+    (hc : ordinaryFiniteP1ChernSpec A N hA (ProjectiveLine S) hPP c)
+    (hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible)
+    (κ : ordinaryFiniteSupportedExt A (pullback.diagonal (ProjectiveLine S ↘ S))
+      (Scheme.finiteEtaleTateLine
+        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA))
+    (hκ : SupportedKummerBoundary A N hA (pullback.diagonal (ProjectiveLine S ↘ S))
+      hI hW κ) :
+    ∀ a : Bool,
+            ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫
+              ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =
+            ordinaryFiniteFirstChern A N hA (ProjectiveLine S) hP
+                (Scheme.Pic.ofIsInvertible
+                  (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)) ≫
+              ordinaryFiniteP1Unit A N hA t (ProjectiveLine S) hP +
+              ordinaryFiniteP1ChernPushforward A N hA (ProjectiveLine S) c := by
+  classical
+  let P := ProjectiveLine S
+  let β : ordinaryFiniteUnit A P ⟶ (ordinaryFiniteLine A N hA P)⟦(2 : ℤ)⟧ :=
+    ordinaryFiniteFirstChern A N hA P hP
+      (Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1))
+  intro a
+  let Q := ProjectiveLine P
+  let W := pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)
+  let i : P ⟶ W := pullback.diagonal (ProjectiveLine S ↘ S)
+  let r : Q ⟶ P := ProjectiveLine P ↘ P
+  let d : ordinaryFiniteUnit A W ⟶
+      (ordinaryFiniteLine A N hA W)⟦(2 : ℤ)⟧ :=
+    ordinaryFiniteSupportedArrow A i (Scheme.finiteEtaleTateLine W N A hA) κ
+  let e : Q ⟶ W := (projectiveLineDiagonalChart S a).val.hom
+  let δ : ordinaryFiniteUnit A Q ⟶
+      (ordinaryFiniteLine A N hA Q)⟦(2 : ℤ)⟧ :=
+    ordinaryFiniteLinePullbackMap A N hA t e hW d
+  let b : ordinaryFiniteUnit A Q ⟶
+      (ordinaryFiniteLine A N hA Q)⟦(2 : ℤ)⟧ :=
+    ordinaryFiniteLinePullbackMap A N hA t r hP β
+  let := hI.isInvertible_dual_toModules
+  have hdeq : d = ordinaryFiniteFirstChern A N hA W hW
+      (Scheme.Pic.ofIsInvertible (Scheme.Modules.dual i.ker.toModules)) := by
+    exact ordinaryFiniteFirstChern_unique A N hA W hW
+      (Scheme.Pic.ofIsInvertible (Scheme.Modules.dual i.ker.toModules)) _
+      (ordinary_supported_kummer_chern W N hN A hA hW i hI κ hκ)
+  have hδ : δ = ordinaryFiniteFirstChern A N hA Q hPP
+      (Scheme.Pic.map e (Scheme.Pic.ofIsInvertible
+        (Scheme.Modules.dual i.ker.toModules))) := by
+    exact (congrArg
+      (ordinaryFiniteLinePullbackMap A N hA t e hW) hdeq).trans
+      (ordinaryFiniteFirstChern_pullback A N hA t e hW hPP _)
+  have hb : b = ordinaryFiniteFirstChern A N hA Q hPP
+      (Scheme.Pic.map r (Scheme.Pic.ofIsInvertible
+        (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1))) := by
+    exact ordinaryFiniteFirstChern_pullback A N hA t r hP hPP _
+  have hceq : c = ordinaryFiniteFirstChern A N hA Q hPP
+      (Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) P 1)) := by
+    exact ordinaryFiniteFirstChern_unique A N hA Q hPP _ c hc
+  have hsum : δ = b + c := by
+    have hp := congrArg (ordinaryFiniteFirstChern A N hA Q hPP)
+      (finiteP1_diagonal_picard S hI a)
+    have hm := ordinaryFiniteFirstChern_mul A N hA Q hPP
+      (Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) P 1))
+      (Scheme.Pic.map r (Scheme.Pic.ofIsInvertible
+        (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)))
+    exact hδ.trans (hp.trans (hm.trans ((add_comm _ _).trans
+      (congrArg₂ (fun x y : ordinaryFiniteUnit A Q ⟶
+        (ordinaryFiniteLine A N hA Q)⟦(2 : ℤ)⟧ ↦ x + y) hb.symm hceq.symm))))
+  have hfactor : ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫
+      ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =
+      supportedDerivedUnit A (projectiveLineDiagonalProjection S a) ≫
+        (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map d ≫
+          ordinaryFiniteP1DiagonalChartMap A N hA t S hS a := by
+    rw [ordinaryFiniteP1DiagonalSupportedMap, projectiveLineDiagonalAlpha_units]
+    exact (congrArg (fun f ↦ f ≫ ordinaryFiniteP1DiagonalChartMap A N hA t S hS a)
+      (ordinaryFiniteSupportedArrow_pushforward A
+        (pullback.diagonal (ProjectiveLine S ↘ S))
+        (projectiveLineDiagonalProjection S a) (Scheme.finiteEtaleTateLine W N A hA) κ)).trans
+      (Category.assoc (supportedDerivedUnit A (projectiveLineDiagonalProjection S a))
+        ((ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map d)
+        (ordinaryFiniteP1DiagonalChartMap A N hA t S hS a))
+  have hchart : supportedDerivedUnit A (projectiveLineDiagonalProjection S a) ≫
+        (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map d ≫
+          ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =
+      supportedDerivedUnit A r ≫ (ordinaryFinitePushforward A r).map δ := by
+    dsimp only [ordinaryFiniteP1DiagonalChartMap, δ, ordinaryFiniteLinePullbackMap]
+    exact coefficient_chart_adjunct A e
+      (projectiveLineDiagonalProjection S a) r
+      (projectiveLineDiagonalChart S a).property _ _ d
+      (ordinaryFiniteShiftedLinePullback A N hA t e hW).hom
+  exact hfactor.trans (hchart.trans
+    (map_sum_components (ordinaryFinitePushforward A r) (supportedDerivedUnit A r)
+      δ b c (β ≫ ordinaryFiniteP1Unit A N hA t P hP)
+      (ordinaryFiniteP1ChernPushforward A N hA P c) hsum
+      (by
+        rw [supportedDerivedUnit_eq A r]
+        dsimp only [b, ordinaryFiniteLinePullbackMap]
+        rw [ordinaryFiniteP1Unit_eq]
+        unfold ordinaryFiniteArrowPullback
+        exact base_adjunct_core (ordinaryFiniteAdjunction A r)
+          (ordinaryFiniteUnitPullback A r) β
+          (ordinaryFiniteShiftedLinePullback A N hA t r hP).hom)
+      (by
+        rw [supportedDerivedUnit_eq A r]
+        rw [ordinaryFiniteP1ChernPushforward_eq]
+        exact unit_chern_core (ordinaryFiniteAdjunction A r)
+          (ordinaryFiniteUnitPullback A r).hom c)))
+
 /-- The supported diagonal boundary has the base and relative hyperplane components.
 Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart proof;
 lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
-(auxiliary; not a blueprint node)
+(blueprint: lem-sp-finite-p1-diagonal-kummer-component-formula)
 
 Proof: the diagonal's regular equations on the four product charts are y-x, x-y,
 1-xy and xy-1. On the chart indexed by i,j the ideal generator is
@@ -300,95 +427,8 @@ theorem ordinaryFiniteP1_diagonal_kummer_component_formula (N : ℕ) (hN : 0 < N
               ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =
             β ≫ ordinaryFiniteP1Unit A N hA t (ProjectiveLine S) hP +
               ordinaryFiniteP1ChernPushforward A N hA (ProjectiveLine S) c := by
-  classical
-  let P := ProjectiveLine S
-  let β : ordinaryFiniteUnit A P ⟶ (ordinaryFiniteLine A N hA P)⟦(2 : ℤ)⟧ :=
-    ordinaryFiniteFirstChern A N hA P hP
-      (Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1))
   intro a
-  refine Exists.intro ?_ ?_
-  · exact β
-  · let Q := ProjectiveLine P
-    let W := pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)
-    let i : P ⟶ W := pullback.diagonal (ProjectiveLine S ↘ S)
-    let r : Q ⟶ P := ProjectiveLine P ↘ P
-    let d : ordinaryFiniteUnit A W ⟶
-        (ordinaryFiniteLine A N hA W)⟦(2 : ℤ)⟧ :=
-      ordinaryFiniteSupportedArrow A i (Scheme.finiteEtaleTateLine W N A hA) κ
-    let e : Q ⟶ W := (projectiveLineDiagonalChart S a).val.hom
-    let δ : ordinaryFiniteUnit A Q ⟶
-        (ordinaryFiniteLine A N hA Q)⟦(2 : ℤ)⟧ :=
-      ordinaryFiniteLinePullbackMap A N hA t e hW d
-    let b : ordinaryFiniteUnit A Q ⟶
-        (ordinaryFiniteLine A N hA Q)⟦(2 : ℤ)⟧ :=
-      ordinaryFiniteLinePullbackMap A N hA t r hP β
-    let := hI.isInvertible_dual_toModules
-    have hdeq : d = ordinaryFiniteFirstChern A N hA W hW
-        (Scheme.Pic.ofIsInvertible (Scheme.Modules.dual i.ker.toModules)) := by
-      exact ordinaryFiniteFirstChern_unique A N hA W hW
-        (Scheme.Pic.ofIsInvertible (Scheme.Modules.dual i.ker.toModules)) _
-        (ordinary_supported_kummer_chern W N hN A hA hW i hI κ hκ)
-    have hδ : δ = ordinaryFiniteFirstChern A N hA Q hPP
-        (Scheme.Pic.map e (Scheme.Pic.ofIsInvertible
-          (Scheme.Modules.dual i.ker.toModules))) := by
-      exact (congrArg
-        (ordinaryFiniteLinePullbackMap A N hA t e hW) hdeq).trans
-        (ordinaryFiniteFirstChern_pullback A N hA t e hW hPP _)
-    have hb : b = ordinaryFiniteFirstChern A N hA Q hPP
-        (Scheme.Pic.map r (Scheme.Pic.ofIsInvertible
-          (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1))) := by
-      exact ordinaryFiniteFirstChern_pullback A N hA t r hP hPP _
-    have hceq : c = ordinaryFiniteFirstChern A N hA Q hPP
-        (Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) P 1)) := by
-      exact ordinaryFiniteFirstChern_unique A N hA Q hPP _ c hc
-    have hsum : δ = b + c := by
-      have hp := congrArg (ordinaryFiniteFirstChern A N hA Q hPP)
-        (finiteP1_diagonal_picard S hI a)
-      have hm := ordinaryFiniteFirstChern_mul A N hA Q hPP
-        (Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) P 1))
-        (Scheme.Pic.map r (Scheme.Pic.ofIsInvertible
-          (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)))
-      exact hδ.trans (hp.trans (hm.trans ((add_comm _ _).trans
-        (congrArg₂ (fun x y : ordinaryFiniteUnit A Q ⟶
-          (ordinaryFiniteLine A N hA Q)⟦(2 : ℤ)⟧ ↦ x + y) hb.symm hceq.symm))))
-    have hfactor : ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫
-        ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =
-        supportedDerivedUnit A (projectiveLineDiagonalProjection S a) ≫
-          (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map d ≫
-            ordinaryFiniteP1DiagonalChartMap A N hA t S hS a := by
-      rw [ordinaryFiniteP1DiagonalSupportedMap, projectiveLineDiagonalAlpha_units]
-      exact (congrArg (fun f ↦ f ≫ ordinaryFiniteP1DiagonalChartMap A N hA t S hS a)
-        (ordinaryFiniteSupportedArrow_pushforward A
-          (pullback.diagonal (ProjectiveLine S ↘ S))
-          (projectiveLineDiagonalProjection S a) (Scheme.finiteEtaleTateLine W N A hA) κ)).trans
-        (Category.assoc (supportedDerivedUnit A (projectiveLineDiagonalProjection S a))
-          ((ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map d)
-          (ordinaryFiniteP1DiagonalChartMap A N hA t S hS a))
-    have hchart : supportedDerivedUnit A (projectiveLineDiagonalProjection S a) ≫
-          (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map d ≫
-            ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =
-        supportedDerivedUnit A r ≫ (ordinaryFinitePushforward A r).map δ := by
-      dsimp only [ordinaryFiniteP1DiagonalChartMap, δ, ordinaryFiniteLinePullbackMap]
-      exact coefficient_chart_adjunct A e
-        (projectiveLineDiagonalProjection S a) r
-        (projectiveLineDiagonalChart S a).property _ _ d
-        (ordinaryFiniteShiftedLinePullback A N hA t e hW).hom
-    exact hfactor.trans (hchart.trans
-      (map_sum_components (ordinaryFinitePushforward A r) (supportedDerivedUnit A r)
-        δ b c (β ≫ ordinaryFiniteP1Unit A N hA t P hP)
-        (ordinaryFiniteP1ChernPushforward A N hA P c) hsum
-        (by
-          rw [supportedDerivedUnit_eq A r]
-          dsimp only [b, ordinaryFiniteLinePullbackMap]
-          rw [ordinaryFiniteP1Unit_eq]
-          unfold ordinaryFiniteArrowPullback
-          exact base_adjunct_core (ordinaryFiniteAdjunction A r)
-            (ordinaryFiniteUnitPullback A r) β
-            (ordinaryFiniteShiftedLinePullback A N hA t r hP).hom)
-        (by
-          rw [supportedDerivedUnit_eq A r]
-          rw [ordinaryFiniteP1ChernPushforward_eq]
-          exact unit_chern_core (ordinaryFiniteAdjunction A r)
-            (ordinaryFiniteUnitPullback A r).hom c)))
+  exact ⟨_, ordinaryFiniteP1_diagonal_kummer_component_formula_fixed N hN A hA
+    t S hS hP hPP hW c hc hI κ hκ a⟩
 
 end AlgebraicGeometry.Etale

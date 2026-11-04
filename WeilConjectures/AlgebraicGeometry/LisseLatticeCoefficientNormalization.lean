@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.LatticeSheafLocallyConstant
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeCoefficientsSupplement
 
 /-!
 # Normalization of continuous lisse coefficients
@@ -53,6 +54,12 @@ private theorem coefficientWithAbsLift_isometry (l : ℕ) [Fact l.Prime]
   apply AddMonoidHomClass.isometry_of_norm
   intro x
   exact (coefficientLiftAbsoluteValue l E x.ofAbs).symm
+
+private theorem coefficientIntegers_mem (l : ℕ) [Fact l.Prime] (E : Type*) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (x : E) :
+    x ∈ Padic.coefficientExtensionIntegers l E ↔
+      Padic.coefficientExtensionAbsoluteValue l E x ≤ 1 :=
+  Padic.mem_coefficientExtensionIntegers l E x
 
 private noncomputable def coefficientWithAbsLiftIntegerRingEquiv (l : ℕ) [Fact l.Prime]
     (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
