@@ -14,15 +14,17 @@ import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.DerivedTensorBraidingShift
 
 /-!
-# Constant tensor for a proper exceptional adjoint over any field
+# Ordered proper projection isomorphism for constant coefficients
 
 Source: Zheng, Construction 2.26, equation (2.26.1), printed p. 15, and
 Proposition 2.29(2), printed p. 16, with base `Spec k`
 (blueprint: lem-sfb-arbitrary-field-exceptional-constant-tensor).
 
-The projection isomorphism uses the ordered proper projection map and the canonical
-pullback identification of termwise constant complexes. Its inverse and the specified
-adjunction counit define the exceptional tensor map by transposition.
+This file only defines `properConstantProjectionIso`: for a proper morphism `f : X ⟶ Y`,
+a finite coefficient ring `A` and a complex `V` of `A`-modules, the isomorphism
+`V_Y ⊗ᴸ Rf_*K ≅ Rf_*(V_X ⊗ᴸ K)`. It is built from the signed derived tensor symmetry,
+the proper projection map and the canonical pullback identification `Lf^*V_Y ≅ V_X` of
+constant complexes.
 -/
 
 @[expose] public section

@@ -23,5 +23,12 @@ theorem higherImageCohomologySquare_represented_generator_transport
       freeRepresentableHomEquiv S U (((a)_*[AddCommGrpCat.{u + 1}]).obj G)
         ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} a).homEquiv _ _
           ((abelianFreeRepresentablePullbackIso a U).hom ≫ x)) := by
-  sorry
+  have hhom : (abelianFreeRepresentablePullbackIso a U).hom =
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} a).homEquiv _ _).symm
+        ((freeRepresentableHomEquiv S U _).symm
+          (freeRepresentableHomEquiv T (a.Etale.obj U) _ (𝟙 _))) := rfl
+  rw [hhom, Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply,
+    freeRepresentableHomEquiv_comp, Equiv.apply_symm_apply]
+  conv_lhs => rw [← Category.id_comp x, freeRepresentableHomEquiv_comp]
+  rfl
 end AlgebraicGeometry.Etale
