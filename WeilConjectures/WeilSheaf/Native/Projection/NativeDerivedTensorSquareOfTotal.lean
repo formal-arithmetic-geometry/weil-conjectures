@@ -72,6 +72,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
   let WU := ((nativeTensorTotal k₀ l Z).obj LP).obj LT
   let cZ := (condensedRealizationTotalTensorIso k₀ l Y).app (P, T)
   let cU := (condensedRealizationTotalTensorIso k₀ l Z).app (LP, LT)
+  let tr := NativeRestrictionDescentProof.totalFamily L
+    (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) (nativePullTotalTensor k₀ l g) P T
   let mZ := F.mapDerivedCategory.mapIso (nativeOpenTensorModel k₀ l Y P T hP hT) ≪≫
     F.mapDerivedCategoryFactors.app WZ ≪≫ DerivedCategory.Q.mapIso cZ
   have hr := V.mapDerivedCategory.congr_map
@@ -93,7 +95,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       (nativePullTensor k₀ l g) P T WZ WU
       (nativeOpenTensorModel k₀ l Y P T hP hT)
       (nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
-      ((nativePullTotalTensor k₀ l g).app (P, T)) hr cZ cU
+      tr (by
+        dsimp only [L, V, LP, LT, WZ, WU, tr] at hr ⊢
+        cast_proofs hr) cZ cU
       (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
         Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
         ← MonoidalCategory.tensorHom_def] using hmU)

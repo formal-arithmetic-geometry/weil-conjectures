@@ -242,3 +242,11 @@ aliases. Using with_reducible around the final_total_diagram application.
 Final compatibility's inverse-square rewrite similarly now uses with_reducible.
 Keeping normal kernel checking; all previously green normalization/sheaf helpers
 remain unchanged.
+
+2026-11-05 06:32 CST: K5-20261105T062843.log rc=1. Reduced transparency
+passes modelU; raw total comparison app now reports uniformProd/prod' mismatch,
+so use the same named totalFamily as normalization and cast its proof after
+unfolding local aliases. Total core now reaches hnZ; targeting its summand with
+conv avoids broad rewrite matching. Added a small generic equality-transport
+lemma for comparison squares to avoid rewriting concrete native derived functors.
+No heartbeat increase or opacity change.

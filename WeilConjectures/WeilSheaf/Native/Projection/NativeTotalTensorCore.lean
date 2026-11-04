@@ -128,7 +128,9 @@ lemma projection_totalTensorSquare_of_sheaf
     ((L.mapHomologicalComplex (.up ℤ)).obj P)
     ((L.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnZ
-  rw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
+  conv_lhs =>
+    arg 2
+    rw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
   rw [hcomp, hcomp]
   have hs := hsheaf (P.X p) (T.X q)
   dsimp only [PullTensorSquare] at hs

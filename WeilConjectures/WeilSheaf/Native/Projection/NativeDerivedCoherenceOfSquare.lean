@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Functor.CurryComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCompatibility
+public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCongr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 
@@ -73,9 +74,11 @@ theorem projectionComparisonCompatible_of_square
       intro M N
       have ht := htensor M N
       dsimp only [DerivedPullTensorSquare] at ht
-      with_reducible rw [Functor.mapDerivedCategorySquareIso_symm, Iso.symm_symm_eq] at ht
+      have he := Functor.mapDerivedCategorySquareIso_symm
+        (condensedRealizationUpperStarIso k₀ l g)
+      have ht' := PullTensorSquareWithComparison.of_symm_eq he ht
       dsimp only [R]
-      exact_mod_proofs ht)
+      exact_mod_proofs ht')
   rw [ProEtale.CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison]
   dsimp only [derivedCondensedRealizationUpperStarIso, Functor.leftDerivedFunctorSquareIso]
   dsimp only [R] at h
