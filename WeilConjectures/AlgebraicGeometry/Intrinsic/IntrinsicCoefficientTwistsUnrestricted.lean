@@ -104,6 +104,12 @@ abbrev twistIntegralRing : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   letI := spectralNorm.normedField ℚ_[l] E
   Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers l E)
 
+/-- The continuous-function condensed rational coefficient ring.
+Source: rational coefficient paragraph (blueprint: def-coefficient-twists-detailed). -/
+abbrev twistRationalRing : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+  letI := spectralNorm.normedField ℚ_[l] E
+  Profinite.continuousCoefficientRingObj E
+
 /-- The discrete condensed finite quotient at positive exponent n+1.
 Source: A_E,n paragraph (blueprint: def-coefficient-twists-detailed). -/
 abbrev twistFiniteRing (n : ℕ) : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
@@ -161,6 +167,19 @@ instance twistFiniteReduction_isMonHom (n : ℕ) : IsMonHom (twistFiniteReductio
   unfold twistFiniteReduction
   infer_instance
 
+/-- Inclusion of continuous integral coefficients into continuous field coefficients.
+Source: E(1) paragraph (blueprint: def-coefficient-twists-detailed). -/
+def twistIntegralToRational : twistIntegralRing l E ⟶ twistRationalRing l E :=
+  letI := spectralNorm.normedField ℚ_[l] E
+  twistContinuousMap (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val
+
+/-- The specified coefficient morphism preserves the ring structure.
+Source: coefficient maps (blueprint: def-coefficient-twists-detailed).
+Proof: it is induced by a continuous unital ring homomorphism. -/
+instance twistIntegralToRational_isMonHom : IsMonHom (twistIntegralToRational l E) := by
+  unfold twistIntegralToRational
+  infer_instance
+
 variable (X : Scheme.{u})
 
 /-- The root presentation at exponent r+1 of the positive quotient A_E,n+1.
@@ -170,6 +189,16 @@ def coefficientFiniteRootLine (n r : ℕ) :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (twistFiniteRing l E n) X) :=
   (Mod.freeFunctor _).obj (rootsOfUnitySheaf X (l ^ (r + 1)))
+
+/-- The canonical comparison sends u tensor a to u^(l^k) tensor a.
+Source: comparison L_n,r' -> L_n,r (blueprint: def-coefficient-twists-detailed). -/
+def coefficientFiniteRootComparison (n r k : ℕ) :
+    coefficientFiniteRootLine l E X n (r + k) ⟶ coefficientFiniteRootLine l E X n r :=
+  (Mod.freeFunctor _).map
+    (eqToHom (by rw [← pow_add]; congr 2; omega :
+      rootsOfUnitySheaf X (l ^ (r + k + 1)) =
+        rootsOfUnitySheaf X (l ^ k * l ^ (r + 1))) ≫
+      rootsOfUnitySheafPow X (l ^ (r + 1)) (l ^ k))
 
 /-- A_E,n+1(1) with the fixed exponent n+1 and its actual quotient coefficient action.
 Source: finite twist display (blueprint: def-coefficient-twists-detailed). -/
@@ -214,6 +243,63 @@ def coefficientIntegralTwistSystem :
     ℕᵒᵖ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (twistIntegralRing l E) X) :=
   Functor.ofOpSequence (coefficientIntegralTwistTransition l E X)
+
+/-- O_E,X(1), constructed as the actual inverse limit of the finite root lines.
+Source: integral limit display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientIntegralTwistOne :
+    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (twistIntegralRing l E) X) :=
+  limit (coefficientIntegralTwistSystem l E X)
+
+/-- E_X(1), the balanced scalar extension of the integral limit line.
+Source: rational twist display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientRationalTwistOne :
+    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (twistRationalRing l E) X) :=
+  (Mod.extendScalars (coefficientMap (twistIntegralToRational l E) X)).obj
+    (coefficientIntegralTwistOne l E X)
+
+/-- Nonnegative powers of a coefficient line, with degree zero the coefficient unit.
+Source: signed twists display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientTwistNat (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
+    ℕ → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R
+  | 0 => 𝟙_ _
+  | n + 1 => coefficientTwistNat R L n ⊗ L
+
+/-- Negative powers are the internal sheaf Hom of the positive power into the unit.
+Source: signed twists display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientSignedTwist (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
+    ℤ → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R
+  | (n : ℕ) => coefficientTwistNat X R L n
+  | .negSucc n => (ihom (coefficientTwistNat X R L (n + 1))).obj (𝟙_ _)
+
+/-- K(m) is derived tensor with the signed line placed in degree zero.
+Source: final K(m) display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientTwistFunctor (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (m : ℤ) :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :=
+  tensorRight ((DerivedCategory.singleFunctor _ 0).obj (coefficientSignedTwist X R L m))
+
+/-- The finite twist functor on the unbounded finite-coefficient derived category.
+Source: final K(m) display (blueprint: def-coefficient-twists-detailed). -/
+abbrev coefficientFiniteTwistFunctor (n : ℕ) (m : ℤ) :=
+  coefficientTwistFunctor X _ (coefficientFiniteTwistOne l E X n) m
+
+/-- The integral twist functor on the unbounded continuous-coefficient derived category.
+Source: final K(m) display (blueprint: def-coefficient-twists-detailed). -/
+abbrev coefficientIntegralTwistFunctor (m : ℤ) :=
+  coefficientTwistFunctor X _ (coefficientIntegralTwistOne l E X) m
+
+/-- The rational twist functor on the unbounded continuous-coefficient derived category.
+Source: final K(m) display (blueprint: def-coefficient-twists-detailed). -/
+abbrev coefficientRationalTwistFunctor (m : ℤ) :=
+  coefficientTwistFunctor X _ (coefficientRationalTwistOne l E X) m
 
 end AlgebraicGeometry.ProEtale
 
