@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.NativeCompleteProjectionDescent.NativeProjectionDescentMaps
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionReductionSquare
+public import WeilConjectures.AlgebraicGeometry.NativeCompleteProjectionDescent.NativeProjectionPullTensorCoherence
 
 /-! # Coherence of the native pullback reduction comparisons
 
@@ -27,22 +28,14 @@ canonical ones, and hence satisfy the two coherences of a monoidal pseudonatural
 * `pull_comp_coherence`: `m.pull` is compatible with composition, for
   `CondensedRing.leftDerivedUpperStarComp` and `VaryingRing.gComp`.
 
-## Missing inputs
+## Proofs
 
-Both statements are left as `sorry`. Deriving them from the representative normalizations
-in `DescentModels` needs inputs not available in the library:
-
-1. every integral object is `DerivedCategory.Q.obj P` for a `FlatRepresentative` complex `P`
-   (flat-term K-flat resolutions in the section presentation), and inverse images of
-   `FlatRepresentative` complexes are `FlatRepresentative`;
-2. a representative formula for the tensorator of `CondensedRing.monoidal_leftDerivedUpperStar`
-   and for `CondensedRing.leftDerivedUpperStarComp` on such complexes, compatible with
-   `pullComplexComparison`;
-3. generation statements: morphisms out of `ordinaryReduction (f^* M)` and out of quotient
-   reductions of signed total tensors are determined by their values on the quotient
-   augmentation generators of unit sections, respectively of tensor generators (needed to
-   compare the existential witnesses `ordinary` of `PullReductionModel`, the chain maps
-   `TensorPresentation.chain` and `TensorComparisonModel.ordinary`).
+Both are derived from the representative normalizations in `DescentModels` by uniqueness:
+every integral object is represented by a flat K-flat complex, the derived compositors and the
+tensorator of `Lg^*` are computed on such representatives, and maps out of quotient reductions
+are determined by their values on quotient augmentation generators. The proofs are
+`pull_comp_coherence_proof` (`NativeProjectionPullCompCoherence`) and
+`pull_tensor_coherence_proof` (`NativeProjectionPullTensorCoherence`).
 -/
 
 @[expose] public noncomputable section
@@ -69,8 +62,8 @@ derived pullback `Lg^*` corresponds to the system tensor pullback.
 Source: blueprint, sec-smooth-purity, paragraph (3)
 (blueprint: lem-sp-complete-projection-reduction-square, proof step 1).
 
-Missing input (see the module docstring): the representative identification of `m.pull g`,
-`(m.tensor T).mu` and `(m.systemPull g).iso` with the canonical scalar-extension comparisons. -/
+Proof: `pull_tensor_coherence_proof`, by uniqueness on flat representatives from the tensor and
+pullback normalizations. -/
 theorem pull_tensor_coherence (m : DescentModels l E) {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     (A B : Integral l E Y) :
     (red l E m Z).map (Functor.OplaxMonoidal.δ (ringedPull l E g) A B) ≫
@@ -80,14 +73,13 @@ theorem pull_tensor_coherence (m : DescentModels l E) {Z Y : Scheme.{u}} (g : Z 
       (m.pull g).hom.app (A ⊗ B) ≫
         (VaryingRing.G (rings l E) (transitions l E) g).map ((m.tensor Y).mu.hom.app (A, B)) ≫
         (m.systemPull g).iso.hom.app ((red l E m Y).obj A, (red l E m Y).obj B) := by
-  sorry
+  exact pull_tensor_coherence_proof m g A B
 
 /-- The pullback reduction comparison is compatible with composition of inverse images.
 Source: blueprint, sec-smooth-purity, paragraph (3)
 (blueprint: lem-sp-complete-projection-reduction-square, proof step 1).
 
-Missing input (see the module docstring): the representative identification of `m.pull` with
-the canonical scalar-extension comparisons. -/
+Proof: `pull_comp_coherence_proof`, by uniqueness from the pullback normalization `pull_model`. -/
 theorem pull_comp_coherence (m : DescentModels l E) {X Z Y : Scheme.{u}} (i : X ⟶ Z)
     (g : Z ⟶ Y) (K : Integral l E Y) :
     (red l E m X).map
@@ -96,7 +88,7 @@ theorem pull_comp_coherence (m : DescentModels l E) {X Z Y : Scheme.{u}} (i : X 
       (m.pull i).hom.app ((ringedPull l E g).obj K) ≫
         (VaryingRing.G (rings l E) (transitions l E) i).map ((m.pull g).hom.app K) ≫
         (VaryingRing.gComp (rings l E) (transitions l E) i g).inv.app ((red l E m Y).obj K) := by
-  sorry
+  exact pull_comp_coherence_proof m i g K
 
 /-- The reconstruction counit is the proper scalar exchange followed by the proper image of
 the open scalar comparison: transpose the defining open/limit and proper/limit formulas and
