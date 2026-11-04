@@ -129,3 +129,9 @@ the composite proof's kernel timeout (~106s). Replaced concrete composite
 rewrites with a generic six-component substitution theorem. The native proof now
 supplies small component equalities independently, and applies the already
 validated adic square as the final input.
+
+2026-11-05 04:30 CST: K5-20261105T042525.log rc=1. Generic component
+substitution is GREEN (1.2s), but its native application still times out in kernel
+checking (~95s). Split four component equalities into independently checked
+lemmas to identify the exact conversion, and separated the final generic-to-native
+predicate cast via exact_mod_proofs.

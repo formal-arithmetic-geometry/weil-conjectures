@@ -84,6 +84,58 @@ lemma projection_nativeOpenSheafTensor_obj_carrier (X : Scheme.{u})
     ((nativeOpenSheafTensor k₀ l X).obj (M, N)).carrier =
       (Mod.tensorLeft N.carrier).obj M.carrier := rfl
 
+/-- Pullback comparison on the carrier of a native tensor. -/
+lemma projection_upperStar_tensor_carrier (M N : ProEtaleWeilSheaf k₀ l Y) :
+    (condensedRealizationUpperStarIso k₀ l g).hom.app
+        ((nativeOpenSheafTensor k₀ l Y).obj (M, N)) =
+      (adicUpperStarCompCondensedModIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).inv.app
+          ((Mod.tensorLeft N.carrier).obj M.carrier) := by
+  have h := condensedRealizationUpperStarIso_hom_app_eq k₀ l g
+    ((nativeOpenSheafTensor k₀ l Y).obj (M, N))
+  simp only [projection_nativeOpenSheafTensor_obj_carrier] at h
+  cast_proofs h
+
+/-- Realization of the native pullback tensor map. -/
+lemma projection_realization_pull_tensor (M N : ProEtaleWeilSheaf k₀ l Y) :
+    (condensedRealization k₀ l Z).map ((nativePullSheafTensor k₀ l g).hom.app (M, N)) =
+      (adicSheafEquivCondensedMod l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.map
+        ((adicUpperStarTensorLeftIso l
+          (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
+            N.carrier).hom.app M.carrier) := by
+  dsimp only [condensedRealization, Functor.comp_map, Endofunctor.IsoAlgebra.forget_map]
+  cast_proofs (adicSheafEquivCondensedMod l
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.congr_map
+      (projection_nativePullSheafTensor_carrier_eq k₀ l g M N)
+
+/-- Tensoring the two carrier pullback comparisons. -/
+lemma projection_upperStar_tensor_hom (M N : ProEtaleWeilSheaf k₀ l Y) :
+    (condensedRealizationUpperStarIso k₀ l g).hom.app M ⊗ₘ
+        (condensedRealizationUpperStarIso k₀ l g).hom.app N =
+      (adicUpperStarCompCondensedModIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).inv.app
+          M.carrier ⊗ₘ
+      (adicUpperStarCompCondensedModIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).inv.app
+          N.carrier := by
+  exact_mod_proofs congrArg₂ (fun p q ↦ p ⊗ₘ q)
+    (condensedRealizationUpperStarIso_hom_app_eq k₀ l g M)
+    (condensedRealizationUpperStarIso_hom_app_eq k₀ l g N)
+
+/-- Realization of the tensor of two native pullbacks. -/
+lemma projection_realization_pulled_tensor (M N : ProEtaleWeilSheaf k₀ l Y) :
+    (condensedRealizationSheafTensorIso k₀ l Z).inv.app
+        ((upperStar k₀ l g).obj M, (upperStar k₀ l g).obj N) =
+      (condensedRelativeTensorIso l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber
+        ((adicUpperStar l (Scheme.Hom.geometricFiberMap g
+          (comp_over g (Spec (CommRingCat.of k₀))))).obj M.carrier)
+        ((adicUpperStar l (Scheme.Hom.geometricFiberMap g
+          (comp_over g (Spec (CommRingCat.of k₀))))).obj N.carrier)).inv := by
+  have h := condensedRealizationSheafTensorIso_inv_eq k₀ l Z
+    ((upperStar k₀ l g).obj M) ((upperStar k₀ l g).obj N)
+  simp only [upperStar, Endofunctor.IsoAlgebra.mapOfNatIso_obj_carrier] at h
+  cast_proofs h
+
 /-- The inverse square is the adic square on the underlying carriers. -/
 lemma condensedRealizationSheafTensor_inverse_square (M N : ProEtaleWeilSheaf k₀ l Y) :
     SheafPullTensorInverseSquare k₀ l g M N := by
@@ -91,37 +143,34 @@ lemma condensedRealizationSheafTensor_inverse_square (M N : ProEtaleWeilSheaf k�
   let E := (adicSheafEquivCondensedMod l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor
   let G := CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f
   let b := adicUpperStarCompCondensedModIso l f
-  refine PullTensorInverseSquare.of_components (upperStar k₀ l g)
-    (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) G
-    (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
-    (nativePullSheafTensor k₀ l g) (condensedRealizationSheafTensorIso k₀ l Y)
-    (condensedRealizationSheafTensorIso k₀ l Z) (condensedRealizationUpperStarIso k₀ l g) M N
-    (G.map (condensedRelativeTensorIso l _ M.carrier N.carrier).inv)
-    (b.inv.app ((Mod.tensorLeft N.carrier).obj M.carrier))
-    (E.map ((adicUpperStarTensorLeftIso l f N.carrier).hom.app M.carrier))
-    (Functor.OplaxMonoidal.δ G
-      ((adicSheafEquivCondensedMod l _).functor.obj M.carrier)
-      ((adicSheafEquivCondensedMod l _).functor.obj N.carrier))
-    (b.inv.app M.carrier ⊗ₘ b.inv.app N.carrier)
-    (condensedRelativeTensorIso l _ ((adicUpperStar l f).obj M.carrier)
-      ((adicUpperStar l f).obj N.carrier)).inv ?_ ?_ ?_ ?_ ?_ ?_ ?_
-  · exact G.congr_map (condensedRealizationSheafTensorIso_inv_eq k₀ l Y M N)
-  · have h := condensedRealizationUpperStarIso_hom_app_eq k₀ l g
-      ((nativeOpenSheafTensor k₀ l Y).obj (M, N))
-    simp only [projection_nativeOpenSheafTensor_obj_carrier] at h
-    cast_proofs h
-  · dsimp only [condensedRealization, Functor.comp_map,
-      Endofunctor.IsoAlgebra.forget_map]
-    cast_proofs E.congr_map (projection_nativePullSheafTensor_carrier_eq k₀ l g M N)
-  · rfl
-  · exact congrArg₂ (fun p q ↦ p ⊗ₘ q)
-      (condensedRealizationUpperStarIso_hom_app_eq k₀ l g M)
-      (condensedRealizationUpperStarIso_hom_app_eq k₀ l g N)
-  · have h := condensedRealizationSheafTensorIso_inv_eq k₀ l Z
-      ((upperStar k₀ l g).obj M) ((upperStar k₀ l g).obj N)
-    simp only [upperStar, Endofunctor.IsoAlgebra.mapOfNatIso_obj_carrier] at h
-    cast_proofs h
-  · cast_proofs adicUpperStar_condensedRelativeTensor_square l f M.carrier N.carrier
+  have hsquare : PullTensorInverseSquare (upperStar k₀ l g)
+      (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) G
+      (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
+      (nativePullSheafTensor k₀ l g) (condensedRealizationSheafTensorIso k₀ l Y)
+      (condensedRealizationSheafTensorIso k₀ l Z) (condensedRealizationUpperStarIso k₀ l g) M N := by
+    refine PullTensorInverseSquare.of_components (upperStar k₀ l g)
+      (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) G
+      (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
+      (nativePullSheafTensor k₀ l g) (condensedRealizationSheafTensorIso k₀ l Y)
+      (condensedRealizationSheafTensorIso k₀ l Z) (condensedRealizationUpperStarIso k₀ l g) M N
+      (G.map (condensedRelativeTensorIso l _ M.carrier N.carrier).inv)
+      (b.inv.app ((Mod.tensorLeft N.carrier).obj M.carrier))
+      (E.map ((adicUpperStarTensorLeftIso l f N.carrier).hom.app M.carrier))
+      (Functor.OplaxMonoidal.δ G
+        ((adicSheafEquivCondensedMod l _).functor.obj M.carrier)
+        ((adicSheafEquivCondensedMod l _).functor.obj N.carrier))
+      (b.inv.app M.carrier ⊗ₘ b.inv.app N.carrier)
+      (condensedRelativeTensorIso l _ ((adicUpperStar l f).obj M.carrier)
+        ((adicUpperStar l f).obj N.carrier)).inv ?_ ?_ ?_ ?_ ?_ ?_ ?_
+    · exact G.congr_map (condensedRealizationSheafTensorIso_inv_eq k₀ l Y M N)
+    · cast_proofs projection_upperStar_tensor_carrier k₀ l g M N
+    · cast_proofs projection_realization_pull_tensor k₀ l g M N
+    · rfl
+    · cast_proofs projection_upperStar_tensor_hom k₀ l g M N
+    · cast_proofs projection_realization_pulled_tensor k₀ l g M N
+    · cast_proofs adicUpperStar_condensedRelativeTensor_square l f M.carrier N.carrier
+  dsimp only [SheafPullTensorInverseSquare]
+  exact_mod_proofs hsquare
 
 /-- The native pullback tensor comparison and the condensed realization tensor comparison
 commute with the pullback comparison. -/
