@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoeffic
 public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalarsStrictArrow
+import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientSliceRealization
 
 /-! # K-flatness of fixed scalar chart coordinates
 
@@ -24,19 +25,18 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The fixed-scalar encoding followed by restriction to a weakly etale chart carries K-flat
 complexes over the constant ring sheaf to K-flat complexes of sheaves of `B`-modules on the
-chart. This is true but not yet formalized.
-Source: Stacks Project, Tags 03CY, 06YN and 03DH.
+chart.
+Source: Stacks Project, Tags 03CY, 06YN, 0E8K and 03DH.
 
-Proof sketch: the fixed-scalar encoding is an exact monoidal equivalence: the sheafified tensor
-product over the constant ring sheaf is the sheafified tensor product of sheaves of `B`-modules
-(compare the private `restrictionTensor` in
-`ProEtaleRestrictedTensorFiniteLocalConstancySupplement`, stated only for finite `B`).
-Monoidal equivalences preserve K-flatness
-(`Functor.kFlat_mapHomologicalComplex_obj_of_isEquivalence`), once `IsKFlatTensor` is
-identified with `kFlat`. Restriction to the weakly etale chart preserves K-flatness: `j_!` is
-exact and faithful on the chart, and the projection formula `j_!(K|_V ⊗ L) ≅ K ⊗ j_! L`
-reduces acyclicity of `K|_V ⊗ L` to that of `K ⊗ j_! L`; the repository only has `j_!` for
-monomorphisms (`ProEtale.localizationLowerShriek`) and no projection formula for it. -/
+Proof: restriction of modules to the slice at the chart preserves K-flatness
+(`SheafOfModules.ringedSite_restriction_exact_kflat`, Tag 0E8K). Sheaves of `B`-modules on
+the chart are identified with modules over the restricted constant ring sheaf by an additive
+equivalence compatible with the sheafified tensor products
+(`proEtaleSliceRealization_tensor`), which carries the chart coordinates to the slice
+restriction (`finiteCoefficientSliceRestrictionRealizationIso`). Such an equivalence preserves
+and reflects the acyclic tensor test
+(`finiteCoefficientSliceRestriction_acyclicTensorTest`), and the acyclic tensor test gives
+K-flatness for quasi-isomorphisms by the symmetry of the tensor product. -/
 theorem finiteCoefficientSliceRestriction_kFlat_of_constant
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
@@ -49,6 +49,7 @@ theorem finiteCoefficientSliceRestriction_kFlat_of_constant
           (.up ℤ)).obj K)) :
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
       (((finiteCoefficientSliceRestriction X B R φ V).mapHomologicalComplex (.up ℤ)).obj K) := by
-  sorry
+  exact ProEt.sheafModule_kFlat_of_acyclicTensorTest B _ _
+    (finiteCoefficientSliceRestriction_acyclicTensorTest X B R φ V K hK _ (Iso.refl _))
 
 end AlgebraicGeometry.Scheme
