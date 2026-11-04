@@ -146,7 +146,6 @@ private theorem normalize_closed
   rw [hγ]
   simp [τ]
 
-set_option linter.unusedVariables false in
 namespace LocallyClosedCoefficientImmersion
 
 private instance modelExtension_full {S X : LocallyClosedCoefficients.{u}}
@@ -174,6 +173,7 @@ private instance modelExtension_faithful {S X : LocallyClosedCoefficients.{u}}
 
 end LocallyClosedCoefficientImmersion
 
+set_option linter.unusedVariables false in
 /-- For a single immersion, the fixed closed-then-open model has the normalized open
 adjunction and the normalized comparison with actual closed direct image.
 

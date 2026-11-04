@@ -65,6 +65,13 @@ def finiteStageIndex {L : Type u} [Field L] [Algebra K L]
     (E₀ : IntermediateField K L) :=
   {E : IntermediateField K L // E₀ ≤ E ∧ FiniteDimensional K E}
 
+instance finiteStageIndexSemilatticeSup {L : Type u} [Field L] [Algebra K L]
+    (E₀ : IntermediateField K L) : SemilatticeSup (finiteStageIndex E₀) :=
+  Subtype.semilatticeSup (fun _ _ hx hy ↦ by
+    let _ := hx.2
+    let _ := hy.2
+    exact ⟨hx.1.trans le_sup_left, inferInstance⟩)
+
 /-- The canonical transition on finite-stage Hom sets.
 Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
 noncomputable def finiteStageHomTransition {L : Type u} [Field L] [Algebra K L]
@@ -129,6 +136,8 @@ end AlgebraicGeometry.Etale.FiniteFieldDescent
 
 namespace AlgebraicGeometry.Etale.FiniteFieldDescent
 
+variable {K : Type u} [Field K] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K))
+
 private theorem finiteStageHomLeg_map {L : Type u} [Field L] [Algebra K L]
     (Λ : Type (u + 1)) [CommRing Λ] {E₀ : IntermediateField K L}
     {P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀)}
@@ -151,6 +160,33 @@ private theorem finiteStageHomTransition_map {L : Type u} [Field L] [Algebra K L
   dsimp only
   rw [← Functor.comp_map, ← NatTrans.naturality_assoc]
   simp
+
+/-- The canonical finite-stage Hom system is colimiting.
+
+Source: Stacks Lemma 09YU (3), with derived internal-Hom comparison and cohomology
+continuity (blueprint: lem-sfb-finite-etale-constructible-hom-descent).
+
+Proof: the finite intermediate fields above E₀ form a directed nonempty system and
+present Y_L as an affine inverse limit of qcqs schemes. Express Hom as degree-zero
+cohomology of derived global sections of RHom(P₀,Q₀). Its source is bounded below:
+P₀ is bounded above and Q₀ bounded below. The affine ind-etale comparison identifies
+its pullback with RHom at each stage and at L, naturally in P₀ and Q₀. Derived etale
+cohomology continuity therefore makes the resulting H⁰ cocone colimiting. Transport
+from H⁰ to Hom using the evaluation adjunction; its naturality fixes the maps to be
+finiteStageHomTransition and finiteStageHomLeg. These canonical maps satisfy identity,
+composition and cocone naturality by coherence of leftDerivedUpperStarComp. Define F
+on the actual Hom sets, choose identity object and vertex equivalences, and apply the
+transported colimit universal property. The construction includes zero objects, the
+empty scheme and L = K. -/
+theorem finiteEtaleConstructibleHomContinuity
+    {L : Type u} [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
+    [Algebra.IsSeparable K L] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (E₀ : IntermediateField K L) (hE₀ : FiniteDimensional K E₀)
+    (P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀))
+    (hP₀ : ctf f Λ P₀) (hQ₀ : ctf f Λ Q₀) :
+    ∃ (H : FiniteStageHomSystem f Λ P₀ Q₀), Nonempty (IsColimit H.c) := by
+  sorry
 
 /-- Finite-stage descent and Hom continuity. The first three clauses are essential surjectivity,
 descent of morphisms, and eventual equality; the last is the filtered-colimit Hom comparison.
