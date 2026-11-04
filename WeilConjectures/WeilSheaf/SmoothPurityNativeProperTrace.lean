@@ -58,6 +58,10 @@ noncomputable abbrev properTraceBaseMap :
   Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))
 
 local instance : IsProper (properTraceBaseMap f).left := ‹IsProper f›
+local instance : IsProper
+    (CondensedRing.traceGeometricFiberOverMap (properTraceBaseMap f)).left :=
+  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)
+    f (comp_over f _) inferInstance
 
 variable {P : Dᵇc(X)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y)⟦Profinite.padicAlgClRingObj l⟧}
@@ -99,10 +103,12 @@ lemma nativeProperTrace_map :
   ((objectProperty k₀ l Y).ι ⋙
     (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor).map_preimage _
 
-/-- The adjunct of the native descended trace is invertible for a smooth proper
-map and an invertible finite-base orientation. -/
-theorem isIso_homEquiv_nativeProperTrace [IsIso γ] (d : ℕ)
-    [SmoothOfRelativeDimension d f]
+/-- The adjunct of the native descended trace is invertible when exceptional
+base change and the finite-base orientation are invertible. -/
+theorem isIso_homEquiv_nativeProperTrace_of_isIso [IsIso γ]
+    [IsIso ((CondensedRing.upperShriekBaseChangeOfMap l (f := properTraceBaseMap f)
+      (f' := CondensedRing.traceGeometricFiberOverMap (properTraceBaseMap f))
+      (Scheme.Hom.isPullback_geometricFiberMap f (comp_over f _)).flip).app N)]
     {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}
     (adj : derivedLowerStar (k₀ := k₀) (l := l) f ⊣ J) :
     IsIso (adj.homEquiv T U (nativeProperTrace f γ T U eT eU)) := by
@@ -124,9 +130,22 @@ theorem isIso_homEquiv_nativeProperTrace [IsIso γ] (d : ℕ)
     (condensedRingObj (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) n _
       (boundedConstructible_condensedCarrier K)
-  have : SmoothOfRelativeDimension d (properTraceBaseMap f).left := ‹_›
-  exact_mod_proofs CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace l
-    (properTraceBaseMap f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ d
+  exact_mod_proofs CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso l
+    (properTraceBaseMap f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ
     ⟨_, hK⟩
+
+/-- The adjunct of the native descended trace is invertible for a smooth proper
+map and an invertible finite-base orientation. -/
+theorem isIso_homEquiv_nativeProperTrace [IsIso γ] (d : ℕ)
+    [SmoothOfRelativeDimension d f]
+    {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}
+    (adj : derivedLowerStar (k₀ := k₀) (l := l) f ⊣ J) :
+    IsIso (adj.homEquiv T U (nativeProperTrace f γ T U eT eU)) := by
+  have : SmoothOfRelativeDimension d (properTraceBaseMap f).left := ‹_›
+  have := CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale l
+    (f := properTraceBaseMap f)
+    (f' := CondensedRing.traceGeometricFiberOverMap (properTraceBaseMap f)) d
+    (Scheme.Hom.isPullback_geometricFiberMap f (comp_over f _)).flip N
+  exact isIso_homEquiv_nativeProperTrace_of_isIso f γ T U eT eU adj
 
 end AlgebraicGeometry.WeilComplex
