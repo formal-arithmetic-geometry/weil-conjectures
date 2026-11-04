@@ -200,3 +200,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - NativeTensorTate's derived-adjunction inference requested an irrelevant underived monoidal instance. Now use an explicitly typed equivalence and its induced derived equivalence's adjunction.
 - DescendedProperUniversality's object normalization now elaborates, but kernel checking times out (62s). Replaced the concrete rewrite of a large Bijective proposition with a generic categorical trace-coordinate transport lemma; the specialization passes the known trace equation and known universal property separately. No heartbeat changes.
 - The 06:34 audit was delayed in git push by server responsiveness, then ran normally. One next audit follows; no DONE.
+
+## 2026-11-05 06:50 +0800 — shifted Hom GREEN; predicate-level trace assembly
+- Audit /home/ubuntu/u9/logs/K4-20261105T064603.log finished rc=1, three built/two failed. NativeHomShift is GREEN (5.0s), including the natural shifted-source internal-Hom comparison. NativeTensorTate now needs only explicit E.functor/E.inverse additivity instances at the derived-equivalence construction; supplied them.
+- The generic trace-coordinate proof still left a 63s kernel timeout in DescendedProperUniversality. Introduced the ordinary transparent predicate Functor.TraceUniversalAt, forming the hom-map over abstract categories, and restated only these new helper declarations through it. Updated the sole native consumer to unfold that predicate before its proof-irrelevance comparison. The assigned K4 theorem's statement is unchanged.
+- This follows the performance guide's predicate-level specialization approach (also successful for K5's normalization); no opaque barrier or heartbeat increase. Next single audit follows. No DONE.

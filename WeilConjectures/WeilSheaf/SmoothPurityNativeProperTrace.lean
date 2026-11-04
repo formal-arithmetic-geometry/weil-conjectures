@@ -136,9 +136,11 @@ theorem isIso_homEquiv_nativeProperTrace_of_isIso [IsIso γ]
     (condensedRingObj (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) n _
       (boundedConstructible_condensedCarrier K)
-  exact_mod_proofs CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso l
+  have hu := CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso l
     (properTraceBaseMap (k₀ := k₀) f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ
     ⟨_, hK⟩
+  dsimp only [Functor.TraceUniversalAt] at hu
+  exact_mod_proofs hu
 
 /-- The adjunct of the native descended trace is invertible for a smooth proper
 map and an invertible finite-base orientation. -/

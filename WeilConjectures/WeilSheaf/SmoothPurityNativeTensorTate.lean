@@ -47,6 +47,8 @@ noncomputable def nativeDerivedTensorTateIso (d : ℤ) :
       constantTwistFunctorCongrIso k₀ l X (inv_mul_cancel b) ≪≫ constantTwistOneIso k₀ l X
   let E : ProEtaleWeilSheaf k₀ l X ≌ ProEtaleWeilSheaf k₀ l X :=
     CategoryTheory.Equivalence.mk F G ef.symm eg
+  have : E.functor.Additive := inferInstanceAs F.Additive
+  have : E.inverse.Additive := inferInstanceAs G.Additive
   let adj : F.mapDerivedCategory ⊣ G.mapDerivedCategory := E.mapDerivedCategory.toAdjunction
   let A := (WeilSheaf.tateTwistSheaf k₀ l X d).obj
   let eH : ihomFunctor k₀ l X A ≅ G :=
