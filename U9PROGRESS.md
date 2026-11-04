@@ -1,0 +1,18 @@
+# K5 progress
+
+2026-11-05: Read the assigned leaf, blueprint fix-prop-projection-formula proof,
+Houyi PRs #2086/#2087, Sheaf route comparison records, and performance guide.
+Merged pr/2086 (82afa10e6), as it restructures the assigned leaf without changing
+its statement. Its sole new projection dependency sorry is
+NativeCondensedRealizationCoherence.comparisonCompatible_derivedCondensedRealization.
+Plan: prove the comparison via its sheaf/total/K-flat localization normalizations,
+using new small helper files. No Lean/lake process run locally; no build yet.
+PR #2087 provides an alternate ordinary adic transfer but uses a transported
+monoidal structure; it does not itself close the native comparison coherence.
+
+The corresponding Sheaf theorem is also unproved: origin/iface-start:
+lean/Sheaf/Paper/NativeProperKFlatPullTensorSquare.lean,
+AlgebraicGeometry.ProEtaleWeilSheaf.native_proper_kflat_pull_tensor_square.
+Its condensed-only analogue is proved, but it does not supply the native square.
+Added a small generic tensor-square representative extensionality helper, ported
+from the surrounding Sheaf proof, for the eventual K-flat normalization proof.
