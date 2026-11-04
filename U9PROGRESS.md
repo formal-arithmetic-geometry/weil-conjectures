@@ -217,3 +217,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - NativeProperTrace needs six geometric-fibre scheme instances and local full-faithfulness witnesses; added them following the already validated direct-trace criterion.
 - Splitting the Tate proof located its 82s kernel timeout precisely in constantTwistDerivedAdjunction. Replaced the induced equivalence construction by direct transport of the two inverse functor isomorphisms, with a generic categorical adjunction constructor. Corrected one line-break field-notation parse error in nativeHomTateIso. No heartbeat raises.
 - C4 fetched read-only at bbf806c5f; encoding not yet green or merged. Next single audit follows; no DONE.
+
+## 2026-11-05 07:05 +0800 — native Tate tensor GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T070103.log finished rc=1, three built/two failed. NativeTensorTate is GREEN (3.5s): transporting the explicit inverse functor isomorphisms avoids the previous 82s kernel timeout.
+- NativeTensorTateShift has one product-naturality goal left; normalized its two identity components explicitly. NativeProperTrace now passes full faithfulness, but its geometric-fibre instance heads need the exact Over.mk spelling and priority. Added those and reduced composed functor objects before exact_mod_proofs in the universal-property specialization.
+- No heartbeat raises or DONE; next single audit follows.

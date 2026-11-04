@@ -28,6 +28,8 @@ namespace AlgebraicGeometry.WeilComplex
 open ProEtale
 open scoped ProEtale.CondensedRing
 
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}}
   [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
@@ -59,28 +61,22 @@ local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
 local instance : LocallyOfFiniteType
-    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
-      (X ↘ Spec (CommRingCat.of k₀)))).hom :=
+    (Over.mk (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
 local instance : QuasiCompact
-    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
-      (X ↘ Spec (CommRingCat.of k₀)))).hom :=
+    (Over.mk (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
 local instance : IsSeparated
-    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
-      (X ↘ Spec (CommRingCat.of k₀)))).hom :=
+    (Over.mk (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 local instance : LocallyOfFiniteType
-    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
-      (Y ↘ Spec (CommRingCat.of k₀)))).hom :=
+    (Over.mk (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
 local instance : QuasiCompact
-    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
-      (Y ↘ Spec (CommRingCat.of k₀)))).hom :=
+    (Over.mk (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
 local instance : IsSeparated
-    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
-      (Y ↘ Spec (CommRingCat.of k₀)))).hom :=
+    (Over.mk (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 
 /-- The given proper morphism, as a morphism over the finite base field. -/
@@ -168,7 +164,7 @@ theorem isIso_homEquiv_nativeProperTrace_of_isIso [IsIso γ]
   have hu := CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso l
     (properTraceBaseMap (k₀ := k₀) f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ
     ⟨_, hK⟩
-  dsimp only [Functor.TraceUniversalAt] at hu
+  dsimp only [Functor.TraceUniversalAt, Functor.comp_obj, ObjectProperty.ι_obj] at hu ⊢
   exact_mod_proofs hu
 
 /-- The adjunct of the native descended trace is invertible for a smooth proper
