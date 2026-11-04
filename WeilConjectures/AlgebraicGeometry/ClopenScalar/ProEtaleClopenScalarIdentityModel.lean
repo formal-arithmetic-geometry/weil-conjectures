@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenDerivedScalarData
+public import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarComputation
 
 /-! # Normalized clopen scalar comparison
 
@@ -76,6 +76,29 @@ theorem clopen_scalar_identity_model
           ((rings.{t, u} j).map_id R)) ≫
         (V.derived ((rings.{t, u} j).obj R)).hom.app ((resD.{t, u} j R).obj
           (DerivedCategory.Q.obj P)) =
-      (resD.{t, u} j R).map ((U.derived R).hom.app (DerivedCategory.Q.obj P)) := by sorry
+      (resD.{t, u} j R).map ((U.derived R).hom.app (DerivedCategory.Q.obj P)) := by
+  apply (cancel_mono ((res.{t, u} j R).mapDerivedCategoryFactors.hom.app P)).1
+  have hV := (V.derived ((rings.{t, u} j).obj R)).hom.naturality
+    ((res.{t, u} j R).mapDerivedCategoryFactors.hom.app P)
+  simp only [Functor.id_map, Functor.comp_obj] at hV
+  simp only [Category.assoc]
+  rw [← hV, V.representative _ _ hiP hif, reassoc_of% (eqToHom_comp_extD_map_comp_computation q
+    ((rings.{t, u} j).map_id R) (((res.{t, u} j R).mapHomologicalComplex (.up ℤ)).obj P)
+    ((res.{t, u} j R).mapDerivedCategoryFactors.hom.app P))]
+  rw [reassoc_of% (hrep (𝟙 R) P hP hf), U.representative R P hP hf, Functor.map_comp_assoc]
+  erw [Functor.mapDerivedCategoryFactors_hom_naturality]
+  simp only [← Functor.map_comp]
+  congr 2
+  congr 1
+  refine HomologicalComplex.hom_ext _ _ (fun k ↦ ?_)
+  simp only [HomologicalComplex.comp_f, HomologicalComplex.eqToHom_f, hdegree (𝟙 R) P k]
+  simp only [id_obj, eqToHom_refl, NatIso.mapHomologicalComplex, mapHomologicalComplexIdIso,
+    Iso.trans_hom, NatTrans.comp_app, NatIso.ofComponents_hom_app, HomologicalComplex.comp_f,
+    NatTrans.mapHomologicalComplex_app_f, HomologicalComplex.Hom.isoOfComponents_hom_f,
+    Iso.refl_hom, Category.comp_id, Category.id_comp, map_comp, mapHomologicalComplex_map_f, map_id]
+  erw [Category.comp_id]
+  have h := hordinary R (P.X k)
+  simp only [eqToHom_refl, Category.id_comp] at h
+  exact h
 
 end AlgebraicGeometry.Scheme.ProEt.ClopenScalar
