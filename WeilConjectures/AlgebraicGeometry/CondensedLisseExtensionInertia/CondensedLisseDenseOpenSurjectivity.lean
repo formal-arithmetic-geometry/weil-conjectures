@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExtension
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,6 +45,48 @@ theorem dense_open_pullbackPathHom_surjective
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ U)
     (σ : Aut (fiber (b ≫ _j))) :
     ∃ τ : Aut (fiber b), pullbackPathIso _j τ = σ := by
-  sorry
+  have : IsOpenImmersion _j := by
+    subst _hj
+    have : IsOpenImmersion _j₀.left := by
+      rw [_hj₀]
+      infer_instance
+    have : IsOpenImmersion
+        ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map _j₀).left :=
+      inferInstanceAs (IsOpenImmersion
+        (pullback.map _ _ _ _ _j₀.left (𝟙 _) (𝟙 _) (by simp) (by simp)))
+    infer_instance
+  have : Nonempty U := ⟨b (IsLocalRing.closedPoint Ω)⟩
+  have : Nonempty C := ⟨_j (b (IsLocalRing.closedPoint Ω))⟩
+  have := SmoothOfRelativeDimension.smooth 1
+    (ProjectiveLine (Spec (.of D.k₀)) ↘ Spec (.of D.k₀))
+  have : IrreducibleSpace (pullback (C := Scheme.{u})
+      (ProjectiveLine (Spec (.of D.k₀)) ↘ Spec (.of D.k₀))
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) :=
+    (Scheme.homeoOfIso ((IsPullback.of_hasPullback _ _).isoIsPullback _ _
+      (ProjectiveSpace.isPullback_map _ _)).symm).irreducibleSpace_iff.1 inferInstance
+  have : ConnectedSpace C := connectedSpace_of_isOpenImmersion
+    (_eC.hom ≫ pullback.map (C₀.ι ≫ ProjectiveLine (Spec (.of D.k₀)) ↘ Spec (.of D.k₀))
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+      (ProjectiveLine (Spec (.of D.k₀)) ↘ Spec (.of D.k₀))
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) C₀.ι (𝟙 _) (𝟙 _) (by simp) (by simp))
+  have : IsRegular C := IsRegular.of_smooth (_eC.hom ≫ pullback.snd _ _)
+  have : IsLocallyNoetherian C :=
+    LocallyOfFiniteType.isLocallyNoetherian (_eC.hom ≫ pullback.snd _ _)
+  have := IsRegular.irreducibleSpace C
+  have := connectedSpace_of_isOpenImmersion _j
+  obtain ⟨GU, _, _⟩ := exists_isFundamentalGroup b
+  obtain ⟨GC, _, _⟩ := exists_isFundamentalGroup (b ≫ _j)
+  obtain ⟨g', rfl⟩ := (PreGaloisCategory.toAut_bijective (fiber (b ≫ _j)) GC).2 σ
+  obtain ⟨g, rfl⟩ :=
+    fundamentalGroupMap_surjective_of_isRegular _j (pullbackFiberIso _j b) GU GC g'
+  refine ⟨PreGaloisCategory.toAut (fiber b) GU g, ?_⟩
+  ext P x
+  obtain ⟨y, rfl⟩ : ∃ y, (pullbackFiberIso _j b).hom.app P y = x :=
+    ⟨(pullbackFiberIso _j b).inv.app P x,
+      ConcreteCategory.congr_hom ((pullbackFiberIso _j b).inv_hom_id_app P) x⟩
+  simp only [pullbackPathIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, ConcreteCategory.comp_apply]
+  rw [Iso.hom_inv_id_app_apply, PreGaloisCategory.toAut_hom_app_apply]
+  exact (fundamentalGroupMap_smul (pullbackFiberIso _j b) GU GC g P y).symm
 
 end AlgebraicGeometry.ProEtale.CondensedLisseExtensionInertia
