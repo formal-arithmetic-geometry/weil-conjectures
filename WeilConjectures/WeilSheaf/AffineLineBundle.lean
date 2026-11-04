@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
+public import WeilConjectures.WeilSheaf.HomotopyInvariance
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.VerdierDual
@@ -138,8 +139,37 @@ to pass from `Λ_X` to all `K`, smooth base change and a projection formula for 
 complexes; none of these is formalized, so it is left with `sorry`. -/
 theorem isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
     (K : WeilComplex k₀ l X) :
-    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) :=
-  sorry
+    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) := by
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k₀))
+  have : IsNoetherian X := ⟨⟩
+  -- the reduced closed subscheme `r : X_red ⟶ X`, with empty open complement `j`
+  let I := Scheme.IdealSheafData.vanishingIdeal (⊤ : TopologicalSpace.Closeds X)
+  let r := I.subschemeι
+  let : I.subscheme.Over (Spec (CommRingCat.of k₀)) := ⟨r ≫ X ↘ Spec (CommRingCat.of k₀)⟩
+  have : r.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : LocallyOfFiniteType (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (r ≫ X ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiCompact (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiCompact (r ≫ X ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiSeparated (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiSeparated (r ≫ X ↘ Spec (CommRingCat.of k₀)))
+  let j := (⊥ : X.Opens).ι
+  have : IsEmpty (⊥ : X.Opens).toScheme := ⟨fun x ↦ x.2⟩
+  have hr : Set.range r = (⊤ : TopologicalSpace.Closeds X) := by simp [r, I]
+  have hc : IsCompl (Set.range r.base) (Set.range j.base) := by
+    rw [Set.range_eq_empty j.base]
+    rw [show Set.range r.base = Set.univ by simpa using hr]
+    exact isCompl_top_bot
+  -- `K` is the direct image of its restriction to `X_red`
+  obtain ⟨M, ⟨e⟩⟩ := derivedLowerStar_essImage_of_isZero r j hc K (isZero_of_isEmpty _)
+  have := isIso_unit_app_derivedLowerStar_obj π s hπ r M
+    fun Y' _ π' s' _ hπ' _ _ _ ↦ isIso_unit_app_of_isClosedImmersion_of_isReduced ⊤ I.subscheme r
+      (Set.subset_univ _) Y' π' s' hπ' M
+  exact (upperStarDerivedLowerStarAdjunction π).unit.isoLocus.prop_of_iso e this
+
 
 /-- **The Thom isomorphism from the affine-line adjunction and homotopy invariance.** If `Rπ₀!` is
 left adjoint to `P ↦ π^*(P(1)[2])` and the unit of `π^* ⊣ Rπ_*` is an isomorphism, then
