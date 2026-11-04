@@ -7,8 +7,12 @@ module
 import all WeilConjectures.WeilSheaf.ProperProjectionFormula
 import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoherence
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquareOfTotal
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedCoherenceOfSquare
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorSquareOfSheaf
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorCore
 import all WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
 import all WeilConjectures.WeilSheaf.Native.Projection.SheafTensorUnit
 import Lean.Util.CollectAxioms
