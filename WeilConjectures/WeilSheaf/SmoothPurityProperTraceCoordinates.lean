@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityProperRelativeTrace
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # Proper trace in the levelwise pullback coordinates
@@ -53,7 +54,8 @@ lemma boundedConstructibleBaseChangeOfMap_inv_app_hom
     apply Iso.ext
     change ((boundedConstructibleBaseChangeOfMap l sq.toCommSq).app P).hom = _
     simp only [boundedConstructibleBaseChangeOfMap, NearbyCyclesModel.liftExchange_app_hom]
-    rfl
+    exact_mod_proofs (Eq.refl
+      ((baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq).app P.obj))
   exact congrArg Iso.inv he
 
 variable {P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧}
@@ -78,10 +80,10 @@ lemma baseChangedProperTrace_levelwise :
     Functor.isoWhiskerRight_inv, Functor.whiskerRight_app, Functor.isoWhiskerLeft_inv,
     Functor.whiskerLeft_app, Iso.symm_inv, Category.assoc]
   rw [← NatTrans.naturality]
+  have hbc := boundedConstructibleBaseChangeOfMap_inv_app_hom l f f' sq P
   simp only [baseChangedProperTrace, ObjectProperty.FullSubcategory.comp_hom,
-    ObjectProperty.FullSubcategory.id_hom, Category.comp_id,
-    boundedConstructibleBaseChangeOfMap_inv_app_hom]
-  rfl
+    ObjectProperty.FullSubcategory.id_hom, boundedConstructibleUpperStarOfMap_map,
+    ObjectProperty.homMk_hom, Category.comp_id, Category.assoc, hbc]
 
 /-- The base-changed proper trace is universal in the exact-pullback coordinates
 when its exceptional base-change component is invertible. -/
