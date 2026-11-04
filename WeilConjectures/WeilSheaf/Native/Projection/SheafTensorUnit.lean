@@ -61,7 +61,7 @@ lemma tensorπ_homEquiv_adicUpperStarTensorLeftIso (M N : AdicSheaf l Y) :
     adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
   rw [← (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) f).unit_naturality_assoc,
     ← Functor.map_comp, map_tensorπ_adicUpperStarTensorLeftIso_hom, Functor.map_comp]
-  rw [← Category.assoc, Adjunction.unit_app_tensor_comp_map_δ]
+  rw [Adjunction.unit_app_tensor_comp_map_δ_assoc]
   rfl
 
 end AlgebraicGeometry.ProEtale
@@ -95,10 +95,10 @@ lemma tensorObjπ_homEquiv_δ
         (Mod.tensorObjπ ((upperStar Λ f).obj M) ((upperStar Λ f).obj N)) := by
   rw [upperStarLowerStarAdjunction_homEquiv_hom]
   rw [← (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit_naturality_assoc,
-    ← Functor.map_comp, Category.assoc, map_tensorObjπ_upperStarUnitHom_δ_hom,
+    ← Functor.map_comp, map_tensorObjπ_upperStarUnitHom_δ_hom,
     Functor.map_comp, Functor.map_comp]
-  rw [← Category.assoc, Adjunction.unit_app_tensor_comp_map_δ]
-  rw [Functor.LaxMonoidal.μ_natural_assoc,
+  rw [Adjunction.unit_app_tensor_comp_map_δ_assoc]
+  rw [← Functor.LaxMonoidal.μ_natural_assoc,
     upperStarLowerStarAdjunction_unit_app_hom,
     upperStarLowerStarAdjunction_unit_app_hom, tensorHom_comp_tensorHom_assoc]
 

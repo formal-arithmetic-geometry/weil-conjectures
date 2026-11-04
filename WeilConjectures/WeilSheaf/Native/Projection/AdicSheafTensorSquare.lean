@@ -123,11 +123,11 @@ lemma adicUpperStar_condensedRelativeTensor_square (M N : AdicSheaf l Y) :
   apply ((CondensedRing.upperStarLowerStarAdjunction
     (Profinite.padicAlgClRingObj l) f).homEquiv _ _).injective
   rw [Adjunction.homEquiv_naturality_left, homEquiv_adicUpperStarCompCondensedModIso_inv_comp,
-    Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_naturality_right]
+    Adjunction.homEquiv_naturality_right]
   apply Mod.hom_ext
   apply (cancel_epi (Mod.tensorObjπ ((adicSheafEquivCondensedMod l Y).functor.obj M)
     ((adicSheafEquivCondensedMod l Y).functor.obj N))).1
-  simp only [Mod.comp_hom', Category.assoc,
+  simp only [Functor.map_comp, Mod.comp_hom', Category.assoc,
     adicLowerStarCompCondensedModIso_hom_app_hom, Category.comp_id,
     CondensedRing.lowerStar_map_hom]
   rw [tensorObjπ_condensedRelativeTensorIso_inv_hom_assoc]
@@ -140,10 +140,11 @@ lemma adicUpperStar_condensedRelativeTensor_square (M N : AdicSheaf l Y) :
     Functor.map_comp, Functor.map_comp, ← Functor.LaxMonoidal.μ_natural_assoc,
     lowerStarForgetAb_tensor_assoc]
   rw [CondensedRing.tensorObjπ_homEquiv_δ_assoc]
-  rw [← Functor.map_comp, ← Functor.map_comp, Mod.tensorObjπ_tensorHom_hom_assoc,
-    tensorObjπ_condensedRelativeTensorIso_inv_hom, Functor.map_comp, Functor.map_comp,
-    Functor.LaxMonoidal.μ_natural_assoc, ← tensorHom_comp_tensorHom_assoc,
-    adicUpperStarCompCondensedModIso_unit_hom, adicUpperStarCompCondensedModIso_unit_hom]
+  conv_rhs =>
+    rw [← Functor.map_comp, ← Functor.map_comp, Mod.tensorObjπ_tensorHom_hom_assoc,
+      tensorObjπ_condensedRelativeTensorIso_inv_hom, Functor.map_comp, Functor.map_comp,
+      ← Functor.LaxMonoidal.μ_natural_assoc, tensorHom_comp_tensorHom_assoc,
+      adicUpperStarCompCondensedModIso_unit_hom, adicUpperStarCompCondensedModIso_unit_hom]
   rfl
 
 end AlgebraicGeometry.ProEtale

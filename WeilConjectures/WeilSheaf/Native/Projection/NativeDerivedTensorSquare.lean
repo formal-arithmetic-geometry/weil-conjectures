@@ -111,6 +111,7 @@ lemma condensedRealizationTensor_pull_square_Q
     (by simpa only [Iso.refl_hom, NatTrans.id_app, Category.id_comp] using hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (condensedRealizationTotalTensor_pull_square k₀ l g P T) mZ rfl
+  simp only [Iso.refl_hom, NatTrans.id_app, Category.id_comp] at hmU'
   have hmZ : mZ.hom = (condensedRealizationTensor k₀ l Y).hom.app
       (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
     (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ F.mapDerivedCategoryFactors.hom.app T) ≫
@@ -154,7 +155,9 @@ lemma condensedRealizationTensor_pull_square
     (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
   let c : MonoidalCategory.tensor _ ⋙ R.mapDerivedCategory ≅
       R.mapDerivedCategory.prod R.mapDerivedCategory ⋙ MonoidalCategory.tensor _ :=
-    Functor.uncurry.mapIso (asIso R.mapDerivedCategoryTensorComparison)
+    NatIso.ofComponents
+      (fun MN ↦ asIso ((R.mapDerivedCategoryTensorComparison.app MN.1).app MN.2))
+      (fun fg ↦ R.projection_mapDerivedCategoryTensorComparison_naturality fg.1 fg.2)
   exact Adjunction.tensorSquare_of_representatives DerivedCategory.Q.obj
     (NativeIsKFlat k₀ l Y) (native_two_sided_kflat_representatives k₀ l Y)
     (nativeOpenPull k₀ l g) (derivedCondensedRealization k₀ l Z)

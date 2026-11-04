@@ -31,7 +31,7 @@ this is `CategoryTheory.Adjunction.ComparisonCompatible`, the hypothesis of
 
 universe u
 
-open CategoryTheory
+open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
