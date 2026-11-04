@@ -81,7 +81,7 @@ noncomputable def nativeHomSingleComplexIso (A : ProEtaleWeilSheaf k₀ l X) :
         (DerivedCategory.Q.map g.hom)) ≫ (M.model P I'.obj I'.property).hom =
       (M.model P I.obj I.property).hom ≫ DerivedCategory.Q.map
         (CochainComplex.bifunctorHomMapRight (H := ihomBifunctor k₀ l X) (K := P) g.hom) := by
-      simpa only [Functor.map_id, op_id, CochainComplex.bifunctorHomMapLeft_id,
+      simpa only [CategoryTheory.Functor.map_id, op_id, CochainComplex.bifunctorHomMapLeft_id,
         Category.id_comp] using M.naturality P P I.obj I'.obj I.property I'.property
           (𝟙 P) g.hom
     apply (cancel_mono (F.rightDerivedFunctorObjQIso I'.obj).hom).mp

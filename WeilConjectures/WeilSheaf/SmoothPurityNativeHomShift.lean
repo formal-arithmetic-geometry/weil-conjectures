@@ -61,7 +61,7 @@ private noncomputable def traceHomModelIso
     (fun I ↦ (nativeDerivedClosedComparison k₀ l X).homModels.weilRepresentatives.model
       P I.obj I.property)
     (fun {I I'} g ↦ by
-      simpa only [Functor.map_id, op_id, CochainComplex.bifunctorHomMapLeft_id,
+      simpa only [CategoryTheory.Functor.map_id, op_id, CochainComplex.bifunctorHomMapLeft_id,
         Category.id_comp] using
         (nativeDerivedClosedComparison k₀ l X).homModels.weilRepresentatives.naturality
           P P I.obj I'.obj I.property I'.property (𝟙 P) g.hom)

@@ -54,7 +54,8 @@ lemma boundedConstructibleBaseChangeOfMap_inv_app_hom
     apply Iso.ext
     change ((boundedConstructibleBaseChangeOfMap l sq.toCommSq).app P).hom = _
     simp only [boundedConstructibleBaseChangeOfMap, NearbyCyclesModel.liftExchange_app_hom]
-    exact_mod_proofs (Eq.refl
+    dsimp only [Iso.app_hom, asIso_hom]
+    cast_proofs (Eq.refl
       ((baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq).app P.obj))
   exact congrArg Iso.inv he
 
@@ -83,7 +84,7 @@ lemma baseChangedProperTrace_levelwise :
   have hbc := boundedConstructibleBaseChangeOfMap_inv_app_hom l f f' sq P
   simp only [baseChangedProperTrace, ObjectProperty.FullSubcategory.comp_hom,
     ObjectProperty.FullSubcategory.id_hom, boundedConstructibleUpperStarOfMap_map,
-    ObjectProperty.homMk_hom, Category.comp_id, Category.assoc, hbc]
+    ObjectProperty.homMk_hom, Category.comp_id, Category.id_comp, Category.assoc, hbc]
 
 /-- The base-changed proper trace is universal in the exact-pullback coordinates
 when its exceptional base-change component is invertible. -/

@@ -137,10 +137,14 @@ local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :
 noncomputable def finiteBaseNativeDescentUnitIso :
     letI := CondensedRing.isMonoidal_boundedConstructible l
       (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+    letI := ObjectProperty.fullMonoidalSubcategory
+      (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l) X))
     (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj (𝟙_ _) ≅
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X) :=
   letI := CondensedRing.isMonoidal_boundedConstructible l
     (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+  letI := ObjectProperty.fullMonoidalSubcategory
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l) X))
   ObjectProperty.isoMk _
     ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.preimageIso
       ((finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := X)).app (𝟙_ _) ≪≫

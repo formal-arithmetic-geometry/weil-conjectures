@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.CategoryTheory.Whiskering
+public import Mathlib.CategoryTheory.EssentialImage
 
 /-! # Descent of natural isomorphisms along full essentially surjective functors -/
 

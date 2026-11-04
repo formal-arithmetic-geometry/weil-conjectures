@@ -30,6 +30,8 @@ namespace AlgebraicGeometry.WeilComplex
 open ProEtale
 open scoped ProEtale.CondensedRing
 
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}
   [X.Over (Spec (CommRingCat.of k₀))]
@@ -69,7 +71,10 @@ noncomputable def finiteBaseNativeDescentShiftedSheafIso
           (X ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.commShiftIso n).app _ ≪≫
         (shiftFunctor _ n).mapIso (derivedEquivCondensedSingleIso G M α).symm ≪≫
         (((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.commShiftIso n).app
-          (WeilSheaf.toComplex.obj G).obj).symm))
+          (WeilSheaf.toComplex.obj G).obj).symm ≪≫
+        (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.mapIso
+          (((objectProperty k₀ l X).ι.commShiftIso n).app
+            (WeilSheaf.toComplex.obj G)).symm))
 
 local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
