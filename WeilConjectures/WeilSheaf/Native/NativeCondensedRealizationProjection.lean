@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyFiniteCoefficientRingRealization
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
 import WeilConjectures.AlgebraicGeometry.CondensedQbarCoefficientConstruction
+import WeilConjectures.SixFunctors.ProEtale.Adic.BoundedConstructibleCondensedComparison
 
 /-!
 # Constructibility and the proper projection formula for the condensed realization
@@ -23,11 +24,6 @@ Consequently, for a proper morphism `g : Z ⟶ Y` over `k₀`, the projection ma
 isomorphism on condensed realizations of Weil complexes
 (`AlgebraicGeometry.ProEtaleWeilSheaf.isIso_projectionMap_derivedCondensedRealization`), by the
 proper projection formula over `k̄`.
-
-On the way, the normalized coefficient isomorphism `nativeModuleCoefficientIso` (chosen from
-`locallyFiniteCoefficientRing_realization`) is identified with the coefficient isomorphism
-`condensedRingObjIsoForgetAb` underlying `adicSheafEquivCondensedMod`
-(`AlgebraicGeometry.ProEtale.nativeModuleCoefficientIso_eq_condensedRingObjIsoForgetAb`).
 -/
 
 @[expose] public section
@@ -38,94 +34,6 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
-
-/-- On the finite subextension `E`, the field-diagram comparison of the condensed algebraic
-closure is the continuous chart comparison. -/
-private lemma fieldDiagramIso_hom_app_eq_chartComparison (l : ℕ) [Fact l.Prime]
-    (T : Scheme.{u}) (E : PadicAlgCl.FiniteIntermediateField l) :
-    (CondensedQbarCoefficientRealization.fieldDiagramIso l T).hom.app E =
-      chartComparison T E := by
-  unfold CondensedQbarCoefficientRealization.fieldDiagramIso
-  change (CondensedQbarCoefficientRealization.finiteFieldComparisonIso E l T).hom.hom = _
-  let adj := pointUpperStarLowerStarAdjunction.comp
-    (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ T))
-  apply (adj.homEquiv _ _).injective
-  change adj.homEquiv _ _ _ = adj.homEquiv _ _ ((adj.homEquiv _ _).symm _)
-  rw [Equiv.apply_symm_apply]
-  ext S f
-  exact CondensedQbarCoefficientRealization.finiteFieldComparison_test E l T S.unop f.down
-
-/-- The leg at `E` of the condensed algebraic closure, followed by the comparison with the
-native constant sheaf, is the inclusion of `E`-valued functions on sections. -/
-private lemma padicAlgClSheafCocone_ι_app_comp_hom_app_down (ℓ : ℕ) [Fact ℓ.Prime]
-    (T : Scheme.{u}) (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (V : T.ProEtᵒᵖ)
-    (s : ((sheafCompose (Scheme.ProEt.topology T)
-      (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-        (continuousMapRingSheaf T E)).obj.obj V) (x : V.unop.left) :
-    (((((padicAlgClSheafCocone T ℓ).ι.app E ≫
-      padicAlgClSheafToAdicConstantSheaf T ℓ).hom.app V) s).down.1 x) =
-        (s.down x : PadicAlgCl ℓ) := by
-  let J := Scheme.ProEt.topology T
-  let R := padicSubfieldSheaf T ℓ E.1
-  let RAb := (sheafCompose J (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R
-  have hu : (Sheaf.sheafifyRingPresheafIso J R).inv.hom = toSheafify J RAb.obj := by
-    change (sheafToPresheaf J Ab.{u + 1}).map
-      (inv ((sheafificationAdjunction J Ab.{u + 1}).counit.app RAb)) = _
-    rw [Functor.map_inv]
-    exact (sheafificationAdjunction J Ab.{u + 1}).inv_counit_map
-  have hf : toSheafify J (padicAlgClRingPresheaf T ℓ ⋙ forget₂ RingCat Ab) ≫
-      (padicAlgClSheafToAdicConstantSheaf T ℓ).hom =
-        padicAlgClPresheafToAdicConstantSheaf T ℓ := by
-    exact ((sheafificationAdjunction J Ab.{u + 1}).homEquiv _ _).apply_symm_apply _
-  change (((((padicSubfieldSheafToPadicAlgClSheaf T ℓ E.1) ≫
-    padicAlgClSheafToAdicConstantSheaf T ℓ).hom.app V) s).down.1 x) = _
-  unfold padicSubfieldSheafToPadicAlgClSheaf continuousMapRingSheafToPadicAlgClSheaf
-    Sheaf.sheafComposeToSheafify
-  change ((((((Sheaf.sheafifyRingPresheafIso J R).inv.hom ≫ _) ≫
-    (padicAlgClSheafToAdicConstantSheaf T ℓ).hom).app V) s).down.1 x) = _
-  rw [hu, Category.assoc, ← toSheafify_naturality_assoc, hf]
-  rfl
-
-/-- The normalized coefficient isomorphism `nativeModuleCoefficientIso`, chosen from
-`locallyFiniteCoefficientRing_realization`, is the coefficient isomorphism
-`condensedRingObjIsoForgetAb` of the condensed model `adicSheafEquivCondensedMod`: both are
-normalized on every finite subextension, and the condensed algebraic closure is the colimit of
-these subextensions. -/
-theorem nativeModuleCoefficientIso_eq_condensedRingObjIsoForgetAb (l : ℕ) [Fact l.Prime]
-    (T : Scheme.{u}) :
-    nativeModuleCoefficientIso l T = condensedRingObjIsoForgetAb l T := by
-  apply Iso.ext
-  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint T) :=
-    (pointUpperStarLowerStarAdjunction.comp
-      (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ T))).leftAdjoint_preservesColimits
-  apply (isColimitOfPreserves (upperStarFromPoint T)
-    (Profinite.isColimitPadicAlgClRingObjCocone l)).hom_ext
-  intro E
-  change (upperStarFromPoint T).map (Profinite.padicSubfieldRingObjToPadicAlgCl l E) ≫
-    (nativeModuleCoefficientIso l T).hom =
-      (upperStarFromPoint T).map (Profinite.padicSubfieldRingObjToPadicAlgCl l E) ≫
-        (condensedRingObjIsoForgetAb l T).hom
-  have hfac :
-      (upperStarFromPoint T).map (Profinite.padicSubfieldRingObjToPadicAlgCl l E) ≫
-        (condensedRingObjIsoForgetAb l T).hom = chartComparison T E ≫
-          (padicAlgClSheafCocone T l).ι.app E ≫
-            padicAlgClSheafToAdicConstantSheaf T l := by
-    change (upperStarFromPoint T).map (Profinite.padicSubfieldRingObjToPadicAlgCl l E) ≫
-      ((CondensedQbarCoefficientRealization.globalCoefficientIso l T).hom.hom ≫
-        padicAlgClSheafToAdicConstantSheaf T l) = _
-    rw [← Category.assoc,
-      CondensedQbarCoefficientRealization.globalCoefficientIso_fac,
-      fieldDiagramIso_hom_app_eq_chartComparison, Category.assoc]
-  rw [hfac]
-  ext V s
-  apply ULift.ext
-  apply Subtype.ext
-  apply ContinuousMap.ext
-  intro x
-  rw [(locallyFiniteCoefficientRing_realization l).choose_spec.2.1 T E V s x]
-  exact (padicAlgClSheafCocone_ι_app_comp_hom_app_down l T E V
-    ((chartComparison T E).hom.app V s) x).symm
 
 /-- Forgetting the `ℚ̄_ℓ`-linear structure of an `ℓ`-adic sheaf and transporting along the
 normalized coefficient isomorphism is the condensed model functor. -/
