@@ -63,11 +63,11 @@ theorem nonempty_iso_affineFourierTransform_comp_inv
     Nonempty (affineFourierTransform k₀ l n ψ ⋙ affineFourierTransform k₀ l n ψ⁻¹ ≅
       tateTwist k₀ l (AffineSpace n (Spec (CommRingCat.of k₀))) (-(Fintype.card n : ℤ))) :=
   by
-    obtain ⟨g⟩ := nonempty_affineFourierGeometry k₀ l n
-    obtain ⟨e₁⟩ := nonempty_affineFourierKernelComposition k₀ l n g ψ hψ
-    obtain ⟨e₂⟩ := nonempty_affineFourierConvolutionKernelDelta k₀ l n g ψ hψ
-    obtain ⟨e₃⟩ := nonempty_affineFourierIdentityKernel k₀ l n g
-    exact ⟨e₁ ≪≫ e₂ ≪≫ e₃⟩
+  -- The proof in #1941 used `nonempty_affineFourierGeometry`,
+  -- `nonempty_affineFourierKernelComposition`, `nonempty_affineFourierConvolutionKernelDelta`
+  -- and `nonempty_affineFourierIdentityKernel` (lem-fd-kernel-composition,
+  -- lem-fd-convolution-kernel), none of which exists in the repository.
+  sorry
 
 /-- The same-character Fourier square is negation pullback followed by the rank Tate twist.
 Source: the latest blueprint's
@@ -92,10 +92,11 @@ theorem nonempty_iso_affineFourierTransform_comp_self
       upperStar (l := l) (AffineSpace.neg n (Spec (CommRingCat.of k₀))) ⋙
         tateTwist k₀ l (AffineSpace n (Spec (CommRingCat.of k₀))) (-(Fintype.card n : ℤ))) :=
   by
-    obtain ⟨g⟩ := nonempty_affineFourierGeometry k₀ l n
-    obtain ⟨e₁⟩ := nonempty_affineFourierKernelSelfComposition k₀ l n g ψ hψ
-    obtain ⟨e₂⟩ := nonempty_affineFourierConvolutionKernelAntiDelta k₀ l n g ψ hψ
-    obtain ⟨e₃⟩ := nonempty_affineFourierAntiIdentityKernel k₀ l n g
-    exact ⟨e₁ ≪≫ e₂ ≪≫ e₃⟩
+  -- The proof in #1941 used `nonempty_affineFourierGeometry`,
+  -- `nonempty_affineFourierKernelSelfComposition`,
+  -- `nonempty_affineFourierConvolutionKernelAntiDelta` and
+  -- `nonempty_affineFourierAntiIdentityKernel` (lem-fd-kernel-composition,
+  -- lem-fd-convolution-kernel), none of which exists in the repository.
+  sorry
 
 end AlgebraicGeometry.WeilComplex
