@@ -149,6 +149,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+set_option linter.unusedSectionVars false in
 /-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k` and a finite discrete
 ring `T` in which `ℓ` is nilpotent, the derived pushforward along a morphism of separated
 `k`-schemes of finite type carries bounded constructible complexes of `T`-sheaves to bounded
@@ -280,6 +281,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+set_option linter.unusedSectionVars false in
 /-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k` and the closed unit
 ball `O` of a finite extension `E` of `ℚ_ℓ`, the derived pushforward along a morphism of separated
 `k`-schemes of finite type carries bounded constructible complexes of `O`-sheaves to bounded
