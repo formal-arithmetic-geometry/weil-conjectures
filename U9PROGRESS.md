@@ -271,3 +271,6 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Audit /home/ubuntu/u9/logs/K4-20261105T072419.log finished rc=1, two built/one failed. NativeDualizingDescent is GREEN (6.1s), including arbitrary open restriction and compactification assembly. Explicitly typing the last open pullback resolves the measured 11s unification timeout.
 - AbsoluteDescent is now reached and reports one ordinary mismatch: smoothness of the structural morphism must be rewritten through Over.mkIdTerminal_from_left. Applied the same normalization already used by the validated concentration helper.
 - No heartbeat raises or DONE; next audit follows.
+
+## 2026-11-05 07:27 +0800 — structural smoothness normalization
+- Audit /home/ubuntu/u9/logs/K4-20261105T072525.log reaches only the same smoothness instance: the terminal-arrow rewrite leaves Over.mk.left and Over.mk.hom projections. Added their explicit simp lemmas. No other AbsoluteDescent error was reported; next audit follows.

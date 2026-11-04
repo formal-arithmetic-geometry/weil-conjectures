@@ -60,7 +60,7 @@ theorem nonempty_shriekRightAdjoint_adicConstant_descendedTate_iso
   obtain ⟨e⟩ := nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso adj
   have : SmoothOfRelativeDimension d
       (Over.mkIdTerminal.from (Over.mk (X ↘ Spec (CommRingCat.of k₀)))).left := by
-    simpa only [Over.mkIdTerminal_from_left] using
+    simpa only [Over.mkIdTerminal_from_left, Over.mk_left, Over.mk_hom] using
       ‹SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))›
   exact ⟨R.mapIso finiteBaseNativeDescentUnitIso.symm ≪≫ e ≪≫
     (finiteBaseNativeDescent (k₀ := k₀) (X := X)).mapIso
