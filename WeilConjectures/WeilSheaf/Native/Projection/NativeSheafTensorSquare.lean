@@ -70,6 +70,20 @@ lemma condensedRealizationUpperStarIso_hom_eq :
     (adicUpperStarCompCondensedModIso l
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
 
+/-- The carrier formula with homogeneous source and target. -/
+lemma projection_nativePullSheafTensor_carrier_eq (M N : ProEtaleWeilSheaf k₀ l Y) :
+    (((nativePullSheafTensor k₀ l g).hom.app (M, N)).hom.f) =
+      (adicUpperStarTensorLeftIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
+          N.carrier).hom.app M.carrier := by
+  exact eq_of_heq (nativePullSheafTensor_hom_app_hom_f k₀ l g M N)
+
+/-- The native tensor has the relative tensor as carrier. -/
+lemma projection_nativeOpenSheafTensor_obj_carrier (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] (M N : ProEtaleWeilSheaf k₀ l X) :
+    ((nativeOpenSheafTensor k₀ l X).obj (M, N)).carrier =
+      (Mod.tensorLeft N.carrier).obj M.carrier := rfl
+
 /-- The inverse square is the adic square on the underlying carriers. -/
 lemma condensedRealizationSheafTensor_inverse_square (M N : ProEtaleWeilSheaf k₀ l Y) :
     SheafPullTensorInverseSquare k₀ l g M N := by
@@ -78,8 +92,9 @@ lemma condensedRealizationSheafTensor_inverse_square (M N : ProEtaleWeilSheaf k�
     condensedRealizationUpperStarIso_hom_eq]
   simp only [Functor.whiskerLeft_app, condensedRealization, Functor.comp_map, Functor.comp_obj,
     Endofunctor.IsoAlgebra.forget_obj, Endofunctor.IsoAlgebra.forget_map]
-  have hm := eq_of_heq (nativePullSheafTensor_hom_app_hom_f k₀ l g M N)
-  rw [hm]
+  simp only [projection_nativeOpenSheafTensor_obj_carrier, upperStar,
+    Endofunctor.IsoAlgebra.mapOfNatIso_obj_carrier]
+  rw [projection_nativePullSheafTensor_carrier_eq]
   cast_proofs adicUpperStar_condensedRelativeTensor_square l
     (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
     M.carrier N.carrier

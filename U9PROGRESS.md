@@ -114,3 +114,11 @@ hits a kernel timeout (~130s). Added a whole-natural-transformation pullback
 identity, split the inverse square from the final rotation, and normalized the
 forgetful functor explicitly before the adic comparison. The final concrete
 rotation is now checked independently in NativeSheafSquareStatement.
+
+2026-11-05 04:22 CST: K5-20261105T041851.log rc=1. Both native square
+predicates and the conditional rotation are GREEN (rotation 0.55s); the whole
+alpha identity is also GREEN. The isolated inverse-square proof still times out
+in the kernel (~106s), although tactics finish in 5.7s. Normalizing native tensor
+and pullback carriers explicitly before the final adic comparison, and checking
+the homogeneous underlying pullback-map equality in a separate lemma. No budget
+increase or kernel bypass.
