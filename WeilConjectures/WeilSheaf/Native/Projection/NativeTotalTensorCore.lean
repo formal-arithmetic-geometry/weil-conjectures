@@ -134,7 +134,8 @@ lemma projection_totalTensorSquare_of_sheaf
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnY
   conv_rhs =>
-    erw [← Functor.map_comp_assoc, hnY, Functor.map_comp_assoc,
+    arg 2
+    erw [← R.map_comp_assoc, hnY, R.map_comp_assoc,
       Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f]
   try rfl
 

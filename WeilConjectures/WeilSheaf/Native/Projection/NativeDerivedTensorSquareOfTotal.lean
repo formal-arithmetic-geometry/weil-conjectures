@@ -116,7 +116,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         curriedTensor_obj_obj] at hmU ⊢
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hmU ⊢
-      cast_proofs hmU)
+      with_reducible exact_mod_proofs hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (by
       have ht := htotal P T

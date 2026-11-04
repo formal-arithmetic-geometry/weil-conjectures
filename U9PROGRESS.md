@@ -304,3 +304,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 07:19 CST: K5-20261105T071407.log rc=1. Derived cast now reaches condensedTensorModel.hom versus localization μ, and tensor.map versus tensorHom; explicitly normalize these definitions. Total named-functor cleanup exposes the same implicit-transparency mismatch already at hpull rewrite. Use standard erw for the native component equalities, allowing their semireducible Aut/Iso conversions; no further budget increase.
 
 2026-11-05 07:23 CST: K5-20261105T071915.log rc=1. Native erw steps pass through hcomp; remove now-redundant dsimp(obj_X), which reports no progress. Scope final map/summand rewrites to RHS. Derived cast has advanced to tensor.obj versus tensorObj: add tensor_obj and normalize newly generated object expressions after model/map simplification.
+
+2026-11-05 07:29 CST: 072400 rc=1. Total now passes sheaf square and naturality; pin final map composition to R and its RHS suffix. Derived cast still fails without useful mismatch trace; use reducible exact_mod_proofs to expose the first non-proof expression mismatch without native unfolding. No budget increase.
