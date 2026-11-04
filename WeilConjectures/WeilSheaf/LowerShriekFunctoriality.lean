@@ -8,6 +8,17 @@ module
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.LowerShriekIndependence
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
+import WeilConjectures.AlgebraicGeometry.Native.NativeBasicComparisons
+import WeilConjectures.WeilSheaf.Native.Open.NativeOpenProperInterchange
+import WeilConjectures.WeilSheaf.Native.NativeCompatibleTowerCalculation
+import WeilConjectures.AlgebraicGeometry.Native.NativeCompactificationModelComparison
+import WeilConjectures.AlgebraicGeometry.Native.NativeProperNaturalBaseChange
+import WeilConjectures.AlgebraicGeometry.Native.NativeOpenNaturalBaseChange
+import WeilConjectures.Compactification.BaseChange
+import WeilConjectures.AlgebraicGeometry.SmoothPurity.CompactifiableCompatibleTower
+import WeilConjectures.WeilSheaf.Native.NativeImmersionHeartLocalization
+import WeilConjectures.WeilSheaf.Localization
+import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-!
 # Functoriality of the direct image with compact support of Weil complexes
@@ -27,10 +38,10 @@ the Deligne–Laumon reduction (`sec-deligne-laumon-general`) uses:
 
 as well as the open–closed triangle `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶` of a Weil complex
 (`prop-sf-open-closed-triangle-all-stages`), as well as the identification of `Rf₀!` with `Rf₀*`
-for proper `f`. All of them are deduced from the comparison `Rb_* ∘ a_! ≅ i_! ∘ Rq_*` of
-`WeilConjectures.WeilSheaf.LowerShriekIndependence` (hence from proper base change,
-`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerStar_comp_upperStar_iso_of_isProper`), the
-adjunction `j_! ⊣ j^*` and the base change of the extension by zero.
+for proper `f`. The extension by zero, the open–closed triangle and the composition are deduced
+from the native comparisons of `Sheaf.WeilSheaf`; the base change is deduced from the native
+proper and open base changes (`Sheaf.WeilSheaf.NativeProperNaturalBaseChange`,
+`Sheaf.WeilSheaf.NativeOpenNaturalBaseChange`) and the compactification model comparison.
 
 ## Main statements
 
@@ -104,7 +115,6 @@ noncomputable def derivedLowerShriekObjIsoDerivedLowerStar (K : WeilComplex k₀
     (Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCongr k₀ l c.comm.symm)).app
       K.obj
 
-
 /-- **For a proper morphism, the direct image with compact support is the direct image**, as an
 isomorphism of functors on Weil complexes; its components are
 `AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar` (blueprint:
@@ -143,11 +153,137 @@ noncomputable def derivedLowerShriekIsoDerivedLowerStar :
 
 end Proper
 
+universe v w uC uD uE vD vE wD wE
+
+-- Use the same coefficient instances as the native functors in the public imports.
+attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
+  ULift.commRing AlgebraicClosure.instCommRing
+
+private theorem exists_ambient_triangle_of_heart_sequence
+    {C : Type uC} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
+    {D : Type uD} [Category.{vD} D] [Abelian D] [HasDerivedCategory.{wD} D]
+    {E : Type uE} [Category.{vE} E] [Abelian E] [HasDerivedCategory.{wE} E]
+    (P : C ⥤ D) (J : D ⥤ C) (Q : C ⥤ E) (I : E ⥤ C)
+    [P.Additive] [J.Additive] [Q.Additive] [I.Additive]
+    [PreservesFiniteLimits P] [PreservesFiniteColimits P]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    (α : P ⋙ J ⟶ 𝟭 C) (β : 𝟭 C ⟶ Q ⋙ I)
+    (h : ∀ M, ∃ w : α.app M ≫ β.app M = 0,
+      (ShortComplex.mk (α.app M) (β.app M) w).ShortExact)
+    (K : _root_.DerivedCategory C) :
+    ∃ T ∈ distTriang (_root_.DerivedCategory C),
+      Nonempty (T.obj₁ ≅ J.mapDerivedCategory.obj (P.mapDerivedCategory.obj K)) ∧
+      Nonempty (T.obj₂ ≅ K) ∧
+      Nonempty (T.obj₃ ≅ I.mapDerivedCategory.obj (Q.mapDerivedCategory.obj K)) := by
+  classical
+  let L := _root_.DerivedCategory.Q.objPreimage K
+  let e := _root_.DerivedCategory.Q.objObjPreimageIso K
+  let a : ((P ⋙ J).mapHomologicalComplex (.up ℤ)).obj L ⟶ L :=
+    { f := fun n ↦ α.app (L.X n)
+      comm' := fun m n _ ↦ (α.naturality (L.d m n)).symm }
+  let b : L ⟶ ((Q ⋙ I).mapHomologicalComplex (.up ℤ)).obj L :=
+    { f := fun n ↦ β.app (L.X n)
+      comm' := fun m n _ ↦ (β.naturality (L.d m n)).symm }
+  let S := ShortComplex.mk a b (by ext n : 1; exact (h (L.X n)).choose)
+  have hS : S.ShortExact :=
+    HomologicalComplex.shortExact_of_degreewise_shortExact S
+      (fun n ↦ (h (L.X n)).choose_spec)
+  exact ⟨_root_.DerivedCategory.triangleOfSES hS,
+    _root_.DerivedCategory.triangleOfSES_distinguished hS,
+    ⟨((P ⋙ J).mapDerivedCategoryFactors.app L).symm ≪≫
+      (P ⋙ J).mapDerivedCategory.mapIso e ≪≫
+      (Functor.mapDerivedCategoryCompIso P J).app K⟩,
+    ⟨e⟩, ⟨((Q ⋙ I).mapDerivedCategoryFactors.app L).symm ≪≫
+      (Q ⋙ I).mapDerivedCategory.mapIso e ≪≫
+      (Functor.mapDerivedCategoryCompIso Q I).app K⟩⟩
+
+private theorem exists_subcategory_triangle_of_ambient
+    {C : Type uC} [Category.{v} C] [Preadditive C] [HasZeroObject C]
+    [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) [P.IsTriangulated] (A B D : P.FullSubcategory)
+    (T₀ : Triangle C) (hT₀ : T₀ ∈ distTriang C)
+    (e₁ : T₀.obj₁ ≅ A.obj) (e₂ : T₀.obj₂ ≅ B.obj) (e₃ : T₀.obj₃ ≅ D.obj) :
+    ∃ T ∈ distTriang P.FullSubcategory,
+      Nonempty (T.obj₁ ≅ A) ∧ Nonempty (T.obj₂ ≅ B) ∧ Nonempty (T.obj₃ ≅ D) := by
+  let ι := P.ι
+  let T : Triangle P.FullSubcategory := Triangle.mk
+    (ObjectProperty.homMk (e₁.inv ≫ T₀.mor₁ ≫ e₂.hom) : A ⟶ B)
+    (ObjectProperty.homMk (e₂.inv ≫ T₀.mor₂ ≫ e₃.hom) : B ⟶ D)
+    (ObjectProperty.homMk (e₃.inv ≫ T₀.mor₃ ≫
+      (shiftFunctor C (1 : ℤ)).map e₁.hom ≫ (ι.commShiftIso (1 : ℤ)).inv.app A))
+  refine ⟨T, ?_, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩⟩
+  change ι.mapTriangle.obj T ∈ distTriang C
+  refine isomorphic_distinguished T₀ hT₀ _
+    (Triangle.isoMk _ _ e₁.symm e₂.symm e₃.symm ?_ ?_ ?_)
+  · change (e₁.inv ≫ T₀.mor₁ ≫ e₂.hom) ≫ e₂.inv = e₁.inv ≫ T₀.mor₁
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  · change (e₂.inv ≫ T₀.mor₂ ≫ e₃.hom) ≫ e₃.inv = e₂.inv ≫ T₀.mor₂
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  · change ((e₃.inv ≫ T₀.mor₃ ≫ (shiftFunctor C (1 : ℤ)).map e₁.hom ≫
+        (ι.commShiftIso (1 : ℤ)).inv.app A) ≫
+        (ι.commShiftIso (1 : ℤ)).hom.app A) ≫
+        (shiftFunctor C (1 : ℤ)).map e₁.inv = e₃.inv ≫ T₀.mor₃
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp,
+      Iso.hom_inv_id]
+    rw [(shiftFunctor C (1 : ℤ)).map_id, Category.comp_id]
+
 section Package
 
 variable {X Y Z U : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
   [U.Over (Spec (CommRingCat.of k₀))]
+
+private theorem nonempty_openShriekComparison (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
+    Nonempty ((objectProperty k₀ l U).ι ⋙
+        (ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategory ≅
+      derivedLowerShriek k₀ l j ⋙ (objectProperty k₀ l X).ι) := by
+  have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over j (Spec (CommRingCat.of k₀))]; infer_instance
+  have : QuasiCompact (U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over j (Spec (CommRingCat.of k₀))]; infer_instance
+  let c := HasCompactification.compactification j
+    (hf := hasCompactification_of_over (k₀ := k₀) j)
+  have : LocallyOfFiniteType (c.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (c.g ≫ X ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiCompact (c.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiCompact (c.g ≫ X ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  obtain ⟨α⟩ := nonempty_extensionByZero_rightDerivedLowerStar_iso
+    k₀ l c.i (𝟙 U) c.g j (by simpa using c.comm.symm)
+  obtain ⟨e⟩ := (nativeWeilBasicComparisons k₀ l).2.1 U
+  exact ⟨(Functor.isoWhiskerLeft (objectProperty k₀ l U).ι
+    (Functor.isoWhiskerRight e
+      (ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategory ≪≫
+      Functor.leftUnitor _)).symm ≪≫ α⟩
+
+private theorem exists_native_localization_triangle (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
+    (hij : IsCompl (Set.range j.base) (Set.range i.base))
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l i)]
+    (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
+    ∃ T ∈ distTriang (_root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X)),
+      Nonempty (T.obj₁ ≅ (ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategory.obj
+        ((ProEtaleWeilSheaf.upperStar k₀ l j).mapDerivedCategory.obj K)) ∧
+      Nonempty (T.obj₂ ≅ K) ∧
+      Nonempty (T.obj₃ ≅ (ProEtaleWeilSheaf.lowerStar k₀ l i).mapDerivedCategory.obj
+        ((ProEtaleWeilSheaf.upperStar k₀ l i).mapDerivedCategory.obj K)) := by
+  -- Keep the unused coefficient comparisons packaged; only the final property is needed.
+  obtain ⟨aj, ai, hlocal⟩ :=
+    ProEtaleWeilSheaf.nativeImmersionHeartLocalization k₀ l X U Z j i hij.symm
+  exact exists_ambient_triangle_of_heart_sequence
+    (ProEtaleWeilSheaf.upperStar k₀ l j) (ProEtaleWeilSheaf.extensionByZero k₀ l j)
+    (ProEtaleWeilSheaf.upperStar k₀ l i) (ProEtaleWeilSheaf.lowerStar k₀ l i)
+    aj.counit ai.unit hlocal.2.2.2.2 K
 
 /-- **The direct image with compact support along an open immersion is the extension by zero**
 (blueprint: `prop-functor-package`, clause 2, compactification comparisons for
@@ -161,9 +297,10 @@ theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ 
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l U) :
     Nonempty ((derivedLowerShriek k₀ l j).obj (WeilSheaf.toComplex.obj G) ≅
       WeilSheaf.toComplex.obj ((WeilSheaf.extensionByZero j).obj G)) := by
-  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_iso_extensionByZero (k₀ := k₀) (l := l) j
-  exact ⟨e.app _ ≪≫ ObjectProperty.isoMk _
-    (((ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategorySingleFunctor 0).app G.obj)⟩
+  obtain ⟨e⟩ := nonempty_openShriekComparison (k₀ := k₀) (l := l) j
+  refine ⟨ObjectProperty.isoMk _ ?_⟩
+  exact (e.app (WeilSheaf.toComplex.obj G)).symm ≪≫
+    ((ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategorySingleFunctor 0).app G.obj
 
 /-- **The open–closed triangle** (blueprint: `prop-sf-open-closed-triangle-all-stages`): for a
 quasi-compact open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X` and a Weil complex `K`
@@ -183,37 +320,31 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
       Nonempty (T.obj₁ ≅ (derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)) ∧
       Nonempty (T.obj₂ ≅ K) ∧
       Nonempty (T.obj₃ ≅ (derivedLowerStar i).obj ((upperStar i).obj K)) := by
-  have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
-  have := locallyOfFiniteType_over_of_isOver i (S := Spec (CommRingCat.of k₀))
-  let adj := WeilComplex.extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j
-  obtain ⟨Q, v, w, hT⟩ := distinguished_cocone_triangle (adj.counit.app K)
-  -- `j^*` inverts the counit, so `j^* Q = 0` and `Q` comes from the closed part
-  have hj : IsIso ((WeilComplex.upperStar j).map (adj.counit.app K)) :=
-    adj.isIso_map_counit_app_of_isIso_unit K
-  have hQ : IsZero ((WeilComplex.upperStar j).obj Q) := (Triangle.isZero₃_iff_isIso₁ _
-    ((WeilComplex.upperStar j).map_distinguished _ hT)).2 hj
-  obtain ⟨P, ⟨eP⟩⟩ := WeilComplex.derivedLowerStar_essImage_of_isZero i j hij.symm Q hQ
-  -- `i^*` kills `j_! j^* K`, so `i^* K ≅ i^* Q`
-  have hi₁ : IsZero ((WeilComplex.upperStar i).obj
-      ((WeilComplex.extensionByZero j).obj ((WeilComplex.upperStar j).obj K))) :=
-    IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _
-      (ProEtaleWeilSheaf.isZero_mapDerivedCategory_upperStar_obj_extensionByZero_obj j i
-        hij.disjoint _)
-  have hi : IsIso ((WeilComplex.upperStar i).map v) := (Triangle.isZero₁_iff_isIso₂ _
-    ((WeilComplex.upperStar i).map_distinguished _ hT)).1 hi₁
-  have : IsIso (WeilComplex.upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) i).counit :=
-    inferInstance
-  obtain ⟨e₁⟩ := WeilComplex.nonempty_derivedLowerShriek_iso_extensionByZero (k₀ := k₀) (l := l) j
-  have ea : (WeilComplex.upperStar i).obj Q ≅ (WeilComplex.upperStar i).obj K :=
-    (asIso ((WeilComplex.upperStar i).map v)).symm
-  have eb : (WeilComplex.upperStar i).obj ((WeilComplex.derivedLowerStar i).obj P) ≅
-      (WeilComplex.upperStar i).obj Q := (WeilComplex.upperStar i).mapIso eP
-  have ec : (WeilComplex.upperStar i).obj ((WeilComplex.derivedLowerStar i).obj P) ≅ P :=
-    asIso ((WeilComplex.upperStarDerivedLowerStarAdjunction i).counit.app P)
-  have e₃ : Q ≅ (WeilComplex.derivedLowerStar i).obj ((WeilComplex.upperStar i).obj K) :=
-    eP.symm ≪≫ (WeilComplex.derivedLowerStar i).mapIso (ec.symm ≪≫ eb ≪≫ ea)
-  exact ⟨Triangle.mk (adj.counit.app K) v w, hT, ⟨(e₁.app _).symm⟩, ⟨Iso.refl _⟩, ⟨e₃⟩⟩
-
+  classical
+  have : PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l i) :=
+    ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isCompl i j hij.symm
+  let P := ProEtaleWeilSheaf.upperStar k₀ l j
+  let J := ProEtaleWeilSheaf.extensionByZero k₀ l j
+  let Q := ProEtaleWeilSheaf.upperStar k₀ l i
+  let I := ProEtaleWeilSheaf.lowerStar k₀ l i
+  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
+    exists_native_localization_triangle (k₀ := k₀) (l := l) j i hij K.obj
+  have pK : P.mapDerivedCategory.obj K.obj = ((upperStar j).obj K).obj := rfl
+  have qK : Q.mapDerivedCategory.obj K.obj = ((upperStar i).obj K).obj := rfl
+  obtain ⟨ej⟩ := nonempty_openShriekComparison (k₀ := k₀) (l := l) j
+  have c₁ : J.mapDerivedCategory.obj (P.mapDerivedCategory.obj K.obj) ≅
+      ((derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)).obj :=
+    J.mapDerivedCategory.mapIso (eqToIso pK) ≪≫ ej.app ((upperStar j).obj K)
+  have rK : I.rightDerivedFunctor.obj ((upperStar i).obj K).obj =
+      ((derivedLowerStar i).obj ((upperStar i).obj K)).obj := rfl
+  have c₃ : I.mapDerivedCategory.obj (Q.mapDerivedCategory.obj K.obj) ≅
+      ((derivedLowerStar i).obj ((upperStar i).obj K)).obj :=
+    I.mapDerivedCategory.mapIso (eqToIso qK) ≪≫
+      (I.rightDerivedFunctorIsoMapDerivedCategory.app ((upperStar i).obj K).obj).symm ≪≫
+      eqToIso rK
+  exact exists_subcategory_triangle_of_ambient (objectProperty k₀ l X)
+    ((derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)) K
+    ((derivedLowerStar i).obj ((upperStar i).obj K)) T hT (e₁ ≪≫ c₁) e₂ (e₃ ≪≫ c₃)
 
 /-- **Composition of direct images with compact support** (blueprint: `prop-functor-package`,
 clause 3: `R(gf)_! ≃ Rg_!Rf_!`; this is `lem-zl-shriek-composition` of
@@ -231,73 +362,70 @@ theorem nonempty_derivedLowerShriek_comp_iso (f : X ⟶ Y) (g : Y ⟶ Z)
     [QuasiSeparated (Z ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (derivedLowerShriek k₀ l (f ≫ g) ≅
       derivedLowerShriek k₀ l f ⋙ derivedLowerShriek k₀ l g) := by
-  have := hasCompactification_of_over (k₀ := k₀) f
-  have := hasCompactification_of_over (k₀ := k₀) g
-  let cf := HasCompactification.compactification f
-  let cg := HasCompactification.compactification g
-  have : QuasiCompact cf.i := cf.quasiCompact_openImmersion inferInstance
-  have : QuasiCompact cg.i := cg.quasiCompact_openImmersion inferInstance
-  have : LocallyOfFiniteType (cg.Z ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (LocallyOfFiniteType (cg.g ≫ Z ↘ Spec (CommRingCat.of k₀)))
-  have : QuasiCompact (cg.Z ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (QuasiCompact (cg.g ≫ Z ↘ Spec (CommRingCat.of k₀)))
-  have : QuasiSeparated (cg.Z ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (QuasiSeparated (cg.g ≫ Z ↘ Spec (CommRingCat.of k₀)))
-  have := hasCompactification_of_over (k₀ := k₀) (cf.g ≫ cg.i)
-  let ch := HasCompactification.compactification (cf.g ≫ cg.i)
-  have : QuasiCompact ch.i := ch.quasiCompact_openImmersion inferInstance
-  have hfg : f ≫ g = (cf.i ≫ ch.i) ≫ ch.g ≫ cg.g := by
-    conv_lhs => rw [cf.comm, cg.comm]
-    simp only [Category.assoc]
-    rw [reassoc_of% ch.comm]
-  obtain ⟨e₁⟩ := nonempty_derivedLowerShriek_comp_ι_iso (k₀ := k₀) (l := l) (f := f ≫ g)
-    (cf.i ≫ ch.i) (ch.g ≫ cg.g) hfg
-  obtain ⟨e₂⟩ := nonempty_derivedLowerShriek_comp_ι_iso (k₀ := k₀) (l := l) (f := f)
-    cf.i cf.g cf.comm
-  obtain ⟨e₃⟩ := nonempty_derivedLowerShriek_comp_ι_iso (k₀ := k₀) (l := l) (f := g)
-    cg.i cg.g cg.comm
-  let key := ProEtaleWeilSheaf.rightDerivedLowerStarExtensionByZeroIso k₀ l ch.i ch.g cf.g cg.i
-    ch.comm.symm
-  let E := WeilComplex.extensionByZero (k₀ := k₀) (l := l) cf.i
-  let ι := (WeilComplex.objectProperty k₀ l X).ι
-  let Φ : derivedLowerShriek k₀ l (f ≫ g) ⋙ (WeilComplex.objectProperty k₀ l Z).ι ≅
-      (derivedLowerShriek k₀ l f ⋙ derivedLowerShriek k₀ l g) ⋙
-        (WeilComplex.objectProperty k₀ l Z).ι :=
-    calc derivedLowerShriek k₀ l (f ≫ g) ⋙ (WeilComplex.objectProperty k₀ l Z).ι
-      _ ≅ ι ⋙ (ProEtaleWeilSheaf.extensionByZero k₀ l (cf.i ≫ ch.i)).mapDerivedCategory ⋙
-          (ProEtaleWeilSheaf.lowerStar k₀ l (ch.g ≫ cg.g)).rightDerivedFunctor := e₁
-      _ ≅ ι ⋙ ((ProEtaleWeilSheaf.extensionByZero k₀ l cf.i).mapDerivedCategory ⋙
-            (ProEtaleWeilSheaf.extensionByZero k₀ l ch.i).mapDerivedCategory) ⋙
-          ((ProEtaleWeilSheaf.lowerStar k₀ l ch.g).rightDerivedFunctor ⋙
-            (ProEtaleWeilSheaf.lowerStar k₀ l cg.g).rightDerivedFunctor) :=
-        Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
-          (ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroCompIso k₀ l cf.i ch.i) _ ≪≫
-          Functor.isoWhiskerLeft _ (ProEtaleWeilSheaf.rightDerivedLowerStarCompIso k₀ l ch.g cg.g))
-      _ ≅ (E ⋙ (WeilComplex.objectProperty k₀ l cf.Z).ι ⋙
-            (ProEtaleWeilSheaf.extensionByZero k₀ l ch.i).mapDerivedCategory ⋙
-              (ProEtaleWeilSheaf.lowerStar k₀ l ch.g).rightDerivedFunctor) ⋙
-          (ProEtaleWeilSheaf.lowerStar k₀ l cg.g).rightDerivedFunctor := Iso.refl _
-      _ ≅ (E ⋙ (WeilComplex.objectProperty k₀ l cf.Z).ι ⋙
-            (ProEtaleWeilSheaf.lowerStar k₀ l cf.g).rightDerivedFunctor ⋙
-              (ProEtaleWeilSheaf.extensionByZero k₀ l cg.i).mapDerivedCategory) ⋙
-          (ProEtaleWeilSheaf.lowerStar k₀ l cg.g).rightDerivedFunctor :=
-        Functor.isoWhiskerRight (Functor.isoWhiskerLeft _ key) _
-      _ ≅ (ι ⋙ (ProEtaleWeilSheaf.extensionByZero k₀ l cf.i).mapDerivedCategory ⋙
-            (ProEtaleWeilSheaf.lowerStar k₀ l cf.g).rightDerivedFunctor) ⋙
-          (ProEtaleWeilSheaf.extensionByZero k₀ l cg.i).mapDerivedCategory ⋙
-            (ProEtaleWeilSheaf.lowerStar k₀ l cg.g).rightDerivedFunctor := Iso.refl _
-      _ ≅ (derivedLowerShriek k₀ l f ⋙ (WeilComplex.objectProperty k₀ l Y).ι) ⋙
-          (ProEtaleWeilSheaf.extensionByZero k₀ l cg.i).mapDerivedCategory ⋙
-            (ProEtaleWeilSheaf.lowerStar k₀ l cg.g).rightDerivedFunctor :=
-        Functor.isoWhiskerRight e₂.symm _
-      _ ≅ derivedLowerShriek k₀ l f ⋙ ((WeilComplex.objectProperty k₀ l Y).ι ⋙
-          (ProEtaleWeilSheaf.extensionByZero k₀ l cg.i).mapDerivedCategory ⋙
-            (ProEtaleWeilSheaf.lowerStar k₀ l cg.g).rightDerivedFunctor) :=
-        Functor.associator _ _ _
-      _ ≅ derivedLowerShriek k₀ l f ⋙ (derivedLowerShriek k₀ l g ⋙
-          (WeilComplex.objectProperty k₀ l Z).ι) := Functor.isoWhiskerLeft _ e₃.symm
-      _ ≅ _ := (Functor.associator _ _ _).symm
-  exact ⟨((WeilComplex.objectProperty k₀ l Z).fullyFaithfulι.whiskeringRight _).preimageIso Φ⟩
+  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
+  let d := HasCompactification.compactification g
+    (hf := hasCompactification_of_over (k₀ := k₀) g)
+  let c := HasCompactification.compactification (f ≫ g)
+    (hf := hasCompactification_of_over (k₀ := k₀) (f ≫ g))
+  obtain ⟨e, _, _⟩ := (exists_compactifiable_compatible_tower f g d c).1
+  let T := Compactification.Triangle.ofRestrict d e
+  let := Compactification.over (k₀ := k₀) T.cf
+  let := Compactification.over (k₀ := k₀) T.cg
+  let := Compactification.over (k₀ := k₀) T.cfg
+  have : T.p.IsOver (Spec (CommRingCat.of k₀)) :=
+    ⟨by change T.p ≫ T.cg.g ≫ Z ↘ Spec (CommRingCat.of k₀) =
+          T.cfg.g ≫ Z ↘ Spec (CommRingCat.of k₀)
+        rw [← Category.assoc, T.p_g]⟩
+  have hq : T.q ≫ T.cfg.g = T.cf.g ≫ g := by
+    rw [← T.p_g, ← Category.assoc, ← T.isPullback.w,
+      Category.assoc, ← T.cg.comm]
+  have : T.q.IsOver (Spec (CommRingCat.of k₀)) :=
+    ⟨by change T.q ≫ T.cfg.g ≫ Z ↘ Spec (CommRingCat.of k₀) =
+          T.cf.g ≫ Y ↘ Spec (CommRingCat.of k₀)
+        rw [← Category.assoc, hq, Category.assoc, comp_over g _]⟩
+  have : LocallyOfFiniteType (T.cf.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (T.cf.g ≫ Y ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiCompact (T.cf.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiCompact (T.cf.g ≫ Y ↘ Spec (CommRingCat.of k₀)))
+  have : LocallyOfFiniteType (T.cg.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (T.cg.g ≫ Z ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiCompact (T.cg.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiCompact (T.cg.g ≫ Z ↘ Spec (CommRingCat.of k₀)))
+  have : LocallyOfFiniteType (T.cfg.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (T.cfg.g ≫ Z ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiCompact (T.cfg.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiCompact (T.cfg.g ≫ Z ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiCompact T.cf.i := T.cf.quasiCompact_openImmersion inferInstance
+  have : QuasiCompact T.cg.i := T.cg.quasiCompact_openImmersion inferInstance
+  have : QuasiCompact T.cfg.i := T.cfg.quasiCompact_openImmersion inferInstance
+  have : QuasiCompact T.q := MorphismProperty.of_isPullback T.isPullback inferInstance
+  obtain ⟨_, _, _, ⟨α⟩⟩ := nativeWeilCompatibleTowerCalculation k₀ l
+    T.cf.i T.q T.cg.i T.p T.cf.g T.cg.g T.isPullback.flip
+  obtain ⟨ef⟩ := (nativeWeilCompactificationModelComparison k₀ l f).2.2 T.cf
+  obtain ⟨eg⟩ := (nativeWeilCompactificationModelComparison k₀ l g).2.2 T.cg
+  obtain ⟨efg⟩ := (nativeWeilCompactificationModelComparison k₀ l (f ≫ g)).2.2 T.cfg
+  let IX := (objectProperty k₀ l X).ι
+  let IY := (objectProperty k₀ l Y).ι
+  let IZ := (objectProperty k₀ l Z).ι
+  let F := ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f T.cf
+  let G := ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l g T.cg
+  let J := (ProEtaleWeilSheaf.extensionByZero k₀ l T.cf.i).mapDerivedCategory
+  let R := (ProEtaleWeilSheaf.lowerStar k₀ l T.cf.g).rightDerivedFunctor
+  have α₀ : IX ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l (f ≫ g) T.cfg ≅
+      IX ⋙ J ⋙ R ⋙ G := by
+    simpa only [IX, J, R, G, T.i_q, T.p_g,
+      ProEtaleWeilSheaf.rightDerivedLowerShriek] using α
+  let α' := α₀ ≪≫ Functor.isoWhiskerLeft IX (Functor.associator J R G).symm ≪≫
+    (Functor.associator IX F G).symm
+  let F' := derivedLowerShriek k₀ l f
+  let G' := derivedLowerShriek k₀ l g
+  exact ⟨((objectProperty k₀ l Z).fullyFaithfulι.whiskeringRight _).preimageIso
+    (efg.symm ≪≫ α' ≪≫ Functor.isoWhiskerRight ef G ≪≫
+      Functor.associator F' IY G ≪≫ Functor.isoWhiskerLeft F' eg ≪≫
+      (Functor.associator F' G' IZ).symm)⟩
 
 /-- **Direct image with compact support of the localization triangle** (blueprint:
 `prop-functor-package`, clause 3: for a closed immersion `i` with open complement `j`, applying
@@ -350,56 +478,107 @@ theorem nonempty_upperStar_derivedLowerShriek_iso {X' Y' : Scheme.{u}}
     [QuasiSeparated (Y' ↘ Spec (CommRingCat.of k₀))]
     {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}
     [h.IsOver (Spec (CommRingCat.of k₀))] (hH : IsPullback g f' f h) :
-    Nonempty (derivedLowerShriek k₀ l f ⋙ upperStar h ≅
-      upperStar g ⋙ derivedLowerShriek k₀ l f') := by
-  have := hasCompactification_of_over (k₀ := k₀) f
+    Nonempty
+      (derivedLowerShriek k₀ l f ⋙ upperStar h ≅
+        upperStar g ⋙ derivedLowerShriek k₀ l f') := by
   let c := HasCompactification.compactification f
+    (hf := hasCompactification_of_over (k₀ := k₀) f)
   let c' := c.ofIsPullback hH
-  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
-  have : QuasiCompact c'.i := c'.quasiCompact_openImmersion inferInstance
-  let p : c'.Z ⟶ c.Z := pullback.fst c.g h
-  have : p.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
-    change pullback.fst c.g h ≫ c.g ≫ Y ↘ Spec (CommRingCat.of k₀) =
-      pullback.snd c.g h ≫ Y' ↘ Spec (CommRingCat.of k₀)
-    rw [pullback.condition_assoc, comp_over h]⟩
-  have hsq : IsPullback g c'.i c.i p := c.isPullback_i_ofIsPullback hH
-  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerStar_comp_upperStar_iso_of_isProper
-    (k₀ := k₀) (l := l) (f := c.g) (g := h) (f' := c'.g) (g' := p) inferInstance
-    (c.isPullback_g_ofIsPullback hH).flip
-  obtain ⟨e₁⟩ := nonempty_derivedLowerShriek_comp_ι_iso (k₀ := k₀) (l := l) (f := f)
-    c.i c.g c.comm
-  obtain ⟨e₂⟩ := nonempty_derivedLowerShriek_comp_ι_iso (k₀ := k₀) (l := l) (f := f')
-    c'.i c'.g c'.comm
-  let E := WeilComplex.extensionByZero (k₀ := k₀) (l := l) c.i
-  let ι := (WeilComplex.objectProperty k₀ l X).ι
-  let Φ : (derivedLowerShriek k₀ l f ⋙ upperStar h) ⋙ (WeilComplex.objectProperty k₀ l Y').ι ≅
-      (upperStar g ⋙ derivedLowerShriek k₀ l f') ⋙ (WeilComplex.objectProperty k₀ l Y').ι :=
-    calc (derivedLowerShriek k₀ l f ⋙ upperStar h) ⋙ (WeilComplex.objectProperty k₀ l Y').ι
-      _ ≅ (derivedLowerShriek k₀ l f ⋙ (WeilComplex.objectProperty k₀ l Y).ι) ⋙
-          (ProEtaleWeilSheaf.upperStar k₀ l h).mapDerivedCategory := Iso.refl _
-      _ ≅ (ι ⋙ (ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory ⋙
-            (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor) ⋙
-          (ProEtaleWeilSheaf.upperStar k₀ l h).mapDerivedCategory :=
-        Functor.isoWhiskerRight e₁ _
-      _ ≅ E ⋙ (derivedLowerStar c.g ⋙ upperStar h) ⋙ (WeilComplex.objectProperty k₀ l Y').ι :=
-        Iso.refl _
-      _ ≅ E ⋙ (upperStar p ⋙ derivedLowerStar c'.g) ⋙ (WeilComplex.objectProperty k₀ l Y').ι :=
-        Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight e _)
-      _ ≅ ι ⋙ ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory ⋙
-            (ProEtaleWeilSheaf.upperStar k₀ l p).mapDerivedCategory) ⋙
-          (ProEtaleWeilSheaf.lowerStar k₀ l c'.g).rightDerivedFunctor := Iso.refl _
-      _ ≅ ι ⋙ ((ProEtaleWeilSheaf.upperStar k₀ l g).mapDerivedCategory ⋙
-            (ProEtaleWeilSheaf.extensionByZero k₀ l c'.i).mapDerivedCategory) ⋙
-          (ProEtaleWeilSheaf.lowerStar k₀ l c'.g).rightDerivedFunctor :=
-        Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
-          (ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroUpperStarIso k₀ l g c'.i c.i p hsq) _)
-      _ ≅ upperStar g ⋙ ((WeilComplex.objectProperty k₀ l X').ι ⋙
-            (ProEtaleWeilSheaf.extensionByZero k₀ l c'.i).mapDerivedCategory ⋙
-              (ProEtaleWeilSheaf.lowerStar k₀ l c'.g).rightDerivedFunctor) := Iso.refl _
-      _ ≅ upperStar g ⋙ (derivedLowerShriek k₀ l f' ⋙ (WeilComplex.objectProperty k₀ l Y').ι) :=
-        Functor.isoWhiskerLeft _ e₂.symm
-      _ ≅ _ := (Functor.associator _ _ _).symm
-  exact ⟨((WeilComplex.objectProperty k₀ l Y').fullyFaithfulι.whiskeringRight _).preimageIso Φ⟩
+  let : (pullback c.g h).Over (Spec (CommRingCat.of k₀)) :=
+    ⟨pullback.snd c.g h ≫ Y' ↘ Spec (CommRingCat.of k₀)⟩
+  have : (pullback.snd c.g h).IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : (pullback.fst c.g h).IsOver (Spec (CommRingCat.of k₀)) := by
+    constructor
+    change pullback.fst c.g h ≫ c.g ≫ (Y ↘ Spec (CommRingCat.of k₀)) =
+      pullback.snd c.g h ≫ (Y' ↘ Spec (CommRingCat.of k₀))
+    rw [← Category.assoc, pullback.condition, Category.assoc, comp_over h]
+  have hc : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  have hc' : QuasiCompact c'.i := c'.quasiCompact_openImmersion inferInstance
+  let sqg : ChosenCartesianSquare (pullback.fst c.g h) c'.g c.g h :=
+    { toCommSq := (Compactification.isPullback_g_ofIsPullback hH c).flip.toCommSq
+      isoPullback := (Compactification.isPullback_g_ofIsPullback hH c).flip.isoPullback
+      hom_fst := (Compactification.isPullback_g_ofIsPullback hH c).flip.isoPullback_hom_fst
+      hom_snd := (Compactification.isPullback_g_ofIsPullback hH c).flip.isoPullback_hom_snd }
+  let sqi : ChosenCartesianSquare g c'.i c.i (pullback.fst c.g h) :=
+    { toCommSq := (Compactification.isPullback_i_ofIsPullback hH c).toCommSq
+      isoPullback := (Compactification.isPullback_i_ofIsPullback hH c).isoPullback
+      hom_fst := (Compactification.isPullback_i_ofIsPullback hH c).isoPullback_hom_fst
+      hom_snd := (Compactification.isPullback_i_ofIsPullback hH c).isoPullback_hom_snd }
+  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over f (Spec (CommRingCat.of k₀))]
+    infer_instance
+  have : LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over f' (Spec (CommRingCat.of k₀))]
+    infer_instance
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over f (Spec (CommRingCat.of k₀))]
+    infer_instance
+  have : QuasiCompact (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over f' (Spec (CommRingCat.of k₀))]
+    infer_instance
+  have : LocallyOfFiniteType (c.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (c.g ≫ Y ↘ Spec (CommRingCat.of k₀)))
+  have : LocallyOfFiniteType (c'.Z ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (c'.g ≫ Y' ↘ Spec (CommRingCat.of k₀)))
+  let IX := (objectProperty k₀ l X).ι
+  let IX' := (objectProperty k₀ l X').ι
+  let IY := (objectProperty k₀ l Y).ι
+  let IY' := (objectProperty k₀ l Y').ι
+  let IZ := (objectProperty k₀ l c.Z).ι
+  let J := (ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory
+  let J' := (ProEtaleWeilSheaf.extensionByZero k₀ l c'.i).mapDerivedCategory
+  let U := (ProEtaleWeilSheaf.upperStar k₀ l h).mapDerivedCategory
+  let V := (ProEtaleWeilSheaf.upperStar k₀ l g).mapDerivedCategory
+  let W := (ProEtaleWeilSheaf.upperStar k₀ l (pullback.fst c.g h)).mapDerivedCategory
+  let R := (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor
+  let R' := (ProEtaleWeilSheaf.lowerStar k₀ l c'.g).rightDerivedFunctor
+  have hJ : ∀ K, WeilComplex.objectProperty k₀ l X K →
+      WeilComplex.objectProperty k₀ l c.Z (J.obj K) := by
+    intro K hK
+    exact ((nativeWeilBasicComparisons k₀ l).2.2.1 X c.Z c.i).2.2 K hK
+  have hJ' : ∀ K, WeilComplex.objectProperty k₀ l X' K →
+      WeilComplex.objectProperty k₀ l c'.Z (J'.obj K) := by
+    intro K hK
+    exact ((nativeWeilBasicComparisons k₀ l).2.2.1 X' c'.Z c'.i).2.2 K hK
+  let JL := (objectProperty k₀ l X).liftFullSubcategory
+    (objectProperty k₀ l c.Z) J hJ
+  let UL := WeilComplex.upperStar (k₀ := k₀) (l := l) h
+  let VL := WeilComplex.upperStar (k₀ := k₀) (l := l) g
+  let eJ := ObjectProperty.liftFullSubcategoryCompιIso
+    (objectProperty k₀ l X) (objectProperty k₀ l c.Z) J hJ
+  let eU : UL ⋙ IY' ≅ IY ⋙ U := by
+    dsimp [UL, IY', IY, U]
+    exact ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
+  let eV : VL ⋙ IX' ≅ IX ⋙ V := by
+    dsimp [VL, IX', IX, V]
+    exact ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
+  obtain ⟨ep⟩ := nativeWeil_proper_natural_baseChange k₀ l
+    (pullback.fst c.g h) c'.g c.g h sqg
+  obtain ⟨eo⟩ := nativeWeilOpenNaturalBaseChange k₀ l
+    g c'.i c.i (pullback.fst c.g h) sqi
+  obtain ⟨ec⟩ := (nativeWeilCompactificationModelComparison k₀ l f).2.2 c
+  obtain ⟨ec'⟩ := (nativeWeilCompactificationModelComparison k₀ l f').2.2 c'
+  have eamb : IX ⋙ J ⋙ R ⋙ U ≅ IX ⋙ V ⋙ J' ⋙ R' := by
+    exact Functor.isoWhiskerRight eJ.symm (R ⋙ U) ≪≫
+      Functor.isoWhiskerLeft JL ep ≪≫
+      Functor.isoWhiskerRight eJ (W ⋙ R') ≪≫
+      Functor.isoWhiskerLeft IX (Functor.isoWhiskerRight eo R')
+  have eleft : (derivedLowerShriek k₀ l f ⋙ UL) ⋙ IY' ≅
+      IX ⋙ J ⋙ R ⋙ U := by
+    exact Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (derivedLowerShriek k₀ l f) eU ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight ec.symm U ≪≫
+      Functor.associator _ _ _
+  have eright : (VL ⋙ derivedLowerShriek k₀ l f') ⋙ IY' ≅
+      IX ⋙ V ⋙ J' ⋙ R' := by
+    exact Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft VL ec'.symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight eV (J' ⋙ R') ≪≫
+      Functor.associator _ _ _
+  exact ⟨((objectProperty k₀ l Y').fullyFaithfulι.whiskeringRight _).preimageIso
+    (eleft ≪≫ eamb ≪≫ eright.symm)⟩
 
 end Package
 
