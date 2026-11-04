@@ -38,7 +38,6 @@ lemma homEquiv_baseChangedTrace
   simp only [Functor.comp_map] at hn
   simp only [Functor.map_comp, Category.assoc]
   rw [← reassoc_of% hn, app_comp_map_unitBaseChange_comp_counit]
-  simp only [Functor.map_comp, Category.assoc]
 
 end CategoryTheory.Adjunction
 

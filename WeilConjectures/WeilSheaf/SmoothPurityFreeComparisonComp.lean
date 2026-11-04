@@ -28,7 +28,7 @@ variable {C C' D D' E E' : Type*}
   (R₂ : D' ⥤ E') (r₂ : D ⥤ E) (e₂ : R₂ ⋙ W ≅ V ⋙ r₂)
 
 /-- Paste two comparison squares with forgetful functors. -/
-noncomputable def compForgetIso : (R₁ ⋙ R₂) ⋙ W ≅ U ⋙ (r₁ ⋙ r₂) :=
+noncomputable def traceCompForgetIso : (R₁ ⋙ R₂) ⋙ W ≅ U ⋙ (r₁ ⋙ r₂) :=
   NatIso.ofComponents (fun A ↦ e₂.app (R₁.obj A) ≪≫ r₂.mapIso (e₁.app A)) (fun f ↦ by
     simp only [Functor.comp_map, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
     have hn₂ := e₂.hom.naturality (R₁.map f)
@@ -46,7 +46,7 @@ theorem unit_app_comp_map_compFreeComparison (X : C)
       r₂.map (adj₂.unit.app (r₁.obj X)) ≫ e₂.inv.app (J.obj (r₁.obj X))) :
     adj₃.unit.app ((r₁ ⋙ r₂).obj X) ≫ W.map (β₂ ≪≫ R₂.mapIso β₁).hom =
       (r₁ ⋙ r₂).map (adj₁.unit.app X) ≫
-        (compForgetIso R₁ r₁ e₁ R₂ r₂ e₂).inv.app (I.obj X) := by
+        (traceCompForgetIso R₁ r₁ e₁ R₂ r₂ e₂).inv.app (I.obj X) := by
   simp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom,
     Functor.map_comp, Category.assoc]
   rw [reassoc_of% h₂]
