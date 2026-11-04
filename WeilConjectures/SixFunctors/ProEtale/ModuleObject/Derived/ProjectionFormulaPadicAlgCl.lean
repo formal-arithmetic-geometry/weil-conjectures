@@ -5,15 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModelPair
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.Mathlib.CategoryTheory.NatIso
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
-public import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgClOfSubfield
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicSubfield
 
 /-!
 # The `ℚ̄_ℓ` projection formula from the integral one
@@ -47,101 +40,9 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
-namespace AlgebraicGeometry.ProEtale
-
-/-- A bounded constructible complex is bounded below. -/
-lemma exists_isGE_of_boundedConstructible {X : Scheme.{u}}
-    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
-    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)}
-    (hK : boundedConstructible R K) : ∃ n : ℤ, K.IsGE n := by
-  obtain ⟨⟨n, hn⟩, -⟩ := hK.1
-  exact ⟨n, hn⟩
-
-namespace CondensedRing
+namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
-
-/-- `isIso_projectionMap_app_app_extendScalars` with explicit hypotheses, the projection map with
-coefficients `Λ` last. -/
-lemma isIso_projectionMap_app_app_extendScalars_of_isIso
-    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
-    [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
-    [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)))
-    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y)))
-    (h₁ : IsIso ((derivedPushHom a f).app K))
-    (h₂ : IsIso ((derivedPushHom a f).app
-      (((curriedTensor _).obj K).obj (((f)^*⟦Λ⟧).leftDerivedFunctor.obj M))))
-    (h₀ : IsIso (((projectionMap Λ f).app K).app M)) :
-    IsIso (((projectionMap Λ' f).app
-      ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.obj K)).app
-        ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.obj M)) :=
-  isIso_projectionMap_app_app_extendScalars a f K M
-
-section ExtendScalars
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (f : X ⟶ Y)
-  [QuasiCompact f] [QuasiSeparated f]
-
-/-- **The projection formula and the coefficient change `𝒪_E ⟶ E`**: for a quasi-compact
-quasi-separated `f`, if the projection map with coefficients `𝒪_E` is invertible at `(K₀, M₀)`,
-with `K₀` and `K₀ ⊗ᴸ Lf^* M₀` bounded below, then the projection map with coefficients `E` is
-invertible at `(E ⊗ᴸ K₀, E ⊗ᴸ M₀)`. -/
-theorem isIso_projectionMap_app_app_padicSubfield_of_padicIntegers
-    (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
-    (M₀ : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)))
-    (n m : ℤ) (hn : K₀.IsGE n)
-    (hm : (((curriedTensor _).obj K₀).obj
-      (((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).leftDerivedFunctor.obj M₀)).IsGE m)
-    (h : IsIso (((projectionMap (Profinite.padicIntegersRingObj ℓ E.1) f).app K₀).app M₀)) :
-    IsIso (((projectionMap (Profinite.continuousMapRingObj E.1) f).app
-      ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-        X)).leftDerivedFunctor.obj K₀)).app
-      ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-        Y)).leftDerivedFunctor.obj M₀)) := by
-  have e := isIso_projectionMap_app_app_extendScalars_of_isIso
-    (padicIntegersRingObjToContinuousMapRingObj ℓ E) f K₀ M₀
-    (by exact_mod_proofs isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f K₀ n)
-    (by exact_mod_proofs (isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E f
-      (((curriedTensor _).obj K₀).obj
-        (((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).leftDerivedFunctor.obj M₀)) m))
-    (by exact_mod_proofs h)
-  exact_mod_proofs e
-
-/-- **The projection formula and the coefficient change `E ⟶ ℚ̄_ℓ`**: for a quasi-compact
-quasi-separated `f`, if the projection map with coefficients `E` is invertible at `(K, M)`, with
-`K` and `K ⊗ᴸ Lf^* M` bounded below, then the projection map with coefficients `ℚ̄_ℓ` is
-invertible at `(ℚ̄_ℓ ⊗ᴸ K, ℚ̄_ℓ ⊗ᴸ M)`. -/
-theorem isIso_projectionMap_app_app_padicAlgCl_of_padicSubfield
-    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E.1) X)))
-    (M : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E.1) Y)))
-    (n m : ℤ) (hn : K.IsGE n)
-    (hm : (((curriedTensor _).obj K).obj
-      (((f)^*⟦Profinite.continuousMapRingObj E.1⟧).leftDerivedFunctor.obj M)).IsGE m)
-    (h : IsIso (((projectionMap (Profinite.continuousMapRingObj E.1) f).app K).app M)) :
-    IsIso (((projectionMap (Profinite.padicAlgClRingObj ℓ) f).app
-      ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-        X)).leftDerivedFunctor.obj K)).app
-      ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-        Y)).leftDerivedFunctor.obj M)) := by
-  have e := isIso_projectionMap_app_app_extendScalars_of_isIso
-    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f K M
-    (by exact_mod_proofs
-      isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E f K n)
-    (by exact_mod_proofs (isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E f
-      (((curriedTensor _).obj K).obj
-        (((f)^*⟦Profinite.continuousMapRingObj E.1⟧).leftDerivedFunctor.obj M)) m))
-    (by exact_mod_proofs h)
-  exact_mod_proofs e
-
-end ExtendScalars
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))}
@@ -205,6 +106,4 @@ theorem isIso_projectionMap_padicAlgClRingObj_of_integral (p : X ⟶ Y)
     (by exact_mod_proofs e₂)
   exact_mod_proofs e₃
 
-end CondensedRing
-
-end AlgebraicGeometry.ProEtale
+end AlgebraicGeometry.ProEtale.CondensedRing
