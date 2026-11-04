@@ -88,6 +88,140 @@ abbrev proEtaleScalarTensorCochain
   ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
     (ProEtale.sheafExtendScalars φ X)).app P).app Q
 
+section SummandFormulas
+
+variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+  [MonoidalCategory C] [MonoidalCategory D] [HasZeroObject C] [HasZeroObject D]
+  [MonoidalPreadditive C] [MonoidalPreadditive D]
+  [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+  [∀ (X₁ X₂ : GradedObject ℤ D), X₁.HasTensor X₂]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+
+/-- On a summand of the signed total tensor, the cochain tensor comparison of an additive
+oplax monoidal functor is its ordinary comparison `δ`.
+Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+@[reassoc]
+theorem map_ιMapBifunctor_mapHomologicalComplexδ (G : C ⥤ D) [G.Additive] [G.OplaxMonoidal]
+    [∀ j, PreservesColimitsOfShape
+      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) G]
+    (K L : CochainComplex C ℤ) (p q n : ℤ)
+    (h : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n) :
+    G.map (HomologicalComplex.ιMapBifunctor K L (curriedTensor C) (.up ℤ) p q n h) ≫
+        (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) G).app K).app L).f n =
+      Functor.OplaxMonoidal.δ G (K.X p) (L.X q) ≫
+        HomologicalComplex.ιMapBifunctor ((G.mapHomologicalComplex (.up ℤ)).obj K)
+          ((G.mapHomologicalComplex (.up ℤ)).obj L) (curriedTensor D) (.up ℤ) p q n h :=
+  HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
+    (Functor.OplaxMonoidal.δNatTrans G) (.up ℤ) K L p q n h
+
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+/-- On a summand of the signed total tensor, a tensor product of cochain maps is the
+tensor product of its components.
+Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+@[reassoc]
+theorem ιMapBifunctor_tensorHom_f {K K' L L' : CochainComplex C ℤ} (f : K ⟶ K')
+    (g : L ⟶ L') (p q n : ℤ) (h : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n) :
+    HomologicalComplex.ιMapBifunctor K L (curriedTensor C) (.up ℤ) p q n h ≫ (f ⊗ₘ g).f n =
+      (f.f p ⊗ₘ g.f q) ≫
+        HomologicalComplex.ιMapBifunctor K' L' (curriedTensor C) (.up ℤ) p q n h := by
+  refine (HomologicalComplex.ι_mapBifunctorMap f g (curriedTensor C) (.up ℤ) p q n h).trans ?_
+  simp [MonoidalCategory.tensorHom_def]
+
+end SummandFormulas
+
+section SquareOfSummands
+
+variable {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Category* D']
+  [Preadditive C] [MonoidalCategory C] [HasZeroObject C] [MonoidalPreadditive C]
+  [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [Preadditive C'] [MonoidalCategory C'] [HasZeroObject C'] [MonoidalPreadditive C']
+  [∀ (X₁ X₂ : GradedObject ℤ C'), X₁.HasTensor X₂]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} C') ((curriedTensor C').obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} C') ((curriedTensor C').flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C'), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C'), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C'), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [Preadditive D] [MonoidalCategory D] [HasZeroObject D] [MonoidalPreadditive D]
+  [∀ (X₁ X₂ : GradedObject ℤ D), X₁.HasTensor X₂]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [Preadditive D'] [MonoidalCategory D'] [HasZeroObject D'] [MonoidalPreadditive D']
+  [∀ (X₁ X₂ : GradedObject ℤ D'), X₁.HasTensor X₂]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} D') ((curriedTensor D').obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} D') ((curriedTensor D').flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D'), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D'), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D'), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+
+/-- A square of additive oplax monoidal functors whose ordinary tensor comparisons commute
+induces the same square on signed total tensors of cochain complexes.
+Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+theorem mapHomologicalComplexδ_square (ν : C ⥤ C') (F : C' ⥤ D') (F' : C ⥤ D) (ν' : D ⥤ D')
+    [ν.Additive] [F.Additive] [F'.Additive] [ν'.Additive]
+    [ν.OplaxMonoidal] [F.OplaxMonoidal] [F'.OplaxMonoidal] [ν'.OplaxMonoidal]
+    [∀ j, PreservesColimitsOfShape
+      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) ν]
+    [∀ j, PreservesColimitsOfShape
+      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) F]
+    [∀ j, PreservesColimitsOfShape
+      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) F']
+    [∀ j, PreservesColimitsOfShape
+      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) ν']
+    (σ : ν ⋙ F ⟶ F' ⋙ ν')
+    (h : ∀ M N : C, F.map (Functor.OplaxMonoidal.δ ν M N) ≫
+        Functor.OplaxMonoidal.δ F (ν.obj M) (ν.obj N) ≫ (σ.app M ⊗ₘ σ.app N) =
+      σ.app (M ⊗ N) ≫ ν'.map (Functor.OplaxMonoidal.δ F' M N) ≫
+        Functor.OplaxMonoidal.δ ν' (F'.obj M) (F'.obj N))
+    (P Q : CochainComplex C ℤ) :
+    (F.mapHomologicalComplex (.up ℤ)).map
+          (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) ν).app P).app Q) ≫
+        ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app
+          ((ν.mapHomologicalComplex (.up ℤ)).obj P)).app
+          ((ν.mapHomologicalComplex (.up ℤ)).obj Q) ≫
+        ((NatTrans.mapHomologicalComplex σ (.up ℤ)).app P ⊗ₘ
+          (NatTrans.mapHomologicalComplex σ (.up ℤ)).app Q) =
+      (NatTrans.mapHomologicalComplex σ (.up ℤ)).app (P ⊗ Q) ≫
+        (ν'.mapHomologicalComplex (.up ℤ)).map
+          (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F').app P).app Q) ≫
+        ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) ν').app
+          ((F'.mapHomologicalComplex (.up ℤ)).obj P)).app
+          ((F'.mapHomologicalComplex (.up ℤ)).obj Q) := by
+  ext n : 1
+  refine HomologicalComplex.mapBifunctor.hom_ext_of_map (G := ν ⋙ F) fun p q hpq ↦ ?_
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+    NatTrans.mapHomologicalComplex_app_f]
+  erw [σ.naturality_assoc]
+  erw [Functor.comp_map, ← Functor.map_comp_assoc, map_ιMapBifunctor_mapHomologicalComplexδ,
+    Functor.map_comp, Category.assoc, map_ιMapBifunctor_mapHomologicalComplexδ_assoc,
+    ιMapBifunctor_tensorHom_f]
+  erw [Functor.comp_map, ← Functor.map_comp_assoc, map_ιMapBifunctor_mapHomologicalComplexδ,
+    Functor.map_comp, Category.assoc, map_ιMapBifunctor_mapHomologicalComplexδ]
+  have h' := h (P.X p) (Q.X q) =≫ HomologicalComplex.ιMapBifunctor
+    ((ν'.mapHomologicalComplex (.up ℤ)).obj ((F'.mapHomologicalComplex (.up ℤ)).obj P))
+    ((ν'.mapHomologicalComplex (.up ℤ)).obj ((F'.mapHomologicalComplex (.up ℤ)).obj Q))
+    (curriedTensor D') (.up ℤ) p q n hpq
+  simp only [Category.assoc] at h'
+  exact h'
+
+end SquareOfSummands
+
 /-- The scalar/site square for signed total tensors commutes before localization.
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 07A4 and 0G7E;
@@ -124,6 +258,7 @@ theorem normalized_stage_site_cochain_tensor_square
         siteTensorCochain B X
           (((ProEtale.etaleSheafExtendScalars φ X).mapHomologicalComplex (.up ℤ)).obj P)
           (((ProEtale.etaleSheafExtendScalars φ X).mapHomologicalComplex (.up ℤ)).obj Q) := by
-  sorry
+  exact mapHomologicalComplexδ_square _ _ _ _ _
+    (normalized_stage_site_sheaf_tensor_square φ X) P Q
 
 end WeilConjectures.FiniteFreeCoefficients.Sites
