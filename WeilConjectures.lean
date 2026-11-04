@@ -14358,6 +14358,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMate
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMateIsIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
@@ -17325,7 +17326,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
@@ -21677,9 +21677,12 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHCup
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHCupPerfect
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantSheafLeg
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicProjectionFormulaAux
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafForgetAb
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicInt
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicIntExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicUpperStarKFlat
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
@@ -25379,6 +25382,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeCoherentInverseHomSquare
 public import WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
 public import WeilConjectures.WeilSheaf.Native.NativeCompatibleTowerCalculation
 public import WeilConjectures.WeilSheaf.Native.NativeDerivedWeilTensorConstructible
+public import WeilConjectures.WeilSheaf.Native.NativeForgetBaseChange
 public import WeilConjectures.WeilSheaf.Native.NativeForgetNormalizedBinaryModels
 public import WeilConjectures.WeilSheaf.Native.NativeFrobeniusCoherentRingedModel
 public import WeilConjectures.WeilSheaf.Native.NativeFrobeniusRingedModel
@@ -25390,12 +25394,16 @@ public import WeilConjectures.WeilSheaf.Native.NativeHomRepresentativeUniqueness
 public import WeilConjectures.WeilSheaf.Native.NativeImmersionHeartLocalization
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedActionHom
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedTensorModels
+public import WeilConjectures.WeilSheaf.Native.NativeProjectionForgetOrdinary
+public import WeilConjectures.WeilSheaf.Native.NativePullDerivedTensor
+public import WeilConjectures.WeilSheaf.Native.NativePullDerivedTensorKFlat
 public import WeilConjectures.WeilSheaf.Native.NativePullSheafTensor
 public import WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
 public import WeilConjectures.WeilSheaf.Native.NativeRingedForgetTensorChainComparison
 public import WeilConjectures.WeilSheaf.Native.NativeStandardHomRepresentatives
 public import WeilConjectures.WeilSheaf.Native.NativeTensorAcyclicTestComparison
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatForget
+public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatOfForget
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenProperInterchange
@@ -25591,6 +25599,7 @@ public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.TraceTriangleAdditivity
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UnramifiedBoundaryPurity
+public import WeilConjectures.WeilSheaf.UpperShriek
 public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarConstant

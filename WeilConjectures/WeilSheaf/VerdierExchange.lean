@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.CompactProjectionFormula
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
+public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 
 /-!
 # The Verdier exchange for Weil complexes
@@ -56,7 +56,12 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- **The tensor–hom adjunction for the derived internal hom** of pro-étale Weil sheaves
 (blueprint: `def-weil-derived-pullback-tensor-hom`): `Hom(P ⊗ T, Q) ≅ Hom(T, RHom(P, Q))`,
-naturally in `T`, the tensor product being the native derived tensor product. -/
+naturally in `T`, the tensor product being the native derived tensor product. It is the chain
+```
+  Hom(P ⊗ T, Q) ≅ Hom(T ⊗ P, Q) ≅ Hom(T, [P, Q]) ≅ Hom(T, RHom(P, Q))
+```
+of the braiding, the closed structure of the native tensor product and the comparison of its
+internal hom with `derivedHom`. -/
 noncomputable def nativeDerivedTensorOpCompYonedaIso
     (P Q : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
     (Prod.sectR P _ ⋙ nativeDerivedTensor k₀ l X).op ⋙ yoneda.obj Q ≅
@@ -86,7 +91,13 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec 
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The tensor–hom adjunction on Weil complexes**: if a Weil complex `A` represents
-`RHom(M, Q)`, then `Hom(M ⊗ T, Q) ≅ Hom(T, A)`, naturally in the Weil complex `T`. -/
+`RHom(M, Q)`, then `Hom(M ⊗ T, Q) ≅ Hom(T, A)`, naturally in the Weil complex `T`. It is the
+chain
+```
+  Hom_W(M ⊗ T, Q) ≅ Hom_D(M ⊗ T, Q) ≅ Hom_D(T, RHom(M, Q)) ≅ Hom_D(T, A) ≅ Hom_W(T, A)
+```
+where `W` is the category of Weil complexes and `D` the ambient derived category, the outer
+isomorphisms coming from the full faithfulness of `W ⊆ D`. -/
 noncomputable def nativeConstructibleTensorOpCompYonedaIso (M Q A : WeilComplex k₀ l X)
     (e : A.obj ≅ (ProEtaleWeilSheaf.derivedHom k₀ l X Q.obj).obj (op M.obj)) :
     (Prod.sectR M _ ⋙ nativeConstructibleTensor k₀ l X).op ⋙ yoneda.obj Q ≅ yoneda.obj A :=
@@ -102,7 +113,16 @@ variable (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
 /-- **Verdier exchange** (blueprint: `fix-cor-verdier-exchange`, with `fix-lem-tensor-adjunction`):
 let `a_X = f ≫ a_Y` be morphisms to a base `S`, `G_X`, `G_Y` right adjoints of `Ra_{X,0}!` and
 `Ra_{Y,0}!`, and `Q` a Weil complex on `S`. If the Weil complexes `D_Y` and `D_X` represent
-`RHom(Rf₀! M, G_Y Q)` and `RHom(M, G_X Q)`, then `D_Y ≅ Rf_* D_X`. -/
+`RHom(Rf₀! M, G_Y Q)` and `RHom(M, G_X Q)`, then `D_Y ≅ Rf_* D_X`. The isomorphism is the
+Yoneda image of the chain, natural in the test Weil complex `T` on `Y`,
+```
+  Hom(T, D_Y) ≅ Hom(Rf₀! M ⊗ T, G_Y Q)        (tensor–hom)
+             ≅ Hom(Rf₀!(M ⊗ f^* T), G_Y Q)   (projection formula)
+             ≅ Hom(Ra_{X,0}!(M ⊗ f^* T), Q)  (Ra_{Y,0}! ⊣ G_Y, Ra_{X,0}! ≅ Ra_{Y,0}! Rf₀!)
+             ≅ Hom(M ⊗ f^* T, G_X Q)         (Ra_{X,0}! ⊣ G_X)
+             ≅ Hom(f^* T, D_X)               (tensor–hom)
+             ≅ Hom(T, Rf_* D_X)              (f^* ⊣ Rf_*).
+``` -/
 theorem nonempty_iso_derivedLowerStar_of_adjunction {S : Scheme.{u}}
     [S.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
