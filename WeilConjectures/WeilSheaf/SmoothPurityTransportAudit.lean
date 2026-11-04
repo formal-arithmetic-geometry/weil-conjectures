@@ -15,6 +15,7 @@ import WeilConjectures.WeilSheaf.SmoothPurityTraceDescent
 import WeilConjectures.WeilSheaf.SmoothPurityCondensedCarrier
 import WeilConjectures.WeilSheaf.SmoothPurityNativeDirectTraceCriterion
 import WeilConjectures.WeilSheaf.SmoothPurityProperTraceCoordinates
+import WeilConjectures.WeilSheaf.SmoothPurityProperDualizingBaseChange
 
 #print axioms AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_free
@@ -41,3 +42,4 @@ import WeilConjectures.WeilSheaf.SmoothPurityProperTraceCoordinates
 #print axioms AlgebraicGeometry.ProEtale.CondensedRing.bijective_map_comp_baseChangedProperTrace
 #print axioms AlgebraicGeometry.WeilComplex.isIso_homEquiv_of_condensed_direct_trace
 #print axioms AlgebraicGeometry.ProEtale.CondensedRing.bijective_map_comp_properTrace_levelwise
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_unit_of_fieldExtension
