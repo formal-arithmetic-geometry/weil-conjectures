@@ -27,6 +27,18 @@ variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
   [PreservesFiniteLimits M] [PreservesFiniteColimits M]
   [PreservesFiniteLimits N] [PreservesFiniteColimits N]
 
+private noncomputable abbrev tripleComparison :
+    (L ⋙ M ⋙ N).mapDerivedCategory ≅
+      L.mapDerivedCategory ⋙ M.mapDerivedCategory ⋙ N.mapDerivedCategory :=
+  Functor.mapDerivedCategoryCompIso (L ⋙ M) N ≪≫
+    isoWhiskerRight (Functor.mapDerivedCategoryCompIso L M) N.mapDerivedCategory
+
+private lemma tripleComparison_hom :
+    (tripleComparison L M N).hom =
+      (Functor.mapDerivedCategoryCompIso L (M ⋙ N)).hom ≫
+        Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryCompIso M N).hom :=
+  (Functor.mapDerivedCategoryCompIso_assoc L M N).symm
+
 variable {L M N}
   {D' : Type*} [Category D'] [Abelian D'] [HasDerivedCategory D']
   {L' : C ⥤ D'} {M' : D' ⥤ E}
@@ -34,11 +46,41 @@ variable {L M N}
   [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
   [PreservesFiniteLimits M'] [PreservesFiniteColimits M']
 
+private lemma tripleComparison_right (e : L ⋙ M ≅ L' ⋙ M') :
+    (tripleComparison L M N).hom ≫
+        Functor.whiskerRight (Functor.mapDerivedCategorySquareIso e).hom
+          N.mapDerivedCategory =
+      (Functor.mapDerivedCategoryNatIso (isoWhiskerRight e N)).hom ≫
+        (tripleComparison L' M' N).hom := by
+  dsimp only [tripleComparison, Functor.mapDerivedCategorySquareIso]
+  simp only [Iso.trans_hom, Iso.symm_hom,
+    isoWhiskerRight_hom, Functor.whiskerRight_comp, Category.assoc]
+  rw [← reassoc_of% (Functor.whiskerRight_comp
+    (Functor.mapDerivedCategoryCompIso L M).hom
+    (Functor.mapDerivedCategoryCompIso L M).inv N.mapDerivedCategory), Iso.hom_inv_id]
+  simp only [Functor.whiskerRight_id', Category.id_comp]
+  rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e N)]
+
 variable {E' : Type*} [Category E'] [Abelian E'] [HasDerivedCategory E']
   {M'' : D ⥤ E'} {N' : E' ⥤ F}
   [M''.Additive] [N'.Additive]
   [PreservesFiniteLimits M''] [PreservesFiniteColimits M'']
   [PreservesFiniteLimits N'] [PreservesFiniteColimits N']
+
+private lemma tripleComparison_left (e : M ⋙ N ≅ M'' ⋙ N') :
+    (tripleComparison L M N).hom ≫
+        Functor.whiskerLeft L.mapDerivedCategory
+          (Functor.mapDerivedCategorySquareIso e).hom =
+      (Functor.mapDerivedCategoryNatIso (isoWhiskerLeft L e)).hom ≫
+        (tripleComparison L M'' N').hom := by
+  rw [tripleComparison_hom, tripleComparison_hom]
+  dsimp only [Functor.mapDerivedCategorySquareIso]
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.whiskerLeft_comp, Category.assoc]
+  rw [← reassoc_of% (Functor.whiskerLeft_comp L.mapDerivedCategory
+    (Functor.mapDerivedCategoryCompIso M N).hom
+    (Functor.mapDerivedCategoryCompIso M N).inv), Iso.hom_inv_id]
+  simp only [Functor.whiskerLeft_id', Category.id_comp]
+  rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft L e)]
 
 end ExactCoherence
 
@@ -124,7 +166,8 @@ theorem exactDerivedCube
       reassoc_of% (tripleComparison_left qH), tripleComparison_right d]
     simp only [pR, Functor.mapDerivedCategoryNatIso_trans, Category.assoc]
   have h := hL.trans ((congrArg (fun p ↦
-    (Functor.mapDerivedCategoryNatIso p).hom ≫ (tripleComparison G' I' R₃).hom) hp).trans hR.symm)
+    (Functor.mapDerivedCategoryNatIso p).hom ≫ (tripleComparison G' I' R₃).hom) hp).trans
+      hR.symm)
   have h' := (cancel_epi (tripleComparison R₀ J H).hom).1 h
   exact congr_app h' M
 

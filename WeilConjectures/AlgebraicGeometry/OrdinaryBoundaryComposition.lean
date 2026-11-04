@@ -57,6 +57,7 @@ private theorem boundary_hom (A : Type (u + 1)) [CommRing A] [Finite A]
     Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
+  rfl
 
 private theorem comparison_inverse_comp (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -130,12 +131,14 @@ theorem ordinaryBoundary_comp (A : Type (u + 1)) [CommRing A] [Finite A]
   have := Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
   rw [boundary_hom, boundary_hom, boundary_hom]
-  simp only [Functor.map_comp, Category.assoc]
+  erw [Functor.map_comp]
+  simp only [Category.assoc]
   have hn := (lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctorPlusCompatibility.inv.naturality
     ((asIso (Functor.rightDerivedFunctorPlusBaseChange
       (lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} A)))).inv.app K)
   dsimp only [Functor.comp_map] at hn
-  rw [reassoc_of% hn]
+  erw [Category.assoc]
+  erw [reassoc_of% hn]
   have hi := comparison_inverse_comp A f g K
   have hi' := congrArg DerivedCategory.Plus.ι.map hi
   simp only [Functor.map_comp] at hi'

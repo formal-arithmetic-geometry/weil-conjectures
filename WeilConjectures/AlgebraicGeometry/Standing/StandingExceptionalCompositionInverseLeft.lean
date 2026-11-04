@@ -276,7 +276,18 @@ private theorem standingCompositeHom_inverse (Λ : Type (u + 1)) [CommRing Λ] [
 -- Explicit congruence keeps derived constructions folded when their site witnesses differ.
 universe u₁ u₂
 
+private theorem coefficientPiEq {α β : Sort u₁} {P : α → Sort u₂}
+    {Q : β → Sort u₂} (h : α = β) (hPQ : HEq P Q) :
+    (∀ x, P x) = (∀ x, Q x) := by
+  cases h
+  cases hPQ
+  rfl
+
 open Lean Meta Elab Tactic in
+private meta structure CoefficientCongrState where
+  proofs : Array (Expr × Expr × Expr) := #[]
+  congrs : Array (Expr × Nat × CongrTheorem) := #[]
+
 open Lean Meta Elab Tactic in
 private meta partial def coefficientHEq (lhs rhs : Expr) (fuel : Nat := 160) :
     StateRefT CoefficientCongrState MetaM Expr := do

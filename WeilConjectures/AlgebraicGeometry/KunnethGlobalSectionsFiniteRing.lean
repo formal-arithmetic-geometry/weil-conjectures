@@ -94,12 +94,10 @@ theorem isIso_kunnethGlobalSectionsMap_finiteCoefficientRing
   letI : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
   letI : Finite Λ := Padic.finite_coefficientExtensionRing l E n hn
   have hInv : HasInvertibleExponent Λ (Spec (CommRingCat.of D.k)) := by
-    have hdvr := (Padic.extension_integers_dvr l E
-      (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+    have hdvr := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
         Padic.coefficientExtensionMaximalIdeal l E := by
-      apply (hdvr.2.1 _).2
+      refine (hdvr.2.1 _).2 ?_
       change spectralNorm (Padic l) E (l : E) < 1
       rw [← map_natCast (algebraMap (Padic l) E),
         spectralNorm_extends (K := Padic l) (L := E)]

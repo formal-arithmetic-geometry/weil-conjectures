@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.AlgebraicGeometry.ChartNormalDifferential.ChartNormalDifferential
 
 /-!
 # Centred diagonal neighbourhood and its differential under an étale source map
