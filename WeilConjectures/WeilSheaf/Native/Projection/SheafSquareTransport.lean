@@ -28,6 +28,7 @@ lemma Endofunctor.IsoAlgebra.isoHComp_forget_symm_hom_app
   simp only [Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
     Iso.symm_hom, Iso.refl_inv, NatTrans.id_app]
   erw [Functor.map_id, Category.comp_id]
+  rfl
 
 /-- Rotate an invertible tensor comparison square to the opposite orientation. -/
 lemma tensorSquare_rotate {C : Type*} [Category C] [MonoidalCategory C]
