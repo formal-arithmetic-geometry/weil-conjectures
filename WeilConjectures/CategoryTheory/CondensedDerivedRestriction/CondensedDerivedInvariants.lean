@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedEquivariantBarData
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarAction
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionInvariants
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
@@ -97,8 +98,8 @@ isomorphism commuting with its inclusion.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: fully fixed sections form submodules stable under restriction and gluing. Restrict
 codomains of maps from trivial actions; composition with the inclusion is the inverse. -/
-theorem invariantsExist : Nonempty (Invariants A G) := by
-  sorry
+theorem invariantsExist : Nonempty (Invariants A G) :=
+  Profinite.CondensedAction.nonempty_invariants
 
 /-- Trivial action is additive and exact on the underlying modules.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).

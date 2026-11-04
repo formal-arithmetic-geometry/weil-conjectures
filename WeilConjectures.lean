@@ -14635,6 +14635,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.BaseCoefficientCondensedIdentification
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.BoundedExtremallyDisconnectedCover
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionInjectiveRestriction
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionInvariants
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionModule
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.GroupAlgebra.CondensedGroupAlgebraExactForgetful
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.InternalBar.CondensedEquivariantDeletionComparison
@@ -16355,6 +16356,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoid
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Products
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Projective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
