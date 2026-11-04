@@ -12,6 +12,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 import WeilConjectures.TraceFormula.Specialization.SliceSupport
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationLimitDimension
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
+public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 
 /-!
 
