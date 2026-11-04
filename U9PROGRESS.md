@@ -16,3 +16,26 @@
   description. Preserve its work and validate against the current slopmaster2 interfaces.
 - Dropped redundant additions to the root import aggregator: the leaf already imports the
   entire new dependency closure. This avoids touching/rebuilding the global all-module file.
+- Source-level import-DAG check: all 15 changed Lean modules are dependencies of
+  AffineLineBundle (14,743 local modules in the full leaf import closure).
+- ucheck submitted at d5c0aca70; currently queued waiting for a shared remote tree.
+- Shared notes updated so other agents can account for the #2071 merge.
+- Verified the leaf statement and surrounding variable assumptions are byte-for-byte unchanged.
+- Added a small AxiomAudit module (not yet built) to record `#print axioms` in the remote log.
+  Import-level scans show old sorries beyond the nine leaves; imports alone do not establish
+  proof dependencies, so the kernel axiom report is needed before claiming independence.
+- Proof summary prepared: finite etale A1 acyclicity; integral derived reduction and Qbar_l
+  scalar extension; pro-etale localization to lisse sheaves; bounded truncation devissage;
+  Noetherian induction and nilpotent reduction via smooth base change and localization.
+- Remote build started on slopci-w3, commit d5c0aca703, log
+  /home/ubuntu/u9/logs/K6-20261105T022045.log.
+- New finite-coefficient unit (43s), geometric smooth base change (14s), Weil smooth
+  base change (18s), Basic (11s), Restriction (5.1s), UnitForget (16s), and categorical
+  helpers passed. At 02:27 UTC, AffineLineConstant is still compiling (~6 CPU minutes);
+  no errors reported and no resource-limit or transparency changes made.
+- GREEN: ucheck WeilConjectures.WeilSheaf.AffineLineBundle returned rc=0,
+  built=44 failed=0, log /home/ubuntu/u9/logs/K6-20261105T022045.log.
+  This validates the leaf and all 14 new #2071 modules in its import closure.
+  AffineLineConstant completed in 363s. No proof fixes were needed after the merge.
+- Next/final check: compile HomotopyInvariance.AxiomAudit to record actual axiom dependencies
+  of the constant, lisse, smooth-base-change and final unit-isomorphism statements.
