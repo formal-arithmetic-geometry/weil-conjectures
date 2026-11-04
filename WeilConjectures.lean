@@ -16628,6 +16628,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfectAdic
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism.Point
@@ -21920,6 +21921,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerIdentific
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerStratum
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerTopology
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelConstructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelDerived
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
@@ -22087,6 +22089,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantFiniten
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissage
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissageRegular
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteEtaleAlgClosed
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarMilnorSequence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarMittagLeffler
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarStratumLisse
