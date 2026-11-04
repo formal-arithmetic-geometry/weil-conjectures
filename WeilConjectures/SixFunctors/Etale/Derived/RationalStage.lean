@@ -280,14 +280,14 @@ instance isTriangulated_boundedConstructibleRational :
   exact {}
 
 /-- **Ekedahl's theorem** (input from the theory of `ℓ`-adic sheaves). For `X` separated and of
-finite type over a field `k`, the rational stage `Dᵇc(X, E)` carries a bounded t-structure: the
-standard one, whose heart is the category of constructible `E`-sheaves.
+finite type over a field `k`, the rational stage `Dᵇc(X, E)` carries a bounded t-structure.
+Ekedahl's standard t-structure, whose heart is the category of constructible `E`-sheaves, is one;
+the statement only asserts that some bounded t-structure exists.
 
 References: T. Ekedahl, *On the adic formalism*; B. Bhatt, P. Scholze, *The pro-étale topology
-for schemes*, §6. The blueprint proves the corresponding statement for the pro-étale model of
-`Dᵇc(X, E)` (blueprint `sk-thm-sbc-karoubian`); the comparison of the étale model
-`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational` with the pro-étale one is
-not available in this repository. -/
+for schemes*, §6. The blueprint works only with the pro-étale model of `Dᵇc(X, E)` and has no node
+for the étale model `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational`; the
+comparison of the two models is not available in this repository. -/
 theorem exists_tStructure_bounded_boundedConstructibleRational {k : Type u} [Field k]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
     ∃ t : Triangulated.TStructure (boundedConstructibleRational l E X).FullSubcategory,
@@ -403,7 +403,6 @@ theorem exists_boundedConstructibleIntegral_idempotent {k : Type u} [Field k]
       ← Functor.map_comp_assoc, biprod.inr_fst_assoc, Category.assoc, biprod.mapIso_hom]
     rw [reassoc_of% hinr]
     simp [reassoc_of% hIB']
-
 
 /-- Idempotent completeness: `Dᵇc(X, E)` is idempotent complete, so that the canonical functor to
 its Karoubi envelope `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructibleRational` is an
