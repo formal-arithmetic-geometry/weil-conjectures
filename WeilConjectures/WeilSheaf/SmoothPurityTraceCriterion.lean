@@ -61,6 +61,7 @@ theorem bijective_map_comp_on_free_of_forget
     rfl
   constructor
   · intro u u' huu
+    change R.map u ≫ d = R.map u' ≫ d at huu
     apply (adj₁.homEquiv X A).injective
     apply h.1
     change r.map (adj₁.homEquiv X A u) ≫ e.inv.app A ≫ V.map d =
