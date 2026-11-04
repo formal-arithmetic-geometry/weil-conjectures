@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.KunnethGlobalSections
 public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.AlgebraicGeometry.Supported.SupportedExteriorProduct
 
@@ -300,6 +301,83 @@ noncomputable def exteriorSupportedSections
           (supportedProductImmersion f g i j).openComplement.ι)))).inv
 
 
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
+/-- The pointwise tensor of global sections is natural in both sheaves. -/
+@[reassoc]
+theorem exteriorSectionsTensor_naturality (T : Scheme.{u})
+    {F F' G G' : Sheaf T.smallEtaleTopology C} (a : F ⟶ F') (b : G ⟶ G') :
+    tensorHom ((Sheaf.Γ T.smallEtaleTopology C).map a)
+        ((Sheaf.Γ T.smallEtaleTopology C).map b) ≫ exteriorSectionsTensor C T F' G' =
+      exteriorSectionsTensor C T F G ≫ (Sheaf.Γ T.smallEtaleTopology C).map (tensorHom a b) := by
+  rw [exteriorSectionsTensor, exteriorSectionsTensor, ← Sheaf.ΓHomEquiv_naturality_left,
+    ← Sheaf.ΓHomEquiv_naturality_right]
+  congr 1
+  ext U
+  have hμ := congr_app (Functor.LaxMonoidal.μ_natural
+    (sheafToPresheaf T.smallEtaleTopology C) a b) U
+  simp only [NatTrans.comp_app] at hμ
+  simp only [NatTrans.comp_app, Functor.const_map_app]
+  rw [tensorHom_comp_tensorHom_assoc, Sheaf.ΓRes_naturality, Sheaf.ΓRes_naturality,
+    ← tensorHom_comp_tensorHom_assoc, Category.assoc]
+  congr 1
+
+/-- The pullback and tensor of sections is natural in both sheaves. -/
+@[reassoc]
+theorem exteriorSectionsMap_naturality
+    {F F' : Sheaf X.smallEtaleTopology C} {G G' : Sheaf Y.smallEtaleTopology C}
+    (a : F ⟶ F') (b : G ⟶ G') :
+    tensorHom ((Sheaf.Γ X.smallEtaleTopology C).map a)
+        ((Sheaf.Γ Y.smallEtaleTopology C).map b) ≫ exteriorSectionsMap C f g F' G' =
+      exteriorSectionsMap C f g F G ≫ (Sheaf.Γ (pullback f g).smallEtaleTopology C).map
+        (tensorHom ((upperStar C (pullback.fst f g)).map a)
+          ((upperStar C (pullback.snd f g)).map b)) := by
+  rw [exteriorSectionsMap, exteriorSectionsMap, tensorHom_comp_tensorHom_assoc,
+    globalSectionsUpperStarMap_naturality, globalSectionsUpperStarMap_naturality,
+    ← tensorHom_comp_tensorHom, Category.assoc, exteriorSectionsTensor_naturality,
+    Category.assoc]
+
+/-- The supported exterior product of sections followed by the inclusion of supported
+sections is the pullback and tensor of the two included sections. -/
+@[reassoc]
+theorem exteriorSupportedSections_ΓSupportι
+    (F : Sheaf X.smallEtaleTopology C) (G : Sheaf Y.smallEtaleTopology C) :
+    exteriorSupportedSections C f g i j F G ≫
+        (Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
+          (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι))).app
+          ((upperStar C (pullback.fst f g)).obj F ⊗ (upperStar C (pullback.snd f g)).obj G) =
+      tensorHom
+        ((Sheaf.ΓSupportι X.smallEtaleTopology C
+          (op (Scheme.Etale.mk i.openComplement.ι))).app F)
+        ((Sheaf.ΓSupportι Y.smallEtaleTopology C
+          (op (Scheme.Etale.mk j.openComplement.ι))).app G) ≫
+        exteriorSectionsMap C f g F G := by
+  rw [exteriorSupportedSections, Category.assoc]
+  erw [PreservesKernel.iso_inv_ι]
+  exact kernel.lift_ι _ _ _
+
+/-- The supported exterior product of sections is natural in both sheaves. -/
+@[reassoc]
+theorem exteriorSupportedSections_naturality
+    {F F' : Sheaf X.smallEtaleTopology C} {G G' : Sheaf Y.smallEtaleTopology C}
+    (a : F ⟶ F') (b : G ⟶ G') :
+    tensorHom ((globalSectionsWithSupport C i).map a) ((globalSectionsWithSupport C j).map b) ≫
+        exteriorSupportedSections C f g i j F' G' =
+      exteriorSupportedSections C f g i j F G ≫
+        (globalSectionsWithSupport C (supportedProductImmersion f g i j)).map
+          (tensorHom ((upperStar C (pullback.fst f g)).map a)
+            ((upperStar C (pullback.snd f g)).map b)) := by
+  rw [← cancel_mono ((Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
+    (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι))).app _),
+    Category.assoc, exteriorSupportedSections_ΓSupportι, Category.assoc]
+  erw [(Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
+    (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι))).naturality]
+  rw [reassoc_of% exteriorSupportedSections_ΓSupportι, tensorHom_comp_tensorHom_assoc]
+  erw [(Sheaf.ΓSupportι X.smallEtaleTopology C
+      (op (Scheme.Etale.mk i.openComplement.ι))).naturality,
+    (Sheaf.ΓSupportι Y.smallEtaleTopology C
+      (op (Scheme.Etale.mk j.openComplement.ι))).naturality]
+  rw [← tensorHom_comp_tensorHom_assoc, exteriorSectionsMap_naturality]
+
 /-- The ordinary exterior product of two cochain complexes, with the signed total
 tensor differential. Source: the nested blueprint unit cited above
 (blueprint: def-pur-supported-exterior-product). -/
@@ -309,6 +387,86 @@ noncomputable def exteriorSectionsComplexTarget
     CochainComplex (Sheaf (pullback f g).smallEtaleTopology C) ℤ :=
   ((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P ⊗
     ((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q
+
+section Tensor
+
+open HomologicalComplex in
+/-- The differential of the tensor product of two cochain complexes on a summand `(r, s)`. -/
+private lemma ιTensorObj_d_tensor {D : Type*} [Category D] [MonoidalCategory D] [Preadditive D]
+    [HasZeroObject D] [(curriedTensor D).Additive]
+    [∀ X₁ : D, ((curriedTensor D).obj X₁).Additive]
+    (K₁ K₂ : CochainComplex D ℤ) [HasTensor K₁ K₂] (r s n : ℤ) (h : r + s = n) :
+    ιTensorObj K₁ K₂ r s n h ≫ (tensorObj K₁ K₂).d n (n + 1) =
+      ComplexShape.ε₁ (.up ℤ) (.up ℤ) (.up ℤ) (r, s) •
+        (K₁.d r (r + 1) ▷ K₂.X s ≫ ιTensorObj K₁ K₂ (r + 1) s (n + 1) (by omega)) +
+      ComplexShape.ε₂ (.up ℤ) (.up ℤ) (.up ℤ) (r, s) •
+        (K₁.X r ◁ K₂.d s (s + 1) ≫ ιTensorObj K₁ K₂ r (s + 1) (n + 1) (by omega)) := by
+  rw [mapBifunctor.d_eq, Preadditive.comp_add, mapBifunctor.ι_D₁, mapBifunctor.ι_D₂,
+    mapBifunctor.d₁_eq _ _ _ _ (by simp : (ComplexShape.up ℤ).Rel r (r + 1)) _ _
+      (show r + 1 + s = n + 1 by omega),
+    mapBifunctor.d₂_eq _ _ _ _ _ (by simp : (ComplexShape.up ℤ).Rel s (s + 1)) _
+      (show r + (s + 1) = n + 1 by omega)]
+  rfl
+
+end Tensor
+
+/-- The degree `n` component of the totalized supported pairing: the coproduct of the
+bidegree pairings followed by the inclusion of that bidegree. -/
+private noncomputable def exteriorSupportedSectionsComplexF
+    (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
+    (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ) (n : ℤ) :
+    (((globalSectionsWithSupport C i).mapHomologicalComplex (.up ℤ)).obj P ⊗
+        ((globalSectionsWithSupport C j).mapHomologicalComplex (.up ℤ)).obj Q).X n ⟶
+      (((globalSectionsWithSupport C (supportedProductImmersion f g i j)).mapHomologicalComplex
+        (.up ℤ)).obj (exteriorSectionsComplexTarget C f g P Q)).X n :=
+  HomologicalComplex.mapBifunctorDesc
+    (K₁ := ((globalSectionsWithSupport C i).mapHomologicalComplex (.up ℤ)).obj P)
+    (K₂ := ((globalSectionsWithSupport C j).mapHomologicalComplex (.up ℤ)).obj Q)
+    (fun r s h ↦ exteriorSupportedSections C f g i j (P.X r) (Q.X s) ≫
+      (globalSectionsWithSupport C (supportedProductImmersion f g i j)).map
+        (HomologicalComplex.ιTensorObj
+          (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P)
+          (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)
+          r s n h))
+
+@[reassoc]
+private lemma ι_exteriorSupportedSectionsComplexF
+    (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
+    (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ) (r s n : ℤ) (h : r + s = n) :
+    HomologicalComplex.ιTensorObj
+        (((globalSectionsWithSupport C i).mapHomologicalComplex (.up ℤ)).obj P)
+        (((globalSectionsWithSupport C j).mapHomologicalComplex (.up ℤ)).obj Q) r s n h ≫
+      exteriorSupportedSectionsComplexF C f g i j P Q n =
+    exteriorSupportedSections C f g i j (P.X r) (Q.X s) ≫
+      (globalSectionsWithSupport C (supportedProductImmersion f g i j)).map
+        (HomologicalComplex.ιTensorObj
+          (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P)
+          (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)
+          r s n h) := by
+  unfold exteriorSupportedSectionsComplexF
+  refine HomologicalComplex.ι_mapBifunctorDesc _ r s ?_
+
+/-- Naturality of the supported exterior product in the first sheaf. -/
+@[reassoc]
+private lemma exteriorSupportedSections_naturality_left'
+    {F F' : Sheaf X.smallEtaleTopology C} (a : F ⟶ F') (G : Sheaf Y.smallEtaleTopology C) :
+    (globalSectionsWithSupport C i).map a ▷ (globalSectionsWithSupport C j).obj G ≫
+        exteriorSupportedSections C f g i j F' G =
+      exteriorSupportedSections C f g i j F G ≫
+        (globalSectionsWithSupport C (supportedProductImmersion f g i j)).map
+          ((upperStar C (pullback.fst f g)).map a ▷ (upperStar C (pullback.snd f g)).obj G) := by
+  simpa using exteriorSupportedSections_naturality C f g i j a (𝟙 G)
+
+/-- Naturality of the supported exterior product in the second sheaf. -/
+@[reassoc]
+private lemma exteriorSupportedSections_naturality_right'
+    (F : Sheaf X.smallEtaleTopology C) {G G' : Sheaf Y.smallEtaleTopology C} (b : G ⟶ G') :
+    (globalSectionsWithSupport C i).obj F ◁ (globalSectionsWithSupport C j).map b ≫
+        exteriorSupportedSections C f g i j F G' =
+      exteriorSupportedSections C f g i j F G ≫
+        (globalSectionsWithSupport C (supportedProductImmersion f g i j)).map
+          ((upperStar C (pullback.fst f g)).obj F ◁ (upperStar C (pullback.snd f g)).map b) := by
+  simpa using exteriorSupportedSections_naturality C f g i j (𝟙 F) b
 
 /-- The degreewise supported pairings extend uniquely to the signed total complexes.
 Source: the nested blueprint unit cited above (blueprint: def-pur-supported-exterior-product).
@@ -334,7 +492,33 @@ theorem existsUnique_exteriorSupportedSectionsComplex
               (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P)
               (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)
               r s n h) := by
-  sorry
+  classical
+  refine ⟨⟨exteriorSupportedSectionsComplexF C f g i j P Q, ?_⟩, ?_, ?_⟩
+  · rintro n _ rfl
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro r s h
+    rw [ι_exteriorSupportedSectionsComplexF_assoc, Functor.mapHomologicalComplex_obj_d,
+      ← Functor.map_comp]
+    unfold exteriorSectionsComplexTarget
+    erw [ιTensorObj_d_tensor]
+    rw [← Category.assoc]
+    erw [ιTensorObj_d_tensor]
+    simp only [Functor.mapHomologicalComplex_obj_d, Functor.map_add, Functor.map_units_smul,
+      Functor.map_comp, Preadditive.add_comp, Linear.units_smul_comp, Category.assoc,
+      Linear.comp_units_smul, Preadditive.comp_add, ι_exteriorSupportedSectionsComplexF,
+      Preadditive.comp_add]
+    congr 2
+    · erw [exteriorSupportedSections_naturality_left'_assoc]
+      rfl
+    · erw [exteriorSupportedSections_naturality_right'_assoc]
+      rfl
+  · intro r s n h
+    exact ι_exteriorSupportedSectionsComplexF C f g i j P Q r s n h
+  · intro φ hφ
+    ext n : 1
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro r s h
+    exact (hφ r s n h).trans (ι_exteriorSupportedSectionsComplexF C f g i j P Q r s n h).symm
 
 /-- The totalized pairing of supported sections. It is the unique chain map whose
 bidegree maps are the explicit kernel lifts above; no object is chosen by bare existence.

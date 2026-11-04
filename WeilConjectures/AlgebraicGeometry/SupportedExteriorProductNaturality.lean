@@ -66,26 +66,6 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
   [HasSmallSiteSheafify C]
 
-omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
-/-- The pointwise tensor of global sections is natural in both sheaves. -/
-@[reassoc]
-theorem exteriorSectionsTensor_naturality (T : Scheme.{u})
-    {F F' G G' : Sheaf T.smallEtaleTopology C} (a : F ⟶ F') (b : G ⟶ G') :
-    tensorHom ((Sheaf.Γ T.smallEtaleTopology C).map a)
-        ((Sheaf.Γ T.smallEtaleTopology C).map b) ≫ exteriorSectionsTensor C T F' G' =
-      exteriorSectionsTensor C T F G ≫ (Sheaf.Γ T.smallEtaleTopology C).map (tensorHom a b) := by
-  rw [exteriorSectionsTensor, exteriorSectionsTensor, ← Sheaf.ΓHomEquiv_naturality_left,
-    ← Sheaf.ΓHomEquiv_naturality_right]
-  congr 1
-  ext U
-  have hμ := congr_app (Functor.LaxMonoidal.μ_natural
-    (sheafToPresheaf T.smallEtaleTopology C) a b) U
-  simp only [NatTrans.comp_app] at hμ
-  simp only [NatTrans.comp_app, Functor.const_map_app]
-  rw [tensorHom_comp_tensorHom_assoc, Sheaf.ΓRes_naturality, Sheaf.ΓRes_naturality,
-    ← tensorHom_comp_tensorHom_assoc, Category.assoc]
-  congr 1
-
 omit [HasSmallSiteSheafify C] in
 /-- The tensor product of two localized chain maps followed by the tensor localization map. -/
 @[reassoc]
@@ -98,21 +78,6 @@ theorem derivedTensorHom_Q_map_comp_μ {T : Scheme.{u}}
   exact Functor.LaxMonoidal.μ_natural DerivedCategory.Q φ ψ
 
 variable {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
-
-/-- The pullback and tensor of sections is natural in both sheaves. -/
-@[reassoc]
-theorem exteriorSectionsMap_naturality
-    {F F' : Sheaf X.smallEtaleTopology C} {G G' : Sheaf Y.smallEtaleTopology C}
-    (a : F ⟶ F') (b : G ⟶ G') :
-    tensorHom ((Sheaf.Γ X.smallEtaleTopology C).map a)
-        ((Sheaf.Γ Y.smallEtaleTopology C).map b) ≫ exteriorSectionsMap C f g F' G' =
-      exteriorSectionsMap C f g F G ≫ (Sheaf.Γ (pullback f g).smallEtaleTopology C).map
-        (tensorHom ((upperStar C (pullback.fst f g)).map a)
-          ((upperStar C (pullback.snd f g)).map b)) := by
-  rw [exteriorSectionsMap, exteriorSectionsMap, tensorHom_comp_tensorHom_assoc,
-    globalSectionsUpperStarMap_naturality, globalSectionsUpperStarMap_naturality,
-    ← tensorHom_comp_tensorHom, Category.assoc, exteriorSectionsTensor_naturality,
-    Category.assoc]
 
 omit [HasSmallSiteSheafify C] in
 /-- The comparison of the derived exterior product with the ordinary exterior complex is
@@ -164,48 +129,6 @@ theorem exteriorProductResolutionIso_inv_naturality
   exact (exteriorProductResolutionComparison_naturality C f g φ ψ).symm
 
 variable {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
-
-/-- The supported exterior product of sections followed by the inclusion of supported
-sections is the pullback and tensor of the two included sections. -/
-@[reassoc]
-theorem exteriorSupportedSections_ΓSupportι
-    (F : Sheaf X.smallEtaleTopology C) (G : Sheaf Y.smallEtaleTopology C) :
-    exteriorSupportedSections C f g i j F G ≫
-        (Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
-          (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι))).app
-          ((upperStar C (pullback.fst f g)).obj F ⊗ (upperStar C (pullback.snd f g)).obj G) =
-      tensorHom
-        ((Sheaf.ΓSupportι X.smallEtaleTopology C
-          (op (Scheme.Etale.mk i.openComplement.ι))).app F)
-        ((Sheaf.ΓSupportι Y.smallEtaleTopology C
-          (op (Scheme.Etale.mk j.openComplement.ι))).app G) ≫
-        exteriorSectionsMap C f g F G := by
-  rw [exteriorSupportedSections, Category.assoc]
-  erw [PreservesKernel.iso_inv_ι]
-  exact kernel.lift_ι _ _ _
-
-/-- The supported exterior product of sections is natural in both sheaves. -/
-@[reassoc]
-theorem exteriorSupportedSections_naturality
-    {F F' : Sheaf X.smallEtaleTopology C} {G G' : Sheaf Y.smallEtaleTopology C}
-    (a : F ⟶ F') (b : G ⟶ G') :
-    tensorHom ((globalSectionsWithSupport C i).map a) ((globalSectionsWithSupport C j).map b) ≫
-        exteriorSupportedSections C f g i j F' G' =
-      exteriorSupportedSections C f g i j F G ≫
-        (globalSectionsWithSupport C (supportedProductImmersion f g i j)).map
-          (tensorHom ((upperStar C (pullback.fst f g)).map a)
-            ((upperStar C (pullback.snd f g)).map b)) := by
-  rw [← cancel_mono ((Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
-    (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι))).app _),
-    Category.assoc, exteriorSupportedSections_ΓSupportι, Category.assoc]
-  erw [(Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
-    (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι))).naturality]
-  rw [exteriorSupportedSections_ΓSupportι_assoc, tensorHom_comp_tensorHom_assoc]
-  erw [(Sheaf.ΓSupportι X.smallEtaleTopology C
-      (op (Scheme.Etale.mk i.openComplement.ι))).naturality,
-    (Sheaf.ΓSupportι Y.smallEtaleTopology C
-      (op (Scheme.Etale.mk j.openComplement.ι))).naturality]
-  rw [← tensorHom_comp_tensorHom_assoc, exteriorSectionsMap_naturality]
 
 /-- The defining property of the totalized supported pairing. -/
 @[reassoc]
