@@ -193,7 +193,6 @@ end AlgebraicGeometry
 
 end
 
-end
 
 open CategoryTheory AlgebraicGeometry
 
