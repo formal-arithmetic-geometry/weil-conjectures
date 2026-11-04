@@ -1,0 +1,92 @@
+/-
+Copyright (c) 2026 The Weil Conjectures contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTrace
+
+/-!
+# The descended smooth trace in native Weil complexes
+
+Given identifications of native complexes with the descended Tate source and the
+descended constant target, the exact equivalence with condensed Weil sheaves lifts
+the finite-field smooth trace to a native morphism. Its adjoint transpose is a native
+purity morphism. The source and target identifications are explicit inputs here.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory MonoidalCategory
+
+namespace AlgebraicGeometry.WeilComplex
+
+open ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+  [Fact (ringChar k₀ ≠ l)]
+
+local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+
+variable {X Y : Scheme.{u}}
+  [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  (d : ℕ) (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
+  (eT : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj ≅
+    (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
+      (X ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj
+        (CondensedRing.boundedConstructibleTateTwist l
+          (Over.mk (X ↘ Spec (CommRingCat.of k₀))) d (2 * d)).obj)
+  (eU : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.obj U.obj ≅
+    (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
+      (Y ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj (𝟙_ _))
+
+/-- Lift the descended smooth trace through the fully faithful condensed realization. -/
+noncomputable def traceOfDescendedSmoothTrace : (derivedLowerShriek k₀ l f).obj T ⟶ U :=
+  ((objectProperty k₀ l Y).ι ⋙
+    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor).preimage
+      ((derivedLowerShriekCompToCondensedIso k₀ l f).hom.app T ≫
+        (CondensedRing.weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)
+          (CondensedRing.compactificationOverField
+            (Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))))
+          (comp_over f (Spec (CommRingCat.of k₀)))).map eT.hom ≫
+        CondensedRing.geometricFiberWeilSmoothTrace l
+          (Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))) d ≫ eU.inv)
+
+/-- The condensed realization of the native trace is the prescribed descended trace. -/
+theorem map_traceOfDescendedSmoothTrace :
+    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.map
+        (traceOfDescendedSmoothTrace f d T U eT eU).hom =
+      (derivedLowerShriekCompToCondensedIso k₀ l f).hom.app T ≫
+        (CondensedRing.weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)
+          (CondensedRing.compactificationOverField
+            (Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))))
+          (comp_over f (Spec (CommRingCat.of k₀)))).map eT.hom ≫
+        CondensedRing.geometricFiberWeilSmoothTrace l
+          (Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))) d ≫ eU.inv :=
+  ((objectProperty k₀ l Y).ι ⋙
+    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor).map_preimage _
+
+variable {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}
+  (adj : derivedLowerShriek k₀ l f ⊣ J)
+
+/-- The purity morphism obtained by transposing the descended native trace. -/
+noncomputable def purityMapOfDescendedSmoothTrace : T ⟶ J.obj U :=
+  adj.homEquiv T U (traceOfDescendedSmoothTrace f d T U eT eU)
+
+/-- The adjoint transpose has the prescribed native trace as its counit composite. -/
+theorem map_purityMapOfDescendedSmoothTrace_comp_counit :
+    (derivedLowerShriek k₀ l f).map (purityMapOfDescendedSmoothTrace f d T U eT eU adj) ≫
+      adj.counit.app U = traceOfDescendedSmoothTrace f d T U eT eU := by
+  exact (adj.homEquiv T U).symm_apply_apply _
+
+end AlgebraicGeometry.WeilComplex
