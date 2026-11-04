@@ -164,6 +164,4 @@ Source: Bhatt--Scholze 3.5.5 and 3.1.11
       DerivedCategory.Q.map (roosF.map
         (koszulTowerComplexMap R (Functor.whiskerLeft P.asFunctor (b.α m))))
 
-set_option maxHeartbeats 1000000 in
--- The kernel checks several independent coefficient-category endpoints here.
 end CategoryTheory.PerfectReductionRoos

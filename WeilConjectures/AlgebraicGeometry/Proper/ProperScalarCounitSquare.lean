@@ -56,6 +56,4 @@ abbrev directImageScalarAdjunction {A B : Type u} [CommRing A] [CommRing B]
     directImageScalarExtension φ T ⊣ directImageScalarRestriction φ T :=
   proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) φ)
 
-set_option maxHeartbeats 1000000 in
--- The four adjunctions and representative identifications require substantial elaboration.
 end AlgebraicGeometry.ProEtale

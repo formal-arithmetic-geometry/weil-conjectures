@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteNativeTensor.FiniteNativeEtaleProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekLocality
-import all WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import all WeilConjectures.AlgebraicGeometry.EtaleSmoothDualityTensor
 
 /-! # The smooth etale transpose for a supplied compactification
 
@@ -47,7 +48,7 @@ theorem canonicalEtaleSmoothTranspose_isIso (A : Type (u + 1)) [CommRing A] [Fin
   let : HasCompactification f := c.hasCompactification
   obtain ⟨_, _, _, _, hθ⟩ := Etale.exists_dualizingComplex_iso_and_tensor A f df
   have ht := hθ K
-  rw [← Etale.ambientTensorMap_eq,
+  rw [← Etale.ambientTensorMap_eq A f K,
     ← Etale.ambientTensorMap_compactification A f c] at ht
   exact ht
 

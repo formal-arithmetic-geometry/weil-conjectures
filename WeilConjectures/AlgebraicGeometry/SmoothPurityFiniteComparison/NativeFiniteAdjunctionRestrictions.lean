@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
 public import WeilConjectures.AlgebraicGeometry.AdjunctionTransfer.EtaleProEtaleAdjunctionTransfer
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingCompactification
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingCompactification
 
 /-! # Native finite-coefficient adjunction restrictions
 
@@ -40,7 +41,7 @@ Source: literature/blueprint/latest/blueprint/part-six-operations/
 sec-six-functors-basics/sec-ctf-finite-foundations/sk-prop-ctf-finite-comparison/
 sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.md, canonical compact-support
 comparison (blueprint: def-sp-finite-adjunction-restrictions). -/
-def encodingCompactSupportComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
+@[no_expose] def encodingCompactSupportComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (encX : FiniteDiscreteOrdinary.Encoding A X)
     (encZ : FiniteDiscreteOrdinary.Encoding A c.Z)
     (encY : FiniteDiscreteOrdinary.Encoding A Y) :

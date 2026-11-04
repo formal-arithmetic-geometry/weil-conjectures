@@ -133,6 +133,22 @@ abbrev singletonSequenceDerived (n : ℕ) :=
   (systemSingleDerivedExtension B n S T).derived ⋙
     (strictSystemSequenceEquivalence B).functor.mapDerivedCategory
 
+/-- Vertical evaluation is left exact: it is reassembly inverse followed by evaluation.
+Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+instance singletonSequenceEvaluationLimits (n : ℕ) :
+    PreservesFiniteLimits (systemSequenceEvaluation B n) :=
+  preservesFiniteLimits_of_natIso
+    (F := (strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n)
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
+
+/-- Vertical evaluation is right exact: it is reassembly inverse followed by evaluation.
+Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+instance singletonSequenceEvaluationColimits (n : ℕ) :
+    PreservesFiniteColimits (systemSequenceEvaluation B n) :=
+  preservesFiniteColimits_of_natIso
+    (F := (strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n)
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
+
 /-- Its actual derived adjunction, transported along the exact-functor compositor.
 Source: Stacks 0FND (blueprint: def-pur-system-singleton-scalar-comparisons). -/
 def singletonSequenceDerivedAdjunction (n : ℕ) :
@@ -176,6 +192,8 @@ def singletonRestrictionEvaluation (n : ℕ) :
   NatIso.ofComponents (fun M ↦ (fullyFaithfulForget _).preimageIso
     (PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; ext x; rfl)))
     (by intros; ext U x; rfl)
+
+variable (A : SystemScalarModel (singletonSequenceRingMap a))
 
 /-- The ordinary comparison is the conjugate of identity-on-sections restriction.
 Source: Stacks 03D7 and 03EK
@@ -245,7 +263,5 @@ def singletonScalarSquare (n m : ℕ) (h : n ≤ m) :
   (systemScalarModelDerivedComposition (a.naturality (homOfLE h).op)
     (S (a.app (op m))) (S (D.map (homOfLE h).op))
       (S (B.map (homOfLE h).op ≫ a.app (op n)))).symm
-
-variable (A : SystemScalarModel (singletonSequenceRingMap a))
 
 end SheafOfModules

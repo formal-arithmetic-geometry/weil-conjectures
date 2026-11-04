@@ -8,12 +8,10 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-import WeilConjectures.AlgebraicGeometry.Etale.Closed.EtaleClosedSupportTriangle
-import WeilConjectures.AlgebraicGeometry.EtaleInjectiveSupportSequence
+import WeilConjectures.AlgebraicGeometry.EtaleSupportRetraction
 import WeilConjectures.AlgebraicGeometry.RelativeLineLowDegreeGeneral
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+import WeilConjectures.Mathlib.CategoryTheory.Iso
 
 /-!
 # Standard-pair low-degree support vanishing
@@ -67,6 +65,36 @@ theorem isZero_homology_rightDerivedSectionsWithSupport_standard_pair
           ((DerivedCategory.singleFunctor _ 0).obj
             (AlgebraicGeometry.Scheme.finiteEtaleTateSheaf Λ (ell ^ N)
               (AffineSpace (ULift.{u} (Fin 1)) Y) (by simpa using hΛ) 1))))) := by
-  sorry
+  intro q hq
+  have hm : 0 < ell ^ N := pow_pos hell.pos _
+  have hmk : IsUnit ((ell ^ N : ℕ) : Γ(Spec (.of k), ⊤)) := by
+    simpa only [Nat.cast_pow, map_pow, map_natCast] using
+      (hell_unit.pow N).map (Scheme.ΓSpecIso (.of k)).inv.hom
+  have hmY : IsUnit ((ell ^ N : ℕ) : Γ(Y, ⊤)) := by
+    simpa only [map_natCast] using hmk.map aY.appTop.hom
+  let p := (AffineSpace.over (ULift.{u} (Fin 1)) Y).hom
+  have hmX : IsUnit ((ell ^ N : ℕ) : Γ(AffineSpace (ULift.{u} (Fin 1)) Y, ⊤)) := by
+    simpa only [map_natCast] using hmY.map p.appTop.hom
+  obtain ⟨-, c, -⟩ := Scheme.etaleFiniteTwistPullback Λ (ell ^ N) hm hΛ
+  obtain ⟨e₀, eπ, -, -, hH1, hid⟩ :=
+    relativeLineLowDegreeGeneral k ell hell hell_unit N hN Λ hΛ Y aY G j hj
+  let F := lowerStar (ModuleCat.{u + 1} Λ) p
+  let adj := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
+  let LX := (upperStar (ModuleCat.{u + 1} Λ) p).obj
+    (Scheme.finiteEtaleTateSheaf Λ (ell ^ N) Y hΛ 1)
+  have : IsIso (F.map (adj.unit.app LX) ≫
+      (lowerStarComp (ModuleCat.{u + 1} Λ) j p (j ≫ p) rfl).hom.app _) :=
+    isIso_of_comp_eq_comp_comp (a := 𝟙 _) (b := 𝟙 _) ((Category.id_comp _).trans hid.symm)
+  have hres : IsIso (F.map (adj.unit.app LX)) := IsIso.of_isIso_comp_right _
+    ((lowerStarComp (ModuleCat.{u + 1} Λ) j p (j ≫ p) rfl).hom.app _)
+  have hij : Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base =
+      (Set.range j.base)ᶜ := by
+    rw [hj, compl_compl]
+  refine isZero_homology_rightDerived_sectionsWithSupport_of_retraction Λ
+    (AffineSpace.zeroSection _ Y) j hij p (AffineSpace.zeroSection_comp_over _ Y) _ ?_ ?_ q hq
+  · exact (NatTrans.isIso_app_iff_of_iso (Functor.whiskerRight adj.unit F)
+      (c p hmY hmX 1)).1 hres
+  · exact (hH1.of_iso (F.homologyRightDerivedFunctorPlusObjSingleFunctorIso _ 1).symm).of_iso
+      ((F.rightDerived 1).mapIso (c p hmY hmX 1)).symm
 
 end AlgebraicGeometry.Etale

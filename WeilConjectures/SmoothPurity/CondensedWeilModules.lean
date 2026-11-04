@@ -49,11 +49,24 @@ abbrev condensedConstructibleWeilSheaves
   ObjectProperty.FullSubcategory (fun M : condensedWeilModules Λ g ↦
     IsConstructibleModuleObject (condensedRingObj Λ Y) M.carrier)
 
+section Derived
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ] {Y : Scheme.{u}} (g : Y ⟶ Y) [IsIso g]
+
 /-- Forget the structure isomorphism of an actual Weil module.
 Source: the forgetful functor in the current definition
 (blueprint: def-weil-weil-sheaf-complex). -/
 abbrev condensedWeilModuleForget :=
   CategoryTheory.Endofunctor.IsoAlgebra.forget (CondensedRing.upperStar Λ g)
+
+/-- Weil modules over an automorphism form a Grothendieck abelian category.
+Source: the fixed-pair construction in the current definition, and the native
+`IsoAlgebra.isGrothendieckAbelian` theorem
+(blueprint: def-weil-weil-sheaf-complex). -/
+instance condensedWeilModules_isGrothendieckAbelian :
+    IsGrothendieckAbelian.{u + 1} (condensedWeilModules Λ g) :=
+  CategoryTheory.Endofunctor.IsoAlgebra.isGrothendieckAbelian (CondensedRing.upperStar Λ g)
 
 /-- Bounded complexes of Weil modules with constructible underlying cohomology.
 This is a property in the ordinary derived category of Weil modules, before forgetting.
@@ -124,11 +137,6 @@ def condensedWeilRealization : condensedWeilComplex Λ g ⥤ condensedStrictWeil
   map f := ObjectProperty.homMk (ObjectProperty.homMk
     { f := (condensedWeilModuleForget Λ g).mapDerivedCategory.map f.hom
       h := (condensedWeilDerivedStructure Λ g).hom.naturality f.hom })
-
-section Derived
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-  [MonObj Λ] [IsCommMonObj Λ] {Y : Scheme.{u}} (g : Y ⟶ Y) [IsIso g]
 
 end Derived
 

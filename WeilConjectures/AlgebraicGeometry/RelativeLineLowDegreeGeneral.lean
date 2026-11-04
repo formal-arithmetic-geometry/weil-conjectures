@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZero
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentKummer
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerLevelIndependence
+import all WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -163,7 +164,7 @@ theorem relativeLineLowDegreeGeneral
   have hmy : IsUnit ((ell ^ N : ℕ) : Γ(Y, ⊤)) := by
     simpa only [map_natCast] using hmfield.map aY.appTop.hom
   let eM : M ≅ tateTwistSheaf Λ Y 1 :=
-    finiteEtaleLineAbIso Y (ell ^ N) Λ hΛ ≪≫
+    Scheme.finiteEtaleLineAbIso Y (ell ^ N) Λ hΛ ≪≫
       extendScalarsRootsOfUnityIsoTateTwistSheaf Λ (ell ^ N) hΛ hmy
   let eT : tateObject Λ Y 1 ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj M :=
     tateTwistObjectIsoSingleFunctor Λ Y 1 ≪≫

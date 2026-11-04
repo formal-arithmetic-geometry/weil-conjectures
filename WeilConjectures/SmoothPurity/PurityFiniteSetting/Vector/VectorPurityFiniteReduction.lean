@@ -28,6 +28,8 @@ set_option synthInstance.maxSize 2048
 universe u v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Functor
+open AlgebraicGeometry.Etale (purityScalarUnitMap purityScalarSingleMap RfPullback RfUpper
+  VectorPurityGamma VectorPurityGammaNormalized)
 namespace WeilConjectures.PurityFiniteSetting
 
 /-- Pure root tensors fix the ordinary scalar-line comparison independently of purity.

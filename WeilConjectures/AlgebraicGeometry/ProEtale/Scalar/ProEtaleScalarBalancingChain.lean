@@ -16,7 +16,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafC
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTensorPullback
 public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProjectionFormulaArrows
-import all WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
+import all WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 import WeilConjectures.Algebra.Homology.IndependentExtensionTensor.ExtensionTensorComparisonIndependent
 import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -393,23 +393,6 @@ private theorem scalarExtensionComparison_section
           (Opposite.op V) s) • _) = _
   rw [map_smul, scalarExtensionComparison_unit]
   exact (scalarSection_smul φ X _ _ _ _).symm
-
-private theorem scalarExtensionBalancing_linear
-    {A B : Type u} [CommRing A] [CommRing B]
-    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (M : proEtaleRingModules Y (proEtaleConstantRing Y A)) (W : X.ProEtᵒᵖ)
-    (b : (proEtaleConstantRing X B).obj.obj W)
-    (h : ((proEtaleConstantRingPullback B f).obj
-      ((scalarBalancingExtension φ Y).obj M)).val.obj W) :
-    (scalarBalancingMap φ f (scalarExtensionBalancing φ f) M).val.app W (b • h) =
-      b • (@id (((scalarBalancingExtension φ X).obj
-        ((proEtaleConstantRingPullback A f).obj M)).val.obj W)
-          ((scalarBalancingMap φ f (scalarExtensionBalancing φ f) M).val.app W h)) := by
-  have he : scalarBalancingMap φ f (scalarExtensionBalancing φ f) M =
-      (scalarMateRestriction φ X).map ((scalarExtensionComparison φ f).hom.app M) := by
-    simp [scalarBalancingMap, scalarExtensionBalancing, Category.assoc]
-  rw [he]
-  exact (((scalarExtensionComparison φ f).hom.app M).val.app W).hom.map_smul b h
 
 private theorem scalarUnitPullback_section
     (B : Type u) [CommRing B] {X Y : Scheme.{u}} (f : X ⟶ Y)
