@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedEquivariantBarData
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarAction
+public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarInvariants
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionInvariants
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
@@ -347,7 +348,7 @@ theorem scalarInvariantsExist (a : A ⟶ A') :
       ∀ N, (invariants A G).inclusion.app ((scalarAction a).functor.obj N) ≫
           (scalarAction a).underlying.hom.app N =
         e.hom.app N ≫ (Mod.comap a.hom.hom).map ((invariants A' G).inclusion.app N) := by
-  sorry
+  exact existsUnique_scalarInvariantsIso _ _ _
 
 /-- The unique scalar/invariants comparison fixed by the invariant inclusions.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
