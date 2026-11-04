@@ -190,3 +190,9 @@ whnf timeout. Fixing normalization by inferring its functor from existing total
 comparison, exposing component equalities before rewrite, pinning curried tensor
 arguments and adding Localizing import. Added missing two-sided-representative
 import and qualified ambiguous tensorHom_def; profiling all remaining layers.
+
+2026-11-05 05:40 CST (clock checked): One ucheck remains queued from about
+05:35. It now also includes abstract totalization and tensor-compatibility helpers
+via the audit imports, plus explicit inclusion of conditional hypotheses. The
+preceding 05:40/05:44 notes used estimated times; those edits actually happened
+around 05:34–05:37. No additional build request is active.
