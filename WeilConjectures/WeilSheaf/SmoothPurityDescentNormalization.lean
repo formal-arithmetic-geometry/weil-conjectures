@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
 public import WeilConjectures.WeilSheaf.SmoothPurityDerivedSquareComp
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # Normalization of the descended proper-image comparison
