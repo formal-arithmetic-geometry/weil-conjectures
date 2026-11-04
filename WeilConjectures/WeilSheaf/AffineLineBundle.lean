@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
+public import WeilConjectures.WeilSheaf.HomotopyInvariance
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.VerdierDual
@@ -26,8 +27,7 @@ blueprint `thm-pur-rank-one-thom`) is deduced from:
   adjunction `Rπ₀! ⊣ Rπ^!` transported along smooth purity `Rπ^! ≅ π^*(1)[2]` for Weil complexes
   (`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension`);
 - homotopy invariance: the unit `K ⟶ Rπ_* π^* K` of `π^* ⊣ Rπ_*` is an isomorphism
-  (`AlgebraicGeometry.WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`,
-  stated here with `sorry`).
+  (`WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`).
 
 From them, `π^* ⋙ Rπ₀!` is left adjoint to `(1)[2] ⋙ π^* ⋙ Rπ_* ≅ (1)[2]`, whose left adjoint is
 also the inverse autoequivalence `(-1)[-2]`; uniqueness of left adjoints gives the Thom
@@ -104,42 +104,52 @@ theorem smoothOfRelativeDimension_one_of_isPullback : SmoothOfRelativeDimension 
   exact (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip this
 
 include hπ in
-/-- **The affine-line adjunction for Weil complexes** (the Weil form of
-`cor-amb-affine-space-adjunction` for `d = 1`). For the trivial line bundle
-`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
-direct image with compact support `Rπ₀!` of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`:
-this is the adjunction `Rπ₀! ⊣ Rπ^!` transported along smooth purity `Rπ^! ≅ π^*(1)[2]`
-(`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension`). -/
-theorem nonempty_adjunction_derivedLowerShriek_of_isPullback :
-    Nonempty (derivedLowerShriek k₀ l π ⊣
-      (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) := by
-  have := smoothOfRelativeDimension_one_of_isPullback π s hπ
-  have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over π]
-    infer_instance
-  have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over π]
-    infer_instance
-  have : HasUpperShriek k₀ l π := isLeftAdjoint_derivedLowerShriek π
-  obtain ⟨e⟩ := nonempty_upperShriek_iso_of_smoothOfRelativeDimension (k₀ := k₀) (l := l) π 1
-  exact ⟨(derivedLowerShriekUpperShriekAdjunction π).ofNatIsoRight (by simpa using e)⟩
+/-- Blueprint `lem-pur-a1-direct-image` (for all Weil complexes): **homotopy invariance**. For
+the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square
+`Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the unit `K ⟶ Rπ_* π^* K` of the adjunction `π^* ⊣ Rπ_*` of
+Weil complexes is an isomorphism for every Weil complex `K` on `X`; that is, `π^*` is fully
+faithful.
 
-include hπ in
-/-- **Homotopy invariance for Weil complexes.** For the trivial line bundle
-`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
-unit `K ⟶ Rπ_* π^* K` of the adjunction `π^* ⊣ Rπ_*` of Weil complexes is an isomorphism for
-every Weil complex `K` on `X`; that is, `π^*` is fully faithful.
-
-For the constant coefficients `Λ_X` this is blueprint `lem-pur-a1-direct-image`, proved on the
-étale side with finite coefficients as
-`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`. The statement for all Weil
-complexes is not a blueprint node. Its proof needs the `ℓ`-adic form of the constant case and,
-to pass from `Λ_X` to all `K`, smooth base change and a projection formula for `Rπ_*` on Weil
-complexes; none of these is formalized, so it is left with `sorry`. -/
+For `K = Λ_X` with finite étale coefficients over an algebraically closed field this is
+`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`; for general `K` it follows from
+the constant case by smooth base change (`sbc-thm-smooth-base-change`) and the acyclicity of
+the affine line over strictly henselian bases. Here it is deduced from the case of a reduced
+scheme (`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isClosedImmersion_of_isReduced`): `K` is
+the direct image of its restriction to the reduced subscheme `X_red`, whose open complement is
+empty, and smooth base change carries the unit along this direct image
+(`AlgebraicGeometry.WeilComplex.isIso_unit_app_derivedLowerStar_obj`). -/
 theorem isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
     (K : WeilComplex k₀ l X) :
-    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) :=
-  sorry
+    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) := by
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k₀))
+  have : IsNoetherian X := ⟨⟩
+  -- the reduced closed subscheme `r : X_red ⟶ X`, with empty open complement `j`
+  let I := Scheme.IdealSheafData.vanishingIdeal (⊤ : TopologicalSpace.Closeds X)
+  let r := I.subschemeι
+  let : I.subscheme.Over (Spec (CommRingCat.of k₀)) := ⟨r ≫ X ↘ Spec (CommRingCat.of k₀)⟩
+  have : r.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : LocallyOfFiniteType (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (r ≫ X ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiCompact (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiCompact (r ≫ X ↘ Spec (CommRingCat.of k₀)))
+  have : QuasiSeparated (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiSeparated (r ≫ X ↘ Spec (CommRingCat.of k₀)))
+  let j := (⊥ : X.Opens).ι
+  have : IsEmpty (⊥ : X.Opens).toScheme := ⟨fun x ↦ x.2⟩
+  have hr : Set.range r = (⊤ : TopologicalSpace.Closeds X) := by simp [r, I]
+  have hc : IsCompl (Set.range r.base) (Set.range j.base) := by
+    rw [Set.range_eq_empty j.base]
+    rw [show Set.range r.base = Set.univ by simpa using hr]
+    exact isCompl_top_bot
+  -- `K` is the direct image of its restriction to `X_red`
+  obtain ⟨M, ⟨e⟩⟩ := derivedLowerStar_essImage_of_isZero r j hc K (isZero_of_isEmpty _)
+  have := isIso_unit_app_derivedLowerStar_obj π s hπ r M
+    fun Y' _ π' s' _ hπ' _ _ _ ↦ isIso_unit_app_of_isClosedImmersion_of_isReduced ⊤ I.subscheme r
+      (Set.subset_univ _) Y' π' s' hπ' M
+  exact (upperStarDerivedLowerStarAdjunction π).unit.isoLocus.prop_of_iso e this
 
 /-- **The Thom isomorphism from the affine-line adjunction and homotopy invariance.** If `Rπ₀!` is
 left adjoint to `P ↦ π^*(P(1)[2])` and the unit of `π^* ⊣ Rπ_*` is an isomorphism, then
