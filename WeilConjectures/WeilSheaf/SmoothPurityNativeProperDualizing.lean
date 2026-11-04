@@ -49,11 +49,11 @@ local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :
 local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
 local instance : IsProper
-    (properTraceBaseMap a).left :=
+    (properTraceBaseMap (k₀ := k₀) a).left :=
   ‹IsProper a›
 local instance : IsProper
     (CondensedRing.traceGeometricFiberOverMap
-      (properTraceBaseMap a)).left :=
+      (properTraceBaseMap (k₀ := k₀) a)).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)
     a (comp_over a _) inferInstance
 
@@ -65,8 +65,8 @@ theorem nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso
     Nonempty (J.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj (𝟙_ _)) ≅
       (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj
         ((CondensedRing.boundedConstructibleUpperShriek l
-          (properTraceBaseMap a)).obj (𝟙_ _))) := by
-  let P := (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap a)).obj
+          (properTraceBaseMap (k₀ := k₀) a)).obj (𝟙_ _))) := by
+  let P := (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) a)).obj
     (𝟙_ _)
   let T := (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj P
   let U := (finiteBaseNativeDescent (k₀ := k₀) (l := l)
@@ -75,7 +75,7 @@ theorem nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso
   let eU := (finiteBaseNativeDescentComparison (k₀ := k₀) (l := l)
     (X := Spec (CommRingCat.of k₀))).app (𝟙_ _)
   have := CondensedRing.isIso_upperShriekBaseChange_geometricFiber_unit l
-    (properTraceBaseMap a)
+    (properTraceBaseMap (k₀ := k₀) a)
   have hi := isIso_homEquiv_nativeProperTrace_of_isIso a (𝟙 P) T U eT eU adj
   exact ⟨(asIso (adj.homEquiv T U (nativeProperTrace a (𝟙 P) T U eT eU))).symm⟩
 
@@ -89,8 +89,8 @@ theorem nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso
         (CondensedRing.dualizingComplex l (Over.mk (X ↘ Spec (CommRingCat.of k₀))))) := by
   obtain ⟨e⟩ := nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso a adj
   exact ⟨e ≪≫ (finiteBaseNativeDescent (k₀ := k₀) (l := l)).mapIso
-    ((CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap a)).mapIso
+    ((CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) a)).mapIso
       (CondensedRing.dualizingComplexPointIso l k₀).symm ≪≫
-      CondensedRing.upperShriekDualizingComplexIso l (properTraceBaseMap a))⟩
+      CondensedRing.upperShriekDualizingComplexIso l (properTraceBaseMap (k₀ := k₀) a))⟩
 
 end AlgebraicGeometry.WeilComplex
