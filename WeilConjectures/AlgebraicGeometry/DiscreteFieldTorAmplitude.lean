@@ -68,7 +68,7 @@ theorem finiteTorAmplitude_of_discreteField (X : Scheme.{u}) [IsNoetherian X]
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (discreteObj A) X))}
     (hK : DerivedCategory.TStructure.t.bounded K) :
-    DerivedCategory.finiteTorAmplitude _ K := by
+    _root_.DerivedCategory.finiteTorAmplitude _ K := by
   have := residueFlatResolution X (condensedRingObj (discreteObj A) X)
   obtain ⟨⟨a, _⟩, ⟨b, _⟩⟩ := hK
   obtain ⟨P, _, _, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE K a b
