@@ -55,9 +55,10 @@ Source: Stacks 07A4; blueprint thm-coef-finite-hom, opening paragraph
 noncomputable def derivedTensorHomRightAdjunction
     {R : Type (u + 1)} [CommRing R] (X : Scheme.{u})
     (K : DerivedCategoryModule R X) :
-    tensorRight K ⊣ (derivedHom (ModuleCat.{u + 1} R) X).obj (op K) :=
-  (derivedTensorHomAdjunction (ModuleCat.{u + 1} R) K).ofNatIsoLeft
-    (BraidedCategory.tensorLeftIsoTensorRight K)
+    tensorRight K ⊣
+      Prod.sectR (op K) (DerivedCategoryModule R X) ⋙
+        Functor.uncurry.obj (MonoidalClosed.internalHom (C := DerivedCategoryModule R X)) :=
+  MonoidalClosed.tensorRightUncurryAdjunction K
 
 /--
 Evaluation-defined comparison after an arbitrary unital coefficient homomorphism.
