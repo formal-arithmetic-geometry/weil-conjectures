@@ -25483,6 +25483,7 @@ public import WeilConjectures.WeilSheaf.OrdinaryImmersionChart.OrdinaryImmersion
 public import WeilConjectures.WeilSheaf.OrdinaryStratifiedModels.OrdinaryPullbackStratifiedModels
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.PoincareDualityLisse
+public import WeilConjectures.WeilSheaf.PoincareDualityLisseEquiv
 public import WeilConjectures.WeilSheaf.PointTraceComparison
 public import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.ExtensionByZero
 public import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.LowerShriek
