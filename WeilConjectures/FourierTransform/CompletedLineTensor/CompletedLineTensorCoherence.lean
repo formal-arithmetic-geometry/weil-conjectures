@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineTensorOrdinaryData
+public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedScalarOrdinaryCoherence
+public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorComplete
 import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineOrdinaryEvaluation
 public import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
@@ -120,22 +122,6 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
-
-/-- Tensor by a signed line preserves the specified augmented quotient-tower completeness.
-Source: Bhatt--Scholze, Definition 3.5.2; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: tensor by the line and its internal dual are inverse exact equivalences.
-Their derived equivalences preserve products. Balanced tensor reassociation identifies
-the reduction tower of the twist with the twisted reduction tower, respecting every
-transition and the augmentation x mapped to 1 tensor x. Apply the equivalence to the
-augmented Roos triangle. Its first map is the prescribed quotient map and its second
-map is 1 minus the transition shift, proving precisely the recorded completeness. -/
-theorem complete (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
-    (m : ℤ) (K : DerivedCategory (integralTowerModules l E X))
-    (hK : IsDerivedCompleteUnrestricted l E X K) :
-    IsDerivedCompleteUnrestricted l E X ((tensor l E X L m).obj K) := by
-  sorry
-
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] F)
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
@@ -219,76 +205,6 @@ theorem extension_complete (K : DerivedCategory (integralTowerModules l E X))
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   completedIntegralCommRingSheafUnrestricted
-
-/-- Ordinary scalar associativity, fixed on sheafified tensors and universal K-flat counits.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
-def AssociatorData :=
-  (completedOrdinaryScalarExtension l E F ι X ⋙
-    completedOrdinaryScalarExtension l F G j X ≅
-      completedOrdinaryScalarExtension l E G (j.comp ι) X) ×
-  (completedDerivedScalarExtension l E F ι X ⋙
-    completedDerivedScalarExtension l F G j X ≅
-      completedDerivedScalarExtension l E G (j.comp ι) X)
-
-variable {l E X F ι G j}
-
-/-- Projection of the canonical ordinary comparison package.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
-def AssociatorData.sheaf (d : AssociatorData l E X F ι G j) :
-    completedOrdinaryScalarExtension l E F ι X ⋙
-    completedOrdinaryScalarExtension l F G j X ≅
-      completedOrdinaryScalarExtension l E G (j.comp ι) X := d.1
-
-/-- Projection of the canonical ordinary comparison package.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
-def AssociatorData.derived (d : AssociatorData l E X F ι G j) :
-    completedDerivedScalarExtension l E F ι X ⋙
-    completedDerivedScalarExtension l F G j X ≅
-      completedDerivedScalarExtension l E G (j.comp ι) X := d.2
-
-variable (l E X F ι G j)
-
-/-- Balanced-tensor multiplication and the universal-counit normalization.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
-def IsAssociatorNormalized (d : AssociatorData l E X F ι G j) : Prop :=
-  (∀ (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
-      (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
-      (t : (completedIntegralCommRingSheafUnrestricted l G X).obj.obj U)
-      (x : M.val.obj U),
-    (d.sheaf.hom.app M).val.app U
-        (completedScalarTensorSection l F G j X _ U t
-          (completedScalarTensorSection l E F ι X M U s x)) =
-      completedScalarTensorSection l E G (j.comp ι) X M U
-        (t * (completedCoefficientMap l F G j X).hom.app U s) x) ∧
-  (∀ P : (integralOperationsGoodComplex l E X).FullSubcategory,
-    (completedDerivedScalarExtension l F G j X).map (completedScalarCounit l E F ι X P.obj) ≫
-        completedScalarCounit l F G j X ((completedOrdinaryScalarComplex l E F ι X).obj P.obj) ≫
-        DerivedCategory.Q.map
-          ((scalarAssociatorComplex l E X F ι G j d.sheaf).hom.app P.obj) =
-      d.derived.hom.app (DerivedCategory.Q.obj P.obj) ≫
-        completedScalarCounit l E G (j.comp ι) X P.obj)
-
-/-- Ordinary scalar associators with exactly the prescribed balanced normalization.
-Source: Stacks 06YY, 07A4; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the balanced map t tensor (s tensor x) mapped to t*j(s) tensor x has inverse
-u tensor x mapped to u tensor (1 tensor x). The two maps commute with restrictions
-and differentials. Sheafification preserves their inverse equations. Ordinary extension
-preserves flat-term K-flat complexes, so localization with the specified counits gives
-the unique derived comparison. Local generation and the localization equivalence prove
-uniqueness of the entire package. -/
-theorem associatorData_existsUnique :
-    ∃! a : AssociatorData l E X F ι G j, IsAssociatorNormalized l E X F ι G j a := by
-  delta AssociatorData IsAssociatorNormalized AssociatorData.sheaf
-    AssociatorData.derived scalarAssociatorComplex
-  exact CompletedScalarAssociator.exists_unique l E X F ι G j
-
-/-- The normalized ordinary scalar associator, including its representative.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
-def associatorData : AssociatorData l E X F ι G j :=
-  (associatorData_existsUnique l E X F ι G j).exists.choose
 
 /-- The completed associator is ordinary associativity conjugated by the specified chi.
 Source: Bhatt--Scholze, Proposition 3.5.1; blueprint Proof (3)
@@ -508,45 +424,6 @@ theorem beta_natural_evaluation (L : integralTowerModules l E X)
             ((integralScalarExtensionOfUniverses l E F ι X).map f) := by
             simp only [Functor.map_comp]
   · exact beta_evaluation_compatibility l E X F ι L N b
-
-section DerivedUnitProof
-
-/-- The ordinary derived multiplication unitor, fixed by the recorded chain unitor.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: multiplication and x mapped to 1 tensor x are inverse on module sheaves.
-They commute with differentials and restrictions. Localization with the canonical
-K-flat counit gives the unique derived unitor with the displayed normalization. -/
-theorem ordinaryUnit_existsUnique :
-    ∃! e : completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X ≅ 𝟭 _,
-      ∀ P : (integralOperationsGoodComplex l E X).FullSubcategory,
-        e.hom.app (DerivedCategory.Q.obj P.obj) =
-          completedScalarCounit l E E (AlgHom.id ℚ_[l] E) X P.obj ≫
-            DerivedCategory.Q.map ((completedScalarIdentityMultiplication l E X).hom.app P.obj) :=
-              by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-    obtain ⟨e, he⟩ := ordinaryUnitOnComplexes_exists l E X
-    refine ⟨e, fun P ↦ he P.obj, ?_⟩
-    intro e' he'
-    let Q := integralOperationsGoodLocalization l E X
-    let W := (HomologicalComplex.quasiIso (integralTowerModules l E X) (.up ℤ)).inverseImage
-      (integralOperationsGoodComplex l E X).ι
-    have : Q.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E X
-    apply Iso.ext
-    apply (Localization.fullyFaithfulWhiskeringLeft Q W _).map_injective
-    apply NatTrans.ext
-    funext P
-    exact (he' P).trans (he P.obj).symm
-
-end DerivedUnitProof
-
-/-- The ordinary multiplication unitor with its prescribed representative.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
-def ordinaryUnit :
-    completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X ≅
-      𝟭 (DerivedCategory (integralTowerModules l E X)) :=
-  (ordinaryUnit_existsUnique l E X).exists.choose
 
 /-- The completed identity comparison is the unitor conjugated by chi.
 Source: Bhatt--Scholze, Proposition 3.5.1
