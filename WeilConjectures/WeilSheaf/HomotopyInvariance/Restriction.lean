@@ -38,7 +38,6 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
 include hπ in
 /-- Let `g : Z ⟶ X` be a morphism of `k₀`-schemes of finite type, quasi-compact and
@@ -59,7 +58,27 @@ theorem isIso_unit_app_derivedLowerStar_obj {Z : Scheme.{u}} [Z.Over (Spec (Comm
       ∀ [IsSeparated π'] [LocallyOfFiniteType π'] [QuasiCompact π'],
         IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π').unit.app M)) :
     IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app
-      ((derivedLowerStar g).obj M)) :=
-  sorry
+      ((derivedLowerStar g).obj M)) := by
+  let : (pullback π g).Over (Spec (CommRingCat.of k₀)) :=
+    ⟨pullback.snd π g ≫ Z ↘ Spec (CommRingCat.of k₀)⟩
+  have : (pullback.snd π g).IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : (pullback.fst π g).IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    rw [← comp_over π, ← Category.assoc, pullback.condition, Category.assoc, comp_over g]
+    rfl⟩
+  have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  have hπ' : IsPullback (pullback.snd π g) (pullback.fst π g ≫ s)
+      (Z ↘ Spec (CommRingCat.of k₀)) (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over g]
+    exact (IsPullback.of_hasPullback π g).flip.paste_vert hπ
+  have := smooth_of_isPullback hπ
+  have := isIso_baseChange_of_smooth (k₀ := k₀) (l := l) (IsPullback.of_hasPullback π g)
+  have := H _ (pullback.snd π g) _ hπ'
+  exact isIso_unit_app_derivedLowerStar_obj_of_isIso_baseChange_app
+    (IsPullback.of_hasPullback π g).w M
 
 end AlgebraicGeometry.WeilComplex
