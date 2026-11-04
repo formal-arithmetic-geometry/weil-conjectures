@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.FreeComparisonNaturality
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFrobenius
@@ -206,8 +205,7 @@ lemma isIso_rightDerivedFunctorUnitQ_mapOfNatIso (K : CochainComplex (IsoAlgebra
     ((rightDerivedFunctorMapOfNatIsoCompForgetIso F e).hom.app (DerivedCategory.Q.obj K))
   exact isIso_of_isIso_forget_mapDerivedCategory_map _
 
--- The statement keeps the (unused) hypothesis `[Abelian.HasKInjectiveResolutions (IsoAlgebra G)]`.
-set_option linter.unusedSectionVars false in
+omit [Abelian.HasKInjectiveResolutions (IsoAlgebra G)] in
 /-- **Right derived transports commute with free algebras.** Let `I` be a K-injective complex
 such that `L` preserves the coproducts `∐ₙ Fⁿ Iᵏ` and the unit of `RL` is an isomorphism at the
 complex `∐ₙ Fⁿ I` underlying the free algebra on `I`. Then the free comparison
