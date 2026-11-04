@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
@@ -17,14 +18,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shi
 
 For pro-étale sheaves with values in a Grothendieck abelian category `A`, the derived pullback
 `Lg^*` carries the shift structure transported from `Rg_*` along the derived adjunction, while
-`Rg_*` carries the shift structure transported from K-injective complexes. We show:
+`Rg_*` carries the shift structure transported from K-injective complexes. Using
+`CategoryTheory.Adjunction.commShift_mapDerivedCategoryRightDerivedAdjunction`, we show:
 
-* `CategoryTheory.Functor.commShift_ext_of_isLeftKanExtension`: two shift structures on a left
-  Kan extension for which the defining transformation commutes with the shifts agree;
-* `CategoryTheory.Functor.commShift_rightDerivedFunctorUnit_kInjectives`: the unit of a total
-  right derived functor commutes with the shifts for the K-injective shift structure;
-* `CategoryTheory.Adjunction.commShift_mapDerivedCategoryRightDerivedAdjunction`: for `L` exact,
-  the adjunction `D(L) ⊣ RR` commutes with the shifts for the K-injective structure on `RR`;
 * `AlgebraicGeometry.ProEtale.commShift_leftDerivedUpperStarIsoMapDerivedCategory_hom` and
   `AlgebraicGeometry.ProEtale.commShift_derivedBaseChangeMap`.
 -/
@@ -36,150 +32,6 @@ universe u' u
 open CategoryTheory Limits Abelian
 
 open scoped CategoryTheory.Functor
-
-namespace CategoryTheory
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-open CategoryTheory.Functor in
-/-- Two shift structures on a left Kan extension `LF` of `F` along `Q`, for both of which the
-defining transformation `β : F ⟶ Q ⋙ LF` commutes with the shifts, agree. Shift functors are
-equivalences, so they preserve the Kan universal property, which detects each comparison. -/
-theorem Functor.commShift_ext_of_isLeftKanExtension
-    {C D E : Type*} [Category C] [Category D] [Category E]
-    [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ]
-    (Q : C ⥤ D) (F : C ⥤ E) [Q.CommShift ℤ] [F.CommShift ℤ]
-    (LF : D ⥤ E) (β : F ⟶ Q ⋙ LF) [LF.IsLeftKanExtension β]
-    (s t : LF.CommShift ℤ)
-    (hs : letI := s; NatTrans.CommShift β ℤ)
-    (ht : letI := t; NatTrans.CommShift β ℤ) : s = t := by
-  have hiso (n : ℤ) : s.commShiftIso n = t.commShiftIso n := by
-    let γ := whiskerRight β (shiftFunctor E n) ≫ (associator Q LF (shiftFunctor E n)).hom
-    let P := LeftExtension.postcompose₂ Q F (shiftFunctor E n)
-    have : P.IsEquivalence := by
-      dsimp [P, LeftExtension.postcompose₂]
-      let δ : (whiskeringLeft C D E).obj Q ⋙ (whiskeringRight C E E).obj (shiftFunctor E n) ⟶
-          (whiskeringRight D E E).obj (shiftFunctor E n) ⋙ (whiskeringLeft C D E).obj Q :=
-        { app H := (associator Q H (shiftFunctor E n)).hom }
-      have : IsIso δ := by apply NatIso.isIso_of_isIso_app
-      exact StructuredArrow.isEquivalenceMap₂ (𝟙 _) δ
-    have : (LF ⋙ shiftFunctor E n).IsLeftKanExtension γ := by
-      constructor
-      refine ⟨Limits.IsInitial.ofIso
-        (Limits.IsInitial.isInitialObj P _ (LF.isUniversalOfIsLeftKanExtension β)) ?_⟩
-      exact LeftExtension.postcompose₂ObjMkIso (shiftFunctor E n) β
-    rw [← Iso.symm_eq_iff]
-    apply Iso.ext
-    apply (LF ⋙ shiftFunctor E n).hom_ext_of_isLeftKanExtension γ
-    ext M
-    dsimp only [γ, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
-      associator_hom_app, Iso.symm_hom]
-    have hshift (v : LF.CommShift ℤ) (hv : letI := v; NatTrans.CommShift β ℤ) :
-        (β.app M)⟦n⟧' ≫ (v.commShiftIso n).inv.app (Q.obj M) =
-          (F.commShiftIso n).inv.app M ≫ β.app (M⟦n⟧) ≫
-            LF.map ((Q.commShiftIso n).hom.app M) := by
-      let := v
-      have := hv
-      have h := NatTrans.shift_app_comm β n M
-      simp only [Functor.commShiftIso_comp_hom_app] at h
-      rw [← cancel_epi ((F.commShiftIso n).hom.app M), Iso.hom_inv_id_app_assoc,
-        ← cancel_mono ((LF.commShiftIso n).hom.app (Q.obj M))]
-      simp only [Category.assoc]
-      erw [Iso.inv_hom_id_app, Category.comp_id]
-      rw [h]
-    simpa only [Category.assoc, Category.id_comp] using (hshift s hs).trans (hshift t ht).symm
-  cases s
-  cases t
-  congr 1
-  funext n
-  exact hiso n
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-open CategoryTheory.Functor CategoryTheory.Category CategoryTheory.Abelian in
-/-- The unit of a total right derived functor commutes with the shifts, for the shift structure
-transported from the K-injective equivalence. -/
-theorem Functor.commShift_rightDerivedFunctorUnit_kInjectives
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions C]
-    (F : C ⥤ D) [F.Additive] : NatTrans.CommShift F.rightDerivedFunctorUnit ℤ := by
-  let inj := ObjectProperty.ι (HomotopyCategory.subcategoryAcyclic C).rightOrthogonal
-  let E := HomotopyCategory.KInjectives.equivalence C
-  let G := inj ⋙ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
-  have hI : NatTrans.CommShift F.rightDerivedFunctorIsoKInjectives.inv ℤ :=
-    Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorIsoKInjectives.symm ℤ
-  have hinv (Y : DerivedCategory C) :
-      F.rightDerivedFunctorIsoKInjectives.inv.app Y =
-        F.rightDerivedFunctorUnit.app (inj.obj (E.inverse.obj Y)) ≫
-          F.rightDerivedFunctor.map (E.counit.app Y) := by
-    simp [Functor.rightDerivedFunctorIsoKInjectives, inj, E]
-  have hE : E.CommShift ℤ := by infer_instance
-  have hU : NatTrans.CommShift E.unitIso.hom ℤ := by infer_instance
-  have heq : whiskerLeft inj F.rightDerivedFunctorUnit =
-      (leftUnitor G).inv ≫ whiskerRight E.unitIso.hom G ≫
-        (associator E.functor E.inverse G).hom ≫
-        whiskerLeft E.functor F.rightDerivedFunctorIsoKInjectives.inv ≫
-        (associator inj DerivedCategory.Qh F.rightDerivedFunctor).hom := by
-    ext X
-    simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
-      associator_hom_app, leftUnitor_inv_app, Category.id_comp, hinv]
-    simp only [Category.assoc]
-    erw [Category.id_comp, Category.comp_id]
-    have h := F.rightDerivedFunctorUnit.naturality (inj.map (E.unit.app X))
-    dsimp only [Functor.comp_map, Functor.comp_obj] at h
-    change _ = (F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).map
-      (inj.map (E.unit.app X)) ≫ _
-    erw [reassoc_of% h]
-    rw [← CategoryTheory.Functor.map_comp]
-    change _ = _ ≫ F.rightDerivedFunctor.map
-      (E.functor.map (E.unit.app X) ≫ E.counit.app (E.functor.obj X))
-    erw [E.functor_unit_comp]
-    rw [CategoryTheory.Functor.map_id, Category.comp_id]
-  have : NatTrans.CommShift (whiskerLeft inj F.rightDerivedFunctorUnit) ℤ := by
-    rw [heq]
-    infer_instance
-  refine NatTrans.CommShift.of_whiskerLeft _ inj (fun K ↦ ?_)
-  obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  obtain ⟨I, hI, i, hi, _⟩ := HasKInjectiveResolutions.exists_isKInjective P
-  have := hI
-  have := hi
-  refine ⟨HomotopyCategory.KInjectives.mk I,
-    (HomotopyCategory.quotient C (.up ℤ)).map i, ?_⟩
-  change IsIso (F.rightDerivedFunctor.map (DerivedCategory.Q.map i))
-  infer_instance
-
-/-- For an adjunction `L ⊣ R` with `L` exact, the derived adjunction `D(L) ⊣ RR` commutes with
-the shifts, where `RR` carries the shift structure transported from K-injective complexes.
-Proof: the shift structure on `RR` transported from `D(L)` along the adjunction also makes the
-unit of `RR` commute with the shifts, so it agrees with the K-injective one by the uniqueness of
-shift structures on left Kan extensions. -/
-theorem Adjunction.commShift_mapDerivedCategoryRightDerivedAdjunction
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions D]
-    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] [R.Additive] (adj : L ⊣ R)
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L] :
-    (adj.mapDerivedCategoryRightDerivedAdjunction).CommShift ℤ := by
-  let adj' := adj.mapDerivedCategoryRightDerivedAdjunction
-  have hβs : NatTrans.CommShift R.rightDerivedFunctorUnit ℤ :=
-    Functor.commShift_rightDerivedFunctorUnit_kInjectives R
-  have ht : letI := adj'.rightAdjointCommShift ℤ; adj'.CommShift ℤ :=
-    adj'.commShift_of_leftAdjoint ℤ
-  have hβt : letI := adj'.rightAdjointCommShift ℤ
-      NatTrans.CommShift R.rightDerivedFunctorUnit ℤ := by
-    let := adj'.rightAdjointCommShift ℤ
-    have := ht
-    exact adj.commShift_rightDerivedFunctorUnit
-  have : R.rightDerivedFunctor.IsLeftKanExtension R.rightDerivedFunctorUnit :=
-    Functor.IsRightDerivedFunctor.isLeftKanExtension _ _ (HomotopyCategory.quasiIso D (.up ℤ))
-  have heq : R.instCommShiftDerivedCategoryRightDerivedFunctorInt =
-      adj'.rightAdjointCommShift ℤ :=
-    Functor.commShift_ext_of_isLeftKanExtension DerivedCategory.Qh _ R.rightDerivedFunctor
-      R.rightDerivedFunctorUnit _ _ hβs hβt
-  exact heq ▸ ht
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
