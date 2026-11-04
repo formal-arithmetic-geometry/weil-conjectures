@@ -247,3 +247,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - AffineLineConstant needs the point adjunction written using the structural morphism appearing in its HasUpperShriek hypothesis. Replaced the separately written identity arrow by that structural morphism.
 - NativeProperDualizing could not synthesize the IsIso exceptional-base-change proof across its point-unit coordinates. Made the new native criterion's base-change proof argument explicit and passed the existing proper-point theorem directly. The assigned leaf's statement is unchanged.
 - Next single audit follows; no heartbeat raises or DONE.
+
+## 2026-11-05 07:20 +0800 — proper dualizing descent GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T071716.log finished rc=1, four built/one failed. AffineLineConstant is GREEN (23s), NativeProperDualizing is GREEN (8.3s), and NativeProperTrace remains GREEN with the explicit exceptional-base-change proof argument.
+- NativeDualizingDescent now reaches a whnf timeout (15s) in the compactification assembly. Extracted nativeOpenDualizingDescentIso over arbitrary open immersions, keeping the finite-base pullback/dualizing comparison independent of the chosen compactification. Pinned k₀/l in the remaining adjunction and descent calls.
+- No heartbeat raises or DONE. C4 build-26 remains failed on diagnostic kernel conversions; actual encoding is still unmerged.

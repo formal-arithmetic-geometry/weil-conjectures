@@ -50,6 +50,34 @@ local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :
 local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
 
+/-- Open restriction of a descended finite-base dualizing object is the descended
+finite-base dualizing object of the open subscheme. -/
+noncomputable def nativeOpenDualizingDescentIso
+    {Z : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+    [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+    (i : X ⟶ Z) [i.IsOver (Spec (CommRingCat.of k₀))] [IsOpenImmersion i] :
+    (upperStar (k₀ := k₀) (l := l) i).obj
+      ((finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := Z)).obj
+        (CondensedRing.dualizingComplex l (Over.mk (Z ↘ Spec (CommRingCat.of k₀))))) ≅
+      (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj
+        (CondensedRing.dualizingComplex l (Over.mk (X ↘ Spec (CommRingCat.of k₀)))) := by
+  let Z₀ := Over.mk (Z ↘ Spec (CommRingCat.of k₀))
+  have : LocallyOfFiniteType Z₀.hom := ‹LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))›
+  have : QuasiCompact Z₀.hom := ‹QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))›
+  have : IsSeparated Z₀.hom := ‹IsSeparated (Z ↘ Spec (CommRingCat.of k₀))›
+  let j : Over.mk (X ↘ Spec (CommRingCat.of k₀)) ⟶ Z₀ :=
+    Over.homMk i (comp_over i (Spec (CommRingCat.of k₀)))
+  have : IsOpenImmersion j.left := ‹IsOpenImmersion i›
+  let e₀ : (finiteBaseTracePullback (k₀ := k₀) (l := l) i).obj
+      (CondensedRing.dualizingComplex l Z₀) ≅
+      CondensedRing.dualizingComplex l (Over.mk (X ↘ Spec (CommRingCat.of k₀))) :=
+    (CondensedRing.dualizingComplexIsoUpperStar l j).symm
+  exact finiteBaseNativeDescentUpperStarIso (k₀ := k₀) (l := l) i
+    (CondensedRing.dualizingComplex l Z₀) ≪≫
+    (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).mapIso e₀
+
 /-- The exceptional inverse image of the descended unit is native descent of the
 finite-base dualizing complex, including the Weil structure. -/
 theorem nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
@@ -86,21 +114,9 @@ theorem nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
       rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
       rfl)
   let eR := adj.rightAdjointUniq
-    (((extensionByZeroUpperStarAdjunction c.i).comp adjg).ofNatIsoLeft e.symm)
-  obtain ⟨eZ⟩ := nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso c.g adjg
-  let Z₀ := Over.mk (c.Z ↘ Spec (CommRingCat.of k₀))
-  have : LocallyOfFiniteType Z₀.hom := ‹LocallyOfFiniteType (c.Z ↘ Spec (CommRingCat.of k₀))›
-  have : QuasiCompact Z₀.hom := ‹QuasiCompact (c.Z ↘ Spec (CommRingCat.of k₀))›
-  have : IsSeparated Z₀.hom := ‹IsSeparated (c.Z ↘ Spec (CommRingCat.of k₀))›
-  let j : Over.mk (X ↘ Spec (CommRingCat.of k₀)) ⟶ Z₀ :=
-    Over.homMk c.i (comp_over c.i (Spec (CommRingCat.of k₀)))
-  have : IsOpenImmersion j.left := ‹IsOpenImmersion c.i›
-  have e₀ : (finiteBaseTracePullback (k₀ := k₀) (l := l) c.i).obj
-      (CondensedRing.dualizingComplex l Z₀) ≅
-      CondensedRing.dualizingComplex l (Over.mk (X ↘ Spec (CommRingCat.of k₀))) :=
-    (CondensedRing.dualizingComplexIsoUpperStar l j).symm
+    (((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) c.i).comp adjg).ofNatIsoLeft e.symm)
+  obtain ⟨eZ⟩ := nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso (k₀ := k₀) (l := l) c.g adjg
   exact ⟨eR.app _ ≪≫ (upperStar c.i).mapIso eZ ≪≫
-    finiteBaseNativeDescentUpperStarIso c.i (CondensedRing.dualizingComplex l Z₀) ≪≫
-    (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).mapIso e₀⟩
+    nativeOpenDualizingDescentIso (k₀ := k₀) (l := l) c.i⟩
 
 end AlgebraicGeometry.WeilComplex
