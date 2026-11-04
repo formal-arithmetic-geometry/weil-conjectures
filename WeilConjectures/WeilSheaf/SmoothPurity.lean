@@ -8,8 +8,10 @@ module
 public import WeilConjectures.TraceFormula.PurityTensorMap
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.TateTwist
+public import WeilConjectures.WeilSheaf.TateTwistNativeTensor
 public import WeilConjectures.WeilSheaf.UpperShriek
 public import WeilConjectures.WeilSheaf.UpperShriekGeometric
+public import WeilConjectures.WeilSheaf.UpperShriekUnitTensorMap
 public import WeilConjectures.WeilSheaf.UpperStarConstant
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
 import WeilConjectures.TraceFormula.PurityDevissage
@@ -41,19 +43,27 @@ the Weil structure reflects isomorphisms
 (`CategoryTheory.Endofunctor.IsoAlgebra.isIso_of_isIso_forget_mapDerivedCategory_map`), so `γ_f`
 is an isomorphism.
 
+As in the blueprint (`def-pur-smooth-purity-map`), `γ_f` is the composite
+`f^* L(d)[2d] ≅ f^* L ⊗ ℚ̄_ℓ(d)[2d] ≅ f^* L ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! L` of
+- the identification of the Tate twist with a tensor product
+  (`AlgebraicGeometry.WeilComplex.nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift`);
+- the inverse of the Weil orientation `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`
+  (`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_adicConstant_iso_of_smooth`);
+- the co-projection map of Weil complexes, which lies over the geometric one
+  (`AlgebraicGeometry.WeilComplex.exists_coprojection_forget_eq_upperShriekUnitTensorMap`).
+
 ## Unfinished
 
-The Weil equivariance of the purity map,
-`exists_natTrans_forget_eq_upperShriekUnitTensorMap`, is stated with `sorry`. Its
-proof needs:
-- a purity map `γ_f` of Weil complexes, natural in `L`, e.g. the adjoint under `Rf₀! ⊣ Rf^!` of a
-  smooth trace `Rf₀! f^* L(d)[2d] ⟶ L` of Weil complexes, together with its Frobenius
-  equivariance (`thm-pur-weil-equivariance-of-purity-and-trace`). The condensed orientation
-  `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is not canonical, and
-  `AlgebraicGeometry.Etale.exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace` is for finite
-  coefficients over `Spec k₀`;
-- the comparison of pullback and Tate twist of Weil complexes with forgetting the Weil structure
-  (the native pullback–tensor comparison), to identify the source of `γ_f` on `X̄`.
+The three inputs of `γ_f` listed above are stated with `sorry`:
+- the Weil orientation needs the Frobenius equivariance of the smooth purity isomorphism
+  `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` (`thm-pur-weil-equivariance-of-purity-and-trace`). The condensed
+  orientation `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is not canonical, and
+  `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism` is for finite coefficients
+  over `Spec k₀`;
+- the co-projection map needs the compatibility of forgetting the Weil structure with the native
+  tensor product, the projection formula and the counit of `Rf₀! ⊣ Rf^!`;
+- the identification of the Tate twist needs a comparison of
+  `AlgebraicGeometry.WeilComplex.tensorLisse` with the native tensor product.
 -/
 
 @[expose] public section
@@ -82,6 +92,40 @@ variable [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l f]
 
+/-- A diagram lemma for `exists_natTrans_forget_eq_upperShriekUnitTensorMap`:
+if `G (H p)` is `ψ' ≫ u ≫ φ'⁻¹`, then `G (H (a ≫ p)) ≫ φ` is
+`(G (H a) ≫ ψ' ≫ u ≫ φ'⁻¹ ≫ φ ≫ u⁻¹) ≫ u`. -/
+private lemma comp_map_comp_hom_eq_of_eq {A B C : Type*} [Category* A] [Category* B]
+    [Category* C] (H : A ⥤ B) (G : B ⥤ C) {S T R : A} {P Q : C} (a : S ≅ T) (p : T ⟶ R)
+    {φ φ' : G.obj (H.obj R) ≅ Q} {ψ' : G.obj (H.obj T) ≅ P} {u : P ≅ Q}
+    (h : G.map (H.map p) = (ψ'.hom ≫ u.hom) ≫ φ'.inv) :
+    G.map (H.map (a.hom ≫ p)) ≫ φ.hom =
+      (G.mapIso (H.mapIso a) ≪≫ ψ' ≪≫ u ≪≫ φ'.symm ≪≫ φ ≪≫ u.symm).hom ≫ u.hom := by
+  simp [h]
+
+/-- **The Weil orientation of a smooth morphism** (blueprint:
+`cor-pur-adic-and-rational-smooth-dualizing-complexes`, at the coefficient stage `ℚ̄_ℓ` with Weil
+structures): for a smooth separated morphism `f : X ⟶ Y` of pure relative dimension `d`, the
+relative dualizing complex `Rf^! ℚ̄_ℓ` is isomorphic to `ℚ̄_ℓ(d)[2d]` as a Weil complex.
+
+On the geometric fibre this is the smooth purity isomorphism `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`). The content is that the orientation
+commutes with the Frobenius structures, as in the finite-coefficient statement over `Spec k₀`
+`AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`. A Frobenius-equivariant
+isomorphism of underlying complexes lifts to a morphism of Weil complexes
+(`CategoryTheory.Endofunctor.IsoAlgebra.exists_forget_mapDerivedCategory_map_eq`), which is then an
+isomorphism since forgetting the Weil structure reflects isomorphisms. This is stated with
+`sorry`; see the module docstring.
+
+`AlgebraicGeometry.WeilComplex.nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth` is the same
+statement for an arbitrary right adjoint of `Rf₀!`, deduced from smooth purity. -/
+theorem nonempty_upperShriek_obj_adicConstant_iso_of_smooth (d : ℕ)
+    [SmoothOfRelativeDimension d f] :
+    Nonempty ((upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
+      ((tateTwist k₀ l X d).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) :=
+  sorry
+
 /-- **Weil equivariance of the purity map** (blueprint:
 `thm-pur-weil-equivariance-of-purity-and-trace`, at the coefficient stage `ℚ̄_ℓ`): let
 `f : X ⟶ Y` be smooth separated of pure relative dimension `d`, and let `φ_L` identify the
@@ -98,8 +142,15 @@ The source isomorphism `ψ_L` is the comparison of pullback, Tate twist and shif
 the Weil structure, followed by the smooth purity isomorphism `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`
 (`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`); here it is only required to exist.
 The content is the construction of `γ_f` as a morphism of Weil complexes: the geometric purity map
-must commute with the Frobenius structures. This is stated with `sorry`; see the module docstring
-for what its proof still needs. -/
+must commute with the Frobenius structures. As in the blueprint (`def-pur-smooth-purity-map`),
+`γ_f` is the co-projection map
+(`AlgebraicGeometry.WeilComplex.exists_coprojection_forget_eq_upperShriekUnitTensorMap`)
+precomposed with the Weil orientation
+(`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_adicConstant_iso_of_smooth`) and the
+identification of the Tate twist with a tensor product
+(`AlgebraicGeometry.WeilComplex.nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift`).
+Since the geometric purity map is an isomorphism, the identification of the targets coming with
+the co-projection map can be replaced by `φ_L`. -/
 theorem exists_natTrans_forget_eq_upperShriekUnitTensorMap (d : ℕ)
     [SmoothOfRelativeDimension d f]
     (φ : ∀ L : WeilComplex k₀ l Y, (adicSheafDerivedEquivCondensedMod l
@@ -119,8 +170,37 @@ theorem exists_natTrans_forget_eq_upperShriekUnitTensorMap (d : ℕ)
               (geometricFiberHom (k₀ := k₀) f)).obj (𝟙_ _)).obj,
         (adicSheafDerivedEquivCondensedMod l _).functor.map (forget.map (γ.app L)) ≫ (φ L).hom =
           ψ.hom ≫ (ObjectProperty.ι _).map (CondensedRing.upperShriekUnitTensorMap l
-            (geometricFiberHom (k₀ := k₀) f) (geometricFiberBoundedConstructibleObj L)) :=
-  sorry
+            (geometricFiberHom (k₀ := k₀) f) (geometricFiberBoundedConstructibleObj L)) := by
+  obtain ⟨π, hπ⟩ :=
+    exists_coprojection_forget_eq_upperShriekUnitTensorMap (k₀ := k₀) (l := l) f
+  obtain ⟨θ⟩ := nonempty_upperShriek_obj_adicConstant_iso_of_smooth (k₀ := k₀) (l := l) f d
+  obtain ⟨τ⟩ := nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift k₀ l X d (2 * d)
+  -- `f^* L(d)[2d] ≅ f^* L ⊗ ℚ̄_ℓ(d)[2d] ≅ f^* L ⊗ Rf^! ℚ̄_ℓ`
+  let e : (𝟭 (WeilComplex k₀ l X)).prod' ((Functor.const _).obj
+      (((tateTwist k₀ l X d).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧)) ≅
+      (𝟭 (WeilComplex k₀ l X)).prod' ((Functor.const _).obj
+        ((upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)))) :=
+    NatIso.ofComponents (fun K ↦ Iso.prod (Iso.refl K) θ.symm) (fun _ ↦ by
+      ext <;> simp)
+  let α := Functor.isoWhiskerLeft (upperStar f)
+    (τ.symm ≪≫ Functor.isoWhiskerRight e (nativeConstructibleTensor k₀ l X))
+  have : Smooth f := SmoothOfRelativeDimension.smooth (n := d) (f := f)
+  have : Smooth (geometricFiberHom (k₀ := k₀) f).left :=
+    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @Smooth) f (comp_over f _) ‹_›
+  refine ⟨α.hom ≫ π, fun L ↦ ?_⟩
+  obtain ⟨φ', ψ', h⟩ := hπ L
+  have := CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth l
+    (geometricFiberHom (k₀ := k₀) f) (geometricFiberBoundedConstructibleObj L)
+  let u := asIso ((ObjectProperty.ι _).map (CondensedRing.upperShriekUnitTensorMap l
+    (geometricFiberHom (k₀ := k₀) f) (geometricFiberBoundedConstructibleObj L)))
+  refine ⟨(adicSheafDerivedEquivCondensedMod l _).functor.mapIso (forget.mapIso (α.app L)) ≪≫
+    ψ' ≪≫ u ≪≫ φ'.symm ≪≫ φ L ≪≫ u.symm, ?_⟩
+  have h' : (adicSheafDerivedEquivCondensedMod l
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.map (forget.map (π.app L)) =
+      (ψ'.hom ≫ u.hom) ≫ φ'.inv :=
+    (Iso.eq_comp_inv φ').2 h
+  exact comp_map_comp_hom_eq_of_eq _ _ (α.app L) (π.app L) h'
 
 /-- **The purity map of Weil complexes** (blueprint: `thm-pur-weil-equivariance-of-purity-and-trace`
 and `sk-thm-purity-transport`, at the coefficient stage `ℚ̄_ℓ` with Weil structures): for a smooth

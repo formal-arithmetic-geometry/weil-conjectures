@@ -25582,6 +25582,7 @@ public import WeilConjectures.WeilSheaf.SupportUpperStar
 public import WeilConjectures.WeilSheaf.Supporting.CompletedCoefficientRingedCoherence
 public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
+public import WeilConjectures.WeilSheaf.TateTwistNativeTensor
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import WeilConjectures.WeilSheaf.TensorObjPairing
@@ -25601,6 +25602,7 @@ public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UnramifiedBoundaryPurity
 public import WeilConjectures.WeilSheaf.UpperShriek
 public import WeilConjectures.WeilSheaf.UpperShriekGeometric
+public import WeilConjectures.WeilSheaf.UpperShriekUnitTensorMap
 public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarConstant
 public import WeilConjectures.WeilSheaf.UpperStarExact
