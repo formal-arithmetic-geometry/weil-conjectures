@@ -308,3 +308,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 07:29 CST: 072400 rc=1. Total now passes sheaf square and naturality; pin final map composition to R and its RHS suffix. Derived cast still fails without useful mismatch trace; use reducible exact_mod_proofs to expose the first non-proof expression mismatch without native unfolding. No budget increase.
 
 2026-11-05 07:33 CST: 072908 rc=1. Reducible matching exposes IsoAlgebra.instPreadditive versus abelian.toPreadditive; add a generic rfl equality and normalize it before matching. Total proof passes all major steps but exhausts cumulative 400k budget at the final summand calculation (21s); scoped increase to 600k after measured progress.
+
+2026-11-05 07:38 CST: 073301 derived result: generic instance equality GREEN, simp does not rewrite the implicit instance path; switch to dsimp using the rfl lemma. Total core still actively checking (>4min CPU). Submit ONLY the independent derived module to test this correction without rebuilding the running total core.
