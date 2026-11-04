@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.IntegralCoherence.IntegralCoherenceData
 public import WeilConjectures.SmoothPurity.IntegralCoherence.SitePullbackMonoidal
-public import WeilConjectures.SmoothPurity.IntegralCoherence.MapCochainComplexCoherence
+public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoherence
 
 /-! # Monoidal strict comparisons for the sequence-site pullback
 
