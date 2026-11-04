@@ -88,13 +88,13 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
 omit [Finite k₀] [Y.Over (Spec (CommRingCat.of k₀))] [π.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] in
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] in
 include hπ in
 /-- The trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` is smooth of relative dimension one, as a
 base change of `𝔸¹ ⟶ Spec k₀`. -/

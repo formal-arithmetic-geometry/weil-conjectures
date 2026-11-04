@@ -100,7 +100,7 @@ theorem WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback
     [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar π ⋙ WeilComplex.derivedLowerShriek k₀ l π ≅
       WeilComplex.tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) := by
   obtain ⟨adj⟩ := WeilComplex.nonempty_adjunction_derivedLowerShriek_of_isPullback
