@@ -29,7 +29,7 @@ private lemma homObjMap_section_component
         ((SheafOfModules.overFunctor _ U).map s).val.app W := by
   rfl
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 400000 in
 -- Projection comparisons involve several composed functors and chosen product objects.
 /-- The shifted section Hom-complex comparison in the homotopy category is natural.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
@@ -126,7 +126,9 @@ theorem homComplex_sections_homotopy_naturality
       f.f n (S.iCycles n z) at hci
     change ((((π L' I n p q hpq).val.app (op U))
       (T.iCycles n (HomologicalComplex.cyclesMap f n z))).app W).hom y = _
-    rw [hci]
+    refine (congrArg
+      (fun x : T.X n ↦
+        ((((π L' I n p q hpq).val.app (op U)) x).app W).hom y) hci).trans ?_
     have hm0 : (((homComplexFunctor (R := R)).map t.op).app I' ≫
         ((homComplexFunctor (R := R)).obj (op L')).map s).f n ≫ π L' I n p q hpq =
         π L I' n p q hpq ≫ SheafOfModules.homObjMap (R := R) (t.f p) (s.f q) :=
@@ -139,7 +141,7 @@ theorem homComplex_sections_homotopy_naturality
     change ((π L' I n p q hpq).val.app (op U)) (f.f n (S.iCycles n z)) =
       (SheafOfModules.homObjMap (R := R) (t.f p) (s.f q)).val.app (op U)
         (((π L I' n p q hpq).val.app (op U)) (S.iCycles n z)) at hm
-    rw [hm]
+    refine (congrArg (fun k ↦ (k.app W).hom y) hm).trans ?_
     simp only [CochainComplex.HomComplex.Cocycle.postcomp_coe,
       CochainComplex.HomComplex.Cocycle.precomp_coe,
       CochainComplex.HomComplex.Cochain.comp_zero_cochain_v,

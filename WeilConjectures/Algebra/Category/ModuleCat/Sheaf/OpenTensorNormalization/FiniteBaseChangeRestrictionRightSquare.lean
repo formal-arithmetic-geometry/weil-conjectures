@@ -88,7 +88,6 @@ private theorem restrictionRightSquareMate_cancel
     (Functor.isoWhiskerLeft (ProEtale.lowerStar (ModuleCat.{u + 1} A) g)
       (ProEtale.upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j)) _
 
-set_option maxRecDepth 2000 in
 -- Use ordinary site objects so all evaluations have exactly the form `op W`.
 private theorem restrictionRightSquare_mateSections
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -142,8 +141,6 @@ private theorem restrictionRightSquare_mateSections
     ProEtale.lowerStar_map_hom_app] at hW
   exact ConcreteCategory.congr_hom hW y
 
-set_option maxRecDepth 2000 in
-set_option maxHeartbeats 400000 in
 -- Allow the complete section calculation to elaborate in one theorem.
 private theorem restrictionRightSquare_fromMate
     (A : Type (u + 1)) [CommRing A] [Finite A]

@@ -69,8 +69,6 @@ private lemma section_sub_units_component
   rw [PresheafOfModules.sub_app, PresheafOfModules.zsmul_app]
   rfl
 
-set_option maxHeartbeats 400000 in
--- Evaluating chosen Hom-complex projections requires extra elaboration heartbeats.
 /-- Any degreewise identification given by the section projections respects differentials.
 Source: Stacks Project, Tag 0A8X, differential of the Hom complex; Tag 0A8Y.
 (blueprint: lem-pur-hom-complex-sections-cochains-comm)
