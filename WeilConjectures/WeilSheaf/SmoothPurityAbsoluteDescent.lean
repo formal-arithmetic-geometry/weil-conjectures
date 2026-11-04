@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeDualizingDescent
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
+public import WeilConjectures.WeilSheaf.SmoothPurityDescentSingle
 public import WeilConjectures.SmoothPurity.Defs
 
 /-!
@@ -64,5 +65,22 @@ theorem nonempty_shriekRightAdjoint_adicConstant_descendedTate_iso
     (finiteBaseNativeDescent (k₀ := k₀)).mapIso
       (asIso (CondensedRing.smoothOrientation l
         (Over.mkIdTerminal.from (Over.mk (X ↘ Spec (CommRingCat.of k₀)))) d)).symm⟩
+
+/-- Absolute native purity follows from the sheaf-level cyclotomic Tate encoding. -/
+theorem nonempty_shriekRightAdjoint_adicConstant_iso_of_tate_encoding
+    (d : ℕ) [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+    (α : (ProEtaleWeilSheaf.toCondensed k₀ l X).obj
+        (WeilSheaf.tateTwistSheaf k₀ l X d).obj ≅
+      (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
+        (X ↘ Spec (CommRingCat.of k₀))).obj (ProEtale.tateTwist X l d))
+    {R : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
+    (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ R) :
+    Nonempty (R.obj (WeilSheaf.toComplex.obj
+        (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))) ≅
+      ((tateTwist k₀ l X d).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) := by
+  obtain ⟨e⟩ := nonempty_shriekRightAdjoint_adicConstant_descendedTate_iso d adj
+  exact ⟨e ≪≫ finiteBaseNativeDescentTateIso d (2 * d) α ≪≫
+    (shiftFunctor _ (2 * d : ℤ)).mapIso (tateTwistConstantSingleIso d).symm⟩
 
 end AlgebraicGeometry.WeilComplex

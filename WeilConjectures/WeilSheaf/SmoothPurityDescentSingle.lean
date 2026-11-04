@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeDescent
 public import WeilConjectures.WeilSheaf.CondensedModelCompactSupport
 public import WeilConjectures.WeilSheaf.TateTwist
+public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 
 /-!
@@ -35,6 +36,18 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- Twisting the constant complex gives the Tate sheaf placed in degree zero. -/
+noncomputable def tateTwistConstantSingleIso (d : ℤ) :
+    (tateTwist k₀ l X d).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) ≅
+      WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d) :=
+  ObjectProperty.isoMk _
+    ((tateTwistCompιIso (k₀ := k₀) (l := l) (X := X) d).app _ ≪≫
+      ((ProEtaleWeilSheaf.constantTwist k₀ l X
+        (WeilSheaf.cyclotomicUnit k₀ l ^ d)).mapDerivedCategorySingleFunctor 0).app _ ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso
+        (WeilSheaf.tateTwistSheafObjIso k₀ l X d).symm)
 
 /-- A sheaf-level descent comparison identifies native descent of any specified
 shift of that sheaf. -/
