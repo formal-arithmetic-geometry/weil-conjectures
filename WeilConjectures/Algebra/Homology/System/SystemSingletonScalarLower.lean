@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarBasic
+public import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarLowerAuxTranspose
 
 /-! # Compatibility of singleton coefficient change with lower-singleton maps
 
@@ -57,6 +58,14 @@ theorem singletonScalarDerivedIso_lower (n m : ℕ) (h : n ≤ m)
           (singletonScalarDerivedIso S T a A m).hom.app P =
         (singletonScalarDerivedIso S T a A n).hom.app ((systemDerivedTensor S B h).obj P) ≫
           (singletonSequenceDerived S T D n).map ((singletonScalarSquare S a n m h).hom.app P) ≫
-          singletonLowerMap S T D h ((S (a.app (op m))).model.T.obj P) := by sorry
+          singletonLowerMap S T D h ((S (a.app (op m))).model.T.obj P) := by
+  apply ((systemDerivedTensorAdj S B h).comp
+    ((singletonSequenceDerivedAdjunction S T B n).comp A.adjunction)).homEquiv _ _ |>.injective
+  rw [singletonScalarLower_transpose_left]
+  erw [singletonScalarLower_transpose_right]
+  congr 1
+  exact mapDerivedCategory_transition_square _ _ (singletonSequenceDerivedTransition_rep B h) _ _
+    (singletonSequenceDerivedTransition_rep D h) _ _ _ _
+    (singletonSequenceTransition_restriction a h) _
 
 end SheafOfModules
