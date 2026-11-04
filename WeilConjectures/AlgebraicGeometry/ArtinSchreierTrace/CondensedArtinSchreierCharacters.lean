@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedCharacterRo
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.WeaklyEtaleBaseChange
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
-import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierTraceBridge
 public import WeilConjectures.CategoryTheory.RingObjects.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 

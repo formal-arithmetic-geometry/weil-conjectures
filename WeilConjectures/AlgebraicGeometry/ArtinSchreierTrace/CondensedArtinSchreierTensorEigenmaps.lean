@@ -810,6 +810,8 @@ private theorem combineRootMaps {X : Scheme.{u}} (Y : Over X)
       (σ (Multiplicative.ofAdd a)).hom.left (Over.w _) = (ψ a.1 * ψ a.2) • φs
     simpa only [AddChar.map_add_eq_mul] using hφs a
 
+-- The nontriviality hypothesis is part of the recorded statement but is not needed.
+set_option linter.unusedVariables false in
 /-- The tensor sheaf and the sum-function sheaf have normalized eigenmaps into the
 same finite etale direct image, with character (a,b) ↦ ψ(a)ψ(b).
 Source: blueprint lem-fd-as-characters Step 5, root addition and eigen-generators

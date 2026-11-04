@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreier
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarFromPointAdditive
 import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 import WeilConjectures.CategoryTheory.ModuleObjects.ModuleGlobalSectionsMonoidalLinear
 

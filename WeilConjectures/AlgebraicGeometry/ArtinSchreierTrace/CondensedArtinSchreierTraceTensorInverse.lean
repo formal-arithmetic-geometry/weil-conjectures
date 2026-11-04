@@ -11,6 +11,8 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchreierTraceTensorAdd
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierProjectorFacts
 import WeilConjectures.CategoryTheory.ModuleObjects.Linear
+import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarFromPointAdditive
 
 /-! # Tensor inverse and inverse character of condensed Artin–Schreier sheaves
 
@@ -166,14 +168,35 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 private abbrev modules (X : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 
-attribute [local instance] additiveFromPoint
-
 private def scalars (X : Scheme.{u}) : MonObj.Γ Λ →+* MonObj.Γ (condensedRingObj Λ X) :=
   MonObj.Γ.mapFunctor (upperStarFromPoint X)
 
+/-- The `ΓΛ`-linear structure on modules induced by the constant global sections. -/
+@[instance_reducible] private def linearModules (X : Scheme.{u}) :
+    Linear (MonObj.Γ Λ) (modules Λ X) := Mod.linearOfRingHom (scalars Λ X)
+
 attribute [local instance] linearModules
 
+/-- Module pushforward is `ΓΛ`-linear. -/
+private theorem linearLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (CondensedRing.lowerStar Λ f).Linear (MonObj.Γ Λ) := by
+  unfold CondensedRing.lowerStar
+  apply Mod.linear_mapMod_comp_comap
+    (ProEtale.lowerStar Ab.{u + 1} f) (condensedPushforwardHom _ f)
+    (scalars Λ X) (scalars Λ Y)
+  intro a
+  simp only [scalars, MonObj.Γ.mapFunctor_hom,
+    condensedPushforwardHom, Adjunction.unitAlgHom, Category.assoc]
+  exact Adjunction.ε_comp_map_comp_unit_app_comp_map
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f)
+    (upperStarFromPoint Y) (upperStarFromPoint X) (upperStarFromPointComp f).hom a.hom
+
 attribute [local instance] linearLowerStar
+
+/-- Module pullback is `ΓΛ`-linear, being left adjoint to a linear functor. -/
+private theorem linearUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (CondensedRing.upperStar Λ f).Linear (MonObj.Γ Λ) :=
+  (CondensedRing.upperStarLowerStarAdjunction _ f).left_adjoint_linear
 
 attribute [local instance] linearUpperStar
 
@@ -487,5 +510,132 @@ theorem condensedArtinSchreier_tensor_inverse_generic
       (reflection_total_conjugates Λ k))
   obtain ⟨en⟩ := neg_transport Λ k ψ er X f
   exact ⟨⟨ei⟩, ⟨(β_ _ _) ≪≫ ei⟩, ⟨en⟩⟩
+
+end AlgebraicGeometry.ArtinSchreierTrace
+
+/-! ### Scaling by a unit
+
+Scaling `[c] : x ↦ c x` of the affine line by `c ∈ kˣ` commutes with Artin–Schreier, since
+`c ^ q = c`, and conjugates translation by `c⁻¹ a` to translation by `a`. As for negation, this
+transports the `ψ`-projector to the `ψ(c ·)`-projector, so `[c]^* L_ψ ≅ L_{ψ(c ·)}`.
+-/
+
+namespace AlgebraicGeometry.ArtinSchreierTrace
+open ProEtale ProEtale.CondensedRing
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k] (c : kˣ)
+local notation "A" => 𝔸(PUnit; Spec (CommRingCat.of k))
+local notation "AS" => AffineSpace.artinSchreierMap PUnit (Spec (CommRingCat.of k)) (Fintype.card k)
+local notation "S" => Etale.artinSchreierScaling k (c : k)
+local notation "S'" => Etale.artinSchreierScaling k ((c⁻¹ : kˣ) : k)
+attribute [local instance] linearModules linearLowerStar linearUpperStar
+
+omit [Fintype k] in
+private theorem scaling_comp_inv : S ≫ S' = 𝟙 A := by
+  rw [← Etale.artinSchreierScaling_mul, Units.mul_inv, Etale.artinSchreierScaling_one]
+
+omit [Fintype k] in
+private theorem scaling_inv_comp : S' ≫ S = 𝟙 A := by
+  rw [← Etale.artinSchreierScaling_mul, Units.inv_mul, Etale.artinSchreierScaling_one]
+
+private theorem scaling_square : S ≫ AS ≫ S' = AS := by
+  rw [Etale.artinSchreierScaling_comp_artinSchreierMap_assoc, scaling_comp_inv,
+    Category.comp_id]
+
+private def scaling_pull_push :
+    CondensedRing.upperStar Λ S ≅ CondensedRing.lowerStar Λ S' := by
+  let η : CondensedRing.upperStar Λ S' ⋙ CondensedRing.upperStar Λ S ≅ 𝟭 _ :=
+    (CondensedRing.upperStarComp Λ S S').symm ≪≫
+      upperStarCongr Λ (scaling_comp_inv k c) ≪≫ CondensedRing.upperStarId Λ A
+  let ε : CondensedRing.upperStar Λ S ⋙ CondensedRing.upperStar Λ S' ≅ 𝟭 _ :=
+    (CondensedRing.upperStarComp Λ S' S).symm ≪≫
+      upperStarCongr Λ (scaling_inv_comp k c) ≪≫ CondensedRing.upperStarId Λ A
+  let E := CategoryTheory.Equivalence.mk
+    (CondensedRing.upperStar Λ S') (CondensedRing.upperStar Λ S) η.symm ε
+  exact Adjunction.rightAdjointUniq E.toAdjunction
+    (CondensedRing.upperStarLowerStarAdjunction Λ S')
+
+private def scaling_push_iso :
+    (CondensedRing.lowerStar Λ S').obj (condensedArtinSchreierPushforward Λ k) ≅
+      condensedArtinSchreierPushforward Λ k :=
+  (CondensedRing.lowerStarComp Λ AS S').app (reg Λ A) ≪≫
+    mapOverIso Λ (AS ≫ S') AS S (scaling_square k c)
+
+private theorem scaling_conjugates (a : k) :
+    (CondensedRing.lowerStar Λ S').map (condensedArtinSchreierTranslationAction Λ k a) ≫
+        (scaling_push_iso Λ k c).hom =
+      (scaling_push_iso Λ k c).hom ≫
+        condensedArtinSchreierTranslationAction Λ k ((c⁻¹ : kˣ) * a) := by
+  let t := Etale.artinSchreierTranslation k a
+  let t' := Etale.artinSchreierTranslation k ((c⁻¹ : kˣ) * a)
+  have ht := Etale.artinSchreierTranslation_comp_artinSchreierMap k a
+  have ht' := Etale.artinSchreierTranslation_comp_artinSchreierMap k ((c⁻¹ : kˣ) * a)
+  have hw : t ≫ (AS ≫ S') = AS ≫ S' := by
+    rw [← Category.assoc, ht]
+  have hg : S ≫ t = t' ≫ S := by
+    rw [Etale.artinSchreierTranslation_comp_artinSchreierScaling, ← mul_assoc,
+      Units.mul_inv, one_mul]
+  let m := mapOver Λ (AS ≫ S') AS S (scaling_square k c)
+  let e := (CondensedRing.lowerStarComp Λ AS S').app (reg Λ A)
+  have hm : mapOver Λ (AS ≫ S') (AS ≫ S') t hw ≫ m =
+      m ≫ mapOver Λ AS AS t' ht' := by
+    rw [← mapOver_comp, ← mapOver_comp]
+    exact mapOver_congr Λ _ _ hg _ _
+  have hp := mapOver_push Λ S' AS AS t ht
+  simp only [action_mapOver]
+  change (CondensedRing.lowerStar Λ S').map (mapOver Λ AS AS t ht) ≫
+      (e.hom ≫ m) = (e.hom ≫ m) ≫ mapOver Λ AS AS t' ht'
+  calc
+    _ = ((CondensedRing.lowerStar Λ S').map (mapOver Λ AS AS t ht) ≫ e.hom) ≫ m :=
+      (Category.assoc _ _ _).symm
+    _ = (e.hom ≫ mapOver Λ (AS ≫ S') (AS ≫ S') t hw) ≫ m :=
+      congrArg (fun z ↦ z ≫ m) hp
+    _ = e.hom ≫ (mapOver Λ (AS ≫ S') (AS ≫ S') t hw ≫ m) := Category.assoc _ _ _
+    _ = e.hom ≫ (m ≫ mapOver Λ AS AS t' ht') := congrArg (fun z ↦ e.hom ≫ z) hm
+    _ = _ := (Category.assoc _ _ _).symm
+
+private def scaling_total_iso :
+    (CondensedRing.upperStar Λ S).obj (condensedArtinSchreierPushforward Λ k) ≅
+      condensedArtinSchreierPushforward Λ k :=
+  (scaling_pull_push Λ k c).app _ ≪≫ scaling_push_iso Λ k c
+
+private theorem scaling_total_conjugates (a : k) :
+    (CondensedRing.upperStar Λ S).map (condensedArtinSchreierTranslationAction Λ k a) ≫
+        (scaling_total_iso Λ k c).hom =
+      (scaling_total_iso Λ k c).hom ≫
+        condensedArtinSchreierTranslationAction Λ k ((c⁻¹ : kˣ) * a) := by
+  change _ ≫ (scaling_pull_push Λ k c).hom.app _ ≫ (scaling_push_iso Λ k c).hom = _
+  rw [NatTrans.naturality_assoc, scaling_conjugates]
+  simp [scaling_total_iso]
+
+private theorem scaling_projector_conjugate (ψ : AddChar k (MonObj.Γ Λ)) :
+    (CondensedRing.upperStar Λ S).map (condensedArtinSchreierProjector Λ k ψ) ≫
+        (scaling_total_iso Λ k c).hom =
+      (scaling_total_iso Λ k c).hom ≫ condensedArtinSchreierProjector Λ k (ψ.mulShift c) := by
+  rw [projector_linear, projector_linear, CategoryTheory.Functor.map_sum, Preadditive.sum_comp,
+    Preadditive.comp_sum]
+  refine Fintype.sum_equiv (Units.mulLeft c⁻¹) _ _ fun a ↦ ?_
+  rw [CategoryTheory.Functor.map_smul (R := MonObj.Γ Λ), Linear.smul_comp,
+    scaling_total_conjugates, Linear.comp_smul, Units.mulLeft_apply, AddChar.mulShift_apply,
+    mul_neg, ← mul_assoc, Units.mul_inv, one_mul]
+
+/-- Pullback along the scaling `[c] : x ↦ c x` of the affine line by `c ∈ kˣ` carries the
+condensed Artin–Schreier sheaf of `ψ` to that of the shifted character `ψ(c ·)`.
+Source: blueprint lem-wft-as-comparison (2) (blueprint: lem-fd-as-lisse).
+
+Proof: the scaling `[c]` is an automorphism commuting with Artin–Schreier and conjugating
+translation by `c⁻¹ a` to translation by `a`. As for negation, pullback along `[c]` is
+pushforward along `[c⁻¹]`, and it carries the `ψ`-projector to the `ψ(c ·)`-projector after
+reindexing the average by `a ↦ c⁻¹ a`. Pullback preserves images. -/
+theorem nonempty_iso_upperStar_scaling_condensedArtinSchreierSheaf
+    (ψ : AddChar k (MonObj.Γ Λ)) :
+    Nonempty ((CondensedRing.upperStar Λ S).obj (condensedArtinSchreierSheaf Λ k ψ) ≅
+      condensedArtinSchreierSheaf Λ k (ψ.mulShift c)) := by
+  let F := CondensedRing.upperStar Λ S
+  let p := condensedArtinSchreierProjector Λ k ψ
+  let e := scaling_total_iso Λ k c
+  refine ⟨(PreservesImage.iso F p).symm ≪≫
+    image.compIso (F.map p) e.hom ≪≫ image.eqToIso (scaling_projector_conjugate Λ k c ψ) ≪≫ ?_⟩
+  exact asIso (image.preComp e.hom (condensedArtinSchreierProjector Λ k (ψ.mulShift c)))
 
 end AlgebraicGeometry.ArtinSchreierTrace

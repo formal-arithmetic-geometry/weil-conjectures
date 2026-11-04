@@ -124,8 +124,8 @@ private theorem evaluation_translation
     rw [Category.assoc]
     congr 1
     rw [add_comm a c, ofAdd_add, map_mul, Aut.Aut_mul_def, Iso.trans_hom]
-  simp only [condensedEvaluation, Category.id_comp, ← Functor.map_comp_assoc,
-    condensedPull_comp, he]
+  simp only [condensedEvaluation, Category.id_comp, ← Functor.map_comp_assoc]
+  rw [← he, condensedPull_comp Λ (s ≫ _) _]
 
 /-- On a chart with root-labelled sheets, evaluation at the root trivializes the
 image of the character projector.

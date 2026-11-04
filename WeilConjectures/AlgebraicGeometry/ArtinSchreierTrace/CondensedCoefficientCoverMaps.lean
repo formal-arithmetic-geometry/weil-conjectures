@@ -241,31 +241,15 @@ private theorem condensedPull_eq_coefficientPull
 /-- Coefficient functions form a contravariant functor on the category of covers.
 Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, restriction of
 coefficient functions (blueprint: lem-wft-as-coefficient-pull-calculus). -/
-theorem condensedPull_comp {X : Scheme.{u}} {W Y Z : Over X}
+theorem condensedPull_comp
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} {W Y Z : Over X}
     (j : W ⟶ Y) (h : Y ⟶ Z) :
     condensedPull Λ (j ≫ h) = condensedPull Λ h ≫ condensedPull Λ j := by
-  have key := congrArg (fun e ↦ e.hom.app (condensedUnit Λ W.left))
-    (coefficientLowerStarFactor_assoc Λ j.left h.left Z.hom
-      (j ≫ h).left Y.hom W.hom rfl (Over.w h) (Over.w j))
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Category.id_comp] at key
-  rw [coefficientLowerStarFactor_rfl] at key
-  unfold condensedPull
-  change (ProEtale.CondensedRing.lowerStar Λ Z.hom).map _ ≫
-      (coefficientLowerStarFactor Λ (Over.w (j ≫ h))).hom.app _ =
-    ((ProEtale.CondensedRing.lowerStar Λ Z.hom).map _ ≫
-      (coefficientLowerStarFactor Λ (Over.w h)).hom.app _) ≫
-    ((ProEtale.CondensedRing.lowerStar Λ Y.hom).map _ ≫
-      (coefficientLowerStarFactor Λ (Over.w j)).hom.app _)
-  dsimp only [Over.comp_left]
-  have hc := congrArg (fun t ↦ (ProEtale.CondensedRing.lowerStar Λ Z.hom).map t ≫
-      (coefficientLowerStarFactor Λ (Over.w (j ≫ h))).hom.app _)
-    (condensedCoefficientLift_comp Λ j.left h.left)
-  refine hc.trans ?_
-  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
-  rw [← key]
-  rw [← NatTrans.naturality_assoc]
+  simp only [condensedPull_eq_coefficientPull, Category.assoc]
+  rw [reassoc_of% coefficientPull_congr Λ j.left (Over.w h),
+    reassoc_of% coefficientPull_comp Λ j.left h.left Z.hom, lowerStarCongr_trans_assoc,
+    lowerStarCongr_trans]
   rfl
 
 private theorem coefficientUnit_pull

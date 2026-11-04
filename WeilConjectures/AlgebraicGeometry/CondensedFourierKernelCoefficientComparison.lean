@@ -200,6 +200,7 @@ set_option allowUnsafeReducibility true in
 attribute [local semireducible] Mod.extendScalars
 
 set_option maxHeartbeats 800000 in
+-- The explicit coefficient-change comparison needs additional elaboration heartbeats.
 private theorem artinFunctionScalar
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k₀ : Type u) [Field k₀] [Fintype k₀]

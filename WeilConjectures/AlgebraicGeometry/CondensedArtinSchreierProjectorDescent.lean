@@ -11,6 +11,7 @@ public import WeilConjectures.SmoothPurity.Finite.FiniteTorAmplitudeSites
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedModulePushforwardMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.ModuleRegularUnitIso
 import WeilConjectures.CategoryTheory.ModuleObjects.ModuleRegularUnitIso
+import WeilConjectures.CategoryTheory.ModuleObjects.ModuleRegularAdjunctionImage
 import Mathlib.CategoryTheory.Abelian.Basic
 import Mathlib.CategoryTheory.Monoidal.Functor
 import Mathlib.CategoryTheory.Monoidal.NaturalTransformation

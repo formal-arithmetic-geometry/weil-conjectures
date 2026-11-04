@@ -14397,6 +14397,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.MapModLimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModTrace
 public import WeilConjectures.CategoryTheory.ModuleObjects.ModuleGlobalSectionsMonoidalLinear
+public import WeilConjectures.CategoryTheory.ModuleObjects.ModuleRegularAdjunctionImage
 public import WeilConjectures.CategoryTheory.ModuleObjects.ModuleRegularUnitIso
 public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
@@ -22037,6 +22038,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.T
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UpperStarIsoId
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.WeaklyEtaleBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarFromPointAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarMapModLimits
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.WeaklyContractibleSections
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedInverseImage
