@@ -159,3 +159,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Fetched origin/u9/C4 at 090de1fa4. C4 has drafted TateFrobeniusTwistPowers and TateFrobeniusTateEncoding; the latter's tateTwistSheafCondensedIso d ψ has exactly our required underived encoding type. Its ψ parameter is supplied directly by toCondensedAdicConstantDescentIso. These C4 additions are not yet green and are not merged.
 - Checked the combined import graph: C4's Tate encoding has no import path to VerdierDual or FourierInversion.OtherSections. Prepared /tmp/k4-route-b-integration.patch (git apply --check passes): new tiny SmoothPurityTateDescent wrapper plus replacement of the two user proof bodies. The patch is not applied yet, to keep the pending repair audit independent of C4's unvalidated chain.
 - The one ucheck from 05:22:49 is still queued, no newer K4 log after 051446. No DONE; no new compiler validation claimed.
+
+## 2026-11-05 05:58 +0800 — wrapper failure, audit resubmitted
+- The request submitted 05:22:49 ended rc=2 before Lean: /home/ubuntu/u9/ubuild.sh line 21 syntax error near `)`, reading the fragment `r '/:' '__').lock`. This is consistent with the in-place script replacement issue K5 reported; no new K4 log was created and no proof failed in this attempt.
+- Read-only bash -n of the current wrapper passes. Resubmitted exactly one ucheck SmoothPurityTransportAudit (session 54694) at 05:58. Current source bfa7615f7 before this log update; prepared integration patch remains unapplied.
