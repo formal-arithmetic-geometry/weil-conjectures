@@ -274,3 +274,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 
 ## 2026-11-05 07:27 +0800 — structural smoothness normalization
 - Audit /home/ubuntu/u9/logs/K4-20261105T072525.log reaches only the same smoothness instance: the terminal-arrow rewrite leaves Over.mk.left and Over.mk.hom projections. Added their explicit simp lemmas. No other AbsoluteDescent error was reported; next audit follows.
+
+## 2026-11-05 07:29 +0800 — full helper audit GREEN
+- ucheck SmoothPurityTransportAudit at 339f162b9 completed rc=0, three newly built modules, log /home/ubuntu/u9/logs/K4-20261105T072651.log. AbsoluteDescent (9.7s), ThomDescent (5.1s), and the complete transport axiom audit (3.0s) are GREEN.
+- The absolute exceptional-unit descent theorem and its Tate-encoding specialization have only propext, Classical.choice, Quot.sound: no sorryAx, including compactification and proper adjoints. The Thom route still sees existing native tensor/projection/Verdier dependencies, to be enumerated before completion; no K2 call was added.
+- C4's actual Tate encoding remains unmerged/unvalidated: latest reachable diagnostic log C4-20261105T072538.log still times out in a module scalar-extension instance conversion. The final user replacement patch remains prepared but unapplied. General K4 leaf unchanged; no DONE.
