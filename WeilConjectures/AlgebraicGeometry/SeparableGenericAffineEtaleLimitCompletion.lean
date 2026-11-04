@@ -63,7 +63,8 @@ theorem separableGeneric_affineEtale_limit
         π₀ j = (Scheme.strictHenselizationCone η).π.app (R.op.obj j)),
       ∃ e : Scheme.strictHenselizationRing η ≃+* Fs,
         (∀ a : Scheme.strictHenselizationRing η,
-          Fs.subtype (e a) = Scheme.strictHenselizationPointEvaluation η a) ∧
+          Fs.subtype (e a) = Scheme.strictHenselizationPointEvaluation η
+            ((Scheme.smallStrictHenselizationColimitIso η).hom a)) ∧
         Nonempty (IsLimit
           ({ pt := X
              π := { app := fun i ↦
@@ -119,7 +120,8 @@ theorem separableGeneric_affineEtale_pointed
       (u : ∀ i : A, (R.op ⋙ D₀).obj (op i) ⟶ S)
       (e : Scheme.strictHenselizationRing η ≃+* Fs)
       (hEval : ∀ a : Scheme.strictHenselizationRing η,
-        Fs.subtype (e a) = Scheme.strictHenselizationPointEvaluation η a)
+        Fs.subtype (e a) = Scheme.strictHenselizationPointEvaluation η
+          ((Scheme.smallStrictHenselizationColimitIso η).hom a))
       (hπcan : ∀ j : Aᵒᵖ,
         π₀ j = (Scheme.strictHenselizationCone η).π.app (R.op.obj j))
       (hucan : ∀ i : A,

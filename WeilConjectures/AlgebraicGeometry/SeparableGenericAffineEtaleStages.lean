@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.FieldTheory.SeparableClosure
+import Mathlib.CategoryTheory.Presentable.Directed
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
@@ -83,7 +84,27 @@ theorem exists_separableGeneric_affineEtale_stages
             (Opposite.unop ((N.obj (Opposite.unop (R.obj i))).1.left))).inv ≫
             ((Scheme.AffineEtale.Spec S).obj
               (N.obj (Opposite.unop (R.obj i))).1).hom) := by
-  sorry
+  intro F η J N D₀
+  have : IsAlgClosed Ω := IsAlgClosure.isAlgClosed S.functionField
+  have : IsCofiltered J := (Scheme.strictHenselization_properties η).2.1
+  obtain ⟨A, _, hdir, hne, R, hR⟩ := IsFiltered.exists_directed Jᵒᵖ
+  have haff (i : Aᵒᵖ) : IsAffine ((R.op ⋙ D₀).obj i) := inferInstanceAs (IsAffine (Spec _))
+  refine ⟨A, inferInstance, hdir, hne, R, inferInstance,
+    fun i ↦ (Scheme.strictHenselizationCone η).π.app (R.op.obj i),
+    fun i ↦ Spec.map (Scheme.ΓSpecIso _).inv ≫
+      ((Scheme.AffineEtale.Spec S).obj (N.obj (unop (R.obj i))).1).hom,
+    fun f ↦ ((Scheme.strictHenselizationCone η).w (R.op.map f)).symm,
+    fun _ ↦ haff _, fun i ↦ ?_, fun h ↦ ?_, fun _ ↦ inferInstance,
+    fun _ ↦ rfl, fun _ ↦ rfl⟩
+  · have := ((Scheme.AffineEtale.Spec S).obj (N.obj (unop (R.obj i))).1).prop
+    infer_instance
+  · have hw := MorphismProperty.Over.w
+      ((Scheme.AffineEtale.Spec S).map (N.map (R.map (homOfLE h)).unop).1)
+    dsimp [D₀, Scheme.strictHenselizationAffineDiagram,
+      Scheme.strictHenselizationCoordinateRings]
+    rw [← Scheme.isoSpec_Spec_inv, ← Scheme.isoSpec_Spec_inv]
+    exact (congrArg (_ ≫ ·) hw.symm).trans (@Scheme.isoSpec_inv_naturality_assoc _ _
+      (inferInstanceAs (IsAffine (Spec _))) (inferInstanceAs (IsAffine (Spec _))) _ _ _).symm
 
 end
 end AlgebraicGeometry

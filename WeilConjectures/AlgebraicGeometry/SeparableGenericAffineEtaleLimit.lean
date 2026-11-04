@@ -76,7 +76,7 @@ theorem exists_separableGeneric_affineEtale_limit
       (π : ∀ i : Iᵒᵖ, X ⟶ D.obj i)
       (hπ : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), π j = π i ≫ D.map f)
       (u : ∀ i : I, D.obj (op i) ⟶ S)
-      (hc : IsLimit
+      (_hc : IsLimit
         ({ pt := X
            π := { app := π
                   naturality := by
@@ -93,11 +93,11 @@ theorem exists_separableGeneric_affineEtale_limit
   let F := S.functionField
   let Fs := separableClosure F Ω
   let X := Spec (CommRingCat.of Fs)
-  letI : IsAlgClosed Ω := IsAlgClosure.isAlgClosed F
+  have : IsAlgClosed Ω := IsAlgClosure.isAlgClosed F
   let η : Spec (CommRingCat.of Ω) ⟶ S :=
     Spec.map (CommRingCat.ofHom (algebraMap F Ω)) ≫ S.fromSpecFunctionField
   let J := SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods η)
-  letI : SmallCategory J := inferInstance
+  let : SmallCategory J := inferInstance
   let D₀ := (Scheme.strictHenselizationAffineDiagram η).op ⋙ Scheme.Spec
   obtain ⟨A, hpre, hdir, hne, R, hR, π₀, u, hrest⟩ :=
     exists_separableGeneric_affineEtale_stages S Ω
