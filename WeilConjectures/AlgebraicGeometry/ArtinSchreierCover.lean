@@ -24,6 +24,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import WeilConjectures.AlgebraicGeometry.CoproductCopiesMorphismsClopen
+import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.Properties
 
 /-! # Artin–Schreier covers of global functions
 
@@ -139,7 +140,7 @@ theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
               (σ (Multiplicative.ofAdd a)).hom.left) ∧
       (ConnectedSpace (artinSchreierCover p X f).left → Function.Bijective σ) ∧
       (IsEmpty X → IsEmpty (artinSchreierCover p X f).left ∧
-        Subsingleton (Aut (artinSchreierCover p X f))) := by
-  sorry
+        Subsingleton (Aut (artinSchreierCover p X f))) :=
+  adjoinRootCover_artinSchreier_properties (P := artinSchreierCoverPolynomial p X f) rfl hchar
 
 end AlgebraicGeometry
