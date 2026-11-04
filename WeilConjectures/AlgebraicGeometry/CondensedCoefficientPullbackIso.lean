@@ -22,6 +22,18 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
+/-- Pullback transports a coefficient comparison, for an arbitrary coefficient map. -/
+private theorem coefficient_pullback_iso_of_isMonHom
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ' Y))
+    (e : (Mod.extendScalars (coefficientMap a Y)).obj M ≅ N) :
+    Nonempty ((Mod.extendScalars (coefficientMap a X)).obj
+        ((CondensedRing.upperStar Λ f).obj M) ≅ (CondensedRing.upperStar Λ' f).obj N) :=
+  ⟨(CondensedRing.pullIso a f).app M ≪≫ (CondensedRing.upperStar Λ' f).mapIso e⟩
+
 /-- A coefficient comparison on the affine Artin–Schreier sheaf transports through ordinary
 pullback along any morphism of schemes. -/
 theorem condensed_coefficient_pullback_iso
@@ -36,7 +48,7 @@ theorem condensed_coefficient_pullback_iso
     Nonempty ((Mod.extendScalars (coefficientMap
       (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X)).obj
         ((CondensedRing.upperStar (Profinite.continuousMapRingObj E.1) f).obj M) ≅
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) f).obj N) := by
-  sorry
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) f).obj N) :=
+  coefficient_pullback_iso_of_isMonHom _ f M N e
 
 end AlgebraicGeometry.ProEtale
