@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import WeilConjectures.CategoryTheory.IntegralProjectivePresentationComplete
 import Mathlib.Topology.ContinuousMap.Algebra
 import Mathlib.Topology.ExtremallyDisconnected
 import Mathlib.Algebra.Homology.ShortComplex.Exact

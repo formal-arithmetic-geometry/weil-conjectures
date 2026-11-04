@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.KummerLine.KummerLineGeometry
+public import WeilConjectures.AlgebraicGeometry.KummerLine.KummerRootLineComputation
 
 /-!
 # Kummer computations with arbitrary finite ring coefficients

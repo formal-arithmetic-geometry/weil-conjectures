@@ -122,5 +122,4 @@ private theorem union_quasiIso {R : Type u} [CommRing R]
           congrArg (fun a ↦ HomologicalComplex.homologyMap a n) (hf 0))
 
 -- The construction hypotheses are retained in the public statement.
-set_option linter.unusedVariables false in
 end CategoryTheory

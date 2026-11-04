@@ -57,6 +57,7 @@ private theorem boundary_hom (A : Type (u + 1)) [CommRing A] [Finite A]
     Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
+  rfl
 
 private theorem comparison_inverse_comp (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
