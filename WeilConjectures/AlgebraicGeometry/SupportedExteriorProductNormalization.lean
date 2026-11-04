@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.AlgebraicGeometry.Supported.SupportedExteriorProduct
 
 /-!
 # Exterior products of supported sections, derived on resolutions
