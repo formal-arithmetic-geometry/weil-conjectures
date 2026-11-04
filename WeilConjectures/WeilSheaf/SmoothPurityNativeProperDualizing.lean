@@ -35,7 +35,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-  [IsProper (X ↘ Spec (CommRingCat.of k₀))]
+  (a : X ⟶ Spec (CommRingCat.of k₀))
+  [a.IsOver (Spec (CommRingCat.of k₀))] [IsProper a]
 
 local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
@@ -45,24 +46,23 @@ local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :
 local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
 local instance : IsProper
-    (properTraceBaseMap (X ↘ Spec (CommRingCat.of k₀))).left :=
-  ‹IsProper (X ↘ Spec (CommRingCat.of k₀))›
+    (properTraceBaseMap a).left :=
+  ‹IsProper a›
 local instance : IsProper
     (CondensedRing.traceGeometricFiberOverMap
-      (properTraceBaseMap (X ↘ Spec (CommRingCat.of k₀)))).left :=
+      (properTraceBaseMap a)).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)
-    (X ↘ Spec (CommRingCat.of k₀)) (comp_over _ _) inferInstance
+    a (comp_over a _) inferInstance
 
 /-- A right adjoint to proper direct image sends the descended finite-base unit
 to the descended finite-base exceptional unit. -/
 theorem nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso
     {J : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
-    (adj : derivedLowerStar (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀)) ⊣ J) :
+    (adj : derivedLowerStar (k₀ := k₀) (l := l) a ⊣ J) :
     Nonempty (J.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj (𝟙_ _)) ≅
       (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj
         ((CondensedRing.boundedConstructibleUpperShriek l
-          (properTraceBaseMap (X ↘ Spec (CommRingCat.of k₀)))).obj (𝟙_ _))) := by
-  let a := X ↘ Spec (CommRingCat.of k₀)
+          (properTraceBaseMap a)).obj (𝟙_ _))) := by
   let P := (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap a)).obj
     (𝟙_ _)
   let T := (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj P
@@ -75,5 +75,19 @@ theorem nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso
     (properTraceBaseMap a)
   have hi := isIso_homEquiv_nativeProperTrace_of_isIso a (𝟙 P) T U eT eU adj
   exact ⟨(asIso (adj.homEquiv T U (nativeProperTrace a (𝟙 P) T U eT eU))).symm⟩
+
+/-- The proper exceptional unit is the native descent of the ordinary dualizing
+complex over the finite field. -/
+theorem nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso
+    {J : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
+    (adj : derivedLowerStar (k₀ := k₀) (l := l) a ⊣ J) :
+    Nonempty (J.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj (𝟙_ _)) ≅
+      (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj
+        (CondensedRing.dualizingComplex l (Over.mk (X ↘ Spec (CommRingCat.of k₀))))) := by
+  obtain ⟨e⟩ := nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso a adj
+  exact ⟨e ≪≫ (finiteBaseNativeDescent (k₀ := k₀) (l := l)).mapIso
+    ((CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap a)).mapIso
+      (CondensedRing.dualizingComplexPointIso l k₀).symm ≪≫
+      CondensedRing.upperShriekDualizingComplexIso l (properTraceBaseMap a))⟩
 
 end AlgebraicGeometry.WeilComplex
