@@ -25,6 +25,15 @@ namespace AlgebraicGeometry.ProEtale.FiniteModelQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+private lemma flat_finite_biproduct (T : Scheme.{u}) (r : ℕ) :
+    ObjectProperty.flat (⨁ fun _ : Fin r ↦ 𝟙_ (AdicCompletion.Modules l E T)) := by
+  have h := ObjectProperty.flat_coproduct
+    (fun _ : ULift.{u + 1} (Fin r) ↦ 𝟙_ (AdicCompletion.Modules l E T))
+    (fun _ ↦ ObjectProperty.prop_unit _)
+  exact ObjectProperty.prop_of_iso _
+    ((Sigma.whiskerEquiv Equiv.ulift.symm (fun _ ↦ Iso.refl _)).symm ≪≫
+      (biproduct.isoCoproduct _).symm) h
+
 set_option maxHeartbeats 800000 in
 -- The derived reduction unfolds the two-term free model complex and its matrix.
 /-- Derived reduction of the literal two-term free model complex keeps its matrix.
@@ -68,8 +77,7 @@ theorem free_complex_reduction (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T)
     obtain ⟨er⟩ := FiniteConstantModel.modelFiniteFree (A l E) T r
     apply (ObjectProperty.flat.prop_iff_of_iso er).2
     change ObjectProperty.flat (⨁ fun _ : Fin r ↦ 𝟙_ (AdicCompletion.Modules l E T))
-    apply (ObjectProperty.flat.prop_iff_of_iso (biproduct.isoProduct _)).2
-    exact ObjectProperty.flat.prop_pi _ (fun _ ↦ ObjectProperty.prop_unit _)
+    exact flat_finite_biproduct l E T r
   have hK : ∀ i, ObjectProperty.flat (K.X i) := by
     intro i
     by_cases h₁ : i = -1

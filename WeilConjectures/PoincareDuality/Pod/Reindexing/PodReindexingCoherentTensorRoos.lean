@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.PoincareDuality.PodCompletedTensorReindex.PodCompletionTensorModels
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingReductionTensorSquare
+import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingCoherentTensorRoosAux6
+import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionReindexUnaryModel
 
 /-! # The strict Roos normalization of the coherent tensor comparison
 
@@ -43,6 +45,8 @@ Source: Stacks 07A4 and 0941
   let q := podReindexingTensorFrame l E g A hA M N
   q.F.map q.dY.hom ≫ q.δ.app q.U ≫ q.RX.map q.w₁ ≫ q.RX.map q.w₂ ≫ q.dX.inv
 
+set_option maxHeartbeats 400000 in
+-- The proof assembles several large strict and derived equations.
 /-- On good complexes, the coherent tensor comparison is the prescribed strict Roos map.
 This is a calculation before descent: there is no constructibility assumption and
 neither `T.tensor`, its Model law, nor its derived naturality occurs in the equation.
@@ -93,6 +97,28 @@ theorem podReindexing_tensor_roos_normalization
       (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app _ ≫
       DerivedCategory.Q.map
         ((A.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
-          integralOperationsRoosFunctor.map (T.tower P Q).hom)) := by sorry
+          integralOperationsRoosFunctor.map (T.tower P Q).hom)) := by
+  have h := podReindexingDerivedFunctor_none_eq l E g
+  obtain ⟨hFP, βP, hβP, hUP⟩ := PodReductionRepresentatives.unary_model l E g A hA h P
+  obtain ⟨hFQ, βQ, hβQ, hUQ⟩ := PodReductionRepresentatives.unary_model l E g A hA h Q
+  have hσ := podReindexing_systemTensor_chainModel l E g A P Q _ _
+    (podReductionUnary_transport l E g A h P hFP βP hUP)
+    (podReductionUnary_transport l E g A h Q hFQ βQ hUQ)
+  have hτ := podCoherentTower_eq l E g A T hA _hGenerators P Q βP βQ hβP hβQ
+  have hroos := (podReindexing_tensor_roos_of_strict l E g A hA P Q (T.tower P Q)
+    ((PodReductionRepresentatives.systemChain l E g).hom.app
+      (((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P.obj,
+        ((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj Q.obj) ≫
+      (coefficientTotalTensor.{u, u + 1, u} (coefficientSequenceTopology (ProEt.topology X))
+        (coefficientSequenceCommRingSheaf l E X)).map (Prod.mkHom
+          (βP ≪≫ ((pullbackTensorOrdinaryReduction l E X).mapHomologicalComplex (.up ℤ)).mapIso
+            (podReindexComplexIso l E g P.obj)).hom
+          (βQ ≪≫ ((pullbackTensorOrdinaryReduction l E X).mapHomologicalComplex (.up ℤ)).mapIso
+            (podReindexComplexIso l E g Q.obj)).hom)) hσ hτ)
+  apply heq_of_eq
+  unfold podReindexingLimitTensorComparisonHom
+  refine Eq.trans ?_ hroos
+  simp only [Category.assoc]
+  rfl
 
 end WeilConjectures

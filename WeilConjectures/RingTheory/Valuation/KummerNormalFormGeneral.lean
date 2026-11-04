@@ -42,7 +42,7 @@ lemma frobeniusMonomial_mem_subring (A : Subring Ω) (hw : ∀ i, w i ∈ A) (j 
 /-- **Kummer normal form for combinations of value `1`**: a combination of the lifted Frobenius
 monomials with coefficients in `K*` of value `≤ 1`, of value `1`, which is a `p`-th power in `L₂`,
 is a `p`-th power in `L₁`. -/
-theorem exists_pow_eq_frobeniusComb_of_kummer [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
+theorem exists_pow_eq_frobeniusComb_of_kummer (K L₁ L₂ Kst : Subfield Ω)
     (A : Subring Ω) (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
     (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hKst : Kst ≤ K) (hAL₁ : ∀ y ∈ A, y ∈ L₁)
     (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
@@ -65,6 +65,7 @@ theorem exists_pow_eq_frobeniusComb_of_kummer [DecidableEq ι] (K L₁ L₂ Kst 
     (hE1 : v (frobeniusComb p w c) = 1) {z : Ω} (hz : z ∈ L₂)
     (hzp : z ^ p = frobeniusComb p w c) :
     ∃ y ∈ L₁, y ^ p = frobeniusComb p w c := by
+  classical
   classical
   have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0
   have hpL : (p : Ω) ∈ L₁ := natCast_mem L₁ p
@@ -159,7 +160,7 @@ theorem exists_pow_eq_frobeniusComb_of_kummer [DecidableEq ι] (K L₁ L₂ Kst 
 /-- **Kummer normal form for approximated elements**: an element `α ∈ L₁`, approximated
 arbitrarily well by combinations of the lifted Frobenius monomials with coefficients in the
 discrete subfield `K*`, which is a `p`-th power in `L₂`, is a `p`-th power in `L₁`. -/
-theorem exists_pow_eq_of_kummer_of_approx [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
+theorem exists_pow_eq_of_kummer_of_approx (K L₁ L₂ Kst : Subfield Ω)
     (A : Subring Ω) (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
     (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hKst : Kst ≤ K) (hAL₁ : ∀ y ∈ A, y ∈ L₁)
     (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
@@ -182,6 +183,7 @@ theorem exists_pow_eq_of_kummer_of_approx [DecidableEq ι] (K L₁ L₂ Kst : Su
     (hα : ∀ t ∈ L₁, t ≠ 0 → ∃ e : Option (ι × ℕ) →₀ Ω, (∀ k, e k ∈ Kst) ∧
       v (α - frobeniusComb p w e) < v t)
     (h₂ : ∃ y ∈ L₂, y ^ p = α) : ∃ y ∈ L₁, y ^ p = α := by
+  classical
   classical
   by_cases hα0 : α = 0
   · exact ⟨0, zero_mem _, by rw [hα0, zero_pow hp.ne_zero]⟩
