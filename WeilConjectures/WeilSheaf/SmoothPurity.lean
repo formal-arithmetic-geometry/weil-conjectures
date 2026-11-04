@@ -54,7 +54,8 @@ As in the blueprint (`def-pur-smooth-purity-map`), `γ_f` is the composite
 
 ## Unfinished
 
-The inputs of `γ_f` listed above rest on statements with `sorry`:
+The identification of the Tate twist with a tensor product is proved. The other two inputs of
+`γ_f` rest on statements with `sorry`:
 - the Weil orientation is lifted from a Frobenius-equivariant isomorphism
   `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` of underlying complexes
   (`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`,
@@ -63,9 +64,10 @@ The inputs of `γ_f` listed above rest on statements with `sorry`:
   `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism` is for finite coefficients
   over `Spec k₀`;
 - the co-projection map needs the compatibility of forgetting the Weil structure with the native
-  tensor product, the projection formula and the counit of `Rf₀! ⊣ Rf^!`;
-- the identification of the Tate twist needs a comparison of
-  `AlgebraicGeometry.WeilComplex.tensorLisse` with the native tensor product.
+  tensor product, the projection formula and the counit of `Rf₀! ⊣ Rf^!`. The Weil projection
+  formula is only known to exist, through the proper projection formula
+  `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`, which is
+  itself stated with `sorry`.
 -/
 
 @[expose] public section
@@ -130,7 +132,11 @@ geometric Frobenius acts on `R^{2d} f̄_! ℚ̄_ℓ` by `q^d` through the trace.
   not formalized: the comparison of underlying complexes is only an existence statement;
 - the finite-coefficient form `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`
   holds over `Spec k₀` and on the étale site, and there is no comparison of the étale `Rf^!`
-  with finite coefficients and the `ℓ`-adic Weil `Rf^!`. -/
+  with finite coefficients and the `ℓ`-adic Weil `Rf^!`.
+
+The node itself, the purity square for the purity map `γ_{f,K}` against the data `φ^pur` and
+`φ^!`, is not stated here: the exceptional datum `φ^!` of the geometric `Rf̄^!` along the Frobenius
+square, and its identification with the Weil structure of `Rf^!`, are not formalized. -/
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     ∃ g : forget.obj ((upperShriek f).obj

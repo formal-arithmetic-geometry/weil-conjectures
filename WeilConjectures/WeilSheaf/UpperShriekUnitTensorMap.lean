@@ -30,8 +30,15 @@ projection formula (`AlgebraicGeometry.WeilComplex.nonempty_nativeCompactProject
 the counit. That it lies over the geometric map needs the compatibility of forgetting the Weil
 structure with the native tensor product, the projection formula, and the counit of
 `Rf₀! ⊣ Rf^!`. Part of this compatibility is
-`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`;
-the rest is missing from the library.
+`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`, but only as
+an existence statement. The main obstruction is the projection formula: the Weil isomorphism
+`Rf₀!(M ⊗ f^* T) ≅ Rf₀! M ⊗ T` is only known to exist, through the proper projection formula
+`AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`, which is
+itself stated with `sorry`. Nothing is known about it after forgetting the Weil structure, and an
+arbitrary isomorphism there changes the adjoint map by an automorphism of
+`Rf₀!(f^* L ⊗ Rf^! ℚ̄_ℓ)` which need not come from `Rf₀!`. A proof needs the canonical
+projection morphism of Weil complexes (built from the native pullback–tensor comparison and
+`g^* ⊣ Rg_*` for the proper factor `g`) together with its comparison with the geometric one.
 -/
 
 @[expose] public section
