@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFrobenius
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFreeComparison
 public import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 
@@ -44,23 +45,17 @@ section RightDerivedFunctorUnitQ
 variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B] [HasDerivedCategory A]
   [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A] (P : A ⥤ B) [P.Additive]
 
-/-- The unit of the total right derived functor `RP` at a complex `K`, as a morphism
-`Q (P K) ⟶ RP (Q K)`. -/
-noncomputable def rightDerivedFunctorUnitQ (K : CochainComplex A ℤ) :
-    DerivedCategory.Q.obj ((P.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ⟶
-      P.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) :=
-  P.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj K)
+lemma rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app (K : CochainComplex A ℤ) :
+    P.rightDerivedFunctorUnitQ K =
+      P.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj K) := by
+  simp only [rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+    NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv]
+  erw [Category.id_comp, Functor.map_id, Category.comp_id]
 
-@[reassoc]
-lemma rightDerivedFunctorUnitQ_naturality {K K' : CochainComplex A ℤ} (f : K ⟶ K') :
-    DerivedCategory.Q.map ((P.mapHomologicalComplex (ComplexShape.up ℤ)).map f) ≫
-        P.rightDerivedFunctorUnitQ K' =
-      P.rightDerivedFunctorUnitQ K ≫ P.rightDerivedFunctor.map (DerivedCategory.Q.map f) :=
-  P.rightDerivedFunctorUnit.naturality ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).map f)
-
-instance (K : CochainComplex A ℤ) [K.IsKInjective] : IsIso (P.rightDerivedFunctorUnitQ K) :=
-  inferInstanceAs (IsIso (P.rightDerivedFunctorUnit.app
-    ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj K)))
+instance (K : CochainComplex A ℤ) [K.IsKInjective] : IsIso (P.rightDerivedFunctorUnitQ K) := by
+  rw [rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app]
+  infer_instance
 
 end RightDerivedFunctorUnitQ
 
@@ -163,6 +158,8 @@ lemma mapDerivedCategoryFactors_inv_app_comp_rightDerivedFunctorMapOfNatIsoCompF
   simp only [c₁, c₂, c₃, Functor.map_id, Category.id_comp, Category.assoc] at h
   erw [Functor.mapDerivedCategoryFactorsh_inv_app_quotient_obj,
     Functor.mapDerivedCategoryFactorsh_inv_app_quotient_obj] at h
+  rw [Functor.rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app,
+    Functor.rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app]
   exact h
 
 omit [HasColimitsOfShape (Discrete ℤ) D] [HasExactColimitsOfShape (Discrete ℤ) D]
@@ -226,7 +223,9 @@ theorem isIso_freeComparison_rightDerivedFunctor (I : CochainComplex C ℤ) [I.I
   have : IsIso ((NatTrans.mapHomologicalComplex β (ComplexShape.up ℤ)).app I) :=
     HomologicalComplex.Hom.isIso_of_components _
   have : IsIso (L.rightDerivedFunctorUnitQ
-      (((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).obj J)) := hI
+      (((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).obj J)) := by
+    rw [Functor.rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app]
+    exact hI
   have := isIso_rightDerivedFunctorUnitQ_mapOfNatIso e J
   -- the free comparison is the composite
   -- `D(Free)(RL (Q I)) ≅ Q(Free (L I)) ≅ Q(mapOfNatIso e (Free I)) ≅ R(mapOfNatIso e)(Q(Free I))`
