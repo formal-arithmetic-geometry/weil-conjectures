@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDual
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityProper
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,6 +28,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
 
+set_option maxHeartbeats 1600000 in
+-- Matching the bounded-constructible closed structure with the ambient one is slow.
 /-- The actual scalar-extension double-dual comparison, including its evaluation equation.
 
 Source: Bhatt--Scholze, Lemmas 6.7.13 and 6.7.18, Proposition 6.8.14 and Remark

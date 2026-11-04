@@ -20,6 +20,65 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
+/-- Transport of the ordered proper projection map along the constant coefficient model:
+if the coefficient identifications `B_Y[0] ≅ (B[0])_Y` and `B_Z[0] ≅ (B[0])_Z` are
+compatible with the two pullback identifications, then the scalar-coefficient ordered
+projection map, followed by these identifications, is the ordered constant projection
+isomorphism `properConstantProjectionIso` for the constant complex `B[0]`.
+Source: the projection clause of properFiniteCoefficientExtension and Zheng,
+Construction 2.26
+(blueprint: lem-sfb-ordinary-exceptional-tensor-projection-normalization).
+
+Proof: naturality of the signed derived symmetry and of the projection map in the
+coefficient, followed by the assumed compatibility of the pullback identifications. -/
+theorem ordinaryExceptional_orderedProjection_transport
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A]
+    (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsProper p]
+    (h : (upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.map
+        (ordinaryScalarCoefficientIso φ Y).hom ≫
+      ((constantFunctorCompLeftDerivedUpperStarIso A p).app
+        (ordinaryCoefficientComplex φ)).hom =
+      (scalarCoefficientPullbackIso φ p).hom ≫ (ordinaryScalarCoefficientIso φ Z).hom)
+    (K : DerivedCategoryModule A Z) :
+    ((derivedTensor (ModuleCat.{u + 1} A) Y).map (ordinaryScalarCoefficientIso φ Y).hom).app
+        ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj K) ≫
+      (properConstantProjectionIso A p (ordinaryCoefficientComplex φ) K).hom =
+    ordinaryScalarProjectionMap φ p K ≫
+      (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.map
+        (((derivedTensor (ModuleCat.{u + 1} A) Z).map
+          (ordinaryScalarCoefficientIso φ Z).hom).app K) := by
+  have hP : ((derivedTensor (ModuleCat.{u + 1} A) Y).obj
+        ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj K)).map
+          (ordinaryScalarCoefficientIso φ Y).hom ≫
+        ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) p).app K).app _ =
+      ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) p).app K).app _ ≫
+        (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.map
+          (((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map
+            ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.map
+              (ordinaryScalarCoefficientIso φ Y).hom)) :=
+    ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) p).app K).naturality _
+  have hX : ((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map
+        ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.map
+          (ordinaryScalarCoefficientIso φ Y).hom) ≫
+      ((derivedTensorSymmetry (ModuleCat.{u + 1} A) Z).hom.app K).app _ ≫
+        ((derivedTensor (ModuleCat.{u + 1} A) Z).map
+          ((constantFunctorCompLeftDerivedUpperStarIso A p).hom.app
+            (ordinaryCoefficientComplex φ))).app K =
+      ((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map
+          (scalarCoefficientPullbackIso φ p).hom ≫
+        ((derivedTensorSymmetry (ModuleCat.{u + 1} A) Z).hom.app K).app _ ≫
+          ((derivedTensor (ModuleCat.{u + 1} A) Z).map
+            (ordinaryScalarCoefficientIso φ Z).hom).app K := by
+    rw [Iso.app_hom] at h
+    rw [NatTrans.naturality_assoc, NatTrans.naturality_assoc, Functor.flip_obj_map,
+      Functor.flip_obj_map, ← NatTrans.comp_app, ← NatTrans.comp_app, ← Functor.map_comp,
+      ← Functor.map_comp, h]
+  simp only [properConstantProjectionIso, ordinaryScalarProjectionMap, Iso.trans_hom,
+    Iso.app_hom, asIso_hom, Functor.mapIso_hom, Category.assoc]
+  erw [NatTrans.naturality_app_assoc, Functor.flip_map_app, reassoc_of% hP]
+  simp only [← Functor.map_comp, Category.assoc]
+  erw [hX]
+
 /-- Under the canonical scalar/constant-tensor identifications, the restricted inverse
 proper coefficient comparison is the inverse ordered constant projection.
 

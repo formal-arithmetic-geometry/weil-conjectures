@@ -52,7 +52,7 @@ private local instance (T : Scheme.{u}) :
   integralCoefficientAbLocallyBijective.{u,u} T
 attribute [local instance] scalarReductionRestrictionLimits scalarReductionRestrictionColimits
 
-/-- The normalized regular quotient trace is invertible on a K-injective representative,
+/-- The normalized regular quotient trace is invertible on any (e.g. K-injective) complex,
 given its invertibility on complexes with injective terms.
 Source: Stacks Tags 079P and 05RT; functorial K-injective resolutions with injective terms
 on a ringed site, and naturality of the trace.
@@ -67,7 +67,6 @@ theorem reductionCoinductionTrace_isIso_onKInjective
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)
     (I : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ)
-    [I.IsKInjective]
     (hterms : ∀ (J : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ)
       [∀ i : ℤ, Injective (J.X i)],
       IsIso ((reductionCoinductionTrace.{u} l E T n).app (DerivedCategory.Q.obj J))) :
