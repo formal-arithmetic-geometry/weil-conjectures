@@ -103,20 +103,27 @@ lemma condensedRealizationTensor_pull_square_Q
   obtain ⟨mU, hmU', hsquare⟩ := final_total_diagram L V F R
     (condensedRealizationUpperStarIso k₀ l g).symm
     (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
-    (MonoidalCategory.tensor _) (condensedRealizationTensor k₀ l Z) (Iso.refl _)
+    (Functor.uncurry.obj (curriedTensor _)) (condensedRealizationTensor k₀ l Z)
+    (Functor.projection_uncurryTensorIso _)
     (nativePullTensor k₀ l g) P T WZ WU
     (nativeOpenTensorModel k₀ l Y P T hP hT)
     (nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
     ((nativePullTotalTensor k₀ l g).app (P, T)) hr cZ cU
-    (by simpa only [Iso.refl_hom, NatTrans.id_app, Category.id_comp] using hmU)
+    (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
+      Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
+      ← tensorHom_def] using hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (condensedRealizationTotalTensor_pull_square k₀ l g P T) mZ rfl
-  simp only [Iso.refl_hom, NatTrans.id_app, Category.id_comp] at hmU'
+  simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp] at hmU'
+  simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
+    ← tensorHom_def] at hsquare
   have hmZ : mZ.hom = (condensedRealizationTensor k₀ l Y).hom.app
       (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
     (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ F.mapDerivedCategoryFactors.hom.app T) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q FP FT :=
-    (condensedRealizationTensor_hom_app_comp k₀ l Y P T hP hT).symm
+      Functor.LaxMonoidal.μ DerivedCategory.Q FP FT := by
+    simpa only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
+      ← tensorHom_def] using
+      (condensedRealizationTensor_hom_app_comp k₀ l Y P T hP hT).symm
   have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
@@ -153,20 +160,29 @@ lemma condensedRealizationTensor_pull_square
         (F.mapDerivedCategory.obj N) := by
   let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
     (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-  let c : MonoidalCategory.tensor _ ⋙ R.mapDerivedCategory ≅
-      R.mapDerivedCategory.prod R.mapDerivedCategory ⋙ MonoidalCategory.tensor _ :=
+  let c : Functor.uncurry.obj (curriedTensor _) ⋙ R.mapDerivedCategory ≅
+      R.mapDerivedCategory.prod R.mapDerivedCategory ⋙
+        Functor.uncurry.obj (curriedTensor _) :=
     NatIso.ofComponents
       (fun MN ↦ asIso ((R.mapDerivedCategoryTensorComparison.app MN.1).app MN.2))
-      (fun fg ↦ R.projection_mapDerivedCategoryTensorComparison_naturality fg.1 fg.2)
-  exact Adjunction.tensorSquare_of_representatives DerivedCategory.Q.obj
+      (fun fg ↦ by
+        simpa only [Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
+          curriedTensor_map_app, curriedTensor_obj_map, ← tensorHom_def] using
+          R.projection_mapDerivedCategoryTensorComparison_naturality fg.1 fg.2)
+  have h := Adjunction.tensorSquare_of_representatives DerivedCategory.Q.obj
     (NativeIsKFlat k₀ l Y) (native_two_sided_kflat_representatives k₀ l Y)
     (nativeOpenPull k₀ l g) (derivedCondensedRealization k₀ l Z)
     (derivedCondensedRealization k₀ l Y) R.mapDerivedCategory
     (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
-    (MonoidalCategory.tensor _) (MonoidalCategory.tensor _)
+    (Functor.uncurry.obj (curriedTensor _)) (Functor.uncurry.obj (curriedTensor _))
     (nativePullTensor k₀ l g) (condensedRealizationTensor k₀ l Z)
     (condensedRealizationTensor k₀ l Y)
     (Functor.mapDerivedCategorySquareIso (condensedRealizationUpperStarIso k₀ l g).symm) c
-    (condensedRealizationTensor_pull_square_Q k₀ l g) M N
+    (fun P T hP hT ↦ by
+      simpa only [Functor.uncurry_obj_map, curriedTensor_map_app,
+        curriedTensor_obj_map, ← tensorHom_def] using
+        condensedRealizationTensor_pull_square_Q k₀ l g P T hP hT) M N
+  simpa only [Functor.uncurry_obj_map, curriedTensor_map_app,
+    curriedTensor_obj_map, ← tensorHom_def] using h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

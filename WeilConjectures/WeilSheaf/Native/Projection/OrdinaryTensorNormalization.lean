@@ -31,6 +31,17 @@ open CategoryTheory Abelian Limits MonoidalCategory DerivedCategory
 
 namespace CategoryTheory.Functor
 
+/-- The uncurried tensor and the tensor bifunctor have the same components. -/
+def projection_uncurryTensorIso (E : Type*) [Category* E] [MonoidalCategory E] :
+    uncurry.obj (curriedTensor E) ≅ MonoidalCategory.tensor E :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun fg ↦ by
+    dsimp
+    rw [Category.comp_id, Category.id_comp, tensorHom_def])
+
+@[simp]
+lemma projection_uncurryTensorIso_hom_app (E : Type*) [Category* E] [MonoidalCategory E]
+    (MN : E × E) : (projection_uncurryTensorIso E).hom.app MN = 𝟙 _ := rfl
+
 section Abstract
 
 variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
