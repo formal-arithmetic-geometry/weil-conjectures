@@ -266,3 +266,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Focused profile /home/ubuntu/u9/logs/K4-20261105T072239.log (rc=1, 15s) isolates 11.17s in expected-type propagation for the final `(upperStar c.i).mapIso eZ`. Its implicit k₀/l were still metavariables while unification compared a composed right adjoint at the point with an object over c.Z.
 - Pinned those parameters and bound the mapped isomorphism before composing it with eR. Removed profiling. The earlier compactification construction and open-descent helper both complete before that final step.
 - No heartbeat raises; next full helper audit follows. No DONE.
+
+## 2026-11-05 07:26 +0800 — compactification descent GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T072419.log finished rc=1, two built/one failed. NativeDualizingDescent is GREEN (6.1s), including arbitrary open restriction and compactification assembly. Explicitly typing the last open pullback resolves the measured 11s unification timeout.
+- AbsoluteDescent is now reached and reports one ordinary mismatch: smoothness of the structural morphism must be rewritten through Over.mkIdTerminal_from_left. Applied the same normalization already used by the validated concentration helper.
+- No heartbeat raises or DONE; next audit follows.
