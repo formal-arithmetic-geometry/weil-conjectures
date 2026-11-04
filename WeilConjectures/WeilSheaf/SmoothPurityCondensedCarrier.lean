@@ -56,9 +56,12 @@ theorem objectProperty_iff_boundedConstructible_condensedCarrier
       ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
         ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K)) := by
   refine (objectProperty_iff K).trans ?_
+  let K₀ : DerivedCategory
+      (AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj K
   have h := boundedConstructibleAdic_iff_boundedConstructible l k₀ (AlgebraicClosure k₀)
     (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
-    ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K)
+    K₀
   refine h.trans ?_
   exact ⟨(boundedConstructible _).prop_of_iso (condensedCarrierIso K).symm,
     (boundedConstructible _).prop_of_iso (condensedCarrierIso K)⟩
