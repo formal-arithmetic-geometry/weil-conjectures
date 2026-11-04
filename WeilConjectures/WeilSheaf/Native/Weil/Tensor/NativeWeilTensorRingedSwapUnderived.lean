@@ -265,6 +265,9 @@ private theorem binary_square
   erw [← Category.assoc, ht] at hv
   apply (cancel_epi (b.forget.map (A.underived P Q).inv)).1
   apply (cancel_mono (d.underived P.carrier Q.carrier).inv).1
+  -- An explicit `Mono` instance: generic instance search leaves a universe metavariable here.
+  have : Mono (b.ordinary.functor.map (e.inv.app (P, Q))) :=
+    inferInstanceAs (Mono (b.ordinary.functor.mapIso (e.app (P, Q))).inv)
   apply (cancel_mono (b.ordinary.functor.map (e.inv.app (P, Q)))).1
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   rw [← b.forget.map_comp_assoc, Iso.inv_hom_id, b.forget.map_id,
