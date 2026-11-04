@@ -13534,6 +13534,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.AsFunctorLocalizati
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomBidual
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomHomotopyExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomSelfAdjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Bounded.BoundedBelowCountableHomContinuity
 public import WeilConjectures.CategoryTheory.DerivedCategory.Bounded.BoundedCohomologyConeWitness
 public import WeilConjectures.CategoryTheory.DerivedCategory.Bounded.BoundedDualizableIndependent
@@ -13677,6 +13678,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Associator
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.BraidingShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedHomComplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableBounded
@@ -24121,6 +24123,7 @@ public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorUnitNormaliz
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryBiduality
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryCanonicalTensorRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryClosedTensorModels
+public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryHomTransport
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryKFlatLocalization
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryOpenTensorSupport
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryRepresentativeCurrying

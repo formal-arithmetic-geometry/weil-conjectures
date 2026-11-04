@@ -10,6 +10,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibility
 public import WeilConjectures.PoincareDuality.Verdier
+public import WeilConjectures.PoincareDuality.Biduality.Constructible
+public import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
+public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryHomTransport
 
 /-!
 # The double-dual morphism of `ℓ`-adic sheaves
@@ -65,20 +68,43 @@ sheaves which is bounded with constructible cohomology. Then the double-dual mor
 `M ⟶ Hom(Hom(M, I), I)` of hom complexes is a quasi-isomorphism.
 
 This is the constructible biduality `ProEtale.CondensedRing.isIso_verdierBiduality` of the
-condensed model, read in the model of `ℓ`-adic sheaves. The missing input is the comparison of
-the two models for the double-dual morphism: the coefficient equivalence `ordinaryToCondensed`
-identifies the derived internal homs (`lem-sf-native-geometric-hom-comparison`, see
-`ProEtaleWeilSheaf.nonempty_nativeGeometricForget_derivedHom_iso`), but it is not known yet to
-carry the hom-complex double-dual morphism to `ProEtale.CondensedRing.verdierBiduality`, the
-transpose of the Koszul-braided evaluation in the closed structure of `Dᵇc` (blueprint:
-`cor-coef-verdier-weil-equivariance`, "evaluation, biduality ... are Weil equivariant"). -/
+condensed model, read in the model of `ℓ`-adic sheaves. The derived double-dual morphism is the
+unit of the self-adjunction `RHom(-, I).rightOp ⊣ RHom(-, I)`
+(`DerivedCategory.bifunctorRHomSelfAdjunction`), and `ProEtale.CondensedRing.verdierBiduality`
+is the unit of the self-adjunction of `[-, ω_Z]` in the closed structure of the condensed model.
+The coefficient equivalence `ordinaryToCondensed` intertwines the two functors
+(`ProEtaleWeilSheaf.ordinaryRHomCondensedIso`), so the two units are isomorphisms at the same
+objects (`ProEtaleWeilSheaf.isIso_bifunctorRHomBidual_app_iff`); no comparison of the two
+double-dual morphisms themselves is needed. -/
 theorem quasiIso_bifunctorHomBidual_ordinary {M I : CochainComplex (ProEtale.AdicSheaf l Z.left) ℤ}
     [I.IsKInjective]
     (eI : Nonempty ((ordinaryToCondensed Z).obj (DerivedCategory.Q.obj I) ≅
       (ObjectProperty.ι _).obj (ProEtale.CondensedRing.dualizingComplex l Z)))
     (hM : ProEtale.constantModelBoundedConstructible (Profinite.padicAlgClRingObj l) Z.left
       ((ordinaryToCondensed Z).obj (DerivedCategory.Q.obj M))) :
-    QuasiIso (CochainComplex.bifunctorHomBidual (ordinaryBifunctorEvaluation l Z.left) M I) :=
-  sorry
+    QuasiIso (CochainComplex.bifunctorHomBidual (ordinaryBifunctorEvaluation l Z.left) M I) := by
+  obtain ⟨eI⟩ := eI
+  have := ProEtale.CondensedRing.isLeftDerivabilityStructure_localizerMorphismKFlat
+    (Profinite.padicAlgClRingObj l) Z.left
+  let : BraidedCategory (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
+      (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj l) Z.left))) :=
+    DerivedCategory.braidedCategory' _
+  have : CompactSpace Z.left := QuasiCompact.compactSpace_of_compactSpace Z.hom
+  have : IsLocallyNoetherian Z.left := LocallyOfFiniteType.isLocallyNoetherian Z.hom
+  have hK : ProEtale.boundedConstructible
+      (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj l) Z.left)
+      ((ordinaryToCondensed Z).obj (DerivedCategory.Q.obj M)) := by
+    rw [(ProEtale.adicConstructibilityPredicateComparison l Z.left
+      (Profinite.padicAlgClRingObj l) .algebraicClosure).2]
+    exact hM
+  have := ProEtale.CondensedRing.isIso_verdierBiduality l (X := Z) ⟨_, hK⟩
+  rw [← DerivedCategory.isIso_bifunctorRHomBidual_app_Q_obj_iff _
+      (precompQuasiIso_ordinaryIhomBifunctor l Z.left I)]
+  refine (isIso_bifunctorRHomBidual_app_iff l Z.left (E := ordinaryBifunctorEvaluation l Z.left)
+    (fun a b ↦ ordinaryBidual_triangle l Z.left a b) eI (DerivedCategory.Q.obj M)).2 ?_
+  have h := Functor.map_isIso (ObjectProperty.ι _)
+    (ProEtale.CondensedRing.verdierBiduality l (X := Z) ⟨_, hK⟩)
+  rwa [ObjectProperty.ι_map, ProEtale.CondensedRing.verdierBiduality,
+    Verdier.bidualityMap_eq_toIhomIhom, ObjectProperty.hom_toIhomIhom] at h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
