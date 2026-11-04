@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.CondensedModelWeil
 public import WeilConjectures.TateTwist.TateModuleTrivialization
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
 /-! # Coefficient-parametric pullback comparisons for Tate descent -/
 
@@ -37,10 +38,21 @@ noncomputable def purityExtendPullbackIso
     (g)^*⟦Λ⟧.obj M ≅ (g)^*⟦Λ⟧.obj N :=
   (Mod.extendScalars (condensedPullbackHom Λ g)).mapIso e
 
+/-- The scalar-extension comparison respects the extension units. -/
+@[reassoc]
+lemma purityExtendPullbackIso_unit
+    (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (e : ((g)^*[Ab.{u + 1}].mapMod _).obj M ≅
+      ((g)^*[Ab.{u + 1}].mapMod _).obj N) :
+    purityPullbackUnit Λ g M ≫ (purityExtendPullbackIso Λ g M N e).hom.hom =
+      e.hom.hom ≫ purityPullbackUnit Λ g N :=
+  Mod.extendUnitHom_extendScalarsMap (condensedPullbackHom Λ g) e.hom
+
 variable {K : Type u} [Field K] [WeaklyEtale g] (f : U ⟶ Spec (.of K))
   (l : ℕ) [Fact l.Prime] {ζ : ℕ → K}
   (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n)) (hζ' : ∀ n, ζ (n + 1) ^ l = ζ n)
 
+set_option maxHeartbeats 400000 in
 /-- The Tate-module trivialization transported through coefficient extension. -/
 noncomputable def purityTateModuleTrivialization :
     (g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj (tateModule X l) ≅
