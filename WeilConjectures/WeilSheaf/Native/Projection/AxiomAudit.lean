@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-import WeilConjectures.WeilSheaf.ProperProjectionFormula
+import all WeilConjectures.WeilSheaf.ProperProjectionFormula
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoherence
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
+import all WeilConjectures.WeilSheaf.Native.Projection.SheafTensorUnit
 import Lean.Util.CollectAxioms
 
 /-! # Dependency audit for the native proper projection formula
@@ -15,12 +21,18 @@ The remote build records the remaining proof leaves reachable from the theorem.
 #print axioms
   AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso
 
+#print axioms AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationTensor_pull_square
+#print axioms AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationSheafTensor_pull_square
+#print axioms AlgebraicGeometry.ProEtaleWeilSheaf.native_two_sided_kflat_representatives
+#print axioms AlgebraicGeometry.ProEtaleWeilSheaf.isIso_projectionMap_derivedCondensedRealization
+
 open Lean in
 run_cmd do
   let env ← getEnv
   let mut seen : NameSet := {}
   let mut pending := #[`AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso]
   let mut leaves : Array Name := #[]
+  let mut unavailable : Array Name := #[]
   while !pending.isEmpty do
     let name := pending.back!
     pending := pending.pop
@@ -29,12 +41,18 @@ run_cmd do
     seen := seen.insert name
     unless (← collectAxioms name).contains ``sorryAx do
       continue
-    if let some info := env.checked.get.find? name then
+    if let some info := (env.setExporting false).find? name then
+      if info.value? true |>.isNone then
+        unavailable := unavailable.push name
       let deps := info.type.getUsedConstants ++
         ((info.value? true).map Expr.getUsedConstants).getD #[]
       if deps.contains ``sorryAx then
         leaves := leaves.push name
       pending := pending ++ deps.filter (· != ``sorryAx)
+    else
+      unavailable := unavailable.push name
   for name in leaves.qsort Name.lt do
     logInfo m!"K5 existing proof leaf: {name}"
-  logInfo m!"K5 remaining proof leaves: {leaves.size}"
+  for name in unavailable.qsort Name.lt do
+    logInfo m!"K5 imported dependency with unavailable proof body: {name}"
+  logInfo m!"K5 visible direct sorry dependencies: {leaves.size}; unavailable bodies: {unavailable.size}"

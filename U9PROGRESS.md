@@ -64,3 +64,11 @@ normalized both spellings before the rewrite; no heartbeat increase.
 in 16s with no timeouts. Remaining issues are identity/composition normalization:
 used explicit mate components, ordinary-transparency identity cancellation, and
 rfl for the final strict forgetting/pushforward square. Rechecking the audit.
+
+2026-11-05 03:00 CST: K5-20261105T025344.log rc=1. AdicSheafTensorSquare
+GREEN in 19s. NativeSheafTensorSquare hit two explicit kernel deterministic
+timeouts (256s total), at the concrete horizontal-iso component lemma and the
+sheaf square. Factored horizontal identity elimination and square rotation into
+an abstract helper; no heartbeat increase. Also corrected dependency audit to
+report hidden imported bodies and added the coproduct-preservation instance
+needed by totalization. Rechecking.

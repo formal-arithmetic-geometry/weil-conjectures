@@ -68,6 +68,7 @@ lemma condensedRealizationTotalTensor_pull_square
       (R.mapHomologicalComplex (.up ℤ)).map
         ((condensedRealizationTotalTensorIso k₀ l Y).hom.app (P, T)) ≫
       (R.mapCochainComplexμIso FP FT).inv := by
+  have : (upperStar k₀ l g).IsLeftAdjoint := (upperStarLowerStarAdjunction k₀ l g).isLeftAdjoint
   dsimp only
   ext n : 1
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,

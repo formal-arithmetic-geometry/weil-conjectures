@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.SheafSquareTransport
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
 
@@ -35,12 +36,13 @@ lemma condensedRealizationSheafTensorIso_inv_eq (X : Scheme.{u})
   rw [condensedRealizationSheafTensorIso_inv_app]
   rfl
 
+omit [Fact (ringChar k₀ ≠ l)] in
 lemma condensedRealizationUpperStarIso_hom_app_eq (M : ProEtaleWeilSheaf k₀ l Y) :
     (condensedRealizationUpperStarIso k₀ l g).hom.app M =
       (adicUpperStarCompCondensedModIso l
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).inv.app
           M.carrier := by
-  simp [condensedRealizationUpperStarIso, Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso]
+  exact Endofunctor.IsoAlgebra.isoHComp_forget_symm_hom_app _ _ M
 
 /-- The native pullback tensor comparison and the condensed realization tensor comparison
 commute with the pullback comparison. -/
@@ -81,12 +83,10 @@ lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ 
       (((nativePullSheafTensor k₀ l g).hom.app (M, N)).hom.f) = _
     rw [hm]
     exact adicUpperStar_condensedRelativeTensor_square l _ M.carrier N.carrier
-  apply (cancel_epi (a.hom.app ((nativeOpenSheafTensor k₀ l Y).obj (M, N)))).1
-  apply (cancel_epi (G.map (nY.inv.app (M, N)))).1
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-  rw [reassoc_of% h]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
-    tensorHom_comp_tensorHom, Iso.hom_inv_id_app, id_tensorHom_id, Category.comp_id,
-    ← G.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+  exact tensorSquare_rotate (G.mapIso (nY.app (M, N)))
+    (a.app ((nativeOpenSheafTensor k₀ l Y).obj (M, N)))
+    ((condensedRealization k₀ l Z).map ((nativePullSheafTensor k₀ l g).hom.app (M, N)))
+    (nZ.app ((upperStar k₀ l g).obj M, (upperStar k₀ l g).obj N))
+    (a.app M) (a.app N) _ h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
