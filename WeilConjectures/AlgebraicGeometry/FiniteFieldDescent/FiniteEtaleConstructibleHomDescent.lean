@@ -205,7 +205,7 @@ theorem finiteEtaleConstructibleHomDescent
     (∃ (E : IntermediateField K L), FiniteDimensional K E ∧
       ∃ (P_E : DerivedCategoryModule Λ (scheme f E)), ctf f Λ P_E ∧
         Nonempty ((pull f Λ (IntermediateField.val E)).obj P_E ≅ P)) ∧
-    (∀ (E : IntermediateField K L) (hE : FiniteDimensional K E)
+    (∀ (E : IntermediateField K L) (_hE : FiniteDimensional K E)
       (P_E Q_E : DerivedCategoryModule Λ (scheme f E)),
       ctf f Λ P_E → ctf f Λ Q_E →
       ∀ (u : (pull f Λ (IntermediateField.val E)).obj P_E ⟶
@@ -219,7 +219,7 @@ theorem finiteEtaleConstructibleHomDescent
           (pullValCompIso f hEE' Λ).hom.app P_E ≫
               (pull f Λ (IntermediateField.val E')).map v ≫
             (pullValCompIso f hEE' Λ).inv.app Q_E = u) ∧
-    (∀ (E : IntermediateField K L) (hE : FiniteDimensional K E)
+    (∀ (E : IntermediateField K L) (_hE : FiniteDimensional K E)
       (P_E Q_E : DerivedCategoryModule Λ (scheme f E)),
       ctf f Λ P_E → ctf f Λ Q_E →
       ∀ (u v : P_E ⟶ Q_E),
@@ -229,7 +229,7 @@ theorem finiteEtaleConstructibleHomDescent
           FiniteDimensional K E' ∧
           (pull f Λ (IntermediateField.inclusion hEE')).map u =
             (pull f Λ (IntermediateField.inclusion hEE')).map v) ∧
-    (∀ (E₀ : IntermediateField K L) (hE₀ : FiniteDimensional K E₀)
+    (∀ (E₀ : IntermediateField K L) (_hE₀ : FiniteDimensional K E₀)
       (P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀)),
       ctf f Λ P₀ → ctf f Λ Q₀ →
       ∃ (H : FiniteStageHomSystem f Λ P₀ Q₀), Nonempty (IsColimit H.c)) := by
