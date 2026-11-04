@@ -25,6 +25,19 @@ Source: Stacks Project, Topology, Tag 0A2V, parts (1) and (2)
 
 universe u v w
 
+/-- A spectral map is continuous for the constructible topologies: preimages of quasi-compact
+opens and of closed sets with quasi-compact complement are again of this form. -/
+theorem IsSpectralMap.continuous_constructibleTopology {X Y : Type*} [TopologicalSpace X]
+    [TopologicalSpace Y] {f : X → Y} (hf : IsSpectralMap f) :
+    @Continuous X Y (constructibleTopology X) (constructibleTopology Y) f := by
+  refine (continuous_generateFrom_iff (t := constructibleTopology X)).mpr ?_
+  rintro s (⟨hso, hsc⟩ | ⟨hscl, hsc⟩)
+  · exact (hf.isCompact_preimage_of_isOpen hso hsc).isOpen_constructibleTopology_of_isOpen
+      (hso.preimage hf.continuous)
+  · refine IsCompact.isOpen_constructibleTopology_of_isClosed ?_ (hscl.preimage hf.continuous)
+    rw [← Set.preimage_compl]
+    exact hf.isCompact_preimage_of_isOpen hscl.isOpen_compl hsc
+
 namespace Topology
 
 -- These diagram axioms are redundant for compactness; keep the existing interface.
