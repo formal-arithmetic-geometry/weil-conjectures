@@ -79,8 +79,100 @@ noncomputable def twistedRingMap {A A' : Ring.{u}} (a : A ⟶ A') :
   (sheafCompose (twistedTopology G) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
     ⟨Functor.whiskerLeft (projection (groupPresheaf G)).op (ringSheafMap a).hom⟩
 
-example {A A' : Ring.{u}} (a : A ⟶ A') (X : Model.{u}) (r : sectionRing A (AsSmall.down.obj X)) :
-    ((twistedRingMap G a).hom.app (op (Object.mk X))).hom r =
-      (a.hom.hom.hom.app (op (AsSmall.down.obj X))).hom r := rfl
+/-- Sections of the twisted module of an internal action are its sections. -/
+noncomputable def twistedSections (M : Equivariant A G) (X : Model.{u}) :
+    ((twistedEquivalence G A).functor.obj M).val.obj (op (Object.mk X)) ≃ₗ[
+      sectionRing A (AsSmall.down.obj X)] sections A M.module (AsSmall.down.obj X) :=
+  (presentationOf G A).sheafSections (toSite.obj M) X
+
+theorem twistedSections_restriction (M : Equivariant A G) {X Y : Model.{u}} (f : X ⟶ Y)
+    (g : (groupPresheaf G).obj (op X))
+    (m : ((twistedEquivalence G A).functor.obj M).val.obj (op (Object.mk Y))) :
+    twistedSections M X (((twistedEquivalence G A).functor.obj M).val.map
+      (opArrow (groupPresheaf G) f g) m) =
+      M.act (AsSmall.down.obj X) g.down
+        ((M.module.X.obj.map (AsSmall.down.map f).op).hom (twistedSections M Y m)) :=
+  (presentationOf G A).sheafSections_restriction (toSite.obj M) f g m
+
+theorem twistedSections_naturality {M N : Equivariant A G} (φ : M ⟶ N) (X : Model.{u})
+    (m : ((twistedEquivalence G A).functor.obj M).val.obj (op (Object.mk X))) :
+    twistedSections N X (((twistedEquivalence G A).functor.map φ).val.app _ m) =
+      (φ.val.hom.hom.app (op (AsSmall.down.obj X))).hom (twistedSections M X m) :=
+  (presentationOf G A).sheafSections_naturality (toSite.map φ) X m
+
+section Scalar
+
+variable {A A' : Ring.{u}} (a : A ⟶ A')
+
+/-- Sectionwise, the twisted module of a scalar restriction is the restriction of scalars of
+the twisted module. -/
+noncomputable def scalarTwistedSections (N : Equivariant A' G) (X : Model.{u}) :
+    ((twistedEquivalence G A).functor.obj ((scalarActionFunctor a G).obj N)).val.obj
+        (op (Object.mk X)) ≃ₗ[(siteRing A).obj.obj (op X)]
+      ((SheafOfModules.restrictScalars (twistedRingMap G a)).obj
+        ((twistedEquivalence G A').functor.obj N)).val.obj (op (Object.mk X)) where
+  toFun m := (twistedSections N X).symm (twistedSections ((scalarActionFunctor a G).obj N) X m)
+  invFun y := (twistedSections ((scalarActionFunctor a G).obj N) X).symm (twistedSections N X y)
+  map_add' m m' := by
+    rw [map_add, map_add]
+  map_smul' r m := by
+    rw [LinearEquiv.map_smul, smul_comap_sections a N.module _ r _ _ _ rfl rfl,
+      LinearEquiv.map_smul]
+    rfl
+  left_inv m := by
+    simp
+  right_inv y := by
+    simp
+
+theorem scalarTwistedSections_apply (N : Equivariant A' G) (X : Model.{u}) (m) :
+    twistedSections N X (scalarTwistedSections a N X m) =
+      twistedSections ((scalarActionFunctor a G).obj N) X m :=
+  (twistedSections N X).apply_symm_apply _
+
+theorem scalarTwistedSections_restriction (N : Equivariant A' G) {X Y : Model.{u}} (f : X ⟶ Y)
+    (g : (groupPresheaf G).obj (op X))
+    (m : ((twistedEquivalence G A).functor.obj ((scalarActionFunctor a G).obj N)).val.obj
+      (op (Object.mk Y))) :
+    scalarTwistedSections a N X (((twistedEquivalence G A).functor.obj
+      ((scalarActionFunctor a G).obj N)).val.map (opArrow (groupPresheaf G) f g) m) =
+      ((twistedEquivalence G A').functor.obj N).val.map (opArrow (groupPresheaf G) f g)
+        (scalarTwistedSections a N Y m) := by
+  apply (twistedSections N X).injective
+  rw [scalarTwistedSections_apply, twistedSections_restriction, twistedSections_restriction,
+    scalarTwistedSections_apply]
+  rfl
+
+/-- The twisted module of a scalar restriction is the restriction of scalars of the twisted
+module. -/
+noncomputable def scalarTwistedIso (N : Equivariant A' G) :
+    (twistedEquivalence G A).functor.obj ((scalarActionFunctor a G).obj N) ≅
+      (SheafOfModules.restrictScalars (twistedRingMap G a)).obj
+        ((twistedEquivalence G A').functor.obj N) :=
+  twistedIsoMk (scalarTwistedSections a N) (fun f g m ↦ scalarTwistedSections_restriction a N f g m)
+
+theorem scalarTwistedIso_naturality {N N' : Equivariant A' G} (φ : N ⟶ N') :
+    (twistedEquivalence G A).functor.map ((scalarActionFunctor a G).map φ) ≫
+        (scalarTwistedIso a N').hom =
+      (scalarTwistedIso a N).hom ≫
+        (SheafOfModules.restrictScalars (twistedRingMap G a)).map
+          ((twistedEquivalence G A').functor.map φ) := by
+  apply twisted_hom_ext
+  intro X m
+  apply (twistedSections N' X).injective
+  have h₁ := scalarTwistedSections_apply a N' X
+    (((twistedEquivalence G A).functor.map ((scalarActionFunctor a G).map φ)).val.app _ m)
+  have h₂ := twistedSections_naturality φ X (scalarTwistedSections a N X m)
+  have h₃ := twistedSections_naturality ((scalarActionFunctor a G).map φ) X m
+  rw [scalarTwistedSections_apply] at h₂
+  exact h₁.trans (h₃.trans h₂.symm)
+
+/-- Scalar restriction of actions is restriction of scalars on twisted modules. -/
+noncomputable def scalarTwistedNatIso :
+    scalarActionFunctor a G ⋙ (twistedEquivalence G A).functor ≅
+      (twistedEquivalence G A').functor ⋙
+        SheafOfModules.restrictScalars (twistedRingMap G a) :=
+  NatIso.ofComponents (scalarTwistedIso a) (scalarTwistedIso_naturality a)
+
+end Scalar
 
 end CategoryTheory.CondensedBar.ActionSite
