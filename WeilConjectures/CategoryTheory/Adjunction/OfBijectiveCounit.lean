@@ -43,20 +43,34 @@ with this bijection as hom-equivalence (inverted) and `ε` as counit. -/
 noncomputable def ofBijectiveCounit {L : C ⥤ D} {R : D ⥤ C} (ε : R ⋙ L ⟶ 𝟭 D)
     (h : ∀ (X : C) (Y : D), Function.Bijective fun g : X ⟶ R.obj Y ↦ L.map g ≫ ε.app Y) :
     L ⊣ R :=
-  sorry
+  mkOfHomEquiv
+    { homEquiv X Y := (Equiv.ofBijective (fun g : X ⟶ R.obj Y ↦ (L.map g ≫ ε.app Y : L.obj X ⟶ Y))
+        (h X Y)).symm
+      homEquiv_naturality_left_symm f g := by simp
+      homEquiv_naturality_right {X Y Y'} f g := by
+        have := ε.naturality g
+        dsimp at this
+        rw [Equiv.symm_apply_eq, Equiv.ofBijective_apply, Functor.map_comp, Category.assoc, this,
+          ← Category.assoc]
+        exact congrArg (· ≫ g) ((Equiv.ofBijective _ (h X Y)).apply_symm_apply f).symm }
 
 @[simp]
 lemma ofBijectiveCounit_counit {L : C ⥤ D} {R : D ⥤ C} (ε : R ⋙ L ⟶ 𝟭 D)
     (h : ∀ (X : C) (Y : D), Function.Bijective fun g : X ⟶ R.obj Y ↦ L.map g ≫ ε.app Y) :
-    (ofBijectiveCounit ε h).counit = ε :=
-  sorry
+    (ofBijectiveCounit ε h).counit = ε := by
+  ext Y
+  simp [ofBijectiveCounit]
 
 /-- The map `g ↦ L g ≫ ε` stays bijective after precomposition with an isomorphism. -/
 lemma bijective_map_comp_iff_of_iso (L : C ⥤ D) {X X' P : C} {T : D} (ε : L.obj P ⟶ T)
     (e : X ≅ X') :
     (Function.Bijective fun g : X ⟶ P ↦ L.map g ≫ ε) ↔
-      Function.Bijective fun g : X' ⟶ P ↦ L.map g ≫ ε :=
-  sorry
+      Function.Bijective fun g : X' ⟶ P ↦ L.map g ≫ ε := by
+  rw [← Function.Bijective.of_comp_iff _ e.symm.homFromEquiv.bijective,
+    ← Function.Bijective.of_comp_iff' (L.mapIso e).symm.homFromEquiv.bijective]
+  convert Iff.rfl using 2
+  ext g
+  simp
 
 variable {C' D' : Type*} [Category C'] [Category D']
   {free₁ : C' ⥤ C} {forget₁ : C ⥤ C'} (adj₁ : free₁ ⊣ forget₁)
@@ -75,8 +89,22 @@ isomorphism, then `g ↦ L g ≫ ε` is bijective on the morphisms `free₁ M �
 theorem bijective_map_comp_free_iff (M : C') [IsIso (freeComparison adj₁ adj₂ L L' c M)] {Q : C}
     {T : D} (ε : L.obj Q ⟶ T) :
     (Function.Bijective fun g : free₁.obj M ⟶ Q ↦ L.map g ≫ ε) ↔
-      Function.Bijective fun f : M ⟶ forget₁.obj Q ↦ L'.map f ≫ c.inv.app Q ≫ forget₂.map ε :=
-  sorry
+      Function.Bijective fun f : M ⟶ forget₁.obj Q ↦ L'.map f ≫ c.inv.app Q ≫ forget₂.map ε := by
+  have key : (adj₂.homEquiv _ _ ∘ (asIso (freeComparison adj₁ adj₂ L L' c M)).symm.homFromEquiv) ∘
+      (fun g : free₁.obj M ⟶ Q ↦ L.map g ≫ ε) =
+      (fun f : M ⟶ forget₁.obj Q ↦ L'.map f ≫ c.inv.app Q ≫ forget₂.map ε) ∘
+        adj₁.homEquiv _ _ := by
+    ext g
+    have := c.inv.naturality g
+    dsimp at this
+    simp only [Function.comp_apply]
+    rw [Iso.homFromEquiv_apply, Iso.symm_inv, asIso_hom, homEquiv_naturality_right,
+      freeComparison, Equiv.apply_symm_apply, homEquiv_unit]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% this]
+  rw [← Function.Bijective.of_comp_iff' ((adj₂.homEquiv _ _).bijective.comp
+    (asIso (freeComparison adj₁ adj₂ L L' c M)).symm.homFromEquiv.bijective), key,
+    Function.Bijective.of_comp_iff _ (adj₁.homEquiv _ _).bijective]
 
 end Adjunction
 
