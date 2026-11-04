@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassDiagonal
+import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerClassSupportedScalarLevelTransfer
 
 /-! # Supported coefficient extension in prescribed diagonal geometry -/
 
@@ -67,6 +68,8 @@ theorem exists_supportedScalarPushComparison
         (SpTowerShriek.push l E b g).obj
           (unit (ProjectiveLine S) (Arings l E (ProjectiveLine S))),
       diagonalExtendedUnit l E c ≫ (c.scalar.T.map a.hom ≫ s.hom) = unitArrow l E p := by
-  sorry
+  obtain ⟨q, hq, hqn⟩ := exists_supportedQuotientSystem l E c g p
+  exact supportedScalarPush_of_isIso l E hc g p a ha q hq
+    (supportedQuotient_scalarAdjunct_isIso l E c g q hqn)
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
