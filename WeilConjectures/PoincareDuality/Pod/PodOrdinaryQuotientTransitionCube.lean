@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.PoincareDuality.PodQuotientTransition.PodQuotientTransitionGenerators
+import WeilConjectures.PoincareDuality.Pod.PodOrdinaryQuotientTransitionCubeAux3
 
 /-! # Ordinary quotient scalar and reindexing cube
 
@@ -99,6 +100,15 @@ theorem podOrdinaryQuotientTransitionCube
             (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P) ≫
           ((integralComparisonSequencePullback l L g).mapHomologicalComplex (.up ℤ)).map
             ((NatIso.mapHomologicalComplex αY (.up ℤ)).inv.app P) := by
-  sorry
+  obtain ⟨αX, hαX⟩ := OrdinaryQuotientCube.scalarComparison_exists l E L ι X MEX MLX
+  obtain ⟨αY, hαY⟩ := OrdinaryQuotientCube.scalarComparison_exists l E L ι Y MEY MLY
+  obtain ⟨βE, hβE⟩ := OrdinaryQuotientCube.reindexComparison_exists l E g MEY MEX
+  obtain ⟨βL, hβL⟩ := OrdinaryQuotientCube.reindexComparison_exists l L g MLY MLX
+  refine ⟨αX, αY, βE, βL, hαX, hαY, hβE, hβL, fun P ↦ ?_⟩
+  ext i : 1
+  simp only [HomologicalComplex.comp_f, NatIso.mapHomologicalComplex_inv_app_f,
+    NatIso.mapHomologicalComplex_hom_app_f, Functor.mapHomologicalComplex_map_f]
+  exact OrdinaryQuotientCube.cube_component l E L ι g MEY MEX MLY MLX b hb αX αY βE βL
+    hαX hαY hβE hβL (P.X i)
 
 end WeilConjectures

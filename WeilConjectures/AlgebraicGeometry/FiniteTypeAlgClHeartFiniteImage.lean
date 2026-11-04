@@ -88,7 +88,7 @@ attribute [local instance 20000]
   PreservesColimitsOfSize.preservesColimitsOfShape
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]

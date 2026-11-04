@@ -75,7 +75,8 @@ attribute [local reducible] integralCoefficientSheaf integralCoefficientCommRing
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Integral pullback reduces to exact inverse image on coherent finite systems.
+/-- Integral pullback reduces to exact inverse image on coherent finite systems, with the
+whole-system value of the comparison recorded.
 The evaluated comparison is the adjoint of the actual Roos projection, for every
 flat-term K-flat representative. No composition comparison is asserted here.
 Source: Stacks 099N(5), 0941; Bhatt--Scholze, Lemma 3.5.7
