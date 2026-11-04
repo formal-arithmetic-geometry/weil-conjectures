@@ -111,7 +111,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         curriedTensor_obj_obj] at hmU ⊢
       simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
         Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-        ← MonoidalCategory.tensorHom_def, Iso.app_hom] at hmU ⊢
+        ← MonoidalCategory.tensorHom_def, Iso.app_hom, condensedTensorModel,
+        asIso_hom, MonoidalCategory.tensor_map, Functor.uncurry_obj_obj,
+        curriedTensor_obj_obj] at hmU ⊢
       cast_proofs hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (by
@@ -120,11 +122,13 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         condensedRealizationPullComplexIso] at ht
       dsimp only [complex_square, tr, NativeRestrictionDescentProof.totalFamily,
         WZ, WU, cZ, cU, L, V, F, R, LP, LT, FP, FT]
-      simp only [Iso.symm_inv, Iso.symm_hom, Iso.app_hom] at ht ⊢
+      simp only [Iso.symm_inv, Iso.symm_hom, Iso.app_hom,
+        MonoidalCategory.tensor_map] at ht ⊢
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj] at ht ⊢
       exact_mod_proofs ht) mZ rfl
-  simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp] at hmU'
+  simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
+    MonoidalCategory.tensor_map, Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hmU'
   simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
     ← MonoidalCategory.tensorHom_def] at hsquare
   have hmZ : mZ.hom = (condensedRealizationTensor k₀ l Y).hom.app
@@ -134,7 +138,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     have hh := (condensedRealizationTensor_hom_app_comp k₀ l Y P T hP hT).symm
     dsimp only [mZ, cZ, WZ, F, FP, FT, Iso.trans_hom, Functor.mapIso_hom]
     simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-      ← MonoidalCategory.tensorHom_def, Iso.app_hom] at hh ⊢
+      ← MonoidalCategory.tensorHom_def, Iso.app_hom, condensedTensorModel,
+      asIso_hom] at hh ⊢
     dsimp only [derivedCondensedRealization, Functor.comp_obj, Functor.prod_obj,
       Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hh ⊢
     cast_proofs hh

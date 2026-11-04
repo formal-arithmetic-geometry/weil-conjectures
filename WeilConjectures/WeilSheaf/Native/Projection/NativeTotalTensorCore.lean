@@ -109,32 +109,32 @@ lemma projection_totalTensorSquare_of_sheaf
   dsimp only [nativeOpenTensorInsertion] at hpull'
   simp only [Functor.map_comp, Iso.app_hom, Functor.comp_obj,
     Functor.prod_obj, Functor.uncurry_obj_obj] at hpull'
-  rw [reassoc_of% hpull']
+  erw [reassoc_of% hpull']
   have hnZ := condensedRealizationTotalTensorIso_summand k₀ l Z
     ((L.mapHomologicalComplex (.up ℤ)).obj P)
     ((L.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnZ
   conv_lhs =>
     arg 2
-    rw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
+    erw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
   conv_lhs =>
     arg 2
     arg 2
     arg 1
-    rw [hcomp P p, hcomp T q]
+    erw [hcomp P p, hcomp T q]
   have hs := hsheaf (P.X p) (T.X q)
   dsimp only [PullTensorSquare] at hs
   dsimp only [Functor.mapHomologicalComplex_obj_X]
-  rw [reassoc_of% hs]
+  erw [reassoc_of% hs]
   have hn := a.inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)
   dsimp only [nativeOpenTensorInsertion] at hn
   simp only [Functor.comp_map L (condensedRealization k₀ l Z),
     Functor.comp_map (condensedRealization k₀ l Y) R] at hn
-  conv_rhs => rw [reassoc_of% hn]
+  conv_rhs => erw [reassoc_of% hn]
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnY
-  rw [← Functor.map_comp_assoc, hnY, Functor.map_comp_assoc,
+  erw [← Functor.map_comp_assoc, hnY, Functor.map_comp_assoc,
     Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f]
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

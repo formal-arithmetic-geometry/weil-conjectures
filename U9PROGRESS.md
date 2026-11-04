@@ -293,10 +293,12 @@ the deferred hmU subproof inside `obtain`, NOT the existential eliminator itself
 only aliases, normalize the curried tensor notation, then cast proofs. Apply the
 same normalization to hmZ. No further heartbeat increase.
 
-2026-11-05 07:15 CST: K5-20261105T070817.log rc=1. Targeted hcomp rewrite
+2026-11-05 07:14 CST: K5-20261105T070817.log rc=1. Targeted hcomp rewrite
 passes; total now fails matching the sheaf square because blanket comp_map
 unfolded condensedRealization and left an implicit-transparency-invalid Aut/Iso
 expression. Pin the outer composition functors in comp_map, normalize complex
 X-components, and likewise pin naturality's composite maps. Derived hmU's cast
 fails comparing (F ⋙ G).obj with G.obj(F.obj): normalize comp_obj/prod_obj and
 derivedCondensedRealization before casting, including hmZ and htotal interfaces.
+
+2026-11-05 07:19 CST: K5-20261105T071407.log rc=1. Derived cast now reaches condensedTensorModel.hom versus localization μ, and tensor.map versus tensorHom; explicitly normalize these definitions. Total named-functor cleanup exposes the same implicit-transparency mismatch already at hpull rewrite. Use standard erw for the native component equalities, allowing their semireducible Aut/Iso conversions; no further budget increase.
