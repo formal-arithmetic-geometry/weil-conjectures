@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.BifunctorHomBidual
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHom
 public import Mathlib.CategoryTheory.Localization.Predicate
+public import WeilConjectures.CategoryTheory.Adjunction.SelfDualUnit
 
 /-!
 # The double-dual morphism of a derived hom
@@ -213,5 +214,46 @@ lemma isIso_bifunctorRHomBidual_app_Q_obj_iff (K : CochainComplex C ℤ) :
         (bifunctorRHomOfComplex H I).map (bifunctorRHomOfComplexQObjIso H hI K).hom.op)
   · intro h
     infer_instance
+
+/-- The double-dual natural transformation satisfies the triangle identity
+`RHom(δ_K, I) ∘ δ_{RHom(K, I)} = 𝟙` if the evaluation does
+(`CochainComplex.bifunctorHomBidual_comp_bifunctorHomMapLeft`). -/
+lemma isSelfDualUnit_bifunctorRHomBidual (hE : E.IsSelfDual) :
+    (bifunctorRHomOfComplex H I).IsSelfDualUnit (bifunctorRHomBidual E hI) := by
+  intro N
+  refine Functor.app_comp_map_app_op_of_iso (Q.objObjPreimageIso N).symm ?_
+  set K := Q.objPreimage N
+  let G := bifunctorRHomOfComplex H I
+  let α := bifunctorRHomOfComplexQObjIso H hI
+  let L := bifunctorHomObj H K I
+  let η := bifunctorRHomBidual E hI
+  have hη (K : CochainComplex C ℤ) : η.app (Q.obj K) = Q.map (bifunctorHomBidual E K I) ≫
+      (α (bifunctorHomObj H K I)).inv ≫ G.map (α K).hom.op :=
+    bifunctorRHomBidual_app_Q_obj E hI K
+  have e₁ : (α K).inv ≫ η.app (G.obj (op (Q.obj K))) =
+      η.app (Q.obj L) ≫ (G.rightOp ⋙ G).map (α K).inv :=
+    η.naturality (α K).inv
+  have e₂ : G.map (η.app (Q.obj K)).op = G.map (G.rightOp.map (α K).hom) ≫
+      G.map (α L).inv.op ≫ G.map (Q.map (bifunctorHomBidual E K I)).op := by
+    rw [hη K, op_comp, op_comp, G.map_comp, G.map_comp, assoc]
+    rfl
+  have e₃ : G.map (Q.map (bifunctorHomBidual E K I)).op ≫ (α K).hom =
+      (α (bifunctorHomObj H L I)).hom ≫
+        Q.map (bifunctorHomMapLeft (H := H) (Y := I) (bifunctorHomBidual E K I)) :=
+    bifunctorRHomOfComplexQObjIso_hom_naturality hI (bifunctorHomBidual E K I)
+  have key : (α K).inv ≫ η.app (G.obj (op (Q.obj K))) ≫ G.map (η.app (Q.obj K)).op ≫
+      (α K).hom = 𝟙 _ := by
+    rw [reassoc_of% e₁, e₂, hη L]
+    simp only [assoc]
+    rw [← G.map_comp_assoc (G.rightOp.map (α K).inv), ← G.rightOp.map_comp, Iso.inv_hom_id,
+      CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, id_comp,
+      e₃, ← G.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id, G.map_id, id_comp,
+      Iso.inv_hom_id_assoc, ← Q.map_comp, bifunctorHomBidual_comp_bifunctorHomMapLeft E K I hE,
+      Q.map_id]
+  change η.app (G.obj (op (Q.obj K))) ≫ G.map (η.app (Q.obj K)).op = 𝟙 _
+  rw [← cancel_epi (α K).inv, ← cancel_mono (α K).hom]
+  simp only [assoc] at key ⊢
+  rw [key]
+  exact ((congrArg ((α K).inv ≫ ·) (Category.id_comp (α K).hom)).trans (α K).inv_hom_id).symm
 
 end DerivedCategory

@@ -130,6 +130,31 @@ lemma bifunctorHomBidual_naturality {K' : CochainComplex C ℤ} (f : K' ⟶ K) :
   rw [← NatTrans.comp_app, ← Functor.map_comp, ← op_comp, bifunctorHomMapLeft_f_π, op_comp,
     Functor.map_comp, NatTrans.comp_app, reassoc_of% (E.naturality (f.f m) (Y.X r))]
 
+/-- An evaluation satisfies the triangle identity if `H(ev_{a,b}, b) ∘ ev_{H(a,b), b} = 𝟙`, as the
+double-dual maps of a symmetric monoidal closed category do. -/
+def BifunctorEvaluation.IsSelfDual : Prop :=
+  ∀ a b : C, E.ev ((H.obj (op a)).obj b) b ≫ (H.map (E.ev a b).op).app b = 𝟙 _
+
+/-- The triangle identity of the double-dual morphisms of hom complexes: for `L = Hom(K, Y)`, the
+composite `L ⟶ Hom(Hom(L, Y), Y) ⟶ Hom(K, Y) = L` of the double-dual morphism of `L` and the
+precomposition with that of `K` is the identity. The signs `(-1)^(n p)` of the two double-dual
+morphisms cancel. -/
+lemma bifunctorHomBidual_comp_bifunctorHomMapLeft (hE : E.IsSelfDual) :
+    bifunctorHomBidual E (bifunctorHomObj H K Y) Y ≫
+      bifunctorHomMapLeft (H := H) (Y := Y) (bifunctorHomBidual E K Y) = 𝟙 _ := by
+  ext n p q h
+  rw [HomologicalComplex.comp_f, assoc, bifunctorHomMapLeft_f_π, bifunctorHomBidual_f_π_assoc,
+    HomologicalComplex.id_f, id_comp]
+  simp only [bifunctorHomBidualComponent, Linear.units_smul_comp, assoc]
+  rw [← NatTrans.comp_app, ← Functor.map_comp, ← op_comp, bifunctorHomBidual_f_π,
+    bifunctorHomBidualComponent]
+  simp only [Units.smul_def, op_zsmul, Functor.map_zsmul, NatTrans.app_zsmul,
+    Preadditive.comp_zsmul, smul_smul, op_comp, Functor.map_comp, NatTrans.comp_app]
+  rw [← reassoc_of% (E.naturality (bifunctorHomπ H K Y n p q h) (Y.X q)), hE, comp_id]
+  have : ((n * p).negOnePow : ℤ) * ((p * n).negOnePow : ℤ) = 1 := by
+    rw [mul_comm p n, ← Units.val_mul, Int.units_mul_self, Units.val_one]
+  rw [this, one_smul]
+
 section Map
 
 variable {C' : Type*} [Category* C'] [Preadditive C'] [HasCountableProducts C']
