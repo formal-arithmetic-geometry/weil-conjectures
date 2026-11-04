@@ -49,7 +49,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k₀)) (d : ℕ)
-  [SmoothOfRelativeDimension d f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [SmoothOfRelativeDimension d f] [IsSeparated f] [QuasiCompact f]
   (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
   [HasInvertibleExponent Λ (Spec (.of (AlgebraicClosure k₀)))]
   [HasInvertibleExponent Λ f.geometricFiber]
