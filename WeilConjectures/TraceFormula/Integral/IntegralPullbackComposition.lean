@@ -210,7 +210,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Integral pullback has natural composition isomorphisms, with their specified
-finite reductions and associative composition law.
+finite reductions, associative composition law and whole-system normalization.
 
 Source: Stacks Tags 099N(2),(5), 0D6D, 0941; Bhatt--Scholze, Lemmas 3.5.5 and 3.5.7
 (blueprint: lem-pod-integral-pullback-composition).
@@ -442,4 +442,5 @@ theorem integralPullbackComposition :
             (integralSystemTransition l E) V n).obj ((integralSystemReduction l E V).obj K))
           ((scalarReductionDerivedExtension l E V n).obj K.obj) d₀.hom
     · exact integralSystemPullbackLift_associativity l E β c₀ hc
+
 end WeilConjectures
