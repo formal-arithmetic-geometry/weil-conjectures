@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
 import WeilConjectures.AlgebraicGeometry.PoincareDuality.CompatiblePrimitiveRoots
+import all WeilConjectures.AlgebraicGeometry.Integral.Residue.IntegralResidueQuotient
+import all WeilConjectures.AlgebraicGeometry.PoincareDuality.CompatibleIntegralRootBases
 import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
