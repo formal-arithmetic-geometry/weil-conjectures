@@ -19,6 +19,7 @@ run_elab do
   let root :=
     `AlgebraicGeometry.WeilComplex.nonempty_trivialLineThom_of_tate_encoding
   let env ← getEnv
+  logInfo m!"Root: {root}; axioms: {← collectAxioms root}"
   let mut pending := #[root]
   let mut seen : NameSet := {}
   let mut leaves : Array Name := #[]
@@ -44,6 +45,7 @@ run_elab do
         pending := pending ++ deps
   logInfo m!"Direct sorry dependencies: {leaves.qsort Name.lt}"
   logInfo m!"Unavailable dependency bodies: {unavailable.qsort Name.lt}"
+  logInfo m!"Visited declarations: {seen.toArray.size}"
   let forbidden := #[
     `AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension,
     `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth,
