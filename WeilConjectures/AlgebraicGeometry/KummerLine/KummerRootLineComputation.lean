@@ -5,11 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Kummer.KummerModuleCoefficients
-public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
-public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.Algebra.Polynomial.Laurent
+public import WeilConjectures.AlgebraicGeometry.KummerLine.KummerLineGeometry
+public import Mathlib.Algebra.Module.ZMod
 
 import WeilConjectures.AlgebraicGeometry.AffinePuncturedLine.AffinePuncturedLineAlgebra
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
@@ -19,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityPullback
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
 import Mathlib.Algebra.Group.TypeTags.Basic
 import Mathlib.Algebra.Group.Prod
-import Mathlib.Algebra.Module.ZMod
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.RingTheory.KrullDimension.Polynomial
 
 /-!
@@ -37,6 +34,33 @@ set_option autoImplicit false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
+
+namespace AlgebraicGeometry.Scheme
+
+/-- Roots-of-unity cohomology is killed by `m`, hence has its unique `ZMod m` action.
+Source: Stacks, Tag 03PK (blueprint: def-pur-kummer-module-coefficients).
+Proof: multiplication by m on the roots sheaf is zero by its kernel inclusion into G_m.
+The additive cohomology functor sends this equality to multiplication by m equal to zero. -/
+theorem kummerRootCohomology_annihilated (X : Scheme.{u}) (m q : ℕ)
+    (x : Sheaf.H (X.rootsOfUnitySheaf m) q) : m • x = 0 := by
+  have h : m • 𝟙 (X.rootsOfUnitySheaf m) = 0 := by
+    change m • 𝟙 (kernel (m • 𝟙 X.gmSheaf)) = 0
+    rw [← cancel_mono (kernel.ι (m • 𝟙 X.gmSheaf)), Preadditive.nsmul_comp,
+      Category.id_comp, zero_comp, ← Category.comp_id (kernel.ι _),
+      ← Preadditive.comp_nsmul, kernel.condition]
+  have hx := congrArg (fun f ↦ Sheaf.H.map f q x) h
+  rw [Sheaf.H.map_nsmul_apply, Sheaf.H.map_id_apply, Sheaf.H.map_apply,
+    Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero] at hx
+  exact hx
+
+/-- The unique residue-ring action on roots-of-unity cohomology.
+Source: Stacks, Tag 03PK (blueprint: def-pur-kummer-module-coefficients). -/
+instance kummerRootCohomologyModule (X : Scheme.{u}) (m q : ℕ) :
+    Module (ULift.{u + 1} (ZMod m)) (Sheaf.H (X.rootsOfUnitySheaf m) q) :=
+  letI := AddCommGroup.zmodModule (kummerRootCohomology_annihilated X m q)
+  Module.compHom _ ULift.ringEquiv.toRingHom
+
+end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.KummerLine
 

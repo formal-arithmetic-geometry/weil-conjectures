@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFiniteSetting
 public import WeilConjectures.AlgebraicGeometry.PurityVectorBundle.PurityVectorBundleZeroSection
+public import WeilConjectures.AlgebraicGeometry.FieldVectorBundle.FieldVectorBundle
 
 /-!
 # Vector bundles over a general base field

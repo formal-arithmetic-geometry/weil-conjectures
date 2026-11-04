@@ -16,9 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
 import WeilConjectures.AlgebraicGeometry.IntegralConstructibleSerre
-public import Mathlib.CategoryTheory.ObjectProperty.Extensions
-public import Mathlib.CategoryTheory.ObjectProperty.Kernels
-public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 /-!
 
@@ -139,27 +136,6 @@ private lemma isZero_mapMod_upperStar_obj {Y : Scheme.{u}} (f : Y ⟶ X)
   rw [IsZero.iff_id_eq_zero]
   refine (Mod.forget _).map_injective ?_
   exact ((ProEtale.upperStar A f).map_isZero ((Mod.forget R).map_isZero hM)).eq_of_src _ _
-
-omit [IsCommMonObj R] in
-private lemma constructible_of_iso
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) A) R} (e : M ≅ N)
-    (hM : IsConstructibleModuleObject R M) : IsConstructibleModuleObject R N := by
-  obtain ⟨S, hS⟩ := hM
-  refine ⟨S, fun a ↦ ?_⟩
-  obtain ⟨𝒰, h𝒰⟩ := hS a
-  refine ⟨𝒰, fun i ↦ ?_⟩
-  obtain ⟨n, m, f, ⟨e'⟩⟩ := h𝒰 i
-  exact ⟨n, m, f, ⟨(((ProEtale.upperStar A (S.immersion a)).mapMod R ⋙
-    (ProEtale.upperStar A (𝒰.f i)).mapMod _).mapIso e).symm ≪≫ e'⟩⟩
-
-omit [IsCommMonObj R] in
-private lemma locallyFinitelyPresented_of_isZero
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) A) R} (hM : IsZero M) :
-    IsLocallyFinitelyPresented R M := by
-  refine ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun i ↦ ?_⟩
-  refine ⟨0, 0, 𝟙 _, ⟨?_⟩⟩
-  exact (((ProEtale.upperStar A _).mapMod R).map_isZero hM).iso
-    (isZero_cokernel_of_epi (𝟙 _))
 
 omit [IsCommMonObj R] in
 /-- A zero module object is constructible, for the trivial stratification and the identity

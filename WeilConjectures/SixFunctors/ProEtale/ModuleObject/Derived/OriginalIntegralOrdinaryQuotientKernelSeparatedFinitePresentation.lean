@@ -25,6 +25,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WContractibleDisjointCover
 import WeilConjectures.NumberTheory.Padics.IntegersShrinkModPow
 import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
+import WeilConjectures.Topology.IntegralContinuousPresentationSeparated
 
 /-! # Separation of ordinary integral quotients of finitely presented modules
 

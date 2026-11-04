@@ -126,7 +126,7 @@ private theorem section_pasting {K : Type*} [Category K]
     (UL : t.hom ≫ u.hom = 𝟙 T) (UR : b.hom ≫ d.hom = 𝟙 T) :
     q.inv ≫ r.hom ≫ s.inv ≫ u.hom = z.inv ≫ w.hom ≫ a.inv ≫ d.hom := by
   rw [← cancel_epi (p.hom ≫ q.hom)]
-  simp only [Category.assoc, Iso.hom_inv_id_assoc, Category.id_comp]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
   rw [reassoc_of% A1, Iso.hom_inv_id_assoc, UL, reassoc_of% A2,
     Iso.hom_inv_id_assoc, ← reassoc_of% A3, Iso.hom_inv_id_assoc, UR]
 
