@@ -132,7 +132,7 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
               (forget.obj L),
             (boundedConstructibleAdic_iff_boundedConstructible l k₀ (AlgebraicClosure k₀)
               (pointGeometricFiberOver k₀) _).1
-              ((objectProperty_iff (Spec (CommRingCat.of k₀)) L.obj).1 L.property)⟩).obj) := by
+              ((objectProperty_iff (X := Spec (CommRingCat.of k₀)) L.obj).1 L.property)⟩).obj) := by
   let c := structureMorphismCompactification (k₀ := k₀) X
   let cb := geometricFiberCompactification (k₀ := k₀) X
   have : IsProper c.g := c.isProper
@@ -167,7 +167,7 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
       (fun _ hK ↦ hK.1) (fun K n hK ↦ ObjectProperty.le_shift _ n K hK) hPC_F hPD_G hR
       adjR'.isLeftAdjoint hcoprod
       (WeilComplex.objectProperty k₀ l c.Z) (WeilComplex.objectProperty k₀ l _)
-      (WeilComplex.objectProperty_iff c.Z) (WeilComplex.objectProperty_iff _)
+      (WeilComplex.objectProperty_iff (X := c.Z)) (WeilComplex.objectProperty_iff (X := _))
       (WeilComplex.objectProperty_rightDerivedLowerStar c.g)
   let adjg := Adjunction.ofIsLeftAdjoint (derivedLowerStar (k₀ := k₀) (l := l) c.g)
   have : IsLocallyNoetherian (Spec (CommRingCat.of k₀)) :=
@@ -194,9 +194,9 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
       (fun _ hK ↦ hK.1) (fun K n hK ↦ ObjectProperty.le_shift _ n K hK) hPC_F hPD_G hR
       adjR' hcoprod
       (WeilComplex.objectProperty k₀ l c.Z) (WeilComplex.objectProperty k₀ l _)
-      (WeilComplex.objectProperty_iff c.Z) (WeilComplex.objectProperty_iff _)
+      (WeilComplex.objectProperty_iff (X := c.Z)) (WeilComplex.objectProperty_iff (X := _))
       (WeilComplex.objectProperty_rightDerivedLowerStar c.g) adjg L
-  obtain ⟨eB⟩ := hR' ⟨_, (WeilComplex.objectProperty_iff _ _).1 L.property⟩
+  obtain ⟨eB⟩ := hR' ⟨_, (WeilComplex.objectProperty_iff _).1 L.property⟩
   -- the chain of isomorphisms (`have` rather than `let`: elaborating the composite with its
   -- type is slow)
   have i₁ := forget.mapIso (eR.app L)
@@ -205,7 +205,7 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
   have i₃ := (adicUpperStar l (Scheme.Hom.geometricFiberMap c.i
     (comp_over c.i _))).mapDerivedCategory.mapIso eg
   have i₄ := (adicUpperStarMapDerivedCategoryCompIso l _ (Scheme.Hom.geometricFiberMap c.i
-    (comp_over c.i _))).app (R'.obj ⟨_, (WeilComplex.objectProperty_iff _ _).1 L.property⟩).obj
+    (comp_over c.i _))).app (R'.obj ⟨_, (WeilComplex.objectProperty_iff _).1 L.property⟩).obj
   have i₅ := (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
     cb.overI.left).mapDerivedCategory.mapIso eB
   have i₆ := (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
@@ -213,13 +213,13 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
       ((CondensedRing.boundedConstructibleLowerStar l cb.overG).rightAdjoint.obj
         ⟨_, (boundedConstructibleAdic_iff_boundedConstructible l k₀ (AlgebraicClosure k₀)
           (pointGeometricFiberOver k₀) _).1
-          ((objectProperty_iff (Spec (CommRingCat.of k₀)) L.obj).1 L.property)⟩).obj
+          ((objectProperty_iff (X := Spec (CommRingCat.of k₀)) L.obj).1 L.property)⟩).obj
   have i₇ := (CondensedRing.boundedConstructibleUpperStarCompatibility
     (Profinite.padicAlgClRingObj l) l cb.overI).symm.app
       ((CondensedRing.boundedConstructibleLowerStar l cb.overG).rightAdjoint.obj
         ⟨_, (boundedConstructibleAdic_iff_boundedConstructible l k₀ (AlgebraicClosure k₀)
           (pointGeometricFiberOver k₀) _).1
-          ((objectProperty_iff (Spec (CommRingCat.of k₀)) L.obj).1 L.property)⟩)
+          ((objectProperty_iff (X := Spec (CommRingCat.of k₀)) L.obj).1 L.property)⟩)
   exact ⟨(adicSheafDerivedEquivCondensedMod l _).functor.mapIso (i₁ ≪≫ i₂ ≪≫ i₃) ≪≫ i₄ ≪≫ i₅ ≪≫
     i₆ ≪≫ i₇⟩
 

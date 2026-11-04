@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarCoproduct
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarCondensedAdjoint
+public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerStar
 
 /-!
@@ -41,27 +42,6 @@ instance : Fact (ringChar (AlgebraicClosure k₀)).Prime :=
 
 instance : Fact (ringChar (AlgebraicClosure k₀) ≠ l) :=
   ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ Fact.out⟩
-
-omit [Fact (ringChar k₀ ≠ l)] in
-/-- An object of the derived category of pro-étale Weil sheaves is a Weil complex if and only if
-its underlying complex of `ℓ`-adic sheaves on the geometric fiber is bounded with constructible
-cohomology. -/
-lemma WeilComplex.objectProperty_iff (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
-    (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
-    WeilComplex.objectProperty k₀ l X K ↔
-      ProEtale.DerivedCategory.boundedConstructibleAdic l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
-        ((IsoAlgebra.forget _).mapDerivedCategory.obj K) := by
-  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  refine ⟨fun hK ↦ ⟨Functor.bounded_mapDerivedCategory_obj _ hK.1, fun n ↦ ?_⟩,
-    fun hK ↦ ⟨(IsoAlgebra.forget _).bounded_of_bounded_mapDerivedCategory_obj hK.1, fun n ↦ ?_⟩⟩
-  · exact (ProEtale.adicConstructibleSheaf l _).prop_of_iso
-      (((IsoAlgebra.forget _).mapDerivedCategoryHomologyFunctorIso n).app K) (hK.2 n)
-  · exact (ProEtale.adicConstructibleSheaf l _).prop_of_iso
-      (((IsoAlgebra.forget _).mapDerivedCategoryHomologyFunctorIso n).symm.app K) (hK.2 n)
 
 section Frobenius
 
@@ -150,7 +130,7 @@ theorem WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper' :
       (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure hk _)
     (ProEtale.preservesColimit_discrete_rightDerivedFunctor_adicLowerStar _)
     (WeilComplex.objectProperty k₀ l Z) (WeilComplex.objectProperty k₀ l Y)
-    (WeilComplex.objectProperty_iff Z) (WeilComplex.objectProperty_iff Y)
+    (WeilComplex.objectProperty_iff (X := Z)) (WeilComplex.objectProperty_iff (X := Y))
     (WeilComplex.objectProperty_rightDerivedLowerStar g)
 
 end AlgebraicGeometry
