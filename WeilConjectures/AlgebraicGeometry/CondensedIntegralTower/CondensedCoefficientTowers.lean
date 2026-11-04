@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBa
 public import WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.CoefficientQuotientTowerLimit
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Integral reduction and total inverse limit in condensed coefficients
@@ -370,6 +371,61 @@ def reduction {m n : ℕ} (h : m ≤ n) :
 
 end Model
 
+/-- Section-ring maps of a factored internal ring map factor accordingly. -/
+private theorem sectionScalarMap_eq_comp {R S Q : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [MonObj Q] [IsCommMonObj R] [IsCommMonObj S] [IsCommMonObj Q]
+    {a : R ⟶ Q} {b : R ⟶ S} {c : S ⟶ Q} [IsMonHom a] [IsMonHom b] [IsMonHom c]
+    (h : a = b ≫ c) :
+    sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) a =
+      sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) b ≫
+        sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) c := by
+  subst h
+  ext U x
+  rfl
+
+/-- On sections, a section-ring map is the underlying internal ring map. -/
+private theorem sectionScalarMap_hom_app_apply
+    {R S : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (a : R ⟶ S) [IsMonHom a]
+    (U : T.ProEtᵒᵖ) (x : R.obj.obj U) :
+    (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) a).hom.app U x =
+      a.hom.app U x :=
+  rfl
+
+/-- The ell-power quotient maps are compatible with the consecutive quotients. -/
+private theorem quotient_comp_step (n : ℕ) :
+    quotient l E (n + 1) ≫ step l E n = quotient l E n :=
+  CoefficientQuotientTower.pointQuotientMap_comp_pointFactorMap l E _
+
+/-- The cone of section-ring quotient maps. -/
+private def quotientCone : Cone (rings l E T) :=
+  ⟨sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (AdicCompletion.ring l E T),
+    NatTrans.ofOpSequence (fun n ↦ sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T)
+      ((upperStarFromPoint T).map (quotient l E n))) (fun n ↦ by
+        simp only [Functor.const_obj_map, rings, Functor.ofOpSequence_map_homOfLE_succ]
+        refine (Category.id_comp _).trans (sectionScalarMap_eq_comp T ?_)
+        rw [← Functor.map_comp, quotient_comp_step])⟩
+
+/-- On sections, the section-ring tower is the pulled-back quotient tower. -/
+private def sectionsIso (U : T.ProEtᵒᵖ) :
+    CoefficientQuotientTower.pullbackSequence l E (fun n ↦ ellIdeal l E ^ (n + 1)) T
+        (fun n ↦ Ideal.pow_le_pow_right (n + 1).le_succ) ⋙
+      sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1} ⋙
+        (CategoryTheory.evaluation _ _).obj U ⋙ forget Ab.{u + 1} ≅
+    ((rings l E T ⋙ sheafToPresheaf _ _) ⋙ (CategoryTheory.evaluation _ _).obj U) ⋙
+      forget CommRingCat.{u + 1} where
+  hom := NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (fun n ↦ by
+    simp only [Functor.comp_map, rings, CoefficientQuotientTower.pullbackSequence,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    ext x
+    exact (sectionScalarMap_hom_app_apply T
+      ((upperStarFromPoint T).map (step l E n)) U x).symm)
+  inv := NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (fun n ↦ by
+    simp only [Functor.comp_map, rings, CoefficientQuotientTower.pullbackSequence,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    ext x
+    exact sectionScalarMap_hom_app_apply T ((upperStarFromPoint T).map (step l E n)) U x)
+
 /-- The pulled-back continuous integer ring is the inverse limit of its positive
 ell-power quotients, with the actual quotient projections. The point equality transports
 only the cone vertex, never its legs. Source: sk-def-sp-coefficient-towers, displayed
@@ -386,6 +442,21 @@ theorem coefficient_limit :
       (∀ n : ℕ, c.π.app (op n) = e.hom ≫
         sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T)
           ((upperStarFromPoint T).map (quotient l E n))) ∧ Nonempty (IsLimit c) := by
-  sorry
+  obtain ⟨r, hr, hpow⟩ := CoefficientQuotientTower.ell_pow_eq_coefficientExtensionIdeal l E
+  have hlim := (CoefficientQuotientTower.pullbackCone_isLimit l E
+    (fun n ↦ ellIdeal l E ^ (n + 1)) T (fun n ↦ Ideal.pow_le_pow_right (n + 1).le_succ)
+    (fun n ↦ ⟨r * (n + 1), Nat.le_mul_of_pos_left _ hr, hpow n⟩)).some
+  refine ⟨quotientCone l E T, Iso.refl _, fun n ↦ (Category.id_comp _).symm, ⟨?_⟩⟩
+  apply isLimitOfReflects (sheafToPresheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+  apply evaluationJointlyReflectsLimits
+  intro U
+  have : ReflectsLimitsOfShape ℕᵒᵖ (forget CommRingCat.{u + 1}) :=
+    reflectsLimitsOfShape_of_reflectsIsomorphisms
+  apply isLimitOfReflects (forget CommRingCat.{u + 1})
+  refine (IsLimit.equivOfNatIsoOfIso (sectionsIso l E T U) _ _ ?_) (isLimitOfPreserves _ hlim)
+  refine Cone.ext (Iso.refl _) (fun n ↦ ?_)
+  ext x
+  exact (sectionScalarMap_hom_app_apply T
+    ((upperStarFromPoint T).map (quotient l E n.unop)) U x).symm
 
 end AlgebraicGeometry.ProEtale.CondensedIntegralTower
