@@ -84,7 +84,8 @@ private lemma boundedBaseChange_adjunct
       ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E)
         (f.asOver (Spec (.of k)))).obj K)).hom ≫
         (boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).map
-          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E)
+          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+              E)
             (f.asOver (Spec (.of k)))).counit.app K) := by
   rw [Adjunction.homEquiv_counit, Iso.app_hom]
   -- Restate the exchange with the `integralCoeff` functors, so that the kernel only compares
@@ -117,59 +118,72 @@ private lemma integral_counit_pull_naturality
     (K : integralConstructible ℓ E X) :
     scalarMap (integralScalarConstructible ℓ E X')
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).map
-          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+              E) (f.asOver (Spec
             (.of k)))).counit.app K)) ≫
       integralConstructiblePullHom ℓ E k g' K =
     integralConstructiblePullHom ℓ E k g'
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
-          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj K)) ≫
+          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+              (.of k)))).obj K)) ≫
       (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
         k)))).map
         (scalarMap (integralScalarConstructible ℓ E X)
-          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+              E) (f.asOver (Spec
             (.of k)))).counit.app K)) := by
   exact integralPull_naturality ℓ E k g'
     (K := (boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
-      ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj K))
+      ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+          (.of k)))).obj K))
     (L := K)
-    ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of
+    ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E)
+        (f.asOver (Spec (.of
       k)))).counit.app K)
 
 private lemma finish_step1
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K))).inv ≫
       scalarMap (integralScalarConstructible ℓ E X')
-        (((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f'.asOver (Spec
+        (((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+            E) (f'.asOver (Spec
           (.of k)))).homEquiv
             ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-              ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+              ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver
+                  (Spec (.of k)))).obj
                 K))
             ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj
               K)).symm
-          ((UnitBallRingObj.boundedConstructibleBaseChange ℓ (continuousIntegers ℓ E) (sq.asOver (Spec (.of k)))).app K))
+          ((UnitBallRingObj.boundedConstructibleBaseChange ℓ (continuousIntegers ℓ E) (sq.asOver
+              (Spec (.of k)))).app K))
             ≫
       integralConstructiblePullHom ℓ E k g' K =
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K))).inv ≫
     scalarMap (integralScalarConstructible ℓ E X')
       (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
         k)))).app
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K)).hom) ≫
     scalarMap (integralScalarConstructible ℓ E X')
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).map
-        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+            E) (f.asOver (Spec
           (.of k)))).counit.app K)) ≫
     integralConstructiblePullHom ℓ E k g' K := by
   exact map_eq_whisker (integralScalarConstructible ℓ E X')
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K))).inv
     (integralConstructiblePullHom ℓ E k g' K) _ _ _
     (boundedBaseChange_adjunct ℓ E k f g f' g' sq K)
@@ -178,34 +192,41 @@ private lemma finish_step2
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K))).inv ≫
     scalarMap (integralScalarConstructible ℓ E X')
       (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
         k)))).app
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K)).hom) ≫
     scalarMap (integralScalarConstructible ℓ E X')
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).map
-        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+            E) (f.asOver (Spec
           (.of k)))).counit.app K)) ≫
     integralConstructiblePullHom ℓ E k g' K =
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K))).inv ≫
     scalarMap (integralScalarConstructible ℓ E X')
       (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
         k)))).app
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K)).hom) ≫
     integralConstructiblePullHom ℓ E k g'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj K)) ≫
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj K)) ≫
     (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
       k)))).map
       (scalarMap (integralScalarConstructible ℓ E X)
-        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+            E) (f.asOver (Spec
           (.of k)))).counit.app K)) := by
   conv_lhs =>
     rhs
@@ -216,84 +237,102 @@ private lemma finish_step3
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K))).inv ≫
     scalarMap (integralScalarConstructible ℓ E X')
       (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
         k)))).app
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K)).hom) ≫
     integralConstructiblePullHom ℓ E k g'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj K)) ≫
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj K)) ≫
     (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
       k)))).map
       (scalarMap (integralScalarConstructible ℓ E X)
-        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+            E) (f.asOver (Spec
           (.of k)))).counit.app K)) =
     (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
       k)))).map
         (integralConstructiblePullHom ℓ E k g
-          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj K)) ≫
+          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+              (.of k)))).obj K)) ≫
       ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver
         (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E Y).obj
-            ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+            ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver
+                (Spec (.of k)))).obj
               K))).hom ≫
       (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
         k)))).map
         (integralConstructiblePullIso ℓ E k f
-          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+              (.of k)))).obj
             K)).inv ≫
       (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
         k)))).map
         (scalarMap (integralScalarConstructible ℓ E X)
-          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+              E) (f.asOver (Spec
             (.of k)))).counit.app K)) := by
   simpa only [Category.assoc] using congrArg
     (fun v ↦ v ≫ (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver
       (Spec (.of k)))).map
       (scalarMap (integralScalarConstructible ℓ E X)
-        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+            E) (f.asOver (Spec
           (.of k)))).counit.app K)))
     (integralPull_square ℓ E k f g f' g' sq
-      ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj K))
+      ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+          (.of k)))).obj K))
 
 private lemma integral_target_finish
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+        ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+            (.of k)))).obj
           K))).inv ≫
       scalarMap (integralScalarConstructible ℓ E X')
-        (((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f'.asOver (Spec
+        (((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+            E) (f'.asOver (Spec
           (.of k)))).homEquiv
             ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-              ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+              ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver
+                  (Spec (.of k)))).obj
                 K))
             ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj
               K)).symm
-          ((UnitBallRingObj.boundedConstructibleBaseChange ℓ (continuousIntegers ℓ E) (sq.asOver (Spec (.of k)))).app K))
+          ((UnitBallRingObj.boundedConstructibleBaseChange ℓ (continuousIntegers ℓ E) (sq.asOver
+              (Spec (.of k)))).app K))
             ≫
       integralConstructiblePullHom ℓ E k g' K =
     (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
       k)))).map
         (integralConstructiblePullHom ℓ E k g
-          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj K)) ≫
+          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+              (.of k)))).obj K)) ≫
       ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver
         (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E Y).obj
-            ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+            ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver
+                (Spec (.of k)))).obj
               K))).hom ≫
       (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
         k)))).map
         (integralConstructiblePullIso ℓ E k f
-          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k)))).obj
+          ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+              (.of k)))).obj
             K)).inv ≫
       (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
         k)))).map
         (scalarMap (integralScalarConstructible ℓ E X)
-          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (f.asOver (Spec
+          ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+              E) (f.asOver (Spec
             (.of k)))).counit.app K)) := by
   exact (finish_step1 ℓ E k f g f' g' sq K).trans
     ((finish_step2 ℓ E k f g f' g' sq K).trans

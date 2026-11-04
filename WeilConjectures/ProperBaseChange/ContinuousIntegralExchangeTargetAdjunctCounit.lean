@@ -68,9 +68,11 @@ private lemma integralPull_counit
         (h.asOver (Spec (.of k)))).counit.app
           ((integralScalarConstructible ℓ E T).obj K) =
     (integralConstructiblePullIso ℓ E k h
-      ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (h.asOver (Spec (.of k)))).obj K)).inv ≫
+      ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (h.asOver (Spec
+          (.of k)))).obj K)).inv ≫
       scalarMap (integralScalarConstructible ℓ E T)
-        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ E) (h.asOver (Spec
+        ((UnitBallRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ (continuousIntegers ℓ
+            E) (h.asOver (Spec
           (.of k)))).counit.app K) := by
   let : IsCommMonObj (condensedRingObj (integralCoeff ℓ E) T) :=
     ProEtale.isCommMonObj_condensedRingObj _ T
