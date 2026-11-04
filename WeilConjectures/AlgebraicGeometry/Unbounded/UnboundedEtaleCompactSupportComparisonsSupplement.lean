@@ -150,6 +150,7 @@ public import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportFiniteTors
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenInterchangeSupplement
@@ -2581,8 +2582,8 @@ identifies the cartesian refinement comparisons. Apply the two common-refinement
 and their inverses to obtain equality of the specified pairwise comparison maps. -/
 theorem unboundedEtaleCompactSupport_comparison_plus
     (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
-    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [QuasiCompact f]
     (c d : Compactification f)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     DerivedCategory.Plus.ι.map
@@ -3662,37 +3663,140 @@ private lemma native_unbounded_triangle_ofRestrict
       rightDerivedLowerShriekOfCompactificationCompIso A d e :=
   unbounded_comp_iso A d e
 
-private lemma unbounded_pairwise_iso_symm
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
-    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    (c d : Compactification f) :
-    (rightDerivedLowerShriekOfCompactificationIso A c d).symm =
-      rightDerivedLowerShriekOfCompactificationIso A d c := by
-  have hc := unboundedEtaleCompactSupport_comparison_coherence A f
-  have h := hc.2 c d c
-  rw [hc.1 c] at h
-  ext : 1
-  rw [Iso.symm_hom, ← cancel_epi (rightDerivedLowerShriekOfCompactificationIso A c d).hom,
-    Iso.hom_inv_id]
-  exact (congrArg Iso.hom h).symm
-
 end CompositionRestriction
 
-set_option maxRecDepth 2048 in
+section CompositionPlus
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+set_option maxRecDepth 4096
+set_option synthInstance.maxSize 2048
+attribute [local instance 40000] CategoryTheory.sheafIsAbelian
+set_option linter.auxLemma false in
+attribute [local instance 100000] AlgebraicGeometry.Etale.DerivedCategoryModule._proof_1
+  AlgebraicGeometry.Etale.DerivedCategoryModule._proof_2
+attribute [local irreducible] Compactification.ofComp Compactification.restrict
+  Compactification.comp
+attribute [local irreducible] native_unbounded_triangle_iso native_bounded_triangle_iso
+  rightDerivedLowerShriekOfCompactificationPlusCompatibility
+
+private theorem inverse_iso_paste
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    {F F' : C ⥤ D} (G : D ⥤ E) {H J : C ⥤ E}
+    (a : H ≅ J) (b : J ≅ F ⋙ G) (c : F ≅ F') :
+    (a ≪≫ b ≪≫ Functor.isoWhiskerRight c G).inv =
+      NatTrans.hcomp c.inv (𝟙 G) ≫ b.inv ≫ a.inv := by
+  ext K
+  simp only [Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_app, NatTrans.hcomp_app, NatTrans.id_app,
+    Category.assoc]
+  erw [Category.id_comp]
+
+private theorem comparison_inverse_plus
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f]
+    (cf cd : Compactification f)
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    DerivedCategory.Plus.ι.map
+        ((rightDerivedLowerShriekOfCompactificationPlusIso A cf cd).hom.app L) ≫
+      (rightDerivedLowerShriekOfCompactificationPlusCompatibility
+        (ModuleCat.{u + 1} A) cd).hom.app L =
+    (rightDerivedLowerShriekOfCompactificationPlusCompatibility
+      (ModuleCat.{u + 1} A) cf).hom.app L ≫
+      (rightDerivedLowerShriekOfCompactificationIso A cd cf).inv.app
+        (DerivedCategory.Plus.ι.obj L) := by
+  have hi := square_inverse
+    (DerivedCategory.Plus.ι.mapIso
+      ((rightDerivedLowerShriekOfCompactificationPlusIso A cd cf).app L))
+    ((rightDerivedLowerShriekOfCompactificationIso A cd cf).app (DerivedCategory.Plus.ι.obj L))
+    ((rightDerivedLowerShriekOfCompactificationPlusCompatibility
+      (ModuleCat.{u + 1} A) cd).hom.app L)
+    ((rightDerivedLowerShriekOfCompactificationPlusCompatibility
+      (ModuleCat.{u + 1} A) cf).hom.app L)
+    (unboundedEtaleCompactSupport_comparison_plus A f cd cf L)
+  simpa only [Functor.mapIso_inv, Iso.app_inv, Iso.app_hom,
+    ← rightDerivedLowerShriekOfCompactificationPlusIso_symm A cd cf,
+    Iso.symm_hom] using hi
+
+private theorem comparison_self_plus
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f]
+    (c : Compactification f)
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    DerivedCategory.Plus.ι.map
+        ((rightDerivedLowerShriekOfCompactificationPlusIso A c c).hom.app L) ≫
+      (rightDerivedLowerShriekOfCompactificationPlusCompatibility
+        (ModuleCat.{u + 1} A) c).hom.app L =
+    (rightDerivedLowerShriekOfCompactificationPlusCompatibility
+      (ModuleCat.{u + 1} A) c).hom.app L ≫
+      (𝟙 _ : rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} A) c ⟶ _).app (DerivedCategory.Plus.ι.obj L) := by
+  simp only [rightDerivedLowerShriekOfCompactificationPlusIso_refl,
+    Iso.refl_hom, NatTrans.id_app]
+  erw [DerivedCategory.Plus.ι.map_id, Category.id_comp, Category.comp_id]
+
+private theorem triangle_restriction_plus
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [QuasiCompact f] [QuasiCompact g]
+    (cf : Compactification f) (cfg : Compactification (f ≫ g))
+    (T : Compactification.Triangle f g)
+    (ε : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cf ⋙
+      rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) T.cg ⟶
+        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cfg)
+    (εp : rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) cf ⋙
+      rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) T.cg ⟶
+        rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) cfg)
+    (hu : ε = NatTrans.hcomp
+          (rightDerivedLowerShriekOfCompactificationIso A T.cf cf).inv
+          (𝟙 (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) T.cg)) ≫
+        (native_unbounded_triangle_iso A T).hom ≫
+        (rightDerivedLowerShriekOfCompactificationIso A T.cfg cfg).hom)
+    (hb : εp = NatTrans.hcomp
+          (rightDerivedLowerShriekOfCompactificationPlusIso A cf T.cf).hom
+          (rightDerivedLowerShriekOfCompactificationPlusIso A T.cg T.cg).hom ≫
+        (native_bounded_triangle_iso (ModuleCat.{u + 1} A) T).hom ≫
+        (rightDerivedLowerShriekOfCompactificationPlusIso A T.cfg cfg).hom)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    let B := ModuleCat.{u + 1} A
+    DerivedCategory.Plus.ι.map (εp.app K) ≫
+      (rightDerivedLowerShriekOfCompactificationPlusCompatibility B cfg).hom.app K =
+    (rightDerivedLowerShriekOfCompactificationPlusCompatibility B T.cg).hom.app
+        ((rightDerivedLowerShriekOfCompactificationPlus B cf).obj K) ≫
+      (rightDerivedLowerShriekOfCompactification B T.cg).map
+        ((rightDerivedLowerShriekOfCompactificationPlusCompatibility B cf).hom.app K) ≫
+      ε.app (DerivedCategory.Plus.ι.obj K) := by
+  dsimp only
+  rw [hu, hb]
+  simp only [NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  rw [unboundedEtaleCompactSupport_comparison_plus A (f ≫ g) T.cfg cfg K]
+  rw [reassoc_of% (triangle_comp_plus A T K)]
+  simp only [NatTrans.hcomp_app, Functor.map_comp, Category.assoc]
+  have hn := (rightDerivedLowerShriekOfCompactificationPlusCompatibility
+    (ModuleCat.{u + 1} A) T.cg).hom.naturality
+    ((rightDerivedLowerShriekOfCompactificationPlusIso A cf T.cf).hom.app K)
+  dsimp only [Functor.comp_map] at hn
+  erw [reassoc_of% hn]
+  erw [reassoc_of% (comparison_self_plus A g T.cg
+    ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) cf).obj K))]
+  simp only [NatTrans.id_app]
+  erw [Category.id_comp, Category.id_comp]
+  simp only [← Functor.map_comp_assoc, ← Functor.map_comp]
+  erw [comparison_inverse_plus A f cf T.cf K]
+  simp only [Functor.map_comp, Functor.comp_map, Functor.comp_obj, Category.assoc]
+
 /-- The normalized composition comparison restricts to the existing bounded-below one.
 Source: Stacks Project, Tags 0F7H--0F7K
 (blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: the inclusions preserve the proper/open exchange, open-extension compositor and
-proper direct-image compositor. Paste these three compatibility squares to compare the
-tower maps. The preceding comparison restriction transports the three compactification
-comparisons to the chosen models, yielding the displayed equation. -/
+Proof: compare two compactifications through their common infimum, using the
+bounded/unbounded refinement squares; invert the second square and paste it with the first.
+For the chosen `ofRestrict` triangle, use this comparison on its first and composite faces,
+and the identity on its second face. The bounded and native compositor definitions give the
+same triangle word, and naturality pastes the four faces. No Noetherian, separatedness or
+finite-type hypothesis is used. -/
 theorem unboundedEtaleCompactSupport_composition_plus
     (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
-    (f : X ⟶ Y) (g : Y ⟶ Z)
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [QuasiCompact f] [QuasiCompact g]
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     DerivedCategory.Plus.ι.map ((rightDerivedLowerShriekPlusCompIso A f g).hom.app K) ≫
@@ -3702,59 +3806,35 @@ theorem unboundedEtaleCompactSupport_composition_plus
       (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
         ((rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) f).hom.app K) ≫
       (unboundedEtaleLowerShriekCompIso A f g).hom.app (DerivedCategory.Plus.ι.obj K) := by
-  obtain ⟨d, he⟩ : ∃ d : Compactification g, Nonempty (Compactification (f ≫ d.i)) :=
-    ⟨HasCompactification.compactification g,
-      ⟨(HasCompactification.compactification (f ≫ g)).ofComp
-        (HasCompactification.compactification g)⟩⟩
-  obtain ⟨e⟩ := he
+  let B := ModuleCat.{u + 1} A
+  let d := HasCompactification.compactification g
+  let e := (HasCompactification.compactification (f ≫ g)).ofComp d
   let T := Compactification.Triangle.ofRestrict d e
   let cf := HasCompactification.compactification f
-  let cg := HasCompactification.compactification g
   let cfg := HasCompactification.compactification (f ≫ g)
   have hb := compositor_middle_transport _ _ _ _
-    (congrArg Iso.hom (native_bounded_triangle_iso_eq (ModuleCat.{u + 1} A) T).symm)
+    (congrArg Iso.hom (native_bounded_triangle_iso_eq B T).symm)
     (rightDerivedLowerShriekPlusCompIso_hom_eq A T)
-  have hu := compositor_iso_transport rfl
-    (unbounded_pairwise_iso_symm A f e.restrict cf)
-    (unbounded_pairwise_iso_symm A g d cg)
-    (native_unbounded_triangle_ofRestrict A d e).symm rfl
-    (unboundedEtaleLowerShriekCompIso_tower A f g d e)
-  have h := restriction_compositor_paste
-    (iC := DerivedCategory.Plus.ι) (iD := DerivedCategory.Plus.ι)
-    (iE := DerivedCategory.Plus.ι)
-    (F₀ := rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
-    (F₁ := rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) T.cf)
-    (G₀ := rightDerivedLowerShriek (ModuleCat.{u + 1} A) g)
-    (G₁ := rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) T.cg)
-    (H₀ := rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g))
-    (H₁ := rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) T.cfg)
-    (Fp₀ := rightDerivedLowerShriekPlus (ModuleCat.{u + 1} A) f)
-    (Fp₁ := rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) T.cf)
-    (Gp₀ := rightDerivedLowerShriekPlus (ModuleCat.{u + 1} A) g)
-    (Gp₁ := rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) T.cg)
-    (Hp₀ := rightDerivedLowerShriekPlus (ModuleCat.{u + 1} A) (f ≫ g))
-    (Hp₁ := rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) T.cfg)
-    (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) f).hom
-    (rightDerivedLowerShriekOfCompactificationPlusCompatibility (ModuleCat.{u + 1} A) T.cf).hom
-    (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) g).hom
-    (rightDerivedLowerShriekOfCompactificationPlusCompatibility (ModuleCat.{u + 1} A) T.cg).hom
-    (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) (f ≫ g)).hom
-    (rightDerivedLowerShriekOfCompactificationPlusCompatibility (ModuleCat.{u + 1} A) T.cfg).hom
-    (rightDerivedLowerShriekOfCompactificationIso A cf T.cf).hom
-    (rightDerivedLowerShriekOfCompactificationIso A cg T.cg).hom
-    (native_unbounded_triangle_iso A T).hom
-    (rightDerivedLowerShriekOfCompactificationIso A T.cfg cfg).hom
-    (rightDerivedLowerShriekOfCompactificationPlusIso A cf T.cf).hom
-    (rightDerivedLowerShriekOfCompactificationPlusIso A cg T.cg).hom
-    (native_bounded_triangle_iso (ModuleCat.{u + 1} A) T).hom
-    (rightDerivedLowerShriekOfCompactificationPlusIso A T.cfg cfg).hom
-    (unboundedEtaleCompactSupport_comparison_plus A f cf T.cf)
-    (unboundedEtaleCompactSupport_comparison_plus A g cg T.cg)
-    (triangle_comp_plus A T)
-    (unboundedEtaleCompactSupport_comparison_plus A (f ≫ g) T.cfg cfg)
+  have hu : (unboundedEtaleLowerShriekCompIso A f g).hom =
+      NatTrans.hcomp (rightDerivedLowerShriekIso A e.restrict).inv
+          (𝟙 (rightDerivedLowerShriek B g)) ≫
+        (native_unbounded_triangle_iso A T).hom ≫
+        (rightDerivedLowerShriekOfCompactificationIso A T.cfg cfg).hom := by
+    rw [native_unbounded_triangle_ofRestrict]
+    have h := inverse_iso_paste (rightDerivedLowerShriek B g)
+      (rightDerivedLowerShriekIso A (d.comp e)).symm
+      (rightDerivedLowerShriekOfCompactificationCompIso A d e).symm
+      (rightDerivedLowerShriekIso A e.restrict)
+    simp only [Iso.symm_inv] at h
+    refine Eq.trans ?_ h
+    simp only [unboundedEtaleLowerShriekCompIso, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerRight_hom, d, e]
+    exact (Category.assoc _ _ _).symm
+  exact triangle_restriction_plus A f g cf cfg T
     (unboundedEtaleLowerShriekCompIso A f g).hom
     (rightDerivedLowerShriekPlusCompIso A f g).hom hu hb K
-  exact h
+
+end CompositionPlus
 
 end BoundedBelowRestriction
 
