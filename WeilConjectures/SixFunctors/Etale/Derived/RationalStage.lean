@@ -202,7 +202,15 @@ idempotent is integral: an idempotent `ε` of `L'` corresponding to `ϖ⁻ᴺ u`
 
 In the theory of `ℓ`-adic sheaves this follows from the existence of the rationalized standard
 `t`-structure on `Dᵇc(X, E)` (Ekedahl): the image of `ϖ⁻ᴺ u` has a lattice, and so does its
-complement. -/
+complement.
+
+The lemma is equivalent to
+`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational` and is
+not formal. Over `R_N = 𝒪_E[u]/(u² - ϖᴺu)` the perfect complexes have all the structure used in
+this file, but the idempotent `(1, 0)` of `R_N[1/ϖ] = E × E` has no lattice. Cones and clearing
+denominators only produce lattices of `A ⊕ A⟦n⟧` (`n ≥ 1`) for the image `A` of `ϖ⁻ᴺ u`. A proof
+needs truncations or images on the étale integral stage for an arbitrary scheme `X`, or a comparison
+with the pro-étale model; neither is available here. -/
 theorem exists_boundedConstructibleIntegral_idempotent
     {ϖ : Shrink.{u + 1} (PadicAlgCl.integers l E)} (hϖ : Irreducible ϖ)
     {L : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E}
