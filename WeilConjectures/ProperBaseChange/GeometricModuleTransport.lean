@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
-import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
+import WeilConjectures.CategoryTheory.GeometricModuleConstruction
 import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!

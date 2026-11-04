@@ -24,7 +24,7 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.Monoidal
-import WeilConjectures.ProperBaseChange.RingedToposKFlatPullback
+import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal

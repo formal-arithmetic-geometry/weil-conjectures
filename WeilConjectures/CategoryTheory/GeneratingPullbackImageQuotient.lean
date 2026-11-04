@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
-import all WeilConjectures.ProperBaseChange.RingedToposKFlatPullback
+import all WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 import all WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
 import all WeilConjectures.ProperBaseChange.RingedTopoiCanonicalTensorPullbackUnitExistence
 

@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.ProperBaseChange.CondensedFieldContinuousRealization
+public import WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 public import Mathlib.Topology.Category.Profinite.EffectiveEpi
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import Mathlib.Condensed.TopComparison
@@ -47,7 +47,7 @@ import Mathlib.CategoryTheory.Monoidal.Ring
 import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
-import WeilConjectures.ProperBaseChange.CondensedFieldContinuousRealization
+import WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 import Mathlib.LinearAlgebra.Matrix.Rank
 import Mathlib.Algebra.Category.ModuleCat.Basic
 import WeilConjectures.ProperBaseChange.CondensedFieldEvaluationFunctors
@@ -64,7 +64,7 @@ import Mathlib.NumberTheory.Padics.ProperSpace
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 import Mathlib.CategoryTheory.Abelian.ShortExact
 import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
-import WeilConjectures.ProperBaseChange.IntegralScalarContractive
+import WeilConjectures.AlgebraicGeometry.IntegralScalarContractive
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import Mathlib.Algebra.Category.ModuleCat.Kernels

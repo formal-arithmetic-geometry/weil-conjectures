@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.ProperBaseChange.ProfiniteTestObjectFunctor
+public import WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.CategoryTheory.Whiskering
 public import Mathlib.Algebra.Category.Ring.Basic
-public import WeilConjectures.ProperBaseChange.CondensedFieldContinuousRealization
+public import WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
@@ -51,7 +51,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-public import WeilConjectures.ProperBaseChange.GeometricFieldProfiniteDenseSubsite
+public import WeilConjectures.AlgebraicGeometry.GeometricFieldProfiniteDenseSubsite
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 public import Mathlib.Algebra.Category.Ring.Limits

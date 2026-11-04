@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.ProperBaseChange.CondensedFieldContinuousRealization
-
+public import WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
@@ -41,7 +40,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import WeilConjectures.ProperBaseChange.GeometricFieldProfiniteDenseSubsite
+import WeilConjectures.AlgebraicGeometry.GeometricFieldProfiniteDenseSubsite
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Mathlib.Algebra.Category.Ring.Limits

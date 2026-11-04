@@ -15,8 +15,7 @@ public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonConstruction
 public import WeilConjectures.CategoryTheory.RingedExtendedCech
-public import WeilConjectures.ProperBaseChange.RingedToposKFlatPullback
-
+public import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 /-!
 # Tensor coherence for a Cech pullback functor
 

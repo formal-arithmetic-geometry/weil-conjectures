@@ -47,7 +47,7 @@ import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import Mathlib.Algebra.Homology.HomologicalComplex
 import Mathlib.Algebra.Homology.Additive
 import Mathlib.CategoryTheory.Types.Basic
-import WeilConjectures.ProperBaseChange.FlatAlgebraicInverseImageOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
