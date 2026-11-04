@@ -45,7 +45,7 @@ noncomputable def etaleHomEquivSubtype (U V : S.Etale) :
 
 /-- The `Γ`-`Spec` adjunction: morphisms `X ⟶ Spec B` are ring maps `B ⟶ Γ(X, ⊤)`. -/
 @[simps]
-noncomputable def homSpecEquiv (X : Scheme.{u}) (B : CommRingCat.{u}) :
+noncomputable def homSpecEquivAppTop (X : Scheme.{u}) (B : CommRingCat.{u}) :
     (X ⟶ Spec B) ≃ (B ⟶ Γ(X, ⊤)) where
   toFun t := (Scheme.ΓSpecIso B).inv ≫ t.appTop
   invFun φ := X.toSpecΓ ≫ Spec.map φ
@@ -58,10 +58,11 @@ noncomputable def homSpecEquiv (X : Scheme.{u}) (B : CommRingCat.{u}) :
 `c : X ⟶ S`) iff the corresponding ring map is compatible with `Γ(c)`. -/
 lemma comp_spec_map_isoSpec_inv_eq_iff {X : Scheme.{u}} {A : CommRingCat.{u}}
     (t : X ⟶ Spec A) (α : Γ(S, ⊤) ⟶ A) (c : X ⟶ S) :
-    t ≫ Spec.map α ≫ S.isoSpec.inv = c ↔ α ≫ homSpecEquiv X A t = c.appTop := by
+    t ≫ Spec.map α ≫ S.isoSpec.inv = c ↔ α ≫ homSpecEquivAppTop X A t = c.appTop := by
   rw [← Category.assoc, Iso.comp_inv_eq,
-    ← (homSpecEquiv X Γ(S, ⊤)).apply_eq_iff_eq (x := t ≫ Spec.map α), homSpecEquiv_apply,
-    homSpecEquiv_apply, homSpecEquiv_apply, Scheme.Hom.comp_appTop, Scheme.Hom.comp_appTop,
+    ← (homSpecEquivAppTop X Γ(S, ⊤)).apply_eq_iff_eq (x := t ≫ Spec.map α),
+    homSpecEquivAppTop_apply, homSpecEquivAppTop_apply, homSpecEquivAppTop_apply,
+    Scheme.Hom.comp_appTop, Scheme.Hom.comp_appTop,
     ← Scheme.ΓSpecIso_inv_naturality_assoc, Scheme.isoSpec_hom, Scheme.toSpecΓ_appTop,
     Iso.inv_hom_id_assoc]
 
@@ -114,7 +115,7 @@ noncomputable def etaleHomSpecQuotientEquiv [Etale (specQuotientStructureMap f)]
     (U : S.Etale) :
     (U ⟶ Etale.mk (specQuotientStructureMap f)) ≃
       {x : ι → Γ(U.left, ⊤) // ∀ k, MvPolynomial.eval₂ U.hom.appTop.hom x (f k) = 0} :=
-  ((etaleHomEquivSubtype U _).trans ((homSpecEquiv U.left _).subtypeEquiv fun t ↦
+  ((etaleHomEquivSubtype U _).trans ((homSpecEquivAppTop U.left _).subtypeEquiv fun t ↦
     comp_spec_map_isoSpec_inv_eq_iff (S := S) t _ U.hom)).trans
       (mvPolynomialQuotientHomEquiv f _ U.hom.appTop)
 
