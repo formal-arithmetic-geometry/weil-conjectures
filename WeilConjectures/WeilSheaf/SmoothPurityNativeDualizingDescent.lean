@@ -110,9 +110,11 @@ theorem nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
   let adjg := Adjunction.ofIsLeftAdjoint (derivedLowerStar (k₀ := k₀) (l := l) c.g)
   have e : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ≅
       extensionByZero c.i ⋙ derivedLowerStar c.g :=
-    NatIso.ofComponents (fun K ↦ Iso.refl _) (fun φ ↦ by
-      rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
-      rfl)
+    NatIso.ofComponents
+      (fun K ↦ ObjectProperty.isoMk _ ((derivedLowerShriekCompιIso k₀ l c).app K))
+      (fun φ ↦ by
+        apply (objectProperty k₀ l (Spec (CommRingCat.of k₀))).ι.map_injective
+        exact (derivedLowerShriekCompιIso k₀ l c).hom.naturality φ)
   let eR := adj.rightAdjointUniq
     (((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) c.i).comp adjg).ofNatIsoLeft e.symm)
   obtain ⟨eZ⟩ := nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso (k₀ := k₀) (l := l) c.g adjg

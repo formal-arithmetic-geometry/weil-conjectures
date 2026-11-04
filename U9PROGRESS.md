@@ -252,3 +252,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Audit /home/ubuntu/u9/logs/K4-20261105T071716.log finished rc=1, four built/one failed. AffineLineConstant is GREEN (23s), NativeProperDualizing is GREEN (8.3s), and NativeProperTrace remains GREEN with the explicit exceptional-base-change proof argument.
 - NativeDualizingDescent now reaches a whnf timeout (15s) in the compactification assembly. Extracted nativeOpenDualizingDescentIso over arbitrary open immersions, keeping the finite-base pullback/dualizing comparison independent of the chosen compactification. Pinned k₀/l in the remaining adjunction and descent calls.
 - No heartbeat raises or DONE. C4 build-26 remains failed on diagnostic kernel conversions; actual encoding is still unmerged.
+
+## 2026-11-05 07:22 +0800 — correct the compactification comparison
+- Audit /home/ubuntu/u9/logs/K4-20261105T072007.log finished rc=1, one module failed. The new arbitrary-open descent comparison elaborates; the remaining timeout is in the compactification wrapper.
+- Comparing against the already GREEN SeparatedAdjunction helper identified a real interface mismatch: compact pushforward is related to extension-by-zero followed by proper pushforward through derivedLowerShriekCompιIso, rather than the reflexivity iso used in the draft. Replaced that attempted conversion by the specified comparison and its naturality proof, exactly as in SeparatedAdjunction.
+- No heartbeat raises or DONE; next audit follows.
