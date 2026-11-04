@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarStages
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestrictionComplete
+import WeilConjectures.AlgebraicGeometry.Pbc.ScalarDirectImage.PbcScalarRestrictionDirectImageMate
+import WeilConjectures.AlgebraicGeometry.Pbc.ScalarDirectImage.PbcActualScalarPullRestrictionUnit
+import WeilConjectures.CategoryTheory.Adjunction.MateRestrictionComparison
 
 /-! # Ambient operation comparisons for finite scalar extension
 
@@ -155,7 +158,38 @@ tensor formula as the mate, so descends independently of that basis. Equivalentl
 use the finite perfect projection formula and the tensor-unit normalization. -/
 @[instance] theorem pbcScalarDirectImageMap_isIso :
     IsIso (pbcScalarDirectImageMap l E F i g) := by
-  sorry
+  let dE := pbcIntegralDatum l E
+  let dF := pbcIntegralDatum l F
+  let cY := pbcScalarCoefficientMap l E F i Y
+  let cX := pbcScalarCoefficientMap l E F i X
+  have hc := pbcScalarCoefficientMap_inverseImage l E F i g
+  have hδ := (proEtaleRingSheafChangeAdjunction g (pbcAdicCompletion Y dE)
+    (pbcAdicCompletion Y dF) (pbcAdicCompletion X dE) (pbcAdicCompletion X dF) cY cX
+    (pbcActualCoefficientIso g dE) (pbcActualCoefficientIso g dF) hc).2.2
+  have key := mateEquiv_eq_mateEquiv_symm_of_unit
+    (pbcActualDerivedAdjunction g dE)
+    (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y dE) (pbcAdicCompletion X dE)
+      (pbcActualCoefficientIso g dE))
+    (pbcActualDerivedAdjunction g dF)
+    (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y dF) (pbcAdicCompletion X dF)
+      (pbcActualCoefficientIso g dF))
+    (pbcDerivedScalarAdjunction cY) (pbcDerivedScalarAdjunction cX)
+    (pbcActualPullProEtaleIso g dE) (pbcActualPullProEtaleIso g dF)
+    (pbcActualDerivedAdjunction_homEquiv g dE) (pbcActualDerivedAdjunction_homEquiv g dF)
+    (pbcActualScalarDerivedPullIso g dE dF cY cX (pbcScalarCoefficientStructureSquare l E F i g))
+    (proEtaleRingRestrictionDerivedPullback g (pbcAdicCompletion Y dE)
+      (pbcAdicCompletion Y dF) (pbcAdicCompletion X dE) (pbcAdicCompletion X dF) cY cX
+      (pbcActualCoefficientIso g dE) (pbcActualCoefficientIso g dF) hc)
+    (proEtaleRingRestrictionDerivedDirectImage g (pbcAdicCompletion Y dE)
+      (pbcAdicCompletion Y dF) (pbcAdicCompletion X dE) (pbcAdicCompletion X dF) cY cX
+      (pbcActualCoefficientIso g dE) (pbcActualCoefficientIso g dF) hc)
+    hδ
+    (pbcActualScalarDerivedPullIso_restriction_unit g dE dF cY cX
+      (pbcScalarCoefficientStructureSquare l E F i g) hc)
+  have hiso := pbcScalarRestrictionDirectImageMate_isIso l E F i g
+  unfold pbcScalarDirectImageMap pbcActualScalarDirectImageMap
+  rw [key]
+  exact hiso
 
 /-- The canonical invertible direct-image comparison, with its mate definition retained.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
