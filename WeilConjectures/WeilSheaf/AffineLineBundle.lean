@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.LineSmooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
@@ -46,38 +47,6 @@ namespace AlgebraicGeometry.WeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-section Twist
-
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-
-variable (k₀ l X) in
-/-- For `m + n = 0` and `a + b = 0`, the twist-shift `K ↦ K(m)[a]` followed by `K ↦ K(n)[b]` is the
-identity. -/
-noncomputable def tateTwistShiftCompTateTwistShiftIso (m n a b : ℤ) (hmn : m + n = 0)
-    (hab : a + b = 0) :
-    (tateTwist k₀ l X m ⋙ shiftFunctor (WeilComplex k₀ l X) a) ⋙
-        (tateTwist k₀ l X n ⋙ shiftFunctor (WeilComplex k₀ l X) b) ≅ 𝟭 _ :=
-  Functor.isoWhiskerLeft (tateTwist k₀ l X m)
-      (Functor.isoWhiskerRight ((tateTwist k₀ l X n).commShiftIso a)
-        (shiftFunctor (WeilComplex k₀ l X) b)) ≪≫
-    Functor.isoWhiskerLeft (tateTwist k₀ l X m ⋙ tateTwist k₀ l X n)
-      (shiftFunctorCompIsoId (WeilComplex k₀ l X) a b hab) ≪≫
-    Functor.rightUnitor _ ≪≫ tateTwistCompTateTwistIso m n hmn
-
-variable (k₀ l X) in
-/-- For `m + n = 0` and `a + b = 0`, the twist-shifts `K ↦ K(m)[a]` and `K ↦ K(n)[b]` are inverse
-autoequivalences of the Weil complexes. -/
-noncomputable def tateTwistShiftEquiv (m n a b : ℤ) (hmn : m + n = 0) (hab : a + b = 0) :
-    WeilComplex k₀ l X ≌ WeilComplex k₀ l X :=
-  CategoryTheory.Equivalence.mk
-    (tateTwist k₀ l X m ⋙ shiftFunctor (WeilComplex k₀ l X) a)
-    (tateTwist k₀ l X n ⋙ shiftFunctor (WeilComplex k₀ l X) b)
-    (tateTwistShiftCompTateTwistShiftIso k₀ l X m n a b hmn hab).symm
-    (tateTwistShiftCompTateTwistShiftIso k₀ l X n m b a (by omega) (by omega))
-
-end Twist
-
 section TrivialLineBundle
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -98,10 +67,29 @@ omit [Finite k₀] [Y.Over (Spec (CommRingCat.of k₀))] [π.IsOver (Spec (CommR
 include hπ in
 /-- The trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` is smooth of relative dimension one, as a
 base change of `𝔸¹ ⟶ Spec k₀`. -/
-theorem smoothOfRelativeDimension_one_of_isPullback : SmoothOfRelativeDimension 1 π := by
-  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
-    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
-  exact (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip this
+theorem smoothOfRelativeDimension_one_of_isPullback : SmoothOfRelativeDimension 1 π :=
+  (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip inferInstance
+
+include hπ in
+/-- **The affine-line adjunction for Weil complexes** (the Weil form of
+`cor-amb-affine-space-adjunction` for `d = 1`). For the trivial line bundle
+`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
+direct image with compact support `Rπ₀!` of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`:
+this is the adjunction `Rπ₀! ⊣ Rπ^!` transported along smooth purity `Rπ^! ≅ π^*(1)[2]`
+(`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension`). -/
+theorem nonempty_adjunction_derivedLowerShriek_of_isPullback :
+    Nonempty (derivedLowerShriek k₀ l π ⊣
+      (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) := by
+  have := smoothOfRelativeDimension_one_of_isPullback π s hπ
+  have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  have : HasUpperShriek k₀ l π := isLeftAdjoint_derivedLowerShriek π
+  obtain ⟨e⟩ := nonempty_upperShriek_iso_of_smoothOfRelativeDimension (k₀ := k₀) (l := l) π 1
+  exact ⟨(derivedLowerShriekUpperShriekAdjunction π).ofNatIsoRight (by simpa using e)⟩
 
 include hπ in
 /-- Blueprint `lem-pur-a1-direct-image` (for all Weil complexes): **homotopy invariance**. For

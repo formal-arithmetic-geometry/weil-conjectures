@@ -1902,6 +1902,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.FieldPoints
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.LineSmooth
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.LinearForm
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.PolynomialFamilyRealization
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.PolynomialMap

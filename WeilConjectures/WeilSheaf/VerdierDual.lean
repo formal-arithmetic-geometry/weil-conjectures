@@ -262,12 +262,15 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [HasUpperShriek k₀ l f]
 
-/-- **Smooth purity for Weil complexes** (blueprint:
-`thm-pur-weil-equivariance-of-purity-and-trace`, the equivariance of the smooth purity
-isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`): for a morphism `f : X ⟶ Y` smooth of relative
-dimension `d`, the purity isomorphism commutes with the Weil structures, so it is an isomorphism
-`Rf^! L ≅ f^*(L(d)[2d])` of Weil complexes, natural in `L`. Only the existence of a natural
-isomorphism is stated here. -/
+/-- **Smooth purity for Weil complexes**: for a morphism `f : X ⟶ Y` smooth of relative dimension
+`d`, `Rf^! L ≅ f^*(L(d)[2d])` naturally in the Weil complex `L`.
+
+This is not a single blueprint node. It combines smooth purity on the geometric fibre
+(`sk-thm-purity-transport`, proved for condensed `ℚ̄_ℓ`-coefficients at the unit as
+`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`) with the Weil equivariance of the
+purity map and the trace (`thm-pur-weil-equivariance-of-purity-and-trace`). Neither is
+formalized for Weil complexes: there is no purity map or smooth trace of Weil complexes yet, so
+it is stated with `sorry`. -/
 theorem nonempty_upperShriek_iso_of_smoothOfRelativeDimension (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     Nonempty (upperShriek (k₀ := k₀) (l := l) f ≅
