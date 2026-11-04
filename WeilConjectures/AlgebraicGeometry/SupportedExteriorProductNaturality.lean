@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductNormalization
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
 
 /-!
 # Naturality of the resolution pairing of supported sections
@@ -42,33 +43,6 @@ namespace AlgebraicGeometry.Etale
 section GlobalSections
 
 variable (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
-
-/-- The pullback map on global sections is natural in the sheaf. -/
-@[reassoc]
-theorem globalSectionsUpperStarMap_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
-    {F F' : Sheaf Y.smallEtaleTopology C} (α : F ⟶ F') :
-    (Sheaf.Γ Y.smallEtaleTopology C).map α ≫ globalSectionsUpperStarMap C f F' =
-      globalSectionsUpperStarMap C f F ≫
-        (Sheaf.Γ X.smallEtaleTopology C).map ((upperStar C f).map α) := by
-  unfold globalSectionsUpperStarMap
-  rw [Category.assoc, Category.assoc,
-    (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology C
-      terminalIsTerminal).hom.naturality_assoc α]
-  have hn := (upperStarLowerStarAdjunction C f).unit.naturality α
-  simp only [Functor.id_map] at hn
-  rw [← Functor.map_comp_assoc, hn, Functor.map_comp]
-  simp only [Category.assoc]
-  rw [← (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology C
-      terminalIsTerminal).inv.naturality]
-  congr 1
-  congr 1
-  have hu := ((upperStar C f).map α).hom.naturality
-    (PreservesTerminal.iso (Scheme.Hom.Etale f)).inv.op
-  simp only [Functor.comp_map, Functor.flip_obj_map, ObjectProperty.ι_map]
-  erw [lowerStar_map_hom_app]
-  simpa only [Category.assoc] using! congrArg (fun a ↦ a ≫
-    (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology C
-      terminalIsTerminal).inv.app ((upperStar C f).obj F')) hu.symm
 
 /-- The support resolution unit is natural in the cochain complex. -/
 @[reassoc]
