@@ -52,8 +52,10 @@ theorem comparisonCompatible_of_tensorSquare_transport
   change U.map (mu.hom.app (M, N)) ≫ nZ.hom.app (P.obj M, P.obj N) =
     (Functor.isoWhiskerLeft V t ≪≫ a).inv.app (TC.obj (M, N)) ≫
       G'.map (nY.hom.app (M, N)) ≫ (d'.app (V.obj M)).app (V.obj N) ≫
-        ((Functor.isoWhiskerLeft V t ≪≫ a).hom.app M ⊗ₘ
-          (Functor.isoWhiskerLeft V t ≪≫ a).hom.app N)
+        ((curriedTensor H).map ((Functor.isoWhiskerLeft V t ≪≫ a).hom.app M)).app
+          (G'.obj (V.obj N)) ≫
+        ((curriedTensor H).obj (U.obj (P.obj M))).map
+          ((Functor.isoWhiskerLeft V t ≪≫ a).hom.app N)
   simpa only [
     Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,

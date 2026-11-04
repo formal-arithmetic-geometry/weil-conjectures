@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeSheafSquareStatement
+public import WeilConjectures.WeilSheaf.Native.Projection.CountableTotalExistence
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalSquareStatement
 public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoherence
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
@@ -16,9 +17,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 set_option Elab.async false
 set_option trace.profiler true
-set_option trace.profiler.threshold 500
-set_option diagnostics true
-set_option diagnostics.threshold 1000
+set_option trace.profiler.threshold 20000
 
 universe u
 
@@ -41,6 +40,20 @@ local instance projection_hasSmallColimits (X : Scheme.{u})
         (condensedRingObj (Profinite.padicAlgClRingObj l)
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :=
   hasColimitsOfSizeShrink _
+
+local instance projection_hasTensor (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))]
+    (A B : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) Ab)
+        (condensedRingObj (Profinite.padicAlgClRingObj l)
+          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))) : A.HasTensor B :=
+  GradedObject.projection_hasCountableMap _ _
+
+local instance projection_nativeHasTotal (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))]
+    (P T : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
+    HomologicalComplex.HasMapBifunctor P T (nativeTensorBifunctor k₀ l X).flip (.up ℤ) :=
+  GradedObject.projection_hasCountableMap _ _
 
 variable
   (L : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z)
@@ -104,13 +117,15 @@ lemma projection_totalTensorSquare_of_sheaf
   dsimp only [Functor.comp_map]
   have hpull := hmu P T p q n hpq
   have hpull' := (condensedRealization k₀ l Z).congr_map hpull
+  dsimp only [nativeOpenTensorInsertion] at hpull'
   simp only [Functor.map_comp] at hpull'
   rw [reassoc_of% hpull']
   simp only [Category.assoc]
-  rw [reassoc_of% (condensedRealizationTotalTensorIso_summand k₀ l Z
-      (((L).mapHomologicalComplex (.up ℤ)).obj P)
-      (((L).mapHomologicalComplex (.up ℤ)).obj T) p q n hpq),
-    CochainComplex.ιTensorObj_tensorHom_f]
+  have hnZ := condensedRealizationTotalTensorIso_summand k₀ l Z
+    ((L.mapHomologicalComplex (.up ℤ)).obj P)
+    ((L.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
+  dsimp only [nativeOpenTensorInsertion] at hnZ
+  rw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
   rw [hcomp, hcomp]
   have hs := hsheaf (P.X p) (T.X q)
   dsimp only [PullTensorSquare] at hs
@@ -118,9 +133,11 @@ lemma projection_totalTensorSquare_of_sheaf
   simp only [Category.assoc]
   have hn := a.inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)
-  dsimp only [Functor.comp_map] at hn
+  dsimp only [Functor.comp_map, nativeOpenTensorInsertion] at hn
   rw [reassoc_of% hn]
-  rw [← Functor.map_comp_assoc, condensedRealizationTotalTensorIso_summand,
-    Functor.map_comp_assoc, Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f]
+  have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
+  dsimp only [nativeOpenTensorInsertion] at hnY
+  rw [← Functor.map_comp_assoc, hnY, Functor.map_comp_assoc,
+    Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f]
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

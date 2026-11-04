@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalSquareStatement
+public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
@@ -20,9 +21,7 @@ import WeilConjectures.Tactic.ExactModProofs
 
 set_option Elab.async false
 set_option trace.profiler true
-set_option trace.profiler.threshold 500
-set_option diagnostics true
-set_option diagnostics.threshold 1000
+set_option trace.profiler.threshold 20000
 
 universe u
 
@@ -44,51 +43,6 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
-
-/-- Normalize descent while keeping its exact functor and total comparison abstract. -/
-lemma projection_nativeRestrictionDerivedTensor_normalization
-    (R : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z) [R.Additive]
-    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
-    (hR : ∀ T, NativeIsKFlat k₀ l Y T →
-      NativeIsKFlat k₀ l Z ((R.mapHomologicalComplex (.up ℤ)).obj T))
-    (t : Functor.uncurry.obj (nativeTensorTotal k₀ l Y) ⋙ R.mapHomologicalComplex (.up ℤ) ≅
-      (R.mapHomologicalComplex (.up ℤ)).prod (R.mapHomologicalComplex (.up ℤ)) ⋙
-        Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) :
-    OpenTensorRestrictionNormalization R
-      (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
-      (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
-      (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y) hR
-      (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
-      (NativeRestrictionDescentProof.totalFamily R
-        (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) t)
-      (nativeRestrictionDerivedTensor k₀ l R hR t) := by
-  have := native_open_tensor_full_kflat_localization k₀ l Y
-  unfold nativeRestrictionDerivedTensor
-  exact_mod_proofs NativeRestrictionDescentProof.restrictionDerivedOfTotal_normalization
-    R (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
-    (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
-    (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y) hR
-    (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
-    (nativeOpenTensorModel_naturality k₀ l Z) (nativeOpenTensorModel_naturality k₀ l Y) t
-
-/-- The normalization of the native pullback tensor comparison on K-flat complexes. -/
-lemma projection_nativePullTensor_normalization :
-    OpenTensorRestrictionNormalization (upperStar k₀ l g)
-      (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
-      (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
-      (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y)
-      (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
-      (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
-      (NativeRestrictionDescentProof.totalFamily (upperStar k₀ l g)
-        (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) (nativePullTotalTensor k₀ l g))
-      (nativePullTensor k₀ l g) := by
-  have h := projection_nativeRestrictionDerivedTensor_normalization k₀ l _
-    (by
-      intro T hT
-      cast_proofs nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g T hT)
-    (nativePullTotalTensor k₀ l g)
-  dsimp only [nativePullTensor]
-  exact_mod_proofs h
 
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
@@ -120,8 +74,12 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
   have hr := V.mapDerivedCategory.congr_map
     (projection_nativePullTensor_normalization k₀ l g P T hP hT)
   simp only [Functor.map_comp] at hr
-  have hLP := nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g P hP
-  have hLT := nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g T hT
+  have hLP : NativeIsKFlat k₀ l Z LP := by
+    dsimp only [LP, L]
+    exact_mod_proofs nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g P hP
+  have hLT : NativeIsKFlat k₀ l Z LT := by
+    dsimp only [LT, L]
+    exact_mod_proofs nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g T hT
   have hmU := (condensedRealizationTensor_hom_app_comp k₀ l Z LP LT hLP hLT).symm
   obtain ⟨mU, hmU', hsquare⟩ := final_total_diagram L V F R
     (condensedRealizationUpperStarIso k₀ l g).symm
