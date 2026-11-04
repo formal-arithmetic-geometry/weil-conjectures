@@ -7,7 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityCompactConstant
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeTensorTateShift
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentSingle
-public import WeilConjectures.WeilSheaf.LowerShriekPackage
+public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 public import WeilConjectures.WeilSheaf.IhomLisse.UpperStarDual
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
@@ -124,8 +124,8 @@ theorem nonempty_trivialLineThom_of_affineLine_constant
   have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over π]
     infer_instance
-  obtain ⟨a⟩ := nonempty_upperStarDerivedLowerShriekIso_of_isPullback hπ.flip
-    (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀)))
+  obtain ⟨bc⟩ := nonempty_upperStar_derivedLowerShriek_iso hπ.flip
+  let a := bc.app (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀)))
   exact nonempty_upperStar_comp_shriek_iso_of_constant_cohomology π (-1) (-2)
     ((derivedLowerShriek k₀ l π).mapIso (purityUpperStarConstantIso s).symm ≪≫
       a.symm ≪≫ (upperStar (X ↘ Spec (CommRingCat.of k₀))).mapIso e ≪≫
