@@ -188,3 +188,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - The check reaches DescendedProperUniversality; its final all-at-once exact term hits a 200000-heartbeat whnf timeout. Split the levelwise bijectivity and coordinate-transport applications, explicitly supplied the proper pushforward functor, and normalize associativity separately.
 - NativeHomSingle still times out rewriting the concrete right-derived naturality square, even with explicit arguments. Reassembled the natural isomorphism from three individually typed natural isomorphisms: representative model, single-complex projection, and K-injective derived evaluation. The last naturality proof now directly applies the inverse evaluation lemma, without rewriting a large composite expression.
 - No heartbeat raises. Next single audit follows; no DONE.
+
+## 2026-11-05 06:35 +0800 — timeouts replaced by explicit normalization goals
+- Audit log /home/ubuntu/u9/logs/K4-20261105T063140.log finished rc=1, two built/two failed. Both refactored proofs now reach ordinary type mismatches without timeouts.
+- NativeHomSingle's new projection and injective-evaluation naturality proofs pass; only the representative-model square needs its composed functor maps changed to explicit model coordinates. Applied that normalization, and the same one to the parallel model square in NativeHomShift before it is reached.
+- DescendedProperUniversality now exposes only composed-functor objects and the identity functor applied to N. Added those two object normalization lemmas to the final simpa. Resubmitting the audit; no heartbeat raises or DONE.

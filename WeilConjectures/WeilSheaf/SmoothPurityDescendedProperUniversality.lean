@@ -101,7 +101,8 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
     ((Functor.mapDerivedCategoryCompIso
       (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) Y.hom)
       (Endofunctor.IsoAlgebra.forget _)).app N.obj) _ h₀
-  simpa only [Category.assoc, Iso.app_hom, Iso.symm_hom] using h₁
+  simpa only [Category.assoc, Iso.app_hom, Iso.symm_hom, Functor.comp_obj,
+    Functor.id_obj] using h₁
 
 /-- The actual descended trace is geometrically universal for a smooth proper map. -/
 theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]
