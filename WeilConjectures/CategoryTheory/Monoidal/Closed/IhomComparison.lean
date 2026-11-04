@@ -127,6 +127,13 @@ def preAppAddHom (A B X : C) : (B ⟶ A) →+ ((ihom A).obj X ⟶ (ihom B).obj X
   map_zero' := pre_zero_app X
   map_add' f g := pre_add_app f g X
 
+/-- The internal hom bifunctor is additive in its first variable. -/
+instance internalHom_additive : (internalHom (C := C)).Additive where
+  map_add {_ _} f g := NatTrans.ext (funext fun X ↦ pre_add_app f.unop g.unop X)
+
+instance (A : Cᵒᵖ) : ((internalHom (C := C)).obj A).Additive :=
+  inferInstanceAs (ihom A.unop).Additive
+
 variable [BraidedCategory C]
 
 /-- **The internal hom turns cokernels into kernels**: if `π : P₀ ⟶ P` is a cokernel of
