@@ -99,7 +99,7 @@ theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [Local
       ((singleFunctorCompAdicSheafDerivedEquivCondensedModIso (l := l) (X := T) 0).app F).symm
       (CondensedRing.boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject _ 0
         hF.isConstructibleModuleObject)
-  have h := CondensedRing.boundedConstructible_rightDerivedLowerStar_obj l f' ⟨_, hM⟩
+  have h := CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_ringChar_ne l f' ⟨_, hM⟩
   exact bounded_homologyProperty_of_boundedConstructible
     ((boundedConstructible _).prop_of_iso
       ((adicRightDerivedLowerStarCompIso (l := l) (X := Y) g).app _).symm h)

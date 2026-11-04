@@ -134,7 +134,7 @@ for torsion coefficients; Bhatt–Scholze, Section 6.8, for `ℚ̲̄_ℓ`). It i
 condensed ring: for the constant discrete ring `𝔽_p` and the affine line over an algebraically
 closed field of characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which
 is infinite. -/
-lemma boundedConstructible_rightDerivedLowerStar_obj
+lemma boundedConstructible_rightDerivedLowerStar_obj_of_ringChar_ne
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)
       ((R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) := by
@@ -144,6 +144,15 @@ lemma boundedConstructible_rightDerivedLowerStar_obj
   exact boundedConstructible_rightDerivedLowerStar_obj_of_single _ f inferInstance
     (finiteTypeDirectImage_single_boundedAbove ℓ f)
     (finiteTypeDirectImage_single_constructible ℓ f) K.property
+
+set_option linter.unusedSectionVars false in
+/-- **Deligne's finiteness theorem** for `Rf_*` over a field of positive characteristic `≠ ℓ`
+(see `boundedConstructible_rightDerivedLowerStar_obj_of_ringChar_ne`). -/
+lemma boundedConstructible_rightDerivedLowerStar_obj
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)
+      ((R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) :=
+  boundedConstructible_rightDerivedLowerStar_obj_of_ringChar_ne ℓ f K
 
 /-- The derived pushforward `Rf_* : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded constructible
 complexes: the restriction of `R((f)_*⟦ℚ̲̄_ℓ⟧)`. -/
@@ -610,7 +619,6 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
-omit [Fact (ringChar k).Prime] in
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-hom-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
 are stable under the derived hom
@@ -679,7 +687,6 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
-set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{E_X})` (SGA 4½ [Th. finitude], 1.6;
@@ -751,7 +758,6 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
-set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{𝒪_{E,X}})` (SGA 4½ [Th. finitude],
