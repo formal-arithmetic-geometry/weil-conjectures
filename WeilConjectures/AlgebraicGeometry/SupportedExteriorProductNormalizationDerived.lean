@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductNormalization
+public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductExistence
+public import WeilConjectures.AlgebraicGeometry.KunnethGlobalSectionsResolution
+public import WeilConjectures.SixFunctors.Etale.SupportCohomologyKFlatResolution
 
 /-!
 # The derived supported exterior product
@@ -59,8 +62,11 @@ theorem existsUnique_resolutionSupportedExteriorProduct
       (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} A)
         (supportedProductImmersion f g i j)).obj
           (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj),
-      IsResolutionSupportedExteriorProduct (ModuleCat.{u + 1} A) f g i j K.obj L.obj κ := by
-  sorry
+      IsResolutionSupportedExteriorProduct (ModuleCat.{u + 1} A) f g i j K.obj L.obj κ :=
+  existsUnique_isResolutionSupportedExteriorProduct_of_resolutions (ModuleCat.{u + 1} A) f g i j
+    (exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport A k f i)
+    (exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport A k g j)
+    K.obj L.obj K.property L.property
 
 /-- The supported exterior product κ, defined anew by the unique derived extension
 of pullback and tensor of supported sections, normalized on K-flat representatives
@@ -139,7 +145,31 @@ theorem resolutionSupportedExteriorProduct_forgetSupport
           (op (Scheme.Etale.mk j.openComplement.ι)))).app L.obj) ≫
       kunnethGlobalSectionsMap A (pullback.fst f g) (pullback.snd f g) f g
         pullback.condition.symm K.obj L.obj := by
-  sorry
+  obtain ⟨n, hn⟩ := K.property
+  obtain ⟨m, hm⟩ := L.property
+  obtain ⟨I₀, eI₀, hI₀, huI₀⟩ := exists_kFlat_supportResolution_iso (ModuleCat.{u + 1} A) i
+    (exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport A k f i)
+    K.obj n hn
+  obtain ⟨J₀, eJ₀, hJ₀, huJ₀⟩ := exists_kFlat_supportResolution_iso (ModuleCat.{u + 1} A) j
+    (exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport A k g j)
+    L.obj m hm
+  have hnorm := (isResolutionSupportedExteriorProduct_iff (ModuleCat.{u + 1} A) f g i j K.obj L.obj
+    _).1 (resolutionSupportedExteriorProduct_normalization A k f g i j K L hF) I₀ J₀ hI₀ hJ₀ eI₀ eJ₀
+  rw [← cancel_epi (tensorHom
+    (exteriorSupportResolutionUnit (ModuleCat.{u + 1} A) i I₀ ≫
+      (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} A) i).map eI₀.hom)
+    (exteriorSupportResolutionUnit (ModuleCat.{u + 1} A) j J₀ ≫
+      (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} A) j).map eJ₀.hom)),
+    reassoc_of% hnorm]
+  erw [resolutionSupportedExteriorPairing_comp_forgetSupport (ModuleCat.{u + 1} A) f g i j I₀ J₀
+    hI₀ hJ₀ (M := externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj)
+    (derivedTensorHom (ModuleCat.{u + 1} A)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map eI₀.hom)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map eJ₀.hom))]
+  rw [tensorHom_comp_tensorHom_assoc, exteriorSupportResolutionUnit_comp_forgetSupport,
+    exteriorSupportResolutionUnit_comp_forgetSupport, ← tensorHom_comp_tensorHom_assoc]
+  erw [kunnethGlobalSectionsMap_resolution A f g I₀ J₀ hI₀ hJ₀ eI₀ eJ₀]
+  rfl
 
 end Derived
 
