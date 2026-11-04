@@ -24,6 +24,7 @@ import WeilConjectures.WeilSheaf.SmoothPurityNativeProperDualizing
 import WeilConjectures.WeilSheaf.SmoothPurityNativeDualizingDescent
 import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
 import WeilConjectures.WeilSheaf.SmoothPurityAbsoluteDescent
+import WeilConjectures.WeilSheaf.SmoothPurityDescentSingle
 
 #print axioms AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_free
@@ -59,3 +60,4 @@ import WeilConjectures.WeilSheaf.SmoothPurityAbsoluteDescent
 #print axioms AlgebraicGeometry.WeilComplex.nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
 #print axioms AlgebraicGeometry.WeilComplex.finiteBaseNativeDescentUnitIso
 #print axioms AlgebraicGeometry.WeilComplex.nonempty_shriekRightAdjoint_adicConstant_descendedTate_iso
+#print axioms AlgebraicGeometry.WeilComplex.finiteBaseNativeDescentTateIso
