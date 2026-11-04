@@ -25,7 +25,6 @@ local instance trChartTensorSquareObjZero (X : Scheme.{u}) (M : X.Modules) :
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The chart tensor comparison is natural for the supplied pure-tensor maps. -/
 theorem tensorResolutionChartTensorIso_naturality_of_pure_tensors {Y : Scheme.{u}}
