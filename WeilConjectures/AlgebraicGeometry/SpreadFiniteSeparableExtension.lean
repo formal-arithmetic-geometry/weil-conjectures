@@ -14,6 +14,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.AlgebraicGeometry.LocalizedSeparablePolynomialModel
+import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.AdjoinRootCoverFiniteEtale
 import Mathlib.FieldTheory.PrimitiveElement
 import Mathlib.RingTheory.Etale.StandardEtale
 
@@ -87,18 +88,12 @@ private theorem polynomial_model_equiv_adjoin
     exact hq
 
 private theorem etale_adjoinRoot_of_isCoprime
-    {R : Type*} [CommRing R] (f : Polynomial R) (hf : f.Monic)
+    {R : Type u} [CommRing R] (f : Polynomial R) (hf : f.Monic)
     (hcop : IsCoprime f f.derivative) : Algebra.Etale R (AdjoinRoot f) := by
   obtain ⟨a, b, hab⟩ := hcop
-  let P : StandardEtalePair R := ⟨f, hf, 1, b, a, 0, by
-    simpa [mul_comm, add_comm] using hab⟩
-  have hmk : AdjoinRoot.mk f P.g = 1 := by simp [P]
-  let e : P.Ring ≃ₐ[R] AdjoinRoot f :=
-    P.equivAwayAdjoinRoot.trans
-      (((IsLocalization.atUnit (AdjoinRoot f)
-        (Localization.Away (AdjoinRoot.mk f P.g)) (AdjoinRoot.mk f P.g)
-        (by rw [hmk]; exact isUnit_one)).symm).restrictScalars R)
-  exact Algebra.Etale.of_equiv e
+  refine Algebra.etale_adjoinRoot_of_isUnit_derivative hf (IsUnit.of_mul_eq_one_right
+    (AdjoinRoot.mk f b) ?_)
+  simpa [mul_comm] using congrArg (AdjoinRoot.mk f) hab
 
 private theorem fractionRing_adjoin_of_primitive
     (A : Type u) [CommRing A] [IsDomain A]
