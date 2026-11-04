@@ -22,7 +22,9 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
 variable (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E]
-variable (T : Scheme.{u})
+variable (T : Scheme.{u}) [IsNoetherian T]
+  [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+  [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
 /-- Derived unit and complex-counit data for the completed scalar map. -/
 structure RealizationScalarFunctorCoreDerivedData
@@ -43,13 +45,12 @@ structure RealizationScalarFunctorCoreDerivedData
       (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ,
     IsIso (pbcComplexCounit φ P)
 
+omit [AlgebraicGeometry.IsNoetherian T] [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+  [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] in
 /-- If `φ` is the inclusion of integral into rational coefficients, transported along an
 identification `e` of the completed integral coefficients with the continuous integral-valued
 functions, then the derived unit is the localized ordinary unit on every complex and the
 derived complex counit is invertible.
-
-The hypothesis on `φ` is needed: exactness of scalar extension fails for an arbitrary
-ring-sheaf map, and the counit clause relies on it.
 
 Source: Stacks Tags 06YY and 0DVC, and Bhatt--Scholze, Lemma 6.8.2
 (blueprint: lem-weil-pbc-realization-scalar-functor).
@@ -59,7 +60,7 @@ integral-valued into continuous field-valued functions. That inclusion is a loca
 so `φ` is sectionwise flat and ordinary scalar extension along `φ` is exact. The unit
 formula holds for every complex by K-flat resolution and naturality. Exact extension
 preserves the resolving quasi-isomorphism, so the counit is invertible everywhere. -/
-theorem realization_scalar_functor_core_derived_data
+theorem nonempty_realizationScalarFunctorCoreDerivedData_of_normalized
     [HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1}]
     [(ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
     [EssentiallySmall.{u + 1} T.ProEt]
@@ -76,6 +77,47 @@ theorem realization_scalar_functor_core_derived_data
     exact (RingHom.Flat.of_bijective
       (ConcreteCategory.bijective_of_isIso (e.hom.hom.app U))).comp
         (integralRationalCoefficient_flat l T E hφ U)
+  exact ⟨⟨pbcDerivedScalarAdjunction_unit_app φ,
+    pbcComplexCounit_isIso_of_preservesFiniteLimits φ⟩⟩
+
+/-- Ordinary scalar extension along an arbitrary ring-sheaf map from the completed integral
+coefficients to the rational coefficients is exact.
+
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
+
+Missing input (cross-section rule). For the normalized inclusion this is proved:
+see `nonempty_realizationScalarFunctorCoreDerivedData_of_normalized`, via
+`integralRationalCoefficient_flat`. Sections of the rational coefficient sheaf are continuous
+`E`-valued functions, a localization, hence flat, over the continuous integral-valued
+functions along the inclusion. For an arbitrary `φ`, as in the statement of
+`realization_scalar_functor_core_derived_data`, one needs in addition a classification of
+ring-sheaf maps from integral-valued to `E`-valued continuous functions: for instance, that
+every such map is, locally on connected components, the inclusion twisted by an automorphism
+of `E` over `ℚ_ℓ`, which is flat. This classification is not available in the repository. -/
+theorem pbcExtend_rationalCoefficient_preservesFiniteLimits
+    (φ : pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
+      rationalCoefficientSheaf l T E) :
+    PreservesFiniteLimits (pbcExtend φ) := by
+  sorry
+
+/-- The derived scalar extension construction supplies the two core identities.
+
+Source: Stacks Tags 06YY and 0DVC, via the exact termwise extension and its
+universal derived adjunction
+(blueprint: lem-weil-pbc-realization-scalar-functor).
+
+Proof: the unit formula holds for every complex by K-flat resolution and naturality
+(`pbcDerivedScalarAdjunction_unit_app`). Exactness of scalar extension
+(`pbcExtend_rationalCoefficient_preservesFiniteLimits`) preserves the resolving
+quasi-isomorphism, so the counit is invertible on every complex. -/
+theorem realization_scalar_functor_core_derived_data
+    [HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1}]
+    [(ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
+    [EssentiallySmall.{u + 1} T.ProEt]
+    (φ : pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
+      rationalCoefficientSheaf l T E) :
+    Nonempty (RealizationScalarFunctorCoreDerivedData l E T φ) := by
+  have := pbcExtend_rationalCoefficient_preservesFiniteLimits l E T φ
   exact ⟨⟨pbcDerivedScalarAdjunction_unit_app φ,
     pbcComplexCounit_isIso_of_preservesFiniteLimits φ⟩⟩
 
