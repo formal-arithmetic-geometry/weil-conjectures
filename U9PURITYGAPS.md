@@ -103,3 +103,18 @@ The parallel C4 branch's `TateFrobeniusLevel.lean` at `378c9a1116` builds on
 `SmoothPurityRootsNaturality.lean` and specializes the finite equation to the modular cyclotomic
 character. It was read but not merged here; its visible check failed before Lean due to the
 remote systemd environment. It does not yet supply the inverse-limit/native comparison.
+
+## Route-B assembly status, 2026-11-05 06:39 +0800
+
+The finite-base construction has now passed the remote checker through these interfaces:
+
+- `ProEtaleWeilSheaf.toCondensedAdicConstantDescentIso`: the actual constant native Weil sheaf is the descent of the ordinary finite-base unit, with its Frobenius structure.
+- `WeilComplex.finiteBaseNativeDescentUnitIso`: the corresponding native derived unit comparison.
+- `WeilComplex.finiteBaseNativeDescentShiftedSheafIso` and `finiteBaseNativeDescentTateIso`: an underived sheaf encoding gives the shifted derived encoding; no monoidal property of the native equivalence is assumed.
+- `CondensedRing.boundedConstructibleBaseChangeOfMap_inv_app_hom` and `bijective_map_comp_properTrace_levelwise_of_isIso`: the actual restricted base-change inverse and the proper trace in the exact-pullback coordinates used by descent.
+- `WeilComplex.nonempty_upperStar_comp_shriek_iso_tensor_constant`: the compact projection formula reduces the Thom functor to the compact constant object (uses the permitted K5 leaf).
+- `WeilComplex.nonempty_compact_constant_iso_of_absolute_purity`: object-level Verdier exchange and ordinary constant homotopy convert absolute purity into compact constant cohomology.
+
+The latest completed audit is `/home/ubuntu/u9/logs/K4-20261105T063140.log` (rc=1). Its two entry failures are explicit normalization mismatches in `SmoothPurityNativeHomSingle` and `SmoothPurityDescendedProperUniversality`; fixes are queued at source `91f44c36a`. The subsequent proper-dualizing, absolute-purity, native tensor/Tate, and Thom assembly modules are drafts pending their first successful checks. They must not be treated as proved merely because their earlier interfaces are green.
+
+C4's `tateTwistSheafCondensedIso d ψ` has the required underived encoding interface, with `ψ := toCondensedAdicConstantDescentIso k₀ l X`. C4 has validated the finite-level, tower, trivialization, pullback, and pullback-naturality layers; the remaining encoding layers are still being checked. No C4 merge or user-proof replacement has been applied on K4 yet. `/tmp/k4-route-b-integration.patch` contains the prepared replacements of the smooth-dualizing user and the trivial-line Thom user. Both avoid K2. The original general relative statement remains unchanged and open, and no K4.DONE is warranted yet.
