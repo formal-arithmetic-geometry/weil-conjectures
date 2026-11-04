@@ -39,3 +39,15 @@
   AffineLineConstant completed in 363s. No proof fixes were needed after the merge.
 - Next/final check: compile HomotopyInvariance.AxiomAudit to record actual axiom dependencies
   of the constant, lisse, smooth-base-change and final unit-isomorphism statements.
+- GREEN: ucheck WeilConjectures.WeilSheaf.HomotopyInvariance.AxiomAudit returned rc=0,
+  built=1 failed=0 on 6118ee0692. Log:
+  /home/ubuntu/u9/logs/K6-20261105T024634.log.
+- The constant-coefficient theorem, lisse theorem, smooth-base-change theorem and FINAL LEAF
+  each depend only on [propext, Classical.choice, Quot.sound]. In particular the final proof
+  uses NO other sorry leaves, and no legacy sorry was introduced into its dependency closure.
+- All 16 changed Lean modules are green: the leaf build covers the 14 merged helpers,
+  and the separate audit build checks the one additional audit module.
+- Final source checks: unchanged leaf statement/section assumptions, no new sorry/axiom/admit/
+  native_decide/skipKernelTC/implemented_by, no changes to another agent's leaf, clean diff.
+- Complete. Final commit after this log update changes documentation only; the Lean sources
+  are exactly those checked on 6118ee0692. K6.DONE records both build logs and the final commit.
