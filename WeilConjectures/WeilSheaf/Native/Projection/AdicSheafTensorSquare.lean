@@ -64,9 +64,11 @@ lemma adicUpperStarCompCondensedModIso_unit_hom (M : AdicSheaf l Y) :
   have hb := congrArg (fun t ↦ t.app ((adicUpperStar l f).obj M))
     (mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom (l := l) f)
   rw [hb] at h
+  dsimp only [Functor.id_obj] at h
   have hh := congrArg Mod.Hom.hom h
   rw [Mod.comp_hom', Mod.comp_hom', adicLowerStarCompCondensedModIso_hom_app_hom,
-    CondensedRing.lowerStar_map_hom, Category.comp_id] at hh
+    CondensedRing.lowerStar_map_hom] at hh
+  erw [Category.comp_id] at hh
   exact hh.symm
 
 /-- The adjoint of a map transported through the pullback comparison. -/
@@ -82,9 +84,13 @@ lemma homEquiv_adicUpperStarCompCondensedModIso_inv_comp
   have hu := unit_mateEquiv (adicUpperStarLowerStarAdjunction l f)
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
     (adicUpperStarCompCondensedModIso l f).inv M
-  rw [mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom] at hu
-  rw [← Category.assoc, ← hu, Category.assoc,
-    ← (adicLowerStarCompCondensedModIso l f).hom.naturality]
+  have hb := congrArg (fun s ↦ s.app ((adicUpperStar l f).obj M))
+    (mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom (l := l) f)
+  rw [hb] at hu
+  dsimp only [Functor.id_obj] at hu
+  have hn := (adicLowerStarCompCondensedModIso l f).hom.naturality t
+  dsimp only [Functor.comp_map] at hn
+  rw [← Category.assoc, ← hu, Category.assoc, ← hn]
   rw [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
 
 /-- Forgetting coefficients commutes with the lax tensor map of pushforward. -/
@@ -125,8 +131,8 @@ lemma adicUpperStar_condensedRelativeTensor_square (M N : AdicSheaf l Y) :
   apply Mod.hom_ext
   apply (cancel_epi (Mod.tensorObjπ ((adicSheafEquivCondensedMod l Y).functor.obj M)
     ((adicSheafEquivCondensedMod l Y).functor.obj N))).1
-  simp only [Functor.map_comp, Mod.comp_hom', Category.assoc,
-    adicLowerStarCompCondensedModIso_hom_app_hom, Category.comp_id,
+  simp only [Functor.map_comp, Mod.comp_hom',
+    adicLowerStarCompCondensedModIso_hom_app_hom,
     CondensedRing.lowerStar_map_hom]
   rw [tensorObjπ_condensedRelativeTensorIso_inv_hom_assoc]
   change μ (weilCoefficientsForgetAb l Y) M.X N.X ≫
@@ -145,5 +151,6 @@ lemma adicUpperStar_condensedRelativeTensor_square (M N : AdicSheaf l Y) :
       ← Functor.LaxMonoidal.μ_natural_assoc, tensorHom_comp_tensorHom_assoc,
       adicUpperStarCompCondensedModIso_unit_hom, adicUpperStarCompCondensedModIso_unit_hom]
   simp only [adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
+  rfl
 
 end AlgebraicGeometry.ProEtale

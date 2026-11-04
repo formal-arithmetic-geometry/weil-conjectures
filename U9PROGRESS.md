@@ -59,3 +59,8 @@ AdicSheafTensorSquare had two deterministic 200000-heartbeat elaboration timeout
 at redundant placeholder-heavy change steps, and a rewrite mismatch between
 adicUpperStar.obj.X and the ambient pullback. Removed those change steps and
 normalized both spellings before the rewrite; no heartbeat increase.
+
+2026-11-05 02:53 CST: K5-20261105T025124.log rc=1, adic square now elaborates
+in 16s with no timeouts. Remaining issues are identity/composition normalization:
+used explicit mate components, ordinary-transparency identity cancellation, and
+rfl for the final strict forgetting/pushforward square. Rechecking the audit.
