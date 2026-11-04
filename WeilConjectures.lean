@@ -237,6 +237,7 @@ public import WeilConjectures.Algebra.Homology.BaseTensorUnitCohomologyModel
 public import WeilConjectures.Algebra.Homology.BifunctorHomBidual
 public import WeilConjectures.Algebra.Homology.BifunctorHomComplex
 public import WeilConjectures.Algebra.Homology.BifunctorHomCone
+public import WeilConjectures.Algebra.Homology.BifunctorHomMonoidal
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
 public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 public import WeilConjectures.Algebra.Homology.BifunctorSingleComparison
@@ -13236,6 +13237,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.RestrictEssImage
 public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingHomEquivCore
+public import WeilConjectures.CategoryTheory.Adjunction.SelfDualUnit
 public import WeilConjectures.CategoryTheory.Adjunction.SixFunctors.CoefficientCounitMateCocycle
 public import WeilConjectures.CategoryTheory.Adjunction.SixFunctors.CompatibleRightComparison
 public import WeilConjectures.CategoryTheory.Adjunction.SixFunctors.CompositionAdjunctionNormalization
@@ -13672,9 +13674,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatFiniteReso
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatTelescope
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.AssociatorShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.BifunctorHomBidualTransport
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.BraidingShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedHomComplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableBounded
@@ -14359,6 +14363,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.BraidingShiftAux
 public import WeilConjectures.CategoryTheory.Monoidal.ClassTransport
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.BidualityTruncation
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.DualFullyFaithful
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.DualFullyFaithfulSubcategory
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.DualizableCoefficientHomAction
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.EvaluationBidualComparisonTransport
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalDual
@@ -14370,6 +14375,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparisonIso
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparisonOfBasis
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomRightAdjoint
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomUnitTensorComparison
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.InternalHomAdditive
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.LeftProjectionComp
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.PairingComparison
@@ -14412,6 +14418,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.FreePresentation
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomComp
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomDual
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomIso
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomSwap
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomTransport
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
@@ -16672,6 +16679,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.IhomUnitTensor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying

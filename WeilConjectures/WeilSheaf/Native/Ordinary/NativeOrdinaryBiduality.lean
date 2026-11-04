@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
 import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgettingMonoidal
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.BifunctorHomBidualTransport
 import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomIso
-import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Subcategory
+import WeilConjectures.CategoryTheory.Monoidal.Closed.DualFullyFaithfulSubcategory
 import WeilConjectures.PoincareDuality.Biduality.Constructible
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 
 /-!
 # The double-dual morphism of `ℓ`-adic sheaves
@@ -29,13 +31,18 @@ The biduality morphisms `M ⟶ 𝓗om(𝓗om(M, N), N)` of sheaves of `ℚ̄_ℓ
 (`AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryBifunctorEvaluation`), hence define the double-dual
 morphism `M ⟶ Hom(Hom(M, I), I)` of hom complexes of `ℓ`-adic sheaves
 (`CochainComplex.bifunctorHomBidual`).
+
+Into a K-injective model of the dualizing complex, this morphism is a quasi-isomorphism on bounded
+constructible complexes
+(`AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`): this is Verdier
+biduality of the condensed model, `ProEtale.CondensedRing.isIso_verdierBiduality`.
 -/
 
 @[expose] public section
 
 universe u
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
 
 open CategoryTheory Opposite
 
@@ -74,13 +81,14 @@ sheaves which is bounded with constructible cohomology. Then the double-dual mor
 `M ⟶ Hom(Hom(M, I), I)` of hom complexes is a quasi-isomorphism.
 
 This is the constructible biduality `ProEtale.CondensedRing.isIso_verdierBiduality` of the
-condensed model, read in the model of `ℓ`-adic sheaves. The missing input is the comparison of
-the two models for the double-dual morphism: the coefficient equivalence `ordinaryToCondensed`
-identifies the derived internal homs (`lem-sf-native-geometric-hom-comparison`, see
-`ProEtaleWeilSheaf.nonempty_nativeGeometricForget_derivedHom_iso`), but it is not known yet to
-carry the hom-complex double-dual morphism to `ProEtale.CondensedRing.verdierBiduality`, the
-transpose of the Koszul-braided evaluation in the closed structure of `Dᵇc` (blueprint:
-`cor-coef-verdier-weil-equivariance`, "evaluation, biduality ... are Weil equivariant"). -/
+condensed model, read in the model of `ℓ`-adic sheaves. The coefficient equivalence `U` from
+`ℓ`-adic sheaves to condensed `ℚ̲̄_ℓ`-modules is monoidal, so it carries the internal hom of
+`ℓ`-adic sheaves to that of condensed modules (`CochainComplex.BifunctorMapIso.ofMonoidal`), and
+the derived hom `RHom(-, I)` of hom complexes to the internal hom `RHom(-, ω)` of the derived
+category (`DerivedCategory.bifunctorRHomOfComplexMapIso`). Condensed biduality makes the latter
+fully faithful on `Dᵇc`; since the hom-complex double dual satisfies the triangle identity, it is
+then invertible (`DerivedCategory.quasiIso_bifunctorHomBidual_of_bijective`). The evaluation and
+the braidings of the two models are never compared. -/
 theorem quasiIso_bifunctorHomBidual_ordinary {M I : CochainComplex (ProEtale.AdicSheaf l Z.left) ℤ}
     [I.IsKInjective]
     (eI : Nonempty ((ordinaryToCondensed Z).obj (DerivedCategory.Q.obj I) ≅
@@ -109,40 +117,25 @@ theorem quasiIso_bifunctorHomBidual_ordinary {M I : CochainComplex (ProEtale.Adi
   let W := DerivedCategory.Q.obj ((U.mapHomologicalComplex (ComplexShape.up ℤ)).obj I)
   let eW : W ≅ (ObjectProperty.ι _).obj (ProEtale.CondensedRing.dualizingComplex l Z) :=
     (U.mapDerivedCategoryFactors.app I).symm ≪≫ eI
-  have hP (X : DerivedCategory _) (hX : P X) : P ((ihom X).obj W) :=
-    ObjectProperty.prop_ihom hX (P.prop_of_iso eW.symm
+  have hP (X : DerivedCategory _) (hX : P X) : P ((CategoryTheory.ihom X).obj W) :=
+    ObjectProperty.prop_ihom P hX (P.prop_of_iso eW.symm
       (ProEtale.CondensedRing.dualizingComplex l Z).property)
   have hbij (X X' : DerivedCategory _) (hX : P X) (hX' : P X') :
       Function.Bijective (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app W) := by
-    let ω := ProEtale.CondensedRing.dualizingComplex l Z
-    let A : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj l⟧ := ⟨X, hX⟩
-    let A' : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj l⟧ := ⟨X', hX'⟩
-    have : IsIso (MonoidalClosed.toIhomIhom ω A') :=
-      ProEtale.CondensedRing.isIso_verdierBiduality l A'
-    have h := MonoidalClosed.bijective_pre_app_of_isIso ω A A'
-    let FF := ObjectProperty.fullyFaithfulι P
-    have h' : Function.Bijective (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app ω.obj) := by
-      have : (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app ω.obj) =
-          FF.homEquiv ∘ (fun g : A ⟶ A' ↦ (MonoidalClosed.pre g).app ω) ∘
-            (FF.homEquiv (X := A) (Y := A')).symm := by
-        funext f
-        exact (ObjectProperty.pre_app_hom (FF.homEquiv.symm f) ω).symm
-      rw [this]
-      exact FF.homEquiv.bijective.comp (h.comp FF.homEquiv.symm.bijective)
-    have : (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app W) =
-        (((ihom X').mapIso eW).symm.homCongr ((ihom X).mapIso eW).symm) ∘
-          (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app ω.obj) := by
-      funext f
-      simp only [Function.comp_apply, Iso.homCongr_apply, Iso.symm_inv, Iso.symm_hom,
-        Functor.mapIso_hom, Functor.mapIso_inv]
-      rw [← Category.assoc, (MonoidalClosed.pre f).naturality, Category.assoc,
-        ← Functor.map_comp, eW.hom_inv_id, Functor.map_id, Category.comp_id]
-    rw [this]
-    exact (Iso.homCongr _ _).bijective.comp h'
+    have : IsIso (MonoidalClosed.toIhomIhom (ProEtale.CondensedRing.dualizingComplex l Z)
+        (⟨X', hX'⟩ : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj l⟧)) :=
+      ProEtale.CondensedRing.isIso_verdierBiduality l _
+    exact MonoidalClosed.bijective_pre_app_of_iso_right eW.symm X X'
+      (ObjectProperty.bijective_pre_app_of_isIso P _ hX hX')
+  have : LocallyOfFiniteType (Z.left ↘ Spec (.of k)) := inferInstanceAs (LocallyOfFiniteType Z.hom)
+  have : QuasiCompact (Z.left ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact Z.hom)
+  have : IsSeparated (Z.left ↘ Spec (.of k)) := inferInstanceAs (IsSeparated Z.hom)
   have hEq := (ProEtale.finiteCoefficientDescentTwoColimit k (ringChar k) l
     (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ l) Z.left).2.2.2.2.1.1
+  have := ProEtale.CondensedRing.isLeftDerivabilityStructure_localizerMorphismKFlat
+    (Profinite.padicAlgClRingObj l) Z.left
   exact DerivedCategory.quasiIso_bifunctorHomBidual_of_bijective φ I
     (ordinaryBifunctorEvaluation l Z.left) (fun a b ↦ Mod.bidual_comp_ihomMap_bidual a b) P hP
-    hbij M (hEq ▸ hM)
+    hbij M (by rw [hEq] at hM; exact hM)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

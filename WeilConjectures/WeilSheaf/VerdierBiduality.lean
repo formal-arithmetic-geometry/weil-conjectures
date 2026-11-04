@@ -46,15 +46,12 @@ complexes when the target represents the dualizing complex of `X̄`
 
 ## Inputs from other chapters
 
-Two statements are not yet available and are stated here with `sorry`:
+One statement is not yet available and is stated here with `sorry`:
 
 * `AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`
   (blueprint: `lem-fix-weil-operations`, the exceptional adjoint "lies over" the geometric one):
   the underlying complex on `X̄` of `Ra_X^! ℚ̄_ℓ`, for the exceptional inverse image of Weil
-  complexes, is the dualizing complex of `X̄`;
-* `AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`: constructible Verdier
-  biduality in the model of `ℓ`-adic sheaves (`det-pd-biduality-coefficients` (iv), proved in the
-  condensed model as `ProEtale.CondensedRing.isIso_verdierBiduality`).
+  complexes, is the dualizing complex of `X̄`.
 -/
 
 @[expose] public section

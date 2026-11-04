@@ -24,7 +24,8 @@ as functors, are compared: neither the evaluation nor the braiding of `D(B)`. Si
 double-dual morphism `δ : 𝟭 ⟶ G G` satisfies the triangle identity, `δ_K` is an isomorphism as soon
 as `G` is fully faithful on `K` and `G G K` (`CategoryTheory.Functor.IsSelfDualUnit`). Full
 faithfulness can be read in `D(B)`, where it is the full faithfulness of `RHom(-, W)`, a
-consequence of Verdier biduality in `D(B)` (`CategoryTheory.MonoidalClosed.bijective_pre_app_of_isIso`).
+consequence of Verdier biduality in `D(B)`
+(`CategoryTheory.MonoidalClosed.bijective_pre_app_of_isIso`).
 
 ## Main results
 
@@ -66,6 +67,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{v} A]
 set_option quotPrecheck false in
 local notation "Uc" => U.mapHomologicalComplex (ComplexShape.up ℤ)
 
+omit [HasDerivedCategory A] [Abelian.HasKInjectiveResolutions A] in
 include φ in
 /-- Precomposition with a quasi-isomorphism is a quasi-isomorphism of hom complexes into `I`: `U`
 carries it to precomposition on internal hom complexes into the K-injective complex `U I`. -/
@@ -90,6 +92,7 @@ noncomputable def mapHomComplexIsoIhom (K : CochainComplex A ℤ) :
     qInternalHomIsoIhom ((Uc).obj I) ((Uc).obj K) ≪≫
       preIso _ (U.mapDerivedCategoryFactors.app K)
 
+omit [Abelian.HasKInjectiveResolutions A] in
 lemma mapHomComplexIsoIhom_hom_naturality {K K' : CochainComplex A ℤ} (f : K ⟶ K') :
     U.mapDerivedCategory.map (Q.map (bifunctorHomMapLeft (H := H) (Y := I) f)) ≫
         (mapHomComplexIsoIhom φ I K).hom =
