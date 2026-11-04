@@ -93,7 +93,7 @@ theorem isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor
     choose X d hd using h
     exact Functor.isLeftAdjoint_of_bijective _ d fun Y W ↦ hd Y W
   intro L''
-  obtain ⟨H, hH, d, hd⟩ := exists_bijective_rightDerivedFunctor_map_comp_free e PC PD hPC hR
+  obtain ⟨H, hH, -, d, hd⟩ := exists_bijective_rightDerivedFunctor_map_comp_free e PC PD hPC hR
     (Adjunction.ofIsLeftAdjoint (PC.liftFullSubcategory PD L.rightDerivedFunctor hR)) hPC_F hPD_G
     hcoprod L''.obj ((hPDW _).1 L''.property)
   refine ⟨⟨H, (hPCW H).2 hH⟩, ObjectProperty.homMk d, fun M ↦ ?_⟩

@@ -120,10 +120,11 @@ lemma bijective_map_comp_counit_app_hom {A B : Type*} [Category* A] [Category* B
 
 /-- **The lifted counit on free algebras.** For an object `L'` of the derived category of
 algebras of `G` whose underlying object lies in `P_D`, there are an object `H` of the derived
-category of algebras of `F` whose underlying object lies in `P_C` and a morphism
+category of algebras of `F` whose underlying object is isomorphic to `R' Y` (hence lies in `P_C`),
+`Y` being the underlying object of `L'`, and a morphism
 `d : RW H ⟶ L'` such that `u ↦ RW u ≫ d` is bijective on morphisms `I X ⟶ H` out of free
-algebras on objects `X ∈ P_C`. Here `H` realizes `R' Y`, `Y` being the underlying object of `L'`,
-with its Weil structure, and `d` lifts the counit `RL (R' Y) ⟶ Y`. -/
+algebras on objects `X ∈ P_C`. Here `H` realizes `R' Y` with its Weil structure, and `d` lifts
+the counit `RL (R' Y) ⟶ Y`. -/
 theorem exists_bijective_rightDerivedFunctor_map_comp_free (PC : ObjectProperty (DerivedCategory C))
     (PD : ObjectProperty (DerivedCategory D)) [PC.IsClosedUnderIsomorphisms]
     (hPC : ∀ K, PC K → DerivedCategory.TStructure.t.bounded K)
@@ -136,6 +137,7 @@ theorem exists_bijective_rightDerivedFunctor_map_comp_free (PC : ObjectProperty 
       PreservesColimit (Discrete.functor X) L.rightDerivedFunctor)
     (L' : DerivedCategory (IsoAlgebra G)) (hL' : PD ((forget G).mapDerivedCategory.obj L')) :
     ∃ (H : DerivedCategory (IsoAlgebra F)) (_ : PC ((forget F).mapDerivedCategory.obj H))
+      (_ : Nonempty ((forget F).mapDerivedCategory.obj H ≅ (R'.obj ⟨_, hL'⟩).obj))
       (d : (mapOfNatIso e).rightDerivedFunctor.obj H ⟶ L'),
       ∀ X, PC X → Function.Bijective
         (fun u : (Free.functor F).mapDerivedCategory.obj X ⟶ H ↦
@@ -162,7 +164,7 @@ theorem exists_bijective_rightDerivedFunctor_map_comp_free (PC : ObjectProperty 
     rw [reassoc_of% (derivedStrIso_hom_app_comp_derivedForgetCommIso e H),
       ← Functor.map_comp_assoc, hσ', Functor.map_comp, Category.assoc, ← reassoc_of% hχ, hv']
   obtain ⟨d, hd⟩ := exists_forget_mapDerivedCategory_map_eq G c hc
-  refine ⟨H, hH, d, fun X hX ↦ ?_⟩
+  refine ⟨H, hH, ⟨eH⟩, d, fun X hX ↦ ?_⟩
   obtain ⟨a, ha⟩ := (hPC X hX).1
   have : X.IsGE a := ha
   have : IsIso (derivedFreeComparison e X) := isIso_derivedFreeComparison e hcoprod X a
