@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.ModuleObjectRingedSiteDerivedComparison
+import WeilConjectures.AlgebraicGeometry.ProfinitePointPullbackFlat
 import WeilConjectures.CategoryTheory.DerivedInternalHomSectionsModel.DerivedInternalHomSectionsModel
 import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
@@ -368,8 +369,8 @@ to the finite free module over the pulled-back ring. The resulting local filtere
 colimit is flat. Equivalently the exact inverse image preserves the tensor tests for
 flatness on local generators. The underlying coefficient and action maps are the
 recorded mapMod construction, so transport back gives the asserted property. -/
-@[instance] theorem pullFlat (X : Scheme.{u}) : (pull Λ X).PreservesFlat := by
-  sorry
+@[instance] theorem pullFlat (X : Scheme.{u}) : (pull Λ X).PreservesFlat :=
+  preservesFlat_mapMod_upperStarFromPoint Λ X
 
 /-- The canonical K-flat derived tensor comparison transported to termwise pullback.
 Its maps come from the existing normalized left-derived tensor comparison.
