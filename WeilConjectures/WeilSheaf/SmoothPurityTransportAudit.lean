@@ -76,3 +76,4 @@ import WeilConjectures.WeilSheaf.SmoothPurityThom
 #print axioms AlgebraicGeometry.ProEtaleWeilSheaf.nativeHomSourceShiftIso
 #print axioms AlgebraicGeometry.WeilComplex.nativeConstructibleTensorTateShiftIso
 #print axioms AlgebraicGeometry.WeilComplex.nonempty_upperStar_comp_shriek_iso_of_constant_cohomology
+#print axioms AlgebraicGeometry.WeilComplex.nonempty_trivialLineThom_of_affineLine_constant

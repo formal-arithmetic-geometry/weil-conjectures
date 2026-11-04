@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityDescentSingle
 public import WeilConjectures.WeilSheaf.LowerShriekPackage
 public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 public import WeilConjectures.WeilSheaf.IhomLisse.UpperStarDual
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
 # The Thom functor from compact cohomology of the constant object
@@ -86,5 +87,48 @@ theorem nonempty_upperStar_comp_shriek_iso_of_constant_cohomology (d n : ℤ)
   exact ⟨a ≪≫ Functor.isoWhiskerRight
     (NatIso.ofComponents (fun _ ↦ e.prod (Iso.refl _)) (fun _ ↦ by simp))
       (nativeConstructibleTensor k₀ l Y) ≪≫ nativeConstructibleTensorTateShiftIso d n⟩
+
+end AlgebraicGeometry.WeilComplex
+
+namespace AlgebraicGeometry.WeilComplex
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+  [Fact (ringChar k₀ ≠ l)]
+
+/-- Compact base change transports the constant affine-line calculation to a
+trivial line bundle; the projection formula gives the full Thom functor. -/
+theorem nonempty_trivialLineThom_of_affineLine_constant
+    (e : (derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀))) ≅
+      (WeilSheaf.toComplex.obj
+        (WeilSheaf.tateTwistSheaf k₀ l (Spec (CommRingCat.of k₀)) (-1)))⟦(-2 : ℤ)⟧)
+    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))]
+    (π : Y ⟶ X) (s : Y ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))]
+    (hπ : IsPullback π s (X ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
+    [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :
+    Nonempty (upperStar π ⋙ derivedLowerShriek k₀ l π ≅
+      tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) := by
+  have : s.IsOver (Spec (CommRingCat.of k₀)) :=
+    ⟨hπ.w.symm.trans (comp_over π _)⟩
+  have : IsSeparated (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  obtain ⟨a⟩ := nonempty_upperStarDerivedLowerShriekIso_of_isPullback hπ.flip
+    (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀)))
+  exact nonempty_upperStar_comp_shriek_iso_of_constant_cohomology π (-1) (-2)
+    ((derivedLowerShriek k₀ l π).mapIso (purityUpperStarConstantIso s).symm ≪≫
+      a.symm ≪≫ (upperStar (X ↘ Spec (CommRingCat.of k₀))).mapIso e ≪≫
+      purityUpperStarShiftedTateIso (X ↘ Spec (CommRingCat.of k₀)) (-1) (-2))
 
 end AlgebraicGeometry.WeilComplex
