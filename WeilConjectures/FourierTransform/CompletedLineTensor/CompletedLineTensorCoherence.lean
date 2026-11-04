@@ -6,6 +6,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineTensorOrdinaryData
+public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorComplete
+import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelNormalized
+public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLinePairData
+import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedScalarOrdinaryCoherence
 import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineOrdinaryEvaluation
 public import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
@@ -121,43 +125,10 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
 
-/-- Tensor by a signed line preserves the specified augmented quotient-tower completeness.
-Source: Bhatt--Scholze, Definition 3.5.2; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: tensor by the line and its internal dual are inverse exact equivalences.
-Their derived equivalences preserve products. Balanced tensor reassociation identifies
-the reduction tower of the twist with the twisted reduction tower, respecting every
-transition and the augmentation x mapped to 1 tensor x. Apply the equivalence to the
-augmented Roos triangle. Its first map is the prescribed quotient map and its second
-map is 1 minus the transition shift, proving precisely the recorded completeness. -/
-theorem complete (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
-    (m : ℤ) (K : DerivedCategory (integralTowerModules l E X))
-    (hK : IsDerivedCompleteUnrestricted l E X K) :
-    IsDerivedCompleteUnrestricted l E X ((tensor l E X L m).obj K) := by
-  sorry
-
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] F)
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
   (j : F →ₐ[ℚ_[l]] G)
-
-/-- Existence and uniqueness of all ordinary signed-line comparisons with their
-representative formulas. Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: tensor powers of b use the canonical binary comparison, including its
-multiplication unitor at zero. The negative map is uniquely determined by evaluation
-and becomes an isomorphism after trivializing the line. Define the ordinary comparison
-on pure tensors by ((x tensor a) tensor s) mapped to (x tensor s) tensor b_m(a tensor 1).
-Balancedness and sheafification give an isomorphism natural in the module. A line is
-flat; tensor with it preserves flat-term K-flat complexes. Apply the K-flat localization
-equivalence, using the specified universal counits. The displayed equation fixes the
-derived comparison uniquely and proves independence from the representative. -/
-theorem pairData_existsUnique (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
-    (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
-    (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
-      (completedCoefficientMap l E F ι X) L ≅ N) :
-    ∃! p : PairData l E X F ι L N, IsPairNormalized l E X F ι L N b p := by
-  sorry
 
 /-- The unique normalized ordinary signed-line comparison package.
 Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
@@ -624,6 +595,35 @@ theorem unit_normalization :
         ((completedScalarComparison l E E (AlgHom.id ℚ_[l] E) X).naturality f)
         ((ordinaryUnit l E X).hom.naturality f)
 
+/-- Completed extension of a map out of a complete object is the ordinary extension
+conjugated by chi. Source: Bhatt--Scholze, Proposition 3.5.1
+(blueprint: lem-pur-completed-line-tensor-coherence).
+Proof: naturality of the comparison. -/
+private theorem extension_map_eq {K M : DerivedCategory (integralTowerModules l E X)}
+    (hK : IsDerivedCompleteUnrestricted l E X K) (hM : IsDerivedCompleteUnrestricted l E X M)
+    (f : K ⟶ M) :
+    (integralScalarExtensionOfUniverses l E F ι X).map f =
+      (chi l E X F ι K hK).inv ≫ (completedDerivedScalarExtension l E F ι X).map f ≫
+        (chi l E X F ι M hM).hom := by
+  rw [Iso.eq_inv_comp]
+  exact ((completedScalarComparison l E F ι X).naturality f).symm
+
+/-- The chosen ordinary associator package is normalized.
+Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+private theorem associatorData_normalized :
+    IsAssociatorNormalized l E X F ι G j (associatorData l E X F ι G j) := by
+  unfold associatorData
+  exact (associatorData_existsUnique l E X F ι G j).exists.choose_spec
+
+/-- The chosen ordinary unitor satisfies its good-complex counit formula.
+Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/
+private theorem ordinaryUnit_normalized :
+    ∀ P : (integralOperationsGoodComplex l E X).FullSubcategory,
+      (ordinaryUnit l E X).hom.app (DerivedCategory.Q.obj P.obj) =
+        completedScalarCounit l E E (AlgHom.id ℚ_[l] E) X P.obj ≫
+          DerivedCategory.Q.map ((completedScalarIdentityMultiplication l E X).hom.app P.obj) :=
+  (ordinaryUnit_existsUnique l E X).exists.choose_spec
+
 /-- Both unit laws and the scalar associativity pentagon on derived-complete inputs.
 Source: Stacks 06YY, 07A4; blueprint Proof (3)
 (blueprint: lem-pur-completed-line-tensor-coherence).
@@ -654,7 +654,52 @@ theorem scalar_coherence :
       (associator l F X G j H k ((integralScalarExtensionOfUniverses l E F ι X).obj K)
           (extension_complete l E X F ι K hK)).hom ≫
         (associator l E X F ι H (k.comp j) K hK).hom) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro K hK
+    have hα := associatorData_normalized l E X E (AlgHom.id ℚ_[l] E) F ι
+    have hD := completedDerivedAssociator_source_unit l E X F ι
+      (associatorData l E X E (AlgHom.id ℚ_[l] E) F ι).sheaf
+      (associatorData l E X E (AlgHom.id ℚ_[l] E) F ι).derived hα.1 hα.2
+      (ordinaryUnit l E X) (ordinaryUnit_normalized l E X) K
+    rw [extension_map_eq l E X F ι (extension_complete l E X E (AlgHom.id ℚ_[l] E) K hK) hK]
+    unfold associator unit
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom, Functor.map_comp,
+      Category.assoc, hD]
+    rfl
+  · intro K hK
+    have hα := associatorData_normalized l E X F ι F (AlgHom.id ℚ_[l] F)
+    have hD := completedDerivedAssociator_target_unit l E X F ι
+      (associatorData l E X F ι F (AlgHom.id ℚ_[l] F)).sheaf
+      (associatorData l E X F ι F (AlgHom.id ℚ_[l] F)).derived hα.1 hα.2
+      (ordinaryUnit l F X) (ordinaryUnit_normalized l F X) K
+    unfold associator unit
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom, hD]
+    exact congrArg (_ ≫ ·) ((Category.assoc _ _ _).symm.trans
+      ((congrArg (· ≫ (chi l E X F ι K hK).hom)
+        ((ordinaryUnit l F X).hom.naturality (chi l E X F ι K hK).inv)).trans (by simp)))
+  · intro H _ _ _ k K hK
+    have h₁ := associatorData_normalized l E X F ι G j
+    have h₂ := associatorData_normalized l E X G (j.comp ι) H k
+    have h₃ := associatorData_normalized l F X G j H k
+    have h₄ := associatorData_normalized l E X F ι H (k.comp j)
+    have hP := completedDerivedAssociator_pentagon l E X F ι G j H k
+      (associatorData l E X F ι G j).sheaf (associatorData l E X G (j.comp ι) H k).sheaf
+      (associatorData l F X G j H k).sheaf (associatorData l E X F ι H (k.comp j)).sheaf
+      (associatorData l E X F ι G j).derived (associatorData l E X G (j.comp ι) H k).derived
+      (associatorData l F X G j H k).derived (associatorData l E X F ι H (k.comp j)).derived
+      h₁.1 h₂.1 h₃.1 h₄.1 h₁.2 h₂.2 h₃.2 h₄.2 K
+    rw [extension_map_eq l G X H k
+      (extension_complete l F X G j _ (extension_complete l E X F ι K hK))
+      (extension_complete l E X G (j.comp ι) K hK)]
+    unfold associator
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom, Functor.map_comp,
+      Category.assoc, Iso.hom_inv_id_assoc, Iso.map_hom_inv_id_assoc]
+    rw [← (associatorData l F X G j H k).derived.hom.naturality_assoc, Functor.comp_map,
+      reassoc_of% hP]
+    exact congrArg (fun x ↦ _ ≫ _ ≫ _ ≫ x) (Category.assoc
+      ((associatorData l F X G j H k).derived.hom.app _)
+      ((associatorData l E X F ι H (k.comp j)).derived.hom.app K)
+      (chi l E X H ((k.comp j).comp ι) K hK).hom)
 
 /-- The completed line comparison commutes with a compatible three-field tower.
 Source: blueprint Proof (3), final sentence
@@ -1107,7 +1152,64 @@ theorem canonical_restriction :
         ((sfRationalConstructibleLocalization l E Y).obj K))
         ((sfRationalConstructibleLocalization l E Y).map
           ((sfIntegralScalarUnit l E Y p hl).hom.app K))) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · intro K
+      apply heq_of_eq
+      have hspec := (associatorData_existsUnique l E Y F ι G j).exists.choose_spec
+      obtain ⟨eEL, eLM, eEM, h1, h2, h3, h4⟩ :=
+        exists_scalarModel_associator_comparison l E F G ι j Y _ hspec.1 _ hspec.2
+      have h4K := congrArg (fun z ↦ z.hom.app K.obj) h4
+      simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+        Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+        Functor.whiskerRight_app] at h4K
+      let K' := (sfConstructibleIntegralScalarExtension p l hl E F ι Y).obj K
+      have hK' : IsDerivedCompleteUnrestricted l F Y K'.obj :=
+        extension_complete l E Y F ι K.obj (intrinsic_complete l E Y K)
+      have hEL : (sfIntegralOrdinaryComparison l E F ι Y).app K =
+          eEL.app K.obj ≪≫ chi l E Y F ι K.obj (intrinsic_complete l E Y K) := by
+        apply Iso.ext
+        rw [Iso.app_hom, sfIntegralOrdinaryComparison_hom_app, ← h1]
+        rfl
+      have hFG : (sfIntegralOrdinaryComparison l F G j Y).app K' =
+          eLM.app K'.obj ≪≫ chi l F Y G j K'.obj hK' := by
+        apply Iso.ext
+        rw [Iso.app_hom, sfIntegralOrdinaryComparison_hom_app, ← h2]
+        rfl
+      have hEG : (sfIntegralOrdinaryComparison l E G (j.comp ι) Y).app K =
+          eEM.app K.obj ≪≫ chi l E Y G (j.comp ι) K.obj (intrinsic_complete l E Y K) := by
+        apply Iso.ext
+        rw [Iso.app_hom, sfIntegralOrdinaryComparison_hom_app, ← h3]
+        rfl
+      refine ((sfIntegralScalarComp_existsUnique l E F ι Y p hl G j).exists.choose_spec K).trans ?_
+      rw [← Iso.app_inv, ← Iso.app_inv,
+        ← Iso.app_hom (sfIntegralOrdinaryComparison l E G (j.comp ι) Y) K, hEL, hFG, hEG]
+      unfold associator associatorData
+      simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom,
+        Iso.app_inv, Category.assoc, Functor.map_comp]
+      congr 1
+      rw [← Functor.map_comp_assoc, ← reassoc_of% (eLM.inv.naturality _), ← reassoc_of% h4K]
+      simp
+    · intro K
+      apply heq_of_eq
+      obtain ⟨e, hχ, hu⟩ := exists_scalarModel_unit_comparison l E Y (ordinaryUnit l E Y)
+        (ordinaryUnit_existsUnique l E Y).exists.choose_spec
+      have hK : (sfIntegralOrdinaryComparison l E E (AlgHom.id ℚ_[l] E) Y).inv.app K ≫
+          e.hom.app K.obj =
+          (chi l E Y E (AlgHom.id ℚ_[l] E) K.obj (intrinsic_complete l E Y K)).inv := by
+        rw [← Iso.app_inv, Iso.inv_comp_eq, Iso.eq_comp_inv, Iso.app_hom,
+          sfIntegralOrdinaryComparison_hom_app, ← hχ]
+        rfl
+      refine ((sfIntegralScalarUnit_existsUnique l E Y p hl).exists.choose_spec K).trans ?_
+      rw [← hu, NatTrans.comp_app, ← Category.assoc, hK]
+      rfl
+    · intro K
+      exact (sfRationalScalarComp_existsUnique l E F ι Y p hl G j).exists.choose_spec
+        ((sfRationalConstructibleLocalization l E Y).obj K)
+    · intro K
+      exact (sfRationalScalarUnit_existsUnique l E Y p hl).exists.choose_spec
+        ((sfRationalConstructibleLocalization l E Y).obj K)
 
 end Rational
 end CompletedLineTensor
