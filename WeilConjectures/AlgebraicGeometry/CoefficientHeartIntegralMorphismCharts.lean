@@ -51,10 +51,10 @@ private theorem heartLiftFieldIsometry (ℓ : ℕ) [Fact ℓ.Prime]
       nf.toMetricSpace.toPseudoMetricSpace.toPseudoEMetricSpace
       (PadicAlgCl.normedFieldOfAlgebra ℓ E.1).toMetricSpace.toPseudoMetricSpace.toPseudoEMetricSpace
       ULift.down := by
-  letI nf := (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.1)).toNormedField
-  letI : TopologicalSpace (ULift.{u} E.1) :=
+  let nf := (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.1)).toNormedField
+  let : TopologicalSpace (ULift.{u} E.1) :=
     nf.toMetricSpace.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
   apply @Isometry.of_dist_eq _ _ nf.toMetricSpace.toPseudoMetricSpace
     (PadicAlgCl.normedFieldOfAlgebra ℓ E.1).toMetricSpace.toPseudoMetricSpace
   intro x y
@@ -71,13 +71,8 @@ private theorem heartLiftIntegerMembership (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (x : ULift.{u} E.1) :
     x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.1) ↔
       x.down ∈ PadicAlgCl.integers ℓ E.1 := by
-  have h := (Padic.extension_integers_dvr ℓ (ULift.{u} E.1)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.1))
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E.1))).choose_spec.choose_spec.1 x
-  rw [heartLiftNorm ℓ E] at h
-  exact h.trans (by
-    rw [PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
-    rfl)
+  rw [Padic.mem_coefficientExtensionIntegers, heartLiftNorm ℓ E, PadicAlgCl.mem_integers_iff,
+    ← NNReal.coe_le_coe, coe_nnnorm, NNReal.coe_one]
 
 /-- Restrict ULift.down to the actual integer subrings; no coefficient data is chosen. -/
 private def heartLiftIntegerEquiv (ℓ : ℕ) [Fact ℓ.Prime]
@@ -224,8 +219,8 @@ private theorem heartCoefficientSquare (ℓ : ℕ) [Fact ℓ.Prime]
     heartLiftIntegralScalar.{u} ℓ E ≫ (heartRationalCoefficientIso.{u} ℓ E).hom.hom =
       (heartIntegralCoefficientIso.{u} ℓ E).hom.hom ≫
         padicIntegersRingObjToContinuousMapRingObj ℓ E := by
-  letI nf := (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.1)).toNormedField
-  letI : TopologicalSpace (ULift.{u} E.1) :=
+  let nf := (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.1)).toNormedField
+  let : TopologicalSpace (ULift.{u} E.1) :=
     nf.toMetricSpace.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
   ext S : 3
   apply ConcreteCategory.hom_ext

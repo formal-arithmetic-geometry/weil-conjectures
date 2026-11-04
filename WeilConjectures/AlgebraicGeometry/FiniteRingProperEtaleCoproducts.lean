@@ -13,6 +13,17 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 import WeilConjectures.AlgebraicGeometry.Geometric.GeometricPointPullbackStalk
 import WeilConjectures.AlgebraicGeometry.Finite.Type.FiniteTypeTorsionCohomologicalDimension
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Proper pushforward preserves coproducts for arbitrary finite rings
 
@@ -26,6 +37,88 @@ universe u
 open CategoryTheory Limits ZeroObject
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
+
+private theorem isZero_derivedSections_of_subsingleton_H {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
+    (h : Subsingleton (Sheaf.H F q)) :
+    IsZero ((DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{u + 1} q).obj
+      ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
+  let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let S : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤
+      AddCommGrpCat.{u + 1} := Sheaf.sectionsFunctorAt X.smallEtaleTopology (⊤_ X.Etale)
+  have hS : IsZero ((S.rightDerived q).obj F) :=
+    (Sheaf.subsingleton_H_iff_isZero_rightDerived X.smallEtaleTopology
+      terminalIsTerminal q F).1 h
+  have : ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (Opposite.op (⊤_ X.Etale))).Additive := { map_add := rfl }
+  exact hS.of_iso (Γ.homologyRightDerivedFunctorPlusObjSingleFunctorIso F q ≪≫
+    (NatIso.rightDerived (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology
+      AddCommGrpCat.{u + 1} terminalIsTerminal) q).app F)
+
+private theorem globalSections_isEquivalence
+    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] :
+    (Sheaf.Γ (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).IsEquivalence := by
+  have h := (Scheme.geometricPoint_pullback_stalk Ω).1
+  have : ((sheafSections (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (Opposite.op (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))))).IsEquivalence := h
+  exact Functor.isEquivalence_of_iso
+    (Sheaf.ΓNatIsoSheafSections (Spec (.of Ω)).smallEtaleTopology
+      AddCommGrpCat.{u + 1} (MorphismProperty.Over.mkIdTerminal (@AlgebraicGeometry.Etale) _)).symm
+
+private theorem isZero_higherDirectImage_over_algClosed
+    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] {T : Scheme.{u}}
+    (a : T ⟶ Spec (.of Ω)) [LocallyOfFiniteType a] [QuasiCompact a]
+    (d : ℕ) (hd : topologicalKrullDim T ≤ (d : WithBot ℕ∞))
+    (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : G.IsTorsion)
+    (q : ℕ) (hq : 2 * d < q) :
+    IsZero ((DerivedCategory.Plus.homologyFunctor
+      (Sheaf (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj
+        ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} a).obj
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj G))) := by
+  let Γ := Sheaf.Γ (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}
+  have : Γ.IsEquivalence := globalSections_isEquivalence Ω
+  have : (lowerStar AddCommGrpCat.{u + 1} a).PreservesInjectiveObjects :=
+    Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} a)
+  let L := (DerivedCategory.Plus.singleFunctor
+    (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj G
+  let R := (rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} a).obj L
+  have hz := isZero_derivedSections_of_subsingleton_H G q
+    (Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed d a hd G hG q hq)
+  let e := (Γ.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.app R).symm ≪≫
+    (Functor.rightDerivedFunctorPlusCompIso' (lowerStar AddCommGrpCat.{u + 1} a) Γ
+      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} a)).app L
+  have hz' : IsZero (Γ.obj ((DerivedCategory.Plus.homologyFunctor _ q).obj R)) :=
+    hz.of_iso ((Γ.mapDerivedCategoryPlusHomologyFunctorIso q).app R ≪≫
+      (DerivedCategory.Plus.homologyFunctor _ q).mapIso e)
+  exact IsZero.of_full_of_faithful_of_isZero Γ _ hz'
+
+private theorem torsionHomology_single {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) :
+    DerivedCategory.Plus.torsionHomology X ((DerivedCategory.Plus.singleFunctor _ 0).obj F) := by
+  intro n
+  by_cases hn : n = 0
+  · subst n
+    have : Scheme.IsTorsionSheaf ((𝟭 _).obj F) :=
+      (Scheme.isTorsionSheaf_iff_isTorsion F).2 hF
+    exact Scheme.IsTorsionSheaf.of_iso
+      ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).app F).symm
+  · have hz : IsZero ((DerivedCategory.Plus.homologyFunctor _ n).obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) := by
+      rcases lt_or_gt_of_ne hn with hn | hn
+      · exact DerivedCategory.Plus.isZero_homology_of_isGE _ 0 n hn
+      · exact DerivedCategory.Plus.isZero_homology_of_isLE _ 0 n hn
+    apply (Scheme.isTorsionSheaf_iff_isTorsion _).2
+    apply Sheaf.IsTorsion.of_forall_isAddTorsion
+    intro U x
+    have hx := Functor.map_isZero
+      (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+        (evaluation _ AddCommGrpCat.{u + 1}).obj U) hz
+    have hs : Subsingleton _ := AddCommGrpCat.isZero_iff_subsingleton.mp hx
+    rw [isOfFinAddOrder_iff_nsmul_eq_zero]
+    refine ⟨1, Nat.one_pos, ?_⟩
+    simpa using hs.elim x 0
 
 private theorem abelian_pointwise_bound {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (t : Y) :
