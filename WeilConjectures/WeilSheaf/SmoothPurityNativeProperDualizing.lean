@@ -39,6 +39,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [a.IsOver (Spec (CommRingCat.of k₀))] [IsProper a]
 
 local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+local instance : (boundedConstructible (condensedRingObj
+    (Profinite.padicAlgClRingObj l) (Spec (CommRingCat.of k₀)))).IsMonoidal :=
+  CondensedRing.isMonoidal_boundedConstructible l (CondensedRing.point k₀)
 local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
 local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
