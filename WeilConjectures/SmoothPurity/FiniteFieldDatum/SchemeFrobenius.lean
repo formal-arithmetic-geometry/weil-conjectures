@@ -27,7 +27,6 @@ coefficient operations, as well as the ordinary constant-ring specialization.
 @[expose] public section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u v
 

@@ -71,9 +71,6 @@ public import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
-public import WeilConjectures.AlgebraicGeometry.Picard.DerivedAdjunctionCompatibility
-public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
-public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Singleton extension and arbitrary coefficient change

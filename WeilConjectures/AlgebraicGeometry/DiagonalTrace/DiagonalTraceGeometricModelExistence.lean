@@ -165,7 +165,17 @@ private theorem transportedLineComparison_normalization
   subst v
   exact lineTensorComparison_normalization l E g k p M n U x y
 
-private theorem positivePullback_nonempty
+/-- The normalized tensor comparison and the prescribed root-line pullback give
+positive twist pullback with its required pure-tensor adjoint formula.
+
+Source: latest blueprint `sk-prop-sp-tower-geometric-classes.proof.md`, clause (4).
+(blueprint: lem-sp-tower-class-positive-pullback-existence).
+
+Proof: compose the tensor pullback comparison at the source root line with identity
+tensor the line pullback isomorphism, and transport the endpoints along the equalities
+fixing the positive functors. Adjunction naturality on pure sections gives the
+prescribed normalization. -/
+theorem _root_.AlgebraicGeometry.ProEtale.SpTowerClasses.positivePullback_nonempty
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
@@ -257,7 +267,7 @@ theorem exists_diagonalTraceGeometricModel (l : ℕ) [Fact l.Prime]
   obtain ⟨b, g, ⟨q⟩, ⟨k⟩⟩ := exists_tensorGeometry l (ULift.{u} (Padic l)) f
   obtain ⟨p⟩ := linePullback_nonempty l (ULift.{u} (Padic l))
     f g q k hS cS cX nS nX
-  obtain ⟨v⟩ := positivePullback_nonempty l (ULift.{u} (Padic l)) g k tS tX p
+  obtain ⟨v⟩ := SpTowerClasses.positivePullback_nonempty l (ULift.{u} (Padic l)) g k tS tX p
   let G : Model l (ULift.{u} (Padic l)) b S X f cS cX tS tX := {
     model := m
     over_eq := hm
