@@ -30,8 +30,16 @@ datum (`AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`).
 
 The input is the compatibility of the canonical orientation with base change
 (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`, blueprint
-`sk-prop-sp-purity-bc` at the unit), a node of the smooth purity section which the library does
-not prove yet.
+`sk-prop-sp-purity-bc` at the unit), a node of the smooth purity section (`sec-smooth-purity`)
+which the library does not prove yet and which that section owns. Its proof is the base change
+of each step of the diagonal construction of
+`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`:
+the smooth base change of the dualizing complex of the first projection
+(`AlgebraicGeometry.Etale.dualizingComplexPullbackFstIso`) and the fundamental class of the
+diagonal as a closed section (`AlgebraicGeometry.Etale.sectionInvariantTwistShiftIsoOfSection`,
+through the Kummer classes); see SGA 4, Exposé XVIII, Théorème 2.9 (Var 4). The `ℚ̄_ℓ` statement
+`AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation_baseChange` is about condensed
+coefficients and does not give it.
 
 ## Main statements
 
