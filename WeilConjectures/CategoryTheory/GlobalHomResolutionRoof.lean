@@ -20,6 +20,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedInternalHomSectionsModel.DerivedInternalHomSectionsModel
 public import WeilConjectures.CategoryTheory.SmoothPurity.HomComplexGlobalHomotopyOfUniverses
 import all WeilConjectures.CategoryTheory.DerivedInternalHomSectionsModel.DerivedInternalHomSectionsModel
@@ -700,6 +701,198 @@ theorem globalHom_resolution_roof_shift_fields
   -- The graded shift calculation is isolated in this named interface.
   sorry
 
+section CompositionChainMap
+
+omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)]
+
+/-- Composition of cochains `g ⊗ f ↦ f.comp g`, as a `B`-bilinear map in fixed degrees.
+Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+def globalLinearHomCompBilin (X Y Z : CochainComplex A ℤ) (r s n : ℤ) (h : r + s = n) :
+    Cochain Y Z r →ₗ[B] Cochain X Y s →ₗ[B] Cochain X Z n :=
+  LinearMap.mk₂ B (fun g f ↦ f.comp g (by omega))
+    (fun _ _ _ ↦ Cochain.comp_add _ _ _ _)
+    (fun _ _ _ ↦ Cochain.comp_smul _ _ _ _)
+    (fun _ _ _ ↦ Cochain.add_comp _ _ _ _)
+    (fun _ _ _ ↦ Cochain.smul_comp _ _ _ _)
+
+/-- The degree-`n` component of composition, out of the total-tensor coproduct.
+Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+def globalLinearHomCompTerm (X Y Z : CochainComplex A ℤ) (n : ℤ) :
+    (globalLinearHom B Y Z ⊗ globalLinearHom B X Y).X n ⟶ (globalLinearHom B X Z).X n :=
+  HomologicalComplex.mapBifunctorDesc (fun r s h ↦
+    ModuleCat.ofHom (TensorProduct.lift (globalLinearHomCompBilin B X Y Z r s n h)))
+
+private theorem roof_compTerm_ι (X Y Z : CochainComplex A ℤ) (r s n : ℤ) (h : r + s = n) :
+    HomologicalComplex.ιTensorObj (globalLinearHom B Y Z) (globalLinearHom B X Y) r s n h ≫
+      globalLinearHomCompTerm B X Y Z n =
+    ModuleCat.ofHom (TensorProduct.lift (globalLinearHomCompBilin B X Y Z r s n h)) :=
+  HomologicalComplex.ι_mapBifunctorDesc _ r s h
+
+/-- Composition commutes with the differentials, by the Leibniz rule
+`δ (f.comp g) = f.comp (δ g) + (-1)^|g| (δ f).comp g`.
+Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+theorem globalLinearHomComp_comm (X Y Z : CochainComplex A ℤ) (n m : ℤ) :
+    globalLinearHomCompTerm B X Y Z n ≫ (globalLinearHom B X Z).d n m =
+      (globalLinearHom B Y Z ⊗ globalLinearHom B X Y).d n m ≫
+        globalLinearHomCompTerm B X Y Z m := by
+  by_cases hnm : n + 1 = m
+  · apply HomologicalComplex.mapBifunctor.hom_ext
+    intro r s h
+    change r + s = n at h
+    change HomologicalComplex.ιTensorObj _ _ r s n h ≫ _ =
+      HomologicalComplex.ιTensorObj _ _ r s n h ≫ _
+    rw [← Category.assoc, roof_compTerm_ι, ← Category.assoc,
+      CochainComplex.ιTensorObj_d _ _ r s n m h hnm]
+    rw [Preadditive.add_comp, Linear.units_smul_comp]
+    simp only [Category.assoc, roof_compTerm_ι]
+    apply ModuleCat.MonoidalCategory.tensor_ext
+    intro g f
+    simp only [ModuleCat.hom_add, ModuleCat.hom_comp, LinearMap.add_apply,
+      LinearMap.comp_apply, Units.smul_def, ModuleCat.hom_zsmul, LinearMap.smul_apply,
+      ModuleCat.MonoidalCategory.whiskerRight_apply, ModuleCat.MonoidalCategory.whiskerLeft_apply,
+      ModuleCat.hom_ofHom]
+    change δ n m (f.comp g (by omega)) = f.comp (δ r (r + 1) g) (by omega) +
+      (r.negOnePow : ℤ) • (δ s (s + 1) f).comp g (by omega)
+    rw [δ_comp f g (by omega) (s + 1) (r + 1) m (by omega) rfl rfl, Units.smul_def]
+  · have hn : ¬ (ComplexShape.up ℤ).Rel n m := hnm
+    rw [(globalLinearHom B X Z).shape n m hn,
+      (globalLinearHom B Y Z ⊗ globalLinearHom B X Y).shape n m hn]
+    simp
+
+/-- Ordinary composition `H(Y,Z) ⊗ H(X,Y) ⟶ H(X,Z)`, `g ⊗ f ↦ f.comp g`.
+Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+def globalLinearHomComp (X Y Z : CochainComplex A ℤ) :
+    globalLinearHom B Y Z ⊗ globalLinearHom B X Y ⟶ globalLinearHom B X Z where
+  f := globalLinearHomCompTerm B X Y Z
+  comm' n m _ := globalLinearHomComp_comm B X Y Z n m
+
+/-- The pure-tensor formula for ordinary composition.
+Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+theorem globalLinearHomComp_formula (X Y Z : CochainComplex A ℤ) (r s n : ℤ) (h : r + s = n)
+    (g : Cochain Y Z r) (f : Cochain X Y s) :
+    (globalLinearHomComp B X Y Z).f n
+        (HomologicalComplex.ιTensorObj (globalLinearHom B Y Z) (globalLinearHom B X Y)
+          r s n h (g ⊗ₜ[B] f)) = f.comp g (by omega) :=
+  congrArg (fun φ ↦ φ.hom (g ⊗ₜ[B] f)) (roof_compTerm_ι B X Y Z r s n h)
+
+private theorem roof_tensor_ext {K L M : CochainComplex (ModuleCat.{v} B) ℤ}
+    {φ ψ : K ⊗ L ⟶ M}
+    (h : ∀ (r s n : ℤ) (h : r + s = n) (x : K.X r) (y : L.X s),
+      φ.f n (HomologicalComplex.ιTensorObj K L r s n h (x ⊗ₜ[B] y)) =
+        ψ.f n (HomologicalComplex.ιTensorObj K L r s n h (x ⊗ₜ[B] y))) : φ = ψ := by
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro r s hrs
+  apply ModuleCat.MonoidalCategory.tensor_ext
+  intro x y
+  exact h r s n hrs x y
+
+private theorem roof_whiskerLeft_apply (K : CochainComplex (ModuleCat.{v} B) ℤ)
+    {L L' : CochainComplex (ModuleCat.{v} B) ℤ} (φ : L ⟶ L')
+    (r s n : ℤ) (h : r + s = n) (x : K.X r) (y : L.X s) :
+    (K ◁ φ).f n (HomologicalComplex.ιTensorObj K L r s n h (x ⊗ₜ[B] y)) =
+      HomologicalComplex.ιTensorObj K L' r s n h (x ⊗ₜ[B] φ.f s y) :=
+  congrArg (fun ψ ↦ ψ.hom (x ⊗ₜ[B] y)) (CochainComplex.ιTensorObj_whiskerLeft_f K φ r s n h)
+
+private theorem roof_whiskerRight_apply {K K' : CochainComplex (ModuleCat.{v} B) ℤ}
+    (φ : K ⟶ K') (L : CochainComplex (ModuleCat.{v} B) ℤ)
+    (r s n : ℤ) (h : r + s = n) (x : K.X r) (y : L.X s) :
+    (φ ▷ L).f n (HomologicalComplex.ιTensorObj K L r s n h (x ⊗ₜ[B] y)) =
+      HomologicalComplex.ιTensorObj K' L r s n h (φ.f r x ⊗ₜ[B] y) :=
+  congrArg (fun ψ ↦ ψ.hom (x ⊗ₜ[B] y)) (CochainComplex.Monoidal.ι_whiskerRight φ r s n h)
+
+/-- Composition is natural in the source: `j ∘ comp = A ∘ (1 ⊗ j)`.
+Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+theorem globalLinearHomComp_precomp {X X' Y Z : CochainComplex A ℤ} (a : X' ⟶ X) :
+    globalLinearHomComp B X Y Z ≫ globalLinearHomMap B a (𝟙 Z) =
+      globalLinearHom B Y Z ◁ globalLinearHomMap B a (𝟙 Y) ≫ globalLinearHomComp B X' Y Z := by
+  apply roof_tensor_ext
+  intro r s n h g f
+  simp only [HomologicalComplex.comp_f, ModuleCat.hom_comp, LinearMap.comp_apply]
+  erw [roof_whiskerLeft_apply, globalLinearHomComp_formula, globalLinearHomComp_formula]
+  change (Cochain.ofHom a).comp ((f.comp g _).comp (Cochain.ofHom (𝟙 Z)) (add_zero n))
+      (zero_add n) =
+    ((Cochain.ofHom a).comp (f.comp (Cochain.ofHom (𝟙 Y)) (add_zero s)) (zero_add s)).comp g _
+  simp
+
+/-- Composition is dinatural in the middle variable: `A ∘ (1 ⊗ p) = B' ∘ (j ⊗ 1)`.
+Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+theorem globalLinearHomComp_middle {X Y Y' Z : CochainComplex A ℤ} (b : Y ⟶ Y') :
+    globalLinearHom B Y' Z ◁ globalLinearHomMap B (𝟙 X) b ≫ globalLinearHomComp B X Y' Z =
+      globalLinearHomMap B b (𝟙 Z) ▷ globalLinearHom B X Y ≫ globalLinearHomComp B X Y Z := by
+  apply roof_tensor_ext
+  intro r s n h g f
+  simp only [HomologicalComplex.comp_f, ModuleCat.hom_comp, LinearMap.comp_apply]
+  erw [roof_whiskerLeft_apply, roof_whiskerRight_apply, globalLinearHomComp_formula,
+    globalLinearHomComp_formula]
+  change ((Cochain.ofHom (𝟙 X)).comp (f.comp (Cochain.ofHom b) (add_zero s)) (zero_add s)).comp
+      g _ =
+    f.comp ((Cochain.ofHom b).comp (g.comp (Cochain.ofHom (𝟙 Z)) (add_zero r)) (zero_add r)) _
+  simp
+
+/-- Composition is natural in the target: `p ∘ comp = B' ∘ (p ⊗ 1)`.
+Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+theorem globalLinearHomComp_postcomp {X Y Z Z' : CochainComplex A ℤ} (c : Z ⟶ Z') :
+    globalLinearHomComp B X Y Z ≫ globalLinearHomMap B (𝟙 X) c =
+      globalLinearHomMap B (𝟙 Y) c ▷ globalLinearHom B X Y ≫ globalLinearHomComp B X Y Z' := by
+  apply roof_tensor_ext
+  intro r s n h g f
+  simp only [HomologicalComplex.comp_f, ModuleCat.hom_comp, LinearMap.comp_apply]
+  erw [roof_whiskerRight_apply, globalLinearHomComp_formula, globalLinearHomComp_formula]
+  change (Cochain.ofHom (𝟙 X)).comp ((f.comp g _).comp (Cochain.ofHom c) (add_zero n))
+      (zero_add n) =
+    f.comp ((Cochain.ofHom (𝟙 Y)).comp (g.comp (Cochain.ofHom c) (add_zero r)) (zero_add r)) _
+  simp
+
+end CompositionChainMap
+
+omit [HasDerivedCategory.{w} A] in
+/-- Abstract composition roof: if `c₁, c₂, c₃` satisfy roof equations along `a, b, e`, with the
+final precomposition by `a` invertible after `Q`, then they are compatible with composition.
+Source: Stacks 09L9, 06XY (blueprint: lem-sf-global-hom-resolution-roof-composition-fields).
+Proof: naturality of `μ` and the three naturality squares of composition; cancel `Q.map j`. -/
+theorem globalLinearHomComp_roof {X Y Z X' Y' Z' : CochainComplex A ℤ}
+    (a : X ⟶ X') (b : Y ⟶ Y') (e : Z ⟶ Z')
+    (c₁ : DerivedCategory.Q.obj (globalLinearHom B Y Z) ⟶
+      DerivedCategory.Q.obj (globalLinearHom B Y' Z'))
+    (c₂ : DerivedCategory.Q.obj (globalLinearHom B X Y) ⟶
+      DerivedCategory.Q.obj (globalLinearHom B X' Y'))
+    (c₃ : DerivedCategory.Q.obj (globalLinearHom B X Z) ⟶
+      DerivedCategory.Q.obj (globalLinearHom B X' Z'))
+    (h₁ : c₁ ≫ DerivedCategory.Q.map (globalLinearHomMap B b (𝟙 Z')) =
+      DerivedCategory.Q.map (globalLinearHomMap B (𝟙 Y) e))
+    (h₂ : c₂ ≫ DerivedCategory.Q.map (globalLinearHomMap B a (𝟙 Y')) =
+      DerivedCategory.Q.map (globalLinearHomMap B (𝟙 X) b))
+    (h₃ : c₃ ≫ DerivedCategory.Q.map (globalLinearHomMap B a (𝟙 Z')) =
+      DerivedCategory.Q.map (globalLinearHomMap B (𝟙 X) e))
+    [IsIso (DerivedCategory.Q.map (globalLinearHomMap B a (𝟙 Z')))] :
+    (c₁ ⊗ₘ c₂) ≫
+        Functor.LaxMonoidal.μ DerivedCategory.Q (globalLinearHom B Y' Z')
+          (globalLinearHom B X' Y') ≫
+        DerivedCategory.Q.map (globalLinearHomComp B X' Y' Z') =
+      Functor.LaxMonoidal.μ DerivedCategory.Q (globalLinearHom B Y Z)
+        (globalLinearHom B X Y) ≫ DerivedCategory.Q.map (globalLinearHomComp B X Y Z) ≫ c₃ := by
+  apply (cancel_mono (DerivedCategory.Q.map (globalLinearHomMap B a (𝟙 Z')))).mp
+  simp only [Category.assoc, h₃]
+  rw [← Functor.map_comp, globalLinearHomComp_precomp, Functor.map_comp,
+    ← Functor.LaxMonoidal.μ_natural_right_assoc,
+    MonoidalCategory.tensorHom_def (C := DerivedCategory (ModuleCat.{v} B)),
+    Category.assoc, ← whiskerLeft_comp_assoc, h₂,
+    Functor.LaxMonoidal.μ_natural_right_assoc, ← Functor.map_comp,
+    globalLinearHomComp_middle, Functor.map_comp,
+    ← Functor.LaxMonoidal.μ_natural_left_assoc, ← comp_whiskerRight_assoc, h₁,
+    Functor.LaxMonoidal.μ_natural_left_assoc, ← Functor.map_comp,
+    ← globalLinearHomComp_postcomp, Functor.map_comp]
+
+private theorem roof_conj_roof {X X' Y Y' : CochainComplex A ℤ}
+    (a : HomotopyEquiv X X') (b : HomotopyEquiv Y Y') :
+    DerivedCategory.Q.map (globalLinearHomMap B a.inv b.hom) ≫
+        DerivedCategory.Q.map (globalLinearHomMap B a.hom (𝟙 Y')) =
+      DerivedCategory.Q.map (globalLinearHomMap B (𝟙 X) b.hom) := by
+  rw [roof_Q_comp]
+  exact roof_homotopy_invariance B _ _ _ _ ⟨a.homotopyHomInvId⟩
+    ⟨Homotopy.ofEq (Category.comp_id _)⟩
+
 /-- Ordinary composition out of the total tensor exists, and is compatible with every `c`
 satisfying the roof equation and every `comparison` given by conjugation with representing
 homotopy equivalences (the hypotheses of the two coherence fields).
@@ -722,8 +915,18 @@ theorem globalHom_resolution_roof_composition_fields
     (comparison : ∀ (X Y : CochainComplex A ℤ) (R R' : GlobalHomResolution X)
       (S S' : GlobalHomResolution Y), globalResolvedHom B R S ≅ globalResolvedHom B R' S') :
     Nonempty (GlobalHomResolutionRoofCompositionFields B c comparison) := by
-  -- The signed total-tensor coherence is isolated in this named interface.
-  sorry
+  refine ⟨⟨globalLinearHomComp B, globalLinearHomComp_formula B, ?_, ?_⟩⟩
+  · intro hc X Y Z R S T
+    have := roof_precomp_quasiIso B R.ι (J := T.I)
+    exact globalLinearHomComp_roof B R.ι S.ι T.ι _ _ _ (hc Y Z S T) (hc X Y R S)
+      (hc X Z R T)
+  · intro hcomp X Y Z R R' S S' T T'
+    have := roof_precomp_quasiIso B (roof_e R R').hom (J := T'.I)
+    rw [hcomp X Y R R' S S' _ _ (roof_e_comm R R') (roof_e_comm S S'),
+      hcomp Y Z S S' T T' _ _ (roof_e_comm S S') (roof_e_comm T T'),
+      hcomp X Z R R' T T' _ _ (roof_e_comm R R') (roof_e_comm T T')]
+    exact globalLinearHomComp_roof B (roof_e R R').hom (roof_e S S').hom (roof_e T T').hom
+      _ _ _ (roof_conj_roof B _ _) (roof_conj_roof B _ _) (roof_conj_roof B _ _)
 
 /-- The unit roof (for every `c` satisfying the roof equation and every `unit` given by the
 scalar formula) and the cohomology interpretation of resolved Hom.
