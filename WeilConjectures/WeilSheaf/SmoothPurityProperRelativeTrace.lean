@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityFieldTrace
+public import WeilConjectures.WeilSheaf.SmoothPurityTraceDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.SmoothProjection
 
 /-!
@@ -79,5 +80,21 @@ theorem isIso_homEquiv_baseChangedProperTrace [IsIso γ] [IsIso v] [WeaklyEtale 
   rw [homEquiv_baseChangedProperTrace]
   have := isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale l d sq N
   infer_instance
+
+/-- The same universal property, on ambient derived morphisms from a constructible
+complex. This is the form needed by the free Weil resolution. -/
+theorem bijective_map_comp_baseChangedProperTrace [IsIso γ] [IsIso v] [WeaklyEtale πY]
+    (d : ℕ) [SmoothOfRelativeDimension d f.left]
+    (K : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj l⟧) :
+    Function.Bijective fun φ : K.obj ⟶
+        ((boundedConstructibleUpperStarOfMap l πX).obj P).obj ↦
+      (lowerStar (Profinite.padicAlgClRingObj l) f'.left).rightDerivedFunctor.map φ ≫
+        (baseChangedProperTrace l f f' sq γ v).hom := by
+  have := isIso_homEquiv_baseChangedProperTrace l f f' sq γ v d
+  exact ObjectProperty.bijective_map_comp_hom_of_isIso_homEquiv _ _
+    (lowerStar (Profinite.padicAlgClRingObj l) f'.left).rightDerivedFunctor
+    (fun M hM ↦ boundedConstructible_rightDerivedLowerStar_obj l f' ⟨M, hM⟩)
+    (lowerStarUpperShriekAdjunction l f')
+    (baseChangedProperTrace l f f' sq γ v) K.obj K.property
 
 end AlgebraicGeometry.ProEtale.CondensedRing

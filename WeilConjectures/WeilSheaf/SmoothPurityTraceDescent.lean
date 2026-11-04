@@ -86,6 +86,31 @@ lemma bijective_map_comp_of_isIso_homEquiv
 
 end CategoryTheory.Adjunction
 
+namespace CategoryTheory.ObjectProperty
+
+/-- A trace with invertible adjoint on full subcategories is universal on the
+underlying morphisms from objects of the source subcategory. -/
+lemma bijective_map_comp_hom_of_isIso_homEquiv
+    {C D : Type*} [Category C] [Category D] (PC : ObjectProperty C)
+    (PD : ObjectProperty D) (L : C ⥤ D) (hL : ∀ K, PC K → PD (L.obj K))
+    {R : PD.FullSubcategory ⥤ PC.FullSubcategory}
+    (adj : PC.liftFullSubcategory PD L hL ⊣ R)
+    {P : PC.FullSubcategory} {N : PD.FullSubcategory}
+    (ε : (PC.liftFullSubcategory PD L hL).obj P ⟶ N)
+    [IsIso (adj.homEquiv P N ε)] (K : C) (hK : PC K) :
+    Function.Bijective fun φ : K ⟶ P.obj ↦ L.map φ ≫ ε.hom := by
+  have hb := Adjunction.bijective_map_comp_of_isIso_homEquiv adj ε ⟨K, hK⟩
+  constructor
+  · intro φ ψ h
+    have hh := hb.1 (a₁ := PC.homMk φ) (a₂ := PC.homMk ψ)
+      (ObjectProperty.hom_ext _ h)
+    exact congrArg InducedCategory.Hom.hom hh
+  · intro ψ
+    obtain ⟨φ, hφ⟩ := hb.2 (PD.homMk ψ)
+    exact ⟨φ.hom, congrArg InducedCategory.Hom.hom hφ⟩
+
+end CategoryTheory.ObjectProperty
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 universe u
