@@ -46,7 +46,7 @@ attribute [local implicit_reducible] GeneralAlgebraicallyClosedCoefficients.Stag
   pbcFiniteField pbcFiniteFieldField pbcFiniteFieldAlgebra
 
 /-- The integral-to-rational localization, viewed in the named coefficient stage. -/
-private def QS (E : Padic.FiniteCoefficientFields l Ω) :
+def QS (E : Padic.FiniteCoefficientFields l Ω) :
     sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T ⥤
       GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E :=
   sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) T
@@ -100,7 +100,8 @@ private theorem scalarFactors {E L : Padic.FiniteCoefficientFields l Ω} (h : E 
   with_unfolding_all exact h
 
 omit [IsAlgClosure ℚ_[l] Ω] [AlgebraicGeometry.IsNoetherian T] dT iT in
-private theorem scalarFactors' {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :
+/-- The framework transition is the localization of the integral transition. -/
+theorem scalarFactors' {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :
     QS l Ω T E ⋙ scalar l Ω T h = U l Ω T h ⋙ QS l Ω T L := by
   unfold scalar GeneralAlgebraicallyClosedCoefficients.transition
   exact scalarFactors l Ω T h
@@ -336,7 +337,8 @@ private theorem copy_eqToIso_commShift
   cases commShift_eq_of_heq J cJ cJ' hcJ
   exact hc'
 
-private theorem stageFactorsJ (family : RationalFamily l Ω T stage)
+/-- The supplied rational functor is the localization of the integral identity functor. -/
+theorem stageFactorsJ (family : RationalFamily l Ω T stage)
     (E : Padic.FiniteCoefficientFields l Ω) :
     QS l Ω T E ⋙ J l Ω T stage family E = I l Ω T stage E ⋙ pbcStageLocalization l Ω T E := by
   have hJ : J l Ω T stage family E = suppliedJ l Ω T stage E := eq_of_heq (family.identity E)
