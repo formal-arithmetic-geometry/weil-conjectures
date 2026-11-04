@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Adjunction.Limits
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 public import WeilConjectures.CategoryTheory.Grothendieck.GrothendieckTopos
+public import WeilConjectures.TraceFormula.InverseSystemSitePoint
 public import Mathlib.CategoryTheory.Sites.Point.Basic
 public import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
 import Mathlib.CategoryTheory.ObjectProperty.FunctorCategory.PreservesLimits
@@ -34,6 +35,9 @@ Grothendieck topology, as in the dependency def-weil-pbc-sites-and-cohomology.
 @[expose] public section
 
 set_option autoImplicit false
+
+-- This proof-only module intentionally exports no declarations.
+set_option linter.privateModule false
 
 universe w u
 

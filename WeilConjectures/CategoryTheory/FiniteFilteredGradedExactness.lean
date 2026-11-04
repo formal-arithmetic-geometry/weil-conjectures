@@ -52,10 +52,6 @@ def IsStrict {A B : FilteredObject C} (f : A ⟶ B) : Prop :=
     imageSubobject (restrictionSteps f p ≫ (B.filtration.step p).arrow) =
       imageSubobject f.hom ⊓ B.filtration.step p
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end FilteredObject
 
 end CategoryTheory

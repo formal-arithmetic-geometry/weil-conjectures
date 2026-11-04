@@ -37,13 +37,6 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The unit-normalized identification of the intrinsic finite pullback with the
 recorded tensor pullback. Both factors are the existing adjunction comparisons;
 no isomorphism is chosen here.

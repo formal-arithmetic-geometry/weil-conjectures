@@ -8,8 +8,10 @@ module
 public import WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationModels
 public import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitModels
 
-import WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullbackEvaluation
-import WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackSuccessor
+import all WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationModels
+import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitModels
+import all WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullbackEvaluation
+import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackSuccessor
 
 /-! # Private finite-level pullback comparison for ordinary quotient systems
 
@@ -202,6 +204,10 @@ private def inverseEvaluation {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
   let adjn := coefficientProEtaleModuleAdjunction.{t, u} f
     (CommRingCat.of (ULift.{t + 1} (finiteCoefficientRing l E (n + 1))))
   let d := directEvaluation l E f n
+  have : ((𝟭 ℕ).prod (proEtaleBaseChange f)).IsContinuous
+      (coefficientSequenceTopology (ProEt.topology Y))
+      (coefficientSequenceTopology (ProEt.topology X)) :=
+    integralComparisonSequenceBaseChange_continuous f
   have : IsIso ((mateEquiv adj adjn).symm d.hom).natTrans :=
     SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
       (ProEt.topology Y) (ProEt.topology X) (proEtaleBaseChange f)
