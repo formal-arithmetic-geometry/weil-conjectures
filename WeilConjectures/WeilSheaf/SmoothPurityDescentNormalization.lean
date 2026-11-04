@@ -20,6 +20,8 @@ universe w₀ w w' v v' u u'
 
 open CategoryTheory Limits
 
+open scoped CategoryTheory.Obj
+
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 variable {A : Type*} [Category A] [Abelian A]
@@ -65,11 +67,19 @@ lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
       (traceDescentComparison e T α S β).inv.app (DerivedCategory.Qh.obj K) =
       DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app K) ≫
         (Functor.mapDerivedCategoryCompRightDerivedFunctorUnit T (mapOfNatIso e)).app K := by
+  have h₁ : (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit L₀ S).app K ≫
+      (Functor.rightDerivedFunctorCompMapDerivedCategoryIso L₀ S).inv.app
+        (DerivedCategory.Qh.obj K) = (L₀ ⋙ S).rightDerivedFunctorUnit.app K := by
+    simp [Functor.rightDerivedFunctorCompMapDerivedCategoryIso]
+  have h₂ : (L₀ ⋙ S).rightDerivedFunctorUnit.app K ≫
+      (Functor.rightDerivedFunctorNatIso β).hom.app (DerivedCategory.Qh.obj K) =
+        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app K) ≫
+          (T ⋙ mapOfNatIso e).rightDerivedFunctorUnit.app K := by
+    simp [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
   simp only [traceDescentComparison, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
-    Functor.rightDerivedFunctorCompMapDerivedCategoryIso, Functor.rightDerivedNatIso_inv,
-    Functor.rightDerivedNatTrans_app_assoc, Functor.rightDerivedFunctorNatIso,
-    Functor.rightDerivedFunctorNatTrans, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
-  rw [rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac]
+    Category.assoc]
+  rw [reassoc_of% h₁, reassoc_of% h₂,
+    rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac]
 
 /-- The derived-unit normalization with the source unit expanded. -/
 lemma traceDescentComparison_inv_fac' (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)

@@ -23,6 +23,8 @@ universe u
 
 open CategoryTheory Limits
 
+open scoped CategoryTheory.Obj
+
 namespace CategoryTheory.Adjunction
 
 variable {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
