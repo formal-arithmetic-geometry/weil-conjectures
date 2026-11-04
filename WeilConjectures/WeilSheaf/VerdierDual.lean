@@ -13,6 +13,7 @@ public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.SmoothPurity
+import WeilConjectures.WeilSheaf.TateTwistPullback
 import WeilConjectures.WeilSheaf.VerdierExchange
 import WeilConjectures.WeilSheaf.VerdierBiduality
 import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
@@ -282,6 +283,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [HasUpperShriek k₀ l f]
 
+set_option linter.unusedSectionVars false in
 /-- **Smooth purity for Weil complexes** (blueprint:
 `thm-pur-weil-equivariance-of-purity-and-trace`, the equivariance of the smooth purity
 isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`): for a morphism `f : X ⟶ Y` smooth of relative
@@ -291,8 +293,10 @@ isomorphism is stated here. -/
 theorem nonempty_upperShriek_iso_of_smoothOfRelativeDimension (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     Nonempty (upperShriek (k₀ := k₀) (l := l) f ≅
-      (tateTwist k₀ l Y d ⋙ shiftFunctor (WeilComplex k₀ l Y) (2 * d : ℤ)) ⋙ upperStar f) :=
-  sorry
+      (tateTwist k₀ l Y d ⋙ shiftFunctor (WeilComplex k₀ l Y) (2 * d : ℤ)) ⋙ upperStar f) := by
+  obtain ⟨adj⟩ := nonempty_derivedLowerShriek_adjunction_of_smooth (k₀ := k₀) (l := l) f d
+  exact ⟨(derivedLowerShriekUpperShriekAdjunction f).rightAdjointUniq adj ≪≫
+    (tateTwistShiftCompUpperStarIso f d (2 * d : ℤ)).symm⟩
 
 end RelativePurity
 
