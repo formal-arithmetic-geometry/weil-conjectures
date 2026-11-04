@@ -27,6 +27,9 @@ and 05QB (blueprint: lem-pur-module-restriction-kernel-comparison).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
 universe u w uB vB uD vD
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.ModuleRestrictionKernel
@@ -89,7 +92,6 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   {W T : C} (m : W ⟶ T)
 
 omit [HasWeakSheafify J RingCat.{u}] in
-omit [HasWeakSheafify J RingCat.{u}] in
 /-- The canonical scalar-forgetting kernel isomorphism on each object.
 Source: Stacks, 03DA/03FD
 (blueprint: lem-pur-module-restriction-kernel-comparison). -/
@@ -122,14 +124,28 @@ Source: Stacks, 03DA/03FD
 def kernelIdentity : S J A m ⋙ v A ≅ V J A ⋙ S₀ J m :=
   NatIso.ofComponents (kernelIdentityObj J A m) (kernelIdentity_naturality J A m)
 
+/-- The restriction-kernel functor on modules is additive.
+Source: Stacks, 093X (blueprint: lem-pur-module-restriction-kernel-comparison). -/
+instance sAdditive : (S J A m).Additive where
+  map_add {M N f g} := by
+    apply (cancel_mono (kernel.ι _)).1
+    simp [S]
+
+/-- The restriction-kernel functor on abelian sheaves is additive.
+Source: Stacks, 093X (blueprint: lem-pur-module-restriction-kernel-comparison). -/
+instance s₀Additive : (S₀ J m).Additive where
+  map_add {M N f g} := by
+    apply (cancel_mono (kernel.ι _)).1
+    simp [S₀]
+
 private def inclusion : S₀ J m ⟶ G₀ J T where
   app M := kernel.ι ((restriction₀ J m).app M)
   naturality _ _ _ := kernel.lift_ι _ _ _
 
-omit [HasWeakSheafify J RingCat.{u}] in
 variable [HasDerivedCategory.{w} (Modules J A)]
   [HasDerivedCategory.{w} (Sheaf J AddCommGrpCat.{u})]
   [HasDerivedCategory.{w} (ModuleCat.{u} A)] [HasDerivedCategory.{w} AddCommGrpCat.{u}]
+  [EnoughInjectives (Modules J A)] [EnoughInjectives (Sheaf J AddCommGrpCat.{u})]
 
 /-- The canonical derived comparison induced by the identity on restriction kernels.
 Source: Stacks, 03FD/05TI/05TH, restriction-kernel refinement
@@ -138,10 +154,4 @@ def comparison :
     (S J A m).rightDerivedFunctorPlus ⋙ (v A).mapDerivedCategoryPlus ⟶
       (V J A).mapDerivedCategoryPlus ⋙ (S₀ J m).rightDerivedFunctorPlus :=
   Functor.rightDerivedFunctorPlusBaseChange (kernelIdentity J A m).hom
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [HasWeakSheafify J RingCat.{u}]
-  [HasDerivedCategory.{w} (Sheaf J AddCommGrpCat.{u})]
-  [HasDerivedCategory.{w} AddCommGrpCat.{u}] in
 end CategoryTheory.ModuleRestrictionKernel

@@ -8280,6 +8280,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.DualFiniteFreeQuotientEmbedding
 public import WeilConjectures.AlgebraicGeometry.Modules.DualLocalEvaluation
 public import WeilConjectures.AlgebraicGeometry.Modules.DualMapLocalRetraction
+public import WeilConjectures.AlgebraicGeometry.Modules.DualRank
 public import WeilConjectures.AlgebraicGeometry.Modules.DualRetractionKey
 public import WeilConjectures.AlgebraicGeometry.Modules.DualRetractionOfLocalSection
 public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism

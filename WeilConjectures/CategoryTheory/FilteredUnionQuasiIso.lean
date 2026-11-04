@@ -121,6 +121,126 @@ private theorem union_quasiIso {R : Type u} [CommRing R]
         simpa only [← HomologicalComplex.homologyMap_comp] using
           congrArg (fun a ↦ HomologicalComplex.homologyMap a n) (hf 0))
 
--- The construction hypotheses are retained in the public statement.
-set_option linter.unusedVariables false in
+/-- The restriction of a filtered morphism to the `p`-th step commutes with the step arrows.
+Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
+proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+theorem FilteredObject.restriction_arrow {C : Type*} [Category* C] [Abelian C]
+    {A B : FilteredObject C} (φ : A ⟶ B) (p : ℤ) :
+    FilteredObject.restriction φ p ≫ (B.filtration.F p).arrow =
+      (A.filtration.F p).arrow ≫ φ.hom :=
+  Classical.choose_spec (φ.preserves p)
+
+/-- The filtration-step restriction of a composite filtered morphism is the composite of the
+restrictions, since the step arrows are monomorphisms.
+Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
+proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+theorem FilteredObject.restriction_comp {C : Type*} [Category* C] [Abelian C]
+    {A B D : FilteredObject C} (φ : A ⟶ B) (ψ : B ⟶ D) (p : ℤ) :
+    FilteredObject.restriction (φ ≫ ψ) p =
+      FilteredObject.restriction φ p ≫ FilteredObject.restriction ψ p := by
+  rw [← cancel_mono (D.filtration.F p).arrow, FilteredObject.restriction_arrow, Category.assoc,
+    FilteredObject.restriction_arrow, ← Category.assoc, FilteredObject.restriction_arrow,
+    Category.assoc]
+  rfl
+
+/-- The short exact sequence `0 → F^{p+1} → F^p → gr^p → 0` of a filtered object.
+Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
+proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+noncomputable def FilteredObject.grShortComplex {C : Type*} [Category* C] [Abelian C]
+    (A : FilteredObject C) (p : ℤ) : ShortComplex C :=
+  ShortComplex.mk (Subobject.ofLE (A.filtration.F (p + 1)) (A.filtration.F p)
+    (A.filtration.F_succ_le p)) (cokernel.π _) (cokernel.condition _)
+
+/-- The sequence `0 → F^{p+1} → F^p → gr^p → 0` is short exact.
+Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
+proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+theorem FilteredObject.grShortComplex_shortExact {C : Type*} [Category* C] [Abelian C]
+    (A : FilteredObject C) (p : ℤ) : (A.grShortComplex p).ShortExact :=
+  ShortComplex.ShortExact.mk'
+    (ShortComplex.exact_of_g_is_cokernel _ (cokernelIsCokernel _))
+    (inferInstanceAs (Mono (Subobject.ofLE _ _ _)))
+    (by
+      dsimp [FilteredObject.grShortComplex]
+      infer_instance)
+
+/-- Step restriction of filtered morphisms commutes with the inclusions of steps.
+Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
+proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+theorem FilteredObject.ofLE_comp_restriction {C : Type*} [Category* C] [Abelian C]
+    {A B : FilteredObject C} (φ : A ⟶ B) (p : ℤ) :
+    Subobject.ofLE (A.filtration.F (p + 1)) (A.filtration.F p) (A.filtration.F_succ_le p) ≫
+        FilteredObject.restriction φ p =
+      FilteredObject.restriction φ (p + 1) ≫
+        Subobject.ofLE (B.filtration.F (p + 1)) (B.filtration.F p)
+          (B.filtration.F_succ_le p) := by
+  rw [← cancel_mono (B.filtration.F p).arrow, Category.assoc, Category.assoc,
+    Subobject.ofLE_arrow, FilteredObject.restriction_arrow, ← Category.assoc,
+    Subobject.ofLE_arrow, FilteredObject.restriction_arrow]
+
+/-- A map of graded pieces compatible with a filtered morphism gives a morphism of the short
+exact sequences `0 → F^{p+1} → F^p → gr^p → 0`.
+Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
+proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+noncomputable def FilteredObject.grShortComplexMap {C : Type*} [Category* C] [Abelian C]
+    {A B : FilteredObject C} (φ : A ⟶ B) (p : ℤ) (g : A.filtration.gr p ⟶ B.filtration.gr p)
+    (hg : cokernel.π _ ≫ g = FilteredObject.restriction φ p ≫ cokernel.π _) :
+    A.grShortComplex p ⟶ B.grShortComplex p where
+  τ₁ := FilteredObject.restriction φ (p + 1)
+  τ₂ := FilteredObject.restriction φ p
+  τ₃ := g
+  comm₁₂ := (FilteredObject.ofLE_comp_restriction φ p).symm
+  comm₂₃ := hg.symm
+
+/-- The union of an increasing chain of filtered complexes `P₀ ⊂ P₁ ⊂ ⋯` mapping
+compatibly to a filtered complex `K` maps quasi-isomorphically to `K`, on the total complex,
+on every filtration step and on every graded piece, provided `f₀` is surjective on cohomology
+(totally and on each step) and each inclusion kills the kernel of `H(f_m)` (totally and on
+each step).
+Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
+proof, union and part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+theorem filteredUnion_quasiIso {R : Type u} [CommRing R]
+    (P : ℕ → FilteredObject (CochainComplex (ModuleCat.{v} R) ℤ))
+    (inc : ∀ m, P m ⟶ P (m + 1))
+    (K U : FilteredObject (CochainComplex (ModuleCat.{v} R) ℤ))
+    (f : ∀ m, P m ⟶ K) (j : ∀ m, P m ⟶ U) (fU : U ⟶ K)
+    (hj : ∀ m, Mono (j m).hom)
+    (hincU : ∀ m, inc m ≫ j (m + 1) = j m)
+    (hf : ∀ m, j m ≫ fU = f m)
+    (hunion : ∀ (n : ℤ) (x : U.obj.X n), ∃ (m : ℕ) (y : (P m).obj.X n), (j m).hom.f n y = x)
+    (hunionStep : ∀ (p n : ℤ)
+      (x : (U.filtration.F p : CochainComplex (ModuleCat.{v} R) ℤ).X n),
+      ∃ (m : ℕ) (y : ((P m).filtration.F p : CochainComplex (ModuleCat.{v} R) ℤ).X n),
+        (FilteredObject.restriction (j m) p).f n y = x)
+    (hzero : ∀ n, Epi (HomologicalComplex.homologyMap (f 0).hom n))
+    (hzeroStep : ∀ p n,
+      Epi (HomologicalComplex.homologyMap (FilteredObject.restriction (f 0) p) n))
+    (hkill : ∀ m n, kernel.ι (HomologicalComplex.homologyMap (f m).hom n) ≫
+      HomologicalComplex.homologyMap (inc m).hom n = 0)
+    (hkillStep : ∀ m p n,
+      kernel.ι (HomologicalComplex.homologyMap (FilteredObject.restriction (f m) p) n) ≫
+        HomologicalComplex.homologyMap (FilteredObject.restriction (inc m) p) n = 0) :
+    QuasiIso fU.hom ∧ (∀ p, QuasiIso (FilteredObject.restriction fU p)) ∧
+      ∀ (p : ℤ) (g : U.filtration.gr p ⟶ K.filtration.gr p),
+        cokernel.π _ ≫ g = FilteredObject.restriction fU p ≫ cokernel.π _ → QuasiIso g := by
+  have hstep (p : ℤ) : QuasiIso (FilteredObject.restriction fU p) := by
+    refine union_quasiIso
+      (fun m ↦ ((P m).filtration.F p : CochainComplex (ModuleCat.{v} R) ℤ))
+      (fun m ↦ FilteredObject.restriction (inc m) p) _ _
+      (fun m ↦ FilteredObject.restriction (f m) p) (fun m ↦ FilteredObject.restriction (j m) p)
+      _ (fun m ↦ ?_) (fun m ↦ ?_) (fun m ↦ ?_) (hunionStep p) (hzeroStep p)
+      (fun m ↦ hkillStep m p)
+    · have := hj m
+      have : Mono (FilteredObject.restriction (j m) p ≫ (U.filtration.F p).arrow) := by
+        rw [FilteredObject.restriction_arrow]
+        infer_instance
+      exact mono_of_mono _ (U.filtration.F p).arrow
+    · rw [← FilteredObject.restriction_comp, hincU]
+    · rw [← FilteredObject.restriction_comp, hf]
+  refine ⟨union_quasiIso (fun m ↦ (P m).obj) (fun m ↦ (inc m).hom) K.obj U.obj
+    (fun m ↦ (f m).hom) (fun m ↦ (j m).hom) fU.hom hj (fun m ↦ congrArg (·.hom) (hincU m))
+    (fun m ↦ congrArg (·.hom) (hf m)) hunion hzero hkill, hstep, fun p g hg ↦ ?_⟩
+  exact HomologicalComplex.HomologySequence.quasiIso_τ₃
+    (FilteredObject.grShortComplexMap fU p g hg) (U.grShortComplex_shortExact p)
+    (K.grShortComplex_shortExact p) (hstep (p + 1)) (hstep p)
+
 end CategoryTheory
