@@ -80,14 +80,15 @@ lemma condensedRealizationTotalTensor_pull_square
   have hpull := (nativePullTotalTensor_summands k₀ l g) P T p q n hpq
   have hpull' := (condensedRealization k₀ l Z).congr_map hpull
   simp only [Functor.map_comp] at hpull'
-  rw [← Category.assoc, ← Category.assoc, hpull']
+  rw [reassoc_of% hpull']
   simp only [Category.assoc]
-  rw [condensedRealizationTotalTensorIso_summand,
+  rw [reassoc_of% (condensedRealizationTotalTensorIso_summand k₀ l Z
+      (((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)).obj P)
+      (((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)).obj T) p q n hpq),
     CochainComplex.ιTensorObj_tensorHom_f]
   rw [condensedRealizationPullComplexIso_hom_app_f,
     condensedRealizationPullComplexIso_hom_app_f]
-  rw [← Category.assoc, ← Category.assoc,
-    condensedRealizationSheafTensor_pull_square]
+  rw [reassoc_of% (condensedRealizationSheafTensor_pull_square k₀ l g (P.X p) (T.X q))]
   simp only [Category.assoc]
   have hn := (condensedRealizationUpperStarIso k₀ l g).inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)

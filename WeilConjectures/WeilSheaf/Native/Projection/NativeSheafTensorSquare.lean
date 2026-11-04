@@ -84,9 +84,9 @@ lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ 
   apply (cancel_epi (a.hom.app ((nativeOpenSheafTensor k₀ l Y).obj (M, N)))).1
   apply (cancel_epi (G.map (nY.inv.app (M, N)))).1
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-  rw [← Category.assoc, ← Category.assoc, h]
+  rw [reassoc_of% h]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
     tensorHom_comp_tensorHom, Iso.hom_inv_id_app, id_tensorHom_id, Category.comp_id,
-    ← G.map_comp, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+    ← G.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
