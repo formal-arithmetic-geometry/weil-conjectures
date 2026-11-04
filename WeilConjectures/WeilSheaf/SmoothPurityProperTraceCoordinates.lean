@@ -84,7 +84,12 @@ lemma boundedConstructibleBaseChangeOfMap_inv_app_hom
   have hbcIso := isIso_boundedConstructibleBaseChangeOfMap l sq
   have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj l) sq
   dsimp only [boundedConstructibleBaseChangeOfMap] at hbcIso ⊢
-  exact NearbyCyclesModel.liftExchange_inv_app_hom _ _ _ _ _ P
+  exact NearbyCyclesModel.liftExchange_inv_app_hom
+    (baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj l f K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj l f' K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πY K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πX K.obj K.property) P
 
 variable {P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
