@@ -49,15 +49,15 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 /-- Native bounded constructibility gives bounded constructibility of the
 forgotten condensed Weil complex. -/
 theorem boundedConstructible_condensedCarrier (K : WeilComplex k₀ l X) :
-    CondensedRing.boundedConstructible
-      (CondensedRing.condensedRingObj (Profinite.padicAlgClRingObj l)
+    boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
       ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
         ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K.obj)) := by
   have h := (boundedConstructibleAdic_iff_boundedConstructible l k₀ (AlgebraicClosure k₀)
     (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
     (forget.obj K)).1 ((objectProperty_iff K.obj).1 K.property)
-  exact (CondensedRing.boundedConstructible _).prop_of_iso
+  exact (boundedConstructible _).prop_of_iso
     (condensedCarrierIso K.obj).symm h
 
 end AlgebraicGeometry.WeilComplex
