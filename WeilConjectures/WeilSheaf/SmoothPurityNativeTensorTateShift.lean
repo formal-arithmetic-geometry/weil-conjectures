@@ -80,7 +80,8 @@ noncomputable def nativeConstructibleTensorTateShiftIso (d n : ℤ) :
     NatIso.ofComponents (fun K ↦ e.prod (Iso.refl (ι.obj K))) (fun _ ↦ by
       simp
       constructor
-      · rw [ι.map_id, Category.id_comp]
+      · erw [ι.map_id]
+        exact Category.id_comp _
       · exact (Category.comp_id _).trans (Category.id_comp _).symm)
   apply ((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
   exact Functor.isoWhiskerRight a (ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X) ≪≫

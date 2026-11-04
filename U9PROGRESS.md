@@ -222,3 +222,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Audit /home/ubuntu/u9/logs/K4-20261105T070103.log finished rc=1, three built/two failed. NativeTensorTate is GREEN (3.5s): transporting the explicit inverse functor isomorphisms avoids the previous 82s kernel timeout.
 - NativeTensorTateShift has one product-naturality goal left; normalized its two identity components explicitly. NativeProperTrace now passes full faithfulness, but its geometric-fibre instance heads need the exact Over.mk spelling and priority. Added those and reduced composed functor objects before exact_mod_proofs in the universal-property specialization.
 - No heartbeat raises or DONE; next single audit follows.
+
+## 2026-11-05 07:05 +0800 — isolate native trace universality
+- Audit /home/ubuntu/u9/logs/K4-20261105T070301.log finished rc=1, five built/two failed. The geometric-fibre instance errors are gone; NativeProperTrace now reaches a 200000-heartbeat whnf timeout (31s). Split condensed universality from the final full-faithfulness adjunction argument and enabled profiling on the new helper to identify any remaining costly check.
+- Shifted tensor's map_id rewrite needs the stronger transparency used in the earlier CompactConstant fix; changed rw to erw. No heartbeat raise, no DONE.

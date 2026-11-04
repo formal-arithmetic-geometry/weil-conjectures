@@ -130,6 +130,37 @@ lemma nativeProperTrace_map :
   ((objectProperty k₀ l Y).ι ⋙
     (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor).map_preimage _
 
+/-- The descended condensed trace is universal on every native constructible source. -/
+set_option trace.profiler true in
+theorem bijective_map_comp_condensedProperTrace [IsIso γ]
+    [IsIso ((CondensedRing.upperShriekBaseChangeOfMap l (f := properTraceBaseMap (k₀ := k₀) f)
+      (f' := CondensedRing.traceGeometricFiberOverMap (properTraceBaseMap (k₀ := k₀) f))
+      (Scheme.Hom.isPullback_geometricFiberMap f (comp_over f _)).flip).app N)]
+    (K : WeilComplex k₀ l X) :
+    (CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l)
+      f (comp_over f _)).rightDerivedFunctor.TraceUniversalAt
+        ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K.obj)
+        (condensedProperTrace f γ T U eT eU) := by
+  dsimp only [Functor.TraceUniversalAt, condensedProperTrace]
+  apply Functor.bijective_map_comp_iso_trace _ eT eU.symm
+  refine Endofunctor.IsoAlgebra.bijective_map_comp_rightDerived_of_bounded
+    (CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso
+      (Profinite.padicAlgClRingObj l) f (comp_over f _))
+    (CondensedRing.condensed_trace_preservesCoproduct (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap f (comp_over f _))) _ _
+    (boundedConstructible_condensedCarrier K).1 ?_
+  intro n
+  have hK := ObjectProperty.le_shift (P := boundedConstructible
+    (condensedRingObj (Profinite.padicAlgClRingObj l)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) n _
+      (boundedConstructible_condensedCarrier K)
+  have hu := CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso l
+    (properTraceBaseMap (k₀ := k₀) f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ
+    ⟨_, hK⟩
+  dsimp only [Functor.TraceUniversalAt, Functor.comp_obj, ObjectProperty.ι_obj] at hu ⊢
+  exact_mod_proofs hu
+
+
 /-- The adjunct of the native descended trace is invertible when exceptional
 base change and the finite-base orientation are invertible. -/
 theorem isIso_homEquiv_nativeProperTrace_of_isIso [IsIso γ]
@@ -149,23 +180,7 @@ theorem isIso_homEquiv_nativeProperTrace_of_isIso [IsIso γ]
     _ (directTraceCondensedComparison f) _ (condensedProperTrace f γ T U eT eU)
     (nativeProperTrace_map f γ T U eT eU)
   intro K
-  apply Functor.bijective_map_comp_iso_trace _ eT eU.symm
-  refine Endofunctor.IsoAlgebra.bijective_map_comp_rightDerived_of_bounded
-    (CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso
-      (Profinite.padicAlgClRingObj l) f (comp_over f _))
-    (CondensedRing.condensed_trace_preservesCoproduct (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap f (comp_over f _))) _ _
-    (boundedConstructible_condensedCarrier K).1 ?_
-  intro n
-  have hK := ObjectProperty.le_shift (P := boundedConstructible
-    (condensedRingObj (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) n _
-      (boundedConstructible_condensedCarrier K)
-  have hu := CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso l
-    (properTraceBaseMap (k₀ := k₀) f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ
-    ⟨_, hK⟩
-  dsimp only [Functor.TraceUniversalAt, Functor.comp_obj, ObjectProperty.ι_obj] at hu ⊢
-  exact_mod_proofs hu
+  exact bijective_map_comp_condensedProperTrace f γ T U eT eU K
 
 /-- The adjunct of the native descended trace is invertible for a smooth proper
 map and an invertible finite-base orientation. -/
