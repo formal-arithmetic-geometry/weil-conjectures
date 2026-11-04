@@ -13,6 +13,7 @@ public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.VerdierBiduality
+import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -76,7 +77,7 @@ has a right adjoint `Rg^!`. The general case
 compactification. -/
 theorem isLeftAdjoint_derivedLowerStar_of_isProper :
     (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
-  sorry
+  isLeftAdjoint_derivedLowerStar_of_isProper' g
 
 end Proper
 
@@ -223,8 +224,16 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 `det-pd-biduality-coefficients`, "`Rf^! = D_X f^* D_Y`"): `Rf^! L ≅ 𝔻_X f^* 𝔻_Y L`. -/
 theorem nonempty_upperShriek_obj_iso [HasUpperShriek k₀ l f] (L : WeilComplex k₀ l Y) :
     Nonempty ((upperShriek f).obj L ≅
-      (verdierDual k₀ l X).obj (op ((upperStar f).obj ((verdierDual k₀ l Y).obj (op L))))) :=
-  sorry
+      (verdierDual k₀ l X).obj (op ((upperStar f).obj ((verdierDual k₀ l Y).obj (op L))))) := by
+  obtain ⟨eX⟩ := nonempty_iso_verdierDual_rightOp_comp_verdierDual k₀ l X
+  obtain ⟨eY⟩ := nonempty_iso_verdierDual_rightOp_comp_verdierDual k₀ l Y
+  obtain ⟨ex⟩ := nonempty_verdierDual_derivedLowerShriek_natIso f
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+  obtain ⟨e⟩ := Adjunction.nonempty_iso_rightOp_comp_op_comp_of_duality (verdierDual k₀ l X) eX
+    (verdierDual k₀ l Y) eY (upperStarDerivedLowerStarAdjunction f)
+    (derivedLowerShriekUpperShriekAdjunction f) ex
+  exact ⟨e.app L⟩
 
 /-- **Verdier exchange** (blueprint: `fix-cor-verdier-exchange`): for a separated morphism of
 finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
