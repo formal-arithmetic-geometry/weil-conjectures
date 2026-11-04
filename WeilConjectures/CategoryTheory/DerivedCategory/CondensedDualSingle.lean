@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.RightDual
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStratificationDefs
-import all WeilConjectures.AlgebraicGeometry.FiniteEtaleLocallyFreeModels
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleLocallyFreeModels
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
 

@@ -115,6 +115,14 @@ def Coefficient.integralMap (c : Coefficient ell) :
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).map (c.fromIntegers ell)
 
+/-- The integral coefficient map is a morphism of ring objects, being induced by a morphism of
+ring sheaves. Source: coefficient pullback
+(blueprint: def-pur-transport-concrete-coefficients). -/
+instance Coefficient.isMonHom_integralMap (c : Coefficient ell) :
+    IsMonHom (c.integralMap.{u} ell) :=
+  inferInstanceAs (IsMonHom ((sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).map (c.fromIntegers ell)))
+
 /-- The root-tower line extended along the actual integral coefficient map.
 For finite A this is A tensor mu at any annihilating positive level; for the
 other coefficients it is the completed line followed by ordinary scalar extension.
@@ -171,7 +179,8 @@ abbrev coefficientAdmissible (ell : ℕ) [Fact ell.Prime] (c : PurityTransport.C
     let : TopologicalSpace A := ⊥
     let : DiscreteTopology A := discreteTopology_bot A
     exact Or.inl ⟨A, inferInstance, inferInstance, inferInstance, inferInstance,
-      fin, ⟨n + 1, fun x ↦ by simp only [nsmul_eq_mul, Nat.cast_pow, hA, zero_mul]⟩, ⟨Iso.refl _⟩⟩
+      fin, ⟨n + 1, fun x ↦ by simp only [nsmul_eq_mul, Nat.cast_pow, hA, zero_mul]⟩,
+      ⟨Iso.refl _⟩⟩
   | integers => exact Or.inr (Or.inl ⟨Iso.refl _⟩)
   | rationals => exact Or.inr (Or.inr (Or.inl ⟨Iso.refl _⟩))
   | integral E => exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩))))

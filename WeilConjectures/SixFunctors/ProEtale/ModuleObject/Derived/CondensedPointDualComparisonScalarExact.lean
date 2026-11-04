@@ -49,6 +49,24 @@ open scoped CategoryTheory.Obj TensorProduct
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsAlgClosed k]
 
+/-- The scalar-extension functor `V ↦ ℚ̲̄_ℓ,s ⊗_{ℚ̄_ℓ} V` at a geometric point: extend the
+scalars acting on the regular module, then tensor with that module using the
+tensor–coyoneda adjunction. Source: local boundary duality, Step 5, scalar extension
+(blueprint: lem-a1-condensed-point-dual-comparison). -/
+def condensedPointScalarExtension :
+    ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl ℓ)) ⥤ PointMod ℓ k :=
+  ModuleCat.extendScalars.{u + 1, u + 1, u + 1} (pointScalarsOp ℓ k) ⋙
+    IsGrothendieckAbelian.tensorObj (𝟙_ (PointMod ℓ k))
+
+/-- Scalar extension at a geometric point is left adjoint to global sections.
+Source: local boundary duality, Step 5, scalar extension
+(blueprint: lem-a1-condensed-point-dual-comparison). -/
+def condensedPointScalarAdjunction :
+    condensedPointScalarExtension ℓ k ⊣ pointSections ℓ k :=
+  (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} (pointScalarsOp ℓ k)).comp
+    (IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction
+      (𝟙_ (PointMod ℓ k)))
+
 omit [IsAlgClosed k] in
 /-- Scalar extension is additive and exact. Source: local boundary duality, Step 5.
 Every monomorphism of vector spaces has a linear retraction. An additive left adjoint

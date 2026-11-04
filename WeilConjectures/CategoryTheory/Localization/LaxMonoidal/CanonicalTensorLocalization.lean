@@ -82,7 +82,8 @@ lemma laxTensor_app_app' {X₁ X₂ : C} {Y₁ Y₂ : D}
   have h₁ := ((laxTensor L W F G).app Y₁).naturality e₂.hom
   have h₂ := congr_app ((laxTensor L W F G).naturality e₁.hom)
   dsimp at h₁ h₂ ⊢
-  rw [← cancel_mono (F.map (Y₁ ◁ e₂.hom)), ← h₁, ← cancel_mono (F.map (e₁.hom ▷ L.obj X₂)),
+  rw [← cancel_mono (F.map (Y₁ ◁ e₂.hom)), ← h₁,
+    ← cancel_mono (F.map (e₁.hom ▷ L.obj X₂)),
     Category.assoc, ← h₂, laxTensor_app_app, Category.assoc, Category.assoc,
     Category.assoc, Category.assoc, ← tensorHom_def'_assoc, tensorHom_comp_tensorHom_assoc,
     ← Functor.map_comp, ← tensorHom_def', ← Functor.map_comp, Category.assoc,
