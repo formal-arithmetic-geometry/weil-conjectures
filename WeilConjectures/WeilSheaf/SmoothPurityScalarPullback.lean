@@ -6,6 +6,8 @@ module
 
 public import WeilConjectures.WeilSheaf.CondensedModelWeil
 public import WeilConjectures.TateTwist.TateModuleTrivialization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 
 /-! # Coefficient-parametric pullback comparisons for Tate descent -/
 
