@@ -83,6 +83,25 @@ mate of `c⁻¹`). -/
 noncomputable def freeComparison (M : C') : free₂.obj (L'.obj M) ⟶ L.obj (free₁.obj M) :=
   (adj₂.homEquiv _ _).symm (L'.map (adj₁.unit.app M) ≫ c.inv.app (free₁.obj M))
 
+/-- The free comparison is natural in `M`. -/
+@[reassoc]
+lemma freeComparison_naturality {M N : C'} (f : M ⟶ N) :
+    free₂.map (L'.map f) ≫ freeComparison adj₁ adj₂ L L' c N =
+      freeComparison adj₁ adj₂ L L' c M ≫ L.map (free₁.map f) := by
+  have h := c.inv.naturality (free₁.map f)
+  dsimp at h
+  rw [freeComparison, freeComparison, ← homEquiv_naturality_left_symm, Equiv.symm_apply_eq,
+    homEquiv_naturality_right, Equiv.apply_symm_apply, Category.assoc, ← h,
+    ← L'.map_comp_assoc, ← L'.map_comp_assoc, ← adj₁.unit_naturality]
+
+/-- The free comparison is an isomorphism at `M` if it is one at an isomorphic object. -/
+lemma isIso_freeComparison_of_iso {M N : C'} (e : M ≅ N)
+    [IsIso (freeComparison adj₁ adj₂ L L' c N)] :
+    IsIso (freeComparison adj₁ adj₂ L L' c M) := by
+  rw [← Category.comp_id (freeComparison adj₁ adj₂ L L' c M), ← L.map_id, ← free₁.map_id,
+    ← e.hom_inv_id, free₁.map_comp, L.map_comp, ← freeComparison_naturality_assoc]
+  infer_instance
+
 /-- **Bijectivity on free objects.** If the comparison `β_M : free₂ (L' M) ⟶ L (free₁ M)` is an
 isomorphism, then `g ↦ L g ≫ ε` is bijective on the morphisms `free₁ M ⟶ Q` if and only if
 `f ↦ L' f ≫ c⁻¹_Q ≫ forget₂ ε` is bijective on the morphisms `M ⟶ forget₁ Q`. -/
