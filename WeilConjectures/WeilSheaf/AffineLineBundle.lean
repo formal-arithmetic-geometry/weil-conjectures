@@ -23,9 +23,12 @@ the rank-one Thom isomorphism `Rπ₀! π^* P ≅ P(-1)[-2]`
 blueprint `thm-pur-rank-one-thom`) is deduced from:
 
 - the affine-line adjunction `Rπ₀! ⊣ π^*(1)[2]`
-  (`AlgebraicGeometry.WeilComplex.nonempty_adjunction_derivedLowerShriek_of_isPullback`), the
-  adjunction `Rπ₀! ⊣ Rπ^!` transported along smooth purity `Rπ^! ≅ π^*(1)[2]` for Weil complexes
-  (`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension`);
+  (`AlgebraicGeometry.WeilComplex.nonempty_adjunction_derivedLowerShriek_of_isPullback`), whose
+  counit is the Weil-equivariant trace of the affine line
+  (`AlgebraicGeometry.WeilComplex.exists_weilTrace_of_isPullback`, stated here with `sorry`): the
+  morphisms of Weil complexes are computed from the underlying `ℓ`-adic morphisms through free
+  Weil objects, with which `Rπ₀!` commutes
+  (`AlgebraicGeometry.WeilComplex.bijective_map_comp_derivedLowerShriek`);
 - homotopy invariance: the unit `K ⟶ Rπ_* π^* K` of `π^* ⊣ Rπ_*` is an isomorphism
   (`AlgebraicGeometry.WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`,
   stated here with `sorry`).
