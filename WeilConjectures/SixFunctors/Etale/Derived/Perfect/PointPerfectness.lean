@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
-public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfectAdic
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 
 /-!

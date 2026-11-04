@@ -789,6 +789,7 @@ theorem strictSectionQuotientTensorModels (X : Scheme.{u})
   clear hstep t
   apply reductionModels X (ring (DerivedNakayama.integerRing l E) X) H HM B ι T
   intro P hP
-  exact strictSectionQuotientConeMaps l E X T data hdata hscalar B ι hB hι P hP
+  simpa only [] using
+    strictSectionQuotientConeMaps l E X T data hdata hscalar B ι hB hι P hP
 
 end AlgebraicGeometry.ProEtale.StrictCompletionRestriction

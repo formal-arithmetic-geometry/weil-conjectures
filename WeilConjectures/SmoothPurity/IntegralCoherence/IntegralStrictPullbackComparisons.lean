@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.IntegralCoherence.IntegralCoherenceData
+public import WeilConjectures.SmoothPurity.IntegralCoherence.SequencePullbackMonoidal
 
 /-! # Strict expression models before derived inverse limit
 
@@ -55,6 +56,7 @@ theorem strictPullbackComparisons
       (∀ {a b : S} (f : W a ⟶ W b), Coherent l E f (c f)) ∧
       (∀ {a b d : S} (h : W d ⟶ W a) (f : W a ⟶ W b),
         CompositionLaw l E h f (c f) (c h) (c (h ≫ f))) := by
-  sorry
+  exact ⟨fun f ↦ sequenceComparison l E f, fun f ↦ sequenceComparison_coherent l E f,
+    fun h f ↦ sequenceComparison_compositionLaw l E h f⟩
 
 end WeilConjectures.IntegralCoherence
