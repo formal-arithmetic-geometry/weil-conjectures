@@ -45,25 +45,6 @@ variable {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
   [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
   [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
   [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
-end LocalizationMate
-
-variable {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
-  [Abelian C₁] [Abelian D₁] [Abelian C₂] [Abelian D₂]
-  [HasDerivedCategory C₁] [HasDerivedCategory D₁]
-  [HasDerivedCategory C₂] [HasDerivedCategory D₂]
-  {f₁ : C₁ ⥤ D₁} {g₁ : D₁ ⥤ C₁} (adj₁ : f₁ ⊣ g₁) {f₂ : C₂ ⥤ D₂} {g₂ : D₂ ⥤ C₂}
-  (adj₂ : f₂ ⊣ g₂) {u : C₁ ⥤ C₂} {v : D₁ ⥤ D₂}
-  [f₁.Additive] [PreservesFiniteLimits f₁] [PreservesFiniteColimits f₁]
-  [g₁.Additive] [PreservesFiniteLimits g₁] [PreservesFiniteColimits g₁]
-  [f₂.Additive] [PreservesFiniteLimits f₂] [PreservesFiniteColimits f₂]
-  [g₂.Additive] [PreservesFiniteLimits g₂] [PreservesFiniteColimits g₂]
-  [u.Additive] [PreservesFiniteLimits u] [PreservesFiniteColimits u]
-  [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
-  (τ : g₁ ⋙ u ≅ v ⋙ g₂) (β : u ⋙ f₂ ≅ f₁ ⋙ v)
-
-end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtale
 
 private lemma squareQFac (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
     (X : CochainComplex A ℤ) :
@@ -102,6 +83,8 @@ private lemma squareQFac (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
   rw [reassoc_of% hF', hG', reassoc_of% he, Iso.inv_hom_id_app_assoc]
   simp only [Functor.map_comp]
 
+end LocalizationMate
+
 private lemma unitQ {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
     {f : C ⥤ D} {g : D ⥤ C} [f.Additive] [g.Additive]
@@ -123,6 +106,20 @@ private lemma unitQ {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian
   rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app]
   exact Category.comp_id _
+
+variable {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
+  [Abelian C₁] [Abelian D₁] [Abelian C₂] [Abelian D₂]
+  [HasDerivedCategory C₁] [HasDerivedCategory D₁]
+  [HasDerivedCategory C₂] [HasDerivedCategory D₂]
+  {f₁ : C₁ ⥤ D₁} {g₁ : D₁ ⥤ C₁} (adj₁ : f₁ ⊣ g₁) {f₂ : C₂ ⥤ D₂} {g₂ : D₂ ⥤ C₂}
+  (adj₂ : f₂ ⊣ g₂) {u : C₁ ⥤ C₂} {v : D₁ ⥤ D₂}
+  [f₁.Additive] [PreservesFiniteLimits f₁] [PreservesFiniteColimits f₁]
+  [g₁.Additive] [PreservesFiniteLimits g₁] [PreservesFiniteColimits g₁]
+  [f₂.Additive] [PreservesFiniteLimits f₂] [PreservesFiniteColimits f₂]
+  [g₂.Additive] [PreservesFiniteLimits g₂] [PreservesFiniteColimits g₂]
+  [u.Additive] [PreservesFiniteLimits u] [PreservesFiniteColimits u]
+  [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
+  (τ : g₁ ⋙ u ≅ v ⋙ g₂) (β : u ⋙ f₂ ≅ f₁ ⋙ v)
 
 private lemma localizedMateQ
     (hβ : ∀ K, adj₂.unit.app (u.obj K) ≫ g₂.map (β.hom.app K) =
