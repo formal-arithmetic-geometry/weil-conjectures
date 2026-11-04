@@ -49,9 +49,7 @@ theorem condensedVerdier_quotient_ringEquiv
     (ULift.moduleEquiv (R := ℚ_[ℓ]) (M := E.1)).symm.finiteDimensional
   let S := Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.1)
   let g := integerLiftEquiv ℓ E
-  have hdata := (Padic.extension_integers_dvr ℓ (ULift.{u} E.1)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.1))
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E.1))).choose_spec.choose_spec
+  have hdata := (Padic.coefficientExtensionIntegers_dvr ℓ (ULift.{u} E.1)).choose_spec
   have : IsLocalRing S := hdata.2.2.2.1
   have hmax : Padic.coefficientExtensionMaximalIdeal ℓ (ULift.{u} E.1) =
       IsLocalRing.maximalIdeal S := IsLocalRing.eq_maximalIdeal hdata.2.2.2.2.1
