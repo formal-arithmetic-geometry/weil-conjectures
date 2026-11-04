@@ -53,13 +53,45 @@ theorem pbcActualDerivedPush_eq :
     pbcActualDerivedPush g d = proEtaleRingDerivedDirectImage g (pbcAdicCompletion Y d)
       (pbcAdicCompletion X d) (pbcActualCoefficientIso g d) := rfl
 
+/-- The object equality of the scalar-extension interface gives the identity on sheafified
+tensors. Source: Stacks Tag 03EK
+(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+def pbcActualModulePullIsoApp (M : pbcModules Y (pbcAdicCompletion Y d)) :
+    (pbcActualModulePull g d).obj M ≅
+      (proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+        (pbcActualCoefficientIso g d)).obj M :=
+  eqToIso ((completedAdicChangeData X (completedCoefficientMap g d)).choose_spec.choose
+    ((proEtaleModuleInverseImage g (pbcAdicCompletion Y d)).obj M))
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The object equality in the scalar-extension interface is natural.
+Source: Stacks Tag 03EK (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Proof: both maps are sheafifications of r ⊗ x ↦ r ⊗ a(x), by the morphism
+characterization in completedAdicChangeData. -/
+theorem pbcActualModulePullIso_naturality
+    (M N : pbcModules Y (pbcAdicCompletion Y d)) (a : M ⟶ N) :
+    (pbcActualModulePull g d).map a ≫ (pbcActualModulePullIsoApp g d N).hom =
+      (pbcActualModulePullIsoApp g d M).hom ≫
+        (proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+          (pbcActualCoefficientIso g d)).map a := by
+  let h := (completedAdicChangeData X (completedCoefficientMap g d)).choose_spec.choose
+  change (completedAdicChangeData X (completedCoefficientMap g d)).choose.map
+      ((proEtaleModuleInverseImage g _).map a) ≫ eqToHom (h _) =
+    eqToHom (h _) ≫ SheafOfModules.changeOfRingsHom
+      (completedCoefficientMap g d) _ ((proEtaleModuleInverseImage g _).map a)
+  erw [(completedAdicChangeData X (completedCoefficientMap g d)).choose_spec.choose_spec.choose
+      ((proEtaleModuleInverseImage g _).map a)]
+  simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id]
+
 /-- The object equality of the scalar-extension interface, as a natural isomorphism of
 module pullbacks. Source: Stacks Tag 03EK
 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
 def pbcActualModulePullIso :
     pbcActualModulePull g d ≅ proEtaleRingModulePullback g (pbcAdicCompletion Y d)
       (pbcAdicCompletion X d) (pbcActualCoefficientIso g d) :=
-  sorry
+  NatIso.ofComponents (fun M ↦ pbcActualModulePullIsoApp g d M)
+    (fun {M N} a ↦ pbcActualModulePullIso_naturality g d M N a)
 
 /-- The derived comparison between the actual derived pullback and the canonical one,
 retaining the universal counit on every complex.
