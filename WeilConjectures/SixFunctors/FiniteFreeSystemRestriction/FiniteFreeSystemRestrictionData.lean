@@ -208,6 +208,67 @@ structure OrdinarySquare {X Y : Scheme.{u}} (f : X ⟶ Y) where
     (ordinaryAdj (A l E) (aTransition l E) f)
       (TwoSquare.mk _ _ _ _ pull.inv)).natTrans = push.hom
 
+/-- The exact pullback comparison on entire derived systems.
+Source: proof Step 8 of the node
+(blueprint: lem-coef-finite-free-system-restriction). -/
+def OrdinarySquare.derivedPull {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (q : OrdinarySquare l E L i f) :
+    P (B l E L i) (bTransition l E L i) f ⋙ U l E L i X ≅
+      U l E L i Y ⋙ P (A l E) (aTransition l E) f :=
+  Functor.mapDerivedCategorySquareIso q.pull
+
+/-- The derived pushforward comparison is the specified geometric right mate.
+Source: proof Step 8 of the node
+(blueprint: lem-coef-finite-free-system-restriction). -/
+def OrdinarySquare.derivedPush {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (q : OrdinarySquare l E L i f) :
+    R (B l E L i) (bTransition l E L i) f ⋙ U l E L i Y ⟶
+      U l E L i X ⋙ R (A l E) (aTransition l E) f :=
+  (mateEquiv (adj (B l E L i) (bTransition l E L i) f)
+    (adj (A l E) (aTransition l E) f)
+      (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).inv)).natTrans
+
+/-- The inverse open-extension comparison is the specified open-adjunction mate.
+Its invertibility is asserted separately, never inferred merely from a mate formula.
+Source: proof Step 9 of the node
+(blueprint: lem-coef-finite-free-system-restriction). -/
+def OrdinarySquare.derivedOpenInv {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [IsOpenImmersion f] (q : OrdinarySquare l E L i f) :
+    U l E L i X ⋙ J (A l E) (aTransition l E) f ⟶
+      J (B l E L i) (bTransition l E L i) f ⋙ U l E L i Y :=
+  ((mateEquiv (jAdj (B l E L i) (bTransition l E L i) f)
+    (jAdj (A l E) (aTransition l E) f)).symm
+      (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).hom)).natTrans
+
+/-- The simultaneous geometric comparisons on the specified finite-type k-schemes.
+Source: geometric comparison clauses of the node
+(blueprint: lem-coef-finite-free-system-restriction). -/
+structure Geometry (D : FiniteFieldDatum.{u}) where
+  /-- The comparisons already exist on the abelian system categories. -/
+  ordinary : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
+    OrdinarySquare l E L i f
+  /-- The derived geometric right mate is invertible. -/
+  push_isIso : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
+    IsIso ((ordinary X Y f).derivedPush l E L i)
+  /-- The derived open-adjunction mate is invertible. -/
+  open_isIso : ∀ (X Y : Spaces D) (j : X.val.left ⟶ Y.val.left)
+    [IsOpenImmersion j], IsIso ((ordinary X Y j).derivedOpenInv l E L i)
+  /-- Constant coefficient sections give the actual ordinary pushforward map. -/
+  coefficient_push : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
+    coefficientModule l E L i Y.val.left ⟶
+      (AlgebraicGeometry.ProEtale.SemilinearProperOpen.push (A l E) (aTransition l E) f).obj
+        (coefficientModule l E L i X.val.left)
+  /-- Its sections are exactly the structural constant-section map for B. -/
+  coefficient_push_section : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left)
+    (V : (ℕ × Y.val.left.ProEt)ᵒᵖ),
+    HEq (fun x ↦ (coefficient_push X Y f).val.app V x)
+      (fun x ↦ (coefficientMap (B l E L i) (bTransition l E L i) f).hom.app V x)
+  /-- Its ordinary pullback adjunct is invertible; exact localization gives the
+  coefficient pullback isomorphism with precisely this constant-section normalization. -/
+  coefficient_pull_isIso : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
+    IsIso (((ordinaryAdj (A l E) (aTransition l E) f).homEquiv _ _).symm
+      (coefficient_push X Y f))
+
 /-- The strict-system realization of a fixed compactification h = pj.
 Source: the compact-support clause of the node
 (blueprint: lem-coef-finite-free-system-restriction). -/
