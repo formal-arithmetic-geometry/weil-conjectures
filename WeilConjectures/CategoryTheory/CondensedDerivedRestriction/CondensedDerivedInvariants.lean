@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedEquivariantBarData
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarAction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZeroUnit
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarInvariants
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionInvariants
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
@@ -269,7 +270,8 @@ theorem degreeZero : ∃ e :
             (.up ℤ) 0).hom.app N)) ≫
         (DerivedCategory.singleFunctorCompHomologyFunctorIso (Modules A) 0).hom.app
           ((invariants A G).functor.obj N) := by
-  sorry
+  have := (invariants A G).adjunction.isRightAdjoint
+  exact Functor.exists_homologyZero_iso_rightDerivedFunctorUnitQ _
 
 /-- The degree-zero identification fixed by the computation unit. That equation
 uniquely determines this isomorphism, since the two comparison maps in degree zero
