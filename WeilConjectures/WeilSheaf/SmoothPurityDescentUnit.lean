@@ -44,7 +44,7 @@ lemma adicUpperStarUnitIso_descent {X Y : Scheme.{u}}
       (a)^*[WeilCoefficients.{u} l].map (upperStarAdicConstantSheafHom l p) ≫
         upperStarAdicConstantSheafHom l a := by
     rw [upperStarCongr_hom_app_comp_upperStarAdicConstantSheafHom,
-      upperStarAdicConstantSheafHom_comp, Iso.inv_hom_id_app_assoc]
+      ← upperStarAdicConstantSheafHom_comp, Iso.inv_hom_id_app_assoc]
   apply Mod.hom_ext
   simp only [Mod.comp_hom', adicUpperStarComp_inv_app_hom,
     adicUpperStarCongr_hom_app_hom, adicUpperStar_map_hom,
@@ -59,6 +59,24 @@ lemma adicUpperStarIsoLowerStarInv_hom_comp_unit {X Y : Scheme.{u}} (e : X ≅ Y
   rw [Mod.comp_hom', adicUpperStarIsoLowerStarInv_hom_app_hom,
     adicLowerStarUnitIso_hom_hom]
   exact upperStarIsoLowerStarInv_hom_app_comp_adicConstantSheafLowerStarIso_hom l e
+
+/-- The unit descent equation in inverse-pushforward coordinates. Keeping the
+automorphism abstract avoids unfolding the geometric Frobenius while cancelling
+the pullback/pushforward comparison. -/
+lemma adicUpperStarUnitIso_descent_inv {X Y : Scheme.{u}}
+    (p : X ⟶ Y) (e : X ≅ X) (h : e.hom ≫ p = p) :
+    (e.inv)_*ᵃ[l].map (adicUpperStarUnitIso l p).hom ≫
+        (adicLowerStarUnitIso l e.symm).hom =
+      (adicUpperStarIsoLowerStarInv l e).inv.app ((p)^*ᵃ[l].obj (AdicSheaf.unit l Y)) ≫
+        (adicUpperStarComp l e.hom p).inv.app (AdicSheaf.unit l Y) ≫
+        (adicUpperStarCongr l h).hom.app (AdicSheaf.unit l Y) ≫
+        (adicUpperStarUnitIso l p).hom := by
+  rw [← cancel_epi ((adicUpperStarIsoLowerStarInv l e).hom.app
+    ((p)^*ᵃ[l].obj (AdicSheaf.unit l Y)))]
+  rw [← NatTrans.naturality_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+    adicUpperStarIsoLowerStarInv_hom_comp_unit]
+  exact (adicUpperStarUnitIso_descent p e.hom h).symm
 
 end AlgebraicGeometry.ProEtale
 
@@ -82,13 +100,11 @@ noncomputable def geometricFiberPullbackUnitIso :
           (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).hom
       dsimp only [geometricFiberPullbackFrobeniusIso, Iso.trans_hom, NatTrans.comp_app,
         Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom]
-      rw [← cancel_epi ((adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app
-          (((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l].obj (AdicSheaf.unit l X)))]
-      rw [← NatTrans.naturality_assoc]
-      simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
-        adicUpperStarIsoLowerStarInv_hom_comp_unit]
-      exact (adicUpperStarUnitIso_descent _ _ _).symm)
+      simp only [Category.assoc]
+      exact adicUpperStarUnitIso_descent_inv
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+        (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _))
 
 /-- The native constant sheaf, in condensed coordinates, is descent of the unit. -/
 noncomputable def toCondensedAdicConstantDescentIso :
@@ -117,14 +133,14 @@ local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
 local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
-local instance : (boundedConstructible
-    (condensedRingObj (Profinite.padicAlgClRingObj l) X)).IsMonoidal :=
-  CondensedRing.isMonoidal_boundedConstructible l (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-
 /-- Native descent of the finite-base tensor unit is the constant Weil complex. -/
 noncomputable def finiteBaseNativeDescentUnitIso :
+    letI := CondensedRing.isMonoidal_boundedConstructible l
+      (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
     (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj (𝟙_ _) ≅
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X) :=
+  letI := CondensedRing.isMonoidal_boundedConstructible l
+    (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
   ObjectProperty.isoMk _
     ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.preimageIso
       ((finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := X)).app (𝟙_ _) ≪≫
