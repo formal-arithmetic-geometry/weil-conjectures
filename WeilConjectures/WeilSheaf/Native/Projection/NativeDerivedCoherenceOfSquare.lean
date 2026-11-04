@@ -20,7 +20,7 @@ import WeilConjectures.Tactic.ExactModProofs
 
 set_option Elab.async false
 set_option trace.profiler true
-set_option trace.profiler.threshold 20000
+set_option trace.profiler.threshold 500
 
 -- Use the coefficient-category instance fixed by the native tensor construction.
 attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
@@ -73,7 +73,8 @@ theorem projectionComparisonCompatible_of_square
       intro M N
       have ht := htensor M N
       dsimp only [DerivedPullTensorSquare] at ht
-      rw [Functor.mapDerivedCategorySquareIso_symm, Iso.symm_symm] at ht
+      rw [Functor.mapDerivedCategorySquareIso_symm, Iso.symm_symm_eq] at ht
+      dsimp only [R]
       exact_mod_proofs ht)
   rw [ProEtale.CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison]
   dsimp only [derivedCondensedRealizationUpperStarIso, Functor.leftDerivedFunctorSquareIso]

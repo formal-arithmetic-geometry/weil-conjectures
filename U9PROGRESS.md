@@ -224,3 +224,12 @@ matched that setting in new native proof interfaces. This is a typeclass-path
 alignment, not an opacity barrier or heartbeat increase. Generic compatibility
 now fails only on Functor.comp_obj spelling, fixed; countable helper needed the
 explicit Mathlib countable-limits import, fixed. Submitting the full small batch.
+
+2026-11-05 06:15 CST: K5-20261105T060942.log rc=1.
+NativePullTensorNormalization GREEN (228s), CountableTotalExistence GREEN (1.2s),
+TensorSquareCompatibility GREEN (1.6s). Matching the native instance priority
+closes the concrete normalization. All totalization existence instances now pass;
+only its calculation has a whnf timeout. Derived conditional Q likewise whnf-
+times out, requiring detailed profiling of the next conversion. Final compatibility
+wrapper had wrong lemma name Iso.symm_symm (actual symm_symm_eq), fixed; expose local
+R before proof casting. New batch profiles these remaining proof bodies.

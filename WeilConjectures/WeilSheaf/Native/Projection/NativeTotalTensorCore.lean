@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 set_option Elab.async false
 set_option trace.profiler true
-set_option trace.profiler.threshold 20000
+set_option trace.profiler.threshold 500
 
 -- Use the coefficient-category instance fixed by the native tensor construction.
 attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
@@ -121,13 +121,15 @@ lemma projection_totalTensorSquare_of_sheaf
   have hpull := hmu P T p q n hpq
   have hpull' := (condensedRealization k₀ l Z).congr_map hpull
   dsimp only [nativeOpenTensorInsertion] at hpull'
-  simp only [Functor.map_comp] at hpull'
+  simp only [Functor.map_comp, Iso.app_hom, Functor.comp_obj,
+    Functor.prod_obj, Functor.uncurry_obj_obj] at hpull'
   rw [reassoc_of% hpull']
   simp only [Category.assoc]
   have hnZ := condensedRealizationTotalTensorIso_summand k₀ l Z
     ((L.mapHomologicalComplex (.up ℤ)).obj P)
     ((L.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
   dsimp only [nativeOpenTensorInsertion] at hnZ
+  simp only [Iso.app_hom] at hnZ
   rw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
   rw [hcomp, hcomp]
   have hs := hsheaf (P.X p) (T.X q)
@@ -140,6 +142,7 @@ lemma projection_totalTensorSquare_of_sheaf
   rw [reassoc_of% hn]
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
   dsimp only [nativeOpenTensorInsertion] at hnY
+  simp only [Iso.app_hom] at hnY
   rw [← Functor.map_comp_assoc, hnY, Functor.map_comp_assoc,
     Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f]
 
