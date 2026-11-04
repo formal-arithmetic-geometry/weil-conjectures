@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionTorsion
 
 /-! # Positive finite coefficient stages are ell-primary
 

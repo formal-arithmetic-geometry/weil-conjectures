@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionTorsion
 
 /-! # Primary torsion in the finite coefficient quotient
 

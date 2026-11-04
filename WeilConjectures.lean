@@ -17088,6 +17088,7 @@ public import WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModulesSuppleme
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionTorsion
 public import WeilConjectures.NumberTheory.Padics.ContinuousUniformizerDivision
 public import WeilConjectures.NumberTheory.Padics.Exponential
 public import WeilConjectures.NumberTheory.Padics.Extension
