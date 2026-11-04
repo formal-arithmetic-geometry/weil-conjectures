@@ -44,17 +44,12 @@ complexes of pro-étale Weil sheaves to that of `ℓ`-adic sheaves
 complexes when the target represents the dualizing complex of `X̄`
 (`AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`).
 
-## Inputs from other chapters
+## Unfinished
 
-Two statements are not yet available and are stated here with `sorry`:
-
-* `AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`
-  (blueprint: `lem-fix-weil-operations`, the exceptional adjoint "lies over" the geometric one):
-  the underlying complex on `X̄` of `Ra_X^! ℚ̄_ℓ`, for the exceptional inverse image of Weil
-  complexes, is the dualizing complex of `X̄`;
-* `AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`: constructible Verdier
-  biduality in the model of `ℓ`-adic sheaves (`det-pd-biduality-coefficients` (iv), proved in the
-  condensed model as `ProEtale.CondensedRing.isIso_verdierBiduality`).
+The identification of the underlying complex on `X̄` of `Ra_X^! ℚ̄_ℓ`, for the exceptional inverse
+image of Weil complexes, with the dualizing complex of `X̄`
+(`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`) is still
+stated with `sorry`.
 -/
 
 @[expose] public section
@@ -248,7 +243,7 @@ Weil complexes along the structure morphism `a : X ⟶ Spec k₀`. Then the unde
 the geometric fibre `X̄` of `R ℚ̄_ℓ` is the dualizing complex `ω_X̄ = Rā^! ℚ̄_ℓ` of `X̄` over `k̄`
 (`ProEtale.CondensedRing.dualizingComplex`).
 
-This input is missing: the exceptional inverse image of Weil complexes is only known as an
+Unfinished: the exceptional inverse image of Weil complexes is only known as an
 abstract right adjoint, and its comparison with the geometric `Rā^!` (the mate of
 `WeilComplex.derivedLowerShriekCompToCondensedIso`, together with the lifting of the geometric
 `ω_X̄` with its Frobenius structure to the derived category of pro-étale Weil sheaves) is not

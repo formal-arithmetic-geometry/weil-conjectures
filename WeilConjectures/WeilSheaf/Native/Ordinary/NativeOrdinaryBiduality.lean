@@ -59,7 +59,8 @@ lemma ordinaryBifunctorEvaluation_triangle :
   fun M N ↦ Mod.bidual_comp_ihomMap_bidual M N
 
 /-- An adjunction `- ⊗ P ⊣ H(P, -)` for every `P`, natural in `P` in the sense of the
-evaluations, is an adjunction with a parameter `(MonoidalCategory.curriedTensor D).flip ⊣₂ curry H`. -/
+evaluations, is an adjunction with a parameter
+`(MonoidalCategory.curriedTensor D).flip ⊣₂ curry H`. -/
 noncomputable def parametrizedAdjunctionOfTensorRight {D : Type*} [Category* D]
     [MonoidalCategory D] (H : Dᵒᵖ × D ⥤ D)
     (adj : ∀ P : D, MonoidalCategory.tensorRight P ⊣ Prod.sectR (op P) D ⋙ H)
@@ -159,6 +160,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 set_option maxHeartbeats 1600000 in
+-- Matching the naturality of `mapDerivedCategoryTensorComparison` with `derivedTensor` unfolds the
+-- derived tensor products of both models.
 /-- **Verdier biduality for `ℓ`-adic complexes on the geometric fibre, at the level of hom
 complexes** (blueprint: `det-pd-biduality-coefficients`, case (iv)). Let `I` be a K-injective
 complex of `ℓ`-adic sheaves on the geometric fibre `X̄` representing the dualizing complex
@@ -220,18 +223,20 @@ theorem quasiIso_bifunctorHomBidual_ordinary
   let V := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
     (ProEtale.nativeModuleCoefficientIso l Y).hom
   obtain ⟨cU⟩ := ProEtale.nativeScalarForgetting_monoidal l Y
-  letI : U.Monoidal := cU
+  let : U.Monoidal := cU
   have : U.IsEquivalence := ProEtale.nativeScalarForgetting_isEquivalence l Y
   have : V.IsEquivalence :=
-    (Mod.comapEquivalenceOfIsIso (ProEtale.nativeModuleCoefficientIso l Y).hom).isEquivalence_functor
+    (Mod.comapEquivalenceOfIsIso
+      (ProEtale.nativeModuleCoefficientIso l Y).hom).isEquivalence_functor
   let E0 := U ⋙ V
-  letI : E0.Monoidal := inferInstanceAs (U ⋙ V).Monoidal
+  let : E0.Monoidal := inferInstanceAs (U ⋙ V).Monoidal
   have : E0.IsEquivalence := inferInstance
   have : E0.PreservesFlat := Functor.preservesFlat_of_isEquivalence E0
   let E := E0.mapDerivedCategory.asEquivalence
-  letI : BraidedCategory (DerivedCategory (ProEtale.AdicSheaf l Y)) :=
+  let : BraidedCategory (DerivedCategory (ProEtale.AdicSheaf l Y)) :=
     (DerivedCategory.nonempty_braidedCategory _).some
-  let τ : (MonoidalCategory.curriedTensor _).flip ⋙ (whiskeringRight _ _ _).obj E0.mapDerivedCategory ≅
+  let τ : (MonoidalCategory.curriedTensor _).flip ⋙
+      (whiskeringRight _ _ _).obj E0.mapDerivedCategory ≅
       E0.mapDerivedCategory ⋙ ProEtale.CondensedRing.derivedTensor Λ Y ⋙
         (whiskeringLeft _ _ _).obj E0.mapDerivedCategory :=
     NatIso.ofComponents (fun P ↦ NatIso.ofComponents (fun Xc ↦

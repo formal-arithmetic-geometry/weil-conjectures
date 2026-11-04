@@ -17109,6 +17109,7 @@ public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.PoincareDuality.Biduality.CoefficientChange
 public import WeilConjectures.PoincareDuality.Biduality.CoefficientChangeBraided
 public import WeilConjectures.PoincareDuality.Biduality.Constructible
+public import WeilConjectures.PoincareDuality.Biduality.ConstructibleDualFullyFaithful
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReading
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHom
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHomAdjunction

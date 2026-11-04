@@ -117,7 +117,15 @@ instance {K' : CochainComplex C ℤ} (f : K' ⟶ K) [IsIso f] :
     rw [← bifunctorHomMapLeft_comp, IsIso.hom_inv_id, bifunctorHomMapLeft_id]⟩
 
 variable {K} in
-/-- The double-dual morphism is natural in `K`. -/
+/-- The double-dual morphism is natural in `K`: for `f : K' ⟶ K` the square
+```
+  K' ──f──▶ K
+  │           │
+  δ           δ
+  ▼           ▼
+  Hom(Hom(K', Y), Y) ──Hom(Hom(f, Y), Y)──▶ Hom(Hom(K, Y), Y)
+```
+commutes. -/
 @[reassoc]
 lemma bifunctorHomBidual_naturality {K' : CochainComplex C ℤ} (f : K' ⟶ K) :
     f ≫ bifunctorHomBidual E K Y = bifunctorHomBidual E K' Y ≫
@@ -217,7 +225,15 @@ def BifunctorEvaluation.MapCompatible (E' : BifunctorEvaluation H') : Prop :=
     E'.ev (U.obj a) (U.obj b)
 
 /-- A functor commuting with the bifunctors and the evaluations carries the double-dual
-morphism of `K` to the double-dual morphism of `U K`. -/
+morphism of `K` to the double-dual morphism of `U K`: the square
+```
+  U K ──U δ──▶ U Hom(Hom(K, Y), Y)
+   ‖                  │ φ
+   ‖                  ▼
+  U K ──δ──▶ Hom'(Hom'(U K, U Y), U Y)
+```
+commutes, the right vertical map being the identifications
+`U Hom(Hom(K, Y), Y) ≅ Hom'(U Hom(K, Y), U Y) ≅ Hom'(Hom'(U K, U Y), U Y)`. -/
 lemma map_bifunctorHomBidual (E' : BifunctorEvaluation H') (hE : E.MapCompatible φ E') :
     (U.mapHomologicalComplex _).map (bifunctorHomBidual E K Y) ≫
         (bifunctorHomObjMapIso (bifunctorHomObj H K Y) Y φ).hom ≫
