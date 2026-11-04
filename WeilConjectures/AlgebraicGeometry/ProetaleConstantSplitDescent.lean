@@ -14,6 +14,8 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import WeilConjectures.AlgebraicGeometry.CoproductCopiesMorphismsClopen
+import WeilConjectures.AlgebraicGeometry.ProetaleCoproductCopiesSheaf
+import WeilConjectures.AlgebraicGeometry.ProetaleSliceDescentDatum
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
@@ -149,7 +151,10 @@ theorem proetaleConstantSplitDescentData_proof {X V : Scheme.{u}} (p : V ⟶ X)
     (e : F.over (Scheme.ProEt.mk p) ≅
       (constantSheaf ((Scheme.ProEt.topology X).over (Scheme.ProEt.mk p))
         (Type w)).obj S) : proetaleConstantSplitDescentData p S F e := by
-  sorry
+  obtain ⟨rho, hrho, hlabel⟩ := Scheme.ProEt.exists_coproductCopiesOver_equiv p S F e
+  have : WeaklyEtale (Over.mk (Sigma.desc fun _ : S ↦ 𝟙 V)).hom := weaklyEtale_sigmaDesc_id V S
+  obtain ⟨halpha, hD⟩ := Scheme.ProEt.exists_unique_iso_and_descentDatum_of_rho rho hrho
+  exact ⟨rho, hrho, hlabel, halpha, hD⟩
 
 /-- The geometric properties of the split codiagonal.
 Source: Tags 03YW and 0AP6
