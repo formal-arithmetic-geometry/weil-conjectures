@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 
 import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteHomEstimate
+import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerBaseChange
 
 /-!
 # Integral coefficients: internal hom, exceptional adjoint and normalized towers
@@ -459,7 +460,8 @@ theorem NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit (M : NormalizedTo
     {c : Cone M.restrict} (hc : Pretriangulated.IsHomotopyLimit c) :
     (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
       DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt :=
-  ⟨sorry, M.derivedComplete_of_isHomotopyLimit hϖ hI hc⟩
+  ⟨fun n ↦ DerivedCategory.isDerivedBaseChange_π_app_of_isHomotopyLimit hϖ hI M.obj M.map
+    M.isDerivedBaseChange (c := c) hc n, M.derivedComplete_of_isHomotopyLimit hϖ hI hc⟩
 
 /-- Tower shapes that occur.
 
