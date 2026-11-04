@@ -689,6 +689,38 @@ structure GlobalHomResolutionRoofCohomologyFields
       DerivedCategory.Q.map a ≫ cohomology X Y R S n z ≫
         (shiftFunctor (DerivedCategory A) n).map (DerivedCategory.Q.map b)
 
+omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
+/-- Any `targetShift` satisfying the family formula is natural in pre/postcomposition. -/
+private theorem roof_targetShift_naturality
+    (targetShift : ∀ (X Y : CochainComplex A ℤ) (n : ℤ),
+      globalLinearHom B X (Y⟦n⟧) ≅ (globalLinearHom B X Y)⟦n⟧)
+    (hshift : ∀ (X Y : CochainComplex A ℤ) (n s : ℤ) (f : Cochain X (Y⟦n⟧) s),
+      ((globalLinearHom B X Y).shiftFunctorObjXIso n s (s + n) rfl).hom
+        ((targetShift X Y n).hom.f s f) = f.rightUnshift (s + n) rfl)
+    {X X' Y Y' : CochainComplex A ℤ} (a : X' ⟶ X) (b : Y ⟶ Y') (n : ℤ) :
+    globalLinearHomMap B a (b⟦n⟧') ≫ (targetShift X' Y' n).hom =
+      (targetShift X Y n).hom ≫ (globalLinearHomMap B a b)⟦n⟧' := by
+  ext s : 1
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro f
+  have h₁ : ((targetShift X' Y' n).hom.f s (globalLinearHomMapTerm B a (b⟦n⟧') s f) :
+      Cochain X' Y' (s + n)) =
+      (globalLinearHomMapTerm B a (b⟦n⟧') s f).rightUnshift (s + n) rfl :=
+    hshift X' Y' n s _
+  have h₂ : ((targetShift X Y n).hom.f s f : Cochain X Y (s + n)) =
+      f.rightUnshift (s + n) rfl := hshift X Y n s f
+  change (targetShift X' Y' n).hom.f s (globalLinearHomMapTerm B a (b⟦n⟧') s f) =
+    globalLinearHomMapTerm B a b (s + n) ((targetShift X Y n).hom.f s f)
+  rw [h₁, h₂]
+  change ((Cochain.ofHom a).comp (f.comp (Cochain.ofHom (b⟦n⟧')) (add_zero s))
+      (zero_add s)).rightUnshift (s + n) rfl =
+    (Cochain.ofHom a).comp ((f.rightUnshift (s + n) rfl).comp (Cochain.ofHom b)
+      (add_zero _)) (zero_add _)
+  ext p q hpq
+  simp [Cochain.rightUnshift_v _ _ _ p q hpq (p + s) rfl,
+    HomologicalComplex.XIsoOfEq_hom_naturality]
+
 /-- The shift square holds for every `c` satisfying the roof equation and every `targetShift`
 given by the family identification (both hypotheses of the field).
 Source: Stacks 09L9 and step 7 of lem-sf-global-hom-resolution-roof.
@@ -707,8 +739,18 @@ theorem globalHom_resolution_roof_shift_fields
     (targetShift : ∀ (X Y : CochainComplex A ℤ) (n : ℤ),
       globalLinearHom B X (Y⟦n⟧) ≅ (globalLinearHom B X Y)⟦n⟧) :
     Nonempty (GlobalHomResolutionRoofShiftFields B c targetShift) := by
-  -- The graded shift calculation is isolated in this named interface.
-  sorry
+  refine ⟨⟨fun hroof hshift X Y R S n ↦ ?_⟩⟩
+  have := roof_precomp_quasiIso B R.ι (J := S.I)
+  have h := hroof X (Y⟦n⟧) R (S.shift n)
+  apply (cancel_mono ((shiftFunctor (DerivedCategory (ModuleCat B)) n).map
+    (DerivedCategory.Q.map (globalLinearHomMap B R.ι (𝟙 S.I))))).mp
+  rw [Category.assoc, Category.assoc, Category.assoc, Category.assoc, ← Functor.map_comp,
+    hroof, ← Functor.commShiftIso_hom_naturality, ← Functor.commShiftIso_hom_naturality,
+    ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
+    ← roof_targetShift_naturality B targetShift hshift,
+    ← roof_targetShift_naturality B targetShift hshift, Functor.map_id,
+    Functor.map_comp_assoc, Functor.map_comp_assoc]
+  exact (reassoc_of% h) _
 
 section CompositionChainMap
 
