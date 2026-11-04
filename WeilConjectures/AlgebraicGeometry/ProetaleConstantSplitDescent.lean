@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.CoproductCopiesMorphismsClopen
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+import WeilConjectures.AlgebraicGeometry.ProetaleSplitCodiagonalGeometry
 
 /-!
 # Split presentations of a pro-etale constant trivialization
@@ -174,7 +175,10 @@ theorem proetaleConstantSplitDescentGeometry {V : Scheme.{u}} (S : Type w)
         ∀ (U : ((proetaleSplitCodiagonal V S) ⁻¹ᵁ B).toScheme.Opens),
           IsCompact (U : Set ((proetaleSplitCodiagonal V S) ⁻¹ᵁ B).toScheme) →
             U.toScheme.IsQuasiAffine) := by
-  sorry
+  refine ⟨isSeparated_sigmaDesc_id V S, etale_sigmaDesc_id V S,
+    fun _ ↦ surjective_sigmaDesc_id V S, fun B _ U hU ↦ ?_⟩
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  exact isQuasiAffine_of_isOpenImmersion_sigma (U.ι ≫ (proetaleSplitCodiagonal V S ⁻¹ᵁ B).ι)
 
 /-- A constant trivialization gives natural split scheme presentations, a unique
 matching overlap isomorphism and its scheme descent cocycle. The codiagonal is
