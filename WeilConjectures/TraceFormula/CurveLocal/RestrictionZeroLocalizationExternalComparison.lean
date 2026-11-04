@@ -50,7 +50,13 @@ The source proof combines ordinary Künneth with arbitrary-base-change for open 
 continuity theorem for strict localization.  No imported declaration packages this composite
 comparison; it is the second independent geometric obligation (estimated at more than four hours
 because all three mate and continuity squares must be assembled).
-(blueprint: restriction-zero-localization-external-comparison). -/
+(blueprint: restriction-zero-localization-external-comparison).
+
+Warning: as stated, for arbitrary `L` and `K`, this is false. Take `Λ ≠ 0` and let `L = K` be the
+skyscraper `(M.y)_* Λ`. Then `P` is the skyscraper at the closed point of `T`, which is nonzero.
+That point lies on `H` and on `V`, so the restriction of `P` to `T ∖ (H ∪ V)` is zero, and so is
+the right-hand side. The only caller, `RestrictionZeroLocalization3`, uses `L = 𝔻_X K` with
+`K_y = 0`. The statement needs these hypotheses. -/
 theorem restrictionZeroLocalization_externalComparison
     {Λ : Type (u + 1)} [CommRing Λ]
     (M : CurveLocalModel k)

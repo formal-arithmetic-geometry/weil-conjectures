@@ -47,7 +47,13 @@ stalkwise strict-localization continuity theorem.  The latter comparison is not 
 the imported source modules; this is the first of the two independent geometric obligations
 (estimated at more than four hours of work because it requires the full continuity and duality
 mate calculation).
-(blueprint: restriction-zero-localization-dual-comparison). -/
+(blueprint: restriction-zero-localization-dual-comparison).
+
+Warning: as stated, for arbitrary `L`, this is false. Take `Λ ≠ 0` and `L` the skyscraper
+`(M.y)_* Λ` at `y`. Then `Lloc` is the skyscraper at the closed point of the strict
+localization, which is nonzero, while `N = j^* Lloc = 0` and so `Rj_* N = 0`. The only caller,
+`RestrictionZeroLocalization3`, uses `L = 𝔻_X K` with `K_y = 0`. There `i^! Lloc = 𝔻(i^* Kloc)`
+vanishes and the comparison holds. The statement needs these hypotheses. -/
 theorem restrictionZeroLocalization_dualComparison
     {Λ : Type (u + 1)} [CommRing Λ]
     (M : CurveLocalModel k)

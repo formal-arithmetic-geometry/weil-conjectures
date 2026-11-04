@@ -32,7 +32,7 @@ theorem coefficientExtensionRing_primary (ell : ℕ) [Fact ell.Prime]
     (E : Type) [Field E] [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
     (n : ℕ) (hn : 1 ≤ n) :
     ∃ m : ℕ, 0 < m ∧ ∀ a : Padic.coefficientExtensionRing ell E n, (ell ^ m) • a = 0 := by
-  sorry
+  exact ⟨n, hn, Padic.pow_nsmul_coefficientExtensionRing ell E n⟩
 
 
 end WeilConjectures.FiniteRingTrace

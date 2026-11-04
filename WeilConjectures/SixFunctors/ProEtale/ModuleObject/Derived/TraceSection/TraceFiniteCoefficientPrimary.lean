@@ -69,6 +69,6 @@ and multiplication by an arbitrary quotient element gives the asserted nsmul. -/
 theorem ringTorsion (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) :
     ∃ m : ℕ, ∀ a : Ring ell E n, (ell ^ m) • a = 0 := by
-  sorry
+  exact ⟨n + 1, Padic.pow_nsmul_coefficientExtensionRing ell E (n + 1)⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.TraceSection
