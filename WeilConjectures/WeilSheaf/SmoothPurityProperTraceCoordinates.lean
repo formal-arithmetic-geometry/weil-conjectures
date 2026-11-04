@@ -22,6 +22,19 @@ universe u
 open CategoryTheory
 open scoped CategoryTheory.Obj
 
+namespace CategoryTheory
+
+/-- Transport of an inverse only requires the equality of the forward maps. -/
+lemma Functor.map_iso_inv_eq_of_map_hom_eq
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X Y : C} (e : X ≅ Y) (e' : F.obj X ≅ F.obj Y)
+    (h : F.map e.hom = e'.hom) : F.map e.inv = e'.inv := by
+  apply (cancel_mono e'.hom).1
+  rw [← h, ← F.map_comp, Iso.inv_hom_id, F.map_id]
+  exact e'.inv_hom_id.symm
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -48,16 +61,14 @@ lemma boundedConstructibleBaseChangeOfMap_inv_app_hom
       (asIso (baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq)).inv.app P.obj := by
   have := isIso_boundedConstructibleBaseChangeOfMap l sq
   have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj l) sq
-  have he : (boundedConstructible _).ι.mapIso
-      ((asIso (boundedConstructibleBaseChangeOfMap l sq.toCommSq)).app P) =
-      (asIso (baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq)).app P.obj := by
-    apply Iso.ext
-    change ((boundedConstructibleBaseChangeOfMap l sq.toCommSq).app P).hom = _
-    simp only [boundedConstructibleBaseChangeOfMap, NearbyCyclesModel.liftExchange_app_hom]
-    dsimp only [Iso.app_hom, asIso_hom]
-    cast_proofs (Eq.refl
-      ((baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq).app P.obj))
-  exact congrArg Iso.inv he
+  apply Functor.map_iso_inv_eq_of_map_hom_eq (boundedConstructible _).ι
+    ((asIso (boundedConstructibleBaseChangeOfMap l sq.toCommSq)).app P)
+    ((asIso (baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq)).app P.obj)
+  change ((boundedConstructibleBaseChangeOfMap l sq.toCommSq).app P).hom = _
+  dsimp only [Iso.app_hom, asIso_hom]
+  simp only [boundedConstructibleBaseChangeOfMap, NearbyCyclesModel.liftExchange_app_hom]
+  cast_proofs (Eq.refl
+    ((baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq).app P.obj))
 
 variable {P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
