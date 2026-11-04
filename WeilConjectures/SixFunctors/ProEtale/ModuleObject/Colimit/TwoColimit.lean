@@ -24,6 +24,10 @@ import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 import WeilConjectures.AlgebraicGeometry.CondensedFinitePresentationDescent
 import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedCoefficientComplexPresentation
+public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedDerivedTensorComparisonSupplement
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedFiniteModelProofAPISupplement
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.SplitCoefficientDerivedFaithfulSupplement
 /-!
 
 # The bounded constructible `ℚ̄_ℓ`-complexes as the 2-colimit over the finite subextensions
@@ -351,6 +355,10 @@ private lemma bounded_factors_cocone
   exact CategoryTheory.factors_of_colimit_cocone N DerivedCategory.Q c hc K
     (CategoryTheory.factors_iso _ ((shiftFunctorZero _ ℤ).app K)
       (CategoryTheory.shiftFactors_of_hom_colimit N DerivedCategory.Q K h 0))
+
+omit [TopologicalSpace.NoetherianSpace X] in
+private lemma tensorComp_eq {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    derivedExtendScalarsCompIso X ℓ h = finiteCoefficientDerivedTensorCompIso X ℓ h := rfl
 
 attribute [local irreducible] derivedExtendScalarsCompIso
 

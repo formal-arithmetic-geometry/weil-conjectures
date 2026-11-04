@@ -39,7 +39,7 @@ omit [Finite k₀] in
 `Spec` of the identity. -/
 instance affineLine.isOver_over :
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).IsOver (Spec (CommRingCat.of k₀)) :=
-  ⟨by simp [specOverSpec_over, Algebra.algebraMap_self]⟩
+  ⟨by simp⟩
 
 set_option hygiene false in
 /-- The structure morphism `p : 𝔸¹ ⟶ Spec k₀`. -/

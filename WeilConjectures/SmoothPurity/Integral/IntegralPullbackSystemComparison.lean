@@ -8,11 +8,13 @@ module
 public import WeilConjectures.SmoothPurity.Integral.IntegralSystemReductionFullyFaithful
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
+public import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedQuotientPullbackRealization
 import WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSystems
 import WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationModels
 import WeilConjectures.SmoothPurity.CompletedOperations.NormalizedCompletedOperationModels
 import WeilConjectures.TraceFormula.Supporting.EffectiveQuotientModelDescent
 import WeilConjectures.PoincareDuality.Integral.IntegralPullbackCounitProjection
+import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedQuotientPullbackRealizationNormalization
 
 /-! # Integral pullback and coherent finite-system reduction
 
@@ -73,7 +75,8 @@ attribute [local reducible] integralCoefficientSheaf integralCoefficientCommRing
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Integral pullback reduces to exact inverse image on coherent finite systems.
+/-- Integral pullback reduces to exact inverse image on coherent finite systems, with the
+whole-system value of the comparison recorded.
 The evaluated comparison is the adjoint of the actual Roos projection, for every
 flat-term K-flat representative. No composition comparison is asserted here.
 Source: Stacks 099N(5), 0941; Bhatt--Scholze, Lemma 3.5.7
@@ -91,7 +94,10 @@ and Roos comparison gives a natural system isomorphism. The counit projection
 formula identifies its evaluation with the scalar adjoint of the defining tower
 projection. Transport through the unit-normalized finite pullback presentation
 and the universal reduction counit gives exactly the displayed formula, for every
-representative and every positive uniformizer exponent. -/
+representative and every positive uniformizer exponent.
+The second clause records the whole-system value: the comparison is the coherent
+reduction of the Roos-normalized realization `completedQuotientPullbackRealization`
+followed by the coherent counit, not only its finite evaluations. -/
 theorem integralPullbackSystemComparison :
     ∃ β : ∀ {X Y : Scheme.{u}}
         [∀ x : X, Invertible (l : X.residueField x)]
@@ -99,7 +105,7 @@ theorem integralPullbackSystemComparison :
         constructibleIntegralPullback l E f ⋙ integralSystemReduction l E X ≅
           integralSystemReduction l E Y ⋙
             finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f,
-      ∀ {X Y : Scheme.{u}}
+      (∀ {X Y : Scheme.{u}}
         [∀ x : X, Invertible (l : X.residueField x)]
         [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
         (K : sfIntegralConstructibleCategory l E Y)
@@ -115,7 +121,17 @@ theorem integralPullbackSystemComparison :
                 ((integralSystemReductionEvaluation l E Y n).hom.app K) =
           (integralSystemReductionEvaluation l E X n).hom.app
               ((constructibleIntegralPullback l E f).obj K) ≫
-            (integralSystemPullbackReductionIso l E f K P e n).hom := by
+            (integralSystemPullbackReductionIso l E f K P e n).hom) ∧
+      ∀ {X Y : Scheme.{u}}
+        [∀ x : X, Invertible (l : X.residueField x)]
+        [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
+        (K : sfIntegralConstructibleCategory l E Y),
+        (β f).hom.app K =
+          (pullbackTensorCalculus l E X).reduction.map
+              ((CompletedQuotient.completedQuotientPullbackRealization l E f).hom.app K.obj) ≫
+            (pullbackTensorCalculus l E X).adjunction.counit.app
+              ((integralComparisonDerivedSequencePullback l E f).obj
+                ((pullbackTensorCalculus l E Y).reduction.obj K.obj)) := by
   classical
   let S (X : Scheme.{u}) : CoefficientDerivedSystemCalculus l E X :=
     (coefficientDerivedSystemEvaluationCalculus l E X).choose
@@ -135,8 +151,10 @@ theorem integralPullbackSystemComparison :
       (S Y) (S X) (S Y) (ρ X) (ρ Y)
   let M {X Y : Scheme.{u}}
       [∀ x : X, Invertible (l : X.residueField x)]
-      [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :=
-    Classical.choice (hd f).2.1
+      [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :
+      IntegralComparisonPullbackModel l E f (S Y) (ρ X) :=
+    ⟨CompletedQuotient.completedQuotientPullbackRealization l E f,
+      CompletedQuotient.completedQuotientPullbackRealization_normalized l E f (ρ X)⟩
   let τ {X Y : Scheme.{u}}
       [∀ x : X, Invertible (l : X.residueField x)]
       [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :
@@ -157,7 +175,7 @@ theorem integralPullbackSystemComparison :
       Iso.isIso_hom ((M f).realization.app K.obj)
     exact IsIso.comp_isIso' (Functor.map_isIso _ _) this
   unfold constructibleIntegralPullback integralSystemReduction finiteSystemDerivedPullback
-  refine ⟨fun {X Y} _ _ f ↦ ?_, ?_⟩
+  refine ⟨fun {X Y} _ _ f ↦ ?_, ?_, ?_⟩
   · refine NatIso.ofComponents (fun K ↦ ?_) ?_
     · exact @asIso _ _ _ _ ((τ f).app K.obj) (ht f K)
     · intro A B a
@@ -186,5 +204,7 @@ theorem integralPullbackSystemComparison :
     simp only [τ, S, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Functor.comp_obj] at h'' ⊢
     exact h''
+  · intro X Y _ _ f K
+    rfl
 
 end WeilConjectures

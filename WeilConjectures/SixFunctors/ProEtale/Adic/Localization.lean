@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteness
 
 /-!
 # The closed-support triangle on `Dᵇc(-, ℚ̄_ℓ)`

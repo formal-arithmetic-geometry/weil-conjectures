@@ -61,7 +61,7 @@ private theorem field_finiteTor (B : Type (u + 1)) [Field B] (Z : Scheme.{u})
 -- Bhatt--Scholze 5.4.3 and the classical finite-type direct-image theorem.
 private theorem finite_field_image
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    [Fact (ringChar k ≠ ℓ)]
     (B : Type u) [Field B] [Finite B] [TopologicalSpace B]
     [DiscreteTopology B] [IsTopologicalRing B] (hB : (ℓ : B) = 0)
     (X Y : Over (Spec (.of k) : Scheme.{u}))
@@ -74,9 +74,7 @@ private theorem finite_field_image
         (FiniteDiscreteOrdinary.coefficient B) f.left).obj K.obj)) := by
   classical
   let E (T : Scheme.{u}) := (FiniteDiscreteOrdinary.encoding_exists B T).some
-  obtain ⟨hreal, hpush⟩ := FiniteDiscreteOrdinary.finiteCtfInternalEtaleRealization
-    ℓ (ringChar k) k (Fact.out : (ringChar k).Prime).pos
-    (Fact.out : ringChar k ≠ ℓ) B E
+  obtain ⟨hreal, hpush⟩ := FiniteDiscreteOrdinary.finiteCtfInternalEtaleRealization_of_field k B E
   obtain ⟨a, b, ht⟩ := K.property.2
   have hab : a ≤ max a b := le_max_left _ _
   have ht' := ht.mono le_rfl (le_max_right a b)
@@ -170,7 +168,7 @@ private theorem residue_discrete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 private theorem integral_image
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
     (X Y : Over (Spec (.of k) : Scheme.{u}))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -360,7 +358,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]

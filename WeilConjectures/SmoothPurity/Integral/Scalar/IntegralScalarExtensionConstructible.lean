@@ -9,6 +9,8 @@ public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensi
 public import WeilConjectures.SmoothPurity.Integral.IntegralConstructibleLinear
 
 import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
+import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
+import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarFiniteLevelBounds
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTowerEffectivity
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
@@ -480,6 +482,74 @@ private theorem cocone_degree_ext
       rw [Preadditive.comp_add, Preadditive.comp_add, reassoc_of% hf, reassoc_of% hs]
     _ = g.f i := by rw [hi, Category.comp_id]
 
+/-- Derived completeness for one finite-field presentation implies unrestricted completeness:
+both are equivalent to the presentation-free Roos condition. -/
+private theorem isDerivedCompleteUnrestricted_of_isDerivedComplete
+    (K : completedIntegralDerivedCategory l E Y D hl)
+    (hK : IsDerivedComplete l E Y D hl K) : IsDerivedCompleteUnrestricted l E Y K := by
+  have hsf := (sfDerivedComplete_iff_legacy l E Y D hl K).mpr hK
+  obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
+  have : Fact p.Prime := ⟨hprime⟩
+  let D' : FiniteFieldDatum.{0} :=
+    { p := p
+      a := 1
+      q := p
+      prime := hprime
+      exponent_pos := by decide
+      cardinality_eq := by simp
+      k₀ := ZMod p
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+  have hl' : l ≠ D'.p := by
+    change l ≠ p
+    omega
+  exact ⟨D', hl', (sfDerivedComplete_iff_legacy l E Y D' hl' K).mp hsf⟩
+
+/-- On a good complex with complete localization, the strict-cone chain comparison is a
+quasi-isomorphism: the universal counit is invertible on K-flat complexes and the descended
+comparison is invertible on complete objects. -/
+private theorem completedScalarChainComparison_isIso
+    (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
+    (hc : IsDerivedCompleteUnrestricted l E Y (DerivedCategory.Q.obj P.obj)) :
+    IsIso (DerivedCategory.Q.map ((completedScalarChainComparison l E L ι Y).app P.obj)) := by
+  have h := (completedScalarComparison_existsUnique l E L ι Y).exists.choose_spec P
+  have h1 : IsIso ((completedScalarComparison_existsUnique l E L ι Y).exists.choose.app
+      (DerivedCategory.Q.obj P.obj)) :=
+    ((finiteFreeCompletedScalarComparison l E L ι Y).2.1 _ hc).1
+  have h2 : IsIso (completedScalarCounit l E L ι Y P.obj) :=
+    (completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+      |>.choose_spec.choose_spec.2.2 P.obj P.property.1
+  have h3 := IsIso.comp_isIso' h1
+    (inferInstance : IsIso ((integralScalarExtensionComparisonOfUniverses l E L ι Y).hom.app P))
+  rw [h] at h3
+  exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ h2 h3
+
+/-- On a good complex with complete localization, ordinary exact extension agrees with the
+completed extension, through the quotient completion chain map. -/
+private noncomputable def ordinaryScalarCompletedIso
+    (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
+    (hc : IsDerivedCompleteUnrestricted l E Y (DerivedCategory.Q.obj P.obj)) :
+    (integralOrdinaryDerivedScalar l E L ι Y).obj (DerivedCategory.Q.obj P.obj) ≅
+      (integralScalarExtension l E L ι Y).obj (DerivedCategory.Q.obj P.obj) :=
+  (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.app P.obj ≪≫
+    DerivedCategory.Q.mapIso
+      ((NatIso.mapHomologicalComplex (ordinaryScalarModelIso l E L ι Y) (.up ℤ)).app
+        P.obj) ≪≫
+    @asIso _ _ _ _ (DerivedCategory.Q.map ((completedScalarChainComparison l E L ι Y).app P.obj))
+      (completedScalarChainComparison_isIso l E L ι Y P hc) ≪≫
+    ((integralScalarExtensionComparison l E L ι Y).app P).symm
+
+/-- Every object of the derived category is the localization of a good complex. -/
+private theorem exists_goodComplex_iso (K : DerivedCategory (integralTowerModules l E Y)) :
+    ∃ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
+      Nonempty (DerivedCategory.Q.obj P.obj ≅ K) := by
+  let := integralOperationsGoodLocalization_isLocalization l E Y
+  have := Localization.essSurj (integralOperationsGoodLocalization l E Y)
+    ((HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)).inverseImage
+      (integralOperationsGoodComplex l E Y).ι)
+  exact ⟨(integralOperationsGoodLocalization l E Y).objPreimage K,
+    ⟨(integralOperationsGoodLocalization l E Y).objObjPreimageIso K⟩⟩
+
 /-- Finite free completed extension preserves bounded constructibility and completeness.
 Source: Bhatt--Scholze, Proposition 3.5.1
 (blueprint: lem-weil-integral-scalar-extension-constructible).
@@ -494,7 +564,13 @@ theorem integralOrdinaryDerivedScalar_constructible
     (hK : boundedConstructibleDerivedCompleteIntegral D l hl E Y K) :
     boundedConstructibleDerivedCompleteIntegral D l hl L Y
       ((integralOrdinaryDerivedScalar l E L ι Y).obj K) := by
-  sorry
+  obtain ⟨P, ⟨e⟩⟩ := exists_goodComplex_iso l E Y K
+  have hP := (boundedConstructibleDerivedCompleteIntegral D l hl E Y).prop_of_iso e.symm hK
+  have hc := isDerivedCompleteUnrestricted_of_isDerivedComplete D l hl E Y _ hP.1
+  exact (boundedConstructibleDerivedCompleteIntegral D l hl L Y).prop_of_iso
+    ((ordinaryScalarCompletedIso l E L ι Y P hc).symm ≪≫
+      (integralOrdinaryDerivedScalar l E L ι Y).mapIso e)
+    (integralScalarExtension_constructible D l hl E L ι Y ⟨_, hP⟩)
 
 /-- Restriction of finite free completed tensor to the integral full subcategories.
 On complete objects its ordinary exact tensor model computes completed derived tensor.
@@ -659,6 +735,45 @@ private theorem integralScalarCompletionChain_model :
     (integralScalarCompletionChain_existsUnique l E L ι Y).exists.choose_spec
     (integralScalarCompletionChain_model_spec l E L ι Y)
 
+/-- On a good complex with complete localization, the quotient completion chain map is a
+quasi-isomorphism. -/
+private theorem integralScalarCompletionChain_isIso
+    (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
+    (hc : IsDerivedCompleteUnrestricted l E Y (DerivedCategory.Q.obj P.obj)) :
+    IsIso (DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι Y).app P.obj)) := by
+  rw [integralScalarCompletionChain_model, NatTrans.comp_app, Functor.map_comp]
+  exact @IsIso.comp_isIso _ _ _ _ _ _ _ inferInstance
+    (completedScalarChainComparison_isIso l E L ι Y P hc)
+
+/-- The localized quotient completion map from ordinary to completed extension, normalized on
+good representatives by the quotient completion chain map. -/
+private theorem integralScalarCompletion_exists :
+    ∃ τ : integralOrdinaryDerivedScalar l E L ι Y ⟶ integralScalarExtension l E L ι Y,
+      ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
+        τ.app (DerivedCategory.Q.obj P.obj) ≫
+            (integralScalarExtensionComparison l E L ι Y).hom.app P =
+          (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫
+            DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι Y).app P.obj) := by
+  let := integralOperationsGoodLocalization_isLocalization l E Y
+  let Λ := integralOperationsGoodLocalization l E Y
+  let ff := Localization.fullyFaithfulWhiskeringLeft Λ
+    ((HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)).inverseImage
+      (integralOperationsGoodComplex l E Y).ι) (DerivedCategory (integralTowerModules l L Y))
+  let α : Λ ⋙ integralOrdinaryDerivedScalar l E L ι Y ⟶ integralScalarOnGood l E L ι Y :=
+    Functor.whiskerLeft (integralOperationsGoodComplex l E Y).ι
+      ((integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom ≫
+        Functor.whiskerRight (integralScalarCompletionChain l E L ι Y) DerivedCategory.Q)
+  refine ⟨ff.preimage (α ≫ (integralScalarExtensionComparison l E L ι Y).inv), fun P ↦ ?_⟩
+  have h : (ff.preimage (α ≫ (integralScalarExtensionComparison l E L ι Y).inv)).app
+      (DerivedCategory.Q.obj P.obj) =
+        α.app P ≫ (integralScalarExtensionComparison l E L ι Y).inv.app P :=
+    NatTrans.congr_app
+      (ff.map_preimage (α ≫ (integralScalarExtensionComparison l E L ι Y).inv)) P
+  rw [h]
+  exact (Category.assoc _ _ _).trans ((congrArg (α.app P ≫ ·)
+    ((integralScalarExtensionComparison l E L ι Y).inv_hom_id_app P)).trans (Category.comp_id _))
+
+
 /-- The canonical finite-free comparison is uniquely fixed on good representatives.
 Source: Bhatt--Scholze, Proposition 3.5.1 and Lemma 6.8.2
 (blueprint: lem-weil-integral-scalar-extension-constructible).
@@ -678,7 +793,43 @@ theorem integralConstructibleScalarComparison_existsUnique :
             (integralScalarExtensionComparison l E L ι Y).hom.app P =
           (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫
             DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι Y).app P.obj) := by
-  sorry
+  obtain ⟨τ, hτ⟩ := integralScalarCompletion_exists l E L ι Y
+  have hiso (K : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) :
+      IsIso (τ.app K.obj) := by
+    obtain ⟨P, ⟨e⟩⟩ := exists_goodComplex_iso l E Y K.obj
+    have hP := (boundedConstructibleDerivedCompleteIntegral D l hl E Y).prop_of_iso
+      e.symm K.property
+    have hc := isDerivedCompleteUnrestricted_of_isDerivedComplete D l hl E Y _ hP.1
+    refine (NatTrans.isIso_app_iff_of_iso τ e).1 ?_
+    have := integralScalarCompletionChain_isIso l E L ι Y P hc
+    have h3 : IsIso (τ.app (DerivedCategory.Q.obj P.obj) ≫
+        (integralScalarExtensionComparison l E L ι Y).hom.app P) := by
+      rw [hτ P]
+      exact @IsIso.comp_isIso _ _ _ _ _ _ _ inferInstance this
+    exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _
+      (Iso.isIso_hom ((integralScalarExtensionComparison l E L ι Y).app P)) h3
+  let c₀ : integralConstructibleScalarExtension D l hl E L ι Y ≅
+      constructibleIntegralScalarExtension D l hl E L ι Y :=
+    NatIso.ofComponents
+      (fun K ↦ (boundedConstructibleDerivedCompleteIntegral D l hl L Y).isoMk
+        (@asIso _ _ _ _ (τ.app K.obj) (hiso K)))
+      (fun f ↦ ObjectProperty.hom_ext _ (τ.naturality f.hom))
+  refine ⟨c₀, fun P hP ↦ hτ P, fun c hc ↦ ?_⟩
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  obtain ⟨P, ⟨e⟩⟩ := exists_goodComplex_iso l E Y K.obj
+  have hP := (boundedConstructibleDerivedCompleteIntegral D l hl E Y).prop_of_iso
+    e.symm K.property
+  let e' : (⟨DerivedCategory.Q.obj P.obj, hP⟩ :
+      boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) ≅ K :=
+    (boundedConstructibleDerivedCompleteIntegral D l hl E Y).isoMk e
+  have hK : c.hom.app ⟨_, hP⟩ = c₀.hom.app ⟨_, hP⟩ := ObjectProperty.hom_ext _
+    ((cancel_mono ((integralScalarExtensionComparison l E L ι Y).hom.app P)).1
+      ((hc P hP).trans (hτ P).symm))
+  rw [← cancel_epi ((integralConstructibleScalarExtension D l hl E L ι Y).map e'.hom),
+    c.hom.naturality, NatTrans.naturality]
+  exact congrArg (· ≫ (constructibleIntegralScalarExtension D l hl E L ι Y).map e'.hom) hK
 
 /-- The finite-free comparison with the canonical quotient completion normalization.
 Source: Bhatt--Scholze, Proposition 3.5.1
