@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import WeilConjectures.WeilSheaf.Native.Projection.InstanceNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
 public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
@@ -116,6 +117,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         curriedTensor_obj_obj] at hmU ⊢
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hmU ⊢
+      simp only [Endofunctor.IsoAlgebra.projection_abelian_toPreadditive] at hmU ⊢
       with_reducible exact_mod_proofs hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (by
@@ -144,7 +146,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       asIso_hom] at hh ⊢
     dsimp only [derivedCondensedRealization, Functor.comp_obj, Functor.prod_obj,
       Functor.uncurry_obj_obj, curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hh ⊢
-    cast_proofs hh
+    simp only [Endofunctor.IsoAlgebra.projection_abelian_toPreadditive] at hh ⊢
+    with_reducible exact_mod_proofs hh
   have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT

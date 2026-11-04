@@ -306,3 +306,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 07:23 CST: K5-20261105T071915.log rc=1. Native erw steps pass through hcomp; remove now-redundant dsimp(obj_X), which reports no progress. Scope final map/summand rewrites to RHS. Derived cast has advanced to tensor.obj versus tensorObj: add tensor_obj and normalize newly generated object expressions after model/map simplification.
 
 2026-11-05 07:29 CST: 072400 rc=1. Total now passes sheaf square and naturality; pin final map composition to R and its RHS suffix. Derived cast still fails without useful mismatch trace; use reducible exact_mod_proofs to expose the first non-proof expression mismatch without native unfolding. No budget increase.
+
+2026-11-05 07:33 CST: 072908 rc=1. Reducible matching exposes IsoAlgebra.instPreadditive versus abelian.toPreadditive; add a generic rfl equality and normalize it before matching. Total proof passes all major steps but exhausts cumulative 400k budget at the final summand calculation (21s); scoped increase to 600k after measured progress.
