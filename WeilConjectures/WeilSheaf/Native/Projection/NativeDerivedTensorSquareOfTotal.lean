@@ -92,6 +92,7 @@ variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
 
 /-- On K-flat representatives, the native tensor square is the localization of the
 square of total complexes. -/
+include htotal in
 lemma condensedRealizationTensor_pull_square_Q_of_total
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :

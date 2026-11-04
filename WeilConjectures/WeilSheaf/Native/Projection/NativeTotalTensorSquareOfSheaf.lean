@@ -38,6 +38,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 variable (hsheaf : ∀ M N : ProEtaleWeilSheaf k₀ l Y, SheafPullTensorSquare k₀ l g M N)
 
 /-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
+include hsheaf in
 lemma condensedRealizationTotalTensor_pull_square_of_sheaf
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) :
     TotalPullTensorSquare k₀ l g P T := by
