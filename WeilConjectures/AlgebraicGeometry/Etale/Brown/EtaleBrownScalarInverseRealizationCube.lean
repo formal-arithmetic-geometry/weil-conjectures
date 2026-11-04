@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProjectionRealization
 public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficientRefinement
 
+import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownCanonicalScalarCube
+import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownInverseRepresentative
+
 /-! # Open scalar transport decomposition
 
 Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16;
@@ -81,6 +84,17 @@ theorem etaleBrownScalarInverseRealization_cube
       (Etale.scalarExtension (strictEtaleBrownRingMap O t h) V).map ((r n).inverse.inv.app K) ≫
       (Etale.properOpenCoefficientPullbackIso (strictEtaleBrownRingMap O t h) g).inv.app
         ((RW.derived n).obj K) := by
-  sorry
+  have hc := strictEtaleBrownCanonicalScalarCube O t g A PW PV B RV RW r
+    (fun k K ↦ strictEtaleBrownInverse_representative O t g k A (B.level k) RV RW (r k) K) h K
+  simp only [strictEtaleBrownCanonicalRestriction_mate, Iso.trans_inv, Iso.symm_inv,
+    NatTrans.comp_app, isoWhiskerLeft_inv, whiskerLeft_app, Functor.map_comp,
+    Category.assoc] at hc
+  rw [← cancel_epi ((RV.scalar h).inv.app _), ← cancel_epi
+    ((Etale.scalarExtension (strictEtaleBrownRingMap O t h) V).map ((r n).inverse.hom.app K)),
+    ← cancel_epi ((Etale.scalarExtension (strictEtaleBrownRingMap O t h) V).map
+      ((Etale.leftDerivedUpperStarIsoMapDerivedCategory
+        (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).hom.app ((RW.derived n).obj K)))]
+  rw [reassoc_of% hc]
+  simp [Etale.properOpenCoefficientPullbackIso]
 
 end AlgebraicGeometry
