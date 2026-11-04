@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 import WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat
+import WeilConjectures.CategoryTheory.Sites.SheafPullbackModuleFlat
 
 /-!
 # Flat module objects under pullback from the condensed point
@@ -41,7 +42,12 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 /-- The pullback of module objects from the condensed point to `(Spec ℤ)_proét` preserves flat
 objects. Source: Stacks Project, Tag 05VD (auxiliary; not a blueprint node). -/
 theorem preservesFlat_mapMod_pointUpperStar : (pointUpperStar.{u}.mapMod Λ).PreservesFlat := by
-  sorry
+  have h := Functor.sheafPullbackConstruction.preservesFlat_mapModComap
+    (coherentTopology Profinite.{u}) (Scheme.ProEt.topology specZ.{u}) profiniteToProEt Λ
+    (pointUpperStar.{u}.obj Λ) (𝟙 _)
+  let e : Mod.mapModComap (𝟙 (pointUpperStar.{u}.obj Λ)) ≅ pointUpperStar.{u}.mapMod Λ :=
+    Functor.isoWhiskerLeft _ (Mod.comapId _) ≪≫ Functor.rightUnitor _
+  exact ⟨fun hM ↦ ObjectProperty.prop_of_iso _ (e.app _) (h.flat_obj hM)⟩
 
 /-- The pullback `p_X^* : Mod_Λ ⥤ Mod_{Λ_X}` of module objects from the condensed point
 preserves flat objects.

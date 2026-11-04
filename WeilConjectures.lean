@@ -15147,6 +15147,7 @@ public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafModuleZSMul
+public import WeilConjectures.CategoryTheory.Sites.SheafPullbackModuleFlat
 public import WeilConjectures.CategoryTheory.Sites.SheafSmul
 public import WeilConjectures.CategoryTheory.Sites.SheafifyAddAction
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
