@@ -314,3 +314,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 [K5 2026-11-05 07:41 CST] NativeTotalTensorCore is GREEN (437s), log K5-20261105T073301.log, commit 22e1cf688b. Summand proof now checks through the full tensor square. Still validating concrete total specialization and derived Q square; separate derived check K5-20261105T073828.log is rebuilding NativePullTensor on newsrv t1. No DONE.
 
 2026-11-05 07:43 CST: 073301 complete rc=1 ONLY DerivedTensorSquareOfTotal failed. NativeTotalTensorCore GREEN 437s (kernel proof 203s), NativeTotalTensorSquareOfSheaf GREEN 104s, NativeTotalTensorSquare GREEN 2.8s. Remaining is derived assembly and downstream leaf/audit.
+
+2026-11-05 07:47 CST: 073828 rc=1: dsimp also skips the implicit instance occurrence. Use with_reducible_and_instances exact_mod_proofs for the model identifications, unfolding instance paths without geometric data. 400k profile reaches deferred total-square argument after 24s; reserve scoped 800k for remaining model identification and cancellation. Root/audit 074448 is still checking merged-PR dependencies; known derived error remains in that source.

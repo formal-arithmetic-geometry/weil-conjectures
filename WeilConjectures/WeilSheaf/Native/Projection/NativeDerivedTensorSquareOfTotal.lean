@@ -56,9 +56,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
 
--- Profiling at 200000 heartbeats reaches a deferred model-square proof (16s);
--- reserve a larger cumulative budget for the native comparison assembly.
-set_option maxHeartbeats 400000 in
+-- Profiling at 400000 heartbeats reaches the deferred total-square argument (24s);
+-- reserve the cumulative budget for both model identifications and final cancellation.
+set_option maxHeartbeats 800000 in
 include htotal in
 /-- On K-flat representatives, the native tensor square is the localization of the
 square of total complexes. -/
@@ -117,8 +117,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         curriedTensor_obj_obj] at hmU ⊢
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hmU ⊢
-      dsimp only [Endofunctor.IsoAlgebra.projection_abelian_toPreadditive] at hmU ⊢
-      with_reducible exact_mod_proofs hmU)
+      with_reducible_and_instances exact_mod_proofs hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (by
       have ht := htotal P T
@@ -146,8 +145,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       asIso_hom] at hh ⊢
     dsimp only [derivedCondensedRealization, Functor.comp_obj, Functor.prod_obj,
       Functor.uncurry_obj_obj, curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hh ⊢
-    dsimp only [Endofunctor.IsoAlgebra.projection_abelian_toPreadditive] at hh ⊢
-    with_reducible exact_mod_proofs hh
+    with_reducible_and_instances exact_mod_proofs hh
   have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
