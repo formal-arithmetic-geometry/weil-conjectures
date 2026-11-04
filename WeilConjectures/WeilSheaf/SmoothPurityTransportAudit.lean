@@ -31,6 +31,7 @@ import WeilConjectures.WeilSheaf.SmoothPurityNativeHomSingle
 import WeilConjectures.WeilSheaf.SmoothPurityNativeTensorTate
 import WeilConjectures.WeilSheaf.SmoothPurityNativeHomShift
 import WeilConjectures.WeilSheaf.SmoothPurityNativeTensorTateShift
+import WeilConjectures.WeilSheaf.SmoothPurityThom
 
 #print axioms AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_free
@@ -74,3 +75,4 @@ import WeilConjectures.WeilSheaf.SmoothPurityNativeTensorTateShift
 #print axioms AlgebraicGeometry.WeilComplex.nativeConstructibleTensorTateIso
 #print axioms AlgebraicGeometry.ProEtaleWeilSheaf.nativeHomSourceShiftIso
 #print axioms AlgebraicGeometry.WeilComplex.nativeConstructibleTensorTateShiftIso
+#print axioms AlgebraicGeometry.WeilComplex.nonempty_upperStar_comp_shriek_iso_of_constant_cohomology
