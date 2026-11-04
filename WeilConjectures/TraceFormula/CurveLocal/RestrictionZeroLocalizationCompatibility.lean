@@ -39,7 +39,17 @@ The proof transports the canonical third-component square through the external-p
 comparison, then applies Leray to the open projection and restricts to the punctured diagonal.
 The required coherence involves two independent derived naturality calculations and is left as a
 named obligation for the next proof pass.
-(blueprint: restriction-zero-localization-compatibility). -/
+(blueprint: restriction-zero-localization-compatibility).
+
+Warning: as stated, for an arbitrary model and arbitrary `L` and `K`, this is false. Take
+`X = 𝔸¹_k` and `y` a point. The constant endomorphism `h = f ≫ y` is allowed (it kills `𝔪_y`),
+and then `G = V` and `O = T ∖ V`. Let `L = j_! Λ`, extension by zero from `X ∖ {y}`, with
+`Λ ≠ 0`, and let `K = Λ`. Then `P` is the extension by zero of `Λ` from `T ∖ V`. Its stalk at
+the closed point vanishes, so `hA` and `hB` hold. But `H⁰` of `S.obj₃ = RΓ(T ∖ V, P)` is `Λ`,
+while `FO` is the extension by zero of `Λ` from `T ∖ (V ∪ H)` to the connected `T ∖ V`. Hence
+`H⁰ RΓ(O, FO) = 0` and the isomorphism `s` cannot exist. The only caller,
+`RestrictionZeroLocalization3`, uses a Frobenius power `h` and `L = 𝔻_X K` with `K_y = 0`.
+The statement needs these hypotheses. -/
 theorem restrictionZeroLocalization_compatibility
     {Λ : Type (u + 1)} [CommRing Λ]
     (M : CurveLocalModel k)
