@@ -24078,6 +24078,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeCoherentInverseHomSquare
 public import WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
 public import WeilConjectures.WeilSheaf.Native.NativeDerivedWeilTensorConstructible
 public import WeilConjectures.WeilSheaf.Native.NativeForgetNormalizedBinaryModels
+public import WeilConjectures.WeilSheaf.Native.NativeForgetTotalTensor
 public import WeilConjectures.WeilSheaf.Native.NativeFrobeniusCoherentRingedModel
 public import WeilConjectures.WeilSheaf.Native.NativeFrobeniusRingedModel
 public import WeilConjectures.WeilSheaf.Native.NativeGeometricHomComparison
@@ -24088,6 +24089,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeHomRepresentativeUniqueness
 public import WeilConjectures.WeilSheaf.Native.NativeImmersionHeartLocalization
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedActionHom
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedTensorModels
+public import WeilConjectures.WeilSheaf.Native.NativePullKFlat
 public import WeilConjectures.WeilSheaf.Native.NativePullSheafTensor
 public import WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
 public import WeilConjectures.WeilSheaf.Native.NativeRingedForgetTensorChainComparison
