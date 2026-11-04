@@ -250,3 +250,11 @@ unfolding local aliases. Total core now reaches hnZ; targeting its summand with
 conv avoids broad rewrite matching. Added a small generic equality-transport
 lemma for comparison squares to avoid rewriting concrete native derived functors.
 No heartbeat increase or opacity change.
+
+2026-11-05 06:37 CST: K5-20261105T063205.log rc=1. TensorSquareCongr
+GREEN (1.1s), NativeDerivedCoherenceOfSquare GREEN (68s): final comparison
+compatibility is proved conditional on the derived square. Total core timeout
+is now precisely synthesis of tensor preserving initial objects; supplying local
+shortcuts via preservesInitialObject_of_preservesZeroMorphisms. Derived proof
+passes normalization, then reduced transparency rejects cZ's totalized tensor
+type. Confine with_reducible to modelU and tr instead of the whole application.

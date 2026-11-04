@@ -58,6 +58,22 @@ local instance projection_nativeHasTotal (X : Scheme.{u})
     HomologicalComplex.HasMapBifunctor P T (nativeTensorBifunctor k₀ l X).flip (.up ℤ) :=
   GradedObject.projection_hasCountableMap _ _
 
+local instance projection_tensorLeftPreservesInitial (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))]
+    (M : Mod (Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) Ab)
+      (condensedRingObj (Profinite.padicAlgClRingObj l)
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :
+    PreservesColimit (Functor.empty.{0} _) ((curriedTensor _).obj M) :=
+  Functor.preservesInitialObject_of_preservesZeroMorphisms _
+
+local instance projection_tensorRightPreservesInitial (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))]
+    (M : Mod (Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) Ab)
+      (condensedRingObj (Profinite.padicAlgClRingObj l)
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :
+    PreservesColimit (Functor.empty.{0} _) ((curriedTensor _).flip.obj M) :=
+  Functor.preservesInitialObject_of_preservesZeroMorphisms _
+
 variable
   (L : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z)
   [L.Additive] [L.IsLeftAdjoint]
