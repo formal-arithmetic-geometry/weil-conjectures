@@ -740,6 +740,35 @@ def IsIntegralExceptionalEtaleDerivedRight (n : ℕ)
           (((integralExceptionalEtaleRealization l E X n).mapHomologicalComplex
              (.up ℤ)).obj J)
 
+/-- Natural transformations out of a right derived functor followed by an equivalence are
+determined by their restriction along the derived unit. -/
+theorem rightDerived_comp_equivalence_ext {C D H K : Type*} [Category C] [Category D]
+    [Category H] [Category K] {F : C ⥤ H} {L : C ⥤ D} {RF : D ⥤ H} (α : F ⟶ L ⋙ RF)
+    (W : MorphismProperty C) [L.IsLocalization W] [RF.IsRightDerivedFunctor α W]
+    (e : H ≌ K) {G : D ⥤ K} (γ₁ γ₂ : RF ⋙ e.functor ⟶ G)
+    (h : ∀ x, e.functor.map (α.app x) ≫ γ₁.app (L.obj x) =
+      e.functor.map (α.app x) ≫ γ₂.app (L.obj x)) :
+    γ₁ = γ₂ := by
+  let δ (γ : RF ⋙ e.functor ⟶ G) : RF ⟶ G ⋙ e.inverse :=
+    RF.rightUnitor.inv ≫ Functor.whiskerLeft RF e.unit ≫ (RF.associator _ _).inv ≫
+      Functor.whiskerRight γ e.inverse
+  have hδ (γ : RF ⋙ e.functor ⟶ G) (y : D) :
+      (δ γ).app y = e.unit.app (RF.obj y) ≫ e.inverse.map (γ.app y) := by
+    simp [δ]
+  have hδ' : δ γ₁ = δ γ₂ := by
+    apply RF.rightDerived_ext α W
+    ext x
+    have h₁ : α.app x ≫ e.unit.app (RF.obj (L.obj x)) =
+        e.unit.app (F.obj x) ≫ e.inverse.map (e.functor.map (α.app x)) :=
+      e.unit.naturality (α.app x)
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, hδ]
+    rw [reassoc_of% h₁, reassoc_of% h₁, ← e.inverse.map_comp, ← e.inverse.map_comp, h x]
+  ext y
+  apply e.inverse.map_injective
+  have h₂ := congr_app hδ' y
+  rw [hδ, hδ] at h₂
+  exact (cancel_epi _).1 h₂
+
 /-- The existence component of the normalized derived direct-image comparison.
 Source: blueprint integral exceptional construction
 (blueprint: lem-pur-adic-etale-derived-right-existence).
@@ -767,7 +796,15 @@ theorem integralExceptionalEtaleDerivedRight_unique (n : ℕ)
           (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) g).rightDerivedFunctor}
     (he : IsIntegralExceptionalEtaleDerivedRight l E g A n B e)
     (he' : IsIntegralExceptionalEtaleDerivedRight l E g A n B e') : e = e' := by
-  sorry
+  have := B.isRightDerived
+  apply Iso.ext
+  refine rightDerived_comp_equivalence_ext B.directUnit
+    (HomologicalComplex.quasiIso _ (ComplexShape.up ℤ))
+    (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory.asEquivalence
+    _ _ fun J ↦ ?_
+  have h := (he J).trans (he' J).symm
+  simp only [← Category.assoc] at h
+  exact (cancel_mono _).1 h
 
 /-- Proper derived realization is uniquely fixed by the full universal-unit square on
 all cochain complexes. It agrees with the underlying section map before derivation.
