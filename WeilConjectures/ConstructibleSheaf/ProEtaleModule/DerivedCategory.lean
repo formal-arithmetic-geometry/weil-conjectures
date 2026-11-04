@@ -141,7 +141,6 @@ private lemma isZero_mapMod_upperStar_obj {Y : Scheme.{u}} (f : Y ⟶ X)
   exact ((ProEtale.upperStar A f).map_isZero ((Mod.forget R).map_isZero hM)).eq_of_src _ _
 
 omit [IsCommMonObj R] in
-
 private lemma constructible_of_iso
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) A) R} (e : M ≅ N)
     (hM : IsConstructibleModuleObject R M) : IsConstructibleModuleObject R N := by
@@ -153,6 +152,7 @@ private lemma constructible_of_iso
   exact ⟨n, m, f, ⟨(((ProEtale.upperStar A (S.immersion a)).mapMod R ⋙
     (ProEtale.upperStar A (𝒰.f i)).mapMod _).mapIso e).symm ≪≫ e'⟩⟩
 
+omit [IsCommMonObj R] in
 private lemma locallyFinitelyPresented_of_isZero
     {M : Mod (Sheaf (Scheme.ProEt.topology X) A) R} (hM : IsZero M) :
     IsLocallyFinitelyPresented R M := by
@@ -161,6 +161,7 @@ private lemma locallyFinitelyPresented_of_isZero
   exact (((ProEtale.upperStar A _).mapMod R).map_isZero hM).iso
     (isZero_cokernel_of_epi (𝟙 _))
 
+omit [IsCommMonObj R] in
 /-- A zero module object is constructible, for the trivial stratification and the identity
 cover. -/
 private lemma constructible_of_isZero {M : Mod (Sheaf (Scheme.ProEt.topology X) A) R}

@@ -132,6 +132,15 @@ private theorem adicConstantH_line_subsingleton
   have := integralAdicH_line_subsingleton K ℓ hℓ q hq
   exact (isBaseChange_integralToAdicConstantH ℓ X q).equiv.toEquiv.symm.subsingleton
 
+private instance pointAdditive (X : Scheme.{v}) : (upperStarFromPoint X).Additive := by
+  have : (upperStarFromPoint X).IsLeftAdjoint :=
+    (upperStarFromPointAdjunction X).isLeftAdjoint
+  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
+  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
+    (upperStarFromPointAdjunction X).leftAdjoint_preservesColimits
+  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
+  exact Functor.additive_of_preservesBinaryBiproducts _
+
 set_option maxHeartbeats 800000 in
 -- The monoidal adjunction comparison unfolds both point and scheme inverse images.
 private theorem continuousMapComparison_constants
