@@ -7,6 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 public import WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 import WeilConjectures.AlgebraicGeometry.CartesianCoefficientTwists
+public import WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
+public import WeilConjectures.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+public import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 
 /-! # The cartesian section-ring coefficient map
 
@@ -94,7 +97,7 @@ private theorem smallRingAdjunction_unit {X Y : Scheme.{u}} (f : Y ⟶ X)
 
 Source: Stacks Project, Sites Tag 00YV and Modules on Sites Tag 03D2;
 ring-coordinate transport in step 1 of lem-sfb-constant-slice-module-encoding.
-(auxiliary; not a blueprint node).
+(blueprint: lem-sfb-condensed-coefficient-ring-pullback).
 
 Proof: forget the ring inverse image to underlying abelian sheaves. The canonical
 forgetful comparison is an isomorphism: inverse image on sets preserves finite

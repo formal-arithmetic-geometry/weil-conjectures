@@ -5,7 +5,9 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Assemble
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Left
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Right
 
 /-! # Representative cancellation for the finite restriction square -/
 
@@ -81,6 +83,9 @@ theorem finite_restriction_representative_square
         o.tensorU.functor.map
           (CategoryTheory.Prod.mkHom (r.hom.app M) (e.openPull.hom.app N)) ≫
         o.tensorComparison.comparison.inv.app
-          (e.realizeX.derived.obj M, e.realizeX.derived.obj N) := by sorry
+          (e.realizeX.derived.obj M, e.realizeX.derived.obj N) :=
+  (RestrictionSquare.squareEq_of_halves A gU j' j g sq o e P Q hp hq
+    (RestrictionSquare.leftEq A gU j' j g sq o e P Q hp hq)
+    (RestrictionSquare.rightEq A gU j' j g sq o e P Q hp hq) h_total).eq
 
 end SheafOfModules.OpenTensorNormalization

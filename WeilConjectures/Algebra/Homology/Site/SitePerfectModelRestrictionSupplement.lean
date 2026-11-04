@@ -71,6 +71,39 @@ private theorem pushforward_finiteColimits
     { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
   exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
+/-- Further slice restriction is exact, at independent universes.
+Source: Stacks Project, Tag 04IX. Restriction commutes with kernels and sheafified
+cokernels through the same abelian-sheaf comparison.
+(blueprint: lem-sf-site-perfect-overmap-exact). -/
+theorem overMap_exact_ofUniverses
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{r}) {U V : C} (f : V ⟶ U)
+    [HasSheafify (J.over U) AddCommGrpCat.{max u v r}]
+    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
+    [HasSheafify (J.over V) AddCommGrpCat.{max u v r}]
+    [(J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v r}] :
+    PreservesFiniteLimits (overMap.{max u v r} R f) ∧
+      PreservesFiniteColimits (overMap.{max u v r} R f) := by
+  exact ⟨pushforward_finiteLimits (Sheaf.pushforwardOverMapIso _ f).inv,
+    pushforward_finiteColimits.{max u v, v, max u v, v, r, max u v r}
+      (Sheaf.pushforwardOverMapIso _ f).inv⟩
+
+/-- Successive slice restrictions compose. Source: Stacks Project, Tag 04IX.
+The comparison is induced by associativity of arrows in the slice.
+(blueprint: lem-sf-site-perfect-overmap-comp). -/
+def sitePerfectOverMapComp
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{r}) {U V W : C} (f : V ⟶ U) (g : W ⟶ V) :
+    overMap.{max u v r} R f ⋙ overMap R g ≅ overMap R (g ≫ f) := by
+  have : (Over.map g ⋙ Over.map f).IsContinuous (J.over W) (J.over U) :=
+    Functor.isContinuous_comp _ _ _ (J.over V) _
+  let e := pushforwardComp (Sheaf.pushforwardOverMapIso R g).inv
+    (Sheaf.pushforwardOverMapIso R f).inv
+  refine e ≪≫ pushforwardNatIso _ (Over.mapComp g f) ≪≫ pushforwardCongr ?_
+  ext Z : 3
+  simp [Sheaf.pushforwardOverMapIso]
+  rfl
+
 /-- The chosen representative definition of derived restriction agrees with the
 functor induced by exact module restriction. Source: Stacks Project, Tag 03DJ.
 The comparison first uses the localization comparison on the chosen representative,

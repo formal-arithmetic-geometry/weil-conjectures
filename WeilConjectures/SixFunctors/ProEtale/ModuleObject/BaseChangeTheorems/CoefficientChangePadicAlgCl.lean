@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClDerivedIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The base-change morphism and the coefficient change `E ⟶ ℚ̄_ℓ`
@@ -39,8 +40,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
--- the instances of the transfer theorem are unified with the concrete coefficient rings
 /-- The rational stage of blueprint `sk-lem-sbc-exchange-compatibility`, for the inclusion
 `E ⟶ ℚ̄_ℓ`: given that (Push) for `E ⟶ ℚ̄_ℓ` is invertible on bounded below complexes along
 quasi-compact quasi-separated morphisms, the extension of scalars `ℚ̄_ℓ ⊗ᴸ_E BC_sq(M)` and the
@@ -67,16 +66,13 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl
   have : QuasiSeparated f'.left := by
     have : QuasiSeparated (f'.left ≫ Y'.hom) := by rw [Over.w f']; infer_instance
     exact QuasiSeparated.of_comp f'.left Y'.hom
-  have ha := M.property.1.1.choose_spec
-  set a := M.property.1.1.choose
+  have hM := M.property.1.1
+  obtain ⟨a, ha⟩ := hM
   have : M.obj.IsGE a := ha
   have : ((g'.left)^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj
       M.obj).IsGE a := isGE_leftDerivedUpperStar_obj _ g'.left M.obj a
   have H : DerivedPullIsoCompCoherence (Profinite.padicSubfieldRingObjToPadicAlgCl.{u} ℓ E) :=
     derivedPullIsoCompCoherence _
-  have h₁ := hP f.left M.obj a
-  have h₂ := hP f'.left ((g'.left)^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj
-    M.obj) a
   have key := nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) ℓ H sq
     (fun K ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f K)
@@ -88,7 +84,13 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_rationalToPadicAlgCl
     (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq)
     (ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E sq)
     (boundedConstructibleBaseChange ℓ sq) (boundedConstructibleBaseChange_eq_exchangeRight ℓ sq)
-    M h₁ h₂
+    M ?h₁ ?h₂
+  -- the instances of the transfer theorem differ from those on the concrete coefficient rings by
+  -- proofs of `Precoherent Profinite`: compare the comparisons up to proofs, not by unification
+  case h₁ => exact_mod_proofs hP f.left M.obj a
+  case h₂ =>
+    exact_mod_proofs (hP f'.left
+      ((g'.left)^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj M.obj) a)
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing
