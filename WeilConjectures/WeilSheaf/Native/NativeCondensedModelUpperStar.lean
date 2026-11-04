@@ -14,6 +14,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedModelTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
+
 /-!
 # The condensed model of `ℓ`-adic sheaves commutes monoidally with pullback
 
@@ -464,5 +466,17 @@ lemma condensedModUpperStarIso_tensor (M N : AdicSheaf l Y) :
   simp only [Iso.trans_hom, Functor.Monoidal.μIso_hom, Functor.mapIso_hom, Category.assoc]
   rw [reassoc_of% hA, Iso.hom_inv_id, Category.comp_id, ← Functor.map_comp_assoc, Iso.hom_inv_id,
     CategoryTheory.Functor.map_id, Category.id_comp, Functor.Monoidal.μ_δ_assoc]
+
+/-- The base change map `f_*ᵃ ⋙ E_Y ⟶ E_Z ⋙ f_*` of the condensed models, the mate of
+`condensedModUpperStarIso` under `f^*ᵃ ⊣ f_*ᵃ` and `f^* ⊣ f_*`, is an isomorphism: the condensed
+models are equivalences. -/
+instance isIso_mateEquiv_condensedModUpperStarIso :
+    IsIso (mateEquiv (adicUpperStarLowerStarAdjunction l f)
+      (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
+      (condensedModUpperStarIso l f).hom).natTrans := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  exact Adjunction.isIso_mateEquiv_app_of_isIso _ _ _
+    (adicSheafEquivCondensedMod l _).toAdjunction (adicSheafEquivCondensedMod l _).toAdjunction M
 
 end AlgebraicGeometry.ProEtale

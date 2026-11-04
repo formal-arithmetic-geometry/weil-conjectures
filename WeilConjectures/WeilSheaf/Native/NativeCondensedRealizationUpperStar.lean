@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealization
+public import WeilConjectures.WeilSheaf.Native.NativeCondensedModelUpperStar
 
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunctionMate
@@ -22,7 +23,7 @@ Let `g : Z ⟶ Y` be a morphism of `k₀`-schemes and `ḡ : Z̄ ⟶ Ȳ` its bas
 fibres. The condensed realization `N_X` of pro-étale Weil sheaves
 (`AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealization`) commutes with pullback: forgetting
 the Weil structure commutes strictly with `g^*`, and the condensed model commutes with `ḡ^*`
-(`AlgebraicGeometry.ProEtale.adicUpperStarCompCondensedModIso`). This gives an isomorphism
+(`AlgebraicGeometry.ProEtale.condensedModUpperStarIso`, monoidally). This gives an isomorphism
 `N_Y ⋙ ḡ^* ≅ g^* ⋙ N_Z` (`AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationUpperStarIso`),
 and on derived categories an isomorphism
 `D(N_Y) ⋙ Lḡ^* ≅ D(g^*) ⋙ D(N_Z)`
@@ -71,14 +72,16 @@ instance preservesKInjectiveComplexes_condensedRealization (X : Scheme.{u})
 
 /-- The condensed realization commutes with pullback: `N_Y ⋙ ḡ^* ≅ g^* ⋙ N_Z`. Forgetting the
 Weil structure commutes strictly with `g^*`, and the condensed model commutes with `ḡ^*` by
-`AlgebraicGeometry.ProEtale.adicUpperStarCompCondensedModIso`. -/
+`AlgebraicGeometry.ProEtale.condensedModUpperStarIso`, whose underlying map of abelian sheaves
+is the identification `ḡ^*(U M) ≅ U(ḡ^* M)`; this choice makes the isomorphism monoidal
+(`AlgebraicGeometry.ProEtale.condensedModUpperStarIso_tensor`). -/
 noncomputable def condensedRealizationUpperStarIso :
     condensedRealization k₀ l Y ⋙ CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))) ≅
       upperStar k₀ l g ⋙ condensedRealization k₀ l Z :=
   Functor.isoHComp (IsoAlgebra.mapOfNatIsoCompForgetIso _).symm
-    (adicUpperStarCompCondensedModIso l
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).symm
+    (condensedModUpperStarIso l
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
 
 /-- The underived base change map `g_* ⋙ N_Y ⟶ N_Z ⋙ ḡ_*`, the mate of
 `AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationUpperStarIso` under `g^* ⊣ g_*` and
@@ -98,13 +101,10 @@ instance isIso_mateEquiv_condensedRealizationUpperStarIso :
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
       (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-      (adicUpperStarCompCondensedModIso l
+      (condensedModUpperStarIso l
         (Scheme.Hom.geometricFiberMap g
-          (comp_over g (Spec (CommRingCat.of k₀))))).symm.hom).natTrans := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro M
-    exact Adjunction.isIso_mateEquiv_app_of_isIso _ _ _
-      (adicSheafEquivCondensedMod l _).toAdjunction (adicSheafEquivCondensedMod l _).toAdjunction M
+          (comp_over g (Spec (CommRingCat.of k₀))))).hom).natTrans :=
+    isIso_mateEquiv_condensedModUpperStarIso l _
   exact isIso_mateEquiv_isoHComp (upperStarLowerStarAdjunction k₀ l g)
     (adicUpperStarLowerStarAdjunction l
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
