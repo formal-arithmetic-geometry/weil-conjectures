@@ -443,7 +443,21 @@ map. The forgetful functor is faithful, so the stated underlying maps determine 
 natural isomorphism uniquely. -/
 theorem restrictionComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : PointCompositionFamily Λ f, PointCompositionNormalization Λ f e := by
-  sorry
+  let e : PointCompositionFamily Λ f :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (Functor.mapModCompIso (upperStarFromPoint Y)
+        (f)^*[Ab.{u + 1}] (upperStarFromPointComp f).hom Λ)
+        (Mod.comap (asIso (condensedPullbackHom Λ f)).inv) ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (pull Λ X)
+        (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).unitIso.symm ≪≫
+      Functor.rightUnitor _
+  have he (M : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ) :
+      (e.hom.app M).hom = (upperStarFromPointComp f).hom.app M.X := by
+    simp [e, Mod.comapEquivalenceOfIsIso]
+  refine ⟨e, he, fun e' he' ↦ ?_⟩
+  ext M
+  exact (he' M).trans (he M).symm
 
 /-- Type of canonical composition identifications after exact localization.
 Source: HRS (4.1) (blueprint: lem-sfb-point-pullback-derived-hom). -/
