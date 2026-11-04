@@ -114,6 +114,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         ← MonoidalCategory.tensorHom_def, Iso.app_hom, condensedTensorModel,
         asIso_hom, MonoidalCategory.tensor_map, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj] at hmU ⊢
+      dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
+        curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hmU ⊢
       cast_proofs hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (by
@@ -125,7 +127,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       simp only [Iso.symm_inv, Iso.symm_hom, Iso.app_hom,
         MonoidalCategory.tensor_map] at ht ⊢
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
-        curriedTensor_obj_obj] at ht ⊢
+        curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at ht ⊢
       exact_mod_proofs ht) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
     MonoidalCategory.tensor_map, Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hmU'
@@ -141,7 +143,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       ← MonoidalCategory.tensorHom_def, Iso.app_hom, condensedTensorModel,
       asIso_hom] at hh ⊢
     dsimp only [derivedCondensedRealization, Functor.comp_obj, Functor.prod_obj,
-      Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hh ⊢
+      Functor.uncurry_obj_obj, curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hh ⊢
     cast_proofs hh
   have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
@@ -158,7 +160,11 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     rw [hmZ, Functor.map_comp, Category.assoc, ← ho, hmU']
     rfl
   apply (cancel_mono mU.hom).1
-  simpa only [Category.assoc, hright] using hsquare
+  simp only [Category.assoc, hright] at hsquare
+  dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization,
+    Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
+    curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hsquare ⊢
+  cast_proofs hsquare
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
