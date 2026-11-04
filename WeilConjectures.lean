@@ -1111,6 +1111,7 @@ public import WeilConjectures.Algebra.Homology.System.SystemSingleDerivedExtensi
 public import WeilConjectures.Algebra.Homology.System.SystemSingletonKFlat
 public import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarBasic
 public import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarLower
+public import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarRepAux
 public import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarRepresentative
 public import WeilConjectures.Algebra.Homology.TelescopeColimit
 public import WeilConjectures.Algebra.Homology.TelescopeColimitExtension
