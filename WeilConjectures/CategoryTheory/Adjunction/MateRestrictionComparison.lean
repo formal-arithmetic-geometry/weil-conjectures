@@ -47,6 +47,21 @@ theorem mateEquiv_eq_mateEquiv_symm_of_unit
         RX.map (oF.inv.app (EY.obj M))) :
     (mateEquiv PE PF (TwoSquare.mk _ _ _ _ θ.hom)).natTrans =
       ((mateEquiv SX SY).symm (TwoSquare.mk _ _ _ _ δ.inv)).natTrans := by
-  sorry
+  have key (X : A) (N : D) (c : LF.obj (EY.obj X) ⟶ N) :
+      PE.homEquiv _ _ (SX.homEquiv _ _ (θ.inv.app X ≫ c)) =
+        SY.unit.app X ≫ RY.map (PF.homEquiv _ _ c) ≫ δ.hom.app N := by
+    rw [hoE, hoF, ← hδ]
+    erw [← PE'.homEquiv_naturality_left]
+    rw [SX.homEquiv_unit, Functor.map_comp, reassoc_of% (h X)]
+    simp
+  have hconj : conjugateEquiv (SY.comp PF) (PE.comp SX) θ.inv = δ.hom := by
+    ext N
+    simpa [Adjunction.homEquiv_unit] using
+      key _ N (LF.map (SY.counit.app (GF.obj N)) ≫ PF.counit.app N)
+  have hconj' : conjugateEquiv (PE.comp SX) (SY.comp PF) θ.hom = δ.inv := by
+    rw [← δ.comp_hom_eq_id, ← hconj]
+    exact conjugateEquiv_comm _ _ θ.inv_hom_id
+  rw [← hconj', ← iterated_mateEquiv_conjugateEquiv PE PF SY SX (TwoSquare.mk _ _ _ _ θ.hom)]
+  exact (congrArg TwoSquare.natTrans ((mateEquiv SX SY).symm_apply_apply _)).symm
 
 end CategoryTheory
