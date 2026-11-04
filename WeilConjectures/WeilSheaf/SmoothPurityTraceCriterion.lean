@@ -71,3 +71,46 @@ theorem bijective_map_comp_on_free_of_forget
     exact hu
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Endofunctor.IsoAlgebra
+
+universe v v'
+
+variable {C : Type*} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
+  {F : C ⥤ C} [F.Additive] [F.IsEquivalence]
+  {D : Type*} [Category.{v'} D] [Abelian D] [IsGrothendieckAbelian.{v'} D]
+  {G : D ⥤ D} [G.Additive] [G.IsEquivalence]
+  [HasDerivedCategory.{v} (IsoAlgebra F)] [HasDerivedCategory.{v'} (IsoAlgebra G)]
+  [HasDerivedCategory.{v} C] [HasDerivedCategory.{v'} D]
+
+/-- A geometric universal trace lifts to a universal trace on derived Weil objects.
+The hypotheses concern the given trace and the comparison on free objects; no
+comparison of right adjoints is required. -/
+theorem bijective_map_comp_of_forget
+    (RW : DerivedCategory (IsoAlgebra F) ⥤ DerivedCategory (IsoAlgebra G))
+    [RW.Additive] [RW.CommShift ℤ] [RW.IsTriangulated]
+    (R : DerivedCategory C ⥤ DerivedCategory D)
+    (e : RW ⋙ (forget G).mapDerivedCategory ≅ (forget F).mapDerivedCategory ⋙ R)
+    (PC : ObjectProperty (DerivedCategory C))
+    (hPC_shift : ∀ (K : DerivedCategory C) (n : ℤ), PC K → PC (K⟦n⟧))
+    {H : DerivedCategory (IsoAlgebra F)} {L' : DerivedCategory (IsoAlgebra G)}
+    (d : RW.obj H ⟶ L')
+    (β : ∀ X, PC X → (Free.functor G).mapDerivedCategory.obj (R.obj X) ≅
+      RW.obj ((Free.functor F).mapDerivedCategory.obj X))
+    (hβ : ∀ X hX,
+      (freeWeilDerivedAdjunction G).unit.app (R.obj X) ≫
+          (forget G).mapDerivedCategory.map (β X hX).hom =
+        R.map ((freeWeilDerivedAdjunction F).unit.app X) ≫
+          e.inv.app ((Free.functor F).mapDerivedCategory.obj X))
+    (h : ∀ X, PC X → Function.Bijective
+      (fun u : X ⟶ (forget F).mapDerivedCategory.obj H ↦
+        R.map u ≫ e.inv.app H ≫ (forget G).mapDerivedCategory.map d))
+    (M : DerivedCategory (IsoAlgebra F)) (hM : PC ((forget F).mapDerivedCategory.obj M)) :
+    Function.Bijective (fun u : M ⟶ H ↦ RW.map u ≫ d) := by
+  apply bijective_map_comp_of_free RW PC hPC_shift d (M := M) (hM := hM)
+  intro X hX
+  exact Adjunction.bijective_map_comp_on_free_of_forget
+    (freeWeilDerivedAdjunction F) (freeWeilDerivedAdjunction G)
+    RW R e d X (β X hX) (hβ X hX) (h X hX)
+
+end CategoryTheory.Endofunctor.IsoAlgebra
