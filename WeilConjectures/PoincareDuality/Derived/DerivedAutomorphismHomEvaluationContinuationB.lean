@@ -122,6 +122,7 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import all WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 import all WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingEvaluationShiftComposition
+import all WeilConjectures.AlgebraicGeometry.Integral.IntegralInverseImageComparisonComposition
 
 public import WeilConjectures.PoincareDuality.Pod.PodHomComplexShiftRepresentatives
 public import WeilConjectures.SixFunctors.Supporting.DerivedAutomorphismHomEvaluationContinuationA
@@ -367,6 +368,25 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y Z : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (h : Z ⟶ X) [IsIso h]
 
+omit [IsIso g] [IsIso h] in
+/-- A restriction along an `eqToHom` arrow is the identity, up to `HEq`. -/
+private theorem presheafOfModules_map_heq_of_eq {C : Type*} [Category C]
+    {R : Cᵒᵖ ⥤ RingCat.{u + 1}} (M : PresheafOfModules.{u + 1} R) {A B : Cᵒᵖ}
+    (f : A ⟶ B) (hf : ∃ p : A = B, f = eqToHom p) (x : M.obj A) :
+    HEq (M.map f x) x := by
+  obtain ⟨rfl, rfl⟩ := hf
+  simp
+
+omit [IsIso g] [IsIso h] in
+/-- The completed coefficient transport is the published completed coefficient map. -/
+private theorem podCompletedRingMap_eq_inverseImage {V W : Scheme.{u}} (k : V ⟶ W) [IsIso k] :
+    podCompletedRingMap l E k = ProEtale.inverseImageCompletedCoefficientMap l E k := by
+  apply limit.hom_ext
+  intro n
+  rw [podCompletedRingMap, limit.lift_π, ProEtale.inverseImageCompletedCoefficientMap,
+    limit.lift_π]
+  rfl
+
 /-- Composition of exact completed inverse image is fixed on all local sections.
 Source: node proof steps 1 and 7, Stacks 00WX.
 Proof: composition of the two postcomposition functors agrees with postcomposition
@@ -381,7 +401,49 @@ theorem podCompletedModuleComp_existsUnique :
       ∀ (M : integralTowerModules l E Y) (U : Z.ProEt)
         (x : ((podCompletedModuleInverseImage l E (h ≫ g)).obj M).val.obj (op U)),
         HEq (((e.hom.app M).val.app (op U)) x) x := by
-  sorry
+  let d : proEtaleIsoPostcompose (h ≫ g) ≅
+      proEtaleIsoPostcompose h ⋙ proEtaleIsoPostcompose g :=
+    MorphismProperty.Over.mapComp (Q := ⊤)
+      (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale g)
+  let : (proEtaleIsoPostcompose h ⋙ proEtaleIsoPostcompose g).IsContinuous
+      (ProEt.topology Z) (ProEt.topology Y) :=
+    Functor.isContinuous_comp _ _ (ProEt.topology Z) (ProEt.topology X) (ProEt.topology Y)
+  let R := completedIntegralCoefficientSheafUnrestricted l E Y
+  let T := Functor.sheafPushforwardContinuousIso d RingCat.{u + 1}
+    (ProEt.topology Z) (ProEt.topology Y)
+  have hc := ProEtale.completedComposition l E h g
+  rw [← podCompletedRingMap_eq_inverseImage l E g, ← podCompletedRingMap_eq_inverseImage l E h,
+    ← podCompletedRingMap_eq_inverseImage l E (h ≫ g)] at hc
+  have hring : inv (podCompletedRingMap l E (h ≫ g)) ≫ T.hom.app R =
+      inv (podCompletedRingMap l E h) ≫
+        (isoSectionwiseInverseImage h RingCat.{u + 1}).map
+          (inv (podCompletedRingMap l E g)) := by
+    rw [← cancel_mono ((isoSectionwiseInverseImage h RingCat.{u + 1}).map
+      (podCompletedRingMap l E g) ≫ podCompletedRingMap l E h), Category.assoc,
+      Category.assoc, ← Functor.map_comp_assoc, IsIso.inv_hom_id,
+      CategoryTheory.Functor.map_id, Category.id_comp, IsIso.inv_hom_id]
+    erw [hc]
+    rw [← Category.assoc (T.hom.app R)]
+    erw [T.hom_inv_id_app]
+    rw [Category.id_comp, IsIso.inv_hom_id]
+  have hd (U : Z.ProEt) : ∃ p, (d.inv.app U).op = eqToHom p := by
+    refine ⟨congrArg op (Functor.congr_obj (MorphismProperty.Over.map_comp (Q := ⊤)
+      (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale g)) U), ?_⟩
+    apply Quiver.Hom.unop_inj
+    rw [Quiver.Hom.unop_op, eqToHom_unop]
+    apply MorphismProperty.Over.Hom.ext
+    simp [d]
+    rfl
+  let e := SheafOfModules.pushforwardNatIso (inv (podCompletedRingMap l E (h ≫ g))) d.symm ≪≫
+    SheafOfModules.pushforwardCongr hring ≪≫
+    (SheafOfModules.pushforwardComp (inv (podCompletedRingMap l E h))
+      (inv (podCompletedRingMap l E g))).symm
+  refine ⟨e, fun M U x ↦ ?_, fun e' he' ↦ ?_⟩
+  · exact presheafOfModules_map_heq_of_eq M.val (d.inv.app U).op (hd U) x
+  · apply Iso.ext
+    ext M U x
+    exact eq_of_heq ((he' M U.unop x).trans
+      (presheafOfModules_map_heq_of_eq M.val (d.inv.app U.unop).op (hd U.unop) x).symm)
 
 /-- The unique identity-on-sections completed composition comparison.
 Source: Stacks 00WX (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
