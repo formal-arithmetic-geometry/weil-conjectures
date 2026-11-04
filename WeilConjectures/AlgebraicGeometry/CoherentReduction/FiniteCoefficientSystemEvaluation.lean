@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedMorphismSheafComp
 public import WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
 public import WeilConjectures.Algebra.Homology.RingIsomorphismTensorTransport
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTrans
+public import WeilConjectures.AlgebraicGeometry.Derived.ComparisonScalarExtensionMate
 
 /-! # Finite-coefficient presentations of the genuine system evaluations
 
@@ -288,7 +289,7 @@ exactly comparisonRestrictScalarsIso. Hence the derived mate is invertible. -/
 theorem nuFixedScalarExtensionComparisonMap_isIso (X : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     IsIso (nuFixedScalarExtensionComparisonMap X φ) := by
-  sorry
+  exact ProEtale.isIso_mate_comparisonRestrictScalarsIso φ X
 
 /-- The canonical comparison isomorphism used by the finite reduction maps.
 Source: Stacks 09B1 and 0F63 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
