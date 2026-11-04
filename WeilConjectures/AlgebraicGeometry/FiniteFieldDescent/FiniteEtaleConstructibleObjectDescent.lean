@@ -6,6 +6,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteFieldDescent.FiniteEtaleConstructibleStages
+import WeilConjectures.AlgebraicGeometry.FiniteFieldDescent.FiniteEtaleConstructibleStagesLimit
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexLimitDescent
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.SurjectiveFlat
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatConstructibleModel
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatConstructibleComplex
 
 /-! # Finite-stage constructible descent component
 
@@ -45,6 +50,20 @@ theorem finiteEtaleConstructibleObjectDescent
     ∃ (E : IntermediateField K L), FiniteDimensional K E ∧
       ∃ (P_E : DerivedCategoryModule Λ (scheme f E)), ctf f Λ P_E ∧
         Nonempty ((pull f Λ (IntermediateField.val E)).obj P_E ≅ P) := by
-  sorry
+  have : CompactSpace (scheme f L) := QuasiCompact.compactSpace_of_compactSpace (toSpec f L)
+  obtain ⟨Pc, ⟨a, b, hab⟩, hPc, ⟨e⟩⟩ :=
+    DerivedCategory.exists_flatConstructibleModel_of_locallyOfFiniteType (toSpec f L) P hP
+  obtain ⟨_, _, hflat⟩ := isBoundedFlatComplex_iff.1 hab
+  obtain ⟨E, PE, _, _, hPE, ⟨eE⟩⟩ :=
+    Scheme.exists_boundedComplex_constructible_limit_descent (stageDiagram f L) (stageCone f L)
+      (isLimitStageCone f L) (surjective_stageCone_π_app f L) Λ Pc a b hPc
+  have hflatE (q : ℤ) : ObjectProperty.flat (PE.X q) :=
+    flat_of_flat_upperStar_of_surjective _ (surjective_stageCone_π_app f L (.op E)) _
+      (ObjectProperty.prop_of_iso _ ((HomologicalComplex.eval _ _ q).mapIso eE).symm (hflat q))
+  refine ⟨E.1, E.2, _root_.DerivedCategory.Q.obj PE,
+    DerivedCategory.constructibleFiniteTor_Q_obj PE a b hflatE hPE,
+    ⟨(leftDerivedUpperStarIsoMapDerivedCategory _ _).app _ ≪≫
+      (Functor.mapDerivedCategoryFactors _).app PE ≪≫
+      _root_.DerivedCategory.Q.mapIso eE ≪≫ e.symm⟩⟩
 
 end AlgebraicGeometry.Etale.FiniteFieldDescent
