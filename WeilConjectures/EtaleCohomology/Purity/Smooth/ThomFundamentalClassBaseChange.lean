@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFramesFundamentalClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapBaseChange
 
 /-!
 # Base change of the fundamental class of a closed immersion with Thom frames
@@ -24,6 +25,8 @@ flatness once the frames of `i'` are given.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass`.
+- `AlgebraicGeometry.Etale.thomFundamentalClassMap_baseChange`: the same for the adjoint
+  `cl_i : Λ_Z ⟶ Ri^!(Λ_X(c)[2c])`, through the base change map of `Ri^!`.
 -/
 
 @[expose] public section
@@ -31,6 +34,8 @@ flatness once the frames of `i'` are given.
 universe u
 
 open CategoryTheory Limits
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -100,6 +105,26 @@ theorem restrictSupportedClass_thomFundamentalClass (hT : HasThomFrames Λ c i)
       hg toZ hH (m ≫ F.toZ) hout, restrictSupportedClass_comp_tateShift Λ a F.e (W.ι ≫ e)
       hab.symm i _ _ F.toZ F.isPullback m hm (m ≫ F.toZ) hout, hF]
     exact restrictSupportedClass_kummerBoundaryProduct Λ a F.f f' (fun _ ↦ rfl) m hm
+
+/-- Base change of `cl_i : Λ_Z ⟶ Ri^!(Λ_X(c)[2c])`
+(`AlgebraicGeometry.Etale.thomFundamentalClassMap`):
+for the base change `i'` of `i` along any `e`, with Thom frames and regular Zariski frames,
+`cl_{i'}` is `Λ_{Z'} ≅ Lg^* Λ_Z ⟶ Lg^* Ri^!(Λ_X(c)[2c]) ⟶ Ri'^! Le^*(Λ_X(c)[2c]) ≅
+Ri'^!(Λ_{X'}(c)[2c])`. -/
+theorem thomFundamentalClassMap_baseChange (hT : HasThomFrames Λ c i)
+    (hR : HasRegularZariskiFrames c i) {k k' : Type u} [Field k] [Field k']
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] {X' Z' : Scheme.{u}}
+    [HasInvertibleExponent Λ X'] (e : X' ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i']
+    (g : Z' ⟶ Z) (hg : IsPullback g i' i e) (hT' : HasThomFrames Λ c i')
+    (hR' : HasRegularZariskiFrames c i') (aX' : X' ⟶ Spec (.of k')) [LocallyOfFiniteType aX'] :
+    thomFundamentalClassMap Λ hT' hR' aX' =
+      (leftDerivedUpperStarConstantComplexIso Λ g).inv ≫
+        (L((g)^*[ModuleCat.{u + 1} Λ])).map (thomFundamentalClassMap Λ hT hR aX) ≫
+          (rightDerivedUpperShriekBaseChangeMap Λ hg).app _ ≫
+            (R(i')^![Λ]).map (leftDerivedUpperStarTateShiftIso Λ e c).hom := by
+  rw [thomFundamentalClassMap, thomFundamentalClassMap,
+    ← restrictSupportedClass_thomFundamentalClass Λ hT hR aX e i' g hg hT' hR' aX',
+    supportedClassMap_restrictSupportedClass]
 
 end Etale
 

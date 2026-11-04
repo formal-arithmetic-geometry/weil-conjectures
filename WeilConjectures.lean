@@ -16656,6 +16656,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassField
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFrames
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFramesFundamentalClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFundamentalClassBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
