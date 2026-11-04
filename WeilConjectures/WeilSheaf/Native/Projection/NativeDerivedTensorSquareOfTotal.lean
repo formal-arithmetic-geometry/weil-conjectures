@@ -59,7 +59,9 @@ lemma projection_nativeRestrictionDerivedTensor_normalization
       (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
       (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y) hR
       (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
-      (fun P T ↦ t.app (P, T)) (nativeRestrictionDerivedTensor k₀ l R hR t) := by
+      (NativeRestrictionDescentProof.totalFamily R
+        (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) t)
+      (nativeRestrictionDerivedTensor k₀ l R hR t) := by
   have := native_open_tensor_full_kflat_localization k₀ l Y
   unfold nativeRestrictionDerivedTensor
   exact_mod_proofs NativeRestrictionDescentProof.restrictionDerivedOfTotal_normalization
@@ -77,7 +79,8 @@ lemma projection_nativePullTensor_normalization :
       (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y)
       (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
       (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
-      (fun P T ↦ (nativePullTotalTensor k₀ l g).app (P, T))
+      (NativeRestrictionDescentProof.totalFamily (upperStar k₀ l g)
+        (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) (nativePullTotalTensor k₀ l g))
       (nativePullTensor k₀ l g) := by
   have h := projection_nativeRestrictionDerivedTensor_normalization k₀ l _
     (by
@@ -90,9 +93,9 @@ lemma projection_nativePullTensor_normalization :
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
 
+include htotal in
 /-- On K-flat representatives, the native tensor square is the localization of the
 square of total complexes. -/
-include htotal in
 lemma condensedRealizationTensor_pull_square_Q_of_total
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :
@@ -161,9 +164,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
   apply (cancel_mono mU.hom).1
   simpa only [Category.assoc, hright] using hsquare
 
+include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
 representatives by naturality. -/
-include htotal in
 lemma condensedRealizationTensor_pull_square_of_total
     (M N : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :
     DerivedPullTensorSquare k₀ l g M N := by
@@ -177,7 +180,7 @@ lemma condensedRealizationTensor_pull_square_of_total
     NatIso.ofComponents
       (fun MN ↦ asIso ((R.mapDerivedCategoryTensorComparison.app MN.1).app MN.2))
       (fun fg ↦ by
-        simpa only [Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
+        simpa only [asIso_hom, Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
           curriedTensor_map_app, curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] using
           R.projection_mapDerivedCategoryTensorComparison_naturality fg.1 fg.2)
   have h := Adjunction.tensorSquare_of_representatives DerivedCategory.Q.obj
@@ -190,11 +193,18 @@ lemma condensedRealizationTensor_pull_square_of_total
     (condensedRealizationTensor k₀ l Y)
     (Functor.mapDerivedCategorySquareIso (condensedRealizationUpperStarIso k₀ l g).symm) c
     (fun P T hP hT ↦ by
-      simpa only [DerivedPullTensorSquare, PullTensorSquareWithComparison, Iso.symm_inv,
+      have hQ := condensedRealizationTensor_pull_square_Q_of_total k₀ l g htotal P T hP hT
+      dsimp only [DerivedPullTensorSquare, PullTensorSquareWithComparison] at hQ
+      simp only [Iso.symm_inv] at hQ
+      simp only [c, NatIso.ofComponents_hom_app, asIso_hom,
         Functor.uncurry_obj_map, curriedTensor_map_app,
-        curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] using
-        condensedRealizationTensor_pull_square_Q_of_total k₀ l g htotal P T hP hT) M N
-  simpa only [Functor.uncurry_obj_map, curriedTensor_map_app,
-    curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] using h
+        curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def]
+      dsimp only [R]
+      exact_mod_proofs hQ) M N
+  simp only [c, NatIso.ofComponents_hom_app, asIso_hom,
+    Functor.uncurry_obj_map, curriedTensor_map_app,
+    curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] at h
+  dsimp only [R] at h
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

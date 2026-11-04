@@ -34,6 +34,14 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
 
+local instance projection_hasSmallColimits (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] :
+    HasColimitsOfSize.{0, 0}
+      (Mod (Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) Ab)
+        (condensedRingObj (Profinite.padicAlgClRingObj l)
+          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :=
+  hasColimitsOfSizeShrink _
+
 variable
   (L : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z)
   [L.Additive] [L.IsLeftAdjoint]
@@ -75,8 +83,8 @@ variable
     (nativeOpenSheafTensor k₀ l Z) mu (condensedRealizationSheafTensorIso k₀ l Y)
     (condensedRealizationSheafTensorIso k₀ l Z) a M N)
 
-/-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
 include hmu hsheaf in
+/-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
 lemma projection_totalTensorSquare_of_sheaf
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) :
     ProjectionTotalTensorSquare k₀ l L R t a P T := by
@@ -88,7 +96,7 @@ lemma projection_totalTensorSquare_of_sheaf
       (condensedRealization k₀ l Y) R a A i
   dsimp only [Functor.ProjectionComplexSquareComponent] at hcomp
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
-  rw [hcomp]
+  conv_rhs => arg 1; rw [hcomp]
   apply HomologicalComplex.mapBifunctor.hom_ext_of_map
     (L ⋙ condensedRealization k₀ l Z)
     (F := (nativeTensorBifunctor k₀ l Y).flip)

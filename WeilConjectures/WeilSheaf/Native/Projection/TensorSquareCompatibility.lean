@@ -41,9 +41,11 @@ theorem comparisonCompatible_of_tensorSquare_transport
       d (V.obj M) (V.obj N) ≫ (a.hom.app M ⊗ₘ a.hom.app N) := by
     apply (cancel_mono (a.inv.app M ⊗ₘ a.inv.app N)).1
     simpa only [PullTensorSquareWithComparison, Category.assoc, tensorHom_comp_tensorHom, Iso.hom_inv_id_app,
-      id_tensorHom_id, Category.comp_id] using h M N
+      MonoidalCategory.id_tensorHom_id, Category.comp_id, Functor.comp_obj] using h M N
   rw [hd] at hh
   have hn := t.inv.naturality (nY.hom.app (M, N))
+  dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
+    curriedTensor_obj_obj] at hn
   simp only [Category.assoc] at hh
   rw [reassoc_of% hn] at hh
   simp only [tensorHom_comp_tensorHom] at hh

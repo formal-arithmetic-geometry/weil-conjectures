@@ -196,3 +196,12 @@ import and qualified ambiguous tensorHom_def; profiling all remaining layers.
 via the audit imports, plus explicit inclusion of conditional hypotheses. The
 preceding 05:40/05:44 notes used estimated times; those edits actually happened
 around 05:34–05:37. No additional build request is active.
+
+2026-11-05 05:48 CST: K5-20261105T054240.log rc=1. Profiling pins
+normalization failure to its HEADER: the concrete lambda t.app forces the full
+upperStar total complex to unfold. Replacing it by the existing abstract
+NativeRestrictionDescentProof.totalFamily interface (also noticed by C5).
+Concrete totalization times out in basic comp_f simp; abstract L/R version passes
+that stage but needs a countable-colimit shortcut and a targeted component rewrite.
+Fixed include/docstring syntax, asIso hom simplification, and ordinary categorical
+object-spelling rewrites. No new heartbeat limits or opacity barriers.
