@@ -3951,6 +3951,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupGlobalSec
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupModel
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Compactification
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalCone
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalConeMap
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.PowMap
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
@@ -16175,6 +16176,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologyHom
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DeformationIso
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficients
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsFrame
@@ -16238,6 +16240,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionPoin
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariant
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTwist
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionThomFrames
@@ -23183,6 +23186,7 @@ public import WeilConjectures.SmoothPurity.PurityFiniteSetting.RankOne.RankOneKu
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Restricted.RestrictedAffineSourceVectorCoordinates
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.SchemeGeometricFrobenius
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Section.PuritySectionInvariant
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Section.PuritySectionInvariantNormalCone
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Supported.SupportedCupComparisonBasic
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Supported.SupportedCupFunctoriality
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Supported.SupportedCupFunctorialityModels
@@ -23273,6 +23277,8 @@ public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarTowerTenso
 public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarTowerTensorLimitStrictWitness
 public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarTowerTensorLimitTransportAssembly
 public import WeilConjectures.SmoothPurity.ScalarExtensionTower.StrictQuotientTensorGenerator
+public import WeilConjectures.SmoothPurity.Section.ProEtaleDeformation
+public import WeilConjectures.SmoothPurity.Section.ProEtaleSectionInvariant
 public import WeilConjectures.SmoothPurity.SequenceKInjectiveComparison.SequenceKInjectiveComparisonShifts
 public import WeilConjectures.SmoothPurity.Sf.SfCompactSupportTowerPresentation
 public import WeilConjectures.SmoothPurity.Sf.SfCompleteDirectImageReduction
