@@ -31,6 +31,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-! # Descent of the quotient counit shift compatibility
 

@@ -84,7 +84,8 @@ theorem finiteCompactSupportComparisonAgreement
       apply Iso.ext
       ext M
       simp [rightDerivedLowerStarComparisonIso, fixedDirectImageComparisonIso,
-        fixedComparisonDirectImageMatePlus]
+        fixedComparisonDirectImageMatePlus, rightDerivedLowerStarComparisonPlusIso,
+        rightDerivedLowerStarComparisonPlusBaseChange]
     apply Iso.ext
     ext K
     simp [rightDerivedLowerShriekOfCompactificationComparisonIso,

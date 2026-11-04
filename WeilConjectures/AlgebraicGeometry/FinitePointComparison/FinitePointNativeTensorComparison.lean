@@ -39,7 +39,7 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSuppleme
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 import all WeilConjectures.AlgebraicGeometry.GeometricStalkToposPoint
 import WeilConjectures.SixFunctors.RingedSitePoint
-import all WeilConjectures.SmoothPurity.RingedSitePointTensor
+import all WeilConjectures.Algebra.Homology.RingedSitePointTensor
 import WeilConjectures.Algebra.Homology.RingedSitePointFlat
 import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
@@ -47,6 +47,8 @@ import all WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
 set_option linter.all false
 set_option warn.classDefReducibility false
+-- Sequential elaboration keeps the peak memory of this module below 4 GB.
+set_option Elab.async false
 
 /-! # Native tensor comparison for sections at a geometric point
 
@@ -59,6 +61,214 @@ K-flat tensor localization for the specified derived-category models.
 @[expose] public section
 
 universe u
+
+section FinitePointComparisonData
+
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
+open AlgebraicGeometry
+
+noncomputable section
+set_option autoImplicit false
+
+namespace AlgebraicGeometry.ProEtale.FinitePointComparison
+
+variable (k : Type u) [Field k] [IsAlgClosed k]
+variable (B : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1})
+
+/-- The ordinary sectionwise module category of the coefficient sheaf.
+Source: the ordinary-module convention of the node
+(blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+abbrev Modules := SheafOfModules.{u + 1}
+  ((sheafCompose (Scheme.ProEt.topology (Spec (.of k)))
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B)
+
+/-- The ordinary ring of final-object sections, canonically the finite coefficient ring.
+Source: the finite condensed point calculation
+(blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+abbrev SectionRing := B.obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))
+
+/-- Exactness of the actual evaluation functor, as supplied by the point-sections theorem.
+Source: Stacks 03CW, 0946
+(blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance sections_limits : PreservesFiniteLimits (pointModuleSections k B) :=
+  ((point_proEtale_sections_exact.{u, u + 1, u + 1} k).2 B).1
+
+/-- Exactness of the actual evaluation functor, as supplied by the point-sections theorem.
+Source: Stacks 03CW, 0946
+(blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance sections_colimits : PreservesFiniteColimits (pointModuleSections k B) :=
+  ((point_proEtale_sections_exact.{u, u + 1, u + 1} k).2 B).2.1
+
+/-- The site is small in the already specified coefficient universe.
+Source: Stacks 098H (blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance (priority := 30000) pointSmall :
+    EssentiallySmall.{u + 1} (Spec (.of k)).ProEt :=
+  CategoryTheory.essentiallySmallSelf.{0, u, u + 1} _
+
+/-- Sheafification in the coefficient universe of the small pro-etale site.
+Source: Stacks 00W1 (blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance (priority := 30000) pointSheafify : HasSheafify (Scheme.ProEt.topology (Spec (.of k)))
+    AddCommGrpCat.{u + 1} := SheafOfModules.hasSheafify_coefficientUniverse.{u + 1, u, u + 1}
+
+/-- The usual local characterization of sheafification equivalences.
+Source: Stacks 00W1 (blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance (priority := 30000) pointLocalEquivalences :
+    (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective
+      AddCommGrpCat.{u + 1} :=
+  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u + 1, u, u + 1}
+
+/-- Mathlib's abelian structure with its coefficient universe specified.
+Source: Stacks 03DA (blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance (priority := 30000) modulesAbelian : Abelian (Modules k B) :=
+  SheafOfModules.instAbelian _
+
+/-! The native ringed-site tensor structures on point modules, as fixed by
+`RingedDerivedNative` (Stacks 06YS); used by the statements below. -/
+
+local instance pointModuleMonoidal : MonoidalCategory (Modules k B) :=
+  RingedDerivedNative.moduleMonoidal.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B
+local instance pointModuleSymmetric : SymmetricCategory (Modules k B) :=
+  RingedDerivedNative.moduleSymmetric.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B
+local instance pointModulePreadditive : MonoidalPreadditive (Modules k B) :=
+  RingedDerivedNative.modulePreadditive.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B
+local instance pointModuleClosed : MonoidalClosed (Modules k B) :=
+  RingedDerivedNative.moduleClosed.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B
+local instance pointModuleGrothendieck : IsGrothendieckAbelian.{u + 1} (Modules k B) :=
+  RingedDerivedNative.moduleGrothendieck.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B
+local instance pointModuleFlat : Abelian.HasFunctorialFlatResolution (Modules k B) :=
+  RingedDerivedNative.moduleFlat.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B
+local instance pointCountableColimits : HasColimitsOfSize.{0, 0} (Modules k B) :=
+  RingedDerivedNative.countableColimits.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B
+local instance pointTensorLeftColimits (M : Modules k B) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+  RingedDerivedNative.tensorLeftColimits.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B M
+local instance pointTensorRightColimits (M : Modules k B) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
+  RingedDerivedNative.tensorRightColimits.{u + 1, u, 0} (Scheme.ProEt.topology (Spec (.of k))) B M
+
+variable [∀ R : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1},
+  HasDerivedCategory.{u + 1} (Modules k R)]
+
+/-- The relative K-flat monoidal structure already constructed for ringed sites.
+Source: Stacks 07A4
+(blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance derivedMonoidal : MonoidalCategory (DerivedCategory.{u + 1} (Modules k B)) :=
+  CategoryTheory.RingedDerivedNative.monoidal.{u + 1, u, 0, u + 1}
+    (Scheme.ProEt.topology (Spec (.of k))) B
+
+/-- Its signed symmetry, from the existing K-flat localization.
+Source: Stacks 07A4
+(blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance derivedSymmetric : SymmetricCategory (DerivedCategory.{u + 1} (Modules k B)) :=
+  CategoryTheory.RingedDerivedNative.symmetric.{u + 1, u, 0, u + 1}
+    (Scheme.ProEt.topology (Spec (.of k))) B
+
+/-- The signed braiding on ordinary module derived tensor products.
+Source: Stacks 0FPT (blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance ordinaryBraiding :
+    BraidedCategory (DerivedCategory.{u + 1} (ModuleCat.{u + 1} (SectionRing k B))) :=
+  DerivedMonoidal.braidedCategory' DerivedCategory.Qh
+    (HomotopyCategory.quasiIso (ModuleCat.{u + 1} (SectionRing k B)) (.up ℤ))
+
+/-- The native localization comparison for the existing relative derived tensor.
+Source: Stacks 06YT (blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+instance localizationLax : (DerivedCategory.Q : CochainComplex (Modules k B) ℤ ⥤
+    DerivedCategory.{u + 1} (Modules k B)).LaxMonoidal :=
+  RingedDerivedNative.lax.{u + 1, u, 0, u + 1}
+    (Scheme.ProEt.topology (Spec (.of k))) B
+
+/-- Exact termwise point sections on the ordinary derived category.
+Source: Stacks 0946 and the exact-functor localization convention
+(blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+abbrev sections : DerivedCategory.{u + 1} (Modules k B) ⥤
+    DerivedCategory.{u + 1} (ModuleCat.{u + 1} (SectionRing k B)) :=
+  (pointModuleSections k B).mapDerivedCategory
+
+-- The injectivity theorems of this structure exhaust the memory budget; they are unused.
+set_option genInjectivity false in
+set_option maxHeartbeats 2000000 in
+-- Elaborating the representative and coherence equations uses the native derived tensors.
+/-- The canonical K-flat point tensor comparison. The family is indexed by the usual
+upper-cohomology bounds; no assertion on unbounded operands is imposed. Its inverse on
+resolving complexes is the actual section-tensor map on each total-complex summand.
+The unit comparison is pinned by both unitor equations and this tensor normalization.
+Source: Stacks 07A4, 03EL
+(blueprint: lem-sf-condensed-point-derived-scalar-comparison). -/
+structure TensorComparison where
+  tau : ∀ (P Q : DerivedCategory.{u + 1} (Modules k B)),
+    (∃ b : ℤ, P.IsLE b) → (∃ c : ℤ, Q.IsLE c) →
+    CategoryTheory.Iso ((sections k B).obj (P ⊗ Q))
+      (@tensorObj (DerivedCategory.{u + 1} (ModuleCat.{u + 1} (SectionRing k B))) _ _
+        ((sections k B).obj P) ((sections k B).obj Q))
+  unit : (sections k B).obj (𝟙_ _) ≅ 𝟙_ _
+  naturality : ∀ (P Q P' Q' : DerivedCategory.{u + 1} (Modules k B))
+    (hP : ∃ b : ℤ, P.IsLE b) (hQ : ∃ b : ℤ, Q.IsLE b)
+    (hP' : ∃ b : ℤ, P'.IsLE b) (hQ' : ∃ b : ℤ, Q'.IsLE b)
+    (f : P ⟶ P') (g : Q ⟶ Q'),
+    (sections k B).map (f ⊗ₘ g) ≫ (tau P' Q' hP' hQ').hom =
+      (tau P Q hP hQ).hom ≫ ((sections k B).map f ⊗ₘ (sections k B).map g)
+  bounded_tensor : ∀ (P Q : DerivedCategory.{u + 1} (Modules k B)),
+    (∃ b : ℤ, P.IsLE b) → (∃ b : ℤ, Q.IsLE b) → ∃ b : ℤ, (P ⊗ Q).IsLE b
+  bounded_sections : ∀ P : DerivedCategory.{u + 1} (Modules k B),
+    (∃ b : ℤ, P.IsLE b) → ∃ b : ℤ, ((sections k B).obj P).IsLE b
+  associativity : ∀ (P Q R : DerivedCategory.{u + 1} (Modules k B))
+    (hP : ∃ b : ℤ, P.IsLE b) (hQ : ∃ b : ℤ, Q.IsLE b) (hR : ∃ b : ℤ, R.IsLE b),
+    (tau (P ⊗ Q) R (bounded_tensor P Q hP hQ) hR).hom ≫
+        ((tau P Q hP hQ).hom ⊗ₘ 𝟙 _) ≫ (α_ _ _ _).hom =
+      (sections k B).map (α_ P Q R).hom ≫
+        (tau P (Q ⊗ R) hP (bounded_tensor Q R hQ hR)).hom ≫
+        (𝟙 _ ⊗ₘ (tau Q R hQ hR).hom)
+  symmetry : ∀ (P Q : DerivedCategory.{u + 1} (Modules k B))
+    (hP : ∃ b : ℤ, P.IsLE b) (hQ : ∃ b : ℤ, Q.IsLE b),
+    (tau P Q hP hQ).hom ≫ (β_ _ _).hom =
+      (sections k B).map (β_ P Q).hom ≫ (tau Q P hQ hP).hom
+  bounded_unit : ∃ b : ℤ, (𝟙_ (DerivedCategory.{u + 1} (Modules k B))).IsLE b
+  left_unit : ∀ (P : DerivedCategory.{u + 1} (Modules k B)) (hP : ∃ b : ℤ, P.IsLE b),
+    (tau (𝟙_ _) P bounded_unit hP).hom ≫ (unit.hom ⊗ₘ 𝟙 _) ≫ (λ_ _).hom =
+      (sections k B).map (λ_ P).hom
+  right_unit : ∀ (P : DerivedCategory.{u + 1} (Modules k B)) (hP : ∃ b : ℤ, P.IsLE b),
+    (tau P (𝟙_ _) hP bounded_unit).hom ≫ (𝟙 _ ⊗ₘ unit.hom) ≫ (ρ_ _).hom =
+      (sections k B).map (ρ_ P).hom
+  representative : ∀ (P Q : CochainComplex (Modules k B) ℤ)
+    (hP : ∃ b : ℤ, (DerivedCategory.Q.obj P).IsLE b)
+    (hQ : ∃ b : ℤ, (DerivedCategory.Q.obj Q).IsLE b),
+    CochainComplex.IsKFlatIndependentCoefficients
+      (J := Scheme.ProEt.topology (Spec (.of k))) (R := B) P →
+    CochainComplex.IsKFlatIndependentCoefficients
+      (J := Scheme.ProEt.topology (Spec (.of k))) (R := B) Q →
+    (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (J := Scheme.ProEt.topology (Spec (.of k))) (R := B) (P.X i)) →
+    (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (J := Scheme.ProEt.topology (Spec (.of k))) (R := B) (Q.X i)) →
+    ∃ b : ((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ≅
+        (((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj P ⊗
+          ((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj Q),
+      (∀ (p q n : ℤ) (h : p + q = n)
+        (x : (P.X p).val.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))))
+        (y : (Q.X q).val.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))),
+        (b.hom.f n)
+          (WeilConjectures.coefficientTensorGenerator.{0, u + 1, u}
+            (Scheme.ProEt.topology (Spec (.of k))) B P Q p q n h
+            (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))) x y) =
+          (CochainComplex.ιMapBifunctor
+            (((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj P)
+            (((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj Q)
+            (curriedTensor _) p q n h) (x ⊗ₜ[SectionRing k B] y)) ∧
+      (sections k B).map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
+          (pointModuleSections k B).mapDerivedCategoryFactors.hom.app (P ⊗ Q) ≫
+          DerivedCategory.Q.map b.hom =
+        (tau (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) hP hQ).hom ≫
+          ((pointModuleSections k B).mapDerivedCategoryFactors.hom.app P ⊗ₘ
+            (pointModuleSections k B).mapDerivedCategoryFactors.hom.app Q) ≫
+          Functor.LaxMonoidal.μ DerivedCategory.Q
+            (((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj P)
+            (((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj Q)
+
+end AlgebraicGeometry.ProEtale.FinitePointComparison
+
+end
+
+end FinitePointComparisonData
 
 namespace PointDerivedWork
 section
@@ -112,14 +322,6 @@ private def presheafEvaluationCore
     (by intros; simp only [Iso.refl_inv, Category.comp_id,
       MonoidalCategory.whiskerLeft_id]; rfl)
 
-private instance pointSmall : EssentiallySmall.{u + 1} (Spec (.of k)).ProEt :=
-  CategoryTheory.essentiallySmallSelf.{0, u, u + 1} _
-private instance pointSheafify : HasSheafify (Scheme.ProEt.topology (Spec (.of k)))
-    AddCommGrpCat.{u + 1} := SheafOfModules.hasSheafify_coefficientUniverse.{u + 1, u, u + 1}
-private instance pointLocalEquivalences :
-    (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective
-      AddCommGrpCat.{u + 1} :=
-  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u + 1, u, u + 1}
 
 @[instance_reducible]
 private def pointEvaluationLax :
@@ -395,6 +597,10 @@ namespace AlgebraicGeometry.ProEtale.FinitePointComparison
 variable [∀ R : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1},
   HasDerivedCategory.{u + 1} (Modules k R)]
 
+attribute [local instance] pointModuleMonoidal pointModuleSymmetric pointModulePreadditive
+  pointModuleClosed pointModuleGrothendieck pointModuleFlat pointCountableColimits
+  pointTensorLeftColimits pointTensorRightColimits
+
 private def pointDerivedMonoidal : (sections k B).Monoidal := by
   let J := Scheme.ProEt.topology (Spec (.of k))
   letI := RingedDerivedNative.moduleMonoidal.{u + 1, u, 0} J B
@@ -484,6 +690,7 @@ private theorem pointDerived_representative :
             (((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj P)
             (((pointModuleSections k B).mapHomologicalComplex (.up ℤ)).obj Q) := by
   intro P Q _ _ _ _ _ _
+  haveI : ∀ X₁ X₂ : GradedObject ℤ (Modules k B), X₁.HasTensor X₂ := fun _ _ ↦ inferInstance
   let J := Scheme.ProEt.topology (Spec (.of k))
   letI := RingedDerivedNative.moduleMonoidal.{u + 1, u, 0} J B
   letI := RingedDerivedNative.moduleSymmetric.{u + 1, u, 0} J B
@@ -538,6 +745,10 @@ variable (k : Type u) [Field k] [IsAlgClosed k]
   [∀ R : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1},
     HasDerivedCategory.{u + 1} (Modules k R)]
 variable (B : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1})
+
+attribute [local instance] pointModuleMonoidal pointModuleSymmetric pointModulePreadditive
+  pointModuleClosed pointModuleGrothendieck pointModuleFlat pointCountableColimits
+  pointTensorLeftColimits pointTensorRightColimits
 
 private theorem bounded_sections (P : DerivedCategory.{u + 1} (Modules k B))
     (hP : ∃ b : ℤ, P.IsLE b) : ∃ b : ℤ, ((sections k B).obj P).IsLE b := by

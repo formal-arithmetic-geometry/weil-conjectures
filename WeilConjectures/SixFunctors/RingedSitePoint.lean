@@ -17,8 +17,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-
-import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+public import WeilConjectures.CategoryTheory.Sites.RingedSitePoint
 
 /-!
 # Ring and module inverse images at a topos point
@@ -31,43 +30,3 @@ sheaves. They specify the finite-product transport, rather than an arbitrary lif
 No object is selected from an existence theorem: all data remain explicit in the
 presentation, and the criterion will hold for every such presentation.
 -/
-
-@[expose] public section
-set_option autoImplicit false
-
-universe u v w
-open CategoryTheory CategoryTheory.Limits
-namespace CategoryTheory
-
-attribute [instance] RingedSitePoint.modules_additive
-
-namespace PointTransport
-
-set_option backward.isDefEq.respectTransparency false
-set_option backward.defeqAttrib.useBackward true
-set_option backward.isDefEq.respectTransparency.types false
-
-open MonoidalCategory CartesianMonoidalCategory
-open Functor.LaxMonoidal
-
-variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
-  {J : GrothendieckTopology C}
-
-private noncomputable abbrev base (R : Sheaf J CommRingCat.{w}) :=
-  (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R
-
-variable (F : Sheaf J (Type w) ⥤ Type w)
-
-omit [EssentiallySmall.{w} C] in
-omit [EssentiallySmall.{w} C] in
-omit [EssentiallySmall.{w} C] in
-omit [EssentiallySmall.{w} C] in
-omit [EssentiallySmall.{w} C] in
-variable {F}
-
-omit [EssentiallySmall.{w} C] in
-end PointTransport
-
-open PointTransport
-
-end CategoryTheory

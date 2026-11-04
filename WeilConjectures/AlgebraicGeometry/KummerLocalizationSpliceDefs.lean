@@ -64,6 +64,7 @@ public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummer
 public import WeilConjectures.AlgebraicGeometry.PrincipalTorsorComparisons.PrincipalTorsorSignTypes
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
 
 /-! # Concrete Kummer and localization splice models
 Source: Stacks Tags 03PL and 0A45; the finite Cartier principal chart.

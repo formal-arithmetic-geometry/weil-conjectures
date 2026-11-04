@@ -56,6 +56,14 @@ abbrev pfModelCoefficients (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) : Type (u + 1) :=
   ULift.{u + 1} (Padic.coefficientExtensionRing l E n)
 
+/-- The recorded positive-level coefficient ring is finite.
+Source: Stacks Tag 09AL (blueprint: lem-sf-proetale-pf-admissible-models). -/
+instance pfModelCoefficients_finite (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) :
+    Finite (pfModelCoefficients l E n) :=
+  haveI := Padic.finite_coefficientExtensionRing l E n n.pos
+  inferInstance
+
 /-- For fixed etale antecedents, every cohomological support interval admits the
 simultaneous bounded models needed for the proper comparison. The `letI` declarations
 in this definition only install the existing sheaf tensor, with its original data.
@@ -155,6 +163,14 @@ private theorem admissible_models_of_tor (A : Type (u + 1)) [CommRing A]
   let T := CochainComplex.mapBifunctor JC RP (curriedTensor _)
   have hTge : T.IsStrictlyGE (u0 + a) :=
     CochainComplex.isStrictlyGE_tensorObj JC RP u0 a
+  have : CochainComplex.IsStrictlyLE JC v0 := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    exact J.map_isZero (C.isZero_of_isStrictlyLE v0 i hi)
+  have : CochainComplex.IsStrictlyLE RP b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    exact R.map_isZero (P.isZero_of_isStrictlyLE b i hi)
   have hTle : T.IsStrictlyLE (v0 + b) :=
     CochainComplex.isStrictlyLE_tensorObj JC RP v0 b
   let eT : _root_.DerivedCategory.Q.obj T ≅
@@ -209,7 +225,11 @@ private theorem bounded_origin (A : Type (u + 1)) [CommRing A] [Finite A]
   have hH (q : ℤ) : IsConstructible A
       ((_root_.DerivedCategory.homologyFunctor _ q).obj K.obj) := by
     obtain ⟨S, _, _, hS⟩ := hc q
-    exact ⟨S, fun i ↦ Scheme.finite_models_of_fixed_lisse (S.domain i) A _ (hS i)⟩
+    refine ⟨S, fun i ↦ ?_⟩
+    obtain ⟨ι, W, g, hg, hM⟩ := Scheme.finite_models_of_fixed_lisse (S.domain i) A _ (hS i)
+    refine ⟨ι, W, g, hg, fun k ↦ ?_⟩
+    obtain ⟨M, _, hMe⟩ := hM k
+    exact ⟨M, Module.Finite.of_finite, hMe⟩
   obtain ⟨Ke, hKe, ⟨α⟩⟩ := DerivedCategory.boundedConstructible_of_homology A hb
     (fun i ↦ exists_isConstructibleSheaf_iso_comparisonUpperStar_obj A (hH i))
   refine ⟨⟨⟨Ke, hKe.1.1⟩, α⟩, fun i ↦

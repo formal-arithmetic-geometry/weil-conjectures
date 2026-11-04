@@ -44,6 +44,16 @@ variable {T : Type c} [Category.{v} T] {J : GrothendieckTopology T}
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   (R : Sheaf J CommRingCat.{max c v r})
 
+/-- The modules over the recorded coefficient ring, with independent site universes.
+Source: Stacks 08JJ, proof step 1 (blueprint: lem-sf-hom-finite-projective). -/
+abbrev Modules (R : Sheaf J CommRingCat.{max c v r}) := SheafOfModules.{max c v r}
+  ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
+
+/-- Ordinary sheaf dual, using the declaration of def-pur-sheaf-hom.
+Source: Stacks 08JJ, proof steps 2--5 (blueprint: lem-sf-hom-finite-projective). -/
+abbrev dual (P : Modules.{c, v, r} R) :=
+  SheafOfModules.homObj.{max c v r, v, c, max c v r} (R := R) P (SheafOfModules.unit _)
+
 set_option linter.unusedSectionVars false in
 /-- Evaluation uniquely determines the ordinary bidual map on every slice.
 The equal-universe upstream SheafOfModules.bidual has this same formula; here

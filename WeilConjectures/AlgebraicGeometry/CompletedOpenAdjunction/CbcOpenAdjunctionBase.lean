@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualStrictPullback
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedExtensionZeroComparison
 public import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSquare
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Ulift
@@ -36,13 +35,13 @@ import WeilConjectures.Compactification.Cofiltered
 import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackReflection
 
 import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensorPiece
-import all WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.AlgebraicGeometry.Clopen.ClopenScalarRestrictionReverseAdjunction
 import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdjunctionSupplement
 import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 import WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenStrictReduction
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedFiniteExchangeCoordinates
+import all WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportProetale
 
 /-!
 Lower construction API (blueprint: def-cbc-open-exact-adjunction-api).

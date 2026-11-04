@@ -59,6 +59,11 @@ structure ProjectiveBundleRealizationPullbackAtlas
           (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app V m =
           c • D'.L.presheaf.map (homOfLE hi).op (t i)
 
+attribute [local irreducible] Scheme.Modules.tensorPullback
+  projectiveBundlePullbackAdjunction projectiveBundlePullbackComp projectiveBundlePullbackCongr
+  Scheme.GradedAlgebraData.relProjHom
+  Scheme.GradedAlgebraData.PullbackData.relProjComparison
+  Scheme.GradedAlgebraData.relProj Scheme.GradedAlgebraData.relProjι
 private theorem transition_of_cross_tensor {T : Scheme.{u}} {M P Q : T.Modules}
     (q : M ⟶ P) (q' : M ⟶ Q)
     (hcross : ∀ (V : T.Opens) (m n : Γ(M, V)),
@@ -82,6 +87,62 @@ private theorem transition_of_cross_tensor {T : Scheme.{u}} {M P Q : T.Modules}
     exact hac)
   rw [hd', smul_smul, had]
 
+/-- Assemble the atlas from a cover by opens carrying source sections whose images under the two
+quotient maps are free generators, using the cross-tensor identity for transitions and
+coefficients. The quotient maps are spelled out so that the frame hypotheses match
+`exists_projectiveBundleRealizationPullbackAtlas_frames` syntactically. -/
+private theorem nonempty_projectiveBundleRealizationPullbackAtlas_of_frames
+    {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
+    (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')
+    (g : B' ⟶ B) (e : F' ≅ (Scheme.Modules.tensorPullback g).obj F)
+    (b : Scheme.GradedAlgebraData.PullbackData g D.A.data D'.A.data)
+    {ι : Type u} (U : ι → D'.A.data.relProj.Opens)
+    (m : ∀ i, Γ((Scheme.Modules.tensorPullback b.relProjComparison).obj
+      ((Scheme.Modules.tensorPullback D.A.data.relProjHom).obj F), U i))
+    (hcover : ⨆ i, U i = ⊤)
+    (hs : ∀ i, Scheme.Modules.IsFreeGenerator
+      (((Scheme.Modules.tensorPullback b.relProjComparison).map D.quotient).app (U i) (m i)))
+    (ht : ∀ i, Scheme.Modules.IsFreeGenerator
+      ((((projectiveBundlePullbackComp b.relProjComparison D.A.data.relProjHom).app F).hom ≫
+        (projectiveBundlePullbackCongr b.isPullback.w).hom.app F ≫
+        ((projectiveBundlePullbackComp D'.A.data.relProjHom g).app F).inv ≫
+        (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app
+          (U i) (m i)))
+    (hcross : ∀ (V : D'.A.data.relProj.Opens)
+      (m n : Γ((Scheme.Modules.tensorPullback b.relProjComparison).obj
+        ((Scheme.Modules.tensorPullback D.A.data.relProjHom).obj F), V)),
+      Scheme.Modules.tmulSection
+          (((Scheme.Modules.tensorPullback b.relProjComparison).map D.quotient).app V m)
+          ((((projectiveBundlePullbackComp b.relProjComparison D.A.data.relProjHom).app F).hom ≫
+            (projectiveBundlePullbackCongr b.isPullback.w).hom.app F ≫
+            ((projectiveBundlePullbackComp D'.A.data.relProjHom g).app F).inv ≫
+            (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app
+              V n) =
+        Scheme.Modules.tmulSection
+          (((Scheme.Modules.tensorPullback b.relProjComparison).map D.quotient).app V n)
+          ((((projectiveBundlePullbackComp b.relProjComparison D.A.data.relProjHom).app F).hom ≫
+            (projectiveBundlePullbackCongr b.isPullback.w).hom.app F ≫
+            ((projectiveBundlePullbackComp D'.A.data.relProjHom g).app F).inv ≫
+            (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app
+              V m)) :
+    Nonempty (ProjectiveBundleRealizationPullbackAtlas D D' g e b) :=
+  ⟨{ ι := ι
+     U := U
+     s := fun i ↦ ((Scheme.Modules.tensorPullback b.relProjComparison).map D.quotient).app (U i)
+      (m i)
+     t := fun i ↦
+      (((projectiveBundlePullbackComp b.relProjComparison D.A.data.relProjHom).app F).hom ≫
+        (projectiveBundlePullbackCongr b.isPullback.w).hom.app F ≫
+        ((projectiveBundlePullbackComp D'.A.data.relProjHom g).app F).inv ≫
+        (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app
+          (U i) (m i)
+     cover := hcover
+     s_generator := hs
+     t_generator := ht
+     transition := transition_of_cross_tensor _ _ hcross m hs
+     coefficients := fun i V hi n ↦
+      exists_projectiveBundleRealizationPullbackAtlas_coefficients _ _ hcross (m i) (hs i) V hi n }⟩
+
 /-- The affine-fraction calculation and normalized quotient equations produce a common frame
 atlas for arbitrary normalized realizations.  This is the local geometric part of the proof.
 Source: Stacks Project, Tags 01NQ, 01NR and 01OB.
@@ -102,39 +163,9 @@ theorem exists_projectiveBundleRealizationPullbackAtlas
           (((Scheme.Modules.tensorPullback g).obj F).presheaf.map (homOfLE h).op
             (projectiveBundlePullbackSection g x))))) :
     Nonempty (ProjectiveBundleRealizationPullbackAtlas D D' g e b) := by
-  classical
-  let M := (Scheme.Modules.tensorPullback b.relProjComparison).obj
-    ((Scheme.Modules.tensorPullback D.A.data.relProjHom).obj F)
-  let q := (Scheme.Modules.tensorPullback b.relProjComparison).map D.quotient
-  let q' :=
-    ((projectiveBundlePullbackComp b.relProjComparison D.A.data.relProjHom).app F).hom ≫
-      (projectiveBundlePullbackCongr b.isPullback.w).hom.app F ≫
-      ((projectiveBundlePullbackComp D'.A.data.relProjHom g).app F).inv ≫
-      (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient
-  let ι := Σ a : Scheme.GradedAlgebraData.PullbackData.Pairs g, Γ(F, a.1.2.1)
-  let U : ι → D'.A.data.relProj.Opens := fun i ↦
-    D'.A.data.relProjι i.1.1.1 ''ᵁ Proj.basicOpen (D'.A.data.grading i.1.1.1)
-      (b.map i.1.2 (D.A.sectionEquiv i.1.1.2 (SymmetricAlgebra.ι _ _ i.2)))
   obtain ⟨hU, hcover, hs, ht⟩ :=
     exists_projectiveBundleRealizationPullbackAtlas_frames D D' g e b hb
-  let m : ∀ i, Γ(M, U i) := fun i ↦ M.presheaf.map (homOfLE (hU i)).op
-    (projectiveBundlePullbackSection b.relProjComparison
-      (projectiveBundlePullbackSection D.A.data.relProjHom i.2))
-  have hcross := projectiveBundleRealizationPullback_cross_tensor D D' g e b hb
-  refine ⟨{
-    ι := ι
-    U := U
-    s := fun i ↦ q.app (U i) (m i)
-    t := fun i ↦ q'.app (U i) (m i)
-    cover := hcover
-    s_generator := hs
-    t_generator := ht
-    transition := ?_
-    coefficients := ?_
-  }⟩
-  · exact transition_of_cross_tensor q q' hcross m hs
-  · intro i V hi n
-    exact exists_projectiveBundleRealizationPullbackAtlas_coefficients q q' hcross
-      (m i) (hs i) V hi n
+  exact nonempty_projectiveBundleRealizationPullbackAtlas_of_frames D D' g e b _ _ hcover hs ht
+    (projectiveBundleRealizationPullback_cross_tensor D D' g e b hb)
 
 end AlgebraicGeometry

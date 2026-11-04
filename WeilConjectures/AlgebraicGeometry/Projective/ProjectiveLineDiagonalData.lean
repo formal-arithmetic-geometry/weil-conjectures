@@ -90,8 +90,8 @@ def projectiveLineDiagonalTrace (N : ℕ) (hN : 0 < N)
           simpa using hS.map
             ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
               (ProjectiveLine S ↘ S)).appTop.hom)).hom ≫
-    projectiveLineTrace N hN A hA (ProjectiveLine S)
-      (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom)
+    (projectiveLineTraceDatum N hN A hA (ProjectiveLine S)
+      (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom)).trace
 
 /-- Transport direct image along a product projection to the standard projective line.
 This is exactly the prefix of `projectiveLineDiagonalTrace`, before its trace factor.

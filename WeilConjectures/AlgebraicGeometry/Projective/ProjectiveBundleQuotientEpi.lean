@@ -102,6 +102,30 @@ private theorem zero_of_twist_generators {R B : Type u} [CommRing R]
     rw [← hr]
     exact congrArg (fun k ↦ k.app W r) (hg i)
 
+private theorem realization_chart_cover
+    {S : Scheme.{u}} {F : S.Modules} (A : S.SymmetricGradedAlgebraData F)
+    (U : S.affineOpens)
+    (hι : ∀ m : F.val.obj (op U.1),
+      A.sectionEquiv U (SymmetricAlgebra.ι _ _ m) ∈ A.data.grading U 1) :
+    (⨆ m : F.val.obj (op U.1),
+      Proj.basicOpen (A.data.grading U) (A.sectionEquiv U (SymmetricAlgebra.ι _ _ m))) = ⊤ := by
+  let : GradedAlgebra (A.data.grading U) := A.data.gradedAlgebra U
+  apply Proj.iSup_basicOpen_eq_top' (A.data.grading U)
+    (fun m ↦ A.sectionEquiv U (SymmetricAlgebra.ι _ _ m)) (fun m ↦ ⟨1, hι m⟩)
+  apply top_unique
+  intro x hx
+  clear hx
+  obtain ⟨x, rfl⟩ := (A.sectionEquiv U).surjective x
+  induction x using SymmetricAlgebra.induction with
+  | algebraMap r =>
+    rw [AlgEquiv.commutes]
+    exact (Algebra.adjoin (A.data.grading U 0)
+      (Set.range (fun m ↦ A.sectionEquiv U (SymmetricAlgebra.ι _ _ m)))).algebraMap_mem
+      (algebraMap Γ(S, U.1) (A.data.grading U 0) r)
+  | ι m => exact Algebra.subset_adjoin ⟨m, rfl⟩
+  | mul a b ha hb => simpa only [map_mul] using mul_mem ha hb
+  | add a b ha hb => simpa only [map_add] using add_mem ha hb
+
 /-- The normalized tautological quotient of any symmetric-algebra realization is epic.
 Source: Stacks Project, Tags 01OB and 01O4.
 Proof: its affine twist charts identify quotient sections with degree-one inclusion sections.
