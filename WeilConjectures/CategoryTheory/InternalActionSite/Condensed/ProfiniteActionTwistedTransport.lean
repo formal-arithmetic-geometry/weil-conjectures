@@ -175,4 +175,57 @@ noncomputable def scalarTwistedNatIso :
 
 end Scalar
 
+section Trivial
+
+variable (A G)
+
+/-- Pullback along the projection from the twisted small profinite site. -/
+noncomputable abbrev projectionPullback :
+    SheafOfModules.{u + 1} (siteRing A) ⥤ SheafOfModules.{u + 1} (twistedRingOf G A) :=
+  trivialPullback (groupPresheaf G) modelPrecoverage modelPrecoverage_isSiteForCoverings
+    (ringSheaf A)
+
+/-- The trivial action functor. -/
+noncomputable abbrev trivialAction : Modules A ⥤ Equivariant A G :=
+  Profinite.CondensedAction.trivial (R := A.toMon) (P := G)
+
+variable {A G}
+
+/-- Sectionwise, the twisted module of a trivial action is the pullback along the
+projection. -/
+noncomputable def trivialTwistedSections (M : Modules A) (X : Model.{u}) :
+    ((twistedEquivalence G A).functor.obj ((trivialAction G A).obj M)).val.obj
+        (op (Object.mk X)) ≃ₗ[(siteRing A).obj.obj (op X)]
+      ((projectionPullback G A).obj ((moduleSiteEquivalence A).functor.obj M)).val.obj
+        (op (Object.mk X)) where
+  toFun m := twistedSections ((trivialAction G A).obj M) X m
+  invFun y := (twistedSections ((trivialAction G A).obj M) X).symm y
+  map_add' m m' := map_add _ m m'
+  map_smul' r m := (twistedSections ((trivialAction G A).obj M) X).map_smul r m
+  left_inv m := (twistedSections ((trivialAction G A).obj M) X).symm_apply_apply m
+  right_inv y := (twistedSections ((trivialAction G A).obj M) X).apply_symm_apply y
+
+/-- The twisted module of a trivial action is the pullback along the projection. -/
+noncomputable def trivialTwistedIso (M : Modules A) :
+    (twistedEquivalence G A).functor.obj ((trivialAction G A).obj M) ≅
+      (projectionPullback G A).obj ((moduleSiteEquivalence A).functor.obj M) :=
+  twistedIsoMk (trivialTwistedSections M) (fun f g m ↦
+    twistedSections_restriction ((trivialAction G A).obj M) f g m)
+
+theorem trivialTwistedIso_naturality {M M' : Modules A} (φ : M ⟶ M') :
+    (twistedEquivalence G A).functor.map ((trivialAction G A).map φ) ≫ (trivialTwistedIso M').hom =
+      (trivialTwistedIso M).hom ≫
+        (projectionPullback G A).map ((moduleSiteEquivalence A).functor.map φ) := by
+  apply twisted_hom_ext
+  intro X m
+  exact twistedSections_naturality ((trivialAction G A).map φ) X m
+
+/-- The trivial action is pullback along the projection on twisted modules. -/
+noncomputable def trivialTwistedNatIso :
+    trivialAction G A ⋙ (twistedEquivalence G A).functor ≅
+      (moduleSiteEquivalence A).functor ⋙ projectionPullback G A :=
+  NatIso.ofComponents trivialTwistedIso trivialTwistedIso_naturality
+
+end Trivial
+
 end CategoryTheory.CondensedBar.ActionSite
