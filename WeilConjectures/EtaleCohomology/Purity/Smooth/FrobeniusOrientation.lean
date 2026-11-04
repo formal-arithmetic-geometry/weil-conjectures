@@ -30,7 +30,8 @@ datum (`AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`).
 
 The input is the compatibility of the canonical orientation with base change
 (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`, blueprint
-`sk-prop-sp-purity-bc` at the unit), a node of the smooth purity section (`sec-smooth-purity`)
+`proposition-compatibility-purity-base-change`, formerly `sk-prop-sp-purity-bc`, the orientation
+part), a node of the smooth purity chapter (`chap-Smooth-purity`)
 which the library does not prove yet and which that section owns. Its proof is the base change
 of each step of the diagonal construction of
 `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`:
@@ -43,7 +44,8 @@ coefficients and does not give it.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` (`sk-prop-sp-purity-bc`).
+- `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`
+  (`proposition-compatibility-purity-base-change`, the orientation part).
 - `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`.
 -/
 
@@ -66,7 +68,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasCompactification f'] [QuasiCompact f'] [HasInvertibleExponent Λ X]
   [HasInvertibleExponent Λ X'] {k k' : Type u} [Field k] [Field k']
 
-/-- Blueprint `sk-prop-sp-purity-bc`: compatibility of purity with base change, at the unit.
+/-- Blueprint `proposition-compatibility-purity-base-change` (formerly `sk-prop-sp-purity-bc`,
+`chap-Smooth-purity`): compatibility of purity with base change, the orientation part. The
+blueprint proof splits `γ_f` into the orientation of `ω_f` and the map `f^*K ⊗ ω_f ⟶ f^!K`, and
+proves first that the orientation commutes with base change; this is that statement.
 
 For a cartesian square `g' ≫ f = f' ≫ g` with `f` and `f'` smooth separated of relative
 dimension `d`, the canonical orientations `θ_f : Rf^! Λ_Y ≅ Λ_X(d)[2d]` and
