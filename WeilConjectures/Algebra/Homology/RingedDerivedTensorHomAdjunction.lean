@@ -17,7 +17,6 @@ Source: Stacks Project, Tag 08J9, with Tags 0A90 and 0A8Z.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -65,6 +64,7 @@ private noncomputable def chainEquivalenceGeneric
   (β_ P L).homFromEquiv.trans
     ((CochainComplex.internalHomEquiv L M P).trans e.symm.homToEquiv)
 
+set_option linter.unusedSectionVars false in
 private theorem chainEquivalenceGeneric_symm_component
     (P L M K : CochainComplex D ℤ) (e : K ≅ CochainComplex.internalHomObj L M)
     (π : ∀ (n p q : ℤ), p + n = q → (K.X n ⟶ (ihom (L.X p)).obj (M.X q)))
@@ -89,6 +89,7 @@ private theorem chainEquivalenceGeneric_symm_component
   simp only [Units.smul_def, smul_smul, ← Units.val_mul, Int.units_mul_self, Units.val_one,
     one_smul]
 
+set_option linter.unusedSectionVars false in
 private theorem tensorMap_naturality
     (P P' L L' M M' : CochainComplex D ℤ)
     (f : P' ⟶ P) (g : L' ⟶ L) (h : M ⟶ M')
@@ -138,6 +139,7 @@ private noncomputable def homotopyEquivGeneric
           ((HomotopyCategory.quotient _ _).obj P) ((HomotopyCategory.quotient _ _).obj M)).trans
       ((HomotopyCategory.quotient _ _).mapIso (e)).symm.homToEquiv)
 
+set_option linter.unusedSectionVars false in
 private theorem homotopyEquivGeneric_map
     (P L M K : CochainComplex D ℤ)
     (e : K ≅ CochainComplex.internalHomObj L M) (ψ : P ⊗ L ⟶ M) :
@@ -457,6 +459,7 @@ private theorem nativeUncurry_eq
   erw [tensorHomAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
   rfl
 
+set_option linter.unusedSectionVars false in
 private theorem baseLimits : HasLimitsOfSize.{0, 0} (Modules.{c, v, u} J R) :=
   hasLimitsOfSizeShrink.{0, 0, max c v u, max c v u} (Modules.{c, v, u} J R)
 attribute [local instance 1000] baseLimits
@@ -594,18 +597,21 @@ private theorem qHomEquiv_map
         ((HomotopyCategory.quotient (Modules.{c, v, u} J R) (.up ℤ)).map f) =
       DerivedCategory.Q.map f := GenericDerived.qHomEquiv_map P I f
 
+set_option linter.unusedSectionVars false in
 private theorem baseFlat :
     Abelian.HasFunctorialFlatResolution (Modules.{c, v, u} J R) :=
   SheafOfModules.hasFunctorialFlatResolution_kfi R
 
 attribute [local instance 1000] baseFlat
 
+set_option linter.unusedSectionVars false in
 private theorem auxTensorLeftColimits (M : Modules.{c, v, u} J R) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
   SheafOfModules.cochainTensorLeftPreservesColimits R M
 
 attribute [local instance 1000] auxTensorLeftColimits
 
+set_option linter.unusedSectionVars false in
 private theorem auxTensorRightColimits (M : Modules.{c, v, u} J R) :
     PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
   SheafOfModules.cochainTensorRightPreservesColimits R M
@@ -661,6 +667,7 @@ private theorem kFlatLocalization :
         infer_instance) rfl
   exact LocalizerMorphism.IsLocalizedEquivalence.isLocalization Φ DerivedCategory.Q
 
+set_option linter.unusedSectionVars false in
 private theorem baseGrothendieck :
     IsGrothendieckAbelian.{max c v u} (Modules.{c, v, u} J R) :=
   (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, u}
@@ -930,6 +937,7 @@ private theorem closedStructure_representatives
     (representativeFunctor.{c, v, u, w} J R) (representativeW.{c, v, u} J R)
     (representativeHomIso.{c, v, u, w} J R) (op P, (op L, M)) ξ
 
+set_option linter.unusedSectionVars false in
 private theorem chainEquiv_symm_pure
     (P L M : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (φ : P ⟶ homComplex (R := R) L M)

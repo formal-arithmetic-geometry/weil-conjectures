@@ -70,7 +70,6 @@ private theorem module_kFlat_of_cone
   exact Q.ext_of_isTriangulatedClosed₂ (mappingCone.triangleh q)
     (HomotopyCategory.mappingCone_triangleh_distinguished q) hP hC
 
-set_option linter.unusedVariables false in
 /-- K-flat complexes have K-flat stalks at every topos point, and a specified
 conservative family detects K-flatness. RingedSitePoint fixes the ordinary stalk
 ring, module action and functor on maps by inverse-image operation graphs. Such

@@ -37,7 +37,6 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
-set_option linter.style.haveILetI false in
 include tRB tAD tBD tApD tBpD tBBpD in
 /-- The characterized coefficient map becomes invertible after extension to D.
 Source: Stacks Project, Tag 0DJ8 affine localization identity; Tag 06Y6.
@@ -65,7 +64,7 @@ theorem exists_secondLocalization_iso
       (ModuleCat.extendScalars (algebraMap (A ⊗[R] Bp) D)).obj (K.cohomology i),
       IsSecondLocalizationMap R A B Bp D hflat Q L K i e.hom := by
   obtain ⟨f, hf⟩ := exists_secondLocalization_hom R A B Bp D T hflat i Q L K
-  letI : IsIso f := secondLocalization_hom_isIso R A B Bp D T hflat i Q L K f hf
+  let : IsIso f := secondLocalization_hom_isIso R A B Bp D T hflat i Q L K f hf
   exact ⟨asIso f, hf⟩
 
 end RingTensorCohomology
