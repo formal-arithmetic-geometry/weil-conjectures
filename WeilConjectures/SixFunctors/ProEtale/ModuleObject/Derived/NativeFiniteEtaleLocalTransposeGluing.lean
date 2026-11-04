@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NativeFiniteEtaleTracePairingLocal
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteEtaleSheetHomDescent
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NativeFiniteEtaleLocalTransposeCompatible
 
 /-! # Gluing the constructed finite-etale sheet transposes -/
 
@@ -45,6 +47,9 @@ theorem nativeFiniteEtaleLocalTranspose_glue
     ∃ f : M ⟶ (upperStar Λ p).obj P,
       ∀ (c : FiniteEtaleModuleChart p) (j : Fin c.degree),
         (upperStar Λ (c.sheet j)).map f = nativeFiniteEtaleLocalTranspose Λ p c M P h j := by
-  sorry
+  refine finiteEtaleSheetHom_exists Λ p M ((upperStar Λ p).obj P)
+    (fun c j ↦ nativeFiniteEtaleLocalTranspose Λ p c M P h j) ?_
+  intro c₁ j₁ c₂ j₂ Z a b _ _ k ha hb
+  exact nativeFiniteEtaleLocalTranspose_compatible Λ p c₁ c₂ M P h j₁ j₂ Z a b k ha hb
 
 end AlgebraicGeometry.ProEtale.CondensedRing
