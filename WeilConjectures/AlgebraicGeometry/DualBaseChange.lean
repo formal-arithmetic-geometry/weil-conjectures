@@ -6,207 +6,87 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.DualBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.Package
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 
 /-!
-# Dual base change
+# Dual base change: pasting compatibilities
 
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-lefschetz-verdier/sec-trace-classes-and-the-lefschetz-verdier-formula/
 sk-d-proper-pushforward/sk-thm-sf-compatibility/thm-sf-dual-base-change.md`,
 node `thm-sf-dual-base-change` (blueprint: thm-sf-dual-base-change).
 
-The statement is on the finite-coefficient, unbounded derived categories supplied by
-`def-sf-datum`.  The exchange is the canonical `Ex_!` of `def-exchange-projection`; the
-dual map is its conjugate mate under the composite A1 adjunctions.  The coherence fields
-below record naturality and horizontal and vertical pasting of that same canonical family,
-and the final field records the A4 proper-coincidence form.
+The dual base change isomorphism `Rf^! Rg_* ≅ Rg'_* Rf'^!` is the existing
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso` (the inverse conjugate
+of the compact-support exchange `Ex_!`, invertible by
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`), and its proper form is
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerShriekBaseChangeIso`. This file states the
+remaining clauses of the node: compatibility of that isomorphism with horizontal and vertical
+pasting of Cartesian squares, with respect to the canonical compositors
+`AlgebraicGeometry.Etale.rightDerivedLowerStarComp` and the exceptional compositor
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek` conjugate to
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-universe u v w uC vC uD vD uE vE
+universe u
 open CategoryTheory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical direct-image compositor `R(g₁)_* ⋙ R(g₂)_* ≅ R(g₁ ≫ g₂)_*`.
-(blueprint: `thm-sf-dual-base-change`, step 4). -/
-noncomputable def dualBaseChangeDirectImageCompositor
-    {Λ : Type (u + 1)} [CommRing Λ]
-    {T S U : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ U) :
-    R((g₁)_*[ModuleCat.{u + 1} Λ]) ⋙ R((g₂)_*[ModuleCat.{u + 1} Λ]) ≅
-      R((g₁ ≫ g₂)_*[ModuleCat.{u + 1} Λ]) :=
-  rightDerivedLowerStarComp (ModuleCat.{u + 1} Λ) g₁ g₂
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+  {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+  [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
 
-/-- The canonical unbounded `R_!` compositor.  It is assembled from the unbounded
-compactification composition isomorphism of `LowerShriekComposition.lean:276` and the canonical
-compactification comparison maps; no `Nonempty` choice is made. -/
-noncomputable def dualBaseChangeLowerShriekCompositor
-    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-    {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact f] [QuasiCompact (f ≫ g)] :
-    R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ] ≅
-      R(f ≫ g)_![ModuleCat.{u + 1} Λ] :=
-  let d := HasCompactification.compactification g
-  let e := (HasCompactification.compactification (f ≫ g)).ofComp d
-  Functor.isoWhiskerRight (rightDerivedLowerShriekIso Λ e.restrict).symm _ ≪≫
-    rightDerivedLowerShriekOfCompactificationCompIso Λ d e ≪≫
-    rightDerivedLowerShriekIso Λ (d.comp e)
-
-/-- The exceptional compositor obtained by conjugating the unbounded `R_!` compositor.
-(blueprint: `thm-sf-dual-base-change`, step 4). -/
-noncomputable def dualBaseChangeExceptionalCompositor
-    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-    {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact f] [QuasiCompact (f ≫ g)] :
-    R(f ≫ g)^![Λ] ≅ R(g)^![Λ] ⋙ R(f)^![Λ] :=
-  conjugateIsoEquiv (rightDerivedUpperShriekAdjunction Λ (f ≫ g))
-    ((rightDerivedUpperShriekAdjunction Λ f).comp
-      (rightDerivedUpperShriekAdjunction Λ g))
-    (dualBaseChangeLowerShriekCompositor (Λ := Λ) f g)
-
-/-- Two composable Cartesian squares and their Cartesian pasted square.  The second square is
-geometric data: all three pullback witnesses are fields, while the mate and compositor isomorphisms
-used below are definitions from the canonical derived six-functor constructions.
-(blueprint: `thm-sf-dual-base-change`, step 4). -/
-structure DualBaseChangePastingData where
-  X : Scheme.{u}
-  X₁ : Scheme.{u}
-  X₂ : Scheme.{u}
-  Y : Scheme.{u}
-  Y₁ : Scheme.{u}
-  Y₂ : Scheme.{u}
-  f : X ⟶ Y
-  f₁ : X₁ ⟶ Y₁
-  f₂ : X₂ ⟶ Y₂
-  g₁ : Y₁ ⟶ Y
-  g₂ : Y₂ ⟶ Y₁
-  g₁' : X₁ ⟶ X
-  g₂' : X₂ ⟶ X₁
-  sq₁ : IsPullback g₁' f₁ f g₁
-  sq₂ : IsPullback g₂' f₂ f₁ g₂
-  sq₁₂ : IsPullback (g₂' ≫ g₁') f₂ f (g₂ ≫ g₁)
-  hcf : HasCompactification f
-  hcf₁ : HasCompactification f₁
-  hcf₂ : HasCompactification f₂
-  hqf : QuasiCompact f
-  hqf₁ : QuasiCompact f₁
-  hqf₂ : QuasiCompact f₂
-  E₀ : Scheme.{u}
-  E₁ : Scheme.{u}
-  E₂ : Scheme.{u}
-  V₀ : Scheme.{u}
-  V₁ : Scheme.{u}
-  V₂ : Scheme.{u}
-  e₁ : E₀ ⟶ E₁
-  e₂ : E₁ ⟶ E₂
-  a₁ : V₁ ⟶ E₁
-  a₂ : V₂ ⟶ E₂
-  a₁' : V₀ ⟶ E₀
-  v₁ : V₀ ⟶ V₁
-  v₂ : V₁ ⟶ V₂
-  vsq₁ : IsPullback a₁' v₁ e₁ a₁
-  vsq₂ : IsPullback a₁ v₂ e₂ a₂
-  vsq₁₂ : IsPullback a₁' (v₁ ≫ v₂) (e₁ ≫ e₂) a₂
-  hce₁ : HasCompactification e₁
-  hce₂ : HasCompactification e₂
-  hce₁₂ : HasCompactification (e₁ ≫ e₂)
-  hqe₁ : QuasiCompact e₁
-  hqe₂ : QuasiCompact e₂
-  hqe₁₂ : QuasiCompact (e₁ ≫ e₂)
-  hcv₁ : HasCompactification v₁
-  hcv₂ : HasCompactification v₂
-  hcv₁₂ : HasCompactification (v₁ ≫ v₂)
-  hqv₁ : QuasiCompact v₁
-  hqv₂ : QuasiCompact v₂
-  hqv₁₂ : QuasiCompact (v₁ ≫ v₂)
-
-/-- The horizontal mate-pasting equation for a `DualBaseChangePastingData` chain.  The two
-`R(g)_*` compositors and the conjugated unbounded `R(f)_!` compositor are pinned by their named
-canonical definitions (blueprint: `thm-sf-dual-base-change`, step 4). -/
-noncomputable def dualBaseChangeHorizontalPasting
-    (p : DualBaseChangePastingData) (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] : Prop :=
-  letI := p.hcf
-  letI := p.hcf₁
-  letI := p.hcf₂
-  letI := p.hqf
-  letI := p.hqf₁
-  letI := p.hqf₂
-  let β₁ := rightDerivedUpperShriekLowerStarBaseChangeIso Λ p.sq₁
-  let β₂ := rightDerivedUpperShriekLowerStarBaseChangeIso Λ p.sq₂
-  let β₁₂ := rightDerivedUpperShriekLowerStarBaseChangeIso Λ p.sq₁₂
-  let dY := (dualBaseChangeDirectImageCompositor (Λ := Λ) p.g₂ p.g₁).symm
-  let dX := dualBaseChangeDirectImageCompositor (Λ := Λ) p.g₂' p.g₁'
-  β₁₂ =
-    Functor.isoWhiskerRight dY R(p.f)^![Λ] ≪≫
+/-- Horizontal pasting for dual base change: for Cartesian squares `sq` (along `g`) and `sq₂`
+(along `g₂`), the dual base change isomorphism of the pasted square `sq₂.paste_horiz sq` is the
+pasting of those of `sq` and `sq₂`, using the canonical direct-image compositors
+`rightDerivedLowerStarComp` (blueprint: `thm-sf-dual-base-change`, step 4). -/
+def DualBaseChangeHorizontalPasting {X₂ Y₂ : Scheme.{u}} {g₂ : Y₂ ⟶ Y'} {g₂' : X₂ ⟶ X'}
+    {f₂ : X₂ ⟶ Y₂} [HasCompactification f₂] [QuasiCompact f₂]
+    (sq : IsPullback g' f' f g) (sq₂ : IsPullback g₂' f₂ f' g₂) : Prop :=
+  rightDerivedUpperShriekLowerStarBaseChangeIso Λ (sq₂.paste_horiz sq) =
+    Functor.isoWhiskerRight (rightDerivedLowerStarComp (ModuleCat.{u + 1} Λ) g₂ g).symm
+        R(f)^![Λ] ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerLeft R((p.g₂)_*[ModuleCat.{u + 1} Λ]) β₁ ≪≫
+      Functor.isoWhiskerLeft R((g₂)_*[ModuleCat.{u + 1} Λ])
+        (rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq) ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight β₂ R((p.g₁')_*[ModuleCat.{u + 1} Λ]) ≪≫
+      Functor.isoWhiskerRight (rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq₂)
+        R((g')_*[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft R(p.f₂)^![Λ] dX
+      Functor.isoWhiskerLeft R(f₂)^![Λ] (rightDerivedLowerStarComp (ModuleCat.{u + 1} Λ) g₂' g')
 
-/-- The vertical mate-pasting equation.  It is the inverse-oriented equation for the same
-canonical pasted-square comparison; its orientation and compositor placement differ from the
-horizontal equation (blueprint: `thm-sf-dual-base-change`, step 4). -/
-noncomputable def dualBaseChangeVerticalPasting
-    (p : DualBaseChangePastingData) (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] : Prop :=
-  letI := p.hce₁
-  letI := p.hce₂
-  letI := p.hce₁₂
-  letI := p.hqe₁
-  letI := p.hqe₂
-  letI := p.hqe₁₂
-  letI := p.hcv₁
-  letI := p.hcv₂
-  letI := p.hcv₁₂
-  letI := p.hqv₁
-  letI := p.hqv₂
-  letI := p.hqv₁₂
-  let β₁ := rightDerivedUpperShriekLowerStarBaseChangeIso Λ p.vsq₁
-  let β₂ := rightDerivedUpperShriekLowerStarBaseChangeIso Λ p.vsq₂
-  let β₁₂ := rightDerivedUpperShriekLowerStarBaseChangeIso Λ p.vsq₁₂
-  let eF := dualBaseChangeExceptionalCompositor (Λ := Λ) p.e₁ p.e₂
-  let eF' := dualBaseChangeExceptionalCompositor (Λ := Λ) p.v₁ p.v₂
-  β₁₂ ≪≫ Functor.isoWhiskerRight eF' R((p.a₁')_*[ModuleCat.{u + 1} Λ]) =
-    Functor.isoWhiskerLeft R((p.a₂)_*[ModuleCat.{u + 1} Λ]) eF ≪≫
+/-- Vertical pasting for dual base change: for a Cartesian square `t` stacked on top of `sq`,
+the dual base change isomorphism of the pasted square `t.paste_vert sq` is the pasting of those
+of `t` and `sq`, using the exceptional compositors conjugate to `rightDerivedLowerShriekCompIso`
+(blueprint: `thm-sf-dual-base-change`, step 4). -/
+def DualBaseChangeVerticalPasting {X₀ X₀' : Scheme.{u}} {e : X₀ ⟶ X} {g₀' : X₀' ⟶ X₀}
+    {f₀' : X₀' ⟶ X'} [HasCompactification e] [HasCompactification (e ≫ f)]
+    [QuasiCompact (e ≫ f)] [HasCompactification f₀'] [QuasiCompact f₀']
+    [HasCompactification (f₀' ≫ f')] [QuasiCompact (f₀' ≫ f')]
+    (sq : IsPullback g' f' f g) (t : IsPullback g₀' f₀' e g') : Prop :=
+  rightDerivedUpperShriekLowerStarBaseChangeIso Λ (t.paste_vert sq) ≪≫
+      Functor.isoWhiskerRight
+        (rightDerivedUpperShriekCompIsoOfLowerShriek Λ f₀' f'
+          (rightDerivedLowerShriekCompIso Λ f₀' f')).symm
+        R((g₀')_*[ModuleCat.{u + 1} Λ]) =
+    Functor.isoWhiskerLeft R((g)_*[ModuleCat.{u + 1} Λ])
+        (rightDerivedUpperShriekCompIsoOfLowerShriek Λ e f
+          (rightDerivedLowerShriekCompIso Λ e f)).symm ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight β₂ R(p.e₁)^![Λ] ≪≫
+      Functor.isoWhiskerRight (rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq) R(e)^![Λ] ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft R(p.v₂)^![Λ] β₁
+      Functor.isoWhiskerLeft R(f')^![Λ] (rightDerivedUpperShriekLowerStarBaseChangeIso Λ t)
 
-/-- Naturality in the square is stated for every actual pair of composable Cartesian squares;
-the canonical mate of the pasted square is required to satisfy the horizontal and vertical mate
-pasting equations with the canonical direct-image and exceptional compositors
-(blueprint: `thm-sf-dual-base-change`, step 4). -/
-def dualBaseChangeNaturality
-    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {g' : X' ⟶ X}
-    {f' : X' ⟶ Y'} [HasCompactification f] [HasCompactification f']
-    [QuasiCompact f']
-    (sq : IsPullback g' f' f g)
-    (β : R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![Λ] ≅
-      R(f')^![Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ])) : Prop :=
-  β = rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq ∧
-  ∀ (p : DualBaseChangePastingData),
-    dualBaseChangeHorizontalPasting p Λ ∧ dualBaseChangeVerticalPasting p Λ
-
-/-- Compatibility with horizontal and vertical pasting of actual Cartesian squares
-(blueprint: `thm-sf-dual-base-change`, step 4). -/
-def dualBaseChangePasting
-    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] : Prop :=
-  ∃ (p : DualBaseChangePastingData),
-    dualBaseChangeHorizontalPasting p Λ ∧ dualBaseChangeVerticalPasting p Λ
-
-/-- Dual base change in the finite-coefficient unbounded datum.
+/-- Dual base change in the finite-coefficient unbounded datum: compatibility of the dual base
+change isomorphism `rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq : Rf^! Rg_* ≅ Rg'_* Rf'^!`
+with horizontal and vertical pasting of Cartesian squares, and stability of properness of `g`
+under the base change, which is what makes the proper form
+`rightDerivedUpperShriekLowerShriekBaseChangeIso` applicable.
 
 Source place: node `thm-sf-dual-base-change` in
 `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-lefschetz-verdier/
@@ -214,46 +94,21 @@ sec-trace-classes-and-the-lefschetz-verdier-formula/sk-d-proper-pushforward/
 sk-thm-sf-compatibility/thm-sf-dual-base-change.md`
 (blueprint: thm-sf-dual-base-change).
 
-The first witness is the canonical compact-support exchange
-`Ex_! : Lg^* Rf_! ≅ Rf'_! Lg'^*`; the second is the inverse conjugate of that
-exchange, hence `Rf^! Rg_* ≅ Rg'_* Rf'^!`.  The two coherence predicates are retained
-for the same witness and the proper clause is expressed using the A4 identifications
-`Ru_! ≅ Ru_*`.  The five proof steps are: (1) the canonical
-`rightDerivedLowerShriekBaseChangeMap` exchange and its A2 invertibility; (2) the
-composite A1 adjunctions; (3) the inverse conjugate mate; (4) mate-calculus naturality,
-horizontal and vertical pasting on actual Cartesian squares with the canonical direct-image and
-conjugated unbounded exceptional compositors and square comparisons; and (5) the A4 proper
-substitution.
--/
-theorem dualBaseChange
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
-    (k : Type u) [Field k]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ Spec (.of k))
-    [HasCompactification f] [QuasiCompact f] [IsSeparated aY]
-    [LocallyOfFiniteType aY] [QuasiCompact aY] [HasCompactification aY]
-    [HasCompactification (f ≫ aY)]
-    (S : SixOperationsPackage Λ k f aY)
-    {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y')
-    [IsSeparated f] [LocallyOfFiniteType f]
-    [IsSeparated f'] [LocallyOfFiniteType f']
-    [IsSeparated g] [LocallyOfFiniteType g]
-    [IsSeparated g'] [LocallyOfFiniteType g']
-    [HasCompactification f'] [QuasiCompact f']
-    (sq : IsPullback g' f' f g) :
-    ∃ τ : R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
-        L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ],
-      ∃ β : R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![Λ] ≅
-          R(f')^![Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]),
-        τ.hom = rightDerivedLowerShriekBaseChangeMap Λ sq ∧
-        β = rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq ∧
-        dualBaseChangeNaturality
-          sq β ∧
-        dualBaseChangePasting (Λ := Λ) ∧
-        (IsProper g → IsProper g') ∧
-        (∀ [IsProper g] [IsProper g'],
-          ∃ β! : R(g)_![ModuleCat.{u + 1} Λ] ⋙ R(f)^![Λ] ≅
-              R(f')^![Λ] ⋙ R(g')_![ModuleCat.{u + 1} Λ],
-            β! = rightDerivedUpperShriekLowerShriekBaseChangeIso Λ sq) := by
+Proof outline: the exchange `Ex_!` is invertible (A2), the dual isomorphism is its inverse
+conjugate under the composite A1 adjunctions, and the pasting equations follow from mate
+calculus applied to the pasting compatibility of `Ex_!` with the direct-image and compactly
+supported compositors. -/
+theorem dualBaseChange (sq : IsPullback g' f' f g) :
+    (∀ {X₂ Y₂ : Scheme.{u}} {g₂ : Y₂ ⟶ Y'} {g₂' : X₂ ⟶ X'} {f₂ : X₂ ⟶ Y₂}
+      [HasCompactification f₂] [QuasiCompact f₂] (sq₂ : IsPullback g₂' f₂ f' g₂),
+      DualBaseChangeHorizontalPasting Λ sq sq₂) ∧
+    (∀ {X₀ X₀' : Scheme.{u}} {e : X₀ ⟶ X} {g₀' : X₀' ⟶ X₀} {f₀' : X₀' ⟶ X'}
+      [HasCompactification e] [HasCompactification (e ≫ f)] [QuasiCompact (e ≫ f)]
+      [HasCompactification f₀'] [QuasiCompact f₀']
+      [HasCompactification (f₀' ≫ f')] [QuasiCompact (f₀' ≫ f')]
+      (t : IsPullback g₀' f₀' e g'),
+      DualBaseChangeVerticalPasting Λ sq t) ∧
+    (IsProper g → IsProper g') := by
   sorry
 
 end AlgebraicGeometry.Etale

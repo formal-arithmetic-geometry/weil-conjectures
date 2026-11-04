@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
 import WeilConjectures.AlgebraicGeometry.Native.NativeHomSourceShiftData
+import all WeilConjectures.CategoryTheory.Exact.ExactDerivedHomComparisonShift
 
 /-! # Formal coherence of the etale internal-Hom comparison
 

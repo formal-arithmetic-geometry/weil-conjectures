@@ -177,7 +177,7 @@ Proof:
 theorem regularLocal_complementary_koszul_data
     (A : Type u) [CommRing A] [IsRegularLocalRing A]
     (r s : ℕ) (hdim : ringKrullDim A = ((r + s : ℕ) : WithBot ℕ∞))
-    (I J : Ideal A) (hI : I ≠ ⊤) (hJ : J ≠ ⊤)
+    (I J : Ideal A) (hI : I ≠ ⊤) (_hJ : J ≠ ⊤)
     [IsRegularLocalRing (A ⧸ I)] [IsRegularLocalRing (A ⧸ J)]
     (hIdim : ringKrullDim (A ⧸ I) = (s : WithBot ℕ∞))
     (hJdim : ringKrullDim (A ⧸ J) = (r : WithBot ℕ∞))

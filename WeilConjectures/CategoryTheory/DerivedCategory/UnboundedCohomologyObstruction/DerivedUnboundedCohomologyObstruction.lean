@@ -136,6 +136,7 @@ private theorem shifts_sum_isLimit
   · have hp : Sigma.ι K j ≫ p n = 0 := Cofan.IsColimit.inj_proj_of_ne hs h
     simp [hp, Sigma.ι_π_of_ne_assoc _ h]
 
+omit [HasDerivedCategory (ModuleCat R)] in
 private theorem directSum_not_surjective
     (M : ℕ → ModuleCat.{max r m} R) (hM : ∀ n, ¬ IsZero (M n)) :
     ¬ Function.Surjective (DirectSum.coeFnLinearMap R (M := fun n ↦ M n)) := by
