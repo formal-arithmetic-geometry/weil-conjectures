@@ -194,8 +194,9 @@ theorem constructibleIntegralPullbackCompι_commShift (l : ℕ) [Fact l.Prime]
     NatTrans.CommShift (constructibleIntegralPullbackCompι l E f).hom ℤ :=
   ObjectProperty.liftCompιIso_hom_commShift_of_heq _ _ _ (fun K n ↦ (hs K n).trans (by
     rw [Functor.commShiftIso_comp_hom_app]
-    exact (Functor.map_comp_heq_of_heq_id _ _ _ (ObjectProperty.shiftFunctor_obj_obj _ n K)
-      (ObjectProperty.ι_commShiftIso_hom_app_heq _ n K)).symm))
+    exact (Functor.map_comp_heq_of_heq_id _ _ _ (ObjectProperty.obj_shift_eq _ n K)
+      ((heq_of_eq (ObjectProperty.ι_commShiftIso_hom_app _ n K)).trans
+        (eqToHom_heq_id_cod _ _ _))).symm))
 
 /-- The ambient form of the integral pullback scalar comparison: the ordinary
 scalar/pullback comparison conjugated by the ordinary-to-completed comparisons. -/
