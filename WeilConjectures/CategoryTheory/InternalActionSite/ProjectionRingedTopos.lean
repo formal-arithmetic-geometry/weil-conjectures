@@ -171,7 +171,8 @@ theorem restrictScalars_kInjectiveImageAcyclic (S S' : Sheaf J.toGrothendieck Co
     inferInstanceAs (𝟭 _).Additive
   have : (Equivalence.refl (C := SheafOfModules.{u} (twistedRing K J hJ S))).functor.Additive :=
     inferInstanceAs (𝟭 _).Additive
-  have : (Equivalence.refl (C := SheafOfModules.{u} (baseRing J.toGrothendieck S))).functor.Additive :=
+  have : (Equivalence.refl (C := SheafOfModules.{u}
+      (baseRing J.toGrothendieck S))).functor.Additive :=
     inferInstanceAs (𝟭 _).Additive
   exact Functor.KInjectiveImageAcyclic.of_equivalence (Equivalence.refl) (Equivalence.refl)
     (Equivalence.refl) (Iso.refl _)
