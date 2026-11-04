@@ -34,7 +34,7 @@ variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [Finite k]
   (f : X ⟶ Y) [IsProper f.left]
 
 local instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
-  ⟨CharP.prime_ringChar (AlgebraicClosure k)⟩
+  ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
 local instance : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k) (l := l)⟩
 
