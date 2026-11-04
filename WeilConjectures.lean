@@ -16609,7 +16609,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves

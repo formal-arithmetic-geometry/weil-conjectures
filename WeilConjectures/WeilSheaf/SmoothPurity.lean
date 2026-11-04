@@ -34,15 +34,23 @@ Forgetting the Weil structure reflects isomorphisms
 (`CategoryTheory.Endofunctor.IsoAlgebra.isIso_of_isIso_forget_mapDerivedCategory_map`), so `γ_f`
 is an isomorphism.
 
-The input `exists_natTrans_upperShriek_isIso_forget_of_smooth` belongs to the chapter on smooth
-purity, and it is stated here with `sorry` (cross-section rule). The chapter proves smooth purity
-for the condensed `ℚ̄_ℓ`-coefficients (`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`,
-`AlgebraicGeometry.ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`). Transporting
-it to Weil complexes still needs two things:
-- the identification of the Weil `Rf^!` with the condensed one on the geometric fibre;
-- the Weil equivariance of the purity map (`thm-pur-weil-equivariance-of-purity-and-trace`).
-For the second, `AlgebraicGeometry.Etale.exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace`
-does not apply: it is for finite coefficients over `Spec k₀`.
+## Unfinished
+
+The input `exists_natTrans_upperShriek_isIso_forget_of_smooth` is not proved, and it is as strong
+as the conclusion: given the adjunction, `rightAdjointUniq` produces such a `γ`. It is the place
+where the actual purity map has to be constructed. The planned construction defines `γ_f` as the
+adjoint, under `Rf₀! ⊣ Rf^!`, of a smooth trace `Rf₀! f^* L(d)[2d] ⟶ L` of Weil complexes, and
+compares it with the smooth purity of the condensed `ℚ̄_ℓ`-coefficients
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`,
+`AlgebraicGeometry.ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`).
+It still lacks:
+- a smooth trace for Weil complexes, or for `ℓ`-adic sheaves on `X̄`, natural in `L`, together with
+  its Frobenius equivariance (`thm-pur-weil-equivariance-of-purity-and-trace`). The condensed
+  orientation `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is not canonical, and
+  `AlgebraicGeometry.Etale.exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace` is for finite
+  coefficients over `Spec k₀`;
+- the comparison of `For ∘ Rf₀!` with the condensed `Rf̄_!` on `Dᵇc`, and of `For ∘ Rf^!` with the
+  geometric `Rf̄^!`.
 -/
 
 @[expose] public section
@@ -78,7 +86,7 @@ complexes:
   for the condensed `ℚ̄_ℓ`-coefficients
   (`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`).
 
-It is stated with `sorry` (cross-section rule). -/
+It is stated with `sorry`; see the module docstring for what its proof still needs. -/
 theorem exists_natTrans_upperShriek_isIso_forget_of_smooth
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [HasUpperShriek k₀ l f] (d : ℕ)
     [SmoothOfRelativeDimension d f] :
