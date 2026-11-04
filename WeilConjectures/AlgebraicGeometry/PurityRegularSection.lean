@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PurityVectorBundle.PurityVectorBundleZeroSection
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.DualRank
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
@@ -45,15 +46,6 @@ def regularSectionEvaluation {T : Scheme.{u}} (F : T.Modules) (s : F.sections) :
     (SheafOfModules.unit T.ringCatSheaf)
     (SheafOfModules.sectionsMap (SheafOfModules.bidual (R := T.sheaf) F) s)
 
-/-- The ordinary dual has the same constant rank, including rank zero.
-Source: Stacks Tag 01C6 and the dual-frame convention (blueprint: def-pur-regular-section).
-Proof: restrict a frame to each trivializing open. Coordinate projections are the dual basis,
-so Hom(O^r,O) is O^r on that open. These opens cover the scheme. -/
-theorem regularSectionDual_rank {T : Scheme.{u}} (F : T.Modules) (r : ℕ)
-    [F.IsFiniteLocallyFreeOfRank r] :
-    (Scheme.Modules.dual F).IsFiniteLocallyFreeOfRank r := by
-  sorry
-
 variable (P : WeilConjectures.PurityFiniteSetting.{u})
   (T : Scheme.{u}) (hT : T ⟶ Spec (CommRingCat.of P.field.k))
   [IsSeparated hT] [LocallyOfFiniteType hT] [QuasiCompact hT]
@@ -63,14 +55,15 @@ Source: Stacks Tag 01M2 (blueprint: def-pur-regular-section). -/
 def regularSectionBundle (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r] :
     PurityVectorBundle P T hT r where
   E := @VectorBundleZeroSection.scheme T (isNoetherian_of_locallyOfFiniteType hT) r
-    (Scheme.Modules.dual F) (regularSectionDual_rank F r)
+    (Scheme.Modules.dual F) (Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r)
   p := @VectorBundleZeroSection.π T (isNoetherian_of_locallyOfFiniteType hT) r
-    (Scheme.Modules.dual F) (regularSectionDual_rank F r)
+    (Scheme.Modules.dual F) (Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r)
   𝓔 := Scheme.Modules.dual F
-  locallyFree := regularSectionDual_rank F r
+  locallyFree := Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r
   phi := Iso.refl _
   over_commutes := Category.id_comp _
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical map into E(F) exists uniquely and has the evaluation ring map on every
 relative-Spec affine chart. Source: Stacks Tags 01LW and 01LX
 (blueprint: def-pur-regular-section).
@@ -89,7 +82,7 @@ theorem regularSectionGeometric_existsUnique (F : T.Modules) (r : ℕ)
           fU ≫ (((regularSectionBundle P T hT F r).p) ⁻¹ᵁ U.1).ι = U.1.ι ≫ f.val ∧
           fU ≫ @VectorBundleZeroSection.affineChart T
             (isNoetherian_of_locallyOfFiniteType hT) r (Scheme.Modules.dual F)
-              (regularSectionDual_rank F r) U =
+              (Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r) U =
             U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
               ((SymmetricAlgebra.lift
                 (((regularSectionEvaluation F s).val.app (op U.1)).hom)).toRingHom)) := by
@@ -116,6 +109,7 @@ def regularSectionZeroProjection (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFre
     (s : F.sections) : regularSectionZeroScheme P T hT F r s ⟶ T :=
   pullback.fst _ _
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Regularity is regularity of the component germs in an actual local frame of F.
 Source: Stacks Tags 067M and 01WY (blueprint: def-pur-regular-section). -/
 def IsRegularSection (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r]
@@ -146,6 +140,7 @@ def regularSectionIntersectionProjection (F G : T.Modules) (r e : ℕ)
     regularSectionIntersectionScheme P T hT F G r e s t ⟶ T :=
   pullback.fst _ _ ≫ regularSectionZeroProjection P T hT F r s
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Transversality requires both sections regular and the concatenated actual components
 regular in simultaneous frames at every intersection point.
 Source: Stacks Tag 067M; purity (L3) (blueprint: def-pur-regular-section). -/
@@ -167,6 +162,7 @@ def IsTransverseDirectSum (F G : T.Modules) (r e : ℕ)
             T.presheaf.germ U.1 (regularSectionIntersectionProjection P T hT F G r e s t x)
               hx (c.repr (t.val (op U.1)) j)))
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The finite direct sum is the product module sheaf, whose section is the pair (s,t).
 Source: purity (L3) (blueprint: def-pur-regular-section). -/
 def regularSectionSum {X : Scheme.{u}} (F G : X.Modules)
@@ -180,7 +176,28 @@ two coordinate projections. These simultaneous frame opens cover the base. -/
 theorem regularSectionSum_rank {X : Scheme.{u}} (F G : X.Modules) (r e : ℕ)
     [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank e] :
     (F ⨯ G).IsFiniteLocallyFreeOfRank (r + e) := by
-  sorry
+  obtain ⟨I, U, hU, eU⟩ := SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{u,
+    u, u}.1 ‹F.IsFiniteLocallyFreeOfRank r›
+  obtain ⟨J, V, hV, eV⟩ := SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{u,
+    u, u}.1 ‹G.IsFiniteLocallyFreeOfRank e›
+  refine Scheme.Modules.isFiniteLocallyFreeOfRank_of_restrict_iso_free (F ⨯ G)
+    (fun p : I × J ↦ Scheme.Opens.ι (U p.1 ⊓ V p.2)) ?_ fun p ↦ ⟨?_⟩
+  · simp only [Scheme.Opens.opensRange_ι]
+    rw [← iSup_inf_iSup, (Opens.coversTop_iff _ _).1 hU, (Opens.coversTop_iff _ _).1 hV,
+      inf_top_eq]
+  · let W : X.Opens := U p.1 ⊓ V p.2
+    have : PreservesColimitsOfSize.{0, 0} (Scheme.Modules.restrictFunctor W.ι) :=
+      preservesColimits_of_natIso (Scheme.Modules.restrictFunctorIsoPullback W.ι).symm
+    exact (Scheme.Modules.restrictFunctor W.ι).mapIso
+        ((biprod.isoProd F G).symm ≪≫ biprod.isoCoprod F G) ≪≫
+      (PreservesColimitPair.iso (Scheme.Modules.restrictFunctor W.ι) F G).symm ≪≫
+      coprod.mapIso (Scheme.Modules.nonempty_restrict_iso_free_of_le inf_le_left
+          (eU p.1).some).some
+        (Scheme.Modules.nonempty_restrict_iso_free_of_le inf_le_right (eV p.2).some).some ≪≫
+      SheafOfModules.freeSumIso _ _ ≪≫
+      SheafOfModules.freeFunctor.mapIso
+        ((Equiv.sumCongr Equiv.ulift Equiv.ulift).trans
+          (finSumFinEquiv.trans Equiv.ulift.symm)).toIso
 
 /-- The zero scheme of the actual paired section of the direct sum module.
 Source: purity (L3) (blueprint: def-pur-regular-section). -/

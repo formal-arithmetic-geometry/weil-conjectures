@@ -12,6 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
 import WeilConjectures.AlgebraicGeometry.PullbackDualFiniteLocallyFree
+import WeilConjectures.AlgebraicGeometry.Modules.DualRank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 
 /-! # Common local ranks for a pulled-back module
@@ -73,19 +74,6 @@ private noncomputable def tensorDual {A B : Scheme.{u}} (a : A ⟶ B)
     (Modules.nonempty_pullback_dual_iso_of_isFiniteLocallyFree a M).some ≪≫
       (Modules.dualFunctor A).mapIso ((tensorComparison a).app M).op
 
-private theorem dual_rank {A : Scheme.{u}} (M : A.Modules) (r : ℕ)
-    [M.IsFiniteLocallyFreeOfRank r] : (Modules.dual M).IsFiniteLocallyFreeOfRank r := by
-  obtain ⟨q, hq, hr⟩ :=
-    SheafOfModules.IsFiniteLocallyFreeOfRank.exists_localGeneratorsData (M := M) (r := r)
-  refine SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{u, u, u}.mpr
-    ⟨q.I, q.X, q.coversTop, fun i ↦ ⟨?_⟩⟩
-  let e : M.over (q.X i) ≅ SheafOfModules.free (ULift.{u} (Fin r)) :=
-    (asIso (q.generators i).π).symm ≪≫ SheafOfModules.freeFunctor.mapIso
-      ((hr i).some.trans Equiv.ulift.symm).toIso
-  exact SheafOfModules.overHomObjIso M (SheafOfModules.unit A.ringCatSheaf) (q.X i) ≪≫
-    ((SheafOfModules.homFunctor (A.sheaf.over (q.X i))).flip.obj
-      (SheafOfModules.unit _)).mapIso e.symm.op ≪≫ SheafOfModules.homObjFreeUnitIso.{u} _
-
 private noncomputable def presentation_baseChange {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (E : X.Modules) (N : T.Modules)
     (e : (Modules.tensorPullback (pullback.fst f g)).obj E ≅
@@ -98,9 +86,9 @@ private noncomputable def presentation_baseChange {X S T : Scheme.{u}}
     pullback.lift (pullback.fst f (h ≫ g)) (pullback.snd f (h ≫ g) ≫ h)
       (by simp only [Category.assoc, pullback.condition])
   have hb₁ : b ≫ pullback.fst f g = pullback.fst f (h ≫ g) := by
-    simp [b]
+    exact pullback.lift_fst _ _ _
   have hb₂ : b ≫ pullback.snd f g = pullback.snd f (h ≫ g) ≫ h := by
-    simp [b]
+    exact pullback.lift_snd _ _ _
   exact (eqToIso (congrArg (fun a ↦ (Modules.tensorPullback a).obj E) hb₁)).symm ≪≫
     (Modules.nonempty_tensorPullbackComp b (pullback.fst f g)).some.app E ≪≫
     (Modules.tensorPullback b).mapIso e ≪≫
@@ -184,7 +172,7 @@ theorem picard_pullback_local_ranks {X S T : Scheme.{u}}
   have hMr : ((Modules.tensorPullback U.ι).obj M).IsFiniteLocallyFreeOfRank r :=
     SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso.{u, u, u} frame'.symm
   have hMd : ((Modules.tensorPullback U.ι).obj (Modules.dual M)).IsFiniteLocallyFreeOfRank r := by
-    have := dual_rank ((Modules.tensorPullback U.ι).obj M) r
+    have := Modules.isFiniteLocallyFreeOfRank_dual ((Modules.tensorPullback U.ι).obj M) r
     exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso.{u, u, u} (tensorDual U.ι M).symm
   refine ⟨U, ht, r, ?_, ?_, ?_⟩
   · exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso.{u, u, u}
