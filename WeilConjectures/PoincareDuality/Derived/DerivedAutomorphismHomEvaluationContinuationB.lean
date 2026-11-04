@@ -208,7 +208,47 @@ theorem podReductionReindexingMap_laws :
       podReductionReindexingMap l E g K ≫
         (pullbackTensorSequenceDerived l E g).map
           ((pullbackTensorCalculus l E Y).reduction.map f) := by
-  sorry
+  classical
+  have hF : pullbackTensorSequenceDerived l E g ≅
+      integralComparisonDerivedSequencePullback l E g := by
+    have heq : pullbackTensorSequenceInverse l E g =
+        integralComparisonSequencePullback l E g := by
+      unfold pullbackTensorSequenceInverse integralComparisonSequencePullback
+      congr 1
+      unfold pullbackTensorSequenceDirect integralComparisonSequenceDirectImage
+      have hr : pullbackTensorSequenceRing l E g = integralComparisonSequenceRingMap l E g := by
+        unfold pullbackTensorSequenceRing pullbackTensorSequenceRingMap
+        rfl
+      rw [hr]
+    exact Functor.mapDerivedCategoryNatIso (eqToIso heq)
+  have hH : (integralComparisonDerivedSequencePullback l E g).IsEquivalence := by
+    let H := integralComparisonDerivedSequencePullback l E g
+    let G := integralComparisonDerivedSequencePullback l E (inv g)
+    let a : H ⋙ G ≅ 𝟭 _ :=
+      (integralComparisonSystemComposition l E (inv g) g).symm ≪≫
+        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E)
+          (IsIso.inv_hom_id g)) ≪≫ integralComparisonSystemUnit l E Y
+    let b : G ⋙ H ≅ 𝟭 _ :=
+      (integralComparisonSystemComposition l E g (inv g)).symm ≪≫
+        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E)
+          (IsIso.hom_inv_id g)) ≪≫ integralComparisonSystemUnit l E X
+    exact (CategoryTheory.Equivalence.mk H G a.symm b).isEquivalence_functor
+  have : (pullbackTensorSequenceDerived l E g).IsEquivalence :=
+    Functor.isEquivalence_of_iso hF.symm
+  have : (podCompletedDerivedInverseImage l E g).IsEquivalence :=
+    (podCompletedInverseImage_equivalence l E g).2
+  obtain ⟨e, he⟩ := adjointSquare (podCompletedDerivedInverseImage l E g)
+    (pullbackTensorSequenceDerived l E g) (pullbackTensorCalculus l E Y).adjunction
+    (pullbackTensorCalculus l E X).adjunction (podLimitReindexing l E g).symm
+  have hmap (K : DerivedCategory (integralTowerModules l E Y)) :
+      podReductionReindexingMap l E g K = e.hom.app K := by
+    rw [podReductionReindexingMap, Equiv.symm_apply_eq, Adjunction.homEquiv_unit]
+    exact (he K).symm
+  refine ⟨fun K ↦ ?_, fun K L f ↦ ?_⟩
+  · rw [hmap]
+    infer_instance
+  · rw [hmap, hmap]
+    exact e.hom.naturality f
 
 /-- The reduction comparison is the isomorphism of that very canonical adjunct.
 Source: node proof step 13 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
