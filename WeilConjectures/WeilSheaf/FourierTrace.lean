@@ -288,6 +288,84 @@ lemma affineLineTraceFunction_eq (K : WeilComplex k₀ l (affineLine k₀)) (n :
     K.affineLineTraceFunction n x = K.affineSpaceTraceFunction (ι := PUnit.{u + 1}) n fun _ ↦ x :=
   rfl
 
+/-- The trace function of a Weil complex on the affine line is invariant under the
+`k₀`-automorphisms of `𝔽_{qⁿ}`. -/
+theorem affineLineTraceFunction_algEquiv (K : WeilComplex k₀ l (affineLine k₀)) (n : ℕ)
+    (σ : FiniteField.galoisExtension k₀ n ≃ₐ[k₀] FiniteField.galoisExtension k₀ n)
+    (x : FiniteField.galoisExtension k₀ n) :
+    K.affineLineTraceFunction n (σ x) = K.affineLineTraceFunction n x := by
+  rw [affineLineTraceFunction, affineLineTraceFunction,
+    ← traceFunction_fieldPointsCongr K n σ ((AffineSpace.fieldPointsEquiv k₀ _).symm x)]
+  congr 1
+  rw [Equiv.symm_apply_eq, AffineSpace.fieldPointsEquiv_fieldPointsCongr, Equiv.apply_symm_apply]
+
+/-- The Weil complex `pr₁^* K ⊗ μ^* ℒ_ψ` on the affine plane, whose direct image with compact
+support along `pr₂` is the Fourier–Deligne transform of `K` up to the shift `[1]`. -/
+noncomputable abbrev fourierIntegrand (ψ : AddChar k₀ (PadicAlgCl l))
+    (K : WeilComplex k₀ l (affineLine k₀)) : WeilComplex k₀ l (affinePlane k₀) :=
+  (tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ)).obj
+    ((upperStar (affinePlane.fst k₀)).obj K)
+
+/-- The trace function of `pr₁^* K ⊗ μ^* ℒ_ψ` at the point `(x, φ(y))` of the fibre of `pr₂`
+over `y` is `ψ(Tr(x φ(y))) t_K(x)`. -/
+theorem traceFunction_upperStar_fourierIntegrand (ψ : AddChar k₀ (PadicAlgCl l))
+    (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : n ≠ 0)
+    (y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ n))
+    (φ : FiniteField.galoisExtension k₀ n →ₐ[k₀] FiniteField.galoisExtension k₀ n)
+    (x : FiniteField.galoisExtension k₀ n) :
+    ((upperStar (affinePlane.sndFiber.fst y)).obj (fourierIntegrand ψ K)).traceFunction n
+        (affinePlane.sndFiber.fieldPointsEquiv y _ (φ, x)) =
+      ψ (Algebra.trace k₀ _ (x * φ (AffineSpace.fieldPointsEquiv k₀ _ y))) *
+        K.affineLineTraceFunction n x := by
+  rw [traceFunction_upperStar, traceFunction_tensorLisse, fourierKernel, affineSpaceFourierKernel,
+    WeilSheaf.traceFunction_upperStar, WeilSheaf.traceFunction_artinSchreier ψ 1 hn,
+    traceFunction_upperStar, map_one, one_mul, affineLineTraceFunction]
+  have hK : Scheme.Hom.mapFieldPoints (affinePlane.fst k₀) _
+      (Scheme.Hom.mapFieldPoints (affinePlane.sndFiber.fst y) _
+        (affinePlane.sndFiber.fieldPointsEquiv y _ (φ, x))) =
+      (AffineSpace.fieldPointsEquiv k₀ _).symm x :=
+    Subtype.ext ((Category.assoc _ _ _).trans (affinePlane.sndFiber.lift_fst_fst φ x))
+  have hμ : (Scheme.ΓSpecIso (.of _)).hom.hom
+      ((Scheme.Hom.mapFieldPoints (affineSpacePair.pairing PUnit.{u + 1} k₀) _
+        (Scheme.Hom.mapFieldPoints (affinePlane.sndFiber.fst y) _
+          (affinePlane.sndFiber.fieldPointsEquiv y _ (φ, x)))).1.appTop
+            (AffineSpace.coord _ PUnit.unit)) =
+      x * φ (AffineSpace.fieldPointsEquiv k₀ _ y) := by
+    rw [← affinePlane.sndFiber.ΓSpecIso_hom_appTop_lift_mul φ x, ← Category.assoc,
+      ← affineSpacePair.pairing_punit]
+    rfl
+  rw [hK, hμ]
+
+/-- Summing the trace function of `pr₁^* K ⊗ μ^* ℒ_ψ` over the `𝔽_{qⁿ}`-rational points
+`(x, φ(y))` of the fibre of `pr₂` over `y` gives `n` times the classical Fourier transform of
+`t_K` at `y`: by Galois invariance the `n` embeddings `φ` contribute the same sum. -/
+theorem finsum_traceFunction_upperStar_fourierIntegrand (ψ : AddChar k₀ (PadicAlgCl l))
+    (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : n ≠ 0)
+    [Fintype (FiniteField.galoisExtension k₀ n)] (y : FiniteField.galoisExtension k₀ n) :
+    ∑ᶠ w, ((upperStar (affinePlane.sndFiber.fst ((AffineSpace.fieldPointsEquiv k₀ _).symm y))).obj
+        (fourierIntegrand ψ K)).traceFunction n w =
+      n • FiniteField.fourierTransform ψ (K.affineLineTraceFunction n) y := by
+  have : Fintype (FiniteField.galoisExtension k₀ n →ₐ[k₀] FiniteField.galoisExtension k₀ n) :=
+    Fintype.ofFinite _
+  rw [← finsum_comp_equiv (affinePlane.sndFiber.fieldPointsEquiv _ _), finsum_eq_sum_of_fintype,
+    Fintype.sum_prod_type]
+  simp_rw [traceFunction_upperStar_fourierIntegrand ψ K hn, Equiv.apply_symm_apply]
+  have h (φ : FiniteField.galoisExtension k₀ n →ₐ[k₀] FiniteField.galoisExtension k₀ n) :
+      ∑ x, ψ (Algebra.trace k₀ _ (x * φ y)) * K.affineLineTraceFunction n x =
+        FiniteField.fourierTransform ψ (K.affineLineTraceFunction n) y := by
+    rw [← MulEquiv.apply_symm_apply (algEquivEquivAlgHom k₀ _) φ,
+      ← Equiv.sum_comp ((algEquivEquivAlgHom k₀ _).symm φ).toEquiv]
+    refine Finset.sum_congr rfl fun x _ ↦ ?_
+    set σ := (algEquivEquivAlgHom k₀ _).symm φ
+    have hσ : algEquivEquivAlgHom k₀ _ σ y = σ y := rfl
+    have hx : σ.toEquiv x = σ x := rfl
+    rw [mul_comm, hx, hσ, ← map_mul, Algebra.trace_eq_of_algEquiv,
+      affineLineTraceFunction_algEquiv]
+  simp_rw [h]
+  rw [Finset.sum_const, Finset.card_univ, ← Nat.card_eq_fintype_card,
+    FiniteField.nat_card_algHom_galoisExtension k₀ hn]
+
 /-- **The Fourier trace formula.** For an additive character `ψ` of `k₀`, a Weil complex `K` on
 the affine line, `n ≥ 1` and `y ∈ 𝔽_{qⁿ}`,
 
