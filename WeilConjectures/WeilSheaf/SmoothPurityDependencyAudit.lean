@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+import all WeilConjectures.CategoryTheory.Native.NativeOpenTensorDescentData
+import all WeilConjectures.CategoryTheory.Native.NativeWeilTensorConstraintLifts
 import all WeilConjectures.WeilSheaf.AffineLineBundle
 import all WeilConjectures.WeilSheaf.Bidual
 import all WeilConjectures.WeilSheaf.BifunctorHomShift
@@ -305,6 +307,7 @@ run_elab do
   let mut seen : NameSet := {}
   let mut leaves : Array Name := #[]
   let mut unavailable : Array Name := #[]
+  let mut inspected : NameSet := {}
   while !pending.isEmpty do
     let name := pending.back!
     pending := pending.pop
@@ -313,6 +316,8 @@ run_elab do
     seen := seen.insert name
     unless (← collectAxioms name).contains `sorryAx do
       continue
+    if let some idx := env.getModuleIdxFor? name then
+      inspected := inspected.insert env.header.moduleNames[idx.toNat]!
     match env.checked.get.find? name with
     | none => unavailable := unavailable.push name
     | some info =>
@@ -336,6 +341,8 @@ run_elab do
       modules := modules.insert env.header.moduleNames[idx.toNat]!
   for name in modules.toArray.qsort Name.lt do
     logInfo m!"Missing import all: {name}"
+  for name in inspected.toArray.qsort Name.lt do
+    logInfo m!"Proof import all: {name}"
   let forbidden := #[
     `AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension,
     `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth,
@@ -344,4 +351,4 @@ run_elab do
     if seen.contains name then
       throwError "The Thom proof uses the relative-purity declaration {name}"
   unless unavailable.isEmpty do
-    logWarning "The dependency audit needs the imported proof bodies listed above"
+    throwError "The dependency audit needs the imported proof bodies listed above"

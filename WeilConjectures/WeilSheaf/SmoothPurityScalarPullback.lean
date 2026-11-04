@@ -5,9 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.CondensedModelWeil
-public import WeilConjectures.TateTwist.TateModuleTrivialization
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
-public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
 /-! # Coefficient-parametric pullback comparisons for Tate descent -/
@@ -47,17 +45,5 @@ lemma purityExtendPullbackIso_unit
     purityPullbackUnit Λ g M ≫ (purityExtendPullbackIso Λ g M N e).hom.hom =
       e.hom.hom ≫ purityPullbackUnit Λ g N :=
   Mod.extendUnitHom_extendScalarsMap (condensedPullbackHom Λ g) e.hom
-
-variable {K : Type u} [Field K] [WeaklyEtale g] (f : U ⟶ Spec (.of K))
-  (l : ℕ) [Fact l.Prime] {ζ : ℕ → K}
-  (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n)) (hζ' : ∀ n, ζ (n + 1) ^ l = ζ n)
-
-set_option maxHeartbeats 400000 in
-/-- The Tate-module trivialization transported through coefficient extension. -/
-noncomputable def purityTateModuleTrivialization :
-    (g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj (tateModule X l) ≅
-      (g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj (𝟙_ _) :=
-  purityExtendPullbackIso (Profinite.continuousMapRingObj ℤ_[l]) g _ _
-    (upperStarMapModTateModuleIsoUnit g f l hζ hζ' ≪≫ (g)^*[Ab.{u + 1}].mapModUnitIso)
 
 end AlgebraicGeometry.ProEtale
