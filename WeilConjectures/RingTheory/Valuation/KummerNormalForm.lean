@@ -108,8 +108,7 @@ lemma one_add_pow_eq (hp : 2 ≤ p) (c : Ω) :
   simp only [one_pow, mul_one]
   have h1 : range (p + 1) = insert p (insert 0 (insert 1 (Ico 2 p))) := by
     ext i; simp only [mem_range, mem_insert, mem_Ico]; omega
-  rw [h1, sum_insert (by simp <;> omega), sum_insert (by simp <;> omega),
-    sum_insert (by simp <;> omega)]
+  rw [h1, sum_insert (by simp; omega), sum_insert (by simp), sum_insert (by simp)]
   simp only [Nat.choose_self, Nat.choose_zero_right, Nat.choose_one_right, pow_zero, pow_one,
     Nat.cast_one, mul_one]
   rw [sum_congr rfl fun i _ ↦ mul_comm (c ^ i) _]
@@ -170,8 +169,9 @@ lemma liftedSum_single (j : ι × ℕ) (c : Ω) :
     liftedSum p w (Finsupp.single j c) = c * w j.1 ^ p ^ j.2 :=
   Finsupp.sum_single_index (zero_mul _)
 
-lemma liftedSum_erase [DecidableEq ι] (d : ι × ℕ →₀ Ω) (j : ι × ℕ) :
+lemma liftedSum_erase (d : ι × ℕ →₀ Ω) (j : ι × ℕ) :
     liftedSum p w d = liftedSum p w (d.erase j) + d j * w j.1 ^ p ^ j.2 := by
+  classical
   conv_lhs => rw [← Finsupp.erase_add_single j d]
   rw [liftedSum_add, liftedSum_single]
 
@@ -195,7 +195,7 @@ lemma valuation_one_add_eq_one {x : Ω} (hx : v x < 1) : v (1 + x) = 1 := by
 /-- **One replacement step of stage 2**: a term `d (w i) ^ p ^ (k + 1)` of value `< v p` is
 replaced, up to the `p`-th power `(1 + c) ^ p` (`c = d^{1/p} (w i) ^ p ^ k`) and a negligible
 error, by `- p d^{1/p} (w i) ^ p ^ k`. -/
-lemma kummer_stage2_step [DecidableEq ι] (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
+lemma kummer_stage2_step (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
     (hw1 : ∀ i, v (w i) = 1) (d : ι × ℕ →₀ Ω) (hdv : ∀ j, v (d j) < v (p : Ω)) {d₀ : Ω}
     (hd₀ : v d₀ < v (p : Ω)) {n : Ω} (hn : v.IsKummerNegligible p n) (i : ι) (k : ℕ) {e : Ω}
     (he : e ^ p = d (i, k + 1)) :
@@ -205,6 +205,7 @@ lemma kummer_stage2_step [DecidableEq ι] (hp : p.Prime) (hp1 : v (p : Ω) < 1) 
           (1 + n')) ∧
       v (e * w i ^ p ^ k) < 1 ∧
       ∀ j, v ((d.erase (i, k + 1) + Finsupp.single (i, k) (-(p : Ω) * e)) j) < v (p : Ω) := by
+  classical
   have hp2 := hp.two_le
   set c := e * w i ^ p ^ k with hcdef
   set d' := d.erase (i, k + 1) + Finsupp.single (i, k) (-(p : Ω) * e) with hd'def
@@ -454,10 +455,11 @@ lemma liftedSum_eq_sum_image [DecidableEq ι] (d : ι × ℕ →₀ Ω) (h0 : �
   · intro j hj j' hj' h
     exact Prod.ext h ((h0 j hj).trans (h0 j' hj').symm)
 
-lemma sum_snd_support_lt [DecidableEq ι] (d : ι × ℕ →₀ Ω) (i : ι) (k : ℕ)
+lemma sum_snd_support_lt (d : ι × ℕ →₀ Ω) (i : ι) (k : ℕ)
     (hj : (i, k + 1) ∈ d.support) (x : Ω) :
     (d.erase (i, k + 1) + Finsupp.single (i, k) x).support.sum Prod.snd <
       d.support.sum Prod.snd := by
+  classical
   classical
   have hsub : (d.erase (i, k + 1) + Finsupp.single (i, k) x).support ⊆
       insert (i, k) (d.support.erase (i, k + 1)) := by
@@ -477,7 +479,7 @@ lemma sum_snd_support_lt [DecidableEq ι] (d : ι × ℕ →₀ Ω) (i : ι) (k 
         rw [add_comm]; exact Nat.add_lt_add_left (Nat.lt_succ_self k) _
 
 /-- **Stage 2 of the Kummer normal form.** -/
-theorem kummer_stage2 [DecidableEq ι] (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
+theorem kummer_stage2 (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
     (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
     (hw : ∀ i, w i ∈ L₁) (hw1 : ∀ i, v (w i) = 1)
     (hval : ∀ (s : Finset ι) (c : ι → Ω), (∀ i ∈ s, c i ∈ K) →
@@ -490,6 +492,7 @@ theorem kummer_stage2 [DecidableEq ι] (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp
     (hn : v.IsKummerNegligible p n)
     (h₂ : ∃ y ∈ L₂, y ^ p = (1 + d₀ + liftedSum p w d) * (1 + n)) :
     ∃ y ∈ L₁, y ^ p = (1 + d₀ + liftedSum p w d) * (1 + n) := by
+  classical
   have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0
   induction hN : d.support.sum Prod.snd using Nat.strong_induction_on generalizing d n with
   | _ N ih =>
