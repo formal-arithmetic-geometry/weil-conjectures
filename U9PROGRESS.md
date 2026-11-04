@@ -310,3 +310,7 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 07:33 CST: 072908 rc=1. Reducible matching exposes IsoAlgebra.instPreadditive versus abelian.toPreadditive; add a generic rfl equality and normalize it before matching. Total proof passes all major steps but exhausts cumulative 400k budget at the final summand calculation (21s); scoped increase to 600k after measured progress.
 
 2026-11-05 07:38 CST: 073301 derived result: generic instance equality GREEN, simp does not rewrite the implicit instance path; switch to dsimp using the rfl lemma. Total core still actively checking (>4min CPU). Submit ONLY the independent derived module to test this correction without rebuilding the running total core.
+
+[K5 2026-11-05 07:41 CST] NativeTotalTensorCore is GREEN (437s), log K5-20261105T073301.log, commit 22e1cf688b. Summand proof now checks through the full tensor square. Still validating concrete total specialization and derived Q square; separate derived check K5-20261105T073828.log is rebuilding NativePullTensor on newsrv t1. No DONE.
+
+2026-11-05 07:43 CST: 073301 complete rc=1 ONLY DerivedTensorSquareOfTotal failed. NativeTotalTensorCore GREEN 437s (kernel proof 203s), NativeTotalTensorSquareOfSheaf GREEN 104s, NativeTotalTensorSquare GREEN 2.8s. Remaining is derived assembly and downstream leaf/audit.
