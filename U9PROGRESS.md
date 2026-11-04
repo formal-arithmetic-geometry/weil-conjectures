@@ -261,3 +261,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 07:23 +0800 — profile the remaining compactification conversion
 - Audit /home/ubuntu/u9/logs/K4-20261105T072125.log still reports the same 15s whnf timeout in the compactification wrapper. The specified compactification comparison is now in place, but another conversion remains.
 - Enabled profiling only for this theorem, with a 5000ms threshold to avoid the earlier verbose trace. No heartbeat raise; current task remains unfinished.
+
+## 2026-11-05 07:25 +0800 — compactification timeout localized
+- Focused profile /home/ubuntu/u9/logs/K4-20261105T072239.log (rc=1, 15s) isolates 11.17s in expected-type propagation for the final `(upperStar c.i).mapIso eZ`. Its implicit k₀/l were still metavariables while unification compared a composed right adjoint at the point with an object over c.Z.
+- Pinned those parameters and bound the mapped isomorphism before composing it with eR. Removed profiling. The earlier compactification construction and open-descent helper both complete before that final step.
+- No heartbeat raises; next full helper audit follows. No DONE.

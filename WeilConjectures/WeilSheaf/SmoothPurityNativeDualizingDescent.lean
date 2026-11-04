@@ -78,8 +78,6 @@ noncomputable def nativeOpenDualizingDescentIso
     (CondensedRing.dualizingComplex l Z₀) ≪≫
     (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).mapIso e₀
 
-set_option trace.profiler true in
-set_option trace.profiler.threshold 5000 in
 /-- The exceptional inverse image of the descended unit is native descent of the
 finite-base dualizing complex, including the Weil structure. -/
 theorem nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
@@ -120,7 +118,7 @@ theorem nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
   let eR := adj.rightAdjointUniq
     (((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) c.i).comp adjg).ofNatIsoLeft e.symm)
   obtain ⟨eZ⟩ := nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso (k₀ := k₀) (l := l) c.g adjg
-  exact ⟨eR.app _ ≪≫ (upperStar c.i).mapIso eZ ≪≫
-    nativeOpenDualizingDescentIso (k₀ := k₀) (l := l) c.i⟩
+  let b := (upperStar (k₀ := k₀) (l := l) c.i).mapIso eZ
+  exact ⟨eR.app _ ≪≫ b ≪≫ nativeOpenDualizingDescentIso (k₀ := k₀) (l := l) c.i⟩
 
 end AlgebraicGeometry.WeilComplex
