@@ -52,18 +52,16 @@ variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* 
   {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
   {G' : E ⥤ C} {H' : F ⥤ D}
 
-lemma bijective_comp_left_of_isIso {X Y Z : C} (f : X ⟶ Y) [IsIso f] :
-    Function.Bijective (fun g : Y ⟶ Z ↦ f ≫ g) :=
-  ⟨fun _ _ h ↦ (cancel_epi f).1 h, fun y ↦ ⟨inv f ≫ y, by simp⟩⟩
-
-lemma bijective_comp_right_of_isIso {X Y Z : C} (f : Y ⟶ Z) [IsIso f] :
-    Function.Bijective (fun g : X ⟶ Y ↦ g ≫ f) :=
-  ⟨fun _ _ h ↦ (cancel_mono f).1 h, fun y ↦ ⟨y ≫ inv f, by simp⟩⟩
-
 /-- Let `α : G ⋙ L₂ ⟶ L₁ ⋙ H` be an isomorphism, with mate `β : R₁ ⋙ G ⟶ H ⋙ R₂` for the
 adjunctions `L₁ ⊣ R₁` and `L₂ ⊣ R₂`, and let `G ⊣ G'` and `H ⊣ H'`. If `β` and the unit of
-`H ⊣ H'` are invertible at `d`, then the unit of `G ⊣ G'` is invertible at `R₁ d`: under the
-adjunctions, `G : (T ⟶ R₁ d) → (G T ⟶ G (R₁ d))` followed by `β_d` is
+`H ⊣ H'` are invertible at `d`, then the unit of `G ⊣ G'` is invertible at `R₁ d`. The square is
+```
+C --L₁--> D
+|G        |H
+v         v
+E --L₂--> F
+```
+filled by `α`. Under the adjunctions, `G : (T ⟶ R₁ d) → (G T ⟶ G (R₁ d))` followed by `β_d` is
 `H : (L₁ T ⟶ d) → (H (L₁ T) ⟶ H d)` followed by `α_T`. -/
 theorem isIso_unit_app_of_isIso_mateEquiv_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (adjG : G ⊣ G') (adjH : H ⊣ H') (α : TwoSquare G L₁ L₂ H) [IsIso α.natTrans] (d : D)
@@ -83,13 +81,14 @@ theorem isIso_unit_app_of_isIso_mateEquiv_app (adj₁ : L₁ ⊣ R₁) (adj₂ :
   have hb : Function.Bijective
       (fun f : T ⟶ R₁.obj d ↦ G.map f ≫ (mateEquiv adj₁ adj₂ α).app d) :=
     (congrArg Function.Bijective e).mpr ((adj₂.homEquiv _ _).bijective.comp
-      ((bijective_comp_left_of_isIso (α.app T)).comp
+      (((asIso α.natTrans).app T).symm.homFromEquiv.bijective.comp
         ((adjH.map_bijective_of_isIso_unit_app _).comp (adj₁.homEquiv T d).symm.bijective)))
   have e' : (G.map : (T ⟶ R₁.obj d) → _) =
       (fun g ↦ g ≫ inv ((mateEquiv adj₁ adj₂ α).app d)) ∘
         (fun f : T ⟶ R₁.obj d ↦ G.map f ≫ (mateEquiv adj₁ adj₂ α).app d) := by
     funext f
     simp
-  exact (congrArg Function.Bijective e').mpr ((bijective_comp_right_of_isIso _).comp hb)
+  exact (congrArg Function.Bijective e').mpr
+    ((asIso ((mateEquiv adj₁ adj₂ α).app d)).symm.homToEquiv.bijective.comp hb)
 
 end CategoryTheory

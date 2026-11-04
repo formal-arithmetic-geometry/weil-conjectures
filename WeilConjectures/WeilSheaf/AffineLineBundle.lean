@@ -27,10 +27,13 @@ blueprint `thm-pur-rank-one-thom`) is deduced from:
   (`AlgebraicGeometry.WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`,
   blueprint `lem-pur-a1-direct-image`, extended from `Λ_X` to all Weil complexes).
 
-Both are proved on the étale side with finite coefficients
-(`AlgebraicGeometry.Etale.nonempty_adjunction_affineLine`,
-`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`). Their passage to `ℓ`-adic
-Weil complexes is not formalized, so they are stated here with `sorry`.
+The affine-line adjunction is proved on the étale side with finite coefficients
+(`AlgebraicGeometry.Etale.nonempty_adjunction_affineLine`); its passage to `ℓ`-adic Weil complexes
+is not formalized, so it is stated here with `sorry`. Homotopy invariance is deduced from the case
+of Weil complexes with lisse cohomology
+(`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isLisse_homologySheaf`) by passing to the
+reduced subscheme and Noetherian induction
+(`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isClosedImmersion_of_isReduced`).
 
 From them, `π^* ⋙ Rπ₀!` is left adjoint to `(1)[2] ⋙ π^* ⋙ Rπ_* ≅ (1)[2]`, whose left adjoint is
 also the inverse autoequivalence `(-1)[-2]`; uniqueness of left adjoints gives the Thom
@@ -121,12 +124,14 @@ faithful.
 For `K = Λ_X` with finite étale coefficients over an algebraically closed field this is
 `AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`; for general `K` it follows from
 the constant case by smooth base change (`sbc-thm-smooth-base-change`) and the acyclicity of
-the affine line over strictly henselian bases. The `ℓ`-adic Weil form for all Weil complexes is
-not formalized; it is stated here with `sorry`. -/
+the affine line over strictly henselian bases. Here it is deduced from the case of a reduced
+scheme (`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isClosedImmersion_of_isReduced`): `K` is
+the direct image of its restriction to the reduced subscheme `X_red`, whose open complement is
+empty, and smooth base change carries the unit along this direct image
+(`AlgebraicGeometry.WeilComplex.isIso_unit_app_derivedLowerStar_obj`). -/
 theorem isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
     (K : WeilComplex k₀ l X) :
-    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) :=
-  by
+    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) := by
   have : IsLocallyNoetherian X :=
     LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
   have : CompactSpace X :=
