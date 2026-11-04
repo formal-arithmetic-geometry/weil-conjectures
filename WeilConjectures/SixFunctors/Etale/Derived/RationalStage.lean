@@ -76,7 +76,7 @@ for an integral morphism `u`.
 
 universe w u
 
-open CategoryTheory Limits TensorProduct
+open CategoryTheory Limits Pretriangulated TensorProduct
 
 /-- In a discrete valuation ring every nonzero element divides a power of a uniformizer. -/
 lemma IsDiscreteValuationRing.exists_mul_eq_pow {R : Type*} [CommRing R] [IsDomain R]
@@ -395,14 +395,12 @@ theorem exists_boundedConstructibleIntegral_idempotent {k : Type u} [Field k]
   apply biprod.hom_ext'
   · dsimp only [i, eK, Iso.trans_hom, biprod.mapIso_hom]
     simp only [Functor.mapBiprod_inv, Functor.mapBiprod_hom, biprod.inl_desc_assoc,
-      ← Functor.map_comp_assoc, biprod.inl_fst_assoc, Category.assoc, biprod.mapIso_hom,
-      biprod.lift_desc, biprod.inl_desc, Iso.inv_hom_id_assoc]
+      ← Functor.map_comp_assoc, biprod.inl_fst_assoc, Category.assoc, biprod.mapIso_hom]
     rw [reassoc_of% hinl, reassoc_of% hinl]
     simp [reassoc_of% hA₁']
   · dsimp only [i, eK, Iso.trans_hom, biprod.mapIso_hom]
     simp only [Functor.mapBiprod_inv, Functor.mapBiprod_hom, biprod.inr_desc_assoc,
-      ← Functor.map_comp_assoc, biprod.inr_fst_assoc, Category.assoc, biprod.mapIso_hom,
-      biprod.lift_desc, biprod.inr_desc, Iso.inv_hom_id_assoc]
+      ← Functor.map_comp_assoc, biprod.inr_fst_assoc, Category.assoc, biprod.mapIso_hom]
     rw [reassoc_of% hinr]
     simp [reassoc_of% hIB']
 
