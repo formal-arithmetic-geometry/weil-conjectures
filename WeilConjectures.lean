@@ -17505,6 +17505,10 @@ public import WeilConjectures.RepresentationTheory.WeilGroupContinuousExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupLattice
 public import WeilConjectures.RepresentationTheory.WeilGroupLatticeExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
+public import WeilConjectures.Reproducer
+public import WeilConjectures.ReproducerFixed
+public import WeilConjectures.ReproducerOpaqueFixed
+public import WeilConjectures.ReproducerTransparentFixed
 public import WeilConjectures.RingTheory.AbsoluteIrreducibilitySpecialization
 public import WeilConjectures.RingTheory.AdicCompletion.ChangeIdeal
 public import WeilConjectures.RingTheory.AdicCompletion.FiniteModule
