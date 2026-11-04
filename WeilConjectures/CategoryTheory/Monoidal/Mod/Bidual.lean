@@ -57,6 +57,18 @@ lemma bidual_comp_ihom_map (M : Mod C A) {N N' : Mod C A} (f : N ⟶ N') :
   rw [uncurryHom_comp_ihom_map, uncurryHom_comp_ihomMap, uncurryHom_bidual, uncurryHom_bidual,
     BraidedCategory.braiding_naturality_right_assoc, evaluation_naturality, Category.assoc]
 
+/-- The triangle identity of biduality: `Hom(M, N) ⟶ Hom(Hom(Hom(M, N), N), N) ⟶ Hom(M, N)`,
+the biduality morphism of `Hom(M, N)` followed by the dual of the biduality morphism of `M`, is
+the identity. -/
+lemma bidual_comp_ihomMap_bidual (M N : Mod C A) :
+    bidual ((ihom M).obj N) N ≫ (ihomMap (bidual M N)).app N = 𝟙 _ := by
+  refine uncurryHom_injective ?_
+  have h := uncurryHom_bidual M N
+  rw [uncurryHom] at h
+  rw [uncurryHom_comp_ihomMap, uncurryHom_bidual, BraidedCategory.braiding_naturality_right_assoc,
+    h, SymmetricCategory.symmetry_assoc, uncurryHom, Mod.id_hom', id_whiskerRight,
+    Category.id_comp]
+
 /-- The internal hom out of an isomorphism is an isomorphism. -/
 lemma isIso_ihomMap_app {M M' : Mod C A} (g : M ⟶ M') [IsIso g] (N : Mod C A) :
     IsIso ((ihomMap g).app N) :=

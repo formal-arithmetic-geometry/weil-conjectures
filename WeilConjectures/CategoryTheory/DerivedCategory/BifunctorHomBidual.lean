@@ -214,4 +214,93 @@ lemma isIso_bifunctorRHomBidual_app_Q_obj_iff (K : CochainComplex C ℤ) :
   · intro h
     infer_instance
 
+/-- The triangle identity `δ_{G A} ≫ G(δ_A) = 𝟙` for a natural transformation `δ : 𝟭 ⟶ G G`
+(with `G` contravariant) is invariant under isomorphisms of `A`. -/
+lemma _root_.CategoryTheory.NatTrans.app_comp_map_app_op_eq_id_of_iso {D : Type*} [Category* D]
+    (G : Dᵒᵖ ⥤ D) (δ : 𝟭 D ⟶ G.rightOp ⋙ G) {A A' : D} (e : A ≅ A')
+    (h : δ.app (G.obj (op A)) ≫ G.map (δ.app A).op = 𝟙 _) :
+    δ.app (G.obj (op A')) ≫ G.map (δ.app A').op = 𝟙 _ := by
+  have h1 : e.hom ≫ δ.app A' = δ.app A ≫ G.map (G.map e.hom.op).op := δ.naturality e.hom
+  have h2 : G.map e.hom.op ≫ δ.app (G.obj (op A)) =
+      δ.app (G.obj (op A')) ≫ G.map (G.map (G.map e.hom.op).op).op :=
+    δ.naturality (G.map e.hom.op)
+  have h1' : δ.app A' = e.inv ≫ δ.app A ≫ G.map (G.map e.hom.op).op := by
+    rw [← h1, e.inv_hom_id_assoc]
+  simp only [h1', op_comp, G.map_comp, assoc]
+  rw [← reassoc_of% h2, reassoc_of% h, ← G.map_comp, ← op_comp, e.inv_hom_id]
+  simp
+
+/-- The triangle identity `δ_{RHom(A, I)} ≫ RHom(δ_A, I) = 𝟙` of the double-dual transformation,
+when the evaluation satisfies the triangle identity. -/
+lemma bifunctorRHomBidual_triangle (hE : E.Triangle) (A : DerivedCategory C) :
+    (bifunctorRHomBidual E hI).app ((bifunctorRHomOfComplex H I).obj (op A)) ≫
+      (bifunctorRHomOfComplex H I).map ((bifunctorRHomBidual E hI).app A).op = 𝟙 _ := by
+  obtain ⟨K, ⟨e⟩⟩ : ∃ K, Nonempty (Q.obj K ≅ A) := ⟨_, ⟨Q.objObjPreimageIso A⟩⟩
+  refine NatTrans.app_comp_map_app_op_eq_id_of_iso _ _ e ?_
+  have n1 : (bifunctorRHomOfComplexQObjIso H hI K).hom ≫
+      (bifunctorRHomBidual E hI).app (Q.obj (bifunctorHomObj H K I)) =
+      (bifunctorRHomBidual E hI).app ((bifunctorRHomOfComplex H I).obj (op (Q.obj K))) ≫
+        (bifunctorRHomOfComplex H I).map ((bifunctorRHomOfComplex H I).map
+          (bifunctorRHomOfComplexQObjIso H hI K).hom.op).op :=
+    (bifunctorRHomBidual E hI).naturality (bifunctorRHomOfComplexQObjIso H hI K).hom
+  have k1 : (bifunctorRHomOfComplex H I).map ((bifunctorRHomOfComplex H I).map
+      (bifunctorRHomOfComplexQObjIso H hI K).hom.op).op ≫
+      (bifunctorRHomOfComplex H I).map ((bifunctorRHomOfComplex H I).map
+        (bifunctorRHomOfComplexQObjIso H hI K).inv.op).op = 𝟙 _ := by
+    rw [← Functor.map_comp, ← op_comp, ← Functor.map_comp, ← op_comp]
+    simp
+  have k2 : (bifunctorRHomOfComplex H I).map ((bifunctorRHomOfComplex H I).map
+      (bifunctorRHomOfComplexQObjIso H hI K).inv.op).op ≫
+      (bifunctorRHomOfComplex H I).map ((bifunctorRHomOfComplex H I).map
+        (bifunctorRHomOfComplexQObjIso H hI K).hom.op).op = 𝟙 _ := by
+    rw [← Functor.map_comp, ← op_comp, ← Functor.map_comp, ← op_comp]
+    simp
+  have k3 : (bifunctorRHomOfComplex H I).map
+      (bifunctorRHomOfComplexQObjIso H hI (bifunctorHomObj H K I)).hom.op ≫
+      (bifunctorRHomOfComplex H I).map
+        (bifunctorRHomOfComplexQObjIso H hI (bifunctorHomObj H K I)).inv.op = 𝟙 _ := by
+    rw [← Functor.map_comp, ← op_comp]
+    simp
+  have n2 : (bifunctorRHomOfComplexQObjIso H hI
+      (bifunctorHomObj H (bifunctorHomObj H K I) I)).inv ≫
+      (bifunctorRHomOfComplex H I).map (Q.map (bifunctorHomBidual E K I)).op =
+      Q.map (bifunctorHomMapLeft (H := H) (Y := I) (bifunctorHomBidual E K I)) ≫
+        (bifunctorRHomOfComplexQObjIso H hI K).inv := by
+    rw [Iso.inv_comp_eq, ← reassoc_of% (bifunctorRHomOfComplexQObjIso_hom_naturality hI
+      (bifunctorHomBidual E K I)), Iso.hom_inv_id, comp_id]
+  have n1' : (bifunctorRHomBidual E hI).app ((bifunctorRHomOfComplex H I).obj (op (Q.obj K))) =
+      (bifunctorRHomOfComplexQObjIso H hI K).hom ≫
+        (bifunctorRHomBidual E hI).app (Q.obj (bifunctorHomObj H K I)) ≫
+          (bifunctorRHomOfComplex H I).map ((bifunctorRHomOfComplex H I).map
+            (bifunctorRHomOfComplexQObjIso H hI K).inv.op).op := by
+    rw [reassoc_of% n1, k1]
+    exact (comp_id _).symm
+  rw [n1', bifunctorRHomBidual_app_Q_obj, bifunctorRHomBidual_app_Q_obj]
+  dsimp only [bifunctorRHomBidualAux]
+  simp only [op_comp, Functor.map_comp, assoc]
+  rw [reassoc_of% k2, reassoc_of% k3, n2, ← Q.map_comp_assoc,
+    bifunctorHomBidual_triangle E K I hE, Q.map_id, id_comp, Iso.hom_inv_id]
+
 end DerivedCategory
+
+namespace CategoryTheory
+
+/-- Let `G : Dᵒᵖ ⥤ D` be a contravariant functor and `δ : 𝟭 ⟶ G G` a natural transformation
+satisfying the triangle identity `δ_{G A} ≫ G(δ_A) = 𝟙`, so that `δ` is the unit of an adjunction
+of `G` with itself. If `f ↦ G f` is bijective on `A ⟶ A` and on `G G A ⟶ A`, then `δ_A` is an
+isomorphism. -/
+theorem isIso_app_of_bijective_map {D : Type*} [Category* D] (G : Dᵒᵖ ⥤ D)
+    (δ : 𝟭 D ⟶ G.rightOp ⋙ G) (htri : ∀ A, δ.app (G.obj (op A)) ≫ G.map (δ.app A).op = 𝟙 _)
+    (A : D) (h₁ : Function.Bijective (fun f : A ⟶ A ↦ G.map f.op))
+    (h₂ : Function.Bijective (fun f : G.obj (op (G.obj (op A))) ⟶ A ↦ G.map f.op)) :
+    IsIso (δ.app A) := by
+  obtain ⟨r, hr : G.map r.op = δ.app (G.obj (op A))⟩ := h₂.2 (δ.app (G.obj (op A)))
+  have h : δ.app A ≫ r = 𝟙 A := h₁.1 (by
+    dsimp only
+    rw [op_comp, G.map_comp, hr, htri, op_id, G.map_id]
+    rfl)
+  refine ⟨r, h, ?_⟩
+  calc r ≫ δ.app A = δ.app _ ≫ G.map (G.map r.op).op := δ.naturality r
+    _ = 𝟙 _ := by rw [hr, htri]
+
+end CategoryTheory

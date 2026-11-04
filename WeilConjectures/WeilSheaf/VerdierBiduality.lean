@@ -164,26 +164,6 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-variable (X) in
-/-- The geometric fibre `X̄` of `X`, as a scheme over the algebraic closure `k̄` of `k₀`. -/
-noncomputable abbrev geometricFiberOver : Over (Spec (.of (AlgebraicClosure k₀))) :=
-  Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
-
-instance : Fact (ringChar (AlgebraicClosure k₀)).Prime :=
-  ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ CharP.char_is_prime k₀ (ringChar k₀)⟩
-
-instance : Fact (ringChar (AlgebraicClosure k₀) ≠ l) :=
-  ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ Fact.out⟩
-
-instance : LocallyOfFiniteType (geometricFiberOver (k₀ := k₀) X).hom :=
-  inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-
-instance : QuasiCompact (geometricFiberOver (k₀ := k₀) X).hom :=
-  inferInstanceAs (QuasiCompact (pullback.snd _ _))
-
-instance : IsSeparated (geometricFiberOver (k₀ := k₀) X).hom :=
-  inferInstanceAs (IsSeparated (pullback.snd _ _))
-
 variable (W : WeilComplex k₀ l X)
 
 /-- The duality `D_W = RHom(-, W)` of Weil complexes into a Weil complex `W`. -/
@@ -217,9 +197,9 @@ theorem isIso_toDualDual_app
     Mod.comap (ProEtale.nativeModuleCoefficientIso l
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom
   have : (ProEtale.constantModelBoundedConstructible (Profinite.padicAlgClRingObj l)
-      (geometricFiberOver (k₀ := k₀) X).left).IsClosedUnderIsomorphisms :=
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).IsClosedUnderIsomorphisms :=
     (ProEtale.constantModelConstructibleFiniteTor_wellDefined
-      (Profinite.padicAlgClRingObj l) (geometricFiberOver (k₀ := k₀) X).left).2.1
+      (Profinite.padicAlgClRingObj l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).2.1
   -- reduce to the derived category, and to a complex `M` representing `K`
   suffices h : IsIso ((DerivedCategory.bifunctorRHomBidual E
       (ProEtaleWeilSheaf.precompQuasiIso k₀ l X I)).app K.obj) by
@@ -239,7 +219,7 @@ theorem isIso_toDualDual_app
     CochainComplex.map_bifunctorHomBidual E M I _ _
       (ProEtaleWeilSheaf.bifunctorEvaluation_mapCompatible k₀ l X)]
   -- the underlying double-dual morphism of `ℓ`-adic sheaves
-  refine ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary (geometricFiberOver X) ?_ ?_
+  refine ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary ?_ ?_
   · obtain ⟨eW⟩ := hW
     exact ⟨F.mapDerivedCategory.mapIso ((U.mapDerivedCategoryFactors.app I).symm ≪≫
       U.mapDerivedCategory.mapIso (DerivedCategory.kInjectiveRepIso W.obj).symm) ≪≫ eW⟩

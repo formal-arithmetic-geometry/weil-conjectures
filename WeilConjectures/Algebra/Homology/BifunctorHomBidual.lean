@@ -130,6 +130,26 @@ lemma bifunctorHomBidual_naturality {K' : CochainComplex C ℤ} (f : K' ⟶ K) :
   rw [← NatTrans.comp_app, ← Functor.map_comp, ← op_comp, bifunctorHomMapLeft_f_π, op_comp,
     Functor.map_comp, NatTrans.comp_app, reassoc_of% (E.naturality (f.f m) (Y.X r))]
 
+/-- The triangle identity of an evaluation: the evaluation of `H(a, b)` followed by `H(ev_a, b)`
+is the identity of `H(a, b)`. -/
+def BifunctorEvaluation.Triangle : Prop :=
+  ∀ a b : C, E.ev ((H.obj (op a)).obj b) b ≫ (H.map (E.ev a b).op).app b = 𝟙 _
+
+/-- The triangle identity for the double-dual morphisms of hom complexes:
+`Hom(K, Y) ⟶ Hom(Hom(Hom(K, Y), Y), Y) ⟶ Hom(K, Y)` is the identity. -/
+lemma bifunctorHomBidual_triangle (hE : E.Triangle) :
+    bifunctorHomBidual E (bifunctorHomObj H K Y) Y ≫
+      bifunctorHomMapLeft (H := H) (Y := Y) (bifunctorHomBidual E K Y) = 𝟙 _ := by
+  ext n p q h
+  rw [HomologicalComplex.comp_f, assoc, bifunctorHomMapLeft_f_π, bifunctorHomBidual_f_π_assoc,
+    HomologicalComplex.id_f, id_comp, bifunctorHomBidualComponent, Linear.units_smul_comp, assoc,
+    ← NatTrans.comp_app, ← Functor.map_comp, ← op_comp, bifunctorHomBidual_f_π,
+    bifunctorHomBidualComponent]
+  simp only [Units.smul_def, op_zsmul, Functor.map_zsmul, NatTrans.app_zsmul,
+    Preadditive.comp_zsmul, smul_smul, op_comp, Functor.map_comp, NatTrans.comp_app]
+  rw [← reassoc_of% (E.naturality _ _), hE, comp_id, ← Units.val_mul, mul_comm n p,
+    Int.units_mul_self, Units.val_one, one_smul]
+
 section Map
 
 variable {C' : Type*} [Category* C'] [Preadditive C'] [HasCountableProducts C']
