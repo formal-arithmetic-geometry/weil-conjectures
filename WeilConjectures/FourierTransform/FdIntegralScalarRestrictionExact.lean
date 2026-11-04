@@ -77,6 +77,8 @@ private theorem scalarExact
 attribute [local irreducible] integralScalarExtension integralOrdinaryScalar
   sfIntegralOrdinaryComparison
 
+set_option maxHeartbeats 400000 in
+-- The shift instances of the now-proved finite scalar extension make the elaboration heavier.
 private theorem scalarShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
