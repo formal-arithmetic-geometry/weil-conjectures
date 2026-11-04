@@ -18,6 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesGaHigherDirectImageVanishing
+import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesGaHigherDirectImageDegreeZero
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
@@ -48,12 +49,11 @@ by `℘ = Frob - 1` corresponding to `F - 1` for the Frobenius `F : x ↦ xᵖ`:
 
 Source: Stacks Project, Tag 0GKV, proof of lemma-proper-smooth-family-curves, case (b).
 
-This is stated without proof: the identification `f_* 𝔾ₐ ≅ 𝔾ₐ` compatibly with the Frobenius
-of `𝒪_S` is not yet formalized. -/
+Proof: `properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero_aux`. -/
 theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero
     {C S : Scheme.{u}} [IsNoetherian S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]
-    (h_dim : ∀ s : S, topologicalKrullDim (f.fiber s) = 1)
+    (_h_dim : ∀ s : S, topologicalKrullDim (f.fiber s) = 1)
     (p : ℕ) [Fact p.Prime] (hpS : (p : Γ(S, ⊤)) = 0) (hpC : (p : Γ(C, ⊤)) = 0) :
     ∃ (E : S.Modules) (_ : E.IsQuasicoherent) (_ : E.IsFiniteLocallyFree)
       (F : Scheme.Modules.etaleTensorSectionsSheaf E ⟶
@@ -74,7 +74,7 @@ theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero
               ((DerivedCategory.singleFunctor _ 0).map (C.gaArtinSchreier p hpC))) ≫ e.hom =
           e.hom ≫ (sheafCompose S.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).map
             (F - 𝟙 _) := by
-  sorry
+  exact properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero_aux f p hpS hpC
 
 /-- **The degree-one case of `properSmoothCurves_higherDirectImage_ga_frobeniusLinear`.**
 With the hypotheses of `properSmoothCurves_higherDirectImage_ga_frobeniusLinear`, the étale
