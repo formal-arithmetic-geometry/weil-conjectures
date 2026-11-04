@@ -15,6 +15,7 @@ import all WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorSquare
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorCore
 import all WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
 import all WeilConjectures.WeilSheaf.Native.Projection.SheafTensorUnit
+import all WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCompatibility
 import Lean.Util.CollectAxioms
 
 /-! # Dependency audit for the native proper projection formula
