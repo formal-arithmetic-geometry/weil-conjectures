@@ -110,7 +110,8 @@ private theorem ringAbelianForget_injective_evaluation_acyclic
     IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
       (evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (Opposite.op W)).rightDerived
         (n + 1)).obj ((ringAbelianForget Λ X).obj G)) := by
-  obtain ⟨e, ⟨eAb⟩⟩ := Scheme.FiniteRingCoefficientComparison.constantModuleEquivalence X Λ
+  let e := Scheme.FiniteRingCoefficientComparison.constantModuleEquivalence X Λ
+  let eAb := Scheme.FiniteRingCoefficientComparison.constantModuleEquivalenceToSheafIso X Λ
   let O := (constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)
   let I : SheafOfModules.{u + 1} O := e.functor.obj G
   have : Injective I := (e.map_injective_iff G).mpr inferInstance
