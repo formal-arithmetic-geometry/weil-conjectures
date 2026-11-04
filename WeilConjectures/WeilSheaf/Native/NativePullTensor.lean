@@ -318,7 +318,7 @@ theorem nativePullSheafTensor_hom_app_hom_f (M N : ProEtaleWeilSheaf k₀ l Y) :
 
 /-- Pullback along `g` preserves native K-flat complexes (`nativeIsKFlat_upperStar_obj`),
 restated with the coefficient instances used by the native tensor operations. -/
-theorem nativeIsKFlat_upperStar_mapHomologicalComplex_obj
+theorem nativeIsKFlat_mapHomologicalComplex_upperStar_obj
     (T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (hT : NativeIsKFlat k₀ l Y T) :
     NativeIsKFlat k₀ l Z (((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)).obj T) := by
   have h := nativeIsKFlat_upperStar_obj k₀ l g
@@ -430,6 +430,6 @@ def nativePullTensor :
     nativeDerivedTensor k₀ l Y ⋙ nativeOpenPull k₀ l g ≅
       (nativeOpenPull k₀ l g).prod (nativeOpenPull k₀ l g) ⋙ nativeDerivedTensor k₀ l Z :=
   nativeRestrictionDerivedTensor k₀ l (upperStar k₀ l g)
-    (nativeIsKFlat_upperStar_mapHomologicalComplex_obj k₀ l g) (nativePullTotalTensor k₀ l g)
+    (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g) (nativePullTotalTensor k₀ l g)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
