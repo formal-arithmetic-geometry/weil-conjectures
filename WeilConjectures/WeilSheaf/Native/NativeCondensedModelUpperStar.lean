@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 public import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequalizer
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedModelTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 
 /-!
 # The condensed model of `ℓ`-adic sheaves commutes monoidally with pullback
@@ -40,22 +41,6 @@ open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
-
-namespace Mod
-
-variable {C : Type*} [Category* C] [MonoidalCategory C]
-  [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight X)]
-  [BraidedCategory C] {R : C} [MonObj R] [IsCommMonObj R]
-
-/-- The projection onto the relative tensor product is natural in both factors. -/
-@[reassoc]
-lemma tensorObjπ_tensorHom_hom {M M' N N' : Mod C R} (f : M ⟶ M') (g : N ⟶ N') :
-    tensorObjπ M N ≫ (f ⊗ₘ g).hom = (f.hom ⊗ₘ g.hom) ≫ tensorObjπ M' N' := by
-  rw [MonoidalCategory.tensorHom_def, Mod.comp_hom', tensorObjπ_whiskerRight_assoc,
-    tensorObjπ_whiskerLeft, ← Category.assoc, ← MonoidalCategory.tensorHom_def]
-
-end Mod
 
 section RelativeTensor
 
