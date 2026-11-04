@@ -506,13 +506,12 @@ variable {X : Scheme.{u}}
 
 /-- Composition in the small pro-étale site is composition of the underlying morphisms.
 Source: Stacks Project, Tag 098K (auxiliary; not a blueprint node). -/
-@[simp, reassoc]
+@[reassoc]
 lemma comp_left {A B C : X.ProEt} (f : A ⟶ B) (g : B ⟶ C) : (f ≫ g).left = f.left ≫ g.left :=
   rfl
 
 /-- The identity of the small pro-étale site is the identity of the underlying scheme.
 Source: Stacks Project, Tag 098K (auxiliary; not a blueprint node). -/
-@[simp]
 lemma id_left (A : X.ProEt) : (𝟙 A : A ⟶ A).left = 𝟙 A.left :=
   rfl
 
