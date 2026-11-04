@@ -22739,6 +22739,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCompDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalQNormalization
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorCounit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Native.NativeLineTensorFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Native.NativeSignedLineFiniteness
