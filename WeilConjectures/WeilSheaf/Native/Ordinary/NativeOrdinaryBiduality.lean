@@ -10,6 +10,14 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibility
 public import WeilConjectures.PoincareDuality.Verdier
+import WeilConjectures.Algebra.Homology.BifunctorHomMonoidal
+import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientDescentTwoColimit
+import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
+import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgettingMonoidal
+import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.BifunctorHomBidualTransport
+import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomIso
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Subcategory
+import WeilConjectures.PoincareDuality.Biduality.Constructible
 
 /-!
 # The double-dual morphism of `ℓ`-adic sheaves
@@ -56,6 +64,7 @@ noncomputable abbrev ordinaryToCondensed :
   (ProEtale.AdicSheaf.forgetAb l Z.left ⋙
     Mod.comap (ProEtale.nativeModuleCoefficientIso l Z.left).hom).mapDerivedCategory
 
+attribute [local instance] ProEtale.CondensedRing.boundedConstructibleBraiding in
 /-- **Verdier biduality for `ℓ`-adic complexes, at the level of hom complexes** (blueprint:
 `det-pd-biduality-coefficients`, case (iv), for the model of `ℓ`-adic sheaves as sheaves of
 `ℚ̄_ℓ,Z`-modules). Let `Z` be a separated scheme of finite type over a field `k` of characteristic
@@ -78,7 +87,62 @@ theorem quasiIso_bifunctorHomBidual_ordinary {M I : CochainComplex (ProEtale.Adi
       (ObjectProperty.ι _).obj (ProEtale.CondensedRing.dualizingComplex l Z)))
     (hM : ProEtale.constantModelBoundedConstructible (Profinite.padicAlgClRingObj l) Z.left
       ((ordinaryToCondensed Z).obj (DerivedCategory.Q.obj M))) :
-    QuasiIso (CochainComplex.bifunctorHomBidual (ordinaryBifunctorEvaluation l Z.left) M I) :=
-  sorry
+    QuasiIso (CochainComplex.bifunctorHomBidual (ordinaryBifunctorEvaluation l Z.left) M I) := by
+  classical
+  obtain ⟨eI⟩ := eI
+  obtain ⟨c⟩ := ProEtale.nativeScalarForgetting_monoidal l Z.left
+  let : (ProEtale.AdicSheaf.forgetAb l Z.left).Monoidal := c
+  have : (ProEtale.AdicSheaf.forgetAb l Z.left).IsEquivalence :=
+    ProEtale.nativeScalarForgetting_isEquivalence l Z.left
+  have : (Mod.comap (ProEtale.nativeModuleCoefficientIso l Z.left).hom).IsEquivalence :=
+    (Mod.comapEquivalenceOfIsIso
+      (ProEtale.nativeModuleCoefficientIso l Z.left).hom).isEquivalence_functor
+  let U := ProEtale.AdicSheaf.forgetAb l Z.left ⋙
+    Mod.comap (ProEtale.nativeModuleCoefficientIso l Z.left).hom
+  let : U.Monoidal := inferInstanceAs (_ ⋙ _).Monoidal
+  have : U.IsEquivalence := inferInstance
+  let φ := CochainComplex.BifunctorMapIso.ofMonoidal (H := ordinaryIhomBifunctor l Z.left) U
+    (fun a ↦ Mod.ihomIsoIhom a) (fun f ↦ Mod.ihomMap_comp_ihomIsoIhom_hom f)
+  -- the bounded constructible complexes, on which the condensed Verdier dual is fully faithful
+  let P := ProEtale.boundedConstructible
+    (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj l) Z.left)
+  let W := DerivedCategory.Q.obj ((U.mapHomologicalComplex (ComplexShape.up ℤ)).obj I)
+  let eW : W ≅ (ObjectProperty.ι _).obj (ProEtale.CondensedRing.dualizingComplex l Z) :=
+    (U.mapDerivedCategoryFactors.app I).symm ≪≫ eI
+  have hP (X : DerivedCategory _) (hX : P X) : P ((ihom X).obj W) :=
+    ObjectProperty.prop_ihom hX (P.prop_of_iso eW.symm
+      (ProEtale.CondensedRing.dualizingComplex l Z).property)
+  have hbij (X X' : DerivedCategory _) (hX : P X) (hX' : P X') :
+      Function.Bijective (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app W) := by
+    let ω := ProEtale.CondensedRing.dualizingComplex l Z
+    let A : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj l⟧ := ⟨X, hX⟩
+    let A' : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj l⟧ := ⟨X', hX'⟩
+    have : IsIso (MonoidalClosed.toIhomIhom ω A') :=
+      ProEtale.CondensedRing.isIso_verdierBiduality l A'
+    have h := MonoidalClosed.bijective_pre_app_of_isIso ω A A'
+    let FF := ObjectProperty.fullyFaithfulι P
+    have h' : Function.Bijective (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app ω.obj) := by
+      have : (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app ω.obj) =
+          FF.homEquiv ∘ (fun g : A ⟶ A' ↦ (MonoidalClosed.pre g).app ω) ∘
+            (FF.homEquiv (X := A) (Y := A')).symm := by
+        funext f
+        exact (ObjectProperty.pre_app_hom (FF.homEquiv.symm f) ω).symm
+      rw [this]
+      exact FF.homEquiv.bijective.comp (h.comp FF.homEquiv.symm.bijective)
+    have : (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app W) =
+        (((ihom X').mapIso eW).symm.homCongr ((ihom X).mapIso eW).symm) ∘
+          (fun f : X ⟶ X' ↦ (MonoidalClosed.pre f).app ω.obj) := by
+      funext f
+      simp only [Function.comp_apply, Iso.homCongr_apply, Iso.symm_inv, Iso.symm_hom,
+        Functor.mapIso_hom, Functor.mapIso_inv]
+      rw [← Category.assoc, (MonoidalClosed.pre f).naturality, Category.assoc,
+        ← Functor.map_comp, eW.hom_inv_id, Functor.map_id, Category.comp_id]
+    rw [this]
+    exact (Iso.homCongr _ _).bijective.comp h'
+  have hEq := (ProEtale.finiteCoefficientDescentTwoColimit k (ringChar k) l
+    (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ l) Z.left).2.2.2.2.1.1
+  exact DerivedCategory.quasiIso_bifunctorHomBidual_of_bijective φ I
+    (ordinaryBifunctorEvaluation l Z.left) (fun a b ↦ Mod.bidual_comp_ihomMap_bidual a b) P hP
+    hbij M (hEq ▸ hM)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

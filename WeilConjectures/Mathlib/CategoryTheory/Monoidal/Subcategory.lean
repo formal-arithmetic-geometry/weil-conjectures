@@ -96,24 +96,4 @@ lemma fullBraidedSubcategory_braiding_hom_hom [BraidedCategory C] (X Y : P.FullS
       (β_ X.obj Y.obj).hom :=
   rfl
 
-section Closed
-
-variable [MonoidalClosed C] [P.IsMonoidalClosed]
-
-/-- The underlying morphism of the evaluation of a full monoidal closed subcategory. -/
-lemma ihom_ev_app_hom (X Y : P.FullSubcategory) :
-    ((ihom.ev X).app Y).hom = (ihom.ev X.obj).app Y.obj :=
-  rfl
-
-variable {P} in
-/-- The underlying morphism of the precomposition of a full monoidal closed subcategory is the
-precomposition: `[-, -]` restricts to `P` as a bifunctor. -/
-lemma pre_app_hom {X Y : P.FullSubcategory} (f : X ⟶ Y) (Z : P.FullSubcategory) :
-    ((MonoidalClosed.pre f).app Z).hom = (MonoidalClosed.pre f.hom).app Z.obj := by
-  apply MonoidalClosed.uncurry_injective
-  exact (congrArg InducedCategory.Hom.hom (MonoidalClosed.uncurry_pre f Z)).trans
-    (MonoidalClosed.uncurry_pre f.hom Z.obj).symm
-
-end Closed
-
 end CategoryTheory.ObjectProperty

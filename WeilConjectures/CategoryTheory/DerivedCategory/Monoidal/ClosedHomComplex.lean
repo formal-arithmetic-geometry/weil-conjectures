@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTria
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomBidual
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.DualFullyFaithful
 public import Mathlib.CategoryTheory.Localization.Opposite
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.InternalHomAdditive
 
 /-!
 # The derived internal hom into a K-injective complex is the hom complex

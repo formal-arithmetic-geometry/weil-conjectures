@@ -57,4 +57,15 @@ lemma isIso_ihomComparison_monoidalLift (A : P.FullSubcategory)
   rw [ι_map, ihomComparison_monoidalLift_app_hom]
   exact h B
 
+section Pre
+
+/-- The underlying morphism of the precomposition of a full monoidal closed subcategory is the
+precomposition: `[-, -]` restricts to `P` as a bifunctor. -/
+lemma pre_app_hom {X Y : P.FullSubcategory} (f : X ⟶ Y) (Z : P.FullSubcategory) :
+    ((pre f).app Z).hom = (pre f.hom).app Z.obj := by
+  apply uncurry_injective
+  exact (congrArg InducedCategory.Hom.hom (uncurry_pre f Z)).trans (uncurry_pre f.hom Z.obj).symm
+
+end Pre
+
 end CategoryTheory.ObjectProperty

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Homology.BifunctorHomBidual
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Functor
 
 /-!
 # Monoidal equivalences commute with internal homs, as bifunctors
