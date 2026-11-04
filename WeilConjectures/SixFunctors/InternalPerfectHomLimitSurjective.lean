@@ -61,6 +61,5 @@ private theorem restricted_compatible
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 1000000 in
 -- Allow normalization of the continuous coefficient category and its derived adjunctions.
 end AlgebraicGeometry.ProEtale.AdicCompletion

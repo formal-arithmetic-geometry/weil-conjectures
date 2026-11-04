@@ -90,18 +90,6 @@ end
 
 -- The explicit adjunction from LocalizedModuleAdjunctionExact, with independent
 -- object and coefficient universes. No exactness or precoverage hypotheses are needed.
-open Classical in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-open Classical in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-open Classical in
-set_option backward.isDefEq.respectTransparency false in
-open Classical in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-open Classical in
 section RawTensor
 
 open Opposite MonoidalCategory
@@ -117,9 +105,6 @@ local notation "A" => (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{
 
 variable (F : SheafOfModules.{max u v} ((A).over U)) (G H : SheafOfModules.{max u v} A)
 
-open Classical in
-open Classical in
-open Classical in
 end RawTensor
 
 section SheafifyTensor

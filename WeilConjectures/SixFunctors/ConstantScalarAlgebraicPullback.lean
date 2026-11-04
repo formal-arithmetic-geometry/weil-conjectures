@@ -155,7 +155,6 @@ private def rightComparison (A : Type w) [CommRing A] :
       (coefficientMap_scalar J K F A U a)
     exact hK.trans (hφ.symm.trans hJ.symm)
 
-omit [RepresentablyFlat F] in
 end
 
 end CategoryTheory.ConstantScalarRestriction

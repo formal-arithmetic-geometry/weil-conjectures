@@ -54,8 +54,6 @@ private def continuousFreeIso (n : ℕ) :
 
 attribute [local irreducible] regularIso freeIso continuousFreeIso
 
-omit [TopologicalSpace A] [IsTopologicalRing A] in
-omit [TopologicalSpace A] [IsTopologicalRing A] in
 end ContinuousScalarPresentation
 
 end AlgebraicGeometry.ProEtale

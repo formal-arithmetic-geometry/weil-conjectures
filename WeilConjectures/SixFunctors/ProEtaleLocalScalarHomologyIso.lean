@@ -161,10 +161,6 @@ private def scalarAdjunction (X : Scheme.{u})
       SheafOfModules.restrictScalars ((adicLisseForget X).map φ) :=
   pbcScalarAdjunction φ
 
-attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
-  ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
-attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
-  ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
 end LocalScalarComparison
 
 attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
@@ -309,17 +305,6 @@ attribute [local irreducible] sliceDerivedChange completedAdicChange
 
 attribute [local irreducible] Functor.mapDerivedCategory DerivedCategory.Q
 
-attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
-  ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
-attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
-  ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
 end LocalScalarComparison
 
-attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
-  ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
-  CochainComplex.IsKFlatIndependentCoefficients sliceChangeData
-  sliceChange sliceDerivedChange completedAdicChange completedAdicDerivedChange localFunctor
-  SheafOfModules.monoidalCategory proEtaleModuleInverseImage
-  Functor.sheafPullbackConstruction.sheafPullback in
 end AlgebraicGeometry.Scheme

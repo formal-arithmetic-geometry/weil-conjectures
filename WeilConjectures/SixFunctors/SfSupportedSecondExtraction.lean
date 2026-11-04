@@ -60,13 +60,6 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
   [UpperStarPreservesFlat C]
 
-omit [UpperStarPreservesFlat C] in
-omit [UpperStarPreservesFlat C] in
-omit [UpperStarPreservesFlat C] in
-omit [UpperStarPreservesFlat C] in
-open MonoidalCategory BraidedCategory in
-open MonoidalCategory BraidedCategory in
-omit [UpperStarPreservesFlat C] in
 end GeneralCoefficients
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -78,6 +71,4 @@ open MonoidalCategory BraidedCategory in
 attribute [local irreducible] projectionIso projectionRightIso
   TraceDiagonalDatum.baseChangeIso
 
-open MonoidalCategory in
-open MonoidalCategory BraidedCategory in
 end AlgebraicGeometry.Etale.SupportedTrace

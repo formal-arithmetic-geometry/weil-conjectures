@@ -65,7 +65,6 @@ omit [EssentiallySmall.{w} C] in
 omit [EssentiallySmall.{w} C] in
 variable {F}
 
-omit [EssentiallySmall.{w} C] in
 end PointTransport
 
 open PointTransport

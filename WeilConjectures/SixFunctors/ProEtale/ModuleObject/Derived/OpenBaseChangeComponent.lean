@@ -97,4 +97,3 @@ theorem openBaseChangeComponentIso
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-end
