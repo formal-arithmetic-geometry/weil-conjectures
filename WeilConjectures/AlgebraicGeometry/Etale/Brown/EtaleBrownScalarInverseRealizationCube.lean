@@ -63,7 +63,7 @@ theorem etaleBrownScalarInverseRealization_cube
     (e : ∀ n, (A.lift n).modules ⋙ strictEtaleBrownConstant O t V n ≅
         strictEtaleBrownConstant O t W n ⋙
           Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g)
-    (he : letI := RV.val.ordinaryAdditive
+    (_he : letI := RV.val.ordinaryAdditive
       letI := RW.val.ordinaryAdditive
       ∀ n (K : CochainComplex (strictEtaleLevel W O t n) ℤ),
         (r n).inverse.inv.app (DerivedCategory.Q.obj K) ≫
