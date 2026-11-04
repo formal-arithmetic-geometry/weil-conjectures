@@ -31,13 +31,22 @@ namespace AlgebraicGeometry.WeilComplex
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
+/-- Pullback commutes with placing a sheaf in degree zero. -/
+noncomputable def purityUpperStarToComplexIso {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] (A : WeilSheaf k₀ l Y) :
+    (upperStar f).obj (WeilSheaf.toComplex.obj A) ≅
+      WeilSheaf.toComplex.obj ((WeilSheaf.upperStar f).obj A) :=
+  ObjectProperty.isoMk _
+    (((ProEtaleWeilSheaf.upperStar k₀ l f).mapDerivedCategorySingleFunctor 0).app A.obj)
+
 /-- Pullback preserves the constant Weil complex. -/
 noncomputable def purityUpperStarConstantIso {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] :
     (upperStar f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X) :=
-  (WeilSheaf.toComplexCompUpperStarIso f).app _ ≪≫
+  purityUpperStarToComplexIso f _ ≪≫
     WeilSheaf.toComplex.mapIso (WeilSheaf.upperStarAdicConstantIso f)
 
 /-- Pullback preserves the native Tate sheaf, including its Frobenius datum. -/
@@ -61,7 +70,7 @@ noncomputable def purityUpperStarShiftedTateIso {X Y : Scheme.{u}}
     (upperStar f).obj ((WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l Y d)) ⟦n⟧) ≅
       (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)) ⟦n⟧ :=
   ((upperStar f).commShiftIso n).app _ ≪≫
-    (shiftFunctor _ n).mapIso ((WeilSheaf.toComplexCompUpperStarIso f).app _ ≪≫
+    (shiftFunctor _ n).mapIso (purityUpperStarToComplexIso f _ ≪≫
       WeilSheaf.toComplex.mapIso (purityUpperStarTateSheafIso f d))
 
 variable {X Y : Scheme.{u}}
@@ -83,7 +92,7 @@ theorem nonempty_upperStar_comp_shriek_iso_of_constant_cohomology (d n : ℤ)
       (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l Y d)) ⟦n⟧) :
     Nonempty (upperStar f ⋙ derivedLowerShriek k₀ l f ≅
       tateTwist k₀ l Y d ⋙ shiftFunctor _ n) := by
-  obtain ⟨a⟩ := nonempty_upperStar_comp_shriek_iso_tensor_constant f
+  obtain ⟨a⟩ := nonempty_upperStar_comp_shriek_iso_tensor_constant (k₀ := k₀) (l := l) f
   exact ⟨a ≪≫ Functor.isoWhiskerRight
     (NatIso.ofComponents (fun _ ↦ e.prod (Iso.refl _)) (fun _ ↦ by simp))
       (nativeConstructibleTensor k₀ l Y) ≪≫ nativeConstructibleTensorTateShiftIso d n⟩
@@ -124,7 +133,7 @@ theorem nonempty_trivialLineThom_of_affineLine_constant
   have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over π]
     infer_instance
-  obtain ⟨bc⟩ := nonempty_upperStar_derivedLowerShriek_iso hπ.flip
+  obtain ⟨bc⟩ := nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hπ.flip
   let a := bc.app (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀)))
   exact nonempty_upperStar_comp_shriek_iso_of_constant_cohomology π (-1) (-2)
     ((derivedLowerShriek k₀ l π).mapIso (purityUpperStarConstantIso s).symm ≪≫

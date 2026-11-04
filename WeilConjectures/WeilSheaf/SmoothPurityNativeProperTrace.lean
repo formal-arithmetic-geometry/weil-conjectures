@@ -131,7 +131,6 @@ lemma nativeProperTrace_map :
     (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor).map_preimage _
 
 /-- The descended condensed trace is universal on every native constructible source. -/
-set_option trace.profiler true in
 theorem bijective_map_comp_condensedProperTrace [IsIso γ]
     [IsIso ((CondensedRing.upperShriekBaseChangeOfMap l (f := properTraceBaseMap (k₀ := k₀) f)
       (f' := CondensedRing.traceGeometricFiberOverMap (properTraceBaseMap (k₀ := k₀) f))
@@ -158,7 +157,7 @@ theorem bijective_map_comp_condensedProperTrace [IsIso γ]
     (properTraceBaseMap (k₀ := k₀) f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ
     ⟨_, hK⟩
   dsimp only [Functor.TraceUniversalAt, Functor.comp_obj, ObjectProperty.ι_obj] at hu ⊢
-  exact_mod_proofs hu
+  cast_proofs hu
 
 
 /-- The adjunct of the native descended trace is invertible when exceptional

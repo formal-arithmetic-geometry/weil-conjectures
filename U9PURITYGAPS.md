@@ -118,3 +118,11 @@ The finite-base construction has now passed the remote checker through these int
 The latest completed audit is `/home/ubuntu/u9/logs/K4-20261105T063140.log` (rc=1). Its two entry failures are explicit normalization mismatches in `SmoothPurityNativeHomSingle` and `SmoothPurityDescendedProperUniversality`; fixes are queued at source `91f44c36a`. The subsequent proper-dualizing, absolute-purity, native tensor/Tate, and Thom assembly modules are drafts pending their first successful checks. They must not be treated as proved merely because their earlier interfaces are green.
 
 C4's `tateTwistSheafCondensedIso d ψ` has the required underived encoding interface, with `ψ := toCondensedAdicConstantDescentIso k₀ l X`. C4 has validated the finite-level, tower, trivialization, pullback, and pullback-naturality layers; the remaining encoding layers are still being checked. No C4 merge or user-proof replacement has been applied on K4 yet. `/tmp/k4-route-b-integration.patch` contains the prepared replacements of the smooth-dualizing user and the trivial-line Thom user. Both avoid K2. The original general relative statement remains unchanged and open, and no K4.DONE is warranted yet.
+
+## Additional validated interfaces, 2026-11-05 07:08 +0800
+
+Geometric descent universality now passes: `bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso` and its smooth specialization are GREEN in `K4-20261105T065604.log` (17s), with the arbitrary-coefficient lemma `geometricFiberWeilDirectTrace_universal` avoiding the concrete kernel conversion. `isIso_upperShriekBaseChange_geometricFiber_unit` is GREEN in that same log (8.6s).
+
+The native internal-Hom comparisons `nativeHomSingleIso` and `nativeHomSourceShiftIso` are GREEN. `nativeConstructibleTensorTateIso` is GREEN in `K4-20261105T070103.log` (3.5s), and `nativeConstructibleTensorTateShiftIso` is GREEN in the ongoing `K4-20261105T070448.log` (6.6s). These validate the natural tensor/Tate comparison needed by the Thom route.
+
+The remaining native proper-trace universality is being profiled after splitting it from the adjunction criterion. Proper-dualizing descent, absolute purity, and the final Thom assembly still await validation. C4's encoding remains separate and unmerged. The original general leaf remains open and unchanged; the user-proof integration patch has not been applied.

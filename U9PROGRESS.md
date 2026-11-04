@@ -226,3 +226,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 07:05 +0800 — isolate native trace universality
 - Audit /home/ubuntu/u9/logs/K4-20261105T070301.log finished rc=1, five built/two failed. The geometric-fibre instance errors are gone; NativeProperTrace now reaches a 200000-heartbeat whnf timeout (31s). Split condensed universality from the final full-faithfulness adjunction argument and enabled profiling on the new helper to identify any remaining costly check.
 - Shifted tensor's map_id rewrite needs the stronger transparency used in the earlier CompactConstant fix; changed rw to erw. No heartbeat raise, no DONE.
+
+## 2026-11-05 07:11 +0800 — shifted Tate tensor GREEN; profile locates trace cast
+- Audit /home/ubuntu/u9/logs/K4-20261105T070448.log finished rc=1, three built/two failed. NativeTensorTateShift is GREEN (6.6s). Thom reached only a missing toComplex/pullback interface and two unresolved k₀ arguments; supplied the comparison directly with mapDerivedCategorySingleFunctor and pinned k₀/l.
+- The profiled native trace module took 263s including a very verbose trace (913k log lines). Its proof elaboration timed out at the final exact_mod_proofs hu (12.7s for that tactic, 24.4s total proof), not at the preceding dsimp (0.015s). Replaced the minimal-subterm cast tactic by cast_proofs, whose outermost proof comparison avoids traversing the deep exceptional-base-change proof terms. Removed profiling (and its misplaced doc-comment wrapper).
+- No heartbeat raises. Full absolute/Thom assembly and C4 encoding remain pending; no DONE.
