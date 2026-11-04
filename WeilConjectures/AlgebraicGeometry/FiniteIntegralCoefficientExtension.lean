@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
-import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientsFiniteFree
+public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientsFiniteFree
 import WeilConjectures.NumberTheory.Padics.LocalFieldIntegralBasis
 import WeilConjectures.CategoryTheory.SheafTensor
 import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
