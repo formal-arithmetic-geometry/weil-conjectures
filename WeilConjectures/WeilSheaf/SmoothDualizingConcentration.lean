@@ -55,6 +55,7 @@ theorem smooth_dualizing_concentration
     ⟨by rw [← Algebra.ringChar_eq k₀ (AlgebraicClosure k₀)]; exact Fact.out⟩
   have : NeZero (l : AlgebraicClosure k₀) :=
     ⟨CharP.cast_ne_zero_of_ne_of_prime _ (Fact.out : l.Prime) Fact.out⟩
+  have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
   have : SmoothOfRelativeDimension d Xbar.hom :=
     MorphismProperty.pullback_snd _ _ ‹SmoothOfRelativeDimension d
       (X ↘ Spec (CommRingCat.of k₀))›
@@ -73,6 +74,8 @@ theorem smooth_dualizing_concentration
         (ProEtale.tateTwist Xbar.left l d)
     refine IsZero.of_iso ?_
       ((_root_.DerivedCategory.homologyFunctor _ n).mapIso (e' ≪≫ s))
+    change IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
+      ((_root_.DerivedCategory.singleFunctor _ b).obj (ProEtale.tateTwist Xbar.left l d)))
     rcases hn with hn | hn
     · exact _root_.DerivedCategory.isZero_of_isGE _ b n hn
     · exact _root_.DerivedCategory.isZero_of_isLE _ b n hn
