@@ -15,6 +15,8 @@ import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.SmoothPurity
 import WeilConjectures.WeilSheaf.VerdierExchange
+import WeilConjectures.WeilSheaf.VerdierBiduality
+import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -86,7 +88,7 @@ the dualizing complex is a Weil complex. -/
 theorem objectProperty_derivedHom_dualizingComplex (K : WeilComplex k₀ l X) :
     WeilComplex.objectProperty k₀ l X
       ((ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj).obj (op K.obj)) :=
-  sorry
+  objectProperty_derivedHom K (dualizingComplex k₀ l X)
 
 /-- The Verdier dual `𝔻_X K = RHom(K, ω_X)` of Weil complexes on a separated `k₀`-scheme of
 finite type `X`, the derived internal hom into the dualizing complex
@@ -106,7 +108,9 @@ lemma verdierDual_obj_obj (K : (WeilComplex k₀ l X)ᵒᵖ) :
 descend, giving a natural isomorphism `K ≅ D_{X,ℚ̄_ℓ} D_{X,ℚ̄_ℓ} K`"). -/
 theorem nonempty_iso_verdierDual_rightOp_comp_verdierDual :
     Nonempty (𝟭 (WeilComplex k₀ l X) ≅ (verdierDual k₀ l X).rightOp ⋙ verdierDual k₀ l X) :=
-  sorry
+  nonempty_iso_dual_rightOp_comp_dual (dualizingComplex k₀ l X)
+    (nonempty_nativeGeometricForget_obj_iso_of_adjunction
+      (derivedLowerShriekUpperShriekAdjunction _))
 
 open Pretriangulated.Opposite in
 /-- **The Verdier dual is exact** (blueprint: `det-pd-biduality-coefficients`, "an exact
@@ -140,8 +144,16 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 `det-pd-biduality-coefficients`, "`Rf^! = D_X f^* D_Y`"): `Rf^! L ≅ 𝔻_X f^* 𝔻_Y L`. -/
 theorem nonempty_upperShriek_obj_iso [HasUpperShriek k₀ l f] (L : WeilComplex k₀ l Y) :
     Nonempty ((upperShriek f).obj L ≅
-      (verdierDual k₀ l X).obj (op ((upperStar f).obj ((verdierDual k₀ l Y).obj (op L))))) :=
-  sorry
+      (verdierDual k₀ l X).obj (op ((upperStar f).obj ((verdierDual k₀ l Y).obj (op L))))) := by
+  obtain ⟨eX⟩ := nonempty_iso_verdierDual_rightOp_comp_verdierDual k₀ l X
+  obtain ⟨eY⟩ := nonempty_iso_verdierDual_rightOp_comp_verdierDual k₀ l Y
+  obtain ⟨ex⟩ := nonempty_verdierDual_derivedLowerShriek_natIso f
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+  obtain ⟨e⟩ := Adjunction.nonempty_iso_rightOp_comp_op_comp_of_duality (verdierDual k₀ l X) eX
+    (verdierDual k₀ l Y) eY (upperStarDerivedLowerStarAdjunction f)
+    (derivedLowerShriekUpperShriekAdjunction f) ex
+  exact ⟨e.app L⟩
 
 /-- **Verdier exchange** (blueprint: `fix-cor-verdier-exchange`): for a separated morphism of
 finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
@@ -173,6 +185,30 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
   nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth d (derivedLowerShriekUpperShriekAdjunction _)
 
 end Smooth
+
+section RelativePurity
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [HasUpperShriek k₀ l f]
+
+/-- **Smooth purity for Weil complexes** (blueprint:
+`thm-pur-weil-equivariance-of-purity-and-trace`, the equivariance of the smooth purity
+isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`): for a morphism `f : X ⟶ Y` smooth of relative
+dimension `d`, the purity isomorphism commutes with the Weil structures, so it is an isomorphism
+`Rf^! L ≅ f^*(L(d)[2d])` of Weil complexes, natural in `L`. Only the existence of a natural
+isomorphism is stated here. -/
+theorem nonempty_upperShriek_iso_of_smoothOfRelativeDimension (d : ℕ)
+    [SmoothOfRelativeDimension d f] :
+    Nonempty (upperShriek (k₀ := k₀) (l := l) f ≅
+      (tateTwist k₀ l Y d ⋙ shiftFunctor (WeilComplex k₀ l Y) (2 * d : ℤ)) ⋙ upperStar f) :=
+  sorry
+
+end RelativePurity
 
 section Lisse
 

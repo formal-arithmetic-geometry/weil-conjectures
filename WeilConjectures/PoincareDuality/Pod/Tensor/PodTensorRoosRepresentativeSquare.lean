@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.PoincareDuality.PodCompletedTensorReindex.PodCompletionTensorModels
+import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorRoosRepresentativeSquareAux
 
 /-! # One strict tensor tower and its canonical completed representative square
 
@@ -115,6 +116,7 @@ theorem podTensorRoosRepresentativeSquare
     (podOrdinaryToCompleted l E g D).app
         ((integralCompletedTensor l E Y).obj
           (DerivedCategory.Q.obj P.obj,DerivedCategory.Q.obj Q.obj)) ≫
-      ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom := by sorry
+      ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom := by
+  exact podTensorRoosRepresentativeSquare_of_normalization l E g D hD P Q hP hQ τ hgen
 
 end WeilConjectures

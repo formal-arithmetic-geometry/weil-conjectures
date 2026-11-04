@@ -48,7 +48,11 @@ constructible adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`
 morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes
 has a right adjoint `Rg^!`. The general case
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` reduces to this one through a
-compactification. -/
+compactification.
+
+For `Y` separated over `k₀` this is
+`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper'`; the condensed model of
+`Dᵇc(-, ℚ̄_ℓ)` through which it is proved is only set up for separated schemes. -/
 theorem isLeftAdjoint_derivedLowerStar_of_isProper :
     (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
   sorry

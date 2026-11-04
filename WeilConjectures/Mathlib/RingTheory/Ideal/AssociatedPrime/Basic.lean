@@ -45,7 +45,7 @@ Mathlib's `associatedPrimes`. -/
 theorem annihilatorAssociatedPrimes_eq_associatedPrimes [IsNoetherianRing R] :
     annihilatorAssociatedPrimes R M = associatedPrimes R M := by
   ext q
-  rw [mem_annihilatorAssociatedPrimes_iff, associatedPrimes, Set.mem_setOf_eq,
+  rw [mem_annihilatorAssociatedPrimes_iff, associatedPrimes, Set.mem_ofPred_eq,
     isAssociatedPrime_iff]
   refine and_congr_right fun _ ↦ exists_congr fun z ↦ ?_
   rw [SetLike.ext_iff]
