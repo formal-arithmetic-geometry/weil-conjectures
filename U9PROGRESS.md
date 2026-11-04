@@ -236,3 +236,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Audit /home/ubuntu/u9/logs/K4-20261105T071051.log finished rc=1. cast_proofs still reaches the 200000-heartbeat whnf timeout in native universality (26s). Thom's comparison repairs pass, but its last trivial-line specialization times out (13s).
 - Added SmoothPurityDescendedWeilUniversality: apply the free Weil resolution entirely in the finite-base Over coordinates, then export its universal property through TraceUniversalAt. The native helper now only specializes that theorem, avoiding a comparison of the expanded native and Over geometric universal-property statements.
 - Pinned k₀/l and structural-map instances in the remaining Thom specialization. Added the new universal-property theorem to the eventual axiom audit. No heartbeat raises or DONE.
+
+## 2026-11-05 07:15 +0800 — native proper trace GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T071238.log finished rc=1, four built/two failed. DescendedWeilUniversality is GREEN (13s), and NativeProperTrace is GREEN: proving the free-Weil universal property in finite-base coordinates removes the native conversion timeout.
+- NativeProperDualizing then hit an import-time collision between generated local instance names in the new file and ProperPointTrace. Assigned explicit unique names to the new local instances.
+- Thom's final trivial-line theorem still times out (18s). Split the compact constant-object computation from the projection-formula application, and gave the base-change component its explicit object-level type. This will identify and shorten the costly conversion. No heartbeat raises or DONE.

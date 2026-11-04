@@ -108,6 +108,36 @@ attribute [local instance 1100] CategoryTheory.instOverClass
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
+/-- Compact base change determines the compact constant object of a trivial line bundle. -/
+theorem nonempty_trivialLine_compact_constant_iso
+    (e : (derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀))) ≅
+      (WeilSheaf.toComplex.obj
+        (WeilSheaf.tateTwistSheaf k₀ l (Spec (CommRingCat.of k₀)) (-1))) ⟦(-2 : ℤ)⟧)
+    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))]
+    (π : Y ⟶ X) (s : Y ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))]
+    (hπ : IsPullback π s (X ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
+    [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :
+    Nonempty ((derivedLowerShriek k₀ l π).obj
+      (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
+        (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X (-1))) ⟦(-2 : ℤ)⟧) := by
+  have : s.IsOver (Spec (CommRingCat.of k₀)) :=
+    ⟨hπ.w.symm.trans (comp_over π _)⟩
+  obtain ⟨bc⟩ := nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hπ.flip
+  let A := WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀))
+  let a : (upperStar (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀))).obj
+      ((derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).obj A) ≅
+      (derivedLowerShriek k₀ l π).obj ((upperStar (k₀ := k₀) (l := l) s).obj A) := bc.app A
+  exact ⟨(derivedLowerShriek k₀ l π).mapIso
+      (purityUpperStarConstantIso (k₀ := k₀) (l := l) s).symm ≪≫
+    a.symm ≪≫ (upperStar (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀))).mapIso e ≪≫
+    purityUpperStarShiftedTateIso (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀)) (-1) (-2)⟩
+
 /-- Compact base change transports the constant affine-line calculation to a
 trivial line bundle; the projection formula gives the full Thom functor. -/
 theorem nonempty_trivialLineThom_of_affineLine_constant
@@ -126,8 +156,6 @@ theorem nonempty_trivialLineThom_of_affineLine_constant
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (upperStar π ⋙ derivedLowerShriek k₀ l π ≅
       tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) := by
-  have : s.IsOver (Spec (CommRingCat.of k₀)) :=
-    ⟨hπ.w.symm.trans (comp_over π _)⟩
   have : IsSeparated (Y ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over π (Spec (CommRingCat.of k₀))]
     infer_instance
@@ -137,11 +165,8 @@ theorem nonempty_trivialLineThom_of_affineLine_constant
   have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over π (Spec (CommRingCat.of k₀))]
     infer_instance
-  obtain ⟨bc⟩ := nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hπ.flip
-  let a := bc.app (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀)))
-  exact nonempty_upperStar_comp_shriek_iso_of_constant_cohomology (k₀ := k₀) (l := l) π (-1) (-2)
-    ((derivedLowerShriek k₀ l π).mapIso (purityUpperStarConstantIso (k₀ := k₀) (l := l) s).symm ≪≫
-      a.symm ≪≫ (upperStar (X ↘ Spec (CommRingCat.of k₀))).mapIso e ≪≫
-      purityUpperStarShiftedTateIso (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀)) (-1) (-2))
+  obtain ⟨a⟩ := nonempty_trivialLine_compact_constant_iso e π s hπ
+  exact nonempty_upperStar_comp_shriek_iso_of_constant_cohomology
+    (k₀ := k₀) (l := l) π (-1) (-2) a
 
 end AlgebraicGeometry.WeilComplex
