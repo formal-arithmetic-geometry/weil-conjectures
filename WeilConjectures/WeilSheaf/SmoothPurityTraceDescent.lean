@@ -61,7 +61,7 @@ lemma descendedTrace_forget
   rw [hi]
   simp only [Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc,
     Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
-  rw [← a'.inv.naturality]
+  rw [← a'.hom.naturality_assoc]
   simp
 
 end CategoryTheory.Functor

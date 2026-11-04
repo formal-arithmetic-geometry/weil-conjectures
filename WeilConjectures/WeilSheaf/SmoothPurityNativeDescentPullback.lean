@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeDescent
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChangeCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Closed
 
 /-!
 # Pullback of finite-base native descent

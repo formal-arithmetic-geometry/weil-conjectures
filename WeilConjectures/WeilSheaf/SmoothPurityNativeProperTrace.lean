@@ -41,6 +41,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 local instance : (objectProperty k₀ l X).ι.Full := (objectProperty k₀ l X).fullyFaithfulι.full
 local instance : (objectProperty k₀ l Y).ι.Full := (objectProperty k₀ l Y).fullyFaithfulι.full
+local instance : (objectProperty k₀ l X).ι.Faithful := (objectProperty k₀ l X).fullyFaithfulι.faithful
+local instance : (objectProperty k₀ l Y).ι.Faithful := (objectProperty k₀ l Y).fullyFaithfulι.faithful
 
 local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=

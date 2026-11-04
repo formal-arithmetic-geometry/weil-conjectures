@@ -77,6 +77,8 @@ theorem isIso_homEquiv_of_condensed_direct_trace
     IsIso (adj.homEquiv P N ε) := by
   have := (objectProperty k₀ l X).fullyFaithfulι.full
   have := (objectProperty k₀ l Y).fullyFaithfulι.full
+  have := (objectProperty k₀ l X).fullyFaithfulι.faithful
+  have := (objectProperty k₀ l Y).fullyFaithfulι.faithful
   apply Adjunction.isIso_homEquiv_of_fullyFaithful_trace adj
     ((objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor)
     ((objectProperty k₀ l Y).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor)

@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityNativeDescent
 public import WeilConjectures.WeilSheaf.CondensedModelGeometricFiberPullback
 public import WeilConjectures.WeilSheaf.UpperStarConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarUnit
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The constant Weil sheaf as finite-base descent
@@ -37,12 +38,18 @@ lemma adicUpperStarUnitIso_descent {X Y : Scheme.{u}}
         (adicUpperStarUnitIso l p).hom =
       (a)^*ᵃ[l].map (adicUpperStarUnitIso l p).hom ≫
         (adicUpperStarUnitIso l a).hom := by
+  have hs : (upperStarComp (WeilCoefficients.{u} l) a p).inv.app (adicConstantSheaf l Y) ≫
+      (upperStarCongr (WeilCoefficients.{u} l) h).hom.app (adicConstantSheaf l Y) ≫
+        upperStarAdicConstantSheafHom l p =
+      (a)^*[WeilCoefficients.{u} l].map (upperStarAdicConstantSheafHom l p) ≫
+        upperStarAdicConstantSheafHom l a := by
+    rw [upperStarCongr_hom_app_comp_upperStarAdicConstantSheafHom,
+      upperStarAdicConstantSheafHom_comp, Iso.inv_hom_id_app_assoc]
   apply Mod.hom_ext
   simp only [Mod.comp_hom', adicUpperStarComp_inv_app_hom,
     adicUpperStarCongr_hom_app_hom, adicUpperStar_map_hom,
     adicUpperStarUnitIso, Mod.regularIsoOfIsIso_hom_hom]
-  rw [upperStarCongr_hom_app_comp_upperStarAdicConstantSheafHom,
-    upperStarAdicConstantSheafHom_comp, Iso.inv_hom_id_app_assoc]
+  exact_mod_proofs hs
 
 /-- Switching between pullback and inverse pushforward preserves the unit map. -/
 lemma adicUpperStarIsoLowerStarInv_hom_comp_unit {X Y : Scheme.{u}} (e : X ≅ Y) :
@@ -67,18 +74,20 @@ noncomputable def geometricFiberPullbackUnitIso :
     (geometricFiberPullback k₀ l X).obj (AdicSheaf.unit l X) ≅ adicConstant k₀ l X :=
   IsoAlgebra.isoMk (adicUpperStarUnitIso l
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj) (by
+      change ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᵃ[l].map
+        (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).hom ≫
+          (adicLowerStarUnitIso l
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom =
+        (geometricFiberPullbackFrobeniusIso k₀ l X).hom.app (AdicSheaf.unit l X) ≫
+          (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).hom
+      dsimp only [geometricFiberPullbackFrobeniusIso, Iso.trans_hom, NatTrans.comp_app,
+        Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom]
       rw [← cancel_epi ((adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app _)]
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app
+          (((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l].obj (AdicSheaf.unit l X)))]
       rw [← NatTrans.naturality_assoc]
-      change _ ≫ ((adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app _ ≫
-        (adicLowerStarUnitIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom) = _
-      rw [adicUpperStarIsoLowerStarInv_hom_comp_unit]
-      simp only [geometricFiberPullback_obj_str, geometricFiberPullbackFrobeniusIso,
-        Iso.app_hom, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-        Functor.whiskerLeft_app, Iso.symm_hom, Category.assoc,
-        Iso.hom_inv_id_app_assoc]
+      simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+        adicUpperStarIsoLowerStarInv_hom_comp_unit]
       exact (adicUpperStarUnitIso_descent _ _ _).symm)
 
 /-- The native constant sheaf, in condensed coordinates, is descent of the unit. -/
@@ -103,6 +112,14 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+
+local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
+local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
+local instance : (boundedConstructible
+    (condensedRingObj (Profinite.padicAlgClRingObj l) X)).IsMonoidal :=
+  CondensedRing.isMonoidal_boundedConstructible l (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
 
 /-- Native descent of the finite-base tensor unit is the constant Weil complex. -/
 noncomputable def finiteBaseNativeDescentUnitIso :
