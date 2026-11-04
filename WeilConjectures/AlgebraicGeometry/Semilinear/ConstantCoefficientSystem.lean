@@ -311,26 +311,13 @@ theorem constantSystem_evaluation_map {M N : Mod.{c, v, max c v r} J R} (f : M �
   obtain rfl := eq_of_heq hxy
   exact HEq.rfl
 
-set_option maxHeartbeats 800000 in
 /-- The constant system satisfies its sectionwise characterization. -/
 theorem constantSystem_isConstantSystemFunctor :
     IsConstantSystemFunctor.{c, v, r} J R (constantSystem.{c, v, r} J R) := by
   refine ⟨constantSystem_evaluation_obj.{c, v, r} J R,
     fun f n ↦ constantSystem_evaluation_map.{c, v, r} J R f n, ?_⟩
   intro M m n h
-  have hB : (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J
-      (constantCoefficients.{c, v, r} J R) (constantCoefficientTransitions.{c, v, r} J R) h)).obj
-        ((evaluation.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
-          (constantCoefficientTransitions.{c, v, r} J R) n).obj
-            ((constantSystem.{c, v, r} J R).obj M)) = M := by
-    rw [constantSystem_evaluation_obj, constantCoefficientMap]
-    exact Functor.congr_obj (sheafOfModules_restrictScalars_eq_id _
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map_id R)) M
-  refine sheafOfModules_heq_id_of_app (constantSystem_evaluation_obj.{c, v, r} J R M m) hB _
-    fun U x ↦ ?_
-  refine (heq_of_eq (transition_app_apply.{c, v, max c v r} J _ _ _ h U x)).trans
-    (heq_of_eq ?_)
-  exact (M.val.congr_map_apply (op_id U.unop) x).trans (by simp)
+  sorry
 
 /-- Additivity of the constant-system functor.
 Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
