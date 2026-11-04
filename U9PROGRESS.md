@@ -257,3 +257,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Audit /home/ubuntu/u9/logs/K4-20261105T072007.log finished rc=1, one module failed. The new arbitrary-open descent comparison elaborates; the remaining timeout is in the compactification wrapper.
 - Comparing against the already GREEN SeparatedAdjunction helper identified a real interface mismatch: compact pushforward is related to extension-by-zero followed by proper pushforward through derivedLowerShriekCompιIso, rather than the reflexivity iso used in the draft. Replaced that attempted conversion by the specified comparison and its naturality proof, exactly as in SeparatedAdjunction.
 - No heartbeat raises or DONE; next audit follows.
+
+## 2026-11-05 07:23 +0800 — profile the remaining compactification conversion
+- Audit /home/ubuntu/u9/logs/K4-20261105T072125.log still reports the same 15s whnf timeout in the compactification wrapper. The specified compactification comparison is now in place, but another conversion remains.
+- Enabled profiling only for this theorem, with a 5000ms threshold to avoid the earlier verbose trace. No heartbeat raise; current task remains unfinished.
