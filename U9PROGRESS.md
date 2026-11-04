@@ -87,3 +87,11 @@ isomorphism, including limits/sheafification/geometric fibres. Added inverse-
 spelled generic component identity and a natural-component version of square
 rotation to avoid converting concrete Iso.app/mapIso projections. Rechecking
 with profiler retained temporarily; no heartbeat changes.
+
+2026-11-05 03:28 CST: K5-20261105T032307.log rc=1 (242s), same kernel
+failures. Matching inverse spellings exposed the remaining difference: the two
+adic pullback maps have distinct generated proofs of comp_over, so equality of
+their .inv components unfolds the whole conjugate construction. Applying the
+repository's exact_mod_proofs tactic at explicit, structurally aligned boundaries
+to cast those proof arguments before kernel conversion. This tactic generates
+ordinary equality/proof-irrelevance terms; no trusted checks bypassed.

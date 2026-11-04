@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.SheafSquareTransport
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The native sheaf tensor square under condensed realization -/
 
@@ -48,7 +49,12 @@ lemma condensedRealizationUpperStarIso_hom_app_eq (M : ProEtaleWeilSheaf k₀ l 
       (adicUpperStarCompCondensedModIso l
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).inv.app
           M.carrier := by
-  exact Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom_app _ _ M
+  dsimp only [condensedRealizationUpperStarIso]
+  exact_mod_proofs Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom_app
+    (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
+      (comp_over g (Spec (CommRingCat.of k₀))))
+    (adicUpperStarCompCondensedModIso l
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))) M
 
 /-- The native pullback tensor comparison and the condensed realization tensor comparison
 commute with the pullback comparison. -/
@@ -88,9 +94,14 @@ lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ 
     change G.map _ ≫ _ ≫ (adicSheafEquivCondensedMod l _).functor.map
       (((nativePullSheafTensor k₀ l g).hom.app (M, N)).hom.f) = _
     rw [hm]
-    exact adicUpperStar_condensedRelativeTensor_square l _ M.carrier N.carrier
-  exact tensorSquare_rotate_components (upperStar k₀ l g) (condensedRealization k₀ l Z)
+    dsimp only [G]
+    exact_mod_proofs adicUpperStar_condensedRelativeTensor_square l
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
+      M.carrier N.carrier
+  exact_mod_proofs tensorSquare_rotate_components (upperStar k₀ l g) (condensedRealization k₀ l Z)
     (condensedRealization k₀ l Y) G (nativeOpenSheafTensor k₀ l Y)
-    (nativeOpenSheafTensor k₀ l Z) (nativePullSheafTensor k₀ l g) nY nZ a M N _ h
+    (nativeOpenSheafTensor k₀ l Z) (nativePullSheafTensor k₀ l g) nY nZ a M N
+    (Functor.OplaxMonoidal.δ G ((condensedRealization k₀ l Y).obj M)
+      ((condensedRealization k₀ l Y).obj N)) h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
