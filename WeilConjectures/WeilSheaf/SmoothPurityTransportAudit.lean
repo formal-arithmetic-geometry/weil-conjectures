@@ -5,9 +5,11 @@ import WeilConjectures.WeilSheaf.SmoothPurityFreeResolution
 import WeilConjectures.WeilSheaf.SmoothPurityTraceCriterion
 import WeilConjectures.WeilSheaf.SmoothPurityNativeTrace
 import WeilConjectures.WeilSheaf.SmoothPurityFreeComparison
+import WeilConjectures.WeilSheaf.SmoothPurityFreeComparisonComp
 
 #print axioms AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_free
 #print axioms CategoryTheory.Adjunction.bijective_map_comp_on_free_of_forget
 #print axioms AlgebraicGeometry.WeilComplex.traceOfDescendedSmoothTrace
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.isIso_forgetFreeComparison
+#print axioms CategoryTheory.Adjunction.unit_app_comp_map_compFreeComparison
