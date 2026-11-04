@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Dual
+public import WeilConjectures.WeilSheaf.PoincareDualityLisseEquiv
 public import WeilConjectures.WeilSheaf.TateTwist
 
 /-!
@@ -29,9 +30,11 @@ invariant under the geometric Frobenius.
 
 The statement is existential, as for constant coefficients
 (`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`): Weil
-complexes have no derived tensor product, `Ra^!` or orientation yet, so the derived Poincaré
-pairing of `def-pod-derived-poincare-pairing` cannot be written down. It is a node of the
-Poincaré duality section, stated here with `sorry` in the form needed by smooth-proper purity.
+complexes have no derived tensor product or orientation yet, so the derived Poincaré pairing of
+`def-pod-derived-poincare-pairing` cannot be written down. The pairing is instead the evaluation
+pairing of the Frobenius-equivariant isomorphism `H^j(X₀ ⊗ k̄, F^∨(d)) ≅ H_c^i(X₀ ⊗ k̄, F)^∨`
+(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_dual_compactlySupportedCohomology`),
+read off from the Verdier duality of Weil complexes.
 -/
 
 @[expose] public section
@@ -63,7 +66,16 @@ theorem exists_isPerfPair_compactlySupportedCohomology_dual (d : ℕ)
           →ₗ[PadicAlgCl l] PadicAlgCl l,
       P.IsPerfPair ∧ ∀ x y, P ((F.compactlySupportedCohomology i).frobenius x)
         ((((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).cohomology j).frobenius y) =
-          P x y :=
-  sorry
+          P x y := by
+  obtain ⟨e⟩ := nonempty_equiv_cohomology_dual_compactlySupportedCohomology d hF i j h
+  let e' : _ ≃ₗ[PadicAlgCl l]
+      Module.Dual (PadicAlgCl l) (F.compactlySupportedCohomology i).carrier :=
+    e.toLinearEquiv
+  refine ⟨(e' : _ →ₗ[PadicAlgCl l] _).flip, inferInstance, fun x y ↦ ?_⟩
+  have he : e' ((((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).cohomology j).frobenius y) =
+      e' y ∘ₗ (F.compactlySupportedCohomology i).frobenius.symm.toLinearMap :=
+    e.map_frobenius y
+  change e' _ _ = e' y x
+  rw [he, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply]
 
 end AlgebraicGeometry.WeilSheaf
