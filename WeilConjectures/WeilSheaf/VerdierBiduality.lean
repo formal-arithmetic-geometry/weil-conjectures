@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.DerivedHomConstructible
 public import WeilConjectures.WeilSheaf.IhomCurry
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryBiduality
+public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 import WeilConjectures.CategoryTheory.RingedForgetTwoInjective.RingedForgetTwoInjectiveModels
 import WeilConjectures.WeilSheaf.DerivedHomPrecomposition
@@ -44,14 +45,18 @@ complexes of pro-étale Weil sheaves to that of `ℓ`-adic sheaves
 complexes when the target represents the dualizing complex of `X̄`
 (`AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`).
 
+## The dualizing complex
+
+The underlying complex on `X̄` of `Ra_X^! ℚ̄_ℓ`, for the exceptional inverse image of Weil
+complexes, is the dualizing complex of `X̄`
+(`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`, blueprint
+`lem-fix-weil-operations`), by
+`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_dualizingComplex`.
+
 ## Inputs from other chapters
 
-Two statements are not yet available and are stated here with `sorry`:
+One statement is not yet available and is stated here with `sorry`:
 
-* `AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`
-  (blueprint: `lem-fix-weil-operations`, the exceptional adjoint "lies over" the geometric one):
-  the underlying complex on `X̄` of `Ra_X^! ℚ̄_ℓ`, for the exceptional inverse image of Weil
-  complexes, is the dualizing complex of `X̄`;
 * `AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`: constructible Verdier
   biduality in the model of `ℓ`-adic sheaves (`det-pd-biduality-coefficients` (iv), proved in the
   condensed model as `ProEtale.CondensedRing.isIso_verdierBiduality`).
@@ -169,21 +174,6 @@ variable (X) in
 noncomputable abbrev geometricFiberOver : Over (Spec (.of (AlgebraicClosure k₀))) :=
   Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
 
-instance : Fact (ringChar (AlgebraicClosure k₀)).Prime :=
-  ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ CharP.char_is_prime k₀ (ringChar k₀)⟩
-
-instance : Fact (ringChar (AlgebraicClosure k₀) ≠ l) :=
-  ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ Fact.out⟩
-
-instance : LocallyOfFiniteType (geometricFiberOver (k₀ := k₀) X).hom :=
-  inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-
-instance : QuasiCompact (geometricFiberOver (k₀ := k₀) X).hom :=
-  inferInstanceAs (QuasiCompact (pullback.snd _ _))
-
-instance : IsSeparated (geometricFiberOver (k₀ := k₀) X).hom :=
-  inferInstanceAs (IsSeparated (pullback.snd _ _))
-
 variable (W : WeilComplex k₀ l X)
 
 /-- The duality `D_W = RHom(-, W)` of Weil complexes into a Weil complex `W`. -/
@@ -266,13 +256,8 @@ Weil exceptional inverse image lies over the geometric one, at the constant shea
 right adjoint of the direct image with compact support `Ra_! : WeilComplex X ⥤ WeilComplex k₀` of
 Weil complexes along the structure morphism `a : X ⟶ Spec k₀`. Then the underlying complex on
 the geometric fibre `X̄` of `R ℚ̄_ℓ` is the dualizing complex `ω_X̄ = Rā^! ℚ̄_ℓ` of `X̄` over `k̄`
-(`ProEtale.CondensedRing.dualizingComplex`).
-
-This input is missing: the exceptional inverse image of Weil complexes is only known as an
-abstract right adjoint, and its comparison with the geometric `Rā^!` (the mate of
-`WeilComplex.derivedLowerShriekCompToCondensedIso`, together with the lifting of the geometric
-`ω_X̄` with its Frobenius structure to the derived category of pro-étale Weil sheaves) is not
-formalized. -/
+(`ProEtale.CondensedRing.dualizingComplex`); see
+`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_dualizingComplex`. -/
 theorem nonempty_nativeGeometricForget_obj_iso_of_adjunction
     {R : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
     (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ R) :
@@ -280,7 +265,7 @@ theorem nonempty_nativeGeometricForget_obj_iso_of_adjunction
         (R.obj (WeilSheaf.toComplex.obj
           (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))).obj ≅
       (ObjectProperty.ι _).obj (CondensedRing.dualizingComplex l (geometricFiberOver X))) :=
-  sorry
+  nonempty_nativeGeometricForget_obj_iso_dualizingComplex adj
 
 end Dualizing
 

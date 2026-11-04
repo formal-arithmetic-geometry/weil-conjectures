@@ -13911,6 +13911,7 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightA
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointCategory
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointCoproduct
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointCounit
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointForget
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointFree
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointLift
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchange
@@ -17136,6 +17137,7 @@ public import WeilConjectures.PoincareDuality.CompletedScalarExtensionTExact
 public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEvaluationBase
 public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEvaluationContinuationABase
 public import WeilConjectures.PoincareDuality.Derived.DerivedPullbackTensorFiniteConstraints
+public import WeilConjectures.PoincareDuality.DualizingComplexCompactification
 public import WeilConjectures.PoincareDuality.ExplicitScalarCone.ExplicitScalarConeWordCoordinates
 public import WeilConjectures.PoincareDuality.GenericRestriction.Comparison
 public import WeilConjectures.PoincareDuality.GenericRestriction.FieldExtension
@@ -20573,6 +20575,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicIntExtendS
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
+public import WeilConjectures.SixFunctors.ProEtale.Adic.BoundedConstructibleCondensedComparison
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClopenDecomposition
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedLowerStar
@@ -20778,6 +20781,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProEtOpenCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarCondensedAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Retract
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
@@ -24284,6 +24288,7 @@ public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.TraceTriangleAdditivity
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UnramifiedBoundaryPurity
+public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarConstant
 public import WeilConjectures.WeilSheaf.UpperStarExact

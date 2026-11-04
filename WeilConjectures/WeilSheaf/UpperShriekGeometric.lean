@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointForget
 public import WeilConjectures.PoincareDuality.DualizingComplexCompactification
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseLocallyFree
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarCondensedAdjoint
 public import WeilConjectures.WeilSheaf.CondensedModelCompactSupport
 public import WeilConjectures.WeilSheaf.LowerShriekIndependence
@@ -48,7 +49,7 @@ The proof does not use the comparison of internal homs of Weil complexes.
 
 universe u
 
-open CategoryTheory Limits Endofunctor
+open CategoryTheory Limits Endofunctor MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
@@ -149,6 +150,7 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
     boundedConstructibleAdic_rightDerivedFunctor_adicLowerStar_obj
       (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure hk _
       hK
+  -- the geometric adjunction `Rḡ_* ⊣ ḡ^!`, transported from the condensed model
   obtain ⟨R', adjR', hR'⟩ :=
     exists_adjunction_boundedConstructibleAdicRightDerivedLowerStar l k₀ cb.overG hR
   have : IsProper (Scheme.Hom.geometricFiberMap c.g (comp_over c.g (Spec (CommRingCat.of k₀)))) :=
@@ -161,6 +163,7 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
       (k₀ := k₀) (l := l) (X := Spec (CommRingCat.of k₀)) K).2 hK
   have hcoprod := ProEtale.preservesColimit_discrete_rightDerivedFunctor_adicLowerStar (l := l)
     (Scheme.Hom.geometricFiberMap c.g (comp_over c.g (Spec (CommRingCat.of k₀))))
+  -- `Rg_*` on Weil complexes is a left adjoint
   have : (derivedLowerStar (k₀ := k₀) (l := l) c.g).IsLeftAdjoint :=
     IsoAlgebra.isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor
       (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l c.g (comp_over c.g _))
@@ -180,14 +183,15 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
   have : IsNoetherian c.Z := ⟨⟩
   have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
   have : QuasiCompact c.i := inferInstance
+  -- `R ≅ R_g ⋙ i^*`, since `Ra_! = Rg_* ∘ i_!` for the compactification defining `Ra_!`
   have e : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ≅
       extensionByZero c.i ⋙ derivedLowerStar c.g :=
-    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ ((derivedLowerShriekCompιIso k₀ l c).app K))
-      (fun φ ↦ by
-        apply (WeilComplex.objectProperty k₀ l _).ι.map_injective
-        exact (derivedLowerShriekCompιIso k₀ l c).hom.naturality φ)
+    NatIso.ofComponents (fun K ↦ Iso.refl _) (fun φ ↦ by
+      rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl)
   let eR : R ≅ (derivedLowerStar (k₀ := k₀) (l := l) c.g).rightAdjoint ⋙ upperStar c.i :=
     adj.rightAdjointUniq (((extensionByZeroUpperStarAdjunction c.i).comp adjg).ofNatIsoLeft e.symm)
+  -- the underlying complex of `R_g L` is `ḡ^!` of that of `L`
   obtain ⟨eg⟩ := IsoAlgebra.nonempty_forget_obj_iso_of_adjunction
       (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l c.g (comp_over c.g _))
       (DerivedCategory.boundedConstructibleAdic l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -199,6 +203,8 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
       (WeilComplex.objectProperty_iff c.Z) (WeilComplex.objectProperty_iff _)
       (WeilComplex.objectProperty_rightDerivedLowerStar c.g) adjg L
   obtain ⟨eB⟩ := hR' ⟨_, (WeilComplex.objectProperty_iff _ _).1 L.property⟩
+  -- the chain of isomorphisms (`have` rather than `let`: elaborating the composite with its
+  -- type is slow)
   have i₁ := forget.mapIso (eR.app L)
   have i₂ := (upperStarCompForgetIso (k₀ := k₀) (l := l) c.i).app
     ((derivedLowerStar (k₀ := k₀) (l := l) c.g).rightAdjoint.obj L)
@@ -223,6 +229,51 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction
   exact ⟨(adicSheafDerivedEquivCondensedMod l _).functor.mapIso (i₁ ≪≫ i₂ ≪≫ i₃) ≪≫ i₄ ≪≫ i₅ ≪≫
     i₆ ≪≫ i₇⟩
 
+
+instance : IsIso (pointGeometricFiberOver k₀).hom := by
+  dsimp only [pointGeometricFiberOver, Over.mk_hom, Scheme.Hom.geometricFiberToAlgebraicClosure]
+  infer_instance
+
+variable (k₀ l) in
+/-- The underlying complex of the constant Weil sheaf `ℚ̄_ℓ` on `Spec k₀`, in the condensed model,
+is the unit `ℚ̄_ℓ` on the geometric fibre. -/
+noncomputable def adicSheafDerivedEquivCondensedModForgetConstantIso :
+    (adicSheafDerivedEquivCondensedMod l
+        (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.obj
+        (forget.obj (WeilSheaf.toComplex.obj
+          (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))) ≅
+      𝟙_ (_root_.DerivedCategory (CategoryTheory.Mod
+        (Sheaf (Scheme.ProEt.topology
+          (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj l)
+          (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber))) :=
+  (adicSheafDerivedEquivCondensedMod l _).functor.mapIso
+      (((IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app _) ≪≫
+    ((adicSheafEquivCondensedMod l _).functor.mapDerivedCategorySingleFunctor 0).app _ ≪≫
+    (_root_.DerivedCategory.singleFunctor _ 0).mapIso (adicSheafEquivCondensedModUnitIso l _) ≪≫
+    _root_.DerivedCategory.singleFunctorObjUnitIso _
+
+/-- **The underlying complex of the dualizing complex of Weil complexes** (blueprint:
+`lem-fix-weil-operations`): for a right adjoint `R` of the direct image with compact support
+`Ra_!` of Weil complexes along the structure morphism `a : X ⟶ Spec k₀`, the underlying complex
+on the geometric fibre `X̄` of `R ℚ̄_ℓ` is the dualizing complex `ω_X̄` of `X̄` over `k̄`. -/
+theorem nonempty_nativeGeometricForget_obj_iso_dualizingComplex
+    {R : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
+    (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ R) :
+    Nonempty ((ProEtaleWeilSheaf.nativeGeometricForget k₀ l X).obj
+        (R.obj (WeilSheaf.toComplex.obj
+          (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))).obj ≅
+      (ObjectProperty.ι _).obj (CondensedRing.dualizingComplex l
+        (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure))) := by
+  obtain ⟨e₁⟩ := nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_of_adjunction adj
+    (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))
+  obtain ⟨e₂⟩ := CondensedRing.nonempty_upperShriekOfCompactification_obj_unit_iso l
+    (f := geometricFiberStructureMorphism (k₀ := k₀) X) (geometricFiberCompactification X)
+  exact ⟨(Functor.mapDerivedCategoryNatIso
+      (forgetAbCompComapNativeModuleCoefficientIso l _)).app _ ≪≫ e₁ ≪≫
+    (ObjectProperty.ι _).mapIso ((CondensedRing.boundedConstructibleUpperShriekOfCompactification l
+      (geometricFiberCompactification (k₀ := k₀) X)).mapIso
+        (ObjectProperty.isoMk _ (adicSheafDerivedEquivCondensedModForgetConstantIso k₀ l)) ≪≫ e₂)⟩
 end WeilComplex
 
 end AlgebraicGeometry
