@@ -39,7 +39,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
 
-set_option linter.privateModule false
 
 /-! # Invertibility of the specified reduction adjuncts
 
@@ -127,6 +126,22 @@ private theorem scalar_adjunct_isIso (hd : d = a ≫ b)
   have : IsIso (f ≫ em.hom) := IsIso.of_isIso_comp_left (B.model.E.map en.inv) _
   exact IsIso.of_isIso_comp_right f em.hom
 
+private theorem kflat_of_iso
+    {P Q : CochainComplex (ringedSiteModules.{r}
+      (derivedChangeRingIndependentCoefficients J R)) ℤ}
+    (e : P ≅ Q) (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) :
+    CochainComplex.IsKFlatIndependentCoefficients (R := R) Q := by
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  let := preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  intro F hF
+  let e' := ((MonoidalCategory.curriedTensor _).map₂CochainComplex.obj F).mapIso e
+  have hh := hP F hF
+  rw [← HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hh ⊢
+  exact (HomotopyCategory.subcategoryAcyclic _).prop_of_iso
+    ((HomotopyCategory.quotient _ _).mapIso e') hh
+
 end ScalarAdjunct
 
 namespace AlgebraicGeometry.ProEtale
@@ -194,5 +209,104 @@ private theorem ordinary_reduction_isIso
   simpa only [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app,
     ← SheafOfModules.comp_val, (level m).inv_hom_id_app,
     SheafOfModules.id_val, PresheafOfModules.id_app, ModuleCat.id_apply] using he
+
+set_option maxHeartbeats 800000 in
+-- Kernel checking the concrete coefficient-sheaf comparisons exceeds the default budget.
+set_option linter.unusedVariables false in
+-- The fixed interface includes universal and evaluation; this proof only needs computes.
+/-- The actual reduction morphisms supplied by D are invertible on strict derived
+reduction. This is a compatibility assertion about D.reduction, not just existence
+of unrelated isomorphisms between successive scalar extensions.
+
+Source: blueprint latest, sec-smooth-purity, normalized-towers-reduction, normalization;
+Stacks Tags 06YY and 0G7E
+(blueprint: lem-sp-reduction-tower-adjunct-normalization).
+
+Proof:
+1. Resolve an arbitrary integral complex by a flat-term K-flat complex P. The counit
+identifies its image under red with the degreewise strict tensor reduction of P.
+2. For m <= n, D.reduction_rep describes the reduction on this representative as
+derived scalar extension followed by the ordinary tensor adjunct of its transition.
+The assumed pure-tensor transition formula and D.ordinaryReduction_eq identify that
+ordinary adjunct with (x tensor c) tensor d mapping to x tensor quotient(c)*d.
+Equality on pure tensors determines the sheafified tensor map.
+3. Successive derived quotient normalization identifies this map with the canonical
+invertible transitivity comparison. Its inverse inserts one in the middle factor.
+The normalization of the scalar-extension units is precisely the adjunct relation
+of step 2. Scalar-model uniqueness transports this computation to D.scalar's models.
+4. Use the evaluation comparisons and the computation counits to conjugate this
+isomorphism to D.reduction on red(Q P). Naturality conjugates it along a K-flat
+representative isomorphism to red(M), proving the assertion for every M.
+Equal indices use the tensor unitor, and three-index compatibility follows from
+associativity of scalar multiplication. No qcqs, boundedness, flat coefficient map,
+or constructibility assumption is used. The zero complex and empty site are included.
+-/
+theorem sp_reduction_tower_adjunct_normalization
+    (D : SpCoefficientTowersAbelian l E T)
+    (coefficient : spIntegralSectionRing l E T ≅
+      WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
+    (ordinary : spIntegralSectionModules l E T ⥤ spCoefficientTowers l E T)
+    [ordinary.Additive]
+    (level : spReductionOrdinaryLevels l E T D coefficient ordinary)
+    (transition : IsSpReductionTransition l E T D coefficient ordinary level)
+    (red : DerivedCategory (spIntegralSectionModules l E T) ⥤
+      spDerivedCoefficientTowers l E T D)
+    (counit : DerivedCategory.Q ⋙ red ⟶
+      ordinary.mapHomologicalComplex (.up ℤ) ⋙ spTowerLocalization l E T D)
+    (universal : red.IsLeftDerivedFunctor counit
+      (HomologicalComplex.quasiIso (spIntegralSectionModules l E T) (.up ℤ)))
+    (computes : ∀ P : CochainComplex (spIntegralSectionModules l E T) ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (R := spIntegralSectionRing l E T) P →
+        IsIso (counit.app P))
+    (evaluation : spReductionDerivedEvaluations l E T D coefficient red) :
+    ∀ M : DerivedCategory (spIntegralSectionModules l E T),
+      IsSpNormalizedTower l E T D (red.obj M) := by
+  clear universal evaluation
+  let := D.hasDerived
+  let := D.equivalenceAdditive
+  intro M m n h
+  let := D.evaluationLimits n
+  let := D.evaluationColimits n
+  let := D.evaluationLimits m
+  let := D.evaluationColimits m
+  let evn := spCoefficientEvaluation l E T D.equivalence n
+  let evm := spCoefficientEvaluation l E T D.equivalence m
+  have : evn.Additive := Functor.additive_of_preserves_binary_products _
+  have : evm.Additive := Functor.additive_of_preserves_binary_products _
+  have hOrd := ordinary_reduction_isIso l E T D coefficient ordinary level transition h
+  let G := DerivedCategory.Q.objPreimage M
+  let eG : DerivedCategory.Q.obj G ≅ M := DerivedCategory.Q.objObjPreimageIso M
+  obtain ⟨P, f, hP, _hflat, hf, _hepi⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (R := spIntegralSectionRing l E T) G
+  let := hf
+  have hLevel : CochainComplex.IsKFlatIndependentCoefficients
+      (R := (spCoefficientCommRings l E T).obj (op n))
+      ((evn.mapHomologicalComplex (.up ℤ)).obj
+        ((ordinary.mapHomologicalComplex (.up ℤ)).obj P)) := by
+    let A := (D.scalar (spIntegralReductionScalar l E T coefficient n)).model
+    have hp := changeOfRings_isKFlat_independentCoefficients
+      (spIntegralReductionScalar l E T coefficient n) P A.E A.obj_eq A.map_eq hP
+    exact kflat_of_iso.{u + 1, u, u + 1}
+      ((Functor.mapHomologicalComplexCompIso (level n) (.up ℤ)).app P).symm hp
+  let QP := (ordinary.mapHomologicalComplex (.up ℤ)).obj P
+  have hChain : IsIso
+      ((NatTrans.mapHomologicalComplex (D.ordinaryReduction h) (.up ℤ)).app QP) := by
+    have hi : ∀ i : ℤ, IsIso
+        (((NatTrans.mapHomologicalComplex (D.ordinaryReduction h) (.up ℤ)).app QP).f i) := by
+      intro i
+      exact hOrd (P.X i)
+    exact HomologicalComplex.Hom.isIso_of_components _
+  have := (D.scalar ((spCoefficientCommRings l E T).map (homOfLE h).op)).model.computes
+    _ hLevel
+  have : IsIso ((D.reduction h).app ((spTowerLocalization l E T D).obj QP)) := by
+    rw [D.reduction_rep h QP]
+    infer_instance
+  have := computes P hP
+  let eP : red.obj (DerivedCategory.Q.obj P) ≅
+      (spTowerLocalization l E T D).obj QP := asIso (counit.app P)
+  have := isIso_app_of_iso (D.reduction h) eP.symm
+  exact isIso_app_of_iso (D.reduction h)
+    (red.mapIso (asIso (DerivedCategory.Q.map f) ≪≫ eG))
 
 end AlgebraicGeometry.ProEtale

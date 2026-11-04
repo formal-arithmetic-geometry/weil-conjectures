@@ -36,8 +36,6 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTowerAdjunc
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTorIntervals
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionLevelConstructible
 
-set_option linter.privateModule false
-
 /-! # The reduction tower is normalized
 
 Source: blueprint latest, sec-smooth-purity, normalized-towers-reduction
@@ -154,7 +152,81 @@ private theorem liftSectionRingIso
       forget₂ RingCat.{u + 1} Ab.{u + 1})).map_injective
   exact he.trans hd.symm
 
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
+
+/-- Reduction is functorial into the ordinary derived category of strict coefficient
+ towers, all its reduction maps are isomorphisms, and on qcqs schemes it carries
+ bounded constructible integral complexes to normalized constructible finite-Tor towers,
+ preserving every Tor interval, also as a cohomological interval at every level.
+Source: blueprint latest, normalized-towers-reduction; Stacks 06YS, 06YY, 0G7E
+(blueprint: det-sp-reduction-tower-normalized).
+
+Proof:
+1. Transport strict tensor descent to the fixed tower presentation, obtaining the
+coefficient identification, ordinary and derived functors, comparison, and evaluations.
+2. Identify the specified transition adjuncts with the successive derived scalar
+extension isomorphisms. This proves normalization on every object without qcqs.
+3. On a qcqs scheme the integral Tor comparison supplies finite Tor amplitude and
+transfers every Tor interval to each reduction, also bounding its cohomology.
+4. A common refinement of the integral cohomology stratifications, finite scalar
+matrix resolutions, and their reduced truncation triangles give constructibility
+of every finite-level cohomology sheaf.
+5. Choose a finite integral Tor interval, widening its lower endpoint to the minimum
+of its endpoints to make it ordered. Step 3 gives this same ordered Tor and
+cohomological interval at every level. Combine it with step 4 for the finite-level
+predicate and the common bounds, then with step 2 for the normalized predicate.
+-/
+theorem sp_reduction_tower_normalized (D : SpCoefficientTowersAbelian l E T) :
+    Nonempty (SpReductionTower l E T D) := by
+  have hlimit :=
+    (sfb_integral_coefficient_limit l E T).choose_spec.choose_spec.choose_spec.2.2.2.2.2
+  have hmon : IsMonHom (spIntegralAbComparison l E T).hom := hlimit.choose_spec.1.1
+  obtain ⟨coefficient, hcomparison, _⟩ := liftSectionRingIso (Scheme.ProEt.topology T)
+    (condensedRingObj (spIntegralCondensed l E) T)
+    (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
+    (spIntegralAbComparison l E T)
+  have hcoefficient : ∀ (U : T.ProEtᵒᵖ)
+      (x : (condensedRingObj (spIntegralCondensed l E) T).obj.obj U),
+      coefficient.hom.hom.app U x = (spIntegralAbComparison l E T).hom.hom.app U x := by
+    intro U x
+    exact ConcreteCategory.congr_hom
+      (congr_app (congrArg (fun f ↦ f.hom) hcomparison) U) x
+  obtain ⟨ordinary, hadditive, level, transition, red, counit, universal,
+      computes, ⟨evaluation⟩⟩ :=
+    sp_reduction_tower_presentation_descent l E T D coefficient
+  have normalized := sp_reduction_tower_adjunct_normalization l E T D coefficient
+    ordinary level transition red counit universal computes evaluation
+  refine ⟨{
+    coefficient := coefficient
+    coefficient_normalized := hcoefficient
+    ordinary := ordinary
+    additive := hadditive
+    level := level
+    transition := transition
+    red := red
+    counit := counit
+    universal := universal
+    computes := computes
+    evaluation := evaluation
+    normalized := normalized
+    constructible := ?_ }⟩
+  intro hcompact hseparated M hM
+  obtain ⟨hfinite, hinterval⟩ :=
+    sp_reduction_tower_tor_intervals l E T D coefficient red evaluation M hM
+  have hconstructible := sp_reduction_tower_level_constructibility l E T D coefficient
+    hcoefficient red evaluation M hM
+  refine ⟨hfinite, ⟨?_, normalized M⟩, hinterval⟩
+  obtain ⟨a, b, htor⟩ := hfinite
+  have hab : min a b ≤ b := min_le_right a b
+  have hordered := htor.mono (min_le_left a b) le_rfl
+  have hlevel := hinterval (min a b) b hab hordered
+  constructor
+  · intro n
+    exact ⟨⟨min a b, b, hab, (hlevel n).2⟩, hconstructible n,
+      min a b, b, (hlevel n).1⟩
+  · exact ⟨min a b, b, min a b, b, hab, hab, fun n ↦
+      ⟨(hlevel n).2, (hlevel n).1⟩⟩
 
 end AlgebraicGeometry.ProEtale

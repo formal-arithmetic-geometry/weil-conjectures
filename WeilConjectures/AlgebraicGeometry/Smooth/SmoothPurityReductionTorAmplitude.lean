@@ -154,4 +154,132 @@ private theorem integral_coefficient_iso :
     Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u}) q.hom
   exact ⟨F, ⟨Mon.mkIso' (G.mapIso q)⟩⟩
 
+attribute [-instance] WeilConjectures.integralOperationsSiteSmall
+  WeilConjectures.integralReductionSiteEssentiallySmall in
+/-- The bounded constructibility hypothesis already implies finite Tor amplitude.
+Source: the integral clause of `det-def-localizing-closure-ctf-equals-bc`.
+(blueprint: lem-sp-reduction-tower-tor-intervals). -/
+private theorem sp_reduction_tower_finite_tor_amplitude
+    [CompactSpace T] [QuasiSeparatedSpace T]
+    (M : DerivedCategory (spIntegralSectionModules l E T))
+    (hM : constantModelBoundedConstructible (spIntegralCondensed l E) T
+      ((spIntegralInternalization l E T).obj M)) :
+    DerivedCategory.finiteTorAmplitude.{u + 1, u + 1, u + 2}
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj (spIntegralCondensed l E) T))
+      ((spIntegralInternalization l E T).obj M) := by
+  obtain ⟨F, hF⟩ := integral_coefficient_iso l E
+  have heq := (localizingClosure_ctf_equals_bc.{u} l T (spIntegralCondensed l E)
+    (Or.inr (Or.inr (Or.inl ⟨F, Or.inl hF⟩)))).1.2.2.1
+  have hmem : (constantModelBoundedConstructible (spIntegralCondensed l E) T ⊓
+      DerivedCategory.finiteTorAmplitude.{u + 1, u + 1, u + 2}
+        (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+          (condensedRingObj (spIntegralCondensed l E) T)))
+      ((spIntegralInternalization l E T).obj M) := by
+    rw [heq]
+    exact hM
+  exact hmem.2
+
+attribute [-instance] WeilConjectures.integralOperationsSiteSmall
+  WeilConjectures.integralReductionSiteEssentiallySmall in
+/-- Bounded constructible integral internalizations have finite Tor amplitude, and
+all evaluated reductions preserve every specified ordered Tor interval.
+
+Source: blueprint latest, sec-smooth-purity/sk-def-sp-normalized-towers/_section.md,
+uniform bounds; the reduction argument of lem-sp-reduction-tower-tor-intervals;
+Stacks Tags 06YY and 08FZ
+(blueprint: lem-sp-reduction-tower-tor-amplitude-helper).
+
+Proof:
+1. Embed E into the fixed algebraic closure. Uniqueness of its extended norm identifies
+its integer ring isometrically with that of a finite intermediate field. Continuous
+functions induce the required condensed coefficient isomorphism. Apply the integral
+qcqs clause of localizingClosure_ctf_equals_bc to hM to obtain finite Tor amplitude.
+2. In a specified interval [a,b], choose a bounded flat internal representative P.
+The exact section equivalence gives a representative Q of M, by its derived counit.
+Its tensor comparison identifies flat terms with site-flat terms. Its zero terms
+outside [a,b] are preserved by the additive equivalence, and Q is K-flat.
+3. At level n, apply the recorded scalar model's ordinary extension to Q. Change of
+rings preserves its flat terms and K-flatness; additivity preserves its zero terms.
+The scalar model's counit computes derived extension on Q. Compose this isomorphism
+with the supplied evaluation comparison and the image of Q isomorphic to M.
+4. The resulting bounded flat model satisfies the intrinsic Tor predicate's tests for
+all K-flat representatives, by scalarExtension_tor_flat_model. No flatness of the
+quotient map, normalization condition, or geometric nonemptiness is required. -/
+theorem sp_reduction_tower_tor_amplitude
+    (D : SpCoefficientTowersAbelian l E T)
+    (coefficient : spIntegralSectionRing l E T ≅
+      WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
+    (red : DerivedCategory (spIntegralSectionModules l E T) ⥤
+      spDerivedCoefficientTowers l E T D)
+    (evaluation : spReductionDerivedEvaluations l E T D coefficient red)
+    [CompactSpace T] [QuasiSeparatedSpace T]
+    (M : DerivedCategory (spIntegralSectionModules l E T))
+    (hM : constantModelBoundedConstructible (spIntegralCondensed l E) T
+      ((spIntegralInternalization l E T).obj M)) :
+    DerivedCategory.finiteTorAmplitude.{u + 1, u + 1, u + 2}
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj (spIntegralCondensed l E) T))
+      ((spIntegralInternalization l E T).obj M) ∧
+    ∀ (a b : ℤ), a ≤ b →
+      DerivedCategory.torAmplitudeIn.{u + 1, u + 1, u + 2}
+        (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+          (condensedRingObj (spIntegralCondensed l E) T)) a b
+        ((spIntegralInternalization l E T).obj M) →
+      ∀ n : ℕ,
+        Scheme.HasProEtaleTorAmplitude T
+          (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))
+          ((spDerivedCoefficientEvaluation l E T D n).obj (red.obj M)) a b := by
+  classical
+  refine ⟨sp_reduction_tower_finite_tor_amplitude l E T M hM, ?_⟩
+  intro a b hab htor n
+  let R := condensedRingObj (spIntegralCondensed l E) T
+  let F := spIntegralModuleEquivalence l E T
+  have : F.functor.Additive :=
+    InternalAbelianSheafModule.comparison_additive (Scheme.ProEt.topology T) R
+  have : F.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  obtain ⟨P, hge, hle, hP, ⟨eP⟩⟩ :=
+    (DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat.{u + 1, u + 1, u + 2} a b
+      ((spIntegralInternalization l E T).obj M)).mp htor
+  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflat, _⟩ :=
+    InternalAbelianSheafModule.internal_section_tensor_comparison
+      (Scheme.ProEt.topology T) R
+  let Q := (F.functor.mapHomologicalComplex (.up ℤ)).obj P
+  have hQ : ∀ i, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (J := Scheme.ProEt.topology T)
+      (R := spIntegralSectionRing l E T) (Q.X i) := by
+    intro i
+    exact (hflat (P.X i)).mp (hP i).2
+  have : CochainComplex.IsStrictlyLE Q b :=
+    (CochainComplex.isStrictlyLE_mapHomologicalComplex_obj_iff _ _ b).mpr hle
+  have hkQ := SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
+    (spIntegralSectionRing l E T) Q b hQ
+  let eQ : DerivedCategory.Q.obj Q ≅ M :=
+    (F.functor.mapDerivedCategoryFactors.app P).symm ≪≫
+      F.functor.mapDerivedCategory.mapIso eP ≪≫ (F.mapDerivedCategory.counitIso.app M)
+  let φ := spIntegralReductionScalar l E T coefficient n
+  let S := (D.scalar φ).model
+  have hext := SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
+    φ Q S.E S.obj_eq (fun g ↦ S.map_eq g) hkQ
+      (fun i ↦ (SheafOfModules.flat_to_cat (spIntegralSectionRing l E T) (Q.X i) (hQ i)).2)
+  let V := (S.E.mapHomologicalComplex (.up ℤ)).obj Q
+  have hV : ∀ i, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (J := Scheme.ProEt.topology T)
+      (R := Scheme.proEtaleConstantRing T
+        (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1)))
+      (V.X i) := by
+    intro i
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso _ (V.X i)).symm (hext.2 i)
+  have hbounds (i : ℤ) (hi : i < a ∨ b < i) : IsZero (V.X i) := by
+    apply S.E.map_isZero
+    apply F.functor.map_isZero
+    rcases hi with hi | hi
+    · exact P.isZero_of_isStrictlyGE a i hi
+    · exact P.isZero_of_isStrictlyLE b i hi
+  have : IsIso (S.ε.app Q) := S.computes Q hkQ
+  let eV : (spDerivedCoefficientEvaluation l E T D n).obj (red.obj M) ≅
+      DerivedCategory.Q.obj V :=
+    (evaluation n).app M ≪≫ S.T.mapIso eQ.symm ≪≫ asIso (S.ε.app Q)
+  exact (scalarExtension_tor_flat_model T _ _ a b hab).mpr ⟨V, hV, hbounds, ⟨eV⟩⟩
 end AlgebraicGeometry.ProEtale

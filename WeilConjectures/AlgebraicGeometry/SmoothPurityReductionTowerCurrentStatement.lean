@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTowerData
+import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTowerNormalized
 
 /-!
 # The reduction tower of a complex is normalized
@@ -73,6 +74,7 @@ structure SpReductionTowerConstruction (D : SpCoefficientTowersAbelian l E T) wh
   /-- Every derived evaluation is the actual derived quotient extension. -/
   evaluation : spReductionDerivedEvaluations l E T D coefficient red
 
+set_option linter.unusedVariables false in
 /-- The canonical reduction tower exists and is normalized; under Noetherianity and
 stalkwise invertibility of `l`, every bounded constructible integral complex gives a
 normalized constructible finite-Tor tower with the same Tor bounds.
@@ -115,6 +117,20 @@ theorem sp_reduction_tower_current_statement
                       spEllIdeal l E ^ (n + 1))))
                   _ _ (HasDerivedCategory.standard _) i).obj
                   ((spDerivedCoefficientEvaluation l E T D n).obj (r.red.obj M)))) := by
-  sorry
+  obtain ⟨R⟩ := sp_reduction_tower_normalized l E T D
+  refine ⟨{
+    coefficient := R.coefficient
+    coefficient_normalized := R.coefficient_normalized
+    ordinary := R.ordinary
+    additive := R.additive
+    level := R.level
+    transition := R.transition
+    red := R.red
+    counit := R.counit
+    universal := R.universal
+    computes := R.computes
+    evaluation := R.evaluation }, R.normalized, ?_⟩
+  intro _ _ M hM
+  exact R.constructible inferInstance inferInstance M hM
 
 end AlgebraicGeometry.ProEtale
