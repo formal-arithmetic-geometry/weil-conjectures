@@ -39,15 +39,15 @@ def termwiseBiproduct : HomologicalComplex C c where
   X j := by letI := hB j; exact ⨁ (fun i ↦ (A i).X j)
   d j k := by letI := hB j; letI := hB k; exact biproduct.map (fun i ↦ (A i).d j k)
   shape j k h := by
-    letI := hB j
-    letI := hB k
+    let := hB j
+    let := hB k
     apply biproduct.hom_ext
     intro i
     simp [(A i).shape j k h]
   d_comp_d' j k l _ _ := by
-    letI := hB j
-    letI := hB k
-    letI := hB l
+    let := hB j
+    let := hB k
+    let := hB l
     apply biproduct.hom_ext
     intro i
     simp only [Category.assoc, biproduct.map_π, biproduct.map_π_assoc,
@@ -59,8 +59,8 @@ Source: Stacks Project, Tag 0130.
 def termwiseBiproductπ (i : I) : termwiseBiproduct A hB ⟶ A i where
   f j := by letI := hB j; exact biproduct.π (fun i ↦ (A i).X j) i
   comm' j k _ := by
-    letI := hB j
-    letI := hB k
+    let := hB j
+    let := hB k
     exact (biproduct.map_π (fun i ↦ (A i).d j k) i).symm
 
 /-- The inclusion of one complex in the termwise biproduct.
@@ -69,8 +69,8 @@ Source: Stacks Project, Tag 0130.
 def termwiseBiproductι (i : I) : A i ⟶ termwiseBiproduct A hB where
   f j := by letI := hB j; exact biproduct.ι (fun i ↦ (A i).X j) i
   comm' j k _ := by
-    letI := hB j
-    letI := hB k
+    let := hB j
+    let := hB k
     exact biproduct.ι_map (fun i ↦ (A i).d j k) i
 
 /-- The homology inclusions and projections form a bicone.
@@ -88,12 +88,12 @@ def termwiseBiproductHomologyBicone (q : J) : Bicone (fun i ↦ (A i).homology q
     · subst i'
       have he : termwiseBiproductι A hB i ≫ termwiseBiproductπ A hB i = 𝟙 _ := by
         ext j
-        letI := hB j
+        let := hB j
         simp [termwiseBiproductι, termwiseBiproductπ]
       simp [he]
     · have he : termwiseBiproductι A hB i ≫ termwiseBiproductπ A hB i' = 0 := by
         ext j
-        letI := hB j
+        let := hB j
         simp [termwiseBiproductι, termwiseBiproductπ, h]
       simp [he, h]
 
@@ -112,7 +112,7 @@ def termwiseBiproductHomologyIsBilimit [Fintype I] (q : J) :
   rw [← Functor.map_sum]
   have he : ∑ i, termwiseBiproductπ A hB i ≫ termwiseBiproductι A hB i = 𝟙 _ := by
     ext j
-    letI := hB j
+    let := hB j
     change (Hom.fAddMonoidHom j)
       (∑ i, termwiseBiproductπ A hB i ≫ termwiseBiproductι A hB i) = 𝟙 _
     rw [map_sum]

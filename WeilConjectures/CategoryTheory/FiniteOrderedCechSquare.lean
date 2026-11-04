@@ -68,9 +68,9 @@ theorem finiteOrderedCechCoface_comp (p : ℕ) (i : Fin (p + 2))
       finiteOrderedCechCoface F U hB p
         (j.castLT (lt_of_le_of_lt h i.is_lt)) ≫
           finiteOrderedCechCoface F U hB (p + 1) i.succ := by
-  letI := hB p
-  letI := hB (p + 1)
-  letI := hB (p + 2)
+  let := hB p
+  let := hB (p + 1)
+  let := hB (p + 2)
   apply biproduct.hom_ext
   intro a
   simp only [finiteOrderedCechCoface, Category.assoc, biproduct.lift_π,
