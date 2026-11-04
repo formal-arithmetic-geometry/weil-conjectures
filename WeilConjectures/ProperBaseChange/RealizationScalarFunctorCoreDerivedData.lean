@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficient
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcDerivedScalarAdjunctionUnit
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.NativeIntegralCoefficientFlat
+public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.RationalCoefficientExtensionExact
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -80,26 +81,8 @@ theorem nonempty_realizationScalarFunctorCoreDerivedData_of_normalized
   exact ⟨⟨pbcDerivedScalarAdjunction_unit_app φ,
     pbcComplexCounit_isIso_of_preservesFiniteLimits φ⟩⟩
 
-/-- Ordinary scalar extension along an arbitrary ring-sheaf map from the completed integral
-coefficients to the rational coefficients is exact.
-
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-
-Missing input (cross-section rule). For the normalized inclusion this is proved:
-see `nonempty_realizationScalarFunctorCoreDerivedData_of_normalized`, via
-`integralRationalCoefficient_flat`. Sections of the rational coefficient sheaf are continuous
-`E`-valued functions, a localization, hence flat, over the continuous integral-valued
-functions along the inclusion. For an arbitrary `φ`, as in the statement of
-`realization_scalar_functor_core_derived_data`, one needs in addition a classification of
-ring-sheaf maps from integral-valued to `E`-valued continuous functions: for instance, that
-every such map is, locally on connected components, the inclusion twisted by an automorphism
-of `E` over `ℚ_ℓ`, which is flat. This classification is not available in the repository. -/
-theorem pbcExtend_rationalCoefficient_preservesFiniteLimits
-    (φ : pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
-      rationalCoefficientSheaf l T E) :
-    PreservesFiniteLimits (pbcExtend φ) := by
-  sorry
-
+-- The section instances are part of the statement as given, though the proof does not use them.
+set_option linter.unusedSectionVars false in
 /-- The derived scalar extension construction supplies the two core identities.
 
 Source: Stacks Tags 06YY and 0DVC, via the exact termwise extension and its
@@ -117,7 +100,7 @@ theorem realization_scalar_functor_core_derived_data
     (φ : pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
       rationalCoefficientSheaf l T E) :
     Nonempty (RealizationScalarFunctorCoreDerivedData l E T φ) := by
-  have := pbcExtend_rationalCoefficient_preservesFiniteLimits l E T φ
+  have := pbcExtend_rationalCoefficient_preservesFiniteLimits l T E φ
   exact ⟨⟨pbcDerivedScalarAdjunction_unit_app φ,
     pbcComplexCounit_isIso_of_preservesFiniteLimits φ⟩⟩
 
