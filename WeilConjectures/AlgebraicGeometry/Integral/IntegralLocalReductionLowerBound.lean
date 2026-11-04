@@ -206,6 +206,33 @@ private theorem lower_bound_of_coefficient_sequence
   simpa using hH.eq_of_src ((SheafOfModules.toSheaf _).map (𝟙 H))
     ((SheafOfModules.toSheaf _).map (0 : H ⟶ H))
 
+/-- Reducing a lower-bounded complex by a completed quotient for a principal ideal generated
+by a nonzero element of a domain loses at most one degree.
+Source: Stacks Project, sites-modules.tex, Tag 093M; sites-cohomology.tex, Tag 06YU
+(blueprint: lem-weil-pbc-integral-local-reduction-lower-bound).
+Proof: as for `integralLocalReduction_isGE`: the two-term free presentation of the
+quotient by multiplication with the nonzero generator power is realized over the
+completed coefficients, pulled back exactly, and its long exact cohomology sequence
+bounds the reduction. -/
+theorem integralLocalReduction_isGE_of_principal
+    {A : Type (u + 1)} [CommRing A] [IsDomain A] (d : AdicCoefficientDatum A)
+    (π : A) (hI : d.ideal = Ideal.span {π}) (hπ : π ≠ 0)
+    {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (L : CochainComplex (pbcModules Y
+      ((adicTowerInverseImage g).obj (pbcAdicCompletion X d))) ℤ)
+    (a : ℤ) [L.IsStrictlyGE a] (n : ℕ) :
+    (adicTowerLocalReduction d g L n).IsGE (a - 1) := by
+  obtain ⟨p, hz, hs, hp⟩ := completed_principal_resolution X d π hI hπ n
+  obtain ⟨f', hz', hs'⟩ := normalized_pullback_sequence g
+    (pbcAdicProjection X d n) _ p hp hz hs
+  exact lower_bound_of_coefficient_sequence Y _ f' _
+    (fun V ↦ by
+      change (((adicTowerInverseImage g).map
+        (pbcAdicProjection X d n)).hom.app V)
+          (1 : ((adicTowerInverseImage g).obj
+            (pbcAdicCompletion X d)).obj.obj V) = 1
+      exact map_one _) hz' hs' (DerivedCategory.Q.obj L) a
+
 /-- Reducing a lower-bounded complex by a completed DVR quotient loses at most one degree.
 Source: Stacks Project, sites-modules.tex, Tag 093M; sites-cohomology.tex, Tag 06YU;
 blueprint order 1429, proof of the local-model cohomological bound.

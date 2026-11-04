@@ -80,6 +80,21 @@ instance sequenceToStrictSystemAdditive : (sequenceToStrictSystemFunctor B).Addi
         (f := (sequenceToStrictSystemFunctor B).map f)
         (g := (sequenceToStrictSystemFunctor B).map g)).symm
 
+/-- Vertical module evaluation is exact.
+Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+instance systemSequenceEvaluationLimits : PreservesFiniteLimits (systemSequenceEvaluation B n) := by
+  change PreservesFiniteLimits
+    ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n)
+  infer_instance
+
+/-- Vertical module evaluation preserves finite colimits.
+Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+instance systemSequenceEvaluationColimits :
+    PreservesFiniteColimits (systemSequenceEvaluation B n) := by
+  change PreservesFiniteColimits
+    ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n)
+  infer_instance
+
 /-- Vertical restriction is the algebraic inverse image of the evaluation morphism of topoi.
 Source: Zheng 4.1; Stacks 00XO and 03D2
 (blueprint: lem-pur-system-evaluation-topos).
