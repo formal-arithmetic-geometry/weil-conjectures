@@ -1,0 +1,7 @@
+module
+
+import WeilConjectures.WeilSheaf.SmoothDualizingConcentration
+import WeilConjectures.WeilSheaf.SmoothPurityFreeResolution
+
+#print axioms AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration
+#print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_free
