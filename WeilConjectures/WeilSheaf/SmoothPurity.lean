@@ -54,9 +54,11 @@ As in the blueprint (`def-pur-smooth-purity-map`), `γ_f` is the composite
 
 ## Unfinished
 
-The three inputs of `γ_f` listed above are stated with `sorry`:
-- the Weil orientation needs the Frobenius equivariance of the smooth purity isomorphism
-  `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` (`thm-pur-weil-equivariance-of-purity-and-trace`). The condensed
+The inputs of `γ_f` listed above rest on statements with `sorry`:
+- the Weil orientation is lifted from a Frobenius-equivariant isomorphism
+  `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` of underlying complexes
+  (`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`,
+  `thm-pur-weil-equivariance-of-purity-and-trace`), which is stated with `sorry`. The condensed
   orientation `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is not canonical, and
   `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism` is for finite coefficients
   over `Spec k₀`;
@@ -103,6 +105,46 @@ private lemma comp_map_comp_hom_eq_of_eq {A B C : Type*} [Category* A] [Category
       (G.mapIso (H.mapIso a) ≪≫ ψ' ≪≫ u ≪≫ φ'.symm ≪≫ φ ≪≫ u.symm).hom ≫ u.hom := by
   simp [h]
 
+/-- **Frobenius equivariance of the orientation of a smooth morphism** (blueprint:
+`thm-pur-weil-equivariance-of-purity-and-trace`, the purity square at `K = ℚ̄_ℓ`): for a smooth
+separated morphism `f : X ⟶ Y` of pure relative dimension `d`, there is an isomorphism
+`Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` of the underlying complexes on the geometric fibre `X̄` which commutes
+with the Frobenius structures `Fr_X^* (-) ≅ (-)` of the two Weil complexes
+(`CategoryTheory.Endofunctor.IsoAlgebra.derivedStrIso`).
+
+Mathematically, this is the canonical orientation. Under the identification of the underlying
+complex of `Rf^! ℚ̄_ℓ` with `Rf̄^! ℚ̄_ℓ`
+(`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`), the
+Frobenius structure of `Rf^! ℚ̄_ℓ` is the exceptional datum
+`Fr_X^* Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! Fr_Y^* ℚ̄_ℓ ≅ Rf̄^! ℚ̄_ℓ` of the cartesian Frobenius square. The
+canonical orientation is compatible with base change along this square
+(`thm-pur-smooth-base-change-coherence`), so it carries the exceptional datum to the Tate datum
+(`def-pur-tate-datum`), which is the Frobenius structure of `ℚ̄_ℓ(d)[2d]`. Equivalently,
+geometric Frobenius acts on `R^{2d} f̄_! ℚ̄_ℓ` by `q^d` through the trace. This is stated with
+`sorry`, for three reasons:
+- the library has no canonical `ℚ̄_ℓ`-orientation. The condensed orientation
+  `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is a non-canonical isomorphism
+  unless its integral lift (`det-sp-purity-coefficient-change`) is known, and an arbitrary
+  isomorphism need not be equivariant when Frobenius permutes the components of `X̄`;
+- the identification of the Frobenius structure of the Weil `Rf^!` with the exceptional datum is
+  not formalized: the comparison of underlying complexes is only an existence statement;
+- the finite-coefficient form `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`
+  holds over `Spec k₀` and on the étale site, and there is no comparison of the étale `Rf^!`
+  with finite coefficients and the `ℓ`-adic Weil `Rf^!`. -/
+theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (d : ℕ)
+    [SmoothOfRelativeDimension d f] :
+    ∃ g : forget.obj ((upperShriek f).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))) ≅
+      forget.obj (((tateTwist k₀ l X d).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧),
+      (Endofunctor.IsoAlgebra.derivedStrIso _).hom.app
+          ((upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))).obj ≫
+          g.hom =
+        (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory.map g.hom ≫
+          (Endofunctor.IsoAlgebra.derivedStrIso _).hom.app (((tateTwist k₀ l X d).obj
+            (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧).obj :=
+  sorry
+
 /-- **The Weil orientation of a smooth morphism** (blueprint:
 `cor-pur-adic-and-rational-smooth-dualizing-complexes`, at the coefficient stage `ℚ̄_ℓ` with Weil
 structures): for a smooth separated morphism `f : X ⟶ Y` of pure relative dimension `d`, the
@@ -111,11 +153,10 @@ relative dualizing complex `Rf^! ℚ̄_ℓ` is isomorphic to `ℚ̄_ℓ(d)[2d]` 
 On the geometric fibre this is the smooth purity isomorphism `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]`
 (`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`). The content is that the orientation
 commutes with the Frobenius structures, as in the finite-coefficient statement over `Spec k₀`
-`AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`. A Frobenius-equivariant
-isomorphism of underlying complexes lifts to a morphism of Weil complexes
-(`CategoryTheory.Endofunctor.IsoAlgebra.exists_forget_mapDerivedCategory_map_eq`), which is then an
-isomorphism since forgetting the Weil structure reflects isomorphisms. This is stated with
-`sorry`; see the module docstring.
+`AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism`
+(`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`).
+A Frobenius-equivariant isomorphism of underlying complexes lifts to an isomorphism of Weil
+complexes (`CategoryTheory.Endofunctor.IsoAlgebra.nonempty_iso_of_forget_mapDerivedCategory_iso`).
 
 `AlgebraicGeometry.WeilComplex.nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth` is the same
 statement for an arbitrary right adjoint of `Rf₀!`, deduced from smooth purity. -/
@@ -123,8 +164,11 @@ theorem nonempty_upperShriek_obj_adicConstant_iso_of_smooth (d : ℕ)
     [SmoothOfRelativeDimension d f] :
     Nonempty ((upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
       ((tateTwist k₀ l X d).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) :=
-  sorry
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) := by
+  obtain ⟨g, hg⟩ :=
+    exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (k₀ := k₀) (l := l) f d
+  obtain ⟨e⟩ := Endofunctor.IsoAlgebra.nonempty_iso_of_forget_mapDerivedCategory_iso _ g hg
+  exact ⟨ObjectProperty.isoMk _ e⟩
 
 /-- **Weil equivariance of the purity map** (blueprint:
 `thm-pur-weil-equivariance-of-purity-and-trace`, at the coefficient stage `ℚ̄_ℓ`): let
