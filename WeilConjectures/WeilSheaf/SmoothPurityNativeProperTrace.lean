@@ -1,0 +1,132 @@
+/-
+Copyright (c) 2026 The Weil Conjectures contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import WeilConjectures.WeilSheaf.SmoothPurityNativeDirectTraceCriterion
+public import WeilConjectures.WeilSheaf.SmoothPurityDescendedProperUniversality
+public import WeilConjectures.WeilSheaf.CondensedModelBaseChangeCoherence
+
+/-!
+# Native universality of a descended smooth proper trace
+
+Given the source and target identifications with descended finite-base objects,
+the trace is constructed by full faithfulness. Its adjunct is invertible by the
+geometric universal property and the free Weil resolution.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+open scoped CategoryTheory.Obj
+
+namespace AlgebraicGeometry.WeilComplex
+
+open ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+  [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}}
+  [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsProper f]
+
+local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
+local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
+local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
+local instance : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)))
+local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)))
+local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
+
+/-- The given proper morphism, as a morphism over the finite base field. -/
+noncomputable abbrev properTraceBaseMap :
+    Over.mk (X ↘ Spec (CommRingCat.of k₀)) ⟶ Over.mk (Y ↘ Spec (CommRingCat.of k₀)) :=
+  Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))
+
+local instance : IsProper (properTraceBaseMap f).left := ‹IsProper f›
+
+variable {P : Dᵇc(X)⟦Profinite.padicAlgClRingObj l⟧}
+  {N : Dᵇc(Y)⟦Profinite.padicAlgClRingObj l⟧}
+  (γ : P ⟶ (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap f)).obj N)
+  (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
+  (eT : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj ≅
+    (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
+      (X ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj P.obj)
+  (eU : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.obj U.obj ≅
+    (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
+      (Y ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj N.obj)
+
+/-- The descended proper trace in the condensed coordinates of the native objects. -/
+noncomputable def condensedProperTrace :
+    (CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l)
+      f (comp_over f _)).rightDerivedFunctor.obj
+        ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj) ⟶
+    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.obj U.obj :=
+  (CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l)
+    f (comp_over f _)).rightDerivedFunctor.map eT.hom ≫
+  CondensedRing.geometricFiberWeilDirectTrace (Profinite.padicAlgClRingObj l)
+    (CondensedRing.upperStarWeilCompatible _ f (comp_over f _))
+    (((CondensedRing.boundedConstructibleLowerStar l (properTraceBaseMap f)).map γ ≫
+      (CondensedRing.lowerStarUpperShriekAdjunction l (properTraceBaseMap f)).counit.app N).hom) ≫
+  eU.inv
+
+/-- Lift the descended proper trace to native Weil complexes. -/
+noncomputable def nativeProperTrace :
+    (derivedLowerStar (k₀ := k₀) (l := l) f).obj T ⟶ U :=
+  ((objectProperty k₀ l Y).ι ⋙
+    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor).preimage
+    ((directTraceCondensedComparison f).hom.app T ≫ condensedProperTrace f γ T U eT eU)
+
+/-- The lifted trace has its prescribed condensed image. -/
+lemma nativeProperTrace_map :
+    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.map
+      (nativeProperTrace f γ T U eT eU).hom =
+    (directTraceCondensedComparison f).hom.app T ≫ condensedProperTrace f γ T U eT eU :=
+  ((objectProperty k₀ l Y).ι ⋙
+    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor).map_preimage _
+
+/-- The adjunct of the native descended trace is invertible for a smooth proper
+map and an invertible finite-base orientation. -/
+theorem isIso_homEquiv_nativeProperTrace [IsIso γ] (d : ℕ)
+    [SmoothOfRelativeDimension d f]
+    {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}
+    (adj : derivedLowerStar (k₀ := k₀) (l := l) f ⊣ J) :
+    IsIso (adj.homEquiv T U (nativeProperTrace f γ T U eT eU)) := by
+  apply Adjunction.isIso_homEquiv_of_fullyFaithful_trace adj
+    ((objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor)
+    ((objectProperty k₀ l Y).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor)
+    _ (directTraceCondensedComparison f) _ (condensedProperTrace f γ T U eT eU)
+    (nativeProperTrace_map f γ T U eT eU)
+  intro K
+  apply Functor.bijective_map_comp_iso_trace _ eT eU.symm
+  refine Endofunctor.IsoAlgebra.bijective_map_comp_rightDerived_of_bounded
+    (CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso
+      (Profinite.padicAlgClRingObj l) f (comp_over f _))
+    (CondensedRing.condensed_trace_preservesCoproduct (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap f (comp_over f _))) _ _
+    (boundedConstructible_condensedCarrier K).1 ?_
+  intro n
+  have hK := ObjectProperty.le_shift (P := boundedConstructible
+    (condensedRingObj (Profinite.padicAlgClRingObj l)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) n _
+      (boundedConstructible_condensedCarrier K)
+  have : SmoothOfRelativeDimension d (properTraceBaseMap f).left := ‹_›
+  exact_mod_proofs CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace l
+    (properTraceBaseMap f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ d
+    ⟨_, hK⟩
+
+end AlgebraicGeometry.WeilComplex
