@@ -132,6 +132,40 @@ def CoefficientLocalization (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [FiniteDimensional ℚ_[ℓ] E] : Prop :=
   RingLocalizationAt ℓ (coefficientMap (scalarMap (l := ℓ) (E := E)) X)
 
+/-- The ordinary regular coefficient telescope, transported to the original
+finite normed field and its actual unit ball.
+Source: the regular coefficient telescope and isometric coefficient transport.
+(blueprint: lem-weil-pbc-normalized-coefficient-localization).
+Proof: restrict the small-field telescope along the inverse integral coefficient
+isomorphism. The field comparison identifies the target module. Colimit
+preservation and the commuting coefficient square give the specified zeroth leg. -/
+theorem regular_telescope (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] :
+    ∃ c : Cocone (ellSequence X ℓ E), Nonempty (IsColimit c) ∧
+      ∃ e : c.pt ≅ restrictedField X ℓ E,
+        (c.ι.app 0 ≫ e.hom).hom = coefficientMap (scalarMap (l := ℓ) (E := E)) X := by
+  obtain ⟨m⟩ := fieldModel_nonempty ℓ E
+  obtain ⟨c, ⟨hc⟩, e, hz⟩ := integralRegularTelescope ℓ m.carrier X
+  let a := m.integerIso X
+  let b := m.fieldIso X
+  let φ := coefficientMap (integralScalarMap ℓ m.carrier) X
+  let ψ := coefficientMap (scalarMap (l := ℓ) (E := E)) X
+  let F := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) a.inv
+  let er : F.obj (Mod.regular (condensedRingObj (integralCoeff ℓ m.carrier) X)) ≅
+      regularIntegral X ℓ E :=
+    restrictedRegularIso a.inv (𝟙 _) a (by exact a.inv_hom_id) ≪≫
+      (Mod.comapId _).app _
+  let es : F.obj c.pt ≅ restrictedField X ℓ E :=
+    F.mapIso e ≪≫ (Mod.comapComp a.inv φ).symm.app _ ≪≫
+      restrictedRegularIso (a.inv ≫ φ) ψ b (by
+        rw [Category.assoc, ← m.scalar_square_scheme X, Iso.inv_hom_id_assoc])
+  apply transportRegularTelescope ℓ F c (isColimitOfPreserves F hc)
+    er es (Mod.forget _) ψ
+  change (c.ι.app 0 ≫ e.hom).hom ≫ b.hom = a.hom ≫ ψ
+  rw [hz]
+  exact (m.scalar_square_scheme X).symm
+
 private theorem ring_localization_of_telescope
     {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C]
     [MonoidalPreadditive C] (p : ℕ) {A B : C} [MonObj A] [MonObj B]
