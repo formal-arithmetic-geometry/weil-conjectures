@@ -66,9 +66,11 @@ variable (hc : UpperStarWeilCompatible (Profinite.padicAlgClRingObj l) f.left (O
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
   (γ : P ⟶ (boundedConstructibleUpperShriek l f).obj N)
 
-/-- The actual descended trace is geometrically universal for a smooth proper map. -/
-theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]
-    (d : ℕ) [SmoothOfRelativeDimension d f.left]
+/-- The actual descended trace is geometrically universal when the exceptional
+base-change component is invertible. -/
+theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
+    [IsIso ((upperShriekBaseChangeOfMap l (f := f) (f' := traceGeometricFiberOverMap f)
+      (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip).app N)]
     (K : Dᵇc(X.hom.geometricFiber)⟦Profinite.padicAlgClRingObj l⟧) :
     Function.Bijective fun φ : K.obj ⟶
         (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
@@ -93,7 +95,31 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]
     ((Functor.mapDerivedCategoryCompIso
       (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) Y.hom)
       (Endofunctor.IsoAlgebra.forget _)).app N.obj) _
-    (bijective_map_comp_properTrace_levelwise l f (traceGeometricFiberOverMap f)
-      (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip γ d K)
+    (bijective_map_comp_properTrace_levelwise_of_isIso l f (traceGeometricFiberOverMap f)
+      (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip γ K)
+
+/-- The actual descended trace is geometrically universal for a smooth proper map. -/
+theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]
+    (d : ℕ) [SmoothOfRelativeDimension d f.left]
+    (K : Dᵇc(X.hom.geometricFiber)⟦Profinite.padicAlgClRingObj l⟧) :
+    Function.Bijective fun φ : K.obj ⟶
+        (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
+          ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).
+            mapDerivedCategory.obj P.obj) ↦
+      (lowerStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap f.left (Over.w f))).rightDerivedFunctor.map φ ≫
+      (Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _
+        (lowerStarGeometricFiberMapCompFrobeniusIso (Profinite.padicAlgClRingObj l)
+          f.left (Over.w f))).inv.app
+            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).
+              mapDerivedCategory.obj P.obj) ≫
+      (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map
+        (geometricFiberWeilDirectTrace (Profinite.padicAlgClRingObj l) hc
+          (((boundedConstructibleLowerStar l f).map γ ≫
+            (lowerStarUpperShriekAdjunction l f).counit.app N).hom)) := by
+  have := isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale l
+    (f := f) (f' := traceGeometricFiberOverMap f) d
+    (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip N
+  exact bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso l f hc γ K
 
 end AlgebraicGeometry.ProEtale.CondensedRing
