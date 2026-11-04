@@ -40,7 +40,7 @@ local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 local instance : (boundedConstructible (condensedRingObj
     (Profinite.padicAlgClRingObj l) (Spec (CommRingCat.of k₀)))).IsMonoidal :=
   CondensedRing.isMonoidal_boundedConstructible l (CondensedRing.point k₀)
-local noncomputable instance : MonoidalCategory (BoundedConstructible
+noncomputable local instance : MonoidalCategory (BoundedConstructible
     (condensedRingObj (Profinite.padicAlgClRingObj l) (Spec (CommRingCat.of k₀)))) :=
   ObjectProperty.fullMonoidalSubcategory _
 local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
