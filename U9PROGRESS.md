@@ -258,3 +258,15 @@ is now precisely synthesis of tensor preserving initial objects; supplying local
 shortcuts via preservesInitialObject_of_preservesZeroMorphisms. Derived proof
 passes normalization, then reduced transparency rejects cZ's totalized tensor
 type. Confine with_reducible to modelU and tr instead of the whole application.
+
+[K5 2026-11-05 06:43 CST] ucheck submitted 06:37:23 ended with SSH rc=255 and no Lean output. Latest reachable K5 log is still 063205 (previous build), so no new proof result. Direct non-multiplexed SSH is publickey-denied; checking existing multiplexed sockets for orphan queue request before resubmitting. Current source 689eeaf79 is committed/pushed; no duplicate build submitted.
+
+[K5 2026-11-05 06:43 CST] Recovered status via existing SSH ControlPath slot0: original remote ubuild PID920840 survived local rc255 and started K5-20261105T064337.log. No resubmission needed. Normal user-configured pool had stalled; explicit existing slot0 responds promptly.
+
+2026-11-05 06:47 CST: K5-20261105T064337.log finished rc=1. Initial-
+colimit shortcuts work; next total timeout is synthesis of HasGoodTensorTensor₂₃
+(after HasGoodTensor₁₂Tensor succeeds in 1.3s). Moved tensor instances to a new
+small NativeTensorTotalInstances file; added all three coherence-instance
+shortcuts. Derived proof also needs the countable-total shortcut (otherwise
+mapCochainComplexμIso hits 20k synthesis budget), and explicit normalization of
+the htotal proof argument. Same mathematical proof, no budget increase.

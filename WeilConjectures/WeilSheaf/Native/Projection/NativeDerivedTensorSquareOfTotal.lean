@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalSquareStatement
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
 public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
@@ -34,6 +34,11 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 open ProEtale
+
+attribute [local instance] projection_hasSmallColimits projection_hasTensor
+  projection_nativeHasTotal projection_tensorLeftPreservesInitial
+  projection_tensorRightPreservesInitial projection_hasGoodTensor12
+  projection_hasGoodTensor23 projection_hasTensor4Ext
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
@@ -101,7 +106,14 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
       ← MonoidalCategory.tensorHom_def] using hmU)
     (R.mapCochainComplexμIso FP FT).symm
-    (htotal P T) mZ rfl
+    (by
+      have ht := htotal P T
+      dsimp only [TotalPullTensorSquare, PullTensorSquareWithComparison,
+        condensedRealizationPullComplexIso] at ht
+      dsimp only [complex_square, tr, NativeRestrictionDescentProof.totalFamily,
+        WZ, WU, cZ, cU, L, V, F, R, LP, LT, FP, FT]
+      simp only [Iso.symm_inv, Iso.symm_hom, Iso.app_hom] at ht ⊢
+      exact_mod_proofs ht) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp] at hmU'
   simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
     ← MonoidalCategory.tensorHom_def] at hsquare
