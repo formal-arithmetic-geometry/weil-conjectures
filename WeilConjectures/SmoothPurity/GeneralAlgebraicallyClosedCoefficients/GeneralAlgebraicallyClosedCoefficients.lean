@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.SfAlgebraicallyClosedCoefficients.SfAlgebraicallyClosedCoefficients
 public import Mathlib.CategoryTheory.Pi.Basic
 public import WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
+public import WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficients.IntrinsicAssociatorShiftSquare
 
 /-! # Common-stage coefficients over arbitrary schemes
 
@@ -212,9 +213,215 @@ private theorem stage_transport_self
   apply (StageSystem.tr_injective (S := S) (le_refl n)).mp
   exact StageSystem.tr_tr (S := S) (le_refl n) (le_refl n) f
 
+private theorem integer_commShift_ext
+    {C : Type*} [Category* C] [HasShift C ℤ]
+    {D : Type*} [Category* D] [HasShift D ℤ] {F : C ⥤ D}
+    (s t : F.CommShift ℤ)
+    (h : ∀ n : ℤ, Functor.commShiftIso F (self := s) n =
+      Functor.commShiftIso F (self := t) n) : s = t := by
+  cases s
+  cases t
+  congr
+  funext n
+  exact h n
+
+private theorem shift_ext {C : Type*} [Category C] (s t : HasShift C ℤ)
+    (hf : ∀ n, @shiftFunctor C ℤ _ _ s n = @shiftFunctor C ℤ _ _ t n)
+    (hz : HEq (@shiftFunctorZero C ℤ _ _ s) (@shiftFunctorZero C ℤ _ _ t))
+    (ha : ∀ n m, HEq (@shiftFunctorAdd C ℤ _ _ s n m)
+      (@shiftFunctorAdd C ℤ _ _ t n m)) : s = t := by
+  cases s with
+  | mk F f =>
+    cases t with
+    | mk G g =>
+      have h : F = G := Discrete.functor_ext hf
+      cases h
+      congr 1
+      apply Functor.Monoidal.ext
+      · exact congrArg Iso.inv (eq_of_heq hz)
+      · funext n m
+        exact congrArg Iso.inv (eq_of_heq (ha n.as m.as))
+      · exact congrArg Iso.hom (eq_of_heq hz)
+      · funext n m
+        exact congrArg Iso.hom (eq_of_heq (ha n.as m.as))
+
+private theorem normalized_shift_ext
+    {I : Type*} {D : Type*} [Category D]
+    {C : I → Type*} [∀ i, Category (C i)] [∀ i, HasShift (C i) ℤ]
+    (J : ∀ i, C i ⥤ D) (cover : ∀ X : D, ∃ i, ∃ K : C i, (J i).obj K = X)
+    (s t : HasShift D ℤ)
+    (hf : ∀ n, @shiftFunctor D ℤ _ _ s n = @shiftFunctor D ℤ _ _ t n)
+    (cs : ∀ i, @Functor.CommShift _ _ _ _ (J i) ℤ _ _ s)
+    (ct : ∀ i, @Functor.CommShift _ _ _ _ (J i) ℤ _ _ t)
+    (hc : ∀ i n K,
+      HEq ((Functor.commShiftIso (J i) (self := cs i) n).hom.app K)
+        ((Functor.commShiftIso (J i) (self := ct i) n).hom.app K)) : s = t := by
+  cases s with
+  | mk F f =>
+    cases t with
+    | mk G g =>
+      have h : F = G := Discrete.functor_ext hf
+      cases h
+      have he (i) (n : ℤ) :
+          Functor.commShiftIso (J i) (self := cs i) n =
+            Functor.commShiftIso (J i) (self := ct i) n := by
+        apply Iso.ext
+        apply NatTrans.ext
+        funext K
+        exact eq_of_heq (hc i n K)
+      apply shift_ext _ _ hf
+      · apply heq_of_eq
+        apply Iso.ext_inv
+        apply NatTrans.ext
+        funext X
+        obtain ⟨i, K, rfl⟩ := cover X
+        have e := congrArg (fun a ↦ a.hom.app K) (he i 0)
+        rw [(cs i).commShiftIso_zero, (ct i).commShiftIso_zero] at e
+        simp only [Functor.CommShift.isoZero_hom_app] at e
+        exact (cancel_epi ((J i).map ((shiftFunctorZero (C i) ℤ).hom.app K))).mp e
+      · intro n m
+        apply heq_of_eq
+        apply Iso.ext_inv
+        apply NatTrans.ext
+        funext X
+        obtain ⟨i, K, rfl⟩ := cover X
+        have e := congrArg (fun a ↦ a.hom.app K) (he i (n + m))
+        rw [(cs i).commShiftIso_add, (ct i).commShiftIso_add] at e
+        simp only [Functor.CommShift.isoAdd_hom_app] at e
+        simp only [he] at e
+        exact (cancel_epi _).mp ((cancel_epi _).mp ((cancel_epi _).mp e))
+
+private theorem sandwich_add {C : Type*} [Category C] [Preadditive C]
+    {W X Y Z : C} (a : W ⟶ X) (f g : X ⟶ Y) (b : Y ⟶ Z) :
+    a ≫ (f + g) ≫ b = a ≫ f ≫ b + a ≫ g ≫ b := by
+  rw [Preadditive.add_comp, Preadditive.comp_add]
+
+section PairShiftNormalization
+
+variable {I : Type w} [Preorder I] [IsDirectedOrder I]
+  {C : I → Type u} [∀ i, Category.{v} (C i)] (S : StageSystem C)
+  [∀ i, HasShift (C i) ℤ]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ (i j k : I) (h : i ≤ j) (k : j ≤ k), NatTrans.CommShift (S.assoc h k).hom ℤ]
+
+private theorem pairShift_unique
+    (s : HasShift S.PairCategory ℤ)
+    (hobj : ∀ n X, (@shiftFunctor S.PairCategory ℤ _ _ s n).obj X =
+      ⟨X.stage, (shiftFunctor (C X.stage) n).obj X.obj⟩)
+    (hmap : ∀ n (X Y : S.PairCategory) (L : I) (hX : X.stage ≤ L) (hY : Y.stage ≤ L)
+      (f : X.toStage hX ⟶ Y.toStage hY),
+      HEq ((@shiftFunctor S.PairCategory ℤ _ _ s n).map
+        (StageSystem.PairCategory.mkHom L hX hY f))
+        (StageSystem.PairCategory.mkHom
+          (X := ⟨X.stage, (shiftFunctor (C X.stage) n).obj X.obj⟩)
+          (Y := ⟨Y.stage, (shiftFunctor (C Y.stage) n).obj Y.obj⟩) L hX hY
+          (((S.T hX).commShiftIso n).hom.app X.obj ≫
+            (shiftFunctor (C L) n).map f ≫ ((S.T hY).commShiftIso n).inv.app Y.obj)))
+    (c : ∀ i, @Functor.CommShift _ _ _ _ (S.ι i) ℤ _ _ s)
+    (hc : ∀ i n K, HEq ((Functor.commShiftIso (S.ι i) (self := c i) n).hom.app K)
+      (𝟙 ((S.ι i).obj ((shiftFunctor (C i) n).obj K)))) :
+    s = StageSystem.PairCategory.hasShift S ℤ := by
+  refine normalized_shift_ext (S.ι) (fun X ↦ ⟨X.stage, X.obj, rfl⟩) s
+    (StageSystem.PairCategory.hasShift S ℤ) ?_ c
+    (fun i ↦ StageSystem.ι_commShift (S := S) (A := ℤ) i) ?_
+  · intro n
+    refine Functor.hext (hobj n) ?_
+    intro X Y f
+    induction f using StageSystem.PairCategory.hom_induction with
+    | h L hX hY f =>
+      exact hmap n X Y L hX hY f
+  · intro i n K
+    exact hc i n K
+
+private theorem pairShift_transIso
+    (s : HasShift S.PairCategory ℤ) (hs : s = StageSystem.PairCategory.hasShift S ℤ)
+    (c : ∀ i, @Functor.CommShift _ _ _ _ (S.ι i) ℤ _ _ s)
+    (hc : ∀ i n K, HEq ((Functor.commShiftIso (S.ι i) (self := c i) n).hom.app K)
+      (𝟙 ((S.ι i).obj ((shiftFunctor (C i) n).obj K))))
+    {i j : I} (h : i ≤ j) :
+    letI := s
+    letI := c
+    NatTrans.CommShift (S.transIso h).hom ℤ := by
+  subst s
+  have hci : c = (fun i ↦ StageSystem.ι_commShift (S := S) (A := ℤ) i) := by
+    funext i
+    apply integer_commShift_ext
+    intro n
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    exact eq_of_heq (hc i n K)
+  subst c
+  exact StageSystem.transIso_commShift (S := S) (A := ℤ) h
+
+variable [∀ i, Preadditive (C i)]
+  [∀ i (n : ℤ), (shiftFunctor (C i) n).Additive] [Preadditive S.PairCategory]
+
+private theorem pairShift_additive
+    (hadd : ∀ {X Y : S.PairCategory} {L : I} (hX : X.stage ≤ L) (hY : Y.stage ≤ L)
+      (f g : X.toStage hX ⟶ Y.toStage hY),
+      StageSystem.PairCategory.mkHom L hX hY f + StageSystem.PairCategory.mkHom L hX hY g =
+        StageSystem.PairCategory.mkHom L hX hY (f + g)) (n : ℤ) :
+    (shiftFunctor S.PairCategory n).Additive := by
+  constructor
+  intro X Y f g
+  obtain ⟨L, -, hX, hY, _, _, u, v, rfl, rfl⟩ :=
+    StageSystem.PairCategory.exists_common_stage f g X.stage
+  rw [hadd, StageSystem.PairCategory.shiftFunctor_map_mkHom,
+    StageSystem.PairCategory.shiftFunctor_map_mkHom,
+    StageSystem.PairCategory.shiftFunctor_map_mkHom]
+  refine Eq.trans ?_ (hadd
+    (X := ⟨X.stage, (shiftFunctor (C X.stage) n).obj X.obj⟩)
+    (Y := ⟨Y.stage, (shiftFunctor (C Y.stage) n).obj Y.obj⟩) hX hY
+    (((S.T hX).commShiftIso n).hom.app X.obj ≫
+      (shiftFunctor (C L) n).map u ≫ ((S.T hY).commShiftIso n).inv.app Y.obj)
+    (((S.T hX).commShiftIso n).hom.app X.obj ≫
+      (shiftFunctor (C L) n).map v ≫ ((S.T hY).commShiftIso n).inv.app Y.obj)).symm
+  exact congrArg (fun f ↦ StageSystem.PairCategory.mkHom
+    (X := ⟨X.stage, (shiftFunctor (C X.stage) n).obj X.obj⟩)
+    (Y := ⟨Y.stage, (shiftFunctor (C Y.stage) n).obj Y.obj⟩) L hX hY f)
+    (by rw [Functor.map_add]; exact sandwich_add _ _ _ _)
+
+end PairShiftNormalization
+
+private theorem compIso_commShift_cast
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ]
+    (F F' : C ⥤ D) (G G' : D ⥤ E) (H H' : C ⥤ E)
+    (hF : F = F') (hG : G = G') (hH : H = H')
+    (cF : F'.CommShift ℤ) (cG : G'.CommShift ℤ) (cH : H'.CommShift ℤ)
+    (a : F ⋙ G ≅ H) (a' : F' ⋙ G' ≅ H') (ha : HEq a a')
+    (hc : letI := cF; letI := cG; letI := cH; NatTrans.CommShift a'.hom ℤ) :
+    letI := cast (congrArg (fun J : C ⥤ D ↦ J.CommShift ℤ) hF.symm) cF
+    letI := cast (congrArg (fun J : D ⥤ E ↦ J.CommShift ℤ) hG.symm) cG
+    letI := cast (congrArg (fun J : C ⥤ E ↦ J.CommShift ℤ) hH.symm) cH
+    NatTrans.CommShift a.hom ℤ := by
+  subst F'
+  subst G'
+  subst H'
+  obtain rfl := eq_of_heq ha
+  exact hc
+
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
+
+private theorem stageAssociator_commShift (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
+    NatTrans.CommShift ((stageSystem l Ω Y).assoc h k).hom ℤ := by
+  exact compIso_commShift_cast
+    (stageTransition l Ω Y E L h) (transition l Ω Y E L h)
+    (stageTransition l Ω Y L M k) (transition l Ω Y L M k)
+    (stageTransition l Ω Y E M (h.trans k)) (transition l Ω Y E M (h.trans k))
+    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E L h)
+    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 L M k)
+    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E M (h.trans k))
+    (transitionCommShift l Ω Y E L h) (transitionCommShift l Ω Y L M k)
+    (transitionCommShift l Ω Y E M (h.trans k))
+    ((stageSystem l Ω Y).assoc h k) (associator l Ω Y E L M h k)
+    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.2 E L M h k)
+    (associator_commShift l Ω Y E L M h k)
+
+attribute [local instance] stageAssociator_commShift
 
 attribute [local irreducible] stageCategory transition scalarAssociator associator
 
@@ -511,6 +718,7 @@ noncomputable def shiftRepresentative (n : ℤ) (A B : Pair l Ω Y)
     (shiftFunctor (Stage l Ω Y L) n).map f ≫
     ((stageTransition l Ω Y B.stage L hB).commShiftIso n).inv.app B.obj
 
+set_option linter.unusedVariables false in
 /-- The induced shift is specified on every object, representative and stage inclusion.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
 Proof: shift each finite representative using shiftRepresentative. Exact scalar
@@ -541,7 +749,22 @@ theorem shift_existsUnique :
                 (𝟙 ((inclusion E : Stage l Ω Y E ⥤ _).obj
                   ((shiftFunctor (Stage l Ω Y E) n).obj K)))) (commInst := c))
         (shiftInst := s) := by
-  sorry
+  let S := stageSystem l Ω Y
+  let s := StageSystem.PairCategory.hasShift S ℤ
+  let := s
+  refine ⟨s, ⟨?_, ?_, ?_, ?_⟩, ?_⟩
+  · intro n
+    exact pairShift_additive S (fun hA hB f g ↦ mkHom_add hA hB f g) n
+  · intro n A
+    rfl
+  · intro n A B L hA hB f
+    exact HEq.rfl
+  · refine ⟨fun E ↦ StageSystem.ι_commShift (S := S) (A := ℤ) E, ?_⟩
+    intro n E K
+    exact HEq.rfl
+  · intro s' hs'
+    obtain ⟨c, hc⟩ := hs'.2.2.2
+    exact pairShift_unique S s' hs'.2.1 hs'.2.2.1 c (fun E n K ↦ hc n E K)
 
 /-- The stagewise shift with the representative formula of shift_existsUnique.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -588,7 +811,12 @@ theorem transitionIso_commShift
     (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) :
     NatTrans.CommShift ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).transIso h).hom ℤ
         := by
-  sorry
+  have hs := (shift_existsUnique (l := l) (Ω := Ω) (Y := Y)).exists.choose_spec
+  exact pairShift_transIso (S := stageSystem l Ω Y)
+    (hasShift (l := l) (Ω := Ω) (Y := Y))
+    (pairShift_unique (stageSystem l Ω Y) _ hs.2.1 hs.2.2.1
+      (fun E ↦ inclusionCommShift E) (fun E n K ↦ hs.2.2.2.choose_spec n E K))
+    (fun E ↦ inclusionCommShift E) (fun E n K ↦ hs.2.2.2.choose_spec n E K) h
 
 /-- The recorded common-stage distinguished-triangle criterion.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
