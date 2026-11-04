@@ -30,7 +30,6 @@ with the dual `N^∨` with Frobenius rescaled by `c`
 
 - `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual_mul`: the
   perfect pairings with `F^∨`, on which the Frobenius acts by `q^d`.
-- `FrobeniusModule.Equiv.dual`: the dual of an isomorphism of Frobenius modules.
 - `FrobeniusModule.Equiv.ofIsPerfPair`: a perfect pairing multiplying the Frobenius by `c`
   identifies `M` with `N^∨` rescaled by `c`.
 -/
@@ -42,21 +41,6 @@ universe u v
 namespace FrobeniusModule
 
 variable {K : Type v} [Field K]
-
-/-- The dual `e^∨ : M^∨ ≅ N^∨`, `f ↦ f ∘ e⁻¹`, of an isomorphism of Frobenius modules
-`e : M ≅ N`. -/
-@[simps toLinearEquiv]
-noncomputable def Equiv.dual {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
-    M.dual.Equiv N.dual where
-  toLinearEquiv := e.toLinearEquiv.symm.dualMap
-  map_frobenius f := by
-    refine LinearMap.ext fun y ↦ ?_
-    have h := e.symm.map_frobenius (N.frobenius.symm y)
-    rw [LinearEquiv.apply_symm_apply, Equiv.symm_toLinearEquiv] at h
-    erw [LinearEquiv.dualMap_apply]
-    rw [dual_frobenius_apply, LinearMap.comp_apply, LinearEquiv.coe_coe, h,
-      LinearEquiv.symm_apply_apply]
-    rfl
 
 /-- A perfect pairing `P : M × N ⟶ K` of Frobenius modules with `P (F x) (F y) = c * P x y`,
 `c ≠ 0`, identifies `M` with the dual `N^∨` with Frobenius rescaled by `c`: the value line is
