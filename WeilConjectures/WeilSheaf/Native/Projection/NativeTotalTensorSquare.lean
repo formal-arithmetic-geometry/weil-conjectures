@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorSquare
-public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationTotalTensor
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalSquareStatement
 public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoherence
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
@@ -28,48 +28,14 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Y.Over (Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- The termwise pullback square in the orientation of the native tensor square. -/
-abbrev condensedRealizationPullComplexIso :=
-  Functor.mapHomologicalComplexCompIso (condensedRealizationUpperStarIso k₀ l g).symm
-      (.up ℤ) ≪≫
-    (Functor.mapHomologicalComplexCompIso
-      (Iso.refl (condensedRealization k₀ l Y ⋙
-        CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-          (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))))
-        (.up ℤ)).symm
-
-@[simp]
-lemma condensedRealizationPullComplexIso_hom_app_f
-    (P : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (n : ℤ) :
-    ((condensedRealizationPullComplexIso k₀ l g).hom.app P).f n =
-      (condensedRealizationUpperStarIso k₀ l g).inv.app (P.X n) := by
-  simp [condensedRealizationPullComplexIso,
-    Functor.mapHomologicalComplexCompIso_hom_app_f,
-    Functor.mapHomologicalComplexCompIso_inv_app_f]
-
 /-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
 lemma condensedRealizationTotalTensor_pull_square
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) :
-    let L := upperStar k₀ l g
-    let V := condensedRealization k₀ l Z
-    let F := condensedRealization k₀ l Y
-    let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    let LP := (L.mapHomologicalComplex (.up ℤ)).obj P
-    let LT := (L.mapHomologicalComplex (.up ℤ)).obj T
-    let FP := (F.mapHomologicalComplex (.up ℤ)).obj P
-    let FT := (F.mapHomologicalComplex (.up ℤ)).obj T
-    (V.mapHomologicalComplex (.up ℤ)).map ((nativePullTotalTensor k₀ l g).hom.app (P, T)) ≫
-      (condensedRealizationTotalTensorIso k₀ l Z).hom.app (LP, LT) ≫
-      ((condensedRealizationPullComplexIso k₀ l g).hom.app P ⊗ₘ
-        (condensedRealizationPullComplexIso k₀ l g).hom.app T) =
-    (condensedRealizationPullComplexIso k₀ l g).hom.app
-        (((nativeTensorTotal k₀ l Y).obj P).obj T) ≫
-      (R.mapHomologicalComplex (.up ℤ)).map
-        ((condensedRealizationTotalTensorIso k₀ l Y).hom.app (P, T)) ≫
-      (R.mapCochainComplexμIso FP FT).inv := by
+    TotalPullTensorSquare k₀ l g P T := by
   have : (upperStar k₀ l g).IsLeftAdjoint := (upperStarLowerStarAdjunction k₀ l g).isLeftAdjoint
-  dsimp only
+  unfold TotalPullTensorSquare PullTensorSquare
+  simp only [Iso.symm_inv]
+  rw [Functor.mapCochainComplex_δ, ← Functor.mapCochainComplexμIso_inv]
   ext n : 1
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     condensedRealizationPullComplexIso_hom_app_f]

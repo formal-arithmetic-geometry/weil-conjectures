@@ -118,7 +118,7 @@ lemma projection_upperStar_tensor_hom (M N : ProEtaleWeilSheaf k₀ l Y) :
       (adicUpperStarCompCondensedModIso l
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).inv.app
           N.carrier := by
-  exact_mod_proofs congrArg₂ (fun p q ↦ p ⊗ₘ q)
+  cast_proofs congrArg₂ (fun p q ↦ p ⊗ₘ q)
     (condensedRealizationUpperStarIso_hom_app_eq k₀ l g M)
     (condensedRealizationUpperStarIso_hom_app_eq k₀ l g N)
 
@@ -162,14 +162,20 @@ lemma condensedRealizationSheafTensor_inverse_square (M N : ProEtaleWeilSheaf k�
       (b.inv.app M.carrier ⊗ₘ b.inv.app N.carrier)
       (condensedRelativeTensorIso l _ ((adicUpperStar l f).obj M.carrier)
         ((adicUpperStar l f).obj N.carrier)).inv ?_ ?_ ?_ ?_ ?_ ?_ ?_
-    · exact G.congr_map (condensedRealizationSheafTensorIso_inv_eq k₀ l Y M N)
+    all_goals dsimp only [E, G, b, f]
+    · have h := G.congr_map (condensedRealizationSheafTensorIso_inv_eq k₀ l Y M N)
+      dsimp only [G, f] at h
+      cast_proofs h
     · cast_proofs projection_upperStar_tensor_carrier k₀ l g M N
     · cast_proofs projection_realization_pull_tensor k₀ l g M N
     · rfl
     · cast_proofs projection_upperStar_tensor_hom k₀ l g M N
     · cast_proofs projection_realization_pulled_tensor k₀ l g M N
-    · cast_proofs adicUpperStar_condensedRelativeTensor_square l f M.carrier N.carrier
+    · have h := adicUpperStar_condensedRelativeTensor_square l f M.carrier N.carrier
+      dsimp only [f] at h
+      cast_proofs h
   dsimp only [SheafPullTensorInverseSquare]
+  dsimp only [G, f] at hsquare
   exact_mod_proofs hsquare
 
 /-- The native pullback tensor comparison and the condensed realization tensor comparison

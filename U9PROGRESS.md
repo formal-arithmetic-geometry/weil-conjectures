@@ -135,3 +135,12 @@ substitution is GREEN (1.2s), but its native application still times out in kern
 checking (~95s). Split four component equalities into independently checked
 lemmas to identify the exact conversion, and separated the final generic-to-native
 predicate cast via exact_mod_proofs.
+
+2026-11-05 04:38 CST: K5-20261105T043542.log rc=1. Three separated
+component lemmas are GREEN (including realization of the native pull tensor in
+0.7s). The tensor-of-comparisons lemma exposed an exact_mod_proofs structural
+mismatch between native and adic functor-object presentations; use cast_proofs.
+Also exposed local f/G/b/E abbreviations before casting, because opaque-to-the-
+traversal local lets prevented the tactic from seeing generated comp_over proof
+differences. Added an independent generic total-square statement module and an
+abstract termwise compositor lemma so their validation can proceed separately.
