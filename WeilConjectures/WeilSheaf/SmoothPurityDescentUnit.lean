@@ -135,14 +135,16 @@ local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
 /-- Native descent of the finite-base tensor unit is the constant Weil complex. -/
 noncomputable def finiteBaseNativeDescentUnitIso :
-    letI := CondensedRing.isMonoidal_boundedConstructible l
-      (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+    letI : (boundedConstructible
+        (condensedRingObj (Profinite.padicAlgClRingObj l) X)).IsMonoidal :=
+      CondensedRing.isMonoidal_boundedConstructible l (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
     letI := ObjectProperty.fullMonoidalSubcategory
       (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l) X))
     (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj (𝟙_ _) ≅
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X) :=
-  letI := CondensedRing.isMonoidal_boundedConstructible l
-    (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+  letI : (boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj l) X)).IsMonoidal :=
+    CondensedRing.isMonoidal_boundedConstructible l (Over.mk (X ↘ Spec (CommRingCat.of k₀)))
   letI := ObjectProperty.fullMonoidalSubcategory
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l) X))
   ObjectProperty.isoMk _
@@ -150,7 +152,9 @@ noncomputable def finiteBaseNativeDescentUnitIso :
       ((finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := X)).app (𝟙_ _) ≪≫
         (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
           (X ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.mapIso
-            (DerivedCategory.singleFunctorObjUnitIso _).symm ≪≫
+            ((Functor.Monoidal.εIso (boundedConstructible
+              (condensedRingObj (Profinite.padicAlgClRingObj l) X)).ι).symm ≪≫
+              (DerivedCategory.singleFunctorObjUnitIso _).symm) ≪≫
         (derivedEquivCondensedSingleIso (WeilSheaf.adicConstant k₀ l X) (𝟙_ _)
           (ProEtaleWeilSheaf.toCondensedAdicConstantDescentIso k₀ l X)).symm))
 

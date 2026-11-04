@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 public import WeilConjectures.WeilSheaf.SmoothPurityWhiskering
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExact
 
 /-!
 # The native closed internal Hom from a sheaf

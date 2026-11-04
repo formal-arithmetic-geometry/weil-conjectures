@@ -42,6 +42,25 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+/-- Restriction to full subcategories preserves the inverse exchange component. -/
+lemma NearbyCyclesModel.liftExchange_inv_app_hom
+    {DY DX DY' DX' : Type*} [Category DY] [Category DX] [Category DY'] [Category DX']
+    {PY : ObjectProperty DY} {PX : ObjectProperty DX}
+    {PY' : ObjectProperty DY'} {PX' : ObjectProperty DX'}
+    {Rf : DX ⥤ DY} {Rf' : DX' ⥤ DY'} {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
+    (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf') [IsIso χ]
+    (hR : ∀ Z : PX.FullSubcategory, PY ((PX.ι ⋙ Rf).obj Z))
+    (hR' : ∀ Z : PX'.FullSubcategory, PY' ((PX'.ι ⋙ Rf').obj Z))
+    (hN : ∀ Z : PY.FullSubcategory, PY' ((PY.ι ⋙ ΨN).obj Z))
+    (hM : ∀ Z : PX.FullSubcategory, PX' ((PX.ι ⋙ ΨM).obj Z))
+    [IsIso (NearbyCyclesModel.liftExchange χ hR hR' hN hM)] (Z : PX.FullSubcategory) :
+    ((asIso (NearbyCyclesModel.liftExchange χ hR hR' hN hM)).inv.app Z).hom =
+      (asIso χ).inv.app Z.obj := by
+  apply Functor.map_iso_inv_eq_of_map_hom_eq PY'.ι
+    ((asIso (NearbyCyclesModel.liftExchange χ hR hR' hN hM)).app Z)
+    ((asIso χ).app Z.obj)
+  exact NearbyCyclesModel.liftExchange_app_hom χ hR hR' hN hM Z
+
 variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   [Fact (ringChar k₁).Prime] [Fact (ringChar k₁ ≠ l)]
   [Fact (ringChar k₂).Prime] [Fact (ringChar k₂ ≠ l)]
@@ -64,14 +83,8 @@ lemma boundedConstructibleBaseChangeOfMap_inv_app_hom
       (asIso (baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq)).inv.app P.obj := by
   have := isIso_boundedConstructibleBaseChangeOfMap l sq
   have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj l) sq
-  apply Functor.map_iso_inv_eq_of_map_hom_eq (boundedConstructible _).ι
-    ((asIso (boundedConstructibleBaseChangeOfMap l sq.toCommSq)).app P)
-    ((asIso (baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq)).app P.obj)
-  change ((boundedConstructibleBaseChangeOfMap l sq.toCommSq).app P).hom = _
-  dsimp only [Iso.app_hom, asIso_hom]
-  simp only [boundedConstructibleBaseChangeOfMap, NearbyCyclesModel.liftExchange_app_hom]
-  cast_proofs (Eq.refl
-    ((baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq).app P.obj))
+  dsimp only [boundedConstructibleBaseChangeOfMap]
+  exact NearbyCyclesModel.liftExchange_inv_app_hom _ _ _ _ _ P
 
 variable {P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
@@ -99,6 +112,7 @@ lemma baseChangedProperTrace_levelwise :
   simp only [baseChangedProperTrace, ObjectProperty.FullSubcategory.comp_hom,
     ObjectProperty.FullSubcategory.id_hom, boundedConstructibleUpperStarOfMap_map,
     ObjectProperty.homMk_hom, Category.comp_id, Category.id_comp, Category.assoc, hbc]
+  erw [Category.id_comp]
 
 /-- The base-changed proper trace is universal in the exact-pullback coordinates
 when its exceptional base-change component is invertible. -/

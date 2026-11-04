@@ -170,3 +170,9 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - DescentUnit's underived/Frobenius proofs passed; its final native unit needs the explicit full-subcategory monoidal structure because an upstream import disables the corresponding structural instance. Bound that structure in both type and body, and supplied the same explicit structure at the point in downstream dualizing helpers.
 - ProperTraceCoordinates still hit a 66s kernel timeout with whole-iso equality. Replaced that proof with an abstract map-inverse lemma using equality of forward maps and cast_proofs; added the missing id_comp normalization. No heartbeat raises.
 - Fixes pushed through a0b9ceeae. Submitted one new ucheck SmoothPurityTransportAudit at 06:09; original and C4 helper chains remain unfinished, integration patch remains unapplied, no DONE.
+
+## 2026-11-05 06:21 +0800 — two more helpers green; four entry repairs
+- Audit at 781c07da1d finished rc=1, log /home/ubuntu/u9/logs/K4-20261105T061458.log. Newly GREEN: CompactConstant (6.1s), Whiskering (1.0s). DescentSingle's shifted-sheaf comparison and DescentUnit's underived/Frobenius comparison also elaborate; the four modules still fail at subsequent interfaces.
+- ProperTraceCoordinates still spent 64s in concrete kernel reduction. Moved the inverse-component identity into an abstract liftExchange lemma so its application can use the actual restricted exchange data directly. Added the remaining identity normalization.
+- DescentSingle now specifies X explicitly to avoid inference through Over.mk.left. DescentUnit binds a typed IsMonoidal instance and uses the monoidal inclusion's unit iso. NativeHomSingle explicitly imports the existing right-derived-functor naturality lemma.
+- Re-read the brief and skill. No new LEAD instruction, no heartbeat raises, and no local Lean/lake invocation. Submitting the next audit; C4 integration remains prepared but unapplied, and no DONE is claimed.
