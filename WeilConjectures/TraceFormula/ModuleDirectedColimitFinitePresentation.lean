@@ -22,6 +22,9 @@ Source: Stacks Project, Algebra, Tag 058G, proof of Lazard's theorem, paragraph 
 
 @[expose] public section
 
+-- This proof-only module intentionally exports no declarations.
+set_option linter.privateModule false
+
 universe u v
 
 open CategoryTheory CategoryTheory.Limits
