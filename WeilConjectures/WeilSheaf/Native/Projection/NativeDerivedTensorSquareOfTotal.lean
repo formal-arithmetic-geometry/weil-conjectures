@@ -55,8 +55,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
 
--- At 200000 heartbeats all 26 model-diagram arguments elaborate (11s), but
--- destructuring the result exhausts the cumulative budget before the final calculation.
+-- Profiling at 200000 heartbeats reaches a deferred model-square proof (16s);
+-- reserve a larger cumulative budget for the native comparison assembly.
 set_option maxHeartbeats 400000 in
 include htotal in
 /-- On K-flat representatives, the native tensor square is the localization of the
@@ -106,7 +106,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       dsimp only [L, V, LP, LT, WZ, WU, tr] at hr ⊢
       cast_proofs hr) cZ cU
     (by
-      dsimp only [V, cU, WU, LP, LT, L] at hmU ⊢
+      dsimp only [V, cU, WU, LP, LT, L, derivedCondensedRealization,
+        Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
+        curriedTensor_obj_obj] at hmU ⊢
       simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
         Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
         ← MonoidalCategory.tensorHom_def, Iso.app_hom] at hmU ⊢
@@ -119,6 +121,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       dsimp only [complex_square, tr, NativeRestrictionDescentProof.totalFamily,
         WZ, WU, cZ, cU, L, V, F, R, LP, LT, FP, FT]
       simp only [Iso.symm_inv, Iso.symm_hom, Iso.app_hom] at ht ⊢
+      dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
+        curriedTensor_obj_obj] at ht ⊢
       exact_mod_proofs ht) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp] at hmU'
   simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
@@ -131,6 +135,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     dsimp only [mZ, cZ, WZ, F, FP, FT, Iso.trans_hom, Functor.mapIso_hom]
     simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
       ← MonoidalCategory.tensorHom_def, Iso.app_hom] at hh ⊢
+    dsimp only [derivedCondensedRealization, Functor.comp_obj, Functor.prod_obj,
+      Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hh ⊢
     cast_proofs hh
   have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))

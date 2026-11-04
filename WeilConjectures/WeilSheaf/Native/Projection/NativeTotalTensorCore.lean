@@ -103,7 +103,7 @@ lemma projection_totalTensorSquare_of_sheaf
     (L ⋙ condensedRealization k₀ l Z)
     (F := (nativeTensorBifunctor k₀ l Y).flip)
   intro p q hpq
-  dsimp only [Functor.comp_map]
+  simp only [Functor.comp_map L (condensedRealization k₀ l Z)]
   have hpull := hmu P T p q n hpq
   have hpull' := (condensedRealization k₀ l Z).congr_map hpull
   dsimp only [nativeOpenTensorInsertion] at hpull'
@@ -124,10 +124,13 @@ lemma projection_totalTensorSquare_of_sheaf
     rw [hcomp P p, hcomp T q]
   have hs := hsheaf (P.X p) (T.X q)
   dsimp only [PullTensorSquare] at hs
+  dsimp only [Functor.mapHomologicalComplex_obj_X]
   rw [reassoc_of% hs]
   have hn := a.inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)
-  dsimp only [Functor.comp_map, nativeOpenTensorInsertion] at hn
+  dsimp only [nativeOpenTensorInsertion] at hn
+  simp only [Functor.comp_map L (condensedRealization k₀ l Z),
+    Functor.comp_map (condensedRealization k₀ l Y) R] at hn
   conv_rhs => rw [reassoc_of% hn]
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnY

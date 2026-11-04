@@ -292,3 +292,11 @@ the deferred hmU subproof inside `obtain`, NOT the existential eliminator itself
 `simpa` unfolds native tensors through LP/LT aliases and proof arguments. Expand
 only aliases, normalize the curried tensor notation, then cast proofs. Apply the
 same normalization to hmZ. No further heartbeat increase.
+
+2026-11-05 07:15 CST: K5-20261105T070817.log rc=1. Targeted hcomp rewrite
+passes; total now fails matching the sheaf square because blanket comp_map
+unfolded condensedRealization and left an implicit-transparency-invalid Aut/Iso
+expression. Pin the outer composition functors in comp_map, normalize complex
+X-components, and likewise pin naturality's composite maps. Derived hmU's cast
+fails comparing (F ⋙ G).obj with G.obj(F.obj): normalize comp_obj/prod_obj and
+derivedCondensedRealization before casting, including hmZ and htotal interfaces.
