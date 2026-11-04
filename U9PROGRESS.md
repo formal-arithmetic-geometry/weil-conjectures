@@ -57,3 +57,29 @@
   reason beside it. No theorem statement, proof body, global option, or trust
   setting changes. This is the only Lean repair beyond the inherited candidate.
 - Next: recheck the leaf and axiom audit, then repeat all required module targets.
+
+## 2026-11-05: leaf and axiom audit green
+
+- Leaf plus temporary audit passed at `2e8886e9a6`: rc=0, leaf 37 seconds, audit
+  2.6 seconds. Log: `/home/ubuntu/u9/logs/K7-20261105T031345.log`.
+- All four audited declarations use exactly `propext`, `Classical.choice`, and
+  `Quot.sound`: the assigned leaf, canonical ordinary symmetry, canonical ordinary
+  coherence, and native Frobenius coherence. No `sorryAx`, other custom axiom, or
+  dependence on the other remaining sorry leaves occurs in these proofs.
+- Moved the measured heartbeat explanation immediately after `set_option ... in`
+  to satisfy the maxHeartbeats style linter; the setting and proof are unchanged.
+- Removed the temporary audit module after retaining its successful remote log.
+- Final validation will rebuild all 13 retained changed Lean modules. Waiting for
+  the earlier full build to finish independent jobs avoids duplicating that work.
+
+## 2026-11-05: build-lock migration collision
+
+- The old full build continued after the server wrapper was updated from basename
+  lock names to full-path-encoded names. Its old lock did not exclude newer jobs.
+- Evidence: its recorded revision was `737a78d780`, but the still-running build's
+  `slopci-w3/src` checkout had become K5 commit `7a645eda921`.
+- Stopped only the stale K7 systemd unit `slopci-w-u9-K7-1793818980.service`.
+  The old full-build log is diagnostic evidence only, not final validation.
+- The completed leaf/audit check remains recorded separately. Final validation
+  will use the updated wrapper and verify that the checkout stays on its recorded
+  K7 revision. Reported the lock migration collision in shared NOTES.md.
