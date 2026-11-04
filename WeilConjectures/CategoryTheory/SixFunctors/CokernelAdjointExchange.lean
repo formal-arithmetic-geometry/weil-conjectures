@@ -158,6 +158,63 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
   (hc' : ∀ X : A', IsColimit (CokernelCofork.ofπ (a'.unit.app X) (hz' X)))
   (F : A ⥤ A') [F.Additive] [PreservesFiniteColimits F] (G : B ⥤ B')
   (ρ : R ⋙ F ≅ G ⋙ R')
+
+include n hz hc hc' in
+private theorem ordinary_exchange :
+    ∃ e : E ⋙ G ≅ F ⋙ E', ∀ X : A,
+      F.map (a.unit.app X) ≫ ρ.hom.app (E.obj X) ≫ R'.map (e.hom.app X) =
+        a'.unit.app (F.obj X) := by
+  classical
+  let u (X : A) := F.map (a.unit.app X) ≫ ρ.hom.app (E.obj X)
+  let b (X : A) := (a'.homEquiv (F.obj X) (G.obj (E.obj X))).symm (u X)
+  have hb (X : A) : a'.unit.app (F.obj X) ≫ R'.map (b X) = u X := by
+    exact (Adjunction.homEquiv_unit a' _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
+  have hzero (X : A) : (n • 𝟙 (F.obj X)) ≫ F.map (a.unit.app X) = 0 := by
+    rw [← F.map_id, ← F.map_nsmul, ← F.map_comp, hz, F.map_zero]
+  have hzero' (X : A) : (n • 𝟙 (F.obj X)) ≫ u X = 0 := by
+    dsimp only [u]
+    rw [← Category.assoc, hzero, zero_comp]
+  have hU (X : A) : IsColimit (CokernelCofork.ofπ (u X) (hzero' X)) := by
+    have hFm : IsColimit (CokernelCofork.ofπ (F.map (a.unit.app X)) (hzero X)) := by
+      let h := isColimitCoforkMapOfIsColimit' F (hz X) (hc X)
+      exact CokernelCofork.isColimitOfIsColimitOfIff' h (n • 𝟙 (F.obj X)) (by
+        intro Z k
+        simp only [F.map_nsmul, F.map_id])
+    exact IsColimit.ofIsoColimit hFm (Cofork.ext (ρ.app (E.obj X)) rfl)
+  have hiso (X : A) : IsIso (b X) := by
+    have hepi : Epi (a'.unit.app (F.obj X)) := Cofork.IsColimit.epi (hc' (F.obj X))
+    let e := (hc' (F.obj X)).coconePointUniqueUpToIso (hU X)
+    have he : a'.unit.app (F.obj X) ≫ e.hom = u X :=
+      (hc' (F.obj X)).comp_coconePointUniqueUpToIso_hom (hU X) WalkingParallelPair.one
+    have heq : R'.map (b X) = e.hom := (cancel_epi (a'.unit.app (F.obj X))).1
+      ((hb X).trans he.symm)
+    have : IsIso (R'.map (b X)) := by rw [heq]; infer_instance
+    exact isIso_of_reflects_iso (b X) R'
+  let β : F ⋙ E' ⟶ E ⋙ G :=
+    { app := b
+      naturality := by
+        intro X Y f
+        apply (a'.homEquiv (F.obj X) (G.obj (E.obj Y))).injective
+        rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+        simp only [R'.map_comp, ← Category.assoc]
+        erw [← a'.unit.naturality (F.map f), Category.assoc, hb, hb]
+        dsimp only [u]
+        simp only [Category.assoc, CategoryTheory.Functor.id_map]
+        rw [← F.map_comp_assoc]
+        erw [a.unit.naturality f, F.map_comp]
+        simp only [Category.assoc]
+        exact congrArg (fun z ↦ F.map (a.unit.app X) ≫ z)
+          (ρ.hom.naturality (E.map f)) }
+  let e := (NatIso.ofComponents (fun X ↦ asIso (β.app X))
+    (fun f ↦ β.naturality f)).symm
+  refine ⟨e, ?_⟩
+  intro X
+  rw [← Category.assoc]
+  change u X ≫ R'.map (inv (b X)) = _
+  rw [← hb, Category.assoc, ← R'.map_comp, IsIso.hom_inv_id, R'.map_id]
+  erw [Category.comp_id]
+
+
 end
 
 section

@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.RingedSiteDg.RingedSiteDgModules
+public import WeilConjectures.CategoryTheory.IntegerShiftFromOne
 
 /-! Derived restriction descends from the literal dg restriction and is exact.
 
@@ -69,23 +70,57 @@ def derivedRestrictionIso
     (fun _ _ f hf ↦ Localization.inverts (Q A) (quasiIsomorphisms A) _
       (restriction_preserves_quasiisomorphisms φ f hf)) (Q B)
 
+/-- The commutation of the descended restriction with the shift by one.  On `Q B M` it is
+`F (Q S) ≅ Q A (res S) ≅ (Q A (res M))⟦1⟧` for a chosen shift comparison `S` of `M`, using
+`DerivedStructure.shiftIso` over `B` and over `A` (the restricted comparison keeps the same
+underlying isomorphism); naturality comes from `DerivedStructure.shift_natural`.
+Source: Stacks sdga, 0FT5 (blueprint: lem-sfb-ringed-dg-restriction-localization-exact).
+
+TODO: construct via `Localization.liftNatIso`; the missing inputs are that restriction carries
+shift comparisons to shift comparisons (naturality of `mapBifunctorShift₁Iso` in the second
+variable) and that a module map lifts along shift comparisons (naturality in the first). -/
+def derivedRestrictionShiftOneIso
+    {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
+    [DerivedStructure A] [DerivedStructure B] :
+    shiftFunctor (Derived B) (1 : ℤ) ⋙ derivedRestriction φ ≅
+      derivedRestriction φ ⋙ shiftFunctor (Derived A) (1 : ℤ) :=
+  sorry
+
+/-- The descended restriction commutes with all shifts: since `ℤ` is free on `1`, the
+commutation with the shift by one generates a coherent family.
+Source: Stacks sdga, 0FT5 (blueprint: lem-sfb-ringed-dg-restriction-localization-exact). -/
+instance derivedRestrictionCommShift
+    {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
+    [DerivedStructure A] [DerivedStructure B] :
+    (derivedRestriction φ).CommShift ℤ :=
+  Functor.commShiftOfOne _ (derivedRestrictionShiftOneIso φ)
+
 /-- The descended literal restriction respects standard shifts and cone triangles.
 Source: Stacks sdga, 0FT5 and derived, 05R6
 (blueprint: lem-sfb-ringed-dg-restriction-localization-exact).
 
 Proof: restriction leaves the underlying complexes and the cone matrices
 unchanged and changes actions only by precomposition with the algebra map.
-It therefore carries a specified shift or cone comparison to the corresponding
-comparison over A.  Use the shift naturality fields to descend these comparisons
-and the localized-cone characterization of distinguished triangles to prove
-exactness of the constructed localization lift.
+It therefore carries a specified cone comparison to the corresponding
+comparison over A.  The commutation isomorphism with the shift by one is computed by
+the shift comparisons, so the image of a standard cone triangle over B is the standard
+cone triangle of the restricted map over A, distinguished by `distinguished_iff`.
 -/
 theorem restriction_localization_exact
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
     [DerivedStructure A] [DerivedStructure B] :
-    ∃ (_ : (derivedRestriction φ).CommShift ℤ),
-      (derivedRestriction φ).IsTriangulated := by
+    (derivedRestriction φ).IsTriangulated := by
   sorry
+
+/-- Package the constructed localization lift with its shift and exactness data.
+Source: Stacks sdga, 0FT5
+(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
+def restrictionDescentData
+    {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
+    [DerivedStructure A] [DerivedStructure B] : RestrictionDescentData φ where
+  restriction := derivedRestriction φ
+  restrictionIso := derivedRestrictionIso φ
+  restrictionExact := restriction_localization_exact φ
 
 /-- Package the constructed localization lift with its shift and exactness data.
 Source: Stacks sdga, 0FT5
@@ -93,13 +128,7 @@ Source: Stacks sdga, 0FT5
 theorem restriction_descends_and_is_exact
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
     [DerivedStructure A] [DerivedStructure B] :
-    Nonempty (RestrictionDescentData φ) := by
-  obtain ⟨hshift, hexact⟩ := restriction_localization_exact φ
-  exact ⟨{
-    restriction := derivedRestriction φ
-    restrictionIso := derivedRestrictionIso φ
-    restrictionShift := hshift
-    restrictionExact := hexact
-  }⟩
+    Nonempty (RestrictionDescentData φ) :=
+  ⟨restrictionDescentData φ⟩
 
 end CategoryTheory.RingedSiteDg

@@ -91,21 +91,17 @@ clause (1), identifies Ext^r(C,B) with colim Ext^r(C,B_i). Every stage group is
 zero by the supplied bound since d < r. A colimit of zero abelian groups is
 zero; transporting along the comparison gives the claim. This uses only
 sheaves, viewed as complexes in degree zero, so the common lower bound is zero.
-The source states this for arbitrary X. The existing theorem
-`constructible_sheaf_ext_continuity` has additional Noetherian and compactness
-hypotheses, so the arbitrary-scheme geometric input is isolated in the two
-coefficient-specific declarations `continuousMap_ext_continuity` and
-`padicAlgCl_ext_continuity`. The conditional algebraic step is proved in
-`constructibleInd_extBound_of_continuity`, and `constructibleInd_extBound_noetherian`
-proves the canonical-coefficient Noetherian special case. Full filtered-colimit
-continuity in degree zero cannot be assumed on a non-quasi-compact scheme. -/
+The comparison is the filtered-colimit continuity `continuousMap_ext_continuity` or
+`padicAlgCl_ext_continuity`; it fails on non-quasi-compact schemes, so `X` is assumed
+locally Noetherian and quasi-compact. The algebraic step is
+`constructibleInd_extBound_of_continuity`. -/
 theorem constructibleInd_extBound
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (_hΛ : Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj E) ∨
       Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ))
-    (X : Scheme.{u})
+    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (_hC : IsConstantModelConstructible Λ X C)
     (d : ℕ)
@@ -118,14 +114,13 @@ theorem constructibleInd_extBound
     (r : ℕ) (hr : d < r) :
     Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C B r) := by
   rcases _hΛ with hΛ | hΛ
-  · have hΛ' : Λ = Profinite.continuousMapRingObj E := congrArg Mon.X hΛ
-    subst Λ
+  · obtain ⟨rfl, h⟩ := Mon.mk.inj hΛ
+    cases eq_of_heq h
     exact constructibleInd_extBound_of_continuity _ X C _hC
       (continuousMap_ext_continuity ℓ E X) d hbound B hB r hr
-  · have hΛ' : Λ = Profinite.padicAlgClRingObj ℓ := congrArg Mon.X hΛ
-    subst Λ
+  · obtain ⟨rfl, h⟩ := Mon.mk.inj hΛ
+    cases eq_of_heq h
     exact constructibleInd_extBound_of_continuity _ X C _hC
-      (padicAlgCl_ext_continuity ℓ X (fun F ↦ continuousMap_ext_continuity ℓ F X))
-      d hbound B hB r hr
+      (padicAlgCl_ext_continuity ℓ X) d hbound B hB r hr
 
 end AlgebraicGeometry.ProEtale

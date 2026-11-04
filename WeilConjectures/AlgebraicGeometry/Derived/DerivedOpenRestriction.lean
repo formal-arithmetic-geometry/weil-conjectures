@@ -29,9 +29,12 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Restriction of derived direct image to an open subscheme is the derived direct image
-of the restriction, naturally in the bounded-below complex of finite-ring module sheaves.
+of the restriction, naturally in the bounded-below complex of module sheaves over any
+commutative ring `Λ`.
 The transformation is the canonical derived exchange map, not an arbitrary isomorphism.
-Source: blueprint, sec-smooth-purity, sk-def-sf-operations,
+Source: blueprint,
+part-six-operations/sec-six-functors-basics/sec-brown-construction/
+sec-construction-of-rf/sk-prop-sf-comp-coherence,
 lem-weil-pbc-derived-open-restriction (blueprint: lem-weil-pbc-derived-open-restriction).
 
 Proof:
@@ -50,13 +53,25 @@ Proof:
    degree, computes the derived exchange map and is an isomorphism. The sectionwise
    construction is natural in the complex and compatible with successive restrictions
    and compositions. -/
-theorem isIso_derivedBaseChangeMapPlus_of_openImmersion
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+theorem isIso_derivedBaseChangeMapPlus_of_openImmersion_of_commRing
+    (Λ : Type (u + 1)) [CommRing Λ]
     {T S U V : Scheme.{u}} (f : T ⟶ S) (a : U ⟶ S)
     (b : V ⟶ T) (fU : V ⟶ U) [IsOpenImmersion a]
     (sq : ChosenCartesianSquare b fU f a) :
     IsIso (derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
   exact isIso_derivedBaseChangeMapPlus_of_etale Λ
     (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)
+
+/-- The finite-coefficient case of
+`isIso_derivedBaseChangeMapPlus_of_openImmersion_of_commRing`, kept for its existing users.
+Source: blueprint, sec-six-functors-basics, sk-prop-sf-comp-coherence,
+lem-weil-pbc-derived-open-restriction (blueprint: lem-weil-pbc-derived-open-restriction). -/
+theorem isIso_derivedBaseChangeMapPlus_of_openImmersion
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {T S U V : Scheme.{u}} (f : T ⟶ S) (a : U ⟶ S)
+    (b : V ⟶ T) (fU : V ⟶ U) [IsOpenImmersion a]
+    (sq : ChosenCartesianSquare b fU f a) :
+    IsIso (derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
+  isIso_derivedBaseChangeMapPlus_of_openImmersion_of_commRing Λ f a b fU sq
 
 end AlgebraicGeometry.Etale

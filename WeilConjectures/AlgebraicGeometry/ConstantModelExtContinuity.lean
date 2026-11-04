@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 
 /-! A filtered-colimit factorization condition for constant-model constructible sources.
 

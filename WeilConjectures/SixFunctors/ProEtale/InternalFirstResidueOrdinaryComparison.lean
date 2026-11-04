@@ -13,6 +13,13 @@ import all WeilConjectures.AlgebraicGeometry.OrdinaryCommonQuotientTower
 import all WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
 import WeilConjectures.SixFunctors.ProEtale.InternalFirstResidueRingPushout
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.Algebra.Homology.OrdinaryCommonQuotientTower.OrdinaryCommonQuotientTowerSupplement
+public import WeilConjectures.AlgebraicGeometry.Constant.ConstantCompletionInverseImageSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelRealizationSupplement
+public import WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
+public import WeilConjectures.SixFunctors.ProEtale.InternalCompletionSectionTransport
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousCoefficientModuleEncodingSupplement
+public import WeilConjectures.SixFunctors.Supporting.ConstantCompletionEquivalence
 
 /-! # The ordinary common first-residue tensor comparison -/
 
@@ -37,6 +44,29 @@ local instance ordinaryResidueAbSheafify (X : Scheme.{u}) :
 local instance ordinaryResidueAbLocallyBijective (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
+
+private def smallRestrictionIso (X : Scheme.{u})
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (f : R ⟶ S) [IsMonHom f] :
+    Mod.comap f ⋙ IntegralModelsStacks.smallModules X R ≅
+      IntegralModelsStacks.smallModules X S ⋙
+        ConstantCompletion.res (IntegralModelsStacks.smallMap X f) := by
+  dsimp only [IntegralModelsStacks.smallModules, IntegralModelsStacks.smallMap]
+  let e := AlgebraicGeometry.ProEtale.CondensedRing.sectionModuleComapIso X f
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · refine (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦ ?_) ?_)
+    · refine ModuleCat.isoMk (Iso.refl _) ?_
+      intro r
+      ext m
+      exact (((e.hom.app M).val.app (Opposite.op (AsSmall.down.obj U.unop))).hom.map_smul r m).symm
+    · intro U V g
+      ext m
+      rfl
+  · intro M N g
+    ext U m
+    rfl
 
 private def ordinarySmallExtensionIso (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}

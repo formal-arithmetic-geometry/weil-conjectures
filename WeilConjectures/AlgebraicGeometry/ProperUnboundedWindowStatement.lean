@@ -40,7 +40,10 @@ sec-brown-construction/sec-proper-direct-image-of-unbounded-complexes/
 sk-lem-proper-unbounded-window/_section.md, assertions (1)--(3); proof in
 sk-lem-proper-unbounded-window.proof.md (blueprint: sk-lem-proper-unbounded-window).
 
-Proof plan, the eight steps of the DAG node:
+Proof: the conjunction of `properUnboundedWindow`, `properUnbounded_preservesCoproducts` and
+their `ℚ̄_ℓ` versions; the coproduct theorems take the natural-number bound `d.toNat`.
+
+Proof plan of those theorems, the eight steps of the DAG node:
 1. Ambient setting: Dic and IndCons as in sk-cor-ambient-ind-derived and sk-prop-ind-heart.
    The module categories are Grothendieck (det-prop-sfb-module-category), so
    lem-sfb-grothendieck-k-injective gives K-injective resolutions, and
@@ -95,6 +98,23 @@ theorem properUnboundedWindow_statement
       ProperUnboundedCoproductAssertions (Profinite.continuousMapRingObj.{u} E) p ∧
       ProperUnboundedWindowAssertions (Profinite.padicAlgClRingObj.{u} ℓ) p d ∧
       ProperUnboundedCoproductAssertions (Profinite.padicAlgClRingObj.{u} ℓ) p := by
-  sorry
+  have hdim : ∀ y : Y, topologicalKrullDim
+      (pullback p (Spec.map (CommRingCat.ofHom
+        (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
+          Y.fromSpecResidueField y) : Scheme.{u}) ≤ (d.toNat : WithBot ℕ∞) := by
+    have key : ∀ δ : WithBot ℕ∞, (∀ n : ℕ, (n : WithBot ℕ∞) ≤ δ → (n : ℤ) ≤ d) →
+        δ ≤ (d.toNat : WithBot ℕ∞) := by
+      intro δ hδ
+      by_contra hle
+      have hsucc : ((d.toNat + 1 : ℕ) : WithBot ℕ∞) ≤ δ := by
+        simpa only [Nat.cast_add, Nat.cast_one] using
+          (ENat.WithBot.add_one_le_iff).2 (lt_of_not_ge hle)
+      have := hδ _ hsucc
+      omega
+    exact fun y ↦ key _ (hd y)
+  exact ⟨properUnboundedWindow ℓ E k p₀ hp₀ hpℓ X Y p d hd,
+    properUnbounded_preservesCoproducts ℓ E k p₀ hp₀ hpℓ X Y p d.toNat hdim,
+    properUnboundedWindow_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p d hd,
+    properUnbounded_preservesCoproducts_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p d.toNat hdim⟩
 
 end AlgebraicGeometry.ProEtale

@@ -43,9 +43,9 @@ natural inverse Hom bijections.  These are chain maps by the Leibniz rules.
 The unit and counit are the displayed formulas and the triangle identities
 reduce to the unit action.  No localization or derived functor is used here.
 -/
-theorem ordinary_extension_exists
+def ordinaryExtension
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B) :
-    Nonempty (OrdinaryExtension φ) := by
+    OrdinaryExtension φ :=
   sorry
 
 end CategoryTheory.RingedSiteDg
