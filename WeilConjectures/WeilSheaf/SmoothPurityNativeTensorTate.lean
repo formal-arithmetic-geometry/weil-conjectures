@@ -31,12 +31,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Native derived tensor with the Tate sheaf is the derived scalar twist. -/
-noncomputable def nativeDerivedTensorTateIso (d : ℤ) :
-    Prod.sectR ((DerivedCategory.singleFunctor _ 0).obj
-      (WeilSheaf.tateTwistSheaf k₀ l X d).obj) _ ⋙ nativeDerivedTensor k₀ l X ≅
-      (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)).mapDerivedCategory := by
-  let b := WeilSheaf.cyclotomicUnit k₀ l ^ d
+/-- The scalar twist and inverse scalar twist induce a derived adjunction. -/
+noncomputable def constantTwistDerivedAdjunction (b : (PadicAlgCl l)ˣ) :
+    (constantTwist k₀ l X b).mapDerivedCategory ⊣
+      (constantTwist k₀ l X b⁻¹).mapDerivedCategory := by
   let F := constantTwist k₀ l X b
   let G := constantTwist k₀ l X b⁻¹
   let ef : F ⋙ G ≅ 𝟭 _ :=
@@ -49,26 +47,51 @@ noncomputable def nativeDerivedTensorTateIso (d : ℤ) :
     CategoryTheory.Equivalence.mk F G ef.symm eg
   have : E.functor.Additive := inferInstanceAs F.Additive
   have : E.inverse.Additive := inferInstanceAs G.Additive
-  let adj : F.mapDerivedCategory ⊣ G.mapDerivedCategory := E.mapDerivedCategory.toAdjunction
-  let A := (WeilSheaf.tateTwistSheaf k₀ l X d).obj
-  let eH : ihomFunctor k₀ l X A ≅ G :=
-    ihomFunctorMapIsoLeft (WeilSheaf.tateTwistSheafObjIso k₀ l X d).symm ≪≫
-      ihomFunctorConstantTwistLeftIso _ b ≪≫
-      Functor.isoWhiskerRight (ihomFunctorAdicConstantIso k₀ l X) G ≪≫ Functor.leftUnitor G
+  exact E.mapDerivedCategory.toAdjunction
+
+/-- Internal Hom from the Tate sheaf is the inverse scalar twist. -/
+noncomputable def ihomTateSheafIso (d : ℤ) :
+    ihomFunctor k₀ l X (WeilSheaf.tateTwistSheaf k₀ l X d).obj ≅
+      constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹ :=
+  ihomFunctorMapIsoLeft (WeilSheaf.tateTwistSheafObjIso k₀ l X d).symm ≪≫
+    ihomFunctorConstantTwistLeftIso _ (WeilSheaf.cyclotomicUnit k₀ l ^ d) ≪≫
+    Functor.isoWhiskerRight (ihomFunctorAdicConstantIso k₀ l X) _ ≪≫ Functor.leftUnitor _
+
+/-- The native derived internal Hom from the Tate complex is the inverse twist. -/
+noncomputable def nativeHomTateIso (d : ℤ) :
+    Prod.sectR (Opposite.op ((DerivedCategory.singleFunctor _ 0).obj
+      (WeilSheaf.tateTwistSheaf k₀ l X d).obj)) _ ⋙
+      (nativeDerivedClosedComparison k₀ l X).homModels.weilHom ≅
+      (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹).mapDerivedCategory :=
+  nativeHomSingleIso _ ≪≫ Functor.rightDerivedFunctorNatIso (ihomTateSheafIso d) ≪≫
+    (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹).
+      rightDerivedFunctorIsoMapDerivedCategory
+
+/-- The tensor functor of the native closed model in fixed-source coordinates. -/
+noncomputable def nativeTensorRightSectRIso
+    (T : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
+    letI := (nativeDerivedClosedComparison k₀ l X).weilClosed.monoidal
+    tensorRight T ≅ Prod.sectR T _ ⋙ nativeDerivedTensor k₀ l X := by
   let C := nativeDerivedClosedComparison k₀ l X
   letI := C.weilClosed.monoidal
   letI := C.weilSymmetry
-  let T := (DerivedCategory.singleFunctor _ 0).obj A
-  let eT : tensorRight T ≅ Prod.sectR T _ ⋙ nativeDerivedTensor k₀ l X :=
-    (BraidedCategory.tensorLeftIsoTensorRight T).symm ≪≫
-      NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun g ↦ by
-        dsimp [nativeDerivedTensor, WeilConjectures.CoefficientClosedStructure.tensor]
-        change T ◁ g ≫ 𝟙 _ = 𝟙 _ ≫ (𝟙 T ⊗ₘ g)
-        simp)
-  exact eT.symm ≪≫
-    ((C.weilClosed.adjunction T).ofNatIsoRight
-      (nativeHomSingleIso A ≪≫ Functor.rightDerivedFunctorNatIso eH ≪≫
-        G.rightDerivedFunctorIsoMapDerivedCategory)).leftAdjointUniq adj
+  exact (BraidedCategory.tensorLeftIsoTensorRight T).symm ≪≫
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun g ↦ by
+      dsimp [nativeDerivedTensor, WeilConjectures.CoefficientClosedStructure.tensor]
+      change T ◁ g ≫ 𝟙 _ = 𝟙 _ ≫ (𝟙 T ⊗ₘ g)
+      simp)
+
+/-- Native derived tensor with the Tate sheaf is the derived scalar twist. -/
+noncomputable def nativeDerivedTensorTateIso (d : ℤ) :
+    Prod.sectR ((DerivedCategory.singleFunctor _ 0).obj
+      (WeilSheaf.tateTwistSheaf k₀ l X d).obj) _ ⋙ nativeDerivedTensor k₀ l X ≅
+      (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)).mapDerivedCategory := by
+  let C := nativeDerivedClosedComparison k₀ l X
+  letI := C.weilClosed.monoidal
+  let T := (DerivedCategory.singleFunctor _ 0).obj (WeilSheaf.tateTwistSheaf k₀ l X d).obj
+  exact (nativeTensorRightSectRIso T).symm ≪≫
+    ((C.weilClosed.adjunction T).ofNatIsoRight (nativeHomTateIso d)).leftAdjointUniq
+      (constantTwistDerivedAdjunction (WeilSheaf.cyclotomicUnit k₀ l ^ d))
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
 
