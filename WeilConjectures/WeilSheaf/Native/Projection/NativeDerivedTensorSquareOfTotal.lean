@@ -84,20 +84,21 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     dsimp only [LT, L]
     exact_mod_proofs nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g T hT
   have hmU := (condensedRealizationTensor_hom_app_comp k₀ l Z LP LT hLP hLT).symm
-  obtain ⟨mU, hmU', hsquare⟩ := final_total_diagram L V F R
-    (condensedRealizationUpperStarIso k₀ l g).symm
-    (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
-    (Functor.uncurry.obj (curriedTensor _)) (condensedRealizationTensor k₀ l Z)
-    (Functor.projection_uncurryTensorIso _)
-    (nativePullTensor k₀ l g) P T WZ WU
-    (nativeOpenTensorModel k₀ l Y P T hP hT)
-    (nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
-    ((nativePullTotalTensor k₀ l g).app (P, T)) hr cZ cU
-    (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
-      Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-      ← MonoidalCategory.tensorHom_def] using hmU)
-    (R.mapCochainComplexμIso FP FT).symm
-    (htotal P T) mZ rfl
+  with_reducible
+    obtain ⟨mU, hmU', hsquare⟩ := final_total_diagram L V F R
+      (condensedRealizationUpperStarIso k₀ l g).symm
+      (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
+      (Functor.uncurry.obj (curriedTensor _)) (condensedRealizationTensor k₀ l Z)
+      (Functor.projection_uncurryTensorIso _)
+      (nativePullTensor k₀ l g) P T WZ WU
+      (nativeOpenTensorModel k₀ l Y P T hP hT)
+      (nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
+      ((nativePullTotalTensor k₀ l g).app (P, T)) hr cZ cU
+      (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
+        Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
+        ← MonoidalCategory.tensorHom_def] using hmU)
+      (R.mapCochainComplexμIso FP FT).symm
+      (htotal P T) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp] at hmU'
   simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
     ← MonoidalCategory.tensorHom_def] at hsquare

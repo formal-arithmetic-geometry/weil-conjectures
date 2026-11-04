@@ -233,3 +233,12 @@ only its calculation has a whnf timeout. Derived conditional Q likewise whnf-
 times out, requiring detailed profiling of the next conversion. Final compatibility
 wrapper had wrong lemma name Iso.symm_symm (actual symm_symm_eq), fixed; expose local
 R before proof casting. New batch profiles these remaining proof bodies.
+
+2026-11-05 06:23 CST: K5-20261105T061750.log rc=1.
+Totalization now passes the first summand rewrite; the next redundant simp[assoc]
+reports no progress, removed. Derived Q's exact timeout is at modelU argument:
+LP/LT aliases cause the elaborator to unfold nativeDerivedTensor instead of the
+aliases. Using with_reducible around the final_total_diagram application.
+Final compatibility's inverse-square rewrite similarly now uses with_reducible.
+Keeping normal kernel checking; all previously green normalization/sheaf helpers
+remain unchanged.

@@ -73,7 +73,7 @@ theorem projectionComparisonCompatible_of_square
       intro M N
       have ht := htensor M N
       dsimp only [DerivedPullTensorSquare] at ht
-      rw [Functor.mapDerivedCategorySquareIso_symm, Iso.symm_symm_eq] at ht
+      with_reducible rw [Functor.mapDerivedCategorySquareIso_symm, Iso.symm_symm_eq] at ht
       dsimp only [R]
       exact_mod_proofs ht)
   rw [ProEtale.CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison]

@@ -124,25 +124,21 @@ lemma projection_totalTensorSquare_of_sheaf
   simp only [Functor.map_comp, Iso.app_hom, Functor.comp_obj,
     Functor.prod_obj, Functor.uncurry_obj_obj] at hpull'
   rw [reassoc_of% hpull']
-  simp only [Category.assoc]
   have hnZ := condensedRealizationTotalTensorIso_summand k₀ l Z
     ((L.mapHomologicalComplex (.up ℤ)).obj P)
     ((L.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
-  dsimp only [nativeOpenTensorInsertion] at hnZ
-  simp only [Iso.app_hom] at hnZ
+  dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnZ
   rw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
   rw [hcomp, hcomp]
   have hs := hsheaf (P.X p) (T.X q)
   dsimp only [PullTensorSquare] at hs
   rw [reassoc_of% hs]
-  simp only [Category.assoc]
   have hn := a.inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)
   dsimp only [Functor.comp_map, nativeOpenTensorInsertion] at hn
   rw [reassoc_of% hn]
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
-  dsimp only [nativeOpenTensorInsertion] at hnY
-  simp only [Iso.app_hom] at hnY
+  dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnY
   rw [← Functor.map_comp_assoc, hnY, Functor.map_comp_assoc,
     Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f]
 

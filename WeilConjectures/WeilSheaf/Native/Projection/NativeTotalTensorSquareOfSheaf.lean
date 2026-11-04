@@ -15,6 +15,9 @@ set_option Elab.async false
 set_option trace.profiler true
 set_option trace.profiler.threshold 20000
 
+-- Match the coefficient-category instance used by the total comparison.
+attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
+
 universe u
 
 open CategoryTheory MonoidalCategory Limits
