@@ -6,34 +6,34 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriek
+public import WeilConjectures.WeilSheaf.VerdierDual
 
 /-!
 # Weil complexes on the trivial line bundle
 
 Let `π : Y ⟶ X` be the trivial line bundle `Y ≅ X ×_{k₀} 𝔸¹` over a `k₀`-scheme `X`, given by a
-cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`. This file records the two inputs on `π` from
-other chapters that the rank-one Thom isomorphism `Rπ₀! π^* P ≅ P(-1)[-2]`
+cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`. This file records the two inputs on `π` that
+the rank-one Thom isomorphism `Rπ₀! π^* P ≅ P(-1)[-2]`
 (`AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback`,
 blueprint `thm-pur-rank-one-thom`) is deduced from:
 
 - the affine-line adjunction `Rπ₀! ⊣ π^*(1)[2]`
-  (`AlgebraicGeometry.WeilComplex.nonempty_adjunction_derivedLowerShriek_of_isPullback`,
-  blueprint `cor-amb-affine-space-adjunction` for `d = 1`);
+  (`AlgebraicGeometry.WeilComplex.nonempty_adjunction_derivedLowerShriek_of_isPullback`), the
+  adjunction `Rπ₀! ⊣ Rπ^!` transported along smooth purity `Rπ^! ≅ π^*(1)[2]` for Weil complexes
+  (`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension`);
 - homotopy invariance: the unit `K ⟶ Rπ_* π^* K` of `π^* ⊣ Rπ_*` is an isomorphism
   (`AlgebraicGeometry.WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`,
-  blueprint `lem-pur-a1-direct-image`, extended from `Λ_X` to all Weil complexes).
-
-Both are proved on the étale side with finite coefficients
-(`AlgebraicGeometry.Etale.nonempty_adjunction_affineLine`,
-`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`). Their passage to `ℓ`-adic
-Weil complexes is not formalized, so they are stated here with `sorry`.
+  stated here with `sorry`).
 
 From them, `π^* ⋙ Rπ₀!` is left adjoint to `(1)[2] ⋙ π^* ⋙ Rπ_* ≅ (1)[2]`, whose left adjoint is
 also the inverse autoequivalence `(-1)[-2]`; uniqueness of left adjoints gives the Thom
 isomorphism (`AlgebraicGeometry.WeilComplex.upperStarCompDerivedLowerShriekIsoOfAdjunction`).
+This argument does not produce the canonical map `τ_E = Rπ_! thom(E)` of the blueprint, only
+some natural isomorphism.
 -/
 
 @[expose] public section
@@ -66,18 +66,15 @@ noncomputable def tateTwistShiftCompTateTwistShiftIso (m n a b : ℤ) (hmn : m +
     Functor.rightUnitor _ ≪≫ tateTwistCompTateTwistIso m n hmn
 
 variable (k₀ l X) in
-/-- The twist-shift `K ↦ K(-1)[-2]` is left adjoint to `K ↦ K(1)[2]`: they are inverse
+/-- For `m + n = 0` and `a + b = 0`, the twist-shifts `K ↦ K(m)[a]` and `K ↦ K(n)[b]` are inverse
 autoequivalences of the Weil complexes. -/
-noncomputable def tateTwistShiftAdjunction :
-    tateTwist k₀ l X (-1) ⋙ shiftFunctor (WeilComplex k₀ l X) (-2 : ℤ) ⊣
-      tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ) :=
-  (CategoryTheory.Equivalence.mk
-    (tateTwist k₀ l X (-1) ⋙ shiftFunctor (WeilComplex k₀ l X) (-2 : ℤ))
-    (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ))
-    (tateTwistShiftCompTateTwistShiftIso k₀ l X (-1) 1 (-2) 2 (by norm_num)
-      (by norm_num)).symm
-    (tateTwistShiftCompTateTwistShiftIso k₀ l X 1 (-1) 2 (-2) (by norm_num)
-      (by norm_num))).toAdjunction
+noncomputable def tateTwistShiftEquiv (m n a b : ℤ) (hmn : m + n = 0) (hab : a + b = 0) :
+    WeilComplex k₀ l X ≌ WeilComplex k₀ l X :=
+  CategoryTheory.Equivalence.mk
+    (tateTwist k₀ l X m ⋙ shiftFunctor (WeilComplex k₀ l X) a)
+    (tateTwist k₀ l X n ⋙ shiftFunctor (WeilComplex k₀ l X) b)
+    (tateTwistShiftCompTateTwistShiftIso k₀ l X m n a b hmn hab).symm
+    (tateTwistShiftCompTateTwistShiftIso k₀ l X n m b a (by omega) (by omega))
 
 end Twist
 
@@ -93,35 +90,52 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
+omit [Finite k₀] [Y.Over (Spec (CommRingCat.of k₀))] [π.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] in
 include hπ in
-/-- Blueprint `cor-amb-affine-space-adjunction` (for `d = 1`, on Weil complexes): **the
-affine-line adjunction**. For the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a
-cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the direct image with compact support `Rπ₀!`
-of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`.
+/-- The trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` is smooth of relative dimension one, as a
+base change of `𝔸¹ ⟶ Spec k₀`. -/
+theorem smoothOfRelativeDimension_one_of_isPullback : SmoothOfRelativeDimension 1 π := by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  exact (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip this
 
-This is the `ℓ`-adic Weil form of the finite-coefficient étale adjunction
-`AlgebraicGeometry.Etale.nonempty_adjunction_affineLine` (`Rp_! ⊣ Lp^*(1)[2]` for
-`p : 𝔸¹_S ⟶ S`), which is proved from the projective-line adjunction `thm-amb-p1-adjunction`.
-Its passage to `ℓ`-adic Weil complexes (limits over the finite coefficients, rationalization
-and compatibility with the Frobenius structures) belongs to the chapter on the exceptional
-inverse image and is not formalized; it is stated here with `sorry`. -/
+include hπ in
+/-- **The affine-line adjunction for Weil complexes** (the Weil form of
+`cor-amb-affine-space-adjunction` for `d = 1`). For the trivial line bundle
+`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
+direct image with compact support `Rπ₀!` of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`:
+this is the adjunction `Rπ₀! ⊣ Rπ^!` transported along smooth purity `Rπ^! ≅ π^*(1)[2]`
+(`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension`). -/
 theorem nonempty_adjunction_derivedLowerShriek_of_isPullback :
     Nonempty (derivedLowerShriek k₀ l π ⊣
-      (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) :=
-  sorry
+      (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) := by
+  have := smoothOfRelativeDimension_one_of_isPullback π s hπ
+  have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over π]
+    infer_instance
+  have : HasUpperShriek k₀ l π := isLeftAdjoint_derivedLowerShriek π
+  obtain ⟨e⟩ := nonempty_upperShriek_iso_of_smoothOfRelativeDimension (k₀ := k₀) (l := l) π 1
+  exact ⟨(derivedLowerShriekUpperShriekAdjunction π).ofNatIsoRight (by simpa using e)⟩
 
 include hπ in
-/-- Blueprint `lem-pur-a1-direct-image` (for all Weil complexes): **homotopy invariance**. For
-the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square
-`Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the unit `K ⟶ Rπ_* π^* K` of the adjunction `π^* ⊣ Rπ_*` of
-Weil complexes is an isomorphism for every Weil complex `K` on `X`; that is, `π^*` is fully
-faithful.
+/-- **Homotopy invariance for Weil complexes.** For the trivial line bundle
+`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
+unit `K ⟶ Rπ_* π^* K` of the adjunction `π^* ⊣ Rπ_*` of Weil complexes is an isomorphism for
+every Weil complex `K` on `X`; that is, `π^*` is fully faithful.
 
-For `K = Λ_X` with finite étale coefficients over an algebraically closed field this is
-`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`; for general `K` it follows from
-the constant case by smooth base change (`sbc-thm-smooth-base-change`) and the acyclicity of
-the affine line over strictly henselian bases. The `ℓ`-adic Weil form for all Weil complexes is
-not formalized; it is stated here with `sorry`. -/
+For the constant coefficients `Λ_X` this is blueprint `lem-pur-a1-direct-image`, proved on the
+étale side with finite coefficients as
+`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`. The statement for all Weil
+complexes is not a blueprint node. Its proof needs the `ℓ`-adic form of the constant case and,
+to pass from `Λ_X` to all `K`, smooth base change and a projection formula for `Rπ_*` on Weil
+complexes; none of these is formalized, so it is left with `sorry`. -/
 theorem isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
     (K : WeilComplex k₀ l X) :
     IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) :=
@@ -141,7 +155,8 @@ noncomputable def upperStarCompDerivedLowerShriekIsoOfAdjunction
     (Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _
         (asIso (upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit).symm ≪≫
-      Functor.rightUnitor _)).leftAdjointUniq (tateTwistShiftAdjunction k₀ l X)
+      Functor.rightUnitor _)).leftAdjointUniq
+    (tateTwistShiftEquiv k₀ l X (-1) 1 (-2) 2 (by norm_num) (by norm_num)).toAdjunction
 
 end TrivialLineBundle
 
