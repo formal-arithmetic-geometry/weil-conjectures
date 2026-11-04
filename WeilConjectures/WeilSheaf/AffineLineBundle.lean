@@ -6,38 +6,23 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.HomotopyInvariance
 public import WeilConjectures.WeilSheaf.Localization
-public import WeilConjectures.WeilSheaf.LowerShriek
 
 /-!
-# Weil complexes on the trivial line bundle
+# Homotopy invariance along the trivial line bundle
 
-Let `π : Y ⟶ X` be the trivial line bundle `Y ≅ X ×_{k₀} 𝔸¹` over a `k₀`-scheme `X`, given by a
-cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`. This file records the two inputs on `π` from
-other chapters that the rank-one Thom isomorphism `Rπ₀! π^* P ≅ P(-1)[-2]`
-(`AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback`,
-blueprint `thm-pur-rank-one-thom`) is deduced from:
+Let `π : Y ⟶ X` be the trivial line bundle `Y ≅ X ×_{k₀} 𝔸¹` over a `k₀`-scheme `X` of finite
+type, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`. This file proves homotopy
+invariance: the unit `K ⟶ Rπ_* π^* K` of `π^* ⊣ Rπ_*` is an isomorphism for every Weil complex
+`K` on `X`
+(`AlgebraicGeometry.WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`,
+blueprint `lem-pur-a1-direct-image`, extended from `Λ_X` to all Weil complexes).
 
-- the affine-line adjunction `Rπ₀! ⊣ π^*(1)[2]`
-  (`AlgebraicGeometry.WeilComplex.nonempty_adjunction_derivedLowerShriek_of_isPullback`,
-  blueprint `cor-amb-affine-space-adjunction` for `d = 1`);
-- homotopy invariance: the unit `K ⟶ Rπ_* π^* K` of `π^* ⊣ Rπ_*` is an isomorphism
-  (`AlgebraicGeometry.WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`,
-  blueprint `lem-pur-a1-direct-image`, extended from `Λ_X` to all Weil complexes).
-
-The affine-line adjunction is proved on the étale side with finite coefficients
-(`AlgebraicGeometry.Etale.nonempty_adjunction_affineLine`); its passage to `ℓ`-adic Weil complexes
-is not formalized, so it is stated here with `sorry`. Homotopy invariance is deduced from the case
-of Weil complexes with lisse cohomology
+It is deduced from the case of Weil complexes with lisse cohomology
 (`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isLisse_homologySheaf`) by passing to the
 reduced subscheme and Noetherian induction
 (`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isClosedImmersion_of_isReduced`).
-
-From them, `π^* ⋙ Rπ₀!` is left adjoint to `(1)[2] ⋙ π^* ⋙ Rπ_* ≅ (1)[2]`, whose left adjoint is
-also the inverse autoequivalence `(-1)[-2]`; uniqueness of left adjoints gives the Thom
-isomorphism (`AlgebraicGeometry.WeilComplex.upperStarCompDerivedLowerShriekIsoOfAdjunction`).
 -/
 
 @[expose] public section
@@ -50,41 +35,6 @@ namespace AlgebraicGeometry.WeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-section Twist
-
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-
-variable (k₀ l X) in
-/-- For `m + n = 0` and `a + b = 0`, the twist-shift `K ↦ K(m)[a]` followed by `K ↦ K(n)[b]` is the
-identity. -/
-noncomputable def tateTwistShiftCompTateTwistShiftIso (m n a b : ℤ) (hmn : m + n = 0)
-    (hab : a + b = 0) :
-    (tateTwist k₀ l X m ⋙ shiftFunctor (WeilComplex k₀ l X) a) ⋙
-        (tateTwist k₀ l X n ⋙ shiftFunctor (WeilComplex k₀ l X) b) ≅ 𝟭 _ :=
-  Functor.isoWhiskerLeft (tateTwist k₀ l X m)
-      (Functor.isoWhiskerRight ((tateTwist k₀ l X n).commShiftIso a)
-        (shiftFunctor (WeilComplex k₀ l X) b)) ≪≫
-    Functor.isoWhiskerLeft (tateTwist k₀ l X m ⋙ tateTwist k₀ l X n)
-      (shiftFunctorCompIsoId (WeilComplex k₀ l X) a b hab) ≪≫
-    Functor.rightUnitor _ ≪≫ tateTwistCompTateTwistIso m n hmn
-
-variable (k₀ l X) in
-/-- The twist-shift `K ↦ K(-1)[-2]` is left adjoint to `K ↦ K(1)[2]`: they are inverse
-autoequivalences of the Weil complexes. -/
-noncomputable def tateTwistShiftAdjunction :
-    tateTwist k₀ l X (-1) ⋙ shiftFunctor (WeilComplex k₀ l X) (-2 : ℤ) ⊣
-      tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ) :=
-  (CategoryTheory.Equivalence.mk
-    (tateTwist k₀ l X (-1) ⋙ shiftFunctor (WeilComplex k₀ l X) (-2 : ℤ))
-    (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ))
-    (tateTwistShiftCompTateTwistShiftIso k₀ l X (-1) 1 (-2) 2 (by norm_num)
-      (by norm_num)).symm
-    (tateTwistShiftCompTateTwistShiftIso k₀ l X 1 (-1) 2 (-2) (by norm_num)
-      (by norm_num))).toAdjunction
-
-end Twist
-
 section TrivialLineBundle
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -96,23 +46,6 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-
-include hπ in
-/-- Blueprint `cor-amb-affine-space-adjunction` (for `d = 1`, on Weil complexes): **the
-affine-line adjunction**. For the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a
-cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the direct image with compact support `Rπ₀!`
-of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`.
-
-This is the `ℓ`-adic Weil form of the finite-coefficient étale adjunction
-`AlgebraicGeometry.Etale.nonempty_adjunction_affineLine` (`Rp_! ⊣ Lp^*(1)[2]` for
-`p : 𝔸¹_S ⟶ S`), which is proved from the projective-line adjunction `thm-amb-p1-adjunction`.
-Its passage to `ℓ`-adic Weil complexes (limits over the finite coefficients, rationalization
-and compatibility with the Frobenius structures) belongs to the chapter on the exceptional
-inverse image and is not formalized; it is stated here with `sorry`. -/
-theorem nonempty_adjunction_derivedLowerShriek_of_isPullback :
-    Nonempty (derivedLowerShriek k₀ l π ⊣
-      (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) :=
-  sorry
 
 include hπ in
 /-- Blueprint `lem-pur-a1-direct-image` (for all Weil complexes): **homotopy invariance**. For
@@ -161,22 +94,6 @@ theorem isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
     fun Y' _ π' s' _ hπ' _ _ _ ↦ isIso_unit_app_of_isClosedImmersion_of_isReduced ⊤ I.subscheme r
       (Set.subset_univ _) Y' π' s' hπ' M
   exact (upperStarDerivedLowerStarAdjunction π).unit.isoLocus.prop_of_iso e this
-
-/-- **The Thom isomorphism from the affine-line adjunction and homotopy invariance.** If `Rπ₀!` is
-left adjoint to `P ↦ π^*(P(1)[2])` and the unit of `π^* ⊣ Rπ_*` is an isomorphism, then
-`Rπ₀! π^* P ≅ P(-1)[-2]` naturally in `P`: `π^* ⋙ Rπ₀!` is left adjoint to
-`(1)[2] ⋙ π^* ⋙ Rπ_* ≅ (1)[2]`, whose left adjoint is also `(-1)[-2]`. -/
-noncomputable def upperStarCompDerivedLowerShriekIsoOfAdjunction
-    (adj : derivedLowerShriek k₀ l π ⊣
-      (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π)
-    [IsIso (upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit] :
-    upperStar π ⋙ derivedLowerShriek k₀ l π ≅
-      tateTwist k₀ l X (-1) ⋙ shiftFunctor (WeilComplex k₀ l X) (-2 : ℤ) :=
-  (((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).comp adj).ofNatIsoRight
-    (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _
-        (asIso (upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit).symm ≪≫
-      Functor.rightUnitor _)).leftAdjointUniq (tateTwistShiftAdjunction k₀ l X)
 
 end TrivialLineBundle
 
