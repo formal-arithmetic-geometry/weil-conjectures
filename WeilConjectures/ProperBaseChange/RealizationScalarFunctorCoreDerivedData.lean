@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarExtension
 public import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientBasicSupplement
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcDerivedScalarAdjunctionUnit
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -43,6 +44,27 @@ structure RealizationScalarFunctorCoreDerivedData
       (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ,
     IsIso (pbcComplexCounit φ P)
 
+/-- Ordinary scalar extension along an arbitrary ring-sheaf map from the completed integral
+coefficients to the rational coefficients is exact.
+
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
+(blueprint: lem-sf-native-integral-coefficient-flat).
+
+Mathematically, sections of the rational coefficient sheaf are continuous E-valued
+functions, which are a localization, hence flat, over the continuous integral-valued
+functions along the inclusion; sheafified extension along a sectionwise flat map preserves
+finite limits. The repository proves this only for the normalized inclusion
+(`nativeIntegralCoefficient_flat` and its private steps `integral_exact` and
+`rational_exact`), using the pointwise formula of the map. For an arbitrary `φ` one needs in
+addition a classification of ring-sheaf maps from integral-valued to E-valued continuous
+functions (for instance, that every such map is pointwise a Galois twist of the inclusion),
+which is not available. This is the remaining gap. -/
+theorem pbcExtend_rationalCoefficient_preservesFiniteLimits
+    (φ : pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
+      rationalCoefficientSheaf l T E) :
+    PreservesFiniteLimits (pbcExtend φ) := by
+  sorry
+
 /-- The derived scalar extension construction supplies the two core identities.
 
 Source: Stacks Tags 06YY and 0DVC, via the exact termwise extension and its
@@ -56,6 +78,8 @@ theorem realization_scalar_functor_core_derived_data
     (φ : pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
       rationalCoefficientSheaf l T E) :
     Nonempty (RealizationScalarFunctorCoreDerivedData l E T φ) := by
-  sorry
+  have := pbcExtend_rationalCoefficient_preservesFiniteLimits l E T φ
+  exact ⟨⟨pbcDerivedScalarAdjunction_unit_app φ,
+    pbcComplexCounit_isIso_of_preservesFiniteLimits φ⟩⟩
 
 end WeilConjectures
