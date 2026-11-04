@@ -20,6 +20,7 @@ import WeilConjectures.WeilSheaf.SmoothPurityNativeProperTrace
 import WeilConjectures.WeilSheaf.SmoothPurityProperPointTrace
 import WeilConjectures.WeilSheaf.SmoothPurityNativeDescent
 import WeilConjectures.WeilSheaf.SmoothPurityNativeDescentPullback
+import WeilConjectures.WeilSheaf.SmoothPurityNativeProperDualizing
 
 #print axioms AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_free
@@ -51,3 +52,4 @@ import WeilConjectures.WeilSheaf.SmoothPurityNativeDescentPullback
 #print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_upperShriekBaseChange_geometricFiber_unit
 #print axioms AlgebraicGeometry.WeilComplex.finiteBaseNativeDescentComparison
 #print axioms AlgebraicGeometry.WeilComplex.finiteBaseNativeDescentUpperStarIso
+#print axioms AlgebraicGeometry.WeilComplex.nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso
