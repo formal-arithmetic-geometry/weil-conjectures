@@ -144,3 +144,13 @@ Also exposed local f/G/b/E abbreviations before casting, because opaque-to-the-
 traversal local lets prevented the tactic from seeing generated comp_over proof
 differences. Added an independent generic total-square statement module and an
 abstract termwise compositor lemma so their validation can proceed separately.
+
+2026-11-05 04:46 CST: K5-20261105T043806.log rc=1. All four carrier
+component lemmas are GREEN; their composition still times out (~106s). The
+independent complex component also has a kernel timeout, and automatic inference
+of the cochain oplax structure fails. Following the existing restriction proof,
+now prove the native inverse square for an arbitrary fibre morphism f and an
+abstract Frobenius comparison e, then specialize to geometricFiberMap. This keeps
+all concrete geometric comparison data outside the composite calculation.
+Total and derived wrappers now take the tensor comparison explicitly; the complex
+component proposition is also formed abstractly. No heartbeat raises.

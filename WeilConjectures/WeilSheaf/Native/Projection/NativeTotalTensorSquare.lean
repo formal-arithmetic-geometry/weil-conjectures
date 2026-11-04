@@ -33,9 +33,8 @@ lemma condensedRealizationTotalTensor_pull_square
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) :
     TotalPullTensorSquare k₀ l g P T := by
   have : (upperStar k₀ l g).IsLeftAdjoint := (upperStarLowerStarAdjunction k₀ l g).isLeftAdjoint
-  unfold TotalPullTensorSquare PullTensorSquare
+  unfold TotalPullTensorSquare PullTensorSquareWithComparison
   simp only [Iso.symm_inv]
-  rw [Functor.mapCochainComplex_δ, ← Functor.mapCochainComplexμIso_inv]
   ext n : 1
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     condensedRealizationPullComplexIso_hom_app_f]

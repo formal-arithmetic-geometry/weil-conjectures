@@ -21,20 +21,28 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory.Functor
 
-/-- Termwise evaluation of the square compositor, with the functors kept abstract. -/
-lemma projection_complex_square_hom_app_f
-    {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
+section ComplexComponent
+variable {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
     [Preadditive C] [Preadditive D] [Preadditive A] [Preadditive B]
     (L : C ⥤ D) (V : D ⥤ B) (F : C ⥤ A) (R : A ⥤ B)
     [L.Additive] [V.Additive] [F.Additive] [R.Additive]
-    (a : F ⋙ R ≅ L ⋙ V) (P : CochainComplex C ℤ) (n : ℤ) :
-    (((mapHomologicalComplexCompIso a.symm (.up ℤ) ≪≫
-      (mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm).hom.app P).f n) =
-      a.inv.app (P.X n) := by
+    (a : F ⋙ R ≅ L ⋙ V) (P : CochainComplex C ℤ) (n : ℤ)
+
+/-- The component formula with all object conversions formed abstractly. -/
+def ProjectionComplexSquareComponent : Prop :=
+  (((mapHomologicalComplexCompIso a.symm (.up ℤ) ≪≫
+    (mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm).hom.app P).f n) =
+    a.inv.app (P.X n)
+
+/-- Termwise evaluation of the square compositor, with the functors kept abstract. -/
+lemma projection_complex_square_hom_app_f : ProjectionComplexSquareComponent L V F R a P n := by
+  unfold ProjectionComplexSquareComponent
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, HomologicalComplex.comp_f,
     mapHomologicalComplexCompIso_hom_app_f, mapHomologicalComplexCompIso_inv_app_f,
     Iso.refl_inv, NatTrans.id_app]
   erw [Category.comp_id]
+
+end ComplexComponent
 
 end CategoryTheory.Functor
 
@@ -61,9 +69,11 @@ abbrev condensedRealizationPullComplexIso :=
 @[simp]
 lemma condensedRealizationPullComplexIso_hom_app_f
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (n : ℤ) :
-    ((condensedRealizationPullComplexIso k₀ l g).hom.app P).f n =
-      (condensedRealizationUpperStarIso k₀ l g).inv.app (P.X n) := by
-  dsimp only [condensedRealizationPullComplexIso]
+    Functor.ProjectionComplexSquareComponent (upperStar k₀ l g)
+      (condensedRealization k₀ l Z) (condensedRealization k₀ l Y)
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+      (condensedRealizationUpperStarIso k₀ l g) P n := by
   exact_mod_proofs Functor.projection_complex_square_hom_app_f
     (upperStar k₀ l g) (condensedRealization k₀ l Z) (condensedRealization k₀ l Y)
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
@@ -73,7 +83,7 @@ lemma condensedRealizationPullComplexIso_hom_app_f
 /-- The square of total tensor comparisons, formed over abstract functors. -/
 def TotalPullTensorSquare
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) : Prop :=
-  PullTensorSquare ((upperStar k₀ l g).mapHomologicalComplex (.up ℤ))
+  PullTensorSquareWithComparison ((upperStar k₀ l g).mapHomologicalComplex (.up ℤ))
     ((condensedRealization k₀ l Z).mapHomologicalComplex (.up ℤ))
     ((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ))
     ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
@@ -82,6 +92,9 @@ def TotalPullTensorSquare
     (Functor.uncurry.obj (nativeTensorTotal k₀ l Y))
     (Functor.uncurry.obj (nativeTensorTotal k₀ l Z))
     (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
-    (condensedRealizationTotalTensorIso k₀ l Z) (condensedRealizationPullComplexIso k₀ l g).symm P T
+    (condensedRealizationTotalTensorIso k₀ l Z) (condensedRealizationPullComplexIso k₀ l g).symm
+    (fun A B ↦ ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).mapCochainComplexμIso
+        A B).inv) P T
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

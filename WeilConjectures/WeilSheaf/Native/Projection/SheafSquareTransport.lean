@@ -138,4 +138,19 @@ lemma PullTensorInverseSquare.of_components
 
 end SquarePredicates
 
+/-- A tensor square with an explicitly supplied comparison, without choosing an oplax instance. -/
+def PullTensorSquareWithComparison
+    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
+    [MonoidalCategory E] [MonoidalCategory H]
+    (P : C ⥤ D) (U : D ⥤ H) (V : C ⥤ E) (G : E ⥤ H)
+    (TC : C × C ⥤ C) (TD : D × D ⥤ D)
+    (mu : TC ⋙ P ≅ P.prod P ⋙ TD)
+    (nY : TC ⋙ V ≅ V.prod V ⋙ Functor.uncurry.obj (curriedTensor E))
+    (nZ : TD ⋙ U ≅ U.prod U ⋙ Functor.uncurry.obj (curriedTensor H))
+    (a : V ⋙ G ≅ P ⋙ U)
+    (d : ∀ A B : E, G.obj (A ⊗ B) ⟶ G.obj A ⊗ G.obj B) (M N : C) : Prop :=
+  U.map (mu.hom.app (M, N)) ≫ nZ.hom.app (P.obj M, P.obj N) ≫
+      (a.inv.app M ⊗ₘ a.inv.app N) =
+    a.inv.app (TC.obj (M, N)) ≫ G.map (nY.hom.app (M, N)) ≫ d (V.obj M) (V.obj N)
+
 end CategoryTheory

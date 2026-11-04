@@ -84,7 +84,8 @@ theorem comparisonCompatible_derivedCondensedRealization :
     rfl
   intro M N
   have h := condensedRealizationTensor_pull_square k₀ l g M N
-  dsimp only at h
+  dsimp only [DerivedPullTensorSquare, PullTensorSquareWithComparison] at h
+  simp only [Iso.symm_inv] at h
   rw [he] at h
   have hh : (derivedCondensedRealization k₀ l Z).map
         ((nativePullTensor k₀ l g).hom.app (M, N)) ≫

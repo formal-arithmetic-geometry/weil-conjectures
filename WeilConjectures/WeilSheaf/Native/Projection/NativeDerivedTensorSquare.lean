@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
@@ -61,24 +62,9 @@ square of total complexes. -/
 lemma condensedRealizationTensor_pull_square_Q
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :
-    let F := condensedRealization k₀ l Y
-    let V := condensedRealization k₀ l Z
-    let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    let e := Functor.mapDerivedCategorySquareIso (condensedRealizationUpperStarIso k₀ l g).symm
-    V.mapDerivedCategory.map ((nativePullTensor k₀ l g).hom.app
-        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
-      (condensedRealizationTensor k₀ l Z).hom.app
-        ((nativeOpenPull k₀ l g).obj (DerivedCategory.Q.obj P),
-          (nativeOpenPull k₀ l g).obj (DerivedCategory.Q.obj T)) ≫
-      (e.hom.app (DerivedCategory.Q.obj P) ⊗ₘ e.hom.app (DerivedCategory.Q.obj T)) =
-    e.hom.app ((nativeDerivedTensor k₀ l Y).obj
-        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
-      R.mapDerivedCategory.map ((condensedRealizationTensor k₀ l Y).hom.app
-        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
-      (R.mapDerivedCategoryTensorComparison.app
-        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))).app
-        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) := by
+    DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
+  unfold DerivedPullTensorSquare PullTensorSquareWithComparison
+  simp only [Iso.symm_inv]
   let L := upperStar k₀ l g
   let V := condensedRealization k₀ l Z
   let F := condensedRealization k₀ l Y
@@ -145,19 +131,9 @@ lemma condensedRealizationTensor_pull_square_Q
 representatives by naturality. -/
 lemma condensedRealizationTensor_pull_square
     (M N : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :
-    let F := condensedRealization k₀ l Y
-    let V := condensedRealization k₀ l Z
-    let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    let e := Functor.mapDerivedCategorySquareIso (condensedRealizationUpperStarIso k₀ l g).symm
-    V.mapDerivedCategory.map ((nativePullTensor k₀ l g).hom.app (M, N)) ≫
-      (condensedRealizationTensor k₀ l Z).hom.app
-        ((nativeOpenPull k₀ l g).obj M, (nativeOpenPull k₀ l g).obj N) ≫
-      (e.hom.app M ⊗ₘ e.hom.app N) =
-    e.hom.app ((nativeDerivedTensor k₀ l Y).obj (M, N)) ≫
-      R.mapDerivedCategory.map ((condensedRealizationTensor k₀ l Y).hom.app (M, N)) ≫
-      (R.mapDerivedCategoryTensorComparison.app (F.mapDerivedCategory.obj M)).app
-        (F.mapDerivedCategory.obj N) := by
+    DerivedPullTensorSquare k₀ l g M N := by
+  unfold DerivedPullTensorSquare PullTensorSquareWithComparison
+  simp only [Iso.symm_inv]
   let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
     (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
   let c : Functor.uncurry.obj (curriedTensor _) ⋙ R.mapDerivedCategory ≅
@@ -179,7 +155,8 @@ lemma condensedRealizationTensor_pull_square
     (condensedRealizationTensor k₀ l Y)
     (Functor.mapDerivedCategorySquareIso (condensedRealizationUpperStarIso k₀ l g).symm) c
     (fun P T hP hT ↦ by
-      simpa only [Functor.uncurry_obj_map, curriedTensor_map_app,
+      simpa only [DerivedPullTensorSquare, PullTensorSquareWithComparison, Iso.symm_inv,
+        Functor.uncurry_obj_map, curriedTensor_map_app,
         curriedTensor_obj_map, ← tensorHom_def] using
         condensedRealizationTensor_pull_square_Q k₀ l g P T hP hT) M N
   simpa only [Functor.uncurry_obj_map, curriedTensor_map_app,
