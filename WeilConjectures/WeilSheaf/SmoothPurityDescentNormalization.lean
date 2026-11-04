@@ -137,6 +137,35 @@ theorem traceDescentComparison_forget (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
 
 end CategoryTheory.Endofunctor.IsoAlgebra
 
+namespace CategoryTheory.Endofunctor.IsoAlgebra
+
+variable {B B' C D : Type*} [Category B] [Category B'] [Category C] [Category D]
+  {F : C ⥤ C} {G : D ⥤ D} {l : B ⥤ B'} {r : B' ⥤ B}
+  {L : C ⥤ D} {R : D ⥤ C} (adjB : l ⊣ r) (adj : L ⊣ R)
+  (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F ≅ G ⋙ R)
+  (hmate : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = eR.hom)
+  {PB : B ⥤ IsoAlgebra F} {PB' : B' ⥤ IsoAlgebra G}
+
+/-- Compute a lifted mate using explicitly identified underlying functors. -/
+lemma traceMate_forget {P₀ : B ⥤ C} {P₀' : B' ⥤ D}
+    (hP : PB ⋙ forget F = P₀) (hP' : PB' ⋙ forget G = P₀')
+    (θ : l ⋙ PB' ≅ PB ⋙ mapOfNatIso eL) (θ₀ : l ⋙ P₀' ≅ P₀ ⋙ L)
+    (hθ : ∀ b, (θ.inv.app b).hom.f = eqToHom (by rw [← hP]; rfl) ≫ θ₀.inv.app b ≫
+      eqToHom (by rw [← hP']; rfl)) (b' : B') :
+    ((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR hmate)
+      (TwoSquare.mk _ _ _ _ θ.inv)).natTrans.app b').hom.f =
+      eqToHom (by rw [← hP]; rfl) ≫
+        (mateEquiv adjB adj (TwoSquare.mk _ _ _ _ θ₀.inv)).natTrans.app b' ≫
+        eqToHom (by rw [← hP']; rfl) := by
+  subst hP hP'
+  have hθ' : Functor.whiskerRight θ.inv (forget G) = θ₀.inv := by
+    ext b
+    simpa using hθ b
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  rw [mateEquiv_mapOfNatIsoAdjunction_app_hom_f, hθ']
+
+end CategoryTheory.Endofunctor.IsoAlgebra
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -151,30 +180,18 @@ lemma lowerStarGeometricFiberWeilBaseChange_app_forget
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     ((lowerStarGeometricFiberWeilBaseChange hc).app M).hom.f =
       (lowerStarBaseChange Λ (Scheme.Hom.isPullback_geometricFiberMap f h).flip.toCommSq).app M := by
-  unfold lowerStarGeometricFiberWeilBaseChange
-  rw [Endofunctor.IsoAlgebra.mateEquiv_mapOfNatIsoAdjunction_app_hom_f]
-  change (mateEquiv (upperStarLowerStarAdjunction Λ f)
+  have he := Endofunctor.IsoAlgebra.traceMate_forget
+    (upperStarLowerStarAdjunction Λ f)
     (upperStarLowerStarAdjunction Λ (Scheme.Hom.geometricFiberMap f h))
-    (TwoSquare.mk _ _ _ _ (geometricFiberUpperStarComparison Λ f h).inv)).natTrans.app M = _
-  rw [geometricFiberUpperStarComparison, Iso.symm_inv,
-    ← Adjunction.exchangeRight_eq_mateEquiv, ← lowerStarBaseChange_eq]
-
-/-- The comparison used by the descended trace has the prescribed derived-unit equation. -/
-lemma geometricFiberWeilRightDerivedLowerStarIso_inv_fac
-    (hc : UpperStarWeilCompatible Λ f h)
-    (K : HomotopyCategory
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (.up ℤ)) :
-    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit (lowerStar Λ f)
-      (geometricFiberWeilLowerStar Λ t)).app K ≫
-        (geometricFiberWeilRightDerivedLowerStarIso hc).inv.app (DerivedCategory.Qh.obj K) =
-      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory
-        (lowerStarGeometricFiberWeilBaseChange hc) (.up ℤ)).app K) ≫
-      (Functor.mapDerivedCategoryCompRightDerivedFunctorUnit
-        (geometricFiberWeilLowerStar Λ s) (geometricFiberMapWeilLowerStar Λ f h)).app K := by
-  exact Endofunctor.IsoAlgebra.traceDescentComparison_inv_fac
+    (upperStarGeometricFiberMapCompFrobeniusIso Λ f h)
     (lowerStarGeometricFiberMapCompFrobeniusIso Λ f h)
-    (geometricFiberWeilLowerStar Λ s)
-    (T₀ := (s.geometricFiberProj)^*⟦Λ⟧) (Iso.refl _)
-    (geometricFiberWeilLowerStar Λ t) (asIso (lowerStarGeometricFiberWeilBaseChange hc)) K
+    (Endofunctor.IsoAlgebra.mateEquiv_leftMateIso_inv _ _)
+    (P₀ := (t.geometricFiberProj)^*⟦Λ⟧) (P₀' := (s.geometricFiberProj)^*⟦Λ⟧) rfl rfl
+    (upperStarCompGeometricFiberWeilLowerStarIso hc) (geometricFiberUpperStarComparison Λ f h)
+    (fun N ↦ by simp [upperStarCompGeometricFiberWeilLowerStarIso]) M
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id] at he
+  rw [geometricFiberUpperStarComparison, Iso.symm_inv,
+    ← Adjunction.exchangeRight_eq_mateEquiv, ← lowerStarBaseChange_eq] at he
+  exact he
 
 end AlgebraicGeometry.ProEtale.CondensedRing
