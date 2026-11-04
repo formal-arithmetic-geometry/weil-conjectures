@@ -95,7 +95,6 @@ attribute [local irreducible] unitBase
 
 attribute [local irreducible] homObjMap homObjUnitIso
 
-include haction in
 end SheafOfModules
 
 namespace SheafOfModules
@@ -109,10 +108,6 @@ variable {A E : Type u} [Category.{v} A] [Category.{v} E]
       f ≫ η N = η M ≫ H.map (X := (op (L.X 0), r.obj M))
         (Y := (op (L.X 0), r.obj N)) ((𝟙 (L.X 0)).op, r.map f))
 
-omit [HasZeroMorphisms E] [r.PreservesZeroMorphisms] in
-omit [HasZeroMorphisms E] [r.PreservesZeroMorphisms] in
-include hη in
-include hη in
 end SheafOfModules
 
 namespace CategoryTheory
@@ -128,6 +123,5 @@ attribute [local irreducible] ringedHomUnitEvaluationIso
   ringedHomUnitFunctorEvaluationIso homComplexUnitEvaluation homComplexπ
 
 -- Keep the propositional instance witnesses small at the concrete interface.
-set_option maxHeartbeats 800000 in
 -- The statement and its normalization compare several chosen Hom-complex constructions.
 end CategoryTheory

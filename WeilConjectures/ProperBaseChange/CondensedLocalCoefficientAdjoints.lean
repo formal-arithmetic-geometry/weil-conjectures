@@ -65,8 +65,6 @@ private lemma scalar_comp_unit (P : Mod C R) :
   rw [Category.assoc, hi]
   exact Category.comp_id _
 
-omit [IsCommMonObj S] in
-omit [IsCommMonObj S] in
 end ScalarUnits
 
 set_option backward.isDefEq.respectTransparency false
@@ -89,6 +87,5 @@ variable
         ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ))).obj M)
   (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (hEF : E ≤ F)
 
-set_option backward.isDefEq.respectTransparency false in
 end LocalAdjoints
 end AlgebraicGeometry.ProEtale

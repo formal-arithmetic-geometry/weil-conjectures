@@ -443,18 +443,12 @@ attribute [local irreducible] derivedUpperStarLowerStarAdjunction
   Mod.derivedExtendMapDerivedCategoryAdjunction derivedComapLowerStarIso
   Adjunction.pushHomOfComapIso Adjunction.pullIsoOfComapIso Adjunction.restrictFullyFaithful
 
-omit [FiniteDimensional ℚ_[ℓ] E] in
-omit [FiniteDimensional ℚ_[ℓ] E] in
-omit [FiniteDimensional ℚ_[ℓ] E] in
 section PullSquareCalculation
 attribute [local irreducible] integralScalarConstructible
   integralConstructiblePullIso
   boundedConstructibleUpperStar UnitBallRingObj.boundedConstructibleLowerStar
   ContinuousMapRingObj.boundedConstructibleLowerStar
 
-omit [FiniteDimensional ℚ_[ℓ] E] in
-omit [FiniteDimensional ℚ_[ℓ] E] in
-omit [FiniteDimensional ℚ_[ℓ] E] in
 end PullSquareCalculation
 
 end General

@@ -319,9 +319,6 @@ private noncomputable abbrev q := CochainComplex.toKInjectiveResolution.{g} (ℕ
     exact (DerivedCategory.triangleOfSESδ_naturality (hS (F.obj X))
       (hS (F.obj Y)) (Smap (F.map f))).symm
 
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A] [HasDerivedCategory.{w} A]
-  [HasCountableProducts (DerivedCategory.{w} A)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] in
-omit [HasLimitsOfShape ℕᵒᵖ A] in
 end CoreWork
 
 end CategoryTheory

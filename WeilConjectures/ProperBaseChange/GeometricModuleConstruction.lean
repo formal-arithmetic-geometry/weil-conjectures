@@ -87,17 +87,10 @@ private noncomputable def fromProd
     (X Y : Sheaf T (Type u)) : X ⨯ Y ⟶ X ⊗ Y :=
   CartesianMonoidalCategory.lift prod.fst prod.snd
 
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] in
 end GeometricConstruction
 
 open GeometricConstruction
 
 -- Keep the pre-existing named nondependent forall binder `hRing` unchanged.
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
 -- The statement records every operation and its underlying comparison.
 end SheafOfModules

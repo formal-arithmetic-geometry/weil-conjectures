@@ -167,6 +167,5 @@ private theorem scalarExtension_unit_iso :
   rw [hv]
   exact ht
 
-set_option maxHeartbeats 800000 in
 -- Transport scalar extension and evaluate the comparison on generalized unit tensors.
 end SheafOfModules

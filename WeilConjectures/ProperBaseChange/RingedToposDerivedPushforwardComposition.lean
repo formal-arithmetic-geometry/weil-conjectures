@@ -146,9 +146,7 @@ private theorem composition [Abelian.HasKInjectiveResolutions A]
     funext M
     simpa [ηfg] using hκ.1 M
 
-omit [HasDerivedCategory A] in
 end Generic
 
-set_option maxHeartbeats 800000 in
 -- Repeated module localizations and their comparison-unit equations require more elaboration steps.
 end CategoryTheory

@@ -47,7 +47,6 @@ section
 variable {D : Type*} [Category* D] [MonoidalCategory D] [BraidedCategory D]
 variable (W : MorphismProperty D) [W.IsMultiplicative] [W.RespectsIso]
 
-omit [MonoidalCategory D] [BraidedCategory D] in
 end
 
 private theorem ringComplex_kflat (O : Sheaf J CommRingCat.{u}) :

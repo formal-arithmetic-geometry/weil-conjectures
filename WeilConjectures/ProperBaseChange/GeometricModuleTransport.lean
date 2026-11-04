@@ -337,7 +337,6 @@ private theorem restrictHomEquiv_map
 
 end Helpers
 
-set_option maxHeartbeats 800000 in
 -- The statement records every operation and its underlying comparison.
 
 end SheafOfModules

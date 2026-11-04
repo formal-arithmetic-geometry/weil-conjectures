@@ -62,11 +62,6 @@ private noncomputable abbrev modules :=
 
 private noncomputable abbrev single := CochainComplex.singleFunctor (modules R) 0
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency true in
 end HomComplex
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory

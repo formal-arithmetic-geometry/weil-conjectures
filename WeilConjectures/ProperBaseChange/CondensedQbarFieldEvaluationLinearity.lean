@@ -75,6 +75,5 @@ private noncomputable abbrev ev (K : Type u) [Field K] [IsAlgClosed K] :=
   sheafToPresheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1} ⋙
     (evaluation _ _).obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))
 
-set_option backward.isDefEq.respectTransparency false in
 
 end AlgebraicGeometry.ProEtale

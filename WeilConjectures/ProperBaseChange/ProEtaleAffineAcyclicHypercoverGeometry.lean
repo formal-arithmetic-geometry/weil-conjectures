@@ -61,12 +61,6 @@ namespace GeometryRealization
 
 open FormalCoproduct
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 end GeometryRealization
 
 private theorem properFace_finite (n : ℕ) :

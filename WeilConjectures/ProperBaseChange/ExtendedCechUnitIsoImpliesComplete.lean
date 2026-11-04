@@ -269,7 +269,6 @@ private theorem exists_cover_mem_span_generatingList
   exact Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨e i, rfl⟩)
 
 
-open CategoryTheory.Pretriangulated.Opposite in
 end LocalCalculation
 
 end CategoryTheory

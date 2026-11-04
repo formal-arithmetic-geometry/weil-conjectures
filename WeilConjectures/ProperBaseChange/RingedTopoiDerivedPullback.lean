@@ -121,10 +121,4 @@ private noncomputable def scalarExtension
   scalarExtensionPresheaf c ⋙ PresheafOfModules.sheafification
     (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).obj)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-open MonoidalCategory in
-open MonoidalCategory in
-set_option synthInstance.maxSize 256 in
-open MonoidalCategory in
 end SheafOfModules

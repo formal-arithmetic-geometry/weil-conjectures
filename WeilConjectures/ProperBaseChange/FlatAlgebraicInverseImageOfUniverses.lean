@@ -152,11 +152,6 @@ private def ringMul {T : Sheaf J (Type (max r m))} (a b : T ⟶ ringSets R) :
     · exact congrArg ULift.down (congrArg (fun k ↦ k x) (a.hom.naturality i)).symm
     · exact congrArg ULift.down (congrArg (fun k ↦ k x) (b.hom.naturality i)).symm)
 
-omit [J.HasSheafCompose (CategoryTheory.forget CommRingCat.{r} ⋙
-  uliftFunctor.{max r m, r})] in
-omit [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [J.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{max r m} ⋙
-    uliftFunctor.{r, max r m})] in
 end Operations
 
 section ImageOperations

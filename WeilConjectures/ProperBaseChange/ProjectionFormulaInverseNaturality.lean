@@ -190,6 +190,5 @@ variable
       CommRingCat.{u} RingCat.{u})).obj S)) ℤ) (hK : K.IsKInjective)
     (repE : E ≅ DerivedCategory.Q.obj K)
 
-set_option maxHeartbeats 800000 in
 -- Keep all derived and ordinary representative isomorphisms explicit.
 end SheafOfModules

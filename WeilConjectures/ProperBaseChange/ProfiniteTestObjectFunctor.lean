@@ -34,6 +34,4 @@ namespace AlgebraicGeometry.ProEtale
 -- Continuous functors to a subcanonical site preserve finite coproducts:
 -- pull back representables, restrict to the extensive topology, and use Yoneda.
 private abbrev point : Profinite.{u} := Profinite.of PUnit.{u + 1}
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale

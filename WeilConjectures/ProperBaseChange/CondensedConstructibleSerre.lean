@@ -306,18 +306,4 @@ private lemma locally_free_comap {X : Scheme.{u}}
   let F := upperStar Ab.{u + 1} (U.f i)
   exact free_of_iso (free_comap (F.map φ) (hU i)) ((F.mapModComapIso φ).app M).symm
 
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
-open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
 end AlgebraicGeometry.ProEtale

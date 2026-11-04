@@ -66,8 +66,6 @@ attribute [local instance] degree_preservesZero
 attribute [local instance] objectResolution_preservesZero
 
 -- Postcomposing a cokernel differential with a mono preserves exactness.
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end
 
 end CochainComplex

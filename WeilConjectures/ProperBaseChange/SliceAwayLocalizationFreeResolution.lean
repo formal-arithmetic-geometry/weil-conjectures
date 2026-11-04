@@ -39,21 +39,12 @@ variable {R : Type u} [CommRing R]
 
 end AlgebraicTelescope
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 section
 
 variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   (O : Sheaf J CommRingCat.{u}) (U : C) (f : O.obj.obj (op U))
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end
 
 section
@@ -68,10 +59,6 @@ private noncomputable abbrev sh : PresheafOfModules.{u} R.obj ⥤ SheafOfModules
 private noncomputable abbrev adj :=
   PresheafOfModules.sheafificationAdjunction.{u} (𝟙 R.obj)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end
 
 end CategoryTheory
