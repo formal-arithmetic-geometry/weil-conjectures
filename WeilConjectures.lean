@@ -63,6 +63,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSiteBiproduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
@@ -437,6 +438,7 @@ public import WeilConjectures.Algebra.Homology.Finite.FiniteFreeMonoCokernelKFla
 public import WeilConjectures.Algebra.Homology.Finite.FiniteFreeScalarExtension
 public import WeilConjectures.Algebra.Homology.Finite.FiniteRingActionLocalConstancy
 public import WeilConjectures.Algebra.Homology.FiniteChainSquaresColimitDescent
+public import WeilConjectures.Algebra.Homology.FiniteFilteredTwistingTotalization
 public import WeilConjectures.Algebra.Homology.FiniteFreeInternalHomExactSequence
 public import WeilConjectures.Algebra.Homology.FiniteFreeZeroHomologyEvaluation
 public import WeilConjectures.Algebra.Homology.FiniteFreeZeroHomologyEvaluationCycles
@@ -455,6 +457,16 @@ public import WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapDifferent
 public import WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapEpi
 public import WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapIsIso
 public import WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapMono
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationBase
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationComparison
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationComparisonFilteredHom
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationComparisonGraded
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationData
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationFiltration
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationFlatness
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationMatrix
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationStructure
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationTail
 public import WeilConjectures.Algebra.Homology.FirstLocalizationCohomologyBaseChange
 public import WeilConjectures.Algebra.Homology.FirstLocalizationComparison
 public import WeilConjectures.Algebra.Homology.FirstLocalizationMap
@@ -4158,6 +4170,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenUnionSESPresentation
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenUnitCone
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
 public import WeilConjectures.AlgebraicGeometry.DerivedPairingOppositeShiftsPullback
+public import WeilConjectures.AlgebraicGeometry.DerivedPointRestrictionComposition
 public import WeilConjectures.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackAcrossUniverses
@@ -5845,6 +5858,7 @@ public import WeilConjectures.AlgebraicGeometry.FieldComplexHomotopyNormalForm
 public import WeilConjectures.AlgebraicGeometry.FieldComplexSingleCohomology
 public import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermFamilySection
 public import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermsOnePoint
+public import WeilConjectures.AlgebraicGeometry.FieldExtensionComponentLocalDimension
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDerivedDirectImageExchange
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionFpqcCover
@@ -8111,6 +8125,7 @@ public import WeilConjectures.AlgebraicGeometry.LocalSystemGenericZeroMap
 public import WeilConjectures.AlgebraicGeometry.LocalTensorFiniteFreeZeroModel
 public import WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBound
 public import WeilConjectures.AlgebraicGeometry.LocalZeroBottomTruncation
+public import WeilConjectures.AlgebraicGeometry.LocalizationSheafExchange
 public import WeilConjectures.AlgebraicGeometry.Localized.LocalizedCartesianFlatSingleComparison
 public import WeilConjectures.AlgebraicGeometry.Localized.LocalizedMixedPullbackFiniteFreeModel
 public import WeilConjectures.AlgebraicGeometry.Localized.LocalizedStrictPerfectResidueHomology
@@ -8144,6 +8159,7 @@ public import WeilConjectures.AlgebraicGeometry.Locally.LocallyConstantLineTwist
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyConstantTorsionLocalAcyclicity
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyFiniteCoefficientRingRealization
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyPerfectScalarModel
+public import WeilConjectures.AlgebraicGeometry.LocallyAlgebraicDimensionComponents
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedCoefficientImmersion.LocallyClosedModuleExtensionModel
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedExtensionData.LocallyClosedExtensionCoherence
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedExtensionData.LocallyClosedModuleExtensionCoherence
@@ -8158,6 +8174,7 @@ public import WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
 public import WeilConjectures.AlgebraicGeometry.LocallyFiniteTorDimension
 public import WeilConjectures.AlgebraicGeometry.LocallyFinitelyPresentedExtendScalars
 public import WeilConjectures.AlgebraicGeometry.LocallyFreeTensorSingle
+public import WeilConjectures.AlgebraicGeometry.LocallyIndEtaleBaseChangeCharts
 public import WeilConjectures.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent
 public import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 public import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeThickening
@@ -13691,6 +13708,7 @@ public import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedHom
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
 public import WeilConjectures.CategoryTheory.Abelian.FirstResolutionExtensionClass
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Biproduct
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.Abelian.HomologyFilteredColimit
@@ -14263,6 +14281,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryA
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBasis
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBiproductPow
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCompIsoNatTrans
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -14880,6 +14899,8 @@ public import WeilConjectures.CategoryTheory.LocalExtendedCechDescription
 public import WeilConjectures.CategoryTheory.LocalModuleHom
 public import WeilConjectures.CategoryTheory.LocalModuleIso
 public import WeilConjectures.CategoryTheory.Localization.ResolutionNormalizedComparison
+public import WeilConjectures.CategoryTheory.LocalizationClosedMate
+public import WeilConjectures.CategoryTheory.LocalizationExactBoundary
 public import WeilConjectures.CategoryTheory.LocalizationRHom.RingedLocalizationRestrictionSupplement
 public import WeilConjectures.CategoryTheory.Localized.LocalizedCommRingPullbackComparison
 public import WeilConjectures.CategoryTheory.Localized.LocalizedExtensionZeroLinearDerived
@@ -15238,6 +15259,7 @@ public import WeilConjectures.CategoryTheory.RepresentedSectionsScalarUnit
 public import WeilConjectures.CategoryTheory.ResolutionDerivedSingleUnitAugmentation
 public import WeilConjectures.CategoryTheory.ResolutionPullbackAugmentation
 public import WeilConjectures.CategoryTheory.ResolutionSectionCohomology
+public import WeilConjectures.CategoryTheory.RestrictedClosedProjectionExchange
 public import WeilConjectures.CategoryTheory.RestrictionRingedToposModuleDirectImage
 public import WeilConjectures.CategoryTheory.Right.RightDerivedComplexUnitNormalization
 public import WeilConjectures.CategoryTheory.Right.RightDerivedExactRestrictionNormalization
@@ -17097,6 +17119,7 @@ public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.Algebra.Group.Subgroup.Ker
 public import WeilConjectures.Mathlib.Algebra.GroupWithZero.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
@@ -17149,6 +17172,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.LeftExactHomologyEdge
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Preadditive
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
@@ -17358,6 +17382,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Ker
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ArrowExactColimits
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Bicone.IsBilimit.BiconeFiniteSupportTotal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ContinuousLatticeIntersectionSupplement
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
@@ -17523,6 +17548,7 @@ public import WeilConjectures.Mathlib.Combinatorics.Enumerative.IncidenceAlgebra
 public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Fin.Tuple.Basic
 public import WeilConjectures.Mathlib.Data.Finset.Order
+public import WeilConjectures.Mathlib.Data.Fintype.BigOperators
 public import WeilConjectures.Mathlib.Data.Multiset.MapFold
 public import WeilConjectures.Mathlib.Data.Multiset.UnionInter
 public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
@@ -17789,6 +17815,7 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionAlgEquiv
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionTorsion
 public import WeilConjectures.NumberTheory.Padics.ContinuousUniformizerDivision
 public import WeilConjectures.NumberTheory.Padics.Exponential
 public import WeilConjectures.NumberTheory.Padics.Extension
@@ -19514,6 +19541,7 @@ public import WeilConjectures.RingTheory.Regular.Depth
 public import WeilConjectures.RingTheory.Regular.RegularSequenceGradedPolynomial
 public import WeilConjectures.RingTheory.Regular.RegularSequenceHigherRelations
 public import WeilConjectures.RingTheory.RegularBaseChange
+public import WeilConjectures.RingTheory.RegularCompleteCoefficientCoordinates
 public import WeilConjectures.RingTheory.RegularComposition
 public import WeilConjectures.RingTheory.RegularCompositionExtendedFiber
 public import WeilConjectures.RingTheory.RegularFiberKernelParameterLift
@@ -22892,6 +22920,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.Tr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.TraceBaseChangeSecond
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TraceCupSigns.TraceCupSigns
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TraceFormula.OrdinaryKunnethClosedComposite
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TraceSection.TraceFiniteCoefficientPrimary
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundIntegers
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundPadicAlgCl
@@ -24545,6 +24574,7 @@ public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FibreModel
 public import WeilConjectures.TraceFormula.FieldDualizable
 public import WeilConjectures.TraceFormula.FiniteEtaleStalkTrace
+public import WeilConjectures.TraceFormula.FiniteRingTrace.TraceFormulaFiniteCoefficientPrimary
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointAlgebra
 public import WeilConjectures.TraceFormula.FixedPointComponent
@@ -25153,6 +25183,8 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisorDevissag
 public import WeilConjectures.TraceFormula.TransverseBoundary.PuncturedTrait
 public import WeilConjectures.TraceFormula.TransverseBoundary.PuncturedTraitChart
 public import WeilConjectures.TraceFormula.TransverseBoundary.TameLocalConstancy
+public import WeilConjectures.TraceFormula.TrfSignedContraction.SignedContractionPermutation
+public import WeilConjectures.TraceFormula.TrfSignedContraction.SignedContractionUnitTranspose
 public import WeilConjectures.TraceFormula.UnitBasis
 public import WeilConjectures.TraceFormula.WeilBaseChange
 public import WeilConjectures.TraceFormula.WeilDistTriang
