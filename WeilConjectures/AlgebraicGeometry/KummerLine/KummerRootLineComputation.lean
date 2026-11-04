@@ -5,13 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Kummer.KummerModuleCoefficients
 public import WeilConjectures.AlgebraicGeometry.KummerLine.KummerLineGeometry
-public import WeilConjectures.AlgebraicGeometry.KummerLine.KummerRootCohomologyModule
-public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
-public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.Algebra.Module.ZMod
 
 import WeilConjectures.AlgebraicGeometry.AffinePuncturedLine.AffinePuncturedLineAlgebra
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
@@ -19,11 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityPullback
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.Algebra.Group.TypeTags.Basic
 import Mathlib.Algebra.Group.Prod
-import Mathlib.Algebra.Module.ZMod
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.RingTheory.KrullDimension.Polynomial
 
 /-!
@@ -42,19 +35,36 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
+namespace AlgebraicGeometry.Scheme
+
+/-- Roots-of-unity cohomology is killed by `m`, hence has its unique `ZMod m` action.
+Source: Stacks, Tag 03PK (blueprint: def-pur-kummer-module-coefficients).
+Proof: multiplication by m on the roots sheaf is zero by its kernel inclusion into G_m.
+The additive cohomology functor sends this equality to multiplication by m equal to zero. -/
+theorem kummerRootCohomology_annihilated (X : Scheme.{u}) (m q : ℕ)
+    (x : Sheaf.H (X.rootsOfUnitySheaf m) q) : m • x = 0 := by
+  have h : m • 𝟙 (X.rootsOfUnitySheaf m) = 0 := by
+    change m • 𝟙 (kernel (m • 𝟙 X.gmSheaf)) = 0
+    rw [← cancel_mono (kernel.ι (m • 𝟙 X.gmSheaf)), Preadditive.nsmul_comp,
+      Category.id_comp, zero_comp, ← Category.comp_id (kernel.ι _),
+      ← Preadditive.comp_nsmul, kernel.condition]
+  have hx := congrArg (fun f ↦ Sheaf.H.map f q x) h
+  rw [Sheaf.H.map_nsmul_apply, Sheaf.H.map_id_apply, Sheaf.H.map_apply,
+    Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero] at hx
+  exact hx
+
+/-- The unique residue-ring action on roots-of-unity cohomology.
+Source: Stacks, Tag 03PK (blueprint: def-pur-kummer-module-coefficients). -/
+instance kummerRootCohomologyModule (X : Scheme.{u}) (m q : ℕ) :
+    Module (ULift.{u + 1} (ZMod m)) (Sheaf.H (X.rootsOfUnitySheaf m) q) :=
+  letI := AddCommGroup.zmodModule (kummerRootCohomology_annihilated X m q)
+  Module.compHom _ ULift.ringEquiv.toRingHom
+
+end AlgebraicGeometry.Scheme
+
 namespace AlgebraicGeometry.KummerLine
 
 attribute [local irreducible] Scheme.kummerδ₀
-
-/-- Identities are étale; named so that instance search does not unfold étaleness. -/
-local instance etaleContainsIdentities :
-    MorphismProperty.ContainsIdentities (@Etale : MorphismProperty Scheme.{u}) :=
-  MorphismProperty.IsMultiplicative.toContainsIdentities
-
-/-- Étale morphisms are stable under composition; named for instance search. -/
-local instance etaleStableUnderComposition :
-    MorphismProperty.IsStableUnderComposition (@Etale : MorphismProperty Scheme.{u}) :=
-  MorphismProperty.IsMultiplicative.toIsStableUnderComposition
 
 private def residueLinearMap (m : ℕ) {M P : Type (u + 1)}
     [AddCommGroup M] [AddCommGroup P]
@@ -115,7 +125,7 @@ private lemma zero_trivialization (X : Scheme.{u}) [ConnectedSpace X]
       congrArg (fun φ : X.constantZMod m ⟶ X.gmSheaf ↦ φ.hom)
         (kernel.lift_ι (m • 𝟙 X.gmSheaf) (X.constantZModToGmSheaf m a ha)
           (X.constantZModToGmSheaf_comp_nsmul m a ha))
-    erw [hh]
+    rw [hh]
     exact X.toSheafify_constantZModToGmSheaf m a ha
   have hh := congrArg (fun f ↦ (f.app (op T)) (1 : ULift.{u + 1} (ZMod m))) hfac
   change _ = (X.zmodToGmPresheaf m a ha).app (op T) (ULift.up (1 : ZMod m)) at hh
@@ -140,12 +150,7 @@ private lemma root_zero (k : Type u) [Field k] (m : ℕ) [NeZero m]
           ULift.up (Additive.ofMul (Units.map (scalar k b).toMonoidHom ζ)) := by
   let X := curve k b
   have : ConnectedSpace X := by
-    cases b
-    · have : IsDomain (CommRingCat.of (Polynomial k)) := inferInstanceAs (IsDomain (Polynomial k))
-      exact inferInstanceAs (ConnectedSpace (Spec (CommRingCat.of (Polynomial k))))
-    · have : IsDomain (CommRingCat.of (LaurentPolynomial k)) :=
-        inferInstanceAs (IsDomain (LaurentPolynomial k))
-      exact inferInstanceAs (ConnectedSpace (Spec (CommRingCat.of (LaurentPolynomial k))))
+    cases b <;> dsimp [X, curve] <;> infer_instance
   let a := Units.map (scalar k b).toMonoidHom ζ
   have ha : a ^ m = 1 := by
     change (Units.map (scalar k b).toMonoidHom ζ) ^ m = 1
@@ -154,12 +159,6 @@ private lemma root_zero (k : Type u) [Field k] (m : ℕ) [NeZero m]
   have : IsIso θ := X.isIso_constantZModToRootsOfUnitySheaf m (structureMap k b)
     (IsPrimitiveRoot.coe_units_iff.mpr hζ) a ha rfl
   exact zero_trivialization X m a ha
-
-private lemma inclusion_comp_structureMap (k : Type u) [Field k] :
-    inclusion k ≫ structureMap k false = structureMap k true :=
-  (Spec.map_comp (CommRingCat.ofHom Polynomial.C)
-    (CommRingCat.ofHom Polynomial.toLaurent)).symm.trans
-    (congrArg Spec.map (CommRingCat.hom_ext (RingHom.ext fun x ↦ Polynomial.toLaurent_C x)))
 
 private lemma line_curve (k : Type u) [Field k] (b : Bool) :
     IsCurve (structureMap k b) := by
@@ -170,7 +169,12 @@ private lemma line_curve (k : Type u) [Field k] (b : Bool) :
     rfl
   have hopen : IsOpenImmersion (inclusion k) :=
     IsOpenImmersion.of_isLocalization (S := LaurentPolynomial k) Polynomial.X
-  have hcomp := inclusion_comp_structureMap k
+  have hcomp : inclusion k ≫ structureMap k false = structureMap k true := by
+    rw [inclusion, structureMap, structureMap, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 2
+    apply RingHom.ext
+    intro x
+    exact Polynomial.toLaurent_C x
   have hfinite : LocallyOfFiniteType (structureMap k false) := by
     change LocallyOfFiniteType (Spec.map (CommRingCat.ofHom Polynomial.C))
     rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
@@ -195,8 +199,12 @@ private lemma root_higher (k : Type u) [Field k] [IsAlgClosed k]
   have : IsCurve (structureMap k b) := line_curve k b
   have : IsAffine (curve k b) := by cases b <;> dsimp [curve] <;> infer_instance
   have ht : ((curve k b).rootsOfUnitySheaf m).IsTorsion := by
-    exact Scheme.isTorsion_of_nsmul_id_eq_zero
-      (Nat.pos_of_ne_zero (NeZero.ne m)) (Scheme.nsmul_id_etale_rootsOfUnitySheaf _ m)
+    refine Scheme.isTorsion_of_nsmul_id_eq_zero
+      (Nat.pos_of_ne_zero (NeZero.ne m))
+      ((cancel_mono (kernel.ι (m • 𝟙 (curve k b).gmSheaf))).1 ?_)
+    rw [Preadditive.nsmul_comp, Category.id_comp, zero_comp,
+      ← Category.comp_id (kernel.ι (m • 𝟙 (curve k b).gmSheaf)),
+      ← Preadditive.comp_nsmul, kernel.condition]
   exact IsCurve.subsingleton_sheafH_of_two_le_of_isAffine (structureMap k b) _ ht q hq
 
 private lemma terminal_naturality (X : Scheme.{u})
@@ -204,26 +212,6 @@ private lemma terminal_naturality (X : Scheme.{u})
     {T S : X.Etale} (hT : IsTerminal T) (hS : IsTerminal S) (x : Sheaf.H F 0) :
     F.obj.map (hT.from S).op (Sheaf.H.equiv₀ F hT x) = Sheaf.H.equiv₀ F hS x := by
   exact (Sheaf.H.equiv₀_congr hT hS F x).symm
-
-private lemma equiv₀_naturality_etale (X : Scheme.{u})
-    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : F ⟶ G)
-    {T : X.Etale} (hT : IsTerminal T) (x : Sheaf.H F 0) :
-    f.hom.app (op T) (Sheaf.H.equiv₀ F hT x) = Sheaf.H.equiv₀ G hT (Sheaf.H.map f 0 x) :=
-  Sheaf.H.equiv₀_naturality hT f x
-
-/-- Restricting `gmSection u` from the terminal object of `X_ét` to `X` itself gives `u`. -/
-private lemma gmSheaf_map_terminalFrom_gmSection (X : Scheme.{u}) (u : Γ(X, ⊤)ˣ) :
-    X.gmSheaf.obj.map (terminalIsTerminal.from (Scheme.Etale.mk (𝟙 X))).op
-        (Scheme.gmSection u) = ULift.up (Additive.ofMul u) := by
-  apply ULift.ext
-  apply Additive.toMul.injective
-  apply Units.ext
-  let g : Scheme.Etale.mk (𝟙 X) ⟶ ⊤_ X.Etale := terminalIsTerminal.from _
-  have hw : g.left ≫ (⊤_ X.Etale).hom = 𝟙 X := MorphismProperty.Over.w g
-  refine (X.gmPresheaf_map_apply g _).trans ?_
-  change g.left.appTop ((⊤_ X.Etale).hom.appTop (u : Γ(X, ⊤))) = (u : Γ(X, ⊤))
-  erw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, hw]
-  rfl
 
 private lemma root_restriction_sections (X Y : Scheme.{u}) (f : Y ⟶ X) (m : ℕ)
     (a : Γ(X, ⊤)ˣ) (c : Γ(Y, ⊤)ˣ)
@@ -244,24 +232,18 @@ private lemma root_restriction_sections (X Y : Scheme.{u}) (f : Y ⟶ X) (m : �
           (MorphismProperty.Over.mkIdTerminal @Etale Z) z) = ULift.up (Additive.ofMul a)) :
       Sheaf.H.equiv₀ Z.gmSheaf terminalIsTerminal
         (Sheaf.H.map (Z.rootsOfUnitySheafι m) 0 z) = Scheme.gmSection a := by
-    let hT : IsTerminal (Scheme.Etale.mk (𝟙 Z)) := MorphismProperty.Over.mkIdTerminal @Etale Z
+    let hT := MorphismProperty.Over.mkIdTerminal @Etale Z
     rw [← terminal_naturality Z Z.gmSheaf hT terminalIsTerminal,
-      ← equiv₀_naturality_etale Z (Z.rootsOfUnitySheafι m) hT z]
-    have hg : hT.from (⊤_ Z.Etale) ≫ terminalIsTerminal.from _ = 𝟙 _ :=
-      terminalIsTerminal.hom_ext _ _
-    refine (congrArg (Z.gmSheaf.obj.map (hT.from (⊤_ Z.Etale)).op) hz).trans ?_
-    refine (congrArg (Z.gmSheaf.obj.map (hT.from (⊤_ Z.Etale)).op)
-      (gmSheaf_map_terminalFrom_gmSection Z a).symm).trans ?_
-    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, hg, op_id,
-      CategoryTheory.Functor.map_id, ConcreteCategory.id_apply]
+      ← Sheaf.H.equiv₀_naturality]
+    exact (congrArg (Z.gmSheaf.obj.map ((hT).from (⊤_ Z.Etale)).op) hz).trans (by rfl)
   have hinj : Function.Injective (Sheaf.H.map (Y.rootsOfUnitySheafι m) 0) := by
     intro v w heq
     let hT := MorphismProperty.Over.mkIdTerminal @Etale Y
     apply (Sheaf.H.equiv₀ (Y.rootsOfUnitySheaf m) hT).injective
     apply Y.injective_kernelι_app m _
-    exact (equiv₀_naturality_etale Y (Y.rootsOfUnitySheafι m) hT v).trans
+    exact (Sheaf.H.equiv₀_naturality (hT := hT) (Y.rootsOfUnitySheafι m) v).trans
       ((congrArg (Sheaf.H.equiv₀ Y.gmSheaf hT) heq).trans
-        (equiv₀_naturality_etale Y (Y.rootsOfUnitySheafι m) hT w).symm)
+        (Sheaf.H.equiv₀_naturality (hT := hT) (Y.rootsOfUnitySheafι m) w).symm)
   apply hinj
   apply (Sheaf.H.equiv₀ Y.gmSheaf terminalIsTerminal).injective
   rw [Scheme.map_kernelι_rootsOfUnityCohomologyMap,
@@ -281,7 +263,12 @@ private lemma root_restriction_zero (k : Type u) [Field k] (m : ℕ) (ζ : kˣ)
     (Units.map (scalar k false).toMonoidHom ζ)
     (Units.map (scalar k true).toMonoidHom ζ) ?_ (z false) (z true) (hz false) (hz true)
   apply Units.ext
-  have hcomp := inclusion_comp_structureMap k
+  have hcomp : inclusion k ≫ structureMap k false = structureMap k true := by
+    rw [inclusion, structureMap, structureMap, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 2
+    apply RingHom.ext
+    intro x
+    exact Polynomial.toLaurent_C x
   change ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ (structureMap k false).appTop ≫
     (inclusion k).appTop) (ζ : k) = _
   rw [← Scheme.Hom.comp_appTop, hcomp]

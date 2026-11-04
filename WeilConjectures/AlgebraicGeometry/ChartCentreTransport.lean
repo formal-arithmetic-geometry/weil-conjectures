@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ConormalGradedAlgebra.ConormalAl
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalRegularPureCodimension
 public import WeilConjectures.AlgebraicGeometry.Purity.PurityNormalProjection
 public import WeilConjectures.AlgebraicGeometry.RelativeTangentBundle.RelativeTangentBundle
+public import WeilConjectures.AlgebraicGeometry.ChartNormalDifferential.ChartNormalDifferential
 public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDifferentials
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale

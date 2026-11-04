@@ -80,10 +80,10 @@ private theorem mapComplex_unit_formula
     Iso.refl_inv, NatTrans.id_app]
   erw [Category.id_comp, Category.comp_id]
 
+set_option maxHeartbeats 2000000 in
 -- The kernel re-check of the final instantiation of the generic normalized tensor lemma
 -- (scalarAdjointInsertion's derived adjunction against `E ⊣ U.mapDerivedCategory`) exceeds
 -- the default budget; elaboration itself is within it.
-set_option maxHeartbeats 2000000 in
 /-- Tensoring the two normalized scalar insertions agrees with inserting their ordinary
 semilinear tensor product, under the published scalar tensorator and flat-single comparisons.
 The ordinary restriction tensorator is `Functor.LaxMonoidal.μ` of exact scalar restriction.
@@ -121,8 +121,8 @@ theorem tateTensor_scalarAdjointInsertion
     (φ : A →+* B) (T : Scheme.{u})
     (L₁ L₂ : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
     (P₁ P₂ : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B))
-    (hL₁ : ObjectProperty.flat L₁) (hL₂ : ObjectProperty.flat L₂)
-    (hP₁ : ObjectProperty.flat P₁) (hP₂ : ObjectProperty.flat P₂)
+    (hL₁ : ObjectProperty.flat L₁) (_hL₂ : ObjectProperty.flat L₂)
+    (hP₁ : ObjectProperty.flat P₁) (_hP₂ : ObjectProperty.flat P₂)
     (η₁ : L₁ ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj P₁)
     (η₂ : L₂ ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj P₂) :
     (ExceptionalCoefficients.tensorIso φ T).hom.app

@@ -52,4 +52,7 @@ noncomputable def P0Index.map (R : Type u) [CommRing R]
   match z with
   | Sum.inl z => z.1
   | Sum.inr z => z.2.1
+
+-- The explicit range and complement calculation needs extra elaboration heartbeats.
+-- The explicit P0 freeness and homology instance elaboration needs extra heartbeats.
 end CategoryTheory

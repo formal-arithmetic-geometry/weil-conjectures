@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Supported.SupportedExteriorProduct
 public import WeilConjectures.AlgebraicGeometry.KunnethGlobalSections
 public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs

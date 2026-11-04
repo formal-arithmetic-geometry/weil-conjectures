@@ -24,9 +24,51 @@ universe u
 open CategoryTheory MonoidalCategory MonObj Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AddCommGrpCat
+private def intResidue (n : ℕ) : 𝟙_ Ab.{u + 1} ⟶ of (ULift.{u + 1} (ZMod n)) :=
+  ofHom ((AddEquiv.ulift.symm.toAddMonoidHom).comp
+    ((Int.castAddHom (ZMod n)).comp AddEquiv.ulift.toAddMonoidHom))
+private theorem intResidue_condition (n : ℕ) : (n • 𝟙 (𝟙_ Ab.{u + 1})) ≫ intResidue n = 0 := by
+  ext x
+  change ((n • x.down : ℤ) : ZMod n) = 0
+  simp
+private noncomputable def intResidueCokernel (n : ℕ) :
+    IsColimit (CokernelCofork.ofπ (intResidue.{u} n) (intResidue_condition n)) := by
+  have : Epi (intResidue.{u} n) := by
+    rw [epi_iff_surjective]
+    intro a
+    obtain ⟨b, hb⟩ := ZMod.intCast_surjective a.down
+    exact ⟨ULift.up b, congrArg ULift.up hb⟩
+  let S := ShortComplex.mk (n • 𝟙 (𝟙_ Ab.{u + 1})) (intResidue.{u} n)
+    (intResidue_condition n)
+  have hS : S.Exact := by
+    rw [ShortComplex.ab_exact_iff]
+    intro a ha
+    have h : (a.down : ZMod n) = 0 := congrArg ULift.down ha
+    obtain ⟨b, hb⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp h
+    refine ⟨ULift.up b, ?_⟩
+    apply ULift.ext
+    exact (show (n : ℤ) * b = a.down from hb.symm)
+  exact hS.gIsCokernel
 end AddCommGrpCat
 
 namespace AlgebraicGeometry.ProEtale
+
+private def freeUnitIso {X : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] :
+    (Mod.freeFunctor R).obj (𝟙_ _) ≅ Mod.regular R :=
+  Mod.isoMk (ρ_ R) (by
+    change ((α_ R R (𝟙_ _)).inv ≫ μ[R] ▷ (𝟙_ _)) ≫ (ρ_ R).hom =
+      R ◁ (ρ_ R).hom ≫ μ[R]
+    rw [Category.assoc, rightUnitor_naturality]
+    monoidal)
+
+private instance freeFunctorAdditive {X : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] :
+    (Mod.freeFunctor R).Additive :=
+  { map_add := by
+      intro A B f g
+      apply Mod.hom_ext
+      exact MonoidalPreadditive.whiskerLeft_add f g }
 
 private theorem freeConstantResidue_isIso {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
@@ -58,6 +100,15 @@ private theorem freeConstantResidue_isIso {X : Scheme.{u}}
     CokernelCofork.IsColimit.isIso_π (c.map F)
       (c.mapIsColimit (AddCommGrpCat.intResidueCokernel n) F) hzero
   infer_instance
+
+private def freePullIso {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    Mod.freeFunctor R ⋙ (upperStar Ab.{u + 1} f).mapMod R ≅
+      upperStar Ab.{u + 1} f ⋙ Mod.freeFunctor ((upperStar Ab.{u + 1} f).obj R) := by
+  let adj := upperStarLowerStarAdjunction Ab.{u + 1} f
+  exact ((Mod.freeForgetAdjunction R).comp (adj.mapModAdjunction R)).leftAdjointUniq
+    (adj.comp (Mod.freeForgetAdjunction ((upperStar Ab.{u + 1} f).obj R)))
+
 
 private theorem freeResidueReduction_isIso {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
