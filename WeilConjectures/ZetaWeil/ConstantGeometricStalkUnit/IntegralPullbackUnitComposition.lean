@@ -63,7 +63,7 @@ private theorem reductionNat_app {X Y : Scheme.{u}} (f : X ⟶ Y)
   apply Iso.ext
   apply (cancel_epi ((integralSystemReductionEvaluation l E X n).hom.app
     ((constructibleIntegralPullback l E f).obj K))).1
-  have h := (integralPullbackSystemComparison l E).choose_spec f K P e n
+  have h := (integralPullbackSystemComparison l E).choose_spec.1 f K P e n
   simpa only [reductionNat, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
     NatTrans.comp_app, isoWhiskerLeft_hom, isoWhiskerRight_hom,
     whiskerLeft_app, whiskerRight_app, Functor.associator_hom_app,
