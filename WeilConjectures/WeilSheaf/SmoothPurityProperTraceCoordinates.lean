@@ -83,10 +83,10 @@ lemma baseChangedProperTrace_levelwise :
     boundedConstructibleBaseChangeOfMap_inv_app_hom]
   rfl
 
-/-- The base-changed smooth proper trace is universal in the exact-pullback
-coordinates used by the descended Weil trace. -/
-theorem bijective_map_comp_properTrace_levelwise [IsIso γ]
-    (d : ℕ) [SmoothOfRelativeDimension d f.left]
+/-- The base-changed proper trace is universal in the exact-pullback coordinates
+when its exceptional base-change component is invertible. -/
+theorem bijective_map_comp_properTrace_levelwise_of_isIso [IsIso γ]
+    [IsIso ((upperShriekBaseChangeOfMap l sq).app N)]
     (K : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj l⟧) :
     Function.Bijective fun φ : K.obj ⟶
         (upperStar (Profinite.padicAlgClRingObj l) πX).mapDerivedCategory.obj P.obj ↦
@@ -102,7 +102,22 @@ theorem bijective_map_comp_properTrace_levelwise [IsIso γ]
     ((leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πY).app N.obj)
     (baseChangedProperTrace l f f' sq γ
       (𝟙 ((boundedConstructibleUpperStarOfMap l πY).obj N))).hom
-    (bijective_map_comp_baseChangedProperTrace l f f' sq γ
-      (𝟙 ((boundedConstructibleUpperStarOfMap l πY).obj N)) d K)
+    (bijective_map_comp_baseChangedProperTrace_of_isIso l f f' sq γ
+      (𝟙 ((boundedConstructibleUpperStarOfMap l πY).obj N)) K)
+
+/-- The base-changed smooth proper trace is universal in the exact-pullback
+coordinates used by the descended Weil trace. -/
+theorem bijective_map_comp_properTrace_levelwise [IsIso γ]
+    (d : ℕ) [SmoothOfRelativeDimension d f.left]
+    (K : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj l⟧) :
+    Function.Bijective fun φ : K.obj ⟶
+        (upperStar (Profinite.padicAlgClRingObj l) πX).mapDerivedCategory.obj P.obj ↦
+      (lowerStar (Profinite.padicAlgClRingObj l) f'.left).rightDerivedFunctor.map φ ≫
+      (rightDerivedLowerStarBaseChangeIso (Profinite.padicAlgClRingObj l) sq).inv.app P.obj ≫
+      (upperStar (Profinite.padicAlgClRingObj l) πY).mapDerivedCategory.map
+        (((boundedConstructibleLowerStar l f).map γ ≫
+          (lowerStarUpperShriekAdjunction l f).counit.app N).hom) := by
+  have := isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale l d sq N
+  exact bijective_map_comp_properTrace_levelwise_of_isIso l f f' sq γ K
 
 end AlgebraicGeometry.ProEtale.CondensedRing
