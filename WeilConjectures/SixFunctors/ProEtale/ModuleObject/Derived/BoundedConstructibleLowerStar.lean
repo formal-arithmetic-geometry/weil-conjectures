@@ -125,6 +125,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+omit [Fact (ringChar k).Prime] in
 /-- **Deligne's finiteness theorem** for `Rf_*` (blueprint `lem-sfb-dc-lower-star-preserves`;
 part of blueprint `sk-def-sfb-dc-restricted-functors`): for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
@@ -133,7 +134,7 @@ for torsion coefficients; Bhatt–Scholze, Section 6.8, for `ℚ̲̄_ℓ`). It i
 condensed ring: for the constant discrete ring `𝔽_p` and the affine line over an algebraically
 closed field of characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which
 is infinite. -/
-lemma boundedConstructible_rightDerivedLowerStar_obj
+lemma boundedConstructible_rightDerivedLowerStar_obj_of_ringChar_ne
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)
       ((R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) := by
@@ -143,6 +144,15 @@ lemma boundedConstructible_rightDerivedLowerStar_obj
   exact boundedConstructible_rightDerivedLowerStar_obj_of_single _ f inferInstance
     (finiteTypeDirectImage_single_boundedAbove ℓ f)
     (finiteTypeDirectImage_single_constructible ℓ f) K.property
+
+set_option linter.unusedSectionVars false in
+/-- **Deligne's finiteness theorem** for `Rf_*` over a field of positive characteristic `≠ ℓ`
+(see `boundedConstructible_rightDerivedLowerStar_obj_of_ringChar_ne`). -/
+lemma boundedConstructible_rightDerivedLowerStar_obj
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)
+      ((R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) :=
+  boundedConstructible_rightDerivedLowerStar_obj_of_ringChar_ne ℓ f K
 
 /-- The derived pushforward `Rf_* : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded constructible
 complexes: the restriction of `R((f)_*⟦ℚ̲̄_ℓ⟧)`. -/
@@ -212,6 +222,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+set_option linter.unusedSectionVars false in
 /-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
 constructible complexes of `E`-sheaves to bounded constructible complexes (SGA 4½ [Th. finitude] for
@@ -308,6 +319,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+set_option linter.unusedSectionVars false in
 /-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
 constructible complexes of `𝒪_E`-sheaves to bounded constructible complexes (SGA 4½ [Th. finitude]
