@@ -73,6 +73,11 @@ def universalTranslation (c : k) : universalCover k ⟶ universalCover k :=
   Over.homMk (Etale.artinSchreierTranslation k c)
     (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)
 
+/-- The averaging endomorphism of the universal cover's coefficient functions for the
+character `χ`, built from the universal translations. -/
+abbrev universalProjector (χ : AddChar k (MonObj.Γ Λ)) :=
+  condensedProjector Λ k (universalCover k) (universalTranslation k) χ
+
 /-- Translation remains a cover map after negation on the base. -/
 def negativeTranslation (c : k) : negativeCover k ⟶ negativeCover k :=
   Over.homMk (Etale.artinSchreierTranslation k c) (by

@@ -3,17 +3,20 @@ Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.Compactification.Defs
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.AlgebraicGeometry.Artinian
 import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.Constant.ConstantShriekRelativeDimensionOne
 import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleSurjectivePullback
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportBaseChangeQcqs
@@ -46,6 +49,8 @@ affine Noetherian finite-dimensional base. The proof follows the closed-subset i
 compact-support base change, good-curves diagram, quasi-finite boundary, proper-smooth models,
 open-closed triangles, and descent steps recorded in the DAG node.
 -/
+
+@[expose] public section
 
 universe u
 
@@ -162,6 +167,66 @@ private theorem goodCurves_constantShriek_constructible
         ((constantSheaf _ (ModuleCat.{u + 1} Λ)).obj M))
       (constantSingle_constructible Λ _ M) cZ q
 
+/-- Generic step: over a nonempty affine Noetherian base, the compactly supported cohomology
+of a finite constant module on a separated affine smooth relative curve is constructible on a
+nonempty open of the base, in every characteristic.
+Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+private theorem generic_constantShriek_constructible
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X S : Scheme.{u}} [IsNoetherian S] [IsAffine S] [Nonempty S]
+    (f : X ⟶ S) [IsSeparated f] [IsAffineHom f] [SmoothOfRelativeDimension 1 f]
+    (M : ModuleCat.{u + 1} Λ) [Finite M] (c : Compactification f) :
+    ∃ U : S.Opens, Nonempty U ∧ ∀ q : ℤ, Scheme.IsConstructibleSheaf
+      ((upperStar (ModuleCat.{u + 1} Λ) U.ι).obj
+        ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj
+          ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj
+            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj
+              ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))))) := by
+  classical
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsAffine X := isAffine_of_isAffineHom f
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  let x : S := Classical.choice inferInstance
+  let η := isIrreducible_irreducibleComponent (x := x) |>.genericPoint
+  have hη : ∃ C ∈ irreducibleComponents S, IsGenericPoint η C :=
+    ⟨irreducibleComponent x, irreducibleComponent_mem_irreducibleComponents x,
+      isIrreducible_irreducibleComponent.isGenericPoint_genericPoint
+        (isClosed_irreducibleComponent (x := x))⟩
+  have := smoothOfRelativeDimension_isStableUnderBaseChange 1
+  have : SmoothOfRelativeDimension 1 (f.fiberToSpecResidueField η) :=
+    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ inferInstance
+  have hdim : topologicalKrullDim (f.fiber η) ≤ 1 :=
+    topologicalKrullDim_le_of_smoothOfRelativeDimension (f.fiberToSpecResidueField η) 1
+  obtain ⟨U, hU, V, g, hgfin, hgsur, _, n, T, Y, Ybar, t, j, p, ν,
+    hνfin, hνsur, hcomm, ht, hj, hjp, hp, W, hW, hWi, hthick⟩ :=
+    exists_good_curves_generic_diagram f η hη hdim
+  have : CompactSpace U :=
+    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact (U : Set S))
+  have : IsFinite g := hgfin
+  have : Surjective g := hgsur
+  have : IsFinite ν := hνfin
+  have : Surjective ν := hνsur
+  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian (g ≫ U.ι)
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace g
+  have : IsNoetherian V := {}
+  refine ⟨U, ⟨⟨η, hU⟩⟩, fun q ↦ ?_⟩
+  let F := (_root_.DerivedCategory.Plus.homologyFunctor _ q).obj
+    ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj
+      ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj
+        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_surjective_pullback g _).mpr
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+  have : IsAffineHom (Limits.pullback.snd f (g ≫ U.ι)) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  have : SmoothOfRelativeDimension 1 (Limits.pullback.snd f (g ≫ U.ι)) :=
+    MorphismProperty.pullback_snd (P := @SmoothOfRelativeDimension 1) _ _ inferInstance
+  have := goodCurves_constantShriek_constructible Λ (Limits.pullback.snd f (g ≫ U.ι))
+    n T Y Ybar t j p ν hcomm ht hj hjp hp W hW hWi hthick M (c.baseChange (g ≫ U.ι)) q
+  obtain ⟨ebc⟩ := nonempty_constantShriekBaseChangeIso Λ f (g ≫ U.ι) M c q
+  exact Scheme.IsConstructibleSheaf.of_iso
+    (ebc.symm ≪≫ (upperStarComp (ModuleCat.{u + 1} Λ) g U.ι).app F)
+
 /-- Compactly supported cohomology of a finite constant module on a separated affine
 smooth relative curve over an affine Noetherian finite-dimensional base is constructible
 in every characteristic.
@@ -212,7 +277,7 @@ theorem constructibleCohomology_lowerShriek_constant_of_smooth_relativeDimension
   have : IsAffine T := isAffine_of_isAffineHom h
   have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian h
   apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
-  apply constructible_of_closed_generic
+  apply constructible_of_closed_nonempty_generic
   intro Z i _ _
   have : IsAffine Z := isAffine_of_isAffineHom i
   have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian i

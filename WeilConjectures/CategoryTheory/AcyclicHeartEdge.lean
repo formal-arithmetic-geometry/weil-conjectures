@@ -346,6 +346,166 @@ noncomputable def acyclicHeartSingleIso (F : A ⥤ B) [F.Additive]
       (F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor A 0).obj X)) ≪≫
     F.homologyRightDerivedFunctorObjSingleFunctorIso X 0 ≪≫ F.rightDerivedZeroIsoSelf.app X
 
+/-- The type of edge families on bounded-below objects with F-acyclic cohomology.
+The proof argument records precisely the positive-degree acyclicity assumption.
+Source: Stacks Tag 0D7U (blueprint: lem-fd-acyclic-heart-edge). -/
+def AcyclicHeartEdgeFamily (F : A ⥤ B) [F.Additive] :=
+  ∀ (L : DerivedCategory.Plus A),
+    (∀ (j : ℤ) (p : ℕ), 0 < p →
+      IsZero ((F.rightDerived p).obj ((DerivedCategory.homologyFunctor A j).obj L.obj))) →
+    ∀ q : ℤ, (DerivedCategory.homologyFunctor B q).obj
+        (F.rightDerivedFunctor.obj L.obj) ⟶
+      F.obj ((DerivedCategory.homologyFunctor A q).obj L.obj)
+
+/-- Normalize an edge on every bounded-below representative and every representing
+isomorphism. The left side precomposes with c_q, the derived truncation inclusion.
+The right side is the map g of the truncation couple, with its bridge isomorphisms
+cancelled, followed by the second-page degree-zero comparison. Thus this condition
+specifies the quotient/Theta edge, rather than an unspecified isomorphism.
+Source: Stacks Tag 0D7U and thm-sp-truncation-e2, part 6
+(blueprint: lem-fd-acyclic-heart-edge). -/
+def IsAcyclicHeartEdge (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
+    (edge : F.AcyclicHeartEdgeFamily) : Prop :=
+  ∀ (L : DerivedCategory.Plus A)
+    (h : ∀ (j : ℤ) (p : ℕ), 0 < p →
+      IsZero ((F.rightDerived p).obj ((DerivedCategory.homologyFunctor A j).obj L.obj)))
+    (K : CochainComplex.Plus A) (e : DerivedCategory.Q.obj K.obj ≅ L.obj) (q : ℤ),
+    (DerivedCategory.homologyFunctor B q).map
+        (F.rightDerivedFunctor.map (DerivedCategory.Q.map (K.obj.ιTruncLE q))) ≫
+      (DerivedCategory.homologyFunctor B q).map (F.rightDerivedFunctor.map e.hom) ≫
+      edge L h q =
+    (DerivedCategory.homologyFunctor B q).map
+        (F.rightDerivedFunctor.map (DerivedCategory.Q.map (TruncationCouple.projection K q))) ≫
+      (F.acyclicHeartSingleIso (K.obj.homology q) q).hom ≫
+      F.map (((DerivedCategory.homologyFunctorFactors A q).app K.obj).inv ≫
+        (DerivedCategory.homologyFunctor A q).map e.hom)
+
+omit [IsGrothendieckAbelian.{v₂} B] in
+/-- The single-object comparison has the components of `acyclicHeartSingleIso`. -/
+private theorem singleComparison_hom_app (F : A ⥤ B) [F.Additive]
+    [PreservesFiniteLimits F] (q : ℤ) (X : A) :
+    (singleComparison F q).hom.app X = (F.acyclicHeartSingleIso X q).hom := by
+  simp [singleComparison, acyclicHeartSingleIso,
+    singleFunctorCompRightDerivedFunctorCompHomologyFunctorZeroIso]
+
+omit [IsGrothendieckAbelian.{v₂} B] in
+/-- Naturality of `acyclicHeartSingleIso` in the object. -/
+@[reassoc]
+private theorem acyclicHeartSingleIso_hom_naturality (F : A ⥤ B) [F.Additive]
+    [PreservesFiniteLimits F] (q : ℤ) {X Y : A} (φ : X ⟶ Y) :
+    (DerivedCategory.homologyFunctor B q).map
+        (F.rightDerivedFunctor.map ((DerivedCategory.singleFunctor A q).map φ)) ≫
+      (F.acyclicHeartSingleIso Y q).hom =
+    (F.acyclicHeartSingleIso X q).hom ≫ F.map φ := by
+  rw [← singleComparison_hom_app, ← singleComparison_hom_app]
+  exact (singleComparison F q).hom.naturality φ
+
+omit [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]
+  [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B] in
+/-- The incoming differential of `τ_{≤q}K` is killed by the quotient to `H^q(K)`. -/
+private theorem truncLE_d_comp_homologyπ' (K : CochainComplex A ℤ) (q : ℤ) (r : ℤ)
+    (_ : (ComplexShape.up ℤ).Rel r q) :
+    (K.truncLE q).d r q ≫ (K.truncLEXIsoCycles q).hom ≫ K.homologyπ q = 0 := by
+  obtain ⟨i, j, b, hi, hs, hz, he, hj, hn⟩ :=
+    CochainComplex.exists_upperTruncationStepSES (C := A)
+  rw [← (hj K q).1, ← Category.assoc, ← (j K q).comm r q]
+  simp
+
+/-- The projection `τ_{≤q}K → H^q(K)[-q]` for an arbitrary cochain complex; on
+bounded-below complexes it is `TruncationCouple.projection`. -/
+private noncomputable def truncProjection (K : CochainComplex A ℤ) (q : ℤ) :
+    K.truncLE q ⟶ (CochainComplex.singleFunctor A q).obj (K.homology q) :=
+  HomologicalComplex.mkHomToSingle
+    ((K.truncLEXIsoCycles q).hom ≫ K.homologyπ q) (truncLE_d_comp_homologyπ' K q)
+
+omit [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]
+  [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B] in
+/-- Naturality of the truncation projection. -/
+private theorem truncProjection_naturality {K L : CochainComplex A ℤ} (f : K ⟶ L) (q : ℤ) :
+    CochainComplex.truncLEMap f q ≫ truncProjection L q =
+      truncProjection K q ≫
+        (CochainComplex.singleFunctor A q).map (HomologicalComplex.homologyMap f q) := by
+  obtain ⟨i, j, b, hi, hs, hz, he, hj, hn⟩ :=
+    CochainComplex.exists_upperTruncationStepSES (C := A)
+  have hp (M : CochainComplex A ℤ) : truncProjection M q = j M q := by
+    apply HomologicalComplex.to_single_hom_ext
+    apply (cancel_mono
+      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (M.homology q)).hom).1
+    rw [(hj M q).1]
+    simp [truncProjection, HomologicalComplex.mkHomToSingle_f]
+  obtain ⟨g, hg₁, hg₂⟩ := (hn f q).2
+  rw [hp, hp, (hj K q).2.2.1, (hj L q).2.2.1, ← Category.assoc, hg₁, Category.assoc,
+    Category.assoc, hg₂]
+
+/-- The projection `τ_{≤q} → H^q[-q]` as a natural transformation of functors on
+cochain complexes. -/
+private noncomputable def truncProjectionNatTrans (q : ℤ) :
+    (ComplexShape.embeddingUpIntLE q).truncLEFunctor A ⟶
+      HomologicalComplex.homologyFunctor A (ComplexShape.up ℤ) q ⋙
+        CochainComplex.singleFunctor A q where
+  app K := truncProjection K q
+  naturality _ _ f := truncProjection_naturality f q
+
+omit [IsGrothendieckAbelian.{v₂} B] in
+/-- Descent of `K ↦ H^q(RF(τ_{≤q}K))` along `Q`, with the truncation inclusion `c` and
+the projection `g` to `F(H^q)` (lem-weil-pbc-truncation-descends). -/
+private theorem descent_data (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (q : ℤ) :
+    ∃ (T : DerivedCategory A ⥤ B)
+      (c : T ⟶ F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q)
+      (g : T ⟶ DerivedCategory.homologyFunctor A q ⋙ F)
+      (e : ∀ K : CochainComplex A ℤ, T.obj (DerivedCategory.Q.obj K) ≅
+        (DerivedCategory.homologyFunctor B q).obj
+          (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj (K.truncLE q)))),
+      (∀ K : CochainComplex.Plus A, c.app (DerivedCategory.Q.obj K.obj) =
+        (e K.obj).hom ≫ (DerivedCategory.homologyFunctor B q).map
+          (F.rightDerivedFunctor.map (DerivedCategory.Q.map (K.obj.ιTruncLE q)))) ∧
+      (∀ K : CochainComplex.Plus A, g.app (DerivedCategory.Q.obj K.obj) =
+        (e K.obj).hom ≫ (DerivedCategory.homologyFunctor B q).map
+          (F.rightDerivedFunctor.map
+            (DerivedCategory.Q.map (TruncationCouple.projection K q))) ≫
+          (F.acyclicHeartSingleIso (K.obj.homology q) q).hom ≫
+          F.map ((DerivedCategory.homologyFunctorFactors A q).app K.obj).inv) := by
+  obtain ⟨_, h₁, _, _⟩ := (DerivedCategory.truncation_triangle A q).2.1
+  let W := HomologicalComplex.quasiIso A (ComplexShape.up ℤ)
+  let τ := (ComplexShape.embeddingUpIntLE q).truncLEFunctor A
+  let Λ := Localization.lift (τ ⋙ DerivedCategory.Q) h₁ DerivedCategory.Q
+  let RH := F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q
+  let σ : (τ ⋙ DerivedCategory.Q) ⋙ RH ⟶
+      DerivedCategory.Q ⋙ DerivedCategory.homologyFunctor A q ⋙ F :=
+    { app K := RH.map (DerivedCategory.Q.map (truncProjection K q)) ≫
+        (F.acyclicHeartSingleIso (K.homology q) q).hom ≫
+        F.map ((DerivedCategory.homologyFunctorFactors A q).inv.app K)
+      naturality K L f := by
+        have h : τ.map f ≫ truncProjection L q = truncProjection K q ≫
+            (CochainComplex.singleFunctor A q).map (HomologicalComplex.homologyMap f q) :=
+          truncProjection_naturality f q
+        have hh := (DerivedCategory.homologyFunctorFactors A q).inv.naturality f
+        have hs := acyclicHeartSingleIso_hom_naturality_assoc F q
+          (HomologicalComplex.homologyMap f q)
+          (F.map ((DerivedCategory.homologyFunctorFactors A q).inv.app L))
+        dsimp only [Functor.comp_map, RH, HomologicalComplex.homologyFunctor_map] at hh hs ⊢
+        rw [Category.assoc, Category.assoc, ← F.map_comp, ← hh, F.map_comp,
+          HomologicalComplex.homologyFunctor_map, ← hs]
+        simp only [← Category.assoc, ← Functor.map_comp, h]
+        rw [DerivedCategory.Q.map_comp]
+        rfl }
+  let c : Λ ⋙ RH ⟶ RH := Localization.liftNatTrans DerivedCategory.Q W
+    ((τ ⋙ DerivedCategory.Q) ⋙ RH) (DerivedCategory.Q ⋙ RH) (Λ ⋙ RH) RH
+    (Functor.whiskerRight (Functor.whiskerRight
+      ((ComplexShape.embeddingUpIntLE q).ιTruncLENatTrans A) DerivedCategory.Q ≫
+        (Functor.leftUnitor DerivedCategory.Q).hom) RH)
+  let g : Λ ⋙ RH ⟶ DerivedCategory.homologyFunctor A q ⋙ F :=
+    Localization.liftNatTrans DerivedCategory.Q W ((τ ⋙ DerivedCategory.Q) ⋙ RH)
+      (DerivedCategory.Q ⋙ DerivedCategory.homologyFunctor A q ⋙ F) (Λ ⋙ RH)
+      (DerivedCategory.homologyFunctor A q ⋙ F) σ
+  refine ⟨Λ ⋙ RH, c, g,
+    fun K ↦ RH.mapIso ((Localization.Lifting.iso DerivedCategory.Q W
+      (τ ⋙ DerivedCategory.Q) Λ).app K), fun K ↦ ?_, fun K ↦ ?_⟩
+  · simp [c, RH, τ]
+    rfl
+  · simp [g, σ, RH, τ, truncProjection, TruncationCouple.projection]
+
+set_option linter.unusedVariables false in
 /-- The canonical acyclic-heart edge is invertible and natural, including in compatible
 morphisms of the derived-functor data. Compatibility is imposed only on shifted single
 objects, by their degree-zero augmentation comparisons, not on the edge to be proved.
