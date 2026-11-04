@@ -32,8 +32,43 @@ open AlgebraicGeometry AlgebraicGeometry.ProEtale Scheme
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+private def comparisonNatIso
+    {C D : Type*} [Category* C] [Category* D]
+    (r : C ⥤ D) (tC : C ⥤ C ⥤ C) (tD : D ⥤ D ⥤ D)
+    (e : ∀ A B, r.obj ((tC.obj A).obj B) ≅ (tD.obj (r.obj A)).obj (r.obj B))
+    (hn : ∀ A A' B B' (a : A ⟶ A') (b : B ⟶ B'),
+      r.map ((tC.map a).app B ≫ (tC.obj A').map b) ≫ (e A' B').hom =
+        (e A B).hom ≫ (tD.map (r.map a)).app (r.obj B) ≫
+          (tD.obj (r.obj A')).map (r.map b)) :
+    (Functor.postcompose₂.obj r).obj tC ≅
+      (((Functor.whiskeringLeft₂ _).obj r).obj r).obj tD := by
+  refine NatIso.ofComponents (fun A ↦ NatIso.ofComponents (fun B ↦ e A B) ?_) ?_
+  · intro B B' b
+    have h := hn A A B B' (𝟙 A) b
+    rw [tC.map_id, NatTrans.id_app, Category.id_comp, r.map_id,
+      tD.map_id, NatTrans.id_app, Category.id_comp] at h
+    exact h
+  · intro A A' a
+    ext B
+    have h := hn A A' B B a (𝟙 B)
+    rw [(tC.obj A').map_id, Category.comp_id, r.map_id,
+      (tD.obj (r.obj A')).map_id, Category.comp_id] at h
+    exact h
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def supportTensorNatIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {S X : Scheme.{u}} (f : S ⟶ X) :
+    (Functor.postcompose₂.obj (supportPullback Λ f).mapDerivedCategory).obj
+        (derivedTensor Λ X) ≅
+      (((Functor.whiskeringLeft₂ _).obj (supportPullback Λ f).mapDerivedCategory).obj
+        (supportPullback Λ f).mapDerivedCategory).obj (derivedTensor Λ S) := by
+  exact comparisonNatIso (supportPullback Λ f).mapDerivedCategory
+    (derivedTensor Λ X) (derivedTensor Λ S) (supportDerivedTensorComparison Λ f)
+    (Classical.choose_spec
+      (ExistsUnique.exists (existsUnique_supportDerivedTensorComparison Λ f))).1
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The closed immersion case of the relative derived projection formula.

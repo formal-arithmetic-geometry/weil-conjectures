@@ -40,9 +40,9 @@ then truncation induction and the finite filtration clause of that lemma.
 
 set_option autoImplicit false
 
-universe u
+universe u v w
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits ZeroObject
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale

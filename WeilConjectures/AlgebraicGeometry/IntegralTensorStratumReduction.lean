@@ -67,7 +67,7 @@ theorem integralTensorStratumReduction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ l)
-    (hstratum : ∀ (S : Scheme.{u}) [S.Over (Spec (.of k))]
+    (_hstratum : ∀ (S : Scheme.{u}) [S.Over (Spec (.of k))]
       [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))]
       [QuasiCompact (S ↘ Spec (.of k))]
       (M N : DerivedCategory (AdicCompletion.Modules l E S)),

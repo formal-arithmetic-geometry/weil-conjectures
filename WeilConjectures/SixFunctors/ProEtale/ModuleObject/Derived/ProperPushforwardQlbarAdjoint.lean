@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import
-  WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+  WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
 /-!
 # A right adjoint to proper constructible pushforward with condensed Qlbar coefficients
