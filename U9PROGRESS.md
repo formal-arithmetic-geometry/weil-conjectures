@@ -23,3 +23,12 @@ versions. The proof transposes through the pullback adjunction, then uses the
 monoidality of lowerStarForgetAbIso. Ported the generic ordinary tensor
 normalization lemmas from pr/2087 under distinct names to keep its future merge
 clean. Remote uchecks are queued behind K6; no compilation feedback yet.
+
+2026-11-05 02:38 CST: Full proof candidate now replaces the relocated coherence
+sorry, with seven small helper modules. The original assigned theorem's statement
+is byte-identical to 19ba966718. Reviewed LEAD route B: the Sheaf compact projection
+user reaches the same K-flat tensor-square sorry through proper_projection, so it
+does not bypass the gap. Added a declaration-level dependency audit for the final
+validation. All three ucheck requests remain queued; the single shared tree is
+currently building K1 after successful K6/K3 builds. No heartbeat raises or local
+Lean/Lake runs.

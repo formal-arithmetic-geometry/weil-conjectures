@@ -145,6 +145,6 @@ lemma adicUpperStar_condensedRelativeTensor_square (M N : AdicSheaf l Y) :
       tensorObjπ_condensedRelativeTensorIso_inv_hom, Functor.map_comp, Functor.map_comp,
       ← Functor.LaxMonoidal.μ_natural_assoc, tensorHom_comp_tensorHom_assoc,
       adicUpperStarCompCondensedModIso_unit_hom, adicUpperStarCompCondensedModIso_unit_hom]
-  rfl
+  simp only [adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
 
 end AlgebraicGeometry.ProEtale
