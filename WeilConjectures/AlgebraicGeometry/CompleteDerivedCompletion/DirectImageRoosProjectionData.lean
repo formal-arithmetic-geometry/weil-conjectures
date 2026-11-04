@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Comple
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosLimitData
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import all WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
+import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 
 /-! Canonical derived-limit projection normalization. -/
 
