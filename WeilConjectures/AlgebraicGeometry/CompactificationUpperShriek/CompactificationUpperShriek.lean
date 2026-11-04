@@ -184,6 +184,11 @@ noncomputable def rightDerivedUpperShriekOfCompactificationAdjunction {f : X ⟶
 noncomputable def rightDerivedUpperShriekAdjunction : R(f)_![A] ⊣ R(f)^![A] :=
   rightDerivedUpperShriekOfCompactificationAdjunction A (HasCompactification.compactification f)
 
+/-- The derived lower shriek `Rf_! : D(X_ét) ⥤ D(Y_ét)` is a left adjoint, its right adjoint
+being `R(f)^![A]`. -/
+instance isLeftAdjoint_rightDerivedLowerShriek : (R(f)_![A]).IsLeftAdjoint :=
+  (rightDerivedUpperShriekAdjunction A f).isLeftAdjoint
+
 instance : (R(f)^![A]).IsRightAdjoint :=
   (rightDerivedUpperShriekAdjunction A f).isRightAdjoint
 
