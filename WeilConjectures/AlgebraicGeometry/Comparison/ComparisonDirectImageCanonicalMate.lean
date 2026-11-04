@@ -98,4 +98,17 @@ noncomputable def comparisonDirectImageCanonicalMate (Λ : Type (u + 1)) [CommRi
   Functor.rightDerivedFunctorPlusBaseChange
     (lowerStarComparisonUpperStarBaseChange u (ModuleCat.{u + 1} Λ))
 
+/-- The canonical comparison is an isomorphism for quasi-compact,
+quasi-separated morphisms.  Its component is the named mate, hence this
+asserts invertibility of that particular morphism.
+
+Source: blueprint `lem-weil-pbc-comparison-direct-image-canonical-mate`,
+proof of `prop-weil-pbc-comparison-direct-image`; Stacks Tag 099R.
+-/
+theorem isIso_comparisonDirectImageCanonicalMate (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ] {U V : Scheme.{u}} (u : U ⟶ V)
+    [QuasiCompact u] [QuasiSeparated u] :
+    IsIso (comparisonDirectImageCanonicalMate Λ u) := by
+  exact isIso_comparisonDirectImagePlus Λ u
+
 end AlgebraicGeometry.ProEtale

@@ -236,24 +236,6 @@ noncomputable def projectiveBundleFrameSection
   projectiveBundleFrameVector D n U e i ≫
     (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).map D.quotient
 
-/-- The full defining frame-section composite, usable while the frame vector stays hidden.
-Source: Stacks Project, Tags 01OB, 0095, 0096
-(blueprint: def-pur-projective-bundle-tautological-data). -/
-theorem projectiveBundleFrameSection_formula {B : Scheme.{u}} {F : B.Modules}
-    (R : ProjectiveBundleRealization B F) (n : ℕ) (U : B.Opens)
-    (e : B.ModuleFrame F U (n + 1)) (i : ULift.{u} (Fin (n + 1))) :
-    projectiveBundleFrameSection R n U e i =
-      ((projectiveBundlePullbackUnitIso (R.A.data.relProjHom ∣_ U)).inv ≫
-        (Scheme.Modules.tensorPullback (R.A.data.relProjHom ∣_ U)).map
-          (SheafOfModules.ιFree i ≫ e.inv) ≫
-        ((projectiveBundlePullbackComp (R.A.data.relProjHom ∣_ U) U.ι).app F).hom ≫
-        (projectiveBundlePullbackCongr (morphismRestrict_ι _ _)).hom.app F ≫
-        ((projectiveBundlePullbackComp (R.A.data.relProjHom ⁻¹ᵁ U).ι
-          R.A.data.relProjHom).app F).inv) ≫
-      (Scheme.Modules.tensorPullback (R.A.data.relProjHom ⁻¹ᵁ U).ι).map R.quotient := by
-  unfold projectiveBundleFrameSection projectiveBundleFrameVector
-  rfl
-
 attribute [irreducible] projectiveBundleFrameSection
 
 set_option genInjectivity false in
@@ -344,55 +326,6 @@ structure ProjectiveBundleBaseChangeDatum
   over : map ≫ D.A.data.relProjHom = D'.A.data.relProjHom ≫ g
   theta : (Scheme.Modules.tensorPullback map).obj D.L ≅ D'.L
   theta_quotient : projectiveBundleThetaQuotientLaw D D' g e map over theta
-
-/-- Coordinate geometry over a field: the coordinate hyperplane, its affine complement
-with the stated ratios, all divisor line bundles, and the scheme-theoretic reduced point.
-Source: blueprint sk-prop-an, proof Step 1; Stacks, Tags 01NG and 01MS
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-structure ProjectiveBundleCoordinateGeometry (K : Type u) [Field K] (n : ℕ) where
-  hyperplane : ∀ hn : 1 ≤ n,
-    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)).subscheme ≅
-        RelativeProjectiveSpace.scheme (Spec (.of K)) (n - 1)
-  hyperplane_over : ∀ hn : 1 ≤ n,
-    (hyperplane hn).hom ≫ RelativeProjectiveSpace.π (Spec (.of K)) (n - 1) =
-      (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-        (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)).subschemeι ≫
-          (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K))
-  affine : AffineSpace (ULift.{u} (Fin n)) (Spec (.of K)) ≅
-    (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩).toScheme
-  affine_over : affine.hom ≫
-      (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩).ι ≫
-      (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K)) =
-    (AffineSpace (ULift.{u} (Fin n)) (Spec (.of K)) ↘ Spec (.of K))
-  ratios : ∀ i : Fin n,
-    (affine.hom ≫ (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1)))
-      (Spec (.of K)) ⟨0⟩).ι).appLE
-        (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)
-        ⊤ (by simp) (ProjectiveSpace.coordRatio (ULift.{u} (Fin (n + 1)))
-          (Spec (.of K)) ⟨0⟩ ⟨i.succ⟩) = AffineSpace.coord _ ⟨i⟩
-  divisor : ∀ i : ULift.{u} (Fin (n + 1)),
-    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) i)).IsInvertible
-  divisorLineBundle : ∀ i : ULift.{u} (Fin (n + 1)),
-    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) i)).toModules.dual ≅
-        ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of K)) 1
-  point : (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subscheme ≅ Spec (.of K)
-  point_over : point.hom =
-    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subschemeι ≫
-        (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K))
-  point_reduced : IsReduced
-    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subscheme
-  point_in_chart : ∀ x : (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus
-      (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (n + 1)))
-        (Spec (.of K)) ⟨i.succ⟩)).subscheme,
-    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subschemeι x ∈
-      ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
