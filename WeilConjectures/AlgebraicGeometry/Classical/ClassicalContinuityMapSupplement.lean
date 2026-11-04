@@ -30,6 +30,8 @@ import Mathlib.CategoryTheory.Limits.MorphismProperty
 import Mathlib.CategoryTheory.Limits.FinallySmall
 import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.AlgebraicGeometry.ClassicalContinuityMap
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-! # Continuity maps and classical pro-étale sheaves
 
@@ -77,6 +79,63 @@ noncomputable def moduleSectionPresheaf : X.ProEtᵒᵖ ⥤ ModuleCat.{u + 1} (U
       map f := M.map f
       map_id U := by ext x; exact congrArg (fun g ↦ g x) (M.map_id U)
       map_comp f g := by ext x; exact congrArg (fun h ↦ h x) (M.map_comp f g) }
+
+/-- The linear continuity map, taking the colimit in coefficient modules.
+Its scalar action is restriction along the canonical constant-section maps.
+Source: current blueprint, continuity-map detail, clause 3
+(blueprint: det-pe-classical-definition-continuity-map). -/
+noncomputable def moduleContinuityMap {I : Type (u + 1)} [SmallCategory I]
+    [IsCofiltered I] (P : AffinePresentation X I) :
+    colimit (sectionDiagram P (moduleSectionPresheaf Λ F)) ⟶
+      (moduleSectionPresheaf Λ F).obj (op P.cone.pt) :=
+  continuityMap P (moduleSectionPresheaf Λ F)
+
+/-- Classicality of intrinsic constant-ring module sheaves.
+Source: current blueprint, continuity-map detail, clause 3
+(blueprint: det-pe-classical-definition-continuity-map). -/
+def IsClassicalModule : Prop :=
+  ∀ {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
+    (P : AffinePresentation X I), IsIso (moduleContinuityMap Λ F P)
+
+/-- Module classicality agrees with classicality of the underlying set sheaf.
+Source: current blueprint, continuity-map detail, clause 3
+(blueprint: det-pe-classical-definition-continuity-map).
+Proof: filtered module colimits have the corresponding set colimits as underlying sets:
+every element comes from a stage and equality is witnessed at a common later stage.
+Under this comparison the two continuity maps agree on every coprojection. A linear
+map is invertible precisely when its underlying function is bijective. -/
+theorem isClassicalModule_iff :
+    IsClassicalModule Λ F ↔
+      IsClassical ((sheafCompose (Scheme.ProEt.topology X)
+        (forget AddCommGrpCat.{u + 1})).obj ((SheafOfModules.toSheaf _).obj F)) := by
+  let V := forget (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ))
+  have h (I : Type (u + 1)) [SmallCategory I] [IsCofiltered I]
+      (P : AffinePresentation X I) :
+      IsIso (moduleContinuityMap Λ F P) ↔
+        Function.Bijective (continuityMap P (moduleSectionPresheaf Λ F ⋙ V)) := by
+    rw [← CategoryTheory.isIso_iff_bijective]
+    have heq :
+        (preservesColimitIso V (sectionDiagram P (moduleSectionPresheaf Λ F))).inv ≫
+          V.map (moduleContinuityMap Λ F P) =
+            continuityMap P (moduleSectionPresheaf Λ F ⋙ V) := by
+      exact preservesColimitIso_inv_comp_desc V
+        (sectionDiagram P (moduleSectionPresheaf Λ F))
+        (sectionCocone P (moduleSectionPresheaf Λ F))
+    rw [← heq, isIso_comp_left_iff]
+    exact (isIso_iff_of_reflects_iso _ V).symm
+  constructor
+  · intro hF I _ _ P
+    exact (h I P).mp (hF P)
+  · intro hF I _ _ P
+    exact (h I P).mpr (hF P)
+
+/-- Classicality of the recorded intrinsic derived category, using its cohomology sheaves.
+Source: current blueprint, continuity-map detail, clause 4
+(blueprint: det-pe-classical-definition-continuity-map). -/
+def IsClassicalComplex {X : Scheme.{u}} (Λ : Type u) [CommRing Λ]
+    (K : Scheme.proEtaleDerivedCategory X Λ) : Prop :=
+  ∀ q : ℤ, IsClassicalModule Λ
+    ((@DerivedCategory.homologyFunctor _ _ _ (HasDerivedCategory.standard _) q).obj K)
 
 end Modules
 
