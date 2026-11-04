@@ -172,7 +172,9 @@ Proof: Fin 1 is nonempty, so the range of the constant tuple is the singleton
 uniformizer. The ideal field of pbcIntegralDatum is the span of that singleton. -/
 theorem generators_span : Ideal.span (Set.range (generators l E)) =
     (pbcIntegralDatum l E).ideal := by
-  sorry
+  unfold generators
+  rw [Set.range_const]
+  rfl
 
 /-- Roos completeness in the coefficient presentation of the completed-open comparison.
 This is only the recorded predicate composed with the recorded coefficient transport.
@@ -232,7 +234,12 @@ open immersion is quasi-compact. The empty open is included. -/
 theorem finiteOpenQC (F : FiniteFieldDatum.{u})
     (U X : Over (Spec (.of F.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     (j : U ⟶ X) [IsOpenImmersion j.left] : QuasiCompact j.left := by
-  sorry
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := {}
+  have : TopologicalSpace.NoetherianSpace U.left :=
+    j.left.isOpenEmbedding.isInducing.noetherianSpace
+  infer_instance
 
 /-- Clause-by-clause assertion on the fixed completed coefficient presentation.
 The square is uniquely determined by its actual unit equation. Its exchange is the

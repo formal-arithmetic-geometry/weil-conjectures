@@ -458,8 +458,8 @@ private theorem reduction_isIso
   let S := (models l E).system T
   apply (S.isIso_iff_evaluations _).2
   intro n
-  have hh := (compactRealization_existsUnique l E D.k
-    (PurCompactSupport.coefficientPrimeUnit l D hl) j c).exists.choose_spec K n
+  have hh := (compactRealization_exists l E D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl) j c).choose_spec K n
   let V := coefficientSequenceDerivedEvaluation l E T n
   let q := (scalarReductionDerivedExtension l E T n).map
     ((compactRealization l E D.k
