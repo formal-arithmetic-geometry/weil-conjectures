@@ -13578,6 +13578,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductRetract
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
+public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfBoundedBelow
 public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfFiniteAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
@@ -20780,10 +20781,10 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRightDeriv
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProEtOpenCover
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarCondensedAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Retract
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarColimit
+public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarCoproduct
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarScalar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarSections

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjoint
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarCoproduct
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarCondensedAdjoint
 public import WeilConjectures.WeilSheaf.LowerStar
 
