@@ -46,10 +46,6 @@ section Generic
 variable {A : Type uE} [Category.{vE} A] [MonoidalCategory A]
   {B : Type uD} [Category.{vD} B] [MonoidalCategory B]
 
-end Generic
-
--- The graded tensor coproduct choices are shared throughout this module.
-
 private theorem oplax_equations (F : A ⥤ B) [F.OplaxMonoidal]
     (c : ∀ X Y : A, F.obj (X ⊗ Y) ≅ F.obj X ⊗ F.obj Y)
     (e : F.obj (𝟙_ A) ≅ 𝟙_ B)
@@ -80,6 +76,9 @@ private theorem oplax_equations (F : A ⥤ B) [F.OplaxMonoidal]
     rw [← hc, ← he]
     simpa only [id_tensorHom] using (Functor.OplaxMonoidal.right_unitality_hom F X).symm
 
+end Generic
+
+-- The graded tensor coproduct choices are shared throughout this module.
 private theorem gradedTensorLeftR (X Y Z : GradedObject ℤ (Modules R)) :
     GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
 private theorem gradedTensorLeftS (X Y Z : GradedObject ℤ (Modules S)) :
@@ -146,6 +145,28 @@ private theorem comparison_braiding (f : RingedPullback R S) (k : Comparison f)
   rw [← Category.assoc, hb]
   simp only [Category.assoc]
   rfl
+
+/-- The actual naturality, reassociation, Koszul-symmetry and action-unit equations.
+Source: Stacks 03EL and 07A4 (blueprint: def-pur-cochain-tensor-coherence-data). -/
+def IsCoherent (f : RingedPullback R S) (k : Comparison f) : Prop :=
+  (∀ (P Q P' Q' : Complex R) (a : P ⟶ P') (b : Q ⟶ Q'),
+    (pull f).map (a ⊗ₘ b) ≫ (comparison f k P' Q').hom =
+      (comparison f k P Q).hom ≫ ((pull f).map a ⊗ₘ (pull f).map b)) ∧
+  (∀ (P Q H : Complex R),
+    (pull f).map (α_ P Q H).hom ≫ (comparison f k P (Q ⊗ H)).hom ≫
+      (𝟙 _ ⊗ₘ (comparison f k Q H).hom) =
+    (comparison f k (P ⊗ Q) H).hom ≫ ((comparison f k P Q).hom ⊗ₘ 𝟙 _) ≫
+      (α_ ((pull f).obj P) ((pull f).obj Q) ((pull f).obj H)).hom) ∧
+  (∀ (P Q : Complex R),
+    (pull f).map (CochainComplex.Monoidal.braiding P Q).hom ≫
+      (comparison f k Q P).hom = (comparison f k P Q).hom ≫
+      (CochainComplex.Monoidal.braiding ((pull f).obj P) ((pull f).obj Q)).hom) ∧
+  (∀ (P : Complex R), (pull f).map (λ_ P).hom =
+    (comparison f k (𝟙_ _) P).hom ≫ ((unit f k).hom ⊗ₘ 𝟙 _) ≫
+      (λ_ ((pull f).obj P)).hom) ∧
+  (∀ (P : Complex R), (pull f).map (ρ_ P).hom =
+    (comparison f k P (𝟙_ _)).hom ≫ (𝟙 _ ⊗ₘ (unit f k).hom) ≫
+      (ρ_ ((pull f).obj P)).hom)
 
 /-- Associativity, Koszul symmetry and both action units of the canonical cochain
 comparison. Source: Stacks 03EL and 07A4, the ordinary comparison and its total.

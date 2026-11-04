@@ -19,8 +19,10 @@ compact-support reduction tower, step 8; Stacks Tags 03DA and 0941.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-universe u
-open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
+universe u v
+open CategoryTheory Opposite AlgebraicGeometry MonObj
+open AlgebraicGeometry.ProEtale
+open scoped CategoryTheory.Obj
 namespace WeilConjectures
 
 private theorem scalarRestrictionHomTransport

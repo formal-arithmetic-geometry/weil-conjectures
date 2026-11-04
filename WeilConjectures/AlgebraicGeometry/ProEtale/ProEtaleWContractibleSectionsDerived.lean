@@ -67,6 +67,9 @@ universe t u v wA wB
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
+
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Evaluation is the composite of the existing additive forgetful and presheaf

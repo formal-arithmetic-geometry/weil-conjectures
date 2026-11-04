@@ -68,6 +68,7 @@ theorem pbcFixedScalarRestriction_preservesFiniteLimits {R S : Type (u + 1)}
 
 attribute [local instance] pbcFixedScalarRestriction_preservesFiniteLimits
 
+omit [EssentiallySmall.{u + 1} C] in
 /-- Helper of the retained scalar adjunction, relocated with its existing proof.
 Source: Stacks 07A6 (blueprint: def-weil-pbc-constant-coefficient-scalar-extension). -/
 theorem pbcFixedScalarRestriction_preservesFiniteColimits {R S : Type (u + 1)}

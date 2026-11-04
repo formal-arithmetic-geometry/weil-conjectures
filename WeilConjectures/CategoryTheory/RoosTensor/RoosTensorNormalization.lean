@@ -48,8 +48,6 @@ private theorem factorsh_quotient
   erw [CategoryTheory.Functor.map_id, DerivedCategory.Qh.map_id]
   erw [Category.comp_id, Category.comp_id, Category.id_comp]
 
-private abbrev towerF := (Functor.whiskeringRight ℕᵒᵖ A B).obj F
-
 section SquareHelpers
 
 variable {A B Ap Bp : Type (u + 1)}

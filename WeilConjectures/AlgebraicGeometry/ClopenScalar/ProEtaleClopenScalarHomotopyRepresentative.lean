@@ -37,17 +37,18 @@ namespace AlgebraicGeometry.Scheme.ProEt.ClopenScalar
 
 section QuotientFormulas
 
-variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
-  [HasDerivedCategory A] [HasDerivedCategory B]
+variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+  [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+  [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] [HasDerivedCategory D]
 
 omit [HasDerivedCategory A] [HasDerivedCategory B] in
-
 private theorem homotopyFactors_hom (F : A ⥤ B) [F.Additive]
     (P : CochainComplex A ℤ) :
     (F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P = 𝟙 _ := by
   unfold Functor.mapHomotopyCategoryFactors
   rfl
 
+omit [HasDerivedCategory A] [HasDerivedCategory B] in
 private theorem homotopyFactors_inv (F : A ⥤ B) [F.Additive]
     (P : CochainComplex A ℤ) :
     (F.mapHomotopyCategoryFactors (.up ℤ)).inv.app P = 𝟙 _ := by
@@ -96,6 +97,8 @@ private theorem computation_eq (E : A ⥤ B) [E.Additive]
     HomotopyCategory.quotient_obj_as]
   rw [DerivedCategory.Qh.map_id, Category.id_comp]
 
+set_option maxHeartbeats 800000 in
+-- The quotient square has several dependent localization and coefficient functor types.
 /-- Convert the cochain representative square to its homotopy quotient square, independently
 of the coefficient model. In the current purity route the four abelian categories may be
 module objects for condensed coefficients; scalar extension and exact clopen restriction
@@ -171,5 +174,4 @@ end QuotientFormulas
 
 attribute [local irreducible] computation
 
--- The quotient square has several dependent localization and coefficient functor types.
 end AlgebraicGeometry.Scheme.ProEt.ClopenScalar

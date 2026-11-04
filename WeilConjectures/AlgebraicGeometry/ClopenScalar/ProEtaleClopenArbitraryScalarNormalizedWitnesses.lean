@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarCompar
 import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenDerivedScalarModels
 import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenDerivedScalarUnits
 import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarComparisonCoherence
+import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarNormalizedSupport
 
 /-! # Normalized scalar witnesses for arbitrary coefficient presentations
 

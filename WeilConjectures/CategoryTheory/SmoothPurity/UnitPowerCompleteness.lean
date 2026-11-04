@@ -134,6 +134,10 @@ namespace CategoryTheory
 
 -- Cache this site-independent proof instead of repeating the general limit-preservation
 -- instance search at every occurrence of the underlying ring sheaf.
+private theorem unitPower_hasSheafCompose
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
+    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+
 attribute [local instance] unitPower_hasSheafCompose
 
 private abbrev sectionValue
@@ -393,7 +397,6 @@ private theorem principal_finiteType
 
 -- The factor-restriction calculation keeps its ring component explicit: the local
 -- description requires the canonical ring comparison, not just an arrow isomorphism.
-
 namespace UnitPowerRestriction
 
 section ModuleRestriction
@@ -574,6 +577,7 @@ private def factorArrow :
   · simp [ringedLocalizationTwoTermAugmentation, ringedLocalizationTwoTermAugmentationF, hn]
 end ComplexRestriction
 
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem factor_restriction
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -616,6 +620,7 @@ private theorem factor_restriction
   rw [← hring]
   exact (factorArrow O (O.over U) V s t h).hom.w.symm
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem derived_factor_restriction
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -662,6 +667,44 @@ private theorem derived_factor_restriction
   congr 1
   exact (congrArg (fun f ↦ k.inv ≫ f) hk).trans (Iso.inv_hom_id_assoc k _)
 
+end UnitPowerRestriction
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem singleton_iso
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u}) (c : (O.obj ⋙ forget CommRingCat).sections) :
+    ∃ e : (ringedExtendedCech O 1 (fun _ ↦ c)).1 ≅ ringedLocalizationTwoTerm O c,
+      e.hom ≫ ringedLocalizationTwoTermAugmentation O c =
+        (ringedExtendedCech O 1 (fun _ ↦ c)).2 := by
+  let : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+    SheafOfModules.isGrothendieckAbelian _
+  let := SheafOfModules.monoidalCategory O
+  let := SheafOfModules.symmetricCategory O
+  let := Classical.choice (SheafOfModules.tensorClosed O).1
+  let := Classical.choice (SheafOfModules.tensorClosed O).2.1
+  refine ⟨HomologicalComplex.rightUnitor (ringedLocalizationTwoTerm O c), ?_⟩
+  change (HomologicalComplex.rightUnitor (ringedLocalizationTwoTerm O c)).hom ≫
+    ringedLocalizationTwoTermAugmentation O c =
+      HomologicalComplex.tensorHom (ringedLocalizationTwoTermAugmentation O c) (𝟙 _) ≫
+        (HomologicalComplex.leftUnitor (ringedSiteRingComplex O)).hom
+  have hn := (CategoryTheory.MonoidalCategory.rightUnitor_naturality
+    (ringedLocalizationTwoTermAugmentation O c)).symm
+  have hu := CategoryTheory.MonoidalCategory.unitors_equal (C := ringedSiteComplex O)
+  change (HomologicalComplex.leftUnitor (ringedSiteRingComplex O)).hom =
+    (HomologicalComplex.rightUnitor (ringedSiteRingComplex O)).hom at hu
+  rw [hu]
+  exact hn
+
+private theorem slice_section_eq
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u}) (c : (O.obj ⋙ forget CommRingCat).sections) (U : C) :
+    ringedSliceSection O U (c.val (op U)) = ringedKoszulSliceSection O c U := by
+  apply Subtype.ext
+  funext V
+  exact c.property V.unop.hom.op
+
+set_option backward.isDefEq.respectTransparency false in
 private theorem principal_localDescription
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -694,45 +737,6 @@ private theorem principal_localDescription
   rw [hd, ← Functor.map_comp, hk, hb']
   simpa only [Category.assoc] using ha
 
-private theorem slice_section_eq
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (O : Sheaf J CommRingCat.{u}) (c : (O.obj ⋙ forget CommRingCat).sections) (U : C) :
-    ringedSliceSection O U (c.val (op U)) = ringedKoszulSliceSection O c U := by
-  apply Subtype.ext
-  funext V
-  exact c.property V.unop.hom.op
-
-private theorem singleton_iso
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (O : Sheaf J CommRingCat.{u}) (c : (O.obj ⋙ forget CommRingCat).sections) :
-    ∃ e : (ringedExtendedCech O 1 (fun _ ↦ c)).1 ≅ ringedLocalizationTwoTerm O c,
-      e.hom ≫ ringedLocalizationTwoTermAugmentation O c =
-        (ringedExtendedCech O 1 (fun _ ↦ c)).2 := by
-  let : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
-    SheafOfModules.isGrothendieckAbelian _
-  let := SheafOfModules.monoidalCategory O
-  let := SheafOfModules.symmetricCategory O
-  let := Classical.choice (SheafOfModules.tensorClosed O).1
-  let := Classical.choice (SheafOfModules.tensorClosed O).2.1
-  refine ⟨HomologicalComplex.rightUnitor (ringedLocalizationTwoTerm O c), ?_⟩
-  change (HomologicalComplex.rightUnitor (ringedLocalizationTwoTerm O c)).hom ≫
-    ringedLocalizationTwoTermAugmentation O c =
-      HomologicalComplex.tensorHom (ringedLocalizationTwoTermAugmentation O c) (𝟙 _) ≫
-        (HomologicalComplex.leftUnitor (ringedSiteRingComplex O)).hom
-  have hn := (CategoryTheory.MonoidalCategory.rightUnitor_naturality
-    (ringedLocalizationTwoTermAugmentation O c)).symm
-  have hu := CategoryTheory.MonoidalCategory.unitors_equal (C := ringedSiteComplex O)
-  change (HomologicalComplex.leftUnitor (ringedSiteRingComplex O)).hom =
-    (HomologicalComplex.rightUnitor (ringedSiteRingComplex O)).hom at hu
-  rw [hu]
-  exact hn
-
-set_option backward.isDefEq.respectTransparency false in
-end UnitPowerRestriction
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem complete_of_iso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

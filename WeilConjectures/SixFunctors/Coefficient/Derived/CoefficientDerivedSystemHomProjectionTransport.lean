@@ -22,12 +22,21 @@ set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-universe t u
+universe t u c v w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
+
+variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+  [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
+  (R B : Sheaf J CommRingCat.{max c v u})
+  [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R))]
+  [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj B))]
 
 /-- The finite projection of gamma acts on H⁰ by scalar extension and the finite
 counit, after the specified evaluation transports.

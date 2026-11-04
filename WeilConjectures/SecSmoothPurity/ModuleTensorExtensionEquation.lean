@@ -247,6 +247,12 @@ private theorem tensorPair_map {A : Sheaf J CommRingCat.{w}}
   ext U t
   exact moduleTmul_map a b U _ _
 
+attribute [local irreducible] moduleTensorPair generator moduleTmul extensionTmul
+attribute [local irreducible] extensionFunctor
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+-- Normalize the dependent coefficient sources before rewriting the generator equations.
 private theorem coefficient_generators (f : RingedPullback R S) (k : Comparison f)
     (d : CoefficientSquare f) (k' : Comparison (changed f d))
     (M N : Modules R) (Z : Sheaf J (Type w))
@@ -290,12 +296,6 @@ private theorem coefficient_generators (f : RingedPullback R S) (k : Comparison 
   erw [hb M Z x, hb N Z y]
   rfl
 
-attribute [local irreducible] moduleTensorPair generator moduleTmul extensionTmul
-attribute [local irreducible] extensionFunctor
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
-
--- Normalize the dependent coefficient sources before rewriting the generator equations.
 private theorem insertion_naturality {A B : Sheaf J CommRingCat.{w}} (c : A ⟶ B)
     {M N : Modules A} (a : M ⟶ N) :
     (underlying A).map a ≫ insertion c N =

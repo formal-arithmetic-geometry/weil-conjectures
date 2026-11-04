@@ -20,6 +20,7 @@ set_option linter.style.haveILetI false
 universe t
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry.ProEtale
+open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 

@@ -22,6 +22,11 @@ universe u
 
 namespace BoundedConstructibleCounterexample
 
+/-- The coefficient field.
+Source: blueprint non-coherent-ring example.
+(blueprint: lem-sfb-nonfinite-multiplication-kernel) -/
+abbrev Scalar := ULift.{u} (ZMod 2)
+
 /-- The countably generated square-zero ideal.
 Source: blueprint non-coherent-ring example.
 (blueprint: lem-sfb-nonfinite-multiplication-kernel) -/

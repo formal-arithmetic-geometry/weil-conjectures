@@ -71,8 +71,12 @@ set_option synthInstance.maxSize 2048
 universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 open AlgebraicGeometry.ProEtale
+open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
+
+variable {Λ Λ' : Sheaf (coherentTopology Profinite.{t}) Ab.{t + 1}}
+  [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
 set_option linter.defProp false in
 /-- The canonical scalar adjunction on the slice for the pulled-back condensed map.
@@ -278,89 +282,6 @@ private theorem globalCounit_isIso (X : Scheme.{t})
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
   (reductionDerivedExistence X f).choose_spec.choose_spec.2.2 P hP
 
-private abbrev sliceModules (X : Scheme.{t}) (U : X.ProEt)
-    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}) :=
-  SheafOfModules.{t + 1} ((sheafCompose ((ProEt.topology X).over U)
-    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (R.over U))
-
-private instance sliceModulesDerived (X : Scheme.{t}) (U : X.ProEt)
-    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}) :
-    HasDerivedCategory (sliceModules X U R) := HasDerivedCategory.standard _
-
-private instance sliceSmall (X : Scheme.{t}) (U : X.ProEt) :
-    EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
-
-private def sliceChangeSpec (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
-    (sliceModules X U R ⥤ sliceModules X U S) → Prop :=
-  (fun {B : Type (t + 2)} {P : B → Prop} (_ : ∃ x, P x) ↦ P)
-    (completedAdicSliceChangeData X U f)
-
-private theorem sliceChangeExistence (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
-    ∃ E, sliceChangeSpec X U f E := completedAdicSliceChangeData X U f
-
-private def sliceDerivedSpec (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S)
-    (LF : DerivedCategory (sliceModules X U R) ⥤ DerivedCategory (sliceModules X U S)) :
-    Prop :=
-  ∃ (ε : DerivedCategory.Qh ⋙ LF ⟶
-      (completedAdicSliceChange X U f).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
-    LF.IsLeftDerivedFunctor ε
-        (HomotopyCategory.quasiIso (sliceModules X U R) (.up ℤ)) ∧
-      (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
-      ∀ P : CochainComplex (sliceModules X U R) ℤ,
-        CochainComplex.IsKFlatIndependentCoefficients (R := R.over U) P →
-        IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
-
-private theorem sliceDerivedExistence (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
-    ∃ LF, sliceDerivedSpec X U f LF :=
-  (sliceChangeExistence X U f).choose_spec.choose_spec.choose_spec.choose_spec.2.2
-
-private def sliceCounit (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
-    DerivedCategory.Qh ⋙ completedAdicSliceDerivedChange X U f ⟶
-      (completedAdicSliceChange X U f).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
-  (sliceDerivedExistence X U f).choose_spec.choose
-
-private theorem sliceCounit_isIso (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S)
-    (P : CochainComplex (sliceModules X U R) ℤ)
-    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R.over U) P) :
-    IsIso ((sliceCounit X U f).app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
-  (sliceDerivedExistence X U f).choose_spec.choose_spec.2.2 P hP
-attribute [-instance] sliceModulesDerived sliceSmall
-
-private theorem globalChangeObj (X : Scheme.{t})
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S)
-    (M : reductionModules X R) :
-    (completedAdicChange X f).obj M = SheafOfModules.changeOfRings f M :=
-  (reductionChangeExistence X f).choose_spec.choose M
-
-private theorem globalChangeMap (X : Scheme.{t})
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S)
-    {M N : reductionModules X R} (a : M ⟶ N) :
-    (completedAdicChange X f).map a = eqToHom (globalChangeObj X f M) ≫
-      SheafOfModules.changeOfRingsHom f M a ≫ eqToHom (globalChangeObj X f N).symm :=
-  (reductionChangeExistence X f).choose_spec.choose_spec.choose a
-
-private theorem sliceChangeObj (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S)
-    (M : sliceModules X U R) :
-    (completedAdicSliceChange X U f).obj M =
-      SheafOfModules.changeOfRings (sliceCoefficientMap X U f) M :=
-  (sliceChangeExistence X U f).choose_spec.choose M
-
-private theorem sliceChangeMap (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S)
-    {M N : sliceModules X U R} (a : M ⟶ N) :
-    (completedAdicSliceChange X U f).map a = eqToHom (sliceChangeObj X U f M) ≫
-      SheafOfModules.changeOfRingsHom (sliceCoefficientMap X U f) M a ≫
-      eqToHom (sliceChangeObj X U f N).symm :=
-  (sliceChangeExistence X U f).choose_spec.choose_spec.choose a
-
 /-- Ordinary scalar extension commutes with inverse image to the pro-etale slice.
 Source: sk-prop-sfb-cartesian-coefficients, det-def-sfb-coefficient-change.
 Proof: the coefficient square commutes by naturality of inverse image from the point.
@@ -489,11 +410,8 @@ private theorem scalarDerived_composites
       whiskerLeft_app, whiskerRight_app]
     infer_instance
 
-attribute [local irreducible] completedAdicChange completedAdicDerivedChange
-  completedAdicSliceChange completedAdicSliceDerivedChange
-  HasDerivedCategory.standard Functor.mapDerivedCategory
-  CochainComplex.IsKFlatIndependentCoefficients SheafOfModules.monoidalCategory
-
+set_option maxHeartbeats 400000 in
+-- reason: derived category instance unification on module objects
 /-- Both composites on condensed module objects derive the corresponding ordinary
 composites. No flatness of the coefficient change is required.
 Source: sk-prop-sfb-cartesian-coefficients; Stacks Tags 06YY and 0D6D.

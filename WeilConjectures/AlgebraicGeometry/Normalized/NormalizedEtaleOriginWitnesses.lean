@@ -34,14 +34,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-  (d : Scheme.AdicCoefficientDatum A)
-  (M : ∀ n : ℕ, PbcWitnessAmbient T d n)
-  (hM : ∀ n : ℕ, DerivedCategory.TStructure.t.plus
-    ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj (M n)))
-  (W : ∀ n : ℕ, Scheme.EtaleOriginWitness T (PbcQuotient d n)
-    ⟨(finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj (M n), hM n⟩)
-  (rho : ∀ (m n : ℕ) (h : n ≤ m),
-    (normalizedOriginReduction (Scheme.ProEt.topology T) d m n h).obj (M m) ≅ M n)
-
 end AlgebraicGeometry.ProEtale
