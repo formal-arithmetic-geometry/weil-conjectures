@@ -81,9 +81,9 @@ lemma boundedConstructibleBaseChangeOfMap_inv_app_hom
     have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj l) sq
     ((asIso (boundedConstructibleBaseChangeOfMap l sq.toCommSq)).inv.app P).hom =
       (asIso (baseChangeMap (Profinite.padicAlgClRingObj l) sq.toCommSq)).inv.app P.obj := by
-  have := isIso_boundedConstructibleBaseChangeOfMap l sq
+  have hbcIso := isIso_boundedConstructibleBaseChangeOfMap l sq
   have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj l) sq
-  dsimp only [boundedConstructibleBaseChangeOfMap]
+  dsimp only [boundedConstructibleBaseChangeOfMap] at hbcIso ⊢
   exact NearbyCyclesModel.liftExchange_inv_app_hom _ _ _ _ _ P
 
 variable {P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧}
@@ -113,6 +113,7 @@ lemma baseChangedProperTrace_levelwise :
     ObjectProperty.FullSubcategory.id_hom, boundedConstructibleUpperStarOfMap_map,
     ObjectProperty.homMk_hom, Category.comp_id, Category.id_comp, Category.assoc, hbc]
   erw [Category.id_comp]
+  simp only [Functor.id_obj]
 
 /-- The base-changed proper trace is universal in the exact-pullback coordinates
 when its exceptional base-change component is invertible. -/

@@ -176,3 +176,9 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - ProperTraceCoordinates still spent 64s in concrete kernel reduction. Moved the inverse-component identity into an abstract liftExchange lemma so its application can use the actual restricted exchange data directly. Added the remaining identity normalization.
 - DescentSingle now specifies X explicitly to avoid inference through Over.mk.left. DescentUnit binds a typed IsMonoidal instance and uses the monoidal inclusion's unit iso. NativeHomSingle explicitly imports the existing right-derived-functor naturality lemma.
 - Re-read the brief and skill. No new LEAD instruction, no heartbeat raises, and no local Lean/lake invocation. Submitting the next audit; C4 integration remains prepared but unapplied, and no DONE is claimed.
+
+## 2026-11-05 06:26 +0800 — native unit and shifted descent GREEN
+- Audit a67976d0cf finished rc=1, log /home/ubuntu/u9/logs/K4-20261105T062319.log, four modules built and two failed. DescentSingle is GREEN (6.4s), including the Tate specialization. DescentUnit is GREEN (131s), including the actual underived Frobenius-compatible unit comparison and its derived native-unit realization.
+- ProperTraceCoordinates now finishes in 12s with no kernel timeout: its abstract inverse lemma is accepted, but the local IsIso instance needs the same unfolding as the goal. Applied dsimp to that named instance and normalized the remaining identity-functor object.
+- NativeHomSingle now finds the naturality lemma; its unspecialized rewrite hit an elaborator isDefEq timeout. Specified the functor F and the morphism g.hom explicitly. No heartbeat increase.
+- Also pinned X explicitly in downstream AbsoluteDescent/NativeProperDualizing/NativeDualizingDescent to avoid the Over.mk.left inference failure just repaired in DescentSingle. These downstream files remain unvalidated until entry modules pass. One new audit follows; no DONE.

@@ -89,7 +89,7 @@ noncomputable def nativeHomSingleComplexIso (A : ProEtaleWeilSheaf k₀ l X) :
     dsimp only [Functor.comp_map, Prod.sectR_map, Iso.trans_hom, Iso.symm_hom,
       Functor.mapIso_hom, asIso_hom]
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-    rw [Functor.rightDerivedFunctor_map_Q_map_comp_objQIso_hom]
+    rw [Functor.rightDerivedFunctor_map_Q_map_comp_objQIso_hom F g.hom]
     simp only [Iso.inv_hom_id_assoc]
     rw [← Category.assoc, hm, Category.assoc, ← DerivedCategory.Q.map_comp,
       singleProjection_right, DerivedCategory.Q.map_comp]
