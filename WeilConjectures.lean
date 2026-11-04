@@ -55,7 +55,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvoluti
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionCanonicalComparisonIso
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionCanonicalComparisonUnique
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionFiltration
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionFlatMono
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionGradedQuotientCore
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionTensorCokernel
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FinalRingedUnitMate
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteGlobalPresentationInternalHomColimit
@@ -328,6 +330,7 @@ public import WeilConjectures.Algebra.Homology.CyclePullbackLifting
 public import WeilConjectures.Algebra.Homology.CyclePullbackResolution
 public import WeilConjectures.Algebra.Homology.CyclePullbackTower
 public import WeilConjectures.Algebra.Homology.CyclePullbackTowerComparison
+public import WeilConjectures.Algebra.Homology.DegreewiseMonoCriterion
 public import WeilConjectures.Algebra.Homology.Derived.DerivedCompleteModuleFinite
 public import WeilConjectures.Algebra.Homology.Derived.DerivedScalarExtensionCounitShift
 public import WeilConjectures.Algebra.Homology.Derived.DerivedScalarTruncationContinuity
@@ -421,6 +424,7 @@ public import WeilConjectures.Algebra.Homology.FilteredColimitCochainHomology
 public import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
 public import WeilConjectures.Algebra.Homology.FilteredColimitsTensorTotal
 public import WeilConjectures.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
+public import WeilConjectures.Algebra.Homology.FilteredComplexGradedProjection
 public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import WeilConjectures.Algebra.Homology.FilteredFreeKProjective
 public import WeilConjectures.Algebra.Homology.FilteredFreeKProjectiveAssembly

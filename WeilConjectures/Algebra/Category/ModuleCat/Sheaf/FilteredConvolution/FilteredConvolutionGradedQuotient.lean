@@ -122,14 +122,12 @@ theorem graded_quotient
   intro r
   obtain ⟨α, hα, huniq⟩ :=
     FilteredConvolutionCore.canonical_comparison_unique F G H hH r
-  haveI : IsIso α :=
+  have : IsIso α :=
     FilteredConvolutionCore.canonical_comparison_isIso F G a b c d hPa hPb hQc hQd
       hSplit hFlat H hH r α hα
   refine ⟨α, ⟨hα, inferInstance⟩, ?_⟩
   intro β hβ
   exact huniq β hβ.1
 
-set_option maxHeartbeats 800000 in
--- Elaborating the total-tensor quotient diagram exceeds the default heartbeat limit.
 end FilteredConvolution
 end SheafOfModules
