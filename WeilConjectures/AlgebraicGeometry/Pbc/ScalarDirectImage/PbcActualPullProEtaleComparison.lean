@@ -169,8 +169,8 @@ theorem pbcActualPullProEtaleIso_fac
     simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
       CategoryTheory.Functor.map_id, Category.id_comp]
     simp only [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id]
-    erw [Category.id_comp, Category.comp_id]
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+    erw [Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_id, Category.comp_id]
   have hh : (pbcActualModulePullHomotopyIso g d).hom.app ((HomotopyCategory.quotient _ _).obj P) ≫
       (G.mapHomotopyCategoryFactors (.up ℤ)).hom.app P =
       ((pbcActualModulePull g d).mapHomotopyCategoryFactors (.up ℤ)).hom.app P ≫
