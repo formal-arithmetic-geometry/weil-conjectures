@@ -24,19 +24,17 @@ variable {A B : Type*} [Category* A] [Abelian A] [Category* B] [Abelian B]
   [HasDerivedCategory A] [HasDerivedCategory B]
 
 /-- An exact functor reflecting isomorphisms induces a functor on derived categories reflecting
-isomorphisms. -/
-lemma reflectsIsomorphisms_mapDerivedCategory (F : A ⥤ B) [F.Additive]
+isomorphisms: a morphism is an isomorphism iff it is one on all homology objects, and
+`F.mapDerivedCategory` commutes with homology. -/
+instance reflectsIsomorphisms_mapDerivedCategory (F : A ⥤ B) [F.Additive]
     [Limits.PreservesFiniteLimits F] [Limits.PreservesFiniteColimits F]
     [F.ReflectsIsomorphisms] : F.mapDerivedCategory.ReflectsIsomorphisms where
-  reflects {X Y} f hf := by
+  reflects f _ := by
     rw [DerivedCategory.isIso_iff]
     intro n
-    have : IsIso ((DerivedCategory.homologyFunctor B n).map (F.mapDerivedCategory.map f)) :=
-      inferInstance
     have : IsIso (F.map ((DerivedCategory.homologyFunctor A n).map f)) :=
-      (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso n) f).2 (by
-        dsimp only [Functor.comp_map]
-        infer_instance)
+      (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso n) f).2
+        (by rw [Functor.comp_map]; infer_instance)
     exact isIso_of_reflects_iso _ F
 
 end CategoryTheory.Functor

@@ -5,14 +5,14 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.CategoryTheory.Adjunction.MateOfNatIsoLeft
 
 /-!
-# Invertibility of mates of pasted squares
+# Invertibility of mates of pasted invertible squares
 
-The mate of a horizontal composite of 2-squares is the vertical composite of the mates
-(`CategoryTheory.mateEquiv_vcomp`); in particular it is an isomorphism as soon as both mates
-are (`CategoryTheory.isIso_mateEquiv_hComp`).
+The horizontal composite `CategoryTheory.Functor.isoHComp` of two invertible 2-squares; its mate
+is an isomorphism as soon as both mates are (`CategoryTheory.isIso_mateEquiv_isoHComp`), by
+`CategoryTheory.isIso_mateEquiv_hComp`.
 -/
 
 @[expose] public section
@@ -23,18 +23,6 @@ open TwoSquare
 
 variable {A B C D E F : Type*} [Category A] [Category B] [Category C] [Category D]
   [Category E] [Category F]
-  {G₁ : A ⥤ C} {G₂ : C ⥤ E} {H₁ : B ⥤ D} {H₂ : D ⥤ F}
-  {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C} {L₃ : E ⥤ F} {R₃ : F ⥤ E}
-
-/-- The mate of the horizontal composite `α ≫ₕ β` of two 2-squares is an isomorphism if the
-mates of `α` and `β` are. -/
-lemma isIso_mateEquiv_hComp (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : L₃ ⊣ R₃)
-    (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂)
-    [IsIso (mateEquiv adj₁ adj₂ α).natTrans] [IsIso (mateEquiv adj₂ adj₃ β).natTrans] :
-    IsIso (mateEquiv adj₁ adj₃ (α ≫ₕ β)).natTrans := by
-  rw [mateEquiv_vcomp adj₁ adj₂ adj₃]
-  dsimp only [vComp]
-  infer_instance
 
 section IsoHComp
 
