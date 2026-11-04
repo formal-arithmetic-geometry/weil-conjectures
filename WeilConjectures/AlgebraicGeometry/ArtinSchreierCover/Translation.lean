@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.AdjoinRootCov
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.CategoryTheory.Endomorphism
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 import Mathlib.Algebra.CharP.Lemmas
 import Mathlib.FieldTheory.Finite.Basic
 import WeilConjectures.Mathlib.Algebra.CharP.Algebra
@@ -35,39 +36,27 @@ section ZModCast
 
 variable {p : ℕ} [Fact p.Prime] {A : Type*} [CommRing A]
 
-/-- The canonical ring map `𝔽_p → A` to a ring in which the prime `p` vanishes. -/
-def zmodRingHom (h : (p : A) = 0) : ZMod p →+* A :=
-  ZMod.castHom (ringChar.dvd h) A
-
 /-- In a ring where the prime `p` vanishes, the cast of the representative of `a : ZMod p` is
 the image of `a` under the canonical ring map. -/
-lemma natCast_val_eq_zmodRingHom (h : (p : A) = 0) (a : ZMod p) :
-    ((a.val : ℕ) : A) = zmodRingHom h a := by
-  rw [zmodRingHom, ZMod.castHom_apply, ZMod.natCast_val]
+lemma natCast_val_eq_zmodRingHomOfNatCastEqZero (h : (p : A) = 0) (a : ZMod p) :
+    ((a.val : ℕ) : A) = zmodRingHomOfNatCastEqZero p h a := by
+  rw [← map_natCast (zmodRingHomOfNatCastEqZero p h), ZMod.natCast_zmod_val]
 
 /-- The cast of the representative is additive in characteristic `p`. -/
 lemma natCast_val_add_of_natCast_eq_zero (h : (p : A) = 0) (a b : ZMod p) :
     (((a + b).val : ℕ) : A) = (a.val : A) + (b.val : A) := by
-  rw [natCast_val_eq_zmodRingHom h, natCast_val_eq_zmodRingHom h, natCast_val_eq_zmodRingHom h,
-    map_add]
+  simp only [natCast_val_eq_zmodRingHomOfNatCastEqZero h, map_add]
 
 /-- Elements of the prime field are fixed by Frobenius. -/
 lemma natCast_val_pow_of_natCast_eq_zero (h : (p : A) = 0) (a : ZMod p) :
     ((a.val : ℕ) : A) ^ p = (a.val : A) := by
-  rw [natCast_val_eq_zmodRingHom h, ← map_pow, ZMod.pow_card]
-
-/-- Frobenius is additive in a ring where the prime `p` vanishes. -/
-lemma add_pow_of_natCast_eq_zero (h : (p : A) = 0) (x y : A) :
-    (x + y) ^ p = x ^ p + y ^ p := by
-  nontriviality A
-  have := CharP.of_ringHom_of_prime (RingHom.id A) (Fact.out : p.Prime) h
-  exact add_pow_char x y p
+  rw [natCast_val_eq_zmodRingHomOfNatCastEqZero h, ← map_pow, ZMod.pow_card]
 
 /-- Translating a solution of `t ^ p - t = c` by an element of the prime field gives another
 solution. -/
 lemma add_natCast_val_pow_sub (h : (p : A) = 0) {t c : A} (ht : t ^ p - t = c) (a : ZMod p) :
     (t + (a.val : A)) ^ p - (t + (a.val : A)) - c = 0 := by
-  rw [add_pow_of_natCast_eq_zero h, natCast_val_pow_of_natCast_eq_zero h, ← ht]
+  rw [add_pow_prime_of_natCast_eq_zero p h, natCast_val_pow_of_natCast_eq_zero h, ← ht]
   ring
 
 end ZModCast

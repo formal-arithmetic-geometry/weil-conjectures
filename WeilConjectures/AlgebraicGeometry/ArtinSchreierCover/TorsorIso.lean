@@ -54,7 +54,7 @@ theorem isIso_artinSchreier_sigmaDesc (hP : P = X ^ p - X - C f)
         (by simp [π])
   let W := pullback π π
   have hW : (p : Γ(W, ⊤)) = 0 := natCast_appTop_eq_zero hchar (pullback.fst π π ≫ π)
-  let ψ : ZMod p →+* Γ(W, ⊤) := zmodRingHom hW
+  let ψ : ZMod p →+* Γ(W, ⊤) := zmodRingHomOfNatCastEqZero p hW
   let d : Γ(W, ⊤) := (pullback.fst π π).appTop T - (pullback.snd π π).appTop T
   have hd : d ^ Fintype.card (ZMod p) = d := by
     refine FiniteField.sub_pow_card_eq_of_pow_card_sub_eq ψ ?_
