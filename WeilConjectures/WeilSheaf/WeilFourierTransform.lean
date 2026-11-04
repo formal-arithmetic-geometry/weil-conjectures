@@ -75,8 +75,11 @@ noncomputable def WeilComplex.affineFourierTransform (k₀ : Type u) [Field k₀
     MorphismProperty.pullback_snd _ _ inferInstance
   letI : QuasiCompact (pullback.snd π π) :=
     MorphismProperty.pullback_snd _ _ inferInstance
+  letI : (pullback.fst π π).IsOver (Spec (CommRingCat.of k₀)) :=
+    ⟨pullback.condition (f := π) (g := π)⟩
+  letI : (pullback.snd π π).IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
   letI : LocallyOfFiniteType (pullback π π ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (LocallyOfFiniteType (pullback.fst π π ≫ π))
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd π π ≫ π))
   WeilComplex.fourierTransformOfPairing π π ψ
     (AffineSpace.stdPairing n (Spec (CommRingCat.of k₀))) (Fintype.card n)
 

@@ -36,6 +36,11 @@ universe u
 
 open CategoryTheory
 
+/-- Negation on affine space is a morphism over the base. -/
+instance AlgebraicGeometry.AffineSpace.isOver_neg (n : Type u) (S : AlgebraicGeometry.Scheme.{u}) :
+    (AffineSpace.neg n S).IsOver S :=
+  ⟨AffineSpace.neg_over n S⟩
+
 namespace AlgebraicGeometry.WeilComplex
 
 /-- Fourier inversion with the inverse additive character, functorially in the Weil complex.
