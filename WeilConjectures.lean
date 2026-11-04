@@ -335,6 +335,7 @@ public import WeilConjectures.Algebra.Homology.Derived.DerivedTensorShiftDescent
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTowerMap
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.FiniteFiltrationExtVanishing
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.MapBijectiveAcyclic
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.MapExactFunctorHom
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ModuleOfRingHom
@@ -6141,9 +6142,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteFamilyJointSurjectivitySta
 public import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
 public import WeilConjectures.AlgebraicGeometry.FiniteFibreCokernelTensor
 public import WeilConjectures.AlgebraicGeometry.FiniteFieldClosedComponentDescent
-public import WeilConjectures.AlgebraicGeometry.FiniteFieldDescent.FiniteEtaleConstructibleHomDescent
-public import WeilConjectures.AlgebraicGeometry.FiniteFieldDescent.FiniteEtaleConstructibleObjectDescent
-public import WeilConjectures.AlgebraicGeometry.FiniteFieldDescent.FiniteEtaleConstructibleStages
 public import WeilConjectures.AlgebraicGeometry.FiniteFieldFiber
 public import WeilConjectures.AlgebraicGeometry.FiniteFieldTowerDegreeBound
 public import WeilConjectures.AlgebraicGeometry.FiniteFlatProperSupportDescent
@@ -16777,7 +16775,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Enoug
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Finite
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.FiniteFiltrationExtVanishing
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.ScalarBoundaryComparison
