@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReindexingReductionTensorData
+import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionReindexUnaryModelAux2
 
 /-! # The unary strict reduction/reindexing model
 
@@ -78,7 +79,7 @@ theorem unary_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
           ((R[Y]).obj P.obj) ≫ (systemQ l E X).map β.hom =
       A.reduction.hom.app ((podReindexingQ l E Y none).obj P.obj) ≫
         (podReindexCalculus l E X).reduction.map ((factor l E g h).hom.app P.obj) ≫
-        (pullbackTensorReductionModel l E X).hom.app ⟨(F[g]).obj P.obj, hFP⟩ := by
-  sorry
+        (pullbackTensorReductionModel l E X).hom.app ⟨(F[g]).obj P.obj, hFP⟩ :=
+  unary_model_core l E g A hA h P
 
 end WeilConjectures.PodReductionRepresentatives

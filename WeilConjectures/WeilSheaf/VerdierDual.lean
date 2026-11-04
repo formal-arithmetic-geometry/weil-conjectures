@@ -13,8 +13,10 @@ public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 import WeilConjectures.WeilSheaf.ProperLowerStarAdjoint
+import WeilConjectures.WeilSheaf.SmoothPurity
 import WeilConjectures.WeilSheaf.VerdierBiduality
 import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
+import WeilConjectures.WeilSheaf.VerdierExchange
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -223,11 +225,10 @@ theorem nonempty_upperShriek_obj_iso [HasUpperShriek k₀ l f] (L : WeilComplex 
 finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
 theorem nonempty_verdierDual_derivedLowerShriek_iso (M : WeilComplex k₀ l X) :
     Nonempty ((verdierDual k₀ l Y).obj (op ((derivedLowerShriek k₀ l f).obj M)) ≅
-      (derivedLowerStar f).obj ((verdierDual k₀ l X).obj (op M))) := by
-  obtain ⟨ex⟩ := nonempty_verdierDual_derivedLowerShriek_natIso f
-    (objectProperty_derivedHom_dualizingComplex k₀ l)
-    (objectProperty_derivedHom_dualizingComplex k₀ l)
-  exact ⟨ex.app (op M)⟩
+      (derivedLowerStar f).obj ((verdierDual k₀ l X).obj (op M))) :=
+  nonempty_iso_derivedLowerStar_of_adjunction f _ _ (comp_over f _)
+    (derivedLowerShriekUpperShriekAdjunction _) (derivedLowerShriekUpperShriekAdjunction _) _ M _ _
+    (Iso.refl _) (Iso.refl _)
 
 end Exchange
 
@@ -247,9 +248,33 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
     Nonempty (dualizingComplex k₀ l X ≅
       ((tateTwist k₀ l X d).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) :=
-  sorry
+  nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth d (derivedLowerShriekUpperShriekAdjunction _)
 
 end Smooth
+
+section RelativePurity
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [HasUpperShriek k₀ l f]
+
+/-- **Smooth purity for Weil complexes** (blueprint:
+`thm-pur-weil-equivariance-of-purity-and-trace`, the equivariance of the smooth purity
+isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`): for a morphism `f : X ⟶ Y` smooth of relative
+dimension `d`, the purity isomorphism commutes with the Weil structures, so it is an isomorphism
+`Rf^! L ≅ f^*(L(d)[2d])` of Weil complexes, natural in `L`. Only the existence of a natural
+isomorphism is stated here. -/
+theorem nonempty_upperShriek_iso_of_smoothOfRelativeDimension (d : ℕ)
+    [SmoothOfRelativeDimension d f] :
+    Nonempty (upperShriek (k₀ := k₀) (l := l) f ≅
+      (tateTwist k₀ l Y d ⋙ shiftFunctor (WeilComplex k₀ l Y) (2 * d : ℤ)) ⋙ upperStar f) :=
+  sorry
+
+end RelativePurity
 
 section Lisse
 

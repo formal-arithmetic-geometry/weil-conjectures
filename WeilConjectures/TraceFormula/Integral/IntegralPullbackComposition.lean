@@ -210,7 +210,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Integral pullback has natural composition isomorphisms, with their specified
-finite reductions and associative composition law.
+finite reductions, associative composition law and whole-system normalization.
 
 Source: Stacks Tags 099N(2),(5), 0D6D, 0941; Bhatt--Scholze, Lemmas 3.5.5 and 3.5.7
 (blueprint: lem-pod-integral-pullback-composition).
@@ -249,7 +249,10 @@ units, and their inverses multiply the three transported scalar factors. These
 formulas commute with all quotient transitions. The simultaneous system model
 therefore gives equality of system maps. Cancel the common invertible comparison
 and use full faithfulness from step 2 to obtain the integral associativity equation.
-The explicit eqToHom below only identifies the two parenthesizations of j >> h >> k. -/
+The explicit eqToHom below only identifies the two parenthesizations of j >> h >> k.
+The last clause records the whole-system normalization of c used in step 3: its
+reduction composed with the system comparisons beta is the system compositor
+after beta_hk, before any finite evaluation. -/
 theorem integralPullbackComposition :
     ∃ c : IntegralPullbackCompositionFamily l E,
       (∀ {V W Z : Scheme.{u}}
@@ -284,7 +287,22 @@ theorem integralPullbackComposition :
             (fun f : Y ⟶ V ↦ (constructibleIntegralPullback l E f).obj K)
             (Category.assoc j h k).symm) ≫
             (c (j ≫ h) k).hom.app K ≫
-              (c j h).hom.app ((constructibleIntegralPullback l E k).obj K)) := by
+              (c j h).hom.app ((constructibleIntegralPullback l E k).obj K)) ∧
+      (∀ {V W Z : Scheme.{u}}
+        [∀ v : V, Invertible (l : V.residueField v)]
+        [∀ w : W, Invertible (l : W.residueField w)]
+        [∀ z : Z, Invertible (l : Z.residueField z)]
+        (h : Z ⟶ W) (k : W ⟶ V) (K : sfIntegralConstructibleCategory l E V),
+        (integralSystemReduction l E Z).map ((c h k).hom.app K) ≫
+            ((integralPullbackSystemComparison l E).choose h).hom.app
+              ((constructibleIntegralPullback l E k).obj K) ≫
+            (finiteSystemDerivedPullback (integralSystemRings l E)
+              (integralSystemTransition l E) h).map
+                (((integralPullbackSystemComparison l E).choose k).hom.app K) =
+          ((integralPullbackSystemComparison l E).choose (h ≫ k)).hom.app K ≫
+            (finiteSystemDerivedComposition (integralSystemRings l E)
+              (integralSystemTransition l E) h k).hom.app
+                ((integralSystemReduction l E V).obj K)) := by
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
   first
@@ -304,7 +322,7 @@ theorem integralPullbackComposition :
             finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f
               :=
       (integralPullbackSystemComparison l E).choose
-    have hβ := @(integralPullbackSystemComparison l E).choose_spec
+    have hβ := @(integralPullbackSystemComparison l E).choose_spec.1
     have hb {X Y : Scheme.{u}}
         [hX : ∀ x : X, Invertible (l : X.residueField x)]
         [hY : ∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
@@ -351,7 +369,7 @@ theorem integralPullbackComposition :
         (finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h
           k)
     choose c₀ hc using @cdata
-    refine ⟨c₀, ?_, ?_⟩
+    refine ⟨c₀, ?_, ?_, hc⟩
     · intro V W Z hV hW hZ h k K P e Q d n
       let ev := finiteSystemDerivedEvaluation (integralSystemRings l E) (integralSystemTransition l
           E) Z n
@@ -424,4 +442,5 @@ theorem integralPullbackComposition :
             (integralSystemTransition l E) V n).obj ((integralSystemReduction l E V).obj K))
           ((scalarReductionDerivedExtension l E V n).obj K.obj) d₀.hom
     · exact integralSystemPullbackLift_associativity l E β c₀ hc
+
 end WeilConjectures
