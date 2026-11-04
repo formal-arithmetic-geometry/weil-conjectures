@@ -169,12 +169,10 @@ lemma projection_inverse_square_of_frobenius
 /-- The inverse square is the adic square on the underlying carriers. -/
 lemma condensedRealizationSheafTensor_inverse_square (M N : ProEtaleWeilSheaf k₀ l Y) :
     SheafPullTensorInverseSquare k₀ l g M N := by
-  have h := projection_inverse_square_of_frobenius k₀ l
-    (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
-      (comp_over g (Spec (CommRingCat.of k₀))))
-    (nativePullSheafTensor k₀ l g)
-    (fun M N ↦ projection_nativePullSheafTensor_carrier_eq k₀ l g M N) M N
+  have h := projection_inverse_square_of_frobenius k₀ l _ _
+    (nativePullSheafTensor k₀ l g) (by
+      intro A B
+      cast_proofs projection_nativePullSheafTensor_carrier_eq k₀ l g A B) M N
   dsimp only [SheafPullTensorInverseSquare, upperStar, condensedRealizationUpperStarIso]
   exact_mod_proofs h
 

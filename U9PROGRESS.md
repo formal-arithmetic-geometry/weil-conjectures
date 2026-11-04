@@ -154,3 +154,11 @@ abstract Frobenius comparison e, then specialize to geometricFiberMap. This keep
 all concrete geometric comparison data outside the composite calculation.
 Total and derived wrappers now take the tensor comparison explicitly; the complex
 component proposition is also formed abstractly. No heartbeat raises.
+
+2026-11-05 04:48 CST: K5-20261105T044426.log rc=1.
+Abstract projection_inverse_square_of_frobenius GREEN (2.47s); total statement
+GREEN (76s); derived statement GREEN (7.5s). The only remaining sheaf timeout is
+the tiny concrete specialization, confirming that reconstructing f/e while
+passing nativePullSheafTensor causes the costly conversion. Letting f/e be
+inferred from that existing tensor comparison, and casting only the propositional
+carrier compatibility, before the final exact_mod_proofs predicate match.
