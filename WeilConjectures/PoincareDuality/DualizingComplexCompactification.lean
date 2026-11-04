@@ -39,7 +39,15 @@ isomorphism, then for every compactification `c` of `f : X ⟶ Y`, `Rf^!(c) ℚ�
 theorem nonempty_upperShriekOfCompactification_obj_unit_iso [IsIso Y.hom] {f : X ⟶ Y}
     (c : Compactification f.left) :
     Nonempty ((boundedConstructibleUpperShriekOfCompactification ℓ c).obj
-        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≅ dualizingComplex ℓ X) :=
-  sorry
+        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≅ dualizingComplex ℓ X) := by
+  have : IsIso (Over.mkIdTerminal.from Y).left := by
+    rw [Over.mkIdTerminal_from_left]
+    infer_instance
+  exact ⟨(conjugateIsoEquiv (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c)
+      (boundedConstructibleUpperShriekAdjunction ℓ f)
+      (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ _ c)).app _ ≪≫
+    (boundedConstructibleUpperShriek ℓ f).mapIso
+      (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ (Over.mkIdTerminal.from Y)).symm ≪≫
+    upperShriekDualizingComplexIso ℓ f⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
