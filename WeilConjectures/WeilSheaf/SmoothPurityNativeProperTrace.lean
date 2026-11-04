@@ -26,6 +26,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.WeilComplex
 
 open ProEtale
+open scoped ProEtale.CondensedRing
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}}

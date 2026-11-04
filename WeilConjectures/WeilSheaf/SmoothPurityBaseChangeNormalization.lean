@@ -78,7 +78,7 @@ lemma ordinaryTraceDescentIso_eq_lowerStarBaseChangeIso
         lowerStarBaseChangeIso Λ (Scheme.Hom.isPullback_geometricFiberMap f h).flip := by
   apply Iso.ext
   apply NatTrans.ext
-  intro M
+  funext M
   simpa [Endofunctor.IsoAlgebra.ordinaryTraceDescentIso,
     Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso, lowerStarBaseChangeIso] using
     lowerStarGeometricFiberWeilBaseChange_app_forget Λ hc M
@@ -155,7 +155,8 @@ lemma geometricFiberWeilRightDerivedLowerStarIso_forget
         ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
           (Endofunctor.IsoAlgebra.forget _)).inv.app K) := by
   rw [rightDerivedLowerStarBaseChangeIso_hom_app_eq_derivedBaseChange,
-    derivedBaseChange_eq_rightDerivedFunctorCommIso]
+    derivedBaseChange_eq_rightDerivedFunctorCommIso Λ
+      (Scheme.Hom.isPullback_geometricFiberMap f h).flip]
   have he := Endofunctor.IsoAlgebra.traceDescentComparison_forget
     (lowerStarGeometricFiberMapCompFrobeniusIso Λ f h)
     (geometricFiberWeilLowerStar Λ s)

@@ -34,8 +34,8 @@ theorem boundedConstructible_geometricFiberWeilLowerStar
     boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj l) s.geometricFiber)
       ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
-        ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) s).
-          mapDerivedCategory.obj P.obj)) := by
+        ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) s).mapDerivedCategory.obj
+          P.obj)) := by
   have h := boundedConstructible_leftDerivedUpperStar_obj_of_scheme
     (Profinite.padicAlgClRingObj l) s.geometricFiberProj P.obj P.property
   have h' := (boundedConstructible _).prop_of_iso
@@ -51,6 +51,7 @@ end AlgebraicGeometry.ProEtale.CondensedRing
 namespace AlgebraicGeometry.WeilComplex
 
 open ProEtale
+open scoped ProEtale.CondensedRing
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}
