@@ -13,6 +13,8 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerived
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedCoherenceOfSquare
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The condensed realization is compatible with the pullback–tensor comparisons
@@ -74,46 +76,7 @@ theorem comparisonCompatible_derivedCondensedRealization :
       (ProEtale.CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
       (condensedRealizationCurriedTensor k₀ l Z) (condensedRealizationCurriedTensor k₀ l Y) := by
-  let R := ProEtale.CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-    (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-  let b := Functor.mapDerivedCategorySquareIso (condensedRealizationUpperStarIso k₀ l g)
-  let θ := R.leftDerivedFunctorIsoMapDerivedCategory
-  have he : (Functor.mapDerivedCategorySquareIso
-      (condensedRealizationUpperStarIso k₀ l g).symm).hom = b.inv := by
-    rw [Functor.mapDerivedCategorySquareIso_symm]
-    rfl
-  intro M N
-  have h := condensedRealizationTensor_pull_square k₀ l g M N
-  dsimp only [DerivedPullTensorSquare, PullTensorSquareWithComparison] at h
-  simp only [Iso.symm_inv] at h
-  rw [he] at h
-  have hh : (derivedCondensedRealization k₀ l Z).map
-        ((nativePullTensor k₀ l g).hom.app (M, N)) ≫
-      (condensedRealizationTensor k₀ l Z).hom.app
-        ((nativeOpenPull k₀ l g).obj M, (nativeOpenPull k₀ l g).obj N) =
-    b.inv.app ((nativeDerivedTensor k₀ l Y).obj (M, N)) ≫
-      R.mapDerivedCategory.map ((condensedRealizationTensor k₀ l Y).hom.app (M, N)) ≫
-      (R.mapDerivedCategoryTensorComparison.app
-        ((derivedCondensedRealization k₀ l Y).obj M)).app
-          ((derivedCondensedRealization k₀ l Y).obj N) ≫
-      (b.hom.app M ⊗ₘ b.hom.app N) := by
-    apply (cancel_mono (b.inv.app M ⊗ₘ b.inv.app N)).1
-    simpa only [Category.assoc, MonoidalCategory.tensorHom_comp_tensorHom,
-      Iso.hom_inv_id_app, MonoidalCategory.id_tensorHom_id, Category.comp_id] using h
-  rw [Functor.mapDerivedCategoryTensorComparison_app_app] at hh
-  have hn := θ.inv.naturality ((condensedRealizationTensor k₀ l Y).hom.app (M, N))
-  dsimp only [Functor.comp_map] at hn
-  simp only [Category.assoc] at hh
-  rw [reassoc_of% hn] at hh
-  simp only [MonoidalCategory.tensorHom_comp_tensorHom] at hh
-  change (derivedCondensedRealization k₀ l Z).map
-        ((nativePullTensor k₀ l g).hom.app (M, N)) ≫
-      (condensedRealizationTensor k₀ l Z).hom.app
-        ((nativeOpenPull k₀ l g).obj M, (nativeOpenPull k₀ l g).obj N) = _
-  rw [ProEtale.CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison]
-  simpa only [derivedCondensedRealizationUpperStarIso, Functor.leftDerivedFunctorSquareIso,
-    Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Category.assoc,
-    MonoidalCategory.tensorHom_def] using hh
+  exact_mod_proofs projectionComparisonCompatible_of_square k₀ l g
+    (condensedRealizationTensor_pull_square k₀ l g)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
