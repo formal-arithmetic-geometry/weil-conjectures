@@ -28,6 +28,7 @@ variable {R} {a b : ℤ}
 
 set_option maxHeartbeats 1000000 in
 -- The summand-by-summand chain-map calculation exceeds the default heartbeat budget.
+omit [HasWeakSheafify J AddCommGrpCat.{w}] in
 /-- Strictly compatible quasi-isomorphisms of twisting families induce the filtered
 comparison map of any two realizations, with graded maps the given ones.
 This is the comparison part of the finite twisting assembly.

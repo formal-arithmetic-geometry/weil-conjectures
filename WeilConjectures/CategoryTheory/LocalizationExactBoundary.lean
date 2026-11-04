@@ -90,7 +90,19 @@ def localizationExactBoundary :
       (I.mapDerivedCategoryFactors.hom ≫ localizationExactConnecting J I a q hz hs ≫
         Functor.whiskerRight J.mapDerivedCategoryFactors.inv (shiftFunctor _ (1 : ℤ)))
 
-/-- The descended map is normalized by the actual chain short exact sequence.
+/-- The descended map is normalized by the actual chain short exact sequence: with
+`φ : I (Q K) ≅ Q (I K)` and `φ' : J (Q K) ≅ Q (J K)` the realization isomorphisms
+`mapDerivedCategoryFactors` and `δ` the connecting map of `0 → J K → K → I K → 0`,
+the square
+```
+            boundary_{Q K}
+  I (Q K) ────────────────→ (J (Q K))[1]
+     │                           │
+    φ_K                       φ'_K[1]
+     ↓                           ↓
+  Q (I K) ──────── δ ──────→ (Q (J K))[1]
+```
+commutes.
 Source: Stacks Tag 0152. Proof: the localization preimage equation, followed by
 cancellation of the exact-functor realization isomorphism.
 (blueprint: lem-trf-localization-exact-boundary). -/

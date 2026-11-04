@@ -18,6 +18,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasWeakSheafify J AddCommGrpCat.{w}]
   {R : Sheaf J CommRingCat.{w}} {a b : ℤ}
 
+omit [HasWeakSheafify J AddCommGrpCat.{w}] in
 /--
 The degreewise upper-triangular map factors through every finite-totalization tail.
 Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations (routine),

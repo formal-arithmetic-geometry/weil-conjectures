@@ -235,6 +235,14 @@ private lemma exchangeHomEquiv_natural_input
 /-- A projection isomorphism gives the canonical internal-Hom exchange on full
 subcategories. No adjunction on the entire ambient categories is required.
 
+For `M, N` in `Q`, the component `e_{M,N} : Hom(L M, G N) ⟶ G (Hom(M, N))` is the
+`F ⊣ G` transpose of the curried composite
+```
+                         q                         F (ev)                ε_N
+  M ⊗ F (Hom(L M, G N)) ──→ F (L M ⊗ Hom(L M, G N)) ──────→ F (G N) ─────→ N
+```
+and `e` is the unique natural isomorphism with these components.
+
 Source: the Hom chain and Yoneda argument of
 lem-trf-exceptional-internal-hom-exchange, proof steps 2--3.
 (blueprint: lem-trf-restricted-closed-projection-exchange).
