@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.InstanceNormalization
+public import WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
 public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
@@ -157,22 +157,12 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
     (F.mapDerivedCategoryFactors.hom.app P) (F.mapDerivedCategoryFactors.hom.app T)
-  have hright : R.mapDerivedCategory.map mZ.hom ≫
-      R.mapDerivedCategoryFactors.hom.app (FP ⊗ FT) ≫
-      DerivedCategory.Q.map (R.mapCochainComplexμIso FP FT).inv =
-    R.mapDerivedCategory.map ((condensedRealizationTensor k₀ l Y).hom.app
-        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
-      (R.mapDerivedCategoryTensorComparison.app
-        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))).app
-          (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) ≫ mU.hom := by
-    rw [hmZ, Functor.map_comp, Category.assoc, ← ho, hmU']
-    rfl
-  apply (cancel_mono mU.hom).1
-  simp only [Category.assoc, hright] at hsquare
+  have hright := R.mapDerivedCategory.projection_map_model_square hmZ hmU' ho
+  have hfinal := projection_cancel_model_square hsquare hright
   dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization,
     Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
-    curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hsquare ⊢
-  cast_proofs hsquare
+    curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hfinal ⊢
+  with_reducible_and_instances cast_proofs hfinal
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
