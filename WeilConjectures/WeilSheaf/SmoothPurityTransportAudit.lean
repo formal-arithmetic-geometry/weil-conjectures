@@ -1,5 +1,6 @@
 module
 
+import WeilConjectures.WeilSheaf.SmoothPurityNativeTraceCriterion
 import WeilConjectures.WeilSheaf.SmoothPurityFieldTrace
 import WeilConjectures.WeilSheaf.SmoothDualizingConcentration
 import WeilConjectures.WeilSheaf.SmoothPurityFreeResolution
@@ -18,3 +19,5 @@ import WeilConjectures.WeilSheaf.SmoothPurityFreeComparisonComp
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_geometric
 
 #print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_homEquiv_fieldChangedSmoothProperTrace
+
+#print axioms AlgebraicGeometry.WeilComplex.isIso_homEquiv_of_geometric_trace
