@@ -221,8 +221,8 @@ private theorem unit_section_surjective (Y : Scheme.{u})
     { app U := AddCommGrpCat.ofHom ((zmultiplesHom _ (M.obj.map (hT.from U.unop).op s)).comp
         AddEquiv.ulift.toAddMonoidHom)
       naturality U V g := by
-        simp
-        erw [Category.id_comp]
+        simp only [Monoidal.tensorUnit_obj, Monoidal.tensorUnit_map, Opposite.op_unop,
+          AddEquiv.toAddMonoidHom_eq_coe, Category.id_comp]
         ext n
         erw [AddCommGrpCat.hom_comp]
         simp only [AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp, Function.comp_apply,
