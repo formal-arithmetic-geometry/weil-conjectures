@@ -22,7 +22,7 @@ universe v u
 
 open CategoryTheory CategoryTheory.MonoidalCategory
 
-namespace WeilConjectures.TrfSignedContraction
+namespace CategoryTheory.SymmetricCategory
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C]
 variable (A B C' D : C)
 
@@ -66,4 +66,4 @@ theorem exchange_signed_permutation :
   simp only [tensorμ, BraidedCategory.braiding_tensor_right_hom]
   monoidal
 
-end WeilConjectures.TrfSignedContraction
+end CategoryTheory.SymmetricCategory

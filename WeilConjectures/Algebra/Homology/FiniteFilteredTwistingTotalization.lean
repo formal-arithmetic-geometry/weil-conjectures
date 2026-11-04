@@ -60,7 +60,6 @@ Proof:
 theorem exists_finiteFilteredTwistingTotalization
     (a b : ℤ) (hab : a ≤ b) (D : FiniteTwistingFamily R a b) :
     ∃ M : FiniteTwistingTotalization D,
-      (∀ n : ℤ, M.P.d n (n + 1) ≫ M.P.d (n + 1) (n + 1 + 1) = 0) ∧
       (((∀ (p : ↥(Finset.Icc a b)) (n : ℤ),
           SheafOfModules.IsFlatOnSite (J := J) (R := R) ((D.G p).X n)) ∧
         (∀ p : ↥(Finset.Icc a b), (D.G p).IsKFlatIndependentCoefficients)) →
@@ -85,10 +84,10 @@ theorem exists_finiteFilteredTwistingTotalization
                 (M.gradedIso p).hom ≫ f p =
                   FilteredObject.gradedMapSteps φ p.val ≫ (M'.gradedIso p).hom) ∧
               (∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps φ p)) := by
-  obtain ⟨M, hM, hflat⟩ := exists_finiteTwistingTotalization_base a b hab D
-  refine ⟨M, hM, hflat, ?_⟩
+  obtain ⟨M, hflat⟩ := exists_finiteTwistingTotalization_base a b hab D
+  refine ⟨M, hflat, ?_⟩
   intro D'
-  obtain ⟨M', hM', _⟩ := exists_finiteTwistingTotalization_base a b hab D'
+  obtain ⟨M', _⟩ := exists_finiteTwistingTotalization_base a b hab D'
   refine ⟨M', ?_⟩
   intro f hf hτ
   exact exists_finiteTwistingTotalization_comparison D D' M M' f hf hτ

@@ -20,7 +20,7 @@ standing coefficient A_E,n (blueprint: lem-trf-finite-coefficient-primary).
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
 
-namespace WeilConjectures.FiniteRingTrace
+namespace Padic
 
 /-- The finite quotient is ell-primary. Source: the coefficient convention A_E,n
 and the DVR description of O_E (blueprint: lem-trf-finite-coefficient-primary).
@@ -36,4 +36,4 @@ theorem coefficientExtensionRing_primary (ell : ℕ) [Fact ell.Prime]
   exact ⟨n, hn, Padic.pow_nsmul_coefficientExtensionRing ell E n⟩
 
 
-end WeilConjectures.FiniteRingTrace
+end Padic

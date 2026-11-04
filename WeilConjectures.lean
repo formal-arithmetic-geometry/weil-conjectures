@@ -13671,12 +13671,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryA
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBasis
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBiproductPow
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCompIsoNatTrans
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTrans
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTransAdditive
-public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTransComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentationPaste
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIso
@@ -16403,6 +16403,7 @@ public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.Algebra.Group.Subgroup.Ker
 public import WeilConjectures.Mathlib.Algebra.GroupWithZero.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
@@ -16825,6 +16826,7 @@ public import WeilConjectures.Mathlib.Combinatorics.Enumerative.IncidenceAlgebra
 public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Fin.Tuple.Basic
 public import WeilConjectures.Mathlib.Data.Finset.Order
+public import WeilConjectures.Mathlib.Data.Fintype.BigOperators
 public import WeilConjectures.Mathlib.Data.Multiset.MapFold
 public import WeilConjectures.Mathlib.Data.Multiset.UnionInter
 public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
@@ -23227,14 +23229,8 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstr
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverDatum
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverProperties
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCovers
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCovers2
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroDescent
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization2
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization3
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalizationCompatibility
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalizationDualComparison
-public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalizationExternalComparison
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroQbar
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTraceDescent
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTransfer
@@ -23258,7 +23254,6 @@ public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.DualizingSmooth
 public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
 public import WeilConjectures.TraceFormula.ExceptionalKunnethRestriction
-public import WeilConjectures.TraceFormula.ExtensionPointGeometry
 public import WeilConjectures.TraceFormula.ExternalProductCoefficients
 public import WeilConjectures.TraceFormula.ExternalProductExtendScalars
 public import WeilConjectures.TraceFormula.FibreCoherence
@@ -23270,7 +23265,6 @@ public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointAlgebra
 public import WeilConjectures.TraceFormula.FixedPointComponent
 public import WeilConjectures.TraceFormula.FixedPointScheme
-public import WeilConjectures.TraceFormula.FixedSchemeGeometry
 public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.FrobeniusCurveLocalTerm
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv

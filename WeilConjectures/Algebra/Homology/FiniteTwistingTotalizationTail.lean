@@ -6,21 +6,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationMatrix
+public import WeilConjectures.Mathlib.Algebra.Homology.Additive
 
-/-! # Tail subcomplexes of a finite twisting totalization
+/-! # Tails of a finite twisting totalization
 
-Given matrix data `X` for a finite twisting family `D`, the tail of weight `r` is the
-direct sum of the summands of weight at least `r`.  Since the differential of `X.P` is
-upper triangular, the tails are subcomplexes, and they form a decreasing filtration
-whose graded pieces are the complexes `D.G p`.
-
-## Main definitions
-
-- `CochainComplex.FiniteTwistingMatrixData.tailComplex`: the tail complex of weight `r`.
-- `CochainComplex.FiniteTwistingMatrixData.tailι`: its inclusion into `X.P`.
-- `CochainComplex.FiniteTwistingMatrixData.tailFiltration`: the tail filtration of `X.P`.
-- `CochainComplex.FiniteTwistingMatrixData.tailGradedπ`: the projection of the tail of
-  weight `p` onto `D.G p`.
+Given matrix data `X` for a finite twisting family `D`, the summands of weight at least `r`
+form a subcomplex of `X.P`, because every matrix entry of the differential raises weight.
+We construct these tails as complexes, their inclusions into `X.P`, the resulting decreasing
+filtration of `X.P`, and identify its graded pieces with the complexes `D.G p`.
 -/
 
 @[expose] public section
@@ -29,339 +22,350 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits
 open scoped BigOperators
 
-/-- In a biproduct indexed by a subtype, the composite of an inclusion and a projection agrees
-with the corresponding composite in the biproduct indexed by the ambient type. -/
-lemma CategoryTheory.Limits.biproduct.ι_π_subtype {𝒞 : Type*} [Category 𝒞]
-    [HasZeroMorphisms 𝒞] {ι : Type*} (g : ι → 𝒞) (P : ι → Prop)
-    [HasBiproduct g] [HasBiproduct fun q : {q : ι // P q} ↦ g q.val] (q t : {q : ι // P q}) :
-    biproduct.ι (fun q : {q : ι // P q} ↦ g q.val) q ≫
-        biproduct.π (fun q : {q : ι // P q} ↦ g q.val) t =
-      biproduct.ι g q.val ≫ biproduct.π g t.val := by
-  classical
-  by_cases h : q = t
-  · subst h
-    simp
-  · rw [biproduct.ι_π_ne _ h, biproduct.ι_π_ne _ (fun e ↦ h (Subtype.ext e))]
-
 namespace CochainComplex
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
   {R : Sheaf J CommRingCat.{w}} {a b : ℤ}
 
-namespace FiniteTwistingFamily
-
-variable (D : FiniteTwistingFamily R a b)
-
-/-- The inclusion of the summands of weight at least `r` into the full direct sum. -/
-noncomputable def tailIncl (r n : ℤ) :
-    (⨁ fun q : {q : ↥(Finset.Icc a b) // r ≤ q.val} ↦ (D.G q.val).X n) ⟶
-      ⨁ fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n :=
-  biproduct.desc fun q ↦ biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) q.val
-
-/-- The projection of the full direct sum onto the summands of weight at least `r`. -/
-noncomputable def tailProj (r n : ℤ) :
-    (⨁ fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) ⟶
-      ⨁ fun q : {q : ↥(Finset.Icc a b) // r ≤ q.val} ↦ (D.G q.val).X n :=
-  biproduct.lift fun q ↦ biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) q.val
-
-@[reassoc (attr := simp)]
-lemma ι_tailIncl (r n : ℤ) (q : {q : ↥(Finset.Icc a b) // r ≤ q.val}) :
-    biproduct.ι (fun q : {q : ↥(Finset.Icc a b) // r ≤ q.val} ↦ (D.G q.val).X n) q ≫
-        D.tailIncl r n =
-      biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) q.val :=
-  biproduct.ι_desc _ _
-
-@[reassoc (attr := simp)]
-lemma tailProj_π (r n : ℤ) (q : {q : ↥(Finset.Icc a b) // r ≤ q.val}) :
-    D.tailProj r n ≫
-        biproduct.π (fun q : {q : ↥(Finset.Icc a b) // r ≤ q.val} ↦ (D.G q.val).X n) q =
-      biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) q.val :=
-  biproduct.lift_π _ _
-
-@[reassoc (attr := simp)]
-lemma tailIncl_tailProj (r n : ℤ) : D.tailIncl r n ≫ D.tailProj r n = 𝟙 _ := by
-  refine biproduct.hom_ext' _ _ fun q ↦ biproduct.hom_ext _ _ fun t ↦ ?_
-  rw [Category.assoc, Category.assoc, ι_tailIncl_assoc, tailProj_π, Category.comp_id]
-  exact (biproduct.ι_π_subtype (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) _ q t).symm
-
-/-- Projecting a summand of weight at least `r` from the tail of weight `r`. -/
-@[reassoc]
-lemma tailIncl_π_of_le (r n : ℤ) (t : ↥(Finset.Icc a b)) (h : r ≤ t.val) :
-    D.tailIncl r n ≫ biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) t =
-      biproduct.π (fun q : {q : ↥(Finset.Icc a b) // r ≤ q.val} ↦ (D.G q.val).X n)
-        ⟨t, h⟩ := by
-  refine biproduct.hom_ext' _ _ fun q ↦ ?_
-  rw [ι_tailIncl_assoc]
-  exact (biproduct.ι_π_subtype (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) _ q ⟨t, h⟩).symm
-
-/-- Projecting a summand of weight less than `r` from the tail of weight `r` gives zero. -/
-@[reassoc]
-lemma tailIncl_π_of_not_le (r n : ℤ) (t : ↥(Finset.Icc a b)) (h : ¬ r ≤ t.val) :
-    D.tailIncl r n ≫ biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) t = 0 := by
-  refine biproduct.hom_ext' _ _ fun q ↦ ?_
-  rw [ι_tailIncl_assoc, comp_zero,
-    biproduct.ι_π_ne _ (fun e ↦ h (by rw [← e]; exact q.property))]
-
-/-- Including a summand of weight at least `r` and then projecting to the tail. -/
-@[reassoc]
-lemma ι_tailProj_of_le (r n : ℤ) (q : ↥(Finset.Icc a b)) (h : r ≤ q.val) :
-    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) q ≫ D.tailProj r n =
-      biproduct.ι (fun q : {q : ↥(Finset.Icc a b) // r ≤ q.val} ↦ (D.G q.val).X n)
-        ⟨q, h⟩ := by
-  refine biproduct.hom_ext _ _ fun t ↦ ?_
-  rw [Category.assoc, tailProj_π]
-  exact (biproduct.ι_π_subtype (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) _ ⟨q, h⟩ t).symm
-
-/-- The idempotent `tailProj ≫ tailIncl` followed by a projection. -/
-@[reassoc]
-lemma tailProj_tailIncl_π (r n : ℤ) (t : ↥(Finset.Icc a b)) :
-    D.tailProj r n ≫ D.tailIncl r n ≫
-        biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) t =
-      if r ≤ t.val then biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) t else 0 := by
-  split_ifs with h
-  · rw [tailIncl_π_of_le _ _ _ _ h, tailProj_π]
-  · rw [tailIncl_π_of_not_le _ _ _ _ h, comp_zero]
-
-/-- A smaller tail factors through a larger one. -/
-@[reassoc (attr := simp)]
-lemma tailIncl_tailProj_tailIncl {r r' : ℤ} (h : r ≤ r') (n : ℤ) :
-    D.tailIncl r' n ≫ D.tailProj r n ≫ D.tailIncl r n = D.tailIncl r' n := by
-  refine biproduct.hom_ext' _ _ fun q ↦ ?_
-  rw [ι_tailIncl_assoc, ι_tailProj_of_le_assoc _ _ _ _ (h.trans q.property), ι_tailIncl,
-    ι_tailIncl]
-
-/-- The tail of weight `r ≤ a` is everything. -/
-lemma tailProj_tailIncl_of_le {r : ℤ} (h : r ≤ a) (n : ℤ) :
-    D.tailProj r n ≫ D.tailIncl r n = 𝟙 _ := by
-  refine biproduct.hom_ext _ _ fun t ↦ ?_
-  rw [Category.assoc, tailProj_tailIncl_π, if_pos (h.trans (Finset.mem_Icc.mp t.property).1),
-    Category.id_comp]
-
-/-- The tail of weight `r > b` is zero. -/
-lemma tailIncl_eq_zero {r : ℤ} (h : b < r) (n : ℤ) : D.tailIncl r n = 0 :=
-  biproduct.hom_ext' _ _ fun q ↦
-    absurd ((Finset.mem_Icc.mp q.val.property).2.trans_lt h) (not_lt.mpr q.property)
-
-/-- Retracting a tail onto a smaller tail. -/
-lemma tailIncl_tailProj_tailIncl_tailProj {r r' : ℤ} (h : r ≤ r') (n : ℤ) :
-    (D.tailIncl r' n ≫ D.tailProj r n) ≫ D.tailIncl r n ≫ D.tailProj r' n = 𝟙 _ := by
-  rw [Category.assoc, D.tailIncl_tailProj_tailIncl_assoc h, tailIncl_tailProj]
-
-/-- The tail of weight `p` splits as the tail of weight `p + 1` plus the summand of
-weight `p`. -/
-lemma tailSplitting_id (p : ↥(Finset.Icc a b)) (n : ℤ) :
-    (D.tailIncl p.val n ≫ D.tailProj (p.val + 1) n) ≫ D.tailIncl (p.val + 1) n ≫
-        D.tailProj p.val n +
-      biproduct.π (fun q : {q : ↥(Finset.Icc a b) // p.val ≤ q.val} ↦ (D.G q.val).X n)
-          ⟨p, le_rfl⟩ ≫
-        biproduct.ι (fun q : {q : ↥(Finset.Icc a b) // p.val ≤ q.val} ↦ (D.G q.val).X n)
-          ⟨p, le_rfl⟩ = 𝟙 _ := by
-  refine biproduct.hom_ext' _ _ fun q ↦ biproduct.hom_ext _ _ fun t ↦ ?_
-  simp only [Preadditive.comp_add, Preadditive.add_comp, Category.assoc, ι_tailIncl_assoc,
-    tailProj_π, tailProj_tailIncl_π, Category.id_comp]
-  by_cases ht : p.val + 1 ≤ t.val.val
-  · have hne : (⟨p, le_rfl⟩ : {q : ↥(Finset.Icc a b) // p.val ≤ q.val}) ≠ t := by
-      rintro rfl
-      simp at ht
-    rw [if_pos ht, biproduct.ι_π_ne _ hne, comp_zero, comp_zero, add_zero]
-    exact (biproduct.ι_π_subtype (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) _ q t).symm
-  · obtain rfl : t = ⟨p, le_rfl⟩ :=
-      Subtype.ext (Subtype.ext (le_antisymm (Int.lt_add_one_iff.mp (not_le.mp ht)) t.property))
-    rw [if_neg ht, comp_zero, zero_add, biproduct.ι_π_self, Category.comp_id]
-
-end FiniteTwistingFamily
+/-- The direct sum of the degree-`n` terms of the complexes of weight at least `r`. -/
+noncomputable abbrev FiniteTwistingFamily.tailSum (D : FiniteTwistingFamily R a b) (r n : ℤ) :
+    finiteTwistingModule D :=
+  ⨁ fun p : {p : ↥(Finset.Icc a b) // r ≤ p.val} ↦ (D.G p.val).X n
 
 namespace FiniteTwistingMatrixData
 
 variable {D : FiniteTwistingFamily R a b} (X : FiniteTwistingMatrixData D)
 
-/-- The differential of `X.P` transported to the direct-sum coordinates. -/
-noncomputable def coordinateDifferential (n m : ℤ) :
-    (⨁ fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) ⟶
-      ⨁ fun q : ↥(Finset.Icc a b) ↦ (D.G q).X m :=
-  (X.coordinates n).inv ≫ X.P.d n m ≫ (X.coordinates m).hom
+/-- The inclusion of the summands of weight at least `r` in degree `n`. -/
+noncomputable def tailι (r n : ℤ) : D.tailSum r n ⟶ X.P.X n :=
+  biproduct.desc fun p : {p : ↥(Finset.Icc a b) // r ≤ p.val} ↦
+    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p.val ≫ (X.coordinates n).inv
 
-/-- In coordinates, the differential of `X.P` is the twisting matrix. -/
-lemma coordinateDifferential_succ (n : ℤ) :
-    X.coordinateDifferential n (n + 1) = finiteTwistingMatrix D n := by
-  refine biproduct.hom_ext' _ _ fun p ↦ ?_
-  simp only [coordinateDifferential, reassoc_of% (X.differential p n), ι_finiteTwistingMatrix,
-    Preadditive.add_comp, Preadditive.sum_comp, Category.assoc, Iso.inv_hom_id,
-    Category.comp_id]
+/-- The projection onto the summands of weight at least `r` in degree `n`. -/
+noncomputable def tailRetraction (r n : ℤ) : X.P.X n ⟶ D.tailSum r n :=
+  (X.coordinates n).hom ≫ biproduct.lift fun p : {p : ↥(Finset.Icc a b) // r ≤ p.val} ↦
+    biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p.val
 
-lemma coordinateDifferential_eq_zero {n m : ℤ} (h : n + 1 ≠ m) :
-    X.coordinateDifferential n m = 0 := by
-  rw [coordinateDifferential, X.P.shape n m h, zero_comp, comp_zero]
-
-@[reassoc (attr := simp)]
-lemma coordinateDifferential_comp (n m k : ℤ) :
-    X.coordinateDifferential n m ≫ X.coordinateDifferential m k = 0 := by
-  simp [coordinateDifferential]
-
-/-- The differential never lowers the weight. -/
-lemma ι_coordinateDifferential_π_of_lt (n m : ℤ) (q t : ↥(Finset.Icc a b))
-    (h : t.val < q.val) :
-    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) q ≫
-      X.coordinateDifferential n m ≫
-      biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X m) t = 0 := by
-  by_cases hnm : n + 1 = m
-  · subst hnm
-    simp only [coordinateDifferential_succ, ι_finiteTwistingMatrix_π,
-      dif_neg (fun e : q = t ↦ h.ne' (congrArg Subtype.val e)), dif_neg (not_lt.mpr h.le),
-      add_zero]
-  · simp only [X.coordinateDifferential_eq_zero hnm, zero_comp, comp_zero]
-
-/-- The diagonal entries of the differential are the differentials of the summands. -/
-lemma ι_coordinateDifferential_π_self (n m : ℤ) (p : ↥(Finset.Icc a b)) :
-    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p ≫
-      X.coordinateDifferential n m ≫
-      biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X m) p = (D.G p).d n m := by
-  by_cases hnm : n + 1 = m
-  · subst hnm
-    simp only [coordinateDifferential_succ, ι_finiteTwistingMatrix_π, dite_true,
-      dif_neg (lt_irrefl p.val), eqToHom_refl, Category.comp_id, add_zero]
-  · simp only [X.coordinateDifferential_eq_zero hnm, zero_comp, comp_zero,
-      (D.G p).shape n m hnm]
-
-/-- The differential preserves every tail. -/
 @[reassoc]
-lemma tailIncl_coordinateDifferential_tailProj_tailIncl (r n m : ℤ) :
-    D.tailIncl r n ≫ X.coordinateDifferential n m ≫ D.tailProj r m ≫ D.tailIncl r m =
-      D.tailIncl r n ≫ X.coordinateDifferential n m := by
-  refine biproduct.hom_ext' _ _ fun q ↦ biproduct.hom_ext _ _ fun t ↦ ?_
-  simp only [Category.assoc, FiniteTwistingFamily.ι_tailIncl_assoc,
-    FiniteTwistingFamily.tailProj_tailIncl_π]
-  split_ifs with h
-  · rfl
-  · rw [comp_zero, comp_zero,
-      X.ι_coordinateDifferential_π_of_lt n m q.val t (lt_of_lt_of_le (not_le.mp h) q.property)]
+lemma ι_tailι (r n : ℤ) (p : {p : ↥(Finset.Icc a b) // r ≤ p.val}) :
+    biproduct.ι (fun p : {p : ↥(Finset.Icc a b) // r ≤ p.val} ↦ (D.G p.val).X n) p ≫
+        X.tailι r n =
+      biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p.val ≫ (X.coordinates n).inv :=
+  biproduct.ι_desc _ _
 
-/-- The tail subcomplex of weight `r`: the summands of weight at least `r`. -/
-noncomputable def tailComplex (r : ℤ) : CochainComplex (finiteTwistingModule D) ℤ where
-  X n := ⨁ fun q : {q : ↥(Finset.Icc a b) // r ≤ q.val} ↦ (D.G q.val).X n
-  d n m := D.tailIncl r n ≫ X.coordinateDifferential n m ≫ D.tailProj r m
-  shape n m h := by
-    rw [X.coordinateDifferential_eq_zero h, zero_comp, comp_zero]
-  d_comp_d' n m k _ _ := by
-    simp only [Category.assoc]
-    rw [X.tailIncl_coordinateDifferential_tailProj_tailIncl_assoc,
-      coordinateDifferential_comp_assoc, zero_comp, comp_zero]
+@[reassoc]
+lemma tailRetraction_π (r n : ℤ) (p : {p : ↥(Finset.Icc a b) // r ≤ p.val}) :
+    X.tailRetraction r n ≫
+        biproduct.π (fun p : {p : ↥(Finset.Icc a b) // r ≤ p.val} ↦ (D.G p.val).X n) p =
+      (X.coordinates n).hom ≫
+        biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p.val := by
+  rw [tailRetraction, Category.assoc, biproduct.lift_π]
 
-lemma tailComplex_d (r n m : ℤ) :
-    (X.tailComplex r).d n m =
-      D.tailIncl r n ≫ X.coordinateDifferential n m ≫ D.tailProj r m :=
-  rfl
+/-- A summand of weight at least `r` is sent by the tail projection to the same summand. -/
+@[reassoc]
+lemma ι_coordinates_inv_tailRetraction (r n : ℤ) (q : ↥(Finset.Icc a b)) (h : r ≤ q.val) :
+    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) q ≫ (X.coordinates n).inv ≫
+        X.tailRetraction r n =
+      biproduct.ι (fun p : {p : ↥(Finset.Icc a b) // r ≤ p.val} ↦ (D.G p.val).X n)
+        ⟨q, h⟩ := by
+  refine biproduct.hom_ext _ _ fun p ↦ ?_
+  rw [Category.assoc, Category.assoc, tailRetraction_π, Iso.inv_hom_id_assoc]
+  obtain ⟨p, hp⟩ := p
+  by_cases hqp : q = p
+  · subst hqp
+    rw [biproduct.ι_π_self, biproduct.ι_π_self]
+  · rw [biproduct.ι_π_ne _ hqp, biproduct.ι_π_ne _ fun e ↦ hqp (congrArg Subtype.val e)]
 
-/-- The inclusion of the tail of weight `r` into `X.P`. -/
-noncomputable def tailι (r : ℤ) : X.tailComplex r ⟶ X.P where
-  f n := D.tailIncl r n ≫ (X.coordinates n).inv
-  comm' n m _ := by
-    rw [tailComplex_d]
-    simp only [Category.assoc]
-    rw [X.tailIncl_coordinateDifferential_tailProj_tailIncl_assoc, coordinateDifferential]
-    simp
+/-- A summand of weight less than `r` is killed by the tail projection. -/
+@[reassoc]
+lemma ι_coordinates_inv_tailRetraction_of_lt (r n : ℤ) (q : ↥(Finset.Icc a b))
+    (h : q.val < r) :
+    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) q ≫ (X.coordinates n).inv ≫
+        X.tailRetraction r n = 0 := by
+  refine biproduct.hom_ext _ _ fun p ↦ ?_
+  rw [Category.assoc, Category.assoc, tailRetraction_π, Iso.inv_hom_id_assoc, zero_comp,
+    biproduct.ι_π_ne _ fun e ↦ (lt_of_lt_of_le h p.2).ne (congrArg Subtype.val e)]
 
-lemma tailι_f (r n : ℤ) : (X.tailι r).f n = D.tailIncl r n ≫ (X.coordinates n).inv :=
-  rfl
-
-/-- The coordinate projection retracts the tail inclusion in each degree. -/
 @[reassoc (attr := simp)]
-lemma tailι_f_retraction (r n : ℤ) :
-    (X.tailι r).f n ≫ (X.coordinates n).hom ≫ D.tailProj r n =
-      𝟙 (⨁ fun q : {q : ↥(Finset.Icc a b) // r ≤ q.val} ↦ (D.G q.val).X n) := by
-  simp [tailι_f]
+lemma tailι_tailRetraction (r n : ℤ) : X.tailι r n ≫ X.tailRetraction r n = 𝟙 _ := by
+  refine biproduct.hom_ext' _ _ fun p ↦ ?_
+  rw [ι_tailι_assoc, ι_coordinates_inv_tailRetraction _ _ _ _ p.2, Category.comp_id]
 
-instance (r : ℤ) : Mono (X.tailι r) :=
-  HomologicalComplex.mono_of_mono_f _ fun n ↦ mono_of_mono_fac (X.tailι_f_retraction r n)
+/-- The tail of weight at least `r'` lies in the tail of weight at least `r` when `r ≤ r'`. -/
+@[reassoc]
+lemma tailι_tailRetraction_tailι_of_le {r r' : ℤ} (h : r ≤ r') (n : ℤ) :
+    X.tailι r' n ≫ X.tailRetraction r n ≫ X.tailι r n = X.tailι r' n := by
+  refine biproduct.hom_ext' _ _ fun p ↦ ?_
+  rw [ι_tailι_assoc, ι_coordinates_inv_tailRetraction_assoc _ _ _ _ (h.trans p.2), ι_tailι,
+    ι_tailι]
 
-/-- The inclusion of the tail of weight `r'` into the tail of weight `r ≤ r'`. -/
-noncomputable def tailMap {r r' : ℤ} (h : r ≤ r') : X.tailComplex r' ⟶ X.tailComplex r where
-  f n := D.tailIncl r' n ≫ D.tailProj r n
-  comm' n m _ := by
-    rw [tailComplex_d, tailComplex_d]
-    simp only [Category.assoc]
-    rw [D.tailIncl_tailProj_tailIncl_assoc h,
-      X.tailIncl_coordinateDifferential_tailProj_tailIncl_assoc]
+/-- Below the weight interval the tail projection is inverse to the tail inclusion. -/
+lemma tailRetraction_tailι_of_le {r : ℤ} (h : r ≤ a) (n : ℤ) :
+    X.tailRetraction r n ≫ X.tailι r n = 𝟙 _ := by
+  rw [← cancel_epi (X.coordinates n).inv]
+  refine biproduct.hom_ext' _ _ fun q ↦ ?_
+  rw [ι_coordinates_inv_tailRetraction_assoc _ _ _ _ (h.trans (Finset.mem_Icc.1 q.2).1),
+    ι_tailι, Category.comp_id]
+
+/-- The tail inclusions are compatible with the differential, since every matrix entry
+raises weight. -/
+lemma tailι_d_tailRetraction_tailι (r n m : ℤ) :
+    X.tailι r n ≫ X.P.d n m ≫ X.tailRetraction r m ≫ X.tailι r m =
+      X.tailι r n ≫ X.P.d n m := by
+  by_cases hnm : n + 1 = m
+  · subst hnm
+    refine biproduct.hom_ext' _ _ fun p ↦ ?_
+    rw [ι_tailι_assoc, ι_tailι_assoc, reassoc_of% (X.differential p.val n),
+      X.differential p.val n, Preadditive.add_comp, Preadditive.sum_comp]
+    congr 1
+    · rw [Category.assoc, Category.assoc, ι_coordinates_inv_tailRetraction_assoc _ _ _ _ p.2,
+        ι_tailι]
+    · refine Finset.sum_congr rfl fun q _ ↦ ?_
+      rw [Category.assoc, Category.assoc,
+        ι_coordinates_inv_tailRetraction_assoc _ _ _ _ (p.2.trans q.2.le), ι_tailι]
+  · rw [X.P.shape n m hnm, zero_comp, comp_zero]
+
+/-- The diagonal entry of the differential matrix. -/
+lemma ι_coordinates_inv_d_coordinates_hom_π_self (p : ↥(Finset.Icc a b)) (n : ℤ) :
+    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p ≫ (X.coordinates n).inv ≫
+        X.P.d n (n + 1) ≫ (X.coordinates (n + 1)).hom ≫
+          biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X (n + 1)) p =
+      (D.G p).d n (n + 1) := by
+  rw [reassoc_of% (X.differential p n), Preadditive.add_comp, Preadditive.sum_comp,
+    Category.assoc, Category.assoc, Iso.inv_hom_id_assoc, biproduct.ι_π_self, Category.comp_id,
+    Finset.sum_eq_zero, add_zero]
+  intro q _
+  rw [Category.assoc, Category.assoc, Iso.inv_hom_id_assoc,
+    biproduct.ι_π_ne _ fun e ↦ lt_irrefl _ (lt_of_lt_of_eq q.2 (congrArg Subtype.val e)),
+    comp_zero]
+
+/-- The entries of the differential matrix below the diagonal vanish. -/
+lemma ι_coordinates_inv_d_coordinates_hom_π_of_lt (p t : ↥(Finset.Icc a b))
+    (h : p.val < t.val) (n : ℤ) :
+    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) t ≫ (X.coordinates n).inv ≫
+        X.P.d n (n + 1) ≫ (X.coordinates (n + 1)).hom ≫
+          biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X (n + 1)) p = 0 := by
+  rw [reassoc_of% (X.differential t n), Preadditive.add_comp, Preadditive.sum_comp,
+    Category.assoc, Category.assoc, Iso.inv_hom_id_assoc,
+    biproduct.ι_π_ne _ fun e ↦ h.ne' (congrArg Subtype.val e), comp_zero, zero_add]
+  refine Finset.sum_eq_zero fun q _ ↦ ?_
+  rw [Category.assoc, Category.assoc, Iso.inv_hom_id_assoc,
+    biproduct.ι_π_ne _ fun e ↦ (h.trans q.2).ne' (congrArg Subtype.val e), comp_zero]
+
+/-- The tail complex of the summands of weight at least `r`. -/
+noncomputable def tail (r : ℤ) : CochainComplex (finiteTwistingModule D) ℤ :=
+  HomologicalComplex.ofRetract X.P (D.tailSum r) (X.tailι r) (X.tailRetraction r)
+    (X.tailι_d_tailRetraction_tailι r)
+
+lemma tail_d (r n m : ℤ) :
+    (X.tail r).d n m = X.tailι r n ≫ X.P.d n m ≫ X.tailRetraction r m := rfl
+
+/-- The inclusion of the tail complex of weight at least `r`. -/
+noncomputable def tailHom (r : ℤ) : X.tail r ⟶ X.P :=
+  HomologicalComplex.ofRetractι X.P (D.tailSum r) (X.tailι r) (X.tailRetraction r)
+    (X.tailι_d_tailRetraction_tailι r)
+
+instance (r : ℤ) : Mono (X.tailHom r) :=
+  HomologicalComplex.mono_ofRetractι _ _ _ _ _ (X.tailι_tailRetraction r)
+
+/-- The inclusion of the tail of weight at least `r'` in the tail of weight at least `r`. -/
+noncomputable def tailMap {r r' : ℤ} (h : r ≤ r') : X.tail r' ⟶ X.tail r :=
+  HomologicalComplex.ofRetractMap X.P (X.tailι_tailRetraction_tailι_of_le h)
 
 lemma tailMap_f {r r' : ℤ} (h : r ≤ r') (n : ℤ) :
-    (X.tailMap h).f n = D.tailIncl r' n ≫ D.tailProj r n :=
-  rfl
+    (X.tailMap h).f n = X.tailι r' n ≫ X.tailRetraction r n := rfl
 
 @[reassoc (attr := simp)]
-lemma tailMap_comp_tailι {r r' : ℤ} (h : r ≤ r') :
-    X.tailMap h ≫ X.tailι r = X.tailι r' := by
-  ext n
-  simp only [HomologicalComplex.comp_f, tailMap_f, tailι_f, Category.assoc,
-    D.tailIncl_tailProj_tailIncl_assoc h]
+lemma tailMap_comp_tailHom {r r' : ℤ} (h : r ≤ r') :
+    X.tailMap h ≫ X.tailHom r = X.tailHom r' :=
+  HomologicalComplex.ofRetractMap_comp_ofRetractι X.P _
 
-/-- The tail filtration of `X.P`: its step of weight `r` is the tail subcomplex. -/
+/-- The decreasing filtration of `X.P` by the tails. -/
 noncomputable def tailFiltration : DecreasingFiltration X.P where
-  F r := Subobject.mk (X.tailι r)
+  F r := Subobject.mk (X.tailHom r)
   F_succ_le _ := Subobject.mk_le_mk_of_comm (X.tailMap (Int.le_add_one le_rfl))
-    (X.tailMap_comp_tailι _)
+    (X.tailMap_comp_tailHom _)
 
-lemma tailFiltration_F (r : ℤ) : X.tailFiltration.F r = Subobject.mk (X.tailι r) :=
-  rfl
+/-- The coordinates of the degree-`n` term of the tail filtration step `r`. -/
+noncomputable def tailFiltrationCoordinates (r n : ℤ) :
+    ((X.tailFiltration.step r : CochainComplex _ ℤ).X n) ≅ D.tailSum r n :=
+  (HomologicalComplex.eval _ _ n).mapIso (Subobject.underlyingIso (X.tailHom r))
 
-/-- The projection of the tail of weight `p` onto its lowest summand `D.G p`. -/
-noncomputable def tailGradedπ (p : ↥(Finset.Icc a b)) : X.tailComplex p.val ⟶ D.G p where
-  f n := biproduct.π (fun q : {q : ↥(Finset.Icc a b) // p.val ≤ q.val} ↦ (D.G q.val).X n)
+lemma tailFiltrationCoordinates_inv_arrow (r n : ℤ) :
+    (X.tailFiltrationCoordinates r n).inv ≫ (X.tailFiltration.step r).arrow.f n =
+      X.tailι r n :=
+  congrArg (fun φ ↦ φ.f n) (Subobject.underlyingIso_arrow (X.tailHom r))
+
+lemma tailFiltration_arrow_f (r n : ℤ) :
+    (X.tailFiltration.step r).arrow.f n = (X.tailFiltrationCoordinates r n).hom ≫ X.tailι r n :=
+  congrArg (fun φ ↦ φ.f n) (Subobject.underlyingIso_hom_comp_eq_mk (X.tailHom r)).symm
+
+/-- The tail filtration step `r` is everything when `r ≤ a`. -/
+lemma tailFiltration_step_eq_top {r : ℤ} (h : r ≤ a) : X.tailFiltration.step r = ⊤ := by
+  have (n : ℤ) : IsIso ((X.tailHom r).f n) :=
+    ⟨⟨X.tailRetraction r n, X.tailι_tailRetraction r n, X.tailRetraction_tailι_of_le h n⟩⟩
+  have := HomologicalComplex.Hom.isIso_of_components (X.tailHom r)
+  exact Subobject.mk_eq_top_of_isIso _
+
+/-- The tail filtration step `r` is zero when `b < r`. -/
+lemma tailFiltration_step_eq_bot {r : ℤ} (h : b < r) : X.tailFiltration.step r = ⊥ := by
+  refine Subobject.mk_eq_bot_iff_zero.2 (HomologicalComplex.hom_ext _ _ fun n ↦ ?_)
+  refine biproduct.hom_ext' _ _ fun p ↦ absurd p.2 ?_
+  have := (Finset.mem_Icc.1 p.1.2).2
+  omega
+
+/-- The projection of the tail of weight at least `p` onto the summand of weight `p`. -/
+noncomputable def tailGradedProjection (p : ↥(Finset.Icc a b)) : X.tail p.val ⟶ D.G p where
+  f n := biproduct.π (fun t : {t : ↥(Finset.Icc a b) // p.val ≤ t.val} ↦ (D.G t.val).X n)
     ⟨p, le_rfl⟩
-  comm' n m _ := by
-    rw [tailComplex_d]
-    refine biproduct.hom_ext' _ _ fun q ↦ ?_
-    simp only [Category.assoc, FiniteTwistingFamily.ι_tailIncl_assoc,
-      FiniteTwistingFamily.tailProj_π]
-    obtain ⟨q, hq⟩ := q
-    rcases hq.lt_or_eq with hlt | heq
-    · rw [biproduct.ι_π_ne_assoc _ (fun e ↦ hlt.ne' (congrArg (fun x ↦ x.val.val) e)),
-        zero_comp, X.ι_coordinateDifferential_π_of_lt n m q p hlt]
-    · obtain rfl : q = p := Subtype.ext heq.symm
-      rw [biproduct.ι_π_self_assoc, X.ι_coordinateDifferential_π_self]
+  comm' n m hnm := by
+    obtain rfl : n + 1 = m := hnm
+    refine biproduct.hom_ext' _ _ fun t ↦ ?_
+    rw [tail_d, Category.assoc, Category.assoc, tailRetraction_π, ι_tailι_assoc]
+    obtain ⟨t, ht⟩ := t
+    rcases ht.eq_or_lt with h | h
+    · obtain rfl : t = p := Subtype.ext h.symm
+      rw [biproduct.ι_π_self_assoc, ι_coordinates_inv_d_coordinates_hom_π_self]
+    · rw [biproduct.ι_π_ne_assoc _ fun e ↦ h.ne' (congrArg (fun x ↦ x.val.val) e), zero_comp,
+        ι_coordinates_inv_d_coordinates_hom_π_of_lt _ _ _ h]
 
-lemma tailGradedπ_f (p : ↥(Finset.Icc a b)) (n : ℤ) :
-    (X.tailGradedπ p).f n =
-      biproduct.π (fun q : {q : ↥(Finset.Icc a b) // p.val ≤ q.val} ↦ (D.G q.val).X n)
-        ⟨p, le_rfl⟩ :=
-  rfl
+lemma tailGradedProjection_f (p : ↥(Finset.Icc a b)) (n : ℤ) :
+    (X.tailGradedProjection p).f n =
+      biproduct.π (fun t : {t : ↥(Finset.Icc a b) // p.val ≤ t.val} ↦ (D.G t.val).X n)
+        ⟨p, le_rfl⟩ := rfl
 
+/-- The composite of the tail inclusion with a coordinate projection is the corresponding
+projection of the tail. -/
+lemma tailι_coordinates_hom_π (r n : ℤ) (p : {p : ↥(Finset.Icc a b) // r ≤ p.val}) :
+    X.tailι r n ≫ (X.coordinates n).hom ≫
+        biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p.val =
+      biproduct.π (fun p : {p : ↥(Finset.Icc a b) // r ≤ p.val} ↦ (D.G p.val).X n) p := by
+  rw [← tailRetraction_π, tailι_tailRetraction_assoc]
+
+/-- The next tail is killed by the projection onto the summand of weight `p`. -/
+@[reassoc]
+lemma tailι_tailRetraction_π_self (p : ↥(Finset.Icc a b)) (n : ℤ) :
+    X.tailι (p.val + 1) n ≫ X.tailRetraction p.val n ≫
+        biproduct.π (fun t : {t : ↥(Finset.Icc a b) // p.val ≤ t.val} ↦ (D.G t.val).X n)
+          ⟨p, le_rfl⟩ = 0 := by
+  rw [tailRetraction_π]
+  refine biproduct.hom_ext' _ _ fun t ↦ ?_
+  rw [ι_tailι_assoc, Iso.inv_hom_id_assoc, comp_zero,
+    biproduct.ι_π_ne _ fun e ↦ by
+      have h : t.val.val = p.val := congrArg Subtype.val e
+      have := t.2
+      omega]
+
+/-- The next tail is killed by the graded projection. -/
 @[reassoc (attr := simp)]
-lemma tailMap_comp_tailGradedπ (p : ↥(Finset.Icc a b)) :
-    X.tailMap (Int.le_add_one le_rfl) ≫ X.tailGradedπ p = 0 := by
-  ext n
-  rw [HomologicalComplex.comp_f, tailMap_f, tailGradedπ_f, Category.assoc,
-    FiniteTwistingFamily.tailProj_π, FiniteTwistingFamily.tailIncl_π_of_not_le _ _ _ _
-      (by simp), HomologicalComplex.zero_f]
+lemma tailMap_comp_tailGradedProjection (p : ↥(Finset.Icc a b)) :
+    X.tailMap (Int.le_add_one le_rfl : p.val ≤ p.val + 1) ≫ X.tailGradedProjection p = 0 :=
+  HomologicalComplex.hom_ext _ _ fun n ↦
+    (Category.assoc _ _ _).trans (X.tailι_tailRetraction_π_self p n)
+
+/-- The comparison of tails is the inclusion of the corresponding subobjects. -/
+lemma underlyingIso_hom_tailMap {r r' : ℤ} (h : r ≤ r') :
+    (Subobject.underlyingIso (X.tailHom r')).hom ≫ X.tailMap h =
+      Subobject.ofLE (Subobject.mk (X.tailHom r')) (Subobject.mk (X.tailHom r))
+          (Subobject.mk_le_mk_of_comm (X.tailMap h) (X.tailMap_comp_tailHom h)) ≫
+        (Subobject.underlyingIso (X.tailHom r)).hom := by
+  rw [Subobject.ofLE_mk_le_mk_of_comm _ (X.tailMap_comp_tailHom h), Category.assoc,
+    Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 /-- The short complex `tail (p + 1) ⟶ tail p ⟶ D.G p`. -/
 noncomputable def tailShortComplex (p : ↥(Finset.Icc a b)) :
     ShortComplex (CochainComplex (finiteTwistingModule D) ℤ) :=
-  ShortComplex.mk _ _ (X.tailMap_comp_tailGradedπ p)
+  ShortComplex.mk _ _ (X.tailMap_comp_tailGradedProjection p)
 
-lemma tailShortComplex_f (p : ↥(Finset.Icc a b)) :
-    (X.tailShortComplex p).f = X.tailMap (Int.le_add_one le_rfl) :=
-  rfl
+lemma tailShortComplex_split_f_r (p : ↥(Finset.Icc a b)) (n : ℤ) :
+    (X.tailι (p.val + 1) n ≫ X.tailRetraction p.val n) ≫
+        (X.tailι p.val n ≫ X.tailRetraction (p.val + 1) n) = 𝟙 _ := by
+  rw [Category.assoc, X.tailι_tailRetraction_tailι_of_le_assoc (Int.le_add_one le_rfl),
+    tailι_tailRetraction]
 
-lemma tailShortComplex_g (p : ↥(Finset.Icc a b)) :
-    (X.tailShortComplex p).g = X.tailGradedπ p :=
-  rfl
+lemma tailShortComplex_split_id (p : ↥(Finset.Icc a b)) (n : ℤ) :
+    (X.tailι p.val n ≫ X.tailRetraction (p.val + 1) n) ≫
+        (X.tailι (p.val + 1) n ≫ X.tailRetraction p.val n) +
+      biproduct.π (fun t : {t : ↥(Finset.Icc a b) // p.val ≤ t.val} ↦ (D.G t.val).X n)
+          ⟨p, le_rfl⟩ ≫
+        biproduct.ι (fun t : {t : ↥(Finset.Icc a b) // p.val ≤ t.val} ↦ (D.G t.val).X n)
+          ⟨p, le_rfl⟩ = 𝟙 _ := by
+  refine biproduct.hom_ext' _ _ fun t ↦ ?_
+  rw [Preadditive.comp_add, Category.comp_id, Category.assoc, ι_tailι_assoc]
+  obtain ⟨t, ht⟩ := t
+  rcases ht.eq_or_lt with h | h
+  · obtain rfl : t = p := Subtype.ext h.symm
+    rw [ι_coordinates_inv_tailRetraction_of_lt_assoc _ _ _ _ (lt_add_one _), zero_comp, zero_add,
+      biproduct.ι_π_self_assoc]
+  · rw [ι_coordinates_inv_tailRetraction_assoc _ _ _ _ (Int.add_one_le_iff.2 h), ι_tailι_assoc,
+      ι_coordinates_inv_tailRetraction _ _ _ _ ht,
+      biproduct.ι_π_ne_assoc _ fun e ↦ h.ne' (congrArg (fun x ↦ x.val.val) e), zero_comp,
+      add_zero]
 
-/-- The degreewise splitting of `tail (p + 1) ⟶ tail p ⟶ D.G p`. -/
+/-- The tail short complex is degreewise split. -/
 noncomputable def tailShortComplexSplitting (p : ↥(Finset.Icc a b)) (n : ℤ) :
     ((X.tailShortComplex p).map (HomologicalComplex.eval _ _ n)).Splitting where
-  r := D.tailIncl p.val n ≫ D.tailProj (p.val + 1) n
-  s := biproduct.ι (fun q : {q : ↥(Finset.Icc a b) // p.val ≤ q.val} ↦ (D.G q.val).X n)
+  r := X.tailι p.val n ≫ X.tailRetraction (p.val + 1) n
+  s := biproduct.ι (fun t : {t : ↥(Finset.Icc a b) // p.val ≤ t.val} ↦ (D.G t.val).X n)
     ⟨p, le_rfl⟩
-  f_r := D.tailIncl_tailProj_tailIncl_tailProj (Int.le_add_one le_rfl) n
+  f_r := X.tailShortComplex_split_f_r p n
   s_g := biproduct.ι_π_self _ _
-  id := D.tailSplitting_id p n
+  id := X.tailShortComplex_split_id p n
 
-/-- The sequence `tail (p + 1) ⟶ tail p ⟶ D.G p` is short exact. -/
 lemma tailShortComplex_shortExact (p : ↥(Finset.Icc a b)) :
     (X.tailShortComplex p).ShortExact :=
   HomologicalComplex.shortExact_of_degreewise_shortExact _ fun n ↦
     (X.tailShortComplexSplitting p n).shortExact
+
+/-- The short complex `F^{p+1} ⟶ F^p ⟶ D.G p` of the tail filtration. -/
+noncomputable def tailFiltrationShortComplex (p : ↥(Finset.Icc a b)) :
+    ShortComplex (CochainComplex (finiteTwistingModule D) ℤ) :=
+  ShortComplex.mk
+    (Subobject.ofLE (Subobject.mk (X.tailHom (p.val + 1))) (Subobject.mk (X.tailHom p.val))
+      (Subobject.mk_le_mk_of_comm (X.tailMap (Int.le_add_one le_rfl))
+        (X.tailMap_comp_tailHom (Int.le_add_one le_rfl))))
+    ((Subobject.underlyingIso (X.tailHom p.val)).hom ≫ X.tailGradedProjection p) (by
+      rw [Subobject.ofLE_mk_le_mk_of_comm _ (X.tailMap_comp_tailHom (Int.le_add_one le_rfl)),
+        Category.assoc, Category.assoc, Iso.inv_hom_id_assoc, tailMap_comp_tailGradedProjection,
+        comp_zero])
+
+/-- The filtration short complex is isomorphic to the tail short complex. -/
+noncomputable def tailFiltrationShortComplexIso (p : ↥(Finset.Icc a b)) :
+    X.tailFiltrationShortComplex p ≅ X.tailShortComplex p :=
+  ShortComplex.isoMk (Subobject.underlyingIso (X.tailHom (p.val + 1)))
+    (Subobject.underlyingIso (X.tailHom p.val)) (Iso.refl _)
+    (X.underlyingIso_hom_tailMap (Int.le_add_one le_rfl)) (Category.comp_id _).symm
+
+/-- The graded projection exhibits `D.G p` as the cokernel of `F^{p+1} ⟶ F^p`. -/
+noncomputable def tailFiltrationIsColimit (p : ↥(Finset.Icc a b)) :
+    IsColimit (CokernelCofork.ofπ _ (X.tailFiltrationShortComplex p).zero) :=
+  (ShortComplex.shortExact_of_iso (X.tailFiltrationShortComplexIso p).symm
+    (X.tailShortComplex_shortExact p)).gIsCokernel
+
+/-- The graded pieces of the tail filtration are the complexes `D.G p`. -/
+noncomputable def tailFiltrationGradedIso (p : ↥(Finset.Icc a b)) :
+    X.tailFiltration.gradedPiece p.val ≅ D.G p :=
+  (colimit.isColimit _).coconePointUniqueUpToIso (X.tailFiltrationIsColimit p)
+
+lemma complexQuotientπ_tailFiltrationGradedIso_hom (p : ↥(Finset.Icc a b)) :
+    X.tailFiltration.complexQuotientπ p.val (p.val + 1) (Int.le_add_one le_rfl) ≫
+        (X.tailFiltrationGradedIso p).hom =
+      (Subobject.underlyingIso (X.tailHom p.val)).hom ≫ X.tailGradedProjection p :=
+  IsColimit.comp_coconePointUniqueUpToIso_hom (colimit.isColimit _)
+    (X.tailFiltrationIsColimit p) WalkingParallelPair.one
+
+/-- Outside the weight interval the graded pieces of the tail filtration vanish. -/
+lemma isZero_tailFiltration_gradedPiece (p : ℤ) (hp : p < a ∨ b < p) :
+    IsZero (X.tailFiltration.gradedPiece p) := by
+  have hle : X.tailFiltration.F p ≤ X.tailFiltration.F (p + 1) := by
+    rcases hp with hp | hp
+    · exact le_top.trans_eq (X.tailFiltration_step_eq_top (by omega : p + 1 ≤ a)).symm
+    · exact (X.tailFiltration_step_eq_bot hp).trans_le bot_le
+  have : Epi (Subobject.ofLE _ _ (X.tailFiltration.F_succ_le p)) :=
+    (SplitEpi.mk (Subobject.ofLE _ _ hle) (by rw [Subobject.ofLE_comp_ofLE,
+      Subobject.ofLE_refl])).epi
+  exact isZero_cokernel_of_epi _
 
 end FiniteTwistingMatrixData
 

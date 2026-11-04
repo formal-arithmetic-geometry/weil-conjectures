@@ -23,7 +23,14 @@ variable {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
   {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
   (G : C ⥤ C) (H : D ⥤ D) (d : G ⋙ L ≅ L ⋙ H)
 
-/-- The unit determines the quotient comparison as the specified mate.
+/-- The unit determines the quotient comparison as the specified mate. Writing `β` for
+the mate of `d.hom` and `η` for the unit of `L ⊣ R`, the following triangle commutes:
+```
+        G η_M                 β_{L M} ≫ R (d⁻¹_M)
+  G M ────────→ G (R (L M)) ─────────────────────→ R (L (G M))
+    ╲                                                  ↗
+     ╲─────────────────────── η_{G M} ────────────────╯
+```
 Source: trace-additivity Steps 2(b) and 6.
 Proof: the unit equation for the mates correspondence, followed by cancellation
 of the inverse square comparison.
@@ -35,7 +42,15 @@ theorem localizationClosedMate_unit (M : C) :
   rw [← Category.assoc, unit_mateEquiv]
   simp [Category.assoc, ← R.map_comp]
 
-/-- An epic pulled-back unit uniquely determines the closed comparison.
+/-- An epic pulled-back unit uniquely determines the closed comparison: if `G η_M` is an
+epimorphism, then any `β'` making the triangle
+```
+        G η_M               β'
+  G M ────────→ G (R (L M)) ───→ R (L (G M))
+    ╲                               ↗
+     ╲────────── η_{G M} ──────────╯
+```
+commute is the mate comparison `β_{L M} ≫ R (d⁻¹_M)` of `localizationClosedMate_unit`.
 Source: trace-additivity Step 6.
 Proof: both candidates have the same composite with the epic pulled-back unit;
 the mate candidate has that composite by its unit equation.
@@ -50,7 +65,17 @@ theorem localizationClosedMate_eq (M : C) [Epi (G.map (adj.unit.app M))]
   exact (localizationClosedMate_unit adj G H d M).symm
 
 /-- Invertibility on the closed restrictions implies invertibility on every object
-of the closed category, using the invertible counit.
+of the closed category, using the invertible counit. For `N : D` the naturality square
+of the mate `β` along the counit `ε_N`
+```
+                 β_{L (R N)}
+  G (R (L (R N))) ─────────→ R (H (L (R N)))
+       │                          │
+  G (R ε_N)                  R (H ε_N)
+       ↓                          ↓
+    G (R N) ─────── β_N ───────→ R (H N)
+```
+has invertible vertical maps, so `β_N` is invertible whenever `β_{L (R N)}` is.
 Source: trace-additivity Step 6.
 Proof: apply the assumed invertibility to R(N). The counit identifies LR(N) with N,
 and naturality conjugates the mate component at LR(N) to its component at N.

@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.TraceSection
 
 /-- The positive coefficient stage; n indexes the level n+1.
 Source: finite conventions and Step 3(d) (blueprint: lem-trf-positive-coefficient-primary). -/
-def Ring (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
+def coefficientStage (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) : Type :=
   Padic.coefficientExtensionRing ell E (n + 1)
 
@@ -34,32 +34,32 @@ def Ring (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
 Source: finite conventions (blueprint: lem-trf-positive-coefficient-primary). -/
 instance ringCommRing (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) :
-    CommRing (Ring ell E n) := inferInstanceAs (CommRing
+    CommRing (coefficientStage ell E n) := inferInstanceAs (CommRing
       (Padic.coefficientExtensionRing ell E (n + 1)))
 
 /-- Finite coefficients carry their discrete topology.
 Source: finite conventions (blueprint: lem-trf-positive-coefficient-primary). -/
 instance ringTopology (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) :
-    TopologicalSpace (Ring ell E n) := ⊥
+    TopologicalSpace (coefficientStage ell E n) := ⊥
 
 /-- Discreteness of the specified finite coefficient topology.
 Source: finite conventions (blueprint: lem-trf-positive-coefficient-primary). -/
 instance ringDiscrete (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) :
-    DiscreteTopology (Ring ell E n) := ⟨rfl⟩
+    DiscreteTopology (coefficientStage ell E n) := ⟨rfl⟩
 
 /-- The discrete quotient is a topological ring.
 Source: finite conventions (blueprint: lem-trf-positive-coefficient-primary). -/
 instance ringTopologicalRing (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) :
-    IsTopologicalRing (Ring ell E n) := DiscreteTopology.topologicalRing
+    IsTopologicalRing (coefficientStage ell E n) := DiscreteTopology.topologicalRing
 
 /-- The existing positive-level finiteness theorem.
 Source: finite conventions (blueprint: lem-trf-positive-coefficient-primary). -/
 instance ringFinite (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) :
-    Finite (Ring ell E n) := Padic.finite_coefficientExtensionRing ell E (n + 1)
+    Finite (coefficientStage ell E n) := Padic.finite_coefficientExtensionRing ell E (n + 1)
       (Nat.succ_le_succ (Nat.zero_le n))
 
 /-- The finite coefficient stage is killed by a power of ell.
@@ -69,7 +69,7 @@ spans that ideal, so ell^(n+1) belongs to its (n+1)-st power. Its quotient class
 and multiplication by an arbitrary quotient element gives the asserted nsmul. -/
 theorem ringTorsion (ell : ℕ) [Fact ell.Prime] (E : Type) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) :
-    ∃ m : ℕ, ∀ a : Ring ell E n, (ell ^ m) • a = 0 := by
+    ∃ m : ℕ, ∀ a : coefficientStage ell E n, (ell ^ m) • a = 0 := by
   exact ⟨n + 1, Padic.pow_nsmul_coefficientExtensionRing ell E (n + 1)⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.TraceSection

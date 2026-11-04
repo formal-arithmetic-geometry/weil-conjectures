@@ -41,7 +41,16 @@ def localizationSheafOpenExchangeObj
     (openClosedShortComplexBaseChangeIso i j t i j tZ tU
       hji.symm hji.symm hi.symm hj.symm M)
 
-/-- The open comparison commutes with the actual counit and has identity total map.
+/-- The open comparison commutes with the actual counit and has identity total map: with
+`ε` the counit of `j_! ⊣ j^*`, the triangle
+```
+  t^* (j_! (j^* M)) ──── exchange ────→ j_! (j^* (t^* M))
+          ╲                                    │
+       t^* ε_M                             ε_{t^* M}
+            ╲                                  ↓
+             ╲──────────────────────────→  t^* M
+```
+commutes.
 Source: trace-additivity Steps 2 and 6, Stacks Tag 09AH.
 Proof: this is the first square of the short-complex isomorphism; its middle
 map is the identity by construction.

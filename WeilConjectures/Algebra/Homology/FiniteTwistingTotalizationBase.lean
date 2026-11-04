@@ -28,8 +28,8 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   (R : Sheaf J CommRingCat.{w})
 variable {R} {a b : ℤ}
 
-/-- The finite upper triangular totalization of a twisting family exists, with its
-square-zero differential and, under flat terms, K-flat total complex and tails.
+/-- The finite upper triangular totalization of a twisting family exists and, under flat
+terms, has a K-flat total complex and K-flat tails.
 This is the construction part of the finite twisting assembly; the comparison map is
 `exists_finiteTwistingTotalization_comparison`.
 Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations (routine),
@@ -42,7 +42,7 @@ Proof:
    below the diagonal; this is the `differential` field. In the square `d^{n+1} ∘ d^n`
    the diagonal entries are `d_p d_p = 0`; the entries below the diagonal vanish; the
    entry `(p,q)` for `p < q` is the Maurer--Cartan expression of `D.maurerCartan`, zero.
-   Hence `P` is a cochain complex, and the first conjunct is `P.d_comp_d`.
+   Hence `P` is a cochain complex.
 2. Every nonzero entry raises the weight, so the summands of weight `≥ r` form a
    subcomplex `F^r P` (def-sp-filtration); this gives `tailCoordinates`, `tailInclusion`,
    `F^a = ⊤`, `F^(b+1) = ⊥` and finiteness. The summand projections split every tail
@@ -59,7 +59,6 @@ Proof:
 theorem exists_finiteTwistingTotalization_base
     (a b : ℤ) (hab : a ≤ b) (D : FiniteTwistingFamily R a b) :
     ∃ M : FiniteTwistingTotalization D,
-      (∀ n : ℤ, M.P.d n (n + 1) ≫ M.P.d (n + 1) (n + 1 + 1) = 0) ∧
       (((∀ (p : ↥(Finset.Icc a b)) (n : ℤ),
           SheafOfModules.IsFlatOnSite (J := J) (R := R) ((D.G p).X n)) ∧
         (∀ p : ↥(Finset.Icc a b), (D.G p).IsKFlatIndependentCoefficients)) →
@@ -67,8 +66,8 @@ theorem exists_finiteTwistingTotalization_base
           ∀ r : ℤ, IsKFlatIndependentCoefficients (J := J) (R := R)
             (M.F.step r : CochainComplex (ringedSiteModules.{w}
               ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)) := by
-  obtain ⟨M, hM⟩ := exists_finiteTwistingTotalization_structure a b hab D
-  refine ⟨M, hM, ?_⟩
+  obtain ⟨M⟩ := exists_finiteTwistingTotalization_structure a b D
+  refine ⟨M, ?_⟩
   intro hflat
   exact finiteTwistingTotalization_kflat_of_flat a b hab D M hflat
 

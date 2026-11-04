@@ -19,7 +19,7 @@ set_option relaxedAutoImplicit false
 
 open CategoryTheory CategoryTheory.MonoidalCategory CategoryTheory.MonoidalClosed
 
-namespace WeilConjectures.TrfSignedContraction
+namespace CategoryTheory.MonoidalClosed
 
 variable {C₁ C₂ C : Type*} [Category C₁] [Category C₂] [Category C]
   [MonoidalCategory C₁] [MonoidalCategory C₂] [MonoidalCategory C]
@@ -49,4 +49,4 @@ theorem unit_external_transpose (M : C₁) (N W : C₂) {Z : C}
   rw [h]
   exact (curry_eq_externalHomMap_comp P Q M N W a).symm
 
-end WeilConjectures.TrfSignedContraction
+end CategoryTheory.MonoidalClosed

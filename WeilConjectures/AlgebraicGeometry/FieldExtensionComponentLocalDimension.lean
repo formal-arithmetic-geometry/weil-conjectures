@@ -29,6 +29,15 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+private theorem localDim_homeomorph_le {X : Type*} {Y : Type*}
+    [TopologicalSpace X] [TopologicalSpace Y] (e : X ≃ₜ Y) (x : X) :
+    topologicalKrullDimAt x ≤ topologicalKrullDimAt (e x) := by
+  refine le_iInf₂ fun U hx ↦ ?_
+  let V : TopologicalSpace.Opens X := ⟨e ⁻¹' U, U.isOpen.preimage e.continuous⟩
+  let eV : V ≃ₜ U := e.subtype (fun _ ↦ Iff.rfl)
+  exact (iInf₂_le V hx).trans_eq
+    (IsHomeomorph.topologicalKrullDim_eq eV eV.isHomeomorph)
+
 private theorem localDim_field_fiber {F : Type u} [Field F] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of F)) (x : X) :
     topologicalKrullDimAt (f.asFiber x) = topologicalKrullDimAt x := by

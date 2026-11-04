@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationData
+public import WeilConjectures.Mathlib.Data.Fintype.BigOperators
 
 /-! # Matrix part of a finite twisting totalization
 
@@ -29,6 +30,8 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   (R : Sheaf J CommRingCat.{w})
 variable {R} {a b : ℤ}
 
+set_option linter.unusedVariables false in
+/-- The category of module sheaves in which a finite twisting family lives. -/
 abbrev finiteTwistingModule (D : FiniteTwistingFamily R a b) :=
   ringedSiteModules.{w}
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
@@ -36,9 +39,13 @@ abbrev finiteTwistingModule (D : FiniteTwistingFamily R a b) :=
 /-- The data supplied by the upper-triangular matrix calculation, before adding
 the tail filtration. -/
 structure FiniteTwistingMatrixData (D : FiniteTwistingFamily R a b) where
+  /-- The total complex. -/
   P : CochainComplex (finiteTwistingModule D) ℤ
+  /-- Each term is identified with the finite direct sum of the given terms. -/
   coordinates : ∀ n : ℤ, P.X n ≅
     ⨁ fun p : ↥(Finset.Icc a b) ↦ (D.G p).X n
+  /-- On each summand, the differential is the diagonal differential plus the strictly
+  upper triangular twisting components. -/
   differential : ∀ (p : ↥(Finset.Icc a b)) (n : ℤ),
     biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p ≫
         (coordinates n).inv ≫ P.d n (n + 1) =
@@ -49,107 +56,121 @@ structure FiniteTwistingMatrixData (D : FiniteTwistingFamily R a b) where
           D.τ p q.val q.property n ≫
             biproduct.ι (fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1)) q.val ≫
               (coordinates (n + 1)).inv
+  /-- The differential squares to zero. -/
   square : ∀ n : ℤ, P.d n (n + 1) ≫ P.d (n + 1) (n + 1 + 1) = 0
 
-/-- The degree `n` upper-triangular matrix of a finite twisting family: on the summand of
-weight `p` it is the differential of `D.G p` plus the twisting maps to all higher weights. -/
-noncomputable def finiteTwistingMatrix (D : FiniteTwistingFamily R a b) (n : ℤ) :
+section Helpers
+
+variable {V : Type*} [Category V] [Preadditive V]
+
+/-- Projecting a sum of maps into summands indexed by a subtype onto one summand. -/
+private lemma biproduct_sum_subtype_comp_ι_comp_π {ι : Type*}
+    {F : ι → V} [HasBiproduct F] {X : V} (P : ι → Prop) [DecidablePred P]
+    [Fintype (Subtype P)]
+    (f : ∀ q : Subtype P, X ⟶ F q.val) (r : ι) :
+    ∑ q : Subtype P, f q ≫ biproduct.ι F q.val ≫ biproduct.π F r =
+      if h : P r then f ⟨r, h⟩ else 0 := by
+  by_cases h : P r
+  · rw [dif_pos h, Fintype.sum_eq_single ⟨r, h⟩, biproduct.ι_π_self, Category.comp_id]
+    intro q hq
+    rw [biproduct.ι_π_ne _ fun e ↦ hq (Subtype.ext e), comp_zero]
+  · rw [dif_neg h]
+    exact Fintype.sum_eq_zero _ fun q ↦ by
+      rw [biproduct.ι_π_ne _ fun e : q.val = r ↦ h (e ▸ q.2), comp_zero]
+
+/-- Two-factor variant of `biproduct_sum_subtype_comp_ι_comp_π`. -/
+private lemma biproduct_sum_subtype_comp_comp_ι_comp_π {ι : Type*}
+    {F : ι → V} [HasBiproduct F] {X : V} (P : ι → Prop) [DecidablePred P]
+    [Fintype (Subtype P)]
+    {Y : ι → V} (f : ∀ q : Subtype P, X ⟶ Y q.val) (g : ∀ q : Subtype P, Y q.val ⟶ F q.val)
+    (r : ι) :
+    ∑ q : Subtype P, f q ≫ g q ≫ biproduct.ι F q.val ≫ biproduct.π F r =
+      if h : P r then f ⟨r, h⟩ ≫ g ⟨r, h⟩ else 0 := by
+  simpa only [Category.assoc] using
+    biproduct_sum_subtype_comp_ι_comp_π P (fun q ↦ f q ≫ g q) r
+
+end Helpers
+
+/-- The upper triangular differential on the direct sum of the terms of a finite
+twisting family: the diagonal differential plus the twisting components. -/
+noncomputable def finiteTwistingMatrixD (D : FiniteTwistingFamily R a b) (n : ℤ) :
     (⨁ fun p : ↥(Finset.Icc a b) ↦ (D.G p).X n) ⟶
       ⨁ fun p : ↥(Finset.Icc a b) ↦ (D.G p).X (n + 1) :=
   biproduct.desc fun p ↦
-    (D.G p).d n (n + 1) ≫ biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X (n + 1)) p +
-      ∑ q : {q : ↥(Finset.Icc a b) // p.val < q.val},
-        D.τ p q.val q.property n ≫
-          biproduct.ι (fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1)) q.val
+    (D.G p).d n (n + 1) ≫ biproduct.ι (fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1)) p +
+    ∑ q : {q : ↥(Finset.Icc a b) // p.val < q.val},
+      D.τ p q.val q.property n ≫
+        biproduct.ι (fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1)) q.val
 
 omit [HasWeakSheafify J AddCommGrpCat.{w}] in
-/-- The summand of weight `p` of the twisting matrix. -/
+/-- Injection of a summand followed by `finiteTwistingMatrixD`. -/
 @[reassoc]
-lemma ι_finiteTwistingMatrix (D : FiniteTwistingFamily R a b) (n : ℤ)
-    (p : ↥(Finset.Icc a b)) :
-    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p ≫ finiteTwistingMatrix D n =
-      (D.G p).d n (n + 1) ≫ biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X (n + 1)) p +
+lemma ι_finiteTwistingMatrixD (D : FiniteTwistingFamily R a b) (p : ↥(Finset.Icc a b))
+    (n : ℤ) :
+    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p ≫ finiteTwistingMatrixD D n =
+      (D.G p).d n (n + 1) ≫
+          biproduct.ι (fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1)) p +
         ∑ q : {q : ↥(Finset.Icc a b) // p.val < q.val},
           D.τ p q.val q.property n ≫
             biproduct.ι (fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1)) q.val :=
   biproduct.ι_desc _ _
 
 omit [HasWeakSheafify J AddCommGrpCat.{w}] in
-/-- The `(p, t)` entry of the twisting matrix. -/
-lemma ι_finiteTwistingMatrix_π (D : FiniteTwistingFamily R a b) (n : ℤ)
-    (p t : ↥(Finset.Icc a b)) :
-    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p ≫ finiteTwistingMatrix D n ≫
-        biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X (n + 1)) t =
-      (if h : p = t then (D.G p).d n (n + 1) ≫ eqToHom (by rw [h]) else 0) +
-        if h : p.val < t.val then D.τ p t h n else 0 := by
-  classical
-  rw [ι_finiteTwistingMatrix_assoc, Preadditive.add_comp, Category.assoc, biproduct.ι_π,
-    Preadditive.sum_comp]
-  congr 1
-  · split_ifs <;> simp
-  · split_ifs with h
-    · rw [Finset.sum_eq_single ⟨t, h⟩]
-      · simp
-      · intro q _ hq
-        rw [Category.assoc, biproduct.ι_π_ne _ (fun e ↦ hq (Subtype.ext e)), comp_zero]
-      · simp
-    · refine Finset.sum_eq_zero fun q _ ↦ ?_
-      rw [Category.assoc, biproduct.ι_π_ne _ (fun e ↦ h (by rw [← e]; exact q.property)),
-        comp_zero]
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasWeakSheafify J AddCommGrpCat.{w}] in
-/-- Summing the products of twisting maps through intermediate weights below `t`. -/
-lemma sum_finiteTwisting_τ_comp_τ (D : FiniteTwistingFamily R a b) (n : ℤ)
-    (p t : ↥(Finset.Icc a b)) :
-    ∑ q : {q : ↥(Finset.Icc a b) // p.val < q.val},
-        (D.τ p q.val q.property n ≫
-          if h : q.val.val < t.val then D.τ q.val t h (n + 1) else 0) =
-      ∑ r : {r : ↥(Finset.Icc a b) // p.val < r.val ∧ r.val < t.val},
-        D.τ p r.val r.property.1 n ≫ D.τ r.val t r.property.2 (n + 1) := by
-  symm
-  refine Fintype.sum_of_injective (fun r ↦ ⟨r.val, r.property.1⟩)
-    (fun r s h ↦ Subtype.ext (by simpa using congrArg Subtype.val h)) _ _ ?_ ?_
-  · intro q hq
-    rw [dif_neg (fun h ↦ hq ⟨⟨q.val, q.property, h⟩, rfl⟩), comp_zero]
-  · intro r
-    rw [dif_pos r.property.2]
+/-- The matrix entries of `finiteTwistingMatrixD`. -/
+lemma ι_finiteTwistingMatrixD_π (D : FiniteTwistingFamily R a b) (p r : ↥(Finset.Icc a b))
+    (n : ℤ) :
+    biproduct.ι (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X n) p ≫ finiteTwistingMatrixD D n ≫
+        biproduct.π (fun q : ↥(Finset.Icc a b) ↦ (D.G q).X (n + 1)) r =
+      (D.G p).d n (n + 1) ≫
+          biproduct.ι (fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1)) p ≫
+          biproduct.π (fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1)) r +
+        if h : p.val < r.val then D.τ p r h n else 0 := by
+  rw [ι_finiteTwistingMatrixD_assoc, Preadditive.add_comp, Preadditive.sum_comp,
+    Category.assoc]
+  simp only [Category.assoc]
+  rw [biproduct_sum_subtype_comp_ι_comp_π
+    (F := fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1))
+    (fun q : ↥(Finset.Icc a b) ↦ p.val < q.val) (fun q ↦ D.τ p q.val q.property n) r]
 
 omit [HasWeakSheafify J AddCommGrpCat.{w}] in
-/-- The twisting matrix squares to zero, by `d_comp_d` on the diagonal and the
-Maurer--Cartan equation above it. -/
-lemma finiteTwistingMatrix_comp (D : FiniteTwistingFamily R a b) (n : ℤ) :
-    finiteTwistingMatrix D n ≫ finiteTwistingMatrix D (n + 1) = 0 := by
-  classical
-  refine biproduct.hom_ext' _ _ fun p ↦ biproduct.hom_ext _ _ fun t ↦ ?_
-  rw [comp_zero, zero_comp, ι_finiteTwistingMatrix_assoc]
-  simp_rw [Preadditive.add_comp, Preadditive.sum_comp, Category.assoc,
-    ι_finiteTwistingMatrix_π, Preadditive.comp_add]
-  rw [Finset.sum_add_distrib, sum_finiteTwisting_τ_comp_τ]
-  by_cases hpt : p = t
-  · subst hpt
-    simp only [dite_true, dif_neg (lt_irrefl p.val), comp_zero, add_zero,
-      eqToHom_refl, Category.comp_id, HomologicalComplex.d_comp_d, zero_add]
-    refine (congrArg₂ (· + ·) (Finset.sum_eq_zero ?_) (Finset.sum_eq_zero ?_)).trans
-      (add_zero 0)
-    · refine fun q _ ↦ ?_
-      rw [dif_neg (fun h ↦ (lt_irrefl p.val) (by simpa [h] using q.property)), comp_zero]
-    · exact fun r _ ↦ absurd (r.property.1.trans r.property.2) (lt_irrefl _)
-  simp only [dif_neg hpt, comp_zero, zero_add]
-  by_cases hlt : p.val < t.val
-  · simp only [dif_pos hlt]
-    rw [Finset.sum_eq_single ⟨t, hlt⟩]
-    · simp only [dite_true, eqToHom_refl, Category.comp_id]
-      exact (add_left_comm _ _ _).trans ((add_assoc _ _ _).symm.trans (D.maurerCartan p t hlt n))
-    · intro q _ hq
-      rw [dif_neg (fun h ↦ hq (Subtype.ext h)), comp_zero]
-    · simp
-  · simp only [dif_neg hlt, comp_zero, zero_add]
-    refine (congrArg₂ (· + ·) (Finset.sum_eq_zero ?_) (Finset.sum_eq_zero ?_)).trans
-      (add_zero 0)
-    · refine fun q _ ↦ ?_
-      rw [dif_neg (fun h ↦ hlt (by simpa [h] using q.property)), comp_zero]
-    · exact fun r _ ↦ absurd (r.property.1.trans r.property.2) hlt
+/-- The upper triangular differential squares to zero, by `d_comp_d` on the diagonal
+and the Maurer--Cartan equations above it. -/
+lemma finiteTwistingMatrixD_comp (D : FiniteTwistingFamily R a b) (n : ℤ) :
+    finiteTwistingMatrixD D n ≫ finiteTwistingMatrixD D (n + 1) = 0 := by
+  refine biproduct.hom_ext' _ _ fun p ↦ biproduct.hom_ext _ _ fun r ↦ ?_
+  rw [comp_zero, zero_comp, Category.assoc, Category.assoc, ι_finiteTwistingMatrixD_assoc,
+    Preadditive.add_comp, Preadditive.sum_comp]
+  simp only [Category.assoc, ι_finiteTwistingMatrixD_π, Preadditive.comp_add,
+    Finset.sum_add_distrib, HomologicalComplex.d_comp_d_assoc, zero_comp, zero_add]
+  rw [biproduct_sum_subtype_comp_comp_ι_comp_π
+    (F := fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1 + 1))
+    (Y := fun t : ↥(Finset.Icc a b) ↦ (D.G t).X (n + 1))
+    (fun q : ↥(Finset.Icc a b) ↦ p.val < q.val)
+    (fun q ↦ D.τ p q.val q.property n) (fun q ↦ (D.G q.val).d (n + 1) (n + 1 + 1)) r]
+  by_cases h : p.val < r.val
+  · have hsum : ∑ q : {q : ↥(Finset.Icc a b) // p.val < q.val},
+        D.τ p q.val q.property n ≫
+          (if h' : q.val.val < r.val then D.τ q.val r h' (n + 1) else 0) =
+        ∑ s : {s : ↥(Finset.Icc a b) // p.val < s.val ∧ s.val < r.val},
+          D.τ p s.val s.property.1 n ≫ D.τ s.val r s.property.2 (n + 1) := by
+      rw [Fintype.sum_subtype_eq_sum_dite (fun q : ↥(Finset.Icc a b) ↦ p.val < q.val),
+        Fintype.sum_subtype_eq_sum_dite
+          (fun s : ↥(Finset.Icc a b) ↦ p.val < s.val ∧ s.val < r.val)]
+      refine Fintype.sum_congr _ _ fun q ↦ ?_
+      by_cases h1 : p.val < q.val
+      · by_cases h2 : q.val < r.val
+        · rw [dif_pos h1, dif_pos h2, dif_pos ⟨h1, h2⟩]
+        · rw [dif_pos h1, dif_neg h2, dif_neg fun h3 ↦ h2 h3.2, comp_zero]
+      · rw [dif_neg h1, dif_neg fun h3 ↦ h1 h3.1]
+    simp only [dif_pos h]
+    rw [hsum]
+    refine Eq.trans ?_ (D.maurerCartan p r h n)
+    abel
+  · simp only [dif_neg h, comp_zero, zero_add]
+    refine Finset.sum_eq_zero fun q _ ↦ ?_
+    rw [dif_neg fun h' ↦ h (q.property.trans h'), comp_zero]
 
+omit [HasWeakSheafify J AddCommGrpCat.{w}] in
 /-- The triangular biproduct construction.  The proof defines the differential by
 `biproduct.desc`; injection followed by the differential is the diagonal
 differential plus the strictly upper triangular twisting sum.  Applying a
@@ -159,16 +180,14 @@ diagonal by `CochainComplex.d_comp_d`, and gives exactly
 then proves the square-zero field.
 (blueprint: lem-trf-finite-filtered-totalization-matrix) -/
 theorem exists_finiteTwistingMatrixData
-    (a b : ℤ) (hab : a ≤ b) (D : FiniteTwistingFamily R a b) :
-    ∃ X : FiniteTwistingMatrixData D, True := by
-  refine ⟨{ P := CochainComplex.of (fun n ↦ ⨁ fun p : ↥(Finset.Icc a b) ↦ (D.G p).X n)
-              (finiteTwistingMatrix D) (finiteTwistingMatrix_comp D)
-            coordinates := fun n ↦ Iso.refl _
-            differential := fun p n ↦ ?_
-            square := fun n ↦ ?_ }, trivial⟩
-  · simp only [Iso.refl_inv, Category.id_comp, Category.comp_id, CochainComplex.of_d,
-      ι_finiteTwistingMatrix]
-  · simp only [CochainComplex.of_d]
-    exact finiteTwistingMatrix_comp D n
+    (a b : ℤ) (D : FiniteTwistingFamily R a b) :
+    Nonempty (FiniteTwistingMatrixData D) :=
+  ⟨{P := CochainComplex.of (fun n ↦ ⨁ fun p : ↥(Finset.Icc a b) ↦ (D.G p).X n)
+        (finiteTwistingMatrixD D) (finiteTwistingMatrixD_comp D)
+    coordinates _ := Iso.refl _
+    differential p n := by
+      simp only [Iso.refl_inv, Category.id_comp, Category.comp_id, CochainComplex.of_d]
+      exact ι_finiteTwistingMatrixD D p n
+    square _ := HomologicalComplex.d_comp_d _ _ _ _ }⟩
 
 end CochainComplex
