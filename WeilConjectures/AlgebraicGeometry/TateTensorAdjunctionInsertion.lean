@@ -13,6 +13,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import WeilConjectures.CategoryTheory.Exact.NormalizedTensorAdjunctionInsertion
 import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorFactorization
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorHomotopyFactorization
 
 /-! # Tensor of normalized scalar-adjunction insertions
 
@@ -44,15 +45,24 @@ private theorem flat_single_comparison
         ((CochainComplex.singleFunctor _ 0).obj L)
         ((CochainComplex.singleFunctor _ 0).obj M) ≫
         DerivedCategory.Q.map (singleCochainTensorIso L M).hom := by
-  rw [singleFunctorObjTensorIso_factorization]
-  simp only [singleFunctorObjIsoQh, DerivedCategory.singleFunctorIsoCompQ,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv,
-    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
-  simp only [Functor.LaxMonoidal.transport_μ, Functor.LaxMonoidal.comp_μ,
-    Category.assoc]
-  rw [← DerivedCategory.quotientCompQhIso_hom_naturality]
-  simp only [Category.id_comp, Functor.comp_map]
-  erw [Category.comp_id]
+  rw [singleFunctorObjTensorIso_homotopy_factorization L M hL]
+  simp only [singleFunctorObjIsoQh, DerivedCategory.singleFunctorIsoCompQ]
+  simp only [Functor.LaxMonoidal.transport_μ, Functor.LaxMonoidal.comp_μ, Category.assoc]
+  erw [← DerivedCategory.quotientCompQhIso_hom_naturality]
+  have hμ (K N : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)) ℤ) :
+      DerivedCategory.Qh.map (Functor.LaxMonoidal.μ
+        (HomotopyCategory.quotient (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)) (.up ℤ))
+        K N) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  rw [hμ]
+  erw [Category.id_comp]
+  erw [Iso.trans_hom, Iso.trans_hom, Iso.trans_inv]
+  have h1 (X : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+      ((Iso.refl (DerivedCategory.singleFunctor
+        (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)) 0)).app X).hom = 𝟙 _ := rfl
+  have h2 (X : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+      ((Iso.refl (DerivedCategory.singleFunctor
+        (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)) 0)).app X).inv = 𝟙 _ := rfl
+  erw [h1, h1, h2, Category.id_comp, Category.id_comp, Category.comp_id]
   rfl
 
 private theorem mapComplex_unit_formula
@@ -67,8 +77,8 @@ private theorem mapComplex_unit_formula
   simp only [Functor.id_obj, Functor.comp_obj, Adjunction.mapHomologicalComplex_unit_app_f,
     HomologicalComplex.comp_f, Functor.mapHomologicalComplexIdIso_inv_app_f,
     NatTrans.mapHomologicalComplex_app_f, Functor.mapHomologicalComplexCompIso_inv_app_f,
-    Iso.refl_inv, NatTrans.id_app, Category.id_comp]
-  exact (Category.comp_id _).symm
+    Iso.refl_inv, NatTrans.id_app]
+  erw [Category.id_comp, Category.comp_id]
 
 -- The kernel re-check of the final instantiation of the generic normalized tensor lemma
 -- (scalarAdjointInsertion's derived adjunction against `E ⊣ U.mapDerivedCategory`) exceeds
@@ -128,8 +138,8 @@ theorem tateTensor_scalarAdjointInsertion
   let F := ProEtale.etaleSheafExtendScalars φ T
   let U := Sheaf.restrictScalars T.smallEtaleTopology φ
   let a : F ⊣ U := ProEtale.etaleSheafExtendScalarsAdjunction φ T
-  letI : F.IsLeftAdjoint := a.isLeftAdjoint
-  letI : F.OplaxMonoidal := composeAndSheafifyOplaxMonoidal T.smallEtaleTopology
+  let : F.IsLeftAdjoint := a.isLeftAdjoint
+  let : F.OplaxMonoidal := composeAndSheafifyOplaxMonoidal T.smallEtaleTopology
     (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
   let E := scalarExtension φ T
   let ad : E ⊣ U.mapDerivedCategory := Adjunction.ofIsRightAdjoint _
@@ -154,8 +164,9 @@ theorem tateTensor_scalarAdjointInsertion
     exact (ExceptionalCoefficients.tensorIso_existsUnique φ T).choose_spec.1
   rw [flat_single_comparison T P₁ P₂ hP₁, flat_single_comparison T L₁ L₂ hL₁]
   unfold SheafExactDegreeZero.scalarAdjointInsertion
-  exact SheafExactDegreeZero.normalizedTensor_adjointInsertion F U a E ad
+  have key := SheafExactDegreeZero.normalizedTensor_adjointInsertion F U a E ad
     (scalarExtensionRepresentative φ T) hrep (ExceptionalCoefficients.tensorIso φ T)
     hn L₁ L₂ P₁ P₂ η₁ η₂
+  exact key
 
 end AlgebraicGeometry.Etale
