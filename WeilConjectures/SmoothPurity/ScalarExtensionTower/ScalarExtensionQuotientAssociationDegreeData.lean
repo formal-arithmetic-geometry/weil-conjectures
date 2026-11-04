@@ -209,8 +209,8 @@ theorem quotientAssociation_degreeData_exists
   obtain ⟨f₀⟩ := coefficientExtensionFiniteAssociation_exists l E E (AlgHom.id ℚ_[l] E) W A₀
   obtain ⟨β₀, hβ₀⟩ := chainSection l E E (AlgHom.id ℚ_[l] E) W A₀ M ρ₀ hρ₀ f₀.association
     f₀.association_section d0.direct d0.directEvaluation d0.direct_transition
-  letI := coefficientScalarModelZero A₁.scalar
-  letI := coefficientScalarModelZero A₀.scalar
+  let := coefficientScalarModelZero A₁.scalar
+  let := coefficientScalarModelZero A₀.scalar
   let Q := (M.quotient l E W).obj K.obj
   have hQ₀ := mapHomologicalComplex_obj_eq hA₀ Q
   have hQ₁ := (mapHomologicalComplex_obj_eq hA₁ Q).symm
