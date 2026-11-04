@@ -274,6 +274,65 @@ private lemma tensor_iota
   rw [CategoryTheory.MonoidalCategory.tensorHom_def, Category.assoc]
   rfl
 
+/-- Ordinary composition transported from the lifted Hom universe along `liftedHomIso`.
+Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-derived-hom). -/
+private def nativeComp [HasDerivedCategory.{w} (ULiftHom.{b} A)]
+    (r : GlobalHomResolutionRoof (ULift.{v} B) (A := ULiftHom.{b} A))
+    (X Y Z : CochainComplex A ℤ) :
+    DerivedMappingOrdinaryHom.complex B Y Z ⊗ DerivedMappingOrdinaryHom.complex B X Y ⟶
+      DerivedMappingOrdinaryHom.complex B X Z :=
+  ((liftedHomIso B A Y Z).inv ⊗ₘ (liftedHomIso B A X Y).inv) ≫
+    r.comp _ _ _ ≫ (liftedHomIso B A X Z).hom
+
+/-- The scalar identity transported from the lifted Hom universe along `liftedHomIso`.
+Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-derived-hom). -/
+private def nativeUnit [HasDerivedCategory.{w} (ULiftHom.{b} A)]
+    (r : GlobalHomResolutionRoof (ULift.{v} B) (A := ULiftHom.{b} A))
+    (X : CochainComplex A ℤ) :
+    (CochainComplex.singleFunctor (ModuleCat.{max b v} (ULift.{v} B)) (0 : ℤ)).obj
+      (ModuleCat.of (ULift.{v} B) (ULift.{v} B)) ⟶
+        DerivedMappingOrdinaryHom.complex B X X :=
+  r.unit _ ≫ (liftedHomIso B A X X).hom
+
+omit [HasDerivedCategory.{max b v} (ModuleCat.{max b v} (ULift.{v} B))] in
+private lemma tensor_iota_apply
+    {K K' L L' : CochainComplex (ModuleCat.{max b v} (ULift.{v} B)) ℤ}
+    (f : K ⟶ K') (g : L ⟶ L') (p q n : ℤ) (h : p + q = n) (x : K.X p) (y : L.X q) :
+    (f ⊗ₘ g).f n (HomologicalComplex.ιTensorObj K L p q n h (x ⊗ₜ[ULift.{v} B] y)) =
+      HomologicalComplex.ιTensorObj K' L' p q n h (f.f p x ⊗ₜ[ULift.{v} B] g.f q y) :=
+  congrArg (fun φ ↦ φ.hom (x ⊗ₜ[ULift.{v} B] y)) (tensor_iota B f g p q n h)
+
+private theorem nativeComp_apply [HasDerivedCategory.{w} (ULiftHom.{b} A)]
+    (r : GlobalHomResolutionRoof (ULift.{v} B) (A := ULiftHom.{b} A))
+    (X Y Z : CochainComplex A ℤ) (a d n : ℤ) (h : a + d = n)
+    (g : (DerivedMappingOrdinaryHom.complex B Y Z).X a)
+    (f : (DerivedMappingOrdinaryHom.complex B X Y).X d) :
+    ((nativeComp B A r X Y Z).f n
+      (HomologicalComplex.ιTensorObj (DerivedMappingOrdinaryHom.complex B Y Z)
+        (DerivedMappingOrdinaryHom.complex B X Y) a d n h
+          (g ⊗ₜ[ULift.{v} B] f))).down =
+      f.down.comp g.down ((add_comm d a).trans h) := by
+  change ((liftedHomIso B A X Z).hom.f n ((r.comp _ _ _).f n
+    (((liftedHomIso B A Y Z).inv ⊗ₘ (liftedHomIso B A X Y).inv).f n
+      (HomologicalComplex.ιTensorObj (DerivedMappingOrdinaryHom.complex B Y Z)
+        (DerivedMappingOrdinaryHom.complex B X Y) a d n h (g ⊗ₜ[ULift.{v} B] f))))).down = _
+  rw [tensor_iota_apply, r.comp_formula]
+  ext p q hpq
+  rfl
+
+private theorem nativeUnit_apply [HasDerivedCategory.{w} (ULiftHom.{b} A)]
+    (r : GlobalHomResolutionRoof (ULift.{v} B) (A := ULiftHom.{b} A))
+    (X : CochainComplex A ℤ) (a : ULift.{v} B) :
+    ((nativeUnit B A r X).f 0 a).down = a.down • Cochain.ofHom (𝟙 X) := by
+  have hr := r.unit_formula
+    (((ULiftHom.up : A ⥤ ULiftHom.{b} A).mapHomologicalComplex (.up ℤ)).obj X) a
+  change ((liftedHomIso B A X X).hom.f 0 ((r.unit _).f 0
+    ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0
+      (ModuleCat.of (ULift.{v} B) (ULift.{v} B))).inv a))).down = _
+  rw [hr]
+  ext p
+  rfl
+
 /-- Ordinary composition and scalar identities have their actual cochain formulas.
 Source: Stacks 09L9 and 070I (blueprint: lem-sf-derived-mapping-derived-hom).
 Proof: apply the global Hom roof theorem to the category with lifted Hom universes.

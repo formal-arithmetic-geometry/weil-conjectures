@@ -36,9 +36,13 @@ namespace WeilConjectures.FiniteFreeCoefficients.Sites
 
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
--- The sheafified scalar balancing tensorator `etaleScalarOplax` of
--- `NormalizedStageSiteSheafTensorSquare` is a local instance there.
-attribute [local instance] etaleScalarOplax
+-- The existing sheafified scalar balancing tensorator (`composeAndSheafifyOplaxMonoidal`),
+-- specialized to the etale site, as in `NormalizedStageSiteSheafTensorSquare`.
+local instance etaleScalarOplax {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (X : Scheme.{u}) :
+    (ProEtale.etaleSheafExtendScalars φ X).OplaxMonoidal :=
+  composeAndSheafifyOplaxMonoidal X.smallEtaleTopology
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
 
 -- The ordinary etale scalar extension is a left adjoint (Stacks 06YY), so it preserves the
 -- coproducts of the signed total tensor; `ExceptionalCoefficientMaps` is not imported here.
