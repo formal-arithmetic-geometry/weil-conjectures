@@ -29,6 +29,7 @@ resulting morphism uniquely. No adjunction for supported coefficient objects is 
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.unusedSectionVars false
 
 universe u v
 
@@ -43,6 +44,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
   [HasSmallSiteSheafify C]
 
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- Naturality of the pointwise tensor of two sections.
 Source: the supported-section pairing of the nested blueprint unit cited above
 (blueprint: def-pur-supported-exterior-product).
@@ -58,7 +60,12 @@ theorem exteriorSections_naturality (T : Scheme.{u})
       (tensorHom (Sheaf.ΓRes F U) (Sheaf.ΓRes G U) ≫
         (Functor.LaxMonoidal.μ (sheafToPresheaf T.smallEtaleTopology C) F G).app U) ≫
         (F ⊗ G).obj.map a := by
-  sorry
+  have h3 := (Functor.LaxMonoidal.μ (sheafToPresheaf T.smallEtaleTopology C) F G).naturality a
+  simp only [Functor.const_obj_map]
+  rw [← Sheaf.ΓRes_map F a, ← Sheaf.ΓRes_map G a, ← tensorHom_comp_tensorHom]
+  erw [Category.id_comp]
+  rw [Category.assoc, Category.assoc]
+  exact congrArg (_ ≫ ·) h3
 
 /-- Tensor two global sections, using the actual pointwise tensor followed by
 sheafification. Source: the nested blueprint unit cited above
@@ -90,6 +97,93 @@ noncomputable def exteriorSectionsMap
       (globalSectionsUpperStarMap C (pullback.snd f g) G) ≫
     exteriorSectionsTensor C (pullback f g) _ _
 
+/-- The adjoint of a cone map of constant presheaves composed with the restriction recovers the
+component of the map. -/
+private lemma ΓHomEquiv_comp_ΓRes {D : Type*} [Category D] (J : GrothendieckTopology D)
+    (A : Type*) [Category A] [HasWeakSheafify J A] [HasGlobalSectionsFunctor J A]
+    {M : A} {F : Sheaf J A} (h : (Functor.const Dᵒᵖ).obj M ⟶ F.obj) (U : Dᵒᵖ) :
+    Sheaf.ΓHomEquiv h ≫ F.ΓRes U = h.app U := by
+  have := congr_app (Sheaf.ΓHomEquiv_naturality_left_symm (Sheaf.ΓHomEquiv h) (𝟙 _)) U
+  rw [Category.comp_id, Equiv.symm_apply_apply] at this
+  rw [this]
+  rfl
+
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
+/-- Restriction of the tensor of two global sections to an étale scheme. -/
+private lemma exteriorSectionsTensor_comp_ΓRes (T : Scheme.{u})
+    (F G : Sheaf T.smallEtaleTopology C) (U : T.Etaleᵒᵖ) :
+    exteriorSectionsTensor C T F G ≫ (F ⊗ G).ΓRes U =
+      tensorHom (Sheaf.ΓRes F U) (Sheaf.ΓRes G U) ≫
+        (Functor.LaxMonoidal.μ (sheafToPresheaf T.smallEtaleTopology C) F G).app U :=
+  ΓHomEquiv_comp_ΓRes _ _ _ U
+
+private lemma ΓNatIsoSheafSections_hom_app_eq_ΓRes' {D : Type*} [Category D]
+    (J : GrothendieckTopology D) (A : Type*) [Category A]
+    [HasWeakSheafify J A] [HasTerminal D] {T : D} (hT : IsTerminal T) (F : Sheaf J A) :
+    (Sheaf.ΓNatIsoSheafSections J A hT).hom.app F = F.ΓRes (op T) := by
+  simp only [Sheaf.ΓNatIsoSheafSections, Sheaf.ΓRes, Sheaf.coneΓ, Sheaf.ΓHomEquiv,
+    Adjunction.rightAdjointUniq, conjugateIsoEquiv_apply_hom, conjugateEquiv_apply_app]
+  erw [Equiv.symm_trans_apply, Equiv.symm_symm, Adjunction.homEquiv_counit,
+    Adjunction.homEquiv_unit]
+  simp [constantSheafAdj, Adjunction.comp_unit_app]
+
+omit [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
+/-- Compatibility of the pullback map on global sections with restriction to an étale
+`S`-scheme `W` mapping to an étale `T`-scheme `V`. -/
+private theorem globalSectionsUpperStarMap_comp_ΓRes
+    {T S : Scheme.{u}} (h : S ⟶ T) (M : Sheaf T.smallEtaleTopology C)
+    (V : T.Etale) (W : S.Etale) (φ : W.left ⟶ V.left) (hφ : φ ≫ V.hom = W.hom ≫ h) :
+    globalSectionsUpperStarMap C h M ≫ ((upperStar C h).obj M).ΓRes (op W) =
+      M.ΓRes (op V) ≫ ((upperStarLowerStarAdjunction C h).unit.app M).hom.app (op V) ≫
+        ((upperStar C h).obj M).obj.map (homToPullback h φ hφ).op := by
+  let N := (upperStar C h).obj M
+  let e := Sheaf.ΓNatIsoSheafSections S.smallEtaleTopology C terminalIsTerminal
+  have he : e.inv.app N ≫ N.ΓRes (op W) = N.obj.map (terminal.from W).op := by
+    apply (cancel_epi (e.hom.app N)).1
+    rw [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp,
+      ΓNatIsoSheafSections_hom_app_eq_ΓRes']
+    exact (Sheaf.ΓRes_map N (terminal.from W).op).symm
+  have hm : terminal.from W ≫ (PreservesTerminal.iso h.Etale).inv =
+      homToPullback h φ hφ ≫ h.Etale.map (terminal.from V) :=
+    (isLimitOfPreserves h.Etale (limit.isLimit (Functor.empty T.Etale))).hom_ext
+      (fun j ↦ isEmptyElim j)
+  simp only [globalSectionsUpperStarMap, Category.assoc]
+  change _ ≫ _ ≫ N.obj.map _ ≫ e.inv.app N ≫ N.ΓRes (op W) = _
+  rw [he, ← N.obj.map_comp, ← op_comp, hm, op_comp, N.obj.map_comp]
+  have hu := ((upperStarLowerStarAdjunction C h).unit.app M).hom.naturality
+    (terminal.from V).op
+  change M.obj.map (terminal.from V).op ≫
+      ((upperStarLowerStarAdjunction C h).unit.app M).hom.app (op V) =
+    ((upperStarLowerStarAdjunction C h).unit.app M).hom.app (op (⊤_ T.Etale)) ≫
+      N.obj.map (h.Etale.map (terminal.from V)).op at hu
+  change (Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology C terminalIsTerminal).hom.app M ≫
+      ((upperStarLowerStarAdjunction C h).unit.app M).hom.app (op (⊤_ T.Etale)) ≫ _ ≫ _ = _
+  rw [← reassoc_of% hu, ΓNatIsoSheafSections_hom_app_eq_ΓRes', Sheaf.ΓRes_map_assoc]
+
+omit [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
+/-- Sections supported away from an open `U` die after pullback and restriction to any étale
+scheme mapping into the pullback of `U`. -/
+private lemma supportι_comp_globalSectionsUpperStarMap_comp_ΓRes
+    {T S : Scheme.{u}} (h : S ⟶ T) (M : Sheaf T.smallEtaleTopology C)
+    (V : T.Etale) (W : S.Etale) (φ : W.left ⟶ V.left) (hφ : φ ≫ V.hom = W.hom ≫ h) :
+    (Sheaf.ΓSupportι T.smallEtaleTopology C (op V)).app M ≫
+      globalSectionsUpperStarMap C h M ≫ ((upperStar C h).obj M).ΓRes (op W) = 0 := by
+  rw [globalSectionsUpperStarMap_comp_ΓRes C h M V W φ hφ,
+    Sheaf.ΓSupportι_app_comp_ΓRes_assoc, zero_comp]
+
+/-- Some étale neighbourhood of each point of an étale scheme maps into any open containing the
+image of the point. -/
+private lemma exists_etale_arrow_range_subset {P : Scheme.{u}} (V : P.Etale) (O : P.Opens)
+    (x : V.left) (hx : V.hom x ∈ O) :
+    ∃ (Y : P.Etale) (f : Y ⟶ V) (y : Y.left),
+      (∀ z : Y.left, Y.hom z ∈ O) ∧ f.left y = x ∧ Etale f.left := by
+  have : Etale V.hom := V.prop
+  refine ⟨Scheme.Etale.mk ((V.hom ⁻¹ᵁ O).ι ≫ V.hom),
+    MorphismProperty.Over.homMk (V.hom ⁻¹ᵁ O).ι rfl, ⟨x, hx⟩, fun z ↦ z.2, rfl,
+    inferInstance⟩
+
 /-- The tensor of pulled-back supported sections vanishes off the product support.
 Source: the nested blueprint unit cited above (blueprint: def-pur-supported-exterior-product).
 Proof: the complement of the product support is covered by the inverse images of the
@@ -106,7 +200,80 @@ theorem exteriorSections_support (F : Sheaf X.smallEtaleTopology C)
       exteriorSectionsMap C f g F G) ≫
       Sheaf.ΓRes _ (op (Scheme.Etale.mk
         (supportedProductImmersion f g i j).openComplement.ι)) = 0 := by
-  sorry
+  classical
+  set V₀ : (pullback f g).Etale :=
+    Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι with hV₀
+  have hc : (supportedProductImmersion f g i j).openComplement =
+      pullback.fst f g ⁻¹ᵁ i.openComplement ⊔
+        pullback.snd f g ⁻¹ᵁ j.openComplement := by
+    apply TopologicalSpace.Opens.ext
+    simp [Scheme.Hom.coe_openComplement, supportedProductImmersion,
+      Scheme.Pullback.range_map, Set.compl_inter, Set.preimage_compl]
+  let S : Sieve V₀ :=
+    { arrows := fun W _ ↦
+        (∀ y : W.left, W.hom y ∈ pullback.fst f g ⁻¹ᵁ i.openComplement) ∨
+        (∀ y : W.left, W.hom y ∈ pullback.snd f g ⁻¹ᵁ j.openComplement)
+      downward_closed := fun {W W'} {w} hw g' ↦ by
+        rcases hw with hw | hw
+        · refine Or.inl fun y ↦ ?_
+          rw [← MorphismProperty.Over.w g']
+          exact hw (g'.left y)
+        · refine Or.inr fun y ↦ ?_
+          rw [← MorphismProperty.Over.w g']
+          exact hw (g'.left y) }
+  have hS : S ∈ (pullback f g).smallEtaleTopology V₀ := by
+    rw [Scheme.smallEtaleTopology,
+      Scheme.smallGrothendieckTopology_eq_toGrothendieck_smallPretopology _ le_rfl]
+    refine (Scheme.mem_toGrothendieck_smallPretopology (P := @Etale) (Q := @Etale) V₀ S).2 ?_
+    intro x
+    have hx : V₀.hom x ∈ Set.range (supportedProductImmersion f g i j).openComplement.ι :=
+      Set.mem_range_self x
+    rw [Scheme.Opens.range_ι, hc] at hx
+    rcases hx with hx | hx
+    · obtain ⟨Y, a, y, hY, hya, hE⟩ :=
+        exists_etale_arrow_range_subset V₀ (pullback.fst f g ⁻¹ᵁ i.openComplement) x hx
+      exact ⟨Y, a, y, Or.inl hY, hE, hya⟩
+    · obtain ⟨Y, a, y, hY, hya, hE⟩ :=
+        exists_etale_arrow_range_subset V₀ (pullback.snd f g ⁻¹ᵁ j.openComplement) x hx
+      exact ⟨Y, a, y, Or.inr hY, hE, hya⟩
+  refine Presheaf.IsSheaf.hom_ext (((upperStar C (pullback.fst f g)).obj F ⊗
+    (upperStar C (pullback.snd f g)).obj G).property) ⟨S, hS⟩ _ 0 ?_
+  rintro ⟨W, w, hw⟩
+  rw [Category.assoc, Sheaf.ΓRes_map, zero_comp]
+  have key {A₁ A₂ : C} (a : A₁ ⟶ (Sheaf.Γ X.smallEtaleTopology C).obj F)
+      (b : A₂ ⟶ (Sheaf.Γ Y.smallEtaleTopology C).obj G) :
+      (tensorHom a b ≫ exteriorSectionsMap C f g F G) ≫
+        ((upperStar C (pullback.fst f g)).obj F ⊗
+          (upperStar C (pullback.snd f g)).obj G).ΓRes (op W) =
+      tensorHom (a ≫ globalSectionsUpperStarMap C (pullback.fst f g) F ≫
+          ((upperStar C (pullback.fst f g)).obj F).ΓRes (op W))
+        (b ≫ globalSectionsUpperStarMap C (pullback.snd f g) G ≫
+          ((upperStar C (pullback.snd f g)).obj G).ΓRes (op W)) ≫
+        (Functor.LaxMonoidal.μ (sheafToPresheaf (pullback f g).smallEtaleTopology C) _ _).app
+          (op W) := by
+    rw [exteriorSectionsMap, Category.assoc, Category.assoc, exteriorSectionsTensor_comp_ΓRes,
+      tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom_assoc]
+    simp only [Category.assoc]
+  rw [key]
+  rcases hw with hw | hw
+  · have hr : Set.range (W.hom ≫ pullback.fst f g) ⊆ Set.range i.openComplement.ι := by
+      rw [Scheme.Opens.range_ι]
+      rintro _ ⟨y, rfl⟩
+      rw [Scheme.Hom.comp_apply]
+      exact hw y
+    have h0 := supportι_comp_globalSectionsUpperStarMap_comp_ΓRes C (pullback.fst f g) F
+      (Scheme.Etale.mk i.openComplement.ι) W (IsOpenImmersion.lift _ _ hr)
+      (IsOpenImmersion.lift_fac _ _ hr)
+    rw [h0, MonoidalPreadditive.zero_tensor, zero_comp]
+  · have hr : Set.range (W.hom ≫ pullback.snd f g) ⊆ Set.range j.openComplement.ι := by
+      rw [Scheme.Opens.range_ι]
+      rintro _ ⟨y, rfl⟩
+      rw [Scheme.Hom.comp_apply]
+      exact hw y
+    have h0 := supportι_comp_globalSectionsUpperStarMap_comp_ΓRes C (pullback.snd f g) G
+      (Scheme.Etale.mk j.openComplement.ι) W (IsOpenImmersion.lift _ _ hr)
+      (IsOpenImmersion.lift_fac _ _ hr)
+    rw [h0, MonoidalPreadditive.tensor_zero, zero_comp]
 
 /-- The ordinary supported exterior product is the kernel lift of the pullback and
 tensor of sections. Source: the nested blueprint unit cited above

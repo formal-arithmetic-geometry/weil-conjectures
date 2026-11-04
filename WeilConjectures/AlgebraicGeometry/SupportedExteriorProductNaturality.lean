@@ -32,6 +32,7 @@ the normalization transfers along quasi-isomorphisms of K-flat representatives.
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.unusedSectionVars false
 
 universe u v
 
@@ -91,6 +92,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
   [HasSmallSiteSheafify C]
 
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The pointwise tensor of global sections is natural in both sheaves. -/
 @[reassoc]
 theorem exteriorSectionsTensor_naturality (T : Scheme.{u})
