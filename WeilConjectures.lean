@@ -2471,6 +2471,7 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientChange.CoefficientOpe
 public import WeilConjectures.AlgebraicGeometry.CoefficientChange.CoefficientTransformationComparisons
 public import WeilConjectures.AlgebraicGeometry.CoefficientClassicalModuleOrigin
 public import WeilConjectures.AlgebraicGeometry.CoefficientClassicalSingle
+public import WeilConjectures.AlgebraicGeometry.CoefficientClosedStructureNaturality
 public import WeilConjectures.AlgebraicGeometry.CoefficientComparisonAffineCech
 public import WeilConjectures.AlgebraicGeometry.CoefficientComparisonAffineSections
 public import WeilConjectures.AlgebraicGeometry.CoefficientComparisonConstantChartCounit
@@ -24270,6 +24271,7 @@ public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TensorHomAdjunction
+public import WeilConjectures.WeilSheaf.TensorHomNatural
 public import WeilConjectures.WeilSheaf.TensorObjPairing
 public import WeilConjectures.WeilSheaf.TensorPower
 public import WeilConjectures.WeilSheaf.TensorPowerWeightLimit
