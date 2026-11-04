@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleExtendScalarsBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
 
 /-!
@@ -77,23 +78,6 @@ theorem preservesColimitsOfShape_discrete_adicLowerStar (B : Type) :
   have : ReflectsColimitsOfShape (Discrete B) (AdicSheaf.toAb l Y) :=
     reflectsColimitsOfShape_of_reflectsIsomorphisms
   exact preservesColimitsOfShape_of_reflects_of_preserves _ (AdicSheaf.toAb l Y)
-
-/-- A faithful functor between categories with zero morphisms preserving zero morphisms reflects
-zero objects. -/
-lemma _root_.CategoryTheory.Functor.isZero_of_isZero_obj {C D : Type*} [Category* C]
-    [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D] (G : C ⥤ D) [G.Faithful]
-    [G.PreservesZeroMorphisms] {A : C} (hA : IsZero (G.obj A)) : IsZero A :=
-  (IsZero.iff_id_eq_zero A).2 (G.map_injective (by
-    rw [G.map_id, G.map_zero]
-    exact hA.eq_of_src _ _))
-
-omit [QuasiCompact f] [QuasiSeparated f] in
-/-- An `ℓ`-adic sheaf whose underlying abelian sheaf is `f_*`-acyclic is `f_*`-acyclic. -/
-lemma rightAcyclic_adicLowerStar_of_rightAcyclic_toAb {F : AdicSheaf l X}
-    (hF : ((f)_*[Ab.{u + 1}]).rightAcyclic ((AdicSheaf.toAb l X).obj F)) :
-    ((f)_*ᵃ[l]).rightAcyclic F := fun q ↦
-  (AdicSheaf.toAb l Y).isZero_of_isZero_obj
-    ((hF q).of_iso ((rightDerivedAdicLowerStarToAbIso l f (q + 1)).app F))
 
 /-- For a quasi-compact quasi-separated morphism `f`, a direct sum of injective `ℓ`-adic sheaves
 is `f_*`-acyclic. -/

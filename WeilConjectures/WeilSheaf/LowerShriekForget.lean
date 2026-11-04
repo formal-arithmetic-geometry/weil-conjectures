@@ -138,6 +138,7 @@ theorem WeilComplex.bijective_map_comp_derivedLowerShriek {K P : WeilComplex k�
   rw [this]
   exact e₂.symm.bijective.comp (H.comp e₁.bijective)
 
+omit [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- **The direct image with compact support commutes with free Weil objects.** For a Weil complex
 `K` on `X` and `n : ℤ`, the comparison `Free(Rf̄_! For K[n]) ⟶ Rf_! Free(For K[n])` between the free
 pro-étale Weil objects is an isomorphism. -/
