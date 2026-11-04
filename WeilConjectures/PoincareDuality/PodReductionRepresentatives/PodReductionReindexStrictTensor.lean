@@ -8,6 +8,8 @@ module
 public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReindexingReductionTensorData
 public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCoherenceData
 public import WeilConjectures.SixFunctors.Tensor.TensorReductionStrictComparison
+public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionReindexStrictTensorAux2
+public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionReindexStrictTensorAux4
 
 /-! # The strict reduction/reindexing tensor equation
 
@@ -48,6 +50,44 @@ set_option hygiene false in
 local notation "S[" W "]" => coefficientTotalTensor.{u, u + 1, u}
   (coefficientSequenceTopology (ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
 
+/-- The inverse-image transpose evaluates a map on the unit section.
+Source: Stacks 03D2. -/
+theorem inverseImage_homEquiv_apply {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (M : coefficientSequenceModules l E Y) (N : coefficientSequenceModules l E X)
+    (f : (integralComparisonSequencePullback l E g).obj M ⟶ N) (V : ℕ × Y.ProEt)
+    (s : M.val.obj (op V)) :
+    (((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).homEquiv M N
+      f).val.app (op V)) s =
+      f.val.app (op ((pullbackTensorSequenceBase g).obj V))
+        (((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.app
+          M).val.app (op V) s) := by
+  erw [Adjunction.homEquiv_unit]
+  rfl
+
+/-- Restriction along an isomorphism of the pro-etale coordinate is injective.
+Source: Stacks 0941. -/
+theorem sequence_restrict_injective {X : Scheme.{u}} (N : coefficientSequenceModules l E X)
+    (n : ℕ) {U V : X.ProEt} (c : U ⟶ V) [IsIso c] :
+    Function.Injective (N.val.map (CategoryTheory.Prod.mkHom (𝟙 n) c).op) := by
+  have : IsIso (CategoryTheory.Prod.mkHom (𝟙 n) c) :=
+    (isIso_prod_iff ℕ X.ProEt).2 ⟨inferInstance, inferInstance⟩
+  exact (ConcreteCategory.bijective_of_isIso
+    (N.val.presheaf.map (CategoryTheory.Prod.mkHom (𝟙 n) c).op)).1
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The comma arrow of an isomorphism of schemes is an isomorphism.
+Source: Stacks 09A5. -/
+theorem proEtaleIsoCommaArrow_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (U : X.ProEt) :
+    IsIso (proEtaleIsoCommaArrow g U) := by
+  have : (MorphismProperty.Over.map ⊤
+      (inferInstance : AlgebraicGeometry.WeaklyEtale g)).IsEquivalence :=
+    (proEtaleIsoPostcompose_equivalence g).1
+  exact inferInstanceAs (IsIso ((MorphismProperty.Over.mapPullbackAdj
+    @AlgebraicGeometry.WeaklyEtale ⊤ g
+    (inferInstance : AlgebraicGeometry.WeaklyEtale g) trivial).unit.app U))
+
+set_option maxHeartbeats 4000000 in
+-- The generator calculation passes through several transported comparison maps.
 /-- Scalar-generator normalization implies the tensor equation before localization.
 There are no derived-category maps, adjunction mates, or completion data in this
 assertion. The three beta maps are tested independently by their unary formulas.
@@ -93,6 +133,98 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (S[X]).map (Prod.mkHom βP.hom βQ.hom) =
       βT.hom ≫ (R[X]).map t.hom ≫
         tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q) := by
-  sorry
+  apply HomologicalComplex.hom_ext
+  intro k
+  apply ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).homEquiv
+    _ _).injective
+  apply reduction_total_hom_ext_postcompose l E g P Q k
+  intro n p q hpq U x y
+  have := proEtaleIsoCommaArrow_isIso g U
+  refine (inverseImage_homEquiv_apply l E g _ _ _ (n, (proEtaleIsoPostcompose g).obj U) _).trans
+    (Eq.trans ?_ (inverseImage_homEquiv_apply l E g _ _ _ _ _).symm)
+  apply sequence_restrict_injective l E _ n (proEtaleIsoCommaArrow g U)
+  rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f]
+  erw [sheafOfModules_comp_apply, sheafOfModules_comp_apply]
+  have e1 := inverseImage_map_unit l E g ((tensorReductionStrictMap l E Y P Q).f k)
+    (n, (proEtaleIsoPostcompose g).obj U)
+    (((pullbackTensorReductionEvaluation l E Y n).hom.app _).val.app
+      (op ((proEtaleIsoPostcompose g).obj U))
+      (unrestrictedIntegralTensorSection l E Y n _ (op ((proEtaleIsoPostcompose g).obj U)) 1
+        (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
+          (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
+          (op ((proEtaleIsoPostcompose g).obj U)) x y)))
+  have e2 := strictMap_generator l E Y P Q n p q k hpq ((proEtaleIsoPostcompose g).obj U) x y
+  erw [e1, e2]
+  have e3 := systemChain_generator l E g ((R[Y]).obj P) ((R[Y]).obj Q) p q k hpq
+    (n, (proEtaleIsoPostcompose g).obj U)
+    (((pullbackTensorReductionEvaluation l E Y n).hom.app (P.X p)).val.app
+      (op ((proEtaleIsoPostcompose g).obj U))
+      (unrestrictedIntegralTensorSection l E Y n _ (op ((proEtaleIsoPostcompose g).obj U)) 1 x))
+    (((pullbackTensorReductionEvaluation l E Y n).hom.app (Q.X q)).val.app
+      (op ((proEtaleIsoPostcompose g).obj U))
+      (unrestrictedIntegralTensorSection l E Y n _ (op ((proEtaleIsoPostcompose g).obj U)) 1 y))
+  erw [e3]
+  have e4 := coefficientTotalTensor_map_tensorGenerator.{u, u + 1, u}
+    (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
+    βP.hom βQ.hom p q k hpq
+    (op ((pullbackTensorSequenceBase g).obj (n, (proEtaleIsoPostcompose g).obj U)))
+    (((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.app
+      ((((R[Y]).obj P).X p))).val.app (op (n, (proEtaleIsoPostcompose g).obj U))
+      (((pullbackTensorReductionEvaluation l E Y n).hom.app (P.X p)).val.app
+        (op ((proEtaleIsoPostcompose g).obj U))
+        (unrestrictedIntegralTensorSection l E Y n _ (op ((proEtaleIsoPostcompose g).obj U)) 1 x)))
+    (((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.app
+      ((((R[Y]).obj Q).X q))).val.app (op (n, (proEtaleIsoPostcompose g).obj U))
+      (((pullbackTensorReductionEvaluation l E Y n).hom.app (Q.X q)).val.app
+        (op ((proEtaleIsoPostcompose g).obj U))
+        (unrestrictedIntegralTensorSection l E Y n _ (op ((proEtaleIsoPostcompose g).obj U)) 1 y)))
+  erw [e4]
+  erw [coefficientTensorGenerator_restrict (coefficientSequenceTopology (ProEt.topology X))
+    (coefficientSequenceCommRingSheaf l E X) ((R[X]).obj ((F[g]).obj P))
+    ((R[X]).obj ((F[g]).obj Q)) p q k hpq]
+  erw [← PresheafOfModules.naturality_apply (βP.hom.f p).val
+    (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op,
+    ← PresheafOfModules.naturality_apply (βQ.hom.f q).val
+    (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op]
+  have h1 : ((isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
+      (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U)) 1 = 1 :=
+    map_one _
+  have rP := (hβP n p U 1 x).trans (congrArg (fun a ↦
+    ((pullbackTensorReductionEvaluation l E X n).hom.app (((F[g]).obj P).X p)).val.app (op U)
+      (unrestrictedIntegralTensorSection l E X n _ (op U) a x)) h1)
+  have rQ := (hβQ n q U 1 y).trans (congrArg (fun a ↦
+    ((pullbackTensorReductionEvaluation l E X n).hom.app (((F[g]).obj Q).X q)).val.app (op U)
+      (unrestrictedIntegralTensorSection l E X n _ (op U) a y)) h1)
+  have rT := (hβT n k U 1 (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
+    (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
+    (op ((proEtaleIsoPostcompose g).obj U)) x y)).trans (congrArg (fun a ↦
+    ((pullbackTensorReductionEvaluation l E X n).hom.app
+      (((F[g]).obj ((T[Y]).obj (P, Q))).X k)).val.app (op U)
+      (unrestrictedIntegralTensorSection l E X n _ (op U) a
+        (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
+          (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
+          (op ((proEtaleIsoPostcompose g).obj U)) x y))) h1)
+  erw [rP]
+  erw [rQ]
+  refine Eq.trans ?_ (PresheafOfModules.naturality_apply ((βT.hom ≫ (R[X]).map t.hom ≫
+    tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val
+    (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op _)
+  have r3 := reduction_map_unitSection l E X n (t.hom.f k) U
+    (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
+      (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
+      (op ((proEtaleIsoPostcompose g).obj U)) x y)
+  have r4 := hPure p q k hpq U x y
+  have r5 := strictMap_generator l E X ((F[g]).obj P) ((F[g]).obj Q) n p q k hpq U x y
+  refine Eq.trans ?_ (congrArg (fun z ↦
+    ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U))
+      ((((R[X]).map t.hom).f k).val.app (op (n, U)) z)) rT).symm
+  refine Eq.trans ?_ (congrArg (fun z ↦
+    ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U)) z)
+      r3).symm
+  refine Eq.trans ?_ (congrArg (fun z ↦
+    ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U))
+      (((pullbackTensorReductionEvaluation l E X n).hom.app _).val.app (op U)
+        (unrestrictedIntegralTensorSection l E X n _ (op U) 1 z))) r4).symm
+  exact r5.symm
 
 end WeilConjectures.PodReductionRepresentatives

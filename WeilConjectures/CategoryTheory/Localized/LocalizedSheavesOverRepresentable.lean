@@ -405,4 +405,69 @@ private noncomputable def counitTransformation {C : Type u} [SmallCategory C]
       ← sheafifyLift_comp K (forgetPairs K U F) F.left.property f.left.hom G.left.property]
     congr 1
 
+/-- The fibre/extension equivalence for an arbitrary Grothendieck topology.
+Source: Stacks Project, Sites, Tag 00Y1, lemma-essential-image-j-shriek.
+(blueprint: lem-weil-pbc-localized-sheaves-over-representable).
+
+Proof: use the same disjoint-union presheaf, sheafification, and fibre constructions
+as in the precoverage interface. The unit is locally bijective by local representation
+of sheafification sections and local equality of representable arrows; the counit is
+locally bijective by forgetting those arrows. Their already proved formulas supply
+the equivalence and all the displayed section and restriction identifications.
+None of these constructions needs a precoverage presentation of the topology. -/
+theorem exists_localizedSheavesOverRepresentable_general
+    {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) [HasWeakSheafify J (Type u)] (U : C) :
+    ∃ (P : Sheaf (J.over U) (Type u) ⥤ Over (yoneda.obj U))
+      (e : ∀ (H : Sheaf (J.over U) (Type u)) (X : C),
+        (P.obj H).left.obj (op X) ≃ Σ a : X ⟶ U, H.obj.obj (op (Over.mk a))),
+      (∀ (H : Sheaf (J.over U) (Type u)) (X : C)
+        (z : (P.obj H).left.obj (op X)),
+        (P.obj H).hom.app (op X) z = (e H X z).1) ∧
+      (∀ (H : Sheaf (J.over U) (Type u)) (X Y : C)
+        (b : Y ⟶ X) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))),
+        e H Y ((P.obj H).left.map b.op ((e H X).symm ⟨a, s⟩)) =
+          ⟨b ≫ a, H.obj.map (Over.homMk b rfl).op s⟩) ∧
+      (∀ (H H' : Sheaf (J.over U) (Type u)) (f : H ⟶ H')
+        (X : C) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))),
+        e H' X ((P.map f).left.app (op X) ((e H X).symm ⟨a, s⟩)) =
+          ⟨a, f.hom.app (op (Over.mk a)) s⟩) ∧
+      ∃ E : Sheaf (J.over U) (Type u) ≌
+          Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U)),
+        Nonempty (E.functor ≅ P ⋙ Over.post (presheafToSheaf J (Type u))) ∧
+        ∃ r : ∀ (F : Over
+            ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (X : Over U),
+            (E.inverse.obj F).obj.obj (op X) ≃
+              {s : F.left.obj.obj (op X.left) |
+                F.hom.hom.app (op X.left) s =
+                  (toSheafify J (yoneda.obj U)).app (op X.left) X.hom},
+          (∀ (F : Over
+              ((presheafToSheaf J (Type u)).obj (yoneda.obj U)))
+            (X Y : Over U) (b : X ⟶ Y) (s : (E.inverse.obj F).obj.obj (op Y)),
+            (r F X ((E.inverse.obj F).obj.map b.op s)).val =
+              F.left.obj.map b.left.op (r F Y s).val) ∧
+          (∀ (F G : Over
+              ((presheafToSheaf J (Type u)).obj (yoneda.obj U)))
+            (f : F ⟶ G) (X : Over U) (s : (E.inverse.obj F).obj.obj (op X)),
+            (r G X ((E.inverse.map f).hom.app (op X) s)).val =
+              f.left.hom.app (op X.left) (r F X s).val) := by
+  classical
+  let K := J
+  let P := sigmaFunctor K U
+  let Efun := extensionFunctor K U
+  let R := fibreFunctor K U
+  have : IsIso (unitTransformation K U) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact unitComparison_isIso K U
+  have : IsIso (counitTransformation K U) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact counitComparison_isIso K U
+  let E : Sheaf (K.over U) (Type u) ≌
+      Over ((presheafToSheaf K (Type u)).obj (yoneda.obj U)) :=
+    Equivalence.mk Efun R (asIso (unitTransformation K U))
+      (asIso (counitTransformation K U))
+  refine ⟨P, fun H X ↦ Equiv.refl _, ?_, ?_, ?_, E, ⟨Iso.refl _⟩,
+    fun F X ↦ Equiv.refl _, ?_, ?_⟩
+  all_goals intros; rfl
+
 end CategoryTheory

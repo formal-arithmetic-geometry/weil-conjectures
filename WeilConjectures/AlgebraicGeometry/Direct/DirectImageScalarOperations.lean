@@ -111,4 +111,20 @@ def directImageConstantPullbackIso (A : Type u) [CommRing A]
         sq.w).trans
           (heq_of_eq (Scheme.proEtaleConstantRingCompositeCoefficients_eq f' g A)).symm))
 
+/-- The ambient ringed exchange specialized to the canonical constant rings.
+Its pullback square is built from the canonical composition comparisons. The two
+composite coefficient identifications are the constant comparison for the same
+scheme map; the proof below supplies that compatibility, rather than assuming it.
+Source: Stacks Tags 07A7, 0D6D and 0E47
+(blueprint: lem-fix-direct-image-scalar-exchange). -/
+def directImageConstantExchange (A : Type u) [CommRing A]
+    {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare h f' f g) :
+    directImageConstantPush A f ⋙ Scheme.proEtaleConstantRingDerivedPullback A g ⟶
+      Scheme.proEtaleConstantRingDerivedPullback A h ⋙ directImageConstantPush A f' :=
+  (mateEquiv
+    (directImageConstantAdjunction A f)
+    (directImageConstantAdjunction A f')
+    (directImageConstantPullbackIso A sq).hom).natTrans
+
 end AlgebraicGeometry.ProEtale

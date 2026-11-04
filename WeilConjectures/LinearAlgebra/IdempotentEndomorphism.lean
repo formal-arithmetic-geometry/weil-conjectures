@@ -172,7 +172,7 @@ theorem Ideal.exists_isIntegral_matrix_model_of_isIdempotentElem {A : Type u} [C
   set x := AdjoinRoot.root f
   set N := n + 1
   have hψx : ψ x = X₀ := by
-    show Ideal.Quotient.liftₐ _ _ _ (Ideal.Quotient.mk _ X) = X₀
+    change Ideal.Quotient.liftₐ _ _ _ (Ideal.Quotient.mk _ X) = X₀
     exact aeval_X X₀
   refine ⟨AdjoinRoot f, inferInstance, inferInstance, inferInstance, ψ, 1 - (1 - x ^ N) ^ N,
     ?_, ?_⟩

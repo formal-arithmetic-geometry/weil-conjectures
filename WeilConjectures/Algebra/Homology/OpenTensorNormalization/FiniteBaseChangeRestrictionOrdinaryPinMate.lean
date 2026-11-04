@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.OpenTensorNormalization.FiniteBaseChangeRestrictionMateTransport
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.OpenTensorNormalization.FiniteBaseChangeRestrictionRightSquare
 
 /-! The sectionwise ordinary mate identity for the finite restriction square.
 (blueprint: lem-sf-finite-base-change-restriction-ordinary-pin-mate)
@@ -49,6 +51,8 @@ theorem finite_base_change_restriction_ordinary_pin_mate
         ((ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w).hom.app N) ≫
       e.open'_pin.star.hom.app ((ProEtale.upperStar (ModuleCat.{u + 1} A) g).obj N) ≫
       (restrict .ordinary j' (finiteInput A gU j' j g sq).S).map
-        (e.pull_pin.ordinary.hom.app N) := by sorry
+        (e.pull_pin.ordinary.hom.app N) := by
+  apply finite_base_change_restriction_mate_transport A gU j' j g sq o e N
+  exact finite_base_change_restriction_right_square A gU j' j g sq o e
 
 end SheafOfModules.OpenTensorNormalization
