@@ -16,6 +16,8 @@ public import Mathlib.Algebra.Field.ULift
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesArtinSchreierKernel
+import WeilConjectures.AlgebraicGeometry.FrobeniusLinearVectorBundleKernelConstructible
 
 /-!
 # Prime coefficients in proper smooth curve families in characteristic `p`
@@ -49,6 +51,8 @@ theorem properSmoothCurves_charP_higherDirectImage_constructible
     Scheme.IsConstructibleSheaf (higherDirectImage (ULift.{u + 1} (ZMod p)) f q
       ((constantSheaf C.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p)))).obj
         (ModuleCat.of (ULift.{u + 1} (ZMod p)) (ULift.{u + 1} (ZMod p))))) := by
-  sorry
+  obtain ⟨E, _, _, F, hF, ⟨e⟩⟩ :=
+    exists_forget₂_higherDirectImage_iso_frobeniusLinear_kernel f h_dim p hp q
+  exact Scheme.isConstructibleSheaf_of_forget₂_iso_frobeniusLinear_kernel p S hp E F hF _ e
 
 end AlgebraicGeometry.Etale

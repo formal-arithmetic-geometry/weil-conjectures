@@ -224,8 +224,7 @@ private theorem dimension_one_prime_homology_constructible
       simpa using this.map (V.ι.stalkMap s).hom
     have hdimV (s : V.toScheme) : topologicalKrullDim (g.fiber s) = 1 :=
       (topologicalKrullDim_fiber_of_isPullback_of_smooth
-        (IsPullback.of_hasPullback f V.ι) s).trans
-        (hdim _)
+        (IsPullback.of_hasPullback f V.ι) s).trans (hdim _)
     have := constant_homology_constructible_of_higherDirectImage g R M (fun n ↦
       (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp
         (properSmoothCurves_prime_higherDirectImage_constructible g hdimV p hunit n)) q
@@ -244,8 +243,7 @@ private theorem dimension_one_prime_homology_constructible
       exact (hz' ⟨⟨i.base z, hz⟩, rfl⟩).elim
     have hdimZ (s : I.subscheme) : topologicalKrullDim (g.fiber s) = 1 :=
       (topologicalKrullDim_fiber_of_isPullback_of_smooth
-        (IsPullback.of_hasPullback f i) s).trans
-        (hdim _)
+        (IsPullback.of_hasPullback f i) s).trans (hdim _)
     have := constant_homology_constructible_of_higherDirectImage g R M (fun n ↦
       properSmoothCurves_charP_higherDirectImage_constructible g hdimZ p hp n) q
     exact Scheme.IsConstructibleSheaf.of_iso
@@ -324,8 +322,7 @@ theorem properSmoothCurves_prime_higherDirectImage_constructible_all_char
         apply isDiscrete_iff_discreteTopology.mpr
         apply discreteTopology_iff_isOpen_singleton.mpr
         rintro ⟨y, hy⟩
-        change g y = x at hy
-        subst x
+        obtain rfl : g y = x := hy
         have hopen : IsOpen ({g.asFiber y} : Set (g.fiber (g y))) := hzero.2.2 y
         rw [← (g.fiberHomeo (g y)).isOpen_image] at hopen
         simpa only [Set.image_singleton, Scheme.Hom.asFiber,
