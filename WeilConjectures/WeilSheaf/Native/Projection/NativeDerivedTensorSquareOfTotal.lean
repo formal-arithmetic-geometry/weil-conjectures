@@ -117,7 +117,11 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         curriedTensor_obj_obj] at hmU ⊢
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hmU ⊢
-      with_reducible_and_instances exact_mod_proofs hmU)
+      dsimp only [Mod.monoidalCategoryCochainComplex, HomologicalComplex.monoidalCategory,
+        Monoidal.induced, HomologicalComplex.monoidalCategoryStruct,
+        HomologicalComplex.tensorObj, Functor.map₂CochainComplex,
+        Functor.map₂HomologicalComplex] at hmU ⊢
+      with_reducible_and_instances cast_proofs hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (by
       have ht := htotal P T
@@ -125,11 +129,11 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         condensedRealizationPullComplexIso] at ht
       dsimp only [complex_square, tr, NativeRestrictionDescentProof.totalFamily,
         WZ, WU, cZ, cU, L, V, F, R, LP, LT, FP, FT]
-      simp only [Iso.symm_inv, Iso.symm_hom, Iso.app_hom,
+      dsimp only [Iso.symm_inv, Iso.symm_hom, Iso.app_hom,
         MonoidalCategory.tensor_map] at ht ⊢
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at ht ⊢
-      exact_mod_proofs ht) mZ rfl
+      with_reducible_and_instances cast_proofs ht) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
     MonoidalCategory.tensor_map, Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hmU'
   simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
@@ -145,7 +149,11 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       asIso_hom] at hh ⊢
     dsimp only [derivedCondensedRealization, Functor.comp_obj, Functor.prod_obj,
       Functor.uncurry_obj_obj, curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hh ⊢
-    with_reducible_and_instances exact_mod_proofs hh
+    dsimp only [Mod.monoidalCategoryCochainComplex, HomologicalComplex.monoidalCategory,
+      Monoidal.induced, HomologicalComplex.monoidalCategoryStruct,
+      HomologicalComplex.tensorObj, Functor.map₂CochainComplex,
+      Functor.map₂HomologicalComplex] at hh ⊢
+    with_reducible_and_instances cast_proofs hh
   have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
