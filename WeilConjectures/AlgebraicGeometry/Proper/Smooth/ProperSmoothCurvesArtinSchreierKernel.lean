@@ -22,6 +22,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesGaHigherDirectImage
+import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesGaHigherDirectImageVanishing
 import WeilConjectures.AlgebraicGeometry.FrobeniusLinearVectorBundleLocallySurjective
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologySequence
@@ -88,23 +89,6 @@ private theorem epi_sheafCompose_uliftFunctor_map {S : Scheme.{u}}
     rintro V g ⟨t, ht⟩
     exact ⟨ULift.up t, congrArg ULift.up ht⟩
   infer_instance
-
--- The bounded below and unbounded models of the higher direct images of an abelian sheaf.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-@[irreducible]
-private noncomputable def abelianHigherDirectImagePlusIso {X S : Scheme.{u}} (f : X ⟶ S)
-    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ) :
-    (DerivedCategory.Plus.homologyFunctor _ q).obj
-      ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj G)) ≅
-    (DerivedCategory.homologyFunctor _ q).obj
-      ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctor.obj
-        ((DerivedCategory.singleFunctor _ 0).obj G)) :=
-  (DerivedCategory.homologyFunctor _ q).mapIso
-    ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlusCompatibility.app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj G))
 
 /-- **The Artin--Schreier sequence for a family of curves.** For a proper smooth family
 `f : C ⟶ S` with geometrically connected one-dimensional fibres over a Noetherian base on
@@ -182,7 +166,7 @@ theorem exists_forget₂_higherDirectImage_iso_frobeniusLinear_kernel
   have : C.smallEtaleTopology.PreservesSheafification
       (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p))) AddCommGrpCat.{u + 1}) :=
     GrothendieckTopology.instPreservesSheafification C.smallEtaleTopology _
-  exact ⟨i₀ ≪≫ abelianHigherDirectImagePlusIso f _ q ≪≫
+  exact ⟨i₀ ≪≫ homologyRightDerivedLowerStarPlusIso f _ q ≪≫
     (H q).mapIso ((constantCommuteCompose C.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p))) AddCommGrpCat.{u + 1})).app
         (ModuleCat.of (ULift.{u + 1} (ZMod p)) (ULift.{u + 1} (ZMod p)))) ≪≫

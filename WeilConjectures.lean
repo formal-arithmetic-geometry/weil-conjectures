@@ -8192,10 +8192,12 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FpqcSections
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexExact
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexFibre
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexHomologyOne
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexLocal
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexOfMatrix
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexSplit
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexSplitDegree
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeMapResidueDetection
@@ -10418,6 +10420,7 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothConnec
 public import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesArtinSchreierKernel
 public import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesFiniteModule
 public import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesGaHigherDirectImage
+public import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesGaHigherDirectImageVanishing
 public import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesPrimeCharP
 public import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesPrimeCoefficients
 public import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothGeometricComponentsLocallyConstant
@@ -16386,6 +16389,7 @@ public import WeilConjectures.LinearAlgebra.KernelBasisOfUnitValue
 public import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
 public import WeilConjectures.LinearAlgebra.Matrix.ComplementaryMinors
 public import WeilConjectures.LinearAlgebra.Matrix.GeneralLinearGroup.LocalLift
+public import WeilConjectures.LinearAlgebra.Matrix.KernelVectorOfMinor
 public import WeilConjectures.LinearAlgebra.Matrix.LeftInverseMinors
 public import WeilConjectures.LinearAlgebra.Matrix.SplitFactorization
 public import WeilConjectures.LinearAlgebra.MatrixRankFieldExtension
