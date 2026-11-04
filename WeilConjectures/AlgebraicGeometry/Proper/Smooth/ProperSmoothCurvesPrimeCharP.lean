@@ -1,0 +1,54 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Algebra.Field.ULift
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+
+/-!
+# Prime coefficients in proper smooth curve families in characteristic `p`
+
+This is case (b) of Stacks Project, Tag 0GKV: the coefficient prime `p` vanishes on the base.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry.Etale
+
+/-- In a proper smooth family of curves with geometrically connected one-dimensional fibres
+over a Noetherian base on which the prime `p` vanishes, the higher direct images of the
+constant sheaf `ℤ/p` are constructible.
+
+Source: Stacks Project, more-etale.tex, Tag 0GKV, lemma-proper-smooth-family-curves, case (b).
+
+Proof: the Artin--Schreier sequence `0 → ℤ/p → 𝔾ₐ → 𝔾ₐ → 0` and the long exact sequence of
+higher direct images identify `Rᵠf_* ℤ/p` with the kernel of `F - 1` on `Rᵠf_* 𝔾ₐ`, since
+`F - 1` is étale locally surjective on `Rᵠ⁻¹f_* 𝔾ₐ`. The latter is the étale sheaf of a finite
+locally free module with a Frobenius-linear endomorphism, and Tag 0GKU applies. -/
+theorem properSmoothCurves_charP_higherDirectImage_constructible
+    {C S : Scheme.{u}} [IsNoetherian S]
+    (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]
+    (h_dim : ∀ s : S, topologicalKrullDim (f.fiber s) = 1)
+    (p : ℕ) [Fact p.Prime] (hp : (p : Γ(S, ⊤)) = 0) (q : ℤ) :
+    Scheme.IsConstructibleSheaf (higherDirectImage (ULift.{u + 1} (ZMod p)) f q
+      ((constantSheaf C.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p)))).obj
+        (ModuleCat.of (ULift.{u + 1} (ZMod p)) (ULift.{u + 1} (ZMod p))))) := by
+  sorry
+
+end AlgebraicGeometry.Etale
