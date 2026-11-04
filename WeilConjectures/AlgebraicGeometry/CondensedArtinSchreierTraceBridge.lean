@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArti
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.ArtinSchreierTraceComparison
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchreierTraceTensorInverse
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
-import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacterMulShift
+import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 
 /-! Comparison data reducing an arbitrary finite-field character to a trace character.
 

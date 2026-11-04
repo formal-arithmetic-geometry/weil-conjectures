@@ -16955,7 +16955,6 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TraceSemilinear
 public import WeilConjectures.Mathlib.NumberTheory.Basic
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter
-public import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacterMulShift
 public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.Mathlib.NumberTheory.Padics.PadicIntegers
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
