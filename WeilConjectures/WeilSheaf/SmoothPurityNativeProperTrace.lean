@@ -39,6 +39,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsProper f]
 
+local instance : (objectProperty k₀ l X).ι.Full := (objectProperty k₀ l X).fullyFaithfulι.full
+local instance : (objectProperty k₀ l Y).ι.Full := (objectProperty k₀ l Y).fullyFaithfulι.full
+
 local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))

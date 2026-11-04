@@ -74,15 +74,15 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
     (K : Dᵇc(X.hom.geometricFiber)⟦Profinite.padicAlgClRingObj l⟧) :
     Function.Bijective fun φ : K.obj ⟶
         (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
-          ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).
-            mapDerivedCategory.obj P.obj) ↦
+          ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).mapDerivedCategory.obj
+            P.obj) ↦
       (lowerStar (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap f.left (Over.w f))).rightDerivedFunctor.map φ ≫
       (Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _
         (lowerStarGeometricFiberMapCompFrobeniusIso (Profinite.padicAlgClRingObj l)
           f.left (Over.w f))).inv.app
-            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).
-              mapDerivedCategory.obj P.obj) ≫
+            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).mapDerivedCategory.obj
+              P.obj) ≫
       (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map
         (geometricFiberWeilDirectTrace (Profinite.padicAlgClRingObj l) hc
           (((boundedConstructibleLowerStar l f).map γ ≫
@@ -104,15 +104,15 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]
     (K : Dᵇc(X.hom.geometricFiber)⟦Profinite.padicAlgClRingObj l⟧) :
     Function.Bijective fun φ : K.obj ⟶
         (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
-          ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).
-            mapDerivedCategory.obj P.obj) ↦
+          ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).mapDerivedCategory.obj
+            P.obj) ↦
       (lowerStar (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap f.left (Over.w f))).rightDerivedFunctor.map φ ≫
       (Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _
         (lowerStarGeometricFiberMapCompFrobeniusIso (Profinite.padicAlgClRingObj l)
           f.left (Over.w f))).inv.app
-            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).
-              mapDerivedCategory.obj P.obj) ≫
+            ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).mapDerivedCategory.obj
+              P.obj) ≫
       (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map
         (geometricFiberWeilDirectTrace (Profinite.padicAlgClRingObj l) hc
           (((boundedConstructibleLowerStar l f).map γ ≫
