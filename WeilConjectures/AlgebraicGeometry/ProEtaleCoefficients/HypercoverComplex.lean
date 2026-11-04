@@ -163,6 +163,8 @@ theorem hypercoverAbelianRows_additive (X : Scheme.{t})
   unfold hypercoverAbelianRows
   infer_instance
 
+attribute [instance] hypercoverAbelianRows_additive
+
 /-- The actual coproduct total of the section bicomplex. Flip puts simplicial degree r
 first; Mathlib's total differential is then `delta + (-1)^r d_K`. Its degree q is
 the sum over r+b=q, r nonnegative, of K^b(W_r). For a strict lower bound a on K,
@@ -187,6 +189,10 @@ noncomputable abbrev hypercoverAbelianEvaluation (X : Scheme.{t})
     ringedSiteModules.{max u v (t + 1)} R ⥤ AddCommGrpCat.{max u v (t + 1)} :=
   SheafOfModules.evaluation R (op U) ⋙ forget₂ _ AddCommGrpCat
 
+variable (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{u})
+  (U : X.ProEt) (W : SimplicialObject (Over U))
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to the vertices, with scalars restricted from the augmentation object.
 Source: Stacks Project, Tag 09A2.
 (blueprint: det-pe-hypercover-complex). -/
@@ -253,6 +259,7 @@ private noncomputable def hypercoverAbelianRowAugmentation
       ((hypercoverAbelianSections X R U W).obj I)).extendXIso
         ComplexShape.embeddingUpNat (i := 0) rfl).inv
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Restriction into the extended section row is natural in the module sheaf.
 Source: Stacks Project, Tag 09A2.
 (blueprint: det-pe-hypercover-complex). -/
@@ -271,6 +278,7 @@ private lemma hypercoverAbelianRowAugmentation_naturality
   exact congrArg (fun z ↦ z ≫ _)
     (hypercoverAbelianRestrictionZero_naturality X R U W f)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The extended section-row differential kills the augmentation.
 Source: Stacks Project, Tag 01GE.
 (blueprint: det-pe-hypercover-complex). -/
@@ -297,6 +305,9 @@ private noncomputable def hypercoverAbelianRowAugmentationComplex
     obtain rfl : k = 1 := by simpa using hk.symm
     exact hypercoverAbelianRowAugmentation_d X R U W I)
 
+set_option maxHeartbeats 800000 in
+-- The total augmentation expands the section, extension and total functors.
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical augmentation of a coefficient complex into total hypercover sections.
 Its degree-n component is restriction into the (0,n) summand.
 Source: Stacks Project, Tag 09A2.
@@ -350,11 +361,6 @@ private noncomputable def hypercoverAbelianAugmentation :
     exact congrArg (fun z ↦ z ≫ D'.ιTotal (.up ℤ) 0 n n (by simp))
       (hypercoverAbelianRowAugmentation_naturality X R U W (f.f n))
 
-attribute [instance] hypercoverAbelianRows_additive
-
-variable (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{u})
-  (U : X.ProEt) (W : SimplicialObject (Over U))
-
 private instance hypercoverAbelianSections_additive :
     (hypercoverAbelianSections.{t, u, v} X R U W).Additive where
   map_add := by intros; rfl
@@ -371,7 +377,9 @@ private instance sectionEvaluation_preservesZero (p : ℕ) :
 
 -- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
 -- `AddCommGrpCat.{max u v (t + 1)}`; Mathlib's concrete-category instance applies instead.
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
+
 private theorem sectionsEvaluation_preservesHomology (R : Sheaf (topology X) RingCat.{u})
     (p : ℕ)
     (hweak : (topology X).IsWeaklyContractible.{max u v (t + 1)} (W _⦋p⦌).left) :
@@ -446,11 +454,9 @@ private theorem sectionBicomplex_zero
   · exact (HomologicalComplex.eval _ _ p).map_isZero
       ((hypercoverAbelianRows X R U W).map_isZero (E.isZero_of_isStrictlyGE N q hq))
 
+set_option maxHeartbeats 800000 in
 -- Comparing section-column maps unfolds the section and extension functor compositions.
--- The comparison expands the evaluation, single-complex and section functors.
--- Transporting the site unfolds pushforward, restriction of scalars and extension functors.
--- The unit comparisons expand the resolution and localization functor compositions.
-
+set_option backward.isDefEq.respectTransparency false in
 /-- Weakly contractible terms suffice for bounded-below quasi-isomorphism invariance;
 no covering or matching-map hypotheses are needed for this comparison.
 Source: Stacks Project, Tags 09A2 and 0946 (1).
@@ -513,6 +519,10 @@ private theorem hypercoverAbelianTotal_map_quasiIso_of_weaklyContractible
     have : IsIso (g.f p) := (hzero E).isIso (hzero F) _
     infer_instance
 
+
+set_option maxHeartbeats 800000 in
+-- The comparison expands the evaluation, single-complex and section functors.
+set_option backward.isDefEq.respectTransparency false in
 /-- Exact descent for individual injective sheaves implies descent for a
 bounded-below complex of injective sheaves.
 Source: Stacks Project, Tags 09A2 and 01GE.
@@ -586,6 +596,7 @@ private theorem hypercoverAbelianAugmentation_quasiIso_of_injective_rows
     · exact ((HomologicalComplex.eval _ (.up ℤ) n).map_isZero
         (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 A p hp)).eq_of_src _ _
 
+
 private theorem all_lower_simplex_eq_of_faces {C : Type*} [Category* C]
     (U : SimplicialObject C) (n : ℕ) (T : C)
     (p : ∀ (Δ : SimplexCategory), Δ.len < n + 1 →
@@ -610,6 +621,7 @@ private theorem all_lower_simplex_eq_of_faces {C : Type*} [Category* C]
   rw [ht]
   exact hc _ _ (by simp) h θ' (SimplexCategory.δ i)
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem properFace_matching_local_lifting
     (hzero : Presieve.singleton (W _⦋0⦌).hom ∈ (precoverage X) U)
     (hmatching : ∀ r : ℕ,
@@ -704,6 +716,9 @@ private theorem singleAbelianAugmentation_quasiIso
       (HomologicalComplex.ExactAt.of_isZero
         (HomologicalComplex.isZero_single_obj_X _ _ _ (n + 1) (by omega)))).mpr (hpos n)
 
+set_option maxHeartbeats 800000 in
+-- Transporting the site unfolds pushforward, restriction of scalars and extension functors.
+set_option backward.isDefEq.respectTransparency false in
 private theorem hypercoverAbelianRowAugmentationComplex_quasiIso_of_injective
     (hzero : Presieve.singleton (W _⦋0⦌).hom ∈ (precoverage X) U)
     (hmatching : ∀ r : ℕ,
@@ -841,28 +856,33 @@ private theorem hypercoverAbelianRowAugmentationComplex_quasiIso_of_injective
 private noncomputable def hypercoverAbelianDerivedUnit
     [HasDerivedCategory.{wA} (ringedSiteModules.{max u v (t + 1)} R)]
     [HasDerivedCategory.{wB} AddCommGrpCat.{max u v (t + 1)}] :
-    (hypercoverAbelianEvaluation X R U).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+    (hypercoverAbelianEvaluation.{t, u, v} X R U).mapHomologicalComplex (.up ℤ) ⋙
+        DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙
-        (hypercoverAbelianEvaluation X R U).rightDerivedFunctorOfQuasiIsoResolutions
+        (hypercoverAbelianEvaluation.{t, u, v} X R U).rightDerivedFunctorOfQuasiIsoResolutions
           (moduleQuasiIsoKInjectiveResolutions X R) where
   app K :=
     (DerivedCategory.quotientCompQhIso _).inv.app _ ≫
-      ((hypercoverAbelianEvaluation X R U).rightDerivedFunctorOfQuasiIsoResolutionsUnit
+      ((hypercoverAbelianEvaluation.{t, u, v} X R U).rightDerivedFunctorOfQuasiIsoResolutionsUnit
         (moduleQuasiIsoKInjectiveResolutions X R)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫
-      ((hypercoverAbelianEvaluation X R U).rightDerivedFunctorOfQuasiIsoResolutions
+      ((hypercoverAbelianEvaluation.{t, u, v} X R U).rightDerivedFunctorOfQuasiIsoResolutions
         (moduleQuasiIsoKInjectiveResolutions X R)).map
           ((DerivedCategory.quotientCompQhIso _).hom.app K)
   naturality K L f := by
-    have h := ((hypercoverAbelianEvaluation X R U).rightDerivedFunctorOfQuasiIsoResolutionsUnit
-      (moduleQuasiIsoKInjectiveResolutions X R)).naturality
-        ((HomotopyCategory.quotient _ (.up ℤ)).map f)
+    have h :=
+      ((hypercoverAbelianEvaluation.{t, u, v} X R U).rightDerivedFunctorOfQuasiIsoResolutionsUnit
+        (moduleQuasiIsoKInjectiveResolutions X R)).naturality
+          ((HomotopyCategory.quotient _ (.up ℤ)).map f)
     simp only [Functor.comp_map, Functor.mapHomotopyCategory_map] at h
     simp only [Functor.comp_map,
       DerivedCategory.quotientCompQhIso_inv_naturality_assoc, Category.assoc]
     rw [reassoc_of% h, ← Functor.map_comp, ← Functor.map_comp,
       DerivedCategory.quotientCompQhIso_hom_naturality]
 
+set_option maxHeartbeats 800000 in
+-- The unit comparisons expand the resolution and localization functor compositions.
+set_option backward.isDefEq.respectTransparency false in
 private theorem hypercoverAbelianNaturalIso_of_injective_rows
     [HasDerivedCategory.{wA} (ringedSiteModules.{max u v (t + 1)} R)]
     [HasDerivedCategory.{wB} AddCommGrpCat.{max u v (t + 1)}]
@@ -872,7 +892,7 @@ private theorem hypercoverAbelianNaturalIso_of_injective_rows
       QuasiIso (hypercoverAbelianRowAugmentationComplex X R U W I)) :
     Nonempty
       (CochainComplex.Plus.ι (ringedSiteModules.{max u v (t + 1)} R) ⋙ DerivedCategory.Q ⋙
-          (hypercoverAbelianEvaluation X R U).rightDerivedFunctorOfQuasiIsoResolutions
+          (hypercoverAbelianEvaluation.{t, u, v} X R U).rightDerivedFunctorOfQuasiIsoResolutions
             (moduleQuasiIsoKInjectiveResolutions X R) ≅
         CochainComplex.Plus.ι (ringedSiteModules.{max u v (t + 1)} R) ⋙
           hypercoverAbelianTotal X R U W ⋙ DerivedCategory.Q) := by
@@ -973,6 +993,7 @@ private theorem hypercoverAbelianNaturalIso_of_injective_rows
   rw [reassoc_of% hνg, hαg]
   rw [← reassoc_of% (he K), hT]
 
+
 /-- Derived sections are naturally the alternating total sections of any weakly
 contractible hypercover. `Plus` means that some integer a is a strict lower bound
 on the terms, so it includes every complex and every bound in the node. The
@@ -1041,7 +1062,7 @@ theorem hypercover_complex_natural_iso (X : Scheme.{t})
             μ ≫ c.π.app (op a) = W.map a.obj.hom.op) :
     Nonempty
       (CochainComplex.Plus.ι (ringedSiteModules.{max u v (t + 1)} R) ⋙ DerivedCategory.Q ⋙
-          (hypercoverAbelianEvaluation X R U).rightDerivedFunctorOfQuasiIsoResolutions
+          (hypercoverAbelianEvaluation.{t, u, v} X R U).rightDerivedFunctorOfQuasiIsoResolutions
             (moduleQuasiIsoKInjectiveResolutions X R) ≅
         CochainComplex.Plus.ι (ringedSiteModules.{max u v (t + 1)} R) ⋙
           hypercoverAbelianTotal X R U W ⋙ DerivedCategory.Q) := by

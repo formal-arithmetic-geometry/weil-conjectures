@@ -1165,18 +1165,12 @@ absolute value at most one in both fields, so the restriction preserves it. -/
 theorem integerInclusion_mem {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (x : Integers l Ω E) :
     IntermediateField.inclusion h (x : E.val) ∈ Integers l Ω L := by
-  have hE := (Padic.extension_integers_dvr l E.val
-    (Padic.coefficientExtensionAbsoluteValue l E.val)
-    (spectralNorm_extends (K := Padic l) (L := E.val))).choose_spec.choose_spec.1 (x : E.val)
-  have hL := (Padic.extension_integers_dvr l L.val
-    (Padic.coefficientExtensionAbsoluteValue l L.val)
-    (spectralNorm_extends (K := Padic l) (L := L.val))).choose_spec.choose_spec.1
-      (IntermediateField.inclusion h (x : E.val))
-  have hx : Padic.coefficientExtensionAbsoluteValue l E.val (x : E.val) ≤ 1 := by
-    apply hE.mp
-    simpa only [Integers, Padic.coefficientExtensionIntegers] using x.property
-  rw [← integerInclusion_absoluteValue l Ω h (x : E.val)] at hx
-  simpa only [Integers, Padic.coefficientExtensionIntegers] using hL.mpr hx
+  have hx : (x : E.val) ∈ Padic.coefficientExtensionIntegers l E.val :=
+    Integers_eq l Ω E ▸ x.property
+  rw [Padic.mem_coefficientExtensionIntegers,
+    ← integerInclusion_absoluteValue l Ω h (x : E.val)] at hx
+  rw [Integers_eq, Padic.mem_coefficientExtensionIntegers]
+  exact hx
 
 /-- The canonical integer-ring restriction of the given intermediate-field inclusion.
 Source: common-stage coefficient formula

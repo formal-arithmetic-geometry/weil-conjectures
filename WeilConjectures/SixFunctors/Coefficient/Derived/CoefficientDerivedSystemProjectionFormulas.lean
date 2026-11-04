@@ -8,8 +8,6 @@ module
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemGammaProjectionTransport
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemHomProjectionTransport
-public import WeilConjectures.CategoryTheory.ClosedScalarHom.ClosedScalarHomComparison
-public import WeilConjectures.SixFunctors.Coefficient.CoefficientHomZeroClass
 
 /-! # Actual finite projections of coefficient gamma
 
@@ -30,102 +28,54 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The finite projection of the canonical enriched scalar comparison is the transpose
-of the projected evaluation. Its action on derived morphisms is scalar extension
-followed by the specified counit.
-
-Source: blueprint `det-prop-scalar-six-tensor-hom`, proof (1) and the paragraph
-"It is v": the comparisons retain the evaluation pairings, units and counits;
-Stacks 07A6 and 08J9.
+/-- Gamma has the actual finite mapping-limit projections and the specified H-zero action.
+This is an identity for any calculus with the two recorded projection-model equations,
+rather than a new choice
+of a mapping equivalence or a construction of the calculus itself.
+Source: Stacks 07A6, 08JA, 0D6E, 0941; the proved
+SheafOfModules.EnrichedSequenceProjection.enrichedSequenceProjectionFormula;
+node lem-coef-derived-system-evaluation-calculus, step 5, final projection calculation
 (blueprint: lem-coef-derived-system-projection-formulas).
 
-Proof: apply the five defining Hom bijections to the map obtained by internal Hom of
-q followed by the inverse canonical comparison. Postcomposition by the comparison
-cancels its inverse. Undo the closed transpose and scalar transpose, then the tensor
-comparison and the target closed transpose. This gives scalar extension of the
-uncurried evaluation, followed by scalar extension of q and the scalar counit.
-For an ordinary derived morphism h, the inverse scalar adjunction is F(h;q) followed
-by the counit; functoriality gives the displayed formula. This is the degree-zero
-formula under the recorded identification of H-zero global Hom with derived morphisms.
-The argument allows zero objects, an empty site, identity coefficient changes, and
-nonflat quotient changes; no preservation of K-injectives by evaluation is asserted. -/
-theorem coefficientDerivedSystemProjectionFormulas (P L : A) (N : B) (q : L ⟶ U.obj N) :
-    (∀ (X : A) (g : X ⟶ H.obj (op P, L)),
-      (adj.homEquiv X (I.obj (op (F.obj P), N))).symm
-          (g ≫ H.map (Prod.mkHom (𝟙 (op P)) q) ≫
-            (ClosedScalarHom.iso S T adj μ).inv.app (op P, N)) =
-        T.transpose (F.obj X) (F.obj P) N
-          ((μ.app (X, P)).inv ≫
-            F.map ((S.transpose X P L).symm g) ≫ F.map q ≫ adj.counit.app N)) ∧
-    (∀ h : P ⟶ L, (adj.homEquiv P N).symm (h ≫ q) =
-      F.map h ≫ F.map q ≫ adj.counit.app N) := by
-  constructor
-  · intro X g
-    let z := g ≫ H.map (Prod.mkHom (𝟙 (op P)) q)
-    let t := z ≫ (ClosedScalarHom.iso S T adj μ).inv.app (op P, N)
-    have ht : ClosedScalarHom.bijection S T adj μ X P N t = z := by
-      rw [ClosedScalarHom.representing]
-      dsimp only [t]
-      rw [Category.assoc, Iso.inv_hom_id_app]
-      exact Category.comp_id z
-    have hz : (S.transpose X P (U.obj N)).symm z =
-        (S.transpose X P L).symm g ≫ q := by
-      simpa [z, CoefficientClosedStructure.transpose, CoefficientClosedStructure.tensor,
-        Prod.sectR] using (S.adjunction P).homEquiv_naturality_right_symm g q
-    dsimp only [ClosedScalarHom.bijection, Equiv.trans_apply, Iso.homCongr,
-      Equiv.coe_fn_mk, Iso.symm_inv, Iso.refl_hom] at ht
-    simp only [Category.comp_id] at ht
-    have ht' := (S.transpose X P (U.obj N)).eq_symm_apply.mpr ht
-    rw [hz] at ht'
-    have ht'' := (adj.homEquiv (S.tensor.obj (X, P)) N).eq_symm_apply.mpr ht'
-    conv_rhs at ht'' => rw [adj.homEquiv_counit, F.map_comp]
-    apply (T.transpose (F.obj X) (F.obj P) N).symm.injective
-    rw [Equiv.symm_apply_apply]
-    apply (cancel_epi (μ.app (X, P)).hom).mp
-    simpa only [t, z, Category.assoc, Iso.hom_inv_id_assoc] using ht''
-  · intro h
-    rw [adj.homEquiv_counit, F.map_comp, Category.assoc]
-
-/-- The actual zero-cycle normalization gives the same finite scalar adjunct.
-Source: Stacks 08JA, 079P, and the scalar unit/counit calculation in the current
-blueprint `det-prop-scalar-six-tensor-hom`.
-(blueprint: lem-coef-derived-system-projection-formulas).
-
-Proof: naturality of the uniquely normalized Hom-zero equivalence sends internal
-Hom of q to postcomposition by q. Its inverse sends h to the recorded zero class.
-The inverse scalar adjunction is extension followed by the specified counit;
-functoriality gives the claimed composition. No arbitrary Hom equivalence is used. -/
-theorem coefficientDerivedSystemProjectionFormulas_homZero
-    {C : Type c} [Category.{d} C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{max c d r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c d r}]
-    (R : Sheaf J CommRingCat.{max c d r})
-    [HasDerivedCategory.{z} (SheafOfModules.{max c d r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c d r} RingCat.{max c d r})).obj R))]
-    {B : Type b} [Category.{w} B]
-    {F : DerivedCategory (SheafOfModules.{max c d r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c d r} RingCat.{max c d r})).obj R)) ⥤ B}
-    {U : B ⥤ DerivedCategory (SheafOfModules.{max c d r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c d r} RingCat.{max c d r})).obj R))}
-    (adj : F ⊣ U)
-    (P L : DerivedCategory (SheafOfModules.{max c d r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c d r} RingCat.{max c d r})).obj R)))
-    (N : B) (q : L ⟶ U.obj N) (h : P ⟶ L) :
-    (adj.homEquiv P N).symm
-      (coefficientHomZeroEquiv.{r, c, d, z} J R P (U.obj N)
-        (((@DerivedCategory.homologyFunctor AddCommGrpCat.{max c d r} _ _
-          (HasDerivedCategory.standard _) 0).map
-            ((coefficientGlobalSections.{r, c, d} J R).map
-              ((derivedInternalHomOfUniverses.{c, d, r, z} J R).map
-                (Prod.mkHom (𝟙 (op P)) q))))
-          ((coefficientHomZeroEquiv.{r, c, d, z} J R P L).symm h))) =
-      F.map h ≫ F.map q ≫ adj.counit.app N := by
-  have he := (coefficientHomZeroEquiv_exists.{r, c, d, z} J R).choose_spec.1.1
-  have hq := he P L P (U.obj N) (𝟙 P) q
-    ((coefficientHomZeroEquiv.{r, c, d, z} J R P L).symm h)
-  change coefficientHomZeroEquiv.{r, c, d, z} J R P (U.obj N) _ = _ at hq
-  simp only [coefficientHomZeroEquiv, AddEquiv.apply_symm_apply, Category.id_comp] at hq
-  simpa only [coefficientHomZeroEquiv, op_id, adj.homEquiv_counit,
-    F.map_comp, Category.assoc] using congrArg (adj.homEquiv P N).symm hq
+Proof:
+1. Use the actual quotient ring sequence, completed coefficient sheaf and the strict
+   system equivalence. Transport the calculus's reduction adjunction, finite evaluations,
+   tensors, internal-Hom fibers and sections comparisons to the generic sequence-site
+   notation of EnrichedSequenceProjection. The pure-tensor model normalizations identify
+   the transported finite tensor comparisons with its normalized scalar comparisons.
+   S.unit_projection is its unit condition and S.reductionTensor_evaluation is its
+   tensor condition. S.reduction_normalized supplies the first normalized input.
+2. Apply enrichedSequenceProjectionFormula. Its finite uncurrying equality says that
+   the enriched adjunct followed by the nth total-limit projection and the Hom-fiber
+   identification is the scalar adjunct of reduced evaluation followed by the evaluated
+   counit. The scalar and closed Hom bijections are injective. Consequently that map
+   equals the finite scalar enriched map after Hom of coefficientSequenceProjection,
+   with the S.reductionEvaluation transport in its first input.
+3. Transport the theorem's right-derived sections and limit pairs to the specified
+   coefficient functors. Their universal comparison units determine the transports.
+   D.globalLimit_model identifies the transported global comparison with S.globalLimit;
+   D.globalEvaluation_model identifies the finite map with S.globalEvaluation, and
+   D.scalarSections_model identifies the scalar sections map. Thus the generic global
+   projection formula is CoefficientGammaProjection for the actual S.gamma.
+   H.sections_projection fixes the system-sections projection used in this transport;
+   arbitrary evaluation isomorphisms without this equation would not suffice.
+4. Apply H-zero to this equality. The coefficientHomZeroEquiv normalizations identify
+   Hom of the total-limit projection with postcomposition by that projection. The
+   normalized scalar adjunction takes h to its scalar extension followed by the
+   finite counit. This is also the last clause of enrichedSequenceProjectionFormula;
+   the ordinary and derived section normalizations in D fix its H-zero transports.
+   Rewrite the finite counit by S.counit_projection and naturality of
+   S.reductionEvaluation. This yields exactly CoefficientHomProjection for the composite
+   coefficientGammaZeroMap; no unrelated Hom equivalence is substituted.
+The argument applies to the empty scheme, the zero object and every positive coefficient
+level. It never asserts that evaluation preserves K-injective systems, or that reducing
+an integral mapping complex computes finite internal Hom. -/
+theorem coefficientDerivedSystemProjectionFormulas
+    (S : CoefficientDerivedSystemCalculus l E W)
+    (D : CoefficientDerivedSystemResolutionCoherence l E W S)
+    (H : CoefficientDerivedSystemProjectionModels l E W S D) :
+    CoefficientGammaProjection l E W S D ∧ CoefficientHomProjection l E W S := by
+  exact ⟨coefficientDerivedSystemGammaProjectionTransport l E W S D H,
+    coefficientDerivedSystemHomProjectionTransport l E W S D H⟩
 
 end WeilConjectures
