@@ -77,8 +77,10 @@ lemma upperStarLowerStarAdjunction_unit_app_hom
     ((upperStarLowerStarAdjunction Λ f).unit.app M).hom =
       (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app M.X ≫
         (ProEtale.lowerStar Ab.{u + 1} f).map (upperStarUnitHom Λ f M) := by
-  simpa only [Adjunction.homEquiv_unit, Functor.map_id, Mod.id_hom', Category.comp_id]
-    using upperStarLowerStarAdjunction_homEquiv_hom Λ f M _ (𝟙 _)
+  have h := upperStarLowerStarAdjunction_homEquiv_hom Λ f M _ (𝟙 _)
+  rw [Adjunction.homEquiv_id] at h
+  erw [Mod.id_hom', Category.comp_id] at h
+  exact h
 
 /-- The adjoint of the condensed pullback tensor comparison on pure tensors. -/
 @[reassoc]
