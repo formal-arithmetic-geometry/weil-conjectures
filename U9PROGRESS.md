@@ -275,3 +275,12 @@ the htotal proof argument. Same mathematical proof, no budget increase.
 helper (4.9s): omitted `open scoped CategoryTheory.Obj`, so condensedRingObj
 was not coerced to the module monoid object. Restored the same scope as the
 source core; retrying the batch.
+
+2026-11-05 07:02 CST: K5-20261105T065237.log rc=1 in t2 after rebuilding
+prerequisites. NativeTensorTotalInstances GREEN (11s), final compatibility GREEN
+again. Total core now passes its summand/tensor-map rewrite (1.6s) and runs out
+of cumulative 200k budget next; whole proof elaboration 12s. Derived Q now
+accepts ALL 26 final_total_diagram arguments (11s), then times out destructuring
+its result; whole proof 16s. After reading the performance guide and eliminating
+the specific instance/unification failures, raise ONLY these two lemma budgets
+to 400000, with comments recording these measurements. Normal kernel checking.

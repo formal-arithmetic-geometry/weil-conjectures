@@ -55,6 +55,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
 
+-- At 200000 heartbeats all 26 model-diagram arguments elaborate (11s), but
+-- destructuring the result exhausts the cumulative budget before the final calculation.
+set_option maxHeartbeats 400000 in
 include htotal in
 /-- On K-flat representatives, the native tensor square is the localization of the
 square of total complexes. -/

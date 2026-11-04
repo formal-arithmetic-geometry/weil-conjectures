@@ -82,6 +82,9 @@ variable
     (nativeOpenSheafTensor k₀ l Z) mu (condensedRealizationSheafTensorIso k₀ l Y)
     (condensedRealizationSheafTensorIso k₀ l Z) a M N)
 
+-- Profiling at 200000 heartbeats reaches the summand tensor-map rewrite (12s);
+-- the remaining component calculation needs a larger cumulative elaboration budget.
+set_option maxHeartbeats 400000 in
 include hmu hsheaf in
 /-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
 lemma projection_totalTensorSquare_of_sheaf
