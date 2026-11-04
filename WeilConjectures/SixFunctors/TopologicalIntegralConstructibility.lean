@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Integral.IntegralModelsGenerators
+import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLisseExtensionConstructible
+import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLisseRestriction
+import all WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
 
 /-! Constructibility of a single integral locally closed extension in the topological
 Noetherian setting. Source: Bhatt--Scholze, Lemma 6.8.13, and step 1 of the plan of
@@ -19,6 +22,38 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry AlgebraicGeometry.ProEtale
 namespace WeilConjectures.SixFunctors
+
+/-- Extension by zero along an open immersion followed by a closed immersion of a locally
+free module over an arbitrary commutative condensed ring is constant-model constructible
+on a topologically Noetherian scheme. -/
+theorem isConstantModelConstructible_openClosedExtension
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    {T Z : Scheme.{u}} (j : T ⟶ Z) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
+    (L₀ : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (hL₀ : CondensedRing.LocallyFree (condensedRingObj Λ T) L₀) :
+    IsConstantModelConstructible Λ X (integralLowerShriek X Λ j i L₀) := by
+  have : TopologicalSpace.NoetherianSpace Z := i.isEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace T := j.isEmbedding.isInducing.noetherianSpace
+  have hs := stratified_openExtension Λ j L₀
+    (stratified_of_finiteModel Λ T L₀ (lisse_finiteModel Λ T L₀ (lisse_of_raw_free Λ T L₀ hL₀)))
+  let U := Scheme.openComplementOfIsClosedImmersion i
+  have : TopologicalSpace.NoetherianSpace U.toScheme := U.ι.isEmbedding.isInducing.noetherianSpace
+  have hij : Set.range U.ι = (Set.range i)ᶜ := by
+    simp [U, Scheme.openComplementOfIsClosedImmersion]
+  have hji : Set.range i = (Set.range U.ι)ᶜ := by rw [hij, compl_compl]
+  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, ⟨e⟩, _⟩ :=
+    CondensedRing.condensed_open_closed_recollement Λ i U.ι hij
+  have hc : CompactSpace X := inferInstance
+  have hq : QuasiSeparatedSpace X := inferInstance
+  rw [IsConstantModelConstructible, if_pos (And.intro hc hq)]
+  apply stratified_of_restrictions Λ U.ι i hji
+  · exact finiteConstantStratified_of_isZero Λ _ _
+      (CondensedRing.openRestrictionPushforwardZero Λ i U.ι hij _)
+  · obtain ⟨R, hR⟩ := hs
+    refine ⟨R, fun a ↦ ?_⟩
+    exact finiteModel_iso Λ _
+      ((CondensedRing.upperStar Λ (R.immersion a)).mapIso (e.app _).symm) (hR a)
 
 /-- The integral extension by zero `i_* j_! L₀` of a locally finite free `O_E`-module is
 constant-model constructible on a topologically Noetherian scheme.
@@ -47,6 +82,6 @@ theorem topological_integral_extension_constructible
     (hL₀ : CondensedRing.LocallyFree (integralCoefficientObject T ℓ E) L₀) :
     IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.1) X
       (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) j i L₀) := by
-  sorry
+  exact isConstantModelConstructible_openClosedExtension _ X j i L₀ hL₀
 
 end WeilConjectures.SixFunctors
