@@ -58,6 +58,8 @@ end AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme
 
 /-- Restriction to an open étale chart transports F, its scalar law, and its kernel.
+The transported endomorphism `F'` is the conjugate of the restriction of `F` by an
+isomorphism `Φ` between the restricted étale sheaf of `E` and the étale sheaf of `G`.
 
 Source: Stacks Project, Tags 03DR (35.8.0.1), 03DT, and 0GKU, the passage to a
 trivializing open in the proof of lemma-frobenius-linear-on-vb.
@@ -87,7 +89,10 @@ theorem frobenius_linear_kernel_etale_pullback
           (F.hom.app (op U) e))
     (V : S.Etale) [IsOpenImmersion V.hom] (G : V.left.Modules) [G.IsQuasicoherent]
     (α : (Modules.tensorPullback V.hom).obj E ≅ G) :
-    ∃ F' : Modules.etaleTensorSectionsSheaf G ⟶ Modules.etaleTensorSectionsSheaf G,
+    ∃ (Φ : (etaleOpenSmallRestriction V.hom).obj (Modules.etaleTensorSectionsSheaf E) ≅
+        Modules.etaleTensorSectionsSheaf G)
+      (F' : Modules.etaleTensorSectionsSheaf G ⟶ Modules.etaleTensorSectionsSheaf G),
+      F' = Φ.inv ≫ (etaleOpenSmallRestriction V.hom).map F ≫ Φ.hom ∧
       (∀ (W : V.left.Etale) (a : Γ(W.left, ⊤))
         (m : Γ((Modules.tensorPullback W.hom).obj G, ⊤)),
         F'.hom.app (op W) ((((Modules.tensorPullback W.hom).obj G).smul a).hom m) =
@@ -121,7 +126,7 @@ theorem frobenius_linear_kernel_etale_pullback
       ((Modules.tensorSectionsComp W.hom V.hom).inv.app E) a x)).trans
       (Modules.Hom.app_smul ((Modules.tensorPullback W.hom).map β.hom) a _))).trans
       (Modules.Hom.app_smul ((Modules.tensorPullback W.hom).map (β.inv ≫ α.hom)) a _)
-  refine ⟨Φ.inv ≫ R.map F ≫ Φ.hom, fun W a m ↦ ?_, ⟨?_⟩⟩
+  refine ⟨Φ, Φ.inv ≫ R.map F ≫ Φ.hom, rfl, fun W a m ↦ ?_, ⟨?_⟩⟩
   · let Ψ := ((sheafToPresheaf _ _).mapIso Φ).app (op W)
     obtain ⟨x, rfl⟩ : ∃ x, Φ.hom.hom.app (op W) x = m := ⟨Ψ.inv m, Ψ.inv_hom_id_apply m⟩
     have hF' (y) : (Φ.inv ≫ R.map F ≫ Φ.hom).hom.app (op W) (Φ.hom.hom.app (op W) y) =

@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchrei
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierProjectorFacts
 import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarFromPointAdditive
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 
 /-! # Tensor inverse and inverse character of condensed Artin–Schreier sheaves
 
@@ -168,28 +168,19 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 private abbrev modules (X : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 
-private def scalars (X : Scheme.{u}) : MonObj.Γ Λ →+* MonObj.Γ (condensedRingObj Λ X) :=
-  MonObj.Γ.mapFunctor (upperStarFromPoint X)
+private abbrev scalars (X : Scheme.{u}) : MonObj.Γ Λ →+* MonObj.Γ (condensedRingObj Λ X) :=
+  ProEtale.CondensedRing.constRingHom Λ (RingHom.id _) X
 
 /-- The `ΓΛ`-linear structure on modules induced by the constant global sections. -/
-@[instance_reducible] private def linearModules (X : Scheme.{u}) :
-    Linear (MonObj.Γ Λ) (modules Λ X) := Mod.linearOfRingHom (scalars Λ X)
+private abbrev linearModules (X : Scheme.{u}) : Linear (MonObj.Γ Λ) (modules Λ X) :=
+  ProEtale.CondensedRing.modLinear Λ (RingHom.id _) X
 
 attribute [local instance] linearModules
 
 /-- Module pushforward is `ΓΛ`-linear. -/
 private theorem linearLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (CondensedRing.lowerStar Λ f).Linear (MonObj.Γ Λ) := by
-  unfold CondensedRing.lowerStar
-  apply Mod.linear_mapMod_comp_comap
-    (ProEtale.lowerStar Ab.{u + 1} f) (condensedPushforwardHom _ f)
-    (scalars Λ X) (scalars Λ Y)
-  intro a
-  simp only [scalars, MonObj.Γ.mapFunctor_hom,
-    condensedPushforwardHom, Adjunction.unitAlgHom, Category.assoc]
-  exact Adjunction.ε_comp_map_comp_unit_app_comp_map
-    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f)
-    (upperStarFromPoint Y) (upperStarFromPoint X) (upperStarFromPointComp f).hom a.hom
+    (CondensedRing.lowerStar Λ f).Linear (MonObj.Γ Λ) :=
+  ProEtale.CondensedRing.linear_lowerStar Λ (RingHom.id _) f
 
 attribute [local instance] linearLowerStar
 

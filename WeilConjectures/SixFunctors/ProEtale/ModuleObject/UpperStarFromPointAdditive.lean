@@ -20,11 +20,13 @@ universe u
 
 open CategoryTheory Limits
 
-namespace AlgebraicGeometry.ProEtale
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
 
 /-- The inverse image `p_X^*` from condensed abelian groups to abelian sheaves on `X_proét` is
 additive, being a left adjoint. -/
-instance instAdditiveUpperStarFromPoint (X : Scheme.{u}) : (upperStarFromPoint X).Additive := by
+instance upperStarFromPoint_additive (X : Scheme.{u}) : (upperStarFromPoint X).Additive := by
   have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
   have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
@@ -34,4 +36,4 @@ instance instAdditiveUpperStarFromPoint (X : Scheme.{u}) : (upperStarFromPoint X
   have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
   exact Functor.additive_of_preservesBinaryBiproducts _
 
-end AlgebraicGeometry.ProEtale
+end AlgebraicGeometry.ProEtale.CondensedRing

@@ -55,6 +55,15 @@ variable
 /-- If the images of `e₁, e₂, e₃` are trivialized after applying `F`, and the multiplication
 map from `image e₁ ⊗ image e₂` to `G (regular S)` is fixed by `e₃`, then its corestriction to
 `image e₃` is an isomorphism.
+```
+                       m := (ι ⊗ ι) ≫ μ ≫ G.map mul
+image e₁ ⊗ image e₂ ─────────────────────────────────▶ G (regular S) ⟲ e₃
+          ╲                                                   ▲
+           ╲ m ≫ factorThruImage e₃  (≅)                      │ image.ι e₃
+            ╲──────────────────────▶ image e₃ ────────────────╯
+```
+The hypothesis `h` is `m ≫ e₃ = m`, so `m` factors through `image e₃`; the theorem says that
+the factor is an isomorphism.
 Source: blueprint lem-kernel-condensed-projector-descent. -/
 theorem image_tensor_regular_isIso (e₁ e₂ e₃ : End (G.obj (Mod.regular S)))
     [IsIso (F.map (image.ι e₁) ≫ adj.counit.app (Mod.regular S))]
@@ -81,6 +90,14 @@ theorem image_tensor_regular_isIso (e₁ e₂ e₃ : End (G.obj (Mod.regular S))
 
 /-- If the image of `e` is trivialized after applying `F` and the unit of `G` is fixed by `e`,
 then the unit of `G` corestricts to an isomorphism from the monoidal unit onto `image e`.
+```
+𝟙_C ──ε──▶ G (regular S)
+  ╲              │ e
+   ╲ ≅           ▼
+    ╲─────▶ image e ──ι──▶ G (regular S)
+```
+The composite `ε ≫ e` equals `ε` by `h`, so `ε` factors through `image e`, and the factor
+`ε ≫ factorThruImage e` is an isomorphism.
 Source: blueprint lem-kernel-condensed-projector-descent. -/
 theorem unit_image_regular_isIso (e : End (G.obj (Mod.regular S)))
     [IsIso (F.map (image.ι e) ≫ adj.counit.app (Mod.regular S))]

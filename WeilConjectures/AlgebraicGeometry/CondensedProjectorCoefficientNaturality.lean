@@ -17,7 +17,6 @@ Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj

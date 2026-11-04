@@ -7,6 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.NumberTheory.LegendreSymbol.AddCharacter
+public import WeilConjectures.Mathlib.Algebra.Group.AddChar
 public import Mathlib.RingTheory.Trace.Basic
 public import Mathlib.LinearAlgebra.Dimension.Constructions
 public import Mathlib.LinearAlgebra.Dimension.Finite
@@ -141,26 +142,6 @@ theorem exists_ne_one_of_isAlgClosed (F K : Type*) [Field F] [Finite F] [Field K
 
 
 section Dedekind
-
-variable {G : Type*} [AddMonoid G]
-
-/-- **Dedekind's lemma for additive characters**: distinct additive characters with values in a
-field are linearly independent. -/
-theorem linearIndependent_coe : LinearIndependent K ((⇑) : AddChar G K → G → K) :=
-  (linearIndependent_monoidHom (Multiplicative G) K).comp
-    (fun φ : AddChar G K ↦ toMonoidHomEquiv φ) toMonoidHomEquiv.injective
-
-/-- A finite group has finitely many additive characters with values in a field. -/
-instance instFinite [Finite G] : Finite (AddChar G K) :=
-  have := Fintype.ofFinite G
-  linearIndependent_coe.finite
-
-/-- A finite group has at most as many additive characters with values in a field as elements. -/
-theorem natCard_le [Finite G] : Nat.card (AddChar G K) ≤ Nat.card G := by
-  have := Fintype.ofFinite G
-  have := Fintype.ofFinite (AddChar G K)
-  simpa only [Module.finrank_fintype_fun_eq_card, Nat.card_eq_fintype_card] using
-    (linearIndependent_coe (G := G) (K := K)).fintype_card_le_finrank
 
 /-- Every additive character of a finite field `F` with values in a field is a multiplicative
 shift `x ↦ ψ (a x)` of a given primitive character `ψ`. -/

@@ -122,7 +122,7 @@ theorem isConstructibleSheaf_of_forget₂_iso_frobeniusLinear_kernel
   have : IsAffine (B x) := hB x
   let V : S.Etale := Scheme.Etale.mk (B x).ι
   have : IsOpenImmersion V.hom := inferInstanceAs (IsOpenImmersion (B x).ι)
-  obtain ⟨F', hF', ⟨β⟩⟩ := frobenius_linear_kernel_etale_pullback p S E F hF V _
+  obtain ⟨-, F', -, hF', ⟨β⟩⟩ := frobenius_linear_kernel_etale_pullback p S E F hF V _
     (α x).some
   have : Nontrivial Γ(B x, ⊤) :=
     ((B x).toScheme.presheaf.germ ⊤ ⟨x, hxB x⟩ trivial).hom.domain_nontrivial
