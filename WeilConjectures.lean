@@ -14158,6 +14158,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCo
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCompletion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralIdempotentComplete
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.PowIntersection
