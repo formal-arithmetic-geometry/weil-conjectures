@@ -20739,6 +20739,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChangeMapComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChangeUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
