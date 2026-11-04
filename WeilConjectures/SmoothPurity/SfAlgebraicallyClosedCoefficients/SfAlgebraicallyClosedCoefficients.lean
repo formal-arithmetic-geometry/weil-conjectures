@@ -194,7 +194,7 @@ private theorem pairShift_transIso
   subst s
   have hci : c = (fun i ↦ StageSystem.ι_commShift (S := S) (A := ℤ) i) := by
     funext i
-    apply pair_integer_commShift_ext
+    apply integer_commShift_ext
     intro n
     apply Iso.ext
     apply NatTrans.ext
@@ -462,20 +462,6 @@ private theorem compIso_commShift_cast
   obtain rfl := eq_of_heq ha
   exact hc
 
-private theorem pair_associator_pentagon
-    (E L M N : Padic.FiniteCoefficientFields l Ω)
-    (h : E ≤ L) (k : L ≤ M) (m : M ≤ N) :
-    Functor.whiskerRight (associator D l hl Ω Y E L M h k).hom (transition D l hl Ω Y M N m) ≫
-        (associator D l hl Ω Y E M N (h.trans k) m).hom =
-      (Functor.associator (transition D l hl Ω Y E L h) (transition D l hl Ω Y L M k)
-        (transition D l hl Ω Y M N m)).hom ≫
-      Functor.whiskerLeft (transition D l hl Ω Y E L h) (associator D l hl Ω Y L M N k m).hom ≫
-        (associator D l hl Ω Y E L N h (k.trans m)).hom := by
-  ext K
-  simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Category.id_comp] using
-    associator_cocycle D l hl Ω Y E L M N h k m K
-
 variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
@@ -493,32 +479,10 @@ private theorem associator_pentagon
         (transition D l hl Ω Y M N m)).hom ≫
       Functor.whiskerLeft (transition D l hl Ω Y E L h) (associator D l hl Ω Y L M N k m).hom ≫
         (associator D l hl Ω Y E L N h (k.trans m)).hom := by
-  have hp := correctedAssociator_pentagon_nat D.p l hl
-      (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
-      (Coefficient.{u} l Ω M) (Coefficient.{u} l Ω N) Y
-      (coefficientInclusion l Ω E L h) (coefficientInclusion l Ω L M k)
-      (coefficientInclusion l Ω M N m) (coefficientInclusion l Ω E M (h.trans k))
-      (coefficientInclusion l Ω L N (k.trans m))
-      (coefficientInclusion l Ω E N ((h.trans k).trans m))
-      ((coefficientInclusion_laws l Ω).2 E L M h k)
-      ((coefficientInclusion_laws l Ω).2 L M N k m)
-      ((coefficientInclusion_laws l Ω).2 E M N (h.trans k) m)
-      ((coefficientInclusion_laws l Ω).2 E L N h (k.trans m))
-  unfold associator transition Stage stageCategory
-  unfold correctedAssociator at hp
-  exact hp
-
-private theorem pair_integer_commShift_ext
-    {C : Type*} [Category* C] [HasShift C ℤ]
-    {D : Type*} [Category* D] [HasShift D ℤ] {F : C ⥤ D}
-    (s t : F.CommShift ℤ)
-    (h : ∀ n : ℤ, Functor.commShiftIso F (self := s) n =
-      Functor.commShiftIso F (self := t) n) : s = t := by
-  cases s
-  cases t
-  congr
-  funext n
-  exact h n
+  ext K
+  simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp] using
+    associator_cocycle D l hl Ω Y E L M N h k m K
 
 /-- The tensor transitions and associators uniquely determine the stage system.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
@@ -538,7 +502,7 @@ theorem stageSystem_existsUnique
   exact stage_spec_existsUnique
     (fun {E L} h ↦ transition D l hl Ω Y E L h)
     (fun {E L M} h k ↦ associator D l hl Ω Y E L M h k)
-    (fun {E L M N} h k m ↦ pair_associator_pentagon D l hl Ω Y E L M N h k m)
+    (fun {E L M N} h k m ↦ associator_pentagon D l hl Ω Y E L M N h k m)
 
 end
 
