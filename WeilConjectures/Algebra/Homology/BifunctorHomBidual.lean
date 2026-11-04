@@ -216,6 +216,24 @@ lemma bifunctorHomObjMapIso_inv_f_map_π (n p q : ℤ) (h : p + n = q) :
   rw [Iso.eq_comp_inv, assoc, ← bifunctorHomObjMapIso_hom_f_π,
     ← HomologicalComplex.comp_f_assoc, Iso.inv_hom_id, HomologicalComplex.id_f, id_comp]
 
+variable {K} in
+/-- The identification `U (bifunctorHomObj H K Y) ≅ bifunctorHomObj H' (U K) (U Y)` is natural
+in `K`. -/
+@[reassoc]
+lemma map_bifunctorHomMapLeft_comp_bifunctorHomObjMapIso_hom {K' : CochainComplex C ℤ}
+    (f : K' ⟶ K) :
+    (U.mapHomologicalComplex _).map (bifunctorHomMapLeft (H := H) (Y := Y) f) ≫
+        (bifunctorHomObjMapIso K' Y φ).hom =
+      (bifunctorHomObjMapIso K Y φ).hom ≫
+        bifunctorHomMapLeft (H := H') (Y := (U.mapHomologicalComplex _).obj Y)
+          ((U.mapHomologicalComplex _).map f) := by
+  ext n p q h
+  rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, assoc, assoc,
+    bifunctorHomObjMapIso_hom_f_π, bifunctorHomMapLeft_f_π, bifunctorHomObjMapIso_hom_f_π_assoc,
+    Functor.mapHomologicalComplex_map_f, ← U.map_comp_assoc, bifunctorHomMapLeft_f_π,
+    U.map_comp_assoc, φ.naturality_left]
+  rfl
+
 /-- An evaluation for `H'` is compatible with an evaluation for `H` through `φ`. -/
 def BifunctorEvaluation.MapCompatible (E' : BifunctorEvaluation H') : Prop :=
   ∀ a b : C, U.map (E.ev a b) ≫ (φ.iso _ b).hom ≫ (H'.map (φ.iso a b).inv.op).app (U.obj b) =

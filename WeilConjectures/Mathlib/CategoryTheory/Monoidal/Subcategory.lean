@@ -111,7 +111,6 @@ precomposition: `[-, -]` restricts to `P` as a bifunctor. -/
 lemma pre_app_hom {X Y : P.FullSubcategory} (f : X ⟶ Y) (Z : P.FullSubcategory) :
     ((MonoidalClosed.pre f).app Z).hom = (MonoidalClosed.pre f.hom).app Z.obj := by
   apply MonoidalClosed.uncurry_injective
-
   exact (congrArg InducedCategory.Hom.hom (MonoidalClosed.uncurry_pre f Z)).trans
     (MonoidalClosed.uncurry_pre f.hom Z.obj).symm
 
