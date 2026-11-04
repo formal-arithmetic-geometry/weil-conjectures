@@ -58,6 +58,31 @@ local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :
 local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
+local instance : LocallyOfFiniteType
+    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
+      (X ↘ Spec (CommRingCat.of k₀)))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
+local instance : QuasiCompact
+    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
+      (X ↘ Spec (CommRingCat.of k₀)))).hom :=
+  inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
+local instance : IsSeparated
+    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
+      (X ↘ Spec (CommRingCat.of k₀)))).hom :=
+  inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
+local instance : LocallyOfFiniteType
+    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
+      (Y ↘ Spec (CommRingCat.of k₀)))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
+local instance : QuasiCompact
+    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
+      (Y ↘ Spec (CommRingCat.of k₀)))).hom :=
+  inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
+local instance : IsSeparated
+    (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure
+      (Y ↘ Spec (CommRingCat.of k₀)))).hom :=
+  inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
+
 /-- The given proper morphism, as a morphism over the finite base field. -/
 noncomputable abbrev properTraceBaseMap :
     Over.mk (X ↘ Spec (CommRingCat.of k₀)) ⟶ Over.mk (Y ↘ Spec (CommRingCat.of k₀)) :=
@@ -118,6 +143,10 @@ theorem isIso_homEquiv_nativeProperTrace_of_isIso [IsIso γ]
     {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}
     (adj : derivedLowerStar (k₀ := k₀) (l := l) f ⊣ J) :
     IsIso (adj.homEquiv T U (nativeProperTrace f γ T U eT eU)) := by
+  have := (objectProperty k₀ l X).fullyFaithfulι.full
+  have := (objectProperty k₀ l Y).fullyFaithfulι.full
+  have := (objectProperty k₀ l X).fullyFaithfulι.faithful
+  have := (objectProperty k₀ l Y).fullyFaithfulι.faithful
   apply Adjunction.isIso_homEquiv_of_fullyFaithful_trace adj
     ((objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor)
     ((objectProperty k₀ l Y).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor)

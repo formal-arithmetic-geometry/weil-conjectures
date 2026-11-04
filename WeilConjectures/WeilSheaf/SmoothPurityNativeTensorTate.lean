@@ -22,6 +22,12 @@ universe u
 
 open CategoryTheory MonoidalCategory
 
+/-- Two specified inverse functor isomorphisms give an adjunction. -/
+noncomputable def CategoryTheory.Adjunction.ofInverseFunctorIsos
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (G : D ⥤ C)
+    (e : F ⋙ G ≅ 𝟭 C) (e' : G ⋙ F ≅ 𝟭 D) : F ⊣ G :=
+  (CategoryTheory.Equivalence.mk F G e.symm e').toAdjunction
+
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
@@ -43,11 +49,11 @@ noncomputable def constantTwistDerivedAdjunction (b : (PadicAlgCl l)ˣ) :
   let eg : G ⋙ F ≅ 𝟭 _ :=
     constantTwistCompConstantTwistIso k₀ l X b⁻¹ b ≪≫
       constantTwistFunctorCongrIso k₀ l X (inv_mul_cancel b) ≪≫ constantTwistOneIso k₀ l X
-  let E : ProEtaleWeilSheaf k₀ l X ≌ ProEtaleWeilSheaf k₀ l X :=
-    CategoryTheory.Equivalence.mk F G ef.symm eg
-  have : E.functor.Additive := inferInstanceAs F.Additive
-  have : E.inverse.Additive := inferInstanceAs G.Additive
-  exact E.mapDerivedCategory.toAdjunction
+  exact Adjunction.ofInverseFunctorIsos F.mapDerivedCategory G.mapDerivedCategory
+    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+      Functor.mapDerivedCategoryNatIso ef ≪≫ Functor.mapDerivedCategoryIdIso _)
+    ((Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+      Functor.mapDerivedCategoryNatIso eg ≪≫ Functor.mapDerivedCategoryIdIso _)
 
 /-- Internal Hom from the Tate sheaf is the inverse scalar twist. -/
 noncomputable def ihomTateSheafIso (d : ℤ) :
@@ -64,8 +70,7 @@ noncomputable def nativeHomTateIso (d : ℤ) :
       (nativeDerivedClosedComparison k₀ l X).homModels.weilHom ≅
       (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹).mapDerivedCategory :=
   nativeHomSingleIso _ ≪≫ Functor.rightDerivedFunctorNatIso (ihomTateSheafIso d) ≪≫
-    (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹).
-      rightDerivedFunctorIsoMapDerivedCategory
+    (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)⁻¹).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- The tensor functor of the native closed model in fixed-source coordinates. -/
 noncomputable def nativeTensorRightSectRIso
