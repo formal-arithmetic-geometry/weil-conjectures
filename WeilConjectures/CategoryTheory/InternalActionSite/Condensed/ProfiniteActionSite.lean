@@ -107,17 +107,25 @@ variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 
 /-- The group presheaf of continuous maps `S ↦ C(S, G)` on the small model. -/
 def groupPresheaf : Model.{u}ᵒᵖ ⥤ GrpCat.{u + 1} where
-  obj X := GrpCat.of (ULift.{u + 1} C((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop, G))
+  obj X := GrpCat.of
+    (ULift.{u + 1} C((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop, G))
   map f := GrpCat.ofHom
-    { toFun := fun g ↦ ⟨g.down.comp ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).map f.unop).hom.hom⟩
+    { toFun := fun g ↦
+        ⟨g.down.comp ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).map f.unop).hom.hom⟩
       map_one' := rfl
       map_mul' := fun _ _ ↦ rfl }
 
 @[simp]
 theorem groupPresheaf_map_down {X Y : Model.{u}ᵒᵖ} (f : X ⟶ Y)
     (g : (groupPresheaf G).obj X) :
-    ((groupPresheaf G).map f g).down = g.down.comp ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).map f.unop).hom.hom :=
+    ((groupPresheaf G).map f g).down =
+      g.down.comp ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).map f.unop).hom.hom :=
   rfl
+
+/-- Sections of the group presheaf are continuous maps to `G`. -/
+def groupPresheafObjEquiv (X : Model.{u}ᵒᵖ) :
+    (groupPresheaf G).obj X ≃* C((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop, G) :=
+  MulEquiv.ulift
 
 /-- The sheaf of continuous maps to `G` on `Profinite`. -/
 noncomputable abbrev continuousMapSheaf :
