@@ -36,3 +36,19 @@ Lean/Lake runs.
 2026-11-05 02:37 CST: A second shared tree opened; the full leaf check has
 started on fe888fc3e9 in slopci-w5. Log:
 /home/ubuntu/u9/logs/K5-20261105T023641.log. Pending compiler feedback.
+
+2026-11-05 02:46 CST: First compiler feedback from K5-20261105T023641.log:
+OrdinaryTensorNormalization is GREEN (7.7s). TensorSquare needed explicit
+whiskered components before rw; SheafTensorUnit needed homEquiv_id instead of
+simplifying homEquiv_unit. Both fixed and pushed in aa4dc89dc. The existing
+pr/2086 NativePullTensor is still compiling (about 8 minutes, ~1 CPU). Stopped
+the duplicate later full check on w3 to free shared capacity: rc=143, log
+/home/ubuntu/u9/logs/K5-20261105T024008.log, same two already-fixed errors.
+The original full check continues on w5; the minimal AdicSheafTensorSquare check
+remains queued and will fetch the corrected branch.
+
+2026-11-05 02:48 CST: NativePullTensor PASSED after 495s. First full leaf
+check completed rc=1 with precisely the two already-fixed helper errors, log
+K5-20261105T023641.log. Canceled the older pending minimal request and consolidated
+validation into a fresh ucheck of Projection.AxiomAudit, which depends on the leaf
+and all eight new helper/audit modules.
