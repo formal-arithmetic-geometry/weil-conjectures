@@ -57,38 +57,38 @@ lemma condensedRealizationUpperStarIso_hom_app_eq (M : ProEtaleWeilSheaf k₀ l 
     (adicUpperStarCompCondensedModIso l
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))) M
 
+omit [Fact (ringChar k₀ ≠ l)] in
+lemma condensedRealizationUpperStarIso_hom_eq :
+    (condensedRealizationUpperStarIso k₀ l g).hom =
+      Functor.whiskerLeft (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
+        (adicUpperStarCompCondensedModIso l
+          (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).inv := by
+  dsimp only [condensedRealizationUpperStarIso]
+  exact_mod_proofs Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom
+    (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
+      (comp_over g (Spec (CommRingCat.of k₀))))
+    (adicUpperStarCompCondensedModIso l
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+
+/-- The inverse square is the adic square on the underlying carriers. -/
+lemma condensedRealizationSheafTensor_inverse_square (M N : ProEtaleWeilSheaf k₀ l Y) :
+    SheafPullTensorInverseSquare k₀ l g M N := by
+  unfold SheafPullTensorInverseSquare PullTensorInverseSquare
+  rw [condensedRealizationSheafTensorIso_inv_eq, condensedRealizationSheafTensorIso_inv_eq,
+    condensedRealizationUpperStarIso_hom_eq]
+  simp only [Functor.whiskerLeft_app, condensedRealization, Functor.comp_map, Functor.comp_obj,
+    Endofunctor.IsoAlgebra.forget_obj, Endofunctor.IsoAlgebra.forget_map]
+  have hm := eq_of_heq (nativePullSheafTensor_hom_app_hom_f k₀ l g M N)
+  rw [hm]
+  cast_proofs adicUpperStar_condensedRelativeTensor_square l
+    (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
+    M.carrier N.carrier
+
 /-- The native pullback tensor comparison and the condensed realization tensor comparison
 commute with the pullback comparison. -/
 lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ l Y) :
-    SheafPullTensorSquare k₀ l g M N := by
-  unfold SheafPullTensorSquare
-  let G := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-    (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-  let a : condensedRealization k₀ l Y ⋙ G ≅ upperStar k₀ l g ⋙
-      condensedRealization k₀ l Z := condensedRealizationUpperStarIso k₀ l g
-  let nY := condensedRealizationSheafTensorIso k₀ l Y
-  let nZ := condensedRealizationSheafTensorIso k₀ l Z
-  have h : PullTensorInverseSquare (upperStar k₀ l g) (condensedRealization k₀ l Z)
-      (condensedRealization k₀ l Y) G (nativeOpenSheafTensor k₀ l Y)
-      (nativeOpenSheafTensor k₀ l Z) (nativePullSheafTensor k₀ l g) nY nZ a M N := by
-    unfold PullTensorInverseSquare
-    dsimp only [a, nY, nZ]
-    rw [condensedRealizationSheafTensorIso_inv_eq,
-      condensedRealizationSheafTensorIso_inv_eq,
-      condensedRealizationUpperStarIso_hom_app_eq,
-      condensedRealizationUpperStarIso_hom_app_eq,
-      condensedRealizationUpperStarIso_hom_app_eq]
-    have hm := eq_of_heq (nativePullSheafTensor_hom_app_hom_f k₀ l g M N)
-    change G.map _ ≫ _ ≫ (adicSheafEquivCondensedMod l _).functor.map
-      (((nativePullSheafTensor k₀ l g).hom.app (M, N)).hom.f) = _
-    rw [hm]
-    dsimp only [G]
-    cast_proofs adicUpperStar_condensedRelativeTensor_square l
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-      M.carrier N.carrier
-  exact_mod_proofs PullTensorInverseSquare.rotate (upperStar k₀ l g)
-    (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) G
-    (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
-    (nativePullSheafTensor k₀ l g) nY nZ a M N h
+    SheafPullTensorSquare k₀ l g M N :=
+  sheafPullTensorSquare_of_inverse k₀ l g M N
+    (condensedRealizationSheafTensor_inverse_square k₀ l g M N)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

@@ -42,6 +42,16 @@ lemma Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom_app
       b.inv.app M.carrier :=
   Endofunctor.IsoAlgebra.isoHComp_forget_symm_hom_app e b.symm M
 
+/-- Whole natural-transformation form of the inverse-spelled forgetting identity. -/
+lemma Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom
+    {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
+    {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D} (e : L ⋙ G ≅ F ⋙ L)
+    {T : C ⥤ A} {R : A ⥤ B} {V : D ⥤ B} (b : L ⋙ V ≅ T ⋙ R) :
+    (Functor.isoHComp (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso e).symm b.symm).hom =
+      Functor.whiskerLeft (Endofunctor.IsoAlgebra.forget F) b.inv := by
+  ext M
+  exact Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom_app e b M
+
 /-- Rotate an invertible tensor comparison square to the opposite orientation. -/
 lemma tensorSquare_rotate {C : Type*} [Category C] [MonoidalCategory C]
     {W W' X Y A A' B B' : C} (b : W ≅ W') (a : W ≅ X) (u : X ⟶ Y)

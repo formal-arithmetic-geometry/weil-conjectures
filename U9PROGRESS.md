@@ -106,3 +106,11 @@ No opaque definitions, skipped checks, or heartbeat increases. The ucheck wrappe
 reported a shell EOF error after the actual failed Lean build; checking wrapper
 syntax before the next run. Also simplified derived symmetry using the existing
 mapDerivedCategorySquareIso_symm theorem instead of concrete unfolding.
+
+2026-11-05 04:09 CST: K5-20261105T040351.log rc=1. Generic predicates GREEN
+(1.4s), NativeSheafSquareStatement GREEN (4.2s), resolving the statement's former
+127s kernel timeout. Native proof tactics now all elaborate, but its value still
+hits a kernel timeout (~130s). Added a whole-natural-transformation pullback
+identity, split the inverse square from the final rotation, and normalized the
+forgetful functor explicitly before the adic comparison. The final concrete
+rotation is now checked independently in NativeSheafSquareStatement.

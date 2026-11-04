@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.SheafSquareTransport
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationSheafTensor
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The native sheaf tensor square under condensed realization -/
 
@@ -44,5 +45,25 @@ def SheafPullTensorSquare (M N : ProEtaleWeilSheaf k₀ l Y) : Prop :=
     (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
     (nativePullSheafTensor k₀ l g) (condensedRealizationSheafTensorIso k₀ l Y)
     (condensedRealizationSheafTensorIso k₀ l Z) (condensedRealizationUpperStarIso k₀ l g) M N
+/-- The inverse orientation, using the same abstract object conversions. -/
+def SheafPullTensorInverseSquare (M N : ProEtaleWeilSheaf k₀ l Y) : Prop :=
+  PullTensorInverseSquare (upperStar k₀ l g) (condensedRealization k₀ l Z)
+    (condensedRealization k₀ l Y)
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+    (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
+    (nativePullSheafTensor k₀ l g) (condensedRealizationSheafTensorIso k₀ l Y)
+    (condensedRealizationSheafTensorIso k₀ l Z) (condensedRealizationUpperStarIso k₀ l g) M N
+
+lemma sheafPullTensorSquare_of_inverse (M N : ProEtaleWeilSheaf k₀ l Y)
+    (h : SheafPullTensorInverseSquare k₀ l g M N) : SheafPullTensorSquare k₀ l g M N := by
+  dsimp only [SheafPullTensorSquare, SheafPullTensorInverseSquare] at *
+  exact_mod_proofs PullTensorInverseSquare.rotate (upperStar k₀ l g)
+    (condensedRealization k₀ l Z) (condensedRealization k₀ l Y)
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+    (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
+    (nativePullSheafTensor k₀ l g) (condensedRealizationSheafTensorIso k₀ l Y)
+    (condensedRealizationSheafTensorIso k₀ l Z) (condensedRealizationUpperStarIso k₀ l g) M N h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
