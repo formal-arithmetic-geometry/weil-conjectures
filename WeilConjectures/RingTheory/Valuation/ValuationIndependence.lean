@@ -115,11 +115,12 @@ theorem eq_zero_of_sum_eq_zero {κ : Type*} [Fintype κ] {x : κ → F}
 /-- If `z` is a residually independent family of elements of value `1` and the `w i` are nonzero
 with values pairwise distinct modulo `v(Kˣ)`, then the products `w i * z j` are linearly
 independent over `K`. -/
-theorem ResiduallyIndependent.linearIndependent_mul {ι κ : Type*} [Fintype ι] [Fintype κ]
+theorem ResiduallyIndependent.linearIndependent_mul {ι κ : Type*} [Fintype ι] [Finite κ]
     {z : ι → F} (h : v.ResiduallyIndependent K z) (hz : ∀ j, v (z j) = 1) {w : κ → F}
     (hw : ∀ i, w i ≠ 0)
     (hdist : ∀ i i', i ≠ i' → ∀ c : K, v (w i) ≠ v (algebraMap K F c) * v (w i')) :
     LinearIndependent K fun p : κ × ι => w p.1 * z p.2 := by
+  cases nonempty_fintype κ
   classical
   refine Fintype.linearIndependent_iff.2 fun g hg p => ?_
   have hs (i : κ) : ∃ c : K, v (∑ j, g (i, j) • z j) = v (algebraMap K F c) := by

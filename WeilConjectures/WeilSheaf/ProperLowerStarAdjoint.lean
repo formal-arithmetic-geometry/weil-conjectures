@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjoint
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarCoproduct
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ProperLowerStarCondensedAdjoint
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerStar
 
@@ -15,8 +16,8 @@ public import WeilConjectures.WeilSheaf.LowerStar
 
 For a proper morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type over `k₀`, the derived
 direct image `Rg_*` of Weil complexes has a right adjoint
-(`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper_geometricFiber`).
-The Weil structure is lifted along the abstract result
+(`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper'`). The Weil
+structure is lifted along the abstract result
 `CategoryTheory.Endofunctor.IsoAlgebra.isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor`
 from the adjunction `Rḡ_* ⊣ ḡ^!` on `Dᵇc(-, ℚ̄_ℓ)` over the algebraic closure of `k₀`
 (`ProEtale.isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper`)
@@ -35,6 +36,12 @@ namespace AlgebraicGeometry
 open scoped ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+instance : Fact (ringChar (AlgebraicClosure k₀)).Prime :=
+  ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ CharP.char_is_prime k₀ (ringChar k₀)⟩
+
+instance : Fact (ringChar (AlgebraicClosure k₀) ≠ l) :=
+  ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ Fact.out⟩
 
 section Frobenius
 
@@ -91,6 +98,7 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
   [IsProper g] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The proper direct image of Weil complexes is a left adjoint** (blueprint
 `det-pd-biduality-coefficients`, the constructible adjunction `Rf_! ⊣ Rf^!` for a proper `f`):
@@ -99,11 +107,13 @@ direct image `Rg_*` of Weil complexes has a right adjoint. The adjunction `Rḡ_
 `Dᵇc(-, ℚ̄_ℓ)` over `k̄₀` lifts to Weil complexes
 (`CategoryTheory.Endofunctor.IsoAlgebra.isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor`),
 `Rḡ_*` commuting with bounded below coproducts. -/
-theorem WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper_geometricFiber :
+theorem WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper' :
     (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint := by
   have : IsProper (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))) :=
     Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g _ ‹_›
   have hk := ringChar_algebraicClosure_ne (k₀ := k₀) (l := l)
+  have : IsSeparated (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
+    inferInstanceAs (IsSeparated (pullback.snd _ _))
   exact IsoAlgebra.isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor
     (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _))
     (ProEtale.DerivedCategory.boundedConstructibleAdic l
@@ -116,11 +126,11 @@ theorem WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper_geometricFiber :
       (WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff K).2 hK)
     (fun _ hK ↦ ProEtale.boundedConstructibleAdic_rightDerivedFunctor_adicLowerStar_obj
       (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure hk _ hK)
-    (ProEtale.isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper
+    (ProEtale.isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper k₀
       (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure hk _)
     (ProEtale.preservesColimit_discrete_rightDerivedFunctor_adicLowerStar _)
     (WeilComplex.objectProperty k₀ l Z) (WeilComplex.objectProperty k₀ l Y)
-    WeilComplex.objectProperty_iff WeilComplex.objectProperty_iff
+    (WeilComplex.objectProperty_iff (X := Z)) (WeilComplex.objectProperty_iff (X := Y))
     (WeilComplex.objectProperty_rightDerivedLowerStar g)
 
 end AlgebraicGeometry

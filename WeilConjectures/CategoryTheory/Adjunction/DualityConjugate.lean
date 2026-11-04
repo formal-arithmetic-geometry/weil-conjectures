@@ -56,13 +56,16 @@ noncomputable def Functor.adjunctionRightOpOfIsoRightOpComp (Dl : Cᵒᵖ ⥤ C)
 `F : C_Y ⥤ Cₓ`, and `S : Cₓ ⥤ C_Y` with `D_Y ∘ S ≅ G ∘ D_X`. Then a right adjoint `R` of `S` is
 isomorphic to `D_X ∘ F ∘ D_Y`:
 ```
-  Cᵒᵖ --S.op--> Dᵒᵖ             D --D_Y.rightOp--> Dᵒᵖ
-   |             |              |                  |
-  D_X    ≅      D_Y      ⟹      R        ≅       F.op
-   v             v              v                  v
-   C -----G----> D              C <------D_X------ Cᵒᵖ
+        Sᵒᵖ                          D_Yᵒᵖ        Fᵒᵖ
+  Cᵒᵖ ──────▶ Dᵒᵖ                D ──────▶ Dᵒᵖ ──────▶ Cᵒᵖ
+   │           │                 │                    │
+  D_X    ≅    D_Y       ⟹        R          ≅        D_X
+   ▼           ▼                 ▼                    ▼
+   C  ───────▶ D                 C ══════════════════ C
+         G
 ```
--/
+As the dualities are anti-equivalences, the left square exhibits `S` as the conjugate of `G` by
+them, so the conjugate of its left adjoint `F` is a right adjoint of `S`. -/
 theorem Adjunction.nonempty_iso_rightOp_comp_op_comp_of_duality
     (DX : Cᵒᵖ ⥤ C) (eX : 𝟭 C ≅ DX.rightOp ⋙ DX) (DY : Dᵒᵖ ⥤ D) (eY : 𝟭 D ≅ DY.rightOp ⋙ DY)
     {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) {S : C ⥤ D} {R : D ⥤ C} (adjS : S ⊣ R)

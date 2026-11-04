@@ -42,7 +42,8 @@ reversed characteristic polynomial, for an integral weight and with the normaliz
   `FrobeniusModule.IsReal`, the condition that its image under `ι : K →+* ℂ` has real
   coefficients.
 - `FrobeniusModule.tateTwist`: the Tate twist `M(n)`, rescaling the Frobenius by `q ^ (-n)`.
-- `FrobeniusModule.dual`: the dual `M^∨` with the inverse transpose of the Frobenius.
+- `FrobeniusModule.dual`: the dual `M^∨` with the inverse transpose of the Frobenius, and
+  `FrobeniusModule.Equiv.dual` the dual of an isomorphism.
 - `FrobeniusModule.IsPureOfWeight.tateTwist`: the twist by `n` lowers the weight by `2 n`.
 - `FrobeniusModule.prod`: the direct sum `M ⊕ N`.
 - `FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual`: for `M` pure of weight `w` and
@@ -313,6 +314,21 @@ noncomputable def dual (M : FrobeniusModule.{u, v} K) : FrobeniusModule.{max u v
 lemma dual_frobenius_apply (M : FrobeniusModule.{u, v} K) (f : Module.Dual K M.carrier) :
     (M.dual.frobenius f : Module.Dual K M.carrier) = f ∘ₗ M.frobenius.symm.toLinearMap :=
   rfl
+
+/-- The dual `e^∨ : M^∨ ≅ N^∨`, `f ↦ f ∘ e⁻¹`, of an isomorphism of Frobenius modules
+`e : M ≅ N`. -/
+@[simps toLinearEquiv]
+noncomputable def Equiv.dual {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    M.dual.Equiv N.dual where
+  toLinearEquiv := e.toLinearEquiv.symm.dualMap
+  map_frobenius f := by
+    refine LinearMap.ext fun y ↦ ?_
+    have h := e.symm.map_frobenius (N.frobenius.symm y)
+    rw [LinearEquiv.apply_symm_apply, Equiv.symm_toLinearEquiv] at h
+    erw [LinearEquiv.dualMap_apply]
+    rw [dual_frobenius_apply, LinearMap.comp_apply, LinearEquiv.coe_coe, h,
+      LinearEquiv.symm_apply_apply]
+    rfl
 
 /-- The dual of a module pure of weight `w` is pure of weight `-w`: the eigenvalues of the
 inverse transpose `(F⁻¹)^∨` are the inverses of those of `F`. -/
