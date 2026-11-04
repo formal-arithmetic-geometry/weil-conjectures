@@ -22,6 +22,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.CategoryTheory.DerivedInternalHomSectionsModel.DerivedInternalHomSectionsModel
 public import WeilConjectures.CategoryTheory.SmoothPurity.HomComplexGlobalHomotopyOfUniverses
+import all WeilConjectures.CategoryTheory.DerivedInternalHomSectionsModel.DerivedInternalHomSectionsModel
+import all WeilConjectures.CategoryTheory.SmoothPurity.HomComplexGlobalHomotopyOfUniverses
 
 /-! # The ordinary-to-resolved global Hom roof
 
@@ -101,6 +103,10 @@ structure GlobalHomResolution (X : CochainComplex A ℤ) where
   ι : X ⟶ I
   injective : I.IsKInjective
   quasiIso : QuasiIso ι
+
+attribute [instance] GlobalHomResolution.injective GlobalHomResolution.quasiIso
+
+variable [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)]
 
 /-- The identity resolution of a K-injective complex.
 Source: Stacks 070I (blueprint: lem-sf-global-hom-resolution-roof). -/
@@ -741,9 +747,5 @@ theorem globalHom_resolution_roof_cohomology_fields
     Nonempty (GlobalHomResolutionRoofCohomologyFields B c unit) := by
   -- The unit and cohomology transport calculation is isolated here.
   sorry
-
-attribute [instance] GlobalHomResolution.injective GlobalHomResolution.quasiIso
-
-variable [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)]
 
 end CategoryTheory
