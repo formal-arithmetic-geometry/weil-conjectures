@@ -10,3 +10,9 @@
 - #2088 adds a new trace sorry and removes existing purity declarations; do not merge it,
   since the homotopy-invariance work it contains is already in #2071.
 - Next: inspect imported proofs and dependencies, then ucheck the leaf and all merged modules.
+- Inspected constant-coefficient argument: finite etale acyclicity -> pro-etale comparison ->
+  derived reduction/Nakayama for integral coefficients -> flat scalar extension to Qbar_l.
+  All 14 added modules contain no sorry/axiom/admit; #2071 appears stronger than the brief's
+  description. Preserve its work and validate against the current slopmaster2 interfaces.
+- Dropped redundant additions to the root import aggregator: the leaf already imports the
+  entire new dependency closure. This avoids touching/rebuilding the global all-module file.
