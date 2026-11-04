@@ -62,6 +62,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSiteBiproduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
@@ -13119,6 +13120,7 @@ public import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedHom
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
 public import WeilConjectures.CategoryTheory.Abelian.FirstResolutionExtensionClass
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Biproduct
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.Abelian.HomologyFilteredColimit
@@ -16451,6 +16453,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.LeftExactHomologyEdge
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Preadditive
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
