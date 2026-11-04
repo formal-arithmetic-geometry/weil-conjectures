@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeSheafSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.SheafSquareTransport
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
@@ -59,19 +60,8 @@ lemma condensedRealizationUpperStarIso_hom_app_eq (M : ProEtaleWeilSheaf k₀ l 
 /-- The native pullback tensor comparison and the condensed realization tensor comparison
 commute with the pullback comparison. -/
 lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ l Y) :
-    (condensedRealization k₀ l Z).map ((nativePullSheafTensor k₀ l g).hom.app (M, N)) ≫
-      (condensedRealizationSheafTensorIso k₀ l Z).hom.app
-        ((upperStar k₀ l g).obj M, (upperStar k₀ l g).obj N) ≫
-      ((condensedRealizationUpperStarIso k₀ l g).inv.app M ⊗ₘ
-        (condensedRealizationUpperStarIso k₀ l g).inv.app N) =
-    (condensedRealizationUpperStarIso k₀ l g).inv.app
-        ((nativeOpenSheafTensor k₀ l Y).obj (M, N)) ≫
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).map
-          ((condensedRealizationSheafTensorIso k₀ l Y).hom.app (M, N)) ≫
-      Functor.OplaxMonoidal.δ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-          ((condensedRealization k₀ l Y).obj M) ((condensedRealization k₀ l Y).obj N) := by
+    SheafPullTensorSquare k₀ l g M N := by
+  unfold SheafPullTensorSquare
   let G := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
     (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
   let a := condensedRealizationUpperStarIso k₀ l g
@@ -95,7 +85,7 @@ lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ 
       (((nativePullSheafTensor k₀ l g).hom.app (M, N)).hom.f) = _
     rw [hm]
     dsimp only [G]
-    exact_mod_proofs adicUpperStar_condensedRelativeTensor_square l
+    cast_proofs adicUpperStar_condensedRelativeTensor_square l
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
       M.carrier N.carrier
   exact_mod_proofs tensorSquare_rotate_components (upperStar k₀ l g) (condensedRealization k₀ l Z)
