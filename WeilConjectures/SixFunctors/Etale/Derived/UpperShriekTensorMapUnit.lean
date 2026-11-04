@@ -71,4 +71,21 @@ lemma lowerShriekRightAdjointUnitTensorMap_unit :
     Category.assoc, Category.assoc, ← G.map_comp, unitors_equal, Iso.inv_hom_id,
     G.map_id, Category.comp_id]
 
+/-- The canonical map `G Λ_Y ⊗ᴸ Lf^* K ⟶ G K`
+(`AlgebraicGeometry.Etale.lowerShriekRightAdjointUnitTensorMap`) is natural in `K`. -/
+@[reassoc]
+lemma lowerShriekRightAdjointUnitTensorMap_naturality
+    {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (φ : K ⟶ K') :
+    lowerShriekRightAdjointUnitTensorMap adj K ≫ G.map φ =
+      G.obj (𝟙_ _) ◁ (L((f)^*[A])).map φ ≫ lowerShriekRightAdjointUnitTensorMap adj K' := by
+  have hπ : ∀ (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+      {N N' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (ψ : N ⟶ N'),
+      (R(f)_![A]).obj M ◁ ψ ≫ ((projectionMap A f).app M).app N' =
+        ((projectionMap A f).app M).app N ≫ (R(f)_![A]).map (M ◁ (L((f)^*[A])).map ψ) :=
+    fun M _ _ ψ ↦ projectionMap_naturality_right A f M ψ
+  rw [lowerShriekRightAdjointUnitTensorMap, lowerShriekRightAdjointUnitTensorMap,
+    lowerShriekRightAdjointTensorMap, lowerShriekRightAdjointTensorMap, Category.assoc,
+    ← G.map_comp, ← leftUnitor_naturality, G.map_comp,
+    Adjunction.projectionTensorMap_naturality_right_assoc adj _ hπ]
+
 end AlgebraicGeometry.Etale
