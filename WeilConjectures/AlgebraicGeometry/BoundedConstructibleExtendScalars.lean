@@ -44,14 +44,6 @@ private lemma constructible_extend
     ((pullbackExtendScalarsComparison (U.immersion i) R S φ).app M).symm
     (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
 
-private lemma constructible_of_iso
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : IsConstructibleModuleObject R M) (e : M ≅ N) :
-    IsConstructibleModuleObject R N := by
-  rcases h with ⟨U, hU⟩
-  exact ⟨U, fun i ↦ lfp_of_iso _ (hU i)
-    (((upperStar Ab.{u + 1} (U.immersion i)).mapMod R).mapIso e)⟩
-
 /-- Exact extension of scalars preserves bounded constructible complexes of module objects.
 (auxiliary; not a blueprint node)
 
@@ -112,14 +104,6 @@ private noncomputable def pullbackExtendScalarsIso :
     Functor.isoWhiskerLeft _ (Mod.comapComp _ _) ≪≫
     (Functor.associator _ _ _).symm
   exact a.leftAdjointUniq (b.ofNatIsoRight e)
-
-private lemma lfp_of_iso
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : IsLocallyFinitelyPresented R M) (e : M ≅ N) :
-    IsLocallyFinitelyPresented R N := by
-  rcases h with ⟨U, hU⟩
-  exact ⟨U, fun i ↦ (fp_iff_of_iso ((upperStar Ab.{u + 1} (U.f i)).mapMod R |>.mapIso e)).mp
-    (hU i)⟩
 
 end
 
