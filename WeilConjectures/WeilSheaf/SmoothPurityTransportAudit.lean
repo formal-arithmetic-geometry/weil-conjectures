@@ -27,6 +27,7 @@ import WeilConjectures.WeilSheaf.SmoothPurityAbsoluteDescent
 import WeilConjectures.WeilSheaf.SmoothPurityDescentSingle
 import WeilConjectures.WeilSheaf.SmoothPurityCompactConstant
 import WeilConjectures.WeilSheaf.SmoothPurityCompactHomotopy
+import WeilConjectures.WeilSheaf.SmoothPurityNativeHomSingle
 
 #print axioms AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_free
@@ -66,3 +67,4 @@ import WeilConjectures.WeilSheaf.SmoothPurityCompactHomotopy
 #print axioms AlgebraicGeometry.WeilComplex.nonempty_upperStar_comp_shriek_iso_tensor_constant
 #print axioms AlgebraicGeometry.WeilComplex.nonempty_shriekRightAdjoint_adicConstant_iso_of_tate_encoding
 #print axioms AlgebraicGeometry.WeilComplex.nonempty_compact_constant_iso_of_absolute_purity
+#print axioms AlgebraicGeometry.ProEtaleWeilSheaf.nativeHomSingleIso
