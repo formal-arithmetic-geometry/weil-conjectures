@@ -457,6 +457,7 @@ public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationFiltrat
 public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationFlatness
 public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationMatrix
 public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationStructure
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationTail
 public import WeilConjectures.Algebra.Homology.FirstLocalizationCohomologyBaseChange
 public import WeilConjectures.Algebra.Homology.FirstLocalizationComparison
 public import WeilConjectures.Algebra.Homology.FirstLocalizationMap
