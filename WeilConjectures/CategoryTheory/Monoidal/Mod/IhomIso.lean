@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequalizer
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 
 /-!
@@ -32,96 +33,44 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
   {R : C} [MonObj R] [IsCommMonObj R]
 
-/-- The quotient map defining the relative tensor product is linear in its first factor. -/
-noncomputable def relativeTensorπ (M N : Mod C R) :
-    (Mod.tensorRight R N.X).obj M ⟶ M ⊗ N :=
-  homMk (M := (Mod.tensorRight R N.X).obj M) (N := M ⊗ N) (tensorObjπ M N) (by
-    change ((α_ R M.X N.X).inv ≫ γ[R,M.X] ▷ N.X) ≫ tensorObjπ M N =
-      R ◁ tensorObjπ M N ≫ γ[R,(M ⊗ N).X]
-    simpa only [Category.assoc] using (whiskerLeft_tensorπ_smul M N).symm)
-
-/-- The relative tensor product is a cofork of the two action maps on module objects. -/
-noncomputable def relativeTensorCofork (M N : Mod C R) :
-    Cofork ((tensorRightMap R γ[R,N.X]).app M) ((tensorRightRightAct R N.X).app M) :=
-  Cofork.ofπ (relativeTensorπ M N) (by
-    apply Mod.hom_ext
-    change M.X ◁ γ[R,N.X] ≫ tensorObjπ M N =
-      ((α_ M.X R N.X).inv ≫ rightAct M ▷ N.X) ≫ tensorObjπ M N
-    rw [Category.assoc, tensorObjπ_condition]
-    simp only [Category.assoc, Iso.inv_hom_id_assoc])
-
-/-- The tensor cofork is a coequalizer, as can be checked after forgetting the module action. -/
-noncomputable def isColimitRelativeTensorCofork (M N : Mod C R) :
-    IsColimit (relativeTensorCofork M N) := by
-  apply isColimitOfIsColimitCoforkMap (forget R)
-  change IsColimit (Cofork.ofπ (tensorObjπ M N) _ :
-    Cofork (M.X ◁ γ[R,N.X]) ((α_ M.X R N.X).inv ≫ rightAct M ▷ N.X))
-  refine Cofork.IsColimit.mk _
-    (fun s ↦ coequalizer.desc (f := rightAct M ▷ N.X)
-      (g := (α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) s.π ?_) ?_ ?_
-  · have h := s.condition
-    change M.X ◁ γ[R,N.X] ≫ s.π =
-      ((α_ M.X R N.X).inv ≫ rightAct M ▷ N.X) ≫ s.π at h
-    rw [← cancel_epi (α_ M.X R N.X).inv]
-    simpa only [Category.assoc, Iso.inv_hom_id_assoc] using h.symm
-  · intro s
-    exact coequalizer.π_desc _ _
-  · intro s m hm
-    apply coequalizer.hom_ext (f := rightAct M ▷ N.X)
-      (g := (α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X])
-    exact hm.trans (coequalizer.π_desc _ _).symm
-
-/-- The two relative tensor products agree: `M ⊗_R N ≅ M ⊗ N`. -/
-noncomputable def tensorLeftObjIso (M N : Mod C R) : (Mod.tensorLeft N).obj M ≅ M ⊗ N :=
-  HasColimit.isoOfNatIso
-    (diagramIsoParallelPair ((Mod.tensorLeftDiagram R N).flip.obj M)) ≪≫
-      (colimit.isColimit _).coconePointUniqueUpToIso (isColimitRelativeTensorCofork M N)
-
 omit [MonoidalPreadditive C] in
-lemma tensorπ_tensorLeftObjIso_hom (M N : Mod C R) :
-    Mod.tensorπ M N ≫ (tensorLeftObjIso M N).hom.hom = Mod.tensorObjπ M N := by
+/-- On the quotient map `M ⊗ N ⟶ M ⊗_R N`, the identification `- ⊗_R N ≅ - ⊗ N` is the quotient
+map of the monoidal tensor product. -/
+lemma tensorπ_relativeTensorRightIso_hom_app_hom (M N : Mod C R) :
+    Mod.tensorπ M N ≫ ((relativeTensorRightIso N).hom.app M).hom = Mod.tensorObjπ M N := by
   have h := congrArg Mod.Hom.hom
     (show colimit.ι ((Mod.tensorLeftDiagram R N).flip.obj M) WalkingParallelPair.one ≫
-        (tensorLeftObjIso M N).hom = relativeTensorπ M N by
-      simp [tensorLeftObjIso, HasColimit.isoOfNatIso_ι_hom_assoc, relativeTensorCofork])
+        (relativeTensorRightIso N).hom.app M = relativeTensorπ M N by
+      simp [relativeTensorRightIso, HasColimit.isoOfNatIso_ι_hom_assoc, relativeTensorCofork])
   exact h
 
-/-- The tensor product `- ⊗_R N` of modules is `- ⊗ N`. -/
-noncomputable def tensorLeftIsoTensorRight (N : Mod C R) :
-    Mod.tensorLeft N ≅ MonoidalCategory.tensorRight N :=
-  NatIso.ofComponents (fun M ↦ tensorLeftObjIso M N) (by
-    intro M M' f
-    apply Mod.tensorLeft_obj_hom_ext
-    simp only [Mod.comp_hom', Mod.tensorπ_map_assoc]
-    rw [tensorπ_tensorLeftObjIso_hom, ← Category.assoc, tensorπ_tensorLeftObjIso_hom]
-    exact (Mod.tensorObjπ_whiskerRight f).symm)
-
 omit [MonoidalPreadditive C] in
-lemma tensorLeftMap_comp_tensorLeftIsoTensorRight_hom {M N : Mod C R} (f : M ⟶ N) :
-    Mod.tensorLeftMap f ≫ (tensorLeftIsoTensorRight N).hom =
-      (tensorLeftIsoTensorRight M).hom ≫ (tensoringRight _).map f := by
+/-- The identification `- ⊗_R N ≅ - ⊗ N` is natural in `N`. -/
+lemma tensorLeftMap_comp_relativeTensorRightIso_hom {M N : Mod C R} (f : M ⟶ N) :
+    Mod.tensorLeftMap f ≫ (relativeTensorRightIso N).hom =
+      (relativeTensorRightIso M).hom ≫ (tensoringRight _).map f := by
   apply NatTrans.ext
   funext P
   apply Mod.tensorLeft_obj_hom_ext
   simp only [NatTrans.comp_app, Mod.comp_hom']
   rw [Mod.tensorπ_tensorLeftMap_assoc]
-  change P.X ◁ f.hom ≫ Mod.tensorπ P N ≫ (tensorLeftObjIso P N).hom.hom = _
-  rw [tensorπ_tensorLeftObjIso_hom]
-  change _ = Mod.tensorπ P M ≫ (tensorLeftObjIso P M).hom.hom ≫ (P ◁ f).hom
-  rw [← Category.assoc, tensorπ_tensorLeftObjIso_hom]
+  change P.X ◁ f.hom ≫ Mod.tensorπ P N ≫ ((relativeTensorRightIso N).hom.app P).hom = _
+  rw [tensorπ_relativeTensorRightIso_hom_app_hom]
+  change _ = Mod.tensorπ P M ≫ ((relativeTensorRightIso M).hom.app P).hom ≫ (P ◁ f).hom
+  rw [← Category.assoc, tensorπ_relativeTensorRightIso_hom_app_hom]
   exact (Mod.tensorObjπ_whiskerLeft f).symm
 
 /-- The tensor product `M ⊗ -` of modules is `- ⊗_R M`, through the symmetry. -/
 noncomputable def tensorLeftIsoModTensorLeft (M : Mod C R) :
     MonoidalCategory.tensorLeft M ≅ Mod.tensorLeft M :=
-  BraidedCategory.tensorLeftIsoTensorRight M ≪≫ (tensorLeftIsoTensorRight M).symm
+  BraidedCategory.tensorLeftIsoTensorRight M ≪≫ (relativeTensorRightIso M).symm
 
 omit [MonoidalPreadditive C] in
 lemma tensorLeftIsoModTensorLeft_hom_comp_tensorLeftMap {M N : Mod C R} (f : M ⟶ N) :
     (tensorLeftIsoModTensorLeft M).hom ≫ Mod.tensorLeftMap f =
       (tensoringLeft _).map f ≫ (tensorLeftIsoModTensorLeft N).hom := by
-  apply (cancel_mono (tensorLeftIsoTensorRight N).hom).1
-  rw [Category.assoc, tensorLeftMap_comp_tensorLeftIsoTensorRight_hom]
+  apply (cancel_mono (relativeTensorRightIso N).hom).1
+  rw [Category.assoc, tensorLeftMap_comp_relativeTensorRightIso_hom]
   simp only [tensorLeftIsoModTensorLeft, Iso.trans_hom, Iso.symm_hom,
     Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
   apply NatTrans.ext
