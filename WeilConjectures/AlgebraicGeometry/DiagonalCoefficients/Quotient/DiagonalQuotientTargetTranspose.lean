@@ -116,8 +116,8 @@ theorem diagonalQuotientTargetTranspose
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A] (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
     (q : UniformizerSquareData l Y E π n A hA) :
-    diagonalQuotientTargetTranspose_stmt l Y E π n A hA q := by
-  unfold diagonalQuotientTargetTranspose_stmt
+    UniformizerSquareData.diagonalQuotientTargetTranspose_stmt l Y E π n A hA q := by
+  unfold UniformizerSquareData.diagonalQuotientTargetTranspose_stmt
   change (UniformizerSquareData.quotientAdjunctionAux q).homEquiv _ _
     (finiteTargetMap q.eW
       (ScalarCompatibility.compositeTarget q.route.first q.route.second)
