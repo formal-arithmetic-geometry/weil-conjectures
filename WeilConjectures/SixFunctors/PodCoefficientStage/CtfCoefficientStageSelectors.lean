@@ -53,6 +53,13 @@ abbrev category (_S : SixFunctorOperationDatum D C E n hn)
   | .rational => sfRationalConstructibleCategory C.l E X.obj.left
   | .common => generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left
 
+/-- Category structures inherited from the actual coefficient categories.
+Source: full-subcategory convention
+(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+instance categoryInstance (s : PodCoefficientStage) (X : SixFunctorSpace D) :
+    Category.{u + 2} (category (_S := S) s X) := by
+  cases s <;> dsimp [category] <;> infer_instance
+
 /-- The actual finite-Tor predicate; field stages use the entire constructible category.
 Source: the four finite-Tor domains
 (blueprint: def-sf-ctf-coefficient-stage-selectors). -/

@@ -40,6 +40,7 @@ open scoped CategoryTheory.Obj DirectSum
 
 namespace AlgebraicGeometry.ProEtale
 
+set_option maxHeartbeats 800000 in
 /-- Ext from a constructible sheaf commutes with arbitrary small sums of
 ind-constructible sheaves, in every integer degree. The displayed additive homomorphism
 is the unique map whose restriction to each summand is postcomposition with the shifted
@@ -87,7 +88,7 @@ theorem det_ind_heart_ii_sums
           ((DerivedCategory.singleFunctor _ 0).obj C ⟶
             (shiftFunctor _ q).obj ((DerivedCategory.singleFunctor _ 0).obj c.pt))) := by
   classical
-  letI : HasCoproduct B := ⟨⟨c, hc⟩⟩
+  let : HasCoproduct B := ⟨⟨c, hc⟩⟩
   let s := (DerivedCategory.singleFunctor _ 0).obj C
   let Y (i : S) := (shiftFunctor _ q).obj
     ((DerivedCategory.singleFunctor _ 0).obj (B i))
@@ -98,7 +99,7 @@ theorem det_ind_heart_ii_sums
     have hi : IsIso (colimit.post M G₀) := by
       exact constructible_sheaf_ext_continuity ℓ E R hR X C hC M
         (colimit.cocone M) (colimit.isColimit M) (-n)
-    letI : IsIso (colimit.post M G₀) := hi
+    let : IsIso (colimit.post M G₀) := hi
     have : PreservesColimit M G₀ := preservesColimit_of_isIso_post _ _
     have : PreservesColimit M ((DerivedCategory.singleFunctor _ 0 ⋙
         shiftFunctor _ (-n)) ⋙ Y') := preservesColimit_of_natIso M
@@ -110,15 +111,15 @@ theorem det_ind_heart_ii_sums
     obtain ⟨i, g, hg⟩ := Concrete.isColimit_exists_rep (M ⋙ G)
       (isColimitOfPreserves G hcM) f
     exact ⟨i, g, hg.symm⟩
-  letI : HasColimitsOfSize.{u + 1, u + 1} (Mod
+  let : HasColimitsOfSize.{u + 1, u + 1} (Mod
       (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (coefficientHeartRingObj R) X)) :=
     IsGrothendieckAbelian.hasColimits _
-  letI : HasCoproducts.{u + 1} (Mod
+  let : HasCoproducts.{u + 1} (Mod
       (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (coefficientHeartRingObj R) X)) := fun J ↦
     HasColimitsOfSize.has_colimits_of_shape (Discrete J)
-  letI : HasCoproducts.{u + 1} (DerivedCategory (Mod
+  let : HasCoproducts.{u + 1} (DerivedCategory (Mod
       (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (coefficientHeartRingObj R) X))) :=
     fun J ↦ inferInstance
@@ -155,7 +156,7 @@ theorem det_ind_heart_ii_sums
     intro f
     obtain ⟨T, g, hg⟩ := CompactFor.of_isColimit hcompact hcY f
     refine ⟨∑ i ∈ T, DirectSum.of (fun i : S ↦ s ⟶ Y i) i (g i), ?_⟩
-    simp only [map_sum, DirectSum.toAddMonoid_of, AddMonoidHom.comp_apply]
+    simp only [map_sum, DirectSum.toAddMonoid_of]
     simpa [cY, Y, F, Preadditive.rightComp, ← Functor.map_comp, Category.assoc] using hg.symm
   have hinj : Function.Injective
       (@DirectSum.toAddMonoid S _ _ (Classical.decEq S) _ _ (fun i : S ↦
@@ -195,16 +196,14 @@ theorem det_ind_heart_ii_sums
       | add d₁ d₂ h₁ h₂ => simp [Preadditive.add_comp, h₁, h₂]
     intro x y hxy
     ext j
-    have hz := congrArg (fun f ↦ f ≫ projShift j) hxy
     have hz' :
         (@DirectSum.toAddMonoid S _ _ (Classical.decEq S) _ _ (fun i : S ↦
           Preadditive.rightComp s ((shiftFunctor _ q).map
             ((DerivedCategory.singleFunctor _ 0).map (c.inj i)))) (x - y)) ≫ projShift j = 0 := by
       rw [map_sub, sub_eq_zero.mpr hxy, zero_comp]
-    have := comp_proj (x - y) j
-    rw [hz'] at this
-    exact sub_eq_zero.mp this.symm
+    have hxy' := (comp_proj (x - y) j).symm.trans hz'
+    rw [DirectSum.sub_apply] at hxy'
+    exact sub_eq_zero.mp hxy'
   exact ⟨hinj, hsurj⟩
-
 
 end AlgebraicGeometry.ProEtale

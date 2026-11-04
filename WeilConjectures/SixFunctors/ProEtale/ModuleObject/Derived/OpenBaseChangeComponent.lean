@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.AlgebraicGeometry.ProEtaleOpenRestriction.ProEtaleOpenRestrictionCounit
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ModuleOpenPasting.ModuleDirectImageOpenPasting
 
 /-! # Open base-change component isomorphism
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
@@ -94,6 +95,22 @@ theorem openBaseChangeComponentIso
           (N.X.obj.map
             (ModuleOpenPasting.sectionArrow a j (pullback.snd a j)
               (pullback.fst a j) (IsPullback.of_hasPullback a j) E).op s) := by
-  sorry
+  obtain ⟨β, hsec, _, _, _, _, _, hcan⟩ :=
+    ModuleOpenPasting.moduleDirectImageOpenPasting_canonical Λ
+  have hb :
+      (β a j (pullback.snd a j) (pullback.fst a j)
+        (IsPullback.of_hasPullback a j)).hom = openBaseChangeCanonical Λ j a :=
+    hcan a j (pullback.snd a j) (pullback.fst a j) (IsPullback.of_hasPullback a j)
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · rw [← hb]
+    infer_instance
+  · exact hsec.1 j ((lowerStar Λ a).obj N)
+  · intro E
+    exact hsec.1 (pullback.fst a j) N
+      ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (pullback.snd a j)).obj E)
+  · intro E s
+    rw [← hb]
+    exact hsec.2 a j (pullback.snd a j) (pullback.fst a j)
+      (IsPullback.of_hasPullback a j) N E s
 
 end AlgebraicGeometry.ProEtale.CondensedRing

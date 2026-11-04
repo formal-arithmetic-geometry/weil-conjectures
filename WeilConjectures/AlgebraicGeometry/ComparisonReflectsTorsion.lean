@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClass
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Comap
 
 /-!
 # Reflection of local torsion by the etale to pro-etale comparison
@@ -19,7 +21,7 @@ Source: Stacks Tags 099T and 03SA; proper-base-change proof, torsion descent.
 
 @[expose] public section
 set_option autoImplicit false
-universe u
+universe u v w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 open Scheme
@@ -85,6 +87,92 @@ private theorem stalkTorsion (T : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClo
   change n • (F.obj.map g.op).hom s = 0 at hz
   rw [← map_nsmul, hz, map_zero]
 
+private noncomputable def torsionComparisonPoint
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (t : Spec (.of Ω) ⟶ T) : (Scheme.ProEt.topology T).Point.{u + 1} where
+  fiber := (Scheme.ProEt.forget T ⋙ coyoneda.obj (Opposite.op (Over.mk t))) ⋙
+    uliftFunctor.{u + 1}
+  isCofiltered := by
+    have : IsCofiltered
+        (Scheme.ProEt.forget T ⋙ coyoneda.obj (Opposite.op (Over.mk t))).Elements :=
+      Functor.isCofiltered_elements _
+    exact .of_equivalence
+      (Functor.Elements.uliftEquivalence.{u + 1}
+        (Scheme.ProEt.forget T ⋙ coyoneda.obj (Opposite.op (Over.mk t)))).symm
+  initiallySmall := initiallySmall_of_essentiallySmall _
+  jointly_surjective R hR x := by
+    obtain ⟨W, g, hg, w, hw⟩ := coverLift R hR x.down.left
+    refine ⟨W, g, hg, ULift.up (Over.homMk w ?_), ?_⟩
+    · change w ≫ W.hom = t
+      rw [← MorphismProperty.Over.w g, ← Category.assoc, hw]
+      exact Over.w x.down
+    · apply ULift.ext
+      apply Over.OverMorphism.ext
+      exact hw
+
+private noncomputable def torsionComparisonPointElements
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (t : Spec (.of Ω) ⟶ T) :
+    Scheme.ProEtaleGeometricNeighbourhood t ≌ (torsionComparisonPoint t).fiber.Elements where
+  functor.obj n := ⟨n.right, ULift.up n.hom⟩
+  functor.map f := ⟨f.right, congrArg ULift.up f.w⟩
+  inverse.obj n := StructuredArrow.mk n.2.down
+  inverse.map f := StructuredArrow.homMk f.1 (congrArg ULift.down f.2)
+  unitIso := Iso.refl _
+  counitIso := Iso.refl _
+
+private theorem torsionComparison_coverPreserving (T : Scheme.{u}) :
+    CoverPreserving T.smallEtaleTopology (Scheme.ProEt.topology T) (Scheme.toProEt T) := by
+  rw [Scheme.ProEt.topology_eq_restrictedTopology]
+  exact MorphismProperty.Over.coverPreserving_changeProp T etale_le_weaklyEtale
+    etaleTopology_le_proetaleTopology
+
+private noncomputable def torsionComparisonPointStalkIso
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (t : Spec (.of Ω) ⟶ T) (A : Type v) [Category.{w} A]
+    [HasColimitsOfSize.{u + 1, u + 1} A] :
+    sheafToPresheaf (Scheme.ProEt.topology T) A ⋙
+      (Functor.whiskeringLeft (Scheme.ProEtaleGeometricNeighbourhood t)ᵒᵖ T.ProEtᵒᵖ A).obj
+        (Scheme.proEtaleGeometricNeighbourhoodForget t).op ⋙ colim ≅
+      (torsionComparisonPoint t).sheafFiber :=
+  Functor.isoWhiskerLeft (sheafToPresheaf (Scheme.ProEt.topology T) A)
+    (Functor.isoWhiskerLeft
+      ((Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π
+        (torsionComparisonPoint t).fiber).op)
+      (Functor.Final.colimIso (torsionComparisonPointElements t).functor.op))
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The geometric stalk of the comparison inverse image is the etale stalk.
+This is the isomorphism part of the canonical comparison of geometric stalks
+(Stacks Project, Tags 0GLZ, 0993 and 05V1). -/
+private theorem torsion_comparison_stalkIso
+    {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (t : Spec (.of Ω) ⟶ T) (A : Type v) [Category.{w} A]
+    [HasColimitsOfSize.{u + 1, u + 1} A] [HasColimitsOfSize.{u, u} A]
+    [HasProducts.{u + 1} A]
+    (L : Sheaf T.smallEtaleTopology A ⥤ Sheaf (Scheme.ProEt.topology T) A)
+    (adj : L ⊣ (Scheme.toProEt T).sheafPushforwardContinuous A
+      T.smallEtaleTopology (Scheme.ProEt.topology T)) :
+    Nonempty (L ⋙ sheafToPresheaf (Scheme.ProEt.topology T) A ⋙
+      (Functor.whiskeringLeft (Scheme.ProEtaleGeometricNeighbourhood t)ᵒᵖ T.ProEtᵒᵖ A).obj
+        (Scheme.proEtaleGeometricNeighbourhoodForget t).op ⋙ colim ≅
+      (Scheme.pointSmallEtale t).sheafFiber) := by
+  let := adj.isRightAdjoint
+  let Φ := torsionComparisonPoint t
+  let hF := torsionComparison_coverPreserving T
+  let a := (Scheme.toProEt T).sheafAdjunctionContinuous A T.smallEtaleTopology
+    (Scheme.ProEt.topology T)
+  let e := adj.leftAdjointUniq a
+  have : InitiallySmall.{u + 1} ((Scheme.toProEt T) ⋙ Φ.fiber).Elements := by
+    change InitiallySmall.{u + 1} ((Scheme.pointSmallEtale t).ulift.{u + 1}).fiber.Elements
+    infer_instance
+  let b := Φ.sheafFiberComapIso (Scheme.toProEt T) hF A
+  let hb : (Φ.comap (Scheme.toProEt T) hF).sheafFiber ≅
+      ((Scheme.pointSmallEtale t).ulift.{u + 1}).sheafFiber (A := A) := Iso.refl _
+  exact ⟨Functor.isoWhiskerLeft L (torsionComparisonPointStalkIso t A) ≪≫
+    Functor.isoWhiskerRight e Φ.sheafFiber ≪≫ b.symm ≪≫ hb ≪≫
+      (Scheme.pointSmallEtale t).uliftSheafFiberIso.{u + 1} A⟩
+
 /-- Exact fully faithful comparison inverse image reflects local integer torsion.
 Source: Stacks Tags 099T and 03SA, and blueprint sk-thm-properbasechange, opening paragraph
 (blueprint: lem-pe-comparison-reflects-local-torsion).
@@ -110,7 +198,8 @@ theorem comparisonUpperStar_reflects_local_torsion (X : Scheme.{u})
     (Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale X)
   rintro ⟨-, ⟨x⟩⟩
   let t := X.algClosurePoint x
-  obtain ⟨c, -⟩ := (Scheme.proEtale_comparison_stalk X _ t).2.2 A
+  obtain ⟨c⟩ := torsion_comparison_stalkIso t (ModuleCat.{u + 1} A) _
+    (comparisonAdjunction (ModuleCat.{u + 1} A) X)
   have hm : IsAddTorsion
       (((Scheme.pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).obj F) :=
     IsAddTorsion.of_surjective (f := (c.hom.app F).hom.toAddMonoidHom)

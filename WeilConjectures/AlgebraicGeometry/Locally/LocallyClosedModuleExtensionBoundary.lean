@@ -147,6 +147,33 @@ private theorem normalize_closed
   simp [τ]
 
 set_option linter.unusedVariables false in
+namespace LocallyClosedCoefficientImmersion
+
+private instance modelExtension_full {S X : LocallyClosedCoefficients.{u}}
+    (a : LocallyClosedCoefficientImmersion S X) : a.modelExtension.Full := by
+  rw [modelExtension_eq]
+  let c := a.extensionFactorization.closed
+  let v := a.extensionFactorization.openMap
+  have : c.push.Full :=
+    (proEtaleRingModuleAdjunction c.hom _ _ c.coefficient).fullyFaithfulROfIsIsoCounit.full
+  have : (modelOpenExtension v a.extensionFactorization.isOpen).Full :=
+    (modelOpenAdjunction v _).fullyFaithfulLOfIsIsoUnit.full
+  exact inferInstanceAs (c.push ⋙ modelOpenExtension v a.extensionFactorization.isOpen).Full
+
+private instance modelExtension_faithful {S X : LocallyClosedCoefficients.{u}}
+    (a : LocallyClosedCoefficientImmersion S X) : a.modelExtension.Faithful := by
+  rw [modelExtension_eq]
+  let c := a.extensionFactorization.closed
+  let v := a.extensionFactorization.openMap
+  have : c.push.Faithful :=
+    (proEtaleRingModuleAdjunction c.hom _ _ c.coefficient).fullyFaithfulROfIsIsoCounit.faithful
+  have : (modelOpenExtension v a.extensionFactorization.isOpen).Faithful :=
+    (modelOpenAdjunction v _).fullyFaithfulLOfIsIsoUnit.faithful
+  exact inferInstanceAs
+    (c.push ⋙ modelOpenExtension v a.extensionFactorization.isOpen).Faithful
+
+end LocallyClosedCoefficientImmersion
+
 /-- For a single immersion, the fixed closed-then-open model has the normalized open
 adjunction and the normalized comparison with actual closed direct image.
 

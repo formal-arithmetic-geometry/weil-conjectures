@@ -33,11 +33,23 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   (R : Sheaf J CommRingCat.{max c v r})
 
-variable [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
-
 /-- The native ringed module category.
 (blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
 abbrev Modules := RingedDerivedNative.Modules.{c, v, r} J R
+
+variable [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
+
+/-- The native tensor, with the monoidal presentation explicitly retained.
+(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+def nativeTensor : DerivedCategory (Modules.{c, v, r} J R) ×
+    DerivedCategory (Modules.{c, v, r} J R) ⥤ DerivedCategory (Modules.{c, v, r} J R) :=
+  @tensor _ _ (RingedDerivedNative.monoidal.{c, v, r, w} J R)
+
+/-- The proved native closed structure, retaining its recorded evaluation model.
+(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+def nativeClosed :
+    CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R) :=
+  (RingedDerivedNative.closedAdjunction.{c, v, r, w} J R).choose
 
 /-- The closed structure uses exactly the native monoidal structure.
 (blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/

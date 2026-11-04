@@ -16,6 +16,25 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace CategoryTheory
 
+@[reassoc] private theorem evaluated_single_naturality
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory.{u + 1} A] [HasDerivedCategory.{u + 1} B]
+    (V : A ⥤ B) [V.Additive] [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    {M N : A} (f : M ⟶ N) :
+    V.mapDerivedCategory.map (((DerivedCategory.singleFunctor A 0).map f)⟦(2 : ℤ)⟧') ≫
+        (V.mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app
+          ((DerivedCategory.singleFunctor A 0).obj N) ≫
+        (((V.mapDerivedCategorySingleFunctor 0).hom.app N)⟦(2 : ℤ)⟧') =
+      (V.mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app
+          ((DerivedCategory.singleFunctor A 0).obj M) ≫
+        (((V.mapDerivedCategorySingleFunctor 0).hom.app M)⟦(2 : ℤ)⟧') ≫
+        (((DerivedCategory.singleFunctor B 0).map (V.map f))⟦(2 : ℤ)⟧') := by
+  rw [Functor.commShiftIso_hom_naturality_assoc]
+  congr 1
+  have hn := (V.mapDerivedCategorySingleFunctor 0).hom.naturality f
+  simpa only [Functor.comp_map, Functor.map_comp] using
+    congrArg (fun z ↦ z⟦(2 : ℤ)⟧') hn
+
 /-- Exact evaluation, an isomorphic pair of coordinates and class detection recover
 ordinary maps from equality of the evaluated shifted composites.
 Source: diagonal coefficient changes (3), exact evaluation and single comparisons.

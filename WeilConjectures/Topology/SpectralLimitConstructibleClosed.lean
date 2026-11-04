@@ -25,6 +25,33 @@ Source: Stacks Project, Topology, Tag 0A2V, parts (1) and (2)
 
 universe u v w
 
+/-- A spectral map of spectral spaces is continuous for their constructible topologies.
+Source: Stacks Project, Topology, Lemma 5.23.3, Tag 0A2S, part (1).
+(blueprint: lem-weil-pbc-spectral-map-constructible-continuous)
+
+Proof: For a quasi-compact open `W` in the target, its preimage is open by continuity
+and quasi-compact by the spectral-map hypothesis, hence open in the constructible topology
+of the source (`def-weil-pbc-constructible-topology`). The preimage of the complement of `W`
+is the complement of this quasi-compact open preimage, hence also subbasic and open in the
+constructible topology. These two cases cover the subbasis of the target's constructible
+topology, so the subbasis criterion (`lem-weil-pbc-continuous-iff-subbase`) gives continuity.
+Equivalently, the preimage of every constructibly open subset of the target is constructibly
+open in the source. -/
+theorem IsSpectralMap.continuous_constructibleTopology
+    {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y]
+    [SpectralSpace X] [SpectralSpace Y] {f : X → Y} (hf : IsSpectralMap f) :
+    @Continuous X Y (constructibleTopology X) (constructibleTopology Y) f := by
+  rw [continuous_generateFrom_iff]
+  intro s hs
+  rcases hs with hs | hs
+  · exact IsCompact.isOpen_constructibleTopology_of_isOpen
+      (hf.isCompact_preimage_of_isOpen hs.1 hs.2)
+      (hf.continuous.isOpen_preimage s hs.1)
+  · apply IsCompact.isOpen_constructibleTopology_of_isClosed
+    · rw [← Set.preimage_compl]
+      exact hf.isCompact_preimage_of_isOpen hs.1.isOpen_compl hs.2
+    · exact hs.1.preimage hf.continuous
+
 namespace Topology
 
 -- These diagram axioms are redundant for compactness; keep the existing interface.
