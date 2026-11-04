@@ -10,8 +10,9 @@ public import WeilConjectures.WeilSheaf.HomotopyInvariance.Basic
 /-!
 # Homotopy invariance and direct images
 
-Let `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` be the trivial line bundle and `g : Z ⟶ X` a morphism of
-`k₀`-schemes. The base change `Y ×_X Z ⟶ Z` of `π` along `g` is the trivial line bundle over `Z`.
+Let `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` be the trivial line bundle and `g : Z ⟶ X` a separated
+morphism of `k₀`-schemes. The base change `Y ×_X Z ⟶ Z` of `π` along `g` is the trivial line
+bundle over `Z`.
 If the unit `M ⟶ Rπ'_* π'^* M` is an isomorphism for a Weil complex `M` on `Z` and every trivial
 line bundle `π'` over `Z`, then the unit `Rg_* M ⟶ Rπ_* π^* Rg_* M` is an isomorphism
 (`AlgebraicGeometry.WeilComplex.isIso_unit_app_derivedLowerStar_obj`). This is the smooth base
@@ -40,7 +41,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 include hπ in
-/-- Let `g : Z ⟶ X` be a morphism of `k₀`-schemes of finite type, quasi-compact and
+/-- Let `g : Z ⟶ X` be a separated morphism of `k₀`-schemes of finite type, quasi-compact and
 quasi-separated, and `M` a Weil complex on `Z` such that the unit `M ⟶ Rπ'_* π'^* M` is an
 isomorphism for every trivial line bundle `π' : Y' ≅ Z ×_{k₀} 𝔸¹ ⟶ Z`. Then the unit
 `Rg_* M ⟶ Rπ_* π^* Rg_* M` is an isomorphism: apply the hypothesis to the base change
@@ -49,7 +50,7 @@ theorem isIso_unit_app_derivedLowerStar_obj {Z : Scheme.{u}} [Z.Over (Spec (Comm
     [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Z ↘ Spec (CommRingCat.of k₀))] (g : Z ⟶ X)
-    [g.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact g] [QuasiSeparated g]
+    [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g] [QuasiCompact g] [QuasiSeparated g]
     [LocallyOfFiniteType g] (M : WeilComplex k₀ l Z)
     (H : ∀ (Y' : Scheme.{u}) [Y'.Over (Spec (CommRingCat.of k₀))] (π' : Y' ⟶ Z)
       (s' : Y' ⟶ affineLine k₀) [π'.IsOver (Spec (CommRingCat.of k₀))],
