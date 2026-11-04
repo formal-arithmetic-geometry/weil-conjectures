@@ -865,6 +865,17 @@ private theorem alpha_identities :
     rw [alpha_cartesian B (𝟙 U) p p (𝟙 X) h (IsPullback.of_id_fst (f := p))]
     exact beta_id_open B p h.symm (IsPullback.of_id_fst (f := p)).flip M
 
+private theorem betaInv_unit {A A' Y Y' : Scheme.{u}}
+    (a : A' ⟶ A) (j' : A' ⟶ Y') (j : A ⟶ Y) (g : Y' ⟶ Y)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
+    (M : Derived B A) :
+    (jAdj B j').unit.app ((G B a).obj M) ≫
+        (G B j').map ((betaInv B a j' j g w).app M) =
+      (G B a).map ((jAdj B j).unit.app M) ≫
+        (squareG B a j' j g w).inv.app ((J B j).obj M) := by
+  change (jAdj B j').homEquiv _ _ (betaInvApp B a j' j g w M) = _
+  exact ((jAdj B j').homEquiv _ _).apply_symm_apply _
+
 end NormalizedIdentities
 
 /-- Beta commutes with composition of open immersions, before evaluation.

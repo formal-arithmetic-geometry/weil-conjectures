@@ -25,7 +25,7 @@ This file states the genuinely new content of `sk-thm-transport` that the API ca
   finite coefficient ring.
 
 The other ingredients of `sk-thm-transport` are stated where they belong:
-`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek` and
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal` and
 `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar` identify the two
 factors of the reduced pairing with the reductions of the two factors of `β_K`, and
 `AlgebraicGeometry.Etale.derivedCompleteIntegral_coefficientDual`,
