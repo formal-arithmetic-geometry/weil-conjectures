@@ -63,7 +63,6 @@ lemma adicUpperStarCompCondensedModIso_unit_hom (M : AdicSheaf l Y) :
     (adicUpperStarCompCondensedModIso l f).inv M
   have hb := congrArg (fun t ↦ t.app ((adicUpperStar l f).obj M))
     (mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom (l := l) f)
-  change _ ≫ (mateEquiv _ _ _).natTrans.app _ = _ at h
   rw [hb] at h
   have hh := congrArg Mod.Hom.hom h
   rw [Mod.comp_hom', Mod.comp_hom', adicLowerStarCompCondensedModIso_hom_app_hom,
@@ -83,7 +82,6 @@ lemma homEquiv_adicUpperStarCompCondensedModIso_inv_comp
   have hu := unit_mateEquiv (adicUpperStarLowerStarAdjunction l f)
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
     (adicUpperStarCompCondensedModIso l f).inv M
-  change _ ≫ (mateEquiv _ _ _).natTrans.app _ = _ at hu
   rw [mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom] at hu
   rw [← Category.assoc, ← hu, Category.assoc,
     ← (adicLowerStarCompCondensedModIso l f).hom.naturality]
@@ -137,8 +135,9 @@ lemma adicUpperStar_condensedRelativeTensor_square (M N : AdicSheaf l Y) :
         (((adicUpperStarLowerStarAdjunction l f).homEquiv _ _
           ((adicUpperStarTensorLeftIso l f N).hom.app M)).hom) = _
   rw [← Functor.map_comp, tensorπ_homEquiv_adicUpperStarTensorLeftIso,
-    Functor.map_comp, Functor.map_comp, ← Functor.LaxMonoidal.μ_natural_assoc,
-    lowerStarForgetAb_tensor_assoc]
+    Functor.map_comp, Functor.map_comp, ← Functor.LaxMonoidal.μ_natural_assoc]
+  simp only [Functor.comp_obj, adicUpperStar_obj_X]
+  rw [lowerStarForgetAb_tensor_assoc]
   rw [CondensedRing.tensorObjπ_homEquiv_δ_assoc]
   conv_rhs =>
     rw [← Functor.map_comp, ← Functor.map_comp, Mod.tensorObjπ_tensorHom_hom_assoc,

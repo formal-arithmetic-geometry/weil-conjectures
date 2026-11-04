@@ -52,3 +52,10 @@ check completed rc=1 with precisely the two already-fixed helper errors, log
 K5-20261105T023641.log. Canceled the older pending minimal request and consolidated
 validation into a fresh ucheck of Projection.AxiomAudit, which depends on the leaf
 and all eight new helper/audit modules.
+
+2026-11-05 02:50 CST: Second check log K5-20261105T024835.log, rc=1.
+TensorSquare, OrdinaryTensorNormalization and SheafTensorUnit all GREEN.
+AdicSheafTensorSquare had two deterministic 200000-heartbeat elaboration timeouts
+at redundant placeholder-heavy change steps, and a rewrite mismatch between
+adicUpperStar.obj.X and the ambient pullback. Removed those change steps and
+normalized both spellings before the rewrite; no heartbeat increase.
