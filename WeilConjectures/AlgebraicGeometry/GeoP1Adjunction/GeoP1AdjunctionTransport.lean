@@ -22,6 +22,7 @@ set_option backward.defeqAttrib.useBackward true
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.GeoP1Adjunction
 
+set_option linter.flexible false in
 /-- Transport an adjunction across equivalences, retaining both canonical formulas.
 Source: the final comparison paragraph of sk-prop-geo-p1-adjunction.proof.md
 (blueprint: geo-p1-adjunction-transport).
@@ -34,7 +35,6 @@ comparisons and the given unit, followed by the two equivalence triangle laws.
 For the counit formula, naturality moves the equivalence units across the comparisons;
 the inverse comparison components cancel. The equivalence triangle laws and
 naturality of the original counit reduce the composite to its stated image. -/
-set_option linter.flexible false in
 theorem transportAdjunction
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     (E : C ≌ C') (F : D ≌ D')
