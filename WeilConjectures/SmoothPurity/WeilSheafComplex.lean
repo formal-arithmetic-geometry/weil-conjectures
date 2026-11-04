@@ -162,8 +162,9 @@ noncomputable def weilStrictExtendToQbar
     (E : PadicAlgCl.FiniteIntermediateField ell) :
     Endofunctor.IsoAlgebra (CondensedRing.upperStar (WeilCoefficient.ab (.finite E))
         (D.geometricFrobenius Y₀).hom).mapDerivedCategory ⥤
-      Endofunctor.IsoAlgebra (CondensedRing.upperStar (WeilCoefficient.ab (WeilCoefficient.qbar (ell := ell)))
-        (D.geometricFrobenius Y₀).hom).mapDerivedCategory :=
+      Endofunctor.IsoAlgebra
+        (CondensedRing.upperStar (WeilCoefficient.ab (WeilCoefficient.qbar (ell := ell)))
+          (D.geometricFrobenius Y₀).hom).mapDerivedCategory :=
   weilStrictExtendScalars (weilCoefficientToQbar E) (D.geometricFrobenius Y₀).hom
 
 /-! ### Frobenius, Weil sheaves, Weil complexes -/
