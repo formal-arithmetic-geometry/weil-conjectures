@@ -33,7 +33,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -41,7 +41,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include ℓ k
 
-omit [Fact (ringChar k).Prime] in
 private theorem torsion_single_bound
     (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
     [DiscreteTopology T] [Finite T] (n : ℕ) (hn : (ℓ : T) ^ n = 0)
@@ -275,7 +274,6 @@ end UnitBallRingObj
 
 namespace FiniteDiscreteRingObj
 
-omit [Fact (ringChar k).Prime] in
 /-- The direct image of a constructible `T̲`-sheaf placed in degree zero is bounded above, for a
 finite discrete ring `T` in which `ℓ` is nilpotent (the case `T̲` of
 `ProEtale.CondensedRing.finiteTypeDirectImage_single_boundedAbove`). -/
