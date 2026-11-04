@@ -91,7 +91,7 @@ the native total tensor of P with an acyclic complex, on either side, is acyclic
 Forgetting is faithful and exact, hence reflects acyclicity; after forgetting, the
 chain comparison (and the ordinary signed swap for the other side) identifies the
 complex with the ordinary total tensor of the forgotten P with an acyclic complex. -/
-theorem native_two_sided_kflat_of_forget
+theorem nativeIsKFlat_of_nativeOrdinaryKFlat_forget
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
       (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
