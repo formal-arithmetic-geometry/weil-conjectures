@@ -162,3 +162,9 @@ the tiny concrete specialization, confirming that reconstructing f/e while
 passing nativePullSheafTensor causes the costly conversion. Letting f/e be
 inferred from that existing tensor comparison, and casting only the propositional
 carrier compatibility, before the final exact_mod_proofs predicate match.
+
+2026-11-05 04:54 CST: While the specialization check is queued, split
+totalization and localization into conditional theorems in new small modules.
+Their only hypotheses are the preceding square identities, and the public final
+lemmas specialize them to the proven preceding layer. This lets ucheck validate
+all three proof layers independently within the same dependency graph.

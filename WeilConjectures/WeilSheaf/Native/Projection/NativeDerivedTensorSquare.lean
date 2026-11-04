@@ -5,12 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorSquare
-public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
-public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
-public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
-public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
-import all WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquareOfTotal
 
 /-! # Localization of the native pullback tensor square -/
 
@@ -37,129 +32,19 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- The normalization of the native pullback tensor comparison on K-flat complexes. -/
-lemma projection_nativePullTensor_normalization :
-    OpenTensorRestrictionNormalization (upperStar k₀ l g)
-      (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
-      (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
-      (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y)
-      (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
-      (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
-      (fun P T ↦ (nativePullTotalTensor k₀ l g).app (P, T))
-      (nativePullTensor k₀ l g) := by
-  have := native_open_tensor_full_kflat_localization k₀ l Y
-  exact NativeRestrictionDescentProof.restrictionDerivedOfTotal_normalization
-    (upperStar k₀ l g) (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
-    (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
-    (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y)
-    (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
-    (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
-    (nativeOpenTensorModel_naturality k₀ l Z) (nativeOpenTensorModel_naturality k₀ l Y)
-    (nativePullTotalTensor k₀ l g)
-
-/-- On K-flat representatives, the native tensor square is the localization of the
-square of total complexes. -/
+/-- The native pullback tensor square on localized K-flat representatives. -/
 lemma condensedRealizationTensor_pull_square_Q
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :
-    DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
-  unfold DerivedPullTensorSquare PullTensorSquareWithComparison
-  simp only [Iso.symm_inv]
-  let L := upperStar k₀ l g
-  let V := condensedRealization k₀ l Z
-  let F := condensedRealization k₀ l Y
-  let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-    (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-  let LP := (L.mapHomologicalComplex (.up ℤ)).obj P
-  let LT := (L.mapHomologicalComplex (.up ℤ)).obj T
-  let FP := (F.mapHomologicalComplex (.up ℤ)).obj P
-  let FT := (F.mapHomologicalComplex (.up ℤ)).obj T
-  let WZ := ((nativeTensorTotal k₀ l Y).obj P).obj T
-  let WU := ((nativeTensorTotal k₀ l Z).obj LP).obj LT
-  let cZ := (condensedRealizationTotalTensorIso k₀ l Y).app (P, T)
-  let cU := (condensedRealizationTotalTensorIso k₀ l Z).app (LP, LT)
-  let mZ := F.mapDerivedCategory.mapIso (nativeOpenTensorModel k₀ l Y P T hP hT) ≪≫
-    F.mapDerivedCategoryFactors.app WZ ≪≫ DerivedCategory.Q.mapIso cZ
-  have hr := V.mapDerivedCategory.congr_map
-    (projection_nativePullTensor_normalization k₀ l g P T hP hT)
-  simp only [Functor.map_comp] at hr
-  have hLP := nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g P hP
-  have hLT := nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g T hT
-  have hmU := (condensedRealizationTensor_hom_app_comp k₀ l Z LP LT hLP hLT).symm
-  obtain ⟨mU, hmU', hsquare⟩ := final_total_diagram L V F R
-    (condensedRealizationUpperStarIso k₀ l g).symm
-    (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
-    (Functor.uncurry.obj (curriedTensor _)) (condensedRealizationTensor k₀ l Z)
-    (Functor.projection_uncurryTensorIso _)
-    (nativePullTensor k₀ l g) P T WZ WU
-    (nativeOpenTensorModel k₀ l Y P T hP hT)
-    (nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
-    ((nativePullTotalTensor k₀ l g).app (P, T)) hr cZ cU
-    (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
-      Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-      ← tensorHom_def] using hmU)
-    (R.mapCochainComplexμIso FP FT).symm
-    (condensedRealizationTotalTensor_pull_square k₀ l g P T) mZ rfl
-  simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp] at hmU'
-  simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-    ← tensorHom_def] at hsquare
-  have hmZ : mZ.hom = (condensedRealizationTensor k₀ l Y).hom.app
-      (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
-    (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ F.mapDerivedCategoryFactors.hom.app T) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q FP FT := by
-    simpa only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-      ← tensorHom_def] using
-      (condensedRealizationTensor_hom_app_comp k₀ l Y P T hP hT).symm
-  have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
-    (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
-    (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
-    (F.mapDerivedCategoryFactors.hom.app P) (F.mapDerivedCategoryFactors.hom.app T)
-  have hright : R.mapDerivedCategory.map mZ.hom ≫
-      R.mapDerivedCategoryFactors.hom.app (FP ⊗ FT) ≫
-      DerivedCategory.Q.map (R.mapCochainComplexμIso FP FT).inv =
-    R.mapDerivedCategory.map ((condensedRealizationTensor k₀ l Y).hom.app
-        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T)) ≫
-      (R.mapDerivedCategoryTensorComparison.app
-        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))).app
-          (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) ≫ mU.hom := by
-    rw [hmZ, Functor.map_comp, Category.assoc, ← ho, hmU']
-    rfl
-  apply (cancel_mono mU.hom).1
-  simpa only [Category.assoc, hright] using hsquare
+    DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) :=
+  condensedRealizationTensor_pull_square_Q_of_total k₀ l g
+    (condensedRealizationTotalTensor_pull_square k₀ l g) P T hP hT
 
-/-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
-representatives by naturality. -/
+/-- The native pullback tensor square on arbitrary derived objects. -/
 lemma condensedRealizationTensor_pull_square
     (M N : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :
-    DerivedPullTensorSquare k₀ l g M N := by
-  unfold DerivedPullTensorSquare PullTensorSquareWithComparison
-  simp only [Iso.symm_inv]
-  let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-    (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-  let c : Functor.uncurry.obj (curriedTensor _) ⋙ R.mapDerivedCategory ≅
-      R.mapDerivedCategory.prod R.mapDerivedCategory ⋙
-        Functor.uncurry.obj (curriedTensor _) :=
-    NatIso.ofComponents
-      (fun MN ↦ asIso ((R.mapDerivedCategoryTensorComparison.app MN.1).app MN.2))
-      (fun fg ↦ by
-        simpa only [Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
-          curriedTensor_map_app, curriedTensor_obj_map, ← tensorHom_def] using
-          R.projection_mapDerivedCategoryTensorComparison_naturality fg.1 fg.2)
-  have h := Adjunction.tensorSquare_of_representatives DerivedCategory.Q.obj
-    (NativeIsKFlat k₀ l Y) (native_two_sided_kflat_representatives k₀ l Y)
-    (nativeOpenPull k₀ l g) (derivedCondensedRealization k₀ l Z)
-    (derivedCondensedRealization k₀ l Y) R.mapDerivedCategory
-    (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
-    (Functor.uncurry.obj (curriedTensor _)) (Functor.uncurry.obj (curriedTensor _))
-    (nativePullTensor k₀ l g) (condensedRealizationTensor k₀ l Z)
-    (condensedRealizationTensor k₀ l Y)
-    (Functor.mapDerivedCategorySquareIso (condensedRealizationUpperStarIso k₀ l g).symm) c
-    (fun P T hP hT ↦ by
-      simpa only [DerivedPullTensorSquare, PullTensorSquareWithComparison, Iso.symm_inv,
-        Functor.uncurry_obj_map, curriedTensor_map_app,
-        curriedTensor_obj_map, ← tensorHom_def] using
-        condensedRealizationTensor_pull_square_Q k₀ l g P T hP hT) M N
-  simpa only [Functor.uncurry_obj_map, curriedTensor_map_app,
-    curriedTensor_obj_map, ← tensorHom_def] using h
+    DerivedPullTensorSquare k₀ l g M N :=
+  condensedRealizationTensor_pull_square_of_total k₀ l g
+    (condensedRealizationTotalTensor_pull_square k₀ l g) M N
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
