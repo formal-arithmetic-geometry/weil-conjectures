@@ -128,6 +128,72 @@ def proetaleConstantSplitDescentData {X V : Scheme.{u}} (p : V ⟶ X)
             ((MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm) f) =
         rho (Over.mk a) f)
 
+/-- Part I (steps 3-4 of the proof below): the presheaf of maps over `V` into the labelled
+coproduct is the sheafification of the constant presheaf `S`, giving natural bijections `rho`
+normalized on labels. Remaining plan: `shrinkYoneda.{w}` of the labelled object of
+`Over (Scheme.ProEt.mk p)` is a sheaf (the pro-etale topology is subcanonical); the label map
+from the constant presheaf to it is locally injective (empty sieve on empty objects) and
+locally surjective (clopen component cover, `coproductCopiesMorphismsClopen`); conclude with
+`Sheaf.isLocallyBijective_iff_isIso` applied to `sheafifyLift`. -/
+theorem proetaleConstantSplitRho_exists {X V : Scheme.{u}} (p : V ⟶ X)
+    [QuasiCompact p] [Surjective p] [WeaklyEtale p] [IsAffine V]
+    (S : Type w) [Small.{u} S] [UnivLE.{u + 1, w}]
+    (F : Sheaf (Scheme.ProEt.topology X) (Type w))
+    (e : F.over (Scheme.ProEt.mk p) ≅
+      (constantSheaf ((Scheme.ProEt.topology X).over (Scheme.ProEt.mk p))
+        (Type w)).obj S) :
+    ∃ rho : ∀ W : Over (Scheme.ProEt.mk p),
+      ((proetaleSliceToOver p).obj W ⟶ Over.mk (proetaleSplitCodiagonal V S)) ≃
+        F.obj.obj (op W.left),
+    (∀ (W W' : Over (Scheme.ProEt.mk p)) (g : W' ⟶ W)
+        (f : (proetaleSliceToOver p).obj W ⟶ Over.mk (proetaleSplitCodiagonal V S)),
+      rho W' ((proetaleSliceToOver p).map g ≫ f) =
+        F.obj.map g.left.op (rho W f)) ∧
+    (∀ (W : Over (Scheme.ProEt.mk p)) (s : S),
+      rho W (proetaleSplitLabel p S W s) =
+        e.inv.hom.app (op W)
+          ((toSheafify ((Scheme.ProEt.topology X).over (Scheme.ProEt.mk p))
+            ((Functor.const (Over (Scheme.ProEt.mk p))ᵒᵖ).obj S)).app (op W) s)) := by
+  sorry
+
+/-- Part II (steps 5-6 of the proof below): any natural family of bijections `rho` yields the
+unique matching overlap isomorphism and a transport-form descent datum preserving `rho`.
+Remaining plan: the universal point on `K = (∐ V) ×_X V` (weakly etale over `X`) gives
+`φ : K ⟶ ∐ V` with `φ ≫ codiag = snd`; transport is `lift a f₂ ≫ φ`; its
+`rho`-compatibility follows from naturality of `rho`, and the identity/cocycle laws from
+injectivity of `rho` at the universal weakly etale objects `∐ V` and `K ×_X V`; `alpha` is
+`lift (lift fst (snd ≫ pr₂) ≫ φ) snd`, unique by injectivity of `rho` at the object `pr₁^* ∐ V`. -/
+theorem proetaleConstantSplitDescent_of_rho {X V : Scheme.{u}} (p : V ⟶ X)
+    [WeaklyEtale p] (S : Type w) [Small.{u} S]
+    (F : Sheaf (Scheme.ProEt.topology X) (Type w))
+    (rho : ∀ W : Over (Scheme.ProEt.mk p),
+      ((proetaleSliceToOver p).obj W ⟶ Over.mk (proetaleSplitCodiagonal V S)) ≃
+        F.obj.obj (op W.left))
+    (hnat : ∀ (W W' : Over (Scheme.ProEt.mk p)) (g : W' ⟶ W)
+        (f : (proetaleSliceToOver p).obj W ⟶ Over.mk (proetaleSplitCodiagonal V S)),
+      rho W' ((proetaleSliceToOver p).map g ≫ f) =
+        F.obj.map g.left.op (rho W f)) :
+    (∃! alpha :
+        (Over.pullback (pullback.fst p p)).obj (Over.mk (proetaleSplitCodiagonal V S)) ≅
+          (Over.pullback (pullback.snd p p)).obj
+            (Over.mk (proetaleSplitCodiagonal V S)),
+      ∀ (W : Over (Scheme.ProEt.mk (pullback.fst p p ≫ p)))
+        (f : (proetaleSliceToOver (pullback.fst p p ≫ p)).obj W ⟶
+          (Over.pullback (pullback.fst p p)).obj (Over.mk (proetaleSplitCodiagonal V S))),
+        rho ((Over.map (proetaleSplitOverlapFirst p)).obj W)
+          (((Over.mapPullbackAdj (pullback.fst p p)).homEquiv _ _).symm f) =
+        rho ((Over.map (proetaleSplitOverlapSecond p)).obj W)
+          (((Over.mapPullbackAdj (pullback.snd p p)).homEquiv _ _).symm
+            (f ≫ alpha.hom))) ∧
+    (∃ D : Over.DescentDatum p (Over.mk (proetaleSplitCodiagonal V S)),
+      ∀ (W : X.ProEt) (a b : W ⟶ Scheme.ProEt.mk p)
+        (f : Over.mk a.left ⟶ Over.mk (proetaleSplitCodiagonal V S)),
+        rho (Over.mk b)
+          (D.transport a.left b.left
+            ((MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm) f) =
+        rho (Over.mk a) f) := by
+  sorry
+
 /-- The representability and overlap/descent-data part of the split presentation.
 Source: Tags 098Z, 03P5, 03YW and 001P
 (blueprint: lem-sfb-proetale-constant-split-descent;
@@ -149,7 +215,8 @@ theorem proetaleConstantSplitDescentData_proof {X V : Scheme.{u}} (p : V ⟶ X)
     (e : F.over (Scheme.ProEt.mk p) ≅
       (constantSheaf ((Scheme.ProEt.topology X).over (Scheme.ProEt.mk p))
         (Type w)).obj S) : proetaleConstantSplitDescentData p S F e := by
-  sorry
+  obtain ⟨rho, hnat, hlabel⟩ := proetaleConstantSplitRho_exists p S F e
+  exact ⟨rho, hnat, hlabel, proetaleConstantSplitDescent_of_rho p S F rho hnat⟩
 
 /-- The geometric properties of the split codiagonal.
 Source: Tags 03YW and 0AP6
