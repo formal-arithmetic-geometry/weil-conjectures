@@ -44,3 +44,16 @@
   compile on `19ba966718`. No repair was needed in the underived module.
 - Next: one batched ucheck of all 13 changed Lean modules (including the leaf and
   root aggregator) plus the temporary four-declaration axiom audit.
+
+## 2026-11-05: localized comparison timeout reproduced
+
+- Batched validation at `737a78d780` rebuilt the swap model, forgetful comparison,
+  and ordinary chain consumer successfully.
+- Log `/home/ubuntu/u9/logs/K7-20261105T030259.log` reports a deterministic `whnf`
+  timeout at the conditional localization helper: 200000 heartbeats, 20 seconds.
+  The unconditional leaf's unknown-helper message is a consequence of that failure.
+- Added a scoped 400000-heartbeat budget only to
+  `native_weil_tensor_ringed_swap_localization_of_underived`, with the measured
+  reason beside it. No theorem statement, proof body, global option, or trust
+  setting changes. This is the only Lean repair beyond the inherited candidate.
+- Next: recheck the leaf and axiom audit, then repeat all required module targets.
