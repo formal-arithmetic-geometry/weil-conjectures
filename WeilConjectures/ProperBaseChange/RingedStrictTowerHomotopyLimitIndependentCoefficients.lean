@@ -39,6 +39,8 @@ statement applies to the small pro-etale site and the actual completed coefficie
 @[expose] public section
 
 set_option autoImplicit false
+-- This module only provides private helpers, consumed via `import all`.
+set_option linter.privateModule false
 
 universe w uC vC r u v u' v' w'
 
@@ -272,6 +274,26 @@ variable {A : Type u} [Category.{v} A] [Abelian A]
     exact Category.comp_id _
   map_comp f g := by simp [Limits.Pi.map_comp_map]
 
+@[reducible] private noncomputable def inc : L (A := A) ⟶ P where
+  app I := Pi.lift (fun n : ℕ ↦
+    (NatTrans.mapHomologicalComplex (lim.π (op n)) (ComplexShape.up ℤ)).app I)
+  naturality I J f := by
+    apply Pi.hom_ext
+    intro n
+    simp only [P, Category.assoc, Limits.Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+    exact (NatTrans.mapHomologicalComplex (lim.π (op n))
+      (ComplexShape.up ℤ)).naturality f
+
+@[reducible] private noncomputable def diff : P (A := A) ⟶ P where
+  app I := towerTransitionEndomorphism
+    (fun n : ℕ ↦ I.asFunctor.map (homOfLE (Nat.le_succ n)).op)
+  naturality I J f := by
+    dsimp only [P]
+    apply towerTransitionEndomorphism_natural_backward
+    intro n
+    exact ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f).naturality
+      (homOfLE (Nat.le_succ n)).op).symm
+
 private lemma inc_diff (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     inc.app I ≫ diff.app I = 0 := by
   change (Pi.lift (fun n : ℕ ↦
@@ -304,8 +326,6 @@ private lemma hS (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [∀ r, Injective (I
 
 variable [HasDerivedCategory.{w} A] [HasCountableProducts (DerivedCategory.{w} A)]
 
-omit [HasLimitsOfShape ℕᵒᵖ A] in
-omit [HasLimitsOfShape ℕᵒᵖ A] in
 variable [IsGrothendieckAbelian.{g} (ℕᵒᵖ ⥤ A)]
   [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
 
@@ -319,9 +339,6 @@ private noncomputable abbrev q := CochainComplex.toKInjectiveResolution.{g} (ℕ
     exact (DerivedCategory.triangleOfSESδ_naturality (hS (F.obj X))
       (hS (F.obj Y)) (Smap (F.map f))).symm
 
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A] [HasDerivedCategory.{w} A]
-  [HasCountableProducts (DerivedCategory.{w} A)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] in
-omit [HasLimitsOfShape ℕᵒᵖ A] in
 end CoreWork
 
 end CategoryTheory
