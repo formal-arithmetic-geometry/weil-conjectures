@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedEquivariantBarData
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarAction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PullbackComparisonOfAcyclic
+public import WeilConjectures.CategoryTheory.InternalActionSite.Condensed.ProfiniteActionScalarAcyclic
 public import WeilConjectures.CategoryTheory.InternalActionSite.Condensed.ProfiniteActionAbelian
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZeroUnit
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarInvariants
@@ -380,7 +382,8 @@ theorem scalarComparisonExist (a : A ⟶ A') :
           (Mod.comap a.hom.hom).mapDerivedCategoryFactors.inv.app
             (((invariants A' G).functor.mapHomologicalComplex (.up ℤ)).obj K) ≫
           (scalarBase a).map ((invariants A' G).functor.rightDerivedFunctorUnitQ K) := by
-  sorry
+  exact Functor.existsUnique_rightDerivedFunctor_comparison_of_acyclic _ _ _ _ _
+    fun I _ J _ j _ ↦ scalarAction_quasiIso_invariants_map (scalarAction a) (invariants A G) I J j
 
 /-- The unique derived coefficient isomorphism normalized by the computation units.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
