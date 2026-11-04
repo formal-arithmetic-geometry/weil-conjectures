@@ -29,15 +29,25 @@ universe u v w w₁ w₂
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 
+/-- In a braided monoidal closed category, `- ⊗ K` is left adjoint to the uncurried internal
+Hom out of `K`. Stated for an abstract category, so that the kernel checks the braiding and
+currying isomorphisms without unfolding the derived closed structure. -/
+noncomputable def CategoryTheory.MonoidalClosed.tensorRightUncurryAdjunction
+    {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
+    (K : C) :
+    tensorRight K ⊣
+      Prod.sectR (op K) C ⋙ Functor.uncurry.obj (MonoidalClosed.internalHom (C := C)) :=
+  ((ihom.adjunction K).ofNatIsoLeft
+      (BraidedCategory.tensorLeftIsoTensorRight K)).ofNatIsoRight
+    (((Functor.currying (C := Cᵒᵖ) (D := C) (E := C)).unitIso.app
+      (MonoidalClosed.internalHom (C := C))).app (op K))
+
 namespace AlgebraicGeometry.Etale
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] Etale.sheafBraidedCategory
 attribute [local instance] DerivedCategory.braidedCategory'
 
-set_option maxHeartbeats 10000000 in
--- The right-tensor adjunction unfolds the derived closed structure and needs this budget.
-set_option maxRecDepth 100000 in
 /-- The native étale right-tensor adjunction, obtained by braiding the closed
 structure so its counit has the node's evaluation order H ⊗ K → M.
 Source: Stacks 07A4; blueprint thm-coef-finite-hom, opening paragraph
@@ -45,9 +55,10 @@ Source: Stacks 07A4; blueprint thm-coef-finite-hom, opening paragraph
 noncomputable def derivedTensorHomRightAdjunction
     {R : Type (u + 1)} [CommRing R] (X : Scheme.{u})
     (K : DerivedCategoryModule R X) :
-    tensorRight K ⊣ (derivedHom (ModuleCat.{u + 1} R) X).obj (op K) :=
-  (derivedTensorHomAdjunction (ModuleCat.{u + 1} R) K).ofNatIsoLeft
-    (BraidedCategory.tensorLeftIsoTensorRight K)
+    tensorRight K ⊣
+      Prod.sectR (op K) (DerivedCategoryModule R X) ⋙
+        Functor.uncurry.obj (MonoidalClosed.internalHom (C := DerivedCategoryModule R X)) :=
+  MonoidalClosed.tensorRightUncurryAdjunction K
 
 /--
 Evaluation-defined comparison after an arbitrary unital coefficient homomorphism.
