@@ -44,6 +44,19 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
+/-- The unit of the Weil adjunction `φ^* ⊣ Rφ_*` at a Weil complex `K` is an isomorphism if and
+only if the unit of the derived adjunction on pro-étale Weil sheaves is one at `K`. -/
+lemma isIso_upperStarDerivedLowerStarAdjunction_unit_app_iff {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (φ : Y ⟶ X)
+    [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
+    [LocallyOfFiniteType φ] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (K : WeilComplex k₀ l X) :
+    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) φ).unit.app K) ↔
+      IsIso ((ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l φ).unit.app K.obj) := by
+  rw [← isIso_iff_of_reflects_iso _ (ObjectProperty.ι _), upperStarDerivedLowerStarAdjunction,
+    Adjunction.map_restrictFullyFaithful_unit_app]
+  simp
+
 include hπ in
 /-- Blueprint `lem-pur-a1-direct-image` (for lisse Weil sheaves): **homotopy invariance for lisse
 Weil sheaves**. For the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` and a lisse Weil sheaf
@@ -70,7 +83,18 @@ reduces to lisse Weil sheaves placed in degree zero
 (`AlgebraicGeometry.WeilComplex.isIso_unit_app_toComplex_of_isLisse`). -/
 theorem isIso_unit_app_of_isLisse_homologySheaf (K : WeilComplex k₀ l X)
     (hK : ∀ n : ℤ, ((homologySheaf n).obj K).IsLisse) :
-    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) :=
-  sorry
+    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) := by
+  let P : ObjectProperty (ProEtaleWeilSheaf k₀ l X) :=
+    fun F ↦ ∃ h : WeilSheaf.objectProperty k₀ l X F, WeilSheaf.IsLisse ⟨F, h⟩
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e ⟨h, hL⟩ ↦
+    ⟨(WeilSheaf.objectProperty k₀ l X).prop_of_iso e h,
+      ProEtale.IsAdicLisseSheaf.of_iso ((Endofunctor.IsoAlgebra.forget _).mapIso e) hL⟩⟩
+  rw [isIso_upperStarDerivedLowerStarAdjunction_unit_app_iff]
+  refine _root_.DerivedCategory.prop_of_bounded
+    (Q := (ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l π).unit.isoLocus)
+    P (fun F ⟨h, hL⟩ ↦ ?_) K.obj K.property.1
+    fun n ↦ ⟨K.property.2 n, hK n⟩
+  have := isIso_unit_app_toComplex_of_isLisse π s hπ ⟨F, h⟩ hL
+  rwa [isIso_upperStarDerivedLowerStarAdjunction_unit_app_iff] at this
 
 end AlgebraicGeometry.WeilComplex
