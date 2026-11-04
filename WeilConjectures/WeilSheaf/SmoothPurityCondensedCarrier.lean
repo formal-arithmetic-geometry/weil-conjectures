@@ -46,6 +46,21 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
+/-- Bounded constructibility is detected on the condensed geometric carrier. -/
+theorem objectProperty_iff_boundedConstructible_condensedCarrier
+    (K : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
+    objectProperty k₀ l X K ↔
+    boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj l)
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
+        ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K)) := by
+  rw [objectProperty_iff,
+    boundedConstructibleAdic_iff_boundedConstructible l k₀ (AlgebraicClosure k₀)
+      (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)]
+  exact ⟨(boundedConstructible _).prop_of_iso (condensedCarrierIso K).symm,
+    (boundedConstructible _).prop_of_iso (condensedCarrierIso K)⟩
+
 /-- Native bounded constructibility gives bounded constructibility of the
 forgotten condensed Weil complex. -/
 theorem boundedConstructible_condensedCarrier (K : WeilComplex k₀ l X) :
@@ -54,10 +69,37 @@ theorem boundedConstructible_condensedCarrier (K : WeilComplex k₀ l X) :
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
       ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
         ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K.obj)) := by
-  have h := (boundedConstructibleAdic_iff_boundedConstructible l k₀ (AlgebraicClosure k₀)
-    (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
-    (forget.obj K)).1 ((objectProperty_iff K.obj).1 K.property)
-  exact (boundedConstructible _).prop_of_iso
-    (condensedCarrierIso K.obj).symm h
+  exact (objectProperty_iff_boundedConstructible_condensedCarrier K.obj).1 K.property
+
+/-- Realize a condensed Weil complex with bounded constructible carrier as a
+native Weil complex. -/
+noncomputable def nativeOfCondensedCarrier
+    (C : DerivedCategory (Endofunctor.IsoAlgebra
+      (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)))
+    (hC : boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj l)
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj C)) :
+    WeilComplex k₀ l X :=
+  ⟨(ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).inverse.obj C,
+    (objectProperty_iff_boundedConstructible_condensedCarrier _).2
+      ((boundedConstructible _).prop_of_iso
+        ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.mapIso
+          ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).counitIso.app C)).symm hC)⟩
+
+/-- The realization has the prescribed condensed Weil complex, including its
+Frobenius datum. -/
+noncomputable def nativeOfCondensedCarrierIso
+    (C : DerivedCategory (Endofunctor.IsoAlgebra
+      (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)))
+    (hC : boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj l)
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj C)) :
+    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj
+      (nativeOfCondensedCarrier C hC).obj ≅ C :=
+  (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).counitIso.app C
 
 end AlgebraicGeometry.WeilComplex
