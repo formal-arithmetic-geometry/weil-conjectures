@@ -131,4 +131,3 @@ lemma projection_mapDerivedCategoryTensorComparison_total_model (X Y : DerivedCa
 end Abstract
 
 end CategoryTheory.Functor
-

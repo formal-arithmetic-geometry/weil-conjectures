@@ -60,8 +60,11 @@ theorem tensorSquare_of_representatives
     let g : (Q M, Q N) ≅ X := e.prod f
     apply (cancel_epi ((TC ⋙ P ⋙ U).map g.hom)).1
     rw [α.naturality, β.naturality]
-    change (U.map (mu.hom.app (Q M, Q N)) ≫ _ ≫ _) ≫ _ =
-      (pull.hom.app (TC.obj (Q M, Q N)) ≫ _ ≫ _) ≫ _
+    change (U.map (mu.hom.app (Q M, Q N)) ≫
+        tZ.hom.app (P.obj (Q M), P.obj (Q N)) ≫
+        TH.map (Prod.mkHom (pull.hom.app (Q M)) (pull.hom.app (Q N)))) ≫ _ =
+      (pull.hom.app (TC.obj (Q M, Q N)) ≫ L.map (tY.hom.app (Q M, Q N)) ≫
+        c.hom.app (V.obj (Q M), V.obj (Q N))) ≫ _
     rw [h M N hM hN]
   intro M N
   exact congrArg (fun t ↦ t.app (M, N)) hab
