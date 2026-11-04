@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedAdjunc
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointFree
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
 public import
-  WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperBoundedBelowCoproducts
+WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperBoundedBelowCoproducts
 
 /-!
 # Testing a condensed Weil trace on its geometric carrier
@@ -42,8 +42,8 @@ theorem isIso_homEquiv_of_fullyFaithful_trace
       (fun ψ ↦ c.hom.app K ≫ ψ) ∘ (fun φ ↦ L'.map φ ≫ δ) ∘ E.map := by
     funext φ
     simp only [Function.comp_apply, Functor.map_comp, hε, ← Category.assoc]
-    rw [c.hom.naturality φ]
-    rfl
+    simpa only [Functor.comp_map] using
+      congrArg (fun ψ ↦ ψ ≫ δ) (c.hom.naturality φ)
   have hp : Function.Bijective fun ψ : L'.obj (E.obj K) ⟶ E'.obj T ↦ c.hom.app K ≫ ψ := by
     refine ⟨fun ψ ψ' hψ ↦ (cancel_epi _).1 hψ, fun ψ ↦ ⟨c.inv.app K ≫ ψ, ?_⟩⟩
     simp
@@ -70,6 +70,7 @@ variable {C D : Type*} [Category.{v} C] [Category.{v} D]
   {L : C ⥤ D} [L.Additive] (e : L ⋙ G ≅ F ⋙ L)
   [HasDerivedCategory.{v} C] [HasDerivedCategory.{v} D]
   [HasDerivedCategory.{v} (IsoAlgebra F)] [HasDerivedCategory.{v} (IsoAlgebra G)]
+  [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions (IsoAlgebra F)]
 
 /-- A trace for a right derived Weil functor is universal if its carrier is universal
 on the shifts of the source and the source is bounded. -/
@@ -113,7 +114,9 @@ theorem condensed_trace_preservesCoproduct
     condensed_boundedBelow_preservesCoproduct Λ f _ a _ (fun n ↦ hK n.down)
   have : PreservesColimit (e.functor ⋙ Discrete.functor K)
       (lowerStar Λ f).rightDerivedFunctor :=
-    preservesColimit_of_iso_diagram _ (Discrete.natIso fun _ ↦ Iso.refl _)
+    preservesColimit_of_iso_diagram
+      (K₁ := Discrete.functor fun n : ULift.{u + 1} ℤ ↦ K n.down)
+      _ (Discrete.natIso fun _ ↦ Iso.refl _)
   exact Functor.Final.preservesColimit_of_comp e.functor
 
 end AlgebraicGeometry.ProEtale.CondensedRing

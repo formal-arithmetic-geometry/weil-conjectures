@@ -192,6 +192,7 @@ lemma lowerStarGeometricFiberWeilBaseChange_app_forget
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id] at he
   rw [geometricFiberUpperStarComparison, Iso.symm_inv,
     ← Adjunction.exchangeRight_eq_mateEquiv, ← lowerStarBaseChange_eq] at he
-  exact he
+  dsimp only [lowerStarGeometricFiberWeilBaseChange]
+  exact_mod_proofs he
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -8,6 +8,9 @@ import WeilConjectures.WeilSheaf.SmoothPurityTraceCriterion
 import WeilConjectures.WeilSheaf.SmoothPurityNativeTrace
 import WeilConjectures.WeilSheaf.SmoothPurityFreeComparison
 import WeilConjectures.WeilSheaf.SmoothPurityFreeComparisonComp
+import WeilConjectures.WeilSheaf.SmoothPurityBaseChangeNormalization
+import WeilConjectures.WeilSheaf.SmoothPurityCondensedTraceCriterion
+import WeilConjectures.WeilSheaf.SmoothPurityProperRelativeTrace
 
 #print axioms AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_free
@@ -21,3 +24,11 @@ import WeilConjectures.WeilSheaf.SmoothPurityFreeComparisonComp
 #print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_homEquiv_fieldChangedSmoothProperTrace
 
 #print axioms AlgebraicGeometry.WeilComplex.isIso_homEquiv_of_geometric_trace
+
+#print axioms CategoryTheory.Functor.traceDerivedSquare_comp
+#print axioms CategoryTheory.Endofunctor.IsoAlgebra.traceDescentComparison_forget
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.geometricFiberWeilRightDerivedLowerStarIso_forget
+#print axioms CategoryTheory.Adjunction.isIso_homEquiv_of_fullyFaithful_trace
+#print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_rightDerived_of_bounded
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.condensed_trace_preservesCoproduct
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_homEquiv_baseChangedProperTrace
