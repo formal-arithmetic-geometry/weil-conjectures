@@ -74,6 +74,7 @@ theorem ringModuleDirectImage_hasKInjectiveResolutions {X : Scheme.{u}}
         I.IsKInjective ∧ QuasiIso s := by
   exact boundedRingModuleDirectImage_hasKInjectiveResolutions R
 
+open CategoryTheory.MonoidalCategory in
 /-- Modules over the tensor unit are abelian sheaves, with their original sections. -/
 private theorem abelianSheaf_module_presentation (X : Scheme.{u}) :
     ∃ R : Sheaf (topology X) RingCat.{u + 1},
