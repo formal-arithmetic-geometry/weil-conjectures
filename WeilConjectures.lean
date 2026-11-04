@@ -16609,7 +16609,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.EpiMono
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
@@ -20817,6 +20816,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.UniversalCoverTowerLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStarFrobeniusCoherence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStarKFlat
 public import WeilConjectures.SixFunctors.ProEtale.Adic.WeaklyEtaleLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModConstantRingSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowAbSheafCokernel
@@ -24078,6 +24078,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeHomRepresentativeUniqueness
 public import WeilConjectures.WeilSheaf.Native.NativeImmersionHeartLocalization
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedActionHom
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedTensorModels
+public import WeilConjectures.WeilSheaf.Native.NativePullDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativePullSheafTensor
 public import WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
 public import WeilConjectures.WeilSheaf.Native.NativeRingedForgetTensorChainComparison
@@ -24085,6 +24086,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeStandardHomRepresentatives
 public import WeilConjectures.WeilSheaf.Native.NativeTensorAcyclicTestComparison
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatForget
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
+public import WeilConjectures.WeilSheaf.Native.NativeUpperStarKFlat
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenRestrictionTensor
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenSheafProjectionTensor
