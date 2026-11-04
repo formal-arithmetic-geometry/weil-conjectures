@@ -16552,6 +16552,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ExactSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 public import WeilConjectures.Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.Mathlib.Algebra.Homology.HomologySequence
+public import WeilConjectures.Mathlib.Algebra.Homology.HomologySequenceLemmas
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
@@ -16565,6 +16566,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFu
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.MonoidalShift
+public import WeilConjectures.Mathlib.Algebra.Homology.QuasiIso
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
@@ -21243,6 +21245,7 @@ public import WeilConjectures.SixFunctors.ProEtale.IntegralConstantLocalTor
 public import WeilConjectures.SixFunctors.ProEtale.IntegralDirectImageLimits
 public import WeilConjectures.SixFunctors.ProEtale.IntegralDirectImageReductionCone
 public import WeilConjectures.SixFunctors.ProEtale.IntegralDirectImageReductionTower
+public import WeilConjectures.SixFunctors.ProEtale.IntegralFixedSectionSquares
 public import WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedRestrictionSquares
 public import WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedRestrictionSquaresSupplement
 public import WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedSectionSquares
