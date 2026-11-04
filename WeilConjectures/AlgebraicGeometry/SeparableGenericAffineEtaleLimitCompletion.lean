@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SeparableGenericAffineEtaleStages
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
-public import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluation
+public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationCanonicalMap
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationPointed
 
 /-! # Canonical strict-henselization completion steps
@@ -63,7 +63,7 @@ theorem separableGeneric_affineEtale_limit
         π₀ j = (Scheme.strictHenselizationCone η).π.app (R.op.obj j)),
       ∃ e : Scheme.strictHenselizationRing η ≃+* Fs,
         (∀ a : Scheme.strictHenselizationRing η,
-          Fs.subtype (e a) = Scheme.strictHenselizationPointEvaluation η a) ∧
+          Fs.subtype (e a) = Scheme.strictHenselizationRingPointEvaluation η a) ∧
         Nonempty (IsLimit
           ({ pt := X
              π := { app := fun i ↦
@@ -119,7 +119,7 @@ theorem separableGeneric_affineEtale_pointed
       (u : ∀ i : A, (R.op ⋙ D₀).obj (op i) ⟶ S)
       (e : Scheme.strictHenselizationRing η ≃+* Fs)
       (hEval : ∀ a : Scheme.strictHenselizationRing η,
-        Fs.subtype (e a) = Scheme.strictHenselizationPointEvaluation η a)
+        Fs.subtype (e a) = Scheme.strictHenselizationRingPointEvaluation η a)
       (hπcan : ∀ j : Aᵒᵖ,
         π₀ j = (Scheme.strictHenselizationCone η).π.app (R.op.obj j))
       (hucan : ∀ i : A,
