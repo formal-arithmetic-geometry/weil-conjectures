@@ -20671,6 +20671,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAssembly
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelBraiding
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.TensorMapBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.TraceCounitLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
