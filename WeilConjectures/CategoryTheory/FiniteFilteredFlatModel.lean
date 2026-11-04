@@ -9,6 +9,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniv
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.CategoryTheory.UniformFiniteFilteredLocalization
+public import WeilConjectures.CategoryTheory.UniformFilteredHomotopy
 public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.CategoryTheory.Quotient
 public import WeilConjectures.CategoryTheory.RingedSiteModules
