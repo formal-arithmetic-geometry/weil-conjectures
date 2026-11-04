@@ -6,12 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Homology.BifunctorHomBidual
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.BidualTriangle
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibility
 public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomBidual
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Parametrized
+public import WeilConjectures.CategoryTheory.Adjunction.ParametrizedTransport
 import WeilConjectures.PoincareDuality.Biduality.ConstructibleDualFullyFaithful
 import WeilConjectures.CategoryTheory.RingedForgetTwoInjective.RingedForgetTwoInjectiveHom
 import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryClosedTensorModels

@@ -13204,6 +13204,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MateTwoColimit
 public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MatesCounit
+public import WeilConjectures.CategoryTheory.Adjunction.ParametrizedTransport
 public import WeilConjectures.CategoryTheory.Adjunction.PoincareDuality.ReductionShiftFromLimitMate
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
@@ -14405,6 +14406,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.MapIhomUnit
 public import WeilConjectures.CategoryTheory.Monoidal.MapIsoUnit
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.BidualTriangle
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
