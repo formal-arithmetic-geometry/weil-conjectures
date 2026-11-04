@@ -94,3 +94,23 @@
   parse error while reading its footer after another in-place wrapper update.
   The current wrapper passes `bash -n`. Rerunning the same 13 targets for a clean
   wrapper rc=0; all retained Lean sources are unchanged.
+
+## 2026-11-05: final validation GREEN
+
+- Final `ucheck` explicitly covered all 13 retained changed Lean modules, including
+  the leaf and `WeilConjectures`: rc=0, 34421 jobs, failed=0.
+- Checked revision: `7d383692c4c878ac7d354a29ba6472083f682018`.
+- Clean wrapper/build log: `/home/ubuntu/u9/logs/K7-20261105T035849.log`.
+- The identical Lean sources were fully rebuilt successfully at
+  `8edcd1a8cdef3827a2eb8ceb42f47e0040d3818e`, with the checkout stable throughout;
+  full compilation log: `/home/ubuntu/u9/logs/K7-20261105T033045.log`.
+- Leaf and four-declaration transitive axiom audit:
+  `/home/ubuntu/u9/logs/K7-20261105T031345.log`, rc=0. Only `propext`,
+  `Classical.choice`, and `Quot.sound`; no remaining sorry-leaf dependency.
+- The leaf statement is byte-identical to `19ba966718`; that upstream commit is
+  already merged. The approved ordinary-symmetry conjunct and its proof remain.
+- The only additional Lean repair is the scoped, measured 400000-heartbeat limit
+  on the conditional localization helper. No proof body or statement changed.
+  The temporary audit module is removed; no new placeholders or trust escapes.
+- Completion metadata is written to `/home/ubuntu/u9/state/K7.DONE`. The final
+  documentation commit changes no Lean sources from the validated revision.
