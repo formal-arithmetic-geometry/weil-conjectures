@@ -101,6 +101,13 @@ noncomputable def supportedHomClassOfMorphism
 
 variable [IsLocallyNoetherian X]
 
+/-- Derive the normalized ordinary adjunction with its exact left adjoint.
+Source: blueprint `def-pur-supported-exterior-product`, K-flat and injective derivation
+(blueprint: def-pur-proetale-supported-exterior-product). -/
+noncomputable def supportedCoefficientDerivedAdjunction :
+    (supportedCoefficients A i).mapDerivedCategory ⊣ supportedSectionsDerived A i :=
+  (supportedCoefficientAdjunction A i).mapDerivedCategoryRightDerivedAdjunction
+
 /-- The adjoint of A[-a] → RΓ_Z(F), shifted by a. The two comparison isomorphisms
 identify C_i(A[-a])[a] with C_i(A)[0]. Source: the cochain shift convention and the
 normalized supported adjunction (blueprint: lem-pur-supported-hom-adjunction-transpose). -/
@@ -137,6 +144,15 @@ def SupportedHomEvaluationNormalization (a : ℤ)
         ShiftedHom.map (Cocycle.equivHomShift.symm
           (Cocycle.fromSingleMk f (zero_add a) (a + 1) rfl hf)) DerivedCategory.Q ≫
         ((DerivedCategory.quotientCompQhIso _).inv.app I.obj)⟦a⟧'
+
+/-- Finiteness of the coefficient quotient in the purity conventions.
+Source: finite coefficient datum, sk-def-purity-conv
+(blueprint: lem-pur-closed-finite-adjoint-counit-transport). -/
+instance purityCoefficientFinite (P : WeilConjectures.PurityFiniteSetting.{u}) :
+    Finite P.Coefficient :=
+  haveI : Finite P.Ring := Padic.finite_coefficientExtensionRing
+    P.coefficients.l P.extension P.level P.level_pos
+  inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
 
 /-- The canonical, evaluation-normalized supported-Hom isomorphism equals the shifted
 transpose under the supported adjunction. Source: blueprint sk-thm-regular, proof Step 5

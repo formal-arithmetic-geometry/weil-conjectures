@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SixFunctors.PointProEtaleSectionsExact
 public import WeilConjectures.SixFunctors.RingedSitePoint
 public import WeilConjectures.AlgebraicGeometry.GeometricStalkToposPoint
-import all WeilConjectures.SmoothPurity.RingedSitePointTensor
+import all WeilConjectures.Algebra.Homology.RingedSitePointTensor
 import Mathlib.CategoryTheory.Limits.Shapes.Terminal
 import Mathlib.CategoryTheory.Sites.Limits
 

@@ -38,6 +38,49 @@ namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+/-- Naturality and evaluation of the two complete compactification words.
+Source: blueprint operations proof (2)
+(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+def StrictWordComparisons (b : Base l E) (o : Operations l E b)
+    (x : OpenExchange l E b o) (levels : ComparisonLevels l E b o) : Prop :=
+  (∀ {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f)
+    {K K' : D l E X} {L L' : D l E Y} (a : K ⟶ K') (d : L ⟶ L'),
+    (tensor l E b Y).map (Prod.mkHom ((F l E b o c).map a) d) ≫
+        projection l E b o c K' L' =
+      projection l E b o c K L ≫
+        (F l E b o c).map ((tensor l E b X).map
+          (Prod.mkHom a ((pull l E b (o.geometry f)).map d)))) ∧
+  (∀ {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (n : ℕ)
+    (K : D l E X) (L : D l E Y),
+    (Ev l E Y n).map (projection l E b o c K L) ≫
+        (Fcomparison l E b o c n).hom.app
+          ((tensor l E b X).obj (K, (pull l E b (o.geometry f)).obj L)) ≫
+        (finiteF l E b c n).map
+          (((b.calculus X).tensorEvaluation n).hom.app
+            (K, (pull l E b (o.geometry f)).obj L) ≫
+            (comparisonLevelTensor l E b X n).map
+              (Prod.mkHom (𝟙 _) (((o.geometry f).pullEvaluation n).hom.app L))) =
+      ((b.calculus Y).tensorEvaluation n).hom.app ((F l E b o c).obj K, L) ≫
+        (comparisonLevelTensor l E b Y n).map
+          (Prod.mkHom ((Fcomparison l E b o c n).hom.app K) (𝟙 _)) ≫
+        comparisonLevelProjection l E b o levels c n ((Ev l E X n).obj K)
+          ((Ev l E Y n).obj L)) ∧
+  (∀ {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (sq : IsPullback h f' f g) (c : Compactification f)
+    (n : ℕ) (K : D l E X),
+    (Ev l E Y' n).map ((exchange l E b o x sq c).app K) ≫
+        (Fcomparison l E b o (c.ofIsPullback sq) n).hom.app
+          ((pull l E b (o.geometry h)).obj K) ≫
+        (finiteF l E b (c.ofIsPullback sq) n).map
+          (((o.geometry h).pullEvaluation n).hom.app K) =
+      ((o.geometry g).pullEvaluation n).hom.app ((F l E b o c).obj K) ≫
+        (proEtaleConstantRingDerivedPullback (R l E n) g).map
+          ((Fcomparison l E b o c n).hom.app K) ≫
+        (comparisonLevelExchange l E b o levels sq c n).app ((Ev l E X n).obj K))
+
 /-- Simultaneous realization of the compactification projection and exchange words
 on actual quotient towers, with their finite evaluations and canonical D+ comparison.
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/

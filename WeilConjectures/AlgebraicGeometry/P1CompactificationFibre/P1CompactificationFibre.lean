@@ -376,6 +376,8 @@ def derivedRestriction (F : Sheaf (𝔸(PUnit.{u + 1}; S)).smallEtaleTopology (C
           ((openImmersionLowerShriek (C A) (j S)).obj F)) ⟶
       (rightDerivedSectionsWithSupport (C A) (z S)).obj
         ((DerivedCategory.singleFunctor _ 0).obj F) :=
+  haveI : (openImmersionRestriction (C A) (j S)).IsLeftAdjoint :=
+    (openImmersionRestrictionLowerStarAdjunction (C A) (j S)).isLeftAdjoint
   (Functor.rightDerivedPullback (openImmersionRestriction (C A) (j S))
       (supportedRestriction S A).hom).app _ ≫
     (rightDerivedSectionsWithSupport (C A) (z S)).map
@@ -395,6 +397,8 @@ resolution by uniqueness of right derived functors.
 theorem derivedRestriction_isIso
     (F : Sheaf (𝔸(PUnit.{u + 1}; S)).smallEtaleTopology (C A)) :
     IsIso (derivedRestriction S A F) := by
+  have : (openImmersionRestriction (C A) (j S)).IsLeftAdjoint :=
+    (openImmersionRestrictionLowerStarAdjunction (C A) (j S)).isLeftAdjoint
   have : (openImmersionRestriction (C A) (j S)).PreservesKInjectiveComplexes :=
     (openImmersionLowerShriekAdjunction (C A) (j S)).preservesKInjectiveComplexes
   have := Functor.isIso_rightDerivedPullback_app

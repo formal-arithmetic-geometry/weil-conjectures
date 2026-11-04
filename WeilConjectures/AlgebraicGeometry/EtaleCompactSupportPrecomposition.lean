@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 public import WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumCompositionCounit
 public import WeilConjectures.AlgebraicGeometry.Etale.Support.EtaleSupportSumCompositor
 public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
+import all WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumCompositionCounit
 
 /-!
 # Finite-torsion unbounded compact supports after exact étale sum extension

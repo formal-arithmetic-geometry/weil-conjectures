@@ -111,6 +111,8 @@ end CochainComplex.KunnethTensorAssociatedGraded
 
 namespace CochainComplex.KunnethTensorAssociatedGraded
 
+variable (R : Type u) [CommRing R]
+
 private noncomputable def tensorFilteredStepMap (K L : ModuleComplex R)
     (FK : DecreasingFiltration K) (FL : DecreasingFiltration L) (n : ℤ) :
     tensorFilteredSource R K L FK FL (n + 1) ⟶

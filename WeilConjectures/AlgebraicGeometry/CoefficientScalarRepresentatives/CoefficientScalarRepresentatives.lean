@@ -10,6 +10,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
+import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
@@ -50,9 +52,6 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C)
   {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B)
 
-attribute [local irreducible] scalarDerivedAdjunctionData
-
-attribute [local irreducible] scalarDerivedAdjunction ordinaryExtension ordinaryAdjunction
 
 /-- Sheafified sectionwise extension of scalars.
 Source: Stacks 03EK (blueprint: def-sp-coefficient-scalar-representatives). -/
@@ -65,6 +64,12 @@ Source: Stacks 03EK (blueprint: def-sp-coefficient-scalar-representatives). -/
 def ordinaryAdjunction : ordinaryExtension J a ⊣ Sheaf.restrictScalars J a :=
   Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} a)
 
+/-- Ordinary scalar extension is additive, being a left adjoint.
+Source: Stacks 03EK (blueprint: def-sp-coefficient-scalar-representatives). -/
+instance ordinaryExtension_additive {R S : Type (u + 1)}
+    [CommRing R] [CommRing S] (φ : R →+* S) : (ordinaryExtension J φ).Additive :=
+  (ordinaryAdjunction J φ).left_adjoint_additive
+
 /-- Countable coproducts in the ordinary module-sheaf category, with the same
 chosen construction used by the native scalar derived adjunction.
 Source: Stacks 06YY (blueprint: def-sp-coefficient-scalar-representatives). -/
@@ -75,64 +80,6 @@ instance sheaf_countableCoproducts (R : Type (u + 1)) [CommRing R] :
   haveI : HasColimitsOfSize.{0, 0} (Sheaf J (ModuleCat.{u + 1} R)) :=
     hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
   ⟨fun K _ ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete K)⟩
-
-private instance ordinaryExtension_preservesKFlat {R S : Type (u + 1)}
-    [CommRing R] [CommRing S] (φ : R →+* S) :
-    (ordinaryExtension J φ).PreservesKFlatQuasiIso := by
-  classical
-  let E := ordinaryExtension J φ
-  let U := Sheaf.restrictScalars J φ
-  let adj : E ⊣ U :=
-    Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
-  have : E.Additive := adj.left_adjoint_additive
-  let B := (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).obj (ModuleCat.of S S)
-  let X := (Functor.const Cᵒᵖ).obj B
-  let a := presheafToSheaf J (ModuleCat.{u + 1} R)
-  let a' := presheafToSheaf J (ModuleCat.{u + 1} S)
-  let F := sheafToPresheaf J (ModuleCat.{u + 1} R)
-  let W := (Functor.whiskeringRight Cᵒᵖ _ _).obj
-    (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
-  have : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ) :=
-    Sheaf.preservesSheafification_of_adjunction J
-      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ)
-  let e : E ⋙ U ≅ MonoidalCategory.tensorRight (a.obj X) :=
-    Functor.associator F (W ⋙ a') U ≪≫
-      Functor.isoWhiskerLeft F (Functor.associator W a' U) ≪≫
-      Functor.isoWhiskerLeft F (Functor.isoWhiskerLeft W
-        (sheafComposeNatIso J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ)
-          (sheafificationAdjunction J (ModuleCat.{u + 1} S))
-          (sheafificationAdjunction J (ModuleCat.{u + 1} R))).symm) ≪≫
-      Functor.isoWhiskerLeft F (Functor.associator W _ a).symm ≪≫
-      Functor.isoWhiskerLeft F (Functor.isoWhiskerRight
-        (Functor.whiskeringRightObjCompIso _ _ ≪≫
-          (Functor.whiskeringRight _ _ _).mapIso
-            (ModuleCat.extendScalarsCompRestrictScalarsIso.{u + 1} φ) ≪≫
-          whiskeringRightTensorRightIso _) a) ≪≫
-      Functor.isoWhiskerLeft F (Sheaf.presheafToSheafCompTensorRightIso X).symm ≪≫
-      (Functor.associator F a (MonoidalCategory.tensorRight (a.obj X))).symm ≪≫
-      Functor.isoWhiskerRight
-        (asIso (sheafificationAdjunction J (ModuleCat.{u + 1} R)).counit)
-        (MonoidalCategory.tensorRight (a.obj X)) ≪≫ Functor.leftUnitor _
-  have hU : U.Faithful := inferInstance
-  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf J (ModuleCat.{u + 1} R)) :=
-    IsGrothendieckAbelian.hasColimits _
-  have : HasColimitsOfSize.{0, 0} (Sheaf J (ModuleCat.{u + 1} R)) :=
-    hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
-  have : HasCountableCoproducts (Sheaf J (ModuleCat.{u + 1} R)) :=
-    ⟨fun K _ ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete K)⟩
-  have : E.PreservesKFlatQuasiIso := by
-    apply CategoryTheory.Functor.PreservesKFlatQuasiIso.mk'
-    intro K hK hKa
-    have ht := CochainComplex.acyclic_tensorRight_of_kFlat K hK hKa (a.obj X)
-    have hEU := ht.of_iso
-      ((NatIso.mapHomologicalComplex e (.up ℤ)).app K).symm
-    have hUK : ((U.mapHomologicalComplex (.up ℤ)).obj
-        ((E.mapHomologicalComplex (.up ℤ)).obj K)).Acyclic :=
-      hEU.of_iso ((CategoryTheory.Functor.mapHomologicalComplexCompIso
-        (Iso.refl (E ⋙ U)) (.up ℤ)).app K)
-    intro n
-    exact (ShortComplex.exact_map_iff_of_faithful _ U).1 (hUK n)
-  infer_instance
 
 /-- Ordinary scalar extension preserves K-flat quasi-isomorphisms without flatness
 of the coefficient map. Source: Stacks 06YY, 07A4
@@ -198,13 +145,29 @@ instance ordinaryExtension_preservesKFlat {R S : Type (u + 1)}
     exact (ShortComplex.exact_map_iff_of_faithful _ U).1 (hUK n)
   infer_instance
 
+private instance restrictScalars_preservesFiniteLimits {R S : Type (u + 1)}
+    [CommRing R] [CommRing S] (φ : R →+* S) :
+    PreservesFiniteLimits (Sheaf.restrictScalars J φ) := by
+  have : PreservesLimitsOfSize.{0, 0} (Sheaf.restrictScalars J φ) :=
+    (ordinaryAdjunction J φ).rightAdjoint_preservesLimits
+  infer_instance
+
+private instance restrictScalars_preservesFiniteColimits {R S : Type (u + 1)}
+    [CommRing R] [CommRing S] (φ : R →+* S) :
+    PreservesFiniteColimits (Sheaf.restrictScalars J φ) := by
+  have : PreservesColimitsOfSize.{0, 0} (Sheaf.restrictScalars J φ) :=
+    (Sheaf.restrictCoextendScalarsAdj J φ).leftAdjoint_preservesColimits
+  infer_instance
+
 private noncomputable def scalarDerivedAdjunctionData
     {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (K : GrothendieckTopology C) (φ : R →+* S) :=
-  normalizedDerivedAdjunction
+  ProEtale.normalizedDerivedAdjunction
     (A := Sheaf K (ModuleCat.{u + 1} R)) (B := Sheaf K (ModuleCat.{u + 1} S))
     (E := ordinaryExtension K φ) (U := Sheaf.restrictScalars K φ)
     (ordinaryAdjunction K φ)
+
+attribute [local irreducible] scalarDerivedAdjunctionData
 
 /-- The normalized native scalar derived adjunction. Its unit is the derived
 ordinary scalar unit, as fixed by scalarDerivedAdjunctionData.
@@ -224,6 +187,9 @@ noncomputable def scalarDerivedAdjunction
     infer_instance
   exact (ordinaryAdjunction K φ).derivedAdjunction.ofNatIsoRight
     (Sheaf.restrictScalars K φ).rightDerivedFunctorIsoMapDerivedCategory
+
+-- Keep the scalar adjunction data folded when elaborating the chosen left adjoints.
+attribute [local irreducible] scalarDerivedAdjunction ordinaryExtension ordinaryAdjunction
 
 /-- The fixed derived scalar extension, selected by its uniquely determined adjunction.
 Source: Stacks 06YY (blueprint: def-sp-coefficient-scalar-representatives). -/
@@ -304,6 +270,8 @@ def comparisonMap :
     (adjunction (Scheme.ProEt.topology T) a)).symm
       (TwoSquare.mk _ _ _ _ (derivedComparisonRestriction T a).inv)).natTrans
 
+variable {R S : Type (u + 1)} [CommRing R] [CommRing S]
+
 private theorem comparison_restrict_mate (φ : R →+* S) :
     (mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} S) T)
       (comparisonAdjunction (ModuleCat.{u + 1} R) T)
@@ -314,6 +282,68 @@ private theorem comparison_restrict_mate (φ : R →+* S) :
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology T) φ)
     (Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ)
     (Iso.refl _) (𝟙 _) (restrict_coextend_mate T φ)
+
+private theorem ordinary_scalar_mate_isIso (φ : R →+* S) :
+    IsIso (((mateEquiv (ordinaryAdjunction T.smallEtaleTopology φ)
+      (ordinaryAdjunction (Scheme.ProEt.topology T) φ)).symm
+      (TwoSquare.mk _ _ _ _ (comparisonRestriction T φ).inv)).natTrans) := by
+  apply isIso_left_mate_of_iterated
+    (ordinaryAdjunction T.smallEtaleTopology φ)
+    (ordinaryAdjunction (Scheme.ProEt.topology T) φ)
+    (comparisonAdjunction (ModuleCat.{u + 1} R) T)
+    (comparisonAdjunction (ModuleCat.{u + 1} S) T)
+  rw [comparison_restrict_mate]
+  infer_instance
+
+private theorem computed_comparison_mate_isIso (φ : R →+* S) :
+    IsIso (((mateEquiv
+      (G := (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory)
+      (H := (comparisonUpperStar (ModuleCat.{u + 1} S) T).mapDerivedCategory)
+      (scalarDerivedAdjunctionData T.smallEtaleTopology φ).adjunction
+      (scalarDerivedAdjunctionData (Scheme.ProEt.topology T) φ).adjunction).symm
+      (TwoSquare.mk _ _ _ _ (derivedComparisonRestriction T φ).inv)).natTrans) := by
+  have := comparison_preservesFlat T R
+  have := ordinary_scalar_mate_isIso T φ
+  exact derived_mate_isIso_of_flat
+    (A := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R))
+    (B := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} S))
+    (C := Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R))
+    (D := Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} S))
+    (E₁ := ordinaryExtension T.smallEtaleTopology φ)
+    (E₂ := ordinaryExtension (Scheme.ProEt.topology T) φ)
+    (U₁ := Sheaf.restrictScalars T.smallEtaleTopology φ)
+    (U₂ := Sheaf.restrictScalars (Scheme.ProEt.topology T) φ)
+    (ordinaryAdjunction T.smallEtaleTopology φ)
+    (ordinaryAdjunction (Scheme.ProEt.topology T) φ)
+    (scalarDerivedAdjunctionData T.smallEtaleTopology φ)
+    (scalarDerivedAdjunctionData (Scheme.ProEt.topology T) φ)
+    (comparisonUpperStar (ModuleCat.{u + 1} R) T)
+    (comparisonUpperStar (ModuleCat.{u + 1} S) T)
+    (comparisonRestriction T φ)
+
+/-- The specified scalar/site arrow is invertible; no different arrow is chosen.
+Source: Stacks 07A4 and 0G7E (blueprint: def-sp-coefficient-scalar-representatives).
+
+Proof: the ordinary restriction square is conjugate to the sectionwise
+coextension/direct-image identity. Iterated mates identify its inverse scalar
+mate with the ordinary tensor/site comparison. Inverse image preserves flat-term
+K-flat resolutions by the local relation criterion and commutes with tensor
+products. On those representatives the displayed derived mate, computed with
+the scalar unit used in representative, is therefore invertible. Localization
+and the unique unit-compatible scalar adjoint comparison give invertibility
+for the specified fixed functors, on all unbounded objects. -/
+@[instance] theorem comparisonMap_isIso : IsIso (comparisonMap T a) := by
+  have := computed_comparison_mate_isIso T a
+  exact isIso_left_mate_change_adjunction
+    (F := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory)
+    (G := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) T).mapDerivedCategory)
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars T.smallEtaleTopology a))
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) a))
+    (scalarDerivedAdjunctionData T.smallEtaleTopology a).adjunction
+    (scalarDerivedAdjunctionData (Scheme.ProEt.topology T) a).adjunction
+    (derivedComparisonRestriction T a).inv
 
 section ComparisonProof
 

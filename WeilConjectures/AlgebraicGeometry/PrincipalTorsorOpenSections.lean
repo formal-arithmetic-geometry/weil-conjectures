@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalTorsorComparisons.Princ
 public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapEtale
-import all WeilConjectures.SmoothPurity.OpenClosedIntegralSections
+import all WeilConjectures.AlgebraicGeometry.OpenClosedIntegralSections
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerBoundarySupplement
 
 /-! # Uniqueness of normalized open sections

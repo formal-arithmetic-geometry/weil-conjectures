@@ -19,6 +19,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlo
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingSections
 public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
+import all WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExtension
 
 /-!
 # Ordinary scalar extension evaluated on a w-contractible affine
@@ -30,9 +31,11 @@ and Proposition 4.3(1).
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-universe u
+universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
+open CategoryTheory.MonoidalCategory CategoryTheory.MonObj
+open scoped ChangeOfRings
 namespace AlgebraicGeometry.ProEtale
 
 private def pushSectionRingMap
@@ -223,6 +226,22 @@ private def sectionUnitIso
   exact { hom := ⟨i.hom⟩, inv := ⟨i.inv⟩
           hom_inv_id := SheafOfModules.hom_ext i.hom_inv_id
           inv_hom_id := SheafOfModules.hom_ext i.inv_hom_id }
+
+section ScalarRealization
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+set_option hygiene false in
+/-- The condensed scalar ring `Λ(*)`. -/
+local notation "A" => condensedScalarRing Λ
+
+set_option hygiene false in
+/-- The condensed section ring sheaf of `Λ`. -/
+local notation "B" => condensedSectionRing Λ
+
+variable (adj : (condensedScalarExtensionModel Λ).E ⊣ SheafOfModules.restrictScalars.{u + 1}
+  ((sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (condensedScalarMap Λ)))
 
 private theorem constantScalarValue (V : Profinite.{u}ᵒᵖ) (r : condensedScalarRing Λ) :
     (condensedScalarMap Λ).hom.app V
@@ -564,6 +583,8 @@ private theorem affineOneIso_scalar (X : Scheme.{u}) (U : X.ProEt)
   rw [_root_.mul_one]
   exact h2
 
+end ScalarRealization
+
 private theorem cocontinuousScalarIso
     {R S : Type v} [CommRing R] [CommRing S] (φ : R →+* S)
     (F : ModuleCat.{v} R ⥤ ModuleCat.{v} S) [F.Additive]
@@ -737,6 +758,8 @@ private theorem affineCoefficientIso_scalar
   erw [hx, ← scalarSection_value Λ r (op S)]
   exact coefficientInsertion_global Λ X U (scalarSection Λ r)
 
+set_option maxHeartbeats 400000 in
+-- The unification of the cocontinuous comparison with the composite realization is slow.
 /-- The coefficient comparison and the ordinary, module-valued scalar comparison.
 This assertion concerns modules in degree zero, without derived categories or
 truncation bounds. Scalar extension uses the actual ordinary functor in the fixed

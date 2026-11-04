@@ -28,9 +28,6 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D)
   (A : SystemScalarModel (singletonSequenceRingMap a))
 
-end SheafOfModules
-
-namespace SheafOfModules
 
 /-- The specified derived conjugate is represented by the ordinary singleton
 coefficient comparison, with the actual universal comparison maps.

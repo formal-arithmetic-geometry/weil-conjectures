@@ -76,6 +76,15 @@ abbrev WeilCoefficient.ab {ell : ℕ} [Fact ell.Prime] (c : WeilCoefficient ell)
     Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   coefficientHeartRingObj (WeilCoefficient.ring c)
 
+/-- The underlying condensed abelian group of `Λ` is a commutative ring object: `E̲ = C(-, E)`
+and `ℚ̲̄_ℓ` are condensed commutative rings.
+Source: `def-weil-weil-sheaf-complex`, first paragraph (blueprint: def-weil-weil-sheaf-complex). -/
+instance WeilCoefficient.isCommMonObj_ab {ell : ℕ} [Fact ell.Prime] (c : WeilCoefficient ell) :
+    IsCommMonObj (WeilCoefficient.ab.{u} c) :=
+  match c with
+  | .finite E => Profinite.isCommMonObj_continuousMapRingObj E
+  | .qbar => Profinite.isCommMonObj_padicAlgClRingObj ell
+
 /-- The coefficient inclusion `E̲ → ℚ̲̄_ℓ`.
 Source: `def-weil-weil-sheaf-complex`, "Descent to a finite field of coefficients"
 (blueprint: def-weil-weil-sheaf-complex). -/

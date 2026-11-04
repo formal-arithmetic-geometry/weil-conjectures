@@ -111,6 +111,17 @@ def symmetricDegree (R M : Type u) [CommRing R] [AddCommGroup M] [Module R M]
   Submodule.span R {x | ∃ v : Fin d → M,
     x = ∏ i, SymmetricAlgebra.ι R M (v i)}
 
+/-- Sheafification of abelian sheaves on an open subscheme, as an atomic instance so that
+frame composites do not carry divergent nested instance proofs. -/
+instance (priority := high) projectiveBundle_hasWeakSheafify (B : Scheme.{u}) (U : B.Opens) :
+    HasWeakSheafify (Opens.grothendieckTopology U.toScheme) AddCommGrpCat.{u} := inferInstance
+
+/-- Local bijectivity on an open subscheme, as an atomic instance; see above. -/
+instance (priority := high) projectiveBundle_wEqualsLocallyBijective (B : Scheme.{u})
+    (U : B.Opens) :
+    (Opens.grothendieckTopology U.toScheme).WEqualsLocallyBijective AddCommGrpCat.{u} :=
+  inferInstance
+
 /-- An actual frame, rather than merely the proposition that one exists.
 Source: Stacks, Tag 01OB
 (blueprint: lem-pur-projective-bundle-tautological-geometry). -/
@@ -224,6 +235,13 @@ noncomputable def projectiveBundleFrameVector
 
 attribute [irreducible] projectiveBundleFrameVector
 
+/-- `morphismRestrict_ι` for the projection of a realization, with atomic arguments so that it
+is not abstracted as a nested proof. -/
+private theorem projectiveBundleFrame_restrict_ι {B : Scheme.{u}} {F : B.Modules}
+    (D : ProjectiveBundleRealization B F) (U : B.Opens) :
+    type_of% (morphismRestrict_ι D.A.data.relProjHom U) :=
+  morphismRestrict_ι _ _
+
 /-- The quotient section associated to the `i`th vector of a specified frame, on `p⁻¹U`.
 Source: Stacks, Tag 01OB
 (blueprint: lem-pur-projective-bundle-tautological-geometry). -/
@@ -233,8 +251,14 @@ noncomputable def projectiveBundleFrameSection
     (n : ℕ) (U : B.Opens) (e : B.ModuleFrame F U (n + 1)) (i : ULift.{u} (Fin (n + 1))) :
     Scheme.Modules.unit (D.A.data.relProjHom ⁻¹ᵁ U).toScheme ⟶
       (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).obj D.L :=
-  projectiveBundleFrameVector D n U e i ≫
-    (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).map D.quotient
+  (((projectiveBundlePullbackUnitIso (D.A.data.relProjHom ∣_ U)).inv ≫
+      (Scheme.Modules.tensorPullback (D.A.data.relProjHom ∣_ U)).map
+        (SheafOfModules.ιFree i ≫ e.inv) ≫
+      ((projectiveBundlePullbackComp (D.A.data.relProjHom ∣_ U) U.ι).app F).hom ≫
+      (projectiveBundlePullbackCongr (projectiveBundleFrame_restrict_ι D U)).hom.app F ≫
+      ((projectiveBundlePullbackComp (D.A.data.relProjHom ⁻¹ᵁ U).ι
+        D.A.data.relProjHom).app F).inv) ≫
+    (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).map D.quotient :)
 
 /-- The full defining frame-section composite, usable while the frame vector stays hidden.
 Source: Stacks Project, Tags 01OB, 0095, 0096
@@ -251,8 +275,9 @@ theorem projectiveBundleFrameSection_formula {B : Scheme.{u}} {F : B.Modules}
         ((projectiveBundlePullbackComp (R.A.data.relProjHom ⁻¹ᵁ U).ι
           R.A.data.relProjHom).app F).inv) ≫
       (Scheme.Modules.tensorPullback (R.A.data.relProjHom ⁻¹ᵁ U).ι).map R.quotient := by
-  unfold projectiveBundleFrameSection projectiveBundleFrameVector
-  rfl
+  unfold projectiveBundleFrameSection
+  rw [show projectiveBundleFrame_restrict_ι R U =
+    morphismRestrict_ι R.A.data.relProjHom U from rfl]
 
 attribute [irreducible] projectiveBundleFrameSection
 

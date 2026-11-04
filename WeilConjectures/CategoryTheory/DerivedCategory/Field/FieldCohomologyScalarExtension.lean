@@ -104,10 +104,4 @@ noncomputable def fieldDerivedHomologyIso (f : K →+* L) (i : ℤ) :
       homologyFunctor (ModuleCat.{u} K) i ⋙ ModuleCat.extendScalars f :=
   (existsUnique_fieldDerivedHomologyIso f i).exists.choose
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end DerivedCategory

@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ambient.AmbientExceptionalRightAdjoint
+public import WeilConjectures.AlgebraicGeometry.Sf.SfFullCohomologicalDimension
 public import WeilConjectures.SmoothPurity.Supporting.ConstructibleIntervalsUnordered
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedFiniteTorConstructible
 public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
