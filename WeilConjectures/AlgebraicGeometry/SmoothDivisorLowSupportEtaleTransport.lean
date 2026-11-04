@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.SixFunctors.Etale.Derived.LisseFieldDual
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
 public import WeilConjectures.SixFunctors.OpenClosed.SupportedSections
@@ -76,18 +77,6 @@ noncomputable def rightDerivedSectionsWithSupportCongr {X : Scheme.{u}} {O₁ O�
     (sectionsWithSupport (ModuleCat.{u + 1} Λ) O₁.ι).rightDerivedFunctor.obj K ≅
       (sectionsWithSupport (ModuleCat.{u + 1} Λ) O₂.ι).rightDerivedFunctor.obj K :=
   eqToIso (by subst h; rfl)
-
-omit [Finite Λ] in
-/-- The vanishing of a cohomology sheaf is preserved by the derived pullback. -/
-lemma isZero_homology_leftDerivedUpperStar_obj {X Y : Scheme.{u}} (f : Y ⟶ X)
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ)
-    (hM : IsZero ((DerivedCategory.homologyFunctor _ n).obj M)) :
-    IsZero ((DerivedCategory.homologyFunctor _ n).obj
-      ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)) :=
-  (((f)^*[ModuleCat.{u + 1} Λ]).map_isZero hM).of_iso
-    ((DerivedCategory.homologyFunctor _ n).mapIso
-        ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app M) ≪≫
-      ((((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso n).app M).symm)
 
 end Transport
 
@@ -216,7 +205,7 @@ theorem isZero_homology_rightDerivedSectionsWithSupport_of_smooth_divisor_of_sta
       (rightDerivedSectionsWithSupportIsoLowerShriekUpperShriek Λ sV).app (S _)
     have hzero := hstd.of_iso ((DerivedCategory.homologyFunctor _ q).mapIso
       ((rightDerivedSectionsWithSupportIsoLowerShriekUpperShriek Λ s).app (S _)).symm)
-    exact (isZero_homology_leftDerivedUpperStar_obj Λ (h d) _ q hzero).of_iso
+    exact (isZero_homology_leftDerivedUpperStar_obj (ModuleCat.{u + 1} Λ) (h d) _ q hzero).of_iso
       ((DerivedCategory.homologyFunctor _ q).mapIso (e₁ ≪≫ e₃ ≪≫ e₂.symm))
 
 end AlgebraicGeometry.Etale
