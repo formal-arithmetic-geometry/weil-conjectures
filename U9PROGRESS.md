@@ -87,3 +87,11 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 03:49 +08:00 — normalization continuation
 - Both queued normalization checks stopped before Lean because the shared ubuild.sh was temporarily syntactically invalid. Read-only bash -n now passes; resubmitted one minimal check (session 17697). No proof failure inferred from that wrapper error.
 - Added the generalized normalized-square composition proof and its use to identify the forgotten descent comparison. New SmoothPurityBaseChangeNormalization identifies the underived square with actual weakly étale base change, then derives its mate using the existing derived_exact_forget_mate theorem. These additions are pending validation.
+
+## 2026-11-05 04:08 +0800 — derived normalization and trace universality
+- Re-read the brief and LEAD lines. The four-gap comparison remains current; no statement change is authorized.
+- K4-20261105T035340.log: generalized derived-square composition GREEN (3.6 s). K4-20261105T035648.log and K4-20261105T035930.log validate all abstract descent normalization lemmas; the remaining concrete sheaf-mate conversion timed out. Replaced that final conversion by dsimp only plus exact_mod_proofs, following the measured comp_over proof-term issue reported by K5.
+- Fixed the three independent CondensedTraceCriterion errors from the last check: naturality under composed functors, explicit K-injective-resolution instances, and the source diagram in the ULift coproduct comparison. No heartbeat increases.
+- Added SmoothPurityProperRelativeTrace: a base-changed trace for arbitrary smooth proper maps and its exceptional-adjoint formula. Added SmoothPurityTraceDescent: a general formula for the forgotten descended trace and its concrete direct-image specialization, together with universal-property transport on full subcategories.
+- One ucheck SmoothPurityTransportAudit remains active (session 54805, submitted 04:01); no new K4 log yet, so it is waiting for a shared tree. Pushed current d0a2e4b8f for that pending build, whose wrapper reads the branch at allocation. These new modules are NOT yet validated.
+- Original general purity remains open. The proper trace comparison is the next integration step; C4 still owns the actual Tate encoding. No DONE written.
