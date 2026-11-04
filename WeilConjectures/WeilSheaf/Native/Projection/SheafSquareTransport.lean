@@ -116,6 +116,26 @@ lemma PullTensorInverseSquare.rotate
   tensorSquare_rotate_components P U V G TC TD mu nY nZ a M N
     (Functor.OplaxMonoidal.δ G (V.obj M) (V.obj N)) h
 
+/-- Substitute the six sides of the inverse square before specializing its objects. -/
+lemma PullTensorInverseSquare.of_components
+    (s₀ : G.obj (V.obj M ⊗ V.obj N) ⟶ G.obj (V.obj (TC.obj (M, N))))
+    (s₁ : G.obj (V.obj (TC.obj (M, N))) ⟶ U.obj (P.obj (TC.obj (M, N))))
+    (s₂ : U.obj (P.obj (TC.obj (M, N))) ⟶ U.obj (TD.obj (P.obj M, P.obj N)))
+    (t₀ : G.obj (V.obj M ⊗ V.obj N) ⟶ G.obj (V.obj M) ⊗ G.obj (V.obj N))
+    (t₁ : G.obj (V.obj M) ⊗ G.obj (V.obj N) ⟶ U.obj (P.obj M) ⊗ U.obj (P.obj N))
+    (t₂ : U.obj (P.obj M) ⊗ U.obj (P.obj N) ⟶ U.obj (TD.obj (P.obj M, P.obj N)))
+    (hs₀ : G.map (nY.inv.app (M, N)) = s₀)
+    (hs₁ : a.hom.app (TC.obj (M, N)) = s₁)
+    (hs₂ : U.map (mu.hom.app (M, N)) = s₂)
+    (ht₀ : Functor.OplaxMonoidal.δ G (V.obj M) (V.obj N) = t₀)
+    (ht₁ : a.hom.app M ⊗ₘ a.hom.app N = t₁)
+    (ht₂ : nZ.inv.app (P.obj M, P.obj N) = t₂)
+    (h : s₀ ≫ s₁ ≫ s₂ = t₀ ≫ t₁ ≫ t₂) :
+    PullTensorInverseSquare P U V G TC TD mu nY nZ a M N := by
+  unfold PullTensorInverseSquare
+  rw [hs₀, hs₁, hs₂, ht₀, ht₁, ht₂]
+  exact h
+
 end SquarePredicates
 
 end CategoryTheory

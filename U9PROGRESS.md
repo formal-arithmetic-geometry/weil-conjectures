@@ -122,3 +122,10 @@ in the kernel (~106s), although tactics finish in 5.7s. Normalizing native tenso
 and pullback carriers explicitly before the final adic comparison, and checking
 the homogeneous underlying pullback-map equality in a separate lemma. No budget
 increase or kernel bypass.
+
+2026-11-05 04:25 CST: K5-20261105T042228.log rc=1. The homogeneous
+carrier-map equality checks; explicit carrier normalization did not eliminate
+the composite proof's kernel timeout (~106s). Replaced concrete composite
+rewrites with a generic six-component substitution theorem. The native proof now
+supplies small component equalities independently, and applies the already
+validated adic square as the final input.
