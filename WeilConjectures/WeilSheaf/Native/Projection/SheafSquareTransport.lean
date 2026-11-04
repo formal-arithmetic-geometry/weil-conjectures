@@ -26,7 +26,8 @@ lemma Endofunctor.IsoAlgebra.isoHComp_forget_symm_hom_app
       b.hom.app M.carrier := by
   rw [Functor.isoHComp_hom_app]
   simp only [Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
-    Iso.symm_hom, Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.comp_id]
+    Iso.symm_hom, Iso.refl_inv, NatTrans.id_app]
+  erw [Functor.map_id, Category.comp_id]
 
 /-- Rotate an invertible tensor comparison square to the opposite orientation. -/
 lemma tensorSquare_rotate {C : Type*} [Category C] [MonoidalCategory C]
@@ -36,9 +37,9 @@ lemma tensorSquare_rotate {C : Type*} [Category C] [MonoidalCategory C]
     u ≫ n.hom ≫ (am.inv ⊗ₘ an.inv) = a.inv ≫ b.hom ≫ d := by
   apply (cancel_epi a.hom).1
   apply (cancel_epi b.inv).1
-  simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc]
+  simp only [Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc]
   rw [reassoc_of% h]
-  simp only [Category.assoc, Iso.inv_hom_id_assoc, tensorHom_comp_tensorHom,
+  simp only [Iso.inv_hom_id_assoc, tensorHom_comp_tensorHom,
     Iso.hom_inv_id, id_tensorHom_id, Category.comp_id]
 
 end CategoryTheory
