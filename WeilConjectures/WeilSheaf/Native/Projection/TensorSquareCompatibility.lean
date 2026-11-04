@@ -60,6 +60,6 @@ theorem comparisonCompatible_of_tensorSquare_transport
     Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     curriedTensor_map_app, curriedTensor_obj_map, Category.assoc,
-    MonoidalCategory.tensorHom_def] using hh
+    MonoidalCategory.tensorHom_def, Functor.comp_obj] using hh
 
 end CategoryTheory.Adjunction

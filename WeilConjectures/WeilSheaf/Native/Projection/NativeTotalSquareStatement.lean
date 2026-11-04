@@ -14,6 +14,9 @@ import WeilConjectures.Tactic.ExactModProofs
 
 @[expose] public noncomputable section
 
+-- Use the coefficient-category instance fixed by the native tensor construction.
+attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
+
 universe u
 
 open CategoryTheory MonoidalCategory Limits

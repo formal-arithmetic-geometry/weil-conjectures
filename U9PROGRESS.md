@@ -215,3 +215,12 @@ then specializing the predicate. Derived Q proof got to the K-flat proofs for LP
 explicit proof casts should prevent unfolding the local functor aliases.
 Totalization now gets past comp_f and its first complex-component rewrite; added
 a generic countable-coproduct existence interface and exposed only summand insertions.
+
+2026-11-05 06:07 CST: K5-20261105T060037.log rc=1.
+Abstract normalization predicate and theorem both accepted (75s/181s kernel),
+concrete specialization still kernel-times out (119s). Source NativePullTensor
+explicitly lowers ModuleCat.isGrothendieckAbelian_of_commRing to priority 0;
+matched that setting in new native proof interfaces. This is a typeclass-path
+alignment, not an opacity barrier or heartbeat increase. Generic compatibility
+now fails only on Functor.comp_obj spelling, fixed; countable helper needed the
+explicit Mathlib countable-limits import, fixed. Submitting the full small batch.
