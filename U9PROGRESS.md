@@ -168,3 +168,16 @@ totalization and localization into conditional theorems in new small modules.
 Their only hypotheses are the preceding square identities, and the public final
 lemmas specialize them to the proven preceding layer. This lets ucheck validate
 all three proof layers independently within the same dependency graph.
+
+2026-11-05 05:18 CST: The single ucheck submitted at 04:48:30
+is still queued (latest K5 log remains 044426). All five trees are occupied;
+newer cleanup jobs can acquire a slot ahead of older leaf requests. Current
+pushed source af7a2c832 includes the inferred-f/e specialization, independently
+checkable conditional proof layers, and abstract-R normalization. No local Lean
+commands, duplicate requests, or heartbeat increases. Waiting for compiler feedback.
+
+2026-11-05 05:28 CST: The 04:48 ucheck exited rc=2 before compilation: shared
+ubuild.sh was edited in place while Bash was waiting in its loop, producing
+line 21 syntax error at truncated text "ock -n 9; then". Current bash -n passes.
+The updated script reserves w3 and newsrv:t1 for leaf agents; resubmitting the
+same complete batch. No new K5 build log was created by the failed request.
