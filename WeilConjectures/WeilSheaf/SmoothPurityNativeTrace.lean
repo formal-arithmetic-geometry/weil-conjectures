@@ -80,6 +80,7 @@ lemma condensedShriekForTrace_eq :
           f (comp_over f (Spec (CommRingCat.of k₀)))))
         (comp_over f (Spec (CommRingCat.of k₀))) := by
   rw [ProEtaleWeilSheaf.condensedRightDerivedLowerShriek_eq]
+  rfl
 
 /-- The comparison with condensed compact support, in the spelling used by the
 finite-field descended trace. -/
@@ -96,7 +97,9 @@ noncomputable def condensedShriekForTraceIso :
       (comp_over f (Spec (CommRingCat.of k₀)))).obj
         ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj) :=
   (derivedLowerShriekCompToCondensedIso k₀ l f).app T ≪≫
-    (eqToIso (condensedShriekForTrace_eq f)).app _
+    eqToIso (congrArg (fun F ↦ F.obj
+      ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj))
+        (condensedShriekForTrace_eq f))
 
 /-- The condensed expression of the trace, with the compactification comparison explicit. -/
 noncomputable def condensedExpressionOfSmoothTrace :

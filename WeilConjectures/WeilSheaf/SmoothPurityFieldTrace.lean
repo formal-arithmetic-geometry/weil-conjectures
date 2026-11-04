@@ -36,6 +36,7 @@ lemma homEquiv_baseChangedTrace
     ← cancel_epi (bc.hom.app T), Iso.hom_inv_id_app_assoc]
   have hn := bc.hom.naturality γ
   simp only [Functor.comp_map] at hn
+  simp only [Functor.map_comp, Category.assoc]
   rw [← reassoc_of% hn, app_comp_map_unitBaseChange_comp_counit]
   simp only [Functor.map_comp, Category.assoc]
 
@@ -84,8 +85,8 @@ def fieldChangedSmoothProperTrace :
       ((boundedConstructibleUpperStarOfMap l (X := X) (Y := X') π).obj
         (boundedConstructibleTateTwist l X d (2 * d))) ⟶ 𝟙_ _ :=
   have := isIso_boundedConstructibleBaseChangeOfMap l sq
-  inv ((boundedConstructibleBaseChangeOfMap l sq.toCommSq).app
-      (boundedConstructibleTateTwist l X d (2 * d))) ≫
+  (asIso (boundedConstructibleBaseChangeOfMap l sq.toCommSq)).inv.app
+      (boundedConstructibleTateTwist l X d (2 * d)) ≫
     (boundedConstructibleUpperStarOfMap l (X := point F) (Y := point L)
       (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map (smoothProperTrace l d) ≫ e
 
@@ -96,7 +97,10 @@ lemma homEquiv_fieldChangedSmoothProperTrace :
       (boundedConstructibleUpperStarOfMap l (X := X) (Y := X') π).map
           (smoothOrientation l (toPoint X) d) ≫ dualizingComplexBaseChange l e sq := by
   have := isIso_boundedConstructibleBaseChangeOfMap l sq
-  exact Adjunction.homEquiv_baseChangedTrace (properLowerStarUpperShriekAdjunction l X)
+  simpa only [fieldChangedSmoothProperTrace, smoothProperTrace, dualizingComplexBaseChange,
+    Adjunction.unitBaseChangeOfEq, eqToHom_refl, Category.id_comp, Category.comp_id,
+    asIso_hom] using
+    Adjunction.homEquiv_baseChangedTrace (properLowerStarUpperShriekAdjunction l X)
     (properLowerStarUpperShriekAdjunction l X')
     (asIso (boundedConstructibleBaseChangeOfMap l sq.toCommSq)) e
     (smoothOrientation l (toPoint X) d)

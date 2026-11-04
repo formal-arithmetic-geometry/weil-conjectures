@@ -34,7 +34,7 @@ noncomputable def compForgetIso : (R₁ ⋙ R₂) ⋙ W ≅ U ⋙ (r₁ ⋙ r₂
     have hn₂ := e₂.hom.naturality (R₁.map f)
     have hn₁ := e₁.hom.naturality f
     simp only [Functor.comp_map] at hn₂ hn₁
-    rw [reassoc_of% hn₂, ← r₂.map_comp, hn₁, r₂.map_comp, Category.assoc])
+    rw [reassoc_of% hn₂, ← r₂.map_comp, hn₁, r₂.map_comp])
 
 /-- The pasted free comparison respects the free units whenever its two factors do. -/
 theorem unit_app_comp_map_compFreeComparison (X : C)
@@ -53,7 +53,6 @@ theorem unit_app_comp_map_compFreeComparison (X : C)
   have hn := e₂.inv.naturality β₁.hom
   simp only [Functor.comp_map] at hn
   rw [← hn]
-  simp only [Functor.comp_map]
   rw [← r₂.map_comp_assoc, h₁, r₂.map_comp, Category.assoc]
   rfl
 
