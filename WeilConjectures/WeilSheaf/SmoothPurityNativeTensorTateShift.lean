@@ -71,12 +71,19 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 /-- The corresponding comparison on constructible Weil complexes. -/
 noncomputable def nativeConstructibleTensorTateShiftIso (d n : ℤ) :
     Prod.sectR ((WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)) ⟦n⟧) _ ⋙
-      nativeConstructibleTensor k₀ l X ≅ tateTwist k₀ l X d ⋙ shiftFunctor _ n :=
-  ((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
-    (Functor.isoWhiskerLeft (objectProperty k₀ l X).ι
+      nativeConstructibleTensor k₀ l X ≅ tateTwist k₀ l X d ⋙ shiftFunctor _ n := by
+  let G := WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)
+  let ι := (objectProperty k₀ l X).ι
+  let e : (ι.obj (G⟦n⟧)) ≅ (ι.obj G)⟦n⟧ := (ι.commShiftIso n).app G
+  let a : Prod.sectR (G⟦n⟧) _ ⋙ ι.prod ι ≅
+      ι ⋙ Prod.sectR ((ι.obj G)⟦n⟧) _ :=
+    NatIso.ofComponents (fun K ↦ e.prod (Iso.refl (ι.obj K))) (fun _ ↦ by simp)
+  apply ((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
+  exact Functor.isoWhiskerRight a (ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X) ≪≫
+    Functor.isoWhiskerLeft ι
       (ProEtaleWeilSheaf.nativeDerivedTensorTateShiftIso d n) ≪≫
       Functor.isoWhiskerRight (tateTwistCompιIso d).symm (shiftFunctor _ n) ≪≫
       Functor.isoWhiskerLeft (tateTwist k₀ l X d)
-        ((objectProperty k₀ l X).ι.commShiftIso n).symm)
+        ((objectProperty k₀ l X).ι.commShiftIso n).symm
 
 end AlgebraicGeometry.WeilComplex
