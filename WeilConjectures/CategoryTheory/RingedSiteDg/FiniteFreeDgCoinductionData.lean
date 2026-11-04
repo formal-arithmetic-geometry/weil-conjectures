@@ -28,8 +28,6 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{u} C]
   {O : Sheaf J CommRingCat.{u}}
 
 set_option maxHeartbeats 800000 in
--- The nested action and localization equations require a larger elaboration budget.
-set_option maxHeartbeats 800000 in
 -- Elaborating the comparison evaluation uses the same budget as the full record.
 /-- The ordinary coinduction and tensor-dual data, without free extension.
 Source: Stacks 0FRS (blueprint: lem-sf-finite-free-dg-coinduction-ordinary-core-stage3). -/
@@ -61,8 +59,4 @@ structure FiniteFreeCoinductionOrdinaryCore (A : Algebra O) where
         (α_ M ((underlying A).obj (coinduction.obj (𝟙_ (Complex O)))) A.X).hom ≫
         (M ◁ evaluation (𝟙_ (Complex O))) ≫ (ρ_ M).hom
 
-variable [HasDerivedCategory.{w} (Coeff O)]
-
-set_option maxHeartbeats 800000 in
--- The nested action and localization equations require a larger elaboration budget.
 end CategoryTheory.RingedSiteDg
