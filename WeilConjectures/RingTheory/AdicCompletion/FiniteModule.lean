@@ -40,8 +40,10 @@ open Submodule TensorProduct
 variable {A : Type*} [CommRing A] (I : Ideal A)
 
 /-- A finite product of copies of an `I`-adically precomplete ring is precomplete. -/
-theorem IsPrecomplete.pi (ι : Type*) [Fintype ι] [DecidableEq ι] [IsPrecomplete I A] :
+theorem IsPrecomplete.pi (ι : Type*) [Finite ι] [IsPrecomplete I A] :
     IsPrecomplete I (ι → A) := by
+  cases nonempty_fintype ι
+  classical
   rw [← AdicCompletion.of_surjective_iff]
   intro y
   choose a ha using fun j ↦ AdicCompletion.of_surjective I A
