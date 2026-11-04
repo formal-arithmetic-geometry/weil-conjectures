@@ -58,7 +58,8 @@ private lemma unit_aux {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCa
     whisker_exchange_assoc, leftUnitor_naturality, ← reassoc_of% hn, reassoc_of% h₁]
 
 omit [CommRing Λ] [Finite Λ] [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] in
-/-- The monoidal computation behind `AlgebraicGeometry.Etale.canonicalSmoothPurityMap_naturality`. -/
+/-- The monoidal computation behind
+`AlgebraicGeometry.Etale.canonicalSmoothPurityMap_naturality`. -/
 private lemma nat_aux {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
     {A A' W O T T' R R' : C} (v : A ⟶ A') (ψ : T ⟶ A ⊗ W) (ψ' : T' ⟶ A' ⊗ W) (t : T ⟶ T')
     (φ : W ⟶ O) (τ : O ⊗ A ⟶ R) (τ' : O ⊗ A' ⟶ R') (r : R ⟶ R')
@@ -112,7 +113,8 @@ lemma canonicalSmoothPurityMap_unit :
   rw [canonicalSmoothPurityMap, hT, hβ]
   change _ ≫ _ ◁ _ ≫ _ = _
   exact unit_aux (leftDerivedUpperStarUnitIso _ f).hom (twistShiftObjIso Λ X d _).hom
-    (twistShiftObjIso Λ X d (𝟙_ _)).hom ((twistShift Λ X d).map (leftDerivedUpperStarUnitIso _ f).hom)
+    (twistShiftObjIso Λ X d (𝟙_ _)).hom
+    ((twistShift Λ X d).map (leftDerivedUpperStarUnitIso _ f).hom)
     (dualizingComplexTwistShiftIso Λ f d aY).inv hn h1
 
 /-- The canonical purity map is natural in `K`. -/
@@ -123,11 +125,36 @@ lemma canonicalSmoothPurityMap_naturality
       (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ) ≫
         canonicalSmoothPurityMap Λ f d aY K' := by
   let := _root_.DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-  have hT := lowerShriekRightAdjointUnitTensorMap_naturality (rightDerivedUpperShriekAdjunction Λ f) φ
+  have hT :=
+    lowerShriekRightAdjointUnitTensorMap_naturality (rightDerivedUpperShriekAdjunction Λ f) φ
   have hn := twistShiftObjIso_hom_naturality Λ (d : ℤ) ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ)
   exact nat_aux _ _ _ _ _ _ _ _ hn hT
 
 end Map
+
+section TwistShift
+
+variable {X Y : Scheme.{u}} [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
+
+omit [Finite Λ] [HasKummerClass.IsNormalized Λ] in
+/-- The identification `Lf^*(K(m)[2m]) ≅ (Lf^* K)(m)[2m]`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarTwistShiftIso`) is natural in `K`. -/
+@[reassoc]
+lemma leftDerivedUpperStarTwistShiftIso_hom_naturality (f : X ⟶ Y) (m : ℤ)
+    {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (v : K ⟶ K') :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map ((twistShift Λ Y m).map v) ≫
+        (leftDerivedUpperStarTwistShiftIso Λ f m K').hom =
+      (leftDerivedUpperStarTwistShiftIso Λ f m K).hom ≫
+        (twistShift Λ X m).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map v) := by
+  simp only [leftDerivedUpperStarTwistShiftIso, twistShift, tateTwist, Iso.trans_hom,
+    Iso.app_hom, Functor.mapIso_hom, Functor.comp_map, Functor.flip_obj_map, Category.assoc]
+  rw [Functor.commShiftIso_hom_naturality_assoc, ← Functor.map_comp, ← Functor.map_comp]
+  congr 2
+  rw [reassoc_of% leftDerivedUpperStarTensorIso_hom_naturality_left, Category.assoc,
+    NatTrans.naturality]
+
+end TwistShift
 
 section BaseChange
 
@@ -154,6 +181,53 @@ theorem canonicalSmoothPurityMap_baseChange (sq : IsPullback g' f' f g)
       (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫
         canonicalSmoothPurityMap Λ f' d aY' ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) :=
   sorry
+
+/-- Blueprint `proposition-compatibility-purity-base-change`, the orientation part: the canonical
+orientations `θ_f : Rf^! Λ_Y ≅ Λ_X(d)[2d]` and `θ_{f'}`
+(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`) are compatible with the exceptional base
+change `Lg'^* Rf^! ⟶ Rf'^! Lg^*` and the pullback of the Tate twist. This is the case
+`K = Λ_Y` of `AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`. -/
+theorem dualizingComplexTwistShiftIso_baseChange (sq : IsPullback g' f' f g)
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
+    (aY' : Y' ⟶ Spec (.of k')) [IsSeparated aY'] [LocallyOfFiniteType aY'] :
+    (upperShriekBaseChangeMap Λ sq).app (constantComplex Λ Y) ≫
+        (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom ≫
+          (dualizingComplexTwistShiftIso Λ f' d aY').hom =
+      (L((g')^*[ModuleCat.{u + 1} Λ])).map (dualizingComplexTwistShiftIso Λ f d aY).hom ≫
+        (leftDerivedUpperStarTwistShiftIso Λ g' d (constantComplex Λ X)).hom ≫
+          (twistShift Λ X' d).map (leftDerivedUpperStarUnitIso _ g').hom := by
+  -- the units of the two factorizations of `g' ≫ f = f' ≫ g`
+  have hε : (L((g')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarUnitIso _ f).hom ≫
+      (leftDerivedUpperStarUnitIso _ g').hom =
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g' f (g' ≫ f) rfl).inv.app _ ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f' g (g' ≫ f) sq.w).hom.app _) ≫
+          (L((f')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarUnitIso _ g).hom ≫
+            (leftDerivedUpperStarUnitIso _ f').hom := by
+    have h₁ := congrArg Iso.hom (leftDerivedUpperStarConstantComplexIso_comp Λ g' f _ rfl)
+    have h₂ := congrArg Iso.hom (leftDerivedUpperStarConstantComplexIso_comp Λ f' g _ sq.w)
+    simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom] at h₁ h₂
+    have hu {S T : Scheme.{u}} (h : S ⟶ T) : (leftDerivedUpperStarUnitIso _ h).hom =
+        (leftDerivedUpperStarConstantComplexIso Λ h).hom :=
+      leftDerivedUpperStarUnitIso_hom_eq_η h
+    rw [hu, hu, hu, hu, Category.assoc]
+    erw [← h₂, h₁, Iso.inv_hom_id_app_assoc]
+  have hnode := canonicalSmoothPurityMap_baseChange Λ d sq aY aY' (𝟙_ _)
+  have hnat := canonicalSmoothPurityMap_naturality Λ f' d aY' (leftDerivedUpperStarUnitIso _ g).hom
+  have htsi := leftDerivedUpperStarTwistShiftIso_hom_naturality Λ g' d
+    (leftDerivedUpperStarUnitIso _ f).hom
+  rw [canonicalSmoothPurityMap_unit] at hnode hnat
+  rw [← cancel_epi ((L((g')^*[ModuleCat.{u + 1} Λ])).map ((twistShift Λ X d).map
+    (leftDerivedUpperStarUnitIso _ f).hom ≫ (dualizingComplexTwistShiftIso Λ f d aY).inv))]
+  erw [reassoc_of% hnode]
+  rw [reassoc_of% hnat, Iso.inv_hom_id, Category.comp_id, Functor.map_comp, Category.assoc,
+    ← Functor.map_comp_assoc (L((g')^*[ModuleCat.{u + 1} Λ]))
+      (dualizingComplexTwistShiftIso Λ f d aY).inv, Iso.inv_hom_id,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  erw [reassoc_of% htsi]
+  simp only [leftDerivedUpperStarTwistShiftBaseChangeIso, Iso.trans_hom, Functor.mapIso_hom,
+    Category.assoc, ← Functor.map_comp]
+  rw [hε]
+  simp only [Iso.app_hom, Iso.symm_hom, Iso.app_inv, Category.assoc]
 
 end BaseChange
 

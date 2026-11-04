@@ -16565,6 +16565,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceTrace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.CanonicalPurityBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClassSmooth
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
@@ -20752,6 +20753,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekLocality
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekOpenRestriction
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekTensorMapUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
