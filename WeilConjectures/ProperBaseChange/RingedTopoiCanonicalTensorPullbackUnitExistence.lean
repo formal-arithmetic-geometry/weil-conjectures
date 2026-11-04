@@ -27,6 +27,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+import all WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
 
 
 @[expose] public section
