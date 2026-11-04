@@ -28,6 +28,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.WeilComplex
 
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
@@ -101,6 +103,8 @@ end AlgebraicGeometry.WeilComplex
 
 namespace AlgebraicGeometry.WeilComplex
 
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
@@ -125,19 +129,19 @@ theorem nonempty_trivialLineThom_of_affineLine_constant
   have : s.IsOver (Spec (CommRingCat.of k₀)) :=
     ⟨hπ.w.symm.trans (comp_over π _)⟩
   have : IsSeparated (Y ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over π]
+    rw [← comp_over π (Spec (CommRingCat.of k₀))]
     infer_instance
   have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over π]
+    rw [← comp_over π (Spec (CommRingCat.of k₀))]
     infer_instance
   have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over π]
+    rw [← comp_over π (Spec (CommRingCat.of k₀))]
     infer_instance
   obtain ⟨bc⟩ := nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hπ.flip
   let a := bc.app (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀)))
-  exact nonempty_upperStar_comp_shriek_iso_of_constant_cohomology π (-1) (-2)
-    ((derivedLowerShriek k₀ l π).mapIso (purityUpperStarConstantIso s).symm ≪≫
+  exact nonempty_upperStar_comp_shriek_iso_of_constant_cohomology (k₀ := k₀) (l := l) π (-1) (-2)
+    ((derivedLowerShriek k₀ l π).mapIso (purityUpperStarConstantIso (k₀ := k₀) (l := l) s).symm ≪≫
       a.symm ≪≫ (upperStar (X ↘ Spec (CommRingCat.of k₀))).mapIso e ≪≫
-      purityUpperStarShiftedTateIso (X ↘ Spec (CommRingCat.of k₀)) (-1) (-2))
+      purityUpperStarShiftedTateIso (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀)) (-1) (-2))
 
 end AlgebraicGeometry.WeilComplex

@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeDirectTraceCriterion
-public import WeilConjectures.WeilSheaf.SmoothPurityDescendedProperUniversality
+public import WeilConjectures.WeilSheaf.SmoothPurityDescendedWeilUniversality
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChangeCoherence
 
 /-!
@@ -142,22 +142,10 @@ theorem bijective_map_comp_condensedProperTrace [IsIso γ]
         (condensedProperTrace f γ T U eT eU) := by
   dsimp only [Functor.TraceUniversalAt, condensedProperTrace]
   apply Functor.bijective_map_comp_iso_trace _ eT eU.symm
-  refine Endofunctor.IsoAlgebra.bijective_map_comp_rightDerived_of_bounded
-    (CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso
-      (Profinite.padicAlgClRingObj l) f (comp_over f _))
-    (CondensedRing.condensed_trace_preservesCoproduct (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap f (comp_over f _))) _ _
-    (boundedConstructible_condensedCarrier K).1 ?_
-  intro n
-  have hK := ObjectProperty.le_shift (P := boundedConstructible
-    (condensedRingObj (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) n _
-      (boundedConstructible_condensedCarrier K)
-  have hu := CondensedRing.bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso l
+  exact CondensedRing.geometricFiberWeilDirectTrace_weilUniversal l
     (properTraceBaseMap (k₀ := k₀) f) (CondensedRing.upperStarWeilCompatible _ f (comp_over f _)) γ
-    ⟨_, hK⟩
-  dsimp only [Functor.TraceUniversalAt, Functor.comp_obj, ObjectProperty.ι_obj] at hu ⊢
-  cast_proofs hu
+    ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K.obj)
+    (boundedConstructible_condensedCarrier K)
 
 
 /-- The adjunct of the native descended trace is invertible when exceptional

@@ -231,3 +231,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Audit /home/ubuntu/u9/logs/K4-20261105T070448.log finished rc=1, three built/two failed. NativeTensorTateShift is GREEN (6.6s). Thom reached only a missing toComplex/pullback interface and two unresolved k₀ arguments; supplied the comparison directly with mapDerivedCategorySingleFunctor and pinned k₀/l.
 - The profiled native trace module took 263s including a very verbose trace (913k log lines). Its proof elaboration timed out at the final exact_mod_proofs hu (12.7s for that tactic, 24.4s total proof), not at the preceding dsimp (0.015s). Replaced the minimal-subterm cast tactic by cast_proofs, whose outermost proof comparison avoids traversing the deep exceptional-base-change proof terms. Removed profiling (and its misplaced doc-comment wrapper).
 - No heartbeat raises. Full absolute/Thom assembly and C4 encoding remain pending; no DONE.
+
+## 2026-11-05 07:13 +0800 — finite-base Weil universality interface
+- Audit /home/ubuntu/u9/logs/K4-20261105T071051.log finished rc=1. cast_proofs still reaches the 200000-heartbeat whnf timeout in native universality (26s). Thom's comparison repairs pass, but its last trivial-line specialization times out (13s).
+- Added SmoothPurityDescendedWeilUniversality: apply the free Weil resolution entirely in the finite-base Over coordinates, then export its universal property through TraceUniversalAt. The native helper now only specializes that theorem, avoiding a comparison of the expanded native and Over geometric universal-property statements.
+- Pinned k₀/l and structural-map instances in the remaining Thom specialization. Added the new universal-property theorem to the eventual axiom audit. No heartbeat raises or DONE.
