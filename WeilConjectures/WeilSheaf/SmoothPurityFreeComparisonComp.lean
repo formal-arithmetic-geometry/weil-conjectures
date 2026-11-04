@@ -31,9 +31,10 @@ variable {C C' D D' E E' : Type*}
 noncomputable def compForgetIso : (R₁ ⋙ R₂) ⋙ W ≅ U ⋙ (r₁ ⋙ r₂) :=
   NatIso.ofComponents (fun A ↦ e₂.app (R₁.obj A) ≪≫ r₂.mapIso (e₁.app A)) (fun f ↦ by
     simp only [Functor.comp_map, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
-    rw [e₂.hom.naturality_assoc]
-    simp only [Functor.comp_map]
-    rw [← r₂.map_comp, ← r₂.map_comp, e₁.hom.naturality])
+    have hn₂ := e₂.hom.naturality (R₁.map f)
+    have hn₁ := e₁.hom.naturality f
+    simp only [Functor.comp_map] at hn₂ hn₁
+    rw [reassoc_of% hn₂, ← r₂.map_comp, hn₁, r₂.map_comp, Category.assoc])
 
 /-- The pasted free comparison respects the free units whenever its two factors do. -/
 theorem unit_app_comp_map_compFreeComparison (X : C)
@@ -49,7 +50,9 @@ theorem unit_app_comp_map_compFreeComparison (X : C)
   simp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom,
     Functor.map_comp, Category.assoc]
   rw [reassoc_of% h₂]
-  erw [← e₂.inv.naturality_assoc β₁.hom]
+  have hn := e₂.inv.naturality β₁.hom
+  simp only [Functor.comp_map] at hn
+  rw [← hn]
   simp only [Functor.comp_map]
   rw [← r₂.map_comp_assoc, h₁, r₂.map_comp, Category.assoc]
   rfl

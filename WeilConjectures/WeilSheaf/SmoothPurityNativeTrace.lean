@@ -71,9 +71,13 @@ lemma condensedShriekForTrace_eq :
     ProEtaleWeilSheaf.condensedRightDerivedLowerShriek k₀ l f
         (HasCompactification.compactification f
           (hf := hasCompactification_of_over (k₀ := k₀) f)) =
-      CondensedRing.weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)
+      CondensedRing.weilRightDerivedLowerShriek
+      (s := X ↘ Spec (CommRingCat.of k₀)) (t := Y ↘ Spec (CommRingCat.of k₀))
+      (Profinite.padicAlgClRingObj l)
         (CondensedRing.compactificationOverField
-          (Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))))
+          (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+          (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
+          f (comp_over f (Spec (CommRingCat.of k₀)))))
         (comp_over f (Spec (CommRingCat.of k₀))) := by
   rw [ProEtaleWeilSheaf.condensedRightDerivedLowerShriek_eq]
 
@@ -82,9 +86,13 @@ finite-field descended trace. -/
 noncomputable def condensedShriekForTraceIso :
     (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.obj
       ((derivedLowerShriek k₀ l f).obj T).obj ≅
-    (CondensedRing.weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)
+    (CondensedRing.weilRightDerivedLowerShriek
+      (s := X ↘ Spec (CommRingCat.of k₀)) (t := Y ↘ Spec (CommRingCat.of k₀))
+      (Profinite.padicAlgClRingObj l)
       (CondensedRing.compactificationOverField
-        (Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))))
+        (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+          (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
+          f (comp_over f (Spec (CommRingCat.of k₀)))))
       (comp_over f (Spec (CommRingCat.of k₀)))).obj
         ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj) :=
   (derivedLowerShriekCompToCondensedIso k₀ l f).app T ≪≫
@@ -96,12 +104,18 @@ noncomputable def condensedExpressionOfSmoothTrace :
         ((derivedLowerShriek k₀ l f).obj T).obj ⟶
       (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.obj U.obj :=
   (condensedShriekForTraceIso f T).hom ≫
-    (CondensedRing.weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)
+    (CondensedRing.weilRightDerivedLowerShriek
+      (s := X ↘ Spec (CommRingCat.of k₀)) (t := Y ↘ Spec (CommRingCat.of k₀))
+      (Profinite.padicAlgClRingObj l)
       (CondensedRing.compactificationOverField
-        (Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))))
+        (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+          (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
+          f (comp_over f (Spec (CommRingCat.of k₀)))))
       (comp_over f (Spec (CommRingCat.of k₀)))).map eT.hom ≫
     CondensedRing.geometricFiberWeilSmoothTrace l
-      (Over.homMk f (comp_over f (Spec (CommRingCat.of k₀)))) d ≫ eU.inv
+      (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+          (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
+          f (comp_over f (Spec (CommRingCat.of k₀)))) d ≫ eU.inv
 
 /-- Lift the descended smooth trace through the fully faithful condensed realization. -/
 noncomputable def traceOfDescendedSmoothTrace : (derivedLowerShriek k₀ l f).obj T ⟶ U :=
