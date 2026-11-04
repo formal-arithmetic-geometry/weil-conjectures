@@ -72,3 +72,9 @@ sheaf square. Factored horizontal identity elimination and square rotation into
 an abstract helper; no heartbeat increase. Also corrected dependency audit to
 report hidden imported bodies and added the coproduct-preservation instance
 needed by totalization. Rechecking.
+
+2026-11-05 03:08 CST: Generic SheafSquareTransport GREEN (<1s), but native
+wrapper still has the same two kernel timeouts (K5-20261105T030309.log,
+243s). The proof tactics now elaborate without errors. Running a synchronous
+profiler/diagnostics check through ucheck to locate the kernel conversion; no
+kernel skipping, no heartbeat increase.
