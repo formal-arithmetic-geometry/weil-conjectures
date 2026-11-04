@@ -12,7 +12,8 @@ public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
-import WeilConjectures.WeilSheaf.VerdierDualInputs
+import WeilConjectures.WeilSheaf.SmoothPurity
+import WeilConjectures.WeilSheaf.VerdierExchange
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes

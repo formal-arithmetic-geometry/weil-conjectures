@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.CompactProjectionFormula
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-!
 # The Verdier exchange for Weil complexes
@@ -41,19 +42,6 @@ no exceptional inverse image `Rf^!` along `f` is needed.
 universe u
 
 open CategoryTheory Opposite MonoidalCategory
-
-namespace CategoryTheory.Functor.FullyFaithful
-
-variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} (hF : F.FullyFaithful)
-
-/-- For a fully faithful functor `F`, the functor `T ↦ Hom(F T, F A)` is `T ↦ Hom(T, A)`. -/
-noncomputable def opCompYonedaObjIso [Category.{v} C] [Category.{v} D] {F : C ⥤ D}
-    (hF : F.FullyFaithful) (A : C) :
-    F.op ⋙ yoneda.obj (F.obj A) ≅ yoneda.obj A :=
-  NatIso.ofComponents (fun _ ↦ hF.homEquiv.symm.toIso)
-    (fun g ↦ by ext x; exact hF.map_injective (by simp))
-
-end CategoryTheory.Functor.FullyFaithful
 
 namespace AlgebraicGeometry
 
