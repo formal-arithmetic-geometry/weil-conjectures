@@ -26,10 +26,6 @@ attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology
 attribute [-instance] ClopenLocalization.modulesAbelian ClopenLocalization.hasDerived
 attribute [-instance] ClopenLocalization.sheafify ClopenLocalization.locallyBijective
 
-end AlgebraicGeometry.Scheme.ProEt.ClopenScalar
-
-namespace AlgebraicGeometry.Scheme.ProEt.ClopenScalar
-
 /-- On a flat-term K-flat complex whose restriction is also flat-term K-flat,
 the normalized derived scalar-composition square follows from the ordinary square.
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D, the composition
