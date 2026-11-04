@@ -46,6 +46,159 @@ def regularSectionEvaluation {T : Scheme.{u}} (F : T.Modules) (s : F.sections) :
     (SheafOfModules.unit T.ringCatSheaf)
     (SheafOfModules.sectionsMap (SheafOfModules.bidual (R := T.sheaf) F) s)
 
+/-- Two sections of `p` agree after precomposition with `h` iff their affine-chart
+components agree over every affine open (the charts being monomorphisms). -/
+theorem comp_eq_comp_iff_of_affineCharts {S E W : Scheme.{u}} (p : E ⟶ S)
+    {Y : S.affineOpens → Scheme.{u}}
+    (chart : ∀ U : S.affineOpens, (p ⁻¹ᵁ U.1).toScheme ⟶ Y U)
+    [∀ U, Mono (chart U)] (a b : S ⟶ E) (c c' : ∀ U : S.affineOpens, U.1.toScheme ⟶ Y U)
+    (ha : ∀ U, ∃ aU : U.1.toScheme ⟶ (p ⁻¹ᵁ U.1).toScheme,
+      aU ≫ (p ⁻¹ᵁ U.1).ι = U.1.ι ≫ a ∧ aU ≫ chart U = c U)
+    (hb : ∀ U, ∃ bU : U.1.toScheme ⟶ (p ⁻¹ᵁ U.1).toScheme,
+      bU ≫ (p ⁻¹ᵁ U.1).ι = U.1.ι ≫ b ∧ bU ≫ chart U = c' U) (h : W ⟶ S) :
+    h ≫ a = h ≫ b ↔ ∀ U, h ∣_ U.1 ≫ c U = h ∣_ U.1 ≫ c' U := by
+  constructor
+  · intro e U
+    obtain ⟨aU, ha₁, ha₂⟩ := ha U
+    obtain ⟨bU, hb₁, hb₂⟩ := hb U
+    have : h ∣_ U.1 ≫ aU = h ∣_ U.1 ≫ bU := by
+      rw [← cancel_mono (p ⁻¹ᵁ U.1).ι, Category.assoc, Category.assoc, ha₁, hb₁,
+        morphismRestrict_ι_assoc, morphismRestrict_ι_assoc, e]
+    rw [← ha₂, ← hb₂, reassoc_of% this]
+  · intro e
+    refine Scheme.hom_ext_of_forall _ _ fun x ↦ ?_
+    obtain ⟨U, hU, hx, -⟩ :=
+      exists_isAffineOpen_mem_and_subset (TopologicalSpace.Opens.mem_top (h x))
+    obtain ⟨aU, ha₁, ha₂⟩ := ha ⟨U, hU⟩
+    obtain ⟨bU, hb₁, hb₂⟩ := hb ⟨U, hU⟩
+    have : h ∣_ U ≫ aU = h ∣_ U ≫ bU := by
+      rw [← cancel_mono (chart ⟨U, hU⟩), Category.assoc, Category.assoc, ha₂, hb₂]
+      exact e ⟨U, hU⟩
+    refine ⟨h ⁻¹ᵁ U, hx, ?_⟩
+    rw [← morphismRestrict_ι_assoc, ← morphismRestrict_ι_assoc, ← ha₁, ← hb₁,
+      reassoc_of% this]
+
+namespace VectorBundleZeroSection
+
+variable {S : Scheme.{u}} (M : S.Modules)
+
+/-- Lift a linear form to the base. -/
+def liftToBase (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) :
+    SymmetricAlgebraSheaf.algebra M ⟶
+      ((antiEquivalence S).functor.obj (op (baseObject S))).obj :=
+  (exists_quasiCoherentSymmetricAlgebra_core S M
+    ((antiEquivalence S).functor.obj (op (baseObject S))).obj φ).exists.choose
+
+theorem liftToBase_sectionMap (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) (U : S.Opens)
+    (a : SymmetricAlgebraSheaf.sections M (op U)) :
+    (liftToBase M φ).right.hom.app (op U) (SymmetricAlgebraSheaf.sectionMap M (op U) a) =
+      SymmetricAlgebra.lift (A := S.presheaf.obj (op U)) (φ.val.app (op U)).hom a := by
+  have h := (exists_quasiCoherentSymmetricAlgebra_core S M
+    ((antiEquivalence S).functor.obj (op (baseObject S))).obj φ).exists.choose_spec
+  induction a using SymmetricAlgebra.induction with
+  | algebraMap r =>
+      rw [AlgHom.commutes]
+      exact congrArg (fun q ↦ q.hom.app (op U) r) (Under.w (liftToBase M φ))
+  | ι x =>
+      rw [SymmetricAlgebra.lift_ι_apply]
+      exact h U x
+  | mul a b ha hb => simp only [map_mul, ha, hb]
+  | add a b ha hb => simp only [map_add, ha, hb]
+variable [IsNoetherian S] (d : ℕ) [M.IsFiniteLocallyFreeOfRank d]
+
+/-- Lift a linear form to the base. -/
+def sectionOver (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) : baseObject S ⟶ over S d M :=
+  ((antiEquivalence S).functor.preimage
+    (((antiEquivalence S).counitIso.app (algebraObject S d M)).hom ≫
+      ObjectProperty.homMk (liftToBase M φ))).unop
+
+/-- Lift a linear form to the base. -/
+def sectionOfForm (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) : S ⟶ scheme S d M :=
+  (sectionOver M d φ).hom.left
+
+theorem sectionOfForm_π (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) :
+    sectionOfForm M d φ ≫ π S d M = 𝟙 S :=
+  Over.w (sectionOver M d φ).hom
+
+theorem sectionOver_map (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) :
+    (antiEquivalence S).functor.map (sectionOver M d φ).op =
+      ((antiEquivalence S).counitIso.app (algebraObject S d M)).hom ≫
+        ObjectProperty.homMk (liftToBase M φ) :=
+  (antiEquivalence S).functor.map_preimage _
+
+set_option maxHeartbeats 1000000 in -- unfolding the anti-equivalence is slow
+theorem sectionOfForm_appLE (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) (U : S.Opens) :
+    (algebraIso S d M).hom.right.hom.app (op U) ≫
+      (sectionOfForm M d φ).appLE ((π S d M) ⁻¹ᵁ U) U
+        (by rw [← Scheme.Hom.comp_preimage, sectionOfForm_π]; simp) =
+      (liftToBase M φ).right.hom.app (op U) := by
+  have hn := congrArg (fun t ↦ t.hom.right.hom.app (op U)) (sectionOver_map M d φ)
+  simp only [ObjectProperty.FullSubcategory.comp_hom, Under.comp_right,
+    TopCat.Sheaf.comp_app] at hn
+  change (sectionOfForm M d φ).appLE ((π S d M) ⁻¹ᵁ U) U _ =
+    ((antiEquivalence S).counitIso.app (algebraObject S d M)).hom.hom.right.hom.app (op U) ≫
+      (liftToBase M φ).right.hom.app (op U) at hn
+  have hc := congrArg (fun t ↦ t.hom.right.hom.app (op U))
+    ((antiEquivalence S).counitIso.app (algebraObject S d M)).inv_hom_id
+  simp only [ObjectProperty.FullSubcategory.comp_hom, Under.comp_right,
+    TopCat.Sheaf.comp_app, ObjectProperty.FullSubcategory.id_hom, Under.id_right,
+    TopCat.Sheaf.id_app] at hc
+  change ((antiEquivalence S).counitIso.app (algebraObject S d M)).inv.hom.right.hom.app
+    (op U) ≫ _ = _
+  rw [hn, ← Category.assoc, hc, Category.id_comp]
+
+set_option maxHeartbeats 1000000 in -- unfolding the anti-equivalence is slow
+theorem sectionOfForm_affineChart (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf)
+    (U : S.affineOpens) :
+    (sectionOfForm M d φ).resLE ((π S d M) ⁻¹ᵁ U.1) U.1
+        (by rw [← Scheme.Hom.comp_preimage, sectionOfForm_π]; simp) ≫ affineChart S d M U =
+      U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+        (SymmetricAlgebra.lift (φ.val.app (op U.1)).hom).toRingHom) := by
+  have hφ : CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap M (op U.1)) ≫
+      (algebraIso S d M).hom.right.hom.app (op U.1) ≫
+      (sectionOfForm M d φ).appLE ((π S d M) ⁻¹ᵁ U.1) U.1
+        (by rw [← Scheme.Hom.comp_preimage, sectionOfForm_π]; simp) =
+      CommRingCat.ofHom (SymmetricAlgebra.lift (φ.val.app (op U.1)).hom).toRingHom := by
+    rw [sectionOfForm_appLE]
+    apply CommRingCat.hom_ext
+    exact RingHom.ext (liftToBase_sectionMap M φ U.1)
+  change (sectionOfForm M d φ).resLE ((π S d M) ⁻¹ᵁ U.1) U.1 _ ≫
+      ((π S d M) ⁻¹ᵁ U.1).toSpecΓ ≫
+        Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.sectionMap M (op U.1)) ≫
+          (algebraIso S d M).hom.right.hom.app (op U.1)) = _
+  rw [← Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc]
+  simp only [← Spec.map_comp, Category.assoc] at hφ ⊢
+  rw [hφ]
+  rfl
+
+
+set_option maxHeartbeats 1000000 in -- unfolding the anti-equivalence is slow
+/-- The section of the vector bundle attached to a linear form `φ : M → O_S`, characterized
+on affine charts by `SymmetricAlgebra.lift φ`. -/
+theorem sectionOfForm_existsUnique (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) :
+    ∃! f : {f : S ⟶ scheme S d M // f ≫ π S d M = 𝟙 S},
+      ∀ U : S.affineOpens,
+        ∃ fU : U.1.toScheme ⟶ ((π S d M) ⁻¹ᵁ U.1).toScheme,
+          fU ≫ ((π S d M) ⁻¹ᵁ U.1).ι = U.1.ι ≫ f.val ∧
+          fU ≫ affineChart S d M U =
+            U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+              (SymmetricAlgebra.lift (φ.val.app (op U.1)).hom).toRingHom) := by
+  have hex (U : S.affineOpens) : ∃ fU : U.1.toScheme ⟶ ((π S d M) ⁻¹ᵁ U.1).toScheme,
+      fU ≫ ((π S d M) ⁻¹ᵁ U.1).ι = U.1.ι ≫ sectionOfForm M d φ ∧
+      fU ≫ affineChart S d M U =
+        U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+          (SymmetricAlgebra.lift (φ.val.app (op U.1)).hom).toRingHom) :=
+    ⟨_, Scheme.Hom.resLE_comp_ι _ _, sectionOfForm_affineChart M d φ U⟩
+  refine ⟨⟨sectionOfForm M d φ, sectionOfForm_π M d φ⟩, hex, fun f hf ↦ Subtype.ext ?_⟩
+  have hiso (U : S.affineOpens) : IsIso (affineChart S d M U) := (affineChart_spec S d M U).1
+  have hmono (U : S.affineOpens) : Mono (affineChart S d M U) := inferInstance
+  have key := comp_eq_comp_iff_of_affineCharts (π S d M)
+    (Y := fun U ↦ Spec (.of (SymmetricAlgebraSheaf.sections M (op U.1))))
+    (fun U ↦ affineChart S d M U) f.val (sectionOfForm M d φ) _ _ hf hex (𝟙 S)
+  simpa using key.2 fun U ↦ rfl
+
+end VectorBundleZeroSection
+
 variable (P : WeilConjectures.PurityFiniteSetting.{u})
   (T : Scheme.{u}) (hT : T ⟶ Spec (CommRingCat.of P.field.k))
   [IsSeparated hT] [LocallyOfFiniteType hT] [QuasiCompact hT]
@@ -86,7 +239,9 @@ theorem regularSectionGeometric_existsUnique (F : T.Modules) (r : ℕ)
             U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
               ((SymmetricAlgebra.lift
                 (((regularSectionEvaluation F s).val.app (op U.1)).hom)).toRingHom)) := by
-  sorry
+  exact @VectorBundleZeroSection.sectionOfForm_existsUnique T
+    (Scheme.Modules.dual F) (isNoetherian_of_locallyOfFiniteType hT) r
+    (Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r) (regularSectionEvaluation F s)
 
 /-- The geometric section determined by dual evaluation, chosen from its unique affine
 characterization, not from an unconstrained existence statement.
