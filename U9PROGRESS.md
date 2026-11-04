@@ -16,3 +16,10 @@ AlgebraicGeometry.ProEtaleWeilSheaf.native_proper_kflat_pull_tensor_square.
 Its condensed-only analogue is proved, but it does not supply the native square.
 Added a small generic tensor-square representative extensionality helper, ported
 from the surrounding Sheaf proof, for the eventual K-flat normalization proof.
+
+2026-11-05 02:30 CST: Added proof candidates for the tensor-generator unit
+formulas, the adic/condensed sheaf pullback tensor square, and its native/total
+versions. The proof transposes through the pullback adjunction, then uses the
+monoidality of lowerStarForgetAbIso. Ported the generic ordinary tensor
+normalization lemmas from pr/2087 under distinct names to keep its future merge
+clean. Remote uchecks are queued behind K6; no compilation feedback yet.
