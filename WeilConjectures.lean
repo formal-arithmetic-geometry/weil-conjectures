@@ -16458,6 +16458,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TraceCup
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TraceEquivariance
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TracePairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitDualDatum
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitOrientation
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UntwistedPerfectness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise
@@ -16578,6 +16579,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependence
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependenceField
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusDatum
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
@@ -20713,6 +20715,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorResolution
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorSheafUpperStar
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorShiftNaturality
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitudeResidue
