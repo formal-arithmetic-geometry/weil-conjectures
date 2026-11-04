@@ -41,6 +41,9 @@ variable {C : Type w} [Category.{v} C] [EssentiallySmall.{r} C] {J : Grothendiec
   [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)]
   (φ : R ⟶ S) (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections)
 
+omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+  [HasSheafify J AddCommGrpCat.{r}] [HasDerivedCategory.{wR} (Modules R)]
+  [HasDerivedCategory.{wS} (Modules S)] in
 /-- The coinduction counit is killed by the regular scalar.
 Source: Stacks Tags 03D7 and 06YP; the scalar acts by zero on restricted modules
 (blueprint: lem-sf-regular-quotient-injective-kernel). -/
