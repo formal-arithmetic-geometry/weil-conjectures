@@ -13,3 +13,5 @@ import WeilConjectures.WeilSheaf.SmoothPurityFreeComparisonComp
 #print axioms AlgebraicGeometry.WeilComplex.traceOfDescendedSmoothTrace
 #print axioms CategoryTheory.Endofunctor.IsoAlgebra.isIso_forgetFreeComparison
 #print axioms CategoryTheory.Adjunction.unit_app_comp_map_compFreeComparison
+
+#print axioms CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_geometric

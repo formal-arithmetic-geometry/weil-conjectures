@@ -41,6 +41,21 @@ variable {X Y : Scheme.{u}}
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (d : ℕ) (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
+
+local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
+local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
+local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
+local instance : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)))
+local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)))
+local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+  inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
+
+variable
   (eT : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj ≅
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj

@@ -56,12 +56,15 @@ theorem bijective_map_comp_on_free_of_forget
       adj₂.homEquiv (r.obj X) B (β.hom ≫ R.map u ≫ d) =
         r.map (adj₁.homEquiv X A u) ≫ e.inv.app A ≫ V.map d := by
     simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
-    rw [reassoc_of% hβ, ← e.inv.naturality_assoc u]
+    rw [reassoc_of% hβ]
+    erw [← e.inv.naturality_assoc u]
     rfl
   constructor
   · intro u u' huu
     apply (adj₁.homEquiv X A).injective
     apply h.1
+    change r.map (adj₁.homEquiv X A u) ≫ e.inv.app A ≫ V.map d =
+      r.map (adj₁.homEquiv X A u') ≫ e.inv.app A ≫ V.map d
     rw [← he u, ← he u', huu]
   · intro y
     obtain ⟨u, hu⟩ := h.2 (adj₂.homEquiv (r.obj X) B (β.hom ≫ y))
@@ -96,8 +99,8 @@ theorem bijective_map_comp_of_forget
     (hPC_shift : ∀ (K : DerivedCategory C) (n : ℤ), PC K → PC (K⟦n⟧))
     {H : DerivedCategory (IsoAlgebra F)} {L' : DerivedCategory (IsoAlgebra G)}
     (d : RW.obj H ⟶ L')
-    (β : ∀ X, PC X → (Free.functor G).mapDerivedCategory.obj (R.obj X) ≅
-      RW.obj ((Free.functor F).mapDerivedCategory.obj X))
+    (β : ∀ X, PC X → ((Free.functor G).mapDerivedCategory.obj (R.obj X) ≅
+      RW.obj ((Free.functor F).mapDerivedCategory.obj X)))
     (hβ : ∀ X hX,
       (freeWeilDerivedAdjunction G).unit.app (R.obj X) ≫
           (forget G).mapDerivedCategory.map (β X hX).hom =

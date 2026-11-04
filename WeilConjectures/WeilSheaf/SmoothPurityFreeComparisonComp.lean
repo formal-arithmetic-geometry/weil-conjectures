@@ -48,7 +48,8 @@ theorem unit_app_comp_map_compFreeComparison (X : C)
         (compForgetIso R₁ r₁ e₁ R₂ r₂ e₂).inv.app (I.obj X) := by
   simp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom,
     Functor.map_comp, Category.assoc]
-  rw [reassoc_of% h₂, ← e₂.inv.naturality_assoc β₁.hom]
+  rw [reassoc_of% h₂]
+  erw [← e₂.inv.naturality_assoc β₁.hom]
   simp only [Functor.comp_map]
   rw [← r₂.map_comp_assoc, h₁, r₂.map_comp, Category.assoc]
   rfl

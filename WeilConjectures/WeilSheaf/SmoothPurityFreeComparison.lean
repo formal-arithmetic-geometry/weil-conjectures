@@ -57,6 +57,8 @@ variable (χ : R ⋙ G.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ R)
         χ.hom.app ((forget F).mapDerivedCategory.obj A) ≫
         R.map ((derivedStrIso F).hom.app A))
 
+include hσ
+
 /-- The cyclic compatibility written through the inverse forgetful comparison. -/
 @[reassoc]
 lemma map_derivedStrIso_comp_forgetComparison_inv (A : DerivedCategory (IsoAlgebra F)) :
