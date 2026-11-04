@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.CondensedBar.CondensedEquivariantBa
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.Condensed.TopComparison
 public import Mathlib.Topology.Category.Profinite.EffectiveEpi
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # The small profinite site for internal condensed actions
@@ -58,21 +59,6 @@ theorem modelPrecoverage_toGrothendieck :
 instance model_hasFiniteLimits : HasFiniteLimits Model.{u} :=
   ⟨fun _ _ _ ↦ Adjunction.hasLimitsOfShape_of_equivalence
     (AsSmall.equiv.{u, u + 1, u + 1} (C := Profinite.{u})).inverse⟩
-
-/-- Composition of covering presieves along `Presieve.bind` is covering for a Grothendieck
-topology viewed as a precoverage. -/
-theorem _root_.CategoryTheory.GrothendieckTopology.toPrecoverage_bind_mem {C : Type*}
-    [Category* C] (T : GrothendieckTopology C) {X : C} (R : Presieve X)
-    (P : ∀ ⦃Y : C⦄ (f : Y ⟶ X), R f → Presieve Y) (hR : R ∈ T.toPrecoverage X)
-    (hP : ∀ (Y : C) (f : Y ⟶ X) (hf : R f), P f hf ∈ T.toPrecoverage Y) :
-    R.bind (fun _ _ hf ↦ P _ hf) ∈ T.toPrecoverage X := by
-  rw [GrothendieckTopology.mem_toPrecoverage_iff] at hR ⊢
-  refine T.transitive hR _ ?_
-  rintro Z g ⟨W, h, f, hf, rfl⟩
-  rw [Sieve.pullback_comp]
-  refine T.pullback_stable h (T.superset_covering ?_ (hP _ f hf))
-  rintro V k ⟨V', l, m, hm, rfl⟩
-  exact ⟨V', l, m ≫ f, ⟨_, _, _, hf, hm, rfl⟩, by simp⟩
 
 /-- The model precoverage satisfies the covering axioms of a site. -/
 theorem modelPrecoverage_isSiteForCoverings : modelPrecoverage.{u}.IsSiteForCoverings := by

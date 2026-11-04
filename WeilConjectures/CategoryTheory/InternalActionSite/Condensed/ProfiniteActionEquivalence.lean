@@ -68,6 +68,33 @@ noncomputable def toSite : Equivariant A G ⥤ SiteEquivariant A G where
   map_id _ := rfl
   map_comp _ _ := rfl
 
+/-- The sections of `toSite.obj M` at `X` are the sections of `M` at the underlying
+profinite set. -/
+theorem toSite_sections (M : Equivariant A G) (X : Model.{u}ᵒᵖ) :
+    ((toSite.obj M).obj.val.obj X : Type (u + 1)) =
+      sections A M.module ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop) :=
+  rfl
+
+/-- Restriction in `toSite.obj M` is restriction in `M`. -/
+theorem toSite_map_apply (M : Equivariant A G) {X Y : Model.{u}ᵒᵖ} (f : X ⟶ Y)
+    (m : sections A M.module ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop)) :
+    (toSite.obj M).obj.val.map f m =
+      (M.module.X.obj.map ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).map f.unop).op).hom m :=
+  rfl
+
+/-- The action of `toSite.obj M` is the action of `M`. -/
+theorem toSite_act_apply (M : Equivariant A G) (X : Model.{u}ᵒᵖ) (a : (groupPresheaf G).obj X)
+    (m : sections A M.module ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop)) :
+    (toSite.obj M).obj.action.act X a m = M.act _ (groupPresheafObjEquiv G X a) m :=
+  rfl
+
+/-- The components of `toSite.map f` are the components of `f`. -/
+theorem toSite_map_hom_app {M N : Equivariant A G} (f : M ⟶ N) (X : Model.{u}ᵒᵖ)
+    (m : sections A M.module ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop)) :
+    (toSite.map f).hom.val.app X m =
+      (f.val.hom.hom.app (op ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop))).hom m :=
+  rfl
+
 /-- Every equivariant map on the small model comes from an equivariant internal map. -/
 noncomputable def toSitePreimage {M N : Equivariant A G} (g : toSite.obj M ⟶ toSite.obj N) :
     M ⟶ N :=
@@ -222,6 +249,20 @@ noncomputable def toSiteModule : Modules A ⥤ SheafOfModules.{u + 1} (siteRing 
       ((sectionsFunctor A).map f).val⟩
   map_id _ := rfl
   map_comp _ _ := rfl
+
+/-- Restriction in `(toSiteModule A).obj M` is restriction in `M`. -/
+theorem toSiteModule_map_apply (M : Modules A) {X Y : Model.{u}ᵒᵖ} (f : X ⟶ Y)
+    (m : sections A M ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop)) :
+    ((toSiteModule A).obj M).val.map f m =
+      (M.X.obj.map ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).map f.unop).op).hom m :=
+  rfl
+
+/-- The components of `(toSiteModule A).map f` are the components of `f`. -/
+theorem toSiteModule_map_val_app {M N : Modules A} (f : M ⟶ N) (X : Model.{u}ᵒᵖ)
+    (m : sections A M ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop)) :
+    ((toSiteModule A).map f).val.app X m =
+      (f.hom.hom.app (op ((AsSmall.down : Model.{u} ⥤ Profinite.{u}).obj X.unop))).hom m :=
+  rfl
 
 /-- Reading internal modules on the small model is additive. -/
 instance toSiteModule_additive : (toSiteModule A).Additive where
