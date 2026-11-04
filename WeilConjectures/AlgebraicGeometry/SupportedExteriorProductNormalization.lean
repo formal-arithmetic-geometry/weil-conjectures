@@ -198,6 +198,19 @@ noncomputable def exteriorProductResolutionComparison
       (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P)
       (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)
 
+/-- Inverse image of étale sheaves preserves K-flat complexes.
+Missing input: the project only proves this for functorial flat resolutions, under the
+hypothesis `Etale.UpperStarPreservesFlat C`
+(`AlgebraicGeometry.Etale.kFlat_upperStar_mapHomologicalComplex_obj`). The general
+statement, for an arbitrary K-flat complex and an arbitrary coefficient category, needs
+the stalkwise description of `g^*` and of the tensor product. -/
+theorem kFlat_upperStar_mapHomologicalComplex_obj_of_kFlat {S T : Scheme.{u}} (h : T ⟶ S)
+    (K : CochainComplex (Sheaf S.smallEtaleTopology C) ℤ)
+    (hK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat K) :
+    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+      (((upperStar C h).mapHomologicalComplex (.up ℤ)).obj K) := by
+  sorry
+
 /-- K-flat representatives compute the derived exterior product.
 Source: the nested blueprint unit cited above (blueprint: def-pur-supported-exterior-product).
 Proof: inverse image is exact and monoidal, so preserves K-flat complexes. Its derived
@@ -209,7 +222,24 @@ theorem isIso_exteriorProductResolutionComparison
     (_hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
     (_hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q) :
     IsIso (exteriorProductResolutionComparison C f g P Q) := by
-  sorry
+  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Qh
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P))
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q))) :=
+    DerivedMonoidal.isIso_counit_app_app_of_kFlat_right DerivedCategory.Qh
+      (HomotopyCategory.quasiIso _ (.up ℤ)) _ _
+      ((HomotopyCategory.kFlat_quotient_obj_iff _).2
+        (kFlat_upperStar_mapHomologicalComplex_obj_of_kFlat C (pullback.snd f g) Q _hQ))
+  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q
+      (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P)
+      (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)) := by
+    -- `Q` is lax monoidal as `quotient ⋙ Qh`, transported along an isomorphism.
+    change IsIso ((_ ⊗ₘ _) ≫
+      (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map _) ≫ _)
+    infer_instance
+  unfold exteriorProductResolutionComparison derivedTensorHom
+  infer_instance
 
 /-- The canonical exterior-product comparison, inverted on K-flat representatives.
 Source: the nested blueprint unit cited above (blueprint: def-pur-supported-exterior-product). -/
