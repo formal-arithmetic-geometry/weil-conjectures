@@ -208,35 +208,6 @@ structure OrdinarySquare {X Y : Scheme.{u}} (f : X ⟶ Y) where
     (ordinaryAdj (A l E) (aTransition l E) f)
       (TwoSquare.mk _ _ _ _ pull.inv)).natTrans = push.hom
 
-/-- The simultaneous geometric comparisons on the specified finite-type k-schemes.
-Source: geometric comparison clauses of the node
-(blueprint: lem-coef-finite-free-system-restriction). -/
-structure Geometry (D : FiniteFieldDatum.{u}) where
-  /-- The comparisons already exist on the abelian system categories. -/
-  ordinary : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
-    OrdinarySquare l E L i f
-  /-- The derived geometric right mate is invertible. -/
-  push_isIso : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
-    IsIso ((ordinary X Y f).derivedPush l E L i)
-  /-- The derived open-adjunction mate is invertible. -/
-  open_isIso : ∀ (X Y : Spaces D) (j : X.val.left ⟶ Y.val.left)
-    [IsOpenImmersion j], IsIso ((ordinary X Y j).derivedOpenInv l E L i)
-  /-- Constant coefficient sections give the actual ordinary pushforward map. -/
-  coefficient_push : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
-    coefficientModule l E L i Y.val.left ⟶
-      (AlgebraicGeometry.ProEtale.SemilinearProperOpen.push (A l E) (aTransition l E) f).obj
-        (coefficientModule l E L i X.val.left)
-  /-- Its sections are exactly the structural constant-section map for B. -/
-  coefficient_push_section : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left)
-    (V : (ℕ × Y.val.left.ProEt)ᵒᵖ),
-    HEq (fun x ↦ (coefficient_push X Y f).val.app V x)
-      (fun x ↦ (coefficientMap (B l E L i) (bTransition l E L i) f).hom.app V x)
-  /-- Its ordinary pullback adjunct is invertible; exact localization gives the
-  coefficient pullback isomorphism with precisely this constant-section normalization. -/
-  coefficient_pull_isIso : ∀ (X Y : Spaces D) (f : X.val.left ⟶ Y.val.left),
-    IsIso (((ordinaryAdj (A l E) (aTransition l E) f).homEquiv _ _).symm
-      (coefficient_push X Y f))
-
 /-- The strict-system realization of a fixed compactification h = pj.
 Source: the compact-support clause of the node
 (blueprint: lem-coef-finite-free-system-restriction). -/

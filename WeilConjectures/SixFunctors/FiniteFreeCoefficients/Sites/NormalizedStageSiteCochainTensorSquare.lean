@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.Sites.NormalizedStageSiteSheafTensorSquare
 
 /-!
 # Signed cochain lift of the scalar/site tensor square
@@ -103,17 +104,12 @@ Additivity commutes with the scalar (-1)^p in the second differential, and all m
 preserve the bidegree, so the Koszul signs on both paths are the same.
 3. On each summand the ordinary sheaf tensor square gives equality: locally each route
 sends b tensor (p tensor q) to (b tensor p) tensor (1 tensor q). The direct-sum universal
-property proves the equality of components, hence of cochain maps. The flat-term
-K-flat hypotheses are retained as the representative context of the assertion.
+property proves the equality of components, hence of cochain maps.
 -/
 theorem normalized_stage_site_cochain_tensor_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (X : Scheme.{u})
-    (P Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
-    (_hPflat : ∀ n : ℤ, ObjectProperty.flat (P.X n))
-    (_hQflat : ∀ n : ℤ, ObjectProperty.flat (Q.X n))
-    (_hPK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (_hQK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q) :
+    (P Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
     ((ProEtale.sheafExtendScalars φ X).mapHomologicalComplex (.up ℤ)).map
           (siteTensorCochain A X P Q) ≫
         proEtaleScalarTensorCochain φ X
