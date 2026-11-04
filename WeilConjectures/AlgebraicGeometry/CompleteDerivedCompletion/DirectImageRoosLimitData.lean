@@ -67,7 +67,7 @@ import WeilConjectures.CategoryTheory.Ringed.RingedConstantTowerPushforwardNorma
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
+import all WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 
 /-!
 # Roos limit data for complete direct images

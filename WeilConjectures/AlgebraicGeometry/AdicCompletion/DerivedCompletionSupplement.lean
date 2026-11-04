@@ -296,12 +296,7 @@ private theorem genericCoconeIso_inv_fst_f
   rw [Iso.hom_inv_id_assoc]
   simp only [genericCoconeCoordinateIso, biprod.lift_fst]
 
-/-- Completed pro-étale module sheaves satisfy countable AB4*: countable products of
-epimorphisms are epimorphisms.
-Proof: the pro-étale site has enough weakly contractible objects, on which evaluation
-is exact. Source: Bhatt--Scholze, Section 3.1 and Proposition 4.2.8
-(blueprint: sk-def-pe-derived-completion). -/
-theorem modules_countableAB4Star : CountableAB4Star (Modules l E X) :=
+private theorem modules_countableAB4Star : CountableAB4Star (Modules l E X) :=
   .of_epi_π_app_zero (Mod.epiπAppZeroOfEpi
     Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
 
