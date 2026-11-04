@@ -270,3 +270,8 @@ small NativeTensorTotalInstances file; added all three coherence-instance
 shortcuts. Derived proof also needs the countable-total shortcut (otherwise
 mapCochainComplexμIso hits 20k synthesis budget), and explicit normalization of
 the htotal proof argument. Same mathematical proof, no budget increase.
+
+2026-11-05 06:48 CST: K5-20261105T064726.log rc=1 in new instance
+helper (4.9s): omitted `open scoped CategoryTheory.Obj`, so condensedRingObj
+was not coerced to the module monoid object. Restored the same scope as the
+source core; retrying the batch.

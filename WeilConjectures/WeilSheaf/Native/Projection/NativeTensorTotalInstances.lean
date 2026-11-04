@@ -15,6 +15,7 @@ attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
 
 universe u
 open CategoryTheory MonoidalCategory Limits
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 open ProEtale
