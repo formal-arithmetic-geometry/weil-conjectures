@@ -53,6 +53,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleShriekRelativeMayerVietoris
 import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleEtaleModuleQcqsAffineLocal
 import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportFiniteTorsion
 import WeilConjectures.AlgebraicGeometry.SmoothAffineCurveConstantShriekConstructible
+import WeilConjectures.AlgebraicGeometry.Lisse.LisseOpenRelativeLineConstructibility
 import Mathlib.RingTheory.KrullDimension.Polynomial
 import Mathlib.RingTheory.KrullDimension.PID
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
@@ -82,9 +83,9 @@ set_option backward.isDefEq.respectTransparency true
 
 section StableInstances
 
-attribute [local instance 2000] stableAbelian
+attribute [local instance 2000] etaleSheafModuleAbelian
 
-attribute [local instance 2000] stableDerived
+attribute [local instance 2000] etaleSheafModuleHasDerivedCategory
 
 -- Stalk calculation adapted from Bin Wu, FiniteEtaleModuleTraceData.
 private instance (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
@@ -276,7 +277,7 @@ private theorem sourceProperty_openExtension
   have : CompactSpace T.toScheme := isCompact_iff_compactSpace.mp hT
   have : QuasiSeparatedSpace T.toScheme := T.ι.isOpenEmbedding.quasiSeparatedSpace
   obtain ⟨e⟩ := source_open_hom_comp Λ T.ι f c ca
-  exact (property_natIso (plusProperty (constructibleProperty Λ Y)) e Q).mpr h
+  exact (prop_iff_of_natIso (plusProperty (constructibleProperty Λ Y)) e Q).mpr h
 
 private theorem sourceProperty_shortExact_three
     (Λ : Type (u + 1)) [Field Λ] [Finite Λ]
@@ -340,7 +341,7 @@ private theorem shriekProperty_disjoint
     sourceProperty Λ c L := by
   classical
   let A := ModuleCat.{u + 1} Λ
-  have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology A) := abelian_biproducts
+  have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology A) := abelian_hasFiniteBiproducts
   let G (a : Fin n) := (openImmersionLowerShriek A (U a).ι).obj
     ((upperStar A (U a).ι).obj L)
   have htop : (⨆ a, U a) = ⊤ := by
@@ -362,7 +363,7 @@ private theorem shriekProperty_disjoint
       (inferInstance : HasCompactification ((U a).ι ≫ f)).nonempty_compactification
     exact sourceProperty_openExtension Λ f c (U a) (hcompact a) ca _ (hlocal a ca)
   apply (sourceProperty Λ c).prop_of_iso eL.symm
-  exact property_image_biproduct (sourceFunctor A c)
+  exact objectProperty_map_biproduct (sourceFunctor A c)
     (plusProperty (constructibleProperty Λ Y)) G hG
 
 private theorem shriekProperty_affine_prime
@@ -406,7 +407,7 @@ private theorem shriekProperty_affine_prime
       ((upperStar B (U a).ι).obj G) r F hF h₀ hᵣ hQ
   obtain ⟨ecomp⟩ := source_proper_comp Λ g f c cf
   have hpush : sourceProperty Λ c ((lowerStar B g).obj G) :=
-    (property_natIso (plusProperty (constructibleProperty Λ (Spec (.of R)))) ecomp G).mpr hG
+    (prop_iff_of_natIso (plusProperty (constructibleProperty Λ (Spec (.of R)))) ecomp G).mpr hG
   obtain ⟨t, ht⟩ := lisse_trace_degree Λ g L d hdeg
   obtain ⟨a, _, ha⟩ := Nat.exists_mul_mod_eq_one_of_coprime
     ((hℓ.coprime_iff_not_dvd.mpr hd).symm) hℓ.one_lt
@@ -446,7 +447,7 @@ private theorem shriekProperty_spec
     have := Scheme.IsFiniteLocallyConstantSheaf.cokernel (kernel.ι (r • 𝟙 F))
     exact Scheme.IsFiniteLocallyConstantSheaf.of_iso (Abelian.coimageIsoImage' (r • 𝟙 F))
   let : Fintype Λ := Fintype.ofFinite Λ
-  apply property_prime_induction (sourceProperty Λ c) H
+  apply objectProperty_of_nsmul_id_eq_zero (sourceProperty Λ c) H
     (shriekProperty_shortExact Λ c) hk hi
     (fun r hr F hF hkill ↦ by
       have : Scheme.IsFiniteLocallyConstantSheaf F := hF
@@ -468,7 +469,7 @@ private theorem shriekProperty_iso_source
   obtain ⟨ec⟩ := source_open_hom_comp Λ e.hom f c c'
   apply (sourceProperty Λ c).prop_of_iso
     (asIso ((openImmersionLowerShriekUpperStarAdjunction B e.hom).counit.app L))
-  exact (property_natIso (plusProperty (constructibleProperty Λ Y)) ec
+  exact (prop_iff_of_natIso (plusProperty (constructibleProperty Λ Y)) ec
     ((upperStar B e.hom).obj L)).mpr h
 
 private theorem shriekProperty_affine
@@ -628,9 +629,9 @@ private theorem isConstructibleEtaleModuleSheaf_lisse_openRelativeLine_shriek
             (Sheaf U.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj L))) := by
   classical
   let : ∀ X : Scheme.{u}, Abelian
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := stableAbelian Λ
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := etaleSheafModuleAbelian Λ
   let : ∀ X : Scheme.{u}, HasDerivedCategory.{u + 1}
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := stableDerived Λ
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := etaleSheafModuleHasDerivedCategory Λ
   have : IsNoetherianRing R := Algebra.FiniteType.isNoetherianRing ℤ R
   let X := U.toScheme
   let f := U.ι ≫ (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of R)) ↘ Spec (.of R))
