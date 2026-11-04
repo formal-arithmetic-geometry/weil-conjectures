@@ -40,7 +40,7 @@ Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations (routine
 lines 12-24 (step 3 of lem-trf-filtered-mapping-cylinder-step).
 (blueprint: lem-trf-finite-filtered-totalization-flatness) -/
 theorem finiteTwistingTotalization_kflat_of_flat
-    (a b : ℤ) (hab : a ≤ b) (D : FiniteTwistingFamily R a b)
+    (a b : ℤ) (_hab : a ≤ b) (D : FiniteTwistingFamily R a b)
     (M : FiniteTwistingTotalization D)
     (hflat : (∀ (p : ↥(Finset.Icc a b)) (n : ℤ),
       SheafOfModules.IsFlatOnSite (J := J) (R := R) ((D.G p).X n)) ∧
