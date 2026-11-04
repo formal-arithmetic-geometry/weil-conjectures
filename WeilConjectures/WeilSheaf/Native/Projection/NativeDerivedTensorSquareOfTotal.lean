@@ -11,6 +11,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 import all WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Localization of the native pullback tensor square -/
 
@@ -37,6 +38,30 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
+/-- Normalize descent while keeping its exact functor and total comparison abstract. -/
+lemma projection_nativeRestrictionDerivedTensor_normalization
+    (R : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z) [R.Additive]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    (hR : ∀ T, NativeIsKFlat k₀ l Y T →
+      NativeIsKFlat k₀ l Z ((R.mapHomologicalComplex (.up ℤ)).obj T))
+    (t : Functor.uncurry.obj (nativeTensorTotal k₀ l Y) ⋙ R.mapHomologicalComplex (.up ℤ) ≅
+      (R.mapHomologicalComplex (.up ℤ)).prod (R.mapHomologicalComplex (.up ℤ)) ⋙
+        Functor.uncurry.obj (nativeTensorTotal k₀ l Z)) :
+    OpenTensorRestrictionNormalization R
+      (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
+      (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
+      (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y) hR
+      (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
+      (fun P T ↦ t.app (P, T)) (nativeRestrictionDerivedTensor k₀ l R hR t) := by
+  have := native_open_tensor_full_kflat_localization k₀ l Y
+  unfold nativeRestrictionDerivedTensor
+  exact_mod_proofs NativeRestrictionDescentProof.restrictionDerivedOfTotal_normalization
+    R (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
+    (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
+    (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y) hR
+    (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
+    (nativeOpenTensorModel_naturality k₀ l Z) (nativeOpenTensorModel_naturality k₀ l Y) t
+
 /-- The normalization of the native pullback tensor comparison on K-flat complexes. -/
 lemma projection_nativePullTensor_normalization :
     OpenTensorRestrictionNormalization (upperStar k₀ l g)
@@ -47,14 +72,9 @@ lemma projection_nativePullTensor_normalization :
       (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
       (fun P T ↦ (nativePullTotalTensor k₀ l g).app (P, T))
       (nativePullTensor k₀ l g) := by
-  have := native_open_tensor_full_kflat_localization k₀ l Y
-  exact NativeRestrictionDescentProof.restrictionDerivedOfTotal_normalization
-    (upperStar k₀ l g) (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y)
-    (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l Y)
-    (NativeIsKFlat k₀ l Z) (NativeIsKFlat k₀ l Y)
-    (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
-    (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
-    (nativeOpenTensorModel_naturality k₀ l Z) (nativeOpenTensorModel_naturality k₀ l Y)
+  dsimp only [nativePullTensor]
+  exact_mod_proofs projection_nativeRestrictionDerivedTensor_normalization k₀ l
+    (upperStar k₀ l g) (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
     (nativePullTotalTensor k₀ l g)
 
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
