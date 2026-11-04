@@ -24297,7 +24297,6 @@ public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
-public import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
 public import WeilConjectures.WeilSheaf.VerdierExchange
 public import WeilConjectures.WeilSheaf.VerdierExchangeNatural
 public import WeilConjectures.WeilSheaf.WeilDescent
