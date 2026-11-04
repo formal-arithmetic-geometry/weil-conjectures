@@ -129,10 +129,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         condensedRealizationPullComplexIso] at ht
       dsimp only [complex_square, tr, NativeRestrictionDescentProof.totalFamily,
         WZ, WU, cZ, cU, L, V, F, R, LP, LT, FP, FT]
-      dsimp only [Iso.symm_inv, Iso.symm_hom, Iso.app_hom,
-        MonoidalCategory.tensor_map] at ht ⊢
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at ht ⊢
+      dsimp only [Iso.app, Iso.symm, MonoidalCategory.tensor_map] at ht ⊢
       with_reducible_and_instances cast_proofs ht) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
     MonoidalCategory.tensor_map, Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hmU'
