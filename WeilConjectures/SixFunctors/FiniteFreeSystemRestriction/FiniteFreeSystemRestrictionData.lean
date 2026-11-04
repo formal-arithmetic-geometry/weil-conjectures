@@ -208,6 +208,38 @@ structure OrdinarySquare {X Y : Scheme.{u}} (f : X ⟶ Y) where
     (ordinaryAdj (A l E) (aTransition l E) f)
       (TwoSquare.mk _ _ _ _ pull.inv)).natTrans = push.hom
 
+/-- The exact pullback comparison on entire derived systems.
+Source: proof Step 8 of the node
+(blueprint: lem-coef-finite-free-system-restriction). -/
+def OrdinarySquare.derivedPull {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (q : OrdinarySquare l E L i f) :
+    P (B l E L i) (bTransition l E L i) f ⋙ U l E L i X ≅
+      U l E L i Y ⋙ P (A l E) (aTransition l E) f :=
+  Functor.mapDerivedCategorySquareIso q.pull
+
+/-- The derived pushforward comparison is the specified geometric right mate.
+Source: proof Step 8 of the node
+(blueprint: lem-coef-finite-free-system-restriction). -/
+def OrdinarySquare.derivedPush {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (q : OrdinarySquare l E L i f) :
+    R (B l E L i) (bTransition l E L i) f ⋙ U l E L i Y ⟶
+      U l E L i X ⋙ R (A l E) (aTransition l E) f :=
+  (mateEquiv (adj (B l E L i) (bTransition l E L i) f)
+    (adj (A l E) (aTransition l E) f)
+      (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).inv)).natTrans
+
+/-- The inverse open-extension comparison is the specified open-adjunction mate.
+Its invertibility is asserted separately, never inferred merely from a mate formula.
+Source: proof Step 9 of the node
+(blueprint: lem-coef-finite-free-system-restriction). -/
+def OrdinarySquare.derivedOpenInv {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [IsOpenImmersion f] (q : OrdinarySquare l E L i f) :
+    U l E L i X ⋙ J (A l E) (aTransition l E) f ⟶
+      J (B l E L i) (bTransition l E L i) f ⋙ U l E L i Y :=
+  ((mateEquiv (jAdj (B l E L i) (bTransition l E L i) f)
+    (jAdj (A l E) (aTransition l E) f)).symm
+      (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).hom)).natTrans
+
 /-- The simultaneous geometric comparisons on the specified finite-type k-schemes.
 Source: geometric comparison clauses of the node
 (blueprint: lem-coef-finite-free-system-restriction). -/
