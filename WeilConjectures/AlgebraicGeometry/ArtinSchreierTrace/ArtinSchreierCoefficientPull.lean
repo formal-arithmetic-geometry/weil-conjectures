@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierUnit.ArtinSchreierSplitProjector
+import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedCoefficientCoverMaps
 
 /-! # Coefficient pullback along actual morphisms of covers
 

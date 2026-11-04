@@ -37,6 +37,11 @@ attribute [local irreducible] AffineSpace.neg AffineSpace.homOfVector
 variable (k : Type u) [Field k] [Fintype k]
 variable (X : Scheme.{u}) [X.Over (Spec (.of k))]
 
+/-- The universal Artin–Schreier covering `t ↦ t ^ q - t` of the affine line over `k`,
+as an object over the affine line. -/
+abbrev universalCover : Over (AffineSpace PUnit (Spec (.of k))) :=
+  Over.mk (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))
+
 /-- A root is an actual morphism to the universal covering, over the function map. -/
 abbrev Root (f : Γ(X, ⊤)) :=
   Over.mk (AffineSpace.homOfVector (X ↘ Spec (.of k))
