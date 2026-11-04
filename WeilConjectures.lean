@@ -457,6 +457,7 @@ public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationFiltrat
 public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationFlatness
 public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationMatrix
 public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationStructure
+public import WeilConjectures.Algebra.Homology.FiniteTwistingTotalizationTail
 public import WeilConjectures.Algebra.Homology.FirstLocalizationCohomologyBaseChange
 public import WeilConjectures.Algebra.Homology.FirstLocalizationComparison
 public import WeilConjectures.Algebra.Homology.FirstLocalizationMap
@@ -13670,6 +13671,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryA
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBasis
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBiproductPow
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCompIsoNatTrans
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -16401,6 +16403,7 @@ public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.Algebra.Group.Subgroup.Ker
 public import WeilConjectures.Mathlib.Algebra.GroupWithZero.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
@@ -16823,6 +16826,7 @@ public import WeilConjectures.Mathlib.Combinatorics.Enumerative.IncidenceAlgebra
 public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Fin.Tuple.Basic
 public import WeilConjectures.Mathlib.Data.Finset.Order
+public import WeilConjectures.Mathlib.Data.Fintype.BigOperators
 public import WeilConjectures.Mathlib.Data.Multiset.MapFold
 public import WeilConjectures.Mathlib.Data.Multiset.UnionInter
 public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd

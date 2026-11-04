@@ -26,6 +26,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   (R : Sheaf J CommRingCat.{w})
 variable {R} {a b : ℤ}
 
+omit [HasWeakSheafify J AddCommGrpCat.{w}] in
 /-- Assemble the triangular matrix data and the tail data into the realization
 record. The two lower constructions separately handle the Maurer--Cartan
 matrix calculation and the filtered quotient construction.
@@ -33,11 +34,10 @@ Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations (routine
 lines 12-24 (steps 1-2 of lem-trf-filtered-mapping-cylinder-step).
 (blueprint: lem-trf-finite-filtered-totalization-structure) -/
 theorem exists_finiteTwistingTotalization_structure
-    (a b : ℤ) (hab : a ≤ b) (D : FiniteTwistingFamily R a b) :
-    ∃ M : FiniteTwistingTotalization D,
-      ∀ n : ℤ, M.P.d n (n + 1) ≫ M.P.d (n + 1) (n + 1 + 1) = 0 := by
-  obtain ⟨X, _⟩ := exists_finiteTwistingMatrixData a b hab D
-  obtain ⟨F, _⟩ := exists_finiteTwistingFiltrationData a b hab D X
+    (a b : ℤ) (D : FiniteTwistingFamily R a b) :
+    Nonempty (FiniteTwistingTotalization D) := by
+  obtain ⟨X⟩ := exists_finiteTwistingMatrixData a b D
+  obtain ⟨F⟩ := exists_finiteTwistingFiltrationData a b D X
   let M : FiniteTwistingTotalization D :=
     { P := X.P
       F := F.F
@@ -52,6 +52,6 @@ theorem exists_finiteTwistingTotalization_structure
       degreewiseSplit := F.degreewiseSplit
       gradedProjection := F.gradedProjection
       outside := F.outside }
-  exact ⟨M, X.square⟩
+  exact ⟨M⟩
 
 end CochainComplex
