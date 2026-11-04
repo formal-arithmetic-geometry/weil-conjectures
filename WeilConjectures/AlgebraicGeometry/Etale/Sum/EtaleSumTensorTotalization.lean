@@ -56,6 +56,63 @@ def TotalTensorComparison :=
       (L.mapHomologicalComplex (.up ℤ)).obj (HomologicalComplex.mapBifunctor P
         ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ))
 
+/-- Naturality of a comparison in both chain-map variables.
+Source: literature/stacks-project/more-etale.tex, Tag 0GKF, natural projection;
+(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+def TotalTensorNaturality (Ψ : TotalTensorComparison F G L R) : Prop :=
+  ∀ (P P' : CochainComplex C ℤ) (H H' : CochainComplex D ℤ)
+    (f : P ⟶ P') (g : H ⟶ H'),
+    HomologicalComplex.mapBifunctorMap ((L.mapHomologicalComplex (.up ℤ)).map f)
+      g G (.up ℤ) ≫ (Ψ P' H').hom =
+      (Ψ P H).hom ≫ (L.mapHomologicalComplex (.up ℤ)).map
+        (HomologicalComplex.mapBifunctorMap f
+          ((R.mapHomologicalComplex (.up ℤ)).map g) F (.up ℤ))
+
+/-- The comparison has the prescribed canonical component on every total summand.
+Source: literature/stacks-project/homology.tex, Tag 012Z, coproduct terms;
+(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+def TotalTensorSummandNormalization (Ψ : TotalTensorComparison F G L R)
+    (a : ∀ (M : C) (N : D),
+      (G.obj (L.obj M)).obj N ⟶ L.obj ((F.obj M).obj (R.obj N))) : Prop :=
+  ∀ (P : CochainComplex C ℤ) (H : CochainComplex D ℤ)
+    (p q n : ℤ) (h : p + q = n),
+    HomologicalComplex.ιMapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P)
+      H G (.up ℤ) p q n h ≫ (Ψ P H).hom.f n =
+        a (P.X p) (H.X q) ≫ L.map
+          (HomologicalComplex.ιMapBifunctor P ((R.mapHomologicalComplex (.up ℤ)).obj H)
+            F (.up ℤ) p q n h)
+
+/-- The induced bifunctor `K(C) × K(D) ⥤ K(D)`, `(P,H) ↦ Tot(L P ⊗ H)`, on homotopy categories.
+Source: literature/stacks-project/homology.tex, Section 010V, maps modulo homotopy;
+(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+noncomputable def TotalTensorHomotopyLeft :
+    (HomotopyCategory C (.up ℤ) ⥤ HomotopyCategory D (.up ℤ) ⥤ HomotopyCategory D (.up ℤ)) :=
+  (((whiskeringLeft₂ _).obj (L.mapHomotopyCategory (.up ℤ))).obj
+    (𝟭 (HomotopyCategory D (.up ℤ)))).obj
+    (G.bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ))
+
+/-- The induced bifunctor `K(C) × K(D) ⥤ K(D)`, `(P,H) ↦ L Tot(P ⊗ R H)`, on homotopy categories.
+Source: literature/stacks-project/homology.tex, Section 010V, maps modulo homotopy;
+(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+noncomputable def TotalTensorHomotopyRight :
+    (HomotopyCategory C (.up ℤ) ⥤ HomotopyCategory D (.up ℤ) ⥤ HomotopyCategory D (.up ℤ)) :=
+  ((CategoryTheory.Functor.postcompose₂.obj (L.mapHomotopyCategory (.up ℤ))).obj
+    ((((whiskeringLeft₂ _).obj (𝟭 (HomotopyCategory C (.up ℤ)))).obj
+      (R.mapHomotopyCategory (.up ℤ))).obj
+      (F.bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ))))
+
+/-- Descent is a natural isomorphism between the actual induced bifunctors on
+homotopy categories; its components on quotient objects are precisely `Q(Ψ)`.
+Source: literature/stacks-project/homology.tex, Section 010V, maps modulo homotopy;
+(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+noncomputable def TotalTensorHomotopyIso
+    (Ψ : TotalTensorComparison F G L R) : Prop :=
+  ∃ η : TotalTensorHomotopyLeft G L ≅ TotalTensorHomotopyRight F L R,
+    ∀ (P : CochainComplex C ℤ) (H : CochainComplex D ℤ),
+      ((η.hom.app ((HomotopyCategory.quotient C (.up ℤ)).obj P)).app
+        ((HomotopyCategory.quotient D (.up ℤ)).obj H)) =
+          (HomotopyCategory.quotient D (.up ℤ)).map (Ψ P H).hom
+
 private noncomputable def totalTensorMapX
     (a : ∀ M N, (G.obj (L.obj M)).obj N ≅ L.obj ((F.obj M).obj (R.obj N)))
     (P : CochainComplex C ℤ) (H : CochainComplex D ℤ) (n : ℤ) :
