@@ -146,6 +146,7 @@ private def roof_forgetIso (X Y : CochainComplex A ℤ) :
     ext z
     rfl)
 
+omit [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 private theorem roof_precomp_quasiIso
     {X X' J : CochainComplex A ℤ} (a : X' ⟶ X) [QuasiIso a] [J.IsKInjective] :
     QuasiIso (globalLinearHomMap B a (𝟙 J)) := by
@@ -227,6 +228,7 @@ private theorem roof_comparison_lifts (X : CochainComplex A ℤ)
     rw [hb', ha']
   · simpa using Nonempty.intro ha
 
+omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 private theorem roof_map_id (X Y : CochainComplex A ℤ) :
     globalLinearHomMap B (𝟙 X) (𝟙 Y) = 𝟙 (globalLinearHom B X Y) := by
   ext n z
@@ -234,6 +236,7 @@ private theorem roof_map_id (X Y : CochainComplex A ℤ) :
     (zero_add n) = z
   simp
 
+omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 private theorem roof_map_comp
     {X X' X'' Y Y' Y'' : CochainComplex A ℤ}
     (a : X' ⟶ X) (a' : X'' ⟶ X') (b : Y ⟶ Y') (b' : Y' ⟶ Y'') :
@@ -246,7 +249,7 @@ private theorem roof_map_comp
     (Cochain.ofHom (a' ≫ a)).comp (z.comp (Cochain.ofHom (b ≫ b'))
       (add_zero n)) (zero_add n)
   ext p q hpq
-  simp [Category.assoc]
+  simp
 
 private def roof_precomp_homotopy {X X' Y : CochainComplex A ℤ}
     {a a' : X' ⟶ X} (h : Homotopy a a') :
@@ -312,6 +315,7 @@ private def roof_postcomp_homotopy {X Y Y' : CochainComplex A ℤ}
     Cochain.comp_sub, Cochain.id_comp]
   abel
 
+omit [HasDerivedCategory.{w} A] in
 private theorem roof_homotopy_invariance
     {X X' Y Y' : CochainComplex A ℤ} (a a' : X' ⟶ X) (b b' : Y ⟶ Y')
     (ha : Nonempty (Homotopy a a')) (hb : Nonempty (Homotopy b b')) :
@@ -341,10 +345,11 @@ private theorem roof_c_roof
     (S : GlobalHomResolution Y) :
     roof_c B X Y R S ≫ DerivedCategory.Q.map (globalLinearHomMap B R.ι (𝟙 S.I)) =
       DerivedCategory.Q.map (globalLinearHomMap B (𝟙 X) S.ι) := by
-  letI := roof_precomp_quasiIso B R.ι (J := S.I)
+  have := roof_precomp_quasiIso B R.ι (J := S.I)
   dsimp [roof_c]
   simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
 
+omit [HasDerivedCategory.{w} A] in
 private theorem roof_Q_comp
     {X X' X'' Y Y' Y'' : CochainComplex A ℤ}
     (a : X' ⟶ X) (a' : X'' ⟶ X') (b : Y ⟶ Y') (b' : Y' ⟶ Y'') :
@@ -362,7 +367,7 @@ private theorem roof_naturality
     (hb : Nonempty (Homotopy (S.ι ≫ b') (b ≫ S'.ι))) :
     DerivedCategory.Q.map (globalLinearHomMap B a b) ≫ roof_c B X' Y' R' S' =
       roof_c B X Y R S ≫ DerivedCategory.Q.map (globalLinearHomMap B a' b') := by
-  haveI := roof_precomp_quasiIso B R'.ι (J := S'.I)
+  have := roof_precomp_quasiIso B R'.ι (J := S'.I)
   have hj : DerivedCategory.Q.map (globalLinearHomMap B a' b') ≫
       DerivedCategory.Q.map (globalLinearHomMap B R'.ι (𝟙 S'.I)) =
       DerivedCategory.Q.map (globalLinearHomMap B R.ι (𝟙 S.I)) ≫
@@ -407,6 +412,7 @@ private theorem roof_lift_unique {X : CochainComplex A ℤ}
     (HomotopyCategory.eq_of_homotopy _ _ ha.some).trans
       (HomotopyCategory.eq_of_homotopy _ _ hb.some).symm
 
+omit [HasDerivedCategory.{w} A] in
 private theorem roof_inv_homotopy {X Y : CochainComplex A ℤ}
     (a b : HomotopyEquiv X Y) (h : Nonempty (Homotopy a.hom b.hom)) :
     Nonempty (Homotopy a.inv b.inv) := by
@@ -440,6 +446,7 @@ private theorem roof_comparison_formula (X Y : CochainComplex A ℤ)
   · exact roof_inv_homotopy _ _ (roof_lift_unique R R' _ _ (roof_e_comm R R') ha)
   · exact roof_lift_unique S S' _ _ (roof_e_comm S S') hb
 
+omit [HasDerivedCategory.{w} A] in
 private theorem roof_equiv_inv_comm {X : CochainComplex A ℤ}
     (R R' : GlobalHomResolution X) (a : HomotopyEquiv R.I R'.I)
     (ha : Nonempty (Homotopy (R.ι ≫ a.hom) R'.ι)) :
@@ -475,6 +482,7 @@ private theorem roof_comparison_refl (X Y : CochainComplex A ℤ)
   simpa only [roof_comparison, HomotopyEquiv.refl_hom, HomotopyEquiv.refl_inv,
     roof_map_id, Functor.map_id, globalResolvedHom] using h
 
+omit [HasDerivedCategory.{w} A] in
 private theorem roof_equiv_trans_comm {X : CochainComplex A ℤ}
     (R R' R'' : GlobalHomResolution X) (a : HomotopyEquiv R.I R'.I)
     (b : HomotopyEquiv R'.I R''.I)
@@ -517,6 +525,7 @@ private def roof_targetShift (X Y : CochainComplex A ℤ) (n : ℤ) :
       rw [Cochain.δ_rightUnshift _ _ rfl _ _ rfl]
       simp only [smul_smul, Int.units_mul_self, one_smul])
 
+omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 private theorem roof_targetShift_formula (X Y : CochainComplex A ℤ) (n s : ℤ)
     (f : Cochain X (Y⟦n⟧) s) :
     ((globalLinearHom B X Y).shiftFunctorObjXIso n s (s + n) rfl).hom
@@ -538,15 +547,13 @@ private noncomputable def roof_unit (X : CochainComplex A ℤ) :
     apply LinearMap.ext
     intro b
     change δ 0 k (b • Cochain.ofHom (𝟙 X)) = 0
-    simp [globalLinearHom, δ_hom])
+    simp)
 
+omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 private theorem roof_unit_formula (X : CochainComplex A ℤ) (b : B) :
     (roof_unit B X).f 0
         ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0
           (ModuleCat.of B B)).inv b) = b • Cochain.ofHom (𝟙 X) := by
-  change (roof_unit B X).f 0
-      ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0
-        (ModuleCat.of B B)).inv b) = _
   dsimp [roof_unit]
   rw [HomologicalComplex.mkHomFromSingle_f]
   change ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0
@@ -886,6 +893,7 @@ theorem globalLinearHomComp_roof {X Y Z X' Y' Z' : CochainComplex A ℤ}
     Functor.LaxMonoidal.μ_natural_left_assoc, ← Functor.map_comp,
     ← globalLinearHomComp_postcomp, Functor.map_comp]
 
+omit [HasDerivedCategory.{w} A] in
 private theorem roof_conj_roof {X X' Y Y' : CochainComplex A ℤ}
     (a : HomotopyEquiv X X') (b : HomotopyEquiv Y Y') :
     DerivedCategory.Q.map (globalLinearHomMap B a.inv b.hom) ≫
