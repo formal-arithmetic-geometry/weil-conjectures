@@ -182,3 +182,9 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - ProperTraceCoordinates now finishes in 12s with no kernel timeout: its abstract inverse lemma is accepted, but the local IsIso instance needs the same unfolding as the goal. Applied dsimp to that named instance and normalized the remaining identity-functor object.
 - NativeHomSingle now finds the naturality lemma; its unspecialized rewrite hit an elaborator isDefEq timeout. Specified the functor F and the morphism g.hom explicitly. No heartbeat increase.
 - Also pinned X explicitly in downstream AbsoluteDescent/NativeProperDualizing/NativeDualizingDescent to avoid the Over.mk.left inference failure just repaired in DescentSingle. These downstream files remain unvalidated until entry modules pass. One new audit follows; no DONE.
+
+## 2026-11-05 06:30 +0800 — proper trace coordinates GREEN
+- Audit aeb22581c finished rc=1, log /home/ubuntu/u9/logs/K4-20261105T062757.log, three built/two failed. ProperTraceCoordinates is now GREEN (17s), including inverse exchange and levelwise universal-property transport. No kernel timeout remains in that module.
+- The check reaches DescendedProperUniversality; its final all-at-once exact term hits a 200000-heartbeat whnf timeout. Split the levelwise bijectivity and coordinate-transport applications, explicitly supplied the proper pushforward functor, and normalize associativity separately.
+- NativeHomSingle still times out rewriting the concrete right-derived naturality square, even with explicit arguments. Reassembled the natural isomorphism from three individually typed natural isomorphisms: representative model, single-complex projection, and K-injective derived evaluation. The last naturality proof now directly applies the inverse evaluation lemma, without rewriting a large composite expression.
+- No heartbeat raises. Next single audit follows; no DONE.

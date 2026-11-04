@@ -88,15 +88,20 @@ theorem bijective_map_comp_geometricFiberWeilDirectTrace_of_isIso [IsIso γ]
           (((boundedConstructibleLowerStar l f).map γ ≫
             (lowerStarUpperShriekAdjunction l f).counit.app N).hom)) := by
   simp_rw [geometricFiberWeilDirectTrace_forget]
-  exact Functor.bijective_map_comp_iso_trace _
+  have h₀ := bijective_map_comp_properTrace_levelwise_of_isIso l f
+    (traceGeometricFiberOverMap f)
+    (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip γ K
+  have h₁ := Functor.bijective_map_comp_iso_trace
+    (lowerStar (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap f.left (Over.w f))).rightDerivedFunctor
+    (K := K.obj)
     ((Functor.mapDerivedCategoryCompIso
       (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom)
       (Endofunctor.IsoAlgebra.forget _)).symm.app P.obj)
     ((Functor.mapDerivedCategoryCompIso
       (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) Y.hom)
-      (Endofunctor.IsoAlgebra.forget _)).app N.obj) _
-    (bijective_map_comp_properTrace_levelwise_of_isIso l f (traceGeometricFiberOverMap f)
-      (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip γ K)
+      (Endofunctor.IsoAlgebra.forget _)).app N.obj) _ h₀
+  simpa only [Category.assoc, Iso.app_hom, Iso.symm_hom] using h₁
 
 /-- The actual descended trace is geometrically universal for a smooth proper map. -/
 theorem bijective_map_comp_geometricFiberWeilDirectTrace [IsIso γ]

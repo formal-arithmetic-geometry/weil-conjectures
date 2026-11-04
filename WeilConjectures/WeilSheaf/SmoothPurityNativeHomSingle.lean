@@ -66,33 +66,45 @@ noncomputable def nativeHomSingleComplexIso (A : ProEtaleWeilSheaf k₀ l X) :
   have : q.EssSurj :=
     inferInstanceAs (CochainComplex.KInjectives.toHomotopyCategory ⋙
       (HomotopyCategory.KInjectives.Qh (C := C))).EssSurj
-  apply (Functor.fullyFaithfulWhiskeringLeftOfFullEssSurj q (DerivedCategory C)).preimageIso
-  refine NatIso.ofComponents (fun I ↦ ?_) ?_
-  · have := I.property
-    have := singleResolutionProjection_isIso A I.obj
-    exact M.model P I.obj I.property ≪≫
-      DerivedCategory.Q.mapIso (asIso (singleResolutionProjection A I.obj)) ≪≫
-      (F.rightDerivedFunctorObjQIso I.obj).symm
-  · intro I I' g
-    have := I.property
-    have := I'.property
-    have := singleResolutionProjection_isIso A I.obj
-    have := singleResolutionProjection_isIso A I'.obj
-    have hm : H.map (Prod.mkHom (𝟙 (op (DerivedCategory.Q.obj P)))
-        (DerivedCategory.Q.map g.hom)) ≫ (M.model P I'.obj I'.property).hom =
-      (M.model P I.obj I.property).hom ≫ DerivedCategory.Q.map
-        (CochainComplex.bifunctorHomMapRight (H := ihomBifunctor k₀ l X) (K := P) g.hom) := by
+  let B : CochainComplex C ℤ ⥤ CochainComplex C ℤ :=
+    { obj I := CochainComplex.bifunctorHomObj (ihomBifunctor k₀ l X) P I
+      map g := CochainComplex.bifunctorHomMapRight g
+      map_id _ := CochainComplex.bifunctorHomMapRight_id
+      map_comp _ _ := CochainComplex.bifunctorHomMapRight_comp _ _ }
+  let a : q ⋙ Prod.sectR (op (DerivedCategory.Q.obj P)) _ ⋙ H ≅
+      CochainComplex.KInjectives.ι ⋙ B ⋙ DerivedCategory.Q :=
+    NatIso.ofComponents (fun I ↦ M.model P I.obj I.property) (fun {I I'} g ↦ by
       simpa only [CategoryTheory.Functor.map_id, op_id, CochainComplex.bifunctorHomMapLeft_id,
         Category.id_comp] using M.naturality P P I.obj I'.obj I.property I'.property
-          (𝟙 P) g.hom
-    apply (cancel_mono (F.rightDerivedFunctorObjQIso I'.obj).hom).mp
-    dsimp only [Functor.comp_map, Prod.sectR_map, Iso.trans_hom, Iso.symm_hom,
-      Functor.mapIso_hom, asIso_hom]
-    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-    rw [Functor.rightDerivedFunctor_map_Q_map_comp_objQIso_hom F g.hom]
-    simp only [Iso.inv_hom_id_assoc]
-    rw [← Category.assoc, hm, Category.assoc, ← DerivedCategory.Q.map_comp,
-      singleProjection_right, DerivedCategory.Q.map_comp]
+          (𝟙 P) g.hom)
+  let b : CochainComplex.KInjectives.ι ⋙ B ⋙ DerivedCategory.Q ≅
+      CochainComplex.KInjectives.ι ⋙ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    NatIso.ofComponents (fun I ↦ by
+      have := I.property
+      have := singleResolutionProjection_isIso A I.obj
+      exact DerivedCategory.Q.mapIso (asIso (singleResolutionProjection A I.obj)))
+      (fun {I I'} g ↦ by
+        have := I.property
+        have := I'.property
+        have := singleResolutionProjection_isIso A I.obj
+        have := singleResolutionProjection_isIso A I'.obj
+        change DerivedCategory.Q.map
+            (CochainComplex.bifunctorHomMapRight (H := ihomBifunctor k₀ l X) (K := P) g.hom) ≫
+              DerivedCategory.Q.map (singleResolutionProjection A I'.obj) =
+          DerivedCategory.Q.map (singleResolutionProjection A I.obj) ≫
+            DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map g.hom)
+        rw [← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp,
+          singleProjection_right])
+  let c : CochainComplex.KInjectives.ι ⋙ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ≅
+      q ⋙ F.rightDerivedFunctor :=
+    NatIso.ofComponents (fun I ↦ by
+      have := I.property
+      exact (F.rightDerivedFunctorObjQIso I.obj).symm) (fun {I I'} g ↦ by
+        have := I.property
+        have := I'.property
+        exact Functor.rightDerivedFunctor_map_Q_map_comp_objQIso_inv F g.hom)
+  exact (Functor.fullyFaithfulWhiskeringLeftOfFullEssSurj q (DerivedCategory C)).preimageIso
+    (a ≪≫ b ≪≫ c)
 
 /-- The same comparison in the standard derived single-functor coordinates. -/
 noncomputable def nativeHomSingleIso (A : ProEtaleWeilSheaf k₀ l X) :
