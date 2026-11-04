@@ -17,6 +17,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Types.Pullbacks
 import Mathlib.CategoryTheory.Functor.EpiMono
 import Mathlib.CategoryTheory.Limits.Types.Products
+import WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
 
 /-! # Representable refinement of an inverse-image cover
 

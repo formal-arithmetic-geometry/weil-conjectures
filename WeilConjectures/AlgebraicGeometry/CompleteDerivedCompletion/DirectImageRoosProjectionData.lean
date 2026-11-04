@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletion
+public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosLimitData
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-! Canonical derived-limit projection normalization. -/

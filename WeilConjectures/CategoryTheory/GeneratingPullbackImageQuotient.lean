@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplemen
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 import all WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 import all WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
-import all WeilConjectures.ProperBaseChange.RingedTopoiCanonicalTensorPullbackUnitExistence
+import all WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullbackUnitExistence
 
 /-! # Epic quotient onto the structural image ideal
 

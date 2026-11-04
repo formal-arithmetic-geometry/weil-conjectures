@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.Monoidal
+public import WeilConjectures.CategoryTheory.RingedExtendedCech
 public import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import WeilConjectures.CategoryTheory.CechPullback.CechPullbackAugmentedTensorComparison
 

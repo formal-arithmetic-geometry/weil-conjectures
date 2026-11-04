@@ -75,11 +75,7 @@ Source: uniqueness of the extending absolute value.
 Proof: both membership conditions are spectral norm at most one. -/
 theorem integers_eq : integers l E = Padic.coefficientExtensionIntegers l E := by
   ext x
-  have hm := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x
-  change x ∈ Padic.coefficientExtensionIntegers l E ↔ _ at hm
-  rw [hm]
+  rw [Padic.mem_coefficientExtensionIntegers]
   change ‖x‖₊ ≤ 1 ↔ spectralNorm ℚ_[l] E x ≤ 1
   rw [← NNReal.coe_le_coe]
   change ‖x‖ ≤ 1 ↔ spectralNorm ℚ_[l] E x ≤ 1

@@ -15,6 +15,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.ConstructibleSheaf.FreeLifting
 import WeilConjectures.AlgebraicGeometry.IntegralConstructibleSerre
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
@@ -168,11 +169,11 @@ theorem integral_triangulated [FiniteDimensional ℚ_[l] E] (T : Scheme.{u})
       (condensedRingObj (Profinite.continuousCoefficientRingObj (integers l E)) T)) := by
   obtain ⟨m⟩ := fieldModel_nonempty l E
   obtain ⟨hk, hc, he⟩ := integralConstructible_serre l m.carrier T
-  let := hk
-  let := hc
-  let := he
   have : (boundedConstructible (condensedRingObj (integralCoeff l m.carrier) T)).IsTriangulated :=
     isTriangulated_boundedConstructible_of_serre _
+      (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
+        ObjectProperty.prop_cokernel _ f hM hN⟩)
+      (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
   have h : boundedConstructible
         (condensedRingObj (Profinite.continuousCoefficientRingObj (integers l E)) T) =
       (boundedConstructible (condensedRingObj (integralCoeff l m.carrier) T)).inverseImage
