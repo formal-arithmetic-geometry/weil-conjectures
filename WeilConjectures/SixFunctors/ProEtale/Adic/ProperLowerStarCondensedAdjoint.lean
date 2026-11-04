@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BoundedConstructibleCondensedComparison
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint
 
 /-!
@@ -114,4 +115,31 @@ theorem exists_adjunction_boundedConstructibleAdicRightDerivedLowerStar
       (boundedConstructibleAdicRightDerivedLowerStarCompIso ℓ k₀ g hR).isoCompInverse.symm,
     fun L ↦ ⟨(adicSheafDerivedEquivCondensedMod ℓ Z.left).counitIso.app _⟩⟩
 
+
+variable (k₀) in
+include k₀ in
+/-- **The proper direct image on `Dᵇc(-, ℚ̄_ℓ)` is a left adjoint** (blueprint
+`lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`, in the model of `ℓ`-adic sheaves): for a
+proper morphism `f : Y ⟶ X`, with `X` separated of finite type over an algebraic closure `k` of a
+finite field `k₀` with `ringChar k ≠ ℓ`, the direct image `Rf_* : Dᵇc(Y, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` has
+a right adjoint. It is transported from the condensed model
+(`ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`) by
+`AlgebraicGeometry.ProEtale.exists_adjunction_boundedConstructibleAdicRightDerivedLowerStar`. -/
+theorem isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper [IsAlgClosed k]
+    {X Y : Scheme.{u}} (s : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType s]
+    [QuasiCompact s] [IsSeparated s] (hk : ringChar k ≠ ℓ) (f : Y ⟶ X) [IsProper f] :
+    (boundedConstructibleAdicRightDerivedLowerStar (l := ℓ) s hk f).IsLeftAdjoint := by
+  let Z' : Over (Spec (CommRingCat.of k)) := Over.mk (f ≫ s)
+  let Y' : Over (Spec (CommRingCat.of k)) := Over.mk s
+  have : LocallyOfFiniteType Z'.hom := inferInstanceAs (LocallyOfFiniteType (f ≫ s))
+  have : QuasiCompact Z'.hom := inferInstanceAs (QuasiCompact (f ≫ s))
+  have : IsSeparated Z'.hom := inferInstanceAs (IsSeparated (f ≫ s))
+  have : LocallyOfFiniteType Y'.hom := inferInstanceAs (LocallyOfFiniteType s)
+  have : QuasiCompact Y'.hom := inferInstanceAs (QuasiCompact s)
+  have : IsSeparated Y'.hom := inferInstanceAs (IsSeparated s)
+  let g : Z' ⟶ Y' := Over.homMk f rfl
+  have : IsProper g.left := inferInstanceAs (IsProper f)
+  obtain ⟨_, adj, -⟩ := exists_adjunction_boundedConstructibleAdicRightDerivedLowerStar ℓ k₀ g
+    fun _ hK ↦ boundedConstructibleAdic_rightDerivedFunctor_adicLowerStar_obj s hk f hK
+  exact adj.isLeftAdjoint
 end AlgebraicGeometry.ProEtale

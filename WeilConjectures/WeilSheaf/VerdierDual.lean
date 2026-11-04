@@ -74,10 +74,14 @@ constructible adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`
 morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes
 has a right adjoint `Rg^!`. The general case
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` reduces to this one through a
-compactification. -/
+compactification.
+
+For `Y` separated over `k₀` this is
+`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper'`; the condensed model of
+`Dᵇc(-, ℚ̄_ℓ)` through which it is proved is only set up for separated schemes. -/
 theorem isLeftAdjoint_derivedLowerStar_of_isProper :
     (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
-  isLeftAdjoint_derivedLowerStar_of_isProper' g
+  sorry
 
 end Proper
 
@@ -239,8 +243,11 @@ theorem nonempty_upperShriek_obj_iso [HasUpperShriek k₀ l f] (L : WeilComplex 
 finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
 theorem nonempty_verdierDual_derivedLowerShriek_iso (M : WeilComplex k₀ l X) :
     Nonempty ((verdierDual k₀ l Y).obj (op ((derivedLowerShriek k₀ l f).obj M)) ≅
-      (derivedLowerStar f).obj ((verdierDual k₀ l X).obj (op M))) :=
-  sorry
+      (derivedLowerStar f).obj ((verdierDual k₀ l X).obj (op M))) := by
+  obtain ⟨ex⟩ := nonempty_verdierDual_derivedLowerShriek_natIso f
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+    (objectProperty_derivedHom_dualizingComplex k₀ l)
+  exact ⟨ex.app (op M)⟩
 
 end Exchange
 

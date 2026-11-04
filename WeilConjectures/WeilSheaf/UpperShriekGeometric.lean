@@ -22,7 +22,7 @@ Let `X` be a separated `k₀`-scheme of finite type with structure morphism `a :
 let `R` be a right adjoint of the direct image with compact support
 `Ra_! : WeilComplex X ⥤ WeilComplex k₀` of Weil complexes. We show that the underlying complex on
 the geometric fibre `X̄` of `R ℚ̄_ℓ` is the dualizing complex `ω_X̄` of `X̄` over `k̄`
-(`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_dualizingComplex`,
+(`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`,
 blueprint `lem-fix-weil-operations`).
 
 ## Proof
@@ -56,12 +56,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
-instance : Fact (ringChar (AlgebraicClosure k₀)).Prime :=
-  ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ CharP.char_is_prime k₀ (ringChar k₀)⟩
-
-instance : Fact (ringChar (AlgebraicClosure k₀) ≠ l) :=
-  ⟨Algebra.ringChar_eq k₀ (AlgebraicClosure k₀) ▸ Fact.out⟩
 
 namespace WeilComplex
 
@@ -257,7 +251,7 @@ noncomputable def adicSheafDerivedEquivCondensedModForgetConstantIso :
 `lem-fix-weil-operations`): for a right adjoint `R` of the direct image with compact support
 `Ra_!` of Weil complexes along the structure morphism `a : X ⟶ Spec k₀`, the underlying complex
 on the geometric fibre `X̄` of `R ℚ̄_ℓ` is the dualizing complex `ω_X̄` of `X̄` over `k̄`. -/
-theorem nonempty_nativeGeometricForget_obj_iso_dualizingComplex
+theorem nonempty_nativeGeometricForget_obj_iso_of_adjunction
     {R : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
     (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ R) :
     Nonempty ((ProEtaleWeilSheaf.nativeGeometricForget k₀ l X).obj

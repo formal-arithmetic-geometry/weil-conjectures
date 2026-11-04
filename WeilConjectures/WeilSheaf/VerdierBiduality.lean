@@ -50,8 +50,7 @@ complexes when the target represents the dualizing complex of `X̄`
 The underlying complex on `X̄` of `Ra_X^! ℚ̄_ℓ`, for the exceptional inverse image of Weil
 complexes, is the dualizing complex of `X̄`
 (`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`, blueprint
-`lem-fix-weil-operations`), by
-`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_dualizingComplex`.
+`lem-fix-weil-operations`, in `WeilConjectures.WeilSheaf.UpperShriekGeometric`).
 
 ## Inputs from other chapters
 
@@ -247,27 +246,6 @@ theorem nonempty_iso_dual_rightOp_comp_dual
   have := isIso_toDualDual_app W hW
   have : IsIso (toDualDual W) := NatIso.isIso_of_isIso_app _
   ⟨asIso (toDualDual W)⟩
-
-section Dualizing
-
-/-- **The underlying complex of the dualizing complex of Weil complexes** (blueprint:
-`lem-fix-weil-operations`, "an admissible exceptional adjoint carries [a Weil structure]": the
-Weil exceptional inverse image lies over the geometric one, at the constant sheaf). Let `R` be a
-right adjoint of the direct image with compact support `Ra_! : WeilComplex X ⥤ WeilComplex k₀` of
-Weil complexes along the structure morphism `a : X ⟶ Spec k₀`. Then the underlying complex on
-the geometric fibre `X̄` of `R ℚ̄_ℓ` is the dualizing complex `ω_X̄ = Rā^! ℚ̄_ℓ` of `X̄` over `k̄`
-(`ProEtale.CondensedRing.dualizingComplex`); see
-`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_dualizingComplex`. -/
-theorem nonempty_nativeGeometricForget_obj_iso_of_adjunction
-    {R : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
-    (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ R) :
-    Nonempty ((ProEtaleWeilSheaf.nativeGeometricForget k₀ l X).obj
-        (R.obj (WeilSheaf.toComplex.obj
-          (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))).obj ≅
-      (ObjectProperty.ι _).obj (CondensedRing.dualizingComplex l (geometricFiberOver X))) :=
-  nonempty_nativeGeometricForget_obj_iso_dualizingComplex adj
-
-end Dualizing
 
 end WeilComplex
 
