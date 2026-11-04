@@ -26,7 +26,6 @@ universe u v w x y z
 open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
-set_option backward.defeqAttrib.useBackward true in
 end CochainComplex
 
 namespace DerivedCategory

@@ -139,9 +139,4 @@ def comparison :
       (V J A).mapDerivedCategoryPlus ⋙ (S₀ J m).rightDerivedFunctorPlus :=
   Functor.rightDerivedFunctorPlusBaseChange (kernelIdentity J A m).hom
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [HasWeakSheafify J RingCat.{u}]
-  [HasDerivedCategory.{w} (Sheaf J AddCommGrpCat.{u})]
-  [HasDerivedCategory.{w} AddCommGrpCat.{u}] in
 end CategoryTheory.ModuleRestrictionKernel

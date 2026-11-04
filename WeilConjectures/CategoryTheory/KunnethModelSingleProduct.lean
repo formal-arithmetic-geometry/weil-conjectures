@@ -68,6 +68,5 @@ private theorem modelCoefficientAction_f
   rw [← whiskerLeft_comp_assoc]
   congr 2
 
-set_option maxHeartbeats 800000 in
 -- The total-tensor homology comparisons contain large canonical colimit expressions.
 end CategoryTheory

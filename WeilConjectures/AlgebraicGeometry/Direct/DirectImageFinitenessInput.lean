@@ -63,4 +63,3 @@ def HasDirectImageFinitenessInput
 
 end AlgebraicGeometry.Scheme
 
-end
