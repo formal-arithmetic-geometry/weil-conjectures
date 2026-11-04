@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedEquivariantBarData
+public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarAction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
@@ -283,8 +284,8 @@ variable {A' : CondensedBar.Ring.{u}}
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: use the same underlying abelian sheaf and action, and restrict its scalar action
 along the given ring map. The displayed underlying comparison is identity on sections. -/
-theorem scalarActionExist (a : A ⟶ A') : Nonempty (ScalarAction a G) := by
-  sorry
+theorem scalarActionExist (a : A ⟶ A') : Nonempty (ScalarAction a G) :=
+  nonempty_scalarAction a G
 
 /-- Scalar restriction on actions, fixed by its underlying module and section action.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
