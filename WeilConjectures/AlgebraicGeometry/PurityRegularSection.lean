@@ -354,6 +354,240 @@ theorem regularSectionSum_rank {X : Scheme.{u}} (F G : X.Modules) (r e : ℕ)
         ((Equiv.sumCongr Equiv.ulift Equiv.ulift).trans
           (finSumFinEquiv.trans Equiv.ulift.symm)).toIso
 
+set_option backward.isDefEq.respectTransparency false in
+theorem regularSectionEvaluation_app {T : Scheme.{u}} (F : T.Modules) (s : F.sections)
+    (U : T.Opens) (φ : (Scheme.Modules.dual F).val.obj (op U)) :
+    (regularSectionEvaluation F s).val.app (op U) φ =
+      φ.app (op (Over.mk (𝟙 U))) (s.val (op U)) := by
+  unfold regularSectionEvaluation SheafOfModules.homObjSectionsEquiv
+  rw [Equiv.trans_apply]
+  have key (A B : SheafOfModules ((sheafCompose (Opens.grothendieckTopology T)
+      (forget₂ CommRingCat RingCat)).obj T.sheaf)) (ψ : A.val ⟶ B.val) :
+      ((SheafOfModules.fullyFaithfulForget ((sheafCompose (Opens.grothendieckTopology T)
+      (forget₂ CommRingCat RingCat)).obj T.sheaf)).homEquiv.symm ψ).val = ψ :=
+    (SheafOfModules.fullyFaithfulForget _).map_preimage ψ
+  erw [key]
+  have h : F.val.map (𝟙 (op U)) (s.val (op U)) = s.val (op U) := by simp
+  exact congrArg (fun m ↦ φ.app (op (Over.mk (𝟙 U))) m) h
+
+set_option backward.isDefEq.respectTransparency false in
+theorem regularSectionSum_val {X : Scheme.{u}} (F G : X.Modules) (s : F.sections)
+    (t : G.sections) (U : X.Opens) :
+    (regularSectionSum F G s t).val (op U) =
+      (prod.lift (𝟙 F) 0 : F ⟶ F ⨯ G).val.app (op U) (s.val (op U)) +
+        (prod.lift 0 (𝟙 G) : G ⟶ F ⨯ G).val.app (op U) (t.val (op U)) := by
+  have e : prod.lift (F.unitHomEquiv.symm s) (G.unitHomEquiv.symm t) =
+      F.unitHomEquiv.symm s ≫ prod.lift (𝟙 F) 0 +
+        G.unitHomEquiv.symm t ≫ prod.lift 0 (𝟙 G) := by
+    ext <;> simp
+  conv_rhs => rw [← F.unitHomEquiv.apply_symm_apply s, ← G.unitHomEquiv.apply_symm_apply t]
+  rw [regularSectionSum, SheafOfModules.unitHomEquiv_apply_coe, e]
+  rfl
+
+theorem dualMap_comp_apply {X : Scheme.{u}} {A B C : X.Modules} (f : A ⟶ B) (g : B ⟶ C)
+    (U : X.Opens) (n : (Scheme.Modules.dual C).val.obj (op U)) :
+    (Scheme.Modules.dualMap f).val.app (op U) ((Scheme.Modules.dualMap g).val.app (op U) n) =
+      (Scheme.Modules.dualMap (f ≫ g)).val.app (op U) n := by
+  have e : Scheme.Modules.dualMap (f ≫ g) =
+      Scheme.Modules.dualMap g ≫ Scheme.Modules.dualMap f :=
+    (Scheme.Modules.dualFunctor X).map_comp g.op f.op
+  rw [e]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+theorem regularSectionEvaluation_sum {X : Scheme.{u}} (F G : X.Modules) (s : F.sections)
+    (t : G.sections) (U : X.Opens) (φ : (Scheme.Modules.dual (F ⨯ G)).val.obj (op U)) :
+    (regularSectionEvaluation (F ⨯ G) (regularSectionSum F G s t)).val.app (op U) φ =
+      (regularSectionEvaluation F s).val.app (op U)
+          ((Scheme.Modules.dualMap (prod.lift (𝟙 F) 0)).val.app (op U) φ) +
+        (regularSectionEvaluation G t).val.app (op U)
+          ((Scheme.Modules.dualMap (prod.lift 0 (𝟙 G))).val.app (op U) φ) := by
+  rw [regularSectionEvaluation_app, regularSectionEvaluation_app, regularSectionEvaluation_app,
+    regularSectionSum_val, map_add]
+  rfl
+
+theorem dualMap_zero_apply {X : Scheme.{u}} {A B : X.Modules} (U : X.Opens)
+    (n : (Scheme.Modules.dual B).val.obj (op U)) :
+    (Scheme.Modules.dualMap (0 : A ⟶ B)).val.app (op U) n = 0 := by
+  dsimp [Scheme.Modules.dualMap, SheafOfModules.homObjMap, PresheafOfModules.homObjMap]
+  refine (?_ : _ ≫ _ ≫ _ = (0 : (PresheafOfModules.restrictOver X.sheaf.obj U).obj _ ⟶ _))
+  apply PresheafOfModules.hom_ext
+  intro W
+  ext x
+  have h0 : SheafOfModules.Hom.val (0 : A ⟶ B) = 0 := rfl
+  rw [h0]
+  simp
+
+theorem comp_SpecMap_eq_comp_SpecMap_iff {X : Scheme.{u}} {R A : CommRingCat.{u}}
+    (g : X ⟶ Spec R) (α β : A ⟶ R) :
+    g ≫ Spec.map α = g ≫ Spec.map β ↔
+      α ≫ (Scheme.ΓSpecIso R).inv ≫ g.appTop =
+        β ≫ (Scheme.ΓSpecIso R).inv ≫ g.appTop := by
+  have key (γ : A ⟶ R) : (Scheme.ΓSpecIso A).inv ≫ (g ≫ Spec.map γ).appTop =
+      γ ≫ (Scheme.ΓSpecIso R).inv ≫ g.appTop := by
+    rw [Scheme.Hom.comp_appTop, ← Category.assoc, ← Scheme.ΓSpecIso_inv_naturality,
+      Category.assoc]
+  rw [← key α, ← key β, cancel_epi (Scheme.ΓSpecIso A).inv]
+  constructor
+  · intro e
+    rw [e]
+  · intro e
+    exact ext_of_isAffine e
+
+theorem _root_.SymmetricAlgebra.lift_comp_eq_algebraMapInv_comp_iff {R A N : Type*} [CommRing R]
+    [CommRing A] [AddCommGroup N] [Module R N] (f : N →ₗ[R] R) (ψ : R →+* A) :
+    ψ.comp (SymmetricAlgebra.lift f).toRingHom =
+        ψ.comp (SymmetricAlgebra.algebraMapInv (R := R) (M := N)).toRingHom ↔
+      ∀ n, ψ (f n) = 0 := by
+  constructor
+  · intro e n
+    simpa [SymmetricAlgebra.algebraMapInv_ι] using
+      congrArg (fun q ↦ q (SymmetricAlgebra.ι R N n)) e
+  · intro e
+    refine RingHom.ext fun a ↦ ?_
+    induction a using SymmetricAlgebra.induction with
+    | algebraMap r => simp
+    | ι n => simp [SymmetricAlgebra.algebraMapInv_ι, e n]
+    | mul a b ha hb => simp_all
+    | add a b ha hb => simp_all
+
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 1000000 in -- unfolding the bundle is slow
+/-- A map `h` satisfies `h ≫ σ_s = h ≫ 0` iff, on every affine open of the base, the ring map
+`Γ(U) → Γ(h⁻¹U)` induced by `h` kills all evaluations of `s`. -/
+theorem regularSection_comp_eq_zeroSection_iff (F : T.Modules) (r : ℕ)
+    [F.IsFiniteLocallyFreeOfRank r] (s : F.sections) {W : Scheme.{u}} (h : W ⟶ T) :
+    h ≫ (regularSectionGeometric P T hT F r s).val =
+        h ≫ (regularSectionBundle P T hT F r).zeroSection ↔
+      ∀ (U : T.affineOpens) (n : (Scheme.Modules.dual F).val.obj (op U.1)),
+        ((Scheme.ΓSpecIso (T.presheaf.obj (op U.1))).inv ≫
+          (h ∣_ U.1 ≫ U.2.isoSpec.hom).appTop).hom
+          ((regularSectionEvaluation F s).val.app (op U.1) n) = 0 := by
+  have hiso (U : T.affineOpens) : IsIso (@VectorBundleZeroSection.affineChart T
+      (isNoetherian_of_locallyOfFiniteType hT) r (Scheme.Modules.dual F)
+      (Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r) U) :=
+    (@VectorBundleZeroSection.affineChart_spec T (isNoetherian_of_locallyOfFiniteType hT) r
+      (Scheme.Modules.dual F) (Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r) U).1
+  have hmono (U : T.affineOpens) : Mono (@VectorBundleZeroSection.affineChart T
+      (isNoetherian_of_locallyOfFiniteType hT) r (Scheme.Modules.dual F)
+      (Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r) U) := inferInstance
+  have hz := (PurityVectorBundle.zeroSection_spec (regularSectionBundle P T hT F r)).2.2
+  refine (comp_eq_comp_iff_of_affineCharts (regularSectionBundle P T hT F r).p
+    (Y := fun U ↦ Spec (.of (SymmetricAlgebraSheaf.sections (Scheme.Modules.dual F) (op U.1))))
+    (fun U ↦ @VectorBundleZeroSection.affineChart T (isNoetherian_of_locallyOfFiniteType hT) r
+      (Scheme.Modules.dual F) (Scheme.Modules.isFiniteLocallyFreeOfRank_dual F r) U)
+    (regularSectionGeometric P T hT F r s).val (regularSectionBundle P T hT F r).zeroSection
+    (fun U ↦ U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+      (SymmetricAlgebra.lift (((regularSectionEvaluation F s).val.app (op U.1)).hom)).toRingHom))
+    (fun U ↦ U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+      (SymmetricAlgebra.algebraMapInv (R := T.presheaf.obj (op U.1))
+        (M := (Scheme.Modules.dual F).val.obj (op U.1))).toRingHom))
+    ?_ ?_ h).trans ?_
+  · exact (regularSectionGeometric_existsUnique P T hT F r s).exists.choose_spec
+  · intro U
+    obtain ⟨zU, h₁, h₂⟩ := hz U
+    exact ⟨zU, h₁, h₂⟩
+  · refine forall_congr' fun U ↦ ?_
+    rw [← Category.assoc, ← Category.assoc, comp_SpecMap_eq_comp_SpecMap_iff,
+      CommRingCat.hom_ext_iff, CommRingCat.hom_comp, CommRingCat.hom_comp]
+    exact (SymmetricAlgebra.lift_comp_eq_algebraMapInv_comp_iff _ _).trans Iff.rfl
+
+
+theorem dualMap_id_apply {X : Scheme.{u}} {A : X.Modules} (U : X.Opens)
+    (n : (Scheme.Modules.dual A).val.obj (op U)) :
+    (Scheme.Modules.dualMap (𝟙 A)).val.app (op U) n = n := by
+  have e : Scheme.Modules.dualMap (𝟙 A) = 𝟙 _ :=
+    (Scheme.Modules.dualFunctor X).map_id (op A)
+  rw [e]
+  rfl
+
+/-- Maps through the zero scheme of `s` are exactly the maps `h` with `h ≫ σ_s = h ≫ 0`. -/
+theorem regularSection_exists_comp_projection_iff (F : T.Modules) (r : ℕ)
+    [F.IsFiniteLocallyFreeOfRank r] (s : F.sections) {W : Scheme.{u}} (h : W ⟶ T) :
+    (∃ k : W ⟶ regularSectionZeroScheme P T hT F r s,
+        k ≫ regularSectionZeroProjection P T hT F r s = h) ↔
+      h ≫ (regularSectionGeometric P T hT F r s).val =
+        h ≫ (regularSectionBundle P T hT F r).zeroSection := by
+  have hσ := (regularSectionGeometric P T hT F r s).property
+  have hz := (PurityVectorBundle.zeroSection_spec (regularSectionBundle P T hT F r)).1
+  constructor
+  · rintro ⟨k, rfl⟩
+    have e : pullback.fst (regularSectionGeometric P T hT F r s).val
+        (regularSectionBundle P T hT F r).zeroSection =
+        pullback.snd (regularSectionGeometric P T hT F r s).val
+          (regularSectionBundle P T hT F r).zeroSection := by
+      have e₁ : pullback.fst (regularSectionGeometric P T hT F r s).val
+          (regularSectionBundle P T hT F r).zeroSection =
+          pullback.fst _ _ ≫ (regularSectionGeometric P T hT F r s).val ≫
+            (regularSectionBundle P T hT F r).p := by
+        rw [hσ, Category.comp_id]
+      have e₂ : pullback.snd (regularSectionGeometric P T hT F r s).val
+          (regularSectionBundle P T hT F r).zeroSection =
+          pullback.snd _ _ ≫ (regularSectionBundle P T hT F r).zeroSection ≫
+            (regularSectionBundle P T hT F r).p := by
+        rw [hz, Category.comp_id]
+      rw [e₁, e₂, ← Category.assoc, ← Category.assoc, pullback.condition]
+    rw [regularSectionZeroProjection, Category.assoc, pullback.condition, e]
+    simp
+  · intro e
+    exact ⟨pullback.lift h h e, pullback.lift_fst _ _ _⟩
+
+instance regularSectionZeroProjection_mono (F : T.Modules) (r : ℕ)
+    [F.IsFiniteLocallyFreeOfRank r] (s : F.sections) :
+    Mono (regularSectionZeroProjection P T hT F r s) := by
+  have hz := (PurityVectorBundle.zeroSection_spec (regularSectionBundle P T hT F r)).1
+  have : Mono (regularSectionBundle P T hT F r).zeroSection :=
+    (IsSplitMono.mk' ⟨(regularSectionBundle P T hT F r).p, hz⟩).mono
+  exact pullback.fst_of_mono
+
+/-- A map kills the paired section iff it kills both components. -/
+theorem regularSectionSum_comp_eq_zeroSection_iff (F G : T.Modules) (r e : ℕ)
+    [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank e]
+    (s : F.sections) (t : G.sections) {W : Scheme.{u}} (h : W ⟶ T) :
+    (h ≫ (@regularSectionGeometric P T hT _ _ _ (F ⨯ G) (r + e)
+        (regularSectionSum_rank F G r e) (regularSectionSum F G s t)).val =
+      h ≫ (@regularSectionBundle P T hT _ _ _ (F ⨯ G) (r + e)
+        (regularSectionSum_rank F G r e)).zeroSection) ↔
+    (h ≫ (regularSectionGeometric P T hT F r s).val =
+        h ≫ (regularSectionBundle P T hT F r).zeroSection) ∧
+      (h ≫ (regularSectionGeometric P T hT G e t).val =
+        h ≫ (regularSectionBundle P T hT G e).zeroSection) := by
+  rw [@regularSection_comp_eq_zeroSection_iff P T hT _ _ _ (F ⨯ G) (r + e)
+      (regularSectionSum_rank F G r e) (regularSectionSum F G s t) W h,
+    regularSection_comp_eq_zeroSection_iff, regularSection_comp_eq_zeroSection_iff,
+    ← forall_and]
+  refine forall_congr' fun U ↦ ?_
+  set ψ := ((Scheme.ΓSpecIso (T.presheaf.obj (op U.1))).inv ≫
+    (h ∣_ U.1 ≫ U.2.isoSpec.hom).appTop).hom
+  constructor
+  · intro H
+    refine ⟨fun n ↦ ?_, fun n ↦ ?_⟩
+    · have := H ((Scheme.Modules.dualMap prod.fst).val.app (op U.1) n)
+      rwa [regularSectionEvaluation_sum, dualMap_comp_apply, dualMap_comp_apply,
+        prod.lift_fst, prod.lift_fst, dualMap_id_apply, dualMap_zero_apply, map_zero, add_zero]
+        at this
+    · have := H ((Scheme.Modules.dualMap prod.snd).val.app (op U.1) n)
+      rwa [regularSectionEvaluation_sum, dualMap_comp_apply, dualMap_comp_apply,
+        prod.lift_snd, prod.lift_snd, dualMap_id_apply, dualMap_zero_apply, map_zero, zero_add]
+        at this
+  · rintro ⟨H₁, H₂⟩ n
+    rw [regularSectionEvaluation_sum, map_add, H₁, H₂, add_zero]
+
+/-- Two monomorphisms over `T` with the same factorization property are uniquely isomorphic
+over `T`. -/
+theorem existsUnique_iso_of_mono_of_forall_exists_comp {C : Type*} [Category C] {A B T : C}
+    (a : A ⟶ T) (b : B ⟶ T) [Mono a] [Mono b]
+    (H : ∀ (W : C) (h : W ⟶ T),
+      (∃ k : W ⟶ A, k ≫ a = h) ↔ ∃ k : W ⟶ B, k ≫ b = h) :
+    ∃! i : A ≅ B, i.hom ≫ b = a := by
+  obtain ⟨f, hf⟩ := (H A a).1 ⟨𝟙 A, Category.id_comp a⟩
+  obtain ⟨g, hg⟩ := (H B b).2 ⟨𝟙 B, Category.id_comp b⟩
+  refine ⟨⟨f, g, ?_, ?_⟩, hf, fun i hi ↦ ?_⟩
+  · rw [← cancel_mono a, Category.assoc, hg, hf, Category.id_comp]
+  · rw [← cancel_mono b, Category.assoc, hf, hg, Category.id_comp]
+  · refine Iso.ext ?_
+    rw [← cancel_mono b, hi, hf]
+
 /-- The zero scheme of the actual paired section of the direct sum module.
 Source: purity (L3) (blueprint: def-pur-regular-section). -/
 def regularSectionSumZeroScheme (F G : T.Modules) (r e : ℕ)
@@ -384,7 +618,29 @@ theorem regularSectionSumZeroComparison_existsUnique (F G : T.Modules) (r e : �
         regularSectionIntersectionScheme P T hT F G r e s t,
       i.hom ≫ regularSectionIntersectionProjection P T hT F G r e s t =
         regularSectionSumZeroProjection P T hT F G r e s t := by
-  sorry
+  have hA : Mono (regularSectionSumZeroProjection P T hT F G r e s t) :=
+    @regularSectionZeroProjection_mono P T hT _ _ _ (F ⨯ G) (r + e)
+      (regularSectionSum_rank F G r e) (regularSectionSum F G s t)
+  have hB : Mono (regularSectionIntersectionProjection P T hT F G r e s t) := by
+    have : Mono (pullback.fst (regularSectionZeroProjection P T hT F r s)
+        (regularSectionZeroProjection P T hT G e t)) := pullback.fst_of_mono
+    unfold regularSectionIntersectionProjection
+    infer_instance
+  refine existsUnique_iso_of_mono_of_forall_exists_comp _ _ fun W h ↦ ?_
+  refine (@regularSection_exists_comp_projection_iff P T hT _ _ _ (F ⨯ G) (r + e)
+    (regularSectionSum_rank F G r e) (regularSectionSum F G s t) W h).trans ?_
+  rw [regularSectionSum_comp_eq_zeroSection_iff,
+    ← regularSection_exists_comp_projection_iff P T hT F r s h,
+    ← regularSection_exists_comp_projection_iff P T hT G e t h]
+  constructor
+  · rintro ⟨⟨k₁, h₁⟩, ⟨k₂, h₂⟩⟩
+    refine ⟨pullback.lift k₁ k₂ (h₁.trans h₂.symm), ?_⟩
+    rw [regularSectionIntersectionProjection, pullback.lift_fst_assoc, h₁]
+  · rintro ⟨k, rfl⟩
+    refine ⟨⟨k ≫ pullback.fst _ _, ?_⟩, ⟨k ≫ pullback.snd _ _, ?_⟩⟩
+    · rw [regularSectionIntersectionProjection, Category.assoc]
+    · rw [Category.assoc, ← pullback.condition, ← Category.assoc]
+      rfl
 
 /-- The canonical comparison, determined by its commutation with the zero-scheme projections.
 Source: purity (L3) (blueprint: def-pur-regular-section). -/
