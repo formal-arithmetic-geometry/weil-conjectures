@@ -94,12 +94,4 @@ theorem compRightDerivedObjIso_hom_naturality {X Y : C} (g : X ⟶ Y) (q : ℕ) 
       ((Functor.mapHomologicalComplexCompIso (Iso.refl (E ⋙ F))
         (ComplexShape.up ℕ)).inv.naturality φ)
 
-/-- Natural form of the canonical comparison computed on restricted resolutions.
-Source: Stacks Project, Tag 015E. The objectwise comparisons are isomorphisms;
-the preceding naturality square therefore assembles them using `NatIso.ofComponents`.
-(blueprint: new-finite-cover-derived-comparison-natural) -/
-def compRightDerivedIso (q : ℕ) : (E ⋙ F).rightDerived q ≅ E ⋙ F.rightDerived q :=
-  NatIso.ofComponents (compRightDerivedObjIso E F hE q)
-    (fun g ↦ compRightDerivedObjIso_hom_naturality E F hE g q)
-
 end CategoryTheory.Functor
