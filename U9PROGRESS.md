@@ -193,3 +193,10 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - Audit log /home/ubuntu/u9/logs/K4-20261105T063140.log finished rc=1, two built/two failed. Both refactored proofs now reach ordinary type mismatches without timeouts.
 - NativeHomSingle's new projection and injective-evaluation naturality proofs pass; only the representative-model square needs its composed functor maps changed to explicit model coordinates. Applied that normalization, and the same one to the parallel model square in NativeHomShift before it is reached.
 - DescendedProperUniversality now exposes only composed-functor objects and the identity functor applied to N. Added those two object normalization lemmas to the final simpa. Resubmitting the audit; no heartbeat raises or DONE.
+
+## 2026-11-05 06:45 +0800 — native single-source Hom GREEN; new downstream feedback
+- Audit /home/ubuntu/u9/logs/K4-20261105T063942.log finished rc=1 (source 18f6b8d34), four built/three failed. NativeHomSingle is GREEN (8.1s), including both natural derived Hom comparisons.
+- NativeHomShift reached its target-naturality proof: generic ext chose the concrete sheaf-element extensionality lemma too early. Restricted ext to the complex degree, then applied bifunctorHomObj_hom_ext explicitly. Made its computational helpers public because Lean's exposed public definition cannot access the private comparison definition.
+- NativeTensorTate's derived-adjunction inference requested an irrelevant underived monoidal instance. Now use an explicitly typed equivalence and its induced derived equivalence's adjunction.
+- DescendedProperUniversality's object normalization now elaborates, but kernel checking times out (62s). Replaced the concrete rewrite of a large Bijective proposition with a generic categorical trace-coordinate transport lemma; the specialization passes the known trace equation and known universal property separately. No heartbeat changes.
+- The 06:34 audit was delayed in git push by server responsiveness, then ran normally. One next audit follows; no DONE.

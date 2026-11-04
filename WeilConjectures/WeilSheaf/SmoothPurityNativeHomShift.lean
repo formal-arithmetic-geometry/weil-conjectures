@@ -29,7 +29,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-private noncomputable def traceHomTarget
+noncomputable def traceHomTarget
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ ⥤
       CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ where
@@ -38,21 +38,23 @@ private noncomputable def traceHomTarget
   map_id _ := CochainComplex.bifunctorHomMapRight_id
   map_comp _ _ := CochainComplex.bifunctorHomMapRight_comp _ _
 
-private noncomputable def traceHomTargetShift
+noncomputable def traceHomTargetShift
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (a b : ℤ) (h : a + b = 0) :
     traceHomTarget P ⋙ shiftFunctor _ b ≅ traceHomTarget (P⟦a⟧) :=
   NatIso.ofComponents
     (fun I ↦ CochainComplex.bifunctorHomShiftIso (ihomBifunctor k₀ l X) P I a b h)
     (fun g ↦ by
-      ext n p q hpq
+      ext n : 1
+      apply CochainComplex.bifunctorHomObj_hom_ext
+      intro p q hpq
       simp [traceHomTarget])
 
-private noncomputable abbrev traceKInjectiveQ :
+noncomputable abbrev traceKInjectiveQ :
     CochainComplex.KInjectives (ProEtaleWeilSheaf k₀ l X) ⥤
       DerivedCategory (ProEtaleWeilSheaf k₀ l X) :=
   CochainComplex.KInjectives.ι ⋙ DerivedCategory.Q
 
-private noncomputable def traceHomModelIso
+noncomputable def traceHomModelIso
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     traceKInjectiveQ ⋙ Prod.sectR (op (DerivedCategory.Q.obj P)) _ ⋙
         (nativeDerivedClosedComparison k₀ l X).homModels.weilHom ≅
@@ -73,7 +75,7 @@ private noncomputable def traceHomModelIso
         (nativeDerivedClosedComparison k₀ l X).homModels.weilRepresentatives.naturality
           P P I.obj I'.obj I.property I'.property (𝟙 P) g.hom)
 
-private noncomputable def traceHomShiftQIso
+noncomputable def traceHomShiftQIso
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (a b : ℤ) (h : a + b = 0) :
     (Prod.sectR (op (DerivedCategory.Q.obj P)) _ ⋙
         (nativeDerivedClosedComparison k₀ l X).homModels.weilHom) ⋙ shiftFunctor _ b ≅
