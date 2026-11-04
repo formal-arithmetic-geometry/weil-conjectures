@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalSquareState
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
+public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 import all WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
@@ -16,6 +17,12 @@ import WeilConjectures.Tactic.ExactModProofs
 /-! # Localization of the native pullback tensor square -/
 
 @[expose] public noncomputable section
+
+set_option Elab.async false
+set_option trace.profiler true
+set_option trace.profiler.threshold 500
+set_option diagnostics true
+set_option diagnostics.threshold 1000
 
 universe u
 
@@ -72,10 +79,13 @@ lemma projection_nativePullTensor_normalization :
       (nativeOpenTensorModel k₀ l Z) (nativeOpenTensorModel k₀ l Y)
       (fun P T ↦ (nativePullTotalTensor k₀ l g).app (P, T))
       (nativePullTensor k₀ l g) := by
-  dsimp only [nativePullTensor]
-  exact_mod_proofs projection_nativeRestrictionDerivedTensor_normalization k₀ l
-    (upperStar k₀ l g) (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
+  have h := projection_nativeRestrictionDerivedTensor_normalization k₀ l _
+    (by
+      intro T hT
+      cast_proofs nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g T hT)
     (nativePullTotalTensor k₀ l g)
+  dsimp only [nativePullTensor]
+  exact_mod_proofs h
 
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
@@ -120,18 +130,18 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     ((nativePullTotalTensor k₀ l g).app (P, T)) hr cZ cU
     (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
       Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-      ← tensorHom_def] using hmU)
+      ← MonoidalCategory.tensorHom_def] using hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (htotal P T) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp] at hmU'
   simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-    ← tensorHom_def] at hsquare
+    ← MonoidalCategory.tensorHom_def] at hsquare
   have hmZ : mZ.hom = (condensedRealizationTensor k₀ l Y).hom.app
       (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
     (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ F.mapDerivedCategoryFactors.hom.app T) ≫
       Functor.LaxMonoidal.μ DerivedCategory.Q FP FT := by
     simpa only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-      ← tensorHom_def] using
+      ← MonoidalCategory.tensorHom_def] using
       (condensedRealizationTensor_hom_app_comp k₀ l Y P T hP hT).symm
   have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
@@ -152,6 +162,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
 
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
 representatives by naturality. -/
+include htotal in
 lemma condensedRealizationTensor_pull_square_of_total
     (M N : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :
     DerivedPullTensorSquare k₀ l g M N := by
@@ -166,7 +177,7 @@ lemma condensedRealizationTensor_pull_square_of_total
       (fun MN ↦ asIso ((R.mapDerivedCategoryTensorComparison.app MN.1).app MN.2))
       (fun fg ↦ by
         simpa only [Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
-          curriedTensor_map_app, curriedTensor_obj_map, ← tensorHom_def] using
+          curriedTensor_map_app, curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] using
           R.projection_mapDerivedCategoryTensorComparison_naturality fg.1 fg.2)
   have h := Adjunction.tensorSquare_of_representatives DerivedCategory.Q.obj
     (NativeIsKFlat k₀ l Y) (native_two_sided_kflat_representatives k₀ l Y)
@@ -180,9 +191,9 @@ lemma condensedRealizationTensor_pull_square_of_total
     (fun P T hP hT ↦ by
       simpa only [DerivedPullTensorSquare, PullTensorSquareWithComparison, Iso.symm_inv,
         Functor.uncurry_obj_map, curriedTensor_map_app,
-        curriedTensor_obj_map, ← tensorHom_def] using
+        curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] using
         condensedRealizationTensor_pull_square_Q_of_total k₀ l g htotal P T hP hT) M N
   simpa only [Functor.uncurry_obj_map, curriedTensor_map_app,
-    curriedTensor_obj_map, ← tensorHom_def] using h
+    curriedTensor_obj_map, ← MonoidalCategory.tensorHom_def] using h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

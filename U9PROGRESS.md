@@ -181,3 +181,12 @@ ubuild.sh was edited in place while Bash was waiting in its loop, producing
 line 21 syntax error at truncated text "ock -n 9; then". Current bash -n passes.
 The updated script reserves w3 and newsrv:t1 for leaf agents; resubmitting the
 same complete batch. No new K5 build log was created by the failed request.
+
+2026-11-05 05:40 CST: K5-20261105T053141.log rc=1. Native sheaf square
+GREEN (3.1s), completing the first genuine comparison layer. Conditional layers
+now expose independent errors: total component simp whnf timeout; concrete native
+normalization whnf timeout (abstract normalization accepted); compatibility header
+whnf timeout. Fixing normalization by inferring its functor from existing total
+comparison, exposing component equalities before rewrite, pinning curried tensor
+arguments and adding Localizing import. Added missing two-sided-representative
+import and qualified ambiguous tensorHom_def; profiling all remaining layers.

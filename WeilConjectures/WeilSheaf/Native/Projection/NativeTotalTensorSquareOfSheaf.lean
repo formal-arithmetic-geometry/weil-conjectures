@@ -14,6 +14,12 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 @[expose] public noncomputable section
 
+set_option Elab.async false
+set_option trace.profiler true
+set_option trace.profiler.threshold 500
+set_option diagnostics true
+set_option diagnostics.threshold 1000
+
 universe u
 
 open CategoryTheory MonoidalCategory Limits
@@ -39,8 +45,11 @@ lemma condensedRealizationTotalTensor_pull_square_of_sheaf
   unfold TotalPullTensorSquare PullTensorSquareWithComparison
   simp only [Iso.symm_inv]
   ext n : 1
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    condensedRealizationPullComplexIso_hom_app_f]
+  have hcomp (A : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (i : ℤ) :=
+    condensedRealizationPullComplexIso_hom_app_f k₀ l g A i
+  dsimp only [Functor.ProjectionComplexSquareComponent] at hcomp
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+  rw [hcomp]
   apply HomologicalComplex.mapBifunctor.hom_ext_of_map
     (upperStar k₀ l g ⋙ condensedRealization k₀ l Z)
     (F := (nativeTensorBifunctor k₀ l Y).flip)
@@ -55,8 +64,7 @@ lemma condensedRealizationTotalTensor_pull_square_of_sheaf
       (((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)).obj P)
       (((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)).obj T) p q n hpq),
     CochainComplex.ιTensorObj_tensorHom_f]
-  rw [condensedRealizationPullComplexIso_hom_app_f,
-    condensedRealizationPullComplexIso_hom_app_f]
+  rw [hcomp, hcomp]
   rw [reassoc_of% (hsheaf (P.X p) (T.X q))]
   simp only [Category.assoc]
   have hn := (condensedRealizationUpperStarIso k₀ l g).inv.naturality

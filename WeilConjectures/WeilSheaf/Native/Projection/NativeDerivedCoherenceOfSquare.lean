@@ -8,11 +8,18 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 public import WeilConjectures.CategoryTheory.Functor.CurryComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 
 /-! # Comparison compatibility from the derived tensor square -/
 
 @[expose] public section
+
+set_option Elab.async false
+set_option trace.profiler true
+set_option trace.profiler.threshold 500
+set_option diagnostics true
+set_option diagnostics.threshold 1000
 
 universe u
 open CategoryTheory MonoidalCategory
@@ -35,7 +42,11 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
 theorem projectionComparisonCompatible_of_square
     (htensor : ∀ M N : DerivedCategory (ProEtaleWeilSheaf k₀ l Y),
       DerivedPullTensorSquare k₀ l g M N) :
-    Adjunction.ComparisonCompatible (derivedCondensedRealizationUpperStarIso k₀ l g)
+    Adjunction.ComparisonCompatible
+      (T_C := Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+      (T_D := Functor.curry.obj (nativeDerivedTensor k₀ l Y))
+      (T_C' := curriedTensor _) (T_D' := curriedTensor _)
+      (derivedCondensedRealizationUpperStarIso k₀ l g)
       (Functor.curryCompIsoOfIso (nativePullTensor k₀ l g)).hom
       (ProEtale.CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
