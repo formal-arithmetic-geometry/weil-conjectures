@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shi
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerArbitraryBaseMaps
+import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerAssembly
 
 /-! Relative conclusions assembled from normalized geometric stalks. -/
 @[expose] public section
@@ -18,6 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
 
+set_option linter.unusedVariables false in
 /-- Relative unit, generator and vanishing conclusions over an arbitrary base scheme,
 given the conclusions on its geometric points.
 Source: blueprint prop-pur-gm-relative-kummer, Step 2 (stalk conservativity)
@@ -31,7 +34,9 @@ s : Spec Omega -> B, lem-pur-relative-kummer-normalized-stalks (with the strict-
 invariance it rests on) identifies the stalks at s of R p_* and R pi_* and of the unit and
 Kummer edge maps with the corresponding derived global sections over Spec Omega, i.e. with
 the conclusions over the base Spec Omega, which hold by `hgeom`. Hence every unit and the
-generator map is an isomorphism on all stalks and the higher cohomology sheaves vanish. -/
+generator map is an isomorphism on all stalks and the higher cohomology sheaves vanish.
+In Lean the five specified maps are taken from `relative_kummer_arbitrary_base_maps`
+(which carries this stalk argument) and completed by `relativeKummerConclusions_of_maps`. -/
 theorem relative_kummer_relative_conclusions (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (B : Scheme.{u})
     (p : B ⟶ Spec (CommRingCat.of P.field.k))
@@ -40,6 +45,7 @@ theorem relative_kummer_relative_conclusions (P : PurityFiniteSetting.{u})
       P.RelativeKummerConclusions h (Spec (CommRingCat.of Ω))
         (s ≫ p)) :
     P.RelativeKummerConclusions h B p := by
-  sorry
+  obtain ⟨hu, ht, hzero, hgen, hvan⟩ := relative_kummer_arbitrary_base_maps P h B p
+  exact P.relativeKummerConclusions_of_maps h B p hu ht hzero hgen hvan
 
 end WeilConjectures.PurityFiniteSetting

@@ -10,6 +10,7 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineScalarBaseSmul
 import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineSheafEvaluationSquare
+import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineOrdinaryEvaluation
 
 /-! # Evaluation compatibility on a good representative
 
@@ -65,6 +66,8 @@ complex comparison built from `d.ordinarySheaf m`. Substitute this at `m` and at
 naturality of the counit for the termwise map `evaluation_L`, both sides of the
 equation become `Q` of termwise maps followed by the same invertible counit. After
 cancelling it, the equation is `Q` applied termwise to `completed_sheaf_evaluation_square`.
+This argument is carried out for every complex in `ordinary_evaluation_compatibility`,
+which we specialize to `K = Q(P)`.
 -/
 theorem completed_good_representative_evaluation (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
@@ -79,8 +82,8 @@ theorem completed_good_representative_evaluation (L : integralTowerModules l E X
       (epsilon l F X N m).hom.app
         ((completedDerivedScalarExtension l E F ι X).obj (DerivedCategory.Q.obj P.obj)) =
     (completedDerivedScalarExtension l E F ι X).map
-      ((epsilon l E X L m).hom.app (DerivedCategory.Q.obj P.obj)) := by
-  sorry
+      ((epsilon l E X L m).hom.app (DerivedCategory.Q.obj P.obj)) :=
+  ordinary_evaluation_compatibility l E X F ι L N b d hd m (DerivedCategory.Q.obj P.obj)
 
 end CompletedLineTensor
 end WeilConjectures

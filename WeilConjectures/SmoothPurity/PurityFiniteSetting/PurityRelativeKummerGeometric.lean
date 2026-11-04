@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shi
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerArbitraryBaseMaps
+import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerAssembly
 
 /-! Geometric stalk calculations for the relative affine-line Kummer theorem. -/
 @[expose] public section
@@ -31,7 +33,8 @@ H^1 free of rank one on kappa(t) (Kummer sequence, Pic = 0, Omega^x divisible) a
 cohomology in degrees >= 2 (affine curve). lem-pur-relative-kummer-strict-local-invariance
 and lem-pur-relative-kummer-normalized-stalks identify these with the relative units,
 Kummer edge section and higher cohomology sheaves over Spec Omega, which are the clauses of
-`RelativeKummerConclusions`. -/
+`RelativeKummerConclusions`. In Lean this is the case B = Spec Omega of
+`relative_kummer_arbitrary_base_maps`, completed by `relativeKummerConclusions_of_maps`. -/
 theorem relative_kummer_geometric_stalk_conclusions (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (B : Scheme.{u})
     (p : B ⟶ Spec (CommRingCat.of P.field.k)) :
@@ -39,6 +42,9 @@ theorem relative_kummer_geometric_stalk_conclusions (P : PurityFiniteSetting.{u}
       (s : Spec (CommRingCat.of Ω) ⟶ B),
       P.RelativeKummerConclusions h (Spec (CommRingCat.of Ω))
         (s ≫ p) := by
-  sorry
+  intro Ω _ _ s
+  obtain ⟨hu, ht, hzero, hgen, hvan⟩ :=
+    relative_kummer_arbitrary_base_maps P h (Spec (CommRingCat.of Ω)) (s ≫ p)
+  exact P.relativeKummerConclusions_of_maps h _ (s ≫ p) hu ht hzero hgen hvan
 
 end WeilConjectures.PurityFiniteSetting

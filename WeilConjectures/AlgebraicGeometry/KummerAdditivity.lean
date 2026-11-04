@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 public import WeilConjectures.CategoryTheory.SmoothPurity.RhomGlobalSectionsOfUniverses
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFiniteSetting
 import Mathlib.Algebra.CharP.CharAndCard
 import Mathlib.Algebra.CharP.Algebra
