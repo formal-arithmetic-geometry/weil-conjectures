@@ -5,11 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelConstructible
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelDerived
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitEssSurjGenerators
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
+import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelConstructible
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitEssSurjGenerators
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
 /-!
 # Finiteness for the pushforward of constructible `ℓ`-adic sheaves
@@ -46,7 +45,6 @@ These results are in a separate file from those reductions because the condensed
 theorem imports `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`.
 -/
 
-
 @[expose] public section
 
 universe u
@@ -58,30 +56,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime]
-
-/-- An `ℓ`-adic complex on a scheme with noetherian underlying space whose module-object
-counterpart over `ℚ̲̄_ℓ` (`AlgebraicGeometry.ProEtale.adicSheafDerivedEquivCondensedMod`) is
-bounded constructible is bounded with constructible cohomology sheaves. -/
-theorem bounded_homologyProperty_of_boundedConstructible {Y : Scheme.{u}}
-    [TopologicalSpace.NoetherianSpace Y] {K : DerivedCategory (AdicSheaf l Y)}
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} l) Y)
-      ((adicSheafDerivedEquivCondensedMod l Y).functor.obj K)) :
-    DerivedCategory.TStructure.t.bounded K ∧
-      _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Y) K := by
-  let E := adicSheafEquivCondensedMod l Y
-  have e (n : ℤ) := (homologyFunctorCompAdicSheafEquivCondensedModIso (l := l) (X := Y) n).app K
-  have hz (n : ℤ) (h : IsZero ((DerivedCategory.homologyFunctor _ n).obj
-      ((adicSheafDerivedEquivCondensedMod l Y).functor.obj K))) :
-      IsZero ((DerivedCategory.homologyFunctor _ n).obj K) :=
-    (E.inverse.map_isZero (h.of_iso (e n))).of_iso (E.unitIso.app _)
-  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := hK
-  refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun n ↦ ?_⟩
-  · exact (DerivedCategory.isGE_iff K a).2 fun n hn ↦
-      hz n ((DerivedCategory.isGE_iff _ a).1 ha n hn)
-  · exact (DerivedCategory.isLE_iff K b).2 fun n hn ↦
-      hz n ((DerivedCategory.isLE_iff _ b).1 hb n hn)
-  · exact isAdicConstructibleSheaf_of_isConstructibleModuleObject
-      (IsConstructibleModuleObject.of_iso (e n).symm (hc n))
 
 section Finiteness
 

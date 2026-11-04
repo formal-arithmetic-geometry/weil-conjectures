@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.CondensedQbarLfpLocalTriviality
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelDerived
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseOverField
@@ -30,6 +32,9 @@ agree on a noetherian scheme:
 - `AlgebraicGeometry.ProEtale.isAdicConstructibleSheaf_of_isConstructibleModuleObject`: hence a
   constructible module object over `ℚ̲̄_ℓ` on a noetherian scheme is a constructible `ℓ`-adic
   sheaf, lisse on the strata of the same stratification.
+- `AlgebraicGeometry.ProEtale.bounded_homologyProperty_of_boundedConstructible`: an `ℓ`-adic
+  complex whose counterpart in the derived category of module objects is bounded constructible is
+  bounded with constructible cohomology sheaves.
 -/
 
 @[expose] public section
@@ -40,9 +45,7 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
-namespace AlgebraicGeometry.ProEtale
-
-variable {l : ℕ} [Fact l.Prime]
+namespace AlgebraicGeometry
 
 /-- A finite family of immersions whose ranges are constructible and partition `X` is a
 stratification of `X`. -/
@@ -66,6 +69,10 @@ noncomputable def Scheme.Stratification.ofImmersions {X : Scheme.{u}} {ι : Type
     immersion := fun a ↦ i (e a)
     isImmersion := fun a ↦ hi (e a)
     range_immersion := fun _ ↦ rfl }
+
+namespace ProEtale
+
+variable {l : ℕ} [Fact l.Prime]
 
 /-- The module object over `ℚ̲̄_ℓ,X` of a lisse `ℓ`-adic sheaf is locally finitely presented. -/
 lemma IsAdicLisseSheaf.isLocallyFinitelyPresented {X : Scheme.{u}} {H : AdicSheaf l X}
@@ -133,4 +140,30 @@ theorem isAdicConstructibleSheaf_of_isConstructibleModuleObject {X : Scheme.{u}}
       (IsLocallyFinitelyPresented.of_iso ((adicUpperStarCompCondensedModIso l _).app G).symm
         ((CondensedRing.isLocallyFinitelyPresented_mapMod_iff _ _ _).1 (hS a)))
 
-end AlgebraicGeometry.ProEtale
+/-- An `ℓ`-adic complex on a scheme with noetherian underlying space whose module-object
+counterpart over `ℚ̲̄_ℓ` (`AlgebraicGeometry.ProEtale.adicSheafDerivedEquivCondensedMod`) is
+bounded constructible is bounded with constructible cohomology sheaves. -/
+theorem bounded_homologyProperty_of_boundedConstructible {Y : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace Y] {K : DerivedCategory (AdicSheaf l Y)}
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} l) Y)
+      ((adicSheafDerivedEquivCondensedMod l Y).functor.obj K)) :
+    DerivedCategory.TStructure.t.bounded K ∧
+      _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Y) K := by
+  let E := adicSheafEquivCondensedMod l Y
+  have e (n : ℤ) := (homologyFunctorCompAdicSheafEquivCondensedModIso (l := l) (X := Y) n).app K
+  have hz (n : ℤ) (h : IsZero ((DerivedCategory.homologyFunctor _ n).obj
+      ((adicSheafDerivedEquivCondensedMod l Y).functor.obj K))) :
+      IsZero ((DerivedCategory.homologyFunctor _ n).obj K) :=
+    (E.inverse.map_isZero (h.of_iso (e n))).of_iso (E.unitIso.app _)
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := hK
+  refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun n ↦ ?_⟩
+  · exact (DerivedCategory.isGE_iff K a).2 fun n hn ↦
+      hz n ((DerivedCategory.isGE_iff _ a).1 ha n hn)
+  · exact (DerivedCategory.isLE_iff K b).2 fun n hn ↦
+      hz n ((DerivedCategory.isLE_iff _ b).1 hb n hn)
+  · exact isAdicConstructibleSheaf_of_isConstructibleModuleObject
+      (IsConstructibleModuleObject.of_iso (e n).symm (hc n))
+
+end ProEtale
+
+end AlgebraicGeometry
