@@ -9,6 +9,9 @@ public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibi
 import WeilConjectures.WeilSheaf.Native.NativeCoefficientTensorComparison
 import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
 import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.CategoryTheory.RingedForgetTwoInjective.RingedForgetTwoInjectiveHom
+import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryClosedTensorModels
+import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilRowHomComparison
 
 /-!
 # Internal Hom under the native geometric realization
@@ -93,17 +96,21 @@ theorem nativeGeometricForget_derivedHomComparison
       (ProEtale.nativeModuleCoefficientIso l Y).hom).isEquivalence_functor
   have : F.IsEquivalence := inferInstance
   let E := F.mapDerivedCategory.asEquivalence
-  obtain ⟨C, _⟩ := (native_closed_forgetful k₀ l X).2.2.2.2
+  -- Only the internal-hom models and the ordinary closed structure are used, not the Weil
+  -- tensor product of `native_closed_forgetful`, whose symmetry rests on a disputed `sorry`.
+  obtain ⟨m⟩ := native_two_injective_hom_model (k₀ := k₀) (l := l) (X := X)
+  obtain ⟨M, η, -, -, -, -⟩ := native_row_hom_comparison k₀ l X m
+  obtain ⟨S, β, -, hS⟩ := native_ordinary_closed_tensor_models l Y M.ordinaryHom
+    M.ordinaryRepresentatives
   let P := (nativeForget k₀ l X).obj K
   let Q := (nativeForget k₀ l X).obj L
-  obtain ⟨τ⟩ := nativeCoefficient_tensorComparison l Y C.homModels.ordinaryHom
-    C.homModels.ordinaryRepresentatives C.ordinaryClosed C.ordinarySymmetry
-    C.ordinaryTensorModels P
-  let e := homComparisonOfEquivalence E (C.ordinaryClosed.adjunction P)
+  obtain ⟨τ⟩ := nativeCoefficient_tensorComparison l Y M.ordinaryHom
+    M.ordinaryRepresentatives S β hS P
+  let e := homComparisonOfEquivalence E (S.adjunction P)
     (ProEtale.CondensedRing.derivedTensorHomAdjunction
       (Profinite.padicAlgClRingObj l) (E.functor.obj P)) τ Q
   exact ⟨F.mapDerivedCategory.mapIso
-    ((nativeForget k₀ l X).mapIso ((C.homModels.nativeModel L).symm.app (op K)) ≪≫
-      C.homComparison.app (op K, L)) ≪≫ e⟩
+    ((nativeForget k₀ l X).mapIso ((M.nativeModel L).symm.app (op K)) ≪≫
+      η.app (op K, L)) ≪≫ e⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
