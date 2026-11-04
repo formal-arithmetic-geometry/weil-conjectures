@@ -10581,6 +10581,7 @@ public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSlice.ProfiniteFree
 public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSliceDerivedHom
 public import WeilConjectures.AlgebraicGeometry.ProfiniteLocallyConstantAdjunction
 public import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
+public import WeilConjectures.AlgebraicGeometry.ProfinitePointPullbackFlat
 public import WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
 public import WeilConjectures.AlgebraicGeometry.Proj.ProjCommonDegreeTwistInvertible
 public import WeilConjectures.AlgebraicGeometry.Proj.ProjQcOpenTwistAmple
@@ -16078,6 +16079,7 @@ public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafModuleZSMul
+public import WeilConjectures.CategoryTheory.Sites.SheafPullbackModuleFlat
 public import WeilConjectures.CategoryTheory.Sites.SheafSmul
 public import WeilConjectures.CategoryTheory.Sites.SheafifyAddAction
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
