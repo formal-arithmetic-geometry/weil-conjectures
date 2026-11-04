@@ -58,6 +58,10 @@ public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
@@ -769,6 +773,114 @@ theorem rightDerived_comp_equivalence_ext {C D H K : Type*} [Category C] [Catego
   rw [hδ, hδ] at h₂
   exact (cancel_epi _).1 h₂
 
+set_option hygiene false in
+local notation "ΦYc" => integralExceptionalEtaleRealization l E Y n
+set_option hygiene false in
+local notation "ΦXc" => integralExceptionalEtaleRealization l E X n
+set_option hygiene false in
+local notation "gs" => Etale.lowerStar (ModuleCat.{u + 1}
+  (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) g
+
+private lemma quotientCompQhIso_inv_app_eq_id {C : Type*} [Category C] [Abelian C]
+    [HasDerivedCategory C] (K : CochainComplex C ℤ) :
+    (DerivedCategory.quotientCompQhIso C).inv.app K = 𝟙 _ := rfl
+
+private lemma integralExceptionalFixedRightUnit_eq (n : ℕ)
+    (J : CochainComplex
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ) :
+    integralExceptionalFixedRightUnit l E g n J =
+      (gs).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj J) := by
+  rw [integralExceptionalFixedRightUnit, quotientCompQhIso_inv_app_eq_id,
+    quotientCompQhIso_inv_app_eq_id, Category.id_comp]
+  refine (congrArg (fun k ↦ (gs).rightDerivedFunctorUnit.app
+    ((HomotopyCategory.quotient _ _).obj J) ≫ k)
+      ((gs).rightDerivedFunctor.map_id (DerivedCategory.Q.obj J))).trans ?_
+  exact Category.comp_id _
+
+private lemma integralExceptionalFixedRightUnit_naturality (n : ℕ)
+    {J J' : CochainComplex
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ} (f : J ⟶ J') :
+    DerivedCategory.Q.map (((gs).mapHomologicalComplex (.up ℤ)).map f) ≫
+        integralExceptionalFixedRightUnit l E g n J' =
+      integralExceptionalFixedRightUnit l E g n J ≫ (gs).rightDerivedFunctor.map
+        (DerivedCategory.Q.map f) := by
+  rw [integralExceptionalFixedRightUnit_eq, integralExceptionalFixedRightUnit_eq]
+  exact (gs).rightDerivedFunctorUnit.naturality ((HomotopyCategory.quotient _ _).map f)
+
+/-- The representative comparison on cochain complexes underlying the derived right
+comparison. -/
+private noncomputable def derivedRightRep (n : ℕ)
+    (J : CochainComplex (strictEtaleLevel X (integralExceptionalIntegers l E)
+        (integralExceptionalUniformizer l E) n) ℤ) :
+    (ΦYc).mapDerivedCategory.obj
+        (DerivedCategory.Q.obj (((A.right n).mapHomologicalComplex (.up ℤ)).obj J)) ⟶
+      (gs).rightDerivedFunctor.obj ((ΦXc).mapDerivedCategory.obj (DerivedCategory.Q.obj J)) :=
+  (ΦYc).mapDerivedCategoryFactors.hom.app
+      (((A.right n).mapHomologicalComplex (.up ℤ)).obj J) ≫
+    DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+      (integralExceptionalEtaleRight l E g A n).hom (.up ℤ)).app J) ≫
+    integralExceptionalFixedRightUnit l E g n (((ΦXc).mapHomologicalComplex (.up ℤ)).obj J) ≫
+    (gs).rightDerivedFunctor.map ((ΦXc).mapDerivedCategoryFactors.inv.app J)
+
+private lemma derivedRightRep_naturality (n : ℕ)
+    {J J' : CochainComplex (strictEtaleLevel X (integralExceptionalIntegers l E)
+        (integralExceptionalUniformizer l E) n) ℤ} (f : J ⟶ J') :
+    (ΦYc).mapDerivedCategory.map
+        (DerivedCategory.Q.map (((A.right n).mapHomologicalComplex (.up ℤ)).map f)) ≫
+        derivedRightRep l E g A n J' =
+      derivedRightRep l E g A n J ≫ (gs).rightDerivedFunctor.map
+        ((ΦXc).mapDerivedCategory.map (DerivedCategory.Q.map f)) := by
+  have h₁ : (ΦYc).mapDerivedCategory.map
+      (DerivedCategory.Q.map (((A.right n).mapHomologicalComplex (.up ℤ)).map f)) ≫
+        (ΦYc).mapDerivedCategoryFactors.hom.app
+          (((A.right n).mapHomologicalComplex (.up ℤ)).obj J') =
+      (ΦYc).mapDerivedCategoryFactors.hom.app
+          (((A.right n).mapHomologicalComplex (.up ℤ)).obj J) ≫
+        DerivedCategory.Q.map (((ΦYc).mapHomologicalComplex (.up ℤ)).map
+          (((A.right n).mapHomologicalComplex (.up ℤ)).map f)) :=
+    (ΦYc).mapDerivedCategoryFactors.hom.naturality _
+  have h₂ : DerivedCategory.Q.map (((ΦYc).mapHomologicalComplex (.up ℤ)).map
+        (((A.right n).mapHomologicalComplex (.up ℤ)).map f)) ≫
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (integralExceptionalEtaleRight l E g A n).hom (.up ℤ)).app J') =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (integralExceptionalEtaleRight l E g A n).hom (.up ℤ)).app J) ≫
+      DerivedCategory.Q.map (((gs).mapHomologicalComplex (.up ℤ)).map
+        (((ΦXc).mapHomologicalComplex (.up ℤ)).map f)) := by
+    rw [← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp]
+    exact congrArg DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+      (integralExceptionalEtaleRight l E g A n).hom (.up ℤ)).naturality f)
+  have h₃ := integralExceptionalFixedRightUnit_naturality l E g n
+    (((ΦXc).mapHomologicalComplex (.up ℤ)).map f)
+  have h₄ : (gs).rightDerivedFunctor.map
+        (DerivedCategory.Q.map (((ΦXc).mapHomologicalComplex (.up ℤ)).map f)) ≫
+      (gs).rightDerivedFunctor.map ((ΦXc).mapDerivedCategoryFactors.inv.app J') =
+      (gs).rightDerivedFunctor.map ((ΦXc).mapDerivedCategoryFactors.inv.app J) ≫
+      (gs).rightDerivedFunctor.map
+        ((ΦXc).mapDerivedCategory.map (DerivedCategory.Q.map f)) := by
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    exact congrArg (gs).rightDerivedFunctor.map
+      ((ΦXc).mapDerivedCategoryFactors.inv.naturality f)
+  simp only [derivedRightRep, Category.assoc]
+  rw [reassoc_of% h₁, reassoc_of% h₂, reassoc_of% h₃, h₄]
+
+private lemma derivedRightRep_isIso (n : ℕ)
+    (I : CochainComplex (strictEtaleLevel X (integralExceptionalIntegers l E)
+        (integralExceptionalUniformizer l E) n) ℤ) (hI : I.IsKInjective) :
+    IsIso (derivedRightRep l E g A n I) := by
+  have : IsIso (integralExceptionalFixedRightUnit l E g n
+      (((ΦXc).mapHomologicalComplex (.up ℤ)).obj I)) := by
+    rw [integralExceptionalFixedRightUnit_eq]
+    infer_instance
+  have : IsIso ((NatTrans.mapHomologicalComplex
+      (integralExceptionalEtaleRight l E g A n).hom (.up ℤ)).app I) :=
+    inferInstanceAs (IsIso ((NatIso.mapHomologicalComplex
+      (integralExceptionalEtaleRight l E g A n) (.up ℤ)).hom.app I))
+  unfold derivedRightRep
+  infer_instance
+
 /-- The existence component of the normalized derived direct-image comparison.
 Source: blueprint integral exceptional construction
 (blueprint: lem-pur-adic-etale-derived-right-existence).
@@ -781,7 +893,52 @@ theorem integralExceptionalEtaleDerivedRight_exists (n : ℕ)
         (Etale.lowerStar (ModuleCat.{u + 1}
           (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) g).rightDerivedFunctor,
       IsIntegralExceptionalEtaleDerivedRight l E g A n B e := by
-  sorry
+  have := B.isRightDerived
+  have : IsGrothendieckAbelian.{u + 1} (strictEtaleLevel X (integralExceptionalIntegers l E)
+      (integralExceptionalUniformizer l E) n) := isGrothendieckAbelian_coefficientUniverse _
+  let eqY := (ΦYc).mapDerivedCategory.asEquivalence
+  let ρ : (((A.right n).mapHomologicalComplex (.up ℤ)) ⋙ DerivedCategory.Q) ⋙
+      (ΦYc).mapDerivedCategory ⟶
+      DerivedCategory.Q ⋙ (ΦXc).mapDerivedCategory ⋙ (gs).rightDerivedFunctor :=
+    { app := fun J ↦ derivedRightRep l E g A n J
+      naturality := fun _ _ f ↦ derivedRightRep_naturality l E g A n f }
+  let β' : ((A.right n).mapHomologicalComplex (.up ℤ)) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ (((ΦXc).mapDerivedCategory ⋙ (gs).rightDerivedFunctor) ⋙
+        eqY.inverse) :=
+    (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ eqY.unit ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight ρ eqY.inverse ≫
+      (Functor.associator _ _ _).hom
+  have hβ' (J) : β'.app J = eqY.unit.app _ ≫ eqY.inverse.map (derivedRightRep l E g A n J) := by
+    simp [β', ρ]
+  let δ := B.direct.rightDerivedDesc B.directUnit
+    (HomologicalComplex.quasiIso _ (ComplexShape.up ℤ)) _ β'
+  let τ : B.direct ⋙ (ΦYc).mapDerivedCategory ⟶
+      (ΦXc).mapDerivedCategory ⋙ (gs).rightDerivedFunctor :=
+    Functor.whiskerRight δ eqY.functor ≫ (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ eqY.counit ≫ (Functor.rightUnitor _).hom
+  have hτ (K) : τ.app K = eqY.functor.map (δ.app K) ≫ eqY.counit.app _ := by
+    simp [τ]
+  have hfac (J) : (ΦYc).mapDerivedCategory.map (B.directUnit.app J) ≫
+      τ.app (DerivedCategory.Q.obj J) = derivedRightRep l E g A n J := by
+    rw [hτ, ← Category.assoc]
+    erw [← Functor.map_comp, B.direct.rightDerived_fac_app]
+    rw [hβ', Functor.map_comp, Category.assoc]
+    erw [eqY.counit.naturality (derivedRightRep l E g A n J)]
+    rw [← Category.assoc]
+    erw [eqY.functor_unit_comp]
+    exact Category.id_comp _
+  have : IsIso τ := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    obtain ⟨I, hI, ⟨i⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+    rw [NatTrans.isIso_app_iff_of_iso τ i]
+    have := B.computes I hI
+    have := derivedRightRep_isIso l E g A n I hI
+    rw [← hfac] at this
+    exact IsIso.of_isIso_comp_left ((ΦYc).mapDerivedCategory.map (B.directUnit.app I)) _
+  refine ⟨asIso τ, fun J ↦ ?_⟩
+  rw [asIso_hom, reassoc_of% (hfac J)]
+  simp [derivedRightRep]
 
 /-- The uniqueness component of the normalized derived direct-image comparison.
 Source: blueprint integral exceptional construction
