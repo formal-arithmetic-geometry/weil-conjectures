@@ -86,7 +86,8 @@ theorem nonempty_upperStar_comp_shriek_iso_tensor_constant :
       Prod.sectR ((derivedLowerShriek k₀ l f).obj U) _ ⋙
         nativeConstructibleTensor k₀ l Y :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun g ↦ by
-      simp [nativeCompactProjectionLeft, nativeConstructibleTensor])
+      simp [nativeCompactProjectionLeft, nativeConstructibleTensor]
+      rw [Functor.map_id])
   exact ⟨Functor.isoWhiskerLeft (upperStar f)
       (Functor.isoWhiskerRight
         (nativeConstructibleTensorConstantIso (k₀ := k₀) (l := l) (X := X)).symm

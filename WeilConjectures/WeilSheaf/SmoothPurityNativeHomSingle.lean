@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
+public import WeilConjectures.WeilSheaf.SmoothPurityWhiskering
 
 /-!
 # The native closed internal Hom from a sheaf
@@ -64,7 +65,7 @@ noncomputable def nativeHomSingleComplexIso (A : ProEtaleWeilSheaf k₀ l X) :
   have : q.EssSurj :=
     inferInstanceAs (CochainComplex.KInjectives.toHomotopyCategory ⋙
       (HomotopyCategory.KInjectives.Qh (C := C))).EssSurj
-  apply ((Functor.whiskeringLeft _ _ _).obj q).preimageIso
+  apply (Functor.fullyFaithfulWhiskeringLeftOfFullEssSurj q (DerivedCategory C)).preimageIso
   refine NatIso.ofComponents (fun I ↦ ?_) ?_
   · have := I.property
     have := singleResolutionProjection_isIso A I.obj

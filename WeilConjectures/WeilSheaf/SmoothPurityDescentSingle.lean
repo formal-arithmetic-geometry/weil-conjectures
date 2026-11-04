@@ -58,8 +58,8 @@ noncomputable def finiteBaseNativeDescentShiftedSheafIso
     (α : (ProEtaleWeilSheaf.toCondensed k₀ l X).obj G.obj ≅
       (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀))).obj M)
-    (n : ℤ) (e : P.obj ≅ ((DerivedCategory.singleFunctor _ 0).obj M)⟦n⟧) :
-    (finiteBaseNativeDescent (k₀ := k₀)).obj P ≅ (WeilSheaf.toComplex.obj G)⟦n⟧ :=
+    (n : ℤ) (e : P.obj ≅ ((DerivedCategory.singleFunctor _ 0).obj M) ⟦n⟧) :
+    (finiteBaseNativeDescent (k₀ := k₀)).obj P ≅ (WeilSheaf.toComplex.obj G) ⟦n⟧ :=
   ObjectProperty.isoMk _
     ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.preimageIso
       ((finiteBaseNativeDescentComparison (k₀ := k₀)).app P ≪≫
@@ -89,7 +89,7 @@ noncomputable def finiteBaseNativeDescentTateIso (d n : ℤ)
     (finiteBaseNativeDescent (k₀ := k₀)).obj
         (CondensedRing.boundedConstructibleTateTwist l
           (Over.mk (X ↘ Spec (CommRingCat.of k₀))) d n) ≅
-      (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d))⟦n⟧ :=
+      (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)) ⟦n⟧ :=
   finiteBaseNativeDescentShiftedSheafIso _ _ _ α n (Iso.refl _)
 
 end AlgebraicGeometry.WeilComplex

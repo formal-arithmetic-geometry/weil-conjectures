@@ -33,7 +33,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 /-- Tensoring by a shifted Tate sheaf is scalar twisting followed by shifting. -/
 noncomputable def nativeDerivedTensorTateShiftIso (d n : ℤ) :
     Prod.sectR (((DerivedCategory.singleFunctor _ 0).obj
-      (WeilSheaf.tateTwistSheaf k₀ l X d).obj)⟦n⟧) _ ⋙ nativeDerivedTensor k₀ l X ≅
+      (WeilSheaf.tateTwistSheaf k₀ l X d).obj) ⟦n⟧) _ ⋙ nativeDerivedTensor k₀ l X ≅
       (constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ d)).mapDerivedCategory ⋙
         shiftFunctor _ n := by
   let D := DerivedCategory (ProEtaleWeilSheaf k₀ l X)
@@ -70,7 +70,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 /-- The corresponding comparison on constructible Weil complexes. -/
 noncomputable def nativeConstructibleTensorTateShiftIso (d n : ℤ) :
-    Prod.sectR ((WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d))⟦n⟧) _ ⋙
+    Prod.sectR ((WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)) ⟦n⟧) _ ⋙
       nativeConstructibleTensor k₀ l X ≅ tateTwist k₀ l X d ⋙ shiftFunctor _ n :=
   ((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
     (Functor.isoWhiskerLeft (objectProperty k₀ l X).ι

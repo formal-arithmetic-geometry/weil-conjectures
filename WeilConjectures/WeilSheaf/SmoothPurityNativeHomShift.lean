@@ -79,8 +79,8 @@ private noncomputable def traceHomShiftQIso
   have : (traceKInjectiveQ (k₀ := k₀) (l := l) (X := X)).EssSurj :=
     inferInstanceAs (CochainComplex.KInjectives.toHomotopyCategory ⋙
       (HomotopyCategory.KInjectives.Qh (C := C))).EssSurj
-  apply ((Functor.whiskeringLeft _ _ _).obj
-    (traceKInjectiveQ (k₀ := k₀) (l := l) (X := X))).preimageIso
+  apply (Functor.fullyFaithfulWhiskeringLeftOfFullEssSurj
+    (traceKInjectiveQ (k₀ := k₀) (l := l) (X := X)) (DerivedCategory C)).preimageIso
   exact Functor.isoWhiskerRight (traceHomModelIso P) (shiftFunctor _ b) ≪≫
     Functor.isoWhiskerLeft (CochainComplex.KInjectives.ι ⋙ traceHomTarget P)
       (DerivedCategory.Q.commShiftIso b).symm ≪≫

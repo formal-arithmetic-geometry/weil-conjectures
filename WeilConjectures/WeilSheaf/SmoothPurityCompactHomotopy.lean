@@ -102,22 +102,22 @@ theorem nonempty_compact_constant_iso_of_absolute_purity (d : ℤ)
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))
     (eX : dualizingComplex k₀ l X ≅
       ((tateTwist k₀ l X d).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦2 * d⟧)
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X))) ⟦2 * d⟧)
     (eY : dualizingComplex k₀ l Y ≅
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) :
     Nonempty ((derivedLowerShriek k₀ l f).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) ≅
       ((tateTwist k₀ l Y (-d)).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)))⟦-(2 * d)⟧) := by
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))) ⟦-(2 * d)⟧) := by
   obtain ⟨e⟩ := nonempty_compact_dualizing_iso_of_constant_homotopy f h
   let L := derivedLowerShriek k₀ l f
   let U := WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)
   let V := WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)
-  let a : L.obj (((tateTwist k₀ l X d).obj U)⟦2 * d⟧) ≅
-      ((tateTwist k₀ l Y d).obj (L.obj U))⟦2 * d⟧ :=
+  let a : L.obj (((tateTwist k₀ l X d).obj U) ⟦2 * d⟧) ≅
+      ((tateTwist k₀ l Y d).obj (L.obj U)) ⟦2 * d⟧ :=
     (L.commShiftIso (2 * d)).app _ ≪≫
       (shiftFunctor _ (2 * d)).mapIso ((compactTateCommutationIso f d).app U)
-  let b : ((tateTwist k₀ l Y d).obj (L.obj U))⟦2 * d⟧ ≅ V :=
+  let b : ((tateTwist k₀ l Y d).obj (L.obj U)) ⟦2 * d⟧ ≅ V :=
     a.symm ≪≫ L.mapIso eX.symm ≪≫ e ≪≫ eY
   let N := tateTwist k₀ l Y (-d) ⋙ shiftFunctor (WeilComplex k₀ l Y) (-(2 * d))
   exact ⟨((tateTwistShiftCompTateTwistShiftIso k₀ l Y d (-d)

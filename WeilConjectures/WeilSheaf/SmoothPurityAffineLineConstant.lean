@@ -45,11 +45,11 @@ variable [HasUpperShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
 theorem nonempty_affineLine_compact_constant_iso_of_absolute_purity
     (eX : dualizingComplex k₀ l (affineLine k₀) ≅
       ((tateTwist k₀ l (affineLine k₀) 1).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀))))⟦(2 : ℤ)⟧) :
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀)))) ⟦(2 : ℤ)⟧) :
     Nonempty ((derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀))) ≅
       (WeilSheaf.toComplex.obj
-        (WeilSheaf.tateTwistSheaf k₀ l (Spec (CommRingCat.of k₀)) (-1)))⟦(-2 : ℤ)⟧) := by
+        (WeilSheaf.tateTwistSheaf k₀ l (Spec (CommRingCat.of k₀)) (-1))) ⟦(-2 : ℤ)⟧) := by
   let a := affineLine k₀ ↘ Spec (CommRingCat.of k₀)
   let U := WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))
   have := isIso_unit_app_toComplex_of_isLisse a (𝟙 _) IsPullback.of_id_snd

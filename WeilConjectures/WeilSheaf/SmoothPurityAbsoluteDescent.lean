@@ -78,7 +78,7 @@ theorem nonempty_shriekRightAdjoint_adicConstant_iso_of_tate_encoding
     Nonempty (R.obj (WeilSheaf.toComplex.obj
         (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))) ≅
       ((tateTwist k₀ l X d).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) := by
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X))) ⟦(2 * d : ℤ)⟧) := by
   obtain ⟨e⟩ := nonempty_shriekRightAdjoint_adicConstant_descendedTate_iso d adj
   exact ⟨e ≪≫ finiteBaseNativeDescentTateIso d (2 * d) α ≪≫
     (shiftFunctor _ (2 * d : ℤ)).mapIso (tateTwistConstantSingleIso d).symm⟩

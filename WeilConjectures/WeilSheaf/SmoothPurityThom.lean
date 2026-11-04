@@ -58,8 +58,8 @@ noncomputable def purityUpperStarTateSheafIso {X Y : Scheme.{u}}
 noncomputable def purityUpperStarShiftedTateIso {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] (d n : ℤ) :
-    (upperStar f).obj ((WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l Y d))⟦n⟧) ≅
-      (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d))⟦n⟧ :=
+    (upperStar f).obj ((WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l Y d)) ⟦n⟧) ≅
+      (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)) ⟦n⟧ :=
   ((upperStar f).commShiftIso n).app _ ≪≫
     (shiftFunctor _ n).mapIso ((WeilSheaf.toComplexCompUpperStarIso f).app _ ≪≫
       WeilSheaf.toComplex.mapIso (purityUpperStarTateSheafIso f d))
@@ -80,7 +80,7 @@ functor through the projection formula. -/
 theorem nonempty_upperStar_comp_shriek_iso_of_constant_cohomology (d n : ℤ)
     (e : (derivedLowerShriek k₀ l f).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) ≅
-      (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l Y d))⟦n⟧) :
+      (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l Y d)) ⟦n⟧) :
     Nonempty (upperStar f ⋙ derivedLowerShriek k₀ l f ≅
       tateTwist k₀ l Y d ⋙ shiftFunctor _ n) := by
   obtain ⟨a⟩ := nonempty_upperStar_comp_shriek_iso_tensor_constant f
@@ -101,7 +101,7 @@ theorem nonempty_trivialLineThom_of_affineLine_constant
     (e : (derivedLowerShriek k₀ l (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineLine k₀))) ≅
       (WeilSheaf.toComplex.obj
-        (WeilSheaf.tateTwistSheaf k₀ l (Spec (CommRingCat.of k₀)) (-1)))⟦(-2 : ℤ)⟧)
+        (WeilSheaf.tateTwistSheaf k₀ l (Spec (CommRingCat.of k₀)) (-1))) ⟦(-2 : ℤ)⟧)
     {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [Y.Over (Spec (CommRingCat.of k₀))]
     (π : Y ⟶ X) (s : Y ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))]
