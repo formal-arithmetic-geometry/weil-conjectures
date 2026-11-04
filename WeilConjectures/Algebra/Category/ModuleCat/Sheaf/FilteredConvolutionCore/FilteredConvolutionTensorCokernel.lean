@@ -71,7 +71,8 @@ theorem exists_map_cokernelπ_comp {D E : Type*} [Category D] [Category E]
 tensor product of the cokernel projections of `a` and `b`. -/
 theorem existsUnique_cokernelπ_tensorHom {A' A B' B X : Complex R} (a : A' ⟶ A) (b : B' ⟶ B)
     (φ : A ⊗ B ⟶ X) (ha : a ▷ B ≫ φ = 0) (hb : A ◁ b ≫ φ = 0) :
-    ∃! ψ : cokernel a ⊗ cokernel b ⟶ X, (cokernel.π a ⊗ₘ cokernel.π b) ≫ ψ = φ := by
+    ∃! ψ : cokernel a ⊗ cokernel b ⟶ X,
+      (cokernel.π a ⊗ₘ cokernel.π b) ≫ ψ = φ := by
   have : Epi (cokernel.π a ⊗ₘ cokernel.π b) := epi_tensorHom _ _
   have : Epi (cokernel.π a ▷ B') := (tensorRight B').map_epi _
   obtain ⟨φ₁, hφ₁⟩ := exists_map_cokernelπ_comp (tensorRight B) a φ ha

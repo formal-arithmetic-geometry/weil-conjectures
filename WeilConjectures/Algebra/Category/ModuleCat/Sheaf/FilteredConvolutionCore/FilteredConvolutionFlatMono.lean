@@ -9,6 +9,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvoluti
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
+import WeilConjectures.CategoryTheory.DerivedCategory.KFlatShortExact
 
 /-! # Monomorphisms after tensoring with complexes of flat module sheaves
 
@@ -39,24 +40,6 @@ private theorem hasExactColimitsOfShape_discrete (R : Sheaf J CommRingCat.{w}) (
 private theorem monomorphisms_isStableUnderColimitsOfShape_discrete
     (R : Sheaf J CommRingCat.{w}) (ι : Type) :
     (MorphismProperty.monomorphisms (Modules R)).IsStableUnderColimitsOfShape (Discrete ι) := by
-  have := hasExactColimitsOfShape_discrete R ι
-  infer_instance
-
-/-- The morphism `X.mapObj p j ⟶ Y.mapObj p j` induced by a family of monomorphisms is a
-monomorphism, provided monomorphisms are stable under coproducts indexed by the fibre. -/
-private theorem mono_gradedObject_mapMap {I K : Type} {D : Type*} [Category* D]
-    {X Y : GradedObject I D} (φ : X ⟶ Y) (p : I → K) [X.HasMap p] [Y.HasMap p] (j : K)
-    [(MorphismProperty.monomorphisms D).IsStableUnderColimitsOfShape (Discrete (p ⁻¹' {j}))]
-    (hφ : ∀ i, Mono (φ i)) : Mono (GradedObject.mapMap φ p j) :=
-  MorphismProperty.IsStableUnderColimitsOfShape.condition
-    (Discrete.functor (X.mapObjFun p j)) (Discrete.functor (Y.mapObjFun p j)) _ _
-    (colimit.isColimit _) (colimit.isColimit _)
-    (Discrete.natTrans fun i ↦ φ i.as.1) (fun i ↦ hφ i.as.1) (GradedObject.mapMap φ p j)
-    (fun i ↦ GradedObject.ι_mapMap φ p i.as.1 j i.as.2)
-
-/-- Coproducts of monomorphisms of module sheaves are monomorphisms (AB4). -/
-theorem mono_sigmaMap {ι : Type} {X Y : ι → Modules R} (f : ∀ i, X i ⟶ Y i)
-    [∀ i, Mono (f i)] : Mono (Limits.Sigma.map f) := by
   have := hasExactColimitsOfShape_discrete R ι
   infer_instance
 
@@ -91,7 +74,7 @@ theorem mono_whiskerLeft_of_isFlatOnSite (X : Complex R)
   have : HasColimitsOfSize.{0, 0} (Modules R) := hasColimitsOfSizeShrink.{0, 0, w, w} _
   refine HomologicalComplex.mono_of_mono_f _ fun n ↦ ?_
   have := monomorphisms_isStableUnderColimitsOfShape_discrete R
-  refine mono_gradedObject_mapMap _ _ n fun ⟨q, p⟩ ↦ ?_
+  refine GradedObject.mono_mapMap _ _ n fun ⟨q, p⟩ ↦ ?_
   simpa using hf p q
 
 end SheafOfModules.FilteredConvolutionCore

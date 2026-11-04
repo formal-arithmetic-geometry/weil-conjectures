@@ -69,7 +69,6 @@ theorem model_frobenius_over (D : WeilConjectures.FiniteFieldDatum.{u})
   rw [← D.cardinality_eq, ← D.card_base, Nat.card_eq_fintype_card, ← map_pow,
     ← map_pow, FiniteField.pow_card]
 
-
 private theorem pullback_map_eq {S T : Scheme.{u}} (b : T ⟶ S)
     {X Y : Over S} (j : X ⟶ Y) :
     ((Over.pullback b).map j).left =

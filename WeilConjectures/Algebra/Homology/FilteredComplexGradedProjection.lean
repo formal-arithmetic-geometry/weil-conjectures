@@ -121,8 +121,8 @@ theorem exists_gradedProjection (a : ℤ) (hPa : F.F a = ⊤)
       HomologicalComplex.comp_f, Category.assoc, Category.assoc, ← Category.assoc _ R, hR,
       Category.id_comp, hπ, comp_zero]
 
-/-- The projection `Fᵖ K ⟶ grᵖ K`: the quotient map `complexQuotientπ p (p + 1)`, with the graded
-piece as its declared target. -/
+/-- The projection `Fᵖ K ⟶ grᵖ K`: the quotient map `complexQuotientπ p (p + 1)`, with the
+graded piece as its declared target. -/
 def gradedπ (p : ℤ) : (F.F p : CochainComplex C ℤ) ⟶ F.gradedPiece p :=
   F.complexQuotientπ p (p + 1) (by omega)
 

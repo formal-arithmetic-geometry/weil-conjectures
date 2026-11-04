@@ -24,8 +24,8 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   {R : Sheaf J CommRingCat.{w}}
 
 /-- The tensor product of two maps of complexes on a summand of the total tensor. -/
-theorem ι_tensorHom_f {K₁ K₂ L₁ L₂ : Complex R} (f : K₁ ⟶ L₁) (g : K₂ ⟶ L₂) (i j n : ℤ)
-    (h : i + j = n) :
+theorem ι_tensorHom_f {K₁ K₂ L₁ L₂ : Complex R} (f : K₁ ⟶ L₁) (g : K₂ ⟶ L₂)
+    (i j n : ℤ) (h : i + j = n) :
     HomologicalComplex.ιTensorObj K₁ K₂ i j n h ≫ (f ⊗ₘ g).f n =
       (f.f i ⊗ₘ g.f j) ≫ HomologicalComplex.ιTensorObj L₁ L₂ i j n h := by
   erw [HomologicalComplex.ι_mapBifunctorMap]
@@ -35,13 +35,14 @@ theorem ι_tensorHom_f {K₁ K₂ L₁ L₂ : Complex R} (f : K₁ ⟶ L₁) (g 
 theorem arrow_comp_cokernelπ_eq_zero {K : Complex R} (G : DecreasingFiltration K) {k l : ℤ}
     (h : l ≤ k) : (G.F k).arrow ≫ cokernel.π (G.F l).arrow = 0 := by
   rw [← Subobject.ofLE_arrow (G.antitone h), Category.assoc, cokernel.condition, comp_zero]
+
 /-- The summand `grᵗ P ⊗ Q / Gʳ⁻ᵗ⁺¹ Q` of the target of the degreewise test map. -/
 abbrev testTarget {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (r t : ℤ) : Complex R :=
   F.gradedPiece t ⊗ cokernel (G.F (r - t + 1)).arrow
 
-/-- The degree `n` test map `(P ⊗ Q)ⁿ ⟶ (∐ₜ grᵗ P ⊗ Q / Gʳ⁻ᵗ⁺¹ Q)ⁿ` built from degreewise
-graded projections `s t i : Pⁱ ⟶ (grᵗ P)ⁱ`, summed over `t ∈ [a, b]`. It is not a map of
+/-- The degree `n` test map `(P ⊗ Q)ⁿ ⟶ (∐ₜ grᵗ P ⊗ Q / Gʳ⁻ᵗ⁺¹ Q)ⁿ` built from
+degreewise graded projections `s t i : Pⁱ ⟶ (grᵗ P)ⁱ`, summed over `t ∈ [a, b]`. It is not a map of
 complexes, since the projections need not commute with the differential. -/
 def testMap {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (s : ∀ t i : ℤ, P.X i ⟶ (F.gradedPiece t).X i) (a b r n : ℤ) :

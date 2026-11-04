@@ -27,7 +27,16 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- Let `q : L ⟶ G` be a cokernel of `j : L' ⟶ L` and let `α : U ⟶ G` satisfy
 `u ≫ α = e ≫ q` with `u` epi. If some `ρ : T ⟶ Z` defined on an object containing `L`
-via `ι` kills `L'` and restricts along `e` to `u ≫ m` with `m` mono, then `α` is mono. -/
+via `ι` kills `L'` and restricts along `e` to `u ≫ m` with `m` mono, then `α` is mono.
+```
+            u           m
+       S ───────▶ U ───────▶ Z
+       │          │          ▲
+     e │          │ α        │ ρ
+   j   ▼    q     ▼    ι     │
+L' ──▶ L ───────▶ G     L ──▶ T
+```
+-/
 theorem mono_of_comp_eq {S U L L' G T Z : C} (u : S ⟶ U) [Epi u] (e : S ⟶ L) (j : L' ⟶ L)
     (q : L ⟶ G) (w : j ≫ q = 0) (hq : IsColimit (CokernelCofork.ofπ q w)) (α : U ⟶ G)
     (hα : u ≫ α = e ≫ q) (ι : L ⟶ T) (ρ : T ⟶ Z) (m : U ⟶ Z) [Mono m]

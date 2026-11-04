@@ -35,7 +35,8 @@ theorem exists_lift_level {P Q : Complex R} (F : DecreasingFiltration P)
     (G : DecreasingFiltration Q) (p q s : ℤ) (hs : s ≤ p + q) :
     ∃ g : ((F.F p : Complex R) ⊗ (G.F q : Complex R)) ⟶ (level F G s : Complex R),
       g ≫ (level F G s).arrow = (F.F p).arrow ⊗ₘ (G.F q).arrow := by
-  refine ⟨((F.F p : Complex R) ◁ Subobject.ofLE _ _ (G.antitone (show s - p ≤ q by omega))) ≫
+  refine ⟨((F.F p : Complex R) ◁
+        Subobject.ofLE _ _ (G.antitone (show s - p ≤ q by omega))) ≫
       Sigma.ι (fun p : ℤ ↦ (F.F p : Complex R) ⊗ (G.F (s - p) : Complex R)) p ≫
       factorThruImageSubobject _, ?_⟩
   simp only [level, Category.assoc, imageSubobject_arrow_comp, Sigma.ι_desc]
