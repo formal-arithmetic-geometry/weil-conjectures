@@ -708,6 +708,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkExact
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Algebra.Homology.Monoidal.BraidingShift
 public import WeilConjectures.Algebra.Homology.Monoidal.Dual
+public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoherence
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.Algebra.Homology.Monoidal.ProjectionMap
 public import WeilConjectures.Algebra.Homology.Monoidal.Supertrace
@@ -13286,7 +13287,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackOpenTriangle
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackOverIsoUnit
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackPowerAppend
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
-public import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescentComposition
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStalkSquare
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
@@ -15930,6 +15930,7 @@ public import WeilConjectures.CategoryTheory.Tensor.TensorPushoutAction
 public import WeilConjectures.CategoryTheory.Tensor.TensorSquareMateTransfer
 public import WeilConjectures.CategoryTheory.Tensor.TensorTowerDatum
 public import WeilConjectures.CategoryTheory.TensorHomologyImageKernelEpi
+public import WeilConjectures.CategoryTheory.TensorPullbackRepresentativeDescentComposition
 public import WeilConjectures.CategoryTheory.TensorQuotientAugmentation
 public import WeilConjectures.CategoryTheory.TermwiseAdjunctionSquareUnit
 public import WeilConjectures.CategoryTheory.ThirdValueConstruction
@@ -23751,7 +23752,6 @@ public import WeilConjectures.SmoothPurity.IntegralCoherence.IntegralGoodQuotien
 public import WeilConjectures.SmoothPurity.IntegralCoherence.IntegralStrictExpressionRealization
 public import WeilConjectures.SmoothPurity.IntegralCoherence.IntegralStrictPullbackComparisons
 public import WeilConjectures.SmoothPurity.IntegralCoherence.IntegralStructuralSystemComparison
-public import WeilConjectures.SmoothPurity.IntegralCoherence.MapCochainComplexCoherence
 public import WeilConjectures.SmoothPurity.IntegralCoherence.SequencePullbackMonoidal
 public import WeilConjectures.SmoothPurity.IntegralCoherence.SitePullbackMonoidal
 public import WeilConjectures.SmoothPurity.IntegralDualizingComplexIso
