@@ -37,18 +37,12 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 /-- The native pullback tensor comparison and the condensed realization tensor comparison
 commute with the pullback comparison. -/
 def SheafPullTensorSquare (M N : ProEtaleWeilSheaf k₀ l Y) : Prop :=
-    (condensedRealization k₀ l Z).map ((nativePullSheafTensor k₀ l g).hom.app (M, N)) ≫
-      (condensedRealizationSheafTensorIso k₀ l Z).hom.app
-        ((upperStar k₀ l g).obj M, (upperStar k₀ l g).obj N) ≫
-      ((condensedRealizationUpperStarIso k₀ l g).inv.app M ⊗ₘ
-        (condensedRealizationUpperStarIso k₀ l g).inv.app N) =
-    (condensedRealizationUpperStarIso k₀ l g).inv.app
-        ((nativeOpenSheafTensor k₀ l Y).obj (M, N)) ≫
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).map
-          ((condensedRealizationSheafTensorIso k₀ l Y).hom.app (M, N)) ≫
-      Functor.OplaxMonoidal.δ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-          ((condensedRealization k₀ l Y).obj M) ((condensedRealization k₀ l Y).obj N)
+  PullTensorSquare (upperStar k₀ l g) (condensedRealization k₀ l Z)
+    (condensedRealization k₀ l Y)
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+    (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
+    (nativePullSheafTensor k₀ l g) (condensedRealizationSheafTensorIso k₀ l Y)
+    (condensedRealizationSheafTensorIso k₀ l Z) (condensedRealizationUpperStarIso k₀ l g) M N
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

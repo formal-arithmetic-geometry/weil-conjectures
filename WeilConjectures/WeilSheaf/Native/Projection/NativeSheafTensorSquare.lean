@@ -64,16 +64,14 @@ lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ 
   unfold SheafPullTensorSquare
   let G := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
     (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-  let a := condensedRealizationUpperStarIso k₀ l g
+  let a : condensedRealization k₀ l Y ⋙ G ≅ upperStar k₀ l g ⋙
+      condensedRealization k₀ l Z := condensedRealizationUpperStarIso k₀ l g
   let nY := condensedRealizationSheafTensorIso k₀ l Y
   let nZ := condensedRealizationSheafTensorIso k₀ l Z
-  have h : G.map (nY.inv.app (M, N)) ≫
-      a.hom.app ((nativeOpenSheafTensor k₀ l Y).obj (M, N)) ≫
-      (condensedRealization k₀ l Z).map ((nativePullSheafTensor k₀ l g).hom.app (M, N)) =
-    Functor.OplaxMonoidal.δ G ((condensedRealization k₀ l Y).obj M)
-        ((condensedRealization k₀ l Y).obj N) ≫
-      (a.hom.app M ⊗ₘ a.hom.app N) ≫
-      nZ.inv.app ((upperStar k₀ l g).obj M, (upperStar k₀ l g).obj N) := by
+  have h : PullTensorInverseSquare (upperStar k₀ l g) (condensedRealization k₀ l Z)
+      (condensedRealization k₀ l Y) G (nativeOpenSheafTensor k₀ l Y)
+      (nativeOpenSheafTensor k₀ l Z) (nativePullSheafTensor k₀ l g) nY nZ a M N := by
+    unfold PullTensorInverseSquare
     dsimp only [a, nY, nZ]
     rw [condensedRealizationSheafTensorIso_inv_eq,
       condensedRealizationSheafTensorIso_inv_eq,
@@ -88,10 +86,9 @@ lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ 
     cast_proofs adicUpperStar_condensedRelativeTensor_square l
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
       M.carrier N.carrier
-  exact_mod_proofs tensorSquare_rotate_components (upperStar k₀ l g) (condensedRealization k₀ l Z)
-    (condensedRealization k₀ l Y) G (nativeOpenSheafTensor k₀ l Y)
-    (nativeOpenSheafTensor k₀ l Z) (nativePullSheafTensor k₀ l g) nY nZ a M N
-    (Functor.OplaxMonoidal.δ G ((condensedRealization k₀ l Y).obj M)
-      ((condensedRealization k₀ l Y).obj N)) h
+  exact_mod_proofs PullTensorInverseSquare.rotate (upperStar k₀ l g)
+    (condensedRealization k₀ l Z) (condensedRealization k₀ l Y) G
+    (nativeOpenSheafTensor k₀ l Y) (nativeOpenSheafTensor k₀ l Z)
+    (nativePullSheafTensor k₀ l g) nY nZ a M N h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

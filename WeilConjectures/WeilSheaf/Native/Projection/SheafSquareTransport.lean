@@ -74,4 +74,37 @@ lemma tensorSquare_rotate_components
   tensorSquare_rotate (G.mapIso (nY.app (M, N))) (a.app (TC.obj (M, N)))
     (U.map (mu.hom.app (M, N))) (nZ.app (P.obj M, P.obj N)) (a.app M) (a.app N) d h
 
+section SquarePredicates
+
+variable {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
+  [MonoidalCategory E] [MonoidalCategory H]
+  (P : C ⥤ D) (U : D ⥤ H) (V : C ⥤ E) (G : E ⥤ H) [G.OplaxMonoidal]
+  (TC : C × C ⥤ C) (TD : D × D ⥤ D)
+  (mu : TC ⋙ P ≅ P.prod P ⋙ TD)
+  (nY : TC ⋙ V ≅ V.prod V ⋙ Functor.uncurry.obj (curriedTensor E))
+  (nZ : TD ⋙ U ≅ U.prod U ⋙ Functor.uncurry.obj (curriedTensor H))
+  (a : V ⋙ G ≅ P ⋙ U) (M N : C)
+
+/-- The pullback tensor square, with its object conversions checked abstractly. -/
+def PullTensorSquare : Prop :=
+  U.map (mu.hom.app (M, N)) ≫ nZ.hom.app (P.obj M, P.obj N) ≫
+      (a.inv.app M ⊗ₘ a.inv.app N) =
+    a.inv.app (TC.obj (M, N)) ≫ G.map (nY.hom.app (M, N)) ≫
+      Functor.OplaxMonoidal.δ G (V.obj M) (V.obj N)
+
+/-- The inverse orientation of the same square. -/
+def PullTensorInverseSquare : Prop :=
+  G.map (nY.inv.app (M, N)) ≫ a.hom.app (TC.obj (M, N)) ≫
+      U.map (mu.hom.app (M, N)) =
+    Functor.OplaxMonoidal.δ G (V.obj M) (V.obj N) ≫
+      (a.hom.app M ⊗ₘ a.hom.app N) ≫ nZ.inv.app (P.obj M, P.obj N)
+
+lemma PullTensorInverseSquare.rotate
+    (h : PullTensorInverseSquare P U V G TC TD mu nY nZ a M N) :
+    PullTensorSquare P U V G TC TD mu nY nZ a M N :=
+  tensorSquare_rotate_components P U V G TC TD mu nY nZ a M N
+    (Functor.OplaxMonoidal.δ G (V.obj M) (V.obj N)) h
+
+end SquarePredicates
+
 end CategoryTheory

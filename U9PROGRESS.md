@@ -95,3 +95,14 @@ their .inv components unfolds the whole conjugate construction. Applying the
 repository's exact_mod_proofs tactic at explicit, structurally aligned boundaries
 to cast those proof arguments before kernel conversion. This tactic generates
 ordinary equality/proof-irrelevance terms; no trusted checks bypassed.
+
+2026-11-05 03:44 CST: New-server log K5-20261105T033542.log rebuilt the
+PR2086 closure (NativePullTensor 375s; all prior helpers green). The isolated
+transparent proposition SheafPullTensorSquare itself hit kernel timeout after
+127s: this proves the remaining bottleneck is in the concrete statement's object
+conversions, not in proof tactics. Replaced its body with an instantiation of a
+generic PullTensorSquare predicate, and likewise abstracted the inverse square.
+No opaque definitions, skipped checks, or heartbeat increases. The ucheck wrapper
+reported a shell EOF error after the actual failed Lean build; checking wrapper
+syntax before the next run. Also simplified derived symmetry using the existing
+mapDerivedCategorySquareIso_symm theorem instead of concrete unfolding.

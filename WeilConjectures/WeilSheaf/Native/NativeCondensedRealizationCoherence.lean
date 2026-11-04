@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 public import WeilConjectures.CategoryTheory.Functor.CurryComparison
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
@@ -79,7 +80,8 @@ theorem comparisonCompatible_derivedCondensedRealization :
   let θ := R.leftDerivedFunctorIsoMapDerivedCategory
   have he : (Functor.mapDerivedCategorySquareIso
       (condensedRealizationUpperStarIso k₀ l g).symm).hom = b.inv := by
-    simp [b, Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryNatIso_symm]
+    rw [Functor.mapDerivedCategorySquareIso_symm]
+    rfl
   intro M N
   have h := condensedRealizationTensor_pull_square k₀ l g M N
   dsimp only at h
