@@ -7,6 +7,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.MatesHCompIsIso
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.CategoryTheory.Functor.CurryComparison
 
 /-! # Abstract identities for transporting the sheaf tensor square -/
