@@ -83,3 +83,14 @@
 - The completed leaf/audit check remains recorded separately. Final validation
   will use the updated wrapper and verify that the checkout stays on its recorded
   K7 revision. Reported the lock migration collision in shared NOTES.md.
+
+## 2026-11-05: full Lean build green; wrapper footer retry
+
+- All 13 requested modules, including the root aggregator, completed successfully
+  at `8edcd1a8cdef3827a2eb8ceb42f47e0040d3818e`: 34421 build jobs, no Lean errors.
+  Log: `/home/ubuntu/u9/logs/K7-20261105T033045.log`.
+- The checkout was monitored at the expected revision throughout compilation.
+- After Lake completed, the long-running shell wrapper hit an unexpected-EOF
+  parse error while reading its footer after another in-place wrapper update.
+  The current wrapper passes `bash -n`. Rerunning the same 13 targets for a clean
+  wrapper rc=0; all retained Lean sources are unchanged.
