@@ -65,7 +65,8 @@ noncomputable abbrev specifiedModel_leftDerivedDerivedTensor :
 of the counits of `LF` on both factors and the lax monoidal structure of
 `Qh : K(D) ⥤ D(D)`. -/
 noncomputable def specifiedModel_derivedTensorLeftDerivedCounit :
-    (((whiskeringLeft₂ _).obj (Qh (C := C))).obj Qh).obj (specifiedModel_derivedTensorLeftDerived F) ⟶
+    (((whiskeringLeft₂ _).obj (Qh (C := C))).obj Qh).obj
+        (specifiedModel_derivedTensorLeftDerived F) ⟶
       (((whiskeringLeft₂ _).obj (F.mapHomotopyCategory (.up ℤ))).obj
         (F.mapHomotopyCategory (.up ℤ))).obj
           ((postcompose₂.obj Qh).obj (curriedTensor _)) :=
@@ -83,7 +84,8 @@ noncomputable def specifiedModel_derivedTensorLeftDerivedCounit :
 ```
 -/
 noncomputable def specifiedModel_leftDerivedDerivedTensorCounit :
-    (((whiskeringLeft₂ _).obj (Qh (C := C))).obj Qh).obj (specifiedModel_leftDerivedDerivedTensor F) ⟶
+    (((whiskeringLeft₂ _).obj (Qh (C := C))).obj Qh).obj
+        (specifiedModel_leftDerivedDerivedTensor F) ⟶
       (postcompose₂.obj (F.mapHomotopyCategory (.up ℤ) ⋙ Qh)).obj (curriedTensor _) :=
   (postcompose₂.obj F.mapDerivedCategory).map (LaxMonoidal.μNatTrans Qh) ≫
     (postcompose₂.map F.mapDerivedCategoryFactorsh.hom).app (curriedTensor _)
@@ -93,7 +95,8 @@ variable [F.PreservesFlat] [F.IsLeftAdjoint]
 /-- `(K, M) ↦ LF K ⊗ᴸ LF M` is the total left derived functor of `(A, B) ↦ F A ⊗ F B`. It is
 computed on pairs `(K, M)` with `K` K-flat and `M`, `F M` K-flat. -/
 instance specifiedModel_isLeftDerivedFunctor₂_derivedTensorLeftDerived :
-    (specifiedModel_derivedTensorLeftDerived F).IsLeftDerivedFunctor₂ (specifiedModel_derivedTensorLeftDerivedCounit F)
+    (specifiedModel_derivedTensorLeftDerived F).IsLeftDerivedFunctor₂
+      (specifiedModel_derivedTensorLeftDerivedCounit F)
       (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
   refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat
@@ -111,7 +114,8 @@ instance specifiedModel_isLeftDerivedFunctor₂_derivedTensorLeftDerived :
 /-- `(K, M) ↦ LF(K ⊗ᴸ M)` is the total left derived functor of `(A, B) ↦ F(A ⊗ B)`. It is
 computed on pairs of K-flat complexes. -/
 instance specifiedModel_isLeftDerivedFunctor₂_leftDerivedDerivedTensor :
-    (specifiedModel_leftDerivedDerivedTensor F).IsLeftDerivedFunctor₂ (specifiedModel_leftDerivedDerivedTensorCounit F)
+    (specifiedModel_leftDerivedDerivedTensor F).IsLeftDerivedFunctor₂
+      (specifiedModel_leftDerivedDerivedTensorCounit F)
       (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
   refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat
@@ -145,7 +149,8 @@ noncomputable def specifiedModel_leftDerivedTensorComparison :
 
 /-- The characterising property of `specifiedModel_leftDerivedTensorComparison`. -/
 @[reassoc]
-lemma specifiedModel_leftDerivedTensorComparison_app_app_comp_counit (K M : HomotopyCategory C (.up ℤ)) :
+lemma specifiedModel_leftDerivedTensorComparison_app_app_comp_counit
+    (K M : HomotopyCategory C (.up ℤ)) :
     ((F.specifiedModel_leftDerivedTensorComparison.app (Qh.obj K)).app (Qh.obj M)) ≫
         ((specifiedModel_derivedTensorLeftDerivedCounit F).app K).app M =
       ((specifiedModel_leftDerivedDerivedTensorCounit F).app K).app M ≫
@@ -153,7 +158,8 @@ lemma specifiedModel_leftDerivedTensorComparison_app_app_comp_counit (K M : Homo
   leftDerived₂NatTrans_app_app _ _ _ _ _ _ _ K M
 
 /-- The comparison `LF(K ⊗ᴸ M) ⟶ LF K ⊗ᴸ LF M` is an isomorphism, `F` being strong monoidal. -/
-instance specifiedModel_isIso_leftDerivedTensorComparison : IsIso F.specifiedModel_leftDerivedTensorComparison := by
+instance specifiedModel_isIso_leftDerivedTensorComparison :
+    IsIso F.specifiedModel_leftDerivedTensorComparison := by
   dsimp only [specifiedModel_leftDerivedTensorComparison]
   infer_instance
 
@@ -168,7 +174,8 @@ lemma specifiedModel_comparison_fac (K M : HomotopyCategory C (.up ℤ)) :
         F.mapDerivedCategoryFactorsh.hom.app (K ⊗ M) ≫
         Qh.map (OplaxMonoidal.δ (F.mapHomotopyCategory (.up ℤ)) K M) := by
   have h := F.specifiedModel_leftDerivedTensorComparison_app_app_comp_counit K M
-  simpa [specifiedModel_derivedTensorLeftDerivedCounit, specifiedModel_leftDerivedDerivedTensorCounit,
+  simpa [specifiedModel_derivedTensorLeftDerivedCounit,
+    specifiedModel_leftDerivedDerivedTensorCounit,
     tensorHom_def, Category.assoc, Functor.mapHomotopyCategory_δ] using h
 
 lemma specifiedModel_exists_kFlatMap_iso (X : DerivedCategory C) :

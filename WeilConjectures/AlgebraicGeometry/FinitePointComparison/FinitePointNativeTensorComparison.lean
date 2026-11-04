@@ -227,13 +227,15 @@ private theorem pointEvaluation_tensor_formula
     (y : N.val.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))) :
     letI := SheafOfModules.cochainModulesMonoidal B
     letI := pointEvaluationMonoidal k B
-    Functor.LaxMonoidal.μ (pointModuleSections k B) M N (x ⊗ₜ[B.obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))] y) =
+    Functor.LaxMonoidal.μ (pointModuleSections k B) M N
+        (x ⊗ₜ[B.obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))] y) =
       (((PresheafOfModules.sheafificationAdjunction.{u + 1}
         (𝟙 ((sheafCompose (Scheme.ProEt.topology (Spec (.of k)))
           (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B).obj)).unit.app
           (M.val ⊗ N.val) ≫
         (SheafOfModules.tensorObjIsoSheafification (R := B) M N).inv.val).app
-          (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))) (x ⊗ₜ[B.obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))] y) := by
+          (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))))
+        (x ⊗ₜ[B.obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))] y) := by
   letI := SheafOfModules.isMonoidal_W_independentCoefficients B
   letI := SheafOfModules.monoidalCategory B
   letI := pointEvaluationMonoidal k B
@@ -406,8 +408,10 @@ private def pointDerivedMonoidal : (sections k B).Monoidal := by
   letI := RingedDerivedNative.tensorRightColimits.{u + 1, u, 0} J B
   let F := pointModuleSections k B
   letI : F.Monoidal := PointDerivedWork.pointEvaluationMonoidal k B
-  letI : F.PreservesFlat := PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_preservesFlat k B
-  letI : F.IsLeftAdjoint := PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_leftAdjoint k B
+  letI : F.PreservesFlat :=
+    PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_preservesFlat k B
+  letI : F.IsLeftAdjoint :=
+    PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_leftAdjoint k B
   letI : F.Additive := ⟨by intros; rfl⟩
   exact F.specifiedModel_monoidal
 
@@ -428,8 +432,10 @@ private theorem pointDerived_braid (P Q : DerivedCategory.{u + 1} (Modules k B))
   letI := RingedDerivedNative.tensorRightColimits.{u + 1, u, 0} J B
   let F := pointModuleSections k B
   letI : F.Monoidal := PointDerivedWork.pointEvaluationMonoidal k B
-  letI : F.PreservesFlat := PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_preservesFlat k B
-  letI : F.IsLeftAdjoint := PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_leftAdjoint k B
+  letI : F.PreservesFlat :=
+    PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_preservesFlat k B
+  letI : F.IsLeftAdjoint :=
+    PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_leftAdjoint k B
   letI : F.Additive := ⟨by intros; rfl⟩
   letI : F.Braided := PointDerivedWork.pointEvaluationBraided k B
   have hF : ∀ X Y : Modules k B,
@@ -490,8 +496,10 @@ private theorem pointDerived_representative :
   letI := RingedDerivedNative.tensorRightColimits.{u + 1, u, 0} J B
   let F := pointModuleSections k B
   letI : F.Monoidal := PointDerivedWork.pointEvaluationMonoidal k B
-  letI : F.PreservesFlat := PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_preservesFlat k B
-  letI : F.IsLeftAdjoint := PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_leftAdjoint k B
+  letI : F.PreservesFlat :=
+    PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_preservesFlat k B
+  letI : F.IsLeftAdjoint :=
+    PointDerivedWork.AlgebraicGeometry.ProEtale.pointSections_leftAdjoint k B
   letI : F.Additive := ⟨by intros; rfl⟩
   let e := F.mapCochainComplexμIso P Q
   refine ⟨e.symm, ?_, ?_⟩
