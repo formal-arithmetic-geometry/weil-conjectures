@@ -9,6 +9,10 @@ public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKum
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerExchangeAux
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerExchangeAuxBridge
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerExchangeAuxCoefficient
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerExchangeAuxPunctured
 
 /-! # Exchange from the relative Kummer computations over both bases
 
@@ -23,6 +27,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace WeilConjectures.PurityFiniteSetting
 
+set_option maxRecDepth 100000 in
 /-- Conditional exchange for an arbitrary map of k-schemes, assuming the relative
 computations on both bases. This does not assert any relative computation itself.
 Source: blueprint latest, sk-lem-sp-reduction/prop-pur-gm-relative-kummer.proof.md,
@@ -52,6 +57,10 @@ theorem relative_kummer_base_change_of_relative_conclusions
     (a : B ⟶ Spec (CommRingCat.of P.field.k))
     (hB : P.RelativeKummerConclusions h B a)
     (hB' : P.RelativeKummerConclusions h B' (g ≫ a)) :
-    P.KummerBaseChangeConclusions h g a := by sorry
+    P.KummerBaseChangeConclusions h g a :=
+  have hκ := P.coordinateKummer_leftDerivedUpperStar_naturality h g a
+  ⟨hκ, P.isIso_lineBaseChange_of_relative_conclusions h g a hB hB',
+    P.isIso_puncturedBaseChange_of_kummer_naturality h g a hB hB' hκ
+      (P.leftDerivedUpperStarSquareIso_derivedCoefficientPullback h (puncturedSquare g))⟩
 
 end WeilConjectures.PurityFiniteSetting
