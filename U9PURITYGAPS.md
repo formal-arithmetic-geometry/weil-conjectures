@@ -71,14 +71,35 @@ These cannot be imported or ported as completed proofs. The blueprint explains t
 finite-coefficient normalization, integral reconstruction, rationalization, and descent, but
 does not replace these equations in Lean.
 
-## Independent completed construction, awaiting remote checking
+## Validated independent constructions
+
+All three new helper modules below and `WeilSheaf/SmoothPurity.lean` passed `ucheck` at
+`b7e771038009eb21aa33c8666a4161d59f816525`. The remote logs are
+`/home/ubuntu/u9/logs/K4-20261105T024557.log` and
+`/home/ubuntu/u9/logs/K4-20261105T025204.log` on `ubuntu@43.131.49.250`.
+The checks also rebuilt `UpperShriek.lean`. Independent modules brought in by #2087 were not
+all checked; this is a partial-result branch, not a completed leaf or integration claim.
 
 `SmoothPurityOpenImmersion.lean` proves zero Tate twist is the identity and the assigned
 adjunction for open immersions, using the existing extension-by-zero adjunction. It does not
 invoke general smooth purity. Neither new helper uses K2; K2's intended proof depends on K4,
 so the reverse dependency must be avoided.
 
+`SmoothPurityRootsNaturality.lean` supplies the semilinear pullback equation for a finite root
+generator: the generator attached to `ζ` is sent to the one attached to `φ ζ`. It derives this
+from naturality of `ΓSpecIso`, first for groups of roots, then for presheaves and sheaves.
+This equation is ready to specialize to arithmetic Frobenius and its `q`-power action. The
+inverse-limit comparison can then use `upperStarFreeTowerIso`,
+`upperStarLimitFreeTowerIso`, and `upperStarExtendScalarsLimitFreeTowerIso` from
+`TateTwist/TateModuleUpperStar.lean`. The normalization of the resulting limit map, and the
+identification with the scalar native Weil line, have not been proved here.
+
 The direct consumers of K4 are the smooth dualizing-object theorem and, via K2, the affine-line
 adjunction. The latter general API permits nonseparated bases; its concrete Fourier consumers
 use separated affine spaces. This observation does not authorize changing the assigned
 statement.
+
+The parallel C4 branch's `TateFrobeniusLevel.lean` at `378c9a1116` builds on
+`SmoothPurityRootsNaturality.lean` and specializes the finite equation to the modular cyclotomic
+character. It was read but not merged here; its visible check failed before Lean due to the
+remote systemd environment. It does not yet supply the inverse-limit/native comparison.

@@ -26,3 +26,22 @@ BLOCKED: The available sources do not provide the comparison needed for the gene
 - Verified textually that both the target statement and its inherited binder block are byte-identical to baseline.
 - The first remote check is still queued; baseline completed and K6 currently occupies the shared tree. No local Lean/lake invocation.
 - Static import-closure audit: the three requested modules cover both new helpers and SmoothPurity/UpperShriek, but not every independent module brought in by #2087. Broader validation is still required for the merge if retaining it as an integration result.
+
+## 2026-11-05 02:33 +08:00 — finite root comparison
+- Added `SmoothPurityRootsNaturality.lean`: change of base-field map for `fieldToSections`, naturality of root generators at group/presheaf/sheaf levels, and the semilinear pullback equation. This is a concrete finite-level step toward the cyclotomic Tate comparison, without adding a purity assumption.
+- Queued a separate minimal `ucheck WeilConjectures.WeilSheaf.SmoothPurityRootsNaturality`; the earlier three-module check remains queued. K6's build is green and K3 currently holds the shared tree.
+
+## 2026-11-05 02:47 +08:00 — first remote check GREEN
+- `ucheck WeilConjectures.WeilSheaf.SmoothPurityOpenImmersion WeilConjectures.WeilSheaf.SmoothPurityDescendedTrace WeilConjectures.WeilSheaf.SmoothPurity`: rc=0, slopci-w3, source commit b7e7710380.
+- Log: `/home/ubuntu/u9/logs/K4-20261105T024557.log` on ubuntu@43.131.49.250. OpenImmersion built in 24 s, DescendedTrace in 25 s, UpperShriek in 9.4 s, SmoothPurity in 7.8 s.
+- This validates the two independent helpers and the merged target module. It does not prove the remaining purity-map sorry or validate every independent file imported by the PR merge.
+- The minimal RootsNaturality check is still queued.
+
+## 2026-11-05 02:54 +08:00 — all new helpers GREEN; incomplete leaf
+- `ucheck WeilConjectures.WeilSheaf.SmoothPurityRootsNaturality`: rc=0, slopci-w3, source commit `b7e771038009eb21aa33c8666a4161d59f816525`. Module built in 7.9 s. Log: `/home/ubuntu/u9/logs/K4-20261105T025204.log` on ubuntu@43.131.49.250.
+- All three new K4 Lean modules and SmoothPurity are validated; the first check also validated the relocated UpperShriek. No local Lean/lake runs, no heartbeat changes, no new sorry/axiom/admit/native_decide or opacity bypass in the helpers.
+- Read the parallel C4 branch's `TateFrobeniusLevel.lean` at 378c9a1116: it uses our root-naturality helper and adds the finite cyclotomic specialization. Did not duplicate or merge that work. Its visible build attempt failed before Lean due to DBUS/XDG environment.
+- New files: SmoothPurityOpenImmersion.lean, SmoothPurityDescendedTrace.lean, SmoothPurityRootsNaturality.lean, U9PURITYGAPS.md, and this progress log. The remaining Lean changes come from the required pr/2087 merge; independent modules in that merge have not all been validated.
+- No K4.DONE written. The original target's type and inherited binder block are unchanged, but its proof still depends on Houyi's equivalent purity-map sorry. K2 now has a validated proof from K4; using K2 here would be circular.
+
+BLOCKED: I have not constructed the general Weil purity morphism. The missing comparison identifies the roots-defined condensed Tate line, with its descended Frobenius datum, with the scalar-defined native Tate line; the validated root-generator equation is only its finite-level input. The descended trace additionally needs geometric adjoint invertibility and extension to arbitrary coefficients. The existing condensed comparison APIs assume absolute separatedness, whereas the unchanged leaf permits nonseparated bases. The shared Sheaf primitives condensed_tate_pair_encoding and condensed_unit_purity_counit remain sorry, so they do not close these obligations. U9PURITYGAPS.md records the exact source boundaries and continuation APIs. Validated partial work is retained; the leaf is not solved.
