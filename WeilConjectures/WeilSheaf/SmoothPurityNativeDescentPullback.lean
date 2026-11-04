@@ -64,7 +64,7 @@ noncomputable abbrev finiteBaseTracePullback :
 noncomputable def finiteBaseNativeDescentUpperStarIso
     (P : Dᵇc(Y)⟦Profinite.padicAlgClRingObj l⟧) :
     (upperStar f).obj ((finiteBaseNativeDescent (k₀ := k₀)).obj P) ≅
-      (finiteBaseNativeDescent (k₀ := k₀)).obj ((finiteBaseTracePullback f).obj P) :=
+      (finiteBaseNativeDescent (k₀ := k₀)).obj ((finiteBaseTracePullback (k₀ := k₀) f).obj P) :=
   ObjectProperty.isoMk _
     ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.preimageIso
       ((ProEtaleWeilSheaf.upperStarMapDerivedCategoryCompIso k₀ l f).app
@@ -81,6 +81,6 @@ noncomputable def finiteBaseNativeDescentUpperStarIso
             ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
               (Profinite.padicAlgClRingObj l) f).app P.obj).symm ≪≫
         ((finiteBaseNativeDescentComparison (k₀ := k₀)).app
-          ((finiteBaseTracePullback f).obj P)).symm))
+          ((finiteBaseTracePullback (k₀ := k₀) f).obj P)).symm))
 
 end AlgebraicGeometry.WeilComplex
