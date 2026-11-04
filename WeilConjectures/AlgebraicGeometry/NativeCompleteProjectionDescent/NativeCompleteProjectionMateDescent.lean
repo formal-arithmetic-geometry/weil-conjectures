@@ -24,6 +24,51 @@ namespace AlgebraicGeometry.ProEtale.NativeCompleteProjectionDescent
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+/-- Bifunctoriality of the native compact-support projection map. -/
+private theorem exceptionalProjection_bifunctorial {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) {M M' : Integral l E X} {K K' : Integral l E Y}
+    (v : M ⟶ M') (w : K ⟶ K') :
+    ((integralImage l E c).map v ⊗ₘ w) ≫
+      CondensedRing.exceptionalProjectionMorphismOfCompactification
+        (spIntegralCondensed l E) c M' K' =
+    CondensedRing.exceptionalProjectionMorphismOfCompactification (spIntegralCondensed l E) c M K ≫
+      (integralImage l E c).map (v ⊗ₘ (ringedPull l E f).map w) := by
+  have hr : (integralImage l E c).obj M' ◁ w ≫
+        CondensedRing.exceptionalProjectionMorphismOfCompactification
+          (spIntegralCondensed l E) c M' K' =
+      CondensedRing.exceptionalProjectionMorphismOfCompactification
+          (spIntegralCondensed l E) c M' K ≫
+        (integralImage l E c).map (M' ◁ (ringedPull l E f).map w) :=
+    CondensedRing.exceptionalProjectionMorphismOfCompactification_natural_right
+      (spIntegralCondensed l E) c M' w
+  have hl : (integralImage l E c).map v ▷ K ≫
+        CondensedRing.exceptionalProjectionMorphismOfCompactification
+          (spIntegralCondensed l E) c M' K =
+      CondensedRing.exceptionalProjectionMorphismOfCompactification
+          (spIntegralCondensed l E) c M K ≫
+        (integralImage l E c).map (v ▷ (ringedPull l E f).obj K) :=
+    CondensedRing.exceptionalProjectionMorphismOfCompactification_natural_left
+      (spIntegralCondensed l E) c v K
+  calc ((integralImage l E c).map v ⊗ₘ w) ≫
+        CondensedRing.exceptionalProjectionMorphismOfCompactification
+          (spIntegralCondensed l E) c M' K'
+      _ = (integralImage l E c).map v ▷ K ≫ (integralImage l E c).obj M' ◁ w ≫
+          CondensedRing.exceptionalProjectionMorphismOfCompactification
+            (spIntegralCondensed l E) c M' K' := by
+        rw [MonoidalCategory.tensorHom_def, Category.assoc]
+      _ = ((integralImage l E c).map v ▷ K ≫
+          CondensedRing.exceptionalProjectionMorphismOfCompactification
+            (spIntegralCondensed l E) c M' K) ≫
+            (integralImage l E c).map (M' ◁ (ringedPull l E f).map w) := by
+        rw [hr, Category.assoc]
+      _ = CondensedRing.exceptionalProjectionMorphismOfCompactification
+            (spIntegralCondensed l E) c M K ≫
+          (integralImage l E c).map (v ▷ (ringedPull l E f).obj K) ≫
+            (integralImage l E c).map (M' ◁ (ringedPull l E f).map w) := by
+        rw [hl, Category.assoc]
+      _ = _ := by
+        rw [← Functor.map_comp, ← MonoidalCategory.tensorHom_def]
+
 /-- Descent of the native compactification projection through its actual reduction units.
 Source: blueprint proof (3), tower projection followed by derived inverse limit
 (blueprint: lem-sp-complete-projection-mate-descent).
@@ -76,6 +121,51 @@ theorem complete_projection_mate_descent (m : DescentModels l E)
           CondensedRing.exceptionalProjectionMorphismOfCompactification
             (spIntegralCondensed l E) c M' K' =
         pi ≫ (integralImage l E c).map (v ⊗ₘ (ringedPull l E f.left).map w) := by
-  sorry
+  intro U V theta pi
+  let := hbM
+  let := hbH
+  let := hOpen
+  let := _hProper
+  let := hUnitU
+  let := hUnitV
+  have ht : IsIso theta := by
+    let B := (red l E m X.left).obj M
+    let C := (red l E m Y.left).obj K
+    let q := (VaryingRing.gComp (rings l E) (transitions l E) c.i c.g).inv.app C ≫
+      eqToHom (congrArg (fun g : X.left ⟶ Y.left ↦
+        (VaryingRing.G (rings l E) (transitions l E) g).obj C) c.comm.symm)
+    have hq' : IsIso ((m.systems X.left).closed.tensor.map (Prod.mkHom (𝟙 B) q)) := by
+      change IsIso (((m.systems X.left).closed.tensor.mapIso
+        (Iso.prod (Iso.refl B) (asIso q))).hom)
+      infer_instance
+    dsimp only [theta, transportedProjection, systemProjection]
+    infer_instance
+  let t := asIso theta
+  have hred : (red l E m Y.left).map pi = theta := by
+    have h := projection_reduction_square l E m c AX AZ AY M K hOpen
+    have hh : (red l E m Y.left).map pi ≫
+        (targetComparison l E m c AX AZ AY M K hbH).hom =
+      (sourceComparison l E m c AX AZ AY M K hbM).hom ≫
+        systemProjection l E m c ((red l E m X.left).obj M)
+          ((red l E m Y.left).obj K) hOpen := by
+      simpa only [targetComparison, sourceComparison, Iso.trans_hom, Functor.mapIso_hom,
+        Iso.prod_hom, asIso_hom, Iso.refl_hom, Iso.app_hom, Category.assoc,
+        Functor.map_comp] using h
+    dsimp only [theta, transportedProjection]
+    rw [← Category.assoc, ← hh]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  have hpi : pi = (adj l E m Y.left AY).unit.app V ≫ (lim l E m Y.left AY).map theta ≫
+      inv ((adj l E m Y.left AY).unit.app U) := by
+    have h := (adj l E m Y.left AY).unit.naturality pi
+    dsimp only [Functor.id_map, Functor.comp_map] at h
+    rw [← hred, ← Category.assoc, IsIso.eq_comp_inv]
+    simpa only [Category.assoc] using h
+  refine ⟨hpi, t, asIso ((adj l E m Y.left AY).unit.app V) ≪≫
+    (lim l E m Y.left AY).mapIso t ≪≫ (asIso ((adj l E m Y.left AY).unit.app U)).symm,
+    rfl, hpi.symm, ?_, ?_⟩
+  · simp only [Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv, asIso_hom, asIso_inv,
+      Category.assoc]
+  · intro M' K' v w
+    exact exceptionalProjection_bifunctorial l E c v w
 
 end AlgebraicGeometry.ProEtale.NativeCompleteProjectionDescent
