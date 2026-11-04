@@ -90,24 +90,4 @@ noncomputable def purityExtendContinuousWeakPullbackIso (T : Type) [TopologicalS
       (g)^*⟦Profinite.continuousMapRingObj T⟧.obj N :=
   purityExtendWeakPullbackIso (Profinite.continuousMapRingObj T) g M N e
 
-variable (l : ℕ) [Fact l.Prime]
-
-/-- The unit for integral adic coefficients, using the abstract comparison. -/
-noncomputable def purityPadicPullbackUnit
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[l]) X)) :
-    (g)^*[Ab.{u + 1}].obj M.X ⟶
-      ((g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj M).X :=
-  purityContinuousPullbackUnit g ℤ_[l] M
-
-variable {K : Type u} [Field K] (f : U ⟶ Spec (.of K)) {ζ : ℕ → K}
-  (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n)) (hζ' : ∀ n, ζ (n + 1) ^ l = ζ n)
-
-/-- The Tate-module trivialization using the weakly étale comparison interface. -/
-noncomputable def purityWeakTateModuleTrivialization :
-    (g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj (tateModule X l) ≅
-      (g)^*⟦Profinite.continuousMapRingObj ℤ_[l]⟧.obj (𝟙_ _) :=
-  purityExtendContinuousWeakPullbackIso g ℤ_[l] _ _
-    (upperStarMapModTateModuleIsoUnit g f l hζ hζ' ≪≫ (g)^*[Ab.{u + 1}].mapModUnitIso)
-
 end AlgebraicGeometry.ProEtale
