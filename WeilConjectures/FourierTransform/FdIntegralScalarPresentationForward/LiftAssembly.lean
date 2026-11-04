@@ -92,9 +92,9 @@ theorem lift_generic
     simp only [eqToIso.hom, eqToHom_app, eqToHom_refl, Category.comp_id, Category.assoc]
       at h1 ⊢
     rw [h1, ← eqToHom_map, ← TL.map_comp_assoc, hω V hV, TL.map_comp, Category.assoc]
-    have hn := fL.hom.naturality (χ.app V.obj)
-    simp only [Functor.comp_map] at hn
-    rw [hn, ← hotc, RL.map_comp, ← reassoc_of% (heD V.obj), Iso.inv_hom_id_app_assoc]
+    · have hn := fL.hom.naturality (χ.app V.obj)
+      simp only [Functor.comp_map] at hn
+      rw [hn, ← hotc, RL.map_comp, ← reassoc_of% (heD V.obj), Iso.inv_hom_id_app_assoc]
   obtain ⟨V, hV, ⟨a⟩⟩ := hgood K
   have hK : α.app K = β.app K := by
     rw [← cancel_epi (((IE ⋙ PE.ι) ⋙ Xh).map a.hom), α.naturality, β.naturality, key]
