@@ -30,6 +30,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+-- The recorded statement binds `hp` and `hk`, which the proof does not use.
+set_option linter.unusedVariables false in
 /-- Every displayed condensed Fourier kernel placed in degree zero is bounded
 constructible, including the noninvertible-cardinality branch of its definition.
 
