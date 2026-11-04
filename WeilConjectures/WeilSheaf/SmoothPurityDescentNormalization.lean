@@ -71,3 +71,45 @@ lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
   rw [rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac]
 
 end CategoryTheory.Endofunctor.IsoAlgebra
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  {k : Type u} [Field k] [Finite k] {X Y : Scheme.{u}} {s : X ⟶ Spec (.of k)}
+  {t : Y ⟶ Spec (.of k)} {f : X ⟶ Y} {h : f ≫ t = s}
+
+/-- Forgetting the descended sheaf base-change map gives the ordinary base-change map. -/
+lemma lowerStarGeometricFiberWeilBaseChange_app_forget
+    (hc : UpperStarWeilCompatible Λ f h)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    ((lowerStarGeometricFiberWeilBaseChange hc).app M).hom.f =
+      (lowerStarBaseChange Λ (Scheme.Hom.isPullback_geometricFiberMap f h).flip.toCommSq).app M := by
+  unfold lowerStarGeometricFiberWeilBaseChange
+  rw [Endofunctor.IsoAlgebra.mateEquiv_mapOfNatIsoAdjunction_app_hom_f]
+  change (mateEquiv (upperStarLowerStarAdjunction Λ f)
+    (upperStarLowerStarAdjunction Λ (Scheme.Hom.geometricFiberMap f h))
+    (TwoSquare.mk _ _ _ _ (geometricFiberUpperStarComparison Λ f h).inv)).natTrans.app M = _
+  rw [geometricFiberUpperStarComparison, Iso.symm_inv,
+    ← Adjunction.exchangeRight_eq_mateEquiv, ← lowerStarBaseChange_eq]
+
+/-- The comparison used by the descended trace has the prescribed derived-unit equation. -/
+lemma geometricFiberWeilRightDerivedLowerStarIso_inv_fac
+    (hc : UpperStarWeilCompatible Λ f h)
+    (K : HomotopyCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (.up ℤ)) :
+    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit (lowerStar Λ f)
+      (geometricFiberWeilLowerStar Λ t)).app K ≫
+        (geometricFiberWeilRightDerivedLowerStarIso hc).inv.app (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory
+        (lowerStarGeometricFiberWeilBaseChange hc) (.up ℤ)).app K) ≫
+      (Functor.mapDerivedCategoryCompRightDerivedFunctorUnit
+        (geometricFiberWeilLowerStar Λ s) (geometricFiberMapWeilLowerStar Λ f h)).app K := by
+  exact Endofunctor.IsoAlgebra.traceDescentComparison_inv_fac
+    (lowerStarGeometricFiberMapCompFrobeniusIso Λ f h)
+    (geometricFiberWeilLowerStar Λ s)
+    (T₀ := (s.geometricFiberProj)^*⟦Λ⟧) (Iso.refl _)
+    (geometricFiberWeilLowerStar Λ t) (asIso (lowerStarGeometricFiberWeilBaseChange hc)) K
+
+end AlgebraicGeometry.ProEtale.CondensedRing
