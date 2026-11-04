@@ -20561,6 +20561,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantSheafLeg
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafForgetAb
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicInt
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicIntExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicUpperStarKFlat
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
@@ -24080,12 +24081,14 @@ public import WeilConjectures.WeilSheaf.Native.NativeImmersionHeartLocalization
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedActionHom
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedTensorModels
 public import WeilConjectures.WeilSheaf.Native.NativePullDerivedTensor
+public import WeilConjectures.WeilSheaf.Native.NativePullDerivedTensorKFlat
 public import WeilConjectures.WeilSheaf.Native.NativePullSheafTensor
 public import WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
 public import WeilConjectures.WeilSheaf.Native.NativeRingedForgetTensorChainComparison
 public import WeilConjectures.WeilSheaf.Native.NativeStandardHomRepresentatives
 public import WeilConjectures.WeilSheaf.Native.NativeTensorAcyclicTestComparison
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatForget
+public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatOfForget
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenRestrictionTensor
