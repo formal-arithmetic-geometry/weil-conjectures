@@ -19,6 +19,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensor
 public import WeilConjectures.AlgebraicGeometry.Etale.Closed.EtaleClosedAmbientAdjoint
 public import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomThickLocus
+public import WeilConjectures.AlgebraicGeometry.FiniteCoefficientOrdinary.FiniteCoefficientOrdinaryDirectImageMaps
 
 /-! # Canonical maps for general étale coefficient pairing change
 

@@ -42,9 +42,6 @@ variable {BY BX u I}
 variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
   (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)
 
-end SheafOfModules
-
-namespace SheafOfModules
 
 /-- Lift an already specified ordinary singleton comparison to derived categories.
 Source: Zheng, base-change sentence before Lemma 4.10, printed p. 23; Stacks 0FND.
