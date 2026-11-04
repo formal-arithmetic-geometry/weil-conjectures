@@ -213,6 +213,13 @@ private noncomputable def resolutionDerivedIso
   have : IsIso t := NatIso.isIso_of_isIso_app _
   exact asIso t ≪≫ (asIso v).symm
 
+/-- Additivity of evaluation with the module universe pinned to `u + 1`, so that instance
+search does not leave the auxiliary universe of `moduleEvaluation_additive` unsolved. -/
+private instance moduleEvaluation_additive_succ (X : Scheme.{u})
+    (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) :
+    (SheafOfModules.evaluation.{u + 1} R (op U)).Additive :=
+  moduleEvaluation_additive.{u, u + 1, 0} X R U
+
 private noncomputable def ringHypercohomologyDerivedIso (X : Scheme.{u})
     (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) (q : ℤ)
     [HasDerivedCategory (ringedSiteModules.{u + 1} R)]
