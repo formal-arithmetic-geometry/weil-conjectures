@@ -30,8 +30,11 @@ lemma Functor.map_iso_inv_eq_of_map_hom_eq
     {X Y : C} (e : X ≅ Y) (e' : F.obj X ≅ F.obj Y)
     (h : F.map e.hom = e'.hom) : F.map e.inv = e'.inv := by
   apply (cancel_mono e'.hom).1
-  rw [← h, ← F.map_comp, Iso.inv_hom_id, F.map_id]
-  exact e'.inv_hom_id.symm
+  calc
+    F.map e.inv ≫ e'.hom = F.map e.inv ≫ F.map e.hom := by rw [h]
+    _ = F.map (e.inv ≫ e.hom) := (F.map_comp _ _).symm
+    _ = 𝟙 _ := by rw [Iso.inv_hom_id, F.map_id]
+    _ = e'.inv ≫ e'.hom := e'.inv_hom_id.symm
 
 end CategoryTheory
 
