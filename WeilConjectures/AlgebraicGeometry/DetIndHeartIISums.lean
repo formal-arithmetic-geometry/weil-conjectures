@@ -41,6 +41,7 @@ open scoped CategoryTheory.Obj DirectSum
 namespace AlgebraicGeometry.ProEtale
 
 set_option maxHeartbeats 800000 in
+-- Elaborating the summand comparison unfolds the direct-sum model of the heart.
 /-- Ext from a constructible sheaf commutes with arbitrary small sums of
 ind-constructible sheaves, in every integer degree. The displayed additive homomorphism
 is the unique map whose restriction to each summand is postcomposition with the shifted
@@ -75,7 +76,7 @@ theorem det_ind_heart_ii_sums
     (B : S → CategoryTheory.Mod
       (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (coefficientHeartRingObj R) X))
-    (hB : ∀ s : S, ObjectProperty.ind.{u + 1}
+    (_hB : ∀ s : S, ObjectProperty.ind.{u + 1}
       (IsConstantModelConstructible (coefficientHeartRingObj R) X) (B s))
     (c : Cofan B) (hc : IsColimit c) :
     Function.Bijective
