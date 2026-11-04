@@ -126,3 +126,9 @@ Geometric descent universality now passes: `bijective_map_comp_geometricFiberWei
 The native internal-Hom comparisons `nativeHomSingleIso` and `nativeHomSourceShiftIso` are GREEN. `nativeConstructibleTensorTateIso` is GREEN in `K4-20261105T070103.log` (3.5s), and `nativeConstructibleTensorTateShiftIso` is GREEN in the ongoing `K4-20261105T070448.log` (6.6s). These validate the natural tensor/Tate comparison needed by the Thom route.
 
 The remaining native proper-trace universality is being profiled after splitting it from the adjunction criterion. Proper-dualizing descent, absolute purity, and the final Thom assembly still await validation. C4's encoding remains separate and unmerged. The original general leaf remains open and unchanged; the user-proof integration patch has not been applied.
+
+## Completed helper chain, 2026-11-05 07:35 +0800
+
+The full SmoothPurityTransportAudit is now GREEN at 339f162b9, log `/home/ubuntu/u9/logs/K4-20261105T072651.log`. This supersedes the earlier pending status: proper trace descent, free Weil universality, proper exceptional unit, compactification, absolute smooth purity, shifted Tate encoding, and conditional Thom assembly all compile. `nonempty_shriekRightAdjoint_adicConstant_iso_of_tate_encoding` and all its absolute-descent inputs depend only on propext, Classical.choice, and Quot.sound. The Thom theorem additionally uses the existing native tensor and projection/Verdier results; a declaration audit is being added to enumerate its remaining leaves.
+
+The only unimplemented integration input is now C4's actual underived Tate encoding. Its finite-level through pullback-naturality chain is green; its module scalar-extension/Weil-structure layer still has a kernel conversion timeout. The general relative K4 leaf remains open, and the prepared downstream replacements remain unapplied. No DONE yet.
