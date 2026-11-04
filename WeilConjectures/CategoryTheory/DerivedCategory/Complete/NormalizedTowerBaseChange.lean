@@ -64,6 +64,50 @@ lemma IsHomotopyLimit.of_whisker_addOpFunctor_one {F : ℕᵒᵖ ⥤ C} (c : Con
 
 end CategoryTheory.Pretriangulated
 
+namespace CategoryTheory.Pretriangulated
+
+section Succ
+
+variable {C : Type*} [Category C]
+
+/-- The cone over a tower `F` obtained from a cone over the shifted tower `n ↦ F (n + 1)`, with
+leg at `0` the leg at `1` followed by the transition `F 1 ⟶ F 0`. -/
+@[simps pt]
+def coneOfAddOpFunctorOne {F : ℕᵒᵖ ⥤ C} (c : Cone (addOpFunctor 1 ⋙ F)) : Cone F where
+  pt := c.pt
+  π := NatTrans.ofOpSequence
+    (fun k ↦ match k with
+      | 0 => c.π.app (op 0) ≫ F.map (homOfLE (Nat.le_succ 0)).op
+      | k + 1 => c.π.app (op k))
+    (fun k ↦ by
+      rcases k with _ | k
+      · simp
+      · have := c.w (homOfLE k.le_succ).op
+        simp only [Functor.const_obj_obj, Functor.comp_obj, addOpFunctor_obj, Functor.comp_map,
+          Functor.const_obj_map, id_comp] at this ⊢
+        rw [← this]
+        rfl)
+
+@[simp]
+lemma coneOfAddOpFunctorOne_π_app_succ {F : ℕᵒᵖ ⥤ C} (c : Cone (addOpFunctor 1 ⋙ F)) (k : ℕ) :
+    (coneOfAddOpFunctorOne c).π.app (op (k + 1)) = c.π.app (op k) :=
+  rfl
+
+end Succ
+
+variable {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [HasLimitsOfShape (Discrete ℕ) C]
+
+/-- The cone `Pretriangulated.coneOfAddOpFunctorOne c` is a homotopy limit cone as soon as `c`
+is. -/
+lemma IsHomotopyLimit.coneOfAddOpFunctorOne {F : ℕᵒᵖ ⥤ C} {c : Cone (addOpFunctor 1 ⋙ F)}
+    (hc : IsHomotopyLimit c) : IsHomotopyLimit (coneOfAddOpFunctorOne c) :=
+  .of_whisker_addOpFunctor_one _ (hc.of_iso (Iso.refl _) _ (Iso.refl _) fun _ ↦ by
+    simp only [Iso.refl_hom, NatTrans.id_app, comp_id, id_comp]
+    rfl)
+
+end CategoryTheory.Pretriangulated
+
 namespace CochainComplex
 
 variable {R : Type*} [Ring R] {𝒜 : Type*} [Category 𝒜] [Abelian 𝒜] [Linear R 𝒜]
@@ -452,5 +496,90 @@ theorem isDerivedBaseChange_π_comp_quotientTowerFunctorIso_hom
   exact (hu.comp_map_iso (asIso g₀)).of_iso M₀.iso.symm
 
 end Reduction
+
+section Succ
+
+variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R)
+  (hI : I = Ideal.span {ϖ})
+  (M : ∀ n : ℕ, DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1)))))
+  (s : ∀ n : ℕ, M (n + 1) ⟶ (levelTransitionRestrictScalars J I (n + 1).le_succ).obj (M n))
+
+/-- The tower `n ↦ Res M_n` in `D(J, R)` of the restrictions of scalars of levels
+`M_n ∈ D(J, R ⧸ Iⁿ⁺¹)` with transitions `s_n : M_{n+1} ⟶ Res M_n`. -/
+noncomputable def succTowerRestrict : ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
+  Functor.ofOpSequence fun n ↦ (levelRestrictScalars J I (n + 2)).map (s n) ≫
+    (levelRestrictScalarsCompIso J I (n + 1).le_succ).hom.app (M n)
+
+open ZeroObject in
+/-- The levels `M_n ∈ D(J, R ⧸ Iⁿ⁺¹)`, preceded by the zero object of `D(J, R ⧸ I⁰)`. -/
+noncomputable def towerOfSucc : ∀ n : ℕ, DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R ⧸ I ^ n)))
+  | 0 => 0
+  | n + 1 => M n
+
+open ZeroObject in
+/-- The transitions of `DerivedCategory.towerOfSucc`. -/
+noncomputable def towerOfSuccMap : ∀ n : ℕ,
+    towerOfSucc M (n + 1) ⟶ (levelTransitionRestrictScalars J I n.le_succ).obj (towerOfSucc M n)
+  | 0 => 0
+  | n + 1 => s n
+
+variable {M s} in
+lemma isDerivedBaseChange_towerOfSuccMap (hs : ∀ n, Sheaf.IsDerivedBaseChange (s n)) :
+    ∀ n, Sheaf.IsDerivedBaseChange (towerOfSuccMap M s n)
+  | 0 => fun N ↦ by
+    have : Subsingleton (R ⧸ I ^ 0) := Ideal.Quotient.subsingleton_iff.2 (by simp)
+    have hN := isZero_of_subsingleton N
+    refine ⟨fun g₁ g₂ _ ↦ hN.eq_of_tgt _ _, fun g ↦ ⟨0, ?_⟩⟩
+    exact ((levelTransitionRestrictScalars J I (Nat.le_succ 0)).map_isZero hN).eq_of_tgt _ _
+  | n + 1 => hs n
+
+/-- The comparison of `DerivedCategory.succTowerRestrict` with the shifted strict model of
+`DerivedCategory.towerOfSucc`. -/
+noncomputable def succTowerRestrictToStrict :
+    succTowerRestrict M s ⟶
+      addOpFunctor 1 ⋙ quotientTowerFunctor (towerOfSucc M) (towerOfSuccMap M s) ⋙ Q :=
+  NatTrans.ofOpSequence
+    (fun n ↦ (quotientTowerFunctorIso (towerOfSucc M) (towerOfSuccMap M s) (n + 1)).inv) fun n ↦ by
+    have h := Q_map_towerFunctor_map_comp_towerFunctorIso_hom (J := J)
+      (A := fun n ↦ R ⧸ I ^ n) (fun h ↦ Ideal.Quotient.factor (Ideal.pow_le_pow_right h))
+      (fun n ↦ Ideal.Quotient.mk (I ^ n)) (fun _ ↦ Ideal.Quotient.factor_comp_mk _)
+      (towerOfSucc M) (towerOfSuccMap M s) (n + 1)
+    unfold succTowerRestrict
+    erw [Functor.ofOpSequence_map_homOfLE_succ]
+    rw [Iso.comp_inv_eq, assoc]
+    erw [h]
+    simp only [Iso.inv_hom_id_assoc]
+    rfl
+
+instance : IsIso (succTowerRestrictToStrict M s) := by
+  have : ∀ n, IsIso ((succTowerRestrictToStrict M s).app n) := fun n ↦ by
+    rw [succTowerRestrictToStrict, NatTrans.ofOpSequence_app]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
+
+include hϖ hI in
+/-- **The legs of the derived limit of a normalized tower are derived base changes.** Let
+`M_n ∈ D(J, R ⧸ Iⁿ⁺¹)` be levels with transitions `s_n : M_{n+1} ⟶ Res M_n` exhibiting `M_n`
+as the derived base change `M_{n+1} ⊗ᴸ R ⧸ Iⁿ⁺¹`, and let `c` be a homotopy limit cone over the
+tower `n ↦ Res M_n` of `D(J, R)`. Then each leg `c.pt ⟶ Res M_n` exhibits `M_n` as the derived
+base change `c.pt ⊗ᴸ_R R ⧸ Iⁿ⁺¹`. -/
+theorem isDerivedBaseChange_π_app_of_isHomotopyLimit
+    (hs : ∀ n, Sheaf.IsDerivedBaseChange (s n)) {c : Cone (succTowerRestrict M s)}
+    (hc : IsHomotopyLimit c) (n : ℕ) :
+    Sheaf.IsDerivedBaseChange (f := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n)) := by
+  let α := succTowerRestrictToStrict M s
+  let c₁ : Cone (addOpFunctor 1 ⋙ quotientTowerFunctor (towerOfSucc M) (towerOfSuccMap M s) ⋙ Q) :=
+    { pt := c.pt, π := c.π ≫ α }
+  have hc₁ : IsHomotopyLimit c₁ := hc.of_iso (asIso α) c₁ (Iso.refl _) fun _ ↦ by simp [c₁]
+  have h := isDerivedBaseChange_π_comp_quotientTowerFunctorIso_hom hϖ hI (n + 1) _ _
+    (isDerivedBaseChange_towerOfSuccMap hs) hc₁.coneOfAddOpFunctorOne
+  have e : (coneOfAddOpFunctorOne c₁).π.app (op (n + 1)) ≫
+      (quotientTowerFunctorIso (towerOfSucc M) (towerOfSuccMap M s) (n + 1)).hom =
+      c.π.app (op n) := by
+    simp [c₁, α, succTowerRestrictToStrict, NatTrans.ofOpSequence_app]
+  rw [e] at h
+  exact h
+
+end Succ
 
 end DerivedCategory
