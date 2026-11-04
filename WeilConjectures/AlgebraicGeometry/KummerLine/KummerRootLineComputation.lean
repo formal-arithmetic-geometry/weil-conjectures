@@ -336,7 +336,6 @@ private lemma root_affine_one (k : Type u) [Field k] [IsAlgClosed k]
     change Units.map (Scheme.ΓSpecIso (CommRingCat.of (Polynomial k))).inv.hom.toMonoidHom
       (Units.map Polynomial.C.toMonoidHom b) = a at hb'
     rw [← hb', ← hc, map_pow, map_pow]
-    rfl
   exact boundary_subsingleton X m hm (degree_one_boundary k false m hm) hpow
 
 private lemma quotient_generator {G H : Type (u + 1)} [CommGroup G] [CommGroup H]

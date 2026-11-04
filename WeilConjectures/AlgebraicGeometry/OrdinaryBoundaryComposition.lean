@@ -52,7 +52,7 @@ private theorem boundary_hom (A : Type (u + 1)) [CommRing A] [Finite A]
   simp only [ordinaryBoundary, rightDerivedLowerStarComparisonIso, Iso.trans_hom,
     Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.mapDerivedCategoryPlusCompatibility, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
+    Functor.mapDerivedCategoryPlusCompatibility,
     Category.assoc, ← Functor.map_comp,
     Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
@@ -142,30 +142,6 @@ theorem ordinaryBoundary_comp (A : Type (u + 1)) [CommRing A] [Finite A]
   have hi := comparison_inverse_comp A f g K
   have hi' := congrArg DerivedCategory.Plus.ι.map hi
   simp only [Functor.map_comp] at hi'
-  change (lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctor.map
-      ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlusCompatibility.inv.app
-        ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.obj K)) ≫
-    (lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctorPlusCompatibility.inv.app
-      ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlus.obj
-        ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.obj K)) ≫
-    DerivedCategory.Plus.ι.map ((lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctorPlus.map
-      ((asIso (Functor.rightDerivedFunctorPlusBaseChange
-        (lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} A)))).inv.app K)) ≫
-    DerivedCategory.Plus.ι.map ((asIso (Functor.rightDerivedFunctorPlusBaseChange
-      (lowerStarComparisonUpperStarBaseChange g (ModuleCat.{u + 1} A)))).inv.app
-        ((Etale.lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlus.obj K)) ≫
-    DerivedCategory.Plus.ι.map
-      ((comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.map
-        ((etaleComparisonDirectImageCompIso A f g).hom.app K)) =
-    (Functor.rightDerivedFunctorCompIso'
-      (lowerStar (ModuleCat.{u + 1} A) f) (lowerStar (ModuleCat.{u + 1} A) g)
-      (lowerStarComp (ModuleCat.{u + 1} A) f g)).hom.app
-        (DerivedCategory.Plus.ι.obj
-          ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.obj K)) ≫
-    (lowerStar (ModuleCat.{u + 1} A) (f ≫ g)).rightDerivedFunctorPlusCompatibility.inv.app
-      ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.obj K) ≫
-    DerivedCategory.Plus.ι.map ((asIso (Functor.rightDerivedFunctorPlusBaseChange
-      (lowerStarComparisonUpperStarBaseChange (f ≫ g) (ModuleCat.{u + 1} A)))).inv.app K)
   erw [hi']
   have hc := Etale.right_derived_comp_prime_plus
     (lowerStar (ModuleCat.{u + 1} A) f) (lowerStar (ModuleCat.{u + 1} A) g)
@@ -174,15 +150,20 @@ theorem ordinaryBoundary_comp (A : Type (u + 1)) [CommRing A] [Finite A]
   apply (cancel_mono (DerivedCategory.Plus.ι.map
     ((asIso (Functor.rightDerivedFunctorPlusBaseChange
       (lowerStarComparisonUpperStarBaseChange (f ≫ g) (ModuleCat.{u + 1} A)))).hom.app K))).1
-  simp only [Category.assoc, ← DerivedCategory.Plus.ι.map_comp]
-  erw [Iso.inv_hom_id_app, Category.comp_id, DerivedCategory.Plus.ι.map_id, Category.comp_id]
+  have hih := Iso.inv_hom_id_app (asIso (Functor.rightDerivedFunctorPlusBaseChange
+    (lowerStarComparisonUpperStarBaseChange (f ≫ g) (ModuleCat.{u + 1} A)))) K
+  have hih' := congrArg DerivedCategory.Plus.ι.map hih
+  rw [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id] at hih'
+  erw [Category.assoc, Category.assoc, Category.assoc, hih', Category.comp_id]
+  erw [Category.assoc, Category.assoc, Category.assoc, hih', Category.comp_id]
   apply (cancel_mono
     ((lowerStar (ModuleCat.{u + 1} A) (f ≫ g)).rightDerivedFunctorPlusCompatibility.hom.app
       ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.obj K))).1
   simp only [Category.assoc]
   erw [hc]
   erw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
-  all_goals erw [Iso.inv_hom_id_app, Category.comp_id]
+    CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app,
+    Category.comp_id]
+  rfl
 
 end AlgebraicGeometry.ProEtale
