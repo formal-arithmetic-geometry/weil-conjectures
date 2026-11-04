@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriek
+public import WeilConjectures.WeilSheaf.LowerShriekForget
 public import WeilConjectures.WeilSheaf.VerdierDual
 
 /-!
@@ -104,25 +105,58 @@ theorem smoothOfRelativeDimension_one_of_isPullback : SmoothOfRelativeDimension 
   exact (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip this
 
 include hπ in
+/-- **The Weil-equivariant trace of the affine line** (blueprint
+`thm-pur-weil-equivariance-of-purity-and-trace` for the trivial line bundle, together with the
+`ℓ`-adic form of `cor-amb-affine-space-adjunction` for `d = 1` on the geometric fibres). For the
+trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over
+`Spec k₀`, there is a natural morphism of Weil complexes `ε_P : Rπ₀! π^*(P(1)[2]) ⟶ P`, the trace,
+whose underlying morphism is the counit of the adjunction `Rπ̄_! ⊣ π̄^*(1)[2]` of `ℓ`-adic complexes
+on the geometric fibres: for every Weil complex `K` on `Y`, the map
+`Hom(For K, For π^*(P(1)[2])) ⟶ Hom(Rπ̄_! For K, For P)`, `φ ↦ Rπ̄_! φ ≫ For ε_P`, is bijective
+(`Rπ̄_!` is computed with the compactification of `π` chosen for `Rπ₀!`, and identified with the
+underlying functor of `Rπ₀!` by
+`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso`).
+
+This is an input from the chapters on smooth purity and Poincaré duality: the geometric adjunction
+is the `ℓ`-adic transport of the finite-coefficient adjunction
+`AlgebraicGeometry.Etale.nonempty_adjunction_affineLine` (the purity map of
+`AlgebraicGeometry.ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth` and
+`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` give it on the condensed `ℚ̄_ℓ`-model),
+and the Weil equivariance of the trace is the content of
+`thm-pur-weil-equivariance-of-purity-and-trace`; neither the comparison of the condensed model with
+`ℓ`-adic sheaves on the geometric fibres for `Rf^!`, nor the Weil structure on the trace, is
+formalized. -/
+theorem exists_weilTrace_of_isPullback :
+    ∃ ε : ((tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) ⋙
+        derivedLowerShriek k₀ l π ⟶ 𝟭 (WeilComplex k₀ l X),
+      ∀ (K : WeilComplex k₀ l Y) (P : WeilComplex k₀ l X),
+        Function.Bijective fun φ : forget.obj K ⟶ forget.obj
+            (((tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙
+              upperStar π).obj P) ↦
+          (ProEtaleWeilSheaf.geometricRightDerivedLowerShriek k₀ l π
+              (lowerShriekCompactification k₀ π)).map φ ≫
+            (ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso k₀ l π
+              (lowerShriekCompactification k₀ π)).inv.app _ ≫ forget.map (ε.app P) :=
+  sorry
+
+include hπ in
 /-- **The affine-line adjunction for Weil complexes** (the Weil form of
 `cor-amb-affine-space-adjunction` for `d = 1`). For the trivial line bundle
 `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
-direct image with compact support `Rπ₀!` of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`:
-this is the adjunction `Rπ₀! ⊣ Rπ^!` transported along smooth purity `Rπ^! ≅ π^*(1)[2]`
-(`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension`). -/
+direct image with compact support `Rπ₀!` of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`,
+with counit the Weil-equivariant trace
+(`AlgebraicGeometry.WeilComplex.exists_weilTrace_of_isPullback`). The morphisms of Weil complexes
+are computed from the underlying `ℓ`-adic morphisms through free Weil objects, with which `Rπ₀!`
+commutes (`AlgebraicGeometry.WeilComplex.bijective_map_comp_derivedLowerShriek`), so the
+adjunction on the geometric fibres gives the adjunction of Weil complexes. -/
 theorem nonempty_adjunction_derivedLowerShriek_of_isPullback :
     Nonempty (derivedLowerShriek k₀ l π ⊣
       (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) := by
-  have := smoothOfRelativeDimension_one_of_isPullback π s hπ
   have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over π]
     infer_instance
-  have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over π]
-    infer_instance
-  have : HasUpperShriek k₀ l π := isLeftAdjoint_derivedLowerShriek π
-  obtain ⟨e⟩ := nonempty_upperShriek_iso_of_smoothOfRelativeDimension (k₀ := k₀) (l := l) π 1
-  exact ⟨(derivedLowerShriekUpperShriekAdjunction π).ofNatIsoRight (by simpa using e)⟩
+  obtain ⟨ε, hε⟩ := exists_weilTrace_of_isPullback π s hπ (l := l)
+  sorry
 
 include hπ in
 /-- **Homotopy invariance for Weil complexes.** For the trivial line bundle

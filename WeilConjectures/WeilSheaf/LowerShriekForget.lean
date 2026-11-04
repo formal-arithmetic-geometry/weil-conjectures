@@ -18,8 +18,9 @@ Let `f : X ⟶ Y` be a morphism of `k₀`-schemes with a compactification `X ⟶
 The direct image with compact support `Rf_! = Rḡ_* ∘ D(ī_!)` of pro-étale Weil sheaves
 (`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriek`) is computed, after forgetting the
 Weil structures, by the direct image with compact support `Rf̄_! = Rḡ_* ∘ D(ī_!)` of `ℓ`-adic
-sheaves on the geometric fibres (`AlgebraicGeometry.ProEtaleWeilSheaf.geometricRightDerivedLowerShriek`):
-`For ∘ Rf_! ≅ Rf̄_! ∘ For` (`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso`).
+sheaves on the geometric fibres
+(`AlgebraicGeometry.ProEtaleWeilSheaf.geometricRightDerivedLowerShriek`): `For ∘ Rf_! ≅ Rf̄_! ∘ For`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso`).
 
 The morphisms of Weil complexes are computed from the underlying morphisms through free Weil
 objects (`CategoryTheory.Endofunctor.IsoAlgebra.bijective_map_comp_of_bijective_forget`), so the
@@ -80,5 +81,76 @@ noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso (f : X 
     (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _ _)
 
 end Compactification
+
+section WeilComplex
+
+variable (k₀) (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
+  [LocallyOfFiniteType f] [QuasiCompact f] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- The compactification of `f` chosen by Nagata's theorem, used to define the direct image with
+compact support `Rf₀!` of Weil complexes (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`). -/
+noncomputable abbrev WeilComplex.lowerShriekCompactification : Compactification f :=
+  HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
+
+variable {k₀} [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- **Morphisms out of `Rf₀! K` from the underlying morphisms.** Let `ε : Rf₀! P ⟶ T` be a morphism
+of Weil complexes. Suppose that `Rf_!` commutes with the free Weil objects on the shifts of the
+underlying complex `For K` of a Weil complex `K`, and that the maps
+`Hom(For K[n], For P) ⟶ Hom(Rf̄_! For K[n], For T)`, `φ ↦ Rf̄_! φ ≫ For ε`, are bijective. Then
+`g ↦ Rf₀! g ≫ ε` is a bijection `Hom(K, P) ≃ Hom(Rf₀! K, T)`. -/
+theorem WeilComplex.bijective_map_comp_derivedLowerShriek {K P : WeilComplex k₀ l X}
+    {T : WeilComplex k₀ l Y} (ε : (WeilComplex.derivedLowerShriek k₀ l f).obj P ⟶ T)
+    (hc : ∀ n : ℤ, IsIso (Adjunction.freeComparison
+      (IsoAlgebra.freeWeilDerivedAdjunction (WeilSheaf.frobeniusPullback k₀ l X))
+      (IsoAlgebra.freeWeilDerivedAdjunction (WeilSheaf.frobeniusPullback k₀ l Y))
+      (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f (lowerShriekCompactification k₀ f))
+      (ProEtaleWeilSheaf.geometricRightDerivedLowerShriek k₀ l f
+        (lowerShriekCompactification k₀ f))
+      (ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso k₀ l f
+        (lowerShriekCompactification k₀ f))
+      ((shiftFunctor _ n).obj (WeilComplex.forget.obj K))))
+    (h : ∀ n : ℤ, Function.Bijective fun φ : (shiftFunctor _ n).obj (WeilComplex.forget.obj K) ⟶
+        WeilComplex.forget.obj P ↦
+      (ProEtaleWeilSheaf.geometricRightDerivedLowerShriek k₀ l f
+        (lowerShriekCompactification k₀ f)).map φ ≫
+        (ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso k₀ l f
+          (lowerShriekCompactification k₀ f)).inv.app P.obj ≫ WeilComplex.forget.map ε) :
+    Function.Bijective fun g : K ⟶ P ↦ (WeilComplex.derivedLowerShriek k₀ l f).map g ≫ ε := by
+  have H := IsoAlgebra.bijective_map_comp_of_bijective_forget (WeilSheaf.frobeniusPullback k₀ l X)
+    (WeilSheaf.frobeniusPullback k₀ l Y) _ _ _ (P := P.obj) (T := T.obj) ε.hom K.obj hc
+    (fun n ↦ ?_)
+  swap
+  · exact h n
+  let e₁ := (ObjectProperty.fullyFaithfulι (WeilComplex.objectProperty k₀ l X)).homEquiv
+    (X := K) (Y := P)
+  let e₂ := (ObjectProperty.fullyFaithfulι (WeilComplex.objectProperty k₀ l Y)).homEquiv
+    (X := (WeilComplex.derivedLowerShriek k₀ l f).obj K) (Y := T)
+  have : (fun g : K ⟶ P ↦ (WeilComplex.derivedLowerShriek k₀ l f).map g ≫ ε) =
+      e₂.symm ∘ (fun g ↦ (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f
+        (lowerShriekCompactification k₀ f)).map g ≫ ε.hom) ∘ e₁ := by
+    funext g
+    exact e₂.injective (by simp [e₁, e₂]; rfl)
+  rw [this]
+  exact e₂.symm.bijective.comp (H.comp e₁.bijective)
+
+/-- **The direct image with compact support commutes with free Weil objects.** For a Weil complex
+`K` on `X` and `n : ℤ`, the comparison `Free(Rf̄_! For K[n]) ⟶ Rf_! Free(For K[n])` between the free
+pro-étale Weil objects is an isomorphism. -/
+theorem WeilComplex.isIso_freeComparison_rightDerivedLowerShriek
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (K : WeilComplex k₀ l X) (n : ℤ) :
+    IsIso (Adjunction.freeComparison
+      (IsoAlgebra.freeWeilDerivedAdjunction (WeilSheaf.frobeniusPullback k₀ l X))
+      (IsoAlgebra.freeWeilDerivedAdjunction (WeilSheaf.frobeniusPullback k₀ l Y))
+      (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f (lowerShriekCompactification k₀ f))
+      (ProEtaleWeilSheaf.geometricRightDerivedLowerShriek k₀ l f
+        (lowerShriekCompactification k₀ f))
+      (ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso k₀ l f
+        (lowerShriekCompactification k₀ f))
+      ((shiftFunctor _ n).obj (WeilComplex.forget.obj K))) :=
+  sorry
+
+end WeilComplex
 
 end AlgebraicGeometry
