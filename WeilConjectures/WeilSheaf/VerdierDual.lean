@@ -12,6 +12,7 @@ public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
+import WeilConjectures.WeilSheaf.SmoothPurity
 import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
 
 /-!
@@ -259,7 +260,7 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
     Nonempty (dualizingComplex k₀ l X ≅
       ((tateTwist k₀ l X d).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) :=
-  sorry
+  nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth d (derivedLowerShriekUpperShriekAdjunction _)
 
 end Smooth
 
