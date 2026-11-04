@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.WeilSheaf.Localization
+public import WeilConjectures.WeilSheaf.UnitForget
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AffineLineLisse
 
 /-!
 # Homotopy invariance for Weil complexes with lisse cohomology
@@ -21,8 +23,14 @@ the case of a lisse Weil sheaf placed in degree zero
 truncation triangles: the objects at which the unit of `π^* ⊣ Rπ_*` is invertible form a
 triangulated subcategory (`CategoryTheory.Adjunction.isTriangulated_isoLocus_unit`).
 
-The case of a lisse Weil sheaf is the `ℓ`-adic Weil form of the acyclicity of the affine line,
-an input from the étale chapter which is not formalized here.
+The case of a lisse Weil sheaf is the `ℓ`-adic Weil form of the acyclicity of the affine line.
+Forgetting the Weil structures reflects isomorphisms and carries the unit to the unit of the
+geometric fibre `π̄ : Ȳ ⟶ X̄`
+(`AlgebraicGeometry.NativeBaseChange.isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isIso`),
+which is the affine line over `X̄`
+(`AlgebraicGeometry.WeilComplex.exists_iso_affineSpace_geometricFiber_of_isPullback`); there the
+unit is invertible at lisse sheaves
+(`AlgebraicGeometry.ProEtale.isIso_adicUnit_app_singleFunctor_of_isAdicLisseSheaf`).
 -/
 
 @[expose] public section
@@ -57,23 +65,59 @@ lemma isIso_upperStarDerivedLowerStarAdjunction_unit_app_iff {X Y : Scheme.{u}}
     Adjunction.map_restrictFullyFaithful_unit_app]
   simp
 
+omit [Finite k₀] [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] in
+include hπ in
+/-- The base change `π̄ : Ȳ ⟶ X̄` of the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` to the
+algebraic closure of `k₀` is the affine line over the geometric fibre `X̄`: there is an
+isomorphism `Ȳ ≅ 𝔸¹_X̄` over `X̄`. Both are base changes of `𝔸¹_{k₀} ⟶ Spec k₀` along
+`X̄ ⟶ X ⟶ Spec k₀`. -/
+lemma exists_iso_affineSpace_geometricFiber_of_isPullback :
+    ∃ e : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
+      𝔸(ULift.{u} (Fin 1); (X ↘ Spec (CommRingCat.of k₀)).geometricFiber),
+      e.hom ≫ (𝔸(ULift.{u} (Fin 1); (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ↘
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) = NativeBaseChange.geometricMap k₀ π := by
+  have h₁ := (Scheme.Hom.isPullback_geometricFiberMap π
+    (comp_over π (Spec (CommRingCat.of k₀)))).paste_vert hπ
+  have h₂ := (AffineSpace.isPullback_map (n := PUnit.{u + 1})
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj ≫ X ↘ Spec (CommRingCat.of k₀))).flip
+  refine ⟨h₁.isoIsPullback _ _ h₂ ≪≫ AffineSpace.reindexIso _
+    (Equiv.ofUnique (ULift.{u} (Fin 1)) PUnit.{u + 1}), ?_⟩
+  simp [NativeBaseChange.geometricMap]
+
+set_option linter.unusedSectionVars false in
 include hπ in
 /-- Blueprint `lem-pur-a1-direct-image` (for lisse Weil sheaves): **homotopy invariance for lisse
 Weil sheaves**. For the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` and a lisse Weil sheaf
 `L` on `X`, the unit `L ⟶ Rπ_* π^* L` of `π^* ⊣ Rπ_*` is an isomorphism.
 
-With finite étale coefficients over an algebraically closed field and `L = Λ` this is
-`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`. A lisse `ℓ`-adic sheaf is,
-modulo `λⁿ`, étale locally constant on `X̄`, and `Rπ_*` commutes with étale base change on `X̄`,
-so the finite-level statement holds for the reductions of an integral lattice of `L`; the
-`ℓ`-adic Weil form follows by passing to the limit over `n`, rationalizing and checking the
-compatibility with the Frobenius structures. This passage from finite étale coefficients to
-`ℓ`-adic Weil complexes belongs to the chapter comparing the étale and the pro-étale
-formalisms and is not formalized; it is stated here with `sorry`. -/
+Forgetting the Weil structures reflects isomorphisms and carries the unit to the unit of the
+derived adjunction `π̄^* ⊣ Rπ̄_*` of `ℓ`-adic sheaves on the geometric fibres
+(`AlgebraicGeometry.NativeBaseChange.isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isIso`).
+The base change `π̄` is the affine line over `X̄`
+(`AlgebraicGeometry.WeilComplex.exists_iso_affineSpace_geometricFiber_of_isPullback`), and the
+underlying `ℓ`-adic sheaf of `L` is lisse, so this is homotopy invariance for lisse `ℓ`-adic
+sheaves over the algebraically closed field `k̄`
+(`AlgebraicGeometry.ProEtale.isIso_adicUnit_app_singleFunctor_of_isAdicLisseSheaf`). -/
 theorem isIso_unit_app_toComplex_of_isLisse (L : WeilSheaf k₀ l X) (hL : L.IsLisse) :
     IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app
-      (WeilSheaf.toComplex.obj L)) :=
-  sorry
+      (WeilSheaf.toComplex.obj L)) := by
+  rw [isIso_upperStarDerivedLowerStarAdjunction_unit_app_iff]
+  refine NativeBaseChange.isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isIso k₀ l π _ ?_
+  obtain ⟨e, he⟩ := exists_iso_affineSpace_geometricFiber_of_isPullback π s hπ
+  have hl : IsUnit ((l : ℕ) : AlgebraicClosure k₀) := by
+    refine IsUnit.mk0 _ fun h ↦ (Fact.out : ringChar k₀ ≠ l) ?_
+    rw [Algebra.ringChar_eq k₀ (AlgebraicClosure k₀)]
+    have : (ringChar (AlgebraicClosure k₀)).Prime := by
+      rw [← Algebra.ringChar_eq k₀ (AlgebraicClosure k₀)]
+      exact CharP.prime_ringChar k₀
+    exact (Nat.prime_dvd_prime_iff_eq this Fact.out).1 ((ringChar.spec _ l).1 h)
+  have h := ProEtale.isIso_adicUnit_app_singleFunctor_of_isAdicLisseSheaf hl
+    (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure _ e he hL
+  exact (NatTrans.isIso_app_iff_of_iso _
+    (((Endofunctor.IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app L.obj)).2 h
 
 include hπ in
 /-- **Homotopy invariance for Weil complexes with lisse cohomology.** For the trivial line bundle
