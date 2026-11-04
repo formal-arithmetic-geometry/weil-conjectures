@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentability.Grothendieck
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 
@@ -50,10 +51,11 @@ below objects in general, so it does not restrict to `D⁺`.
 
 ## Implementation notes
 
-* `isLeftAdjoint_rightDerivedLowerStar_of_isProper` is `sorry` by design: this file only
-  *states* that `Rg_*` has a right adjoint for `g` proper, the proof is left to a later file.
-  The adjoint exists by Brown representability, `Rg_*` being, for `g` proper, a colimit
-  preserving functor between compactly generated triangulated categories.
+* `isLeftAdjoint_rightDerivedLowerStar_of_isProper` is proved by Brown representability
+  (`DerivedCategory.isLeftAdjoint_of_preservesCoproducts`, [Stacks, Tag 0F5Y]) from
+  `preservesColimitsOfShape_discrete_rightDerivedLowerStar_of_isProper`, which says that `Rg_*`
+  commutes with coproducts. That lemma is `sorry`. It is proved only for torsion `ModuleCat`
+  coefficients, in `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint`.
 * `Rg^!` for proper `g` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint
   extracted from the instance, not a construction. Only the adjunction
   `Adjunction.ofIsLeftAdjoint` should be used about it. The composite `Rf^!` is a construction
@@ -94,18 +96,33 @@ section Proper
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
 
+/-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_ét) ⥤ D(Y_ét)` on the
+unbounded derived categories of étale sheaves with values in `A` commutes with coproducts.
+
+This is the coproduct input to Brown representability for
+`isLeftAdjoint_rightDerivedLowerStar_of_isProper`. It is the analogue for an arbitrary
+Grothendieck abelian category `A` of
+`AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedLowerStar_of_isProper`
+(blueprint `lem-amb-proper-coproducts`), which is proved for `ModuleCat Λ` with `Λ` torsion: there,
+proper base change bounds the cohomological amplitude of `Rg_*` [Stacks, Tag 0F0D]. -/
+-- STATEMENT-DISPUTED: the proof for `ModuleCat Λ` with `Λ` torsion uses proper base change
+-- [Stacks, Tag 095T], and that theorem needs torsion coefficients. No argument is known for an
+-- arbitrary Grothendieck abelian `A`, for example `A = Ab`. The instance below needs exactly this
+-- statement, because a left adjoint preserves coproducts. It is not a certified counterexample.
+theorem preservesColimitsOfShape_discrete_rightDerivedLowerStar_of_isProper (J : Type (u + 1)) :
+    PreservesColimitsOfShape (Discrete J) ((g)_*[A]).rightDerivedFunctor :=
+  sorry
+
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_ét) ⥤ D(Y_ét)` is a
 left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
--- STATEMENT-DISPUTED: this instance quantifies over every Grothendieck abelian A, whereas
--- Derived.UpperShriek explicitly assumes adjoint existence for general A. The available
--- Derived.LowerShriekLeftAdjoint proves proper coproduct preservation only for ModuleCat Λ
--- with IsAddTorsion Λ; its finite-coefficient specialization cannot supply arbitrary A.
--- The historical generic coproduct node now states the finite-coefficient theorem instead.
--- Brown representability supplies only the last step after coproduct preservation. This is
--- a conflict of source contracts requiring review, not a certified counterexample.
 instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
-    ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint :=
-  sorry
+    ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint := by
+  let adj := mapDerivedUpperStarLowerStarAdjunction A g
+  let : (R((g)_*[A])).CommShift ℤ := adj.rightAdjointCommShift ℤ
+  have : adj.CommShift ℤ := adj.commShift_of_leftAdjoint ℤ
+  have : (R((g)_*[A])).IsTriangulated := adj.isTriangulated_rightAdjoint
+  have := preservesColimitsOfShape_discrete_rightDerivedLowerStar_of_isProper A g
+  exact DerivedCategory.isLeftAdjoint_of_preservesCoproducts (R((g)_*[A]))
 
 end Proper
 
