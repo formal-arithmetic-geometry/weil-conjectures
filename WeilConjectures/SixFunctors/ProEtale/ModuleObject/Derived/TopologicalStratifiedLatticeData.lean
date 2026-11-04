@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratificatio
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.StratifiedLattice
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ContinuousLatticeIntersectionSupplement
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
 import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete
 import Mathlib.CategoryTheory.Functor.OfSequence
 import Mathlib.CategoryTheory.Limits.Types.Filtered
