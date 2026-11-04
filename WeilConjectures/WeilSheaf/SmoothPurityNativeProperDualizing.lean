@@ -65,16 +65,17 @@ to the descended finite-base exceptional unit. -/
 theorem nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso
     {J : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
     (adj : derivedLowerStar (k₀ := k₀) (l := l) a ⊣ J) :
-    Nonempty (J.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj (𝟙_ _)) ≅
-      (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj
+    Nonempty (J.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)
+      (X := Spec (CommRingCat.of k₀))).obj (𝟙_ _)) ≅
+      (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj
         ((CondensedRing.boundedConstructibleUpperShriek l
           (properTraceBaseMap (k₀ := k₀) a)).obj (𝟙_ _))) := by
   let P := (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) a)).obj
     (𝟙_ _)
-  let T := (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj P
+  let T := (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj P
   let U := (finiteBaseNativeDescent (k₀ := k₀) (l := l)
     (X := Spec (CommRingCat.of k₀))).obj (𝟙_ _)
-  let eT := (finiteBaseNativeDescentComparison (k₀ := k₀) (l := l)).app P
+  let eT := (finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := X)).app P
   let eU := (finiteBaseNativeDescentComparison (k₀ := k₀) (l := l)
     (X := Spec (CommRingCat.of k₀))).app (𝟙_ _)
   have := CondensedRing.isIso_upperShriekBaseChange_geometricFiber_unit l
@@ -87,11 +88,12 @@ complex over the finite field. -/
 theorem nonempty_rightAdjoint_finiteBaseNativeDescent_dualizing_iso
     {J : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
     (adj : derivedLowerStar (k₀ := k₀) (l := l) a ⊣ J) :
-    Nonempty (J.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj (𝟙_ _)) ≅
-      (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj
+    Nonempty (J.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)
+      (X := Spec (CommRingCat.of k₀))).obj (𝟙_ _)) ≅
+      (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj
         (CondensedRing.dualizingComplex l (Over.mk (X ↘ Spec (CommRingCat.of k₀))))) := by
   obtain ⟨e⟩ := nonempty_rightAdjoint_finiteBaseNativeDescent_unit_iso a adj
-  exact ⟨e ≪≫ (finiteBaseNativeDescent (k₀ := k₀) (l := l)).mapIso
+  exact ⟨e ≪≫ (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).mapIso
     ((CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) a)).mapIso
       (CondensedRing.dualizingComplexPointIso l k₀).symm ≪≫
       CondensedRing.upperShriekDualizingComplexIso l (properTraceBaseMap (k₀ := k₀) a))⟩

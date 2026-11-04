@@ -54,7 +54,7 @@ theorem nonempty_shriekRightAdjoint_adicConstant_descendedTate_iso
     (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ R) :
     Nonempty (R.obj (WeilSheaf.toComplex.obj
       (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))) ≅
-      (finiteBaseNativeDescent (k₀ := k₀)).obj
+      (finiteBaseNativeDescent (k₀ := k₀) (X := X)).obj
         (CondensedRing.boundedConstructibleTateTwist l
           (Over.mk (X ↘ Spec (CommRingCat.of k₀))) d (2 * d))) := by
   obtain ⟨e⟩ := nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso adj
@@ -62,7 +62,7 @@ theorem nonempty_shriekRightAdjoint_adicConstant_descendedTate_iso
       (Over.mkIdTerminal.from (Over.mk (X ↘ Spec (CommRingCat.of k₀)))).left :=
     ‹SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))›
   exact ⟨R.mapIso finiteBaseNativeDescentUnitIso.symm ≪≫ e ≪≫
-    (finiteBaseNativeDescent (k₀ := k₀)).mapIso
+    (finiteBaseNativeDescent (k₀ := k₀) (X := X)).mapIso
       (asIso (CondensedRing.smoothOrientation l
         (Over.mkIdTerminal.from (Over.mk (X ↘ Spec (CommRingCat.of k₀)))) d)).symm⟩
 

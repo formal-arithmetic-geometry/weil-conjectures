@@ -55,8 +55,9 @@ finite-base dualizing complex, including the Weil structure. -/
 theorem nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
     {R : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
     (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ R) :
-    Nonempty (R.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj (𝟙_ _)) ≅
-      (finiteBaseNativeDescent (k₀ := k₀) (l := l)).obj
+    Nonempty (R.obj ((finiteBaseNativeDescent (k₀ := k₀) (l := l)
+      (X := Spec (CommRingCat.of k₀))).obj (𝟙_ _)) ≅
+      (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj
         (CondensedRing.dualizingComplex l (Over.mk (X ↘ Spec (CommRingCat.of k₀))))) := by
   let c := structureMorphismCompactification (k₀ := k₀) X
   have : IsProper c.g := c.isProper
@@ -100,6 +101,6 @@ theorem nonempty_shriekRightAdjoint_finiteBaseNativeDescent_dualizing_iso
     (CondensedRing.dualizingComplexIsoUpperStar l j).symm
   exact ⟨eR.app _ ≪≫ (upperStar c.i).mapIso eZ ≪≫
     finiteBaseNativeDescentUpperStarIso c.i (CondensedRing.dualizingComplex l Z₀) ≪≫
-    (finiteBaseNativeDescent (k₀ := k₀) (l := l)).mapIso e₀⟩
+    (finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).mapIso e₀⟩
 
 end AlgebraicGeometry.WeilComplex
