@@ -72,13 +72,15 @@ theorem separableGeneric_affineEtale_limit
                       intro i j f
                       change Spec.map (CommRingCat.ofHom e.toRingHom) ≫ π₀ j =
                         Spec.map (CommRingCat.ofHom e.toRingHom) ≫ π₀ i ≫
-                          ((Scheme.strictHenselizationAffineDiagram η).op ⋙ Scheme.Spec).map (R.op.map f)
+                          ((Scheme.strictHenselizationAffineDiagram η).op ⋙
+                              Scheme.Spec).map (R.op.map f)
                       rw [hπcan j, hπcan i]
                       change Spec.map (CommRingCat.ofHom e.toRingHom) ≫
                           (Scheme.strictHenselizationCone η).π.app (R.op.obj j) =
                         Spec.map (CommRingCat.ofHom e.toRingHom) ≫
                           (Scheme.strictHenselizationCone η).π.app (R.op.obj i) ≫
-                            ((Scheme.strictHenselizationAffineDiagram η).op ⋙ Scheme.Spec).map (R.op.map f)
+                            ((Scheme.strictHenselizationAffineDiagram η).op ⋙
+                                Scheme.Spec).map (R.op.map f)
                       simpa only [Category.assoc] using
                         (congrArg (fun q ↦
                           Spec.map (CommRingCat.ofHom e.toRingHom) ≫ q)
