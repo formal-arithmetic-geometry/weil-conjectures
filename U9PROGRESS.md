@@ -78,3 +78,12 @@ wrapper still has the same two kernel timeouts (K5-20261105T030309.log,
 243s). The proof tactics now elaborate without errors. Running a synchronous
 profiler/diagnostics check through ucheck to locate the kernel conversion; no
 kernel skipping, no heartbeat increase.
+
+2026-11-05 03:22 CST: Synchronous profile K5-20261105T031710.log (237s,
+rc=1) confirms kernel costs: alpha component 1.15s elaboration/~104s kernel;
+sheaf square ~5s elaboration/122s kernel. Trace identifies concrete conversion
+adicUpperStarCompCondensedModIso.inv versus .symm.hom as expanding the conjugate
+isomorphism, including limits/sheafification/geometric fibres. Added inverse-
+spelled generic component identity and a natural-component version of square
+rotation to avoid converting concrete Iso.app/mapIso projections. Rechecking
+with profiler retained temporarily; no heartbeat changes.

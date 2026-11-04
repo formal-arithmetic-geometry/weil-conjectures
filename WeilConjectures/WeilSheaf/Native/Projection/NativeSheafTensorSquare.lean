@@ -48,7 +48,7 @@ lemma condensedRealizationUpperStarIso_hom_app_eq (M : ProEtaleWeilSheaf k₀ l 
       (adicUpperStarCompCondensedModIso l
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).inv.app
           M.carrier := by
-  exact Endofunctor.IsoAlgebra.isoHComp_forget_symm_hom_app _ _ M
+  exact Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom_app _ _ M
 
 /-- The native pullback tensor comparison and the condensed realization tensor comparison
 commute with the pullback comparison. -/
@@ -89,10 +89,8 @@ lemma condensedRealizationSheafTensor_pull_square (M N : ProEtaleWeilSheaf k₀ 
       (((nativePullSheafTensor k₀ l g).hom.app (M, N)).hom.f) = _
     rw [hm]
     exact adicUpperStar_condensedRelativeTensor_square l _ M.carrier N.carrier
-  exact tensorSquare_rotate (G.mapIso (nY.app (M, N)))
-    (a.app ((nativeOpenSheafTensor k₀ l Y).obj (M, N)))
-    ((condensedRealization k₀ l Z).map ((nativePullSheafTensor k₀ l g).hom.app (M, N)))
-    (nZ.app ((upperStar k₀ l g).obj M, (upperStar k₀ l g).obj N))
-    (a.app M) (a.app N) _ h
+  exact tensorSquare_rotate_components (upperStar k₀ l g) (condensedRealization k₀ l Z)
+    (condensedRealization k₀ l Y) G (nativeOpenSheafTensor k₀ l Y)
+    (nativeOpenSheafTensor k₀ l Z) (nativePullSheafTensor k₀ l g) nY nZ a M N _ h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

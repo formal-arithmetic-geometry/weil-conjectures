@@ -7,6 +7,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.MatesHCompIsIso
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import Mathlib.CategoryTheory.Monoidal.Category
+public import WeilConjectures.CategoryTheory.Functor.CurryComparison
 
 /-! # Abstract identities for transporting the sheaf tensor square -/
 
@@ -30,6 +31,16 @@ lemma Endofunctor.IsoAlgebra.isoHComp_forget_symm_hom_app
   erw [Functor.map_id, Category.comp_id]
   rfl
 
+/-- The inverse spelling avoids reducing a concrete conjugate isomorphism. -/
+lemma Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom_app
+    {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
+    {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D} (e : L ⋙ G ≅ F ⋙ L)
+    {T : C ⥤ A} {R : A ⥤ B} {V : D ⥤ B} (b : L ⋙ V ≅ T ⋙ R)
+    (M : Endofunctor.IsoAlgebra F) :
+    (Functor.isoHComp (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso e).symm b.symm).hom.app M =
+      b.inv.app M.carrier :=
+  Endofunctor.IsoAlgebra.isoHComp_forget_symm_hom_app e b.symm M
+
 /-- Rotate an invertible tensor comparison square to the opposite orientation. -/
 lemma tensorSquare_rotate {C : Type*} [Category C] [MonoidalCategory C]
     {W W' X Y A A' B B' : C} (b : W ≅ W') (a : W ≅ X) (u : X ⟶ Y)
@@ -42,5 +53,25 @@ lemma tensorSquare_rotate {C : Type*} [Category C] [MonoidalCategory C]
   rw [reassoc_of% h]
   simp only [Iso.inv_hom_id_assoc, tensorHom_comp_tensorHom,
     Iso.hom_inv_id, id_tensorHom_id, Category.comp_id]
+
+/-- Rotate the comparison using natural-transformation components throughout. -/
+lemma tensorSquare_rotate_components
+    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
+    [MonoidalCategory E] [MonoidalCategory H]
+    (P : C ⥤ D) (U : D ⥤ H) (V : C ⥤ E) (G : E ⥤ H)
+    (TC : C × C ⥤ C) (TD : D × D ⥤ D)
+    (mu : TC ⋙ P ≅ P.prod P ⋙ TD)
+    (nY : TC ⋙ V ≅ V.prod V ⋙ Functor.uncurry.obj (curriedTensor E))
+    (nZ : TD ⋙ U ≅ U.prod U ⋙ Functor.uncurry.obj (curriedTensor H))
+    (a : V ⋙ G ≅ P ⋙ U) (M N : C)
+    (d : G.obj (V.obj M ⊗ V.obj N) ⟶ G.obj (V.obj M) ⊗ G.obj (V.obj N))
+    (h : G.map (nY.inv.app (M, N)) ≫ a.hom.app (TC.obj (M, N)) ≫
+        U.map (mu.hom.app (M, N)) =
+      d ≫ (a.hom.app M ⊗ₘ a.hom.app N) ≫ nZ.inv.app (P.obj M, P.obj N)) :
+    U.map (mu.hom.app (M, N)) ≫ nZ.hom.app (P.obj M, P.obj N) ≫
+        (a.inv.app M ⊗ₘ a.inv.app N) =
+      a.inv.app (TC.obj (M, N)) ≫ G.map (nY.hom.app (M, N)) ≫ d :=
+  tensorSquare_rotate (G.mapIso (nY.app (M, N))) (a.app (TC.obj (M, N)))
+    (U.map (mu.hom.app (M, N))) (nZ.app (P.obj M, P.obj N)) (a.app M) (a.app N) d h
 
 end CategoryTheory
