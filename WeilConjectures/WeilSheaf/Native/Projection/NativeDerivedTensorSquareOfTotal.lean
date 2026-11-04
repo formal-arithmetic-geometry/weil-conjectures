@@ -105,9 +105,12 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     (by with_reducible exact tr) (by
       dsimp only [L, V, LP, LT, WZ, WU, tr] at hr ⊢
       cast_proofs hr) cZ cU
-    (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
-      Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-      ← MonoidalCategory.tensorHom_def] using hmU)
+    (by
+      dsimp only [V, cU, WU, LP, LT, L] at hmU ⊢
+      simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
+        Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
+        ← MonoidalCategory.tensorHom_def, Iso.app_hom] at hmU ⊢
+      cast_proofs hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (by
       have ht := htotal P T
@@ -124,9 +127,11 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
     (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ F.mapDerivedCategoryFactors.hom.app T) ≫
       Functor.LaxMonoidal.μ DerivedCategory.Q FP FT := by
-    simpa only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-      ← MonoidalCategory.tensorHom_def] using
-      (condensedRealizationTensor_hom_app_comp k₀ l Y P T hP hT).symm
+    have hh := (condensedRealizationTensor_hom_app_comp k₀ l Y P T hP hT).symm
+    dsimp only [mZ, cZ, WZ, F, FP, FT, Iso.trans_hom, Functor.mapIso_hom]
+    simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
+      ← MonoidalCategory.tensorHom_def, Iso.app_hom] at hh ⊢
+    cast_proofs hh
   have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
     (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT

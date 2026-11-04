@@ -284,3 +284,11 @@ accepts ALL 26 final_total_diagram arguments (11s), then times out destructuring
 its result; whole proof 16s. After reading the performance guide and eliminating
 the specific instance/unification failures, raise ONLY these two lemma budgets
 to 400000, with comments recording these measurements. Normal kernel checking.
+
+2026-11-05 07:08 CST: K5-20261105T070226.log rc=1. At 400k, the total
+failure is specifically blanket `rw [hcomp,hcomp]`, unfolding unrelated tensor
+functors; target the two tensor factors and pin P/p, T/q. Derived failure is
+the deferred hmU subproof inside `obtain`, NOT the existential eliminator itself:
+`simpa` unfolds native tensors through LP/LT aliases and proof arguments. Expand
+only aliases, normalize the curried tensor notation, then cast proofs. Apply the
+same normalization to hmZ. No further heartbeat increase.

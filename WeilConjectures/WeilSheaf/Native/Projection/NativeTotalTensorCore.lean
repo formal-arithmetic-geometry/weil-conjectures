@@ -117,14 +117,18 @@ lemma projection_totalTensorSquare_of_sheaf
   conv_lhs =>
     arg 2
     rw [reassoc_of% hnZ, CochainComplex.ιTensorObj_tensorHom_f]
-  rw [hcomp, hcomp]
+  conv_lhs =>
+    arg 2
+    arg 2
+    arg 1
+    rw [hcomp P p, hcomp T q]
   have hs := hsheaf (P.X p) (T.X q)
   dsimp only [PullTensorSquare] at hs
   rw [reassoc_of% hs]
   have hn := a.inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)
   dsimp only [Functor.comp_map, nativeOpenTensorInsertion] at hn
-  rw [reassoc_of% hn]
+  conv_rhs => rw [reassoc_of% hn]
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnY
   rw [← Functor.map_comp_assoc, hnY, Functor.map_comp_assoc,
