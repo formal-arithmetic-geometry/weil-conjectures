@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.NativeCompleteProjectionDescent.NativeProjectionDescentMaps
+public import WeilConjectures.AlgebraicGeometry.NativeCompleteProjectionDescent.NativeProjectionPullCoherence
+public import WeilConjectures.PoincareDuality.ProjectionFormulaCompactificationIso
 
 /-! # Descent of the actual compact-support projection mate
 
@@ -78,6 +80,24 @@ theorem projection_reduction_square
       (m.systems Y).closed.tensor.map
         (Prod.mkHom (reconstruction l E m c AX AZ AY M) (𝟙 _)) ≫
       systemProjection l E m c ((red l E m X).obj M) ((red l E m Y).obj K) hOpen := by
-  sorry
+  obtain ⟨e, he⟩ : ∃ e, e = CondensedRing.leftDerivedUpperStarCompactificationIso
+    (spIntegralCondensed l E) c := ⟨_, rfl⟩
+  exact Adjunction.compactification_projection_reduction_square (m.tensor X).mu
+    (m.tensor c.Z).mu (m.tensor Y).mu (ringedOpenAdj l E c.i) (ringedAdj l E c.g)
+    (VaryingRing.jAdj (rings l E) (transitions l E) c.i)
+    (VaryingRing.adj (rings l E) (transitions l E) c.g)
+    (fun C ↦ (VaryingRing.gComp (rings l E) (transitions l E) c.i c.g).inv.app C ≫
+      eqToHom (congrArg (fun g : X ⟶ Y ↦
+        (VaryingRing.G (rings l E) (transitions l E) g).obj C) c.comm.symm))
+    (m.systemPull c.i).iso (m.systemPull c.g).iso (m.pull c.i) (m.pull c.g) (m.pull f)
+    (m.openScalar c.i) (pull_tensor_coherence m c.i) (pull_tensor_coherence m c.g)
+    (m.openScalar_normalized c.i) M K
+    (hq := CondensedRing.isIso_openImmersionProjectionComparison _ c.i M _) (hs := hOpen)
+    (e.inv.app K) (pull_compactification m c K e he)
+    (CondensedRing.exceptionalProjectionMorphismOfCompactification
+      (spIntegralCondensed l E) c M K)
+    (CondensedRing.exceptionalProjectionMorphismOfCompactification_eq _ c M K e he)
+    _ (reconstruction_eq m c AX AZ AY M) _ (reconstruction_eq m c AX AZ AY _)
+    (systemProjection l E m c ((red l E m X).obj M) ((red l E m Y).obj K) hOpen) rfl
 
 end AlgebraicGeometry.ProEtale.NativeCompleteProjectionDescent
