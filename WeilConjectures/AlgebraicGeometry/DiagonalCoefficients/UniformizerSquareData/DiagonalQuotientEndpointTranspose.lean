@@ -48,6 +48,9 @@ private theorem insertion_comp
     (v ≫ R.map w) ≫ (S ⋙ R).map z = v ≫ R.map (w ≫ S.map z) := by
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
 
+namespace UniformizerSquareData
+
+attribute [local irreducible] Adjunction.homEquiv instCategoryDerivedCategory in
 /-- The statement of `quotientEndpointZero_transpose` (named so that the exported signature of the
 theorem stays small; definitionally the equation below). -/
 def quotientEndpointZero_transpose_stmt
@@ -58,8 +61,6 @@ def quotientEndpointZero_transpose_stmt
     (quotientAdjunctionAux q).homEquiv _ _ (quotientEndpointZero q) =
       (DerivedCategory.singleFunctor _ 0).map q.quotientRootInsertion ≫
         (q.quotientRight.mapDerivedCategorySingleFunctor 0).inv.app _
-
-namespace UniformizerSquareData
 
 attribute [local irreducible] Adjunction.homEquiv instCategoryDerivedCategory in
 /-- The degree-zero endpoint transposes to its ordinary root insertion.
