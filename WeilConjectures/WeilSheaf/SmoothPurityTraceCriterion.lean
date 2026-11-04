@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityFreeResolution
+public import WeilConjectures.WeilSheaf.SmoothPurityFreeComparison
 
 /-!
 # Testing a trace on free objects
@@ -112,5 +113,37 @@ theorem bijective_map_comp_of_forget
   exact Adjunction.bijective_map_comp_on_free_of_forget
     (freeWeilDerivedAdjunction F) (freeWeilDerivedAdjunction G)
     RW R e d X (β X hX) (hβ X hX) (h X hX)
+
+/-- For a functor compatible with the cyclic actions and preserving the free
+coproducts, the geometric universal property of a trace implies its Weil universal
+property. The required free comparisons are constructed from the forgetful square. -/
+theorem bijective_map_comp_of_geometric
+    (RW : DerivedCategory (IsoAlgebra F) ⥤ DerivedCategory (IsoAlgebra G))
+    [RW.Additive] [RW.CommShift ℤ] [RW.IsTriangulated]
+    (R : DerivedCategory C ⥤ DerivedCategory D)
+    (e : RW ⋙ (forget G).mapDerivedCategory ≅ (forget F).mapDerivedCategory ⋙ R)
+    (χ : R ⋙ G.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ R)
+    (hσ : ∀ A : DerivedCategory (IsoAlgebra F),
+      (derivedStrIso G).hom.app (RW.obj A) ≫ e.hom.app A =
+        G.mapDerivedCategory.map (e.hom.app A) ≫
+          χ.hom.app ((forget F).mapDerivedCategory.obj A) ≫
+          R.map ((derivedStrIso F).hom.app A))
+    (PC : ObjectProperty (DerivedCategory C))
+    (hPC_shift : ∀ (K : DerivedCategory C) (n : ℤ), PC K → PC (K⟦n⟧))
+    (hcolimit : ∀ X, PC X → CategoryTheory.Limits.PreservesColimit
+      (Discrete.functor fun n ↦ (Free.objFunctor F n).mapDerivedCategory.obj X) R)
+    {H : DerivedCategory (IsoAlgebra F)} {L' : DerivedCategory (IsoAlgebra G)}
+    (d : RW.obj H ⟶ L')
+    (h : ∀ X, PC X → Function.Bijective
+      (fun u : X ⟶ (forget F).mapDerivedCategory.obj H ↦
+        R.map u ≫ e.inv.app H ≫ (forget G).mapDerivedCategory.map d))
+    (M : DerivedCategory (IsoAlgebra F)) (hM : PC ((forget F).mapDerivedCategory.obj M)) :
+    Function.Bijective (fun u : M ⟶ H ↦ RW.map u ≫ d) := by
+  have (X : DerivedCategory C) (hX : PC X) : IsIso (forgetFreeComparison RW R e X) := by
+    have := hcolimit X hX
+    exact isIso_forgetFreeComparison RW R e χ hσ X
+  exact bijective_map_comp_of_forget RW R e PC hPC_shift d
+    (fun X hX ↦ @asIso _ _ _ _ (forgetFreeComparison RW R e X) (this X hX))
+    (fun X _ ↦ unit_app_comp_map_forgetFreeComparison RW R e X) h M hM
 
 end CategoryTheory.Endofunctor.IsoAlgebra
