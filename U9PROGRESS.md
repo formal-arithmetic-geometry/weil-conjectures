@@ -296,3 +296,13 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 07:40 +0800 — scalar specialization still costly
 - Scoped 400000-heartbeat experiment still times out in the concrete Tate-module specialization (104s, K4-20261105T073637.log). Removed that experimental specialization and the heartbeat override, retaining only the abstract unit, abstract extension-iso comparison, and their unit equation, which emitted no errors. Reproducer saved outside the repository at /tmp/k4-scalar-pullback-timeout.lean. No heartbeat raises remain in K4's new helpers.
 - The complete dependency audit now imports the two previously unavailable native proof modules and will reject any unresolved body as well as K2/K4 use. Next check includes the top-level WeilConjectures module to cover the remaining modules brought in by the authorized upstream merges.
+
+## 2026-11-05 07:46 +0800 — complete Thom declaration audit
+- SmoothPurityDependencyAudit in current top-level build K4-20261105T073946.log now inspects 1789 declarations with NO unavailable proof bodies. Its exact direct sorry set is K5 nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso and K7 native_weil_tensor_ringed_swap_localization. The guard confirms no K2/general-K4 dependency.
+- Reduced the audit's import-all list to the modules whose proof bodies it actually inspected. The top-level build is still running, with projection, tensor pullback, Fourier, cohomological range, and curve users already green.
+- Prepared a revised scalar-extension helper whose input is formed in the weakly-etale instance context before specializing Λ; this targets the actual instance crossing, unlike the earlier helper without a weakly-etale hypothesis. Next tiny check will validate it with the ordinary heartbeat limit.
+
+## 2026-11-05 07:51 +0800 — top-level build GREEN
+- ucheck WeilConjectures + SmoothPurityDependencyAudit + SmoothPurityScalarPullback at 24fc7af431 finished rc=0, 131 modules built, 34482 jobs, log /home/ubuntu/u9/logs/K4-20261105T073946.log. This validates all current downstream users and the extra projection/base-change modules inherited from PR merges.
+- Exact conditional Thom sorry dependencies are K5 and K7 only; no inaccessible bodies and no K2/K4 use. The three original generic scalar-pullback helpers also passed (4.2s).
+- Pending edits only reduce/strengthen the audit command and test new scalar helpers (weakly-etale context and variable topological ring before specializing ℤ_l). They are not part of the validated main proof yet. C4 remains unmerged and the downstream integration patch unapplied; no DONE.
