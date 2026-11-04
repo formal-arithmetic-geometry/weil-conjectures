@@ -52,13 +52,9 @@ complexes, is the dualizing complex of `X̄`
 (`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`, blueprint
 `lem-fix-weil-operations`, in `WeilConjectures.WeilSheaf.UpperShriekGeometric`).
 
-## Inputs from other chapters
-
-One statement is not yet available and is stated here with `sorry`:
-
-* `AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`: constructible Verdier
-  biduality in the model of `ℓ`-adic sheaves (`det-pd-biduality-coefficients` (iv), proved in the
-  condensed model as `ProEtale.CondensedRing.isIso_verdierBiduality`).
+The constructible biduality of hom complexes of `ℓ`-adic sheaves
+(`AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`) is read off from the
+condensed biduality `ProEtale.CondensedRing.isIso_verdierBiduality`.
 -/
 
 @[expose] public section
