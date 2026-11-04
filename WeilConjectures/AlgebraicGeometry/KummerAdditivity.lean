@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 public import WeilConjectures.CategoryTheory.SmoothPurity.RhomGlobalSectionsOfUniverses
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFiniteSetting
 import Mathlib.Algebra.CharP.CharAndCard
 import Mathlib.Algebra.CharP.Algebra
@@ -97,26 +97,13 @@ def kummerFirstChernAbelian (A : Type (u + 1)) [CommRing A] (m : ℕ)
   Sheaf.H.map (ordinaryFiniteRootMap A m hA T) 2
     (T.kummerδ₁ m hT (Scheme.Pic.toCohomologicalPicardGroup T M))
 
-/-- The actual forget-and-evaluate-on-one comparison is bijective in degree two.
-Source: Stacks Tags 03FD and 08JA (blueprint: lem-pur-kummer-additivity).
-Proof: Hom_A(A,-) is global sections by evaluation on one. Resolve the target by
-injective module sheaves; their underlying abelian sheaves are global-sections acyclic
-by lem-weil-pbc-etale-module-cohomology-forget. The acyclic-resolution comparison gives
-H² of the same section complex. The Ext/derived-Hom comparison and
-lem-pur-rhom-global-sections identify its degree-two cocycles with maps A -> F[2].
-The resulting comparison is precisely ordinaryFiniteClass, hence it is bijective. -/
-theorem kummerFirstChernRealization_bijective (A : Type (u + 1)) [CommRing A]
-    (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
-    Function.Bijective (ordinaryFiniteClass A T F 2) := by
-  exact ordinaryFiniteClass_bijective_arbitraryBase A T F 2
-
 /-- The unique derived morphism realizing the actual Kummer boundary class.
 Source: Stacks Tags 03PL, 03FD and 08JA (blueprint: lem-pur-kummer-additivity). -/
 def kummerFirstChern (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (hA : (m : A) = 0) (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (M : T.Pic) :
     ordinaryFiniteUnit A T ⟶ (ordinaryFiniteLine A m hA T)⟦(2 : ℤ)⟧ :=
   (Equiv.ofBijective (ordinaryFiniteClass A T (Scheme.finiteEtaleTateLine T m A hA) 2)
-    (kummerFirstChernRealization_bijective A T _)).symm
+    (ordinaryFiniteClass_bijective_arbitraryBase A T _ 2)).symm
       (kummerFirstChernAbelian A m hA T hT M)
 
 end AlgebraicGeometry.Etale

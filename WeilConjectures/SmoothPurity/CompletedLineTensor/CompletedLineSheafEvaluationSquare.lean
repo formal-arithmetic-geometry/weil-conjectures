@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineTensorOrdinaryData
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineScalarBaseSmul
+import all WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineOrdinaryEvaluation
 
 /-! # Ordinary sheaf evaluation square
 
@@ -64,7 +65,8 @@ same Hom evaluation with the factors interchanged; for `m = 0` the first clause 
 gives the unit comparison and the pairing is multiplication) identifies the scalar with
 `φ(pairing_L(a, f))`. By `completed_scalar_base_smul` this equals
 `s ⊗ (pairing_L(a, f) • x)`, which is the image of the generator under the extension of
-`evaluation_L`, again by the section formula of `evaluation`. -/
+`evaluation_L`, again by the section formula of `evaluation`. This computation is
+`sheaf_square` in `CompletedLineOrdinaryEvaluation`. -/
 theorem completed_sheaf_evaluation_square (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -76,7 +78,8 @@ theorem completed_sheaf_evaluation_square (L : integralTowerModules l E X)
       (sheaf l F X N (-m)).map ((d.ordinarySheaf m).hom.app M) ≫
       (evaluation l F X N m).hom.app ((completedOrdinaryScalarExtension l E F ι X).obj M) =
     (completedOrdinaryScalarExtension l E F ι X).map
-      ((evaluation l E X L m).hom.app M) := by sorry
+      ((evaluation l E X L m).hom.app M) :=
+  sheaf_square l E X F ι L N b d hd m M
 
 end CompletedLineTensor
 end WeilConjectures

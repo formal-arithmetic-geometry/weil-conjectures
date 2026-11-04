@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ReductionExtendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
@@ -52,17 +53,17 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C)
   {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B)
 
-
-/-- Sheafified sectionwise extension of scalars.
+/-- Sheafified sectionwise extension of scalars: the upstream `Sheaf.extendScalars`, as a
+semireducible definition so that instance search does not unfold it.
 Source: Stacks 03EK (blueprint: def-sp-coefficient-scalar-representatives). -/
 def ordinaryExtension : Sheaf J (ModuleCat.{u + 1} A) ⥤
     Sheaf J (ModuleCat.{u + 1} B) :=
-  Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} a)
+  Sheaf.extendScalars J a
 
-/-- The actual ordinary extension/restriction adjunction, normalized by its tensor unit.
+/-- The upstream extension/restriction adjunction `Sheaf.extendScalarsAdjunction`.
 Source: Stacks 03EK (blueprint: def-sp-coefficient-scalar-representatives). -/
 def ordinaryAdjunction : ordinaryExtension J a ⊣ Sheaf.restrictScalars J a :=
-  Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} a)
+  Sheaf.extendScalarsAdjunction J a
 
 /-- Ordinary scalar extension is additive, being a left adjoint.
 Source: Stacks 03EK (blueprint: def-sp-coefficient-scalar-representatives). -/

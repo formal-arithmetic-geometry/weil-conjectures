@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarBasic
+public import WeilConjectures.Algebra.Homology.System.SystemSingletonScalarRepAux
 
 /-! # Normalized representative of singleton coefficient change
 
@@ -29,6 +30,52 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (A : SystemScalarModel (singletonSequenceRingMap a))
 
 
+/-- The transported singleton derived adjunction transposes the localized comparison to the
+localized ordinary transpose. Source: Stacks 0FND and 09T5
+(blueprint: lem-pur-system-singleton-scalar-representative).
+Proof: transpose across the derived sequence equivalence, then use the normalized
+singleton transpose and the exact-functor compositor. -/
+theorem singletonSequenceDerivedAdjunction_transpose (R : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
+    (n : ℕ) (P : CochainComplex (systemLevel R n) ℤ)
+    (K : CochainComplex (systemSequenceModules R) ℤ)
+    (f : ((singletonSequenceOrdinary S T R n).mapHomologicalComplex (.up ℤ)).obj P ⟶ K) :
+    (singletonSequenceDerivedAdjunction S T R n).homEquiv _ _
+        (singletonSequenceComparison S T R n P ≫ DerivedCategory.Q.map f) =
+      DerivedCategory.Q.map ((((systemSingleAdjunction S T R n).mapHomologicalComplex
+          (.up ℤ)).comp ((strictSystemSequenceEquivalence R).toAdjunction.mapHomologicalComplex
+            (.up ℤ))).homEquiv P K f) ≫
+        (systemSequenceEvaluation R n).mapDerivedCategoryFactors.inv.app K := by
+  have hC : (systemEvaluation R n).mapDerivedCategoryFactors.inv.app
+        (((strictSystemSequenceEquivalence R).inverse.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      (systemEvaluation R n).mapDerivedCategory.map
+        ((strictSystemSequenceEquivalence R).inverse.mapDerivedCategoryFactors.inv.app K) ≫
+      (Functor.mapDerivedCategoryCompIso (strictSystemSequenceEquivalence R).inverse
+        (systemEvaluation R n)).inv.app (DerivedCategory.Q.obj K) =
+      ((strictSystemSequenceEquivalence R).inverse ⋙
+        systemEvaluation R n).mapDerivedCategoryFactors.inv.app K :=
+    iso_chain_inv_eq
+      ((Functor.mapDerivedCategoryCompIso (strictSystemSequenceEquivalence R).inverse
+        (systemEvaluation R n)).app _)
+      ((systemEvaluation R n).mapDerivedCategory.mapIso
+        ((strictSystemSequenceEquivalence R).inverse.mapDerivedCategoryFactors.app K))
+      ((systemEvaluation R n).mapDerivedCategoryFactors.app _)
+      (((strictSystemSequenceEquivalence R).inverse ⋙
+        systemEvaluation R n).mapDerivedCategoryFactors.app K)
+      (Functor.mapDerivedCategoryCompIso_hom_app_factors _ _ K)
+  exact comp_ofNatIsoRight_homEquiv_eq (systemSingleDerivedExtension R n S T).adjunction
+    (strictSystemSequenceEquivalence R).mapDerivedCategory.toAdjunction
+    (Functor.mapDerivedCategoryCompIso (strictSystemSequenceEquivalence R).inverse
+      (systemEvaluation R n)).symm
+    ((systemSingleDerivedExtension R n S T).comparison.app P)
+    ((strictSystemSequenceEquivalence R).functor.mapDerivedCategoryFactors.hom.app
+      (((systemSingleFunctor S T R n).mapHomologicalComplex (.up ℤ)).obj P))
+    (DerivedCategory.Q.map f) _ _ _ _ _
+    (Equivalence.mapDerivedCategory_homEquiv_Q (strictSystemSequenceEquivalence R)
+      (((systemSingleFunctor S T R n).mapHomologicalComplex (.up ℤ)).obj P) K f)
+    ((systemSingleDerivedExtension R n S T).transpose P
+      (((strictSystemSequenceEquivalence R).inverse.mapHomologicalComplex (.up ℤ)).obj K)
+      (((strictSystemSequenceEquivalence R).toAdjunction.mapHomologicalComplex (.up ℤ)).homEquiv
+        _ _ f)) hC
 /-- The specified derived conjugate is represented by the ordinary singleton
 coefficient comparison, with the actual universal comparison maps.
 Source: Stacks, Derived Categories, lemmas pre-derived-adjoint-functors (0FND) and
@@ -53,6 +100,46 @@ theorem singletonScalarDerivedIso_rep (n : ℕ)
           singletonScalarTargetComparison S T a n P =
         singletonScalarSourceComparison S T a A n P ≫ DerivedCategory.Q.map
           ((NatIso.mapHomologicalComplex (singletonScalarOrdinaryIso S T a A n)
-            (.up ℤ)).hom.app P) := by sorry
+            (.up ℤ)).hom.app P) := by
+  refine normalizedAdjunction_uniqueness (QA := DerivedCategory.Q) (QB := DerivedCategory.Q)
+    ((((systemSingleAdjunction S T B n).mapHomologicalComplex (.up ℤ)).comp
+      ((strictSystemSequenceEquivalence B).toAdjunction.mapHomologicalComplex (.up ℤ))).comp
+        (A.ordinaryAdj.mapHomologicalComplex (.up ℤ)))
+    (((S (a.app (op n))).ordinaryAdj.mapHomologicalComplex (.up ℤ)).comp
+      (((systemSingleAdjunction S T D n).mapHomologicalComplex (.up ℤ)).comp
+        ((strictSystemSequenceEquivalence D).toAdjunction.mapHomologicalComplex (.up ℤ))))
+    ((singletonSequenceDerivedAdjunction S T B n).comp A.adjunction)
+    ((S (a.app (op n))).adjunction.comp (singletonSequenceDerivedAdjunction S T D n))
+    (singletonScalarSourceComparison S T a A n) (singletonScalarTargetComparison S T a n)
+    (fun K ↦ (systemSequenceEvaluation B n).mapDerivedCategoryFactors.inv.app
+        (((singletonSequenceRestriction a).mapHomologicalComplex (.up ℤ)).obj K) ≫
+      (systemSequenceEvaluation B n).mapDerivedCategory.map
+        ((singletonSequenceRestriction a).mapDerivedCategoryFactors.inv.app K))
+    (fun K ↦ (singletonLevelRestriction a n).mapDerivedCategoryFactors.inv.app
+        (((systemSequenceEvaluation D n).mapHomologicalComplex (.up ℤ)).obj K) ≫
+      (singletonLevelRestriction a n).mapDerivedCategory.map
+        ((systemSequenceEvaluation D n).mapDerivedCategoryFactors.inv.app K))
+    ?_ ?_ (NatIso.mapHomologicalComplex (singletonRestrictionEvaluation a n) (.up ℤ))
+    (singletonDerivedRestrictionEvaluation a n)
+    (fun P ↦ (NatIso.mapHomologicalComplex (singletonScalarOrdinaryIso S T a A n)
+      (.up ℤ)).hom.app P) ?_ ?_ P
+  · intro P K f
+    exact normalizedAdjunction_composition_pointwise _ _ _ _ _ _ _ _
+      (singletonSequenceDerivedAdjunction_transpose S T B n) A.transpose P K f
+  · intro P K f
+    exact normalizedAdjunction_composition_pointwise _ _ _ _ _ _ _ _
+      (S (a.app (op n))).transpose (singletonSequenceDerivedAdjunction_transpose S T D n) P K f
+  · intro P
+    have h (i : ℤ) := Adjunction.homEquiv_leftAdjointUniq_hom_app
+      (((singletonSequenceOrdinaryAdjunction S T B n).comp A.ordinaryAdj).ofNatIsoRight
+        (singletonRestrictionEvaluation a n))
+      ((S (a.app (op n))).ordinaryAdj.comp (singletonSequenceOrdinaryAdjunction S T D n)) (P.X i)
+    simp only [Adjunction.homEquiv_unit] at h
+    erw [Adjunction.homEquiv_unit]
+    ext i : 1
+    exact h i
+  · intro K
+    exact Functor.mapDerivedCategorySquareIso_hom_app_inv_factors _ _ _ _
+      (singletonRestrictionEvaluation a n) K
 
 end SheafOfModules

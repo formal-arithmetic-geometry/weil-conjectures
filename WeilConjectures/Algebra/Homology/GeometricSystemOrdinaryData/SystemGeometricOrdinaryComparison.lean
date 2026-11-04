@@ -72,8 +72,6 @@ public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySuppl
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
-public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
-public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-! # Ordinary geometric comparison on strict semilinear systems -/
 

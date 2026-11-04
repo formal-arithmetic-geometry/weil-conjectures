@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
+public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassTensorPullback
 import WeilConjectures.CategoryTheory.SixFunctors.MateIsoAlongEquivalences
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassTensorGeometryExistence
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassLinePullbackExistence
@@ -165,7 +166,17 @@ private theorem transportedLineComparison_normalization
   subst v
   exact lineTensorComparison_normalization l E g k p M n U x y
 
-private theorem positivePullback_nonempty
+/-- The normalized tensor comparison and the prescribed root-line pullback give
+positive twist pullback with its required pure-tensor adjoint formula.
+
+Source: latest blueprint `sk-prop-sp-tower-geometric-classes.proof.md`, clause (4).
+(blueprint: lem-sp-tower-class-positive-pullback-existence).
+
+Proof: compose the tensor pullback comparison at the source root line with identity
+tensor the line pullback isomorphism, and transport the endpoints along the equalities
+fixing the positive functors. Adjunction naturality on pure sections gives the
+prescribed normalization. -/
+theorem positivePullback_nonempty
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
