@@ -64,7 +64,8 @@ lemma mapDerivedCategoryAdjunction_unit_eq :
       g.mapDerivedCategory.map (f.mapDerivedCategoryFactors.hom.app Y) ≫
         g.mapDerivedCategoryFactors.hom.app ((f.mapHomologicalComplex _).obj Y) =
       DerivedCategory.Q.map ((mapHomologicalComplex (ComplexShape.up ℤ) adj).unit.app Y) := by
-    have e1 : (DerivedCategory.quotientCompQhIso C).hom.app Y = 𝟙 _ := rfl
+    have e1 : (DerivedCategory.quotientCompQhIso C).hom.app Y = 𝟙 _ :=
+      Quotient.lift.isLift_hom _ _ _ Y
     have e2 : (DerivedCategory.quotientCompQhIso D).inv.app ((f.mapHomologicalComplex _).obj Y) =
       𝟙 _ := rfl
     have e3 : (f.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app Y = 𝟙 _ := rfl
@@ -87,7 +88,8 @@ lemma mapDerivedCategoryAdjunction_unit_eq :
     simp only [Functor.mapDerivedCategoryFactorsh_hom_app, Iso.trans_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
       Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at hi
-    have e1 : (DerivedCategory.quotientCompQhIso C).hom.app Y = 𝟙 _ := rfl
+    have e1 : (DerivedCategory.quotientCompQhIso C).hom.app Y = 𝟙 _ :=
+      Quotient.lift.isLift_hom _ _ _ Y
     have e3 : ((𝟭 C).mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app Y = 𝟙 _ := rfl
     have e4 : (DerivedCategory.quotientCompQhIso C).inv.app
       (((𝟭 C).mapHomologicalComplex (ComplexShape.up ℤ)).obj Y) = 𝟙 _ := rfl
@@ -130,7 +132,7 @@ lemma mapDerivedCategoryAdjunction_unit_comp_mapDerivedCategoryTrace {t : f ⋙ 
     (hd : adj.unit ≫ t = d • 𝟙 _) :
     adj.mapDerivedCategoryAdjunction.unit ≫ mapDerivedCategoryTrace t = d • 𝟙 _ := by
   rw [mapDerivedCategoryAdjunction_unit_eq, mapDerivedCategoryTrace, assoc, assoc,
-    Iso.hom_inv_id_assoc, ← Functor.mapDerivedCategoryNatTrans_comp_assoc, hd,
+    Iso.inv_hom_id_assoc, ← Functor.mapDerivedCategoryNatTrans_comp_assoc, hd,
     Functor.mapDerivedCategoryNatTrans_nsmul, Functor.mapDerivedCategoryNatTrans_id,
     Preadditive.nsmul_comp, id_comp, Preadditive.comp_nsmul, Iso.inv_hom_id]
 
