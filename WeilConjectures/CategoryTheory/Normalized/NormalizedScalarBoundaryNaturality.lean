@@ -49,7 +49,7 @@ private theorem square_factors (e : F ⋙ G ≅ H ⋙ I) (K : CochainComplex A �
   rw [CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_factors,
     CategoryTheory.Functor.mapDerivedCategoryNatIso_fac]
   rw [← CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_factors F G K]
-  erw [Category.assoc, Iso.inv_hom_id_app_assoc]
+  erw [Category.assoc, Iso.hom_inv_id_app_assoc]
   exact Category.assoc _ _ _
 
 private theorem single_factors (F : A ⥤ B) [F.Additive]
