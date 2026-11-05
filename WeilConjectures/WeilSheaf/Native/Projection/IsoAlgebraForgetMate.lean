@@ -24,7 +24,7 @@ lemma mateEquiv_mapOfNatIsoCompForgetIso_inv_eq :
     (mateEquiv (mapOfNatIsoAdjunction adj eL eR h) adj
       (mapOfNatIsoCompForgetIso eL).inv).natTrans =
         (mapOfNatIsoCompForgetIso eR).hom := by
-  ext M : 1
-  exact mateEquiv_mapOfNatIsoCompForgetIso_inv_app adj eL eR h M
+  exact NatTrans.ext (funext fun M ↦
+    mateEquiv_mapOfNatIsoCompForgetIso_inv_app adj eL eR h M)
 
 end CategoryTheory.Endofunctor.IsoAlgebra
