@@ -31,12 +31,14 @@ lemma traceUniversalAt_of_fullyFaithful
   · intro φ ψ heq
     obtain ⟨φ, rfl⟩ := I.map_surjective φ
     obtain ⟨ψ, rfl⟩ := I.map_surjective ψ
+    dsimp only at heq
     rw [he, he] at heq
     exact congrArg I.map (h.1 (J.map_injective ((cancel_epi _).1 heq)))
   · intro ψ
     obtain ⟨ψ, hψ⟩ := J.map_surjective (c.hom.app K ≫ ψ)
     obtain ⟨φ, hφ⟩ := h.2 ψ
     refine ⟨I.map φ, ?_⟩
+    dsimp only at hφ ⊢
     rw [he, hφ, hψ, Iso.inv_hom_id_app_assoc]
 
 /-- Replacing a direct-image functor by an isomorphic one preserves trace
@@ -54,6 +56,7 @@ lemma traceUniversalAt_of_iso
   · intro ψ
     obtain ⟨φ, hφ⟩ := h.2 (e.inv.app K ≫ ψ)
     refine ⟨φ, ?_⟩
+    dsimp only at hφ ⊢
     rw [he, hφ, Iso.hom_inv_id_app_assoc]
 
 end CategoryTheory.Functor

@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityBoundedShriekUniversality
+public import WeilConjectures.WeilSheaf.SmoothPurityReflectedSquareInverse
 
 /-! # Ambient coordinates of the cross-field compactification exchange -/
 
@@ -14,17 +15,6 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj
-
-namespace CategoryTheory.ObjectProperty
-
-/-- A reflected natural isomorphism has the prescribed ambient inverse components. -/
-lemma preimageIso_inv_app_hom {C D : Type*} [Category C] [Category D]
-    (P : ObjectProperty D) {F G : C ⥤ P.FullSubcategory}
-    (e : F ⋙ P.ι ≅ G ⋙ P.ι) (K : C) :
-    (((P.fullyFaithfulι.whiskeringRight C).preimageIso e).inv.app K).hom = e.inv.app K :=
-  NatTrans.congr_app ((P.fullyFaithfulι.whiskeringRight C).map_preimage e.inv) K
-
-end CategoryTheory.ObjectProperty
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -58,9 +48,12 @@ lemma purityFieldCompactificationExchange_inv_app_hom
         ((boundedConstructibleLowerShriekOfCompactificationCompatibility l c).inv.app P) ≫
       (purityFieldPullbackCompatibility l (πY := πY)).inv.app
         ((boundedConstructibleLowerShriekOfCompactification l c).obj P) := by
-  unfold purityFieldCompactificationExchange
-  rw [ObjectProperty.preimageIso_inv_app_hom]
-  simp
+  exact ObjectProperty.preimageIso_comparisonSquare_inv_app_hom
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility l c)
+    (boundedConstructibleLowerShriekOfCompactificationCompatibility l c')
+    (purityFieldPullbackCompatibility l (πY := πX))
+    (purityFieldPullbackCompatibility l (πY := πY))
+    (purityFieldCompactificationAmbientExchange l f f' c c' hi hg) P
 
 variable {P : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj l⟧}
