@@ -34,6 +34,9 @@ def compactProjectionGeometricPullIso :
   (eqToIso (congrArg (boundedConstructibleUpperStar Λ l) c.overI_overG.symm) ≪≫
     boundedConstructibleUpperStarComp Λ l c.overI c.overG).symm
 
+set_option maxHeartbeats 800000 in
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- The geometric exceptional projection factors through the canonical pullback compositor. -/
 lemma compactProjectionGeometricPullIso_projection_eq
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧)
