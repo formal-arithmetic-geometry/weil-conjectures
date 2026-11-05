@@ -1,10 +1,11 @@
-# BZ72 progress
+# BZ72 complete
 
 - Unit: BZ72, branch `u9/BZ72`.
-- Scope: Cospecialization, FinitarySliceEnoughPoints, ProEtale.Adic.UpperStar, BifunctorHomHomotopyExactSupplement.
-- First three modules pass remote `ucheck-bump`.
-- Supplement proofs ported; coordinate theorem needed canonical `quotientCompQhIso` transports because Mathlib now hides Qh. Proposed exception explicitly, then user instructed continuation; patch applied.
-- Four-module check final2 reduced to one final reassociation in the coordinate proof. Replaced the failed simplifier call with Category.assoc; final3 is running.
+- All four assigned modules passed `ucheck-bump` together: rc=0, 3821 jobs.
+- Checked source commit: `1ff41157e8e837eefed5af2db7bae1d35eab175d`; this final update changes only progress documentation.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ72-final3-full.log`.
+- Fix patterns and the coordinate statement's canonical endpoint transports: `/home/ubuntu/u9/bz/FIXES-BZ72.md`.
+- The user instructed continuation after the explicit statement-adjustment proposal. All other declaration statements and existing docstrings are unchanged.
 - No local Lean/Lake execution, no sorries or trust escapes, no heartbeat increases.
-- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ72.md`.
-- After green: record final remote log and commit, write `/home/ubuntu/u9/state/BZ72.DONE`, remove stale BLOCKED marker.
+- Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
+- Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
