@@ -60,10 +60,10 @@ theorem exists_geometric_equivariant_integralOrientation_iso (g : X.left ⟶ X.l
       (((shiftFunctor _ (1 : ℤ)).mapIso φT).homCongr (Iso.refl _)).symm
   have hfin (n : ℕ) :=
     finite_hom_derivedReduction_integralOrientation (ℓ := ℓ) (E := E.1) f d (n + 1)
-  have h := exists_equivariant_iso_of_finite_reductions ℓ E G
-    (fun n ↦ L((g)^*⟦Profinite.integersModPowRingObj ℓ E.1 (n + 1)⟧))
-    (fun n ↦ integersModPowReductionUpperStarIso ℓ E.1 (n + 1) g)
-    𝐓 𝐖 φT.hom φW (inst := hshift) hfin
+  let Gn := fun n : ℕ ↦ L((g)^*⟦Profinite.integersModPowRingObj ℓ E.1 (n + 1)⟧)
+  let c := fun n : ℕ ↦ integersModPowReductionUpperStarIso ℓ E.1 (n + 1) g
+  have h := exists_equivariant_iso_of_finite_reductions ℓ E (X := X) G Gn c
+    𝐓 𝐖 φT.hom φW hfin
     hne (fun n s hs ↦ isWeilEquivariant_derivedReductionStep g (n + 1) φT.hom φW s hs)
   exact h
 
