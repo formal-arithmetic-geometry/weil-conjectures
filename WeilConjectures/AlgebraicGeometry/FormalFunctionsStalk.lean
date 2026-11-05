@@ -172,28 +172,24 @@ theorem formal_functions_stalk {X Y : Scheme.{uS}} (f : X ⟶ Y) [IsProper f]
     simp only [ConcreteCategory.comp_apply] at hg
     change (limit.π S (op n)) (g.inv (d.hom (e.hom (c.hom x)))) =
       (limit.π (S ⋙ R) (op n)) (d.hom (e.hom (c.hom x))) at hg
-    rw [hg]
     have hd := congrArg (fun k ↦ k (e.hom (c.hom x)))
       (HasLimit.isoOfNatIso_hom_π b (op n))
     simp only [ConcreteCategory.comp_apply] at hd
-    rw [hd]
     have hh := congrArg (fun k ↦ k (c.hom x)) (he n)
     simp only [ConcreteCategory.comp_apply] at hh
     change (limit.π (formalCompletionSystem J F' ⋙ C) (op n))
       (e.hom (c.hom x)) = q n (AdicCompletion.eval I (C.obj F') (n + 1) (c.hom x)) at hh
-    rw [hh]
     have hc : AdicCompletion.eval I (C.obj F') (n + 1) (c.hom x) =
         Submodule.Quotient.mk (a z) := by
       change a.toLinearMap.reduceModIdeal (I ^ (n + 1))
         (AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) x) = _
       rw [hx]
       rfl
-    rw [hc]
     have hqn := LinearMap.congr_fun (hq n) (a z)
     change q n (Submodule.Quotient.mk (a z)) =
       (C.map (formalModuleQuotientπ J (n + 1) F')) (a z) at hqn
-    rw [hqn]
-    exact (hb n z).symm
+    exact hg.trans (hd.trans ((congrArg (b.hom.app (op n))
+      (hh.trans ((congrArg (q n) hc).trans hqn))).trans (hb n z).symm))
   have hcomp : ∀ (n : ℕ) (z : formalFunctionsStalk f y F p),
       (limit.π S (op n)) (v.hom (AdicCompletion.of I _ z)) = θ n z := by
     intro n z
