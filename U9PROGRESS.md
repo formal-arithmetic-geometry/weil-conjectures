@@ -9,7 +9,10 @@
   cochain unit. The importer proof now uses cochain-unit naturality.
 - The original canonical-single proof is unchanged. All binders, assumptions,
   and existing docstrings are unchanged.
-- Next: remote ucheck-bump on both modules, then check one more importer layer.
+- The assigned module and direct importer passed together at `63a5e3555`: rc=0,
+  built=8, failed=0. Log: `/home/ubuntu/u9/logs/BZ264-20261106T013140.log`.
+- Continuing into `HypercohomologyLeftEdgeSingleAux` and `HypercohomologyLeftEdgeSingle`.
+  The auxiliary proof uses direct-Q boundedness instances (known BZ130 pattern).
 - Patterns and full build logs: `/home/ubuntu/u9/bz/FIXES-BZ264.md`.
 - No local Lean/Lake, forbidden proof shortcuts, or heartbeat changes.
 

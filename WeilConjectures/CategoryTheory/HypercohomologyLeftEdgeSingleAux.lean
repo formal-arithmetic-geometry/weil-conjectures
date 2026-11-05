@@ -54,15 +54,13 @@ theorem cochainHypercohomologyLeftEdge_single_aux (A : B) (n : ℕ) :
   let H := DerivedCategory.Plus.homologyFunctor B n
   have h₀ : t.IsGE K 0 := by
     apply (DerivedCategory.Plus.isGE_ι_obj_iff _ 0).mp
-    exact DerivedCategory.TStructure.t.isGE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app L.obj).symm 0
+    exact inferInstanceAs ((DerivedCategory.Q.obj L.obj).IsGE 0)
   have hL : L.obj.IsStrictlyLE (n : ℤ) := by
     exact CochainComplex.isStrictlyLE_of_iso
       (HomologicalComplex.extendSingleIso ComplexShape.embeddingUpNat A n (n : ℤ) rfl).symm n
   have hLE : t.IsLE K n := by
     apply (DerivedCategory.Plus.isLE_ι_obj_iff _ n).mp
-    exact DerivedCategory.TStructure.t.isLE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app L.obj).symm n
+    exact inferInstanceAs ((DerivedCategory.Q.obj L.obj).IsLE n)
   have hi : IsIso ((t.truncLTι (n + 1)).app K) :=
     (t.isLE_iff_isIso_truncLTι_app (n : ℤ) (n + 1) rfl K).mp hLE
   let i := (t.truncLTι (n + 1)).app K
