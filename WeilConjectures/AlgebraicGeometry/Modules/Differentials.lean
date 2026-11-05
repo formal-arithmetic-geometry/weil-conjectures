@@ -254,16 +254,16 @@ noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} 
     ext U x
     simp only [relativeDifferentialsHomEquiv_apply]
     erw [Derivation.postcomp_d_apply, Derivation.postcomp_d_apply]
-    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ConcreteCategory.comp_apply,
-      relativeDifferentialsHomEquiv_symm_app_d]
+    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.hom_comp,
+      LinearMap.comp_apply, relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₂.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
   inv_hom_id := by
     apply (f₂.relativeDifferentialsHomEquiv _).injective
     ext U x
     simp only [relativeDifferentialsHomEquiv_apply]
     erw [Derivation.postcomp_d_apply, Derivation.postcomp_d_apply]
-    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ConcreteCategory.comp_apply,
-      relativeDifferentialsHomEquiv_symm_app_d]
+    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.hom_comp,
+      LinearMap.comp_apply, relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₁.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
 
 
@@ -280,11 +280,11 @@ noncomputable def relativeDifferentialsCompIso {V : Scheme.{u}} (g : X ⟶ V) (i
         rw [appIso_hom, Category.assoc, g.naturality, ← Category.assoc, ← comp_app]
         rfl
       rw [← ConcreteCategory.comp_apply, h, ConcreteCategory.comp_apply]
-      erw [D.d_map, D.d_app_app]
+      erw [D.d_map, PresheafOfModules.Derivation'.d_app_app D]
       exact map_zero _)
     (fun M D W a ↦ by
       change D.d (g.app _ (i.app W a)) = 0
-      exact D.d_app_app _ _)
+      exact PresheafOfModules.Derivation'.d_app_app D _ _)
 
 
 section Restrict
@@ -307,7 +307,8 @@ noncomputable def pushforwardDerivation :
           ((j ≫ f).relativeDifferentialsDerivation.d (j.app W₁.unop x))
       rw [← ConcreteCategory.comp_apply, j.naturality, ConcreteCategory.comp_apply]
       exact (j ≫ f).relativeDifferentialsDerivation.d_map _ _)
-    (fun V a ↦ (j ≫ f).relativeDifferentialsDerivation.d_app_app V a)
+    (fun V a ↦ PresheafOfModules.Derivation'.d_app_app
+      (j ≫ f).relativeDifferentialsDerivation V a)
 
 lemma pushforwardDerivation_desc_app_d (W : X.Opens) (s : Γ(X, W)) :
     ((f.relativeDifferentialsHomEquiv _).symm (f.pushforwardDerivation j)).val.app (op W)
@@ -337,7 +338,8 @@ noncomputable def restrictDerivation :
       change f.relativeDifferentialsDerivation.d
         ((j.appIso (j ⁻¹ᵁ (f ⁻¹ᵁ V))).inv (j.app (f ⁻¹ᵁ V) (f.app V a))) = 0
       rw [← ConcreteCategory.comp_apply (j.app _), app_appIso_inv]
-      erw [f.relativeDifferentialsDerivation.d_map, f.relativeDifferentialsDerivation.d_app_app]
+      erw [f.relativeDifferentialsDerivation.d_map,
+        PresheafOfModules.Derivation'.d_app_app f.relativeDifferentialsDerivation]
       exact map_zero _)
 
 /-- The morphism `Ω¹_{X/S}|_U ⟶ Ω¹_{U/S}`. -/
