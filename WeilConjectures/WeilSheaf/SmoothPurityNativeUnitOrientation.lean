@@ -86,6 +86,7 @@ local instance : IsSeparated
     (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 
+include eT eU in
 /-- Unit base change, together with the native Tate and unit coordinates, gives
 an isomorphism from the native right adjoint at the unit to the native Tate object. -/
 theorem nonempty_shriekRightAdjoint_obj_iso_of_unitBaseChange
@@ -108,6 +109,10 @@ theorem nonempty_shriekRightAdjoint_obj_iso_of_unitBaseChange
         (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
           (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _))) e.hom)] :
     Nonempty (J.obj U ≅ T) := by
+  have : SmoothOfRelativeDimension d
+      (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
+        (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)).left :=
+    ‹SmoothOfRelativeDimension d f›
   have ho := isIso_purityMapOfDescendedSmoothTrace_of_universal f d T U eT eU adj
     (fun K ↦ CondensedRing.geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange l
       (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))

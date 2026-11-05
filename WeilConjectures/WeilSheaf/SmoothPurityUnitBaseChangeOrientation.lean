@@ -98,6 +98,8 @@ variable (d : ℕ) [SmoothOfRelativeDimension d f]
         (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
           (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _))) e.hom)]
 
+include α e
+
 /-- The native Tate encoding turns the shriek universality criterion into the
 usual orientation of the constant Weil complex. -/
 theorem nonempty_shriekRightAdjoint_adicConstant_iso_of_unitBaseChange
