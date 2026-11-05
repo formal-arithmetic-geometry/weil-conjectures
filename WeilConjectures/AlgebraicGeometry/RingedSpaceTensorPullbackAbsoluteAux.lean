@@ -42,7 +42,9 @@ private theorem inverseImage_isKFlat
   let := SheafOfModules.monoidalCategory (TopCat.Sheaf.inverseImageRing f R)
   intro F hF i
   exact (hk F hF i).of_iso
-    (((MonoidalCategory.curriedTensor _).map₂CochainComplex.obj F).mapIso e)
+    (HomologicalComplex₂.total.mapIso
+      ((((MonoidalCategory.curriedTensor _).mapBifunctorHomologicalComplex
+        (.up ℤ) (.up ℤ)).obj F).mapIso e) (.up ℤ))
 
 private theorem exists_leftDerived_of_resolving
     {C : Type*} [Category* C] {D : Type*} [Category* D]
