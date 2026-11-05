@@ -45,8 +45,8 @@ lemma purity_adicLowerStarUnit_condensed {X : Scheme.{u}} (e : X ≅ X) :
     (e.hom)^*ᵃ[l] (e.inv)_*ᵃ[l]
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)
     (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.inv)
-    (adicUpperStarCompCondensedModIso l e.hom).symm
-    (adicLowerStarCompCondensedModIso l e.inv).symm
+    (adicUpperStarCompCondensedModIso l e.hom).inv
+    (adicLowerStarCompCondensedModIso l e.inv).inv
     (adicUpperStarIsoLowerStarInv l e)
     (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj l) e)
     (adicSheafEquivCondensedModTensorUnitIso l X)

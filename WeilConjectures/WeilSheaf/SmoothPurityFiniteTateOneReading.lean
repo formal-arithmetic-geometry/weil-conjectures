@@ -66,14 +66,17 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     (ringChar_integersModPowCoeff ℓ E n) hzero g
     (isUnit_natCast_pow_of_neZero ℓ n f) (isUnit_natCast_pow_of_neZero ℓ n (g ≫ f))
   have hr := upperStarIntegralTateTwistOneIso_hom_comp_reduction ℓ E g f n
-  have h := purity_reading_composition
+  have h := purity_reading_composition_component
     (CondensedRing.upperStar (Profinite.integersModPowRingObj ℓ E n) g)
     (finiteCoefficientModEquivalence Y (PadicAlgCl.integersModPow ℓ E n)).functor
     (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor
     (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]
     (upperStarFiniteCoefficientModEquivalenceIso g (PadicAlgCl.integersModPow ℓ E n))
-    ((pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv.app
-      (integralTateTwistOne Y ℓ E))
+    (Mod.extendScalars (integersModPowReduction Y ℓ E n))
+    (CondensedRing.upperStar (Profinite.padicIntegersRingObj ℓ E) g ⋙
+      Mod.extendScalars (integersModPowReduction X ℓ E n))
+    (pullIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g).inv
+    (integralTateTwistOne Y ℓ E)
     ((Mod.extendScalars (integersModPowReduction X ℓ E n)).map
       (upperStarIntegralTateTwistOneIso ℓ E g f).hom)
     (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n (g ≫ f))

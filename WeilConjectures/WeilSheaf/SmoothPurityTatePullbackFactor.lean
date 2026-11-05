@@ -51,12 +51,12 @@ lemma purity_upperStarTateTwistOneIso_factor
       (purityModuleFactorIso (Profinite.padicAlgClRingObj ℓ) p s hs).hom.app
           (tateTwistOne X ℓ) ≫ (upperStarTateTwistOneIso ℓ p a).hom := by
   exact purity_factor_component
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (s ≫ p))
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) p ⋙
-      CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) s)
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) p)
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) s)
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (s ≫ p))
     (CondensedRing.upperStarComp (Profinite.padicAlgClRingObj ℓ) s p)
     (CondensedRing.upperStarCongr (Profinite.padicAlgClRingObj ℓ) hs)
+    (purityModuleFactorIso (Profinite.padicAlgClRingObj ℓ) p s hs) rfl
     (tateTwistOne X ℓ) _ _ _
     (purity_upperStarTateTwistOneIso_comp ℓ s p a)
     (purity_upperStarTateTwistOneIso_congr ℓ hs a)
@@ -79,9 +79,9 @@ lemma purity_upperStar_unit_factor {X U : Scheme.{u}}
         (Functor.Monoidal.εIso (CondensedRing.upperStar Λ s)).inv =
       (purityModuleFactorIso Λ p s hs).hom.app (𝟙_ _) ≫
         (Functor.Monoidal.εIso (CondensedRing.upperStar Λ p)).inv := by
-  exact purity_factor_component (CondensedRing.upperStar Λ (s ≫ p))
-    (CondensedRing.upperStar Λ p ⋙ CondensedRing.upperStar Λ s) (CondensedRing.upperStar Λ p)
-    (CondensedRing.upperStarComp Λ s p) (CondensedRing.upperStarCongr Λ hs) (𝟙_ _) _ _ _
+  exact purity_factor_component (CondensedRing.upperStar Λ p) (CondensedRing.upperStar Λ s)
+    (CondensedRing.upperStar Λ (s ≫ p)) (CondensedRing.upperStarComp Λ s p)
+    (CondensedRing.upperStarCongr Λ hs) (purityModuleFactorIso Λ p s hs) rfl (𝟙_ _) _ _ _
     (upperStarComp_hom_app_unit Λ s p) (purity_upperStar_unit_congr Λ hs)
 
 end Unit

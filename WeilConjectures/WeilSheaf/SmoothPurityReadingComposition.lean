@@ -34,4 +34,23 @@ lemma purity_reading_composition
   simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
   rw [reassoc_of% hm, hread, reassoc_of% hn]
 
+/-- Retain the initial coefficient-comparison component, including its composite
+source functor, in the resulting equation. -/
+lemma purity_reading_composition_component
+    {B₀ C₀ C D₀ D : Type*} [Category B₀] [Category C₀] [Category C]
+    [Category D₀] [Category D]
+    (P : C₀ ⥤ C) (F₀ : C₀ ⥤ D₀) (F : C ⥤ D) (Q : D₀ ⥤ D)
+    (α : P ⋙ F ≅ F₀ ⋙ Q) (E : B₀ ⥤ C₀) (J : B₀ ⥤ C)
+    (u : E ⋙ P ⟶ J) (M : B₀)
+    {B : C₀} {W R S : C} {T₀ : D₀} {T : D}
+    (v : J.obj M ⟶ W) (rX : W ≅ S) (rY : E.obj M ≅ B)
+    (q₁ : P.obj B ⟶ R) (q₂ : R ⟶ S)
+    (bX : F.obj S ≅ T) (bY : F₀.obj B ≅ T₀) (w : Q.obj T₀ ⟶ T)
+    (hred : u.app M ≫ v ≫ rX.hom = P.map rY.hom ≫ q₁ ≫ q₂)
+    (hread : F.map q₁ ≫ F.map q₂ ≫ bX.hom =
+      α.hom.app B ≫ Q.map bY.hom ≫ w) :
+    F.map (u.app M) ≫ F.map v ≫ (F.mapIso rX ≪≫ bX).hom =
+      α.hom.app (E.obj M) ≫ Q.map (F₀.mapIso rY ≪≫ bY).hom ≫ w :=
+  purity_reading_composition P F₀ F Q α (u.app M) v rX rY q₁ q₂ bX bY w hred hread
+
 end CategoryTheory
