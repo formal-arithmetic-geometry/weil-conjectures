@@ -29,7 +29,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-private noncomputable local instance rawDerivedClassAffineDescentHasShift (T : Scheme.{u}) :
+noncomputable local instance rawDerivedClassAffineDescentHasShift (T : Scheme.{u}) :
     HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
   inferInstance
 
