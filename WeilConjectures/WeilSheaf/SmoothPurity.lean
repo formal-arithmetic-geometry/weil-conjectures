@@ -177,6 +177,9 @@ theorem nonempty_upperShriek_obj_adicConstant_iso_of_smooth (d : ℕ)
   obtain ⟨e⟩ := Endofunctor.IsoAlgebra.nonempty_iso_of_forget_mapDerivedCategory_iso _ g hg
   exact ⟨ObjectProperty.isoMk _ e⟩
 
+set_option maxHeartbeats 2000000 in
+set_option profiler true in
+set_option profiler.threshold 100 in
 /-- **Weil equivariance of the purity map** (blueprint:
 `thm-pur-weil-equivariance-of-purity-and-trace`, at the coefficient stage `ℚ̄_ℓ`): let
 `f : X ⟶ Y` be smooth separated of pure relative dimension `d`, and let `φ_L` identify the
