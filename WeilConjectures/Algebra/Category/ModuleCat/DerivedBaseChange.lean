@@ -363,11 +363,11 @@ lemma Q_map_restrictScalars_comp (hgf : gf = g.comp f) {K : CochainComplex (Modu
         (restrictScalars.{u} f).mapDerivedCategoryFactors.hom.app
           (((restrictScalars.{u} g).mapHomologicalComplex _).obj L) ≫
         DerivedCategory.Q.map (restrictScalarsCompComplexMap hgf L) := by
-    simp only [derivedRestrictScalarsCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    simp only [derivedRestrictScalarsCompIso, Iso.trans_hom, NatTrans.comp_app,
       Category.assoc]
     rw [Functor.mapDerivedCategoryNatIso_fac,
       ← Functor.mapDerivedCategoryCompIso_fac (restrictScalars g) (restrictScalars f) L]
-    simp only [Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app_assoc]
+    simp only [Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc]
     have h₂ : (Functor.mapHomologicalComplexCompIso
         (Iso.refl (restrictScalars.{u} g ⋙ restrictScalars.{u} f)) (.up ℤ)).hom.app L ≫
           (NatTrans.mapHomologicalComplex (restrictScalarsComp' f g gf hgf).inv (.up ℤ)).app L =
