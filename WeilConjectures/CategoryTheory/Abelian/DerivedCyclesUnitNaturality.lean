@@ -153,7 +153,8 @@ theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
     simp only [Functor.map_comp, mapHomotopyCategoryPlusSingleFunctorQhObjIso,
       Functor.preimageIso_inv, Functor.map_preimage, Functor.mapIso_inv]
     rw [← hcunit]
-    rfl
+    simp only [Iso.trans_inv, Functor.mapIso_inv, Category.assoc]
+    erw [Category.id_comp]
   have hw : z ≫
       S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K) ≫
       S.rightDerivedFunctor.map q ≫ S.rightDerivedFunctorPlusCompatibility.inv.app M =
@@ -198,6 +199,7 @@ theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
   rw [← reassoc_of% hz]
   erw [← HD.map_comp_assoc, ← HD.map_comp_assoc, ← HD.map_comp]
   simp only [Category.assoc]
+  erw [Category.id_comp, S.rightDerivedFunctor.map_id, Category.id_comp]
   rw [hw]
   simp only [HD.map_comp, Category.assoc, rightDerivedPlusSingleUnitHomologyAt]
   rfl
