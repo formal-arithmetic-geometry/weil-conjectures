@@ -271,7 +271,7 @@ private def derivedRestrictionComp :
     (Mod.comap ψ : Mod C T ⥤ Mod C S).mapDerivedCategory ⋙
       (Mod.comap φ).mapDerivedCategory ≅
       (Mod.comap χ).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (Mod.comap ψ) (Mod.comap φ)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (Mod.comap ψ) (Mod.comap φ)) ≪≫
     Functor.mapDerivedCategoryNatIso (ordinaryRestrictionComp φ ψ χ h)
 
 private def derivedAssociation :
@@ -660,7 +660,7 @@ abbrev restriction (n : ℕ) : DerivedCategory (Mod C (S n)) ⥤ DerivedCategory
 def restrictionComp (n : ℕ) :
     (Mod.comap (r n)).mapDerivedCategory ⋙ restriction R S q (n + 1) ≅
       restriction R S q n :=
-  (Functor.mapDerivedCategoryCompIso (Mod.comap (r n)) (Mod.comap (q (n + 1)))).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (Mod.comap (r n)) (Mod.comap (q (n + 1)))) ≪≫
     Functor.mapDerivedCategoryNatIso
       ((Mod.comapComp (q (n + 1)) (r n)).symm ≪≫ Mod.comapCongr (h n))
 

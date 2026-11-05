@@ -125,7 +125,7 @@ private theorem finite_purelyInseparable_specMap
       (RingHom.finitePresentation_algebraMap.mpr
         (Algebra.FinitePresentation.of_finiteType.mp inferInstance)),
     ⟨Function.surjective_to_subsingleton _⟩, ?_⟩
-  apply ((tfae_universallyInjective q).out 1 0).mp
+  apply ((tfae_universallyInjective q).out 2 1).mp
   intro Ω _ g₁ g₂ hg
   rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢
   apply congrArg Spec.map

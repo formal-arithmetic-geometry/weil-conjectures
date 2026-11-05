@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.QuasiCoherentSymmetricAlgebraCore
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.QuasiCoherentSymmetricAlgebraAffine
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The symmetric algebra of a quasi-coherent module
 

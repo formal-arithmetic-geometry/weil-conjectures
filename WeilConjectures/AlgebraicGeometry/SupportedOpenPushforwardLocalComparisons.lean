@@ -117,7 +117,7 @@ private theorem direct_image_support
         (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V ⋙ F) :=
       comp_preservesFiniteColimits _ _
     exact (F.mapDerivedCategory.map_isZero hz).of_iso
-      ((Functor.mapDerivedCategoryCompIso
+      (((Functor.mapDerivedCategoryCompIso).symm
         (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V)
         (Equivalence.functor (C := SheafOfModules.{u}
           ((moduleRings Y.toRingedSpace).over V)) (D := D) e)).app K)

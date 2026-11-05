@@ -41,7 +41,7 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
 
 private noncomputable def exactComp (e : H ≅ F ⋙ G) :
     H.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory :=
-  Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G
+  Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm
 
 @[reassoc]
 private lemma exactComp_fac (e : H ≅ F ⋙ G)
@@ -285,7 +285,7 @@ Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites,
 noncomputable def derivedSliceMapIso {U V : C} (f : V ⟶ U) :
     derivedSliceRestriction J B U ⋙ derivedSliceMap J B f ≅
       derivedSliceRestriction J B V :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (sliceRestrictionMapIso J B f)
 
 variable (A D : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B)))
@@ -669,9 +669,9 @@ Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites,
 noncomputable def sliceRestrictScalarsIso (φ : B →+* B') (U : C) :
     derivedSliceRestriction J B' U ⋙ Sheaf.derivedRestrictScalars (J.over U) φ ≅
       Sheaf.derivedRestrictScalars J φ ⋙ derivedSliceRestriction J B U :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso
       (sliceRestrictScalarsSheafIso J B φ U) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _
+        (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end CategoryTheory

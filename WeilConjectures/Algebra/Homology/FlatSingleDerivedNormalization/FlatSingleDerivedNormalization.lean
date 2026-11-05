@@ -30,6 +30,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Mathlib.Combinatorics.SetFamily.FourFunctions
 
 /-! # Normalized derived tensor with a flat degree-zero sheaf
 

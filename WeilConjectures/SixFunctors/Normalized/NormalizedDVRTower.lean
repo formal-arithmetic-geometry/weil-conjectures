@@ -103,7 +103,7 @@ noncomputable def normalizedDVRResComp {r m n : ℕ} (hrm : m ≤ r) (hmn : n �
     e₀ ≪≫ eqToIso (congrArg
       (fun f : integralCoefficientSheaf l E X r ⟶ integralCoefficientSheaf l E X n ↦
         SheafOfModules.restrictScalars.{max u (t + 1)} f) he)
-  (Functor.mapDerivedCategoryCompIso (normalizedDVRModuleRes l E X hmn)
+  ((Functor.mapDerivedCategoryCompIso (normalizedDVRModuleRes l E X hmn)).symm
     (normalizedDVRModuleRes l E X hrm)).symm ≪≫ Functor.mapDerivedCategoryNatIso e
 
 variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)

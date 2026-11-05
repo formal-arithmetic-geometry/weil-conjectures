@@ -24,7 +24,7 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
 private theorem comp_reassoc :
     (mapDerivedCategoryCompIso (F ⋙ G) H).inv ≫
       (mapDerivedCategoryCompIso F (G ⋙ H)).hom =
-    (isoWhiskerRight (mapDerivedCategoryCompIso F G) D(H)).hom ≫
+    (isoWhiskerRight (mapDerivedCategoryCompIso F G).symm D(H)).hom ≫
       (isoWhiskerLeft D(F) (mapDerivedCategoryCompIso G H)).inv := by
   rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
   exact mapDerivedCategoryCompIso_assoc F G H
@@ -32,7 +32,7 @@ private theorem comp_reassoc :
 private theorem comp_reassoc_inv :
     (mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
       (mapDerivedCategoryCompIso (F ⋙ G) H).hom =
-    (isoWhiskerLeft D(F) (mapDerivedCategoryCompIso G H)).hom ≫
+    (isoWhiskerLeft D(F) (mapDerivedCategoryCompIso G H).symm).hom ≫
       (isoWhiskerRight (mapDerivedCategoryCompIso F G) D(H)).inv := by
   rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
   exact (mapDerivedCategoryCompIso_assoc F G H).symm
@@ -47,7 +47,7 @@ private theorem nat_left (F : A ⥤ B) {G G' : B ⥤ C}
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] (e : G ≅ G') :
     (mapDerivedCategoryNatIso (isoWhiskerLeft F e)).hom =
-      (mapDerivedCategoryCompIso F G).hom ≫
+      (mapDerivedCategoryCompIso F G).inv ≫
         (isoWhiskerLeft D(F) (mapDerivedCategoryNatIso e)).hom ≫
         (mapDerivedCategoryCompIso F G').inv := by
   rw [← Category.assoc, Iso.eq_comp_inv]
@@ -58,7 +58,7 @@ private theorem nat_right {F F' : A ⥤ B} (G : B ⥤ C)
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ F') :
     (mapDerivedCategoryNatIso (isoWhiskerRight e G)).hom =
-      (mapDerivedCategoryCompIso F G).hom ≫
+      (mapDerivedCategoryCompIso F G).inv ≫
         (isoWhiskerRight (mapDerivedCategoryNatIso e) D(G)).hom ≫
         (mapDerivedCategoryCompIso F' G).inv := by
   rw [← Category.assoc, Iso.eq_comp_inv]
@@ -109,7 +109,7 @@ factors are precisely the two derived squares and the endpoint composition compa
 theorem mapDerivedCategorySquareIso_paste (α : F ⋙ E₁ ≅ E₀ ⋙ P) (β : G ⋙ E₂ ≅ E₁ ⋙ Q) :
     (mapDerivedCategorySquareIso (F₁ := F ⋙ G) (F₂ := E₂)
       (G₁ := E₀) (G₂ := P ⋙ Q) (isoWhiskerLeft F β ≪≫ isoWhiskerRight α Q)).hom =
-      (isoWhiskerRight (mapDerivedCategoryCompIso F G) D(E₂)).hom ≫
+      (isoWhiskerRight (mapDerivedCategoryCompIso F G).symm D(E₂)).hom ≫
         (isoWhiskerLeft D(F) (mapDerivedCategorySquareIso β)).hom ≫
         (isoWhiskerRight (mapDerivedCategorySquareIso α) D(Q)).hom ≫
         (isoWhiskerLeft D(E₀) (mapDerivedCategoryCompIso P Q)).inv := by

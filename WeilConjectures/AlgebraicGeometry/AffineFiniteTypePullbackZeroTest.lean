@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # A finite test for vanishing after pullback from an affine open

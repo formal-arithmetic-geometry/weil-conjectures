@@ -302,7 +302,7 @@ theorem pseudoCoherent_normalizedAlgebraTower
     (hf : ∀ n : ℕ, f n =
       (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.mk (J ^ (n + 2)))).mapDerivedCategory.map
         (t n) ≫
-      (Functor.mapDerivedCategoryCompIso
+      ((Functor.mapDerivedCategoryCompIso).symm
         (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.factor
           (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
         (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.mk (J ^ (n + 2))))).inv.app (K n) ≫

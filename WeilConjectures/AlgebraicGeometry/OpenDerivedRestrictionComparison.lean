@@ -93,7 +93,7 @@ theorem open_derived_restriction_comparison
   let F := r ⋙ e
   let M := F.mapDerivedCategory
   let L := r.mapDerivedCategory
-  let c : M ≅ L ⋙ e.mapDerivedCategory := Functor.mapDerivedCategoryCompIso r e
+  let c : M ≅ L ⋙ e.mapDerivedCategory := (Functor.mapDerivedCategoryCompIso r e).symm
   refine ⟨hD, (nonempty_derivedOpenLocalization.{u, w} U.toScheme).some, R, adj,
     ?_, ?_, ?_, ?_⟩
   · intro K hK

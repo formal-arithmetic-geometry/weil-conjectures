@@ -214,7 +214,7 @@ lemma mapDerivedCategorySquareIso_hom_app_comp (α₂ : r₀ ⋙ p₂ ≅ P₂ �
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hA₁ hA₂ hA₃
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
   have hWL₁' : (mapDerivedCategoryNatIso (isoWhiskerLeft r₀ e)).hom.app K =
-      (mapDerivedCategoryCompIso r₀ p₁₂).hom.app K ≫
+      (mapDerivedCategoryCompIso r₀ p₁₂).inv.app K ≫
         (mapDerivedCategoryNatIso e).hom.app (r₀.mapDerivedCategory.obj K) ≫
         (mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).inv.app K := by
     rw [← reassoc_of% hWL₁, Iso.hom_inv_id_app, Category.comp_id]

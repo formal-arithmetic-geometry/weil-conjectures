@@ -989,7 +989,7 @@ private lemma derivedLeftUnit (I : D ⥤ D) [I.Additive]
     (c : K ≅ F ⋙ I) (i : I ≅ 𝟭 D) (w : K = F)
     (h : c ≪≫ isoWhiskerLeft F i = eqToIso w) (M : DerivedCategory C) :
     (mapDerivedCategoryNatIso c).hom.app M ≫
-      (mapDerivedCategoryCompIso F I).hom.app M ≫
+      (mapDerivedCategoryCompIso F I).inv.app M ≫
       (mapDerivedCategoryNatIso i).hom.app (F.mapDerivedCategory.obj M) ≫
       (mapDerivedCategoryIdIso D).hom.app (F.mapDerivedCategory.obj M) =
       (eqToHom (show K.mapDerivedCategory = F.mapDerivedCategory by cases w; rfl)).app M := by
@@ -1009,7 +1009,7 @@ private lemma derivedRightUnit (I : C ⥤ C) [I.Additive]
     (c : K ≅ I ⋙ F) (i : I ≅ 𝟭 C) (w : K = F)
     (h : c ≪≫ isoWhiskerRight i F = eqToIso w) (M : DerivedCategory C) :
     (mapDerivedCategoryNatIso c).hom.app M ≫
-      (mapDerivedCategoryCompIso I F).hom.app M ≫
+      (mapDerivedCategoryCompIso I F).inv.app M ≫
       F.mapDerivedCategory.map
         ((mapDerivedCategoryNatIso i).hom.app M ≫ (mapDerivedCategoryIdIso C).hom.app M) =
       (eqToHom (show K.mapDerivedCategory = F.mapDerivedCategory by cases w; rfl)).app M := by
@@ -1053,7 +1053,7 @@ private lemma derivedAssociativity
         (mapDerivedCategoryNatIso c₂).hom.app M ≫
         (mapDerivedCategoryCompIso P H).hom.app M ≫
         H.mapDerivedCategory.map ((mapDerivedCategoryNatIso c₃).hom.app M ≫
-          (mapDerivedCategoryCompIso F G).hom.app M) := by
+          (mapDerivedCategoryCompIso F G).inv.app M) := by
   subst R'
   simp only [eqToIso_refl, Iso.refl_trans] at h
   have hm := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom.app M) h.symm
@@ -1085,7 +1085,7 @@ noncomputable def profinitePointAbelianDerivedComp
     (upperStar Ab.{u + 1} (f ≫ g)).mapDerivedCategory ≅
       (upperStar Ab.{u + 1} g).mapDerivedCategory ⋙ (upperStar Ab.{u + 1} f).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (upperStarComp Ab.{u + 1} f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)
+    (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)).symm
 
 /-- The canonical termwise derived identity comparison, using the existing lift of the
 ordinary inverse-image identity and its normalization on the identity functor.
@@ -1151,7 +1151,7 @@ theorem profinite_point_pullback_abelianderived_coherence
           (eqToHom (congrArg (fun k : X' ⟶ Y ↦ (upperStar Ab.{u + 1} k).mapDerivedCategory)
             w)).app M ≫
           (profinitePointAbelianDerivedComp f' g).hom.app M =
-        (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} f) (upperStar Ab.{u + 1}
+        ((Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} f)).symm (upperStar Ab.{u + 1}
           b)).inv.app M ≫
           (Functor.mapDerivedCategoryNatIso
             ((upperStarComp Ab.{u + 1} b f).symm ≪≫
@@ -1228,7 +1228,7 @@ noncomputable def profinitePointModuleDerivedComp
       (CondensedRing.upperStar Λ g).mapDerivedCategory ⋙ (CondensedRing.upperStar Λ
         f).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)
+    (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)).symm
 
 /-- The canonical termwise derived identity comparison, using the existing lift of the
 ordinary inverse-image identity and its normalization on the identity functor.
@@ -1302,7 +1302,7 @@ theorem profinite_point_pullback_modulederived_coherence
           (eqToHom (congrArg (fun k : X' ⟶ Y ↦ (CondensedRing.upperStar Λ k).mapDerivedCategory)
             w)).app M ≫
           (profinitePointModuleDerivedComp Λ f' g).hom.app M =
-        (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ f) (CondensedRing.upperStar
+        ((Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ f)).symm (CondensedRing.upperStar
           Λ b)).inv.app M ≫
           (Functor.mapDerivedCategoryNatIso
             ((CondensedRing.upperStarComp Λ b f).symm ≪≫

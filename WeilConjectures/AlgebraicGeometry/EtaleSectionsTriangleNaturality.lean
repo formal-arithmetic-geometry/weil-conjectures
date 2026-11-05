@@ -89,7 +89,7 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
       rfl
     erw [hid, CategoryTheory.Functor.map_id, Category.comp_id] at hc
     have hf : (Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso G L).hom.app (DerivedCategory.Q.obj J) ≫
+        (Functor.mapDerivedCategoryCompIso G L).symm).hom.app (DerivedCategory.Q.obj J) ≫
         L.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app J) ≫
           L.mapDerivedCategoryFactors.hom.app
             ((G.mapHomologicalComplex (.up ℤ)).obj J) =
