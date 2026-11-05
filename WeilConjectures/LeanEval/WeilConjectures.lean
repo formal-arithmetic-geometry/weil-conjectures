@@ -68,7 +68,7 @@ def weilInverseRoots {d : ℕ} (P : Fin (2 * d + 1) → ℤ[X]) (i : ℕ) : Mult
 lemma weilInverseRoots_of_lt {d : ℕ} (P : Fin (2 * d + 1) → ℤ[X]) {i : ℕ}
     (h : i < 2 * d + 1) :
     weilInverseRoots P i = ((P ⟨i, h⟩).map (Int.castRingHom ℂ)).roots.map (·⁻¹) :=
-  dif_pos h
+  dite_eq_left h
 
 /-- The complex roots of an integer polynomial are permuted by every automorphism of `ℂ`. -/
 lemma map_roots_map_intCast_ringEquiv (p : ℤ[X]) (φ : ℂ ≃+* ℂ) :

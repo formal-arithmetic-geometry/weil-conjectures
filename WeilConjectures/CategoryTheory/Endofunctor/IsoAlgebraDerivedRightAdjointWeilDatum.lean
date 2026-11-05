@@ -278,9 +278,9 @@ theorem exists_forget_obj_iso_counit_comm
       G.mapDerivedCategory.map (adj.counit.app Y).hom ≫ (derivedStrIso G).hom.app L'.obj := by
     rw [hε]
     simp only [Functor.map_comp, Category.assoc]
-    rw [← reassoc_of% hcomm, reassoc_of% hstr', hnat, Iso.map_hom_inv_id_assoc,
+    rw [← reassoc_of% hcomm, reassoc_of% hstr', hnat, Iso.hom_inv_id_map_assoc,
       Iso.hom_inv_id_app_assoc]
   have := eq_of_comm_counit e PC PD hR adj hPC_F Y (key.trans hv.symm)
-  rw [← this, Iso.map_hom_inv_id_assoc]
+  rw [← this, Iso.hom_inv_id_map_assoc]
 
 end CategoryTheory.Endofunctor.IsoAlgebra
