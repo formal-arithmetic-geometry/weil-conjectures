@@ -7,6 +7,7 @@ module
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
+import all WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionKFlatTensorComparison
 public import WeilConjectures.AlgebraicGeometry.SectionOplaxTotalComparison
 public import WeilConjectures.AlgebraicGeometry.SectionRepresentativeTensorArrow
@@ -40,26 +41,6 @@ attribute [local irreducible] CategoryTheory.Localization.Monoidal.tensorBifunct
   CategoryTheory.DerivedMonoidal.bifunctor
 
 namespace ResolutionConjugation
-
-private theorem counit_quotient_transport
-    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
-    [HasDerivedCategory A] [HasDerivedCategory B]
-    (F : A ⥤ B) [F.Additive] (LF : DerivedCategory A ⥤ DerivedCategory B)
-    (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
-    (P : CochainComplex A ℤ) :
-    LF.map ((DerivedCategory.quotientCompQhIso A).inv.app P) ≫
-        ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) ≫
-        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
-        (DerivedCategory.quotientCompQhIso B).hom.app
-          ((F.mapHomologicalComplex (.up ℤ)).obj P) =
-      ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) := by
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    Quotient.lift.isLift_hom]
-  erw [LF.map_id, DerivedCategory.Qh.map_id]
-  erw [Category.comp_id, Category.comp_id, Category.id_comp]
-
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
@@ -71,14 +52,8 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
       (internalLocalizationFunctor Λ X).obj ((totalInternalPull Λ f).obj A) :=
   by
     with_unfolding_all
-      exact (CondensedRing.upperStar Λ f).leftDerivedFunctor.map
-          ((DerivedCategory.quotientCompQhIso (internalModules Λ Y)).inv.app A) ≫
-        (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj A) ≫
-        DerivedCategory.Qh.map
-          (((CondensedRing.upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app A) ≫
-        (DerivedCategory.quotientCompQhIso (internalModules Λ X)).hom.app
-          (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj A)
+      exact cast (by rfl) ((CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj A))
 
 /-- The specified section resolution transformation epsilon, using exact localization.
 Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
@@ -597,8 +572,14 @@ theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ 
       (derivedSectionFunctor Λ X).map (eta Λ f A) ≫ d Λ f A =
         j Λ f A ≫ epsilon Λ f ((totalSectionEquivalence Λ Y).obj A) := by
     have h := (sectionDerivedPushpullNormalization Λ f).2.2.2.2.1 A
+    conv at h =>
+      rhs
+      lhs
+      rw [_root_.counit_quotient_transport]
     with_unfolding_all
       unfold eta d j epsilon cochainLocalizationIso termwisePullComparison
+      simp only [internalDerivedPullFunctor, internalLocalizationFunctor,
+        totalInternalPull, retainedCochainFunctor, retainedCochainObject, cast_eq]
       exact reverse_assoc_square _ _ _ h
   have qTensor_naturality (T : Scheme.{u})
       {A A' B B' : CochainComplex (modules Λ T) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
@@ -795,11 +776,12 @@ theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ 
         eta Λ f A ≫ (internalLocalizationFunctor Λ X).map ((totalInternalPull Λ f).map a) := by
     have h := (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.naturality
       ((HomotopyCategory.quotient _ (.up ℤ)).map a)
-    simpa only [eta, counit_quotient_transport,
-      internalDerivedPullFunctor, internalLocalizationFunctor,
-      comparisonSource, totalInternalPull,
-      Functor.comp_map,
-      Functor.mapHomotopyCategory_map, qh_map_quotient] using h
+    with_unfolding_all
+      simp only [eta, internalDerivedPullFunctor, internalLocalizationFunctor,
+        comparisonSource, totalInternalPull, retainedCochainFunctor, retainedCochainObject,
+        retainedCochainMap, cast_eq, Functor.comp_map,
+        Functor.mapHomotopyCategory_map, qh_map_quotient] at h ⊢
+      exact h
   have aInternal_naturality
       {A A' B B' : CochainComplex (internalModules Λ Y) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
       (internalDerivedPullFunctor Λ f).map ((internalLocalizationFunctor Λ Y).map a ⊗ₘ
