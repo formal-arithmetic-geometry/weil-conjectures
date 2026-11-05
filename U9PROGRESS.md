@@ -187,3 +187,22 @@
 - Remote log: `/home/ubuntu/u9/logs/BZ605-20261106T045422.log`;
   tree: `poolb:43.157.189.27`. No downstream edits were required.
 - Next: one second-layer batch (four raw triangle pullback importers), then DONE.
+
+# BZ605 complete
+
+- Unit and both downstream layers are green: 9 selected modules passed `ucheck-bump`.
+- Unit plus layer 1: rc=0, built=27, failed=0, 4364 jobs at `d3dc5d8650`.
+- Layer 2: rc=0, built=21, failed=0, 4369 jobs at `7c34f43bef`.
+  The assigned module rebuilt successfully again on this second tree in 217 seconds.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ605-unit-layer1-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ605-layer2-full.log`.
+- Final Lean change is limited to `CohomPresheaf.lean`: direct-Q homology and chain-map
+  comparisons, localization imports, and proof-local identity normalization.
+- The user authorized the exact one-hypothesis/definition-body API proposal by
+  instructing continuation. All other 58 declaration headers and all docstrings
+  are unchanged. No downstream source edits were needed.
+- No local Lean/Lake, sorries, forbidden proof shortcuts, heartbeat increases, or profiler probes.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ605.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ605-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ605.DONE`.
+- This final documentation commit leaves Lean sources identical to the validated revision.
