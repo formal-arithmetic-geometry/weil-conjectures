@@ -50,9 +50,10 @@ noncomputable def puritySingleComparison :
 lemma puritySingleComparison_app_eq_of_flat {P : C} (hP : ObjectProperty.flat P) :
     F.puritySingleComparison.app P = (F.leftDerivedFunctorSingleFunctorIsoOfFlat hP).hom := by
   simp only [puritySingleComparison, leftDerivedFunctorSingleFunctorIsoOfFlat,
-    Iso.trans_hom, Iso.app_hom, Iso.app_inv, Iso.symm_hom, Functor.mapIso_hom,
+    Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom,
     NatTrans.comp_app, whiskerRight_app, whiskerLeft_app, asIso_hom, Functor.map_comp,
-    Category.assoc]
+    Category.assoc, Functor.comp_obj]
+  rfl
 
 /-- The flat-object comparison is natural in maps between flat objects. -/
 lemma leftDerivedFunctorSingleFunctorIsoOfFlat_naturality
@@ -61,7 +62,7 @@ lemma leftDerivedFunctorSingleFunctorIsoOfFlat_naturality
         (F.leftDerivedFunctorSingleFunctorIsoOfFlat hQ).hom =
       (F.leftDerivedFunctorSingleFunctorIsoOfFlat hP).hom ≫
         (DerivedCategory.singleFunctor D 0).map (F.map s) := by
-  simpa only [puritySingleComparison_app_eq_of_flat F hP,
+  simpa only [Functor.comp_map, puritySingleComparison_app_eq_of_flat F hP,
     puritySingleComparison_app_eq_of_flat F hQ] using F.puritySingleComparison.naturality s
 
 end CategoryTheory.Functor
