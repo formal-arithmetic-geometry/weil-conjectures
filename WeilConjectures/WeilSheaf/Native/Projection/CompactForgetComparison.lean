@@ -5,11 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.UpperShriekGeometric
-public import WeilConjectures.WeilSheaf.LowerShriekForget
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
-public import WeilConjectures.WeilSheaf.ProperProjectionFormula
-public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionIso
+public import WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
 
 /-! # Natural geometric comparisons for the compact projection formula -/
 

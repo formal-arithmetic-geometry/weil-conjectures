@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
-public import WeilConjectures.CategoryTheory.Functor.CurryComparison
+public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionTranspose
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenDerivedTensor
 public import WeilConjectures.WeilSheaf.ExtensionByZeroDerived
 public import WeilConjectures.CategoryTheory.Adjunction.FullyFaithfulCounitLocal
@@ -56,26 +56,33 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   (j : U ⟶ Z) [j.IsOver (Spec (CommRingCat.of k₀))] [IsOpenImmersion j]
 
+/-- An existing open tensor isomorphism witnesses the essential image needed below. -/
+def nativeOpenProjectionEssentialImageIso :
+    nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDerivedRight k₀ l j :=
+  (native_open_derived_tensor k₀ l j).choose_spec.choose.gamma
+
 /-- The open projection comparison is invertible: the tensor of an extension by zero with
 any complex lies in the essential image of the fully faithful extension by zero. -/
 theorem isIso_nativeOpenProjectionMap
     (M : DerivedCategory (ProEtaleWeilSheaf k₀ l U))
     (N : DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) :
     IsIso ((((derivedExtensionByZeroUpperStarAdjunction k₀ l j).projectionMap
-      (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U)) (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+      (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U))
+      (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
       (Functor.curryCompIsoOfIso (nativePullTensor k₀ l j)).inv).app M).app N) := by
-  obtain ⟨s, d, _, _⟩ := native_open_derived_tensor k₀ l j
   exact (derivedExtensionByZeroUpperStarAdjunction k₀ l j).isIso_projectionMap_app_app_of_iso
-    (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U)) (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+    (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U))
+      (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
     (Functor.curryCompIsoOfIso (nativePullTensor k₀ l j)).inv M N
     ((nativeDerivedTensor k₀ l U).obj (M, (nativeOpenPull k₀ l j).obj N))
-    (d.gamma.app (M, N))
+    ((nativeOpenProjectionEssentialImageIso k₀ l j).app (M, N))
 
 /-- Extension by zero satisfies the projection formula, with inverse given by the canonical
 unit transpose for the native pullback/tensor comparison. -/
 def nativeOpenProjectionIso : nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDerivedRight k₀ l j := by
   let q := (derivedExtensionByZeroUpperStarAdjunction k₀ l j).projectionMap
-    (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U)) (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+    (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U))
+      (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
     (Functor.curryCompIsoOfIso (nativePullTensor k₀ l j)).inv
   have h (MN : DerivedCategory (ProEtaleWeilSheaf k₀ l U) ×
       DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) : IsIso ((q.app MN.1).app MN.2) :=
@@ -96,9 +103,10 @@ lemma nativeOpenProjectionIso_inverse_unit
         (nativePullTensor k₀ l j).inv.app ((nativeOpenExtension k₀ l j).obj M, N) := by
   change (derivedExtensionByZeroUpperStarAdjunction k₀ l j).homEquiv _ _
     ((((derivedExtensionByZeroUpperStarAdjunction k₀ l j).projectionMap
-      (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U)) (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
+      (nativeOpenPull k₀ l j) (Functor.curry.obj (nativeDerivedTensor k₀ l U))
+      (Functor.curry.obj (nativeDerivedTensor k₀ l Z))
       (Functor.curryCompIsoOfIso (nativePullTensor k₀ l j)).inv).app M).app N) = _
-  rw [Adjunction.projectionMap_app_app, Equiv.apply_symm_apply]
-  simp [Adjunction.projectionMapTranspose, Functor.curryCompIsoOfIso]
+  exact Adjunction.homEquiv_projectionMap_curryCompIsoOfIso
+    (derivedExtensionByZeroUpperStarAdjunction k₀ l j) (nativePullTensor k₀ l j) M N
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
