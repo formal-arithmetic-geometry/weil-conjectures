@@ -210,6 +210,7 @@ import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.Algebra.Homology.Single
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Mathlib.Util.CountHeartbeats
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.GrothendieckAbelian
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 
@@ -390,6 +391,7 @@ private lemma conjugation_of_mixed_factorization
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
+#count_heartbeats in
 /-- A morphism of algebraic-closure extensions of two lisse finite-field modules
 is obtained at a finite field. This asserts only existence of representatives, not their
 comparison or equality relation.
