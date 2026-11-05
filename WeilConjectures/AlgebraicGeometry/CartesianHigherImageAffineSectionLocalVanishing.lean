@@ -25,6 +25,9 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+attribute [local instance] cartesianHigherImageFiniteRawClassHasShift
+  cartesianHigherImageFiniteRawClassHasZeroMorphisms
+
 private noncomputable def rawSectionsComparison
     (S : Scheme.{u}) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) :
