@@ -45,8 +45,11 @@ theorem comapUpperStarIso_inv_app_of_coefficient_comp (hc : a ≫ b = c)
     Mod.comapComp_hom_app_hom, Functor.comp_obj]
   erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.id_comp,
     Category.comp_id]
-  erw [upperStarUnitHom_comapUpperStarIso_inv_app_hom_assoc,
-    upperStarUnitHom_comapUpperStarIso_inv_app_hom,
-    upperStarUnitHom_comapUpperStarIso_inv_app_hom]
+  have ha := upperStarUnitHom_comapUpperStarIso_inv_app_hom a f
+    ((Mod.comap (coefficientMap b Y)).obj N)
+  have hb := upperStarUnitHom_comapUpperStarIso_inv_app_hom b f N
+  have hc' := upperStarUnitHom_comapUpperStarIso_inv_app_hom c f N
+  have hab := congrArg (fun t ↦ t ≫ ((comapUpperStarIso b f).inv.app N).hom) ha
+  exact (Category.assoc _ _ _).symm.trans (hab.trans (hb.trans hc'.symm))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
