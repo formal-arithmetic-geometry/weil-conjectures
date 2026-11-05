@@ -49,3 +49,18 @@
   all other declaration statements and all existing docstrings are unchanged.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
+
+# BZ148 complete
+
+- Branch: `u9/BZ148`; starting commit: `80aeb4bf4`.
+- All four assigned modules pass `ucheck-bump` together: rc=0, failed=0, 2916 jobs.
+- Validated source commit: `811a71f8249e8724bd7a1e8f1f998fceb8736596`.
+  This completion update changes only progress documentation.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ148-final-full.log`.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ148.md`.
+- Reversed the derived-composition isomorphism uses, restricted counit simplification,
+  and supplied the ring-presheaf Kan-extension family through the pointwise API.
+- The user instructed continuation after the exact two statement-local `cD` adaptations
+  were proposed; that patch is applied. All other declaration types and docstrings are unchanged.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ148.DONE`.
