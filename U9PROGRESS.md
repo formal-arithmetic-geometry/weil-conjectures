@@ -1,18 +1,25 @@
-# BZ361 in progress
+# BZ361 complete
 
 - Branch: `u9/BZ361`; starting commit: `98654719bd`.
-- Assigned module: `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport`.
-- Baseline `ucheck-bump` reproduced all 14 errors.
+- Green modules: `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport`,
+  `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomGluing`, and
+  `WeilConjectures.AlgebraicGeometry.OpenUnionHomGluing`.
+- Final `ucheck-bump OpenUnionHomGluing` rebuilt all three successfully:
+  rc=0, failed=0, 2934 jobs, on `poolb:43.166.72.113`.
+- Validated source commit: `b70a9873a373ab8573533b63a6971fc4eab717bc`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ361-open-union-full.log`.
 - The user instructed continuation after the explicit statement API migration proposal.
-  The comparison-orientation substitutions are applied, preserving all binders, hypotheses,
+  Applied the comparison-orientation substitutions, preserving all binders, hypotheses,
   and intended morphisms under Mathlib's reversed `mapDerivedCategoryCompIso`.
-- Proof cancellation uses the inverse comparison and `Iso.inv_hom_id_app`.
-- Assigned module is green: `ef081fb90b`, rc=0, failed=0, 2801 jobs on
-  `poolb:43.157.187.72`; log: `/home/ubuntu/u9/bz/BUILD-BZ361-unit-green-full.log`.
-- Next: build `SchemeDerivedHomGluing` and its two
-  direct importers `DerivedOpenGluing` and `OpenUnionHomGluing` as instructed.
+- Proofs use the inverse cancellation, explicit unfolding of local comparison aliases,
+  and removal of one redundant `rfl`. Existing docstrings and limit settings are unchanged.
+- The other second-layer importer `DerivedOpenGluing` was attempted and skipped per
+  the brief: its BZ459-owned dependency `DerivedOpenGluingObjects` fails at lines 159/197.
 - Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ361.md`.
-- No local Lean/Lake, forbidden proof escapes, heartbeat increases, or DONE marker.
+- Contract audit: `/home/ubuntu/u9/bz/BZ361-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ361.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
 
 # BZ133 complete
 
