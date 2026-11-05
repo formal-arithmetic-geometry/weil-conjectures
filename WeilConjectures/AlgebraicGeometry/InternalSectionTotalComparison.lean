@@ -282,7 +282,7 @@ instance internalTotalExists (P Q : CochainComplex (Internal Λ X) ℤ) :
 Source: Stacks 06YL (auxiliary; not a blueprint node). -/
 instance internalComplexMonoidal : MonoidalCategory (CochainComplex (Internal Λ X) ℤ) := by
   exact @CategoryTheory.Mod.monoidalCategoryCochainComplex _ _ _ _ _ _ _
-    (condensedRingObj Λ X) _ (isCommMonObj_condensedRingObj Λ X)
+    (condensedRingObj Λ X) _ (isCommMonObj_condensedRingObj Λ X) _
 
 /-- The native total tensor, with its instance fixed explicitly.
 Source: Stacks 06YL (auxiliary; not a blueprint node). -/
