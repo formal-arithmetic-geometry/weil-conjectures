@@ -73,7 +73,12 @@ private theorem unit_single (M : C) :
         ⟨(CochainComplex.singleFunctor C 0).obj M, by
           rw [CochainComplex.plus_iff]
           exact ⟨0, inferInstance⟩⟩
-      L.mapDerivedCategoryPlus.map
+      let s : (DerivedCategory.Plus.singleFunctor C 0).obj M ≅
+          DerivedCategory.Plus.Q.obj S :=
+        DerivedCategory.Plus.ι.preimageIso
+          ((DerivedCategory.Plus.singleFunctorιIso C 0).hom.app M ≫
+            (DerivedCategory.singleFunctorIsoCompQ C 0).hom.app M)
+      s.hom ≫ L.mapDerivedCategoryPlus.map
           ((DerivedCategory.Plus.quotientCompQhIso C).inv.app S) ≫
         L.mapDerivedCategoryPlusFactorsh.hom.app
           ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
@@ -88,9 +93,6 @@ private theorem unit_single (M : C) :
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
       Iso.symm_hom, NatTrans.comp_app, Functor.mapIso_hom,
       Category.id_comp]
-    apply (cancel_mono (DerivedCategory.Q.map
-      ((HomologicalComplex.singleMapHomologicalComplex L (.up ℤ) 0).hom.app M))).1
-    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
     rw [← Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app]
     simp [DerivedCategory.Plus.quotientCompQhIso,
       DerivedCategory.Plus.QhCompιIsoιCompQh, Functor.mapDerivedCategoryPlusCompatibility,

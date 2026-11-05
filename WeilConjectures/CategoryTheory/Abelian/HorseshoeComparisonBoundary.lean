@@ -111,7 +111,7 @@ private theorem comparison_eq_unit
   change _ ≫ DerivedCategory.Plus.ι.map (inv
       (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R))) ≫
       DerivedCategory.Plus.ι.map (DerivedCategory.Plus.Q.map vg) ≫ _ = _
-  have hη' := v.rightDerivedFunctorPlusUnit.naturality (DerivedCategory.Plus.Q.map g)
+  have hη' := v.rightDerivedFunctorPlusUnit.naturality g
   have hu' : inv (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R)) ≫
         DerivedCategory.Plus.Q.map vg =
       v.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
@@ -122,7 +122,6 @@ private theorem comparison_eq_unit
   simp only [Functor.map_comp] at hu''
   erw [reassoc_of% hu'']
   rw [← DerivedCategory.Plus.ι.map_comp_assoc, ← v.rightDerivedFunctorPlus.map_comp, ha]
-  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -226,8 +225,7 @@ private theorem augmentation_boundary
     DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
     DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
     Category.id_comp]
-  simp only [Functor.map_id, Category.comp_id]
-  erw [reassoc_of% hn]
+  simpa [DerivedCategory.singleFunctorIsoCompQ, Functor.commShiftIso_comp_hom_app] using hn
 
 /-- The explicit comparisons respect the connecting arrow of the derived
 horseshoe triangle.
@@ -315,8 +313,11 @@ theorem horseshoe_comparison_boundary
   have hunit' :
       DerivedCategory.Plus.ι.map (v.rightDerivedFunctorPlus.map
           (boundedBelowSESBoundary H hH)) ≫
-        (Functor.commShiftIso (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
-          (1 : ℤ)).hom.app (DerivedCategory.Plus.Q.obj H.X₁) ≫
+        DerivedCategory.Plus.ι.map
+          ((v.rightDerivedFunctorPlus.commShiftIso (1 : ℤ)).hom.app
+            (DerivedCategory.Plus.Q.obj H.X₁)) ≫
+        (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
+          (v.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj H.X₁)) ≫
         (boundedBelowInjectiveComparison v H.X₁)⟦(1 : ℤ)⟧' =
       boundedBelowInjectiveComparison v H.X₃ ≫
         DerivedCategory.triangleOfSESδ hV := by
