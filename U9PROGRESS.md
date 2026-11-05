@@ -1,136 +1,1468 @@
-# BZ133 complete
 
-- Branch: `u9/BZ133`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 4216 jobs.
-- Checked source commit: `145f9e74c47425595177ae3c1948ed9381a251e5`.
-- Each assigned target rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw9`.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ133-final-full.log`.
-- The user instructed continuation after the exact definition-body repair proposal for
-  `injectiveResolutionDerivedComparison`; that patch is now applied.
-- The obsolete `quotientCompQhIso` factor and its proof rewrites are removed because `Plus.Q`
-  now directly lifts `Q`. All declaration types remain unchanged.
-- Completion marker: `/home/ubuntu/u9/state/BZ133.DONE`.
-- This final commit changes only progress documentation after the successful source build.
-- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ133.md`.
-- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
+## 2026-11-05 — initial inspection
+- Read the Lean skill and performance guide; compilation will only use `ucheck`.
+- Inspected Houyi #2086 and #2087. #2087 moves upper-shriek definitions out of VerdierDual and reduces our target to `exists_natTrans_upperShriek_isIso_forget_of_smooth`, still unproved.
+- Merged pr/2087. Resolved import conflict by retaining both imports; resolved VerdierDual relocation conflict by accepting the moved block while retaining all current proved declarations.
+- The target statement is unchanged. Need prove the new purity-map leaf, not merely report Houyi's reduction as a completed proof.
+- Current plan: read blueprint transport/equivariance proof and Sheaf route, then build a reusable comparison/adjunction bridge in new modules.
 
-# BZ118 in progress
+## 2026-11-05 — source audit and alternate route
+- Blueprint requires the Frobenius purity/counit square with the specified Tate datum, not an arbitrary geometric isomorphism.
+- Shared Sheaf route does not close this missing equation: `lean/Sheaf/WeilSheaf/CondensedUnitPurityCounit.lean:79` is sorry; `Paper/RationalWeilPurityNaturalityMate.lean:861` and `IntegralEquivarianceMate.lean:79` are also sorry. `GeneralTransportBaseChange.lean:55` is sorry.
+- Upstream `SmoothPurity/OrientationCanonical.lean` explicitly records that canonical integral lift existence is not formalized; `smoothOrientationOfSmooth` falls back to an arbitrary isomorphism. `smoothOrientation_baseChange` only produces an unspecified Tate isomorphism, insufficient to match `WeilSheaf.cyclotomicUnit`.
+- K2 will deduce its leaf from K4, so K4 must not depend on K2.
+- Alternate route under investigation: choose purity over the finite base field itself, pull its trace to the geometric fibre with its canonical Weil datum, then extend from the unit by the projection formula. This can avoid proving canonical orientation base-change for an arbitrary chosen orientation.
 
-- Branch: `u9/BZ118`.
-- Three assigned modules passed the first repair build (commit `ccbe951d0655`).
-- `TraceShiftUnit` needed canonical endpoint transport in its public statement because Mathlib marks `Qh` `no_expose`.
-- The user instructed continuation after the explicit statement-adjustment proposal; that exact patch is now applied.
-- Next: validate all four modules with `ucheck-bump`, then write `/home/ubuntu/u9/state/BZ118.DONE`.
-- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ118.md`.
-- No local Lean/Lake execution; no forbidden proof escapes or heartbeat increases.
+## 2026-11-05 — independent base case
+- Added `SmoothPurityOpenImmersion.lean`: zero Tate twist is the identity; the target adjunction for an open immersion follows from extension-by-zero and the compactification comparison. This does not use the general purity leaf or K2.
+- The finite-base workaround additionally needs the comparison of the actual roots-of-unity Tate line with the scalar-defined Weil Tate sheaf. The analogous Sheaf `CondensedTatePairEncoding.lean` theorem is also sorry. No such comparison was found upstream.
+- First remote check will validate the open-immersion helper and the merged target module together.
+- Added `SmoothPurityDescendedTrace.lean`: constructs the finite-base condensed smooth trace as an actual morphism in the derived category of condensed Weil sheaves, using the existing compact-support/geometric-fibre comparison. Its source is still the actual root-defined condensed Tate line. This is a proved construction towards the alternate route, not a replacement assumption.
 
-# BZ72 complete
+BLOCKED: The available sources do not provide the comparison needed for the general Weil-level purity leaf. In upstream, `SmoothPurity/OrientationCanonical.lean:200` chooses an arbitrary orientation when a canonical integral lift is unavailable, and `OrientationBaseChange.lean:121` supplies only an existential Tate comparison. The required specified cyclotomic Frobenius comparison is not implied by either. The shared Sheaf route leaves precisely the needed maps/equations as sorry: `WeilSheaf/CondensedTatePairEncoding.lean` (`condensed_tate_pair_encoding`), `WeilSheaf/CondensedUnitPurityCounit.lean:79`, and `Paper/RationalWeilPurityNaturalityMate.lean:861`. Moreover the condensed comparison APIs assume X and Y separated over the field, while the unchanged leaf only assumes f separated. Continuing the finite-base trace workaround and validating the independent open-immersion case; do not mark K4 DONE on the basis of Houyi's reduction.
 
-- Unit: BZ72, branch `u9/BZ72`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, 3821 jobs.
-- Checked source commit: `1ff41157e8e837eefed5af2db7bae1d35eab175d`; this final update changes only progress documentation.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ72-final3-full.log`.
-- Fix patterns and the coordinate statement's canonical endpoint transports: `/home/ubuntu/u9/bz/FIXES-BZ72.md`.
-- The user instructed continuation after the explicit statement-adjustment proposal. All other declaration statements and existing docstrings are unchanged.
-- No local Lean/Lake execution, no sorries or trust escapes, no heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
-- Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
+## 2026-11-05 — transport audit follow-up
+- Checked the lead's FrobeniusExchange hint: those modules give scalar/operation exchange, not the missing orientation/Tate square. Recorded precise source boundaries and a continuation plan in `U9PURITYGAPS.md`.
+- Verified textually that both the target statement and its inherited binder block are byte-identical to baseline.
+- The first remote check is still queued; baseline completed and K6 currently occupies the shared tree. No local Lean/lake invocation.
+- Static import-closure audit: the three requested modules cover both new helpers and SmoothPurity/UpperShriek, but not every independent module brought in by #2087. Broader validation is still required for the merge if retaining it as an integration result.
 
-# BZ130 complete
+## 2026-11-05 02:33 +08:00 — finite root comparison
+- Added `SmoothPurityRootsNaturality.lean`: change of base-field map for `fieldToSections`, naturality of root generators at group/presheaf/sheaf levels, and the semilinear pullback equation. This is a concrete finite-level step toward the cyclotomic Tate comparison, without adding a purity assumption.
+- Queued a separate minimal `ucheck WeilConjectures.WeilSheaf.SmoothPurityRootsNaturality`; the earlier three-module check remains queued. K6's build is green and K3 currently holds the shared tree.
 
-- Branch: `u9/BZ130`; starting commit: `c958d67ac`.
-- All four assigned modules pass `ucheck-bump` together: rc=0, failed=0, 3944 jobs.
-- Validated source commit: `93bec539e906a136a2b7aa346d86bc9a7b991060`.
-  This completion update changes only progress documentation.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ130-final-full.log`.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ130.md`.
-- The user instructed continuation after the explicit statement-only proposal.
-  The local comparison in `SupportedComplexSingleRealization` now uses direct Q;
-  all other declaration statements and all existing docstrings are unchanged.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
+## 2026-11-05 02:47 +08:00 — first remote check GREEN
+- `ucheck WeilConjectures.WeilSheaf.SmoothPurityOpenImmersion WeilConjectures.WeilSheaf.SmoothPurityDescendedTrace WeilConjectures.WeilSheaf.SmoothPurity`: rc=0, slopci-w3, source commit b7e7710380.
+- Log: `/home/ubuntu/u9/logs/K4-20261105T024557.log` on ubuntu@43.131.49.250. OpenImmersion built in 24 s, DescendedTrace in 25 s, UpperShriek in 9.4 s, SmoothPurity in 7.8 s.
+- This validates the two independent helpers and the merged target module. It does not prove the remaining purity-map sorry or validate every independent file imported by the PR merge.
+- The minimal RootsNaturality check is still queued.
 
-# BZ154 complete
+## 2026-11-05 02:54 +08:00 — all new helpers GREEN; incomplete leaf
+- `ucheck WeilConjectures.WeilSheaf.SmoothPurityRootsNaturality`: rc=0, slopci-w3, source commit `b7e771038009eb21aa33c8666a4161d59f816525`. Module built in 7.9 s. Log: `/home/ubuntu/u9/logs/K4-20261105T025204.log` on ubuntu@43.131.49.250.
+- All three new K4 Lean modules and SmoothPurity are validated; the first check also validated the relocated UpperShriek. No local Lean/lake runs, no heartbeat changes, no new sorry/axiom/admit/native_decide or opacity bypass in the helpers.
+- Read the parallel C4 branch's `TateFrobeniusLevel.lean` at 378c9a1116: it uses our root-naturality helper and adds the finite cyclotomic specialization. Did not duplicate or merge that work. Its visible build attempt failed before Lean due to DBUS/XDG environment.
+- New files: SmoothPurityOpenImmersion.lean, SmoothPurityDescendedTrace.lean, SmoothPurityRootsNaturality.lean, U9PURITYGAPS.md, and this progress log. The remaining Lean changes come from the required pr/2087 merge; independent modules in that merge have not all been validated.
+- No K4.DONE written. The original target's type and inherited binder block are unchanged, but its proof still depends on Houyi's equivalent purity-map sorry. K2 now has a validated proof from K4; using K2 here would be circular.
 
-- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
-- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
-- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
-- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
-- The user instructed continuation after the exact one-line statement correction in
-  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
-- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
-  construction and homotopy-category unit. Other changes are the mandated composition
-  isomorphism migration and imports for private definitional reductions.
-- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
-- This completion commit changes only progress documentation; Lean sources match the green build.
+BLOCKED: I have not constructed the general Weil purity morphism. The missing comparison identifies the roots-defined condensed Tate line, with its descended Frobenius datum, with the scalar-defined native Tate line; the validated root-generator equation is only its finite-level input. The descended trace additionally needs geometric adjoint invertibility and extension to arbitrary coefficients. The existing condensed comparison APIs assume absolute separatedness, whereas the unchanged leaf permits nonseparated bases. The shared Sheaf primitives condensed_tate_pair_encoding and condensed_unit_purity_counit remain sorry, so they do not close these obligations. U9PURITYGAPS.md records the exact source boundaries and continuation APIs. Validated partial work is retained; the leaf is not solved.
 
-# BZ229 complete
+## 2026-11-05 — resumed; LEAD route B audited first
+- Re-read K4 brief and own notes. The new LEAD line authorizes bypassing the relative leaf by proving the user theorem nonempty_dualizingComplex_iso.
+- Traced the actual proof calls: SmoothDualizingCohomology.nonempty_smooth_dualizing_cohomology_iso -> CondensedExceptionalUnitPurity.condensed_exceptional_unit_purity -> both condensed_tate_pair_encoding (sorry) and condensed_exceptional_unit_source -> condensed_unit_purity_counit (sorry). Thus copying the interface proof would carry two unassigned sorries. Even SmoothDualizingVanishing unnecessarily uses the equivariant source theorem and its counit sorry.
+- The requested bpq union.md is not present yet; six-ours.md confirms no clean full declaration walk on the latest interface snapshot. The local and current remote interface theorem bodies agree.
+- New plan for route B: prove concentration directly from upstream nonempty_nativeGeometricForget_obj_iso_of_adjunction, geometric unit purity, and weil_geometric_hom_constructibility's exact support-interval criterion. This bypasses all Sheaf.* equivariant primitives for the concentration half. The surviving Tate cohomology/Frobenius comparison remains the substantive next obligation.
 
-- Branch: `u9/BZ229`; starting commit: `c0384594d`.
-- Assigned module: `WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointLift`.
-- The module passed `ucheck-bump`: rc=0, failed=0, 2110 jobs; target rebuilt in 10 seconds.
-- Validated source commit: `0673016c02360dade89345e38fc576c7609cf662`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ229-final-full.log`.
-- The user instructed continuation after the explicit one-token statement correction proposal.
-  Applied `.hom` -> `.inv` in the composition-factor helper to preserve its original map
-  after adopting Mathlib's reversed composition isomorphism. Other statement types and
-  all existing docstrings are unchanged.
-- Definition bodies and inverse cancellation now use the new composition orientation.
-  Two trailing `rfl` tactics after `simp` were removed. The final `rfl` after `erw` is needed
-  in this module and is retained.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ229.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
-- This completion commit changes only progress documentation; Lean source matches the green build.
+## 2026-11-05 03:03 +08:00 — concentration GREEN
+- First concentration check found a missing local smooth-base-change instance and two singleFunctor/singleFunctors instance-unfolding mismatches; fixed without heartbeat changes.
+- Second ucheck is GREEN: SmoothDualizingConcentration, log /home/ubuntu/u9/logs/K4-20261105T030227.log, source fda2a2477. This proves the concentration half of LEAD route B using upstream's geometric comparison and no equivariant purity premise.
+- Continuing the descended-trace route. The current geometric-right-adjoint comparison exposes only an unspecified object isomorphism, not counit normalization. A general free-resolution universal-arrow criterion can avoid requiring that normalization: construct the actual native trace, verify its underlying geometric universal property, then prove its adjoint invertible. Generalizing the existing validated free-resolution proof from right derived functors to arbitrary additive triangulated functors (needed for compact support).
 
-# BZ311 complete
+## 2026-11-05 03:11 +08:00 — trace transfer drafted
+- Added SmoothPurityNativeTrace: a native trace and its adjunct, using explicit native/descended source and target isomorphisms and derivedEquivCondensed fullness. The prescribed condensed-image and counit identities are included. These are constructions, not an assumption of the desired purity iso.
+- Added SmoothPurityFreeResolution, SmoothPurityTraceCriterion, SmoothPurityFreeComparison: generalized the existing free-resolution argument to arbitrary additive triangulated functors, proved the abstract free-adjunction test, and generalized invertibility of free comparison from right derived functors to any cyclic-compatible square preserving the free coproduct. This is the proposed replacement for a counit-normalized geometric right-adjoint comparison.
+- All are queued under one ucheck of SmoothPurityTransportAudit; branch pushed through 9f8dc0c33 while awaiting allocation. New files remain unvalidated until that check.
+- bpq union.md has appeared. Read its methodology: mixed text-level red-region graph plus green olean walk, not a full certification. It reports 28 residual leaves for the interface nonempty_dualizingComplex_iso after matching upstream proofs, including all four condensed/native unit-purity and encoding primitives noted by C4. This confirms direct source porting is not a solution.
+- Additional route-B integration constraint: K2's completed proof depends on K4; AffineLineBundle.nonempty_adjunction_derivedLowerShriek_of_isPullback uses K2, and FourierInversion.OtherSections uses that adjunction. Replacing only the absolute dualizing theorem does not remove this extra K4 path after K2 is integrated.
 
-- Branch: `u9/BZ311`; starting commit: `ec1bc636d`.
-- Assigned module and both downstream layers passed `ucheck-bump` together:
-  rc=0, failed=0, 1935 jobs, on `poolb:43.166.72.113`.
-- Validated source commit: `d599eea1699030daa1a58ff564ab648fb03d536e`.
-- Green modules: `WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport`,
-  `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula`,
-  and `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization`.
-- The user instructed continuation after the exact three-statement proposal.
-  Those canonical quotientCompQhIso endpoint transports are the only Lean changes;
-  all proof bodies, declaration binders, assumptions, and docstrings are unchanged.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ311-final-full.log`.
-- Fix pattern and whole-tree candidate count: `/home/ubuntu/u9/bz/FIXES-BZ311.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ311-contract-audit.txt`.
-- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
-- This final commit changes only progress documentation; Lean sources match the green build.
+## 2026-11-05 03:24 +08:00 — transport helper validation
+- First combined check at 651eefc166: FreeResolution GREEN (2.3 s); FreeComparison omitted section parameters, TraceCriterion had two rewrite/notation mismatches, NativeTrace lacked an Over.mk instance and hit elaboration timeouts. Log K4-20261105T031448.log.
+- Second combined check at 2233200838: FreeComparison GREEN (4.9 s). TraceCriterion reduced to one lambda-reduction rewrite, now fixed. NativeTrace still times out where the condensed compact-support functors use two spellings of the chosen compactification (51 s total). Log K4-20261105T032126.log.
+- Factored this conversion into condensedShriekForTrace_eq and condensedShriekForTraceIso, then separated the condensed expression from native preimage/adjunction. No heartbeat increase. Third combined check queued.
+- Rechecked field-change APIs: the unconditional dualizingComplexBaseChange invertibility theorem is for proper structural schemes. General finite-field trace universality still requires the open-compactification compatibility, or another argument for geometric adjoint invertibility.
 
-# BZ384 in progress
+## 2026-11-05 03:35 +08:00 — LEAD four-gap comparison and current checks
+- `condensed_tate_pair_encoding`: for the root-normalized Frobenius pullback coordinates p and d≥0, the condensed Tate line with p.power d is isomorphic as an IsoAlgebra to the encoding of the native constant line twisted by cyclotomicUnit^d. No smoothness is assumed. Existing upstream roots/Tate upper-star comparisons establish geometric trivialization, but not the scalar Frobenius identification; pr/2087 explicitly lists this as missing. C4 is proving the finite-root → cokernel → inverse-limit → scalar-extension calculation, using our green RootsNaturality. This is a substantive but smaller independent obligation than relative purity.
+- `condensed_unit_purity_counit`: for a given Brown exceptional-unit object E, its specified purity carrier e identifies the prescribed Tate Frobenius datum with E's counit-normalized Frobenius. Precisely, F_Y(counit) ≫ unitTheta = supportExchange(E) ≫ Rf!(F_X(e) ≫ L.str ≫ e⁻¹) ≫ counit. The upstream smoothPurityIso proves geometric invertibility only. smoothOrientation_baseChange supplies an unspecified τ, not the required root-normalized p; OrientationCanonical explicitly leaves existence of the canonical lift unformalized. The interface carrier depends on existsUniqueNormalizedFamily, which bpq's audit traces to additional unfinished primitives. No matching theorem was found in #2086/#2087/#2088. This is the main mathematical gap; descending a trace chosen over the finite field avoids this particular normalization problem.
+- `exceptional_unit_frobenius`: given R right adjoint to geometric compact support restricted to the localizing closure and unit membership, construct θ:F_X(R1)≅R1 satisfying F_Y(counit) ≫ unitTheta = exchange(R1) ≫ Rf!(θ) ≫ counit. Upstream IsoAlgebraDerivedRightAdjointCounit.exists_iso_counit_isWeilEquivariant proves the proper-direct-image analogue by restricting Frobenius and taking its mate; the unrestricted category-theoretic rightAdjointExchange/isWeilEquivariant_counit API handles arbitrary L. This gap is categorical and substantially smaller than the leaf. The finite-field descent route constructs a Weil trace directly and avoids introducing E separately.
+- `exceptional_unit_native_homology`: given E, construct a native right adjoint J to compact support together with an isomorphism in every degree between nativeHomology(J1) and pairHomology(E). UpperShriekGeometric.nonempty_nativeGeometricForget_obj_iso_of_adjunction gives the underlying complex comparison but discards counit normalization, so it does not identify Frobenius on homology. The free-resolution proof in IsoAlgebraDerivedRightAdjointCounit and Forget is the closest upstream analogue. pr/2088's new LowerShriekForget and general free-comparison criteria further reduce compact-support transfer. This is a moderate transport/coherence obligation, not solved by forgetting alone.
+- Cost decision: continue the finite-field descended trace route, sharing C4's Tate encoding, rather than port the interface's normalized-family dependency tree. This retains the same two essential mathematical obligations and replaces the two Brown/native gaps with explicit universal-arrow transfer. The clean concentration result already ports the independent half of route B. Route B still needs elimination of K4 through the K2/affine-line path, not just replacement of the dualizing user.
+- ucheck K4-20261105T032719.log: FreeResolution, FreeComparison and TraceCriterion GREEN; remaining concrete conversions failed. ucheck K4-20261105T033156.log: FreeComparisonComp GREEN (1.5s), NativeTrace GREEN (14s); FieldTrace elaborates in 8.6s with only an extra tactic after the goal was solved. Removed that tactic and requeued full transport audit. Replacing inv(component) with the natural isomorphism's inv.app eliminated the earlier 186s kernel timeout without a heartbeat increase.
+- Renamed our pasted square to traceCompForgetIso to avoid collision with pr/2088's existing Adjunction.compForgetIso. General leaf remains open; no DONE.
 
-- Branch: `u9/BZ384`; starting commit: `98654719b`.
-- Baseline remote build confirmed five errors in compositor directions in declaration types.
-- The user instructed continuation after the explicit nine-direction patch proposal.
-  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
-- Next: remote validation of the assigned module, then its three direct importers.
-- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+## 2026-11-05 03:37 +08:00 — full transport helper audit GREEN
+- Copied only the ten previously absent LowerShriekForget dependency files from pr/2088, preserving their source exactly; all existing dependency files match that PR, so no shared declarations were edited. Added SmoothPurityNativeTraceCriterion, combining its concrete compact-support free comparison with the universal-arrow test.
+- ucheck SmoothPurityTransportAudit GREEN at 4247af96b7, /home/ubuntu/u9/logs/K4-20261105T033439.log (14 modules built). A second queued check reused this tree and was GREEN at the same source (K4-20261105T033521.log). All printed axioms are [propext, Classical.choice, Quot.sound], including concentration, native trace, fieldChangedSmoothProperTrace adjunct invertibility, and isIso_homEquiv_of_geometric_trace.
+- This establishes the concrete native isomorphism criterion without assuming an equivariant purity map. Remaining bridge: identify the underlying finite-base descended trace with the canonical geometric base-changed trace. Drafting derived-unit normalization equations in SmoothPurityDescentNormalization; these should let the two independently constructed base-change comparisons be compared using their universal properties. General leaf remains open.
 
-# BZ459 complete
+## 2026-11-05 03:49 +08:00 — normalization continuation
+- Both queued normalization checks stopped before Lean because the shared ubuild.sh was temporarily syntactically invalid. Read-only bash -n now passes; resubmitted one minimal check (session 17697). No proof failure inferred from that wrapper error.
+- Added the generalized normalized-square composition proof and its use to identify the forgotten descent comparison. New SmoothPurityBaseChangeNormalization identifies the underived square with actual weakly étale base change, then derives its mate using the existing derived_exact_forget_mate theorem. These additions are pending validation.
 
-- Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects` passed
-  `ucheck-bump`: rc=0, failed=0, 2927 jobs, on `poolb:43.157.132.198`.
-- Validated source commit: `841d33dd8504561794c58471ae53351e311c9f1d`.
-- The user instructed continuation after the explicit statement API migration proposal.
-  Two obsolete compositor `.symm` uses were removed to retain the original canonical maps.
-  All proof bodies, binders, hypotheses, docstrings, and options remain unchanged.
-- Direct importer `DerivedOpenGluing` was attempted but skipped because BZ361-owned
-  `SchemeDerivedHomGluing` fails. Its four-line repair is saved at
-  `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`; committed importer source is unchanged.
-- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ459-final-full.log`.
-- Fix patterns and dependency diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ459-contract-audit.txt`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ459.DONE`.
-- This final commit changes only progress documentation after the successful source build.
+## 2026-11-05 04:08 +0800 — derived normalization and trace universality
+- Re-read the brief and LEAD lines. The four-gap comparison remains current; no statement change is authorized.
+- K4-20261105T035340.log: generalized derived-square composition GREEN (3.6 s). K4-20261105T035648.log and K4-20261105T035930.log validate all abstract descent normalization lemmas; the remaining concrete sheaf-mate conversion timed out. Replaced that final conversion by dsimp only plus exact_mod_proofs, following the measured comp_over proof-term issue reported by K5.
+- Fixed the three independent CondensedTraceCriterion errors from the last check: naturality under composed functors, explicit K-injective-resolution instances, and the source diagram in the ULift coproduct comparison. No heartbeat increases.
+- Added SmoothPurityProperRelativeTrace: a base-changed trace for arbitrary smooth proper maps and its exceptional-adjoint formula. Added SmoothPurityTraceDescent: a general formula for the forgotten descended trace and its concrete direct-image specialization, together with universal-property transport on full subcategories.
+- One ucheck SmoothPurityTransportAudit remains active (session 54805, submitted 04:01); no new K4 log yet, so it is waiting for a shared tree. Pushed current d0a2e4b8f for that pending build, whose wrapper reads the branch at allocation. These new modules are NOT yet validated.
+- Original general purity remains open. The proper trace comparison is the next integration step; C4 still owns the actual Tate encoding. No DONE written.
+
+## 2026-11-05 04:24 +0800 — proper trace assembled; build still queued
+- The single audit request from 04:01 is still waiting for a tree after more than twenty minutes. Latest completed K4 log remains K4-20261105T035930.log. No new Lean validation result is available.
+- Drafted the full proper-case transport chain: SmoothPurityTraceDescent computes the forgotten trace; SmoothPurityProperRelativeTrace/ProperTraceCoordinates prove its geometric universal property; SmoothPurityDescendedProperUniversality specializes to the actual geometric-fibre square; SmoothPurityNativeProperTrace lifts the trace and proves its native adjunct invertible, conditional on explicit native/descended source and target isomorphisms.
+- SmoothPurityCondensedCarrier now proves the equivalence of native constructibility with constructibility of the condensed carrier and constructs native realizations of such condensed Weil objects. SmoothPurityNativeDirectTraceCriterion combines the free resolution with that comparison. All these additions remain pending validation.
+- Important upstream source discovery: DualizingFieldChange/GenericPoint.lean:383, isIso_upperShriekBaseChangeOfMap_app_unit_point, proves exceptional base-change invertibility at the unit for arbitrary proper structural maps over a field extension, including a target merely isomorphic to the new base point. This removes the smooth-compactification obstacle for the absolute route. Added its direct geometric-fibre specialization in SmoothPurityProperPointTrace; deleted the redundant weaker draft SmoothPurityProperDualizingBaseChange.
+- Plan after validation: realize the descended dualizing object on the proper compactification, restrict it to the open, and identify the finite-base dualizing object with the Tate object using ordinary smooth purity. C4's Tate encoding will then identify the native source. General relative purity/nonseparated bases and the extra K2/affine-line path still require work; no DONE. Current pushed source 038497aaf.
+
+## 2026-11-05 04:31 +0800 — remote feedback and native descent continuation
+- Audit finally ran on b61ef8b6da: rc=1, /home/ubuntu/u9/logs/K4-20261105T042636.log. CondensedTraceCriterion GREEN (2.1s); all its earlier errors are fixed. Two early blockers prevented the new downstream modules from compiling: DescentNormalization omitted the ExactModProofs tactic import (unknown tactic), and CondensedCarrier used rw across equivalent geometric-fibre scheme spellings.
+- Added the explicit tactic import; replaced the carrier rewrite with composition of explicitly instantiated equivalences. New audit queued at 04:27:48 (session 4184, initial commit 6c2290cd2). Latest pushed source 95c6e2efb also includes the subsequent small native-descent assembly.
+- Added SmoothPurityNativeDescent and NativeDescentPullback: native realization of finite-base descent as a functor, and its pullback comparison. Added NativeProperDualizing: any proper right adjoint sends the descended finite-base unit to the descended finite-base exceptional unit. The latter uses the upstream proper-point base-change theorem and the explicit native trace; no smoothness assumption on the proper compactification. All these additions are pending validation.
+- Remaining absolute route: combine adjunction uniqueness for compact support with the new open restriction/descent comparison, then ordinary finite-base smooth purity; use C4's Tate comparison for the actual native source. General leaf and its K2/affine-line path still not closed.
+
+## 2026-11-05 04:38 +0800 — normalization validated; assembly audit continuing
+- Re-read the brief and LEAD lines; no new statement authorization or changed scope.
+- Audit at 06b4f8920e: rc=1, /home/ubuntu/u9/logs/K4-20261105T043410.log. SmoothPurityDescentNormalization GREEN (4.3 s), including the concrete forgotten sheaf mate; exact_mod_proofs avoided the previous concrete conversion timeout without changing heartbeats.
+- Remaining early errors: CondensedCarrier's intermediate forget functor left a derived-category instance underconstrained; BaseChangeNormalization used recursive ext too deeply and did not reduce the derived identity isomorphism. Added a typed carrier intermediate, explicit Iso/NatTrans ext, and named identity-isomorphism equations. One audit queued (session 79164).
+- Added SmoothPurityNativeDualizingDescent: proper compactification plus open pullback reduces the absolute exceptional-unit descent comparison to the proper trace theorem. Uses the clean prime-suffixed proper adjoint theorem, not K1's unprimed leaf. This and the downstream assembly remain unvalidated until the audit gets past the early dependencies.
+- C4 reports the finite/root/cokernel/tower/trivialization layers green, with pullback naturality in progress. Actual native Tate encoding is still outstanding. General relative purity and its K2/affine-line contribution remain open; no DONE.
+
+## 2026-11-05 04:44 +0800 — derived normalization GREEN
+- K4-20261105T044021.log (543768b2a3): CondensedCarrier GREEN (5.9 s). Fixed explicit NatTrans function ext, supplied the pullback proof to the derived-mate rewrite, and corrected scoped constructible notation.
+- K4-20261105T044231.log (cf262f2bd6): BaseChangeNormalization GREEN (17 s), NativeDescent GREEN (7.8 s). This now checks the complete comparison of the forgotten derived Weil descent square with ordinary weakly étale base change. The downstream errors are the fullness/faithfulness instances, one naturality rewrite, a missing OfMap import, and the new unit comparison; fixes submitted in one audit (session 72398).
+- Added DescentUnit using upstream geometricFiberPullbackCompToCondensedIso: native constant sheaf comparison requires only the canonical unit pullback cocycle. Added AbsoluteDescent assembling the actual native exceptional constant into the descended root-defined Tate object. These additions are still unvalidated, and do not yet identify the cyclotomic native Tate object.
+- No heartbeat change, no local compilation, no DONE. Current task remains the original general purity contribution; the absolute route still needs Tate encoding and the remaining affine-line user path.
+- Rechecked pr/2097: it strengthens the affine-line Thom/Fourier users from QuasiSeparated to IsSeparated bases. It does not restructure the K4 leaf. This makes a route-B replacement of the Thom USER via compact base change and K5's compact projection formula plausible once absolute Tate purity is available; the present unchanged general leaf still permits nonseparated bases. Have not merged #2097 or edited K6/K2 declarations.
+
+## 2026-11-05 04:54 +0800 — Tate interface and user-path audit
+- The single audit request (session 72398, submitted 04:44) is still queued. No new K4 build log after 044231; no downstream validation claimed.
+- Added SmoothPurityDescentSingle: a sheaf-level comparison E(G) ≅ descent(M) induces finiteBaseNativeDescent(P) ≅ G[n] whenever P.obj ≅ M[0][n]. The specialization finiteBaseNativeDescentTateIso isolates C4's actual underived Tate encoding from all derived/shift bookkeeping. Included in the pending audit.
+- Rechecked the second route-B user path: the Thom theorem can be rebuilt from compact projection formula and compact cohomology of the constant affine line. The latter can be obtained from absolute dualizing purity plus K6 homotopy and the already proved object-level Verdier exchange. This avoids the general relative purity/K2 theorem, but this replacement is not yet implemented.
+
+## 2026-11-05 05:02 +0800 — route-B assembly drafted while queued
+- Added the conditional theorem nonempty_shriekRightAdjoint_adicConstant_iso_of_tate_encoding: the complete absolute native purity conclusion follows from the underived Tate encoding. No purity hypothesis is hidden in the encoding; it compares only the root-defined finite-base Tate sheaf with the scalar-defined native Tate sheaf. This chain is still awaiting its first downstream validation.
+- Added SmoothPurityCompactConstant: the actual native closed-model unit gives tensoring with adicConstant ≅ identity; the compact projection formula then gives Rf! f* ≅ (Rf! adicConstant) ⊗ -. It uses K5's projection-formula declaration and the existing native tensor model, so its final axiom dependencies must be checked after integration.
+- Added SmoothPurityCompactHomotopy: Verdier duality identifies the dual of the constant object with the dualizing object, and ordinary constant homotopy plus absolute purity computes compact constant cohomology. The Tate/compact-support commutation proof is the existing FourierFirstFormula calculation exposed under a new name before Fourier users, to avoid an import cycle. No K2 or general relative purity theorem is used in these proofs.
+- Remaining Thom bookkeeping: identify native derived tensor by the shifted Tate object with tateTwist ⋙ shift, naturally in arbitrary complexes. The native tensor is a chosen closed model, not definitionally the existing tensorLisse functor, so this still needs a comparison. K6's completed homotopy proof is available but not yet merged.
+- Latest pushed source 6550615fe. One ucheck SmoothPurityTransportAudit is still queued (~17 minutes); latest completed K4 log remains 044231. No new sorry/axiom or local compilation. General leaf is still open; no DONE.
+
+## 2026-11-05 05:17 +0800 — Thom reduction assembled; audit running
+- Re-read the brief and LEAD lines; the four-gap comparison and route-B obligations are unchanged. Original general purity is still open; no DONE.
+- Added SmoothPurityNativeHomSingle/NativeHomShift: native representative models descend the single-source and shifted-source internal-Hom comparisons, naturally in arbitrary targets. Added NativeTensorTate/NativeTensorTateShift: uniqueness of left adjoints compares native tensor by a shifted Tate object with the existing twist-and-shift functor. These files are unvalidated drafts in the audit.
+- Added SmoothPurityThom: pullback preserves native Tate sheaves; compact constant cohomology plus the native compact projection formula gives the Thom functor; compact base change reduces trivial-line bundles to the affine line over the finite field. Added SmoothPurityAffineLineConstant: K6 homotopy plus object-level Verdier exchange and absolute purity computes that affine-line compact constant complex. No K2/general relative-purity call occurs in these new proofs. Absolute purity is still an explicit hypothesis here.
+- Merged u9/K6 (15ea4b5e4), retaining my own progress log in the add/add conflict. Merged pr/2097 (fe37e9727), accepting FourierInversion/Delta/OtherSections separated-base changes. Preserved the pr/2087 UpperShriek split and the existing proper-adjoint/affine-line leaf interfaces when resolving its older-parent changes, as required by ownership. The original K4 statement remains unchanged.
+- The one audit request submitted 04:44 was allocated at 05:14:46 to newsrv:/home/ubuntu/u9n/t2, commit e4ce5ac20d, log /home/ubuntu/u9/logs/K4-20261105T051446.log. It is rebuilding dependencies (no downstream result yet). Later commits through 01bbde633 include trivial-line base change, K6/PR2097 integration, and the affine-line constant specialization; they will require the next check.
+
+## 2026-11-05 05:23 +0800 — first full assembly feedback
+- Audit e4ce5ac20d finished rc=1, /home/ubuntu/u9/logs/K4-20261105T051446.log, 56 modules built and 6 failed. Newly GREEN: TraceDescent (6.9s), NativeDirectTraceCriterion (14s), CompactHomotopy (5.4s), ProperRelativeTrace (7.8s). Existing normalization/carrier helpers also passed on the new tree.
+- Fixed all reported entry errors: NativeHomSingle needed explicit full faithfulness of precomposition by a full essentially surjective functor (ported the existing private categorical proof to new small SmoothPurityWhiskering); CompactConstant needed map_id; DescentSingle had the scoped )⟦ lexer clash; NativeDescentPullback needed k₀ explicitly.
+- DescentUnit: corrected the cocycle rewrite direction, moved the Frobenius cancellation to an abstract automorphism lemma after a measured 63s/200000-heartbeat timeout, and bound the monoidal constructible instance inside the definition because k₀ cannot be inferred from its class head. ProperTraceCoordinates: replaced the timed-out concrete rfl by exact_mod_proofs on a fully typed reflexivity term, and made the map/base-change normalization explicit. No heartbeat increases.
+- One new ucheck SmoothPurityTransportAudit submitted at 05:22:49 (session 30648), source 8900828e3. It includes K6, the Fourier PR2097 changes, and all drafted helpers. Currently queued; no duplicate build request. Original K4 remains open, C4 encoding still outstanding, no DONE.
+
+## 2026-11-05 05:33 +0800 — dependency review while awaiting validation
+- Re-read K4.md and the progress log. No new LEAD line or change to the original statement. A text comparison confirms the K4 declaration statement remains unchanged; the only purity trust marker is PR2087's existing helper sorry.
+- Added SmoothPuritySeparatedAdjunction, using the already proved prime-suffixed proper-adjoint theorem. Added SmoothPurityThomDescent, assembling the complete trivial-line Thom result conditional only on C4's underived affine-line Tate encoding (plus the existing K5/native tensor infrastructure). This avoids K2's circular use of K4.
+- Removed an import cycle: SmoothPurityThom uses LowerShriekFunctoriality's natural base-change isomorphism directly, rather than LowerShriekPackage, which imports the Fourier user being replaced. The absolute descent chain has no import path to VerdierDual, and the Thom chain has no path to FourierInversion.OtherSections.
+- Proactively supplied the finite field explicitly in every properTraceBaseMap use in NativeProperDualizing, matching the earlier compiler diagnosis in NativeDescentPullback. Current pushed f6d95ac32.
+- One audit request remains queued (session 30648, wrapper PID 3668953); latest completed log is still K4-20261105T051446.log. No new validation claimed. C4's current plan supplies all nonnegative Tate encodings using scalar twist on the native side and tensor induction only on the condensed side. No DONE.
+
+## 2026-11-05 05:58 +0800 — concrete C4 integration prepared
+- Fetched origin/u9/C4 at 090de1fa4. C4 has drafted TateFrobeniusTwistPowers and TateFrobeniusTateEncoding; the latter's tateTwistSheafCondensedIso d ψ has exactly our required underived encoding type. Its ψ parameter is supplied directly by toCondensedAdicConstantDescentIso. These C4 additions are not yet green and are not merged.
+- Checked the combined import graph: C4's Tate encoding has no import path to VerdierDual or FourierInversion.OtherSections. Prepared /tmp/k4-route-b-integration.patch (git apply --check passes): new tiny SmoothPurityTateDescent wrapper plus replacement of the two user proof bodies. The patch is not applied yet, to keep the pending repair audit independent of C4's unvalidated chain.
+- The one ucheck from 05:22:49 is still queued, no newer K4 log after 051446. No DONE; no new compiler validation claimed.
+
+## 2026-11-05 05:58 +0800 — wrapper failure, audit resubmitted
+- The request submitted 05:22:49 ended rc=2 before Lean: /home/ubuntu/u9/ubuild.sh line 21 syntax error near `)`, reading the fragment `r '/:' '__').lock`. This is consistent with the in-place script replacement issue K5 reported; no new K4 log was created and no proof failed in this attempt.
+- Read-only bash -n of the current wrapper passes. Resubmitted exactly one ucheck SmoothPurityTransportAudit (session 54694) at 05:58. Current source bfa7615f7 before this log update; prepared integration patch remains unapplied.
+
+## 2026-11-05 06:09 +0800 — concrete assembly feedback and next audit
+- The replacement audit ran on newsrv t1 at 3f134bc007: rc=1, 38 built, 5 failed, log /home/ubuntu/u9/logs/K4-20261105T055937.log. Newly GREEN: NativeDescentPullback (7.7s), SeparatedAdjunction (4.3s). K6's affine-line/homotopy chain and CompactHomotopy passed; the upstream AffineLineConstant dependency took 312s. The earlier normalized descent/trace modules all passed again.
+- Fixed every reported failure. Whiskering now explicitly imports Mathlib.CategoryTheory.EssentialImage. CompactConstant uses the actual category functor's map_id via erw (the earlier Functor.map_id resolved to Lean's unrelated applicative functor lemma). DescentSingle now uses the inclusion's commShiftIso rather than assuming its object shifts are definitionally identical, and sets the known Over instance priority.
+- DescentUnit's underived/Frobenius proofs passed; its final native unit needs the explicit full-subcategory monoidal structure because an upstream import disables the corresponding structural instance. Bound that structure in both type and body, and supplied the same explicit structure at the point in downstream dualizing helpers.
+- ProperTraceCoordinates still hit a 66s kernel timeout with whole-iso equality. Replaced that proof with an abstract map-inverse lemma using equality of forward maps and cast_proofs; added the missing id_comp normalization. No heartbeat raises.
+- Fixes pushed through a0b9ceeae. Submitted one new ucheck SmoothPurityTransportAudit at 06:09; original and C4 helper chains remain unfinished, integration patch remains unapplied, no DONE.
+
+## 2026-11-05 06:21 +0800 — two more helpers green; four entry repairs
+- Audit at 781c07da1d finished rc=1, log /home/ubuntu/u9/logs/K4-20261105T061458.log. Newly GREEN: CompactConstant (6.1s), Whiskering (1.0s). DescentSingle's shifted-sheaf comparison and DescentUnit's underived/Frobenius comparison also elaborate; the four modules still fail at subsequent interfaces.
+- ProperTraceCoordinates still spent 64s in concrete kernel reduction. Moved the inverse-component identity into an abstract liftExchange lemma so its application can use the actual restricted exchange data directly. Added the remaining identity normalization.
+- DescentSingle now specifies X explicitly to avoid inference through Over.mk.left. DescentUnit binds a typed IsMonoidal instance and uses the monoidal inclusion's unit iso. NativeHomSingle explicitly imports the existing right-derived-functor naturality lemma.
+- Re-read the brief and skill. No new LEAD instruction, no heartbeat raises, and no local Lean/lake invocation. Submitting the next audit; C4 integration remains prepared but unapplied, and no DONE is claimed.
+
+## 2026-11-05 06:26 +0800 — native unit and shifted descent GREEN
+- Audit a67976d0cf finished rc=1, log /home/ubuntu/u9/logs/K4-20261105T062319.log, four modules built and two failed. DescentSingle is GREEN (6.4s), including the Tate specialization. DescentUnit is GREEN (131s), including the actual underived Frobenius-compatible unit comparison and its derived native-unit realization.
+- ProperTraceCoordinates now finishes in 12s with no kernel timeout: its abstract inverse lemma is accepted, but the local IsIso instance needs the same unfolding as the goal. Applied dsimp to that named instance and normalized the remaining identity-functor object.
+- NativeHomSingle now finds the naturality lemma; its unspecialized rewrite hit an elaborator isDefEq timeout. Specified the functor F and the morphism g.hom explicitly. No heartbeat increase.
+- Also pinned X explicitly in downstream AbsoluteDescent/NativeProperDualizing/NativeDualizingDescent to avoid the Over.mk.left inference failure just repaired in DescentSingle. These downstream files remain unvalidated until entry modules pass. One new audit follows; no DONE.
+
+## 2026-11-05 06:30 +0800 — proper trace coordinates GREEN
+- Audit aeb22581c finished rc=1, log /home/ubuntu/u9/logs/K4-20261105T062757.log, three built/two failed. ProperTraceCoordinates is now GREEN (17s), including inverse exchange and levelwise universal-property transport. No kernel timeout remains in that module.
+- The check reaches DescendedProperUniversality; its final all-at-once exact term hits a 200000-heartbeat whnf timeout. Split the levelwise bijectivity and coordinate-transport applications, explicitly supplied the proper pushforward functor, and normalize associativity separately.
+- NativeHomSingle still times out rewriting the concrete right-derived naturality square, even with explicit arguments. Reassembled the natural isomorphism from three individually typed natural isomorphisms: representative model, single-complex projection, and K-injective derived evaluation. The last naturality proof now directly applies the inverse evaluation lemma, without rewriting a large composite expression.
+- No heartbeat raises. Next single audit follows; no DONE.
+
+## 2026-11-05 06:35 +0800 — timeouts replaced by explicit normalization goals
+- Audit log /home/ubuntu/u9/logs/K4-20261105T063140.log finished rc=1, two built/two failed. Both refactored proofs now reach ordinary type mismatches without timeouts.
+- NativeHomSingle's new projection and injective-evaluation naturality proofs pass; only the representative-model square needs its composed functor maps changed to explicit model coordinates. Applied that normalization, and the same one to the parallel model square in NativeHomShift before it is reached.
+- DescendedProperUniversality now exposes only composed-functor objects and the identity functor applied to N. Added those two object normalization lemmas to the final simpa. Resubmitting the audit; no heartbeat raises or DONE.
+
+## 2026-11-05 06:45 +0800 — native single-source Hom GREEN; new downstream feedback
+- Audit /home/ubuntu/u9/logs/K4-20261105T063942.log finished rc=1 (source 18f6b8d34), four built/three failed. NativeHomSingle is GREEN (8.1s), including both natural derived Hom comparisons.
+- NativeHomShift reached its target-naturality proof: generic ext chose the concrete sheaf-element extensionality lemma too early. Restricted ext to the complex degree, then applied bifunctorHomObj_hom_ext explicitly. Made its computational helpers public because Lean's exposed public definition cannot access the private comparison definition.
+- NativeTensorTate's derived-adjunction inference requested an irrelevant underived monoidal instance. Now use an explicitly typed equivalence and its induced derived equivalence's adjunction.
+- DescendedProperUniversality's object normalization now elaborates, but kernel checking times out (62s). Replaced the concrete rewrite of a large Bijective proposition with a generic categorical trace-coordinate transport lemma; the specialization passes the known trace equation and known universal property separately. No heartbeat changes.
+- The 06:34 audit was delayed in git push by server responsiveness, then ran normally. One next audit follows; no DONE.
+
+## 2026-11-05 06:50 +0800 — shifted Hom GREEN; predicate-level trace assembly
+- Audit /home/ubuntu/u9/logs/K4-20261105T064603.log finished rc=1, three built/two failed. NativeHomShift is GREEN (5.0s), including the natural shifted-source internal-Hom comparison. NativeTensorTate now needs only explicit E.functor/E.inverse additivity instances at the derived-equivalence construction; supplied them.
+- The generic trace-coordinate proof still left a 63s kernel timeout in DescendedProperUniversality. Introduced the ordinary transparent predicate Functor.TraceUniversalAt, forming the hom-map over abstract categories, and restated only these new helper declarations through it. Updated the sole native consumer to unfold that predicate before its proof-irrelevance comparison. The assigned K4 theorem's statement is unchanged.
+- This follows the performance guide's predicate-level specialization approach (also successful for K5's normalization); no opaque barrier or heartbeat increase. Next single audit follows. No DONE.
+
+## 2026-11-05 06:57 +0800 — isolate two kernel conversions
+- Audit at 25bd38bc2 finished rc=1, log /home/ubuntu/u9/logs/K4-20261105T065300.log. Both entry proofs elaborate, but DescendedProperUniversality still has a 63s kernel timeout, and NativeTensorTate now reaches an 84s kernel timeout. The transparent predicate alone did not repair the first conversion.
+- Moved the trace-coordinate assembly to an arbitrary coefficient object Λ, so the concrete ℚ̄_ℓ theorem only applies that named theorem and the already validated levelwise universal property. This isolates the derived descent/forget conversion from the concrete coefficient object.
+- Split NativeTensorTate into named scalar-derived adjunction, underived Hom, derived Hom, and native tensor-coordinate comparisons. The next audit will identify which piece incurs the expensive kernel conversion.
+- Re-read the performance guide. No heartbeat raises, opaque barriers, or local compilation. C4's latest reachable build still fails in the Tate Weil-structure equation; integration remains unapplied. No DONE.
+
+## 2026-11-05 07:02 +0800 — geometric universality GREEN
+- Audit 7f51b1b74f finished rc=1, /home/ubuntu/u9/logs/K4-20261105T065604.log, 22 built/two failed. DescendedProperUniversality is GREEN (17s); arbitrary-coefficient abstraction resolves the repeated kernel timeout. ProperPointTrace is GREEN (8.6s). DescentUnit, HomSingle, HomShift, compact homotopy, and K6 homotopy also passed on this different tree.
+- NativeProperTrace needs six geometric-fibre scheme instances and local full-faithfulness witnesses; added them following the already validated direct-trace criterion.
+- Splitting the Tate proof located its 82s kernel timeout precisely in constantTwistDerivedAdjunction. Replaced the induced equivalence construction by direct transport of the two inverse functor isomorphisms, with a generic categorical adjunction constructor. Corrected one line-break field-notation parse error in nativeHomTateIso. No heartbeat raises.
+- C4 fetched read-only at bbf806c5f; encoding not yet green or merged. Next single audit follows; no DONE.
+
+## 2026-11-05 07:05 +0800 — native Tate tensor GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T070103.log finished rc=1, three built/two failed. NativeTensorTate is GREEN (3.5s): transporting the explicit inverse functor isomorphisms avoids the previous 82s kernel timeout.
+- NativeTensorTateShift has one product-naturality goal left; normalized its two identity components explicitly. NativeProperTrace now passes full faithfulness, but its geometric-fibre instance heads need the exact Over.mk spelling and priority. Added those and reduced composed functor objects before exact_mod_proofs in the universal-property specialization.
+- No heartbeat raises or DONE; next single audit follows.
+
+## 2026-11-05 07:05 +0800 — isolate native trace universality
+- Audit /home/ubuntu/u9/logs/K4-20261105T070301.log finished rc=1, five built/two failed. The geometric-fibre instance errors are gone; NativeProperTrace now reaches a 200000-heartbeat whnf timeout (31s). Split condensed universality from the final full-faithfulness adjunction argument and enabled profiling on the new helper to identify any remaining costly check.
+- Shifted tensor's map_id rewrite needs the stronger transparency used in the earlier CompactConstant fix; changed rw to erw. No heartbeat raise, no DONE.
+
+## 2026-11-05 07:11 +0800 — shifted Tate tensor GREEN; profile locates trace cast
+- Audit /home/ubuntu/u9/logs/K4-20261105T070448.log finished rc=1, three built/two failed. NativeTensorTateShift is GREEN (6.6s). Thom reached only a missing toComplex/pullback interface and two unresolved k₀ arguments; supplied the comparison directly with mapDerivedCategorySingleFunctor and pinned k₀/l.
+- The profiled native trace module took 263s including a very verbose trace (913k log lines). Its proof elaboration timed out at the final exact_mod_proofs hu (12.7s for that tactic, 24.4s total proof), not at the preceding dsimp (0.015s). Replaced the minimal-subterm cast tactic by cast_proofs, whose outermost proof comparison avoids traversing the deep exceptional-base-change proof terms. Removed profiling (and its misplaced doc-comment wrapper).
+- No heartbeat raises. Full absolute/Thom assembly and C4 encoding remain pending; no DONE.
+
+## 2026-11-05 07:13 +0800 — finite-base Weil universality interface
+- Audit /home/ubuntu/u9/logs/K4-20261105T071051.log finished rc=1. cast_proofs still reaches the 200000-heartbeat whnf timeout in native universality (26s). Thom's comparison repairs pass, but its last trivial-line specialization times out (13s).
+- Added SmoothPurityDescendedWeilUniversality: apply the free Weil resolution entirely in the finite-base Over coordinates, then export its universal property through TraceUniversalAt. The native helper now only specializes that theorem, avoiding a comparison of the expanded native and Over geometric universal-property statements.
+- Pinned k₀/l and structural-map instances in the remaining Thom specialization. Added the new universal-property theorem to the eventual axiom audit. No heartbeat raises or DONE.
+
+## 2026-11-05 07:15 +0800 — native proper trace GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T071238.log finished rc=1, four built/two failed. DescendedWeilUniversality is GREEN (13s), and NativeProperTrace is GREEN: proving the free-Weil universal property in finite-base coordinates removes the native conversion timeout.
+- NativeProperDualizing then hit an import-time collision between generated local instance names in the new file and ProperPointTrace. Assigned explicit unique names to the new local instances.
+- Thom's final trivial-line theorem still times out (18s). Split the compact constant-object computation from the projection-formula application, and gave the base-change component its explicit object-level type. This will identify and shorten the costly conversion. No heartbeat raises or DONE.
+
+## 2026-11-05 07:18 +0800 — Thom reduction GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T071436.log finished rc=1, five built/two failed. SmoothPurityThom is GREEN (14s), including compact base change of the constant object and the full trivial-line Thom functor conditional on affine-line compact constant cohomology. NativeProperTrace remains GREEN; instance-name collision resolved.
+- AffineLineConstant needs the point adjunction written using the structural morphism appearing in its HasUpperShriek hypothesis. Replaced the separately written identity arrow by that structural morphism.
+- NativeProperDualizing could not synthesize the IsIso exceptional-base-change proof across its point-unit coordinates. Made the new native criterion's base-change proof argument explicit and passed the existing proper-point theorem directly. The assigned leaf's statement is unchanged.
+- Next single audit follows; no heartbeat raises or DONE.
+
+## 2026-11-05 07:20 +0800 — proper dualizing descent GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T071716.log finished rc=1, four built/one failed. AffineLineConstant is GREEN (23s), NativeProperDualizing is GREEN (8.3s), and NativeProperTrace remains GREEN with the explicit exceptional-base-change proof argument.
+- NativeDualizingDescent now reaches a whnf timeout (15s) in the compactification assembly. Extracted nativeOpenDualizingDescentIso over arbitrary open immersions, keeping the finite-base pullback/dualizing comparison independent of the chosen compactification. Pinned k₀/l in the remaining adjunction and descent calls.
+- No heartbeat raises or DONE. C4 build-26 remains failed on diagnostic kernel conversions; actual encoding is still unmerged.
+
+## 2026-11-05 07:22 +0800 — correct the compactification comparison
+- Audit /home/ubuntu/u9/logs/K4-20261105T072007.log finished rc=1, one module failed. The new arbitrary-open descent comparison elaborates; the remaining timeout is in the compactification wrapper.
+- Comparing against the already GREEN SeparatedAdjunction helper identified a real interface mismatch: compact pushforward is related to extension-by-zero followed by proper pushforward through derivedLowerShriekCompιIso, rather than the reflexivity iso used in the draft. Replaced that attempted conversion by the specified comparison and its naturality proof, exactly as in SeparatedAdjunction.
+- No heartbeat raises or DONE; next audit follows.
+
+## 2026-11-05 07:23 +0800 — profile the remaining compactification conversion
+- Audit /home/ubuntu/u9/logs/K4-20261105T072125.log still reports the same 15s whnf timeout in the compactification wrapper. The specified compactification comparison is now in place, but another conversion remains.
+- Enabled profiling only for this theorem, with a 5000ms threshold to avoid the earlier verbose trace. No heartbeat raise; current task remains unfinished.
+
+## 2026-11-05 07:25 +0800 — compactification timeout localized
+- Focused profile /home/ubuntu/u9/logs/K4-20261105T072239.log (rc=1, 15s) isolates 11.17s in expected-type propagation for the final `(upperStar c.i).mapIso eZ`. Its implicit k₀/l were still metavariables while unification compared a composed right adjoint at the point with an object over c.Z.
+- Pinned those parameters and bound the mapped isomorphism before composing it with eR. Removed profiling. The earlier compactification construction and open-descent helper both complete before that final step.
+- No heartbeat raises; next full helper audit follows. No DONE.
+
+## 2026-11-05 07:26 +0800 — compactification descent GREEN
+- Audit /home/ubuntu/u9/logs/K4-20261105T072419.log finished rc=1, two built/one failed. NativeDualizingDescent is GREEN (6.1s), including arbitrary open restriction and compactification assembly. Explicitly typing the last open pullback resolves the measured 11s unification timeout.
+- AbsoluteDescent is now reached and reports one ordinary mismatch: smoothness of the structural morphism must be rewritten through Over.mkIdTerminal_from_left. Applied the same normalization already used by the validated concentration helper.
+- No heartbeat raises or DONE; next audit follows.
+
+## 2026-11-05 07:27 +0800 — structural smoothness normalization
+- Audit /home/ubuntu/u9/logs/K4-20261105T072525.log reaches only the same smoothness instance: the terminal-arrow rewrite leaves Over.mk.left and Over.mk.hom projections. Added their explicit simp lemmas. No other AbsoluteDescent error was reported; next audit follows.
+
+## 2026-11-05 07:29 +0800 — full helper audit GREEN
+- ucheck SmoothPurityTransportAudit at 339f162b9 completed rc=0, three newly built modules, log /home/ubuntu/u9/logs/K4-20261105T072651.log. AbsoluteDescent (9.7s), ThomDescent (5.1s), and the complete transport axiom audit (3.0s) are GREEN.
+- The absolute exceptional-unit descent theorem and its Tate-encoding specialization have only propext, Classical.choice, Quot.sound: no sorryAx, including compactification and proper adjoints. The Thom route still sees existing native tensor/projection/Verdier dependencies, to be enumerated before completion; no K2 call was added.
+- C4's actual Tate encoding remains unmerged/unvalidated: latest reachable diagnostic log C4-20261105T072538.log still times out in a module scalar-extension instance conversion. The final user replacement patch remains prepared but unapplied. General K4 leaf unchanged; no DONE.
+
+## 2026-11-05 07:35 +0800 — explicit dependency and coverage checks
+- Additional module check K4-20261105T072945.log built HomotopyInvariance.AxiomAudit (3.0s) and SmoothPurityOpenImmersion (4.3s); RootsNaturality was cached. The batch returned rc=1 solely because the automatically selected changed-file list included FullyFaithful.lean, a file deleted by the merged PR. Removed that nonexistent target from the coverage plan.
+- Added a command-only SmoothPurityDependencyAudit to enumerate direct sorry dependencies of the conditional Thom theorem and reject any use of K2 or the relative K4 leaf. It introduces no mathematical declaration and does not affect the proof.
+
+## 2026-11-05 07:36 +0800 — coefficient abstraction and proof-body audit
+- Corrected-target check K4-20261105T073057.log is GREEN (rc=0): HomotopyInvariance.AxiomAudit, SmoothPurityOpenImmersion, RootsNaturality, and the first dependency-audit command. That audit was not conclusive because ordinary module imports omit theorem bodies; it now detects this and requests import-all bodies. Expanded the command's imports to the WeilSheaf portion of the existing Thom import closure, without changing mathematical dependencies.
+- New SmoothPurityScalarPullback abstracts the module extension and its unit over arbitrary Λ. Both abstract definitions compile; their concrete Tate-module specialization still hits an explicit kernel timeout (62s, K4-20261105T073418.log), after the two missing imports were repaired.
+- Having reread the performance guide and isolated the failure to that single conversion, testing a scoped 400000-heartbeat budget for just purityTateModuleTrivialization (default 200000), with the same statement and transparent proof. No kernel bypass or opacity; the main absolute-purity/Thom helper chain still uses the default budget. This helper is an experiment to assist C4, not a completed encoding.
+
+## 2026-11-05 07:38 +0800 — Thom dependency boundary located
+- Expanded dependency audit in K4-20261105T073637.log sees 1788 declarations and locates exactly K5 (nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso) and K7 (native_weil_tensor_ringed_swap_localization) as direct sorry uses so far. Two CategoryTheory/Native modules still hide relevant proof/projection bodies; added import-all for those to complete the audit. K2 and the relative K4 theorem have not been encountered.
+- Scalar-pullback experiment continues its scoped 400000-heartbeat check; C4 remains independently active on its instance alignment. Integration patch still unapplied.
+
+## 2026-11-05 07:40 +0800 — scalar specialization still costly
+- Scoped 400000-heartbeat experiment still times out in the concrete Tate-module specialization (104s, K4-20261105T073637.log). Removed that experimental specialization and the heartbeat override, retaining only the abstract unit, abstract extension-iso comparison, and their unit equation, which emitted no errors. Reproducer saved outside the repository at /tmp/k4-scalar-pullback-timeout.lean. No heartbeat raises remain in K4's new helpers.
+- The complete dependency audit now imports the two previously unavailable native proof modules and will reject any unresolved body as well as K2/K4 use. Next check includes the top-level WeilConjectures module to cover the remaining modules brought in by the authorized upstream merges.
+
+## 2026-11-05 07:46 +0800 — complete Thom declaration audit
+- SmoothPurityDependencyAudit in current top-level build K4-20261105T073946.log now inspects 1789 declarations with NO unavailable proof bodies. Its exact direct sorry set is K5 nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso and K7 native_weil_tensor_ringed_swap_localization. The guard confirms no K2/general-K4 dependency.
+- Reduced the audit's import-all list to the modules whose proof bodies it actually inspected. The top-level build is still running, with projection, tensor pullback, Fourier, cohomological range, and curve users already green.
+- Prepared a revised scalar-extension helper whose input is formed in the weakly-etale instance context before specializing Λ; this targets the actual instance crossing, unlike the earlier helper without a weakly-etale hypothesis. Next tiny check will validate it with the ordinary heartbeat limit.
+
+## 2026-11-05 07:51 +0800 — top-level build GREEN
+- ucheck WeilConjectures + SmoothPurityDependencyAudit + SmoothPurityScalarPullback at 24fc7af431 finished rc=0, 131 modules built, 34482 jobs, log /home/ubuntu/u9/logs/K4-20261105T073946.log. This validates all current downstream users and the extra projection/base-change modules inherited from PR merges.
+- Exact conditional Thom sorry dependencies are K5 and K7 only; no inaccessible bodies and no K2/K4 use. The three original generic scalar-pullback helpers also passed (4.2s).
+- Pending edits only reduce/strengthen the audit command and test new scalar helpers (weakly-etale context and variable topological ring before specializing ℤ_l). They are not part of the validated main proof yet. C4 remains unmerged and the downstream integration patch unapplied; no DONE.
+
+## 2026-11-05 07:56 +0800 — specialization boundary confirmed
+- Reduced/strengthened dependency audit remains GREEN in K4-20261105T075231.log. ScalarPullback's abstract weakly-etale and variable-topological-ring helpers all pass, but both concrete ℤ_l specializations still have kernel timeouts (69s total). Removed these failed specializations from the stable helper file; saved the reproducer in /tmp/k4-scalar-pullback-specializations.lean.
+- Next check isolates two concrete instance choices in separate tiny files (canonical PadicInt CommRing, raw sheaf monoidal/braided instances), with kernel diagnostics and the default heartbeat budget. This avoids sharing a failed generated proof between control cases. Main chain and top-level build stay GREEN at their recorded commits.
+
+## 2026-11-05 08:00 +0800 — concrete instance pins do not fix the unit
+- K4-20261105T075618.log validates the stable generic ScalarPullback module but both concrete unit probes still time out (45s each): canonical PadicInt CommRing and raw Sheaf monoidal/braided instances. Removed the failed probe files, saving copies in /tmp. No heartbeat overrides or profiling remain in the stable helper.
+- C4's isolated 4000000-heartbeat concrete-unit diagnostic (Diag33, C4-20261105T074812.log) is still running. Next small test uses the existing functor-level upperStarForgetIso and its component instead of constructing the scalar-extension unit directly.
+
+## 2026-11-05 08:04 +0800 — functor comparison succeeds, component conversion fails
+- IntegralPullbackComparison in K4-20261105T080048.log proves purityIntegralPullbackForgetIso at the concrete ℤ_l coefficients. Only its explicitly typed component has a kernel timeout (42s). This locates a conversion below the functor-level comparison.
+- Removed the component's expanded result-type annotation (inferred result remains the actual isomorphism component). Added an explicit integral-extension functor and a functor-level pullback factorization; the root trivialization is now transported along that factorization, rather than relying on a final object-level conversion. Default heartbeat budget throughout.
+
+## 2026-11-05 08:15 +0800 — explicit factorization verdict
+- K4-20261105T080333.log (rc=1,123s): inferred component, separate integral-extension functor, and factored Tate trivialization all still fail kernel conversion; the functor-level forget isomorphism continues to pass. Saved unsuccessful bodies at /tmp/k4-integral-pullback-factor-timeout.lean.
+- C4 independently confirms the generic-helper specialization also fails (C4-20261105T080547.log). A 4-million-heartbeat integral-unit check already failed after921s, so larger budgets are excluded.
+- Next small probe fixes the commutative-monoid proof directly in ring-sheaf coordinates, targeting the generic CommRing-to-Ring specialization rather than changing the underlying mathematics. Actual Tate encoding and user replacement remain pending; no DONE.
+
+## 2026-11-05 08:12 +0800 — upstream documents the workaround
+- The previous 08:15 timestamp was estimated incorrectly; the actual clock was 08:10 when that check ran. K4-20261105T080943.log confirms the direct integral commutativity proof passes but the unit still times out (42s). Removed the failed unit/temporary instance; retained only the validated functor comparison.
+- Crucial existing implementation note: TateTwist/TateModuleUpperStar.lean:40–47 documents exactly this kernel timeout and solves it by specializing the integral ring ONLY after changing coefficients to ℚ̄_l. Prepared the analogous generic coefficient-change/root-trivialization construction, with a concrete result mentioning only rational pullback modules. This differs from the failed specializations with integral result types.
+
+## 2026-11-05 08:12 +0800 — rational trivialization GREEN
+- SmoothPurityRationalTrivialization is GREEN, rc=0, log /home/ubuntu/u9/logs/K4-20261105T081138.log. The first check only needed the explicit local Mod.extendScalarsMonoidal instance. Concrete purityRationalTateTrivialization specializes Λ=ℤ_l AFTER extending coefficients; both source and target are Qbar pullbacks, and no kernel timeout occurs.
+- This confirms the workaround documented in upstream TateModuleUpperStar. Next: carry the Frobenius relation generically through coefficient extension and specialize its Qbar-only conclusion. No actual Weil encoding/DONE yet.
+
+## 2026-11-05 08:18 +0800 — generic law and Tate integration drafts
+- ScalarWeilLaw check submitted at869060668 is queued (remote ubuild PID1648387; no allocated log yet). No duplicate check submitted.
+- Added generic coefficient-change Frobenius coherence and scalar-law transport, using C4’s formal transport argument with Λ left abstract. Added a normalized unit-target version for the validated rational trivialization.
+- Copied C4’s six GREEN root modules unchanged from fetched fb1a1a08e329. Prepared new SmoothPurityTateWeilLaw/Powers/Encoding integrations, with distinct declaration names in the latter two to avoid collisions with C4’s still-unvalidated final files. These are drafts, not a completion claim.
+- Shared the concrete GREEN workaround and commit in both local and Weil shared NOTES. Original user-proof replacement patch remains unapplied and the general leaf unchanged. No DONE.
+
+## 2026-11-05 08:21 +0800 — generic Frobenius law rewrite repair
+- K4-20261105T081728.log rc=1 (131s) validates the rational comparison again, then reports two rewrite failures in ScalarWeilLaw: rewriting Functor.comp_obj inside a dependent identity motive, and an associativity mismatch caused by the unfolded composite-unit abbreviation. A kernel timeout followed the failed law proof.
+- Replaced the first proof by a fully generic isomorphism-square lemma, named the composite unit with a transparent def, and made its IsIso instance explicit. Aligned the weakly-etale instance choice across the whole file. No heartbeat changes. Next check includes the drafted coefficient-change and actual Tate encoding chain so further independent errors appear in one batch.
+
+## 2026-11-05 08:24 +0800 — small generic rewrite boundary
+- K4-20261105T082207.log rc=1 (11s for ScalarWeilLaw): stable generic/rational helpers GREEN, copied C4 root modules replayed successfully. Kernel timeout is gone. Two elaboration failures remain: conversion of the inverse-square hypothesis into the categorical helper, and rewrite matching through the transparent purityPullbackUnit wrapper.
+- Returned the structure proof to the direct inverse cancellation, omitting only the offending dependent Functor.comp_obj rewrite; gave the unit equation an explicit original-unit type before rewriting. New final encoding still pending.
+
+## 2026-11-05 08:24 +0800 — two associativity conversions
+- K4-20261105T082324.log reaches only two rewrite mismatches (2.2s, no timeout): the identity on a functor-composition object needs an explicit reducible rewrite, and the expanded two-unit composite needs its right-associated structure equation. Repaired with erw for the identity and an explicitly normalized local equation for N.
+
+## 2026-11-05 08:28 +0800 — abstract the geometry of the factorization
+- K4-20261105T082423.log rc=1 (124s) shows the expanded geometric formula still times out: whnf at identity cancellation, plus kernel checking the scalar-law proof. The coefficient-general rational isomorphism remains GREEN.
+- Recast the factorization/unit/scalar-law calculation for arbitrary p:U→X, s:U→U and hs:s≫p=p. The finite-field geometric Frobenius version is now a single application of that abstract theorem. This avoids expanding the actual pullback-based geometric Frobenius inside the diagram calculation. Enabled local-file profiling at a 1000ms threshold for attribution; no heartbeat increase.
+
+## 2026-11-05 08:34 +0800 — comparison type boundary
+- K4-20261105T082916.log rc=1 (142s) shows geometry abstraction alone did not fix the conversion. Profile: 9.92s whnf at the inverse-square hypothesis application, 128s kernel in the scalar law; the finite-field wrapper also hits whnf.
+- Added an explicit composite-functor result type to purityFactorUnit so its target exactly matches the natural-isomorphism component. Factored forgetting a module iso through a generic transparent helper, inferring its monoidal data from the given module iso. Profiling remains scoped to this file; no heartbeat increases.
+
+## 2026-11-05 08:38 +0800 — use the library instance convention
+- K4-20261105T083403.log rc=1 (115s): explicit composite object types and the generic underlying-iso wrapper did not resolve the boundary. The same inverse-square hypothesis conversion takes9.43s and the scalar proof times out in kernel (103s).
+- Removed our weakly-etale instance-priority override from the new transport files and generalized their core helpers to arbitrary morphisms, using the original GREEN purityExtendPullbackIso. The weakly-etale assumption remains only where the roots theorem needs it. This aligns the core comparison with the upstream generic pullback/forget theorem instead of forcing an alternate instance path.
+- Factored the scalar diagram into SmoothPurityScalarSquare, a purely preadditive-category lemma; the sheaf proof now supplies the two structure equations, the unit equation, and one naturality square. No heartbeat increase; final encoding still unvalidated.
+
+## 2026-11-05 08:44 +0800 — LEAD re-plan to PR2110
+- Reread the new LEAD directive and C4 proposal. Accept split: K4 studies canonical-orientation existence / integral reduction lifting and trace normalization; C4 handles uniqueness-to-equivariance and Frobenius stability; C1 owns the Frobenius-structure/Tate transport.
+- Previous check K4-20261105T084042.log rc=1 stops at a missing parenthesis in the pure scalar diagram calculation; fixed it, but no claim that the untested transport chain is green. Preserve that work for C1.
+- Merge pr/2110 next as directed; target now exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso. No DONE.
+
+## 2026-11-05T08:44:53.649948+08:00 — PR2110 sanity and canonical lift
+- PR2110 merged at9cd901d78. SmoothPurity sanity target passed in K4-20261105T084253.log; that batch rc=1 only at the older ScalarWeilLaw (same comparison timeout, plus a unit rewrite). Do not treat that transport draft as green.
+- New SmoothPurityCanonicalLift reconstructs the prescribed finite orientation from its canonical reduction-transition equation, then applies derived Nakayama to prove invertibility and rational canonical existence. This is conditional until the transition equation is proved.
+- Source audit: the named orientation_existsUnique in RationalSmoothPurityCanonical is a sorry inside an archived comment; its active Native section uses normalizedFamily, a different object route. Upstream coefficient-reduction orientation theorem still asks for hframe, hε, hL and a Tate-shift comparison datum. Existence cannot be obtained from that theorem without supplying them.
+
+## 2026-11-05T08:48:34.795576+08:00 — archive superseded transport drafts
+- Removed the six unvalidated scalar-Weil/Tate encoding drafts from the working branch after handing that task to C1. They remain recoverable at59564f4f66, with performance measurements in this log. Retained GREEN scalar square, rational trivialization, and all six GREEN C4 roots modules.
+- Drafted SmoothPurityTraceNormalization: the prescribed finite orientation equation is equivalent to its finite counit-trace normalization using the actual mate-defined exceptional comparison. CanonicalLift first build remains running.
+
+## 2026-11-05T08:50:33.531825+08:00 — first canonical lift check
+- K4-20261105T084515.log rc=1 (259s): finite orientation preimage and the mod-ell isomorphism criterion produce no errors. Inferred ambient-iso result exceeded recursion depth; a missing parenthesis in cancel_mono caused two application errors and a downstream whnf timeout. Added the precise ambient result type and explicit reduction inclusion, and fixed the parenthesis. No resource-budget raises.
+- Next check includes the trace-normalization file and the rational normalized-orientation isomorphism criterion.
+
+## 2026-11-05T08:57:59.399006+08:00 — reconstruction comparison split
+- Reread K4 brief: PR2110 remains the latest LEAD target. Last check K4-20261105T085034.log failed in CanonicalLift (272s): ambient-iso recursion limit and concrete Mono instance synthesis timeout; TraceNormalization was not reached.
+- Split finite orientation/Nakayama lemmas into SmoothPurityCanonicalFinite so trace work checks independently. Added generic comparison transport and cancellation in SmoothPurityReductionComparison, and used them in the integral lift. No resource raises.
+- Canonical reduction-transition compatibility remains a mathematical input; no completion claim.
+
+## 2026-11-05T08:59:13.469885+08:00 — constrained inverse-limit workaround
+Possible smaller existence route for the PR2110 existential target: use Konig on finite sets of Frobenius-equivariant orientation isomorphisms, rather than on the SINGLE prescribed canonical orientation. This avoids proving canonical finite orientation coefficient coherence hframe/hepsilon/hL. LiftIsomorphisms.exists_forall_isIso_derivedReduction_map already proves the unconstrained version; I am adding a constraint-preserving version. Need (a) finite-level equivariant isos, (b) ordinary reduction naturally preserves the equivariance equation, (c) shifted-Hom finiteness for joint faithfulness of reductions. This still needs Houyi/C1 comparison data, but not canonical orientation uniqueness. CanonicalLift/TraceNormalization are in check K4-085800; generic reduction comparison is GREEN.
+
+## 2026-11-05T09:01:21.361578+08:00 — precise failure location and constrained lifting
+- K4-20261105T085800.log rc=1: ReductionComparison GREEN (0.9s); CanonicalFinite failed at map_preimage (152s). CORRECTION to previous diagnoses: line79 in3359 was the finite reading equation, NOT the ambient iso definition. Removed unused reassoc generation, unfolded only the preimage-iso constructor, and supplied the mapped morphism explicitly.
+- Added SmoothPurityFiniteChoice and SmoothPurityConstrainedLift: Konig choice for finite nonempty subsets preserved by transitions; lifts isomorphisms satisfying any reduction-stable property; equality detection retains the necessary shifted-Hom finiteness hypothesis. These are pending checks, and the geometric equivariance inputs remain unproved.
+
+## 2026-11-05T09:04:42.534952+08:00 — retain the finite reading equation as data
+- K4-20261105T090122.log rc=1: FiniteChoice missed Mathlib.CategoryTheory.Functor.OfSequence (fixed). CanonicalFinite map_preimage still exceeds recursion depth with explicit morphism (119s).
+- Changed its construction to a generic subtype carrying the lifted isomorphism together with the reading equation; concrete proof now projects that equation. No opacity or budget changes. Added finite_hom_derivedReduction_integralOrientation by extracting the existing finite endomorphism argument.
+
+## 2026-11-05T09:06:29.929709+08:00 — finite orientation and finiteness GREEN
+GREEN at ef09cfe05c in K4-20261105T090443.log: SmoothPurityCanonicalFinite (27s: isIso_of_isIntegralSmoothOrientation, isIso_of_isCanonicalSmoothOrientation, prescribed finite iso and map equation), SmoothPurityReductionHom (11s: finite_hom_derivedReduction_integralOrientation at every n), SmoothPurityFiniteChoice (0.7s constrained Konig), ReductionComparison (0.6s). TraceNormalization has 7s rw conversion timeout at finite-map equation; fixed via direct equality transitivity plus generic mate-iso criterion. ConstrainedLift has 17s rewrite conversion timeout; replacing rewrite with explicit transition naturality + congrArg. CanonicalLift pending. Finite reading exact map_preimage recursion was solved by generic subtype bundling iso AND its map equation (no limit raise).
+
+## 2026-11-05T09:08:32.872699+08:00 — direct equalities replace concrete rewrites
+- Full K4-20261105T090443.log rc=1: CanonicalLift failed at rw[hg,hphi] (122s), while its ambient iso and generic comparison application passed. Replaced both concrete rewrites by congrArg/trans. Trace and constrained lift repaired similarly.
+- Added pending SmoothPurityReductionHomShift: finite shifted Hom required by the Milnor uniqueness theorem, using negative Ext of finite Tate lines. This supplies the missing hypothesis identified earlier; no blanket claim that reductions are jointly faithful.
+
+## 2026-11-05T09:14:21.801871+08:00 — next small validation batch
+- K4-20261105T090834.log rc=1: constrained lift (17s) needed a separately checked reduction-step compatibility lemma; trace normalization (138s) hit recursion depth at concrete equality transitivity, now moved into the generic trace criterion; shifted Hom had a parser error, fixed with explicit shiftFunctor. CanonicalLift (258s) reached final normalization but hit recursion depth comparing instances. Scoped the stronger IsNoetherian instance to the completeness proof to avoid changing every subsequent NoetherianSpace instance.
+- Added CanonicalUnique (integral/rational normalized orientation uniqueness) and FiniteEquivariance (relative finite Frobenius square, with explicit old finite-base-change sorry dependency). Split equality detection into ReductionFaithful to keep uniqueness independent of constrained choice.
+
+## 2026-11-05T09:20:19.035849+08:00 — retain the green reduction equality detector
+- K4-20261105T091423.log rc=1: ReductionFaithful GREEN (10s). ConstrainedLift total declaration budget still exhausted (17s), so simplified to finite sets of morphisms satisfying IsIso and P (no iso-valued sequence or hom projections). HomShift parser needed spaces before shift notation after parentheses; fixed. FiniteEquivariance had namespace resolution Functor.map_id and constantComplex-vs-unit normalization issues; fixed explicitly.
+- CanonicalLift still failed at final finite-map equality after260s: noetherian scoping alone did NOT solve it. Isolated CanonicalCriterion and used the upstream kernel-checked exact_mod_proofs tactic on the normalization theorem; TraceNormalization now also constructs the generic statement without an expected type before comparison by the same tactic. No budgets raised.
+- Re-fetched PR2110: remains12d0ade2a03c04b4b69c9cc02068fec40806071c; latest brief unchanged.
+
+## 2026-11-05T09:24:55.439453+08:00 — canonical reconstruction and finite relative equivariance GREEN
+- K4-20261105T092020.log at f239f75a20 rc=1: CanonicalCriterion GREEN (7.4s), CanonicalLift GREEN (128s), ReductionHomShift GREEN (14s), FiniteEquivariance GREEN (3.6s). Conditional canonical existence is now checked; its transition-compatibility hypothesis remains unproved.
+- CanonicalUnique failed to synthesize the shifted-Hom finiteness instance at an inferred source; pinned K/L explicitly. TraceNormalization fails while elaborating the finite orientation morphism argument (14s), ConstrainedLift fails at declaration-level whnf (17s). Added scoped profiling to distinguish expensive conversions before further repairs. No resource raises.
+
+## 2026-11-05 09:29 +0800 — profile-guided reduction of inference
+- K4-20261105T092457.log rc=1: finite equivariance remains GREEN. Trace profile pinpoints expected-type propagation of `finiteEtaleReading.map` with unresolved source/target: Lean attempts to equate the full reduction functor with its reading factor (10.75s). Bound the fully inferred morphism before applying the mate criterion.
+- ConstrainedLift spends its declaration budget re-elaborating leftDerivedFunctor, reaching timeout at the first local T definition. Added a transparent named reduction functor to shrink repeated inference in this new API. Unique missing-instance error resolved by explicit K/L; profiling its remaining whnf timeout next. No resource raises.
+
+## 2026-11-05 09:29 +0800 — remove redundant derived-functor synthesis
+- K4-20261105T092651.log rc=1: TraceNormalization now reaches the final comparison in4.8s; unfold both reading/reduction composition spellings before exact_mod_proofs. The previous10.75s propagation timeout is gone.
+- Unique profile isolates the remaining failure to synthesizing derived tensor-four colimit instances while RESTATING the finite-Hom hypothesis, not the uniqueness argument. Reuse the inferred type of the checked HomShift theorem directly. ReductionFunctor missed open Scheme (ProEt.topology resolution), repaired. No resource raises.
+
+## 2026-11-05T09:29:34.799147+08:00 — trace normalization GREEN
+- K4-20261105T092806.log at295510e9bd validates SmoothPurityTraceNormalization (21s). Shared exact theorem with C4. ReductionFunctor only has a name-resolution typo (condensedRingObj lives in ProEtale, not CondensedRing), now corrected. Unique still times out; restoring scoped profiling after the inferred-finiteness change.
+- BLOCKED: unconditional canonical existence still requires coefficient-transition compatibility absent from the available upstream theorems. map_dualizingComplexTwistShiftIso_reduction asks for hframe, hepsilon and hL; no constructor for these actual comparisons has been found. Best workaround continues: choose compatible finite equivariant isomorphisms by finite-choice, using Houyi's finite-to-adic comparison and C1's Weil exceptional datum. The semilinear Frobenius requires ambient pullback APIs rather than Over(kbar) shortcuts.
+
+## 2026-11-05 09:33 +0800 — uniqueness conversion pinpointed
+- K4-20261105T092936.log rc=1 on the new remote pool. Unique now reaches the LAST comparison application;13.58s spent propagating its expected type into `congrArg ι.map`, again comparing the composite reduction with its inclusion factor. Bound that equality before passing it to the generic comparison theorem.
+- ReductionFunctor needs the CategoryTheory.Obj scope for the transported MonObj instance (the other files already open it). Added the scope. No budget changes.
+
+## 2026-11-05T09:32:40.917669+08:00 — canonical uniqueness GREEN
+- K4-20261105T093120.log validates SmoothPurityCanonicalUnique (8.4s): both eq_of_isIntegralSmoothOrientation and eq_of_isCanonicalSmoothOrientation. Binding the fully inferred inclusion-map equality avoids the last13.58s expected-type conversion. ReductionFunctor is GREEN (8.2s).
+- ConstrainedLift now elaborates its complete proof except the final rewrite, where the named functor is intentionally not unfolded by rw. Added the exact equality in the new functor spelling before rewriting. No resource raises.
+
+## 2026-11-05T09:36:15.538544+08:00 — full canonical-helper batch GREEN
+- K4-20261105T093242.log rc=0: ConstrainedLift12s, CanonicalCriterion8.8s, TraceNormalization23s, FiniteEquivariance4.9s, CanonicalLift139s; CanonicalUnique cached green. This validates all canonical-lift/uniqueness/trace/constrained-choice files added in the re-plan.
+- Added pending SmoothPurityEquivarianceDetection: transported finite Weil equations are exactly reductions of the integral equation; the proven Milnor finiteness criterion then detects integral equivariance. This uses ambient endofunctors and so does not incorrectly impose kbar-linearity on geometric Frobenius.
+- Rechecked the active interface route: CondensedWeilEquivarianceParent.existsUniqueNormalizedFamily uses NormalizedFamilyProjectionCompatible; its two reconstruction inputs finiteExplicitNormalizedAdjunctions and projectionPreservingCoefficientExtension are literal sorries (files: Sheaf/SecSmoothPurity/FiniteExplicitNormalizedAdjunctions:55 and ProjectionPreservingCoefficientExtension:62). Therefore this route does not supply the missing canonical coefficient compatibility. PR2110 refetched, unchanged12d0ade2a0.
+
+## 2026-11-05 09:38 +0800 — equivariant reconstruction assembly
+- K4-20261105T093616.log rc=1: generic transported-equation iff passes; concrete equality detector needs its forall-finiteness instance explicitly passed across the named reduction functor. Applied that repair.
+- Added SmoothPurityEquivariantLift: combines constrained finite choice and equality detection to produce an integral equivariant map whose every reduction is invertible. Its inputs are finite Hom, finite equivariant iso existence, and stability of the ordinary reduction step. This states exactly what the finite-to-adic comparison must supply for the alternative route.
+
+## 2026-11-05T09:40:26.149274+08:00 — equivariance detector and constrained equivariant lift GREEN
+- K4-20261105T093726.log rc=0 (1c33749a7): SmoothPurityEquivarianceDetection and SmoothPurityEquivariantLift both GREEN. Passing the Milnor-finiteness witness explicitly resolved the instance mismatch.
+- Added bounded-constructible Nakayama wrapper and exists_equivariant_iso_of_finite_reductions. First check K4-20261105T093904.log rc=1 (15s): only the composite-map IsIso hypothesis needs its inclusion-map spelling for typeclass search; changed the local hypothesis type. Also pinned full-subcategory source/target for the ambient Nakayama call.
+- Added command-only SmoothPurityOrientationAudit to check the complete current chain and report axiom dependencies; no changes to the target statement or body.
+
+## 2026-11-05T09:41:59.508589+08:00 — full orientation-helper audit GREEN, standard axioms
+- K4-20261105T094027.log rc=0 at7b66f0991e: EquivariantIsoLift26s and OrientationAudit2.6s, all23,444 jobs green. The audit includes SmoothPurity itself unchanged.
+- Standard axioms only (propext, Classical.choice, Quot.sound) for canonical integral uniqueness, conditional canonical existence, trace normalization, and exists_equivariant_iso_of_finite_reductions. The relative finite equivariance helper additionally depends on the documented upstream finite purity base-change sorryAx.
+- Removed unused prime-characteristic hypotheses from the new general isomorphism lift and repaired long lines. One final small validation follows. No target proof or DONE claim.
+- BLOCKED: target assembly still lacks the concrete identification of integral exceptional/Tate Weil data after finite étale reduction and the associated reduction-step stability. C1 owns the Weil exceptional datum, Houyi owns the finite/adic comparison; the complete alternative reconstruction theorem is now ready for those inputs. The canonical alternative additionally needs CanonicalIntegralOrientationCompatible, not supplied by the source/interface route (literal sorries identified above).
+
+## 2026-11-05T09:43:44.899695+08:00 — final checked checkpoint for the reconstruction interfaces
+- Final ucheck SmoothPurityOrientationAudit is GREEN at ce95784d8b, rc=0, log /home/ubuntu/u9/logs/K4-20261105T094201.log, including all current reconstruction helpers and the unchanged SmoothPurity module. EquivariantIsoLift23s; audit2.9s; no warnings.
+- Audit confirms standard axioms only for integral/rational normalization uniqueness (integral theorem audited), conditional canonical reconstruction, trace normalization, and the full finite-equivariant-isomorphism reconstruction. The standalone relative finite-equivariance theorem has the documented preexisting finite purity base-change admission.
+- No new sorry, axiom, admit, native_decide, skipKernelTC, implemented_by or opaque declaration in this helper chain; no heartbeat increases. git diff --check is clean. K4.DONE has not been written because the assigned leaf remains open.
+- The best alternative is now a complete, checked construction: exists_equivariant_iso_of_finite_reductions. Instantiate it using the integral Tate and exceptional data, the pullback/reduction comparisons, finite equivariant isomorphisms and preservation of that equation by ordinary reduction. Existing finite_hom_derivedReduction_integralOrientation and finite_shift_hom_integralOrientation_reduction discharge the finiteness inputs (transport the latter along the invertible Tate datum).
+BLOCKED: the actual integral exceptional/Tate Weil data have not been identified with the finite étale data, and their ordinary-reduction coherence has not been supplied. These are exactly the C1/Houyi comparison inputs of the latest LEAD split. The canonical alternative also remains conditional on CanonicalIntegralOrientationCompatible; the interface reconstruction theorems that would discharge it are literal sorries, with file/line evidence above. The target exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso is unchanged and still contains sorry.
+
+## 2026-11-05T09:48:36.041312+08:00 — resume actual reduction coherence
+Reread brief and current notes. C4 is explicitly lead-assigned finite purity iso-square base change. Checking actual coefficient/pullback composition coherence to supply the reduction-stability input of the equivariant reconstruction. No new assumptions are being hidden in the target.
+
+## 2026-11-05T09:56:40.417703+08:00 — actual coefficient composition
+Added SmoothPurityCoefficientPullCompOrdinary (GREEN9.2s), SmoothPurityCoefficientPullMate (GREEN4.6s), SmoothPurityCoefficientPullCompDerived (GREEN16s). Last check K4-20261105T095457 failed only final mate composition: generic inverse cancellation needs comp_obj normalization and concrete rw exceeds200k heartbeats. Replaced concrete rw by a generic named-comparison mate composition lemma. Drafted actual isWeilEquivariant_derivedReductionStep and exists_geometric_equivariant_integralOrientation_iso, discharging hstep/finite Hom/shifted Hom internally; pending checks.
+
+## 2026-11-05T10:02:31.586574+08:00 — reduction stability and integral Tate datum GREEN
+
+[K4] 2026-11-05T10:02:31.586574+08:00: Actual hstep is now GREEN at d7e43695b2, log /home/ubuntu/u9/logs/K4-20261105T100049.log: SmoothPurityCoefficientWeilReduction12s + SmoothPurityReductionWeilStep15s, theorem isWeilEquivariant_derivedReductionStep, no hypotheses beyond the finite Weil equation. It proves ordinary coefficient reduction preserves the transported Weil equation for ANY scheme endomorphism, using canonical nonflat pull comparison coefficient-composition (GREEN21s). SmoothPurityIntegralTatePullback also GREEN8.9s: actual integral Tate geometric datum from root-of-unity tower, all nonnegative twists and shifts. Final purity-specific reconstruction wrapper in repair (header timeout); core hstep proof closed. Copied C1 four new green helper files from9b1b4154f8 (UpperShriekWeilDatum+3 CategoryTheory files) into K4 for combined audit; no existing C1/shared declarations changed.
+
+The finite/adic comparison inputs remain the only mathematical assembly gap for this alternative; no DONE or target-body edit.
+
+## 2026-11-05T10:09:56.549713+08:00 — actual geometric reconstruction GREEN
+
+[K4] 2026-11-05T10:09:56.549713+08:00: GREEN geometric reconstruction at aadf121ad2, K4-20261105T100803.log: exists_geometric_equivariant_integralOrientation_iso (SmoothPurityGeometricEquivariantLift) now supplies actual reduction stability, finite Hom and finite shifted Hom internally. Hypotheses are only actual integral data phiT (invertible), phiW, and existence of equivariant finite isos for the actual integersModPowReductionUpperStarIso. The audit reports standard axioms only, also for actual reduction stability, integral Tate pullback and C1's imported exists_forget_upperShriek_obj_iso_isWeilEquivariant. Integral Tate datum from roots tower is GREEN; I am proving projection compatibility for its finite reductions. The overall batch failed only the independent new TateTowerProjection draft (missing open Scheme, now repaired).
+For C1 piece (2): the geometric model needed is CondensedRing.boundedConstructibleUpperShriek l (geometricFiberHom f), and integral PadicIntegersRingObj.boundedConstructibleUpperShriek l E f (over kbar), with AMBIENT geometric pullback L(g)^*. g is semilinear over kbar, so an Over(kbar)-only bridge is insufficient. Our integral reconstruction is on any scheme endomorphism g. Need comparison of actual Weil datum with this exceptional datum (then Houyi finite-reading compatibility). Tate-side identification with the native Weil datum is still open; new integral root-tower datum is upperStarShiftIntegralTateTwistDerivedIso.
+
+## 2026-11-05T10:20:21.834574+08:00 — finite étale reconstruction interface GREEN
+
+[K4] 2026-11-05T10:20:21.834574+08:00: Full actual finite-etale reconstruction interface GREEN on u9/K4, log /home/ubuntu/u9/logs/K4-20261105T101736.log (rc0): SmoothPurityEtaleEquivariantLift.exists_equivariant_integralOrientation_iso_of_etale_reductions. Input is ONLY integral Tate iso datum, integral exceptional datum, and finite etale equivariant iso existence for purityEtaleReducedWeilDatum. Named datum uses the actual nonflat reduction comparison, bounded reduction compatibility, coefficient equivalence and comparison-site base change. No Over(kbar)-linearity restriction on g. SemilinearReading and FiniteReadingWeil are green; audit gives standard axioms only. This is a concrete comparison target for C1/Houyi; it avoids canonical coefficient compatibility entirely. Also generic Tate-tower projection compat is green (101024), and generic free/pull/coefficient conjugate cube just passed (101921); testing its concrete specialization to finish finite Tate projection naturality. Target Weil leaf still unchanged/sorry.
+
+## 2026-11-05T10:38:31.454098+08:00 — actual Tate projection checks
+
+[K4] 2026-11-05T10:38:31.454098+08:00: Actual ordinary Tate reduction compatibility advancing: SmoothPurityTateModuleReductionPullback GREEN (K4-20261105T102327.log); coefficient composition pull square GREEN (102841), and free-tower double reduction GREEN (103404). These use the actual Mod.extendScalarsCompIsoOfEq and pullIso, not assumed coherence. Integral specialization has only explicit definition normalization repairs in check. Next is derived-single/flat comparison, then finite site reading/powers. Useful namespace trap: in AlgebraicGeometry, unqualified Functor.map_id can resolve to Prelude Functor.map_id (id <$> x); fully qualify CategoryTheory.Functor.map_id. No heartbeat raises. Actual target remains unchanged/sorry; C1/Houyi exceptional comparison and finite purity still required.
+
+## 2026-11-05T10:44:13.749375+08:00 — LEAD uniqueness re-plan
+
+[K4] 2026-11-05T10:44:13.749375+08:00: Read latest LEAD expert answer; stopping any Ex_! pasting expansion (I had been doing Tate/reduction coherence, not pasting). Existing K4 GREEN eq_of_isIntegralSmoothOrientation / eq_of_isCanonicalSmoothOrientation and isIntegralSmoothOrientation_iff_trace already supply uniqueness and the actual finite trace normalization criterion. Re-read requested interface: RationalSmoothPurityCanonical.lean lines159ff defines IsNormalizedTrace via finiteIntegration; orientation_existsUnique at219–225 is literally sorry in its archived section, so cannot port an unconditional result from it. Its active native existsUniqueNormalizedFamily factors through smoothPurityTransportProjectionCompatible and normalizedFamilyUnique; examining these now for the intended normalization/affine integration argument. Current plan: preserve checked Tate comparisons, focus on existence of the actual normalized trace and its Frobenius invariance, then use the existing uniqueness theorem. The missing normalization theorem is distinct from adjunction-uniqueness (which is already formal). PR2110 head still12d0ade2a0. No DONE.
+
+[K4] 2026-11-05T10:46:07.278814+08:00: Further evidence on the requested uniqueness route: active interface NormalizedFamilyUniqueness.lean:55 normalizedFamilyUnique invokes FiniteNormalizedTraceUnique.lean:45 finiteNormalizedTrace_unique, whose body is literally sorry at59. FiniteSemilinearTraceEquation.lean also has sorry at baseChangeCompatible_weilTransport. Blueprint det-sp-unique-right-adjoint is the ordinary counit-compatible right-adjoint uniqueness (already Mathlib/C1), while uniqueness from affine integration additionally needs projection compatibility and local smooth-chart normalization. Thus active interface is useful decomposition but not a proof we can simply port. C4: please focus the finite affine-normalization uniqueness/input per new LEAD; K4 already has finite-reduction orientation uniqueness and trace equivalence checked, and is completing actual Tate compatibility needed by either uniqueness or equivariant reconstruction. No Ex_! pasting work begun on K4.
+
+BLOCKED (uniqueness route audit, 2026-11-05 10:50 CST): the requested source does not supply the missing unconditional affine-normalized family. In origin/iface-start, Sheaf/SecSmoothPurity/FiniteExplicitNormalizedAdjunctions.lean:50–55 (existence), FiniteNormalizedTraceUnique.lean:45–59 (uniqueness), and FiniteGroundFieldTraceInvariance.lean:60–81 (semilinear invariance) each have literal sorry bodies. AffineGroundFieldTraceInvariance itself is proved, but assumes the AffineNormalized family predicate. Upstream SmoothPurity/Defs.lean:301–317 explicitly says canonical orientation existence is not formalized and otherwise chooses a noncanonical iso. Thus right-adjoint uniqueness alone cannot close the assigned Weil square. Continuing actual Tate normalization/comparison work, while C4 and Houyi supply the geometric normalization and exceptional comparison inputs. No new assumptions/admissions added to the target.
+
+## 2026-11-05T11:02:04.243321+08:00 — comparison checks resumed
+Reread K4 brief and progress; uniqueness directive unchanged. K4-20261105T105704.log rc1: SingleComparisonSquare needs singleFunctor.map spelled as Q.map, SingleExactNormalization needs the last map_id after expanding the exact comparison, finite Tate specialization retains a partially-applied tateModuleTransition. Repairs queued in the next ucheck together with the new cochain/derived-single and rational Tate chain. Added generic tensor comparison and nonnegative Tate-power rationalization drafts, using actual isMonoidal_pullIso_hom. No resource increases or target admission changes.
+
+[K4] 2026-11-05T11:06:12.702361+08:00: Actual ordinary integral Tate datum comparisons GREEN on u9/K4, commit68228e09e8, log /home/ubuntu/u9/logs/K4-20261105T110347.log: upperStarIntegralTateTwistOneIso_hom_comp_reduction (finite coefficients), upperStarIntegralTateTwistOneIso_hom_comp_rationalization, and upperStarIntegralTateTwistNatIso_hom_comp_rationalization (ALL nonnegative powers,19s). Last proof uses actual isMonoidal_pullIso_hom and generic unit/tensor compatibility, no assumed coefficient coherence. Derived-single comparison still in repair; next derived/shift square. Generic single comparison square and single datum square also green. Target still sorry; normalization/exceptional-model comparison gaps unchanged.
+
+## 2026-11-05T11:17:36.612836+08:00 — shift compatibility and profile-guided derived comparison
+SmoothPurityCoefficientPullShift GREEN11s in K4-20261105T111133.log: actual derivedUpperStarExtendScalarsIso hom commutes with shifts, by existing mate characterization and actual restriction/pullback shift compatibility. ShiftDatumSquare and SingleModuleComparison also green in111215. DerivedPullSingle timeout measured in111316: the expensive step is elaborating L(Mod.extendScalars(...)) with the generic lemma expected type (4s profile, many upperStar/presheafToSheaf reductions), before the counit/square argument. Bound all four derived functors before instantiating and combined the cochain/single steps in a generic theorem; testing now. No resource increases. Ordinary rational powers green; target still unchanged.
+
+## 2026-11-05 11:27 CST — derived pull/single square GREEN
+K4-20261105T112453.log at43eb615a8 validates DerivedPullSingle16s and named homotopy counits29s. Next DerivedDatumSquare fails in its statement at the second flat comparison (line50,20s), before proof elaboration. Added transparent named flat-single/exact-pullback isomorphisms in a small new file and shortened the helper statement; rational Tate wrapper expands them only at the final normalization. No budget changes.
+
+2026-11-05 11:31 CST: K4-20261105T112901.log: FlatModuleComparison GREEN7.3s; DerivedDatumSquare GREEN8.6s. RationalDerived reached31s with only a namespace resolution error (ProEtale vs CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory); qualified it. Added generic coefficient-trivialization zsmul preservation and actual rational semilinear Frobenius scalar to test alongside Tate audit.
+
+2026-11-05 11:34 CST: K4-20261105T113144.log validates RationalTrivializationScalar4.5s: rational root trivialization along fσ equals q times that along f, with generic coefficient scalar transport. RationalDerived final normalization still mismatches tateTwistNat vs tateTwistDerived at a natural cast; explicitly unfold tateTwistDerived/tateTwist in the final comparison. No budgets raised.
+
+2026-11-05 11:36 CST: RationalDerived GREEN in K4-20261105T113247.log after explicit tateTwistDerived/tateTwist normalization. Shift helper failed only parsing at unspaced `)⟦`; fixed the notation spacing. RationalTrivializationScalar remains GREEN.
+
+2026-11-05 11:38 CST: Shift specialization K4-20261105T113358 fails elaborating the first raw derived pullback functor argument at200k/30s, matching earlier Single comparison profiling. Reuse named derived functors and add their canonical CommShift instances in a small file. Also isolating the old underlying-factor forward square with the upstream upperStarForgetIso spelling retained, to avoid previous mapMod/underlying-unit instance conversions.
+
+[K4→C1] 2026-11-05T11:36:14: Read piece(2) COMPLETE report. Please take (c) concrete Tate datum identification: under adicSheafDerivedEquivCondensedMod, the derivedStrIso of the native Weil Tate unit/shift should match the canonical geometric datum upperStarShiftTateTwistDerivedIso l Fr_X (Xbar→Spec kbar) d (2*d). K4 has now GREEN actual integral→rational datum square for all d in SmoothPurityIntegralTateRationalDerived (log K4-20261105T113247), and shift specialization is checking. Also new RationalTrivializationScalar GREEN4.5s log113144 proves purityRationalTateTrivialization_comp_specGeometricFrobenius_hom (q scalar), avoiding raw ℤ_l module operations. Old six drafts at59564f4f66 remain available; I isolated only their forward pullback/forget factor square in SmoothPurityPullbackForgetFactor (checking) using upstream upperStarForgetIso spelling. Will send outcome. I retain finite Tate reduction compatibility/reconstruction. This removes overlap and gives a concrete target for (c).
+
+[K4→C1] 2026-11-05T11:45:13: The formerly failing forward pullback/forget factor square is now GREEN77s at b7bdd08ea1, log K4-20261105T114138: new file SmoothPurityPullbackForgetFactor, theorem purity_upperStarForgetIso_factor_hom. Fix was to RETAIN upstream upperStarForgetIso/maps throughout and explicitly dsimp Mod.forget at the inverse-square boundary, avoiding the old purityFactorUnit/unit alias conversions. No budgets raised. This is usable for the old ScalarWeilLaw's main structure equation. Generic/rational scalar trivialization also green as noted. Native Tate identification still yours per prior note; K4 advances finite reduction powers (now GREEN47s in same log) and derived/shift compatibility.
+
+2026-11-05 11:48 CST: K4-20261105T114515.log validates finite derived Tate reduction29s and clean forward forget-factor85s. Rational shift has a final conversion mismatch, not a failed square: exact_mod_proofs reports Lg* versus shift⋙Lg* at a nested type. Checking the full inferred equality before further edits; the two upstream derived-pull CommShift instances use the same ofIso constructor. No resource changes.
+
+2026-11-05 11:53 CST: Fetched C1 a7bd97995f and copied FOUR NEW green files only: WeilLiftAdjunction, IsoAlgebraDerivedExactMate, UpperShriekWeilDatumComposite, UpperShriekWeilDatumAssembly. Existing shared files left untouched (C1 UpperShriekWeilDatum diff was formatting only). Added trace-assembly axiom check to own OrientationAudit; check next after the single active Tate batch. PR2110 unchanged12d0ade2a0; PR2102cf9ced0d29 still admits canonicalSmoothPurityMap_baseChange, merely reducing the old orientation base-change admission to it.
+
+[K4→C1] 2026-11-05 11:58 CST: TateComparisonAudit GREEN at b42d907c2b, log K4-20261105T115033.log. Actual integral→finite and integral→rational derived SHIFTED datum squares now proved for every d≥0, every shift, standard axioms only. Files SmoothPurityFiniteTateShift and SmoothPurityIntegralTateRationalShift. For your requested sheaf-level identification: canonical datum is upstream upperStarTateTwistOneIso (TateModuleUpperStar:299), powers upperStarTateTwistNatIso (Pullback:53). K4 currently has a rational root trivialization purityRationalTateTrivialization g f l hζ hζ' and the scalar equation purityRationalTateTrivialization_comp_specGeometricFrobenius_hom (SmoothPurityRationalTrivializationScalar), plus GREEN forward forget-factor square purity_upperStarForgetIso_factor_hom (SmoothPurityPullbackForgetFactor). The FULL trivialization↔χ·can square is not yet proved; the old ScalarWeilLaw draft at59564f4f66 tried it. Those ingredients remove its former factor/scalar blockers. Please use these to complete the sheaf-level datum identification; I retain finite étale reading. C1 Assembly/Composite now copied; combined OrientationAudit checking.
+
+2026-11-05 11:58 CST: Combined OrientationAudit built successfully (23467 jobs) in K4-20261105T115408.log at bf21e4801, including all four new C1 files. Trace assembly has only standard axioms. The ucheck wrapper then exited 2 with an unexpected-EOF quote error in the shared remote ubuild.sh; current bash -n succeeds, indicating concurrent launcher update. Rechecking cached audit together with new finite root adapter. No Lean compiler errors. New adapter reuses existing FiniteRootSiteComparison root square, identifying its normalized root map with the Tate API kernel map.
+
+[K4] 2026-11-05T11:59:37.800016+08:00: C1 four new files copied from a7bd97995f; combined SmoothPurityOrientationAudit built successfully at bf21e4801 in /home/ubuntu/u9/logs/K4-20261105T115408.log. _of_trace has only standard axioms. ucheck wrapper hit concurrent shared ubuild.sh editing (unexpected EOF after successful build); current bash -n passes and cached audit recheck is queued with finite root adapter. TateComparisonAudit rc0 at b42d907c2b, log115033: both actual shifted integral→finite and integral→rational Tate datum squares green, no sorryAx. For finite site reading, discovered existing AlgebraicGeometry/Finite/FiniteRootSiteComparison.root_square in its public Spec; extracting its canonical kernel-map version, then identifying with upstream rootsOfUnitySheafIsoKernel. No new geometric assumption needed. Target remains open.
+
+[K4→C1] 2026-11-05T12:01:58.224171+08:00: Exact condensed form: ProEtale.tateTwistDerived X l d = singleFunctor(_)(0).obj (ProEtale.tateTwist X l d); for natural d, tateTwist = tateTwistNat. Upstream TateTwist/Pullback:87 upperStarTateTwistDerivedIso l g f d is leftDerivedUpperStarIsoMapDerivedCategory.app ≪≫ mapDerivedCategorySingleFunctor(0).app ≪≫ singleFunctor.mapIso (upperStarTateTwistIso l g f d). Its shifted form is commShiftIso ≪≫ shift.mapIso. Thus the needed ordinary statement is an iso e : tateTwistNat Xbar l d ≅ 𝟙_ with (upperStarTateTwistNatIso l Fr_X p d).hom ≫ e.hom = (upperStar Fr_X).map e.hom ≫ (cyclotomicUnit k0 l ^ d acting on the canonical pullback-unit iso). cyclotomicUnit = q⁻¹; the trivialization-along-pσ equation has q, so inversion in the datum equation matters. purityRationalTateTrivialization (𝟙 Xbar) p l hζ hζ' gives the one-twist trivialization between pullback-by-id Tate and pullback-by-id unit; conjugate by CondensedRing.upperStarId to get e. No completed sheaf Weil square beyond the scalar/factor lemmas already sent. Your latest note says you await that statement, so please treat this as the concrete target for (c), which I understood you to own including the sheaf square.
+
+2026-11-05T12:10:49.795441+08:00: RootKernelPullback GREEN26s in K4-20261105T120842.log: canonical raw-root pullback equals the kernel-root datum, by equality of the normalized section coordinates. Prior rewrite timeout localized by profiler to rw on concrete section models; replaced it with h1.trans (congrArg ... h2 |>.trans h3.symm), no budgets raised. FiniteRootReading now only the last map/inverse cancellation; FiniteFreePullback right square hit simp with both map_comp and reverse map_comp_assoc, now separated into directed steps. C1 native Tate side green9e587db41c; sent precise condensed sheaf datum statement, including q⁻¹ direction, and asked coefficient-generic scalar law if feasible. No target change.
+
+2026-11-05 12:14 CST: K4-20261105T121051.log validates FiniteRootReading and RootKernelPullback. FreePullback cancellation now reaches exactly counitInv ≫ counit, but rw refuses the semireducible forget/composite object spellings; use erw only for this cancellation. Removed profiler flags. FiniteFreeSite factor theorem next. No resource changes.
+
+2026-11-05 12:20 CST: FiniteFreePullback GREEN29s and ComparisonRestriction GREEN8.9s in K4-20261105T121830.log. Actual finite coefficient pullback preserves the free-module comparison; actual finite-reading site comparison equals the inverse of the usual comparisonUpperStarUpperStarIso. Site factor failed only a missing open scoped CategoryTheory.Obj (fixed). Added the free-site/geometric pullback cube, pending.
+
+[K4→C1] 2026-11-05 12:26 CST: Read your cycle35 generic tensorPowPairIso result. To avoid split ambiguity: I will take the d=1 ordinary scalar-Weil square after the current finite-free reading batch (root reading already green, free-site factor in repair). Please own induction + native/condensed derived datum transport; keep induction coefficient-generic if possible for finite coefficients too. The d=1 ingredients are present, but prior concrete factor instance conversions caused performance trouble; newly GREEN forward-factor lemma should resolve those. I will send the checked exact statement.
+
+2026-11-05 12:34 CST: FiniteFreeSite GREEN42s (122547); FiniteFreeSitePullback GREEN27s and generic ScalarFactorSquare GREEN4.1s (123030, build still active). FiniteFreeReading only associator identities obstruct its naturality rewrite; isolated a component factorization lemma. Restored ScalarWeilLaw with generic faithful-functor scalar-square transport and actual upperStarForgetIso factors, avoiding the former alias rewrite. Concrete specialization currently slow (Rss total ~7GB at2m37; this includes imports, phase not yet attributed). No budget raise; will profile the concrete boundary if it fails. C1 accepted the precise d=1/powers split. PR2110/2102 and upstreamslopmaster unchanged at12:26.
+
+2026-11-05 12:35 CST: Stopped only K4 ScalarWeilLaw compiler PID3916156 after3m07/3m21CPU and RssAnon7146416kB (RssFile620968kB), without a theorem diagnostic. Other target already failed at known identity conversion. Next scalar check uses synchronous elaboration plus profiler to identify exact phase/check; no kernel skipping or budget change.
+
+2026-11-05 12:37 CST: Synchronous ScalarWeilLaw check at39a87728fe reproduced growing memory (RssAnon5.2GB at~2m) before diagnostic; stopped own PID3956453. Found concrete ha/hb passed a left-associated factor equation directly to a right-associated generic hypothesis, triggering definitional associativity instead of Category.assoc. Added explicit simp only [Category.assoc] and unfolded only the two named factor aliases. FiniteFreeReading now uses explicit naturality with comp_map/comp_obj normalization. Next finite-site axiom audit + corrected scalar profile.
+
+[K4→C1] 2026-11-05 12:38 CST: Read GREEN TateTwistPowerDatum at7fd42346dc; thank you, your exact d=1 IsoAlgebra input is recorded. K4 is repairing the generic scalar transport (ScalarFactorSquare GREEN4.1s; concrete ScalarWeilLaw checked next with explicit associativity). This first produces q-law on p^* Tate(X0) for the descent datum geometricFiberProjUpperStarFrobeniusIso; identifying with canonical upperStarTateTwistOneIso on Xbar still requires its pullback-composition/root-tower comparison. The upstream root pullback cocycle is already GREEN in TateFrobeniusPullbackNaturality. Please continue the native/derived transport parameterized by the d=1 iso while I discharge it, so there is no idle dependency. No need to copy the older unvalidated TatePowers draft.
+
+2026-11-05 12:44 CST: K4-20261105T123721.log rc1. FiniteFreeReading naturality is now solved; final rewrite retains Iso.symm_hom on an associator (added normalization). Scalar profile identifies ha precisely: expected `(e.app M).hom` versus supplied `e.hom.app M`; defeq expands the concrete category and takes178s including failed kernel recovery. Added Iso.app_hom explicitly, normalized the unit-forget boundary and final factor alias. No resources raised.
+
+2026-11-05 12:47 CST: K4-20261105T124348.log atad55db33cb: FiniteFreeReading and FiniteSiteAudit GREEN; six actual root/free/site comparison axioms checks standard only. Scalar normalization gives IDENTICAL printed equations, but simpa final defeq expands the concrete category (profile explicit); using exact_mod_proofs after explicit normalization, as recommended by guide §17.4. Added generic free pullback composition plus its module-object specialization for the Tate datum cocycle. This is ordinary Tate pullback composition, not exceptional Ex_! pasting.
+
+2026-11-05 12:51 CST: K4-20261105T124708.log: generic FreePullbackComposition GREEN973ms. Scalar exact_mod_proofs pinpoints hidden object spellings (X vs U and sheaf category vs module category) inside otherwise identical printed equations, so now explicitly normalizing Functor.comp_obj/comp_map and Mod.forget. Kernel timeout was on failed proof recovery (149s); no accepted proof yet. FreePullbackComp final boundary similarly normalizes Mod.forget before applying lowerStarComp_hom_app_hom. Added limit-leg composition and free-level/free-tower cocycle drafts.
+
+2026-11-05 12:54 CST: K4-20261105T125045.log at0312baba82: LimitPullbackComposition GREEN681ms. Scalar proof now fully elaborates (all three exact_mod_proofs conversions solved after comp_obj/map normalization), but kernel still times out125s on the combined declaration. Split comparison equations into ScalarComparison and use smaller cast_proofs there, retaining actual upstream iso spelling. FreePullbackComp remaining opaque-looking goal will be printed at its boundary (temporary trace_state); no kernel bypass or budget raise. Added coefficient datum/tower composition to the pending small batch.
+
+2026-11-05 13:00 CST: K4-20261105T125635.log: ScalarComparison GREEN4.1s (both component squares, smaller proof casts). ScalarWeilLaw still kernel-bound180s at the generic specialization, so added a functor-indexed generic wrapper to retain natural-transformation components and their source objects verbatim. FreePullbackComp trace showed literal left/right identities hiding behind lowerStar object equalities; using erw to remove them. CoefficientDatumComp likewise needs erw for map_id. Checking the accumulated Tate cocycle and generic scalar conjugation with these repairs.
+
+[K4→C1/C4] 2026-11-05T13:12:46.347061+08:00: Latest LEAD PR1850/2116 read. pr/1850 head956acfea9 now contains actual exists_isIntegralSmoothOrientation, canonical orientation existence and IsIntegralSmoothOrientation.eq; no literal admissions in Orientation*.lean or the added reduction comparison files checked. This supersedes the earlier missing coefficient-transition blocker, but Frobenius/semilinear invariance remains separate. PR2116 head supplies public rightDerivedLowerShriekBaseChangeMap_paste_horiz and _paste_vert (vertical uses unboundedEtaleLowerShriekCompIso). C4 should use this for H1/H3 after H2; I will integrate1850 after current Tate batch. C1 condensed-adjunction plan matches the canonical model; please continue. K4 retains d1 ordinary Tate datum, current single ucheck queued since13:00.
+
+2026-11-05T13:16:16.729629+08:00: Current ucheck remains queued. Prepared canonical d1 Tate pair assembly and copied six C1 prerequisite files (new files only, pending K4 validation). Added finite free-root reading composition draft, combining the independently green root/site and free/site squares; this is the actual finiteCoefficientModEquivalenceFreeRootsOfUnityIso, not a replacement datum. PR1850 merge preview has only an import-list conflict in WeilConjectures.lean; will merge after Tate batch to avoid changing its dependency cache. No target change or DONE.
+
+[K4→C1/C4] 2026-11-05T13:21:06.713689+08:00: CORRECTION to my PR1850 audit: earlier git-grep glob expanded against current worktree and MISSED added helper files. A broad git grep finds NINE literal admissions in draft1850: OrientationTransitionTate:111, TateOne:207, TateStep:87/164, TateZero:57, TateZeroPieces:124/150, UnitPieces:59/93. Thus canonical existence/uniqueness declarations have proof bodies but existence still transitively uses sorryAx; the coefficient compatibility blocker is not fully discharged. I previewed/locally merged then reverted the draft; the unpushed merge/revert pair was removed from branch history (tree restored exactly to a5bdf4b56) so a future upstream merge stays clean and no draft admissions enter active K4. PR2116 public pasting files have no literal admissions. Use1850 as decomposition/template, not certified completed input. K4 actual root/free/site compatibility may help TateOne, but scalar/canonical datum remains first priority.
+
+[K4→LEAD] 2026-11-05T13:24:52.623830+08:00: K4 ucheck PID264439 has waited ~25min without acquiring a tree; C1/C4 also queued. Read-only lock audit: leaf-reserved Weil trees w3/w4/w5 are occupied by fill-2114-1/fill-2112-1/fill-2111-1 bulk builds since~12:58; newsrv t1 C6; t2 cleanup. No jobs interrupted and no extra build submitted. Please preserve some leaf capacity when routing the fill batches. Current branch source unchanged at remote selected pre-queue commit; local new drafts remain unpushed until result.
+
+2026-11-05T13:38:57.114772+08:00: Prepared SmoothPurityTateDatumAudit (untracked, next batch) for canonical cocycle, q-scalar, d1 pair, C1 power induction and native shifted datum. Fallback direct scalar proof is in /tmp/k4-scalar-direct-proof.txt; substitute only if the active functor-indexed specialization still kernel-times out. The single active ucheck is session83788 / remotePID264439, targets TatePullbackComp+ScalarWeilLaw+ScalarDatumConjugation, remote commit336e318ee; still queued at13:38. Localhead a5bdf4b56 contains the new d1/C1/free-root drafts. No local/remote direct Lean invocation.
+
+BLOCKED (current target inputs): draft1850 canonical existence still depends on its nine admitted coefficient-Tate/unit coherence lemmas; C4 finite Frobenius equivariance and Houyi exceptional comparison remain outstanding. Continue actual Tate datum validation and the existing sorry-free finite-equivariant reconstruction route; do not certify1850 existence or write DONE.
+
+[K4→LEAD] 2026-11-05T13:44:57.639588+08:00: Queue starvation diagnosis: ubuilder cleanup-name regex is ^[LHA][0-9]+$|^dupscan$|^cl, so D-series cleanup jobs are treated as leaf jobs and acquire reserved trees. At13:44 w4=D048(PID497413), w5=D078(PID959805), t2=D096; K4 still queued45min, C1/C4 similarly. Recommend include D in cleanup regex for NEW wrappers; existing queued wrappers have script loaded and need lead-managed routing. I have not changed shared scripts or interrupted jobs.
+
+2026-11-05T13:47:18.438397+08:00: Canceled ONLY queued K4 wrapper264439 after~48min (SIGSTOP then inspected child: sleep only; no build had started; session83788 exited255). Replacing with ONE accumulated batch: SmoothPurityTateDatumAudit + SmoothPurityFiniteFreeRootsReading. Includes original pending scalar/cocycle/conjugation checks and all new Tate/C1 modules. No build work was interrupted or discarded.
+
+[K4→C1] 2026-11-05T13:49:55.920602+08:00: hunit shortcut: existing CondensedModelGeometricFiberPullback.adicUpperStarCompCondensedModIso_inv_of_iso is the actual upper/push comparison square for any scheme iso; combine with GREEN CondensedModelUpperStarUnit.upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit and K4 SmoothPurityDescentUnit.adicUpperStarIsoLowerStarInv_hom_comp_unit. UnitIso and TensorUnitIso have identical underlying maps (respective _hom_hom/_inv_hom lemmas in CondensedModelScalar and CondensedModelUpperStarUnit), so Mod.hom_ext gives the iso identification. This should discharge your literal hunit without going through descent. K4 canceled only its sleeping queued wrapper after48min and resubmitted ONE accumulated batch atad1c8a08b; newPID1816690, stillqueued.
+
+[K4→C1/C4] 2026-11-05T13:51:29.638865+08:00: Shared ubuilder was just updated: cleanup regex now includes D/fill, w5 reserved mainline, and leaf jobs now permitted on POOL trees (old leaf-pool exclusion removed). I stopped ONLY my sleeping queued PID1816690 (no compiler started) and am resubmitting same accumulated two-module ucheck to load the new script. C1/C4 old queued wrappers still have old loop parsed; consider same if demonstrably sleeping.
+
+2026-11-05T13:59:44.241632+08:00: Accumulated build K4-20261105T135252.log selected e991a5fa0b on newsrv:t1. Generic scalar functor wrapper and free/limit composition pass. Three early local errors repaired for next batch: remove redundant identity rewrite after reflexivity in FreePullbackComp; parenthesize the mapped natural-transformation component in ScalarComparison (the missing parentheses also caused its downstream timeout); use postcomposition of the scalar equation in ScalarDatumConjugation. Current build continues rebuilding uncached upstream prerequisites; no second ucheck submitted. C4 now has PR2116-based H1/H3 and final finite Frobenius orientation drafts queued.
+
+2026-11-05T14:08:48.093270+08:00: Current build additionally identified a missing C1 prerequisite ConstantGeometricFiberPullback, now copied from weil/u9/C1 (new file only; no admissions). C1 tensor power induction and concrete TateTwistPowerDatum passed. Added two unvalidated finite reading adapters: FiniteTateLineReading (root exponent → coefficient characteristic) and FiniteTateOneReading (actual integral one-twist reduction → canonical étale one-twist pullback). Existing generic free/root/site squares and actual integral reduction square supply the proof. Next small batch will check ScalarWeilLaw, TatePullbackComp, ScalarDatumConjugation and FiniteTateOneReading before repeating the larger audit.
+
+2026-11-05T14:12:30.159840+08:00: Stopped only the verified K4 systemd unit u9-K4-1793857972.service on newsrv after the large batch had already failed and spent ~20min rebuilding 141 unrelated/dependency modules. Completed artifacts remain cached; active jobs were canceled. IMPORTANT: wrapper printed rc=0 after systemctl stop, but log has failed=7 and NO successful build completion: THIS IS NOT GREEN. Session27891 is closed. Next submission is a smaller scalar/cocycle/conjugation batch to unblock compiler-guided repair before the full finite/native audit.
+
+[K4→C1] 2026-11-05T14:17:19.269605+08:00: ScalarWeilLaw GREEN39s at e6d4f6a7f2 in /home/ubuntu/u9/logs/K4-20261105T141532.log. The prior kernel timeout is resolved by the functor-indexed generic wrapper retaining natural-transformation components, with explicit parentheses in the concrete statement. No resource increase. FreePullbackComp GREEN3.9s, CoefficientDatumComp GREEN11s, ScalarDatumConjugation GREEN1.8s. Root-tower cocycle failed only unqualified upperStar resolving to the abelian version; all pending module-pullback references now qualified. Next batch TateOnePair + actual finite one-twist reading. Profiling flags removed before recheck. Main leaf still open.
+
+[K4→C1] 2026-11-05T14:19:40.038738+08:00: While the next two-target batch queues, I drafted the remaining hunit equation in new SmoothPurityConstantWeilDatum (with light generic UnitDatumTransport): purity_adicConstantCondensedStr_hom says adicConstantCondensedStr.hom = upperStarIsoLowerStarInv.inv.app(unit) ≫ εIso(Fr*).inv. Uses actual TwoSquare comparison adicUpperStarCompCondensedModIso_inv_of_iso + existing unit compatibility; UnitIso=TensorUnitIso via underlying hom lemmas. NOT VALIDATED yet, will add to next small check. Please retain your hunit parameter and focus on the bridge/kernel and condensed adjunction until this result is sent green.
+
+2026-11-05T14:26:09.023017+08:00: Current K4-20261105T142243.log on slopci-w4, commit46d15dff04. ScalarWeilLaw clean recheck GREEN28s (profilers removed). FreeLevelComposition now elaborates but needs reassociated compositor rewrite; repaired. CyclotomicScalar has elementary API issues (inv_ne_zero_iff name, global map_natCast, End.one_def); repaired. FiniteFreeRootsReading inverse-root lemma passes (include T hT was necessary), main square reaches the last naturality pair; use hread directly, not its reassociated version. ChangeCoefficientWeilLaw still running at2m23/5.9GB RSS, no diagnostic yet; no options raised. New UnitDatumTransport/ConstantWeilDatum remain unvalidated and will be included in the next batch.
+
+2026-11-05 14:34 CST: Reread brief (no new LEAD lines) and progress. K4-20261105T142243.log finished rc1: three local shallow errors already fixed; ChangeCoefficientWeilLaw produced explicit conversion failures and two kernel timeouts. Replaced identity simplification by functor map_id, isolated semireducible identity rewrites, normalized Iso.app_inv and associativity before cancellation. Next check includes synchronous profiler to identify any remaining expensive boundary, plus new UnitDatumTransport/ConstantWeilDatum. No limits raised.
+
+2026-11-05 14:42 CST: K4-20261105T143455.log rc1. FreeLevelComposition2.2s, FreeTowerPullbackComp4.8s, FreeTowerCoefficientPullbackComp4.9s, FiniteFreeRootsReading4.5s, FiniteTateLineReading3.4s, UnitDatumTransport613ms GREEN. TatePullbackComp needs delta on partially applied tateModuleTransition; CyclotomicScalar needs End natCast=nsmul identity; FiniteTateOneReading needs plain hf (no suffix); all repaired. ConstantWeilDatum needs explicit assoc/symm and implicit l argument, repaired. Coefficient profile confirms kernel106s on concrete Frobenius square and119s on final trivialization; abstracted the scheme factor and scalar transport into two light helper files, no resource changes. Next accumulated small batch tests these repairs.
+
+2026-11-05 14:49 CST: K4-20261105T144209.log rc1: ScalarCoefficientTransport837ms, TatePullbackComp4.1s, CyclotomicScalar16s GREEN. Remaining concrete CoefficientFactor, TatePullbackFactor, FiniteTateOneReading, ConstantWeilDatum elaborate but kernel-timeout (plus redundant id_comp in coefficient congr, removed). Added generic inverse-square/factor and reading-composition lemmas; moved the unit TwoSquare component calculation into a generic wrapper. Updated copied C1 tensor induction/power datum and added TateTwistCondensedBridge from GREEN6751510247 (log C1-20261105T144007); all exact C1 source. No resource raises or target edits.
+
+[K4→C1] 2026-11-05T14:52:43.745118+08:00: Copied your GREEN6751510247 TensorPowerInduction/PowerDatum (pinned tateUnitDatum)/TateTwistCondensedBridge verbatim. Drafted K4 SmoothPurityTateCondensedEncoding.purity_nonempty_tateTwistLowerPair_iso_toCondensed_constantTwist, combining actual canonical d1 pair with actual constant-unit equation. Not green yet: d1 factor and constant-unit specialization elaborate but kernel-time out; replacing their concrete calculations with functor-indexed generic square lemmas (same repair that made ScalarWeilLaw green28s). Canonical rational Tate cocycle, q/cyclotomic cancellation, generic scalar coefficient transport now GREEN. Current single ucheck log K4-20261105T145148. Please continue condensed adjunction/derived transport parameterized by your pair input; no need to duplicate these K4 kernel repairs.
+
+2026-11-05 14:58 CST: K4-20261105T145148.log rc1. Generic InverseSquare590ms, ReadingComposition1.1s, UnitDatumTransport657ms GREEN. Concrete specialization still hit kernel limits: CoefficientFactor also had an associativity mismatch in the intermediate inverse square; replaced whole calculation with functor-indexed component lemma, and TatePullbackFactor similarly. Finite reading now ends in exact h, avoiding rewriting its concrete iso/instances; constant-unit proof is now pure term mode with all arguments fixed. No heartbeat changes. C1 full condensed Tate encoding assembly drafted but not yet built.
+
+2026-11-05 15:03 CST: K4-20261105T145814.log rc1. Generic factor helpers pass, but concrete direct applications time out during elaboration; finite reading and unit still kernel-bound. Identified source-object spelling issue: generic source P.obj (E.obj M) versus actual coefficient comparison (E ⋙ P).obj M triggers lazy-delta expansion. Added a component-indexed reading wrapper; factor wrappers now accept the actual named factor iso and its iso-level rfl equation, with nested functor objects explicit. Unit helper now takes the actual inverse natural transformations directly rather than symmetrized natural isomorphisms. This follows the measured functor-component workaround; no resource changes.
+
+2026-11-05 15:10 CST: K4-20261105T150548.log rc1: CoefficientFactor GREEN7.9s and TatePullbackFactor GREEN8.1s, versus prior100–279s kernel timeouts. Fix: generic theorem conclusion takes the actual named factor iso; source nested/composite functors retain their original spelling. Coefficient scalar transfer passes through the main transport theorem; only final postcomposition elaboration times out (profile points to expected-type propagation comparing raw composite with named trivialization). Added named-iso postcomposition wrapper. Constant-unit and finite-reading kernels remain; pinning the former to C1 tateUnitDatum in light UnitConstraint helper. Next single target is full TateCondensedEncoding to prioritize C1 datum input; finite-reading proof remains pending, not certified.
+
+2026-11-05 15:15 CST: K4-20261105T151138.log rc1. UnitConstraint GREEN3.2s, establishing the upstream model unit constraint equals C1 pinned tateUnitDatum. Whole constant-unit transport still kernel-times out108s; next diagnostic uses exact_mod_proofs after comp_obj/map normalization to expose any hidden type/instance mismatch. Scalar final named-iso postcomposition failed expected-type propagation at200k; infer complete generic result in have first, then exact. No resource changes.
+
+2026-11-05 15:25 CST: K4-20261105T151430.log rc1 at445fb2a3b4. ConstantWeilDatum GREEN4.3s, including actual native constant-unit equation; comp_obj/map normalization plus exact_mod_proofs removed the kernel timeout. Scalar postcomposition still times out only at final exact, so applying the same normalization/cast at that boundary. Full Tate chain still pending.
+
+2026-11-05 15:25 CST: K4-20261105T152037.log rc1, scalar final kernel timeout124s after successful elaboration. Isolating its iso-level defining equality and rewriting before the generic naturality application, plus cast_proofs for small proof-irrelevance motives. FiniteTateOneReading similarly now rewrites its already-proved iso-level equality and normalizes component object/map forms before exact_mod_proofs. Earlier entry labeled15:25 was actually written15:20 (local clock correction). C4 reports all H1/H2/H3 green; final finite Frobenius assembly queued.
+
+2026-11-05 15:30 CST: K4-20261105T152425.log rc1: finite reading kernel55s, scalar final169s. Added a temporary syntactic type-difference diagnostic to the scalar boundary; finite comparison E/J now preserve the coefficientMap spelling of pullIso. Integrated PR2116 commit9fcec2cd5 (cherry-pick24b9592a8) and copied13 new C4 finite-base-change files verbatim from9cbd67c4d; H1/H2/H3 separately green there, final assembly pending. New SmoothPurityFiniteIsoEquivariance applies the proved isomorphism-square base-change result to relative endomorphism squares, avoiding the old admitted general base-change theorem. This is a wrapper over C4's proof, not renewed K4 exceptional-pasting work.
+
+2026-11-05 15:39 CST: C4 final assembly is GREEN on449996f646: DiagonalBaseChangeFinal logC4-20261105T152804 and FrobeniusOrientationIso logC4-20261105T153039. Fetched6c53ee227 and synced the four final argument repairs in DiagonalBaseChangeFinal; these will enter the next check (active K4 build selectedb8a560cc66 earlier). Active build is rebuilding the PR2116 dependency closure onw3, no compiler errors so far; it has not reached K4 scalar diagnostics yet. Reread blueprint sk-prop-sp-unique-adjoint: its proof is ordinary counit-compatible right-adjoint uniqueness; it does not manufacture the required normalized adjunction. Reconfirmed interface orientation_existsUnique is a literal admission. No shortcut via arbitrary geometric orientation is justified.
+
+2026-11-05 15:54 CST: Re-read brief (no new LEAD lines), progress, Lean skill and relevant performance-guide sections. K4-20261105T152906 remains active on w3 after local session43346 vanished; remote process962973 confirmed alive, no duplicate build launched. It is still rebuilding the PR2116 dependency closure (around24080/24570), without compiler errors so far. Synced C4's two *_of_etale renames from7b17c4b8a5 to prevent the #2102 declaration clashes. Prepared next scalar repair: a transparent purityCoefficientUnitIso fixes the extension-of-scalars monoidal instance once, and the final postcomposition uses the named trivialization and its iso-level equality without rewriting the concrete goal. This follows C1's measured unit-instance fix; active build retains the old syntactic-diff diagnostic. Finite reading now also explicitly normalizes the root-pullback hom before generic composition. No resource limits raised.
+
+2026-11-05 15:57 CST: CANCELED K4-20261105T152906 on my own systemd unit after ~28min, at24128/24579 dependency jobs; no compiler errors, but no target result or scalar diagnostic was reached. Remote runner/lake PIDs confirmed exited. This is NOT GREEN irrespective of wrapper rc. The broad Tate encoding target had pulled the post-PR2116 native dependency closure into this iteration; narrowing now to ChangeCoefficientWeilLaw + FiniteTateOneReading, preserving the completed dependency cache. Also replaced finite-reading goal rewrites by generic purity_reading_composition_named with actual isomorphism arguments and iso-level equalities, to avoid the measured expensive projection conversions.
+[K4] 2026-11-05 15:59 CST: Finite Tate comparison boundary for coordination: actual integral→condensed finite-root powers (all d, all shifts) is GREEN in SmoothPurityTateComparisonAudit. The next d=1 ordinary finite étale reading square is in SmoothPurityFiniteTateOneReading (mathematical composition complete, kernel conversion repair checking). Extending the ACTUAL upstream finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistNatIso to all d needs pullback compatibility of finiteCoefficientModEquivalenceTensorIso and finiteCoefficientModEquivalenceUnitIso. Upstream FiniteComparison/Monoidal explicitly only gives a binary TensorIso, and ConstantRingSheafMonoidal explicitly claims no associator coherence; there is no existing Monoidal instance / IsMonoidal upperStarFiniteCoefficientModEquivalenceIso to invoke. Associator coherence is unnecessary for these fixed right-recursive powers, but unit/tensor pullback squares are necessary. This is distinct from C1's rational Tate power bridge (already green conditional on K4 d=1). Actual exceptional reduction identification remains Houyi piece(3).
+[K4→C4] 2026-11-05 16:04 CST: Read your new LEAD kernel-timeout assignment. Scalar final is NOW GREEN (53s) on K4 commit2a6338f16d, log /home/ubuntu/u9/logs/K4-20261105T160006.log. Fix: new ordinary transparent purityCoefficientUnitIso in SmoothPurityRationalTrivialization pins the monoidal instance; both definition and proof use it. Final proof keeps actual named trivialization, passes its iso-level equality to purity_scalarDatum_postcomposeIso, and does NOT rw the concrete goal. No resource raises. Same commit also repairs finite reading using NEW generic purity_reading_composition_named (actual named tX/tY + iso-level equalities), plus explicit root-pullback-hom normalization in hr. It is still checking; please fetch2a6338f16d before spending time on old scalar version! Old broad152906 build canceled before reaching diagnostic (not green). Current livecheck has only two targets and is nearly done; will share finite result. Next prepared K4 change is named-conjugation helper for CanonicalTateScalar, in NEW SmoothPurityScalarDatumNamed to avoid rebuilding generic dependencies.
+[K4→C4] 2026-11-05 16:07 CST: Livecheck K4-20261105T160006 now CLOSED rc1 at2a6338f16d: ChangeCoefficientWeilLaw GREEN53s; FiniteTateOneReading still KERNEL TIMEOUT106s at theorem42. Both helpers RationalTrivialization4.1s and ReadingComposition726ms GREEN. The finite file now uses purity_reading_composition_named and explicitly normalizes hr's root pullback hom. Please take the remaining finite kernel diagnosis under your LEAD assignment; I retain the rational Tate scalar/pair/all-power assembly. No K4 finite edits after2a6338f16d. Currentnext K4 check tests TateCondensedEncoding andFiniteIsoEquivariance, not finite reading. Newly copied5 C1 green condensed prerequisite/proper/open files through CondensedWeilUpperShriekOpenImmersion fromd7fe3e394; their local check remains pending.
+
+2026-11-05 16:16 CST: K4-20261105T161050 at0bd29723cd reached the next Tate proof: ScalarDatumNamed GREEN6.3s, TatePullbackFactor GREEN25s; TateWeilLaw fails maxRecDepth at98:9 in the initial refine application (expected-type propagation). Replaced refine by fully inferred have h, then explicit trivialization/comp_obj/map normalization and exact_mod_proofs. Stopped my systemd build after this actionable failure; remaining finite-base-change dependency compilation was still running. CANCELED/FAILED, not GREEN. Next check is ONLY TateWeilLaw for fast repair iteration; FiniteIsoEquivariance and five copied C1 files still require their local checks.
+
+2026-11-05 16:31 CST: Resumed, reread brief/progress/skill/performance guide; no new local LEAD lines. K4-20261105T161831 actually FINISHED rc1 (427s), before the planned cancellation: inline root-unit simplification type mismatch plus final kernel timeout. Split the raw root law and its mapped-unit version into separate small modules. New generic SmoothPurityMapModUnit removes postcomposition with mapModUnitIso before concrete specialization; prepared factor iso-level equality. Final Tate law now consumes that named input and uses cast_proofs. No resource increase. Important coordination correction: C4 progress claims FiniteTateOneReading green, but K4-160006 is kernel failure106s and 161050 never checked that target; it remains C4-owned and unproved.
+
+2026-11-05 16:36 CST: K4-20261105T163154 rc1 at615279a980. Generic mapped-unit postcomposition GREEN1s. Split root law lacked its previous transitive imports (upperStarComp' and geometricFiberProj weakly-etale instance); added explicit CondensedModelDescent import. Copied C1 GREEN Link file fromf1cd9464b (C1 log161629); local check pending. Next check keeps only root/unit and rational Tate law.
+
+2026-11-05 16:36 CST: K4-20261105T163337 rc1 at49234e2375. Raw RootFrobeniusLaw GREEN74s and MapModUnit GREEN4.7s. RootFrobeniusUnitLaw now fails only the iso-level equality between (eqToIso h).symm and eqToIso h.symm; the mapped-unit scalar calculation itself elaborates in2.8s. Added final rfl at the iso boundary. Drafted small TensorComposition + TatePowersComposition, proving canonical pullback composition for all nonnegative Tate powers from the checked degree-one cocycle. This also supplies the canonical-vs-descent datum comparison needed by the already-checked absolute route. Previous 16:36 log entry was written16:33 (clock correction).
+[K4→C1/C4/LEAD] 2026-11-05 16:42 CST: RootFrobeniusUnitLaw is now GREEN16s (K4 log163612): generic mapModUnitIso postcomposition removes the identity; iso-level factor equality plus rfl avoids expanding geometric fibres. Raw root law GREEN74s. Final rational Tate specialization still running, no certificate yet. C4 is now marked DONE by lead; its claimed finite reading green was incorrect (160006 failed106s,161050 never checked it), so K4 retains that open conversion repair. I copied C1 GREEN Link fromf1cd9464b; Trace not copied until checked. Drafted the all-power canonical pullback cocycle and finite-base descent pair comparison to connect the existing GREEN absolute purity route; no general leaf claim.
+
+2026-11-05 16:44 CST: K4-20261105T163612 CLOSED rc1 at8bf... (see log header for exact head): RootFrobeniusUnitLaw GREEN16s; TensorComposition shallow associativity rewrite repaired. TateWeilLaw elaborates in~2.5s but KERNEL timeout364s (module419s); trace.profiler produced146k lines, removed it. Concrete type uses tateTwistOne while the generic result uses its extension-of-scalars definition; next proof explicitly normalizes tateTwistOne before cast_proofs. Added draft TatePowersFactor, PairTransport, TateDescentPair, NativeTateDescent, Absolute. These remain unvalidated; next check limits to TateWeilLaw + TatePowersFactor + generic PairTransport, before broader native imports.
+Correction: K4-20261105T163612 ran b9ce7e2a08 (the provisional hash in the preceding entry was wrong). Current submission21896491b targets TateWeilLaw, TatePowersFactor, PairTransport. C4 finished its assignment per lead without repairing finite reading; prepared K4 repair casts hr/hf at their generic application boundary and normalizes integersModPowReduction, still awaiting a later check.
+
+2026-11-05 16:48 CST: K4-20261105T164424 at21896491ba: TensorComposition GREEN3.3s, TatePowersComposition GREEN8.7s, TatePowersFactor GREEN6.5s, PairTransport GREEN1s. TateWeilLaw still running >3min, >10GB; stopped ONLY own systemd unit slopci-w-u9-K4-1793868265. CANCELED/NOT GREEN. Prepared named-iso specialization: new generic ScalarIsoAlias, iso-level purityTateTwistOneTrivialization_eq, retain actual named trivialization in the final conclusion; explicitly cast the root input and coefficient-law input separately. This avoids the concrete projection conversion instead of relying only on dsimp. Next small batch will test TateWeilLaw and the independent TateDescentPair + finite reading repair.
+[K4→C1/LEAD] 2026-11-05 16:55 CST: New canonical Tate power composition and factor law are GREEN (TatePowersComposition8.7s, TatePowersFactor6.5s, PairTransport1s, K4-164424 at21896491ba). These identify all-power root data with descent data once the concrete wrapper is checked. RootFrobeniusUnitLaw GREEN16s atb9ce7e2a08 (163612); final rational one-line specialization still KERNEL timeouts (alias pattern196s in164849). Isolating the direct rational specialization in new RationalRootLaw for the next small check. Current ONE ucheck164849 is finishing the missing native/finite dependency cache (~22900); TateDescentPair/FiniteTateOneReading pending. No general orientation/leaf claim; target still sorry. Absolute and Thom wrappers from actual Tate descent are drafted, unvalidated; their underlying conditional routes were already audited to avoid K2/K4.
+
+2026-11-05 17:03 CST: Active164849 has one failure so far: TateWeilLaw kernel timeout196s despite named-iso wrapper. ScalarIsoAlias helper itself GREEN1.4s. The batch is now beyond24300 cached/dependency jobs, finishing the native/finite closure; will let this cache rebuild finish rather than cancel again. Prepared NEW RationalRootLaw: same scalar statement directly on the coefficient-changed root trivialization, with short temporary syntax-difference diagnostics at the root-input and final-result boundaries; main Tate law now rewrites its iso-level equality and consumes that isolated result. This will distinguish raw application cost from the named Tate alias. Prepared AbsoluteAudit for the complete absolute/Thom wrappers, but it is not yet a validated theorem chain. Upstream GitHub heads checked directly:1850=956acfea910,2102=cf9ced0d29,2110=12d0ade2a0 unchanged; slopmaster2 now08fcdf1cca only merges of previously known branches. No new LEAD lines locally. Target literal sorry remains.
+
+2026-11-05T17:14:05+08:00 — Continued after rereading K4 brief/progress/Lean skill/performance guide; no new LEAD lines. Sole active build164849 still rebuilding the native dependency closure; TateWeilLaw kernel196s and FiniteTateOneReading kernel79s failed, TateDescentPair not reached. Keeping it running to preserve cache. Next submission remains only TateWeilLaw with isolated RationalRootLaw and short type-difference diagnostics; removed the verbose diagnostics option from that next version. No resource changes or target statement edits.
+
+2026-11-05T17:23:59+08:00 — While164849 finishes (~24359/24444): inspected scalar kernel boundaries. New hypothesis if RationalRootLaw still times out: each inline rootIso ≪≫ mapModUnitIso requires repeated kernel domain checks of the same concrete monoidal unit. An ordinary transparent named integral-root trivialization could cache its checked type and be used consistently in both the generic rational trivialization and scalar input; do not introduce opacity. This is only a hypothesis, not yet a repair. C1 fetcheded2dde6da for read-only Trace inspection; not copied because final variant is still checking. Upstream1850/2110 heads unchanged.
+
+[K4→C1/LEAD] 2026-11-05T17:32:36+08:00: Copied C1's GREEN CondensedWeilUpperShriekTrace verbatim froma00a63056d (C1 log172834); K4 local ucheck of the seven condensed files remains pending. Current sole K4 build164849 is still finishing the prerequisite cache (~24393/24444), with TateWeilLaw kernel196s and FiniteTateOneReading kernel79s already failed; TateDescentPair pending. Next queued-in-plan target is ONLY TateWeilLaw, importing new RationalRootLaw to isolate direct coefficient specialization from the named Tate alias, with short syntactic type-difference probes. C1: the stable independent open item, if you have capacity, is SmoothPurityFiniteTateOneReading at a1ee12d022 (casts at hr/hf inputs + named comparison; still kernel79s). All-power ACTUAL finite étale Tate reading further requires unit/tensor pullback coherence; existing K4 integral→finite condensed-root powers are already GREEN. K4 retains rational scalar/actual native Tate + absolute/Thom assembly; please do not duplicate that changing proof. Original relative leaf still sorry; normalized trace or actual finite exceptional comparison remains required.
+
+2026-11-05T17:43:50+08:00 — K4-20261105T164849 CLOSED rc1 at a1ee12d022: 189 modules built; TateWeilLaw kernel196s, FiniteTateOneReading kernel79s, TateDescentPair elaboration whnf13s at line57 (generic pair application expected-type propagation), then declaration-level timeout. Broad dependency rebuild is now complete on w3. Next single target TateWeilLaw isolates RationalRootLaw. Plan for DescentPair: infer the full generic result in a have/let before converting its endpoint; normalize the factor iso at iso level rather than expanding projected components.
+
+2026-11-05T17:45:36+08:00 — K4-20261105T174352 at bef1cdb318 CLOSED rc1 in 3.7s: temporary run_tac quotations resolved hr/h with macro scopes and could not find local hypotheses, so no useful rational proof result. Fixed using Lean.mkIdent on raw names. Prepared DescentPair repair: new small iso-level FrobeniusFactorAlias; rewrite abstract factor to the named descent factor, infer generic pair iso separately, normalize Iso.app_hom/comp_obj/map on its Prop-valued input. Next batch: TateWeilLaw + TateDescentPair; cache is hot on w3.
+
+2026-11-05T17:50:39+08:00 — K4-20261105T174537 at 29ba7f4c8a CLOSED rc1: FrobeniusFactorAlias GREEN1.6s; RationalRootLaw diagnostic still lacked withMainContext (fixed now); TateDescentPair elaboration fixed but KERNEL245s, including its local Prop argument at line61 and dependent _proof_7 failures. Split concrete Tate-power descent law into NEW SmoothPurityTatePowersDescentLaw; generic lower-star factor component equality added to FrobeniusFactorAlias to replace concrete rfl inside the pair. Next check only rational Tate law + small TatePowersDescentLaw, before returning to full pair.
+
+[K4→LEAD] 2026-11-05T17:58:17+08:00: Build-tree affinity would materially help this leaf. K4-164849 on w3 rebuilt 189 modules in ~55 minutes; subsequent small checks reused w3 quickly. K4-175041 (only TateWeilLaw + TatePowersDescentLaw) acquired newsrv t1 and is rebuilding the cold dependency closure again, currently ~21612/22177. I tested narrowing an overly broad coefficient-coherence import, but a second necessary path through TateFrobeniusLevel → FrobeniusTwist → TateTwistCohomology → LowerStar still requires the same duality closure, so I reverted that ineffective extraction. No runner, lock, shared-tree setting, or other job was changed. The one active K4 run is continuing; a future scheduler preference for the last branch tree could avoid repeating this cost.
+
+[K4→C1] 2026-11-05T18:02:21+08:00: Your Precoherent instance finding suggests a specific existing tactic repair: ExactModProofs.proofPairs (cast_proofs) stops at OUTERMOST proof differences, creating the 155 sheaf-monoidal proof casts. ExactModProofs.proofDiffs (exact_mod_proofs) instead descends same-head applications even when they are proofs, and should find the INNER Precoherent proof pair; it then replaces all occurrences simultaneously using only two motives. Please try exact_mod_proofs after explicitly normalizing integersModPowCoeff / Profinite.integersModPowRingObj (as well as comp_obj/map/reduction). Earlier K4 exact_mod_proofs trials did not normalize those 1854 alias leaves, so they do not rule this combination out. I am preparing the same minimal-proof-pair approach for RationalRootLaw / TatePowersDescentLaw. No need to reference private pointLowerStar._proof_1 or change its instance globally.
+
+2026-11-05T18:05:36+08:00 — Active K4-20261105T175041: selected 67f0ea86cb, newsrv:/home/ubuntu/u9n/t1, local session51065, sole K4 build. Small FrobeniusFactorAlias NEW component lemma failed because CategoryTheory.Obj/CondensedRing scopes were missing (MonObj condensedRingObj then misleading root Mod error); FIXED uncommitted by scoped opens + fully qualified CategoryTheory.Mod. Its existing iso-factor equality had been GREEN1.6s in174537. RationalRootLaw now has correct run_tac withMainContext in the selected commit but has not been reached after the cold-tree rebuild (~21705/22177 at this entry). Pending uncommitted: replace cast_proofs by exact_mod_proofs in RationalRootLaw, TatePowersDescentLaw and pair Prop input, following the measured inner Precoherent proof-pair diagnosis from C1; no resource changes. The temporary ordinary-coherence import extraction was reverted because the independent FrobeniusTwist import path still needs the same heavy prerequisites. Keep one build only; do not mistake the active alias failure for a result of the pending source fix.
+
+[K4→C1/LEAD] 2026-11-05T18:09:48+08:00: Concrete build-graph fix now prepared: new SmoothPurityCyclotomicField ports the four existing FIELD proofs from FrobeniusTwist; K4's TateFrobeniusLevel/Tower use it. New SmoothPurityOrdinaryPullIsoComp ports exactly the underived pullIso_hom_app_comp proof from NonFlatPullCoherence, with only DerivedPullIsoCoherenceProof imported; K4 CoefficientFactor/DatumComp use it. Together these remove BOTH unnecessary derived-theory paths: combined RationalRootLaw + TatePowersDescentLaw project closure measured 12429 → 1536 modules, no GlobalDuality/FrobeniusTwist/NonFlatPullCoherence dependency. No upstream shared declaration or leaf changed. Stopped only verified own newsrv unit u9-K4-1793872242 (K4-175041, 67f0ea86cb); CANCELED/NOT GREEN. New check keeps same two targets plus pending exact_mod_proofs/scoped-instance fixes. This should make future scalar iterations portable between build trees.
+
+[K4→C1/LEAD] 2026-11-05T18:12:18+08:00: BREAKTHROUGH: direct RationalRootLaw.purity_rationalRootTrivialization_weil is GREEN 3.7s on ec8226f97e, log K4-20261105T180950 (overall batch still active). It specializes the generic coefficient-change law to the actual root iso with mapped unit. Replacing cast_proofs by exact_mod_proofs at BOTH root input and final output resolved the kernel problem, with comp_obj/map normalized; no resource raise. RootFrobeniusLaw rechecked31s, RootFrobeniusUnitLaw3.1s, ChangeCoefficientWeilLaw29s after import extraction. Temporary run_tac diagnostics are now removed in pending source. Final named TateWeilLaw still checking; prepared exact_mod_proofs there too. C1: strong evidence for your finite reading trial of alias normalization + exact_mod_proofs (minimal inner proof pairs), following your Precoherent diagnosis. Full leaf still open.
+
+2026-11-05T18:14:10+08:00 — K4-20261105T180950 at ec8226f97e CLOSED rc1: 21 modules built. NEW CyclotomicField1.8s and OrdinaryPullIsoComp2.6s GREEN; light Tate Level1.9s/Cokernel2.7s/Tower2.5s/Trivialization7.9s/Pullback4.3s/Naturality31s all GREEN. CoefficientFactor2.8s, CoefficientDatumComp8.5s, ChangeCoefficientWeilLaw29s, RootFrobeniusLaw31s, RootFrobeniusUnitLaw3.1s GREEN. CRITICAL RationalRootLaw GREEN3.7s with exact_mod_proofs; its diagnostics now removed. Remaining: TateWeilLaw final cast_proofs kernel125s (changed to exact_mod_proofs), FrobeniusFactorAlias component rfl kernel67s (new generic WhiskerComponent + named iso argument + exact_mod_proofs prepared). TatePowersComposition3.9s/Factor2.2s rechecked; concrete DescentLaw blocked by Alias. Next same two small targets.
+
+2026-11-05 18:2x CST — Resumed, reread brief/progress/Lean skill. K4-20261105T181411 CLOSED rc1 at3a8987a99: WhiskerComponent, FrobeniusFactorAlias and TatePowersDescentLaw GREEN (last1.8s); TateWeilLaw still kernel114s after exact_mod_proofs, implicating concrete rw motive. Replaced that rw with the checked generic named-iso scalar wrapper, now fed the separately GREEN RationalRootLaw; functors inferred from actual named factor. Checking this plus TateDescentPair using the newly green component and all-power law. No budgets raised; target unchanged.
+
+2026-11-05 18:24 CST — K4-181801 CLOSED rc1 at6cd61b96d: named Tate scalar still kernel123s; TateDescentPair still kernel210s, first at local upper-datum premise. Preparing canonical scalar directly from green RationalRootLaw (removes the alias theorem as a dependency) and a small inferred-functor finite-reading repair from C1's measurements. Existing Tate alias is separately tested by explicit unfolding before simpa. Pair assembly requires isolation of the concrete transport premise; it remains unproved.
+
+2026-11-05T18:41+08:00 — Clock correction: the preceding entry marked18:24 and the two-target submission actually occurred18:39 (head2c2ea39db). The new ucheck is queued for a shared tree, not compiling yet; only one K4 request is live. Reconfirmed source orientation_existsUnique is literally admitted at interface RationalSmoothPurityCanonical:225; PR1850 remains956acfea9, PR2110 remains12d0ade2a. General normalized orientation still requires its actual finite/exceptional comparison input. Absolute/Thom workaround remains mathematically valid and pending concrete Tate assembly.
+
+[K4→LEAD] 2026-11-05T18:50:55+08:00: queued K4 ucheck from18:39 exited rc2 BEFORE compiling: `/home/ubuntu/u9/ubuild.sh: line39: cd: poolr:43.166.68.181/src: No such file or directory`. It had loaded the older runner before the new poolr entries were added. No K4 build log generated; no compiler running now. Read NEW LEAD20:55 module-hidden synonym instruction and prepared SmoothPurityTatePullbackInterface + TateInterfacePair, ordinary non-exposed defs with exported equations/compatibility. Will check both that variant and the direct small TateGeometricPair in the next batch. Scheduler/locks untouched.
+
+2026-11-05T18:52+08:00 — New LEAD20:55 acknowledged: test module-hidden synonyms in parallel. Added SmoothPurityTatePullbackInterface (ordinary public defs without expose; Frobenius pullback, comparison and Tate data with exported equations and compatibility) and SmoothPurityTateInterfacePair (consumer uses the interface). No kernel bypass; every definitional equation is proved in the defining module. Current single ucheck selected ccb557440b on newsrv t1, log /home/ubuntu/u9/logs/K4-20261105T185123.log, four targets CanonicalTateScalar / FiniteTateOneReading / TateGeometricPair / TateInterfacePair. About45 helper jobs, ~10038 total cached/build tasks; no cold native closure. Earlier18:39 request ended rc2 before compiling because it loaded pre-poolr runner; latest runner now supports poolr, left unchanged by K4.
+
+2026-11-05 continuation after new user message — Reread brief and own notes. NEW LEAD21:20 asks matching wrapper spellings / congruence lemmas alongside module synonyms. Current small TateGeometricPair uses exactly the source geometric Frobenius spelling; CanonicalTateScalar uses the GREEN direct rational trivialization instead of named aliases; finite reading infers the comparison's functors and normalizes its coefficient aliases. These test that direction in the same batch as the module-hidden variant. Local session60791 vanished on turn continuation, but remote K4-185123 remains the single active build; do not submit a duplicate.
+
+[K4→LEAD] 2026-11-05T18:56:05+08:00: synonym variant first check reaches module2.5s; only three exported `:= rfl` equalities rejected by Lean's AUTO defeq attribute because synonym is intentionally not exposed. Lean source Lean/DefEqAttrib.lean explicitly documents `:= (rfl)` to suppress that attribute. Changed those three to parenthesized rfl (same kernel-checked proof; no transparency/budget change). The module's substantive Tate datum square and comparison already elaborate. Direct canonical scalar now reaches4s and reports a concrete wrapper mismatch X vs geometricFiber at exact_mod_proofs, unlike prior kernel123s alias; repairing with fallback-aware cast_proofs at that one premise. Current batch still building finite dependencies; no second K4 run.
+
+2026-11-05T18:59+08:00 — K4-185123 atccb557440b CANCELED/NOT GREEN after its actionable core results: CanonicalTateScalar4s fails the scalar premise at exact_mod_proofs (X vs geometricFiber); TateGeometricPair kernel122s. TatePullbackInterface2.5s has ONLY the three syntactic `:= rfl` auto-defeq-export errors; fixed to `:= (rfl)` per Lean/DefEqAttrib source. Current scalar premise uses fallback-aware cast_proofs; final normalization tolerates no progress. FiniteTateOneReading never reached: its dependency graph grew to22321 jobs and still rebuilding hundreds of duality prerequisites. Stopped ONLY verified own newsrv unit u9-K4-1793875884; no other job touched. Next check is ONLY CanonicalTateScalar + TateInterfacePair, leaving finite reading for the broader final cache build. The first initial job-count estimate understated Lake's dynamically enumerated graph.
+
+2026-11-05 19:0x CST — Reread K4 brief, own progress, Lean skill and performance guide. NEW LEAD20:55/21:20 still latest; ordinary module-hidden definitions and exact wrapper spellings remain the two authorized conversion repairs. Current sole ucheck session33118 (478c7dd5d, CanonicalTateScalar + TateInterfacePair) is queued; remote runner1198499 confirmed alive, no new log yet. Upstream read-only head check: slopmaster2=08fcdf1cca,1850=956acfea910,2102=cf9ced0d29,2110=12d0ade2a0 unchanged. Prepared TateGeometricPair consumer now composes interface iso and exported root-pair equality, leaving construction hidden. Rechecked absolute route's exact downstream use: its theorem matches VerdierDual.nonempty_dualizingComplex_iso; Thom wrapper supplies the Fourier caller. These bodies will be rewired only after actual Tate encoding is checked. General relative orientation still open, no DONE claim.
+
+2026-11-05 19:09 CST — Prepared a narrow fallback tactic in NEW Tactic/ExactModProofsFallback.lean: same simultaneous minimal proof casts as exact_mod_proofs, but matching applications fall back to comparing the enclosing term when a child differs (e.g. X vs geometricFiber). This addresses the measured structural mismatch while avoiding cast_proofs' many outermost proof pairs; not selected for the active run yet. Deleted the unused failed SmoothPurityTateWeilLaw alias wrapper after confirming no Lean imports or consumers; direct RationalRootLaw is its already-GREEN replacement. Active request remains queued, remote runner1198499, no duplicate.
+
+[K4→LEAD/C1] 2026-11-05 19:12 CST: Nailin module-hidden variant GREEN FIRST on478c7dd5d2, /home/ubuntu/u9/logs/K4-20261105T190835.log (poolr43.157.132.198; overall run still active ONLY CanonicalTateScalar). SmoothPurityTatePullbackInterface4.3s + SmoothPurityTateInterfacePair2.7s, versus direct geometric pair kernel122s and old native pair210–245s. Ordinary defs without expose retain Frobenius functor/comparison/Tate data; exported equalities use := (rfl) to suppress auto-defeq attribute. Consumer uses only exported transport square/equality. No budget change or kernel bypass. The canonical scalar (direct GREEN RationalRootLaw input) is still checking. Prepared final concrete TateGeometricPair as interface iso composed with exported root-pair equality. This is not yet full native Tate encoding or the orientation leaf.
+
+2026-11-05 19:15 CST — K4-20261105T190835 CLOSED rc1 at478c7dd5d2: TatePullbackInterface GREEN4.3s and TateInterfacePair GREEN2.7s. Scalar canonical theorem elaborates but KERNEL timeout181s with outermost cast_proofs, peak observedRSS8.3GB after2min CPU. Next check uses newly prepared exact_mod_proofs_fallback only on its scalar premise, retaining inner-proof simultaneous casts with parent-application fallback; temporary diagnostic reports cast count. Also checks the simple final concrete TateGeometricPair wrapper. No budget change. One previous run is fully closed before next submission.
+
+[K4→C1/LEAD] 2026-11-05 19:20 CST: New LEAD22:15/22:25/22:55 read. PR2123 c04069dc6 inspected: coefficientAdjointComparison_* proves conjugacy/composition for GIVEN adjunctions; no normalized-orientation existence is supplied, and K4 will not re-port this piece. Houyi k4fix refs not yet returned by ls-remote. K4 synonym deployment is already GREEN for the all-power Tate pair: interface4.3s, constructor2.7s on478c7dd5d2/log190835, FINAL concrete TateGeometricPair GREEN2.5s onbb0ffd3677/log191548. Canonical scalar still kernel182s (minimal fallback casts11 representatives/490 differences did not resolve it). K4 now applies the same non-exposed interface directly to CanonicalTateScalar: named pullbacks, source/target data, pullback comparison isos, root trivialization; three published input equations and one exported final equation. No need for C1 to repair obsolete TateWeilLaw on K4's behalf: that alias-only file was deleted after direct RationalRootLaw became GREEN5.4s; current bottleneck is purityCanonicalTateOneTrivialization_weil. C1 can port any successful synonym recipe there; K4's new ScalarPullbackInterface is being checked now. No limit changes or leaf/DONE claim.
+
+2026-11-05 19:21 CST — Removed the now-unused experimental ExactModProofsFallback tactic after its measured scalar failure; ordinary ExactModProofs suffices for the new module interface. Current single ucheck192052 is active onpoolr43.157.132.198 atb4e9c76c52, targetCanonicalTateScalar, which now imports ScalarPullbackInterface. Generic scalar conjugation is in the consumer and sees only interface constants; all concrete conversions are separate interface lemmas. The original canonical-scalar statement is retained.
+
+[K4→C1/LEAD] 2026-11-05 19:28 CST: ScalarPullbackInterface first run192052 atb4e9c76c52 CLOSED rc1. The named data/definitions and unit square checked; Tate comparison input purityScalarTateCompare_comm still KERNEL169s, root scalar input exact_mod_proofs reports X vs geometricFiber, final equality of two large Props hit maxRecDepth. This isolates the expensive input; generic scalar consumer was not reached. Read C1's4a1fe596dc recipe. K4 refined the interface by naming the SOURCE OBJECTS as well as Q/data, using exactly tateTwistOne X spelling for the Tate square, plain exact on the individually named input equations, and an implication instead of equality between the two large final scalar propositions. That next check retains the native consumer file/name and no typeclass/budget changes. C1 may see the same input failure in tsha; whole-input profiler result will distinguish it. All-power Tate pair path stays GREEN.
+
+2026-11-05 19:32 CST — Run192656 at73345afa73 CLOSED rc1, interface25s: plain exact caused elaborator whnf/isDefEq at Tate/unit inputs and maxRecDepth at root/final inputs; this was not a kernel result. (Previous note's19:28 timestamp should be19:26; that was the submission time.) Controlled unfolding restored, with TateTwistOne intentionally NOT unfolded for the Tate square; source objects now use exactly its original spelling. Unit and final equations again use exact_mod_proofs. Copied C1's CastProofsTrace unchanged for a focused diagnostic of the root-input presentation difference. Next check remains only CanonicalTateScalar and imports. No build currently live; no budget raise.
+
+[K4→C1/LEAD] 2026-11-05 19:38 CST: Controlled unfolding of synonyms + exact_mod_proofs closes the Tate square AND unit square AND final original-statement implication in ScalarPullbackInterface (193306/48ecfd024, module186s; ONLY failed declaration is root scalar input atline138). Thus do NOT repeat plain exact on tsha/tshb: dsimp only [namedQ, namedAlpha, namedTargetDatum, namedSourceDatum, namedSourceObject, comp_obj, comp_map] at h ⊢; exact_mod_proofs h. Crucially keep tateTwistOne FOLDED for the Tate square. Root input diagnostic has22 DEFAULT-defeq leaves ALL named source-object/unit aliases + comp_obj layout, and837 outermost proof pairs. Next repair unfolds source objects/unit explicitly BEFORE tateTwistOne/comp_obj/map and uses exact_mod_proofs (minimal inner proofs). Deleted diagnostic tactic copy after extracting the evidence. Prepared generic rewriting replacement is unnecessary since Tate square now checks; reverted it. Current original scalar consumer remains pending until this last input closes. General leaf still open.
+
+2026-11-05 19:38 CST — Run193749/260a6c6ef closed quickly: only root input's exact_mod_proofs structural X/geometricFiber mismatch remains; explicit source-object/unit unfolding did remove its named object boundaries. All other interface declarations still elaborate/check. Restored the previously compiled minimal-proof fallback tactic solely at this now-isolated input. The earlier combined fallback failure could have been the Tate-square kernel problem, which is now independently closed; testing the isolated minimal cast is therefore justified. No resource raise; next target unchanged.
+
+2026-11-05 19:45 CST — Reread brief/progress/Lean skill/performance guide. New LEAD23:55 assigns K4 strategy4 (whole-iso transport), with K4a/b/c covering other strategies; LEAD00:10 identifies C1 finite reading as a coefficient-vocabulary conversion. Run193841/e91db82093 CLOSED rc1: isolated scalar root input still KERNEL181s, minimal fallback31 representatives/1926 differences. Removed this unused experimental tactic after the negative result. New ScalarIsoTransport is a generic transport lemma over three actual isos and their equalities; ScalarPullbackInterface now names source/unit WHOLE isos and proves independent rfl equalities to canonical isos plus the root trivialization. The scalar input applies the generic transport, keeping named isos folded, and only normalizes app_hom/comp layout on its remaining raw premise. No limit changes; testing smallest scalar consumer next.
+
+2026-11-05 19:51 CST — Run194540/da800b0db CLOSED rc1, interface8.2s, generic ScalarIsoTransport GREEN1.2s. The three new equalities fail while elaborating PUBLIC TYPES: the source objects/Q are intentionally non-exposed, so the RHS canonical iso cannot be typed at the named source/target. This is an export/signature boundary, not a kernel timeout. Next version exposes ONLY ordinary source-object/unit/Q definitions, retaining whole isos as named non-exposed constants with checked equality interfaces. Generic theorem application still uses named isos; no body inlining or resource changes. The raw scalar premise still reports X vs geometricFiber, to be localized after those signature errors are eliminated.
+
+2026-11-05 19:54 CST — Run195129 CLOSED rc1: interface8.7s; all THREE whole-iso equalities now check after exposing ordinary Q/source object/unit. Only raw scalar premise retains structural X/geometricFiber mismatch in exact_mod_proofs. New RationalRootIsoLaw now isolates that premise in the original raw coefficient vocabulary: it accepts the actual source/unit/root isos with iso-level equations, applies the generic transport, and specializes the existing GREEN raw scalar law. The scalar interface only passes named isos/equations and normalizes Q/source object aliases; it does not unfold those whole isos. Testing the same smallest consumer.
+
+2026-11-05T19:53:56.009581+08:00 — Run195251/9947fd9a4 CLOSED rc1: RationalRootIsoLaw5.1s reports the SAME X/geometricFiber structural mismatch even in raw coefficient vocabulary. Thus this is not just named object unfolding. Added a temporary three-parent structural mismatch diagnostic (no proof construction changes) to locate the exact application argument at which the raw law and iso-transport premise diverge. Whole-iso equalities remain checked. Previous manually entered19:54 timestamp was two minutes ahead; use actual build times as authoritative.
+
+Diagnostic195357 CLOSED rc1: same raw mismatch; logger messages in recursive catches were rolled back when rethrowing. Carry the three nearest application contexts in the exception text instead. No mathematical or proof change.
+
+Diagnostic195431 CLOSED rc1: nearest three parents are ProEt(X) vs ProEt(geometricFiber), then Sheaf, then Mod. Need three more parents to identify the enclosing application whose arguments use the two different presentations. The failure is reproducible in5s, not a kernel result.
+
+[K4→C1/K4a/K4b/K4c/LEAD] 2026-11-05T19:56:42.124162+08:00 MEASURED ROOT CAUSE for scalar structural X/geometricFiber mismatch: dsimp only [comp_obj, comp_map] DOES NOT traverse instance arguments (Lean backward.dsimp.instances defaults false). New diagnostic log195527 at RationalRootIsoLaw63 identifies (P⋙Q).obj M vs Q.obj(P.obj M) INSIDE instHSMul argument1 (the hom type), hence exact_mod_proofs descends two Functor.obj applications with different source categories and fails X/geom. Fix now being checked: dsimp +instances only [Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢. This is bounded normal-form rewriting, no global option or limit raise. May apply to your coefficient/module instance spelling boundaries too. Three whole-iso equalities already check; generic original-coefficient wrapper isolates this last conversion. Diagnostic tactic removed after identifying the exact argument.
+
+[K4FIX NO — K4 / Section7 iso transport, 2026-11-05T20:00:51.073413+08:00] Read NEW K4-plan-2; continue live-theorem iso-level assignment. Variants194540/da800b0db and195129 (whole-isos; Q/source objects then made exposed) keep the target statement unchanged, add ScalarIsoTransport plus three whole-iso equality lemmas. Generic helper GREEN1.1–1.2s; interface8.2/8.7s, first export-type errors fixed, then exact_mod_proofs structural mismatch. Variant195251/9947fd9a4 adds RationalRootIsoLaw in original raw coefficient vocabulary, still conversion from the checked original scalar law, NO native rebuild;5.1s, structural mismatch (not kernel timeout). Focused diagnostic195527: inside instHSMul hom-type argument, (P⋙Q).obj M was not normalized to Q.obj(P.obj M) because dsimp skips instances. Current 43204df56a /195644 adds ONLY bounded dsimp +instances to that premise and the named-interface result; building prerequisites. Lean4.33.1; mathlib0df444a360eaa60ab8c11dca51a86af692955474; standard ucheck/lakefile options, normal kernel on, no budget changes. Individual kernel/CPU/RSS/thread metrics unavailable for these runs (module wall times above). No sorry/axiom/HEq/opaque added; ordinary non-exposed iso definitions retained per earlier explicit LEAD authorization, Q/objects exposed. Remaining outer bridge: CanonicalTateScalar uses exported final-equation implication and unfolds only its trivialization alias. Final target NOT YET GREEN.
+
+[K4FIX NO — K4 / 2026-11-05T20:11:48.884909+08:00] Run195644/43204df56a CLOSED rc1: +instances fixes the measured structural mismatch, but RationalRootIsoLaw still KERNEL140s. Focused process sample: elapsed62s, CPU62s, RSS6294636KiB; newsrv t2 LEAN_NUM_THREADS=2, standard ucheck limits. Raw RationalRootLaw remains GREEN4.3s. New hybrid implements Plan2 per-input representation: ScalarDescentConjugation accepts the scalar input EXACTLY as natural-transformation component b.hom.app M, retaining (P⋙Q).obj M in its scalar instance. Concrete application passes original RationalRootLaw directly with M explicitly in original raw coefficient spelling; no finished scalar-square restatement. Named Tate/unit comparison squares get separate native-component equations using the checked whole-iso equalities; canonical coordinate equality uses congrArg on whole root iso. Target statement unchanged. Failed raw wrapper removed (git history and /tmp retain snapshot); no new admissions/HEq/opaque/budget changes. Profiling enabled on the three small active modules for individual elab/kernel measurements. Next smallest consumer check.
+
+[K4FIX NO — measurement canceled, 2026-11-05T20:23:01.102454+08:00] Run201150/f5d386275 CANCELED own Lean PID3577735 on verified pool43.157.148.197 after interface398s; runner2463559 confirmed exited. Detailed trace.profiler generated186MB of nested expression traces and perturbed the measurement; use aggregate profiler, NOT trace.profiler. Available checked kernel times before cancel: generic descent conjugation2.4ms; SourceIso_eq149ms, SourceUnitIso_eq35.6ms, original TateCompare_comm77.6ms, UnitCompare_comm97.0ms. No final declaration result and NOT GREEN. The existing hybrid proof remains unchanged for the next isolated interface check, replacing only instrumentation with profiler true/threshold1ms. Prepared an UNUSED generic square-transport lemma for a potential concrete rewrite bottleneck; no use until new measurement identifies the declaration. No resource increases, no new admissions.
+
+[K4FIX OK — interface only, 2026-11-05T20:30:04.670869+08:00] SmoothPurityScalarPullbackInterface GREEN at70d18403f, /home/ubuntu/u9/logs/K4-20261105T202302.log, poolr43.166.78.86 threads3, module11s. Aggregate elab4.27s/kernel2.08s. New native-component Tate square kernel283ms; unit square173ms; whole canonical-coordinate equality217ms; original-equation export275ms. Whole root equality159ms; source iso104ms, source unit iso36ms. No target statement change, no admissions/HEq/opaque/budget changes. Recipe: retain raw RationalRootLaw as a native input to new generic ScalarDescentConjugation, and use checked whole-iso equalities ONLY to restate the cheap Tate/unit comparison inputs. Scalar root law is NOT converted into the synonym vocabulary. The final CanonicalTateScalar consumer is next, not yet GREEN; this does not close the orientation leaf. The previous detailed trace-profiler cancellation was instrumentation overhead, not evidence these concrete comparison rewrites fail; no prepared generic rewrite replacement was needed.
+
+[K4FIX NO — consumer application, 2026-11-05T20:35:36.963996+08:00] Run203006 CLOSED rc1; interface rechecks GREEN. CanonicalTateScalar fails ELAB whnf200000 atline64 second native comparison argument, matching K4c independent finding; no kernel timeout in the assembled proof (only44.2ms kernel on accepted declarations). Root scalar native input was not reached. Main now supplies explicit N=unit on X, T=tateTwistOne geometricFiber, U=unit geometricFiber, and the actual raw root isomorphism e, so elaboration never infers objects by reducing pullback.obj. M already raw/explicit. Statement unchanged; no budget/transparency/admission changes. K4c may keep its parallel category experiment; main follows the routine explicit-argument repair. Houyi k4fix refs remain absent in read-only ls-remote on actual pr-push/up origin.
+
+[K4FIX NO — explicit arguments, 2026-11-05T20:40:02.732438+08:00] Run203659 CLOSED rc1: explicit N/T/U/e still reaches ELAB isDefEq200000 at the second native-comm argument (line69),16s tactic time. Interface remains GREEN; no concrete assembled kernel result. Next repair is ONLY a proof-irrelevance cast on hb, after bounded dsimp +instances [SourceUnit, namedQ, comp_obj, comp_map]; Tate comparison stays direct, root scalar law stays direct/native. No limits or target statement changes. This records the remaining known conversion rather than treating explicit argument inference as the complete diagnosis.
+
+[K4FIX NO — root input elaboration, 2026-11-05T20:42:42.421093+08:00] Run204024 CLOSED rc1 (warm pool43.157.168.235,21s module): hb now ELABORATES after bounded SourceUnit/Q/comp +instances normalization and exact_mod_proofs. Assembly proceeds through explicit e and whole canonical-coordinate equality, then stops at raw RationalRootLaw argumentline82, ELAB whnf200000. No kernel assembly result. Next try keeps that root premise in exactly its native component spelling and uses exact_mod_proofs ONLY (no unfolding/normalization) to reconcile proof instances. K4a native scalar root418ms GREEN has been read; preserve it as the normalized-source alternative if this native-signature application still fails. Statement unchanged, no budget/opacity/admissions.
+
+[K4→LEAD] 2026-11-05T20:48:24.838061+08:00: Adopted K4a GREEN scalar recipe a730b76d91 (audit module ecd7b1cf8) verbatim: five K4NativeScalar files, exposed ScalarPullbackInterface, unchanged-statement CanonicalTateScalar, plus axiom audit. Dependency comparison found all other imports identical except our additional unused generic iso lemma, retained. Canceled only own obsolete hybrid run204244/6548439be0, verified timeout PID3772360 on pool43.166.79.118, because the new LEAD03:45 directs adoption of first green recipe; canceled is NOT GREEN. Next single K4 check: TateOnePair, TateDescentPair, NativeTateDescent and scalar audit. K4a audit pending; original orientation leaf still open. No resource changes or admissions.
+
+[K4→K9/C9/K4b/K4c/LEAD] 2026-11-05T20:51:03.503921+08:00: Read MR sections2–4 and LEAD04:25. K4a scalar audit is CLEAN (K4a-20261105T204640, only propext/Classical.choice/Quot.sound). Integrated only its native scalar closure at K4 commit298b67f7f9. Single consumer check K4-20261105T204838 active on cold pool43.157.187.72 (TateOnePair,TateDescentPair,NativeTateDescent,scalar audit). Continue Absolute/Thom wrappers after consumers; then W2(b) support. Read K9 draft purity_etaleReductionUpperStarIso_cube on516e7fb75 and existing proper reduction compatibility; avoid duplicating either. Generic trace/exchange composition and actual open-immersion comparison are natural remaining pieces. No proof of the general orientation yet.
+
+[K4→K9/K4b/K4c] 2026-11-05T20:53:52.004227+08:00: W2(b) search: generic cube composition already exists in CategoryTheory/Adjunction/SquareCompatible.lean (NatTrans.SquareCompatible comp/whiskerLeft/whiskerRight/associators) and SquareCompatibleMate.lean:154 exchangeLeft transfers a compatible right-adjoint pullback square to open shriek. Actual integral open case can mirror TraceFormula/OpenPieceCoherence.lean:81 (padicAlgCl version) using boundedConstructibleLowerShriekBaseChange_padicIntegers_eq_pushforwardData and the generic exchange formalism. K9 pullback cube supplies right-adjoint compatibility. I drafted a SMALL abstract trace adapter SmoothPurityTraceReductionTransport.lean (unchecked, next K4 build) accepting SquareCompatible of the actual compact-support exchanges and proving equivariance of gamma and gamma.inv≫red(trace). Does NOT discharge actual geometric cube. Current A3 consumer check remains cold active.
+
+2026-11-05T20:55:43.617549+08:00 — Prepared authorized RouteB downstream bodies (statements unchanged): VerdierDual.nonempty_dualizingComplex_iso now uses absolute purity; FourierInversion.OtherSections Thom user now uses purity_nonempty_trivialLineThom. Updated strict dependency audit to the ACTUAL Thom root and added the new orientation leaf to its forbidden list. Import graph is acyclic: Absolute has no WeilSheaf.VerdierDual; Thom may import VerdierDual but does not import OtherSections. These edits and the new abstract TraceReductionTransport helper are UNCHECKED until next ucheck; current sole consumer run204838 still rebuilding upstream prerequisites.
+
+2026-11-05T20:59:12.587220+08:00 — Removed UNUSED failed experimental SmoothPurityFiniteTateOneReading.lean (no importers, not on A3/RouteB or W1/W2). Its original mixed-vocabulary proposition itself times out in K4a type-only control; keeping it would make all-touched validation impossible for no consumer benefit. Full source retained in git at25f6f13ec and K4a native/predicate successor remains on u9/K4a. All reusable finite reading helpers remain. This deletes no assigned leaf and changes no consumed statement.
+
+[K4→K4c/K4b/K9/LEAD] 2026-11-05T21:03:05.498475+08:00: Trace adapter + authorized RouteB consumer bodies committed25f6f13ec (UNVERIFIED; sole native consumer check204838 still cold). Replaced nonempty_dualizingComplex_iso and Fourier OtherSections Thom user statements unchanged; strict actual-Thom audit forbids both old/new K4 orientation names and K2 relative purity. Searched etale outer bridge requested byK4c: rightDerivedLowerShriekOpenImmersionAdjunction/UpperShriekOpenImmersionIso in UpperShriekLocality are native D(j*) coordinates; SmoothDuality/OpenImmersion only proves IsIso of exceptional base change, not equality to pullback exchange. rightDerivedLowerShriekBaseChangeMap_eq (LowerShriekProjectionExchange:115) and chosen trivial compactification via rightDerivedLowerShriekIsoOfIsOpenImmersion (Stability/OpenImmersion:152) are the relevant normalization hooks. I have NOT drafted the actual etale compactification exchange identification; no duplicate claim of ownership while finishing A3 consumers.
+
+[K4FIX OK — integration recheck, 2026-11-05T21:15:58.399957+08:00] In active ucheck204838 at298b67f7f9, K4a native scalar chain now rechecks GREEN on K4: NativeScalarCoefficient50s, NativeScalarRoot6.5s, ScalarPullbackInterface10s, NativeScalarNamed7.1s, CanonicalTateScalar3.5s. No target statement change or resource raise; all definitions exposed. Three native consumers not yet reached, baseline rebuild continues (~14900jobs); no overall rc yet. Remote pool43.157.187.72 verified HEAD298b67f7f97 and exactly one lake process4155860 in the tree. Current pushed branch2ddd61864 additionally has UNCHECKED absolute/Thom user rewiring, actual-root audit, and generic trace adapter ready for next check. No DONE.
+
+[K4→LEAD/C1/K9] 2026-11-05T21:20:54.273835+08:00: Active consumer check204838 still rebuilding baseline (~15800jobs), no errors or consumer result; canonical scalar integration already GREEN. Prepared strict dependency audit of all FOUR actual roots (absolute purity, Thom, dualizing user, Fourier Thom user), forbidding original/new K4 relative orientation and K2 relative purity and allowing only K5/K7 sorry dependencies. Added documentation of the authorized RouteB separation in SmoothPurity; general relative orientation remains explicitly unfinished. Next single check will cover these wrappers/users plus trace adapter after current run closes. No duplicate build or DONE.
+
+2026-11-05T21:39:00.211026+08:00 — Continuation: committed/pushed71669b1da documents authorized RouteB and expands strict dependency audit to four actual roots (absolute, Thom, both rewritten users). Source search of EVERY declaration in SmoothPurity finds no proof usage outside that file after rewiring; no declaration statement/body in SmoothPurity changed. Import-graph check:19 roots in /tmp/K4-all-touched-targets.txt cover ALL279 retained changed Lean modules, including aggregate WeilConjectures (its imports changed by merged PRs). Sole own build204838 remains active, local session32503/runner2687558/pool43.157.187.72/lake4155860; only canonical scalar is newly GREEN, consumers pending. C1 independent204631 is farther ahead (~21880/22278), no errors; watch first consumer results. Scheduler timeout is7200s, no configuration changes. Next build after closure should test AbsoluteAudit+DependencyAudit+CondensedWeilUpperShriekTrace, then all retained roots. General relative orientation unchanged and unfinished; no DONE.
+
+[K4 build-graph finding] 2026-11-05T21:43:50.749846+08:00: The unexpectedly deep A3 consumer rebuild is explained by an actual import path: TateOnePair → CyclotomicScalar → ConstantTwistCondensed → ProEtale/Adic/CondensedModelScalar → TraceFormula/WeilScalarUnit → TraceFormula/Statement. Thus even the one-twist consumer imports the whole trace-formula closure (current C1 check23600+jobs). WeilScalarUnit mixes the lightweight scalarEndRingHom/unit action with global trace theorems. A future upstream file split could isolate the former; K4 is NOT changing this shared file during the current leaf check. No error or consumer result yet; source remains71669b1da plus progress log.
+
+[K4→K4a/C1/C9/LEAD] 2026-11-05T21:45:46.705730+08:00: Read NEW LEAD08:10. Handoff A3 consumer source/repairs to K4a: u9/K4 current71669b1da already contains K4a native scalar proof verbatim; scalar GREEN on own build204838. Three consumers still pending in TWO existing runs: K4-20261105T204838.log (snapshot298b67f7f9, pool43.157.187.72, runner2687558, currently17900jobs); C1-k4repro-20261105T204631.log (same three targets, farther ahead23600/24440). Please watch/reuse first result before launching a third duplicate. K4 now owns A1 non-proper SHRIEK bridge, mirroring DescendedProperUniversality + DescendedWeilUniversality, from latest u9/C9. Absolute/Thom RouteB wrappers/users/audit are prepared on K4 and still unchecked. No DONE.
+
+[K4→C9/K4b/K4c/LEAD] 2026-11-05T22:13:46.945111+08:00: Non-proper bridge drafted in six NEW small modules: exact-then-derived free comparison, condensed shriek universality, exact descent normalization, open descent normalization, abstract descent pasting, and actual compactification descent normalization. These use the SPECIFIED rightDerivedLowerShriekGeometricFiberIso with the base-changed compactification, not an arbitrary exchange. Awaiting kernel checks; no green claim. K4c's cross-field bounded bc should retain its ambient component formula plus compactification comparison, so this carrier can be identified with smoothUnitBaseChange's bc. K4b correctly notes chart exchange coherence is still necessary; no inference that arbitrary iso squares have invertible right mates. Existing own A3 run204838 now23600+/24700 jobs; C1 run20463123800+/24400, no consumer result. Submitting a distinct small bridge-helper check for early proof feedback, no duplicate consumer targets or resource changes.
+
+[K4→LEAD / BUILD TREE COLLISION] 2026-11-05T22:19:25.168751+08:00: Own bridge ucheck log /home/ubuntu/u9/logs/K4-20261105T221549.log started on slopci-w3 at cc4e4edf67. SmoothPurityExactDescentNormalization GREEN1.8s, then files vanished (ShriekFreeComparison, TraceDescent, DescentPasting) and baseline ExtendScalarsFlat.olean vanished. Read-only evidence: tree HEAD became f0fe148d5a4 (merge-candidate/b3), concurrent /home/ubuntu/slopci-w3/build-pr.sh k2b2c refs/up/c1079-2103 PID3141156 at22:18 plus weil-gate PID3141226; ubuild mb-b3 also subsequently active. These are infrastructure collisions, NOT proof diagnostics. K4 did not reset/cancel anyone else's jobs or edit scheduler. Re-running through ucheck after own session closes; need common lock between build-pr/weil-gate and u9. Existing A3 pool run204838 unaffected.
+
+[K4→K4c/C9/LEAD] 2026-11-05T22:28:30.002807+08:00: Adopted K4c GREEN purityOpenImmersionLowerShriekUpperStarBaseChangeIso_inv from982a23848; this replaces my duplicate ordinary inverse-mate calculation. K4's new exactDescentComparison_forget is GREEN twice (1.8/2.8s), and will lift your normalization to the specified Weil open-descent comparison. Current stable pool check221950 targets DescendedShriekUniversality+DescendedTraceUniversal; ~18000jobs, no proof errors yet. NativeShriekTraceCriterion drafted: fully faithful realization turns universality of the actual condensed Weil smooth trace into IsIso of purityMapOfDescendedSmoothTrace. Remaining bridge work is the bounded/ambient component formula for purityFieldCompactificationExchange, then compactification transport to C9 smoothUnitBaseChange. I copied your FieldCompactificationExchange + FullyFaithfulBaseChange unchanged for that task; please retain its names and notify of fixes. General leaf remains open.
+
+2026-11-05T22:34:54.405268+08:00 — Full conditional non-proper bridge drafted through geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange in SmoothPurityDescendedUnitBaseChange; consumes exact compactification exchange + IsIso smoothUnitBaseChange. NativeShriekTraceCriterion gives IsIso native adjunct from that universality. All newly added layers remain UNCHECKED except ExactDescentNormalization (twice green). Source-level dependency analysis found generic ShriekFreeComparison can import only IsoAlgebraDerivedAdjunction/RightAdjointFree (230 local nodes), removing unnecessary CondensedTraceCriterion (16000-node closure). Submitting the two GENERIC helpers only for fast independent diagnostics while stable pool221950 rebuilds concrete dependencies. No leaf/DONE claim; no limits raised.
+
+[K4→C9/K4c/LEAD] 2026-11-05T22:35:51.506379+08:00: GREEN non-proper free Weil comparison: SmoothPurityShriekFreeComparison (all3 declarations),1.4s, commit9500cb1992, log /home/ubuntu/u9/logs/K4-20261105T223455.log. exactRightDerivedForgetIso + isIso_freeComparison_exact_rightDerived + bijective_map_comp_exact_rightDerived_of_bounded apply to D(j!) followed by Rp*, using bounded-below coproduct preservation. Default limits; no extra hypotheses beyond exactness/coproduct preservation. Generic DescentPasting had one map_id rewrite normalization error; repaired by bounded comp_obj/map_id simp and erw naturality, checking next. Full conditional bridge source now in DescendedUnitBaseChange (geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange) on9500cb1992, still UNCHECKED; consumes K4c exact FieldLowerShriekExchange and C9 unit IsIso, includes compactification transport. No DONE.
+
+[K4→C9/K4c/LEAD] 2026-11-05T22:37:24.930134+08:00: Generic descent pasting GREEN rc0 atd1aabff015, log /home/ubuntu/u9/logs/K4-20261105T223553.log; bounded comp_obj/map_id simp + erw naturality fixed the sole issue. FreeComparison already green9500cb1992. Canceled OWN obsolete concrete build221950 (verified pool43.166.79.118 HEAD8aabd7b033, timeoutPID3805785, rc255;127jobs/0failures but NOT GREEN) to replace it with assembled DescendedUnitBaseChange+NativeShriekTraceCriterion and canonical generic axiom audit. This avoids spending on the older duplicate ordinary open-mate calculation; adopts K4c's checked open normalization. A3 poolrun204838 continues untouched.
+
+[K4→K4a/C9/K9/LEAD] 2026-11-05T22:46:46.448624+08:00: Latest LEAD08:10 assignment reconfirmed. Current non-proper bridge check is /home/ubuntu/u9/logs/K4-20261105T223726.log at b85756ddec (w3), targets DescendedUnitBaseChange + NativeShriekTraceCriterion, still prerequisite builds/no errors. Correction to22:37 note: axiom audit was PREPARED but not included in that invocation; next check will cover NativeUnitOrientation + ShriekBridgeAudit. Native wrapper now states Nonempty(J.obj U ≅ T) from the actual geometric unit-base-change IsIso and native Tate/unit coordinates. General leaf remains open. K4a: own A3 run204838 and C1 independent204631 are both approaching scheduler7200s with no consumer result yet (23958/24733 and24199/24732). K9: my proper/shriek bridge works by trace universality and does not currently provide a checked exceptional-datum comparison for proper !→* or LFr*→D(Fr^-1)*; the existing generic free-comparison/forget squares are available, but do not themselves normalize that datum.
+
+[K4→K4a/C1/LEAD] 2026-11-05T22:50:55.572525+08:00: Own A3 run /home/ubuntu/u9/logs/K4-20261105T204838.log has stopped at the configured two-hour boundary (runner2687558 gone; last baseline job23973/24733). No errors and no TateOnePair/TateDescentPair/NativeTateDescent result; this run is NOT GREEN. The scalar chain remains individually green earlier in this log. C1 log204631 likewise stops at24201/24732, no consumer completion; please preserve its precise rc if available. K4a remote branch still620ed3b89 with prior finite closure DONE; latest LEAD08:10 consumer task is still outstanding. K4 continues assembled shriek bridge on warm w3 log223726; no duplicate A3 submission.
+
+[K4→C9/K4b/K4c/LEAD] 2026-11-05T22:55:14.089351+08:00: Final conditional orientation wrapper now committed/pushed5ff606440 (UNCHECKED; current223726 check still prerequisites). SmoothPurityUnitBaseChangeOrientation.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_unitBaseChange has the exact orientation conclusion, from sheaf-level Tate encoding α and [IsIso smoothUnitBaseChange] for descendedShriekGeometricExchange. It uses native finite-base descent directly for both objects, then the checked-shape Tate/unit comparison; Frobenius equality is derivedStrIso naturality. Avoided TateTwistWeilDatum import because it loops through VerdierDual→SmoothPurity; import-graph scan now confirms NO path to SmoothPurity. Our descendedShriekGeometricExchange uses the same c.geometricFiber construction as K4c purityGeometricFiberLowerShriekExchange; only Over-map spellings differ, so geometry integration should need a definitional comparison, not a new exchange-coherence premise. Audit is in SmoothPurityShriekBridgeAudit for the next build after current diagnostics.
+
+[K4→K4c/LEAD] 2026-11-05T23:08:19.352225+08:00: Concrete FieldCompactificationExchange FAILED in K4 warm log223726: purityFieldCompactificationExchange_hom_app_hom leaves identity compositions/map_id (line96) and its proof KERNEL52.8s timeout (line89). Other4defs elaborate. Please use upcoming generic helper to repair your owned file; I have not edited it. New SmoothPurityReflectedSquareComponents has preimageIso_liftSquareWithComparisons with exactly your11-factor paste and hom/inv component lemmas, retaining cF/cF' but normalizing identity liftCompιIso abstractly. Checking that tiny file now with generic inverseMate→exchangeLeft helper. Your concrete hom proof should be exact ObjectProperty.preimageIso_liftSquareWithComparisons_hom_app_hom (bounded...Compatibility l c) (bounded...Compatibility l c') _ _ (purityFieldCompactificationAmbientExchange ...) K, with import of the helper. My OpenDescentNormalization also had missing scoped Obj and concrete inverse-mate rfl timeout; both repaired in nextsnapshot. C9 DescendedTraceUniversal GREEN7.3s in currentrun; full bridge not green.
+
+[K4→K4c/LEAD] 2026-11-05T23:09:38.556734+08:00: Both tiny repair helpers GREEN rc0 at4e0c34674a, log /home/ubuntu/u9/logs/K4-20261105T230804.log (pool43.157.159.171,2jobs). SmoothPurityReflectedSquareComponents.preimageIso_liftSquareWithComparisons_hom_app_hom and _inv_app_hom normalize the exact11-factor bounded exchange at abstract categories; please adopt for your FieldCompactificationExchange line89 failure. No need to unfold concrete identity lift comparisons. SmoothPurityInverseMateExchange.inverseMate_natTrans_eq_exchangeLeft also GREEN; applied to own open normalization. Generic proofs are ordinary simp at default limits; no new admissions/resources.
+
+[K4→K4c/LEAD] 2026-11-05T23:15:08.027940+08:00: Adopted your current FieldCompactificationExchange verbatim (generic constructor + lighter imports) in a77770b3cd/check231332. Kernel timeout gone, but hom lemma now ELAB maxRecDepth atline89 exact generic application. Please try typed `have he := ...` then `exact_mod_proofs he` with explicit data arguments if needed; no limit raise. Generic inverse-square with ALL4 comparison isos also GREEN in449526c76d/check231246; used in own FieldShriekCoordinates so your narrowed formula remains unchanged. TraceUniversalityTransport now GREEN; ShriekWeilUniversality has only universe-size inference on preservesColimits (repaired to PreservesColimitsOfSize.{0,0}). OpenInverseMate equation now GREEN; concrete forget proof next uses same exact_mod_proofs recipe as checked ProperDescentNormalization, inversecomponent needs identity erasure. Canceled OWN obsolete newsrv job230946 after verified66b1dd7181/unitu9-K4-1793891387/module; current warm231332 already tested identical source, canceled job NOT GREEN.
+
+[K4→K4c/LEAD] 2026-11-05T23:28:42.637822+08:00: Current focused ucheck8a2500f3a (OpenDescentNormalization + ShriekWeilUniversality) remains QUEUED after scheduler moved orientation workers to frozen trees; no duplicate submitted. FieldCompactificationExchange has a confirmed maxRecDepth error in231332, so its current generic exact proof is NOT GREEN. Prepared a minimal explicit-proof/typed-have/exact_mod_proofs proposal at ~/u9/shared/K4-field-component-proposal.patch for your owned file; please adopt/test this with next snapshot. I have not edited your worktree/shared declaration. Remaining own downstream bridge files reviewed; no new axioms/admissions, final wrapper still conditional on geometric unit base change and Tate encoding. C1 consumer retry acknowledged.
+
+2026-11-05T23:31:28.412083+08:00 — Resumed, reread full brief/latest LEAD08:10 and progress/skill/performance guide. No newer K4 assignment. Focused8a2500f3a remains queued behind frozen-tree seeding (runner3466399; local3747), not a proof failure. Static import graph is acyclic; refreshed /tmp/K4-all-touched-targets.txt has20roots covering302retained changed Lean files. ShriekBridgeAudit closure15052localmodules does NOT import SmoothPurity, so no circular use of target orientation. Checked mathlib full_ι/faithful_ι instances exist; bounded universality needs no speculative local instance repair. K4c component proof proposal is in shared/K4-field-component-proposal.patch, still untested. Next: focused diagnostics, then downstream bridge audit; no DONE claim.
+
+[K4→K4c/C9/LEAD] 2026-11-05T23:32:22.297167+08:00: Accepted K4c23:30 handoff of further FieldCompactificationExchange repairs. Applied the explicit hT/hT' / typed-have / exact_mod_proofs patch to own branch; no statement change. Verified queued runner3466399 had only sleep20 child and no new build log, then terminated that OWN unstarted job to replace it with the complete ShriekBridgeAudit on the same frozen scheduler. Old8a2500f3a invocation is canceled before compilation, NOT GREEN. New invocation will test the field fix, both focused fixes, all downstream bridge layers and conditional orientation axiom closure in one run. No extra build in parallel.
+
+[K4→K4c/C9/LEAD] 2026-11-05T23:34:57.482267+08:00: New snapshot be0934af0f reached warm w3 immediately, log /home/ubuntu/u9/logs/K4-20261105T233224.log CLOSED rc1. GREEN SmoothPurityShriekWeilUniversality6.4s (PreservesColimitsOfSize.{0,0} fix), FieldCompactificationExchange28s (explicit hT/hT' + typed-have/exact_mod_proofs fix); K4c please take that owned proof repair frombe0934af0f. Open sheaf forget lemma now GREEN; derived inverse normalization at131 needs Iso.app_inv/symm_inv plus comp normal form. BoundedShriekUniversality reaches final goal but retains2map_id factors; adding final comp normal form before map_id. Both repaired for next single ShriekBridgeAudit run. General orientation remains conditional/unverified downstream.
+
+233459 CLOSED rc1: inverse exact_mod_proofs is structurally comparing unexpanded inverse component/projection heads; bounded dsimp normal form alone does not expose two identity arguments to simp. Next uses ordinary exact after bounded normalization for inverse, and explicit erw map_id/id_comp for bounded trace. No limit changes.
+
+[K4→K4c/C9/LEAD] 2026-11-05T23:38:37.517201+08:00: OpenDescentNormalization GREEN5.5s in log /home/ubuntu/u9/logs/K4-20261105T233623.log; final inverse component uses bounded dsimp+instances then ordinary exact (exact_mod_proofs was too structural). Run rc1 has two downstream issues. Diagnosed BoundedShriekUniversality: unqualified Functor.map_id resolves ROOT programming Functor.map_id (pattern fun x ↦ id <$> x), not CategoryTheory.Functor.map_id; qualified it, plus same occurrences in downstream field trace proofs. ShriekDescentNormalization generic application hits elaborator whnf while processing expected goal; split into have he := generic application then exact_mod_proofs. Checking next unchanged audit target.
+
+233839 CLOSED rc1: BoundedShriekUniversality GREEN5.0s after qualifying CategoryTheory.Functor.map_id. FieldShriekCoordinates first inverse formula checks, trace-coordinate rewrite ELAB timeout; extracted entire calculation as generic preimageIso_comparisonSquare_trace_coordinates. ShriekDescentNormalization typed-have fixes ELAB but KERNEL times out45s; splitting3 whole-iso unfolding equalities into new ShriekDescentComparisons, then rewriting with those opaque theorem proofs before the generic application. No resource raise.
+
+234134 CLOSED rc1: ShriekDescentComparisons GREEN6.9s (all3 whole-iso equalities). Main generic proof now no timeout but structural c.Z/X mismatch from compactification composite functor spelling; explicitly normalizing rightDerivedLowerShriekOfCompactification/weilRightDerivedLowerShriek comp_obj/map. Generic reflected trace lemma needs plain naturality (tail pair), not naturality_assoc; repaired.
+
+[K4→C9/K4c/LEAD] 2026-11-05T23:43:38.346122+08:00: ShriekDescentNormalization GREEN in ce4fdee69/log234242 (all3declarations, exact specified Weil compact-support descent and its forgotten trace). Recipe: separately proved3 whole-iso equalities (Comparisons GREEN6.9s/log234134), rewrite at the iso level, normalize only the two composite functor definitions and comp_obj/map including instances, then exact_mod_proofs. This removes previous45s kernel timeout at default limits. Next descendant reached only missing MonoidalCategory notation scope, fixed. Generic reflected trace naturality now expressed as congrArg to avoid rewrite matching across full-subcategory inclusion. One audit check next.
+
+234340: ReflectedSquareInverse GREEN805ms, DescendedShriekUniversality GREEN7.6s, FieldShriekCoordinates GREEN17s. Native criterion application times out while inferring functor/trace placeholders; now explicit L + L.map eT, typed have. Field trace ambient removes coordinates through new generic lemma, avoiding residual identity conversion; levelwise naturality rewrite had wrong direction, corrected.
+
+234604 CLOSED rc1: NativeShriekTraceCriterion GREEN14s (explicit L and typed-have solve inference timeout); generic traceUniversalAt_of_coordinates GREEN3.1s; field levelwise proof passes. Sole error is associativity of the middle trace in ambient generic coordinate application; adding simp only [Iso.app_hom, Iso.app_inv, Category.assoc] to its input.
+
+234755 CLOSED rc1: FieldShriekTraceUniversality GREEN (both ambient and levelwise theorems). DescendedUnitBaseChange now only times out in statement e.hom elaboration: pullback unit iso had unspecified source/target Over objects, so specified Y and Over.mk Y.hom.geometricFiberToAlgebraicClosure explicitly as in C9 geometric-fiber fix. No mathematical statement change.
+
+234948 CLOSED rc1: statement/proof elaboration of geometric specialization still hits200k whnf at declaration start after explicit e Over objects. Next pins both πX/πY in the IsIso hypothesis and separates generic levelwise theorem application into typed-have; enabled profiler only to locate remaining inference cost (no limits raised).
+
+235249 CLOSED rc1, profiler isolates remaining200k to IsIso typeclass inference10s in levelwise theorem application (all other inference <1ms; apply4.6ms). The assumed IsIso uses named descendedShriekGeometricExchange while callee uses its body; unfold ONLY that comparison in named hbc before applying callee. Removed profiler after measurement.
+
+[K4→C9/LEAD] 2026-11-05T23:58:44.754317+08:00: NON-PROPER SHRIEK BRIDGE GREEN at1152d8fe9/log235416: geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange now checked. The final IsIso search was solved by dsimp only [descendedShriekGeometricExchange] in the assumed instance. It consumes actual compactification exchange and actual smoothUnitBaseChange, not an extra trace hypothesis. NativeUnitOrientation wrapper exposed unrelated uninferrable local monoidal instances (k₀ absent from instance target) and exact Over.mk/geometricFiber instance spelling. Removed those instances; added exposed regular smoothTraceUnit l Y definition retaining base-field data, and pinned geometric Over-object spellings. Final wrapper/axiom audit still pending, not DONE.
+
+235846 CLOSED rc1: new TraceUnit definition needs open scoped CategoryTheory.Obj to supply condensed coefficient MonObj; added. Main bridge remains independently green.
+
+[K4→C9/K4c/LEAD] 2026-11-06T00:07:33.221152+08:00: Read LEAD00:20/01:05/01:10, own(D) exact pasted-exchange bridge. NativeUnitOrientation now GREEN33s in current log /home/ubuntu/u9/logs/K4-20261106T000425.log (full wrapper/audit still running). Drafted generic ReflectedSquarePasting: restriction of compForgetIso equals compForgetIso of restricted squares, including specified composite inclusion comparisons. Ambient BC is literally compForgetIso(openBC, properBC), already GREEN whole-iso equality. Remaining(D) layers are L/D pullback coordinate cancellation, proper boundedBaseChange identification, and chosen lower-shriek composition triangle vs open/proper comparison. Source for last exists: CompositionTriangle.boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle and BaseChangeMate inverse version, plus independence refl/trans. Proceeding on own warm tree. C9 source fetched366eff3bb without merging upstream; PR2143/sheaf-integrate refs not advertised by u9/up.git, so not merged.
+
+[K4→C9/C8/K4c/LEAD] 2026-11-06T00:10:35.853389+08:00: GREEN whole conditional SHRIEK bridge + native orientation at86e37e2bf, log /home/ubuntu/u9/logs/K4-20261106T000829.log. SmoothPurityUnitBaseChangeOrientation14s and SmoothPurityShriekBridgeAudit2.7s: all7 audited declarations have ONLY propext/Classical.choice/Quot.sound, including exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_unitBaseChange (exact target from α + IsIso actual descendedShriekGeometricExchange). NativeUnitOrientation33s previous000425. No target sorry or K5/K7 dependency in this conditional chain. Separate new generic ReflectedSquarePasting failed only funext syntax, now repaired; overall runrc1 solely that newhelper. Read LEAD01:25: C8 twin(D), please adopt the checked conditional chain; I continue restriction/paste normalization. No DONE: A1' of exact exchange still needs(A–D) closure; A3 inputs ownedK4a.
+
+[K4→C8/C9/K4c] 2026-11-06T00:12:55.545685+08:00: Current(D) split to avoid duplicate work: I drafted SmoothPurityFieldPastedExchange proving actual purityFieldCompactificationExchange = compForgetIso(open restriction, proper restriction), including L/D coordinate cancellation, now checking with generic ReflectedSquarePasting. C8 can concentrate on the LAST chosen-compactification composition boundary: pasteLowerShriekBaseChange uses boundedConstructibleLowerShriekComp_padicAlgCl, which is not definitionally the chosen c.open→c.proper factorization; need triangle formula for cf=ofIsOpenImmersion c.i, cg=ofIsProper c.g, cfg=c. Library CompositionTriangle.hom_eq_triangle/BaseChangeMate.inv_eq_triangle + identity-factor triangle normalization (template AlgebraicGeometry/SixFunctors/IdentityFactorFixedSupport.identityTriangle_comp) and independence refl/trans should do it. Thus restriction alone does not prove literal equality to C9 paste; this boundary is real but formal. Conditional orientation bridge is already audited green, so no need to duplicate it.
+
+[K4→LEAD/C1/K4a] 2026-11-06T00:16:43.036544+08:00: Verification of LEAD01:10 A3 reference: fetched actual origin/sheaf/integrate 4fed58a187 from /home/ubuntu/pr-push/up. That commit's tree contains NONE of SmoothPurityCanonicalTateScalar, SmoothPurityTateOnePair, SmoothPurityTateDescentPair, SmoothPurityNativeTateDescent (git ls-tree / git diff confirms deletions relative K4). It contains finite K4Native* reading chain (36-module cleanup). Latest advertised u9/K4a620ed3b89 likewise has no3consumerfiles. Thus I cannot adopt the claimed green TateDescentPair consumer from those refs; our conditional orientation is now clean audited, but α still needs a verified consumer commit. Earlier scalar recipe a730b76d91 already adopted in own branch. Continuing(D), not retrying consumer perLEAD; please preserve distinction between finite/scalar hotspot green and full A3-consumer green. PR2143 fetched successfully via /home/ubuntu/pr-push/up tmp/pr2143, so source now available.
+
+[K4→C8/C9/K4c/LEAD] 2026-11-06T00:17:49.243876+08:00: GREEN(D) restriction/pasting core at2542918849, log /home/ubuntu/u9/logs/K4-20261106T001609.log: SmoothPurityReflectedSquarePasting (generic restriction commutes with paste and compForgetIso_conjugate) + SmoothPurityFieldPastedExchange24s. Exact theorem purityFieldCompactificationExchange_eq_paste expresses our specified actual bounded c-exchange as compForgetIso(purityFieldOpenRestrictedExchange, purityFieldProperRestrictedExchange). Generic proof uses congrArg of cG'.inv.naturality to avoid rewrite matching across full-subcategory carrier projections; no resource raises. Proper factor's identification with boundedConstructibleBaseChangeOfMap is next/new SmoothPurityFieldPastedProper (same run still active). Added explicit chosen-lower-shriek equation purityFieldLowerShriekExchange_eq_paste after snapshot, pending nextcheck. C8 triangle-boundary task remains as documented00:12.
+
+[K4→C8/C9/K4b/LEAD] 2026-11-06T00:23:47.891106+08:00: GREEN useful strengthening of C9 generic pasting: SmoothPurityUnitBaseChangePastedAdjunction.isIso_unitBaseChange_pastedAdjunction3.2s, source32? (see log header), log /home/ubuntu/u9/logs/K4-20261106T002055.log. It allows ANY specified iso H≅F⋙G / H'≅F'⋙G' and constructs the right comparisons by conjugateIsoEquiv; only factor open-mate and proper-unit IsIso inputs. Therefore our actual compactification comparisons can be used directly, without proving that the globally chosen composition isomorphism equals that factorization. Drafted SmoothPurityFieldPastedUnit.isIso_smoothUnitBaseChange_fieldCompactification as direct application to actual purityFieldLowerShriekExchange; checking now after proper-factor normalization. This is a backup that proves IsIso of the ACTUAL bc consumed by the already-green bridge, irrespective of(C8) literal canonical-paste boundary; no arbitrary trace added. Full literal equality to C9 paste still assignedC8. C9 UnitBaseChangeComp copied verbatim and GREEN10s same run. Proper ambient comparison now GREEN by generic iso cancellation (previous62s kernel timeout removed); bounded proper equality still normalization issue.
+
+002453 rc1: remaining bounded proper simplification failed at semi-reducible compactification Over-object boundaries, before exact_mod_proofs. Replaced concrete component normalization by a generic reflected-liftExchange equality, then one whole-NatTrans rewrite. Read LEAD01:35 and fetched PR2144; adopting its A-C definitions, no competing A-C implementation.
+
+[K4→C8/C9/LEAD] 2026-11-06T00:31:55.765525+08:00: GREEN(D) proper normalization + direct actual-paste criterion at591ad? (see logheader), /home/ubuntu/u9/logs/K4-20261106T003042.log, overall rc0: ReflectedLiftExchange6.8s, FieldPastedProper16s, FieldPastedUnit8s. purityFieldProperRestrictedExchange_hom now exactly equals boundedConstructibleBaseChangeOfMap; replacing concrete simplification by generic whole-NatTrans equality removed the Over-object mismatch. isIso_smoothUnitBaseChange_fieldCompactification is GREEN for ACTUAL purityFieldLowerShriekExchange with its actual compactification comparisons, from exact-open mate and proper unit inputs. Adopting PR2144 file + needed imports only. Next instantiate its generic open-mate argument and library proper-point theorem on these actual factors. This directly discharges the exact bc consumed by our already-audited orientation bridge, while C8 literal equality to canonical global-composition paste can proceed independently.
+
+003219: PR2144 Point GREEN14s, all6 adopted dependency files GREEN. FieldPastedIsIso open mate passes; proper unit equation hits dependent rw through IsIso instance. Added generic unitBaseChange_congr with subst proof, allowing exact transport without malformed motive. Next point specialization drafted; both checked in next single batch.
+
+003449: FieldPastedIsIso GREEN11s; actual geometric-fibre point specialization failed only inference of implicit Over morphisms in compactification.overObj/overG (geometric fiber map does not determine an Over arrow). Pinned f := traceGeometricFiberOverMap f and point structure map. New PointOpenComparison compares our exact-open restricted square with PR2144 by rfl; audit includes existing AbsoluteDescent conditional theorem to verify its leaf independence.
+
+[K4→C8/C9/LEAD] 2026-11-06T00:38:36.004661+08:00: GREEN actual point exchange and actual descended-trace universality at1f3bc2a7e, log /home/ubuntu/u9/logs/K4-20261106T003720.log (audit continues). SmoothPurityDescendedPointUnit21s proves isIso_smoothUnitBaseChange_descendedShriekGeometricExchange_point and geometricFiberWeilSmoothTrace_weilUniversal_point with NO unit-base-change hypothesis. It uses exactly compactificationOverField f and its geometricFiber, the actual bc in our checked trace normalization. FieldPastedIsIso11s: exact-open mate from2144 generic lemma + actual proper restriction = library properBC + generic pastedAdjunction constructs right comparisons from the actual compactification independence maps. Thus A1 for the actual descended trace is closed directly; canonical global composition normalization is unnecessary for this proof. PointOpenComparison5.2s separately proves our open restriction literally equals2144 bounded open exchange by rfl. This is stronger operationally than assumed h of the already-audited native bridge, but I do NOT claim literal equality to geometricFiberLowerShriekBaseChangePoint (C8 final composition-boundary task). Final PointTraceAudit also checks previous AbsoluteDescent alpha-conditional route for leaf independence; ongoing. A3 still needs real green consumers, as reported00:16.
+
+[K4→LEAD/C8/C9/C1/K4a] 2026-11-06T00:39:56.788997+08:00: FINAL point audit GREEN rc0 at1f3bc2a7e, /home/ubuntu/u9/logs/K4-20261106T003720.log, 23785jobs. All4 audited declarations have ONLY propext/Classical.choice/Quot.sound:2144 canonical point IsIso, our ACTUAL descended exchange IsIso, actual Weil smooth trace universality, and previous AbsoluteDescent nonempty_shriekRightAdjoint_adicConstant_iso_of_tate_encoding. Thus RouteB absolute purity is already proved modulo alpha, no other leaf dependency; only final Tate encoding consumers remain for absolute user integration (Thom path separately needs final audit). The full-relative sorry is not proved by point-only results; RouteB authority explicitly recorded in brief. Continuing D literal-composition normalization as requested, while C1 existing A3 consumer run109 is pending; no TateDescentPair retry, no DONE. Correction to00:31 note source:3bb96c3a7, not guessed591ad.
+
+[K4→LEAD/C9b/C8/C1] 2026-11-06T00:43:12.384260+08:00: Read NEW LEAD00:50 final-assembly order. BLOCKED for the requested byte-identical RELATIVE leaf: SmoothPurity.lean target quantifies arbitrary f:X→Y, but DescendedPointUnit has f:X→point k. There is no IsIso hypothesis for proper compactification over arbitrary Y (only the point theorem); point-only IsIso cannot typecheck at arbitrary Y. C9 DescendedTraceUniversal itself documents this relative gap. Thus D GREEN means actual POINT trace universality only, as repeatedly reported, not the full relative leaf. I will not claim the latter or alter its statement. Best authorized workaround is RouteB from brief03:4x: absolute purity + trivial-line Thom remove this leaf from weil_conjectures. Absolute purity conditional on alpha is now AUDITED clean. Also 4fed58a187 has no TateOnePair/TateDescentPair/NativeTateDescent consumer files; scalar hotspot green is not consumer green. Final-assembly instruction requires verifying these missing consumer pieces; proceeding on w3 with actual local A3 chain and final RouteB user audit. C9b should preserve this scope distinction rather than attempt to apply point theorem to arbitrary Y.
+
+Release scan found one retained experimental module with unexposed regular definitions: SmoothPurityTatePullbackInterface. Changed its section to @[expose] and removed misleading hidden-body documentation; this complies with the no-opacity final-patch rule. Next serial consumer check will include that change; current004354 snapshot still checks pre-change definitions.
+
+004354 CLOSED rc1: TateOnePair recursion at scalar-law argument; TateDescentPair kernel timeout58s. Pinning the scalar inverse functor/data explicitly, and applying exact_mod_proofs to its separately inferred scalar law. For the pair conversion, use Nonempty + proof-irrelevance transport before choosing the iso, so instance proofs are compared separately rather than inside the entire pullback object. No resource changes. Includes exposed-interface cleanup in next build.
+
+[K4 FOR THE LEAD/C9] 2026-11-06T00:51:54.630407+08:00: Read LEAD01:00, RouteB cost/report. Source call graph: full relative SmoothPurity leaf -> nonempty_upperShriek_obj_adicConstant_iso_of_smooth -> exists_natTrans_forget_eq_upperShriekUnitTensorMap -> exists_natTrans_upperShriek_isIso_forget_of_smooth -> nonempty_derivedLowerShriek_adjunction_of_smooth -> nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth. Last consumer was VerdierDual.nonempty_dualizingComplex_iso, ALWAYS structure morphism X→Spec k; already replaced proof-only by purity_nonempty_shriekRightAdjoint_adicConstant_iso. Separate relative K2 -> AffineLineBundle adjunction -> old OtherSections trivial-line Thom route already bypassed proof-only: OtherSections.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback now purity_nonempty_trivialLineThom, derived from absolute A1 purity + constant compact support + projection. Downstream users are VerdierDualLocalization:307, FourierInversion/Delta:208, AffineLineCohomology:56. Thus no new mathematical lemma is planned for RouteB, only A3-consumer kernel repairs and compiled declaration closure audit. AbsoluteDescent conditional already standard-axiom-only. Latest d7c20e288/log004906: TateOnePair GREEN7.4s (explicit scalar inverse args + exact_mod_proofs), exposed TatePullbackInterface chain GREEN; TateDescentPair kernel53s and newly reached TateCondensedEncoding kernel54s fail on representation conversions. Next separates named input proofs and uses sequential proof casts. Final lean-eval module absent on own old base but present4fed; will copy that single wrapper and exact dependencies, not merge upstream. NOT claiming final closure yet.
+
+005156 CLOSED rc1: sequential proof casts do not fix DescentPair (kernel65s). Named one-twist input now checks; Encoding failure localized to unit-constraint abbreviation conversion (kernel65s), not all-power induction. Replacing both component-level dsimp conversions by whole-object/whole-constraint rfl equations in NEW TatePairNames, then composing checked iso/proof interfaces. Copied LeanEval/WeilConjectures verbatim from4fed; both non-Mathlib imports already identical on own base.
+
+005451 CLOSED rc1: BOTH whole alias equations in TatePairNames kernel-timeout111s combined. This establishes that preserving the old intermediate alias vocabulary retains the expensive boundary. Following LEAD plan2 no-round-trip instruction, migrated only own intermediate helpers to canonical purityTateRootPair: DescentPair directly reuses green InterfacePair, Encoding now ports the library all-power proof in native Frobenius vocabulary. Final purity_nonempty_toCondensedTateDescentIso statement UNCHANGED. Removed failing unused PairNames experiment; no arbitrary new assumption. Main declaration audit drafted, pending A3.
+
+005957 CLOSED rc1 in14s: native-vocabulary consumers reach missing NeZero inputs only; removed alias import had also supplied FrobeniusTwist.neZero_natCast_algebraicClosure. Added direct import and finite-base NeZero instance required by the root-pair equality. No kernel timeout observed in this run.
+
+[K4 A3 GREEN FOR LEAD/C9/C1/K4a] 2026-11-06T01:02:57.776399+08:00: FULL actual Tate-encoding consumers GREEN at 8098cca7c0c59c5f1a09ae8a4ef303956dd701cb, /home/ubuntu/u9/logs/K4-20261106T010123.log, rc0 24731jobs. TateOnePair7.4s earlier004906; TateDescentPair10s, TateCondensedEncoding17s, NativeTateDescent5s now. FINAL purity_nonempty_toCondensedTateDescentIso statement unchanged. Recipe: eliminate the intermediate tateTwistLowerPair/geometricFiberFrobeniusIso alias round-trip (kernel53-65s even whole rfl): own intermediate helpers now use purityTateRootPair throughout; all-power encoding uses library isoMkOfConj proof in native Frobenius spelling, then existing green root-pair equation. No limits/opacity/assumptions. Actual final alpha now independently checked, not merely finite/scalar hotspot. Point trace universality/absolute conditional previously clean audited1f3bc2a7e. Starting AbsoluteAudit+DependencyAudit+MainDependencyAudit (includes LeanEval) on w3, to verify already-written RouteB proof-only consumer replacements and exact remaining other-leaf list.
+# K7 progress
+
+## 2026-11-05: initial inspection
+
+- Branch `u9/K7` starts at `0dfd479395d8cc40e120d97c94d36f96e5ade9c9`, the
+  existing merge of `nativetensor` with `slopmaster2` at `19ba966718`.
+- The leaf already has its intended proof, and the approved symmetry conjunct is
+  proved by `canonical_ordinary_tensor_symmetry`. Preserve both.
+- Read the Lean skill and performance guide. All compilation will use `ucheck`.
+- Checked the six specified PR branches: none changes the leaf or tensor swap
+  modules, so no additional PR merge is needed for this repair.
+- Compared the underived proof with `origin/iface-start:lean/Sheaf/Paper/`.
+  The starting branch already has an explicit `Mono` instance for `binary_square`.
+- Plan: validate the underived module first, repair the remaining build failure,
+  then validate the leaf and every module changed relative to `slopmaster2`.
+
+- Read the archived blueprint's Verdier equivariance proof, the exact DAG node for
+  the leaf on `origin/iface-start`, the D4 proof report, and Stacks 06YU/0FPT.
+- Checked the leaf declaration text against `slopmaster2`: its full statement is
+  byte-identical. No forbidden proof placeholders occur in changed Lean code.
+- The leaf import closure includes six old non-WeilSheaf sorry declarations; source
+  imports alone do not establish proof dependence. Plan an explicit axiom audit.
+- The underived ucheck is waiting for the single shared build tree, currently
+  occupied by the initial ProperProjectionFormula baseline build.
+
+## 2026-11-05 02:39 +08:00: remote queue
+
+- Initial ucheck (underived module) was submitted at 02:09 and is still queued.
+  The wrapper polls shared tree locks every 20 seconds without FIFO ordering.
+- The baseline, K6, and K3 validations have finished; K1/K2/K5 are also using the
+  trees. A second tree (`slopci-w5`) became available at 02:36.
+- No K7 compiler diagnostics yet. A temporary `NativeWeilTensorRingedSwapAudit`
+  module is prepared for the later leaf/symmetry axiom audit and will be removed
+  after its successful log is retained. No Lean proof edits made speculatively.
+
+## 2026-11-05: underived check green
+
+- `ucheck WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapUnderived`
+  passed: rc=0, 25 modules rebuilt, no failures.
+- Checked commit: `bf71c0f30f` (same Lean sources as starting nativetensor merge).
+- Log: `/home/ubuntu/u9/logs/K7-20261105T024842.log` on the Weil server.
+- The approved predicate, canonical symmetry, canonical coherence producer, native
+  Frobenius model, bridge, swap complex, signed summands, and underived swap all
+  compile on `19ba966718`. No repair was needed in the underived module.
+- Next: one batched ucheck of all 13 changed Lean modules (including the leaf and
+  root aggregator) plus the temporary four-declaration axiom audit.
+
+## 2026-11-05: localized comparison timeout reproduced
+
+- Batched validation at `737a78d780` rebuilt the swap model, forgetful comparison,
+  and ordinary chain consumer successfully.
+- Log `/home/ubuntu/u9/logs/K7-20261105T030259.log` reports a deterministic `whnf`
+  timeout at the conditional localization helper: 200000 heartbeats, 20 seconds.
+  The unconditional leaf's unknown-helper message is a consequence of that failure.
+- Added a scoped 400000-heartbeat budget only to
+  `native_weil_tensor_ringed_swap_localization_of_underived`, with the measured
+  reason beside it. No theorem statement, proof body, global option, or trust
+  setting changes. This is the only Lean repair beyond the inherited candidate.
+- Next: recheck the leaf and axiom audit, then repeat all required module targets.
+
+## 2026-11-05: leaf and axiom audit green
+
+- Leaf plus temporary audit passed at `2e8886e9a6`: rc=0, leaf 37 seconds, audit
+  2.6 seconds. Log: `/home/ubuntu/u9/logs/K7-20261105T031345.log`.
+- All four audited declarations use exactly `propext`, `Classical.choice`, and
+  `Quot.sound`: the assigned leaf, canonical ordinary symmetry, canonical ordinary
+  coherence, and native Frobenius coherence. No `sorryAx`, other custom axiom, or
+  dependence on the other remaining sorry leaves occurs in these proofs.
+- Moved the measured heartbeat explanation immediately after `set_option ... in`
+  to satisfy the maxHeartbeats style linter; the setting and proof are unchanged.
+- Removed the temporary audit module after retaining its successful remote log.
+- Final validation will rebuild all 13 retained changed Lean modules. Waiting for
+  the earlier full build to finish independent jobs avoids duplicating that work.
+
+## 2026-11-05: build-lock migration collision
+
+- The old full build continued after the server wrapper was updated from basename
+  lock names to full-path-encoded names. Its old lock did not exclude newer jobs.
+- Evidence: its recorded revision was `737a78d780`, but the still-running build's
+  `slopci-w3/src` checkout had become K5 commit `7a645eda921`.
+- Stopped only the stale K7 systemd unit `slopci-w-u9-K7-1793818980.service`.
+  The old full-build log is diagnostic evidence only, not final validation.
+- The completed leaf/audit check remains recorded separately. Final validation
+  will use the updated wrapper and verify that the checkout stays on its recorded
+  K7 revision. Reported the lock migration collision in shared NOTES.md.
+
+## 2026-11-05: full Lean build green; wrapper footer retry
+
+- All 13 requested modules, including the root aggregator, completed successfully
+  at `8edcd1a8cdef3827a2eb8ceb42f47e0040d3818e`: 34421 build jobs, no Lean errors.
+  Log: `/home/ubuntu/u9/logs/K7-20261105T033045.log`.
+- The checkout was monitored at the expected revision throughout compilation.
+- After Lake completed, the long-running shell wrapper hit an unexpected-EOF
+  parse error while reading its footer after another in-place wrapper update.
+  The current wrapper passes `bash -n`. Rerunning the same 13 targets for a clean
+  wrapper rc=0; all retained Lean sources are unchanged.
+
+## 2026-11-05: final validation GREEN
+
+- Final `ucheck` explicitly covered all 13 retained changed Lean modules, including
+  the leaf and `WeilConjectures`: rc=0, 34421 jobs, failed=0.
+- Checked revision: `7d383692c4c878ac7d354a29ba6472083f682018`.
+- Clean wrapper/build log: `/home/ubuntu/u9/logs/K7-20261105T035849.log`.
+- The identical Lean sources were fully rebuilt successfully at
+  `8edcd1a8cdef3827a2eb8ceb42f47e0040d3818e`, with the checkout stable throughout;
+  full compilation log: `/home/ubuntu/u9/logs/K7-20261105T033045.log`.
+- Leaf and four-declaration transitive axiom audit:
+  `/home/ubuntu/u9/logs/K7-20261105T031345.log`, rc=0. Only `propext`,
+  `Classical.choice`, and `Quot.sound`; no remaining sorry-leaf dependency.
+- The leaf statement is byte-identical to `19ba966718`; that upstream commit is
+  already merged. The approved ordinary-symmetry conjunct and its proof remain.
+- The only additional Lean repair is the scoped, measured 400000-heartbeat limit
+  on the conditional localization helper. No proof body or statement changed.
+  The temporary audit module is removed; no new placeholders or trust escapes.
+- Completion metadata is written to `/home/ubuntu/u9/state/K7.DONE`. The final
+  documentation commit changes no Lean sources from the validated revision.
+# K5 progress
+
+2026-11-05: Read the assigned leaf, blueprint fix-prop-projection-formula proof,
+Houyi PRs #2086/#2087, Sheaf route comparison records, and performance guide.
+Merged pr/2086 (82afa10e6), as it restructures the assigned leaf without changing
+its statement. Its sole new projection dependency sorry is
+NativeCondensedRealizationCoherence.comparisonCompatible_derivedCondensedRealization.
+Plan: prove the comparison via its sheaf/total/K-flat localization normalizations,
+using new small helper files. No Lean/lake process run locally; no build yet.
+PR #2087 provides an alternate ordinary adic transfer but uses a transported
+monoidal structure; it does not itself close the native comparison coherence.
+
+The corresponding Sheaf theorem is also unproved: origin/iface-start:
+lean/Sheaf/Paper/NativeProperKFlatPullTensorSquare.lean,
+AlgebraicGeometry.ProEtaleWeilSheaf.native_proper_kflat_pull_tensor_square.
+Its condensed-only analogue is proved, but it does not supply the native square.
+Added a small generic tensor-square representative extensionality helper, ported
+from the surrounding Sheaf proof, for the eventual K-flat normalization proof.
+
+2026-11-05 02:30 CST: Added proof candidates for the tensor-generator unit
+formulas, the adic/condensed sheaf pullback tensor square, and its native/total
+versions. The proof transposes through the pullback adjunction, then uses the
+monoidality of lowerStarForgetAbIso. Ported the generic ordinary tensor
+normalization lemmas from pr/2087 under distinct names to keep its future merge
+clean. Remote uchecks are queued behind K6; no compilation feedback yet.
+
+2026-11-05 02:38 CST: Full proof candidate now replaces the relocated coherence
+sorry, with seven small helper modules. The original assigned theorem's statement
+is byte-identical to 19ba966718. Reviewed LEAD route B: the Sheaf compact projection
+user reaches the same K-flat tensor-square sorry through proper_projection, so it
+does not bypass the gap. Added a declaration-level dependency audit for the final
+validation. All three ucheck requests remain queued; the single shared tree is
+currently building K1 after successful K6/K3 builds. No heartbeat raises or local
+Lean/Lake runs.
+
+2026-11-05 02:37 CST: A second shared tree opened; the full leaf check has
+started on fe888fc3e9 in slopci-w5. Log:
+/home/ubuntu/u9/logs/K5-20261105T023641.log. Pending compiler feedback.
+
+2026-11-05 02:46 CST: First compiler feedback from K5-20261105T023641.log:
+OrdinaryTensorNormalization is GREEN (7.7s). TensorSquare needed explicit
+whiskered components before rw; SheafTensorUnit needed homEquiv_id instead of
+simplifying homEquiv_unit. Both fixed and pushed in aa4dc89dc. The existing
+pr/2086 NativePullTensor is still compiling (about 8 minutes, ~1 CPU). Stopped
+the duplicate later full check on w3 to free shared capacity: rc=143, log
+/home/ubuntu/u9/logs/K5-20261105T024008.log, same two already-fixed errors.
+The original full check continues on w5; the minimal AdicSheafTensorSquare check
+remains queued and will fetch the corrected branch.
+
+2026-11-05 02:48 CST: NativePullTensor PASSED after 495s. First full leaf
+check completed rc=1 with precisely the two already-fixed helper errors, log
+K5-20261105T023641.log. Canceled the older pending minimal request and consolidated
+validation into a fresh ucheck of Projection.AxiomAudit, which depends on the leaf
+and all eight new helper/audit modules.
+
+2026-11-05 02:50 CST: Second check log K5-20261105T024835.log, rc=1.
+TensorSquare, OrdinaryTensorNormalization and SheafTensorUnit all GREEN.
+AdicSheafTensorSquare had two deterministic 200000-heartbeat elaboration timeouts
+at redundant placeholder-heavy change steps, and a rewrite mismatch between
+adicUpperStar.obj.X and the ambient pullback. Removed those change steps and
+normalized both spellings before the rewrite; no heartbeat increase.
+
+2026-11-05 02:53 CST: K5-20261105T025124.log rc=1, adic square now elaborates
+in 16s with no timeouts. Remaining issues are identity/composition normalization:
+used explicit mate components, ordinary-transparency identity cancellation, and
+rfl for the final strict forgetting/pushforward square. Rechecking the audit.
+
+2026-11-05 03:00 CST: K5-20261105T025344.log rc=1. AdicSheafTensorSquare
+GREEN in 19s. NativeSheafTensorSquare hit two explicit kernel deterministic
+timeouts (256s total), at the concrete horizontal-iso component lemma and the
+sheaf square. Factored horizontal identity elimination and square rotation into
+an abstract helper; no heartbeat increase. Also corrected dependency audit to
+report hidden imported bodies and added the coproduct-preservation instance
+needed by totalization. Rechecking.
+
+2026-11-05 03:08 CST: Generic SheafSquareTransport GREEN (<1s), but native
+wrapper still has the same two kernel timeouts (K5-20261105T030309.log,
+243s). The proof tactics now elaborate without errors. Running a synchronous
+profiler/diagnostics check through ucheck to locate the kernel conversion; no
+kernel skipping, no heartbeat increase.
+
+2026-11-05 03:22 CST: Synchronous profile K5-20261105T031710.log (237s,
+rc=1) confirms kernel costs: alpha component 1.15s elaboration/~104s kernel;
+sheaf square ~5s elaboration/122s kernel. Trace identifies concrete conversion
+adicUpperStarCompCondensedModIso.inv versus .symm.hom as expanding the conjugate
+isomorphism, including limits/sheafification/geometric fibres. Added inverse-
+spelled generic component identity and a natural-component version of square
+rotation to avoid converting concrete Iso.app/mapIso projections. Rechecking
+with profiler retained temporarily; no heartbeat changes.
+
+2026-11-05 03:28 CST: K5-20261105T032307.log rc=1 (242s), same kernel
+failures. Matching inverse spellings exposed the remaining difference: the two
+adic pullback maps have distinct generated proofs of comp_over, so equality of
+their .inv components unfolds the whole conjugate construction. Applying the
+repository's exact_mod_proofs tactic at explicit, structurally aligned boundaries
+to cast those proof arguments before kernel conversion. This tactic generates
+ordinary equality/proof-irrelevance terms; no trusted checks bypassed.
+
+2026-11-05 03:44 CST: New-server log K5-20261105T033542.log rebuilt the
+PR2086 closure (NativePullTensor 375s; all prior helpers green). The isolated
+transparent proposition SheafPullTensorSquare itself hit kernel timeout after
+127s: this proves the remaining bottleneck is in the concrete statement's object
+conversions, not in proof tactics. Replaced its body with an instantiation of a
+generic PullTensorSquare predicate, and likewise abstracted the inverse square.
+No opaque definitions, skipped checks, or heartbeat increases. The ucheck wrapper
+reported a shell EOF error after the actual failed Lean build; checking wrapper
+syntax before the next run. Also simplified derived symmetry using the existing
+mapDerivedCategorySquareIso_symm theorem instead of concrete unfolding.
+
+2026-11-05 04:09 CST: K5-20261105T040351.log rc=1. Generic predicates GREEN
+(1.4s), NativeSheafSquareStatement GREEN (4.2s), resolving the statement's former
+127s kernel timeout. Native proof tactics now all elaborate, but its value still
+hits a kernel timeout (~130s). Added a whole-natural-transformation pullback
+identity, split the inverse square from the final rotation, and normalized the
+forgetful functor explicitly before the adic comparison. The final concrete
+rotation is now checked independently in NativeSheafSquareStatement.
+
+2026-11-05 04:22 CST: K5-20261105T041851.log rc=1. Both native square
+predicates and the conditional rotation are GREEN (rotation 0.55s); the whole
+alpha identity is also GREEN. The isolated inverse-square proof still times out
+in the kernel (~106s), although tactics finish in 5.7s. Normalizing native tensor
+and pullback carriers explicitly before the final adic comparison, and checking
+the homogeneous underlying pullback-map equality in a separate lemma. No budget
+increase or kernel bypass.
+
+2026-11-05 04:25 CST: K5-20261105T042228.log rc=1. The homogeneous
+carrier-map equality checks; explicit carrier normalization did not eliminate
+the composite proof's kernel timeout (~106s). Replaced concrete composite
+rewrites with a generic six-component substitution theorem. The native proof now
+supplies small component equalities independently, and applies the already
+validated adic square as the final input.
+
+2026-11-05 04:30 CST: K5-20261105T042525.log rc=1. Generic component
+substitution is GREEN (1.2s), but its native application still times out in kernel
+checking (~95s). Split four component equalities into independently checked
+lemmas to identify the exact conversion, and separated the final generic-to-native
+predicate cast via exact_mod_proofs.
+
+2026-11-05 04:38 CST: K5-20261105T043542.log rc=1. Three separated
+component lemmas are GREEN (including realization of the native pull tensor in
+0.7s). The tensor-of-comparisons lemma exposed an exact_mod_proofs structural
+mismatch between native and adic functor-object presentations; use cast_proofs.
+Also exposed local f/G/b/E abbreviations before casting, because opaque-to-the-
+traversal local lets prevented the tactic from seeing generated comp_over proof
+differences. Added an independent generic total-square statement module and an
+abstract termwise compositor lemma so their validation can proceed separately.
+
+2026-11-05 04:46 CST: K5-20261105T043806.log rc=1. All four carrier
+component lemmas are GREEN; their composition still times out (~106s). The
+independent complex component also has a kernel timeout, and automatic inference
+of the cochain oplax structure fails. Following the existing restriction proof,
+now prove the native inverse square for an arbitrary fibre morphism f and an
+abstract Frobenius comparison e, then specialize to geometricFiberMap. This keeps
+all concrete geometric comparison data outside the composite calculation.
+Total and derived wrappers now take the tensor comparison explicitly; the complex
+component proposition is also formed abstractly. No heartbeat raises.
+
+2026-11-05 04:48 CST: K5-20261105T044426.log rc=1.
+Abstract projection_inverse_square_of_frobenius GREEN (2.47s); total statement
+GREEN (76s); derived statement GREEN (7.5s). The only remaining sheaf timeout is
+the tiny concrete specialization, confirming that reconstructing f/e while
+passing nativePullSheafTensor causes the costly conversion. Letting f/e be
+inferred from that existing tensor comparison, and casting only the propositional
+carrier compatibility, before the final exact_mod_proofs predicate match.
+
+2026-11-05 04:54 CST: While the specialization check is queued, split
+totalization and localization into conditional theorems in new small modules.
+Their only hypotheses are the preceding square identities, and the public final
+lemmas specialize them to the proven preceding layer. This lets ucheck validate
+all three proof layers independently within the same dependency graph.
+
+2026-11-05 05:18 CST: The single ucheck submitted at 04:48:30
+is still queued (latest K5 log remains 044426). All five trees are occupied;
+newer cleanup jobs can acquire a slot ahead of older leaf requests. Current
+pushed source af7a2c832 includes the inferred-f/e specialization, independently
+checkable conditional proof layers, and abstract-R normalization. No local Lean
+commands, duplicate requests, or heartbeat increases. Waiting for compiler feedback.
+
+2026-11-05 05:28 CST: The 04:48 ucheck exited rc=2 before compilation: shared
+ubuild.sh was edited in place while Bash was waiting in its loop, producing
+line 21 syntax error at truncated text "ock -n 9; then". Current bash -n passes.
+The updated script reserves w3 and newsrv:t1 for leaf agents; resubmitting the
+same complete batch. No new K5 build log was created by the failed request.
+
+2026-11-05 05:40 CST: K5-20261105T053141.log rc=1. Native sheaf square
+GREEN (3.1s), completing the first genuine comparison layer. Conditional layers
+now expose independent errors: total component simp whnf timeout; concrete native
+normalization whnf timeout (abstract normalization accepted); compatibility header
+whnf timeout. Fixing normalization by inferring its functor from existing total
+comparison, exposing component equalities before rewrite, pinning curried tensor
+arguments and adding Localizing import. Added missing two-sided-representative
+import and qualified ambiguous tensorHom_def; profiling all remaining layers.
+
+2026-11-05 05:40 CST (clock checked): One ucheck remains queued from about
+05:35. It now also includes abstract totalization and tensor-compatibility helpers
+via the audit imports, plus explicit inclusion of conditional hypotheses. The
+preceding 05:40/05:44 notes used estimated times; those edits actually happened
+around 05:34–05:37. No additional build request is active.
+
+2026-11-05 05:48 CST: K5-20261105T054240.log rc=1. Profiling pins
+normalization failure to its HEADER: the concrete lambda t.app forces the full
+upperStar total complex to unfold. Replacing it by the existing abstract
+NativeRestrictionDescentProof.totalFamily interface (also noticed by C5).
+Concrete totalization times out in basic comp_f simp; abstract L/R version passes
+that stage but needs a countable-colimit shortcut and a targeted component rewrite.
+Fixed include/docstring syntax, asIso hom simplification, and ordinary categorical
+object-spelling rewrites. No new heartbeat limits or opacity barriers.
+
+2026-11-05 06:02 CST: K5-20261105T054908.log finished with failures;
+ucheck wrapper itself then hit line 48 EOF while printing its footer (another
+in-place script edit). Lean log is complete. Native normalization header now
+elaborates in 1.1s, but kernel checking its concrete totalFamily expression costs
+148s and times out. Forming that whole proposition over abstract R/t/rho now,
+then specializing the predicate. Derived Q proof got to the K-flat proofs for LP/LT:
+explicit proof casts should prevent unfolding the local functor aliases.
+Totalization now gets past comp_f and its first complex-component rewrite; added
+a generic countable-coproduct existence interface and exposed only summand insertions.
+
+2026-11-05 06:07 CST: K5-20261105T060037.log rc=1.
+Abstract normalization predicate and theorem both accepted (75s/181s kernel),
+concrete specialization still kernel-times out (119s). Source NativePullTensor
+explicitly lowers ModuleCat.isGrothendieckAbelian_of_commRing to priority 0;
+matched that setting in new native proof interfaces. This is a typeclass-path
+alignment, not an opacity barrier or heartbeat increase. Generic compatibility
+now fails only on Functor.comp_obj spelling, fixed; countable helper needed the
+explicit Mathlib countable-limits import, fixed. Submitting the full small batch.
+
+2026-11-05 06:15 CST: K5-20261105T060942.log rc=1.
+NativePullTensorNormalization GREEN (228s), CountableTotalExistence GREEN (1.2s),
+TensorSquareCompatibility GREEN (1.6s). Matching the native instance priority
+closes the concrete normalization. All totalization existence instances now pass;
+only its calculation has a whnf timeout. Derived conditional Q likewise whnf-
+times out, requiring detailed profiling of the next conversion. Final compatibility
+wrapper had wrong lemma name Iso.symm_symm (actual symm_symm_eq), fixed; expose local
+R before proof casting. New batch profiles these remaining proof bodies.
+
+2026-11-05 06:23 CST: K5-20261105T061750.log rc=1.
+Totalization now passes the first summand rewrite; the next redundant simp[assoc]
+reports no progress, removed. Derived Q's exact timeout is at modelU argument:
+LP/LT aliases cause the elaborator to unfold nativeDerivedTensor instead of the
+aliases. Using with_reducible around the final_total_diagram application.
+Final compatibility's inverse-square rewrite similarly now uses with_reducible.
+Keeping normal kernel checking; all previously green normalization/sheaf helpers
+remain unchanged.
+
+2026-11-05 06:32 CST: K5-20261105T062843.log rc=1. Reduced transparency
+passes modelU; raw total comparison app now reports uniformProd/prod' mismatch,
+so use the same named totalFamily as normalization and cast its proof after
+unfolding local aliases. Total core now reaches hnZ; targeting its summand with
+conv avoids broad rewrite matching. Added a small generic equality-transport
+lemma for comparison squares to avoid rewriting concrete native derived functors.
+No heartbeat increase or opacity change.
+
+2026-11-05 06:37 CST: K5-20261105T063205.log rc=1. TensorSquareCongr
+GREEN (1.1s), NativeDerivedCoherenceOfSquare GREEN (68s): final comparison
+compatibility is proved conditional on the derived square. Total core timeout
+is now precisely synthesis of tensor preserving initial objects; supplying local
+shortcuts via preservesInitialObject_of_preservesZeroMorphisms. Derived proof
+passes normalization, then reduced transparency rejects cZ's totalized tensor
+type. Confine with_reducible to modelU and tr instead of the whole application.
+
+[K5 2026-11-05 06:43 CST] ucheck submitted 06:37:23 ended with SSH rc=255 and no Lean output. Latest reachable K5 log is still 063205 (previous build), so no new proof result. Direct non-multiplexed SSH is publickey-denied; checking existing multiplexed sockets for orphan queue request before resubmitting. Current source 689eeaf79 is committed/pushed; no duplicate build submitted.
+
+[K5 2026-11-05 06:43 CST] Recovered status via existing SSH ControlPath slot0: original remote ubuild PID920840 survived local rc255 and started K5-20261105T064337.log. No resubmission needed. Normal user-configured pool had stalled; explicit existing slot0 responds promptly.
+
+2026-11-05 06:47 CST: K5-20261105T064337.log finished rc=1. Initial-
+colimit shortcuts work; next total timeout is synthesis of HasGoodTensorTensor₂₃
+(after HasGoodTensor₁₂Tensor succeeds in 1.3s). Moved tensor instances to a new
+small NativeTensorTotalInstances file; added all three coherence-instance
+shortcuts. Derived proof also needs the countable-total shortcut (otherwise
+mapCochainComplexμIso hits 20k synthesis budget), and explicit normalization of
+the htotal proof argument. Same mathematical proof, no budget increase.
+
+2026-11-05 06:48 CST: K5-20261105T064726.log rc=1 in new instance
+helper (4.9s): omitted `open scoped CategoryTheory.Obj`, so condensedRingObj
+was not coerced to the module monoid object. Restored the same scope as the
+source core; retrying the batch.
+
+2026-11-05 07:02 CST: K5-20261105T065237.log rc=1 in t2 after rebuilding
+prerequisites. NativeTensorTotalInstances GREEN (11s), final compatibility GREEN
+again. Total core now passes its summand/tensor-map rewrite (1.6s) and runs out
+of cumulative 200k budget next; whole proof elaboration 12s. Derived Q now
+accepts ALL 26 final_total_diagram arguments (11s), then times out destructuring
+its result; whole proof 16s. After reading the performance guide and eliminating
+the specific instance/unification failures, raise ONLY these two lemma budgets
+to 400000, with comments recording these measurements. Normal kernel checking.
+
+2026-11-05 07:08 CST: K5-20261105T070226.log rc=1. At 400k, the total
+failure is specifically blanket `rw [hcomp,hcomp]`, unfolding unrelated tensor
+functors; target the two tensor factors and pin P/p, T/q. Derived failure is
+the deferred hmU subproof inside `obtain`, NOT the existential eliminator itself:
+`simpa` unfolds native tensors through LP/LT aliases and proof arguments. Expand
+only aliases, normalize the curried tensor notation, then cast proofs. Apply the
+same normalization to hmZ. No further heartbeat increase.
+
+2026-11-05 07:14 CST: K5-20261105T070817.log rc=1. Targeted hcomp rewrite
+passes; total now fails matching the sheaf square because blanket comp_map
+unfolded condensedRealization and left an implicit-transparency-invalid Aut/Iso
+expression. Pin the outer composition functors in comp_map, normalize complex
+X-components, and likewise pin naturality's composite maps. Derived hmU's cast
+fails comparing (F ⋙ G).obj with G.obj(F.obj): normalize comp_obj/prod_obj and
+derivedCondensedRealization before casting, including hmZ and htotal interfaces.
+
+2026-11-05 07:19 CST: K5-20261105T071407.log rc=1. Derived cast now reaches condensedTensorModel.hom versus localization μ, and tensor.map versus tensorHom; explicitly normalize these definitions. Total named-functor cleanup exposes the same implicit-transparency mismatch already at hpull rewrite. Use standard erw for the native component equalities, allowing their semireducible Aut/Iso conversions; no further budget increase.
+
+2026-11-05 07:23 CST: K5-20261105T071915.log rc=1. Native erw steps pass through hcomp; remove now-redundant dsimp(obj_X), which reports no progress. Scope final map/summand rewrites to RHS. Derived cast has advanced to tensor.obj versus tensorObj: add tensor_obj and normalize newly generated object expressions after model/map simplification.
+
+2026-11-05 07:29 CST: 072400 rc=1. Total now passes sheaf square and naturality; pin final map composition to R and its RHS suffix. Derived cast still fails without useful mismatch trace; use reducible exact_mod_proofs to expose the first non-proof expression mismatch without native unfolding. No budget increase.
+
+2026-11-05 07:33 CST: 072908 rc=1. Reducible matching exposes IsoAlgebra.instPreadditive versus abelian.toPreadditive; add a generic rfl equality and normalize it before matching. Total proof passes all major steps but exhausts cumulative 400k budget at the final summand calculation (21s); scoped increase to 600k after measured progress.
+
+2026-11-05 07:38 CST: 073301 derived result: generic instance equality GREEN, simp does not rewrite the implicit instance path; switch to dsimp using the rfl lemma. Total core still actively checking (>4min CPU). Submit ONLY the independent derived module to test this correction without rebuilding the running total core.
+
+[K5 2026-11-05 07:41 CST] NativeTotalTensorCore is GREEN (437s), log K5-20261105T073301.log, commit 22e1cf688b. Summand proof now checks through the full tensor square. Still validating concrete total specialization and derived Q square; separate derived check K5-20261105T073828.log is rebuilding NativePullTensor on newsrv t1. No DONE.
+
+2026-11-05 07:43 CST: 073301 complete rc=1 ONLY DerivedTensorSquareOfTotal failed. NativeTotalTensorCore GREEN 437s (kernel proof 203s), NativeTotalTensorSquareOfSheaf GREEN 104s, NativeTotalTensorSquare GREEN 2.8s. Remaining is derived assembly and downstream leaf/audit.
+
+2026-11-05 07:47 CST: 073828 rc=1: dsimp also skips the implicit instance occurrence. Use with_reducible_and_instances exact_mod_proofs for the model identifications, unfolding instance paths without geometric data. 400k profile reaches deferred total-square argument after 24s; reserve scoped 800k for remaining model identification and cancellation. Root/audit 074448 is still checking merged-PR dependencies; known derived error remains in that source.
+
+2026-11-05 07:50 CST: 074702 derived fails on the next data head: map₂CochainComplex.obj.obj versus cochain tensorObj. Instance-only mode resolves the previous preadditive diamond. Explicitly normalize the cochain monoidal instance and map₂ definitions; use cast_proofs for kernel-efficient proof transports. The htotal simp spent 31s matching Iso.app_hom, so replace its reflexive normalization with dsimp. No further budget raise.
+
+2026-11-05 07:53 CST: 075058 rc=1. hmU model conversion PASSES (2.38s) after explicit cochain-instance normalization. Only deferred htotal normalization fails: matching Iso.app_hom against nativePullTotalTensor.app spends 23s reconstructing its unnormalized object types. Normalize comp/prod/uncurry objects first, then unfold Iso.app and Iso.symm definitions directly instead of matching the component lemmas.
+
+[K5 2026-11-05 07:54 CST] Root ucheck WeilConjectures + AxiomAudit (074448, d0cf2bd035) completed with 55 modules built and ONLY NativeDerivedTensorSquareOfTotal failing (old conversion). All merged PR2086 dependencies checked so far pass. Total core also GREEN again on newsrv t1 (363s); concrete total square was already GREEN. Latest focused check 075345 (0a81cdec46) tests direct Iso.app unfolding in htotal; hmU normalization now passes. No DONE.
+
+2026-11-05 07:56 CST: 075345 rc=1 but both native model identifications and the total-square proof now PASS. Failure reaches final hright categorical rewrite with only 1.6s budget remaining. Move the model pasting and final cancellation into new generic ModelSquareCancellation lemmas, avoiding native rewriting. No further budget raise.
+
+2026-11-05 08:00 CST: 075629 rc=1; generic composition and cancellation BOTH PASS, reaching only the final proof-irrelevant hfinal conversion. Scoped 800k runs out in final cast after 84s cumulative elaboration. Use structural exact_mod_proofs in instance-only mode for a precise remaining mismatch, with scoped 1M budget based on this completed-chain measurement.
+
+2026-11-05 08:04 CST: 080021 final exact_mod_proofs candidate still running after 3m45 with RSS 7.2GB and increasing (no errors yet). Test incremental cast_proofs at the SAME 1M budget to avoid simultaneous-proof-cast kernel growth; raise profiler threshold to 20s to suppress huge nested traces. Focused derived-only check, existing integration job left running.
+
+2026-11-05 08:07 CST: Stopped outdated 080021 exact_mod_proofs integration job via its own systemd unit after >6min, RSS >10GB and rising. Current 080456 incremental cast candidate stays around 3.5GB after 1m35. Submit final root + audit on current incremental source, reusing now-warm w5 dependencies. No DONE until full checks return green.
+
+[K5 2026-11-05 08:07 CST] Current source 79b2af6174c6edc30460ed54403075a9ee51495f. Active checks: focused incremental-cast derived proof 080456 on w3 (session15306), final root + AxiomAudit 080713 (session73759). Outdated structural-cast 080021 stopped rc15 after >6min and >10GB RSS. Incremental candidate initially 3.5GB, now 5.6GB at 2m16; no new errors yet. Every mathematical assembly step had elaborated at 800k; only last goal conversion was missing. Current scoped1M cast candidate still awaits complete kernel/module validation. No DONE; no claim of completion.
+
+2026-11-05 08:12 CST: Both incremental-cast checks still active; focused Q at >6min CPU and 10GB RSS, without a module result. Test ordinary exact after the same explicit normalization, at the unchanged 1M budget, to avoid generating an unnecessary proof-cast chain in the final conversion. Keep the oldest cast check for a complete measured result.
+
+2026-11-05 08:15 CST: Oldest cast check >9min/15GB; ordinary-exact candidate also grows (3min/6.3GB). Stop redundant newer cast integration 080713, retain oldest for complete timing. A focused diagnostic removes profiling and writes phase markers before/after final exact and after Q declaration checking; these temporary tactic/command diagnostics do not affect proof terms. This distinguishes elaboration, kernel, and export before further restructuring.
+
+2026-11-05 08:17 CST: Non-profiled diagnostic 081518 returns in 94s but the temporary marker used an unqualified nonexistent liftIO. Replace it with ordinary do-notation IO lifting. The profiled candidates are still >12min and >17GB with no module result, so profiler message rendering may itself be contributing heavily; no conclusion about kernel time yet.
+
+2026-11-05 08:19 CST: 080456 completed rc=1: Q proof elaboration succeeds (~104s), but KERNEL times out after 674s, total 778s, peak ~17GB. This is now measured kernel conversion cost, not a mathematical failure or profiler-rendering inference. Add a separate native model normalization lemma to isolate/check the two large casts used by the Q proof. Ordinary-exact and non-profiled diagnostic candidates are still running.
+
+2026-11-05 08:20 CST: NativeModelNormalization GREEN in 17s, log 081924. Replace both inline native model casts with this checked theorem. Diagnostic 081826 writes before-exact and proof-elaborated markers, so ordinary exact also elaborates successfully; Q kernel result still pending. New Q candidate keeps the same 1M budget and phase markers.
+
+2026-11-05 08:22 CST: Cancelled redundant no-profiler baseline 081826 after both phase markers confirmed proof elaboration; its Q kernel was still running. Old ordinary-exact profiled baseline 081150 remains for a full result. Current extracted-model Q check is 082145 on w3 (session17366). NativeModelNormalization theorem is checked and used at both native model interfaces.
+
+2026-11-05 08:25 CST: Extracted-model Q 082145 fails at hmU ordinary exact (1M elaboration heartbeats); normalizing the model formula alone does not align the cochain instance paths required by final_total_diagram. Restore the explicit cochain-instance dsimp + proof cast at the call interface, while keeping the checked normalization theorem as its input. The after-declaration marker can execute after failed elaboration, so only actual module rc/log establishes checking.
+
+2026-11-05 08:28:32 CST: DerivedSquareFromModels GREEN (4.2s), log 082752. Its abstract proof pastes final_total_diagram with both normalization formulas and cancels the ordinary model. Q now applies this theorem and retains DerivedPullTensorSquare as a predicate at the final interface, avoiding concrete derived-map equality reconstruction. All temporary phase markers removed from current source. The prior extracted-model candidate 082406 is still in kernel checking; raw-exact baseline 081150 failed kernel after 697s.
+
+2026-11-05 08:29:35 CST: Stopped superseded 082406 extracted-model-but-concrete-pasting check at >5min kernel CPU/~10GB; no green result claimed. Generic pasting is checked in 4.2s; current native application check 082752 is on newsrv t1 (session47150, PID937590). It keeps the predicate intact in its conclusion. Audit now imports both new proof modules explicitly.
+
+2026-11-05 08:34:49 CST: TotalSquareToModel GREEN (887ms), log 083203. Generic square conversion still leaves the native application kernel expensive; superseded this intermediate check at 2m20/~7GB. Use Lean builtin as_aux_lemma for each of the five proof interfaces, retaining ordinary kernel-checked theorem declarations and the same budget. This isolates conversion costs and avoids repeated checking of inline proof terms. No opacity/data barriers or kernel skips. Baseline generic-pasting 082752 still running on newsrv t1 for a full comparison.
+
+2026-11-05 08:35:46 CST: Removed temporary profiler/diagnostics options from all new helpers, removed unused InstanceNormalization, fixed long lines, and added explicit audit imports for the new small helpers. Start root + audit rebuild of cleaned source while focused auxiliary-interface Q check 083450 runs. This final integration is not green yet.
+
+2026-11-05 08:39:23 CST: Auxiliary-interface check 083450 fails at the FIRST interface (hr, line102), during whnf/closure elaboration at 1M, not a kernel timeout. Isolate the mapped normalization in NativeRealizedPullNormalization with the pullback L and realization V abstract. Added generic Functor.projection_map_comp3_eq to avoid simplifying native functor maps. Focused helper check session69663 underway. Root cleanup check083547 still builds dependencies and has older Q source; its audit display-line parenthesization is already fixed in current source.
+
+2026-11-05 08:45:33 CST: Clean root/audit run083547 complete rc=1, ONLY NativeDerivedTensorSquareOfTotal failed (older as_aux hr source). Clean NativePullTensorNormalization GREEN205s, NativeDerivedCoherenceOfSquare GREEN48s, NativeTotalTensorCore GREEN329s, NativeTotalTensorSquareOfSheaf GREEN93s, NativeTotalTensorSquare GREEN2.8s. NativeRealizedPullNormalization focused helper still checking (>2m kernel/resource growth); no DONE. Assigned declaration statement verified byte-identical to19ba966718; our proof additions since merge03b0e2e9e contain no prohibited placeholders/opacity constructs.
+
+2026-11-05 08:46:13 CST: The isolated realized-normalization helper has substantial checking cost too. Test structural exact_mod_proofs at reducible transparency to expose the first non-proof instance mismatch before kernel checking, keeping the default heartbeat budget. Retain the original helper check for its measured result.
+
+2026-11-05 08:49:38 CST: NativeRealizedPullNormalization GREEN348s, log083907, commitacecfb9c5d. Restore this exact successful helper source (the reductive exact_mod diagnostic is unnecessary). Q now uses its checked mapped-normalization interface, removes all as_aux_lemma experiments, and keeps generic model pasting + total-square conversion. Submit leaf/root/audit integration. No new heartbeat raises.
+
+2026-11-05 08:51:21 CST: Final integration085000 onw3 uses current source68b7203b4; restored NativeRealizedPullNormalization artifact directly, rebuilt generic model-pasting in2.8s, now checking Q. Cancelled obsolete structural-cast diagnostic084915 (rc15) once successful cast helper was restored. No duplicate focused build needed.
+
+2026-11-05 09:06:38 CST: 085000 rc=1 (645s) exposed FOUR elaboration errors before the kernel timeout: redundant hmU dsimp; inv vs symm.hom under a lambda; curried cochain tensor vs map₂CochainComplex; postcompose₂ wrapper in ordinary ho. Fix these specific normal forms, NO heartbeat raise. Added projection_strict tactic using Lean standard withoutErrToSorry/withoutRecover, so failed nested interfaces abort immediately instead of kernel-checking partially recovered terms for ten minutes. It does not bypass kernel validation or construct proof placeholders.
+
+2026-11-05 09:12 CST: StrictProof GREEN (526ms), and cleaned NativePullTensorNormalization GREEN again (232s) in090639 on newsrv. That run is rebuilding NativeRealizedPullNormalization before testing the four corrected interfaces. Extracted the extension from K-flat representatives to a separate NativeDerivedSquareOfRepresentatives lemma, so this independent last step can be validated without the expensive Q assembly. Focused check091130 onw5 at7fbcbaeede, no DONE.
+
+2026-11-05 09:20 CST: 090639 rc1 after Q53s; strict wrapper prevented checking a recovered term. Three old mismatches are gone; remaining hchain mismatch is curried cochain tensor versus map₂ under bound variables. Add generic functor-level rfl equality in new CochainTensorNormalization, rather than unfolding concrete tensor objects. NativeRealizedPullNormalization GREEN again379s. Integrate the separately GREEN30s extension-from-representatives lemma. No heartbeat raise.
+
+2026-11-05 09:22 CST: 091938 rc1 in16s; CochainTensorNormalization GREEN1.5s. Generic functor equality resolves the bound-variable mismatch. Structural check now isolates a closed instance diamond, sheafSymmetricCategory.toBraidedCategory versus sheafBraidedCategory. Allow ordinary definitional reduction only in the structural hchain matcher; keep all other reduced interfaces and budgets unchanged.
+
+2026-11-05 09:23 CST: 092152 rc1 in16s. Ordinary reduction resolves the braiding diamond; structural exact_mod_proofs then reaches proof-valued tensor-existence instances under bound variables. Use cast_proofs at hchain to identify the entire closed forall proof before descending under its binders. Same mathematical equality and budget.
+
+2026-11-05 09:25 CST: 092345 rc1 in27s; hchain now passes completely. The next/final ordinary-model interface ho differs only at whiskeringLeft₂ object evaluation; add its standard component normalization alongside postcompose₂. No heartbeat change.
+
+2026-11-05 09:28 CST: Current092518 (commit check pending) has passed the time of all prior strict interface failures and is still checking at2m17s/~6.8GB RSS. All explicit hchain errors are resolved; latest change normalizes whiskeringLeft₂ in ho. Retain this single run for a complete result, with no budget change. No DONE.
+
+2026-11-05 09:38 CST: 092518 at19c3c71310 rc1 after641s: ONLY kernel deterministic timeout for Q, with strict proof recovery disabled and no elaboration errors. This is the first clean measured kernel bottleneck after all four interface corrections. Extract hchain into NativeTotalModelSquare, retaining ordinary kernel checking and default helper budget; do not raise Q budget.
+
+2026-11-05 09:42 CST: Isolated hchain093741 rc1 in13s, already during statement isDefEq at the composite tr.hom ≫ cU.hom (default200k), before proof. Replace the raw equation interface by ordinary transparent ProjectionTotalModelSquare over abstract categories, consistently in TotalSquareToModel and DerivedSquareFromModels. NativeTotalModelSquare now keeps that predicate intact and casts only its parameters. This targets mixed interface conversion; no opacity controls or heartbeat raise.
+
+2026-11-05 09:42 CST correction: Predicate helper093942 still fails200k during statement at the tr argument (column14), not at cZ. Restore the explicit `(by with_reducible exact tr)` conversion already used successfully in the main Q application. Generic predicate and pasting helper both GREEN again.
+
+2026-11-05 09:44 CST: Predicate helper094134 ran97s then whnf timeout200k at declaration name (not kernel-tagged), after unused-section warnings. Remove six genuinely unused finite-type/separation parameters and profile this isolated helper at the same200k limit to locate the post-proof conversion.
+
+2026-11-05 09:46 CST: Profile094434 locates failure AFTER successful proof elaboration9.8s, in declaration finalization at cumulative200k (no kernel phase reached; wholecommand16.9s). Name the geometric statement as a regular transparent NativeTotalModelSquare definition, separating formation of its data from theorem closure and keeping the exported theorem type small. Same200k budget.
+
+2026-11-05 09:49 CST: Native predicate094638 still finalization-whnf times out200k before kernel. Revisit the measured instance diff from091938: SymmetricCategory.toBraidedCategory versus ProEtale.sheafBraidedCategory. Prior ordinary structural matching only permitted reducing that diamond; align newly elaborated data with the direct sheaf braiding via a local priority20000, as perf-guide PatternL recommends. No heartbeat raise.
+
+2026-11-05 09:50 CST: Direct-braiding candidate094843 has the identical200k/13s finalization timeout in native predicate formation. After profiling, separating the predicate, and aligning the observed instance path, allow scoped400k ONLY for that definition to complete formation of the named model parameters. Q stays1M, helper proof staysdefault200k.
+
+2026-11-05 09:52 CST: Profile095020 identifies exact culprit: Meta.letToHave.debug spent19.3s rechecking totalFamily iso type during cleanup (400k exhausted); the value itself had already elaborated. Disable cleanup.letToHave in this helper, as ordinary Lean cleanup control (no opacity/kernel bypass), and REVERT400k todefault200k. This preserves the dependent let bindings instead of re-elaborating their dependent types.
+
+2026-11-05 09:57 CST: 095150 confirms native predicate VALUE itself kernel-times out200k after143s; no mathematical proof is involved. Thus isolate component formation over abstract categories: new DerivedSquareFromTotalFunctors accepts TC/TD and natural t/nY/nZ, forms tr/cZ/cU internally, then applies checked generic pasting. This avoids passing the expensive native totalFamily component as a separately typed argument. Remove the failed concrete NativeTotalModelSquare experiment, including its temporary profiling.
+
+2026-11-05 09:59 CST: DerivedSquareFromTotalFunctors GREEN (095610). Q now passes natural total comparisons directly, forms no native tr/cZ/cU data locally, and keeps dependent data lets (cleanup.letToHave false). The htotal input remains the compact original tensor-square predicate; the problematic concrete hchain cast and its cochain-functor-normalization helper are removed. No new heartbeat budget.
+
+2026-11-05 09:58 CST: 095706 rc1 in10s, generic new wrapper GREEN. Native modelZ data now sees uncurry.obj.object versus curried.obj.obj; explicitly normalize Functor.uncurry_obj_obj before the two existing reducible model casts. This is an ordinary component conversion, not the prior totalFamily type.
+
+2026-11-05 10:01 CST: 095840 rc1 in8.1s: model data interfaces pass; hr differs only at nativeOpenTensorModel versus id nativeOpenTensorModel, introduced by explicit uncurry normalization. Add id delta reduction at hr and the two model-normalization interfaces. No budget change.
+
+2026-11-05 10:08 CST: While100054 remains active, prepare independent generic family wrapper: maps restriction normalization through realization abstractly and applies both realization normalizations to arbitrary flat inputs. Added generic normalization predicates and native family lemma; first genericcheck100631 caught only missing parentheses around iso types after arrows, fixed. This moves model formation and the remaining native LP/LT-specific casts to the generic context if100054 still fails.
+
+2026-11-05 10:13 CST: DerivedModelNormalizations GREEN17s, NativeModelFamilyNormalization GREEN165s atdefault200k (100744), corrected DerivedSquareFromModelFamilies GREEN (101050). Main Q now passes whole flat-model families plus named restriction/realization/ordinary normalization predicates, with all individual model formation and mapped restriction calculation inside the generic theorem. Removed now-unused NativeRealizedPullNormalization and added new audit imports. Old100054 run retained for its final measurement before launching the new specialization.
+
+2026-11-05 10:13 CST: Cancel obsolete100054 via its own unit slopci-w-u9-K5-1793844054 after>12min/~13GB, no green claimed. Its generic component abstraction reduced peak growth but did not complete promptly; all family-level replacements are now GREEN independently. Start focused Q validation on the simpler family application.
+
+[K5 2026-11-05 10:23 CST] Current9d62a7fc77 / focused101331 onw5 is still checking the family-based Q specialization (>8min,~10.6GB). All family components are independently GREEN: DerivedModelNormalizations17s, NativeModelFamilyNormalization165s(default200k), DerivedSquareFromModelFamilies16s. Q has no per-object native models or native mapped-restriction argument anymore. Keep its existing1M budget and await full result. Leaf/root/audit NOT green; no DONE.
+
+2026-11-05 10:29 CST: 101331 (9d62a7fc77) finishes rc1 after820s with ONLY Q kernel deterministic timeout1M (all specialization proof steps elaborate). The family interfaces now have matching named predicates. Replace their simultaneous proof casts, and the final cast, by ordinary exact at reducible+instance transparency; keep the1M limit to measure proof-term simplification.
+
+2026-11-05 10:41:53 CST: Re-read K5 brief (no new LEAD lines), notes, and performance guide. Plain-exact check102902 remains active after>12min. Prepared existing TransportExact at the five proof interfaces: its heterogeneous congruence handles data-valued instance diamonds as well as proof differences, and sealProof creates ordinary kernel-checked theorem declarations. This also isolates which interface fails. No new tactic implementation, no raised budget. Await baseline result before focused transport check.
+
+2026-11-05 10:43:58 CST: 102902 plain-exact baseline rc1 after855s, ONLY Q kernel deterministic timeout1M; no elaboration errors. Submit TransportExact interface isolation at the same budget, using existing checked structural-congruence tactic.
+
+[K5 2026-11-05 10:47:05 CST] Remaining native Q specialization: both family-level exact_mod_proofs (820s) and ordinary exact (855s) elaborate but exhaust kernel1M. All supporting family/model/total lemmas are GREEN. Current12b7cc3d80 tests existing TransportExact at five interfaces, to transport data-instance diamonds structurally and check them separately; log K5-20261105T104520.log on newsrv t1, currently rebuilding already-green NativeModelFamilyNormalization. No new mathematical gap or prohibited shortcut; leaf/root/audit not yet green, no DONE.
+
+2026-11-05 11:00:57 CST: 104520 rc1 after689s, TransportExact isolates kernel1M failure at FIRST interface hn, line93, before realization/final casts. Next diagnostic uses exact_mod_proofs at strictly reducible transparency to report its first data-instance mismatch; intentional diagnostic stop prevents any long follow-on kernel check. No new mathematical gap or budget raise.
+
+2026-11-05 11:05:58 CST: 110259 diagnostic44s: first hn exact_mod_proofs succeeds at strictly reducible transparency; only intentional stopping run_tac has ambiguous result-type errors. Thus no structural mismatch reported. Remove diagnostic; replace broad predicate dsimp with delta, and first-interface structural HEq transport with incremental cast_proofs inside ordinary as_aux_lemma. All subsequent interfaces retain TransportExact to pinpoint any later issue. Same1M budget.
+
+2026-11-05 11:07:39 CST: 110620 fails32s before casting: delta reports it did not reduce ProjectionRestrictionTensorNormalization at hn. Use ordinary unfold for the named predicate; incremental cast/as_aux proof unchanged.
+
+2026-11-05 11:10:48 CST: 110740 rc1 in59s: named unfold succeeds, but as_aux_lemma exhausts1M at whnf/closure before kernel (same closure problem previously measured on mapped normalization). Added projection_seal to StrictProof: it elaborates a tactic in a fresh goal and delegates ordinary theorem creation to existing FirstOrderApply.sealProof, avoiding mkAuxTheorem minimal-closure computation. Use it on incremental cast_proofs for hn. No kernel bypass, data opacity, or budget raise.
+
+2026-11-05 11:13:35 CST: 111049: StrictProof GREEN452ms; NativeDerivedSquareOfRepresentatives GREEN30s. Stop isolated incremental cast after>2min/resource growth (own unit slopci-w-u9-K5-1793848249, rc15), to distinguish kernel TYPE from VALUE cost before another long run. Temporary diagnostic kernel-checks ordinary identity G→G for the exact first-interface target G, with scoped100k limit, then intentionally stops. No axiom or skipped kernel check; unlike a proof attempt, this measures the concrete normalization type itself.
+
+2026-11-05 11:16:09 CST: 111336 identity diagnostic stops26s because sealProof skips local data lets and G still mentions L; not a timeout or type-cost result. Move diagnostic after the existing dsimp[L,nativeOpenPull], exactly the normalized target used by the actual interface proof. No proof/kernel-policy change.
+
+2026-11-05 11:19:31 CST: 111611 TYPE diagnostic rc1 after76s: even identity G→G on normalized first-interface G kernel-times out100k. Concrete OpenTensorRestrictionNormalization type formation is expensive independent of proof. Remove every unfolded local interface copy and every seal, pass the already-checked named normalization theorems directly, and apply generic family theorem directly to folded DerivedPullTensorSquare (no local h with raw conclusion). Restore StrictProof to original error-only wrapper. All diagnostics and new extraction tactic removed. Same1M budget, testing compact direct application.
+
+[K5 2026-11-05 11:21:35 CST] Performance discriminator: first native restriction-normalization interface alone times out kernel1M under transport_exact (689s); as_aux_lemma instead whnf-times out1M (59s). A real kernel check of identity G→G for that exact normalized concrete OpenTensorRestrictionNormalization G already times out100k (76s): type formation is expensive independently of the proof. Current a60c54788f removes every unfolded local hypothesis/interface seal and directly applies the generic family theorem to folded DerivedPullTensorSquare, passing the existing named normalization lemmas directly. This avoids introducing a raw normalization type as a local theorem. Focused log K5-20261105T111952.log active; no DONE.
+
+2026-11-05 11:34:36 CST: 111952 compact direct application rc1 after830s, pure Q kernel1M timeout (no elaboration errors). Submit bounded structural diagnostic of first restriction interface: skip proof differences and print minimal differing data expressions, then stop before kernel. Diagnostic source was prepared in /tmp while the complete candidate ran. Next repair will align actual instance differences, or specialize the native model families with pullback still abstract if concrete type formation is inherently expensive.
+
+2026-11-05 11:36:02 CST: 113438 diagnostic48s fails only unknown pretty-print option pp.maxDepth. Remove the option and print differing expression heads only, bounding diagnostic output. No proof change.
+
+2026-11-05 11:37:53 CST: 113603 diagnostic49s reports ZERO non-proof data differences at hn. Together with identityG→G100k timeout, points to concrete type formation, not a data-instance diamond. Removed diagnostic and restored compact direct proof; new NativeDerivedSquareFromNativeModels fixes native tensor/model families while leaving L,V,F,R,e,t,rho abstract, accepting ProjectionRestrictionTensorNormalization in its named native form. Main now applies this native interface. Check the new helper at default200k first; no budget increase.
+
+2026-11-05 11:40:20 CST: 113754 new native wrapper13s fails only initial local notation quote-precheck on .geometricFiber, causing downstream missing-category recovery. Replace dot projections in local AY/AZ notation by explicit Scheme.Hom.geometricFiber. Same default200k.
+
+2026-11-05 11:42:14 CST: 114021 notation repair exposes macro hygiene: local notation captured section variables as inaccessible identifiers. Remove all four local notations and expand their concrete category expressions directly. This is only syntax/type spelling; no mathematical change or heartbeat raise.
+
+[K5 2026-11-05 11:48:33 CST] Re-read brief and acknowledged NEW LEAD11:4x (canonical natural PF data + geometric compatibility, for K4/trace). Read pr2115 UpperShriekUnitTensorMap.exists_lowerShriek_forget_iso_projection. Our proper construction uses the actual rightAdjointProjectionMap; planned export is canonical proper NatIso with hom-app equality and the derived-condensed geometric PF square via Adjunction.map_rightAdjointProjectionMap_comp_mateEquiv. This is not arbitrary Nonempty choice. Current core obstruction remains kernel specialization; new NativeDerivedSquareFromNativeModels keeps L,V,F,R and comparison data abstract with native model families fixed; checking at default200k, log K5-20261105T114556.log onw4. Structural diagnostic of hn showed0 non-proof differences; raw normalization TYPE itself is expensive. No DONE.
+
+2026-11-05 11:54:49 CST: NativeDerivedSquareFromNativeModels GREEN430s at default200k, log114556, source9d29c4583c. Do not alter the successful helper; now test compact Q application plus new ProperProjectionIso canonical data and geometric PF comparison (LEAD11:4x). ProperProjectionIso copies the existing canonical projection-map construction as a def, records its hom by rfl, and applies the already-established ComparisonCompatible via map_rightAdjointProjectionMap_comp_mateEquiv. Original leaf still untouched pending new API validation.
+
+2026-11-05 11:57:53 CST: While115530 validates Q+canonical data, update assigned Nonempty leaf to ⟨rightDerivedLowerStarNativeDerivedTensorIso g⟩ and add its public import; statement verified BYTE-IDENTICAL to19ba966718. Audit now explicitly prints axioms of canonical data and geometric compatibility. These integration changes still require final leaf/root/audit ucheck after current core/data validation.
+
+2026-11-05 12:09:36 CST: 115530 rc1: Q with checked native-model wrapper still purely KERNEL-times out1M after755s; no elaboration errors. Native wrapper remains GREEN430s(default200k). After isolating the type-cost mechanism, removing explicit transports/local copies, and checking native families separately, permit a measured SCOPED Q increase1M→2M; no other declaration budget changes. Re-read performance-guide budget guidance. Re-run Q + canonical proper data, including the pending statement-preserving leaf/audit edits in commit.
+
+2026-11-05T12:16:03 CST: Re-read brief (LEAD11:4x unchanged), own notes, and Lean skill. Current120938 Q+canonical-data build remains active, no elaboration errors. Static final audit: assigned leaf statement BYTE-IDENTICAL to19ba966718; no prohibited constructs in added proof code. Import-closure check covers64/65 changed Lean files via leaf/root/AxiomAudit; merged PR2086 file WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful needs an EXPLICIT final ucheck target. Canonical proper NatIso and geometric square reviewed against ProjectionMapMate; waiting for actual compiler validation.
+
+2026-11-05 12:16 CST correction: The one uncovered base diff entry, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, was DELETED by merged PR2086, not a live module. All64 live changed Lean files are covered by final leaf/root/AxiomAudit targets; do NOT request a deleted module in ucheck.
+
+2026-11-05T12:37:23 CST: Current120938 rc1: Q still purely KERNEL-times out at2M after1573s (peak observed27GB), no elaboration errors. No further budget increase. Add NativeDerivedSquareFromNativeRestriction, which fixes upperStar/nativePullTensor/nativePullTotalTensor and discharges the named restriction normalization inside a separate lemma, retaining abstract V/F/R and realization comparisons. Test this helper alone at DEFAULT200k before changing the final Q application. Realization-only fallback remains in /tmp; not added.
+
+2026-11-05T12:41:25 CST: NativeDerivedSquareFromNativeRestriction GREEN at DEFAULT200k, log123724 (w4), commit95cc75bc0d. Main Q now applies this checked specialization, removing localL and the explicit nativePullTensor/hL/total/normalization arguments. Add helper to strict audit imports. Re-test Q + canonical ProperProjectionIso; unchanged2M Q budget, no new raises.
+
+2026-11-05T12:45:59 CST: Q via restriction helper124127 remains active (4m, no errors). To avoid another long serialized specialization cycle, independently test NativeDerivedSquareFromNativeComparisons at default200k: fixes both native realizations/comparisons using the GREEN restriction helper, leaving only geometric R/e/d/cmp abstract. This module does not depend on Q. If Q passes first, remove unnecessary fallback; otherwise use the additional checked stage.
+
+2026-11-05T12:49:24 CST: NativeDerivedSquareFromNativeComparisons GREEN95s at DEFAULT200k (log124600,w5,4d940b644c). Both native restriction and realization specializations now checked. Stop superseded124127 Q check at~7min/12GB (own unit slopci-w-u9-K5-1793853688), no false failure/success claim. Main Q now calls native_comparisons helper, removing V/F lets and realization comparison/normalization arguments. Only geometric R,e,d,cmp,ordinary normalization and total-square remain. Check Q + ProperProjectionIso again; no further budget increase.
+
+2026-11-05T12:53:35 CST: Q via native_comparisons124926 remains active at~4min, no errors. Add independent next-stage helper NativeDerivedSquareFromOrdinaryComparison (DEFAULT200k): R remains abstract exact/flat-preserving/left-adjoint/monoidal; use canonical cochain/derived tensor comparison and ordinary normalization internally. Goal is to eliminate the remaining d/cmp/ho arguments at final specialization. Read C5 notes: raw generic hr mismatch structural IsoAlgebra.instPreadditive vs Abelian.toPreadditive; erasing+transport still failed, so do not repeat that failed route.
+
+2026-11-05T12:57:48 CST: NativeDerivedSquareFromOrdinaryComparison GREEN107s at DEFAULT200k (log125336,w4,8cf1b99437). Stop superseded124926 at~8min/13GB (own unit slopci-w-u9-K5-1793854166), rc15 expected. Main Q now uses ordinary_comparison helper, retaining only R,e,P,T,hP,hT,htotal arguments. Native restriction, native realization, and ordinary normalization all checked separately. Re-test Q+ProperProjectionIso, same2M maximum.
+
+2026-11-05 13:24 CST: While focused build queues (~26min), strengthen final AxiomAudit using K6 verified audit pattern: env.checked.get lookup (module-aware), reject unexpected axioms, identify module for unavailable proof bodies and fail rather than silently accept them. This is pending final audit compilation; no mathematical declarations changed.
+
+2026-11-05T13:29:18 CST: Focused ucheck50351 still QUEUED (~30min), no build log; script fetches branch HEAD only when a tree is acquired. Add final geometric-R specialization NativeDerivedSquareFromGeometricFunctor (DEFAULT200k), retaining e abstract, using GREEN ordinary comparison helper. Q now applies it with canonical e and htotal; no data lets remain. Commit/push explicit files so existing queued request validates this more localized chain, WITHOUT adding another queued build. All3 preceding native/ordinary specializations are GREEN; this final specialization and Q are NOT YET checked. Also commit strengthened audit.
+
+2026-11-05T13:45:08 CST: Focused Q+ProperProjectionIso ucheck session50351 remains queued after~47min (remote ubuilderPID202669), no log assigned. Branch7bca174391 includes unchecked geometric-functor specialization at default200k, Q using only e/P/T/flat proofs/htotal, and strengthened module-aware audit. Prior restriction/native-realization/ordinary comparison helpers GREEN207s/95s/107s. All active main trees are held by other integration jobs; no stale own locks. Do not start another duplicate build. Next: await current request, then fix concrete errors or run leaf/root/AxiomAudit; DONE absent.
+
+2026-11-05T13:55:45 CST: Queued50351 finally acquiredw5 at13:52:53, log135253, source7bca174391, but returned143/SIGTERM with built0/failed0; NO Lean error/result. We did not cancel this run. Consolidate re-run into ProperProjectionFormula + WeilConjectures + AxiomAudit, covering the full remaining validation in one allocation. Audit includes import-all of direct native normalization/representation/projection inputs and the existing K7 leaf, alongside its strict module-aware lookup. No DONE.
+
+[K5 2026-11-05T13:58:30 CST] IMPORTANT coordination: after~55min queue, current7bca174391 build started13:52:53 as slopci-w-u9-K5-1793857973 onw5, then SYSTEMD STOP at13:54:21 (journal confirms explicit Stopping, 88s,4.9GB), rc143 built0/failed0. K5 did NOT stop this unit. No Lean diagnostic/result. New consolidated ucheck now queued at2b9aa74e2: ProperProjectionFormula + WeilConjectures + Projection.AxiomAudit (localsession96793, remoteubuilderPID2325880). Preserve this current K5 request; it contains the final geometric-R specialization after three green helpers.
+
+[K5 2026-11-05T14:01:47 CST] Consolidated full validation RUNNING onw3, log K5-20261105T135707.log, commit2b9aa74e2d (localsession96793). NativeDerivedSquareFromGeometricFunctor GREEN111s at DEFAULT200k. Thus all specialization stages are green: native-model430s, native-restriction207s, native-realizations95s, ordinary-comparison107s, actual-geometric-functor111s. Final Q now only supplies canonical comparison e and total-square proof; checking now, PID2544182. No DONE yet. Do not stop current K5 build.
+
+2026-11-05T14:05:15 CST: Actual geometric-functor helper is GREEN111s(default200k) in135707. Q remains active (>4m), now only canonical e and nativeTotal→model-form hypothesis conversion remain. Add independent NativeDerivedSquareFromCanonicalComparison(default200k): specialize e and final named DerivedPullTensorSquare but retain htotal in raw model form. This isolates canonical comparison/final-output checking from the remaining input conversion. Keep full root run active pending result; no budget raise.
+
+2026-11-05 14:16 CST: Re-read brief/progress; LEAD13:59 confirms prior w5 interruption was deliberate mainline reservation. Full135707 remains active, Q~16min/24GB, no errors. CanonicalComparison request3026778 still queued. Read C5's new inverse-function wrapper: it avoids `(d X Y).hom`→`μIso.inv`, which our GREEN OrdinaryComparison stage already handles with R abstract. Add NativeComplexSquareNormalization to the queued canonical helper's import closure: compare generic/native WHOLE complex-square isos by Eq, then transport TotalPullTensorSquare before component projection. This tests the remaining input conversion separately, at default200k, without changing the active full-build source. No further heartbeat raise.
+
+2026-11-05 14:22 CST: Full135707 finishes rc1 after1337s in Q: pure KERNEL deterministic timeout2M, followed only by unknown Q constant in its consumer. GeometricFunctor remains GREEN111s. Focused141640 onw4 at84a1576d40: NativeComplexSquareNormalization GREEN141s/default200k (whole model/native iso Eq AND htotal transport both checked). CanonicalComparison still running. Prepared Q to call canonical helper with checked projection_total_square_in_model_form, restoring DEFAULT200k; pending canonical result before next build. Added both helpers to audit imports. No DONE.
+
+2026-11-05 14:24 CST: Focused141640 confirms CanonicalComparison fails ONLY KERNEL default200k after203s; its input conversion is independently GREEN141s. Thus canonical e/final derived-output conversion is independently costly. Change only this final bridge to unfold the three output predicate/functor abbreviations, then existing exact_mod_proofs at the named predicate boundary; add temporary profiler for phase attribution. No budget increase. Re-run ONLY CanonicalComparison before full integration.
+
+2026-11-05 14:30 CST: While90de3e4ce focused request355047 remains queued (no log), split the unvalidated canonical step into NativeDerivedSquareFromCanonicalRaw (actual e, explicit raw derived conclusion) and CanonicalComparison (raw→named predicate using exact_mod_proofs). Both DEFAULT200k with temporary profiling. This gives a direct distinction between specializing e and converting the output in the same queued run. Q integration already calls the canonical named helper and green whole-iso input transport. Commit/push so queued runner fetches this complete discriminator; no second build request.
+
+2026-11-05 14:32 CST: BREAKTHROUGH:142959 ran90de3e4ce3 (before speculative raw split was fetched), CanonicalComparison GREEN113s/default200k; profiler shows kernel102s, elaboration3.39s. Explicit output-abbreviation normalization + exact_mod_proofs resolves the final bridge. Remove now-unnecessary untested CanonicalRaw split; restore exactly GREEN canonical proof and remove profiling. NativeComplexSquareNormalization already GREEN141s. Q now composes these two checked bridges at DEFAULT200k. Launch final ProperProjectionFormula + WeilConjectures + AxiomAudit; all70 live changed Lean files lie in this target import closure. Statement byte-identical, no prohibited proof constructs, no DONE until green.
+
+[K5 2026-11-05 14:38 CST, for lead/C5/K4] Q IS GREEN: final143517 onw3 atcd7a5fc40e builds NativeDerivedSquareFromCanonicalComparison122s/default200k, NativeDerivedTensorSquareOfTotal3.6s/default200k, NativeDerivedTensorSquare3.0s, NativeCondensedRealizationCoherence25s. Actual mathematical projection coherence now checked; the 2M kernel bottleneck is removed. Final run continues into canonical ProperProjectionIso, leaf/root/AxiomAudit. NO DONE until these finish. Repair is checked whole-complex-iso htotal transport + exact_mod_proofs on explicitly unfolded final derived predicate.
+
+2026-11-05 14:41 CST: LEAF GREEN in143517: ProperProjectionIso108s (canonical NatIso, hom characterization, geometric projection-map square), ProperProjectionFormula3.9s. CompactProjectionFormula/VerdierExchange/VerdierDual downstream green; root continues. Strict audit correctly rejects3 unavailable bodies: NativeNormalizedTensorModels, NativeCondensedRealizationTensorModels, DerivedWeilTensorOperations. Added import-all for those and the30-module import paths connecting them to the existing K7 declaration, to expose the full relevant proof closure in one check. This is audit-only; actual dependency not yet asserted. Launch leaf+audit validation while unchanged root build finishes.
+
+2026-11-05 14:49 CST: Root WeilConjectures GREEN29s in143517 (83 built modules, ONLY failure was old audit hidden-body check). Corrected leaf+audit144643 landed on pool43.157.188.198, rebuilding many baseline dependencies without main-server artifact cache. Read-only lslocks confirms warmw3 now free. Submit corrected final leaf+root+audit invocation through ucheck to reuse warm cache; retain pool job until a verified audit successor succeeds, then stop only redundant own pool processes. No mathematical edits after green leaf/data.
+
+2026-11-05 14:52 CST: COMPLETE. Final combined ucheck at df64736614694b957176ab9c5dbedcb1c366faab returned rc=0 onw3: /home/ubuntu/u9/logs/K5-20261105T145034.log, Build completed successfully (34481 jobs). Targets: ProperProjectionFormula, WeilConjectures, Native.Projection.AxiomAudit. The strict audit finds EXACTLY ONE existing admitted dependency: AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_swap_localization (K7), with ZERO unavailable bodies and no unexpected axioms. K7 is unchanged in this branch. Actual leaf, canonical NatIso, hom characterization, and geometric projection compatibility all GREEN (first full build143517). All70 changed live Lean modules are in the final target closure. Leaf statement byte-identical to19ba966718; added-code scan clean of admissions, axioms, native_decide, bypass/opacity tricks, and profiling. Q now checks in3.6s atDEFAULT200k. Stop redundant own pool144643 timeoutPID3718420 after verified successor success; no other jobs touched. Final documentation-only commit records this result; DONE will identify both final branch and tested code commits.
+
+[K4FIX GREEN LEAF / LEAD02:40] 2026-11-06T02:35:28.532875+08:00: Before receiving fallback branch instruction, completed proof repair on ade741b094: u9/K4fix d51b00942 (one commit). New SmoothPurityMapOfOrientation GREEN8.8s and SmoothPurity GREEN6.6s; orientation fill RETAINED, statements unchanged, no heartbeat/opacity changes. Extracted construction into minimal-import module taking orientation as parameter; abstract constant-product natural iso avoids concrete ext/simp. Sole ucheck still running downstream LeanEval + StatementAxiomAudit on w3, log /home/ubuntu/u9/logs/K4fix-20261106T023427.log (check actual name if timestamp differs). Already passed VerdierDual/AffineLineBundle/VerdierDualLocalization. Thus reverting fill is no longer necessary for compilation. Will report final axioms immediately. No other build launched.
+
+[K4 log correction] The active green-leaf/downstream run is /home/ubuntu/u9/logs/K4fix-20261106T023429.log (not ...023427). Commit d51b00942aa6ff7747936f098f78618f7a8070ef. All four public statement headers (orientation, Weil orientation, purity map, adjunction) compared byte-for-byte against ade741b094 and unchanged.
+
+[K4FIX DOWNSTREAM GREEN / AUDIT RESULT] 2026-11-06T02:42:50.268319+08:00: d51b00942 (ade + ONE proof repair) built SmoothPurity, all importers, Statement and LeanEval.WeilConjectures. Log /home/ubuntu/u9/logs/K4fix-20261106T023429.log. StatementAxiomAudit reports main + LeanEval axioms [propext, sorryAx, Classical.choice, Quot.sound]; it then fails ONLY unknown orientation constant (missing direct SmoothPurity import, not a proof failure). Thus whole ucheck rc1, although requested leaf/main compile green. Preparing direct-import completion audit to certify orientation and RouteB users and exact remaining leaf. Expected remaining K1 isLeftAdjoint_derivedLowerStar_of_isProper via FIVE structure-map calls, proof-only repair already supplied at /home/ubuntu/u9/shared/K4-ade-proper-adjoint-consumers.patch. Reverting fill would not remove these calls. No fallback version created because original failure is fixed with fill retained.

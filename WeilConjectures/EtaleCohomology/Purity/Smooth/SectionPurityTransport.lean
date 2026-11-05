@@ -18,10 +18,10 @@ an étale morphism `e : X' ⟶ X` (for instance an isomorphism), `g : Z' ⟶ Z`.
 the pullback `Lg^* cl_i` followed by the exceptional base change
 `Lg^* Ri^! ⟶ Ri'^! Le^*` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`), through
 `Λ_{Z'} ≅ Lg^* Λ_Z` and `Le^*(Λ_X(c)[2c]) ≅ Λ_{X'}(c)[2c]`
-(`AlgebraicGeometry.Etale.thomFundamentalClassMap_baseChange_of_etale`): the fundamental class
-restricts to the fundamental class
-(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`) and the adjoint of
-a restricted class with supports is the base change of its adjoint
+(`AlgebraicGeometry.Etale.thomFundamentalClassMap_baseChange_of_etale`): the fundamental class restricts
+to the fundamental class
+(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`) and the adjoint of a
+restricted class with supports is the base change of its adjoint
 (`AlgebraicGeometry.Etale.supportedClassMap_restrictSupportedClass`).
 
 For a closed section `s` of a smooth morphism `g : V ⟶ B` and its base change `s'` along an
@@ -104,8 +104,7 @@ theorem rightDerivedUpperShriekTateObjectIsoOfSection_baseChange :
         (rightDerivedUpperShriekTateObjectIsoOfSection Λ c g' s' hs' aB').hom := by
   have := SmoothOfRelativeDimension.smooth c g
   have := SmoothOfRelativeDimension.smooth c g'
-  have h := thomFundamentalClassMap_baseChange_of_etale Λ eV hsq
-    (hasThomFrames_of_section Λ c g s hs aB)
+  have h := thomFundamentalClassMap_baseChange_of_etale Λ eV hsq (hasThomFrames_of_section Λ c g s hs aB)
     (hasRegularZariskiFrames_of_section c g s hs) (hasThomFrames_of_section Λ c g' s' hs' aB')
     (hasRegularZariskiFrames_of_section c g' s' hs') (g ≫ aB) (g' ≫ aB')
   have := isIso_thomFundamentalClassMap Λ (hasThomFrames_of_section Λ c g s hs aB)

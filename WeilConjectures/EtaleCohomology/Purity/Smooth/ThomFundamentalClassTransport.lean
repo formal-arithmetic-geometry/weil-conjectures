@@ -14,8 +14,7 @@ Let `i : Z ⟶ X` be a closed immersion with Thom frames and `i' : Z' ⟶ X'` it
 an étale morphism `e : X' ⟶ X` (for instance an isomorphism). The restriction of supports of the
 fundamental class `[Z ⊂ X]` (`AlgebraicGeometry.Etale.thomFundamentalClass`) along `e` is the
 fundamental class `[Z' ⊂ X']`
-(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`): a frame
-`(U, e', f)` of
+(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`): a frame `(U, e', f)` of
 `i'` is a frame `(U, e' ≫ e, f)` of `i` (`AlgebraicGeometry.Scheme.Hom.EtaleFrame.ofIsPullback`),
 with the same frame class, and restriction of supports along the composite `e' ≫ e` is the
 composite of the restrictions, so the restricted fundamental class has the frame classes as frame

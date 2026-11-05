@@ -26508,3 +26508,7 @@ public import WeilConjectures.ZetaWeil.FiniteRegularCoefficientComparisons
 public import WeilConjectures.ZetaWeil.FrobeniusPointTransport
 public import WeilConjectures.ZetaWeil.SpecifiedHomScalarRationalNaturality
 public import WeilConjectures.ZetaWeil.SpecifiedHomScalarTower
+public import WeilConjectures.SmoothPurity.EtaleUpperShriek
+public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeEtale
+public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeOpenImmersion
+public import WeilConjectures.WeilSheaf.VerdierDualUpperShriek

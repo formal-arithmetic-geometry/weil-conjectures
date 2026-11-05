@@ -14,9 +14,9 @@ public import WeilConjectures.WeilSheaf.LowerStar
 /-!
 # The proper direct image of Weil complexes is a left adjoint
 
-For a proper morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` separated of finite type over `k₀`,
-the derived direct image `Rg_*` of Weil complexes has a right adjoint
-(`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper`). The Weil
+For a proper morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type over `k₀`, the derived
+direct image `Rg_*` of Weil complexes has a right adjoint
+(`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper'`). The Weil
 structure is lifted along the abstract result
 `CategoryTheory.Endofunctor.IsoAlgebra.isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor`
 from the adjunction `Rḡ_* ⊣ ḡ^!` on `Dᵇc(-, ℚ̄_ℓ)` over the algebraic closure of `k₀`
@@ -102,12 +102,12 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
 
 /-- **The proper direct image of Weil complexes is a left adjoint** (blueprint
 `det-pd-biduality-coefficients`, the constructible adjunction `Rf_! ⊣ Rf^!` for a proper `f`):
-for a proper morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` separated of finite type over `k₀`, the
-derived direct image `Rg_*` of Weil complexes has a right adjoint. The adjunction `Rḡ_* ⊣ ḡ^!` on
+for a proper morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type over `k₀`, the derived
+direct image `Rg_*` of Weil complexes has a right adjoint. The adjunction `Rḡ_* ⊣ ḡ^!` on
 `Dᵇc(-, ℚ̄_ℓ)` over `k̄₀` lifts to Weil complexes
 (`CategoryTheory.Endofunctor.IsoAlgebra.isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor`),
 `Rḡ_*` commuting with bounded below coproducts. -/
-theorem WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper :
+theorem WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper' :
     (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint := by
   have : IsProper (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))) :=
     Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g _ ‹_›
