@@ -117,6 +117,7 @@ theorem local_perfect_of_openRestriction_iso
       (Modules.overEquiv U).functor
     let H := SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V
     let L := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) O
+    have : G.Additive := Functor.additive_of_preserves_binary_products _
     have fac : s.inv ≫ V.ι ≫ U.ι = O.ι := by
       rw [← Category.assoc, U.isoImage_ι_inv_ι V]
       exact X.homOfLE_ι _
