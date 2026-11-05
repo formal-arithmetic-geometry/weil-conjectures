@@ -22,7 +22,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
-  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [NeZero (ℓ : k)] {X X' : Scheme.{u}}
   (g : X' ⟶ X) (f : X ⟶ Spec (.of k))
 

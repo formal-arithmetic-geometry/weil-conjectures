@@ -25,6 +25,7 @@ lemma purity_unit_comparison :
     e.app (𝟙_ C) ≫ G.map (η F) ≫ η G = I.map (η H) ≫ η I := by
   apply (cancel_epi (Functor.LaxMonoidal.ε (H ⋙ I))).mp
   rw [← Category.assoc, ← Category.assoc, NatTrans.IsMonoidal.unit]
+  simp only [Category.assoc]
   change Functor.LaxMonoidal.ε (F ⋙ G) ≫ η (F ⋙ G) =
     Functor.LaxMonoidal.ε (H ⋙ I) ≫ η (H ⋙ I)
   simp only [Functor.Monoidal.ε_η]
@@ -47,6 +48,6 @@ lemma purity_tensor_comparison
   have he := NatTrans.IsMonoidal.δ_comp_tensorHom e M N
   simp only [comp_δ, Functor.comp_obj, Category.assoc] at he
   rw [← reassoc_of% he]
-  simp only [tensorHom_comp_tensorHom, Category.assoc, hM, hN]
+  simp only [tensorHom_comp_tensorHom, hM, hN]
 
 end CategoryTheory

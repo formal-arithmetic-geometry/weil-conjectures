@@ -90,6 +90,9 @@ lemma puritySingleComparisonOfCochain_square
     HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
     HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
     HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
-    Functor.map_id, Functor.comp_obj, Category.id_comp, Category.comp_id]
+    Functor.map_id, Functor.comp_obj, Category.id_comp]
+  change e.app P ≫ I.map (𝟙 (H.obj P)) ≫ 𝟙 (I.obj (H.obj P)) =
+    G.map (𝟙 (F.obj P)) ≫ 𝟙 (G.obj (F.obj P)) ≫ e.app P ≫ 𝟙 (I.obj (H.obj P))
+  simp only [Functor.map_id, Category.id_comp, Category.comp_id]
 
 end CategoryTheory.Functor

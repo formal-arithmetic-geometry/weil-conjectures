@@ -57,11 +57,11 @@ lemma upperStarIntegralTateTwistOneIso_hom_comp_reduction :
     (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
     (Profinite.padicIntRingObjToIntegersModPow ℓ E n) rfl n
   simp only [upperStarIntegralTateTwistOneIso, integralTateTwistOne, tateModule,
-    tateModuleSystem, tateModuleTransition, tateModuleLevel,
+    tateModuleSystem,
     integersModPowReduction, purityTateRootPullbackIso,
     extendScalarsIntegralTateTwistOneIntegersModPowIso,
     extendScalarsTateModuleIso, purityFreeTowerProjection, upperStarFreeTowerIsoApp,
-    Iso.trans_hom, Iso.app_hom, NatTrans.comp_app, Functor.mapIso_hom, asIso_hom,
+    Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, asIso_hom,
     Functor.map_comp, Category.assoc] at h ⊢
   delta tateModuleTransition
   exact h
