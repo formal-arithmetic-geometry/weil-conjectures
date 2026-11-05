@@ -143,7 +143,7 @@ theorem condensedSubfield_bounded_copower_comparison
   let Λ := Profinite.continuousMapRingObj E
   let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
   let B := Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)
-  have : HasZeroMorphisms A := inferInstance
+  let : HasZeroMorphisms A := Preadditive.preadditiveHasZeroMorphisms
   have : HasColimitsOfSize.{u + 1, u + 1} A :=
     CategoryTheory.IsGrothendieckAbelian.hasColimits A
   have : HasColimitsOfSize.{u + 1, u + 1} B :=
