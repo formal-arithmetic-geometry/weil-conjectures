@@ -447,10 +447,10 @@ private theorem derived_mate_factors
   simp only [Functor.map_comp, Category.assoc] at ht
   simp only [← Functor.map_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] at ht
-  rw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc] at ht
+  erw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc] at ht
   dsimp only [chainDerivedUnit]
   simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hn]
+  erw [reassoc_of% hn]
   simpa only [Category.assoc, ← Functor.map_comp, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] using ht
 
