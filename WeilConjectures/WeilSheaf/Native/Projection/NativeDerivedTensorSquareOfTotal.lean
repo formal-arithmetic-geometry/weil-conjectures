@@ -56,9 +56,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 variable (htotal : ∀ P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ,
   TotalPullTensorSquare k₀ l g P T)
 
--- Profiling at 400000 heartbeats reaches the deferred total-square argument (24s);
--- reserve the cumulative budget for both model identifications and final cancellation.
-set_option maxHeartbeats 800000 in
+-- Profiling at 800000 heartbeats completes model pasting and cancellation;
+-- reserve the cumulative budget for the final proof-irrelevant goal conversion.
+set_option maxHeartbeats 1000000 in
 include htotal in
 /-- On K-flat representatives, the native tensor square is the localization of the
 square of total complexes. -/
@@ -162,7 +162,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
   dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization,
     Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
     curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hfinal ⊢
-  with_reducible_and_instances cast_proofs hfinal
+  with_reducible_and_instances exact_mod_proofs hfinal
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
