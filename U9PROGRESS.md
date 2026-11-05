@@ -93,3 +93,8 @@
 - Next: remote validation, direct importers, then DONE with all green modules.
 - Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ275.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+- Assigned module green at `94ea31c9cda188870dc8c0b0642a600420754bf0`: ucheck-bump rc=0, failed=0, 3869 jobs.
+- Assigned build log: `/home/ubuntu/u9/bz/BUILD-BZ275-assigned-green-full.log`.
+- Applied the same compositor and private-localization import patterns to direct importers;
+  validating both together before advancing one more layer.
