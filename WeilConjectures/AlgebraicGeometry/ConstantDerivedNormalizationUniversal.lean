@@ -25,6 +25,9 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.ConstantNormalizationComparison
+
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Type (max u v)) [CommRing R]
 
