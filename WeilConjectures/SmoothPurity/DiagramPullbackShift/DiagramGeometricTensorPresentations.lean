@@ -33,9 +33,8 @@ open AlgebraicGeometry.Scheme
 open AlgebraicGeometry.ProEtale (condensedRingObj condensedPullbackHom)
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
-namespace WeilConjectures.DiagramPullbackShift
+namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-open AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
@@ -125,4 +124,4 @@ theorem diagramGeometricTensorPresentations : GeometricTensorPresentations Λ wh
   mate f g := conjugateIsoEquiv_upperStarComp Λ f g
   unit f g M := upperStarLowerStarAdjunction_unit_app_upperStarComp Λ f g M
 
-end WeilConjectures.DiagramPullbackShift
+end AlgebraicGeometry.ProEtale.CondensedRing

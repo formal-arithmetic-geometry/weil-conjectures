@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportRestrictionGeneral
+import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
@@ -226,6 +226,31 @@ private theorem ordinary_plus_compat (A : Type (u + 1)) [CommRing A] [Finite A]
     (rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A) f g (f ≫ g) rfl)
     (ordinary_comp_eq A f g) K
 
+/-- `unboundedEtaleCompactSupport_composition_plus`, with the unbounded compositor written as
+the inverse of `rightDerivedLowerShriekCompIso` (the two agree by definition). -/
+private theorem composition_plus (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [QuasiCompact f] [QuasiCompact g]
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    DerivedCategory.Plus.ι.map ((rightDerivedLowerShriekPlusCompIso A f g).hom.app K) ≫
+      (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) (f ≫ g)).hom.app K =
+    (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) g).hom.app
+        ((rightDerivedLowerShriekPlus (ModuleCat.{u + 1} A) f).obj K) ≫
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
+        ((rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) f).hom.app K) ≫
+      (rightDerivedLowerShriekCompIso A f g).inv.app (DerivedCategory.Plus.ι.obj K) := by
+  have e : (unboundedEtaleLowerShriekCompIso A f g).hom =
+      (rightDerivedLowerShriekCompIso A f g).inv := by
+    apply NatTrans.ext
+    funext M
+    simp only [unboundedEtaleLowerShriekCompIso, rightDerivedLowerShriekCompIso,
+      Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.trans_inv, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
+      Category.assoc]
+    rfl
+  rw [← e]
+  exact unboundedEtaleCompactSupport_composition_plus A f g K
+
 attribute [local irreducible] rightDerivedLowerShriek rightDerivedLowerShriekPlus
   rightDerivedLowerShriekPlusCompatibility rightDerivedLowerShriekIsoRightDerivedLowerStar
   rightDerivedLowerShriekPlusCompIso rightDerivedLowerShriekCompIso properLowerShriekPlusIso
@@ -318,7 +343,7 @@ theorem properLowerShriekPlusIso_comp (A : Type (u + 1)) [CommRing A] [Finite A]
     (rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A) f g (f ≫ g) rfl)
     (fun L ↦ proper_plus_hom A f L) (fun L ↦ proper_plus_hom A g L)
     (fun L ↦ proper_plus_hom A (f ≫ g) L)
-    (fun L ↦ compactSupportCompositionPlusCompatibility A f g L)
+    (fun L ↦ composition_plus A f g L)
     (fun L ↦ ordinary_plus_compat A f g L) (proper_native_nat A f g) K
 /-- The proper compositor equation before evaluation at an object.
 Source: the proper forget-supports composition equation above
