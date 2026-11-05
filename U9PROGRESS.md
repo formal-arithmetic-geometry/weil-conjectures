@@ -142,23 +142,27 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ566 in progress
+# BZ566 complete
 
-- Branch: `u9/BZ566`; starting commit: `8af5cb3248`.
-- The user instructed continuation after the explicit two-private-helper API proposal.
-  The compositor orientation edits and matching inverse cancellation are now applied.
-- Baseline `ucheck-bump` stopped before the target in `Presheaf.InternalHom`, assigned to BZ581.
-- Assigned module and both direct importers passed together at `e4462d9530`:
-  rc=0, failed=0, 4924 jobs, on `poolb:43.157.148.197`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ566-repair3-importers-full.log`.
-- Merged coordinator `cfcb63ad7` to incorporate the shared dependency repairs.
-- Second-layer IntegralResiduePullFlatModelComparison built successfully (8.2s).
-- Skipped CategoryTheory.Integral.IntegralResidueTensorPresentation: its unowned
-  IntegralResidueRestrictPullComp dependency fails at lines 24 and 99.
-- Next: final ucheck-bump of the four successful modules, then DONE.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
+- Branch: `u9/BZ566`; coordinator base: `cfcb63ad7` (sweep29).
+- Assigned module and three downstream modules passed together through `ucheck-bump`:
+  rc=0, failed=0, 4925 jobs, on `poolb:43.157.174.214`.
+- Validated source commit: `4917c92b48a3cd585a9abcb62d70cbfe688512d2`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ566-final-full.log`.
+- The user instructed continuation after the explicit private-helper compositor proposal.
+  Migrated the assigned helpers and their downstream copies to Mathlib's reversed
+  composition isomorphism, with the matching hom/inv cancellation. Public statements
+  and existing docstrings are unchanged.
+- Reused BZ549's dependency repairs and then merged coordinator sweep29; the remaining
+  Lean diff against that coordinator base is confined to the two mate-normalization files.
+- Second-layer CategoryTheory.Integral.IntegralResidueTensorPresentation was skipped:
+  its unowned IntegralResidueRestrictPullComp and IntegralResiduePullSquareIsIso
+  dependencies failed. No changes to those dependencies.
+- Fix patterns, exact errors, occurrence counts and all four validated module names:
+  `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ566.DONE`.
+- No local Lean/Lake, proof placeholders, forbidden shortcuts, or heartbeat increases.
+- This final commit changes progress documentation only; Lean sources match the green build.
 
 # BZ549 in progress
 
