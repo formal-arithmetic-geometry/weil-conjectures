@@ -232,6 +232,9 @@
 - The user instructed continuation after the exact two-cast proposal and downstream request.
   Applied `BZ800-statement-cast-proposal.patch` and the same identity casts to
   direct importer `DerivedPullbackMonoidalDescent`, preserving the existing morphisms.
-- Next: validate both modules with `ucheck-bump`, then continue downstream (up to 30 extra modules).
+- Leaf rebuilt successfully at `46f8f154b4`; the direct importer was blocked by
+  unowned `DerivedPullbackTensorUnitKFlat.lean:359:12: Type mismatch`.
+- Following the brief's skip rule, saved the unvalidated importer patch outside the repo
+  and restored its source. Next: leaf-only rc=0 validation, final audit, and DONE.
 - Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
