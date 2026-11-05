@@ -122,6 +122,8 @@ theorem dvr_tame_tensor_factor_map_maximalIdeal
   have hle := dvr_tame_tensor_factor_ramificationIdx_le B n hnpos n hnpos hn A
     hindex E hE hC hbounds P hP hinj hfinite Q hQ hclosed
   have hone : Q.ramificationIdx A = 1 := by
+    have : IsNoetherianRing (integralClosure A F) :=
+      IsNoetherianRing.of_finite A (integralClosure A F)
     have hpos := Ideal.ramificationIdx_pos A Q
     simp only [Nat.gcd_self, Nat.div_self hnpos] at hle
     omega
