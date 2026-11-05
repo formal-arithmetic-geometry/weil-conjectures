@@ -32,14 +32,14 @@ in `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctor
 noncomputable def rightDerivedPlusSingleUnit (Y : B) :
     (DerivedCategory.Plus.singleFunctor C 0).obj (G.obj Y) ⟶
       G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor B 0).obj Y) :=
-  (G.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 Y).inv ≫
-    G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.singleFunctor B 0).obj Y) ≫
-    G.rightDerivedFunctorPlus.map
-      (DerivedCategory.Plus.ι.preimageIso
-        (X := (DerivedCategory.Plus.singleFunctor B 0).obj Y)
-        (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.singleFunctor B 0).obj Y))
-        ((DerivedCategory.singleFunctorIsoCompQ B 0).app Y ≪≫
-          (DerivedCategory.quotientCompQhIso B).symm.app _)).inv
+  let S : CochainComplex.Plus B :=
+    ⟨(CochainComplex.singleFunctor B 0).obj Y, 0, inferInstance⟩
+  let T : CochainComplex.Plus C :=
+    ⟨(CochainComplex.singleFunctor C 0).obj (G.obj Y), 0, inferInstance⟩
+  let s : T ⟶ G.mapCochainComplexPlus.obj S := ObjectProperty.homMk
+    ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).inv.app Y)
+  DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S
+
 
 /-- Degree-zero homology of the derived unit on a single complex.
 
@@ -88,37 +88,26 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
   let a := (HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).inv.app Y ≫
     (G.mapHomologicalComplex (.up ℤ)).map R.ι'
   let a' : SC ⟶ G.rightDerivedPlusComplex Y := ObjectProperty.homMk a
-  have hsource : (G.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 Y).inv =
-      DerivedCategory.Plus.Q.map s ≫
-        (DerivedCategory.Plus.quotientCompQhIso C).inv.app
-          (G.mapCochainComplexPlus.obj S) := by
-    apply DerivedCategory.Plus.ι.map_injective
-    simp [mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-      DerivedCategory.Plus.quotientCompQhIso, s, S, SC]
-  have htarget :
-      (DerivedCategory.Plus.ι.preimageIso
-        (X := (DerivedCategory.Plus.singleFunctor B 0).obj Y)
-        (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.singleFunctor B 0).obj Y))
-        ((DerivedCategory.singleFunctorIsoCompQ B 0).app Y ≪≫
-          (DerivedCategory.quotientCompQhIso B).symm.app _)).inv =
-      (DerivedCategory.Plus.quotientCompQhIso B).hom.app S := by
-    apply DerivedCategory.Plus.ι.map_injective
-    simp [DerivedCategory.Plus.quotientCompQhIso, DerivedCategory.singleFunctorIsoCompQ, S]
   have hsingleUnit : G.rightDerivedPlusSingleUnit Y =
-      DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S := by
-    simp only [rightDerivedPlusSingleUnit, hsource, htarget,
-      rightDerivedFunctorPlusUnit_app, quotientCompMapHomotopyCategoryPlusIso,
-      Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.id_comp, Category.assoc]
+      DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S := rfl
   have : ∀ n, Injective (L.obj.X n) := fun n ↦
     inferInstanceAs (Injective (R.cochainComplex.X n))
   have : IsIso (G.rightDerivedFunctorPlusUnit.app L) := by
-    rw [rightDerivedFunctorPlusUnit_app]
-    infer_instance
+    let L' : CochainComplex (InjectiveObject B) ℤ :=
+      HomologicalComplex.liftObjectProperty _ R.cochainComplex inferInstance
+    have hL' : L'.IsStrictlyGE 0 := by
+      rwa [← CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ (InjectiveObject.ι B)]
+    exact inferInstanceAs (IsIso (G.rightDerivedFunctorPlusUnit.app
+      ((InjectiveObject.ι B).mapCochainComplexPlus.obj ⟨L', 0, hL'⟩)))
   have hresolution : (G.rightDerivedFunctorPlusObjSingleFunctorIsoQ Y).hom =
       G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
         CategoryTheory.inv (G.rightDerivedFunctorPlusUnit.app L) := by
     simp [rightDerivedFunctorPlusObjSingleFunctorIsoQ,
       DerivedCategory.singleFunctorIsoCompQ, g, R, L]
+    congr 1
+    apply DerivedCategory.Plus.ι.map_injective
+    rw [Functor.map_preimage]
+    exact Category.id_comp _
   have hcancel : G.rightDerivedPlusSingleUnit Y ≫
       (G.rightDerivedFunctorPlusObjSingleFunctorIsoQ Y).hom =
       DerivedCategory.Plus.Q.map a' := by
@@ -172,7 +161,6 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     simp only [Iso.inv_hom_id_assoc]
     dsimp [InjectiveResolution.cochainComplexXIso, HomologicalComplex.mapExtendIso,
       HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso]
-    dsimp only [HomologicalComplex.Hom.isoOfComponents]
     erw [HomologicalComplex.mapExtendX_hom_eq R.cocomplex G
       (ComplexShape.embeddingUpNat.r_f 0)]
     simp [eqToHom_map]
