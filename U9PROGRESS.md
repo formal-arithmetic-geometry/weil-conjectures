@@ -1,15 +1,26 @@
-# BZ244 in progress
+# BZ244 complete
 
-- Branch: `u9/BZ244`; starting commit: `c781553bf`.
-- The user instructed continuation after the exact two-site statement compatibility patch.
-  Applied that patch: Mathlib's reversed compositor now uses `.symm`, preserving the maps.
-- Matching proof-body substitutions are also applied; no other theorem statements changed.
-- Unit passed `ucheck-bump` at `77103258ee41c099ab4aeb649fc58587d582546d`: rc=0, failed=0, 3846 jobs.
-- Applying the same compositor migration to the two direct importers and validating them together.
-- Next: obtain a green unit build, then test the two direct downstream importers and one
-  further layer under the brief's ownership and module-count limits.
-- Patterns and baseline logs: `/home/ubuntu/u9/bz/FIXES-BZ244.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Unit: BZ244; branch: `u9/BZ244`; starting commit: `c781553bf`.
+- Five modules passed together through `ucheck-bump`: rc=0, failed=0, 3914 jobs.
+- Validated source commit: `04eeac193862d42de32c188c48615ffd41e07e5d`. This final update changes progress notes only.
+- Green modules:
+  - `WeilConjectures.AlgebraicGeometry.DerivedUnitLerayComp`
+  - `WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws`
+  - `WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic`
+  - `WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionCoproduct`
+  - `WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence`
+- The user instructed continuation after the two-site statement compatibility proposal.
+  Used the inverse of Mathlib's reversed compositor in the assigned module and its direct
+  importers, preserving the intended maps. Added `Iso.symm_hom` for rewrite matching.
+- All other statements and all existing docstrings are unchanged. No local Lean/Lake,
+  proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
+- Two second-layer targets were skipped per the brief's ownership rule:
+  `GlobalSectionsRestrictionStrictlyLocal` (first blocker `OpenHomTriangleRealization`),
+  `EtaleHypercohomologyUniformBound` (`EtaleKInjectiveUnitLeray`, `EtaleRowSectionsExtend`).
+- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ244-final-full.log`.
+- Fix patterns, whole-tree occurrence counts, and skipped dependency details:
+  `/home/ubuntu/u9/bz/FIXES-BZ244.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ244.DONE`.
 
 # BZ150 complete
 
