@@ -48,9 +48,7 @@ theorem exists_geometric_equivariant_integralOrientation_iso (g : X.left ⟶ X.l
     (φW : L((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj 𝐖.obj ⟶ 𝐖.obj)
     (hne : ∀ n : ℕ, ∃ e : (purityIntegralReduction X.left ℓ E.1 (n + 1)).obj 𝐓.obj ≅
         (purityIntegralReduction X.left ℓ E.1 (n + 1)).obj 𝐖.obj,
-      IsWeilEquivariant L((g)^*⟦Profinite.integersModPowRingObj ℓ E.1 (n + 1)⟧)
-        (transportWeilDatum _ (integersModPowReductionUpperStarIso ℓ E.1 (n + 1) g) φT.hom)
-        (transportWeilDatum _ (integersModPowReductionUpperStarIso ℓ E.1 (n + 1) g) φW) e.hom) :
+      PurityGeometricReductionWeilCondition g φT.hom φW (n + 1) e.hom) :
     ∃ e : 𝐓 ≅ 𝐖,
       IsWeilEquivariant L((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) φT.hom φW e.hom.hom := by
   let G := L((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)

@@ -23,6 +23,19 @@ open Scheme PadicAlgCl CondensedRing
 variable {X : Scheme.{u}} {ℓ : ℕ} [Fact ℓ.Prime]
   {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)]
 
+/-- The Weil equation at a finite geometric reduction. Naming it keeps applications
+from repeatedly elaborating the geometric and coefficient derived functors. -/
+def PurityGeometricReductionWeilCondition (g : X ⟶ X)
+    {K M : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
+    (φK : L((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).obj K ⟶ K)
+    (φM : L((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).obj M ⟶ M) (n : ℕ)
+    (s : (purityIntegralReduction X ℓ E n).obj K ⟶
+      (purityIntegralReduction X ℓ E n).obj M) : Prop :=
+  IsWeilEquivariant L((g)^*⟦Profinite.integersModPowRingObj ℓ E n⟧)
+    (transportWeilDatum _ (integersModPowReductionUpperStarIso ℓ E n g) φK)
+    (transportWeilDatum _ (integersModPowReductionUpperStarIso ℓ E n g) φM) s
+
 /-- The actual transition between two finite reductions preserves equivariance for the
 actual geometric pullback/reduction comparisons. The scheme endomorphism need not be
 linear over a chosen base field. -/
