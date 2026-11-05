@@ -91,7 +91,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         have hn := projection_nativePullTensor_normalization k₀ l g
         unfold ProjectionRestrictionTensorNormalization at hn
         dsimp only [L, nativeOpenPull]
-        as_aux_lemma => with_reducible cast_proofs hn)
+        projection_seal with_reducible cast_proofs hn)
       (by
         have hF := projection_native_realization_model_normalization k₀ l Y
         dsimp only [F, derivedCondensedRealization]
