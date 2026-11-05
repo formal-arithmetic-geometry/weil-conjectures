@@ -67,7 +67,14 @@ lemma purityCanonicalTateOneTrivialization_weil :
     (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a)
     (purityScalarTateCompare ℓ a) (purityScalarUnitCompare ℓ a)
     (purityScalarTargetDatum ℓ a) (purityScalarTargetUnitDatum ℓ a)
-    (purityScalarTateCompare_native_comm ℓ a) (purityScalarUnitCompare_native_comm ℓ a)
+    (by
+      have ha := purityScalarTateCompare_native_comm ℓ a
+      dsimp +instances only [Functor.comp_obj, Functor.comp_map] at ha ⊢
+      exact_mod_proofs ha)
+    (by
+      have hb := purityScalarUnitCompare_native_comm ℓ a
+      dsimp +instances only [Functor.comp_obj, Functor.comp_map] at hb ⊢
+      exact_mod_proofs hb)
     (purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
       (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
       (upperStarMapModTateModuleIsoUnit a.geometricFiberProj

@@ -73,3 +73,8 @@ locks or scheduler settings touched. Next combined concrete check uses corrected
 any equation proof. Avoiding that global target per new LEAD plan. Isolating our different outer
 iso boundary with an admission-free Prop type control and explicit source/target functor transport:
 this should distinguish type conversion of two iso types from comparison of the iso values.
+
+20:41 CST: Explicit N/T/U/e does NOT fix concrete scalar application: 11c0651d87/log203508
+again ELAB isDefEq200000 at the unit native-comm argument (20s). Interface stays GREEN11s.
+Next variant uses by-blocks only for the two cheap comparison-square inputs, bounded dsimp
++instances on comp_obj/map, then exact_mod_proofs. Keep scalar root input native and untouched.
