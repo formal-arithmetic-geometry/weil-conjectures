@@ -1,3 +1,16 @@
+# BZ244 in progress
+
+- Branch: `u9/BZ244`; starting commit: `c781553bf`.
+- The user instructed continuation after the exact two-site statement compatibility patch.
+  Applied that patch: Mathlib's reversed compositor now uses `.symm`, preserving the maps.
+- Matching proof-body substitutions are also applied; no other theorem statements changed.
+- Unit passed `ucheck-bump` at `77103258ee41c099ab4aeb649fc58587d582546d`: rc=0, failed=0, 3846 jobs.
+- Applying the same compositor migration to the two direct importers and validating them together.
+- Next: obtain a green unit build, then test the two direct downstream importers and one
+  further layer under the brief's ownership and module-count limits.
+- Patterns and baseline logs: `/home/ubuntu/u9/bz/FIXES-BZ244.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
 # BZ150 complete
 
 - Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
