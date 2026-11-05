@@ -1,15 +1,27 @@
-# BZ244 in progress
+# BZ252 complete
 
-- Branch: `u9/BZ244`; starting commit: `c781553bf`.
-- The user instructed continuation after the exact two-site statement compatibility patch.
-  Applied that patch: Mathlib's reversed compositor now uses `.symm`, preserving the maps.
-- Matching proof-body substitutions are also applied; no other theorem statements changed.
-- Unit passed `ucheck-bump` at `77103258ee41c099ab4aeb649fc58587d582546d`: rc=0, failed=0, 3846 jobs.
-- Applying the same compositor migration to the two direct importers and validating them together.
-- Next: obtain a green unit build, then test the two direct downstream importers and one
-  further layer under the brief's ownership and module-count limits.
-- Patterns and baseline logs: `/home/ubuntu/u9/bz/FIXES-BZ244.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Unit: `BZ252`; branch: `u9/BZ252`; starting commit: `c781553bf`.
+- The assigned EtaleComplexPullbackTransport module and direct importers
+  EtaleComplexPullbackCoherence and EtaleComplexPullbackPresentation passed together
+  via `ucheck-bump`: rc=0, failed=0, 3848 jobs.
+- Validated source commit: `e66b1a260a`; full log:
+  `/home/ubuntu/u9/bz/BUILD-BZ252-repair1-full.log`.
+- Verified build pins: Lean v4.35.0-rc3 and Mathlib
+  `b63f6e8a68d220e3b3bc4f3792bb53650d375f24` on newsrv bumpw5.
+- Applied the exact compositor compatibility proposals after the user's continuation:
+  four uses in Transport and two in Presentation now take the inverse of Mathlib's
+  reversed compositor. This preserves the original mathematical maps.
+- Only the proposed private helper statement and the hm/hs hypotheses changed;
+  all remaining declaration types and existing docstrings are unchanged.
+- FixedDerivedCohomologyDiagram and RawFixedDerivedComparisonNaturality were attempted
+  and skipped for other-owner dependency failures. The second-layer importer
+  DerivedEtaleCohomologyLimit is also blocked by other-owner dependencies.
+- Fix pattern, whole-tree counts, and dependency errors:
+  `/home/ubuntu/u9/bz/FIXES-BZ252.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, profiler probes,
+  or heartbeat/recursion-limit increases. `git diff --check` passed.
+- Completion marker: `/home/ubuntu/u9/state/BZ252.DONE`.
+- This final progress update changes documentation only after the green source build.
 
 # BZ150 complete
 
