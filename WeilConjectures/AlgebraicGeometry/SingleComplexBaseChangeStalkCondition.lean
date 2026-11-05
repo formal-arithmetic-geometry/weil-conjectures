@@ -272,7 +272,7 @@ structure Coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory 
   isKFlat : P.IsKFlatTensor
   counit_isIso : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
   t : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P ⟶ N
-  represents : (counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+  represents : cast (by rfl) ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
     (DerivedCategory.Q (C := SheafOfModules.{uSC} (moduleRings X'.toRingedSpace))).map t ≫
       e'.hom = (derivedPullback g').map e.hom ≫ φ
 
