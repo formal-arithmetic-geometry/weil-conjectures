@@ -35,11 +35,6 @@ local instance (Y : Scheme.{u}) (V : Y.Opens) :
   inferInstanceAs ((SheafOfModules.forget Y.ringCatSheaf ⋙
     PresheafOfModules.evaluation Y.ringCatSheaf.obj (op V)).Additive)
 
-local instance (Y : Scheme.{u}) (V : Y.Opens) :
-    (SheafOfModules.evaluation.{u} Y.ringCatSheaf (op V) ⋙
-      forget₂ (ModuleCat.{u} (Y.ringCatSheaf.obj.obj (op V))) AddCommGrpCat.{u}).Additive :=
-  inferInstance
-
 /-- Global sections of a quasi-isomorphism from the direct image of a nonnegative complex
 of injective modules to a nonnegative complex of injective modules is a quasi-isomorphism,
 both over `O_Y(Y)` (Mathlib's `SheafOfModules.evaluation` at `⊤`, as in
