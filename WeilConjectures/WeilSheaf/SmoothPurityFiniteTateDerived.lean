@@ -21,7 +21,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
-  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
   (n : ℕ) {k : Type u} [Field k] [NeZero (ℓ : k)] {X X' : Scheme.{u}}
 
 /-- The finite Tate power in degree zero, with its geometric pullback datum. -/
