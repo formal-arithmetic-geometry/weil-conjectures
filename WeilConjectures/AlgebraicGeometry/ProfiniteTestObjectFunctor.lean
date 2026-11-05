@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Topology.Category.Profinite.AsLimit
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Over
 
 import Mathlib.Topology.Category.Profinite.CofilteredLimit
 import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
@@ -204,7 +205,9 @@ private theorem profinite_cover_preserving :
   obtain ⟨a⟩ := hg
   exact ⟨S a, f a, 𝟙 _, hmem a, (Category.id_comp _).symm⟩
 
-set_option backward.isDefEq.respectTransparency true in
+local instance (X : Scheme.{u}) : HasCoproducts.{u} (Over X) :=
+  fun _ ↦ Over.instHasColimitsOfShape
+
 /-- The relative profinite test functor is independent of finite-quotient presentation,
 preserves finite limits and finite disjoint unions, and takes finite jointly surjective
 families to fpqc coverings. Its restriction to finite sets is naturally the coproduct of
