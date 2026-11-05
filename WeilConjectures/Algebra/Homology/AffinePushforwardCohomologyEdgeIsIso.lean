@@ -110,8 +110,10 @@ theorem affinePushforwardCohomologyEdge_isIso
         ((P.mapHomotopyCategory (.up ℤ)).map (q.map s))) := by
       apply (DerivedCategory.isIso_Qh_map_iff _).mpr
       exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).mpr hPs
-    have : IsIso ((DerivedCategory.Qh.{w} ⋙ P.rightDerivedFunctor.{_, _, _, _, w, w}).map (q.map s)) := by
-      change IsIso (P.rightDerivedFunctor.{_, _, _, _, w, w}.map (DerivedCategory.Qh.{w}.map (q.map s)))
+    have : IsIso ((DerivedCategory.Qh.{w} ⋙
+        P.rightDerivedFunctor.{_, _, _, _, w, w}).map (q.map s)) := by
+      change IsIso (P.rightDerivedFunctor.{_, _, _, _, w, w}.map
+        (DerivedCategory.Qh.{w}.map (q.map s)))
       infer_instance
     have hu : IsIso (P.rightDerivedFunctorUnit.{_, _, _, _, w, w}.app (q.obj D)) := by
       have hn := P.rightDerivedFunctorUnit.{_, _, _, _, w, w}.naturality (q.map s)
