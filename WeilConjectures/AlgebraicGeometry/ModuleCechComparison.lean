@@ -49,6 +49,9 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 universe u
 
+attribute [-instance]
+  CategoryTheory.Limits.instHasBinaryProductObjOfPreservesLimitDiscreteWalkingPairPair
+
 private local instance (R : Type u) [Ring R] (J : Type) :
     HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
