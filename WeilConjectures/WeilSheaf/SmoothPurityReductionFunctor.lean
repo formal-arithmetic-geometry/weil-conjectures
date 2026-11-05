@@ -23,9 +23,9 @@ repeated elaboration of the derived-functor instance in reconstruction statement
 noncomputable def purityIntegralReduction (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] (n : ℕ) :
     DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (CondensedRing.condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) ⥤
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) ⥤
     DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (CondensedRing.condensedRingObj (Profinite.integersModPowRingObj ℓ E n) X)) :=
+      (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) X)) :=
   (Mod.extendScalars (integersModPowReduction X ℓ E n)).leftDerivedFunctor
 
 end AlgebraicGeometry.ProEtale

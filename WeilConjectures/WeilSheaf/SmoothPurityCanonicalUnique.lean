@@ -35,6 +35,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (E : PadicAlgCl.FiniteIntermediateField ℓ) (f : X ⟶ Y) (d : ℕ)
   [SmoothOfRelativeDimension d f.left]
 
+set_option trace.profiler true in
+set_option trace.profiler.threshold 1000 in
 /-- The finite normalization determines the integral orientation uniquely. -/
 theorem eq_of_isIntegralSmoothOrientation
     {φ ψ : (shiftFunctor (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) (2 * d : ℤ)).obj
@@ -49,7 +51,7 @@ theorem eq_of_isIntegralSmoothOrientation
     have : IsNoetherian X.left := isNoetherian_of_locallyOfFiniteType X.hom
     exact derivedCompleteIntegers_of_boundedConstructible W.property
   have := fun n : ℕ ↦ finite_shift_hom_integralOrientation_reduction
-    (ℓ := ℓ) (E := E) f d (n + 1)
+    (ℓ := ℓ) (E := E.1) f d (n + 1)
   apply (ObjectProperty.fullyFaithfulι _).map_injective
   apply eq_of_derivedReduction_map_eq (K := K.obj) (L := W.obj) hW
   intro n
