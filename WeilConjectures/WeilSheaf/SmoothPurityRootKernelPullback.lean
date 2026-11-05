@@ -75,9 +75,14 @@ lemma purityRootsPresheafKernelIso_lowerStar {X Y : Scheme.{u}} (g : X ⟶ Y) (N
     proEtaleRootsOfUnitySections X N _
       ((purityRootsPresheafKernelIso X N).hom.hom.app _
         ((rootsOfUnityToLowerStar g N).hom.app V x))
-  rw [purity_rootDirectImage_sections,
-    purityRootsPresheafKernelIso_sections, purityRootsPresheafKernelIso_sections]
-  rfl
+  have h₁ := purity_rootDirectImage_sections g N V
+    ((purityRootsPresheafKernelIso Y N).hom.hom.app V x)
+  have h₂ := congrArg (fun z : Additive (rootsOfUnity N Γ(V.unop.left, ⊤)) ↦
+    Additive.ofMul (restrictRootsOfUnity (pullback.fst V.unop.hom g).appTop.hom N
+      (Additive.toMul z))) (purityRootsPresheafKernelIso_sections Y N V x)
+  have h₃ := purityRootsPresheafKernelIso_sections X N ((proEtaleBaseChange g).op.obj V)
+    ((rootsOfUnityToLowerStar g N).hom.app V x)
+  exact h₁.trans (h₂.trans h₃.symm)
 
 /-- The canonical inverse-image root maps agree under the kernel comparison. -/
 lemma purityRootsPresheafKernelIso_upperStar {X Y : Scheme.{u}} (g : X ⟶ Y) (N : ℕ) :
