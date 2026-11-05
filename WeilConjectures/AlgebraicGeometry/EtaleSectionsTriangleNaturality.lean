@@ -101,7 +101,7 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
     apply (cancel_epi (L.mapDerivedCategory.map
       (G.mapDerivedCategoryFactors.hom.app J))).1
     apply (cancel_epi ((Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso G L).hom.app (DerivedCategory.Q.obj J))).1
+      (Functor.mapDerivedCategoryCompIso G L).symm).hom.app (DerivedCategory.Q.obj J))).1
     rw [← L.mapDerivedCategory.map_comp_assoc]
     simp only [G, L, e, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
       Category.id_comp]

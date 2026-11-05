@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBoundAux
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Local cohomological bound for a restricted lower tail
 Source: Stacks Project, Tags 0D64, 01E1 and 03FD.

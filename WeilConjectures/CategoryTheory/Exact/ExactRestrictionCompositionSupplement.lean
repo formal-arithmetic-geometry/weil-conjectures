@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionComposition
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Composition of the inverse factorization comparisons of exact functors
 

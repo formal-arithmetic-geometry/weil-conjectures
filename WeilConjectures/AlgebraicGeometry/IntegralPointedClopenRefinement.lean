@@ -67,7 +67,7 @@ theorem exists_pointed_clopen_refinement
     CategoryTheory.Over.homMk (r ≫ pullback.fst W.hom ρ) (by
       change (r ≫ pullback.fst W.hom ρ) ≫ W.hom = basePt f c t ≫ ρ
       rw [Category.assoc, pullback.condition, ← Category.assoc, hrs])
-  obtain ⟨s, ⟨b⟩⟩ := Scheme.Hom.SplitNbhd.exists_pieceFunctor_obj_hom g t₀ ⟨W, w⟩
+  obtain ⟨s, ⟨b⟩⟩ := Scheme.Hom.SplitNbhd.exists_pieceFunctor_obj_hom g t₀ (Functor.elementsMk _ W w)
   let c' := c.comp s.obj
   let gm := c.compHom s.obj
   let θ : pullback c'.1.hom f ⟶ pullback s.obj.1.hom g :=

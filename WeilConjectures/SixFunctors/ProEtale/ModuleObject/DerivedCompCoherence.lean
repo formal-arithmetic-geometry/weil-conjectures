@@ -205,7 +205,7 @@ lemma mapDerivedCategory_compCoherence' (Cm : mfg ≅ mg ⋙ mf) (Cs : sfg ≅ s
         ((mapDerivedCategoryNatIso Cs).hom ≫ (mapDerivedCategoryCompIso sg sf).hom).app
           (G₃.mapDerivedCategory.obj M) =
       G₁.mapDerivedCategory.map
-          (((mapDerivedCategoryNatIso Cm).hom ≫ (mapDerivedCategoryCompIso mg mf).inv).app M) ≫
+          (((mapDerivedCategoryNatIso Cm).hom ≫ (mapDerivedCategoryCompIso mg mf).hom).app M) ≫
         ((mapDerivedCategoryCompIso mf G₁).inv ≫ (mapDerivedCategoryNatIso iF).hom ≫
           (mapDerivedCategoryCompIso G₂ sf).hom).app (mg.mapDerivedCategory.obj M) ≫
         sf.mapDerivedCategory.map (((mapDerivedCategoryCompIso mg G₂).inv ≫

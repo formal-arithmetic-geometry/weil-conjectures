@@ -24,7 +24,7 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
 private theorem comp_reassoc :
     (mapDerivedCategoryCompIso (F ⋙ G) H).inv ≫
       (mapDerivedCategoryCompIso F (G ⋙ H)).hom =
-    (isoWhiskerRight (mapDerivedCategoryCompIso F G).symm D(H)).hom ≫
+    (isoWhiskerRight (mapDerivedCategoryCompIso F G) D(H)).hom ≫
       (isoWhiskerLeft D(F) (mapDerivedCategoryCompIso G H)).inv := by
   rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
   exact mapDerivedCategoryCompIso_assoc F G H
@@ -32,7 +32,7 @@ private theorem comp_reassoc :
 private theorem comp_reassoc_inv :
     (mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
       (mapDerivedCategoryCompIso (F ⋙ G) H).hom =
-    (isoWhiskerLeft D(F) (mapDerivedCategoryCompIso G H).symm).hom ≫
+    (isoWhiskerLeft D(F) (mapDerivedCategoryCompIso G H)).hom ≫
       (isoWhiskerRight (mapDerivedCategoryCompIso F G) D(H)).inv := by
   rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
   exact (mapDerivedCategoryCompIso_assoc F G H).symm
@@ -49,7 +49,7 @@ private theorem nat_left (F : A ⥤ B) {G G' : B ⥤ C}
     (mapDerivedCategoryNatIso (isoWhiskerLeft F e)).hom =
       (mapDerivedCategoryCompIso F G).inv ≫
         (isoWhiskerLeft D(F) (mapDerivedCategoryNatIso e)).hom ≫
-        (mapDerivedCategoryCompIso F G').inv := by
+        (mapDerivedCategoryCompIso F G').hom := by
   rw [← Category.assoc, Iso.eq_comp_inv]
   exact mapDerivedCategoryNatIso_isoWhiskerLeft F e
 private theorem nat_right {F F' : A ⥤ B} (G : B ⥤ C)
@@ -60,7 +60,7 @@ private theorem nat_right {F F' : A ⥤ B} (G : B ⥤ C)
     (mapDerivedCategoryNatIso (isoWhiskerRight e G)).hom =
       (mapDerivedCategoryCompIso F G).inv ≫
         (isoWhiskerRight (mapDerivedCategoryNatIso e) D(G)).hom ≫
-        (mapDerivedCategoryCompIso F' G).inv := by
+        (mapDerivedCategoryCompIso F' G).hom := by
   rw [← Category.assoc, Iso.eq_comp_inv]
   exact mapDerivedCategoryNatIso_isoWhiskerRight e G
 end WhiskerEq
@@ -112,7 +112,7 @@ theorem mapDerivedCategorySquareIso_paste (α : F ⋙ E₁ ≅ E₀ ⋙ P) (β :
       (isoWhiskerRight (mapDerivedCategoryCompIso F G).symm D(E₂)).hom ≫
         (isoWhiskerLeft D(F) (mapDerivedCategorySquareIso β)).hom ≫
         (isoWhiskerRight (mapDerivedCategorySquareIso α) D(Q)).hom ≫
-        (isoWhiskerLeft D(E₀) (mapDerivedCategoryCompIso P Q)).inv := by
+        (isoWhiskerLeft D(E₀) (mapDerivedCategoryCompIso P Q).symm).inv := by
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     mapDerivedCategoryNatIso_trans, nat_left, nat_right, Category.assoc,
     isoWhiskerLeft_hom, isoWhiskerRight_hom, isoWhiskerLeft_inv,

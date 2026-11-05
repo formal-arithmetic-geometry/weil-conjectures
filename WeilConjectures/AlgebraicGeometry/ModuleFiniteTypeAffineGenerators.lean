@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ModuleGeneratingSectionsCompactSelection
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite affine sections generating on a compact open
 

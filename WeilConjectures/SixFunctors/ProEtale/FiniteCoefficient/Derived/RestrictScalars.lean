@@ -216,7 +216,7 @@ lemma mapDerivedCategorySquareIso_hom_app_comp (α₂ : r₀ ⋙ p₂ ≅ P₂ �
   have hWL₁' : (mapDerivedCategoryNatIso (isoWhiskerLeft r₀ e)).hom.app K =
       (mapDerivedCategoryCompIso r₀ p₁₂).inv.app K ≫
         (mapDerivedCategoryNatIso e).hom.app (r₀.mapDerivedCategory.obj K) ≫
-        (mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).inv.app K := by
+        (mapDerivedCategoryCompIso r₀ (p₂ ⋙ p₁)).hom.app K := by
     rw [← reassoc_of% hWL₁, Iso.hom_inv_id_app, Category.comp_id]
   have hWR₂' : (mapDerivedCategoryNatIso (isoWhiskerRight α₂ p₁)).hom.app K =
       (mapDerivedCategoryCompIso (r₀ ⋙ p₂) p₁).hom.app K ≫

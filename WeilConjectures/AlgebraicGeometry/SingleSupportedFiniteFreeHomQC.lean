@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.AlgebraicGeometry.SingleSupportedFiniteFreeHomologyIso
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The one-column finite free Hom calculation
 

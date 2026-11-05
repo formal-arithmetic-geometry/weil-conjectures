@@ -149,7 +149,7 @@ private lemma pasting
     let d := (mapDerivedCategoryCompIso A T).symm ≪≫ mapDerivedCategoryNatIso γ
     (mapDerivedCategoryCompIso (A ⋙ e) S).inv ≫
       (mapDerivedCategoryNatIso α).hom ≫ (mapDerivedCategoryCompIso B v).hom =
-    whiskerRight (mapDerivedCategoryCompIso A e).hom S.mapDerivedCategory ≫
+    whiskerRight (mapDerivedCategoryCompIso A e).inv S.mapDerivedCategory ≫
       whiskerLeft A.mapDerivedCategory k.hom ≫ whiskerRight d.hom v.mapDerivedCategory := by
   dsimp only
   refine Localization.natTrans_ext DerivedCategory.Q

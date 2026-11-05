@@ -374,7 +374,7 @@ theorem pseudoCoherent_normalizedAlgebraTower
         (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso
       (ModuleCat.restrictScalarsComp' (q (n + 1)) (φ n) (q n) (hq n)) ≪≫
-      Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars (φ n))
+      (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars (φ n))).symm
         (ModuleCat.restrictScalars (q (n + 1)))
   have hχ := fun n ↦ restrictScalarsComp_derived_factors (q (n + 1)) (φ n) (q n) (hq n)
   have htri : IsDerivedLimitTriangle

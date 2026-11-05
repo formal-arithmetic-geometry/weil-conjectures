@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.RingTheory.Ideal.Span
 import WeilConjectures.AlgebraicGeometry.AffineIdealGeneratorCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Compatible numerators on a finite principal-open cover
 
