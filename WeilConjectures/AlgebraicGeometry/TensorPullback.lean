@@ -36,7 +36,11 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {X Y Z : Scheme.{w}} (g : X ⟶ Y)
 
-private local instance : Limits.HasColimits.{w} CommRingCat.{w} := inferInstance
+private local instance (F : (Opens Y)ᵒᵖ ⥤ CommRingCat.{w}) :
+    (Opens.map g.base).op.HasLeftKanExtension F := by
+  have : (Opens.map g.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+  exact Functor.HasLeftKanExtension.mk _
+    (Functor.pointwiseLeftKanExtensionUnit (Opens.map g.base).op F)
 
 /-- The ring map `g⁻¹ O_Y → O_X` adjoint to the structure-sheaf map of `g`.
 Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback). -/
