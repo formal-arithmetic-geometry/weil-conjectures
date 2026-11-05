@@ -61,7 +61,27 @@ private noncomputable def presheafTransportAdjunction
     (botModuleLiftFullyFaithful R) (botModuleLiftFullyFaithful S)
     (Iso.refl _) (Iso.refl _)
 
-set_option diagnostics true in
+private noncomputable def sheafificationTransportIso
+    {C D : Type u} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    [F.IsContinuous J K] [G.IsContinuous K J]
+    {S : Sheaf J RingCat.{u}} {R : Sheaf K RingCat.{u}}
+    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat J K).obj R)
+    (ψ : R ⟶ (G.sheafPushforwardContinuous RingCat K J).obj S)
+    (h₁ : Functor.whiskerRight (NatTrans.op adj.counit) R.obj =
+      ψ.hom ≫ G.op.whiskerLeft φ.hom)
+    (h₂ : φ.hom ≫ F.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op adj.unit) S.obj = 𝟙 S.obj) :
+    PresheafOfModules.sheafification.{u} (𝟙 R.obj) ⋙ SheafOfModules.pushforward φ ≅
+      PresheafOfModules.pushforward φ.hom ⋙
+        PresheafOfModules.sheafification.{u} (𝟙 S.obj) :=
+  Adjunction.leftAdjointUniq
+    ((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 R.obj)).comp
+      (SheafOfModules.pushforwardPushforwardAdj adj φ ψ h₁ h₂))
+    ((presheafTransportAdjunction adj φ.hom ψ.hom h₁ h₂).comp
+      (PresheafOfModules.sheafificationAdjunction.{u} (𝟙 S.obj)))
+
 /-- Sheafification commutes with transport along the localized open-site equivalence.
 Source: Stacks Project, Tag 01CD, sheafification step in the localized-site construction.
 (blueprint: lem-sc-localized-open-sheafification).
@@ -89,14 +109,12 @@ theorem exists_localizedOpen_sheafification_iso (X : Scheme.{u}) (U : X.Opens) :
             (R₀ := (moduleRings U.toScheme.toRingedSpace).obj)
             (R := moduleRings U.toScheme.toRingedSpace)
             (𝟙 (moduleRings U.toScheme.toRingedSpace).obj)) := by
-  trace "BZ346: theorem body"
   let R := moduleRings X.toRingedSpace
   let e := (TopologicalSpace.Opens.overEquivalence U).symm
   let φ := (U.overPullbackSheafEquivOver.app R).inv
   let ψ := (U.sheafRestrictSheafEquivOver.app R).inv
   have h₁ : Functor.whiskerRight (NatTrans.op e.counit) (R.over U).obj =
       ψ.hom ≫ e.inverse.op.whiskerLeft φ.hom := rfl
-  trace "BZ346: h1 complete"
   have h₂ : φ.hom ≫ e.functor.op.whiskerLeft ψ.hom ≫
       Functor.whiskerRight (NatTrans.op e.unit) (U.sheafRestrict.obj R).obj =
         𝟙 (U.sheafRestrict.obj R).obj := by
@@ -105,13 +123,6 @@ theorem exists_localizedOpen_sheafification_iso (X : Scheme.{u}) (U : X.Opens) :
       TopologicalSpace.Opens.sheafRestrictSheafEquivOver,
       TopologicalSpace.Opens.overEquivalence, eqToHom_map, IsOpenMap.functor]
     rfl
-  trace "BZ346: h2 complete"
-  let adj := presheafTransportAdjunction e.toAdjunction φ.hom ψ.hom h₁ h₂
-  trace "BZ346: transport adjunction complete"
-  exact ⟨Adjunction.leftAdjointUniq
-    ((PresheafOfModules.sheafificationAdjunction.{u}
-      (𝟙 (R.over U).obj)).comp (Scheme.Modules.overEquiv U).toAdjunction)
-    (adj.comp (PresheafOfModules.sheafificationAdjunction.{u}
-      (𝟙 (moduleRings U.toScheme.toRingedSpace).obj)))⟩
+  exact ⟨sheafificationTransportIso e.toAdjunction φ ψ h₁ h₂⟩
 
 end AlgebraicGeometry
