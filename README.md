@@ -1,72 +1,18 @@
-# weil-conjectures
-
-A Lean 4 formalization project for the **Weil conjectures**: rationality of
-the zeta function, the functional equation, and the Riemann hypothesis for
-smooth, proper, geometrically integral varieties over finite fields. The
-target statements live in `WeilConjectures/Statement.lean`
-(`AlgebraicGeometry.Scheme.weil_conjectures` and
-`AlgebraicGeometry.Scheme.zetaSeries_rational`), formulated purely
-arithmetically in terms of integer polynomials and their complex roots.
-
-## Blueprint
-
-The informal blueprint is maintained in
-[formal-arithmetic-geometry/weil-conjectures-blueprint](https://github.com/formal-arithmetic-geometry/weil-conjectures-blueprint)
-and included at `blueprint/` as a Git submodule pinned to a specific commit.
-Its Markdown nodes live under `blueprint/blueprint/`, with configuration in
-`blueprint/blueprint.toml`.
-
-Clone this project with the submodule:
-
-```bash
-git clone --recurse-submodules https://github.com/formal-arithmetic-geometry/weil-conjectures
-```
-
-For an existing checkout, run this from the project root after pulling or
-switching branches to initialize or update the submodule to the pinned commit:
-
-```bash
-git submodule update --init --recursive
-```
-
-See [the blueprint README](blueprint/README.md) for local build instructions;
-run its Lake commands from `blueprint/`. Blueprint content changes belong in
-the blueprint repository; after they are committed and pushed there, update
-and commit the submodule pointer here. The blueprint repository builds and
-publishes its site independently of this project's Lean CI.
-
-## Where the mathematics lives
-
-Before stating a result, check whether this repository already proves it:
-
-* the zeta function `Z(X, t)` is `AlgebraicGeometry.Scheme.Hom.zetaSeries`,
-  defined in `Comparator/Weil/Definitions.lean`, with its theory in
-  `WeilConjectures/ZetaSeries.lean`;
-* the two headline statements are
-  `AlgebraicGeometry.Scheme.zetaSeries_rational` and
-  `AlgebraicGeometry.Scheme.weil_conjectures` in
-  `WeilConjectures/Statement.lean`;
-* Nagata compactification is `AlgebraicGeometry.NagataCompactification` in
-  `WeilConjectures/Compactification/NagataCompactification.lean`, built on
-  the rest of `WeilConjectures/Compactification/`;
-* the six operations on the étale and pro-étale derived categories are
-  constructed in `WeilConjectures/SixFunctors/`.
-
-New declarations are named and namespaced as if they were headed for Mathlib
-(`AlgebraicGeometry.*`, `CategoryTheory.*`, ...) and go into the topic tree
-they belong to, not into a tree named after a document's sectioning. A file
-under `WeilConjectures/Mathlib/` must mirror a file that already exists in
-Mathlib.
-
-## GitHub configuration
-
-To set up your new GitHub repository, follow these steps:
-
-* Under your repository name, click **Settings**.
-* In the **Actions** section of the sidebar, click "General".
-* Check the box **Allow GitHub Actions to create and approve pull requests**.
-
-No GitHub Pages configuration is needed: no workflow publishes a site, so
-the **Pages** settings can be left disabled.
-
-After following the steps above, you can remove this section from the README file.
+# Minimal reproduction: kernel deterministic timeout on the finite étale Tate reading (K4 / smooth purity, Weil Rf^! orientation)
+Base: slopmaster2 08fcdf1cca + 22 files from branch sheaf/k4-smooth-purity-wip (commit a1ee12d022, unchanged except the two `set_option` lines).
+Build: `lake build WeilConjectures.WeilSheaf.SmoothPurityFiniteTateOneReading` (≈ 40 s elaboration, then `(kernel) deterministic timeout` at the lemma).
+Generic lemma: `CategoryTheory.purity_reading_composition_named` (WeilSheaf/SmoothPurityReadingComposition.lean): composes a reduction square and a reading square
+through a pullback comparison α : P ⋙ F ≅ F₀ ⋙ Q; it is instantiated with P = condensed pullback ī^* of Λ-module objects, F/F₀ = finiteCoefficientModEquivalence,
+Q = étale pullback of ModuleCat(ℤ/ℓⁿ)-sheaves, α = upperStarFiniteCoefficientModEquivalenceIso, to prove the concrete instance
+`purity_finiteCoefficientIntegralTateOneReading_pullback` (the finite-coefficient reading of the integral Tate line commutes with pullback).
+Symptom: elaboration succeeds (`cast_proofs` casts 73 + 83 + 156 differing proof subterms, one `Eq.mpr` each over the whole goal), then the KERNEL times out at 200000
+heartbeats; the variant `_exact` (plain `exact`, maxHeartbeats 2000000) elaborates in ~480 s and the kernel STILL times out at 2M.
+Measured (set_option diagnostics true, logs C1-20261105T175418 / 180044): non-proof differences between `h` and the goal are 1854 reducible-abbrev mismatches
+(`integersModPowCoeff ℓ E n` vs `ULift (PadicAlgCl.integersModPow ℓ E n)` ×1106, `Profinite.integersModPowRingObj` vs `continuousMapRingObj (integersModPow …)` ×748);
+155 of the 180 proof differences are the `Precoherent Profinite` instance inside `coherentTopology Profinite` (Mathlib `instPrecoherentOfFinitaryPreExtensiveOfPreregular`
+vs the auxiliary constant `ProEtale.pointLowerStar._proof_1`); the unifier/kernel unfold CategoryStruct.comp ×20378, Classical.choose ×6207, Mod.comap ×5752,
+presheafToSheaf ×5451, sheafPullback ×3588, Functor.lan ×3375, CondensedRing.upperStar ×2810, Mod.comapEquivalenceOfIsIso ×2806, Mod.extendScalars ×1912, …:
+the explicitly spelled functor arguments of the generic lemma are only definitionally (not syntactically) equal to the functors in the types of pullIso / α / the named isos.
+Tried: cast_proofs (kernel timeout), exact_mod_proofs, plain exact at 2M heartbeats (kernel timeout), direct goal assignment without Meta check (kernel timeout),
+dsimp-normalizing the two aliases + exact_mod_proofs (K4, pending). Question: how to state/prove such instances so that neither the unifier nor the kernel
+compares the condensed pullback functors structurally (e.g. a canonical form for the Precoherent instance, or an API to instantiate α/pullIso with `_` functors).
