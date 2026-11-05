@@ -6,6 +6,8 @@ module
 
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeConjugate
+public import WeilConjectures.CategoryTheory.DerivedCategory.ExchangeLeftAdjoint
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 
 /-! # Normalization of the exact open exchange used by geometric descent -/
 
@@ -42,6 +44,34 @@ lemma purityOpenImmersionLowerShriekUpperStarBaseChangeIso_inv
     ((upperStarLowerStarAdjunction Λ f').comp
       (openImmersionLowerShriekUpperStarAdjunction Λ g'))).injective
   rw [Equiv.apply_symm_apply, Adjunction.conjugateEquiv_exchangeLeft]
+  rfl
+
+/-- Deriving the normalized open square preserves its adjunction mate. -/
+lemma purityOpenImmersionLowerShriekMapDerivedCategoryBaseChangeIso_inv
+    (sq : IsPullback g' f' f g) [WeaklyEtale f] [WeaklyEtale f'] :
+    (openImmersionLowerShriekMapDerivedCategoryBaseChangeIso Λ sq).inv =
+      Adjunction.exchangeLeft
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ g)
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ g')
+        (Functor.mapDerivedCategorySquareIso (upperStarSquareComparison Λ sq.toCommSq)) := by
+  have he := purityOpenImmersionLowerShriekUpperStarBaseChangeIso_inv Λ sq
+  have : IsIso (Adjunction.exchangeLeft
+      (openImmersionLowerShriekUpperStarAdjunction Λ g)
+      (openImmersionLowerShriekUpperStarAdjunction Λ g')
+      (upperStarSquareComparison Λ sq.toCommSq)) := by
+    rw [← he]
+    infer_instance
+  have he' : asIso (Adjunction.exchangeLeft
+      (openImmersionLowerShriekUpperStarAdjunction Λ g)
+      (openImmersionLowerShriekUpperStarAdjunction Λ g')
+      (upperStarSquareComparison Λ sq.toCommSq)) =
+      (openImmersionLowerShriekUpperStarBaseChangeIso Λ sq).symm := by
+    apply Iso.ext
+    exact he.symm
+  rw [derivedOpenImmersionLowerShriekUpperStarAdjunction,
+    derivedOpenImmersionLowerShriekUpperStarAdjunction,
+    Adjunction.exchangeLeft_mapDerivedCategoryAdjunction, he',
+    Functor.mapDerivedCategorySquareIso_symm]
   rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing
