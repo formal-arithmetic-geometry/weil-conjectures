@@ -45,7 +45,7 @@ theorem mapDerivedCategoryNatIso_trans_idIso_inv_app_Q_obj {D : Type*} [Category
   apply (Iso.eq_comp_inv ((Functor.mapDerivedCategoryFactors (C₁ := D) (C₂ := D) R).app P)).2
   have hh := Functor.mapDerivedCategoryNatIso_fac r.symm P
   rw [Functor.mapDerivedCategoryNatIso_symm] at hh
-  simp only [Iso.trans_inv, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_inv, NatTrans.comp_app, Iso.app_hom, Category.assoc]
   rw [hh, ← Category.assoc, ← hId, Iso.inv_hom_id_app]
   erw [Category.id_comp]
 
