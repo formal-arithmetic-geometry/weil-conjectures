@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.PurityTensorMap
 public import WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
 public import WeilConjectures.WeilSheaf.UpperShriek
 public import WeilConjectures.WeilSheaf.UpperShriekGeometric
+public import WeilConjectures.WeilSheaf.Native.Projection.CompactProjectionFinal
 
 /-!
 # The co-projection map of the exceptional inverse image of Weil complexes
@@ -35,17 +36,10 @@ geometric map by a formal argument on adjunctions
 natural isomorphism `Rf̄_! ∘ For ≅ For ∘ Rf₀!` whose mate `For ∘ Rf^! ⟶ Rf̄^! ∘ For` is invertible
 and which carries a projection formula for Weil complexes to the geometric projection formula.
 
-## Unfinished
-
-This input is stated with `sorry`
-(`AlgebraicGeometry.WeilComplex.exists_lowerShriek_forget_iso_projection`). The library has no
-natural comparison of `For ∘ Rf₀!` with the condensed `Rf̄_!`
-(`CondensedRing.boundedConstructibleLowerShriek`): only an objectwise identification of the right
-adjoints exists
-(`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`), and the
-comparison of forgetting with the native tensor product
-(`ProEtaleWeilSheaf.nativeGeometricForget_tensorComparison`) and the Weil projection formula
-(`WeilComplex.nonempty_nativeCompactProjectionLeft_iso`) are only `Nonempty` statements.
+The comparison is constructed from the canonical proper projection map and the open
+projection map. Their forget squares and invertible exceptional mates paste along the chosen
+compactification. Compatibility of the geometric projection with change of compactification
+then gives the comparison for the geometric category's chosen compact direct image.
 -/
 
 @[expose] public section
@@ -175,8 +169,15 @@ theorem exists_lowerShriek_forget_iso_projection :
           τY.hom.app ((derivedLowerShriek k₀ l f).obj M, T) ≫
             β.inv.app M ▷ (geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T ≫
             CondensedRing.boundedConstructibleExceptionalProjectionMorphism l
-              (geometricFiberHom (k₀ := k₀) f) _ _ :=
-  sorry
+              (geometricFiberHom (k₀ := k₀) f) _ _ := by
+  refine ⟨projectionCompactForgetIso k₀ l f, ?_,
+    compactProjectionForgetTensorIso k₀ l X, compactProjectionForgetTensorIso k₀ l Y,
+    projectionCompactPullForgetIso k₀ l f, projectionCompactIso k₀ l f, ?_⟩
+  · have := isIso_mateEquiv_projectionCompactForgetIso k₀ l f
+      (derivedLowerShriekUpperShriekAdjunction f)
+    intro L
+    infer_instance
+  · exact projectionCompact_forget_square k₀ l f
 
 set_option maxHeartbeats 1000000 in
 -- elaborating the instantiation of the abstract transport lemma is slow

@@ -1,0 +1,151 @@
+/-
+Copyright (c) 2026. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import WeilConjectures.WeilSheaf.Native.Projection.BoundedOpenProjectionSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperProjectionSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.MateAdjunctionChoice
+
+/-! # The normalized compact-support projection and forget comparisons -/
+
+@[expose] public noncomputable section
+
+universe u
+
+open CategoryTheory MonoidalCategory
+
+namespace AlgebraicGeometry.WeilComplex
+
+open ProEtale
+
+attribute [local instance] Compactification.over
+
+variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
+  [Fact (ringChar k₀ ≠ l)]
+  {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+
+local notation "c" => nativeProjectionCompactification k₀ f
+local notation "cb" => geometricFiberHomCompactification (k₀ := k₀) f
+local notation "fb" => geometricFiberHom (k₀ := k₀) f
+local notation "Λ" => Profinite.padicAlgClRingObj l
+
+local instance : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+
+/-- The pullback compositor on bounded Weil complexes. -/
+def projectionBoundedPullComp : upperStar c.g ⋙ upperStar c.i ≅ upperStar (k₀ := k₀) (l := l) f :=
+  ((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
+    (Functor.isoWhiskerLeft (objectProperty k₀ l Y).ι (nativeProjectionPullComp k₀ l f))
+
+/-- The geometric pullback compositor through the chosen Weil compactification. -/
+def projectionGeometricPullComp :
+    CondensedRing.boundedConstructibleUpperStar Λ l cb.overG ⋙
+        CondensedRing.boundedConstructibleUpperStar Λ l cb.overI ≅
+      CondensedRing.boundedConstructibleUpperStar Λ l fb :=
+  (eqToIso (congrArg (CondensedRing.boundedConstructibleUpperStar Λ l) cb.overI_overG.symm) ≪≫
+    CondensedRing.boundedConstructibleUpperStarComp Λ l cb.overI cb.overG).symm
+
+/-- Forget comparison for the compactification induced from the Weil category. -/
+def projectionCompactificationForgetIso :
+    derivedLowerShriek k₀ l f ⋙ compactProjectionForget k₀ l Y ≅
+      compactProjectionForget k₀ l X ⋙
+        CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb :=
+  Functor.isoWhiskerLeft (extensionByZero c.i) (projectionProperForgetIso k₀ l c.g) ≪≫
+    Functor.isoWhiskerRight (projectionOpenForgetIso k₀ l c.i)
+      (CondensedRing.boundedConstructibleLowerStar l cb.overG)
+
+/-- Pullback comparison obtained by pasting the open and proper comparisons. -/
+def projectionCompactPullForgetIso :
+    upperStar f ⋙ compactProjectionForget k₀ l X ≅
+      compactProjectionForget k₀ l Y ⋙ CondensedRing.boundedConstructibleUpperStar Λ l fb :=
+  Functor.isoWhiskerRight (projectionBoundedPullComp k₀ l f).symm
+      (compactProjectionForget k₀ l X) ≪≫
+    Functor.isoWhiskerLeft (upperStar c.g) (compactProjectionForgetUpperStarIso k₀ l c.i) ≪≫
+    Functor.isoWhiskerRight (compactProjectionForgetUpperStarIso k₀ l c.g)
+      (CondensedRing.boundedConstructibleUpperStar Λ l cb.overI) ≪≫
+    Functor.isoWhiskerLeft (compactProjectionForget k₀ l Y) (projectionGeometricPullComp k₀ l f)
+
+/-- The compact projection isomorphism, with both factors canonically normalized. -/
+def projectionCompactIso : nativeCompactProjectionLeft k₀ l f ≅ nativeCompactProjectionRight k₀ l f :=
+  projectionCompositeIso (nativeBoundedOpenProjectionIso c.i) (nativeBoundedProperProjectionIso c.g)
+    (projectionBoundedPullComp k₀ l f)
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+/-- The compact projection isomorphism lies over the geometric projection map for the
+base-changed compactification. -/
+theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
+    (N : WeilComplex k₀ l Y) :
+    (compactProjectionForget k₀ l Y).map ((projectionCompactIso k₀ l f).hom.app (M, N)) ≫
+        (projectionCompactificationForgetIso k₀ l f).hom.app _ ≫
+        (CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb).map
+          ((compactProjectionForgetTensorIso k₀ l X).hom.app (M, (upperStar f).obj N) ≫
+            (compactProjectionForget k₀ l X).obj M ◁
+              (projectionCompactPullForgetIso k₀ l f).hom.app N) =
+      (compactProjectionForgetTensorIso k₀ l Y).hom.app ((derivedLowerShriek k₀ l f).obj M, N) ≫
+        (projectionCompactificationForgetIso k₀ l f).hom.app M ▷
+          (compactProjectionForget k₀ l Y).obj N ≫
+        ObjectProperty.homMk
+          (CondensedRing.exceptionalProjectionMorphismOfCompactification Λ cb
+            ((compactProjectionForget k₀ l X).obj M).obj
+            ((compactProjectionForget k₀ l Y).obj N).obj) := by
+  rw [CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb _ _
+    ((projectionGeometricPullComp k₀ l f).hom.app _) (by
+      exact CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb _)]
+  have h := projectionForgetSquare_paste
+    (projectionOpenForgetIso k₀ l c.i) (projectionProperForgetIso k₀ l c.g)
+    (compactProjectionForgetUpperStarIso k₀ l c.i)
+    (compactProjectionForgetUpperStarIso k₀ l c.g)
+    (compactProjectionForgetTensorIso k₀ l X) (compactProjectionForgetTensorIso k₀ l c.Z)
+    (compactProjectionForgetTensorIso k₀ l Y)
+    (projectionBoundedPullComp k₀ l f) (projectionGeometricPullComp k₀ l f)
+    _ _ _ _ (projectionForgetSquare_open k₀ l c.i) (projectionForgetSquare_proper k₀ l c.g) M N
+  simpa only [projectionCompactIso, projectionCompositeIso_hom_app,
+    projectionCompactificationForgetIso, projectionCompactPullForgetIso,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Adjunction.projectionMorphismNatTrans, Adjunction.invProjectionComparisonNatTrans,
+    Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
+    id_whiskerRight, whiskerLeft_id, Category.id_comp, Category.comp_id,
+    Category.assoc] using h
+
+/-- The exceptional mate of the normalized compactification comparison is invertible. -/
+theorem isIso_mateEquiv_projectionCompactificationForgetIso
+    {R : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}
+    (adj : derivedLowerShriek k₀ l f ⊣ R) :
+    IsIso (mateEquiv adj
+      (CondensedRing.boundedConstructibleUpperShriekOfCompactificationAdjunction l cb)
+      (projectionCompactificationForgetIso k₀ l f).inv).natTrans := by
+  have : (derivedLowerStar (k₀ := k₀) (l := l) c.g).IsLeftAdjoint :=
+    isLeftAdjoint_derivedLowerStar_of_isProper c.g
+  let ai := extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) c.i
+  let bi := CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l cb.overI
+  let ag := Adjunction.ofIsLeftAdjoint (derivedLowerStar (k₀ := k₀) (l := l) c.g)
+  let bg := Adjunction.ofIsLeftAdjoint (CondensedRing.boundedConstructibleLowerStar l cb.overG)
+  have : IsIso (mateEquiv ai bi (projectionOpenForgetIso k₀ l c.i).inv).natTrans :=
+    isIso_mateEquiv_projectionOpenForgetIso k₀ l c.i
+  have : IsIso (mateEquiv ag bg (projectionProperForgetIso k₀ l c.g).inv).natTrans :=
+    isIso_mateEquiv_projectionProperForgetIso k₀ l c.g ag bg
+  let e : derivedLowerShriek k₀ l f ≅ extensionByZero c.i ⋙ derivedLowerStar c.g :=
+    NatIso.ofComponents (fun M ↦ Iso.refl _) (fun φ ↦ by
+      simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+      rfl)
+  have h := isIso_mateEquiv_vComp_whiskerLeft_whiskerRight ai bi ag bg adj
+    (CondensedRing.boundedConstructibleUpperShriekOfCompactificationAdjunction l cb)
+    e (Iso.refl _) (projectionOpenForgetIso k₀ l c.i).inv (projectionProperForgetIso k₀ l c.g).inv
+  convert h using 1
+  congr 1
+  ext M
+  simp [projectionCompactificationForgetIso, e, TwoSquare.vComp,
+    TwoSquare.whiskerLeft, TwoSquare.whiskerRight]
+
+end AlgebraicGeometry.WeilComplex
