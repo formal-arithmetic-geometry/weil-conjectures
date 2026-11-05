@@ -60,7 +60,12 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
             (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g) := by
-  exact K4Native.purity_finiteCoefficientIntegralTateOneReading_pullback ℓ E n g f
+  have h := K4Native.purity_finiteCoefficientIntegralTateOneReading_pullback ℓ E n g f
+  simp only [K4Native.finiteCoefficientModEquivalence_eq,
+    K4Native.upperStarFiniteCoefficientModEquivalenceIso_eq,
+    K4Native.finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso_eq] at h
+  dsimp +instances only [Functor.comp_obj, Functor.comp_map, integersModPowReduction] at h ⊢
+  exact_mod_proofs h
 
 
 /-- The actual finite-coefficient reading of the integral Tate line preserves its
@@ -86,6 +91,6 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback_exact
             (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g) := by
-  exact purity_finiteCoefficientIntegralTateOneReading_pullback ℓ E n g f
+  exact_mod_proofs purity_finiteCoefficientIntegralTateOneReading_pullback ℓ E n g f
 
 end AlgebraicGeometry.ProEtale
