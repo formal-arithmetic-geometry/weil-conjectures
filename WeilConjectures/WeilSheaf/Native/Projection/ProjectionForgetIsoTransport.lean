@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPasting
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Transport of projection squares between isomorphic realization functors -/
 
@@ -29,6 +30,22 @@ def projectionPushForgetIso (δ : I ⋙ ND ≅ NC ⋙ I') (aC : NC ≅ FC) (aD :
 def projectionTensorForgetIso (tC : TC ⋙ NC ≅ NC.prod NC ⋙ TC') (aC : NC ≅ FC) :
     TC ⋙ FC ≅ FC.prod FC ⋙ TC' :=
   Functor.isoWhiskerLeft TC aC.symm ≪≫ tC ≪≫ Functor.isoWhiskerRight (NatIso.prod aC aC) TC'
+
+/-- Transporting the realization functors preserves invertibility of the exceptional mate. -/
+theorem isIso_mateEquiv_projectionPushForgetIso
+    {R : D ⥤ C} {R' : D' ⥤ C'} (adj : I ⊣ R) (adj' : I' ⊣ R')
+    (δ : I ⋙ ND ≅ NC ⋙ I') (aC : NC ≅ FC) (aD : ND ≅ FD)
+    [IsIso (mateEquiv adj adj' δ.inv).natTrans] :
+    IsIso (mateEquiv adj adj' (projectionPushForgetIso δ aC aD).inv).natTrans := by
+  let α := TwoSquare.mk _ _ _ _ δ.inv
+  have h := mateEquiv_whiskerTop_whiskerBottom adj adj' α aC.inv aD.hom
+  have he : (mateEquiv adj adj' (projectionPushForgetIso δ aC aD).inv).natTrans =
+      (((mateEquiv adj adj' α).whiskerRight aC.inv).whiskerLeft aD.hom).natTrans := by
+    rw [← h]
+    rfl
+  rw [he]
+  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft]
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Isomorphic realization functors carry the same projection-formula square. -/
@@ -72,8 +89,7 @@ theorem projectionForgetSquare_of_iso
   simp only [Functor.map_comp, Category.assoc]
   rw [← I'.map_comp_assoc, Iso.hom_inv_id_app, I'.map_id, Category.id_comp]
   rw [← I'.map_comp, hc, I'.map_comp]
-  rw [← I'.map_comp_assoc, reassoc_of% (h M N), ← reassoc_of% hn]
-  rw [← Category.assoc, ← Category.assoc, hd]
-  simp only [Category.assoc]
+  rw [← I'.map_comp_assoc, reassoc_of% (h M N), ← hn]
+  rw [reassoc_of% hd]
 
 end CategoryTheory

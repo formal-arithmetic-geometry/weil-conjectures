@@ -18,6 +18,17 @@ namespace CategoryTheory.Functor
 variable {A B A' B' : Type*} [Category* A] [Category* B]
   [Category* A'] [Category* B']
 
+/-- View a curried right-adjoint projection map as a map from a product category. -/
+def uncurryRightProjection {F : B ⥤ A} {G : A ⥤ B}
+    {TA : A × A ⥤ A} {TB : B × B ⥤ B}
+    (q : G ⋙ curry.obj TB ⟶
+      (postcompose₂.obj G).obj ((((whiskeringLeft₂ A).obj (𝟭 A)).obj F).obj (curry.obj TA))) :
+    G.prod (𝟭 B) ⋙ TB ⟶ (𝟭 A).prod F ⋙ TA ⋙ G where
+  app MN := (q.app MN.1).app MN.2
+  naturality := by
+    intro M N f
+    exact naturality_curry_postcompose₂ q (𝟭 A) (𝟭 B) f.1 f.2
+
 /-- Uncurry a comparison with a functor, simplifying the functorial composition maps. -/
 def uncurryCompIsoOfIso {TA : A ⥤ A ⥤ A} {TB : B ⥤ B ⥤ B} {R : B ⥤ A}
     (e : (postcompose₂.obj R).obj TB ≅ (((whiskeringLeft₂ A).obj R).obj R).obj TA) :

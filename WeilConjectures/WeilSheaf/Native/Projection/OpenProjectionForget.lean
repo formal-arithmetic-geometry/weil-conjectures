@@ -103,7 +103,7 @@ lemma map_nativeOpenProjectionIso_hom_app
               ((derivedCondensedRealization k₀ l U).obj M),
                 (derivedCondensedRealization k₀ l Z).obj N) := by
     rw [CondensedRing.openImmersionProjectionComparison, Adjunction.projectionComparison,
-      Adjunction.projectionMap_app_app, Equiv.apply_symm_apply]
+      Equiv.apply_symm_apply]
     simp [Adjunction.projectionMapTranspose, ρ', Functor.uncurryCompIsoOfIso,
       Functor.uncurry_obj_map]
   have h := compactProjectionOpen_forget_of_unit_at adj adj'
@@ -116,7 +116,7 @@ lemma map_nativeOpenProjectionIso_hom_app
       ((derivedCondensedRealization k₀ l Z).obj N))).symm hu hr
     (nativeOpenProjectionIso_inverse_unit k₀ l j M N) hg'
   simpa only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-    whiskerRight_id, whiskerLeft_id, Category.id_comp, Category.comp_id,
+    id_whiskerRight, whiskerLeft_id, Category.id_comp, Category.comp_id,
     Iso.symm_hom, Iso.symm_inv, asIso_hom, asIso_inv] using h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
