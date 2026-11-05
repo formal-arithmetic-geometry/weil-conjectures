@@ -246,7 +246,7 @@ theorem milnor_boundary_factorization [HasDerivedCategory.{v} AddCommGrpCat.{u}]
         DerivedCategory.HomologySequence.δ T (i - 1) i (by omega) ≫
           (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map g :=
       (DerivedCategory.homologyFunctor AddCommGrpCat.{u} 0).homologySequenceδ_naturality
-        T T' ψ (i - 1) i (by omega)
+        ψ (i - 1) i (by omega)
     obtain ⟨h, _, hn⟩ := he (K ⋙ H) (K' ⋙ H) (Functor.whiskerRight φ H)
     rw [← Category.assoc, hn, Category.assoc]
     rw [Category.assoc]

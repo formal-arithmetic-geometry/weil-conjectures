@@ -52,12 +52,15 @@ private def sourceScalar (U : C) (b : B.obj.obj (op U)) :
     change M.val.obj (op W.unop.left) at m
     symm
     change M.val.map g.unop.left.op (B.obj.map W.unop.hom.op b • m) =
-      B.obj.map W'.unop.hom.op b • M.val.map g.unop.left.op m
+      @SMul.smul _ _ (M.val.obj (op W'.unop.left)).isModule.toSMul
+        (B.obj.map W'.unop.hom.op b) (M.val.map g.unop.left.op m)
     rw [M.val.map_smul]
     have h := ConcreteCategory.congr_hom
       (B.obj.map_comp W.unop.hom.op g.unop.left.op) b
     rw [← op_comp, Over.w] at h
-    exact congrArg (fun a ↦ a • M.val.map g.unop.left.op m) h.symm
+    exact congrArg (fun a ↦
+      @SMul.smul _ _ (M.val.obj (op W'.unop.left)).isModule.toSMul a
+        (M.val.map g.unop.left.op m)) h.symm
 
 private def coefficientHomSmul (U : C) (b : B.obj.obj (op U))
     (f : (PresheafOfModules.restrictOver R.obj U).obj ((scalarRestriction φ).obj M).val ⟶
