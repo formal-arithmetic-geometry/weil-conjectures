@@ -71,8 +71,8 @@ variable (k₀) in
 noncomputable abbrev condensedProperOverHom :=
   (geometricFiberHomCompactification (k₀ := k₀) f).overG
 
-variable (k₀) in
 set_option linter.unusedSectionVars false in
+variable (k₀) in
 /-- **Deligne's finiteness for `Rḡ_*`** in the form used by `CondensedWeilUpperShriek`. -/
 theorem condensedProperPreserves (K)
     (hK : condensedBoundedConstructible k₀ l (shriekCompactification k₀ f).Z K) :
@@ -147,9 +147,8 @@ noncomputable def condensedWeilProperAdjunction :
       condensedWeilProperRightAdjoint k₀ l f :=
   Adjunction.ofIsLeftAdjoint _
 
+set_option linter.style.longLine false in
 variable (k₀) in
-set_option linter.style.longLine false in
-set_option linter.style.longLine false in
 /-- **The Frobenius structure of the Weil `Rg^!` is the exceptional datum of the upstream
 geometric adjunction** (condensed model, concrete adjunctions). -/
 theorem exists_condensedForget_obj_iso_isWeilEquivariant_rightWeilDatum_concrete

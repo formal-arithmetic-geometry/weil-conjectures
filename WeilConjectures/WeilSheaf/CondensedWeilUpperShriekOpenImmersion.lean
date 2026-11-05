@@ -100,10 +100,9 @@ noncomputable abbrev condensedOpenImmersionExchange :=
     (shriekCompactification k₀ f).i
     (comp_over (shriekCompactification k₀ f).i (Spec (CommRingCat.of k₀)))
 
-variable (k₀) in
-set_option linter.style.longLine false in
 set_option linter.style.longLine false in
 set_option linter.unusedSectionVars false in
+variable (k₀) in
 /-- The condensed Weil pullback `D(i^*)` along the open immersion of the compactification
 preserves bounded constructible condensed Weil complexes. -/
 theorem condensedWeilObjectProperty_openImmersionUpperStar
@@ -140,9 +139,8 @@ noncomputable def condensedGeometricUpperShriek :
       (fun K hK ↦ CondensedRing.boundedConstructible_mapDerivedCategory_upperStar_obj _
         (condensedOpenImmersionMap k₀ f) K hK)
 
+set_option linter.style.longLine false in
 variable (k₀) in
-set_option linter.style.longLine false in
-set_option linter.style.longLine false in
 /-- The underlying bounded constructible condensed complex of a condensed Weil complex. -/
 noncomputable abbrev condensedForgetObj (L' : (condensedWeilObjectProperty k₀ l Y).FullSubcategory) :
     (condensedBoundedConstructible k₀ l Y).FullSubcategory :=

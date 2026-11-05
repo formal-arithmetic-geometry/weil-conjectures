@@ -139,10 +139,9 @@ noncomputable abbrev condensedProperExchange :=
     (shriekCompactification k₀ f).g
     (comp_over (shriekCompactification k₀ f).g (Spec (CommRingCat.of k₀)))
 
-variable (k₀) in
-set_option linter.style.longLine false in
 set_option linter.style.longLine false in
 set_option linter.unusedSectionVars false in
+variable (k₀) in
 /-- The Weil derived direct image along `g` in the condensed model preserves bounded
 constructible condensed Weil complexes, as soon as the geometric one preserves bounded
 constructible complexes (`hR`). -/
@@ -158,9 +157,8 @@ theorem condensedWeilObjectProperty_rightDerivedFunctor
   ObjectProperty.prop_of_iso (condensedBoundedConstructible k₀ l Y)
     ((IsoAlgebra.derivedForgetCommIso (condensedProperExchange k₀ l f)).app M).symm (hR _ hM)
 
+set_option linter.style.longLine false in
 variable (k₀) in
-set_option linter.style.longLine false in
-set_option linter.style.longLine false in
 /-- **The Weil derived direct image is a left adjoint in the condensed model**, as soon as the
 geometric derived direct image on bounded constructible complexes is. -/
 theorem isLeftAdjoint_condensedWeilLowerStar
@@ -193,9 +191,8 @@ theorem isLeftAdjoint_condensedWeilLowerStar
     (condensedWeilObjectProperty k₀ l Y) (fun _ ↦ Iff.rfl) (fun _ ↦ Iff.rfl)
     (condensedWeilObjectProperty_rightDerivedFunctor k₀ l f hR)
 
+set_option linter.style.longLine false in
 variable (k₀) in
-set_option linter.style.longLine false in
-set_option linter.style.longLine false in
 /-- **The Frobenius structure of the Weil `Rg^!` is the exceptional datum, condensed model**: for a
 right adjoint `R'` of the geometric `Rḡ_*` on bounded constructible condensed complexes and a right
 adjoint `RW` of the Weil `Rg_*` on bounded constructible condensed Weil complexes, the underlying

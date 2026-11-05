@@ -90,9 +90,8 @@ instance : QuasiCompact (compactificationOpenImmersion k₀ f) :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @QuasiCompact)
     (shriekCompactification k₀ f).i _ ‹_›
 
+set_option linter.style.longLine false in
 variable (k₀) in
-set_option linter.style.longLine false in
-set_option linter.style.longLine false in
 /-- The levelwise derived adjunction `D(ī_!) ⊣ D(ī^*)`, restricted to bounded constructible adic
 complexes. -/
 noncomputable abbrev openImmersionBoundedConstructibleAdjunction :

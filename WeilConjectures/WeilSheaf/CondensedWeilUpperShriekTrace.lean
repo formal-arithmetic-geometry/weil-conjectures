@@ -105,9 +105,8 @@ set_option linter.style.longLine false in
 instance : IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   ⟨⟩
 
+set_option linter.style.longLine false in
 variable (k₀) in
-set_option linter.style.longLine false in
-set_option linter.style.longLine false in
 /-- The lift of the condensed Frobenius `(Fr_S⁻¹)_*` to bounded constructible condensed
 complexes. -/
 noncomputable abbrev condensedFrobeniusLift (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))]
@@ -158,9 +157,8 @@ noncomputable def condensedOpenImmersionGeometricExchange :
       ((IsoAlgebra.derivedExactCommIso (condensedOpenImmersionShriekExchange k₀ l f)).hom.naturality
         φ.hom))
 
+set_option linter.style.longLine false in
 variable (k₀) in
-set_option linter.style.longLine false in
-set_option linter.style.longLine false in
 /-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ D(ī_!)` and `f̄^! = ī^* ∘ ḡ^!`, condensed model. -/
 noncomputable abbrev condensedCompactifiedAdjunction :=
   (condensedOpenImmersionGeometricAdjunction k₀ l f).comp (condensedProperAdjunction k₀ l f)
