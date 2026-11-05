@@ -79,7 +79,7 @@ theorem exists_constantModSheaf_finite_sum_colimit
     forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1} ⋙
       constantSheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}
   have : PreservesColimits (forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1}) :=
-    ModuleCat.forget₂PreservesColimitsOfSize
+    ModuleCat.forget₂PreservesColimitsOfSize.{u + 1, u + 1, u + 1, u + 1} R
   have : PreservesColimits T := by
     dsimp [T, constantSheaf]
     infer_instance
