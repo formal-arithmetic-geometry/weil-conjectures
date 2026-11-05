@@ -21,6 +21,7 @@ import all WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCompatibility
 import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModelFamilies
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeModels
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeRestriction
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeComparisons
 import all WeilConjectures.WeilSheaf.Native.Projection.DerivedModelNormalizations
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromTotalFunctors
