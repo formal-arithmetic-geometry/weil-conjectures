@@ -1,26 +1,3 @@
-# BZ361 complete
-
-- Branch: `u9/BZ361`; starting commit: `98654719bd`.
-- Green modules: `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport`,
-  `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomGluing`, and
-  `WeilConjectures.AlgebraicGeometry.OpenUnionHomGluing`.
-- Final `ucheck-bump OpenUnionHomGluing` rebuilt all three successfully:
-  rc=0, failed=0, 2934 jobs, on `poolb:43.166.72.113`.
-- Validated source commit: `b70a9873a373ab8573533b63a6971fc4eab717bc`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ361-open-union-full.log`.
-- The user instructed continuation after the explicit statement API migration proposal.
-  Applied the comparison-orientation substitutions, preserving all binders, hypotheses,
-  and intended morphisms under Mathlib's reversed `mapDerivedCategoryCompIso`.
-- Proofs use the inverse cancellation, explicit unfolding of local comparison aliases,
-  and removal of one redundant `rfl`. Existing docstrings and limit settings are unchanged.
-- The other second-layer importer `DerivedOpenGluing` was attempted and skipped per
-  the brief: its BZ459-owned dependency `DerivedOpenGluingObjects` fails at lines 159/197.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ361.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ361-contract-audit.txt`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ361.DONE`.
-- This final commit changes only progress documentation; Lean sources match the green build.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -128,3 +105,24 @@
 - No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ367 complete
+
+- Branch: `u9/BZ367`; starting commit: `98654719b`.
+- Assigned module `WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization`
+  passed `ucheck-bump`: rc=0, failed=0, 2225 jobs, at `a75d107ae0`.
+- Direct importer `WeilConjectures.WeilSheaf.Native.Projection.DerivedModelNormalizations`
+  also built successfully at `7c097cb5fe`; the assigned module rebuilt successfully there.
+- The user instructed continuation after the exact two-line visibility proposal.
+  Both internal helpers are private, with the required Localization imports.
+  All proposition texts and proof bodies are unchanged; neither helper has external callers.
+- Three other direct importers and all five second-layer candidates are skipped because
+  they transitively import failing unowned `ProfinitePointPullback` (BZ395).
+  The downstream batch additionally found failures owned by BZ436, BZ390, and BZ389.
+  Its remaining dependency work was stopped after all target outcomes were known;
+  its wrapper rc=0 after stopping must not be mistaken for an all-green batch.
+- Build logs, exact errors, patterns, and counts: `/home/ubuntu/u9/bz/FIXES-BZ367.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ367-contract-audit.txt`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
+- This completion commit changes only progress documentation; Lean sources match the green build.
+- Completion marker: `/home/ubuntu/u9/state/BZ367.DONE`.
