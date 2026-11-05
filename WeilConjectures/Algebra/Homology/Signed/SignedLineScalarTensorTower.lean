@@ -680,6 +680,7 @@ noncomputable local instance {A B : Type*} [Ring A] [Ring B] (f : A →+* B)
     (M : ModuleCat.{u} B) : Module B ((ModuleCat.restrictScalars f).obj M) :=
   inferInstanceAs (Module B M)
 
+set_option trace.Meta.synthInstance true in
 /-- Local signed basis normalization: a genuine basis after every restriction, positive
 powers by tensors, and negative powers dual to the positive ones on every slice object.
 Source: Stacks 03EK and 04TT, local rank-one coordinates.
