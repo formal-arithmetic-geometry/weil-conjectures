@@ -246,16 +246,14 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
+# BZ856 in progress
 
-# BZ852 in progress
-
-- Branch: `u9/BZ852`; original baseline: `2ab2b07a323`.
-- Resumed after rereading the brief and progress notes; merged integrated bump `db406319f`.
-- The user instructed continuation after the two-file upstream restoration proposal.
-  Restored the original line-evaluation proof chain and `signed_line_power_flat`,
-  preserving all declaration statements and current imports.
-- Applied known BZ169 fixes: explicit coefficient/module carriers in `chart_basis`,
-  and a local unit-module scalar action for `cancellation_pure`.
-- Next: remote validation of both restored modules and SignedLineDerivedAction,
-  then direct importers and downstream layers as required.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
+- Reread the brief and prior notes on continuation; no new LEAD lines were present.
+- User instructed continuation after the explicit five-upstream-module restoration proposal.
+  The six deleted prerequisites are restored from the reviewed draft, retaining later
+  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
+- Merged integrated bump branch `db406319f` before restoring the prerequisites.
+- Assigned theorem remains intact: it has live callers and cannot be pruned.
+- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
+- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
