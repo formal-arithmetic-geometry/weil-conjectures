@@ -127,7 +127,7 @@ variable {A B E : Type*} [Category A] [Category B] [Category E] [Abelian A] [Abe
 `Functor.mapHomologicalComplexCompIso` cancelled. -/
 @[reassoc]
 lemma mapDerivedCategoryCompIso_hom_app_Q_obj_comp_factors (K : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategoryCompIso P P').hom.app (DerivedCategory.Q.obj K) ≫
+    (Functor.mapDerivedCategoryCompIso P P').inv.app (DerivedCategory.Q.obj K) ≫
       P'.mapDerivedCategory.map (P.mapDerivedCategoryFactors.hom.app K) ≫
       P'.mapDerivedCategoryFactors.hom.app ((P.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) =
     (P ⋙ P').mapDerivedCategoryFactors.hom.app K := by
