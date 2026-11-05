@@ -115,3 +115,15 @@
 - Next: remote validation of the assigned module, then its three direct importers.
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ469 in progress
+
+- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
+- The user instructed continuation after the exact two-site API proposal.
+  Applied `.symm` to both composition comparisons in
+  `injectiveSections_strictLocal_comparison`, preserving the original map directions
+  under Mathlib's reversed compositor.
+- Pinned API inspected at b63f6e8a; known quotient patterns do not match this module.
+- Next: remote validation, then up to four direct importers and a second downstream layer.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
