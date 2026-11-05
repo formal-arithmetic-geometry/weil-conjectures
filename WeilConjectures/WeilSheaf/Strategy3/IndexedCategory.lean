@@ -30,15 +30,16 @@ structure Object (val : I → C) where
 instance : Category (Object val) where
   Hom A B := val A.index ⟶ val B.index
   id A := 𝟙 (val A.index)
-  comp f g := f ≫ g
+  comp {A B D} f g :=
+    (f : val A.index ⟶ val B.index) ≫ (g : val B.index ⟶ val D.index)
   id_comp f := Category.id_comp f
   comp_id f := Category.comp_id f
   assoc f g h := Category.assoc f g h
 
 instance [Preadditive C] : Preadditive (Object val) where
   homGroup A B := inferInstanceAs (AddCommGroup (val A.index ⟶ val B.index))
-  add_comp _ _ _ f g h := Preadditive.add_comp _ _ _ f g h
-  comp_add _ _ _ f g h := Preadditive.comp_add _ _ _ f g h
+  add_comp A B D f g h := Preadditive.add_comp (val A.index) (val B.index) (val D.index) f g h
+  comp_add A B D f g h := Preadditive.comp_add (val A.index) (val B.index) (val D.index) f g h
 
 /-- The unique outer interpretation needed by the calculation. -/
 def realize : Object val ⥤ C where
@@ -52,15 +53,22 @@ def fullyFaithfulRealize : (realize val).FullyFaithful where
   preimage_map f := rfl
 
 instance [Preadditive C] : (realize val).Additive where
-  map_add _ _ := rfl
+  map_add := rfl
 
 /-- Pullback on labels, using the chosen presentation at the next label. -/
 def pullback (Q : C ⥤ C) (shift : I → I)
     (step : ∀ i, Q.obj (val i) ≅ val (shift i)) : Object val ⥤ Object val where
   obj A := ⟨shift A.index⟩
-  map {A B} f := (step A.index).inv ≫ Q.map f ≫ (step B.index).hom
-  map_id A := by simp
-  map_comp f g := by simp [Functor.map_comp, Category.assoc]
+  map {A B} f := (show val (shift A.index) ⟶ val (shift B.index) from
+    (step A.index).inv ≫ Q.map (show val A.index ⟶ val B.index from f) ≫ (step B.index).hom)
+  map_id A := by
+    change (step A.index).inv ≫ Q.map (𝟙 (val A.index)) ≫ (step A.index).hom = 𝟙 _
+    simp
+  map_comp {A B D} f g := by
+    change (step A.index).inv ≫ Q.map (f ≫ g) ≫ (step D.index).hom =
+      ((step A.index).inv ≫ Q.map f ≫ (step B.index).hom) ≫
+        (step B.index).inv ≫ Q.map g ≫ (step D.index).hom
+    simp [Functor.map_comp, Category.assoc]
 
 /-- Realizing pullback requires just this one natural comparison. -/
 def pullbackRealizeIso (Q : C ⥤ C) (shift : I → I)
