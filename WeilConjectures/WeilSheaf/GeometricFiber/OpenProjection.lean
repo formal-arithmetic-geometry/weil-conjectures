@@ -33,6 +33,91 @@ universe u
 
 open CategoryTheory MonoidalCategory
 
+namespace AlgebraicGeometry.ProEtaleWeilSheaf
+
+open ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+section PullTensor
+
+variable (k₀ l) {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
+
+set_option maxHeartbeats 1000000 in
+-- the derived categories of condensed module objects are slow to elaborate
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+/-- The derived condensed realization carries the inverse of the native pullback–tensor
+comparison to the lax monoidal structure of the derived pullback `Lḡ^*` of condensed module
+objects, up to the tensor comparisons `AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationTensor`
+and the pullback comparison
+`AlgebraicGeometry.ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso`: a reformulation of
+`AlgebraicGeometry.ProEtaleWeilSheaf.comparisonCompatible_derivedCondensedRealization`. -/
+theorem map_nativePullTensor_inv_app_comp (a b : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :
+    (derivedCondensedRealization k₀ l Z).map ((nativePullTensor k₀ l g).inv.app (a, b)) ≫
+        (derivedCondensedRealizationUpperStarIso k₀ l g).inv.app
+          ((nativeDerivedTensor k₀ l Y).obj (a, b)) ≫
+        (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
+          ((condensedRealizationTensor k₀ l Y).hom.app (a, b)) =
+      (condensedRealizationTensor k₀ l Z).hom.app
+          ((nativeOpenPull k₀ l g).obj a, (nativeOpenPull k₀ l g).obj b) ≫
+        ((derivedCondensedRealizationUpperStarIso k₀ l g).inv.app a ⊗ₘ
+          (derivedCondensedRealizationUpperStarIso k₀ l g).inv.app b) ≫
+        Functor.LaxMonoidal.μ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor
+          ((derivedCondensedRealization k₀ l Y).obj a)
+          ((derivedCondensedRealization k₀ l Y).obj b) := by
+  have H := comparisonCompatible_derivedCondensedRealization k₀ l g a b
+  simp only [nativeCurriedPullTensor, condensedRealizationCurriedTensor,
+    Functor.curryCompIsoOfIso_hom_app_app, Functor.curryCompIsoOfIso'_hom_app_app] at H
+  simp only [curriedTensor_map_app, curriedTensor_obj_map] at H
+  have H' : (derivedCondensedRealization k₀ l Z).map ((nativePullTensor k₀ l g).hom.app (a, b)) ≫
+      (condensedRealizationTensor k₀ l Z).hom.app
+        ((nativeOpenPull k₀ l g).obj a, (nativeOpenPull k₀ l g).obj b) =
+      ((derivedCondensedRealizationUpperStarIso k₀ l g).inv.app
+          ((nativeDerivedTensor k₀ l Y).obj (a, b)) ≫
+        (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
+          ((condensedRealizationTensor k₀ l Y).hom.app (a, b)) ≫
+        Functor.OplaxMonoidal.δ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor
+          ((derivedCondensedRealization k₀ l Y).obj a)
+          ((derivedCondensedRealization k₀ l Y).obj b)) ≫
+        (tensorIso ((derivedCondensedRealizationUpperStarIso k₀ l g).app a)
+          ((derivedCondensedRealizationUpperStarIso k₀ l g).app b)).hom := by
+    refine H.trans ?_
+    simp only [Category.assoc, tensorIso_hom, Iso.app_hom, MonoidalCategory.tensorHom_def]
+    rfl
+  have H4 := ((Iso.comp_inv_eq _).2 H').symm
+  have H5 := (Iso.comp_inv_eq (Functor.Monoidal.μIso
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+      (Scheme.Hom.geometricFiberMap g
+        (comp_over g (Spec (CommRingCat.of k₀))))).leftDerivedFunctor
+    ((derivedCondensedRealization k₀ l Y).obj a)
+    ((derivedCondensedRealization k₀ l Y).obj b))).1 ((Category.assoc _ _ _).trans H4)
+  refine (congrArg (fun t ↦ (derivedCondensedRealization k₀ l Z).map
+    ((nativePullTensor k₀ l g).inv.app (a, b)) ≫ t) H5).trans ?_
+  simp only [Category.assoc]
+  exact ((derivedCondensedRealization k₀ l Z).mapIso
+    ((nativePullTensor k₀ l g).app (a, b))).inv_hom_id_assoc _
+
+end PullTensor
+
+end AlgebraicGeometry.ProEtaleWeilSheaf
+
 namespace AlgebraicGeometry.WeilComplex
 
 open ProEtale
