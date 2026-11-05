@@ -116,10 +116,19 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ430 in progress
+# BZ430 complete
 
 - Branch: `u9/BZ430`; starting commit: `99a06bbbb`.
-- User instructed continuation after the exact two-helper visibility proposal; both helper proposition texts are unchanged and both are now private.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison` passed `ucheck-bump`: rc=0, failed=0, 2022 jobs, target rebuilt in 6.1 seconds.
+- Validated source commit: `bb1af5fb2f`; tree: `poolb:43.157.174.214`.
+- User instructed continuation after the exact two-helper visibility proposal; both helper proposition texts are unchanged and both are now private. All proof bodies, binders, assumptions, and docstrings are unchanged.
 - Localization public/import-all directives permit proof and private-signature reduction through `Qh`.
-- Next: validate owned module through `ucheck-bump`, then `WeilConjectures.WeilSheaf.LowerShriekForget` and its importer.
-- Fixes: `/home/ubuntu/u9/bz/FIXES-BZ430.md`. No local Lean/Lake or forbidden proof escapes.
+- Owned module also rebuilt successfully in the downstream batch at `e6c26edd04`.
+- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was blocked by unowned BZ373's `GrothendieckEtaleRelativeSectionColimit.lean:98:7` rewrite failure. Per the brief, stopped the downstream attempt and skipped its importer `WeilConjectures.WeilSheaf.AffineLineBundle`, which shares the blocker.
+- Owned green log: `/home/ubuntu/u9/bz/BZ430-owned-green-full.log`.
+- Downstream failure log: `/home/ubuntu/u9/bz/BZ430-downstream-full.log`.
+- Fixes and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ430.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ430-contract-audit.txt`.
+- No local Lean/Lake, sorries, axioms, admissions, trust bypasses, profiler probes, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ430.DONE`.
+- This final commit updates only progress documentation; Lean source matches the green build.
