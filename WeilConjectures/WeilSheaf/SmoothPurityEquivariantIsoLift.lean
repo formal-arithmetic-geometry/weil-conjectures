@@ -43,6 +43,9 @@ theorem isIso_of_purityIntegralReduction_map
     exact hf
   have hredι := (NatIso.isIso_map_iff
     (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1 1) g).2 hmap
+  change IsIso ((boundedConstructible
+    (condensedRingObj (Profinite.integersModPowRingObj ℓ E.1 1) X.left)).ι.map
+    ((boundedConstructibleIntegersModPowReduction X.left ℓ E.1 1).map g)) at hredι
   have hred : IsIso ((boundedConstructibleIntegersModPowReduction X.left ℓ E.1 1).map g) :=
     isIso_of_reflects_iso _ (boundedConstructible _).ι
   have : IsIso g := isIso_of_isIso_etaleReduction_map ℓ E.1 one_ne_zero g (by
@@ -87,7 +90,7 @@ theorem exists_equivariant_iso_of_finite_reductions
   have h := exists_equivariant_forall_isIso_derivedReduction_map G Gn c φK φL
     hL hfin hne hstep
   obtain ⟨f, hf, hfiso⟩ := h
-  have := isIso_of_purityIntegralReduction_map ℓ E f (hfiso 0)
+  have := isIso_of_purityIntegralReduction_map ℓ E (K := K) (L := L) f (hfiso 0)
   let e := (ObjectProperty.fullyFaithfulι (boundedConstructible
     (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left))).preimageIso (asIso f)
   refine ⟨e, ?_⟩

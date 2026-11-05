@@ -444,3 +444,8 @@ GREEN at ef09cfe05c in K4-20261105T090443.log: SmoothPurityCanonicalFinite (27s:
 ## 2026-11-05 09:38 +0800 — equivariant reconstruction assembly
 - K4-20261105T093616.log rc=1: generic transported-equation iff passes; concrete equality detector needs its forall-finiteness instance explicitly passed across the named reduction functor. Applied that repair.
 - Added SmoothPurityEquivariantLift: combines constrained finite choice and equality detection to produce an integral equivariant map whose every reduction is invertible. Its inputs are finite Hom, finite equivariant iso existence, and stability of the ordinary reduction step. This states exactly what the finite-to-adic comparison must supply for the alternative route.
+
+## 2026-11-05T09:40:26.149274+08:00 — equivariance detector and constrained equivariant lift GREEN
+- K4-20261105T093726.log rc=0 (1c33749a7): SmoothPurityEquivarianceDetection and SmoothPurityEquivariantLift both GREEN. Passing the Milnor-finiteness witness explicitly resolved the instance mismatch.
+- Added bounded-constructible Nakayama wrapper and exists_equivariant_iso_of_finite_reductions. First check K4-20261105T093904.log rc=1 (15s): only the composite-map IsIso hypothesis needs its inclusion-map spelling for typeclass search; changed the local hypothesis type. Also pinned full-subcategory source/target for the ambient Nakayama call.
+- Added command-only SmoothPurityOrientationAudit to check the complete current chain and report axiom dependencies; no changes to the target statement or body.
