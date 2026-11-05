@@ -24926,7 +24926,9 @@ public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedDiagonalLoca
 public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedDiagonalProduct
 public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedFactors
 public import WeilConjectures.TraceFormula.CurveLocal.CoverTangentCones
+public import WeilConjectures.TraceFormula.CurveLocal.CoversDegreePrimeToEll
 public import WeilConjectures.TraceFormula.CurveLocal.DerivedFiniteEtaleTrace
+public import WeilConjectures.TraceFormula.CurveLocal.DescentVanishingFiniteEtale
 public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.ExtensionByZero
 public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusGraphSquare
@@ -24964,6 +24966,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalUpperShriek
 public import WeilConjectures.TraceFormula.CurveLocal.StrictLocalVanishing
 public import WeilConjectures.TraceFormula.CurveLocal.SupportTriangleCounit
 public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
+public import WeilConjectures.TraceFormula.CurveLocal.TangentConesOnCover
 public import WeilConjectures.TraceFormula.CurveLocal.TensorMonodromy
 public import WeilConjectures.TraceFormula.CurvePieces
 public import WeilConjectures.TraceFormula.CurvePiecesAdditivity
@@ -24986,11 +24989,13 @@ public import WeilConjectures.TraceFormula.FixedPointAlgebra
 public import WeilConjectures.TraceFormula.FixedPointComponent
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.FrobeniusCorrespondence
 public import WeilConjectures.TraceFormula.FrobeniusCurveLocalTerm
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
+public import WeilConjectures.TraceFormula.FrobeniusSupportedRestriction
 public import WeilConjectures.TraceFormula.GenericBaseChange
 public import WeilConjectures.TraceFormula.GenericBaseChangePullback
 public import WeilConjectures.TraceFormula.GenericQuotient
@@ -25011,6 +25016,7 @@ public import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelC
 public import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelComparison
 public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageFactors
 public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageUnit
+public import WeilConjectures.TraceFormula.IntegralFrobeniusNotInvertible
 public import WeilConjectures.TraceFormula.IntegralPointThickening
 public import WeilConjectures.TraceFormula.InverseSystemSitePoint
 public import WeilConjectures.TraceFormula.InverseSystemSitePoint2
@@ -25086,6 +25092,7 @@ public import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientRealizatio
 public import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarModelExistence
 public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProjectiveLineFibre
+public import WeilConjectures.TraceFormula.ProjectiveLineFrobenius
 public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.ProperCompatibilityEvaluation
 public import WeilConjectures.TraceFormula.ProperCompatibilityExchange
@@ -26036,7 +26043,9 @@ public import WeilConjectures.WeilSheaf.TorsorPairing
 public import WeilConjectures.WeilSheaf.TraceCupAdicConstant
 public import WeilConjectures.WeilSheaf.TraceFunction
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
+public import WeilConjectures.WeilSheaf.TraceFunctionLowerShriek
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
+public import WeilConjectures.WeilSheaf.TraceFunctionSquaring
 public import WeilConjectures.WeilSheaf.TraceFunctionTensor
 public import WeilConjectures.WeilSheaf.TraceFunctionVanishing
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
@@ -26100,6 +26109,8 @@ public import WeilConjectures.ZetaFunction.RelativePurity
 public import WeilConjectures.ZetaFunction.SixOperations
 public import WeilConjectures.ZetaFunction.SmoothProper
 public import WeilConjectures.ZetaFunction.TraceFormula
+public import WeilConjectures.ZetaFunction.TraceFormulaCorollaries
+public import WeilConjectures.ZetaFunction.TraceFormulaExamples
 public import WeilConjectures.ZetaFunction.WeightSeparation
 public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.ZetaFunction.WeilFactorization
