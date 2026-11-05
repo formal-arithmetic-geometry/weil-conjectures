@@ -142,22 +142,41 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ537 complete
+# BZ539 in progress
 
-- Branch: `u9/BZ537`; assigned module and both downstream layers passed `ucheck-bump`.
-- Green modules under `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits`:
-  `PushforwardZeroSingle`, `PushforwardZeroDescent`, and `PushforwardLimit`.
-- Final validation: rc=0, failed=0, 4251 jobs; all three modules rebuilt successfully.
-- Validated source commit: `e84836c9a1d191d254751b075d18633e2fdb44d6`.
-- Final remote log: `/home/ubuntu/u9/logs/BZ537-20261106T034929.log`.
-- Full local log: `/home/ubuntu/u9/bz/BUILD-BZ537-layer2-full.log`.
-- Merged owner BZ581's `216c997cc4f` to clear the InternalHom prerequisite.
-- Repairs use direct Q for the single-complex comparison, explicit public Qh/Q
-  comparison isomorphisms in degree-zero homology, and `erw` for the transported
-  naturality proof. No downstream source changes were necessary.
-- All seven declaration signatures and existing docstrings are unchanged.
-- Audit: `/home/ubuntu/u9/bz/BZ537-contract-audit.txt`.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ537.md`.
-- No local Lean/Lake, sorries, forbidden proof shortcuts, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ537.DONE`.
-- This final commit changes only progress documentation; Lean sources match the green build.
+- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
+- Re-read the brief and prior notes on user-requested continuation.
+- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
+  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
+- The coordinator subsequently added the public Mathlib monoidal import in
+  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
+- The proposed compatibility-namespace patch remains unapplied while testing
+  the coordinator's repair.
+- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
+  then check up to four direct importers and one further downstream layer.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
+- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
+
+- The public import resolved the missing name, but the resumed build failed in
+  `InternalHom:375` because its proof mixed new and compatibility map APIs.
+- User continuation followed the explicit one-line dependency patch proposal;
+  that exact compatibility-namespace proof repair is now applied.
+- Retrying the assigned module; declarations and heartbeat settings unchanged.
+
+- Compatibility build validated Presheaf.InternalHom and exposed the identical
+  copied-proof failure in Algebra.Homology.KFlat:82. Applied the same one-line
+  namespace correction there; no old-name occurrences remain in the target closure.
+- Retrying the target after these two minimal dependency proof corrections.
+
+- KFlat now passes. Its resolution module exposed the same copied-proof mismatch;
+  applied the same correction in KFlatResolutionIndependentCoefficients:132.
+- Corrected the dependency scan to include import all and trailing import comments.
+  All three changes are the same one-line proof-body replacement.
+
+- Assigned module and all four selected direct importers passed together at
+  `5b2cf87cce` (rc=0, failed=0, 4423 jobs).
+- All three compatibility-lemma dependency corrections are validated.
+- Green log: `/home/ubuntu/u9/logs/BZ539-20261106T041952.log`;
+  local full copy: `/home/ubuntu/u9/bz/BUILD-BZ539-layer1-full.log`.
+- Checking second-layer importers ChangeOfCoefficientsPullCounit and
+  DerivedPullIsoCoherenceLowerStar next; skip failures in unowned dependencies.
