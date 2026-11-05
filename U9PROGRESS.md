@@ -176,7 +176,8 @@
 - Read the brief again on continuation; there are no appended LEAD overrides.
 - The user instructed continuation after the explicit endpoint-transport statement proposal.
   That exact patch is applied; the proof reduces the new transport to an identity.
-- The Localization public/import-all imports restore the opaque implementation in the proof.
+- The proof keeps quotientCompQhIso opaque and reduces only the exposed homotopy comparison;
+  the final source uses a public Localization import and no import-all directive.
 - Original ucheck-bump is queued; it will build the newly pushed branch once a tree is free.
 - Next: validate the assigned module, then attempt its direct importer and follow the
   external-dependency skip rule if BZ631's target-transport module fails.
