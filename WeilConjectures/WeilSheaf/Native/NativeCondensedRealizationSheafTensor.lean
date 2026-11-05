@@ -83,7 +83,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
 /-- The native tensor map in the parameter variable is, on underlying `ℓ`-adic sheaves, the map
 `Mod.tensorLeftMap` of coequalizer tensors. -/
-lemma condensedRealization_nativeTensorMap_app_hom_f [Fact (ringChar k₀ ≠ l)] {P P' : ProEtaleWeilSheaf k₀ l X}
+lemma condensedRealization_nativeTensorMap_app_hom_f [Fact (ringChar k₀ ≠ l)]
+    {P P' : ProEtaleWeilSheaf k₀ l X}
     (f : P ⟶ P') (Q : ProEtaleWeilSheaf k₀ l X) :
     ((nativeTensorMap k₀ l X f).app Q).hom.f = (Mod.tensorLeftMap f.hom.f).app Q.carrier := by
   change ((conjugateEquiv (Mod.ihomAdjunction P'.carrier)
@@ -98,7 +99,8 @@ lemma forget_map_nativeOpenSheafTensor_map
     (Endofunctor.IsoAlgebra.forget _).map ((nativeOpenSheafTensor k₀ l X).map fg) =
       (Mod.tensorLeftMap fg.2.hom.f).app MN.1.carrier ≫
         (Mod.tensorLeft MN'.2.carrier).map fg.1.hom.f := by
-  simp [nativeOpenSheafTensor, nativeTensorBifunctor, condensedRealization_nativeTensorMap_app_hom_f]
+  simp [nativeOpenSheafTensor, nativeTensorBifunctor,
+    condensedRealization_nativeTensorMap_app_hom_f]
   rfl
 
 /-- The underlying `ℓ`-adic sheaf of the native sheaf tensor `M ⊗ N` of pro-étale Weil sheaves is

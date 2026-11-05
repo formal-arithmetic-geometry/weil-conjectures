@@ -28,6 +28,7 @@ instance projection_isIso_geometricOpen_unit :
   inferInstanceAs
     (IsIso (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).unit)
 
+omit [IsOpenImmersion j] in
 /-- The tensor isomorphism used by pullback has inverse its monoidal multiplication. -/
 lemma projection_leftDerivedUpperStarTensorIso_inv_app
     (M N : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

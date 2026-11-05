@@ -44,6 +44,10 @@ local instance : IsProper (gb).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) g
     (comp_over g (Spec (CommRingCat.of k₀))) ‹_›
 
+omit [Fact (ringChar k₀ ≠ l)] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [IsProper g] in
 /-- The ambient proper comparison factors through the adic realization. -/
 lemma projectionProperForgetIso_factorization
     (M : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
@@ -57,7 +61,8 @@ lemma projectionProperForgetIso_factorization
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).hom.app
           ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M) ≫
       (CondensedRing.lowerStar Λ
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor.map
+        (Scheme.Hom.geometricFiberMap g
+          (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor.map
           ((projectionRealizationCompIso k₀ l X).inv.app M) := by
   exact ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M
 
@@ -86,7 +91,7 @@ lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
     Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app,
     Functor.associator_inv_app, Functor.associator_hom_app,
     ObjectProperty.FullSubcategory.comp_hom]
-  simp only [ObjectProperty.FullSubcategory.id_hom, Category.id_comp, Category.comp_id]
+  simp only [ObjectProperty.FullSubcategory.id_hom, Category.comp_id]
   erw [Category.id_comp]
   rfl
 
@@ -98,7 +103,8 @@ theorem projectionForgetSquare_proper :
       (compactProjectionForgetUpperStarIso k₀ l g)
       (compactProjectionForgetTensorIso k₀ l X) (compactProjectionForgetTensorIso k₀ l Y)
       (nativeBoundedProperProjectionIso (k₀ := k₀) (l := l) g).hom
-      (CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l gb).projectionMorphismNatTrans := by
+      (CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l
+        gb).projectionMorphismNatTrans := by
   have h := projectionForgetSquare_of_iso
     (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
     (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l g).symm
@@ -106,7 +112,8 @@ theorem projectionForgetSquare_proper :
     (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l Y)
     (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y)
     (ProEtaleWeilSheaf.nativeProperProjectionNatTrans k₀ l g)
-    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (gb).left).uncurriedProjectionMorphismNatTrans
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ
+      (gb).left).uncurriedProjectionMorphismNatTrans
     (ProEtaleWeilSheaf.nativeProperProjection_forgetSquare k₀ l g)
   apply (projectionForgetSquare_monoidal_iff _ _ _ _ _ _).2
   intro M N

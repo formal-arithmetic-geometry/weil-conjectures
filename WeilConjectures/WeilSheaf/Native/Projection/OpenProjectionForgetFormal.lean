@@ -127,13 +127,13 @@ theorem compactProjectionOpen_forget_of_unit_at
       _ = eE.hom.app X ≫ (eE.inv.app X ≫ FB.map (gamma.inv) ≫ p) := by
         simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
       _ = _ := by rw [hi]
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp]
   apply (cancel_epi (FB.map (gamma.inv))).1
   simp only [← FB.map_comp_assoc, Iso.inv_hom_id, Functor.map_id, Category.id_comp]
   have hi'' := congrArg
     (fun z ↦ z ≫ gamma'.hom) hi'
   simp only [p, q, X, Functor.map_comp, Category.assoc, Iso.inv_hom_id,
-    Functor.comp_obj, Functor.prod_obj, Functor.id_obj, Category.comp_id] at hi''
+    Functor.comp_obj, Functor.prod_obj, Category.comp_id] at hi''
   exact hi''.symm
 
 

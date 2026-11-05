@@ -113,7 +113,7 @@ theorem projectionForgetSquare_paste
     have hnδ := δI.hom.naturality x
     dsimp only [Functor.comp_map] at hnδ
     rw [ND.map_comp, Category.assoc, reassoc_of% hnδ, ← I'.map_comp, ht]
-    simp only [Functor.map_comp, Category.assoc]
+    simp only [Functor.map_comp]
     rw [← I'.map_comp_assoc, reassoc_of% (hI M (Q.obj N))]
     rw [← reassoc_of% hnI]
     have hs : TD'.map (Prod.mkHom (δI.hom.app M) (𝟙 (ND.obj (Q.obj N)))) ≫
@@ -135,7 +135,7 @@ theorem projectionForgetSquare_paste
     (δG.hom.app _ ≫ G'.map (δI.hom.app _)) ≫ G'.map (I'.map k) = _
   simp only [NE.map_comp, Category.assoc]
   rw [reassoc_of% hnδG, ← G'.map_comp, ← G'.map_comp, hi]
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp]
   dsimp only [Functor.prod_obj, Functor.comp_obj, Functor.id_obj]
   rw [← G'.map_comp_assoc, reassoc_of% (hG (I.obj M) N)]
   rw [← reassoc_of% hnG]

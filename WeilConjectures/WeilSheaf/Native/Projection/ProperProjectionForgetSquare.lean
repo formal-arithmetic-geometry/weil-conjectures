@@ -56,7 +56,8 @@ theorem nativeProperProjection_forgetSquare :
       (derivedCondensedRealizationUpperStarIso k₀ l g).symm
       (condensedRealizationTensor k₀ l X) (condensedRealizationTensor k₀ l Y)
       (nativeProperProjectionNatTrans k₀ l g)
-      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb).uncurriedProjectionMorphismNatTrans := by
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ
+        gb).uncurriedProjectionMorphismNatTrans := by
   exact Adjunction.projectionForgetSquare_of_comparisonCompatible
     (derivedUpperStarLowerStarAdjunction k₀ l g)
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb)

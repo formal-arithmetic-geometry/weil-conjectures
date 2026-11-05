@@ -58,6 +58,11 @@ def projectionOpenForgetIso :
   ((boundedConstructible _).fullyFaithfulι.whiskeringRight _).preimageIso
     (Functor.isoWhiskerLeft (objectProperty k₀ l U).ι (projectionOpenCompositeForgetIso k₀ l j))
 
+omit [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))] in
 /-- The bounded Weil open counit is the ambient counit. -/
 lemma projectionOpenAdjunction_counit_app_hom (M : WeilComplex k₀ l Z) :
     ((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j).counit.app M).hom =
@@ -75,11 +80,14 @@ lemma projectionOpenAdjunction_counit_app_hom (M : WeilComplex k₀ l Z) :
   erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
+omit [QuasiCompact j] in
 /-- The bounded geometric open unit is the ambient unit. -/
 lemma projectionOpenAdjunction_unit_app_hom (K : BoundedConstructible (condensedRingObj Λ
       (U ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :
-      ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb).unit.app K).hom =
-      (CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left).unit.app K.obj := by
+      ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l
+        jb).unit.app K).hom =
+      (CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ
+        (jb).left).unit.app K.obj := by
     let B := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left
     change (ObjectProperty.ι _).map ((B.restrictFullyFaithful
       (L := CondensedRing.boundedConstructibleOpenImmersionLowerShriek Λ l jb)
@@ -153,7 +161,8 @@ theorem isIso_mateEquiv_projectionOpenForgetIso :
       (projectionOpenForgetIso k₀ l j).inv).natTrans := by
   let A := ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l j
   let B := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left
-  have hcan : IsIso (mateEquiv A B (ProEtaleWeilSheaf.nativeOpenForgetIso k₀ l j).inv).natTrans := by
+  have hcan : IsIso (mateEquiv A B
+      (ProEtaleWeilSheaf.nativeOpenForgetIso k₀ l j).inv).natTrans := by
     change IsIso ((mateEquiv A B) ((mateEquiv A B).symm
       (TwoSquare.mk _ _ _ _ (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso
         k₀ l j).inv))).natTrans
