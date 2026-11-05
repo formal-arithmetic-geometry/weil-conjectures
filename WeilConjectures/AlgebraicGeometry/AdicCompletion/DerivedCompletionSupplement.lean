@@ -109,6 +109,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed modulesMonoidalPreadditive
   finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts complexNatLimit
 
 private theorem restricted_linear {C : Type*} [Category C] [MonoidalCategory C]
     {R S T : C} [MonObj S] [MonObj T] (q : R ⟶ S) (r : R ⟶ T)
@@ -187,6 +188,8 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.modulesMonoidalPreadditive AdicCompletion.finiteModulesDerived
   AdicCompletion.modulesDerived
   AdicCompletion.modulesProducts AdicCompletion.complexProducts
+  AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
 
 end AlgebraicGeometry.ProEtale
 
@@ -196,6 +199,7 @@ attribute [local irreducible] upperStarFromPoint
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed
   modulesMonoidalPreadditive finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts complexNatLimit
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
@@ -489,6 +493,7 @@ attribute [local irreducible] upperStarFromPoint
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed
   modulesMonoidalPreadditive finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts complexNatLimit
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
