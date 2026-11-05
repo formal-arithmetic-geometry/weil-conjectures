@@ -128,6 +128,7 @@ lemma geometricFiberWeilExtensionByZeroMapDerivedCategoryIso_forget
   simp only [Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
     Iso.refl_hom, NatTrans.id_app]
   erw [Category.comp_id]
+  dsimp +instances only [Iso.app_inv, Iso.symm_inv, Functor.comp_obj, Functor.comp_map] at he ⊢
   exact_mod_proofs he.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
