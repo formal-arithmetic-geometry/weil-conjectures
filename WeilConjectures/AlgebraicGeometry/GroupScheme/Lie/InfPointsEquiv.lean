@@ -34,11 +34,11 @@ omit [GrpObj G] in
 theorem homOfDerivation_bijective (g : S ⟶ G.left) :
     Function.Bijective (homOfDerivation G g) := by
   refine (Equiv.bijective _).comp ((Equiv.bijective _).comp ⟨fun D₁ D₂ h ↦ ?_, fun φ ↦ ?_⟩)
-  · rw [← (PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₁,
-      ← (PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₂]
+  · rw [← (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₁,
+      ← (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₂]
     exact congrArg _ h
   · refine ⟨(PresheafOfModules.DifferentialsConstruction.derivation' _).postcomp φ, ?_⟩
-    apply (PresheafOfModules.DifferentialsConstruction.isUniversal' _).postcomp_injective
+    apply (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).postcomp_injective
     rw [PresheafOfModules.Derivation.Universal.fac]
 
 /-- The morphisms `ω_{G/S} ⟶ 𝒪_S` attached to derivations along two morphisms `g₁ = g₂ = e` agree
