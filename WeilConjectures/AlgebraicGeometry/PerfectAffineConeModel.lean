@@ -40,6 +40,8 @@ private theorem strictlyPerfect_mappingCone (X : Scheme.{u}) (U : X.Opens)
     obtain ⟨m, j₁, r₁, hj₁⟩ := hp₁ (i + 1)
     obtain ⟨n, j₂, r₂, hj₂⟩ := hp₂ i
     let R := (moduleRings X.toRingedSpace).over U
+    have : HasBinaryBiproducts (SheafOfModules.{u} R) := inferInstance
+    have : HasBinaryBiproduct (A.X (i + 1)) (B.X i) := inferInstance
     have e₁ := HomologicalComplex.homotopyCofiber.XIsoBiprod α i (i + 1) rfl
     have e₂ : (SheafOfModules.free (R := R) (ULift.{u} (Fin m))) ⊞
         (SheafOfModules.free (R := R) (ULift.{u} (Fin n))) ≅

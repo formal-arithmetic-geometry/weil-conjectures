@@ -75,6 +75,8 @@ variable [∀ Y : Scheme.{u},
 
 attribute [local irreducible] RingedSpace.moduleDirectImage
 
+-- The quotient identity conversions exceeded 200000 heartbeats in the v4.35 remote build.
+set_option maxHeartbeats 400000 in
 /-- The sheaf-level affine edge is compatible with the actual derived unit on an
 exact family of quasi-coherent sheaves. No tilde/Gamma coordinates or ordinary
 comparison isomorphism occur here.
@@ -129,13 +131,13 @@ theorem exists_affineDerivedPushforwardSheafEdge
           (((F ⋙ RingedSpace.moduleDirectImage
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)
               |>.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫
-        (DerivedCategory.homologyFunctor
-          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
-          (cast (by rfl)
+        (cast (by rfl)
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
             (((RingedSpace.moduleDirectImage
               (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj
-                ((F.mapHomologicalComplex (.up ℤ)).obj C)))) := by
+                ((F.mapHomologicalComplex (.up ℤ)).obj C))))) := by
   let X := Spec (.of A)
   let Y := Spec (.of B)
   let f := Spec.map (CommRingCat.ofHom φ)
@@ -215,11 +217,12 @@ theorem exists_affineDerivedPushforwardSheafEdge
     change Epi U.π
     infer_instance
   simp only [Functor.map_comp] at hn
-  have hqC : (DerivedCategory.quotientCompQhIso C).hom.app K = 𝟙 _ := rfl
-  have hqD : (DerivedCategory.quotientCompQhIso D).inv.app
-      ((S.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
-  have hqD' : (DerivedCategory.quotientCompQhIso D).inv.app
-      (((F ⋙ S).mapHomologicalComplex (.up ℤ)).obj M) = 𝟙 _ := rfl
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv] at hn
+  erw [S.rightDerivedFunctor.map_id, (DerivedCategory.homologyFunctor D i).map_id,
+    (DerivedCategory.homologyFunctor D i).map_id] at hn
+  simp only [Category.id_comp, Category.comp_id] at hn
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
   apply (cancel_mono (γ.app ⟨_, hM⟩ ≫ δ.hom.app (DerivedCategory.Q.obj K))).mp
   simpa only [ε, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
@@ -228,10 +231,7 @@ theorem exists_affineDerivedPushforwardSheafEdge
     γ, S, T, U, K, ι, H, f, X, Y, C, D, Functor.whiskerRight_app, ObjectProperty.ι_obj,
     ShortComplex.LeftHomologyData.map_π, ShortComplex.mapHomologyIso,
     Functor.comp_map, Functor.map_comp, Functor.mapHomologicalComplex, Functor.comp_obj,
-    cast_eq, hqC, hqD, hqD', Functor.map_id,
-    DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+    cast_eq]
     using hn.symm
 
 end AlgebraicGeometry
