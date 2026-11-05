@@ -132,8 +132,6 @@ theorem extMk_firstCycles :
       DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
       DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
       Category.id_comp, Functor.comp_obj]
-    erw [(shiftFunctor (DerivedCategory C) (1 : ℤ)).map_id]
-    rw [Category.comp_id]
     exact DerivedCategory.descShortComplex_triangleOfSESδ
       (hS.map_of_exact (HomologicalComplex.single C (.up ℤ) 0))
   conv_rhs =>
