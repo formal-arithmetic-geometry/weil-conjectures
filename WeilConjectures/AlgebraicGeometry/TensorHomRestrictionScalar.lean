@@ -99,7 +99,7 @@ theorem tensorHom_restriction_of_local_scalar
   have hid (r : X.sheaf.obj.obj (op W)) :
       X.sheaf.obj.map (𝟙 (op W)) r = r := by simp
   erw [hid]
-  change ι.app W a • (s.app (op (Over.mk (homOfLE hW)))) g = _
+  change (show Γ(X, W) from ι.app W a) • (s.app (op (Over.mk (homOfLE hW)))) g = _
   have hm : ((restrictFunctor U.ι).map (ι ▷ H ≫ (λ_ H).hom)).app V
       (tmulSection (M := A) (N := H) (U := W) a g) =
         (show Γ(X, W) from ι.app W a) • (show Γ(H, W) from g) := by
@@ -108,7 +108,7 @@ theorem tensorHom_restriction_of_local_scalar
       whiskerRight_app_tmulSection]
     exact leftUnitor_hom_app_tmulSection' (M := H) (ι.app W a) g
   rw [hm]
-  change ι.app W a • (s.app (op (Over.mk (homOfLE hW)))) g =
+  change (show Γ(X, W) from ι.app W a) • (s.app (op (Over.mk (homOfLE hW)))) g =
     (s.app (op (Over.mk (homOfLE hW))))
       ((show Γ(X, W) from ι.app W a) • (show Γ(H, W) from g))
   exact ((s.app (op (Over.mk (homOfLE hW)))).hom.map_smul _ _).symm
