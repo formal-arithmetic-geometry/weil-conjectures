@@ -42,11 +42,11 @@ private noncomputable def resolutionAugmentationIso
     (DerivedCategory.Plus.singleFunctor A 0).obj X ≅
       DerivedCategory.Plus.Q.obj (resolutionPlus I) :=
   DerivedCategory.Plus.ι.preimageIso
-    (DerivedCategory.Plus.singleFunctorιIso A 0).app X ≪≫
+    ((DerivedCategory.Plus.singleFunctorιIso A 0).app X) ≪≫
       (DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
       asIso (DerivedCategory.Q.map I.ι') ≪≫
       (DerivedCategory.quotientCompQhIso A).symm.app I.cochainComplex ≪≫
-      (DerivedCategory.Plus.quotientCompQhIso A).hom.app (resolutionPlus I)
+      (DerivedCategory.Plus.quotientCompQhIso A).app (resolutionPlus I)
 
 set_option maxHeartbeats 100000 in
 -- The quotient factorization and the lifted unit involve several nested functors.
