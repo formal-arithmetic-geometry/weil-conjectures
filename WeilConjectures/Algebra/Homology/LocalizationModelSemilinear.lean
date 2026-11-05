@@ -153,7 +153,7 @@ theorem localizationModelMap_smul (i : ℤ)
   let c := localizationModelMap R A Aq B D i Q L K uQ
   change c (a • x) =
     Algebra.TensorProduct.map (IsScalarTower.toAlgHom R A Aq) (AlgHom.id R B) a • c x
-  induction a with
+  induction a using TensorProduct.inductionOn with
   | tmul a b =>
     rw [Algebra.TensorProduct.map_tmul]
     change c ((a ⊗ₜ[R] b) • x) = (algebraMap A Aq a ⊗ₜ[R] b) • c x

@@ -446,7 +446,7 @@ private theorem integralRawForward_isIso
     a b c d hsq q (fun _ _ ↦ rfl)
   have he : ⇑((integralRawForward S l E).app U) = e := by
     funext z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s x =>
       change (purTwistZlModule S l).val.obj U at x

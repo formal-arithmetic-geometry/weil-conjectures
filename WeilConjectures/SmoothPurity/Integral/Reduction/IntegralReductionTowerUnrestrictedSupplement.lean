@@ -108,7 +108,7 @@ private noncomputable def sectionMap (U : Cᵒᵖ) :
     { toFun := TensorProduct.map h (LinearMap.id : M.val.obj U →ₗ[R.obj.obj U] M.val.obj U)
       map_add' := map_add _
       map_smul' := fun s z ↦ by
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul t x =>
           change S.obj.obj U at t
           change q.hom.app U (s * t) ⊗ₜ[R.obj.obj U,(g.hom.app U).hom] x =
@@ -213,7 +213,7 @@ private theorem restricted_hom_ext
   apply Sheaf.hom_ext
   apply CategoryTheory.sheafify_hom_ext _ _ _ N.isSheaf
   ext U z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | tmul s x => exact h U s x
   | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
 

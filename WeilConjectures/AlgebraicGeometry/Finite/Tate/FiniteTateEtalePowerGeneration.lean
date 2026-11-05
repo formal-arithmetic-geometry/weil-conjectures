@@ -112,17 +112,17 @@ private theorem rawGenerator_span (T : Scheme.{u}) (A : Type (u + 1)) [CommRing 
   | zero =>
     exact Submodule.subset_span ⟨(t, Fin.elim0), rfl⟩
   | one =>
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a z => exact Submodule.subset_span ⟨(a, fun _ ↦ z), rfl⟩
     | add t s ht hs => exact Submodule.add_mem _ ht hs
   | more k _ ih =>
     simp only [rawPower] at t
     change t ∈ Submodule.span A _
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | add t s ht hs => exact Submodule.add_mem _ ht hs
     | tmul t s =>
       change t ⊗ₜ[A] s ∈ Submodule.span A _
-      induction s with
+      induction s using TensorProduct.inductionOn with
       | add x y hx hy =>
         simpa only [TensorProduct.tmul_add] using Submodule.add_mem _ hx hy
       | tmul b z =>

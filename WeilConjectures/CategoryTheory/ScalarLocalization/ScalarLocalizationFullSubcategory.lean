@@ -51,7 +51,7 @@ noncomputable def fullSubcategoryInclusion : ScalarLocalization R P.FullSubcateg
         (TensorProduct.congr _ _ g) (TensorProduct.congr _ _ f)
     induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f with
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         simp only [composition_tmul, TensorProduct.congr_tmul]
         rfl

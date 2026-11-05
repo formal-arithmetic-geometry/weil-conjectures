@@ -60,7 +60,7 @@ private theorem internalGenerator_hom_ext
   apply (cancel_epi (Mod.extendπ a M)).mp
   apply Sheaf.tensor_hom_ext
   ext U y
-  induction y with
+  induction y using TensorProduct.inductionOn with
   | add y y' hy hy' => simp only [map_add, hy, hy']
   | tmul z x => exact h U z x
 

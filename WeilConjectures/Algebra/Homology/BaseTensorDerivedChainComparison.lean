@@ -132,7 +132,7 @@ theorem exists_baseTensorDerivedChainComparison
   intro P β hβ
   have hb : β = γ.app P := by
     ext j x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul b p => exact (hβ j b p).trans (hγ P j b p).symm
     | add x y hx hy => simp only [map_add, hx, hy]
   subst β

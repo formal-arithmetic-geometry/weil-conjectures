@@ -106,7 +106,7 @@ private theorem exists_finite_koszul_cycle_lift
   have hδ : ∀ t : S ⊗[R] (s → N), ∀ i j : s,
       E₂ (δ.lTensor S t) (i, j) = (i : R) • E t j - (j : R) • E t i := by
     intro t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a z =>
       intro i j
       simp [E, E₂, δ, TensorProduct.tmul_sub, TensorProduct.tmul_smul]
@@ -157,7 +157,7 @@ private theorem exists_finite_koszul_cycle_lift
   have hb : ∀ m : S ⊗[R] N, ∀ i : s,
       E (Z.subtype.lTensor S (b.lTensor S m)) i = (i : R) • m := by
     intro m
-    induction m with
+    induction m using TensorProduct.inductionOn with
     | tmul a z => intro i; simp [E, b, b₀, TensorProduct.tmul_smul]
     | add m m' hm hm' => intro i; simp [hm, hm', smul_add]
   refine ⟨(y : s → N), m, hcyc y, ?_⟩

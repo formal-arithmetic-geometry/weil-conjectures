@@ -159,7 +159,7 @@ noncomputable def restrictScalarsObjExtendScalarsObjIso (M : ModuleCat.{u} A) :
     (M₂ := ↑((restrictScalars.{u} f).obj (of A' A') ⊗ M))
     (AddEquiv.refl _)
     (fun r x ↦ by
-      induction x with
+      induction x using TensorProduct.inductionOn with
       | tmul q m => rfl
       | add x y hx hy => simp_all)).toModuleIso
 
@@ -171,7 +171,7 @@ noncomputable def extendScalarsCompRestrictScalarsIso :
   NatIso.ofComponents (fun M ↦ restrictScalarsObjExtendScalarsObjIso f M ≪≫ β_ _ M)
     (fun {M N} φ ↦ by
       ext x
-      induction x with
+      induction x using TensorProduct.inductionOn with
       | tmul q m => rfl
       | add x y hx hy => simp_all)
 

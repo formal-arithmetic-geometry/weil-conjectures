@@ -260,7 +260,7 @@ theorem isBaseChange_extendedReesAlgebraAlgHom [Module.Flat R S] :
   have hL : ∀ z, (L z : S[T;T⁻¹]) = AddMonoidAlgebra.scalarTensorEquiv R S
       (LinearMap.lTensor S I.extendedReesAlgebra.val.toLinearMap z) := by
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul a x =>
       simp only [L, Algebra.TensorProduct.lift_tmul, LinearMap.lTensor_tmul,
         AddMonoidAlgebra.scalarTensorEquiv_tmul]

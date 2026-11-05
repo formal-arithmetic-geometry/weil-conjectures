@@ -323,7 +323,7 @@ theorem irrelevant_le {V W : X.affineOpens} (h : W ≤ V) :
   let I := (HomogeneousIdeal.irrelevant (A.sectionGrade V)).map (A.restriction h)
   have hm (t : Γ(F, V.1) ⊗[Γ(X, V.1)] Γ(X, W.1)) :
       (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) W.1 (c t) ∈ I := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a r =>
         rw [ht, Scheme.Modules.Hom.app_smul]
         have he : (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) W.1

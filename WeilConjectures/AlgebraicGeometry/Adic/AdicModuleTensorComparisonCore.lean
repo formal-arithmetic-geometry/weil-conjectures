@@ -240,7 +240,7 @@ private lemma nativeTensor_exists {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro r z
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
       | tmul x y =>
         exact LinearMap.congr_fun ((b V).map_smul r x) y
@@ -249,7 +249,7 @@ private lemma nativeTensor_exists {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro x z
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
       | tmul r y =>
         exact ((b V x).map_smul r y).trans

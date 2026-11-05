@@ -46,7 +46,7 @@ private theorem tensor_three_ext (M L N H : KFlatFixedTensor.Modules A)
   rw [← PresheafOfModules.naturality_apply f.val,
     ← PresheafOfModules.naturality_apply g.val, scalarTensorTmul_naturality, ← ht]
   clear ht
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t t' ih ih' => simp only [map_add, scalarTensorTmul_add_first, ih, ih']
   | tmul x y => exact h (op W) x y (N.val.map i.op z)
 

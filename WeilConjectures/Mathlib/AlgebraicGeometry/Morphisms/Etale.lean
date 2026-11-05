@@ -559,7 +559,7 @@ theorem Etale.isSeparable_residueField_of_spec {A B : Type u} [CommRing A] [Comm
     [Algebra A B] (h : Etale (Spec.map (CommRingCat.ofHom (algebraMap A B))))
     (p : Ideal A) [p.IsPrime] (q : Ideal B) [q.IsPrime] [q.LiesOver p]
     [Algebra (Localization.AtPrime p) (Localization.AtPrime q)]
-    [Localization.AtPrime.IsLiesOverAlgebra p q] :
+    [IsScalarTower _ (Localization.AtPrime p) (Localization.AtPrime q)] :
     Algebra.IsSeparable p.ResidueField q.ResidueField ∧
       Module.Finite p.ResidueField q.ResidueField := by
   rw [HasRingHomProperty.Spec_iff (P := @Etale)] at h

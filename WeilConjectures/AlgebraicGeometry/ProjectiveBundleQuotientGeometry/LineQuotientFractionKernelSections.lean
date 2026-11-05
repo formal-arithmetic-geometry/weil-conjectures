@@ -85,7 +85,7 @@ private theorem affine_kernel_of_coefficients {S T : Scheme.{u}} (h : T ⟶ S)
   have hcoeff (t : Γ(E, U.1) ⊗[Γ(S, U.1)] Γ(T, W.1)) :
       b * he.coeff (p.app W.1 (c E inferInstance t)) =
         hl.coeff (q.app W.1 (c E inferInstance t)) := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul v r =>
       rw [hp]
       have hs : (((Classical.choose (exists_tensorPullbackAdjunction h)).unit.app E).val.app

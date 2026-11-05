@@ -219,7 +219,7 @@ this is the restriction to the geometric point `t`. -/
 noncomputable def cospecializationMap (F : Sheaf S.smallEtaleTopology A) :
     (pointSmallEtale s).sheafFiber.obj F ⟶
       (pointSmallEtale (t ≫ strictLocalizationToBase s)).sheafFiber.obj F :=
-  colimit.pre ((CategoryOfElements.π
+  colimit.pre ((Functor.Elements.π
       (pointSmallEtale (t ≫ strictLocalizationToBase s)).fiber).op ⋙ F.obj)
     (cospecializationNeighborhoodFunctor s t).op
 
@@ -231,7 +231,7 @@ lemma toPresheafFiber_cospecializationMap (F : Sheaf S.smallEtaleTopology A)
     (pointSmallEtale s).toPresheafFiber x.1 x.2 F.obj ≫ cospecializationMap s t A F =
       (pointSmallEtale (t ≫ strictLocalizationToBase s)).toPresheafFiber x.1
         ((cospecializationNeighborhoodFunctor s t).obj x).2 F.obj :=
-  colimit.ι_pre ((CategoryOfElements.π
+  colimit.ι_pre ((Functor.Elements.π
       (pointSmallEtale (t ≫ strictLocalizationToBase s)).fiber).op ⋙ F.obj)
     (cospecializationNeighborhoodFunctor s t).op (op x)
 

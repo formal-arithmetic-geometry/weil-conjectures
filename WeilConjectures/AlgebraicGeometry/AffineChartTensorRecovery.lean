@@ -173,7 +173,7 @@ private theorem tensor_coordinate_square
   have hout (z : (ModuleCat.extendScalars r).obj Q) :
       (d.hom.app N).app ⊤ (pullbackΓ v _
         (e₀N (cQ.inv ((1 : C) ⊗ₜ[B,r₁] z)))) = pullbackΓ l _ (eₓN z) := by
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul b n =>
       change B at b
       have hb : b ⊗ₜ[A,r] n = b • ((1 : B) ⊗ₜ[A,r] n :
@@ -200,7 +200,7 @@ private theorem tensor_coordinate_square
   apply affine_pullback_hom_ext l _
   intro z
   obtain ⟨z, rfl⟩ := eₓM.surjective z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | tmul b m =>
     change B at b
     have hb : b ⊗ₜ[A,r] m = b • ((1 : B) ⊗ₜ[A,r] m :

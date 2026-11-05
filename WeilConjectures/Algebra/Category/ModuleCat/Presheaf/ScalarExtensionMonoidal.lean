@@ -169,7 +169,7 @@ private def sectionTensorIso
   intro X Y f
   apply ModuleCat.ExtendScalars.hom_ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
   | tmul m n =>
     change Functor.OplaxMonoidal.δ (ModuleCat.extendScalars (coeff φ Y))

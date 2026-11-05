@@ -102,7 +102,7 @@ private theorem scalar_relation_unit_bijective
     rw [map_sub, sub_eq_zero] at hz
     exact hz
   have hnormal (z : TensorProduct D C N) : q z = q (TensorProduct.tmul D (1 : C) (a z)) := by
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul c n => rw [ha]; exact hrel c n
     | add x y hx hy => simp only [map_add, TensorProduct.tmul_add, hx, hy]
   constructor

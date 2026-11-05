@@ -124,7 +124,7 @@ private def rawLeftRealization
     (fun K ↦ (sfRationalConstructibleLocalization l E.carrier Y).mapIso
       (e.app ((integralRepresentative l Ω E X hX).obj K.obj))) ?_
   intro K L h
-  induction h with
+  induction h using TensorProduct.inductionOn with
   | tmul a h =>
     change ScalarLocalization.composition _ _ _ _ _ _
         (1 ⊗ₜ _)

@@ -413,7 +413,7 @@ def coordTensorApp (q : B →ₗ[A] A) (M : modules (constantRing J A)) (U : C�
         ((coord J A B q).val.app U).hom) t
       map_add' := _root_.map_add _
       map_smul' := fun r t ↦ by
-        induction t with
+        induction t using TensorProduct.inductionOn with
         | tmul s m =>
           erw [ModuleCat.ExtendScalars.smul_tmul]
           rw [TensorProduct.lift.tmul, TensorProduct.lift.tmul, LinearMap.comp_apply,
@@ -440,7 +440,7 @@ def coordTensor (q : B →ₗ[A] A) (M : modules (constantRing J A)) :
   app U := coordTensorApp J A B q M U
   naturality {U V} f := by
     ext t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul s m =>
       change coordTensorApp J A B q M V
           ((SheafOfModules.changeOfRingsPresheaf (constAlgebraMap J A B) M).map f
@@ -578,7 +578,7 @@ theorem sum_proj_incl {I : Type*} [Fintype I] (b : Module.Basis I A B)
   apply restrictSheafify_hom_ext
   intro U t
   rw [SheafOfModules.sum_val_app]
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul s m =>
     let : Module ((constantRing J A).obj.obj U) ((constantRing J B).obj.obj U) :=
       Module.compHom _ ((constAlgebraMap J A B).hom.app U).hom
@@ -625,7 +625,7 @@ theorem proj_extendScalars_map (q : B →ₗ[A] A) {M N : modules (constantRing 
       ((ModuleCat.extendScalars ((constAlgebraMap J A B).hom.app U).hom).map (f.val.app U) t)) =
     f.val.app U ((proj J A B q M).val.app U ((toSheafify J
         (SheafOfModules.changeOfRingsPresheaf (constAlgebraMap J A B) M).presheaf).app U t)) := by
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul s m =>
     erw [ModuleCat.ExtendScalars.map_tmul]
     rw [proj_apply, proj_apply]

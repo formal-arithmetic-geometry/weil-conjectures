@@ -184,7 +184,7 @@ theorem affine_pushout_first_tensor_sections [IsAffineHom f]
       simp only [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
     intro r
     obtain ⟨x, rfl⟩ := e.surjective r
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul c d => exact ⟨[(c, d)], by simpa using htmul c d⟩
     | add x y hx hy =>
       obtain ⟨l, hl⟩ := hx

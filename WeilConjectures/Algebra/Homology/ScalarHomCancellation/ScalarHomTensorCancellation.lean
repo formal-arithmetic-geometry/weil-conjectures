@@ -94,10 +94,10 @@ private noncomputable def cancellationPresheafIso (α : R ⟶ S)
   PresheafOfModules.isoMk (cancellationApp α M N) (by
     intro U V i
     ext t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul m z =>
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
       | tmul s n =>
         change (cancellationApp α M N V).hom
@@ -127,10 +127,10 @@ private theorem cancellationPresheafIso_naturality (α : R ⟶ S)
     (cancellationPresheafIso α M N).hom ≫
       (((restrictScalars (𝓻 α)).map f).val ⊗ₘ g.val) := by
   ext W t
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul m z =>
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
     | tmul s n =>
       change (cancellationApp α M' N' W).hom

@@ -72,7 +72,7 @@ private theorem extension_over_hom_ext
     g.val.app (op V) ((changeOfRingsOfUniverses α N).val.map i.left.op z)
   rw [← ht]
   clear ht
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' =>
     erw [(η.app (op V)).hom.map_add, (f.val.app (op V)).hom.map_add,
       (g.val.app (op V)).hom.map_add, ht, ht']

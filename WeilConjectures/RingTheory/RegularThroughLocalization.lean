@@ -84,7 +84,7 @@ theorem isRegular_of_comp_algebraMap_localization
     exact Algebra.isGeometricallyRegular_of_fieldIso σ.toRingEquiv
       (e₁.toRingEquiv.trans e₂.symm.toRingEquiv) (by
         intro x y
-        induction y with
+        induction y using TensorProduct.inductionOn with
         | tmul a c =>
           change e₂.symm (σ (x * a) ⊗ₜ[A] c) =
             σ x • e₂.symm (σ a ⊗ₜ[A] c)

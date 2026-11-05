@@ -382,7 +382,7 @@ private theorem reductionTensor_hom_ext (T : Scheme.{t})
   apply Sheaf.hom_ext
   apply sheafify_hom_ext (ProEt.topology T) _ _ N.property
   ext V z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   | tmul s x => with_unfolding_all exact h V s x
 
@@ -448,7 +448,7 @@ private theorem level_hom_ext (X : Scheme.{u})
   apply (adjS.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   ext U t
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simp only [map_add, ht, ht']
   | tmul s x => with_unfolding_all exact h U s x
 

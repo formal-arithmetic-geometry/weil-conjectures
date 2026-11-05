@@ -199,13 +199,13 @@ theorem specifiedHomScalarRational_naturality (X : Scheme.{u})
     _ ≫ HL.map (ObjectProperty.homMk (X := SP P) (Y := SP P')
       (Prod.mkHom (F.map a).op (F.map b)))
   rw [hβ, hγ]
-  induction a with
+  induction a using TensorProduct.inductionOn with
   | add a a' ha ha' =>
     simp only [F.map_add, map_add, LinearMap.add_apply, Preadditive.add_comp,
       Preadditive.comp_add,
       ha, ha']
   | tmul x a =>
-    induction b with
+    induction b using TensorProduct.inductionOn with
     | add b b' hb hb' =>
       simp only [F.map_add, map_add, Preadditive.add_comp, Preadditive.comp_add, hb, hb']
     | tmul y b =>

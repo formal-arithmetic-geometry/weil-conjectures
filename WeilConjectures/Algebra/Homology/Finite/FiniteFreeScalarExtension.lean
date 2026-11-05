@@ -153,7 +153,7 @@ attribute [local irreducible] changeOfRingsMap
   PresheafOfModules.isoMk (scalarExtensionApp φ d e M) (by
     intro V W f
     ext x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s m =>
       apply sectionProduct_ext d M W
@@ -282,7 +282,7 @@ private theorem scalarPresheaf_naturality (φ : R ⟶ S) (d : ℕ)
       (scalarExtensionPresheafIso φ d e N).hom =
         (scalarExtensionPresheafIso φ d e M).hom ≫ (Limits.Pi.map (fun _ : Fin d ↦ f)).val := by
   ext V x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul s m =>
     apply sectionProduct_ext d N V

@@ -58,14 +58,14 @@ lemma tensorHom_tmul {X Y : C} (a : F') (f : X ⟶ Y) :
 lemma tensorHom_lTensor_rightComp {X Y Z : C} (g : Y ⟶ Z) (t : F' ⊗[F] (X ⟶ Y)) :
     Φ.tensorHom hΦ X Z ((Linear.rightComp F X g).lTensor F' t) =
       Φ.tensorHom hΦ X Y t ≫ Φ.map g := by
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul a f => simp
   | add x y hx hy => simp [hx, hy]
 
 lemma tensorHom_lTensor_leftComp {X Y Z : C} (f : X ⟶ Y) (t : F' ⊗[F] (Y ⟶ Z)) :
     Φ.tensorHom hΦ X Z ((Linear.leftComp F Z f).lTensor F' t) =
       Φ.map f ≫ Φ.tensorHom hΦ Y Z t := by
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul a g => simp
   | add x y hx hy => simp [hx, hy]
 
@@ -89,7 +89,7 @@ lemma TensorBijective.of_iso {X Y X' Y' : C} (h : Φ.TensorBijective hΦ X Y) (e
       (fun g ↦ Φ.map e.inv ≫ g ≫ Φ.map e'.hom) ∘ Φ.tensorHom hΦ X Y ∘
         (u.symm.lTensor F') := by
     ext t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a f =>
       simp only [Function.comp_apply, LinearEquiv.lTensor_tmul, tensorHom_tmul, u]
       simp [← Functor.map_comp]
@@ -107,7 +107,7 @@ lemma TensorBijective.of_isZero_left {X Y : C} (hX : IsZero X) :
   have : Subsingleton (F' ⊗[F] (X ⟶ Y)) := by
     refine ⟨fun s t ↦ ?_⟩
     have h (s : F' ⊗[F] (X ⟶ Y)) : s = 0 := by
-      induction s with
+      induction s using TensorProduct.inductionOn with
       | tmul a f => rw [Subsingleton.elim f 0, tmul_zero]
       | add x y hx hy => rw [hx, hy, add_zero]
     rw [h s, h t]
@@ -119,7 +119,7 @@ lemma TensorBijective.of_isZero_right {X Y : C} (hY : IsZero Y) :
   have : Subsingleton (F' ⊗[F] (X ⟶ Y)) := by
     refine ⟨fun s t ↦ ?_⟩
     have h (s : F' ⊗[F] (X ⟶ Y)) : s = 0 := by
-      induction s with
+      induction s using TensorProduct.inductionOn with
       | tmul a f => rw [Subsingleton.elim f 0, tmul_zero]
       | add x y hx hy => rw [hx, hy, add_zero]
     rw [h s, h t]
@@ -159,7 +159,7 @@ lemma TensorBijective.of_subsingleton {X Y : C} [Subsingleton (X ⟶ Y)]
   have : Subsingleton (F' ⊗[F] (X ⟶ Y)) := by
     refine ⟨fun s t ↦ ?_⟩
     have h (s : F' ⊗[F] (X ⟶ Y)) : s = 0 := by
-      induction s with
+      induction s using TensorProduct.inductionOn with
       | tmul a f => rw [Subsingleton.elim f 0, tmul_zero]
       | add x y hx hy => rw [hx, hy, add_zero]
     rw [h s, h t]
@@ -270,7 +270,7 @@ lemma TensorBijective.shift {X Y : C} (h : Φ.TensorBijective hΦ X Y) (n : ℤ)
       (fun g ↦ (Φ.commShiftIso n).hom.app X ≫ g⟦n⟧' ≫ (Φ.commShiftIso n).inv.app Y) ∘
         Φ.tensorHom hΦ X Y := by
     ext t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a f =>
       simp only [Function.comp_apply, LinearEquiv.lTensor_tmul, tensorHom_tmul, s,
         LinearEquiv.coe_mk, LinearMap.coe_mk, AddHom.coe_mk, Functor.map_smul,

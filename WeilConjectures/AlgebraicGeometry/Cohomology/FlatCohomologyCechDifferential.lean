@@ -134,7 +134,6 @@ theorem cechBaseChange_components_comm (f : X ⟶ Spec (.of R))
   apply LinearMap.ext
   intro t
   induction t using TensorProduct.inductionOn with
-  | zero => simp only [map_zero]
   | tmul b x =>
     simp only [ModuleCat.comp_apply]
     change B.d k (k + 1) (c k (b ⊗ₜ[R] x)) =

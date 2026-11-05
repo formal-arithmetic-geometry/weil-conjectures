@@ -84,7 +84,7 @@ private theorem tail_rep_zero
     have he : αl.toLinearMap.rTensor M₀ (αjl.toLinearMap.rTensor M₀ t) =
         αj.toLinearMap.rTensor M₀ t := by
       clear ht
-      induction t with
+      induction t using TensorProduct.inductionOn with
       | tmul a m =>
         simp only [LinearMap.rTensor_tmul]
         exact congrArg (fun a ↦ a ⊗ₜ[F.obj i₀] m)
@@ -162,7 +162,7 @@ private theorem tensor_rep_zero
   have e_of (j : J) (t : A j ⊗[R] N) :
       e (Module.DirectLimit.of R J (fun j ↦ A j ⊗[R] N) ft j t) =
         (μ j).rTensor N t := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a n =>
       dsimp only [e, ft]
       rw [LinearEquiv.trans_apply, TensorProduct.directLimitLeft_symm_of_tmul,

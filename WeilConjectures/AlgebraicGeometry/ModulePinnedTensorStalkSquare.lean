@@ -74,7 +74,7 @@ theorem module_pinned_tensor_stalk_square {X Y : Scheme.{u}}
       (Functor.Monoidal.μIso F (SY.obj M) (SY.obj N)).inv := by
     apply ModuleCat.ExtendScalars.hom_ext
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
     | tmul s t =>
       obtain ⟨U, hxU, s, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf s

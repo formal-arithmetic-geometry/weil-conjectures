@@ -45,7 +45,7 @@ private noncomputable def tensorScalarIso
           with
         map_smul' := by
           intro r x
-          induction x with
+          induction x using TensorProduct.inductionOn with
           | tmul m b =>
             change B at b
             change b ⊗ₜ[R, algebraMap R B] (r • m) =

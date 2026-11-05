@@ -181,7 +181,7 @@ noncomputable def scalarTensorAssocRawIso {R : Sheaf J CommRingCat.{u}}
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro xy z
-      induction xy with
+      induction xy using TensorProduct.inductionOn with
       | add xy xy' h h' => simp only [map_add, TensorProduct.add_tmul, h, h']
       | tmul x y => rfl)
 

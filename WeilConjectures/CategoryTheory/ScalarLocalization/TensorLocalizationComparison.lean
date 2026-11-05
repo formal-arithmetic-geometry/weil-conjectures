@@ -44,7 +44,7 @@ noncomputable def tensorRationalComparison
   map_comp {X Y Z} f g := by
     induction f using TensorProduct.inductionOn with
     | tmul a f =>
-      induction g with
+      induction g using TensorProduct.inductionOn with
       | tmul b g =>
         change Rationalization.tensorHomEquiv _ _ _ _
           (composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _

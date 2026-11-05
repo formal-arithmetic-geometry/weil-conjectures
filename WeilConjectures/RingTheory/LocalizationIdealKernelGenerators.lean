@@ -151,7 +151,7 @@ theorem exists_localization_ideal_kernel_generators
         intro a x
         induction a using TensorProduct.inductionOn with
         | tmul s r =>
-          induction x with
+          induction x using TensorProduct.inductionOn with
           | tmul b m =>
             change S ⊗[R] R' at b
             induction b using TensorProduct.inductionOn with
@@ -209,13 +209,13 @@ theorem exists_localization_ideal_kernel_generators
   have hsymN (y : J ⊗[R'] N) :
       gN (TensorProduct.comm R' J N y) =
         TensorProduct.lift ((LinearMap.lsmul R' N).comp J.subtype) y := by
-    induction y with
+    induction y using TensorProduct.inductionOn with
     | tmul b n => rfl
     | add x y hx hy => simp_all
   have hsymP (z : J ⊗[R'] P) :
       gP (TensorProduct.comm R' J P z) =
         TensorProduct.lift ((LinearMap.lsmul R' P).comp J.subtype) z := by
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul b n => rfl
     | add x y hx hy => simp_all
   -- Reindex those generators using the symmetries in the statement.

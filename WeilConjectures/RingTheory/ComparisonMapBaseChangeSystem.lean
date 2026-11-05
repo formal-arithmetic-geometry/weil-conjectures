@@ -65,7 +65,7 @@ private theorem comparison_scalar_obstruction :
         prod (Algebra.TensorProduct.map (AlgHom.id ℤ A)
           ((AlgHom.id ℤ ℤ).prod (AlgHom.id ℤ ℤ)) x) = (rid x, rid x) := by
       intro x
-      induction x with
+      induction x using TensorProduct.inductionOn with
       | tmul a z => simp [prod, rid, Algebra.TensorProduct.prodRight_tmul]
       | add x y hx hy => simp [hx, hy]
     have heq := congrArg prod hx

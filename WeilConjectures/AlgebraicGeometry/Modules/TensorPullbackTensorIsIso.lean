@@ -88,7 +88,7 @@ theorem isIso_tensorPullback_of_tmul {X Y : Scheme.{v}} (f : X ⟶ Y)
     have he : l.inv ≫ SX.map α ≫ r.hom = (Functor.Monoidal.μIso F (SY.obj M) (SY.obj N)).inv := by
       apply ModuleCat.ExtendScalars.hom_ext
       intro z
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
       | tmul s t =>
         obtain ⟨U, hxU, s, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf s

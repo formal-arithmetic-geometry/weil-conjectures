@@ -69,7 +69,7 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
     apply le_antisymm
     · rintro _ ⟨z, rfl⟩
       obtain ⟨w, rfl⟩ := ht z
-      induction w with
+      induction w using TensorProduct.inductionOn with
       | tmul s t =>
         change a.app U.1 (tensorSectionsMap K M U.1 (s ⊗ₜ t)) ∈ I • ⊤
         rw [hp]
@@ -235,7 +235,7 @@ private theorem powerProduct_isZero_iff_affine_cover (X : Scheme.{u})
         intro z
         obtain ⟨w, rfl⟩ :=
           (Modules.quasiCoherent_tensor_product_affine_sections J F).2 _ U.1.2 |>.2 z
-        induction w with
+        induction w using TensorProduct.inductionOn with
         | tmul a s =>
           rw [Modules.tensorSectionsMap_tmul, hm]
           exact Module.mem_annihilator.mp (h U.1 U.2

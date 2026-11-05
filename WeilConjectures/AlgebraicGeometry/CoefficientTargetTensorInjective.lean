@@ -32,7 +32,7 @@ private theorem tensor_leftInverse_of_generators
     (h : ∀ s : N, l (c ((1 : R) ⊗ₜ[A] s)) = (1 : R) ⊗ₜ[A] s) :
     Function.LeftInverse l c := by
   intro t
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | tmul r s =>
     have he : r ⊗ₜ[A] s = r • ((1 : R) ⊗ₜ[A] s) := by
       rw [TensorProduct.smul_tmul', smul_eq_mul, mul_one]

@@ -53,11 +53,11 @@ private theorem exists_tensorRingEquiv
   let g := Algebra.TensorProduct.mapRingHom eR.symm.toRingHom eA.symm.toRingHom
     eB.symm.toRingHom hRA' hRB'
   have hgf (x : A₀ ⊗[R₀] B₀) : g (f x) = x := by
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a b => simp [f, g]
     | add x y hx hy => simp [hx, hy]
   have hfg (x : A ⊗[R] B) : f (g x) = x := by
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a b => simp [f, g]
     | add x y hx hy => simp [hx, hy]
   let e : (A₀ ⊗[R₀] B₀) ≃+* (A ⊗[R] B) :=
@@ -227,7 +227,7 @@ theorem exists_baseDerivedTensor_ordinary_ring_comparison
     exact kB.hom.hom.map_smul b x
   have hlinear (r : A₀ ⊗[R₀] B₀) (x : M.cohomology i) :
       v (r • x) = eE r • v x := by
-    induction r with
+    induction r using TensorProduct.inductionOn with
     | tmul a b =>
       rw [heE]
       have ht₀ : (a ⊗ₜ[R₀] b : A₀ ⊗[R₀] B₀) =

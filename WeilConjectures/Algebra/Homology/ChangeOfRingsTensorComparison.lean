@@ -54,7 +54,7 @@ private noncomputable def sectionTensorIso
       map_smul' := by
         intro r x
         change (O'.obj.obj X) ⊗[O.obj.obj X, (φ.hom.app X).hom] (M.val.obj X) at x
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | tmul s m => rfl
         | add x y hx hy => simpa only [smul_add] using congrArg₂ (· + ·) hx hy }
   exact e.toModuleIso
@@ -76,7 +76,7 @@ private noncomputable def presheafTensorIso
     intro X Y f
     ext x
     change (O'.obj.obj X) ⊗[O.obj.obj X, (φ.hom.app X).hom] (M.val.obj X) at x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul s m =>
       change changeOfRingsMap φ M f (s ⊗ₜ m) = _
       rw [show changeOfRingsMap φ M f (s ⊗ₜ m) = _ from
@@ -111,7 +111,7 @@ private lemma presheafTensorIso_naturality
           (unit (𝓡 O'))).val ◁ a.val := by
   ext X x
   change (O'.obj.obj X) ⊗[O.obj.obj X, (φ.hom.app X).hom] (M.val.obj X) at x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul s m => rfl
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 

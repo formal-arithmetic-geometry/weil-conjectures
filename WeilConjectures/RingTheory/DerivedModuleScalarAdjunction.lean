@@ -63,7 +63,7 @@ private theorem derivedRestrictScalars_isRightAdjoint_sameUniverse
     (AddEquiv.toLinearEquiv (M := ↑((F ⋙ restrictScalars φ).obj M))
       (M₂ := ↑((tensorLeft B).obj M)) (AddEquiv.refl _) (by
         intro r z
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul s m => rfl
         | add a b ha hb =>
             simpa only [map_add, smul_add] using congrArg₂ (· + ·) ha hb)).toModuleIso

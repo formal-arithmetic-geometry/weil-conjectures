@@ -224,7 +224,7 @@ private theorem unit_section_surjective (Y : Scheme.{u})
         ext n
         simp only [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_ofHom,
           AddMonoidHom.coe_comp, Function.comp_apply, zmultiplesHom_apply,
-          AddEquiv.toAddMonoidHom_eq_coe, AddMonoidHom.coe_coe, map_zsmul]
+          AddEquiv.toAddMonoidHom_eq_coe, AddMonoidHom.coe_ofClass, map_zsmul]
         change n.down • M.obj.map (hT.from V.unop).op s =
           n.down • M.obj.map g (M.obj.map (hT.from U.unop).op s)
         rw [← Functor.map_comp_apply, show (hT.from U.unop).op ≫ g =

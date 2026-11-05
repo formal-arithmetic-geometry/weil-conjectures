@@ -119,7 +119,7 @@ private theorem ordinaryCoefficientMap_square
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
   | tmul a x =>
     change TensorProduct.comm A _ _ ((ordinaryCoefficientMap I n).app (P.X j)

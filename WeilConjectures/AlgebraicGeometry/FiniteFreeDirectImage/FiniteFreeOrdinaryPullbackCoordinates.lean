@@ -245,7 +245,7 @@ private theorem presentedTensor_hom_ext (X : Scheme.{u}) (s : ScalarModel X)
   unfold SheafOfModules.tensorUnit
   simp only [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
   ext V z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | tmul b m => exact h V b m
   | add x y hx hy => simp_all
 

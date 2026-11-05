@@ -109,7 +109,7 @@ theorem existsUnique_semilinearHom (F : C ⥤ D) [F.Additive]
   · intro k hk
     apply AddMonoidHom.ext
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul a f => exact (hk a f).trans (TensorProduct.liftAddHom_tmul β hb a f).symm
     | add z w hz hw => simp only [map_add, hz, hw]
 
@@ -144,9 +144,9 @@ theorem extensionHom_laws (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F) :
   · intro K
     simp
   · intro K L M f g
-    induction g with
+    induction g using TensorProduct.inductionOn with
     | tmul a g =>
-      induction f with
+      induction f using TensorProduct.inductionOn with
       | tmul a' f => simp [composition_tmul]
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']

@@ -45,7 +45,7 @@ private theorem tensor_clear_away
   let γ := TensorProduct.tmul R (1 : A) g
   have hs := Localization.awayMap_surjective_iff.mp haway
   intro u
-  induction u with
+  induction u using TensorProduct.inductionOn with
   | tmul x y =>
     obtain ⟨z, n, hz⟩ := hs y
     change z.1 = g.1 ^ n * y at hz

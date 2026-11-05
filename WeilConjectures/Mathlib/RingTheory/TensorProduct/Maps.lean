@@ -178,7 +178,7 @@ theorem isNilpotent_of_productMap_eq_zero {f : R →ₐ[K] K} {g : S →ₐ[K] K
   set I₁ := (RingHom.ker f).map (includeLeft : R →ₐ[K] R ⊗[K] S)
   set I₂ := (RingHom.ker g).map (includeRight : S →ₐ[K] R ⊗[K] S)
   have key (t : R ⊗[K] S) : t - algebraMap K _ (productMap f g t) ∈ I₁ ⊔ I₂ := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy =>
       rw [map_add, map_add, add_sub_add_comm]
       exact add_mem hx hy

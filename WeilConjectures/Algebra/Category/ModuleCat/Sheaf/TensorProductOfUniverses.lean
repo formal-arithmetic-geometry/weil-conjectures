@@ -93,7 +93,7 @@ theorem exists_changeOfRingsMapMixedUniverses
       map_smul' := ?_ }, ?_⟩
   · intro s z
     change (R₂.obj.obj X) ⊗[R₁.obj.obj X, (α.hom.app X).hom] (M.val.obj X) at z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul t n =>
       change R₂.obj.obj X at t
       change R₂.obj.map f (s * t) ⊗ₜ[R₁.obj.obj Y, (α.hom.app Y).hom]

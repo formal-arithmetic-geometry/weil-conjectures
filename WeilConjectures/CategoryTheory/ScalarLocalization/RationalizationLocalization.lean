@@ -40,7 +40,7 @@ private noncomputable def toRationalization
     change Localization.Away p ⊗[R] (Y.obj ⟶ Z.obj) at g
     induction f using TensorProduct.inductionOn with
     | tmul a f =>
-      induction g with
+      induction g using TensorProduct.inductionOn with
       | tmul b g =>
         change Rationalization.tensorHomEquiv _ _ _ _
           (composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _

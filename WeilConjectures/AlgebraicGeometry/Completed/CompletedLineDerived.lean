@@ -61,7 +61,7 @@ private noncomputable def extensionPresheafIso
     intro V W i
     apply ModuleCat.hom_ext
     ext t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s x =>
       change SheafOfModules.changeOfRingsMap a M i

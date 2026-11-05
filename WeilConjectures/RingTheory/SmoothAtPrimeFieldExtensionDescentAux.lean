@@ -34,7 +34,7 @@ private theorem h1_baseChange
       (tensorH1CotangentOfFlat k S K).toLinearMap := by
     apply LinearMap.ext
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp_all only [map_add]
     | tmul a x =>
       simp only [LinearMap.comp_apply, LinearMap.restrictScalars_apply,

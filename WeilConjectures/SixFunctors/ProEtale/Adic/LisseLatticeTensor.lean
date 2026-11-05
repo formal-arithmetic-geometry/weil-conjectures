@@ -89,7 +89,7 @@ lemma exists_sum_of_surjective_tensorSections (U : X.ProEt)
     ∃ (n : ℕ) (a : Fin n → (adicConstantSheaf l X).obj.obj (op U)) (m : Fin n → C(U.left, M)),
       x = ∑ j, sectionAct F (a j) (ψ U (m j)) := by
   obtain ⟨τ, rfl⟩ := h x
-  induction τ with
+  induction τ using TensorProduct.inductionOn with
   | tmul c m =>
     refine ⟨1, fun _ ↦ ULift.up (algebraMap _ _ c), fun _ ↦ m, ?_⟩
     rw [Fin.sum_univ_one, algebraMap_sectionAct F (ULift.up c)]

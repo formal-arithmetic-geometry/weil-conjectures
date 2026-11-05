@@ -67,7 +67,7 @@ private theorem unit_kernel (M : ModuleCat.{u} R) (x : M) :
   have hT := rTensor_exact M hπ hf
   have hμ (z : R ⊗[R] M) :
       TensorProduct.lid R M (LinearMap.rTensor M μ z) = t • TensorProduct.lid R M z := by
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp [hz, hw, smul_add]
     | tmul a m => simp [μ, smul_smul]
   constructor

@@ -364,7 +364,7 @@ private theorem scalar_unit_surjective
     Function.Surjective ((ModuleCat.extendRestrictScalarsAdj φ).unit.app P) := by
   let : Algebra A B := φ.toAlgebra
   intro x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul b p =>
     obtain ⟨a, rfl⟩ := hs b
     refine ⟨a • p, ?_⟩

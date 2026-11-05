@@ -128,7 +128,7 @@ theorem exists_etale_isIdempotentElem_forall_eq [Module.Finite A B] (φ : A →+
     let := φ.toAlgebra
     apply RingHom.ext
     intro x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a₁ b =>
       simp only [RingHom.comp_apply, θ, PointsOver.tensor_tmul, map_mul]
       congr 1
@@ -197,9 +197,9 @@ theorem exists_etale_isIdempotentElem_forall_eq [Module.Finite A B] (φ : A →+
       ((t'.tensor hφ₁).tensor hφ₂) x := by
     intro t' x
     let := φ.toAlgebra
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a₂ y =>
-      induction y with
+      induction y using TensorProduct.inductionOn with
       | tmul a₁ b =>
         rw [show ψ (a₂ ⊗ₜ (a₁ ⊗ₜ b)) = (a₁ • a₂) ⊗ₜ b from
           Algebra.TensorProduct.cancelBaseChange_tmul A A₁ A₂ A₂ B a₂ a₁ b]

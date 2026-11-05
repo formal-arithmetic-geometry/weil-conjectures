@@ -331,7 +331,7 @@ noncomputable def tensorEquiv : PointsOver φ' (A' ⊗[A] B) ≃ PointsOver φ B
   left_inv t := by
     let := φ.toAlgebra
     ext x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul a' b =>
       have h : a' ⊗ₜ[A] b =
           algebraMap A' (A' ⊗[A] B) a' * Algebra.TensorProduct.includeRight b := by
@@ -406,7 +406,7 @@ lemma tensor_map (t : PointsOver φ B) (x : A' ⊗[A] B) :
     t.tensor (comp_algebraMap_of_tower hφ' hφ'')
       (Algebra.TensorProduct.map (IsScalarTower.toAlgHom A A' A'') (AlgHom.id A B) x) =
       t.tensor hφ' x := by
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul a' b =>
     simp only [Algebra.TensorProduct.map_tmul, tensor_tmul, AlgHom.id_apply,
       IsScalarTower.coe_toAlgHom']
@@ -418,9 +418,9 @@ lemma tensor_cancelBaseChange (t : PointsOver φ B) (x : A'' ⊗[A'] (A' ⊗[A] 
     t.tensor (comp_algebraMap_of_tower hφ' hφ'')
       (Algebra.TensorProduct.cancelBaseChange A A' A'' A'' B x) =
       (t.tensor hφ').tensor hφ'' x := by
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | tmul a'' y =>
-    induction y with
+    induction y using TensorProduct.inductionOn with
     | tmul a' b =>
       rw [Algebra.TensorProduct.cancelBaseChange_tmul]
       simp only [tensor_tmul, Algebra.smul_def, map_mul]

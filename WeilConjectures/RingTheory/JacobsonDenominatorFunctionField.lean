@@ -144,7 +144,7 @@ private theorem exists_large_valuation_of_tensor_surjective
       (IsScalarTower.toAlgHom ℤ A K) (IsScalarTower.toAlgHom ℤ D K)
     have hp : ∀ z : TensorProduct ℤ A D, v (p z) ≤ 1 := by
       intro z
-      induction z with
+      induction z using TensorProduct.inductionOn with
       | tmul a d =>
         simp only [p, Algebra.TensorProduct.productMap_apply_tmul,
           IsScalarTower.toAlgHom_apply, Valuation.map_mul]

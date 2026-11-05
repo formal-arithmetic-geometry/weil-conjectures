@@ -235,7 +235,7 @@ theorem exists_stalk_tensor_iso {X : TopCat.{u}} (R : X.Presheaf CommRingCat.{u}
     | tmul s t => erw [hp]; exact hβ U hx s t
   have hpq : Function.LeftInverse p q := by
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
     | tmul m n =>
       obtain ⟨U, hxU, s, rfl⟩ := TopCat.Presheaf.exists_germ_eq F.presheaf m

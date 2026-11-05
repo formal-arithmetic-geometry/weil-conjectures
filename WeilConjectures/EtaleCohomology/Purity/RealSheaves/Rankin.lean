@@ -89,7 +89,7 @@ coefficient of the tensor product is a fixed linear combination of products of c
 the factors. -/
 theorem IsLisse.tprod (hρ : W.IsLisse l ρ) (hσ : W.IsLisse l σ) : W.IsLisse l (ρ.tprod σ) :=
   IsLisse.of_continuous_apply fun φ x ↦ by
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul v w =>
       let b := Module.finBasis (PadicAlgCl l) V
       let b' := Module.finBasis (PadicAlgCl l) V'

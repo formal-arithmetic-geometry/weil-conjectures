@@ -43,10 +43,10 @@ private noncomputable def baseChangeTensorCancel
   refine { e₀ with map_smul' := ?_ }
   intro c x
   change e₀ (c • x) = c • e₀ x
-  induction x with
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp [smul_add, hx, hy]
   | tmul b m =>
-    induction b with
+    induction b using TensorProduct.inductionOn with
     | add b d hb hd => simp [smul_add, TensorProduct.add_tmul, hb, hd]
     | tmul c' s =>
       simp [e₀, TensorProduct.smul_tmul', Algebra.smul_def,
@@ -163,7 +163,7 @@ theorem flat_quotient_localized_baseChange
     map_smul' := by
       intro c x
       change eN₀ (c • x) = c • eN₀ x
-      induction x with
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simp [smul_add, hx, hy]
       | tmul b m =>
         simp only [eN₀, TensorProduct.smul_tmul', TensorProduct.congr_tmul]

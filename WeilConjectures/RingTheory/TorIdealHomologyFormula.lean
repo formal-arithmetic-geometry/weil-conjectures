@@ -127,12 +127,12 @@ theorem exists_tor_ideal_homology_formula
   have hq₁ : Function.Surjective q₁ := LinearMap.lTensor_surjective _ I.mkQ_surjective
   have hd₀ : ∀ a, db (s₁ a) = s₀ (da a) := by
     intro a
-    induction a with
+    induction a using TensorProduct.inductionOn with
     | tmul p a => rfl
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
   have hd₁ : ∀ b, q₀ (db b) = (C.d 1 0).hom (q₁ b) := by
     intro b
-    induction b with
+    induction b using TensorProduct.inductionOn with
     | tmul p r => rfl
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
   have hi : ∀ z, (C.d 1 0).hom ((C.iCycles 1).hom z) = 0 := by
@@ -140,7 +140,7 @@ theorem exists_tor_ideal_homology_formula
     exact congrArg (fun f : C.cycles 1 ⟶ C.X 0 ↦ f z) (C.iCycles_d 1 0)
   have hμ : ∀ a, μ (da a) = 0 := by
     intro a
-    induction a with
+    induction a using TensorProduct.inductionOn with
     | tmul p a =>
       have hp : P.π.f 0 (P.complex.d 1 0 p) = 0 :=
         congrArg (fun f : P.complex.X 1 ⟶ M ↦ f p) P.complex_d_comp_π_f_zero

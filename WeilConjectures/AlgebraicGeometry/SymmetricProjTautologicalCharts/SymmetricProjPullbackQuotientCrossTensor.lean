@@ -64,9 +64,9 @@ private theorem cross_tensor_affine {S T : Scheme.{u}} (h : T ⟶ S)
   intro m n
   obtain ⟨a, rfl⟩ := (hc E inferInstance).surjective m
   obtain ⟨b, rfl⟩ := (hc E inferInstance).surjective n
-  induction a with
+  induction a using TensorProduct.inductionOn with
   | tmul m r =>
-    induction b with
+    induction b using TensorProduct.inductionOn with
     | tmul n s =>
       simp only [hp, hunit, Hom.app_smul, smul_tmulSection, tmulSection_smul]
       rw [hpure]

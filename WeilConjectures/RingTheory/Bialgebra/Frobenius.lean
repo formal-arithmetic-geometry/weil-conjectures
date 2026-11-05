@@ -82,7 +82,7 @@ noncomputable abbrev bialgebra : Bialgebra K S :=
           (Algebra.TensorProduct.map (restrictComul hS) (.id K S) t)) =
           TensorProduct.assoc K A A A (Coalgebra.comul (R := K) (A := A) |>.rTensor A
             (Algebra.TensorProduct.map S.val S.val t)) := by
-        induction t with
+        induction t using TensorProduct.inductionOn with
         | add t₁ t₂ h₁ h₂ => simp only [map_add, h₁, h₂]
         | tmul a b =>
           simp only [Algebra.TensorProduct.map_tmul, LinearMap.rTensor_tmul, AlgHom.id_apply,
@@ -94,7 +94,7 @@ noncomputable abbrev bialgebra : Bialgebra K S :=
       have h₂ (t : S ⊗[K] S) : j (Algebra.TensorProduct.map (.id K S) (restrictComul hS) t) =
           (Coalgebra.comul (R := K) (A := A)).lTensor A
             (Algebra.TensorProduct.map S.val S.val t) := by
-        induction t with
+        induction t using TensorProduct.inductionOn with
         | add t₁ t₂ h₁ h₂ => simp only [map_add, h₁, h₂]
         | tmul a b =>
           simp only [j, Algebra.TensorProduct.map_tmul, LinearMap.lTensor_tmul, AlgHom.id_apply,
@@ -113,7 +113,7 @@ noncomputable abbrev bialgebra : Bialgebra K S :=
           ((Bialgebra.counitAlgHom K A).comp S.val) (.id K S) t) =
           (Coalgebra.counit (R := K) (A := A)).rTensor A
             (Algebra.TensorProduct.map S.val S.val t) := by
-        induction t with
+        induction t using TensorProduct.inductionOn with
         | add t₁ t₂ h₁ h₂ => simp only [map_add, h₁, h₂]
         | tmul a b => rfl
       simp only [AlgHom.comp_apply, AlgEquiv.coe_toAlgHom]
@@ -129,7 +129,7 @@ noncomputable abbrev bialgebra : Bialgebra K S :=
           ((Bialgebra.counitAlgHom K A).comp S.val) t) =
           (Coalgebra.counit (R := K) (A := A)).lTensor A
             (Algebra.TensorProduct.map S.val S.val t) := by
-        induction t with
+        induction t using TensorProduct.inductionOn with
         | add t₁ t₂ h₁ h₂ => simp only [map_add, h₁, h₂]
         | tmul a b => rfl
       simp only [AlgHom.comp_apply, AlgEquiv.coe_toAlgHom]
@@ -203,7 +203,7 @@ theorem comul_mem_range_of_mem_frobenius [Nontrivial A] [Fact p.Prime] [CharP K 
   have : CharP (A ⊗[K] A) p := charP_of_injective_algebraMap (algebraMap K _).injective p
   have key (t : A ⊗[K] A) : t ^ p ∈
       (Algebra.TensorProduct.map (frobenius K A p).val (frobenius K A p).val).range := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul x y =>
       exact ⟨⟨x ^ p, pow_mem_frobenius x⟩ ⊗ₜ ⟨y ^ p, pow_mem_frobenius y⟩, by
         simp [Algebra.TensorProduct.tmul_pow]⟩

@@ -194,7 +194,7 @@ private theorem stalkChangeOfRingsMap_injective (X : TopCat.{u})
               Module.compHom _ (α.hom.app (op U.unop.val)).hom
             change TensorProduct (R₁.obj.obj (op U.unop.val)) (R₂.obj.obj (op U.unop.val))
               (F.val.obj (op U.unop.val)) at t
-            induction t with
+            induction t using TensorProduct.inductionOn with
             | tmul a s =>
               erw [changeOfRingsMap_tmul']
               erw [hq, hq]
@@ -273,7 +273,7 @@ theorem stalkChangeOfRingsPresheafIso (X : TopCat.{u})
       Module.compHom _ (α.hom.app (op U)).hom
     change TensorProduct (R₁.obj.obj (op U)) (R₂.obj.obj (op U))
       (F.val.obj (op U)) at t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a s => exact ⟨_, hψ F U hx s a⟩
     | add t v ht hv =>
       obtain ⟨a, ha⟩ := ht

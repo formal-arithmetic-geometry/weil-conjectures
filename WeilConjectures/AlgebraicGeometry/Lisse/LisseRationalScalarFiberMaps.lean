@@ -62,7 +62,7 @@ def tensorAlgebraIso {R A : Type (d + 1)} [CommRing R] [CommRing A] [Algebra R A
       map_add' := q.map_add
       map_smul' := by
         intro a z
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul b m => rfl
         | add x z hx hz =>
           change q (a • x) = a • q x at hx

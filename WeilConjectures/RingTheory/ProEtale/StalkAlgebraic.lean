@@ -31,7 +31,7 @@ lemma Ideal.IsMaximal.of_isAlgebraic {A B : Type*} [CommRing A] [CommRing B] [Al
     (m : Ideal A) [m.IsMaximal] (q : Ideal B) [Ideal.IsPrime q]
     [q.LiesOver m]
     [Algebra (Localization.AtPrime m) (Localization.AtPrime q)]
-    [Localization.AtPrime.IsLiesOverAlgebra m q]
+    [IsScalarTower _ (Localization.AtPrime m) (Localization.AtPrime q)]
     [Algebra.IsAlgebraic m.ResidueField q.ResidueField] : q.IsMaximal := by
   rw [Ideal.Quotient.maximal_ideal_iff_isField_quotient]
   let := Ideal.Quotient.field m
@@ -60,7 +60,7 @@ lemma PrimeSpectrum.zeroLocus_subset_closedPoints_of_isAlgebraic {A B : Type*} [
     [CommRing B] [Algebra A B] (I : Ideal A)
     (ha : ∀ (q : Ideal B) [q.IsPrime]
       [Algebra (Localization.AtPrime (q.comap (algebraMap A B))) (Localization.AtPrime q)]
-      [Localization.AtPrime.IsLiesOverAlgebra (q.comap (algebraMap A B)) q],
+      [IsScalarTower _ (Localization.AtPrime (q.comap (algebraMap A B))) (Localization.AtPrime q)],
       Algebra.IsAlgebraic (q.comap (algebraMap A B)).ResidueField q.ResidueField)
     (hc : PrimeSpectrum.zeroLocus I ⊆ closedPoints (PrimeSpectrum A)) :
     PrimeSpectrum.zeroLocus (I.map (algebraMap A B)) ⊆ closedPoints (PrimeSpectrum B) := by

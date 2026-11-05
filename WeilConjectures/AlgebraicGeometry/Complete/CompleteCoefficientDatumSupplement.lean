@@ -303,7 +303,7 @@ private theorem adicTensorAddHom_ext (X : Scheme.{t}) {A B : Type t}
   intro z
   let : Module ((adicConstantRing X A).obj.obj U) ((adicConstantRing X B).obj.obj U) :=
     Module.compHom _ ((adicConstantMap X φ).hom.app U).hom
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | tmul s m => exact h U s m
   | add x y hx hy => simp only [map_add, hx, hy]
 

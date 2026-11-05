@@ -288,7 +288,7 @@ private noncomputable def tateLocalizedTensorIso
   change T.map f ≫ eqToHom (ho K') = eqToHom (ho K) ≫ G.map f
   rw [comp_eqToHom_iff, Category.assoc]
   apply (conj_eqToHom_iff_heq _ _ (ho K) (ho K')).mpr
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul c f =>
     exact (ht K K' c f).trans
       (heq_of_eq (LinearMap.baseChange_tmul (F.mapLinearMap R) c f).symm)

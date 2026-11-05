@@ -86,7 +86,7 @@ theorem existsUnique
     change Localization.Away t ⊗[R] (K.2.obj ⟶ L.2.obj) at f₂
     induction f₁ using TensorProduct.inductionOn with
     | tmul x f₁ =>
-      induction f₂ with
+      induction f₂ using TensorProduct.inductionOn with
       | tmul y f₂ =>
         have h₁ := heq_comp (hF K) (hF L) (hG L) (pβ f₁ f₂ x y) (ha L)
         have h₂ := heq_comp (hF K) (hG K) (hG L) (ha K) (pγ f₁ f₂ x y)

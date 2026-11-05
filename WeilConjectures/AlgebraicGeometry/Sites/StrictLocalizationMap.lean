@@ -78,13 +78,13 @@ noncomputable def pullback :
     apply Subtype.ext
     apply MorphismProperty.Over.Hom.ext
     apply pullback.hom_ext <;>
-      simp only [Functor.id_obj, Functor.const_obj_obj, CategoryOfElements.id_val, Etale.id_left,
+      simp only [Functor.id_obj, Functor.const_obj_obj, Functor.Elements.id_hom, Etale.id_left,
         pullback.map_id, MorphismProperty.Over.homMk_hom, Over.homMk_left] <;>
       exact Category.id_comp _
   map_comp f g := by
     apply Subtype.ext
     apply MorphismProperty.Over.Hom.ext
-    apply pullback.hom_ext <;> simp [CategoryOfElements.comp_val]
+    apply pullback.hom_ext <;> simp [Functor.Elements.comp_hom]
 
 end PointedEtaleNeighborhood
 

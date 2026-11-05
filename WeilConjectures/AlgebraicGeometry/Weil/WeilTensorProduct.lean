@@ -193,10 +193,10 @@ private theorem scalarLocalization_bilinear_naturality
       ScalarLocalization.composition R C p _ _ _
         (b' (ScalarLocalization.mapHom R C p H _ _ f)
           (ScalarLocalization.mapHom R C p H _ _ g)) (1 ⊗ₜ[R] i) := by
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | add f₁ f₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
   | tmul s f =>
-    induction g with
+    induction g using TensorProduct.inductionOn with
     | add g₁ g₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
     | tmul t g =>
       rw [hb, scalarLocalization_mapHom_tmul, scalarLocalization_mapHom_tmul,
@@ -577,16 +577,16 @@ theorem wfRationalTensor_laws (p : A) :
         ScalarLocalization.composition A (WfCompleteCategory X d r a ha) p _ _ _
           (wfRationalTensorHom X d r a ha p M' M'' N' N'' f' g')
           (wfRationalTensorHom X d r a ha p M M' N N' f g)
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | add f₁ f₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
     | tmul s f =>
-      induction f' with
+      induction f' using TensorProduct.inductionOn with
       | add f₁ f₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
       | tmul t f' =>
-        induction g with
+        induction g using TensorProduct.inductionOn with
         | add g₁ g₂ h₁ h₂ => simp only [map_add, h₁, h₂]
         | tmul u g =>
-          induction g' with
+          induction g' using TensorProduct.inductionOn with
           | add g₁ g₂ h₁ h₂ => simp only [map_add, LinearMap.add_apply, h₁, h₂]
           | tmul v g' =>
             rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul,
@@ -1250,10 +1250,10 @@ theorem wfConstructibleInclusion_exists (p : A) :
           ScalarLocalization.composition A _ p _ _ _
             ((I.mapLinearMap A).baseChange (Localization.Away p) g)
             ((I.mapLinearMap A).baseChange (Localization.Away p) f)
-        induction f with
+        induction f using TensorProduct.inductionOn with
         | add f f' hf hf' => simp only [map_add, hf, hf']
         | tmul s f =>
-          induction g with
+          induction g using TensorProduct.inductionOn with
           | add g g' hg hg' => simp only [map_add, LinearMap.add_apply, hg, hg']
           | tmul t g => simp only [ScalarLocalization.composition_tmul, LinearMap.baseChange_tmul,
               Functor.coe_mapLinearMap, Functor.map_comp] }

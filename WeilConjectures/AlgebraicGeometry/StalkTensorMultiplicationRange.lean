@@ -129,7 +129,7 @@ theorem stalk_tensor_multiplication_range {X : Scheme.{u}} {J : X.Modules}
       ConcreteCategory.congr_hom (Φ J F).hom_inv_id z
     rw [← hz]
     generalize (Φ J F).hom z = q
-    induction q with
+    induction q using TensorProduct.inductionOn with
     | tmul a b =>
       rw [hmul]
       exact Submodule.smul_mem_smul ⟨a, rfl⟩ (Submodule.mem_top : b ∈ ⊤)

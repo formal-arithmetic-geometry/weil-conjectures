@@ -208,7 +208,7 @@ noncomputable def homDualEquiv (M N : FrobeniusModule.{max u v, v} K) :
     have key (T : M.carrier ⊗[K] N.carrier) :
         (homDualLinearEquiv M N).symm ((M.tensor N).frobenius T) =
           (M.dual.linearHom N).frobenius ((homDualLinearEquiv M N).symm T) := by
-      induction T with
+      induction T using TensorProduct.inductionOn with
       | tmul x y =>
         refine LinearMap.ext fun φ ↦ ?_
         rw [tensor_frobenius_tmul, homDualLinearEquiv_symm_tmul, linearHom_frobenius_apply]

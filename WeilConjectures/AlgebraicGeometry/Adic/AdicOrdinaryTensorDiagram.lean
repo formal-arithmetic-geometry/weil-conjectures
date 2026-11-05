@@ -128,7 +128,7 @@ def adicOrdinaryRestrictedTensorIso
     (AddEquiv.toLinearEquiv (M := ↑((F ⋙ ModuleCat.restrictScalars φ).obj M))
       (M₂ := ↑((tensorLeft V).obj M)) (AddEquiv.refl _) (by
         intro r z
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul s m => rfl
         | add a b ha hb =>
             simpa only [map_add, smul_add] using congrArg₂ (· + ·) ha hb)).toModuleIso

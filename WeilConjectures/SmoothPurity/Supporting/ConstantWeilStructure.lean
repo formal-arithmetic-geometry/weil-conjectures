@@ -288,7 +288,7 @@ private def regularExtensionPresheafIso :
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simp only [map_add, hz, hz']
   | tmul s x =>
     change (regularExtensionApp α V).hom

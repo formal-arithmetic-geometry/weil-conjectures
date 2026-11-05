@@ -91,13 +91,13 @@ private theorem homLocalizedAction_comp
   induction a using TensorProduct.inductionOn with
   | add a c ha hc => simp only [map_add, LinearMap.add_apply, ha, hc]
   | tmul x a =>
-    induction a' with
+    induction a' using TensorProduct.inductionOn with
     | add a' c ha hc => simp only [map_add, LinearMap.add_apply, ha, hc]
     | tmul x' a' =>
-      induction b with
+      induction b using TensorProduct.inductionOn with
       | add b c hb hc => simp only [map_add, hb, hc]
       | tmul y b =>
-        induction b' with
+        induction b' using TensorProduct.inductionOn with
         | add b' c hb hc => simp only [map_add, LinearMap.add_apply, hb, hc]
         | tmul y' b' =>
           simp only [ScalarLocalization.composition_tmul,
@@ -177,7 +177,7 @@ theorem restrictedHom_existsUnique :
     change Localization.Away p ⊗[A] (P.obj.2.obj ⟶ Q.obj.2.obj) at b
     induction a using TensorProduct.inductionOn with
     | tmul c a =>
-      induction b with
+      induction b using TensorProduct.inductionOn with
       | tmul d b =>
         apply (conj_eqToHom_iff_heq _ _ (hG.1 P) (hG.1 Q)).2
         exact (pγ a b c d).trans

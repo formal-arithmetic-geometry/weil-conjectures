@@ -328,7 +328,7 @@ theorem comparison_tensor_transition_isPushout
     apply RingHom.ext
     intro z
     obtain ⟨z, rfl⟩ := (d k).symm.surjective z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
     | tmul b q =>
       change δ (c k ((α.app k).hom ((d k).symm (b ⊗ₜ[P] q)))) =
@@ -359,7 +359,7 @@ theorem comparison_tensor_transition_isPushout
     rw [h', hck a, hδφ]
     rfl
   obtain ⟨z, rfl⟩ := (Algebra.IsPushout.equiv Bj Cj Bk Ck).surjective z
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simpa only [map_add] using congrArg₂ (· + ·) hz hz'
   | tmul a b =>
     change h.hom ((c k).symm ((Algebra.IsPushout.equiv Bj Cj Bk Ck) (a ⊗ₜ[Bj] b))) =

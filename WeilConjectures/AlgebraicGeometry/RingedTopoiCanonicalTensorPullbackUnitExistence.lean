@@ -143,7 +143,7 @@ private theorem scalarExtension_unit_iso :
       apply ModuleCat.hom_ext
       apply LinearMap.ext
       intro x
-      induction x with
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add, hx, hy]
       | tmul s r =>
         change S.obj.obj W at s

@@ -85,7 +85,7 @@ private theorem product_range_affine {X : Scheme.{v}} {J : X.Modules}
   · rintro _ ⟨s, rfl⟩
     obtain ⟨z, rfl⟩ :=
       (Modules.quasiCoherent_tensor_product_affine_sections J M).2 U.1 U.2 |>.2 s
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul a t =>
       rw [Modules.tensorSectionsMap_tmul, ht]
       exact AddSubgroup.subset_closure ⟨a, t, rfl⟩
@@ -150,7 +150,7 @@ private theorem extended_product_range_affine {X Y : Scheme.{v}} (f : Y ⟶ X)
   · apply (AddSubgroup.closure_le _).mpr
     rintro s ⟨x, t, rfl⟩
     obtain ⟨z, rfl⟩ := (hc I inferInstance).2 x
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       rw [hcalc, LinearEquiv.map_smul]
       change (b * f.app V.1 _) • t ∈ H

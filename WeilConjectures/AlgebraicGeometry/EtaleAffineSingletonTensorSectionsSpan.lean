@@ -37,7 +37,7 @@ private theorem tensor_generators_span
   intro x hx
   clear hx
   obtain ⟨t, rfl⟩ := E.surjective x
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t s ht hs =>
     simpa only [map_add] using (AddSubgroup.closure (Set.range v)).add_mem ht hs
   | tmul m b =>

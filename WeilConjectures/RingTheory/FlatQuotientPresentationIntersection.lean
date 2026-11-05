@@ -48,7 +48,7 @@ private theorem quotient_lTensor_injective
   let eY := TensorProduct.equivOfCompatibleSMul R Q R C Y
   have he (z : C ⊗[Q] X) :
       (d.restrictScalars R).lTensor C (eX z) = eY (d.lTensor C z) := by
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul c x => rfl
     | add a b ha hb => simp [ha, hb]
   intro a b hab
@@ -135,7 +135,7 @@ theorem flat_quotient_presentation_intersection
   have hred (b : B) (hb : b ∈ J) (x : B ⊗[R] F) :
       a.rTensor F (b • x) = 0 := by
     have hb0 : a b = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr hb
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul c f =>
       simp only [TensorProduct.smul_tmul', smul_eq_mul, LinearMap.rTensor_tmul]
       have hab : a (b * c) = a b * a c := map_mul (Ideal.Quotient.mk J) b c
@@ -149,7 +149,7 @@ theorem flat_quotient_presentation_intersection
       (d.restrictScalars R).lTensor C (e.lTensor C (a.rTensor q.ker t)) =
         (TensorProduct.mk R Q F 1).lTensor C
           (a.rTensor F (q.ker.subtype.baseChange B t)) := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul b l => rfl
     | add x y hx hy => simp [hx, hy]
   have htc : e.lTensor C tc = 0 := by
@@ -165,7 +165,7 @@ theorem flat_quotient_presentation_intersection
     have hvcomm (v : B ⊗[R] e.ker) :
         a.rTensor q.ker (e.ker.subtype.baseChange B v) =
           e.ker.subtype.lTensor C (a.rTensor e.ker v) := by
-      induction v with
+      induction v using TensorProduct.inductionOn with
       | tmul b l => rfl
       | add x y hx hy => simp [hx, hy]
     rw [hvcomm, hv, hs]
@@ -178,7 +178,7 @@ theorem flat_quotient_presentation_intersection
       (q.ker ⊓ I • (⊤ : Submodule R F)).baseChange B := by
     change q.ker.subtype.baseChange B (e.ker.subtype.baseChange B v) ∈ _
     clear hv hvc hdiff hs htc ht hz hw
-    induction v with
+    induction v using TensorProduct.inductionOn with
     | tmul b l =>
       exact Submodule.tmul_mem_baseChange_of_mem b
         ⟨l.val.property, (heker l.val).mp l.property⟩
@@ -186,7 +186,7 @@ theorem flat_quotient_presentation_intersection
   have hsecond : q.ker.subtype.baseChange B (t - vl) ∈ J • q.ker.baseChange B := by
     rw [← hw]
     clear hw
-    induction w with
+    induction w using TensorProduct.inductionOn with
     | tmul b l =>
       have hb : (b : B) ∈ J := by
         apply Ideal.Quotient.eq_zero_iff_mem.mp

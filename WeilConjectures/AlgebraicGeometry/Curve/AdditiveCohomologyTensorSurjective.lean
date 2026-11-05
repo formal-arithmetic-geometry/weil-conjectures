@@ -99,7 +99,7 @@ theorem additive_cohomology_tensor_surjective
     TensorProduct.AlgebraTensorModule.congr (LinearEquiv.refl k' k') e
   let B := Scheme.Modules.H.baseChange (S := k') f M 1
   have hcomm (z : k' ⊗[k] Sheaf.H G 1) : e' (β z) = B (t z) := by
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul b x =>
       rw [hβ, e'.map_smul, he]
       change b • Scheme.Modules.H.baseChangeLinear (S := k') f M 1 (e x) =

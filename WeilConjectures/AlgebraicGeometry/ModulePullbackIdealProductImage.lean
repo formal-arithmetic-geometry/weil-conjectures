@@ -141,7 +141,7 @@ private theorem modulePullbackIdealProductImage_affine_range {X Y : Scheme.{v}} 
   · rintro _ ⟨s, rfl⟩
     obtain ⟨z, rfl⟩ := (hc K hK).2 s
     change φ.app U.1 (c K hK z) ∈ I • ⊤
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | tmul r b =>
       rw [hnat, TensorProduct.map_tmul, LinearMap.id_apply]
       have hr : i.app V.1 r ∈ J.ideal V •
@@ -168,7 +168,7 @@ private theorem modulePullbackIdealProductImage_affine_range {X Y : Scheme.{v}} 
         (n : Γ((Scheme.Modules.tensorPullback f).obj G, U.1)) :
         (f.appLE V.1 U.1 hUV).hom a • n ∈ Q := by
       obtain ⟨t, rfl⟩ := (hc G hG).2 n
-      induction t with
+      induction t using TensorProduct.inductionOn with
       | tmul m b =>
         have ham : a • m ∈ J.ideal V •
             (⊤ : Submodule Γ(Y, V.1) Γ(G, V.1)) :=

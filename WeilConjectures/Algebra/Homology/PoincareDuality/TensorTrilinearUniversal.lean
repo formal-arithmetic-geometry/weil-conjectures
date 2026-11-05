@@ -162,7 +162,7 @@ private theorem evaluate_injective (A B T H : SheafOfModules.{u}
   apply ModuleCat.hom_ext
   apply TensorProduct.ext'
   intro q z
-  induction q with
+  induction q using TensorProduct.inductionOn with
   | tmul x y => exact congrArg (fun b ↦ b.1 U x y z) h
   | add q q' hq hq' => simp only [TensorProduct.add_tmul, map_add, hq, hq']
 
@@ -190,9 +190,9 @@ private noncomputable def liftTriple (A B T H : SheafOfModules.{u}
     change TensorProduct.lift (TensorProduct.lift (curry R A B T H β V))
         ((siteTensorPresheaf (siteTensorPresheaf A.val B.val) T.val).map i q) =
       H.val.map i (TensorProduct.lift (TensorProduct.lift (curry R A B T H β U)) q)
-    induction q with
+    induction q using TensorProduct.inductionOn with
     | tmul q z =>
-      induction q with
+      induction q using TensorProduct.inductionOn with
       | tmul x y => exact β.2.2.2.2 i x y z
       | add q q' hq hq' =>
         simp only [TensorProduct.add_tmul, map_add, hq, hq']

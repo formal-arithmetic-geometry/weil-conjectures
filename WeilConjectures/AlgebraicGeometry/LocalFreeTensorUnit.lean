@@ -154,7 +154,7 @@ private noncomputable def localTensorPresheafIso :
     (SheafOfModules.free (R := (((sheafCompose _
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (S.over V)).over (q.X i)))
         (q.generators i).I).val.map g ((localTensorSectionIso α V M q i T).hom z)
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simp only [map_add, hz, hz']
   | tmul s m =>
     have ht := Classical.choose_spec

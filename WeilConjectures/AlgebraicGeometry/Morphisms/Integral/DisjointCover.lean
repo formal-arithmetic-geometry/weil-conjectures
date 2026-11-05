@@ -265,7 +265,7 @@ theorem exists_hom_disjoint_cover (c : Nbhd y) (R : Sieve (f.Etale.obj c.1))
   refine ⟨c', g ≫ c.restrictHom U₁ hu, ι, P, hdisj, hsup, fun i ↦ ?_⟩
   have := hP i
   rwa [Sieve.pullback_apply, Category.assoc, ← Functor.map_comp,
-    ← CategoryOfElements.comp_val] at this
+    ← Functor.Elements.comp_hom] at this
 
 end AlgebraicGeometry.Scheme.Hom.Nbhd
 

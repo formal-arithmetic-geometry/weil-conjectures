@@ -458,9 +458,9 @@ theorem between_laws :
   · intro K
     simp [betweenHom]
   · intro K L M f g
-    induction g with
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f with
+      induction f using TensorProduct.inductionOn with
       | tmul a f => simp [betweenHom, composition_tmul]
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']
@@ -486,7 +486,7 @@ theorem betweenNat_naturality (α : F ⟶ G) (K L : ScalarLocalization R C p)
       ((1 : Localization.Away p) ⊗ₜ[R] α.app K.obj) ≫ (between R p G).map f := by
   change composition R D p _ _ _ _ (betweenHom R p F _ _ f) =
     composition R D p _ _ _ (betweenHom R p G _ _ f) _
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul a f => simp [betweenHom, composition_tmul, α.naturality f]
   | add f g hf hg => simp [map_add, hf, hg]
 

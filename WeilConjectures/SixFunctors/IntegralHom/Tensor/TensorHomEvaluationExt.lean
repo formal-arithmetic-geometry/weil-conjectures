@@ -98,7 +98,7 @@ theorem tensorHomEvaluation_ext
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   apply hom_eval_ext.{c, v, r}
   intro U s x
-  induction s with
+  induction s using TensorProduct.inductionOn with
   | tmul v z => exact h U v z x
   | add v z hv hz =>
     simp only [map_add]

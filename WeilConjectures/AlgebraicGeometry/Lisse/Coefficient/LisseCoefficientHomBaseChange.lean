@@ -118,7 +118,7 @@ private theorem quotientTensorCoordinate_natural (b : Module.Basis ι R S) (I : 
     quotientTensorCoordinate b I N hN i
         (LinearMap.baseChange (S ⧸ I.map (algebraMap R S)) f.hom z) =
       f (quotientTensorCoordinate b I M hM i z) := by
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simp only [map_add, hz, hw]
   | tmul a m =>
     change @SMul.smul _ _ hN.hasSMul ((quotientBasis b I).repr a i) (f m) =
@@ -139,7 +139,7 @@ private theorem quotientTensor_reconstruct [Fintype ι] (b : Module.Basis ι R S
       TensorProduct.tmul R (1 : S ⧸ I.map (algebraMap R S))
         (quotientTensorCoordinate b I M hM i z)) = z := by
   classical
-  induction z with
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw =>
     simp only [map_add, TensorProduct.tmul_add, smul_add, Finset.sum_add_distrib, hz, hw]
   | tmul a m =>
@@ -372,7 +372,7 @@ private theorem restrictedScalarSheaf_ext
   let c := ((ModuleCat.ringExtendScalarsAdj.{d + 1, d + 1} f).leftAdjointUniq
     (ModuleCat.extendRestrictScalarsAdj.{d + 1, d + 1, d + 1} f)).app (M.obj.obj U)
   obtain ⟨t, rfl⟩ := (ConcreteCategory.bijective_of_isIso c.inv).surjective z
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simpa only [map_add] using congrArg₂ (· + ·) ht ht'
   | tmul a m =>
     have ht : c.inv (TensorProduct.tmul A a m) =
@@ -940,7 +940,7 @@ private theorem rational_span_of_integral_span
   let W := Submodule.span L
     (Set.range (fun g : F ⟶ G ↦ (lisseRationalScalarExtension l E Y L ι).map g))
   change f ∈ W
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | add f g hf hg => exact W.add_mem hf hg
   | tmul a u =>
     have hu := hi F.integral G.integral u

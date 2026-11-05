@@ -112,7 +112,7 @@ theorem ringKrullDim_adjoin_range_add_one_le {K L C R : Type*} [Field K] [Field 
   let Φ : E ⊗[F] L →ₐ[F] R := Algebra.TensorProduct.productMap Φ₀ j
   let D := Algebra.adjoin L (Set.range ι)
   have hΦD (x : E ⊗[F] L) : Φ x ∈ D := by
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => rw [map_add]; exact D.add_mem hx hy
     | tmul e l =>
       rw [Algebra.TensorProduct.productMap_apply_tmul]

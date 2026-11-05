@@ -77,7 +77,7 @@ private noncomputable def abTensorMap (X : Scheme.{u})
     { toFun := t
       map_add' := t.map_add
       map_smul' := fun s z ↦ by
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | add z z' hz hz' =>
           calc
             t (s • (z + z')) = t (s • z) + t (s • z') :=
@@ -106,7 +106,7 @@ private noncomputable abbrev abTensorPresheaf (X : Scheme.{u})
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul b m =>
       change (S.obj.map (𝟙 V) b) ⊗ₜ[ℤ] (M.obj.map (𝟙 V) m) = b ⊗ₜ[ℤ] m
@@ -119,7 +119,7 @@ private noncomputable abbrev abTensorPresheaf (X : Scheme.{u})
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul b m =>
       change (S.obj.map (f ≫ g) b) ⊗ₜ[ℤ] (M.obj.map (f ≫ g) m) =
@@ -176,7 +176,7 @@ private noncomputable def abTensorRawToExtension (X : Scheme.{u}) (ℓ n : ℕ)
         { toFun := f V
           map_add' := (f V).map_add
           map_smul' := fun b z ↦ by
-            induction z with
+            induction z using TensorProduct.inductionOn with
             | add z z' hz hz' =>
               exact ((congrArg (f V) (smul_add b z z')).trans ((f V).map_add _ _)).trans
                 ((congrArg₂ (fun x y : T.val.obj V ↦ x + y) hz hz').trans
@@ -195,7 +195,7 @@ private noncomputable def abTensorRawToExtension (X : Scheme.{u}) (ℓ n : ℕ)
         apply ModuleCat.hom_ext
         apply LinearMap.ext
         intro z
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | add z z' hz hz' => simp only [map_add, hz, hz']
         | tmul b m =>
           exact (SheafOfModules.scalarExtensionSection_naturality α M i b m).symm }
@@ -368,7 +368,7 @@ theorem constantZMod_scalarTensor (X : Scheme.{u}) (ℓ n : ℕ)
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z with
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul b m =>
       change q.val.app V (p.val.app V (η.app V (b ⊗ₜ[ℤ] m))) =

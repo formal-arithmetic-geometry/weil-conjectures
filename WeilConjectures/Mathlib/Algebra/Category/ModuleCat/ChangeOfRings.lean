@@ -53,12 +53,12 @@ noncomputable def ModuleCat.tensorEquivExtendScalars (R S : Type u) [CommRing R]
             ((TensorProduct.mk R S N).map_smul r (show S from s)) }
   have h₁ : ∀ x, invFun (toFun x) = x := by
     intro x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have h₂ : ∀ x, toFun (invFun x) = x := by
     intro x
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   exact
@@ -66,7 +66,7 @@ noncomputable def ModuleCat.tensorEquivExtendScalars (R S : Type u) [CommRing R]
       invFun := invFun
       map_add' := toFun.map_add
       map_smul' s x := by
-        induction x with
+        induction x using TensorProduct.inductionOn with
         | tmul s' n => rfl
         | add x y hx hy =>
           rw [smul_add, map_add, hx, hy, map_add]
@@ -179,7 +179,7 @@ noncomputable def extendScalarsCompRestrictScalarsIso' :
       ext x
       obtain ⟨y, rfl⟩ := (tensorEquivRestrictScalarsExtendScalars R S M).surjective x
       apply (tensorEquivRestrictScalarsExtendScalars R S N).injective
-      induction y with
+      induction y using TensorProduct.inductionOn with
       | tmul m s => rfl
       | add x y hx hy => simp only [map_add, hx, hy])
 

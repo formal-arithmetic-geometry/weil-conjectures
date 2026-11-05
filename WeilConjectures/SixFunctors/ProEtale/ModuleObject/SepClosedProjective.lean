@@ -63,7 +63,7 @@ theorem projective_presheafToSheaf_const (hT : IsTerminal T)
         simp only [Functor.const_obj_obj, Functor.const_obj_map, AddCommGrpCat.hom_comp,
           AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp, Function.comp_apply,
           AddCommGrpCat.hom_id, AddMonoidHom.id_apply, zmultiplesHom_apply,
-          AddEquiv.toAddMonoidHom_eq_coe, AddMonoidHom.coe_coe, map_zsmul]
+          AddEquiv.toAddMonoidHom_eq_coe, AddMonoidHom.coe_ofClass, map_zsmul]
         rw [← Functor.map_comp_apply, show (hT.from U.unop).op ≫ g = (hT.from V.unop).op from
           Quiver.Hom.unop_inj (hT.hom_ext _ _)] }
   refine ⟨(adj.homEquiv _ _).symm y', ?_⟩

@@ -134,7 +134,7 @@ theorem idealPowerProduct_isZero_iff_affine_cover (X : Scheme.{u})
         intro z
         obtain ⟨w, rfl⟩ :=
           (Modules.quasiCoherent_tensor_product_affine_sections J F).2 _ U.1.2 |>.2 z
-        induction w with
+        induction w using TensorProduct.inductionOn with
         | tmul a s =>
           rw [Modules.tensorSectionsMap_tmul, hm]
           exact Module.mem_annihilator.mp (h U.1 U.2

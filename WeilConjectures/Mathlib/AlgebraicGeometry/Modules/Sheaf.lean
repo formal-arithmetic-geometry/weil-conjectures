@@ -376,8 +376,8 @@ noncomputable def freeSectionsEquiv (I : Type u) [Fintype I] [DecidableEq I] :
     ext j
     dsimp only
     rw [map_sum, Finset.sum_eq_single j (fun i _ hi ↦ ?_) (by simp)]
-    · rw [freeπ_app_ιFree_app, if_pos rfl]
-    · rw [freeπ_app_ιFree_app, if_neg hi]
+    · rw [freeπ_app_ιFree_app, ite_eq_left rfl]
+    · rw [freeπ_app_ιFree_app, ite_eq_right hi]
 
 /-- The application `Γ(M, U) → Γ(N, U)` of a morphism of `𝒪_X`-modules, as a `Γ(X, U)`-linear
 map. -/

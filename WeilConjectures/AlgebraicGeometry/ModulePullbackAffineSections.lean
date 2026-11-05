@@ -128,13 +128,13 @@ theorem exists_tensorPullback_affine_sections
     apply tensorPullback_affine_sections_bijective f V U hUV G hG (c G)
     exact hp G
   · intro G hG b t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul s d => simp [hp, TensorProduct.smul_tmul', mul_smul]
     | add t t' ht ht' => simp_all only [map_add, smul_add]
   · intro G hG s b
     exact hp G s b
   · intro G G' hG hG' a t
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul s b =>
       simp only [TensorProduct.map_tmul, LinearMap.id_apply, hp]
       rw [Hom.app_smul]

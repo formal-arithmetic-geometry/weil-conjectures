@@ -215,7 +215,7 @@ theorem scalarExtensionTower_hom_ext {R S T : Sheaf J CommRingCat.{u}}
   rw [← PresheafOfModules.naturality_apply f.val,
     ← PresheafOfModules.naturality_apply g.val, scalarExtensionSection_naturality, ← ht]
   clear ht
-  induction t with
+  induction t using TensorProduct.inductionOn with
   | add t t' ih ih' =>
     erw [(η.app (op V)).hom.map_add, scalarExtensionSection_add,
       (f.val.app (op V)).hom.map_add, (g.val.app (op V)).hom.map_add, ih, ih']

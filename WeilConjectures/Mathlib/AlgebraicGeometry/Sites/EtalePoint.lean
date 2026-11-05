@@ -303,8 +303,8 @@ Elements (pointSmallEtale (s ≫ f)).fiber --- base change ---> Elements (pointS
 commutes, on the nose. -/
 lemma pointSmallEtaleElementsBaseChange_comp_π :
     pointSmallEtaleElementsBaseChange f s ⋙
-        CategoryOfElements.π (pointSmallEtale s).fiber =
-      CategoryOfElements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
+        Functor.Elements.π (pointSmallEtale s).fiber =
+      Functor.Elements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
   rfl
 
 end BaseChange
