@@ -98,6 +98,7 @@ noncomputable def PreOneHypercover.RelativeLimitPresentation.isColimitOfIsLimit 
     colimitIsoFlipCompColim_inv_app]
   congr 1
   rw [← Category.assoc]
+  simp only [HasColimit.ι_isoOfNatIso_inv_assoc, compEvaluation_inv_app, Category.id_comp]
   have h := colimitObjIsoColimitCompEvaluation_ι_inv (pres.multicospan P) j k
   refine (congrArg (· ≫ ((colimit.isColimit (pres.multicospan P)).coconePointUniqueUpToIso
     hd).hom.app k) h).trans ?_
