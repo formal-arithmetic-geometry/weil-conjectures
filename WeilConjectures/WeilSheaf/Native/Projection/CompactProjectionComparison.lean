@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedOpenProjectionSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperProjectionSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.MateAdjunctionChoice
+public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPastingMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
 
 /-! # The normalized compact-support projection and forget comparisons -/
@@ -102,7 +103,7 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
   rw [CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb _ _
     ((projectionGeometricPullComp k₀ l f).hom.app _) (by
       exact CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb _)]
-  have h := projectionForgetSquare_paste
+  have h := projectionForgetSquare_paste_monoidal
     (projectionOpenForgetIso k₀ l (c).i) (projectionProperForgetIso k₀ l (c).g)
     (compactProjectionForgetUpperStarIso k₀ l (c).i)
     (compactProjectionForgetUpperStarIso k₀ l (c).g)
