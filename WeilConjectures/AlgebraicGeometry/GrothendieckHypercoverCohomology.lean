@@ -86,7 +86,7 @@ private noncomputable def generalRefinementCochainHomotopy
         Functor.whiskerRight_app, Functor.rightOp_obj, NatTrans.rightOp_app,
         Category.assoc, HomologicalComplex.comp_f, HomologicalComplex.unopFunctor_map_f,
         alternatingFaceMapComplex_obj_X, Quiver.Hom.unop_op,
-        alternatingFaceMapComplex_map_f, SimplicialObject.whiskering_obj_map_app,
+        alternatingFaceMapComplex_map_f, Functor.whiskeringRight_obj_map,
         Functor.rightOp_map, HomologicalComplex.Hom.isoOfComponents_hom_f,
         HomologicalComplex.Hom.isoOfComponents_inv_f, Iso.refl_hom, Iso.refl_inv,
         Category.id_comp]

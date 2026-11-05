@@ -169,7 +169,7 @@ theorem noetherian_vanishing_of_constant_subsheaves
         exact Fin.elim0 i
       have hz : IsZero T := IsZero.of_epi_eq_zero g hgzero
       change IsZero ((Abelian.extFunctorObj _ p).obj T)
-      exact Functor.map_isZero _ hz
+      exact Functor.map_isZero (Abelian.extFunctorObj _ p) hz
     | succ n ih =>
       intro U hU T g hg
       let _ := hg
