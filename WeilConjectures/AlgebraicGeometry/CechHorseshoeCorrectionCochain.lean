@@ -23,6 +23,10 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false
 
+local instance (R : Type u) [Ring R] (J : Type*) [Small.{u} J] :
+    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
+
 private theorem cechMapπ {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F G : X.Modules} (f : F ⟶ G) (n : ℕ) (y : Fin (n + 1) → ι)
     (v : ((cechComplexFunctor U).obj F.presheafModuleCat).X n) :
