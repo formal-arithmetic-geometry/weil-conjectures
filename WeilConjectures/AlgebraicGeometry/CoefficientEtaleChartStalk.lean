@@ -181,15 +181,15 @@ theorem coefficient_etale_chart_stalk
   refine ⟨(?_ : (coefficientEtaleDerivedStalk X B x).obj K ≅
     DerivedCategory.Q.obj M).symm⟩
   exact ((Functor.mapDerivedCategoryNatIso hs).app K).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso F (R ⋙ T)).app K ≪≫
-    (Functor.mapDerivedCategoryCompIso R T).app (F.mapDerivedCategory.obj K) ≪≫
+    ((Functor.mapDerivedCategoryCompIso F (R ⋙ T)).app K).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso R T).app (F.mapDerivedCategory.obj K)).symm ≪≫
     dT.mapIso em ≪≫
     dT.mapIso
       ((constantSheaf (J.over W)
         (ModuleCat.{max v (u + 1)} B)).mapDerivedCategoryFactors.app M).symm ≪≫
-    ((Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (constantSheaf (J.over W) (ModuleCat.{max v (u + 1)} B)) T).app
-        (DerivedCategory.Q.obj M)).symm ≪≫
+        (DerivedCategory.Q.obj M) ≪≫
     (Functor.mapDerivedCategoryNatIso hc).app (DerivedCategory.Q.obj M) ≪≫
     (Functor.mapDerivedCategoryIdIso (ModuleCat.{max v (u + 1)} B)).app _
 
