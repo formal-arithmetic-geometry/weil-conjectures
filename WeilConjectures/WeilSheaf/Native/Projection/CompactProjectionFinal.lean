@@ -80,9 +80,10 @@ theorem projectionCompact_forget_square (M : WeilComplex k₀ l X) (N : WeilComp
       (f := fb) l (CondensedRing.compactificationOverField fb) cb
   let t := (compactProjectionForgetTensorIso k₀ l X).hom.app (M, (upperStar f).obj N) ≫
     (compactProjectionForget k₀ l X).obj M ◁ (projectionCompactPullForgetIso k₀ l f).hom.app N
-  have hη := CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
-    (f := fb) l (CondensedRing.compactificationOverField fb) cb
-      ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
+  have hη := open CondensedRing in
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
+      (f := fb) l (CondensedRing.compactificationOverField fb) cb
+        ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
   exact projectionForgetSquare_changeGeometricPush η
     ((compactProjectionForget k₀ l Y).map ((projectionCompactIso k₀ l f).hom.app (M, N)))
     ((projectionCompactificationForgetIso k₀ l f).hom.app _)

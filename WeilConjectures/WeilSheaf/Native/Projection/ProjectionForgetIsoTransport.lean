@@ -86,7 +86,7 @@ theorem projectionForgetSquare_of_iso
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, NatIso.prod,
     NatTrans.prod, Functor.comp_obj, Functor.prod_obj, Functor.id_obj, Category.assoc]
   rw [reassoc_of% hnD]
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp]
   rw [← I'.map_comp_assoc, Iso.hom_inv_id_app, I'.map_id, Category.id_comp]
   rw [← I'.map_comp, hc, I'.map_comp]
   rw [← I'.map_comp_assoc, reassoc_of% (h M N), ← hn]

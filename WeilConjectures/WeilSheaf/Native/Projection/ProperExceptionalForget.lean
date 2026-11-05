@@ -50,11 +50,16 @@ def properProjectionAdicForgetIso :
       forgetBoundedConstructibleAdic k₀ l Z ⋙ properProjectionAdicPush k₀ l g :=
   NatIso.ofComponents
     (fun M ↦ ObjectProperty.isoMk _ ((IsoAlgebra.derivedForgetCommIso
-      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))).app M.obj))
+      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+        (comp_over g (Spec (CommRingCat.of k₀))))).app M.obj))
     (fun φ ↦ ObjectProperty.hom_ext _ ((IsoAlgebra.derivedForgetCommIso
-      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))).hom.naturality
+      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+        (comp_over g (Spec (CommRingCat.of k₀))))).hom.naturality
         φ.hom))
 
+omit [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- The mate of the proper forget comparison is invertible for any choices of the exceptional
 right adjoints. The proof retains the geometric counit in the Weil lifting construction. -/
 theorem isIso_mateEquiv_properProjectionAdicForgetIso
@@ -68,7 +73,8 @@ theorem isIso_mateEquiv_properProjectionAdicForgetIso
     IsIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _
       (properProjectionAdicForgetIso k₀ l g).inv)).app M) := by
   exact IsoAlgebra.isIso_mateEquiv_restrictedDerivedForget_app
-    (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))
+    (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+      (comp_over g (Spec (CommRingCat.of k₀))))
     (DerivedCategory.boundedConstructibleAdic l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (DerivedCategory.boundedConstructibleAdic l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (fun _ hK ↦ hK.1) (fun K n hK ↦ ObjectProperty.le_shift _ n K hK)

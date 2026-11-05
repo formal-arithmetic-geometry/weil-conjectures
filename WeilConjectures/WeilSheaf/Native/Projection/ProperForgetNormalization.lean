@@ -97,7 +97,8 @@ lemma nativeProjectionUnderivedPushMate_normalization :
   let b := adicUpperStarLowerStarAdjunction l gb
   let c := CondensedRing.upperStarLowerStarAdjunction Λ gb
   let α₁ := (IsoAlgebra.mapOfNatIsoCompForgetIso
-    (adicUpperStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))).symm
+    (adicUpperStarGeometricFiberMapCompFrobeniusIso l g
+      (comp_over g (Spec (CommRingCat.of k₀))))).symm
   let α₂ := (adicUpperStarCompCondensedModIso l gb).symm
   let β₁ := IsoAlgebra.mapOfNatIsoCompForgetIso
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))
@@ -137,7 +138,8 @@ lemma nativeProjectionPushMate_normalization
           ((lowerStar k₀ l g).rightDerivedFunctor.obj M) ≫
       (adicSheafDerivedEquivCondensedMod l _).functor.map
         ((IsoAlgebra.derivedForgetCommIso
-          (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M) ≫
+          (adicLowerStarGeometricFiberMapCompFrobeniusIso l g
+            (comp_over g (Spec (CommRingCat.of k₀))))).hom.app M) ≫
       (projectionAdicCondensedDerivedPushIso l gb).hom.app
         ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M) ≫
       (CondensedRing.lowerStar Λ gb).rightDerivedFunctor.map
