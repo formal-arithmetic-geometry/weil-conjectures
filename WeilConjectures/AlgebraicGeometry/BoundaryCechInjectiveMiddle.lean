@@ -35,8 +35,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-local instance (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
-    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+private local instance boundaryCechModuleProducts (R : Type u) [Ring R] (J : Type v)
+    [Small.{u} J] : HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
 
 set_option backward.isDefEq.respectTransparency false in
