@@ -76,7 +76,6 @@ theorem etale_coefficient_product_identity_component
       (lowerStar AddCommGrpCat.{u + 1} (D.map t.2.op)).obj
         (Injective.under (F t.1))) t)
   convert h using 1
-  · congr! 3
-  · congr! 3
+  congr! 3
 
 end AlgebraicGeometry.Etale
