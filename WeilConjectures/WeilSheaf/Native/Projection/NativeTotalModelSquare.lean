@@ -19,6 +19,7 @@ set_option Elab.async false
 set_option trace.profiler true
 set_option trace.profiler.threshold 5000
 attribute [local instance 0] ModuleCat.isGrothendieckAbelian_of_commRing
+attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 
 universe u
 open CategoryTheory MonoidalCategory Limits
