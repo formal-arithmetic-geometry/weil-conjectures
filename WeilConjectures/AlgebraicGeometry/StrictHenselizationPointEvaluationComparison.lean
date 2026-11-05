@@ -95,7 +95,7 @@ theorem strictHenselizationPointEvaluation_comparison
       app := fun n ↦ n.unop.obj.2.left.appTop ≫ (ΓSpecIso (.of Ω)).hom
       naturality := by
         intro n m f
-        have h := congrArg Over.Hom.left f.unop.hom.property
+        have h := congrArg Over.Hom.left f.unop.hom.map_val
         change m.unop.obj.2.left ≫ f.unop.hom.1.left = n.unop.obj.2.left at h
         change f.unop.hom.1.left.appTop ≫
           m.unop.obj.2.left.appTop ≫ (ΓSpecIso (.of Ω)).hom = _
