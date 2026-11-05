@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Algebra.Group.Finsupp
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
