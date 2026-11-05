@@ -149,11 +149,18 @@ theorem coefficientProEtaleModuleDirectImage_isRightAdjoint {X Y : Scheme.{t}} (
             (ProEt.topology Z)).obj (rings Z)) (𝟙 _) (𝟙 _)
       (by ext : 2; exact (rings Z).obj.map_id _)
       (by ext : 2; exact (rings Z).obj.map_id _)
+  have : HasWeakSheafify (coefficientProEtaleModelTopology.{t, r} X)
+      AddCommGrpCat.{max r (t + 1)} := by
+    infer_instance
+  have : (coefficientProEtaleModelTopology.{t, r} X).WEqualsLocallyBijective
+      AddCommGrpCat.{max r (t + 1)} := by
+    infer_instance
   let smallPush := SheafOfModules.pushforward.{max r (t + 1)}
     (coefficientProEtaleModelRingMap f A)
   have : smallPush.IsRightAdjoint := by
-    dsimp [smallPush]
-    infer_instance
+    exact (SheafOfModules.PullbackConstruction.adjunction.{max r (t + 1)}
+      (F := coefficientProEtaleModelBaseChange f)
+      (coefficientProEtaleModelRingMap f A)).isRightAdjoint
   have hx : (e X).inverse.IsRightAdjoint := (e X).isRightAdjoint_inverse
   have hy : (e Y).functor.IsRightAdjoint := (e Y).isRightAdjoint_functor
   apply Functor.isRightAdjoint_of_iso
