@@ -105,7 +105,7 @@ theorem supported_open_extension
         Functor.isoWhiskerRight er e.functor ≪≫ Functor.leftUnitor e.functor) ≪≫
       e.counitIso
   let lrD : L.mapDerivedCategory ⋙ (schemeOpenRestriction X O).mapDerivedCategory ≅
-      𝟭 _ := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      𝟭 _ := Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso lr ≪≫ Functor.mapDerivedCategoryIdIso _
   have hff := adjD.fullyFaithfulLOfCompIsoId lrD
   let : L.mapDerivedCategory.Full := hff.full
