@@ -43,10 +43,10 @@ lemma exactDescentComparison_forget
     (hd : ∀ M, d.hom.app M = V.map (b.inv.app M) ≫ c.hom.app (T.obj M))
     (K : DerivedCategory A) :
     (mapDerivedCategorySquareIso d).hom.app K =
-      (mapDerivedCategoryCompIso S V).hom.app (L.mapDerivedCategory.obj K) ≫
+      (mapDerivedCategoryCompIso S V).inv.app (L.mapDerivedCategory.obj K) ≫
         V.mapDerivedCategory.map ((mapDerivedCategorySquareIso b).inv.app K) ≫
         (mapDerivedCategorySquareIso c).hom.app (T.mapDerivedCategory.obj K) ≫
-        R.mapDerivedCategory.map ((mapDerivedCategoryCompIso T U).inv.app K) := by
+        R.mapDerivedCategory.map ((mapDerivedCategoryCompIso T U).hom.app K) := by
   have h₁ := (derivedRepresents_mapDerivedCategoryCompIso S V).whiskerLeft (ofMap L)
   have h₂ := h₁.comp (derivedRepresents_associator_inv (ofMap L) (ofMap S) (ofMap V))
   have h₃ := h₂.comp ((derivedRepresents_mapDerivedCategorySquareIso b).inv.whiskerRight
