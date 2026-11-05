@@ -257,10 +257,10 @@ def sequenceRestrictionDerivedEvaluation
           (op n)).mapDerivedCategory ≅
       derivedSystemEvaluation B n ⋙
         (sequenceCoefficientRestriction (α.app (op n))).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso r.functor
+  ((Functor.mapDerivedCategoryCompIso r.functor).symm
     ((CategoryTheory.evaluation ℕᵒᵖ _).obj (op n))).symm ≪≫
     Functor.mapDerivedCategoryNatIso (r.evaluation n) ≪≫
-    Functor.mapDerivedCategoryCompIso (systemEvaluation B n)
+    (Functor.mapDerivedCategoryCompIso (systemEvaluation B n)).symm
       (sequenceCoefficientRestriction (α.app (op n)))
 
 /-- The two finite comparisons, with the actual total derived functors as their endpoints.

@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.FormalCompletionPushforwardLimitIso
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleLimitFull
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleLimitProjectionEpi
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Lifting compatible maps through the formal-functions comparison
 
