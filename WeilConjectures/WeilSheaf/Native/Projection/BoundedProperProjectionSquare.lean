@@ -57,8 +57,8 @@ lemma projectionProperForgetIso_factorization
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).hom.app
           ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory.obj M) ≫
       (CondensedRing.lowerStar Λ
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).
-          rightDerivedFunctor.map ((projectionRealizationCompIso k₀ l X).inv.app M) := by
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor.map
+          ((projectionRealizationCompIso k₀ l X).inv.app M) := by
   exact ProEtaleWeilSheaf.nativeProjectionPushMate_normalization k₀ l g M
 
 set_option backward.isDefEq.respectTransparency false in
