@@ -125,7 +125,7 @@ theorem dvr_uniformizer_root_algebra
     intro M hM
     let := hM
     have hc : M.comap (algebraMap B A) = IsLocalRing.maximalIdeal B :=
-      IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal M)
+      IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_under_of_isIntegral_of_isMaximal M)
     have hpiM : algebraMap B A pi ∈ M := by
       change pi ∈ M.comap (algebraMap B A)
       rw [hc, hpi.maximalIdeal_eq]
