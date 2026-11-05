@@ -70,6 +70,62 @@ variable {C₁ : Type u₁} [Category.{v₁} C₁]
   (J₃ : GrothendieckTopology C₃)
   [HasWeakSheafify J₁ D] [HasWeakSheafify J₂ D] [HasWeakSheafify J₃ D]
 
+private def constantDirect (F : C₁ ⥤ C₂) [F.IsContinuous J₁ J₂] (N : D) :
+    (constantSheaf J₁ D).obj N ⟶
+      (F.sheafPushforwardContinuous D J₁ J₂).obj ((constantSheaf J₂ D).obj N) :=
+  ((sheafificationAdjunction J₁ D).homEquiv _ _).symm
+    (Functor.whiskerLeft F.op (toSheafify J₂ ((Functor.const C₂ᵒᵖ).obj N)))
+
+private theorem constantDirect_unit (F : C₁ ⥤ C₂) [F.IsContinuous J₁ J₂]
+    (N : D) (W : C₁ᵒᵖ) :
+    (toSheafify J₁ ((Functor.const C₁ᵒᵖ).obj N)).app W ≫
+      (constantDirect J₁ J₂ F N).hom.app W =
+        (toSheafify J₂ ((Functor.const C₂ᵒᵖ).obj N)).app (F.op.obj W) := by
+  have h := ((sheafificationAdjunction J₁ D).homEquiv
+    ((Functor.const C₁ᵒᵖ).obj N)
+    ((F.sheafPushforwardContinuous D J₁ J₂).obj ((constantSheaf J₂ D).obj N))).apply_symm_apply
+    (Functor.whiskerLeft F.op (toSheafify J₂ ((Functor.const C₂ᵒᵖ).obj N)))
+  rw [Adjunction.homEquiv_unit] at h
+  exact congrArg (fun k ↦ k.app W) h
+
+private def constantInverse (F : C₁ ⥤ C₂) [F.IsContinuous J₁ J₂]
+    {L : Sheaf J₁ D ⥤ Sheaf J₂ D}
+    (a : L ⊣ F.sheafPushforwardContinuous D J₁ J₂) (N : D) :
+    L.obj ((constantSheaf J₁ D).obj N) ⟶ (constantSheaf J₂ D).obj N :=
+  (a.homEquiv _ _).symm (constantDirect J₁ J₂ F N)
+
+private theorem homEquiv_mate
+    {E E' : Type*} [Category E] [Category E']
+    {L L' : E ⥤ E'} {R R' : E' ⥤ E} (a : L ⊣ R) (b : L' ⊣ R')
+    (d : R' ≅ R) {X : E} {Y : E'} (t : L'.obj X ⟶ Y) :
+    a.homEquiv X Y
+        (((conjugateIsoEquiv a b).symm d.symm).inv.app X ≫ t) =
+      b.homEquiv X Y t ≫ d.hom.app Y := by
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Functor.map_comp,
+    ← Category.assoc]
+  change (a.unit.app X ≫
+      R.map (((conjugateEquiv b a).symm d.hom).app X)) ≫ R.map t = _
+  rw [← unit_conjugateEquiv_symm b a d.hom X, Category.assoc, ← d.hom.naturality]
+  simp only [Category.assoc]
+
+private theorem constantInverse_composite_adjunct
+    (F : C₁ ⥤ C₂) (G : C₂ ⥤ C₃)
+    [F.IsContinuous J₁ J₂] [G.IsContinuous J₂ J₃]
+    {L₁ : Sheaf J₁ D ⥤ Sheaf J₂ D} {L₂ : Sheaf J₂ D ⥤ Sheaf J₃ D}
+    (a₁ : L₁ ⊣ F.sheafPushforwardContinuous D J₁ J₂)
+    (a₂ : L₂ ⊣ G.sheafPushforwardContinuous D J₂ J₃) (N : D) :
+    (a₁.comp a₂).homEquiv _ _
+        (L₂.map (constantInverse J₁ J₂ F a₁ N) ≫ constantInverse J₂ J₃ G a₂ N) =
+      constantDirect J₁ J₂ F N ≫
+        (F.sheafPushforwardContinuous D J₁ J₂).map (constantDirect J₂ J₃ G N) := by
+  rw [Adjunction.comp_homEquiv]
+  change a₁.homEquiv _ _ (a₂.homEquiv _ _ _) = _
+  rw [Adjunction.homEquiv_naturality_left]
+  unfold constantInverse
+  rw [Equiv.apply_symm_apply, Adjunction.homEquiv_naturality_right,
+    Equiv.apply_symm_apply]
+
+
 end ConstantProof
 
 
@@ -134,6 +190,23 @@ private theorem comp_transport {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   subst h
   simp
 
+private theorem map_id_transport
+    {B C : Type*} [Category B] [Category C] (ν : B ⥤ C)
+    {X : B} {Y : C} (t : Y ⟶ ν.obj X) :
+    t ≫ ν.map (𝟙 X) = 𝟙 Y ≫ t := by
+  rw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
+
+private theorem comparison_transport_nat
+    {I B C D E : Type*} [Category B] [Category C] [Category D] [Category E]
+    (L : I → B ⥤ C) (P : I → D ⥤ E) (ν : B ⥤ D) (μ : C ⥤ E)
+    (c : ∀ t, ν ⋙ P t ≅ L t ⋙ μ) {f g : I} (h : g = f) :
+    (c f).hom ≫ Functor.whiskerRight (eqToIso (congrArg L h)).symm.hom μ =
+      Functor.whiskerLeft ν (eqToIso (congrArg P h.symm)).hom ≫ (c g).hom := by
+  subst g
+  ext X
+  change (c f).hom.app X ≫ μ.map (𝟙 _) = 𝟙 _ ≫ (c f).hom.app X
+  exact map_id_transport μ ((c f).hom.app X)
+
 private theorem pro_square_iso {D D' Z Z' : Scheme.{u}}
     (i : D ⟶ Z) (i' : D' ⟶ Z') (g : Z' ⟶ Z) (gD : D' ⟶ D)
     (sq : CommSq gD i' i g) :
@@ -143,6 +216,47 @@ private theorem pro_square_iso {D D' Z Z' : Scheme.{u}}
         upperStarComp Ab.{u + 1} gD i := by
   unfold integralSquare
   rfl
+
+private theorem paste_components
+    {B C : Type*} [Category B] [Category C] (ν : B ⥤ C)
+    {A₁ A₂ B₁ B₂ : B} {P Q R S : C}
+    (a : A₁ ⟶ A₂) (ai : A₂ ⟶ A₁) (b : B₁ ⟶ B₂) (t : A₁ ⟶ B₁)
+    (pi : Q ⟶ P) (q : R ⟶ S) (z : P ⟶ R)
+    (c : P ⟶ ν.obj A₁) (d : R ⟶ ν.obj B₁)
+    (u : Q ⟶ ν.obj A₂) (v : S ⟶ ν.obj B₂) (e : A₂ ⟶ B₂) (s : Q ⟶ S)
+    (hai : a ≫ ai = 𝟙 _) (ha : u = pi ≫ c ≫ ν.map a)
+    (hb : d ≫ ν.map b = q ≫ v) (ht : c ≫ ν.map t = z ≫ d)
+    (he : e = ai ≫ t ≫ b) (hs : s = pi ≫ z ≫ q) :
+    u ≫ ν.map e = s ≫ v := by
+  have hac : ν.map a ≫ ν.map ai = 𝟙 _ := by
+    rw [← Functor.map_comp, hai, CategoryTheory.Functor.map_id]
+  rw [ha, he, hs]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hac]
+  rw [reassoc_of% ht, hb]
+
+private theorem paste_components_assoc
+    {B C : Type*} [Category B] [Category C] (ν : B ⥤ C)
+    {A₁ A₂ B₁ B₂ : B} {P Q R S U V : C}
+    (a : A₁ ⟶ A₂) (ai : A₂ ⟶ A₁) (b : B₁ ⟶ B₂) (t : A₁ ⟶ B₁)
+    (pi : Q ⟶ P) (q : R ⟶ S) (z : P ⟶ R)
+    (c : P ⟶ ν.obj A₁) (d : R ⟶ ν.obj B₁)
+    (u₀ : Q ⟶ U) (u₁ : U ⟶ ν.obj A₂) (v₀ : S ⟶ V) (v₁ : V ⟶ ν.obj B₂)
+    (e : A₂ ⟶ B₂) (s : Q ⟶ S)
+    (hai : a ≫ ai = 𝟙 _) (ha : u₀ ≫ u₁ = pi ≫ c ≫ ν.map a)
+    (hb : d ≫ ν.map b = q ≫ v₀ ≫ v₁) (ht : c ≫ ν.map t = z ≫ d)
+    (he : e = ai ≫ t ≫ b) (hs : s = pi ≫ z ≫ q) :
+    u₀ ≫ u₁ ≫ ν.map e = s ≫ v₀ ≫ v₁ := by
+  simpa only [Category.assoc] using
+    paste_components ν a ai b t pi q z c d (u₀ ≫ u₁) (v₀ ≫ v₁) e s
+      hai ha hb ht he hs
+
+private theorem iso_factor
+    {C : Type*} [Category C] {P Q R S : C} (p : P ⟶ Q) (pi : Q ⟶ P)
+    (hpi : pi ≫ p = 𝟙 _) (c : P ⟶ R) (m : R ⟶ S) (u : Q ⟶ S)
+    (h : c ≫ m = p ≫ u) : u = pi ≫ c ≫ m := by
+  have hh := congrArg (fun t ↦ pi ≫ t) h
+  simpa only [Category.assoc, reassoc_of% hpi] using hh.symm
 
 private theorem comparison_comp_forward {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (F : Sheaf Z.smallEtaleTopology Ab.{u + 1}) :
@@ -170,6 +284,79 @@ private theorem comparison_comp_forward {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : 
 -- sheaf-pullback functors during equality transport unfolds large Kan extensions.
 -- L₁, L₂ are the etale path g then i'; L₁', L₂' are i then gD.
 -- R denotes the corresponding pro-etale paths, and K the site comparisons.
+private structure ClosedSquareData
+    (A₀ B B' C P Q Q' R : Type*) [Category A₀] [Category B] [Category B']
+    [Category C] [Category P] [Category Q] [Category Q'] [Category R] where
+  L₁ : A₀ ⥤ B
+  L₂ : B ⥤ C
+  L₁' : A₀ ⥤ B'
+  L₂' : B' ⥤ C
+  K₀ : A₀ ⥤ P
+  K₁ : B ⥤ Q
+  K₁' : B' ⥤ Q'
+  K₂ : C ⥤ R
+  R₁ : P ⥤ Q
+  R₂ : Q ⥤ R
+  R₁' : P ⥤ Q'
+  R₂' : Q' ⥤ R
+  c₁ : K₀ ⋙ R₁ ≅ L₁ ⋙ K₁
+  c₂ : K₁ ⋙ R₂ ≅ L₂ ⋙ K₂
+  c₁' : K₀ ⋙ R₁' ≅ L₁' ⋙ K₁'
+  c₂' : K₁' ⋙ R₂' ≅ L₂' ⋙ K₂
+  L : A₀ ⥤ C
+  L' : A₀ ⥤ C
+  T : P ⥤ R
+  T' : P ⥤ R
+  c : K₀ ⋙ T ≅ L ⋙ K₂
+  c' : K₀ ⋙ T' ≅ L' ⋙ K₂
+  a : L ≅ L₁ ⋙ L₂
+  a' : L' ≅ L₁' ⋙ L₂'
+  p : T ≅ R₁ ⋙ R₂
+  p' : T' ≅ R₁' ⋙ R₂'
+  e : L ≅ L'
+  d : T ≅ T'
+  se : L₁ ⋙ L₂ ≅ L₁' ⋙ L₂'
+  sp : R₁ ⋙ R₂ ≅ R₁' ⋙ R₂'
+
+private structure ClosedSquareLaws
+    {A₀ B B' C P Q Q' R : Type*} [Category A₀] [Category B] [Category B']
+    [Category C] [Category P] [Category Q] [Category Q'] [Category R]
+    (s : ClosedSquareData A₀ B B' C P Q Q' R) : Prop where
+  ha : ∀ F, s.R₂.map (s.c₁.hom.app F) ≫ s.c₂.hom.app (s.L₁.obj F) =
+    s.p.inv.app (s.K₀.obj F) ≫ s.c.hom.app F ≫ s.K₂.map (s.a.hom.app F)
+  hb : ∀ F, s.c'.hom.app F ≫ s.K₂.map (s.a'.hom.app F) =
+    s.p'.hom.app (s.K₀.obj F) ≫ s.R₂'.map (s.c₁'.hom.app F) ≫ s.c₂'.hom.app (s.L₁'.obj F)
+  ht : s.c.hom ≫ Functor.whiskerRight s.e.hom s.K₂ =
+    Functor.whiskerLeft s.K₀ s.d.hom ≫ s.c'.hom
+  he : s.se = s.a.symm ≪≫ s.e ≪≫ s.a'
+  hp : s.sp = s.p.symm ≪≫ s.d ≪≫ s.p'
+
+private theorem closedSquare_component
+    {A₀ B B' C P Q Q' R : Type*} [Category A₀] [Category B] [Category B']
+    [Category C] [Category P] [Category Q] [Category Q'] [Category R]
+    (s : ClosedSquareData A₀ B B' C P Q Q' R) (h : ClosedSquareLaws s) (F : A₀) :
+    s.R₂.map (s.c₁.hom.app F) ≫ s.c₂.hom.app (s.L₁.obj F) ≫
+        s.K₂.map (s.se.hom.app F) =
+      s.sp.hom.app (s.K₀.obj F) ≫ s.R₂'.map (s.c₁'.hom.app F) ≫
+        s.c₂'.hom.app (s.L₁'.obj F) := by
+  have he : s.se.hom.app F = s.a.inv.app F ≫ s.e.hom.app F ≫ s.a'.hom.app F := by
+    rw [h.he]
+    rfl
+  have hp : s.sp.hom.app (s.K₀.obj F) =
+      s.p.inv.app (s.K₀.obj F) ≫ s.d.hom.app (s.K₀.obj F) ≫
+        s.p'.hom.app (s.K₀.obj F) := by
+    rw [h.hp]
+    rfl
+  have ht := congrArg (fun t ↦ t.app F) h.ht
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at ht
+  exact paste_components_assoc s.K₂ (s.a.hom.app F) (s.a.inv.app F)
+    (s.a'.hom.app F) (s.e.hom.app F) (s.p.inv.app (s.K₀.obj F))
+    (s.p'.hom.app (s.K₀.obj F)) (s.d.hom.app (s.K₀.obj F))
+    (s.c.hom.app F) (s.c'.hom.app F) (s.R₂.map (s.c₁.hom.app F))
+    (s.c₂.hom.app (s.L₁.obj F)) (s.R₂'.map (s.c₁'.hom.app F))
+    (s.c₂'.hom.app (s.L₁'.obj F)) (s.se.hom.app F) (s.sp.hom.app (s.K₀.obj F))
+    (Iso.hom_inv_id_app s.a F) (h.ha F) (h.hb F) ht he hp
+
 private theorem etale_square_iso {D D' Z Z' : Scheme.{u}}
     (i : D ⟶ Z) (i' : D' ⟶ Z') (g : Z' ⟶ Z) (gD : D' ⟶ D)
     (sq : CommSq gD i' i g) :
@@ -277,6 +464,18 @@ private theorem cartierSquareLaws {D D' Z Z' : Scheme.{u}}
 
 
 end SquareProof
+
+private lemma transportedHom
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    {L : B ⥤ C} {R : C ⥤ B} {P : C ⥤ D} {Q : D ⥤ C} {S : D ⥤ B}
+    (a : L ⊣ R) (p : P ⊣ Q) (d : Q ⋙ R ≅ S)
+    (M : B) (N : D) (t : L.obj M ⟶ Q.obj N) :
+    ((a.comp p).ofNatIsoRight d).homEquiv M N ((p.homEquiv _ _).symm t) =
+      a.homEquiv _ _ t ≫ d.hom.app N := by
+  rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv]
+  change a.homEquiv _ _ (p.homEquiv _ _ ((p.homEquiv _ _).symm t)) ≫ d.hom.app N = _
+  rw [Equiv.apply_symm_apply]
+
 
 private lemma comparison_constant_inverse
     (T : Scheme.{u}) (M : Ab.{u + 1}) :
@@ -514,6 +713,45 @@ private theorem etale_exchange_counit {D D' Z Z' : Scheme.{u}}
 -- The mate argument uses only square coherence, the two source-counit equations,
 -- and compatibility of the constant maps. Work in abstract categories so that
 -- associativity and naturality never unfold a concrete sheaf construction.
+private theorem closedExchange_mates
+    {A₀ B B' C P Q Q' R : Type*} [Category A₀] [Category B] [Category B']
+    [Category C] [Category P] [Category Q] [Category Q'] [Category R]
+    (s : ClosedSquareData A₀ B B' C P Q Q' R)
+    (r : B' ⥤ A₀) (r' : C ⥤ B) (rp : Q' ⥤ P) (rp' : R ⥤ Q)
+    (a : s.R₂ ⊣ rp') (F : B') (F' : C) (G : Q') (G' : R)
+    (eps : s.L₁'.obj (r.obj F) ⟶ F) (eps' : s.L₂.obj (r'.obj F') ⟶ F')
+    (ep : s.R₁'.obj (rp.obj G) ⟶ G)
+    (cc : s.K₁'.obj F ⟶ G) (cc' : s.K₂.obj F' ⟶ G')
+    (cm : s.L₂'.obj F ⟶ F') (cp : s.R₂'.obj G ⟶ G')
+    (t : s.K₀.obj (r.obj F) ⟶ rp.obj G)
+    (t' : s.K₁.obj (r'.obj F') ⟶ rp'.obj G')
+    (ex : s.L₁.obj (r.obj F) ⟶ r'.obj F')
+    (h : ClosedSquareLaws s)
+    (ht : s.R₁'.map t ≫ ep = s.c₁'.hom.app (r.obj F) ≫ s.K₁'.map eps ≫ cc)
+    (ht' : s.R₂.map t' ≫ a.counit.app G' =
+      s.c₂.hom.app (r'.obj F') ≫ s.K₂.map eps' ≫ cc')
+    (hc : s.R₂'.map cc ≫ cp = s.c₂'.hom.app F ≫ s.K₂.map cm ≫ cc')
+    (he : s.L₂.map ex ≫ eps' = s.se.hom.app (r.obj F) ≫ s.L₂'.map eps ≫ cm) :
+    s.R₁.map t ≫ (a.homEquiv _ _)
+        (s.sp.hom.app (rp.obj G) ≫ s.R₂'.map ep ≫ cp) =
+      s.c₁.hom.app (r.obj F) ≫ s.K₁.map ex ≫ t' := by
+  apply (a.homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_naturality_left_symm, Equiv.symm_apply_apply]
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have hn := s.sp.hom.naturality t
+  simp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn, ← s.R₂'.map_comp_assoc, ht]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hc]
+  have hn' := s.c₂'.hom.naturality eps
+  simp only [Functor.comp_map] at hn'
+  rw [reassoc_of% hn', ← reassoc_of% closedSquare_component s h (r.obj F), ht']
+  have hn'' := s.c₂.hom.naturality ex
+  simp only [Functor.comp_map] at hn''
+  rw [reassoc_of% hn'']
+  simp only [← Functor.map_comp_assoc]
+  rw [he]
+
 /-- Site comparison intertwines the two closed exchanges on constant modules.
 Source: blueprint sk-lem-geo-cartier.proof.md, opening and final paragraphs
 (blueprint: lem-diagonal-integral-source-exchange).

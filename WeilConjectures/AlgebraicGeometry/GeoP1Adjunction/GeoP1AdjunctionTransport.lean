@@ -22,6 +22,7 @@ set_option backward.defeqAttrib.useBackward true
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.GeoP1Adjunction
 
+set_option linter.flexible false in
 /-- Transport an adjunction across equivalences, retaining both canonical formulas.
 Source: the final comparison paragraph of sk-prop-geo-p1-adjunction.proof.md
 (blueprint: geo-p1-adjunction-transport).
@@ -79,10 +80,9 @@ theorem transportAdjunction
       el, er, Iso.trans_hom, Functor.associator_hom_app,
       Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
       Functor.isoWhiskerRight_hom, Functor.leftUnitor_hom_app,
-      Functor.map_comp, Functor.comp_map, Category.assoc,
-      Equivalence.symm_unit, Equivalence.symm_counit]
+      Functor.comp_map, Category.assoc, Equivalence.symm_unit]
     rw [hrnat, hrnat, hrnat]
-    simp only [Functor.comp_map, ← R'.map_comp]
+    simp only [← R'.map_comp]
     rw [F.counit_naturality, F.counit_naturality_assoc, F.functor_unit_comp_assoc]
     simp only [R'.map_comp]
     rw [E.counitInv_app_functor]
@@ -98,7 +98,7 @@ theorem transportAdjunction
       Functor.associator_inv_app, Functor.isoWhiskerLeft_inv,
       Functor.isoWhiskerRight_inv, Functor.leftUnitor_inv_app,
       Functor.map_comp, Functor.comp_map, Category.assoc,
-      Equivalence.symm_unit, Equivalence.symm_counit]
+      Equivalence.symm_counit]
     have hr := r.hom.naturality (F.unit.app Y)
     simp only [Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hr
     have hc1 : r.hom.app Y ≫ R'.map (F.counitInv.app (F.functor.obj Y)) ≫
@@ -121,7 +121,7 @@ theorem transportAdjunction
     slice_lhs 2 3 =>
       rw [← F.functor.map_comp, ← L.map_comp]
       simp
-    simp only [Category.id_comp, Category.comp_id]
+    simp only [Category.id_comp]
     have ha : L.map (R.map (F.unit.app Y)) ≫
         a.counit.app (F.inverse.obj (F.functor.obj Y)) =
         a.counit.app Y ≫ F.unit.app Y := a.counit.naturality (F.unit.app Y)

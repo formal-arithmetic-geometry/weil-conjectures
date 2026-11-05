@@ -49,6 +49,30 @@ Source: the blueprint proof, “The colimit is filtered”
 abbrev StageHom (k : I) (a b : O) (ha : birth a ≤ k) (hb : birth b ≤ k) :=
   (⟨a, ha⟩ : StageObject birth k) ⟶ ⟨b, hb⟩
 
+/-- Exactly the four transition laws assumed in the directed local-category lemma.
+Source: the blueprint proof, “The colimit is filtered” and “Composition”
+(blueprint: lem-sfb-directed-local-category-quotient). -/
+structure Transitions where
+  /-- Transport a morphism without changing its two labels. -/
+  map : ∀ {k n : I} (h : k ≤ n) {a b : O} {ha : birth a ≤ k} {hb : birth b ≤ k},
+    StageHom birth k a b ha hb → StageHom birth n a b (ha.trans h) (hb.trans h)
+  /-- Transport to the same stage is the identity function. -/
+  map_refl : ∀ {k : I} {a b : O} {ha : birth a ≤ k} {hb : birth b ≤ k}
+    (g : StageHom birth k a b ha hb), map le_rfl g = g
+  /-- Successive transports equal direct transport. -/
+  map_trans : ∀ {k n p : I} (h : k ≤ n) (h' : n ≤ p)
+    {a b : O} {ha : birth a ≤ k} {hb : birth b ≤ k}
+    (g : StageHom birth k a b ha hb), map h' (map h g) = map (h.trans h') g
+  /-- Transport preserves stage identities. -/
+  map_id : ∀ {k n : I} (h : k ≤ n) (a : O) (ha : birth a ≤ k),
+    map h (𝟙 (⟨a, ha⟩ : StageObject birth k)) =
+      𝟙 (⟨a, ha.trans h⟩ : StageObject birth n)
+  /-- Transport preserves stage composition. -/
+  map_comp : ∀ {k n : I} (h : k ≤ n) {a b c : O}
+    {ha : birth a ≤ k} {hb : birth b ≤ k} {hc : birth c ≤ k}
+    (g : StageHom birth k a b ha hb) (f : StageHom birth k b c hb hc),
+    map h (g ≫ f) = map h g ≫ map h f
+
 variable {birth} (T : Transitions birth)
 
 /-- The common-stage preorder `J_ab`.
@@ -99,6 +123,105 @@ def classOf {a b : O} (r : Rep birth a b) : T.Hom a b := Quot.mk _ r
 Source: the blueprint proof, “The colimit is filtered”
 (blueprint: lem-sfb-directed-local-category-quotient). -/
 def generatedClass {a b : O} (r : Rep birth a b) : T.GeneratedHom a b := Quot.mk _ r
+
+variable [hI : Nonempty I] [hdir : IsDirectedOrder I]
+
+include hI hdir
+
+private theorem eventual_refl {a b : O} (r : Rep birth a b) : T.Eventual r r := by
+  have _ := hI
+  have _ := hdir
+  exact ⟨r.1.val, le_rfl, le_rfl, rfl⟩
+
+private theorem eventual_symm {a b : O} {r s : Rep birth a b}
+    (h : T.Eventual r s) : T.Eventual s r := by
+  have _ := hI
+  have _ := hdir
+  obtain ⟨p, hr, hs, e⟩ := h
+  exact ⟨p, hs, hr, e.symm⟩
+
+private theorem eventual_trans {a b : O} {r s t : Rep birth a b}
+    (h : T.Eventual r s) (h' : T.Eventual s t) : T.Eventual r t := by
+  have _ := hI
+  have _ := hdir
+  obtain ⟨p, hr, hs, e⟩ := h
+  obtain ⟨q, hs', ht, e'⟩ := h'
+  obtain ⟨m, hp, hq⟩ := exists_ge_ge p q
+  refine ⟨m, hr.trans hp, ht.trans hq, ?_⟩
+  calc
+    T.map (hr.trans hp) r.2 = T.map hp (T.map hr r.2) := (T.map_trans _ _ _).symm
+    _ = T.map hp (T.map hs s.2) := congrArg (T.map hp) e
+    _ = T.map (hs.trans hp) s.2 := T.map_trans _ _ _
+    _ = T.map hq (T.map hs' s.2) := (T.map_trans _ _ _).symm
+    _ = T.map hq (T.map ht t.2) := congrArg (T.map hq) e'
+    _ = T.map (ht.trans hq) t.2 := T.map_trans _ _ _
+
+private theorem step_eventual {a b : O} {r s : Rep birth a b}
+    (h : T.Step r s) : T.Eventual r s := by
+  have _ := hI
+  have _ := hdir
+  obtain ⟨h, e⟩ := h
+  exact ⟨s.1.val, h, le_rfl, e.trans (T.map_refl s.2).symm⟩
+
+/-- Eventual equality is an equivalence relation and is exactly the equivalence closure of `Step`.
+Source: the blueprint proof, “The colimit is filtered”
+(blueprint: lem-sfb-directed-local-category-quotient).
+Proof: take the original stage for reflexivity and reverse the equality for symmetry.
+For transitivity take an upper bound of the two witnesses, then use `map_trans`.
+A forward step is eventual equality at its target. Conversely two eventually equal
+representatives are connected by two forward steps to their common transported representative. -/
+theorem eventual_equivalence (a b : O) :
+    _root_.Equivalence (T.Eventual (a := a) (b := b)) ∧
+      ∀ r s : Rep birth a b, T.Eventual r s ↔ Relation.EqvGen T.Step r s := by
+  have _ := hI
+  have _ := hdir
+  refine ⟨⟨T.eventual_refl, fun h ↦ T.eventual_symm h,
+    fun h h' ↦ T.eventual_trans h h'⟩, ?_⟩
+  intro r s
+  constructor
+  · rintro ⟨p, hr, hs, e⟩
+    let t : Rep birth a b :=
+      ⟨⟨p, r.1.property.1.trans hr, r.1.property.2.trans hr⟩, T.map hr r.2⟩
+    exact Relation.EqvGen.trans r t s (Relation.EqvGen.rel _ _ ⟨hr, rfl⟩)
+      (Relation.EqvGen.symm _ _ (Relation.EqvGen.rel _ _ ⟨hs, e.symm⟩))
+  · intro h
+    induction h with
+    | rel r s h => exact T.step_eventual h
+    | refl r => exact T.eventual_refl r
+    | symm r s h ih => exact T.eventual_symm ih
+    | trans r s t h h' ih ih' => exact T.eventual_trans ih ih'
+
+/-- Every Hom class is represented, and equality is exactly the common-stage condition.
+Source: the blueprint proof, “The colimit is filtered”
+(blueprint: lem-sfb-directed-local-category-quotient).
+Proof: quotient induction supplies representatives. Equality in `Quot` is the equivalence
+closure of its relation, which equals that relation by `eventual_equivalence`. -/
+theorem classOf_properties (a b : O) :
+    Function.Surjective (T.classOf (a := a) (b := b)) ∧
+      ∀ r s : Rep birth a b, T.classOf r = T.classOf s ↔ T.Eventual r s := by
+  have _ := hI
+  have _ := hdir
+  refine ⟨?_, fun r s ↦ (T.eventual_equivalence a b).1.quot_mk_eq_iff r s⟩
+  intro x
+  induction x using Quot.inductionOn with
+  | h r => exact ⟨r, rfl⟩
+
+/-- The common-stage preorder is filtered, including nonemptiness.
+Source: the blueprint proof, “The colimit is filtered”
+(blueprint: lem-sfb-directed-local-category-quotient).
+Proof: an upper bound of the two birth indices belongs to `J_ab`; upper bounds of stages
+remain in `J_ab`. Parallel arrows in a preorder coincide and are equalized by the identity.
+This is `IsFiltered` from [def-weil-pbc-category-colimit]. -/
+theorem index_isFiltered (a b : O) : IsFiltered (Index birth a b) := by
+  have _ := E
+  have _ := hI
+  have _ := hdir
+  obtain ⟨k, ha, hb⟩ := exists_ge_ge (birth a) (birth b)
+  let : Nonempty (Index birth a b) := ⟨⟨k, ha, hb⟩⟩
+  let : IsDirectedOrder (Index birth a b) := ⟨fun k n ↦ by
+    obtain ⟨p, hk, hn⟩ := exists_ge_ge k.val n.val
+    exact ⟨⟨p, k.property.1.trans hk, k.property.2.trans hk⟩, hk, hn⟩⟩
+  infer_instance
 
 /-- The transition function on the canonical universe lifts, with both universes fixed.
 Source: the blueprint proof, “The colimit is filtered”
@@ -217,105 +340,6 @@ theorem existsUnique_desc (a b : O) (S : Type z)
   funext x
   induction x using Quot.inductionOn with
   | h r => exact hv r
-
-private theorem eventual_refl {a b : O} (r : Rep birth a b) : T.Eventual r r := by
-  have _ := hI
-  have _ := hdir
-  exact ⟨r.1.val, le_rfl, le_rfl, rfl⟩
-
-private theorem eventual_symm {a b : O} {r s : Rep birth a b}
-    (h : T.Eventual r s) : T.Eventual s r := by
-  have _ := hI
-  have _ := hdir
-  obtain ⟨p, hr, hs, e⟩ := h
-  exact ⟨p, hs, hr, e.symm⟩
-
-private theorem eventual_trans {a b : O} {r s t : Rep birth a b}
-    (h : T.Eventual r s) (h' : T.Eventual s t) : T.Eventual r t := by
-  have _ := hI
-  have _ := hdir
-  obtain ⟨p, hr, hs, e⟩ := h
-  obtain ⟨q, hs', ht, e'⟩ := h'
-  obtain ⟨m, hp, hq⟩ := exists_ge_ge p q
-  refine ⟨m, hr.trans hp, ht.trans hq, ?_⟩
-  calc
-    T.map (hr.trans hp) r.2 = T.map hp (T.map hr r.2) := (T.map_trans _ _ _).symm
-    _ = T.map hp (T.map hs s.2) := congrArg (T.map hp) e
-    _ = T.map (hs.trans hp) s.2 := T.map_trans _ _ _
-    _ = T.map hq (T.map hs' s.2) := (T.map_trans _ _ _).symm
-    _ = T.map hq (T.map ht t.2) := congrArg (T.map hq) e'
-    _ = T.map (ht.trans hq) t.2 := T.map_trans _ _ _
-
-private theorem step_eventual {a b : O} {r s : Rep birth a b}
-    (h : T.Step r s) : T.Eventual r s := by
-  have _ := hI
-  have _ := hdir
-  obtain ⟨h, e⟩ := h
-  exact ⟨s.1.val, h, le_rfl, e.trans (T.map_refl s.2).symm⟩
-
-/-- Eventual equality is an equivalence relation and is exactly the equivalence closure of `Step`.
-Source: the blueprint proof, “The colimit is filtered”
-(blueprint: lem-sfb-directed-local-category-quotient).
-Proof: take the original stage for reflexivity and reverse the equality for symmetry.
-For transitivity take an upper bound of the two witnesses, then use `map_trans`.
-A forward step is eventual equality at its target. Conversely two eventually equal
-representatives are connected by two forward steps to their common transported representative. -/
-theorem eventual_equivalence (a b : O) :
-    _root_.Equivalence (T.Eventual (a := a) (b := b)) ∧
-      ∀ r s : Rep birth a b, T.Eventual r s ↔ Relation.EqvGen T.Step r s := by
-  have _ := hI
-  have _ := hdir
-  refine ⟨⟨T.eventual_refl, fun h ↦ T.eventual_symm h,
-    fun h h' ↦ T.eventual_trans h h'⟩, ?_⟩
-  intro r s
-  constructor
-  · rintro ⟨p, hr, hs, e⟩
-    let t : Rep birth a b :=
-      ⟨⟨p, r.1.property.1.trans hr, r.1.property.2.trans hr⟩, T.map hr r.2⟩
-    exact Relation.EqvGen.trans r t s (Relation.EqvGen.rel _ _ ⟨hr, rfl⟩)
-      (Relation.EqvGen.symm _ _ (Relation.EqvGen.rel _ _ ⟨hs, e.symm⟩))
-  · intro h
-    induction h with
-    | rel r s h => exact T.step_eventual h
-    | refl r => exact T.eventual_refl r
-    | symm r s h ih => exact T.eventual_symm ih
-    | trans r s t h h' ih ih' => exact T.eventual_trans ih ih'
-
-/-- Every Hom class is represented, and equality is exactly the common-stage condition.
-Source: the blueprint proof, “The colimit is filtered”
-(blueprint: lem-sfb-directed-local-category-quotient).
-Proof: quotient induction supplies representatives. Equality in `Quot` is the equivalence
-closure of its relation, which equals that relation by `eventual_equivalence`. -/
-theorem classOf_properties (a b : O) :
-    Function.Surjective (T.classOf (a := a) (b := b)) ∧
-      ∀ r s : Rep birth a b, T.classOf r = T.classOf s ↔ T.Eventual r s := by
-  have _ := hI
-  have _ := hdir
-  refine ⟨?_, fun r s ↦ (T.eventual_equivalence a b).1.quot_mk_eq_iff r s⟩
-  intro x
-  induction x using Quot.inductionOn with
-  | h r => exact ⟨r, rfl⟩
-
-/-- The common-stage preorder is filtered, including nonemptiness.
-Source: the blueprint proof, “The colimit is filtered”
-(blueprint: lem-sfb-directed-local-category-quotient).
-Proof: an upper bound of the two birth indices belongs to `J_ab`; upper bounds of stages
-remain in `J_ab`. Parallel arrows in a preorder coincide and are equalized by the identity.
-This is `IsFiltered` from [def-weil-pbc-category-colimit]. -/
-theorem index_isFiltered (a b : O) : IsFiltered (Index birth a b) := by
-  have _ := E
-  have _ := hI
-  have _ := hdir
-  obtain ⟨k, ha, hb⟩ := exists_ge_ge (birth a) (birth b)
-  let : Nonempty (Index birth a b) := ⟨⟨k, ha, hb⟩⟩
-  let : IsDirectedOrder (Index birth a b) := ⟨fun k n ↦ by
-    obtain ⟨p, hk, hn⟩ := exists_ge_ge k.val n.val
-    exact ⟨⟨p, k.property.1.trans hk, k.property.2.trans hk⟩, hk, hn⟩⟩
-  infer_instance
-
-variable [hI : Nonempty I] [hdir : IsDirected I (· ≤ ·)]
-
-include hI hdir
 
 /-- A chosen common upper bound, used only in the concrete composition construction.
 Source: the blueprint proof, “Composition”

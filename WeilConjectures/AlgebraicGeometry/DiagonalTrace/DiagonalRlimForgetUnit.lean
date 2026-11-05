@@ -20,6 +20,10 @@ open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
+private abbrev Fgt (l : ℕ) [Fact l.Prime] :=
+  ModuleCat.restrictScalars (Int.castRingHom (ULift.{u + 1} ℤ_[l])) ⋙
+    forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}
+
 private theorem Fgt_leftAdjoint (l : ℕ) [Fact l.Prime] : (Fgt.{u} l).IsLeftAdjoint := by
   exact ((ModuleCat.restrictCoextendScalarsAdj.{u + 1, 0, u + 1}
     (Int.castRingHom (ULift.{u + 1} ℤ_[l]))).comp

@@ -102,8 +102,8 @@ theorem indConstructible_ext_vanishing_and_sums
       let R := Profinite.padicSubfieldCondensedRing ℓ E
       have hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
           R = Profinite.padicAlgClCondensedRing ℓ := Or.inl rfl
-      letI : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-      letI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+      have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+      have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
       have hs := det_ind_heart_ii_sums ℓ E X R hR
         (C := C.obj) (hC := C.property) q S B hB c hc
       simpa [R, coefficientHeartRingObj] using hs
@@ -112,8 +112,8 @@ theorem indConstructible_ext_vanishing_and_sums
       let R := Profinite.padicAlgClCondensedRing ℓ
       have hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
           R = Profinite.padicAlgClCondensedRing ℓ := Or.inr rfl
-      letI : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-      letI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+      have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+      have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
       have hs := det_ind_heart_ii_sums ℓ E X R hR
         (C := C.obj) (hC := C.property) q S B hB c hc
       simpa [R, coefficientHeartRingObj] using hs

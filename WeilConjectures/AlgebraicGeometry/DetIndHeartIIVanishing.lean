@@ -87,9 +87,9 @@ theorem det_ind_heart_ii_vanishing
       ∀ q : ℤ, (d : ℤ) < q →
         Subsingleton ((DerivedCategory.singleFunctor _ 0).obj C.obj ⟶
           (shiftFunctor _ q).obj ((DerivedCategory.singleFunctor _ 0).obj B))) := by
-  letI : IsLocallyNoetherian X :=
+  let : IsLocallyNoetherian X :=
     LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  letI : CompactSpace X :=
+  let : CompactSpace X :=
     QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
   rcases _hΛ with ⟨E, hE⟩ | hE
   · cases hE
@@ -126,7 +126,7 @@ theorem det_ind_heart_ii_vanishing
             preadditiveCoyoneda.obj
               (op ((DerivedCategory.singleFunctor _ 0).obj C.obj))).mapCocone
                 pres.cocone)
-      letI : IsIso e := hiso
+      let : IsIso e := hiso
       let Z : Ab.{u + 1} := colimit F
       have hsub : Subsingleton Z := by
         constructor
@@ -138,12 +138,12 @@ theorem det_ind_heart_ii_vanishing
         let k := IsFiltered.max i j
         let hik := IsFiltered.leftToMax i j
         let hjk := IsFiltered.rightToMax i j
-        letI : Subsingleton (F.obj k) := _hbound
+        let : Subsingleton (F.obj k) := _hbound
           ⟨pres.diag.obj k, hpres k⟩ q hq
         rw [← hxi, ← hyj]
         exact Concrete.isColimit_rep_eq_of_exists F xi yj
           ⟨k, hik, hjk, Subsingleton.elim _ _⟩
-      letI : Subsingleton Z := hsub
+      let : Subsingleton Z := hsub
       constructor
       intro f g
       have hfg : (inv e).hom f = (inv e).hom g := Subsingleton.elim _ _
@@ -184,7 +184,7 @@ theorem det_ind_heart_ii_vanishing
             preadditiveCoyoneda.obj
               (op ((DerivedCategory.singleFunctor _ 0).obj C.obj))).mapCocone
                 pres.cocone)
-      letI : IsIso e := hiso
+      let : IsIso e := hiso
       let Z : Ab.{u + 1} := colimit F
       have hsub : Subsingleton Z := by
         constructor
@@ -196,12 +196,12 @@ theorem det_ind_heart_ii_vanishing
         let k := IsFiltered.max i j
         let hik := IsFiltered.leftToMax i j
         let hjk := IsFiltered.rightToMax i j
-        letI : Subsingleton (F.obj k) := _hbound
+        let : Subsingleton (F.obj k) := _hbound
           ⟨pres.diag.obj k, hpres k⟩ q hq
         rw [← hxi, ← hyj]
         exact Concrete.isColimit_rep_eq_of_exists F xi yj
           ⟨k, hik, hjk, Subsingleton.elim _ _⟩
-      letI : Subsingleton Z := hsub
+      let : Subsingleton Z := hsub
       constructor
       intro f g
       have hfg : (inv e).hom f = (inv e).hom g := Subsingleton.elim _ _

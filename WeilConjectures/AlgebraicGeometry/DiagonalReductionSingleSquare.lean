@@ -23,6 +23,24 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 attribute [local implicit_reducible] DerivedCategory.singleFunctors
   HomotopyCategory.singleFunctors CochainComplex.singleFunctors
 
+/-- Termwise application preserves finite limits, since it preserves each finite
+limit shape pointwise. Source: Mathlib pointwise functor limits.
+(blueprint: lem-diagonal-exact-whiskering). -/
+instance diagonalReductionWhiskering_preservesFiniteLimits
+    {B D : Type*} [Category B] [Category D] [HasFiniteLimits B]
+    (G : B ⥤ D) [PreservesFiniteLimits G] :
+    PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ B D).obj G) where
+  preservesFiniteLimits _ _ _ := inferInstance
+
+/-- Termwise application preserves finite colimits, since it preserves each finite
+colimit shape pointwise. Source: Mathlib pointwise functor colimits.
+(blueprint: lem-diagonal-exact-whiskering). -/
+instance diagonalReductionWhiskering_preservesFiniteColimits
+    {B D : Type*} [Category B] [Category D] [HasFiniteColimits B]
+    (G : B ⥤ D) [PreservesFiniteColimits G] :
+    PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ B D).obj G) where
+  preservesFiniteColimits _ _ _ := inferInstance
+
 set_option maxHeartbeats 2000000 in
 -- The cochain single comparison checks several nested exact-functor constructions.
 /-- A comparison of reduction counits on a single complex gives its degree-zero square.
