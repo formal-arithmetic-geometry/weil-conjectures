@@ -34,6 +34,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open SheafOfModules
 namespace SheafOfModules.RingedPresentationOnSites
 
+attribute [local instance] SheafOfModules.sheafHasBinaryProduct
+
 private theorem reflect_binary
     {C D : Type*} [Category C] [Category D] [HasBinaryProducts C] [HasBinaryProducts D]
     (F : C ⥤ D) [PreservesFiniteProducts F]
