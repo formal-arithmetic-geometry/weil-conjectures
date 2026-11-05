@@ -249,13 +249,16 @@
 
 # BZ852 in progress
 
-- Branch: `u9/BZ852`; original baseline: `2ab2b07a323`.
-- Resumed after rereading the brief and progress notes; merged integrated bump `db406319f`.
-- The user instructed continuation after the two-file upstream restoration proposal.
-  Restored the original line-evaluation proof chain and `signed_line_power_flat`,
-  preserving all declaration statements and current imports.
-- Applied known BZ169 fixes: explicit coefficient/module carriers in `chart_basis`,
-  and a local unit-module scalar action for `cancellation_pure`.
-- Next: remote validation of both restored modules and SignedLineDerivedAction,
-  then direct importers and downstream layers as required.
+- Branch: `u9/BZ852`; original baseline: `2ab2b07a323`; integrated baseline: `db406319f`.
+- Restored the original LineEvaluationInversePair proof chain and `signed_line_power_flat`
+  after the user instructed continuation of the concrete two-file proposal.
+- Existing theorem statements and docstrings are unchanged. Repairs expose scalar carriers
+  in `chart_basis` and provide a private local scalar instance for `cancellation_pure`.
+- Assigned SignedLineDerivedAction and direct importer SignedLineDerivedBaseChange are green.
+- `ucheck-bump` at `d8d95ad22f12eb0cad385f9490dc058517797953`: rc=0, failed=0, 4005 jobs.
+  Both restored prerequisites, SignedLineOrdinaryConstraints, and SignedLineLocalizedCoherence
+  also rebuilt successfully (six modules total).
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ852-restored2-full.log`.
+- Next: check layer 2, CartesianCoefficientTwistsSupplement, and continue while fixable.
+- Patterns and exact rewrite rules: `/home/ubuntu/u9/bz/FIXES-BZ852.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
