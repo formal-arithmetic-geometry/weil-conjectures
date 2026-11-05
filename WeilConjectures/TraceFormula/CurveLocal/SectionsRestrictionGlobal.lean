@@ -149,6 +149,7 @@ lemma rightDerivedPullback_app_eq_of_adjunction
     exact comp_id _
   rw [rightDerivedPullback_fac_app, ← Qh.map_comp_assoc]
   erw [h₅]
+  rfl
 
 end CategoryTheory.Functor
 
