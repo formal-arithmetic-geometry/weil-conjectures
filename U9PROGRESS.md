@@ -105,3 +105,18 @@
 - No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+
+# BZ396 in progress
+
+- Branch: `u9/BZ396`; initial commit: `98654719bdfe7ff3e77ff047b3bce53405d2dc4a`.
+- Assigned module: `WeilConjectures.AlgebraicGeometry.Derived.DerivedExchangeModuleTermwiseSupplement`.
+- Baseline build reproduced 13 errors; proof/import fixes reduced them to 4.
+- The user instructed continuation after the exact four-line statement API proposal in
+  `/home/ubuntu/u9/bz/BZ396-statement-api.patch`; that patch is now applied.
+- The comparison isomorphism uses Mathlib's new orientation; the mathematical maps are preserved.
+- Localization is imported publicly and with `import all` for hidden identity transports.
+- Removed the obsolete local irreducibility attribute on the opaque comparison isomorphism.
+- Fix records, exact errors, occurrence counts, and build logs: `/home/ubuntu/u9/bz/FIXES-BZ396.md`.
+- Next: validate the assigned module with `ucheck-bump`, then check downstream importers.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat raises.
