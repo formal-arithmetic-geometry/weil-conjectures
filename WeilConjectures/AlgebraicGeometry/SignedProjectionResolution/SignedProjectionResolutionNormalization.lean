@@ -94,22 +94,6 @@ def totalMate : sourceComplex f R S c I F ⟶ pushTargetComplex f R S c I F := b
     (proEtaleRingModuleAdjunction f R S c) (proEtaleOrdinaryTensorPullback f R S c)
     (fun {_ _ _ _} v z ↦ proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z) I F
 
-/-- The specified finite-total retract inverse s. The existing construction has
-summand (1 tensor p_r) q_{I^a,N_r} f_*(1 tensor f^* i_r), by
-tensorAdjunctionTotalInverse_summand, including rank zero. No i_r or p_r is a chain map.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
-def totalInverse : pushTargetComplex f R S c I F ⟶ sourceComplex f R S c I F := by
-  letI := SheafOfModules.monoidalCategory R
-  letI := SheafOfModules.monoidalCategory S
-  let j := Classical.choose (proEtaleProjectionUnit_existsUnique f R S c).exists
-  let hj := Classical.choose_spec (proEtaleProjectionUnit_existsUnique f R S c).exists
-  exact tensorAdjunctionTotalInverse
-    (proEtaleRingModulePullback f R S c) (proEtaleRingModuleDirectImage f R S c)
-    (proEtaleRingModuleAdjunction f R S c) (proEtaleOrdinaryTensorPullback f R S c)
-    (fun {_ _ _ _} v z ↦ proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z)
-    j hj I F bounded package.N package.i package.p package.splitting
-
 private theorem transport_projection
     {C : Type*} [Category C] {D : Type*} [Category D]
     (L : C ⥤ D) (V : D ⥤ C) (T : C × C ⥤ C) (U : D × D ⥤ D)
