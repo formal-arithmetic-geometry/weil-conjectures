@@ -4068,6 +4068,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Compactificatio
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalCone
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalConeMap
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalConeMapPullback
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.PowMap
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
@@ -24910,6 +24911,7 @@ public import WeilConjectures.TraceFormula.ConstructibleGenerationLowerStar
 public import WeilConjectures.TraceFormula.ContractingAdditivity
 public import WeilConjectures.TraceFormula.ContractingClosedPiece
 public import WeilConjectures.TraceFormula.ContractingGraph
+public import WeilConjectures.TraceFormula.ContractingGraphCriterion
 public import WeilConjectures.TraceFormula.ContractingLocalTerm
 public import WeilConjectures.TraceFormula.ContractingOpenPiece
 public import WeilConjectures.TraceFormula.ContractingPieces
@@ -25186,8 +25188,10 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFacto
 public import WeilConjectures.TraceFormula.Specialization.ComponentModelHom
 public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialLiftUnit
+public import WeilConjectures.TraceFormula.Specialization.ComponentSpecializationIntegral
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClass
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
+public import WeilConjectures.TraceFormula.Specialization.ConstantFamilySmoothUnit
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
 public import WeilConjectures.TraceFormula.Specialization.ContractingSquaring
 public import WeilConjectures.TraceFormula.Specialization.CoordinateCompactification
@@ -25450,6 +25454,7 @@ public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnCompo
 public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginBaseChange
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginCentre
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginFiniteModule
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPow
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowFibre
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowModel
