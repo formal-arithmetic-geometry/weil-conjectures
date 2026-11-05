@@ -1,3 +1,17 @@
+# BZ819 in progress
+
+- Branch: `u9/BZ819`; starting commit: `b3093d8fb32f9515a8a68790234b27f5de49f457`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- The user instructed continuation after the concrete prerequisite-restoration proposal.
+  Restored four declarations in `ScalarInternalHomAdjunction` and
+  `RingedFiniteFreeHomBaseChangeData`, preserving their original statements and docstrings.
+- The original root error was a missing `ringedFiniteFreeHomBaseChange_complex` caused
+  by deletion commits `2ecab1add` and `e0251c19d`; its callers require it to remain.
+- Added Localization imports for the private scalar-adjunction proof's Qh reductions.
+- Next: validate the restored dependencies and assigned leaf with `ucheck-bump`, repair
+  any remaining proof errors, then check downstream importers and write DONE.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
