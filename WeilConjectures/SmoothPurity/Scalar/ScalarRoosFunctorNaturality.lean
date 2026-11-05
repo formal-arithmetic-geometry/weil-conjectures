@@ -18,7 +18,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 
 attribute [local implicit_reducible] integralOperationsRoos scalarRoosMap
-  Functor.mapHomologicalComplex
 
 section FunctorNaturality
 universe a b c d
