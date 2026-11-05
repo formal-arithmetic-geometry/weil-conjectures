@@ -240,3 +240,9 @@
 - Direct importer AffinePerfectTensorRoof is blocked by unowned
   DerivedPullbackTensorAssociativity.lean:323:12 (Type mismatch), also at 459:12.
 - Next build covers the four assigned/restored modules without the blocked importer.
+
+- The second remote build compiled AffinePerfectOpenRepresentCohomologyColimit (32s)
+  and AffinePerfectOpenRepresentCohomology (8.5s).
+- AffineKoszulSectionColimit also exhausted 200000 heartbeats at whnf. Restored its
+  original scoped 1000000 budget after this measured failure; no pre-deletion bound is raised.
+- Third validation batch again targets all four assigned/restored modules.
