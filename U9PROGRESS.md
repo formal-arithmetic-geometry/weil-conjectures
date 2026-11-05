@@ -142,17 +142,20 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ543 in progress
+# BZ543 complete
 
-- Branch: `u9/BZ543`; owned module: `CondensedQcqsPushforwardLocalComparison`.
-- Candidate local `HasZeroMorphisms` instance committed as `e12f4eef4`.
-- First ucheck-bump stopped in unowned `Presheaf.InternalHom`, before reaching the target.
-- On resume, found coordinator fix `04f9380d1`: public Mathlib Monoidal imports.
-  Merged integrated tip `8af5cb32483`; no independent edits to unowned modules.
-- Remote validation running; local log: `/home/ubuntu/u9/bz/BUILD-BZ543-resume1.log`.
-- Next: fix any owned errors, validate the leaf, then follow the brief's downstream layers.
-- Fix notes: `/home/ubuntu/u9/bz/FIXES-BZ543.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ543`; assigned module and six downstream modules passed together
+  through `ucheck-bump`: rc=0, failed=0, 4523 jobs.
+- Validated source commit: `a732a755a776bd6a4d43d64d629ef8638eb15798`.
+- Build tree: `poolb:43.166.81.121`; toolchain and Mathlib pins verified directly.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ543-final-full.log`.
+- Fix patterns and all seven module names: `/home/ubuntu/u9/bz/FIXES-BZ543.md`.
+- The four edited BZ543 modules add only local instance proofs and scoped
+  elaboration options. Existing statements and heartbeat limits are unchanged.
+- Imported tested prerequisite repairs and coordinator integration through `cfcb63ad77e`.
+- No local Lean/Lake, sorries in target sources, proof escapes, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ543.DONE`.
+- This final commit changes only progress documentation after the successful build.
 
 # BZ557 in progress
 
