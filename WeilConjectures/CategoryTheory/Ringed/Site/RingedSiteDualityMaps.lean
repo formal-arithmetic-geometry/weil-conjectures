@@ -609,11 +609,8 @@ noncomputable local instance ringedSiteUnitSMul
     (M : SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
     (U : Cᵒᵖ) :
-    SMul (((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0).val.obj U) (M.val.obj U) where
-  smul a x := @SMul.smul (R.obj.obj U) (M.val.obj U) (M.val.obj U).isModule.toSMul
-    (((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
-      (SheafOfModules.unit.{max c v r}
-        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))).hom.val.app U) a) x
+    SMul (((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0).val.obj U) (M.val.obj U) :=
+  (M.val.obj U).isModule.toSMul
 
 noncomputable local instance ringedSiteRestrictedUnitSMul
     (M : SheafOfModules.{max c v r}
@@ -622,14 +619,9 @@ noncomputable local instance ringedSiteRestrictedUnitSMul
     SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj
       ((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0).val).obj W)
       ((ModuleCat.restrictScalars
-        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
-          (M.val.obj (op W.unop.left))) where
-  smul a x := @SMul.smul (R.obj.obj (op W.unop.left)) (M.val.obj (op W.unop.left))
-    (M.val.obj (op W.unop.left)).isModule.toSMul
-    (((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
-      (SheafOfModules.unit.{max c v r}
-        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))).hom.val.app
-          (op W.unop.left)) a) x
+        (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj.map
+          f).hom).obj (M.val.obj (op W.unop.left))) :=
+  (M.val.obj (op W.unop.left)).isModule.toSMul
 
 -- These unused generated lemmas expand the native derived coefficient category.
 set_option genSizeOfSpec false in
@@ -747,13 +739,7 @@ theorem ringedSiteDualityMaps_exists : Nonempty (RingedSiteDualityModel.{c, v, r
     obtain ⟨ρ, hρ, he⟩ := K.rightUnitor_model P hP
     refine ⟨ρ.hom, ?_, ?_⟩
     · intro p U x a
-      let e := HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
-        (SheafOfModules.unit.{max c v r}
-          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
-      have he : e.inv.val.app U (e.hom.val.app U a) = a := by
-        exact congrArg (fun f ↦ f.val.app U a) e.hom_inv_id
-      simpa only [ringedTensorUnitSection, he] using
-        hρ p (Int.add_zero p) U (e.hom.val.app U a) x
+      exact hρ p (Int.add_zero p) U a x
     · rw [K.tensorIso_both P (ringedTensorUnitComplex.{c, v, r} J R) hP hunit] at he
       exact he
   · intro P Q V hP hQ hV
@@ -1189,7 +1175,7 @@ private theorem ringedSiteNormalizedSymmetry_eq
 
 end NormalizedSymmetry
 
-attribute [local semireducible] coefficientTotalTensor ringedSiteDualityUnitComplex
+attribute [local semireducible] coefficientTotalTensor
 
 private theorem ringedSiteTensorCoherence
     (M : RingedSiteDualityModel.{c, v, r, w} J R) :
