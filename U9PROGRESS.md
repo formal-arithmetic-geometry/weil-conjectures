@@ -245,3 +245,15 @@
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+# BZ856 in progress
+
+- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
+- Reread the brief and prior notes on continuation; no new LEAD lines were present.
+- User instructed continuation after the explicit five-upstream-module restoration proposal.
+  The six deleted prerequisites are restored from the reviewed draft, retaining later
+  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
+- Merged integrated bump branch `db406319f` before restoring the prerequisites.
+- Assigned theorem remains intact: it has live callers and cannot be pruned.
+- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
+- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
