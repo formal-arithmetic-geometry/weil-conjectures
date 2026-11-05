@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCoefficientFiniteFree
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestrictionComplete
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
-import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectImageCoherence
+import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeRestrictionDirectImageMate
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
 
@@ -1219,39 +1219,6 @@ theorem pbcScalarDirectImageMap_scalarMate :
   refine Eq.trans ?_ (congrArg TwoSquare.natTrans h)
   simp only [pbcScalarDirectImageMap, pbcActualScalarDirectImageMap, pbcScalarOrdinaryPullIso]
 
-private theorem scalarInverseMate_isIso_of_isIso
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    {L₁ L₁' : A ⥤ B} {R₁ : B ⥤ A} {L₂ L₂' : C ⥤ D} {R₂ : D ⥤ C}
-    {G : A ⥤ C} {H : B ⥤ D}
-    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : L₁' ⊣ R₁) (b₂ : L₂' ⊣ R₂)
-    (β : TwoSquare R₁ H G R₂)
-    (hb : IsIso (((mateEquiv b₁ b₂).symm β).natTrans)) :
-    IsIso (((mateEquiv a₁ a₂).symm β).natTrans) := by
-  let e₁ : L₁' ≅ L₁ := (conjugateIsoEquiv a₁ b₁).symm (Iso.refl R₁)
-  let e₂ : L₂' ≅ L₂ := (conjugateIsoEquiv a₂ b₂).symm (Iso.refl R₂)
-  have h₁ : conjugateEquiv a₁ b₁ e₁.hom = 𝟙 R₁ :=
-    (conjugateEquiv a₁ b₁).apply_symm_apply (𝟙 R₁)
-  have h₂ : conjugateEquiv a₂ b₂ e₂.hom = 𝟙 R₂ :=
-    (conjugateEquiv a₂ b₂).apply_symm_apply (𝟙 R₂)
-  let w := (mateEquiv a₁ a₂).symm β
-  let w' := (mateEquiv b₁ b₂).symm β
-  have h : w'.whiskerLeft e₁.hom = w.whiskerRight e₂.hom := by
-    apply (mateEquiv a₁ b₂).injective
-    rw [conjugateEquiv_mateEquiv_vcomp a₁ b₁ b₂ e₁.hom w',
-      mateEquiv_conjugateEquiv_vcomp a₁ a₂ b₂ w e₂.hom]
-    simp only [w, w', Equiv.apply_symm_apply, h₁, h₂]
-    ext X
-    simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom]
-  let : ∀ X, IsIso (w.natTrans.app X) := fun X ↦ by
-    have hc := congrArg (fun t ↦ t.natTrans.app X) h
-    change w'.app X ≫ H.map (e₁.hom.app X) = e₂.hom.app (G.obj X) ≫ w.app X at hc
-    have : IsIso (w'.app X) := NatIso.isIso_app_of_isIso _ X
-    have : IsIso (e₂.hom.app (G.obj X) ≫ w.app X) := by
-      rw [← hc]
-      infer_instance
-    exact IsIso.of_isIso_comp_left (e₂.hom.app (G.obj X)) (w.app X)
-  exact NatIso.isIso_of_isIso_app _
-
 /-- The canonical scalar/direct-image mate is invertible for finite coefficient extensions.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
 Proof: the target valuation ring is finite free over the source. Locally choose a
@@ -1261,49 +1228,10 @@ tensor formula as the mate, so descends independently of that basis. Equivalentl
 use the finite perfect projection formula and the tensor-unit normalization. -/
 @[instance] theorem pbcScalarDirectImageMap_isIso :
     IsIso (pbcScalarDirectImageMap l E F i g) := by
-  classical
-  obtain ⟨d, ⟨b⟩⟩ := pbcScalarCoefficient_finiteFree l E F i Y
-  let RE := (adicLisseForget Y).obj (pbcAdicCompletion Y (pbcIntegralDatum l E))
-  let N := SheafOfModules.unit RE
-  let : HasBiproduct (fun _ : Fin d ↦ N) := HasBiproduct.of_hasProduct _
-  let e : (∏ᶜ fun _ : Fin d ↦ N) ≅
-      SheafOfModules.free (R := RE) (ULift.{u + 1} (Fin d)) :=
-    (biproduct.isoProduct (fun _ : Fin d ↦ N)).symm ≪≫
-      biproduct.isoCoproduct (fun _ : Fin d ↦ N) ≪≫
-        Sigma.whiskerEquiv (Equiv.ulift.{u + 1, 0}).symm (fun _ ↦ Iso.refl N)
-  let R' : FiniteFreeDirectImage.Coefficients g :=
-    ⟨pbcAdicCompletion Y (pbcIntegralDatum l E), pbcAdicCompletion X (pbcIntegralDatum l E),
-      pbcCompletedCoefficientIso g (pbcIntegralDatum l E)⟩
-  let S' : FiniteFreeDirectImage.Coefficients g :=
-    ⟨pbcAdicCompletion Y (pbcIntegralDatum l F), pbcAdicCompletion X (pbcIntegralDatum l F),
-      pbcCompletedCoefficientIso g (pbcIntegralDatum l F)⟩
-  let a' : FiniteFreeDirectImage.CoefficientMap R' S' :=
-    ⟨pbcScalarCoefficientMap l E F i Y, pbcScalarCoefficientMap l E F i X,
-      pbcScalarCoefficientInverseSquare l E F i g⟩
-  obtain ⟨sY, sX, _, _, hi, _⟩ := FiniteFreeDirectImage.finiteFreeDirectImageCoherence g
-  have : IsIso (FiniteFreeDirectImage.comparison sY sX a') := (hi R' S' a' d ⟨b ≪≫ e⟩).1
+  obtain ⟨d, hfree⟩ := pbcScalarCoefficient_finiteFree l E F i Y
+  have hiso := FiniteFreeDirectImage.restrictionDirectImageMate_isIso g _ _ _ _ _ _ _ _
+    (pbcScalarCoefficientInverseSquare l E F i g) d hfree
   let δ := pbcScalarRestrictionDirectImage l E F i g
-  have hm : (mateEquiv (sX.adjunction a'.source) (sY.adjunction a'.target)
-      (TwoSquare.mk _ _ _ _ (FiniteFreeDirectImage.comparison sY sX a'))).natTrans =
-      δ.inv := by
-    rw [FiniteFreeDirectImage.comparison, iterated_mateEquiv_conjugateEquiv]
-    exact (conjugateEquiv _ _).apply_symm_apply δ.inv
-  have he : ((mateEquiv (sX.adjunction a'.source) (sY.adjunction a'.target)).symm
-      (TwoSquare.mk _ _ _ _ δ.inv)).natTrans =
-        FiniteFreeDirectImage.comparison sY sX a' := by
-    apply congrArg TwoSquare.natTrans
-    apply (mateEquiv (sX.adjunction a'.source) (sY.adjunction a'.target)).injective
-    rw [Equiv.apply_symm_apply]
-    ext K
-    exact (NatTrans.congr_app hm K).symm
-  have : IsIso (((mateEquiv (sX.adjunction a'.source)
-      (sY.adjunction a'.target)).symm (TwoSquare.mk _ _ _ _ δ.inv)).natTrans) := by
-    rw [he]
-    infer_instance
-  have hiso := scalarInverseMate_isIso_of_isIso
-    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
-    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
-    (sX.adjunction a'.source) (sY.adjunction a'.target) (TwoSquare.mk _ _ _ _ δ.inv) this
   have hs : mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
       (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
       (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g)) =
