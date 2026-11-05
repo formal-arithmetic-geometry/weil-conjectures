@@ -84,6 +84,7 @@ theorem schemeMVOpenComposition_complex_localization
     dsimp [b₀, schemeMVHomotopyOpenComposition, Functor.mapHomotopyCategoryCompIso,
       Quotient.natIsoLift, Quotient.natTransLift]
     rw [Functor.map_comp]
+    rfl
   dsimp only at hn ⊢
   rw [hb] at hn
   dsimp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
@@ -91,13 +92,19 @@ theorem schemeMVOpenComposition_complex_localization
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app]
   simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
     Functor.comp_obj, Functor.map_comp, Category.assoc]
-  erw [DerivedCategory.Qh.map_id]
-  simp only [Category.id_comp, Category.comp_id, Category.assoc,
-    ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
-  erw [F.rightDerivedFunctor.map_id, RY.rightDerivedFunctor.map_id]
-  simp only [Category.id_comp]
-  erw [β.hom.naturality_assoc, DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
-  rw [← Category.assoc, hn]
-  simp only [Functor.comp_map, Category.assoc]
+  repeat erw [DerivedCategory.Qh.map_id]
+  simp only [Category.id_comp, Functor.map_comp, Category.assoc]
+  erw [← (schemeDerivedDirectImage h).map_comp_assoc, Iso.hom_inv_id_app,
+    (schemeDerivedDirectImage h).map_id, Category.id_comp]
+  erw [← (schemeDerivedDirectImage W.ι).map_comp_assoc, Iso.hom_inv_id_app,
+    (schemeDerivedDirectImage W.ι).map_id, Category.id_comp]
+  erw [β.hom.naturality, DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  have ht := congrArg (fun t ↦
+    (DerivedCategory.quotientCompQhIso _).inv.app
+      ((F.mapHomologicalComplex (.up ℤ)).obj ((RX.mapHomologicalComplex (.up ℤ)).obj J)) ≫
+        t ≫ (schemeDerivedDirectImage W.ι).map
+          ((schemeDerivedDirectImage (h ∣_ W)).map
+            ((DerivedCategory.quotientCompQhIso _).hom.app J))) hn
+  simpa only [Functor.comp_map, Category.assoc] using ht
 
 end AlgebraicGeometry
