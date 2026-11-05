@@ -116,22 +116,30 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ469 in progress
+# BZ469 complete
 
 - Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
-- Assigned module passed `ucheck-bump` at `5c3da91d0` (4234 jobs, rc=0).
+- Assigned module and downstream continuation pass `ucheck-bump`: rc=0, failed=0,
+  4250 jobs on `newsrv:/home/ubuntu/u9n/bumpw1`.
+- Validated source commit: `aa9e4bf9dd9d54aaf2c32a7536f56be00764afeb`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ469-final-full.log`.
 - The user instructed continuation after the explicit compositor API proposal.
-  The assigned theorem and its Etale wrapper now use `.symm` at the four affected sites.
-- `StrictLocalInjectiveSourceComparison` passes after giving its proof-local `q'` the
-  explicit quotient-then-Plus.Qh endpoint required by the homotopy-category derived unit.
-  Applied the same local fix to the Strict/Local counterpart for final validation.
-- Direct importers Etale.EtaleInjectiveSectionsComparison and
-  StrictLocalInjectiveSourceComparison/Transition passed at `9eddb01a93`.
-- SourceStageSectionsNaturality, SourceDerivedSectionsNaturalityCore, and
-  SourceDerivedSectionsNaturality passed as second-layer dependencies.
-- StrictLocalInjectiveSourceSections is skipped: its unowned dependencies
+  Four approved statement sites use `.symm` for Mathlib's reversed compositor;
+  two proof-local q' annotations explicitly target quotient followed by Plus.Qh.
+- Green modules:
+- WeilConjectures.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+- WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison
+- WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+- WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceTransition
+- WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceComparison
+- WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality
+- WeilConjectures.AlgebraicGeometry.SourceDerivedSectionsNaturalityCore
+- WeilConjectures.AlgebraicGeometry.SourceDerivedSectionsNaturality
+- Skipped StrictLocalInjectiveSourceSections because unowned dependencies
   InjectiveExchangeSourceTransport, InjectiveExchangeTargetTransport, and
-  SourceLocalizedCocycleHomology fail. No edits to these blockers.
-- Next: final green batch including the Strict/Local comparison counterpart, then DONE.
-- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+  SourceLocalizedCocycleHomology fail. Their source files are untouched.
+- Patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ469-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ469.DONE`.
+- This final commit updates only progress documentation; Lean sources match the green build.
