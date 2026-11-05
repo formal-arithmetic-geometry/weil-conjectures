@@ -41,9 +41,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 
-attribute [expose] HomologicalComplexUpToQuasiIso.Qh
-attribute [expose] HomologicalComplexUpToQuasiIso.quotientCompQhIso
-
 private theorem qh_map_quotient
     {A : Type*} [Category* A] [Abelian A] [HasDerivedCategory A]
     {P Q : CochainComplex A ℤ} (t : P ⟶ Q) :
