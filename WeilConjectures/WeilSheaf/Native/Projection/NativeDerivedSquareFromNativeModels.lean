@@ -38,13 +38,13 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 local notation "CY" => ProEtaleWeilSheaf k₀ l Y
 local notation "CZ" => ProEtaleWeilSheaf k₀ l Z
 local notation "AY" => Mod
-  (Sheaf (Scheme.ProEt.topology (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) Ab)
+  (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab)
   (condensedRingObj (Profinite.padicAlgClRingObj l)
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))
 local notation "AZ" => Mod
-  (Sheaf (Scheme.ProEt.topology (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) Ab)
+  (Sheaf (Scheme.ProEt.topology (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab)
   (condensedRingObj (Profinite.padicAlgClRingObj l)
-    (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀))))
 
 variable (L : CY ⥤ CZ) (V : CZ ⥤ AZ) (F : CY ⥤ AY) (R : AY ⥤ AZ)
   [L.Additive] [V.Additive] [F.Additive] [R.Additive]

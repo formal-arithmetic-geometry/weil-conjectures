@@ -440,3 +440,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 11:36:02 CST: 113438 diagnostic48s fails only unknown pretty-print option pp.maxDepth. Remove the option and print differing expression heads only, bounding diagnostic output. No proof change.
 
 2026-11-05 11:37:53 CST: 113603 diagnostic49s reports ZERO non-proof data differences at hn. Together with identityG→G100k timeout, points to concrete type formation, not a data-instance diamond. Removed diagnostic and restored compact direct proof; new NativeDerivedSquareFromNativeModels fixes native tensor/model families while leaving L,V,F,R,e,t,rho abstract, accepting ProjectionRestrictionTensorNormalization in its named native form. Main now applies this native interface. Check the new helper at default200k first; no budget increase.
+
+2026-11-05 11:40:20 CST: 113754 new native wrapper13s fails only initial local notation quote-precheck on .geometricFiber, causing downstream missing-category recovery. Replace dot projections in local AY/AZ notation by explicit Scheme.Hom.geometricFiber. Same default200k.
