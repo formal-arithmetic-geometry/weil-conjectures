@@ -13,7 +13,7 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
 public import WeilConjectures.AlgebraicGeometry.OpenDerivedStalkIso
 import WeilConjectures.AlgebraicGeometry.OpenRestrictedOrdinaryComparisonSquare
-import WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitCompatibility
+import all WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitCompatibility
 
 /-! # Comparison square on literal restrictions
 

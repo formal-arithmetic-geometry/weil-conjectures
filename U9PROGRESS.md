@@ -246,15 +246,12 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ861 in progress
+# BZ862 in progress
 
-- Branch: `u9/BZ861`; starting commit: `db406319f`.
-- The user instructed continuation after the exact restoration and canonical-transport proposal.
-- Restored `tilde_preservesHomology`, `affineBaseChangeTildeCohomologyIso`, and
-  `affineTensorPullbackHomologySheafIso` in their original two upstream modules.
-- Their external references were checked before restoration; the assigned theorem is still used.
-- Replaced obsolete generated additive instances using `tilde.map_add` and added the
-  proposed canonical Q/Qh transports around the inverse counit.
-- Next: remote validation, then the direct importer and further layers under the brief.
-- Fix records and baseline diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ861.md`.
-- No local Lean/Lake execution, forbidden proof shortcuts, or heartbeat changes.
+- Branch: u9/BZ862; starting commit db406319f.
+- User continuation authorizes the previously proposed upstream prerequisite restoration.
+- Restored comparisonIntoPullback and the five-file counit prerequisite path from pre-prune commits.
+- Applied known public/implementation Localization imports for Qh definitional conversions.
+- The earlier ucheck-bump request is still queued; its runner takes the latest branch when a tree frees.
+- Next: commit/push restorations, repair remote build diagnostics, then continue downstream and write DONE.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ862.md. No local Lean/Lake or proof shortcuts.
