@@ -36,6 +36,8 @@ private noncomputable def toRationalization
     change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
     simp
   map_comp {X Y Z} f g := by
+    change Localization.Away p ⊗[R] (X.obj ⟶ Y.obj) at f
+    change Localization.Away p ⊗[R] (Y.obj ⟶ Z.obj) at g
     induction f using TensorProduct.inductionOn with
     | tmul a f =>
       induction g with
