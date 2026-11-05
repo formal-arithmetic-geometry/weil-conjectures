@@ -116,27 +116,68 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ457 in progress
+# BZ469 in progress
 
-- Branch: `u9/BZ457`; starting commit: `99a06bbbb`.
-- Assigned module: `WeilConjectures.Algebra.Homology.AffineDerivedPushforwardSheafEdge`.
-- Baseline and import-only remote builds identify one public statement mismatch:
-  `HomologicalComplexUpToQuasiIso.Qh` is `@[no_expose]` in pinned Mathlib.
-- The user instructed continuation after the explicit identity-cast proposal.
-  Applied `cast (by rfl)` around the unit morphism, with public and implementation
-  imports of `Mathlib.Algebra.Homology.Localization`.
-- Remote leaf validation is queued via `ucheck-bump`; no local Lean/Lake execution.
-- Next: fix any remaining proof errors, validate both direct importers, then the
-  normalization layer and write `/home/ubuntu/u9/state/BZ457.DONE`.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ457.md`.
+- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
+- The user instructed continuation after the exact two-site API proposal.
+  Applied `.symm` to both composition comparisons in
+  `injectiveSections_strictLocal_comparison`, preserving the original map directions
+  under Mathlib's reversed compositor.
+- Pinned API inspected at b63f6e8a; known quotient patterns do not match this module.
+- Next: remote validation, then up to four direct importers and a second downstream layer.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# BZ457 complete
+# BZ511 in progress
 
-- Branch: `u9/BZ457`; final source commit: `a15d4de9c`.
-- Assigned module green: `WeilConjectures.Algebra.Homology.AffineDerivedPushforwardSheafEdge`.
-- Leaf validation: `ucheck-bump` rc=0, failed=0, 3865 jobs at commit `a816d14e5c`; it was rebuilt again as a dependency in the final downstream attempt at `a15d4de9c`.
-- Direct importers attempted: `WeilConjectures.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` and `WeilConjectures.Algebra.Homology.AffinePushforwardCohomologyEdgeExists`. Their batch reached 4424/4426 targets and failed only in unowned `WeilConjectures.AlgebraicGeometry.Modules.StalkTensor.lean:372` with `Alternative zero has not been provided`; skipped per brief.
-- Final fix notes: `/home/ubuntu/u9/bz/FIXES-BZ457.md`.
-- Final leaf log: `/home/ubuntu/u9/bz/BUILD-BZ457-leaf-green-full.log`.
-- Downstream blocked log: `/home/ubuntu/u9/bz/BUILD-BZ457-downstream-blocked-current-full.log`.
-- No local Lean/Lake execution, sorry/admit/axiom/native_decide/kernel bypass, profiler probe, or heartbeat increase remains.
+- Branch: `u9/BZ511`; starting commit: `fa248eeed`.
+- The user instructed continuation after the exact two-private-helper API proposal.
+  The compositor inverse in `derivedCompSingle` and the direct compositor in
+  `derivedTripleNatSingle` are applied. The public theorem statement is unchanged.
+- Proofs now use Mathlib's single-object compositor lemma, hom naturality, and
+  hom/inv cancellation; the redundant `rfl` after `simp only` is removed.
+- Pinned Mathlib source was inspected at b63f6e8a. Patterns, occurrence counts,
+  and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
+- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
+  acquiring a tree. Next: validate the owned module and continue downstream.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ585 complete
+
+- Branch: `u9/BZ585`; starting commit: `8af5cb324`.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`
+  passed ucheck-bump: rc=0, failed=0, 2022 jobs, target rebuilt in 4.8s.
+- Validated commit: `db7bb14d08c2234513afd1b158e2524d33864d66`; newsrv bumpw4, Lean v4.35.0-rc3
+  and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24 confirmed on the build host.
+- Added the Localization public/import-all imports and made the two internal comparison
+  helpers private, following user continuation after that exact proposal. All statements,
+  proofs, binders, assumptions and existing docstrings are unchanged.
+- Contract audit: `/home/ubuntu/u9/bz/BZ585-contract-audit.txt`.
+  Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
+- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was attempted at
+  `c7cb6c306b`; the assigned module rebuilt successfully in that batch in 6.1s.
+- The importer is blocked by unowned `FreeComparisonMapDerivedCategory` (BZ584)
+  and six other dependencies. Stopped only the verified timeout process for this
+  build after confirming dependency failures. Result: rc=255, failed=7; the downstream
+  batch is not green. No downstream or external dependency sources were changed.
+- Skipped `LowerShriekForget`, `AffineLineBundle`, and `SmoothPurityNativeTraceCriterion`
+  under the brief's external-dependency rule. Only the assigned module is claimed green.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ585-downstream1-full.log`.
+- No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
+- Final documentation commit leaves Lean source identical to the green revision.
+
+# BZ605 in progress
+
+- Branch: `u9/BZ605`; baseline: `0d3c0ae938`.
+- Assigned module: `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf`.
+- The user instructed continuation after the exact `BZ605-public-api-proposal.patch`.
+  That patch is applied: the public chain-map hypothesis and homology comparison now
+  use direct `Q`, removing the obsolete identity quotient transport. All other
+  declaration headers remain unchanged.
+- Localization imports and proof-local identity normalization preserve both private
+  helper hypotheses. No local Lean/Lake, proof escapes, heartbeat changes, or profiler probes.
+- Next: remote validation of the unit and four direct importers, then one more downstream layer.
+- Fixes and build logs: `/home/ubuntu/u9/bz/FIXES-BZ605.md`.

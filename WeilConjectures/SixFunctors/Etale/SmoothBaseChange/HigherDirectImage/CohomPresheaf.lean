@@ -380,24 +380,18 @@ its image in `D⁺`. -/
 noncomputable abbrev Etale.homologyComparison :
     M.obj.homology 0 ⟶
       (DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M) :=
-  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj ≫
-    (DerivedCategory.homologyFunctor _ 0).map
-      ((DerivedCategory.quotientCompQhIso _).inv.app M.obj)
+  (DerivedCategory.homologyFunctorFactors _ 0).inv.app M.obj
 
 lemma Etale.derivedHomToHomology_app_eq {W : X.Etaleᵒᵖ}
     (β : (DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.freeSheaf Λ X).obj W.unop) ⟶
       DerivedCategory.Plus.Q.obj M)
     (f : (HomologicalComplex.single _ (.up ℤ) 0).obj ((Etale.freeSheaf Λ X).obj W.unop) ⟶ M.obj)
-    (hf : DerivedCategory.Plus.ι.map β =
-      DerivedCategory.Q.map f) :
+    (hf : DerivedCategory.Plus.ι.map β = DerivedCategory.Q.map f) :
     (Etale.derivedHomToHomology (DerivedCategory.Plus.Q.obj M)).app W β =
       DerivedCategory.singleCyclesHom _ ≫ HomologicalComplex.cyclesMap f 0 ≫
-        M.obj.homologyπ 0 ≫ Etale.homologyComparison M := by
-  change _ = _ ≫ 𝟙 _ at hf
-  rw [Category.comp_id] at hf
-  simpa only [Etale.homologyComparison, Functor.map_id, Category.comp_id] using
-    DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso_inv_app_comp_homologyFunctor_map
-      β f hf
+        M.obj.homologyπ 0 ≫ Etale.homologyComparison M :=
+  DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso_inv_app_comp_homologyFunctor_map
+    β f hf
 
 theorem Etale.isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
     Presheaf.IsLocallySurjective X.smallEtaleTopology
@@ -517,7 +511,7 @@ private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_hz {W : X.Etal
     (f : (HomologicalComplex.single _ (.up ℤ) 0).obj ((Etale.moduleFreeSheaf Λ X).obj W.unop) ⟶
       M.obj)
     (hf : DerivedCategory.Plus.ι.map β =
-      DerivedCategory.Q.map f) :
+      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj) :
     (DerivedCategory.singleCyclesHom ((Etale.moduleFreeSheaf Λ X).obj W.unop) ≫
       HomologicalComplex.cyclesMap f 0) ≫ M.obj.homologyπ 0 = 0 := by
   let z := DerivedCategory.singleCyclesHom ((Etale.moduleFreeSheaf Λ X).obj W.unop) ≫
@@ -529,7 +523,10 @@ private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_hz {W : X.Etal
     apply (Etale.moduleFreeSheafHomEquiv Λ W.unop
       ((DerivedCategory.Plus.homologyFunctor _ 0).obj (DerivedCategory.Plus.Q.obj M))).injective
     rw [Etale.moduleFreeSheafHomEquiv_apply, Etale.moduleFreeSheafHomEquiv_apply, map_zero]
-    have := Etale.derivedHomToHomology_app_eq M β f hf
+    have hf₀ : DerivedCategory.Plus.ι.map β = DerivedCategory.Q.map f := by
+      change _ = _ ≫ 𝟙 _ at hf
+      simpa only [Category.comp_id] using hf
+    have := Etale.derivedHomToHomology_app_eq M β f hf₀
     simp only [z, Category.assoc]
     rw [← this]
     exact hβ
@@ -548,7 +545,7 @@ private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_cover {W : X.E
     (f : (HomologicalComplex.single _ (.up ℤ) 0).obj ((Etale.moduleFreeSheaf Λ X).obj W.unop) ⟶
       M.obj)
     (hf : DerivedCategory.Plus.ι.map β =
-      DerivedCategory.Q.map f)
+      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj)
     (b' : (Etale.moduleFreeSheaf Λ X).obj V ⟶ M.obj.X (-1))
     (hφz : (Etale.moduleFreeSheaf Λ X).map g ≫
       (DerivedCategory.singleCyclesHom ((Etale.moduleFreeSheaf Λ X).obj W.unop) ≫
@@ -564,7 +561,7 @@ private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_cover {W : X.E
     exact hφz
   have hβ' : DerivedCategory.Plus.ι.map
       ((DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β) =
-        DerivedCategory.Q.map f' := by
+        DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
     rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
     rfl
   change _ = _ ≫ 𝟙 _ at hβ'
