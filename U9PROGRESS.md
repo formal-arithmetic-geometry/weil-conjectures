@@ -156,3 +156,13 @@
   so the supplied assignment and earlier BZ160 fix remain applicable.
 - Fix patterns and baseline logs: `/home/ubuntu/u9/bz/FIXES-BZ584.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
+
+## BZ584 assigned module green
+
+- `ucheck-bump WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory`
+  passed: rc=0, built=1, failed=0, 1890 jobs; target rebuilt in 4.1 seconds.
+- Validated source commit: `ac06f213ce0fa83101e06826d358d98662962dcf`.
+- Tree: `poolb:43.166.85.105`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ584-unit-full.log`.
+- Continuing with direct importers `LowerShriekForget`, `SmoothPurityCondensedCarrier`,
+  and `SmoothPurityShriekFreeComparison` under `WeilConjectures.WeilSheaf`.
