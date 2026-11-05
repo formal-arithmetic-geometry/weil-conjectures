@@ -53,18 +53,6 @@ namespace Etale
 
 section Identity
 
-/-- The projection map `R(𝟙 X)_* M ⊗ᴸ L ⟶ R(𝟙 X)_*(M ⊗ᴸ L(𝟙 X)^* L)` of the identity is an
-isomorphism, for any coefficients: the derived pullback `L(𝟙 X)^* ≅ 𝟭` is an equivalence and
-its tensor comparison is invertible. -/
-theorem isIso_rightDerivedLowerStarProjectionMap_id_app_app (X : Scheme.{u})
-    (M L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso (((rightDerivedLowerStarProjectionMap A (𝟙 X)).app M).app L) := by
-  have : L(((𝟙 X))^*[A]).IsEquivalence :=
-    Functor.isEquivalence_of_iso (leftDerivedUpperStarId A X).symm
-  exact (derivedUpperStarLowerStarAdjunction A (𝟙 X))
-    |>.isIso_rightAdjointProjectionMap_app_app_of_isEquivalence
-      (leftDerivedUpperStarTensorComparison A (𝟙 X)) M L
-
 end Identity
 
 variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
@@ -116,38 +104,6 @@ theorem projectionMapOfCompactification_comp_compactificationForgetSupports
   rw [← Iso.symm_hom, ← leftDerivedUpperStarCompactificationIso_eq] at h
   simp only [derivedTensor_map_app, derivedTensor_obj_map] at h
   exact h
-
-/-- **For a proper morphism the compactly supported projection formula is the direct-image
-projection formula**: for any compactification `c` of a proper `f`, the projection map `PF_c`
-is invertible at `(K, L)` if and only if the projection map
-`Rf_*K ⊗ᴸ L ⟶ Rf_*(K ⊗ᴸ Lf^*L)` is. -/
-theorem isIso_projectionMapOfCompactification_app_app_iff_of_isProper [IsProper f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    IsIso (((projectionMapOfCompactification A c).app K).app L) ↔
-      IsIso (((rightDerivedLowerStarProjectionMap A f).app K).app L) := by
-  have h := projectionMapOfCompactification_comp_compactificationForgetSupports A c K L
-  refine ⟨fun _ ↦ ?_, fun _ ↦ ?_⟩
-  · have : IsIso (((projectionMapOfCompactification A c).app K).app L ≫
-        (compactificationForgetSupports A c).app
-          (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L))) := inferInstance
-    rw [h] at this
-    exact IsIso.of_isIso_comp_left (((-⊗ᴸ-(Y)[A]).map
-      ((compactificationForgetSupports A c).app K)).app L) _
-  · have : IsIso (((-⊗ᴸ-(Y)[A]).map ((compactificationForgetSupports A c).app K)).app L ≫
-        ((rightDerivedLowerStarProjectionMap A f).app K).app L) := inferInstance
-    rw [← h] at this
-    exact IsIso.of_isIso_comp_right _ ((compactificationForgetSupports A c).app
-      (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)))
-
-/-- **The projection formula for a compactification of the identity**: for any
-compactification `c` of `𝟙 X`, the projection map `PF_c` is an isomorphism, for any
-coefficients. -/
-theorem isIso_projectionMapOfCompactification_id_app_app (c : Compactification (𝟙 X))
-    (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso (((projectionMapOfCompactification A c).app K).app L) := by
-  rw [isIso_projectionMapOfCompactification_app_app_iff_of_isProper]
-  exact isIso_rightDerivedLowerStarProjectionMap_id_app_app A X K L
 
 end Etale
 

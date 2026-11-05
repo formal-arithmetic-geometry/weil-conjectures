@@ -121,14 +121,6 @@ def Etale.localizationRestriction :
     (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The sections of `j_f^* G` over `T → V` are the sections of `G` over `T → V → U`. -/
-lemma Etale.localizationRestriction_obj_val_obj (G : Sheaf U.smallEtaleTopology A)
-    (b : V.Etale) :
-    ((Etale.localizationRestriction A f h).obj G).obj.obj (op b) =
-      G.obj.obj (op ((MorphismProperty.Over.map ⊤ h).obj b)) :=
-  rfl
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `j_f^*` acts on morphisms by whiskering along `(MorphismProperty.Over.map ⊤ h).op`. -/
 lemma Etale.localizationRestriction_map_hom_app {G G' : Sheaf U.smallEtaleTopology A}
     (φ : G ⟶ G') (b : V.Etale) :
@@ -151,15 +143,6 @@ instance : (Etale.localizationLowerShriek A f h).IsLeftAdjoint :=
 
 instance : (Etale.localizationRestriction A f h).IsRightAdjoint :=
   (Etale.localizationLowerShriekAdjunction A f h).isRightAdjoint
-
-/-- The lower shriek agrees with mathlib's abstract left adjoint
-`(MorphismProperty.Over.map ⊤ h).sheafPullback` of the restriction functor. -/
-noncomputable def Etale.localizationLowerShriekIsoSheafPullback :
-    (MorphismProperty.Over.map ⊤ h).sheafPullback A
-        (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) ≅
-      Etale.localizationLowerShriek A f h :=
-  Functor.sheafPullbackConstruction.sheafPullbackIso (MorphismProperty.Over.map ⊤ h) A
-    (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)
 
 end Adjunction
 
@@ -221,21 +204,6 @@ noncomputable def Etale.localizationLowerShriekPresheaf :
     (V.Etaleᵒᵖ ⥤ A) ⥤ (U.Etaleᵒᵖ ⥤ A) :=
   (MorphismProperty.Over.map ⊤ h).op.lan
 
-/-- The presheaf-level adjunction between `j_{f,!}^{pre}` and restriction. -/
-noncomputable def Etale.localizationLowerShriekPresheafAdjunction :
-    Etale.localizationLowerShriekPresheaf A f h ⊣
-      (Functor.whiskeringLeft V.Etaleᵒᵖ U.Etaleᵒᵖ A).obj (MorphismProperty.Over.map ⊤ h).op :=
-  (MorphismProperty.Over.map ⊤ h).op.lanAdjunction A
-
-/-- The lower shriek is definitionally the left Kan extension on presheaves followed by
-sheafification. -/
-lemma Etale.localizationLowerShriek_eq :
-    Etale.localizationLowerShriek A f h =
-      sheafToPresheaf V.smallEtaleTopology A ⋙
-        Etale.localizationLowerShriekPresheaf A f h ⋙
-          presheafToSheaf U.smallEtaleTopology A :=
-  rfl
-
 end Presheaf
 
 /-! ### The extension by zero along an open immersion -/
@@ -252,14 +220,6 @@ open Etale
 def Etale.openImmersionRestriction :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf U.smallEtaleTopology A :=
   Etale.localizationRestriction A j inferInstance
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The sections of `j^* G` over `T → U` are the sections of `G` over `T → U → X`. -/
-lemma Etale.openImmersionRestriction_obj_val_obj (G : Sheaf X.smallEtaleTopology A)
-    (b : U.Etale) :
-    ((Etale.openImmersionRestriction A j).obj G).obj.obj (op b) =
-      G.obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ j)).obj b)) :=
-  rfl
 
 /-- Restriction along an open immersion is left adjoint to the pushforward `j_*`: this is
 the right half of the triple `j_! ⊣ j^* ⊣ j_*`. -/

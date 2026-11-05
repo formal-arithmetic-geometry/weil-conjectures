@@ -168,31 +168,6 @@ private lemma exists_algHomEquivFixedFieldPointsFiber {m : ℕ} (hm : m ≠ 0) (
   exact ⟨Equiv.ofBijective _ (f.bijective_fixedFieldPointOfAlgHom _
     (IsAlgClosed.lift : FiniteField.galoisExtension k m →ₐ[k] Ω) ψ hψ' y)⟩
 
-/-- **Fixed points over a point.** For `ψ : x ↦ x ^ (q ^ m)`, `m ≥ 1`, the number of `ψ`-fixed
-`Ω`-points of `X` lying over a point `y` is `deg y` if `deg y ∣ m`, and `0` otherwise. -/
-theorem Hom.natCard_fixedFieldPoints_fiber {m : ℕ} (hm : m ≠ 0) (ψ : Ω →+* Ω)
-    (hψ : ∀ a, ψ a = a ^ (Nat.card k ^ m)) (y : X) :
-    Nat.card {g : f.fixedFieldPoints ψ // g.1.base default = y} =
-      if f.degreeOver y ∣ m then f.degreeOver y else 0 := by
-  let := (f.residueFieldAlgebraMap y).toAlgebra
-  obtain ⟨e⟩ := exists_algHomEquivFixedFieldPointsFiber f hm ψ hψ y
-  have : Finite (FiniteField.galoisExtension k m) := Module.finite_of_finite k
-  rw [← Nat.card_congr e]
-  by_cases hdvd : f.degreeOver y ∣ m
-  · rw [if_pos hdvd]
-    have hdvd' : Module.finrank k (X.residueField y) ∣
-        Module.finrank k (FiniteField.galoisExtension k m) := by
-      rw [FiniteField.finrank_galoisExtension k m hm]
-      exact hdvd
-    rw [FiniteField.natCard_algHom_of_finrank_dvd hdvd']
-    rfl
-  · rw [if_neg hdvd]
-    have : IsEmpty (X.residueField y →ₐ[k] FiniteField.galoisExtension k m) := by
-      rw [← not_nonempty_iff, FiniteField.nonempty_algHom_iff_finrank_dvd,
-        FiniteField.finrank_galoisExtension k m hm]
-      exact hdvd
-    exact Nat.card_of_isEmpty
-
 /-- A `ψ`-fixed `Ω`-point of `X`, for `ψ : x ↦ x ^ (q ^ m)` and `m ≥ 1`, lies over a point with
 finite residue field whose degree divides `m`. -/
 theorem Hom.mem_finitePoints_of_mem_fixedFieldPoints {m : ℕ} (hm : m ≠ 0) (ψ : Ω →+* Ω)
@@ -223,30 +198,5 @@ theorem Hom.finite_fixedFieldPoints [QuasiCompact f] [LocallyOfFiniteType f] {m 
   obtain ⟨hfin, hdvd⟩ := f.mem_finitePoints_of_mem_fixedFieldPoints hm ψ hψ hg
   exact Set.mem_iUnion₂.2 ⟨⟨g.base default, hfin⟩, Nat.le_of_dvd (Nat.pos_of_ne_zero hm) hdvd,
     ⟨⟨g, hg⟩, rfl⟩, rfl⟩
-
-/-- **Regrouping a sum over fixed points.** For `ψ : x ↦ x ^ (q ^ m)`, `m ≥ 1`, and a function
-`h` on the points of `X`, the sum of `h` over the underlying points of the `ψ`-fixed `Ω`-points
-of `X` is `∑_{deg y ∣ m} deg y • h y`, over the closed points `y` of `X`; the sum may be taken
-over any finite set `T` of closed points containing those of degree dividing `m`. -/
-theorem Hom.sum_fixedFieldPoints {m : ℕ} (hm : m ≠ 0) (ψ : Ω →+* Ω)
-    (hψ : ∀ a, ψ a = a ^ (Nat.card k ^ m)) [Fintype (f.fixedFieldPoints ψ)] {M : Type*}
-    [AddCommMonoid M] (h : X → M) {T : Finset X.finitePoints}
-    (hT : ∀ y : X.finitePoints, f.degreeOver y.1 ∣ m → y ∈ T) :
-    ∑ g : f.fixedFieldPoints ψ, h (g.1.base default) =
-      ∑ y ∈ T with f.degreeOver y.1 ∣ m, f.degreeOver y.1 • h y.1 := by
-  classical
-  let π : f.fixedFieldPoints ψ → X.finitePoints := fun g ↦
-    ⟨g.1.base default, (f.mem_finitePoints_of_mem_fixedFieldPoints hm ψ hψ g.2).1⟩
-  have hπ (g : f.fixedFieldPoints ψ) (_ : g ∈ Finset.univ) :
-      π g ∈ T.filter fun y ↦ f.degreeOver y.1 ∣ m :=
-    have hdvd := (f.mem_finitePoints_of_mem_fixedFieldPoints hm ψ hψ g.2).2
-    Finset.mem_filter.2 ⟨hT _ hdvd, hdvd⟩
-  rw [← Finset.sum_fiberwise_of_maps_to hπ]
-  refine Finset.sum_congr rfl fun y hy ↦ ?_
-  rw [Finset.sum_congr rfl fun g hg ↦ congrArg h (congrArg Subtype.val
-    (Finset.mem_filter.1 hg).2), Finset.sum_const, ← Fintype.card_subtype,
-    ← Nat.card_eq_fintype_card,
-    Nat.card_congr (Equiv.subtypeEquivRight fun g ↦ Subtype.ext_iff),
-    f.natCard_fixedFieldPoints_fiber hm ψ hψ, if_pos (Finset.mem_filter.1 hy).2]
 
 end AlgebraicGeometry.Scheme

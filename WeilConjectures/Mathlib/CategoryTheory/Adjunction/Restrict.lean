@@ -123,16 +123,4 @@ variable {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Categor
   {L' : C' ⥤ D'} {R' : D' ⥤ C'} (adj' : L' ⊣ R') {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
   (comm : iD ⋙ R' ≅ R ⋙ iC) (h : ∀ X, iD.essImage (L'.obj (iC.obj X)))
 
-/-- **Left adjoints commute with fully faithful functors preserved by them.** If the right
-adjoints commute with the fully faithful functors `iC`, `iD`, and the left adjoint `L'` maps the
-image of `iC` into the essential image of `iD`, then the left adjoints commute with `iC`, `iD`:
-`iC ⋙ L' ≅ L ⋙ iD`. -/
-noncomputable def compIsoOfForallMemEssImage : iC ⋙ L' ≅ L ⋙ iD :=
-  have := hiD.full
-  have := hiD.faithful
-  (Functor.essImage.liftFunctorCompIso (iC ⋙ L') iD h).symm ≪≫
-    Functor.isoWhiskerRight
-      ((adj'.restrictFullyFaithful hiC hiD
-        (Functor.essImage.liftFunctorCompIso (iC ⋙ L') iD h).symm comm).leftAdjointUniq adj) iD
-
 end CategoryTheory.Adjunction

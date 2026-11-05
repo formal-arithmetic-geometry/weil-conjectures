@@ -56,78 +56,8 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {X : Scheme.{u}}
 
-/-- On the pro-étale site, `1 - t` is an epimorphism on a product `∏ Fₙ` of the terms of a tower
-`F` of sheaves of modules with epimorphic transitions, `t` being the transition endomorphism:
-the `R¹lim` of such a tower vanishes. The site is covered by weakly contractible objects
-(Stacks 0990), on which this is the Mittag-Leffler property of towers of surjections. -/
-lemma epi_one_sub_of_epi {Λ : Type (u + 1)} [Ring Λ]
-    {F : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)}
-    {P : Fan fun n : ℕ ↦ F.obj (op n)} (hP : IsLimit P) (t : P.pt ⟶ P.pt)
-    (ht : ∀ n : ℕ, t ≫ P.proj n = P.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op)
-    (hF : ∀ n : ℕ, Epi (F.map (homOfLE n.le_succ).op)) : Epi (𝟙 P.pt - t) :=
-  GrothendieckTopology.epi_one_sub_of_forall_exists.{u + 1, u}
-    (fun W : X.ProEt ↦ IsAffine W.left ∧
-      (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)
-    (fun V ↦ Scheme.ProEt.exists_isWeaklyContractible_cover V) (fun _ hW ↦ hW.2) hP t ht hF
-
 variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} {ϖ : R}
   {K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))}
   {L : ∀ n : ℕ, DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (R ⧸ I ^ n)))}
-
-/-- A normalized tower `K` of étale complexes, pulled back to the pro-étale site by the exact
-`R`-linear functor `ν^*`, is represented by a normalized `ϖ`-adic tower of complexes of
-pro-étale sheaves. -/
-lemma exists_iso_isNormalizedAdicTower_comparison (hϖ : ϖ ∈ nonZeroDivisors R)
-    (hI : I = Ideal.span {ϖ}) (hK : DerivedCategory.IsNormalizedTower X.smallEtaleTopology I K L) :
-    ∃ (T : ℕᵒᵖ ⥤ CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ℤ)
-      (_ : T ⋙ DerivedCategory.Q ≅
-        K ⋙ (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory),
-      CochainComplex.IsNormalizedAdicTower ϖ T := by
-  obtain ⟨T, E, hT⟩ := hK.exists_iso_isNormalizedAdicTower hϖ hI
-  let F := comparisonUpperStar (ModuleCat.{u + 1} R) X
-  exact ⟨T ⋙ F.mapHomologicalComplex _, Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft T F.mapDerivedCategoryFactors.symm ≪≫ (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight E _, hT.map⟩
-
-/-- *Realization* of a normalized system of étale complexes: let `K_n ∈ D(X_ét, R ⧸ Iⁿ)` be a
-normalized system (`DerivedCategory.IsNormalizedTower`) with `I = (ϖ)`, `ϖ` a nonzerodivisor,
-and let `K_R = R lim_n ν^* K_n` be the derived limit in
-`D(X_proét, R)` of its pullback by the comparison functor `ν^*` (the point of a homotopy limit
-cone `c`). Then
-1. `K_R` is derived complete;
-2. `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ ν^* K_n` for every `n`, compatibly with the transitions, the legs
-   `K_R ⟶ ν^* K_n` of `c` being the reduction maps followed by these isomorphisms;
-3. if the `K_n` share a range of degrees `[a, b]`, then `K_R` lies in `[a, b]`.
-
-The range statement is false for the derived limit on the étale site, which is why the
-realization is taken on the pro-étale site. -/
-theorem derivedComplete_and_exists_iso_of_isNormalizedTower
-    (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
-    (hK : DerivedCategory.IsNormalizedTower X.smallEtaleTopology I K L)
-    {c : Cone (K ⋙ (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory)}
-    (hc : IsHomotopyLimit c) :
-    DerivedCategory.derivedComplete (Scheme.ProEt.topology X) I c.pt ∧
-      (∃ e : DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ≅
-          K ⋙ (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory,
-        ∀ n : ℕ, c.π.app (op n) =
-          (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app (op n) ≫
-            e.hom.app (op n)) ∧
-      ∀ a b : ℤ, (∀ n : ℕ, (K.obj (op n)).IsGE a ∧ (K.obj (op n)).IsLE b) →
-        c.pt.IsGE a ∧ c.pt.IsLE b := by
-  obtain ⟨T, E, hT⟩ := exists_iso_isNormalizedAdicTower_comparison hϖ hI hK
-  refine ⟨DerivedCategory.derivedComplete_of_iso_isNormalizedAdicTower hϖ hI hT E hc,
-    DerivedCategory.exists_derivedCompletionDiagram_iso_of_iso_isNormalizedAdicTower hϖ hI hT E hc,
-    fun a b hab ↦ ?_⟩
-  let F := comparisonUpperStar (ModuleCat.{u + 1} R) X
-  have hab' (n : ℕ) : (F.mapDerivedCategory.obj (K.obj (op n))).IsGE a ∧
-      (F.mapDerivedCategory.obj (K.obj (op n))).IsLE b := by
-    have := (hab n).1
-    have := (hab n).2
-    exact ⟨F.isGE_mapDerivedCategory_obj _ a, F.isLE_mapDerivedCategory_obj _ b⟩
-  have := CountableAB4Star.ofShape
-    (C := Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ℕ
-  exact DerivedCategory.isGE_and_isLE_of_isHomotopyLimit hc a b hab'
-    (DerivedCategory.epi_homologyFunctor_map_of_iso_isNormalizedAdicTower hT E b (hab' 1).2)
-    fun _ _ hP t ht hF ↦ epi_one_sub_of_epi hP t ht hF
 
 end AlgebraicGeometry.ProEtale

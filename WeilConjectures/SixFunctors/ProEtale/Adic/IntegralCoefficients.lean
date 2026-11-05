@@ -181,13 +181,6 @@ lemma continuousMapReduction_apply (n : ℕ) (f : C(T, ℤ_[p])) (t : T) :
     continuousMapReduction n f t = toZModPow n (f t) :=
   rfl
 
-/-- A continuous function `T → ℤ_p` gives the compatible family of its reductions, locally
-constant functions `T → ℤ/pⁿ`. -/
-noncomputable def continuousMapToCompatibleLocallyConstant :
-    C(T, ℤ_[p]) →+* compatibleLocallyConstant p T :=
-  (RingHom.pi continuousMapReduction).codRestrict _ fun f m n h t ↦
-    RingHom.congr_fun (zmod_cast_comp_toZModPow m n h) (f t)
-
 /-- The continuous function `T → ℤ_p` with reductions a compatible family of locally constant
 functions. -/
 noncomputable def compatibleLocallyConstantToContinuousMap :
@@ -198,57 +191,11 @@ noncomputable def compatibleLocallyConstantToContinuousMap :
   map_add' a b := ContinuousMap.ext fun t ↦ by simp
   map_mul' a b := ContinuousMap.ext fun t ↦ by simp
 
-/-- **`C(T, ℤ_p) = lim_n LocallyConstant(T, ℤ/pⁿ)`** as rings: the section-level form of
-`ℤ_p,X ≅ lim_n (ℤ/pⁿ)_X` (`det-prop-sfb-qlbar-colimit-x-integral-limit`, for `E = ℚ_p`). -/
-noncomputable def continuousMapRingEquivCompatibleLocallyConstant :
-    C(T, ℤ_[p]) ≃+* compatibleLocallyConstant p T :=
-  RingEquiv.ofRingHom continuousMapToCompatibleLocallyConstant
-    compatibleLocallyConstantToContinuousMap
-    (RingHom.ext fun a ↦ Subtype.ext <| funext fun n ↦ LocallyConstant.ext fun t ↦ by
-      simp [continuousMapToCompatibleLocallyConstant, compatibleLocallyConstantToContinuousMap])
-    (RingHom.ext fun f ↦ ContinuousMap.ext fun t ↦ ext_of_toZModPow.1 fun n ↦ by
-      simp [continuousMapToCompatibleLocallyConstant, compatibleLocallyConstantToContinuousMap])
-
 end PadicInt
 
 namespace PadicAlgCl
 
 variable (l : ℕ) [Fact l.Prime] (T : Type*) [TopologicalSpace T]
-
-/-- The function `T → ℚ̄_ℓ` underlying an integral function `T → ℤ_ℓ`. -/
-noncomputable def integralCoe (f : C(T, ℤ_[l])) : C(T, PadicAlgCl l) :=
-  ⟨fun t ↦ algebraMap ℚ_[l] (PadicAlgCl l) (f t),
-    (continuous_algebraMap ℚ_[l] (PadicAlgCl l)).comp (continuous_subtype_val.comp f.continuous)⟩
-
-/-- An integral function `T → ℤ_ℓ` is a locally finite function `T → ℚ̄_ℓ`: its values lie in
-the line `ℚ_ℓ`. -/
-lemma integralCoe_mem_locallyFiniteFunctions (f : C(T, ℤ_[l])) :
-    integralCoe l T f ∈ locallyFiniteFunctions l T := by
-  intro x
-  refine ⟨Set.univ, Filter.univ_mem, Submodule.finiteDimensional_of_le
-    (S₂ := Submodule.span ℚ_[l] {1}) (Submodule.span_le.2 ?_)⟩
-  rintro _ ⟨y, -, rfl⟩
-  refine Submodule.mem_span_singleton.2 ⟨(f y : ℚ_[l]), ?_⟩
-  simp [integralCoe, Algebra.smul_def]
-
-/-- The inclusion `C(T, ℤ_ℓ) → ℚ̄_ℓ,T` of integral functions into the locally finite functions,
-the sections of the constant `ℓ`-adic sheaf: the map `ℤ_ℓ,X → ℚ̄_ℓ,X` along which integral
-lattices are rationalised. -/
-noncomputable def integralToLocallyFiniteFunctions :
-    C(T, ℤ_[l]) →+* locallyFiniteFunctions l T where
-  toFun f := ⟨_, integralCoe_mem_locallyFiniteFunctions l T f⟩
-  map_zero' := Subtype.ext <| ContinuousMap.ext fun _ ↦ by simp [integralCoe]
-  map_one' := Subtype.ext <| ContinuousMap.ext fun _ ↦ by simp [integralCoe]
-  map_add' _ _ := Subtype.ext <| ContinuousMap.ext fun _ ↦ by simp [integralCoe]
-  map_mul' _ _ := Subtype.ext <| ContinuousMap.ext fun _ ↦ by simp [integralCoe]
-
-/-- The inclusion of integral functions into the locally finite functions is injective. -/
-lemma integralToLocallyFiniteFunctions_injective :
-    Function.Injective (integralToLocallyFiniteFunctions l T) := by
-  intro f g h
-  ext t
-  have := congrArg (fun φ : locallyFiniteFunctions l T ↦ (φ : C(T, PadicAlgCl l)) t) h
-  exact PadicInt.ext (by simpa [integralToLocallyFiniteFunctions, integralCoe] using this)
 
 /-- The norm of `ℓ` in `ℚ̄_ℓ` is `ℓ⁻¹`. -/
 lemma norm_natCast_self : ‖(l : PadicAlgCl l)‖ = (l : ℝ)⁻¹ := by
@@ -272,23 +219,5 @@ lemma exists_norm_pow_mul_le_one [CompactSpace T] (f : C(T, PadicAlgCl l)) :
         mul_le_mul hm.le ((hC t (Set.mem_univ t)).trans (le_max_left C 1)) (norm_nonneg _)
           hC1.le
     _ = 1 := inv_mul_cancel₀ (lt_max_of_lt_right one_pos).ne'
-
-/-- **`C(T, ℚ_ℓ) = C(T, ℤ_ℓ)[1/ℓ]` on a compact space**: every continuous `f : T → ℚ_ℓ` on a
-compact `T` is `ℓ⁻ᵐ g` for a continuous `g : T → ℤ_ℓ` (`det-prop-sfb-qlbar-colimit-x-invert-ell`
-on a profinite set, for `E = ℚ_ℓ`). -/
-lemma exists_padicInt_eq_pow_mul [CompactSpace T] (f : C(T, ℚ_[l])) :
-    ∃ (m : ℕ) (g : C(T, ℤ_[l])), ∀ t, ((g t : ℤ_[l]) : ℚ_[l]) = (l : ℚ_[l]) ^ m * f t := by
-  obtain ⟨C, hC⟩ := isCompact_univ.exists_bound_of_continuousOn f.continuous.continuousOn
-  have hl1 : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
-  have hC1 : 0 < (max C 1)⁻¹ := inv_pos.2 (lt_max_of_lt_right one_pos)
-  obtain ⟨m, hm⟩ := exists_pow_lt_of_lt_one hC1 (inv_lt_one_of_one_lt₀ hl1)
-  have hle (t : T) : ‖(l : ℚ_[l]) ^ m * f t‖ ≤ 1 := by
-    rw [norm_mul, norm_pow, Padic.norm_p]
-    calc (l : ℝ)⁻¹ ^ m * ‖f t‖ ≤ (max C 1)⁻¹ * max C 1 :=
-          mul_le_mul hm.le ((hC t (Set.mem_univ t)).trans (le_max_left C 1)) (norm_nonneg _)
-            hC1.le
-      _ = 1 := inv_mul_cancel₀ (lt_max_of_lt_right one_pos).ne'
-  exact ⟨m, ⟨fun t ↦ ⟨_, hle t⟩, Continuous.subtype_mk
-    ((continuous_const.mul f.continuous)) _⟩, fun _ ↦ rfl⟩
 
 end PadicAlgCl

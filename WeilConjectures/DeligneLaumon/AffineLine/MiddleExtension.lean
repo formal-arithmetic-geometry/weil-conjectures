@@ -70,20 +70,6 @@ def IsNonexceptional {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
   ∀ a : AlgebraicClosure k₀, ¬ F.HasLinearArtinSchreierConstituent ψ a j
 
-/-- The middle extension `j_*M` of a lisse sheaf `M` on a dense open `j : U₀ ↪ 𝔸¹` is
-*Fourier-nonexceptional* if after geometric base change it is neither a constant sheaf (up to a
-constant Weil twist) nor the Artin–Schreier sheaf `ℒ_{ψ(a x)}` for any `a ∈ k`.
-
-The condition is phrased on `U`, using `j^* j_* M = M` and `j_*(ℒ|_U) = ℒ` for `ℒ` lisse on the
-whole line: `M_k̄` is not constant, and it is not isomorphic to `ℒ_{ψ(a x)}|_U`. The latter
-isomorphism is phrased as "`M_k̄` is irreducible and `ℒ_{ψ(a x)}|_U` is a constituent of it",
-which is equivalent since the Artin–Schreier sheaves are irreducible.
-(blueprint: `def-fd-nonexceptional`) -/
-def LisseOnDenseOpen.IsFourierNonexceptional (ψ : AddChar k₀ (PadicAlgCl l))
-    (D : LisseOnDenseOpen k₀ l) : Prop :=
-  ¬ D.IsGeometricallyConstant ∧ ∀ a : AlgebraicClosure k₀,
-    ¬ (D.sheaf.IsGeometricallyIrreducible ∧ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j)
-
 /-- `D'` is a *Fourier partner* of `D` if the Fourier transform of the curve perverse middle
 extension `(j_*M)[1]` of `D` is the middle extension `(j'_*M')[1]` of `D'`.
 (blueprint: `sk-p-dl-a1-middle`) -/
@@ -94,24 +80,6 @@ def LisseOnDenseOpen.IsFourierPartner (ψ : AddChar k₀ (PadicAlgCl l))
 namespace LisseOnDenseOpen
 
 variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
-
-/-- **Constituent-nonexceptional implies Fourier-nonexceptional.** If no geometric constituent
-of the irreducible lisse sheaf `M` is a linear character `ℒ_{ψ(a x)}|_U`, then `M_k̄` is neither
-constant, since a nonzero constant sheaf has the trivial constituent `ℒ_{ψ(0 · x)}`, nor
-isomorphic to some `ℒ_{ψ(a x)}|_U`, which would be its constituent.
-(blueprint: `lem-a1-constituent-nonexceptional-comparison`, part 1) -/
-theorem isFourierNonexceptional_of_isNonexceptional (hD : D.sheaf.IsIrreducibleLisse)
-    (h : D.sheaf.IsNonexceptional ψ D.j) : D.IsFourierNonexceptional ψ :=
-  ⟨fun hc ↦ h 0 (D.hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant ψ hD.2.1 hc),
-    fun a ha ↦ h a ha.2⟩
-
-/-- **For geometrically irreducible sheaves the two notions coincide.** If `M_k̄` is
-irreducible, its only geometric constituent is `M_k̄` itself, so a constituent `ℒ_{ψ(a x)}|_U`
-would be isomorphic to `M_k̄`. (blueprint: `lem-a1-constituent-nonexceptional-comparison`) -/
-theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducibleLisse)
-    (hirr : D.sheaf.IsGeometricallyIrreducible) :
-    D.sheaf.IsNonexceptional ψ D.j ↔ D.IsFourierNonexceptional ψ :=
-  ⟨D.isFourierNonexceptional_of_isNonexceptional ψ hD, fun h a ha ↦ h.2 a ⟨hirr, ha⟩⟩
 
 /-- A lisse sheaf unramified at infinity has no geometric constituent `ℒ_{ψ(a x)}|_U` with
 `a ≠ 0`: on the punctured disc at `∞` the sheaf becomes constant, so such a constituent would be

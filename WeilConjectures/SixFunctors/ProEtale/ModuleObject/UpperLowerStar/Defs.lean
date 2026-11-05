@@ -89,27 +89,6 @@ noncomputable def lowerStar :
 @[inherit_doc lowerStar]
 scoped notation "(" f ")_*⟦" Λ "⟧" => lowerStar Λ f
 
-omit [IsCommMonObj Λ] in
-/-- The underlying sheaf of `f_* M` is `f_* M`. -/
-lemma lowerStar_comp_forget :
-    (f)_*⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ Y) =
-      Mod.forget (condensedRingObj Λ X) ⋙ (f)_*[Ab.{u + 1}] := rfl
-
-omit [IsCommMonObj Λ] in
-lemma lowerStar_obj_X
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    ((f)_*⟦Λ⟧.obj M).X = (f)_*[Ab.{u + 1}].obj M.X := rfl
-
-omit [IsCommMonObj Λ] in
-/-- The action of `Λ_Y` on `f_* M` is `η_f` followed by the action of `f_* Λ_X` on `f_* M`
-induced by the lax monoidal structure of `f_*`. -/
-lemma lowerStar_obj_smul
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    γ[condensedRingObj Λ Y,((f)_*⟦Λ⟧.obj M).X] =
-      condensedPushforwardHom Λ f ▷ (f)_*[Ab.{u + 1}].obj M.X ≫
-        Functor.LaxMonoidal.μ (f)_*[Ab.{u + 1}] (condensedRingObj Λ X) M.X ≫
-          (f)_*[Ab.{u + 1}].map γ[condensedRingObj Λ X,M.X] := rfl
-
 instance lowerStar_additive : (f)_*⟦Λ⟧.Additive := by
   unfold lowerStar
   infer_instance
@@ -136,18 +115,6 @@ noncomputable def upperStar :
 
 @[inherit_doc upperStar]
 scoped notation "(" f ")^*⟦" Λ "⟧" => upperStar Λ f
-
-/-- The underlying sheaf of `f^* M` is the extension of scalars `Λ_X ⊗_{f^* Λ_Y} f^* M` of
-the `f^* Λ_Y`-module `f^* M`. -/
-lemma upperStar_comp_forget :
-    (f)^*⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ X) =
-      (f)^*[Ab.{u + 1}].mapMod _ ⋙ Mod.extendScalars (condensedPullbackHom Λ f) ⋙
-        Mod.forget (condensedRingObj Λ X) := rfl
-
-lemma upperStar_obj
-    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    (f)^*⟦Λ⟧.obj M =
-      Mod.extendScalarsObj (condensedPullbackHom Λ f) (((f)^*[Ab.{u + 1}].mapMod _).obj M) := rfl
 
 instance upperStar_additive : (f)^*⟦Λ⟧.Additive := by
   unfold upperStar
@@ -179,12 +146,6 @@ noncomputable def linearLowerStar :
   (f)_*[Ab.{u + 1}].mapMod _ ⋙
     Mod.comap ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom
       (condensedRingObj Λ Y))
-
-omit [IsCommMonObj Λ] in
-/-- The underlying sheaf of the linear pushforward is the pushforward. -/
-lemma linearLowerStar_comp_forget :
-    linearLowerStar Λ f ⋙ Mod.forget (condensedRingObj Λ Y) =
-      Mod.forget _ ⋙ (f)_*[Ab.{u + 1}] := rfl
 
 instance linearLowerStar_additive : (linearLowerStar Λ f).Additive := by
   unfold linearLowerStar

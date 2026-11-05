@@ -28,37 +28,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The canonical associated-module-sheaf realization is fully faithful and every module
-sheaf is in its essential image. This identifies fixed scalar module sheaves with the
-modules over the specified continuous-function coefficient sheaf, not a new coefficient
-category. Source: blueprint finite coefficient modules, order 1233
-(blueprint: def-weil-pbc-proetale-modules).
-
-Proof: restrict a module's action along the constant scalar sections to obtain a
-fixed-ring module sheaf. Conversely extend a fixed scalar action to local scalar
-sections, using local bijectivity of finiteCoefficientScalarMap. Sheaf gluing makes
-this extension unique. The realization unit and counit are the associated-module-sheaf
-unit and counit and are isomorphisms. Restriction and realization preserve morphisms
-sectionwise, giving full faithfulness and essential surjectivity. This uses the exact
-same realization already recorded by the node, including on the empty scheme and for
-the zero coefficient ring. -/
-theorem finiteCoefficientRealization_full_faithful_essSurj (T : Scheme.{u})
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    [TopologicalSpace Λ] [DiscreteTopology Λ] :
-    (finiteCoefficientRealization T Λ).Full ∧
-      (finiteCoefficientRealization T Λ).Faithful ∧
-        (finiteCoefficientRealization T Λ).EssSurj := by
-  let := finiteCoefficientRealizationIsEquivalenceRing T Λ
-  exact ⟨inferInstance, inferInstance, inferInstance⟩
-
-/-- Realization gives the coefficient equivalence used for canonical transport.
-Source: blueprint finite coefficient modules, order 1233
-(blueprint: def-weil-pbc-proetale-modules). -/
-instance refinementRealizationIsEquivalence (T : Scheme.{u}) (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
-    (finiteCoefficientRealization T Λ).IsEquivalence where
-  full := (finiteCoefficientRealization_full_faithful_essSurj T Λ).1
-  faithful := (finiteCoefficientRealization_full_faithful_essSurj T Λ).2.1
-  essSurj := (finiteCoefficientRealization_full_faithful_essSurj T Λ).2.2
-
 end AlgebraicGeometry.ProEtale

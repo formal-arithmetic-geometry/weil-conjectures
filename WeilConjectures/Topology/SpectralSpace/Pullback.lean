@@ -64,23 +64,9 @@ variable {f g}
 
 include f' g' pb
 
-theorem CategoryTheory.IsPullback.t0Space [T0Space X] [T0Space Y] : T0Space P :=
-  (homeoOfIso pb.isoPullback).symm.t0Space
-
 variable [T2Space S]
-
-theorem CategoryTheory.IsPullback.quasiSober [QuasiSober X] [QuasiSober Y] : QuasiSober P :=
-  (homeoOfIso pb.isoPullback).symm.quasiSober
 
 theorem CategoryTheory.IsPullback.compactSpace [CompactSpace X] [CompactSpace Y] : CompactSpace P :=
   (homeoOfIso pb.isoPullback).symm.compactSpace
-
-theorem CategoryTheory.IsPullback.prespectralSpace [PrespectralSpace X] [PrespectralSpace Y] :
-    PrespectralSpace P :=
-  (homeoOfIso pb.isoPullback).symm.prespectralSpace
-
-theorem CategoryTheory.IsPullback.spectralSpace [SpectralSpace X] [SpectralSpace Y] :
-    SpectralSpace P :=
-  (homeoOfIso pb.isoPullback).symm.spectralSpace
 
 end IsPullback

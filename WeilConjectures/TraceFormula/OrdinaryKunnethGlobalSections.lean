@@ -45,28 +45,4 @@ variable {K : Type u} [Field K] [Fact (ringChar K).Prime] [Fact (ringChar K ≠ 
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
 
-/-- **The ordinary Künneth formula for global sections over a field** (blueprint
-`sk-lem-sf-kunneth-star`, for `fᵢ : Xᵢ ⟶ Spec K`; SGA 4½, [Th. finitude], Cor. 1.11): for a
-cartesian square `P = X ×_K Y` of separated `K`-schemes of finite type and bounded constructible
-`A`, `B`, the Künneth map `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(X ×_K Y, A ⊠ B)` is an isomorphism. -/
-theorem isIso_lowerStarKunnethMap'_of_isPullback (p₁ : P.left ⟶ X.left)
-    (p₂ : P.left ⟶ Y.left)
-    (w₁ : p₁ ≫ X.hom = P.hom ≫ 𝟙 _) (w₂ : p₂ ≫ Y.hom = P.hom ≫ 𝟙 _)
-    (h : IsPullback p₁ p₂ X.hom Y.hom)
-    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) A)
-    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)))
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left) B) :
-    IsIso (lowerStarKunnethMap' (Profinite.padicAlgClRingObj ℓ)
-      (⟨w₁⟩ : CommSq p₁ P.hom X.hom (𝟙 _)) (⟨w₂⟩ : CommSq p₂ P.hom Y.hom (𝟙 _)) A B) := by
-  exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback_point ℓ
-    (p₁ := (Over.homMk p₁ (w₁.trans (Category.comp_id _)) : P ⟶ X))
-    (p₂ := (Over.homMk p₂ (w₂.trans (Category.comp_id _)) : P ⟶ Y)) h
-    (q := (Over.homMk P.hom (Category.comp_id _) : P ⟶ point K))
-    (a := (Over.homMk X.hom (Category.comp_id _) : X ⟶ point K))
-    (b := (Over.homMk Y.hom (Category.comp_id _) : Y ⟶ point K))
-    (Over.OverMorphism.ext w₁.symm) (Over.OverMorphism.ext w₂.symm) ⟨w₁⟩ ⟨w₂⟩ ⟨A, hA⟩ ⟨B, hB⟩
-
 end AlgebraicGeometry.ProEtale.CondensedRing

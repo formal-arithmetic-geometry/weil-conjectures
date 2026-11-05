@@ -52,16 +52,4 @@ theorem smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk {k : Type u} [
   have : IrreducibleSpace X := IsRegular.irreducibleSpace X
   exact (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr (by exact_mod_cast hdim)
 
-/-- **A normal geometrically connected curve of dimension one over a perfect field (e.g. a finite
-field) is smooth of relative dimension one** (the hypotheses of blueprint
-`thm-wf-rank-one-finite-geometric-image-curve` and `prop-wf-open-curve-h1-no-frobenius-fixed`:
-`U₀` normal, geometrically connected, separated, of finite type and pure of dimension one). -/
-theorem IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk {k : Type u} [Field k]
-    [PerfectField k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]
-    [GeometricallyConnected f]
-    (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x))
-    (hdim : topologicalKrullDim X = 1) : SmoothOfRelativeDimension 1 f :=
-  have : ConnectedSpace X := GeometricallyConnected.connectedSpace_of_subsingleton (f := f)
-  AlgebraicGeometry.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk f hX hdim
-
 end AlgebraicGeometry

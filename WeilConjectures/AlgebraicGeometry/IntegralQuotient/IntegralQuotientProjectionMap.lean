@@ -37,41 +37,6 @@ namespace AlgebraicGeometry.ProEtale.IntegralQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The actual ordinary cartesian identification of the restricted quotient coefficient.
-Source: Stacks 0D6D, cartesian coefficients
-(blueprint: def-sfb-integral-quotient-projection-map). -/
-def coefficientPull₀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
-    (CondensedRing.upperStar (integral l E) f).obj (B₀ (reduction l E n) Y) ≅
-      B₀ (reduction l E n) X :=
-  (CondensedRing.comapUpperStarIso (reduction l E n) f).symm.app _ ≪≫
-    (V₀ (reduction l E n) X).mapIso
-      (Functor.Monoidal.εIso (CondensedRing.upperStar (finite l E n) f)).symm
-
-/-- The canonical inverse-image computation at a cochain representative.
-Source: Stacks 0G7E (blueprint: def-sfb-integral-quotient-projection-map). -/
-def computePull {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (P : CochainComplex (Modules Λ Y) ℤ) :
-    (L Λ f).obj (DerivedCategory.Q.obj P) ⟶
-      DerivedCategory.Q.obj
-        (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P) :=
-  (L Λ f).map ((DerivedCategory.quotientCompQhIso (Modules Λ Y)).inv.app P) ≫
-    (pullCounit f).app ((HomotopyCategory.quotient _ _).obj P) ≫
-    DerivedCategory.Qh.map
-      (((CondensedRing.upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
-    (DerivedCategory.quotientCompQhIso (Modules Λ X)).hom.app
-      (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P)
-
-/-- The specified coefficient pullback arrow in the derived category.
-Source: Stacks 0D6D (blueprint: def-sfb-integral-quotient-projection-map). -/
-def coefficientPull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
-    (L (integral l E) f).obj (B (reduction l E n) Y) ⟶ B (reduction l E n) X :=
-  computePull f ((CochainComplex.singleFunctor _ 0).obj (B₀ (reduction l E n) Y)) ≫
-    DerivedCategory.Q.map
-      (((CondensedRing.upperStar (integral l E) f).mapCochainComplexSingleFunctor 0).hom.app
-          (B₀ (reduction l E n) Y) ≫
-        (CochainComplex.singleFunctor _ 0).map (coefficientPull₀ l E f n).hom)
-
 /-- The perfect-coefficient projection arrow: the recorded module-object projection map
 (the counit transpose of the specified derived tensor-pullback comparison followed by the
 integral counit), followed by the direct image of the actual cartesian pullback of the

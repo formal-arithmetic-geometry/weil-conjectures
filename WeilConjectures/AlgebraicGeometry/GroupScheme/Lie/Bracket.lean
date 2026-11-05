@@ -148,13 +148,6 @@ noncomputable def tangentMap (m : A) (hm : m * m = 0) (hπ : π m = 0) :
     pointsKer G aug₁ →* pointsKer G π :=
   kerMap (DualNumber.liftElem m hm) (aug_comp_liftElem m hm hπ)
 
-theorem kerHom_tangentMap (m : A) (hm : m * m = 0) (hπ : π m = 0) (v : pointsKer G aug₁)
-    (a : stalkOne G) :
-    kerHom (tangentMap m hm hπ v) a =
-      algebraMap k A (counit G a) + algebraMap k A (tangentCoeff v a) * m := by
-  rw [tangentMap, kerHom_kerMap]
-  simp [kerHom_tangent, DualNumber.liftElem_apply]
-
 omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
 theorem liftElem_comp_eq {B : Type u} [CommRing B] [Algebra k B] (ψ : A →ₐ[k] B) (m : A)
     (hm : m * m = 0) (m' : B) (hm' : m' * m' = 0) (h : ψ m = m') :
@@ -554,22 +547,6 @@ theorem tangentCoeff_one (a : stalkOne G) : tangentCoeff (1 : pointsKer G aug₁
   rw [tangentCoeff, kerHom_one]
   simp [algebraMap_eq_inl]
 
-/-- The group law on tangent vectors is the addition of the `D_v`. -/
-theorem tangentCoeff_mul (v w : pointsKer G aug₁) (a : stalkOne G) :
-    tangentCoeff (v * w) a = tangentCoeff v a + tangentCoeff w a := by
-  conv_lhs => rw [← tangentMap_inr_one v, ← tangentMap_inr_one w]
-  rw [tangentCoeff, kerHom_tangentMap_mul_tangentMap]
-  simp [algebraMap_eq_inl]
-
-theorem tangent_mul_comm (v w : pointsKer G aug₁) : v * w = w * v :=
-  tangent_ext fun a ↦ by rw [tangentCoeff_mul, tangentCoeff_mul, add_comm]
-
-theorem tangentCoeff_inv (v : pointsKer G aug₁) (a : stalkOne G) :
-    tangentCoeff v⁻¹ a = -tangentCoeff v a := by
-  have h := tangentCoeff_mul v v⁻¹ a
-  rw [mul_inv_cancel, tangentCoeff_one] at h
-  linear_combination -h
-
 theorem snd_snd_algebraMap₂ (c : k) :
     (algebraMap k (DualNumber (DualNumber k)) c).snd.snd = 0 := by
   simp [algebraMap_eq_inl']
@@ -778,11 +755,6 @@ theorem tangentBracket_one_left (w : pointsKer G aug₁) : tangentBracket 1 w = 
   rw [one_mul] at h
   exact left_eq_mul.mp h
 
-theorem tangentBracket_inv_left (v w : pointsKer G aug₁) :
-    tangentBracket v⁻¹ w = (tangentBracket v w)⁻¹ := by
-  rw [eq_inv_iff_mul_eq_one, ← tangentBracket_mul_left, inv_mul_cancel,
-    tangentBracket_one_left]
-
 variable (G) in
 /-- The Lie algebra of `G` is the group of tangent vectors: `Lie(G) ≃ ker(G(k[ε]) → G(k))`. -/
 noncomputable def lieEquivTangent : Lie G ≃ pointsKer G (aug₁ (k := k)) :=
@@ -840,9 +812,6 @@ theorem lie_antisymm' (x y : Lie G) : ⁅x, y⁆ = -⁅y, x⁆ := by
   have h := lie_self' (x + y)
   rw [lie_add_left, lie_add_right, lie_add_right, lie_self', lie_self', zero_add, add_zero] at h
   exact eq_neg_of_add_eq_zero_left h
-
-theorem lie_neg_right' (x y : Lie G) : ⁅x, -y⁆ = -⁅x, y⁆ := by
-  rw [lie_antisymm', lie_neg_left', neg_neg, lie_antisymm' x y, neg_neg]
 
 theorem lieEquivTangent_neg (x : Lie G) : lieEquivTangent G (-x) = (lieEquivTangent G x)⁻¹ := by
   rw [eq_inv_iff_mul_eq_one, ← lieEquivTangent_add, neg_add_cancel,

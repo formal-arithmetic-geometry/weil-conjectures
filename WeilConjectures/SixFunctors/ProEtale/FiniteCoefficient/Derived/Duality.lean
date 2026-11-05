@@ -68,44 +68,11 @@ namespace ProEtale
 
 variable (X : Scheme.{u})
 
-/-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
-
-The naive dual `K ↦ K^∨ = RHom_{Λ_X}(K, Λ_X)` on `D(X_proét)`, the internal hom into the
-constant sheaf `Λ_X = 𝟙_ D(X_proét)`. -/
-noncomputable def derivedDual :
-    (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))ᵒᵖ ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  (RHom(X)[A]).flip.obj (𝟙_ _)
-
-/-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
-
-The ordinary cohomology `H^i(X, K) = H^i(RΓ(X, K))`, the companion of the compactly
-supported `AlgebraicGeometry.ProEtale.compactlySupportedCohomology`. -/
-noncomputable def cohomology (i : ℤ) :
-    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤ A :=
-  rightDerivedGlobalSections A X ⋙ DerivedCategory.homologyFunctor A i
-
 @[inherit_doc cohomology]
 scoped notation "H(" X ")[" A "](" i ")" => cohomology A X i
 
 variable {X} {Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
   [CompactSpace Y]
-
-/-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
-
-The dualizing complex `ω_{X,Λ} = Ra_X^! Λ` of a scheme `X` with structure morphism
-`a_X : X ⟶ Y`, the exceptional inverse image of the constant sheaf `Λ_Y = 𝟙_ D(Y_proét)`. -/
-noncomputable def dualizingComplex : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u
-    + 1} Λ)) :=
-  (R(a)^![Λ]).obj (𝟙_ _)
-
-/-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
-
-The Verdier dual `𝔻_X K = RHom_{Λ_X}(K, ω_{X,Λ})` on `D(X_proét)`. -/
-noncomputable def verdierDual :
-    (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))ᵒᵖ ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
-  (RHom(X)[ModuleCat.{u + 1} Λ]).flip.obj (dualizingComplex Λ a)
 
 end ProEtale
 

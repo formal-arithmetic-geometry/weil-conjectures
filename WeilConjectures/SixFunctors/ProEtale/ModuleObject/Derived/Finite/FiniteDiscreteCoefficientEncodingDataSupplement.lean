@@ -41,24 +41,4 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   (hG : G ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1} =
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
-local instance : HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} (ULift.{u + 1} B)) :=
-  ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
-
-/-- This coefficient encoding preserves the underlying abelian sheaf. -/
-noncomputable def finiteDiscreteCoefficientEquivalenceForgetIso (T : Scheme.{u}) :
-    (finiteDiscreteCoefficientEquivalence B eR G hG T).functor ⋙ Mod.forget _ ≅
-      sheafCompose (ProEt.topology T)
-        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) := by
-  letI : ((ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=
-    GrothendieckTopology.W.monoidal (J := ProEt.topology T) (A := Ab.{u + 1})
-  let H := sheafEncoding (ProEt.topology T) (ULift.{u + 1} B) G hG
-  let U := sheafCompose (ProEt.topology T)
-    (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1})
-  unfold finiteDiscreteCoefficientEquivalence
-  change H.inv ⋙ Mod.forget _ ≅ U
-  exact Functor.isoWhiskerLeft H.inv
-      (sheafEncodingForgetIso (ProEt.topology T) (ULift.{u + 1} B) G hG).symm ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight H.asEquivalence.counitIso U ≪≫ Functor.leftUnitor U
-
 end AlgebraicGeometry.ProEtale.CondensedRing

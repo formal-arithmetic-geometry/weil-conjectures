@@ -59,61 +59,6 @@ noncomputable def tensorStrOfIso {K L : Mod C A} (sK : (mapModComap σ).obj K �
   (tensorLeftCompMapModComapIso σ hβF K).app L ≪≫ (tensorLeftMapIso sK).app _ ≪≫
     (tensorLeft K).mapIso sL
 
-/-- The structure isomorphism of the tensor product `L ⊗_A K` of modules with structure
-isomorphisms: `Φ (L ⊗ K) ≅ Φ L ⊗ Φ K ≅ Φ L ⊗ K ≅ L ⊗ K`. -/
-noncomputable def isoAlgebraTensorStr (K L : IsoAlgebra (mapModComap σ)) :
-    (mapModComap σ).obj ((tensorLeft K.carrier).obj L.carrier) ≅
-      (tensorLeft K.carrier).obj L.carrier :=
-  tensorStrOfIso σ hβF K.str L.str
-
-/-- The tensor product `L ⊗_A K` of modules with structure isomorphisms. -/
-noncomputable def isoAlgebraTensorObj (K L : IsoAlgebra (mapModComap σ)) :
-    IsoAlgebra (mapModComap σ) :=
-  IsoAlgebra.mk ((tensorLeft K.carrier).obj L.carrier) (isoAlgebraTensorStr σ hβF K L)
-
-lemma isoAlgebraTensor_map_comm (K : IsoAlgebra (mapModComap σ))
-    {L L' : IsoAlgebra (mapModComap σ)} (f : L ⟶ L') :
-    (mapModComap σ).map ((tensorLeft K.carrier).map f.hom.f) ≫
-        (isoAlgebraTensorStr σ hβF K L').hom =
-      (isoAlgebraTensorStr σ hβF K L).hom ≫ (tensorLeft K.carrier).map f.hom.f := by
-  have h₁ : (mapModComap σ).map ((tensorLeft K.carrier).map f.hom.f) ≫
-      (tensorLeftCompMapModComapIso σ hβF K.carrier).hom.app L'.carrier =
-      (tensorLeftCompMapModComapIso σ hβF K.carrier).hom.app L.carrier ≫
-        (tensorLeft ((mapModComap σ).obj K.carrier)).map ((mapModComap σ).map f.hom.f) :=
-    (tensorLeftCompMapModComapIso σ hβF K.carrier).hom.naturality f.hom.f
-  have h₂ := (tensorLeftMapIso K.str).hom.naturality ((mapModComap σ).map f.hom.f)
-  simp only [isoAlgebraTensorStr, tensorStrOfIso, Iso.trans_hom, Iso.app_hom,
-    Functor.mapIso_hom, Category.assoc]
-  slice_lhs 1 2 => erw [h₁]
-  slice_lhs 2 3 => erw [h₂]
-  rw [Category.assoc, ← Functor.map_comp]
-  rw [← Functor.map_comp]
-  exact congrArg (fun x ↦ _ ≫ _ ≫ (tensorLeft K.carrier).map x) f.hom.h
-
-/-- The tensor product `- ⊗_A K` with a module with structure isomorphism, as a functor. -/
-noncomputable def isoAlgebraTensor (K : IsoAlgebra (mapModComap σ)) :
-    IsoAlgebra (mapModComap σ) ⥤ IsoAlgebra (mapModComap σ) where
-  obj L := isoAlgebraTensorObj σ hβF K L
-  map f := ObjectProperty.homMk ⟨(tensorLeft K.carrier).map f.hom.f,
-    isoAlgebraTensor_map_comm σ hβF K f⟩
-  map_id _ := IsoAlgebra.hom_ext ((tensorLeft K.carrier).map_id _)
-  map_comp _ _ := IsoAlgebra.hom_ext ((tensorLeft K.carrier).map_comp _ _)
-
-@[simp]
-lemma isoAlgebraTensor_obj_carrier (K L : IsoAlgebra (mapModComap σ)) :
-    ((isoAlgebraTensor σ hβF K).obj L).carrier = (tensorLeft K.carrier).obj L.carrier :=
-  rfl
-
-lemma isoAlgebraTensor_obj_str (K L : IsoAlgebra (mapModComap σ)) :
-    ((isoAlgebraTensor σ hβF K).obj L).str = isoAlgebraTensorStr σ hβF K L :=
-  IsoAlgebra.mk_str _ _
-
-@[simp]
-lemma isoAlgebraTensor_map_hom_f (K : IsoAlgebra (mapModComap σ))
-    {L L' : IsoAlgebra (mapModComap σ)} (f : L ⟶ L') :
-    ((isoAlgebraTensor σ hβF K).map f).hom.f = (tensorLeft K.carrier).map f.hom.f :=
-  rfl
-
 end Tensor
 
 section Exchange

@@ -58,13 +58,6 @@ theorem integersModPowPullδCompatible : IntegersModPowPullδCompatible ℓ E n 
     (zsmul_id_comp_integersModPowReduction Y ℓ E n) (zsmul_id_comp_integersModPowReduction X ℓ E n)
     (shortExact_integersModPowReduction Y ℓ E n) (shortExact_integersModPowReduction X ℓ E n)
 
-/-- **Reduction modulo `ℓⁿ` commutes with the derived pushforward along any morphism**:
-`Rf_*^{𝒪_E} ⋙ red_Y ⟶ red_X ⋙ Rf_*^{𝒪_E ⧸ ℓⁿ}` is an isomorphism. -/
-theorem isIso_derivedLowerStarIntegersModPowReduction :
-    IsIso (derivedLowerStarIntegersModPowReduction ℓ E n f) :=
-  isIso_derivedLowerStarIntegersModPowReduction_of_compatible ℓ E n f
-    (integersModPowPullUnitCompatible ℓ E n f) (integersModPowPullδCompatible ℓ E n f)
-
 end Derived
 
 section BoundedConstructible
@@ -84,14 +77,6 @@ theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction' :
     IsIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n d) :=
   isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_compatible ℓ E n d
     (integersModPowPullUnitCompatible ℓ E n d.left) (integersModPowPullδCompatible ℓ E n d.left)
-
-/-- **Reduction modulo `ℓⁿ` commutes with the proper pushforward on bounded constructible
-complexes** (blueprint `det-prop-scalar-six-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`):
-`Rg_* ⋙ red_Y ⟶ red_Z ⋙ Rg_*` is an isomorphism for a proper morphism `g`. -/
-theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_isProper
-    (g : Z ⟶ Y) [IsProper g.left] :
-    IsIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n g) :=
-  isIso_boundedConstructibleLowerStarIntegersModPowReduction' ℓ E n g
 
 end BoundedConstructible
 

@@ -164,14 +164,6 @@ theorem IsFiniteLocallyConstantSheaf.of_upperStar (G : Sheaf Z.smallEtaleTopolog
   toIsLocallyConstantSheaf := IsLocallyConstantSheaf.of_upperStar p G
   toIsFiniteSheaf := IsFiniteSheaf.of_upperStar p G
 
-/-- A sheaf is finite locally constant if and only if its pullback along a surjective closed
-immersion is. -/
-theorem isFiniteLocallyConstantSheaf_upperStar_iff (G : Sheaf Z.smallEtaleTopology A) :
-    IsFiniteLocallyConstantSheaf ((Etale.upperStar A p).obj G) ↔
-      IsFiniteLocallyConstantSheaf G :=
-  ⟨fun _ ↦ IsFiniteLocallyConstantSheaf.of_upperStar p G,
-    fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar p G⟩
-
 end Finite
 
 end AlgebraicGeometry.Scheme

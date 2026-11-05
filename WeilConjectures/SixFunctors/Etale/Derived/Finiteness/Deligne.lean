@@ -417,25 +417,6 @@ theorem exists_hasConstructibleDirectImageBaseChangeOn {k : Type u} [Field k]
   exists_hasConstructibleDirectImageBaseChangeOn_of_smoothGenericDirectImage
     (Λ := Λ) (smoothGenericDirectImage Λ) aS fY j F
 
-omit [Finite Λ] in
-/-- Blueprint `lem-fin-radicial-exchange-descent`: Descending the exchange property through a
-universal homeomorphism.
-
-Let `π : S' ⟶ S` be finite, surjective and radicial (universally injective), let `j : X ⟶ Y`
-be an open immersion of `S`-schemes and `F` a sheaf of `Λ`-modules on `X`. Form the base changes
-`Y' = Y ×_S S'` and `X' = X ×_Y Y'`, with the open immersion `j' : X' ⟶ Y'`. If over `S'` the
-direct image `Rj'_*(F|_{X'})` is bounded constructible and its formation commutes with every base
-change from a noetherian scheme, then the same holds over `S`. -/
-theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective
-    {S S' X Y X' Y' : Scheme.{u}} (π : S' ⟶ S) [IsFinite π] [Surjective π]
-    [UniversallyInjective π] (fY : Y ⟶ S) (j : X ⟶ Y) [IsOpenImmersion j] (g : Y' ⟶ Y)
-    (fY' : Y' ⟶ S') (hY : IsPullback g fY' fY π) (g' : X' ⟶ X) (j' : X' ⟶ Y')
-    (hX : IsPullback g' j' j g) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (h : HasConstructibleDirectImageBaseChangeOn Λ fY' j'
-      ((Etale.upperStar (ModuleCat.{u + 1} Λ) g').obj F) Set.univ) :
-    HasConstructibleDirectImageBaseChangeOn Λ fY j F Set.univ :=
-  .of_isFinite_of_surjective' π fY j g fY' hY g' j' hX F h
-
 /-- Blueprint `cor-fin-deligne-open-over-field`: Higher open direct images over a field.
 
 Let `k` be a field, let `Λ` be a finite ring whose exponent is invertible in `k` (the blueprint

@@ -174,13 +174,6 @@ lemma rightDerivedFunctor_map_Q_map_comp_objQIso_inv (F : C ⥤ D) [F.Additive]
   rw [Iso.comp_inv_eq, assoc, rightDerivedFunctor_map_Q_map_comp_objQIso_hom,
     Iso.inv_hom_id_assoc]
 
-lemma rightDerivedFunctorNatTrans_comp {F G H : C ⥤ D} [F.Additive] [G.Additive] [H.Additive]
-    (τ : F ⟶ G) (τ' : G ⟶ H) :
-    rightDerivedFunctorNatTrans (τ ≫ τ') =
-      rightDerivedFunctorNatTrans τ ≫ rightDerivedFunctorNatTrans τ' := by
-  simp only [rightDerivedFunctorNatTrans, NatTrans.mapHomotopyCategory_comp,
-    Functor.whiskerRight_comp, rightDerivedNatTrans_comp]
-
 end Functor
 
 end
@@ -365,59 +358,8 @@ lemma rightDerivedTriangle_obj_distinguished (M : Plus C) :
     simp only [rightDerivedδAux, assoc, ← Functor.map_comp, Iso.hom_inv_id, Functor.map_id,
       comp_id]
 
-/-- **The long exact sequence of right derived functors.** For a short complex of functors
-`F₁ ⟶ F₂ ⟶ F₃` which is short exact on injectives and a bounded below complex `K`, the sequence
-
-`⋯ ⟶ H^q(RF₁ K) ⟶ H^q(RF₂ K) ⟶ H^q(RF₃ K) ⟶ H^{q+1}(RF₁ K) ⟶ ⋯`
-
-is exact; all the maps are natural in `K` (`rightDerivedTriangle` is a functor). -/
-lemma exact_homology_rightDerivedTriangle (M : Plus C) (q₀ q₁ : ℤ) (h : q₀ + 1 = q₁) :
-    (ShortComplex.mk _ _ (DerivedCategory.HomologySequence.comp_δ _
-        (rightDerivedTriangle_obj_distinguished hS M) q₀ q₁ h)).Exact ∧
-      (ShortComplex.mk _ _ (DerivedCategory.HomologySequence.δ_comp _
-        (rightDerivedTriangle_obj_distinguished hS M) q₀ q₁ h)).Exact ∧
-      (ShortComplex.mk ((DerivedCategory.homologyFunctor D q₀).map
-          ((rightDerivedTriangle hS).obj M).mor₁)
-        ((DerivedCategory.homologyFunctor D q₀).map ((rightDerivedTriangle hS).obj M).mor₂)
-        (by simp only [← Functor.map_comp, comp_distTriang_mor_zero₁₂ _
-          (rightDerivedTriangle_obj_distinguished hS M), Functor.map_zero])).Exact :=
-  ⟨DerivedCategory.HomologySequence.exact₃ _ (rightDerivedTriangle_obj_distinguished hS M) q₀ q₁ h,
-    DerivedCategory.HomologySequence.exact₁ _ (rightDerivedTriangle_obj_distinguished hS M) q₀ q₁ h,
-    DerivedCategory.HomologySequence.exact₂ _ (rightDerivedTriangle_obj_distinguished hS M) q₀⟩
-
 variable {S' : ShortComplex (C ⥤ D)} [S'.X₁.Additive] [S'.X₂.Additive] [S'.X₃.Additive]
   (hS' : S'.ShortExactOnInjectives)
-
-lemma rightDerivedδ_natTrans (τ : S ⟶ S') :
-    rightDerivedδ hS ≫ Functor.whiskerRight
-        (Functor.whiskerLeft Plus.ι (Functor.rightDerivedFunctorNatTrans τ.τ₁))
-        (shiftFunctor _ (1 : ℤ)) =
-      Functor.whiskerLeft Plus.ι (Functor.rightDerivedFunctorNatTrans τ.τ₃) ≫
-        rightDerivedδ hS' := by
-  ext M
-  set R := Plus.injectiveModel M
-  have h₁ := (Functor.rightDerivedFunctorNatTrans τ.τ₁).naturality R.iso.hom
-  have h₃ := (Functor.rightDerivedFunctorNatTrans τ.τ₃).naturality R.iso.inv
-  dsimp at h₁ h₃ ⊢
-  rw [rightDerivedδ_app_eq hS M R, rightDerivedδ_app_eq hS' M R]
-  simp only [rightDerivedδAux, assoc]
-  rw [← reassoc_of% h₃, rightDerivedδQObj_natTrans_assoc hS hS' τ R.I]
-  simp only [← Functor.map_comp, h₁]
-
-/-- The functoriality of the triangle of right derived functors in the short complex of
-functors. -/
-noncomputable def rightDerivedTriangleMap (τ : S ⟶ S') :
-    rightDerivedTriangle hS ⟶ rightDerivedTriangle hS' :=
-  Triangle.functorHomMk' (Functor.whiskerLeft Plus.ι (Functor.rightDerivedFunctorNatTrans τ.τ₁))
-    (Functor.whiskerLeft Plus.ι (Functor.rightDerivedFunctorNatTrans τ.τ₂))
-    (Functor.whiskerLeft Plus.ι (Functor.rightDerivedFunctorNatTrans τ.τ₃))
-    (by rw [← Functor.whiskerLeft_comp, ← Functor.whiskerLeft_comp,
-      ← Functor.rightDerivedFunctorNatTrans_comp, ← Functor.rightDerivedFunctorNatTrans_comp,
-      τ.comm₁₂])
-    (by rw [← Functor.whiskerLeft_comp, ← Functor.whiskerLeft_comp,
-      ← Functor.rightDerivedFunctorNatTrans_comp, ← Functor.rightDerivedFunctorNatTrans_comp,
-      τ.comm₂₃])
-    (rightDerivedδ_natTrans hS hS' τ)
 
 end ShortComplex
 

@@ -118,17 +118,6 @@ lemma Etale.existsUnique_of_isCompl {a : A} (s : a ⟶ G.obj.obj (op U))
   · exact hσ'.2
   · exact hσ'.1
 
-/-- The sections of a sheaf on the small étale site over `P` are the product of its sections
-over two complementary open subschemes `U` and `W` of `P`. -/
-noncomputable def Etale.isLimitBinaryFanOfIsCompl :
-    IsLimit (BinaryFan.mk (G.obj.map i.op) (G.obj.map j.op)) :=
-  BinaryFan.IsLimit.mk _
-    (fun s t ↦ (Etale.existsUnique_of_isCompl G i j h s t).exists.choose)
-    (fun s t ↦ (Etale.existsUnique_of_isCompl G i j h s t).exists.choose_spec.1)
-    (fun s t ↦ (Etale.existsUnique_of_isCompl G i j h s t).exists.choose_spec.2)
-    (fun s t _ h₁ h₂ ↦ (Etale.existsUnique_of_isCompl G i j h s t).unique ⟨h₁, h₂⟩
-      (Etale.existsUnique_of_isCompl G i j h s t).exists.choose_spec)
-
 end Clopen
 
 section Graph
@@ -149,7 +138,6 @@ noncomputable def Etale.graph (U : X.Etale) : U ⟶ Etale.graphTarget f U :=
 omit [IsSeparated f] in
 lemma Etale.graph_left (U : X.Etale) :
     (Etale.graph f U).left = pullback.lift (𝟙 U.left) U.hom (by simp) := rfl
-
 
 omit [IsSeparated f] in
 @[reassoc (attr := simp)]
@@ -335,8 +323,6 @@ namespace AlgebraicGeometry
 
 open Etale
 
-
-
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
   [AlgebraicGeometry.Etale f] [IsSeparated f]
@@ -416,7 +402,6 @@ noncomputable def Etale.sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber f y
           ((MorphismProperty.Over.map ⊤ ‹AlgebraicGeometry.Etale f›).map g) _
             ((f)_*[A].obj G).obj))
 
-
 omit [HasSmallSiteSheafify A] in
 @[reassoc (attr := simp)]
 lemma Etale.toPresheafFiber_sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber f y)
@@ -427,18 +412,6 @@ lemma Etale.toPresheafFiber_sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber
         (Scheme.pointSmallEtale y).toPresheafFiber _ (Etale.fiberMapPoint f t U x)
           ((f)_*[A].obj G).obj :=
   (Scheme.pointSmallEtale t.1).toPresheafFiber_presheafFiberDesc _ _ U x
-
-omit [IsSeparated f] in
-/-- The point `(u, t')` of `U ×_Y X` attached to a geometric point `u` of `U` over `t` and a
-geometric point `t'` of `X` over `y`. -/
-lemma Etale.basePt_fiberMapPoint (t t' : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
-    (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
-    Scheme.Hom.basePt f ⟨_, Etale.fiberMapPoint f t U x⟩ t' =
-      pullback.lift x.left t'.1 (by
-        have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
-        change x.left ≫ U.hom ≫ f = _
-        rw [← Category.assoc, hx, t.2, t'.2]) :=
-  rfl
 
 omit [HasSmallSiteSheafify A] in
 /-- Restricting the germ of the extension by zero of a section back to `t` gives the germ of
@@ -559,7 +532,6 @@ instance Etale.isIso_biproductSheafFiberToLowerStar :
   rw [h]
   infer_instance
 
-
 omit [IsFinite f] [HasSmallSiteSheafify A] in
 lemma Etale.lowerStarUnit_comp_map_app_π {M : A}
     (φ : (f)_*[A].obj G ⟶ (Scheme.pointSmallEtale y).skyscraperSheaf M)
@@ -583,7 +555,6 @@ lemma Etale.skyscraperSheaf_map_π {M : A} {V V' : Y.Etale} (g : V ⟶ V')
     ((Scheme.pointSmallEtale y).skyscraperSheaf M).obj.map g.op ≫ Pi.π _ z =
       Pi.π _ ((Scheme.pointSmallEtale y).fiber.map g z) := by
   exact (Pi.map'_comp_π _ _ z).trans (Category.comp_id _)
-
 
 omit [IsSeparated f] [IsFinite f] in
 /-- The geometric point of `U` over `y` underlying a geometric point of `U ⟶ X ⟶ Y`. -/
@@ -759,22 +730,6 @@ lemma Etale.bijective_lowerStarUnit_comp_map_of_concrete
   exact ((Etale.etaleLowerShriekRestrictionAdjunction A f).homEquiv _ _).bijective.comp
     ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun ψ ↦ ⟨inv (Etale.etaleLowerShriekToLowerStar A f G) ≫ ψ,
       IsIso.hom_inv_id_assoc _ _⟩⟩
-
-
-omit [IsGrothendieckAbelian.{u + 1} A] [AlgebraicGeometry.Etale f] [IsSeparated f] [IsFinite f] in
-lemma Etale.sheafCompose_preadditiveCoyoneda_map_hom_app_apply {Z : Scheme.{u}}
-    {P Q : Sheaf Z.smallEtaleTopology A} (ψ : P ⟶ Q) {a : A} (U : Z.Etaleᵒᵖ)
-    (x : a ⟶ P.obj.obj U) :
-    (((sheafCompose _ (preadditiveCoyoneda.obj (op a))).map ψ).hom.app U).hom x =
-      x ≫ ψ.hom.app U :=
-  rfl
-
-omit [IsGrothendieckAbelian.{u + 1} A] [AlgebraicGeometry.Etale f] [IsSeparated f] [IsFinite f] in
-lemma Etale.sheafCompose_map_preadditiveCoyoneda_map_app_hom_app_apply {Z : Scheme.{u}}
-    (P : Sheaf Z.smallEtaleTopology A) {a a' : A} (g : a ⟶ a') (U : Z.Etaleᵒᵖ)
-    (x : a' ⟶ P.obj.obj U) :
-    (((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app P).hom.app U).hom x = g ≫ x :=
-  rfl
 
 omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- **Extension by zero off the graphs is the unit of an adjunction `f_* ⊣ f^*`** for a finite

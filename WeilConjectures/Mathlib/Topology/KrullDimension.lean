@@ -480,21 +480,3 @@ theorem Topology.IsEmbedding.topologicalKrullDim_eq_range {X Y : Type*} [Topolog
     topologicalKrullDim Y = topologicalKrullDim (Set.range f) :=
   IsHomeomorph.topologicalKrullDim_eq _ hf.toHomeomorph.isHomeomorph
 
-/-- A quasi-sober space of positive topological Krull dimension has a point which is not
-closed: the generic point of the larger member of a chain of length one of irreducible closed
-subsets. -/
-theorem exists_not_isClosed_singleton_of_topologicalKrullDim_pos {X : Type*}
-    [TopologicalSpace X] [QuasiSober X] (hX : 0 < topologicalKrullDim X) :
-    ∃ x : X, ¬ IsClosed ({x} : Set X) := by
-  obtain ⟨Z₀, Z₁, hZ⟩ := Order.krullDim_pos_iff.1 hX
-  have hη := Z₁.isIrreducible.isGenericPoint_genericPoint Z₁.isClosed
-  set η := Z₁.isIrreducible.genericPoint
-  refine ⟨η, fun hc ↦ ?_⟩
-  have h₁ : (Z₁ : Set X) = {η} := by rw [← hη.def]; exact hc.closure_eq
-  obtain ⟨z, hz⟩ := Z₀.isIrreducible.nonempty
-  have h₀ : (Z₀ : Set X) ⊆ Z₁ := hZ.le
-  have hzη : z = η := by have := h₀ hz; rw [h₁] at this; exact this
-  have : (Z₁ : Set X) ⊆ Z₀ := by
-    rw [h₁, Set.singleton_subset_iff, ← hzη]
-    exact hz
-  exact hZ.ne (SetLike.coe_injective (h₀.antisymm this))

@@ -23,22 +23,4 @@ open CategoryTheory Limits Opposite
 
 namespace CategoryTheory.Sheaf
 
-/-- **Sheaf cohomology is right-derived evaluation.** For a terminal object `T` of the site,
-`Hⁿ(F)` is the `n`-th right derived functor of the evaluation at `T`, in every degree. -/
-theorem cohomology_nonempty_addEquiv_rightDerived_evaluation
-    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w} (Sheaf J AddCommGrpCat.{w})]
-    [HasInjectiveResolutions (Sheaf J AddCommGrpCat.{w})]
-    (T : C) (hT : IsTerminal T) (F : Sheaf J AddCommGrpCat.{w}) (n : ℕ) :
-    Nonempty
-      (Sheaf.H F n ≃+
-        (((sheafToPresheaf J AddCommGrpCat.{w} ⋙
-          (evaluation Cᵒᵖ AddCommGrpCat.{w}).obj (op T)).rightDerived n).obj F)) := by
-  cases n with
-  | zero =>
-    exact ⟨(H.equiv₀ F hT).trans
-      (((sheafToPresheaf J AddCommGrpCat.{w} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{w}).obj
-        (op T)).rightDerivedZeroIsoSelf.app F).symm.addCommGroupIsoToAddEquiv)⟩
-  | succ n => exact cohomology_nonempty_addEquiv_rightDerived_evaluation_succ J T hT F n
-
 end CategoryTheory.Sheaf

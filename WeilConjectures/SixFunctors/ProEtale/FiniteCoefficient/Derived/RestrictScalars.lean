@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 
-
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
@@ -82,13 +81,6 @@ lemma conjugateEquiv_associator_inv {L₀₁ : A ⥤ B} {R₁₀ : B ⥤ A} {L�
     Adjunction.comp_counit_app, Category.id_comp]
   simp
 
-/-- The inverse left unitor is conjugate to the right unitor, the counterpart of
-`CategoryTheory.conjugateEquiv_leftUnitor_hom`. -/
-lemma conjugateEquiv_leftUnitor_inv {L : A ⥤ B} {R : B ⥤ A} (adj : L ⊣ R) :
-    conjugateEquiv (Adjunction.id.comp adj) adj (Functor.leftUnitor L).inv =
-      (Functor.rightUnitor R).hom := by
-  cat_disch
-
 end Conjugate
 
 namespace Functor
@@ -101,15 +93,9 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
   [Abelian C] [Abelian D] [Abelian E]
   (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
 
-
-
 variable [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-
-
-
-
 
 end Factors
 
@@ -119,19 +105,11 @@ variable {C D E E' : Type*} [Category C] [Category D] [Category E] [Category E']
   [Abelian C] [Abelian D] [Abelian E] [Abelian E']
   [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] [HasDerivedCategory E']
 
-
-
 variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-
-
-
-
 
 variable (G : D ⥤ E) (H : E ⥤ E') [G.Additive] [H.Additive]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-
-
 
 end Coherence
 
@@ -140,10 +118,6 @@ section Whisker
 variable {C D E : Type*} [Category C] [Category D] [Category E]
   [Abelian C] [Abelian D] [Abelian E]
   [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-
-
-
-
 
 end Whisker
 
@@ -250,39 +224,6 @@ variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B] [HasDer
   [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]
   [p.Additive] [PreservesFiniteLimits p] [PreservesFiniteColimits p]
 
-/-- The isomorphism `Functor.mapDerivedCategorySquareIso` induced on derived categories by a
-square of exact functors whose horizontal functors are identified with identity functors by
-`eP` and `ep` is compatible with these identifications, as soon as the square itself is
-(hypothesis `h`). -/
-lemma mapDerivedCategorySquareIso_hom_app_id (α : r ⋙ p ≅ P ⋙ r) (eP : P ≅ 𝟭 A)
-    (ep : p ≅ 𝟭 B) (h : ∀ X, α.hom.app X ≫ r.map (eP.hom.app X) = ep.hom.app (r.obj X))
-    (K : DerivedCategory A) :
-    (mapDerivedCategorySquareIso α).hom.app K ≫
-        r.mapDerivedCategory.map
-          ((mapDerivedCategoryNatIso eP ≪≫ mapDerivedCategoryIdIso A).hom.app K) =
-      (mapDerivedCategoryNatIso ep ≪≫ mapDerivedCategoryIdIso B).hom.app
-        (r.mapDerivedCategory.obj K) := by
-  have hiso : α ≪≫ isoWhiskerRight eP r = isoWhiskerLeft r ep := by
-    ext X
-    simpa using h X
-  have hm : (mapDerivedCategoryNatIso α).hom.app K ≫
-      (mapDerivedCategoryNatIso (isoWhiskerRight eP r)).hom.app K =
-      (mapDerivedCategoryNatIso (isoWhiskerLeft r ep)).hom.app K := by
-    rw [← NatTrans.comp_app, ← mapDerivedCategoryNatIso_trans, hiso]
-  have hWR := congr_app (mapDerivedCategoryNatIso_isoWhiskerRight eP r) K
-  have hWL := congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft r ep) K
-  have hUL := congr_app (mapDerivedCategoryCompIso_id_comp r) K
-  have hUR := congr_app (mapDerivedCategoryCompIso_comp_id r) K
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    NatTrans.id_app] at hWR hWL hUL hUR
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% hWR, reassoc_of% hm, hUL]
-  -- the identity is that of an object which agrees with the target only up to unfolding `𝟭 A`
-  erw [Category.comp_id]
-  rw [← cancel_epi ((mapDerivedCategoryCompIso r p).hom.app K),
-    Iso.hom_inv_id_app_assoc, ← reassoc_of% hWL, hUR]
-  erw [Category.comp_id]
-
 end Identity
 
 end Functor
@@ -319,239 +260,15 @@ lemma conjugateEquiv_upperStarRestrictScalarsIso_hom :
       (upperStarRestrictScalarsIso ρ g).hom = 𝟙 _ :=
   congrArg Iso.hom ((conjugateIsoEquiv _ _).apply_symm_apply (Iso.refl _))
 
-/-- The componentwise form of
-`AlgebraicGeometry.ProEtale.conjugateEquiv_upperStarRestrictScalarsIso_hom`. -/
-lemma conjugateEquiv_upperStarRestrictScalarsIso_hom_app
-    (F : Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) :
-    (conjugateEquiv
-      ((upperStarLowerStarAdjunction _ g).comp (Sheaf.restrictCoextendScalarsAdj _ ρ))
-      ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp (upperStarLowerStarAdjunction _ g))
-      (upperStarRestrictScalarsIso ρ g).hom).app F = 𝟙 _ :=
-  NatTrans.congr_app (conjugateEquiv_upperStarRestrictScalarsIso_hom ρ g) F
-
 end UpperStar
 
-/-- The identity isomorphism of the pullback is conjugate to the inverse of the identity
-isomorphism of the pushforward. -/
-lemma conjugateEquiv_upperStarId_hom (A : Type*) [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) :
-    conjugateEquiv Adjunction.id (upperStarLowerStarAdjunction A (𝟙 X)) (upperStarId A X).hom =
-      (lowerStarId A X).inv :=
-  congrArg Iso.hom (conjugateIsoEquiv_upperStarId A X)
-
 section Coherence
-
-/-- Compatibility of `AlgebraicGeometry.ProEtale.upperStarRestrictScalarsIso` with the
-composition isomorphisms `(g₁ ≫ g₂)^* ≅ g₂^* ⋙ g₁^*`: the isomorphism for `g₁ ≫ g₂` is the
-pasting of those for `g₂` and `g₁`. -/
-lemma upperStarRestrictScalarsIso_comp_hom {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R) :
-    (upperStarRestrictScalarsIso ρ (g₁ ≫ g₂)).hom ≫
-        Functor.whiskerRight (upperStarComp _ g₁ g₂).hom (Sheaf.restrictScalars _ ρ) =
-      Functor.whiskerLeft (Sheaf.restrictScalars _ ρ) (upperStarComp _ g₁ g₂).hom ≫
-        (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (upperStarRestrictScalarsIso ρ g₂).hom _ ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft _ (upperStarRestrictScalarsIso ρ g₁).hom ≫
-        (Functor.associator _ _ _).inv := by
-  apply (conjugateEquiv
-    (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g₂).comp
-      (upperStarLowerStarAdjunction _ g₁)).comp (Sheaf.restrictCoextendScalarsAdj _ ρ))
-    ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (g₁ ≫ g₂)))).injective
-  rw [← conjugateEquiv_comp _
-    ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') (g₁ ≫ g₂)).comp
-      (Sheaf.restrictCoextendScalarsAdj _ ρ)) _,
-    conjugateEquiv_whiskerRight, conjugateEquiv_upperStarComp_hom,
-    ← conjugateEquiv_comp _
-      ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp
-        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g₂).comp
-          (upperStarLowerStarAdjunction _ g₁))) _,
-    ← conjugateEquiv_comp _
-      (((Sheaf.restrictCoextendScalarsAdj _ ρ).comp
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g₂)).comp
-          (upperStarLowerStarAdjunction _ g₁)) _,
-    ← conjugateEquiv_comp _
-      (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g₂).comp
-        (Sheaf.restrictCoextendScalarsAdj _ ρ)).comp
-          (upperStarLowerStarAdjunction _ g₁)) _,
-    ← conjugateEquiv_comp _
-      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g₂).comp
-        ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp
-          (upperStarLowerStarAdjunction _ g₁))) _,
-    ← conjugateEquiv_comp _
-      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g₂).comp
-        ((upperStarLowerStarAdjunction _ g₁).comp
-          (Sheaf.restrictCoextendScalarsAdj _ ρ))) _]
-  simp only [conjugateEquiv_whiskerLeft, conjugateEquiv_whiskerRight,
-    conjugateEquiv_upperStarComp_hom, conjugateEquiv_associator_inv,
-    conjugateEquiv_associator_hom]
-  ext F : 2
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_inv_app, Functor.associator_hom_app, Category.id_comp, Category.comp_id,
-    conjugateEquiv_upperStarRestrictScalarsIso_hom_app]
-  ext V : 3
-  simp only [lowerStarComp_hom_app_hom_app]
-  rfl
-
-/-- Compatibility of `AlgebraicGeometry.ProEtale.upperStarRestrictScalarsIso` with the identity
-isomorphisms `(𝟙 X)^* ≅ 𝟭`. -/
-lemma upperStarRestrictScalarsIso_id_hom (X : Scheme.{u}) :
-    (upperStarRestrictScalarsIso ρ (𝟙 X)).hom ≫
-        Functor.whiskerRight (upperStarId _ X).hom (Sheaf.restrictScalars _ ρ) =
-      Functor.whiskerLeft (Sheaf.restrictScalars _ ρ) (upperStarId _ X).hom ≫
-        (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv := by
-  apply (conjugateEquiv (Adjunction.id.comp (Sheaf.restrictCoextendScalarsAdj _ ρ))
-    ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X)))).injective
-  rw [← conjugateEquiv_comp _
-    ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') (𝟙 X)).comp
-      (Sheaf.restrictCoextendScalarsAdj _ ρ)) _,
-    ← conjugateEquiv_comp _
-      ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp Adjunction.id) _,
-    ← conjugateEquiv_comp _ (Sheaf.restrictCoextendScalarsAdj _ ρ) _]
-  simp only [conjugateEquiv_whiskerLeft, conjugateEquiv_whiskerRight,
-    conjugateEquiv_upperStarId_hom, conjugateEquiv_leftUnitor_inv,
-    conjugateEquiv_rightUnitor_hom]
-  ext F : 2
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Category.comp_id,
-    conjugateEquiv_upperStarRestrictScalarsIso_hom_app]
-  ext V : 3
-  simp only [lowerStarId_inv_app_hom_app]
-  rfl
-
-/-- Compatibility of `AlgebraicGeometry.ProEtale.upperStarRestrictScalarsIso` with the
-congruence isomorphisms `f^* ≅ g^*` for `f = g`. -/
-lemma upperStarRestrictScalarsIso_congr_hom {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
-    (upperStarRestrictScalarsIso ρ f).hom ≫
-        Functor.whiskerRight (upperStarCongr _ h).hom (Sheaf.restrictScalars _ ρ) =
-      Functor.whiskerLeft (Sheaf.restrictScalars _ ρ) (upperStarCongr _ h).hom ≫
-        (upperStarRestrictScalarsIso ρ g).hom := by
-  subst h
-  simp [upperStarCongr]
 
 end Coherence
 
 section Derived
 
-/-- The components of the composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*` of derived
-pullbacks, in terms of the functors induced levelwise by the exact pullbacks. -/
-lemma leftDerivedUpperStarComp_hom_app (A : Type*) [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
-    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
-    {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology R) A)) :
-    (leftDerivedUpperStarComp A g₁ g₂).hom.app K =
-      (leftDerivedUpperStarIsoMapDerivedCategory A (g₁ ≫ g₂)).hom.app K ≫
-        (Functor.mapDerivedCategoryTriangleIso (upperStarComp A g₁ g₂)).hom.app K ≫
-        (upperStar A g₁).mapDerivedCategory.map
-          ((leftDerivedUpperStarIsoMapDerivedCategory A g₂).inv.app K) ≫
-        (leftDerivedUpperStarIsoMapDerivedCategory A g₁).inv.app
-          ((upperStar A g₂).leftDerivedFunctor.obj K) := by
-  simp [leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
-    Functor.leftDerivedFunctorCompIso, leftDerivedUpperStarIsoMapDerivedCategory]
-
-/-- The components of the identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback, in terms
-of the functor induced levelwise by the exact pullback. -/
-lemma leftDerivedUpperStarId_hom_app (A : Type*) [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
-    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
-    (X : Scheme.{u}) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    (leftDerivedUpperStarId A X).hom.app K =
-      (leftDerivedUpperStarIsoMapDerivedCategory A (𝟙 X)).hom.app K ≫
-        (Functor.mapDerivedCategoryNatIso (upperStarId A X) ≪≫
-          Functor.mapDerivedCategoryIdIso _).hom.app K := by
-  simp [leftDerivedUpperStarId, Functor.leftDerivedFunctorNatIso,
-    leftDerivedUpperStarIsoMapDerivedCategory]
-
 variable {Y Z : Scheme.{u}} (g : Y ⟶ Z)
-
-/-- The derived pullback commutes with restriction of scalars: for `ρ : Λ →+* Λ'` and a
-morphism of schemes `g : Y ⟶ Z`, the canonical isomorphism `Lg^* (Res K) ≅ Res (Lg^* K)` for `K`
-in the derived category of pro-étale sheaves of `Λ'`-modules on `Z`. Both derived pullbacks are
-computed levelwise (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarIsoMapDerivedCategory`), and
-the isomorphism is induced by `AlgebraicGeometry.ProEtale.upperStarRestrictScalarsIso`. -/
-noncomputable def leftDerivedUpperStarRestrictScalarsIso :
-    Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Z) ρ ⋙
-        L(upperStar (ModuleCat.{u + 1} Λ) g) ≅
-      L(upperStar (ModuleCat.{u + 1} Λ') g) ⋙
-        Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) ρ :=
-  Functor.isoWhiskerLeft (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Z) ρ)
-      (leftDerivedUpperStarIsoMapDerivedCategory _ g) ≪≫
-    Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIso ρ g) ≪≫
-    Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory _ g).symm
-      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) ρ)
-
-/-- The components of `AlgebraicGeometry.ProEtale.leftDerivedUpperStarRestrictScalarsIso`. -/
-lemma leftDerivedUpperStarRestrictScalarsIso_hom_app
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ'))) :
-    (leftDerivedUpperStarRestrictScalarsIso ρ g).hom.app K =
-      (leftDerivedUpperStarIsoMapDerivedCategory _ g).hom.app
-          ((Sheaf.derivedRestrictScalars _ ρ).obj K) ≫
-        (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIso ρ g)).hom.app K ≫
-        (Sheaf.derivedRestrictScalars _ ρ).map
-          ((leftDerivedUpperStarIsoMapDerivedCategory _ g).inv.app K) :=
-  rfl
-
-/-- Compatibility of `AlgebraicGeometry.ProEtale.leftDerivedUpperStarRestrictScalarsIso` with
-the composition isomorphisms `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*` (over `Λ'` on the left, over `Λ` on
-the right). -/
-lemma leftDerivedUpperStarRestrictScalarsIso_comp_hom_app {T S R : Scheme.{u}} (g₁ : T ⟶ S)
-    (g₂ : S ⟶ R)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology R) (ModuleCat.{u + 1} Λ'))) :
-    (leftDerivedUpperStarRestrictScalarsIso ρ (g₁ ≫ g₂)).hom.app K ≫
-        (Sheaf.derivedRestrictScalars _ ρ).map ((leftDerivedUpperStarComp _ g₁ g₂).hom.app K) =
-      (leftDerivedUpperStarComp _ g₁ g₂).hom.app ((Sheaf.derivedRestrictScalars _ ρ).obj K) ≫
-        (L(upperStar (ModuleCat.{u + 1} Λ) g₁)).map
-          ((leftDerivedUpperStarRestrictScalarsIso ρ g₂).hom.app K) ≫
-        (leftDerivedUpperStarRestrictScalarsIso ρ g₁).hom.app
-          ((L(upperStar (ModuleCat.{u + 1} Λ') g₂)).obj K) := by
-  have H := Functor.mapDerivedCategorySquareIso_hom_app_comp
-    (upperStarRestrictScalarsIso ρ g₂) (upperStarRestrictScalarsIso ρ g₁)
-    (upperStarRestrictScalarsIso ρ (g₁ ≫ g₂)) (upperStarComp _ g₁ g₂) (upperStarComp _ g₁ g₂)
-    (fun X ↦ by simpa using congr_app (upperStarRestrictScalarsIso_comp_hom ρ g₁ g₂) X) K
-  have hnat :=
-    (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIso ρ g₁)).hom.naturality
-      ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ') g₂).inv.app K)
-  simp only [Functor.comp_map] at hnat
-  rw [leftDerivedUpperStarComp_hom_app, leftDerivedUpperStarComp_hom_app,
-    leftDerivedUpperStarRestrictScalarsIso_hom_app,
-    leftDerivedUpperStarRestrictScalarsIso_hom_app,
-    leftDerivedUpperStarRestrictScalarsIso_hom_app]
-  simp only [Category.assoc]
-  -- `erw`: the instance arguments of the derived pullbacks are found along different paths
-  erw [NatIso.naturality_1_assoc]
-  simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc]
-  simp only [Functor.map_comp, Category.assoc]
-  -- `erw`: `Sheaf.derivedRestrictScalars` is the reducible `mapDerivedCategory` of `H`
-  erw [reassoc_of% hnat, reassoc_of% H]
-
-/-- Compatibility of `AlgebraicGeometry.ProEtale.leftDerivedUpperStarRestrictScalarsIso` with
-the identity isomorphisms `L(𝟙 X)^* ≅ 𝟭`. -/
-lemma leftDerivedUpperStarRestrictScalarsIso_id_hom_app (X : Scheme.{u})
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ'))) :
-    (leftDerivedUpperStarRestrictScalarsIso ρ (𝟙 X)).hom.app K ≫
-        (Sheaf.derivedRestrictScalars _ ρ).map ((leftDerivedUpperStarId _ X).hom.app K) =
-      (leftDerivedUpperStarId _ X).hom.app ((Sheaf.derivedRestrictScalars _ ρ).obj K) := by
-  have H := Functor.mapDerivedCategorySquareIso_hom_app_id (upperStarRestrictScalarsIso ρ (𝟙 X))
-    (upperStarId _ X) (upperStarId _ X)
-    (fun Y ↦ by simpa using congr_app (upperStarRestrictScalarsIso_id_hom ρ X) Y) K
-  rw [leftDerivedUpperStarRestrictScalarsIso_hom_app, leftDerivedUpperStarId_hom_app,
-    leftDerivedUpperStarId_hom_app]
-  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc]
-  -- `erw`: `Sheaf.derivedRestrictScalars` is the reducible `mapDerivedCategory` of `H`
-  erw [H]
-
-/-- Compatibility of `AlgebraicGeometry.ProEtale.leftDerivedUpperStarRestrictScalarsIso` with
-the congruence isomorphisms `Lf^* ≅ Lg^*` for `f = g`. -/
-lemma leftDerivedUpperStarRestrictScalarsIso_congr_hom_app {X Y : Scheme.{u}} {f g : X ⟶ Y}
-    (h : f = g) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ'))) :
-    (leftDerivedUpperStarRestrictScalarsIso ρ f).hom.app K ≫
-        (Sheaf.derivedRestrictScalars _ ρ).map ((leftDerivedUpperStarCongr _ h).hom.app K) =
-      (leftDerivedUpperStarCongr _ h).hom.app ((Sheaf.derivedRestrictScalars _ ρ).obj K) ≫
-        (leftDerivedUpperStarRestrictScalarsIso ρ g).hom.app K := by
-  subst h
-  simp
 
 end Derived
 

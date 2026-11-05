@@ -94,37 +94,6 @@ namespace ProjectiveDomination
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- **Projective dominations are stable under base change**: the base change of a projective
-domination of `f : X ⟶ Y` along `g : Y' ⟶ Y` is a projective domination of
-`X ×_Y Y' ⟶ Y'`. The closed immersion into `ℙ(n; Y')` is the base change of the given one along
-`ℙ(n; Y') ⟶ ℙ(n; Y)`. (Blueprint `lemma-weil-pbc-chow-factorization`, base change part.) -/
-noncomputable def pullback (D : ProjectiveDomination f) {Y' : Scheme.{u}} (g : Y' ⟶ Y) :
-    ProjectiveDomination (Limits.pullback.snd f g) :=
-  have h : IsPullback (Limits.pullback.fst (D.π ≫ f) g) (Limits.pullback.snd (D.π ≫ f) g)
-      (D.i ≫ ℙ(D.n; Y) ↘ Y) g := by
-    rw [D.w]
-    exact IsPullback.of_hasPullback _ _
-  have hw : Limits.pullback.snd (D.π ≫ f) g ≫ g =
-      (Limits.pullback.fst (D.π ≫ f) g ≫ D.i) ≫ ℙ(D.n; Y) ↘ Y := by
-    rw [Category.assoc, D.w, Limits.pullback.condition]
-  have : IsClosedImmersion (ProjectiveSpace.liftBaseChange _ _ hw) :=
-    MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_liftBaseChange _ h hw)
-      inferInstance
-  have hπ : IsPullback (Limits.pullback.map (D.π ≫ f) g f g D.π (𝟙 _) (𝟙 _) (by simp)
-      (by simp)) (Limits.pullback.fst (D.π ≫ f) g) (Limits.pullback.fst f g) D.π := by
-    refine IsPullback.of_right ?_ (by simp) (IsPullback.of_hasPullback f g).flip
-    simpa using (IsPullback.of_hasPullback (D.π ≫ f) g).flip
-  have : IsProper (Limits.pullback.map (D.π ≫ f) g f g D.π (𝟙 _) (𝟙 _) (by simp) (by simp)) :=
-    MorphismProperty.of_isPullback hπ.flip inferInstance
-  have : Surjective (Limits.pullback.map (D.π ≫ f) g f g D.π (𝟙 _) (𝟙 _) (by simp)
-      (by simp)) :=
-    MorphismProperty.of_isPullback hπ.flip inferInstance
-  { X' := Limits.pullback (D.π ≫ f) g
-    π := Limits.pullback.map (D.π ≫ f) g f g D.π (𝟙 _) (𝟙 _) (by simp) (by simp)
-    n := D.n
-    i := ProjectiveSpace.liftBaseChange _ _ hw
-    w := by simp }
-
 /-- **Proper schemes over an affine base are dominated by projective ones.** Let `f : X ⟶ Y`
 be proper with `Y` affine; no Noetherian or finite presentation hypothesis is imposed. Then
 there are a proper surjection `π : X̃ ⟶ X` and a closed immersion `i : X̃ ⟶ ℙ(n; Y)` over `Y`,

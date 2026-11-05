@@ -34,11 +34,5 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
   [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
   [TensorPreservesCountableCoproducts C]
 
-/-- The standard Koszul braiding, with summand map `(-1)^(pq)` times the base braiding.
-Source: `CochainComplex.Monoidal.braidedCategory`, Stacks Tag 0G6E
-(blueprint: def-sfb-countable-tensor-structures). -/
-noncomputable instance braided [BraidedCategory C] : BraidedCategory (CochainComplex C ℤ) :=
-  CochainComplex.Monoidal.braidedCategory
-
 end CountableTensorStructures
 end CategoryTheory

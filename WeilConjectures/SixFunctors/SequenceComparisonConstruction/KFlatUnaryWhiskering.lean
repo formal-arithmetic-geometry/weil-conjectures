@@ -62,49 +62,4 @@ universe a b c d e f
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 namespace SequenceComparisonConstruction
 
-/-- Restriction along K-flat representatives is fully faithful on functor categories.
-Source: Stacks 06YS, 07A4 and 0G7E
-(blueprint: lem-sf-kflat-unary-whiskering).
-Proof: every homotopy object has a K-flat resolution, giving the hypotheses of
-resolvingRepresentativesFullyFaithfulWhiskering on the K-flat full subcategory.
-Transport its product restriction comparison by quotientCompQhIso. Apply the
-projection/diagonal construction unaryWhiskeringOfProduct to obtain unary full
-faithfulness for the actual derived localization on cochain complexes. -/
-theorem kflatWhiskering
-    {D : Type e} [Category.{f} D]
-    {C : Type a} [Category.{b} C] [EssentiallySmall.{c} C]
-    {J : GrothendieckTopology C}
-    [J.HasSheafCompose (forget₂ CommRingCat.{c} RingCat.{c})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{c}]
-    [HasSheafify J AddCommGrpCat.{c}]
-    (R : Sheaf J CommRingCat.{c})
-    [HasDerivedCategory.{d} (SheafOfModules.{c}
-      ((sheafCompose J (forget₂ CommRingCat.{c} RingCat.{c})).obj R))] :
-    let A := SheafOfModules.{c}
-      ((sheafCompose J (forget₂ CommRingCat.{c} RingCat.{c})).obj R)
-    let P : ObjectProperty (CochainComplex A ℤ) :=
-      CochainComplex.IsKFlatIndependentCoefficients (R := R)
-    Nonempty (((whiskeringLeft P.FullSubcategory (DerivedCategory A) D).obj
-      (P.ι ⋙ DerivedCategory.Q)).FullyFaithful) := by
-  intro A P
-  let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ P X.as
-  have hres : ∀ X : HomotopyCategory A (.up ℤ),
-      ∃ (Y : H.FullSubcategory) (s : Y.obj ⟶ X),
-        HomotopyCategory.quasiIso A (.up ℤ) s := by
-    intro X
-    obtain ⟨K, q, hK, _, hq, _⟩ :=
-      CochainComplex.exists_isKFlatResolutionIndependentCoefficients X.as
-    exact ⟨⟨(HomotopyCategory.quotient A (.up ℤ)).obj K, hK⟩,
-      (HomotopyCategory.quotient A (.up ℤ)).map q,
-      (HomotopyCategory.quotient_map_mem_quasiIso_iff q).2 hq⟩
-  obtain ⟨ff⟩ := resolvingRepresentativesFullyFaithfulWhiskering
-    (K := CochainComplex A ℤ) (H := HomotopyCategory A (.up ℤ))
-    (D := DerivedCategory A) D
-    (HomotopyCategory.quotient A (.up ℤ)) HomotopyCategory.quotient_obj_surjective
-    (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh P H (fun _ ↦ Iff.rfl) hres
-  let ff' := ff.ofIso ((Functor.whiskeringLeft _ _ D).mapIso
-    (NatIso.prod (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))
-      (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))))
-  exact ⟨CategoryTheory.Functor.unaryWhiskeringOfProduct D (P.ι ⋙ DerivedCategory.Q) ff'⟩
-
 end SequenceComparisonConstruction

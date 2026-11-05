@@ -200,7 +200,6 @@ paragraph of the finite comparison proof
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -213,89 +212,6 @@ namespace CategoryTheory
 section ConstantScalars
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   (A : Type u) [CommRing A]
-
-private instance commRingForgetSheafification :
-    J.PreservesSheafification (forget₂ CommRingCat.{u} RingCat.{u}) where
-  le := by
-    intro P Q f hf
-    let : Presheaf.IsLocallyInjective J f := hf.isLocallyInjective
-    let : Presheaf.IsLocallySurjective J f := hf.isLocallySurjective
-    let : Presheaf.IsLocallyInjective J (Functor.whiskerRight f
-        (forget₂ CommRingCat.{u} RingCat.{u})) :=
-      ⟨fun x y h ↦ Presheaf.equalizerSieve_mem J f x y h⟩
-    let : Presheaf.IsLocallySurjective J (Functor.whiskerRight f
-        (forget₂ CommRingCat.{u} RingCat.{u})) :=
-      ⟨fun x ↦ Presheaf.imageSieve_mem J f x⟩
-    exact J.W_of_isLocallyBijective (Functor.whiskerRight f
-      (forget₂ CommRingCat.{u} RingCat.{u}))
-
-private def coefficientRingIso : SheafOfModules.constantCoefficientRing J A ≅
-    (constantSheaf J RingCat.{u}).obj (RingCat.of A) :=
-  (constantCommuteCompose J (forget₂ CommRingCat.{u} RingCat.{u})).app (CommRingCat.of A)
-
-private def ringRestriction : ConstantCompletion.Mod (ConstantCompletion.constant J A) ⥤
-    SheafOfModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of A)) :=
-  SheafOfModules.restrictScalars (coefficientRingIso J A).inv
-
-private theorem ringRestriction_equivalence : (ringRestriction J A).IsEquivalence := by
-  let eC : C ≌ C := Equivalence.refl
-  let : eC.functor.IsContinuous J J := inferInstanceAs (Functor.IsContinuous (𝟭 C) J J)
-  let : eC.inverse.IsContinuous J J := inferInstanceAs (Functor.IsContinuous (𝟭 C) J J)
-  let c := (coefficientRingIso J A).symm
-  let e := SheafOfModules.pushforwardPushforwardEquivalence.{u}
-    (J := J) (K := J) eC c.hom c.inv
-    (by
-      ext U x
-      dsimp [eC, Equivalence.refl]
-      simp only [Functor.map_id]
-      exact congrArg (fun f ↦ f.hom.app U x) c.inv_hom_id.symm)
-    (by
-      ext U x
-      dsimp [eC, Equivalence.refl]
-      simp only [Functor.map_id]
-      exact congrArg (fun f ↦ f.hom.app U x) c.hom_inv_id)
-  exact e.isEquivalence_functor
-
-private theorem coefficientRingIso_unit :
-    SheafOfModules.constantCoefficientUnit J A ≫ (coefficientRingIso J A).hom.hom =
-      toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of A)) := by
-  change SheafOfModules.constantCoefficientUnit J A ≫
-    ((constantCommuteCompose J (forget₂ CommRingCat.{u} RingCat.{u})).hom.app
-      (CommRingCat.of A)).hom = _
-  rw [constantCommuteCompose_hom_app_hom]
-  unfold SheafOfModules.constantCoefficientUnit
-  rw [← Category.assoc, sheafComposeIso_inv_fac]
-  exact (toSheafify_naturality J
-    (Functor.constComp Cᵒᵖ (CommRingCat.of A)
-      (forget₂ CommRingCat.{u} RingCat.{u})).hom).symm.trans
-      (by rfl)
-
-private theorem restriction_smul (M : ConstantCompletion.Mod (ConstantCompletion.constant J A))
-    (V : Cᵒᵖ) (a : A) (x : M.val.obj V) :
-    a • (show ((ringRestriction J A ⋙ constantRingModuleRestriction J A).obj M).obj.obj V
-      from x) =
-    a • (show ((coefficientModelFixedScalars J A).obj M).obj.obj V from x) := by
-  have h := congrArg (fun f ↦ f.app V a) (coefficientRingIso_unit J A)
-  have hi := congrArg (fun f ↦ f.hom.app V) (coefficientRingIso J A).hom_inv_id
-  change (coefficientRingIso J A).inv.hom.app V
-    ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of A))).app V a) • x =
-      (SheafOfModules.constantCoefficientUnit J A).app V a • x
-  erw [← h]
-  exact congrArg (fun b ↦ b • x) (ConcreteCategory.congr_hom hi _)
-
-private def restrictionIso :
-    ringRestriction J A ⋙ constantRingModuleRestriction J A ≅ coefficientModelFixedScalars J A := by
-  refine NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _
-    (NatIso.ofComponents (fun V ↦ ?_) ?_)) ?_
-  · exact ModuleCat.isoMk (Iso.refl _) (fun a ↦ by
-      ext x
-      exact (restriction_smul J A M V a x).symm)
-  · intro V W f
-    ext x
-    rfl
-  · intro M N f
-    ext V x
-    rfl
 
 end ConstantScalars
 end CategoryTheory

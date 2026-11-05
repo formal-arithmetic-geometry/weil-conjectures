@@ -32,50 +32,5 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CommRingCat.EtaleContraction
 
-/-- Representatives of faithfully flat étale algebras, in the fixed universe `u`.
-Étale ring maps are of finite presentation. Source: blueprint order 1226
-(blueprint: def-weil-pbc-etale-contraction). -/
-abbrev Representatives (R : CommRingCat.{u}ᵒᵖ) : Type u :=
-  Skeleton (SmallModel.{u} ((CommRingCat.etale.op ⊓ CommRingCat.faithfullyFlat.op).Over ⊤ R))
-
-/-- The finite tensor coproducts and their canonical inclusion maps, written dually.
-`FiniteFamilies` includes the empty subset, whose wide pullback is the base ring.
-Source: blueprint order 1226 (blueprint: def-weil-pbc-etale-contraction). -/
-noncomputable def finiteDiagram (R : CommRingCat.{u}ᵒᵖ) :
-    (FiniteFamilies (Representatives R))ᵒᵖ ⥤ Over R :=
-  (FiniteFamilies.map (fromSkeleton (SmallModel.{u}
-    ((CommRingCat.etale.op ⊓ CommRingCat.faithfullyFlat.op).Over ⊤ R)))).op ⋙
-      FiniteFamilies.diag (CommRingCat.etale.op ⊓ CommRingCat.faithfullyFlat.op) R
-
-/-- Adjoin all the representatives by the filtered colimit of finite tensor coproducts.
-Its structural map is the arrow of this `Over` object. Source: blueprint order 1226
-(blueprint: def-weil-pbc-etale-contraction). -/
-noncomputable def step (R : CommRingCat.{u}ᵒᵖ) : Over R :=
-  limit (finiteDiagram R)
-
-/-- The successive rings, with `stage R 0 = R`. Source: blueprint order 1226
-(blueprint: def-weil-pbc-etale-contraction). -/
-noncomputable def stage (R : CommRingCat.{u}ᵒᵖ) : ℕ → CommRingCat.{u}ᵒᵖ
-  | 0 => R
-  | n + 1 => (step (stage R n)).left
-
-/-- The sequential diagram with the structural maps from the finite-tensor colimits.
-Source: blueprint order 1226 (blueprint: def-weil-pbc-etale-contraction). -/
-noncomputable def sequence (R : CommRingCat.{u}ᵒᵖ) : ℕᵒᵖ ⥤ CommRingCat.{u}ᵒᵖ :=
-  Functor.ofOpSequence (X := stage R) (fun n ↦ (step (stage R n)).hom)
-
 end CommRingCat.EtaleContraction
 
-/-- The ring `Rᵉ`, the sequential colimit of the successive tensor coproducts of one
-representative of each faithfully flat étale algebra of finite presentation.
-Both colimits carry their canonical maps and universal properties from `limit` in
-the opposite category. Source: blueprint order 1226
-(blueprint: def-weil-pbc-etale-contraction). -/
-noncomputable def CommRingCat.etaleContraction (R : CommRingCat.{u}) : CommRingCat.{u} :=
-  (limit (EtaleContraction.sequence (op R))).unop
-
-/-- The canonical map of the `n`-th ring to `Rᵉ`. Source: blueprint order 1226
-(blueprint: def-weil-pbc-etale-contraction). -/
-noncomputable def CommRingCat.EtaleContraction.ι (R : CommRingCat.{u}) (n : ℕ) :
-    (stage (op R) n).unop ⟶ R.etaleContraction :=
-  (limit.π (sequence (op R)) (op n)).unop

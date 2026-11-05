@@ -166,22 +166,7 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
     IsIso.inv_eq_of_hom_inv_id]
   rw [← Category.assoc, Hom.toImage_imageι, hx]
 
-/-- **Duals of invertible modules.** For an invertible `𝒪_X`-module `M`, the dual `Mᵛ` is
-invertible, the evaluation `ev : M ⊗ Mᵛ ⟶ 𝒪_X`, `x ⊗ φ ↦ φ(x)`, is an isomorphism, and the
-canonical biduality morphism `M ⟶ Mᵛᵛ` is an isomorphism.
-
-(blueprint: `lem-pc-tensor-dual-invertible`) -/
-theorem Modules.isInvertible_dual_and_isIso_dualEvaluation_and_isIso_bidual {X : Scheme.{u}}
-    (M : X.Modules) [M.IsInvertible] :
-    Mᵛ.IsInvertible ∧ IsIso (Modules.dualEvaluation M) ∧
-      IsIso (SheafOfModules.bidual (R := X.sheaf) M) := by
-  have := Modules.IsInvertible.sheafOfModules_isInvertible M
-  have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} M :=
-    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
-  exact ⟨inferInstance, inferInstance, SheafOfModules.isIso_bidual (R := X.sheaf) M⟩
-
 end Sections
-
 
 section FiniteScheme
 
@@ -586,7 +571,6 @@ theorem Modules.exists_isInvertible_zeroLocus_tensorObj_dual (ℒ : X.Modules) [
   simp only [Functor.id_map, Functor.comp_map, h', Functor.map_zero, comp_zero] at this
   rw [← hs i, this]
 
-
 include k in
 /-- **Every line bundle comes from a divisor.** Every invertible sheaf `ℒ` on a smooth proper
 curve is `𝒪_X(D₁) ⊗ 𝒪_X(D₂)⁻¹` for effective Cartier divisors `D₁` and `D₂`, given by
@@ -707,35 +691,6 @@ theorem eulerChar_unit_eq :
   rw [Modules.finrankH_unit_zero]
   rfl
 
-/-- **Riemann–Roch for curves, free case.** The Euler characteristic of the free sheaf of rank
-`r` on a smooth proper curve `X` over `k` with `H⁰(X, 𝒪_X) = k`, of genus `g`, is
-`χ(𝒪_X^{⊕ r}) = r (1 - g)`: cohomology commutes with finite direct sums
-(`AlgebraicGeometry.Scheme.Modules.finrankH_of_isBilimit`).
-
-Together with `AlgebraicGeometry.Scheme.Modules.degree`, which measures the degree of a
-rank-`r` sheaf against `𝒪_X^{⊕ r}`, this is the content of the Riemann–Roch identity
-`χ(ℱ) = deg ℱ + r (1 - g)`.
-
-(blueprint: `sk-thm-picard-rr`, `lem-sc-riemann-roch`) -/
-theorem eulerChar_free_eq (r : ℕ) :
-    Modules.eulerChar (X := X) k (SheafOfModules.free (ULift.{u} (Fin r))) =
-      r * (1 - (arithmeticGenus k X : ℤ)) := by
-  let O : X.Modules := SheafOfModules.unit X.ringCatSheaf
-  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
-  have := SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (ULift.{u} (Fin r))
-  have hb := biconeIsBilimitOfColimitCoconeOfIsColimit
-    (colimit.isColimit (Discrete.functor fun _ : ULift.{u} (Fin r) ↦ O))
-  have (q : ℕ) : FiniteDimensional k (O.H q) :=
-    Modules.finiteDimensional_H (M := 𝟙_ X.Modules) k q
-  have h (q : ℕ) : Modules.finrankH (X := X) k (SheafOfModules.free (ULift.{u} (Fin r))) q =
-      r * O.finrankH k q :=
-    (Modules.finrankH_of_isBilimit k hb q).trans (by simp)
-  refine (Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one _).trans ?_
-  have hO := (Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (k := k) O).symm.trans
-    (eulerChar_unit_eq (k := k))
-  simp only [h, Nat.cast_mul, ← hO]
-  ring
-
 /-- **Riemann–Roch for line bundles.** `χ(ℒ) = deg ℒ + 1 - g` for every invertible `ℒ` on a
 smooth proper curve with `H⁰(X, 𝒪_X) = k`, of genus `g`, where by
 `AlgebraicGeometry.Scheme.Modules.degree_tensorObj` and
@@ -783,205 +738,6 @@ theorem serreDuality [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
   · exact nonempty_dual_H_one_iso
   · exact nonempty_dual_H_zero_iso
 
-/-- **Trace duality on a finite étale scheme over `k`.** Let `X` be affine with `Γ(X, ⊤)` étale
-over `k`, and let `ℱ` be quasi-coherent. Then `x ↦ (m ↦ Tr(x(m)))`, pairing a global section `x`
-of `ℱᵛ` (a morphism `ℱ ⟶ 𝒪_X`) with a global section `m` of `ℱ` and taking the trace of
-`Γ(X, ⊤)` over `k`, is a `k`-linear isomorphism `H⁰(X, ℱᵛ) ≃ H⁰(X, ℱ)^∨`. -/
-theorem exists_linearEquiv_dual_H_zero_of_etale [IsAffine X]
-    (hX : (globalSectionsRingHom k (X := X)).Etale) (ℱ : X.Modules) [ℱ.IsQuasicoherent] :
-    letI := (globalSectionsRingHom k (X := X)).toAlgebra
-    ∃ e : (ℱᵛ).H 0 ≃ₗ[k] Module.Dual k (ℱ.H 0), ∀ x m, e x m =
-      Algebra.trace k Γ(X, ⊤) ((Modules.homObjHZeroAddEquiv ℱ (SheafOfModules.unit _) x).app ⊤
-        (Modules.H.zeroLinearEquiv ℱ m)) := by
-  let := (globalSectionsRingHom k (X := X)).toAlgebra
-  have : Algebra.Etale k Γ(X, ⊤) := hX
-  set Φ := Modules.homObjHZeroAddEquiv ℱ (SheafOfModules.unit X.ringCatSheaf)
-  set z := Modules.H.zeroLinearEquiv ℱ
-  -- `Γ(ℱ, ⊤)` as a `k`-module, by restricting scalars along `k → Γ(X, ⊤)`
-  let : Module k Γ(ℱ, ⊤) := Module.compHom _ (algebraMap k Γ(X, ⊤))
-  have : IsScalarTower k Γ(X, ⊤) Γ(ℱ, ⊤) := ⟨fun c a m ↦ by
-    change (c • a) • m = algebraMap k Γ(X, ⊤) c • (a • m)
-    rw [Algebra.smul_def, mul_smul]⟩
-  let D := Algebra.Etale.linearMapEquivDual k Γ(X, ⊤) Γ(ℱ, ⊤)
-  -- the `Γ(X, ⊤)`-linear map on global sections of a morphism `ℱ ⟶ 𝒪_X`
-  let appₗ (φ : ℱ ⟶ SheafOfModules.unit X.ringCatSheaf) : Γ(ℱ, ⊤) →ₗ[Γ(X, ⊤)] Γ(X, ⊤) :=
-    { toFun := φ.app ⊤
-      map_add' := map_add _
-      map_smul' a m := Modules.Hom.app_smul φ a m }
-  have hz (c : k) (m : ℱ.H 0) : z (c • m) = c • z m := by
-    rw [Modules.smul_H_eq_globalSectionsRingHom_smul, LinearEquiv.map_smul]
-    rfl
-  let L : (ℱᵛ).H 0 →ₗ[k] Module.Dual k (ℱ.H 0) :=
-    { toFun x :=
-        { toFun m := Algebra.trace k Γ(X, ⊤) ((Φ x).app ⊤ (z m))
-          map_add' m m' := by simp only [map_add]
-          map_smul' c m := by
-            change Algebra.trace k Γ(X, ⊤) (appₗ (Φ x) (z (c • m))) = c * _
-            rw [hz, LinearMap.map_smul_of_tower, map_smul, smul_eq_mul]
-            rfl }
-      map_add' x y := by
-        ext m
-        simp only [map_add, LinearMap.coe_mk, AddHom.coe_mk, LinearMap.add_apply]
-        rw [show ((Φ x + Φ y).app ⊤) (z m) = (Φ x).app ⊤ (z m) + (Φ y).app ⊤ (z m) from rfl,
-          map_add]
-      map_smul' c x := by
-        ext m
-        simp only [LinearMap.coe_mk, AddHom.coe_mk, RingHom.id_apply, LinearMap.smul_apply,
-          smul_eq_mul]
-        rw [Modules.smul_H_eq_globalSectionsRingHom_smul, Modules.homObjHZeroAddEquiv_smul]
-        change Algebra.trace k Γ(X, ⊤) ((Modules.smulHom _ _).app ⊤ ((Φ x).app ⊤ (z m))) = _
-        rw [Modules.smulHom_app_top_apply, smul_eq_mul]
-        change Algebra.trace k Γ(X, ⊤) (algebraMap k Γ(X, ⊤) c * _) = _
-        rw [← Algebra.smul_def, map_smul, smul_eq_mul] }
-  refine ⟨LinearEquiv.ofBijective L ⟨fun x y h ↦ ?_, fun l ↦ ?_⟩, fun x m ↦ rfl⟩
-  · have h0 (m : ℱ.H 0) : Algebra.trace k Γ(X, ⊤) ((Φ (x - y)).app ⊤ (z m)) = 0 := by
-      have := congr($h m)
-      rw [← sub_eq_zero, ← LinearMap.sub_apply, ← map_sub] at this
-      exact this
-    have hD : D (appₗ (Φ (x - y))) = 0 := LinearMap.ext fun p ↦ by
-      obtain ⟨m, rfl⟩ := z.surjective p
-      exact h0 m
-    have happ : appₗ (Φ (x - y)) = 0 := D.injective (hD.trans D.map_zero.symm)
-    have hΦ : Φ (x - y) = 0 := Modules.hom_ext_of_isAffine fun m ↦ congr($happ m)
-    rw [← sub_eq_zero]
-    exact Φ.injective (hΦ.trans Φ.map_zero.symm)
-  · let l' : Module.Dual k Γ(ℱ, ⊤) :=
-      { toFun p := l (z.symm p)
-        map_add' p q := by rw [map_add, map_add]
-        map_smul' c p := by
-          have : z.symm (c • p) = c • z.symm p := by
-            apply z.injective
-            rw [hz, LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
-          rw [this, map_smul, RingHom.id_apply, smul_eq_mul] }
-    have : (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent :=
-      SheafOfModules.isQuasicoherent_unit.{u, u, u} (R := X.ringCatSheaf)
-    obtain ⟨φ, hφ⟩ := Modules.exists_hom_app_top_eq_of_isAffine (M := ℱ)
-      (N := SheafOfModules.unit X.ringCatSheaf) (D.symm l')
-    refine ⟨Φ.symm φ, LinearMap.ext fun m ↦ ?_⟩
-    change Algebra.trace k Γ(X, ⊤) ((Φ (Φ.symm φ)).app ⊤ (z m)) = l m
-    rw [AddEquiv.apply_symm_apply, hφ]
-    exact congr($(D.apply_symm_apply l') (z m)).trans (congrArg l (z.symm_apply_apply m))
-
-/-- **Serre duality in dimension `0`.** Let `X` be smooth and proper of relative dimension `0`
-over `k`, i.e. `X = Spec A` with `A` finite étale over `k`, so that the canonical module is
-`ω_X = 𝒪_X`. Then `ℱ ↦ H^0(X, ℱ)^∨` and `ℱ ↦ H^0(X, ℱᵛ)` are naturally isomorphic as
-contravariant functors on finite locally free `ℱ`: there are `k`-linear isomorphisms
-`e ℱ : H^0(X, ℱ)^∨ ≅ H^0(X, ℱᵛ)` such that for every morphism `φ : ℱ ⟶ 𝒢` of finite locally
-free modules the square
-```
-  H^0(𝒢)^∨ ───── e 𝒢 ─────▶ H^0(𝒢ᵛ)
-     │                         │
- H^0(φ)^∨                   H^0(φᵛ)
-     ▼                         ▼
-  H^0(ℱ)^∨ ───── e ℱ ─────▶ H^0(ℱᵛ)
-```
-commutes. The isomorphism is the one induced by the trace pairing
-`H^0(ℱ) ⊗ H^0(ℱᵛ) → H^0(𝒪_X) = A → k`, whose last map is the trace `Tr_{A/k}`. In degrees
-`q > 0` both sides vanish.
-
-(blueprint: `det-thm-picard-duality`) -/
-theorem serreDuality_zero [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
-    [IsProper (X ↘ Spec (.of k))] :
-    Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
-        (Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅
-      (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        Modules.cohomologyFunctor k 0) := by
-  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
-  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
-  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
-  have hX : (globalSectionsRingHom k (X := X)).Etale := by
-    have h := (HasRingHomProperty.iff_of_isAffine (P := @Etale)
-      (f := X ↘ Spec (.of k))).mp inferInstance
-    rw [globalSectionsRingHom, CommRingCat.hom_comp]
-    exact RingHom.Etale.stableUnderComposition _ _
-      (.of_bijective (ConcreteCategory.bijective_of_isIso _)) h
-  have he (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory) :=
-    have : ℱ.obj.IsFiniteLocallyFree := ℱ.property
-    have : ℱ.obj.IsQuasicoherent := inferInstance
-    exists_linearEquiv_dual_H_zero_of_etale hX ℱ.obj
-  choose e he using he
-  refine ⟨(NatIso.ofComponents (fun ℱ ↦ (e ℱ.unop).toModuleIso) fun {ℱ 𝒢} f ↦ ?_).symm⟩
-  ext x
-  refine LinearMap.ext fun m ↦ ?_
-  change e 𝒢.unop (Modules.H.map (Modules.dualMap f.unop.hom) 0 x) m =
-    e ℱ.unop x (Modules.H.map f.unop.hom 0 m)
-  let := (globalSectionsRingHom k (X := X)).toAlgebra
-  refine (he 𝒢.unop _ m).trans (Eq.trans (congrArg (Algebra.trace k Γ(X, ⊤)) ?_)
-    (he ℱ.unop x _).symm)
-  have h := Modules.homObjHZeroAddEquiv_map (N := SheafOfModules.unit X.ringCatSheaf)
-    f.unop.hom x
-  rw [Modules.H.zeroLinearEquiv_map]
-  exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
-
-/-- **Serre duality in dimension `0`, with the trace formula.** Let `X` be smooth and proper of
-relative dimension `0` over `k`, so `X = Spec A` with `A = Γ(X, ⊤)` finite étale over `k`. There
-is an isomorphism `e : (ℱ ↦ H^0(X, ℱ)^∨) ≅ (ℱ ↦ H^0(X, ℱᵛ))` of contravariant functors on finite
-locally free `ℱ` whose inverse is the trace pairing: a global section `x` of `ℱᵛ`, i.e. a
-morphism `ℱ ⟶ 𝒪_X`, is sent to the functional `m ↦ Tr_{A/k}(x(m))` on `H^0(X, ℱ)`. That is,
-the duality morphism `t_X : H^0(X, 𝒪_X) = A → k` is the trace `Tr_{A/k}`.
-
-(blueprint: `det-thm-picard-duality`, case `n = 0`) -/
-theorem exists_serreDuality_zero_iso_trace [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
-    [IsProper (X ↘ Spec (.of k))] :
-    letI := (globalSectionsRingHom k (X := X)).toAlgebra
-    ∃ e : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
-        (Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅
-      (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        Modules.cohomologyFunctor k 0,
-      ∀ (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategoryᵒᵖ)
-        (x : Modules.H (ℱ.unop.obj : X.Modules)ᵛ 0)
-        (m : Modules.H (ℱ.unop.obj : X.Modules) 0),
-        DFunLike.coe (F := Module.Dual k (Modules.H (ℱ.unop.obj : X.Modules) 0))
-          ((e.inv.app ℱ).hom x) m =
-        Algebra.trace k Γ(X, ⊤) ((Modules.homObjHZeroAddEquiv ℱ.unop.obj
-          (SheafOfModules.unit _) x).app ⊤ (Modules.H.zeroLinearEquiv ℱ.unop.obj m)) := by
-  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
-  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
-  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
-  have hX : (globalSectionsRingHom k (X := X)).Etale := by
-    have h := (HasRingHomProperty.iff_of_isAffine (P := @Etale)
-      (f := X ↘ Spec (.of k))).mp inferInstance
-    rw [globalSectionsRingHom, CommRingCat.hom_comp]
-    exact RingHom.Etale.stableUnderComposition _ _
-      (.of_bijective (ConcreteCategory.bijective_of_isIso _)) h
-  have he (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory) :=
-    have : ℱ.obj.IsFiniteLocallyFree := ℱ.property
-    have : ℱ.obj.IsQuasicoherent := inferInstance
-    exists_linearEquiv_dual_H_zero_of_etale hX ℱ.obj
-  choose e he using he
-  refine ⟨(NatIso.ofComponents (fun ℱ ↦ (e ℱ.unop).toModuleIso) fun {ℱ 𝒢} f ↦ ?_).symm,
-    fun ℱ x m ↦ ?_⟩
-  · ext x
-    refine LinearMap.ext fun m ↦ ?_
-    change e 𝒢.unop (Modules.H.map (Modules.dualMap f.unop.hom) 0 x) m =
-      e ℱ.unop x (Modules.H.map f.unop.hom 0 m)
-    let := (globalSectionsRingHom k (X := X)).toAlgebra
-    refine (he 𝒢.unop _ m).trans (Eq.trans (congrArg (Algebra.trace k Γ(X, ⊤)) ?_)
-      (he ℱ.unop x _).symm)
-    have h := Modules.homObjHZeroAddEquiv_map (N := SheafOfModules.unit X.ringCatSheaf)
-      f.unop.hom x
-    rw [Modules.H.zeroLinearEquiv_map]
-    exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
-  · exact he ℱ.unop x m
-
-/-- **Serre duality in dimension `0`, positive degrees.** Let `X` be smooth and proper of
-relative dimension `0` over `k`, so `X` is affine (finite étale over `k`). Then for every finite
-locally free `ℱ` and every `q > 0`, both sides of Serre duality vanish:
-`H^q(X, ℱ) = 0` and `H^q(X, ℱᵛ) = 0` (here `ω_X = 𝒪_X`, so `ℱᵛ ⊗ ω_X ≅ ℱᵛ`).
-
-(blueprint: `det-thm-picard-duality`, case `n = 0`) -/
-theorem subsingleton_H_and_dual_of_smoothOfRelativeDimension_zero
-    [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
-    (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] {q : ℕ} (hq : 0 < q) :
-    Subsingleton (ℱ.H q) ∧ Subsingleton (ℱᵛ.H q) := by
-  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
-  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
-  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
-  have : ℱᵛ.IsFiniteLocallyFree := Modules.IsFiniteLocallyFree.dual ℱ
-  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hq.ne'
-  exact ⟨Modules.subsingleton_H_succ_of_isAffine ℱ q,
-    Modules.subsingleton_H_succ_of_isAffine ℱᵛ q⟩
-
 /-- **`h⁰(Ω¹) = h¹(𝒪_X)`.** On a smooth proper curve over `k`,
 `dim_k H⁰(X, Ω¹_{X/k}) = dim_k H¹(X, 𝒪_X)`. -/
 theorem finrankH_relativeDifferentials_zero_eq_arithmeticGenus
@@ -1008,19 +764,6 @@ theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
     [IsProper (X ↘ Spec (.of k))] :
     (X ↘ Spec (.of k)).genus = arithmeticGenus k X := by
   rw [Hom.genus_eq_finrankH_zero, finrankH_relativeDifferentials_zero_eq_arithmeticGenus]
-
-/-- Blueprint `def-sc-genus`: The genus of a curve.
-
-The genus of a smooth proper curve `X` over `k` is finite: `H⁰(X, Ω¹_{X/k})`, whose dimension is
-the genus (`AlgebraicGeometry.Scheme.Hom.genus_eq_finrankH_zero`), is a finite-dimensional
-`k`-vector space, since `Ω¹_{X/k}` is invertible and the cohomology of a coherent module on a
-proper scheme over a field is finite-dimensional (Stacks 02O5). -/
-theorem finiteDimensional_H_relativeDifferentials
-    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (q : ℕ) :
-    FiniteDimensional k ((X ↘ Spec (.of k)).relativeDifferentials.H q) :=
-  have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
-  have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
-  inferInstance
 
 end Duality
 
@@ -1604,55 +1347,6 @@ theorem isAmple_of_degree_pos_of_isAlgClosed [IsAlgClosed k] [GlobalSectionsBije
   push_cast
   nlinarith
 
-/-- **Positive degree implies ample.** An invertible sheaf of positive degree on a smooth
-proper curve over `k` with `H⁰(X, 𝒪_X) = k` is ample: after base change to an algebraic closure
-`k̄`, where the degree is unchanged (`AlgebraicGeometry.Scheme.Modules.degree_pullback`), some
-power `ℒ_{k̄}^{⊗ m}` is very ample
-(`AlgebraicGeometry.Scheme.isAmple_of_degree_pos_of_isAlgClosed`), and very ampleness
-descends (`AlgebraicGeometry.IsVeryAmple.of_pullback`).
-
-(blueprint: `sk-thm-picard-rr`, part (G)) -/
-theorem isAmple_of_degree_pos [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.IsInvertible]
-    (hd : 0 < ℒ.degree k) :
-    IsAmple (X ↘ Spec (.of k)) ℒ := by
-  let K := AlgebraicClosure k
-  let g := Spec.map (CommRingCat.ofHom (algebraMap k K))
-  have : SmoothOfRelativeDimension 1 (Limits.pullback (X ↘ Spec (.of k)) g ↘ Spec (.of K)) :=
-    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback
-      (IsPullback.of_hasPullback _ _) ‹_›
-  have : IsProper (Limits.pullback (X ↘ Spec (.of k)) g ↘ Spec (.of K)) :=
-    IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback _ _) ‹_›
-  obtain ⟨-, m, hm, hv⟩ := isAmple_of_degree_pos_of_isAlgClosed
-    ((Modules.pullback (pullback.fst (X ↘ Spec (.of k)) g)).obj ℒ)
-    ((Modules.degree_pullback k K ℒ).symm ▸ hd)
-  exact ⟨inferInstance, m, hm, IsVeryAmple.of_pullback _ K _
-    (hv.of_iso (Modules.nonempty_pullback_tensorPow_iso _ ℒ m).some.symm)⟩
-
-/-- **Ample if and only if positive degree.** An invertible sheaf on a smooth proper curve over
-`k` with `H⁰(X, 𝒪_X) = k` is ample if and only if it has positive degree. Ampleness and degree
-are both invariant under base change to an algebraic closure, where an ample line bundle has
-positive degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`).
-
-(blueprint: `lem-pc-ample-positive-degree`) -/
-theorem isAmple_iff_degree_pos [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.IsInvertible] :
-    IsAmple (X ↘ Spec (.of k)) ℒ ↔ 0 < ℒ.degree k := by
-  refine ⟨fun h ↦ ?_, isAmple_of_degree_pos ℒ⟩
-  let K := AlgebraicClosure k
-  let g := Spec.map (CommRingCat.ofHom (algebraMap k K))
-  let XK := Limits.pullback (X ↘ Spec (.of k)) g
-  have : SmoothOfRelativeDimension 1 (XK ↘ Spec (.of K)) :=
-    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback
-      (IsPullback.of_hasPullback _ _) ‹_›
-  have : IsProper (XK ↘ Spec (.of K)) :=
-    IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback _ _) ‹_›
-  have := GlobalSectionsBijective.nonempty (k := K) (X := XK)
-  have hdim := topologicalKrullDim_eq_of_smoothOfRelativeDimension (XK ↘ Spec (.of K)) 1
-  rw [← Modules.degree_pullback k K ℒ]
-  have := Scheme.Hom.degree_pos_of_isAmple (XK ↘ Spec (.of K)) (by exact_mod_cast hdim)
-    ((Modules.pullback (pullback.fst (X ↘ Spec (.of k)) g)).obj ℒ) (h.pullback_of_field K)
-  rwa [Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one _ (by exact_mod_cast hdim)]
-    at this
-
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
 /-- **Affine complement.** Let `D` be an effective Cartier divisor on a smooth proper curve `X`,
 with invertible ideal sheaf `J = 𝒪_X(-D)`, whose line bundle `𝒪_X(D) = J.toModulesᵛ` is ample.
@@ -1727,17 +1421,6 @@ theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_isSepClosed [IsSepClos
   have := GeometricallyConnected.of_isSepClosed (k := k) X
   .of_smooth_of_geometricallyConnected _
 
-/-- **Base change of a smooth curve is integral.** For a smooth connected scheme `X` over a
-separably closed field `k`, e.g. a smooth projective curve, and a field extension `K/k`, the base
-change `X_K = X ×_{Spec k} Spec K` is integral.
-
-(blueprint: `prop-pc-xk-integral`, part (2)) -/
-theorem isIntegral_baseChange [IsSepClosed k] [Smooth (X ↘ Spec (.of k))] [ConnectedSpace X] :
-    IsIntegral (Limits.pullback (X ↘ Spec (.of k))
-      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :=
-  (GeometricallyIntegral.of_isSepClosed (k := k) (X := X)).geometrically_isIntegral _ _ _
-    (IsPullback.of_hasPullback _ _)
-
 end FieldExtension
 
 section BaseChange
@@ -1745,41 +1428,6 @@ section BaseChange
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
   [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
   (K : Type u) [Field K] [Algebra k K]
-
-/-- **The degree of the dictionary.** Let `X` be a smooth projective curve of genus `g` over
-`k` with `H⁰(X, 𝒪_X) = k`, let `K/k` be a field extension and let `ℒ` be a line bundle on the
-base change `X_K = X ×_{Spec k} Spec K` with `h^0(X_K, ℒ) = 1` and `H^q(X_K, ℒ) = 0` for
-`q > 0`. Then `deg ℒ = χ(ℒ) - χ(𝒪_{X_K}) = 1 - (1 - g) = g`.
-
-Of the hypothesis `H⁰(X, 𝒪_X) = k`, only `h⁰(X, 𝒪_X) = 1` is used, through
-`χ(𝒪_{X_K}) = χ(𝒪_X) = h⁰(X, 𝒪_X) - g = 1 - g`. Without it the statement fails: for
-`X = ℙ¹_ℂ` over `k = ℝ` and `K = ℂ`, the base change `X_ℂ` is two copies of `ℙ¹_ℂ`, so
-`χ(𝒪_{X_ℂ}) = 2` rather than `1 - g = 1`, and the line bundle that is `𝒪(-1)` on one copy and
-`𝒪` on the other has `χ(ℒ) = 1`, hence `deg ℒ = 1 - 2 = -1 ≠ g = 0`.
-
-(blueprint: `det-cor-picard-degree-g`, `cor-picard-degree-g`) -/
-theorem degree_eq_genus [GlobalSectionsBijective k X]
-    (ℒ : (Limits.pullback (X ↘ Spec (.of k))
-      (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
-    [ℒ.IsInvertible] (h0 : Modules.finrankH K ℒ 0 = 1)
-    (hq : ∀ q : ℕ, 0 < q → Subsingleton (ℒ.H q)) :
-    ℒ.degree K = (arithmeticGenus k X : ℤ) := by
-  -- `X_K` is a smooth proper curve over `K` with `H⁰(X_K, 𝒪_{X_K}) = K`
-  -- (`AlgebraicGeometry.Scheme.GlobalSectionsBijective.pullback`), so Riemann–Roch applies.
-  have : SmoothOfRelativeDimension 1 (Limits.pullback (X ↘ Spec (.of k))
-      (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)) :=
-    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback
-      (IsPullback.of_hasPullback _ _) ‹_›
-  have : IsProper (Limits.pullback (X ↘ Spec (.of k))
-      (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)) :=
-    IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback _ _) ‹_›
-  have hχ : ℒ.eulerChar K = 1 := by
-    rw [Modules.eulerChar, finsum_eq_single _ 0 fun q hq0 ↦ ?_]
-    · simp [h0]
-    · have := hq q (Nat.pos_of_ne_zero hq0)
-      simp [Modules.finrankH, Module.finrank_zero_of_subsingleton]
-  rw [Modules.degree, hχ, eulerChar_unit_eq, arithmeticGenus_pullback]
-  ring
 
 /-- **The degree of a twist.** For an invertible sheaf `ℒ` on `X_K` and an invertible sheaf `ℳ`
 on the smooth proper curve `X`, `deg (ℒ ⊗ ℳ_K) = deg ℒ + deg ℳ`, by additivity of the degree on

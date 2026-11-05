@@ -172,60 +172,11 @@ theorem boundedConstructible_tensor_single
 
 namespace ContinuousMapRingObj
 
-/-- For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived tensor product of two constructible
-`E`-sheaves placed in degree `0` is bounded constructible. This is the case of single
-sheaves in blueprint `lem-sfb-dc-tensor-preserves`.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-
-Proof: `boundedConstructible_tensor_single_of_lfp`, with the local calculation
-`lfp_tensor_single_continuousMapRingObj` (local freeness). -/
-theorem boundedConstructible_tensor_single (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
-    [QuasiCompact X.hom] [IsSeparated X.hom]
-    (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E) X.left))
-    (hF : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.continuousMapRingObj E) X.left) F)
-    (hG : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.continuousMapRingObj E) X.left) G) :
-    boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X.left)
-      (((-⊗ᴸ-(X.left)⟦(Profinite.continuousMapRingObj E)⟧).obj
-        ((DerivedCategory.singleFunctor _ 0).obj F)).obj
-          ((DerivedCategory.singleFunctor _ 0).obj G)) :=
-  boundedConstructible_tensor_single_of_lfp _ X
-    (fun Y _ ↦ lfp_tensor_single_continuousMapRingObj ℓ Y E) F G hF hG
-
 end ContinuousMapRingObj
 
 /-! ### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
 
 namespace PadicIntegersRingObj
-
-/-- For a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived tensor product of two constructible
-`𝒪_E`-sheaves placed in degree `0` is bounded constructible. This is the case of single
-sheaves in blueprint `lem-sfb-dc-tensor-preserves`.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-
-Proof: `boundedConstructible_tensor_single_of_lfp`, with the local calculation
-`lfp_tensor_single_padicIntegersRingObj` (a two-term locally finite free resolution). -/
-theorem boundedConstructible_tensor_single (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
-    [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-    (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
-    [QuasiCompact X.hom] [IsSeparated X.hom]
-    (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left))
-    (hF : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) F)
-    (hG : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) G) :
-    boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)
-      (((-⊗ᴸ-(X.left)⟦(Profinite.padicIntegersRingObj ℓ E)⟧).obj
-        ((DerivedCategory.singleFunctor _ 0).obj F)).obj
-          ((DerivedCategory.singleFunctor _ 0).obj G)) :=
-  boundedConstructible_tensor_single_of_lfp _ X
-    (fun Y _ ↦ lfp_tensor_single_padicIntegersRingObj ℓ Y E) F G hF hG
 
 end PadicIntegersRingObj
 

@@ -37,19 +37,4 @@ attribute [instance] proEtaleRingRestrictScalars_preservesFiniteLimits
 
 variable {T : Scheme.{u}} {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S)
 
-/-- Ordinary scalar extension, with objects and maps fixed by the tensor construction.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-four-corners). -/
-noncomputable def proEtaleRingExtension : proEtaleRingModules T R ⥤ proEtaleRingModules T S :=
-  reductionChange T a
-
-/-- The fixed scalar extension is additive. Source: Stacks Tag 06YY
-(blueprint: def-weil-pbc-four-corners). -/
-noncomputable instance proEtaleRingExtension_additive : (proEtaleRingExtension a).Additive :=
-  reductionChangeAdditive T a
-
-/-- Reuse the published tensor-unit normalized ordinary scalar adjunction.
-Source: Stacks 03D3, 06YY (blueprint: def-weil-pbc-four-corners). -/
-noncomputable abbrev proEtaleRingExtensionAdjunction :
-    proEtaleRingExtension a ⊣ proEtaleRingRestrictScalars a := pbcScalarAdjunction a
-
 end AlgebraicGeometry.Scheme

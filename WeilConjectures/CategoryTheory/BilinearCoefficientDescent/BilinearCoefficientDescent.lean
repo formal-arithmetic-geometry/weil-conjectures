@@ -54,31 +54,6 @@ variable {R : Type r} [CommRing R]
   {C : Type u} [Category.{v} C] [Preadditive C] [Linear R C]
   {D : Type u'} [Category.{v'} D] [Preadditive D] [Linear R D]
 
-/-- Separate linearity includes additivity in each variable. Source: raw Hom tensor formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-structure IsSeparatelyLinear (R : Type r) [CommRing R]
-    {C : Type u} [Category.{v} C] [Preadditive C] [Linear R C]
-    {D : Type u'} [Category.{v'} D] [Preadditive D] [Linear R D]
-    (U : C × C ⥤ D) : Prop where
-  right :
-    ∀ X : C, (Prod.sectR X C ⋙ U).Additive ∧ (Prod.sectR X C ⋙ U).Linear R
-  left :
-    ∀ Y : C, (Prod.sectL C Y ⋙ U).Additive ∧ (Prod.sectL C Y ⋙ U).Linear R
-
-/-- The exact object and pure-tensor prescriptions for an extension. Source: raw Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-structure IsRawExtension (p : R) (U : C × C ⥤ D)
-    (F : ScalarLocalization R C p × ScalarLocalization R C p ⥤
-      ScalarLocalization R D p) : Prop where
-  linear :
-    IsSeparatelyLinear (Localization.Away p) F
-  formula :
-      (∀ X : ScalarLocalization R C p × ScalarLocalization R C p,
-      F.obj X = ⟨U.obj (X.1.obj, X.2.obj)⟩) ∧
-    ∀ (X X' Y Y' : C) (f : X ⟶ X') (g : Y ⟶ Y') (a b : Localization.Away p),
-      HEq (F.map (X := (⟨X⟩, ⟨Y⟩)) (Y := (⟨X'⟩, ⟨Y'⟩))
-        (a ⊗ₜ[R] f, b ⊗ₜ[R] g)) ((a * b) ⊗ₜ[R] U.map (X := (X, Y)) (Y := (X', Y')) (f, g))
-
 @[no_expose] private def tensorComp (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
     [Preadditive C] [Linear R C] (p : R) (K L M : C)
     (g : Localization.Away p ⊗[R] (L ⟶ M)) (f : Localization.Away p ⊗[R] (K ⟶ L)) :
@@ -87,49 +62,8 @@ structure IsRawExtension (p : R) (U : C × C ⥤ D)
 
 attribute [local implicit_reducible] tensorComp
 
-private theorem tensorComp_zero_left (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
-    [Preadditive C] [Linear R C] (p : R) (K L M : C)
-    (f : Localization.Away p ⊗[R] (K ⟶ L)) :
-    tensorComp R C p K L M 0 f = 0 := by
-  exact congrArg (fun k ↦ k f) (ScalarLocalization.composition R C p K L M).map_zero
-
-private theorem tensorComp_zero_right (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
-    [Preadditive C] [Linear R C] (p : R) (K L M : C)
-    (g : Localization.Away p ⊗[R] (L ⟶ M)) :
-    tensorComp R C p K L M g 0 = 0 := by
-  exact ((ScalarLocalization.composition R C p K L M) g).map_zero
-
-private theorem tensorComp_add_left (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
-    [Preadditive C] [Linear R C] (p : R) (K L M : C)
-    (g g' : Localization.Away p ⊗[R] (L ⟶ M))
-    (f : Localization.Away p ⊗[R] (K ⟶ L)) :
-    tensorComp R C p K L M (g + g') f =
-      tensorComp R C p K L M g f + tensorComp R C p K L M g' f := by
-  exact congrArg (fun k ↦ k f) ((ScalarLocalization.composition R C p K L M).map_add g g')
-
-private theorem tensorComp_add_right (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
-    [Preadditive C] [Linear R C] (p : R) (K L M : C)
-    (g : Localization.Away p ⊗[R] (L ⟶ M))
-    (f f' : Localization.Away p ⊗[R] (K ⟶ L)) :
-    tensorComp R C p K L M g (f + f') =
-      tensorComp R C p K L M g f + tensorComp R C p K L M g f' := by
-  exact ((ScalarLocalization.composition R C p K L M) g).map_add f f'
-
-private theorem tensorComp_tmul (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
-    [Preadditive C] [Linear R C] (p : R) (K L M : C)
-    (f : L ⟶ M) (g : K ⟶ L) (a b : Localization.Away p) :
-    tensorComp R C p K L M (a ⊗ₜ[R] f) (b ⊗ₜ[R] g) = (a * b) ⊗ₜ[R] (g ≫ f) := by
-  exact ScalarLocalization.composition_tmul R C p K L M f g a b
-
 attribute [local simp] tensorComp_zero_left tensorComp_zero_right
   tensorComp_add_left tensorComp_add_right
-
-private theorem hom_add_heq {E : Type u₃} [Category.{v₃} E] [Preadditive E]
-    {X Y X' Y' : E} (hx : X = X') (hy : Y = Y')
-    {f g : X ⟶ Y} {f' g' : X' ⟶ Y'} (hf : HEq f f') (hg : HEq g g') :
-    HEq (f + g) (f' + g') := by
-  subst X'; subst Y'
-  exact heq_of_eq (congrArg₂ (· + ·) (eq_of_heq hf) (eq_of_heq hg))
 
 @[no_expose] private def integralHom (U : C × C ⥤ D) (hU : IsSeparatelyLinear R U)
     (X X' Y Y' : C) : (X ⟶ X') →ₗ[R] (Y ⟶ Y') →ₗ[R]
@@ -144,17 +78,6 @@ private theorem hom_add_heq {E : Type u₃} [Category.{v₃} E] [Preadditive E]
     (by intros; rw [(Prod.sectL C Y ⋙ U).map_smul, Linear.smul_comp])
     (by intros; rw [(Prod.sectR X' C ⋙ U).map_add, Preadditive.comp_add])
     (by intros; rw [(Prod.sectR X' C ⋙ U).map_smul, Linear.comp_smul])
-
-private theorem integralHom_apply (U : C × C ⥤ D) (hU : IsSeparatelyLinear R U)
-    {X X' Y Y' : C} (f : X ⟶ X') (g : Y ⟶ Y') :
-    integralHom U hU X X' Y Y' f g =
-      U.map (X := (X, Y)) (Y := (X', Y')) (f, g) := by
-  change U.map (X := (X, Y)) (Y := (X', Y)) (f, 𝟙 Y) ≫
-    U.map (X := (X', Y)) (Y := (X', Y')) (𝟙 X', g) =
-      U.map (X := (X, Y)) (Y := (X', Y')) (f, g)
-  rw [← U.map_comp]
-  congr 1
-  exact Prod.ext (Category.comp_id f) (Category.id_comp g)
 
 attribute [local irreducible] integralHom
 
@@ -176,99 +99,10 @@ attribute [local irreducible] integralHom
     Localization.Away p ⊗[R] (U.obj (X, Y) ⟶ U.obj (X', Y')) :=
   ((rawHomLinear p U hU X X' Y Y').toFun f).toFun g
 
-private theorem rawHom_tmul (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) {X X' Y Y' : C}
-    (a b : Localization.Away p) (f : X ⟶ X') (g : Y ⟶ Y') :
-    rawHom p U hU X X' Y Y' (a ⊗ₜ[R] f) (b ⊗ₜ[R] g) =
-      (a * b) ⊗ₜ[R] U.map (f, g) := by
-  change rawHomLinear p U hU X X' Y Y' (a ⊗ₜ[R] f) (b ⊗ₜ[R] g) = _
-  simp only [rawHomLinear, TensorProduct.curry_apply, LinearMap.comp_apply, LinearEquiv.coe_coe,
-    AlgebraTensorModule.distribBaseChange_symm_tmul, LinearMap.baseChange_tmul,
-    TensorProduct.lift.tmul, integralHom_apply]
-
-private theorem rawHom_zero_left (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) (X X' Y Y' : C)
-    (g : Localization.Away p ⊗[R] (Y ⟶ Y')) :
-    rawHom p U hU X X' Y Y' 0 g = 0 := by
-  exact congrArg (fun k ↦ k g) (rawHomLinear p U hU X X' Y Y').map_zero
-
-private theorem rawHom_zero_right (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) (X X' Y Y' : C)
-    (f : Localization.Away p ⊗[R] (X ⟶ X')) :
-    rawHom p U hU X X' Y Y' f 0 = 0 := by
-  exact ((rawHomLinear p U hU X X' Y Y') f).map_zero
-
-private theorem rawHom_add_left (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) (X X' Y Y' : C)
-    (f f' : Localization.Away p ⊗[R] (X ⟶ X')) (g : Localization.Away p ⊗[R] (Y ⟶ Y')) :
-    rawHom p U hU X X' Y Y' (f + f') g =
-      rawHom p U hU X X' Y Y' f g + rawHom p U hU X X' Y Y' f' g := by
-  exact congrArg (fun k ↦ k g) ((rawHomLinear p U hU X X' Y Y').map_add f f')
-
-private theorem rawHom_add_right (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) (X X' Y Y' : C)
-    (f : Localization.Away p ⊗[R] (X ⟶ X')) (g g' : Localization.Away p ⊗[R] (Y ⟶ Y')) :
-    rawHom p U hU X X' Y Y' f (g + g') =
-      rawHom p U hU X X' Y Y' f g + rawHom p U hU X X' Y Y' f g' := by
-  exact ((rawHomLinear p U hU X X' Y Y') f).map_add g g'
-
-private theorem rawHom_smul_left (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) (X X' Y Y' : C)
-    (a : Localization.Away p)
-    (f : Localization.Away p ⊗[R] (X ⟶ X'))
-    (g : Localization.Away p ⊗[R] (Y ⟶ Y')) :
-    rawHom p U hU X X' Y Y' (a • f) g = a • rawHom p U hU X X' Y Y' f g := by
-  exact congrArg (fun k ↦ k g) ((rawHomLinear p U hU X X' Y Y').map_smul a f)
-
-private theorem rawHom_smul_right (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) (X X' Y Y' : C)
-    (a : Localization.Away p)
-    (f : Localization.Away p ⊗[R] (X ⟶ X'))
-    (g : Localization.Away p ⊗[R] (Y ⟶ Y')) :
-    rawHom p U hU X X' Y Y' f (a • g) = a • rawHom p U hU X X' Y Y' f g := by
-  exact ((rawHomLinear p U hU X X' Y Y') f).map_smul a g
-
 attribute [local simp] rawHom_zero_left rawHom_zero_right rawHom_add_left rawHom_add_right
 
 attribute [local irreducible] rawHom rawHomLinear ScalarLocalization.composition
   ScalarLocalization.extensionHom ScalarLocalization.coefficientMap
-
-private theorem rawHom_comp (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) (X X' X'' Y Y' Y'' : C)
-    (f : Localization.Away p ⊗[R] (X ⟶ X'))
-    (f' : Localization.Away p ⊗[R] (X' ⟶ X''))
-    (g : Localization.Away p ⊗[R] (Y ⟶ Y'))
-    (g' : Localization.Away p ⊗[R] (Y' ⟶ Y'')) :
-    rawHom p U hU X X'' Y Y''
-        (tensorComp R C p X X' X'' f' f)
-        (tensorComp R C p Y Y' Y'' g' g) =
-      tensorComp R D p _ _ _
-        (rawHom p U hU X' X'' Y' Y'' f' g') (rawHom p U hU X X' Y Y' f g) := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [tensorComp_zero_right, rawHom_zero_left]
-  | add f f₁ hf hf₁ => simp only [tensorComp_add_right, rawHom_add_left,
-    hf, hf₁]
-  | tmul a f =>
-    induction f' using TensorProduct.induction_on with
-    | zero => simp only [tensorComp_zero_left, rawHom_zero_left]
-    | add f' f₁ hf hf₁ => simp only [tensorComp_add_left, rawHom_add_left,
-      hf, hf₁]
-    | tmul a' f' =>
-      induction g using TensorProduct.induction_on with
-      | zero => simp only [tensorComp_zero_right, rawHom_zero_right]
-      | add g g₁ hg hg₁ => simp only [tensorComp_add_right, rawHom_add_right,
-        hg, hg₁]
-      | tmul b g =>
-        induction g' using TensorProduct.induction_on with
-        | zero => simp only [tensorComp_zero_left, rawHom_zero_right]
-        | add g' g₁ hg hg₁ => simp only [tensorComp_add_left,
-          rawHom_add_right,
-          hg, hg₁]
-        | tmul b' g' =>
-          simp only [tensorComp_tmul, rawHom_tmul]
-          rw [← U.map_comp]
-          congr 1
-          ac_rfl
 
 @[no_expose] private noncomputable def rawFunctor (p : R) (U : C × C ⥤ D)
     (hU : IsSeparatelyLinear R U) :
@@ -282,71 +116,6 @@ private theorem rawHom_comp (p : R) (U : C × C ⥤ D)
   map_comp {X Y Z} f g := rawHom_comp p U hU _ _ _ _ _ _ f.1 g.1 f.2 g.2
 
 attribute [local implicit_reducible] rawFunctor
-
-private theorem rawFunctor_linear (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) : IsSeparatelyLinear (Localization.Away p)
-      (rawFunctor p U hU) := by
-  constructor
-  · intro X
-    constructor
-    · constructor
-      intro Y Y' f g
-      exact rawHom_add_right p U hU _ _ _ _ (𝟙 X) f g
-    · constructor
-      intro Y Y' f a
-      exact rawHom_smul_right p U hU _ _ _ _ a (𝟙 X) f
-  · intro Y
-    constructor
-    · constructor
-      intro X X' f g
-      exact rawHom_add_left p U hU _ _ _ _ f g (𝟙 Y)
-    · constructor
-      intro X X' f a
-      exact rawHom_smul_left p U hU _ _ _ _ a f (𝟙 Y)
-
-/-- Unique raw bilinear extension, including torsion Hom modules.
-Source: raw Hom tensor formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent).
-Proof, steps 1--2: factor U(f,g) as U(f,1) followed by U(1,g). Separate linearity and
-bilinear composition make this bilinear on the two Hom modules. Apply module base change
-(def-weil-module-base-change). On pure tensors identity and composition are the integral
-functor laws times the product of scalars. Tensor induction gives the laws and uniqueness;
-no injectivity into the tensor product is used. -/
-theorem raw_extension_existsUnique (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) :
-    ∃! F : ScalarLocalization R C p × ScalarLocalization R C p ⥤
-      ScalarLocalization R D p, IsRawExtension p U F := by
-  refine ⟨rawFunctor p U hU, ⟨rawFunctor_linear p U hU, fun _ ↦ rfl, ?_⟩, ?_⟩
-  · intro X X' Y Y' f g a b
-    exact heq_of_eq (rawHom_tmul p U hU a b f g)
-  · intro F hF
-    apply Functor.hext hF.2.1
-    rintro ⟨X₁, X₂⟩ ⟨Y₁, Y₂⟩ f
-    let X := (X₁, X₂)
-    let Y := (Y₁, Y₂)
-    have hh (f₁ : X.1 ⟶ Y.1) (f₂ : X.2 ⟶ Y.2) :
-        HEq (integralHom F hF.1 X.1 Y.1 X.2 Y.2 f₁ f₂)
-          (rawHom p U hU _ _ _ _ f₁ f₂) := by
-      induction f₁ using TensorProduct.induction_on with
-      | zero =>
-        apply (conj_eqToHom_iff_heq _ _ (hF.2.1 X) (hF.2.1 Y)).1
-        simp
-      | tmul a f₁ =>
-        induction f₂ using TensorProduct.induction_on with
-        | zero =>
-          apply (conj_eqToHom_iff_heq _ _ (hF.2.1 X) (hF.2.1 Y)).1
-          simp
-        | tmul b f₂ =>
-          rw [integralHom_apply, rawHom_tmul]
-          exact hF.2.2 _ _ _ _ f₁ f₂ a b
-        | add g h hg hh =>
-          rw [LinearMap.map_add, rawHom_add_right]
-          exact hom_add_heq (hF.2.1 X) (hF.2.1 Y) hg hh
-      | add g h hg hh =>
-        simp only [rawHom_add_left, LinearMap.map_add,
-          LinearMap.add_apply]
-        exact hom_add_heq (hF.2.1 X) (hF.2.1 Y) hg hh
-    rcases f with ⟨f, g⟩
-    simpa only [integralHom_apply, X, Y, rawFunctor] using hh f g
 
 /-- Give a functor its prescribed object function, transporting its morphisms.
 Source: transport along object equalities
@@ -362,18 +131,6 @@ Source: transport along object equalities
     simp only [F.map_comp, Category.assoc, eqToHom_trans_assoc,
       eqToHom_refl, Category.id_comp]
 
-/-- Object normalization preserves the functor itself.
-Source: equality of functors by object equality and heterogeneous map equality
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-theorem withObjects_eq
-    {C₀ : Type u₃} [Category.{v₃} C₀] {D₀ : Type u₂} [Category.{v₂} D₀]
-    (F : C₀ ⥤ D₀) (obj : C₀ → D₀) (h : ∀ X, F.obj X = obj X) :
-    withObjects F obj h = F := by
-  unfold withObjects
-  apply Functor.hext (fun X ↦ (h X).symm)
-  intro X Y f
-  exact (eqToHom_comp_heq _ _).trans (comp_eqToHom_heq _ _)
-
 /-- The unique raw extension; all its data are determined by the preceding prescription.
 Source: raw Hom tensor formula
 (blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
@@ -382,55 +139,15 @@ Source: raw Hom tensor formula
     (fun X ↦ ⟨U.obj (X.1.obj, X.2.obj)⟩)
     (raw_extension_existsUnique p U hU).exists.choose_spec.2.1
 
-/-- The raw extension retains the stipulated object.
-Source: the uniquely prescribed construction
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-theorem raw_obj (p : R) (U : C × C ⥤ D)
-    (hU : IsSeparatelyLinear R U) (X : ScalarLocalization R C p × ScalarLocalization R C p) :
-    (raw p U hU).obj X = ⟨U.obj (X.1.obj, X.2.obj)⟩ := by
-  exact Eq.trans rfl rfl
-
-private theorem id_heq {E : Type*} [Category E] {X Y : E} (h : X = Y) :
-    HEq (𝟙 X) (𝟙 Y) := by
-  subst Y
-  rfl
-
 attribute [local irreducible] raw
-
-omit [Linear R D] in
-private theorem extendedHom_tmul {S' : Type u₃} [CommRing S'] [Linear S' D]
-    (p : R) (q : S') (φ : R →+* S')
-    (h : IsUnit (algebraMap S' (Localization.Away q) (φ p)))
-    (F : C ⥤ D) [F.Additive] (hF : ScalarLocalization.IsSemilinear φ F)
-    (X Y : C) (a : Localization.Away p) (f : X ⟶ Y) :
-    ScalarLocalization.extensionHom p q φ h F hF X Y (a ⊗ₜ[R] f) =
-      ScalarLocalization.coefficientMap p q φ h a ⊗ₜ[S'] F.map f :=
-  by
-    unfold ScalarLocalization.extensionHom
-    exact (ScalarLocalization.existsUnique_semilinearHom p q φ h F hF X Y).exists.choose_spec a f
 
 section RawWhiskering
 
 variable {E : Type u₂} [Category.{v₂} E] [Preadditive E] [Linear R E]
 
-private theorem coefficientMap_id (p : R) :
-    ScalarLocalization.coefficientMap p p (RingHom.id R)
-      (IsLocalization.Away.algebraMap_isUnit p) = RingHom.id (Localization.Away p) := by
-  symm
-  apply (ScalarLocalization.coefficientMap_unique _ _ _ _ _).1
-  rfl
-
-omit [Preadditive D] in
-private theorem map_heq {D₀ : Type u₃} [Category.{v₃} D₀]
-    (F : D ⥤ D₀) {X Y X' Y' : D} (hx : X = X') (hy : Y = Y')
-    {f : X ⟶ Y} {g : X' ⟶ Y'} (h : HEq f g) : HEq (F.map f) (F.map g) := by
-  subst X'; subst Y'
-  exact heq_of_eq (congrArg F.map (eq_of_heq h))
-
 end RawWhiskering
 
 attribute [local implicit_reducible] StageSystem.Morphism.functor StageSystem.ι
-
 
 section CommonStage
 
@@ -466,16 +183,6 @@ namespace Units
 @[no_expose, implicit_reducible] def unit {S : StageSystem A} (uS : Units S) :
     ∀ i, S.T (le_refl i) ≅ 𝟭 (A i) := uS.val
 
-omit [IsDirectedOrder I] in
-theorem left {S : StageSystem A} (uS : Units S) {i j : I} (h : i ≤ j) (X : A i) :
-    (S.assoc (le_refl i) h).hom.app X = (S.T h).map ((uS.unit i).hom.app X) :=
-  uS.property.1 h X
-
-omit [IsDirectedOrder I] in
-theorem right {S : StageSystem A} (uS : Units S) {i j : I} (h : i ≤ j) (X : A i) :
-    (S.assoc h (le_refl j)).hom.app X = (uS.unit j).hom.app ((S.T h).obj X) :=
-  uS.property.2 h X
-
 @[no_expose] def mk {S : StageSystem A} (unit : ∀ i, S.T (le_refl i) ≅ 𝟭 (A i))
     (left : ∀ {i j : I} (h : i ≤ j) (X : A i),
       (S.assoc (le_refl i) h).hom.app X = (S.T h).map ((unit i).hom.app X))
@@ -501,17 +208,6 @@ Source: common-stage comparison cocycle
     (T.assoc h h').hom.app ((U i).obj (X, Y)) ≫
       (comparison (h.trans h')).hom.app (X, Y)
 
-/-- A bilinear family with the specified scalar comparison and its tower equation.
-Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent).
-Linearity is imposed separately at integral stages, not on this purely categorical interface. -/
-structure Family where
-  mkData ::
-  functors : ∀ i, A i × A₂ i ⥤ B i
-  comparisons : ∀ {i j : I} (h : i ≤ j),
-    functors i ⋙ T.T h ≅ (S.T h).prod (S₂.T h) ⋙ functors j
-  coherence : FamilyTower S S₂ T functors comparisons
-
 namespace Family
 
 variable {S S₂ T}
@@ -520,19 +216,6 @@ variable {S S₂ T}
 
 @[no_expose, implicit_reducible] def comparison (F : Family S S₂ T) {i j : I} (h : i ≤ j) :
     F.U i ⋙ T.T h ≅ (S.T h).prod (S₂.T h) ⋙ F.U j := F.comparisons h
-
-omit [IsDirectedOrder I] in
-theorem tower (F : Family S S₂ T) :
-    ∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k) (X : A i) (Y : A₂ i),
-    (T.T h').map ((F.comparison h).hom.app (X, Y)) ≫
-      (F.comparison h').hom.app ((S.T h).obj X, (S₂.T h).obj Y) ≫
-      (F.U k).map (X := ((S.T h').obj ((S.T h).obj X),
-        (S₂.T h').obj ((S₂.T h).obj Y)))
-        (Y := ((S.T (h.trans h')).obj X, (S₂.T (h.trans h')).obj Y))
-        ((S.assoc h h').hom.app X, (S₂.assoc h h').hom.app Y) =
-    (T.assoc h h').hom.app ((F.U i).obj (X, Y)) ≫
-      (F.comparison (h.trans h')).hom.app (X, Y) :=
-  F.coherence
 
 @[no_expose] def mk (U : ∀ i, A i × A₂ i ⥤ B i)
     (comparison : ∀ {i j : I} (h : i ≤ j),
@@ -551,17 +234,6 @@ end Family
 
 variable {S S₂ T}
 
-/-- The identity cocycle for the supplied bilinear scalar comparison.
-Source: common-stage formula, supplied λ identity cocycle
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-def HasUnitComparison (U : Family S S₂ T) (uS : Units S) (uS₂ : Units S₂)
-    (uT : Units T) : Prop :=
-  ∀ (i : I) (X : A i) (Y : A₂ i),
-    (U.comparison (le_refl i)).hom.app (X, Y) ≫
-      (U.U i).map (X := ((S.T (le_refl i)).obj X, (S₂.T (le_refl i)).obj Y))
-        (Y := (X, Y)) ((uS.unit i).hom.app X, (uS₂.unit i).hom.app Y) =
-        (uT.unit i).hom.app ((U.U i).obj (X, Y))
-
 /-- The scalar square stored in a compatible transformation.
 Source: common-stage transformation formula
 (blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
@@ -572,27 +244,12 @@ Source: common-stage transformation formula
       (U.comparison h).hom.app (X, Y) ≫
         (app j).app ((S.T h).obj X, (S₂.T h).obj Y)
 
-/-- Compatible transformations, including the scalar square of the statement.
-Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-structure Transformation (U V : Family S S₂ T) where
-  mkData ::
-  components : ∀ i, U.U i ⟶ V.U i
-  compatibility : TransformationSquare U V components
-
 namespace Transformation
 
 variable {U V : Family S S₂ T}
 
 @[no_expose, implicit_reducible] def app (η : Transformation U V) (i : I) :
     U.U i ⟶ V.U i := η.components i
-
-omit [IsDirectedOrder I] in
-theorem square (η : Transformation U V) :
-    ∀ {i j : I} (h : i ≤ j) (X : A i) (Y : A₂ i),
-    (T.T h).map ((η.app i).app (X, Y)) ≫ (V.comparison h).hom.app (X, Y) =
-      (U.comparison h).hom.app (X, Y) ≫
-        (η.app j).app ((S.T h).obj X, (S₂.T h).obj Y) := η.compatibility
 
 @[no_expose] def mk (app : ∀ i, U.U i ⟶ V.U i)
     (square : ∀ {i j : I} (h : i ≤ j) (X : A i) (Y : A₂ i),
@@ -602,72 +259,6 @@ theorem square (η : Transformation U V) :
   Transformation.mkData app square
 
 end Transformation
-
-/-- The specified common-field output object. Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-def output (U : Family S S₂ T) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
-    (X : S.PairCategory × S₂.PairCategory) : T.PairCategory :=
-  ⟨join X.1.stage X.2.stage,
-    (U.U _).obj (X.1.toStage (left _ _), X.2.toStage (right _ _))⟩
-
-/-- The endpoint identification d from the node's proof, using both input associators.
-Source: common-stage Hom formula, proof step 7
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-def endpoint (U : Family S S₂ T) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
-    (X : S.PairCategory × S₂.PairCategory) {L : I}
-    (h : join X.1.stage X.2.stage ≤ L) :
-    (T.T h).obj (output U join left right X).obj ≅
-      (U.U L).obj (X.1.toStage ((left _ _).trans h),
-        X.2.toStage ((right _ _).trans h)) :=
-  (U.comparison h).app _ ≪≫ (U.U L).mapIso
-    (Iso.prod ((S.assoc (left _ _) h).app X.1.obj)
-      ((S₂.assoc (right _ _) h).app X.2.obj))
-
-/-- The explicit object and common-stage arrow formulas, with equality of transported endpoints.
-Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-structure IsDescent (U : Family S S₂ T) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
-    (F : S.PairCategory × S₂.PairCategory ⥤ T.PairCategory) : Prop where
-  objects :
-    ∀ X, F.obj X = output U join left right X
-  arrows :
-    ∀ (X Y : S.PairCategory × S₂.PairCategory) (L : I)
-      (hX : join X.1.stage X.2.stage ≤ L) (hY : join Y.1.stage Y.2.stage ≤ L)
-      (f : X.1.toStage ((left _ _).trans hX) ⟶ Y.1.toStage ((left _ _).trans hY))
-      (g : X.2.toStage ((right _ _).trans hX) ⟶ Y.2.toStage ((right _ _).trans hY)),
-      HEq (F.map (StageSystem.PairCategory.mkHom L _ _ f,
-        StageSystem.PairCategory.mkHom L _ _ g))
-        (StageSystem.PairCategory.mkHom (X := output U join left right X)
-          (Y := output U join left right Y) L hX hY
-          ((endpoint U join left right X hX).hom ≫ (U.U L).map (f, g) ≫
-            (endpoint U join left right Y hY).inv))
-
-/-- The specification record is equivalent to its original two clauses.
-Source: the unchanged specification in this module
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-theorem isDescent_iff (U : Family S S₂ T) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
-    (F : S.PairCategory × S₂.PairCategory ⥤ T.PairCategory) :
-    IsDescent U join left right F ↔
-  (∀ X, F.obj X = output U join left right X) ∧
-  ∀ (X Y : S.PairCategory × S₂.PairCategory) (L : I)
-    (hX : join X.1.stage X.2.stage ≤ L) (hY : join Y.1.stage Y.2.stage ≤ L)
-    (f : X.1.toStage ((left _ _).trans hX) ⟶ Y.1.toStage ((left _ _).trans hY))
-    (g : X.2.toStage ((right _ _).trans hX) ⟶ Y.2.toStage ((right _ _).trans hY)),
-    HEq (F.map (StageSystem.PairCategory.mkHom L _ _ f,
-      StageSystem.PairCategory.mkHom L _ _ g))
-      (StageSystem.PairCategory.mkHom (X := output U join left right X)
-        (Y := output U join left right Y) L hX hY
-        ((endpoint U join left right X hX).hom ≫ (U.U L).map (f, g) ≫
-          (endpoint U join left right Y hY).inv)) := by
-  constructor
-  · intro h
-    exact ⟨h.1, h.2⟩
-  · rintro ⟨h₁, h₂⟩
-    exact ⟨h₁, h₂⟩
 
 @[no_expose] private def productSystem (S : StageSystem A) (S₂ : StageSystem A₂) :
     StageSystem (fun i ↦ A i × A₂ i) where
@@ -715,55 +306,6 @@ theorem isDescent_iff (U : Family S S₂ T) (join : I → I → I)
 attribute [local implicit_reducible] productSystem familyMorphism projectionLeft
   projectionRight diagonal
 
-private theorem diagonal_map (S : StageSystem A) (S₂ : StageSystem A₂)
-    {X Y : (productSystem S S₂).PairCategory} {n : I}
-    (hX : X.stage ≤ n) (hY : Y.stage ≤ n) (f : X.toStage hX ⟶ Y.toStage hY) :
-    (diagonal S S₂).map (StageSystem.PairCategory.mkHom n hX hY f) =
-      (StageSystem.PairCategory.mkHom
-        (X := ⟨X.stage, X.obj.1⟩) (Y := ⟨Y.stage, Y.obj.1⟩) n hX hY f.1,
-        StageSystem.PairCategory.mkHom
-          (X := ⟨X.stage, X.obj.2⟩) (Y := ⟨Y.stage, Y.obj.2⟩) n hX hY f.2) := by
-  change (StageSystem.PairCategory.mkHom (S := S)
-      (X := ⟨X.stage, X.obj.1⟩) (Y := ⟨Y.stage, Y.obj.1⟩) n hX hY (𝟙 _ ≫ f.1 ≫ 𝟙 _),
-    StageSystem.PairCategory.mkHom (S := S₂)
-      (X := ⟨X.stage, X.obj.2⟩) (Y := ⟨Y.stage, Y.obj.2⟩) n hX hY (𝟙 _ ≫ f.2 ≫ 𝟙 _)) = _
-  simp only [Category.id_comp, Category.comp_id]
-
-private theorem diagonal_bijective (S : StageSystem A) (S₂ : StageSystem A₂)
-    (X Y : (productSystem S S₂).PairCategory) :
-    Function.Bijective ((diagonal S S₂).map (X := X) (Y := Y)) := by
-  constructor
-  · intro f g he
-    induction f using StageSystem.PairCategory.hom_induction with
-    | h n hX hY u =>
-      induction g using StageSystem.PairCategory.hom_induction with
-      | h m hX' hY' v =>
-        rw [diagonal_map, diagonal_map] at he
-        obtain ⟨p, hn, hm, hp⟩ :=
-          (StageSystem.PairCategory.mkHom_eq_mkHom_iff' (S := S)
-            (X := ⟨X.stage, X.obj.1⟩) (Y := ⟨Y.stage, Y.obj.1⟩) u.1 v.1).1
-              (congrArg _root_.Prod.fst he)
-        obtain ⟨q, hn', hm', hq⟩ :=
-          (StageSystem.PairCategory.mkHom_eq_mkHom_iff' (S := S₂)
-            (X := ⟨X.stage, X.obj.2⟩) (Y := ⟨Y.stage, Y.obj.2⟩) u.2 v.2).1
-              (congrArg _root_.Prod.snd he)
-        obtain ⟨r, hpr, hqr⟩ := exists_ge_ge p q
-        apply (StageSystem.PairCategory.mkHom_eq_mkHom_iff' u v).2
-        refine ⟨r, hn.trans hpr, hm.trans hpr, ?_⟩
-        apply Prod.ext
-        · change S.tr (hn.trans hpr) u.1 = S.tr (hm.trans hpr) v.1
-          have hr := congrArg (S.tr hpr) hp
-          simpa only [S.tr_tr] using hr
-        · change S₂.tr (hn.trans hpr) u.2 = S₂.tr (hm.trans hpr) v.2
-          have hr := congrArg (S₂.tr hqr) hq
-          simpa only [S₂.tr_tr] using hr
-  · rintro ⟨f, g⟩
-    obtain ⟨n, hn, hX, hY, u, rfl⟩ := StageSystem.PairCategory.exists_le_mkHom_eq f X.stage
-    obtain ⟨m, hm, hX', hY', v, rfl⟩ := StageSystem.PairCategory.exists_le_mkHom_eq g n
-    refine ⟨StageSystem.PairCategory.mkHom m (hX.trans hm) (hY.trans hm)
-      (S.tr hm u, v), ?_⟩
-    rw [diagonal_map, StageSystem.PairCategory.mkHom_tr]
-
 @[no_expose] private def diagonalFF (S : StageSystem A) (S₂ : StageSystem A₂) :
     (diagonal S S₂).FullyFaithful :=
   ((Functor.FullyFaithful.nonempty_iff_map_bijective _).2 (diagonal_bijective S S₂)).some
@@ -799,76 +341,6 @@ private theorem diagonal_bijective (S : StageSystem A) (S₂ : StageSystem A₂)
 
 attribute [local implicit_reducible] pairedObject pairedIso pairing output endpoint
 
-private theorem isoToStage_hom_eq (X : S.PairCategory) {j k : I}
-    (a : X.stage ≤ j) (b : j ≤ k) :
-    (S.isoToStage X a).hom = StageSystem.PairCategory.mkHom
-      (X := X) (Y := (S.ι j).obj (X.toStage a))
-      k (a.trans b) b ((S.assoc a b).inv.app X.obj) := by
-  change StageSystem.PairCategory.mkHom j a (le_refl j) _ = _
-  rw [← StageSystem.PairCategory.mkHom_tr b]
-  apply congrArg (StageSystem.PairCategory.mkHom
-    (X := X) (Y := (S.ι j).obj (X.toStage a)) k (a.trans b) b)
-  dsimp only [StageSystem.tr]
-  rw [← Category.assoc, S.cocycle_inv a (le_refl j) b, Category.assoc,
-    Iso.inv_hom_id_app]
-  exact Category.comp_id _
-
-private theorem isoToStage_inv_eq (X : S.PairCategory) {j k : I}
-    (a : X.stage ≤ j) (b : j ≤ k) :
-    (S.isoToStage X a).inv = StageSystem.PairCategory.mkHom
-      (X := (S.ι j).obj (X.toStage a)) (Y := X)
-      k b (a.trans b) ((S.assoc a b).hom.app X.obj) := by
-  apply (cancel_epi (S.isoToStage X a).hom).1
-  rw [Iso.hom_inv_id, isoToStage_hom_eq X a b,
-    StageSystem.PairCategory.mkHom_comp_mkHom,
-    StageSystem.PairCategory.id_eq_mkHom X (a.trans b)]
-  simp
-
-private theorem conjugate_mkHom {X Y : S.PairCategory} {j j' k : I}
-    (a : X.stage ≤ j) (a' : Y.stage ≤ j') (b : j ≤ k) (b' : j' ≤ k)
-    (f : X.toStage (a.trans b) ⟶ Y.toStage (a'.trans b')) :
-    (S.isoToStage X a).inv ≫ StageSystem.PairCategory.mkHom k _ _ f ≫
-      (S.isoToStage Y a').hom =
-    StageSystem.PairCategory.mkHom
-      (X := (S.ι j).obj (X.toStage a)) (Y := (S.ι j').obj (Y.toStage a')) k b b'
-      ((S.assoc a b).hom.app X.obj ≫ f ≫ (S.assoc a' b').inv.app Y.obj) := by
-  rw [isoToStage_inv_eq X a b, isoToStage_hom_eq Y a' b',
-    StageSystem.PairCategory.mkHom_comp_mkHom, StageSystem.PairCategory.mkHom_comp_mkHom]
-
-private theorem pairing_map (S : StageSystem A) (S₂ : StageSystem A₂) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
-    (X Y : S.PairCategory × S₂.PairCategory) (L : I)
-    (hX : join X.1.stage X.2.stage ≤ L) (hY : join Y.1.stage Y.2.stage ≤ L)
-    (f : X.1.toStage ((left _ _).trans hX) ⟶ Y.1.toStage ((left _ _).trans hY))
-    (g : X.2.toStage ((right _ _).trans hX) ⟶ Y.2.toStage ((right _ _).trans hY)) :
-    (pairing S S₂ join left right).map
-      (StageSystem.PairCategory.mkHom L _ _ f, StageSystem.PairCategory.mkHom L _ _ g) =
-      StageSystem.PairCategory.mkHom L hX hY
-        ((S.assoc (left _ _) hX).hom.app X.1.obj ≫ f ≫
-            (S.assoc (left _ _) hY).inv.app Y.1.obj,
-          (S₂.assoc (right _ _) hX).hom.app X.2.obj ≫ g ≫
-            (S₂.assoc (right _ _) hY).inv.app Y.2.obj) := by
-  apply (diagonalFF S S₂).map_injective
-  rw [diagonal_map]
-  change (diagonal S S₂).map ((diagonalFF S S₂).preimage _) = _
-  rw [(diagonalFF S S₂).map_preimage]
-  exact Prod.ext (conjugate_mkHom _ _ _ _ f) (conjugate_mkHom _ _ _ _ g)
-
-private theorem exists_joint_representative
-    (join : I → I → I) (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
-    (X Y : S.PairCategory × S₂.PairCategory) (f : X.1 ⟶ Y.1) (g : X.2 ⟶ Y.2) :
-    ∃ (L : I) (hX : join X.1.stage X.2.stage ≤ L)
-      (hY : join Y.1.stage Y.2.stage ≤ L)
-      (u : X.1.toStage ((left _ _).trans hX) ⟶ Y.1.toStage ((left _ _).trans hY))
-      (v : X.2.toStage ((right _ _).trans hX) ⟶ Y.2.toStage ((right _ _).trans hY)),
-      f = StageSystem.PairCategory.mkHom L _ _ u ∧
-        g = StageSystem.PairCategory.mkHom L _ _ v := by
-  obtain ⟨m, hmX, hmY⟩ := exists_ge_ge (join X.1.stage X.2.stage) (join Y.1.stage Y.2.stage)
-  obtain ⟨n, hmn, hX, hY, u, rfl⟩ := StageSystem.PairCategory.exists_le_mkHom_eq f m
-  obtain ⟨L, hnL, hX', hY', v, rfl⟩ := StageSystem.PairCategory.exists_le_mkHom_eq g n
-  exact ⟨L, hmX.trans (hmn.trans hnL), hmY.trans (hmn.trans hnL),
-    S.tr hnL u, v, (StageSystem.PairCategory.mkHom_tr hnL u).symm, rfl⟩
-
 @[no_expose] private def explicitDescent (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :
     S.PairCategory × S₂.PairCategory ⥤ T.PairCategory where
@@ -876,46 +348,6 @@ private theorem exists_joint_representative
   map f := (pairing S S₂ join left right ⋙ (familyMorphism U).functor).map f
   map_id X := (pairing S S₂ join left right ⋙ (familyMorphism U).functor).map_id X
   map_comp f g := (pairing S S₂ join left right ⋙ (familyMorphism U).functor).map_comp f g
-
-private theorem explicitDescent_spec (U : Family S S₂ T) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :
-    IsDescent U join left right (explicitDescent U join left right) := by
-  refine ⟨fun _ ↦ rfl, ?_⟩
-  intro X Y L hX hY f g
-  apply heq_of_eq
-  dsimp only [explicitDescent, Functor.comp_map]
-  rw [pairing_map S S₂ join left right X Y L hX hY f g,
-    StageSystem.Morphism.functor_map_mkHom]
-  apply congrArg (StageSystem.PairCategory.mkHom L hX hY)
-  dsimp only [StageSystem.Morphism.mapAt, familyMorphism, endpoint, Iso.trans_hom,
-    Iso.trans_inv, Iso.app, Functor.mapIso_hom, Functor.mapIso_inv]
-  simp only [Iso.prod_hom, Iso.prod_inv, Category.assoc]
-  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
-  simp only [prod_comp, Category.assoc]
-  rfl
-
-/-- Existence and uniqueness of the descended bifunctor with its explicit representatives.
-Source: common-stage Hom formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent).
-Proof, steps 5--9: choose a common upper stage for two arrow representatives and the output
-fields. Conjugate U_L(f,g) by the endpoint identifications. The comparison tower equation,
-the two input associator cocycles and comparison naturality show that this commutes with
-transport. Equality of representatives is equality after a further common stage, so the
-formula factors through the actual quotient Hom. Identity and composition follow by
-cancelling adjacent endpoint isomorphisms. Every arrow has a representative, giving uniqueness.
-This is the pair-category model of def-weil-algebraically-closed-coefficients, used without
-any geometric, additive-object or triangulated hypotheses. -/
-theorem descent_existsUnique (U : Family S S₂ T) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :
-    ∃! F : S.PairCategory × S₂.PairCategory ⥤ T.PairCategory,
-      IsDescent U join left right F := by
-  refine ⟨explicitDescent U join left right, explicitDescent_spec U join left right, ?_⟩
-  intro F hF
-  apply Functor.hext hF.1
-  rintro X Y ⟨f, g⟩
-  obtain ⟨L, hX, hY, u, v, rfl, rfl⟩ :=
-    exists_joint_representative join left right X Y f g
-  exact (hF.2 X Y L hX hY u v).trans
-    ((explicitDescent_spec U join left right).2 X Y L hX hY u v).symm
 
 /-- The unique representative-normalized descended bifunctor.
 Source: common-stage Hom formula
@@ -926,24 +358,7 @@ Source: common-stage Hom formula
     (output U join left right)
     (descent_existsUnique U join left right).exists.choose_spec.1
 
-/-- The chosen common-stage functor satisfies the complete representative prescription.
-Source: the proved unique descent
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-theorem descend_spec (U : Family S S₂ T) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :
-    IsDescent U join left right (descend U join left right) := by
-  unfold descend
-  rw [withObjects_eq]
-  exact (descent_existsUnique U join left right).exists.choose_spec
-
 attribute [local implicit_reducible] explicitDescent
-
-private theorem descend_eq (U : Family S S₂ T) (join : I → I → I)
-    (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :
-    descend U join left right = explicitDescent U join left right :=
-  (descent_existsUnique U join left right).unique
-    (descend_spec U join left right)
-    (explicitDescent_spec U join left right)
 
 attribute [local irreducible] descend
 
@@ -1021,65 +436,7 @@ variable {I : Type w} [Preorder I]
   (S : StageSystem A) [∀ (i j : I) (h : i ≤ j), (S.T h).Additive]
   (semi : ∀ {i j : I} (h : i ≤ j), ScalarLocalization.IsSemilinear (φ h) (S.T h))
 
-private theorem coefficientMap_comp {i j k : I} (h : i ≤ j) (h' : j ≤ k)
-    (φcomp : (φ h').comp (φ h) = φ (h.trans h')) :
-    (ScalarLocalization.coefficientMap (π j) (π k) (φ h') (unitImage h')).comp
-      (ScalarLocalization.coefficientMap (π i) (π j) (φ h) (unitImage h)) =
-      ScalarLocalization.coefficientMap (π i) (π k) (φ (h.trans h'))
-        (unitImage (h.trans h')) := by
-  apply (ScalarLocalization.coefficientMap_unique _ _ _ _ _).1
-  ext r
-  simp only [RingHom.comp_apply, ScalarLocalization.coefficientMap,
-    IsLocalization.Away.lift_eq]
-  exact congrArg (algebraMap (O k) (Localization.Away (π k))) (RingHom.congr_fun φcomp r)
-
 variable {π φ unitImage S semi}
-
-private theorem rationalComparison_naturality
-    {B : I → Type u'} [∀ i, Category.{v'} (B i)]
-    [∀ i, Preadditive (B i)] [∀ i, Linear (O i) (B i)]
-    (T : StageSystem B) [∀ (i j : I) (h : i ≤ j), (T.T h).Additive]
-    (semiT : ∀ {i j : I} (h : i ≤ j), ScalarLocalization.IsSemilinear (φ h) (T.T h))
-    (U : Family S S T) (hU : ∀ i, IsSeparatelyLinear (O i) (U.U i))
-    {i j : I} (h : i ≤ j) (X X' Y Y' : A i)
-    (f : Localization.Away (π i) ⊗[O i] (X ⟶ X'))
-    (g : Localization.Away (π i) ⊗[O i] (Y ⟶ Y')) :
-    tensorComp (O j) (B j) (π j) _ _ _
-        (1 ⊗ₜ[O j] (U.comparison h).hom.app (X', Y'))
-        (ScalarLocalization.extensionHom (π i) (π j) (φ h) (unitImage h)
-          (T.T h) (semiT h) ((U.U i).obj (X, Y)) ((U.U i).obj (X', Y'))
-          (rawHom (π i) (U.U i) (hU i) X X' Y Y' f g)) =
-      tensorComp (O j) (B j) (π j) _ _ _
-        (rawHom (π j) (U.U j) (hU j)
-          ((S.T h).obj X) ((S.T h).obj X') ((S.T h).obj Y) ((S.T h).obj Y')
-          (ScalarLocalization.extensionHom (π i) (π j) (φ h) (unitImage h)
-            (S.T h) (semi h) X X' f)
-          (ScalarLocalization.extensionHom (π i) (π j) (φ h) (unitImage h)
-            (S.T h) (semi h) Y Y' g))
-        (1 ⊗ₜ[O j] (U.comparison h).hom.app (X, Y)) := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [tensorComp_zero_left, tensorComp_zero_right, rawHom_zero_left,
-    AddMonoidHom.map_zero]
-  | add f f' hf hf' =>
-    simp only [tensorComp_add_left, tensorComp_add_right, rawHom_add_left,
-      AddMonoidHom.map_add]
-    exact congrArg₂ (· + ·) hf hf'
-  | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero => simp only [tensorComp_zero_left, tensorComp_zero_right, rawHom_zero_right,
-      AddMonoidHom.map_zero]
-    | add g g' hg hg' =>
-      simp only [tensorComp_add_left, tensorComp_add_right, rawHom_add_right,
-        AddMonoidHom.map_add]
-      exact congrArg₂ (· + ·) hg hg'
-    | tmul b g =>
-      rw [rawHom_tmul, extendedHom_tmul, extendedHom_tmul, extendedHom_tmul,
-        rawHom_tmul, map_mul, tensorComp_tmul,
-        tensorComp_tmul, one_mul, mul_one]
-      exact congrArg (fun f ↦
-        (ScalarLocalization.coefficientMap (π i) (π j) (φ h) (unitImage h) a *
-          ScalarLocalization.coefficientMap (π i) (π j) (φ h) (unitImage h) b) ⊗ₜ[O j] f)
-        ((U.comparison h).hom.naturality (X := (X,Y)) (Y := (X',Y')) (f,g))
 
 @[no_expose] private def rationalComparisonIso
     {B : I → Type u'} [∀ i, Category.{v'} (B i)]
@@ -1118,23 +475,6 @@ Source: blueprint coefficient definitions
 @[no_expose] def Integers (E : Padic.FiniteCoefficientFields l Ω) : Subring E.val :=
   Padic.coefficientExtensionIntegers l E.val
 
-/-- The named integer ring is exactly the recorded coefficient-extension subring.
-Source: coefficient ring definition
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-theorem Integers_eq (E : Padic.FiniteCoefficientFields l Ω) :
-    Integers l Ω E = Padic.coefficientExtensionIntegers l E.val := by
-  exact Eq.trans rfl rfl
-
-
-
-/-- The recorded uniformizer belongs to the named integer subring.
-Source: the coefficient uniformizer definition and `Integers_eq`
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-theorem uniformizer_mem (E : Padic.FiniteCoefficientFields l Ω) :
-    (Padic.coefficientExtensionUniformizer l E.val : E.val) ∈ Integers l Ω E := by
-  rw [Integers_eq]
-  exact (Padic.coefficientExtensionUniformizer l E.val).property
-
 /-- The recorded uniformizer; no extra torsion-free or characteristic hypotheses.
 Source: blueprint coefficient definitions
 (blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
@@ -1143,24 +483,6 @@ Source: blueprint coefficient definitions
 
 set_option linter.unusedSectionVars false in
 attribute [local irreducible] Padic.finiteCoefficientCompositum uniformizer
-
-/-- The chosen output field is exactly the compositum, including the base-field case.
-Source: common-stage formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent).
-Proof, step 5: finiteCoefficientFields_properties supplies both upper-bound proofs;
-finiteCoefficientCompositum is the supremum of intermediate fields, hence is finite. -/
-theorem compositum_upper :
-    (∀ E F : Padic.FiniteCoefficientFields l Ω,
-      E ≤ Padic.finiteCoefficientCompositum l Ω E F) ∧
-    (∀ E F : Padic.FiniteCoefficientFields l Ω,
-      F ≤ Padic.finiteCoefficientCompositum l Ω E F) := by
-  exact ⟨fun E F ↦ (Padic.finiteCoefficientFields_properties l Ω).1 E F |>.1,
-    fun E F ↦ (Padic.finiteCoefficientFields_properties l Ω).1 E F |>.2⟩
-
-/-- Directedness uses the actual finite compositum, not finiteness of the field as a set.
-Source: common-stage formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
-instance coefficientDirected : IsDirectedOrder (Padic.FiniteCoefficientFields l Ω) where
-  directed E F := ⟨Padic.finiteCoefficientCompositum l Ω E F,
-    (compositum_upper l Ω).1 E F, (compositum_upper l Ω).2 E F⟩
 
 end PadicCoefficients
 end CategoryTheory.BilinearCoefficientDescent

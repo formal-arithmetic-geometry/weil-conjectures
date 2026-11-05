@@ -129,32 +129,6 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero (h : X ⟶ X)
   refine (congrArg (BorelMooreSection.restrict j) hZ.symm).trans ?_
   rw [BorelMooreSection.restrict_pushforward_self]
 
-/-- **The local term on a one-point scheme**: if `X` has a single point, the open piece at a
-fixed rational point `x` is zero, and the local term of the graph correspondence `(𝟙, h)` along
-an open and closed subscheme `B` of the fixed locus with underlying set `{x}` is the trace of the
-stalk map `v_x`. -/
-theorem localTerm_traceClass_ofGraph_eq_trace_of_subsingleton [Subsingleton X.left] (h : X ⟶ X)
-    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
-    (F : (ofGraph K h v).FixedLocus) (x : RationalPoint X) (hx : x ≫ h = x)
-    {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
-    [IsOpenImmersion j.left] [IsClosedImmersion j.left]
-    (hB : Set.range j.left.base =
-      {(F.liftPoint x ((Category.comp_id x).trans hx.symm)).left.base (default : Spec (.of k))})
-    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)] :
-    ((ofGraph K h v).traceClass F).localTerm j = trace (graphStalkMap K h v x hx) := by
-  refine localTerm_traceClass_ofGraph_eq_trace_of_localTerm_eq_zero h v F x hx j hB ?_
-  have hx' : Set.range x.left.base = Set.univ :=
-    Set.eq_univ_of_forall fun y ↦ ⟨(default : Spec (.of k)), Subsingleton.elim _ _⟩
-  have hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj
-      (pointOpenPiece K x)) :=
-    isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ (pointComplι x) h
-      ((isCompl_range_pointComplι x).disjoint.mono_right (hx' ▸ Set.subset_univ _)) _
-  have h0 : F.traceClassWithCoeff _ (graphOpenPieceCoeff K v hx ≫
-      (boundedConstructibleUpperShriekId ℓ X).inv.app _) = 0 :=
-    traceClass_eq_zero_of_isZero _ _ hK
-  rw [h0]
-  simpa using BorelMooreSection.localTerm_add j 0 0
-
 /-! ### The curve case -/
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}

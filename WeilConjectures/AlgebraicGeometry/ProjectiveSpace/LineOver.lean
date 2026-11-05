@@ -174,11 +174,6 @@ instance (B : Over S) [IsSeparated B.hom] : IsSeparated (overProjectiveLine B).h
 def overProjectiveLineProj (B : Over S) : overProjectiveLine B ⟶ B :=
   Over.homMk (ProjectiveLine B.left ↘ B.left) rfl
 
-/-- The underlying morphism of `overProjectiveLineProj B` is the structure morphism. -/
-lemma overProjectiveLineProj_left (B : Over S) :
-    (overProjectiveLineProj B).left = ProjectiveLine B.left ↘ B.left :=
-  rfl
-
 instance (B : Over S) : IsProper (overProjectiveLineProj B).left :=
   inferInstanceAs (IsProper (ProjectiveLine B.left ↘ B.left))
 
@@ -339,15 +334,6 @@ lemma overAffineLineι_naturality (j : ℕ) {E E' : Over (Spec (.of k))} (b : E 
   exact (comp_homOfSections _ _ _ (span_range_pairSections_one _)).trans
     ((homOfSections_congr hg hs).trans
       (homOfSections_map _ _ _ (span_range_pairSections_one _)).symm)
-
-/-- **The complement of `𝔸^{j+1}_k ×_k E` in `ℙ¹_{𝔸ʲ_k ×_k E}` is the section at infinity**:
-the image of `overAffineLineι` is the complement of the image of `ProjectiveLine.infinity`. -/
-lemma range_overAffineLineι (j : ℕ) (E : Over (Spec (.of k))) :
-    Set.range (overAffineLineι j E).left =
-      (Set.range (infinity (overProd (polyAffine k j) E).left))ᶜ := by
-  have := isIso_homOfVector_overAffineLineCoord j E
-  rw [range_infinity, compl_compl, overAffineLineι_left, ← Scheme.Hom.coe_opensRange,
-    Scheme.Hom.opensRange_comp_of_isIso]
 
 end AffineLine
 

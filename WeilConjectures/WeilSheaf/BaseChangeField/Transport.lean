@@ -62,13 +62,6 @@ def frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l Y) : (m : ℕ) →
       (adicLowerStarComp l _ _).symm.app _ ≪≫
       (WeilSheaf.frobeniusPullback k₀ l Y).mapIso (K.frobeniusPowIso m) ≪≫ K.str
 
-lemma _root_.AlgebraicGeometry.WeilSheaf.frobeniusPowIso_eq [Fact (ringChar k₀ ≠ l)]
-    (F : WeilSheaf k₀ l Y) (m : ℕ) : F.frobeniusPowIso m = F.obj.frobeniusPowIso m := by
-  induction m with
-  | zero => rfl
-  | succ m ih =>
-    rw [WeilSheaf.frobeniusPowIso, frobeniusPowIso, ih]
-
 /-- The iterated Weil structures are natural. -/
 @[reassoc]
 lemma frobeniusPowIso_hom_naturality {K K' : ProEtaleWeilSheaf k₀ l Y} (φ : K ⟶ K') (m : ℕ) :

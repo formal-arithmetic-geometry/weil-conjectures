@@ -60,41 +60,6 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} {X Y : Scheme.{u}}
 
-lemma projectionMapApp_eq (Λ' : Type (u + 1)) [CommRing Λ'] (f : X ⟶ Y)
-    [HasCompactification f] (K : 𝐃(X, Λ')) (L : 𝐃(Y, Λ')) :
-    projectionMapApp Λ' f K L = ((projectionMap (ModuleCat.{u + 1} Λ') f).app K).app L :=
-  rfl
-
-lemma hasProjectionFormula_iff_isIso_projectionMapApp (Λ' : Type (u + 1)) [CommRing Λ']
-    (f : X ⟶ Y) [HasCompactification f] (K : 𝐃(X, Λ')) (L : 𝐃(Y, Λ')) :
-    HasProjectionFormula (ModuleCat.{u + 1} Λ') f K L ↔ IsIso (projectionMapApp Λ' f K L) :=
-  Iff.rfl
-
-/-- The finite-level projection formula (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`)
-for `AlgebraicGeometry.Etale.projectionMapApp`. -/
-instance isIso_projectionMapApp_of_finite (Λ' : Type (u + 1)) [CommRing Λ'] [Finite Λ']
-    (f : X ⟶ Y) [HasCompactification f] (K : 𝐃(X, Λ')) (L : 𝐃(Y, Λ')) :
-    IsIso (projectionMapApp Λ' f K L) :=
-  hasProjectionFormula_of_finite Λ' f K L
-
-/-- **The reduction of the projection map at a finite quotient.** For a nonzerodivisor `ϖ` of
-`Λ` with `Λ ⧸ (ϖ)ⁿ` finite, `f : X ⟶ Y` admitting a compactification, and arbitrary
-`K ∈ D(X_ét, Λ)` and `L ∈ D(Y_ét, Λ)`, the reduction modulo `(ϖ)ⁿ` of the projection map
-`PF_{f, K, L}` is an isomorphism: it is the restriction of scalars of the projection map
-`PF_{f, K_n, L_n}` over the finite ring `Λ ⧸ (ϖ)ⁿ`
-(`AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`),
-which is an isomorphism by the finite-level projection formula
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`). -/
-theorem isIso_reductionModIdeal_map_projectionMap_of_finite (hϖ : ϖ ∈ nonZeroDivisors Λ)
-    (n : ℕ) [Finite (Λ ⧸ Ideal.span {ϖ} ^ n)] (f : X ⟶ Y) [HasCompactification f]
-    (K : 𝐃(X, Λ)) (L : 𝐃(Y, Λ)) :
-    IsIso ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ n)).map
-      (projectionMapApp Λ f K L)) := by
-  obtain ⟨Kn, -, Ln, -, -, -, ⟨e⟩⟩ :=
-    exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap hϖ n f K L
-  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff e).2
-    (Functor.map_isIso (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) Y) _)
-
 end Etale
 
 end AlgebraicGeometry

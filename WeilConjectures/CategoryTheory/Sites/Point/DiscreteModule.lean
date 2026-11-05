@@ -129,12 +129,6 @@ noncomputable def sheafHAddEquiv (F : Sheaf J AddCommGrpCat.{max u' w}) (n : ℕ
     (h.equivalence.toAdjunction.extAddEquiv _ (h.functor.obj F) n).trans <|
       Abelian.Ext.precompAddEquiv (h.functorObjConstantSheafIso _).symm _ n
 
-/-- At a Galois point, global sections are the invariants of the fibre:
-`H⁰(C, F) ≃ (F_Φ)ᴳ`. -/
-noncomputable def sheafHZeroAddEquiv (F : Sheaf J AddCommGrpCat.{max u' w}) :
-    Sheaf.H F 0 ≃+ (DiscreteModule.invariants G).obj (h.functor.obj F) :=
-  (h.sheafHAddEquiv F 0).trans (DiscreteModule.H_zero_addEquiv _)
-
 /-- At a Galois point, the cohomology of the constant sheaf with value `A` is the continuous
 cohomology of the trivial module `A`. -/
 noncomputable def sheafHConstantSheafAddEquiv (A : AddCommGrpCat.{max u' w}) (n : ℕ) :

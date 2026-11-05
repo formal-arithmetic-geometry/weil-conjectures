@@ -28,29 +28,4 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   (hi : UpperStarWeilCompatible Λ c.i (c.i_comp_g_comp h))
   (hg : UpperStarWeilCompatible Λ c.g (rfl : c.g ≫ t = c.g ≫ t))
 
-/-- Geometric compact-support base change is the paste of its open and proper parts. -/
-lemma rightDerivedLowerShriekGeometricFiberIso_eq_compForgetIso :
-    rightDerivedLowerShriekGeometricFiberIso Λ c h =
-      Adjunction.compForgetIso
-        (openImmersionLowerShriekMapDerivedCategoryBaseChangeIso Λ
-          (Scheme.Hom.isPullback_geometricFiberMap c.i (c.i_comp_g_comp h)))
-        (rightDerivedLowerStarBaseChangeIso Λ
-          (Scheme.Hom.isPullback_geometricFiberMap c.g rfl).flip) := rfl
-
-/-- Weil descent of compact support is the paste of its open and proper descent squares. -/
-lemma geometricFiberWeilRightDerivedLowerShriekIso_eq_traceCompDescentIso :
-    geometricFiberWeilRightDerivedLowerShriekIso c h hi hg =
-      Functor.traceCompDescentIso
-        (geometricFiberWeilExtensionByZeroMapDerivedCategoryIso hi)
-        (geometricFiberWeilRightDerivedLowerStarIso hg) := rfl
-
-/-- Forgetting compact support pastes the exact open and derived proper comparisons. -/
-lemma weilRightDerivedLowerShriekCompForgetIso_eq_compForgetIso :
-    weilRightDerivedLowerShriekCompForgetIso Λ c h =
-      Adjunction.compForgetIso
-        (Functor.mapDerivedCategoryCompForgetIso (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso
-          (openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso Λ c.i (c.i_comp_g_comp h))))
-        (Endofunctor.IsoAlgebra.derivedForgetCommIso
-          (lowerStarGeometricFiberMapCompFrobeniusIso Λ c.g rfl)) := rfl
-
 end AlgebraicGeometry.ProEtale.CondensedRing

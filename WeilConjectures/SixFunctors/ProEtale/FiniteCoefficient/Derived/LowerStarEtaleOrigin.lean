@@ -52,20 +52,6 @@ noncomputable def rightDerivedLowerStarMapDerivedCategoryObjIso
 
 namespace DerivedCategory
 
-/-- The pro-étale derived direct image along a quasi-compact quasi-separated morphism preserves
-bounded below complexes of étale origin. -/
-lemma plusEtaleOrigin_rightDerivedLowerStar_obj
-    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hL : plusEtaleOrigin A X L) :
-    plusEtaleOrigin A Y ((R((f)_*[A])).obj L) := by
-  obtain ⟨K', hK', ⟨e⟩⟩ := hL
-  refine ⟨(R(Etale.lowerStar A f)).obj K', ?_,
-    ⟨(rightDerivedLowerStarMapDerivedCategoryObjIso A f K' hK').symm ≪≫
-      (R((f)_*[A])).mapIso e⟩⟩
-  exact _root_.DerivedCategory.TStructure.t.plus.prop_of_iso
-    ((Etale.lowerStar A f).rightDerivedFunctorPlusCompatibility.app ⟨K', hK'⟩)
-    ((R+(Etale.lowerStar A f)).obj ⟨K', hK'⟩).property
-
 end DerivedCategory
 
 end AlgebraicGeometry.ProEtale

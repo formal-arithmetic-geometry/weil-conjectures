@@ -31,21 +31,4 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (Φ : Point.
   [J.WEqualsLocallyBijective A] [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{w, w} (CategoryTheory.forget A)] [LocallySmall.{w} C]
 
-/-- **The fibre of a morphism out of a constant sheaf** is its adjunct followed by the germ map
-at the terminal object: `(M_C)_Φ ≅ M ⟶ G_Φ` is `M ⟶ Γ(T, G) ⟶ G_Φ`. -/
-lemma sheafFiberConstantSheafIso_inv_comp_sheafFiber_map {T : C} (hT : IsTerminal T)
-    (t : Φ.fiber.obj T) (M : A) (G : Sheaf J A) (ψ : (constantSheaf J A).obj M ⟶ G) :
-    (Φ.sheafFiberConstantSheafIso M).inv ≫ Φ.sheafFiber.map ψ =
-      (constantSheafAdj J A hT).homEquiv M G ψ ≫ Φ.toPresheafFiber T t G.obj := by
-  rw [constantSheafAdj_homEquiv_apply, Category.assoc, ← Φ.toPresheafFiber_naturality]
-  have h2 := Φ.toPresheafFiber_naturality (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M))
-    T t
-  erw [← reassoc_of% h2]
-  have h := Φ.toPresheafFiber_presheafFiberConstIso_hom M T t
-  rw [← Iso.eq_comp_inv] at h
-  erw [Category.id_comp] at h
-  rw [h]
-  simp only [sheafFiberConstantSheafIso, Iso.trans_inv, Iso.symm_inv, asIso_hom, Category.assoc]
-  rfl
-
 end CategoryTheory.GrothendieckTopology.Point

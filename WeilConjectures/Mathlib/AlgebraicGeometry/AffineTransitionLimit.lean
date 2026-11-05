@@ -1426,7 +1426,6 @@ lemma inr_stageDiagram_map {T T' : E.Stage} (f : T ⟶ T') :
       Spec.map f.algHom ≫ pushout.inr (E.Wι T'.j) T'.toSpec :=
   pushout.inr_desc _ _ _
 
-
 @[simp] lemma opensRange_Wι (E : ExtensionData.{u}) (j : Over E.i₀) :
     (E.Wι j).opensRange = E.N.D.map j.hom ⁻¹ᵁ E.W₀ :=
   Scheme.Opens.opensRange_ι _
@@ -1499,7 +1498,6 @@ instance isAffineHom_stageDiagram_map {T T' : E.Stage} (f : T ⟶ T') :
       (isPullback_pushout_inr f).flip.isoPullback.hom _).mp ?_
     rw [(isPullback_pushout_inr f).flip.isoPullback_hom_snd]
     infer_instance
-
 
 /-! ### The cone -/
 
@@ -1636,7 +1634,6 @@ noncomputable def Stage.fromX (T : E.Stage) : E.X ⟶ E.stageDiagram.obj T :=
       rw [(cancel_mono E.U.ι).mp
         (pullback.condition : pullback.fst E.U.ι E.U.ι ≫ _ = pullback.snd _ _ ≫ _)])
 
-
 @[reassoc (attr := simp)]
 lemma Stage.Uι_fromX (T : E.Stage) : E.U.ι ≫ T.fromX = T.fromU :=
   E.cover.ι_glueMorphisms _ _ true
@@ -1669,7 +1666,6 @@ noncomputable def stageCone (E : ExtensionData.{u}) : Cone E.stageDiagram where
 
 @[simp] lemma stageCone_π_app (E : ExtensionData.{u}) (T : E.Stage) :
     E.stageCone.π.app T = T.fromX := rfl
-
 
 /-! ### The two charts of a stage scheme -/
 
@@ -1769,7 +1765,6 @@ lemma Stage.fromX_preimage_chartU_inf_chartV (T : E.Stage) :
     T.fromX ⁻¹ᵁ (T.chartU ⊓ T.chartV) = E.U ⊓ E.V := by
   rw [Scheme.Hom.preimage_inf, T.fromX_preimage_chartU, T.fromX_preimage_chartV]
 
-
 /-! ### The limit property, chart by chart -/
 
 /-- (Implementation) The system of Noetherian stages `Dⱼ`, indexed by the stages below a
@@ -1814,7 +1809,6 @@ noncomputable def isLimitOpensConeChartU (E : ExtensionData.{u}) (T₀ : E.Stage
         IsOpenImmersion.isoOfRangeEq_hom_fac, opensCone_π_ι, Scheme.isoOfEq_hom_ι_assoc]
       exact (Stage.Uι_fromX S.left).symm))
     (E.isLimitBaseCone T₀)
-
 
 /-- (Implementation) The system of intersections `Wⱼ`, indexed by the stages below a fixed
 stage. -/
@@ -1951,8 +1945,6 @@ noncomputable abbrev specDiagram (E : ExtensionData.{u}) : E.Stage ⥤ Scheme.{u
 algebras. -/
 noncomputable def specCone (E : ExtensionData.{u}) : Cone E.specDiagram :=
   Scheme.Spec.mapCone (Limits.coneOfCoconeLeftOp E.algCocone)
-
-lemma specCone_pt (E : ExtensionData.{u}) : E.specCone.pt = Spec Γ(E.X, E.V) := rfl
 
 lemma specCone_π_app (E : ExtensionData.{u}) (T : E.Stage) :
     E.specCone.π.app T = Spec.map T.φ := rfl
@@ -2770,7 +2762,6 @@ lemma isPullback_isPullbackLift {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g 
   rw [isPullbackLift_fst, c.w f]
   exact H
 
-
 variable (D c) in
 /-- (Implementation) The property that `g : X ⟶ lim Dⱼ` is the base change along
 `lim Dⱼ ⟶ D_k` of a scheme of finite presentation over the stage `D_k`. -/
@@ -2792,14 +2783,6 @@ finite presentation over one of the stages. -/
 def DescendsToStage {X : Scheme.{u}} (g : X ⟶ c.pt) : Prop := ∃ k, DescendsAt D c k g
 
 omit [IsCofiltered I] in
-lemma DescendsAt.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
-    (H : DescendsAt D c k g) : DescendsAt D c k' g := by
-  obtain ⟨Y, p, h, hp, hcpt, hqs, hsq⟩ := H
-  have := hp; have := hcpt; have := hqs
-  exact ⟨pullback p (D.map f), pullback.snd _ _, isPullbackLift D c f hsq, inferInstance,
-    inferInstance, inferInstance, isPullback_isPullbackLift f hsq⟩
-
-omit [IsCofiltered I] in
 lemma DescendsAtWithOpen.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
     {W : X.Opens} (H : DescendsAtWithOpen D c k g W) : DescendsAtWithOpen D c k' g W := by
   obtain ⟨Y, p, h, O, hp, hcpt, hqs, hsq, hOc, hO⟩ := H
@@ -2811,12 +2794,6 @@ lemma DescendsAtWithOpen.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X 
     isPullback_isPullbackLift f hsq,
     QuasiCompact.isCompact_preimage _ O.isOpen hOc, ?_⟩
   rw [← Scheme.Hom.comp_preimage, isPullbackLift_fst, hO]
-
-omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
-lemma DescendsAtWithOpen.descendsAt {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt} {W : X.Opens}
-    (H : DescendsAtWithOpen D c k g W) : DescendsAt D c k g := by
-  obtain ⟨Y, p, h, O, hp, hcpt, hqs, hsq, -, -⟩ := H
-  exact ⟨Y, p, h, hp, hcpt, hqs, hsq⟩
 
 include hc in
 /-- (Implementation) A quasi-compact open of a scheme over the limit descends to a
@@ -2895,7 +2872,6 @@ lemma DescendsToStage.comp_iso {X X' : Scheme.{u}} (e : X' ≅ X) {g : X ⟶ c.p
   refine ⟨k, Y, p, e.hom ≫ h, hp, hcpt, hqs, ?_⟩
   have hiso : IsPullback e.hom (e.hom ≫ g) g (𝟙 c.pt) := IsPullback.of_horiz_isIso ⟨by simp⟩
   simpa using hiso.paste_horiz hsq
-
 
 include hc in
 /-- (Implementation) **The two-open gluing step**: if a scheme over the limit is covered by
@@ -3188,7 +3164,6 @@ theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.o
   obtain ⟨i, Y, p, h, hp, hcpt, hqs, hsq⟩ := H
   have := hp; have := hcpt; have := hqs
   exact ⟨i, Y, p, hp, inferInstance, inferInstance, h, hsq⟩
-
 
 include hc in
 /-- **A finitely presented closed subscheme of the limit is closed at a finite stage.**
@@ -3595,7 +3570,6 @@ end Descent
 
 end FinitePresentationDescent
 
-
 section SeparatedDescent
 
 /-!
@@ -3840,7 +3814,6 @@ lemma exists_isSeparatingPair_of_isLimit
 
 end SeparatingPair
 
-
 set_option maxHeartbeats 1000000 in
 -- the reduction to the affine criterion goes through two common refinements of stages
 include hc in
@@ -4002,7 +3975,6 @@ theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
   infer_instance
 
 end SeparatedDescent
-
 
 section FinitePresentationModel
 
@@ -4217,8 +4189,6 @@ theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.
     MorphismProperty.pullback_snd _ _ ‹_›, hk, pullback.lift_snd _ _ _⟩
 
 end FinitePresentationModel
-
-
 
 section ClosedSubschemeLimit
 
@@ -4897,7 +4867,6 @@ theorem exists_spec_field_of_isQcqsLocalProperty (T : Scheme.{u})
 
 end MinimalCounterexample
 
-
 section ClosedImmersionDescent
 
 /-!
@@ -4964,7 +4933,6 @@ lemma Scheme.exists_isClosedImmersion_comp_π_of_isAffine [IsCofiltered I]
   rw [hs] at hsR
   exact hsR (Algebra.mem_top (x := y))
 
-
 private lemma isClosedImmersion_morphismRestrict_congr {X Y : Scheme.{u}} {a b : X ⟶ Y} (e : a = b)
     {U U' : Y.Opens} (e' : U = U') :
     IsClosedImmersion (a ∣_ U) ↔ IsClosedImmersion (b ∣_ U') := by
@@ -4998,7 +4966,6 @@ lemma Scheme.isClosedImmersion_morphismRestrict_comp_π_of_comp {Y : Scheme.{u}}
     .of_comp _ (D.map h ∣_ (D.map f ⁻¹ᵁ U))
   exact (isClosedImmersion_morphismRestrict_congr rfl
     (by rw [D.map_comp, Scheme.Hom.comp_preimage])).mpr this
-
 
 private lemma Scheme.Hom.isClosedImmersion_resLE_congr {X Y : Scheme.{u}} (f : X ⟶ Y) (W : Y.Opens)
     {V V' : X.Opens} (e : V = V') (h : V ≤ f ⁻¹ᵁ W) (h' : V' ≤ f ⁻¹ᵁ W) :
@@ -5036,7 +5003,6 @@ lemma Scheme.exists_isClosedImmersion_morphismRestrict_comp_π [IsCofiltered I]
   rw [opensCone_π_app, Scheme.Hom.resLE_comp_resLE] at hj
   refine (Scheme.Hom.isClosedImmersion_resLE_congr _ _ ?_ _ _).mp hj
   rw [Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage (c.π.app j.left), c.w]
-
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **Closed immersions spread out from a limit** (Stacks Project Tag 081B, part (1);
@@ -5084,7 +5050,6 @@ theorem Scheme.exists_isClosedImmersion_comp_π [IsCofiltered I]
       (hs.ge (Set.mem_univ ((D.map (fk (Finset.mem_insert_self _ _))) y)))
     exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨l, hl⟩, hlU⟩
 
-
 set_option backward.isDefEq.respectTransparency false in
 /-- **A quasi-compact open of a limit is closed in an open of some stage.** Let `{Dᵢ}` be a
 cofiltered system of quasi-compact schemes with affine transition morphisms and morphisms
@@ -5128,42 +5093,6 @@ theorem Scheme.exists_isClosedImmersion_of_isOpenImmersion_of_isLimit [IsCofilte
     opensCone_π_ι D c i₁ V₁ j
   rw [Category.assoc, h₂, reassoc_of% hg₀]
 
-/-- **Quasi-compact opens of a cofiltered limit descend** (Stacks Project Tag 01Z4, parts (1)
-and (3); blueprint `pqf-lem-limit-qc-open-descends`, items 1 and 3). Let `{Dᵢ}` be a cofiltered
-system of quasi-compact schemes with affine transition morphisms and limit `S = lim Dᵢ`, and let
-`V ⊆ S` be a quasi-compact open. Then `V = fᵢ⁻¹(Vᵢ)` for a quasi-compact open `Vᵢ` of some
-stage; the preimages `Vⱼ` of `Vᵢ` at later stages are quasi-compact, their transition morphisms
-are affine, and the projections exhibit `V = fᵢ⁻¹(Vᵢ)` as the limit `lim_{j ≥ i} Vⱼ`. -/
-theorem Scheme.exists_preimage_eq_and_isLimit_opensCone [IsCofiltered I]
-    [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (hc : IsLimit c) (V : c.pt.Opens)
-    (hV : IsCompact (V : Set c.pt)) :
-    ∃ (i : I) (Vᵢ : (D.obj i).Opens), IsCompact (Vᵢ : Set (D.obj i)) ∧ c.π.app i ⁻¹ᵁ Vᵢ = V ∧
-      (∀ j : Over i, IsCompact ((D.map j.hom ⁻¹ᵁ Vᵢ : (D.obj j.left).Opens) : Set (D.obj j.left))) ∧
-      (∀ {j k : Over i} (f : j ⟶ k), IsAffineHom ((opensDiagram D i Vᵢ).map f)) ∧
-      Nonempty (IsLimit (opensCone D c i Vᵢ)) := by
-  obtain ⟨i, Vᵢ, hVᵢ, hVᵢV⟩ := exists_preimage_eq D c hc V hV
-  exact ⟨i, Vᵢ, hVᵢ, hVᵢV, fun j ↦ QuasiCompact.isCompact_preimage _ Vᵢ.2 hVᵢ,
-    fun f ↦ inferInstance, ⟨isLimitOpensCone D c hc i Vᵢ⟩⟩
-
-/-- **Two descents of a quasi-compact open eventually agree** (Stacks Project Tag 01Z4, part
-(2); blueprint `pqf-lem-limit-qc-open-descends`, item 2). If quasi-compact opens `Vᵢ ⊆ Dᵢ` and
-`Vᵢ' ⊆ Dᵢ'` have the same preimage in the limit, then their preimages agree at some stage
-`i'' ≥ i, i'`. -/
-theorem Scheme.exists_map_preimage_eq_map_preimage_of_isLimit [IsCofiltered I]
-    [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (hc : IsLimit c) {i i' : I}
-    {V : (D.obj i).Opens} {V' : (D.obj i').Opens} (hV : IsCompact (V : Set (D.obj i)))
-    (hV' : IsCompact (V' : Set (D.obj i'))) (H : c.π.app i ⁻¹ᵁ V = c.π.app i' ⁻¹ᵁ V') :
-    ∃ (i'' : I) (f : i'' ⟶ i) (f' : i'' ⟶ i'), D.map f ⁻¹ᵁ V = D.map f' ⁻¹ᵁ V' := by
-  obtain ⟨k, g, g'⟩ : ∃ (k : I) (_ : k ⟶ i), Nonempty (k ⟶ i') :=
-    ⟨IsCofiltered.min i i', IsCofiltered.minToLeft i i', ⟨IsCofiltered.minToRight i i'⟩⟩
-  obtain ⟨g'⟩ := g'
-  obtain ⟨l, h, hl⟩ := exists_map_preimage_eq_map_preimage D c hc (i := k)
-    (U := D.map g ⁻¹ᵁ V) (V := D.map g' ⁻¹ᵁ V') (QuasiCompact.isCompact_preimage _ V.2 hV)
-    (QuasiCompact.isCompact_preimage _ V'.2 hV')
-    (by rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, c.w, c.w, H])
-  refine ⟨l, h ≫ g, h ≫ g', ?_⟩
-  rw [Functor.map_comp, Functor.map_comp, Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage, hl]
-
 end ClosedImmersionDescent
 
 end AlgebraicGeometry
@@ -5177,18 +5106,6 @@ universe v₁ v₂ v₃ u₁ u₂ u₃
 open CategoryTheory Limits
 
 namespace CategoryTheory
-
-lemma IsConnected.of_forall_nonempty_hom_left {C : Type*} [Category* C]
-    (X : C) (h : ∀ (Y : C), Nonempty (X ⟶ Y)) :
-    IsConnected C :=
-  have : Nonempty C := ⟨X⟩
-  zigzag_isConnected fun _ _ ↦ .trans (.of_inv (h _).some) (.of_hom (h _).some)
-
-lemma IsConnected.of_forall_nonempty_hom_right {C : Type*} [Category* C]
-    (X : C) (h : ∀ (Y : C), Nonempty (Y ⟶ X)) :
-    IsConnected C :=
-  have : Nonempty C := ⟨X⟩
-  zigzag_isConnected fun _ _ ↦ .trans (.of_hom (h _).some) (.of_inv (h _).some)
 
 variable {C : Type u₁} [Category.{v₁} C]
   {I : Type u₂} {I' : Type u₃} [Category.{v₂} I]

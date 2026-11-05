@@ -71,16 +71,6 @@ lemma homEquiv_baseChangedProperTrace :
       (lowerStarUpperShriekAdjunction l f')
       (asIso (boundedConstructibleBaseChangeOfMap l sq.toCommSq)) v γ
 
-/-- For a smooth proper map, weakly étale base change preserves the universal
-property of a trace whose adjoint is invertible. -/
-theorem isIso_homEquiv_baseChangedProperTrace [IsIso γ] [IsIso v] [WeaklyEtale πY]
-    (d : ℕ) [SmoothOfRelativeDimension d f.left] :
-    IsIso ((lowerStarUpperShriekAdjunction l f').homEquiv _ _
-      (baseChangedProperTrace l f f' sq γ v)) := by
-  rw [homEquiv_baseChangedProperTrace]
-  have := isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale l d sq N
-  infer_instance
-
 /-- An invertible exceptional base-change component suffices for universality of
 the pulled-back trace. -/
 theorem isIso_homEquiv_baseChangedProperTrace_of_isIso [IsIso γ] [IsIso v]
@@ -105,17 +95,5 @@ theorem bijective_map_comp_baseChangedProperTrace_of_isIso [IsIso γ] [IsIso v]
     (fun M hM ↦ boundedConstructible_rightDerivedLowerStar_obj l f' ⟨M, hM⟩)
     (lowerStarUpperShriekAdjunction l f')
     (baseChangedProperTrace l f f' sq γ v) K.obj K.property
-
-/-- The same universal property, on ambient derived morphisms from a constructible
-complex. This is the form needed by the free Weil resolution. -/
-theorem bijective_map_comp_baseChangedProperTrace [IsIso γ] [IsIso v] [WeaklyEtale πY]
-    (d : ℕ) [SmoothOfRelativeDimension d f.left]
-    (K : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj l⟧) :
-    Function.Bijective fun φ : K.obj ⟶
-        ((boundedConstructibleUpperStarOfMap l πX).obj P).obj ↦
-      (lowerStar (Profinite.padicAlgClRingObj l) f'.left).rightDerivedFunctor.map φ ≫
-        (baseChangedProperTrace l f f' sq γ v).hom := by
-  have := isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale l d sq N
-  exact bijective_map_comp_baseChangedProperTrace_of_isIso l f f' sq γ v K
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -164,30 +164,6 @@ noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     K ⟶ verdierDual ℓ (verdierDual ℓ K) :=
   Verdier.bidualityMap (dualizingComplex ℓ X) K
 
-/-- **Biduality for dualizable complexes** (the lisse step of the blueprint theorem
-`det-pd-biduality-coefficients`): if the dualizing complex `ω_X` is isomorphic to an invertible
-object (as `ℚ̄_ℓ(d)[2d]` is, for `X` smooth of dimension `d`), the double-dual morphism
-`δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every dualizable `K`. -/
-theorem isIso_verdierBiduality_of_isDualizable {T : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (γ : T ≅ dualizingComplex ℓ X) (hT : IsInvertible T)
-    {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hK : IsDualizable K) :
-    IsIso (verdierBiduality ℓ K) :=
-  Verdier.isIso_bidualityMap_of_isDualizable γ hT hK
-
-/-- **Open–closed dévissage of biduality**: for a quasi-compact open immersion `j : U ⟶ X` and a
-closed immersion `i : Z ⟶ X` onto its complement, the double-dual morphism `δ_K` is an
-isomorphism as soon as its restrictions `Lj^* δ_K` and `Li^* δ_K` are. -/
-theorem isIso_verdierBiduality_of_isCompl {Z U : Over (Spec (.of k))}
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
-    (i : Z ⟶ X) [IsClosedImmersion i.left] (j : U ⟶ X) [QuasiCompact j.left]
-    (hij : IsCompl (Set.range i.left.base) (Set.range j.left.base))
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (hj : IsIso ((boundedConstructibleUpperStar _ ℓ j).map (verdierBiduality ℓ K)))
-    (hi : IsIso ((boundedConstructibleUpperStar _ ℓ i).map (verdierBiduality ℓ K))) :
-    IsIso (verdierBiduality ℓ K) :=
-  isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl _ ℓ i j hij _ hj hi
-
 end Dualizing
 
 /-! ### The absolute and opposite exchange morphisms -/
@@ -208,28 +184,6 @@ noncomputable def upperShriekDualizingComplexIso :
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (Over.mkIdTerminal.from Y)).app
       (𝟙_ _)).symm ≪≫
     eqToIso (by rw [Over.mkIdTerminal.comp_from]; rfl)
-
-/-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K` (`ℚ̄_ℓ`-coefficient): the
-exchange morphism `Φ_{f,K,ω_Y}` precomposed with the inverse of `γ =
-upperShriekDualizingComplexIso`. -/
-noncomputable def absoluteVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerStar ℓ f).obj (verdierDual ℓ K) ⟶
-      verdierDual ℓ ((boundedConstructibleLowerShriek ℓ f).obj K) :=
-  Verdier.absoluteExchange (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
-    (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (boundedConstructibleExceptionalProjection ℓ f)
-    (dualizingComplex ℓ X) (dualizingComplex ℓ Y) (upperShriekDualizingComplexIso ℓ f) K
-
-/-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K` (`ℚ̄_ℓ`-coefficient):
-the double-dual morphism of `Rf_! 𝔻_X K`, followed by the dual of `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y
-Rf_! 𝔻_X K`. The familiar `𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its inverse, when it is invertible. -/
-noncomputable def dualVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek ℓ f).obj (verdierDual ℓ K) ⟶
-      verdierDual ℓ ((boundedConstructibleLowerStar ℓ f).obj K) :=
-  Verdier.dualExchange (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
-    (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (boundedConstructibleExceptionalProjection ℓ f)
-    (dualizingComplex ℓ X) (dualizingComplex ℓ Y) (upperShriekDualizingComplexIso ℓ f) K
 
 end Absolute
 
@@ -272,44 +226,6 @@ noncomputable def dualizingComplexIsoUpperStar :
       (boundedConstructibleUpperStar _ ℓ j).obj (dualizingComplex ℓ X) :=
   (upperShriekDualizingComplexIso ℓ j).symm ≪≫
     (boundedConstructibleUpperShriekIsoUpperStar ℓ j).app _
-
-/-- **Restriction of biduality to an open subscheme**: for an open immersion `j : U ⟶ X`, the
-restriction `Lj^* δ_K` of the double-dual morphism of `K` is an isomorphism if and only if the
-double-dual morphism `δ_{Lj^* K}` is, under
-the identification `Lj^* ω_X ≅ ω_U` (`dualizingComplexIsoUpperStar`) and the
-commutation of `Lj^*` with internal homs
-(`isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion`). The compatibility of
-`Lj^*` with the Koszul braidings is `boundedConstructibleUpperStar_map_braiding_hom_δ`. -/
-theorem isIso_map_verdierBiduality_iff_of_isOpenImmersion
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStar _ ℓ j).map (verdierBiduality ℓ K)) ↔
-      IsIso (verdierBiduality ℓ ((boundedConstructibleUpperStar _ ℓ j).obj K)) := by
-  have hbr : ∀ K M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
-      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ j) K M ≫
-          (boundedConstructibleUpperStar _ ℓ j).map (β_ K M).hom =
-        (β_ ((boundedConstructibleUpperStar _ ℓ j).obj K)
-            ((boundedConstructibleUpperStar _ ℓ j).obj M)).hom ≫
-          Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ j) M K := fun K M ↦ by
-    rw [← cancel_mono (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ j) M K),
-      Category.assoc, Category.assoc, boundedConstructibleUpperStar_map_braiding_hom_δ,
-      Functor.Monoidal.μ_δ, Category.comp_id, Functor.Monoidal.μ_δ_assoc]
-  let : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).LaxBraided :=
-    { (inferInstance : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        j).LaxMonoidal) with braided := hbr }
-  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion ℓ j K
-  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion ℓ j
-    ((ihom K).obj (dualizingComplex ℓ X))
-  have : IsIso (MonoidalClosed.dualComparison (boundedConstructibleUpperStar _ ℓ j)
-      (dualizingComplexIsoUpperStar ℓ j).inv K) := by
-    rw [MonoidalClosed.dualComparison]
-    infer_instance
-  have : IsIso (MonoidalClosed.dualComparison (boundedConstructibleUpperStar _ ℓ j)
-      (dualizingComplexIsoUpperStar ℓ j).inv
-      ((ihom K).obj (dualizingComplex ℓ X))) := by
-    rw [MonoidalClosed.dualComparison]
-    infer_instance
-  exact MonoidalClosed.isIso_map_toIhomIhom_iff (boundedConstructibleUpperStar _ ℓ j)
-    (dualizingComplexIsoUpperStar ℓ j).inv K
 
 end OpenImmersion
 

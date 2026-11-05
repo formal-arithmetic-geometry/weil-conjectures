@@ -111,10 +111,6 @@ noncomputable def sections (i : I) : S.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{
   map_id _ := (D.obj i).presheaf.map_id _
   map_comp _ _ := ((D.obj i).presheaf.map_comp _ _)
 
-/-- The sections of `(pᵢ)_* 𝒪_{Dᵢ}` over `U` are `Γ(Dᵢ, pᵢ⁻¹ U)`. -/
-lemma sections_obj (i : I) (U : S.AffineZariskiSiteᵒᵖ) :
-    (sections D p i).obj U = Γ(D.obj i, p i ⁻¹ᵁ U.unop.toOpens) := rfl
-
 /-- The structure morphism `𝒪_S ⟶ (pᵢ)_* 𝒪_{Dᵢ}`. -/
 noncomputable def sectionsι (i : I) : (toOpensFunctor S).op ⋙ S.presheaf ⟶ sections D p i where
   app U := (p i).app U.unop.toOpens
@@ -139,7 +135,6 @@ lemma coequifibered_sectionsι [∀ i, IsAffineHom (p i)] (i : I) :
       (homOfLE ((p i).preimage_mono (toOpens_mono (U.basicOpen_le r)))).op).hom.toAlgebra
   rw! (castMode := .all) [e]
   exact hU.isLocalization_basicOpen _
-
 
 /-- The map induced on sections by an endomorphism equal to the identity. -/
 lemma appLE_eq_map_of_eq_id {X : Scheme.{u}} (g : X ⟶ X) (hg : g = 𝟙 X) (U V : X.Opens)
@@ -173,7 +168,6 @@ lemma sectionsι_comp_diagram_map {i j : Iᵒᵖ} (φ : i ⟶ j) :
   rw [NatTrans.comp_app, sectionsι_app, sectionsι_app, diagram_map_app, Scheme.Hom.app_eq_appLE,
     Scheme.Hom.appLE_comp_appLE, Scheme.Hom.app_eq_appLE]
   exact Scheme.Hom.appLE_congr_hom (hp φ.unop) _ _ _ _
-
 
 variable [IsCofiltered I] [∀ i, IsAffineHom (p i)]
 
@@ -213,10 +207,6 @@ noncomputable abbrev limitScheme : Scheme.{u} := (gluingData D p hp).glued
 
 /-- The structure morphism `lim Dᵢ ⟶ S`. -/
 noncomputable abbrev limitHom : limitScheme D p hp ⟶ S := (gluingData D p hp).toBase
-
-/-- The transition maps of the relative gluing datum are `Spec` of restriction maps. -/
-lemma gluingData_functor_map {U V : S.AffineZariskiSite} (f : U ⟶ V) :
-    (gluingData D p hp).functor.map f = Spec.map ((algebra D p hp).map f.op) := rfl
 
 /-- The chart `Spec Γ(Dᵢ, pᵢ⁻¹ U) ⟶ Dᵢ` over an affine open `U ⊆ S`. -/
 noncomputable abbrev chart (i : I) (U : S.AffineZariskiSite) :
@@ -291,7 +281,6 @@ noncomputable def limitCone : Cone D where
     { app := π D p hp
       naturality _ _ g := by simp }
 
-
 section IsLimit
 
 variable (U : S.AffineZariskiSite)
@@ -305,12 +294,6 @@ noncomputable def ringCocone (i₁ : I) : Cocone (Over.forget i₁ ⋙ ringDiagr
   (((CategoryTheory.evaluation _ _).obj (Opposite.op U)).mapCocone
     (colimit.cocone (diagram D p hp))).whisker
     (Over.forget i₁).op
-
-omit [∀ i, IsAffineHom (p i)] in
-/-- The components of `ringCocone` are the colimit inclusions. -/
-lemma ringCocone_ι_app (i₁ : I) (j : (Over i₁)ᵒᵖ) :
-    (ringCocone D p hp U i₁).ι.app j =
-      (colimit.ι (diagram D p hp) (.op j.unop.left)).app (.op U) := rfl
 
 /-- `colim Γ(Dᵢ, pᵢ⁻¹ U)` is the colimit of the rings `Γ(Dᵢ, pᵢ⁻¹ U)` for `i` over `i₀`. -/
 noncomputable def isColimitRingCocone (i₁ : I) : IsColimit (ringCocone D p hp U i₁) :=

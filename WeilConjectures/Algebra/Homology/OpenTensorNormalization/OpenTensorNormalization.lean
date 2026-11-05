@@ -66,7 +66,6 @@ restriction formulas. Source: Stacks 03DI, 0F6Z, 0E8I and 0GL1
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -76,17 +75,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open AlgebraicGeometry.Scheme.ProjectionRestriction
 namespace SheafOfModules.OpenTensorNormalization
-
-private theorem ordinaryUnit_isIso {m : Mode} {U X : Scheme.{u}}
-    {j : U ⟶ X} [IsOpenImmersion j] {R : Sheaf (topology m X) CommRingCat.{u + 1}}
-    (o : OpenExtension m j R) (M : Mod (restrictRing m j R)) :
-    IsIso (o.adjunction.unit.app M) := by
-  have h : o.adjunction.unit.app M = (o.sectionIso M).inv := by
-    apply (cancel_mono (o.sectionIso M).hom).1
-    rw [o.sectionUnit, Iso.inv_hom_id]
-    rfl
-  rw [h]
-  infer_instance
 
 end SheafOfModules.OpenTensorNormalization
 

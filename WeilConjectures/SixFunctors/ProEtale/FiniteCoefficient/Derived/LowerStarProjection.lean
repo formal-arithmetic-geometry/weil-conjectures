@@ -119,19 +119,6 @@ noncomputable def rightDerivedLowerStarProjectionMap :
   (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap
     (leftDerivedUpperStarTensorComparison A p)
 
-/-- The projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` at `(M, L)` is the transpose along
-`Lp^* ⊣ Rp_*` of the comparison `Lp^*(Rp_*M ⊗ᴸ L) ⟶ Lp^*Rp_*M ⊗ᴸ Lp^*L` followed by
-`ε_M ⊗ᴸ 𝟙`. -/
-lemma rightDerivedLowerStarProjectionMap_app_app
-    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
-    ((rightDerivedLowerStarProjectionMap A p).app M).app L =
-      (derivedUpperStarLowerStarAdjunction A p).homEquiv _ _
-        (((leftDerivedUpperStarTensorComparison A p).app (R((p)_*[A]).obj M)).app L ≫
-          ((-⊗ᴸ-(X)[A]).map ((derivedUpperStarLowerStarAdjunction A p).counit.app M)).app
-            (L((p)^*[A]).obj L)) :=
-  rfl
-
 /-- The transpose along `Lp^* ⊣ Rp_*` of the projection map
 `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is the composite
 ```

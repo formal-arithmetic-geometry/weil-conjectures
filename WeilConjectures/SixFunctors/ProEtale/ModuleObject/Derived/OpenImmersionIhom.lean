@@ -110,16 +110,6 @@ instance isIso_projectionMap_derivedOpenImmersionLowerShriekLeftDerivedUpperStar
   dsimp only [Functor.Monoidal.projectionMap]
   infer_instance
 
-/-- **The derived pullback along an open immersion commutes with internal homs**: for an open
-immersion `j : U ⟶ X`, the comparison `Lj^* RHom(M, N) ⟶ RHom(Lj^* M, Lj^* N)` of the monoidal
-functor `Lj^*` is an isomorphism. -/
-theorem isIso_ihomComparison_leftDerivedUpperStar_of_isOpenImmersion
-    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) :
-    IsIso (Functor.LaxMonoidal.ihomComparison L((j)^*⟦Λ⟧) M).natTrans :=
-  Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j) M
-
 /-! ### Bounded constructible complexes -/
 
 section BoundedConstructible

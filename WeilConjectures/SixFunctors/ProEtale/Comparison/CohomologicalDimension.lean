@@ -62,30 +62,4 @@ noncomputable def comparisonLowerStarCompRightDerivedGlobalSectionsIso :
     (comparisonAdjunction A X).preservesKInjectiveComplexes
   Functor.rightDerivedFunctorCompIso' _ _ (comparisonLowerStarCompGlobalSectionsIso A X)
 
-/-- Blueprints `rem-sf-fullcd-reduction` (3), `rem-sf-fullcd-general-form` (a): if the étale
-cohomology `H^p(X_ét, G)` vanishes for `p > e` and every étale sheaf `G`, and the comparison
-direct images `R^q ν_* F` vanish for `q > M` and every pro-étale sheaf `F`, then the pro-étale
-cohomology `H^r(X_proét, F)` vanishes for `r > M + e` and every pro-étale sheaf `F`. In the
-Leray spectral sequence `E₂^{p,q} = H^p(X_ét, R^q ν_* F) ⇒ H^{p+q}(X_proét, F)` the
-`p`-direction is bounded by `e`, so unbounded degrees can only enter through `q`. -/
-theorem isZero_homology_rightDerivedGlobalSections_of_comparison (e M : ℤ)
-    (het : ∀ (G : Sheaf X.smallEtaleTopology A) (p : ℤ), e < p →
-      IsZero ((DerivedCategory.homologyFunctor _ p).obj
-        ((Etale.rightDerivedGlobalSections A X).obj ((DerivedCategory.singleFunctor _ 0).obj G))))
-    (hν : ∀ (F : Sheaf (Scheme.ProEt.topology X) A) (q : ℤ), M < q →
-      IsZero ((DerivedCategory.homologyFunctor _ q).obj
-        ((R(ν_*(X)[A])).obj ((DerivedCategory.singleFunctor _ 0).obj F))))
-    (F : Sheaf (Scheme.ProEt.topology X) A) (r : ℤ) (hr : M + e < r) :
-    IsZero ((DerivedCategory.homologyFunctor _ r).obj
-      ((rightDerivedGlobalSections A X).obj ((DerivedCategory.singleFunctor _ 0).obj F))) := by
-  have : (Etale.rightDerivedGlobalSections A X).IsTriangulated :=
-    inferInstanceAs (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctor.IsTriangulated
-  let K := (R(ν_*(X)[A])).obj ((DerivedCategory.singleFunctor _ 0).obj F)
-  have : K.IsGE 0 := (ν_*(X)[A]).isGE_rightDerivedFunctor_obj_singleFunctor F
-  have : K.IsLE M := (DerivedCategory.isLE_iff K M).2 fun q hq ↦ hν F q hq
-  exact (DerivedCategory.isZero_homology_obj_of_isGE_of_isLE
-      (Etale.rightDerivedGlobalSections A X) e het K 0 M r hr).of_iso
-    ((DerivedCategory.homologyFunctor _ r).mapIso
-      ((comparisonLowerStarCompRightDerivedGlobalSectionsIso A X).app _).symm)
-
 end AlgebraicGeometry.ProEtale

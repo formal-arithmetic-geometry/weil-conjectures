@@ -36,16 +36,6 @@ variable {C₁ C₂ D C₁' C₂' D' : Type*} [Category* C₁] [Category* C₂] 
   [Category* C₁'] [Category* C₂'] [Category* D']
   {F : C₁ ⥤ C₂ ⥤ D} {F' : C₁' ⥤ C₂' ⥤ D'} {G₁ : C₁ ⥤ C₁'} {G₂ : C₂ ⥤ C₂'} {G : D ⥤ D'}
 
-/-- Given a natural transformation `τ : G (F X₁ X₂) ⟶ F' (G₁ X₁) (G₂ X₂)` and `X₂ : C₂`,
-this is the natural transformation `G (F X₁ X₂) ⟶ F' (G₁ X₁) (G₂ X₂)` in `X₁`, with
-components `(τ.app X₁).app X₂`. It is `τ.flipApp X₂`, with source and target expressed
-as composites of functors. -/
-abbrev flipAppComp
-    (τ : (Functor.postcompose₂.obj G).obj F ⟶
-      (((Functor.whiskeringLeft₂ D').obj G₁).obj G₂).obj F') (X₂ : C₂) :
-    F.flip.obj X₂ ⋙ G ⟶ G₁ ⋙ F'.flip.obj (G₂.obj X₂) :=
-  τ.flipApp X₂
-
 end CategoryTheory.NatTrans
 
 namespace HomologicalComplex
@@ -115,43 +105,6 @@ instance (L₁ : CochainComplex C₁' ℤ) :
     HasMapBifunctor L₁ ((G₂ ⋙ single C₂' (.up ℤ) 0).obj X₂) F' (.up ℤ) :=
   inferInstanceAs (HasMapBifunctor L₁ ((single C₂' (.up ℤ) 0).obj (G₂.obj X₂)) F' (.up ℤ))
 
-omit [G.Additive] in
-/-- Degreewise version of `mapBifunctorComparison_single₂`: in degree `n`, the comparison
-morphism on `K₁ ⊗ single(X₂)` is `τ` at `(K₁.X n, X₂)`, up to the identifications given by
-`mapBifunctorSingle₂Iso`. -/
-lemma mapBifunctorComparisonX_single₂ (n : ℤ) :
-    G.map ((mapBifunctorSingle₂Iso F X₂ K₁).inv.f n) ≫
-      mapBifunctorComparisonX τ (.up ℤ) K₁ ((single C₂ (.up ℤ) 0).obj X₂) n ≫
-      (mapBifunctorMap (𝟙 _) ((singleMapHomologicalComplex G₂ (.up ℤ) 0).hom.app X₂) F'
-        (.up ℤ)).f n =
-    (τ.app (K₁.X n)).app X₂ ≫
-      (mapBifunctorSingle₂Iso F' (G₂.obj X₂) ((G₁.mapHomologicalComplex _).obj K₁)).inv.f n := by
-  have h := (τ.app (K₁.X n)).naturality (singleObjXSelf (.up ℤ) 0 X₂).inv
-  dsimp at h
-  rw [mapBifunctorSingle₂Iso_inv_f, mapBifunctorSingle₂Iso_inv_f, Functor.map_comp, assoc,
-    map_ιMapBifunctor_mapBifunctorComparisonX_assoc, ι_mapBifunctorMap, reassoc_of% h,
-    HomologicalComplex.id_f, CategoryTheory.Functor.map_id, NatTrans.id_app, id_comp,
-    singleMapHomologicalComplex_hom_app_self]
-  -- the two `F'.obj` below agree only up to unfolding `Functor.mapHomologicalComplex_obj_X`
-  erw [← Functor.map_comp_assoc]
-  rw [Iso.map_inv_hom_id_assoc]
-  rfl
-
-/-- On `K₁ ⊗ single(X₂)`, the comparison morphism `G(K₁ ⊗ X₂) ⟶ G₁(K₁) ⊗ G₂(X₂)` is,
-through the identifications `mapBifunctorSingle₂Iso`, the degreewise application of
-`τ(-, X₂)`. -/
-lemma mapBifunctorComparison_single₂ :
-    (G.mapHomologicalComplex _).map (mapBifunctorSingle₂Iso F X₂ K₁).inv ≫
-      mapBifunctorComparison τ (.up ℤ) K₁ ((single C₂ (.up ℤ) 0).obj X₂) ≫
-      mapBifunctorMap (𝟙 _) ((singleMapHomologicalComplex G₂ (.up ℤ) 0).hom.app X₂) F'
-        (.up ℤ) ≫
-      (mapBifunctorSingle₂Iso F' (G₂.obj X₂) ((G₁.mapHomologicalComplex _).obj K₁)).hom =
-    (NatTrans.mapHomologicalComplex (τ.flipAppComp X₂) (.up ℤ)).app K₁ := by
-  rw [← cancel_mono (mapBifunctorSingle₂Iso F' (G₂.obj X₂)
-    ((G₁.mapHomologicalComplex _).obj K₁)).inv, assoc, assoc, assoc, Iso.hom_inv_id, comp_id]
-  ext n
-  exact mapBifunctorComparisonX_single₂ τ K₁ X₂ n
-
 end CochainComplex
 
 namespace CategoryTheory.Functor.OplaxMonoidal
@@ -182,27 +135,11 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
     (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) G]
   (K : CochainComplex C ℤ) (X₂ : C)
 
-/-- For an additive oplax monoidal functor `G`, the comparison morphism
-`G(K ⊗ X₂) ⟶ G(K) ⊗ G(X₂)` induced by `δ` on the tensor product of a cochain complex `K` with
-the single complex `X₂` is, through the identifications `mapBifunctorSingle₂Iso`, the
-degreewise morphism `δ G (K.X n) X₂`. (The tensor product `K ⊗ L` of cochain complexes is
-definitionally `mapBifunctor K L (curriedTensor C) (.up ℤ)`, although not syntactically.) -/
-lemma mapBifunctorComparison_δNatTrans_single₂ :
-    (G.mapHomologicalComplex _).map (mapBifunctorSingle₂Iso (curriedTensor C) X₂ K).inv ≫
-      mapBifunctorComparison (δNatTrans G) (.up ℤ) K ((single C (.up ℤ) 0).obj X₂) ≫
-      mapBifunctorMap (𝟙 _) ((singleMapHomologicalComplex G (.up ℤ) 0).hom.app X₂)
-        (curriedTensor D) (.up ℤ) ≫
-      (mapBifunctorSingle₂Iso (curriedTensor D) (G.obj X₂)
-        ((G.mapHomologicalComplex _).obj K)).hom =
-    (NatTrans.mapHomologicalComplex (δRightNatTrans G X₂) (.up ℤ)).app K :=
-  mapBifunctorComparison_single₂ (δNatTrans G) K X₂
-
 end CochainComplex
 
 namespace CochainComplex
 
 section Naturality
-
 
 variable {C₁ C₂ D : Type*} [Category* C₁] [Category* C₂] [Category* D]
   [HasZeroMorphisms C₁] [HasZeroMorphisms C₂] [Preadditive D] [HasZeroObject C₂]

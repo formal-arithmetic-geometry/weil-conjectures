@@ -99,9 +99,6 @@ noncomputable abbrev Xy : Scheme.{u} := strictLocalization M.y
 noncomputable def Xyo : M.Xy.Opens :=
   ⟨{closedPoint (strictHenselization M.y)}ᶜ, (isClosed_singleton_closedPoint _).isOpen_compl⟩
 
-lemma mem_Xyo_iff (z : M.Xy) : z ∈ M.Xyo ↔ z ≠ closedPoint (strictHenselization M.y) :=
-  Iff.rfl
-
 /-- A point of `X_y` lying over `y` is the closed point. -/
 lemma eq_closedPoint_of_toBase_eq (z : M.Xy) (hz : strictLocalizationToBase M.y z = M.y default) :
     z = closedPoint (strictHenselization M.y) :=

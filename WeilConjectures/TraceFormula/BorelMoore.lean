@@ -71,51 +71,11 @@ noncomputable def pushforward (α : BorelMooreSection ℓ T) : BorelMooreSection
       (dualizingComplexComp ℓ h).inv ≫
     (boundedConstructibleUpperShriekAdjunction ℓ h).counit.app _
 
-/-- The pushforward of Borel–Moore sections is additive. -/
-lemma pushforward_add (α β : BorelMooreSection ℓ T) :
-    pushforward h (α + β) = pushforward h α + pushforward h β := by
-  simp only [pushforward, Preadditive.comp_add, Functor.map_add, Preadditive.add_comp]
-
 end Pushforward
 
 section Scalar
 
 variable {X : Over (Spec (.of k))} [QuasiCompact X.hom]
-
-/-- The action of a scalar `t ∈ End (ℚ̄_ℓ,s)` on `ℚ̄_ℓ,X`: the pullback of `t` along the structure
-morphism `a_X`, read through the unit isomorphism `ℚ̄_ℓ,X ≅ La_X^* ℚ̄_ℓ,s` of the monoidal functor
-`La_X^*`. -/
-noncomputable def scalar [LocallyOfFiniteType X.hom] [IsSeparated X.hom]
-    (t : End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :
-    End (𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).hom ≫
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map t ≫
-    (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv
-
-/-- **Linearity of the integral** (blueprint `lem-trf-integration-linear`,
-`rem-ptr-trf-integration-8`): for a scalar `t ∈ End (ℚ̄_ℓ,s)` acting on a Borel–Moore section `α`
-through `scalar`, `∫_X (t • α) = t ∘ ∫_X α`. Together with `integral_add` this is the
-`End (ℚ̄_ℓ,s)`-linearity of the integral. -/
-lemma integral_scalar_comp [IsProper X.hom]
-    (t : End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
-    (α : BorelMooreSection ℓ X) :
-    integral (scalar t ≫ α : BorelMooreSection ℓ X) = t ≫ α.integral := by
-  have : IsProper (toPoint X).left := by
-    rw [toPoint_left]
-    infer_instance
-  have hn := (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-    (toPoint X)).unit.naturality t
-  simp only [Functor.id_map, Functor.comp_map] at hn
-  simp only [integral, scalar, Adjunction.homEquiv_counit, Category.assoc, Functor.map_comp]
-  rw [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.naturality_assoc
-      (Functor.Monoidal.εIso
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).hom,
-    ← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp,
-    ← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.naturality_assoc,
-    ← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.naturality_assoc,
-    ← reassoc_of% hn]
 
 end Scalar
 

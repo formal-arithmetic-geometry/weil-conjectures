@@ -37,14 +37,4 @@ universe v w
 
 namespace Rep
 
-/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems.
-
-A representation of a topological group `G` on a `Λ`-module is *finite continuous* if the
-underlying module is finite and every stabilizer is open, i.e. the action is continuous for
-the discrete topology on the module. For a profinite `G` this is exactly the condition
-appearing in the Galois correspondence: a finite `Λ`-module with a continuous `G`-action. -/
-def IsFiniteContinuous {Λ : Type v} [CommRing Λ] {G : Type w} [Group G] [TopologicalSpace G] :
-    CategoryTheory.ObjectProperty (Rep.{v} Λ G) :=
-  fun X ↦ Finite X.V ∧ ∀ x : X.V, IsOpen {g : G | X.ρ g x = x}
-
 end Rep

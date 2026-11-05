@@ -71,7 +71,6 @@ forward maps insert one and their inverse maps multiply the scalar coefficients.
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 set_option Elab.async false
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -107,12 +106,6 @@ set_option backward.isDefEq.respectTransparency.types false
   inferInstance
 
 attribute [local irreducible] tensorComparison tensorTotalMap comparison
-
-private theorem tensorComparison_eq {R : Sheaf J CommRingCat.{w}}
-    {S : Sheaf K CommRingCat.{w}} (f : RingedPullback R S) (c : Comparison f)
-    (P Q : Complex R) : tensorComparison f c P Q = comparison f c P Q := by
-  unfold tensorComparison
-  rfl
 
 @[no_expose] private def identityCoefficientSquare {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
     CoefficientComparisonsBalanced.Square (𝟭 (Sheaf J (Type w))) :=

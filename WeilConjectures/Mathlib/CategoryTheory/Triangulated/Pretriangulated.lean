@@ -77,24 +77,6 @@ lemma comp_self_eq_zero {k : T.obj₁ ⟶ T.obj₁} (h₁ : k ≫ T.mor₁ = 0)
 
 end Triangle
 
-/-- Let `ψ : T ⟶ T'` be a morphism of distinguished triangles such that `T.mor₁ = 0` and
-`ψ.hom₁ = 0`. Then there is a map `b : T.obj₃ ⟶ T'.obj₂` with `T.mor₂ ≫ b = ψ.hom₂` and
-`b ≫ T'.mor₂ = ψ.hom₃`. -/
-lemma exists_lift_of_mor₁_eq_zero {T T' : Triangle C} (hT : T ∈ distTriang C)
-    (hT' : T' ∈ distTriang C) (hT₁ : T.mor₁ = 0) (ψ : T ⟶ T') (hψ₁ : ψ.hom₁ = 0) :
-    ∃ b : T.obj₃ ⟶ T'.obj₂, T.mor₂ ≫ b = ψ.hom₂ ∧ b ≫ T'.mor₂ = ψ.hom₃ := by
-  obtain ⟨r, hr⟩ := Triangle.yoneda_exact₂ T hT ψ.hom₂ (by rw [hT₁, zero_comp])
-  obtain ⟨y, hy⟩ := Triangle.yoneda_exact₃ T hT (r ≫ T'.mor₂ - ψ.hom₃) (by
-    rw [Preadditive.comp_sub, reassoc_of% hr.symm, ψ.comm₂, sub_self])
-  have : Epi T.mor₃ := (Triangle.mor₁_eq_zero_iff_epi₃ T hT).1 hT₁
-  obtain ⟨z, hz⟩ := Triangle.coyoneda_exact₃ T' hT' y (by
-    rw [← cancel_epi T.mor₃, ← Category.assoc, ← hy, comp_zero, Preadditive.sub_comp,
-      Category.assoc, comp_distTriang_mor_zero₂₃ _ hT', comp_zero, zero_sub, ← ψ.comm₃,
-      hψ₁, Functor.map_zero, comp_zero, neg_zero])
-  refine ⟨r - T.mor₃ ≫ z, ?_, ?_⟩
-  · rw [Preadditive.comp_sub, ← hr, comp_distTriang_mor_zero₂₃_assoc _ hT, zero_comp, sub_zero]
-  · rw [Preadditive.sub_comp, Category.assoc, ← hz, ← hy, sub_sub_cancel]
-
 /-- Let `φ : T ⟶ T'` and `φ' : T' ⟶ T` be morphisms of distinguished triangles such that the
 composites `φ ≫ φ'` and `φ' ≫ φ` act as the identity on `T.mor₁`, `T.mor₃` (resp. `T'.mor₁`,
 `T'.mor₃`) through their second and third components. Then `φ.hom₁` is an isomorphism: the
@@ -144,17 +126,6 @@ theorem exists_triangleHom_of_comp_eq_zero {T T' : Triangle C} (hT : T ∈ distT
   obtain ⟨a, ha⟩ := Triangle.coyoneda_exact₂ T' hT' (T.mor₁ ≫ φ) (by simpa using hφ)
   obtain ⟨c, hc₁, hc₂⟩ := complete_distinguished_triangle_morphism T T' hT hT' a φ ha
   exact ⟨{ hom₁ := a, hom₂ := φ, hom₃ := c, comm₁ := ha, comm₂ := hc₁, comm₃ := hc₂ }, rfl⟩
-
-/-- **Uniqueness of the extension of a middle component** [BBD, 1.1.9]. Let `T` and `T'` be
-distinguished triangles with `Hom(T.obj₁⟦1⟧, T'.obj₃) = 0`. Then a morphism of triangles
-`T ⟶ T'` is determined by its middle component. -/
-theorem triangleHom_ext_of_subsingleton {T T' : Triangle C} (hT : T ∈ distTriang C)
-    (hT' : T' ∈ distTriang C) [Subsingleton (T.obj₁⟦(1 : ℤ)⟧ ⟶ T'.obj₃)] {τ τ' : T ⟶ T'}
-    (h : τ.hom₂ = τ'.hom₂) : τ = τ' := by
-  ext
-  · exact Triangle.cancel_mor₁_of_subsingleton hT' (by rw [← τ.comm₁, ← τ'.comm₁, h])
-  · exact h
-  · exact Triangle.cancel_mor₂_of_subsingleton hT (by rw [τ.comm₂, τ'.comm₂, h])
 
 /-- For a morphism `φ : T ⟶ T'` of distinguished triangles whose second objects vanish,
 ```
@@ -256,29 +227,5 @@ open Limits
 
 variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-
-/-- **Pre-triangulated categories.** A pre-triangulated category (`Pretriangulated C`) is an
-additive category with a shift `[1]` and a class of distinguished triangles satisfying (TR1)
-distinguished triangles are closed under isomorphism, `X ⟶ X ⟶ 0 ⟶ X[1]` is distinguished and
-every morphism is the first arrow of a distinguished triangle; (TR2) a triangle is distinguished
-iff its rotation is; (TR3) a commutative square between the bases of two distinguished
-triangles extends to a morphism of triangles. A triangulated category
-(`CategoryTheory.IsTriangulated`) satisfies moreover the octahedral axiom, and an exact functor
-is a functor commuting with the shift and preserving distinguished triangles
-(`CategoryTheory.Functor.IsTriangulated`, see `Functor.isTriangulated_iff_map_distinguished`).
-(blueprint: `def-weil-triangulated-category`) -/
-theorem tr1_tr2_tr3 :
-    (∀ T₁ T₂ : Triangle C, (T₁ ≅ T₂) → T₂ ∈ distTriang C → T₁ ∈ distTriang C) ∧
-    (∀ X : C, contractibleTriangle X ∈ distTriang C) ∧
-    (∀ {X Y : C} (u : X ⟶ Y), ∃ (Z : C) (v : Y ⟶ Z) (w : Z ⟶ X⟦(1 : ℤ)⟧),
-      Triangle.mk u v w ∈ distTriang C) ∧
-    (∀ T : Triangle C, T ∈ distTriang C ↔ T.rotate ∈ distTriang C) ∧
-    (∀ T₁ T₂ : Triangle C, T₁ ∈ distTriang C → T₂ ∈ distTriang C →
-      ∀ (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂), T₁.mor₁ ≫ b = a ≫ T₂.mor₁ →
-        ∃ c : T₁.obj₃ ⟶ T₂.obj₃, T₁.mor₂ ≫ c = b ≫ T₂.mor₂ ∧
-          T₁.mor₃ ≫ a⟦(1 : ℤ)⟧' = c ≫ T₂.mor₃) :=
-  ⟨fun _ _ e h ↦ isomorphic_distinguished _ h _ e, contractible_distinguished,
-    fun u ↦ distinguished_cocone_triangle u, rotate_distinguished_triangle,
-    fun _ _ h₁ h₂ a b w ↦ complete_distinguished_triangle_morphism _ _ h₁ h₂ a b w⟩
 
 end CategoryTheory.Pretriangulated

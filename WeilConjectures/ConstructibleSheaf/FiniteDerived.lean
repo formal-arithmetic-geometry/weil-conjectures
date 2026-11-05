@@ -67,25 +67,6 @@ theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite {X S : S
 
 variable [Finite Λ]
 
-/-- Blueprint `lem-fin-finite-morphism`: Finite direct images of constructible sheaves.
-
-Let `f : X ⟶ S` be finite with `S` of finite type over a field `k`, and let `F` be a
-constructible sheaf of `Λ`-modules on `X_ét`. Then `f_* F` is constructible on `S_ét` and
-`R^q f_* F = 0` for every `q > 0`. The case of a Noetherian base is
-`AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isFinite`. -/
-theorem isConstructibleSheaf_lowerStar_of_isFinite {k : Type u} [Field k] {X S : Scheme.{u}}
-    (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) [IsFinite f]
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
-    IsConstructibleSheaf ((f)_*[ModuleCat.{u + 1} Λ].obj F) ∧
-      ∀ q : ℤ, 0 < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
-        ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
-  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
-  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
-  have : IsNoetherian S := {}
-  exact ⟨Scheme.IsConstructibleSheaf.lowerStar_of_isFinite f F, fun q hq ↦
-    isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite f F q hq.ne'⟩
-
 omit [Finite Λ] in
 /-- Blueprint `lem-fin-closed-immersion`: Closed immersions preserve constructibility.
 

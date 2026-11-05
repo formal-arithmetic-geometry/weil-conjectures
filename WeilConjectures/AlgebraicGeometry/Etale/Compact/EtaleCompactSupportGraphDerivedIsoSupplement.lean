@@ -45,17 +45,4 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- Core data from the specified graph map, with its forced inverse and termwise descent.
-Source: SGA 4 XVII 6.2.11
-(blueprint: lem-asd-compact-support-graph-derived-isomorphism). -/
-noncomputable def canonicalEtaleCompactSupportCore
-    (A : Type (u + 1)) [CommRing A] [Finite A] : EtaleCompactSupportCore A where
-  comparison := fun f _ _ _ _ _ _ c ↦ canonicalEtaleCompactSupportComparison A f c
-  sheafComparison := fun f _ _ _ _ _ _ c => etaleCompactificationGraphMap A f c
-  sheaf_normalization := fun f _ _ _ _ _ _ c M =>
-    compactSupportGraphSheafComparison_normalization A f c M
-  derived_normalization := by
-    intro U X f hf hs hU hUc hX hXc c K
-    exact compactSupportDerivedComparison_app A f c (etaleCompactificationGraphMap A f c) K
-
 end AlgebraicGeometry.Etale

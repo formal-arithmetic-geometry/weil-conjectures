@@ -74,25 +74,6 @@ noncomputable abbrev supportSiteEtaleComparisonAdjunction {X Y : Scheme.{u}} (f 
     (MorphismProperty.Over.pullback @Etale ⊤ f) D
     Y.smallEtaleTopology X.smallEtaleTopology
 
-/-- The composition comparison, adjoint to associativity of chosen fibre products.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: lem-weil-pbc-comparison-pullback). -/
-noncomputable def supportSiteEtaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    supportSiteEtaleComparisonPullback D (f ≫ g) ≅
-      supportSiteEtaleComparisonPullback D g ⋙ supportSiteEtaleComparisonPullback D f :=
-  have : (MorphismProperty.Over.pullback @Etale ⊤ f).IsContinuous
-      Y.smallEtaleTopology X.smallEtaleTopology := Etale.isContinuous_overPullback f
-  have : (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
-      Z.smallEtaleTopology Y.smallEtaleTopology := Etale.isContinuous_overPullback g
-  have : (MorphismProperty.Over.pullback @Etale ⊤ (f ≫ g)).IsContinuous
-      Z.smallEtaleTopology X.smallEtaleTopology := Etale.isContinuous_overPullback (f ≫ g)
-  ((conjugateIsoEquiv (supportSiteEtaleComparisonAdjunction D (f ≫ g))
-    ((supportSiteEtaleComparisonAdjunction D g).comp (supportSiteEtaleComparisonAdjunction D
-      f))).symm
-      (Functor.sheafPushforwardContinuousComp'
-        (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) f g).symm D
-        Z.smallEtaleTopology Y.smallEtaleTopology X.smallEtaleTopology).symm).symm
-
 /-- The constructed proEtale inverse image for the coefficient category `D`.
 For abelian coefficients this is definitionally the existing `upperStar`.
 Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
@@ -109,32 +90,6 @@ noncomputable abbrev supportSiteProEtaleComparisonAdjunction {X Y : Scheme.{u}} 
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) D
     (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
-
-/-- The composition comparison, adjoint to associativity of chosen fibre products.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: lem-weil-pbc-comparison-pullback). -/
-noncomputable def supportSiteProEtaleComparisonComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    supportSiteProEtaleComparisonPullback D (f ≫ g) ≅
-      supportSiteProEtaleComparisonPullback D g ⋙ supportSiteProEtaleComparisonPullback D f :=
-  ((conjugateIsoEquiv (supportSiteProEtaleComparisonAdjunction D (f ≫ g))
-    ((supportSiteProEtaleComparisonAdjunction D g).comp (supportSiteProEtaleComparisonAdjunction
-      D f))).symm
-      (Functor.sheafPushforwardContinuousComp'
-        (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).symm D
-        (Scheme.ProEt.topology Z) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)).symm).symm
-
-/-- The specified square identification: compose through the equal composite morphisms.
-The chosen Cartesian identification supplies the commutativity equation.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: lem-weil-pbc-comparison-pullback). -/
-noncomputable def supportSiteProEtaleComparisonSquare {X' X Y' Y : Scheme.{u}}
-    {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
-    (sq : ChosenCartesianSquare g' f' f g) :
-    supportSiteProEtaleComparisonPullback D g ⋙ supportSiteProEtaleComparisonPullback D f' ≅
-      supportSiteProEtaleComparisonPullback D f ⋙ supportSiteProEtaleComparisonPullback D g' :=
-  (supportSiteProEtaleComparisonComp D f' g).symm ≪≫
-    eqToIso (congrArg (supportSiteProEtaleComparisonPullback D) sq.w.symm) ≪≫
-      supportSiteProEtaleComparisonComp D g' f
 
 /-- The comparison inverse image, constructed by left Kan extension and sheafification.
 It is definitionally `comparisonUpperStar` for abelian coefficients and the left adjoint
@@ -201,53 +156,6 @@ noncomputable def supportSiteComparisonCoefficientPullbackIso {X Y : Scheme.{u}}
     ((supportSiteComparisonCoefficientAdjunction D Y).comp
       (supportSiteProEtaleComparisonAdjunction D f))).symm
       (supportSiteComparisonCoefficientDirectImageIso D f).symm).symm
-
-/-- The identity, composition and chosen Cartesian-square equations for the
-canonical comparison. This reuses `ComparisonPullbackCoherent`: the support-site
-comparison maps above are definitionally the same canonical maps. Equations are
-componentwise on every sheaf, equivalently
-equalities of natural transformations. The square is the specified one, including
-its commutativity transport; it is not replaced by an arbitrary isomorphism.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 (blueprint: lem-weil-pbc-comparison-pullback). -/
-abbrev supportSiteComparisonPullbackCoherent : Prop :=
-  ComparisonPullbackCoherent D
-
-/-- The canonical isomorphism `ν_U^* u⁻¹ ≅ u⁻¹ ν_V^*` is coherent for sets, abelian
-sheaves and sheaves of modules over every finite discrete ring.
-Source: blueprint, sec-proper-base-change, sk-thm-properbasechange,
-lem-weil-pbc-comparison-pullback; Stacks, Tags 098T, 099R and 0B65
-(blueprint: lem-weil-pbc-comparison-pullback).
-
-Proof: (1) the etale-to-pro-etale inclusion commutes with base change: both composites
-have the same fibre products and arrows. Restriction of sheaves therefore gives
-`supportSiteComparisonCoefficientDirectImageIso`. Scalar actions are the same constant sections,
-so this works in fixed-ring modules as well as sets and abelian groups.
-(2) Compose the inverse-image and comparison adjunctions (`Adjunction.comp`), and
-apply the unit-normalized conjugation bijection (`conjugateIsoEquiv` and
-`unit_conjugateEquiv_symm`). This is exactly `supportSiteComparisonCoefficientPullbackIso`.
-(3) For identities the right-image map is the identity after the fibre-product identity.
-For composites, both right-image paths restrict along the same associativity map
-`(W ×[Z] Y) ×[Y] X ≅ W ×[Z] X`, preserving the two projections. The composite Hom
-bijections thus coincide; their injectivity proves the identity and composite equations.
-(4) For the chosen Cartesian square, expand each square identification through the
-composition comparisons and the supplied commutativity equation. Both paths on sections
-identify the iterated products with `W ×[Y] X'` preserving both projections. Thus the
-right-image maps agree, and injectivity of the adjunction Hom bijections proves the
-specified square equation. These arguments are the node's four proof steps and retain
-all identity, arbitrary-composite and chosen-square cases.
-
-The existing `comparison_pullback_coherent` proves this argument for the same
-Kan-extension constructions. The support-site comparison, identity, composition
-and square isomorphisms are definitionally equal to its counterparts, so the
-coherence predicate reuses the existing one and the theorem specializes directly. -/
-theorem supportSiteComparison_pullback_coherent :
-    supportSiteComparisonPullbackCoherent (Type (u + 1)) ∧
-      supportSiteComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧
-      ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],
-        supportSiteComparisonPullbackCoherent (ModuleCat.{u + 1} Λ) := by
-  exact ⟨comparison_pullback_coherent.1, comparison_pullback_coherent.2.1,
-    fun Λ _ _ ↦ comparison_pullback_coherent.2.2 Λ⟩
 
 end ProEtale
 end AlgebraicGeometry

@@ -139,17 +139,6 @@ instance isRightAdjoint_boundedConstructibleLowerStar :
     (boundedConstructibleLowerStar ℓ E n f).IsRightAdjoint :=
   (boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f).isRightAdjoint
 
-/-- The composition isomorphism `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` on bounded constructible complexes
-(`𝒪_E ⧸ ℓⁿ`-coefficient): the conjugate of `boundedConstructibleUpperStarComp`. -/
-noncomputable def boundedConstructibleLowerStarComp {Z : Over (Spec (.of k))}
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (g : Y ⟶ Z) :
-    boundedConstructibleLowerStar ℓ E n f ⋙ boundedConstructibleLowerStar ℓ E n g ≅
-      boundedConstructibleLowerStar ℓ E n (f ≫ g) :=
-  (conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ E n (f ≫ g))
-    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ E n g).comp
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f))
-    (boundedConstructibleUpperStarComp (Profinite.integersModPowRingObj ℓ E n) ℓ f g).symm).symm
-
 /-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` on bounded constructible complexes is
 an isomorphism (`𝒪_E ⧸ ℓⁿ`-coefficient). -/
 instance isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion

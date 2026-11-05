@@ -61,16 +61,6 @@ theorem directedOn_ofFiniteType_le (H : X.IdealSheafData) :
   rintro K₁ ⟨h₁, hf₁⟩ K₂ ⟨h₂, hf₂⟩
   exact ⟨K₁ ⊔ K₂, ⟨sup_le h₁ h₂, hf₁.sup hf₂⟩, le_sup_left, le_sup_right⟩
 
-/-- The finite-type quasi-coherent subsheaves of `H` restricting to the unit ideal on an
-open `U` are directed: the family is closed under `⊔`. -/
-theorem directedOn_ofFiniteType_le_comap_eq_top (H : X.IdealSheafData) (U : X.Opens) :
-    DirectedOn (· ≤ ·)
-      {K : X.IdealSheafData | K ≤ H ∧ K.ofFiniteType ∧ K.comap U.ι = ⊤} := by
-  rintro K₁ ⟨h₁, hf₁, ht₁⟩ K₂ ⟨h₂, hf₂, -⟩
-  refine ⟨K₁ ⊔ K₂, ⟨sup_le h₁ h₂, hf₁.sup hf₂, top_le_iff.mp ?_⟩, le_sup_left, le_sup_right⟩
-  rw [← ht₁]
-  exact comap_mono U.ι le_sup_left
-
 end Directedness
 
 section Compact
@@ -118,18 +108,6 @@ theorem exists_le_of_ofFiniteType_le_iSup [CompactSpace X] {A : X.IdealSheafData
     obtain ⟨U, hUt, hxU⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
     exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨U, hUt⟩, hxU⟩
   · exact (hi _).trans (hz _ (Finset.mem_image_of_mem i U.2) _)
-
-/-- **A finite-type ideal sheaf on a quasi-compact scheme is a compact element**, in the
-form of a supremum over a directed set of ideal sheaves.
-(Blueprint: `lemma:nagata-finite-type-ideal-compact`.) -/
-theorem exists_mem_le_of_ofFiniteType_le_sSup [CompactSpace X] {A : X.IdealSheafData}
-    (hA : A.ofFiniteType) {S : Set X.IdealSheafData} (hS : S.Nonempty)
-    (hdir : DirectedOn (· ≤ ·) S) (hle : A ≤ sSup S) :
-    ∃ B ∈ S, A ≤ B := by
-  have : Nonempty S := hS.to_subtype
-  rw [sSup_eq_iSup'] at hle
-  obtain ⟨B, hB⟩ := exists_le_of_ofFiniteType_le_iSup hA hdir.directed_val hle
-  exact ⟨B, B.2, hB⟩
 
 end Compact
 
@@ -194,63 +172,6 @@ end Directed
 section UnitOnOpen
 
 variable [CompactSpace X] [QuasiSeparatedSpace X]
-
-/-- A quasi-coherent ideal sheaf restricting to the unit ideal on a quasi-compact open `U`
-has a finite-type quasi-coherent subsheaf which still restricts to the unit ideal on `U`. -/
-theorem exists_ofFiniteType_le_comap_eq_top (H : X.IdealSheafData) {U : X.Opens}
-    (hU : IsCompact (U : Set X)) (hHU : H.comap U.ι = ⊤) :
-    ∃ K : X.IdealSheafData, K ≤ H ∧ K.ofFiniteType ∧ K.comap U.ι = ⊤ := by
-  have hft : H.ofFiniteTypeOn U := by
-    rw [ofFiniteTypeOn_iff_comap, hHU]
-    exact ofFiniteType_top
-  obtain ⟨K, hKle, hKft, hKcomap⟩ := exists_finiteType_le_comap_eq H U hU hft
-  exact ⟨K, hKle, hKft, by rw [hKcomap, hHU]⟩
-
-/-- **The finite-type subsheaves restricting to the unit ideal on `U` are cofinal**
-(blueprint: `lemma:nagata-ideal-directed-union-finite-type`). -/
-theorem sSup_ofFiniteType_le_comap_eq_top_eq (H : X.IdealSheafData) {U : X.Opens}
-    (hU : IsCompact (U : Set X)) (hHU : H.comap U.ι = ⊤) :
-    sSup {K : X.IdealSheafData | K ≤ H ∧ K.ofFiniteType ∧ K.comap U.ι = ⊤} = H := by
-  refine le_antisymm (sSup_le fun K hK ↦ hK.1) ?_
-  obtain ⟨K', hK'le, hK'ft, hK'top⟩ := exists_ofFiniteType_le_comap_eq_top H hU hHU
-  -- the smaller family is cofinal in the family of all finite-type subsheaves
-  have hcof : sSup {K : X.IdealSheafData | K ≤ H ∧ K.ofFiniteType} ≤
-      sSup {K : X.IdealSheafData | K ≤ H ∧ K.ofFiniteType ∧ K.comap U.ι = ⊤} := by
-    refine sSup_le fun K hK ↦ le_sup_left.trans (le_sSup (a := K ⊔ K')
-      ⟨sup_le hK.1 hK'le, hK.2.sup hK'ft, top_le_iff.mp ?_⟩)
-    rw [← hK'top]
-    exact comap_mono U.ι le_sup_right
-  exact (sSup_ofFiniteType_le_eq H).ge.trans hcof
-
-/-- **The "for large `α`" step**: on a qcqs scheme, a finite-type quasi-coherent subsheaf of
-an ideal sheaf `H` restricting to the unit ideal on a quasi-compact open `U` is contained in
-a finite-type quasi-coherent subsheaf of `H` which still restricts to the unit ideal on `U`.
-(Blueprint: `lemma:nagata-ideal-directed-union-finite-type`.) -/
-theorem exists_ofFiniteType_le_comap_eq_top_of_le {A H : X.IdealSheafData}
-    (hA : A.ofFiniteType) (hAH : A ≤ H) {U : X.Opens} (hU : IsCompact (U : Set X))
-    (hHU : H.comap U.ι = ⊤) :
-    ∃ K : X.IdealSheafData, A ≤ K ∧ K ≤ H ∧ K.ofFiniteType ∧ K.comap U.ι = ⊤ := by
-  obtain ⟨K', hK'le, hK'ft, hK'top⟩ := exists_ofFiniteType_le_comap_eq_top H hU hHU
-  refine ⟨A ⊔ K', le_sup_left, sup_le hAH hK'le, hA.sup hK'ft, top_le_iff.mp ?_⟩
-  rw [← hK'top]
-  exact comap_mono U.ι le_sup_right
-
-/-- **The "for large `α`" step with a prescribed restriction**: on a qcqs scheme, an ideal
-sheaf `H` restricting to the unit ideal on a quasi-compact open `U` and of finite type on a
-quasi-compact open `W` has a finite-type quasi-coherent subsheaf with the same restriction
-to `W` which still restricts to the unit ideal on `U`.
-(Blueprint: `lemma:nagata-ideal-directed-union-finite-type`.) -/
-theorem exists_ofFiniteType_le_comap_eq_comap_of_comap_eq_top {H : X.IdealSheafData}
-    {U W : X.Opens} (hU : IsCompact (U : Set X)) (hW : IsCompact (W : Set X))
-    (hHU : H.comap U.ι = ⊤) (hHW : H.ofFiniteTypeOn W) :
-    ∃ K : X.IdealSheafData, K ≤ H ∧ K.ofFiniteType ∧ K.comap W.ι = H.comap W.ι ∧
-      K.comap U.ι = ⊤ := by
-  obtain ⟨L, hLle, hLft, hLcomap⟩ := exists_finiteType_le_comap_eq H W hW hHW
-  obtain ⟨K, hLK, hKle, hKft, hKtop⟩ :=
-    exists_ofFiniteType_le_comap_eq_top_of_le hLft hLle hU hHU
-  refine ⟨K, hKle, hKft, le_antisymm (comap_mono W.ι hKle) ?_, hKtop⟩
-  rw [← hLcomap]
-  exact comap_mono W.ι hLK
 
 end UnitOnOpen
 

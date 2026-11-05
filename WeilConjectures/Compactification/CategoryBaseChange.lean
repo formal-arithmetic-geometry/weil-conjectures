@@ -267,25 +267,6 @@ end Inf
 
 /-! ### Compactifications over a field -/
 
-/-- **Compactifications over a field form a cofiltered category** (blueprint
-`prop-compactification-refinement`): let `X` and `Y` be schemes of finite type over a field
-`K` and `f : X ⟶ Y` a separated `K`-morphism (automatically of finite type). Then the
-category of compactifications of `f` is nonempty, by Nagata's compactification theorem, and
-cofiltered: any finite family of compactifications has a common refinement, and any two
-parallel refinements become equal after a further refinement. -/
-theorem isCofiltered_of_field {K : Type u} [Field K] {X Y : Scheme.{u}}
-    (pX : X ⟶ Spec (.of K)) (pY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType pX] [QuasiCompact pX]
-    [LocallyOfFiniteType pY] [QuasiCompact pY] (f : X ⟶ Y) (hf : f ≫ pY = pX)
-    [IsSeparated f] : IsCofiltered (Compactification f) := by
-  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian pY
-  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace pY
-  have : QuasiSeparatedSpace Y := IsLocallyNoetherian.quasiSeparatedSpace
-  have : LocallyOfFiniteType (f ≫ pY) := by rw [hf]; infer_instance
-  have : QuasiCompact (f ≫ pY) := by rw [hf]; infer_instance
-  have : LocallyOfFiniteType f := locallyOfFiniteType_of_comp f pY
-  have : QuasiCompact f := .of_comp f pY
-  infer_instance
-
 /-! ### Axiom census -/
 
 /--
@@ -294,12 +275,5 @@ info: 'AlgebraicGeometry.Compactification.isIso_infBaseChange_hom' depends on
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Compactification.isIso_infBaseChange_hom
-
-/--
-info: 'AlgebraicGeometry.Compactification.isCofiltered_of_field' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Compactification.isCofiltered_of_field
 
 end AlgebraicGeometry.Compactification

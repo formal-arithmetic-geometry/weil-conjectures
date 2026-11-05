@@ -150,7 +150,6 @@ noncomputable def upperStarIsoLowerStarInv (e : X ≅ Y) : (e.hom)^*[A] ≅ (e.i
   (upperStarLowerStarAdjunction A e.hom).leftAdjointUniq
     (lowerStarEquivalence A e).symm.toAdjunction
 
-
 section Coherence
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
@@ -213,23 +212,6 @@ lemma lowerStar_map_unit_comp_counit {X Y : Scheme.{u}} (e : X ≅ Y)
     (hRY := ProEt.isContinuous_overPullback _) (hR'Y := ProEt.isContinuous_overPullback _)
   rw [lowerStarCongr_eq, lowerStarCongr_eq]
   exact this
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The adjunctions `(e.hom)_* ⊣ (e.inv)_*` given by `lowerStarEquivalence e` and by
-`lowerStarEquivalence e.symm` agree: the unit of the first is the adjointification of a unit
-which already satisfies the triangle identity `lowerStar_map_unit_comp_counit`, and the unit of
-the second is the inverse of the counit of `lowerStarEquivalence e.symm`, which is the same
-composite of identity, congruence and composition isomorphisms. -/
-lemma lowerStarEquivalence_symm_symm_toAdjunction (e : X ≅ Y) :
-    (lowerStarEquivalence A e.symm).symm.toAdjunction =
-      (lowerStarEquivalence A e).toAdjunction := by
-  apply Adjunction.ext
-  have := Equivalence.adjointifyη_eq _ _ (lowerStar_map_unit_comp_counit A e)
-  change (lowerStarComp A e.hom e.inv ≪≫ lowerStarCongr A e.symm.inv_hom_id ≪≫
-    lowerStarId A X).inv = (Equivalence.adjointifyη _ _).hom
-  rw [this]
-  simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_hom, Category.assoc]
-  rfl
 
 /-- The congruence isomorphism of pullbacks is conjugate to that of pushforwards. -/
 lemma conjugateEquiv_upperStarCongr_inv {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g') :

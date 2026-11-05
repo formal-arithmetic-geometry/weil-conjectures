@@ -54,64 +54,6 @@ section Amplitude
 variable (Φ : DerivedCategory C ⥤ DerivedCategory D) [Φ.CommShift ℤ] [Φ.IsTriangulated] (d : ℤ)
   (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms] [P.ContainsZero]
 
-omit [Φ.IsTriangulated] [P.ContainsZero] in
-/-- If a triangulated functor sends every object of `P` placed in degree `0` into degrees `≤ d`,
-it sends every complex concentrated in degree `n` with cohomology in `P` into degrees
-`≤ n + d`. -/
-lemma isLE_obj_of_isGE_of_isLE_of_homologyProperty
-    (hΦ : ∀ F : C, P F → (Φ.obj ((singleFunctor C 0).obj F)).IsLE d)
-    (M : DerivedCategory C) (hMP : homologyProperty P M) (n : ℤ) [M.IsGE n] [M.IsLE n] :
-    (Φ.obj M).IsLE (n + d) := by
-  obtain ⟨Y, ⟨e⟩⟩ := exists_iso_singleFunctor_obj_of_isGE_of_isLE M n
-  have := hΦ Y (P.prop_of_iso ((homologyFunctor C n).mapIso e ≪≫
-    (singleFunctorCompHomologyFunctorIso C n).app Y) (hMP n))
-  have : t.IsLE ((Φ.obj ((singleFunctor C 0).obj Y))⟦-n⟧) (n + d) :=
-    t.isLE_shift _ d (-n) (n + d) (by lia)
-  let e' : (Φ.obj ((singleFunctor C 0).obj Y))⟦-n⟧ ≅ Φ.obj M :=
-    (Φ.commShiftIso (-n)).symm.app _ ≪≫
-      Φ.mapIso (((singleFunctors C).shiftIso (-n) n 0 (by lia)).app Y) ≪≫ Φ.mapIso e.symm
-  exact t.isLE_of_iso e' (n + d)
-
-/-- **Amplitude by dévissage, relative to a class `P`.** If a triangulated functor
-`Φ : D(C) ⥤ D(D)` sends every object of `P` placed in degree `0` into degrees `≤ d`, it sends
-every bounded complex with cohomology in `P` concentrated in degrees `≤ n` into degrees
-`≤ n + d`: by induction on the length, using the truncation triangle
-`τ_{< n} M ⟶ M ⟶ τ_{≥ n} M ⟶`. -/
-lemma isLE_obj_of_isLE_of_homologyProperty
-    (hΦ : ∀ F : C, P F → (Φ.obj ((singleFunctor C 0).obj F)).IsLE d)
-    (M : DerivedCategory C) (hM : t.bounded M) (hMP : homologyProperty P M) (n : ℤ) [M.IsLE n] :
-    (Φ.obj M).IsLE (n + d) := by
-  obtain ⟨⟨a, ha⟩, -⟩ := hM
-  suffices h : ∀ (k : ℕ) (M : DerivedCategory C) (n : ℤ), homologyProperty P M →
-      M.IsGE (n - k) → M.IsLE n → (Φ.obj M).IsLE (n + d) by
-    exact h (n - a).toNat M n hMP (t.isGE_of_ge M _ a (by lia)) inferInstance
-  intro k
-  induction k with
-  | zero =>
-    intro M n hMP h₁ h₂
-    have : M.IsGE n := by simpa using h₁
-    exact isLE_obj_of_isGE_of_isLE_of_homologyProperty Φ d P hΦ M hMP n
-  | succ k ih =>
-    intro M n hMP h₁ h₂
-    have hT := Φ.map_distinguished _ (t.triangleLTGE_distinguished n M)
-    refine t.isLE₂ _ hT (n + d) ?_ ?_
-    · have : ((t.triangleLTGE n).obj M).obj₁.IsLE (n - 1) :=
-        t.isLE_truncLT_obj _ _ _ (by lia)
-      have : ((t.triangleLTGE n).obj M).obj₁.IsGE (n - 1 - k) := by
-        have : M.IsGE (n - 1 - k) := t.isGE_of_ge M _ (n - ↑(k + 1)) (by lia)
-        exact inferInstanceAs (t.IsGE ((t.truncLT n).obj M) _)
-      have hP₁ : homologyProperty P ((t.triangleLTGE n).obj M).obj₁ :=
-        (homologyProperty P).prop_of_iso ((t.truncLEIsoTruncLT (n - 1) n (by lia)).app M)
-          (homologyProperty_truncLE hMP (n - 1))
-      have := ih _ (n - 1) hP₁ this inferInstance
-      exact t.isLE_of_le (Φ.obj ((t.triangleLTGE n).obj M).obj₁) (n - 1 + d) (n + d) (by lia)
-    · have : ((t.triangleLTGE n).obj M).obj₃.IsLE n :=
-        inferInstanceAs (t.IsLE ((t.truncGE n).obj M) n)
-      have : ((t.triangleLTGE n).obj M).obj₃.IsGE n :=
-        inferInstanceAs (t.IsGE ((t.truncGE n).obj M) n)
-      exact isLE_obj_of_isGE_of_isLE_of_homologyProperty Φ d P hΦ _
-        (homologyProperty_truncGE hMP n) n
-
 end Amplitude
 
 section Coproducts
@@ -244,40 +186,6 @@ variable [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExt
   [P.IsClosedUnderColimitsOfShape (Discrete J)]
   [HasLimitsOfShape (Discrete ℕ) C] [HasExactLimitsOfShape (Discrete ℕ) C]
   [HasLimitsOfShape (Discrete ℕ) D] [HasExactLimitsOfShape (Discrete ℕ) D]
-
-omit [P.IsClosedUnderIsomorphisms] [P.ContainsZero] [P.IsClosedUnderKernels]
-  [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] [HasLimitsOfShape (Discrete ℕ) C]
-  [HasExactLimitsOfShape (Discrete ℕ) C] [HasLimitsOfShape (Discrete ℕ) D]
-  [HasExactLimitsOfShape (Discrete ℕ) D] in
-/-- Complexes with cohomology in a class closed under coproducts are closed under coproducts. -/
-lemma homologyProperty_sigma (N : J → DerivedCategory C) (hN : ∀ j, homologyProperty P (N j)) :
-    homologyProperty P (∐ N) := fun n ↦
-  P.prop_of_isColimit
-    (isColimitOfPreserves (homologyFunctor C n) (coproductIsCoproduct N)) fun j ↦ hN j.as n
-
-/-- **Commutation with coproducts from the heart.** Let `P` be a weak Serre class of objects of
-`C` closed under coproducts, where `C` and `D` have exact coproducts and exact countable
-products, and let `G : D(C) ⥤ D(D)` be a triangulated functor preserving countable products and
-not lowering degrees. If `G` sends the objects of `P` placed in degree `0` into degrees `≤ d`
-and commutes with coproducts of families of such objects, then `G` commutes with coproducts of
-arbitrary families of complexes with cohomology in `P`. -/
-theorem isIso_sigmaComparison_of_homologyProperty [G.CommShift ℤ] [G.IsTriangulated]
-    [PreservesLimitsOfShape (Discrete ℕ) G] (d : ℤ)
-    (hG₁ : ∀ F : C, P F → (G.obj ((singleFunctor C 0).obj F)).IsLE d)
-    (hG₂ : ∀ (X : DerivedCategory C) (a : ℤ), X.IsGE a → (G.obj X).IsGE a)
-    (hG₃ : ∀ N : J → C, (∀ j, P (N j)) →
-      IsIso (sigmaComparison G fun j ↦ (singleFunctor C 0).obj (N j)))
-    (M : J → DerivedCategory C) (hM : ∀ j, homologyProperty P (M j)) :
-    IsIso (sigmaComparison G M) := by
-  refine isIso_sigmaComparison_of_bounded G (homologyProperty P)
-    (fun _ n hX ↦ ⟨homologyProperty_truncLE hX n, homologyProperty_truncGE hX n⟩)
-    (homologyProperty_sigma P) (d + 1) (fun X b hX hXb ↦ ?_) hG₂
-    (fun N a b hN ↦ isIso_sigmaComparison_of_isGE_of_isLE_of_homologyProperty G P hG₃ N a b hN)
-    M hM
-  have := isLE_obj_of_forall_isLE_obj_truncGE G X (b + d) fun n ↦
-    isLE_obj_of_isLE_of_homologyProperty G d P hG₁ _
-      ⟨⟨-(n : ℤ), inferInstance⟩, ⟨b, inferInstance⟩⟩ (homologyProperty_truncGE hX _) b
-  rwa [← add_assoc]
 
 end Coproducts
 

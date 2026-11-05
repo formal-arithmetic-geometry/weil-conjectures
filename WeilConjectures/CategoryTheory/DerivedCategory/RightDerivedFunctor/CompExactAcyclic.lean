@@ -32,20 +32,4 @@ variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
   (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits G]
 
-/-- For `F` exact sending injective objects to `G`-acyclic objects, and `G` left exact,
-`R^n (F ⋙ G) ≅ F ⋙ R^n G`. -/
-noncomputable def rightDerivedCompIsoOfExactOfRightAcyclic
-    (hFG : ∀ (I : C) [Injective I], G.rightAcyclic (F.obj I)) (n : ℕ) :
-    (F ⋙ G).rightDerived n ≅ F ⋙ G.rightDerived n :=
-  ((F ⋙ G).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso n).symm ≪≫
-    isoWhiskerLeft (DerivedCategory.Plus.singleFunctor C 0)
-      (isoWhiskerRight (rightDerivedFunctorPlusCompIsoOfRightAcyclic F G hFG)
-        (DerivedCategory.Plus.homologyFunctor E n) ≪≫ Functor.associator _ _ _) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    isoWhiskerRight (isoWhiskerLeft (DerivedCategory.Plus.singleFunctor C 0)
-      (rightDerivedFunctorPlusIsoMapDerivedCategoryPlus F) ≪≫
-      F.mapDerivedCategoryPlusSingleFunctor 0) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    isoWhiskerLeft F (G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso n)
-
 end CategoryTheory.Functor

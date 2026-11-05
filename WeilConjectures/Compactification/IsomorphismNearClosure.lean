@@ -749,26 +749,6 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
   ⟨isoNearClosureBlowup hU q hT hTN hN,
     exists_isIso_strictTransformMap_isoNearClosureBlowup hU q hTU hT hTN hN⟩
 
-
-/-- **A proper open immersion with dense image is an isomorphism** (blueprint:
-`lemma-nagata-proper-open-dense-iso`): if `q : Z ⟶ X` is proper and an open immersion, and its
-image contains a scheme-theoretically dense quasi-compact open `D` of `X`, then `q` is an
-isomorphism. The image of `q` is open, and closed because `q` is universally closed; it contains
-the dense set `D`, hence is everything. -/
-theorem isIso_of_isProper_of_isOpenImmersion {X Z : Scheme.{u}} (q : Z ⟶ X) [IsProper q]
-    [IsOpenImmersion q] (D : X.Opens) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι]
-    (hD : D ≤ q.opensRange) : IsIso q := by
-  refine isIso_of_isOpenImmersion_of_opensRange_eq_top q ?_
-  have hclosed : IsClosed (Set.range q) := q.isClosedMap.isClosed_range
-  have hdense : closure (D : Set X) = Set.univ := by
-    simpa using D.ι.denseRange.closure_range
-  apply TopologicalSpace.Opens.ext
-  rw [Scheme.Hom.coe_opensRange, TopologicalSpace.Opens.coe_top, Set.eq_univ_iff_forall]
-  intro x
-  have : closure (D : Set X) ⊆ Set.range q := hclosed.closure_subset_iff.mpr (by
-    intro y hy; exact (hD hy : y ∈ q.opensRange))
-  exact this (hdense ▸ Set.mem_univ x)
-
 /-! ### Axiom census -/
 
 /--

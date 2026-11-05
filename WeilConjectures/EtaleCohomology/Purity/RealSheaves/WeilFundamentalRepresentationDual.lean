@@ -279,11 +279,6 @@ noncomputable def fundamentalRepDualEquiv (F : WeilSheaf K l C) (hF : F.IsLisse)
         rw [fundamentalRep_frobLift, fundamentalRep_frobLift]
         exact dualStalkLinearMap_frobStalk M F hF d v
 
-variable (M) in
-lemma fundamentalRepDualEquiv_apply (F : WeilSheaf K l C) (hF : F.IsLisse) (d) :
-    fundamentalRepDualEquiv M D F hF d = dualStalkLinearMap B F hF d :=
-  rfl
-
 /-- **The Weil fundamental representation of the dual is the contragredient**: the evaluation
 pairing of the stalks at the base point identifies the Weil fundamental representation of the
 dual `ℱ^∨` of a lisse Weil sheaf with the dual of that of `ℱ`

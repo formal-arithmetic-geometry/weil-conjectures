@@ -276,12 +276,7 @@ noncomputable abbrev pushforward : Correspondence ℓ P.coeff where
   c₂ := P.b₂
   u := P.pushforwardCoeff
 
-
 /-! ### The induced map of fixed loci -/
-
-lemma pushforward_c₁ : P.pushforward.c₁ = P.b₁ := rfl
-
-lemma pushforward_c₂ : P.pushforward.c₂ = P.b₂ := rfl
 
 variable (Fc : c.FixedLocus) (Fb : P.pushforward.FixedLocus)
 

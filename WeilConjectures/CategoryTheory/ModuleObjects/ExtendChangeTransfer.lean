@@ -110,27 +110,6 @@ variable {R R' S T : C} [MonObj R] [MonObj R'] [MonObj S] [MonObj T] [IsCommMonO
   [IsCommMonObj R'] [IsCommMonObj S] {a : R ⟶ S} {b : S ⟶ T} {ι : R ⟶ T} {a' : R' ⟶ S}
   {ι' : R' ⟶ T} [IsMonHom a] [IsMonHom b] [IsMonHom ι] [IsMonHom a'] [IsMonHom ι']
 
-/-- The underlying map of the adjoint transfer `Res_a(S ⊗_{R'} M) ⟶ Res_ι(T ⊗_{R'} M)` of the
-isomorphisms `extendScalarsCompIsoOfEq` is the map `x ⊗ m ↦ b(x) ⊗ m`. -/
-lemma compIsoTransfer_extendRestrictAdjunction_hom (h : a ≫ b = ι) (h' : a' ≫ b = ι')
-    (M : Mod C R') :
-    (Adjunction.compIsoTransfer (extendRestrictAdjunction a) (extendRestrictAdjunction ι)
-      (extendScalarsCompIsoOfEq h) (extendScalarsCompIsoOfEq h') M).hom =
-        extendChangeHom b h' M := by
-  have key : extendUnit b (extendScalarsObj a' M) ≫
-      (comap b).map ((extendScalarsCompIsoOfEq h').hom.app M) = extendChange b h' M :=
-    extendScalarsObj_hom_ext' (by
-      rw [comp_hom', extendUnit_hom, comap_map_hom, extendUnitHom_extendScalarsCompIsoOfEq_hom_app,
-        extendChange_hom, extendUnitHom_extendChangeHom])
-  have hε := congrArg Hom.hom ((extendRestrictAdjunction a).right_triangle_components
-    (extendScalarsObj a' M))
-  simp only [comp_hom', comap_map_hom, extendRestrictAdjunction_unit_app_hom] at hε
-  rw [Adjunction.compIsoTransfer, Adjunction.homEquiv_unit, comp_hom', comap_map_hom,
-    extendRestrictAdjunction_unit_app_hom, comp_hom', comp_hom',
-    extendUnitHom_extendScalarsCompIsoOfEq_inv_app_assoc, extendScalars_map]
-  erw [extendUnitHom_extendScalarsMap_assoc, reassoc_of% hε, Category.id_comp]
-  exact congrArg Hom.hom key
-
 end Transfer
 
 end CategoryTheory.Mod

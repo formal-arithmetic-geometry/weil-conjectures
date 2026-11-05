@@ -65,12 +65,4 @@ Proof: extension of scalars and tensoring with the fixed module are additive. -/
   rw [h]
   simp
 
-/-- (blueprint: def-pc-mixed-total-tensor) The total tensor bifunctor on complexes, with
-terms `⨁_{p+q=n} Mᵖ ⊗_R Eᑫ` and differential `d_M ⊗ 1 + (-1)^p 1 ⊗ d_E`.
-Source: Stacks Project, Section 06Y5 and Lemma 06Y6. -/
-noncomputable def mixedTotalTensor {R A : Type u} [CommRing R] [CommRing A] (f : R →+* A) :
-    CochainComplex (ModuleCat.{u} A) ℤ ⥤
-      CochainComplex (ModuleCat.{u} R) ℤ ⥤ CochainComplex (ModuleCat.{u} A) ℤ :=
-  (mixedTensor f).map₂CochainComplex
-
 end ModuleCat

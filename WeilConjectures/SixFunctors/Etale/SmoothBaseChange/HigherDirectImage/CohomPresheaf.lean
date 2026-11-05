@@ -59,7 +59,6 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-
 /-- The free sheaf `Λ[W]` of `Λ`-modules on an étale `X`-scheme `W`: the sheafification of the
 presheaf `V ↦ Λ^{(Hom_X(V, W))}`. It corepresents sections over `W`, and
 `Ext^q(Λ[W], F)` is the étale cohomology `H^q(W, F|_W)`. -/
@@ -140,7 +139,6 @@ lemma Etale.freeSheafHomEquiv_map {W W' : X.Etale} (v : W' ⟶ W)
       G.obj.map v.op (Etale.freeSheafHomEquiv Λ W G f) := by
   simp only [Etale.freeSheafHomEquiv_apply]
   exact congrArg (fun k ↦ k f) ((Etale.freeSheafSections Λ G).naturality v.op)
-
 
 end RawFreeSheaf
 
@@ -227,10 +225,6 @@ local instance Etale.moduleUpperStarPreservesFiniteLimits {X Y : Scheme.{u}} (h 
 local instance Etale.moduleUpperStarPreservesFiniteColimits {X Y : Scheme.{u}} (h : Y ⟶ X) :
     PreservesFiniteColimits (Etale.moduleUpperStar Λ h) :=
   inferInstanceAs (PreservesFiniteColimits ((h)^*[ModuleCat.{u + 1} Λ]))
-
-noncomputable abbrev Etale.moduleDerivedAdjunction {X Y : Scheme.{u}} (h : Y ⟶ X) :
-    D+(Etale.moduleUpperStar Λ h) ⊣ R+(Etale.moduleLowerStar Λ h) :=
-  Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h
 
 section CohomologyPresheaf
 
@@ -356,7 +350,6 @@ lemma Etale.moduleFreeSheafSections_naturality
     ← Etale.moduleFreeSheafHomEquiv_apply, ← Etale.moduleFreeSheafHomEquiv_apply]
   exact (Etale.moduleFreeSheafHomEquiv_comp Λ W.unop f g).symm
 
-
 lemma Etale.freeSheafSections_naturality
     {G G' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (g : G ⟶ G') :
     Etale.freeSheafSections Λ G ≫ Etale.sectionsMap g =
@@ -367,7 +360,6 @@ lemma Etale.freeSheafSections_naturality
   rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply,
     ← Etale.freeSheafHomEquiv_apply, ← Etale.freeSheafHomEquiv_apply]
   exact (Etale.freeSheafHomEquiv_comp Λ W.unop f g).symm
-
 
 section Key
 
@@ -481,22 +473,6 @@ private noncomputable def homotopyOfSingleCycles
   simp only [Category.assoc]
   rw [← h]
   simp
-
-/-- A map from a single complex whose degree-`0` component factors through the differential
-`M⁻¹ ⟶ M⁰` is null-homotopic. -/
-noncomputable def Etale.homotopyOfSingle {A : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (f : (HomologicalComplex.single _ (.up ℤ) 0).obj A ⟶ M.obj) (b : A ⟶ M.obj.X (-1))
-    (hb : f.f 0 = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A).hom ≫ b ≫ M.obj.d (-1) 0) :
-    Homotopy f 0 :=
-  (Homotopy.ofEq (HomologicalComplex.from_single_hom_ext (j := 0) (by
-    rw [hb, Homotopy.nullHomotopicMap'_f (k₂ := -1) (k₀ := 1) (by simp) (by simp)]
-    simp
-    rfl)) :
-      Homotopy f (Homotopy.nullHomotopicMap' (fun i j (_ : j + 1 = i) ↦
-        if hi : i = 0 then
-          (HomologicalComplex.singleObjXIsoOfEq (.up ℤ) 0 A i hi).hom ≫ b ≫
-            eqToHom (by congr 1; lia)
-        else 0))).trans (Homotopy.nullHomotopy' _)
 
 /-- The degree-`0` cycle class of a lift `f` of a class `β` that induces the zero section of
 `H⁰`: it vanishes in the homology sheaf. Auxiliary for
@@ -748,62 +724,7 @@ theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.
   rw [hφ]
   constructor <;> infer_instance
 
-/-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
-quasi-separated morphisms, for complexes.
-
-Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `K ∈ D⁺(Y_ét, Λ)`. Then the `q`-th
-cohomology sheaf of `Rh_* K` is, as a sheaf of abelian groups, the sheafification of the
-presheaf `W ↦ H^q(W ×_X Y, K|)` on the small étale site of `X`
-(`AlgebraicGeometry.Etale.higherDirectImagePresheaf`): the canonical map
-`AlgebraicGeometry.Etale.higherDirectImagePresheafToSheaf` induces an isomorphism from the
-sheafification. The hypotheses on `h` are those of the blueprint; the statement holds for any
-`h` (Stacks `072W`). -/
-theorem Etale.isIso_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
-    (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ)
-    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (((sheafificationAdjunction X.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv _ _).symm
-      (Etale.higherDirectImagePresheafToSheaf Λ h q K)) := by
-  obtain ⟨_, _⟩ := Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ h q K
-  set ψ := ((sheafificationAdjunction X.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv _ _).symm
-    (Etale.higherDirectImagePresheafToSheaf Λ h q K)
-  have hfac : toSheafify _ _ ≫ ψ.hom = Etale.higherDirectImagePresheafToSheaf Λ h q K := by
-    have := ((sheafificationAdjunction X.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv
-      _ _).apply_symm_apply (Etale.higherDirectImagePresheafToSheaf Λ h q K)
-    rw [Adjunction.homEquiv_unit] at this
-    exact this
-  have : PreservesLimitsOfSize.{u, u + 1} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
-    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
-  have : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
-    inferInstance
-  refine (Sheaf.isLocallyBijective_iff_isIso ψ).1 ⟨?_, ?_⟩
-  · have : Presheaf.IsLocallyInjective X.smallEtaleTopology (toSheafify _ _ ≫ ψ.hom) := by
-      rw [hfac]; infer_instance
-    exact Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective
-      X.smallEtaleTopology
-      (toSheafify _ _) ψ.hom
-  · have : Presheaf.IsLocallySurjective X.smallEtaleTopology (toSheafify _ _ ≫ ψ.hom) := by
-      rw [hfac]; infer_instance
-    exact Presheaf.isLocallySurjective_of_isLocallySurjective X.smallEtaleTopology
-      (toSheafify _ _) ψ.hom
-
-/-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
-quasi-separated morphisms.
-
-Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `F` an étale sheaf of `Λ`-modules on
-`Y`. Then `R^q h_* F` is, as a sheaf of abelian groups, the sheafification of the presheaf
-`W ↦ H^q(W ×_X Y, F|)` on the small étale site of `X`, via the canonical map
-`AlgebraicGeometry.Etale.higherDirectImagePresheafToSheaf`. This is the case `K = F[0]` of
-`AlgebraicGeometry.Etale.isIso_higherDirectImagePresheafToSheaf`. -/
-theorem Etale.isIso_higherDirectImagePresheafToSheaf_singleFunctor
-    {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ)
-    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso (((sheafificationAdjunction X.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv _ _).symm
-      (Etale.higherDirectImagePresheafToSheaf Λ h q
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) :=
-  Etale.isIso_higherDirectImagePresheafToSheaf Λ h q _
-
 end CohomologyPresheaf
-
 
 section FilteredColimits
 
@@ -815,7 +736,6 @@ noncomputable def Etale.higherDirectImagePresheafMap {X Y : Scheme.{u}} (h : Y �
     (φ : K ⟶ K') :
     Etale.higherDirectImagePresheaf Λ h q K ⟶ Etale.higherDirectImagePresheaf Λ h q K' :=
   Functor.whiskerLeft _ (preadditiveYoneda.map ((shiftFunctor _ q).map φ))
-
 
 lemma Etale.higherDirectImagePresheafToHom_app_apply {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -905,17 +825,6 @@ noncomputable def Etale.higherDirectImagePresheafFunctor {X Y : Scheme.{u}} (h :
   shiftFunctor _ q ⋙ preadditiveYoneda ⋙ (Functor.whiskeringLeft _ _ _).obj
     (Etale.freeSheaf Λ X ⋙ (h)^*[ModuleCat.{u + 1} Λ] ⋙ DerivedCategory.Plus.singleFunctor _ 0).op
 
-lemma Etale.higherDirectImagePresheafFunctor_obj {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ) (K) :
-    (Etale.higherDirectImagePresheafFunctor Λ h q).obj K =
-      Etale.higherDirectImagePresheaf Λ h q K :=
-  rfl
-
-lemma Etale.higherDirectImagePresheafFunctor_map {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
-    {K K'} (φ : K ⟶ K') :
-    (Etale.higherDirectImagePresheafFunctor Λ h q).map φ =
-      Etale.higherDirectImagePresheafMap Λ h q φ :=
-  rfl
-
 end FilteredColimits
 
 /-- Blueprint `sbc-lem-higher-direct-image-presheaf`, in the vanishing form used for constant
@@ -949,6 +858,5 @@ theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : 
   apply Etale.isZero_constantModHigherDirectImage_of_cyclic Λ h d q
   intro e he
   exact Etale.isZero_cyclicHigherDirectImage_of_locally_zero h e q (H e he)
-
 
 end AlgebraicGeometry

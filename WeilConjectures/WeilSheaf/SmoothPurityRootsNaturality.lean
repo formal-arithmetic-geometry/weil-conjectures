@@ -66,18 +66,4 @@ lemma unitToRootsOfUnitySheaf_comp_Spec_map {N : ℕ} [NeZero N] {ζ : K}
   ext
   rfl
 
-/-- Pullback along a semilinear scheme morphism sends the generator `ζ` to `φ ζ`. -/
-lemma upperStar_map_unitToRootsOfUnitySheaf_semilinear
-    {X : Scheme.{u}} (g : U ⟶ X) (s : X ⟶ Spec (.of K))
-    (hg : g ≫ s = f ≫ Spec.map (CommRingCat.ofHom φ)) {N : ℕ} [NeZero N]
-    {ζ : K} (hζ : ζ ^ N = 1) (hφζ : φ ζ ^ N = 1) :
-    (g)^*[Ab.{u + 1}].map
-        (unitToRootsOfUnitySheaf s hζ ≫ (rootsOfUnitySheafIso X N).hom) ≫
-          upperStarRootsOfUnityComparison g N =
-      Functor.OplaxMonoidal.η (g)^*[Ab.{u + 1}] ≫
-        unitToRootsOfUnitySheaf f hφζ ≫ (rootsOfUnitySheafIso U N).hom := by
-  rw [upperStar_map_unitToRootsOfUnitySheaf_comp_upperStarRootsOfUnityComparison g s
-    (f ≫ Spec.map (CommRingCat.ofHom φ)) hg hζ,
-    unitToRootsOfUnitySheaf_comp_Spec_map φ f hζ hφζ]
-
 end AlgebraicGeometry.ProEtale

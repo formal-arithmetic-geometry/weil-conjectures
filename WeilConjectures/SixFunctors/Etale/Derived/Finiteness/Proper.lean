@@ -186,60 +186,6 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper {X S : S
   ⟨fun q ↦ hasConstructibleDirectImages_of_isProper aS f F inferInstance q,
     isZero_homology_rightDerivedLowerStar_of_isProper f d hd F⟩
 
-
-/-- Blueprint `obl-fin-comparison`: The comparison and finitude of proper direct images.
-
-Let `f : X ⟶ S` be a proper morphism with `S` of finite type over `k`, whose geometric fibres
-have dimension at most `d`, and let `F` be a constructible sheaf of `Λ`-modules on `X_ét`, for a
-finite ring `Λ` killed by an integer invertible in `k`. Let `s : Spec Ω ⟶ S` be a geometric point
-(`Ω` algebraically closed), with geometric fibre `X_s = X ×_S Spec Ω`, projections
-`i_s : X_s ⟶ X` and `a_s : X_s ⟶ Spec Ω`. Then:
-
-1. (the comparison) for every `q`, the base change map `s^*(Rᵠf_* F) ⟶ Hᵠ(X_s, F|_{X_s})`
-   (the `q`-th homology of `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus` at `F`, the
-   right-hand side being the sheaf `Rᵠa_{s*}(i_s^* F)` on `Spec Ω`) is an isomorphism, the
-   fibre cohomology is finite, and it vanishes for `q > 2d`;
-2. (the finitude) every `Rᵠf_* F` is constructible, and `Rᵠf_* F = 0` for `q > 2d`. -/
-theorem isIso_homology_derivedBaseChangeMapPlus_of_isProper {X S : Scheme.{u}}
-    (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) [IsProper f]
-    (d : ℕ) (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S),
-      topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (d : WithBot ℕ∞))
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
-    (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (q : ℤ),
-      IsIso ((Plus.homologyFunctor _ q).map ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ)
-        (IsPullback.of_hasPullback f s).toCommSq).app ((Plus.singleFunctor _ 0).obj F))) ∧
-      IsFiniteSheaf ((Plus.homologyFunctor _ q).obj
-        ((pullback.snd f s)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj
-          (((pullback.fst f s)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj
-            ((Plus.singleFunctor _ 0).obj F)))) ∧
-      ((2 * d : ℤ) < q → IsZero ((Plus.homologyFunctor _ q).obj
-        ((pullback.snd f s)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj
-          (((pullback.fst f s)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj
-            ((Plus.singleFunctor _ 0).obj F)))))) ∧
-    (∀ q : ℤ, IsConstructibleSheaf ((homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)))) ∧
-    ∀ q : ℤ, (2 * d : ℤ) < q → IsZero ((homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) := by
-  obtain ⟨h₁, h₂⟩ := isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper aS f d hd F
-  refine ⟨fun Ω _ _ s q ↦ ?_, h₁, h₂⟩
-  let sq := IsPullback.of_hasPullback f s
-  let K := (Plus.singleFunctor _ 0).obj F
-  have := Etale.isIso_baseChange_of_isProper_of_torsionHomology Λ sq K
-    (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion Λ X isAddTorsion_of_finite K)
-  refine ⟨inferInstance, ?_, isZero_homology_fibre_of_isProper f s d (hd Ω s) F q⟩
-  have : IsFiniteSheaf ((homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) :=
-    (h₁ q).isFiniteSheaf
-  have := IsFiniteSheaf.upperStar s ((homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)))
-  exact IsFiniteSheaf.of_iso ((Etale.upperStar (ModuleCat.{u + 1} Λ) s).mapIso
-      (homologyRightDerivedLowerStarSingleIsoPlus f F q) ≪≫
-    ((Etale.upperStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlusHomologyFunctorIso q).app
-      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj K) ≪≫
-    (Plus.homologyFunctor _ q).mapIso
-      (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)))
-
-
 /-- Blueprint `lem-fin-proper-bounded-constructible`: Bounded constructible complexes under a
 proper direct image.
 
@@ -258,7 +204,6 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isProper {Y S : Scheme.{u}
     (fun Ω _ _ s ↦ hd Ω s) F
   exact ⟨⟨⟨0, ((b)_*[ModuleCat.{u + 1} Λ]).isGE_rightDerivedFunctor_obj_singleFunctor F⟩,
     ⟨2 * d, (isLE_iff _ _).2 fun q hq ↦ h₂ q hq⟩⟩, h₁⟩
-
 
 end Etale
 

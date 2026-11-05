@@ -146,23 +146,6 @@ namespace GrpObj
 
 variable {G}
 
-/-- The point of `G` with values in the dual numbers `R[ε]` of a tangent vector `x ∈ Lie(G)`: the
-infinitesimal point of `x`, through `(Spec R)[ε] ≅ Spec R[ε]`. (blueprint:
-`def-wf-lie-algebra-derivation`) -/
-noncomputable def tangentPoint (x : Lie G) : points G (DualNumber R) :=
-  infPointsEquivTangentGroup G ((lieEquiv G).symm x)
-
-theorem tangentPoint_mem_tangentGroup (x : Lie G) : tangentPoint x ∈ tangentGroup G :=
-  (infPointsEquivTangentGroup G ((lieEquiv G).symm x)).2
-
-theorem tangentPoint_injective : Function.Injective (tangentPoint (G := G)) := fun _ _ h ↦
-  (lieEquiv G).symm.injective ((infPointsEquivTangentGroup G).injective (Subtype.ext h))
-
-theorem exists_tangentPoint_eq {p : points G (DualNumber R)} (hp : p ∈ tangentGroup G) :
-    ∃ x : Lie G, tangentPoint x = p :=
-  ⟨lieEquiv G ((infPointsEquivTangentGroup G).symm ⟨p, hp⟩), by
-    simp [tangentPoint]⟩
-
 end GrpObj
 
 end Ring

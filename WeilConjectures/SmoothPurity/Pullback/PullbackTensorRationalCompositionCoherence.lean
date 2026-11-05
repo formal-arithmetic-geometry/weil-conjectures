@@ -38,35 +38,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Rational component of higher pullback/tensor composition coherence.
-Source: Stacks 07A4 and 0941; localization of the integral composition square.
-(blueprint: lem-pur-pullback-tensor-composition-coherence). -/
-theorem pullbackTensorRationalCompositionCoherence {X Y Z : Scheme.{u}}
-    (f : X ⟶ Y) (h : Z ⟶ X)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
-    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)] :
-    ∀ M N : sfRationalConstructibleCategory l E Y,
-      canonicalRationalPullbackTensor_composition l E f h M N := by
-  intro M N
-  have hL := canonicalRationalPullbackTensorComposition_left_localization l E f h M N
-  have hR := canonicalRationalPullbackTensorComposition_right_localization l E f h M N
-  have hI := pullbackTensorIntegralCompositionCoherence l E f h M.obj N.obj
-  have hmapI :
-      (sfRationalConstructibleLocalization l E Z).map
-          ((canonicalIntegralPullbackTensor l E (h ≫ f) M.obj N.obj).hom ≫
-            (constructibleIntegralTensor l E Z).map (Prod.mkHom
-              ((pullbackTensorIntegralComposition l E f h).hom.app M.obj)
-              ((pullbackTensorIntegralComposition l E f h).hom.app N.obj))) =
-      (sfRationalConstructibleLocalization l E Z).map
-        ((pullbackTensorIntegralComposition l E f h).hom.app
-            ((constructibleIntegralTensor l E Y).obj (M.obj,N.obj)) ≫
-          (constructibleIntegralPullback l E h).map
-            (canonicalIntegralPullbackTensor l E f M.obj N.obj).hom ≫
-          (canonicalIntegralPullbackTensor l E h
-            ((constructibleIntegralPullback l E f).obj M.obj)
-            ((constructibleIntegralPullback l E f).obj N.obj)).hom) := by
-    exact congrArg (sfRationalConstructibleLocalization l E Z).map hI
-  exact eq_of_heq (hL.trans ((heq_of_eq hmapI).trans hR.symm))
-
 end WeilConjectures

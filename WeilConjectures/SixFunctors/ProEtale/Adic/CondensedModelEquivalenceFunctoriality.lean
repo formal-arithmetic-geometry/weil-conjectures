@@ -224,49 +224,4 @@ noncomputable def adicUpperStarCompCondensedModIso (f : Y ⟶ X) :
 
 /-! ### Global sections of pullbacks -/
 
-variable (l X) in
-/-- Global sections on `X_proét` commute with forgetting the `ℚ̄_ℓ`-module structure: both are
-the sections over the terminal object `X`. -/
-noncomputable def globalSectionsForgetAbIso :
-    Sheaf.Γ (Scheme.ProEt.topology X) (WeilCoefficients.{u} l) ⋙
-        forget₂ (WeilCoefficients.{u} l) Ab.{u + 1} ≅
-      weilCoefficientsForgetAb l X ⋙ Sheaf.Γ (Scheme.ProEt.topology X) Ab.{u + 1} :=
-  Functor.isoWhiskerRight
-      (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId X)) _ ≪≫
-    Iso.refl (weilCoefficientsForgetAb l X ⋙
-      (sheafSections (Scheme.ProEt.topology X) Ab.{u + 1}).obj (op (Scheme.ProEt.mk (𝟙 X)))) ≪≫
-    Functor.isoWhiskerLeft _
-      (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId X)).symm
-
-variable (l) in
-/-- The global sections on `Y` of the old pullback `s^* F` of an `ℓ`-adic sheaf, as an abelian
-group, are naturally the global sections of the underlying abelian sheaf of the new pullback
-`s^* (E_X F)` of the corresponding module object over `Λ_X`. -/
-noncomputable def globalSectionsAdicUpperStarIso (s : Y ⟶ X) :
-    (s)^*ᵃ[l] ⋙ AdicSheaf.forget Y ⋙ Sheaf.Γ _ (WeilCoefficients.{u} l) ⋙
-        forget₂ (WeilCoefficients.{u} l) Ab.{u + 1} ≅
-      (adicSheafEquivCondensedMod l X).functor ⋙
-        CondensedRing.upperStar (Profinite.padicAlgClRingObj l) s ⋙ Mod.forget _ ⋙
-          Sheaf.Γ (Scheme.ProEt.topology Y) Ab.{u + 1} :=
-  Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _ (globalSectionsForgetAbIso l Y)) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Iso.refl (((s)^*ᵃ[l] ⋙ (adicSheafEquivCondensedMod l Y).functor) ⋙
-      (Mod.forget _ ⋙ Sheaf.Γ (Scheme.ProEt.topology Y) Ab.{u + 1})) ≪≫
-    Functor.isoWhiskerRight (adicUpperStarCompCondensedModIso l s) _ ≪≫
-    Functor.associator _ _ _
-
-variable (l) in
-/-- The component of `AlgebraicGeometry.ProEtale.globalSectionsAdicUpperStarIso` at an `ℓ`-adic
-sheaf `M`: the global sections `Γ(Y, s^* M)` of the pullback of the underlying sheaf of
-`ℚ̄_ℓ`-modules, as an abelian group, agree with the global sections of the new pullback. For a
-geometric point `s : Spec Ω ⟶ X`, the left hand side is the stalk
-`AlgebraicGeometry.WeilSheaf.stalkObj`. -/
-noncomputable def globalSectionsAdicUpperStarObjIso (s : Y ⟶ X) (M : AdicSheaf l X) :
-    (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1}).obj
-        ((Sheaf.Γ _ _).obj ((s)^*[WeilCoefficients.{u} l].obj M.X)) ≅
-      (Sheaf.Γ (Scheme.ProEt.topology Y) Ab.{u + 1}).obj
-        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l) s).obj
-          ((adicSheafEquivCondensedMod l X).functor.obj M)).X :=
-  (globalSectionsAdicUpperStarIso l s).app M
-
 end AlgebraicGeometry.ProEtale

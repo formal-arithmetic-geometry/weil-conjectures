@@ -47,46 +47,4 @@ attribute [local instance] sfIntrinsicPullback_additive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Combine the two ordinary maps in the supplied exact-evaluation factorization.
-Source: Stacks Tags 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-factors).
-Proof: specialize the supplied factorization equation at A. Functoriality of the
-quotient identifies the two consecutive images with the image of their composite;
-associativity gives the displayed factorization.
--/
-theorem completedPullbackTensor_evaluation_factors {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (n : ℕ)
-    (c : integralOperationsLevelPullback l E f n ≅
-      sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)
-    (e : pullbackTensorSequenceDerived l E f ⋙
-        coefficientSequenceDerivedEvaluation l E X n ≅
-      coefficientSequenceDerivedEvaluation l E Y n ⋙ finiteDerivedPullback l E n f)
-    (he : ∀ A : CochainComplex (coefficientSequenceModules l E Y) ℤ,
-      e.hom.app (DerivedCategory.Q.obj A) ≫
-        (finiteDerivedPullback l E n f).map
-          ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app A) ≫
-        (sfIntrinsicPullback
-          (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app _ =
-      (coefficientSequenceDerivedEvaluation l E X n).map
-        ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A) ≫
-        (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app _ ≫
-        DerivedCategory.Q.map ((pullbackTensorInverseEvaluationComplex l E f n).inv.app A) ≫
-        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app
-          (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj A)))
-    (A : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
-    e.hom.app (DerivedCategory.Q.obj A) ≫
-      (finiteDerivedPullback l E n f).map
-        ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app A) ≫
-      (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))
-        f).mapDerivedCategoryFactors.hom.app _ =
-    (coefficientSequenceDerivedEvaluation l E X n).map
-      ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A) ≫
-      (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app _ ≫
-      DerivedCategory.Q.map
-        ((pullbackTensorInverseEvaluationComplex l E f n).inv.app A ≫
-          (NatIso.mapHomologicalComplex c (.up ℤ)).hom.app
-            (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj A)) := by
-  have h := he A
-  simpa only [Functor.map_comp, Category.assoc] using h
-
 end WeilConjectures

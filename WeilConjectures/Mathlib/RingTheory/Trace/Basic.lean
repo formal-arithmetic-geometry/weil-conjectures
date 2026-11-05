@@ -80,61 +80,6 @@ theorem Etale.exists_trace_mul_ne_zero {A : Type*} [CommRing A] [Algebra K A] [A
 
 variable {A : Type*} [CommRing A] [Algebra K A] [Algebra.Etale K A]
 
-/-- For a finite étale `K`-algebra `A`, the trace pairing identifies `A` with its `K`-dual. -/
-theorem Etale.bijective_traceDual :
-    Function.Bijective (fun a : A ↦ (Algebra.trace K A).comp (Algebra.lmul K A a)) := by
-  have : Module.Finite K A := FormallyUnramified.finite_of_free K A
-  let τ : A →ₗ[K] Module.Dual K A :=
-    { toFun a := (Algebra.trace K A).comp (Algebra.lmul K A a)
-      map_add' a b := by ext; simp
-      map_smul' c a := by ext; simp }
-  have hinj : Function.Injective τ := by
-    rw [← LinearMap.ker_eq_bot, LinearMap.ker_eq_bot']
-    intro a ha
-    by_contra h
-    obtain ⟨b, hb⟩ := exists_trace_mul_ne_zero (K := K) h
-    exact hb (by simpa [τ] using congr($ha b))
-  exact ⟨hinj, (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
-    (Subspace.dual_finrank_eq).symm).1 hinj⟩
-
-variable (K A) in
-/-- **Trace duality for finite étale algebras.** For a finite étale `K`-algebra `A` and an
-`A`-module `P`, composing with the trace `Tr_{A/K}` identifies `A`-linear forms on `P` with
-`K`-linear forms. -/
-noncomputable def Etale.linearMapEquivDual (P : Type*) [AddCommGroup P] [Module A P] [Module K P]
-    [IsScalarTower K A P] : (P →ₗ[A] A) ≃ₗ[K] Module.Dual K P :=
-  LinearEquiv.ofBijective
-    { toFun φ := (Algebra.trace K A).comp (φ.restrictScalars K)
-      map_add' φ ψ := by ext; simp
-      map_smul' c φ := by ext; simp } <| by
-    have hτ := bijective_traceDual (K := K) (A := A)
-    refine ⟨fun φ ψ h ↦ LinearMap.ext fun p ↦ ?_, fun l ↦ ?_⟩
-    · refine hτ.1 (LinearMap.ext fun b ↦ ?_)
-      have := congr($h (b • p))
-      simpa [mul_comm b] using this
-    · choose t ht using fun p : P ↦ hτ.2 ((l : P →ₗ[K] K).comp
-        ((LinearMap.toSpanSingleton A P p).restrictScalars K))
-      have ht' (p : P) (b : A) : Algebra.trace K A (b * t p) = l (b • p) := by
-        simpa [mul_comm] using congr($(ht p) b)
-      let φ : P →ₗ[A] A :=
-        { toFun := t
-          map_add' p q := hτ.1 (LinearMap.ext fun b ↦ by
-            change Algebra.trace K A (t (p + q) * b) = Algebra.trace K A ((t p + t q) * b)
-            rw [add_mul, map_add, mul_comm, ht', mul_comm, ht', mul_comm, ht', smul_add,
-              map_add])
-          map_smul' a p := hτ.1 (LinearMap.ext fun b ↦ by
-            change Algebra.trace K A (t (a • p) * b) = Algebra.trace K A ((a * t p) * b)
-            rw [mul_comm, ht', show a * t p * b = (b * a) * t p by ring, ht', mul_smul]) }
-      refine ⟨φ, LinearMap.ext fun p ↦ ?_⟩
-      change Algebra.trace K A (t p) = l p
-      simpa using ht' p 1
-
-@[simp]
-theorem Etale.linearMapEquivDual_apply (P : Type*) [AddCommGroup P] [Module A P] [Module K P]
-    [IsScalarTower K A P] (φ : P →ₗ[A] A) (p : P) :
-    linearMapEquivDual K A P φ p = Algebra.trace K A (φ p) :=
-  rfl
-
 end Algebra
 
 end

@@ -236,16 +236,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasDerivedCategory.{u + 1} B] [MonoidalCategory B] [MonoidalClosed B] [MonoidalPreadditive B]
   [BraidedCategory B] [Abelian.HasFunctorialFlatResolution B]
 
-/-- A monoidal additive equivalence `F : B ⥤ X_ét` onto the category of `A`-valued étale sheaves
-on `X` commutes with the derived tensor products:
-`D(F)(N ⊗ᴸ M) ≅ D(F) N ⊗ᴸ D(F) M`. -/
-noncomputable def mapDerivedCategoryObjTensorIsoDerivedTensor
-    (F : B ⥤ Sheaf X.smallEtaleTopology A) [F.Monoidal] [F.IsEquivalence] [F.Additive]
-    (N M : DerivedCategory B) :
-    F.mapDerivedCategory.obj (N ⊗ M) ≅
-      ((derivedTensor A X).obj (F.mapDerivedCategory.obj N)).obj (F.mapDerivedCategory.obj M) :=
-  (DerivedCategory.tensorLeftCompMapDerivedCategoryIso F N).app M
-
 end MonoidalEquivalence
 
 section DirectSums
@@ -488,22 +478,6 @@ noncomputable def rightDerivedGlobalSectionsIsoOfIsSepClosed :
   Functor.rightDerivedFunctorNatIso (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint) ≪≫
     Functor.rightDerivedFunctorIsoMapDerivedCategory _
 
-/-- Blueprint `lem-kun-0ezp` (cohomology of a separably closed point, for sheaves of
-`Λ`-modules): over a separably closed field `k`, `H^q(Spec k, F) = 0` for every étale sheaf `F`
-of `Λ`-modules on `Spec k` and every `q ≠ 0`. -/
-theorem isZero_cohomology_of_isSepClosed
-    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℤ} (hq : q ≠ 0) :
-    IsZero ((cohomology (ModuleCat.{u + 1} Λ) (Spec (.of k)) q).obj
-      ((DerivedCategory.singleFunctor _ 0).obj F)) := by
-  let Γ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-    (op (etalePoint k))
-  refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctor _ q).mapIso
-    ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app _ ≪≫
-      (Γ.mapDerivedCategorySingleFunctor 0).app F ≪≫
-        (DerivedCategory.singleFunctorIsoCompQ (ModuleCat.{u + 1} Λ) 0).app (Γ.obj F)) ≪≫
-    (DerivedCategory.homologyFunctorFactors _ q).app _)
-  exact HomologicalComplex.isZero_single_obj_homology _ _ _ _ hq
-
 /-- Over a separably closed field `k`, every object `C` of `D((Spec k)_ét, Λ)` is the constant
 complex on its derived global sections: `C ≅ RΓ(Spec k, C)_{Spec k}`. -/
 theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed
@@ -516,57 +490,6 @@ theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed
     additive_sheafSections_obj Λ _
   ⟨((constantSheafEquivalenceOfIsSepClosed Λ).mapDerivedCategory.counitIso.app C).symm ≪≫
     (constantFunctor Λ _).mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app C).symm⟩
-
-/-- Blueprint `lem-kun-03qu-global-generation` (for sheaves of `Λ`-modules): over a separably
-closed field `k`, every étale sheaf of `Λ`-modules on `Spec k` is globally generated. -/
-theorem isGloballyGenerated_of_isSepClosed
-    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsGloballyGenerated Λ (Spec (.of k)) F := by
-  let adj := constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-    (isTerminalEtaleTerminal (Spec (.of k)))
-  let Γ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-    (op (etaleTerminal (Spec (.of k))))
-  have : Γ.IsEquivalence := isEquivalence_sheafSections_etalePoint Λ
-  refine Γ.epi_of_epi_map ?_
-  rw [ModuleCat.epi_iff_surjective]
-  intro s
-  refine ⟨(adj.unit.app (ModuleCat.of Λ Λ) ≫ Γ.map (Sigma.ι
-    (fun _ : F.obj.obj (op (etaleTerminal (Spec (.of k)))) ↦ (constantSheaf
-      (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) s))
-      (1 : Λ), ?_⟩
-  have h := adj.homEquiv_unit (ModuleCat.of Λ Λ) F
-    ((adj.homEquiv _ _).symm (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s)))
-  rw [Equiv.apply_symm_apply] at h
-  rw [← ConcreteCategory.comp_apply, Category.assoc, ← Γ.map_comp,
-    globalSectionsEvaluation, Sigma.ι_desc, ← h]
-  simp only [ModuleCat.hom_ofHom]
-  exact one_smul Λ s
-/-- Over a separably closed field `k`, the derived global sections
-`RΓ(Spec k, -) : D((Spec k)_ét, Λ) ⥤ D(Λ)` are compatible with the derived tensor products:
-`RΓ(Spec k, C ⊗ᴸ C') ≅ RΓ(Spec k, C) ⊗ᴸ RΓ(Spec k, C')`. -/
-theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_of_isSepClosed
-    (C C' : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C).obj C') ≅
-      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C ⊗
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C') := by
-  let E := constantSheafEquivalenceOfIsSepClosed Λ (k := k)
-  let _ : E.functor.Additive := additive_constantSheaf Λ _
-  let _ : E.inverse.Additive := additive_sheafSections_obj Λ _
-  let F := constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-  have : F.IsEquivalence := E.isEquivalence_functor
-  let R := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
-  let T := derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))
-  let e (X) : F.mapDerivedCategory.obj (R.obj X) ≅ X :=
-    F.mapDerivedCategory.mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app X) ≪≫
-      E.mapDerivedCategory.counitIso.app X
-  let e' (N) : R.obj (F.mapDerivedCategory.obj N) ≅ N :=
-    (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app _ ≪≫
-      (E.mapDerivedCategory.unitIso.app N).symm
-  let i : (T.obj C).obj C' ≅ F.mapDerivedCategory.obj (R.obj C ⊗ R.obj C') :=
-    (T.mapIso (e C).symm).app C' ≪≫ (T.obj _).mapIso (e C').symm ≪≫
-      (mapDerivedCategoryObjTensorIsoDerivedTensor _ _ F (R.obj C) (R.obj C')).symm
-  exact ⟨R.mapIso i ≪≫ e' (R.obj C ⊗ R.obj C')⟩
 
 /-- Over a separably closed field `k`, a morphism `a : X ⟶ Spec k` has finite cohomological
 dimension as soon as `X` has: by the Leray isomorphism, the global sections of the sheaf
@@ -672,26 +595,6 @@ instance isIso_rightDerivedLowerStarProjectionMap_app_app
   isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ aX
     (hasFiniteCohomologicalDimension_of_isSepClosed Λ (fun x ↦ isOfFinAddOrder_of_finite x) aX)
     E C
-
-omit [HasInvertibleExponent Λ (Spec (.of k))] in
-/-- `RΓ(X, E) ⊗ᴸ RΓ(Spec k, C) ≅ RΓ(X, E ⊗ᴸ La_X^* C)` for a finite-type scheme `X` over a
-separably closed field `k`: the tensor product with a constant complex (`lem-kun-0f12`), read
-in `D(Λ)` through `RΓ(Spec k, -)`. -/
-theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperStar
-    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C ≅
-      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj
-          ((L((aX)^*[ModuleCat.{u + 1} Λ])).obj C))) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedGlobalSections_derivedTensor_of_isSepClosed Λ
-    ((R((aX)_*[ModuleCat.{u + 1} Λ])).obj E) C
-  exact ⟨whiskerRightIso
-      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aX).app E).symm _ ≪≫ e.symm ≪≫
-    (rightDerivedGlobalSections _ (Spec (.of k))).mapIso
-      (asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) aX).app E).app C)) ≪≫
-    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aX).app _⟩
 
 end Kunneth
 

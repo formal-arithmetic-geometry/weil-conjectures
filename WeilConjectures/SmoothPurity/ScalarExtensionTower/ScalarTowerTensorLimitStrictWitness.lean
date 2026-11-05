@@ -39,41 +39,4 @@ attribute [local irreducible] integralComparisonDerivedSequenceScalar
   integralComparisonSequenceScalarModel
 open scoped ChangeOfRings
 
-/-- A strict scalar/tensor comparison at one pair of good cochain complexes.
-
-The equation is exactly the representative equation in `DerivedSigmaModel`.
-It is a lower-level datum: it mentions only cochain complexes and the strict
-tensor models, and has no localization or completed constructible objects.
-Source: Stacks 07A4 and 0941 (blueprint: stage3-pur-scalar-tensor-limit-strict-witness).
--/
-structure StrictTensorWitness (W : Scheme.{u})
-    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
-    (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅
-      (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod
-        (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor)
-    where
-  P : Complex l E W
-  Q : Complex l E W
-  hP : Good l E W P
-  hQ : Good l E W Q
-  hsP : Good l L W ((scalar l E L ι W).obj P)
-  hsQ : Good l L W ((scalar l E L ι W).obj Q)
-  equation : DerivedSigmaModel l E L ι W SE SL α
-
-/-- Extract the strict representative datum from `DerivedSigmaModel`.
-Source: Stacks 07A4 and 0941 (blueprint: stage3-pur-scalar-tensor-limit-strict-witness).
--/
-theorem strictTensorWitness_of_derivedSigmaModel (W : Scheme.{u})
-    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
-    (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅
-      (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod
-        (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor)
-    (hα : DerivedSigmaModel l E L ι W SE SL α)
-    (P Q : Complex l E W) (hP : Good l E W P) (hQ : Good l E W Q) :
-    ∃ w : StrictTensorWitness l E L ι W SE SL α, w.P = P ∧ w.Q = Q := by
-  obtain ⟨hsP, hsQ, _heq⟩ := hα P Q hP hQ
-  refine ⟨⟨P, Q, hP, hQ, hsP, hsQ, hα⟩, rfl, rfl⟩
-
 end WeilConjectures.ScalarExtensionTower

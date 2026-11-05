@@ -88,21 +88,6 @@ def restrict {X : Scheme.{u}} {n : ℕ}
   matching_cover q := U.matching_cover
     ⟨q.val, lt_of_lt_of_le q.isLt (Nat.succ_le_succ hm)⟩
 
-/-- Restricting to the same bound retains the data. -/
-theorem restrict_self {X : Scheme.{u}} {n : ℕ}
-    (U : TruncatedFiniteSplitEtaleHypercover X n) : U.restrict n le_rfl = U := by
-  cases U
-  unfold restrict
-  congr 1
-
-/-- Restriction is transitive. -/
-theorem restrict_restrict {X : Scheme.{u}} {n m l : ℕ}
-    (U : TruncatedFiniteSplitEtaleHypercover X n) (hml : l ≤ m) (hnm : m ≤ n) :
-    (U.restrict m hnm).restrict l hml = U.restrict l (hml.trans hnm) := by
-  cases U
-  unfold restrict
-  congr 1
-
 end TruncatedFiniteSplitEtaleHypercover
 
 /-- A split finite hypercover through degree `n`, together with its map to `K`.

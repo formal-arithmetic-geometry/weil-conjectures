@@ -38,49 +38,4 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 attribute [local irreducible] homComplexFunctor homComplexπ
 
-/-- Product preservation and the specified sheaf-Hom comparison induce the normalized
-comparison of actual Hom complexes.
-Source: Stacks Project, Section 0A8X; steps 4–5 of the ringed-forgetting comparison
-(blueprint: lem-sf-ringed-sheaf-hom-complex-comparison).
-Proof: specialize the abstract product-total comparison to homComplexFunctor and homComplexπ.
-The cones homComplexIsLimit give the products. The equations homComplex_d_π give the standard
-differential, and homComplexFunctor_map_f_π gives the map equation after composing the two
-homObjMap factors. The resulting comparison has exactly the prescribed projections. -/
-theorem sheafHomComplexComparison :
-    ∃ chain : Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙
-        U.mapHomologicalComplex (.up ℤ) ≅
-      ((U.mapHomologicalComplex (.up ℤ)).op.prod (U.mapHomologicalComplex (.up ℤ))) ⋙
-        Functor.uncurry.obj (homComplexFunctor (R := R')),
-      ∀ (K I : CochainComplex (SheafOfModules.{max c v r}
-        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
-        (n p q : ℤ) (hpq : p + n = q),
-        (chain.hom.app (op K, I)).f n ≫
-            homComplexπ (R := R') ((U.mapHomologicalComplex (.up ℤ)).obj K)
-              ((U.mapHomologicalComplex (.up ℤ)).obj I) n p q hpq =
-          U.map (homComplexπ (R := R) K I n p q hpq) ≫
-            h.hom.app (op (K.X p), I.X q) := by
-  exact ringedHomComplexComparison U
-    (SheafOfModules.homFunctor (R := R)) (SheafOfModules.homFunctor (R := R'))
-    (Functor.uncurry.obj (homComplexFunctor (R := R)))
-    (Functor.uncurry.obj (homComplexFunctor (R := R')))
-    (homComplexπ (R := R)) (homComplexπ (R := R'))
-    (homComplexIsLimit (R := R)) (homComplexIsLimit (R := R'))
-    (homComplex_d_π (R := R)) (homComplex_d_π (R := R'))
-    (by
-      intro K K' I I' f g n p q hpq
-      simpa only [Functor.uncurry_obj_map, Functor.uncurry_obj_obj,
-        SheafOfModules.homFunctor_obj_obj, Quiver.Hom.unop_op,
-        SheafOfModules.homFunctor_map_app, SheafOfModules.homFunctor_obj_map,
-        Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
-        Category.id_comp, Category.comp_id] using
-        homComplexFunctor_map_f_π (R := R) f g n p q hpq)
-    (by
-      intro K K' I I' f g n p q hpq
-      simpa only [Functor.uncurry_obj_map, Functor.uncurry_obj_obj,
-        SheafOfModules.homFunctor_obj_obj, Quiver.Hom.unop_op,
-        SheafOfModules.homFunctor_map_app, SheafOfModules.homFunctor_obj_map,
-        Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
-        Category.id_comp, Category.comp_id] using
-        homComplexFunctor_map_f_π (R := R') f g n p q hpq) h
-
 end CategoryTheory

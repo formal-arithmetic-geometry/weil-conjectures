@@ -61,30 +61,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left}
 
-/-- The lax tensor map `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` of nearby cycles
-(`NearbyCyclesModel.tensorMap`) on bounded constructible complexes. -/
-noncomputable def boundedConstructibleTensorMap
-    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-    (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleNearbyCycles hP).obj A ⊗ (boundedConstructibleNearbyCycles hP).obj B ⟶
-      (boundedConstructibleNearbyCycles hP).obj (A ⊗ B) :=
-  ObjectProperty.homMk (M.tensorMap (Profinite.padicAlgClRingObj ℓ) A.obj B.obj)
-
 variable (ℓ) [IsSepClosed k'] [Algebra k k'] {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
-
-/-- The **duality map** `δ_{M,K} : Ψ D_X K ⟶ D_{X'} Ψ K` of a trait model `M` over the base
-(blueprint `sk-prop-tf-nearby-duality-foundation`): the adjoint of `θ_M ∘ Ψ(ev) ∘ μ_Ψ`, with `θ_M`
-the dualizing map `β_a(ℚ̄_ℓ)` of the family `D` (`NearbyCyclesModel.NearbyDualizingData`). -/
-noncomputable def nearbyDualityMap (D : NearbyDualizingData k k' ℓ)
-    (h : M.IsTraitModelOfBase k q g)
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
-        (verdierDual ℓ K) ⟶
-      verdierDual ℓ ((boundedConstructibleNearbyCycles
-        (h.preservesBoundedConstructible ℓ)).obj K) :=
-  Verdier.nearbyDualityMap (boundedConstructibleTensorMap (h.preservesBoundedConstructible ℓ))
-    (D.θ h) K
 
 end NearbyCyclesModel
 

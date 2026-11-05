@@ -50,25 +50,4 @@ abbrev schemeDerivedCategory (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : Type _ :=
   DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))
 
-/-- An object `K` of `D(𝒪_X)` has quasi-coherent cohomology sheaves: for every `n : ℤ` the
-cohomology sheaf `H^n(K)` is quasi-coherent (Mathlib's `SheafOfModules.IsQuasicoherent`).
-Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  det-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category
-  (blueprint: def-pc-derived-category). -/
-def schemeDerivedQCohProperty (X : Scheme.{u})
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
-    ObjectProperty (schemeDerivedCategory X) :=
-  fun K => ∀ n : ℤ,
-    ((DerivedCategory.homologyFunctor
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K).IsQuasicoherent
-
-/-- The full subcategory `D_QCoh(𝒪_X)` of `D(𝒪_X)` of objects whose cohomology sheaves are
-quasi-coherent.
-Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  det-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category
-  (blueprint: def-pc-derived-category). -/
-abbrev schemeDerivedQCohCategory (X : Scheme.{u})
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : Type _ :=
-  (schemeDerivedQCohProperty X).FullSubcategory
-
 end AlgebraicGeometry

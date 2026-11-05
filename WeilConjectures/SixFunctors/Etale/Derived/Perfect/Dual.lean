@@ -82,15 +82,6 @@ noncomputable def coefficientDual :
 
 variable {A X}
 
-/-- Blueprint `def-pod-coefficient-dual-on-x`: Coefficient dual on `X`, the evaluation.
-
-The *evaluation* `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X`: the counit at `Λ_X` of the adjunction
-`K ⊗ᴸ - ⊣ RHom(K, -)` (`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/
-noncomputable def coefficientEvaluation
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((derivedTensor A X).obj K).obj ((coefficientDual A X).obj (op K)) ⟶ 𝟙_ _ :=
-  (derivedTensorHomAdjunction A K).counit.app (𝟙_ _)
-
 /-- An exact pairing in `D(X_ét)` can be swapped: if `K` and `K'` form an exact pairing, so do
 `K'` and `K`. In other words, the right dual of a dualizable complex is also its left dual.
 
@@ -110,58 +101,6 @@ noncomputable def coefficientDualIsoOfExactPairing
     (L K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing L K] :
     (coefficientDual A X).obj (op K) ≅ L :=
   MonoidalClosed.ihomObjUnitIso L K
-
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
-This is also blueprint `prop-sf-dualizable` (Perfect complexes are dualizable).
-
-The coefficient dual of a dualizable complex is again dualizable. The evaluation
-`K ⊗ᴸ K^∨ ⟶ Λ_X` is `AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`. -/
-theorem isDualizable_coefficientDual
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
-    IsDualizable ((coefficientDual A X).obj (op K)) := by
-  obtain ⟨_⟩ := hK
-  obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
-  exact ⟨{ rightDual := K
-           exact := exactPairingCongrLeft (coefficientDualIsoOfExactPairing Kᘁ K) }⟩
-
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
-
-For a dualizable `K` the biduality map `K ⟶ K^∨∨` into the double coefficient dual is an
-isomorphism. -/
-theorem nonempty_iso_coefficientDual_coefficientDual
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
-    Nonempty (K ≅ (coefficientDual A X).obj (op ((coefficientDual A X).obj (op K)))) := by
-  obtain ⟨_⟩ := hK
-  obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
-  exact ⟨(coefficientDualIsoOfExactPairing K Kᘁ).symm ≪≫
-    (coefficientDual A X).mapIso (coefficientDualIsoOfExactPairing Kᘁ K).op⟩
-
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
-This is also blueprint `prop-sf-dualizable-hom` (Internal Hom through the coefficient dual).
-
-For a dualizable `K` and every `M` the canonical map `K^∨ ⊗ᴸ M ⟶ RHom(K, M)` is an
-isomorphism. -/
-theorem nonempty_iso_coefficientDual_tensor
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    Nonempty ((coefficientDual A X).obj (op K) ⊗ M ≅ (RHom(X)[A].obj (op K)).obj M) := by
-  obtain ⟨_⟩ := hK
-  obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
-  exact ⟨whiskerRightIso (coefficientDualIsoOfExactPairing Kᘁ K) M ≪≫
-    (MonoidalClosed.ihomObjIsoTensor Kᘁ K M).symm⟩
-
-/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
-
-For a dualizable `K`, an invertible twist `T` — in the `ℓ`-adic formalism a Tate twist
-`Λ(m)_X` — and any `M`, the canonical map `RHom(K, M ⊗ᴸ T) ⟶ RHom(K, M) ⊗ᴸ T` is an
-isomorphism. In particular `RHom(K, Λ_X(m)) ≅ K^∨(m)`. -/
-theorem nonempty_iso_derivedHom_tensor
-    {K T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
-    (_hT : IsInvertible T) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    Nonempty ((RHom(X)[A].obj (op K)).obj (M ⊗ T) ≅ (RHom(X)[A].obj (op K)).obj M ⊗ T) := by
-  obtain ⟨e₁⟩ := nonempty_iso_coefficientDual_tensor hK (M ⊗ T)
-  obtain ⟨e₂⟩ := nonempty_iso_coefficientDual_tensor hK M
-  exact ⟨e₁.symm ≪≫ (α_ _ _ _).symm ≪≫ whiskerRightIso e₂ T⟩
 
 /-- The canonical map `RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`: the transpose of
 `K ⊗ᴸ (RHom(K, M) ⊗ᴸ T) ≅ (K ⊗ᴸ RHom(K, M)) ⊗ᴸ T ⟶ M ⊗ᴸ T`, built from the evaluation
@@ -217,43 +156,13 @@ noncomputable def derivedHomIsoCoefficientDualTensor
       ((λ_ T).symm : T ≅ ((derivedTensor A X).obj (𝟙_ _)).obj T) ≪≫
     derivedHomTensorIso K hT (𝟙_ _)
 
-/-- The derived hom out of a dualizable complex is tensoring with its coefficient dual,
-`RHom(K, M) ≅ K^∨ ⊗ᴸ M`, written with `AlgebraicGeometry.Etale.derivedTensor`
-(`AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`). -/
-theorem nonempty_iso_derivedHom_derivedTensor
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    Nonempty ((RHom(X)[A].obj (op K)).obj M ≅
-      ((derivedTensor A X).obj ((coefficientDual A X).obj (op K))).obj M) :=
-  (nonempty_iso_coefficientDual_tensor hK M).map Iso.symm
-
 section Biduality
 
 variable (A X)
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- The coefficient biduality `K ⟶ K^∨∨`, natural in `K`: the double-dual map
-`CategoryTheory.MonoidalClosed.toIhomIhomUnit` of the braided monoidal closed category
-`D(X_ét)`, for the braiding `DerivedCategory.braidedCategory'` of the derived tensor product. -/
-noncomputable def coefficientDualDoubleDual :
-    𝟭 _ ⟶ (coefficientDual A X).rightOp ⋙ coefficientDual A X :=
-  MonoidalClosed.toIhomIhomNatTrans (𝟙_ _)
-
 variable {A X}
-
-lemma coefficientDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (coefficientDualDoubleDual A X).app K = MonoidalClosed.toIhomIhomUnit K :=
-  rfl
-
-/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
-This is also the biduality clause of blueprint `thm-sf-dual-perfect`.
-
-For a dualizable `K` the coefficient biduality `K ⟶ K^∨∨` is an isomorphism. -/
-theorem isIso_coefficientDualDoubleDual_app
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
-    IsIso ((coefficientDualDoubleDual A X).app K) :=
-  MonoidalClosed.isIso_toIhomIhomUnit_of_isDualizable hK
 
 end Biduality
 

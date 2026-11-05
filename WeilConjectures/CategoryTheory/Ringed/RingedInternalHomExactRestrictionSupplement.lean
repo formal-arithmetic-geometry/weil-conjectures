@@ -150,39 +150,6 @@ open CategoryTheory.Pretriangulated.Opposite
 
 namespace CategoryTheory
 
-private theorem ringedSite_pushforward_limits
-    {C D : Type u} [SmallCategory C] [SmallCategory D]
-    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
-    {G : C ⥤ D} [Functor.IsContinuous G J K]
-    {S : Sheaf J RingCat.{u}} {R : Sheaf K RingCat.{u}}
-    (φ : S ⟶ (G.sheafPushforwardContinuous RingCat.{u} J K).obj R) :
-    PreservesFiniteLimits (SheafOfModules.pushforward.{u} φ) := by
-  let T := SheafOfModules.forget.{u} S ⋙ PresheafOfModules.toPresheaf S.obj
-  have : PreservesFiniteLimits (SheafOfModules.pushforward.{u} φ ⋙ T) := by
-    change PreservesFiniteLimits
-      ((SheafOfModules.forget.{u} R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙
-        (Functor.whiskeringLeft _ _ _).obj G.op)
-    infer_instance
-  exact preservesFiniteLimits_of_reflects_of_preserves _ T
-
-private theorem ringedSite_pushforward_colimits
-    {C D : Type u} [SmallCategory C] [SmallCategory D]
-    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
-    {G : C ⥤ D} [Functor.IsContinuous G J K] [G.IsCocontinuous J K]
-    {S : Sheaf J RingCat.{u}} {R : Sheaf K RingCat.{u}}
-    (φ : S ⟶ (G.sheafPushforwardContinuous RingCat.{u} J K).obj R) :
-    PreservesFiniteColimits (SheafOfModules.pushforward.{u} φ) := by
-  let H := G.sheafPushforwardContinuous AddCommGrpCat.{u} J K
-  have : PreservesColimitsOfSize.{u, u} H :=
-    (G.sheafAdjunctionCocontinuous AddCommGrpCat.{u} J K).leftAdjoint_preservesColimits
-  let T := SheafOfModules.toSheaf.{u} S
-  have : PreservesFiniteColimits (SheafOfModules.pushforward.{u} φ ⋙ T) := by
-    change PreservesFiniteColimits (SheafOfModules.toSheaf.{u} R ⋙ H)
-    infer_instance
-  have : ReflectsFiniteColimits T :=
-    { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
-  exact preservesFiniteColimits_of_reflects_of_preserves _ T
-
 set_option maxHeartbeats 400000 in
 -- Descending the trifunctor comparison requires several large tensor instances.
 set_option backward.isDefEq.respectTransparency true in

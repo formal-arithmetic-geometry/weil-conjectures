@@ -50,24 +50,6 @@ variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ₁ ⟶ Λ₂) [IsMonHom a] (b : Λ₂ ⟶ Λ₃) [IsMonHom b]
   {X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- The restricted base change map with coefficients `Λ₃` is a split monomorphism at `K` as soon
-as it is one at `T_b (T_a K₀)` for some `K₀` with `T_b (T_a K₀) ≅ K`. -/
-lemma isSplitMono_map_baseChangeMap_app_of_iso_extendScalars (sq : CommSq g' p' p g)
-    (i : Z ⟶ Y')
-    (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ₁ X)))
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ₃ X))}
-    (e : Nonempty ((Mod.extendScalars (coefficientMap b X)).leftDerivedFunctor.obj
-        ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.obj K₀) ≅ K))
-    (h : IsSplitMono ((L((i)^*⟦Λ₃⟧)).map ((Adjunction.exchangeRight
-      (derivedUpperStarLowerStarAdjunction Λ₃ p) (derivedUpperStarLowerStarAdjunction Λ₃ p')
-      (pullbackSquareComparison Λ₃ sq)).app
-        ((Mod.extendScalars (coefficientMap b X)).leftDerivedFunctor.obj
-          ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.obj K₀))))) :
-    IsSplitMono ((L((i)^*⟦Λ₃⟧)).map ((Adjunction.exchangeRight
-      (derivedUpperStarLowerStarAdjunction Λ₃ p) (derivedUpperStarLowerStarAdjunction Λ₃ p')
-      (pullbackSquareComparison Λ₃ sq)).app K)) :=
-  Arrow.isSplitMono_of_iso (Arrow.isoMapApp _ _ e.some).symm
-
 end Transport
 
 end AlgebraicGeometry.ProEtale.CondensedRing

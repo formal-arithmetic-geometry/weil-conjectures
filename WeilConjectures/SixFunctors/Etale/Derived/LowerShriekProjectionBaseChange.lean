@@ -161,28 +161,12 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap' [HasSm
     Functor.whiskerRight (derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv R((c'.g)_*[A]) ≫
     (Functor.associator _ _ _).hom
 
-/-- The component `Lg^* Rf_!(c) T ⟶ Rf'_!(c') Lg'^* T` of
-`rightDerivedLowerShriekOfCompactificationBaseChangeMap'`, with source and target written without
-composite functors. -/
-noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMapApp [HasSmallSiteSheafify A]
-    (T : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    L((g)^*[A]).obj ((Rf_!(c)[A]).obj T) ⟶ (Rf_!(c')[A]).obj (L((g')^*[A]).obj T) :=
-  (rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app T
-
 lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app [HasSmallSiteSheafify A]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app K =
       (derivedBaseChangeMap A hp).app (D((c.i)_!open[A]).obj K) ≫
         R((c'.g)_*[A]).map ((derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.app K) := by
   simp [rightDerivedLowerShriekOfCompactificationBaseChangeMap']
-
-lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap_eq [HasSmallSiteSheafify A]
-    (sq : IsPullback g' f' f g) :
-    rightDerivedLowerShriekOfCompactificationBaseChangeMap A sq c =
-      rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c (c.ofIsPullback sq)
-        (pullback.fst c.g g) (c.isPullback_i_ofIsPullback sq)
-        (IsPullback.of_hasPullback c.g g).toCommSq :=
-  rfl
 
 section
 
@@ -192,24 +176,6 @@ variable [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-
-omit [HasSmallSiteSheafify A] in
-/-- Restating an intertwining property of a morphism `κ : Rf_!(c₁) ⟶ Rf_!(c₂)` with the projection
-maps. Specialising this generic statement, rather than using a specialised proof directly, keeps
-the instance terms of the projection maps identical to those of other generic statements. -/
-lemma projectionMapOfCompactification_comp_of_forall {X Y : Scheme.{u}} {f : X ⟶ Y}
-    (c₁ c₂ : Compactification f) (κ : Rf_!(c₁)[A] ⟶ Rf_!(c₂)[A])
-    (h : ∀ (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
-      (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)),
-      ((projectionMapOfCompactification A c₁).app K).app L ≫
-        κ.app (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) =
-      ((-⊗ᴸ-(Y)[A]).map (κ.app K)).app L ≫ ((projectionMapOfCompactification A c₂).app K).app L)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((projectionMapOfCompactification A c₁).app K).app L ≫
-        κ.app (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) =
-      ((-⊗ᴸ-(Y)[A]).map (κ.app K)).app L ≫ ((projectionMapOfCompactification A c₂).app K).app L :=
-  h K L
 
 /-- **The projection map commutes with compactly supported base change**, for a compactification
 `c'` of the base change lying over `c`. -/
@@ -293,26 +259,6 @@ theorem projectionMapOfCompactification_baseChange
         ((projectionMapOfCompactification A c').app (L((g')^*[A]).obj K)).app
           (L((g)^*[A]).obj L) :=
   projectionMapOfCompactification_baseChange' A sq c c' q hi hp K L
-
-/-- `projectionMapOfCompactification_baseChange` with the base change map written through its
-plain-typed components. -/
-theorem projectionMapOfCompactification_baseChange_app
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    L((g)^*[A]).map (((projectionMapOfCompactification A c).app K).app L) ≫
-        rightDerivedLowerShriekOfCompactificationBaseChangeMapApp A c c' q hi hp
-          (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) ≫
-        (Rf_!(c')[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app
-          (L((f)^*[A]).obj L)) ≫
-        (Rf_!(c')[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
-          (derivedSquareUpperStarIsoInvApp A sq L)) =
-      ((leftDerivedUpperStarTensorComparison A g).app ((Rf_!(c)[A]).obj K)).app L ≫
-        ((-⊗ᴸ-(Y')[A]).map (rightDerivedLowerShriekOfCompactificationBaseChangeMapApp A c c' q
-          hi hp K)).app (L((g)^*[A]).obj L) ≫
-        ((projectionMapOfCompactification A c').app (L((g')^*[A]).obj K)).app
-          (L((g)^*[A]).obj L) :=
-  projectionMapOfCompactification_baseChange' A sq c c' q hi hp K L
-
 
 /-- `projectionMapOfCompactification_baseChange` followed by a comparison `κ : Rf'_!(c') ⟶ Rf'_!(e)`
 intertwining the projection maps. -/

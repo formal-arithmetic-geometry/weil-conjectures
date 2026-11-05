@@ -234,15 +234,6 @@ theorem isIso_dualizingComplexTensorMap_of_etale {V W : Scheme.{u}} (e : V ⟶ W
     (isInvertible_dualizingComplex_of_etale Λ _) K
     (isIso_dualizingComplexTensorMap_of_isOpenImmersion Λ _ K)
 
-/-- For an étale morphism `e`, the tensor map `Re^! M ⊗ᴸ Le^* N ⟶ Re^!(M ⊗ᴸ N)` is an
-isomorphism. -/
-theorem isIso_rightDerivedUpperShriekTensorMap_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
-    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e]
-    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (rightDerivedUpperShriekTensorMap e M N) :=
-  isIso_lowerShriekRightAdjointTensorMap_of_forall (rightDerivedUpperShriekAdjunction Λ e)
-    (projectionMapAssociativity Λ e) (isIso_dualizingComplexTensorMap_of_etale Λ e) M N
-
 variable {Λ} in
 /-- **Smooth duality for étale morphisms** (the étale case of the proof of blueprint
 `thm-asd-smooth-tensor`): for every étale `e` admitting a compactification, the canonical tensor

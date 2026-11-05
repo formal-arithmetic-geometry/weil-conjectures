@@ -58,13 +58,6 @@ orthogonality, and the inherited shifts give the two shift axioms. -/
   exact ObjectProperty.HasInducedTStructure.mk'
     (fun X hX m ↦ pbcIntegralCanonicalTruncations_mem T l E ⟨X, hX⟩ m)
 
-/-- The induced standard integral t-structure, using Mathlib's actual construction.
-Source: order 1431 (blueprint: prop-weil-pbc-integral-tstructure). -/
-def pbcIntegralTStructure :=
-  ObjectProperty.tStructure
-    (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))
-    (pbcAmbientTStructure T l E)
-
 set_option linter.unnecessarySimpa false in
 /-- The inherited shifts are linear for the actual constant-section scalar action.
 Source: order 1431 (blueprint: prop-weil-pbc-integral-tstructure).
@@ -81,87 +74,5 @@ scalar equation and gives it in the full subcategory. -/
   refine ⟨fun f r ↦ P.ι.map_injective ?_⟩
   simpa only [Functor.map_smul, Functor.comp_map] using
     (shiftFunctor P.FullSubcategory n ⋙ P.ι).map_smul r f
-
-/-- The standard integral structure is bounded, its heart is cohomology in degree zero,
-and its canonical truncations are the ambient ones. Uniformizer torsion is preserved
-with the same exponent. Source: order 1431; BBD 1.3.3
-(blueprint: prop-weil-pbc-integral-tstructure).
-Proof: the uniformly bounded local finite models give a finite cohomology interval
-for each complete object. This proves boundedness. The induced aisle and coaisle are
-ambient degree bounds, so their intersection says precisely that all nonzero-degree
-cohomology vanishes. The ambient canonical truncation triangles lie in the subcategory;
-uniqueness of truncation triangles supplies the two natural isomorphisms. On the domain
-of pbc_integral_truncations those ambient truncations are the specified Roos limits,
-so these identifications also compare the tower constructions. For torsion, compose
-p^N id on a lower truncation with its counit, or precompose p^N id on an upper truncation
-with its unit. Bilinearity makes the resulting map zero when p^N id_K is zero. The
-respective adjunctions are injective on Hom, so both truncated identities are killed
-by that same p^N. -/
-theorem pbc_integral_tstructure :
-    (pbcIntegralTStructure T l E).bounded = ⊤ ∧
-    (∀ K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E),
-      (pbcIntegralTStructure T l E).heart K ↔
-        ∀ i : ℤ, i ≠ 0 → IsZero ((DerivedCategory.homologyFunctor _ i).obj K.obj)) ∧
-    (∀ m : ℤ,
-      Nonempty ((pbcIntegralTStructure T l E).truncLE m ⋙
-          (ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))) ≅
-        (ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))) ⋙
-          (pbcAmbientTStructure T l E).truncLE m) ∧
-      Nonempty ((pbcIntegralTStructure T l E).truncGE m ⋙
-          (ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))) ≅
-        (ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))) ⋙
-          (pbcAmbientTStructure T l E).truncGE m)) ∧
-    ∀ (K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E))
-      (N : ℕ), 1 ≤ N → (pbcUniformizer l E) ^ N • 𝟙 K = 0 →
-      ∀ m : ℤ,
-        (pbcUniformizer l E) ^ N •
-          𝟙 (((pbcIntegralTStructure T l E).truncLE m).obj K) = 0 ∧
-        (pbcUniformizer l E) ^ N •
-          𝟙 (((pbcIntegralTStructure T l E).truncGE m).obj K) = 0 := by
-  let P : ObjectProperty (PbcCompletedDerived T (pbcIntegralDatum l E)) :=
-    PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)
-  let t := pbcIntegralTStructure T l E
-  let s := pbcAmbientTStructure T l E
-  refine ⟨?_, ?_, ?_, ?_⟩
-  · apply le_antisymm le_top
-    intro K _
-    have hl : IsUnit (l : Γ(T, ⊤)) :=
-      T.toRingedSpace.isUnit_of_isUnit_germ ⊤ _ (by
-        intro x hx
-        simpa using hInv.out x)
-    obtain ⟨a, b, hab, ha, hb⟩ :=
-      (((integralStratifiedPerfectCharacterization T l E hDim.out hl K.obj).2).mp
-        (((integralStratifiedPerfectCharacterization T l E hDim.out hl K.obj).1).mp
-          K.property)).1
-    exact ⟨⟨a, (ObjectProperty.tStructure_isGE_iff P s K a).mpr ha⟩,
-      ⟨b, (ObjectProperty.tStructure_isLE_iff P s K b).mpr hb⟩⟩
-  · intro K
-    change (P.tStructure s).heart K ↔ _
-    rw [(P.tStructure s).mem_heart_iff, ObjectProperty.tStructure_isLE_iff,
-      ObjectProperty.tStructure_isGE_iff]
-    change K.obj.IsLE 0 ∧ K.obj.IsGE 0 ↔ _
-    rw [DerivedCategory.isLE_iff, DerivedCategory.isGE_iff]
-    constructor
-    · rintro ⟨hle, hge⟩ i hi
-      rcases lt_or_gt_of_ne hi with hi | hi
-      · exact hge i hi
-      · exact hle i hi
-    · intro h
-      exact ⟨fun i hi ↦ h i (by omega), fun i hi ↦ h i (by omega)⟩
-  · have : P.ι.IsTExact t s :=
-      { isLE := fun K n h ↦ (ObjectProperty.tStructure_isLE_iff P s K n).mp h
-        isGE := fun K n h ↦ (ObjectProperty.tStructure_isGE_iff P s K n).mp h }
-    intro m
-    exact ⟨⟨P.ι.eTruncLTIso t s (m + 1 : ℤ)⟩, ⟨P.ι.eTruncGEIso t s m⟩⟩
-  · intro K N hN hK m
-    change (pbcUniformizer l E) ^ N • 𝟙 ((t.truncLE m).obj K) = 0 ∧
-      (pbcUniformizer l E) ^ N • 𝟙 ((t.truncGE m).obj K) = 0
-    constructor
-    · apply t.to_truncLE_obj_ext
-      simpa using
-        congrArg (fun f ↦ (t.truncLEι m).app K ≫ f) hK
-    · apply t.from_truncGE_obj_ext
-      simpa using
-        congrArg (fun f ↦ f ≫ (t.truncGEπ m).app K) hK
 
 end AlgebraicGeometry.Scheme

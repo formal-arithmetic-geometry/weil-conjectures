@@ -32,11 +32,4 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (X : Scheme.{u}) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
   [IsCommMonObj Λ]
 
-/-- The derived category of module objects over a condensed coefficient ring on `X_proét` has
-countable products: countable products of module objects are exact. -/
-instance hasCountableProducts_derivedCategory_mod :
-    HasCountableProducts (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) :=
-  derivedCategory_hasCountableProducts _
-
 end AlgebraicGeometry.ProEtale.CondensedRing

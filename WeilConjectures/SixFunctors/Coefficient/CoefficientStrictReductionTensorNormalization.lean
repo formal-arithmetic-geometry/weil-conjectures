@@ -25,18 +25,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Reduction admits a tensor comparison computed by a single strict chain map.
-Source: Stacks 07A4, proof of lemma-pullback-tensor-product, with the sequence
-projection construction of 0941 and the K-flat resolution of 06YS.
-Proof: first choose the strict comparison supplied by the sequence projection,
-then apply its simultaneous representative normalization on arbitrary flat-term
-K-flat inputs. This gives precisely the defining clauses of the conclusion.
-(blueprint: lem-coef-strict-reduction-tensor-normalization). -/
-theorem coefficientStrictReductionTensorNormalization
-    (R : CoefficientDerivedSystemReduction l E W) :
-    ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅
-      R.reduction.prod R.reduction ⋙ R.systemClosed.tensor,
-      CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ } := by
-  exact coefficientStrictReductionTensorNormalization_of l E W R
-
 end WeilConjectures

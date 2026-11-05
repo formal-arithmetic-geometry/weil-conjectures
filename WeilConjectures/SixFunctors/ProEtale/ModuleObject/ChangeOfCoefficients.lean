@@ -97,10 +97,6 @@ noncomputable abbrev coefficientMap (X : Scheme.{u}) :
   (upperStarFromPoint X).map a
 
 omit [MonObj Λ] [MonObj Λ'] [IsMonHom a] in
-lemma coefficientMap_id (X : Scheme.{u}) : coefficientMap (𝟙 Λ) X = 𝟙 _ :=
-  (upperStarFromPoint X).map_id Λ
-
-omit [MonObj Λ] [MonObj Λ'] [IsMonHom a] in
 lemma coefficientMap_comp {Λ'' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     (b : Λ' ⟶ Λ'') (X : Scheme.{u}) :
     coefficientMap (a ≫ b) X = coefficientMap a X ≫ coefficientMap b X :=
@@ -260,22 +256,6 @@ section OpenImmersion
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Restriction of scalars commutes with the extension by zero along an open immersion:
-`j_!^Λ' ⋙ Res_{a_X} ≅ Res_{a_U} ⋙ j_!^Λ`, by the naturality of the projection formula and the
-square of the coefficient morphisms `α_j`. -/
-noncomputable def comapOpenImmersionLowerShriekIso :
-    (j)_!open⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X) ≅
-      Mod.comap (coefficientMap a U) ⋙ (j)_!open⟦Λ⟧ :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (Mod.comap (condensedPullbackHom Λ' j))
-      ((ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1}
-        j).projectionFormula.mapModLeftComapIso (coefficientMap a X)) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((Mod.comapComp _ _).symm ≪≫
-      Mod.comapCongr (map_coefficientMap_comp_condensedPullbackHom a j) ≪≫
-      Mod.comapComp _ _) _ ≪≫
-    Functor.associator _ _ _
-
 /-- **(Shriek) for an open immersion**, underived: `j_!^Λ ⋙ Ext_{a_X} ≅ Ext_{a_U} ⋙ j_!^Λ'`, the
 conjugate of `comapUpperStarIso` along `j_! ⊣ j^*` and `Ext ⊣ Res`. -/
 noncomputable def openImmersionShriekIso :
@@ -308,30 +288,6 @@ section LowerShriek
 
 variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-
-/-- **(Shriek)**: the canonical comparison `Rf_!^Λ ⋙ T^Y ⟶ T^X ⋙ Rf_!^Λ'` for
-`Rf_! = Di_! ⋙ Rg_*` attached to the chosen compactification `X ⟶[i] Z ⟶[g] Y` of `f`: the
-derived (Push) comparison for the proper `g` followed by the derived (Shriek) isomorphism for
-the open immersion `i`. -/
-noncomputable def derivedLowerShriekHom :
-    R(f)_!⟦Λ⟧ ⋙ L(Mod.extendScalars (coefficientMap a Y)) ⟶
-      L(Mod.extendScalars (coefficientMap a X)) ⋙ R(f)_!⟦Λ'⟧ :=
-  (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft D(((HasCompactification.compactification f).i)_!open⟦Λ⟧)
-      (derivedPushHom a (HasCompactification.compactification f).g) ≫
-    (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight
-      (derivedOpenImmersionShriekIso a (HasCompactification.compactification f).i).hom
-      R(((HasCompactification.compactification f).g)_*⟦Λ'⟧) ≫
-    (Functor.associator _ _ _).hom
-
-/-- **(Shriek)** is an isomorphism whenever (Push) is one for the proper part `g` of the chosen
-compactification: its open immersion contributes a formal isomorphism. -/
-instance isIso_derivedLowerShriekHom
-    [IsIso (derivedPushHom a (HasCompactification.compactification f).g)] :
-    IsIso (derivedLowerShriekHom a f) := by
-  unfold derivedLowerShriekHom
-  infer_instance
 
 end LowerShriek
 

@@ -1030,11 +1030,4 @@ noncomputable def moduleUnit (f : RingedPullback R S) (k : Comparison f) :
 
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-/-- The termwise lift of the normalized unit map, from R[0] to S[0].
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
-noncomputable def unit (f : RingedPullback R S) (k : Comparison f) :
-    (pull f).obj (𝟙_ (Complex R)) ≅ 𝟙_ (Complex S) :=
-  (HomologicalComplex.singleMapHomologicalComplex f.L (.up ℤ) 0).app (𝟙_ (Modules R)) ≪≫
-    (HomologicalComplex.single (Modules S) (.up ℤ) 0).mapIso (moduleUnit f k)
-
 end CategoryTheory.CochainPullback

@@ -105,11 +105,6 @@ lemma extendChangeHom_comp :
   rw [← cancel_epi (extendπ φ M), extendπ_extendChangeHom_assoc, extendπ_extendChangeHom,
     extendπ_extendChangeHom, comp_whiskerRight_assoc]
 
-lemma extendChangeHom_id :
-    extendChangeHom (𝟙 S) (Category.comp_id φ) M = 𝟙 _ := by
-  rw [← cancel_epi (extendπ φ M), extendπ_extendChangeHom, id_whiskerRight, Category.id_comp,
-    Category.comp_id]
-
 end Change
 
 section Colimit

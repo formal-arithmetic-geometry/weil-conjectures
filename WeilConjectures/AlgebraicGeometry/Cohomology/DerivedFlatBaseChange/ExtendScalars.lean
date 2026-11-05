@@ -28,12 +28,4 @@ namespace AlgebraicGeometry
 
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-/-- For flat `g` between affine schemes, the derived extension of global scalars is induced by the
-exact functor `Γ(T, ⊤) ⊗_{Γ(S, ⊤)} -`. -/
-noncomputable def mixedGlobalExtensionIsoOfFlat {T S : Scheme.{u}} [IsAffine S] [IsAffine T]
-    (g : T ⟶ S) [Flat g] :
-    mixedGlobalExtension g ≅ (ModuleCat.extendScalars.{u, u, u} g.appTop.hom).mapDerivedCategory :=
-  (mixedGlobalExtensionAdjunction g).leftAdjointUniq
-    (ModuleCat.extendRestrictScalarsAdj.{u, u, u} g.appTop.hom).mapDerivedCategoryAdjunction
-
 end AlgebraicGeometry

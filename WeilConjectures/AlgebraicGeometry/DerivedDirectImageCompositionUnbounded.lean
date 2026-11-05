@@ -35,16 +35,4 @@ variable {X Y Z : Scheme.{u₂}}
   [HasDerivedCategory.{wY₂} (SheafOfModules.{u₂} (moduleRings Y.toRingedSpace))]
   [HasDerivedCategory.{wZ₂} (SheafOfModules.{u₂} (moduleRings Z.toRingedSpace))]
 
-/-- The derived direct image of a composite is canonically naturally isomorphic to the
-composite of the derived direct images. Source: Stacks Project, Lemma 20.28.2 (Tag 0D5T),
-using the derived pullback composition and uniqueness of right adjoints
-(blueprint: lem-pc-derived-direct-image-composition). -/
-theorem derivedDirectImageComposition (p : X ⟶ Y) (f : Y ⟶ Z) :
-    Nonempty
-      (schemeDerivedDirectImage (p ≫ f) ≅
-        schemeDerivedDirectImage p ⋙ schemeDerivedDirectImage f) := by
-  obtain ⟨e, _⟩ := RingedSpace.exists_derivedModuleDirectImageComposition
-    p.toLRSHom.toShHom f.toLRSHom.toShHom
-  exact ⟨e.symm⟩
-
 end AlgebraicGeometry

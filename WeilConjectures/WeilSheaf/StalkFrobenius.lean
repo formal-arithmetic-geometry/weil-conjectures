@@ -26,7 +26,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 section GlobalSections
 
-
 /-- The global sections of `(e¹)⁻¹_* N` and of `(e⁻¹)_* N` are identified compatibly with the
 identification `(e¹)⁻¹_* N ≅ (e⁻¹)_* (e⁰)⁻¹_* N ≅ (e⁻¹)_* N` defining the first iterate of a
 Weil structure. -/
@@ -171,80 +170,7 @@ lemma globalSectionsToStalkObj_comp_stalkAt_iso
     globalSectionsToStalkObj_comp_stalkObjFrobeniusPowIso_hom,
     reassoc_of% globalSectionsLowerStarIso_inv_comp_frobeniusPowIso_one]
 
-omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-private theorem toModuleCat_map_comp_apply {M N P : WeilCoefficients.{u} l} (f : M ⟶ N)
-    (g : N ⟶ P) (x : (WeilCoefficients.toModuleCat l).obj M) :
-    ((WeilCoefficients.toModuleCat l).map (f ≫ g)).hom x =
-      ((WeilCoefficients.toModuleCat l).map g).hom
-        (((WeilCoefficients.toModuleCat l).map f).hom x) := by
-  rw [Functor.map_comp]
-  rfl
-
-omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-private theorem linearEquivOfIso_apply {M N : WeilCoefficients.{u} l} (e : M ≅ N)
-    (x : (WeilCoefficients.toModuleCat l).obj M) :
-    WeilCoefficients.linearEquivOfIso e x = ((WeilCoefficients.toModuleCat l).map e.hom).hom x :=
-  rfl
-
-private theorem globalSections_frobenius_eq [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    F.globalSections.frobenius = WeilCoefficients.linearEquivOfIso
-      ((ProEtale.globalSectionsLowerStarIso _
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).symm.app F.obj.carrier.X ≪≫
-        (Sheaf.Γ _ _).mapIso ((ProEtale.AdicSheaf.forget _).mapIso F.obj.str)) :=
-  rfl
-
-private theorem stalkAt_frobenius_eq' (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    (F.stalkAt s m hs).frobenius = WeilCoefficients.linearEquivOfIso
-      ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
-        F.stalkObjFrobeniusPowIso m s) :=
-  rfl
-
-/-- The restriction of global sections to the stalk at a geometric point `s` with
-`s ≫ Fr = σ ≫ s`, for instance a point over a `k₀`-rational point, intertwines the Frobenius of
-`Γ(X̄, F)` with the Frobenius of `F_s` relative to `k₀`:
-
-```
-          Fr
-  Γ(X̄, F) ---> Γ(X̄, F)
-     |            |
-     v            v
-    F_s  -----> F_s
-          Fr
-```
--/
-theorem globalSectionsToStalkObj_frobenius [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom =
-      (specGeometricFrobenius k₀ ^ 1).hom ≫ s)
-    (a : F.globalSections.carrier) :
-    ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom
-        (F.globalSections.frobenius a) =
-      (F.stalkAt s 1 hs).frobenius
-        (((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom a) := by
-  -- the intermediate equations are stated with explicit arguments to keep the kernel fast
-  let eΓ := (ProEtale.globalSectionsLowerStarIso _
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).symm.app F.obj.carrier.X ≪≫
-      (Sheaf.Γ _ _).mapIso ((ProEtale.AdicSheaf.forget _).mapIso F.obj.str)
-  let es := (F.stalkObjSpecFrobeniusPowIso 1 s).symm ≪≫
-    eqToIso (congrArg F.stalkObj hs.symm) ≪≫ F.stalkObjFrobeniusPowIso 1 s
-  have h₀ := toModuleCat_map_comp_apply eΓ.hom (F.globalSectionsToStalkObj s) a
-  have h₁ := congrArg (fun g ↦ ((WeilCoefficients.toModuleCat l).map g).hom a)
-    (globalSectionsToStalkObj_comp_stalkAt_iso F s hs)
-  have h₂ := toModuleCat_map_comp_apply (F.globalSectionsToStalkObj s) es.hom a
-  have e₁ := (LinearEquiv.congr_fun (globalSections_frobenius_eq F) a).trans
-    (linearEquivOfIso_apply eΓ a)
-  have e₂ := (LinearEquiv.congr_fun (stalkAt_frobenius_eq' F s 1 hs)
-    (((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom a)).trans
-      (linearEquivOfIso_apply es
-        (((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom a))
-  exact (congrArg ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom
-    e₁).trans (h₀.symm.trans (h₁.symm.trans (h₂.trans e₂.symm)))
-
 end GlobalSections
-
 
 section Transport
 

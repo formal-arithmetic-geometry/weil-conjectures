@@ -123,50 +123,6 @@ theorem map_supportedRestrictionIntegral_comp
     boundedConstructibleUpperShriekExtendScalars
   with_reducible exact h
 
-/-- **Transport of the vanishing of the supported restriction from `𝒪_E` to `E`**: if the stalk
-along `z : T ⟶ Fix(c)` of the extension of scalars to `E` of the `𝒪_E`-supported restriction of
-`P` vanishes, so does the stalk of the `E`-supported restriction of `E ⊗ P`. This uses the `f^!`
-clause of blueprint `sk-prop-scalar-six` (`isIso_boundedConstructibleUpperShriekExtendScalars`)
-for the support `c`. -/
-theorem upperStar_map_supportedRestrictionE_eq_zero_of_supportedRestrictionIntegral
-    {T : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
-    [IsSeparated T.hom] (z : T ⟶ F.F)
-    (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)
-    (h : (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ z).map
-      ((boundedConstructibleExtendScalars F.F.left ℓ E).map
-        (F.supportedRestrictionIntegral E P)) = 0) :
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ z).map
-      (F.supportedRestrictionE E ((boundedConstructibleExtendScalars (X ⨯ X).left ℓ E).obj P)) =
-        0 := by
-  have := isIso_boundedConstructibleUpperShriekExtendScalars ℓ E c.support
-  have h1 := congrArg (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ z).map
-    (F.map_supportedRestrictionIntegral_comp E P)
-  simp only [Functor.map_comp, h, Limits.zero_comp] at h1
-  exact (Preadditive.IsIso.comp_left_eq_zero _ _).1
-    ((Preadditive.IsIso.comp_left_eq_zero _ _).1 h1.symm)
-
-/-- **Transport of the vanishing of a stalk of the supported restriction from `𝒪_E` to `E`**: if
-the stalk along `z : T ⟶ Fix(c)` of the `𝒪_E`-supported restriction of `P` vanishes, so does the
-stalk of the `E`-supported restriction of `E ⊗ P`. -/
-theorem upperStar_map_supportedRestrictionE_eq_zero_of_upperStar_map_supportedRestrictionIntegral
-    {T : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
-    [IsSeparated T.hom] (z : T ⟶ F.F)
-    (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)
-    (h : (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ z).map
-      (F.supportedRestrictionIntegral E P) = 0) :
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ z).map
-      (F.supportedRestrictionE E ((boundedConstructibleExtendScalars (X ⨯ X).left ℓ E).obj P)) =
-        0 := by
-  refine F.upperStar_map_supportedRestrictionE_eq_zero_of_supportedRestrictionIntegral E z P ?_
-  have h1 := NatIso.map_eq_zero_of_map_eq_zero (boundedConstructibleUpperStarExtendScalarsIso ℓ E z)
-    (f := F.supportedRestrictionIntegral E P) (by
-      dsimp only [Functor.comp_map]
-      refine (congrArg (boundedConstructibleExtendScalars T.left ℓ E).map ?_).trans
-        (Functor.map_zero _ _ _)
-      with_reducible exact h)
-  dsimp only [Functor.comp_map] at h1
-  with_reducible exact h1
-
 end Correspondence.FixedLocus
 
 end AlgebraicGeometry.ProEtale.CondensedRing

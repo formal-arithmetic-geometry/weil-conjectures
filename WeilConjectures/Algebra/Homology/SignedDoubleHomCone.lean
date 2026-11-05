@@ -349,63 +349,10 @@ abbrev Modules (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{max u v w, r, v, u}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
-/-- Integer cochain complexes in the recorded module category.
-Source: Stacks 0A8X (auxiliary; not a blueprint node). -/
-abbrev Complex (R : Sheaf J CommRingCat.{r}) := CochainComplex (Modules.{u, v, w, r} R) ℤ
-
 /-- Binary biproducts computed from the existing sectionwise products. This supplies
 cones without any sheafification or injectivity assumption.
 Source: Stacks 014E (auxiliary; not a blueprint node). -/
 noncomputable instance moduleBinaryBiproducts : HasBinaryBiproducts (Modules.{u, v, w, r} R) :=
   HasBinaryBiproducts.of_hasBinaryProducts
-
-/-- The specified product projection of the existing Hom complex, with an explicit
-index equality for reindexing.
-Source: Stacks 0A8X (auxiliary; not a blueprint node). -/
-noncomputable def proj (K I : Complex.{u, v, w, r} R) (n a b : ℤ) (h : a + n = b) :
-    (homComplex K I).X n ⟶ SheafOfModules.homObj (K.X a) (I.X b) :=
-  homComplexπ K I n a b h
-
-/-- The existing product universal property, with the same projections as `proj`.
-Source: Stacks 0A8X (auxiliary; not a blueprint node). -/
-noncomputable def productLimit (K I : Complex.{u, v, w, r} R) (n : ℤ) :
-    IsLimit (Fan.mk ((homComplex K I).X n) (fun a : ℤ ↦ proj K I n a (a + n) rfl)) :=
-  homComplexIsLimit K I n
-
-/-- The unsigned graded inclusion X^q into T(Cone u)^q, extending maps by zero
-on the A[1] summand. Its data come from the product universal property.
-Source: Stacks 014E and 0A8X (auxiliary; not a blueprint node). -/
-noncomputable def inB (I : Complex.{u, v, w, r} R)
-    {A B : Complex.{u, v, w, r} R} (f : A ⟶ B) (q : ℤ) :
-    (homComplex B I).X q ⟶ (homComplex (CochainComplex.mappingCone f) I).X q :=
-  Fan.IsLimit.lift (productLimit _ I q) (fun a : ℤ ↦
-    proj B I q a (a + q) rfl ≫
-      SheafOfModules.homObjMap (HomologicalComplex.homotopyCofiber.sndX f a) (𝟙 _))
-
-/-- The unsigned graded inclusion Y^r into T(Cone u)^(r+1), extending maps by
-zero on the B summand.
-Source: Stacks 014E and 0A8X (auxiliary; not a blueprint node). -/
-noncomputable def inA (I : Complex.{u, v, w, r} R)
-    {A B : Complex.{u, v, w, r} R} (f : A ⟶ B) (t : ℤ) :
-    (homComplex A I).X t ⟶ (homComplex (CochainComplex.mappingCone f) I).X (t + 1) :=
-  Fan.IsLimit.lift (productLimit _ I (t + 1)) (fun a : ℤ ↦
-    proj A I t (a + 1) (a + (t + 1)) (by omega) ≫
-      SheafOfModules.homObjMap
-        (HomologicalComplex.homotopyCofiber.fstX f a (a + 1) rfl) (𝟙 _))
-
-/-- The cone map induced by a commutative square, with no homotopy correction.
-Source: Stacks 014E (auxiliary; not a blueprint node). -/
-noncomputable abbrev coneMap {a b : Arrow (Complex.{u, v, w, r} R)} (h : a ⟶ b) :=
-  CochainComplex.mappingCone.map a.hom b.hom h.left h.right h.w.symm
-
-private lemma map_add_left {A A' B B' : Modules.{u, v, w, r} R}
-    (f g : A' ⟶ A) (h : B ⟶ B') :
-    SheafOfModules.homObjMap (R := R) (f + g) h =
-      SheafOfModules.homObjMap f h + SheafOfModules.homObjMap g h :=
-  SheafOfModules.hom_ext (PresheafOfModules.homObjMap_add_left f.val g.val h.val)
-
-private lemma map_zero_left {A A' B B' : Modules.{u, v, w, r} R} (g : B ⟶ B') :
-    SheafOfModules.homObjMap (R := R) (0 : A' ⟶ A) g = 0 :=
-  SheafOfModules.hom_ext (PresheafOfModules.homObjMap_zero_left g.val)
 
 end CategoryTheory.SignedDoubleHomCone

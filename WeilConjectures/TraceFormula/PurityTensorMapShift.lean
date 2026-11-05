@@ -166,22 +166,4 @@ lemma isIso_upperShriekUnitTensorMap_of_triangEnvelope (f : X ⟶ Y)
     IsIso (upperShriekUnitTensorMap ℓ f K) :=
   (P.triangEnvelope_le_iff (Q := (upperShriekUnitTensorMapNatTrans ℓ f).isoLocus)).2 h K hK
 
-/-- **Two out of three for the purity map**: for a distinguished triangle
-`K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` of `Dᵇc(Y)⟦ℚ̄_ℓ⟧`, if `γ_{f,K₁}` and `γ_{f,K₃}` are isomorphisms, so is
-`γ_{f,K₂}`. -/
-lemma isIso_upperShriekUnitTensorMap_of_distinguished (f : X ⟶ Y)
-    (T : Pretriangulated.Triangle (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
-    (hT : T ∈ Pretriangulated.distinguishedTriangles)
-    [IsIso (upperShriekUnitTensorMap ℓ f T.obj₁)] [IsIso (upperShriekUnitTensorMap ℓ f T.obj₃)] :
-    IsIso (upperShriekUnitTensorMap ℓ f T.obj₂) :=
-  ObjectProperty.ext_of_isTriangulatedClosed₂ (upperShriekUnitTensorMapNatTrans ℓ f).isoLocus T hT
-    (inferInstanceAs (IsIso (upperShriekUnitTensorMap ℓ f T.obj₁)))
-    (inferInstanceAs (IsIso (upperShriekUnitTensorMap ℓ f T.obj₃)))
-
-/-- The purity map `γ_{f,K[n]}` is an isomorphism if and only if `γ_{f,K}` is. -/
-lemma isIso_upperShriekUnitTensorMap_shift_iff (f : X ⟶ Y)
-    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (n : ℤ) :
-    IsIso (upperShriekUnitTensorMap ℓ f (K⟦n⟧)) ↔ IsIso (upperShriekUnitTensorMap ℓ f K) :=
-  NatTrans.isIso_app_shift_iff (upperShriekUnitTensorMapNatTrans ℓ f) K n
-
 end AlgebraicGeometry.ProEtale.CondensedRing

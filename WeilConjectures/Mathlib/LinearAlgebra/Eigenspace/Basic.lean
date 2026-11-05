@@ -58,26 +58,4 @@ theorem hasEigenvalue_of_subquotient (f : Module.End K V) {U S : Submodule K V} 
   rw [hasEigenvalue_iff, eigenspace_def, ← LinearMap.det_eq_zero_iff_ker_ne_bot]
   exact hdet
 
-/-- An eigenvalue of an endomorphism `g` of a quotient `π : V ↠ W` induced by `f`, i.e. with
-`π ∘ f = g ∘ π`, is an eigenvalue of `f`: otherwise `f - c` is injective, hence surjective, so
-`g - c` is surjective, hence injective.
-(blueprint: `sk-p-linear-filtration`) -/
-theorem hasEigenvalue_of_comp_eq_comp {W : Type*} [AddCommGroup W] [Module K W]
-    [FiniteDimensional K W] (f : Module.End K V) (g : Module.End K W) (π : V →ₗ[K] W)
-    (hπ : Function.Surjective π) (h : π ∘ₗ f = g ∘ₗ π) {c : K} (hc : g.HasEigenvalue c) :
-    f.HasEigenvalue c := by
-  by_contra hf
-  rw [hasEigenvalue_iff, not_ne_iff, eigenspace_def, LinearMap.ker_eq_bot] at hf
-  have hsurj := LinearMap.injective_iff_surjective.1 hf
-  have hg : Function.Surjective (g - c • (1 : Module.End K W)) := fun w ↦ by
-    obtain ⟨v, rfl⟩ := hπ w
-    obtain ⟨u, rfl⟩ := hsurj v
-    refine ⟨π u, ?_⟩
-    have := LinearMap.congr_fun h u
-    simp only [LinearMap.coe_comp, Function.comp_apply] at this
-    simp [this]
-  obtain ⟨w, hw⟩ := hc.exists_hasEigenvector
-  refine hw.2 (LinearMap.injective_iff_surjective.2 hg ?_)
-  simp [hw.apply_eq_smul]
-
 end Module.End

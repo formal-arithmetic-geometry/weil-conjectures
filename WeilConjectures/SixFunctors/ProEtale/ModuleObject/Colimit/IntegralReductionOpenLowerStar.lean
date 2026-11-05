@@ -67,51 +67,9 @@ noncomputable def rightDerivedLowerStarComapIso :
       (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)))
     (derivedUpperStarExtendScalarsIso a f)
 
-omit [IsCommMonObj Λ] [IsCommMonObj Λ'] in
-/-- The derived restriction of scalars reflects zero objects: it commutes with homology, and the
-restriction of scalars of module objects reflects zero objects. -/
-lemma isZero_of_isZero_mapDerivedCategory_comap {X : Scheme.{u}}
-    {G : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))}
-    (hG : IsZero (D(Mod.comap (coefficientMap a X)).obj G)) : IsZero G :=
-  (DerivedCategory.isZero_iff _).2 fun i ↦ Mod.isZero_of_isZero_comap _
-    (((DerivedCategory.isZero_iff _).1 hG i).of_iso
-      (((Mod.comap (coefficientMap a X)).mapDerivedCategoryHomologyFunctorIso i).app G))
-
-/-- If `Lj^*` kills `G`, it kills the restriction of scalars of `G`: `Lj^*` commutes with the
-restriction of scalars (`derivedComapUpperStarIso`). -/
-lemma isZero_leftDerivedUpperStar_obj_mapDerivedCategory_comap {U X : Scheme.{u}} (j : U ⟶ X)
-    {G : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))}
-    (hG : IsZero (L((j)^*⟦Λ'⟧).obj G)) :
-    IsZero (L((j)^*⟦Λ⟧).obj (D(Mod.comap (coefficientMap a X)).obj G)) :=
-  (D(Mod.comap (coefficientMap a U)).map_isZero
-    (hG.of_iso ((leftDerivedUpperStarIsoMapDerivedCategory Λ' j).app G).symm)).of_iso
-    ((leftDerivedUpperStarIsoMapDerivedCategory Λ j).app _ ≪≫
-      (derivedComapUpperStarIso a j).symm.app G)
-
 end Comap
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
   (n : ℕ)
-
-/-- **Reduction modulo `ℓⁿ` preserves `j`-local objects**: for an open immersion `j : U ⟶ X` and
-`N ∈ D(Mod_{𝒪_{E,X}})` such that the unit `N ⟶ Rj_* Lj^* N` is an isomorphism, the unit at the
-reduction `N ⊗ᴸ_{𝒪_E} 𝒪_E ⧸ ℓⁿ` is an isomorphism. By the reduction triangle and two out of
-three, the restriction of scalars of the reduction is `j`-local, and locality descends along the
-restriction of scalars. -/
-theorem isIso_derivedUpperStarLowerStarAdjunction_unit_app_integersModPowReduction
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (N : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)))
-    (hN : IsIso ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E)
-      j).unit.app N)) :
-    IsIso ((derivedUpperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E n)
-      j).unit.app (L(Mod.extendScalars (integersModPowReduction X ℓ E n)).obj N)) := by
-  obtain ⟨g, h, hT⟩ := exists_distinguished_integersModPowReduction X ℓ E n N
-  exact (derivedUpperStarLowerStarAdjunction _ j).isIso_unit_app_of_isIso_unit_app_map
-    (derivedUpperStarLowerStarAdjunction _ j) _ _
-    (rightDerivedLowerStarComapIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) j)
-    (fun _ ↦ isZero_of_isZero_mapDerivedCategory_comap _)
-    (fun _ ↦ isZero_leftDerivedUpperStar_obj_mapDerivedCategory_comap _ j) _
-    ((derivedUpperStarLowerStarAdjunction _ j).isIso_unit_app_obj₃_of_distTriang _ hT hN hN)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

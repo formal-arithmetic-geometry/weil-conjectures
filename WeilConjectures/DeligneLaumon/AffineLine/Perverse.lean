@@ -109,10 +109,6 @@ def IsCurvePerverseLE (n : ℤ) (K : WeilComplex k₀ l X) : Prop :=
   (∀ a : ℤ, n < a → IsZero ((homologySheaf a).obj K)) ∧
     (WeilSheaf.support ((homologySheaf n).obj K)).Finite
 
-theorem isCurvePerverseUpper_iff_isCurvePerverseLE_zero (K : WeilComplex k₀ l X) :
-    K.IsCurvePerverseUpper ↔ K.IsCurvePerverseLE 0 :=
-  Iff.rfl
-
 /-- Curve perversity is invariant under isomorphism: the cohomology sheaves of isomorphic
 complexes are isomorphic, hence have the same support. -/
 instance : ObjectProperty.IsClosedUnderIsomorphisms
@@ -370,7 +366,6 @@ theorem eq_zero_of_comp_hom_eq_zero
       (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X))) ⟶ Q) = 0 :=
     (cancel_mono f).1 (ObjectProperty.hom_ext _ (by simpa using hu))
   exact congrArg (fun φ ↦ φ.hom) this
-
 
 /-- **Cokernels in the heart** (`thm-a1-curve-perverse-heart`, part (5)): the cone `C` of a
 monomorphism `f : Q ⟶ P` of the curve perverse heart is curve perverse, so that

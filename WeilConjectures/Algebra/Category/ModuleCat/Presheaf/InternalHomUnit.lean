@@ -48,7 +48,6 @@ lemma restrictOver_smul_app_apply {M P : PresheafOfModules.{v} (R ⋙ forget₂ 
 
 end Additive
 
-
 section Unit
 
 variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
@@ -76,7 +75,6 @@ lemma homObjUnitInvApp_app_one {U : C} (n : N.obj (op U)) :
   (congrArg (fun s ↦ s.val (op (Over.mk (𝟙 U))))
     ((unitHomEquiv ((restrictOver R U).obj N)).apply_symm_apply _)).trans
       ((N.congr_map_apply op_id n).trans (N.map_id_apply' n))
-
 
 /-- The sections of `homObj R N` over `X` are the sections of `N` over `X`. -/
 noncomputable def homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅ N.obj X :=
@@ -120,11 +118,6 @@ noncomputable def homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅
       inv_hom_id := by
         ext n
         exact homObjUnitInvApp_app_one N n }
-
-
-lemma homObjUnitIsoApp_hom_apply (X : Cᵒᵖ) (φ : (homObj (unit _) N).obj X) :
-    (homObjUnitIsoApp N X).hom φ = φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj X) :=
-  rfl
 
 /-- **The internal hom out of the unit.** `homObj R N ≅ N`: a morphism `R|_U ⟶ N|_U` is
 determined by the image of `1`. -/

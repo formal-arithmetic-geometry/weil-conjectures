@@ -138,30 +138,6 @@ lemma relativeDifferentialsHomEquiv_apply {M : X.Modules} (g : f.relativeDiffere
     f.relativeDifferentialsHomEquiv M g = f.relativeDifferentialsDerivation.postcomp g.val :=
   rfl
 
-/-- If `f⁻¹𝒪_S ⟶ 𝒪_X` is surjective on sections, then `Ω¹_{X/S} = 0`. -/
-lemma isZero_relativeDifferentials_of_surjective
-    (h : ∀ U, Function.Surjective (f.pullbackPresheafToPresheaf.app U)) :
-    IsZero f.relativeDifferentials := by
-  rw [IsZero.iff_id_eq_zero]
-  apply (f.relativeDifferentialsHomEquiv _).injective
-  ext U x
-  obtain ⟨a, rfl⟩ := h U x
-  simp only [relativeDifferentialsHomEquiv_apply, Derivation.postcomp_d_apply]
-  erw [Derivation'.d_app]
-  simp
-
-/-- The sheaf of relative differentials of an open immersion vanishes. -/
-lemma isZero_relativeDifferentials [IsOpenImmersion f] : IsZero f.relativeDifferentials := by
-  refine f.isZero_relativeDifferentials_of_surjective fun U y ↦ ?_
-  obtain ⟨z, rfl⟩ := (ConcreteCategory.bijective_of_isIso (f.appIso U.unop).hom).2 y
-  rw [appIso_hom', appLE_eq_pullbackPresheafToPresheaf_app]
-  exact ⟨_, rfl⟩
-
-variable (X) in
-/-- The sheaf of relative differentials of the identity morphism vanishes: `Ω¹_{X/X} = 0`. -/
-lemma isZero_relativeDifferentials_id : IsZero (𝟙 X : X ⟶ X).relativeDifferentials :=
-  isZero_relativeDifferentials _
-
 /-- Every section of `f⁻¹𝒪_S` over `W` comes, in `𝒪_X(W)`, from a section of `𝒪_S` over some
 open `V` with `W ⊆ f⁻¹ V`: the colimit defining `f⁻¹𝒪_S` is filtered. -/
 lemma exists_appLE_eq_pullbackPresheafToPresheaf_app (W : X.Opens)
@@ -218,7 +194,6 @@ noncomputable def derivationMk {M : _root_.PresheafOfModules.{u} (X.presheaf ⋙
     rw [d_map, d_app]
     exact map_zero _
 
-
 /-- On sections, `(relativeDifferentialsHomEquiv M).symm D` sends `d x` to `D x`. -/
 lemma relativeDifferentialsHomEquiv_symm_app_d {M : X.Modules}
     (D : M.val.Derivation' f.pullbackPresheafToPresheaf) {U : X.Opensᵒᵖ} (x : X.presheaf.obj U) :
@@ -265,7 +240,6 @@ noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} 
       relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₁.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
 
-
 /-- For an open immersion `i : V ⟶ S` and `g : X ⟶ V`, the sheaves of relative differentials
 `Ω¹_{X/S}` (for `g ≫ i`) and `Ω¹_{X/V}` (for `g`) are isomorphic. -/
 noncomputable def relativeDifferentialsCompIso {V : Scheme.{u}} (g : X ⟶ V) (i : V ⟶ S)
@@ -284,7 +258,6 @@ noncomputable def relativeDifferentialsCompIso {V : Scheme.{u}} (g : X ⟶ V) (i
     (fun M D W a ↦ by
       change D.d (g.app _ (i.app W a)) = 0
       exact D.d_app_app _ _)
-
 
 section Restrict
 
@@ -487,7 +460,6 @@ lemma isLocallyFraction_derivationStalk (W : (Spec S).Opens) (s : Γ(Spec S, W))
   simp only [e, derivationStalk]
   rfl
 
-
 /-- The derivation `𝒪_{Spec S} → M^~` induced by `D`, on sections over `W`. -/
 noncomputable def tildeDerivationApp (W : (Spec S).Opens) :
     Γ(Spec S, W) →+ (tilde M).val.obj (op W) :=
@@ -508,14 +480,12 @@ noncomputable def tildeDerivation :
       erw [StructureSheaf.comap_apply]
       exact derivationStalk_localRingHom D x.1 _)
 
-
 lemma tildeDerivation_d_top (b : S) :
     (tildeDerivation D).d (X := op ⊤) ((Scheme.ΓSpecIso S).inv b) =
       tilde.toOpen M ⊤ (D.d b) := by
   refine Subtype.ext (funext fun x ↦ ?_)
   change derivationStalk D x.1 (LocalizedModule.mk b 1) = LocalizedModule.mk (D.d b) 1
   exact (LocalizedModule.derivationLift_mk_one _ _ _ _)
-
 
 end TildeDerivation
 
@@ -584,7 +554,6 @@ lemma relativeDifferentialsSpecTildeHom_comp_toTilde :
   exact (Scheme.Hom.relativeDifferentialsHomEquiv_symm_app_d _ _ _).trans
     (tildeDerivation_d_top _ b)
 
-
 lemma relativeDifferentialsSpecToTilde_comp_tildeHom :
     relativeDifferentialsSpecToTilde φ ≫ relativeDifferentialsSpecTildeHom φ = 𝟙 _ := by
   apply ((Spec.map φ).relativeDifferentialsHomEquiv _).injective
@@ -640,23 +609,6 @@ namespace Scheme.Hom
 
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
-/-- **The affine description of `Ω¹_{X/S}`.** Let `U ⊆ S` and `V ⊆ X` be affine opens with
-`f(V) ⊆ U`, and write `A = Γ(S, U)`, `B = Γ(X, V)`. Then the restriction of `Ω¹_{X/S}` to
-`V = Spec B` is the sheaf `Ω_{B/A}^~` associated with the `B`-module of Kähler differentials of
-the `A`-algebra `B` (for the algebra structure given by `f.appLE U V e`).
-
-For a curve `C` over a field `k`, with `S = Spec k` and `U = ⊤`, this is the standard affine
-description `Ω¹_{C/k}|_{Spec B} = Ω_{B/k}^~` of the sheaf of Kähler differentials of `C`.
-
-(blueprint: `def-sc-kahler-differentials`) -/
-noncomputable def relativeDifferentialsRestrictFromSpecIso {U : S.Opens} (hU : IsAffineOpen U)
-    {V : X.Opens} (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U) :
-    f.relativeDifferentials.restrict hV.fromSpec ≅
-      tilde (CommRingCat.KaehlerDifferential (f.appLE U V e)) :=
-  f.relativeDifferentialsRestrictIso hV.fromSpec ≪≫
-    relativeDifferentialsCongr _ (IsAffineOpen.SpecMap_appLE_fromSpec f hU hV e).symm ≪≫
-    relativeDifferentialsCompIso _ _ ≪≫ relativeDifferentialsSpecIso _
-
 /-- If `f` is smooth of relative dimension one, then every point of `X` has an open
 neighbourhood `V` on which `Ω¹_{X/S}` is trivial: on an affine chart where `f` is standard
 smooth, `Ω¹_{X/S}|_V ≅ Ω_{𝒪(V)/𝒪(U)}^~ ≅ 𝒪_V`. -/
@@ -701,44 +653,6 @@ theorem isInvertible_relativeDifferentials [SmoothOfRelativeDimension 1 f] :
     exact IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.2 ⟨x, hxV x⟩)
   exact SheafOfModules.isInvertible_of_forall_over_unit (M := f.relativeDifferentials) V hcov
     hV'
-
-/-- **Differentials of a smooth morphism.** If `f` is smooth of relative dimension `d`, then
-`Ω¹_{X/S}` is finite locally free of rank `d`: on an affine chart `Spec B ⟶ Spec A` where `f` is
-standard smooth, `Ω¹_{X/S}` is `Ω_{B/A}^~`, and `Ω_{B/A} ≅ Bᵈ`. -/
-theorem isFiniteLocallyFreeOfRank_relativeDifferentials (d : ℕ)
-    [SmoothOfRelativeDimension d f] : f.relativeDifferentials.IsFiniteLocallyFreeOfRank d := by
-  choose U hU V hV hx e hsm using fun x ↦
-    SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension (n := d) (f := f) x
-  refine Modules.isFiniteLocallyFreeOfRank_of_isOpenImmersion _ (fun x ↦ (hV x).fromSpec)
-    (eq_top_iff.2 fun x _ ↦ TopologicalSpace.Opens.mem_iSup.2
-      ⟨x, by rw [IsAffineOpen.opensRange_fromSpec]; exact hx x⟩) fun x ↦ ?_
-  let φ := f.appLE (U x) (V x) (e x)
-  let := φ.hom.toAlgebra
-  have : Algebra.IsStandardSmoothOfRelativeDimension d Γ(S, U x) Γ(X, V x) := hsm x
-  obtain ⟨eΩ⟩ :=
-    Algebra.IsStandardSmoothOfRelativeDimension.nonempty_linearEquiv_kaehlerDifferential
-      (R := Γ(S, U x)) (S := Γ(X, V x)) d
-  let N := (Spec.map φ).relativeDifferentials
-  let T : (Modules.pullback (hV x).fromSpec).obj f.relativeDifferentials ≅ N :=
-    ((Modules.restrictFunctorIsoPullback _).app _).symm ≪≫
-      f.relativeDifferentialsRestrictIso (hV x).fromSpec ≪≫
-      relativeDifferentialsCongr _
-        (IsAffineOpen.SpecMap_appLE_fromSpec f (hU x) (hV x) (e x)).symm ≪≫
-      relativeDifferentialsCompIso _ _
-  have : N.IsQuasicoherent :=
-    (SheafOfModules.isQuasicoherent (Spec Γ(X, V x)).ringCatSheaf).prop_of_iso
-      (relativeDifferentialsSpecIso φ).symm
-      (inferInstanceAs (tilde (CommRingCat.KaehlerDifferential φ)).IsQuasicoherent)
-  let E : Γ(N, ⊤) ≃ₗ[Γ(X, V x)] (Fin d → Γ(X, V x)) :=
-    (relativeDifferentialsSpecΓIso φ).toLinearEquiv ≪≫ₗ eΩ
-  have : Module.FinitePresentation Γ(X, V x) Γ(N, ⊤) := .of_equiv E.symm
-  have : Module.Flat Γ(X, V x) Γ(N, ⊤) := .of_linearEquiv E
-  have : N.IsFiniteLocallyFreeOfRank d :=
-    Modules.isFiniteLocallyFreeOfRank_of_rankAtStalk_eq N fun p ↦ by
-      have := p.nontrivial
-      rw [congr_fun (Module.rankAtStalk_eq_of_equiv E) p, Module.rankAtStalk_eq_finrank_of_free]
-      simp
-  exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso T.symm
 
 end Scheme.Hom
 

@@ -46,19 +46,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The ring adjunction unit transported to the existing small site model.
-No commutativity is used. Source: Stacks, Tags 00YV and 03D2
-(blueprint: def-weil-proetale-inverse-image). -/
-noncomputable def proEtaleRingModelUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) RingCat.{u + 1}) :
-    ((AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt).sheafPushforwardContinuous
-      RingCat.{u + 1} (proEtaleModelTopology Y) (ProEt.topology Y)).obj R ⟶
-    ((proEtaleModelBaseChange f).sheafPushforwardContinuous RingCat.{u + 1}
-      (proEtaleModelTopology Y) (proEtaleModelTopology X)).obj
-        (((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
-          RingCat.{u + 1} (proEtaleModelTopology X) (ProEt.topology X)).obj
-            ((proEtaleSheafInverseImage f RingCat.{u + 1}).obj R)) :=
-  ⟨Functor.whiskerLeft AsSmall.down.op
-    ((proEtaleSheafAdjunction f RingCat.{u + 1}).unit.app R).hom⟩
-
 end AlgebraicGeometry.Scheme

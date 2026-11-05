@@ -68,23 +68,6 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso [PreservesFiniteLimi
     F.homologyRightDerivedFunctorPlusObjQIsoOfInjective T' n ≪≫
     (asIso (HomologicalComplex.homologyMap ((F.mapHomologicalComplex _).map i.hom) n)).symm⟩
 
-/-- **Acyclic resolutions of complexes compute `R⁺F`.** If `F` is left exact and `φ : K ⟶ L`
-is a quasi-isomorphism from a bounded below complex `K` to a bounded below complex `L` of
-`F`-acyclic objects, then `H^n(R⁺F(K)) ≅ H^n(F(L))` for all `n`.
-(blueprint: `lemma-weil-pbc-leray-acyclicity`, item 3) -/
-theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso_of_quasiIso [PreservesFiniteLimits F]
-    {K L : CochainComplex.Plus C} (φ : K ⟶ L) [QuasiIso φ.hom]
-    (hL : ∀ n, F.rightAcyclic (L.obj.X n)) (n : ℤ) :
-    Nonempty ((DerivedCategory.Plus.homologyFunctor D n).obj
-        (F.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj K)) ≅
-      ((F.mapHomologicalComplex _).obj L.obj).homology n) := by
-  have : IsIso (DerivedCategory.Plus.Q.map φ) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 ‹_›)
-  obtain ⟨e⟩ := F.nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso L hL n
-  exact ⟨(DerivedCategory.Plus.homologyFunctor D n).mapIso
-    (F.rightDerivedFunctorPlus.mapIso (asIso (DerivedCategory.Plus.Q.map φ))) ≪≫ e⟩
-
 /-- **Acyclic complexes compute `R⁺F`, at the level of the unit.** If `F` is left exact and `L`
 is a bounded below complex of `F`-acyclic objects, then the unit `F(L) ⟶ R⁺F(L)` is an
 isomorphism in `DerivedCategory.Plus D`. Choose a quasi-isomorphism `i : L ⟶ T` to a bounded

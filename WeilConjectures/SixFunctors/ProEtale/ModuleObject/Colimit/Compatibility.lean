@@ -823,11 +823,6 @@ instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateF
     fun _ hn ↦ hn.elim fun b hb ↦ isIso_derivedPushHom_of_isIso_biproductDesc_globalSmul
       (Profinite.padicSubfieldRingObjMap ℓ h) (Profinite.continuousMapConstRingHom F) b hb f
 
-/-- **(Shriek)** is an isomorphism for a finite extension `F/E`, on all unbounded objects. -/
-example [HasCompactification f] {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
-  inferInstance
-
 end Push
 
 end CondensedRing

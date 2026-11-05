@@ -261,29 +261,6 @@ theorem exists_comp_unit_eq
   (isHomotopyLimit_canonicalReductionTowerCone hL).exists_lift
     (Limits.Cone.ofOpSequence _ K φ hφ)
 
-/-- **Uniqueness of the lift** into a derived complete complex: if `L` is derived complete and
-the groups `Hom(K⟦1⟧, Res_{n+1} (red_{n+1} L))` are finite, a morphism `K ⟶ L` is determined by
-its composites with the units `L ⟶ Res_{n+1} (red_{n+1} L)` (the `lim¹` term of the Milnor
-sequence vanishes). -/
-theorem eq_of_comp_unit_eq
-    {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
-    (hL : derivedCompleteIntegers ℓ E X L)
-    [∀ n : ℕ, Finite (K⟦(1 : ℤ)⟧ ⟶
-      (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L))]
-    {f g : K ⟶ L}
-    (h : ∀ n : ℕ, f ≫ (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (integersModPowReduction X ℓ E (n + 1))).unit.app L =
-      g ≫ (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (integersModPowReduction X ℓ E (n + 1))).unit.app L) : f = g :=
-  have : ∀ n : ℕ, Finite (K⟦(1 : ℤ)⟧ ⟶ (canonicalReductionTower E L).obj (op n)) := fun n ↦
-    inferInstanceAs (Finite (K⟦(1 : ℤ)⟧ ⟶
-      (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L)))
-  ((isHomotopyLimit_canonicalReductionTowerCone hL).bijective_milnorMap K).1
-    (Subtype.ext (funext h))
-
 /-- A morphism `f : K ⟶ L` satisfies `red_{n+1} f = φ_n` if and only if
 `f ≫ η^L_n = η^K_n ≫ Res_{n+1} φ_n`, for the units `η_n` of `red_{n+1} ⊣ Res_{n+1}`. -/
 lemma derivedReduction_map_eq_iff
@@ -354,30 +331,5 @@ theorem exists_derivedReduction_map_eq
     (fun n ↦ homEquiv_comp_reductionTransition (n + 1) (φ (n + 1)) (φ n) (hφ n))
   exact ⟨f, fun n ↦ (derivedReduction_map_eq_iff (n + 1) f (φ n)).2
     ((hf n).trans (Adjunction.homEquiv_unit _ _ _ _))⟩
-
-/-- **Unique lifting of morphisms of reductions** into a derived complete complex `L`, when the
-groups `Hom(K⟦1⟧, Res_{n+1} (red_{n+1} L))` are finite. -/
-theorem existsUnique_derivedReduction_map_eq
-    {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
-    (hL : derivedCompleteIntegers ℓ E X L)
-    [∀ n : ℕ, Finite (K⟦(1 : ℤ)⟧ ⟶
-      (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L))]
-    (φ : ∀ n : ℕ,
-      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ⟶
-        (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L)
-    (hφ : ∀ n : ℕ,
-      (Mod.comap (integersModPowReduction X ℓ E (n + 1 + 1))).mapDerivedCategory.map (φ (n + 1)) ≫
-          reductionTransition E (n + 1) L =
-        reductionTransition E (n + 1) K ≫
-          (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.map (φ n)) :
-    ∃! f : K ⟶ L, ∀ n : ℕ,
-      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map f =
-        φ n := by
-  obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq hL φ hφ
-  refine ⟨f, hf, fun g hg ↦ eq_of_comp_unit_eq hL fun n ↦ ?_⟩
-  rw [(derivedReduction_map_eq_iff (n + 1) g (φ n)).1 (hg n),
-    (derivedReduction_map_eq_iff (n + 1) f (φ n)).1 (hf n)]
 
 end AlgebraicGeometry.ProEtale

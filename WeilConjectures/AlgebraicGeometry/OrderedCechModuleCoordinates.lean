@@ -32,19 +32,6 @@ noncomputable def orderedCechTupleOpenMap {X : Scheme.{u}} {r p : ℕ}
   prod.lift (Pi.lift fun l ↦ homOfLE (inf_le_left.trans
     (iInf_le (fun k ↦ W ⟨t k⟩) l))) (homOfLE inf_le_right)
 
-/-- The coordinate transport is an isomorphism, including for empty intersections.
-Source: Stacks 01FJ, products in the poset of opens are intersections.
-(blueprint: def-pc-ordered-cech-module-coordinates).
-Proof: The projections of the product give the reverse containment. -/
-theorem orderedCechTupleOpenMap_isIso {X : Scheme.{u}} {r p : ℕ}
-    (W : ULift.{u} (Fin r) → X.Opens) (B : X.Opens)
-    (t : Fin (p + 1) ↪o Fin r) : IsIso (orderedCechTupleOpenMap W B t) := by
-  apply (PartialOrder.isIso_iff_eq _).mpr
-  apply le_antisymm (orderedCechTupleOpenMap W B t).le
-  apply le_inf
-  · exact le_iInf fun k ↦ (prod.fst ≫ Pi.π (fun l ↦ W ⟨t l⟩) k).le
-  · exact (prod.snd : (∏ᶜ fun l ↦ W ⟨t l⟩) ⨯ B ⟶ B).le
-
 /-- Evaluate a usual Čech presentation on an increasing tuple after pushforward.
 All transports are actual maps, including the extension isomorphism in degree p.
 Source: Stacks 01FJ and 01FK, restriction to ordered tuples.
@@ -79,7 +66,6 @@ variable {X T : Scheme.{u}} (f : X ⟶ T)
       ((cechComplexFunctor W).obj
         ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙
           (Functor.whiskeringRight _ _ _).obj M.presheafModuleCat)).X p)
-
 
 /-- Ordered coordinates are additive.
 Source: Stacks 01FK, restriction to ordered tuples.

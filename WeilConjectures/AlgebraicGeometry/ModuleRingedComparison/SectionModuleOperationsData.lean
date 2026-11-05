@@ -88,35 +88,4 @@ namespace AlgebraicGeometry.ProEtale.ModuleRingedComparison
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-
-
-
-
-
-
-
-
-
-
-/-- The existing sectionwise extension by zero.
-Source: Stacks 03DI (blueprint: def-pd-section-module-operations-data). -/
-abbrev extension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    modules Λ U ⥤ modules Λ X :=
-  InternalModuleOperations.extension Λ j
-
-/-- The existing extension-by-zero adjunction.
-Source: Stacks 03DI (blueprint: def-pd-section-module-operations-data). -/
-abbrev openAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    extension Λ j ⊣ pullback Λ j :=
-  InternalModuleOperations.openAdjunction Λ j
-
-
-
-/-- The existing extension comparison normalized by the ordinary open adjunction mate.
-Source: Stacks 03DI and 03DJ (blueprint: def-pd-section-module-operations-data). -/
-abbrev ordinaryExtensionComparison {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
-  InternalModuleOperations.openComparison Λ j
-
-
-
 end AlgebraicGeometry.ProEtale.ModuleRingedComparison

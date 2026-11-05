@@ -59,26 +59,6 @@ section Mate
 variable {C Z C' Z' : Type*} [Category* C] [Category* Z] [Category* C'] [Category* Z']
   {i : Z ⥤ C} {G : C ⥤ Z} {i' : Z' ⥤ C'} {G' : C' ⥤ Z'} {Φ : C ⥤ C'} {ΦZ : Z ⥤ Z'}
 
-/-- Let `i ⊣ G` and `i' ⊣ G'` be adjunctions with `i'` fully faithful, and `α : ΦZ ⋙ i' ⟶ i ⋙ Φ`
-a natural isomorphism. The mate `G ⋙ ΦZ ⟶ Φ ⋙ G'` of `α` is an isomorphism at `K` as soon as
-`Φ (i G K)` is isomorphic to `i' G' (Φ K)` compatibly with the counits: `i'` of the mate is
-then the composite of `α` and this isomorphism. -/
-lemma Adjunction.isIso_mateEquiv_app (adj : i ⊣ G) (adj' : i' ⊣ G') (hi' : i'.FullyFaithful)
-    (α : ΦZ ⋙ i' ⟶ i ⋙ Φ) [IsIso α] (K : C)
-    (f : Φ.obj (i.obj (G.obj K)) ≅ i'.obj (G'.obj (Φ.obj K)))
-    (hf : f.hom ≫ adj'.counit.app (Φ.obj K) = Φ.map (adj.counit.app K)) :
-    IsIso ((mateEquiv adj adj' α).natTrans.app K) := by
-  have h : i'.map ((mateEquiv adj adj' α).natTrans.app K) = α.app (G.obj K) ≫ f.hom := by
-    rw [← hi'.map_preimage (α.app (G.obj K) ≫ f.hom)]
-    congr 1
-    apply (adj'.homEquiv _ _).symm.injective
-    simp only [Adjunction.homEquiv_counit, hi'.map_preimage, Category.assoc, hf]
-    exact mateEquiv_counit adj adj' α K
-  have : IsIso (i'.map ((mateEquiv adj adj' α).natTrans.app K)) := by
-    rw [h]
-    infer_instance
-  exact hi'.isIso_of_isIso_map _
-
 end Mate
 
 namespace Pretriangulated
@@ -262,73 +242,6 @@ lemma exists_triangleHom (h₀ : ∀ M, IsZero (jUp.obj (i.obj M))) {K K' : C} (
     exact (adj'.counit_naturality φ).symm
   · rw [τ.comm₂, hτ]
     exact (adj.unit_naturality φ).symm
-
-omit [HasZeroObject U] [Pretriangulated U] [jUp.IsTriangulated] in
-include adj' in
-/-- **A morphism of supported localization triangles is determined by its middle component.** -/
-lemma triangleHom_ext (h₀ : ∀ M, IsZero (jUp.obj (i.obj M))) {K K' : C} {w w'}
-    (hw : triangle adj adj' K w ∈ distTriang C) (hw' : triangle adj adj' K' w' ∈ distTriang C)
-    {τ τ' : triangle adj adj' K w ⟶ triangle adj adj' K' w'} (h : τ.hom₂ = τ'.hom₂) :
-    τ = τ' :=
-  have : Subsingleton ((triangle adj adj' K w).obj₁⟦(1 : ℤ)⟧ ⟶ (triangle adj adj' K' w').obj₃) :=
-    subsingleton_hom_shift i jUp adj h₀ _ _ 1
-  triangleHom_ext_of_subsingleton hw hw' h
-
-omit [Preadditive C] [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-  [HasZeroObject U] [Pretriangulated U] [jUp.IsTriangulated] in
-include adj in
-/-- `Hom(A⟦n⟧, B) = 0` for `A` in the essential image of `i` and `B` in that of `j_*`. -/
-lemma subsingleton_hom_shift_of_essImage (h₀ : ∀ M, IsZero (jUp.obj (i.obj M))) {A B : C}
-    (hA : i.essImage A) (hB : jLow.essImage B) (n : ℤ) : Subsingleton (A⟦n⟧ ⟶ B) := by
-  obtain ⟨M, ⟨eM⟩⟩ := hA
-  obtain ⟨N, ⟨eN⟩⟩ := hB
-  have := subsingleton_hom_shift i jUp adj h₀ M N n
-  exact (((shiftFunctor C n).mapIso eM).homCongr eN).symm.subsingleton
-
-omit [Preadditive C] [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-  [HasZeroObject U] [Pretriangulated U] [jUp.IsTriangulated] in
-include adj in
-/-- `Hom(A, B) = 0` for `A` in the essential image of `i` and `B` in that of `j_*`. -/
-lemma subsingleton_hom_of_essImage (h₀ : ∀ M, IsZero (jUp.obj (i.obj M))) {A B : C}
-    (hA : i.essImage A) (hB : jLow.essImage B) : Subsingleton (A ⟶ B) :=
-  have := subsingleton_hom_shift_of_essImage adj h₀ hA hB 0
-  ((shiftFunctorZero C ℤ).app A).homFromEquiv.symm.subsingleton
-
-omit [HasZeroObject U] [Pretriangulated U] [jUp.IsTriangulated] in
-include adj' in
-/-- **The supported localization triangle is determined by its vertices.** A distinguished
-triangle `A ⟶ K ⟶ B ⟶ A⟦1⟧` with `A` in the essential image of `i` and `B` in that of `j_*` is
-isomorphic to the supported localization triangle `i i^! K ⟶ K ⟶ j_* j^* K ⟶`, by an
-isomorphism of triangles which is the identity on `K`. -/
-lemma exists_iso_triangle (h₀ : ∀ M, IsZero (jUp.obj (i.obj M))) {T : Triangle C}
-    (hT : T ∈ distTriang C) (h₁ : i.essImage T.obj₁) (h₃ : jLow.essImage T.obj₃) {w}
-    (hw : triangle adj adj' T.obj₂ w ∈ distTriang C) :
-    ∃ e : T ≅ triangle adj adj' T.obj₂ w, e.hom.hom₂ = 𝟙 _ := by
-  have hi (M : Z) : i.essImage (i.obj M) := i.obj_mem_essImage M
-  have hj (N : U) : jLow.essImage (jLow.obj N) := jLow.obj_mem_essImage N
-  obtain ⟨τ, hτ⟩ := exists_triangleHom_of_comp_eq_zero hT hw (𝟙 T.obj₂) (by
-    have := subsingleton_hom_of_essImage adj h₀ h₁ (hj (jUp.obj T.obj₂))
-    exact Subsingleton.elim _ _)
-  obtain ⟨τ', hτ'⟩ := exists_triangleHom_of_comp_eq_zero hw hT (𝟙 T.obj₂) (by
-    have := subsingleton_hom_of_essImage adj h₀ (hi (G.obj T.obj₂)) h₃
-    exact Subsingleton.elim _ _)
-  have := subsingleton_hom_shift_of_essImage adj h₀ h₁ h₃ 1
-  have := subsingleton_hom_shift_of_essImage adj h₀ (hi (G.obj T.obj₂)) (hj (jUp.obj T.obj₂)) 1
-  refine ⟨{ hom := τ, inv := τ', hom_inv_id := ?_, inv_hom_id := ?_ }, hτ⟩
-  · exact triangleHom_ext_of_subsingleton hT hT (by simp [hτ, hτ'])
-  · exact triangleHom_ext_of_subsingleton hw hw (by simp [hτ, hτ'])
-
-omit [Preadditive C] [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-  [HasZeroObject U] [Pretriangulated U] [jUp.IsTriangulated] in
-include adj adj' in
-/-- **`i^! j_* = 0`**: `Hom(M, i^! j_* N) = Hom(i M, j_* N) = 0` for every `M`. -/
-lemma isZero_obj_obj [Preadditive Z] (h₀ : ∀ M, IsZero (jUp.obj (i.obj M))) (N : U) :
-    IsZero (G.obj (jLow.obj N)) := by
-  rw [IsZero.iff_id_eq_zero]
-  have : Subsingleton (i.obj (G.obj (jLow.obj N)) ⟶ jLow.obj N) :=
-    have := subsingleton_hom_shift i jUp adj h₀ (G.obj (jLow.obj N)) N 0
-    ((shiftFunctorZero C ℤ).app _).homFromEquiv.symm.subsingleton
-  exact (adj'.homEquiv _ _).symm.injective (Subsingleton.elim _ _)
 
 end Recollement
 

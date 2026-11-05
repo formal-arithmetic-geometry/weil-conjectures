@@ -162,13 +162,6 @@ theorem finiteCoefficientModules_hasKInjectiveResolutions (V : Scheme.{u}) :
 
 attribute [instance] finiteCoefficientModules_hasKInjectiveResolutions
 
-/-- The ordinary uncompleted derived direct image, using K-injective resolutions in
-all modules over the specified finite coefficient ring sheaf. Source: Stacks Section 07A5
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable def finiteCoefficientDerivedDirectImage :
-    FiniteCoefficientDerivedCategory S Λ ⥤ FiniteCoefficientDerivedCategory T Λ :=
-  (finiteCoefficientModuleDirectImage f Λ).rightDerivedFunctor
-
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale
@@ -193,69 +186,6 @@ theorem finiteCoefficientRealization_isEquivalence :
 
 attribute [instance] finiteCoefficientRealization_isEquivalence
 
-/-- The inverse of the canonical coefficient realization, rather than a new coefficient
-category. Source: Stacks, Modules on Sites, sheafification of modules
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable def finiteCoefficientUnrealization :
-    FiniteCoefficientModules T Λ ⥤ Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ) :=
-  (finiteCoefficientRealization T Λ).asEquivalence.inverse
-
-/-- The realization inverse is additive, being an inverse equivalence of additive
-categories. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable instance finiteCoefficientUnrealization_additive :
-    (finiteCoefficientUnrealization T Λ).Additive :=
-  @Equivalence.inverse_additive _ _ _ _ _ _
-    (finiteCoefficientRealization T Λ).asEquivalence (finiteCoefficientRealization_additive T Λ)
-
-/-- Its inverse preserves finite limits. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable instance finiteCoefficientUnrealization_preservesFiniteLimits :
-    PreservesFiniteLimits (finiteCoefficientUnrealization T Λ) :=
-  inferInstanceAs (PreservesFiniteLimits (finiteCoefficientRealization T Λ).asEquivalence.inverse)
-
-/-- Its inverse preserves finite colimits. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable instance finiteCoefficientUnrealization_preservesFiniteColimits :
-    PreservesFiniteColimits (finiteCoefficientUnrealization T Λ) :=
-  inferInstanceAs (PreservesFiniteColimits (finiteCoefficientRealization T Λ).asEquivalence.inverse)
-
 variable {S : Scheme.{u}} (f : S ⟶ T)
-
-/-- Pullback in the specified coefficient-ring presentation. Its fixed-scalar version
-is the module-valued Kan extension and sheafification, so the coefficient identification
-is the one induced by constant scalar sections. Source: Stacks,
-lemma-adjoint-push-pull-modules (blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable def finiteCoefficientPullback :
-    FiniteCoefficientModules T Λ ⥤ FiniteCoefficientModules S Λ :=
-  finiteCoefficientUnrealization T Λ ⋙ upperStar (ModuleCat.{u + 1} Λ) f ⋙
-    finiteCoefficientRealization S Λ
-
-/-- Additivity of pullback. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable instance finiteCoefficientPullback_additive :
-    (finiteCoefficientPullback T Λ f).Additive :=
-  inferInstanceAs (finiteCoefficientUnrealization T Λ ⋙
-    upperStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientRealization S Λ).Additive
-
-/-- Exactness of pullback, on finite limits. Source: Stacks, Tag 04JC
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable instance finiteCoefficientPullback_preservesFiniteLimits :
-    PreservesFiniteLimits (finiteCoefficientPullback T Λ f) :=
-  inferInstanceAs (PreservesFiniteLimits (finiteCoefficientUnrealization T Λ ⋙
-    upperStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientRealization S Λ))
-
-/-- Exactness of pullback, on finite colimits. Source: Stacks, Tag 04JC
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable instance finiteCoefficientPullback_preservesFiniteColimits :
-    PreservesFiniteColimits (finiteCoefficientPullback T Λ f) :=
-  inferInstanceAs (PreservesFiniteColimits (finiteCoefficientUnrealization T Λ ⋙
-    upperStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientRealization S Λ))
-
-/-- Ordinary uncompleted derived pullback is exact termwise descent through localization.
-Source: Stacks, Section 0735 (blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable abbrev finiteCoefficientDerivedPullback :
-    FiniteCoefficientDerivedCategory T Λ ⥤ FiniteCoefficientDerivedCategory S Λ :=
-  (finiteCoefficientPullback T Λ f).mapDerivedCategory
 
 end AlgebraicGeometry.ProEtale

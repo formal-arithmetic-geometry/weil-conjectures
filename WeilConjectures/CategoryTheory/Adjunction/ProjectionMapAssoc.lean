@@ -38,27 +38,6 @@ open MonoidalCategory Functor.OplaxMonoidal
 variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
 
-/-- The right adjoint projection map `G M ⊗ L ⟶ G (M ⊗ F L)` of an oplax monoidal left adjoint
-is compatible with the associators. -/
-lemma rightAdjointProjectionMap_assoc (M : C) (L L' : D) :
-    ((adj.rightAdjointProjectionMap (Functor.OplaxMonoidal.δNatTrans F)).app M).app (L ⊗ L') ≫
-        G.map (M ◁ δ F L L') ≫ G.map (α_ M (F.obj L) (F.obj L')).inv =
-      (α_ (G.obj M) L L').inv ≫
-        (((adj.rightAdjointProjectionMap (Functor.OplaxMonoidal.δNatTrans F)).app M).app L ▷ L') ≫
-          ((adj.rightAdjointProjectionMap (Functor.OplaxMonoidal.δNatTrans F)).app
-            (M ⊗ F.obj L)).app L' := by
-  apply (adj.homEquiv _ _).symm.injective
-  simp only [homEquiv_counit, Functor.map_comp, Category.assoc, counit_naturality]
-  erw [adj.counit.naturality_assoc, map_rightAdjointProjectionMap_app_app_comp_counit_assoc,
-    map_rightAdjointProjectionMap_app_app_comp_counit]
-  simp only [δNatTrans_app_app, curriedTensor_map_app, Functor.id_map]
-  erw [← δ_natural_left_assoc, ← comp_whiskerRight]
-  erw [map_rightAdjointProjectionMap_app_app_comp_counit]
-  simp only [δNatTrans_app_app, curriedTensor_map_app, comp_whiskerRight]
-  erw [← associativity_inv_assoc]
-  rw [← associator_inv_naturality_left, ← whisker_exchange_assoc]
-  rfl
-
 section LeftAdjoint
 
 variable {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) (G' : D ⥤ C) [G'.LaxMonoidal]

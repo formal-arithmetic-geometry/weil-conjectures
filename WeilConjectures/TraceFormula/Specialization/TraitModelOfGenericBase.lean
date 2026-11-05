@@ -123,33 +123,6 @@ section GenericFibreBaseChange
 variable (k' : Type u) [Field k'] {B : Scheme.{u}} (X₁ : Over B)
   (ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ B)
 
-/-- The base change morphism `X₁ ×_B Spec Ω ⟶ X₁ ×_B η` along the geometric generic point
-`Spec Ω ⟶ η` of the trait, for a morphism `ι : η ⟶ B`. -/
-noncomputable def genericFibreBaseChangeMap :
-    pullback X₁.hom (traitGenericPointToSpec k' ≫ ι) ⟶ pullback X₁.hom ι :=
-  pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ traitGenericPointToSpec k') (by
-    rw [pullback.condition, Category.assoc])
-
-@[reassoc (attr := simp)]
-lemma genericFibreBaseChangeMap_fst :
-    genericFibreBaseChangeMap k' X₁ ι ≫ pullback.fst _ _ = pullback.fst _ _ :=
-  pullback.lift_fst _ _ _
-
-@[reassoc (attr := simp)]
-lemma genericFibreBaseChangeMap_snd :
-    genericFibreBaseChangeMap k' X₁ ι ≫ pullback.snd _ _ =
-      pullback.snd _ _ ≫ traitGenericPointToSpec k' :=
-  pullback.lift_snd _ _ _
-
-/-- `X₁ ×_B Spec Ω` is the base change of `X₁ ×_B η` along `Spec Ω ⟶ η`. -/
-lemma isPullback_genericFibreBaseChangeMap :
-    IsPullback (genericFibreBaseChangeMap k' X₁ ι) (pullback.snd _ _) (pullback.snd _ _)
-      (traitGenericPointToSpec k') := by
-  refine IsPullback.of_right ?_ (genericFibreBaseChangeMap_snd k' X₁ ι)
-    (IsPullback.of_hasPullback _ _)
-  rw [genericFibreBaseChangeMap_fst]
-  exact IsPullback.of_hasPullback _ _
-
 end GenericFibreBaseChange
 
 namespace ProEtale.CondensedRing.NearbyCyclesModel
@@ -202,68 +175,11 @@ structure IsTraitModelOfGenericBase (X₁ : Over (Spec (.of F)))
         genericFibreInclusion M q g isTraitModelOver.isPullback_j.w ≫ w ≫ pullback.fst _ _ =
           M.ε
 
-/-- **The geometric generic fibre of a trait model over the generic base is open**: it is an open
-of `X₁ ×_F Spec Ω`, by the base change of the open immersion of the generic fibre along
-`Spec Ω ⟶ η`. -/
-lemma IsTraitModelOfGenericBase.exists_openImmersion {X₁ : Over (Spec (.of F))}
-    {ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ Spec (.of F)}
-    {M : NearbyCyclesModel X₁.left X'.left} {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
-    (h : M.IsTraitModelOfGenericBase X₁ ι q g) :
-    ∃ u : M.generic ⟶ pullback X₁.hom (traitGenericPointToSpec k' ≫ ι),
-      IsOpenImmersion u ∧ u ≫ pullback.fst _ _ = M.ε ∧ u ≫ pullback.snd _ _ = g := by
-  obtain ⟨w, hw, hw₁, hw₂⟩ := h.exists_openImmersion_genericFibre
-  have hM := h.isTraitModelOver
-  have hr := isPullback_genericFibreBaseChangeMap k' X₁ ι
-  let s := genericFibreInclusion M q g hM.isPullback_j.w
-  let u := hr.lift (s ≫ w) g (by
-    rw [Category.assoc, hw₁, genericFibreInclusion_snd])
-  have hu : u ≫ genericFibreBaseChangeMap k' X₁ ι = s ≫ w := hr.lift_fst _ _ _
-  have hP : IsPullback s u w (genericFibreBaseChangeMap k' X₁ ι) := by
-    refine IsPullback.of_bot ?_ hu.symm hr
-    rw [hw₁, hr.lift_snd]
-    exact hM.isPullback_traitGenericPointToSpec
-  refine ⟨u, MorphismProperty.of_isPullback hP hw, ?_, hr.lift_snd _ _ _⟩
-  rw [← genericFibreBaseChangeMap_fst k' X₁ ι, reassoc_of% hu, hw₂]
-
 end Definition
 
 section OfBase
 
 variable {k : Type u} [Field k] {k' : Type u} [Field k'] [Algebra k k']
-
-/-- **Trait models over the base are trait models over the generic base** `(k, X)`, with
-`ι : η ⟶ S ⟶ Spec k`. The generic fibre `𝒳_η` maps to `X ×_k η` by `(e, q)`; this map is an open
-immersion because its base change along the faithfully flat `Spec Ω ⟶ η` is the open immersion
-`𝒳_Ω ⟶ X ×_k Spec Ω` (fpqc descent, Stacks 02L3). -/
-theorem IsTraitModelOfBase.isTraitModelOfGenericBase {X : Over (Spec (.of k))}
-    {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (h : M.IsTraitModelOfBase k q g) :
-    M.IsTraitModelOfGenericBase X (traitGenericSpec k' ≫ traitToBase k k') q g := by
-  obtain ⟨e, he, he'⟩ := h.exists_comp_ε
-  obtain ⟨u, hu, hu₁, hu₂⟩ := h.exists_openImmersion
-  have hM := h.isTraitModelOver
-  let s := genericFibreInclusion M q g hM.isPullback_j.w
-  let E : pullback q (traitGenericSpec k') ⟶
-      pullback X.hom (traitGenericSpec k' ≫ traitToBase k k') :=
-    pullback.lift (pullback.fst _ _ ≫ e) (pullback.snd _ _) (by
-      rw [Category.assoc, he', pullback.condition_assoc])
-  have hEfst : E ≫ pullback.fst _ _ = pullback.fst _ _ ≫ e := pullback.lift_fst _ _ _
-  have hEsnd : E ≫ pullback.snd _ _ = pullback.snd _ _ := pullback.lift_snd _ _ _
-  have hP : IsPullback s u E (traitGenericBaseChangeMap k' X) := by
-    refine IsPullback.of_bot ?_ ?_ (isPullback_traitGenericBaseChangeMap k' X)
-    · rw [hu₂, hEsnd]
-      exact hM.isPullback_traitGenericPointToSpec
-    · apply pullback.hom_ext
-      · rw [Category.assoc, hEfst, genericFibreInclusion_fst_assoc, he, Category.assoc,
-          traitGenericBaseChangeMap_fst, hu₁]
-      · rw [Category.assoc, hEsnd, genericFibreInclusion_snd, Category.assoc,
-          traitGenericBaseChangeMap_snd, reassoc_of% hu₂]
-  have : IsOpenImmersion E :=
-    MorphismProperty.of_isPullback_of_descendsAlong (P := @IsOpenImmersion) hP.flip
-      (traitGenericBaseChangeMap_mem k' X) hu
-  refine ⟨hM, E, this, hEsnd, ?_⟩
-  rw [hEfst, genericFibreInclusion_fst_assoc, he]
 
 end OfBase
 
@@ -353,113 +269,6 @@ noncomputable def genericSliceModel :
   ε := pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ traitGenericPointToSpec K) (by
       rw [pullback.condition, Category.assoc, traitGenericPointToSpec_traitGenericSpec]) ≫
     (genericSliceFibreIso x hb).hom
-
-/-- **The generic slice of a model over the trait is a trait model over the generic base**: for a
-model `M` of finite type over the trait `S = Spec k'⟦t⟧`, a coordinate `b : 𝒳 ⟶ 𝔸¹_S` over `S`,
-a field extension `K` of `k'` and `x ∈ K`, the base change of `M` along the generic slice
-`σ : Spec K⟦t⟧ ⟶ 𝔸¹_S` is a trait model over the generic base `(Frac K⟦t⟧, X₂)`,
-`X₂ = 𝒳_η ×_{𝔸¹_η} Spec Frac K⟦t⟧`, with `ι = 𝟙`. Its generic fibre is all of `X₂`. -/
-theorem isTraitModelOfGenericBase_genericSliceModel
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g) :
-    (genericSliceModel x hb).IsTraitModelOfGenericBase (genericSliceBase x hb) (𝟙 _)
-      (X' := baseChangeSpecial b (traitSlice x)) (pullback.snd b (traitSlice x))
-      (pullback.snd _ _) := by
-  have hB := IsTraitModelOver.baseChange hM b hb (traitSlice x) (traitSlice_over x)
-  let w := pullback.lift (genericSliceFibreIso x hb).hom (pullback.snd _ _)
-    (by rw [genericSliceFibreIso_hom_over, Category.comp_id] :
-      (genericSliceFibreIso x hb).hom ≫ (genericSliceBase x hb).hom =
-        pullback.snd (pullback.snd b (traitSlice x)) (traitGenericSpec K) ≫ 𝟙 _)
-  have hw : w ≫ pullback.fst _ _ = (genericSliceFibreIso x hb).hom := pullback.lift_fst _ _ _
-  have : IsIso (w ≫ pullback.fst _ _) := by
-    rw [hw]
-    infer_instance
-  have : IsIso w := IsIso.of_isIso_comp_right w (pullback.fst _ _)
-  exact ⟨⟨hB.1, hB.2, hB.3, hB.4, hB.5⟩, w, inferInstance, pullback.lift_snd _ _ _,
-    by rw [hw]; rfl⟩
-
-/-- The base `X₂` of the generic slice of a model of finite type over the trait is locally of
-finite type over `Frac K⟦t⟧`. -/
-lemma IsTraitModelOver.locallyOfFiniteType_genericSliceBase
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g) :
-    LocallyOfFiniteType (genericSliceBase x hb).hom := by
-  have := hM.locallyOfFiniteType
-  have : LocallyOfFiniteType (coordinateBaseChange b hb (traitGenericSpec k') ≫
-      𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k')))) := by
-    rw [coordinateBaseChange_over]
-    infer_instance
-  have := locallyOfFiniteType_of_comp (coordinateBaseChange b hb (traitGenericSpec k'))
-    (𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k'))))
-  exact inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-
-/-- The base `X₂` of the generic slice of a model of finite type over the trait is quasi-compact
-over `Frac K⟦t⟧`. -/
-lemma IsTraitModelOver.quasiCompact_genericSliceBase
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g) :
-    QuasiCompact (genericSliceBase x hb).hom := by
-  have := hM.quasiCompact
-  have : QuasiCompact (coordinateBaseChange b hb (traitGenericSpec k') ≫
-      𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k')))) := by
-    rw [coordinateBaseChange_over]
-    infer_instance
-  have := QuasiCompact.of_comp (coordinateBaseChange b hb (traitGenericSpec k'))
-    (𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k'))))
-  exact inferInstanceAs (QuasiCompact (pullback.snd _ _))
-
-/-- The base `X₂` of the generic slice of a model of finite type over the trait is separated
-over `Frac K⟦t⟧`. -/
-lemma IsTraitModelOver.isSeparated_genericSliceBase
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g) :
-    IsSeparated (genericSliceBase x hb).hom := by
-  have := hM.isSeparated
-  have : IsSeparated (coordinateBaseChange b hb (traitGenericSpec k') ≫
-      𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k')))) := by
-    rw [coordinateBaseChange_over]
-    infer_instance
-  have := IsSeparated.of_comp (coordinateBaseChange b hb (traitGenericSpec k'))
-    (𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k'))))
-  exact inferInstanceAs (IsSeparated (pullback.snd _ _))
-
-/-- **The base of the generic slice maps to the base of `M`**: if `M` is a trait model of `X₁`
-over the generic base `(F, X₁)` along `ι`, there is a morphism `X₂ ⟶ X₁`, lying over
-`Spec Frac K⟦t⟧ ⟶ η ⟶ Spec F`, through which the identification `ε` of the generic slice model
-is compatible with the identification `ε` of `M` along the map of geometric generic fibres. -/
-theorem IsTraitModelOfGenericBase.exists_genericSliceBase_comp {F : Type u} [Field F]
-    {X₁ : Over (Spec (.of F))} {ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ Spec (.of F)}
-    {M : NearbyCyclesModel X₁.left X'.left} {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
-    (h : M.IsTraitModelOfGenericBase X₁ ι q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
-    (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q) :
-    ∃ c : (genericSliceBase x hb).left ⟶ X₁.left,
-      c ≫ X₁.hom = (genericSliceBase x hb).hom ≫ traitGenericSpecMap k' K ≫ ι ∧
-        (genericSliceModel x hb).ε ≫ c =
-          baseChangeGenericMap h.isTraitModelOver b hb (traitSlice x) (traitSlice_over x) ≫
-            M.ε := by
-  obtain ⟨w, -, hw₁, hw₂⟩ := h.exists_openImmersion_genericFibre
-  have hM := h.isTraitModelOver
-  refine ⟨pullback.fst _ _ ≫ w ≫ pullback.fst _ _, ?_, ?_⟩
-  · rw [Category.assoc, Category.assoc, pullback.condition, reassoc_of% hw₁,
-      ← coordinateBaseChange_over b hb (traitGenericSpec k'), Category.assoc,
-      pullback.condition_assoc,
-      traitGenericSlice_over_assoc]
-    rfl
-  · have key : pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ traitGenericPointToSpec K)
-        (by rw [pullback.condition, Category.assoc, traitGenericPointToSpec_traitGenericSpec]) ≫
-          genericSliceFibreMap x hb =
-        baseChangeGenericMap hM b hb (traitSlice x) (traitSlice_over x) ≫
-          genericFibreInclusion M q g hM.isPullback_j.w := by
-      apply pullback.hom_ext
-      · simp
-      · simp only [Category.assoc, genericSliceFibreMap_snd, pullback.lift_snd_assoc,
-          genericFibreInclusion_snd, baseChangeGenericMap_g_assoc,
-          traitGenericPointToSpec_traitGenericSpecMap]
-    simp only [genericSliceModel_ε, Category.assoc, genericSliceFibreIso_hom_fst_assoc]
-    rw [reassoc_of% key, hw₂]
 
 end GenericSlice
 

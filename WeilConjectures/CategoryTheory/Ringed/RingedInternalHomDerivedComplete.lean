@@ -100,23 +100,4 @@ namespace CategoryTheory
 
 open CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
-private theorem isZero_nestedHom
-    {D : Type*} [Category* D] [HasZeroMorphisms D]
-    (H : Dᵒᵖ × D ⥤ D) (S : WeilConjectures.CoefficientClosedStructure H)
-    (β : @SymmetricCategory D _ S.monoidal) (A B N : D)
-    (h : IsZero (H.obj (op A, N))) :
-    IsZero (H.obj (op A, H.obj (op B, N))) := by
-  let := S.monoidal
-  let := β
-  let X := H.obj (op A, H.obj (op B, N))
-  let t : (X ⊗ B) ⊗ A ≅ (X ⊗ A) ⊗ B :=
-    (α_ X B A) ≪≫ ((tensorLeft X).mapIso (β_ B A)) ≪≫ (α_ X A B).symm
-  -- Adjunction and symmetry move A past B. The last Hom set has a zero target.
-  let e : (X ⟶ X) ≃ (X ⊗ B ⟶ H.obj (op A, N)) :=
-    ((S.adjunction A).homEquiv X (H.obj (op B, N))).symm |>.trans
-      (((S.adjunction B).homEquiv (X ⊗ A) N).symm) |>.trans
-      (Iso.homCongr t.symm (Iso.refl N)) |>.trans
-      ((S.adjunction A).homEquiv (X ⊗ B) N)
-  exact (IsZero.iff_id_eq_zero X).mpr (e.injective (h.eq_of_tgt _ _))
-
 end CategoryTheory

@@ -34,21 +34,10 @@ attribute [local instance 3000] integralTowerHasDerivedCategory
 
 attribute [local instance 50000] hasSheafCompose_of_preservesLimitsOfSize
 
-private local instance (W : AlgebraicGeometry.Scheme.{u}) :
-    EssentiallySmall.{u+1} W.ProEt := essentiallySmallSelf.{0, u, u+1} _
-
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   GrothendieckTopology.hasSheafify_proEtTopology
   integralOperationsAbSheafify integralOperationsAbLocallyBijective
   integralOperationsCommHasDerivedCategory
-
-private local instance (W : AlgebraicGeometry.Scheme.{u}) :
-    HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{u+1} :=
-  integralCoefficientAbSheafify.{u, u} W
-
-private local instance (W : AlgebraicGeometry.Scheme.{u}) :
-    (AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
-      AddCommGrpCat.{u+1} := integralCoefficientAbLocallyBijective.{u, u} W
 
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -66,22 +55,5 @@ variable (W : AlgebraicGeometry.Scheme.{u})
 local notation "I" => ObjectProperty.ι (integralOperationsGoodComplex l E W)
 local notation "q" => integralOperationsGoodLocalization l E W
 local notation "t" => Functor.prod I I ⋙ integralOperationsTensorComplexFunctor l E W
-
-/-- Reassociate the recorded tensor representative comparison without changing its map.
-Source: Stacks 06YT and 08TC
-(blueprint: def-pur-integral-tensor-representative-reassociate).
-The construction is exactly integralCompletedTensorComparison; only its target
-functor is written as the tensor complex functor followed by Q. -/
-def integralTensorRepresentativeReassociate :
-    (Functor.prod q q) ⋙ integralCompletedTensor l E W ≅ t ⋙ DerivedCategory.Q :=
-  integralCompletedTensorComparison l E W
-
-/-- The reassociation preserves every component of the recorded comparison.
-Source: Stacks 06YT and 08TC
-(blueprint: def-pur-integral-tensor-representative-reassociate).
-Proof: the reassociation was defined to be this same comparison. -/
-theorem integralTensorRepresentativeReassociate_app (P) :
-    (integralTensorRepresentativeReassociate l E W).hom.app P =
-      (integralCompletedTensorComparison l E W).hom.app P := rfl
 
 end WeilConjectures

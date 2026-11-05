@@ -47,30 +47,4 @@ local notation "𝓢" =>
   (sheafCompose (ProEt.topology Y)
     (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj 𝓡
 
-
-/-- Derived tensor with the constant ring `B` along a ring map `φ : A →+* B`.
-
-The constant ring sheaf `B_Y`, as a module over itself, is restricted along the
-constant-sheaf image of `φ` and placed in degree zero. Applying `derivedTensor`
-uses exactly the same chosen K-flat resolution of `K₁`.
-
-Source: blueprint `def-weil-derived-tensor`, order 663, last sentence;
-Stacks Project, Tag 06YU (blueprint: def-weil-derived-tensor). -/
-noncomputable def derivedTensorRing
-    (B : Type w) [CommRing B] (φ : A →+* B)
-    (K₁ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ)
-    (f : P ⟶ K₁) (hf : QuasiIso f)
-    (hP : CochainComplex.IsAcyclicTensorKFlat.{w + 1, w} (R := 𝓡) P) :
-    proEtaleDerivedCategory Y A :=
-  let RB := (constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).obj
-    (CommRingCat.of (ULift.{w + 1, w} B))
-  let SB := (sheafCompose (ProEt.topology Y)
-    (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj RB
-  let α : 𝓢 ⟶ SB := (sheafCompose (ProEt.topology Y)
-    (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).map
-      ((constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).map
-        (CommRingCat.ofHom (RingHom.ulift φ)))
-  let M := (SheafOfModules.restrictScalars.{w + 1} α).obj (SheafOfModules.unit SB)
-  derivedTensor Y A K₁ ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj M) P f hf hP
-
 end AlgebraicGeometry.Scheme

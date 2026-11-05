@@ -29,59 +29,6 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Stacks, Algebra, Local rings and 00CT; Schemes, discussion before 01J9
-(blueprint: lem-weil-pbc-spec-field-point-residue-field), clause (1).
-
-Proof: use `lem-weil-pbc-spec-residue-field-identification` to identify the scheme
-residue field with the residue field of the localization, compatibly with the germ
-and residue maps. Then `lem-weil-pbc-prime-residue-field-algebra` gives the kernel
-and the fraction-field structure on the prime quotient. -/
-theorem spec_field_point_residue_field
-    (R : CommRingCat.{u}) (p : PrimeSpectrum R) :
-    Nonempty ((Spec R).residueField p ≅
-      CommRingCat.of (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal))) ∧
-    CommRingCat.ofHom (algebraMap R p.asIdeal.ResidueField) ≫
-        (Scheme.Spec.residueFieldIso R p).inv =
-      (Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ p trivial ≫
-        (Spec R).residue p ∧
-    RingHom.ker (algebraMap R p.asIdeal.ResidueField) = p.asIdeal ∧
-    IsFractionRing (R ⧸ p.asIdeal) p.asIdeal.ResidueField := by
-  refine ⟨⟨Scheme.Spec.residueFieldIso R p⟩, ?_, ?_, inferInstance⟩
-  · exact Scheme.Spec.algebraMap_residueFieldIso_inv R p
-  · exact Ideal.ker_algebraMap_residueField p.asIdeal
-
-/-- Stacks, Schemes, discussion before 01J9 and its following diagram
-(blueprint: lem-weil-pbc-spec-field-point-residue-field), clause (2).
-
-Proof: `lem-weil-pbc-affine-open-spec-points` supplies the corresponding prime and
-open immersion. Apply `lem-weil-pbc-residue-field-point-naturality`: the residue-field
-map of the open immersion is an isomorphism, and the canonical point maps commute.
-Use `lem-weil-pbc-spec-residue-field-identification` to replace the affine point map
-by Spec of the canonical ring map. Invert the residue-field isomorphism and compose
-contravariantly to obtain the asserted factorization. -/
-theorem spec_field_point_residue_field_affine_open
-    (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U)
-    (x : X) (hx : x ∈ U) :
-    ∃ (p : PrimeSpectrum Γ(X, U)) (hp : hU.fromSpec p = x)
-      (e : X.residueField x ≅ CommRingCat.of p.asIdeal.ResidueField),
-      e.hom = (X.residueFieldCongr hp).inv ≫ hU.fromSpec.residueFieldMap p ≫
-        (Scheme.Spec.residueFieldIso Γ(X, U) p).hom ∧
-      X.fromSpecResidueField x =
-        Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U) p.asIdeal.ResidueField) ≫ e.inv) ≫
-          hU.fromSpec := by
-  have hx' : x ∈ Set.range hU.fromSpec := by
-    rw [hU.range_fromSpec]
-    exact hx
-  obtain ⟨p, rfl⟩ := hx'
-  let e := asIso (hU.fromSpec.residueFieldMap p) ≪≫
-    Scheme.Spec.residueFieldIso Γ(X, U) p
-  refine ⟨p, rfl, e, ?_, ?_⟩
-  · simp [e]
-  · simp only [e, Iso.trans_inv, asIso_inv, Spec.map_comp, Category.assoc]
-    rw [Scheme.Spec.map_residueFieldIso_inv_eq_fromSpecResidueField_assoc]
-    rw [← Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField hU.fromSpec p]
-    simp
-
 /-- Stacks, Schemes, discussion before 01J9; Algebra, 00E2 and 00CT
 (blueprint: lem-weil-pbc-spec-field-point-residue-field), clause (3).
 
@@ -123,43 +70,5 @@ theorem spec_field_point_residue_field_map
     exact (Category.id_comp _).symm
   · intro l' hl'
     exact Ideal.ResidueField.ringHom_ext (hl'.trans hl.symm)
-
-/-- Stacks, Algebra, Local rings and 00CT; Schemes, discussion before 01J9
-(blueprint: lem-weil-pbc-spec-field-point-residue-field), final part of clause (3).
-
-Proof: injectivity gives kernel zero, which is the generic point because every prime
-contains it (`def-weil-affine-spectrum`). Clause (1) identifies its residue field as a
-fraction field of R. Clause (3)'s induced field map extends the given map. It is injective
-as a map of fields. Every element of K is a ratio of images of elements of R, with nonzero
-denominator; the corresponding ratio in the residue field maps to it. Thus the induced
-field map is bijective, hence an isomorphism. -/
-theorem spec_field_point_residue_field_generic
-    (R : Type u) [CommRing R] [IsDomain R] (K : Type u) [Field K]
-    [Algebra R K] [IsFractionRing R K] :
-    (Spec.map (CommRingCat.ofHom (algebraMap R K)) (IsLocalRing.closedPoint K)).asIdeal = ⊥ ∧
-    IsGenericPoint
-      (Spec.map (CommRingCat.ofHom (algebraMap R K)) (IsLocalRing.closedPoint K)) Set.univ ∧
-    IsIso ((Spec (.of R)).descResidueField
-      (Scheme.stalkClosedPointTo (Spec.map (CommRingCat.ofHom (algebraMap R K))))) := by
-  obtain ⟨q, hq, l, hker, hl, hcomp, -⟩ :=
-    spec_field_point_residue_field_map R K (algebraMap R K)
-  have hqbot : q.asIdeal = ⊥ := by
-    rw [hker, ← RingHom.injective_iff_ker_eq_bot]
-    exact IsFractionRing.injective R K
-  refine ⟨by rw [hq]; exact hqbot, ?_, ?_⟩
-  · change closure {_} = Set.univ
-    rw [hq, PrimeSpectrum.closure_singleton, hqbot, PrimeSpectrum.zeroLocus_bot]
-  · have hsurj : Function.Surjective l.hom := by
-      intro z
-      obtain ⟨a, b, -, rfl⟩ := IsFractionRing.div_surjective R z
-      refine ⟨algebraMap R q.asIdeal.ResidueField a /
-        algebraMap R q.asIdeal.ResidueField b, ?_⟩
-      rw [map_div₀]
-      exact congrArg₂ (· / ·) (RingHom.congr_fun hcomp a) (RingHom.congr_fun hcomp b)
-    have : IsIso l := (ConcreteCategory.isIso_iff_bijective l).mpr
-      ⟨RingHom.injective l.hom, hsurj⟩
-    rw [hl] at this
-    rw [isIso_comp_left_iff, isIso_comp_left_iff] at this
-    simpa [← hq] using this
 
 end AlgebraicGeometry

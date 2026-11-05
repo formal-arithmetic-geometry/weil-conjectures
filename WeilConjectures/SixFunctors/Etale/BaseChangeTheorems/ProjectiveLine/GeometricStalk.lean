@@ -205,26 +205,4 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
     funext fun x ↦ (e₂.symm_apply_apply _).symm.trans (congrArg e₂.symm (h x))
   exact hfun ▸ e₂.symm.bijective.comp (hb.comp e₁.bijective)
 
-/-- **Injective acyclicity of the projective line**: for every scheme `S`, the projection
-`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`. For an injective
-torsion sheaf `I` the higher direct images `Rᵠp_* I` vanish, and after any base change the
-exchange morphism `g⁻¹ Rᵠp_* I ⟶ Rᵠf'_* g'⁻¹ I` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`), so the target
-vanishes too.
-(blueprint: `prop-weil-pbc-projective-line`) -/
-theorem Etale.hasInjectiveAcyclicity_projectiveLine (S : Scheme.{u}) :
-    Etale.HasInjectiveAcyclicity Λ (ProjectiveLine S ↘ S) := by
-  intro T X' g f' g' sq I hI _ q hq
-  obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le hq.le
-  have := hI
-  have := Etale.isIso_baseChangeHomologyMap_projectiveLine Λ sq I n
-  refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor _ n).mapIso
-    (((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.mapIso
-      ((((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app I))).symm
-  refine IsZero.of_iso ?_ (asIso (Etale.baseChangeHomologyMap Λ sq n I)).symm
-  refine IsZero.of_iso ?_
-    ((((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso n).app _).symm
-  exact ((g)^*[ModuleCat.{u + 1} Λ]).map_isZero
-    (Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor _ I (q := n) (by lia))
-
 end AlgebraicGeometry

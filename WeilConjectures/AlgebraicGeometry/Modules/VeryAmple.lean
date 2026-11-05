@@ -181,48 +181,4 @@ theorem IsAmple.tensorObj {f : X ⟶ Spec (.of K)} {L M : X.Modules} (hL : IsAmp
   exact ((L.tensorPowMulIso a b).symm ⊗ᵢ ((M.tensorPowMulIso b a).symm ≪≫
     eqToIso (congrArg M.tensorPow (Nat.mul_comm b a)))) ≪≫ (L.tensorPowTensorObjIso M _).symm
 
-/-- **Very ampleness is stable under field extension.** If `M = i^* 𝒪(1)` for a closed
-immersion `i : X ⟶ ℙ(n; k)`, then for a field extension `K/k` the base change `M_K` is the
-pullback of `𝒪(1)` along the base change `i_K : X_K ⟶ ℙ(n; K)` of `i`, which is again a closed
-immersion (Stacks 01JY).
-
-(blueprint: `lem-pc-very-ample-ample`, `lem-pc-closed-imm-base-change`) -/
-theorem IsVeryAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)}
-    {M : X.Modules} (h : IsVeryAmple f M) (K : Type u) [Field K] [Algebra k K] :
-    IsVeryAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
-      ((Scheme.Modules.pullback
-        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M) := by
-  obtain ⟨n, i, hn, hi, hif, ⟨e⟩⟩ := h
-  set g := Spec.map (CommRingCat.ofHom (algebraMap k K))
-  have w : pullback.snd f g ≫ g = (pullback.fst f g ≫ i) ≫ ℙ(n; Spec (.of k)) ↘ Spec (.of k) := by
-    rw [Category.assoc, hif, pullback.condition]
-  let i' := ProjectiveSpace.liftBaseChange (pullback.snd f g) (pullback.fst f g ≫ i) w
-  -- `i'` is the base change of `i` along `ℙ(n; K) ⟶ ℙ(n; k)`.
-  have hpb : IsPullback i' (pullback.fst f g) (ProjectiveSpace.map n g) i := by
-    refine IsPullback.of_right (h₂₂ := ℙ(n; Spec (.of k)) ↘ Spec (.of k))
-      (h₁₂ := ℙ(n; Spec (.of K)) ↘ Spec (.of K)) (v₁₃ := g) ?_
-      (ProjectiveSpace.liftBaseChange_map _ _ _) (ProjectiveSpace.isPullback_map n g).flip
-    rw [ProjectiveSpace.liftBaseChange_over, hif]
-    exact (IsPullback.of_hasPullback f g).flip
-  have : IsClosedImmersion i' := MorphismProperty.of_isPullback hpb.flip hi
-  refine ⟨n, i', hn, this, ProjectiveSpace.liftBaseChange_over _ _ _, ⟨?_⟩⟩
-  exact (Scheme.Modules.pullback i').mapIso (ProjectiveSpace.pullbackMapTwistIso n g 1).symm ≪≫
-    (Scheme.Modules.pullbackComp i' (ProjectiveSpace.map n g)).app _ ≪≫
-    (Scheme.Modules.pullbackCongr (ProjectiveSpace.liftBaseChange_map _ _ _)).app _ ≪≫
-    (Scheme.Modules.pullbackComp (pullback.fst f g) i).symm.app _ ≪≫
-    (Scheme.Modules.pullback (pullback.fst f g)).mapIso e
-
-/-- **Ampleness is stable under field extension**, by
-`AlgebraicGeometry.IsVeryAmple.pullback_of_field` applied to a very ample tensor power.
-
-(blueprint: `lem-pc-very-ample-ample`) -/
-theorem IsAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)}
-    {M : X.Modules} (h : IsAmple f M) (K : Type u) [Field K] [Algebra k K] :
-    IsAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
-      ((Scheme.Modules.pullback
-        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M) := by
-  obtain ⟨hinv, m, hm, hv⟩ := h
-  exact ⟨inferInstance, m, hm, (hv.pullback_of_field K).of_iso
-    (Scheme.Modules.nonempty_pullback_tensorPow_iso _ M m).some⟩
-
 end AlgebraicGeometry

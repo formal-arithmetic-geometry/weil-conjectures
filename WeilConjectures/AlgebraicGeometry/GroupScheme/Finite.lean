@@ -72,30 +72,6 @@ theorem exists_hopfAlgebra_iso (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.
         Iso.inv_hom_id_assoc])]
     exact Scheme.Hom.finrankΓ_SpecMap K H.unop
 
-/-- Blueprint `lem-sc-connected-finite-order`: Connected finite group schemes have `p`-power order
-
-Let `G` be a finite group scheme over a field `K` of characteristic `p > 0`. If `G` is
-connected, then its order `|G| = dim_K Γ(G, 𝒪_G)` is a power of `p`.
-
-`G` is the spectrum of a finite-dimensional commutative Hopf algebra `H`, which is local since
-`Spec H` is connected; conclude by `Bialgebra.exists_finrank_eq_pow`. This also proves blueprint
-`lem-sc-connected-finite-order`. -/
-theorem exists_finrankΓ_eq_pow (p : ℕ) [Fact p.Prime] [CharP K p]
-    (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [ConnectedSpace G.left] :
-    ∃ r : ℕ, G.hom.finrankΓ = p ^ r := by
-  obtain ⟨H, _, _, e, -, _, hfin⟩ := exists_hopfAlgebra_iso G
-  have : IsArtinianRing H := .of_finite K H
-  have : ConnectedSpace (PrimeSpectrum H) :=
-    (Scheme.homeoOfIso e.symm).surjective.connectedSpace (Scheme.homeoOfIso e.symm).continuous
-  have : Subsingleton (PrimeSpectrum H) := subsingleton_of_preconnected_totallyDisconnected
-  have : Nontrivial H := PrimeSpectrum.nonempty_iff_nontrivial.1 inferInstance
-  have : IsLocalRing H := .of_unique_max_ideal <| by
-    obtain ⟨M, hM⟩ := Ideal.exists_maximal H
-    exact ⟨M, hM, fun N hN ↦ congrArg PrimeSpectrum.asIdeal
-      (Subsingleton.elim (⟨N, hN.isPrime⟩ : PrimeSpectrum H) ⟨M, hM.isPrime⟩)⟩
-  rw [hfin]
-  exact Bialgebra.exists_finrank_eq_pow K H p
-
 /-- Blueprint `lem-sc-fg-order-prime-etale`: Group schemes of order prime to `p` are étale
 
 Let `G` be a finite group scheme over a field `K` of characteristic `p`, of order `m`. If

@@ -132,22 +132,6 @@ private theorem ordinaryEvaluation_pure (K L : RingedTensorModules.{c, v, r} J R
   exact RingedDerivedNative.uncurry_pure.{c, v, r} J R K
     (SheafOfModules.homObj (R := R) K L) L (𝟙 _) V φ x
 
-private theorem tensor_ext (K L N : RingedTensorModules.{c, v, r} J R)
-    (f g : (SheafOfModules.monoidalCategory R).tensorObj K L ⟶ N)
-    (h : ∀ (V : Cᵒᵖ) (x : K.val.obj V) (y : L.val.obj V),
-      f.val.app V (sheafTensorGenerator.{c, v, r} J R K L V x y) =
-        g.val.app V (sheafTensorGenerator.{c, v, r} J R K L V x y)) : f = g := by
-  apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification (R := R) K L).inv).1
-  apply ((PresheafOfModules.sheafificationAdjunction.{max c v r}
-    (𝟙 ((sheafCompose J
-      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj)).homEquiv
-        (K.val ⊗ L.val) N).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  apply PresheafOfModules.hom_ext
-  intro V
-  apply ModuleCat.MonoidalCategory.tensor_ext
-  exact h V
-
 attribute [local irreducible] ordinaryEvaluation coefficientTensorGenerator
 
 variable {D : Type d} [Category.{vd} D] (J' : GrothendieckTopology D)

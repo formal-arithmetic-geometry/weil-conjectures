@@ -86,7 +86,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-
 /-- `ℓ` stays different from the characteristic after a field extension of `k₀`. -/
 lemma fact_ringChar_ne_of_algebra (k₀ : Type u) [Field k₀] {l : ℕ} [Fact (ringChar k₀ ≠ l)]
     (k₀' : Type u) [Field k₀'] [Algebra k₀ k₀'] : Fact (ringChar k₀' ≠ l) :=
@@ -207,32 +206,6 @@ theorem exists_traceCup_poincareDuality :
   congr 1
   rw [Module.natCard_eq_pow_finrank (K := k₀) (V := k₀'), Nat.cast_pow, ← pow_mul, ← pow_mul,
     mul_comm d]
-
-/-- Blueprint `prop-poincare-pairing`: Poincaré duality and Frobenius similitude.
-
-For `X` smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, with
-`Hⁱ = Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` and geometric Frobenius `F`, there is a trace–cup structure on `H^•`,
-with pairings `⟨x, y⟩ = tr (x ⌣ y)`, such that the trace `tr : H^{2d} ⟶ ℚ̄_ℓ(-d)` is an
-isomorphism and, for `i + j = 2d`:
-
-* the pairing `Hⁱ × H^j ⟶ ℚ̄_ℓ(-d)` is perfect, equivalently it induces a Frobenius-equivariant
-  isomorphism `H^j ≅ (Hⁱ)^∨(-d)`;
-* `F` acts on `ℚ̄_ℓ(-d)` by `q^d`, and `⟨F x, F y⟩ = q^d ⟨x, y⟩`;
-* graded commutativity gives `⟨y, x⟩ = (-1)ⁱ ⟨x, y⟩`; in middle degree `i = j = d` the pairing
-  is `(-1)^d`-symmetric. -/
-theorem exists_traceCup_poincarePairing :
-    ∃ T : FrobeniusModule.TraceCup.{u + 1} 𝐇 (2 * d) 𝐪,
-      Function.Bijective T.trace ∧
-      (∀ z, T.trace ((𝐇 (2 * d)).frobenius z) = 𝐪 * T.trace z) ∧
-      ∀ (i j : ℤ) (h : i + j = 2 * d),
-        (T.pairing i j h).IsPerfPair ∧
-        Nonempty ((𝐇 j).Equiv (((𝐇 i).dual).tateTwist (Nat.card k₀) (-d))) ∧
-        (∀ x y,
-          T.pairing i j h ((𝐇 i).frobenius x) ((𝐇 j).frobenius y) = 𝐪 * T.pairing i j h x y) ∧
-        ∀ x y, T.pairing j i ((add_comm j i).trans h) y x = i.negOnePow • T.pairing i j h x y := by
-  obtain ⟨T, htr, -, -, hp, hF, hsim, hrec, -⟩ := exists_traceCup_poincareDuality k₀ l X d
-  exact ⟨T, htr, hF, fun i j h ↦ ⟨hp i j h, (hrec i j h).1, hsim i j h,
-    T.pairing_comm_of_eq_two_mul rfl i j h⟩⟩
 
 /-- Blueprint `sk-thm-poincare-duality`: Poincaré duality.
 

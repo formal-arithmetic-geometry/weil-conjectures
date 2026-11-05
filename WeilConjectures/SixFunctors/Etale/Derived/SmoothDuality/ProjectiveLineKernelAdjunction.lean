@@ -43,31 +43,11 @@ section ProjectionMap
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (p : X ⟶ Y)
 
-/-- The projection map of `Rp_*` is the projection map of the adjunction `Lp^* ⊣ Rp_*` for the
-monoidal structure of `Lp^*`. -/
-lemma rightDerivedLowerStarProjectionMap_app_app_eq_monoidalProjection
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) p).app M).app L =
-      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).monoidalProjection M L :=
-  rfl
-
 end ProjectionMap
 
 section ProjectionFormula
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-
-/-- The projection formula for the derived pushforward along a proper morphism, at finite
-coefficients, in the form `CategoryTheory.Adjunction.monoidalProjection`. -/
-instance isIso_monoidalProjection_of_isProper {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p]
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso
-      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).monoidalProjection M L) := by
-  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ p
-  rw [← rightDerivedLowerStarProjectionMap_app_app_eq_monoidalProjection]
-  infer_instance
 
 end ProjectionFormula
 

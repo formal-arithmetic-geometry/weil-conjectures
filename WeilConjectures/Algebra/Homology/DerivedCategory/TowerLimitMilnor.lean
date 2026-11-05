@@ -142,20 +142,4 @@ theorem shortExact_milnor_of_isHomotopyLimit (hc : IsHomotopyLimit c) (i j : ℤ
     dsimp only at this
     rwa [hlift, epi_comp_iff_of_isIso] at this
 
-/-- **`R¹lim = 0` gives `Hʲ(R lim Fₙ) = lim Hʲ(Fₙ)`.** If, for `i + 1 = j`, the map `1 - t` on a
-product of the `Hⁱ(Fₙ)` is an epimorphism (e.g. under the Mittag-Leffler condition), then the
-map `Hʲ(c.pt) ⟶ lim Hʲ(Fₙ)` induced by a homotopy limit cone `c` is an isomorphism. -/
-theorem isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit (hc : IsHomotopyLimit c)
-    (i j : ℤ) (hij : i + 1 = j) {P : Fan fun n : ℕ ↦ (homologyFunctor C i).obj (F.obj (op n))}
-    (hP : IsLimit P) (t : P.pt ⟶ P.pt)
-    (ht : ∀ n : ℕ, t ≫ P.proj n =
-      P.proj (n + 1) ≫ (homologyFunctor C i).map (F.map (homOfLE n.le_succ).op))
-    (hepi : Epi (𝟙 P.pt - t)) {d : Cone (F ⋙ homologyFunctor C j)} (hd : IsLimit d) :
-    IsIso (hd.lift ((homologyFunctor C j).mapCone c)) := by
-  obtain ⟨a, hz, hS⟩ := shortExact_milnor_of_isHomotopyLimit hc i j hij hP t ht hd
-  have : Mono (hd.lift ((homologyFunctor C j).mapCone c)) :=
-    (ShortComplex.exact_iff_mono _ ((isZero_cokernel_of_epi _).eq_of_src _ _)).1 hS.exact
-  have := hS.epi_g
-  exact isIso_of_mono_of_epi _
-
 end DerivedCategory

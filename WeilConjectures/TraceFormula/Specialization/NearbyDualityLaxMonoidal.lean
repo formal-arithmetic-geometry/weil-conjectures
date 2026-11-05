@@ -344,23 +344,6 @@ noncomputable def _root_.CategoryTheory.ObjectProperty.laxMonoidalLift (F : C �
   left_unitality X := ObjectProperty.hom_ext _ (Functor.LaxMonoidal.left_unitality F X.obj)
   right_unitality X := ObjectProperty.hom_ext _ (Functor.LaxMonoidal.right_unitality F X.obj)
 
-
-/-- The unit map of a composite `F ⋙ R ⋙ I` of lax monoidal functors, `R` the lax monoidal right
-adjoint of an oplax monoidal functor `L`, is invertible if those of `F` and `I` and the counit of
-`L` are, and `I` inverts the unit of `L ⊣ R` at the tensor unit. -/
-lemma _root_.CategoryTheory.Adjunction.isIso_ε_comp_rightAdjointLaxMonoidal
-    {C D T S : Type*} [Category* C] [Category* D] [Category* T] [Category* S]
-    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory T] [MonoidalCategory S]
-    (F : C ⥤ D) {L : T ⥤ D} {R : D ⥤ T} (I : T ⥤ S) [F.LaxMonoidal] [L.OplaxMonoidal]
-    [I.LaxMonoidal] (adj : L ⊣ R) [IsIso (Functor.LaxMonoidal.ε F)]
-    [IsIso (Functor.OplaxMonoidal.η L)] [IsIso (Functor.LaxMonoidal.ε I)]
-    [IsIso (I.map (adj.unit.app (𝟙_ T)))] :
-    IsIso (@Functor.LaxMonoidal.ε _ _ _ _ _ _ (F ⋙ R ⋙ I)
-      (@Functor.LaxMonoidal.comp _ _ _ _ _ _ _ _ _ F (R ⋙ I) _
-        (@Functor.LaxMonoidal.comp _ _ _ _ _ _ _ _ _ R I adj.rightAdjointLaxMonoidal _))) := by
-  simp only [Functor.LaxMonoidal.comp_ε, Adjunction.rightAdjointLaxMonoidal_ε,
-    Adjunction.homEquiv_unit, Functor.comp_map, Functor.map_comp]
-  infer_instance
 end Lift
 
 end Verdier

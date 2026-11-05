@@ -61,20 +61,6 @@ lemma connectingOfIso_comp {a c c' : Cx} (g : c' ⟶ c)
   simp only [connectingOfIso, Functor.map_comp, Category.assoc]
   rw [reassoc_of% h]
 
-
-
-/-- The connecting morphism of `connectingOfIso` is natural in its target. -/
-lemma connectingOfIso_comp_shift {a a' c : Cx} (g : a ⟶ a')
-    (δ : ι.obj c ⟶ (shiftFunctor Dx (1 : ℤ)).obj (ι.obj a)) :
-    connectingOfIso A ιs ι R e (δ ≫ (shiftFunctor Dx (1 : ℤ)).map (ι.map g)) =
-      connectingOfIso A ιs ι R e δ ≫ (shiftFunctor Ds (1 : ℤ)).map (ιs.map (A.map g)) := by
-  have h := e.inv.naturality g
-  simp only [Functor.comp_map] at h
-  have h' := (R.commShiftIso (1 : ℤ)).hom.naturality (ι.map g)
-  simp only [Functor.comp_map] at h'
-  simp only [connectingOfIso, Functor.map_comp, Category.assoc]
-  rw [reassoc_of% h', ← Functor.map_comp, h, Functor.map_comp]
-
 end ConnectingNaturality
 
 /-! ### Distinguished triangles of Weil objects -/

@@ -138,11 +138,6 @@ variable (l) in
 noncomputable def adicUpperStarLowerStarAdjunction : (g)^*ᵃ[l] ⊣ (g)_*ᵃ[l] :=
   (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g).modAdjunction _
 
-/-- The underlying sheaf of `g_* M` is the pushforward of the underlying sheaf of `M`. -/
-lemma adicLowerStar_obj_X (M : AdicSheaf l Z) :
-    ((g)_*ᵃ[l].obj M).X = (g)_*[WeilCoefficients.{u} l].obj M.X :=
-  rfl
-
 /-- The underlying sheaf of `g^* M` is the pullback of the underlying sheaf of `M`. -/
 lemma adicUpperStar_obj_X (M : AdicSheaf l Y) :
     ((g)^*ᵃ[l].obj M).X = (g)^*[WeilCoefficients.{u} l].obj M.X :=

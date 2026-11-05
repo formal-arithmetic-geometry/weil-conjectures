@@ -103,10 +103,6 @@ exact pairing between `V` and `Vᘁ`. -/
 noncomputable def categoricalTrace {V : C} [HasRightDual V] (T : V ⟶ V) : End (𝟙_ C) :=
   MonoidalCategory.trace T
 
-lemma categoricalTrace_eq_trace {V : C} [HasRightDual V] (T : V ⟶ V) :
-    categoricalTrace T = ExactPairing.trace V Vᘁ T :=
-  rfl
-
 /-- The categorical trace does not depend on the choice of the right dual. -/
 theorem categoricalTrace_congr {V : C} (h h' : HasRightDual V) (T : V ⟶ V) :
     @categoricalTrace _ _ _ _ _ h T = @categoricalTrace _ _ _ _ _ h' T :=
@@ -118,11 +114,6 @@ theorem categoricalTrace_congr {V : C} (h h' : HasRightDual V) (T : V ⟶ V) :
 theorem categoricalTrace_conj {V W : C} [HasRightDual V] [HasRightDual W] (e : V ≅ W)
     (T : V ⟶ V) : categoricalTrace (e.inv ≫ T ≫ e.hom) = categoricalTrace T :=
   (trace_eq_of_iso e T _ (by simp)).symm
-
-/-- The identity of the monoidal unit has trace `1`. -/
-theorem categoricalTrace_id_tensorUnit [HasRightDual (𝟙_ C)] :
-    categoricalTrace (𝟙 (𝟙_ C)) = 1 :=
-  trace_id_tensorUnit
 
 /-- An endomorphism of a zero object has trace `0`: the evaluation `Vᘁ ⊗ V ⟶ 𝟙_ C` corresponds to
 a morphism out of `V`, so it is zero. -/
@@ -174,11 +165,6 @@ theorem traceOrZero_conj {V W : C} (e : V ≅ W) (T : V ⟶ V) :
   · have hW : ¬ Nonempty (HasRightDual W) := fun ⟨dW⟩ ↦
       hV ⟨@HasRightDual.mk _ _ _ _ Wᘁ (exactPairingCongrLeft e)⟩
     rw [traceOrZero, traceOrZero, dif_neg hV, dif_neg hW]
-
-/-- The identity of the monoidal unit has trace `1`. -/
-theorem traceOrZero_id_tensorUnit : traceOrZero (𝟙 (𝟙_ C)) = 1 := by
-  let : HasRightDual (𝟙_ C) := ⟨𝟙_ C⟩
-  rw [traceOrZero_eq_categoricalTrace, categoricalTrace_id_tensorUnit]
 
 /-- An endomorphism of a zero object has trace `0`. -/
 theorem traceOrZero_eq_zero_of_isZero {V : C} (hV : Limits.IsZero V) (T : V ⟶ V) :

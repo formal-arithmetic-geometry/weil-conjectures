@@ -108,23 +108,6 @@ variable {C₁ : Type w} [Category.{v} C₁] {C₂ : Type w} [Category.{v} C₂]
   (U₁ : ι → Over V₁) (U₂ : ι → Over V₂)
   (P₁ : C₁ᵒᵖ ⥤ AddCommGrpCat.{max w v}) (P₂ : C₂ᵒᵖ ⥤ AddCommGrpCat.{max w v})
 
-/-- Maps between the members of two Čech nerves, compatible with the face maps, induce a map
-of Čech cochains which commutes with the Čech differentials. -/
-lemma cechComplex_d_cochainMap
-    (ψ : ∀ {k : ℕ} (y : Fin (k + 1) → ι),
-      P₁.obj (op (cechNerveObj U₁ y).left) →+ P₂.obj (op (cechNerveObj U₂ y).left))
-    (hψ : ∀ {k : ℕ} (y : Fin (k + 2) → ι) (i : Fin (k + 2))
-      (x : P₁.obj (op (cechNerveObj U₁ (y ∘ i.succAbove)).left)),
-      ψ y (P₁.map (cechNerveMap U₁ y i.succAbove).left.op x) =
-        P₂.map (cechNerveMap U₂ y i.succAbove).left.op (ψ (y ∘ i.succAbove) x))
-    (k : ℕ) (c : ((cechComplex U₁).obj P₁).X k) :
-    (((cechComplex U₂).obj P₂).d k (k + 1) fun y ↦ ψ y (c y)) =
-      fun y ↦ ψ y (((cechComplex U₁).obj P₁).d k (k + 1) c y) := by
-  funext y
-  rw [cechComplex_d_apply, cechComplex_d_apply, map_sum]
-  refine Finset.sum_congr rfl fun i _ ↦ ?_
-  rw [map_zsmul, hψ]
-
 end CochainMap
 
 section RelativeLimit
@@ -352,110 +335,7 @@ variable {C' : Type w} [Category.{v} C'] {C : Type w} [Category.{v} C] {F : C' �
   [∀ j, PreservesFiniteProducts (Over.post F (X := pV.diag.obj j))]
   (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
 
-/-- The map from the Čech cochains of `F.op ⋙ P` for the stage `αⱼ` to the Čech cochains of
-`P` for the limit morphism, induced by the projections `limitNerveLeg`. -/
-noncomputable def stageCochainMap (j : J) (k : ℕ) :
-    CechCochain (stageFamily h j) (F.op ⋙ P) k →+ CechCochain (limitFamily h) P k :=
-  AddMonoidHom.pi fun y ↦ (P.map (limitNerveLeg h j y).op).hom.comp (Pi.evalAddMonoidHom _ y)
-
-lemma stageCochainMap_apply (j : J) {k : ℕ} (c : CechCochain (stageFamily h j) (F.op ⋙ P) k)
-    (y : Fin (k + 1) → Fin 1) :
-    stageCochainMap h P j k c y = P.map (limitNerveLeg h j y).op (c y) :=
-  rfl
-
-/-- The transition map between the Čech cochains of `F.op ⋙ P` for two stages. -/
-noncomputable def stageTransitionCochainMap {i j : J} (g : i ⟶ j) (k : ℕ) :
-    CechCochain (stageFamily h j) (F.op ⋙ P) k →+ CechCochain (stageFamily h i) (F.op ⋙ P) k :=
-  AddMonoidHom.pi fun y ↦
-    (P.map (F.map (stageNerveMap h g y)).op).hom.comp (Pi.evalAddMonoidHom _ y)
-
-omit [HasFiniteProducts (Over V)]
-  [∀ j, PreservesFiniteProducts (Over.post F (X := pV.diag.obj j))] in
-lemma stageTransitionCochainMap_apply {i j : J} (g : i ⟶ j) {k : ℕ}
-    (c : CechCochain (stageFamily h j) (F.op ⋙ P) k) (y : Fin (k + 1) → Fin 1) :
-    stageTransitionCochainMap h P g k c y = P.map (F.map (stageNerveMap h g y)).op (c y) :=
-  rfl
-
-lemma stageCochainMap_d (j : J) (k : ℕ)
-    (c : ((cechComplex (stageFamily h j)).obj (F.op ⋙ P)).X k) :
-    ((cechComplex (limitFamily h)).obj P).d k (k + 1) (stageCochainMap h P j k c) =
-      stageCochainMap h P j (k + 1) (((cechComplex (stageFamily h j)).obj (F.op ⋙ P)).d k
-        (k + 1) c) :=
-  cechComplex_d_cochainMap (stageFamily h j) (limitFamily h) (F.op ⋙ P) P
-    (fun y ↦ (P.map (limitNerveLeg h j y).op).hom) (fun y i x ↦ by
-      change P.map (limitNerveLeg h j y).op (P.map (F.map (cechNerveMap _ y _).left).op x) =
-        P.map (cechNerveMap _ y _).left.op (P.map (limitNerveLeg h j _).op x)
-      rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← P.map_comp,
-        ← P.map_comp, ← op_comp, ← op_comp, limitNerveLeg_cechNerveMap]) k c
-
-omit [HasFiniteProducts (Over V)]
-  [∀ j, PreservesFiniteProducts (Over.post F (X := pV.diag.obj j))] in
-lemma stageTransitionCochainMap_d {i j : J} (g : i ⟶ j) (k : ℕ)
-    (c : ((cechComplex (stageFamily h j)).obj (F.op ⋙ P)).X k) :
-    ((cechComplex (stageFamily h i)).obj (F.op ⋙ P)).d k (k + 1)
-        (stageTransitionCochainMap h P g k c) =
-      stageTransitionCochainMap h P g (k + 1)
-        (((cechComplex (stageFamily h j)).obj (F.op ⋙ P)).d k (k + 1) c) :=
-  cechComplex_d_cochainMap (stageFamily h j) (stageFamily h i) (F.op ⋙ P) (F.op ⋙ P)
-    (fun y ↦ (P.map (F.map (stageNerveMap h g y)).op).hom) (fun y l x ↦ by
-      change P.map (F.map (stageNerveMap h g y)).op (P.map (F.map (cechNerveMap _ y _).left).op x)
-        = P.map (F.map (cechNerveMap _ y _).left).op
-          (P.map (F.map (stageNerveMap h g _)).op x)
-      rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← P.map_comp,
-        ← P.map_comp, ← op_comp, ← op_comp, ← F.map_comp, ← F.map_comp,
-        stageNerveMap_cechNerveMap]) k c
-
-lemma stageCochainMap_stageTransitionCochainMap {i j : J} (g : i ⟶ j) (k : ℕ)
-    (c : CechCochain (stageFamily h j) (F.op ⋙ P) k) :
-    stageCochainMap h P i k (stageTransitionCochainMap h P g k c) = stageCochainMap h P j k c := by
-  funext y
-  change P.map (limitNerveLeg h i y).op (P.map (F.map (stageNerveMap h g y)).op (c y)) =
-    P.map (limitNerveLeg h j y).op (c y)
-  rw [← ConcreteCategory.comp_apply, ← P.map_comp, ← op_comp, limitNerveLeg_stageNerveMap]
-
 variable [IsCofiltered J]
-
-/-- **Čech complexes along a cofiltered limit of morphisms.** Let `q : W ⟶ V` be the cofiltered
-limit of morphisms `αⱼ : Wⱼ ⟶ Vⱼ` of `C'` under `F : C' ⥤ C`, and let `P` be a presheaf on `C`
-sending such cofiltered limits to filtered colimits. If the Čech complexes of `F.op ⋙ P` for all
-the `αⱼ` are exact in positive degrees, so is the Čech complex of `P` for `q`: it is the filtered
-colimit of the former. -/
-theorem exactAt_cechComplex_of_relativeLimitPresentation
-    [F.PreservesRelativeFilteredColimits.{t} P]
-    (hstage : ∀ (j : J) (q : ℕ),
-      ((cechComplex (stageFamily h j)).obj (F.op ⋙ P)).ExactAt (q + 1))
-    (q : ℕ) : ((cechComplex (limitFamily h)).obj P).ExactAt (q + 1) := by
-  have hcol {k : ℕ} (y : Fin (k + 1) → Fin 1) :=
-    (Functor.PreservesRelativeFilteredColimits.nonempty_isColimit (F := F) (P := P)
-      (stageNerveCone h y) (isLimitStageNerveCone h y)).some
-  rw [exactAt_cechComplex_iff]
-  intro c hc
-  let y₀ : Fin (q + 2) → Fin 1 := fun _ ↦ 0
-  let y₁ : Fin (q + 3) → Fin 1 := fun _ ↦ 0
-  obtain ⟨⟨j⟩, x₀, hx₀⟩ := AddCommGrpCat.exists_ι_apply_eq_of_isColimit (hcol y₀) (c y₀)
-  let x : ((cechComplex (stageFamily h j)).obj (F.op ⋙ P)).X (q + 1) := fun _ ↦ x₀
-  have hx : stageCochainMap h P j (q + 1) x = c := by
-    funext y
-    obtain rfl : y = y₀ := Subsingleton.elim _ _
-    exact hx₀
-  -- the differential of `x` vanishes in the colimit, hence at some later stage
-  have hdx : P.map (limitNerveLeg h j y₁).op
-      ((((cechComplex (stageFamily h j)).obj (F.op ⋙ P)).d (q + 1) (q + 2) x) y₁) = 0 := by
-    have := congrFun ((stageCochainMap_d h P j (q + 1) x).symm.trans
-      ((congrArg _ hx).trans hc)) y₁
-    exact this
-  obtain ⟨⟨j'⟩, a, ha⟩ := AddCommGrpCat.exists_map_eq_zero_of_isColimit (hcol y₁) _ hdx
-  let g : j' ⟶ j := a.unop
-  let x' := stageTransitionCochainMap h P g (q + 1) x
-  have hx' : ((cechComplex (stageFamily h j')).obj (F.op ⋙ P)).d (q + 1) (q + 2) x' = 0 := by
-    rw [stageTransitionCochainMap_d]
-    funext y
-    obtain rfl : y = y₁ := Subsingleton.elim _ _
-    exact ha
-  obtain ⟨b, hb⟩ := (exactAt_cechComplex_iff _ _ _).1 (hstage j' q) x' hx'
-  refine ⟨stageCochainMap h P j' q b, ?_⟩
-  rw [stageCochainMap_d, hb, ← hx]
-  exact stageCochainMap_stageTransitionCochainMap h P g (q + 1) x
 
 end Exactness
 

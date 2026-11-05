@@ -41,14 +41,4 @@ universe u
 
 namespace Padic
 
-/-- The finite residue field `k_E = 𝒪_E / 𝔪_E`.
-
-Source: blueprint `def-weil-finite-field-fiber`, order 411, and slopmaster2 Definition
-`def:weil-finite-coefficient-datum` (blueprint: def-weil-l-adic-coefficient-extension). -/
-@[reducible]
-noncomputable def coefficientExtensionResidueField (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
-    Type u :=
-  coefficientExtensionIntegers l E ⧸ coefficientExtensionMaximalIdeal l E
-
 end Padic

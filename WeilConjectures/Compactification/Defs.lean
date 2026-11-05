@@ -182,22 +182,11 @@ theorem locallyOfFiniteType : LocallyOfFiniteType f := by
   rw [c.comm]
   infer_instance
 
-/-- If the open immersion into a compactification is quasi-compact, the compactified
-morphism is quasi-compact. -/
-theorem quasiCompact (hi : QuasiCompact c.i) : QuasiCompact f := by
-  rw [c.comm]
-  infer_instance
-
 /-- The open immersion into a compactification of a quasi-compact morphism is
 quasi-compact. -/
 theorem quasiCompact_openImmersion (hf : QuasiCompact f) : QuasiCompact c.i := by
   have : QuasiCompact (c.i ≫ c.g) := c.comm ▸ hf
   exact .of_comp c.i c.g
-
-/-- The open immersion into a compactification is quasi-compact if and only if the
-compactified morphism is. -/
-theorem quasiCompact_openImmersion_iff : QuasiCompact c.i ↔ QuasiCompact f :=
-  ⟨c.quasiCompact, c.quasiCompact_openImmersion⟩
 
 /-- The open immersion into a compactification of a **proper** morphism is itself proper:
 `c.i` is proper as soon as `c.i ≫ c.g` is, because `c.g` is separated. -/
@@ -265,12 +254,6 @@ compactification, then so does its restriction `e ≫ f` along any open immersio
 theorem comp_of_isOpenImmersion {X' : Scheme.{u}} (e : X' ⟶ X) [IsOpenImmersion e] :
     HasCompactification (e ≫ f) :=
   ((compactification f).precomp e).hasCompactification
-
-/-- **Compactifiability is preserved by proper postcomposition**: if `f : X ⟶ Y` admits a
-compactification and `p : Y ⟶ S` is proper, then `f ≫ p` admits one too. -/
-theorem comp_of_isProper {S : Scheme.{u}} (p : Y ⟶ S) [IsProper p] :
-    HasCompactification (f ≫ p) :=
-  ((compactification f).postcomp p).hasCompactification
 
 end HasCompactification
 

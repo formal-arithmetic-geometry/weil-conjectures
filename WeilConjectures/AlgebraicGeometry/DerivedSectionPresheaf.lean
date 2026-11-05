@@ -29,22 +29,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The presheaf `V ↦ Hⁱ(RΓ(f⁻¹V,E))`, with the restriction maps induced by the same
-K-injective resolution and the `𝒪_Y(V)`-action induced by `f`. We derive the composite
-of direct image and the inclusion into module presheaves, then take cohomology in
-that presheaf category. Its standard derived-category implementation is internal:
-only the resulting presheaf functor is exposed.
-Source: Stacks Project, Cohomology, Tag 0D5X
-(blueprint: def-pc-derived-section-presheaf). -/
-noncomputable def schemeDerivedSectionPresheaf {X Y : Scheme.{a}}
-    [HasDerivedCategory.{b} (SheafOfModules.{a} (moduleRings X.toRingedSpace))]
-    (f : X ⟶ Y) (i : ℤ) :
-    schemeDerivedCategory X ⥤ PresheafOfModules.{a} (moduleRings Y.toRingedSpace).obj :=
-  letI := HasDerivedCategory.standard
-    (PresheafOfModules.{a} (moduleRings Y.toRingedSpace).obj)
-  (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
-    SheafOfModules.forget (moduleRings Y.toRingedSpace)).rightDerivedFunctor ⋙
-      DerivedCategory.homologyFunctor
-        (PresheafOfModules.{a} (moduleRings Y.toRingedSpace).obj) i
-
 end AlgebraicGeometry

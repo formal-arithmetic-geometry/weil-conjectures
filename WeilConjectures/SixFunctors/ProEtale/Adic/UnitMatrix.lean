@@ -243,12 +243,6 @@ noncomputable def adicConstantSheafMul (a : PadicAlgCl.locallyFiniteFunctions l 
        congr 1
        exact congrArg a.1 (by rw [← MorphismProperty.Over.w g.unop]; rfl) }⟩
 
-lemma adicConstantSheafMul_app (a : PadicAlgCl.locallyFiniteFunctions l V) (U : V.ProEtᵒᵖ)
-    (s : (adicConstantSheaf l V).obj.obj U) :
-    (adicConstantSheafMul a).hom.app U s =
-      ULift.up (mulPullback (T := U.unop.left) s.down U.unop.hom a) :=
-  rfl
-
 lemma adicConstantSheafEndFun_mul (a : PadicAlgCl.locallyFiniteFunctions l V) :
     adicConstantSheafEndFun (adicConstantSheafMul a) = a := by
   change 1 * _ = a

@@ -44,89 +44,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Transport an exact pair along three object isomorphisms. -/
-private theorem exact_transport
-    {C : Type uC} [Category.{vC, uC} C] [Abelian C]
-    {X₁ X₂ X₃ Y₁ Y₂ Y₃ : C} (a : X₁ ⟶ X₂) (b : X₂ ⟶ X₃)
-    (w : a ≫ b = 0) (h : (ShortComplex.mk a b w).Exact)
-    {a' : Y₁ ⟶ Y₂} {b' : Y₂ ⟶ Y₃}
-    (e₁ : X₁ ≅ Y₁) (e₂ : X₂ ≅ Y₂) (e₃ : X₃ ≅ Y₃)
-    (h₁ : e₁.hom ≫ a' = a ≫ e₂.hom)
-    (h₂ : e₂.hom ≫ b' = b ≫ e₃.hom) :
-    ∃ w' : a' ≫ b' = 0, (ShortComplex.mk _ _ w').Exact := by
-  have w' : a' ≫ b' = 0 := by
-    rw [← cancel_epi e₁.hom, ← Category.assoc, h₁, Category.assoc, h₂,
-      ← Category.assoc, w, zero_comp, comp_zero]
-  refine ⟨w', ShortComplex.exact_of_iso ?_ h⟩
-  exact ShortComplex.isoMk e₁ e₂ e₃ h₁ h₂
-
-/-- Naturality of an indexed morphism with respect to equality transports. -/
-private theorem cast_naturality
-    {C : Type uC} [Category.{vC, uC} C] {I : Type*} (X Y : I → C)
-    (f : ∀ i, X i ⟶ Y i) {i j : I} (h : i = j) :
-    eqToHom (congrArg X h) ≫ f j = f i ≫ eqToHom (congrArg Y h) := by
-  subst j
-  simp
-
-/-- Naturality with a common target, including its final equality transports. -/
-private theorem cast_naturality_last
-    {C : Type uC} [Category.{vC, uC} C] {I : Type*} (X Y : I → C)
-    (f : ∀ i, X i ⟶ Y i) {i j : I} (h : i = j) {Z : C}
-    (hi : Y i = Z) (hj : Y j = Z) :
-    eqToHom (congrArg X h) ≫ f j ≫ eqToHom hj = f i ≫ eqToHom hi := by
-  subst j
-  simp
-
-/-- Reindex a family of morphisms along equalities of the two indices. -/
-private theorem reindex_hom
-    {C : Type uC} [Category.{vC, uC} C] (X Y : ℤ → ℤ → C)
-    (f : ∀ p q, X p q ⟶ Y p q) {p q p' q' : ℤ}
-    (hp : p = p') (hq : q = q') :
-    eqToHom (congrArg₂ X hp hq) ≫ f p' q' =
-      f p q ≫ eqToHom (congrArg₂ Y hp hq) := by
-  subst p'
-  subst q'
-  simp
-
-/-- Adding the zero bidegree does not change an exact pair. -/
-private theorem exact_zero_right
-    {C : Type uC} [Category.{vC, uC} C] [Abelian C] (D E : ℤ → ℤ → C)
-    (g : ∀ p q, D p q ⟶ E p q)
-    (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1)) (p q : ℤ)
-    (h : ∃ w : g p q ≫ f p q = 0, (ShortComplex.mk _ _ w).Exact) :
-    ∃ w : (g p q ≫ eqToHom (by simp : E p q = E (p + (0 : ℕ)) (q - (0 : ℕ)))) ≫
-        f (p + (0 : ℕ)) (q - (0 : ℕ)) = 0,
-      (ShortComplex.mk _ _ w).Exact := by
-  obtain ⟨w, h⟩ := h
-  refine exact_transport _ _ w h (Iso.refl _) (eqToIso ?_) (eqToIso ?_) ?_ ?_
-  · simp
-  · simp
-  · simp
-  · exact reindex_hom E (fun p q ↦ D (p + 2) (q - 1)) f
-      (by simp) (by simp)
-
-/-- Postcomposing the last map with an equality isomorphism preserves exactness. -/
-private theorem exact_cast_last
-    {C : Type uC} [Category.{vC, uC} C] [Abelian C] {X Y Z Z' : C}
-    (a : X ⟶ Y) (b : Y ⟶ Z)
-    (h : ∃ w : a ≫ b = 0, (ShortComplex.mk _ _ w).Exact) (hz : Z = Z') :
-    ∃ w : a ≫ (b ≫ eqToHom hz) = 0, (ShortComplex.mk _ _ w).Exact := by
-  obtain ⟨w, h⟩ := h
-  exact exact_transport a b w h (Iso.refl _) (Iso.refl _) (eqToIso hz)
-    (by simp) (by simp)
-
 variable {A : Type u₁} [Category.{v₁} A] [Abelian A] [HasDerivedCategory.{w₁} A]
   {B : Type u₂} [Category.{v₂} B] [Abelian B] [HasDerivedCategory.{w₂} B]
   (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
   (K : CochainComplex.Plus A)
-omit [Abelian A] [HasDerivedCategory A] in
-private theorem inverse_square {V W V' W' : A} (a : V ⟶ W) (b : V' ⟶ W')
-    (e : V ≅ V') (f : W ≅ W') (h : a ≫ f.hom = e.hom ≫ b) :
-    b ≫ f.inv = e.inv ≫ a := by
-  rw [← cancel_epi e.hom]
-  simp only [Iso.hom_inv_id_assoc]
-  rw [← Category.assoc, ← h]
-  simp
 
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.

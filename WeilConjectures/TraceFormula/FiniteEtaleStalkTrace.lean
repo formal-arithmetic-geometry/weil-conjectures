@@ -133,7 +133,6 @@ lemma WeilSheaf.pointStalkFunctor_obj_str_hom {x : P ⟶ Z.left} (hx : x ≫ e.h
   rw [WeilSheaf.pointStalkFunctor_obj_str, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
   rfl
 
-
 /-- The trace of the stalk Frobenius only depends on the Weil sheaf up to isomorphism. -/
 lemma stalkFrobeniusTrace_congr {x : P ⟶ Z.left} (hx : x ≫ e.hom.left = σ ≫ x)
     {F G : WeilSheaf ℓ e} (i : F ≅ G) :
@@ -141,16 +140,6 @@ lemma stalkFrobeniusTrace_congr {x : P ⟶ Z.left} (hx : x ≫ e.hom.left = σ �
   have h := IsoAlgebra.traceOrZero_str_congr ((WeilSheaf.pointStalkFunctor ℓ τ e hx).mapIso i)
   rw [WeilSheaf.pointStalkFunctor_obj_str_hom, WeilSheaf.pointStalkFunctor_obj_str_hom] at h
   exact h.symm
-
-/-- The trace of the stalk Frobenius only depends on the point up to equality. -/
-lemma stalkFrobeniusTrace_congr_point {x x' : P ⟶ Z.left} (h : x = x')
-    (hx : x ≫ e.hom.left = σ ≫ x) (hx' : x' ≫ e.hom.left = σ ≫ x')
-    {M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left)}
-    (φ : (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M ⟶ M) :
-    stalkFrobeniusTrace ℓ τ e hx φ = stalkFrobeniusTrace ℓ τ e hx' φ := by
-  subst h
-  rfl
 
 /-- The structure morphism of the stalk of a Weil sheaf at a geometric point is its stalk
 Frobenius. -/
@@ -180,13 +169,6 @@ noncomputable def weilStalkTransport {x x' : P ⟶ X.left} (h : x ≫ eX.hom.lef
       (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj F.carrier :=
   (weilPointComparison ℓ τ eX h).hom.app F.carrier ≫
     (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map F.str.hom
-
-/-- The Frobenius transport at a point fixed by the twisted Frobenius is the Frobenius of the
-stalk. -/
-lemma weilStalkTransport_self {x : P ⟶ X.left} (h : x ≫ eX.hom.left = σ ≫ x)
-    (F : WeilSheaf ℓ eX) :
-    weilStalkTransport ℓ eX τ h F = stalkFrobenius ℓ τ eX h F.str.hom :=
-  rfl
 
 /-- **The Frobenius of the stalk of a pushforward permutes the factors**: for a point `ȳ` with
 `ȳ ≫ e_Y = σ ≫ ȳ` and points `x̄`, `x̄'` over `ȳ` with `x̄ ≫ e_X = σ ≫ x̄'`, the Frobenius of the
@@ -250,7 +232,6 @@ theorem stalkFrobeniusTrace_lowerStar [IsFinite f.left] [Etale f.left] [IsIso σ
   · rw [finsum_eq_if, if_neg h]
     dsimp only [G]
     rw [dif_neg h]
-
 
 /-- Reindexing a sum of traces of stalk Frobenii over the fixed points along a family `pt`
 enumerating them. -/

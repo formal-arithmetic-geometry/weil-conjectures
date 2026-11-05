@@ -36,26 +36,5 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 namespace CommonQuotientTowerPresentation
 variable {φ : R ⟶ B} (D : CommonQuotientTowerPresentation φ)
 
-/-- The actual kernel ideal sheaf, evaluated on an object of the site.
-Naturality of `q` makes these ideal sheaves descending with the tower index.
-Source: Stacks 099L and 03EK
-(blueprint: def-weil-pbc-common-quotient-tower-presentation). -/
-def ideal (n : ℕ) (U : Cᵒᵖ) : Ideal (R.obj.obj U) :=
-  RingHom.ker ((D.q.app (op n)).hom.app U).hom
-
-/-- Local membership in `I_n M`: locally a section is a finite sum of products of
-kernel-ideal sections and module sections. The generated sieve expresses local
-membership without any enough-points hypothesis. Source: Stacks 03EK
-(blueprint: def-weil-pbc-common-quotient-tower-presentation). -/
-def locallyInIdealProduct
-    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-    (n : ℕ)
-    (M : ringedSiteModules.{m}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
-    (U : Cᵒᵖ) (x : M.val.obj U) : Prop :=
-  Sieve.generate (fun (V : C) (f : V ⟶ U.unop) ↦
-    M.val.map f.op x ∈ Submodule.span (R.obj.obj (op V))
-      {y | ∃ j ∈ D.ideal n (op V), ∃ p : M.val.obj (op V), y = j • p}) ∈ J U.unop
-
 end CommonQuotientTowerPresentation
 end SheafOfModules

@@ -77,21 +77,6 @@ lemma degIter_neg_one_zero (N : ℕ) :
 
 variable {b : ℤ × ℤ} (X : ExactCouple C ((-1, 0) : ℤ × ℤ) b 0)
 
-/-- A couple is *regular* if for every index `i`, the differentials `d_r` arriving at `i` vanish
-for `r ≫ 0`; equivalently, the boundaries `B_r ⊆ E` at `i` are eventually constant.
-
-(blueprint: `def-sp-convergence`) -/
-def IsRegular : Prop :=
-  ∀ i : ℤ × ℤ, ∃ n₀ : ℕ, ∀ n ≥ n₀, ∀ j, (X.derivedIter n).d j i = 0
-
-/-- A couple is *complete* if for every index `i` the images of the composites
-`αʳ : D (i + (r, 0)) ⟶ D i` have zero intersection.
-
-(blueprint: `def-sp-convergence`) -/
-def IsComplete : Prop :=
-  ∀ (i : ℤ × ℤ) (P : Subobject (X.D i)),
-    (∀ r : ℕ, P ≤ imageSubobject (X.αPow r (i + ((r : ℤ), 0)) i)) → P = ⊥
-
 /-- The data of the convergence of the spectral sequence of the couple `X` to the filtrations
 `F n` of objects `A n`, along the structure maps `ι p n : D^{p, n} ⟶ Aⁿ` of the abutment.
 

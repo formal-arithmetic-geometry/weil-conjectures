@@ -26,22 +26,4 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   {f' : X' ⟶ Y'} {g' : X' ⟶ X}
   [IsOpenImmersion g] [IsOpenImmersion g']
 
-/-- The descent open exchange is the inverse of the canonical left exchange. -/
-lemma purityOpenImmersionLowerShriekUpperStarBaseChangeIso_inv
-    (sq : IsPullback g' f' f g) :
-    (openImmersionLowerShriekUpperStarBaseChangeIso Λ sq).inv =
-      Adjunction.exchangeLeft
-        (openImmersionLowerShriekUpperStarAdjunction Λ g)
-        (openImmersionLowerShriekUpperStarAdjunction Λ g')
-        (upperStarSquareComparison Λ sq.toCommSq) := by
-  unfold openImmersionLowerShriekUpperStarBaseChangeIso
-  rw [Iso.symm_inv, conjugateIsoEquiv_symm_apply_hom]
-  apply (conjugateEquiv
-    ((openImmersionLowerShriekUpperStarAdjunction Λ g).comp
-      (upperStarLowerStarAdjunction Λ f))
-    ((upperStarLowerStarAdjunction Λ f').comp
-      (openImmersionLowerShriekUpperStarAdjunction Λ g'))).injective
-  rw [Equiv.apply_symm_apply, Adjunction.conjugateEquiv_exchangeLeft]
-  rfl
-
 end AlgebraicGeometry.ProEtale.CondensedRing

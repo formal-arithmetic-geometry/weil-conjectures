@@ -483,7 +483,6 @@ theorem existsUnique_pureFundamentalClass [IsRegularImmersion c i]
   exact ⟨γ, hall, fun γ' hγ' ↦ eq_of_frameRestriction_eq_of_pure Λ c i hP fun F _ ↦ by
     rw [hγ' F, hall F]⟩
 
-
 variable [IsRegularImmersion c i]
 
 /-- The *fundamental class* `[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` of a regular closed immersion
@@ -582,16 +581,6 @@ noncomputable def cartierKummerClass (hP : SupportedTatePure Λ 1 i) :
       ((R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧)) :=
   pureFundamentalClass Λ 1 i hP
 
-/-- Blueprint `lem-amb-cartier-kummer-map`: A Cartier divisor gives a supported Kummer map
-
-The *supported Kummer map* `Λ_D ⟶ Ri^! (Λ_T(1)[2])` of an effective Cartier divisor
-`i : D ⟶ T`, the adjoint (`AlgebraicGeometry.Etale.supportedClassMap`) of its class
-`AlgebraicGeometry.Etale.cartierKummerClass`; by `Ri_! ⊣ Ri^!` and `Ri_! ≅ i_*` it is equivalently
-a map `i_* Λ_D ⟶ Λ_T(1)[2]`. -/
-noncomputable def cartierKummerMap (hP : SupportedTatePure Λ 1 i) :
-    constantComplex Λ D ⟶ (R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧) :=
-  supportedClassMap Λ i (cartierKummerClass Λ i hP)
-
 /-- Blueprint `lem-amb-cartier-kummer-map`, local description: on every chart `(e : U ⟶ T, f)`
 of `D`, an étale `e` with a function `f` on `U` cutting out `D ×_T U`, the class `c_D` restricts
 to the Kummer boundary class `∂κ(f) ∪ 1` of `f` (`AlgebraicGeometry.Etale.kummerBoundaryProduct`
@@ -600,16 +589,6 @@ theorem frameRestriction_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
     (F : i.EtaleFrame 1) :
     frameRestriction Λ F (cartierKummerClass Λ i hP) = kummerBoundaryProduct Λ F.f :=
   frameRestriction_pureFundamentalClass Λ 1 i hP F
-
-/-- The class `c_D` is the unique class with supports in `D` restricting to the Kummer boundary
-class of the local equation on every chart of `D`. -/
-theorem eq_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
-    (γ : constantComplex Λ T ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧)))
-    (hγ : ∀ F : i.EtaleFrame 1, frameRestriction Λ F γ = kummerBoundaryProduct Λ F.f) :
-    γ = cartierKummerClass Λ i hP :=
-  (existsUnique_pureFundamentalClass Λ 1 i hP).unique hγ
-    (frameRestriction_pureFundamentalClass Λ 1 i hP)
 
 /-- Blueprint `lem-amb-cartier-kummer-map`, base change: for any `g : T' ⟶ T` along which the
 pulled-back divisor `i' : D' ⟶ T'` is again an effective Cartier divisor satisfying the purity

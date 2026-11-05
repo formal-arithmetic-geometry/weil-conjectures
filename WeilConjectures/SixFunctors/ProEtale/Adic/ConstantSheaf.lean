@@ -312,7 +312,6 @@ theorem isSheaf_fpqcTopology_adicFunctionsPresheaf :
   exact Presieve.isSheaf_iso _ (adicFunctionsPresheafForgetIso l).symm
     (isSheaf_fpqcTopology_adicFunctionsSubfunctor l)
 
-
 namespace ProEtale
 
 /-- The constant `ℓ`-adic sheaf `ℚ̄_ℓ,X` on the small pro-étale site of `X`: the sections over a
@@ -324,12 +323,6 @@ noncomputable def adicConstantSheaf (X : Scheme.{u}) :
     Scheme.proetaleTopology).obj
     ⟨adicFunctionsPresheaf l, .of_le Scheme.proetaleTopology_le_fpqcTopology <|
       isSheaf_fpqcTopology_adicFunctionsPresheaf l⟩
-
-/-- The sections of `ℚ̄_ℓ,X` over `U` are the locally finite continuous functions on `U`. -/
-lemma adicConstantSheaf_obj_obj (X : Scheme.{u}) (U : X.ProEt) :
-    (adicConstantSheaf l X).obj.obj (op U) =
-      ModuleCat.of _ (ULift.{u + 1} (locallyFiniteFunctions l U.left)) :=
-  rfl
 
 /-- Base change along an isomorphism `g : X ⟶ Y` does not change the underlying schemes of the
 objects of the pro-étale site, up to the canonical isomorphisms `V ×_Y X ≅ V`. -/

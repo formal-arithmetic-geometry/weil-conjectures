@@ -108,13 +108,6 @@ noncomputable def proEtaleGeometricStalk [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶
     (F : Sheaf (ProEt.topology Y) C) : C :=
   colimit (proEtaleGeometricStalkDiagram y F)
 
-/-- The set-valued geometric stalk in the chosen larger universe.
-Source: the blueprint, `def-weil-scheme-morphism-properties`, last sentence
-(auxiliary; not a blueprint node). -/
-noncomputable abbrev proEtaleGeometricSetStalk [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
-    (F : Sheaf (ProEt.topology Y) (Type (u + 1))) : Type (u + 1) :=
-  proEtaleGeometricStalk y F
-
 /-- The stalk with fixed commutative coefficients, using the same diagram in `A`-modules.
 Source: the blueprint, `def-weil-scheme-morphism-properties`, last sentence
 (auxiliary; not a blueprint node). -/
@@ -122,40 +115,5 @@ noncomputable abbrev proEtaleGeometricFixedModuleStalk [IsAlgClosed Ω] (y : Spe
     (A : Type (u + 1)) [CommRing A]
     (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : ModuleCat.{u + 1} A :=
   proEtaleGeometricStalk y F
-
-/-- The diagram of rings underlying a commutative ring sheaf on pointed neighbourhoods.
-Source: the blueprint, `def-weil-scheme-morphism-properties`, last sentence
-(auxiliary; not a blueprint node). -/
-noncomputable def proEtaleGeometricStalkRingDiagram [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
-    (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
-    (ProEtaleGeometricNeighbourhood y)ᵒᵖ ⥤ RingCat.{u + 1} :=
-  (proEtaleGeometricNeighbourhoodForget y).op ⋙ O.obj ⋙
-    forget₂ CommRingCat.{u + 1} RingCat.{u + 1}
-
-/-- The stalk ring, with operations induced from sections at common pointed refinements.
-Its underlying set is the filtered colimit of the underlying sets; forgetting commutativity
-here allows use of the general `PresheafOfModules` construction.
-Source: the blueprint, `def-weil-scheme-morphism-properties`, last sentence
-(auxiliary; not a blueprint node). -/
-noncomputable def proEtaleGeometricStalkRing [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
-    (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) : RingCat.{u + 1} :=
-  colimit (proEtaleGeometricStalkRingDiagram y O)
-
-/-- The stalk of an `O`-module sheaf as a module over the stalk ring. The Mathlib
-colimit-module construction takes the additive colimit and defines scalar multiplication
-by representing scalars and vectors at a common refinement. Its action respects the
-semilinear restriction maps; no single section ring is used as a fixed coefficient ring.
-Source: the blueprint, `def-weil-scheme-morphism-properties`, last sentence; Stacks Project,
-Tags 0F6B and 002F (auxiliary; not a blueprint node). -/
-noncomputable def proEtaleGeometricModuleStalk [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
-    (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (F : SheafOfModules.{u + 1}
-      ((sheafCompose (ProEt.topology Y)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O)) :
-    ModuleCat.{u + 1} (proEtaleGeometricStalkRing y O) :=
-  (PresheafOfModules.colimitFunctor
-    (colimit.isColimit (proEtaleGeometricStalkRingDiagram y O))).obj
-      ((PresheafOfModules.pushforward₀ (proEtaleGeometricNeighbourhoodForget y)
-        (O.obj ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj F.val)
 
 end AlgebraicGeometry.Scheme

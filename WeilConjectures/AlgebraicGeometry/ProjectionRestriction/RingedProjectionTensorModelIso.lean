@@ -80,47 +80,4 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   HomologicalComplex₂.total MorphismProperty.Q'
   SheafOfModules.KFlatFixedTensor.representativeIso
 
-private theorem publishedRepresentative (P Q : CochainComplex (Mod R) ℤ)
-    (hp : resolving R P) (hq : resolving R Q) :
-    SheafOfModules.cochainTensorRepresentativeArrow J R (⟨P, hp⟩, ⟨Q, hq⟩) =
-      (SheafOfModules.KFlatFixedTensor.representativeIso R P Q hp.1 hq.1 hp.2 hq.2).hom := by
-  unfold SheafOfModules.cochainTensorRepresentativeArrow
-  change (𝟙 _) ≫ _ ≫ _ ≫
-    (SheafOfModules.siteDerivedTensorIndependentCoefficients J R).map (𝟙 _) = _
-  rw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
-  unfold SheafOfModules.KFlatFixedTensor.representativeIso
-  rfl
-
-set_option maxHeartbeats 800000 in
--- Compare the two normalized representative interfaces without unfolding their tensor data.
-/-- A tensor model is naturally identified with the published derived tensor, with
-its specified representative comparison.
-Source: Stacks Project, Tag 06YU (definition-derived-tor and its independence construction).
-(blueprint: lem-weil-pbc-ringed-projection-tensor-model-iso).
-
-Proof: apply cochain tensor model rigidity to the natural comparison of a. It
-extends the comparison from resolving pairs to an isomorphism e of bifunctors.
-The cochain representative arrow is the published representativeIso: the
-quotient-to-derived factorization has identity components, so its initial
-identity and the tensor's image of the product identity cancel. Evaluating the
-normalization equation of rigidity at each resolving pair gives the displayed
-equation. Both directions of e are supplied by the existing rigidity theorem;
-there is no choice of a new tensor operation. The argument uses neither a bound
-nor any shift or pullback hypotheses. -/
-theorem ringedProjectionTensorModelIso (a : TensorModel R) :
-    ∃ e : SheafOfModules.siteDerivedTensorIndependentCoefficients J R ≅ a.functor,
-      ∀ (P Q : CochainComplex (Mod R) ℤ) (hp : resolving R P) (hq : resolving R Q),
-        (SheafOfModules.KFlatFixedTensor.representativeIso R P Q hp.1 hq.1 hp.2 hq.2).hom ≫
-          e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =
-            a.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩) := by
-  obtain ⟨r, hr, he, _⟩ :=
-    SheafOfModules.cochain_tensor_model_rigidity.{u + 1, u, u + 1, u + 2, 0, 0} J R
-  obtain ⟨e, he, _⟩ := he a.functor a.representative
-  refine ⟨e, ?_⟩
-  intro P Q hp hq
-  have h := congr_app he (⟨P, hp⟩, ⟨Q, hq⟩)
-  change r.hom.app _ ≫ e.hom.app _ = _ at h
-  rw [hr, publishedRepresentative P Q hp hq] at h
-  exact h
-
 end AlgebraicGeometry.Scheme.ProjectionRestriction

@@ -36,44 +36,4 @@ variable (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Field F] [Algebra ℚ_[l] E] [Algebra ℚ_[l] F]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
 
-/-- The completed target integral coefficients are finite free over the source ones.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
-Proof: an integral basis of the target valuation ring is a basis of every finite
-quotient, compatibly with the transitions; pass to the limit. -/
-theorem pbcScalarCoefficient_finiteFree (T : Scheme.{u}) :
-    ∃ d : ℕ, Nonempty ((proEtaleRingRestrictScalars (pbcScalarCoefficientMap l E F i T)).obj
-        (SheafOfModules.unit ((sheafCompose (ProEt.topology T)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-            (pbcAdicCompletion T (pbcIntegralDatum l F)))) ≅
-      ∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose (ProEt.topology T)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-          (pbcAdicCompletion T (pbcIntegralDatum l E)))) := by
-  classical
-  let FC := adicLisseForget T
-  let eR := WeilConjectures.purCoefficientIso l E T
-  let eS := WeilConjectures.purCoefficientIso l F T
-  let φ' := WeilConjectures.completedCoefficientMap l E F i T
-  have hmap : WeilConjectures.integralCompletedScalarMap l E F i T = φ' := by
-    apply (WeilConjectures.completedCoefficientMap_existsUnique l E F i T).unique
-    · exact (WeilConjectures.integralCompletedScalarMap_existsUnique l E F i T).exists.choose_spec
-    · exact (WeilConjectures.completedCoefficientMap_existsUnique l E F i T).exists.choose_spec
-  have hsq := scalarComplete_coefficientScalar_square l E F i T
-  rw [hmap] at hsq
-  change eR.hom ≫ φ' = pbcScalarCoefficientMap l E F i T ≫ eS.hom at hsq
-  have hinv : φ' ≫ eS.inv = eR.inv ≫ pbcScalarCoefficientMap l E F i T := by
-    apply (Iso.comp_inv_eq eS).mpr
-    rw [Category.assoc]
-    exact ((Iso.inv_comp_eq eR).mpr hsq.symm).symm
-  have hb := WeilConjectures.completedIntegralFiniteFree l E T F i φ'
-    (WeilConjectures.completedCoefficientMap_existsUnique l E F i T).exists.choose_spec
-  obtain ⟨b⟩ := hb
-  have h : FC.map φ' ≫ (FC.mapIso eS).symm.hom =
-      (FC.mapIso eR).symm.hom ≫ FC.map (pbcScalarCoefficientMap l E F i T) := by
-    simp only [Iso.symm_hom, Functor.mapIso_inv, ← FC.map_comp, hinv]
-  let := i.toAlgebra
-  exact ⟨Module.finrank E F, WeilConjectures.freeTransport (FC.mapIso eR).symm
-    (FC.mapIso eS).symm (FC.map φ') (FC.map (pbcScalarCoefficientMap l E F i T)) h
-    (Module.finrank E F) b⟩
-
 end AlgebraicGeometry.Scheme

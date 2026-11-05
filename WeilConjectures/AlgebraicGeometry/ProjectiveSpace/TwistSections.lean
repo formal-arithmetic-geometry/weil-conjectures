@@ -90,8 +90,6 @@ lemma basicOpen_monomialToNat_indicator_mono {s t : Set n} (h : t ⊆ s) :
   mem_basicOpen_monomialToNat_indicator.2 fun i hi ↦
     mem_basicOpen_monomialToNat_indicator.1 hx i (h hi)
 
-
-
 variable (R m) in
 /-- **The section `xᵃ / xᵇ` of `𝒪(m)`** over an open `U` of `Proj R[Xᵢ]` on which `xᵇ` does not
 vanish, for nonnegative exponent vectors `a`, `b` with `∑ aᵢ = ∑ bᵢ + m`. -/
@@ -105,14 +103,6 @@ noncomputable def twistMonomialFraction {a b : n → ℤ} (h : ∑ i, a i = ∑ 
       rw [cast_sum_toNat ha, cast_sum_toNat hb, h]),
     isLocallyFraction_mk (by rw [cast_sum_toNat ha, cast_sum_toNat hb, h]) _ _
       fun x ↦ hU x.1 x.2⟩
-
-lemma coe_twistMonomialFraction_apply {a b : n → ℤ} (h : ∑ i, a i = ∑ i, b i + m) (ha : 0 ≤ a)
-    (hb : 0 ≤ b) (U : (Proj (homogeneousSubmodule n R)).Opens)
-    (hU : ∀ x ∈ U, monomialToNat R b ∉ x.asHomogeneousIdeal) (x : U) :
-    ((twistMonomialFraction (R := R) (m := m) h ha hb U hU).1 x :
-      Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =
-      Localization.mk (monomialToNat R a) ⟨monomialToNat R b, hU x.1 x.2⟩ :=
-  rfl
 
 lemma monomialToNat_nsmul_indicator_notMem {x : Proj (homogeneousSubmodule n R)}
     (hx : x ∈ Proj.basicOpen _ (monomialToNat R (s.indicator 1))) (N : ℕ) :
@@ -159,8 +149,6 @@ lemma twist_presheaf_map_twistMonomial {t : Set n} (hts : t ⊆ s) (e : laurentE
     (nsmul_nonneg h0' _) (add_nsmul_indicator_nonneg (fun i hi ↦ e.2.2 i fun h ↦ hi (hts h))
       (neg_le_negExponentSum e.1)) (nsmul_nonneg h0 _) ?_ _ _
   abel
-
-
 
 variable (s m) in
 open Classical in
@@ -263,7 +251,6 @@ lemma isPullback_preimage (W : (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)
     (by rw [Iso.refl_hom, Category.comp_id]; exact hr.symm.trans (Category.id_comp _).symm)
     (by rw [Iso.refl_hom, Category.comp_id]; exact (Category.id_comp _).symm)
     (terminal.hom_ext _ _) (terminal.hom_ext _ _)
-
 
 variable {n} [Fintype n]
 
@@ -430,7 +417,6 @@ end Twist
 section Cech
 
 open Scheme.Modules Opposite
-
 
 /-- The preimage of `D₊(∏_{i ∈ s} Xᵢ)` is contained in the standard open `D₊(xᵢ)`, `i ∈ s`. -/
 lemma preimage_basicOpenInt_le_standardOpen {s : Set n} {i : n} (hi : i ∈ s) :

@@ -119,26 +119,4 @@ theorem isIso_unit_app_toComplex_of_isLisse (L : WeilSheaf k₀ l X) (hL : L.IsL
   exact (NatTrans.isIso_app_iff_of_iso _
     (((Endofunctor.IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app L.obj)).2 h
 
-include hπ in
-/-- **Homotopy invariance for Weil complexes with lisse cohomology.** For the trivial line bundle
-`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` and a Weil complex `K` on `X` whose cohomology sheaves are lisse, the
-unit `K ⟶ Rπ_* π^* K` is an isomorphism. By dévissage along the truncation triangles, this
-reduces to lisse Weil sheaves placed in degree zero
-(`AlgebraicGeometry.WeilComplex.isIso_unit_app_toComplex_of_isLisse`). -/
-theorem isIso_unit_app_of_isLisse_homologySheaf (K : WeilComplex k₀ l X)
-    (hK : ∀ n : ℤ, ((homologySheaf n).obj K).IsLisse) :
-    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) := by
-  let P : ObjectProperty (ProEtaleWeilSheaf k₀ l X) :=
-    fun F ↦ ∃ h : WeilSheaf.objectProperty k₀ l X F, WeilSheaf.IsLisse ⟨F, h⟩
-  have : P.IsClosedUnderIsomorphisms := ⟨fun e ⟨h, hL⟩ ↦
-    ⟨(WeilSheaf.objectProperty k₀ l X).prop_of_iso e h,
-      ProEtale.IsAdicLisseSheaf.of_iso ((Endofunctor.IsoAlgebra.forget _).mapIso e) hL⟩⟩
-  rw [isIso_upperStarDerivedLowerStarAdjunction_unit_app_iff]
-  refine _root_.DerivedCategory.prop_of_bounded
-    (Q := (ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l π).unit.isoLocus)
-    P (fun F ⟨h, hL⟩ ↦ ?_) K.obj K.property.1
-    fun n ↦ ⟨K.property.2 n, hK n⟩
-  have := isIso_unit_app_toComplex_of_isLisse π s hπ ⟨F, h⟩ hL
-  rwa [isIso_upperStarDerivedLowerStarAdjunction_unit_app_iff] at this
-
 end AlgebraicGeometry.WeilComplex

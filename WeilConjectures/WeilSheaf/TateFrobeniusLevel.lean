@@ -161,28 +161,6 @@ theorem unitToRootsOfUnitySheaf_comp_specGeometricFrobenius
 
 variable {X₀ : Scheme.{u}} (a : X₀ ⟶ Spec (.of k))
 
-/-- **The pullback of roots of unity along the geometric Galois Frobenius, on the trivialized
-`μ_{ℓⁿ}`**: on the geometric fibre `X̄` with structure morphism `a_X : X̄ ⟶ Spec k̄` and geometric
-Galois Frobenius `g = 𝟙 × σ`, for `ζ ∈ k̄` with `ζ ^ ℓⁿ = 1`, the comparison `g^* μ_{ℓⁿ} ⟶ μ_{ℓⁿ}`
-carries `g^*(a ↦ ζ ^ a)` to `c · (a ↦ ζ ^ a)`, through the identification `g^* ℤ ≅ ℤ` of the
-units, where `c ∈ ℤ/ℓⁿ` is the value of the modular cyclotomic character of the geometric
-Frobenius (`c q = 1`). -/
-theorem upperStar_map_unitToRootsOfUnitySheaf_geometricGaloisFrobenius
-    (n : ℕ) {ζ : AlgebraicClosure k} (hζ : ζ ^ (ℓ ^ n) = 1) :
-    (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map
-        (unitToRootsOfUnitySheaf a.geometricFiberToAlgebraicClosure hζ ≫
-          (rootsOfUnitySheafIso a.geometricFiber (ℓ ^ n)).hom) ≫
-        upperStarRootsOfUnityComparison a.geometricGaloisFrobenius.hom (ℓ ^ n) =
-      η (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}] ≫
-        ((((geometricFrobeniusModularCharacter k ℓ n : (ZMod (ℓ ^ n))ˣ) : ZMod (ℓ ^ n)).val : ℤ) •
-          unitToRootsOfUnitySheaf a.geometricFiberToAlgebraicClosure hζ) ≫
-        (rootsOfUnitySheafIso a.geometricFiber (ℓ ^ n)).hom := by
-  rw [upperStar_map_unitToRootsOfUnitySheaf_comp_upperStarRootsOfUnityComparison
-    a.geometricGaloisFrobenius.hom a.geometricFiberToAlgebraicClosure
-    (a.geometricFiberToAlgebraicClosure ≫ (specGeometricFrobenius k).hom)
-    (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure a) hζ,
-    unitToRootsOfUnitySheaf_comp_specGeometricFrobenius]
-
 end FiniteField
 
 end AlgebraicGeometry.ProEtale

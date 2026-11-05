@@ -207,21 +207,6 @@ lemma Etale.stalkRestrict_eq_counit (s : Spec (.of Ω) ⟶ X)
   · exact (basePt_snd f ⟨V, u⟩ ⟨s, rfl⟩).trans
       (pointSmallEtaleFiberEtaleIso_inv_app_left_snd f s V u).symm
 
-omit [IsFinite f] in
-/-- **The stalk restriction is the counit of `f^* ⊣ f_*` on stalks**, in the form indexed by
-a geometric point `t` of `X` in the geometric fibre of `f` over `y`. This is
-`AlgebraicGeometry.Etale.stalkRestrict_eq_counit` with `y` in place of `t.1 ≫ f`, the two
-stalks being identified along `t.2 : t.1 ≫ f = y`. -/
-lemma Etale.stalkRestrict_eq_counit' (G : Sheaf X.smallEtaleTopology A) :
-    Etale.stalkRestrict A f y t G =
-      eqToHom (by rw [t.2]) ≫
-        (Etale.upperStarCompSheafFiberIso A f t.1).inv.app ((f)_*[A].obj G) ≫
-          (pointSmallEtale t.1).sheafFiber.map
-            ((Etale.upperStarLowerStarAdjunction A f).counit.app G) := by
-  obtain ⟨t, rfl⟩ := t
-  rw [eqToHom_refl, Category.id_comp]
-  exact Etale.stalkRestrict_eq_counit A f t G
-
 end StalkRestrict
 
 section StalkFormula

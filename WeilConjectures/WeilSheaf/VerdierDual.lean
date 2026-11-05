@@ -198,18 +198,6 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [HasUpperShriek k₀ l f]
 
-/-- **Smooth purity for Weil complexes** (blueprint:
-`thm-pur-weil-equivariance-of-purity-and-trace`, the equivariance of the smooth purity
-isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`): for a morphism `f : X ⟶ Y` smooth of relative
-dimension `d`, the purity isomorphism commutes with the Weil structures, so it is an isomorphism
-`Rf^! L ≅ f^*(L(d)[2d])` of Weil complexes, natural in `L`. Only the existence of a natural
-isomorphism is stated here. -/
-theorem nonempty_upperShriek_iso_of_smoothOfRelativeDimension (d : ℕ)
-    [SmoothOfRelativeDimension d f] :
-    Nonempty (upperShriek (k₀ := k₀) (l := l) f ≅
-      (tateTwist k₀ l Y d ⋙ shiftFunctor (WeilComplex k₀ l Y) (2 * d : ℤ)) ⋙ upperStar f) :=
-  sorry
-
 end RelativePurity
 
 section Lisse

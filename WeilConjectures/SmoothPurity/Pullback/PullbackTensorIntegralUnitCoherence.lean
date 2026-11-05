@@ -31,14 +31,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-theorem pullbackTensorIntegralUnitCoherence {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :
-    canonicalIntegralPullbackTensor_unit l E f := by
-  unfold canonicalIntegralPullbackTensor_unit
-  obtain ⟨ε, hε⟩ := canonicalIntegralPullbackTensor_unit_exists l E f
-  refine ⟨ε, hε, ?_⟩
-  intro δ hδ
-  exact canonicalIntegralPullbackTensor_unit_unique l E f ε δ hε hδ |>.symm
-
 end WeilConjectures

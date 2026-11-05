@@ -90,55 +90,8 @@ namespace IsDerivedBaseChange
 variable {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))}
   {K' K'' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A'))}
 
-/-- Two derived base changes of the same object are isomorphic through every comparison map
-compatible with them. -/
-lemma isIso {η : K ⟶ (derivedRestrictScalars J f).obj K'}
-    {η' : K ⟶ (derivedRestrictScalars J f).obj K''} (hη : IsDerivedBaseChange η)
-    (hη' : IsDerivedBaseChange η') (φ : K' ⟶ K'')
-    (hφ : η ≫ (derivedRestrictScalars J f).map φ = η') : IsIso φ := by
-  obtain ⟨ψ, hψ : η' ≫ _ = η⟩ := (hη' K').2 η
-  refine ⟨⟨ψ, (hη K').1 ?_, (hη' K'').1 ?_⟩⟩
-  · dsimp only
-    rw [Functor.map_comp, reassoc_of% hφ, hψ, Functor.map_id, Category.comp_id]
-  · dsimp only
-    rw [Functor.map_comp, reassoc_of% hψ, hφ, Functor.map_id, Category.comp_id]
-
-/-- Derived base change is invariant under isomorphisms of the source. -/
-lemma of_iso {K₀ : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))} (e : K₀ ≅ K)
-    {η : K ⟶ (derivedRestrictScalars J f).obj K'} (hη : IsDerivedBaseChange η) :
-    IsDerivedBaseChange (e.hom ≫ η) := by
-  intro N
-  convert (e.symm.homFromEquiv (Z := (derivedRestrictScalars J f).obj N)).bijective.comp
-    (hη N) using 1
-  ext g
-  simp
-
-/-- Derived base change is invariant under isomorphisms of the target. -/
-lemma comp_map_iso {η : K ⟶ (derivedRestrictScalars J f).obj K'} (hη : IsDerivedBaseChange η)
-    (e : K' ≅ K'') : IsDerivedBaseChange (η ≫ (derivedRestrictScalars J f).map e.hom) := by
-  intro N
-  convert (hη N).comp (e.symm.homFromEquiv (Z := N)).bijective using 1
-  ext g
-  simp
-
 variable {A'' : Type (u + 1)} [CommRing A''] {g : A' →+* A''} {gf : A →+* A''}
   (hgf : gf = g.comp f)
-
-include hgf in
-/-- Derived base changes compose. -/
-lemma comp {K'' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A''))}
-    {η : K ⟶ (derivedRestrictScalars J f).obj K'} (hη : IsDerivedBaseChange η)
-    {η' : K' ⟶ (derivedRestrictScalars J g).obj K''} (hη' : IsDerivedBaseChange η') :
-    IsDerivedBaseChange (f := gf)
-      (η ≫ (derivedRestrictScalars J f).map η' ≫
-        (derivedRestrictScalarsCompIso J hgf).hom.app K'') := by
-  intro N
-  convert ((((derivedRestrictScalarsCompIso J hgf).app N).homToEquiv
-    (Z := K)).bijective.comp (hη _)).comp (hη' N) using 1
-  ext g
-  have := (derivedRestrictScalarsCompIso J hgf).hom.naturality g
-  dsimp at this ⊢
-  simp [this]
 
 end IsDerivedBaseChange
 

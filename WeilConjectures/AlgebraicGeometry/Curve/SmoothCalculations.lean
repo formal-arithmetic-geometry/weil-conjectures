@@ -561,7 +561,6 @@ theorem bijective_cohomologyMap_constantModSheaf_of_isProper [IsCurve f] [Smooth
       · apply proper_constant_base_change_higher f r k' h q
         omega
 
-
 /-- **`C₈` for `𝐅_r`.** Let `C` be a smooth separated connected curve over an algebraically
 closed field `k`, `a : W ⟶ C` an open immersion and `r` a prime. Then the restriction
 `H²(C, 𝐅_r) ⟶ H²(W, a^* 𝐅_r)` is surjective: either `W = C`, or `W` is affine and
@@ -634,57 +633,6 @@ theorem surjective_cohomologyMap_constantModSheaf_two [IsCurve f] [Smooth f] [Co
       exact fun y ↦ ⟨0, Subsingleton.elim _ _⟩
 
 /-! ### The smooth-curve calculations -/
-
-/-- **The smooth-curve calculations.** Let `C` be a smooth separated connected curve over an
-algebraically closed field `k` and `n` a prime. The constant sheaf `𝐅_n` (read over `Λ` as
-`Λ/nΛ`) satisfies
-
-* `C₁` and `C₈`;
-* `C₂` when `C` is affine, `C₅` and `C₇` when `C` is proper;
-* `C₄` and `C₆` when `n ≠ char k` (part (a) of the blueprint statement), the finiteness in
-  `C₄` and `C₅` when `Λ/nΛ` is finite;
-* `C₃` when `n = char k` (part (b));
-
-each in the form of the corresponding field of `AlgebraicGeometry.IsCurve.Assertions`, with the
-coefficient hypotheses specialised to `𝐅_n` as in the lemmas above. The maps in `C₆`, `C₇`,
-`C₈` are the pullback maps `AlgebraicGeometry.Etale.cohomologyMap` (part (c)).
-
-Only the assertions are stated here; the explicit groups of part (a) are the curve estimates
-`AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod`,
-`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one` and
-`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_two`, and their invariance
-under algebraically closed extension is `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`.
-(blueprint: thm-sc-main)
--/
-theorem constantModSheaf_curveCalculations [IsCurve f] [Smooth f] [ConnectedSpace C] (n : ℕ)
-    [Fact n.Prime] :
-    let F := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-      (Etale.constantModSheaf Λ C n)
-    (∀ q, 2 < q → Subsingleton (Sheaf.H F q)) ∧
-    (IsAffine C → ∀ q, 1 < q → Subsingleton (Sheaf.H F q)) ∧
-    (CharP k n → ∀ q, 1 < q → Subsingleton (Sheaf.H F q)) ∧
-    ((n : k) ≠ 0 → Finite (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ)) →
-      ∀ q, Finite (Sheaf.H F q)) ∧
-    (IsProper f → Finite (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ)) →
-      ∀ q, Finite (Sheaf.H F q)) ∧
-    ((n : k) ≠ 0 → ∀ (k' : Type u) [Field k'] [IsAlgClosed k'] {C' : Scheme.{u}}
-      {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C},
-      IsPullback ι' f' f ι → ∀ q, Function.Bijective (Etale.cohomologyMap ι' F q)) ∧
-    (IsProper f → ∀ (k' : Type u) [Field k'] [IsAlgClosed k'] {C' : Scheme.{u}}
-      {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C},
-      IsPullback ι' f' f ι → ∀ q, Function.Bijective (Etale.cohomologyMap ι' F q)) ∧
-    (∀ {W : Scheme.{u}} (a : W ⟶ C) [IsOpenImmersion a],
-      Function.Surjective (Etale.cohomologyMap a F 2)) :=
-  by
-    dsimp
-    exact ⟨subsingleton_sheafH_constantModSheaf_of_two_lt Λ f n,
-    fun _ ↦ subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine Λ f n,
-    fun _ ↦ subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP Λ f n,
-    fun hn _ ↦ finite_sheafH_constantModSheaf_of_ne_zero Λ f n hn,
-    fun _ _ ↦ finite_sheafH_constantModSheaf_of_isProper Λ f n,
-    fun hn k' _ _ _ _ _ _ h ↦ bijective_cohomologyMap_constantModSheaf_of_ne_zero Λ f n hn k' h,
-    fun _ k' _ _ _ _ _ _ h ↦ bijective_cohomologyMap_constantModSheaf_of_isProper Λ f n k' h,
-    fun a _ ↦ surjective_cohomologyMap_constantModSheaf_two Λ f n a⟩
 
 /-! ### The eight assertions on smooth curves -/
 

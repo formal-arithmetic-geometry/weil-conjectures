@@ -99,27 +99,6 @@ namespace CategoryTheory.Adjunction
 
 variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
 
-/-- Let `adj₁ : L ⊣ R` and `adj₂ : S ⊣ T` be adjunctions between `C` and `D` whose right adjoint
-`R` and left adjoint `S` are identified by `θ : S ≅ R`. For `e : L A ≅ B`, `σ : N ≅ S M` and
-`γ : M ≅ T A`, composing a morphism `f : A ⟶ N` with the counit of `adj₂` read through `σ`
-and `γ` factors through the morphism `A ⟶ R (L A) ≅ R B ≅ S B` given by the unit of `adj₁`:
-the second factor `S B ⟶ A` is the transpose of `f` along `adj₁`, `e`, `γ` and `adj₂`. -/
-theorem comp_map_counit_eq_comp_homEquiv_symm {L : D ⥤ C} {R : C ⥤ D} {S : C ⥤ D} {T : D ⥤ C}
-    (adj₁ : L ⊣ R) (adj₂ : S ⊣ T) (θ : S ≅ R) {A N : D} {B M : C} (e : L.obj A ≅ B)
-    (σ : N ≅ S.obj M) (γ : M ≅ T.obj A) (f : A ⟶ N) :
-    f ≫ σ.hom ≫ S.map γ.hom ≫ adj₂.counit.app A =
-      (adj₁.unit.app A ≫ R.map e.hom ≫ θ.inv.app B) ≫
-        (adj₂.homEquiv B A).symm
-          (e.inv ≫ (adj₁.homEquiv A M).symm (f ≫ (σ ≪≫ θ.app M).hom) ≫ γ.hom) := by
-  have h₁ : adj₁.unit.app A ≫ R.map ((adj₁.homEquiv A M).symm (f ≫ (σ ≪≫ θ.app M).hom)) =
-      f ≫ (σ ≪≫ θ.app M).hom :=
-    (adj₁.homEquiv_unit _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
-  rw [homEquiv_counit, Category.assoc, Category.assoc, ← Category.assoc (θ.inv.app B),
-    ← θ.inv.naturality, Category.assoc, ← Functor.map_comp_assoc, ← Category.assoc e.hom,
-    Iso.hom_inv_id, Category.id_comp, Functor.map_comp_assoc, ← Category.assoc (adj₁.unit.app A),
-    h₁]
-  simp
-
 section UnitIso
 
 variable {C D : Type*} [Category* C] [Category* D]
@@ -139,35 +118,5 @@ end CategoryTheory.Adjunction
 namespace CategoryTheory.Adjunction
 
 variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] {F : C ⥤ D} {G : D ⥤ C}
-
-/-- For an adjunction `F ⊣ G` with unit `η` and counit `ε`, and morphisms `φ : F A ⟶ B`,
-`ψ : A ⟶ G B`, one has `ψ = η_A ≫ G φ` if and only if `F ψ ≫ ε_B = φ`. In particular the adjunct
-`η_A ≫ G φ` of `φ` gives back `φ` after applying `F` and composing with the counit.
-(blueprint: `lem-weil-pbc-adjunct-counit-identity`) -/
-theorem eq_unit_comp_map_iff_map_comp_counit (adj : F ⊣ G) {A : C} {B : D} (φ : F.obj A ⟶ B)
-    (ψ : A ⟶ G.obj B) : ψ = adj.unit.app A ≫ G.map φ ↔ F.map ψ ≫ adj.counit.app B = φ :=
-  adj.eq_unit_comp_map_iff φ ψ
-
-/-- **An adjunction from hom-set bijections natural in both variables.** A family of bijections
-`Ψ : (F X ⟶ Y) ≃ (X ⟶ G Y)` natural in `X` and `Y` (a `CoreHomEquiv F G`) defines the
-adjunction `mkOfHomEquiv Ψ : F ⊣ G` with hom bijection `Ψ`, unit `η_X = Ψ (𝟙 (F X))` and counit
-`ε_Y = Ψ⁻¹ (𝟙 (G Y))`; the formulas `Ψ a = η_X ≫ G a` and `Ψ⁻¹ b = F b ≫ ε_Y` are then
-`Adjunction.homEquiv_unit` and `Adjunction.homEquiv_counit`.
-(blueprint: `lem-weil-pbc-adjunction-of-natural-bijection`) -/
-theorem mkOfHomEquiv_homEquiv_unit_counit (adj : CoreHomEquiv F G) :
-    (∀ X Y, (mkOfHomEquiv adj).homEquiv X Y = adj.homEquiv X Y) ∧
-      (∀ X, (mkOfHomEquiv adj).unit.app X = adj.homEquiv X _ (𝟙 (F.obj X))) ∧
-      (∀ Y, (mkOfHomEquiv adj).counit.app Y = (adj.homEquiv _ Y).symm (𝟙 (G.obj Y))) := by
-  refine ⟨fun X Y ↦ ?_, fun _ ↦ rfl, fun _ ↦ rfl⟩
-  ext f
-  simp
-
-/-- If `F ⊣ G`, there is at most one morphism from an object `A` killed by `F` to an object
-isomorphic to an object in the image of `G`. -/
-lemma subsingleton_hom_of_isZero_leftAdjoint (adj : F ⊣ G) {A B : C} {N : D} (e : B ≅ G.obj N)
-    (hA : Limits.IsZero (F.obj A)) : Subsingleton (A ⟶ B) :=
-  ⟨fun a b ↦ by
-    rw [← cancel_mono e.hom]
-    exact (adj.homEquiv _ _).symm.injective (hA.eq_of_src _ _)⟩
 
 end CategoryTheory.Adjunction

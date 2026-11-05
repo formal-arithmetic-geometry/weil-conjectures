@@ -32,14 +32,6 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- The native pullback tensor square on localized K-flat representatives. -/
-lemma condensedRealizationTensor_pull_square_Q
-    (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
-    (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :
-    DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) :=
-  condensedRealizationTensor_pull_square_Q_of_total k₀ l g
-    (condensedRealizationTotalTensor_pull_square k₀ l g) P T hP hT
-
 /-- The native pullback tensor square on arbitrary derived objects. -/
 lemma condensedRealizationTensor_pull_square
     (M N : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :

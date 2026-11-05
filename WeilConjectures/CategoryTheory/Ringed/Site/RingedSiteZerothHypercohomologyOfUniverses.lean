@@ -41,37 +41,4 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-/-- `H⁰ RΓ` on a ringed site, with module sections in a universe containing its objects,
-arrows and ring sections. Global sections are `Hom_R(R, -)`; the right derived functor
-uses the canonical functorial K-injective replacement, followed by zeroth homology.
-No representative or site equivalence is chosen by an unspecified existence theorem.
-
-Source: Stacks Project, Section 07A5 and Lemma 08JA
-(blueprint: def-pur-ringed-site-zeroth-hypercohomology). -/
-noncomputable def ringedSiteZerothHypercohomologyOfUniverses
-    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{max c v r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-    (R : Sheaf J CommRingCat.{max c v r})
-    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-      ((sheafCompose J
-        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))] :
-    DerivedCategory (SheafOfModules.{max c v r}
-      ((sheafCompose J
-        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ⥤
-      AddCommGrpCat.{max c v r} :=
-  letI : IsGrothendieckAbelian.{max c v r} (SheafOfModules.{max c v r}
-      ((sheafCompose J
-        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) :=
-    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, r}
-      J R).1
-  letI := HasDerivedCategory.standard AddCommGrpCat.{max c v r}
-  let Γ : SheafOfModules.{max c v r}
-      ((sheafCompose J
-        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) ⥤ AddCommGrpCat.{max c v r} :=
-    preadditiveCoyoneda.obj (op (SheafOfModules.unit
-      ((sheafCompose J
-        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)))
-  Γ.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{max c v r} 0
-
 end CategoryTheory

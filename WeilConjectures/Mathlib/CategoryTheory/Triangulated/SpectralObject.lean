@@ -142,45 +142,6 @@ def _root_.CategoryTheory.NatTrans.mapTriangulatedSpectralObject {F₁ F₂ : C 
 variable {E : Type*} [Category* E] [HasZeroObject E] [Preadditive E] [HasShift E ℤ]
   [∀ n : ℤ, (shiftFunctor E n).Additive] [Pretriangulated E]
 
-/-- The functor induced on spectral objects by a composition of triangulated functors is the
-composition of the induced functors. -/
-def mapTriangulatedSpectralObjectCompIso (F : C ⥤ D) (G : D ⥤ E) [F.CommShift ℤ]
-    [F.IsTriangulated] [G.CommShift ℤ] [G.IsTriangulated] (ι : Type*) [Category* ι] :
-    (F ⋙ G).mapTriangulatedSpectralObject ι ≅
-      F.mapTriangulatedSpectralObject ι ⋙ G.mapTriangulatedSpectralObject ι :=
-  NatIso.ofComponents (fun X ↦
-    { hom :=
-        { hom := 𝟙 _
-          comm f g := by
-            change ((F ⋙ G).map (X.δ f g) ≫ ((F ⋙ G).commShiftIso (1 : ℤ)).hom.app _) ≫
-                (shiftFunctor E (1 : ℤ)).map (𝟙 _) =
-              𝟙 _ ≫ (G.map (F.map (X.δ f g) ≫ (F.commShiftIso (1 : ℤ)).hom.app _) ≫
-                (G.commShiftIso (1 : ℤ)).hom.app _)
-            simp [Functor.commShiftIso_comp_hom_app] }
-      inv :=
-        { hom := 𝟙 _
-          comm f g := by
-            change (G.map (F.map (X.δ f g) ≫ (F.commShiftIso (1 : ℤ)).hom.app _) ≫
-                (G.commShiftIso (1 : ℤ)).hom.app _) ≫ (shiftFunctor E (1 : ℤ)).map (𝟙 _) =
-              𝟙 _ ≫ ((F ⋙ G).map (X.δ f g) ≫ ((F ⋙ G).commShiftIso (1 : ℤ)).hom.app _)
-            simp [Functor.commShiftIso_comp_hom_app] }
-      hom_inv_id := by ext1; exact Category.comp_id _
-      inv_hom_id := by ext1; exact Category.comp_id _ }) (fun α ↦ by
-    ext1
-    exact (Category.comp_id _).trans (Category.id_comp _).symm)
-
-@[simp]
-lemma mapTriangulatedSpectralObjectCompIso_hom_app_hom (F : C ⥤ D) (G : D ⥤ E) [F.CommShift ℤ]
-    [F.IsTriangulated] [G.CommShift ℤ] [G.IsTriangulated] (ι : Type*) [Category* ι]
-    (X : Triangulated.SpectralObject C ι) :
-    ((mapTriangulatedSpectralObjectCompIso F G ι).hom.app X).hom = 𝟙 _ := rfl
-
-@[simp]
-lemma mapTriangulatedSpectralObjectCompIso_inv_app_hom (F : C ⥤ D) (G : D ⥤ E) [F.CommShift ℤ]
-    [F.IsTriangulated] [G.CommShift ℤ] [G.IsTriangulated] (ι : Type*) [Category* ι]
-    (X : Triangulated.SpectralObject C ι) :
-    ((mapTriangulatedSpectralObjectCompIso F G ι).inv.app X).hom = 𝟙 _ := rfl
-
 end NatTrans
 
 section Exact
@@ -196,27 +157,6 @@ variable {D A' : Type*} [Category* D] [HasZeroObject D] [Preadditive D] [HasShif
     γ.map ((H.shiftIso 1 a a' h).hom.app X) ≫ (e a').hom.app X =
       (e a).hom.app (X⟦(1 : ℤ)⟧) ≫ (H'.shift a).map ((F.commShiftIso (1 : ℤ)).hom.app X) ≫
         (H'.shiftIso 1 a a' h).hom.app (F.obj X))
-
-/-- Let `H : C ⥤ A` and `H' : D ⥤ A'` be homological functors with shift sequences, `F : C ⥤ D`
-a triangulated functor and `γ : A ⥤ A'` an exact functor, together with isomorphisms
-`e n : H.shift n ⋙ γ ≅ F ⋙ H'.shift n` compatible with the shifts by `1`. Then applying `H` and
-then `γ` to a spectral object gives the same spectral object as applying `F` and then `H'`. -/
-noncomputable def mapHomologicalSpectralObjectCompMapSpectralObjectIso
-    (ι : Type*) [Category* ι] :
-    H.mapHomologicalSpectralObject ι ⋙ γ.mapSpectralObject ι ≅
-      F.mapTriangulatedSpectralObject ι ⋙ H'.mapHomologicalSpectralObject ι :=
-  NatIso.ofComponents (fun X ↦ Abelian.SpectralObject.isoMk
-    (fun n ↦ Functor.isoWhiskerLeft X.ω₁ (e n)) (fun n₀ n₁ hn₁ i j k f g ↦ by
-      change γ.map (H.shiftMap (X.δ f g) n₀ n₁ _) ≫ (e n₁).hom.app _ =
-        (e n₀).hom.app _ ≫ H'.shiftMap (F.map (X.δ f g) ≫ (F.commShiftIso (1 : ℤ)).hom.app _)
-          n₀ n₁ _
-      simp only [shiftMap, Functor.map_comp, Category.assoc]
-      rw [he n₀ n₁ (by lia)]
-      exact ((e n₀).hom.naturality_assoc (X.δ f g) _).trans (by simp [Functor.comp_map])))
-    (fun {X Y} α ↦ by
-      refine Abelian.SpectralObject.Hom.ext (funext fun n ↦ ?_)
-      ext D
-      exact (e n).hom.naturality (α.hom.app D))
 
 end Exact
 

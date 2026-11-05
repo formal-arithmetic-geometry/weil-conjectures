@@ -82,26 +82,4 @@ lemma oneSection_apply_notMem_range_zeroSection [Nonempty n] (y : S) :
     simp
   exact h₀ (hy' ▸ h₁)
 
-/-- **The complement of the zero section is dense.** The zero section of `𝔸(n; S)`, `n`
-nonempty, has empty interior: the fibre of `𝔸(n; S) ⟶ S` through a point `0(y)` is irreducible,
-so its generic point specializes both to `0(y)` and to `1(y)`, and an open subset of the closed
-zero section containing `0(y)` would contain the generic point and hence `1(y)`. -/
-theorem dense_compl_range_zeroSection [Nonempty n] :
-    Dense (Set.range (zeroSection n S))ᶜ := by
-  rw [← interior_eq_empty_iff_dense_compl, Set.eq_empty_iff_forall_notMem]
-  rintro _ hx
-  obtain ⟨y, rfl⟩ := interior_subset hx
-  have hF : IsIrreducible ((𝔸(n; S) ↘ S) ⁻¹' {y}) :=
-    (𝔸(n; S) ↘ S).isIrreducible_preimage (isOpenMap_over (n := n) S) isIrreducible_singleton
-  have hg := hF.isGenericPoint_genericPoint_closure
-  have h₀ : hF.genericPoint ⤳ zeroSection n S y := hg.specializes (subset_closure (by
-    simp [← Scheme.Hom.comp_apply]))
-  have h₁ : hF.genericPoint ⤳ oneSection n S y := hg.specializes (subset_closure (by
-    simp [← Scheme.Hom.comp_apply]))
-  have hmem := h₀.mem_open isOpen_interior hx
-  have hclosed : IsClosed (Set.range (zeroSection n S)) :=
-    (zeroSection n S).isClosedEmbedding.isClosed_range
-  exact oneSection_apply_notMem_range_zeroSection n S y
-    (h₁.mem_closed hclosed (interior_subset hmem))
-
 end AlgebraicGeometry.AffineSpace

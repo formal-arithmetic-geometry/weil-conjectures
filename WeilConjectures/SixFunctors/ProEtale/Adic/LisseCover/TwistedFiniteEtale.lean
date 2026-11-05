@@ -202,20 +202,6 @@ theorem exists_finite_invariant_subset_of_isIntegrallyClosed_stalk [IsLocallyNoe
   exact exists_finite_invariant_subset_of_comp f j hj hsub hc (fun w s' ↦
     exists_finite_invariant_subset_of_isGenericallyConnected (j ≫ f) hη hQ hc.restrict w s') v s
 
-/-- **The components of a locally constant sheaf of sets on a regular scheme are finite**: the
-case of a connected regular Noetherian scheme `Y` of
-`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`, regular schemes
-being normal (`AlgebraicGeometry.IsRegular.isIntegrallyClosed_stalk`). -/
-theorem exists_finite_invariant_subset [IsLocallyNoetherian Y] [CompactSpace Y]
-    [IsRegular Y] [ConnectedSpace Y] (f : V ⟶ Y) [WeaklyEtale f] [Surjective f]
-    [QuasiCompact f] {S : Type*} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
-    (v : V) (s : S) :
-    ∃ T : V → Set S, (∀ v, (T v).Finite) ∧ IsLocallyConstant T ∧
-      (∀ z, T ((pullback.fst f f).base z) = c z '' T ((pullback.snd f f).base z)) ∧
-        s ∈ T v :=
-  exists_finite_invariant_subset_of_isIntegrallyClosed_stalk
-    (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) f hc v s
-
 /-- **Locally constant sheaves of sets on a geometrically unibranch scheme are unions of finite
 étale ones** (Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10, with Lemma
 7.3.9), in cocycle form. Let `Y` be a connected normal (hence geometrically unibranch)
@@ -353,21 +339,6 @@ theorem exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk [IsLocal
     rw [hσ'a, ← Scheme.Hom.comp_apply, pullback.lift_fst]
     exact ha
 
-/-- **Locally constant sheaves of sets on a regular scheme are unions of finite étale ones**:
-the case of a connected regular Noetherian scheme `Y` of
-`AlgebraicGeometry.exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk`, regular
-schemes being normal (`AlgebraicGeometry.IsRegular.isIntegrallyClosed_stalk`). -/
-theorem exists_isTwistedSection_finiteEtale [IsLocallyNoetherian Y] [CompactSpace Y]
-    [IsRegular Y] [ConnectedSpace Y] (f : V ⟶ Y) [WeaklyEtale f] [Surjective f]
-    [QuasiCompact f] {S : Type*} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
-    {K : Type u} [Field K] [IsAlgClosed K] (v : Spec (.of K) ⟶ V) (s : S) :
-    ∃ (P : Scheme.{u}) (p : P ⟶ Y) (_ : IsFinite p) (_ : Etale p) (σ : ↥(pullback f p) → S)
-      (p' : Spec (.of K) ⟶ P) (h : v ≫ f = p' ≫ p),
-      IsTwistedSection f c p σ ∧
-        σ ((pullback.lift v p' h).base (IsLocalRing.closedPoint K)) = s :=
-  exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk
-    (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) f hc v s
-
 /-- The points of the fibre of a finite coproduct of finite étale schemes come from the
 summands. -/
 lemma Scheme.FiniteEtale.exists_fiber_map_sigmaι {X : Scheme.{u}} {Ω : Type u} [Field Ω]
@@ -457,7 +428,6 @@ theorem Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale {Ω : Type u} [Fiel
   simp only [hφσ, pullback.lift_fst, fiberMk_left] at h₁
   exact ⟨(e.symm i).1, (e.symm i).2, h₁⟩
 
-
 /-- **Pro-étale locally constant sheaves of sets are constant on the universal cover.** Let `Y`
 be a connected normal Noetherian scheme, `Ỹ_y = U.cover y` its universal profinite étale cover
 at a geometric point `y`, `f : V ⟶ Y` a single-morphism pro-étale cover and `c` a descent
@@ -490,18 +460,5 @@ theorem exists_isTwistedSection_universalCover_of_isIntegrallyClosed_stalk {Ω :
   simp only [Function.comp_apply]
   rw [← hx', ← Scheme.Hom.comp_apply, hm]
   exact hσs
-
-/-- **Pro-étale locally constant sheaves of sets on a regular scheme are constant on the
-universal cover**: the case of a connected regular Noetherian scheme `Y` of
-`AlgebraicGeometry.exists_isTwistedSection_universalCover_of_isIntegrallyClosed_stalk`, regular
-schemes being normal (`AlgebraicGeometry.IsRegular.isIntegrallyClosed_stalk`). -/
-theorem exists_isTwistedSection_universalCover {Ω : Type u} [Field Ω] [IsLocallyNoetherian Y]
-    [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] (U : Scheme.UniversalCovers Y Ω)
-    (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (f : V ⟶ Y) [WeaklyEtale f] [Surjective f]
-    [QuasiCompact f] {S : Type*} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
-    (x : ↥(pullback f (U.proj y))) (s : S) :
-    ∃ σ, IsTwistedSection f c (U.proj y) σ ∧ σ x = s :=
-  exists_isTwistedSection_universalCover_of_isIntegrallyClosed_stalk
-    (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) U y f hc x s
 
 end AlgebraicGeometry

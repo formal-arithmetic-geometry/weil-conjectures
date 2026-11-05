@@ -62,43 +62,4 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l f]
 
-/-- **The co-projection map of Weil complexes lies over the geometric one** (blueprint:
-`thm-pur-weil-equivariance-of-purity-and-trace`, the Weil equivariance of the map
-`φ_{f,K} : Lf^* K ⊗ ω_f ⟶ Rf^! K` of `pur9-cs-def-phi`, at the coefficient stage `ℚ̄_ℓ`): for a
-separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-schemes of finite type, there is
-a morphism of Weil complexes `f^* L ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! L`, natural in `L`, which on the geometric
-fibre `X̄` is the geometric co-projection map `f̄^* L̄ ⊗ Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! L̄`
-(`AlgebraicGeometry.ProEtale.CondensedRing.upperShriekUnitTensorMap`), up to isomorphisms `ψ_L`
-of the sources and `φ_L` of the targets.
-
-The isomorphism `φ_L` is the identification of the underlying complex of `Rf^! L` with
-`Rf̄^! L̄` (`WeilComplex.nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek`),
-and `ψ_L` is the comparison of pullback and tensor product with forgetting the Weil structure,
-together with `φ` at `ℚ̄_ℓ`; here both are only required to exist. -/
-theorem exists_coprojection_forget_eq_upperShriekUnitTensorMap :
-    ∃ π : upperStar f ⋙ (𝟭 (WeilComplex k₀ l X)).prod' ((Functor.const _).obj
-          ((upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)))) ⋙
-          nativeConstructibleTensor k₀ l X ⟶
-        upperShriek f,
-      ∀ L : WeilComplex k₀ l Y,
-        ∃ (φ : (adicSheafDerivedEquivCondensedMod l
-            (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.obj
-              (forget.obj ((upperShriek f).obj L)) ≅
-          ((CondensedRing.boundedConstructibleUpperShriek l (geometricFiberHom (k₀ := k₀) f)).obj
-            (geometricFiberBoundedConstructibleObj L)).obj)
-          (ψ : (adicSheafDerivedEquivCondensedMod l
-            (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.obj
-              (forget.obj ((upperStar f ⋙ (𝟭 (WeilComplex k₀ l X)).prod' ((Functor.const _).obj
-                ((upperShriek f).obj (WeilSheaf.toComplex.obj
-                  (WeilSheaf.adicConstant k₀ l Y)))) ⋙
-                nativeConstructibleTensor k₀ l X).obj L)) ≅
-          ((CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) f)).obj
-              (geometricFiberBoundedConstructibleObj L) ⊗
-            (CondensedRing.boundedConstructibleUpperShriek l
-              (geometricFiberHom (k₀ := k₀) f)).obj (𝟙_ _)).obj),
-        (adicSheafDerivedEquivCondensedMod l _).functor.map (forget.map (π.app L)) ≫ φ.hom =
-          ψ.hom ≫ (ObjectProperty.ι _).map (CondensedRing.upperShriekUnitTensorMap l
-            (geometricFiberHom (k₀ := k₀) f) (geometricFiberBoundedConstructibleObj L)) :=
-  sorry
-
 end AlgebraicGeometry.WeilComplex

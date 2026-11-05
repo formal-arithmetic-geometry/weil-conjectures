@@ -66,28 +66,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated Z₁.hom] [LocallyOfFiniteType Z₂.hom] [QuasiCompact Z₂.hom] [IsSeparated Z₂.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- Blueprint `prop-compactification-coherence-detailed`, transitivity clause ("these
-transformations are identities for identity refinements and are transitive under
-composition"): for refinements `h : Z ⟶ Z₁` and `h₁ : Z₁ ⟶ Z₂` of factorizations
-`X ⟶[i] Z ⟶[p] Y`, `X ⟶[i₁] Z₁ ⟶[p₁] Y` and `X ⟶[i₂] Z₂ ⟶[p₂] Y`, the comparison along the
-composite `h ≫ h₁` is the composite of the comparisons. The blueprint states the clause for
-refinements of compactifications; it is used here for factorizations with an open immersion
-followed by an arbitrary morphism, such as `U ⟶[j] X ⟶[𝟙] X`, which are compactifications up to
-the identification of the middle object. -/
-theorem boundedConstructibleLowerShriekRefinementIso'_trans {i : X ⟶ Z} {i₁ : X ⟶ Z₁}
-    {i₂ : X ⟶ Z₂} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] [IsOpenImmersion i₂.left]
-    {h : Z ⟶ Z₁} {h₁ : Z₁ ⟶ Z₂} {h₂ : Z ⟶ Z₂} (sq : IsPullback (𝟙 X) i i₁ h)
-    (sq₁ : IsPullback (𝟙 X) i₁ i₂ h₁) (sq₂ : IsPullback (𝟙 X) i i₂ h₂) (_hh : h ≫ h₁ = h₂)
-    {p : Z ⟶ Y} {p₁ : Z₁ ⟶ Y} {p₂ : Z₂ ⟶ Y} (wp : h ≫ p₁ = p) (wp₁ : h₁ ≫ p₂ = p₁)
-    (wp₂ : h₂ ≫ p₂ = p)
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq)]
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq₁)]
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq₂)] :
-    boundedConstructibleLowerShriekRefinementIso' ℓ sq₁ wp₁ ≪≫
-        boundedConstructibleLowerShriekRefinementIso' ℓ sq wp =
-      boundedConstructibleLowerShriekRefinementIso' ℓ sq₂ wp₂ :=
-  boundedConstructibleLowerShriekRefinementIso'_trans_eq ℓ sq sq₁ sq₂ _hh wp wp₁ wp₂
-
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}

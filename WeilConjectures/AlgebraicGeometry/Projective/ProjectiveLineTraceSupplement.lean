@@ -438,16 +438,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The trace sends the scalar Kummer Chern class of O(1) to one.
-Source: blueprint def-amb-p1-trace (blueprint: def-amb-p1-trace).
-Proof: the decomposition's second component is the Chern adjunct h. Thus
-h = in₂ then b, and h then b inverse then pr₂ = in₂ then pr₂ = identity. -/
-theorem projectiveLineTrace_chern (N : ℕ) (hN : 0 < N)
-    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
-    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
-    ordinaryFiniteP1ChernPushforward A N hA S
-        (projectiveLineTraceDatum N hN A hA S hS).chern ≫
-      (projectiveLineTraceDatum N hN A hA S hS).trace = 𝟙 (ordinaryFiniteUnit A S) := by
-  exact (projectiveLineTraceDatum N hN A hA S hS).trace_chern
-
 end AlgebraicGeometry.Etale

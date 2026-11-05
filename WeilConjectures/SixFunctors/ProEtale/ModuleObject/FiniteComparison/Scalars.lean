@@ -65,10 +65,6 @@ def regularHomAddEquiv (M : Mod C A) : (regular A ⟶ M) ≃+ (𝟙_ C ⟶ M.X) 
   map_add' x y := by
     rw [add_hom, Preadditive.comp_add]
 
-lemma regularHomAddEquiv_apply (M : Mod C A) (x : regular A ⟶ M) :
-    regularHomAddEquiv M x = η[A] ≫ x.hom :=
-  rfl
-
 end Preadditive
 
 end CategoryTheory.Mod
@@ -146,10 +142,6 @@ noncomputable def unitHomEvalAddEquiv (hT : IsTerminal T) (F : Sheaf J Ab.{w}) :
   AddEquiv.ofBijective (AddMonoidHom.mk' (unitHomEval T) fun s t ↦ by simp [unitHomEval])
     ⟨unitHomEval_injective hT F, unitHomEval_surjective hT F⟩
 
-lemma unitHomEvalAddEquiv_apply (hT : IsTerminal T) {F : Sheaf J Ab.{w}}
-    (s : 𝟙_ (Sheaf J Ab.{w}) ⟶ F) : unitHomEvalAddEquiv hT F s = unitHomEval T s :=
-  rfl
-
 end CategoryTheory.Sheaf
 
 /-! ### The constant global sections of a constant ring sheaf -/
@@ -162,9 +154,6 @@ def unitHom {M : Ab.{w}} (m : M) : 𝟙_ Ab.{w} ⟶ M :=
     { toFun n := (n : ULift.{w} ℤ).down • m
       map_zero' := zero_smul ℤ _
       map_add' a b := add_smul a.down b.down _ }
-
-lemma unitHom_apply {M : Ab.{w}} (m : M) (n : ULift.{w} ℤ) : (unitHom m).hom n = n.down • m :=
-  rfl
 
 end AddCommGrpCat
 

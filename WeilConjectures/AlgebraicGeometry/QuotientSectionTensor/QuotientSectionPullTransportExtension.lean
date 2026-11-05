@@ -31,21 +31,4 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- Flat-term computation equations extend to every complex in the derived
-category. The extension is the resolving-class/localization step and is strictly
-weaker than constructing the comparison itself.
-Source: Stacks 06YS and 06YU; localization descent in parent proof step 8.
-(blueprint: lem-sfb-quotient-section-pull-transport-extension).
--/
-theorem section_pull_transport_extend_kflat {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
-    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅
-      derivedPullback Λ f ⋙ cX.model.T)
-    (hflat : SectionPullNormalizedOnKFlat a f cX cY barLam) :
-    SectionPullNormalized a f cX cY barLam := by
-  rcases hflat with ⟨e, hordinary, hcomputation⟩
-  refine ⟨e, hordinary, ?_⟩
-  exact section_pull_normalized_localization_descent
-    a f cX cY barLam e hcomputation
-
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

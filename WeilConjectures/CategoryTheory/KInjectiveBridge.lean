@@ -69,29 +69,4 @@ end CochainComplex
 
 namespace CategoryTheory.Functor
 
-/-- For a left exact additive functor `F` and a bounded-below complex `K`, the notation `RFK`
-with a chosen K-injective resolution `r : K ⟶ I` means the complex `F(I)` obtained termwise.
-Its dependence on `r` is explicit; no choice-independence claim is part of this definition.
-Source: blueprint def-sp-kinjective-bridge (blueprint: def-sp-kinjective-bridge). -/
-def rightDerivedComplexWithResolution
-    {C : Type u₁} [Category.{v₁} C] [Abelian C]
-    {D : Type u₂} [Category.{v₂} D] [Abelian D]
-    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
-    (K : CochainComplex.Plus C) (r : CochainComplex.KInjectiveResolutionChoice K.obj) :
-    CochainComplex D ℤ :=
-  (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj r.complex
-
-/-- For a left exact additive functor `F`, a bounded-below complex `K`, and a chosen
-K-injective resolution `r`, define `R^p F(K)` as `H^p(RFK)`, for every integer `p`.
-Agreement with ordinary right derived functors on objects in degree zero is the later
-comparison lemma `lem-sp-kinjective-computes`.
-Source: blueprint def-sp-kinjective-bridge (blueprint: def-sp-kinjective-bridge). -/
-noncomputable def rightDerivedCohomologyWithResolution
-    {C : Type u₁} [Category.{v₁} C] [Abelian C]
-    {D : Type u₂} [Category.{v₂} D] [Abelian D]
-    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
-    (K : CochainComplex.Plus C) (r : CochainComplex.KInjectiveResolutionChoice K.obj)
-    (p : ℤ) : D :=
-  (F.rightDerivedComplexWithResolution K r).homology p
-
 end CategoryTheory.Functor

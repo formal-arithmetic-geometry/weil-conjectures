@@ -37,27 +37,4 @@ instance : PreservesFiniteLimits (pushforward f) :=
   have := (pullbackPushforwardAdjunction f).rightAdjoint_preservesLimits.{0, 0}
   inferInstance
 
-/-- **The Čech resolution computes the derived direct image.** Let `f : X ⟶ S` be separated, `U`
-a finite cover of `X` whose finite intersections are affine over `S`, and `ℱ` a quasi-coherent
-`𝒪_X`-module. Then `Rf_* ℱ ≅ f_* Č(U, ℱ)` in `D(𝒪_S)`, where the Čech complex is placed in
-degrees `≥ 0`. -/
-noncomputable def derivedPushforwardSingleIsoCechResolution [IsSeparated f] [Finite ι]
-    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineHom ((⨅ l, U (y l)).ι ≫ f))
-    (hU' : ⨆ i, U i = ⊤) (ℱ : X.Modules) [ℱ.IsQuasicoherent] :
-    (derivedPushforward f).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ) ≅
-      DerivedCategory.Q.obj ((((pushforward f).mapHomologicalComplex _).obj
-        (cechResolution U ℱ)).extend ComplexShape.embeddingUpNat) :=
-  have := quasiIso_cechResolutionι U ℱ hU'
-  (pushforward f).rightDerivedFunctorSingleObjIsoOfResolution (cechResolutionι U ℱ)
-      (rightAcyclic_cechResolution_X_of_isAffineHom f U hU ℱ) ≪≫
-    DerivedCategory.Q.mapIso ((cechResolution U ℱ).mapExtendIso _ _)
-
-/-- **The cohomology sheaves of the derived direct image** are the higher direct images:
-`H^q(Rf_* ℱ) ≅ R^q f_* ℱ`. -/
-noncomputable def homologyDerivedPushforwardSingleIso (ℱ : X.Modules) (q : ℕ) :
-    (DerivedCategory.homologyFunctor _ q).obj
-        ((derivedPushforward f).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ)) ≅
-      (higherDirectImage f q).obj ℱ :=
-  (pushforward f).homologyRightDerivedFunctorSingleObjIso ℱ q
-
 end AlgebraicGeometry.Scheme.Modules

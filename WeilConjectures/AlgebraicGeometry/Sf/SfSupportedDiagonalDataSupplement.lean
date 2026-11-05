@@ -240,17 +240,6 @@ namespace AlgebraicGeometry.Etale.SupportedTrace
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The inverse projection formula followed by trace and the left unitor.
-Source: thm-amb-p1-adjunction.proof.md (blueprint: def-sf-supported-diagonal-calculus). -/
-def evaluation {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
-    {B : DerivedCategoryModule A X}
-    (t : (push A f).obj B ⟶ derivedTensorUnit (ModuleCat.{u + 1} A) Y)
-    (K : DerivedCategoryModule A Y) : (push A f).obj ((CoordinateTrace.pull A f ⋙ (derivedTensor
-      (ModuleCat.{u + 1} A) X).obj B).obj K) ⟶ K :=
-  (projectionIso A f B).inv.app K ≫
-    ((derivedTensor (ModuleCat.{u + 1} A) Y).map t).app K ≫
-      (derivedTensorUnitLeftUnitor (ModuleCat.{u + 1} A) Y).hom.app K
-
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
 
 section TensorUnit

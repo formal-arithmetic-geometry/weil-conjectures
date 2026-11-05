@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
 
-
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
@@ -87,15 +86,5 @@ def IsConstructibleEtaleSheafOfSets {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (Type (u + 1))) : Prop :=
   ∃ S : Stratification T, ∀ i : Fin S.n,
     IsFiniteLocallyConstantSheafOfTypes ((etaleSetPullback (S.immersion i)).obj F)
-
-/-- An object of the unbounded derived category of abelian sheaves has torsion cohomology
-when every cohomology sheaf is torsion in the local-section sense. There is no uniform
-annihilator or boundedness hypothesis.
-Source: blueprint `def-weil-pbc-etale-sheaves`, torsion cohomology clause. -/
-def HasTorsionEtaleCohomology {T : Scheme.{u}}
-    (K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) : Prop :=
-  ∀ r : ℤ, CategoryTheory.Sheaf.IsTorsion
-    ((DerivedCategory.homologyFunctor
-      (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) r).obj K)
 
 end AlgebraicGeometry.Scheme

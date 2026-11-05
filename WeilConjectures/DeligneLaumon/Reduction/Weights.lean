@@ -122,9 +122,6 @@ namespace WeilSheaf
 
 variable {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X} {w w' : ℝ}
 
-theorem IsMixedOfWeightsAtMost.isMixed (h : F.IsMixedOfWeightsAtMost ι w) : F.IsMixed ι :=
-  ⟨w, h⟩
-
 /-- Mixed upper bounds are monotone in the bound (blueprint: `sk-d-real-weights`). -/
 theorem IsMixedOfWeightsAtMost.mono_weight (h : F.IsMixedOfWeightsAtMost ι w) (hw : w ≤ w') :
     F.IsMixedOfWeightsAtMost ι w' := by
@@ -206,23 +203,6 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
   (h₁.of_epi (kernel.lift S.g S.f S.zero)).of_mono_cokernel (kernel.ι S.g)
     (h₃.of_mono (Abelian.factorThruCoimage S.g))
 
-
-/-- The middle term of a short exact sequence `0 ⟶ G' ⟶ G ⟶ G'' ⟶ 0` of Weil sheaves whose outer
-terms are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtration of
-`G'` with the inverse image of that of `G''` (blueprint: `lem-a1-mixed-direct-summand`, part 2). -/
-theorem IsMixedOfWeightsAtMost.of_shortExact {S : ShortComplex (WeilSheaf k₀ l X)}
-    (hS : S.ShortExact) (h₁ : S.X₁.IsMixedOfWeightsAtMost ι w)
-    (h₃ : S.X₃.IsMixedOfWeightsAtMost ι w) : S.X₂.IsMixedOfWeightsAtMost ι w :=
-  .of_exact hS.exact h₁ h₃
-
-/-- A direct summand, more generally a retract, of a Weil sheaf mixed of weights at most `w` is
-mixed of weights at most `w`: it is a Weil subsheaf (blueprint: `lem-a1-mixed-direct-summand`,
-part 3). -/
-theorem IsMixedOfWeightsAtMost.of_retract (h : Retract G F) (hF : F.IsMixedOfWeightsAtMost ι w) :
-    G.IsMixedOfWeightsAtMost ι w :=
-  have : Mono h.i := mono_of_mono_fac h.retract
-  hF.of_mono h.i
-
 /-- A subobject of a Weil sheaf with weights at most `v` has weights at most `v`: its stalks are
 Frobenius-stable subspaces. -/
 theorem HasWeightsAtMost.of_mono {v : ℝ} (f : F ⟶ G) [Mono f] (h : G.HasWeightsAtMost ι v) :
@@ -245,7 +225,6 @@ theorem isPunctuallyPureOfWeight_of_isZero (hF : IsZero F) (w : ℝ) :
   have : Subsingleton (F.stalk x).carrier := not_nontrivial_iff_subsingleton.1 this
   obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
   exact (hv.2 (Subsingleton.elim _ _)).elim
-
 
 /-- A nonzero Weil sheaf punctually pure of weight `u` with weights at most `v` has `u ≤ v`: it has
 a nonzero stalk at some closed point, and an eigenvalue there. -/
@@ -286,24 +265,6 @@ theorem IsMixedOfWeightsAtMost.of_hasWeightsAtMost
     by_cases hz : IsZero (cokernel i)
     · exact ⟨v, le_rfl, isPunctuallyPureOfWeight_of_isZero hz v⟩
     · exact ⟨w', hpure.le_of_hasWeightsAtMost (hv.of_epi (cokernel.π i)) hz, hpure⟩
-
-/-- A sheaf with a finite filtration `0 = G 0 ↪ G 1 ↪ ⋯ ↪ G n ≅ F` whose successive quotients
-`coker φᵢ` are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtrations
-of the quotients along the filtration of `F` (blueprint: `lem-zl-composition-weight-bound`, the
-extension step along the abutment filtration). -/
-theorem IsMixedOfWeightsAtMost.of_filtration {n : ℕ} (G : Fin (n + 1) → WeilSheaf k₀ l X)
-    (φ : ∀ i : Fin n, G i.castSucc ⟶ G i.succ) (h0 : IsZero (G 0))
-    (hlast : IsIsomorphic (G (Fin.last n)) F) [∀ i, Mono (φ i)]
-    (h : ∀ i : Fin n, (cokernel (φ i)).IsMixedOfWeightsAtMost ι w) :
-    F.IsMixedOfWeightsAtMost ι w := by
-  have key : ∀ (i : ℕ) (hi : i < n + 1), (G ⟨i, hi⟩).IsMixedOfWeightsAtMost ι w := by
-    intro i
-    induction i with
-    | zero => exact fun _ ↦ isMixedOfWeightsAtMost_of_isZero h0 w
-    | succ i ih =>
-      intro hi
-      exact (ih (by omega)).of_mono_cokernel (φ ⟨i, by omega⟩) (h ⟨i, by omega⟩)
-  exact (key n (by omega)).of_iso hlast.some
 
 end WeilSheaf
 
@@ -379,25 +340,11 @@ theorem IsMixedOfWeightsAtMost.of_distTriang (T : Triangle (WeilComplex k₀ l X
     (h₃ : T.obj₃.IsMixedOfWeightsAtMost ι w) : T.obj₂.IsMixedOfWeightsAtMost ι w :=
   fun b ↦ WeilSheaf.IsMixedOfWeightsAtMost.of_exact (homologySheaf_exact₂ T b hT) (h₁ b) (h₃ b)
 
-/-- **Retract stability of complex weights.** A direct summand, more generally a retract, of a
-Weil complex mixed of weights at most `w` is mixed of weights at most `w`: its cohomology sheaves
-are retracts of those of the ambient complex. -/
-theorem IsMixedOfWeightsAtMost.of_retract (h : Retract K L) (hL : L.IsMixedOfWeightsAtMost ι w) :
-    K.IsMixedOfWeightsAtMost ι w :=
-  fun b ↦ (hL b).of_retract (h.map (homologySheaf b))
-
 /-- A shift `K[n]` of a Weil complex mixed of weights at most `w` is mixed of weights at most
 `w + n`. -/
 theorem IsMixedOfWeightsAtMost.shift (hK : K.IsMixedOfWeightsAtMost ι w) (n : ℤ) :
     (K⟦n⟧).IsMixedOfWeightsAtMost ι (w + n) := fun a ↦
   ((hK (n + a)).of_iso (homologySheafShiftIso K n a (n + a) rfl).symm).mono_weight
-    (by push_cast; linarith)
-
-/-- A Weil complex `K` is mixed of weights at most `w` as soon as `K[n]` is mixed of weights at
-most `w + n`. -/
-theorem IsMixedOfWeightsAtMost.of_shift {n : ℤ} (hK : (K⟦n⟧).IsMixedOfWeightsAtMost ι (w + n)) :
-    K.IsMixedOfWeightsAtMost ι w := fun a ↦
-  ((hK (a - n)).of_iso (homologySheafShiftIso K n (a - n) a (by lia))).mono_weight
     (by push_cast; linarith)
 
 /-- A Weil sheaf placed in degree `a` is mixed of weights at most `w` as a complex if and only if
@@ -437,24 +384,6 @@ def HasDirectImageWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : �
     rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
   ∀ (w : ℝ) (F : WeilSheaf k₀ l X), F.IsMixedOfWeightsAtMost ι w →
     ∀ r : ℕ, ((WeilSheaf.higherLowerShriek k₀ l f r).obj F).IsMixedOfWeightsAtMost ι (w + r)
-
-/-- The complex form of the direct-image weight assertion, for a single morphism `f : X ⟶ Y` of
-`k₀`-schemes: `Rf₀!` carries every Weil complex on `X` that is mixed of weights at most `w` to a
-Weil complex mixed of weights at most `w`, for every `w`
-(blueprint: `lem-zl-morphism-open-closed-reduction`). -/
-def HasDirectImageComplexWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
-    [Fact (ringChar k₀ ≠ l)] (ι : PadicAlgCl l →+* ℂ) {X Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
-    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
-    [QuasiCompact f]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] : Prop :=
-  haveI : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
-  ∀ (w : ℝ) (K : WeilComplex k₀ l X), K.IsMixedOfWeightsAtMost ι w →
-    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w
-
 
 /-! ### Passage from sheaves to complexes -/
 

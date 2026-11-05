@@ -84,11 +84,6 @@ noncomputable def tensorStalkLinearMap (F G : WeilSheaf K l C) (hF : F.IsLisse)
   WeilCoefficients.homLinearMap
     (Mod.evaluationPairing (stalkFunctor l B.t) (F.dual hF).obj.carrier G.obj.carrier)
 
-lemma tensorStalkLinearMap_apply (F G : WeilSheaf K l C) (hF : F.IsLisse) (hG : G.IsLisse) (d v) :
-    tensorStalkLinearMap B F G hF hG d v =
-      Mod.evaluationPairing (stalkFunctor l B.t) (F.dual hF).obj.carrier G.obj.carrier d v :=
-  rfl
-
 /-- The map `(ℱ ⊗ 𝒢)_t → Hom((ℱ^∨)_t, 𝒢_t)` is bijective, `ℱ^∨` being lisse
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.bijective_evaluationPairing_of_lisse`). -/
 lemma bijective_tensorStalkLinearMap (F G : WeilSheaf K l C) (hF : F.IsLisse) (hG : G.IsLisse) :
@@ -151,22 +146,6 @@ noncomputable def fundamentalRepTensorObjLinHomEquiv (F G : WeilSheaf K l C) (hF
       · refine apply_eq_linHom_of_equivariant _ _ _ _ _ (fun d v ↦ ?_) d
         rw [fundamentalRep_frobLift, fundamentalRep_frobLift, fundamentalRep_frobLift]
         exact tensorStalkLinearMap_frobStalk M F G hF hG d v
-
-variable (M) in
-lemma fundamentalRepTensorObjLinHomEquiv_apply (F G : WeilSheaf K l C) (hF : F.IsLisse)
-    (hG : G.IsLisse) (z) :
-    fundamentalRepTensorObjLinHomEquiv M D F G hF hG z = tensorStalkLinearMap B F G hF hG z :=
-  rfl
-
-/-- The Weil fundamental representation of `ℱ ⊗ 𝒢` is the representation on
-`Hom((ℱ^∨)_t, 𝒢_t)` induced by those of `ℱ^∨` and `𝒢`
-(`AlgebraicGeometry.WeilGroup.fundamentalRepTensorObjLinHomEquiv`). -/
-theorem nonempty_equiv_fundamentalRep_tensorObj_linHom (F G : WeilSheaf K l C) (hF : F.IsLisse)
-    (hG : G.IsLisse) :
-    Nonempty ((fundamentalRep M D (F.tensorObj G hF) (hF.tensorObj hG)).Equiv
-      (Representation.linHom (fundamentalRep M D (F.dual hF) hF.dual)
-        (fundamentalRep M D G hG))) :=
-  ⟨fundamentalRepTensorObjLinHomEquiv M D F G hF hG⟩
 
 variable (M) in
 /-- The identification `(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t` of Weil fundamental representations: the

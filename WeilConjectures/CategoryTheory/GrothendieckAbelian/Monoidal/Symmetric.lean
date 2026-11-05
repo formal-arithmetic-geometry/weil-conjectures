@@ -30,9 +30,4 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
   [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A]
 
-lemma toBraidedCategory_symmetricCategory_sheaf_of_essentiallySmall :
-    (symmetricCategory_sheaf_of_essentiallySmall J (A := A)).toBraidedCategory =
-      braidedCategory_sheaf_of_essentiallySmall A J :=
-  rfl
-
 end CategoryTheory.GrothendieckTopology

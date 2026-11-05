@@ -36,12 +36,4 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
   [QuasiCompact j]
 
-/-- The adjunction `D(i_*) ⊣ Ri^!₀` on the unbounded derived categories of module objects, for a
-closed immersion `i` with quasi-compact open complement `j` (`i_*` is then exact,
-`ProEtale.CondensedRing.preservesFiniteColimits_lowerStar_of_isCompl`). -/
-noncomputable def derivedLowerStarClosedUpperShriekAdjunction
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) [PreservesFiniteColimits (i)_*⟦Λ⟧] :
-    ((i)_*⟦Λ⟧).mapDerivedCategory ⊣ (closedUpperShriek Λ i j).rightDerivedFunctor :=
-  (lowerStarClosedUpperShriekAdjunction Λ i j hij).mapDerivedCategoryRightDerivedAdjunction
-
 end AlgebraicGeometry.ProEtale.CondensedRing

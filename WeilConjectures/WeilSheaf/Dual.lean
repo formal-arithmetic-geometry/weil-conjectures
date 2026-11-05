@@ -206,21 +206,6 @@ end Monoidal
 
 namespace WeilSheaf
 
-/-- The Weil structure of the dual `F^∨ = [F, ℚ̄_ℓ]` of a Weil sheaf `F`, the composite
-```
-  Fr^* [F, ℚ̄_ℓ] ≅ [Fr^* F, Fr^* ℚ̄_ℓ] ≅ [F, Fr^* ℚ̄_ℓ] ≅ [F, ℚ̄_ℓ]
-```
-of the comparison `CategoryTheory.Functor.Monoidal.ihomObjIso` for the monoidal equivalence
-`Fr^*`, the inverse of the Weil structure `φ : Fr^* F ≅ F` in the first variable and the Weil
-structure of the constant Weil sheaf `ℚ̄_ℓ` in the second. -/
-noncomputable def dualStr (F : WeilSheaf k₀ l X) :
-    (frobeniusPullback k₀ l X).obj
-        ((ProEtale.AdicSheaf.ihom F.obj.carrier).obj
-          (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier) ≅
-      (ProEtale.AdicSheaf.ihom F.obj.carrier).obj
-        (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier :=
-  (ProEtaleWeilSheaf.ihom k₀ l X F.obj (ProEtaleWeilSheaf.adicConstant k₀ l X)).str
-
 -- TODO(unify): def-real-weil-representation-operations
 /-- The dual `F^∨ = [F, ℚ̄_ℓ]` of a lisse Weil sheaf: the internal hom into the constant Weil
 sheaf `ℚ̄_ℓ`, with the Weil structure `AlgebraicGeometry.WeilSheaf.dualStr`. It is lisse

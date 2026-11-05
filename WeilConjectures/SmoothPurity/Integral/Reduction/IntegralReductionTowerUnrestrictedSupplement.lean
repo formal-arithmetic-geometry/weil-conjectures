@@ -366,17 +366,6 @@ private theorem unrestrictedReduction_obj (n : ℕ) (M : integralTowerModules l 
     change (scalarReductionExistence l E Y n).choose.obj M = _
     exact (scalarReductionExistence l E Y n).choose_spec.choose M
 
-private theorem unrestrictedReduction_map (n : ℕ)
-    {M N : integralTowerModules l E Y} (a : M ⟶ N) :
-    (unrestrictedIntegralReductionFunctor l E Y n).map a =
-      eqToHom (unrestrictedReduction_obj l E Y n M) ≫
-        SheafOfModules.changeOfRingsHom
-          (completedIntegralCommRingProjectionUnrestricted l E Y n) M a ≫
-        eqToHom (unrestrictedReduction_obj l E Y n N).symm :=
-  by
-    change (scalarReductionExistence l E Y n).choose.map a = _
-    exact (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose a
-
 private noncomputable def unrestrictedModuleStep (n : ℕ)
     (M : integralTowerModules l E Y) :
     (SheafOfModules.UnrestrictedTowerProof.res
@@ -394,64 +383,6 @@ private noncomputable def unrestrictedModuleStep (n : ℕ)
     (unrestrictedReduction_obj l E Y (n + 1))
     (unrestrictedReduction_obj l E Y n)
 
-private theorem unrestrictedModuleStep_naturality (n : ℕ)
-    {M N : integralTowerModules l E Y} (a : M ⟶ N) :
-    (SheafOfModules.UnrestrictedTowerProof.res
-      (completedIntegralCommRingProjectionUnrestricted l E Y (n + 1))).map
-        ((unrestrictedIntegralReductionFunctor l E Y (n + 1)).map a) ≫
-      unrestrictedModuleStep l E Y n N =
-    unrestrictedModuleStep l E Y n M ≫
-      (SheafOfModules.UnrestrictedTowerProof.res
-        (completedIntegralCommRingProjectionUnrestricted l E Y n)).map
-          ((unrestrictedIntegralReductionFunctor l E Y n).map a) :=
-  SheafOfModules.UnrestrictedTowerProof.identifiedMap_naturality
-    (completedIntegralCommRingProjectionUnrestricted l E Y (n + 1))
-    (completedIntegralCommRingProjectionUnrestricted l E Y n)
-    (unrestrictedCoefficientStep l E Y n) (unrestrictedCoefficientStep_comp l E Y n) M
-    (unrestrictedIntegralReductionFunctor l E Y (n + 1))
-    (unrestrictedIntegralReductionFunctor l E Y n)
-    (unrestrictedReduction_obj l E Y (n + 1))
-    (unrestrictedReduction_obj l E Y n)
-    (unrestrictedReduction_map l E Y (n + 1))
-    (unrestrictedReduction_map l E Y n) a
-
-private theorem unrestrictedModuleStep_tmul (n : ℕ) (M : integralTowerModules l E Y)
-    (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-    (s : (integralCoefficientCommRingSheaf l E Y (n + 1)).obj.obj U) (x : M.val.obj U) :
-    (unrestrictedModuleStep l E Y n M).val.app U
-      (unrestrictedIntegralTensorSection l E Y (n + 1) M U s x) =
-    unrestrictedIntegralTensorSection l E Y n M U
-      ((integralCoefficientSheafTransition l E Y n).hom.app U s) x :=
-  SheafOfModules.UnrestrictedTowerProof.identifiedMap_tmul
-    (completedIntegralCommRingProjectionUnrestricted l E Y (n + 1))
-    (completedIntegralCommRingProjectionUnrestricted l E Y n)
-    (unrestrictedCoefficientStep l E Y n) (unrestrictedCoefficientStep_comp l E Y n) M
-    (unrestrictedIntegralReductionFunctor l E Y (n + 1))
-    (unrestrictedIntegralReductionFunctor l E Y n)
-    (unrestrictedReduction_obj l E Y (n + 1))
-    (unrestrictedReduction_obj l E Y n) U s x
-
-private theorem unrestrictedReduction_hom_ext (n : ℕ) (M N : integralTowerModules l E Y)
-    (a b : (SheafOfModules.UnrestrictedTowerProof.res
-      (completedIntegralCommRingProjectionUnrestricted l E Y n)).obj
-        ((unrestrictedIntegralReductionFunctor l E Y n).obj M) ⟶ N)
-    (h : ∀ U s x, a.val.app U (unrestrictedIntegralTensorSection l E Y n M U s x) =
-      b.val.app U (unrestrictedIntegralTensorSection l E Y n M U s x)) : a = b :=
-  SheafOfModules.UnrestrictedTowerProof.identified_hom_ext
-    (completedIntegralCommRingProjectionUnrestricted l E Y n) M
-    (unrestrictedIntegralReductionFunctor l E Y n)
-    (unrestrictedReduction_obj l E Y n) N a b h
-
 attribute [local irreducible] unrestrictedModuleStep
-
-/-- The strict reduction tower before localization, retaining its canonical transitions.
-Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-weil-integral-reduction-tower). -/
-noncomputable def unrestrictedIntegralComplexTower
-    (P : CochainComplex (integralTowerModules l E Y) ℤ) :
-    ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E Y) ℤ :=
-  Functor.ofOpSequence
-    (X := fun n ↦ (unrestrictedIntegralComplexFunctor l E Y n).obj P)
-    (fun n ↦ (unrestrictedIntegralTransition l E Y n).app P)
 
 end WeilConjectures

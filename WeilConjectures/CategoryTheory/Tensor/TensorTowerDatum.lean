@@ -16,25 +16,6 @@ set_option linter.privateModule false
 universe u v
 namespace CategoryTheory
 
-/-- The category structures, functors and normalized comparisons of one tensor tower.
-This record keeps changes of category presentation outside the component equation.
-Source: the tensor clause of the coefficient-tower argument.
-(blueprint: def-weil-tensor-tower-datum). -/
-structure TensorTowerDatum (C D E : Type u) where
-  [catC : Category.{v} C]
-  [catD : Category.{v} D]
-  [catE : Category.{v} E]
-  U : C × C ⥤ C
-  V : D × D ⥤ D
-  B : E × E ⥤ E
-  F : C ⥤ D
-  G : D ⥤ E
-  H : C ⥤ E
-  a : F ⋙ G ≅ H
-  p : U ⋙ F ≅ F.prod F ⋙ V
-  q : V ⋙ G ≅ G.prod G ⋙ B
-  r : U ⋙ H ≅ H.prod H ⋙ B
-
 namespace TensorTowerDatum
 variable {C D E : Type u}
 

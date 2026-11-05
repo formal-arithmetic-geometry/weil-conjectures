@@ -179,12 +179,6 @@ noncomputable def addIso' : (a b : ℤ) → e.zpow a ⊗ e.zpow b ≅ e.zpow (a 
 noncomputable def addIso (a b c : ℤ) (h : a + b = c) : e.zpow a ⊗ e.zpow b ≅ e.zpow c :=
   e.addIso' a b ≪≫ eqToIso (congrArg e.zpow h)
 
-lemma addIso_congr {a b c c' : ℤ} (h : a + b = c) (h' : a + b = c') :
-    (e.addIso a b c h).hom ≫ eqToHom (congrArg e.zpow (h.symm.trans h')) =
-      (e.addIso a b c' h').hom := by
-  subst h h'
-  simp
-
 lemma addIso_hom_eqToHom {a b c c' : ℤ} (h : a + b = c) (hc : c = c') :
     (e.addIso a b c h).hom ≫ eqToHom (congrArg e.zpow hc) = (e.addIso a b c' (h.trans hc)).hom := by
   subst hc
@@ -233,7 +227,6 @@ lemma addIso_succ (a a' b c c' : ℤ) (ha : a + 1 = a') (h : a + b = c) (h' : a'
       simp only [addIso, addIso', Iso.trans_hom, eqToIso_refl, Iso.refl_hom, comp_id, addIsoNeg,
         whiskerLeft_descend_hom]
       simp
-
 
 /-- A property of integers that holds at `0` and passes between consecutive integers holds
 everywhere. -/

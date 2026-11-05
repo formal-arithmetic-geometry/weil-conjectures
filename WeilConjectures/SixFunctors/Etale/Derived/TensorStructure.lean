@@ -115,33 +115,6 @@ theorem nonempty_iso_derivedTensor_flip :
 
 variable {A X}
 
-/-- Blueprint `def-pod-perfect-derived-pairing`: Perfect derived pairing.
-
-A pairing `b : C ⊗ᴸ D ⟶ Λ_X` in `D(X_ét)` is *perfect* if its tensor–internal-hom adjoint
-`D ⟶ RHom(C, Λ_X)` is an isomorphism.
-
-This is `CategoryTheory.MonoidalClosed.IsPerfectPairing` (see
-`AlgebraicGeometry.Etale.isPerfectPairing_iff`), stated for a pairing whose source is written
-with `AlgebraicGeometry.Etale.derivedTensor`. The only difference is the term used to
-elaborate `C ⊗ D`: here it is `derivedTensor`, so that the definition can be applied at
-`A = ModuleCat Λ` to pairings built from `derivedTensor`, without the kernel having to
-compare the two tensor products there (see the implementation notes).
-
-The names `AlgebraicGeometry.Etale.IsPerfectPairing` and
-`AlgebraicGeometry.Etale.isPerfectPairing_iff` repeat those of
-`CategoryTheory.MonoidalClosed.IsPerfectPairing` on purpose, since they express the same
-property. When both namespaces are open, write the namespace explicitly. -/
-def IsPerfectPairing {C D : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (b : ((derivedTensor A X).obj C).obj D ⟶ 𝟙_ _) : Prop :=
-  MonoidalClosed.IsPerfectPairing (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) b
-
-lemma isPerfectPairing_iff {C D : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (b : ((derivedTensor A X).obj C).obj D ⟶ 𝟙_ _) :
-    IsPerfectPairing b ↔
-      MonoidalClosed.IsPerfectPairing (C := _root_.DerivedCategory
-        (Sheaf X.smallEtaleTopology A)) b :=
-  Iff.rfl
-
 /-- An object `K` of `D(X_ét)` is invertible if and only if `K ⊗ᴸ M ≅ Λ_X` and
 `M ⊗ᴸ K ≅ Λ_X` for some `M`. -/
 lemma isInvertible_iff_exists_derivedTensor

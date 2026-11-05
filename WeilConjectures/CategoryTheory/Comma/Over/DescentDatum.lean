@@ -116,64 +116,7 @@ section Universal
 
 variable [HasPullback (V.hom ≫ p) p]
 
-/-- The universal point for a descent datum on `V`: the first projection
-`V ×_Y X ⟶ V`, a point of `V` over `V ×_Y X ⟶ V ⟶ X`. -/
-noncomputable abbrev universalPoint :
-    Over.mk (pullback.fst (V.hom ≫ p) p ≫ V.hom) ⟶ V :=
-  Over.homMk (pullback.fst (V.hom ≫ p) p) rfl
-
-/-- The morphism `φ : V ×_Y X ⟶ V` over `X` underlying a descent datum on `V`: the transport of
-the universal point. -/
-noncomputable def toHom (D : DescentDatum p V) : Limits.pullback (V.hom ≫ p) p ⟶ V.left :=
-  (D.transport _ (pullback.snd (V.hom ≫ p) p) (by rw [Category.assoc, pullback.condition])
-    universalPoint).left
-
-/-- **A descent datum is determined by its morphism `φ : V ×_Y X ⟶ V`.** The transport of a
-point `a` of `V` over `f₁` to `f₂` is `(a, f₂) ≫ φ`, by naturality of the transport. -/
-lemma transport_left_eq_lift_toHom (D : DescentDatum p V) {T : C} (f₁ f₂ : T ⟶ X)
-    (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V) :
-    (D.transport f₁ f₂ h a).left =
-      pullback.lift a.left f₂ (by rw [← Category.assoc, Over.w a]; exact h) ≫ D.toHom := by
-  let g : T ⟶ Limits.pullback (V.hom ≫ p) p :=
-    pullback.lift a.left f₂ (by rw [← Category.assoc, Over.w a]; exact h)
-  have key := D.transport_homMk_comp g _ (pullback.snd (V.hom ≫ p) p)
-    (by rw [Category.assoc, pullback.condition]) universalPoint
-  have e₁ : f₁ = g ≫ pullback.fst (V.hom ≫ p) p ≫ V.hom := by
-    rw [pullback.lift_fst_assoc]; exact (Over.w a).symm
-  have e₂ : f₂ = g ≫ pullback.snd (V.hom ≫ p) p := (pullback.lift_snd _ _ _).symm
-  rw [D.transport_left_congr h (by rw [← e₁, ← e₂]; exact h) a
-    ((Over.homMk g rfl : Over.mk (g ≫ pullback.fst (V.hom ≫ p) p ≫ V.hom) ⟶
-      Over.mk (pullback.fst (V.hom ≫ p) p ≫ V.hom)) ≫ universalPoint)
-    e₁ e₂ (by simp [g]), key]
-  rfl
-
-/-- Two descent data on `V` with the same morphism `V ×_Y X ⟶ V` have the same transport. -/
-lemma transport_eq_of_toHom_eq {D E : DescentDatum p V} (hDE : D.toHom = E.toHom) {T : C}
-    (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V) :
-    D.transport f₁ f₂ h a = E.transport f₁ f₂ h a :=
-  Over.OverMorphism.ext (by
-    rw [transport_left_eq_lift_toHom, transport_left_eq_lift_toHom, hDE])
-
 end Universal
-
-/-- A descent datum `D` on `V` relative to `p : X ⟶ Y` **base changes** to a descent datum `E` on
-`V'` relative to `p' = ι ≫ p : X' ⟶ Y`, through a morphism `q : V' ⟶ V` over `ι : X' ⟶ X`, if
-transporting a point `a` of `V'` by `E` and then mapping it to `V` by `q` is the same as mapping
-`a` to `V` and transporting it by `D`:
-```
-  V'(f₁) --E--> V'(f₂)
-    |             |
-    q             q
-    v             v
-  V(f₁ ≫ ι) --D--> V(f₂ ≫ ι)
-```
-When `q` exhibits `V'` as `V ×_X X'`, this says that `E` is the pullback of `D` along `ι`. -/
-def IsBaseChange {X' : C} {ι : X' ⟶ X} {p' : X' ⟶ Y} (hp : ι ≫ p = p') {V' : Over X'}
-    {q : V'.left ⟶ V.left} (hq : q ≫ V.hom = V'.hom ≫ ι) (D : DescentDatum p V)
-    (E : DescentDatum p' V') : Prop :=
-  ∀ ⦃T : C⦄ (f₁ f₂ : T ⟶ X') (h : f₁ ≫ p' = f₂ ≫ p') (a : Over.mk f₁ ⟶ V'),
-    (D.transport (f₁ ≫ ι) (f₂ ≫ ι) (by rw [Category.assoc, Category.assoc, hp, h])
-      (Over.homMk (a.left ≫ q) (by simp [hq]))).left = (E.transport f₁ f₂ h a).left ≫ q
 
 end DescentDatum
 

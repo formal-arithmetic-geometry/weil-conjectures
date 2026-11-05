@@ -26,17 +26,9 @@ variable {J C : Type*} [Category* J] [Category* C] (F : J ⥤ C)
 
 namespace IsCofiltered
 
-/-- Constructor for `IsEventuallyConstant`. -/
-lemma IsEventuallyConstant.mk' (i : J) (hF : F.IsEventuallyConstantTo i) :
-    IsEventuallyConstant F := ⟨⟨i, hF⟩⟩
-
 end IsCofiltered
 
 namespace IsFiltered
-
-/-- Constructor for `IsEventuallyConstant`. -/
-lemma IsEventuallyConstant.mk' (i : J) (hF : F.IsEventuallyConstantFrom i) :
-    IsEventuallyConstant F := ⟨⟨i, hF⟩⟩
 
 end IsFiltered
 

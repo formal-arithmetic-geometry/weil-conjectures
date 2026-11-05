@@ -139,24 +139,6 @@ end WeilSheaf
 
 variable (ψ : AddChar k₀ (PadicAlgCl l))
 
-/-- **Linear Artin–Schreier sheaves are ramified at infinity.** For a nontrivial additive
-character `ψ` and `a ≠ 0`, the Artin–Schreier sheaf `ℒ_{ψ(a x)}` on `𝔸¹_{k₀}` does not extend
-to a lisse sheaf on a neighbourhood of `∞` in `ℙ¹`: otherwise it would be constant on the
-punctured disc at `∞`
-(`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
-while the inertia group at `∞` acts on it through `ψ`.
-(blueprint: `lem-a1-artin-schreier-ramified-infinity`) -/
-theorem not_isUnramifiedAtInfinity_artinSchreier (hψ : ψ ≠ 1) {a : k₀} (ha : a ≠ 0) :
-    ¬ (artinSchreier ψ a).IsUnramifiedAtInfinity (𝟙 (affineLine k₀)) := by
-  intro h
-  obtain ⟨n, ⟨e⟩⟩ := WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity h
-    (laurentPoint k₀ 1) (by
-      rw [Scheme.Hom.geometricFiberMap_id, Category.comp_id])
-  have hb : algebraMap k₀ (AlgebraicClosure k₀) a * 1 ≠ 0 := by simpa using ha
-  exact affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage ψ hψ hb e.hom
-    ((ProEtale.adicUpperStarCompObjIso (laurentPoint_comp_geometricFiberMap_smul k₀ a 1) _).hom ≫
-      (laurentPoint k₀ _)^*ᵃ[l].map (affineLine.artinSchreierCarrierIso ψ).hom)
-
 namespace WeilSheaf.LisseOnDenseOpen
 
 variable (D : LisseOnDenseOpen k₀ l)

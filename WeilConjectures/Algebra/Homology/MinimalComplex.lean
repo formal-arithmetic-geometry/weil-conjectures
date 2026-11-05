@@ -52,30 +52,7 @@ section LinearAlgebra
 
 variable {A : Type u} [CommRing A]
 
-/-- The image of an element of `I • ⊤` under a linear map lies in `I • ⊤`. -/
-lemma LinearMap.map_mem_ideal_smul_top {V W : Type*} [AddCommGroup V] [Module A V]
-    [AddCommGroup W] [Module A W] (f : V →ₗ[A] W) (I : Ideal A) {x : V}
-    (hx : x ∈ I • (⊤ : Submodule A V)) : f x ∈ I • (⊤ : Submodule A W) := by
-  have h := Submodule.mem_map_of_mem (f := f) hx
-  rw [Submodule.map_smul''] at h
-  exact Submodule.smul_mono le_rfl le_top h
-
 variable [IsLocalRing A]
-
-/-- **Nakayama**: an endomorphism of a finite module over a local ring which is congruent to
-the identity modulo the maximal ideal is bijective. -/
-lemma LinearMap.bijective_of_sub_mem_maximalIdeal_smul_top {V : Type*} [AddCommGroup V]
-    [Module A V] [Module.Finite A V] (u : V →ₗ[A] V)
-    (hu : ∀ x, u x - x ∈ IsLocalRing.maximalIdeal A • (⊤ : Submodule A V)) :
-    Function.Bijective u := by
-  refine OrzechProperty.bijective_of_surjective_endomorphism u ?_
-  rw [← LinearMap.range_eq_top, ← top_le_iff]
-  refine Submodule.le_of_le_smul_of_le_jacobson_bot (Module.finite_def.mp inferInstance)
-    (IsLocalRing.maximalIdeal_le_jacobson ⊥) fun x _ ↦ ?_
-  have hx : x = u x - (u x - x) := by abel
-  rw [hx]
-  exact Submodule.sub_mem _ (Submodule.mem_sup_left (LinearMap.mem_range_self u x))
-    (Submodule.mem_sup_right (hu x))
 
 /-- A submodule of a finite free module over a local ring which admits a linear retraction is
 again finite and free. -/
@@ -323,47 +300,6 @@ modulo `𝔪`. -/
 def IsMinimal (M : CochainComplex (ModuleCat.{v} A) ℤ) : Prop :=
   ∀ (i j : ℤ) (x : M.X i),
     (M.d i j).hom x ∈ IsLocalRing.maximalIdeal A • (⊤ : Submodule A (M.X j))
-
-/-- If `f` and `g` are homotopic maps between minimal complexes, then `f - g` takes values in
-`𝔪 • ⊤` in every degree. -/
-lemma IsMinimal.sub_mem_of_homotopy {M N : CochainComplex (ModuleCat.{v} A) ℤ}
-    (hM : M.IsMinimal) (hN : N.IsMinimal) {f g : M ⟶ N} (H : Homotopy f g) (k : ℤ)
-    (x : M.X k) :
-    (f.f k).hom x - (g.f k).hom x ∈ IsLocalRing.maximalIdeal A • (⊤ : Submodule A (N.X k)) := by
-  rw [H.comm k, dNext_eq _ (show (ComplexShape.up ℤ).Rel k (k + 1) from rfl),
-    prevD_eq _ (show (ComplexShape.up ℤ).Rel (k - 1) k by simp)]
-  simp only [ModuleCat.hom_add, ModuleCat.hom_comp, LinearMap.add_apply, LinearMap.comp_apply,
-    add_sub_cancel_right]
-  exact Submodule.add_mem _ ((H.hom (k + 1) k).hom.map_mem_ideal_smul_top _ (hM _ _ x))
-    (hN _ _ _)
-
-/-- A chain map between minimal complexes of finite modules which is a homotopy equivalence is
-bijective in each degree. -/
-lemma IsMinimal.bijective_of_homotopyEquiv {M N : CochainComplex (ModuleCat.{v} A) ℤ}
-    (hM : M.IsMinimal) (hN : N.IsMinimal) [∀ i, Module.Finite A (M.X i)]
-    [∀ i, Module.Finite A (N.X i)] (e : HomotopyEquiv M N) (k : ℤ) :
-    Function.Bijective (e.hom.f k) := by
-  have h₁ := LinearMap.bijective_of_sub_mem_maximalIdeal_smul_top ((e.hom ≫ e.inv).f k).hom
-    fun x ↦ by simpa using hM.sub_mem_of_homotopy hM e.homotopyHomInvId k x
-  have h₂ := LinearMap.bijective_of_sub_mem_maximalIdeal_smul_top ((e.inv ≫ e.hom).f k).hom
-    fun x ↦ by simpa using hN.sub_mem_of_homotopy hN e.homotopyInvHomId k x
-  simp only [HomologicalComplex.comp_f, ModuleCat.hom_comp, LinearMap.coe_comp] at h₁ h₂
-  exact ⟨h₁.1.of_comp, h₂.2.of_comp⟩
-
-/-- A quasi-isomorphism between bounded above minimal complexes of finite free modules over a
-local ring is an isomorphism of complexes. -/
-theorem isIso_of_quasiIso_of_isMinimal {M M' : CochainComplex (ModuleCat.{v} A) ℤ}
-    (α : M ⟶ M') [QuasiIso α] (b b' : ℤ) [M.IsStrictlyLE b] [M'.IsStrictlyLE b']
-    [∀ i, Module.Free A (M.X i)] [∀ i, Module.Finite A (M.X i)]
-    [∀ i, Module.Free A (M'.X i)] [∀ i, Module.Finite A (M'.X i)]
-    (hM : M.IsMinimal) (hM' : M'.IsMinimal) : IsIso α := by
-  have := isKProjective_of_projective M b
-  have := isKProjective_of_projective M' b'
-  obtain ⟨e, rfl⟩ := (IsKProjective.quasiIso_iff α).1 inferInstance
-  have (k : ℤ) : IsIso (e.hom.f k) := by
-    rw [ConcreteCategory.isIso_iff_bijective]
-    exact hM.bijective_of_homotopyEquiv hM' e k
-  exact HomologicalComplex.Hom.isIso_of_components _
 
 /-- If a complex of free modules over a local ring is not minimal, then there is an idempotent
 null-homotopic chain endomorphism of it which is nonzero in some degree. -/

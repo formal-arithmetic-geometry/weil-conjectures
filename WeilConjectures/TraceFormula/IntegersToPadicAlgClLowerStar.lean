@@ -81,14 +81,6 @@ noncomputable def boundedConstructibleLowerStarToPadicAlgClIsoOfQcqs (g : Z ⟶ 
       Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ g).symm ≪≫
       (Functor.associator _ _ _).symm)
 
-/-- For proper `g`, `boundedConstructibleLowerStarToPadicAlgClIsoOfQcqs` is the comparison
-`boundedConstructibleLowerStarToPadicAlgClIso`: both are the restriction of the same derived (Push)
-morphism. -/
-lemma boundedConstructibleLowerStarToPadicAlgClIsoOfQcqs_eq (g : Z ⟶ Y) [IsProper g.left] :
-    boundedConstructibleLowerStarToPadicAlgClIsoOfQcqs ℓ E g =
-      boundedConstructibleLowerStarToPadicAlgClIso ℓ E g :=
-  Iso.ext rfl
-
 /-- **(Push)** on bounded constructible complexes for `𝒪_E ⟶ ℚ̄_ℓ` (blueprint
 `det-prop-scalar-six-direct-image`), for any morphism `g` of separated `k`-schemes of finite type:
 `Rg_*^{𝒪_E} ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`. It is the comparison for `𝒪_E ⟶ E`

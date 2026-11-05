@@ -114,14 +114,6 @@ lemma fromBimod_obj_smul (P : Bimod (Mon.mk R) (Mon.mk R)) :
     γ[R,((fromBimod R).obj P).X] = P.actLeft :=
   rfl
 
-/-- Forgetting the right action of the bimodule associated with a module object gives back the
-module object. -/
-def fromBimodToBimodIso : toBimod R ⋙ fromBimod R ≅ 𝟭 (Mod C R) :=
-  NatIso.ofComponents (fun M ↦ isoMk (Iso.refl M.X) (by
-    erw [Category.comp_id, whiskerLeft_id, Category.id_comp])) (fun f ↦ by
-      ext
-      exact (Category.comp_id f.hom).trans (Category.id_comp f.hom).symm)
-
 end Mod
 
 end CategoryTheory

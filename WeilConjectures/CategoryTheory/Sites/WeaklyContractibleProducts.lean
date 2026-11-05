@@ -53,27 +53,4 @@ lemma epi_iff_of_forall_exists {F G : Sheaf J (ModuleCat.{w} R)} (f : F ⟶ G) :
   rw [ShortComplex.exact_iff_epi _ (by simp)]
   rfl
 
-include hP hPW in
-/-- **Mittag-Leffler for towers of epimorphisms.** If every object of the site is covered by
-weakly contractible objects, then for a tower `F` of sheaves of modules with epimorphic
-transitions, the map `1 - t` on a product `∏ Fₙ` is an epimorphism, where `t` has components
-`∏ Fₙ ⟶ Fₙ₊₁ ⟶ Fₙ`: on sections over a weakly contractible object this is
-`ModuleCat.epi_one_sub_of_epi`. -/
-lemma epi_one_sub_of_forall_exists {F : ℕᵒᵖ ⥤ Sheaf J (ModuleCat.{w} R)}
-    {Pf : Fan fun n : ℕ ↦ F.obj (op n)} (hPf : IsLimit Pf) (t : Pf.pt ⟶ Pf.pt)
-    (ht : ∀ n : ℕ, t ≫ Pf.proj n = Pf.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op)
-    (hF : ∀ n : ℕ, Epi (F.map (homOfLE n.le_succ).op)) : Epi (𝟙 Pf.pt - t) := by
-  rw [epi_iff_of_forall_exists P hP hPW]
-  intro W hW
-  let E := sheafToPresheaf J (ModuleCat.{w} R) ⋙ (evaluation Cᵒᵖ (ModuleCat.{w} R)).obj (op W)
-  have hPf' : IsLimit (Fan.mk Pf.pt Pf.proj) :=
-    IsLimit.ofIsoLimit hPf (Cone.ext (Iso.refl _) fun ⟨_⟩ ↦ (Category.id_comp _).symm)
-  have := ModuleCat.epi_one_sub_of_epi (F := F ⋙ E)
-    (isLimitFanMkObjOfIsLimit E _ _ hPf') (E.map t)
-    (fun n ↦ by simpa [E] using congrArg E.map (ht n))
-    (fun n ↦ (epi_iff_of_forall_exists P hP hPW _).1 (hF n) W hW)
-  change Epi (E.map (𝟙 Pf.pt - t))
-  rw [E.map_sub, E.map_id]
-  exact this
-
 end CategoryTheory.GrothendieckTopology

@@ -94,33 +94,11 @@ section Proper
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
 
-/-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_ét) ⥤ D(Y_ét)` is a
-left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
--- STATEMENT-DISPUTED: this instance quantifies over every Grothendieck abelian A, whereas
--- Derived.UpperShriek explicitly assumes adjoint existence for general A. The available
--- Derived.LowerShriekLeftAdjoint proves proper coproduct preservation only for ModuleCat Λ
--- with IsAddTorsion Λ; its finite-coefficient specialization cannot supply arbitrary A.
--- The historical generic coproduct node now states the finite-coefficient theorem instead.
--- Brown representability supplies only the last step after coproduct preservation. This is
--- a conflict of source contracts requiring review, not a certified counterexample.
-instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
-    ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint :=
-  sorry
-
 end Proper
 
 section OfCompactification
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
-
-/-- The exceptional inverse image `Rf^! : D(Y_ét) ⥤ D(X_ét)` attached to a compactification
-`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the unbounded derived categories of étale sheaves: a chosen
-right adjoint `Rg^!` of the derived pushforward `Rg_*` along the proper `g`, followed by the
-levelwise pullback `Di^*` along the open immersion `i`. -/
-noncomputable def rightDerivedUpperShriekOfCompactification :
-    DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology A) :=
-  ((c.g)_*[A]).rightDerivedFunctor.rightAdjoint ⋙ D((c.i)^*[A])
 
 @[inherit_doc rightDerivedUpperShriekOfCompactification]
 scoped notation "Rf^!("c")[" A "]" =>
@@ -131,15 +109,6 @@ end OfCompactification
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 section Unbounded
-
-/-- The exceptional inverse image `Rf^! : D(Y_ét) ⥤ D(X_ét)` along a morphism `f : X ⟶ Y`
-admitting a compactification, on the unbounded derived categories of étale sheaves: the
-functor `rightDerivedUpperShriekOfCompactification` attached to the chosen compactification
-`HasCompactification.compactification f`. -/
-noncomputable def rightDerivedUpperShriek :
-    DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology A) :=
-  Rf^!(HasCompactification.compactification f)[A]
 
 @[inherit_doc rightDerivedUpperShriek]
 scoped notation "R(" f ")^![" A "]" =>
@@ -154,26 +123,6 @@ adjunction `Di_! ⊣ Di^*` along the open immersion of a compactification, see
 `Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-
-/-- The adjunction `Rf_! ⊣ Rf^!` attached to a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`:
-the composite of the derived adjunction `Di_! ⊣ Di^*` along the open immersion `i` and of the
-adjunction `Rg_* ⊣ Rg^!` along the proper `g`. -/
-noncomputable def rightDerivedUpperShriekOfCompactificationAdjunction {f : X ⟶ Y}
-    (c : Compactification f) : Rf_!(c)[A] ⊣ Rf^!(c)[A] :=
-  (derivedOpenImmersionLowerShriekUpperStarAdjunction A c.i).comp
-    (Adjunction.ofIsLeftAdjoint _)
-
-/-- The adjunction `Rf_! ⊣ Rf^!` on the unbounded derived categories of étale sheaves. -/
-noncomputable def rightDerivedUpperShriekAdjunction : R(f)_![A] ⊣ R(f)^![A] :=
-  rightDerivedUpperShriekOfCompactificationAdjunction A (HasCompactification.compactification f)
-
-/-- The derived lower shriek `Rf_! : D(X_ét) ⥤ D(Y_ét)` is a left adjoint, its right adjoint
-being `R(f)^![A]`. -/
-instance isLeftAdjoint_rightDerivedLowerShriek : (R(f)_![A]).IsLeftAdjoint :=
-  (rightDerivedUpperShriekAdjunction A f).isLeftAdjoint
-
-instance : (R(f)^![A]).IsRightAdjoint :=
-  (rightDerivedUpperShriekAdjunction A f).isRightAdjoint
 
 end Adjunction
 

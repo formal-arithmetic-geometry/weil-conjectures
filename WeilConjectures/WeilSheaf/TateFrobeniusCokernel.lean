@@ -73,22 +73,6 @@ lemma upperStar_map_cokernel_π_comp_upperStarCokernelPowIso_hom :
     (cokernel.condition ((N : ℤ) • 𝟙 (𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1}))))
     (cokernelIsCokernel _)).comp_coconePointUniqueUpToIso_hom _ WalkingParallelPair.one
 
-/-- The identifications `g^*(ℤ/ℓⁿ) ≅ ℤ/ℓⁿ` are compatible with the reductions
-`ℤ/ℓⁿ⁺¹ ⟶ ℤ/ℓⁿ`. -/
-lemma upperStarCokernelPowIso_naturality (ℓ n : ℕ) :
-    (g)^*[Ab.{u + 1}].map (cokernelPowTransition (𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1})) ℓ n) ≫
-        (upperStarCokernelPowIso g (ℓ ^ n)).hom =
-      (upperStarCokernelPowIso g (ℓ ^ (n + 1))).hom ≫
-        cokernelPowTransition (𝟙_ (Sheaf (ProEt.topology X) Ab.{u + 1})) ℓ n := by
-  refine Cofork.IsColimit.hom_ext (isColimitCoforkMapOfIsColimit' (g)^*[Ab.{u + 1}]
-    (cokernel.condition (((ℓ ^ (n + 1) : ℕ) : ℤ) • 𝟙 (𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1}))))
-    (cokernelIsCokernel _)) ?_
-  try simp only [Cofork.π_ofπ]
-  rw [← Functor.map_comp_assoc, cokernel_π_cokernelPowTransition,
-    upperStar_map_cokernel_π_comp_upperStarCokernelPowIso_hom,
-    upperStar_map_cokernel_π_comp_upperStarCokernelPowIso_hom_assoc,
-    cokernel_π_cokernelPowTransition]
-
 end Cokernel
 
 /-! ### Weakly étale morphisms -/
@@ -131,32 +115,6 @@ section FiniteField
 variable {k : Type u} [Field k] [Finite k] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)]
   {X₀ : Scheme.{u}} (a : X₀ ⟶ Spec (.of k)) {ζ : ℕ → AlgebraicClosure k}
   (hζ : ∀ n, IsPrimitiveRoot (ζ n) (ℓ ^ n))
-
-/-- **The geometric Galois Frobenius on the trivialized `μ_{ℓⁿ}`, in cokernel form**: on the
-geometric fibre `X̄` with its trivializations `ℤ/ℓⁿ ≅ μ_{ℓⁿ}` by the compatible system `ζₙ`, the
-pullback along `g = 𝟙 × σ` of `ℤ/ℓⁿ ≅ μ_{ℓⁿ}` followed by the comparison `g^* μ_{ℓⁿ} ⟶ μ_{ℓⁿ}` is
-`g^*(ℤ/ℓⁿ) ≅ ℤ/ℓⁿ` followed by `c` times `ℤ/ℓⁿ ≅ μ_{ℓⁿ}`, where `c ∈ ℤ/ℓⁿ` is the value of the
-modular cyclotomic character of the geometric Frobenius (`c q = 1`). -/
-theorem upperStar_map_cokernelPowIsoRootsOfUnitySheaf_hom_geometricGaloisFrobenius (n : ℕ) :
-    (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map
-        (cokernelPowIsoRootsOfUnitySheaf a.geometricFiberToAlgebraicClosure ℓ hζ n).hom ≫
-        upperStarRootsOfUnitySheafHom a.geometricGaloisFrobenius.hom (ℓ ^ n) =
-      (upperStarCokernelPowIso a.geometricGaloisFrobenius.hom (ℓ ^ n)).hom ≫
-        ((((geometricFrobeniusModularCharacter k ℓ n : (ZMod (ℓ ^ n))ˣ) : ZMod (ℓ ^ n)).val : ℤ) •
-          (cokernelPowIsoRootsOfUnitySheaf a.geometricFiberToAlgebraicClosure ℓ hζ n).hom) := by
-  refine Cofork.IsColimit.hom_ext (isColimitCoforkMapOfIsColimit'
-    (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}]
-    (cokernel.condition (((ℓ ^ n : ℕ) : ℤ) •
-      𝟙 (𝟙_ (Sheaf (ProEt.topology a.geometricFiber) Ab.{u + 1}))))
-    (cokernelIsCokernel _)) ?_
-  try simp only [Cofork.π_ofπ]
-  rw [← Functor.map_comp_assoc, cokernel_π_cokernelPowIsoRootsOfUnitySheaf_hom,
-    upperStar_map_cokernel_π_comp_upperStarCokernelPowIso_hom_assoc, Preadditive.comp_zsmul,
-    cokernel_π_cokernelPowIsoRootsOfUnitySheaf_hom, upperStarRootsOfUnitySheafHom,
-    ← Functor.map_comp_assoc,
-    reassoc_of% (upperStar_map_unitToRootsOfUnitySheaf_geometricGaloisFrobenius a n
-      (hζ n).pow_eq_one),
-    Iso.hom_inv_id, Category.comp_id]
 
 end FiniteField
 

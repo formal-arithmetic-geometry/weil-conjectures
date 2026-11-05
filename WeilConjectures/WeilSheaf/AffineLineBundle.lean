@@ -66,17 +66,6 @@ noncomputable def tateTwistShiftCompTateTwistShiftIso (m n a b : ℤ) (hmn : m +
       (shiftFunctorCompIsoId (WeilComplex k₀ l X) a b hab) ≪≫
     Functor.rightUnitor _ ≪≫ tateTwistCompTateTwistIso m n hmn
 
-variable (k₀ l X) in
-/-- For `m + n = 0` and `a + b = 0`, the twist-shifts `K ↦ K(m)[a]` and `K ↦ K(n)[b]` are inverse
-autoequivalences of the Weil complexes. -/
-noncomputable def tateTwistShiftEquiv (m n a b : ℤ) (hmn : m + n = 0) (hab : a + b = 0) :
-    WeilComplex k₀ l X ≌ WeilComplex k₀ l X :=
-  CategoryTheory.Equivalence.mk
-    (tateTwist k₀ l X m ⋙ shiftFunctor (WeilComplex k₀ l X) a)
-    (tateTwist k₀ l X n ⋙ shiftFunctor (WeilComplex k₀ l X) b)
-    (tateTwistShiftCompTateTwistShiftIso k₀ l X m n a b hmn hab).symm
-    (tateTwistShiftCompTateTwistShiftIso k₀ l X n m b a (by omega) (by omega))
-
 end Twist
 
 section TrivialLineBundle
@@ -90,103 +79,6 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-
-omit [Finite k₀] [Y.Over (Spec (CommRingCat.of k₀))] [π.IsOver (Spec (CommRingCat.of k₀))]
-  [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] in
-include hπ in
-/-- The trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` is smooth of relative dimension one, as a
-base change of `𝔸¹ ⟶ Spec k₀`. -/
-theorem smoothOfRelativeDimension_one_of_isPullback : SmoothOfRelativeDimension 1 π := by
-  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
-    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
-  exact (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip this
-
-include hπ in
-/-- **The affine-line adjunction for Weil complexes** (the Weil form of
-`cor-amb-affine-space-adjunction` for `d = 1`). For the trivial line bundle
-`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
-direct image with compact support `Rπ₀!` of Weil complexes is left adjoint to `P ↦ π^*(P(1)[2])`:
-this is the adjunction `Rπ₀! ⊣ Rπ^!` transported along smooth purity `Rπ^! ≅ π^*(1)[2]`
-(`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension`). -/
-theorem nonempty_adjunction_derivedLowerShriek_of_isPullback :
-    Nonempty (derivedLowerShriek k₀ l π ⊣
-      (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π) := by
-  have := smoothOfRelativeDimension_one_of_isPullback π s hπ
-  have : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over π]
-    infer_instance
-  have : QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over π]
-    infer_instance
-  have : HasUpperShriek k₀ l π := isLeftAdjoint_derivedLowerShriek π
-  obtain ⟨e⟩ := nonempty_upperShriek_iso_of_smoothOfRelativeDimension (k₀ := k₀) (l := l) π 1
-  exact ⟨(derivedLowerShriekUpperShriekAdjunction π).ofNatIsoRight (by simpa using e)⟩
-
-include hπ in
-/-- **Homotopy invariance for Weil complexes.** For the trivial line bundle
-`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X`, given by a cartesian square `Y ⟶ 𝔸¹, Y ⟶ X` over `Spec k₀`, the
-unit `K ⟶ Rπ_* π^* K` of the adjunction `π^* ⊣ Rπ_*` of Weil complexes is an isomorphism for
-every Weil complex `K` on `X`; that is, `π^*` is fully faithful.
-
-For the constant coefficients `Λ_X` this is blueprint `lem-pur-a1-direct-image`, proved on the
-étale side with finite coefficients as
-`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`. The statement for all Weil
-complexes is not a blueprint node. Its proof needs the `ℓ`-adic form of the constant case and,
-to pass from `Λ_X` to all `K`, smooth base change and a projection formula for `Rπ_*` on Weil
-complexes; none of these is formalized, so it is left with `sorry`. -/
-theorem isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback
-    (K : WeilComplex k₀ l X) :
-    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) := by
-  have : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
-  have : CompactSpace X :=
-    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k₀))
-  have : IsNoetherian X := ⟨⟩
-  -- the reduced closed subscheme `r : X_red ⟶ X`, with empty open complement `j`
-  let I := Scheme.IdealSheafData.vanishingIdeal (⊤ : TopologicalSpace.Closeds X)
-  let r := I.subschemeι
-  let : I.subscheme.Over (Spec (CommRingCat.of k₀)) := ⟨r ≫ X ↘ Spec (CommRingCat.of k₀)⟩
-  have : r.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
-  have : LocallyOfFiniteType (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (LocallyOfFiniteType (r ≫ X ↘ Spec (CommRingCat.of k₀)))
-  have : QuasiCompact (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (QuasiCompact (r ≫ X ↘ Spec (CommRingCat.of k₀)))
-  have : QuasiSeparated (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (QuasiSeparated (r ≫ X ↘ Spec (CommRingCat.of k₀)))
-  let j := (⊥ : X.Opens).ι
-  have : IsEmpty (⊥ : X.Opens).toScheme := ⟨fun x ↦ x.2⟩
-  have hr : Set.range r = (⊤ : TopologicalSpace.Closeds X) := by simp [r, I]
-  have hc : IsCompl (Set.range r.base) (Set.range j.base) := by
-    rw [Set.range_eq_empty j.base]
-    rw [show Set.range r.base = Set.univ by simpa using hr]
-    exact isCompl_top_bot
-  -- `K` is the direct image of its restriction to `X_red`
-  obtain ⟨M, ⟨e⟩⟩ := derivedLowerStar_essImage_of_isZero r j hc K (isZero_of_isEmpty _)
-  have := isIso_unit_app_derivedLowerStar_obj π s hπ r M
-    fun Y' _ π' s' _ hπ' _ _ _ ↦ isIso_unit_app_of_isClosedImmersion_of_isReduced ⊤ I.subscheme r
-      (Set.subset_univ _) Y' π' s' hπ' M
-  exact (upperStarDerivedLowerStarAdjunction π).unit.isoLocus.prop_of_iso e this
-
-
-/-- **The Thom isomorphism from the affine-line adjunction and homotopy invariance.** If `Rπ₀!` is
-left adjoint to `P ↦ π^*(P(1)[2])` and the unit of `π^* ⊣ Rπ_*` is an isomorphism, then
-`Rπ₀! π^* P ≅ P(-1)[-2]` naturally in `P`: `π^* ⋙ Rπ₀!` is left adjoint to
-`(1)[2] ⋙ π^* ⋙ Rπ_* ≅ (1)[2]`, whose left adjoint is also `(-1)[-2]`. -/
-noncomputable def upperStarCompDerivedLowerShriekIsoOfAdjunction
-    (adj : derivedLowerShriek k₀ l π ⊣
-      (tateTwist k₀ l X 1 ⋙ shiftFunctor (WeilComplex k₀ l X) (2 : ℤ)) ⋙ upperStar π)
-    [IsIso (upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit] :
-    upperStar π ⋙ derivedLowerShriek k₀ l π ≅
-      tateTwist k₀ l X (-1) ⋙ shiftFunctor (WeilComplex k₀ l X) (-2 : ℤ) :=
-  (((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).comp adj).ofNatIsoRight
-    (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _
-        (asIso (upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit).symm ≪≫
-      Functor.rightUnitor _)).leftAdjointUniq
-    (tateTwistShiftEquiv k₀ l X (-1) 1 (-2) 2 (by norm_num) (by norm_num)).toAdjunction
 
 end TrivialLineBundle
 

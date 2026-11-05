@@ -76,37 +76,6 @@ def isRefinementHomotopic {U V : FiniteSplitEtaleHypercover X}
     (f g : U.Refinement V) : Prop :=
   Relation.EqvGen (fun a b : U.Refinement V ↦ Nonempty (SimplicialObject.Homotopy a b)) f g
 
-/-- def-weil-pbc-finite-split-hypercover. -/
-def RefinementClasses (U V : FiniteSplitEtaleHypercover X) :=
-  Quot (fun a b : U.Refinement V ↦ Nonempty (SimplicialObject.Homotopy a b))
-
-/-- def-weil-pbc-finite-split-hypercover. -/
-def truncation (U : FiniteSplitEtaleHypercover X) (r : ℕ) :=
-  ((SimplicialObject.truncation r).obj U.simplicial,
-    fun n : Fin (r + 1) ↦
-      (U.splitting.N n.val, U.splitting.cofan (op (SimplexCategory.mk n.val)),
-        U.splitting.isColimit' (op (SimplexCategory.mk n.val)),
-        PLift.up (U.finite_each_degree n.val),
-        U.matching n.val, U.matchingMap n.val, U.projection n.val,
-        PLift.up (U.projection_naturality n.val), PLift.up (U.matching_universal n.val),
-        PLift.up (U.matchingMap_projection n.val), PLift.up (U.matching_cover n.val)))
-
-/-- def-weil-pbc-finite-split-hypercover. -/
-def sectionCosimplicial (U : FiniteSplitEtaleHypercover X)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v}) : CosimplicialObject AddCommGrpCat.{v} :=
-  U.simplicial.rightOp ⋙ F.obj
-
-/-- def-weil-pbc-finite-split-hypercover. -/
-noncomputable def complex (U : FiniteSplitEtaleHypercover X)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v}) : CochainComplex AddCommGrpCat.{v} ℕ :=
-  (AlgebraicTopology.alternatingCofaceMapComplex AddCommGrpCat.{v}).obj
-    (U.sectionCosimplicial F)
-
-/-- def-weil-pbc-finite-split-hypercover. -/
-noncomputable def cohomology (U : FiniteSplitEtaleHypercover X)
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v}) (q : ℕ) : AddCommGrpCat.{v} :=
-  (U.complex F).homology q
-
 end FiniteSplitEtaleHypercover
 
 /-- def-weil-pbc-finite-split-hypercover. -/

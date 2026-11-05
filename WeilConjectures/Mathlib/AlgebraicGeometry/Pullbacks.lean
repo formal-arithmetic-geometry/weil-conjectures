@@ -50,7 +50,6 @@ already an instance in Mathlib, since `⊤_ Scheme` is affine.
 The `ULift ℤ`-algebra structure on a commutative ring `A : Type u` is `ULift.algebra'`, which is a
 def rather than an instance; it is enabled as a local instance in this file.
 
-
 -/
 
 /-!
@@ -276,20 +275,6 @@ lemma Scheme.Pullback.opensRange_openCoverOfLeftRight_f {X Y Z : Scheme.{u}}
     Scheme.Pullback.openCoverOfLeftRight_f]
   rfl
 
-/-- A variant of `AlgebraicGeometry.Scheme.isPullback_of_openCover` in which the pullbacks of the
-cover are given by arbitrary pullback squares. -/
-lemma Scheme.isPullback_of_openCover_of_isPullback {W Y Z X' : Scheme.{u}}
-    (fWX : W ⟶ X') (fWY : W ⟶ Y) (fXZ : X' ⟶ Z) (fYZ : Y ⟶ Z) (𝒰 : X'.OpenCover)
-    (W' : 𝒰.I₀ → Scheme.{u}) (a : ∀ i, W' i ⟶ W) (b : ∀ i, W' i ⟶ 𝒰.X i)
-    (ha : ∀ i, IsPullback (a i) (b i) fWX (𝒰.f i))
-    (H : ∀ i, IsPullback (b i) (a i ≫ fWY) (𝒰.f i ≫ fXZ) fYZ) :
-    IsPullback fWX fWY fXZ fYZ := by
-  refine Scheme.isPullback_of_openCover fWX fWY fXZ fYZ 𝒰 fun i ↦ ?_
-  refine (H i).of_iso (ha i).isoPullback (Iso.refl _) (Iso.refl _)
-    (Iso.refl _) ?_ ?_ (by simp) (by simp)
-  · simp [Scheme.Cover.pullbackHom]
-  · exact (Category.comp_id _).trans (congrArg (· ≫ fWY) (ha i).isoPullback_hom_fst.symm)
-
 end AlgebraicGeometry
 
 noncomputable section
@@ -326,31 +311,6 @@ lemma isPullback_partialSectionOpenι :
       (pullback.fst x y) j :=
   IsPullback.of_right (by simpa using (IsPullback.of_hasPullback (j ≫ x) y).flip)
     (partialSectionOpenι_fst x y j) (IsPullback.of_hasPullback x y).flip
-
-/-- **The base change of an isomorphism over an open stays an isomorphism**: if
-`j : U ⟶ X` restricts to an isomorphism over an open `V ⊆ X` — in the application `j`
-is an admissible blow-up and `V` the complement of its center — then the base-changed
-morphism `U ×_S Y ⟶ X ×_S Y` restricts to an isomorphism over the preimage of `V`
-under the first projection. -/
-lemma isIso_partialSectionOpenι_restrict (V : X.Opens) [IsIso (j ∣_ V)] :
-    IsIso (partialSectionOpenι x y j ∣_ (pullback.fst x y ⁻¹ᵁ V)) := by
-  -- `(U ×_S Y)|_{ρ⁻¹V}` is `U ×_X (X ×_S Y)|_V` by pasting the restriction square onto
-  -- the cartesian square above, ...
-  have hA : IsPullback (partialSectionOpenι x y j ∣_ (pullback.fst x y ⁻¹ᵁ V))
-      (partialSectionOpenι x y j ⁻¹ᵁ (pullback.fst x y ⁻¹ᵁ V)).ι
-      (pullback.fst x y ⁻¹ᵁ V).ι (partialSectionOpenι x y j) :=
-    isPullback_morphismRestrict _ _
-  have hpaste := hA.paste_vert (isPullback_partialSectionOpenι x y j)
-  -- ... and `(X ×_S Y)|_V ⟶ X` factors through `V`, so it is `j|_V` base-changed.
-  have ht : IsPullback (j ⁻¹ᵁ V).ι (j ∣_ V) j V.ι :=
-    (isPullback_morphismRestrict j V).flip
-  have hs : IsPullback ((partialSectionOpenι x y j ⁻¹ᵁ (pullback.fst x y ⁻¹ᵁ V)).ι ≫
-        pullback.fst (j ≫ x) y)
-      (partialSectionOpenι x y j ∣_ (pullback.fst x y ⁻¹ᵁ V)) j
-      ((pullback.fst x y ∣_ V) ≫ V.ι) := by
-    rw [morphismRestrict_ι]
-    exact hpaste.flip
-  exact (IsPullback.of_right' hs ht).flip.isIso_fst_of_isIso
 
 variable (hγ : γ ≫ pullback.fst x y = j)
 

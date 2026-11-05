@@ -39,19 +39,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- Common-stage component of higher pullback/tensor composition coherence.
-Source: Stacks 07A4 and 0941; finite-stage representative descent.
-(blueprint: lem-pur-pullback-tensor-composition-coherence). -/
-theorem pullbackTensorCommonStageCompositionCoherence {X Y Z : Scheme.{u}}
-    (f : X ⟶ Y) (h : Z ⟶ X)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
-    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)] :
-    ∀ M N : generalAlgebraicallyClosedConstructibleCategory l Ω Y,
-      canonicalCommonStagePullbackTensor_composition l Ω f h M N := by
-  intro M N
-  obtain ⟨L, hA, hB, r, hl, hr⟩ :=
-    commonStageCompositionFiniteRepresentative l Ω f h M N
-  exact eq_of_heq (hl.trans hr.symm)
-
 end WeilConjectures

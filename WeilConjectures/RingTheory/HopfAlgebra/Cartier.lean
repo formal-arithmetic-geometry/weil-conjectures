@@ -367,70 +367,6 @@ theorem exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation [IsNoetheria
   exact mem_iInf_pow_ker_iff.1 ((isPrime_iInf_pow_ker_of_forall_exists_derivation hD).mem_of_pow_mem
     n (hn ▸ zero_mem _))
 
-
-/-- **Cartier's lemma**, stable-subset form: let `ε` be a `k`-point of a Noetherian `k`-algebra
-`A` over a field of characteristic zero, and `W` a set of functions vanishing at `ε`. If every
-tangent vector at `ε` extends to a derivation of `A` preserving `W`, then the elements of `W`
-lie in every power of the ideal of `ε`: a derivation of an element of `I ^ r ∖ I ^ (r + 1)` in a
-suitable direction lies outside `I ^ r`, by Euler's identity. -/
-theorem mem_iInf_pow_ker_of_forall_exists_derivation [IsNoetherianRing A] {W : Set A}
-    (hW : ∀ a ∈ W, a ∈ RingHom.ker ε)
-    (hD : ∀ φ : (RingHom.ker ε).Cotangent →ₗ[k] k, ∃ D : Derivation k A A,
-      (∀ a ∈ W, D a ∈ W) ∧
-        ∀ a (ha : a ∈ RingHom.ker ε), ε (D a) = φ ((RingHom.ker ε).toCotangent ⟨a, ha⟩))
-    {a : A} (ha : a ∈ W) : a ∈ ⨅ r : ℕ, RingHom.ker ε ^ r := by
-  classical
-  have := ε.finiteDimensional_cotangent
-  set I := RingHom.ker ε
-  let B := Module.finBasis k I.Cotangent
-  choose y hy using fun i ↦ I.toCotangent_surjective (B i)
-  choose D hDW hD' using fun j ↦ hD (B.coord j)
-  set x : Fin (Module.finrank k I.Cotangent) → A := fun i ↦ (y i : A)
-  have hx (i) : x i ∈ I := (y i).2
-  have hspan : ∀ a ∈ I, ∃ c : Fin (Module.finrank k I.Cotangent) → k,
-      a - ∑ i, algebraMap k A (c i) * x i ∈ I ^ 2 := fun a ha ↦ by
-    refine ⟨fun i ↦ B.repr (I.toCotangent ⟨a, ha⟩) i, ?_⟩
-    have h : I.toCotangent (⟨a, ha⟩ - ∑ i, B.repr (I.toCotangent ⟨a, ha⟩) i • y i) = 0 := by
-      rw [map_sub, map_sum]
-      simp_rw [LinearMap.map_smul_of_tower, hy]
-      rw [B.sum_repr, sub_self]
-    rw [I.toCotangent_eq_zero] at h
-    simpa [Algebra.smul_def] using h
-  have hDx (i j) : ε (D j (x i)) = if i = j then 1 else 0 := by
-    rw [hD' j (y i) (y i).2, hy, Module.Basis.coord_apply, Module.Basis.repr_self,
-      Finsupp.single_apply]
-  have key (r : ℕ) : ∀ a ∈ W, a ∈ I ^ (r + 1) := by
-    induction r with
-    | zero => exact fun a ha ↦ by simpa using hW a ha
-    | succ r ih =>
-      intro a ha
-      obtain ⟨f, hf, hfa⟩ := exists_isHomogeneous_sub_aeval_mem_pow_succ hx hspan (ih a ha)
-      have hpd (j) : pderiv j f = 0 := by
-        have hf' (i) : (pderiv i f).IsHomogeneous r := by simpa using hf.pderiv (i := i)
-        refine eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ hx hDx (hf' j) ?_
-        have h1 : D j (aeval x f) ∈ I ^ (r + 1) := by
-          have h := (D j).map_mem_pow_of_mem_pow_succ hfa
-          rw [map_sub] at h
-          simpa using sub_mem (ih _ (hDW j a ha)) h
-        rw [(D j).map_aeval_eq_sum] at h1
-        have h2 : ∑ i, aeval x (pderiv i f) * (D j (x i) - algebraMap k A (ε (D j (x i)))) ∈
-            I ^ (r + 1) :=
-          Ideal.sum_mem _ fun i _ ↦ by
-            rw [pow_succ]
-            exact Ideal.mul_mem_mul ((hf' i).aeval_mem_pow hx) (ε.sub_algebraMap_mem_ker _)
-        have h3 : aeval x (pderiv j f) = ∑ i, aeval x (pderiv i f) * D j (x i) -
-            ∑ i, aeval x (pderiv i f) * (D j (x i) - algebraMap k A (ε (D j (x i)))) := by
-          rw [← Finset.sum_sub_distrib]
-          simp_rw [mul_sub, sub_sub_cancel, hDx, apply_ite (algebraMap k A), map_one, map_zero,
-            mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
-        rw [h3]
-        exact sub_mem h1 h2
-      have h := hf.sum_X_mul_pderiv
-      simp only [hpd, mul_zero, Finset.sum_const_zero] at h
-      rw [eq_comm, nsmul_eq_mul, mul_eq_zero] at h
-      have hf0 : f = 0 := h.resolve_left (Nat.cast_ne_zero.2 (Nat.succ_ne_zero r))
-      simpa [hf0] using hfa
-  exact Submodule.mem_iInf _ |>.2 fun r ↦ Ideal.pow_le_pow_right (Nat.le_succ r) (key r a ha)
 end AlgHom
 
 /-! ### Invariant derivations of a bialgebra -/
@@ -636,27 +572,6 @@ theorem height_ker_liftEquiv_le_card [Algebra.FiniteType k A] {ι : Type*} [Fint
       rw [← Ideal.map_pow]
       exact Ideal.mem_map_of_mem _ hc
 
-/-- The ideal of the base change `K ⊗[k] A → K` of a `k`-point `ε` of a finitely generated
-`k`-algebra `A` has height at most the dimension of the cotangent space of `A` at `ε`. -/
-theorem height_ker_liftEquiv_le [Algebra.FiniteType k A] :
-    (RingHom.ker (liftEquiv k K A K ((Algebra.ofId k K).comp ε))).height ≤
-      Module.finrank k (RingHom.ker ε).Cotangent := by
-  classical
-  have := Algebra.FiniteType.isNoetherianRing k A
-  have := ε.finiteDimensional_cotangent
-  set I := RingHom.ker ε
-  let B := Module.finBasis k I.Cotangent
-  choose y hy using fun i ↦ I.toCotangent_surjective (B i)
-  have h := height_ker_liftEquiv_le_card K (x := fun i ↦ (y i : A)) (fun i ↦ (y i).2)
-    fun a ha ↦ ⟨fun i ↦ B.repr (I.toCotangent ⟨a, ha⟩) i, by
-      have h : I.toCotangent (⟨a, ha⟩ - ∑ i, B.repr (I.toCotangent ⟨a, ha⟩) i • y i) = 0 := by
-        rw [map_sub, map_sum]
-        simp_rw [LinearMap.map_smul_of_tower, hy]
-        rw [B.sum_repr, sub_self]
-      rw [I.toCotangent_eq_zero] at h
-      simpa [Algebra.smul_def] using h⟩
-  rwa [Fintype.card_fin] at h
-
 end AlgHom
 
 /-! ### Cartier's theorem -/
@@ -694,16 +609,6 @@ private theorem comp_translation_inv (g : WithConv (A →ₐ[k] k)) :
     AlgHom.comp_id, toConv_ofConv, toConv_ofConv, inv_mul_cancel, AlgHom.convOne_def,
     ofConv_toConv, Subsingleton.elim (Algebra.ofId k k) (AlgHom.id k k), AlgHom.id_comp]
 
-private theorem counitAlgHom_comp_translation (g : WithConv (A →ₐ[k] k)) :
-    (counitAlgHom k A).comp (translation g) = g.ofConv := by
-  rw [translation, AlgHom.comp_convMul_distrib, ← AlgHom.comp_assoc,
-    Subsingleton.elim ((counitAlgHom k A).comp (Algebra.ofId k A)) (AlgHom.id k k),
-    AlgHom.id_comp, AlgHom.comp_id, toConv_ofConv,
-    show toConv (counitAlgHom k A) = 1 by
-      rw [AlgHom.convOne_def, Subsingleton.elim (Algebra.ofId k k) (AlgHom.id k k),
-        AlgHom.id_comp],
-    mul_one, ofConv_toConv]
-
 /-- Translations act transitively on the `k`-points of a commutative Hopf algebra: for every
 `k`-point `g` there is an algebra automorphism `τ` of `A` with `g ∘ τ = ε`. -/
 theorem HopfAlgebra.exists_algEquiv_comp_eq_counitAlgHom (g : A →ₐ[k] k) :
@@ -736,14 +641,6 @@ theorem Bialgebra.counitAlgHom_baseChange_eq_liftEquiv (K : Type*) [Field K] [Al
     counitAlgHom K (K ⊗[k] A) =
       AlgHom.liftEquiv k K A K ((Algebra.ofId k K).comp (counitAlgHom k A)) :=
   Algebra.TensorProduct.ext_ring (AlgHom.ext fun a ↦ by simp)
-
-/-- The augmentation ideal of the base change `K ⊗[k] A` of a commutative Hopf algebra is
-generated by the augmentation ideal of `A`. -/
-theorem HopfAlgebra.ker_counitAlgHom_baseChange_le_map (K : Type*) [Field K] [Algebra k K] :
-    RingHom.ker (counitAlgHom K (K ⊗[k] A)) ≤ (RingHom.ker (counitAlgHom k A)).map
-      (Algebra.TensorProduct.includeRight : A →ₐ[k] K ⊗[k] A) := by
-  rw [Bialgebra.counitAlgHom_baseChange_eq_liftEquiv]
-  exact AlgHom.ker_liftEquiv_le_map K
 
 /-- If `xᵢ ∈ 𝔪` span the augmentation ideal `𝔪` of a commutative Hopf algebra `A` modulo `𝔪²`,
 then the augmentation ideal of a base change `K ⊗[k] A` has height at most the number of
@@ -797,33 +694,6 @@ theorem HopfAlgebra.exists_apply_eq_one_mul_eq_zero_of_isNilpotent [IsNoetherian
   · have h := congrArg (translation (toConv g)⁻¹) hsb
     rwa [map_mul, map_zero, ← AlgHom.comp_apply _ (translation (toConv g)), hφψ,
       AlgHom.id_apply] at h
-
-/-- **Cartier's lemma** at an arbitrary `k`-point `g` of a Noetherian commutative Hopf algebra in
-characteristic zero: the functions vanishing near `g` form a prime ideal, so a single
-irreducible component passes through `g`. It is the translate by `g` of
-`Bialgebra.isPrime_iInf_pow_ker_counitAlgHom`. -/
-theorem HopfAlgebra.isPrime_iInf_pow_ker [IsNoetherianRing A] (g : A →ₐ[k] k) :
-    (⨅ r : ℕ, RingHom.ker g ^ r).IsPrime := by
-  have hP := Bialgebra.isPrime_iInf_pow_ker_counitAlgHom k A
-  have hφψ : (translation (toConv g)⁻¹).comp (translation (toConv g)) = AlgHom.id k A := by
-    rw [translation_comp_translation, mul_inv_cancel, translation_one]
-  have hε := counitAlgHom_comp_translation (toConv g)
-  have hg := comp_translation_inv (toConv g)
-  rw [ofConv_toConv] at hε hg
-  convert Ideal.IsPrime.comap (translation (toConv g)) (hK := hP) using 1
-  ext b
-  rw [Ideal.mem_comap, AlgHom.mem_iInf_pow_ker_iff, AlgHom.mem_iInf_pow_ker_iff]
-  constructor
-  · rintro ⟨t, ht, htb⟩
-    refine ⟨translation (toConv g) t, ?_, ?_⟩
-    · rw [← AlgHom.comp_apply, hε, ht]
-    · rw [← map_mul, htb, map_zero]
-  · rintro ⟨s, hs, hsb⟩
-    refine ⟨translation (toConv g)⁻¹ s, ?_, ?_⟩
-    · rw [← AlgHom.comp_apply, hg, hs]
-    · have h := congrArg (translation (toConv g)⁻¹) hsb
-      rwa [map_mul, map_zero, ← AlgHom.comp_apply _ (translation (toConv g)), hφψ,
-        AlgHom.id_apply] at h
 
 /-- Over an algebraically closed field of characteristic zero, a finitely generated commutative
 Hopf algebra is reduced. -/

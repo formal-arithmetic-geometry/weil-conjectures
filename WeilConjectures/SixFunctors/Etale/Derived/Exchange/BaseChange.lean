@@ -140,74 +140,6 @@ noncomputable def Etale.baseChangeCubeArrowIso (sq : CommSq e h g p) (bT : CommS
     rw [reassoc_of% H]
     simp [← Functor.map_comp])
 
-/-- If the exchange morphisms of the faces `bT` and `bX` of the cube are isomorphisms (at `K` and
-at `e^* K`), then the exchange morphism of the pulled-back square `sq'` at `uT^* K` is an
-isomorphism if and only if the pullback along `uX` of the exchange morphism of `sq` at `K` is. -/
-theorem Etale.isIso_baseChange_app_iff_of_cube (sq : CommSq e h g p) (bT : CommSq uT g' g u)
-    (sq' : CommSq e' h' g' p') (bX : CommSq uY h' h uX) (hp : p' ≫ u = uX ≫ p)
-    (he : e' ≫ uT = uY ≫ e)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    [IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) bT).app K)]
-    [IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) bX).app
-      (((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K))] :
-    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq').app
-        (((uT)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K)) ↔
-      IsIso (((uX)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-          ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K)) := by
-  rw [Arrow.isIso_iff_isIso_of_isIso (Etale.baseChangeCubeArrowIso Λ sq bT sq' bX hp he K).hom]
-  exact isIso_comp_right_iff _ _
-
-/-- An exact functor reflecting isomorphisms induces a functor on the bounded below derived
-categories reflecting isomorphisms. -/
-lemma _root_.CategoryTheory.Functor.reflectsIsomorphisms_mapDerivedCategoryPlus {C D : Type*}
-    [Category* C] [Category* D] [Abelian C] [Abelian D] [HasDerivedCategory C]
-    [HasDerivedCategory D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
-    [PreservesFiniteColimits F] [F.ReflectsIsomorphisms] :
-    F.mapDerivedCategoryPlus.ReflectsIsomorphisms where
-  reflects φ _ := by
-    rw [DerivedCategory.Plus.isIso_iff]
-    intro n
-    have : IsIso (F.map ((DerivedCategory.Plus.homologyFunctor C n).map φ)) :=
-      (NatIso.isIso_map_iff (F.mapDerivedCategoryPlusHomologyFunctorIso n) φ).2
-        (by rw [Functor.comp_map]; infer_instance)
-    exact isIso_of_reflects_iso _ F
-
-/-- **Detecting the invertibility of an exchange morphism after base change.** If the exchange
-morphisms of the faces `bT` and `bX` of the cube are isomorphisms, the pullback along `uX`
-reflects isomorphisms (for instance if `uX` is surjective,
-`AlgebraicGeometry.Etale.reflectsIsomorphisms_upperStar_of_surjective`), and the exchange
-morphism of the pulled-back square `sq'` is an isomorphism at `uT^* K`, then the exchange
-morphism of `sq` is an isomorphism at `K`. -/
-theorem Etale.isIso_baseChange_app_of_cube (sq : CommSq e h g p) (bT : CommSq uT g' g u)
-    (sq' : CommSq e' h' g' p') (bX : CommSq uY h' h uX) (hp : p' ≫ u = uX ≫ p)
-    (he : e' ≫ uT = uY ≫ e) [((uX)^*[ModuleCat.{u + 1} Λ]).ReflectsIsomorphisms]
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    [IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) bT).app K)]
-    [IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) bX).app
-      (((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K))]
-    (hK : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq').app
-        (((uT)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K))) :
-    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K) := by
-  have := ((uX)^*[ModuleCat.{u + 1} Λ]).reflectsIsomorphisms_mapDerivedCategoryPlus
-  have := (Etale.isIso_baseChange_app_iff_of_cube Λ sq bT sq' bX hp he K).1 hK
-  exact isIso_of_reflects_iso _ ((uX)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus
-
-/-- **Exchange isomorphisms are stable under base change** when the pushforwards commute with
-it: if the exchange morphisms of the faces `bT` and `bX` of the cube are isomorphisms and the
-exchange morphism of `sq` is an isomorphism at `K`, then so is the exchange morphism of the
-pulled-back square `sq'` at `uT^* K`. -/
-theorem Etale.isIso_baseChange_app_cube_of_isIso (sq : CommSq e h g p) (bT : CommSq uT g' g u)
-    (sq' : CommSq e' h' g' p') (bX : CommSq uY h' h uX) (hp : p' ≫ u = uX ≫ p)
-    (he : e' ≫ uT = uY ≫ e)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    [IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) bT).app K)]
-    [IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) bX).app
-      (((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K))]
-    (hK : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K)) :
-    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq').app
-        (((uT)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K)) :=
-  (Etale.isIso_baseChange_app_iff_of_cube Λ sq bT sq' bX hp he K).2 inferInstance
-
 /-- The degreewise form of `AlgebraicGeometry.Etale.isIso_baseChange_app_iff_of_cube`: if the
 exchange morphisms of the faces `bT` and `bX` of the cube are isomorphisms on `q`-th cohomology
 sheaves (at `K` and at `e^* K`), then the exchange morphism of the pulled-back square `sq'` at
@@ -335,20 +267,6 @@ theorem Etale.isIso_baseChangeHomologyMap_of_cube_of_surjective (sq : IsPullback
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
   have := Etale.reflectsIsomorphisms_upperStar_of_surjective Λ uX huX
   Etale.isIso_baseChangeHomologyMap_of_cube Λ sq bT sq' bX hp he q F hT hX hF
-
-/-- **Stability of degree-`q` base change under a further base change** commuting with the
-pushforwards: in a cube of cartesian squares over `u : S' ⟶ S`, if the degree-`q` base change
-maps of the faces `bT` and `bX` and of the original square at `F` are isomorphisms, then so is
-the degree-`q` base change map of the pulled-back square at `uT⁻¹ F`. -/
-theorem Etale.isIso_baseChangeHomologyMap_cube_of_isIso (sq : IsPullback e h g p)
-    (bT : IsPullback uT g' g u) (sq' : IsPullback e' h' g' p') (bX : IsPullback uY h' h uX)
-    (hp : p' ≫ u = uX ≫ p) (he : e' ≫ uT = uY ≫ e)
-    (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hT : IsIso (Etale.baseChangeHomologyMap Λ bT q F))
-    (hX : IsIso (Etale.baseChangeHomologyMap Λ bX q ((e)^*[ModuleCat.{u + 1} Λ].obj F)))
-    (hF : IsIso (Etale.baseChangeHomologyMap Λ sq q F)) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq' q ((uT)^*[ModuleCat.{u + 1} Λ].obj F)) :=
-  (Etale.isIso_baseChangeHomologyMap_iff_of_cube Λ sq bT sq' bX hp he q F hT hX).2 inferInstance
 
 end Sheaves
 

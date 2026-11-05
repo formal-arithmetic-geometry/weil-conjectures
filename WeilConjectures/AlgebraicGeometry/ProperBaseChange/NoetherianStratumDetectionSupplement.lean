@@ -69,30 +69,6 @@ private noncomputable def modelSheafEquivalence (X : Scheme.{u})
     (modelSheafEquivalence Y D).fullyFaithfulFunctor
     (modelSheafEquivalence X D).fullyFaithfulFunctor (Iso.refl _) (Iso.refl _)
 
-private theorem modelRingAdjunction_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) RingCat.{u + 1}) :
-    (modelAdjunction f RingCat.{u + 1}).unit.app
-        ((modelSheafEquivalence Y RingCat.{u + 1}).inverse.obj R) =
-      proEtaleRingModelUnit f R := by
-  apply (modelSheafEquivalence Y RingCat.{u + 1}).functor.map_injective
-  rw [modelAdjunction, Adjunction.map_restrictFullyFaithful_unit_app]
-  simp only [Iso.refl_hom, NatTrans.id_app]
-  rfl
-
-private noncomputable def modelAbelianPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (modelSheafEquivalence Y AddCommGrpCat.{u + 1}).inverse ⋙
-      Functor.sheafPullbackConstruction.sheafPullback (proEtaleModelBaseChange f)
-        AddCommGrpCat.{u + 1} (proEtaleModelTopology Y) (proEtaleModelTopology X) ⋙
-      (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor ≅
-        proEtaleSheafInverseImage f AddCommGrpCat.{u + 1} := by
-  let a := modelAdjunction f AddCommGrpCat.{u + 1}
-  let b := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-    (proEtaleModelBaseChange f) AddCommGrpCat.{u + 1}
-      (proEtaleModelTopology Y) (proEtaleModelTopology X)
-  exact Functor.isoWhiskerLeft (modelSheafEquivalence Y AddCommGrpCat.{u + 1}).inverse
-    (Functor.isoWhiskerRight (b.leftAdjointUniq a)
-      (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor)
-
 /-- Abelian sheaves are detected by the chosen pro-etale covers of all strata.
 Source: Stacks, Tags 09AH and 09AB, and finite-stratum induction
 (blueprint: lem-weil-pbc-noetherian-stratum-detection).

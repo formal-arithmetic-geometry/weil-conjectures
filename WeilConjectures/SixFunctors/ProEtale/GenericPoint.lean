@@ -85,35 +85,6 @@ namespace Scheme.ProEt
 
 variable {X : Scheme.{u}}
 
-/-- Let `T` be an object of `X_proét` whose underlying scheme is isomorphic to the spectrum of
-a separably closed field `L`. Every covering sieve of `T` contains the identity: a member
-`f : V ⟶ T` of a pro-étale covering family with `V` nonempty has a section. -/
-lemma id_mem_of_mem_topology_of_isSepClosed {L : Type u} [Field L] [IsSepClosed L]
-    {T : X.ProEt} (e : T.left ≅ Spec (.of L)) {S : Sieve T} (hS : S ∈ topology X T) :
-    S (𝟙 T) := by
-  obtain ⟨R, hR, hRS⟩ := mem_topology_iff.1 hS
-  have hR' : R.map (Scheme.ProEt.forget X ⋙ Over.forget X) ∈
-      Scheme.precoverage @WeaklyEtale T.left :=
-    Scheme.propQCPrecoverage_le_precoverage _ hR
-  obtain ⟨Y, g, hg, x, -⟩ := hR'.1 (e.inv.base (IsLocalRing.closedPoint L))
-  obtain ⟨hg⟩ := hg
-  obtain @⟨V, f, hf⟩ := hg
-  have : WeaklyEtale f.left := by
-    have : WeaklyEtale (f.left ≫ T.hom) := by
-      rw [MorphismProperty.Over.w]
-      infer_instance
-    exact WeaklyEtale.of_comp f.left T.hom
-  obtain ⟨σ, hσ⟩ := exists_comp_eq_id_of_weaklyEtale_of_isSepClosed (f.left ≫ e.hom) x
-  have hσ' : σ ≫ f.left = e.inv := by
-    rw [← cancel_mono e.hom, Category.assoc, hσ, e.inv_hom_id]
-  have hσ'' : (e.hom ≫ σ) ≫ V.hom = T.hom := by
-    rw [← MorphismProperty.Over.w f, Category.assoc, reassoc_of% hσ', e.hom_inv_id_assoc]
-  have : S (MorphismProperty.Over.homMk (A := T) (e.hom ≫ σ) hσ'' ≫ f) :=
-    S.downward_closed (hRS _ _ hf) _
-  convert this
-  refine MorphismProperty.Over.Hom.ext ?_
-  exact (by rw [Category.assoc, hσ', e.hom_inv_id] : (e.hom ≫ σ) ≫ f.left = 𝟙 T.left).symm
-
 end Scheme.ProEt
 
 namespace ProEtale
@@ -126,35 +97,6 @@ variable {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type*}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
   [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A]
 
-/-- Let `T` be an object of `X_proét` all of whose covering sieves contain the identity. An
-epimorphism of pro-étale sheaves with values in a concrete category `A` is surjective on
-sections over `T`. -/
-lemma surjective_app_of_epi_of_forall_id_mem {T : X.ProEt}
-    (hT : ∀ S : Sieve T, S ∈ Scheme.ProEt.topology X T → S (𝟙 T))
-    [(Scheme.ProEt.topology X).WEqualsLocallyBijective A]
-    [HasSheafify (Scheme.ProEt.topology X) A]
-    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
-    [Balanced (Sheaf (Scheme.ProEt.topology X) A)]
-    {F G : Sheaf (Scheme.ProEt.topology X) A} (φ : F ⟶ G) [Epi φ] :
-    Function.Surjective (φ.hom.app (op T)) := by
-  have := (Sheaf.isLocallySurjective_iff_epi' A φ).2 inferInstance
-  intro s
-  obtain ⟨t, ht⟩ := hT _ (Presheaf.imageSieve_mem (Scheme.ProEt.topology _) φ.hom s)
-  exact ⟨t, by simpa using ht⟩
-
-/-- Let `T` be an object of `X_proét` all of whose covering sieves contain the identity. Taking
-sections over `T` preserves epimorphisms of pro-étale sheaves with values in a concrete
-category. -/
-lemma preservesEpimorphisms_sheafSections_of_forall_id_mem {T : X.ProEt}
-    (hT : ∀ S : Sieve T, S ∈ Scheme.ProEt.topology X T → S (𝟙 T))
-    [(Scheme.ProEt.topology X).WEqualsLocallyBijective A]
-    [HasSheafify (Scheme.ProEt.topology X) A]
-    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
-    [Balanced (Sheaf (Scheme.ProEt.topology X) A)] :
-    ((sheafSections (Scheme.ProEt.topology X) A).obj (op T)).PreservesEpimorphisms where
-  preserves φ _ := (CategoryTheory.forget A).epi_of_epi_map
-    ((epi_iff_surjective _).2 (surjective_app_of_epi_of_forall_id_mem hT φ))
-
 end Concrete
 
 section Sheafify
@@ -165,19 +107,6 @@ variable {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type (u +
   [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
   [(Scheme.ProEt.topology X).PreservesSheafification (CategoryTheory.forget A)]
 
-/-- Let `T` be an object of `X_proét` all of whose covering sieves contain the identity. The map
-from a presheaf with values in a concrete category to its pro-étale sheafification is bijective
-on sections over `T`. -/
-lemma bijective_toSheafify_app_of_forall_id_mem {T : X.ProEt}
-    (hT : ∀ S : Sieve T, S ∈ Scheme.ProEt.topology X T → S (𝟙 T)) (G : X.ProEtᵒᵖ ⥤ A) :
-    Function.Bijective ((toSheafify (Scheme.ProEt.topology X) G).app (op T)) := by
-  refine ⟨fun x y hxy ↦ ?_, fun s ↦ ?_⟩
-  · simpa using hT _
-      (Presheaf.equalizerSieve_mem (Scheme.ProEt.topology X) (toSheafify _ G) x y hxy)
-  · obtain ⟨t, ht⟩ := hT _
-      (Presheaf.imageSieve_mem (Scheme.ProEt.topology X) (toSheafify _ G) s)
-    exact ⟨t, by simpa using ht⟩
-
 end Sheafify
 
 end ProEtale
@@ -186,103 +115,11 @@ namespace Scheme.ProEt
 
 variable (X : Scheme.{u}) [IsIntegral X]
 
-/-- The geometric generic point `Spec Kˢᵉᵖ ⟶ Spec K ⟶ X` of an integral scheme `X` with function
-field `K`, where `Kˢᵉᵖ = SeparableClosure K`. -/
-noncomputable def genericPointSepHom :
-    Spec (.of (SeparableClosure X.functionField)) ⟶ X :=
-  Spec.map (CommRingCat.ofHom (algebraMap X.functionField (SeparableClosure X.functionField))) ≫
-    X.fromSpecStalk (genericPoint X)
-
-instance : WeaklyEtale (genericPointSepHom X) := by
-  have := Algebra.IndEtale.of_isSeparable X.functionField (SeparableClosure X.functionField)
-  rw [genericPointSepHom]
-  infer_instance
-
-/-- The geometric generic point `Spec Kˢᵉᵖ ⟶ X` of an integral scheme `X`, as an object of the
-small pro-étale site of `X`. -/
-noncomputable def genericPointSep : X.ProEt :=
-  Scheme.ProEt.mk (genericPointSepHom X)
-
-/-- The underlying scheme of the geometric generic point is `Spec Kˢᵉᵖ`. -/
-lemma genericPointSep_left :
-    (genericPointSep X).left = Spec (.of (SeparableClosure X.functionField)) :=
-  rfl
-
-/-- The structure morphism of the geometric generic point. -/
-lemma genericPointSep_hom : (genericPointSep X).hom = genericPointSepHom X :=
-  rfl
-
-/-- The action of `σ ∈ Gal(Kˢᵉᵖ/K)` on the geometric generic point: the automorphism
-`Spec σ` of `Spec Kˢᵉᵖ` over `X`. -/
-noncomputable def genericPointSepAut
-    (σ : SeparableClosure X.functionField ≃ₐ[X.functionField] SeparableClosure X.functionField) :
-    genericPointSep X ⟶ genericPointSep X :=
-  MorphismProperty.Over.homMk (Spec.map (CommRingCat.ofHom σ.toRingHom)) (by
-    rw [genericPointSep_hom, genericPointSepHom, ← Category.assoc, ← Spec.map_comp]
-    congr 3
-    ext x
-    simp)
-
-lemma genericPointSepAut_left
-    (σ : SeparableClosure X.functionField ≃ₐ[X.functionField] SeparableClosure X.functionField) :
-    (genericPointSepAut X σ).left = Spec.map (CommRingCat.ofHom σ.toRingHom) :=
-  rfl
-
-@[simp]
-lemma genericPointSepAut_one : genericPointSepAut X 1 = 𝟙 _ := by
-  refine MorphismProperty.Over.Hom.ext ?_
-  rw [genericPointSepAut_left]
-  exact Spec.map_id _
-
-/-- The Galois action on the geometric generic point is a right action:
-`Spec (σ * τ) = Spec σ ≫ Spec τ`. -/
-lemma genericPointSepAut_mul
-    (σ τ : SeparableClosure X.functionField ≃ₐ[X.functionField]
-      SeparableClosure X.functionField) :
-    genericPointSepAut X (σ * τ) = genericPointSepAut X σ ≫ genericPointSepAut X τ := by
-  refine MorphismProperty.Over.Hom.ext ?_
-  rw [MorphismProperty.Comma.comp_left, genericPointSepAut_left, genericPointSepAut_left,
-    genericPointSepAut_left, ← Spec.map_comp]
-  rfl
-
-/-- Every covering sieve of the geometric generic point contains the identity. -/
-lemma id_mem_genericPointSep {S : Sieve (genericPointSep X)}
-    (hS : S ∈ topology X (genericPointSep X)) : S (𝟙 _) :=
-  id_mem_of_mem_topology_of_isSepClosed (Iso.refl _) hS
-
 end Scheme.ProEt
 
 namespace ProEtale
 
 variable (X : Scheme.{u}) [IsIntegral X]
-
-/-- Taking sections over the geometric generic point preserves epimorphisms of pro-étale sheaves
-with values in a concrete category. -/
-lemma preservesEpimorphisms_sheafSections_genericPointSep
-    {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type*}
-    [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
-    [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A]
-    [(Scheme.ProEt.topology X).WEqualsLocallyBijective A]
-    [HasSheafify (Scheme.ProEt.topology X) A]
-    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
-    [Balanced (Sheaf (Scheme.ProEt.topology X) A)] :
-    ((sheafSections (Scheme.ProEt.topology X) A).obj
-      (op (Scheme.ProEt.genericPointSep X))).PreservesEpimorphisms :=
-  preservesEpimorphisms_sheafSections_of_forall_id_mem
-    fun _ ↦ Scheme.ProEt.id_mem_genericPointSep X
-
-/-- The map from a presheaf with values in a concrete category to its pro-étale sheafification is
-bijective on sections over the geometric generic point. -/
-lemma bijective_toSheafify_app_genericPointSep
-    {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type (u + 1)}
-    [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
-    [HasSheafify (Scheme.ProEt.topology X) A]
-    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
-    [(Scheme.ProEt.topology X).PreservesSheafification (CategoryTheory.forget A)]
-    (G : X.ProEtᵒᵖ ⥤ A) :
-    Function.Bijective ((toSheafify (Scheme.ProEt.topology X) G).app
-      (op (Scheme.ProEt.genericPointSep X))) :=
-  bijective_toSheafify_app_of_forall_id_mem (fun _ ↦ Scheme.ProEt.id_mem_genericPointSep X) G
 
 end ProEtale
 

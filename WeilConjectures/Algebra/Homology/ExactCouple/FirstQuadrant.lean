@@ -269,13 +269,6 @@ lemma firstQuadrantSpectralSequence_page_X (hX : X.IsFirstQuadrant) (r : ℤ) (h
       (X.derivedIter (r - 1).toNat).E (pq.1, pq.1 + pq.2) :=
   rfl
 
-/-- The `E₂`-page of the first quadrant spectral sequence of an exact couple is the homology of
-the complex `(E, d)` of the couple. -/
-lemma firstQuadrantSpectralSequence_page_two_X (hX : X.IsFirstQuadrant) (pq : ℕ × ℕ) :
-    ((X.firstQuadrantSpectralSequence hX).page 2).X pq =
-      X.dComplex.homology (pq.1, pq.1 + pq.2) :=
-  rfl
-
 /-- In a first quadrant couple, the entry `E^{p, n}` of the `N`-th derived couple is stable for
 `N ≥ max p (n - p + 1)`. -/
 lemma nonempty_derivedIter_E_iso_of_isFirstQuadrant (hX : X.IsFirstQuadrant) (p n : ℤ)

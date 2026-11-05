@@ -44,62 +44,6 @@ namespace CategoryTheory
 variable {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
   {R : Type (u + 1)} [CommRing R]
 
-/-- **Reduction modulo `I` preserves locally trivial relations.** If `P` is a presheaf of modules
-over a Noetherian ring `R` with locally trivial relations, so is its reduction
-`U ↦ P(U) / I P(U)`, as a presheaf of `R ⧸ I`-modules. A relation between reductions of sections
-`yⱼ` lifts to a relation `∑ⱼ eₗⱼ yⱼ = ∑ₖ γₖ wₗₖ` in `P`, with `γ` generators of `I`, which is
-locally trivial. -/
-theorem Presheaf.HasLocallyTrivialRelations.comp_quotSMulTop [IsNoetherianRing R]
-    {P : Cᵒᵖ ⥤ ModuleCat.{u + 1} R} (hP : Presheaf.HasLocallyTrivialRelations J P)
-    (I : Ideal R) :
-    Presheaf.HasLocallyTrivialRelations J (P ⋙ ModuleCat.quotSMulTop I) := by
-  classical
-  intro V s q x e' he'
-  -- generators of `I`, and lifts of the coefficients and of the sections
-  obtain ⟨r, γ, hγ⟩ :=
-    Submodule.fg_iff_exists_fin_generating_family.1 (IsNoetherian.noetherian I)
-  choose e he using fun l j ↦ Ideal.Quotient.mk_surjective (e' l j)
-  choose y hy using fun j ↦ Submodule.Quotient.mk_surjective _ (x j)
-  -- each relation `∑ⱼ eₗⱼ yⱼ` lies in `I • P(V)`, hence is `∑ₖ γₖ wₗₖ`
-  have hrel (l : Fin q) : ∑ j, e l j • y j ∈ I • (⊤ : Submodule R (P.obj (op V))) := by
-    rw [← Submodule.Quotient.mk_eq_zero]
-    have h : (Submodule.Quotient.mk (∑ j, e l j • y j) :
-        P.obj (op V) ⧸ I • (⊤ : Submodule R (P.obj (op V)))) = ∑ j, e' l j • x j := by
-      simp only [← he, ← hy]
-      exact map_sum (Submodule.mkQ _) _ _
-    rw [h]
-    exact he' l
-  choose w hw using fun l ↦ Submodule.exists_eq_sum_smul_of_mem_smul_top hγ (hrel l)
-  -- the lifted system of relations on `Fin s ⊕ (Fin q × Fin r)`
-  let Y : Fin s ⊕ (Fin q × Fin r) → P.obj (op V) := Sum.elim y fun p ↦ w p.1 p.2
-  let E : Matrix (Fin q) (Fin s ⊕ (Fin q × Fin r)) R :=
-    fun l ↦ Sum.elim (e l) fun p ↦ if p.1 = l then -γ p.2 else 0
-  have hE (l : Fin q) : ∑ n, E l n • Y n = 0 := by
-    simp only [E, Y, Fintype.sum_sum_type, Sum.elim_inl, Sum.elim_inr, Fintype.sum_prod_type,
-      ite_smul, zero_smul, neg_smul]
-    rw [Finset.sum_eq_single l (fun l' _ hl' ↦ by simp [hl']) (by simp), hw l]
-    simp
-  obtain ⟨T, hT, hfac⟩ := hP.exists_of_fintype Y E hE
-  refine ⟨T, hT, fun W f hf ↦ ?_⟩
-  obtain ⟨t, b, z, heb, hyz⟩ := hfac f hf
-  refine ⟨t, fun j m ↦ Ideal.Quotient.mk I (b (Sum.inl j) m),
-    fun m ↦ Submodule.Quotient.mk (z m), ?_, fun j ↦ ?_⟩
-  · ext l m
-    have h₀ := congrFun (congrFun heb l) m
-    simp only [Matrix.mul_apply, E, Fintype.sum_sum_type, Sum.elim_inl, Sum.elim_inr,
-      Fintype.sum_prod_type, ite_mul, zero_mul, neg_mul, Matrix.zero_apply] at h₀
-    rw [Finset.sum_eq_single l (fun l' _ hl' ↦ by simp [hl']) (by simp)] at h₀
-    simp only [if_true, Finset.sum_neg_distrib, ← sub_eq_add_neg, sub_eq_zero] at h₀
-    simp only [Matrix.mul_apply, Matrix.zero_apply, ← he, ← map_mul, ← map_sum, h₀,
-      Ideal.Quotient.eq_zero_iff_mem]
-    refine Ideal.sum_mem _ fun k _ ↦ Ideal.mul_mem_right _ _ ?_
-    rw [← hγ]
-    exact Submodule.subset_span ⟨k, rfl⟩
-  · rw [← hy j]
-    change Submodule.Quotient.mk (P.map f.op (Y (Sum.inl j))) = _
-    rw [hyz (Sum.inl j)]
-    exact map_sum (Submodule.mkQ _) _ _
-
 section Sheaf
 
 variable [EssentiallySmall.{u + 1} C] [J.HasSheafCompose (forget (ModuleCat.{u + 1} R))]
@@ -112,16 +56,6 @@ variable (J) in
 noncomputable abbrev Sheaf.quotSMulTop :
     Sheaf J (ModuleCat.{u + 1} R) ⥤ Sheaf J (ModuleCat.{u + 1} (R ⧸ I)) :=
   Sheaf.composeAndSheafify J (ModuleCat.quotSMulTop I)
-
-/-- **The reduction of a flat sheaf is flat.** If `F` is a flat sheaf of modules over a Noetherian
-ring `R`, its reduction `F / I F` is a flat sheaf of `R ⧸ I`-modules. -/
-theorem Sheaf.flat_quotSMulTop_obj [IsNoetherianRing R]
-    [J.HasSheafCompose (forget (ModuleCat.{u + 1} (R ⧸ I)))]
-    [J.WEqualsLocallyBijective (ModuleCat.{u + 1} (R ⧸ I))]
-    {F : Sheaf J (ModuleCat.{u + 1} R)} (hF : ObjectProperty.flat F) :
-    ObjectProperty.flat ((Sheaf.quotSMulTop J I).obj F) :=
-  Presheaf.flat_presheafToSheaf_obj_of_hasLocallyTrivialRelations
-    ((Sheaf.hasLocallyTrivialRelations_of_flat hF).comp_quotSMulTop I)
 
 /-- Tensoring a presheaf with a constant presheaf is computed objectwise. -/
 noncomputable def whiskeringRightTensorRightIso (X : ModuleCat.{u + 1} R) :

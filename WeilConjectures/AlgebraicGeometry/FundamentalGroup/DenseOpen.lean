@@ -42,24 +42,6 @@ lemma connectedSpace_of_isOpenImmersion [IrreducibleSpace X] [Nonempty U] : Conn
   have := j.isOpenEmbedding.irreducibleSpace
   infer_instance
 
-/-- Blueprint `lem-wf-dense-open-pi1-surjective`, part (1), second formulation: a connected
-finite étale cover of a connected locally noetherian regular scheme `X` stays connected over a
-nonempty open `U`. The cover is regular, being étale over `X`, hence irreducible, and its
-restriction to `U` is a nonempty open of it. -/
-lemma isConnected_pullback_of_isRegular [IsRegular X] [IsLocallyNoetherian X] [ConnectedSpace X]
-    [Nonempty U] (P : X.FiniteEtale) [IsConnected P] : IsConnected ((pullback j).obj P) := by
-  have := connectedSpace_of_isConnected P
-  have : Etale P.obj.hom := P.obj.prop
-  have : IsLocallyNoetherian P.obj.left :=
-    LocallyOfFiniteType.isLocallyNoetherian (Y := X) P.obj.hom
-  have : IsRegular P.obj.left :=
-    ⟨isRegularLocalRing_stalk_of_etale (Y := X) P.obj.hom
-      (fun _ ↦ IsRegular.isRegularLocalRing_stalk _)⟩
-  have := IsRegular.irreducibleSpace P.obj.left
-  have := IsRegular.irreducibleSpace X
-  have := connectedSpace_of_isOpenImmersion j
-  exact isConnected_pullback_of_irreducibleSpace j P
-
 variable [ConnectedSpace U] [ConnectedSpace X] {Ω Ω' : Type u} [Field Ω] [IsSepClosed Ω]
   [Field Ω'] [IsSepClosed Ω']
   {s : Spec (.of Ω) ⟶ U} {t : Spec (.of Ω') ⟶ X} (τ : pullback j ⋙ fiber s ≅ fiber t)
@@ -67,16 +49,5 @@ variable [ConnectedSpace U] [ConnectedSpace X] {Ω Ω' : Type u} [Field Ω] [IsS
   [IsTopologicalGroup GU] [CompactSpace GU] [IsFundamentalGroup (fiber s) GU]
   (GX : Type u) [Group GX] [TopologicalSpace GX] [IsTopologicalGroup GX] [CompactSpace GX]
   [∀ P, MulAction GX ((fiber t).obj P)] [IsFundamentalGroup (fiber t) GX]
-
-/-- Blueprint `lem-wf-dense-open-pi1-surjective`, part (1): **the fundamental group of a
-nonempty open of a connected regular scheme surjects onto that of the scheme.** For a connected
-locally noetherian regular scheme `X`, an open immersion `j : U ⟶ X` with `U` nonempty and a
-path `τ` between the fibre functors, the map `π₁(U) → π₁(X)` is surjective: connected finite
-étale covers of `X` stay connected over `U`
-(`AlgebraicGeometry.Scheme.FiniteEtale.isConnected_pullback_of_isRegular`). -/
-theorem fundamentalGroupMap_surjective_of_isRegular [IsRegular X] [IsLocallyNoetherian X]
-    [Nonempty U] :
-    Function.Surjective (fundamentalGroupMap τ GU GX) := by
-  exact fundamentalGroupMap_surjective τ GX GU fun P _ ↦ isConnected_pullback_of_isRegular j P
 
 end AlgebraicGeometry.Scheme.FiniteEtale

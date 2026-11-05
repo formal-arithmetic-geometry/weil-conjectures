@@ -52,24 +52,6 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-rational-exactness). -/
       ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) ⋙
         pbcEmbeddingAmbientTensor l E F i T := Iso.refl _
 
-/-- The actual tensor Hom formula agrees with tensoring integral arrows by one.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-rational-exactness).
-Proof: put the scalar equal to one in pbcRationalScalarHom_exists. The normalized
-coefficient isomorphisms and the algebra inclusion send one to one, yielding the
-displayed naturality equation of identity components. -/
-theorem pbcScalarLocalization_naturality
-    {K L : PbcIntegralCategory l E T dim.out inv.out} (f : K ⟶ L) :
-    (pbcRationalization T (pbcIntegralDatum l F) (pbcUniformizer l F)).map
-        ((pbcEmbeddingIntegralTensor l E F i T dim.out inv.out).map f) ≫ 𝟙 _ =
-      𝟙 _ ≫ (pbcRationalScalarExtension l E F i T dim.out inv.out).map
-        ((pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)).map f) := by
-  have h := (pbcRationalScalarHom_exists l E F i T dim.out inv.out K L).exists.choose_spec
-    (1 : Localization.Away (pbcUniformizer l E)) f
-  simp only [Category.comp_id, Category.id_comp]
-  change _ = pbcRationalScalarHom l E F i T dim.out inv.out K L _
-  dsimp only [pbcRationalScalarHom]
-  simpa only [one_smul, map_one] using h.symm
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in

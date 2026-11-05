@@ -130,13 +130,6 @@ lower bound. Source: blueprint, `def-weil-pbc-proetale-modules`
 noncomputable abbrev FiniteCoefficientDerivedCategoryPlus :=
   @DerivedCategory.Plus (FiniteCoefficientModules T Λ) _ _ (HasDerivedCategory.standard _)
 
-/-- The etale derived category in the standard fixed-ring module-sheaf encoding.
-The canonical equivalence above identifies its abelian category with modules over
-`finiteCoefficientEtaleRingSheaf`. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
-abbrev FiniteCoefficientEtaleDerivedCategory :=
-  DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-
 /-- Realization as modules over the specified ring sheaf: keep the module presheaf,
 then apply the canonical associated-module-sheaf functor along constant scalar sections.
 Source: blueprint, `def-weil-pbc-proetale-modules`
@@ -226,42 +219,6 @@ Source: blueprint, `def-weil-pbc-proetale-modules`
 noncomputable instance finiteCoefficientModules_hasDerivedCategory :
     HasDerivedCategory.{u + 2} (FiniteCoefficientModules T Λ) :=
   HasDerivedCategory.standard _
-
-/-- Applying the exact comparison termwise to integer-indexed cochain complexes induces
-this functor on their localizations. Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
-noncomputable def finiteCoefficientDerivedComparison :
-    FiniteCoefficientEtaleDerivedCategory T Λ ⥤ FiniteCoefficientDerivedCategory T Λ :=
-  (finiteCoefficientComparison T Λ).mapDerivedCategory
-
-/-- Bounded constructible objects are the essential image of bounded constructible
-etale complexes under the canonical derived comparison functor.
-Source: blueprint, `def-weil-pbc-proetale-modules`
-(blueprint: def-weil-pbc-proetale-modules). -/
-def isBoundedConstructibleFiniteCoefficient (T : Scheme.{u}) (Λ : Type (u + 1))
-    [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
-    ObjectProperty (FiniteCoefficientDerivedCategory T Λ) :=
-  ObjectProperty.map (fun L : FiniteCoefficientEtaleDerivedCategory T Λ ↦
-    (∀ j : ℤ, ∃ S : Scheme.Stratification T,
-      (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) ∧
-      ∀ k : Fin S.n,
-        ∃ d : Scheme.LocallyConstantDatum
-          ((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).obj
-            ((_root_.DerivedCategory.homologyFunctor
-              (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) j).obj L)),
-          ∀ i : d.cover.I₀, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧
-            Nonempty
-              ((((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).obj
-                ((_root_.DerivedCategory.homologyFunctor
-                  (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) j).obj L)).over
-                    (d.cover.etalePrecoverageToEtale i)) ≅
-                (constantSheaf
-                  ((S.domain k).smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i))
-                  (ModuleCat.{u + 1} Λ)).obj M)) ∧
-    ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) →
-      IsZero ((_root_.DerivedCategory.homologyFunctor
-        (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).obj L))
-    (finiteCoefficientDerivedComparison T Λ)
 
 /-- The canonical realization identifies fixed-ring module sheaves with modules over the
 continuous-function coefficient sheaf, including finite noncommutative coefficient rings.

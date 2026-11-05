@@ -40,35 +40,4 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
 
-/-- Normalized scalar realization data can be fixed simultaneously, and every
-universally normalized internal pull comparison has a section-normalized realization
-using that same family. This assertion concerns pullbacks only.
-Source: Stacks 03EK, 0D6D and 07A6; scalar exchange rectangle, proof step 1.
-(blueprint: lem-sfb-normalized-scalar-section-family)
-
-Proof: apply internal_scalar_pullback_normalization to the identity at every
-scheme T, and retain its normalized section scalar comparison at the source T.
-Choose these comparisons pointwise. For each edge h, apply
-section_pull_normalized_of_normalized to the two chosen normalized endpoint
-comparisons and the supplied PullNormalized witness. Its conclusion is exactly
-the required SectionPullNormalized witness for that edge. The construction works
-for identity edges, nonflat coefficient maps, zero rings and empty schemes. -/
-theorem normalized_scalar_section_family (φ : Λ ⟶ Λ') [IsMonHom φ]
-    (b : ∀ {U V : Scheme.{u}} (h : U ⟶ V),
-      D φ V ⋙ L Λ' h ≅ L Λ h ⋙ D φ U)
-    (normalized : ∀ {U V : Scheme.{u}} (h : U ⟶ V), PullNormalized φ h (b h)) :
-    ∃ s : ∀ T : Scheme.{u}, SectionScalarComparison φ T,
-      (∀ T : Scheme.{u}, SectionScalarNormalized φ T (s T)) ∧
-      ∀ {U V : Scheme.{u}} (h : U ⟶ V),
-        SectionPullNormalized φ h (s U) (s V) (b h) := by
-  classical
-  have exists_section (T : Scheme.{u}) :
-      ∃ s : SectionScalarComparison φ T, SectionScalarNormalized φ T s := by
-    obtain ⟨tX, tY, e, sX, sY, htX, htY, he, hsX, hsY, hTX, hTY, hp⟩ :=
-      internal_scalar_pullback_normalization φ (𝟙 T)
-    exact ⟨sX, hsX⟩
-  choose s hs using exists_section
-  exact ⟨s, hs, fun h ↦ section_pull_normalized_of_normalized φ h
-    _ _ (hs _) (hs _) (b h) (normalized h)⟩
-
 end AlgebraicGeometry.ProEtale.QuotientChange

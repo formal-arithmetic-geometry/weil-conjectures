@@ -160,21 +160,4 @@ theorem IsPunctuallyPureOfWeight.stalkAt {F : WeilSheaf k₀ l X} {ι : PadicAlg
     (Scheme.Hom.mem_finitePoints_and_degreeOver_dvd_of_geometricGaloisFrobenius_pow _ s hm
       hs).1⟩ rfl).1 (h _)
 
-/-- A Weil sheaf is punctually pure of weight `w` as soon as, over every closed point `x`, there
-is some geometric point `s` with `s ≫ g_Xᵐ = σᵐ ≫ s`, `m ≥ 1`, at which `F_s` with `F_x^{(m)}`
-is pure of weight `w` relative to `qᵐ`
-(`AlgebraicGeometry.WeilSheaf.isPureOfWeight_stalk_iff_stalkAt`). -/
-theorem isPunctuallyPureOfWeight_of_forall_stalkAt {F : WeilSheaf k₀ l X}
-    {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
-    (h : ∀ x : X.finitePoints, ∃ (s : Spec (.of (AlgebraicClosure k₀)) ⟶
-        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (m : ℕ) (_ : 0 < m)
-      (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-        (specGeometricFrobenius k₀ ^ m).hom ≫ s),
-      (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-        (IsLocalRing.closedPoint _) = x.1 ∧
-      (F.stalkAt s m hs).IsPureOfWeight ι (Nat.card k₀ ^ m) w) :
-    F.IsPunctuallyPureOfWeight ι w := fun x ↦ by
-  obtain ⟨s, m, hm, hs, hx, hpure⟩ := h x
-  exact (isPureOfWeight_stalk_iff_stalkAt F ι w s hm hs x hx).2 hpure
-
 end AlgebraicGeometry.WeilSheaf

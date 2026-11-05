@@ -84,17 +84,4 @@ theorem bijective_mapExtComp_constantIntToRing [CompactSpace X] [QuasiSeparatedS
   rw [← hcomp] at hb
   exact (Function.Bijective.of_comp_iff _ (Ext.mk₀_bijective _ _)).1 hb
 
-/-- **Classes in `D(X_ét, Λ)` are abelian cohomology classes.** On a quasi-compact
-quasi-separated scheme, `Hom(Λ_X, Λ_X[n])` in `D(X_ét, Λ)` is the abelian cohomology group
-`Hⁿ(X_ét, Λ)` of the underlying abelian sheaf of `Λ_X`. -/
-noncomputable def unitShiftAddEquivH [CompactSpace X] [QuasiSeparatedSpace X] (n : ℕ) :
-    (𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦(n : ℤ)⟧) ≃+
-      Sheaf.H ((sheafForget₂ Λ X).obj
-        (Sheaf.constantRing X.smallEtaleTopology Λ)) n :=
-  let e := unitIsoSingleFunctorConstantSheaf Λ X
-  (AddEquiv.mk' (e.homCongr ((shiftFunctor _ (n : ℤ)).mapIso e)) fun f g ↦ by
-      simp [Iso.homCongr_apply]).trans <|
-    (Ext.homAddEquiv (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm.trans <|
-      AddEquiv.ofBijective _ (bijective_mapExtComp_constantIntToRing Λ X _ n)
-
 end AlgebraicGeometry.Etale

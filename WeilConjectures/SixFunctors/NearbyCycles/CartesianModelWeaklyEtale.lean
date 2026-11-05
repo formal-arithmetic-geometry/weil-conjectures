@@ -32,12 +32,4 @@ open Scheme
 variable {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f')
 
-/-- If the morphism of total spaces of `φ` is weakly étale, the pullback exchange of
-`fromCartesian` is an isomorphism (weakly étale base change of `Rj_*`). -/
-lemma isIso_pullbackExchange_fromCartesian_of_weaklyEtale
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    [WeaklyEtale φ.total] : IsIso (φ.fromCartesian.pullbackExchange Λ) :=
-  have : WeaklyEtale φ.fromCartesian.total := ‹WeaklyEtale φ.total›
-  φ.fromCartesian.isIso_pullbackExchange_of_weaklyEtale Λ φ.isPullback_fromCartesian
-
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom

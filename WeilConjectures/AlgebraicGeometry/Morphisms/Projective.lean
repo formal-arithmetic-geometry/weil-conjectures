@@ -55,12 +55,6 @@ instance (priority := 100) IsHProjective.isProper (f : X ⟶ S) [IsHProjective f
   obtain ⟨n, _, i, _, rfl⟩ := IsHProjective.exists_isClosedImmersion (f := f)
   infer_instance
 
-/-- An H-projective morphism is projective, being proper and hence quasi-compact.
-
-This is not an instance, since together with the parent projection
-`AlgebraicGeometry.IsProjective.toIsHProjective` it would form an instance cycle. -/
-theorem IsHProjective.isProjective (f : X ⟶ S) [IsHProjective f] : IsProjective f where
-
 end Projective
 
 end AlgebraicGeometry

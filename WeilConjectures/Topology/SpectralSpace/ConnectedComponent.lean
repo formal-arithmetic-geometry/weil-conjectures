@@ -213,7 +213,6 @@ instance compactSpace_connectedComponent {X : Type u} [TopologicalSpace X] [Comp
     have h3 : IsCompact (Set.range f) := isCompact_range h1
     simpa [f, ConnectedComponents.range_coe] using h3
 
-
 @[stacks 0906]
 instance t2Space_connectedComponent {X : Type u} [TopologicalSpace X] [CompactSpace X]
     [QuasiSeparatedSpace X] [PrespectralSpace X] : T2Space (ConnectedComponents X) := by
@@ -247,12 +246,6 @@ section Spectral
 variable [SpectralSpace X]
 
 open CategoryTheory TopCat Continuous Limits
-
-theorem ConnectedComponents.spectralSpace_of_isPullback {Y T : Type u} [TopologicalSpace Y]
-    [TopologicalSpace T] [CompactSpace T] [T2Space T] [TotallyDisconnectedSpace T]
-    {f : C(Y, X)} {g : C(Y, T)} {i : C(T, ConnectedComponents X)}
-    (pb : IsPullback (ofHom g) (ofHom f) (ofHom i) (ofHom ⟨mk, continuous_coe⟩)) :
-    SpectralSpace Y := pb.spectralSpace
 
 omit [SpectralSpace X] in
 /-- The first projection of a pullback along the connected components map is surjective. -/

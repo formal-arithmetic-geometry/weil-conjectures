@@ -259,12 +259,6 @@ lemma cosetRep_eq_of_mul_inv_mem {g g' : G} (h : g' * g⁻¹ ∈ K) :
   congr 1
   exact (Quotient.sound (QuotientGroup.rightRel_apply.2 h)).symm
 
-omit [TopologicalSpace G] [IsTopologicalGroup G] [K.FiniteIndex] in
-lemma cosetRep_eq_out (c : Quotient (QuotientGroup.rightRel K)) :
-    cosetRep K c.out = c.out := by
-  unfold cosetRep
-  rw [Quotient.out_eq]
-
 /-- For `K` open of finite index, coinduction preserves surjections. -/
 lemma surjective_coind_map (hK : IsOpen (K : Set G)) {N N' : DiscreteModule.{w} K} (ψ : N ⟶ N')
     (hψ : Function.Surjective ψ.hom.hom.hom) :

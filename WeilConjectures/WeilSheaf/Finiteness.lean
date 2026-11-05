@@ -201,29 +201,11 @@ theorem exists_subsingleton_compactlySupportedCohomology (K : WeilComplex k₀ l
     ∃ a b : ℤ, ∀ r, r < a ∨ b < r → Subsingleton (K.compactlySupportedCohomology r).carrier :=
   exists_subsingleton_cohomologyFrobeniusModule _
 
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
-
-The ordinary cohomology `Hʳ(X ⊗ k̄, K)` of a Weil complex vanishes outside a finite interval of
-degrees `r`. -/
-theorem exists_subsingleton_cohomology (K : WeilComplex k₀ l X) :
-    ∃ a b : ℤ, ∀ r, r < a ∨ b < r → Subsingleton (K.cohomology r).carrier :=
-  exists_subsingleton_cohomologyFrobeniusModule _
-
 end WeilComplex
 
 namespace WeilSheaf
 
 variable (k₀ l X)
-
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
-
-If the geometric fiber `X ⊗ k̄` has dimension at most `e`, the compactly supported cohomology
-`Hʳ_c(X ⊗ k̄, ℚ̄_ℓ)` of the constant Weil sheaf vanishes for `r < 0` and for `r > 2e`. -/
-theorem subsingleton_compactlySupportedCohomology_adicConstant (e : ℕ)
-    (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
-    (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
-    Subsingleton ((adicConstant k₀ l X).compactlySupportedCohomology r).carrier :=
-  subsingleton_compactlySupportedCohomology_adicConstant_of_two_mul_lt k₀ l X e he r hr
 
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 
@@ -327,18 +309,6 @@ end WeilComplex
 namespace WeilSheaf
 
 variable (k₀ l X)
-
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
-
-If `X` is proper over `k₀` and the geometric fiber `X ⊗ k̄` has dimension at most `e`, the
-cohomology `Hʳ(X ⊗ k̄, ℚ̄_ℓ)` of the constant Weil sheaf vanishes for `r < 0` and for `r > 2e`.
-For `X` smooth of pure dimension `d` the same vanishing, without properness, is
-`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant`. -/
-theorem subsingleton_cohomology_adicConstant_of_isProper (e : ℕ)
-    (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
-    (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
-    Subsingleton ((adicConstant k₀ l X).cohomology r).carrier :=
-  subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X e he hr
 
 end WeilSheaf
 

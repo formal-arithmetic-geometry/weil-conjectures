@@ -125,7 +125,6 @@ noncomputable def homologyZeroBiprodShiftIso :
   (_root_.DerivedCategory.homologyFunctor _ 0).mapBiprod _ _ ≪≫
     (isoBiprodZero ((hQ (0 - 1) (by omega)).of_iso (homologyShiftNegOneIso Λ Q 0))).symm
 
-
 /-- For `Q` concentrated in degree zero, `H¹(Q ⊕ Q[-1]) ≅ H⁰(Q)`. -/
 noncomputable def homologyOneBiprodShiftIso :
     (_root_.DerivedCategory.homologyFunctor _ 1).obj (Q ⊞ Q⟦(-1 : ℤ)⟧) ≅
@@ -219,14 +218,6 @@ theorem isIso_of_isSplitMono_of_iso {X : Scheme.{u}}
   have hbij : Function.Bijective (Φ.map φ) :=
     hinj.bijective_of_nat_card_le (Nat.card_congr eF).le
   exact (LinearEquiv.ofBijective (Φ.map φ).hom hbij).toModuleIso.isIso_hom
-
-/-- The geometric stalks of the constant sheaf `Λ` are finite when `Λ` is. -/
-lemma finite_sheafFiber_homology_constantComplex [Finite Λ] {X : Scheme.{u}} (x : X) :
-    Finite ↑(((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
-      ((_root_.DerivedCategory.homologyFunctor _ 0).obj (constantComplex Λ X))) :=
-  Finite.of_equiv _ ((X.uliftPointSmallEtale x).sheafFiber.mapIso
-    (homologyZeroConstantComplexIso Λ X) ≪≫
-      (X.uliftPointSmallEtale x).sheafFiberConstantSheafIso _).toLinearEquiv.toEquiv.symm
 
 /-- A split monomorphism `φ : M ⟶ K` in `D(X_ét, Λ)` out of a complex `M` concentrated in degree
 zero is an isomorphism if `K ≅ M` and the geometric stalks of `H⁰(M)` are finite. -/
@@ -376,48 +367,6 @@ lemma localizationTriangleLowerStar_mem_distTriang :
     localizationTriangleLowerStar Λ p i j hij L ∈ distTriang _ :=
   (R((p)_*[ModuleCat.{u + 1} Λ])).map_distinguished _
     (supportedLocalizationTriangle_mem_distTriang _ i j hij L)
-
-/-- The first term of `AlgebraicGeometry.Etale.localizationTriangleLowerStar` is
-`R(i ≫ p)_* Ri^! L`. -/
-noncomputable def localizationTriangleLowerStarObj₁Iso :
-    (localizationTriangleLowerStar Λ p i j hij L).obj₁ ≅
-      (R((i ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![Λ]).obj L) :=
-  (R((p)_*[ModuleCat.{u + 1} Λ])).mapIso
-      ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ i).app _) ≪≫
-    (rightDerivedLowerStarComp _ i p).app _
-
-/-- The third term of `AlgebraicGeometry.Etale.localizationTriangleLowerStar` is
-`R(j ≫ p)_* Lj^* L`. -/
-noncomputable def localizationTriangleLowerStarObj₃Iso :
-    (localizationTriangleLowerStar Λ p i j hij L).obj₃ ≅
-      (R((j ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) :=
-  (rightDerivedLowerStarComp _ j p).app _
-
-include hij in
-/-- In the direct image along `p` of the localization triangle of `(i, j)`, if `Hⁿ(Rp_* L)` and
-`Hⁿ⁺¹(Rp_* L)` vanish, the boundary is an isomorphism
-`Hⁿ(R(j ≫ p)_* Lj^* L) ≅ Hⁿ⁺¹(R(i ≫ p)_* Ri^! L)`. -/
-theorem nonempty_iso_homology_of_localizationTriangleLowerStar (n : ℤ)
-    (h₁ : IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
-      ((R((p)_*[ModuleCat.{u + 1} Λ])).obj L)))
-    (h₂ : IsZero ((_root_.DerivedCategory.homologyFunctor _ (n + 1)).obj
-      ((R((p)_*[ModuleCat.{u + 1} Λ])).obj L))) :
-    Nonempty ((_root_.DerivedCategory.homologyFunctor _ n).obj
-        ((R((j ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
-      (_root_.DerivedCategory.homologyFunctor _ (n + 1)).obj
-        ((R((i ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![Λ]).obj L))) := by
-  let T := localizationTriangleLowerStar Λ p i j hij L
-  have hT := localizationTriangleLowerStar_mem_distTriang Λ p i j hij L
-  let δ := _root_.DerivedCategory.HomologySequence.δ T n (n + 1) rfl
-  have : Mono δ := (_root_.DerivedCategory.HomologySequence.exact₃ T hT n (n + 1) rfl).mono_g
-    (h₁.eq_of_src _ _)
-  have : Epi δ := (_root_.DerivedCategory.HomologySequence.exact₁ T hT n (n + 1) rfl).epi_f
-    (h₂.eq_of_tgt _ _)
-  have : IsIso δ := isIso_of_mono_of_epi δ
-  exact ⟨(_root_.DerivedCategory.homologyFunctor _ n).mapIso
-      (localizationTriangleLowerStarObj₃Iso Λ p i j hij L).symm ≪≫ asIso δ ≪≫
-    (_root_.DerivedCategory.homologyFunctor _ (n + 1)).mapIso
-      (localizationTriangleLowerStarObj₁Iso Λ p i j hij L)⟩
 
 end Localization
 

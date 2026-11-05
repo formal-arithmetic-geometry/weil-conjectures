@@ -88,46 +88,4 @@ theorem comparison_unit {U V : Scheme.{u}} (f : U ⟶ V) [QuasiCompact f] [Quasi
     (rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).hom
     (ComparisonCore.comparison_counit Λ f) G
 
-/-- **Pro-étale nearby cycles of constant complexes over a strictly henselian local ring**: let
-`R` be a strictly henselian local ring, `t : Spec Ω ⟶ Spec R` a morphism from the spectrum of a
-separably closed field and `b : R ⟶ κ` a map to a field with kernel the maximal ideal. For a
-bounded below complex `G` of étale sheaves of `Λ`-modules on `Spec R` with constant cohomology
-sheaves, the pullback along `Spec b` of the pro-étale unit `ν^* G ⟶ Rt_* Lt^* ν^* G` is an
-isomorphism. -/
-theorem isIso_leftDerivedUpperStar_map_unit_app_of_isConstant_homology
-    (R : Type u) [CommRing R] [IsStrictlyHenselianLocalRing R]
-    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R))
-    {κ : Type u} [Field κ] (b : R →+* κ) (hb : RingHom.ker b = IsLocalRing.maximalIdeal R)
-    (G : DerivedCategory.Plus (Sheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hG : ∀ q, Sheaf.IsConstant (Spec (.of R)).smallEtaleTopology
-      ((DerivedCategory.Plus.homologyFunctor _ q).obj G)) :
-    IsIso (L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) (Spec.map (CommRingCat.ofHom b))).map
-      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) t).unit.app
-        ((DerivedCategory.Plus.ι ⋙ D(ν^*(Spec (.of R))[ModuleCat.{u + 1} Λ])).obj G))) := by
-  have : IsLocalHom b := ⟨fun x hx ↦ by
-    by_contra h
-    have hx0 : b x = 0 := (RingHom.mem_ker).1 (hb ▸ (IsLocalRing.mem_maximalIdeal x).2 h)
-    rw [hx0] at hx
-    exact not_isUnit_zero hx⟩
-  have hs : Spec.map (CommRingCat.ofHom b) =
-      Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.lift b)) ≫
-        Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)) := by
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, IsLocalRing.ResidueField.lift_comp_residue]
-  have hη : IsIso (D+(Etale.upperStar (ModuleCat.{u + 1} Λ) (Spec.map (CommRingCat.ofHom b))).map
-      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) t).unit.app G)) := by
-    have := Etale.isIso_upperStar_map_unit_app_of_isConstant_homology Λ R t G hG
-    rw [hs, NatIso.isIso_map_iff (Etale.upperStarPlusComp _ _ _), Functor.comp_map]
-    infer_instance
-  have hν : IsIso (L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) (Spec.map (CommRingCat.ofHom b))).map
-      ((DerivedCategory.Plus.ι ⋙ D(ν^*(Spec (.of R))[ModuleCat.{u + 1} Λ])).map
-        ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) t).unit.app G))) :=
-    (NatIso.isIso_map_iff
-      (leftDerivedUpperStarComparisonIso (Spec.map (CommRingCat.ofHom b)) Λ)
-      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) t).unit.app G)).1
-      (by
-        rw [Functor.comp_map]
-        infer_instance)
-  rw [← comparison_unit Λ t G, Functor.map_comp, Functor.map_comp]
-  infer_instance
-
 end AlgebraicGeometry.ProEtale

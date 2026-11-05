@@ -33,10 +33,6 @@ noncomputable def purityTateFrobeniusPull :
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber) :=
   upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom
 
-lemma purityTateFrobeniusPull_eq :
-    purityTateFrobeniusPull ℓ a =
-      upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom := (rfl)
-
 /-- The comparison of the two Frobenius conventions in the module interface. -/
 noncomputable def purityTateFrobeniusCompare :
     purityTateFrobeniusPull ℓ a ≅

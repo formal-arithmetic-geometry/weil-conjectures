@@ -209,59 +209,6 @@ lemma comp_hom_f {K K' K'' : IsoAlgebra F} (φ : K ⟶ K') (ψ : K' ⟶ K'') :
     (φ ≫ ψ).hom.f = φ.hom.f ≫ ψ.hom.f :=
   rfl
 
-/-- The coherently iterated structure isomorphism `Φ^[n] : Fⁿ a ≅ a`, defined recursively
-by `Φ^[0] = 𝟙 a` and `Φ^[n + 1] = Φ ∘ F(Φ^[n])`:
-
-```
-            F (Φ^[n])         Φ
-F (Fⁿ a) -----------> F a -------> a
-```
--/
-noncomputable def strIterate (K : IsoAlgebra F) :
-    ∀ n : ℕ, (F.iterate n).obj K.carrier ≅ K.carrier
-  | 0 => Iso.refl K.carrier
-  | n + 1 => F.mapIso (K.strIterate n) ≪≫ K.str
-
-@[simp]
-lemma strIterate_zero (K : IsoAlgebra F) : K.strIterate 0 = Iso.refl K.carrier :=
-  rfl
-
-/-- The recursive description of the iterated structure isomorphism:
-
-```
-            F (Φ^[n])         Φ
-F (Fⁿ a) -----------> F a -------> a
-```
--/
-@[simp]
-lemma strIterate_succ (K : IsoAlgebra F) (n : ℕ) :
-    K.strIterate (n + 1) = F.mapIso (K.strIterate n) ≪≫ K.str :=
-  rfl
-
-@[simp]
-lemma strIterate_one (K : IsoAlgebra F) : K.strIterate 1 = K.str := by
-  ext
-  simp
-
-/-- The iterated structure isomorphisms are compatible with addition: up to the identification
-`Fᵐ⁺ⁿ a = Fⁿ (Fᵐ a)` of `Functor.iterate_add`, `Φ^[m + n]` is the composite
-
-```
-             Fⁿ (Φ^[m])          Φ^[n]
-Fⁿ (Fᵐ a) -------------> Fⁿ a --------> a
-```
--/
-lemma strIterate_add_hom (K : IsoAlgebra F) (m n : ℕ) :
-    (K.strIterate (m + n)).hom =
-      eqToHom (Functor.congr_obj (F.iterate_add m n) K.carrier) ≫
-        (F.iterate n).map (K.strIterate m).hom ≫ (K.strIterate n).hom := by
-  induction n with
-  | zero => simp
-  | succ n ih =>
-    change F.map (K.strIterate (m + n)).hom ≫ K.str.hom =
-      _ ≫ F.map ((F.iterate n).map (K.strIterate m).hom) ≫ F.map (K.strIterate n).hom ≫ _
-    rw [ih, F.map_comp, F.map_comp, eqToHom_map, Category.assoc, Category.assoc]
-
 section Map
 
 variable {G : D ⥤ D} {L : C ⥤ D}
@@ -329,88 +276,11 @@ section Map₂
 
 variable {F₁ : C ⥤ C} {F₂ : D ⥤ D}
 
-/-- A pair of algebras with invertible structure morphism, for `F₁` and `F₂`, is an algebra with
-invertible structure morphism for the product endofunctor `F₁.prod F₂`, with structure
-isomorphism `Φ_K × Φ_L`. -/
-noncomputable def prod : IsoAlgebra F₁ × IsoAlgebra F₂ ⥤ IsoAlgebra (F₁.prod F₂) where
-  obj KL := mk (KL.1.carrier, KL.2.carrier) (KL.1.str.prod KL.2.str)
-  map {KL KL'} φ := ObjectProperty.homMk
-    { f := (φ.1.hom.f, φ.2.hom.f)
-      h := Prod.ext φ.1.hom.h φ.2.hom.h }
-
-@[simp]
-lemma prod_obj_carrier (KL : IsoAlgebra F₁ × IsoAlgebra F₂) :
-    (prod.obj KL).carrier = (KL.1.carrier, KL.2.carrier) :=
-  rfl
-
-@[simp]
-lemma prod_obj_str (KL : IsoAlgebra F₁ × IsoAlgebra F₂) :
-    (prod.obj KL).str = KL.1.str.prod KL.2.str :=
-  mk_str _ _
-
 variable {E : Type*} [Category* E] {G : E ⥤ E} (B : C ⥤ D ⥤ E)
-
-/-- Transport of algebras with invertible structure morphism along a bifunctor
-`B : C ⥤ D ⥤ E` equipped with a commutation isomorphism
-`e_{a,b} : G (B a b) ≅ B (F₁ a) (F₂ b)`, natural in `a` and `b` (an isomorphism of functors
-`C × D ⥤ E`): the pair `(K, L)` is sent to `B K L` with the structure isomorphism
-
-```
-             e                  B Φ_K Φ_L
-G (B K L) -------> B (F₁ K) (F₂ L) ---------> B K L
-```
-
-It is the one-variable transport `mapOfNatIso e` along `uncurry B`, applied to the product
-algebra `prod.obj (K, L)` and curried. This is the transport of Weil structures along a tensor
-product. -/
-noncomputable def mapOfNatIso₂
-    (e : Functor.uncurry.obj B ⋙ G ≅ F₁.prod F₂ ⋙ Functor.uncurry.obj B) :
-    IsoAlgebra F₁ ⥤ IsoAlgebra F₂ ⥤ IsoAlgebra G :=
-  Functor.curry.obj (prod ⋙ mapOfNatIso e)
-
-@[simp]
-lemma mapOfNatIso₂_obj_obj_carrier
-    (e : Functor.uncurry.obj B ⋙ G ≅ F₁.prod F₂ ⋙ Functor.uncurry.obj B)
-    (K : IsoAlgebra F₁) (L : IsoAlgebra F₂) :
-    (((mapOfNatIso₂ B e).obj K).obj L).carrier = (B.obj K.carrier).obj L.carrier :=
-  rfl
-
-lemma mapOfNatIso₂_obj_obj_str
-    (e : Functor.uncurry.obj B ⋙ G ≅ F₁.prod F₂ ⋙ Functor.uncurry.obj B)
-    (K : IsoAlgebra F₁) (L : IsoAlgebra F₂) :
-    (((mapOfNatIso₂ B e).obj K).obj L).str =
-      e.app (K.carrier, L.carrier) ≪≫ (Functor.uncurry.obj B).mapIso (K.str.prod L.str) := by
-  ext
-  simp [mapOfNatIso₂]
 
 end Map₂
 
 section Op
-
-/-- An algebra with invertible structure morphism `(a, Φ : F a ≅ a)` of `F` gives an algebra
-with invertible structure morphism of `F.op` on `op a`, with structure isomorphism the opposite
-of `Φ⁻¹ : a ≅ F a`. This is the contravariant variable of a transport along a bifunctor such as
-an internal hom: the structure isomorphism enters through its inverse. -/
-noncomputable def opFunctor : (IsoAlgebra F)ᵒᵖ ⥤ IsoAlgebra F.op where
-  obj K := mk (Opposite.op K.unop.carrier) K.unop.str.symm.op
-  map {K K'} φ := ObjectProperty.homMk
-    { f := φ.unop.hom.f.op
-      h := by
-        apply Quiver.Hom.unop_inj
-        have h : F.map φ.unop.hom.f ≫ K.unop.str.hom = K'.unop.str.hom ≫ φ.unop.hom.f :=
-          φ.unop.hom.h
-        change (K'.unop.str.inv ≫ F.map φ.unop.hom.f) = φ.unop.hom.f ≫ K.unop.str.inv
-        rw [Iso.inv_comp_eq, ← Category.assoc, ← h, Category.assoc, Iso.hom_inv_id,
-          Category.comp_id] }
-
-lemma opFunctor_obj_carrier (K : (IsoAlgebra F)ᵒᵖ) :
-    (opFunctor.obj K).carrier = Opposite.op K.unop.carrier :=
-  mk_carrier _ _
-
-@[simp]
-lemma opFunctor_obj_str (K : (IsoAlgebra F)ᵒᵖ) :
-    (opFunctor.obj K).str = K.unop.str.symm.op :=
-  mk_str _ _
 
 end Op
 

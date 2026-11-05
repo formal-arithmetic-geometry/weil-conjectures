@@ -97,33 +97,6 @@ theorem nonempty_iso_fourierTransform_of_iso_constantTwist (ψ : AddChar k₀ (P
       ((fourierTransformCompιIso ψ).app K).symm⟩
 
 -- TODO(unify): prop-base-linear
-/-- The Fourier–Deligne transform of Weil complexes on the affine line commutes with the Tate
-twist: `FT_ψ(K(m)) ≅ FT_ψ(K)(m)` as Weil complexes, naturally in `K`. This is the Weil
-structure part of the second clause of the base linearity proposition; the underlying
-statement on étale complexes is `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist`.
-
-The Tate twist is the constant twist by `χ_ℓ(σ)^m`
-(`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedFunctorIhomFunctorTateTwistIso`), and each
-constituent of the Fourier–Deligne transform commutes with constant twists.
-(blueprint: `prop-base-linear`, clause (2)) -/
-theorem nonempty_iso_fourierTransform_tateTwist (ψ : AddChar k₀ (PadicAlgCl l)) (m : ℤ) :
-    Nonempty (WeilComplex.tateTwist k₀ l (affineLine k₀) m ⋙ fourierTransform ψ ≅
-      fourierTransform ψ ⋙ WeilComplex.tateTwist k₀ l (affineLine k₀) m) := by
-  let P := WeilComplex.objectProperty k₀ l (affineLine k₀)
-  let e := ProEtaleWeilSheaf.rightDerivedFunctorIhomFunctorTateTwistIso
-    (k₀ := k₀) (l := l) (X := affineLine k₀) m
-  refine ⟨((P.fullyFaithfulι.whiskeringRight _).preimageIso ?_)⟩
-  exact Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (WeilComplex.tateTwist k₀ l (affineLine k₀) m)
-      (fourierTransformCompιIso ψ) ≪≫
-    (Functor.associator P.ι _ _).symm ≪≫
-    Functor.isoWhiskerRight (Functor.isoWhiskerLeft P.ι e) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft P.ι (constantTwistCompFourierTransformDerivedIso ψ _) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (fourierTransformCompιIso ψ).symm _ ≪≫
-    Functor.isoWhiskerLeft _ e.symm ≪≫
-    (Functor.associator (fourierTransform ψ) P.ι _).symm
 
 end Fourier
 

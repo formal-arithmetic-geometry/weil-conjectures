@@ -55,9 +55,6 @@ lemma curry_units_smul (k : ℤˣ) (f : A ⊗ X ⟶ Y) : curry (k • f) = k •
 lemma uncurry_add (f g : X ⟶ (ihom A).obj Y) : uncurry (f + g) = uncurry f + uncurry g :=
   map_add (curryAddEquiv A X Y).symm f g
 
-lemma uncurry_sub (f g : X ⟶ (ihom A).obj Y) : uncurry (f - g) = uncurry f - uncurry g :=
-  map_sub (curryAddEquiv A X Y).symm f g
-
 lemma uncurry_zsmul (k : ℤ) (f : X ⟶ (ihom A).obj Y) : uncurry (k • f) = k • uncurry f :=
   map_zsmul (curryAddEquiv A X Y).symm k f
 

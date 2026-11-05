@@ -229,15 +229,6 @@ noncomputable def extensionByZeroCompIhomFunctorHom (B : ProEtaleWeilSheaf k₀ 
     ((ProEtale.adicOpenImmersionLowerShriekIhomHom l
       (Scheme.Hom.geometricFiberMap j (comp_over j _)) B.carrier).naturality f.hom.f)
 
-omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-lemma extensionByZeroCompIhomFunctorHom_app_hom_f (B : ProEtaleWeilSheaf k₀ l X)
-    (hB : ProEtale.IsAdicLisseSheaf B.carrier) (N : ProEtaleWeilSheaf k₀ l U) :
-    ((extensionByZeroCompIhomFunctorHom j B hB).app N).hom.f =
-      (ProEtale.adicOpenImmersionLowerShriekIhomHom l
-        (Scheme.Hom.geometricFiberMap j (comp_over j _)) B.carrier).app N.carrier :=
-  rfl
-
 instance isIso_extensionByZeroCompIhomFunctorHom [QuasiCompact j] (B : ProEtaleWeilSheaf k₀ l X)
     (hB : ProEtale.IsAdicLisseSheaf B.carrier) :
     IsIso (extensionByZeroCompIhomFunctorHom j B hB) := by

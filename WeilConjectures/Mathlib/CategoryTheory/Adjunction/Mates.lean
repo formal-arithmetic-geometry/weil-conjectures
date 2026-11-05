@@ -50,7 +50,6 @@ and it is the latter that one wants when transporting the coherence of a pseudof
 
 namespace CategoryTheory
 
-
 universe v₁ v₂ v₃ v₄ u₁ u₂ u₃ u₄
 
 variable {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄}
@@ -73,26 +72,6 @@ lemma conjugateIsoEquiv_trans (e : L₂ ≅ L₁) (e' : L₃ ≅ L₂) :
       conjugateIsoEquiv adj₁ adj₂ e ≪≫ conjugateIsoEquiv adj₂ adj₃ e' := by
   ext : 1
   exact (conjugateEquiv_comp adj₁ adj₂ adj₃ e.hom e'.hom).symm
-
-/-- **The mate of an isomorphism of left adjoints carries the pasted unit and counit.**
-Transporting the adjunction `L₁ ⊣ R₁` along an isomorphism `e : L₁ ≅ L₂` of left adjoints and
-along its conjugate `R₁ ≅ R₂` gives back the adjunction `L₂ ⊣ R₂`: the unit and counit of
-`adj₂` are those of `adj₁` pasted with `e` and with the conjugate of `e`:
-```
-  𝟭 --η₁--> L₁ ⋙ R₁ --e ◫ ẽ--> L₂ ⋙ R₂        R₂ ⋙ L₂ --ẽ⁻¹ ◫ e⁻¹--> R₁ ⋙ L₁ --ε₁--> 𝟭
-```
-where `ẽ : R₁ ≅ R₂` is the inverse of the conjugate `R₂ ≅ R₁` of `e`; the left composite is the
-unit `η₂` of `adj₂` and the right composite is its counit `ε₂`. -/
-lemma Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv (e : L₁ ≅ L₂) :
-    (adj₁.ofNatIsoLeft e).ofNatIsoRight (conjugateIsoEquiv adj₂ adj₁ e).symm = adj₂ := by
-  ext c
-  have h := unit_conjugateEquiv adj₁ adj₂ e.inv c
-  have hn := (conjugateEquiv adj₁ adj₂ e.inv).naturality (e.hom.app c)
-  simp only [Functor.comp_obj, Functor.id_obj] at h hn
-  simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.symm_hom, conjugateIsoEquiv_apply_inv,
-    Category.assoc, Functor.comp_obj, Functor.id_obj]
-  rw [hn, reassoc_of% h, ← R₂.map_comp, Iso.inv_hom_id_app, R₂.map_id, Category.comp_id]
 
 end
 
@@ -139,59 +118,7 @@ section LiftAlgebraStr
 
 variable {L : A ⥤ B} {R : B ⥤ A} (adj : L ⊣ R) {G : A ⥤ A} {H : B ⥤ B}
 
-/-- Given an adjunction `L ⊣ R`, a lift `α : G ⋙ L ≅ L ⋙ H` of an endofunctor `G` of `A` to
-an endofunctor `H` of `B`, and a structure map `φ : G K ⟶ K`, the structure map
-
-```
-  G (R (L K)) ──mate of α──▶ R (H (L K)) ──R α⁻¹──▶ R (L (G K)) ──R (L φ)──▶ R (L K)
-```
-
-on `R (L K)`, where the mate `R ⋙ G ⟶ H ⋙ R` of `α` is
-`CategoryTheory.mateEquiv adj adj α.hom`. -/
-def Adjunction.liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ : G.obj K ⟶ K) :
-    G.obj (R.obj (L.obj K)) ⟶ R.obj (L.obj K) :=
-  (mateEquiv adj adj α.hom).app (L.obj K) ≫ R.map (α.inv.app K ≫ L.map φ)
-
-/-- The unit `η : K ⟶ R (L K)` intertwines `φ` and its lift `Adjunction.liftAlgebraStr`:
-
-```
-  G K ──G η──▶ G (R (L K))
-   │φ              │liftAlgebraStr α φ
-   ▼               ▼
-   K ────η────▶ R (L K)
-``` -/
-lemma Adjunction.map_unit_app_comp_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A}
-    (φ : G.obj K ⟶ K) :
-    G.map (adj.unit.app K) ≫ adj.liftAlgebraStr α φ = φ ≫ adj.unit.app K := by
-  rw [liftAlgebraStr, ← Category.assoc, unit_mateEquiv]
-  simp only [Functor.id_obj, Functor.comp_obj, Category.assoc, Functor.map_comp,
-    ← R.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
-  exact adj.unit_naturality φ
-
-instance Adjunction.isIso_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ : G.obj K ⟶ K)
-    [IsIso (mateEquiv adj adj α.hom).natTrans] [IsIso φ] : IsIso (adj.liftAlgebraStr α φ) := by
-  dsimp [liftAlgebraStr]
-  infer_instance
-
 end LiftAlgebraStr
-
-/-- Whiskering a 2-square at the bottom corresponds, under `mateEquiv`, to whiskering its mate
-on the left: for a 2-square `w` and `β : H ⟶ H'`
-
-```
-A ---G---> C            B ---R₁---> A
-|          |            |           |
-L₁   ⇙    L₂    ↦      H'    ⇙     G
-v          v            v           v
-B --H'---> D            D ---R₂---> C
-```
--/
-lemma mateEquiv_whiskerBottom {G : A ⥤ C} {H H' : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A}
-    {L₂ : C ⥤ D} {R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (w : TwoSquare G L₁ L₂ H)
-    (β : H ⟶ H') :
-    mateEquiv adj₁ adj₂ (w.whiskerBottom β) = (mateEquiv adj₁ adj₂ w).whiskerLeft β := by
-  ext X
-  simp [mateEquiv, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft, ← Functor.map_comp]
 
 /-- Conjugation is compatible with 2-squares: let `α : L₂ ⟶ L₁` and `α' : L₂' ⟶ L₁'` be
 morphisms of left adjoints, and let `w₁ : TwoSquare G L₁ L₁' H` and
@@ -301,7 +228,6 @@ end Adjunction
 
 end Triple
 
-
 section IteratedMate
 
 variable {F₁ : A ⥤ C} {U₁ : C ⥤ A} {F₂ : B ⥤ D} {U₂ : D ⥤ B}
@@ -410,39 +336,6 @@ lemma conjugateEquiv_eq_of_unit (α : L₂ ⟶ L₁) (β : R₁ ⟶ R₂)
   ext a
   apply (adj₂.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← h, unit_conjugateEquiv_symm adj₁ adj₂]
-
-/-- Blueprint `lem-trf-adjoint-mate`: mates along an isomorphism of left adjoints. For
-adjunctions `L₁ ⊣ R₁`, `L₂ ⊣ R₂` and a natural isomorphism `α : L₁ ≅ L₂`, the conjugate
-`β = conjugateIsoEquiv adj₁ adj₂ α.symm : R₁ ≅ R₂`
-
-1. is given by `β = R₂ ε₁ ∘ R₂ α⁻¹ R₁ ∘ η₂ R₁`, with inverse `β⁻¹ = R₁ ε₂ ∘ R₁ α R₂ ∘ η₁ R₂`;
-2. carries the units and the counits to each other: `R₂ α ∘ β L₁ ∘ η₁ = η₂` and
-   `ε₂ ∘ α R₂ ∘ L₁ β = ε₁`;
-3. is the unique natural isomorphism `R₁ ≅ R₂` with the unit compatibility of (2). -/
-theorem conjugateIsoEquiv_symm_spec (α : L₁ ≅ L₂) :
-    (∀ b, (conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app b =
-      adj₂.unit.app (R₁.obj b) ≫ R₂.map (α.inv.app (R₁.obj b)) ≫ R₂.map (adj₁.counit.app b)) ∧
-    (∀ b, (conjugateIsoEquiv adj₁ adj₂ α.symm).inv.app b =
-      adj₁.unit.app (R₂.obj b) ≫ R₁.map (α.hom.app (R₂.obj b)) ≫ R₁.map (adj₂.counit.app b)) ∧
-    (∀ a, adj₁.unit.app a ≫ (conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app (L₁.obj a) ≫
-      R₂.map (α.hom.app a) = adj₂.unit.app a) ∧
-    (∀ b, L₁.map ((conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app b) ≫ α.hom.app (R₂.obj b) ≫
-      adj₂.counit.app b = adj₁.counit.app b) ∧
-    (∀ β : R₁ ≅ R₂, (∀ a, adj₁.unit.app a ≫ β.hom.app (L₁.obj a) ≫ R₂.map (α.hom.app a) =
-      adj₂.unit.app a) → β = conjugateIsoEquiv adj₁ adj₂ α.symm) := by
-  refine ⟨fun b ↦ ?_, fun b ↦ ?_, fun a ↦ ?_, fun b ↦ ?_, fun β hβ ↦ ?_⟩
-  · simp [conjugateEquiv_apply_app]
-  · simp [conjugateEquiv_apply_app]
-  · have h := unit_conjugateEquiv adj₁ adj₂ α.inv a
-    simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom]
-    rw [reassoc_of% h, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id, Category.comp_id]
-  · have h := conjugateEquiv_counit adj₁ adj₂ α.inv b
-    simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom]
-    rw [α.hom.naturality_assoc, h, Iso.hom_inv_id_app_assoc]
-  · ext1
-    refine (conjugateEquiv_eq_of_unit adj₁ adj₂ α.inv β.hom fun a ↦ ?_).symm
-    rw [← hβ a, Category.assoc, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
-      Functor.map_id, Category.comp_id]
 
 end ConjugateUnit
 

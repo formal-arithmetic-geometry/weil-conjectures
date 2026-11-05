@@ -39,15 +39,4 @@ namespace CategoryTheory.InjectiveTowerRoos
 
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
-/-- The product of the evaluated complexes of a strict tower complex, acting on
-strict maps by the product of their evaluated maps.
-Source: Stacks Project, sites-cohomology.tex, Tag 0941, proof of
-lemma-derived-limit-is-ok (blueprint: def-pur-tower-product-functor). -/
-noncomputable def productFunctor :
-    CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ CochainComplex A ℤ where
-  obj := roosP
-  map := roosPmap
-  map_id := roosPmap_id
-  map_comp := roosPmap_comp
-
 end CategoryTheory.InjectiveTowerRoos

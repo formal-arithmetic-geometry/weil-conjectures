@@ -99,14 +99,6 @@ theorem Algebra.IndEtale.isDomain_localization_of_etale [Algebra.IndEtale R S]
   · right
     rw [← hw f b'', h, map_zero]
 
-/-- The localizations at primes of an ind-étale algebra over a ring with regular local rings
-are domains. -/
-theorem Algebra.IndEtale.isDomain_localization_of_isRegularLocalRing [Algebra.IndEtale R S]
-    (hR : ∀ (p : Ideal R) [p.IsPrime], IsRegularLocalRing (Localization.AtPrime p))
-    (q : Ideal S) [q.IsPrime] : IsDomain (Localization.AtPrime q) :=
-  isDomain_localization_of_etale (R := R) (fun A _ _ _ Q _ ↦
-    Algebra.Etale.isDomain_localization_of_isRegularLocalRing (S := A) hR Q) q
-
 /-- **Weakly étale algebras have integral local rings if étale algebras do.** Let `R` be a ring
 such that the localizations at primes of every étale `R`-algebra are domains and `S` a weakly
 étale `R`-algebra. Then the localizations of `S` at primes are domains: there is a faithfully

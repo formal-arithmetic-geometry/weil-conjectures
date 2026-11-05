@@ -80,42 +80,6 @@ namespace SheafOfModules.FixedTensorLocalization
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
-/-- The recorded module-sheaf category. Source: Stacks, Modules on Sites, 03DA
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev Modules := CategoryTheory.ringedSiteModules.{r}
-  ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
-
-/-- Unbounded complexes. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev Complexes := CochainComplex (Modules R) ℤ
-
-/-- The homotopy category. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev Homotopy := HomotopyCategory (Modules R) (.up ℤ)
-
-/-- Quotient by chain homotopy. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev quotient := HomotopyCategory.quotient (Modules R) (.up ℤ)
-
-/-- The direct-sum total tensor with its canonical signs. Source: Stacks, Tag 06YM
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev totalTensor :=
-  (@curriedTensor (Modules R) _ (SheafOfModules.monoidalCategory R)).map₂CochainComplex
-
 variable [HasDerivedCategory.{w} (Modules R)]
-
-/-- The chosen-universe derived category. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev Derived := DerivedCategory (Modules R)
-
-/-- Homotopy localization. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev Q := DerivedCategory.Qh (C := Modules R)
-
-/-- The resolving full subcategory selected by the published descent theorem.
-Source: Stacks, Tags 06YS and 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev resolving : ObjectProperty (Homotopy R) :=
-  (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0} J R).choose
 
 end SheafOfModules.FixedTensorLocalization

@@ -135,29 +135,6 @@ end ProperFibre
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `fin4-lem-fibrewise-cohomological-dimension`: Cohomological dimension over an
-algebraically closed field.
-
-Let `k'` be an algebraically closed field, `X` a `k'`-scheme of finite type of dimension at most
-`d`, and `F` an étale sheaf of `Λ`-modules over a finite ring `Λ`. Then `Hᵠ(X_ét, F) = 0` for
-`q > 2d`, cohomology being that of the underlying abelian sheaf. The blueprint assumes `F`
-constructible; this is not needed, since `F` is torsion as `Λ` is finite, and the bound
-`cd_tor(X) ≤ 2d` (`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`) applies
-to all torsion sheaves. -/
-theorem subsingleton_H_forget₂_of_two_mul_lt {k' : Type u} [Field k'] [IsAlgClosed k']
-    {X : Scheme.{u}} (a : X ⟶ Spec (.of k')) [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
-    (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (hq : 2 * d < q) :
-    Subsingleton (Sheaf.H ((sheafCompose X.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
-  refine Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed d a hX _ ?_ q hq
-  refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
-  have := Fintype.ofFinite Λ
-  refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨Fintype.card Λ, Fintype.card_pos, ?_⟩
-  let y : F.obj.obj U := x
-  change Fintype.card Λ • y = 0
-  rw [← one_smul Λ y, ← smul_assoc, card_nsmul_eq_zero, zero_smul]
-
 /-- Blueprint `lem-dg-compact-support-amplitude`: The compact-support bound uses the original
 fibres.
 

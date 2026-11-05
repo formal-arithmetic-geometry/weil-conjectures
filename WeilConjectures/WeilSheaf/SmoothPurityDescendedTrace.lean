@@ -34,26 +34,4 @@ variable (l : ℕ) [Fact l.Prime] {k₀ : Type u} [Field k₀] [Finite k₀]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (d : ℕ)
 
-/-- The finite-field smooth trace, pulled to the geometric fibre with Weil structures. -/
-noncomputable def geometricFiberWeilSmoothTrace :
-    (weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)
-        (compactificationOverField f) (Over.w f)).obj
-      ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) X.hom).mapDerivedCategory.obj
-        (boundedConstructibleTateTwist l X d (2 * d)).obj) ⟶
-      (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) Y.hom).mapDerivedCategory.obj
-        (𝟙_ _) :=
-  (boundedConstructibleLowerShriekGeometricFiberWeilIso l f).inv.app
-      (boundedConstructibleTateTwist l X d (2 * d)) ≫
-    (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) Y.hom).mapDerivedCategory.map
-      (smoothTrace l f d).hom
-
-/-- Compact-support base change identifies the descended trace with the pulled-back trace. -/
-theorem geometricFiberWeilSmoothTrace_baseChange :
-    (boundedConstructibleLowerShriekGeometricFiberWeilIso l f).hom.app
-        (boundedConstructibleTateTwist l X d (2 * d)) ≫ geometricFiberWeilSmoothTrace l f d =
-      (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l) Y.hom).mapDerivedCategory.map
-        (smoothTrace l f d).hom := by
-  unfold geometricFiberWeilSmoothTrace
-  rw [Iso.hom_inv_id_app_assoc]
-
 end AlgebraicGeometry.ProEtale.CondensedRing

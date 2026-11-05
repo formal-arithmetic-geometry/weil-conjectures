@@ -304,46 +304,6 @@ variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsO
     (Spec (.of k))).base)ᶜ) [HasInvertibleExponent Λ G]
   [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))]
 
-include hj in
-/-- Blueprint `thm-pur-kummer-affine-line`: Kummer computations on the line and the punctured line.
-
-Let `k` be an algebraically closed field and `Λ` a finite coefficient ring whose exponent is
-invertible in `k`, with Tate twist `Λ(1) = μₙ ⊗ Λ` (`n` the characteristic of `Λ`). Let
-`G = 𝔾_{m,k}` be the complement of the zero section of `𝔸¹_k`, with coordinate `t`. Then
-
-1. `Hᵠ(𝔸¹_k, Λ(1)) = 0` for `q ≠ 0` and `H⁰(𝔸¹_k, Λ(1)) ≅ Λ`;
-2. `H⁰(𝔾_{m,k}, Λ(1)) ≅ Λ` and `Hᵠ(𝔾_{m,k}, Λ(1)) = 0` for `q ∉ {0, 1}`;
-3. `H¹(𝔾_{m,k}, Λ(1)) = Hom(Λ, Λ(1)[1])` is free of rank one over `Λ` on the Kummer class
-   `κ(t)` of the coordinate.
-
-In particular all these cohomology groups are finite. The blueprint takes `Λ = A` free over
-`ℤ/ℓ^N`; here `Λ` is any finite commutative ring with invertible exponent, so the statements
-hold after any change of finite coefficients. -/
-theorem kummer_affineLine_multiplicativeGroup :
-    (∀ q : ℤ, q ≠ 0 → IsZero ((cohomology (ModuleCat.{u + 1} Λ)
-        𝔸(ULift.{u} (Fin 1); Spec (.of k)) q).obj
-          (tateTwistObject Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 1))) ∧
-      Nonempty ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 0).obj
-        (tateTwistObject Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 1) ≅ ModuleCat.of Λ Λ) ∧
-      Nonempty ((cohomology (ModuleCat.{u + 1} Λ) G 0).obj (tateTwistObject Λ G 1) ≅
-        ModuleCat.of Λ Λ) ∧
-      (∀ q : ℤ, q ≠ 0 → q ≠ 1 →
-        IsZero ((cohomology (ModuleCat.{u + 1} Λ) G q).obj (tateTwistObject Λ G 1))) ∧
-      Function.Bijective (fun c : Λ ↦ c • kummerClassOf G Λ (AffineSpace.unitLineCoord j hj)) := by
-  have := (connectedSpace_of_range_eq_compl_zeroSection j hj).toNonempty
-  have : HasInvertibleExponent Λ (Spec (.of k)) := HasInvertibleExponent.of_hom_of_nonempty
-    (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) (Λ := Λ)
-  obtain ⟨eA⟩ := nonempty_tateTwistObject_one_iso_constantComplex Λ
-    (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
-  obtain ⟨eG⟩ := nonempty_tateTwistObject_one_iso_constantComplex Λ
-    (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
-  have := connectedSpace_of_range_eq_compl_zeroSection j hj
-  exact ⟨fun q hq ↦ (isZero_cohomology_affineLine Λ q hq).of_iso ((cohomology _ _ q).mapIso eA),
-    ⟨(cohomology _ _ 0).mapIso eA ≪≫ cohomologyZeroConstantComplexIso Λ _⟩,
-    ⟨(cohomology _ _ 0).mapIso eG ≪≫ cohomologyZeroConstantComplexIso Λ _⟩,
-    fun q hq0 hq1 ↦ (isZero_cohomology_multiplicativeGroup Λ j hj q hq0 hq1).of_iso
-      ((cohomology _ _ q).mapIso eG), bijective_smul_kummerClassOf Λ j hj⟩
-
 omit [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))] in
 include hj in
 /-- Untwisted form of `H¹(𝔾_{m,k}, Λ) ≅ Λ`: `Hom(Λ, Λ[1])` is free of rank one over `Λ`. -/

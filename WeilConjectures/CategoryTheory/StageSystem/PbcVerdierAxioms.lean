@@ -26,71 +26,6 @@ set_option backward.isDefEq.respectTransparency.types true
 universe w u v
 open CategoryTheory CategoryTheory.Pretriangulated CategoryTheory.Limits
 -- Compare the concrete tensor-Hom model with the existing Verdier localization.
-private noncomputable def stageRationalComparison
-    (R : Type*) [CommRing R] (C : Type u) [Category.{v} C]
-    [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
-    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
-    ScalarLocalization R C p ⥤ Rationalization (Submonoid.powers p) C where
-  obj X := (Rationalization.Q (Submonoid.powers p) C).obj X.obj
-  map {X Y} f := Rationalization.tensorHomEquiv (Submonoid.powers p)
-    (Localization.Away p) X.obj Y.obj f
-  map_id X := by
-    change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
-    simp
-  map_comp {X Y Z} f g := by
-    induction f using TensorProduct.induction_on with
-    | zero => simp only [Limits.zero_comp, map_zero, Limits.zero_comp]
-    | tmul a f =>
-      induction g using TensorProduct.induction_on with
-      | zero => simp only [Limits.comp_zero, map_zero, Limits.comp_zero]
-      | tmul b g =>
-        change Rationalization.tensorHomEquiv _ _ _ _
-          (ScalarLocalization.composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _
-        rw [ScalarLocalization.composition_tmul]
-        simp only [Rationalization.tensorHomEquiv_tmul, Functor.map_comp,
-          Linear.smul_comp, Linear.comp_smul, smul_smul, mul_comm]
-      | add g h hg hh =>
-        rw [Preadditive.comp_add X Y Z (a ⊗ₜ[R] f) g h]
-        simp only [_root_.map_add]
-        rw [hg, hh]
-        exact (Preadditive.comp_add _ _ _ _ _ _).symm
-    | add f h hf hh =>
-      rw [Preadditive.add_comp X Y Z f h g]
-      simp only [_root_.map_add]
-      rw [hf, hh]
-      exact (Preadditive.add_comp _ _ _ _ _ _).symm
-
-private theorem stageLocalization
-    (R : Type*) [CommRing R] (C : Type u) [Category.{v} C]
-    [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
-    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
-    (ScalarLocalization.localization R C p).IsLocalization
-      (Rationalization.W (Submonoid.powers p) C) := by
-  classical
-  let M := Submonoid.powers p
-  let F := stageRationalComparison R C p
-  have : F.Full := ⟨fun {X Y} ↦
-    (Rationalization.tensorHomEquiv M (Localization.Away p) X.obj Y.obj).surjective⟩
-  have : F.Faithful := ⟨fun {X Y} ↦
-    (Rationalization.tensorHomEquiv M (Localization.Away p) X.obj Y.obj).injective⟩
-  have : F.EssSurj := ⟨fun X ↦ by
-    obtain ⟨Y, ⟨e⟩⟩ := Rationalization.exists_iso_obj X
-    exact ⟨⟨Y⟩, ⟨e⟩⟩⟩
-  have : F.IsEquivalence := {}
-  let Q := ScalarLocalization.localization R C p
-  have fac : Q ⋙ F ≅ Rationalization.Q M C :=
-    NatIso.ofComponents (fun X ↦ Iso.refl _) (by
-      intro X Y f
-      dsimp [Q, F, ScalarLocalization.localization, stageRationalComparison]
-      simp only [Category.comp_id, Category.id_comp,
-        Rationalization.tensorHomEquiv_tmul, one_smul]
-      rfl)
-  exact Functor.IsLocalization.of_equivalence_target (Rationalization.Q M C)
-      (Rationalization.W M C) Q F.asEquivalence.symm
-      (Functor.isoWhiskerRight fac.symm F.inv ≪≫ Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft Q F.asEquivalence.unitIso.symm ≪≫ Q.rightUnitor)
 
 namespace CategoryTheory.StageSystem
 
@@ -155,13 +90,6 @@ same common stage, so their classes agree. This is precisely NatTrans.CommShift.
     (pbcStageShift_coherence S n h le_rfl X)
   simpa only [Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj,
     Category.comp_id] using eq
-
-/-- The recorded Verdier theorem uniquely fixes the pretriangulation by the
-recorded CommonStageDistinguished predicate. Its data is the specified triangle
-set; the inherited HasShift and Hom group structures are retained.
-Source: blueprint order 1540 (blueprint: thm-weil-pbc-verdier-axioms). -/
-instance qbarPairPretriangulated : Pretriangulated S.PairCategory :=
-  (commonStage_verdier_existsUnique S).exists.choose
 
 end CategoryTheory.StageSystem
 
@@ -258,25 +186,5 @@ exactness on every distinguished rational triangle, including identity fields. -
     (Functor.mapTriangleCompIso B Q').app D'
   exact isomorphic_distinguished _ hBD _
     ((G.mapTriangle.mapIso e) ≪≫ c)
-
-/-- The actual common-stage triangulation satisfies all four Verdier axioms.
-Source: blueprint order 1540 (blueprint: thm-weil-pbc-verdier-axioms).
-Proof: apply commonStage_verdier_existsUnique to the actual completed integral
-rational stages and their exact scalar transitions. Its proof moves finitely
-many representatives and equations to one common stage: finite-stage TR1 gives
-cones and identity triangles, TR2 gives signed rotation, and TR3 completes
-commutative squares. Cone independence and finite-stage TR4 give the octahedron.
-Its distinguished set is exactly CommonStageDistinguished by construction.
-The same theorem gives exactness of the stage inclusions, and the specified
-shift comparisons give qbarTransIsoCommShift for every transition identification. -/
-theorem pbcVerdierAxioms :
-    CategoryTheory.IsTriangulated (PbcFiniteStagePairCategory l Qbar T hDim.out hInv.out) ∧
-    (∀ E : Padic.FiniteCoefficientFields l Qbar,
-      ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).IsTriangulated) ∧
-    ∀ {E F : Padic.FiniteCoefficientFields l Qbar} (h : E ≤ F),
-      NatTrans.CommShift ((pbcScalarSystem l Qbar T hDim.out hInv.out).transIso h).hom ℤ := by
-  let S := pbcScalarSystem l Qbar T hDim.out hInv.out
-  have ht := (CategoryTheory.StageSystem.commonStage_verdier_existsUnique S).exists.choose_spec
-  exact ⟨ht.2.1, ht.2.2, fun h ↦ inferInstance⟩
 
 end AlgebraicGeometry.Scheme

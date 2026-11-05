@@ -10,7 +10,6 @@ public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.Topology.Sober
 
-
 /-!
 # Affine opens through the generic points of the irreducible components
 
@@ -162,16 +161,6 @@ theorem exists_isAffineOpen_pairwise_disjoint [QuasiSeparatedSpace X] {s : Set X
   choose! U hUaff hUmem hUle hUdisj using key
   exact ⟨U, hUaff, hUmem, fun x hx y hy hxy ↦
     (hUdisj x hx y hy (Ne.symm hxy)).mono_right (hUle y hy)⟩
-
-/-- A finite set of generic points of irreducible components of a quasi-separated scheme is
-contained in an affine open: the disjoint union of the affine opens provided by
-`AlgebraicGeometry.exists_isAffineOpen_pairwise_disjoint` is affine. -/
-theorem exists_isAffineOpen_of_subset_genericPoints [QuasiSeparatedSpace X] {s : Set X}
-    (hsf : s.Finite) (hs : s ⊆ genericPoints X) :
-    ∃ U : X.Opens, IsAffineOpen U ∧ s ⊆ (U : Set X) := by
-  obtain ⟨U, hUaff, hUmem, hUdisj⟩ := exists_isAffineOpen_pairwise_disjoint hsf hs
-  refine ⟨⨆ x ∈ s, U x, IsAffineOpen.biSup_of_disjoint hsf hUaff hUdisj, fun x hx ↦ ?_⟩
-  exact Opens.mem_iSup.mpr ⟨x, Opens.mem_iSup.mpr ⟨hx, hUmem x hx⟩⟩
 
 /-- **An affine open containing a point and all generic points.** Let `X` be a quasi-separated
 scheme, let `s` be a finite set of generic points of irreducible components of `X` and let

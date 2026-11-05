@@ -234,33 +234,6 @@ instance isRegularImmersion_diagonal_projectiveLine (S : Scheme.{u}) :
     IsRegularImmersion 1 (pullback.diagonal (ProjectiveLine S ↘ S)) :=
   isRegularImmersion_diagonal 1 _
 
-/-- **Purity for the diagonal of the projective line** `Δ : ℙ¹_S ⟶ ℙ¹_S ×_S ℙ¹_S`, over every
-base `S` on which the exponent of `Λ` is invertible: `ℙ¹_S` is covered by the two charts
-`𝔸¹_S ⟶ ℙ¹_S` (`AlgebraicGeometry.Etale.supportedTatePure_diagonal_of_cover`). -/
-theorem supportedTatePure_diagonal_projectiveLine (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
-    haveI : HasInvertibleExponent Λ (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) :=
-      .of_hom (pullback.fst _ _ ≫ ProjectiveLine S ↘ S)
-    SupportedTatePure Λ 1 (pullback.diagonal (ProjectiveLine S ↘ S)) := by
-  have (a : ULift.{u} Bool) : IsOpenImmersion (bif a.down then ProjectiveLine.affineChart S
-      else ProjectiveLine.infinityChart S) := by
-    rcases a with ⟨_ | _⟩
-    · exact inferInstanceAs (IsOpenImmersion (ProjectiveLine.infinityChart S))
-    · exact inferInstanceAs (IsOpenImmersion (ProjectiveLine.affineChart S))
-  refine supportedTatePure_diagonal_of_cover Λ PUnit.{u + 1} (ProjectiveLine S ↘ S)
-    (ι := ULift.{u} Bool) (fun a ↦ bif a.down then ProjectiveLine.affineChart S
-      else ProjectiveLine.infinityChart S) ?_ ?_
-  · rintro ⟨_ | _⟩
-    · exact ProjectiveLine.infinityChart_over
-    · exact ProjectiveLine.affineChart_over S
-  · intro x
-    have hx : x ∈ (ProjectiveLine.affineChart S).opensRange ⊔
-        (ProjectiveLine.infinityChart S).opensRange := by
-      rw [ProjectiveLine.opensRange_affineChart_sup_opensRange_infinityChart]
-      trivial
-    rcases hx with ⟨y, hy⟩ | ⟨y, hy⟩
-    · exact ⟨⟨true⟩, y, hy⟩
-    · exact ⟨⟨false⟩, y, hy⟩
-
 end Etale
 
 end AlgebraicGeometry

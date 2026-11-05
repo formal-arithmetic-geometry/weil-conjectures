@@ -32,7 +32,6 @@ Source: Stacks Tags 093J, 03EK and 00HD; steps 2--3 of
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -42,33 +41,5 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 open scoped TensorProduct ChangeOfRings
 namespace WeilConjectures
-
-private theorem constantSection_bijective (k A : Type u) [Field k] [IsAlgClosed k]
-    [CommRing A] : Function.Bijective (pointConstantSectionMap k A) := by
-  exact AlgebraicGeometry.ProEtale.bijective_toSheafify_app_of_iso (Iso.refl _)
-    ((Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj
-      (CommRingCat.of (ULift.{u + 1, u} A)))
-
-private def constantSectionEquiv (k A : Type u) [Field k] [IsAlgClosed k] [CommRing A] :=
-  RingEquiv.ofBijective (pointConstantSectionMap k A) (constantSection_bijective k A)
-
-private def sheafificationFinalIso (k : Type u) [Field k] [IsAlgClosed k]
-    (R : Sheaf (ProEt.topology (Spec (.of k))) RingCat.{u + 1})
-    (P : PresheafOfModules.{u + 1} R.obj) :
-    P.obj (op (ProEt.mk (𝟙 (Spec (.of k))))) ≅
-      ((PresheafOfModules.sheafification (𝟙 R.obj)).obj P).val.obj
-        (op (ProEt.mk (𝟙 (Spec (.of k))))) := by
-  let U := op (ProEt.mk (𝟙 (Spec (.of k))))
-  let η := (PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.app P
-  let φ : P.obj U ⟶ ((PresheafOfModules.sheafification (𝟙 R.obj)).obj P).val.obj U :=
-    ModuleCat.ofHom (X := P.obj U)
-      (Y := ((PresheafOfModules.sheafification (𝟙 R.obj)).obj P).val.obj U)
-      { toFun := fun x ↦ η.app U x
-        map_add' := fun x y ↦ (η.app U).hom.map_add x y
-        map_smul' := fun a x ↦ (η.app U).hom.map_smul a x }
-  have hφ : Function.Bijective φ :=
-    AlgebraicGeometry.ProEtale.bijective_toSheafify_app_of_iso (Iso.refl _) P.presheaf
-  exact (LinearEquiv.ofBijective φ.hom hφ).toModuleIso
-
 
 end WeilConjectures

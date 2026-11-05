@@ -106,15 +106,6 @@ lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom'
         K.obj :=
   restrictFullyFaithful_derivedUpperStarLowerStarAdjunction_unit_app_hom ℓ f _ K
 
-/-- On the ambient derived category, the counit of `Lf^* ⊣ Rf_*` on bounded constructible
-complexes is the counit of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
-lemma boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom'
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K).hom =
-      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).counit.app
-        K.obj :=
-  restrictFullyFaithful_derivedUpperStarLowerStarAdjunction_counit_app_hom ℓ f _ K
-
 end PadicAlgCl
 
 namespace ContinuousMapRingObj
@@ -125,21 +116,6 @@ lemma boundedConstructibleLowerStar_obj_obj (K : Dᵇc(X.left)⟦Profinite.conti
     ((boundedConstructibleLowerStar ℓ E f).obj K).obj =
       (lowerStar (Profinite.continuousMapRingObj E) f.left).rightDerivedFunctor.obj K.obj :=
   rfl
-
-lemma boundedConstructibleLowerStar_map_hom
-    {K L : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧} (φ : K ⟶ L) :
-    ((boundedConstructibleLowerStar ℓ E f).map φ).hom =
-      (lowerStar (Profinite.continuousMapRingObj E) f.left).rightDerivedFunctor.map φ.hom :=
-  rfl
-
-/-- On the ambient derived category, the unit of `Lf^* ⊣ Rf_*` on bounded constructible complexes
-is the unit of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
-lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom'
-    (K : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ E f).unit.app K).hom =
-      (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) f.left).unit.app
-        K.obj :=
-  restrictFullyFaithful_derivedUpperStarLowerStarAdjunction_unit_app_hom ℓ f _ K
 
 /-- On the ambient derived category, the counit of `Lf^* ⊣ Rf_*` on bounded constructible
 complexes is the counit of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
@@ -159,11 +135,6 @@ variable (j : X ⟶ Y) [IsOpenImmersion j.left]
 lemma boundedConstructibleOpenImmersionLowerShriek_obj_obj (K : Dᵇc(X.left)⟦Λ⟧) :
     ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).obj K).obj =
       (openImmersionLowerShriek Λ j.left).mapDerivedCategory.obj K.obj :=
-  rfl
-
-lemma boundedConstructibleOpenImmersionLowerShriek_map_hom {K L : Dᵇc(X.left)⟦Λ⟧} (φ : K ⟶ L) :
-    ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).map φ).hom =
-      (openImmersionLowerShriek Λ j.left).mapDerivedCategory.map φ.hom :=
   rfl
 
 /-- On the ambient derived category, the unit of `j_! ⊣ Lj^*` on bounded constructible complexes

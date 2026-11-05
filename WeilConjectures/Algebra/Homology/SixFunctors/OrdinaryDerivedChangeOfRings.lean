@@ -71,7 +71,6 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace ModuleCat
 
-
 -- A full, essentially surjective functor is initial: every comma object maps
 -- to a fixed lift of the target, giving a zigzag between any two objects.
 section LocalizationTensor
@@ -97,43 +96,5 @@ end UniversalPair
 end ModuleCat
 
 namespace ModuleCat
-
-/-- The ordinary-module universal pair, including its canonical tensor structure.
-Source: Stacks 06YY and 0A6A (blueprint: lem-pur-derived-change-of-rings).
-The tensor equation fixes the structure on resolving representatives, so the
-monoidal structure is not arbitrary extra data. -/
-structure OrdinaryDerivedChangeOfRings {R S : Type u} [CommRing R] [CommRing S]
-    (φ : R →+* S) where
-  F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} S)
-  counit : DerivedCategory.Q ⋙ F ⟶
-    (extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
-  universal : F.IsLeftDerivedFunctor counit
-    (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ))
-  pointwise : ((extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙
-    DerivedCategory.Q).HasPointwiseLeftDerivedFunctor
-      (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ))
-  computes : ∀ P : CochainComplex (ModuleCat.{u} R) ℤ,
-    (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat P →
-      IsIso (counit.app P)
-  triangulated : ∃ (_ : F.CommShift ℤ), F.IsTriangulated
-  [monoidal : F.Monoidal]
-  unit_normalized :
-    F.map (Functor.LaxMonoidal.ε DerivedCategory.Q) ≫
-        counit.app (𝟙_ (CochainComplex (ModuleCat.{u} R) ℤ)) ≫
-        DerivedCategory.Q.map (Functor.OplaxMonoidal.η
-          ((extendScalars φ).mapHomologicalComplex (.up ℤ))) =
-      Functor.OplaxMonoidal.η F ≫ Functor.LaxMonoidal.ε DerivedCategory.Q
-  tensor_normalized : ∀ (P Q : CochainComplex (ModuleCat.{u} R) ℤ),
-    (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat P →
-    (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat Q →
-    Functor.LaxMonoidal.μ F (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ≫
-        F.map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫ counit.app (P ⊗ Q) ≫
-        DerivedCategory.Q.map
-          (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
-            (extendScalars φ)).app P).app Q) =
-      (counit.app P ⊗ₘ counit.app Q) ≫
-        Functor.LaxMonoidal.μ DerivedCategory.Q
-          (((extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P)
-          (((extendScalars φ).mapHomologicalComplex (.up ℤ)).obj Q)
 
 end ModuleCat

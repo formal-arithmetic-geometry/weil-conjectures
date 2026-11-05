@@ -141,35 +141,4 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
   · obtain ⟨γ, hγ, hγU⟩ := hΓ g
     exact ⟨γ, hγ, Set.mem_iInter.1 hγU j⟩
 
-/-- **Curve testing for geometric irreducibility**
-(blueprint: `lem-zl-curve-testing-irreducibility`). Let `X₀` be a smooth geometrically connected
-affine scheme of dimension `d ≥ 1` over a finite field `k₀`, with geometric fiber `X`, let
-`𝒮₁, …, 𝒮ᵣ` be Weil sheaves on `X₀` whose geometric restrictions are irreducible local systems,
-and let `S` be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion
-`i : C ⟶ X` of a smooth connected affine curve over `k̄` through `S`, defined over a finite
-extension of `k₀` (stable under a power of the geometric Galois Frobenius of `X`), on which
-every `𝒮ⱼ` remains geometrically irreducible. -/
-theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k₀ : Type u}
-    [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X₀ : Scheme.{u}}
-    [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 1 ≤ d)
-    [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (X₀ ↘ Spec (CommRingCat.of k₀))] {r : ℕ}
-    (𝒮 : Fin r → WeilSheaf k₀ l X₀)
-    (h𝒮 : ∀ j, ProEtale.IsIrreducibleAdicLocalSystem (𝒮 j).obj.carrier)
-    (S : Finset
-      (Spec (.of (AlgebraicClosure k₀)) ⟶ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber))
-    (hS : S.Nonempty)
-    (hS' : ∀ s ∈ S, s ≫ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure = 𝟙 _) :
-    ∃ (C : Scheme.{u}) (i : C ⟶ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber),
-      IsClosedImmersion i ∧ IsAffine C ∧
-      SmoothOfRelativeDimension 1
-        (i ≫ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure) ∧
-      ConnectedSpace C ∧ (∀ s ∈ S, ∃ c, c ≫ i = s) ∧
-      (∀ j, ProEtale.IsIrreducibleAdicLocalSystem
-        ((i)^*ᵃ[l].obj (𝒮 j).obj.carrier)) ∧
-      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
-        φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom :=
-  Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperStar _ hd
-    (fun j ↦ (𝒮 j).obj.carrier) h𝒮 S hS hS'
-
 end AlgebraicGeometry

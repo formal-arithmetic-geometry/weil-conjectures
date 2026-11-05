@@ -50,14 +50,6 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 
 namespace WeilGroup
 
-/-- Blueprint `lem-tw-root-of-unity-modulus`: Modulus of a root of unity.
-
-A root of unity has weight `0` for every `ι` and every residue cardinality. -/
-theorem frobeniusWeight_eq_zero_of_pow_eq_one {E : Type*} [Field E] (ι : E →+* ℂ) (qx : ℕ)
-    {ζ : E} {n : ℕ} (hn : n ≠ 0) (hζ : ζ ^ n = 1) : frobeniusWeight ι qx ζ = 0 := by
-  rw [frobeniusWeight, norm_eq_one_of_pow_eq_one (by rw [← map_pow, hζ, map_one]) hn,
-    Real.log_one, mul_zero, zero_div]
-
 variable (W : WeilGroup p) {l : ℕ} [Fact l.Prime]
 
 section RankOne
@@ -267,26 +259,6 @@ theorem frobeniusWeight_eq_of_continuous (χ : W.carrier →* (PadicAlgCl l)ˣ)
   have hd' : (d : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hd
   field_simp
   exact mul_div_cancel_left₀ _ hd'
-
-/-- Blueprint `cor-wf-rank-one-punctual-purity-curve`: Punctual purity of a rank-one Weil
-character on a curve.
-
-The weight `2 log |ι (χ s)| / log q` does not depend on the choice of the element `s` of degree
-one: two such elements differ by an element of `π₁(C)`, on which `χ` takes root of unity
-values. -/
-theorem frobeniusWeight_eq_of_deg_eq_one (χ : W.carrier →* (PadicAlgCl l)ˣ)
-    (hχ : Continuous fun g : W.geometric ↦ (χ g : PadicAlgCl l)) (ι : PadicAlgCl l →+* ℂ)
-    {s : W.carrier} (hs : W.deg s = Multiplicative.ofAdd 1) :
-    frobeniusWeight ι (Nat.card K) (χ s) = frobeniusWeight ι (Nat.card K) (χ W.frobeniusLift) := by
-  obtain ⟨N, hN, hpow⟩ := W.exists_pow_eq_one_of_continuous χ hχ
-  have hg : s * W.frobeniusLift⁻¹ ∈ W.geometric := by
-    rw [MonoidHom.mem_ker, map_mul, map_inv, hs, W.deg_frobeniusLift, mul_inv_cancel]
-  have hs' : χ s = χ (⟨_, hg⟩ : W.geometric) * χ W.frobeniusLift := by
-    rw [Subgroup.coe_mk, map_mul, map_inv, inv_mul_cancel_right]
-  have hgn : ‖ι (χ (⟨_, hg⟩ : W.geometric))‖ = 1 := by
-    refine norm_eq_one_of_pow_eq_one ?_ hN.ne'
-    rw [← map_pow, ← Units.val_pow_eq_pow_val, hpow, Units.val_one, map_one]
-  rw [frobeniusWeight, frobeniusWeight, hs', Units.val_mul, map_mul, norm_mul, hgn, one_mul]
 
 end RankOne
 

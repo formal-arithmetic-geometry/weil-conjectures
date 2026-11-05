@@ -225,13 +225,6 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
 
-/-- The lower shriek of `P` attached to a compactification is the compactly supported direct
-image of the exchange formalism of `P`. -/
-lemma lowerShriekOfCompactification_eq_shriek (c : Compactification f.left) :
-    P.lowerShriekOfCompactification c =
-      (𝔽).shriek (SepFinType.homMk c.overI) (SepFinType.homMk c.overG) :=
-  rfl
-
 end Shriek
 
 end BoundedConstructiblePushforwardData

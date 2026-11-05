@@ -46,21 +46,4 @@ noncomputable def mapIhomObjIso (e : G.obj A ≅ A') (d : G.obj B ≅ B') :
       inv_hom_id := by
         rw [← NatTrans.comp_app, ← pre_map, e.inv_hom_id, pre_id, NatTrans.id_app] }
 
-lemma mapIhomObjIso_hom (e : G.obj A ≅ A') (d : G.obj B ≅ B') :
-    (mapIhomObjIso G e d).hom = (ihomComparison G A).natTrans.app B ≫
-      (ihom (G.obj A)).map d.hom ≫ (pre e.inv).app B' :=
-  rfl
-
-/-- The isomorphism `G [A, B] ≅ [A', B']` of `mapIhomObjIso` is compatible with evaluation:
-`G` of the evaluation `A ⊗ [A, B] ⟶ B`, after the tensorator and `d : G B ≅ B'`, is the evaluation
-`A' ⊗ [A', B'] ⟶ B'` after `e ⊗ mapIhomObjIso G e d`. -/
-lemma μ_comp_map_ev_comp_hom (e : G.obj A ≅ A') (d : G.obj B ≅ B') :
-    μ G A ((ihom A).obj B) ≫ G.map ((ihom.ev A).app B) ≫ d.hom =
-      (e.hom ⊗ₘ (mapIhomObjIso G e d).hom) ≫ (ihom.ev A').app B' := by
-  rw [mapIhomObjIso_hom, tensorHom_def, MonoidalCategory.whiskerLeft_comp,
-    MonoidalCategory.whiskerLeft_comp, Category.assoc, Category.assoc, Category.assoc,
-    id_tensor_pre_app_comp_ev, whisker_exchange_assoc, whisker_exchange_assoc,
-    ← comp_whiskerRight_assoc, e.hom_inv_id, id_whiskerRight, Category.id_comp,
-    ihom.ev_naturality, ihomComparison_ev_assoc]
-
 end CategoryTheory.Functor.LaxMonoidal

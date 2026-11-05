@@ -117,44 +117,6 @@ namespace TensorFunctorTransport
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D]
 
-/-- The associator is the existing equivalence-transport associator.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(blueprint: def-pd-section-derived-tensor-data). -/
-theorem associator_eq (e : C ≌ D) (X Y Z : D) :
-    @MonoidalCategoryStruct.associator _ _ (struct e) X Y Z =
-      @MonoidalCategoryStruct.associator _ _ (Monoidal.transportStruct e) X Y Z := by
-  rfl
-
-/-- The left unitor is the existing equivalence-transport unitor.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(blueprint: def-pd-section-derived-tensor-data). -/
-theorem leftUnitor_eq (e : C ≌ D) (X : D) :
-    @MonoidalCategoryStruct.leftUnitor _ _ (struct e) X =
-      @MonoidalCategoryStruct.leftUnitor _ _ (Monoidal.transportStruct e) X := by
-  rfl
-
-/-- The right unitor is the existing equivalence-transport unitor.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(blueprint: def-pd-section-derived-tensor-data). -/
-theorem rightUnitor_eq (e : C ≌ D) (X : D) :
-    @MonoidalCategoryStruct.rightUnitor _ _ (struct e) X =
-      @MonoidalCategoryStruct.rightUnitor _ _ (Monoidal.transportStruct e) X := by
-  rfl
-
-/-- The tensor functor of the shared full structure is the shared conjugate functor.
-Source: Stacks 06YU, fixed equivalence transport
-(blueprint: def-pd-section-derived-tensor-data). -/
-theorem tensor_eq (e : C ≌ D) :
-    @MonoidalCategory.tensor D _ (monoidal e) = tensorFunctor e := by
-  rfl
-
-private theorem monoidal_ext (m n : MonoidalCategory D)
-    (h : m.toMonoidalCategoryStruct = n.toMonoidalCategoryStruct) : m = n := by
-  cases m
-  cases n
-  cases h
-  rfl
-
 end TensorFunctorTransport
 end ResolvingOplaxConstraints
 
@@ -164,15 +126,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
-
-/-- The functor-level signed tensor is the same object-level signed direct-sum total.
-Source: Stacks 06YN (blueprint: def-pd-section-derived-tensor-data).
-Proof: unfold totalTensor and cochainTotalFunctor. Its object is exactly
-mapBifunctor with the up-integer total shape. -/
-theorem totalTensor_obj (X : Scheme.{u}) (P Q : CochainComplex (modules Λ X) ℤ) :
-    (totalTensor Λ X).obj (P, Q) =
-      CochainComplex.mapBifunctor P Q (curriedTensor (modules Λ X)) := by
-  rfl
 
 attribute [local instance] sectionFunctorAdditive sectionOrdinaryTensorMap_isIso
 

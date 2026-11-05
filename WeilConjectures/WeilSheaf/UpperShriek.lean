@@ -43,20 +43,6 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [IsProper g] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The proper exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the
-constructible adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper
-morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes
-has a right adjoint `Rg^!`. The general case
-`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` reduces to this one through a
-compactification.
-
-For `Y` separated over `k₀` this is
-`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar_of_isProper'`; the condensed model of
-`Dᵇc(-, ℚ̄_ℓ)` through which it is proved is only set up for separated schemes. -/
-theorem isLeftAdjoint_derivedLowerStar_of_isProper :
-    (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
-  sorry
-
 end Proper
 
 section UpperShriek
@@ -75,37 +61,6 @@ the exceptional inverse image `Rf^!` (`AlgebraicGeometry.WeilComplex.upperShriek
 always has one is `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. -/
 abbrev HasUpperShriek : Prop :=
   (derivedLowerShriek k₀ l f).IsLeftAdjoint
-
-omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
-/-- **The constructible exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the
-constructible adjunction `Rf_! ⊣ Rf^!`"; the exceptional inverse image itself is defined at the
-finite stage as `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`): for a
-separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes of finite type, the direct image
-with compact support `Rf₀!` of Weil complexes has a right adjoint. -/
-theorem isLeftAdjoint_derivedLowerShriek : HasUpperShriek k₀ l f := by
-  let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
-  let := Compactification.over (k₀ := k₀) c
-  have : IsLocallyNoetherian Y :=
-    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
-  have : CompactSpace Y :=
-    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
-  have : IsProper c.g := c.isProper
-  have : IsOpenImmersion c.i := c.isOpenImmersion
-  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
-  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
-  have : IsNoetherian c.Z := ⟨⟩
-  have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
-  have : QuasiCompact c.i := inferInstance
-  have e : derivedLowerShriek k₀ l f ≅ extensionByZero c.i ⋙ derivedLowerStar c.g :=
-    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ ((derivedLowerShriekCompιIso k₀ l c).app K))
-      (fun φ ↦ by
-        apply (WeilComplex.objectProperty k₀ l Y).ι.map_injective
-        exact (derivedLowerShriekCompιIso k₀ l c).hom.naturality φ)
-  have := isLeftAdjoint_derivedLowerStar_of_isProper (k₀ := k₀) (l := l) c.g
-  have : (extensionByZero (k₀ := k₀) (l := l) c.i).IsLeftAdjoint :=
-    (extensionByZeroUpperStarAdjunction c.i).isLeftAdjoint
-  exact Functor.isLeftAdjoint_of_iso e.symm
 
 variable [HasUpperShriek k₀ l f]
 

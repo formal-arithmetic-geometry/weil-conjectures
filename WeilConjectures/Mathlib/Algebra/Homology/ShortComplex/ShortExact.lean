@@ -87,51 +87,6 @@ noncomputable def pullbackMap {Y' : C} (ψ : Y' ⟶ Y) : S.pullback (ψ ≫ φ) 
     apply Limits.pullback.hom_ext <;> simp [ShortComplex.pullback]
   comm₂₃ := by simp [ShortComplex.pullback]
 
-/-- Two short exact sequences `S` and `S'` are isomorphic via an isomorphism `e : S.X₂ ≅ S'.X₂`
-of their middle terms, provided `S.f ≫ e.hom ≫ S'.g = 0` and `S'.f ≫ e.inv ≫ S.g = 0`. -/
-noncomputable def ShortExact.isoOfCompEqZero {S S' : ShortComplex C} (hS : S.ShortExact)
-    (hS' : S'.ShortExact) (e : S.X₂ ≅ S'.X₂) (h₁ : S.f ≫ e.hom ≫ S'.g = 0)
-    (h₂ : S'.f ≫ e.inv ≫ S.g = 0) :
-    S ≅ S' :=
-  have := hS.mono_f
-  have := hS.epi_g
-  have := hS'.mono_f
-  have := hS'.epi_g
-  { hom :=
-      { τ₁ := hS'.exact.lift (S.f ≫ e.hom) (by rw [Category.assoc, h₁])
-        τ₂ := e.hom
-        τ₃ := hS.exact.desc (e.hom ≫ S'.g) (by rw [← Category.assoc] at h₁ ⊢; exact h₁)
-        comm₁₂ := hS'.exact.lift_f _ _
-        comm₂₃ := (hS.exact.g_desc _ _).symm }
-    inv :=
-      { τ₁ := hS.exact.lift (S'.f ≫ e.inv) (by rw [Category.assoc, h₂])
-        τ₂ := e.inv
-        τ₃ := hS'.exact.desc (e.inv ≫ S.g) (by rw [← Category.assoc] at h₂ ⊢; exact h₂)
-        comm₁₂ := hS.exact.lift_f _ _
-        comm₂₃ := (hS'.exact.g_desc _ _).symm }
-    hom_inv_id := by
-      ext
-      · rw [← cancel_mono S.f]
-        simp [ShortComplex.Exact.lift_f]
-      · simp
-      · rw [← cancel_epi S.g]
-        simp [reassoc_of% (hS.exact.g_desc _ _), ShortComplex.Exact.g_desc]
-    inv_hom_id := by
-      ext
-      · rw [← cancel_mono S'.f]
-        simp [ShortComplex.Exact.lift_f]
-      · simp
-      · rw [← cancel_epi S'.g]
-        simp [reassoc_of% (hS'.exact.g_desc _ _), ShortComplex.Exact.g_desc] }
-
-/-- The middle component of `ShortExact.isoOfCompEqZero` is the given isomorphism. -/
-@[simp]
-lemma ShortExact.isoOfCompEqZero_hom_τ₂ {S S' : ShortComplex C} (hS : S.ShortExact)
-    (hS' : S'.ShortExact) (e : S.X₂ ≅ S'.X₂) (h₁ : S.f ≫ e.hom ≫ S'.g = 0)
-    (h₂ : S'.f ≫ e.inv ≫ S.g = 0) :
-    (hS.isoOfCompEqZero hS' e h₁ h₂).hom.τ₂ = e.hom :=
-  rfl
-
 /-- Let `φ : S₁ ⟶ S₂` be a morphism of short complexes such that `S₁.g` is an epimorphism and
 `S₂` is exact with `S₂.g` an epimorphism. If `φ.τ₁` and `φ.τ₂` are isomorphisms, then so is
 `φ.τ₃`:

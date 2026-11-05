@@ -55,29 +55,6 @@ lemma geometricGaloisFrobenius_hom_comp_componentMap :
   have : Algebra.IsAlgebraic k₀ k' := Algebra.IsAlgebraic.of_finite k₀ k'
   Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberComponentMap _ _ hc r hr
 
-/-- The commutation `θ^* ⋙ Fr'^* ≅ (Frʳ)^* ⋙ θ^*` of the pullback along the component map with
-the Frobenius pullbacks (in the pushforward convention `Fr^* = (Fr⁻¹)_*` of the Weil sheaves). -/
-def componentRestrictionCommIso :
-    (componentMap hc)^*ᵃ[l] ⋙ WeilSheaf.frobeniusPullback k' l V ≅
-      frobeniusPowPullback k₀ l V r ⋙ (componentMap hc)^*ᵃ[l] :=
-  Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l
-      (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius).symm ≪≫
-    (adicUpperStarComp l _ _).symm ≪≫
-    adicUpperStarCongr l (geometricGaloisFrobenius_hom_comp_componentMap hc r hr) ≪≫
-    adicUpperStarComp l _ _ ≪≫
-    Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l
-      ((V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r)) _
-
-/-- **Restriction to a component**: a pro-étale Weil sheaf `(K, φ)` on `V` relative to `k₀`
-gives the pro-étale Weil sheaf `(θ^* K, θ^* φ_r)` on `V` relative to `k'`. -/
-def componentRestriction : ProEtaleWeilSheaf k₀ l V ⥤ ProEtaleWeilSheaf k' l V :=
-  powFunctor k₀ l V r ⋙ IsoAlgebra.mapOfNatIso (componentRestrictionCommIso hc r hr)
-
-@[simp]
-lemma componentRestriction_obj_carrier (K : ProEtaleWeilSheaf k₀ l V) :
-    ((componentRestriction hc r hr).obj K).carrier = (componentMap hc)^*ᵃ[l].obj K.carrier :=
-  rfl
-
 end ProEtaleWeilSheaf
 
 namespace WeilSheaf
@@ -88,17 +65,6 @@ variable {k₀ k' : Type u} [Field k₀] [Field k'] [Finite k₀] [Finite k'] [A
   (hc : (V ↘ Spec (CommRingCat.of k')) ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k')) =
     V ↘ Spec (CommRingCat.of k₀))
   (r : ℕ) (hr : Nat.card k' = Nat.card k₀ ^ r)
-
-/-- Restriction to a component, on Weil sheaves: the pullback of a constructible sheaf is
-constructible. -/
-def componentRestriction : WeilSheaf k₀ l V ⥤ WeilSheaf k' l V :=
-  ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ ProEtaleWeilSheaf.componentRestriction hc r hr)
-    fun G ↦ G.property.upperStar _
-
-/-- Restriction to a component preserves lissity. -/
-theorem IsLisse.componentRestriction {G : WeilSheaf k₀ l V} (hG : G.IsLisse) :
-    ((componentRestriction hc r hr).obj G).IsLisse :=
-  hG.upperStar _
 
 end WeilSheaf
 

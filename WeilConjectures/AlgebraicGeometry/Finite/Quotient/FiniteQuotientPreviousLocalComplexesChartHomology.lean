@@ -91,29 +91,6 @@ attribute [local irreducible] HasDerivedCategory.standard completedAdicChangeDat
       inv.val.app U := (ModuleCat.restrictScalarsId'App _ rfl (N.val.obj U)).inv
       inv.val.naturality i := by ext m; rfl }) (by intro M N f; ext U x; rfl)
 
-private theorem restrictionIsEquivalence (X : Scheme.{t})
-    {R S : Sheaf (ProEt.topology X) RingCat.{t + 1}} (e : R ≅ S) :
-    (SheafOfModules.restrictScalars.{t + 1} e.hom).IsEquivalence := by
-  apply Functor.IsEquivalence.mk' (SheafOfModules.restrictScalars e.inv)
-  · exact (restrictionIdIso X S).symm ≪≫
-      eqToIso (congrArg (SheafOfModules.restrictScalars.{t + 1}) e.inv_hom_id.symm) ≪≫
-      restrictionCompIso X e.inv e.hom
-  · exact (restrictionCompIso X e.hom e.inv).symm ≪≫
-      eqToIso (congrArg (SheafOfModules.restrictScalars.{t + 1}) e.hom_inv_id) ≪≫
-      restrictionIdIso X R
-
-private theorem changeIsEquivalence (X : Scheme.{t})
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}
-    (φ : R ⟶ S) [IsIso φ] : (completedAdicChange X φ).IsEquivalence := by
-  let G := SheafOfModules.restrictScalars.{t + 1}
-    ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ)
-  have : G.IsEquivalence := restrictionIsEquivalence X
-    ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).mapIso (asIso φ))
-  let a := (completedAdjunction X φ).choose
-  exact a.isEquivalence_left_of_isEquivalence_right
-
 @[irreducible] private def derivedChangeComplexIso (X : Scheme.{t})
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}
     (φ : R ⟶ S) [IsIso φ]
@@ -140,27 +117,6 @@ private theorem changeIsEquivalence (X : Scheme.{t})
     Functor.leftDerivedNatIso L F.mapDerivedCategory ε F.mapDerivedCategoryFactorsh.hom
       (HomotopyCategory.quasiIso _ (.up ℤ)) (Iso.refl _)
   exact i.app _ ≪≫ F.mapDerivedCategoryFactors.app K
-
-private abbrev baseConstantFunctor (X : Scheme.{t}) (B : Type t) [CommRing B] :=
-  ModuleCat.uliftFunctor.{t + 1, t} B ⋙
-    ModuleCat.restrictScalars.{t + 1}
-      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom ⋙ koszulConstantFunctor X B
-
-private theorem baseConstantExact (X : Scheme.{t}) (B : Type t) [CommRing B] :
-    (baseConstantFunctor X B).Additive ∧
-      PreservesFiniteLimits (baseConstantFunctor X B) ∧
-      PreservesFiniteColimits (baseConstantFunctor X B) := by
-  have h := commutativeSiteConstantModuleFunctor_exact
-    (ProEt.topology X) (ULift.{t + 1} B)
-  have : (koszulConstantFunctor X B).Additive := h.1
-  have : PreservesFiniteLimits (koszulConstantFunctor X B) := h.2.1
-  have : PreservesFiniteColimits (koszulConstantFunctor X B) := h.2.2
-  have : PreservesFiniteLimits (baseConstantFunctor X B) := comp_preservesFiniteLimits _ _
-  have : PreservesFiniteColimits (baseConstantFunctor X B) := comp_preservesFiniteColimits _ _
-  refine ⟨?_, inferInstance, inferInstance⟩
-  apply leftExactFunctor_le_additiveFunctor _ _
-  rw [leftExactFunctor_iff]
-  infer_instance
 
 @[irreducible] private def constantRestrictionIso (X : Scheme.{t})
     {B D : Type t} [CommRing B] [CommRing D] (f : B →+* D) (M : ModuleCat.{t} D) :
@@ -325,116 +281,5 @@ private theorem baseConstantExact (X : Scheme.{t}) (B : Type t) [CommRing B] :
     (DerivedCategory.homologyFunctorFactors _ q).app _ ≪≫
     ((finiteModelConstantComplex X B P).sc q).mapHomologyIso (completedAdicChange X φ) ≪≫
     (completedAdicChange X φ).mapIso ((P.sc q).mapHomologyIso (baseConstantFunctor X B))
-
-private abbrev restrictedObject (X : Scheme.{t})
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (ψ : R ⟶ S)
-    (K : DerivedCategory (SheafOfModules.{t + 1}
-      ((sheafCompose (ProEt.topology X)
-        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S))) :=
-  let F := SheafOfModules.restrictScalars.{t + 1}
-    ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map ψ)
-  DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj
-    (DerivedCategory.Q.objPreimage K))
-
-private theorem chartHomology (X : Scheme.{t})
-    {B D : Type t} [CommRing B] [CommRing D]
-    [(koszulConstantFunctor X D).PreservesZeroMorphisms]
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}
-    (φB : adicConstantRing X B ⟶ R) (φD : adicConstantRing X D ⟶ S)
-    [IsIso φB] [IsIso φD] (f : B →+* D) (ψ : R ⟶ S)
-    (h : adicConstantMap X f ≫ φD = φB ≫ ψ)
-    (K : DerivedCategory (SheafOfModules.{t + 1}
-      ((sheafCompose (ProEt.topology X)
-        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S)))
-    (P : CochainComplex (ModuleCat.{t} D) ℤ) (U : X.ProEt)
-    (e : Nonempty
-      (ringedSiteDerivedRestrictionOfUniverses _ U K ≅
-        ringedSiteDerivedRestrictionOfUniverses _ U
-          ((completedAdicDerivedChange X φD).obj
-            (DerivedCategory.Q.obj (finiteModelConstantComplex X D P)))))
-    (q : ℤ) :
-    Nonempty
-      ((SheafOfModules.overFunctor _ U).obj
-          ((DerivedCategory.homologyFunctor _ q).obj (restrictedObject X ψ K)) ≅
-        (SheafOfModules.overFunctor _ U).obj
-          ((finiteCoefficientConstantFunctor X B φB).obj
-            ((((ModuleCat.restrictScalars f).mapHomologicalComplex (.up ℤ)).obj P).homology
-              q))) := by
-  let H := sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})
-  let L := (completedAdicDerivedChange X φD).obj
-    (DerivedCategory.Q.obj (finiteModelConstantComplex X D P))
-  let α := H.map ψ
-  let F := SheafOfModules.restrictScalars.{t + 1} α
-  let O := SheafOfModules.overFunctor.{t + 1} (H.obj S) U
-  let O' := SheafOfModules.overFunctor.{t + 1} (H.obj R) U
-  let FU := SheafOfModules.restrictScalars.{t + 1}
-    (((ProEt.topology X).overPullback RingCat.{t + 1} U).map α)
-  obtain ⟨hlim, hcolim, _⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction ψ
-  have : PreservesFiniteLimits F := hlim
-  have : PreservesFiniteColimits F := hcolim
-  let eH : O.obj ((DerivedCategory.homologyFunctor _ q).obj K) ≅
-      O.obj ((finiteCoefficientConstantFunctor X D φD).obj (P.homology q)) :=
-    (sliceHomologyIso X _ U K q).symm ≪≫
-      (DerivedCategory.homologyFunctor _ q).mapIso e.some ≪≫
-      sliceHomologyIso X _ U L q ≪≫ O.mapIso (modelHomologyIso X D φD P q)
-  let ePrevious : (DerivedCategory.homologyFunctor _ q).obj (restrictedObject X ψ K) ≅
-      F.obj ((DerivedCategory.homologyFunctor _ q).obj K) :=
-    representativeHomologyIso F (DerivedCategory.Q.objPreimage K) q ≪≫
-      F.mapIso ((DerivedCategory.homologyFunctor _ q).mapIso
-        (DerivedCategory.Q.objObjPreimageIso K))
-  exact ⟨O'.mapIso ePrevious ≪≫ FU.mapIso eH ≪≫
-    O'.mapIso (coefficientRestrictionIso X φB φD f ψ h (P.homology q)) ≪≫
-    O'.mapIso ((finiteCoefficientConstantFunctor X B φB).mapIso
-      ((P.sc q).mapHomologyIso (ModuleCat.restrictScalars f)).symm)⟩
-
-/-- Transport the supplied chart comparison to homology after restriction of scalars.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
-The quotient map from `A ⧸ I^(n+2)` to `A ⧸ I^(n+1)` is exact on modules,
-slice restriction, and constant realization. Applying the derived homology
-functor to the supplied comparison and composing the coefficient compatibility
-isomorphisms gives the displayed isomorphism in every degree.
-(blueprint: lem-weil-pbc-finite-quotient-previous-local-complexes-chart-homology).
--/
-theorem finiteQuotient_previous_local_complexes_chart_homology
-    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
-    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
-    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n)
-    (hφ : ∀ n : ℕ, IsIso (φ n))
-    (hcompat : FinitePerfectModelsCompatible X d φ)
-    (M : DerivedCategory (CompletedAdicModules X d))
-    (V : X.Etale) (W Z : X.Etale) (g : W ⟶ V) (f : Z ⟶ W)
-    (a b : ℤ) (hab : a ≤ b) (n : ℕ)
-    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ℤ)
-    (e : Nonempty
-      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)
-          ((toProEt X).obj Z) ((completedAdicQuotientReduction X d n).obj M) ≅
-        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)
-          ((toProEt X).obj Z) ((completedAdicDerivedChange X (φ n)).obj
-            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))) :
-    let qring : A ⧸ d.ideal ^ (n + 1 + 1) →+* A ⧸ d.ideal ^ (n + 1) :=
-      Ideal.Quotient.factorPowSucc d.ideal (n + 1)
-    let Q := ((ModuleCat.restrictScalars qring).mapHomologicalComplex (.up ℤ)).obj P
-    ∀ q : ℤ, Nonempty
-      ((SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj
-          ((DerivedCategory.homologyFunctor _ q).obj
-            (finiteQuotientPreviousObject X d M n)) ≅
-        (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj
-          ((finiteCoefficientConstantFunctor X
-            (A ⧸ d.ideal ^ (n + 1 + 1)) (φ (n + 1))).obj (Q.homology q))) := by
-  let _ := g
-  let _ := f
-  let _ := hab
-  have : IsIso (φ n) := hφ n
-  have : IsIso (φ (n + 1)) := hφ (n + 1)
-  exact chartHomology X (φ (n + 1)) (φ n)
-    (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
-    (completedAdicQuotientCommMap X d (n + 1) n (Nat.le_succ n))
-    (hcompat.1 n) ((completedAdicQuotientReduction X d n).obj M) P
-    ((toProEt X).obj Z) e
 
 end AlgebraicGeometry.Scheme

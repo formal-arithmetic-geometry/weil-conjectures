@@ -128,46 +128,6 @@ instance isIso_upperStarRestrictScalars : IsIso (upperStarRestrictScalars φ g).
       (lowerStarCompCoextendScalarsIso φ g).inv) := inferInstance
   exact this
 
-/-- **Pullback commutes with restriction of scalars**: the isomorphism
-`g^*(res G) ≅ res(g^* G)` given by the comparison
-`AlgebraicGeometry.Etale.upperStarRestrictScalars`. -/
-noncomputable def upperStarRestrictScalarsIso :
-    Sheaf.restrictScalars Y.smallEtaleTopology φ ⋙ (g)^*[ModuleCat.{u + 1} Λ] ≅
-      (g)^*[ModuleCat.{u + 1} Λ'] ⋙ Sheaf.restrictScalars Z.smallEtaleTopology φ :=
-  asIso (upperStarRestrictScalars φ g).natTrans
-
-/-- `AlgebraicGeometry.Etale.upperStarRestrictScalarsIso` is conjugate, along the adjunctions
-`res ⊣ coext` and `g^* ⊣ g_*`, to the identity of `g_* ∘ coext = coext ∘ g_*`. -/
-lemma conjugateEquiv_upperStarRestrictScalarsIso_hom :
-    conjugateEquiv
-      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g).comp
-        (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ))
-      ((Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ).comp
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g))
-      (upperStarRestrictScalarsIso φ g).hom = 𝟙 _ := by
-  have h := iterated_mateEquiv_conjugateEquiv_symm
-    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g)
-    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
-    (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ)
-    (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ)
-    (TwoSquare.mk _ _ _ _ (lowerStarCompCoextendScalarsIso φ g).inv)
-  rw [mateEquiv_symm_lowerStarCompCoextendScalarsIso] at h
-  change conjugateEquiv _ _ (upperStarRestrictScalars φ g).natTrans = _
-  rw [upperStarRestrictScalars, h]
-  exact (conjugateEquiv _ _).apply_symm_apply (lowerStarCompCoextendScalarsIso φ g).inv
-
-/-- The componentwise form of
-`AlgebraicGeometry.Etale.conjugateEquiv_upperStarRestrictScalarsIso_hom`. -/
-lemma conjugateEquiv_upperStarRestrictScalarsIso_hom_app
-    (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    (conjugateEquiv
-      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g).comp
-        (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ))
-      ((Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ).comp
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g))
-      (upperStarRestrictScalarsIso φ g).hom).app F = 𝟙 _ :=
-  NatTrans.congr_app (conjugateEquiv_upperStarRestrictScalarsIso_hom φ g) F
-
 end Pullback
 
 section BaseChangeMap

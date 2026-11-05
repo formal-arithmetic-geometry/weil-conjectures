@@ -466,16 +466,6 @@ section
 variable {D : Type*} [Category D] [Preadditive D] (F : C ⥤ D) [F.PreservesZeroMorphisms]
   [PreservesColimit (Discrete.functor (fun j => (K.X (κ.φ₁ j)).X (κ.φ₂ j))) F]
 
-def map :
-    CoreHasTotal ((F.mapHomologicalComplex₂ c₁ c₂).obj K) c n where
-  J := κ.J
-  φ₁ := κ.φ₁
-  φ₂ := κ.φ₂
-  π_φ := κ.π_φ
-  hφ := κ.hφ
-  isZero i₁ i₂ h h' := κ.isZero i₁ i₂ h (fun h'' => h' (F.map_isZero h''))
-  hasCoproduct' := ⟨_, isColimitOfHasCoproductOfPreservesColimit F _⟩
-
 include κ in
 lemma preserves : PreservesColimit (Discrete.functor
     (K.toGradedObject.mapObjFun (ComplexShape.π c₁ c₂ c) n)) F := by
@@ -911,29 +901,6 @@ lemma preservesTotal_of_isStrictlyLE
   (K.coreHasTotalOfIsStrictlyLE x₀ y₀ n).preserves F
 
 end
-
-lemma hasTotal_of_isStrictlyGE_of_isStrictlyLE (K : HomologicalComplex₂ C (up ℤ) (up ℤ))
-    (x₀ x₁ : ℤ)
-    [CochainComplex.IsStrictlyGE K x₀] [CochainComplex.IsStrictlyLE K x₁] :
-    K.HasTotal (up ℤ) := fun n => by
-  obtain ⟨M, hM⟩ : ∃ (M : ℕ), x₀ + M > x₁ := by
-    by_cases h : x₁ < x₀
-    · exact ⟨0, by omega⟩
-    · simp only [not_lt] at h
-      obtain ⟨k, rfl⟩ := Int.le.dest h
-      exact ⟨k + 1, by omega⟩
-  apply hasCoproduct_of_isZero (J := Fin M) (ι := fun ⟨k, _⟩ => ⟨⟨x₀ + k, n - x₀ - k⟩, by simp⟩)
-  · rintro ⟨k, hk⟩ ⟨k', hk'⟩
-    simp
-  · rintro ⟨⟨x, y⟩, hxy : x + y = n⟩ h
-    by_cases hx : x₀ ≤ x
-    · obtain ⟨k, hk⟩ := Int.le.dest hx
-      refine (HomologicalComplex.eval _ _ y).map_isZero
-        (CochainComplex.isZero_of_isStrictlyLE K x₁ x ?_)
-      by_contra!
-      exact h ⟨⟨k, by omega⟩, by simp only [Subtype.mk.injEq, Prod.mk.injEq]; omega⟩
-    · exact (HomologicalComplex.eval _ _ y).map_isZero
-        (CochainComplex.isZero_of_isStrictlyGE K x₀ x (by simpa using hx))
 
 set_option backward.defeqAttrib.useBackward true in
 lemma total.quasiIso_map_of_finitely_many_columns {K L : HomologicalComplex₂ C (up ℤ) (up ℤ)}

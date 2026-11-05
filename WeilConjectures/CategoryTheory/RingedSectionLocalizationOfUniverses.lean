@@ -192,11 +192,6 @@ variable {P : Cᵒᵖ ⥤ CommRingCat.{u}} {A : Sheaf J AddCommGrpCat.{u}}
 variable (η : (P ⋙ forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat) ⟶ A.obj)
 variable [Presheaf.IsLocallyInjective J η] [Presheaf.IsLocallySurjective J η]
 
-private lemma ext {X : Cᵒᵖ} {x y : A.obj.obj X} (S : Sieve X.unop) (hS : S ∈ J X.unop)
-    (h : ∀ ⦃Y : C⦄ (g : Y ⟶ X.unop), S g → A.obj.map g.op x = A.obj.map g.op y) :
-    x = y :=
-  A.isSeparated _ _ hS x y (fun _ g hg ↦ h g hg)
-
 variable [HasSheafify J AddCommGrpCat.{u}]
 variable [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
 

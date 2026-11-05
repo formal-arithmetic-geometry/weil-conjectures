@@ -105,20 +105,6 @@ lemma toModuleCat_map_comp_globalSectionsTransport_id (F : WeilSheaf k₀ l X)
     (ProEtale.globalSectionsTransport_id_naturality _ hsq
       ((ProEtale.AdicSheaf.forget _).map P.arrow))
 
-omit [Finite L] [Fact (ringChar L ≠ l)] in
-/-- The comparison of stalks along `Θ ≫ s = s' ≫ j`, for the identity of the underlying sheaf
-`j^* F̄`, in terms of the algebra `AlgebraicGeometry.WeilSheaf.powIsoAlgebra`. -/
-lemma globalSectionsTransport_id_powIsoAlgebra (F : WeilSheaf k₀ l X)
-    {s' : Spec (.of (AlgebraicClosure L)) ⟶ (Y ↘ Spec (CommRingCat.of L)).geometricFiber}
-    {s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    {Θ : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure k₀))}
-    (hsq : Θ ≫ s = s' ≫ j) :
-    ProEtale.globalSectionsTransport _ hsq
-        (𝟙 ((j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X)) =
-      ProEtale.globalSectionsTransport _ hsq
-        (𝟙 ((j)^*[WeilCoefficients.{u} l].obj F.obj.carrier.X)) :=
-  rfl
-
 /-- The comparison of stalks `F_s ⟶ (j^* F̄)_{s'}` along `Θ ≫ s = s' ≫ j`, `Θ` an isomorphism,
 carries the stalk `P_s` of a subsheaf `P` defined over `L` onto the image of the stalk of its
 pullback. -/

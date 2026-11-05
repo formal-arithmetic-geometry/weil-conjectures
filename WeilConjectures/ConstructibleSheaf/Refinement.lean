@@ -86,17 +86,6 @@ theorem IsFiniteLocallyConstantSheaf.upperStar_of_range_subset (h : Set.range a 
         (Etale.upperStarComp A (pullback.fst a b) a).app F)
   exact IsFiniteLocallyConstantSheaf.of_upperStar (pullback.fst a b) _
 
-/-- **Independence of the scheme structure**: for immersions `a`, `b` with the same image,
-`a^* F` is finite locally constant if and only if `b^* F` is.
-(blueprint: `lemma-constructible-immersion-independence`) -/
-theorem isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq [IsImmersion a]
-    (h : Set.range a = Set.range b)
-    (F : Sheaf X.smallEtaleTopology A) :
-    IsFiniteLocallyConstantSheaf ((Etale.upperStar A a).obj F) ↔
-      IsFiniteLocallyConstantSheaf ((Etale.upperStar A b).obj F) :=
-  ⟨fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar_of_range_subset b a h.ge F,
-    fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar_of_range_subset a b h.le F⟩
-
 end Independence
 
 section Refines
@@ -124,13 +113,6 @@ theorem Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar {T S : Str
     ?_ F
   rw [T.range_immersion, S.range_immersion]
   exact hk
-
-/-- A sheaf is constructible with respect to a refinement of a witnessing stratification. -/
-theorem IsConstructibleSheaf.of_refines {T S : Stratification X} (hTS : T.Refines S)
-    (F : Sheaf X.smallEtaleTopology A)
-    (hS : ∀ k, IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion k)).obj F)) :
-    IsConstructibleSheaf F :=
-  ⟨T, hTS.isFiniteLocallyConstantSheaf_upperStar F hS⟩
 
 end Refines
 
@@ -177,11 +159,6 @@ lemma Stratification.inter_refines_left : (S.inter T).Refines S :=
 /-- The common refinement refines the second stratification. -/
 lemma Stratification.inter_refines_right : (S.inter T).Refines T :=
   fun k ↦ ⟨(finProdFinEquiv.symm k).2, Set.inter_subset_right⟩
-
-/-- **Two stratifications have a common refinement.**
-(blueprint: `lemma:constructible-common-refinement`) -/
-lemma Stratification.exists_refines : ∃ R : Stratification X, R.Refines S ∧ R.Refines T :=
-  ⟨S.inter T, S.inter_refines_left T, S.inter_refines_right T⟩
 
 end Inter
 

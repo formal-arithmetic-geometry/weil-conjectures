@@ -53,10 +53,6 @@ lemma cokernel_π_cokernelPowTransition (n : ℕ) :
 noncomputable def cokernelPowTower : ℕᵒᵖ ⥤ C :=
   Functor.ofOpSequence (X := fun n ↦ cokernel (((ℓ ^ n : ℕ) : ℤ) • 𝟙 A)) (cokernelPowTransition A ℓ)
 
-lemma cokernelPowTower_obj (n : ℕ) :
-    (cokernelPowTower A ℓ).obj (Opposite.op n) = cokernel (((ℓ ^ n : ℕ) : ℤ) • 𝟙 A) :=
-  rfl
-
 @[simp]
 lemma cokernelPowTower_map_succ (n : ℕ) :
     (cokernelPowTower A ℓ).map (homOfLE (n.le_add_right 1)).op = cokernelPowTransition A ℓ n :=

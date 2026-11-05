@@ -107,20 +107,4 @@ noncomputable def isLimitPadicIntSheafCone : IsLimit (padicIntSheafCone X l) := 
     isLimitOfReflects (forget RingCat.{u + 1})
       (nonempty_isLimit_mapCone_padicIntSheafCone X l U).some)
 
-/-- The inclusion `ℤ_ℓ,X → ℚ̄_ℓ,X` of the integral functions into the constant `ℓ`-adic sheaf
-`AlgebraicGeometry.ProEtale.adicConstantSheaf` underlying `ℓ`-adic sheaves, as a morphism of
-abelian sheaves: the map along which an integral lattice `lim_n Fₙ` of a lisse sheaf is to be
-rationalised. -/
-noncomputable def integralToAdicConstantSheaf :
-    (sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-        (padicIntSheaf X l) ⟶
-      (sheafCompose (ProEt.topology X) (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1})).obj
-        (adicConstantSheaf l X) :=
-  ObjectProperty.homMk
-    { app U := AddCommGrpCat.ofHom
-        { toFun x := ULift.up (PadicAlgCl.integralToLocallyFiniteFunctions l U.unop.left x.down)
-          map_zero' := congrArg ULift.up (map_zero _)
-          map_add' x y := congrArg ULift.up (map_add _ x.down y.down) }
-      naturality _ _ _ := rfl }
-
 end AlgebraicGeometry.ProEtale

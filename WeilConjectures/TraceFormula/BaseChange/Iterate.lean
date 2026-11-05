@@ -158,10 +158,6 @@ noncomputable def weilHomologyComparisonOfHom (g : X ⟶ X) :
       (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ g).symm _ ≪≫
     Functor.associator _ _ _
 
-lemma weilHomologyComparison_eq (e : X ≅ X) :
-    weilHomologyComparison ℓ e n = weilHomologyComparisonOfHom ℓ n e.hom :=
-  rfl
-
 lemma weilHomologyComparisonOfHom_hom_app (g : X ⟶ X)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (weilHomologyComparisonOfHom ℓ n g).hom.app K =

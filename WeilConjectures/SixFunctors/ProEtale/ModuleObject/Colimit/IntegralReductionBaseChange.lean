@@ -86,15 +86,6 @@ private lemma fullSubcategory_eqToHom_hom {C : Type*} [Category C] {P : ObjectPr
   subst h
   rfl
 
-/-- The restricted reduction modulo `ℓⁿ` is the derived extension of scalars on morphisms. -/
-private lemma boundedConstructibleIntegersModPowReduction_map_hom (Z : Scheme.{u})
-    [TopologicalSpace.NoetherianSpace Z]
-    {K L : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Z)}
-    (φ : K ⟶ L) :
-    ((boundedConstructibleIntegersModPowReduction Z ℓ E n).map φ).hom =
-      (Mod.extendScalars (integersModPowReduction Z ℓ E n)).leftDerivedFunctor.map φ.hom :=
-  rfl
-
 set_option hygiene false in
 /-- Proves the cube condition `boundedConstructibleUpperStarIntegersModPowReductionIso_cube` for
 the square `sq` at the object `M` (in the context of this file): the restrictions to the ambient
@@ -120,28 +111,6 @@ local macro "integersModPowReduction_cube_tac" : tactic => `(tactic| (
     boundedConstructibleUpperStarComp_hom_app_hom, Category.assoc]
   unfold integersModPowReductionUpperStarIso
   exact H))
-
-/-- **The reduction modulo `ℓⁿ` is compatible with the pullback square comparisons**: for a
-commutative square `g' ≫ f = f' ≫ g`, the two composites
-`Lf'^* Lg^* red M ⟶ red Lg'^* Lf^* M` built from the pullback comparisons of the reduction and
-the pullback square comparisons agree. This is the cube condition of
-`CategoryTheory.mateEquiv_app_cube`. -/
-lemma boundedConstructibleUpperStarIntegersModPowReductionIso_cube (sq : CommSq g' f' f g)
-    (M : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    (boundedConstructibleUpperStar (Profinite.integersModPowRingObj ℓ E n) ℓ f').map
-        ((boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n g).inv.app M) ≫
-      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f').inv.app
-        ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ g).obj M) ≫
-      (boundedConstructibleIntegersModPowReduction X'.left ℓ E n).map
-        ((boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
-          sq).hom.app M) =
-    (boundedConstructiblePullbackSquareComparison (Profinite.integersModPowRingObj ℓ E n) ℓ
-        sq).hom.app ((boundedConstructibleIntegersModPowReduction Y.left ℓ E n).obj M) ≫
-      (boundedConstructibleUpperStar (Profinite.integersModPowRingObj ℓ E n) ℓ g').map
-        ((boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f).inv.app M) ≫
-      (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n g').inv.app
-        ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f).obj M) := by
-  integersModPowReduction_cube_tac
 
 /-- **The reduction modulo `ℓⁿ` carries the base change morphism to the base change morphism**:
 for a commutative square `g' ≫ f = f' ≫ g` and `K ∈ Dᵇc(X)⟦𝒪_E⟧`,

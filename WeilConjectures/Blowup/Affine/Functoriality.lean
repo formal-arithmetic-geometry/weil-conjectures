@@ -79,18 +79,8 @@ lemma reesGrading.hom_reesMonomial (φ : A →+* B) (h : I.map φ = J) {n : ℕ}
         (by rw [← h, ← Ideal.map_pow]; exact Ideal.mem_map_of_mem φ ha) :=
   Subtype.ext <| by simp [Polynomial.map_monomial]
 
-@[simp]
-lemma reesGrading.hom_reesX (φ : A →+* B) (h : I.map φ = J) (a : A) (ha : a ∈ I) :
-    reesGrading.hom φ h (reesX I a ha) =
-      reesX J (φ a) (by rw [← h]; exact Ideal.mem_map_of_mem φ ha) :=
-  reesGrading.hom_reesMonomial φ h a (by rwa [pow_one])
-
 lemma reesGrading.hom_id : reesGrading.hom (RingHom.id A) (Ideal.map_id I) = .id (reesGrading I) :=
   GradedRingHom.ext fun F => Subtype.ext <| by simp
-
-lemma reesGrading.hom_congr {φ φ' : A →+* B} (e : φ = φ') (h : I.map φ = J) :
-    reesGrading.hom φ h = reesGrading.hom φ' (e ▸ h) := by
-  subst e; rfl
 
 lemma reesGrading.hom_comp (φ : A →+* B) (ψ : B →+* C) (h : I.map φ = J) (h' : J.map ψ = K) :
     (reesGrading.hom ψ h').comp (reesGrading.hom φ h) =

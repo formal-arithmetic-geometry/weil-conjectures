@@ -56,16 +56,6 @@ variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u})
 
-/-- For a morphism `q : Λ_X ⟶ M` out of the unit, the natural transformation `K ⟶ K ⊗ᴸ M`:
-the inverse of the right unitor `K ⊗ᴸ Λ_X ≅ K` followed by `K ⊗ᴸ q`. -/
-noncomputable def derivedTensorRightUnitorInvComp
-    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (q : 𝟙_ _ ⟶ M) :
-    𝟭 _ ⟶ (derivedTensor A X).flip.obj M where
-  app K := (derivedTensorRightUnitor A X K).inv ≫ ((derivedTensor A X).obj K).map q
-  naturality K L f := by
-    change f ≫ (ρ_ L).inv ≫ L ◁ q = ((ρ_ K).inv ≫ K ◁ q) ≫ f ▷ M
-    rw [rightUnitor_inv_naturality_assoc, Category.assoc, whisker_exchange]
-
 end General
 
 section UnitComparison
@@ -202,35 +192,6 @@ lemma leftDerivedUpperStarSingleConstantSheafIso_hom_naturality (g : X ⟶ Y) {M
     ← (upperStarConstantSheafIso A g).hom.naturality φ]
   rfl
 
-/-- For a morphism `φ : 𝟙 ⟶ M` in `A`, the derived pullback of the induced map `𝟙 ⟶ M_Y` of
-constant complexes is, under `Lg^* M_Y ≅ M_X` and the unit comparison `Lg^* 𝟙 ≅ 𝟙`, the induced
-map `𝟙 ⟶ M_X`. -/
-lemma leftDerivedUpperStar_map_comp_leftDerivedUpperStarSingleConstantSheafIso_hom
-    (g : X ⟶ Y) {M : A} (φ : 𝟙_ A ⟶ M) :
-    (L((g)^*[A])).map ((singleFunctorObjUnitIso A Y).inv ≫
-        (DerivedCategory.singleFunctor _ 0).map ((constantSheaf Y.smallEtaleTopology A).map φ)) ≫
-        (leftDerivedUpperStarSingleConstantSheafIso A g M).hom =
-      (leftDerivedUpperStarUnitIso A g).hom ≫ (singleFunctorObjUnitIso A X).inv ≫
-        (DerivedCategory.singleFunctor _ 0).map ((constantSheaf X.smallEtaleTopology A).map φ) := by
-  rw [Functor.map_comp, Category.assoc, leftDerivedUpperStarSingleConstantSheafIso_hom_naturality,
-    reassoc_of% leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp]
-
-variable (X) in
-/-- For a morphism `φ : 𝟙 ⟶ M` in `A`, the induced map `𝟙 ⟶ M_X` of constant complexes: the
-identification of the unit of `D(X_ét)` with the unit sheaf in degree zero followed by the map of
-constant sheaves. -/
-noncomputable def unitToConstantSingle {M : A} (φ : 𝟙_ A ⟶ M) :
-    𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) ⟶ constantSingle A X M :=
-  (singleFunctorObjUnitIso A X).inv ≫
-    (DerivedCategory.singleFunctor _ 0).map ((constantSheaf X.smallEtaleTopology A).map φ)
-
-/-- The derived pullback of `AlgebraicGeometry.Etale.unitToConstantSingle`. -/
-lemma leftDerivedUpperStar_map_unitToConstantSingle (g : X ⟶ Y) {M : A} (φ : 𝟙_ A ⟶ M) :
-    (L((g)^*[A])).map (unitToConstantSingle A Y φ) ≫
-        (leftDerivedUpperStarSingleConstantSheafIso A g M).hom =
-      (leftDerivedUpperStarUnitIso A g).hom ≫ unitToConstantSingle A X φ :=
-  leftDerivedUpperStar_map_comp_leftDerivedUpperStarSingleConstantSheafIso_hom A g φ
-
 end UnitComparison
 
 section ProjectionMap
@@ -247,28 +208,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
   {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
 
-/-- **Right unitality of the projection map** `Ra_! K ⊗ᴸ M ⟶ Ra_!(K ⊗ᴸ La^* M)` at `M = 𝟙`:
-followed by `Ra_!(K ⊗ᴸ La^* 𝟙 ≅ K ⊗ᴸ 𝟙 ≅ K)` it is the right unitor. -/
-lemma projectionMap_rightUnitality (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((projectionMap A a).app K).app (𝟙_ _) ≫ (R(a)_![A]).map
-        (K ◁ (leftDerivedUpperStarUnitIso A a).hom ≫ (ρ_ K).hom) =
-      (ρ_ ((R(a)_![A]).obj K)).hom := by
-  rw [projectionMap_app_app_eq, rightDerivedLowerShriek_map_eq]
-  exact compactificationProjectionMap_rightUnitality A (HasCompactification.compactification a) K
-
-/-- The inverse of the projection map at `M = 𝟙` is the inverse of the right unitor followed by
-`Ra_!(K ≅ K ⊗ᴸ 𝟙 ≅ K ⊗ᴸ La^* 𝟙)`. -/
-lemma rightDerivedLowerShriek_map_rightUnitor_inv_comp_inv_projectionMap
-    [IsIso (projectionMap A a)] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (R(a)_![A]).map ((ρ_ K).inv ≫ K ◁ (leftDerivedUpperStarUnitIso A a).inv) ≫
-      inv (((projectionMap A a).app K).app (𝟙_ _)) = (ρ_ ((R(a)_![A]).obj K)).inv := by
-  have e : (K ◁ (leftDerivedUpperStarUnitIso A a).hom ≫ (ρ_ K).hom) ≫
-      ((ρ_ K).inv ≫ K ◁ (leftDerivedUpperStarUnitIso A a).inv) = 𝟙 _ := by
-    simp
-  rw [IsIso.comp_inv_eq, Iso.eq_inv_comp, ← projectionMap_rightUnitality A a K,
-    Category.assoc, ← Functor.map_comp, e]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
-
 /-- Naturality of the inverse of the projection map in its second variable. -/
 @[reassoc]
 lemma rightDerivedLowerShriek_map_whiskerLeft_comp_inv_projectionMap [IsIso (projectionMap A a)]
@@ -278,57 +217,6 @@ lemma rightDerivedLowerShriek_map_whiskerLeft_comp_inv_projectionMap [IsIso (pro
       inv (((projectionMap A a).app K).app (𝟙_ _)) ≫ (R(a)_![A]).obj K ◁ q := by
   rw [IsIso.comp_inv_eq, Category.assoc, IsIso.eq_inv_comp]
   exact (projectionMap_naturality_right A a K q).symm
-
-/-- The adjoint form of
-`AlgebraicGeometry.Etale.rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft`. -/
-lemma rightDerivedLowerShriek_map_rightUnitor_inv_comp_whiskerLeft [IsIso (projectionMap
-    (ModuleCat.{u + 1} Λ) a)]
- {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (q : 𝟙_ _ ⟶ M) (q' : 𝟙_ _ ⟶ M') (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj M ≅ M')
-    (h : (L((a)^*[ModuleCat.{u + 1} Λ])).map q ≫ e.hom = (leftDerivedUpperStarUnitIso (ModuleCat.{u
-        + 1} Λ) a).hom ≫ q')
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (R(a)_![ModuleCat.{u + 1} Λ]).map (((ρ_ ((R(a)^![Λ]).obj K)).inv ≫ (R(a)^![Λ]).obj K ◁ q') ≫
-        (R(a)^![Λ]).obj K ◁ e.inv) ≫
-      inv (((projectionMap (ModuleCat.{u + 1} Λ) a).app ((R(a)^![Λ]).obj K)).app M) ≫
-        (rightDerivedUpperShriekAdjunction Λ a).counit.app K ▷ M =
-    (rightDerivedUpperShriekAdjunction Λ a).counit.app K ≫ (ρ_ K).inv ≫ K ◁ q := by
-  set B := (R(a)^![Λ]).obj K
-  have h' : q' ≫ e.inv = (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) a).inv ≫
-      (L((a)^*[ModuleCat.{u + 1} Λ])).map q := by
-    rw [Iso.comp_inv_eq, Category.assoc, h, Iso.inv_hom_id_assoc]
-  rw [Category.assoc, ← whiskerLeft_comp, h', whiskerLeft_comp, ← Category.assoc
-    ((ρ_ B).inv), Functor.map_comp, Category.assoc,
-    reassoc_of% (rightDerivedLowerShriek_map_whiskerLeft_comp_inv_projectionMap (ModuleCat.{u + 1}
-        Λ) a B q),
-    reassoc_of% (rightDerivedLowerShriek_map_rightUnitor_inv_comp_inv_projectionMap (ModuleCat.{u +
-        1} Λ) a B),
-    whisker_exchange]
-  exact (rightUnitor_inv_naturality_assoc _ _).symm
-
-/-- Let `q : 𝟙 ⟶ M` on `Y` and `q' : 𝟙 ⟶ M'` on `X` be compatible under an identification
-`e : La^* M ≅ M'` and the unit comparison `La^* 𝟙 ≅ 𝟙`. Then the map
-`Ra^! K ⟶ Ra^! K ⊗ᴸ M'` induced by `q'`, followed by `e⁻¹` and the comparison
-`Ra^! K ⊗ᴸ La^* M ⟶ Ra^!(K ⊗ᴸ M)` (adjoint to the inverse of the projection map followed by the
-counit), is `Ra^!` of the map `K ⟶ K ⊗ᴸ M` induced by `q`. -/
-lemma rightDerivedUpperShriek_map_rightUnitor_inv_comp_whiskerLeft [IsIso (projectionMap
-    (ModuleCat.{u + 1} Λ) a)]
- {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (q : 𝟙_ _ ⟶ M) (q' : 𝟙_ _ ⟶ M') (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj M ≅ M')
-    (h : (L((a)^*[ModuleCat.{u + 1} Λ])).map q ≫ e.hom = (leftDerivedUpperStarUnitIso (ModuleCat.{u
-        + 1} Λ) a).hom ≫ q')
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((ρ_ ((R(a)^![Λ]).obj K)).inv ≫ (R(a)^![Λ]).obj K ◁ q') ≫ (R(a)^![Λ]).obj K ◁ e.inv ≫
-      (rightDerivedUpperShriekAdjunction Λ a).homEquiv _ _
-        (inv (((projectionMap (ModuleCat.{u + 1} Λ) a).app ((R(a)^![Λ]).obj K)).app M) ≫
-          (rightDerivedUpperShriekAdjunction Λ a).counit.app K ▷ M) =
-    (R(a)^![Λ]).map ((ρ_ K).inv ≫ K ◁ q) := by
-  apply ((rightDerivedUpperShriekAdjunction Λ a).homEquiv _ _).symm.injective
-  rw [← Category.assoc, ← Adjunction.homEquiv_naturality_left, Equiv.symm_apply_apply,
-    Adjunction.homEquiv_counit, Adjunction.counit_naturality]
-  exact rightDerivedLowerShriek_map_rightUnitor_inv_comp_whiskerLeft Λ a q q' e h K
 
 end ProjectionMap
 

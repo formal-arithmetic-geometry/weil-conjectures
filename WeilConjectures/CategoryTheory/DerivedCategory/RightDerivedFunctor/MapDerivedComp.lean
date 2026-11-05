@@ -209,65 +209,6 @@ variable {C₁ C₂ C₃ V : Type*} [Category C₁] [Category C₂] [Category C�
   [L₁₂.PreservesKInjectiveComplexes]
   {Γ₁ : C₁ ⥤ V} {Γ₂ : C₂ ⥤ V} {Γ₃ : C₃ ⥤ V} [Γ₁.Additive] [Γ₂.Additive] [Γ₃.Additive]
 
-/-- **Composition of the isomorphisms `RΓ₁ ≅ D(L) ⋙ RΓ₂`.** Given compatible isomorphisms
-`γ₁ : L₁ ⋙ Γ₂ ≅ Γ₁`, `γ₂ : L₂ ⋙ Γ₃ ≅ Γ₂` and `γ₁₂ : L₁₂ ⋙ Γ₃ ≅ Γ₁`, with `ε : L₁ ⋙ L₂ ≅ L₁₂`,
-the isomorphism `RΓ₁ ≅ D(L₁₂) ⋙ RΓ₃` of `γ₁₂` is the composite of those of `γ₁` and `γ₂`,
-up to `D(L₁₂) ≅ D(L₁) ⋙ D(L₂)`. -/
-lemma rightDerivedFunctorIsoMapDerivedCategoryComp_hom_app_comp (γ₁ : L₁ ⋙ Γ₂ ≅ Γ₁)
-    (γ₂ : L₂ ⋙ Γ₃ ≅ Γ₂) (γ₁₂ : L₁₂ ⋙ Γ₃ ≅ Γ₁) (ε : L₁ ⋙ L₂ ≅ L₁₂)
-    (h : ∀ X, γ₁₂.hom.app X = Γ₃.map (ε.inv.app X) ≫ γ₂.hom.app (L₁.obj X) ≫ γ₁.hom.app X)
-    (K : DerivedCategory C₁) :
-    (rightDerivedFunctorIsoMapDerivedCategoryComp γ₁).hom.app K ≫
-        (rightDerivedFunctorIsoMapDerivedCategoryComp γ₂).hom.app (L₁.mapDerivedCategory.obj K) =
-      (rightDerivedFunctorIsoMapDerivedCategoryComp γ₁₂).hom.app K ≫
-        Γ₃.rightDerivedFunctor.map ((mapDerivedCategoryNatIso ε.symm).hom.app K ≫
-          (mapDerivedCategoryCompIso L₁ L₂).hom.app K) := by
-  suffices H : (rightDerivedFunctorIsoMapDerivedCategoryComp γ₁).hom ≫
-      whiskerLeft L₁.mapDerivedCategory (rightDerivedFunctorIsoMapDerivedCategoryComp γ₂).hom =
-      (rightDerivedFunctorIsoMapDerivedCategoryComp γ₁₂).hom ≫
-        whiskerRight ((mapDerivedCategoryNatIso ε.symm).hom ≫
-          (mapDerivedCategoryCompIso L₁ L₂).hom) Γ₃.rightDerivedFunctor from congr_app H K
-  refine rightDerived_ext Γ₁.rightDerivedFunctor Γ₁.rightDerivedFunctorUnit
-    (HomotopyCategory.quasiIso C₁ (ComplexShape.up ℤ)) _ _ _ ?_
-  ext X
-  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
-  rw [rightDerivedFunctorIsoMapDerivedCategoryComp_hom_fac_assoc,
-    rightDerivedFunctorIsoMapDerivedCategoryComp_hom_fac_assoc,
-    mapDerivedCategoryCompRightDerivedFunctorUnit_app,
-    mapDerivedCategoryCompRightDerivedFunctorUnit_app]
-  simp only [Category.assoc]
-  erw [(rightDerivedFunctorIsoMapDerivedCategoryComp γ₂).hom.naturality]
-  rw [rightDerivedFunctorIsoMapDerivedCategoryComp_hom_fac_assoc γ₂,
-    mapDerivedCategoryCompRightDerivedFunctorUnit_app]
-  simp only [Category.assoc, Functor.comp_map, ← Functor.map_comp]
-  rw [mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryNatIso_hom_app_assoc,
-    mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_hom_app]
-  simp only [Functor.map_comp]
-  erw [← Γ₃.rightDerivedFunctorUnit.naturality_assoc,
-    ← Γ₃.rightDerivedFunctorUnit.naturality_assoc]
-  simp only [Functor.comp_map, ← DerivedCategory.Qh.map_comp_assoc]
-  congr 2
-  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
-  have c₁ : (mapHomotopyCategoryCompIso (Iso.refl (L₁ ⋙ Γ₂)) (ComplexShape.up ℤ)).inv.app
-      ((HomotopyCategory.quotient C₁ (ComplexShape.up ℤ)).obj K) = 𝟙 _ := rfl
-  have c₂ : (mapHomotopyCategoryCompIso (Iso.refl (L₂ ⋙ Γ₃)) (ComplexShape.up ℤ)).inv.app
-      ((L₁.mapHomotopyCategory (ComplexShape.up ℤ)).obj
-        ((HomotopyCategory.quotient C₁ (ComplexShape.up ℤ)).obj K)) = 𝟙 _ := rfl
-  have c₃ : (mapHomotopyCategoryCompIso (Iso.refl (L₁₂ ⋙ Γ₃)) (ComplexShape.up ℤ)).inv.app
-      ((HomotopyCategory.quotient C₁ (ComplexShape.up ℤ)).obj K) = 𝟙 _ := rfl
-  have c₄ : (mapHomotopyCategoryCompIso (Iso.refl (L₁ ⋙ L₂)) (ComplexShape.up ℤ)).inv.app
-      ((HomotopyCategory.quotient C₁ (ComplexShape.up ℤ)).obj K) = 𝟙 _ := rfl
-  erw [c₁, c₂, c₃, c₄, Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id,
-    Category.comp_id, NatTrans.mapHomotopyCategory_app, NatTrans.mapHomotopyCategory_app,
-    NatTrans.mapHomotopyCategory_app, NatTrans.mapHomotopyCategory_app,
-    Functor.mapHomotopyCategory_map, ← Functor.map_comp, ← Functor.map_comp]
-  congr 1
-  ext n
-  change γ₁.inv.app (K.X n) ≫ γ₂.inv.app (L₁.obj (K.X n)) =
-    γ₁₂.inv.app (K.X n) ≫ Γ₃.map (ε.inv.app (K.X n))
-  rw [← cancel_epi (γ₁₂.hom.app _), Iso.hom_inv_id_app_assoc, h]
-  simp
-
 end Comp
 
 end CategoryTheory.Functor

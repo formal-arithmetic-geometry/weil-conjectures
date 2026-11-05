@@ -211,17 +211,6 @@ lemma isIso_sigmaDesc_of_existsUnique {M : Type (u + 1)} [Finite M]
   have : IsIso Φ := isIso_of_reflects_iso Φ (fiber s)
   exact inferInstanceAs (IsIso ((ObjectProperty.ι _ ⋙ Etale.forget Y ⋙ Over.forget Y).map Φ))
 
-/-- Blueprint `rem-ptr-galois-object-2`: Pointer to the properties of [def-galois-object].
-
-The Galois covers of `Y` — the connected finite étale `P ⟶ Y` on whose geometric fibre `P_s`
-the automorphism group `Aut_Y(P)` acts simply transitively — are exactly the Galois objects of
-the Galois category of finite étale `Y`-schemes. -/
-theorem isGalois_iff (P : Y.FiniteEtale) :
-    IsGalois P ↔ IsConnected P ∧
-      ∀ x : (fiber s).obj P, Function.Bijective fun σ : Aut P ↦ (fiber s).map σ.hom x := by
-  refine ⟨fun _ ↦ ⟨inferInstance, evaluation_aut_bijective_of_isGalois (fiber s) P⟩,
-    fun ⟨_, h⟩ ↦ (isGalois_iff_pretransitive (fiber s) P).mpr ⟨fun x y ↦ (h x).2 y⟩⟩
-
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 

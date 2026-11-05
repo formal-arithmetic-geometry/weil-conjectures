@@ -139,14 +139,6 @@ theorem Hom.degreeOver_ne_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
   have : Finite (X.residueField x) := X.mem_finitePoints.mp hx
   exact Module.finrank_pos.ne'
 
-/-- The degree of a point with infinite residue field is `0` (by junk convention). -/
-theorem Hom.degreeOver_eq_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
-    (hx : x ∉ X.finitePoints) : f.degreeOver x = 0 := by
-  let := (f.residueFieldAlgebraMap x).toAlgebra
-  have h : ¬ Module.Finite k (X.residueField x) := fun _ ↦
-    hx (X.mem_finitePoints.mpr (Module.finite_of_finite k))
-  exact Module.finrank_of_not_finite h
-
 /-- Ring homomorphisms from a finitely generated ring into a finite ring form a finite
 type. -/
 private lemma finite_ringHom {A B : Type u} [CommRing A] [CommRing B] [Finite B]
@@ -491,29 +483,5 @@ theorem Hom.finsum_fieldPoints_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
           nat_card_fieldPointFiber f hn, if_pos (Finset.mem_filter.mp q.2).2]
     _ = ∑ x ∈ T', f.degreeOver x.1 • g x :=
         Finset.sum_coe_sort T' (fun x : X.finitePoints ↦ f.degreeOver x.1 • g x)
-
-/-- On a scheme locally of finite type over a finite field, the points with finite residue field
-are the closed points (`AlgebraicGeometry.Scheme.finitePoints_eq_closedPoints`). -/
-theorem Hom.finitePoints_eq_closedPoints [Finite k] (f : X.Hom (Spec (.of k)))
-    [LocallyOfFiniteType f] : X.finitePoints = closedPoints X := by
-  let g : ULift.{u} ℤ →+* k := (Int.castRingHom k).comp ULift.ringEquiv.toRingHom
-  have hg : g.FiniteType := by
-    have h₁ : (algebraMap ℤ k).FiniteType :=
-      (RingHom.finite_algebraMap.2 Module.Finite.of_finite).finiteType
-    exact h₁.comp (RingHom.FiniteType.of_surjective _ ULift.ringEquiv.surjective)
-  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom g)) := by
-    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
-    exact hg
-  exact Scheme.finitePoints_eq_closedPoints X (f ≫ Spec.map (CommRingCat.ofHom g))
-
-/-- A nonempty quasi-compact scheme locally of finite type over a finite field has a point
-with finite residue field: it has a closed point, and closed points of such a scheme have
-finite residue fields (`AlgebraicGeometry.Scheme.Hom.finitePoints_eq_closedPoints`). -/
-theorem Hom.exists_mem_finitePoints [Finite k] (f : X.Hom (Spec (.of k)))
-    [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X] : ∃ x, x ∈ X.finitePoints := by
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
-  obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := X) Set.univ_nonempty
-  rw [f.finitePoints_eq_closedPoints]
-  exact ⟨x, hx⟩
 
 end AlgebraicGeometry.Scheme

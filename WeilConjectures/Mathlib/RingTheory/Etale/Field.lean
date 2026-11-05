@@ -125,19 +125,6 @@ end Algebra.Etale
 
 namespace Algebra.Etale
 
-/-- A finite algebra `A` over a field `K` is étale if and only if `Ω[A⁄K] = 0`.
-
-Part of blueprint `lem-sc-finite-etale-algebra-criterion`. A finite `K`-algebra is of finite
-presentation, and over a field formally unramified algebras of finite type are formally
-étale. -/
-theorem iff_subsingleton_kaehlerDifferential_of_field {K A : Type*} [Field K] [CommRing A]
-    [Algebra K A] [Module.Finite K A] :
-    Algebra.Etale K A ↔ Subsingleton Ω[A⁄K] := by
-  refine ⟨fun _ ↦ inferInstance, fun h ↦ ?_⟩
-  have : Algebra.FormallyUnramified K A := ⟨h⟩
-  exact ⟨.of_formallyUnramified_of_field K A,
-    FinitePresentation.of_finiteType.mp inferInstance⟩
-
 /-- A finite separable field extension is étale. -/
 theorem of_finite_of_isSeparable {K L : Type*} [Field K] [Field L] [Algebra K L]
     [Module.Finite K L] [Algebra.IsSeparable K L] : Algebra.Etale K L :=

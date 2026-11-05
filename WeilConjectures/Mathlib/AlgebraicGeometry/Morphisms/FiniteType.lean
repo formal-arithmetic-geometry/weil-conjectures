@@ -176,18 +176,6 @@ theorem IsAffineOpen.topologicalKrullDim_ne_top {K : Type u} [Field K] {X : Sche
   rw [this, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
   exact ringKrullDim_ne_top_of_finiteType K _
 
-/-- An integral scheme locally of finite type over a field has finite dimension: the dimension of
-any nonempty affine open subscheme, the spectrum of a finitely generated algebra. -/
-theorem topologicalKrullDim_ne_top {K : Type u} [Field K] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [IsIntegral X] :
-    topologicalKrullDim X ≠ ⊤ := by
-  obtain ⟨x⟩ := (inferInstance : Nonempty X)
-  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
-    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
-  have : Nonempty U := ⟨⟨x, hxU⟩⟩
-  rw [← topologicalKrullDim_opens_eq f U]
-  exact hU.topologicalKrullDim_ne_top f
-
 /-- A quasi-compact scheme locally of finite type over a field has finite dimension: it is
 covered by finitely many affine open subschemes, each of finite dimension. -/
 theorem topologicalKrullDim_ne_top_of_compactSpace {K : Type u} [Field K] {X : Scheme.{u}}

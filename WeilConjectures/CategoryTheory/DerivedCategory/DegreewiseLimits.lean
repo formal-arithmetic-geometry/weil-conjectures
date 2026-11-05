@@ -147,15 +147,6 @@ instance [HasLimitsOfShape J C] [HasExactLimitsOfShape J C] (i : ι) :
     PreservesLimitsOfShape J (homologyFunctor C c i) :=
   preservesLimitsOfShape_of_natIso (homologyFunctorIso C c i).symm
 
-/-- Homology commutes with coproducts when coproducts are exact: if `s` is a coproduct of
-a family `K` of homological complexes, then `Hⁱ(s.pt)` is the coproduct of the `Hⁱ(K j)`. -/
-noncomputable def isColimitCofanHomology {β : Type*} [HasColimitsOfShape (Discrete β) C]
-    [HasExactColimitsOfShape (Discrete β) C] {K : β → HomologicalComplex C c} {s : Cofan K}
-    (hs : IsColimit s) (i : ι) :
-    IsColimit (Cofan.mk (s.pt.homology i) fun j ↦ homologyMap (s.inj j) i) :=
-  isColimitCofanMkObjOfIsColimit (homologyFunctor C c i) K s.inj
-    (hs.ofIsoColimit (Cofan.ext (Iso.refl _) (by simp)))
-
 /-- Homology commutes with products when products are exact: if `s` is a product of
 a family `K` of homological complexes, then `Hⁱ(s.pt)` is the product of the `Hⁱ(K j)`. -/
 noncomputable def isLimitFanHomology {β : Type*} [HasLimitsOfShape (Discrete β) C]
@@ -171,58 +162,7 @@ namespace CategoryTheory.Limits
 
 variable {C : Type*} [Category* C] [HasZeroMorphisms C] {β : Type*} {X : β → C}
 
-/-- If at most one of the objects `X j` is nonzero, a coproduct `s` of the `X j` is also
-a product, with projections any retractions `p j` of the coprojections. -/
-noncomputable def Cofan.IsColimit.isLimitFanMk {s : Cofan X} (hs : IsColimit s)
-    (hX : ∀ i j, ¬ IsZero (X i) → ¬ IsZero (X j) → i = j) (p : ∀ j, s.pt ⟶ X j)
-    (hp : ∀ j, s.inj j ≫ p j = 𝟙 _) : IsLimit (Fan.mk s.pt p) := by
-  by_cases h : ∃ j, ¬ IsZero (X j)
-  · let j₀ := h.choose
-    have hj₀ : ¬ IsZero (X j₀) := h.choose_spec
-    have hX' (j : β) (hj : j ≠ j₀) : IsZero (X j) := by
-      by_contra h
-      exact hj (hX _ _ h hj₀)
-    have hp₀ : p j₀ ≫ s.inj j₀ = 𝟙 _ := Cofan.IsColimit.hom_ext hs _ _ fun j ↦ by
-      by_cases hj : j = j₀
-      · subst hj
-        simp [reassoc_of% (hp j₀)]
-      · exact (hX' j hj).eq_of_src _ _
-    refine Fan.IsLimit.mk _ (fun t ↦ t.proj j₀ ≫ s.inj j₀) (fun t j ↦ ?_) (fun t m hm ↦ ?_)
-    · by_cases hj : j = j₀
-      · subst hj
-        simp [hp]
-      · exact (hX' j hj).eq_of_tgt _ _
-    · rw [← hm j₀]
-      simp [hp₀]
-  · simp only [not_exists, not_not] at h
-    have hpt : IsZero s.pt := (IsZero.iff_id_eq_zero _).2
-      (Cofan.IsColimit.hom_ext hs _ _ fun j ↦ (h j).eq_of_src _ _)
-    exact Fan.IsLimit.mk _ (fun _ ↦ 0) (fun _ j ↦ (h j).eq_of_tgt _ _)
-      (fun _ _ _ ↦ hpt.eq_of_tgt _ _)
-
 variable [DecidableEq β]
-
-/-- The projection from a coproduct onto one of its summands, which is the identity on this
-summand and zero on the other summands. -/
-noncomputable def Cofan.IsColimit.proj {s : Cofan X} (hs : IsColimit s) (j : β) : s.pt ⟶ X j :=
-  Cofan.IsColimit.desc hs fun i ↦ if h : i = j then eqToHom (by rw [h]) else 0
-
-@[reassoc (attr := simp)]
-lemma Cofan.IsColimit.inj_proj_self {s : Cofan X} (hs : IsColimit s) (j : β) :
-    s.inj j ≫ proj hs j = 𝟙 _ := by
-  simp [proj]
-
-@[reassoc]
-lemma Cofan.IsColimit.inj_proj_of_ne {s : Cofan X} (hs : IsColimit s) {i j : β} (h : i ≠ j) :
-    s.inj i ≫ proj hs j = 0 := by
-  simp [proj, h]
-
-/-- If at most one of the objects `X j` is nonzero, a coproduct `s` of the `X j` is also
-a product, with projections `Cofan.IsColimit.proj hs`. -/
-noncomputable def Cofan.IsColimit.isLimitFanMkProj {s : Cofan X} (hs : IsColimit s)
-    (hX : ∀ i j, ¬ IsZero (X i) → ¬ IsZero (X j) → i = j) :
-    IsLimit (Fan.mk s.pt (proj hs)) :=
-  isLimitFanMk hs hX _ (inj_proj_self hs)
 
 end CategoryTheory.Limits
 
@@ -231,49 +171,11 @@ namespace HomologicalComplex
 variable {C : Type*} [Category* C] [HasZeroMorphisms C] {ι : Type*} {c : ComplexShape ι}
   {β : Type*} {K : β → HomologicalComplex C c}
 
-/-- If in each degree at most one of the complexes `K j` is nonzero, a coproduct `s` of the
-`K j` is also a product, with projections any retractions `p j` of the coprojections. -/
-noncomputable def isLimitFanMkOfIsColimit
-    [∀ i, PreservesColimit (Discrete.functor K) (eval C c i)]
-    (hK : ∀ (i : ι) (j j' : β), ¬ IsZero ((K j).X i) → ¬ IsZero ((K j').X i) → j = j')
-    {s : Cofan K} (hs : IsColimit s) (p : ∀ j, s.pt ⟶ K j) (hp : ∀ j, s.inj j ≫ p j = 𝟙 _) :
-    IsLimit (Fan.mk s.pt p) :=
-  isLimitOfEval _ _ fun i ↦ (isLimitMapConeFanMkEquiv (eval C c i) K p).symm
-    (Cofan.IsColimit.isLimitFanMk (isColimitCofanMkX hs i) (hK i) _
-      (fun j ↦ by simpa using congr_hom (hp j) i))
-
-/-- If in each degree at most one of the complexes `K j` is nonzero, a coproduct `s` of the
-`K j` is also a product, with projections `Cofan.IsColimit.proj hs`. -/
-noncomputable def isLimitFanMkProjOfIsColimit [DecidableEq β]
-    [∀ i, PreservesColimit (Discrete.functor K) (eval C c i)]
-    (hK : ∀ (i : ι) (j j' : β), ¬ IsZero ((K j).X i) → ¬ IsZero ((K j').X i) → j = j')
-    {s : Cofan K} (hs : IsColimit s) :
-    IsLimit (Fan.mk s.pt (Cofan.IsColimit.proj hs)) :=
-  isLimitFanMkOfIsColimit hK hs _ (Cofan.IsColimit.inj_proj_self hs)
-
 end HomologicalComplex
 
 namespace CochainComplex
 
 variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C]
-
-/-- In each degree, at most one of the complexes `F[0]⟦n⟧` for `n : ℕ` is nonzero. -/
-lemma eq_of_not_isZero_singleFunctor_obj_shift_X (F : C) (d : ℤ) (m n : ℕ)
-    (hm : ¬ IsZero (((singleFunctor C 0).obj F)⟦(m : ℤ)⟧.X d))
-    (hn : ¬ IsZero (((singleFunctor C 0).obj F)⟦(n : ℤ)⟧.X d)) : m = n := by
-  have h (k : ℕ) (hk : ¬ IsZero (((singleFunctor C 0).obj F)⟦(k : ℤ)⟧.X d)) : d + k = 0 := by
-    by_contra h
-    exact hk (HomologicalComplex.isZero_single_obj_X (.up ℤ) _ _ _ h)
-  have := h m hm
-  have := h n hn
-  omega
-
-/-- The coproduct of the complexes `F[0]⟦n⟧` for `n : ℕ` is also their product. -/
-noncomputable def isLimitFanMkProjSingleFunctorObjShift (F : C)
-    {s : Cofan fun n : ℕ ↦ ((singleFunctor C 0).obj F)⟦(n : ℤ)⟧} (hs : IsColimit s) :
-    IsLimit (Fan.mk s.pt (Cofan.IsColimit.proj hs)) :=
-  HomologicalComplex.isLimitFanMkProjOfIsColimit
-    (fun d m n ↦ eq_of_not_isZero_singleFunctor_obj_shift_X F d m n) hs
 
 end CochainComplex
 

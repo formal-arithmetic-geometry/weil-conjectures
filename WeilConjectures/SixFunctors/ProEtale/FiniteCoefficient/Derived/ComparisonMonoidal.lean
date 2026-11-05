@@ -60,17 +60,4 @@ noncomputable def derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
     Functor.isoWhiskerLeft D(ν^*(X)[A]) ((ProEtale.derivedTensor A X).mapIso
       ((ν^*(X)[A]).leftDerivedFunctorIsoMapDerivedCategory.app K))
 
-/-- The **projection formula for the comparison morphism**:
-`RHom(K, Rν_* N) ≅ Rν_* RHom(ν^* K, N)`, naturally in `N : D(X_proét)`. The two sides are right
-adjoint to `G ↦ ν^*(K ⊗ᴸ G)` and to `G ↦ ν^*K ⊗ᴸ ν^*G`, which agree because `ν^*` is strong
-monoidal. -/
-noncomputable def rightDerivedComparisonLowerStarCompDerivedHomIso [(ν^*(X)[A]).PreservesFlat]
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    R(ν_*(X)[A]) ⋙ (Etale.derivedHom A X).obj (Opposite.op K) ≅
-      (ProEtale.derivedHom A X).obj (Opposite.op (D(ν^*(X)[A]).obj K)) ⋙ R(ν_*(X)[A]) :=
-  ((Etale.derivedTensorHomAdjunction A K).comp (derivedComparisonAdjunction A X)).rightAdjointUniq
-    (((derivedComparisonAdjunction A X).comp
-      (ProEtale.derivedTensorHomAdjunction A (D(ν^*(X)[A]).obj K))).ofNatIsoLeft
-        (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso A K).symm)
-
 end AlgebraicGeometry.ProEtale

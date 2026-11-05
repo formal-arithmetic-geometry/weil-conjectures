@@ -65,13 +65,6 @@ theorem cohomologyMap_cohomologyMap_eq_zero_iff (f : X ⟶ Y) (g : Y ⟶ Z) (k :
   exact Ext.mk₀_comp_mapExactFunctor_comp_eq_zero_iff _ _ _
     (upperStarComp AddCommGrpCat.{u + 1} f g) _ _ _ x
 
-/-- A class dies after pulling back along `f` as soon as it dies after pulling back along a
-morphism `g` through which `f` factors. -/
-lemma cohomologyMap_eq_zero_of_fac (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (hk : f ≫ g = k)
-    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (x : Sheaf.H F 1)
-    (hx : cohomologyMap g F 1 x = 0) : cohomologyMap k F 1 x = 0 := by
-  rw [← cohomologyMap_cohomologyMap_eq_zero_iff f g k hk, hx, map_zero]
-
 /-- Pulling back along `g` and then along `f` kills a class exactly when pulling back along
 `f ≫ g` does, in every degree. -/
 theorem cohomologyMap_cohomologyMap_eq_zero_iff' (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)

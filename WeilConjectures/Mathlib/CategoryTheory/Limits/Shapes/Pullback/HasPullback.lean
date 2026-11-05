@@ -102,52 +102,6 @@ section MapOverBaseIso
 
 variable [HasPullbacks C] (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
 
-/-- The fibre product `X₁ ×_S X₂` is the fibre product over `B = Y₁ ×_S Y₂` of the base changes
-`X₁ ×_{Y₁} B ⟶ B` and `X₂ ×_{Y₂} B ⟶ B` of `f₁` and `f₂`; under this identification
-`f₁ × f₂` becomes the structure morphism of the fibre product over `B`
-(`pullback.mapOverBaseIso_hom_toBase`). -/
-noncomputable def pullback.mapOverBaseIso :
-    pullback (f₁ ≫ b₁) (f₂ ≫ b₂) ≅
-      pullback (pullback.snd f₁ (pullback.fst b₁ b₂)) (pullback.snd f₂ (pullback.snd b₁ b₂)) where
-  hom := pullback.lift
-    (pullback.lift (pullback.fst _ _) (pullback.mapOverBase f₁ f₂ b₁ b₂) (by simp))
-    (pullback.lift (pullback.snd _ _) (pullback.mapOverBase f₁ f₂ b₁ b₂) (by simp))
-    (by simp)
-  inv := pullback.lift (pullback.fst _ _ ≫ pullback.fst _ _) (pullback.snd _ _ ≫ pullback.fst _ _)
-    (by
-      simp only [Category.assoc]
-      rw [pullback.condition_assoc, pullback.condition_assoc (f := f₂), pullback.condition_assoc,
-        pullback.condition])
-  hom_inv_id := by ext <;> simp
-  inv_hom_id := by
-    have h : pullback.snd (pullback.snd f₁ (pullback.fst b₁ b₂))
-        (pullback.snd f₂ (pullback.snd b₁ b₂)) ≫ pullback.fst f₂ (pullback.snd b₁ b₂) ≫ f₂ =
-          pullback.fst (pullback.snd f₁ (pullback.fst b₁ b₂))
-            (pullback.snd f₂ (pullback.snd b₁ b₂)) ≫
-            pullback.snd f₁ (pullback.fst b₁ b₂) ≫ pullback.snd b₁ b₂ := by
-      rw [pullback.condition, ← pullback.condition_assoc]
-    ext <;> simp [-pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase,
-      ← pullback.condition, h]
-
-@[reassoc (attr := simp)]
-lemma pullback.mapOverBaseIso_hom_toBase :
-    (pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom ≫ pullback.toBase _ _ =
-      pullback.mapOverBase f₁ f₂ b₁ b₂ := by
-  simp only [pullback.mapOverBaseIso, pullback.toBase, pullback.lift_fst_assoc,
-    pullback.lift_snd]
-
-@[reassoc (attr := simp)]
-lemma pullback.mapOverBaseIso_inv_fst :
-    (pullback.mapOverBaseIso f₁ f₂ b₁ b₂).inv ≫ pullback.fst _ _ =
-      pullback.fst _ _ ≫ pullback.fst _ _ := by
-  simp [pullback.mapOverBaseIso]
-
-@[reassoc (attr := simp)]
-lemma pullback.mapOverBaseIso_inv_snd :
-    (pullback.mapOverBaseIso f₁ f₂ b₁ b₂).inv ≫ pullback.snd _ _ =
-      pullback.snd _ _ ≫ pullback.fst _ _ := by
-  simp [pullback.mapOverBaseIso]
-
 end MapOverBaseIso
 
 end CategoryTheory.Limits

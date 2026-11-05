@@ -33,24 +33,4 @@ namespace CategoryTheory
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   (Λ : Type u) [CommRing Λ]
 
-instance (M : ModuleCat.{u} Λ) :
-    Presheaf.IsLocallyInjective J (siteConstantModuleUnit J Λ M) :=
-  inferInstanceAs (Presheaf.IsLocallyInjective J
-    (toSheafify J ((siteConstantModulePresheaf (C := C) Λ).obj M).presheaf))
-
-instance (M : ModuleCat.{u} Λ) :
-    Presheaf.IsLocallySurjective J (siteConstantModuleUnit J Λ M) :=
-  inferInstanceAs (Presheaf.IsLocallySurjective J
-    (toSheafify J ((siteConstantModulePresheaf (C := C) Λ).obj M).presheaf))
-
-instance (M : ModuleCat.{u} Λ) :
-    Presheaf.IsLocallyInjective J (siteConstantModuleUnitSections J Λ M) where
-  equalizerSieve_mem {U} x y h := by
-    exact Presheaf.equalizerSieve_mem J (siteConstantModuleUnit J Λ M) x y h
-
-instance (M : ModuleCat.{u} Λ) :
-    Presheaf.IsLocallySurjective J (siteConstantModuleUnitSections J Λ M) where
-  imageSieve_mem {U} x := by
-    exact Presheaf.imageSieve_mem J (siteConstantModuleUnit J Λ M) x
-
 end CategoryTheory

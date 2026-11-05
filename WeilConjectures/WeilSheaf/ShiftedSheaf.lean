@@ -81,11 +81,6 @@ theorem isZero_homologySheaf_toShiftedComplex {a : ℤ} (ha : a ≠ -1) (G : Wei
   · exact (_root_.DerivedCategory.isLE_iff
       ((_root_.DerivedCategory.singleFunctor _ (-1)).obj G.obj) (-1)).1 inferInstance a h
 
-/-- Isomorphic Weil sheaves have the same upper weight bounds. -/
-theorem HasWeightsAtMost.of_iso {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    {w : ℝ} (hF : F.HasWeightsAtMost ι w) : G.HasWeightsAtMost ι w := fun x ↦
-  (hF x).of_equiv (nonempty_equiv_stalkAt_of_iso _ _ _ e.symm).some
-
 end WeilSheaf
 
 namespace WeilComplex
@@ -112,17 +107,6 @@ theorem traceFunction_eq_of_iso {K L : WeilComplex k₀ l X} (e : K ≅ L) (n : 
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     K.traceFunction n y = L.traceFunction n y :=
   finsum_congr fun a ↦ by rw [WeilSheaf.traceFunction_eq_of_iso ((homologySheaf a).mapIso e)]
-
-/-- The trace function of `G[1]` is the negative of that of the Weil sheaf `G`. -/
-theorem traceFunction_toShiftedComplex (G : WeilSheaf k₀ l X) (n : ℕ)
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    (WeilSheaf.toShiftedComplex.obj G).traceFunction n y = -G.traceFunction n y := by
-  have e : (homologySheaf (-1)).obj (WeilSheaf.toShiftedComplex.obj G) ≅ G :=
-    WeilSheaf.toShiftedComplexCompHomologySheafIso.app G
-  rw [traceFunction_eq_sum _ {-1} (fun a ha ↦
-      WeilSheaf.isZero_homologySheaf_toShiftedComplex (Finset.notMem_singleton.1 ha) G),
-    Finset.sum_singleton, WeilSheaf.traceFunction_eq_of_iso e]
-  simp
 
 end WeilComplex
 

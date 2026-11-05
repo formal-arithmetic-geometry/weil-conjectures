@@ -28,17 +28,4 @@ variable {C D : Type*} [Category* C] [Category* D] {F : D ⥤ C} {G : C ⥤ D} (
   {T_C : C ⥤ C ⥤ C} {T_D : D ⥤ D ⥤ D}
   (φ : (postcompose₂.obj F).obj T_D ⟶ (((whiskeringLeft₂ C).obj F).obj F).obj T_C)
 
-/-- The right adjoint projection map of an adjunction `F ⊣ G` whose left adjoint `F` is an
-equivalence is an isomorphism as soon as the comparison `φ` is: its image under `F`, followed by
-the invertible counit, is `φ` followed by `T_C` applied to the counit. -/
-theorem isIso_rightAdjointProjectionMap_app_app_of_isEquivalence [F.IsEquivalence] [IsIso φ]
-    (M : C) (L : D) : IsIso (((adj.rightAdjointProjectionMap φ).app M).app L) := by
-  have : IsIso (F.map (((adj.rightAdjointProjectionMap φ).app M).app L)) := by
-    have : IsIso (F.map (((adj.rightAdjointProjectionMap φ).app M).app L) ≫
-        adj.counit.app _) := by
-      rw [adj.map_rightAdjointProjectionMap_app_app_comp_counit φ M L]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
-  exact isIso_of_reflects_iso _ F
-
 end CategoryTheory.Adjunction

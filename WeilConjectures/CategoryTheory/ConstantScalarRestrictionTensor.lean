@@ -384,15 +384,6 @@ The CommRingCat presentation is identified with RingCat by constantCommuteCompos
   exact inferInstanceAs
     (SheafOfModules.restrictScalars c.inv ⋙ constantRingModuleRestriction J B).IsEquivalence
 
-/-- Restriction is exact for the two abelian categories.
-Source: Stacks 03CY and 0038 (auxiliary; not a blueprint node).
-Proof: step 1 applies lem-galois-equivalence-preserves-limits to the equivalence and
-its inverse. In particular both preserve kernels and cokernels, hence finite limits
-and finite colimits. -/
-theorem exact : exactFunctor _ _ (restriction J B) := by
-  exact ⟨inferInstanceAs (PreservesFiniteLimits (restriction J B)),
-    inferInstanceAs (PreservesFiniteColimits (restriction J B))⟩
-
 /-- The local pure tensor in the ordinary ringed-site tensor.
 Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
 def ringPure (M N : Modules J B) (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :

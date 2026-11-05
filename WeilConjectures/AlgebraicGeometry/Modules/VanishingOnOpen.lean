@@ -99,11 +99,6 @@ lemma isZero_of_isZero_restrict_top {M : X.Modules} (h : IsZero (M.restrict (⊤
     IsZero M :=
   (isZero_iff_forall_subsingleton M).mpr fun V ↦ (isZero_restrict_iff M ⊤).mp h V le_top
 
-/-- The restriction of a zero module vanishes. -/
-lemma isZero_restrict_of_isZero {M : X.Modules} (h : IsZero M) (U : X.Opens) :
-    IsZero (M.restrict U.ι) :=
-  (isZero_restrict_iff M U).mpr fun V _ ↦ (isZero_iff_forall_subsingleton M).mp h V
-
 section Restrict
 
 variable {M N : X.Modules} (φ : M ⟶ N) (U : X.Opens)

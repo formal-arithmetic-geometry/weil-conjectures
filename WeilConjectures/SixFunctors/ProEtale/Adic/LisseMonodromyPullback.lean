@@ -183,20 +183,7 @@ theorem exists_lisseMonodromy_isCompatible_of_isIntegrallyClosed_stalk [IsLocall
     Scheme.UniversalCovers.lisseMonodromy_isEquivalenceAt_of_irreducibleSpace hU',
     fun _ _ τ G ↦ (Scheme.universalCoversHom f).lisseMonodromy_mono_upperStar hU hU' τ G⟩
 
-/-- **Compatible monodromies exist** for a morphism `f : Y' ⟶ Y` of connected regular Noetherian
-schemes: regular schemes are normal
-(`AlgebraicGeometry.ProEtale.exists_lisseMonodromy_isCompatible_of_isIntegrallyClosed_stalk`). -/
-theorem exists_lisseMonodromy_isCompatible [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y]
-    [ConnectedSpace Y] [IsLocallyNoetherian Y'] [CompactSpace Y'] [IsRegular Y']
-    [ConnectedSpace Y'] (f : Y' ⟶ Y) :
-    ∃ (M : LisseMonodromy l Y Ω) (M' : LisseMonodromy l Y' Ω), (∀ t, M.IsEquivalenceAt t) ∧
-      (∀ t, M'.IsEquivalenceAt t) ∧ LisseMonodromy.IsCompatible f M M' :=
-  exists_lisseMonodromy_isCompatible_of_isIntegrallyClosed_stalk
-    (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩)
-    (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) f
-
 section DenseOpen
-
 
 /-- A nonempty open subscheme of a connected normal locally Noetherian scheme is again
 connected, normal and locally Noetherian. -/
@@ -210,16 +197,6 @@ lemma isLocallyNoetherian_isIntegrallyClosed_stalk_connectedSpace_of_isOpenImmer
   have := irreducibleSpace_of_isDomain_stalk Y fun y ↦ (hY y).1
   exact ⟨isLocallyNoetherian_of_isOpenImmersion j,
     Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain j hY,
-    Scheme.FiniteEtale.connectedSpace_of_isOpenImmersion j⟩
-
-/-- A nonempty open subscheme of a connected regular locally Noetherian scheme is again
-connected, regular and locally Noetherian. -/
-lemma isLocallyNoetherian_isRegular_connectedSpace_of_isOpenImmersion [IsLocallyNoetherian Y]
-    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y'] :
-    IsLocallyNoetherian Y' ∧ IsRegular Y' ∧ ConnectedSpace Y' := by
-  have := IsRegular.irreducibleSpace Y
-  refine ⟨isLocallyNoetherian_of_isOpenImmersion j,
-    ⟨isRegularLocalRing_stalk_of_etale j fun _ ↦ inferInstance⟩,
     Scheme.FiniteEtale.connectedSpace_of_isOpenImmersion j⟩
 
 /-- **The fundamental group of a dense open of a normal scheme surjects**, in terms of paths:
@@ -254,15 +231,6 @@ lemma exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk [IsLocallyNoetherian
     ← ConcreteCategory.comp_apply ((pullbackFiberIso j t).hom.app P), Iso.hom_inv_id_app,
     ConcreteCategory.id_apply]
   rfl
-
-/-- **The fundamental group of a dense open of a regular scheme surjects**, in terms of paths
-(`AlgebraicGeometry.ProEtale.exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk`, regular
-schemes being normal). -/
-lemma exists_pullbackPathIso_eq_of_isRegular [IsLocallyNoetherian Y] [IsRegular Y]
-    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y')
-    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t), pullbackPathIso j σ' = σ :=
-  exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk
-    (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j t σ
 
 /-- A nonempty scheme has a geometric point with values in the algebraic closure of a field
 (of the residue field at any point). -/
@@ -308,17 +276,6 @@ theorem IsAdicLisseSheaf.exists_upperStar_iso_of_mono_of_isIntegrallyClosed_stal
       ((stalkFunctor l t).map ((AdicSheaf.forget Y').map i))))
   exact ⟨G.obj, G.property, ⟨(ObjectProperty.ι _).mapIso e⟩⟩
 
-/-- **Lisse subsheaves extend over a dense open** of a connected regular Noetherian scheme:
-regular schemes are normal
-(`IsAdicLisseSheaf.exists_upperStar_iso_of_mono_of_isIntegrallyClosed_stalk`). -/
-theorem IsAdicLisseSheaf.exists_upperStar_iso_of_mono [IsLocallyNoetherian Y] [CompactSpace Y]
-    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y']
-    {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N) {G' : AdicSheaf l Y'}
-    (hG' : IsAdicLisseSheaf G') (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
-    ∃ G : AdicSheaf l Y, IsAdicLisseSheaf G ∧ Nonempty ((j)^*ᵃ[l].obj G ≅ G') :=
-  IsAdicLisseSheaf.exists_upperStar_iso_of_mono_of_isIntegrallyClosed_stalk
-    (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j hN hG' i
-
 /-- The direct image `j_* G'` of a lisse subsheaf `G'` of the restriction `j^* N` of a lisse
 sheaf `N` to a dense open `j : Y' ⟶ Y` of a connected normal Noetherian scheme is
 lisse: `G'` is the restriction of a lisse `G`
@@ -348,77 +305,6 @@ theorem IsAdicLisseSheaf.adicLowerStar_of_mono [IsLocallyNoetherian Y] [CompactS
     IsAdicLisseSheaf ((j)_*ᵃ[l].obj G') :=
   IsAdicLisseSheaf.adicLowerStar_of_mono_of_isIntegrallyClosed_stalk
     (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j hj hN hG' i
-
-/-- **Restriction to a dense open is fully faithful on lisse sheaves** (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (4), geometric form): for a dense open
-`j : Y' ⟶ Y` of a scheme whose local rings are integrally closed domains and `N` lisse on `Y`,
-the restriction `Hom(A, N) → Hom(j^* A, j^* N)` is bijective for every `A`, since the unit
-`N ⟶ j_* j^* N` is an isomorphism. -/
-theorem IsAdicLisseSheaf.adicUpperStar_map_bijective_of_isIntegrallyClosed_stalk
-    (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
-    (j : Y' ⟶ Y) [IsOpenImmersion j] [QuasiCompact j] (hj : Dense (Set.range j))
-    (A : AdicSheaf l Y) {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N) :
-    Function.Bijective ((j)^*ᵃ[l].map : (A ⟶ N) → ((j)^*ᵃ[l].obj A ⟶ (j)^*ᵃ[l].obj N)) :=
-  have := hN.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed hY j hj
-  (adicUpperStarLowerStarAdjunction l j).map_bijective_of_isIso_unit_app A
-
-/-- **Restriction to a dense open is fully faithful on lisse sheaves** (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (4), geometric form): for a dense open
-`j : Y' ⟶ Y` of a scheme with regular local rings and `N` lisse on `Y`, the restriction
-`Hom(A, N) → Hom(j^* A, j^* N)` is bijective for every `A`, since the unit `N ⟶ j_* j^* N` is
-an isomorphism. -/
-theorem IsAdicLisseSheaf.adicUpperStar_map_bijective
-    (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (j : Y' ⟶ Y) [IsOpenImmersion j]
-    [QuasiCompact j] (hj : Dense (Set.range j)) (A : AdicSheaf l Y) {N : AdicSheaf l Y}
-    (hN : IsAdicLisseSheaf N) :
-    Function.Bijective ((j)^*ᵃ[l].map : (A ⟶ N) → ((j)^*ᵃ[l].obj A ⟶ (j)^*ᵃ[l].obj N)) :=
-  have := hN.isIso_adicUpperStarLowerStarAdjunction_unit_app hY j hj
-  (adicUpperStarLowerStarAdjunction l j).map_bijective_of_isIso_unit_app A
-
-/-- **Restriction to a dense open preserves irreducible local systems** (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (4), geometric form). Let `Y` be a connected normal
-Noetherian scheme and `j : Y' ⟶ Y` a dense open immersion. If `N` is an irreducible
-`ℓ`-adic local system on `Y`, so is `j^* N`: it is nonzero since `N ≅ j_* j^* N`, a lisse
-subsheaf of `j^* N` is the restriction of a lisse `G`
-(`IsAdicLisseSheaf.exists_upperStar_iso_of_mono_of_isIntegrallyClosed_stalk`), and the inclusion
-is the restriction of a monomorphism `G ⟶ N` by full faithfulness. -/
-theorem IsIrreducibleAdicLocalSystem.adicUpperStar_of_isIntegrallyClosed_stalk
-    [IsLocallyNoetherian Y] [CompactSpace Y] [ConnectedSpace Y]
-    (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
-    (j : Y' ⟶ Y) [IsOpenImmersion j] (hj : Dense (Set.range j)) {N : AdicSheaf l Y}
-    (hN : IsIrreducibleAdicLocalSystem N) : IsIrreducibleAdicLocalSystem ((j)^*ᵃ[l].obj N) := by
-  obtain ⟨hNl, hN0, hNirr⟩ := hN
-  have hjN : ¬ IsZero ((j)^*ᵃ[l].obj N) := fun h ↦ hN0 (by
-    have := hNl.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed hY j hj
-    exact ((j)_*ᵃ[l].map_isZero h).of_iso
-      (asIso ((adicUpperStarLowerStarAdjunction l j).unit.app N)))
-  have : Nonempty Y' := not_isEmpty_iff.1 fun _ ↦ hjN (isZero_adicSheaf_of_isEmpty l _)
-  refine ⟨hNl.upperStar j, hjN, fun G' i _ hG' ↦ ?_⟩
-  obtain ⟨G, hG, ⟨e⟩⟩ := hNl.exists_upperStar_iso_of_mono_of_isIntegrallyClosed_stalk hY j hG' i
-  obtain ⟨g, hg⟩ :=
-    (hNl.adicUpperStar_map_bijective_of_isIntegrallyClosed_stalk hY j hj G).2 (e.hom ≫ i)
-  have : Mono ((j)^*ᵃ[l].map g) := by
-    rw [hg]
-    infer_instance
-  have : Mono g := ⟨fun a b hab ↦
-    (hG.adicUpperStar_map_bijective_of_isIntegrallyClosed_stalk hY j hj _).1 (by
-      rw [← cancel_mono ((j)^*ᵃ[l].map g), ← Functor.map_comp, ← Functor.map_comp, hab])⟩
-  obtain h | h := hNirr G g inferInstance hG
-  · exact Or.inl (((j)^*ᵃ[l].map_isZero h).of_iso e.symm)
-  · have : IsIso (e.hom ≫ i) := by
-      rw [← hg]
-      infer_instance
-    exact Or.inr (IsIso.of_isIso_comp_left e.hom i)
-
-/-- **Restriction to a dense open preserves irreducible local systems** on a connected regular
-Noetherian scheme: regular schemes are normal
-(`IsIrreducibleAdicLocalSystem.adicUpperStar_of_isIntegrallyClosed_stalk`). -/
-theorem IsIrreducibleAdicLocalSystem.adicUpperStar [IsLocallyNoetherian Y] [CompactSpace Y]
-    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (hj : Dense (Set.range j))
-    {N : AdicSheaf l Y} (hN : IsIrreducibleAdicLocalSystem N) :
-    IsIrreducibleAdicLocalSystem ((j)^*ᵃ[l].obj N) :=
-  IsIrreducibleAdicLocalSystem.adicUpperStar_of_isIntegrallyClosed_stalk
-    (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j hj hN
 
 end DenseOpen
 

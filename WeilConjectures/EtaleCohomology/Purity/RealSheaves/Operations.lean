@@ -61,31 +61,6 @@ theorem frobeniusWeight_mul (qx : ℕ) {a b : E} (ha : a ≠ 0) (hb : b ≠ 0) :
   simp only [frobeniusWeight, map_mul, norm_mul, Real.log_mul ha' hb']
   ring
 
-/-- For `qx > 1` and `ι α ≠ 0`, the weight bound `wt_{ι, qx} (α) ≤ β` is the bound
-`|ι α| ^ 2 ≤ qx ^ β`. -/
-theorem frobeniusWeight_le_iff {qx : ℕ} (hq : 1 < qx) {α : E} (hα : ι α ≠ 0) {β : ℝ} :
-    frobeniusWeight ι qx α ≤ β ↔ ‖ι α‖ ^ 2 ≤ (qx : ℝ) ^ β := by
-  have hq' : (1 : ℝ) < qx := by exact_mod_cast hq
-  have h1 : 0 < ‖ι α‖ ^ 2 := by positivity
-  have h2 : (0 : ℝ) < (qx : ℝ) ^ β := by positivity
-  rw [frobeniusWeight, div_le_iff₀ (Real.log_pos hq'), ← Real.log_le_log_iff h1 h2,
-    Real.log_pow, Real.log_rpow (by positivity)]
-  push_cast
-  constructor <;> intro h <;> linarith
-
-/-- The weight of a power is the multiple of the weight. -/
-theorem frobeniusWeight_pow (qx : ℕ) (α : E) (n : ℕ) :
-    frobeniusWeight ι qx (α ^ n) = n * frobeniusWeight ι qx α := by
-  simp only [frobeniusWeight, map_pow, norm_pow, Real.log_pow]
-  ring
-
-/-- The weight of an inverse is the negative of the weight; in particular duality negates
-weights (blueprint `sk-r-real-linear`). -/
-theorem frobeniusWeight_inv (qx : ℕ) (α : E) :
-    frobeniusWeight ι qx α⁻¹ = -frobeniusWeight ι qx α := by
-  simp only [frobeniusWeight, map_inv₀, norm_inv, Real.log_inv]
-  ring
-
 /-- The `ι`-weight of a product of nonzero elements is the sum of the weights. -/
 theorem frobeniusWeight_multiset_prod (qx : ℕ) {s : Multiset E} (hs : (0 : E) ∉ s) :
     frobeniusWeight ι qx s.prod = (s.map (frobeniusWeight ι qx)).sum := by
@@ -225,18 +200,6 @@ theorem IsLisse.ofCharacter_detCharacter [FiniteDimensional (PadicAlgCl l) V]
     smul_eq_mul]
   exact hdet.mul continuous_const
 
-/-- The dual of a lisse Weil sheaf is lisse: its matrix coefficients are those of `ρ (g⁻¹)`. -/
-theorem IsLisse.dual [FiniteDimensional (PadicAlgCl l) V] (hρ : W.IsLisse l ρ) :
-    W.IsLisse l ρ.dual := by
-  refine IsLisse.of_continuous_apply fun φ f ↦ ?_
-  obtain ⟨w, rfl⟩ := (Module.evalEquiv (PadicAlgCl l) V).surjective φ
-  have h : (fun g : W.geometric ↦ Module.evalEquiv (PadicAlgCl l) V w (ρ.dual g f)) =
-      fun g ↦ f (ρ (g⁻¹ : W.geometric) w) := by
-    funext g
-    simp [Representation.dual_apply, Module.Dual.transpose_apply]
-  rw [h]
-  exact (hρ.continuous_apply f w).comp continuous_inv
-
 end Lisse
 
 section Real
@@ -330,26 +293,6 @@ theorem IsReal.exteriorPower_of_charpoly_eq {σ : Representation (PadicAlgCl l) 
     rw [Multiset.powersetCard_map, Multiset.map_map, Multiset.map_map]
     exact Multiset.map_congr rfl fun t _ ↦ map_multiset_prod (starRingEnd ℂ) t
   rw [hE, hmap, hconj, hreal.map_conj_localEigenvalues ι x]
-
-/-- Blueprint `lem-tw-dual-negation`: Weight of the linear dual.
-
-The dual of a sheaf punctually pure of weight `w` is punctually pure of weight `-w`: the
-local eigenvalues of the dual are the inverses of those of `ρ` (`p-linear-spectra`), and
-inverses have the negative weight (`lem-tw-multiplicativity`). -/
-theorem IsPunctuallyPure.dual {w : ℝ} (h : W.IsPunctuallyPure l ρ ι w) :
-    W.IsPunctuallyPure l ρ.dual ι (-w) := by
-  intro x γ hγ
-  rw [localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
-    ← Module.End.hasEigenvalue_iff_isRoot_charpoly, Representation.hasEigenvalue_dual_iff] at hγ
-  have hγ' := ρ.hasEigenvalue_inv hγ
-  rw [inv_inv] at hγ'
-  have hmem : γ⁻¹ ∈ W.localEigenvalues l ρ x := by
-    rw [localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
-      ← Module.End.hasEigenvalue_iff_isRoot_charpoly]
-    exact hγ'
-  have := h x _ hmem
-  rw [frobeniusWeight_inv] at this
-  linarith
 
 end Real
 

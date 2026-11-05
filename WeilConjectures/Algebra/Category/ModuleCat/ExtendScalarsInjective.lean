@@ -34,35 +34,4 @@ universe v u₁ u₂
 
 variable {R : Type u₁} {S : Type u₂} [Field R] [CommRing S] (f : R →+* S)
 
-set_option backward.isDefEq.respectTransparency false in
-/-- The map `S ⊗_R X ⟶ Y` adjoint to `g : X ⟶ Y` is injective when `R` is a field and `X`, `Y`
-embed compatibly into functions on a set `T` with values in `R`, `S`. -/
-lemma injective_homEquiv_symm_of_eval {X : ModuleCat.{max v u₂} R} {Y : ModuleCat.{max v u₂} S}
-    (g : X ⟶ (restrictScalars f).obj Y) {T : Type*} (evX : T → X →ₗ[R] R)
-    (evY : T → Y →ₗ[S] S) (hX : ∀ x, (∀ t, evX t x = 0) → x = 0)
-    (hg : ∀ t x, evY t (g x) = f (evX t x)) :
-    Function.Injective (((extendRestrictScalarsAdj f).homEquiv X Y).symm g).hom := by
-  let : Module R S := Module.compHom S f
-  let b := Module.Basis.ofVectorSpace R ((restrictScalars f).obj (of S S))
-  classical
-  rw [← LinearMap.ker_eq_bot, LinearMap.ker_eq_bot']
-  intro z hz
-  obtain ⟨c, rfl⟩ := (equivFinsuppOfBasisLeft b).symm.surjective z
-  suffices c = 0 by simp [this]
-  have key : ∀ t, (c.sum fun i x ↦ evX t x • (b i : S)) = 0 := by
-    intro t
-    have h1 := congrArg (evY t) hz
-    rw [map_zero, equivFinsuppOfBasisLeft_symm_apply, map_finsuppSum, map_finsuppSum] at h1
-    rw [← h1]
-    refine Finsupp.sum_congr fun i _ ↦ ?_
-    change f (evX t (c i)) * (show S from b i) = evY t ((show S from b i) • g (c i))
-    rw [LinearMap.map_smul, hg, smul_eq_mul, mul_comm]
-  ext i
-  apply hX
-  intro t
-  have := linearIndependent_iff.1 b.linearIndependent (c.mapRange (evX t) (map_zero _)) (by
-    rw [Finsupp.linearCombination_apply, Finsupp.sum_mapRange_index (fun i ↦ zero_smul R (b i))]
-    exact key t)
-  simpa using congrArg (· i) this
-
 end ModuleCat

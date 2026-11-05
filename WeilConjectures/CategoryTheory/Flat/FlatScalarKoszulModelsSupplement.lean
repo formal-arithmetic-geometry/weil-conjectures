@@ -110,38 +110,4 @@ namespace CategoryTheory.FlatScalarKoszul
 
 variable {S : Type u} [SmallCategory S] {J : GrothendieckTopology S}
 
-/-- Termwise restriction on complexes. Source: Stacks 0A07
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
-abbrev restrictComplex {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :=
-  (restriction φ).mapHomologicalComplex (.up ℤ)
-
-/-- Levelwise restriction on strict towers. Source: Stacks 0A07
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
-abbrev restrictTower {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :=
-  (Functor.whiskeringRight ℕᵒᵖ (Modules B) (Modules R)).obj (restriction φ)
-
-/-- Termwise levelwise restriction. Source: Stacks 0A07
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
-abbrev restrictTowerComplex {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :=
-  (restrictTower φ).mapHomologicalComplex (.up ℤ)
-
-/-- The image list of global sections. Source: Stacks 0A0E
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
-def imageSections {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) {r : ℕ}
-    (a : Fin r → (R.obj ⋙ forget CommRingCat).sections) :
-    Fin r → (B.obj ⋙ forget CommRingCat).sections :=
-  fun i ↦ ⟨fun U ↦ φ.hom.app U ((a i).val U), fun f ↦ by
-    exact congrFun (congrArg (fun g ↦ g.hom) (φ.hom.naturality f).symm) ((a i).val _) |>.trans
-      (congrArg (φ.hom.app _) ((a i).property f))⟩
-
-/-- The canonical comparison, identity on compatible families, before deriving limit.
-Source: Stacks 0A07
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
-def limitComparison {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
-    limitComplex B ⋙ restrictComplex φ ⟶ restrictTowerComplex φ ⋙ limitComplex R :=
-  letI : PreservesLimitsOfSize.{0, 0} (restriction φ) :=
-    preservesSmallestLimits_of_preservesLimits (restriction φ)
-  NatTrans.mapHomologicalComplex
-    (preservesLimitNatIso (restriction φ) (J := ℕᵒᵖ)).hom (.up ℤ)
-
 end CategoryTheory.FlatScalarKoszul

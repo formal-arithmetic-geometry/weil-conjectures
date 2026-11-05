@@ -39,27 +39,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A sheaf of modules over a finite commutative constant ring is constructible if
-some finite partition into locally closed constructible immersed subschemes has
-locally constant restrictions with finite geometric stalks. The restriction is
-`proEtaleConstantModulePullback`: inverse image followed by tensor extension along
-`proEtaleCoefficientInverseImageMap`, the canonical comparison of constant ring sheaves.
-Finiteness is imposed on the underlying set of the module stalk, equivalently finite
-module generation since the coefficient ring is finite. The coefficient ring itself
-may be the zero ring, and the empty scheme is allowed.
-Source: Weil blueprint, `def-weil-finite-torsion-constructibility`, second paragraph;
-compare Stacks Tag 09AJ, whose affine-local convention differs from this global one
-(blueprint: def-weil-proetale-constructible-sheaf). -/
-noncomputable def IsConstructibleProEtaleModuleSheaf
-    (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
-    (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop :=
-  ∃ S : Stratification Y, 0 < S.n ∧
-    ∀ i : Fin S.n,
-      IsLocallyConstantProEtaleModuleSheaf (S.domain i) A
-        (proEtaleConstantModulePullback (S.immersion i) A F) ∧
-      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
-        (y : Spec (.of Ω) ⟶ S.domain i),
-        Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing (S.domain i) A)
-          (proEtaleConstantModulePullback (S.immersion i) A F))
-
 end AlgebraicGeometry.Scheme

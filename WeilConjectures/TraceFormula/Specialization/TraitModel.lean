@@ -33,16 +33,6 @@ namespace NearbyCyclesModel
 
 variable {k' : Type u} [Field k'] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
 
-/-- A nearby-cycles model of `X` with special fibre `X'` is *of finite type over the trait*
-`Spec k'⟦t⟧` if its total space is separated, quasi-compact and locally of finite type over the
-trait, and `j` and `i` are the inclusions of its geometric generic fibre and of its special
-fibre. -/
-structure IsTraitModel (M : NearbyCyclesModel X X'.left) : Prop where
-  exists_isPullback : ∃ (q : M.total ⟶ trait k')
-      (g : M.generic ⟶ Spec (.of (traitGenericField k'))),
-    LocallyOfFiniteType q ∧ QuasiCompact q ∧ IsSeparated q ∧
-      IsPullback M.j g q (traitGenericPoint k') ∧ IsPullback M.i X'.hom q (traitClosedPoint k')
-
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing

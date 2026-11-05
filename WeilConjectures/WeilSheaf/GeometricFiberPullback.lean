@@ -75,11 +75,6 @@ lemma geometricFiberPullback_obj_carrier (H : AdicSheaf l X) :
       ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l].obj H :=
   rfl
 
-lemma geometricFiberPullback_obj_str (H : AdicSheaf l X) :
-    ((geometricFiberPullback k₀ l X).obj H).str =
-      (geometricFiberPullbackFrobeniusIso k₀ l X).app H :=
-  IsoAlgebra.mk_str _ _
-
 end ProEtaleWeilSheaf
 
 variable {k₀ l X} [Fact (ringChar k₀ ≠ l)]

@@ -69,16 +69,6 @@ instance : (C.IsAcyclicExtension Λ zbar).IsClosedUnderIsomorphisms where
       ((D((C.strictLocalizationComplementι zbar)_!open[ModuleCat.{u + 1} Λ])).mapIso e)).symm
 
 omit [Finite Λ] in
-/-- `IsAcyclicExtension` is stable under shifts. -/
-lemma isAcyclicExtension_shift
-    (K : DerivedCategory
-      (Sheaf (C.strictLocalizationComplement zbar).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (n : ℤ) (hK : C.IsAcyclicExtension Λ zbar K) : C.IsAcyclicExtension Λ zbar (K⟦n⟧) :=
-  ((shiftFunctor _ n).map_isZero hK).of_iso
-    (((D((C.strictLocalizationComplementι zbar)_!open[ModuleCat.{u + 1} Λ]) ⋙
-      Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) _).commShiftIso n).app K)
-
-omit [Finite Λ] in
 /-- `IsAcyclicExtension` is stable under extensions. -/
 lemma isAcyclicExtension_ext (T : Pretriangulated.Triangle (DerivedCategory
       (Sheaf (C.strictLocalizationComplement zbar).smallEtaleTopology (ModuleCat.{u + 1} Λ))))

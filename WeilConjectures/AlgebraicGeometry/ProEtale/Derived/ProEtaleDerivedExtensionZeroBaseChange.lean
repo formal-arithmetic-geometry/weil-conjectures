@@ -35,33 +35,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The canonical ordinary pro-etale extension-by-zero base-change isomorphism,
-from `g⁻¹ j_!` to `j'_! g_U⁻¹`, applied degreewise.  Its inverse on sheaves is the
-conjugate, under `j_! ⋙ g⁻¹ ⊣ g_* ⋙ j⁻¹` and `g_U⁻¹ ⋙ j'_! ⊣ j'⁻¹ ⋙ g_{U,*}`, of the
-weakly etale base-change isomorphism `ProEtale.baseChangeMap` of the chosen cartesian
-square: the construction of the upstream `derivedOpenImmersionLowerShriekBaseChangeIso`
-(with the node's orientation), whose module cannot be imported with the side imports.
-Source: Stacks Tag 03S6 (`lemma-shriek-base-change`), and Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change). -/
-noncomputable def ordinaryOpenExtensionBaseChangeIso
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
-    (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j']
-    (hsq : IsPullback gU j' j g) :
-    (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory ⋙
-        (upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategory ≅
-      (upperStar (ModuleCat.{u + 1} Λ) gU).mapDerivedCategory ⋙
-        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j').mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso
-      ((conjugateIsoEquiv
-        ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).comp
-          (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g))
-        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) gU).comp
-          (openImmersionLowerShriekUpperStarAdjunction
-            (ModuleCat.{u + 1} Λ) j'))).symm
-        (@asIso _ _ _ _ (ProEtale.baseChangeMap (ModuleCat.{u + 1} Λ) hsq.toCommSq)
-          (ProEtale.isIso_baseChangeMap_of_isPullback (ModuleCat.{u + 1} Λ) hsq))).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
-
 end AlgebraicGeometry.ProEtale

@@ -48,16 +48,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor ZeroObject
 
 namespace CategoryTheory
 
-/-- A functor which preserves zero morphisms and reflects isomorphisms reflects zero objects. -/
-lemma Functor.isZero_of_isZero_map {C D : Type*} [Category* C]
-    [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D] [HasZeroObject C] [HasZeroObject D]
-    (G : C ⥤ D) [G.PreservesZeroMorphisms] [G.ReflectsIsomorphisms] {A : C}
-    (h : IsZero (G.obj A)) : IsZero A := by
-  have : IsIso (G.map (0 : A ⟶ 0)) :=
-    isIso_of_source_target_iso_zero _ h.isoZero (G.map_isZero (isZero_zero _)).isoZero
-  have := isIso_of_reflects_iso (0 : A ⟶ 0) G
-  exact (isZero_zero _).of_iso (asIso (0 : A ⟶ 0))
-
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -112,53 +102,5 @@ theorem boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueField
     (hp _ (boundedConstructible_derivedReduction_obj Z ℓ E K hK))
 
 variable {ℓ E}
-
-/-- **Amplitude from the reduction**: on a noetherian scheme, a bounded constructible
-`𝒪_E`-complex `K` whose first derived reduction lies in degrees `≤ c` lies in degrees `≤ c`. For
-`q > c` the reduction triangle `K --ϖ--> K ⟶ K ⊗ᴸ 𝔽_E ⟶ K[1]` shows that `ϖ` is surjective on
-the constructible sheaf `Hᵠ(K)`, so that its reduction vanishes, and `Hᵠ(K) = 0` by Nakayama's
-lemma. -/
-theorem isLE_of_isLE_derivedReduction {X : Scheme.{u}} [IsNoetherian X]
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K)
-    (c : ℤ) (h : ((derivedReduction X ℓ E).obj K).IsLE c) : K.IsLE c := by
-  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
-  rw [Ideal.submodule_span_eq] at hϖ
-  have hS := shortExact_padicIntegersRegularEnd X ℓ E ϖ hϖ
-  obtain ⟨g, δ, hT⟩ := Mod.exists_distinguished_regularEndCenter_derivedExtendScalars _ hS K
-  rw [DerivedCategory.isLE_iff]
-  intro q hq
-  have hred : IsZero ((residueFieldModuleSheaf X ℓ E).obj ((DerivedCategory.homologyFunctor _ q).obj
-      ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K))) :=
-    (((DerivedCategory.isLE_iff _ c).1 h q hq).of_iso
-      (((residueFieldModuleSheaf X ℓ E).mapDerivedCategoryHomologyFunctorIso q).app _))
-  have h₁ : IsZero ((DerivedCategory.homologyFunctor _ q).obj
-      ((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
-        ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K))) :=
-    ((Mod.comap (padicIntegersToResidueField X ℓ E)).map_isZero
-      ((residueFieldModuleSheaf X ℓ E).isZero_of_isZero_map hred)).of_iso
-      (((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategoryHomologyFunctorIso
-        q).app _).symm
-  have hex := (DerivedCategory.homologyFunctor _ q).map_distinguished_exact _ hT
-  have hepi : Epi ((DerivedCategory.homologyFunctor _ q).map
-      ((padicIntegersCenter X ℓ E ϖ).derivedCategory.app K)) :=
-    hex.epi_f (h₁.eq_of_tgt _ _)
-  rw [CatCenter.homologyFunctor_map_derivedCategory_app, Mod.regularEndCenter_app] at hepi
-  obtain ⟨-, hu⟩ := Mod.exact_regularEndSMul_extendUnit _ hS
-    ((DerivedCategory.homologyFunctor _ q).obj K)
-  have h₀ : Mod.extendUnit (padicIntegersToResidueField X ℓ E)
-      ((DerivedCategory.homologyFunctor _ q).obj K) = 0 := by
-    rw [← cancel_epi (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E.1 ϖ)
-      ((DerivedCategory.homologyFunctor _ q).obj K)), comp_zero]
-    exact Mod.regularEndSMul_comp_extendUnit (padicIntegersRegularEnd_hom_comp_residueField X ℓ E ϖ
-      (hϖ ▸ Ideal.mem_span_singleton_self ϖ)) _
-  rw [h₀] at hu
-  have hz : IsZero ((Mod.comap (padicIntegersToResidueField X ℓ E)).obj
-      ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).obj
-        ((DerivedCategory.homologyFunctor _ q).obj K))) :=
-    IsZero.of_epi_zero ((DerivedCategory.homologyFunctor _ q).obj K) _
-  exact isZero_of_isConstructibleModuleObject_of_isZero_extendScalars ℓ E _
-    (((mem_boundedConstructible_iff _ _).1 hK).2 q) (Mod.isZero_of_isZero_comap _ hz)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

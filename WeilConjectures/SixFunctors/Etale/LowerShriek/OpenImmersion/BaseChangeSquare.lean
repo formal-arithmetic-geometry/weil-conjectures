@@ -162,92 +162,13 @@ lemma Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap_app
     Etale.squareUpperStarIso_flip_hom_app_hom_app_assoc, ← Functor.map_comp, ← Functor.map_comp,
     Etale.unit_map_openImmersionLowerShriekToLowerStar_app_counit, CategoryTheory.Functor.map_id]
 
-omit [HasSmallSiteSheafify A] in
-/-- The comparison `j_! ⟶ j_*` intertwines the base change map `j'_! g'^* ⟶ g''^* j_!` of the
-extension by zero with the base change map `g''^* j_* ⟶ j'_* g'^*` of the pushforward. -/
-lemma Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap (sq : CommSq g' j' j g'') :
-    Etale.openImmersionLowerShriekBaseChangeMap A sq ≫
-        Functor.whiskerRight (Etale.openImmersionLowerShriekToLowerStar A j) (g'')^*[A] ≫
-          Etale.baseChangeMap A sq =
-      Functor.whiskerLeft (g')^*[A] (Etale.openImmersionLowerShriekToLowerStar A j') :=
-  NatTrans.ext <| funext <|
-    Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap_app A sq
-
 section IdLeft
 
 /-! ### Comparison with the case `g' = 𝟙` -/
 
 variable {X C D : Scheme.{u}} (j : X ⟶ C) (q : C ⟶ D) (k : X ⟶ D) (hk : j ≫ q = k)
 
-/-- For the square
-
-```
-X --j--> C
-|        |
-𝟙        q
-v        v
-X --k--> D
-```
-
-the base change map `q_* ⋙ k^* ⟶ j^* ⋙ (𝟙 X)_*` of the flipped square is
-`Etale.upperStarBaseChange`, followed by the identification `(𝟙 X)_* ≅ 𝟭` of
-`Etale.lowerStarId`. -/
-lemma Etale.baseChangeMap_flip_id_left :
-    Etale.baseChangeMap A (⟨by simp [hk]⟩ : CommSq (𝟙 X) j k q).flip =
-      Etale.upperStarBaseChange A j q k hk ≫ ((j)^*[A]).rightUnitor.inv ≫
-        Functor.whiskerLeft (j)^*[A] (Etale.lowerStarId A X).inv := by
-  -- Both sides are mates, under `j^* ⊣ j_*` and `k^* ⊣ k_*`, of the composition isomorphism
-  -- `j_* ⋙ q_* ≅ k_*`.
-  apply (mateEquiv (Etale.upperStarLowerStarAdjunction A j)
-    (Etale.upperStarLowerStarAdjunction A k)).injective
-  refine (Etale.mateEquiv_baseChangeSquare A _).trans ?_
-  have hR : Etale.upperStarBaseChange A j q k hk ≫ ((j)^*[A]).rightUnitor.inv ≫
-        Functor.whiskerLeft (j)^*[A] (Etale.lowerStarId A X).inv =
-      ((TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((k)^*[A]) (𝟭 _)
-        (Etale.upperStarBaseChange A j q k hk)).whiskerBottom
-          (Etale.lowerStarId A X).inv).natTrans := by
-    ext F
-    simp [TwoSquare.whiskerBottom]
-  rw [hR, mateEquiv_whiskerBottom]
-  subst hk
-  rw [TwoSquare.whiskerLeft, Etale.mateEquiv_upperStarBaseChange, Etale.squareLowerStarIso,
-    Iso.trans_hom, Iso.symm_hom, Etale.lowerStarComp_id_left]
-  ext F
-  simp
-
 variable [IsOpenImmersion j] [IsOpenImmersion k]
-
-/-- For the square
-
-```
-X --j--> C
-|        |
-𝟙        q
-v        v
-X --k--> D
-```
-
-the base change map `(𝟙 X)^* ⋙ j_! ⟶ k_! ⋙ q^*` is
-`Etale.openImmersionLowerShriekBaseChange`, preceded by the identification `(𝟙 X)^* ≅ 𝟭` of
-`Etale.upperStarId`. -/
-lemma Etale.openImmersionLowerShriekBaseChangeMap_id_left :
-    Etale.openImmersionLowerShriekBaseChangeMap A (⟨by simp [hk]⟩ : CommSq (𝟙 X) j k q) =
-      Functor.whiskerRight (Etale.upperStarId A X).hom (j)_!open[A] ≫
-        ((j)_!open[A]).leftUnitor.hom ≫ Etale.openImmersionLowerShriekBaseChange A j q k hk := by
-  have hconj : conjugateEquiv Adjunction.id (Etale.upperStarLowerStarAdjunction A (𝟙 X))
-      (Etale.upperStarId A X).hom = (Etale.lowerStarId A X).inv :=
-    congrArg Iso.hom (Etale.conjugateIsoEquiv_upperStarId A X)
-  have hlu : conjugateEquiv (Etale.openImmersionLowerShriekUpperStarAdjunction A j)
-      (Adjunction.id.comp (Etale.openImmersionLowerShriekUpperStarAdjunction A j))
-      ((j)_!open[A]).leftUnitor.hom = ((j)^*[A]).rightUnitor.inv :=
-    conjugateEquiv_leftUnitor_hom _
-  rw [Etale.openImmersionLowerShriekBaseChangeMap, Equiv.symm_apply_eq,
-    Etale.baseChangeMap_flip_id_left A j q k hk,
-    ← conjugateEquiv_comp _
-      (Adjunction.id.comp (Etale.openImmersionLowerShriekUpperStarAdjunction A j)) _,
-    ← conjugateEquiv_comp _ (Etale.openImmersionLowerShriekUpperStarAdjunction A j) _,
-    conjugateEquiv_whiskerRight, hconj, hlu, Etale.openImmersionLowerShriekBaseChange,
-    Equiv.apply_symm_apply, Category.assoc]
 
 end IdLeft
 

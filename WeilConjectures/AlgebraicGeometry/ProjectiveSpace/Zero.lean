@@ -125,18 +125,6 @@ instance Proj.instIsIsoProjectiveSpaceOverAffineToSpec :
   rw [Proj.projectiveSpaceOverAffineToSpec]
   infer_instance
 
-/-- **Projective space on one homogeneous coordinate is its base**: for a one-element index
-type `n`, the structure morphism exhibits `ℙ^n_A` as `Spec A`. -/
-def Proj.projectiveSpaceOverAffineIsoSpec :
-    Proj.projectiveSpaceOverAffine n A ≅ Spec (.of A) :=
-  asIso (Proj.projectiveSpaceOverAffineToSpec n A)
-
-@[simp]
-lemma Proj.projectiveSpaceOverAffineIsoSpec_hom :
-    (Proj.projectiveSpaceOverAffineIsoSpec n A).hom =
-      Proj.projectiveSpaceOverAffineToSpec n A :=
-  rfl
-
 end Affine
 
 namespace ProjectiveSpace

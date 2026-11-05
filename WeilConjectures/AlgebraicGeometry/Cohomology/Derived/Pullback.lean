@@ -136,30 +136,4 @@ instance : (derivedPullback g).IsLeftDerivedFunctor (derivedPullbackCounit g)
   inferInstanceAs ((pullback g).leftDerivedFunctor.IsLeftDerivedFunctor
     (pullback g).leftDerivedFunctorCounit _)
 
-/-- **Termwise derived pullback of a bounded above flat complex.** Let `E` be a complex of flat
-`𝒪_S`-modules vanishing in large degrees. Then the derived pullback `Lg^* E` is represented by the
-termwise pullback `g^* E`: the canonical map `Lg^* E ⟶ g^* E` is an isomorphism. Indeed a bounded
-above complex of flat modules is K-flat.
-
-(blueprint: `lem-pc-flat-complex-derived-pullback`, `rem-ptr-pc-derived-pullback-10`) -/
-theorem isIso_derivedPullbackCounit_app (E : CochainComplex S.Modules ℤ) (b : ℤ)
-    [E.IsStrictlyLE b] (hE : ∀ n, ObjectProperty.flat (E.X n)) :
-    IsIso ((derivedPullbackCounit g).app ((HomotopyCategory.quotient _ _).obj E)) :=
-  (pullback g).isIso_leftDerivedFunctorCounit_app_of_kFlat E
-    (CochainComplex.kFlat_of_isStrictlyLE_of_flat E b hE)
-
-/-- The derived pullback of a bounded above complex `E` of flat `𝒪_S`-modules is the termwise
-pullback: `Lg^* E ≅ g^* E` in `D(𝒪_T)`.
-
-(blueprint: `lem-pc-flat-complex-derived-pullback`) -/
-noncomputable def derivedPullbackObjIsoOfFlat (E : CochainComplex S.Modules ℤ) (b : ℤ)
-    [E.IsStrictlyLE b] (hE : ∀ n, ObjectProperty.flat (E.X n)) :
-    (derivedPullback g).obj (DerivedCategory.Q.obj E) ≅
-      DerivedCategory.Q.obj (((pullback g).mapHomologicalComplex _).obj E) :=
-  have := isIso_derivedPullbackCounit_app g E b hE
-  (derivedPullback g).mapIso ((DerivedCategory.quotientCompQhIso S.Modules).symm.app E) ≪≫
-    asIso ((derivedPullbackCounit g).app ((HomotopyCategory.quotient _ _).obj E)) ≪≫
-    DerivedCategory.Qh.mapIso (((pullback g).mapHomotopyCategoryFactors _).app E) ≪≫
-    (DerivedCategory.quotientCompQhIso T.Modules).app _
-
 end AlgebraicGeometry.Scheme.Modules

@@ -36,21 +36,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
-private theorem essentiallySmall_embeds
-    {A : Type*} [Category* A] {D : Type*} [Category* D]
-    [LocallySmall.{u} D] [WellPowered.{u} D]
-    (F : A ⥤ D) (hF : F.FullyFaithful) (Q : D) :
-    ObjectProperty.EssentiallySmall.{u}
-      (fun X ↦ ∃ f : F.obj X ⟶ Q, Mono f) := by
-  classical
-  let S := {s : Subobject Q // ∃ X : A, Nonempty (F.obj X ≅ (s : D))}
-  let repr : S → A := fun s ↦ s.property.choose
-  have hre (s : S) : Nonempty (F.obj (repr s) ≅ (s.val : D)) :=
-    s.property.choose_spec
-  refine ⟨ObjectProperty.ofObj repr, inferInstance, ?_⟩
-  intro X ⟨f, hf⟩
-  let s : S := ⟨Subobject.mk f, X, ⟨(Subobject.underlyingIso f).symm⟩⟩
-  exact ⟨repr s, ⟨s⟩,
-    ⟨hF.preimageIso ((Subobject.underlyingIso f).symm ≪≫ (hre s).some.symm)⟩⟩
-
 end SheafOfModules

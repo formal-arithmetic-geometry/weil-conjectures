@@ -282,12 +282,6 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
 variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- The Weil structure of the internal hom, as the structure isomorphism `ihomStr`. -/
-lemma ihom_str_hom (A B : ProEtaleWeilSheaf k₀ l X) :
-    (ihom k₀ l X A B).str.hom =
-      (ihomStr l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius A.str B.str).hom :=
-  rfl
-
 /-- The Weil structure of the internal hom is `ihomStr`. -/
 lemma ihom_str (A B : ProEtaleWeilSheaf k₀ l X) :
     (ihom k₀ l X A B).str =
@@ -308,11 +302,6 @@ lemma upperStar_obj_str (A : ProEtaleWeilSheaf k₀ l Y) :
       upperStarStr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
         (comp_over φ (Spec (CommRingCat.of k₀)))).symm A.str :=
   Iso.ext (upperStar_obj_str_hom φ A)
-
-/-- The internal hom functor on objects. -/
-lemma ihomFunctor_obj (A B : ProEtaleWeilSheaf k₀ l X) :
-    (ihomFunctor k₀ l X A).obj B = ihom k₀ l X A B :=
-  rfl
 
 /-- The comparison `φ^* [A, B] ⟶ [φ^* A, φ^* B]` is compatible with the Weil structures. -/
 lemma upperStarIhomComparison_comm (A B : ProEtaleWeilSheaf k₀ l Y) :

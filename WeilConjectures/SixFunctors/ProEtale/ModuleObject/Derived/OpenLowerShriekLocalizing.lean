@@ -43,37 +43,4 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   [QuasiCompact X.hom] [IsSeparated X.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left]
 
-/-- The extension by zero `j_!` on module objects preserves direct sums, being left adjoint to
-`j^*`. -/
-instance (J : Type (u + 1)) :
-    PreservesColimitsOfShape (Discrete J) D((j.left)_!open⟦Λ⟧) :=
-  have : PreservesColimitsOfSize.{u + 1, u + 1} D((j.left)_!open⟦Λ⟧) :=
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left).leftAdjoint_preservesColimits
-  inferInstance
-
-include ℓ in
-/-- Blueprint `det-proper-image-localizing-open`: Extension by zero on the localizing
-categories, at the `ℓ`-adic stages.
-
-For a commutative condensed ring `Λ` (such as `𝒪̲_E`, `E̲` or `ℚ̲̄_ℓ`, for which
-`Dctf(-, Λ) = Dbc(-, Λ)`) and an open immersion `j : U ⟶ X` of separated finite-type
-`k`-schemes, the extension by zero `j_! : D(U_proét, Λ) ⥤ D(X_proét, Λ)` maps `Dbc(U, Λ)` into
-`Dbc(X, Λ)`, preserves direct sums, and maps `Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`; it is
-exact, being induced by an exact functor. The first assertion is the extension-by-zero part of
-`sk-def-sfb-dc-restricted-functors`; the last one follows by
-`det-proper-image-localizing-principle`. -/
-theorem localizingClosure_boundedConstructible_openImmersionLowerShriek :
-    boundedConstructible (condensedRingObj Λ U.left) ≤
-        (boundedConstructible (condensedRingObj Λ X.left)).inverseImage
-          D((j.left)_!open⟦Λ⟧) ∧
-      (∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) D((j.left)_!open⟦Λ⟧)) ∧
-      (boundedConstructible (condensedRingObj Λ U.left)).localizingClosure ≤
-        ((boundedConstructible (condensedRingObj Λ X.left)).localizingClosure
-          ).inverseImage D((j.left)_!open⟦Λ⟧) :=
-  ⟨fun K hK ↦ boundedConstructible_openImmersionLowerShriek_obj Λ ℓ j ⟨K, hK⟩,
-    fun _ ↦ inferInstance,
-    ObjectProperty.localizingClosure_le_inverseImage _ _ fun K hK ↦
-      ObjectProperty.le_localizingClosure _ _
-        (boundedConstructible_openImmersionLowerShriek_obj Λ ℓ j ⟨K, hK⟩)⟩
-
 end AlgebraicGeometry.ProEtale.CondensedRing

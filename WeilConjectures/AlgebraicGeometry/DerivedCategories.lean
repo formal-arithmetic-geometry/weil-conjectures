@@ -46,18 +46,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- An object `K` of `D(T_et, Λ)` has *torsion cohomology* if every cohomology sheaf
-`H^r(K)`, as a sheaf of abelian groups, is a torsion sheaf: every local section is locally
-killed by a positive integer (`CategoryTheory.Sheaf.IsTorsion`).
-Source: blueprint
-`sec-curve-estimates/lem-sc-second-kummer-divisors/def-weil-pbc-derived-categories.md` (blueprint:
-def-weil-pbc-derived-categories). -/
-def DerivedCategory.torsionCohomology (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) :
-    ObjectProperty (DerivedCategoryModule Λ T) :=
-  fun K ↦ ∀ r : ℤ, CategoryTheory.Sheaf.IsTorsion
-    ((sheafCompose T.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-      ((_root_.DerivedCategory.homologyFunctor
-        (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) r).obj K))
-
 end AlgebraicGeometry.Etale

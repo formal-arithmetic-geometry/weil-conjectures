@@ -155,11 +155,6 @@ theorem leftDerivedUpperStar_map_kummerClass [HasInvertibleExponent Λ X]
         kummerClass Λ (Units.map f.appTop.hom.toMonoidHom u) :=
   HasKummerClass.leftDerivedUpperStar_map_kummerClass f u
 
-/-- The Kummer class is multiplicative: `κ(uv) = κ(u) + κ(v)`. -/
-theorem kummerClass_mul [HasInvertibleExponent Λ X] (u v : Γ(X, ⊤)ˣ) :
-    kummerClass Λ (u * v) = kummerClass Λ u + kummerClass Λ v :=
-  HasKummerClass.kummerClass_mul X u v
-
 end Kummer
 
 section Boundary

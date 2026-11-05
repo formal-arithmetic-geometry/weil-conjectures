@@ -27,24 +27,4 @@ open DerivedCategory (IsMPseudoCoherent)
 
 namespace CategoryTheory
 
-/-- If `K ⟶ L ⟶ M ⟶ K[1]` is distinguished in the derived category of a ring,
-then `(m + 1)`-pseudo-coherence of `K` and `m`-pseudo-coherence of `L` imply
-`m`-pseudo-coherence of `M` (Stacks, Tag 064R).
-(blueprint: lem-sc-cone-pseudo-coherent)
-
-Proof: apply the first clause of the ring-level distinguished-triangle lemma
-(lem-pc-ring-pseudo-coherent-distinguished-triangle, Tag 064R) to the triangle `T`:
-if `T.obj₁` is `(m + 1)`-pseudo-coherent and `T.obj₂` is `m`-pseudo-coherent, then
-`T.obj₃` is `m`-pseudo-coherent.
--/
-theorem isMPseudoCoherent_cone
-    (R : Type u) [CommRing R]
-    [HasDerivedCategory.{w} (ModuleCat.{v} R)]
-    (m : ℤ)
-    (T : Triangle (DerivedCategory (ModuleCat.{v} R)))
-    (hT : T ∈ distTriang (DerivedCategory (ModuleCat.{v} R))) :
-    IsMPseudoCoherent (m + 1) T.obj₁ →
-      IsMPseudoCoherent m T.obj₂ → IsMPseudoCoherent m T.obj₃ := by
-  exact (isMPseudoCoherent_of_distinguished_triangle R m T hT).1
-
 end CategoryTheory

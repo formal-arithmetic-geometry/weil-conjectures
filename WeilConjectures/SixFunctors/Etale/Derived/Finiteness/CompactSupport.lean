@@ -223,24 +223,6 @@ section Stalk
 
 variable [Finite Λ] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- Blueprint `prop-trf-compact-support-perfectness`: Compact-support perfectness (geometric
-stalks).
-
-Also blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
-geometric stalks.
-
-For a finite coefficient ring `Λ`, `K ∈ D^b_{ctf}(X, Λ)` and a geometric point
-`x̄ : Spec Ω ⟶ X` (`Ω` separably closed), the derived geometric stalk
-`K_x̄ = RΓ(Spec Ω, Lx̄^* K)` is a perfect complex of `Λ`-modules: `Lx̄^*` preserves `Dctf`, and
-`RΓ(Spec Ω, -)` carries `Dctf(Spec Ω, Λ)` into perfect complexes. -/
-theorem isPerfect_geometricStalk (x : Spec (.of Ω) ⟶ X)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
-    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of Ω))).obj
-      ((L((x)^*[ModuleCat.{u + 1} Λ])).obj K)).IsPerfect :=
-  isPerfect_rightDerivedGlobalSections_of_isSepClosed _
-    (constructibleFiniteTor_leftDerivedUpperStar _ x hK)
-
 end Stalk
 
 end Etale

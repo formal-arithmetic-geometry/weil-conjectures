@@ -190,43 +190,6 @@ universe u
 
 variable {R : Type u} [Ring R]
 
-/-- Elements of a product of modules are determined by their components. -/
-lemma ext_of_isLimit_fan {ι : Type*} {M : ι → ModuleCat.{u} R} {P : Fan M} (hP : IsLimit P)
-    {x y : P.pt} (h : ∀ i, (P.proj i).hom x = (P.proj i).hom y) : x = y := by
-  have := Fan.IsLimit.hom_ext hP (ofHom (LinearMap.toSpanSingleton R _ x))
-    (ofHom (LinearMap.toSpanSingleton R _ y)) fun i ↦ by
-      ext
-      simp [h i]
-  simpa using congrArg (fun f : ModuleCat.of R R ⟶ _ ↦ f.hom (1 : R)) this
-
-/-- A family of elements of modules `Mᵢ` comes from an element of a product of the `Mᵢ`. -/
-lemma exists_proj_eq_of_isLimit_fan {ι : Type*} {M : ι → ModuleCat.{u} R} {P : Fan M}
-    (hP : IsLimit P) (x : ∀ i, M i) : ∃ y : P.pt, ∀ i, (P.proj i).hom y = x i :=
-  ⟨(Fan.IsLimit.lift hP fun i ↦ ofHom (LinearMap.toSpanSingleton R _ (x i))).hom 1, fun i ↦ by
-    exact (congrArg (fun f : ModuleCat.of R R ⟶ M i ↦ f.hom (1 : R))
-      (Fan.IsLimit.fac hP _ i)).trans (one_smul R (x i))⟩
-
-/-- For a tower `F` of modules with surjective transitions, the map `1 - t` on a product
-`∏ Fₙ` is surjective, where `t` has components `∏ Fₙ ⟶ Fₙ₊₁ ⟶ Fₙ`: given `y`, the components
-`xₙ` of a preimage are chosen inductively, `xₙ₊₁` lifting `xₙ - yₙ`. -/
-lemma epi_one_sub_of_epi {F : ℕᵒᵖ ⥤ ModuleCat.{u} R} {P : Fan fun n : ℕ ↦ F.obj (op n)}
-    (hP : IsLimit P) (t : P.pt ⟶ P.pt)
-    (ht : ∀ n : ℕ, t ≫ P.proj n = P.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op)
-    (hF : ∀ n : ℕ, Epi (F.map (homOfLE n.le_succ).op)) : Epi (𝟙 P.pt - t) := by
-  rw [ModuleCat.epi_iff_surjective]
-  intro y
-  have hs (n : ℕ) := (ModuleCat.epi_iff_surjective _).1 (hF n)
-  let x : ∀ n : ℕ, F.obj (op n) := fun n ↦ Nat.rec (motive := fun n ↦ F.obj (op n)) 0
-    (fun n xn ↦ (hs n (xn - (P.proj n).hom y)).choose) n
-  have hx (n : ℕ) : (F.map (homOfLE n.le_succ).op).hom (x (n + 1)) = x n - (P.proj n).hom y :=
-    (hs n _).choose_spec
-  obtain ⟨z, hz⟩ := exists_proj_eq_of_isLimit_fan hP x
-  refine ⟨z, ext_of_isLimit_fan hP fun n ↦ ?_⟩
-  have h₁ := congrArg (fun f ↦ f.hom z) (ht n)
-  simp only [hom_comp, LinearMap.coe_comp, Function.comp_apply] at h₁
-  simp only [hom_sub, hom_id, LinearMap.sub_apply, LinearMap.id_apply, map_sub, h₁, hz, hx,
-    sub_sub_cancel]
-
 end ModuleCat
 
 namespace DerivedCategory
@@ -234,48 +197,5 @@ namespace DerivedCategory
 universe u
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory (ModuleCat.{u} R)]
-
-/-- The image in the derived category of a limit cone `c` of a tower `T` of complexes of
-modules whose transitions are degreewise surjective is a homotopy limit cone: in each degree
-`0 ⟶ lim Tₙ ⟶ ∏ Tₙ ──1 - t──▶ ∏ Tₙ ⟶ 0` is exact, and the triangle in the derived category
-attached to this short exact sequence of complexes is the Milnor triangle. -/
-theorem isHomotopyLimit_mapCone_Q_of_epi {T : ℕᵒᵖ ⥤ CochainComplex (ModuleCat.{u} R) ℤ}
-    (hT : ∀ (n : ℕ) (i : ℤ), Epi ((T.map (homOfLE n.le_succ).op).f i)) {c : Cone T}
-    (hc : IsLimit c) :
-    IsHomotopyLimit (Q.mapCone c) := by
-  let K (n : ℕ) : CochainComplex (ModuleCat.{u} R) ℤ := T.obj (op n)
-  let P : Fan K := Fan.mk (∏ᶜ K) (Pi.π K)
-  let hP : IsLimit P := productIsProduct K
-  let t : P.pt ⟶ P.pt := Pi.lift fun n ↦ Pi.π K (n + 1) ≫ T.map (homOfLE n.le_succ).op
-  have ht (n : ℕ) : t ≫ P.proj n = P.proj (n + 1) ≫ T.map (homOfLE n.le_succ).op :=
-    Pi.lift_π _ _
-  let S := ShortComplex.mk _ _ (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hP t ht c)
-  have hk := Fan.IsLimit.isLimitKernelForkOneSub hP t ht hc
-  have hS : S.ShortExact := by
-    have : Mono S.f := mono_of_isLimit_fork hk
-    have : Epi S.g := HomologicalComplex.epi_of_epi_f _ fun i ↦ by
-      rw [HomologicalComplex.sub_f_apply, HomologicalComplex.id_f]
-      exact ModuleCat.epi_one_sub_of_epi (F := T ⋙ HomologicalComplex.eval _ _ i)
-        (isLimitFanMkObjOfIsLimit (HomologicalComplex.eval _ _ i) K _ hP) (t.f i)
-        (fun n ↦ (HomologicalComplex.comp_f _ _ i).symm.trans
-          ((congrArg (fun φ ↦ φ.f i) (ht n)).trans (HomologicalComplex.comp_f _ _ i)))
-        fun n ↦ hT n i
-    exact { exact := ShortComplex.exact_of_f_is_kernel _ hk }
-  let hQ := isLimitFanQ K
-  refine ⟨_, hQ, triangleOfSESδ hS, isomorphic_distinguished _ (triangleOfSES_distinguished hS) _
-    (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_ ?_)⟩
-  · refine Fan.IsLimit.hom_ext hQ _ _ fun n ↦ ?_
-    simp only [Functor.mapCone_pt, Functor.comp_obj, Fan.mk_pt, Functor.mapCone_π_app,
-      Triangle.mk_mor₁, Iso.refl_hom, comp_id, fan_mk_proj, triangleOfSES_mor₁, id_comp]
-    exact (Fan.IsLimit.fac hQ (fun n ↦ Q.map (c.π.app (op n))) n).trans (congrArg Q.map
-      (Fan.IsLimit.fac hP (fun n ↦ c.π.app (op n)) n).symm |>.trans (Q.map_comp _ _))
-  · refine Fan.IsLimit.hom_ext hQ _ _ fun n ↦ ?_
-    simp only [Functor.mapCone_pt, Functor.comp_obj, Fan.mk_pt, Functor.mapCone_π_app,
-      towerShift, fan_mk_proj, Nat.succ_eq_add_one, homOfLE_leOfHom, Functor.comp_map,
-      triangleOfSES, Triangle.mk_mor₂, ← Functor.map_comp, Iso.refl_hom, comp_id,
-      Preadditive.sub_comp, Functor.map_sub, CategoryTheory.Functor.map_id,
-      Preadditive.comp_sub, id_comp, sub_right_inj, S, P]
-    exact (Fan.IsLimit.fac hQ _ n).trans (congrArg Q.map (ht n).symm)
-  · simp [triangleOfSES]
 
 end DerivedCategory

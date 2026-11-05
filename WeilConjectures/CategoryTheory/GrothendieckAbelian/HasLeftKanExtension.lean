@@ -381,14 +381,6 @@ instance hasLeftKanExtension_op_overMap (A : Type u') [Category.{u + 1} A] [Abel
     (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F :=
   inferInstance
 
-/-- Every étale scheme over `U` either lies in the essential image of the localization
-functor of `h : Etale f`, or has empty indexing comma category. -/
-lemma mem_essImage_or_isEmpty_costructuredArrow_op_overMap {V U : Scheme.{u}} {f : V ⟶ U}
-    (h : Etale f) (W : U.Etaleᵒᵖ) :
-    (MorphismProperty.Over.map ⊤ h).op.essImage W ∨
-      IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ h).op W) :=
-  SmallSite.mem_essImage_or_isEmpty_costructuredArrow_op_overMap h W
-
 /-- The presheaf-level left Kan extension along the opposite of the localization functor
 of `h : Etale f` with `f` a monomorphism is left exact: by the dichotomy
 `mem_essImage_or_isEmpty_costructuredArrow_op_overMap` it is pointwise either an evaluation
@@ -443,14 +435,6 @@ instance hasLeftKanExtension_op_overMap (A : Type u') [Category.{u + 1} A] [Abel
     [Mono f] (F : V.ProEtᵒᵖ ⥤ A) :
     (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F :=
   inferInstance
-
-/-- Every weakly étale scheme over `U` either lies in the essential image of the
-localization functor of `h : WeaklyEtale f`, or has empty indexing comma category. -/
-lemma mem_essImage_or_isEmpty_costructuredArrow_op_overMap {V U : Scheme.{u}} {f : V ⟶ U}
-    (h : WeaklyEtale f) (W : U.ProEtᵒᵖ) :
-    (MorphismProperty.Over.map ⊤ h).op.essImage W ∨
-      IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ h).op W) :=
-  SmallSite.mem_essImage_or_isEmpty_costructuredArrow_op_overMap h W
 
 /-- The presheaf-level left Kan extension along the opposite of the localization functor
 of `h : WeaklyEtale f` with `f` a monomorphism is left exact: by the dichotomy

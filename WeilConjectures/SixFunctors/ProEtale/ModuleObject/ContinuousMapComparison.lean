@@ -162,12 +162,6 @@ noncomputable def continuousMapRingSheafToLowerStar :
               (profiniteToProEt.map f.unop)).left.base x))
         rw [profiniteTestObjectProj_naturality] }
 
-lemma continuousMapRingSheafToLowerStar_hom_app_apply (S : Profinite.{u}ᵒᵖ)
-    (g : ULift.{u + 1} C(S.unop, T)) :
-    (continuousMapRingSheafToLowerStar X T).hom.app S g =
-      ULift.up (g.down.comp (profiniteTestObjectProj X S.unop)) :=
-  rfl
-
 /-- The adjunction `p_X^* ⊣ p_{X*}`, the composite of `p^* ⊣ p_*` and `π_X^* ⊣ π_{X*}`. -/
 noncomputable abbrev upperStarFromPointAdjunction :
     upperStarFromPoint X ⊣ (toSpecZ X)_*[Ab.{u + 1}] ⋙ pointLowerStar :=

@@ -428,46 +428,6 @@ variable {C'' : Type*} [Category C''] [Abelian C''] [HasDerivedCategory C'']
   (h''₁₂ : S.f ≫ α''₂ = α''₁ ≫ Functor.whiskerLeft P'' S''.f)
   (h''₂₃ : S.g ≫ α''₃ = α''₂ ≫ Functor.whiskerLeft P'' S''.g)
 
-/-- **Compatibility of the pullback of triangles with composition.** If `P'' ≅ P ⋙ P'` and
-the maps `α''ᵢ`, `αᵢ`, `α'ᵢ` are compatible, the morphism of triangles along `P''` is the
-composite of the morphisms of triangles along `P` and `P'`, up to the comparison
-`P''(K) ≅ P'(P(K))`. -/
-lemma rightDerivedTrianglePullback_comp
-    (hα₁ : α''₁ ≫ Functor.whiskerRight ε.hom S''.X₁ = α₁ ≫ Functor.whiskerLeft P α'₁)
-    (hα₂ : α''₂ ≫ Functor.whiskerRight ε.hom S''.X₂ = α₂ ≫ Functor.whiskerLeft P α'₂)
-    (hα₃ : α''₃ ≫ Functor.whiskerRight ε.hom S''.X₃ = α₃ ≫ Functor.whiskerLeft P α'₃)
-    (M : Plus C) :
-    (rightDerivedTrianglePullback P'' hS hS'' α''₁ α''₂ α''₃ h''₁₂ h''₂₃).app M ≫
-        (rightDerivedTriangle hS'').map
-          ((Functor.mapDerivedCategoryPlusNatIso ε ≪≫
-            Functor.mapDerivedCategoryPlusCompIso P P').hom.app M) =
-      (rightDerivedTrianglePullback P hS hS' α₁ α₂ α₃ h₁₂ h₂₃).app M ≫
-        (rightDerivedTrianglePullback P' hS' hS'' α'₁ α'₂ α'₃ h'₁₂ h'₂₃).app
-          (P.mapDerivedCategoryPlus.obj M) := by
-  have k₁ := Functor.rightDerivedPullback_comp P P' P'' ε α₁ α'₁ α''₁ hα₁ M.obj
-  have k₂ := Functor.rightDerivedPullback_comp P P' P'' ε α₂ α'₂ α''₂ hα₂ M.obj
-  have k₃ := Functor.rightDerivedPullback_comp P P' P'' ε α₃ α'₃ α''₃ hα₃ M.obj
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp] at k₁ k₂ k₃
-  ext
-  · simp only [Pretriangulated.comp_hom₁, rightDerivedTrianglePullback_app_hom₁,
-      rightDerivedTriangle,
-      Triangle.functorMk_map_hom₁, Functor.comp_map, Iso.trans_hom, NatTrans.comp_app,
-      Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
-    exact k₁
-  · simp only [Pretriangulated.comp_hom₂, rightDerivedTrianglePullback_app_hom₂,
-      rightDerivedTriangle,
-      Triangle.functorMk_map_hom₂, Functor.comp_map, Iso.trans_hom, NatTrans.comp_app,
-      Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
-    exact k₂
-  · simp only [Pretriangulated.comp_hom₃, rightDerivedTrianglePullback_app_hom₃,
-      rightDerivedTriangle,
-      Triangle.functorMk_map_hom₃, Functor.comp_map, Iso.trans_hom, NatTrans.comp_app,
-      Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
-    exact k₃
-
 end Comp
 
 end ShortComplex

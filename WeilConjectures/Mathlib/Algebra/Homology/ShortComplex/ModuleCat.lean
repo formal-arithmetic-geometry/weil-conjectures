@@ -96,64 +96,10 @@ noncomputable def homologyZeroLinearEquiv {R : Type u} [Ring R]
         rw [K.shape 0 0 (by simp)]
         rfl))))
 
-/-- The class in `K.homology j` of a cycle of a cochain complex of modules. -/
-noncomputable def homologyClass {R : Type u} [Ring R]
-    (K : CochainComplex (ModuleCat.{u} R) ℕ) (i j k : ℕ) (hi : (ComplexShape.up ℕ).prev j = i)
-    (hk : (ComplexShape.up ℕ).next j = k) :
-    LinearMap.ker (K.d j k).hom →ₗ[R] K.homology j :=
-  (K.homologyLinearEquivQuotient i j k hi hk).symm.toLinearMap ∘ₗ Submodule.mkQ _
-
 section HomologyClass
 
 variable {R : Type u} [Ring R] (K : CochainComplex (ModuleCat.{u} R) ℕ) {i j k : ℕ}
   (hi : (ComplexShape.up ℕ).prev j = i) (hk : (ComplexShape.up ℕ).next j = k)
-
-lemma homologyLinearEquivQuotient_homologyClass
-    (z : LinearMap.ker (K.d j k).hom) :
-    K.homologyLinearEquivQuotient i j k hi hk (K.homologyClass i j k hi hk z) =
-      Submodule.Quotient.mk z := by
-  simp [CochainComplex.homologyClass]
-
-lemma homologyClass_surjective :
-    Function.Surjective (K.homologyClass i j k hi hk) :=
-  (K.homologyLinearEquivQuotient i j k hi hk).symm.surjective.comp (Submodule.mkQ_surjective _)
-
-/-- A cycle `z`, as an element of `K.cycles j`. -/
-lemma iCycles_cyclesIsoSc'_inv_moduleCatCyclesIso_inv
-    (z : LinearMap.ker (K.d j k).hom) :
-    K.iCycles j ((K.cyclesIsoSc' i j k hi hk).inv ((K.sc' i j k).moduleCatCyclesIso.inv z)) =
-      z.1 := by
-  rw [← CategoryTheory.comp_apply, K.cyclesIsoSc'_inv_iCycles]
-  exact (ConcreteCategory.congr_hom (K.sc' i j k).moduleCatCyclesIso_inv_iCycles z).trans rfl
-
-/-- The class of a cycle `z` is the image under `homologyπ` of any element of `K.cycles j` lying
-over `z`. -/
-lemma homologyClass_eq_homologyπ (z : LinearMap.ker (K.d j k).hom)
-    (y : K.cycles j) (hy : K.iCycles j y = z.1) :
-    K.homologyClass i j k hi hk z = K.homologyπ j y := by
-  have hw : (K.cyclesIsoSc' i j k hi hk).inv ((K.sc' i j k).moduleCatCyclesIso.inv z) = y :=
-    (ModuleCat.mono_iff_injective (K.iCycles j)).1 inferInstance
-      ((K.iCycles_cyclesIsoSc'_inv_moduleCatCyclesIso_inv hi hk z).trans hy.symm)
-  rw [← hw, ← CategoryTheory.comp_apply, ← K.π_homologyIsoSc'_inv i j k hi hk,
-    CategoryTheory.comp_apply, ShortComplex.moduleCatCyclesIso_inv_π_apply]
-  rfl
-
-/-- **Naturality of the classes of cycles**: a morphism of complexes maps the class of a cycle
-`z` to the class of its image. -/
-lemma homologyMap_homologyClass {L : CochainComplex (ModuleCat.{u} R) ℕ}
-    (φ : K ⟶ L) (z : LinearMap.ker (K.d j k).hom) :
-    HomologicalComplex.homologyMap φ j (K.homologyClass i j k hi hk z) =
-      L.homologyClass i j k hi hk ⟨φ.f j z, by
-        have h := ConcreteCategory.congr_hom (φ.comm j k) z.1
-        simp only [CategoryTheory.comp_apply] at h
-        change L.d j k (φ.f j z.1) = 0
-        rw [h, LinearMap.mem_ker.1 z.2, map_zero]⟩ := by
-  set y := (K.cyclesIsoSc' i j k hi hk).inv ((K.sc' i j k).moduleCatCyclesIso.inv z)
-  have hy : K.iCycles j y = z.1 := K.iCycles_cyclesIsoSc'_inv_moduleCatCyclesIso_inv hi hk z
-  rw [K.homologyClass_eq_homologyπ hi hk z y hy, ← CategoryTheory.comp_apply,
-    HomologicalComplex.homologyπ_naturality, CategoryTheory.comp_apply]
-  refine (L.homologyClass_eq_homologyπ hi hk _ _ ?_).symm
-  rw [← CategoryTheory.comp_apply, HomologicalComplex.cyclesMap_i, CategoryTheory.comp_apply, hy]
 
 end HomologyClass
 

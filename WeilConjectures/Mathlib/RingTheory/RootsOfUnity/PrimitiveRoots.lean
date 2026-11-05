@@ -24,17 +24,4 @@ namespace IsPrimitiveRoot
 
 variable {R : Type*} [CommRing R] [IsDomain R] {n : ℕ} [NeZero n] {ζ : Rˣ}
 
-/-- For a primitive `n`-th root of unity `ζ` in a domain `R`, the isomorphism
-`θ_ζ : ZMod n ≃+ μₙ(R)`, `a ↦ ζ ^ a`, from `ZMod n` to the `n`-th roots of unity of `R`, written
-additively. This is the effect on points over a field of the trivialization of
-blueprint `def-sc-mu-trivialization`.
-(blueprint: `lem-sc-primitive-root`) -/
-noncomputable def zmodAddEquivRootsOfUnity (h : IsPrimitiveRoot ζ n) :
-    ZMod n ≃+ Additive (rootsOfUnity n R) :=
-  h.zmodEquivZPowers.trans (MulEquiv.subgroupCongr h.zpowers_eq).toAdditive
-
-lemma zmodAddEquivRootsOfUnity_natCast (h : IsPrimitiveRoot ζ n) (a : ℕ) :
-    ((Additive.toMul (h.zmodAddEquivRootsOfUnity a) : rootsOfUnity n R) : Rˣ) = ζ ^ a := by
-  simp [zmodAddEquivRootsOfUnity, zmodEquivZPowers_apply_coe_nat]
-
 end IsPrimitiveRoot

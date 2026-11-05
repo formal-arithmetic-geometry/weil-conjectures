@@ -175,50 +175,6 @@ noncomputable def ProEtaleWeilSheaf.rightDerivedLowerStarCompIso (φ : X ⟶ Y) 
         (ProEtaleWeilSheaf.lowerStar k₀ l ψ).rightDerivedFunctor :=
   (Functor.rightDerivedFunctorCompIso' _ _ (ProEtaleWeilSheaf.lowerStarCompIso k₀ l φ ψ)).symm
 
-variable (k₀ l) in
-/-- **Degenerate Leray isomorphism**: for an exact pushforward `ψ_*`, the cohomology of
-`R(φ ≫ ψ)_* K` is the pushforward along `ψ` of the cohomology of `Rφ_* K`. -/
-noncomputable def ProEtaleWeilSheaf.homologyRightDerivedLowerStarCompIso (φ : X ⟶ Y)
-    (ψ : Y ⟶ Z) [φ.IsOver (Spec (CommRingCat.of k₀))] [ψ.IsOver (Spec (CommRingCat.of k₀))]
-    [PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l ψ)]
-    (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (i : ℤ) :
-    (_root_.DerivedCategory.homologyFunctor _ i).obj
-        ((ProEtaleWeilSheaf.lowerStar k₀ l (φ ≫ ψ)).rightDerivedFunctor.obj K) ≅
-      (ProEtaleWeilSheaf.lowerStar k₀ l ψ).obj ((_root_.DerivedCategory.homologyFunctor _ i).obj
-        ((ProEtaleWeilSheaf.lowerStar k₀ l φ).rightDerivedFunctor.obj K)) :=
-  (_root_.DerivedCategory.homologyFunctor _ i).mapIso
-      ((ProEtaleWeilSheaf.rightDerivedLowerStarCompIso k₀ l φ ψ).app K ≪≫
-        (ProEtaleWeilSheaf.lowerStar k₀ l ψ).rightDerivedFunctorIsoMapDerivedCategory.app _) ≪≫
-    ((Functor.mapDerivedCategoryHomologyFunctorIso _ i).app _).symm
-
-variable (k₀ l) in
-/-- **The pushforward along a finite étale `P ⟶ Spec k₀` is exact** on pro-étale Weil sheaves:
-its geometric fibre `P̄ ⟶ Spec k̄` is a finite disjoint union of copies of `Spec k̄`
-(`AlgebraicGeometry.ProEtale.preservesFiniteColimits_adicLowerStar_of_isAlgClosed`). -/
-lemma ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite_of_etale
-    (P : Scheme.{u}) [P.Over (Spec (CommRingCat.of k₀))]
-    [IsFinite (P ↘ Spec (CommRingCat.of k₀))] [Etale (P ↘ Spec (CommRingCat.of k₀))] :
-    PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l (P ↘ Spec (CommRingCat.of k₀))) := by
-  have : IsIso
-      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
-    inferInstanceAs (IsIso (pullback.snd _ _))
-  have : IsFinite (P ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
-    inferInstanceAs (IsFinite (pullback.snd _ _))
-  have : Etale (P ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
-    inferInstanceAs (Etale (pullback.snd _ _))
-  have := ProEtale.preservesFiniteColimits_adicLowerStar_of_isAlgClosed l
-    (P ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
-  have hg : (P ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure ≫
-      inv (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure =
-      Scheme.Hom.geometricFiberMap (P ↘ Spec (CommRingCat.of k₀)) (comp_over _ _) := by
-    rw [IsIso.comp_inv_eq, Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure]
-  have : PreservesFiniteColimits
-      (ProEtale.adicLowerStar l
-        (Scheme.Hom.geometricFiberMap (P ↘ Spec (CommRingCat.of k₀)) (comp_over _ _))) :=
-    preservesFiniteColimits_of_natIso (ProEtale.adicLowerStarComp l _ _ ≪≫
-      ProEtale.adicLowerStarCongr l hg)
-  exact IsoAlgebra.preservesFiniteColimits_mapOfNatIso _
-
 end Derived
 
 namespace WeilSheaf
@@ -231,21 +187,5 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   (f : X ⟶ P) [f.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact f] [QuasiSeparated f]
   [LocallyOfFiniteType f]
-
-/-- **Leray over a finite étale base.** For a morphism `f : X ⟶ P` of `k₀`-schemes to a finite
-étale `k₀`-scheme `P` and a Weil sheaf `F` on `X`, `Hⁱ(X ⊗ k̄, F) ≅ Γ(P̄, Rⁱf_* F)` as Frobenius
-modules: `Ra_{X*} ≅ Ra_{P*} ∘ Rf_*` for the structure morphisms `a_X`, `a_P`, and the cohomology
-of `P ⊗ k̄` is concentrated in degree `0`. -/
-theorem nonempty_equiv_cohomology_globalSections_higherLowerStar (F : WeilSheaf k₀ l X)
-    (i : ℕ) :
-    Nonempty ((F.cohomology i).Equiv ((higherLowerStar f i).obj F).globalSections) := by
-  have := ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite_of_etale k₀ l P
-  exact ⟨(globalSectionsEquivOfIso (ObjectProperty.isoMk _
-    ((_root_.DerivedCategory.homologyFunctor _ i).mapIso
-      ((Functor.rightDerivedFunctorNatIso
-        (ProEtaleWeilSheaf.lowerStarCongr k₀ l (comp_over f _).symm)).app _) ≪≫
-      ProEtaleWeilSheaf.homologyRightDerivedLowerStarCompIso k₀ l f
-        (P ↘ Spec (CommRingCat.of k₀)) _ i))).trans
-    (globalSectionsLowerStarEquiv (P ↘ Spec (CommRingCat.of k₀)) _)⟩
 
 end AlgebraicGeometry.WeilSheaf

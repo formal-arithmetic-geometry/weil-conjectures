@@ -365,19 +365,6 @@ theorem isIso_upperStar_map_upperShriekBaseChange_of_forall_integral
   exact (NatTrans.isIso_app_iff_of_iso (Functor.whiskerRight (upperShriekBaseChangeNatTrans ℓ sq)
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ o)) e).1 h₂
 
-/-- **From integral to `ℚ̄_ℓ`-coefficients**: if, for every finite subextension `E ⊆ ℚ̄_ℓ`, the
-exceptional base change map with `𝒪_E`-coefficients is an isomorphism, then so is the one with
-`ℚ̄_ℓ`-coefficients (`isIso_upperStar_map_upperShriekBaseChange_of_forall_integral` for
-`o = 𝟙`). -/
-theorem isIso_upperShriekBaseChange_of_forall_isIso_integral (sq : IsPullback g' f' f g)
-    (h : ∀ (E : FiniteIntermediateField ℓ) (P : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧),
-      IsIso ((PadicIntegersRingObj.upperShriekBaseChange ℓ E.1 sq).app P))
-    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (upperShriekBaseChange ℓ sq L) := by
-  have h' := isIso_upperStar_map_upperShriekBaseChange_of_forall_integral ℓ sq (𝟙 X')
-    (fun E P ↦ by have := h E P; infer_instance) L
-  rwa [← NatIso.isIso_map_iff (boundedConstructibleUpperStarId _ ℓ X').symm] at h'
-
 /-! ### Reduction modulo `ℓ` and smooth base change with finite coefficients -/
 
 section Reduction
@@ -484,45 +471,6 @@ theorem isIso_map_etaleReduction_map_upperShriekBaseChange_integral (sq : IsPull
   rw [isIso_comp_right_iff] at hR
   exact hR
 
-/-- **Smooth base change for `Rf^!` with `𝒪_E`-coefficients, from finite coefficients**: let
-`f` be smooth of relative dimension `d` and let `γ_f`, `γ_{f'}` be comparisons of the reduction
-modulo `ℓ` with `Rf_!` and `Rf'_!` whose transposes `(Rf^! K)_{𝒪_E ⧸ ℓ} ⟶ Rf^! (K_{𝒪_E ⧸ ℓ})`
-are invertible and which are compatible with compact-support base change
-(`EtaleReductionLowerShriekBaseChangeCompatible`). Then the exceptional base change map
-`Lg'^* Rf^! P ⟶ Rf'^! Lg^* P` with `𝒪_E`-coefficients is an isomorphism: its reduction is
-identified with the étale exceptional base change map of the reduction
-(`isIso_map_etaleReduction_map_upperShriekBaseChange_integral`), invertible by smooth base change
-with finite coefficients
-(`Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`), and the
-reduction reflects isomorphisms (`isIso_of_isIso_etaleReduction_map`). -/
-theorem isIso_upperShriekBaseChange_integral_of_compatible (sq : IsPullback g' f' f g) (d : ℕ)
-    [SmoothOfRelativeDimension d f.left] [HasCompactification f.left]
-    [HasCompactification f'.left]
-    (γf : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ⋙ etaleReduction ℓ E 1 Y ≅
-      etaleReduction ℓ E 1 X ⋙
-        Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E 1)) f.left)
-    (γf' : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f' ⋙ etaleReduction ℓ E 1 Y' ≅
-      etaleReduction ℓ E 1 X' ⋙
-        Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E 1)) f'.left)
-    (hγf : IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-      (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γf.inv)).natTrans)
-    (hγf' : IsIso (mateEquiv
-      (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f')
-      (Etale.rightDerivedUpperShriekAdjunction _ f'.left) (TwoSquare.mk _ _ _ _ γf'.inv)).natTrans)
-    (hσ : EtaleReductionLowerShriekBaseChangeCompatible ℓ E 1 sq γf γf')
-    (P : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    IsIso ((PadicIntegersRingObj.upperShriekBaseChange ℓ E sq).app P) := by
-  have := isNoetherian_of_locallyOfFiniteType Y.hom
-  have : HasInvertibleExponent (integersModPowCoeff.{u} ℓ E 1) X.left :=
-    HasInvertibleExponent.of_hom X.hom
-  have := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
-    (integersModPowCoeff.{u} ℓ E 1) f.left d sq.overLeft
-  refine isIso_of_isIso_etaleReduction_map ℓ E one_ne_zero _
-    (isIso_map_etaleReduction_map_upperShriekBaseChange_integral ℓ E sq γf γf' hγf hγf' hσ P
-      (𝟭 _) ?_)
-  exact inferInstanceAs (IsIso ((Etale.rightDerivedUpperShriekBaseChangeMap
-    (integersModPowCoeff.{u} ℓ E 1) sq.overLeft).app _))
-
 /-- The square `sq` admits comparisons of the reduction modulo `ℓ` with `Rf_!` and `Rf'_!`, with
 invertible transposes, which are compatible with compact-support base change
 (`EtaleReductionLowerShriekBaseChangeCompatible`). -/
@@ -542,28 +490,6 @@ def HasEtaleReductionLowerShriekBaseChangeCompatible (sq : IsPullback g' f' f g)
     EtaleReductionLowerShriekBaseChangeCompatible ℓ E 1 sq γf γf'
 
 end Reduction
-
-/-- **Smooth base change for `Rf^!` along any morphism, given the compatibility of the reduction
-modulo `ℓ` with compact-support base change** (SGA 4, Exposé XVIII, Théorème 3.2.5 and
-Théorème 2.9 (Var 4); blueprint `sk-prop-sp-purity-bc`): for a cartesian square
-`g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` smooth of relative dimension
-`d` and `g` arbitrary, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with
-`ℚ̄_ℓ`-coefficients is an isomorphism for every `L`, provided that, for every finite subextension
-`E ⊆ ℚ̄_ℓ`, the reduction modulo `ℓ` admits comparisons with `Rf_!` and `Rf'_!` (with invertible
-transposes) compatible with compact-support base change
-(`HasEtaleReductionLowerShriekBaseChangeCompatible`). The `ℚ̄_ℓ` map comes from the `𝒪_E` maps
-(`isIso_upperShriekBaseChange_of_forall_isIso_integral`), which are invertible by smooth base
-change with finite coefficients (`isIso_upperShriekBaseChange_integral_of_compatible`). -/
-theorem isIso_upperShriekBaseChange_of_etaleReductionCompatible (sq : IsPullback g' f' f g)
-    (d : ℕ) [SmoothOfRelativeDimension d f.left]
-    (h : ∀ E : FiniteIntermediateField ℓ, HasEtaleReductionLowerShriekBaseChangeCompatible ℓ E.1 sq)
-    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (upperShriekBaseChange ℓ sq L) := by
-  have := HasCompactification.of_over f
-  have := HasCompactification.of_over f'
-  refine isIso_upperShriekBaseChange_of_forall_isIso_integral ℓ sq (fun E P ↦ ?_) L
-  obtain ⟨γf, γf', hγf, hγf', hσ⟩ := h E
-  exact isIso_upperShriekBaseChange_integral_of_compatible ℓ E.1 sq d γf γf' hγf hγf' hσ P
 
 /-! ### Reduction to proper morphisms -/
 

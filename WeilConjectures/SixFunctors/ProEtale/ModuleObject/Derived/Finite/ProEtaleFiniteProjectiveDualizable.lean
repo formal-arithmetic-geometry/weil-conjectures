@@ -35,46 +35,4 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-private lemma isDualizable_finite_power
-    {A : Type*} [Category A] [Preadditive A] [MonoidalCategory A]
-    [MonoidalPreadditive A] [HasFiniteBiproducts A]
-    (U : A) (hU : IsDualizable U) (n : ℕ) :
-    IsDualizable (∏ᶜ fun _ : Fin n ↦ U) := by
-  let : HasBinaryBiproducts A := HasBinaryBiproducts.of_hasBinaryProducts
-  induction n with
-  | zero =>
-    apply IsZero.isDualizable
-    rw [IsZero.iff_id_eq_zero]
-    apply Pi.hom_ext
-    intro i
-    exact Fin.elim0 i
-  | succ n hn =>
-    let V := ∏ᶜ fun _ : Fin n ↦ U
-    let e : U ⊞ V ≅ ∏ᶜ (fun _ : Fin (n + 1) ↦ U) :=
-      { hom := Pi.lift (Fin.cases biprod.fst (fun i ↦ biprod.snd ≫ Pi.π _ i))
-        inv := biprod.lift (Pi.π _ 0) (Pi.lift fun i : Fin n ↦ Pi.π _ i.succ)
-        hom_inv_id := by
-          apply biprod.hom_ext
-          · simp
-          · apply Pi.hom_ext
-            intro i
-            simp
-        inv_hom_id := by
-          apply Pi.hom_ext
-          intro i
-          refine Fin.cases ?_ (fun j ↦ ?_) i
-          · simp
-          · simp }
-    exact (hU.biprod hn).of_iso e
-
-private theorem finiteFree_retract_isDualizable
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (S : Scheme.{u}) (r : ℕ)
-    (L : supportModules Λ S) (ι : L ⟶ Mod.finiteFree (condensedRingObj Λ S) r)
-    (π : Mod.finiteFree (condensedRingObj Λ S) r ⟶ L) (h : ι ≫ π = 𝟙 _) :
-    IsDualizable L := by
-  apply IsDualizable.of_retract ⟨ι, π, h⟩
-  exact (isDualizable_finite_power _ isDualizable_unit r).of_iso
-    (biproduct.isoProduct (fun _ : Fin r ↦ Mod.regular (condensedRingObj Λ S))).symm
-
 end AlgebraicGeometry.ProEtale.CondensedRing

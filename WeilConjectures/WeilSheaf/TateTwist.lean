@@ -141,16 +141,6 @@ theorem isLisse_tateTwistSheaf : ∀ m : ℤ, (tateTwistSheaf k₀ l X m).IsLiss
   | (n : ℕ) => isLisse_tateTwistSheafNat k₀ l X n
   | .negSucc n => (isLisse_tateTwistSheafNat k₀ l X (n + 1)).dual
 
-/-- `ℚ̄_ℓ(0)` is the constant Weil sheaf `ℚ̄_ℓ`. -/
-theorem tateTwistSheaf_zero : tateTwistSheaf k₀ l X 0 = adicConstant k₀ l X :=
-  rfl
-
-/-- `ℚ̄_ℓ(1)` is the constant Weil twist `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)}`
-(`AlgebraicGeometry.WeilSheaf.constantTwist`). This holds by definition. -/
-theorem tateTwistSheaf_one :
-    tateTwistSheaf k₀ l X 1 = (adicConstant k₀ l X).constantTwist (cyclotomicUnit k₀ l) :=
-  rfl
-
 end
 
 end WeilSheaf

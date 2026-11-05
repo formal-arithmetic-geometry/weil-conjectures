@@ -168,14 +168,6 @@ theorem lisseStalk_faithful_of_irreducibleSpace [IrreducibleSpace Y]
     rw [← cancel_epi (kernel.ι φ), kernel.condition, comp_zero]
   exact ObjectProperty.hom_ext _ (sub_eq_zero.1 h0)
 
-omit [CompactSpace Y] in
-/-- **The stalk functor is faithful** on lisse sheaves on a connected regular Noetherian
-scheme, which is irreducible (`AlgebraicGeometry.IsRegular.irreducibleSpace`). -/
-theorem lisseStalk_faithful (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G H : LisseSheaf l Y}
-    (f g : G ⟶ H) (h : (lisseStalk l t).map f = (lisseStalk l t).map g) : f = g :=
-  have := IsRegular.irreducibleSpace Y
-  lisseStalk_faithful_of_irreducibleSpace t f g h
-
 include hU in
 omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
 /-- The transport of stalks preserves the evaluation pairing `𝓗om(G, N)_y × G_y → N_y`. -/

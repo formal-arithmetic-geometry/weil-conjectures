@@ -31,13 +31,6 @@ variable {C : Type*} [Category* C] {D : Type*} [Category* D] (e : C ≌ D)
   (J : GrothendieckTopology C) (K : GrothendieckTopology D) [e.inverse.IsDenseSubsite K J]
   (A : Type*) [Category* A] [HasWeakSheafify J A] [HasWeakSheafify K A]
 
-/-- The sections of the transport of a sheaf `G` along an equivalence of sites over `Y : D`
-are the sections of `G` over `e.inverse.obj Y`. -/
-def Equivalence.sheafCongrFunctorCompSheafSectionsObjIso (Y : D) :
-    (e.sheafCongr J K A).functor ⋙ (sheafSections K A).obj (Opposite.op Y) ≅
-      (sheafSections J A).obj (Opposite.op (e.inverse.obj Y)) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _)
-
 /-- The transport of sheaves along an equivalence of sites commutes with the constant sheaf
 functors: both `constantSheaf J A ⋙ functor` and `constantSheaf K A` are left adjoint to
 global sections over a terminal object. -/

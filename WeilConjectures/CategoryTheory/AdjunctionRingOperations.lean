@@ -28,17 +28,6 @@ variable {C : Type u} [Category.{v} C] [CartesianMonoidalCategory C]
   {L : D ⥤ C} {V : C ⥤ D} (adj : L ⊣ V)
   [PreservesFiniteProducts V]
 
-/-- The counit converts an inverse terminal comparison into the terminal map. -/
-theorem counit_constant {A : C} (o : 𝟙_ C ⟶ A) (T : D) :
-    L.map (toUnit T ≫ (preservesTerminalIso V).inv ≫ V.map o) ≫ adj.counit.app A =
-      toUnit (L.obj T) ≫ o := by
-  simp only [Functor.map_comp, Category.assoc]
-  rw [show L.map (V.map o) ≫ adj.counit.app A = adj.counit.app _ ≫ o from
-    adj.counit.naturality o]
-  simp only [← Category.assoc]
-  apply congrArg (fun k ↦ k ≫ o)
-  exact toUnit_unique _ _
-
 /-- The counit converts inverse product comparisons into the product of counits. -/
 theorem counit_pair {A B X : C} (o : A ⊗ B ⟶ X) {T : D}
     (x : T ⟶ V.obj A) (y : T ⟶ V.obj B) :

@@ -31,15 +31,6 @@ open Limits
 
 attribute [local instance] preservesBinaryBiproducts_of_preservesBiproducts
 
-/-- If `P ≅ (A ⊞ B) ⊞ M` and an additive functor `G` sends both `P` and `A` to `U`, then
-`U ≅ U ⊞ (G B ⊞ G M)`. -/
-lemma Functor.nonempty_iso_biprod_of_iso_biprod {C D : Type*} [Category C] [Category D]
-    [Preadditive C] [Preadditive D] [HasBinaryBiproducts C] [HasBinaryBiproducts D]
-    (G : C ⥤ D) [G.Additive] {P A B M : C} (e : P ≅ (A ⊞ B) ⊞ M) {U : D}
-    (hP : G.obj P ≅ U) (hA : G.obj A ≅ U) : Nonempty (U ≅ U ⊞ (G.obj B ⊞ G.obj M)) :=
-  ⟨hP.symm ≪≫ G.mapIso e ≪≫ G.mapBiprod _ _ ≪≫ biprod.mapIso (G.mapBiprod _ _) (Iso.refl _) ≪≫
-    biprod.associator _ _ _ ≪≫ biprod.mapIso hA (Iso.refl _)⟩
-
 /-- A natural transformation between additive functors is invertible at a finite biproduct if it
 is invertible at the summands. -/
 lemma NatTrans.isIso_app_biproduct {C D : Type*} [Category C] [Category D]

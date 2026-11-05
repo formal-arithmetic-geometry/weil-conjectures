@@ -59,22 +59,4 @@ attribute [local irreducible] changeOfRingsOfUniverses changeOfRingsHomOfUnivers
   scalarExtensionSection
   siteSheafTensorTmul siteSheafTensorRight siteSheafTensorSecondMap
 
-/-- Canonical associators and unitors for the actual sheafified tensor product.
-Each isomorphism is specified by its action on local pure tensors, rather than an
-unspecified monoidal structure. Source: Stacks, Tag 03EK
-(auxiliary; not a blueprint node). -/
-structure ScalarTensorCoherence (R : Sheaf J CommRingCat.{u}) where
-  associator : ∀ (N P Q : Mod R), 𝒯 (𝒯 N P) Q ≅ 𝒯 N (𝒯 P Q)
-  associator_tmul : ∀ (N P Q : Mod R) (U : Cᵒᵖ)
-      (x : N.val.obj U) (y : P.val.obj U) (z : Q.val.obj U),
-    ((associator N P Q).hom.val.app U)
-        (siteSheafTensorTmul (𝒯 N P) Q U (siteSheafTensorTmul N P U x y) z) =
-      siteSheafTensorTmul N (𝒯 P Q) U x (siteSheafTensorTmul P Q U y z)
-  leftUnitor : ∀ N : Mod R, 𝒯 (𝒪 R) N ≅ N
-  leftUnitor_tmul : ∀ (N : Mod R) (U : Cᵒᵖ) (a : R.obj.obj U) (x : N.val.obj U),
-    ((leftUnitor N).hom.val.app U) (siteSheafTensorTmul (𝒪 R) N U a x) = a • x
-  rightUnitor : ∀ N : Mod R, 𝒯 N (𝒪 R) ≅ N
-  rightUnitor_tmul : ∀ (N : Mod R) (U : Cᵒᵖ) (x : N.val.obj U) (a : R.obj.obj U),
-    ((rightUnitor N).hom.val.app U) (siteSheafTensorTmul N (𝒪 R) U x a) = a • x
-
 end SheafOfModules

@@ -106,21 +106,7 @@ lemma refinementComparison_eq_of_baseChange (r : c.Refinement d)
   ExchangeFormalism.refinementComparison_eq_of_baseChange F c.i c.g d.i d.g r.hom hr.flip.w
     r.hom_g β hβ
 
-/-- The comparison along a refinement `r`, in terms of the unit of `r^* ⊣ r_*` and the inverse
-of the base change map of the extension by zero of the square of `r`. -/
-lemma refinementComparison_app_eq (r : c.Refinement d)
-    (hr : IsPullback c.i (𝟙 X) r.hom d.i) (K : F.obj X) :
-    haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
-    (F.refinementComparison r hr).app K =
-      (F.pf d.g).map ((F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫
-        (F.pf r.hom).map (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
-          (F.sh c.i).map ((F.pbId X).hom.app K))) ≫
-        (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) :=
-  haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
-  ExchangeFormalism.refinementComparison_app_eq F c.i c.g d.i d.g r.hom hr.flip.w r.hom_g K
-
 end Refinement
-
 
 section ProperExchange
 
@@ -198,17 +184,6 @@ theorem shriekIso_eq (r : e.Refinement c) (s : e.Refinement d)
       (Compactification.Refinement.ext_of_isSchemeTheoreticallyDominant hdense
         ((Compactification.infSnd e e').comp (Compactification.infSnd c d))
         ((Compactification.infFst e e').comp s))]
-
-/-- For a refinement `r : c.Refinement d` with cartesian square, `F.shriekIso c d` is the inverse
-of the comparison along `r`. -/
-theorem shriekIso_eq_symm (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X) r.hom d.i) :
-    F.shriekIso c d = (asIso (F.refinementComparison r hr)).symm := by
-  have hid : IsPullback c.i (𝟙 X) (Compactification.Refinement.id c).hom c.i := by
-    rw [Compactification.Refinement.id_hom]
-    exact IsPullback.of_vert_isIso ⟨by simp⟩
-  rw [F.shriekIso_eq (Compactification.Refinement.id c) r hid hr]
-  ext : 1
-  simp [F.refinementComparison_eq_id _ hid rfl]
 
 @[simp]
 theorem shriekIso_refl (c : Compactification f) : F.shriekIso c c = Iso.refl _ := by

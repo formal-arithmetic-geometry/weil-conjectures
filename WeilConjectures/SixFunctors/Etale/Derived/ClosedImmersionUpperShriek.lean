@@ -223,34 +223,6 @@ section Derived
 variable {R : Type (u + 1)} [Ring R] {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Blueprint `lem-exc-closed-ambient`: Closed-immersion right adjoint before restriction.
-
-Let `i : Z ⟶ X` be a closed immersion with open complement `j : U ⟶ X`. On the unbounded
-derived categories of étale sheaves of modules, the direct image `Ri_*` has a right adjoint, the
-right derived functor `Ri^!` of the sheaf-level `i^! = i^* Γ_Z`
-(`AlgebraicGeometry.Etale.closedUpperShriek`). No constructibility is assumed of the values of
-this right adjoint.
-
-On sheaves `i_* ⊣ i^!` (`AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction`), and
-`i_*` is exact (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), so
-`Ri_*` is `i_*` applied termwise and
-`CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction` applies: `i^!` is computed
-on K-injective resolutions. -/
-noncomputable def derivedLowerStarClosedUpperShriekAdjunction
-    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
-    ((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctor ⊣
-      (closedUpperShriek (ModuleCat.{u + 1} R) i j).rightDerivedFunctor :=
-  ((lowerStarClosedUpperShriekAdjunction _ i j hij).mapDerivedCategoryRightDerivedAdjunction
-    ).ofNatIsoLeft ((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctorIsoMapDerivedCategory.symm
-
-/-- The direct image `Ri_*` along a closed immersion is a left adjoint on the unbounded derived
-categories of étale sheaves of modules
-(`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`). -/
-lemma isLeftAdjoint_rightDerivedFunctor_lowerStar_of_isClosedImmersion
-    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
-    ((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctor.IsLeftAdjoint :=
-  (derivedLowerStarClosedUpperShriekAdjunction i j hij).isLeftAdjoint
-
 end Derived
 
 end Etale

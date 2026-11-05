@@ -28,13 +28,4 @@ universe v u v' u'
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} {A : Type u'}
   [Category.{v'} A] [Preadditive A] [HasLimitsOfShape (Discrete ℕ) A]
 
-/-- A sheaf all of whose sections are derived `n`-adically complete is derived `n`-adically
-complete. -/
-lemma isDerivedAdicComplete_of_forall {n : ℤ} (F : Sheaf J A)
-    (h : ∀ U : Cᵒᵖ, IsDerivedAdicComplete n (F.obj.obj U)) : IsDerivedAdicComplete n F :=
-  IsDerivedAdicComplete.of_map (fun U : Cᵒᵖ ↦ sheafToPresheaf J A ⋙ (evaluation Cᵒᵖ A).obj U)
-    (fun f hf ↦ by
-      have : IsIso ((sheafToPresheaf J A).map f) := @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ hf
-      exact isIso_of_reflects_iso f (sheafToPresheaf J A)) h
-
 end CategoryTheory.Sheaf

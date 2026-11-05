@@ -346,11 +346,6 @@ instance Scheme.Etale.surjective_of_epi {S : Scheme} {X Y : S.Etale} (f : X ⟶ 
     [Epi f] : Surjective f.left :=
   Over.surjective_of_epi_of_isOpenMap f.left.isOpenMap
 
-/-- A morphism in the small étale site is an epimorphism if and only if it is surjective. -/
-lemma Scheme.Etale.epi_iff_surjective {S : Scheme} {X Y : S.Etale} (f : X ⟶ Y) :
-    Epi f ↔ Surjective f.left :=
-  ⟨fun _ ↦ Over.surjective_of_epi_of_isOpenMap f.left.isOpenMap, fun _ ↦ inferInstance⟩
-
 /-- The small étale site of a scheme is preregular. -/
 instance Scheme.Etale.preregular (S : Scheme.{u}) : Preregular S.Etale := by
   apply Preregular.of_hasPullbacks_of_effectiveEpi_fst
@@ -361,9 +356,5 @@ instance Scheme.Etale.preregular (S : Scheme.{u}) : Preregular S.Etale := by
     simp only [MorphismProperty.Over.forget_comp_forget_map]
     infer_instance
   infer_instance
-
-/-- The small étale site of a scheme is precoherent. -/
-lemma Scheme.Etale.precoherent (S : Scheme.{u}) : Precoherent S.Etale :=
-  inferInstance
 
 end AlgebraicGeometry

@@ -191,39 +191,6 @@ theorem nonempty_iso_geometricConstituent_zero :
   exact ⟨(Scheme.Hom.geometricFiberMap D.j (comp_over D.j _))^*ᵃ[l].mapIso e ≪≫
     ProEtale.adicUpperStarUnitIso l _⟩
 
-/-- A geometrically constant lisse sheaf on `U₀` is constant on the connected `Ū`: it is a
-finite direct sum of copies of `ℚ̄_ℓ` there. -/
-theorem exists_iso_biproduct_of_isGeometricallyConstant (hc : D.IsGeometricallyConstant) :
-    ∃ n : ℕ, Nonempty (D.sheaf.obj.carrier ≅ ⨁ fun _ : Fin n ↦
-      ProEtale.AdicSheaf.unit l (D.U ↘ Spec (CommRingCat.of k₀)).geometricFiber) := by
-  have := D.irreducibleSpace_geometricFiber
-  let V : (D.U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens := ⊤
-  have : ConnectedSpace V := isConnected_iff_connectedSpace.1 (by
-    rw [TopologicalSpace.Opens.coe_top]
-    exact isConnected_univ)
-  obtain ⟨n, ⟨e⟩⟩ := hc V this
-  have : IsIso V.ι := by
-    rw [← Scheme.topIso_hom]
-    infer_instance
-  exact ⟨n, ⟨(V.ι)^*ᵃ[l].preimageIso
-    (e ≪≫ (ProEtale.AdicSheaf.freeUpperStarIso l (Fin n) V.ι).symm)⟩⟩
-
-/-- A nonzero geometrically constant lisse sheaf has the trivial rank-one sheaf
-`ℒ_{ψ(0 · x)} = ℚ̄_ℓ` as a geometric constituent: on the connected `Ū` it is a nonzero finite
-sum of copies of `ℚ̄_ℓ`, which surjects onto `ℒ_{ψ(0 · x)}|_U = ℚ̄_ℓ`. -/
-theorem hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant
-    (hne : ¬ IsZero D.sheaf) (hc : D.IsGeometricallyConstant) :
-    D.sheaf.HasLinearArtinSchreierConstituent ψ 0 D.j := by
-  obtain ⟨n, ⟨e⟩⟩ := D.exists_iso_biproduct_of_isGeometricallyConstant hc
-  obtain ⟨eT⟩ := D.nonempty_iso_geometricConstituent_zero ψ
-  have hn : n ≠ 0 := by
-    rintro rfl
-    refine hne (isZero_iff_isZero_carrier.2 (IsZero.of_iso ?_ e))
-    exact ⟨fun _ ↦ ⟨⟨0⟩, fun _ ↦ biproduct.hom_ext' _ _ fun j ↦ Fin.elim0 j⟩,
-      fun _ ↦ ⟨⟨0⟩, fun _ ↦ biproduct.hom_ext _ _ fun j ↦ Fin.elim0 j⟩⟩
-  exact ⟨_, 𝟙 _, e.hom ≫ biproduct.π _ ⟨0, Nat.pos_of_ne_zero hn⟩ ≫ eT.inv, D.lisse,
-    inferInstance, inferInstance⟩
-
 /-- **A trivial geometric constituent forces geometric constancy.** If the trivial rank-one
 sheaf `ℒ_{ψ(0 · x)} = ℚ̄_ℓ` is a geometric constituent of an irreducible lisse sheaf `M`, then
 `M` is geometrically constant: this is the sheaf-theoretic Clifford theorem

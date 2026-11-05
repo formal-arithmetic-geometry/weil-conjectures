@@ -65,20 +65,6 @@ def extendGenerators (E : Sheaf J (Type w))
     (PresheafOfModules.sheafificationAdjunction (𝟙 (ring B).obj))).homEquiv E.obj M).symm
       a.hom
 
-/-- The actual abelian-presheaf sheafification unit for the free presheaf.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
-def freeModuleUnit (E : Sheaf J (Type w)) :
-    (PresheafOfModules.freeObj (R := (ring B).obj) E.obj).presheaf ⟶
-      ((free B).obj E).val.presheaf :=
-  letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
-  letI : ∀ U : Cᵒᵖ,
-      HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
-        AddCommGrpCat.{w} :=
-    fun _ ↦ HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
-  letI := GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
-    J (A := AddCommGrpCat.{w})
-  toSheafify J (PresheafOfModules.freeObj (R := (ring B).obj) E.obj).presheaf
-
 private def freeHomEquivRaw (E : Sheaf J (Type w))
     (M : SheafOfModules.{w} (ring B)) :
     ((free B).obj E ⟶ M) ≃ (E.obj ⟶ ((underlyingRaw B).obj M).obj) :=
@@ -121,71 +107,6 @@ theorem freeModule_restrict_bijective (E : Sheaf J (Type w))
     apply Sheaf.hom_ext
     rw [← freeHomEquivRaw_apply]
     exact (freeHomEquivRaw B E M).apply_symm_apply a.hom
-
-/-- The explicitly constructed extension is the inverse bijection.
-Source: Stacks 04BL and 03CY
-(auxiliary; not a blueprint node).
-
-Proof: evaluating the presheaf extension on [e] gives a(e). Sheafification's unit
-therefore gives the first identity. For a map h, its composite with the sheafification
-unit and the extension of its generator values agree on [e], hence on finite sums.
-Uniqueness in def-weil-presheaf-modules-sheafification gives the second identity.
-These are steps 2--4 of the node's proof. -/
-theorem freeModule_extend_inverse (E : Sheaf J (Type w))
-    (M : SheafOfModules.{w} (ring B)) :
-    (∀ a : E ⟶ (underlyingRaw B).obj M,
-      restrictGenerators B E M (extendGenerators B E M a) = a) ∧
-    (∀ h : (free B).obj E ⟶ M,
-      extendGenerators B E M (restrictGenerators B E M h) = h) := by
-  constructor
-  · intro a
-    apply Sheaf.hom_ext
-    rw [← freeHomEquivRaw_apply]
-    exact (freeHomEquivRaw B E M).apply_symm_apply a.hom
-  · intro h
-    change (freeHomEquivRaw B E M).symm (restrictGenerators B E M h).hom = h
-    rw [← freeHomEquivRaw_apply]
-    exact (freeHomEquivRaw B E M).symm_apply_apply h
-
-/-- The inverse has exactly the finite-sum formula before module sheafification.
-Source: Stacks 04BL and 03CY
-(auxiliary; not a blueprint node).
-
-Proof: node steps 2--3 identify the presheaf extension with freeObjDesc, whose
-component is ModuleCat.freeDesc, namely Finsupp.lift. Thus it sends a finite
-coefficient family v to the sum of v(e) times a(e). The defining Hom equivalence
-for module sheafification says that composing the extension with its unit is this
-presheaf map. No surjectivity of the unit on sections is asserted or needed. -/
-theorem freeModule_extend_formula (E : Sheaf J (Type w))
-    (M : SheafOfModules.{w} (ring B))
-    (a : E ⟶ (underlyingRaw B).obj M) (U : Cᵒᵖ)
-    (v : E.obj.obj U →₀ (ring B).obj.obj U) :
-    (extendGenerators B E M a).val.app U
-      ((freeModuleUnit B E).app U v) =
-        v.sum (fun e b ↦ b • @id (M.val.obj U) (a.hom.app U e)) := by
-  let := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
-  let : ∀ U : Cᵒᵖ,
-      HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
-        AddCommGrpCat.{w} :=
-    fun _ ↦ HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
-  let := GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
-    J (A := AddCommGrpCat.{w})
-  have h : PresheafOfModules.sheafificationHomEquiv (𝟙 (ring B).obj)
-      (extendGenerators B E M a) = PresheafOfModules.freeObjDesc a.hom := by
-    rw [← PresheafOfModules.sheafificationAdjunction_homEquiv_apply]
-    dsimp only [extendGenerators]
-    rw [Adjunction.comp_homEquiv]
-    simp only [Equiv.symm_trans_apply, PresheafOfModules.freeAdjunction_homEquiv]
-    erw [Equiv.apply_symm_apply]
-    rfl
-  have h' := congrArg (PresheafOfModules.toPresheaf (ring B).obj).map h
-  rw [PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def] at h'
-  have h'' := ConcreteCategory.congr_hom (NatTrans.congr_app h' U) v
-  change (extendGenerators B E M a).val.app U
-      ((freeModuleUnit B E).app U v) = ModuleCat.freeDesc (a.hom.app U) v at h''
-  rw [h'']
-  exact Finsupp.lift_apply (M := M.val.obj U) (R := (ring B).obj.obj U)
-    (X := E.obj.obj U) (fun e ↦ a.hom.app U e) v
 
 /-- Naturality of the restriction bijections in both E and M.
 Source: Stacks 04BL and 03CY

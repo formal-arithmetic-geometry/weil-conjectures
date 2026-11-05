@@ -60,18 +60,6 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- The direct image with compact support along the identity is the identity: `R(𝟙)_! K ≅ K`,
-the identity being proper (`AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar`)
-and the pushforward along the identity being the identity. -/
-noncomputable def WeilComplex.derivedLowerShriekIdObjIso (X : Scheme.{u})
-    [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    (K : WeilComplex k₀ l X) : (WeilComplex.derivedLowerShriek k₀ l (𝟙 X)).obj K ≅ K :=
-  WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar (𝟙 X) K ≪≫ ObjectProperty.isoMk _
-    ((Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarIdIso k₀ l X)).app K.obj ≪≫
-      (Functor.rightDerivedFunctorIsoMapDerivedCategory (𝟭 _)).app K.obj ≪≫
-      (Functor.mapDerivedCategoryIdIso _).app K.obj)
-
 /-- `Spec k₀` has exactly one `K`-valued point over itself, for every field extension `K` of
 `k₀`: the structure morphism `Spec K ⟶ Spec k₀`. -/
 noncomputable instance Scheme.Hom.uniqueFieldPointsSpecSelf (K : Type u) [Field K]
@@ -81,33 +69,6 @@ noncomputable instance Scheme.Hom.uniqueFieldPointsSpecSelf (K : Type u) [Field 
   uniq y := Subtype.ext ((Category.comp_id _).symm.trans y.2)
 
 namespace WeilSheaf
-
-/-- **The global side of the trace formula on the point.** For a Weil sheaf `G` on `Spec k₀`,
-the alternating sum of the traces of `Fᵐ` on the compactly supported cohomology
-`H_c^i(Spec k̄, G)` is the trace of `Fᵐ` on the global sections `Γ(Spec k̄, G)`: the direct
-image with compact support along the identity is the identity, so `H_c^0 = Γ(Spec k̄, G)` and
-`H_c^i = 0` for `i ≠ 0`. -/
-theorem finsum_trace_compactlySupportedCohomology_spec
-    (G : WeilSheaf k₀ l (Spec (CommRingCat.of k₀))) (m : ℕ) :
-    ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-      (((toComplex.obj G).compactlySupportedCohomology i).frobeniusEnd ^ m) =
-      LinearMap.trace (PadicAlgCl l) _ (G.globalSections.frobeniusEnd ^ m) := by
-  let e := WeilComplex.derivedLowerShriekIdObjIso (l := l) (Spec (CommRingCat.of k₀))
-    (toComplex.obj G)
-  have h (i : ℤ) : LinearMap.trace (PadicAlgCl l) _
-      (((toComplex.obj G).compactlySupportedCohomology i).frobeniusEnd ^ m) =
-      LinearMap.trace (PadicAlgCl l) _
-        (((WeilComplex.homologySheaf i).obj (toComplex.obj G)).globalSections.frobeniusEnd ^
-          m) :=
-    ((globalSectionsEquivOfIso ((WeilComplex.homologySheaf i).mapIso e)).trace_frobeniusEnd_pow
-      m).symm
-  rw [finsum_eq_single _ 0 fun i hi ↦ ?_, h, Int.negOnePow_zero, Units.val_one, one_smul]
-  · exact ((globalSectionsEquivOfIso
-      (toComplexCompHomologySheafIso.app G)).trace_frobeniusEnd_pow m).symm
-  · have : Subsingleton
-        ((WeilComplex.homologySheaf i).obj (toComplex.obj G)).globalSections.carrier :=
-      subsingleton_globalSections_of_isZero (WeilComplex.isZero_homologySheaf_singleComplex hi G)
-    rw [h, Subsingleton.elim (_ ^ m) 0, map_zero, smul_zero]
 
 /-- **The local side of the trace formula on the point.** The trace function of a Weil sheaf
 `G` on `Spec k₀` at the (unique) `𝔽_{qᵐ}`-point, `m ≥ 1`, is the trace of `Fᵐ` on the global
@@ -148,32 +109,6 @@ theorem traceFunction_toComplex_spec_eq_trace_globalSections
     (toComplex.obj G).traceFunction m y =
       LinearMap.trace (PadicAlgCl l) _ (G.globalSections.frobeniusEnd ^ m) := by
   rw [WeilComplex.traceFunction_toComplex, traceFunction_spec_eq_trace_globalSections G m hm y]
-
-/-- **The Grothendieck–Lefschetz trace formula for Weil sheaves on `Spec k₀`**, at the
-unique `𝔽_{qᵐ}`-point, `m ≥ 1`: `∑ᵢ (-1)ⁱ Tr(Fᵐ | H_c^i(Spec k̄, G)) = t_{G,m}(y)`. -/
-theorem finsum_trace_compactlySupportedCohomology_spec_eq_traceFunction
-    (G : WeilSheaf k₀ l (Spec (CommRingCat.of k₀))) (m : ℕ) (hm : 1 ≤ m)
-    (y : (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).fieldPoints
-      (FiniteField.galoisExtension k₀ m)) :
-    ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-      (((toComplex.obj G).compactlySupportedCohomology i).frobeniusEnd ^ m) =
-      (toComplex.obj G).traceFunction m y := by
-  rw [finsum_trace_compactlySupportedCohomology_spec,
-    traceFunction_toComplex_spec_eq_trace_globalSections G m hm y]
-
-/-- **The Grothendieck–Lefschetz trace formula for Weil sheaves on `Spec k₀`**, in the shape of
-the general formula: for `m ≠ 0`,
-`∑ᵢ (-1)ⁱ Tr(Fᵐ | H_c^i(Spec k̄, G)) = ∑_{y ∈ Spec k₀(𝔽_{qᵐ})} t_{G,m}(y)`. -/
-theorem finsum_trace_compactlySupportedCohomology_spec_eq_finsum_traceFunction
-    (G : WeilSheaf k₀ l (Spec (CommRingCat.of k₀))) {m : ℕ} (hm : m ≠ 0) :
-    ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-      (((toComplex.obj G).compactlySupportedCohomology i).frobenius.toLinearMap ^ m) =
-      ∑ᶠ y : (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).fieldPoints
-          (FiniteField.galoisExtension k₀ m),
-        (toComplex.obj G).traceFunction m y := by
-  refine .trans ?_ (finsum_unique _).symm
-  exact finsum_trace_compactlySupportedCohomology_spec_eq_traceFunction G m
-    (Nat.one_le_iff_ne_zero.2 hm) default
 
 end WeilSheaf
 

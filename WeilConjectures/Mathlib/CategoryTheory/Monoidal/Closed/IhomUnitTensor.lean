@@ -26,38 +26,6 @@ open MonoidalCategory MonoidalClosed LaxMonoidal OplaxMonoidal
 variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
   [MonoidalClosed C] [MonoidalClosed D] (G : C ⥤ D) [G.Monoidal]
 
-/-- The internal hom comparison of a monoidal functor `G` intertwines the canonical maps
-`[A, 𝟙] ⊗ Z ⟶ [A, Z]` for `A` and `G A`:
-```
-  G [A, 𝟙] ⊗ G Z ──────μ──────▶ G ([A, 𝟙] ⊗ Z) ──G φ──▶ G [A, Z]
-        │                                                  │
-        ▼                                                  ▼
-  [G A, 𝟙] ⊗ G Z ─────────────────φ───────────────▶ [G A, G Z]
-```
--/
-lemma ihomComparison_ihomUnitTensorToIhom (A Z : C) :
-    μ G _ Z ≫ G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).natTrans.app Z =
-      (((ihomComparison G A).natTrans.app (𝟙_ C) ≫ (ihom (G.obj A)).map (η G)) ▷ G.obj Z) ≫
-        ihomUnitTensorToIhom (G.obj A) (G.obj Z) := by
-  apply uncurry_injective
-  rw [uncurry_eq, uncurry_eq]
-  simp only [ihomUnitTensorToIhom, MonoidalCategory.whiskerLeft_comp, Category.assoc,
-    ihomComparison_ev, whiskerLeft_curry_ihom_ev_app, μ_natural_right_assoc]
-  have hl : μ G (𝟙_ C) Z ≫ G.map (λ_ Z).hom = η G ▷ G.obj Z ≫ (λ_ _).hom := by
-    rw [LaxMonoidal.left_unitality G, ← comp_whiskerRight_assoc, Monoidal.η_ε, id_whiskerRight,
-      Category.id_comp]
-  rw [← G.map_comp, whiskerLeft_curry_ihom_ev_app, G.map_comp, G.map_comp,
-    LaxMonoidal.associativity_inv_assoc, ← μ_natural_left_assoc]
-  erw [hl]
-  rw [associator_inv_naturality_middle_assoc, MonoidalCategory.whiskerLeft_comp]
-  have hR : (G.obj A ◁ (ihomComparison G A).natTrans.app (𝟙_ C) ≫
-      G.obj A ◁ (ihom (G.obj A)).map (η G)) ≫ (ihom.ev (G.obj A)).app (𝟙_ D) =
-      (μ G A ((ihom A).obj (𝟙_ C)) ≫ G.map ((ihom.ev A).app (𝟙_ C))) ≫ η G := by
-    rw [Category.assoc, ihom.ev_naturality, ihomComparison_ev_assoc, Category.assoc]
-  rw [← comp_whiskerRight_assoc _ (η G), ← comp_whiskerRight_assoc _ ((ihom.ev _).app _), hR]
-  simp only [comp_whiskerRight, Category.assoc]
-  rfl
-
 variable {G} {L : D ⥤ C} (adj : L ⊣ G)
 
 /-- The projection map `L (G A ⊗ T) ⟶ A ⊗ L T` of a left adjoint `L` of a monoidal functor `G`:
@@ -97,22 +65,6 @@ lemma isIso_ihomComparison_of_isIso_projectionMap (A : C) [IsIso (projectionMap 
     IsIso (ihomComparison G A).natTrans := by
   rw [← conjugateEquiv_projectionMap adj A]
   infer_instance
-
-/-- If the projection map of the left adjoint of a monoidal functor `G` is an isomorphism at `A`,
-and the canonical map `[G A, 𝟙] ⊗ G Z ⟶ [G A, G Z]` is an isomorphism (for instance if `G A` is
-dualizable), then `G` sends the canonical map `[A, 𝟙] ⊗ Z ⟶ [A, Z]` to an isomorphism. -/
-lemma isIso_map_ihomUnitTensorToIhom (A Z : C) [IsIso (projectionMap adj A)]
-    [IsIso (ihomUnitTensorToIhom (G.obj A) (G.obj Z))] :
-    IsIso (G.map (ihomUnitTensorToIhom A Z)) := by
-  have := isIso_ihomComparison_of_isIso_projectionMap adj A
-  have h := ihomComparison_ihomUnitTensorToIhom G A Z
-  have h' : IsIso (μ G _ Z ≫ G.map (ihomUnitTensorToIhom A Z) ≫
-      (ihomComparison G A).natTrans.app Z) := by
-    rw [h]
-    infer_instance
-  have := IsIso.of_isIso_comp_left (μ G _ Z)
-    (G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).natTrans.app Z)
-  exact IsIso.of_isIso_comp_right _ ((ihomComparison G A).natTrans.app Z)
 
 /-- Conversely, if `G` commutes with internal homs out of `A`, the projection map
 `L (G A ⊗ T) ⟶ A ⊗ L T` of its left adjoint is an isomorphism. -/

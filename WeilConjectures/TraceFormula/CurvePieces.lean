@@ -146,96 +146,10 @@ variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ)
 
 /-! ### The closed piece -/
 
-/-- The *closed piece* `K^Z = Rx_* Lx^* K` of `K` at a rational point `x` (blueprint
-`d-curve-pieces`). -/
-noncomputable abbrev closedPiece (x : RationalPoint X) :
-    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleLowerStar ℓ x).obj
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier)
-
-/-- The *point correspondence* `(s, 𝟙, 𝟙)` of the geometric stalk `K_x̄ = Lx^* K` at a rational
-point `x` fixed by `Φ_m`, with coefficient map the local Frobenius `F_{x,m}` (blueprint
-`d-curve-pieces`). -/
-noncomputable abbrev stalkCorrespondence (m : ℕ) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) :
-    Correspondence ℓ ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-      K.carrier) where
-  C := point k
-  c₁ := 𝟙 _
-  c₂ := 𝟙 _
-  u := (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).hom.app _ ≫
-    K.stalkFrobenius m x hx ≫ (boundedConstructibleUpperShriekId ℓ (point k)).inv.app _
-
-/-- The point correspondence is the diagonal correspondence of the local Frobenius. -/
-lemma stalkCorrespondence_eq_ofEnd (m : ℕ) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) :
-    K.stalkCorrespondence m x hx = Correspondence.ofEnd _ (K.stalkFrobenius m x hx) :=
-  rfl
-
-/-- The proper pushforward diagram `(x, x)` from the point correspondence on `s` to the graph
-`(𝟙, Φ_m)` on `X` (blueprint `d-curve-pieces`): a diagram since `x ≫ 𝟙 = 𝟙 ≫ x` and
-`x ≫ Φ_m = 𝟙 ≫ x`. -/
-noncomputable abbrev closedPieceDiagram (m : ℕ) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) :
-    (K.stalkCorrespondence m x hx).ProperPushforwardDiagram X where
-  f := x
-  D := X
-  b₁ := 𝟙 X
-  b₂ := frobeniusIterate Φ m
-  g := x
-  w₁ := by
-    rw [Category.comp_id]
-    exact (Category.id_comp x).symm
-  w₂ := by
-    rw [hx]
-    exact (Category.id_comp x).symm
-
-lemma closedPieceDiagram_coeff (m : ℕ) (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
-    (K.closedPieceDiagram m x hx).coeff = K.closedPiece x :=
-  rfl
-
-/-- The *closed piece coefficient* `u^Z = [x, x]_! F_{x,m} : LΦ_m^* K^Z ⟶ R(𝟙)^! K^Z` (blueprint
-`d-curve-pieces`): the coefficient pushforward of the local Frobenius along the proper pushforward
-diagram `(x, x)`, a coefficient map for the graph `(𝟙, Φ_m)`. -/
-noncomputable def closedPieceCoeff (m : ℕ) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ m)).obj
-        (K.closedPiece x) ⟶
-      (boundedConstructibleUpperShriek ℓ (𝟙 X)).obj
-        (K.closedPiece x) :=
-  (K.closedPieceDiagram m x hx).pushforwardCoeff
-
 /-! ### The open piece -/
 
 variable {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
   [IsSeparated U.hom] (j : U ⟶ X) [IsOpenImmersion j.left]
-
-/-- The *open piece* `K^U = j_! Lj^* K` of `K` along an open immersion `j : U ⟶ X` (blueprint
-`d-curve-pieces`). -/
-noncomputable abbrev openPiece : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)
-
-/-- The *open piece coefficient* `u^U : LΦ_m^* K^U ⟶ K^U` (blueprint `d-curve-pieces`) for a
-cartesian square `Φ_{m,U} ≫ j = j ≫ Φ_m`:
-```
-LΦ_m^* j_! Lj^* K --b--> j_! LΦ_{m,U}^* Lj^* K ≅ j_! L(Φ_{m,U} ≫ j)^* K = j_! L(j ≫ Φ_m)^* K
-  ≅ j_! Lj^* LΦ_m^* K --j_! Lj^* φ_m--> j_! Lj^* K,
-```
-the open-square exchange `b` (open `!`-base change) followed by `φ_m`. -/
-noncomputable def openPieceCoeff (m : ℕ) {ΦU : U ⟶ U}
-    (sq : IsPullback ΦU j j (frobeniusIterate Φ m)) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ m)).obj
-        (K.openPiece j) ⟶ K.openPiece j :=
-  (openSquareExchange ℓ sq).hom.app _ ≫
-    (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
-      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ ΦU j).inv.app
-          K.carrier ≫
-        eqToHom (by rw [sq.w]) ≫
-        (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ j
-          (frobeniusIterate Φ m)).hom.app K.carrier ≫
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
-          (K.iterateStr m).hom)
 
 end WeilBoundedConstructible
 

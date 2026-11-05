@@ -162,15 +162,6 @@ lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
   have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
   ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ F.isConstant_over _⟩⟩⟩
 
-/-- A sheaf `F` on the small étale site of `X` is an *irreducible local system* if it is locally
-constant and nonzero, and every locally constant subsheaf of `F` is zero or all of `F`. For a
-lisse sheaf on a connected scheme this says that the corresponding representation of the étale
-fundamental group is irreducible. -/
-def IsIrreducibleLocalSystem (F : Sheaf X.smallEtaleTopology A) : Prop :=
-  IsLocallyConstantSheaf F ∧ ¬ IsZero F ∧
-    ∀ (G : Sheaf X.smallEtaleTopology A) (ι : G ⟶ F), Mono ι → IsLocallyConstantSheaf G →
-      IsZero G ∨ IsIso ι
-
 end LocallyConstant
 
 section FiniteSheaf
@@ -196,21 +187,6 @@ class IsFiniteSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   isFinitelyGenerated_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ X) :
     ConcreteCategory.IsFinitelyGenerated ((pointSmallEtale s).sheafFiber.obj F)
-
-/-- **Finite sheaves of modules via epimorphisms from finite free modules.** A sheaf of
-`Λ`-modules on the small étale site of `X` is finite if and only if each of its stalks at a
-geometric point receives an epimorphism `Λ^n ⟶ F_s̄` from a finite free `Λ`-module
-(`ModuleCat.isFinitelyGenerated_iff_exists_epi`). The right-hand side is a definition of
-finiteness that does not refer to elements of the stalks, to which `IsFiniteSheaf` can be
-switched. -/
-lemma isFiniteSheaf_iff_exists_epi {Λ : Type (u + 1)} [Ring Λ]
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsFiniteSheaf F ↔ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
-      ∃ (n : ℕ) (f : ModuleCat.of Λ (Fin n → Λ) ⟶ (pointSmallEtale s).sheafFiber.obj F),
-        Epi f :=
-  ⟨fun h Ω _ _ s ↦ (ModuleCat.isFinitelyGenerated_iff_exists_epi _).1
-      (h.isFinitelyGenerated_sheafFiber Ω s),
-    fun h ↦ ⟨fun Ω _ _ s ↦ (ModuleCat.isFinitelyGenerated_iff_exists_epi _).2 (h Ω s)⟩⟩
 
 end FiniteSheaf
 

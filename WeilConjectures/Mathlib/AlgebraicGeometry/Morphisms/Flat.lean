@@ -37,14 +37,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- **Every morphism to a field is flat.** For a field `k`, every morphism `X ⟶ Spec k` is flat:
-every `k`-module is free, hence flat. This is Mathlib's low-priority instance for morphisms to an
-integral one-point scheme.
-
-(blueprint: `lem-pc-flat-field`) -/
-theorem Flat.of_field (k : Type u) [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) : Flat f :=
-  inferInstance
-
 /-- **Flatness descends along a flat surjection on the source.** If `u : X' ⟶ X` is flat and
 surjective and `u ≫ f` is flat, then `f` is flat.
 

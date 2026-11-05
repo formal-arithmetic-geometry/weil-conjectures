@@ -260,135 +260,15 @@ open scoped ChangeOfRings
 
 namespace SheafOfModules.ScalarPullback
 
-/-- The module category already used by the scalar-change model.
-Source: Stacks 03D2 (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-abbrev Modules {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
-    (A : Sheaf J CommRingCat.{u}) :=
-  ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)
-
-/-- Forget a module to its underlying sheaf of sets.
-Source: Stacks 03D2 (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-noncomputable abbrev underlying {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
-    (A : Sheaf J CommRingCat.{u}) : Modules A ⥤ Sheaf J (Type u) :=
-  toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙
-    sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u} ⋙ uliftFunctor.{u, u})
-
-/-- Restriction of scalars along the given sheaf ring map.
-Source: Stacks 03D2 (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-noncomputable abbrev restriction {C : Type u} [Category.{u} C]
-    {J : GrothendieckTopology C} {A B : Sheaf J CommRingCat.{u}} (φ : A ⟶ B) :
-    Modules B ⥤ Modules A :=
-  restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ)
-
 section InverseImageAliases
 
 variable {C D : Type u} [Category.{u} C] [Category.{u} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
-/-- The existing algebraic inverse-image presentation in the small-site universe.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-abbrev InverseImage (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
-    (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) :=
-  AlgebraicInverseImageOfUniverses.{u, u, u, u, u, u} L A B
-
 variable {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
   {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
 
-/-- The existing module projection, with its sheaf-composition instances elaborated once.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-abbrev inverseModules (I : InverseImage L A B) : Modules A ⥤ Modules B := I.modules
-
-/-- The existing ring identification of the algebraic inverse-image presentation.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-abbrev inverseRing (I : InverseImage L A B) :
-    L.obj ((sheafCompose J
-      (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).obj A) ≅
-      (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).obj B :=
-  I.ringUnderlying
-
-/-- The existing underlying-module identification of the inverse-image presentation.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-abbrev inverseUnderlying (I : InverseImage L A B) :
-    inverseModules I ⋙ underlying B ≅ underlying A ⋙ L :=
-  I.moduleUnderlying
-
 end InverseImageAliases
-
-/-- The image of a balanced pure tensor in the model's ordinary scalar extension.
-The equality transport only identifies the model's object with the existing sheafification.
-Source: Stacks 03EL (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-noncomputable def pure {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
-    {A B : Sheaf J CommRingCat.{u}} {φ : A ⟶ B}
-    [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasDerivedCategory.{w} (Modules A)] [HasDerivedCategory.{w} (Modules B)]
-    (m : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} φ) (M : Modules A) (U : Cᵒᵖ)
-    (b : B.obj.obj U) (x : M.val.obj U) : (m.E.obj M).val.obj U :=
-  (eqToHom (m.obj_eq M).symm).val.app U
-    ((toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U
-      (b ⊗ₜ[A.obj.obj U, (φ.hom.app U).hom] x))
-
-/-- The inverse scalar-adjunction mate of a restriction/action square.
-Source: Stacks 07A7 (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-def mate {AY : Type u₁} {BY : Type u₂} {AX : Type u₃} {BX : Type u₄}
-    [Category.{v₁} AY] [Category.{v₂} BY] [Category.{v₃} AX] [Category.{v₄} BX]
-    {TY : AY ⥤ BY} {rY : BY ⥤ AY} {TX : AX ⥤ BX} {rX : BX ⥤ AX}
-    (dY : TY ⊣ rY) (dX : TX ⊣ rX) {IA : AY ⥤ AX} {IB : BY ⥤ BX}
-    (a : rY ⋙ IA ⟶ IB ⋙ rX) : IA ⋙ TX ⟶ TY ⋙ IB :=
-  ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a)).natTrans
-
-set_option backward.isDefEq.respectTransparency false in
-private noncomputable def moduleComparison
-    {C D : Type u} [Category.{u} C] [Category.{u} D]
-    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
-    {F G : Sheaf J (Type u) ⥤ Sheaf K (Type u)} [PreservesFiniteLimits F]
-    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
-    (γ : F ≅ G) (I : InverseImage F A B) (I' : InverseImage G A B)
-    (hr : γ.hom.app _ ≫ (inverseRing I').hom = (inverseRing I).hom) :
-    inverseModules I ≅ inverseModules I' := by
-  let f (M : Modules A) : (inverseModules I).obj M ⟶ (inverseModules I').obj M :=
-    { val :=
-      { app := fun U ↦ ModuleCat.ofHom
-          { toFun := ((CategoryTheory.moduleComparisonApp γ I I' M).hom.app U)
-            map_add' := ((CategoryTheory.moduleComparisonApp γ I I' M).hom.app U).hom.map_add
-            map_smul' := by
-              intro r x
-              have h := CategoryTheory.module_compare_smul γ.hom I I' M U r x
-              have he : CategoryTheory.compareMap γ.hom I.ringUnderlying I'.ringUnderlying =
-                  𝟙 _ := by
-                dsimp [CategoryTheory.compareMap]
-                rw [hr, Iso.inv_hom_id]
-              rw [he] at h
-              exact h }
-        naturality := by
-          intro U V g
-          ext x
-          exact CategoryTheory.congr_fun
-            ((CategoryTheory.moduleComparisonApp γ I I' M).hom.naturality g) x } }
-  have hf (M : Modules A) : (underlying B).map (f M) =
-      I.moduleUnderlying.hom.app M ≫ γ.hom.app _ ≫ I'.moduleUnderlying.inv.app M := by
-    exact CategoryTheory.moduleComparisonApp_underlying γ I I' M
-  let β : inverseModules I ⟶ inverseModules I' :=
-    { app := f
-      naturality := by
-        intro M N g
-        apply (underlying B).map_injective
-        rw [Functor.map_comp, Functor.map_comp, hf, hf]
-        have h := (I.moduleUnderlying ≪≫
-          Functor.isoWhiskerLeft (underlying A) γ ≪≫ I'.moduleUnderlying.symm).hom.naturality g
-        simpa only [Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
-          NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-          Functor.whiskerLeft_app, Functor.comp_map, Category.assoc] using h }
-  have hi (M : Modules A) : IsIso (β.app M) := by
-    have h : (underlying B).map (β.app M) =
-        I.moduleUnderlying.hom.app M ≫ γ.hom.app _ ≫ I'.moduleUnderlying.inv.app M := by
-      exact CategoryTheory.moduleComparisonApp_underlying γ I I' M
-    have : IsIso ((underlying B).map (β.app M)) := by rw [h]; infer_instance
-    exact isIso_of_reflects_iso _ (underlying B)
-  exact NatIso.ofComponents (fun M ↦ asIso (β.app M)) (fun g ↦ β.naturality g)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in

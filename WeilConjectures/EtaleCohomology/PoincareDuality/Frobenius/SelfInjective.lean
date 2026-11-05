@@ -125,52 +125,6 @@ variable [Finite Λ] [HasTateTwist Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)}
 
 namespace TateOrientation
 
-/-- **Degreewise Poincaré duality over a self-injective coefficient ring** (finite level of
-blueprint `sk-thm-transport`). Let `k` be separably closed, `Λ` a finite self-injective
-cogenerating ring (e.g. `ℤ/ℓᵐ`) whose characteristic is invertible on `X`, and `γ` a Tate
-orientation of `a : X ⟶ Spec k`. For every `K ∈ D(X_ét, Λ)` and `i + j = 2d`, the degreewise
-Poincaré pairing `H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ End(Λ_s)` is nondegenerate on both sides.
-
-The derived Poincaré pairing is perfect
-(`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`), so its
-degree-zero part is a composition pairing `⟨x, y⟩ = x ≫ g(y)` with `g` bijective, which is
-nondegenerate (`AlgebraicGeometry.Etale.nondegenerate_comp_unit_of_isSepClosed_of_injective`). -/
-theorem injective_degreewisePoincarePairing
-    (hcog : ∀ (M : ModuleCat.{u + 1} Λ) (x : M), x ≠ 0 → ∃ χ : M →ₗ[Λ] Λ, χ x ≠ 0)
-    (γ : TateOrientation Λ a d) (K : DerivedCategoryModule Λ X) (i j : ℤ)
-    (hij : i + j = 2 * d) :
-    Function.Injective (γ.degreewisePoincarePairing K i j hij) ∧
-      Function.Injective (γ.degreewisePoincarePairing K i j hij).flip := by
-  obtain ⟨g, hg⟩ := (γ.isPerfectPairing_poincarePairing_of_finite K).exists_addEquiv_degreeZero
-    i (j - 2 * d) (by omega)
-  obtain ⟨h₁, h₂⟩ := nondegenerate_comp_unit_of_isSepClosed_of_injective hcog
-    (((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧)
-  let s := (shiftFunctorAdd' (DerivedCategoryModule Λ (Spec (.of k))) (2 * d : ℤ) (j - 2 * d) j
-    (by omega)).app ((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))
-  have hp (x y) : γ.degreewisePoincarePairing K i j hij x y = x ≫ g (y ≫ s.hom) := by
-    rw [degreewisePoincarePairing_apply, degreewisePairing_apply]
-    simp only [Category.assoc]
-    rw [hg x]
-    rfl
-  refine ⟨(injective_iff_map_eq_zero _).2 fun x hx ↦ ?_,
-    (injective_iff_map_eq_zero _).2 fun y hy ↦ ?_⟩
-  · by_contra hx0
-    obtain ⟨f, hf⟩ := h₁ x hx0
-    obtain ⟨z, rfl⟩ := g.surjective f
-    have := LinearMap.congr_fun hx (z ≫ s.inv)
-    rw [hp, Category.assoc, s.inv_hom_id] at this
-    erw [Category.comp_id] at this
-    simp only [LinearMap.zero_apply] at this
-    exact hf this
-  · by_contra hy0
-    have hgy : g (y ≫ s.hom) ≠ 0 := fun h ↦ hy0 (by
-      have h' := g.injective (h.trans (map_zero g).symm)
-      simpa using congrArg (· ≫ s.inv) h')
-    obtain ⟨x, hx⟩ := h₂ _ hgy
-    have := LinearMap.congr_fun hy x
-    rw [LinearMap.flip_apply, hp] at this
-    exact hx this
-
 end TateOrientation
 
 end AlgebraicGeometry.Etale

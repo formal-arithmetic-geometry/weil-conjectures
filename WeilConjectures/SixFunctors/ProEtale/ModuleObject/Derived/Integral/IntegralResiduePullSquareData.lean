@@ -28,13 +28,6 @@ attribute [local irreducible] Functor.leftDerivedFunctor
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- Exact restriction from residue modules to integral modules on the derived category. -/
-noncomputable abbrev residueExchangeRestriction (T : Scheme.{u}) :
-    residueExchangeDerived
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T ⥤
-      residueExchangeDerived (integralCoeff ℓ E) T :=
-  (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory
-
 /-- The canonical restriction/pullback square, obtained by applying the levelwise
 comparison and the exact-pullback identifications. Its data are constructed explicitly. -/
 @[irreducible] noncomputable def residueExchangeRestrictPullIso
@@ -62,24 +55,6 @@ exact restriction/pullback. Invertibility is a property, not chosen data. -/
   ((mateEquiv (residueExchangeReductionAdjunction ℓ E Y)
       (residueExchangeReductionAdjunction ℓ E X)).symm
     (TwoSquare.mk _ _ _ _ (residueExchangeRestrictPullIso ℓ E f).hom)).natTrans
-
-/-- The defining counit identity of the constructed scalar pull comparison. -/
-theorem residueExchangePullHom_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (N : residueExchangeDerived
-      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) Y) :
-    (residueExchangeReduction ℓ E X).map
-        ((residueExchangeRestrictPullIso ℓ E f).hom.app N) ≫
-      (residueExchangeReductionAdjunction ℓ E X).counit.app
-        ((residueExchangeUpperStar
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).obj N) =
-    (residueExchangePullHom ℓ E f).app ((residueExchangeRestriction ℓ E Y).obj N) ≫
-      (residueExchangeUpperStar
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map
-          ((residueExchangeReductionAdjunction ℓ E Y).counit.app N) := by
-  unfold residueExchangePullHom
-  exact mateEquiv_counit_symm (residueExchangeReductionAdjunction ℓ E Y)
-    (residueExchangeReductionAdjunction ℓ E X)
-    (TwoSquare.mk _ _ _ _ (residueExchangeRestrictPullIso ℓ E f).hom) N
 
 /-- The derived reduction counit with its actual reduction functor exposed. -/
 @[irreducible] noncomputable def residueExchangeReductionCounit (T : Scheme.{u}) :

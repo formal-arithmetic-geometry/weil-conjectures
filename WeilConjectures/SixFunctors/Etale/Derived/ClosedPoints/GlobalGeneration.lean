@@ -100,18 +100,6 @@ theorem isGloballyGenerated_of_epi_sigmaDesc {X : Scheme.{u}} {ι : Type w}
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i),
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i), e]
 
-/-- Blueprint `lem-kun-colim-gbl-gen`: **colimits of globally generated sheaves.** The point
-of a colimit cocone of a diagram of globally generated étale sheaves of `Λ`-modules (for
-instance a filtered colimit) is globally generated: the legs of a colimit cocone are jointly
-epimorphic. -/
-theorem isGloballyGenerated_of_isColimit {X : Scheme.{u}} {J : Type w} [Category J]
-    {D : J ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [HasCoproduct D.obj]
-    {c : Cocone D} (hc : IsColimit c) (hD : ∀ j, IsGloballyGenerated Λ X (D.obj j)) :
-    IsGloballyGenerated Λ X c.pt :=
-  have : Epi (Sigma.desc c.ι.app) := ⟨fun {T} g h e ↦ hc.hom_ext fun j ↦ by
-    simpa using Sigma.ι _ j ≫= e⟩
-  isGloballyGenerated_of_epi_sigmaDesc Λ c.ι.app hD
-
 /-- A globally generated sheaf without nonzero global sections is zero: its evaluation
 morphism vanishes. -/
 theorem isZero_of_isGloballyGenerated {X : Scheme.{u}}
@@ -129,30 +117,6 @@ theorem isZero_of_isGloballyGenerated {X : Scheme.{u}}
   have : Epi (globalSectionsEvaluation Λ X F) := hF
   refine (IsZero.iff_id_eq_zero _).2 ((cancel_epi (globalSectionsEvaluation Λ X F)).1 ?_)
   rw [h0, zero_comp, comp_zero]
-
-/-- Blueprint `lem-kun-global-generated-stalkwise`: **global generation is stalkwise
-surjectivity.** An étale sheaf `F` of `Λ`-modules is globally generated if and only if its
-evaluation morphism is surjective on every geometric stalk. The stalk functors preserve
-epimorphisms, being left adjoints; conversely, the cokernel projection of the evaluation
-morphism vanishes on all stalks, hence vanishes
-(`AlgebraicGeometry.Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint`). -/
-theorem isGloballyGenerated_iff_forall_epi_sheafFiber_map {X : Scheme.{u}}
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsGloballyGenerated Λ X F ↔ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
-      (s : Spec (.of Ω) ⟶ X),
-      Epi ((pointSmallEtale s).sheafFiber.map (globalSectionsEvaluation Λ X F)) := by
-  refine ⟨fun h Ω _ _ s ↦ ?_, fun h ↦ ?_⟩
-  · have : Epi (globalSectionsEvaluation Λ X F) := h
-    infer_instance
-  · have : AB5OfSize.{u + 1, u + 1} (ModuleCat.{u + 1} Λ) := inferInstance
-    have hπ : cokernel.π (globalSectionsEvaluation Λ X F) = 0 :=
-      sheafHom_ext_of_sheafFiber_map_algClosurePoint fun x ↦ by
-        have := h _ (X.algClosurePoint x)
-        rw [Functor.map_zero, ← cancel_epi ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.map
-          (globalSectionsEvaluation Λ X F)), ← Functor.map_comp, cokernel.condition,
-          Functor.map_zero, comp_zero]
-    exact Abelian.epi_of_cokernel_π_eq_zero _ hπ
-
 
 /-- Re-basing the global sections from the chosen terminal object `⊤_ X.Etale` to
 `AlgebraicGeometry.Etale.etaleTerminal X`. -/

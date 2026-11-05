@@ -45,21 +45,6 @@ variable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
 
 open Topology
 
-/-- A w-local map sends closed points to closed points. -/
-lemma IsWLocalMap.isClosed_singleton {f : X → Y} (hf : IsWLocalMap f)
-    {x : X} (hx : IsClosed {x}) :
-    IsClosed {f x} :=
-  mem_closedPoints_iff.mp
-    (hf.closedPoints_subset_preimage_closedPoints (mem_closedPoints_iff.mpr hx))
-
-lemma IsWLocalMap.comp {Z : Type*} [TopologicalSpace Z] {f : X → Y} {g : Y → Z}
-    (hf : IsWLocalMap f) (hg : IsWLocalMap g) :
-    IsWLocalMap (g ∘ f) where
-  toIsSpectralMap := hg.toIsSpectralMap.comp hf.toIsSpectralMap
-  closedPoints_subset_preimage_closedPoints _ hx :=
-    hg.closedPoints_subset_preimage_closedPoints
-      (hf.closedPoints_subset_preimage_closedPoints hx)
-
 /-- An embedding with specialization-stable range maps closed singletons to closed singletons. -/
 lemma Topology.IsEmbedding.isClosed_singleton
     {f : X → Y} (hf : IsEmbedding f) (hrange : StableUnderSpecialization (Set.range f))

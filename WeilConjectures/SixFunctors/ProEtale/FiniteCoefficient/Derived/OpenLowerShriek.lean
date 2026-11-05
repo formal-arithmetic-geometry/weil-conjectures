@@ -71,14 +71,4 @@ noncomputable def ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction :
     D((j)_!open[A]) ⊣ D((j)^*[A]) :=
   (ProEtale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryAdjunction
 
-/-- The bounded below version of
-`ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction`: the derived adjunction
-`j_! ⊣ j^*` along an open immersion on the bounded below derived categories of pro-étale
-sheaves, obtained by restricting the unbounded one along the fully faithful inclusions,
-which is legitimate since the exact functors `j_!` and `j^*` preserve bounded below
-objects. -/
-noncomputable def ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus :
-    D+((j)_!open[A]) ⊣ D+((j)^*[A]) :=
-  (ProEtale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryPlusAdjunction
-
 end AlgebraicGeometry

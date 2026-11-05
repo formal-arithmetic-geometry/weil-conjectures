@@ -91,13 +91,4 @@ noncomputable def upperStarTateTwistDerivedIso (f : X ⟶ Spec (.of k)) (d : ℤ
       0).app _ ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (upperStarTateTwistIso ℓ g f d)
 
-/-- **The derived pullback of the shifted Tate twist** `ℚ̄_ℓ,X(d)[n]` is `ℚ̄_ℓ,X'(d)[n]`, the
-derived pullback commuting with the shifts. -/
-noncomputable def upperStarShiftTateTwistDerivedIso (f : X ⟶ Spec (.of k)) (d n : ℤ) :
-    L((g)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-        ((shiftFunctor _ n).obj (tateTwistDerived X ℓ d)) ≅
-      (shiftFunctor _ n).obj (tateTwistDerived X' ℓ d) :=
-  (L((g)^*⟦Profinite.padicAlgClRingObj ℓ⟧).commShiftIso n).app _ ≪≫
-    (shiftFunctor _ n).mapIso (upperStarTateTwistDerivedIso ℓ g f d)
-
 end AlgebraicGeometry.ProEtale

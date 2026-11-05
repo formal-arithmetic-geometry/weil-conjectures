@@ -32,21 +32,4 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (R : CommRingCat.{u}) [IsWContractibleRing R]
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
--- take long to synthesize
-/-- Over the spectrum of a w-contractible ring, the unit of pro-étale sheaves of `Λ`-modules is
-projective, and morphisms out of it to coproducts and to tensor products are finite sums. -/
-theorem projective_unit_and_finite_of_isWContractibleRing :
-    Projective (𝟙_ (Sheaf (Scheme.ProEt.topology (Spec R)) (ModuleCat.{u + 1} Λ))) ∧
-      UnitFactorsThroughFiniteCoproducts
-        (Sheaf (Scheme.ProEt.topology (Spec R)) (ModuleCat.{u + 1} Λ)) ∧
-      UnitTensorFinite (Sheaf (Scheme.ProEt.topology (Spec R)) (ModuleCat.{u + 1} Λ)) := by
-  have hW := Scheme.ProEt.isTerminalMkId (Spec R)
-  have hfd := Scheme.ProEt.hasFiniteDisjointRefinements_of_iso
-    (W := Scheme.ProEt.mk (𝟙 (Spec R))) (R := R) (Iso.refl _)
-  exact ⟨Sheaf.projective_unit (R := Λ) hW hfd,
-    Sheaf.unitFactorsThroughFiniteCoproducts (R := Λ) hW hfd,
-    Sheaf.unitTensorFinite (R := Λ) hW hfd⟩
-
 end AlgebraicGeometry.ProEtale

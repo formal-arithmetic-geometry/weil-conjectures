@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 
-
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.AlgebraicGeometry.BaseChangeField
@@ -68,42 +67,11 @@ section RelativeDimension
 
 variable {X S : Scheme.{u}}
 
-/-- The *relative dimension* of a morphism `f : X ⟶ S` at a point `s : S`: the dimension
-`dim X_s` of the fibre `X_s = X ×_S Spec κ(s)`. It is `⊥` when the fibre is empty.
-
-The *dimension* of a scheme is the Krull dimension `topologicalKrullDim` of its underlying space.
-
-(blueprint: `def-pc-dimension`) -/
-noncomputable def Scheme.Hom.relativeDimension (f : X ⟶ S) (s : S) : WithBot ℕ∞ :=
-  topologicalKrullDim (f.fiber s)
-
-/-- A morphism `f : X ⟶ S` is *of relative dimension `d`* if all its nonempty fibres have
-dimension `d`.
-
-(blueprint: `def-pc-dimension`) -/
-def Scheme.Hom.IsOfRelativeDimension (f : X ⟶ S) (d : ℕ) : Prop :=
-  ∀ s : S, Nonempty (f.fiber s) → f.relativeDimension s = d
-
-/-- A morphism which is smooth of relative dimension `d` is of relative dimension `d`: each of
-its fibres is smooth of relative dimension `d` over a field. -/
-theorem Scheme.Hom.isOfRelativeDimension_of_smoothOfRelativeDimension (f : X ⟶ S) (d : ℕ)
-    [SmoothOfRelativeDimension d f] : f.IsOfRelativeDimension d := by
-  intro s _
-  have : SmoothOfRelativeDimension d (f.fiberToSpecResidueField s) :=
-    inferInstanceAs (SmoothOfRelativeDimension d (pullback.snd _ _))
-  exact topologicalKrullDim_eq_of_smoothOfRelativeDimension (f.fiberToSpecResidueField s) d
-
 end RelativeDimension
 
 section Projective
 
 variable {X S : Scheme.{u}}
-
-
-
-
-
-
 
 end Projective
 
@@ -150,16 +118,6 @@ instance (priority := 100) IsIntegralCurve.isConnectedCurve (f : X ⟶ Spec (.of
   connectedSpace := inferInstance
   krullDim_eq_one := IsIntegralCurve.topologicalKrullDim_eq_one (f := f)
 
-/-- **Smooth projective curves are smooth connected curves.** A smooth projective curve `X`
-over a field `K` is a smooth connected curve: `X` is nonempty, connected, separated, of finite
-type and of dimension one over `K`, and smooth over `K`. The blueprint states this over an
-algebraically closed field, but the argument does not use it.
-
-(blueprint: `lem-pc-curves-are-sc`) -/
-theorem IsSmoothProjectiveCurve.isConnectedCurve_and_smooth (f : X ⟶ Spec (.of K))
-    [IsSmoothProjectiveCurve f] : IsConnectedCurve f ∧ Smooth f ∧ IsProper f :=
-  ⟨inferInstance, inferInstance, inferInstance⟩
-
 /-- A smooth projective curve over `K` is smooth of relative dimension one over `K`: it is
 irreducible, smooth and of dimension one. -/
 instance (priority := 100) IsSmoothProjectiveCurve.smoothOfRelativeDimension
@@ -175,35 +133,7 @@ variable {k : Type u} [Field k] {C : Scheme.{u}} [C.Over (Spec (.of k))]
 
 variable [IsSmoothProjectiveCurve (C ↘ Spec (.of k))]
 
-variable (k C) in
-/-- **The genus of a geometrically integral smooth projective curve is finite.** For a smooth
-projective curve `C` over `k`, its genus `g(C) = dim_k H¹(C, 𝒪_C)`
-(`AlgebraicGeometry.Scheme.arithmeticGenus`) is the dimension of a finite-dimensional
-`k`-vector space, coherent cohomology of a proper scheme over a field being finite-dimensional.
-
-(blueprint: `def-sc-general-curve`) -/
-theorem IsSmoothProjectiveCurve.finiteDimensional_H_one :
-    FiniteDimensional k (Scheme.Modules.H (X := C) (SheafOfModules.unit C.ringCatSheaf) 1) :=
-  have := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
-  have : (SheafOfModules.unit C.ringCatSheaf).IsInvertible :=
-    SheafOfModules.instIsInvertibleUnit.{u, u, u}
-  have : (SheafOfModules.unit C.ringCatSheaf).IsFiniteLocallyFree :=
-    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
-  have : (SheafOfModules.unit C.ringCatSheaf).IsFinitePresentation :=
-    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
-  Scheme.Modules.finiteDimensional_H_of_isProper _ 1
-
 variable (K : Type u) [Field K] [Algebra k K]
-
-variable (k C) in
-/-- **The genus is invariant under base change.** For a smooth projective curve `C` over `k` and
-a field extension `K/k`, `g(C_K) = g(C)`, where `g = dim H¹(-, 𝒪)`: this is flat base change of
-cohomology along `C_K ⟶ C`.
-
-(blueprint: `def-sc-general-curve`) -/
-theorem IsSmoothProjectiveCurve.arithmeticGenus_baseChangeField :
-    Scheme.arithmeticGenus K (C.baseChangeField k K) = Scheme.arithmeticGenus k C :=
-  Scheme.arithmeticGenus_pullback K
 
 /-- The base change of a smooth projective curve to a field extension is smooth of relative
 dimension one. -/
@@ -216,17 +146,6 @@ instance IsSmoothProjectiveCurve.isProper_baseChangeField :
     IsProper (C.baseChangeField k K ↘ Spec (.of K)) :=
   inferInstanceAs (IsProper (pullback.snd _ _))
 
-variable (k C) in
-/-- **The genus of the base change.** For a smooth projective curve `C` over `k` and a field
-extension `K/k`, the genus `dim_K Γ(C_K, Ω¹_{C_K/K})` of the smooth proper curve `C_K`
-(`AlgebraicGeometry.Scheme.Hom.genus`, blueprint `def-sc-genus`) is the genus
-`g(C) = dim_k H¹(C, 𝒪_C)` of `C`.
-
-(blueprint: `def-sc-general-curve`) -/
-theorem IsSmoothProjectiveCurve.genus_baseChangeField :
-    (C.baseChangeField k K ↘ Spec (.of K)).genus = Scheme.arithmeticGenus k C :=
-  Scheme.genus_eq_arithmeticGenus.trans (arithmeticGenus_baseChangeField k C K)
-
 variable [GeometricallyIntegral (C ↘ Spec (.of k))]
 
 /-- The base change of a geometrically integral smooth projective curve to a field extension is
@@ -235,24 +154,6 @@ instance IsSmoothProjectiveCurve.isIntegral_baseChangeField :
     IsIntegral (C.baseChangeField k K) :=
   pullback_of_geometrically (GeometricallyIntegral.geometrically_isIntegral
     (f := C ↘ Spec (.of k))) K _
-
-variable (k C) in
-/-- **Base change of a geometrically integral smooth projective curve.** For a geometrically
-integral smooth projective curve `C` over `k` and a field extension `K/k` (in the blueprint,
-algebraically closed), the base change `C_K` is a proper smooth connected curve over `K` in the
-sense of `AlgebraicGeometry.IsConnectedCurve`, so that the degree and `Pic⁰` conventions of the
-smooth-curve chapter apply to it.
-
-(blueprint: `def-sc-general-curve`) -/
-theorem IsSmoothProjectiveCurve.isConnectedCurve_baseChangeField :
-    IsConnectedCurve (C.baseChangeField k K ↘ Spec (.of K)) ∧
-      Smooth (C.baseChangeField k K ↘ Spec (.of K)) ∧
-      IsProper (C.baseChangeField k K ↘ Spec (.of K)) := by
-  have hdim : topologicalKrullDim (C.baseChangeField k K) = 1 := by
-    exact_mod_cast topologicalKrullDim_eq_of_smoothOfRelativeDimension
-      (C.baseChangeField k K ↘ Spec (.of K)) 1
-  have : IsCurve (C.baseChangeField k K ↘ Spec (.of K)) := ⟨hdim.le⟩
-  exact ⟨⟨inferInstance, hdim⟩, SmoothOfRelativeDimension.smooth 1 _, inferInstance⟩
 
 end GeneralCurve
 

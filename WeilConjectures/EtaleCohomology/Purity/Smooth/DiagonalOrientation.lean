@@ -239,33 +239,6 @@ noncomputable def dualizingComplexTwistShiftIso [HasKummerClass Λ]
     sectionInvariantTwistShiftIsoOfSection Λ d (pullback.fst f f) (pullback.diagonal f)
       (pullback.diagonal_fst f) (f ≫ aY)
 
-/-- The fundamental class of a closed immersion with Thom frames does not depend on the
-structure morphism to a field used to construct it: it is the unique class restricting to the
-frame classes (`AlgebraicGeometry.Etale.HasThomFrames.existsUnique_fundamentalClass`). -/
-theorem thomFundamentalClass_eq [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]
-    {X Z : Scheme.{u}} [HasInvertibleExponent Λ X] {c : ℕ} {i : Z ⟶ X} [IsClosedImmersion i]
-    (hT : HasThomFrames Λ c i) (hR : HasRegularZariskiFrames c i) {k k' : Type u} [Field k]
-    [Field k'] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] (aX' : X ⟶ Spec (.of k'))
-    [LocallyOfFiniteType aX'] :
-    thomFundamentalClass Λ hT hR aX = thomFundamentalClass Λ hT hR aX' :=
-  (hT.existsUnique_fundamentalClass hR aX).unique
-    (frameRestriction_thomFundamentalClass Λ hT hR aX)
-    (frameRestriction_thomFundamentalClass Λ hT hR aX')
-
-/-- The isomorphism `ω_f ≅ Λ_X(d)[2d]` (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`)
-does not depend on the structure morphism of `Y` to a field: it is determined by `f`, `d`, `Λ`
-and the Kummer class. -/
-theorem dualizingComplexTwistShiftIso_eq [HasKummerClass Λ]
-    [HasKummerClass.IsNormalized Λ] [IsSeparated f] {k k' : Type u} [Field k] [Field k']
-    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
-    (aY' : Y ⟶ Spec (.of k')) [IsSeparated aY'] [LocallyOfFiniteType aY'] :
-    dualizingComplexTwistShiftIso Λ f d aY = dualizingComplexTwistShiftIso Λ f d aY' := by
-  simp only [dualizingComplexTwistShiftIso, sectionInvariantTwistShiftIsoOfSection,
-    rightDerivedUpperShriekTateObjectIsoOfSection, thomFundamentalClassMap]
-  have : HasInvertibleExponent Λ (pullback f f) := .of_hom (pullback.fst f f)
-  simp only [thomFundamentalClass_eq Λ _ _ (pullback.fst f f ≫ f ≫ aY)
-    (pullback.fst f f ≫ f ≫ aY')]
-
 end Etale
 
 end AlgebraicGeometry

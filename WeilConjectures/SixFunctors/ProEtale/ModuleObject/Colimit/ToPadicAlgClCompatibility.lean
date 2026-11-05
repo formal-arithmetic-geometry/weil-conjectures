@@ -104,10 +104,6 @@ noncomputable def boundedConstructibleToPadicAlgCl :
     Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   constructibleToPadicAlgCl X ℓ E
 
-lemma boundedConstructibleToPadicAlgCl_eq :
-    boundedConstructibleToPadicAlgCl X ℓ E = constructibleToPadicAlgCl X ℓ E :=
-  rfl
-
 /-- The extension of scalars `T_X` on bounded constructible complexes is compatible with the
 inclusions. -/
 noncomputable def boundedConstructibleToPadicAlgClCompatibility :

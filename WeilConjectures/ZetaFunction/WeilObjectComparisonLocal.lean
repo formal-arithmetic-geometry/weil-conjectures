@@ -133,62 +133,9 @@ theorem HasWeilObjectComparison.satisfiesLefschetz {K : WeilComplex k₀ l X}
 
 namespace HasLocalWeilObjectComparison
 
-/-- The local comparison only depends on the Weil complex up to isomorphism. -/
-theorem of_iso {K L : WeilComplex k₀ l X} (e : K ≅ L) (hK : HasLocalWeilObjectComparison ι K) :
-    HasLocalWeilObjectComparison ι L := by
-  obtain ⟨K', hloc⟩ := hK
-  exact ⟨K', fun n y ↦ (hloc n y).trans (traceFunction_eq_of_iso e (n + 1) y)⟩
-
-/-- The local comparison for `K` gives the local comparison for every shift `K[a]`. -/
-theorem shift {K : WeilComplex k₀ l X} (hK : HasLocalWeilObjectComparison ι K) (a : ℤ) :
-    HasLocalWeilObjectComparison ι (K⟦a⟧) := by
-  obtain ⟨K', hloc⟩ := hK
-  rcases Int.even_or_odd a with ha | ha
-  · refine ⟨K', fun n y ↦ ?_⟩
-    rw [traceFunction_shift, Int.negOnePow_even a ha, Units.val_one, one_smul, hloc]
-  · obtain ⟨C, hCloc, -⟩ :=
-      WeilBoundedConstructible.exists_weilStalkTraceAlternatingSum_eq_neg l
-        (Iso.refl (overSpec (k₀ := k₀) X)) K'
-    refine ⟨C, fun n y ↦ ?_⟩
-    rw [traceFunction_shift, Int.negOnePow_odd a ha, Units.val_neg, Units.val_one,
-      neg_smul, one_smul, hCloc, map_neg, hloc]
-
-/-- The local comparison is stable under extensions. -/
-theorem of_distTriang (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTriang _)
-    (h₁ : HasLocalWeilObjectComparison ι T.obj₁) (h₃ : HasLocalWeilObjectComparison ι T.obj₃) :
-    HasLocalWeilObjectComparison ι T.obj₂ := by
-  obtain ⟨K₁, hloc₁⟩ := h₁
-  obtain ⟨K₃, hloc₃⟩ := h₃
-  obtain ⟨B, hBloc, -⟩ :=
-    WeilBoundedConstructible.exists_weilStalkTraceAlternatingSum_eq_add l
-      (Iso.refl (overSpec (k₀ := k₀) X)) K₁ K₃
-  refine ⟨B, fun n y ↦ ?_⟩
-  rw [traceFunction_eq_add_of_distTriang T hT, hBloc, map_add, hloc₁, hloc₃]
-
 end HasLocalWeilObjectComparison
 
 namespace SatisfiesLefschetz
-
-/-- The Grothendieck–Lefschetz formula only depends on the Weil complex up to isomorphism. -/
-theorem of_iso {K L : WeilComplex k₀ l X} (e : K ≅ L) (hK : SatisfiesLefschetz K) :
-    SatisfiesLefschetz L := fun n ↦ by
-  rw [← finsum_trace_compactlySupportedCohomology_congr e (n + 1), hK n]
-  exact finsum_congr fun y ↦ traceFunction_eq_of_iso e (n + 1) y
-
-/-- The Grothendieck–Lefschetz formula for `K` gives it for every shift `K[a]`: both sides are
-multiplied by `(-1)ᵃ`. -/
-theorem shift {K : WeilComplex k₀ l X} (hK : SatisfiesLefschetz K) (a : ℤ) :
-    SatisfiesLefschetz (K⟦a⟧) := fun n ↦ by
-  rw [finsum_trace_compactlySupportedCohomology_shift, hK n, smul_finsum]
-  exact finsum_congr fun y ↦ (traceFunction_shift K a (n + 1) y).symm
-
-/-- The Grothendieck–Lefschetz formula is stable under extensions. -/
-theorem of_distTriang (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTriang _)
-    (h₁ : SatisfiesLefschetz T.obj₁) (h₃ : SatisfiesLefschetz T.obj₃) :
-    SatisfiesLefschetz T.obj₂ := fun n ↦ by
-  rw [finsum_trace_compactlySupportedCohomology_eq_add_of_distTriang T hT, h₁ n, h₃ n,
-    ← finsum_add_distrib (Set.toFinite _) (Set.toFinite _)]
-  exact finsum_congr fun y ↦ (traceFunction_eq_add_of_distTriang T hT (n + 1) y).symm
 
 end SatisfiesLefschetz
 

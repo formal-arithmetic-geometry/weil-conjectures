@@ -486,10 +486,6 @@ noncomputable def condensedEquivalence :
         (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv) :=
   (toCondensed k₀ l X).asEquivalence
 
-lemma condensedEquivalence_functor :
-    (condensedEquivalence k₀ l X).functor = toCondensed k₀ l X :=
-  rfl
-
 instance : (condensedEquivalence k₀ l X).functor.Additive :=
   inferInstanceAs (toCondensed k₀ l X).Additive
 
@@ -507,10 +503,6 @@ noncomputable def derivedEquivCondensed :
         (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
           (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)) :=
   (condensedEquivalence k₀ l X).mapDerivedCategory
-
-lemma derivedEquivCondensed_functor :
-    (derivedEquivCondensed k₀ l X).functor = (toCondensed k₀ l X).mapDerivedCategory :=
-  rfl
 
 /-- The derived comparison commutes with the shifts. -/
 noncomputable instance : (derivedEquivCondensed k₀ l X).functor.CommShift ℤ :=

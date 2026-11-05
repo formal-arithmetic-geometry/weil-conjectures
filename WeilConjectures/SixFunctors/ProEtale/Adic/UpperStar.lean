@@ -162,7 +162,6 @@ lemma exists_opens_factor_of_eq_zero (V' : V.ProEt) (t : C(V'.left, PadicAlgCl l
     · simp [reassoc_of% hm', hm]
     · simp [hφ]
 
-
 /-- **The sections of `ℚ̄_ℓ,W` are locally pulled back from `ℚ̄_ℓ,V`.** Every point of
 `U : W.ProEt` has an affine open neighbourhood `Spec B` on which a locally finite function `s`
 on `U` is `t ∘ fst ∘ φ` for some `V' : V.ProEt`, a locally finite function `t` on `V'` and
@@ -230,7 +229,6 @@ lemma exists_openImmersion_eq_comp_fst (U : W.ProEt)
       Homeomorph.symm_apply_apply]
     rfl
 
-
 variable (l) in
 /-- The comparison `ℚ̄_ℓ,V ⟶ g_* ℚ̄_ℓ,W`: precomposition with `V' ×_V W ⟶ V'`. -/
 noncomputable def adicConstantSheafToLowerStar :
@@ -248,7 +246,6 @@ noncomputable def adicConstantSheafToLowerStar :
          pullback.lift_fst _ _ _
        rw [← Scheme.Hom.comp_apply, ← key]
        rfl }⟩
-
 
 /-- Two sections of `ℚ̄_ℓ` are equal if their underlying functions agree. -/
 lemma adicConstantSheaf_ext {X : Scheme.{u}} {U : X.ProEt}
@@ -303,13 +300,6 @@ instance isIso_upperStarAdicConstantSheafHom : IsIso (upperStarAdicConstantSheaf
     exact Scheme.ProEt.mem_topology_of_openImmersion S (fun x ↦ (O x).ι)
       (fun x ↦ ⟨x, by simpa using hxO x⟩) fun x ↦
         ⟨V'' x, a x, φ' x, adicConstantSheaf_ext fun y ↦ hz x y, heq x⟩
-
-variable (l) in
-/-- **The pullback of the constant `ℓ`-adic sheaf is the constant `ℓ`-adic sheaf**
-(Bhatt–Scholze, Lemma 4.2.12): for an arbitrary morphism `g : W ⟶ V`, `g^* ℚ̄_ℓ,V ≅ ℚ̄_ℓ,W`. -/
-noncomputable def upperStarAdicConstantSheafIso :
-    (g)^*[WeilCoefficients.{u} l].obj (adicConstantSheaf l V) ≅ adicConstantSheaf l W :=
-  asIso (upperStarAdicConstantSheafHom l g)
 
 end General
 

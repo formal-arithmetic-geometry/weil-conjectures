@@ -29,9 +29,4 @@ open CategoryTheory CategoryTheory.Limits Opposite TensorProduct
 
 namespace CategoryTheory
 
-private theorem point_eq (U : (Discrete PUnit.{u + 1})ᵒᵖ) :
-    U = op ⟨PUnit.unit⟩ := by
-  rcases U with ⟨⟨⟨⟩⟩⟩
-  rfl
-
 end CategoryTheory

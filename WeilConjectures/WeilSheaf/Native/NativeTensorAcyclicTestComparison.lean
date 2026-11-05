@@ -69,25 +69,11 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [Z.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ Z) [IsOpenImmersion j]
   [j.IsOver (Spec (CommRingCat.of k₀))]
 
-private structure FlatTest (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
-    (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) : Prop where
-  test : NativeIsKFlat k₀ l X P
+-- The data structure was elaborated without this shortcut instance; using it here makes the
+-- kernel compare two `IsGrothendieckAbelian` instances by deep unfolding.
 
 -- The data structure was elaborated without this shortcut instance; using it here makes the
 -- kernel compare two `IsGrothendieckAbelian` instances by deep unfolding.
-attribute [-instance] ModuleCat.isGrothendieckAbelian_of_commRing in
-private theorem FlatTest.restrict (s : NativeOpenTensorData k₀ l j)
-    (P : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) (hP : FlatTest k₀ l Z P) :
-    FlatTest k₀ l U (((upperStar k₀ l j).mapHomologicalComplex (.up ℤ)).obj P) :=
-  ⟨s.restriction_kflat P hP.test⟩
-
--- The data structure was elaborated without this shortcut instance; using it here makes the
--- kernel compare two `IsGrothendieckAbelian` instances by deep unfolding.
-attribute [-instance] ModuleCat.isGrothendieckAbelian_of_commRing in
-private theorem FlatTest.extend (s : NativeOpenTensorData k₀ l j)
-    (P : CochainComplex (ProEtaleWeilSheaf k₀ l U) ℤ) (hP : FlatTest k₀ l U P) :
-    FlatTest k₀ l Z (((extensionByZero k₀ l j).mapHomologicalComplex (.up ℤ)).obj P) :=
-  ⟨s.extension_kflat P hP.test⟩
 
 private instance nativeTensor_additive (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))] :

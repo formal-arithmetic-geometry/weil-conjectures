@@ -69,25 +69,6 @@ theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
     rw [hPF, neg_neg, zpow_one, pow_one]).trans
       ((cohomologyZeroEquiv (F.dual hF)).dual.rescale _)⟩
 
-/-- Blueprint `lem-a1-affine-hc2-pure`: Purity of `H_c²` on an affine curve.
-
-Let `U₀` be a smooth geometrically connected affine curve and `F` a lisse Weil sheaf on `U₀`,
-punctually `ι`-pure of weight `w`. Then `H_c²(U, F)` is `ι`-pure of weight `w + 2` (possibly
-zero): it is the Tate twist `(-1)` of the geometric coinvariants
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`), which are pure
-of weight `w` (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`), and the
-twist `(-1)` raises weights by two. -/
-theorem isPureOfWeightOver_compactlySupportedCohomology_two [IsAffine U]
-    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
-    (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
-    (F.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (w + 2) := by
-  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_two F hF
-  have h := (isPureOfWeightOver_geometricCoinvariants ι F hF hw).tateTwist Nat.card_pos (-1)
-  have hw2 : w - 2 * ((-1 : ℤ) : ℝ) = w + 2 := by push_cast; ring
-  rw [hw2] at h
-  exact FrobeniusModule.IsPureOfWeight.of_equiv e h
-
 end WeilSheaf
 
 end AlgebraicGeometry

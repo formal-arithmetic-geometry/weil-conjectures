@@ -87,62 +87,6 @@ section StrictModel
 variable {J I} {ϖ : R} {T : ℕᵒᵖ ⥤ CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ}
   {K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
 
-/-- Let `K` be a tower in `D(J, R)` represented by a normalized `ϖ`-adic tower of complexes `T`,
-with `I = (ϖ)` and `ϖ` a nonzerodivisor. Then the derived limit `K_R` of `K` (the point of a
-homotopy limit cone `c`) satisfies `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ K_n`, compatibly with the transitions, the
-legs of `c` being the reduction maps followed by these isomorphisms. -/
-theorem exists_derivedCompletionDiagram_iso_of_iso_isNormalizedAdicTower
-    (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
-    (hT : CochainComplex.IsNormalizedAdicTower ϖ T) (E : T ⋙ Q ≅ K) {c : Cone K}
-    (hc : IsHomotopyLimit c) :
-    ∃ e : derivedCompletionDiagram J I c.pt ≅ K, ∀ n : ℕ,
-      c.π.app (op n) = (derivedCompletionCone J I c.pt).π.app (op n) ≫ e.hom.app (op n) := by
-  let c' : Cone (T ⋙ Q) := { pt := c.pt, π := c.π ≫ E.inv }
-  have hc' : IsHomotopyLimit c' :=
-    hc.of_iso E.symm c' (Iso.refl _) (fun n ↦ by simp [c'])
-  obtain ⟨e', he'⟩ := exists_derivedCompletionDiagram_iso_of_isNormalizedAdicTower hϖ hI hT hc'
-  refine ⟨e' ≪≫ E, fun n ↦ ?_⟩
-  have h := he' n
-  simp only [c', NatTrans.comp_app] at h
-  calc c.π.app _ = (c.π.app (op n) ≫ E.inv.app _) ≫ E.hom.app _ := by simp
-    _ = _ := by rw [h]; simp
-
-/-- The derived limit of a tower of `D(J, R)` represented by a normalized `ϖ`-adic tower of
-complexes, with `I = (ϖ)` and `ϖ` a nonzerodivisor, is derived complete: transport the
-homotopy limit cone along
-`DerivedCategory.exists_derivedCompletionDiagram_iso_of_iso_isNormalizedAdicTower`. -/
-theorem derivedComplete_of_iso_isNormalizedAdicTower (hϖ : ϖ ∈ nonZeroDivisors R)
-    (hI : I = Ideal.span {ϖ}) (hT : CochainComplex.IsNormalizedAdicTower ϖ T) (E : T ⋙ Q ≅ K)
-    {c : Cone K} (hc : IsHomotopyLimit c) : derivedComplete J I c.pt := by
-  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso_of_iso_isNormalizedAdicTower hϖ hI hT E hc
-  refine hc.of_iso e.symm _ (Iso.refl _) fun n ↦ ?_
-  rw [he n]
-  simp
-
-/-- The transitions `K_{n+1} ⟶ K_n` of a tower of `D(J, R)` represented by a normalized
-`ϖ`-adic tower of complexes, whose first level `K_1` lies in degrees `≤ b`, are surjective on
-`H^b`: this is right exactness of the base change `- ⊗ᴸ_{A_{n+1}} A_n` in the top degree
-(`CochainComplex.IsNormalizedAdicTower.epi_homologyMap_map`). -/
-lemma epi_homologyFunctor_map_of_iso_isNormalizedAdicTower
-    (hT : CochainComplex.IsNormalizedAdicTower ϖ T) (E : T ⋙ Q ≅ K) (b : ℤ)
-    (hb : (K.obj (op 1)).IsLE b) (n : ℕ) :
-    Epi ((homologyFunctor _ b).map (K.map (homOfLE n.le_succ).op)) := by
-  have hE : K.map (homOfLE n.le_succ).op =
-      (E.app (op (n + 1))).inv ≫ Q.map (T.map (homOfLE n.le_succ).op) ≫ (E.app (op n)).hom := by
-    rw [← Functor.comp_map, Iso.app_hom, Iso.app_inv, E.hom.naturality, Iso.inv_hom_id_app_assoc]
-  have h₁ : (T.obj (op 1)).ExactAt (b + 1) := by
-    rw [HomologicalComplex.exactAt_iff_isZero_homology]
-    refine (isZero_of_isLE _ b (b + 1) (by lia) (hX := hb)).of_iso ?_
-    exact ((homologyFunctorFactors _ (b + 1)).app _).symm ≪≫
-      (homologyFunctor _ (b + 1)).mapIso (E.app (op 1))
-  have := hT.epi_homologyMap_map b h₁ n
-  rw [hE, Functor.map_comp, Functor.map_comp]
-  have hQ : (homologyFunctor _ b).map (Q.map (T.map (homOfLE n.le_succ).op)) = _ :=
-    (NatIso.naturality_2 (homologyFunctorFactors _ b) (T.map (homOfLE n.le_succ).op)).symm
-  rw [hQ]
-  exact epi_comp' inferInstance (epi_comp' (epi_comp' inferInstance
-    (epi_comp' this inferInstance)) inferInstance)
-
 end StrictModel
 
 variable {J I} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
@@ -152,57 +96,6 @@ variable {J I} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {�
 namespace IsNormalizedTower
 
 variable (hK : IsNormalizedTower J I K L)
-
-include hϖ hI hK in
-/-- A normalized tower is represented by a normalized `ϖ`-adic tower of complexes
-(`CochainComplex.IsNormalizedAdicTower`): there is a tower `T` of complexes of sheaves of
-`R`-modules with an isomorphism `T ⋙ Q ≅ K` (`DerivedCategory.exists_isNormalizedAdicTower`). -/
-lemma exists_iso_isNormalizedAdicTower :
-    ∃ (T : ℕᵒᵖ ⥤ CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ) (_ : T ⋙ Q ≅ K),
-      CochainComplex.IsNormalizedAdicTower ϖ T := by
-  obtain ⟨eK, t, ht, hmap⟩ := hK
-  obtain ⟨T, e, hT, he⟩ := DerivedCategory.exists_isNormalizedAdicTower
-    (J := J) (R := R) (A := fun n ↦ R ⧸ I ^ n)
-    (fun h ↦ Ideal.Quotient.factor (Ideal.pow_le_pow_right h))
-    (fun n ↦ Ideal.Quotient.mk (I ^ n)) (fun h ↦ Ideal.Quotient.factor_comp_mk _)
-    (fun _ _ ↦ Ideal.Quotient.factor_comp _ _) (Ideal.Quotient.mk_pow_eq_zero_of_eq_span hI)
-    (Ideal.Quotient.exact_mul_mk_pow hϖ hI) (fun _ ↦ Ideal.Quotient.factor_surjective _)
-    (Ideal.Quotient.ker_factor_pow_eq_span hI) L t ht
-  let α : T ⋙ Q ⟶ K := NatTrans.ofOpSequence
-    (fun n ↦ (e n).hom ≫ (eK n).inv) (fun n ↦ by
-      dsimp
-      rw [hmap n, reassoc_of% (he n)]
-      simp)
-  have : ∀ n, IsIso (α.app n) := fun n ↦ by
-    simp only [α, NatTrans.ofOpSequence_app]
-    infer_instance
-  have : IsIso α := NatIso.isIso_of_isIso_app _
-  exact ⟨T, asIso α, hT⟩
-
-include hϖ hI hK in
-/-- Levelwise reduction: the realization `K_R = R lim_n K_n` of a normalized tower (the point of a
-homotopy limit cone `c`) reduces to the given levels, `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ K_n`, compatibly with the
-transitions, the legs `K_R ⟶ K_n` of `c` being the reduction maps followed by these isomorphisms. -/
-theorem exists_derivedCompletionDiagram_iso {c : Cone K} (hc : IsHomotopyLimit c) :
-    ∃ e : derivedCompletionDiagram J I c.pt ≅ K, ∀ n : ℕ,
-      c.π.app (op n) = (derivedCompletionCone J I c.pt).π.app (op n) ≫ e.hom.app (op n) := by
-  obtain ⟨T, E, hT⟩ := hK.exists_iso_isNormalizedAdicTower hϖ hI
-  exact exists_derivedCompletionDiagram_iso_of_iso_isNormalizedAdicTower hϖ hI hT E hc
-
-include hϖ hI hK in
-/-- Derived completeness: the realization `K_R = R lim_n K_n` of a normalized tower is derived
-complete, that is, it is the derived limit of its own reductions `K_R ⊗ᴸ_R R ⧸ Iⁿ`. -/
-theorem derivedComplete {c : Cone K} (hc : IsHomotopyLimit c) : derivedComplete J I c.pt := by
-  obtain ⟨T, E, hT⟩ := hK.exists_iso_isNormalizedAdicTower hϖ hI
-  exact derivedComplete_of_iso_isNormalizedAdicTower hϖ hI hT E hc
-
-include hϖ hI hK in
-/-- The transitions `K_{n+1} ⟶ K_n` of a normalized tower whose first level `K_1` lies in
-degrees `≤ b` are surjective on `H^b`. -/
-lemma epi_homologyFunctor_map (b : ℤ) (hb : (K.obj (op 1)).IsLE b) (n : ℕ) :
-    Epi ((homologyFunctor _ b).map (K.map (homOfLE n.le_succ).op)) := by
-  obtain ⟨T, E, hT⟩ := hK.exists_iso_isNormalizedAdicTower hϖ hI
-  exact epi_homologyFunctor_map_of_iso_isNormalizedAdicTower hT E b hb n
 
 end IsNormalizedTower
 

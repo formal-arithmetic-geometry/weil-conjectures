@@ -130,15 +130,6 @@ lemma Etale.map_unit_baseChangeMap_app (sq : CommSq g' f' f g)
         ((f')_*[A]).map ((Etale.squareUpperStarIso A sq).hom.app G) :=
   unit_mateEquiv _ _ _ G
 
-omit [HasSmallSiteSheafify A] in
-/-- **Naturality of the base change map** in the sheaf.
-(blueprint: `lemma-weil-pbc-underived-exchange-naturality`) -/
-lemma Etale.baseChangeMap_naturality (sq : CommSq g' f' f g)
-    {F F' : Sheaf X.smallEtaleTopology A} (u : F ⟶ F') :
-    ((g)^*[A]).map (((f)_*[A]).map u) ≫ (Etale.baseChangeMap A sq).app F' =
-      (Etale.baseChangeMap A sq).app F ≫ ((f')_*[A]).map (((g')^*[A]).map u) :=
-  (Etale.baseChangeMap A sq).naturality u
-
 /-- The square isomorphism `g'_* ⋙ f_* ≅ f'_* ⋙ g_*` of pushforwards attached to a
 commutative square `g' ≫ f = f' ≫ g`: both sides are identified with the pushforward along
 the diagonal by `AlgebraicGeometry.Etale.lowerStarComp`. -/

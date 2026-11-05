@@ -24,18 +24,4 @@ universe w v u
 
 namespace CategoryTheory
 
-/-- A category is a Grothendieck topos relative to universe `w` if it is equivalent to
-`Type w`-valued sheaves on a site whose objects and morphisms belong to universe `w`.
-
-The topology uses Mathlib's `Sieve` and its pullback, with the maximal-sieve, pullback-stability
-and transitivity axioms of `GrothendieckTopology`. The category `Sheaf J (Type w)` is the full
-subcategory of presheaves satisfying unique amalgamation for every covering sieve.
-
-Source: Stacks Project, Sites, Tag 00XA (topoi), Tag 00Z4 (topologies), Tag 00Z8 (sheaves),
-and Tag 00VI (small sites), with the universe convention `def-weil-size-convention`
-(blueprint: def-weil-pbc-topos). -/
-def IsGrothendieckTopos (E : Type u) [Category.{v} E] : Prop :=
-  ∃ (D : Type w) (c : SmallCategory D) (J : @GrothendieckTopology D c),
-    Nonempty (E ≌ @Sheaf D c J (Type w) inferInstance)
-
 end CategoryTheory

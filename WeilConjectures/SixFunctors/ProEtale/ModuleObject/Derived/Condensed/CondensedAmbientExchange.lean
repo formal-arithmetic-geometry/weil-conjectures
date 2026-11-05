@@ -38,31 +38,4 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The canonical pullback comparison around a square for one condensed coefficient ring.
-The two coefficient identifications are those obtained by pullback from the same point;
-the published composition comparison is induced from the ordinary tensor pullbacks.
-Source: blueprint main-20261015, def-weil-pbc-ambient-ringed-exchange, displayed theta;
-Stacks Project, Remark 07A7 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
-def condensedAmbientPullbackComparison (sq : ChosenCartesianSquare g' f' f g) :
-    (upperStar Λ g).leftDerivedFunctor ⋙ (upperStar Λ f').leftDerivedFunctor ≅
-      (upperStar Λ f).leftDerivedFunctor ⋙ (upperStar Λ g').leftDerivedFunctor :=
-  (leftDerivedUpperStarComp Λ f' g).symm ≪≫
-    eqToIso (congrArg (fun h : X' ⟶ Y ↦ (upperStar Λ h).leftDerivedFunctor)
-      sq.toCommSq.w.symm) ≪≫ leftDerivedUpperStarComp Λ g' f
-
-/-- The ambient exchange on ordinary unbounded internal module objects.
-This is the mate of the canonical composition comparison, under the derived
-adjunctions of the full module pushforward and tensor pullback composites.
-Its component inserts the unit for f', applies the square comparison under Rf'_*,
-then contracts the counit for f. It is defined for every condensed ring and before
-any constructibility, properness or completeness condition.
-Source: blueprint main-20261015, def-weil-pbc-ambient-ringed-exchange, final formula;
-Stacks Project, Remark 07A7 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
-def condensedAmbientExchange (sq : ChosenCartesianSquare g' f' f g) :
-    (lowerStar Λ f).rightDerivedFunctor ⋙ (upperStar Λ g).leftDerivedFunctor ⟶
-      (upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ f').rightDerivedFunctor :=
-  (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
-    (derivedUpperStarLowerStarAdjunction Λ f')
-    (TwoSquare.mk _ _ _ _ (condensedAmbientPullbackComparison Λ sq).hom)).natTrans
-
 end AlgebraicGeometry.ProEtale.CondensedRing

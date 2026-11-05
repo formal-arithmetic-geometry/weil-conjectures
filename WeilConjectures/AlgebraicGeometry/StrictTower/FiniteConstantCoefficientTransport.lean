@@ -829,51 +829,6 @@ private theorem scalar_direct_mate
     ((ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).right_triangle_components
       (M.obj.obj (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj U)))).symm
 
-private theorem siteDirect_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    [TopologicalSpace Λ] [DiscreteTopology Λ] :
-    (mateEquiv (cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
-      (cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
-      (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv).natTrans =
-        lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ) := by
-  change mateEquiv _ _ _ = (mateEquiv
-    (comparisonAdjunction (ModuleCat.{u + 1} Λ) X)
-    (comparisonAdjunction (ModuleCat.{u + 1} Λ) Y)).symm
-      (lowerStarCompComparisonLowerStarIso f (ModuleCat.{u + 1} Λ)).inv
-  apply (mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} Λ) X)
-    (comparisonAdjunction (ModuleCat.{u + 1} Λ) Y)).injective
-  rw [Equiv.apply_symm_apply]
-  apply (TwoSquare.equivNatTrans _ _ _ _).injective
-  change (mateEquiv _ _ (mateEquiv _ _ _)).natTrans = _
-  rw [iterated_mateEquiv_conjugateEquiv]
-  change conjugateEquiv
-    ((cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f).comp
-      (cbcComparisonCoefficientAdjunction (ModuleCat.{u + 1} Λ) X))
-    ((cbcComparisonCoefficientAdjunction (ModuleCat.{u + 1} Λ) Y).comp
-      (cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f))
-    (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv = _
-  change conjugateEquiv
-    ((cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f).comp
-      (cbcComparisonCoefficientAdjunction (ModuleCat.{u + 1} Λ) X))
-    ((cbcComparisonCoefficientAdjunction (ModuleCat.{u + 1} Λ) Y).comp
-      (cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f))
-    ((conjugateEquiv _ _).symm
-      (cbcComparisonCoefficientDirectImageIso (ModuleCat.{u + 1} Λ) f).inv) = _
-  exact (Equiv.apply_symm_apply _ _).trans (by rfl)
-
-private theorem hDirect_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [QuasiCompact f] [QuasiSeparated f] (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
-    IsIso (hDirect B f Λ φ) := by
-  have : IsIso (mateEquiv
-      (cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
-      (cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
-      (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv).natTrans := by
-    rw [siteDirect_eq]
-    exact isIso_lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ)
-  dsimp only [hDirect]
-  infer_instance
-
 private theorem cPullback_fixed {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
@@ -1262,18 +1217,6 @@ noncomputable def hOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
       H B U Λ φ ⋙ moduleJ B j :=
   (@asIso _ _ _ _ (hOpenInv B j Λ φ) (hOpenInv_isIso B j Λ φ)).inv
 
-/-- The normalized forward open comparison is invertible.
-Source: Stacks, Tag 09AF
-(blueprint: def-cbc-finite-constant-coefficient-transport).
-Proof: this is the inverse of the invertible unit-normalized inverse comparison,
-so the two inverse identities give invertibility of the forward arrow. -/
-theorem hOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
-    IsIso (hOpen B j Λ φ) := by
-  dsimp only [hOpen]
-  infer_instance
-
 /-- The comparison functor is additive and exact.
 Source: Stacks, Tags 03DA and 099R
 (blueprint: def-cbc-finite-constant-coefficient-transport).
@@ -1304,30 +1247,6 @@ noncomputable instance h_finiteColimits (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     PreservesFiniteColimits (H B X Λ φ) := (h_exact B X Λ φ).2.2
 
-/-- The bounded-below comparison included into the unbounded target.
-Source: Stacks, Tags 099R and 05RU
-(blueprint: def-cbc-finite-constant-coefficient-transport). -/
-noncomputable def HD (X : Scheme.{u}) (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
-    DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
-      DerivedCategory (Modules B X) :=
-  (H B X Λ φ).mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι
-
-/-- Canonical derived direct-image comparison; its unit normalization is built into
-rightDerivedFunctorPlusBaseChange. Source: Stacks, Tags 099R and 0B65
-(blueprint: def-cbc-finite-constant-coefficient-transport). -/
-noncomputable def hR {U X : Scheme.{u}} (f : U ⟶ X) (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
-    Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f ⋙ HD B X Λ φ ⟶
-      HD B U Λ φ ⋙ (moduleDirectImage B f).rightDerivedFunctor :=
-  (Functor.associator _ _ _).inv ≫
-  Functor.whiskerRight (Functor.rightDerivedFunctorPlusBaseChange (hDirect B f Λ φ))
-    DerivedCategory.Plus.ι ≫
-  (Functor.associator _ _ _).hom ≫
-  Functor.whiskerLeft (H B U Λ φ).mapDerivedCategoryPlus
-    (moduleDirectImage B f).rightDerivedFunctorPlusCompatibility.hom ≫
-  (Functor.associator _ _ _).inv
-
 section DerivedHelpers
 
 variable {A A' D D' : Type*} [Category* A] [Category* A']
@@ -1336,21 +1255,6 @@ variable {A A' D D' : Type*} [Category* A] [Category* A']
   {F : A ⥤ D} {F' : A' ⥤ D'} {E : A ⥤ A'} {E' : D ⥤ D'}
   [F.Additive] [F'.Additive] [E.Additive] [E'.Additive]
   [PreservesFiniteLimits F'] [E.IsEquivalence] [E'.IsEquivalence]
-
-private theorem rightAcyclic_of_equivalenceSquare (e : F ⋙ E' ≅ E ⋙ F') (M : A)
-    (h : F'.rightAcyclic (E.obj M)) : F.rightAcyclic M := by
-  intro q
-  let e' : E'.obj ((F.rightDerived (q + 1)).obj M) ≅
-      (F'.rightDerived (q + 1)).obj (E.obj M) :=
-    (Functor.rightDerivedCompObjIso F E' (q + 1) M).symm ≪≫
-      Functor.rightDerivedObjIsoOfIso e (q + 1) M ≪≫
-      Functor.compRightDerivedObjIso E F'
-        (fun I _ ↦ Functor.rightAcyclic_of_injective (E.obj I)) (q + 1) M
-  have hz : IsZero (E'.obj ((F.rightDerived (q + 1)).obj M)) := (h q).of_iso e'
-  apply (IsZero.iff_id_eq_zero _).mpr
-  apply E'.map_injective
-  rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_zero]
-  exact hz.eq_of_src _ _
 
 end DerivedHelpers
 
@@ -1363,83 +1267,6 @@ set_option backward.defeqAttrib.useBackward true
 
 attribute [local instance] fixedRestriction_equivalence fixedRestriction_additive
 
-private theorem h_rightAcyclic {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [QuasiCompact f] [QuasiSeparated f] (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)
-    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] :
-    (moduleDirectImage B f).rightAcyclic ((H B X Λ φ).obj I) := by
-  apply rightAcyclic_of_equivalenceSquare (fixedDirect B f)
-  let F := (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj I
-  have hF := rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective
-    (ModuleCat.{u + 1} Λ) f I
-  have h : (lowerStar (ModuleCat.{u + 1} B) f).rightAcyclic
-      ((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).obj F) := by
-    intro q
-    exact (Functor.map_isZero (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ)
-      (hF q)).of_iso ((rightDerivedLowerStarRestrictScalarsIso φ f (q + 1)).app F).symm
-  exact (lowerStar (ModuleCat.{u + 1} B) f).rightAcyclic.prop_of_iso
-    ((cFixed B X Λ φ).app F).symm h
-
-/-- This particular direct-image comparison is an isomorphism for qcqs maps.
-Source: Stacks, Tag 099R
-(blueprint: def-cbc-finite-constant-coefficient-transport).
-Proof: the underived site mate is invertible for qcqs maps, and the normalized
-coefficient comparison is invertible. The image of an injective etale sheaf under
-site inverse image is direct-image acyclic. The higher-direct-image scalar comparison
-transports this acyclicity through scalar restriction. The equivalence between modules
-over the constant ring sheaf and fixed-ring module sheaves reflects acyclicity and
-identifies their higher direct images. Thus H sends injective etale sheaves to
-module-direct-image acyclic objects. Apply the acyclic-object criterion to the exact
-functors H and the specified hDirect; its derived base-change map is invertible.
-The associators and compatibility isomorphisms in hR preserve invertibility. -/
-theorem hR_isIso {U X : Scheme.{u}} (f : U ⟶ X) [QuasiCompact f] [QuasiSeparated f]
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
-    IsIso (hR B f Λ φ) := by
-  have : (moduleDirectImage B f).IsRightAdjoint :=
-    (Scheme.proEtaleRingModuleAdjunction f (coefficients B X)
-      (coefficients B U) (constantRingIso B f)).isRightAdjoint
-  have : IsIso (hDirect B f Λ φ) := hDirect_isIso B f Λ φ
-  have : IsIso (Functor.rightDerivedFunctorPlusBaseChange (hDirect B f Λ φ)) :=
-    Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
-      (asIso (hDirect B f Λ φ)) (fun I _ ↦ h_rightAcyclic B f Λ φ I)
-  dsimp only [hR]
-  infer_instance
-
 end DerivedComparison
-
-/-- Derived open comparison with the same open-unit normalization.
-Source: Stacks, Tag 09AF
-(blueprint: def-cbc-finite-constant-coefficient-transport). -/
-noncomputable def hJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
-    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus ⋙
-        HD B X Λ φ ≅ HD B U Λ φ ⋙ (moduleJ B j).mapDerivedCategory :=
-  (Functor.associator _ _ _).symm ≪≫
-  isoWhiskerRight
-    ((Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
-      Functor.mapDerivedCategoryPlusNatIso
-        (@asIso _ _ _ _ (hOpen B j Λ φ) (hOpen_isIso B j Λ φ)) ≪≫
-      Functor.mapDerivedCategoryPlusCompIso _ _) DerivedCategory.Plus.ι ≪≫
-  Functor.associator _ _ _ ≪≫
-  isoWhiskerLeft (H B U Λ φ).mapDerivedCategoryPlus
-    (moduleJ B j).mapDerivedCategoryPlusCompatibility ≪≫
-  (Functor.associator _ _ _).symm
-
-/-- The canonical comparison from H of the etale origin to its scalar-restricted
-finite-coefficient realization. Source: blueprint finite-origin hypothesis
-(blueprint: def-cbc-finite-constant-coefficient-transport). -/
-noncomputable def originIso {X : Scheme.{u}} {K : DerivedCategory (Modules B X)}
-    (w : ScalarEtaleOrigin B X K) : (HD B X w.Λ w.φ).obj w.origin.L ≅ K :=
-  (isoWhiskerRight
-    (Functor.mapDerivedCategoryPlusCompIso
-      (finiteCoefficientComparison X w.Λ) (finiteRestriction B X w.Λ w.φ))
-    DerivedCategory.Plus.ι ≪≫ Functor.associator _ _ _ ≪≫
-    isoWhiskerLeft (finiteCoefficientComparison X w.Λ).mapDerivedCategoryPlus
-      (finiteRestriction B X w.Λ w.φ).mapDerivedCategoryPlusCompatibility ≪≫
-    (Functor.associator _ _ _).symm).app w.origin.L ≪≫
-  (finiteRestriction B X w.Λ w.φ).mapDerivedCategory.mapIso
-    (DerivedCategory.Plus.ι.mapIso w.origin.alpha) ≪≫ w.iso
 
 end AlgebraicGeometry.ProEtale.StrictTower

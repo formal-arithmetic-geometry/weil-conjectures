@@ -29,38 +29,4 @@ variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 variable {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R]
 
-/-- Restrict scalars along the inverse ring isomorphism and use the fixed-scalar
-section-action encoding. Source: blueprint finite-coefficient identification, steps 1
-and 8; Stacks Tags 03D3 and 09C8
-(blueprint: def-sfb-finite-coefficient-operation-encoding). -/
-def coefficientEncoding (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u})
-    (E : Encoding A T) : DerivedCategory
-      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) ⥤
-        DerivedCategory (Sheaf (Scheme.ProEt.topology T)
-          (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
-  (Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-    (coefficientMap e.inv.hom T)).mapDerivedCategory ⋙ E.fixedDerived.functor
-
-/-- The constructed encoding is an equivalence, since both factors are exact equivalences.
-Source: scalar restriction along an isomorphism and normalized section-action encoding
-(blueprint: def-sfb-finite-coefficient-operation-encoding). -/
-instance coefficientEncoding_isEquivalence
-    (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u}) (E : Encoding A T) :
-    (coefficientEncoding A e T E).IsEquivalence := by
-  have : IsIso e.inv.hom := by
-    change IsIso ((Mon.forget _).map e.inv)
-    infer_instance
-  have : IsIso (coefficientMap e.inv.hom T) := by
-    dsimp [coefficientMap]
-    infer_instance
-  have : (Mod.comap (coefficientMap e.inv.hom T)).IsEquivalence :=
-    (inferInstance : (Mod.comapEquivalenceOfIsIso
-      (coefficientMap e.inv.hom T)).functor.IsEquivalence)
-  have := Functor.isEquivalence_mapDerivedCategory
-    (Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-      (coefficientMap e.inv.hom T))
-  change ((Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-    (coefficientMap e.inv.hom T)).mapDerivedCategory ⋙ E.fixedDerived.functor).IsEquivalence
-  infer_instance
-
 end AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary

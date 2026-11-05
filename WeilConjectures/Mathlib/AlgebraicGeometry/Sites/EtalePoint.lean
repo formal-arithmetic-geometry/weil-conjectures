@@ -287,22 +287,6 @@ lemma pointSmallEtaleElementsBaseChange_map_val
     ((pointSmallEtaleElementsBaseChange f s).map t).val = f.Etale.map t.val :=
   rfl
 
-/-- `AlgebraicGeometry.Scheme.pointSmallEtaleElementsBaseChange` lies over base change: the
-square
-```
-Elements (pointSmallEtale (s ≫ f)).fiber --- base change ---> Elements (pointSmallEtale s).fiber
-             |                                                             |
-             π                                                             π
-             ↓                                                             ↓
-          Y.Etale ------------------- f.Etale -----------------------> X.Etale
-```
-commutes, on the nose. -/
-lemma pointSmallEtaleElementsBaseChange_comp_π :
-    pointSmallEtaleElementsBaseChange f s ⋙
-        CategoryOfElements.π (pointSmallEtale s).fiber =
-      CategoryOfElements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
-  rfl
-
 end BaseChange
 
 section ClosedImmersion
@@ -437,34 +421,6 @@ section Reparametrization
 
 variable {S : Scheme.{u}} {Ω Ω' : Type u} [Field Ω] [IsSepClosed Ω] [Field Ω'] [IsSepClosed Ω']
   (e : Spec (.of Ω') ≅ Spec (.of Ω)) (s : Spec (.of Ω) ⟶ S)
-
-/-- The isomorphism of fibre functors underlying
-`AlgebraicGeometry.Scheme.pointSmallEtaleCongr`: a lift `t : Spec Ω' ⟶ U` of `e ≫ s` to an
-étale `U ⟶ S` is sent to the lift `e⁻¹ ≫ t` of `s`,
-
-```
-  Spec Ω --e⁻¹--> Spec Ω' --t--> U
-        \                       |
-         s                      v
-          --------------------> S
-```
--/
-noncomputable def pointSmallEtaleFiberCongr :
-    (pointSmallEtale (e.hom ≫ s)).fiber ≅ (pointSmallEtale s).fiber :=
-  Functor.isoWhiskerLeft (Etale.forget S)
-    (coyoneda.mapIso (Over.isoMk e.symm).op)
-
-/-- Reparametrising a geometric point `s : Spec Ω ⟶ S` by an isomorphism
-`e : Spec Ω' ≅ Spec Ω` gives an isomorphic point of the small étale site: `e ≫ s ≅ s`, by
-`AlgebraicGeometry.Scheme.pointSmallEtaleFiberCongr` on fibre functors. -/
-noncomputable def pointSmallEtaleCongr : pointSmallEtale (e.hom ≫ s) ≅ pointSmallEtale s :=
-  GrothendieckTopology.Point.isoMk (pointSmallEtaleFiberCongr e s)
-
-/-- The universe-lifted form of `AlgebraicGeometry.Scheme.pointSmallEtaleCongr`. -/
-noncomputable def uliftPointSmallEtaleCongr :
-    (pointSmallEtale (e.hom ≫ s)).ulift.{u + 1} ≅ (pointSmallEtale s).ulift.{u + 1} :=
-  GrothendieckTopology.Point.isoMk
-    (Functor.isoWhiskerRight (pointSmallEtaleFiberCongr e s) uliftFunctor.{u + 1})
 
 end Reparametrization
 

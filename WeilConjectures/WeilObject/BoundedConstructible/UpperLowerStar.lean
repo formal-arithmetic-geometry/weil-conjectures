@@ -85,7 +85,6 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-
 /-- The derived pullback `Lg^*` along an isomorphism `g` on bounded constructible complexes is an
 equivalence, with inverse `L(g⁻¹)^*`: the composition isomorphisms identify both composites with
 the pullbacks along identities, which are the identity functors. -/
@@ -164,14 +163,6 @@ lemma weilUpperStar_obj_str (K : WeilBoundedConstructible ℓ ΦY) :
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
-/-- The derived pullback of Weil objects lifts the derived pullback on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the
-forgetful functors. -/
-lemma weilUpperStar_comp_forget :
-    weilUpperStar ℓ ΦX ΦY f hf ⋙ WeilBoundedConstructible.forget ℓ ΦX =
-      WeilBoundedConstructible.forget ℓ ΦY ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
-  rfl
-
 end UpperStar
 
 /-! ### The pushforward -/
@@ -215,14 +206,6 @@ lemma weilLowerStar_obj_str (K : WeilBoundedConstructible ℓ eX.hom) :
       (asIso (weilLowerStarComparison ℓ eX eY f hf)).app K.carrier ≪≫
         (boundedConstructibleLowerStar ℓ f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
-
-/-- The derived pushforward of Weil objects lifts the derived pushforward on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along
-the forgetful functors. -/
-lemma weilLowerStar_comp_forget :
-    weilLowerStar ℓ eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ eY.hom =
-      WeilBoundedConstructible.forget ℓ eX.hom ⋙
-        boundedConstructibleLowerStar ℓ f :=
-  rfl
 
 end LowerStar
 

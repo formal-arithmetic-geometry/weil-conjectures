@@ -32,16 +32,4 @@ namespace ChainComplex
 
 variable {R : Type u} [CommRing R]
 
-/-- The tensor of a chain map with a module map, formed by mapping the chain map
-and then the module map.
-Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
-(blueprint: def-weil-pbc-tensor-bicomplex) -/
-def tensorMap {P P' : ChainComplex (ModuleCat.{u} R) ℕ}
-    {N N' : ModuleCat.{u} R} (a : P ⟶ P') (g : N ⟶ N') :
-    ((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P ⟶
-      ((tensorRight N').mapHomologicalComplex (.down ℕ)).obj P' :=
-  ((tensorRight N).mapHomologicalComplex (.down ℕ)).map a ≫
-    (NatTrans.mapHomologicalComplex ((tensoringRight (ModuleCat R)).map g)
-      (.down ℕ)).app P'
-
 end ChainComplex

@@ -356,10 +356,6 @@ noncomputable
 def objBase (n : ℕ) : obj P Q X n ⟶ X :=
   (diag P Q X).map (homOfLE <| n.zero_le).op
 
-lemma diag_map_le_succ (n : ℕ) (hn : n ≤ n + 1) :
-    (diag P Q X).map (homOfLE hn).op = ((P ⊓ Q).precontraction _).hom := by
-  simp [diag]
-
 set_option backward.defeqAttrib.useBackward true in
 @[simps]
 noncomputable
@@ -389,10 +385,6 @@ abbrev contraction.π (n : ℕ) : contraction P Q X ⟶ Construction.obj P Q X n
 variable (K) in
 noncomputable def Contraction.base : contraction P Q X ⟶ X :=
   contraction.π _ _ _ 0
-
-lemma contraction.w (n m : ℕ) (hmn : n ≤ m) :
-    contraction.π P Q X m ≫ (Construction.diag P Q X).map ⟨homOfLE hmn⟩ = contraction.π P Q X n :=
-  limit.w _ _
 
 lemma pro_pro_contractionπ [PreProSpreads.{w} P] [Limits.HasPullbacks C] [LocallySmall.{w} C]
     (H : P.op ≤ isFinitelyPresentable.{w} Cᵒᵖ)

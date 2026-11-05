@@ -52,32 +52,6 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `def-exc-direct-image-input`: The classical direct-image finiteness input.
-
-Let `k` be a field and `Λ` a coefficient ring. The *direct-image finiteness input over `k`* holds
-if
-
-1. (*finiteness of the direct image*) for every morphism `u : S ⟶ T` between finite-type
-   `k`-schemes (such a morphism is of finite type), every constructible sheaf `F` of `Λ`-modules
-   on `S_ét` and every `q ≥ 0`, the higher direct image `R^q u_* F` is constructible on `T_ét`;
-2. (*cohomological dimension*) for every separably closed field `K` on which the exponent of `Λ`
-   is invertible and every finite-type `K`-scheme `W` of dimension at most `d`, `H^q(W, M) = 0`
-   for every `q > 2d` and every torsion abelian sheaf `M` on `W_ét`.
-
-In the blueprint `Λ` is a finite ring annihilated by an integer `N` prime to the characteristic
-of `k`; in clause (2) the condition that the characteristic of `K` is prime to `N` is the
-invertibility of the exponent of `Λ` on `Spec K`. -/
-def DirectImageFinitenessInput (k : Type u) [Field k] : Prop :=
-  (∀ (S T : Scheme.{u}) (aS : S ⟶ Spec (.of k)) (aT : T ⟶ Spec (.of k))
-      [LocallyOfFiniteType aS] [QuasiCompact aS] [LocallyOfFiniteType aT] [QuasiCompact aT]
-      (u : S ⟶ T), u ≫ aT = aS → ∀ (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-      IsConstructibleSheaf F → ∀ q : ℕ, IsConstructibleSheaf (higherDirectImage Λ u q F)) ∧
-    ∀ (K : Type u) [Field K] [IsSepClosed K], HasInvertibleExponent Λ (Spec (.of K)) →
-      ∀ (d : ℕ) (W : Scheme.{u}) (a : W ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a],
-      topologicalKrullDim W ≤ (d : WithBot ℕ∞) →
-      ∀ (M : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}), M.IsTorsion →
-      ∀ q : ℕ, 2 * d < q → Subsingleton (Sheaf.H M q)
-
 /-- Blueprint `def-exc-open-complement-bound`: Open-complement cohomological-dimension
 condition.
 
@@ -149,23 +123,6 @@ theorem isConstructibleSheaf_higherDirectImage {k : Type u} [Field k]
   have := (boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType Λ u aS aT hu _
     (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)).2 q
   IsConstructibleSheaf.of_iso (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ u F q)
-
-/-- Blueprint `thm-exc-direct-image-input-holds`: The direct-image finiteness input holds.
-
-Let `k` be a separably closed field and `Λ` a finite ring whose exponent is invertible in `k`.
-Then both clauses of the direct-image finiteness input
-(`AlgebraicGeometry.Etale.DirectImageFinitenessInput`) hold over `k`. Clause (1) is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType`
-(`thm-dg-finite-type-constructibility`), through
-`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage`; clause (2) is
-`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`, the bound
-`cd_tor(W) ≤ 2d + 0` of `thm-sc-finite-type-torsion-cd` for the separably closed field `K`
-(`lem-kun-cd-sep-closed-point`). Separable closedness of `k` is not needed for clause (1). -/
-theorem directImageFinitenessInput (k : Type u) [Field k]
-    [HasInvertibleExponent Λ (Spec (.of k))] : DirectImageFinitenessInput Λ k :=
-  ⟨fun _ _ aS aT _ _ _ _ u hu F _ q ↦ isConstructibleSheaf_higherDirectImage aS aT u hu F q,
-    fun _ _ _ _ d _ a _ _ hW M hM q hq ↦
-      Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed d a hW M hM q hq⟩
 
 /-- Blueprint `lem-exc-open-complement-known`: The open-complement condition from the
 direct-image input.

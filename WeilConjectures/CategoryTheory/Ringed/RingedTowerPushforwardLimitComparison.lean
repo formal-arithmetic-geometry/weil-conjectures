@@ -184,117 +184,11 @@ section Helpers
 variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B] [Abelian A] [Abelian B]
   [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
 
-private theorem towerComparison_existsComposite
-    {T : Type u} [Category T] [Abelian T] [HasDerivedCategory.{w} T]
-    [Abelian.HasKInjectiveResolutions A]
-    (F : A ⥤ B) (G : B ⥤ T) [F.Additive] [G.Additive]
-    (RF : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B)
-    (RG : DerivedCategory.{w} B ⥤ DerivedCategory.{w} T)
-    (ηf : F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
-      DerivedCategory.Q.{w} ⋙ RF)
-    (ηg : G.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
-      DerivedCategory.Q.{w} ⋙ RG)
-    (hf : ∀ I : CochainComplex A ℤ, I.IsKInjective → IsIso (ηf.app I))
-    (hg : ∀ I : CochainComplex A ℤ, I.IsKInjective →
-      IsIso (ηg.app ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj I))) :
-    ∃ (η : (F ⋙ G).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
-        DerivedCategory.Q.{w} ⋙ (RF ⋙ RG)),
-      (RF ⋙ RG).IsRightDerivedFunctor η
-        (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)) ∧
-      ∀ X, η.app X = ηg.app ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) ≫
-        RG.map (ηf.app X) := by
-  let Fc := F.mapHomologicalComplex (ComplexShape.up ℤ)
-  let Gc := G.mapHomologicalComplex (ComplexShape.up ℤ)
-  let η : (F ⋙ G).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
-      DerivedCategory.Q.{w} ⋙ (RF ⋙ RG) :=
-    { app := fun X ↦ ηg.app (Fc.obj X) ≫ RG.map (ηf.app X)
-      naturality := by
-        intro X Y a
-        change DerivedCategory.Q.map (Gc.map (Fc.map a)) ≫
-            (ηg.app (Fc.obj Y) ≫ RG.map (ηf.app Y)) =
-          (ηg.app (Fc.obj X) ≫ RG.map (ηf.app X)) ≫ RG.map (RF.map (DerivedCategory.Q.map a))
-        have hn := ηg.naturality (Fc.map a)
-        have hm := ηf.naturality a
-        dsimp only [Functor.comp_map] at hn hm
-        rw [← Category.assoc, hn]
-        simp only [Category.assoc]
-        rw [← RG.map_comp, hm, RG.map_comp] }
-  refine ⟨η, ?_, fun _ ↦ rfl⟩
-  apply (derives (F ⋙ G)).isRightDerivedFunctor_of_isIso η
-  intro X
-  have := hf X.obj X.property
-  have := hg X.obj X.property
-  change IsIso (ηg.app (Fc.obj X.obj) ≫ RG.map (ηf.app X.obj))
-  infer_instance
-
 variable [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
 
 variable [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
 
 variable [HasLimitsOfShape ℕᵒᵖ A]
-
-omit [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)] in
-private theorem towerComparison_limPreservesKInjective
-    [(lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive] :
-    (lim : (ℕᵒᵖ ⥤ A) ⥤ A).PreservesKInjectiveComplexes := by
-  exact Adjunction.preservesKInjectiveComplexes
-    (constLimAdj : (Functor.const ℕᵒᵖ : A ⥤ (ℕᵒᵖ ⥤ A)) ⊣ lim)
-
-private theorem towerComparison_existsLimitIso
-    [HasLimitsOfShape ℕᵒᵖ B]
-    [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
-    [(lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive] [(lim : (ℕᵒᵖ ⥤ B) ⥤ B).Additive]
-    (F : A ⥤ B) [F.Additive]
-    (RF : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B)
-    (RT : DerivedCategory.{w} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{w} (ℕᵒᵖ ⥤ B))
-    (LA : DerivedCategory.{w} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{w} A)
-    (LB : DerivedCategory.{w} (ℕᵒᵖ ⥤ B) ⥤ DerivedCategory.{w} B)
-    (ηf : F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
-      DerivedCategory.Q.{w} ⋙ RF)
-    (ηt : ((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex
-      (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ RT)
-    (ηA : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
-      DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ LA)
-    (ηB : (lim : (ℕᵒᵖ ⥤ B) ⥤ B).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
-      DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ LB)
-    (hf : ∀ I : CochainComplex A ℤ, I.IsKInjective → IsIso (ηf.app I))
-    (ht : ∀ I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ, I.IsKInjective → IsIso (ηt.app I))
-    (hA : ∀ I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ, I.IsKInjective → IsIso (ηA.app I))
-    (hB : ∀ I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ, I.IsKInjective →
-      IsIso (ηB.app ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex
-        (ComplexShape.up ℤ)).obj I)))
-    (c : (lim : (ℕᵒᵖ ⥤ A) ⥤ A) ⋙ F ≅
-      (Functor.whiskeringRight ℕᵒᵖ A B).obj F ⋙ (lim : (ℕᵒᵖ ⥤ B) ⥤ B)) :
-    ∃ a : LA ⋙ RF ≅ RT ⋙ LB,
-      ∀ X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ,
-        ηf.app (((lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj X) ≫ RF.map (ηA.app X) ≫
-          a.hom.app (DerivedCategory.Q.{w}.obj X) =
-        DerivedCategory.Q.{w}.map
-            ((NatTrans.mapHomologicalComplex c.hom (ComplexShape.up ℤ)).app X) ≫
-          ηB.app ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj X) ≫ LB.map (ηt.app X) := by
-  have := towerComparison_limPreservesKInjective (A := A)
-  obtain ⟨α, hα, hαapp⟩ := towerComparison_existsComposite
-    (lim : (ℕᵒᵖ ⥤ A) ⥤ A) F LA RF ηA ηf hA (fun I hI ↦ by
-      have := hI
-      exact hf _ inferInstance)
-  obtain ⟨β, hβ, hβapp⟩ := towerComparison_existsComposite
-    ((Functor.whiskeringRight ℕᵒᵖ A B).obj F) (lim : (ℕᵒᵖ ⥤ B) ⥤ B)
-    RT LB ηt ηB ht hB
-  have := hα
-  have := hβ
-  let τ := Functor.isoWhiskerRight (NatIso.mapHomologicalComplex c (ComplexShape.up ℤ))
-    DerivedCategory.Q.{w}
-  let a := Functor.rightDerivedNatIso (LA ⋙ RF) (RT ⋙ LB) α β
-    (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (ComplexShape.up ℤ)) τ
-  refine ⟨a, ?_⟩
-  intro X
-  have h := Functor.rightDerivedNatTrans_app (LA ⋙ RF) (RT ⋙ LB) α β
-    (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (ComplexShape.up ℤ)) τ.hom X
-  rw [hαapp, hβapp] at h
-  rw [← Category.assoc]
-  exact h
 
 end Helpers
 

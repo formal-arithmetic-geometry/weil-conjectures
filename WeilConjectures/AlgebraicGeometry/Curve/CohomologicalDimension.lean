@@ -422,23 +422,6 @@ namespace IsConnectedCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
-/-- **Cohomological dimension of a smooth affine curve.** Let `C` be a smooth affine connected
-curve over an algebraically closed field `k`. Then `H^q(C_ét, F) = 0` for `q ≥ 2` and every
-torsion abelian sheaf `F` on `C_ét`.
-
-Degrees `q ≥ 3` are `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`. In degree two,
-`H²(C, F) ≅ H²(C, η_* η^* F)` for the generic point `η` of `C`
-(`AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField`), and the latter
-vanishes by `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar`.
-(blueprint: `lem-sc-affine-cohomological-dimension`) -/
-theorem subsingleton_sheafH_of_two_le_of_isAffine_of_smooth (f : C ⟶ Spec (.of k))
-    [IsConnectedCurve f] [Smooth f] [IsAffine C]
-    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
-    (hq : 2 ≤ q) : Subsingleton (Sheaf.H F q) := by
-  obtain rfl | hq := hq.eq_or_lt
-  · exact subsingleton_sheafH_two_of_isAffine_of_smooth f F hF
-  · exact IsCurve.subsingleton_sheafH_of_three_le f F hF q hq
-
 end IsConnectedCurve
 
 namespace IsCurve

@@ -87,14 +87,4 @@ instance isIso_pointSmallEtalePrecomp_hom
     (ConcreteCategory.isIso_iff_bijective _).mpr (hbij U)
   exact NatIso.isIso_of_isIso_app _
 
-/-- The stalks of a sheaf at a geometric point `s` and at its base change `a ≫ s` along an
-extension of separably closed fields agree, for coefficients in any category. -/
-noncomputable def sheafFiberPrecompIso {S : Scheme.{u}} {k l : Type u} [Field k]
-    [IsSepClosed k] [Field l] [IsSepClosed l] (s : Spec (.of k) ⟶ S)
-    (a : Spec (.of l) ⟶ Spec (.of k)) (A : Type*) [Category A]
-    [HasColimitsOfSize.{u, u} A] :
-    (pointSmallEtale s).sheafFiber (A := A) ≅ (pointSmallEtale (a ≫ s)).sheafFiber :=
-  (GrothendieckTopology.Point.sheafFiberIso
-    (GrothendieckTopology.Point.isoMk (asIso (pointSmallEtalePrecomp s a).hom)))
-
 end AlgebraicGeometry.Scheme

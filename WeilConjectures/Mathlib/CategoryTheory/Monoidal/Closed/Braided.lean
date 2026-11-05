@@ -60,24 +60,4 @@ lemma IsInvertible.isIso_ev [MonoidalClosed C] {A : C} (hA : IsInvertible A) (B 
   have : IsIso (ihom.adjunction A).counit := inferInstance
   exact NatIso.isIso_app_of_isIso (ihom.adjunction A).counit B
 
-/-- **Invertibility is reflected by a conservative monoidal functor commuting with duals.** Let
-`G` be a monoidal functor between closed braided monoidal categories which reflects isomorphisms,
-and let `A` be an object for which the comparison `G [A, 𝟙] ⟶ [G A, G 𝟙]`
-(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism. If `G A` is invertible,
-then so is `A`: `G` of the evaluation `A ⊗ [A, 𝟙] ⟶ 𝟙` is, up to the comparison and the
-tensorator, the evaluation of the invertible object `G A`. -/
-theorem isInvertible_of_isIso_ihomComparison [MonoidalClosed C] [BraidedCategory D]
-    [MonoidalClosed D] (G : C ⥤ D) [G.Monoidal]
-    (hG : ∀ {M N : C} (φ : M ⟶ N), IsIso (G.map φ) → IsIso φ) {A : C}
-    [IsIso ((ihomComparison G A).natTrans.app (𝟙_ C))] (h : IsInvertible (G.obj A)) :
-    IsInvertible A := by
-  have := h.isIso_ev (G.obj (𝟙_ C))
-  have h₁ := ihomComparison_ev G A (𝟙_ C)
-  have : IsIso (μ G A ((ihom A).obj (𝟙_ C)) ≫ G.map ((ihom.ev A).app (𝟙_ C))) := by
-    rw [← h₁]
-    infer_instance
-  have := hG _ (IsIso.of_isIso_comp_left (μ G A ((ihom A).obj (𝟙_ C)))
-    (G.map ((ihom.ev A).app (𝟙_ C))))
-  exact (isInvertible_iff_of_braided A).2 ⟨_, ⟨asIso ((ihom.ev A).app (𝟙_ C))⟩⟩
-
 end CategoryTheory

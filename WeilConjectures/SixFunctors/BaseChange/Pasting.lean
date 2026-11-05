@@ -215,24 +215,6 @@ lemma Etale.baseChangeMap_paste_horiz_app (sq₁ : CommSq g' f' f g) (sq₂ : Co
   simp only [Etale.baseChangeMap]
   exact this
 
-/-- **Horizontal pasting of the base change maps**: for two squares pasted horizontally, the
-base change map of the pasted square is the composite of the base change maps of the two
-squares, modulo the composition isomorphisms of the pullbacks along the horizontal maps. -/
-lemma Etale.baseChangeMap_paste_horiz (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g'' f'' f' h)
-    (sq : CommSq (g'' ≫ g') f'' f (h ≫ g)) :
-    Etale.baseChangeMap A sq =
-      Functor.whiskerLeft ((f)_*[A]) (Etale.upperStarComp A h g).hom ≫
-        (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (Etale.baseChangeMap A sq₁) ((h)^*[A]) ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft ((g')^*[A]) (Etale.baseChangeMap A sq₂) ≫
-        (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (Etale.upperStarComp A g'' g').inv ((f'')_*[A]) := by
-  refine NatTrans.ext (funext fun F => ?_)
-  rw [Etale.baseChangeMap_paste_horiz_app A sq₁ sq₂ sq]
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
-    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.comp_obj, id_comp]
-
 end Horizontal
 
 section Vertical
@@ -320,24 +302,6 @@ lemma Etale.baseChangeMap_paste_vert_app (sq₁ : CommSq g' f' f g) (sq₂ : Com
     Functor.comp_obj, Category.assoc] at this
   simp only [Etale.baseChangeMap]
   exact this
-
-/-- **Vertical pasting of the base change maps**: for two squares pasted vertically, the
-base change map of the pasted square is the composite of the base change maps of the two
-squares, modulo the composition isomorphisms of the pushforwards along the vertical maps. -/
-lemma Etale.baseChangeMap_paste_vert (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g e' e k)
-    (sq : CommSq g' (f' ≫ e') (f ≫ e) k) :
-    Etale.baseChangeMap A sq =
-      Functor.whiskerRight (Etale.lowerStarComp A f e).inv ((k)^*[A]) ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft ((f)_*[A]) (Etale.baseChangeMap A sq₂) ≫
-        (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (Etale.baseChangeMap A sq₁) ((e')_*[A]) ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft ((g')^*[A]) (Etale.lowerStarComp A f' e').hom := by
-  refine NatTrans.ext (funext fun F => ?_)
-  rw [Etale.baseChangeMap_paste_vert_app A sq₁ sq₂ sq]
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
-    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.comp_obj, id_comp]
 
 end Vertical
 

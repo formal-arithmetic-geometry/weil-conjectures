@@ -35,19 +35,4 @@ namespace AlgebraicGeometry.Scheme
 -- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
 attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
-/-- Localization factorization of the termwise completed realization, with its canonical
-normalization. Source: Stacks Tag 015F, parts (3)--(4)
-(blueprint: lem-weil-pbc-completed-realization-derived-cohomology).
-This is `mapDerivedCategoryFactors`, so its shift structure is the one descended from
-identity maps on the terms of shifted complexes. -/
-def integralRealizationFactors (T : Scheme.{u})
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
-    completedConstantQ (ModuleCat.{u + 1} A) ⋙ integralConstantDerived T d ≅
-      (integralConstantModule T d).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
-        DerivedCategory.Q :=
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
-  letI := (integralConstantModule_exact T d).1
-  letI := (integralConstantModule_exact T d).2
-  (integralConstantModule T d).mapDerivedCategoryFactors
-
 end AlgebraicGeometry.Scheme

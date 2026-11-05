@@ -51,19 +51,4 @@ noncomputable def postcompAddEquiv (X : C) {Y Y' : C} (e : Y ≅ Y') (n : ℕ) :
   left_inv _ := by simp [Ext.mk₀_comp_mk₀]
   right_inv _ := by simp [Ext.mk₀_comp_mk₀]
 
-open Limits in
-/-- The `Ext`-groups out of a finite coproduct vanish if they vanish for each summand: `Ext`
-commutes with finite biproducts in its first variable (`Ext.biproductAddEquiv`). -/
-lemma subsingleton_sigma {ι : Type*} [Finite ι] (f : ι → C) [HasCoproduct f] (Z : C) (n : ℕ)
-    [∀ j, Subsingleton (Ext (f j) Z n)] : Subsingleton (Ext (∐ f) Z n) := by
-  -- reindex by `Fin k`, since the biproduct API is stated for index types in `Type`
-  obtain ⟨k, ⟨e⟩⟩ := Finite.exists_equiv_fin ι
-  have : HasFiniteBiproducts C := HasFiniteBiproducts.of_hasFiniteCoproducts
-  have (j : Fin k) : Subsingleton (Ext ((f ∘ e.symm) j) Z n) :=
-    inferInstanceAs (Subsingleton (Ext (f (e.symm j)) Z n))
-  have : Subsingleton (Ext (∐ (f ∘ e.symm)) Z n) :=
-    ((precompAddEquiv (biproduct.isoCoproduct _) Z n).trans
-      (biproductAddEquiv (biproduct.isBilimit _) Z n)).toEquiv.subsingleton
-  exact (precompAddEquiv (Sigma.reindex e.symm f) Z n).toEquiv.subsingleton
-
 end CategoryTheory.Abelian.Ext

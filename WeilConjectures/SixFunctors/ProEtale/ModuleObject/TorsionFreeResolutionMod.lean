@@ -39,10 +39,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C] [Monoida
   [SymmetricCategory C] [MonoidalClosed C] [IsGrothendieckAbelian.{v} C]
   {R : C} [MonObj R] [IsCommMonObj R]
 
-omit [MonoidalPreadditive C] in
-lemma regularEndSMul_eq_unitEndSMul (r : 𝟙_ (Mod C R) ⟶ 𝟙_ (Mod C R)) (M : Mod C R) :
-    regularEndSMul r M = unitEndSMul r M := rfl
-
 section Comap
 
 variable {S : C} [MonObj S] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ]

@@ -32,36 +32,4 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
   (hT' : ∀ K : PB.FullSubcategory, PB' ((PB.ι ⋙ T').obj K))
   (e : F ⋙ T' ≅ T ⋙ F')
 
-/-- The components of the restriction to full subcategories of a commutation isomorphism
-`e : F ⋙ T' ≅ T ⋙ F'` are those of `e`. -/
-lemma preimageIso_liftSquare_hom_app_hom (K : PA.FullSubcategory) :
-    ((((PB'.fullyFaithfulι).whiskeringRight _).preimageIso
-      (Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft (PB.lift (PA.ι ⋙ F) hF) (PB'.liftCompιIso (PB.ι ⋙ T') hT') ≪≫
-        (Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (PB.liftCompιIso (PA.ι ⋙ F) hF) T' ≪≫
-        Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft PA.ι e ≪≫
-        (Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (PA'.liftCompιIso (PA.ι ⋙ T) hT).symm F' ≪≫
-        Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft (PA'.lift (PA.ι ⋙ T) hT) (PB'.liftCompιIso (PA'.ι ⋙ F') hF').symm ≪≫
-        (Functor.associator _ _ _).symm)).hom.app K).hom = e.hom.app K.obj := by
-  simp [liftCompιIso]
-
-/-- The components of the inverse of the restriction to full subcategories of a commutation
-isomorphism `e : F ⋙ T' ≅ T ⋙ F'` are those of the inverse of `e`. -/
-lemma preimageIso_liftSquare_inv_app_hom (K : PA.FullSubcategory) :
-    ((((PB'.fullyFaithfulι).whiskeringRight _).preimageIso
-      (Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft (PB.lift (PA.ι ⋙ F) hF) (PB'.liftCompιIso (PB.ι ⋙ T') hT') ≪≫
-        (Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (PB.liftCompιIso (PA.ι ⋙ F) hF) T' ≪≫
-        Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft PA.ι e ≪≫
-        (Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (PA'.liftCompιIso (PA.ι ⋙ T) hT).symm F' ≪≫
-        Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft (PA'.lift (PA.ι ⋙ T) hT) (PB'.liftCompιIso (PA'.ι ⋙ F') hF').symm ≪≫
-        (Functor.associator _ _ _).symm)).inv.app K).hom = e.inv.app K.obj := by
-  simp [liftCompιIso]
-
 end CategoryTheory.ObjectProperty

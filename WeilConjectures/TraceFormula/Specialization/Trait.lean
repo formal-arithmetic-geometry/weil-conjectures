@@ -72,18 +72,6 @@ noncomputable def traitGenericPoint : Spec (.of (traitGenericField k')) ⟶ trai
 noncomputable def traitToBase : trait k' ⟶ Spec (.of k) :=
   Spec.map (CommRingCat.ofHom (algebraMap k (PowerSeries k')))
 
-/-- The coordinate `t : Spec k'⟦t⟧ ⟶ 𝔸¹_k`, over the structure morphism
-`Spec k'⟦t⟧ ⟶ Spec k`. -/
-noncomputable def traitToAffineLine : trait k' ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) :=
-  AffineSpace.homOfVector (traitToBase k k')
-    fun _ ↦ (Scheme.ΓSpecIso (.of (PowerSeries k'))).inv PowerSeries.X
-
-@[reassoc (attr := simp)]
-lemma traitToAffineLine_over :
-    traitToAffineLine k k' ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k) =
-      traitToBase k k' :=
-  AffineSpace.homOfVector_over _ _
-
 /-- The closed point of the trait lies over `Spec k' ⟶ Spec k`. -/
 @[reassoc]
 lemma traitClosedPoint_traitToBase :
@@ -91,22 +79,6 @@ lemma traitClosedPoint_traitToBase :
       Spec.map (CommRingCat.ofHom (algebraMap k k')) := by
   rw [traitClosedPoint, traitToBase, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
   congr 2
-
-/-- The coordinate `t` maps the closed point of the trait to the origin of `𝔸¹_k`. -/
-@[reassoc]
-lemma traitClosedPoint_traitToAffineLine :
-    traitClosedPoint k' ≫ traitToAffineLine k k' =
-      Spec.map (CommRingCat.ofHom (algebraMap k k')) ≫
-        AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k)) := by
-  refine AffineSpace.hom_ext ?_ fun i ↦ ?_
-  · rw [Category.assoc, Category.assoc, traitToAffineLine_over, AffineSpace.zeroSection_over,
-      Category.comp_id, traitClosedPoint_traitToBase]
-  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, Scheme.Hom.comp_appTop,
-      CommRingCat.comp_apply, AffineSpace.zeroSection_appTop_coord, map_zero, traitToAffineLine,
-      AffineSpace.homOfVector_appTop_coord, traitClosedPoint, ← CommRingCat.comp_apply,
-      ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
-    change (Scheme.ΓSpecIso (.of k')).inv (PowerSeries.constantCoeff PowerSeries.X) = 0
-    rw [PowerSeries.constantCoeff_X, map_zero]
 
 end Trait
 

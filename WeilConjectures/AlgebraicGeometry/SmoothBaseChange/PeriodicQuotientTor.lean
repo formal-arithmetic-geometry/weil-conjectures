@@ -39,7 +39,6 @@ import WeilConjectures.Algebra.Homology.SmoothBaseChange.AlternatingUnitResoluti
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
@@ -50,30 +49,5 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 variable (T : Scheme.{u})
   {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
-
-private def ordinaryIso : pbcExtend φ ≅ SheafOfModules.ordinaryExtension.{u + 1, u, u + 1}
-  (J := ProEt.topology T) φ := by
-  let F := pbcExtend φ
-  have hobj (M : pbcModules T R) : F.obj M =
-      (SheafOfModules.ordinaryExtension.{u + 1, u, u + 1}
-        (J := ProEt.topology T) φ).obj M :=
-    (pbcExtensionExistence φ).choose_spec.choose M
-  refine NatIso.ofComponents (fun M ↦ eqToIso (hobj M)) ?_
-  intro M N f
-  have hm : F.map f = eqToHom (hobj M) ≫
-      SheafOfModules.changeOfRingsHom φ M f ≫ eqToHom (hobj N).symm :=
-    (pbcExtensionExistence φ).choose_spec.choose_spec.choose f
-  change F.map f ≫ eqToHom (hobj N) = _
-  rw [hm]
-  simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id]
-  rfl
-
-private local instance restriction_faithful
-    (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
-    (φ : R ⟶ S) : (pbcRestrict φ).Faithful where
-  map_injective := by
-    intro M N f g h
-    ext U x
-    exact congrArg (fun k ↦ k.val.app U x) h
 
 end AlgebraicGeometry.Scheme

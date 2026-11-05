@@ -46,13 +46,4 @@ variable {X X' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
 
-/-- **The pullback of the Tate twists**: for a morphism `g : X' ⟶ X` of separated `k`-schemes
-of finite type, `Lg^* ℚ̄_ℓ,X(d)[n] ≅ ℚ̄_ℓ,X'(d)[n]` in `Dᵇc(X')⟦ℚ̲̄_ℓ⟧`. -/
-noncomputable def boundedConstructibleUpperStarTateTwistIso (g : X' ⟶ X) (d n : ℤ) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj
-        (boundedConstructibleTateTwist ℓ X d n) ≅ boundedConstructibleTateTwist ℓ X' d n :=
-  have := neZero_natCast_of_ringChar_ne ℓ (k := k)
-  (boundedConstructible _).fullyFaithfulι.preimageIso
-    (upperStarShiftTateTwistDerivedIso ℓ g.left X.hom d n)
-
 end AlgebraicGeometry.ProEtale.CondensedRing

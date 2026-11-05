@@ -236,15 +236,6 @@ theorem exists_isEllAdicQuotient (hℓ : (ℓ : ResidueField R) ≠ 0) :
   have h4 : ℓ ^ (b + 1) ∣ n := ⟨c, by rw [← h3, hc]; ring⟩
   exact Nat.pow_succ_factorization_not_dvd hn0 hℓ'.out h4
 
-omit [IsDomain R] [IsDiscreteValuationRing R] [HenselianLocalRing R]
-  [IsSepClosed (ResidueField R)] in
-/-- A prime `ℓ` different from the characteristic `p` of a field is invertible in it. -/
-lemma natCast_ne_zero_of_ne [IsLocalRing R] {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime)
-    (hℓp : ℓ ≠ p) : (ℓ : ResidueField R) ≠ 0 := by
-  rw [Ne, CharP.cast_eq_zero_iff (ResidueField R) p]
-  intro h
-  exact hℓp ((Nat.prime_dvd_prime_iff_eq hp hℓ'.out).1 h).symm
-
 variable (R) in
 /-- The vanishing of `Hᵠ(Gal(Ω/F), M)` for `q > 1` and `ℓ`-primary `M`, for a prime `ℓ`
 invertible in the residue field. See `IsDiscreteValuationRing.subsingleton_H_galois`. -/
@@ -254,53 +245,5 @@ theorem subsingleton_H_galois_of_natCast_ne_zero (hℓ : (ℓ : ResidueField R) 
   have : IsSepClosure F Ω := ⟨‹_›, ‹_›⟩
   obtain ⟨χ, τ, h⟩ := exists_isEllAdicQuotient R F Ω hℓ
   exact h.subsingleton_H M hM hq
-
-omit [IsSepClosed (ResidueField R)] [IsDomain R] [IsDiscreteValuationRing R]
-  [HenselianLocalRing R] [IsFractionRing R F] [IsSepClosed Ω] [Algebra.IsSeparable F Ω]
-  [Fact ℓ.Prime] in
-/-- `H⁰(Gal(Ω/F), M)` is finite for finite `M`. -/
-theorem finite_H_zero_galois (M : DiscreteModule.{w} Gal(Ω/F)) [Finite M.obj.V] :
-    Finite (DiscreteModule.H Gal(Ω/F) M 0) :=
-  Finite.of_injective (fun x ↦ (DiscreteModule.H_zero_addEquiv M x).1)
-    (Subtype.val_injective.comp (DiscreteModule.H_zero_addEquiv M).injective)
-
-variable (R) in
-/-- `H¹(Gal(Ω/F), M)` is finite for finite `ℓ`-primary `M`, for a prime `ℓ` invertible in the
-residue field: it is a quotient of `Mᴷ` (`DiscreteModule.IsEllAdicQuotient.HOneAddEquiv`). -/
-theorem finite_H_one_galois_of_natCast_ne_zero (hℓ : (ℓ : ResidueField R) ≠ 0)
-    (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) [Finite M.obj.V] :
-    Finite (DiscreteModule.H Gal(Ω/F) M 1) := by
-  have : IsSepClosure F Ω := ⟨‹_›, ‹_›⟩
-  obtain ⟨χ, τ, h⟩ := exists_isEllAdicQuotient R F Ω hℓ
-  have : Finite (DiscreteModule.fixedAddSubgroup M χ.toMonoidHom.ker) := Subtype.finite
-  exact Finite.of_equiv _ (h.HOneAddEquiv hM).symm.toEquiv
-
-variable (R) in
-/-- Blueprint `lem-exc-dvr-galois`: The prime-to-characteristic local Galois calculation.
-
-Let `R` be a discrete valuation ring which is strictly henselian, with separably closed
-residue field of characteristic `p > 0`; put `F = Frac(R)`, `G = Gal(Ω/F)` for a separable
-closure `Ω` of `F`, and fix a prime `ℓ ≠ p`. Then `Hᵠ(G, M) = 0` for `q > 1` and every discrete
-`G`-module `M` killed by a power of `ℓ` (more generally `ℓ`-primary); if `M` is finite, then
-`H⁰(G, M)` and `H¹(G, M)` are finite (`IsDiscreteValuationRing.finite_H_zero_galois`,
-`IsDiscreteValuationRing.finite_H_one_galois`).
-
-Discrete modules over a finite ring `A` killed by a power of `ℓ` are in particular `ℓ`-primary
-discrete `G`-modules, and the cohomology is computed with `ℤ`-coefficients (see
-`DiscreteModule`). The excellence assumption of the blueprint is not needed: integral closures
-in finite separable extensions of `F` are finite over `R`; and the residue field only needs to
-be separably closed. -/
-theorem subsingleton_H_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime) (hℓp : ℓ ≠ p)
-    (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) {q : ℕ} (hq : 1 < q) :
-    Subsingleton (DiscreteModule.H Gal(Ω/F) M q) :=
-  subsingleton_H_galois_of_natCast_ne_zero R (natCast_ne_zero_of_ne hp hℓp) M hM hq
-
-variable (R) in
-/-- Blueprint `lem-exc-dvr-galois`: The prime-to-characteristic local Galois calculation,
-finiteness of `H¹` (see `IsDiscreteValuationRing.subsingleton_H_galois`). -/
-theorem finite_H_one_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime) (hℓp : ℓ ≠ p)
-    (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) [Finite M.obj.V] :
-    Finite (DiscreteModule.H Gal(Ω/F) M 1) :=
-  finite_H_one_galois_of_natCast_ne_zero R (natCast_ne_zero_of_ne hp hℓp) M hM
 
 end IsDiscreteValuationRing

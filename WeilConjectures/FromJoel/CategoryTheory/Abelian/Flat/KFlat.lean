@@ -230,16 +230,6 @@ instance closedUnderLimitsOfShape_discrete_kFlat (J : Type) [Finite J] :
     rw [HomotopyCategory.kFlat_quotient_obj_iff]
     apply p.prop_diag_obj
 
-lemma kFlat_prod {K L : CochainComplex A ℤ} (hK : (quasiIso A (.up ℤ)).kFlat K)
-    (hL : (quasiIso A (.up ℤ)).kFlat L) :
-    (quasiIso A (.up ℤ)).kFlat (K ⨯ L) :=
-  ObjectProperty.prop_of_isLimit _ (limit.isLimit (pair K L)) (by rintro (_ | _) <;> assumption)
-
-lemma kFlat_biprod {K L : CochainComplex A ℤ} (hK : (quasiIso A (.up ℤ)).kFlat K)
-    (hL : (quasiIso A (.up ℤ)).kFlat L) :
-    (quasiIso A (.up ℤ)).kFlat (K ⊞ L) :=
-  ObjectProperty.prop_of_iso _ (biprod.isoProd K L).symm (kFlat_prod hK hL)
-
 lemma kFlat_single_obj_iff_flat (X : A) (n : ℤ) :
     (quasiIso A (.up ℤ)).kFlat ((single _ _ n).obj X) ↔ ObjectProperty.flat X := by
   trans (quasiIso A (.up ℤ)).kFlat ((single _ _ 0).obj X)
@@ -371,7 +361,6 @@ variable {A} {C : Type*} [Category C] [Preadditive C] [HasZeroObject C] [HasFini
   {ι : C ⥤ A} [ι.Full] [ι.Faithful] [ι.Additive]
   (Λ : LeftResolution ι) [Λ.F.PreservesZeroMorphisms]
   (hι : ι.essImage ≤ ObjectProperty.flat)
-
 
 namespace LeftResolution
 

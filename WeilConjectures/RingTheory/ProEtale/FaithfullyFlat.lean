@@ -209,12 +209,6 @@ variable {S : Type u} [CommRing S]
 
 namespace Flat
 
-/-- A module is flat if it can be written as a filtered colimit of flat modules. -/
-theorem of_colimitPresentation {ι : Type u} [SmallCategory ι] [IsFiltered ι]
-    (P : ColimitPresentation ι (ModuleCat.of R M))
-    (h : ∀ (i : ι), Module.Flat R (P.diag.obj i)) : Module.Flat R M :=
-  ModuleCat.flat_of_colimitPresentation (M := .of R M) P h
-
 /-- Flat is equivalent to ind-flat. -/
 theorem iff_ind_flat [Algebra R S] : Module.Flat R S ↔
     ObjectProperty.ind.{u} (CommAlgCat.flat R) (.of R S) := by
@@ -226,16 +220,6 @@ end Flat
 namespace FaithfullyFlat
 
 -- `Do we need SmallCategory here?`
-theorem of_colimitPresentation [Algebra R S] {ι : Type u} [SmallCategory ι] [IsFiltered ι]
-    (P : ColimitPresentation ι (CommAlgCat.of R S))
-    (h : ∀ (i : ι), Module.FaithfullyFlat R (P.diag.obj i)) : Module.FaithfullyFlat R S :=
-  CommAlgCat.faithfullyFlat_of_colimitPresentation P h
-
-theorem iff_ind_faithfullyFlat [Algebra R S] :
-    Module.FaithfullyFlat R S ↔ ObjectProperty.ind.{u}
-      (CommAlgCat.faithfullyFlat R) (.of R S) := by
-  rw [CommAlgCat.ind_faithfullyFlat]
-  rfl
 
 end FaithfullyFlat
 
@@ -263,20 +247,6 @@ lemma of_isColimit {R S : CommRingCat.{u}} (f : R ⟶ S) (J : Type u) [SmallCate
 end Flat
 
 namespace FaithfullyFlat
-
-/-- Faithfully flat is equivalent to ind-(faithfully flat). -/
-lemma iff_ind_faithfullyFlat (f : R →+* S) :
-    f.FaithfullyFlat ↔ MorphismProperty.ind.{u}
-      CommRingCat.faithfullyFlat (CommRingCat.ofHom f) := by
-  rw [CommRingCat.ind_faithfullyFlat_eq_faithfullyFlat]
-  rfl
-
-/-- A ring hom is faithfully flat if it can be written as a colimit of faithfully flat ring maps. -/
-lemma of_isColimit {R S : CommRingCat.{u}} (f : R ⟶ S) (J : Type u) [SmallCategory J]
-    [IsFiltered J] (D : J ⥤ CommRingCat.{u}) {t : (Functor.const J).obj R ⟶ D}
-    {c : D ⟶ (Functor.const J).obj S} (hc : IsColimit (.mk _ c))
-    (htc : ∀ i, (t.app i).hom.FaithfullyFlat ∧ t.app i ≫ c.app i = f) : f.hom.FaithfullyFlat :=
-  (iff_ind_faithfullyFlat _).mpr ⟨J, ‹_›, ‹_›, D, t, c, hc, by simpa using htc⟩
 
 end FaithfullyFlat
 

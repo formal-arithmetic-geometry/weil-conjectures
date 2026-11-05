@@ -289,55 +289,6 @@ theorem IsLisse.of_continuous_apply {V : Type u} [AddCommGroup V] [Module (Padic
   continuous_toMatrix b i j := by
     simpa [LinearMap.toMatrix_apply] using h (b.coord i) (b j)
 
-/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
-
-Continuity of the matrix coefficients in *one* basis of a finite-dimensional `V` implies
-continuity in every basis: a change of basis is a fixed invertible matrix, so it acts on the
-matrix coefficients by a fixed polynomial expression. -/
-theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
-    [FiniteDimensional (PadicAlgCl l) V]
-    (ρ : Representation (PadicAlgCl l) W.carrier V) :
-    W.IsLisse l ρ ↔ ∃ (n : ℕ) (b : Module.Basis (Fin n) (PadicAlgCl l) V), ∀ i j,
-      Continuous fun g : W.geometric ↦ LinearMap.toMatrix b b (ρ g) i j := by
-  refine ⟨fun h ↦ ⟨_, Module.finBasis (PadicAlgCl l) V, h.continuous_toMatrix _⟩, ?_⟩
-  rintro ⟨n, b, hb⟩
-  refine IsLisse.of_continuous_apply fun φ v ↦ ?_
-  have key (g : W.geometric) : φ (ρ g v) =
-      ∑ i, φ (b i) * ∑ j, LinearMap.toMatrix b b (ρ g) i j * b.repr v j := by
-    conv_lhs => rw [← b.sum_repr (ρ g v)]
-    simp only [map_sum, map_smul, smul_eq_mul, ← LinearMap.toMatrix_mulVec_repr b b,
-      Matrix.mulVec, dotProduct]
-    exact Finset.sum_congr rfl fun i _ ↦ mul_comm _ _
-  simp_rw [key]
-  exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
-    continuous_finsetSum _ fun j _ ↦ (hb i j).mul continuous_const
-
-/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
-Blueprint `def-wf-constant-weil-twist`: Constant Weil twist.
-
-The constant Weil line `B_b`: the one-dimensional representation of `W(C₀)` on which `g`
-acts by `b ^ deg g`; it is trivial on `π₁(C) = ker deg`. Tensoring with it,
-`ρ.tprod (W.constLine l b)`, is the constant Weil twist of `ρ`. -/
-noncomputable def constLine (b : (PadicAlgCl l)ˣ) :
-    Representation (PadicAlgCl l) W.carrier (PadicAlgCl l) where
-  toFun g := (b ^ Multiplicative.toAdd (W.deg g) : (PadicAlgCl l)ˣ) • (1 : Module.End _ _)
-  map_one' := by simp
-  map_mul' g h := by
-    have h' : Multiplicative.toAdd (W.deg (g * h))
-        = Multiplicative.toAdd (W.deg g) + Multiplicative.toAdd (W.deg h) := by
-      rw [map_mul]; rfl
-    rw [h', zpow_add]
-    ext
-    simp [smul_smul, mul_comm]
-
-/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
-
-The Tate line `ℚ̄_ℓ(n) = B_{q ^ (-n)}`, on which the geometric Frobenius acts by `q ^ (-n)`. -/
-noncomputable def tateLine (n : ℤ) :
-    Representation (PadicAlgCl l) W.carrier (PadicAlgCl l) :=
-  W.constLine l (Units.mk0 ((Nat.card K : PadicAlgCl l) ^ (-n))
-    (zpow_ne_zero _ (Nat.cast_ne_zero.mpr Nat.card_pos.ne')))
-
 end WeilGroup
 
 end AlgebraicGeometry

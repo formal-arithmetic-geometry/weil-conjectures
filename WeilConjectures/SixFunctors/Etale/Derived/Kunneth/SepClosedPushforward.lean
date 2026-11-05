@@ -39,26 +39,6 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {L : Type u} [Field L] [IsSepClosed L]
 
-/-- Over a separably closed field `L`, the free sheaf `Λ[W]` on an étale `L`-scheme `W` is a
-projective object of the category of étale sheaves of `Λ`-modules on `Spec L`: under the
-equivalence with `Λ`-modules given by the global sections it is the free module on the
-`L`-points of `W`, since sheafification does not change global sections
-(`AlgebraicGeometry.Etale.bijective_toSheafify_app_etalePoint`). -/
-theorem projective_freeSheaf_of_isSepClosed (W : (Spec (.of L)).Etale) :
-    Projective ((Etale.freeSheaf Λ (Spec (.of L))).obj W) := by
-  let P : (Spec (.of L)).Etaleᵒᵖ ⥤ ModuleCat.{u + 1} Λ :=
-    uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ
-  have : IsIso ((toSheafify (Spec (.of L)).smallEtaleTopology P).app (op (etalePoint L))) :=
-    (ConcreteCategory.isIso_iff_bijective _).2 (bijective_toSheafify_app_etalePoint Λ P)
-  have hP : Projective (P.obj (op (etalePoint L))) :=
-    ModuleCat.projective_of_free (Finsupp.basisSingleOne)
-  have hP' : Projective
-      ((constantSheafEquivalenceOfIsSepClosed Λ (k := L)).symm.functor.obj
-        ((Etale.freeSheaf Λ (Spec (.of L))).obj W)) :=
-    Projective.of_iso (asIso ((toSheafify (Spec (.of L)).smallEtaleTopology P).app
-      (op (etalePoint L)))) hP
-  exact ((constantSheafEquivalenceOfIsSepClosed Λ (k := L)).symm.map_projective_iff _).1 hP'
-
 instance preservesHomology_lowerStar_of_isSepClosed {Y : Scheme.{u}} (f : Spec (.of L) ⟶ Y) :
     ((f)_*[ModuleCat.{u + 1} Λ]).PreservesHomology :=
   Functor.preservesHomology_of_preservesEpis_and_kernels _

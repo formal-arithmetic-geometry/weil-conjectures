@@ -132,91 +132,12 @@ variable {M N : Systems.{c, v, max c v r} J B τ}
         (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h)).map (d n) =
       d m ≫ (transition.{c, v, max c v r} J B τ h).app N)
 
-private def undoRestriction {R S : RingCat.{r}} (φ : R ≅ S)
-    {V W : ModuleCat.{r} S}
-    (f : (ModuleCat.restrictScalars φ.hom.hom).obj V ⟶
-      (ModuleCat.restrictScalars φ.hom.hom).obj W) : V ⟶ W :=
-  ModuleCat.ofHom {
-    toFun := f
-    map_add' := f.hom.map_add
-    map_smul' := by
-      intro a x
-      have h := f.hom.map_smul (φ.inv a) x
-      change f (φ.hom (φ.inv a) • x) = φ.hom (φ.inv a) • f x at h
-      have hi : φ.hom (φ.inv a) = a :=
-        congrArg (fun k : S ⟶ S ↦ k a) φ.inv_hom_id
-      simpa only [hi, RingHom.id_apply] using h }
-
 @[irreducible] private def assemble_app (X : (ℕ × C)ᵒᵖ) : M.val.obj X ⟶ N.val.obj X :=
   undoRestriction.{max c v r}
     ((CategoryTheory.evaluation Cᵒᵖ RingCat).obj (op X.unop.2) |>.mapIso
       ((sheafToPresheaf J RingCat).mapIso
         (eqToIso (evaluation_ring.{c, v, max c v r} J B τ X.unop.1).symm)))
     ((d X.unop.1).val.app (op X.unop.2))
-
-private theorem assemble_app_apply (X : (ℕ × C)ᵒᵖ) (x : M.val.obj X) :
-    assemble_app.{c, v, r} J B τ d X x = (d X.unop.1).val.app (op X.unop.2) x := by
-  unfold assemble_app undoRestriction
-  rfl
-
-private theorem vertical_natural (n : ℕ) {U V : Cᵒᵖ} (i : U ⟶ V)
-    (x : M.val.obj (op (n, U.unop))) :
-    N.val.map (Prod.mkHom (𝟙 n) i.unop).op
-        (assemble_app.{c, v, r} J B τ d (op (n, U.unop)) x) =
-      assemble_app.{c, v, r} J B τ d (op (n, V.unop))
-        (M.val.map (Prod.mkHom (𝟙 n) i.unop).op x) := by
-  rw [assemble_app_apply, assemble_app_apply]
-  exact (PresheafOfModules.naturality_apply (d n).val i x).symm
-
-private theorem restriction_square_apply
-    {R S : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ S)
-    {V W : Mod.{c, v, max c v r} J R} {V' W' : Mod.{c, v, max c v r} J S}
-    (a : V ⟶ (res.{c, v, max c v r} φ).obj V')
-    (b : W ⟶ (res.{c, v, max c v r} φ).obj W') (f : V ⟶ W) (g : V' ⟶ W')
-    (h : a ≫ (res.{c, v, max c v r} φ).map g = f ≫ b)
-    (U : Cᵒᵖ) (x : V.val.obj U) :
-    g.val.app U (a.val.app U x) = b.val.app U (f.val.app U x) :=
-  congrArg (fun k ↦ k.val.app U x) h
-
-private theorem square_of_functions {A B P Q : Type r}
-    (f : A → B) (g : P → Q) (a a' : A → P) (b b' : B → Q)
-    (ha : a = a') (hb : b = b') (hs : ∀ x, g (a x) = b (f x)) (x : A) :
-    b' (f x) = g (a' x) := by
-  rw [← ha, ← hb]
-  exact (hs x).symm
-
-set_option maxHeartbeats 400000 in
--- Normalization checks the scalar-restriction identifications for both component maps.
-private theorem horizontal_natural
-    (ht : ∀ {m n : ℕ} (h : n ≤ m),
-      (transition.{c, v, max c v r} J B τ h).app M ≫
-          (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h)).map (d n) =
-        d m ≫ (transition.{c, v, max c v r} J B τ h).app N)
-    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ)
-    (x : M.val.obj (op (m, U.unop))) :
-    N.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op
-        (assemble_app.{c, v, r} J B τ d (op (m, U.unop)) x) =
-      assemble_app.{c, v, r} J B τ d (op (n, U.unop))
-        (M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x) := by
-  rw [assemble_app_apply, assemble_app_apply]
-  exact square_of_functions.{max c v r}
-    (A := M.val.obj (op (m, U.unop))) (B := N.val.obj (op (m, U.unop)))
-    (P := M.val.obj (op (n, U.unop))) (Q := N.val.obj (op (n, U.unop)))
-    (fun y ↦ (d m).val.app U y) (fun y ↦ (d n).val.app U y)
-    (fun y ↦ ((transition.{c, v, max c v r} J B τ h).app M).val.app U y)
-    (fun y ↦ M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op y)
-    (fun y ↦ ((transition.{c, v, max c v r} J B τ h).app N).val.app U y)
-    (fun y ↦ N.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op y)
-    (eq_of_heq ((transition_exists.{c, v, max c v r} J B τ h).exists.choose_spec M U))
-    (eq_of_heq ((transition_exists.{c, v, max c v r} J B τ h).exists.choose_spec N U))
-    (fun y ↦ restriction_square_apply.{c, v, r} J
-      (coefficientMap.{c, v, max c v r} J B τ h)
-      (V := (evaluation.{c, v, max c v r} J B τ m).obj M)
-      (W := (evaluation.{c, v, max c v r} J B τ m).obj N)
-      (V' := (evaluation.{c, v, max c v r} J B τ n).obj M)
-      (W' := (evaluation.{c, v, max c v r} J B τ n).obj N)
-      ((transition.{c, v, max c v r} J B τ h).app M)
-      ((transition.{c, v, max c v r} J B τ h).app N) (d m) (d n) (ht h) U y) x
 
 include ht in
 @[irreducible] private def assemble : M ⟶ N where
@@ -246,12 +167,6 @@ include ht in
         exact horizontal_natural.{c, v, r} J B τ d ht
           (leOfHom f.unop.1) (op Y.unop.2) (M.val.map a x) }
 
-private theorem assemble_evaluation (n : ℕ) :
-    (evaluation.{c, v, max c v r} J B τ n).map (assemble.{c, v, r} J B τ d ht) = d n := by
-  unfold assemble
-  ext U x
-  exact assemble_app_apply.{c, v, r} J B τ d (op (n, U.unop)) x
-
 @[irreducible] private def assemble_iso
     (δ : ∀ n : ℕ, (evaluation.{c, v, max c v r} J B τ n).obj M ≅
       (evaluation.{c, v, max c v r} J B τ n).obj N)
@@ -271,42 +186,6 @@ private theorem assemble_evaluation (n : ℕ) :
   have : IsIso q := hj.jointlyReflectsIsomorphisms.isIso q
   exact asIso q
 
-private theorem assemble_iso_evaluation
-    (δ : ∀ n : ℕ, (evaluation.{c, v, max c v r} J B τ n).obj M ≅
-      (evaluation.{c, v, max c v r} J B τ n).obj N)
-    (ht : ∀ {m n : ℕ} (h : n ≤ m),
-      (transition.{c, v, max c v r} J B τ h).app M ≫
-          (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h)).map (δ n).hom =
-        (δ m).hom ≫ (transition.{c, v, max c v r} J B τ h).app N) (n : ℕ) :
-    (evaluation.{c, v, max c v r} J B τ n).map
-      (assemble_iso.{c, v, r} J B τ δ ht).hom = (δ n).hom := by
-  unfold assemble_iso
-  exact assemble_evaluation.{c, v, r} J B τ (fun k ↦ (δ k).hom) ht n
-
 end Assembly
-
-/-- Compatible isomorphisms on every coefficient level assemble to a system isomorphism.
-Source: Zheng Construction 4.1, the actual module sheaves on the product site.
-(blueprint: lem-coef-system-iso-assembly).
-
-Proof: undo the identity scalar restriction in evaluation to obtain linear maps on
-the actual component modules. Naturality in the site and compatibility with horizontal
-transitions imply naturality on the product category, since every product arrow
-factors as a vertical arrow followed by a horizontal arrow. This constructs a module
-sheaf morphism. Evaluations are jointly faithful, so they jointly reflect
-isomorphisms in the abelian system category. Each evaluation is the prescribed
-isomorphism, and therefore the constructed morphism is invertible. -/
-theorem systemIsoOfEvaluation_exists
-    {M N : Systems.{c, v, max c v r} J B τ}
-    (δ : ∀ n : ℕ, (evaluation.{c, v, max c v r} J B τ n).obj M ≅
-      (evaluation.{c, v, max c v r} J B τ n).obj N)
-    (ht : ∀ {m n : ℕ} (h : n ≤ m),
-      (transition.{c, v, max c v r} J B τ h).app M ≫
-          (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h)).map (δ n).hom =
-        (δ m).hom ≫ (transition.{c, v, max c v r} J B τ h).app N) :
-    ∃ e : M ≅ N, ∀ n : ℕ,
-      (evaluation.{c, v, max c v r} J B τ n).map e.hom = (δ n).hom := by
-  exact ⟨assemble_iso.{c, v, r} J B τ δ ht,
-    assemble_iso_evaluation.{c, v, r} J B τ δ ht⟩
 
 end WeilConjectures.SemilinearSections

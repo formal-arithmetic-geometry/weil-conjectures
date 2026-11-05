@@ -137,7 +137,6 @@ theorem isIso_app_of_isIso_Qh_map_mapHomotopyCategoryPlus_app (τ : F ⟶ G) (J 
   exact IsIso.of_isIso_comp_left
     ((HomologicalComplex.homologyFunctorSingleIso D (ComplexShape.up ℤ) 0).hom.app _) _
 
-
 omit [HasDerivedCategory D] in
 /-- A natural transformation `τ : S ⟶ T` between left exact functors of abelian categories is an
 isomorphism at the kernel `E.X₁` of a morphism `E.g : E.X₂ ⟶ E.X₃` as soon as it is one at
@@ -185,17 +184,6 @@ theorem Etale.HasTorsionBaseChange.comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.
   have := Etale.isBaseChangeIso_of_hasTorsionBaseChange Λ hΛ hh
   have := Etale.IsBaseChangeIso.comp (ModuleCat.{u + 1} Λ) f h
   Etale.hasTorsionBaseChange_of_isBaseChangeIso Λ (f ≫ h)
-
-/-- **Composition stability of injective acyclicity.** For a torsion coefficient ring `Λ` and
-proper morphisms `f : X ⟶ Y`, `h : Y ⟶ Z` with injective acyclicity, `f ≫ h` has injective
-acyclicity. (blueprint: `prop-weil-pbc-composition-stability`) -/
-theorem Etale.HasInjectiveAcyclicity.comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.{u}}
-    {f : X ⟶ Y} {h : Y ⟶ Z} [IsProper f] [IsProper h] (hf : Etale.HasInjectiveAcyclicity Λ f)
-    (hh : Etale.HasInjectiveAcyclicity Λ h) : Etale.HasInjectiveAcyclicity Λ (f ≫ h) :=
-  (Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity Λ hΛ (f ≫ h)).1
-    (Etale.HasTorsionBaseChange.comp Λ hΛ
-      ((Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity Λ hΛ f).2 hf)
-      ((Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity Λ hΛ h).2 hh))
 
 /-- **The underived exchange at an injective sheaf, from the base change property.** For a
 torsion coefficient ring `Λ`, if `f` satisfies the base change property, then for every

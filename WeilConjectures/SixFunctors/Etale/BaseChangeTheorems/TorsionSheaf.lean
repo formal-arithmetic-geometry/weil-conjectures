@@ -197,26 +197,6 @@ lemma Scheme.IsTorsionModuleSheaf.of_isTorsionSheafOfInvertibleOrder
       Scheme.IsTorsionSheafOfInvertibleOrder.exists_isUnit_nsmul_eq_zero (S := S) Ω s x
     exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, hx⟩
 
-/-- A sheaf `F` of `Λ`-modules on the small étale site of `X` is *`P`-torsion*, for a set `P`
-of primes, if every element of every geometric stalk of `F` is killed by a positive integer all
-of whose prime divisors lie in `P`. This is the condition on the cohomology sheaves in the
-categories with allowable torsion of blueprint `sbc-def-derived-categories-with-allowable-torsion`
-and `sk-def-sf-categories`. -/
-class Scheme.IsTorsionSheafOfPrimes (P : Set ℕ) {Λ : Type (u + 1)} [CommRing Λ]
-    {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
-  exists_nsmul_eq_zero (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
-    (x : ↥((pointSmallEtale s).sheafFiber.obj F)) :
-    ∃ n : ℕ, 0 < n ∧ (∀ p ∈ n.primeFactors, p ∈ P) ∧ n • x = 0
-
-/-- A `P`-torsion sheaf is in particular a torsion sheaf. This is not an instance: the set `P`
-cannot be recovered from the conclusion. -/
-lemma Scheme.IsTorsionModuleSheaf.of_isTorsionSheafOfPrimes (P : Set ℕ) {Λ : Type (u + 1)}
-    [CommRing Λ] {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheafOfPrimes P F] : IsTorsionModuleSheaf F where
-  isTorsion_sheafFiber Ω _ _ s x := by
-    obtain ⟨n, hn, -, hx⟩ := Scheme.IsTorsionSheafOfPrimes.exists_nsmul_eq_zero (P := P) Ω s x
-    exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, hx⟩
-
 /-- A torsion sheaf `F` of `Λ`-modules is the point of a colimit cocone over a filtered diagram
 of sheaves, each of which is killed by some positive integer.
 
@@ -493,57 +473,6 @@ lemma Etale.DerivedCategory.Plus.moduleTorsionHomology_singleFunctor_obj
     have := hZ.epi (0 : I ⟶ _)
     exact IsTorsionModuleSheaf.of_epi (0 : I ⟶ _)
 
-/-- An object of the bounded below derived category of étale sheaves of `Λ`-modules has
-*`P`-torsion cohomology*, for a set `P` of primes, if all its cohomology sheaves are `P`-torsion
-(`AlgebraicGeometry.Scheme.IsTorsionSheafOfPrimes`). -/
-noncomputable def Etale.DerivedCategory.Plus.torsionHomologyOfPrimes (P : Set ℕ) :
-    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  fun K ↦ ∀ n : ℤ, IsTorsionSheafOfPrimes P
-    ((DerivedCategory.Plus.homologyFunctor
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) n).obj K)
-
-/-- `P`-torsion cohomology is in particular torsion cohomology. -/
-lemma Etale.DerivedCategory.Plus.torsionHomologyOfPrimes_le_moduleTorsionHomology (P : Set ℕ) :
-    Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P ≤
-      Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X :=
-  fun _ hK n ↦ have := hK n; .of_isTorsionSheafOfPrimes P _
-
-/-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
-
-The ambient category `D⁺_P-tor(X, Λ)` of bounded below complexes of étale sheaves of
-`Λ`-modules whose cohomology sheaves have `P`-torsion geometric stalks, for a set `P` of primes,
-as a full subcategory of `D⁺(X_ét, Λ)` (blueprint
-`sbc-def-derived-categories-with-allowable-torsion`). -/
-noncomputable def Etale.DerivedCategoryPlusTorsionOfPrimes (P : Set ℕ) : Type _ :=
-  (Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P).FullSubcategory
-
-noncomputable instance (P : Set ℕ) : Category (Etale.DerivedCategoryPlusTorsionOfPrimes Λ X P) :=
-  inferInstanceAs <|
-    Category (Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P).FullSubcategory
-
-/-- The inclusion of `D⁺_P-tor(X, Λ)` into `D⁺(X_ét, Λ)`. -/
-noncomputable def Etale.DerivedCategoryPlusTorsionOfPrimes.ι (P : Set ℕ) :
-    Etale.DerivedCategoryPlusTorsionOfPrimes Λ X P ⥤
-      DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P).ι
-
 end TorsionHomology
-
-
-/-- This is for describing sheaves in smooth base change. -/
-class Scheme.OrderInvertibleOnSheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (F : Sheaf X.smallEtaleTopology Ab.{u + 1}) : Prop where
-  isUnit_addOrderOf_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
-      (x : ↥((pointSmallEtale s).sheafFiber.obj F)) :
-    IsUnit ((addOrderOf x : ℕ) : Γ(Y, ⊤))
-
-
-/-- An object of `D+` with cohomologies `OrderInvertibleOnSheaf`. -/
-noncomputable def Etale.DerivedCategory.Plus.orderInvertibleOnHomology
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1})) :=
-  fun K ↦ ∀ n : ℤ, OrderInvertibleOnSheaf f
-    ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology Ab.{u + 1}) n).obj K)
-
 
 end AlgebraicGeometry

@@ -105,13 +105,6 @@ noncomputable def DerivedCategory.constructibleFiniteTor :
     ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
   Etale.DerivedCategory.boundedConstructible A X ⊓ Etale.DerivedCategory.finiteTorAmplitude A X
 
-lemma DerivedCategory.constructibleFiniteTor_iff
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    DerivedCategory.constructibleFiniteTor A X K ↔
-      Etale.DerivedCategory.boundedConstructible A X K ∧
-        Etale.DerivedCategory.finiteTorAmplitude A X K :=
-  Iff.rfl
-
 /-- Membership in the blueprint's `D_c^[a, b](X, A)` together with Tor amplitude in the same
 interval, as an object property of `D(X_ét)`: bounded constructible, homology concentrated in
 `[a, b]`, and Tor amplitude in `[a, b]`. -/
@@ -120,21 +113,6 @@ noncomputable def DerivedCategory.constructibleTorAmplitudeIn (a b : ℤ) :
   Etale.DerivedCategory.boundedConstructible A X ⊓
     _root_.DerivedCategory.homologyConcentratedIn a b ⊓
     Etale.DerivedCategory.torAmplitudeIn A X a b
-
-lemma DerivedCategory.constructibleTorAmplitudeIn_iff (a b : ℤ)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    DerivedCategory.constructibleTorAmplitudeIn A X a b K ↔
-      (Etale.DerivedCategory.boundedConstructible A X K ∧
-          _root_.DerivedCategory.homologyConcentratedIn a b K) ∧
-        Etale.DerivedCategory.torAmplitudeIn A X a b K :=
-  Iff.rfl
-
-/-- `D_c^[a, b](X, A)` with Tor amplitude in `[a, b]` is the intersection of
-`Etale.DerivedCategory.constructibleIn` and `Etale.DerivedCategory.torAmplitudeIn`. -/
-lemma DerivedCategory.constructibleTorAmplitudeIn_eq (a b : ℤ) :
-    DerivedCategory.constructibleTorAmplitudeIn A X a b =
-      DerivedCategory.constructibleIn A X a b ⊓ DerivedCategory.torAmplitudeIn A X a b :=
-  rfl
 
 variable {A X}
 
@@ -160,16 +138,6 @@ noncomputable def DerivedCategoryFiniteTor : Type _ :=
 
 noncomputable instance : Category (DerivedCategoryFiniteTor A X) :=
   inferInstanceAs <| Category (DerivedCategory.constructibleFiniteTor A X).FullSubcategory
-
-/-- The inclusion of `Dctf(X, A)` into the derived category of étale sheaves. -/
-noncomputable def DerivedCategoryFiniteTor.ι :
-    DerivedCategoryFiniteTor A X ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
-  (DerivedCategory.constructibleFiniteTor A X).ι
-
-/-- The inclusion `Dctf(X, A) ⊆ Dᵇc(X, A)` of blueprint `sk-def-sf-categories`. -/
-noncomputable def DerivedCategoryFiniteTor.toBoundedConstructible :
-    DerivedCategoryFiniteTor A X ⥤ DerivedCategoryBoundedConstructible A X :=
-  ObjectProperty.ιOfLE inf_le_left
 
 @[inherit_doc DerivedCategoryFiniteTor]
 scoped notation "Dctf(" X ", " A ")" => Etale.DerivedCategoryFiniteTor A X

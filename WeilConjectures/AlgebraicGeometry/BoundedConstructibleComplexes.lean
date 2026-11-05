@@ -52,15 +52,4 @@ def DerivedCategory.isBoundedConstructible (Λ : Type (u + 1)) [CommRing Λ] [Fi
       IsZero ((_root_.DerivedCategory.homologyFunctor
         (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).obj K)
 
-/-- `D^b_c(T_et, Λ) ⊂ D(T_et, Λ)`: the full subcategory of bounded constructible complexes.
-Source: blueprint `sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md`
-(blueprint: def-weil-pbc-constructible-complexes). -/
-def BoundedConstructibleDerivedCategory (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    (T : Scheme.{u}) : Type _ :=
-  (DerivedCategory.isBoundedConstructible Λ T).FullSubcategory
-
-noncomputable instance (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (T : Scheme.{u}) :
-    Category (BoundedConstructibleDerivedCategory Λ T) :=
-  inferInstanceAs (Category (DerivedCategory.isBoundedConstructible Λ T).FullSubcategory)
-
 end AlgebraicGeometry.Etale

@@ -183,47 +183,6 @@ section Identity
 
 variable (C)
 
-/-- **The identity law for the bounded below derived unit**: the unit of the bounded below
-derived adjunction of `Adjunction.id` is the identity, modulo the identity isomorphisms
-`Functor.mapDerivedCategoryPlusIdIso` and `Functor.rightDerivedFunctorPlusIdIso`. -/
-theorem derivedPlus_id_unit [EnoughInjectives C] :
-    (Adjunction.id (C := C)).derivedPlus.unit =
-      (Functor.mapDerivedCategoryPlusIdIso C).inv ≫
-        Functor.whiskerLeft (𝟭 C).mapDerivedCategoryPlus
-          (Functor.rightDerivedFunctorPlusIdIso C).inv := by
-  refine ((Adjunction.id (C := C)).derivedPlus_unit_eq _ ?_).symm
-  intro K
-  have hαf : (𝟭 C).mapDerivedCategoryPlusFactorsh.hom.app K =
-      (Functor.mapDerivedCategoryPlusIdIso C).hom.app (DerivedCategory.Plus.Qh.obj K) ≫
-        DerivedCategory.Plus.Qh.map
-          ((Functor.mapHomotopyCategoryPlusIdIso C).inv.app K) := by
-    rw [Functor.mapDerivedCategoryPlusIdIso_fac_app, Category.assoc, ← Functor.map_comp]
-    simp
-  have hu : (𝟭 C).rightDerivedFunctorPlusUnit.app ((𝟭 C).mapHomotopyCategoryPlus.obj K) =
-      DerivedCategory.Plus.Qh.map
-          ((Functor.mapHomotopyCategoryPlusIdIso C).hom.app
-            ((𝟭 C).mapHomotopyCategoryPlus.obj K)) ≫
-        (Functor.rightDerivedFunctorPlusIdIso C).inv.app
-          (DerivedCategory.Plus.Qh.obj ((𝟭 C).mapHomotopyCategoryPlus.obj K)) := by
-    rw [← Functor.rightDerivedFunctorPlusIdIso_fac_app]
-    simp
-  rw [mapHomotopyCategoryPlus_id_unit_app, hu, hαf]
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
-  rw [← NatTrans.naturality_assoc, ← NatTrans.naturality]
-  simp only [Functor.id_map, Functor.comp_obj, Iso.inv_hom_id_app_assoc,
-    ← Functor.map_comp_assoc, NatTrans.naturality, Iso.hom_inv_id_app, Functor.map_id,
-    Category.id_comp]
-
-/-- The pointwise form of `Adjunction.derivedPlus_id_unit`. -/
-@[reassoc]
-theorem derivedPlus_id_unit_app [EnoughInjectives C] (X : DerivedCategory.Plus C) :
-    (Adjunction.id (C := C)).derivedPlus.unit.app X ≫
-        (Functor.rightDerivedFunctorPlusIdIso C).hom.app
-          ((𝟭 C).mapDerivedCategoryPlus.obj X) ≫
-        (Functor.mapDerivedCategoryPlusIdIso C).hom.app X = 𝟙 X := by
-  rw [derivedPlus_id_unit]
-  simp
-
 end Identity
 
 section Conjugate

@@ -102,10 +102,6 @@ lemma flat_submodule [Ring.WeakDimensionLEOne R] {M : Type*} [AddCommGroup M] [M
       ← LinearMap.rTensor_comp_lTensor, LinearMap.coe_comp]
   exact (hnat ▸ h).of_comp
 
-lemma flat_ideal [Ring.WeakDimensionLEOne R] (I : Ideal R) :
-    Module.Flat R I :=
-  flat_submodule _ _
-
 /-- The product of valuation rings is of weak dimension `≤ 1`. -/
 lemma pi_of_isValuationRing {ι : Type*} (R : ι → Type*) [∀ i, CommRing (R i)]
     [∀ i, IsDomain (R i)] [∀ i, ValuationRing (R i)] :
@@ -205,8 +201,6 @@ instance of_field (R : Type*) [Field R] : AbsolutelyFlat R where
   flat _ := inferInstance
 
 variable (R : Type*) [CommRing R] (M : Type*) [AddCommGroup M] [Module R M]
-
-lemma of_isField (h : IsField R) : AbsolutelyFlat R := @of_field R h.toField
 
 lemma isField_of_isLocalRing [IsLocalRing R] [AbsolutelyFlat R] : IsField R := by
   apply Ring.isField_iff_maximal_bot.mpr

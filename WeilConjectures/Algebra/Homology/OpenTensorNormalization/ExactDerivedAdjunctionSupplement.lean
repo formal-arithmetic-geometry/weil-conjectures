@@ -35,15 +35,4 @@ end CategoryTheory.Adjunction
 
 namespace SheafOfModules.OpenTensorNormalization
 
-/-- Localize the actual termwise adjunction, with the standard exact-functor
-factorizations. Source: Stacks 015F.
-(blueprint: lem-sf-open-tensor-normalization). -/
-def exactDerivedAdjunction {C D : Type v} [Category.{h} C] [Category.{h} D]
-    [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
-    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ⊣ G) :
-    F.mapDerivedCategory ⊣ G.mapDerivedCategory :=
-  a.mapExactDerivedCategory
-
 end SheafOfModules.OpenTensorNormalization

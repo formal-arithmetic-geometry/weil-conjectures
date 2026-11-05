@@ -30,30 +30,4 @@ open CategoryTheory MonoidalCategory DirectSum
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The relations identifying a fraction with the same fraction after multiplying numerator
-and denominator by a power of the global section `s` (as the morphism
-`homOfGlobalSection L s : 𝒪_X ⟶ L`). Source: Stacks Project, Properties, Section 0B5K,
-equation module-invert-s (blueprint: def-sc-section-fraction-presentation). -/
-noncomputable def sectionFractionRelations {X : Scheme.{u}} (L F : X.Modules)
-    (s : Γ(L, ⊤)) :
-    Submodule Γ(X, ⊤) (⨁ n : ℕ, Γ(F ⊗ L.tensorPow n, ⊤)) :=
-  Submodule.span Γ(X, ⊤) {z | ∃ (n b : ℕ) (t : Γ(F ⊗ L.tensorPow n, ⊤)),
-    z = DirectSum.of (fun i : ℕ ↦ Γ(F ⊗ L.tensorPow i, ⊤)) n t -
-      DirectSum.of (fun i : ℕ ↦ Γ(F ⊗ L.tensorPow i, ⊤)) (n + b)
-        ((mulTensorPowSection (homOfGlobalSection L s) F n b).app ⊤ t)}
-
-/-- The module of degree-zero section fractions, presented as the direct sum of nonnegative
-numerator degrees modulo the fraction relations. Source: Stacks Project, Properties,
-Section 0B5K, equation module-invert-s (blueprint: def-sc-section-fraction-presentation). -/
-noncomputable abbrev SectionFractionPresentation {X : Scheme.{u}} (L F : X.Modules)
-    (s : Γ(L, ⊤)) : Type u :=
-  (⨁ n : ℕ, Γ(F ⊗ L.tensorPow n, ⊤)) ⧸ sectionFractionRelations L F s
-
-/-- The fraction `t/s^n`. Source: Stacks Project, Properties, Section 0B5K,
-equation module-invert-s (blueprint: def-sc-section-fraction-presentation). -/
-noncomputable def sectionFraction {X : Scheme.{u}} (L F : X.Modules)
-    (s : Γ(L, ⊤)) (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, ⊤)) :
-    SectionFractionPresentation L F s :=
-  Submodule.Quotient.mk (DirectSum.of (fun i : ℕ ↦ Γ(F ⊗ L.tensorPow i, ⊤)) n t)
-
 end AlgebraicGeometry.Scheme.Modules

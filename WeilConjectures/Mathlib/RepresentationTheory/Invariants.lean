@@ -156,24 +156,6 @@ section Normal
 variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
   (ρ : Representation k G V) (S : Subgroup G) [S.Normal]
 
-/-- In an irreducible representation the invariants `V^S` of a normal subgroup `S` are zero or
-everything: they form a subrepresentation, since `s (g v) = g (g⁻¹ s g) v = g v` for `v ∈ V^S`
-(`Representation.le_comap_invariants`). -/
-theorem IsIrreducible.invariants_comp_subtype_eq_bot_or_eq_top [IsIrreducible ρ] :
-    invariants (ρ.comp S.subtype) = ⊥ ∨ invariants (ρ.comp S.subtype) = ⊤ :=
-  (IsSimpleOrder.eq_bot_or_eq_top (⟨invariants (ρ.comp S.subtype),
-    fun g _ hv ↦ le_comap_invariants ρ S g hv⟩ : Subrepresentation ρ)).imp
-      (congrArg Subrepresentation.toSubmodule) (congrArg Subrepresentation.toSubmodule)
-
-/-- A normal subgroup `S` with nonzero invariants in an irreducible representation acts
-trivially. -/
-theorem IsIrreducible.eq_one_of_invariants_ne_bot [IsIrreducible ρ]
-    (h : invariants (ρ.comp S.subtype) ≠ ⊥) {s : G} (hs : s ∈ S) : ρ s = 1 := by
-  have htop := (invariants_comp_subtype_eq_bot_or_eq_top ρ S).resolve_left h
-  ext v
-  have hv : v ∈ invariants (ρ.comp S.subtype) := htop ▸ Submodule.mem_top
-  exact hv ⟨s, hs⟩
-
 end Normal
 
 end Representation

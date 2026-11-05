@@ -324,7 +324,6 @@ theorem hasEigenvalue_stalkAt_adicConstant_iff {α : PadicAlgCl l} :
     exact Module.End.hasEigenvalue_of_hasEigenvector (x := x)
       (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 (by simp), hx⟩)
 
-
 end TensorStalk
 
 /-- The stalk of the tensor product `F ⊗ G` of a lisse Weil sheaf `F` and a Weil sheaf `G` at a
@@ -340,27 +339,6 @@ noncomputable def stalkTensorObjEquiv (F G : WeilSheaf k₀ l X) (hF : F.IsLisse
     (x : X.finitePoints) :
     ((F.tensorObj G hF).stalk x).Equiv ((F.stalk x).tensor (G.stalk x)) :=
   stalkAtTensorObjEquivTensor _ _ _ F G hF
-
-/-- If `a` is an eigenvalue of the local Frobenius of `F` at `x` and `b` one of `G`, then `a b`
-is an eigenvalue of the local Frobenius of `F ⊗ G` at `x`. -/
-theorem hasEigenvalue_stalk_tensorObj {F G : WeilSheaf k₀ l X} (hF : F.IsLisse)
-    {x : X.finitePoints} {a b : PadicAlgCl l} (ha : (F.stalk x).frobeniusEnd.HasEigenvalue a)
-    (hb : (G.stalk x).frobeniusEnd.HasEigenvalue b) :
-    ((F.tensorObj G hF).stalk x).frobeniusEnd.HasEigenvalue (a * b) :=
-  FrobeniusModule.hasEigenvalue_of_surjective
-    (stalkTensorObjEquiv F G hF x).toLinearEquiv.toLinearMap
-    (stalkTensorObjEquiv F G hF x).map_frobenius
-    (stalkTensorObjEquiv F G hF x).toLinearEquiv.surjective
-    (FrobeniusModule.hasEigenvalue_tensor_mul ha hb)
-
-/-- Every eigenvalue of the local Frobenius of `F ⊗ G` at `x` is a product `a b` of an
-eigenvalue `a` of that of `F` and an eigenvalue `b` of that of `G`. -/
-theorem exists_of_hasEigenvalue_stalk_tensorObj {F G : WeilSheaf k₀ l X} (hF : F.IsLisse)
-    {x : X.finitePoints} {μ : PadicAlgCl l}
-    (h : ((F.tensorObj G hF).stalk x).frobeniusEnd.HasEigenvalue μ) :
-    ∃ a b, (F.stalk x).frobeniusEnd.HasEigenvalue a ∧ (G.stalk x).frobeniusEnd.HasEigenvalue b ∧
-      μ = a * b :=
-  FrobeniusModule.exists_of_hasEigenvalue_tensor ((stalkTensorObjEquiv F G hF x).hasEigenvalue h)
 
 /-- The residue cardinality `q_x` at a closed point is positive. -/
 lemma residueCard_pos (x : X.finitePoints) :

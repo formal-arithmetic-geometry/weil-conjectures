@@ -54,15 +54,6 @@ instance essentiallySmall_singleObjects [ObjectProperty.EssentiallySmall.{w'} P]
   obtain ⟨M₀, hM₀, ⟨e'⟩⟩ := hP₀ M hM
   exact ⟨_, ObjectProperty.ofObj_apply _ (n, ⟨M₀, hM₀⟩), ⟨e ≪≫ (singleFunctor C n).mapIso e'⟩⟩
 
-/-- The iterated extensions of shifted objects of an essentially small property of objects are
-essentially small. -/
-lemma essentiallySmall_iteratedExtensions [LocallySmall.{w'} (DerivedCategory C)]
-    [ObjectProperty.EssentiallySmall.{w'} P] (d : ℕ) :
-    ObjectProperty.EssentiallySmall.{w'} (iteratedExtensions P d) := by
-  induction d with
-  | zero => exact essentiallySmall_singleObjects P
-  | succ d ih => exact ObjectProperty.essentiallySmall_extensionProduct _ _
-
 /-- An object of `D(C)` with cohomology in degrees `[a, a + d]` satisfying `P` is a `d`-fold
 iterated extension of shifted objects satisfying `P`: split off the top cohomology with the
 truncation triangle `τ_{<b} K ⟶ K ⟶ τ_{≥b} K ⟶ (τ_{<b} K)⟦1⟧`, `b = a + d`. -/
@@ -121,17 +112,5 @@ lemma iteratedExtensions_le {Q : ObjectProperty (DerivedCategory C)} [Q.IsTriang
   | succ d ih =>
     rintro K ⟨Y, Z, f, g, h, hT, hY, hZ⟩
     exact Q.ext_of_isTriangulatedClosed₂ _ hT (ih Y hY) (hQ Z hZ)
-
-/-- Blueprint `det-brown-hypotheses-small` (formal part): if `P` is essentially small and closed
-under isomorphisms, the bounded objects of `D(C)` all of whose cohomology objects satisfy `P`
-are essentially small. -/
-theorem essentiallySmall_bounded_inf [P.IsClosedUnderIsomorphisms]
-    [ObjectProperty.EssentiallySmall.{w'} P] [LocallySmall.{w'} (DerivedCategory C)] :
-    ObjectProperty.EssentiallySmall.{w'}
-      (TStructure.t.bounded ⊓ fun K ↦ ∀ n, P ((homologyFunctor C n).obj K)) := by
-  have := essentiallySmall_iteratedExtensions P
-  refine ObjectProperty.EssentiallySmall.of_le (Q := ⨆ d, iteratedExtensions P d) ?_
-  rintro K ⟨hK, hP⟩
-  exact (ObjectProperty.prop_iSup_iff _ _).2 (exists_iteratedExtensions_of_bounded P K hK hP)
 
 end DerivedCategory

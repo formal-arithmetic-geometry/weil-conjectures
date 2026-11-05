@@ -123,31 +123,6 @@ theorem Scheme.Hom.genus_baseChangeField [SmoothOfRelativeDimension 1 f] [IsProp
   have h₃ := Scheme.arithmeticGenus_pullback (k := k) (X := C) k'
   exact h₂.trans (h₃.trans h₁.symm)
 
-/-- **The degree is invariant under extension of the base field.** For a proper `k`-scheme `C`
-and a field extension `k ⊆ k'`, pulling back a line bundle along `C_{k'} ⟶ C` preserves its
-degree (`AlgebraicGeometry.Scheme.Modules.degree_pullback_of_isPullback`). -/
-lemma Scheme.Hom.picDegree_map_baseChangeField [IsProper f] (L : C.Pic) :
-    (f.baseChangeField k').picDegree
-        (Scheme.Pic.map (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) L) =
-      f.picDegree L := by
-  let : C.Over (Spec (.of k)) := ⟨f⟩
-  let : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Over (Spec (.of k')) :=
-    ⟨f.baseChangeField k'⟩
-  have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
-  have := Scheme.Pic.isInvertible L
-  have : SheafOfModules.IsInvertible.{u, u, u} ((Scheme.Modules.pullback
-      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))).obj
-        ((fromSkeleton C.Modules).obj L.val)) :=
-    SheafOfModules.IsInvertible.pullback this
-  have := Scheme.Modules.IsInvertible.of_sheafOfModules ((fromSkeleton C.Modules).obj L.val)
-  have hL : Scheme.Pic.map (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) L =
-      Scheme.Pic.mk ((Scheme.Modules.pullback
-        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))).obj
-          ((fromSkeleton C.Modules).obj L.val)) :=
-    Scheme.Pic.ext rfl
-  rw [hL, Scheme.Hom.picDegree_mk, Scheme.Hom.picDegree_eq]
-  exact Scheme.Modules.degree_pullback_of_isPullback _ _ (IsPullback.of_hasPullback _ _) _
-
 /-- The cohomology of the pullback of `ℤ/n` to the base change is that of `ℤ/n`. -/
 noncomputable def Scheme.Hom.sheafHBaseChangeConstantZModAddEquiv (n q : ℕ) :
     Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1}

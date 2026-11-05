@@ -627,18 +627,6 @@ lemma iff_ind_isLocalIso (f : R →+* S) :
     RingHom.IsLocalIso.respectsIso.ind_toMorphismProperty_iff_ind_toObjectProperty,
     CommAlgCat.isLocalIso_eq]
 
-/-- A ring hom is ind-Zariski if and only if it can be written
-as a colimit of local isomorphisms. -/
-lemma iff_exists {R S : CommRingCat.{u}} (f : R ⟶ S) :
-    f.hom.IndZariski ↔
-    ∃ (J : Type u) (_ : SmallCategory J) (_ : IsFiltered J) (D : J ⥤ CommRingCat.{u})
-      (t : (Functor.const J).obj R ⟶ D) (c : D ⟶ (Functor.const J).obj S)
-      (_ : IsColimit (.mk _ c)), ∀ i, (t.app i).hom.IsLocalIso ∧ t.app i ≫ c.app i = f :=
-  RingHom.IndZariski.iff_ind_isLocalIso _
-
-lemma id : (RingHom.id R).IndZariski :=
-  Algebra.IndZariski.refl
-
 /-- Local isomorphisms are finitely presentable morphisms in `CommRingCat`. -/
 lemma _root_.CommRingCat.isLocalIso_le_isFinitelyPresentable :
     RingHom.toMorphismProperty RingHom.IsLocalIso ≤
@@ -662,20 +650,6 @@ lemma iff_ind_indZariski (f : R →+* S) :
     ext X Y g
     exact iff_ind_isLocalIso g.hom
   rw [heq, MorphismProperty.ind_ind CommRingCat.isLocalIso_le_isFinitelyPresentable.{u}]
-
-lemma respectsIso :
-    RingHom.RespectsIso
-      (fun {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) ↦ f.IndZariski) := by
-  rw [RingHom.toMorphismProperty_respectsIso_iff]
-  have heq : RingHom.toMorphismProperty
-      (fun {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) ↦ f.IndZariski) =
-      MorphismProperty.ind.{u} (RingHom.toMorphismProperty RingHom.IsLocalIso) := by
-    ext X Y g
-    exact iff_ind_isLocalIso g.hom
-  rw [heq]
-  have : (RingHom.toMorphismProperty RingHom.IsLocalIso).RespectsIso :=
-    RingHom.toMorphismProperty_respectsIso_iff.mp RingHom.IsLocalIso.respectsIso
-  infer_instance
 
 section AwaySpread
 
@@ -786,11 +760,6 @@ noncomputable def awaySystem (j₀ : J) (r : D.obj j₀) : Under j₀ ⥤ CommRi
     rw [h, D.map_comp]
     rfl
 
-omit [IsFiltered J] in
-lemma awaySystem_map (j₀ : J) (r : D.obj j₀) {k l : Under j₀} (t : k ⟶ l) :
-    (awaySystem (D := D) j₀ r).map t = awayLift (D.map t.right) _ _ (rAt_map j₀ r t) :=
-  rfl
-
 /-- The cocone over `awaySystem` with apex the localization of the colimit. -/
 noncomputable def awaySystemCocone (c : Cocone D) (j₀ : J) (r : D.obj j₀) :
     Cocone (awaySystem (D := D) j₀ r) where
@@ -806,11 +775,6 @@ noncomputable def awaySystemCocone (c : Cocone D) (j₀ : J) (r : D.obj j₀) :
         rw [awayLift_algebraMap, awayLift_algebraMap, awayLift_algebraMap]
         congr 1
         exact coconeι_w_apply c t.right x }
-
-omit [IsFiltered J] in
-lemma awaySystemCocone_app (c : Cocone D) (j₀ : J) (r : D.obj j₀) (k : Under j₀) :
-    (awaySystemCocone c j₀ r).ι.app k = awayLift (coconeι c k.right) _ _ (rAt_cocone j₀ r k) :=
-  rfl
 
 /-- Every element of the localization of the colimit lifts to a stage. -/
 lemma awaySystem_exists_rep {c : Cocone D} (hc : IsColimit c) (j₀ : J) (r : D.obj j₀)
@@ -1787,33 +1751,6 @@ lemma awaySystemCocone_w_apply (c : Cocone D) (j' : J) (r : D.obj j')
     _ = ((awaySystemCocone c j' r).ι.app m).hom x :=
         congrArg (fun q ↦ q.hom x) ((awaySystemCocone c j' r).w u)
 
-omit [IsFiltered J] in
-/-- Generalized form of `pieceChi_push` with an arbitrary target element. -/
-lemma pieceChi_push' {j₀ : J} {A₀ : CommRingCat.{u}} {f₀ : D.obj j₀ ⟶ A₀}
-    {k : Under j₀} (selt : D.obj k.right) (q : A₀ ⟶ CommRingCat.of (Localization.Away selt))
-    (hq : f₀ ≫ q =
-      D.map k.hom ≫ CommRingCat.ofHom (algebraMap (D.obj k.right) (Localization.Away selt)))
-    {l : Under j₀} (t : k ⟶ l) (selt' : D.obj l.right) (h : (D.map t.right).hom selt = selt')
-    (hq' : f₀ ≫ q ≫ awayLift (D.map t.right) selt selt' h =
-      D.map l.hom ≫ CommRingCat.ofHom (algebraMap (D.obj l.right) (Localization.Away selt'))) :
-    (pushSystem j₀ f₀).map t ≫ pieceChi f₀ l selt'
-        (q ≫ awayLift (D.map t.right) selt selt' h) hq' =
-      pieceChi f₀ k selt q hq ≫ awayLift (D.map t.right) selt selt' h := by
-  apply (pushSquare j₀ f₀ k).hom_ext
-  · refine CommRingCat.hom_ext (RingHom.ext fun b ↦ ?_)
-    change (pieceChi f₀ l selt' _ hq').hom
-        (((pushSystem j₀ f₀).map t).hom ((pushInl j₀ f₀ k).hom b)) =
-      (awayLift (D.map t.right) selt selt' h).hom
-        ((pieceChi f₀ k selt q hq).hom ((pushInl j₀ f₀ k).hom b))
-    rw [pushInl_map_apply, pieceChi_inl, pieceChi_inl, awayLift_algebraMap]
-  · refine CommRingCat.hom_ext (RingHom.ext fun a ↦ ?_)
-    change (pieceChi f₀ l selt' _ hq').hom
-        (((pushSystem j₀ f₀).map t).hom ((pushInr j₀ f₀ k).hom a)) =
-      (awayLift (D.map t.right) selt selt' h).hom
-        ((pieceChi f₀ k selt q hq).hom ((pushInr j₀ f₀ k).hom a))
-    rw [pushInr_map_apply, pieceChi_inr, pieceChi_inr]
-    rfl
-
 set_option maxHeartbeats 1600000 in
 -- The proof descends many pieces of data stage by stage through a long chain of filtered
 -- colimit arguments, which exceeds the default heartbeat limit.
@@ -2363,39 +2300,10 @@ lemma comp (hg : g.IndZariski) (hf : f.IndZariski) : (g.comp f).IndZariski := by
       Category.assoc]
     exact whisker_eq (CommRingCat.ofHom f) (hts j).2
 
-lemma prod {g : R →+* T} (hf : f.IndZariski) (hg : g.IndZariski) : (f.prod g).IndZariski := by
-  algebraize [f, g]
-  exact Algebra.IndZariski.prod R S T
-
-lemma pi {ι : Type u} [_root_.Finite ι] (S : ι → Type u) [∀ i, CommRing (S i)]
-    (f : ∀ i, R →+* (S i)) (hf : ∀ i, (f i).IndZariski) : (RingHom.pi f).IndZariski := by
-  let (i : ι) : Algebra R (S i) := (f i).toAlgebra
-  have (i : ι) : Algebra.IndZariski R (S i) := hf i
-  exact Algebra.IndZariski.pi R S
-
-lemma flat (h : f.IndZariski) : f.Flat := by
-  algebraize [f]
-  exact .of_indZariski R S
-
 @[stacks 096T]
 theorem bijectiveOnStalks (h : f.IndZariski) : f.BijectiveOnStalks := by
   algebraize [f]
   exact Algebra.IndZariski.bijectiveOnStalks_algebraMap R S
-
-/-- A ring hom is ind-Zariski if it can be written as a filtered colimit of ind-Zariski maps. -/
-lemma of_isColimit {R S : CommRingCat.{u}} (f : R ⟶ S) (J : Type u) [SmallCategory J]
-    [IsFiltered J] (D : J ⥤ CommRingCat.{u}) {t : (Functor.const J).obj R ⟶ D}
-    {c : D ⟶ (Functor.const J).obj S} (hc : IsColimit (.mk _ c))
-    (htc : ∀ i, (t.app i).hom.IndZariski ∧ t.app i ≫ c.app i = f) : f.hom.IndZariski := by
-  refine (iff_ind_indZariski _).mpr ⟨J, ‹_›, ‹_›, D, t, c, hc, fun j ↦ ⟨?_, (htc j).2⟩⟩
-  exact (htc j).1
-
-theorem _root_.Algebra.IndZariski.iff_ind_indZariksi [Algebra R S] :
-    Algebra.IndZariski R S ↔ ObjectProperty.ind.{u}
-      (RingHom.toObjectProperty RingHom.IndZariski R) (.of R S) :=
-  (algebraMap_iff (R := R) (S := S)).symm.trans
-    ((iff_ind_indZariski _).trans
-      respectsIso.ind_toMorphismProperty_iff_ind_toObjectProperty)
 
 /-- Ind-Zariski ring homomorphisms are stable under base change. -/
 lemma isStableUnderBaseChange : RingHom.IsStableUnderBaseChange RingHom.IndZariski := by

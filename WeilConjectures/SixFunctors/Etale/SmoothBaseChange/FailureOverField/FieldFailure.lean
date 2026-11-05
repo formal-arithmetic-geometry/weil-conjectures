@@ -93,17 +93,6 @@ structure Etale.FieldFailure (q : ℤ) where
   /-- the base-change map is not an isomorphism -/
   not_isIso : ¬ IsIso (Etale.baseChangeHomologyMap Λ isPullback_fibre q F)
 
-variable {Λ p} in
-/-- Blueprint `sbc-lem-bc-failure-field` (last clause): if `S` is separated, the base change
-`S' ⟶ S` of a counterexample over a field is affine, since `S'` is affine. -/
-lemma Etale.FieldFailure.isAffineHom_a [S.IsSeparated] {q : ℤ} (F : Etale.FieldFailure Λ p q) :
-    IsAffineHom F.a :=
-  have := F.isAffine
-  have : IsAffineHom (F.a ≫ terminal.from S) := by
-    rw [terminal.comp_from]
-    infer_instance
-  IsAffineHom.of_comp F.a (terminal.from S)
-
 end FieldFailure
 
 end AlgebraicGeometry

@@ -688,25 +688,6 @@ theorem shortExact_divisorSequence :
   exact ShortComplex.exact_of_g_is_cokernel _
     (IsColimit.ofIsoColimit (cokernelIsCokernel _) (Cofork.ext e hd.symm))
 
-include hc in
-/-- **The cokernel of `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is the sheaf of Weil divisors**, as an isomorphism
-`cokernel (𝔾ₘ ⟶ i_* i^* 𝔾ₘ) ≅ ⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`; see
-`AlgebraicGeometry.Scheme.exists_cokernel_toGenericGm_iso_hom_comp_eq` for its compatibility
-with the divisor map.
-(blueprint: `lem-sc-divisor-sequence-general`, exactness in the middle and surjectivity) -/
-theorem nonempty_cokernel_toGenericGm_iso : Nonempty (cokernel X.toGenericGm ≅ c.pt) :=
-  let ⟨_, e, _⟩ := X.exists_cokernel_toGenericGm_iso_hom_comp_eq c hc
-  ⟨e⟩
-
-include hc in
-/-- The divisor sequence of `AlgebraicGeometry.Scheme.shortExact_divisorSequence`, with the
-divisor map forgotten.
-(blueprint: `lem-sc-divisor-sequence-general`) -/
-theorem exists_shortExact_divisorSequence :
-    ∃ (d : X.genericGm ⟶ c.pt) (w : X.toGenericGm ≫ d = 0),
-      (ShortComplex.mk X.toGenericGm d w).ShortExact :=
-  ⟨_, _, X.shortExact_divisorSequence c hc⟩
-
 end DivisorSequence
 
 omit [IsIntegral X] in

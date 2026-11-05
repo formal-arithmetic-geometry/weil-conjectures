@@ -176,20 +176,6 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
 
 open scoped Obj
 
-/-- The linearization `P_{B'} : Mod C (S B') ⥤ Mod D B'` of a functor `P` satisfying a
-projection formula with respect to the strong monoidal `S` is compatible with restriction of
-scalars: restricting the `B'`-action of `P M` along `φ : B ⟶ B'` is the linearization `P_B`
-applied to `M` with its `S B'`-action restricted along `S φ`. Both actions are
-`B ⊗ P M ≅ P (S B ⊗ M) ⟶ P (S B' ⊗ M) ⟶ P M`, by the naturality of the projection formula. -/
-noncomputable def mapModLeftComapIso :
-    pf.mapModLeft B' ⋙ Mod.comap φ ≅ Mod.comap (S.map φ) ⋙ pf.mapModLeft B :=
-  NatIso.ofComponents (fun M ↦ Mod.isoMk (Iso.refl _) (by
-    rw [Iso.refl_hom, Category.comp_id, MonoidalCategory.whiskerLeft_id, Category.id_comp]
-    change φ ▷ P.obj M.X ≫ (pf.iso B' M.X).inv ≫ P.map γ[S.obj B',M.X] =
-      (pf.iso B M.X).inv ≫ P.map (S.map φ ▷ M.X ≫ γ[S.obj B',M.X])
-    rw [whiskerRight_iso_inv_assoc, P.map_comp]))
-    (fun f ↦ by ext; simp; rfl)
-
 end Functor.ProjectionFormula
 
 /-! ### Mates and conjugates in a square of adjunctions -/
@@ -241,15 +227,6 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] {D : Type u₂
   (φ_X : R_X ⟶ S_X) (φ_Y : R_Y ⟶ S_Y) (η_R : R_Y ⟶ F.obj R_X) (η_S : S_Y ⟶ F.obj S_X)
 
 open scoped Obj
-
-/-- If the morphisms `η_R : R_Y ⟶ F R_X`, `η_S : S_Y ⟶ F S_X` form a commutative square with
-`φ_X` and `φ_Y`, then so do their mates `α_R = G η_R ≫ counit : G R_Y ⟶ R_X` and
-`α_S : G S_Y ⟶ S_X` with `φ_X` and `G φ_Y`: `G φ_Y ≫ α_S = α_R ≫ φ_X`. -/
-lemma pullbackHom_square (sq : φ_Y ≫ η_S = η_R ≫ F.map φ_X) :
-    G.map φ_Y ≫ (G.map η_S ≫ adj.counitAlgHom S_X) =
-      (G.map η_R ≫ adj.counitAlgHom R_X) ≫ φ_X := by
-  rw [← Category.assoc, ← G.map_comp, sq, G.map_comp, Category.assoc, Category.assoc,
-    Adjunction.counitAlgHom, Adjunction.counitAlgHom, adj.counit_naturality]
 
 end Adjunction
 

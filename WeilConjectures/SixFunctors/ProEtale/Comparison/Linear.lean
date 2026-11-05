@@ -30,13 +30,4 @@ namespace AlgebraicGeometry.ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   (Λ : Type*) [Ring Λ] [Linear Λ A] (X : Scheme.{u})
 
-/-- The restriction `ν_*` on sheaves with values in a `Λ`-linear category is `Λ`-linear: it acts
-on morphisms by whiskering. -/
-instance linear_comparisonLowerStar : ν_*(X)[A].Linear Λ where
-
-/-- The comparison functor `ν^*` on sheaves with values in a `Λ`-linear category is `Λ`-linear,
-being left adjoint to the `Λ`-linear restriction `ν_*`. -/
-instance linear_comparisonUpperStar : ν^*(X)[A].Linear Λ :=
-  (comparisonAdjunction A X).left_adjoint_linear
-
 end AlgebraicGeometry.ProEtale

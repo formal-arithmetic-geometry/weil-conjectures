@@ -38,12 +38,6 @@ noncomputable def coefficientExtensionAbsoluteValue (l : ℕ) [Fact l.Prime] (E 
     AbsoluteValue E ℝ :=
   MulRingNorm.mulRingNormEquivAbsoluteValue (spectralMulAlgNorm ℚ_[l] E).toMulRingNorm
 
-/-- The coefficient absolute value is the spectral norm. -/
-lemma coefficientExtensionAbsoluteValue_apply (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (x : E) :
-    coefficientExtensionAbsoluteValue l E x = spectralNorm ℚ_[l] E x :=
-  rfl
-
 /-- The valuation ring `𝒪_E = {x : E | |x|_E ≤ 1}` of the spectral absolute value.
 
 Source: blueprint `def-weil-finite-field-fiber`, order 411, and slopmaster2 Definition
@@ -75,21 +69,6 @@ end Padic
 namespace Padic
 
 section
-
-/-- The witness subring of `extension_integers_dvr` for the spectral absolute value is the
-closed unit ball `coefficientExtensionIntegers l E`: both have the membership condition
-`|x|_E ≤ 1`.
-
-Source: blueprint `def-weil-finite-field-fiber`, order 411
-(auxiliary; not a blueprint node). -/
-theorem coefficientExtensionIntegers_eq_choose (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
-    coefficientExtensionIntegers l E =
-      (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-        (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose :=
-  Subring.ext fun x ↦ (mem_coefficientExtensionIntegers l E x).trans
-    ((extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x).symm
 
 /-- The conclusion of `extension_integers_dvr` for the spectral absolute value, stated for
 the closed unit ball `coefficientExtensionIntegers l E` itself.

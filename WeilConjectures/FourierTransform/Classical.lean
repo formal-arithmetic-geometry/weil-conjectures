@@ -70,52 +70,6 @@ lemma fourierTransformPi_eq_sum_compTrace (ψ : AddChar K R) (f : (ι → L) →
     fourierTransformPi ψ f y = ∑ x, f x * ψ.compTrace L (∑ i, x i * y i) :=
   rfl
 
-/-- The classical Fourier transform on `L^ι` commutes with negation. -/
-lemma fourierTransformPi_neg (ψ : AddChar K R) (f : (ι → L) → R) :
-    fourierTransformPi ψ (fun x ↦ -f x) = fun y ↦ -fourierTransformPi ψ f y := by
-  ext y
-  simp [fourierTransformPi]
-
-/-- The classical Fourier transform on `L^ι` is linear over the constants. -/
-lemma fourierTransformPi_const_mul (ψ : AddChar K R) (c : R) (f : (ι → L) → R) (y : ι → L) :
-    fourierTransformPi ψ (fun x ↦ c * f x) y = c * fourierTransformPi ψ f y := by
-  simp [fourierTransformPi, Finset.mul_sum, mul_assoc]
-
-/-- The *classical Fourier transform* `f̂(y) = ∑ₓ f(x) ψ(Tr_{L/K}(x y))` of a function
-`f : L → R` on a finite field `L`, with respect to the additive character `ψ ∘ Tr_{L/K}` of `L`
-induced by an additive character `ψ` of a subfield `K`. For `L = 𝔽_{qⁿ}` over `K = 𝔽_q` this
-is the transform with respect to the character `ψₙ` of `𝔽_{qⁿ}`. It is the transform on `L^ι`
-for `ι` with one element (`FiniteField.fourierTransformPi_unique`).
-(sketch blueprint: `def-fd-trace-function`) -/
-noncomputable def fourierTransform (ψ : AddChar K R) (f : L → R) (y : L) : R :=
-  ∑ x, f x * ψ (Algebra.trace K L (x * y))
-
-lemma fourierTransform_eq_sum_compTrace (ψ : AddChar K R) (f : L → R) (y : L) :
-    fourierTransform ψ f y = ∑ x, f x * ψ.compTrace L (x * y) :=
-  rfl
-
-/-- The classical Fourier transform is additive in the function; in particular it commutes with
-negation. -/
-lemma fourierTransform_neg (ψ : AddChar K R) (f : L → R) :
-    fourierTransform ψ (fun x ↦ -f x) = fun y ↦ -fourierTransform ψ f y := by
-  ext y
-  simp [fourierTransform, Finset.sum_neg_distrib]
-
-omit [Field L] [Fintype ι] [DecidableEq ι] in
-/-- A sum over the vectors `L^ι`, for `ι` with one element, is a sum over `L`. -/
-lemma sum_funUnique [Unique ι] [Fintype (ι → L)] {M : Type*} [AddCommMonoid M]
-    (g : (ι → L) → M) : ∑ x, g x = ∑ a, g fun _ ↦ a :=
-  Fintype.sum_equiv (Equiv.funUnique ι L) _ _ fun x ↦
-    congrArg g (funext fun i ↦ congrArg x (Unique.uniq _ i))
-
-/-- For `ι` with one element, the classical Fourier transform on `L^ι = L` is the classical
-Fourier transform on `L`: a one-term pairing is the product. -/
-lemma fourierTransformPi_unique [Unique ι] (ψ : AddChar K R) (f : (ι → L) → R) (y : L) :
-    fourierTransformPi ψ f (fun _ ↦ y) = fourierTransform ψ (fun x ↦ f fun _ ↦ x) y := by
-  rw [fourierTransformPi, sum_funUnique]
-  simp only [Fintype.sum_unique]
-  rfl
-
 variable [FiniteDimensional K L] [Algebra.IsSeparable K L] [IsDomain R]
 
 /-- **Additive orthogonality on `L^ι`.** For a nontrivial additive character `ψ` of `K`,
@@ -138,41 +92,6 @@ theorem sum_compTrace_sum_sub_mul [DecidableEq L] {ψ : AddChar K R} (hψ : ψ �
   · simp [h]
   · obtain ⟨i, hi⟩ := Function.ne_iff.1 h
     exact Finset.prod_eq_zero (Finset.mem_univ i) (if_neg hi)
-
-/-- **Classical Fourier inversion on `L^ι`.** For a nontrivial additive character `ψ` of `K`,
-the transform with respect to `ψ⁻¹` of the transform with respect to `ψ` is `#L ^ #ι` times
-the identity. (sketch blueprint: `det-prop-double-trace`, proof) -/
-theorem fourierTransformPi_inv_fourierTransformPi {ψ : AddChar K R} (hψ : ψ ≠ 1)
-    (f : (ι → L) → R) (y : ι → L) :
-    fourierTransformPi ψ⁻¹ (fourierTransformPi ψ f) y =
-      (Fintype.card L : R) ^ Fintype.card ι * f y := by
-  classical
-  have h (z : ι → L) : ∑ x : ι → L, f z * ψ.compTrace L (∑ i, z i * x i) *
-      ψ⁻¹.compTrace L (∑ i, x i * y i) =
-      f z * ∑ x : ι → L, ψ.compTrace L (∑ i, (z i - y i) * x i) := by
-    rw [Finset.mul_sum]
-    refine Finset.sum_congr rfl fun x _ ↦ ?_
-    rw [mul_assoc, AddChar.compTrace_apply, AddChar.compTrace_apply, AddChar.inv_apply,
-      ← AddChar.map_add_eq_mul, ← map_neg, ← map_add, AddChar.compTrace_apply]
-    congr 3
-    rw [← Finset.sum_neg_distrib, ← Finset.sum_add_distrib]
-    exact Finset.sum_congr rfl fun i _ ↦ by ring
-  simp_rw [fourierTransformPi_eq_sum_compTrace, Finset.sum_mul]
-  rw [Finset.sum_comm]
-  simp_rw [h, sum_compTrace_sum_sub_mul hψ, mul_ite, mul_zero]
-  rw [Finset.sum_ite_eq' Finset.univ y, if_pos (Finset.mem_univ _), mul_comm]
-
-/-- **Classical Fourier inversion.** For a nontrivial additive character `ψ` of `K`, the
-transform with respect to `ψ⁻¹` of the transform with respect to `ψ` is `#L` times the
-identity: `∑_x (∑_z f(z) ψ_L(z x)) ψ_L(-x y) = #L · f(y)`. It is the case `ι = Unit` of
-`FiniteField.fourierTransformPi_inv_fourierTransformPi`.
-(sketch blueprint: `det-prop-double-trace`, proof) -/
-theorem fourierTransform_inv_fourierTransform {ψ : AddChar K R} (hψ : ψ ≠ 1) (f : L → R)
-    (y : L) :
-    fourierTransform ψ⁻¹ (fourierTransform ψ f) y = Fintype.card L * f y := by
-  have h := fourierTransformPi_inv_fourierTransformPi (ι := Unit) hψ (fun x ↦ f (x ())) fun _ ↦ y
-  simp only [fourierTransformPi_unique, Fintype.card_unit, pow_one] at h
-  exact h
 
 omit [Fintype L] [Algebra.IsSeparable K L] [IsDomain R] in
 /-- The values of an additive character of a finite field, embedded in `ℂ`, are roots of
@@ -226,18 +145,5 @@ theorem sum_norm_sq_fourierTransformPi [Finite K] (j : R →+* ℂ) {ψ : AddCha
   simp_rw [← Finset.mul_sum, horth, mul_ite, mul_zero, Finset.sum_ite_eq, Finset.mem_univ,
     if_true, Finset.mul_sum]
   exact Finset.sum_congr rfl fun x _ ↦ by ring
-
-/-- **Classical Plancherel identity.** For a nontrivial additive character `ψ` of a finite field
-`K`, a finite extension `L / K` and a ring homomorphism `ι : R →+* ℂ`,
-`∑_y |ι f̂(y)|² = #L ∑_x |ι f(x)|²`. It is the case `ι = Unit` of
-`FiniteField.sum_norm_sq_fourierTransformPi`.
-(sketch blueprint: `sk-cor-plancherel`, proof) -/
-theorem sum_norm_sq_fourierTransform [Finite K] (ι : R →+* ℂ) {ψ : AddChar K R} (hψ : ψ ≠ 1)
-    (f : L → R) :
-    ∑ y, ‖ι (fourierTransform ψ f y)‖ ^ 2 = Fintype.card L * ∑ x, ‖ι (f x)‖ ^ 2 := by
-  have h := sum_norm_sq_fourierTransformPi (ι := Unit) ι hψ fun x ↦ f (x ())
-  rw [sum_funUnique, sum_funUnique, Fintype.card_unit, pow_one] at h
-  simp only [fourierTransformPi_unique] at h
-  exact h
 
 end FiniteField

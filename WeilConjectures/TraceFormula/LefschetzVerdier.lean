@@ -151,13 +151,6 @@ lemma mateEquiv_app_comp_eq_aux {Sg Rg Sg' Sg'' : C ⥤ P} {S1 U1 : P ⥤ P} {Sc
   rw [← reassoc_of% hn, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app_assoc, hf,
     Iso.hom_inv_id_app_assoc]
 
-/-- Assembling a composite from two equations of partial composites. -/
-lemma assemble_aux {A B B' B'' D E F : P} {a₁ : A ⟶ B} {a₂ : B ⟶ B'} {a₃ : B' ⟶ B''}
-    {p : A ⟶ B''} (hA : a₁ ≫ a₂ ≫ a₃ = p) (u : B'' ⟶ D) {b₁ : D ⟶ E} {b₂ : E ⟶ F}
-    {q : D ⟶ F} (hB : q = b₁ ≫ b₂) :
-    a₁ ≫ a₂ ≫ a₃ ≫ u ≫ b₁ ≫ b₂ = p ≫ u ≫ q := by
-  rw [← hA, hB]
-  simp only [Category.assoc]
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing

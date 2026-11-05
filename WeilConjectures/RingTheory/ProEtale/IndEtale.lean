@@ -56,21 +56,6 @@ lemma iff_ind_etale (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] :
     Algebra.IndEtale R S ↔ ObjectProperty.ind.{u} (CommAlgCat.etale R) (.of R S) :=
   Algebra.indEtale_iff R S
 
-/-- Étale `R`-algebras are finitely presented. -/
-lemma etale_le_finitePresentation :
-    CommAlgCat.etale R ≤ CommAlgCat.finitePresentation R := by
-  intro S hS
-  exact (RingHom.etale_algebraMap.mpr hS).2
-
-/-- If every stage of a filtered colimit presentation of `S` over `R` is ind-étale,
-then `S` is ind-étale over `R`. -/
-theorem of_colimitPresentation {ι : Type u} [SmallCategory ι] [IsFiltered ι]
-    (P : ColimitPresentation ι (CommAlgCat.of R S))
-    (h : ∀ (i : ι), Algebra.IndEtale R (P.diag.obj i)) : Algebra.IndEtale R S := by
-  rw [iff_ind_etale, ← ObjectProperty.ind_ind (etale_le_finitePresentation R |>.trans
-    (CommAlgCat.finitePresentation_le_isFinitelyPresentable R))]
-  exact ⟨ι, ‹_›, ‹_›, P, fun i => (iff_ind_etale R _).mp (h i)⟩
-
 instance : (CommAlgCat.etale.{u} R).IsClosedUnderIsomorphisms := by
   rw [CommAlgCat.etale_eq]
   exact RingHom.Etale.respectsIso.isClosedUnderIsomorphisms_toObjectProperty R
@@ -385,20 +370,6 @@ lemma of_isColimit {R S : CommRingCat.{u}} (f : R ⟶ S) (J : Type u) [SmallCate
     (htc : ∀ i, (t.app i).hom.IndEtale ∧ t.app i ≫ c.app i = f) : f.hom.IndEtale := by
   refine (iff_ind_indEtale _).mpr ⟨J, ‹_›, ‹_›, D, t, c, hc, fun j ↦ ⟨?_, (htc j).2⟩⟩
   exact (htc j).1
-
-/-- Ind-étale algebras are equivalent to ind-ind-étale algebras. -/
-theorem _root_.Algebra.IndEtale.iff_ind_indEtale [Algebra R S] :
-    Algebra.IndEtale R S ↔ ObjectProperty.ind.{u}
-      (RingHom.toObjectProperty RingHom.IndEtale R) (.of R S) :=
-  have h := isStableUnderBaseChange.localizationPreserves.away.respectsIso
-  (algebraMap_iff (R := R) S).symm.trans
-    ((RingHom.IndEtale.iff_ind_indEtale _).trans
-      h.ind_toMorphismProperty_iff_ind_toObjectProperty)
-
-lemma _root_.RingHom.IndZariski.indEtale {f : R →+* S}
-    (hf : f.IndZariski) : f.IndEtale := by
-  algebraize [f]
-  exact .of_indZariski R S
 
 end RingHom.IndEtale
 

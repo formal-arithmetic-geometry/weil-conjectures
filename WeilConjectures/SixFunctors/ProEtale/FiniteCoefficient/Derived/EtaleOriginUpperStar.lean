@@ -34,20 +34,4 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {X Y : Scheme.{u}}
 
-/-- **Pullbacks of complexes of étale origin are of étale origin**: if `L` is bounded below of
-étale origin on `X`, so is `Lf^* L` on `Y`. -/
-lemma DerivedCategory.plusEtaleOrigin.leftDerivedUpperStar_obj (f : Y ⟶ X)
-    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hL : DerivedCategory.plusEtaleOrigin A X L) :
-    DerivedCategory.plusEtaleOrigin A Y (L((f)^*[A]).obj L) := by
-  obtain ⟨N, ⟨n, hN⟩, ⟨e⟩⟩ := hL
-  have : N.IsGE n := hN
-  have hN' : DerivedCategory.TStructure.t.plus (D(Etale.upperStar A f).obj N) :=
-    ⟨n, (Etale.upperStar A f).isGE_mapDerivedCategory_obj N n⟩
-  refine ObjectProperty.prop_of_iso _ ?_ (plusEtaleOrigin_mapDerivedCategory_obj hN')
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm.app N ≪≫
-    (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A f).symm).app N ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).app N ≪≫
-    (D((f)^*[A])).mapIso e ≪≫ (leftDerivedUpperStarIsoMapDerivedCategory A f).symm.app L
-
 end AlgebraicGeometry.ProEtale

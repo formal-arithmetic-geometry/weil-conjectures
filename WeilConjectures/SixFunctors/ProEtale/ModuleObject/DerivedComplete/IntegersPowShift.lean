@@ -110,11 +110,6 @@ noncomputable def continuousMapSheafMulConst (t : T) :
   ⟨{ app _ := AddCommGrpCat.ofHom (AddMonoidHom.mulLeft (ULift.up (ContinuousMap.const _ t)))
      naturality _ _ _ := rfl }⟩
 
-lemma continuousMapSheafMulConst_hom_app_apply (t : T) (U : V.ProEtᵒᵖ)
-    (a : ULift.{u + 1} C(U.unop.left, T)) :
-    (continuousMapSheafMulConst V t).hom.app U a = ULift.up (ContinuousMap.const _ t * a.down) :=
-  rfl
-
 end MulConst
 
 variable (V : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]

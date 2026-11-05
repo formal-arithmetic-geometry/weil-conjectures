@@ -44,30 +44,6 @@ noncomputable def rightDerivedHomologyIsoRightDerived [HasInjectiveResolutions C
   R.rightDerivedHomologyIso (injectiveResolution X).kInjectiveResolution v p ≪≫
     ((injectiveResolution X).isoRightDerivedObjCochainComplex v p).symm
 
-/-- **K-injective resolutions compute `R⁺v`**: for a bounded below complex `K` and a K-injective
-resolution `R` of `K`, `Hᵖ(R⁺v(K)) ≅ Hᵖ(v(I))`.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
-noncomputable def homologyRightDerivedFunctorPlusObjIso [EnoughInjectives C]
-    [HasDerivedCategory C] [HasDerivedCategory D] (K : CochainComplex.Plus C)
-    (R : K.obj.KInjectiveResolution) (p : ℤ) :
-    (DerivedCategory.Plus.homologyFunctor D p).obj
-        (v.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj K)) ≅
-      R.rightDerivedHomology v p :=
-  have := K.2.choose_spec
-  let R₀ := (exists_of_isStrictlyGE K.obj K.2.choose).choose
-  have h₀ := (exists_of_isStrictlyGE K.obj K.2.choose).choose_spec
-  let L : CochainComplex.Plus C := ⟨R₀.I, K.2.choose, h₀.1⟩
-  have : ∀ i, Injective (L.obj.X i) := h₀.2
-  let φ : K ⟶ L := ObjectProperty.homMk R₀.ι
-  have : IsIso (DerivedCategory.Plus.Q.map φ) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2
-        ((HomologicalComplex.mem_quasiIso_iff _).2 R₀.quasiIso_ι))
-  (DerivedCategory.Plus.homologyFunctor D p).mapIso
-      (v.rightDerivedFunctorPlus.mapIso (asIso (DerivedCategory.Plus.Q.map φ))) ≪≫
-    v.homologyRightDerivedFunctorPlusObjQIsoOfInjective L p ≪≫ R₀.rightDerivedHomologyIso R v p
-
 variable [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
   {K : CochainComplex C ℤ} (R : K.KInjectiveResolution)
 

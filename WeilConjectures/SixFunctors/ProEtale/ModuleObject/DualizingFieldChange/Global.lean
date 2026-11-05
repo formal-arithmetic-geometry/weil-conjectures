@@ -135,18 +135,6 @@ theorem isIso_lowerStar_map_dualizingComplexBaseChange [IsIso e]
   Verdier.isIso_map_of_isIso_map_nearbyDualityMap_unit _ _ _
     (isIso_lowerStar_map_nearbyDualityMap_dualizingComplexBaseChange ℓ e sq (𝟙_ _))
 
-/-- **Base change of dualizing complexes, finite case**: for `X` finite over `k₁`, the comparison
-`π^* ω_X ⟶ ω_{X'}` is an isomorphism: `X'` is finite over `k₂`, and the finite pushforward
-`Ra'_*` is conservative
-(`ProEtale.CondensedRing.isIso_of_isIso_map_boundedConstructibleLowerStar_of_isFinite`). -/
-theorem isIso_dualizingComplexBaseChange_of_isFinite [IsIso e]
-    (sq : IsPullback π (toPoint X').left (toPoint X).left πₛ) [IsFinite (toPoint X).left] :
-    IsIso (dualizingComplexBaseChange ℓ e sq) := by
-  have : IsFinite (toPoint X').left :=
-    MorphismProperty.of_isPullback (P := @IsFinite) sq ‹_›
-  exact isIso_of_isIso_map_boundedConstructibleLowerStar_of_isFinite ℓ (toPoint X') _
-    (isIso_lowerStar_map_dualizingComplexBaseChange ℓ e sq)
-
 end Global
 
 end AlgebraicGeometry.ProEtale.CondensedRing

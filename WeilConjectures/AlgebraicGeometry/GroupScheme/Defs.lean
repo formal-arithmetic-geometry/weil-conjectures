@@ -146,35 +146,6 @@ end Kernel
 
 section Etale
 
-/-- Blueprint `lem-sc-finite-etale-algebra-criterion`: Finite étale algebras.
-
-For a finite algebra `A` over a field `K`, the following are equivalent: `Spec A ⟶ Spec K` is
-étale; `Ω[A⁄K] = 0`; `A` is a *finite étale `K`-algebra*, a finite product of finite separable
-field extensions of `K`. -/
-theorem etale_SpecMap_algebraMap_tfae (A : Type u) [CommRing A] [Algebra K A]
-    [Module.Finite K A] :
-    List.TFAE [Etale (Spec.map (CommRingCat.ofHom (algebraMap K A))), Subsingleton Ω[A⁄K],
-      ∃ (I : Type u) (_ : Finite I) (L : I → Type u) (_ : ∀ i, Field (L i))
-        (_ : ∀ i, Algebra K (L i)) (_ : A ≃ₐ[K] Π i, L i),
-        ∀ i, Module.Finite K (L i) ∧ Algebra.IsSeparable K (L i)] := by
-  have h : Etale (Spec.map (CommRingCat.ofHom (algebraMap K A))) ↔ Algebra.Etale K A := by
-    rw [HasRingHomProperty.Spec_iff (P := @Etale), CommRingCat.hom_ofHom,
-      RingHom.etale_algebraMap]
-  tfae_have 1 ↔ 2 := h.trans Algebra.Etale.iff_subsingleton_kaehlerDifferential_of_field
-  tfae_have 1 ↔ 3 := h.trans (Algebra.Etale.iff_exists_algEquiv_prod K A)
-  tfae_finish
-
-/-- Blueprint `lem-sc-finite-etale-algebra-criterion`: a finite scheme `X` over a field `K`, for
-instance a finite group scheme, is étale over `K` if and only if `Γ(X, 𝒪_X)` is a finite étale
-`K`-algebra (`Algebra.Etale.iff_exists_algEquiv_prod`). -/
-theorem Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite {X : Scheme.{u}}
-    (h : X ⟶ Spec (.of K)) [IsFinite h] :
-    Etale h ↔
-      letI := h.ΓAlgebra
-      Algebra.Etale K Γ(X, ⊤) := by
-  have := isAffine_of_isAffineHom h
-  exact h.etale_iff_etale_ΓAlgebra
-
 end Etale
 
 /-- Blueprint `def-sc-mult-n`: Multiplication by `n` and `n`-torsion.
@@ -200,29 +171,6 @@ noncomputable def torsionSubgroupScheme (G : Over (Spec (.of K))) [GrpObj G] (n 
 noncomputable instance (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
     GrpObj (torsionSubgroupScheme G n) :=
   inferInstanceAs (GrpObj (GrpObj.ker (𝟙 G ^ n)))
-
-/-- The inclusion `G[n] ⟶ G` of the `n`-torsion subgroup scheme, that is,
-`CategoryTheory.GrpObj.kerι (𝟙 G ^ n)`. -/
-noncomputable def torsionSubgroupScheme.ι (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) :
-    torsionSubgroupScheme G n ⟶ G :=
-  GrpObj.kerι (𝟙 G ^ n)
-
-instance (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) : Mono (torsionSubgroupScheme.ι G n) :=
-  GrpObj.mono_kerι _
-
-/-- The inclusion `G[n] ⟶ G` is killed by `[n]`. -/
-theorem torsionSubgroupScheme.ι_pow (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) :
-    torsionSubgroupScheme.ι G n ^ n = 1 := by
-  have h := GrpObj.kerι_comp (𝟙 G ^ n)
-  simp only [comp_pow, Category.comp_id] at h
-  exact h
-
-/-- Blueprint `def-sc-mult-n`: the `n`-torsion subgroup scheme `G[n]` of a commutative group
-scheme is a closed subgroup scheme of `G`, being the kernel of the homomorphism `[n] = 𝟙 G ^ n`
-(`AlgebraicGeometry.isMonHom_npow_id`, `AlgebraicGeometry.isClosedSubgroupScheme_kerι`). -/
-instance isClosedSubgroupScheme_torsionSubgroupScheme_ι (G : Over (Spec (.of K))) [GrpObj G]
-    [IsCommMonObj G] (n : ℕ) : IsClosedSubgroupScheme (torsionSubgroupScheme.ι G n) :=
-  isClosedSubgroupScheme_kerι _
 
 /-- Blueprint `def-sc-mult-n`: the `T`-points of the `n`-torsion subgroup scheme.
 
@@ -251,32 +199,6 @@ noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMon
     AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) (n : ℤ) ≃
       (𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme G n) :=
   torsionByPointsEquiv G n (𝟙_ _)
-
-@[simp]
-theorem torsionByPointsEquiv_comp_ι (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G]
-    (n : ℕ) (T : Over (Spec (.of K))) (x : AddSubgroup.torsionBy (Additive (T ⟶ G)) (n : ℤ)) :
-    torsionByPointsEquiv G n T x ≫ torsionSubgroupScheme.ι G n =
-      (x : Additive (T ⟶ G)).toMul :=
-  GrpObj.kerLift_kerι _ _ _
-
-/-- Blueprint `def-sc-mult-n`: multiplication by `k` maps `G[m]` to `G[n]` when `m = k * n`.
-
-This is the morphism `G[m] ⟶ G[n]` through which `G[m] ⟶ G ⟶ G`, the inclusion followed by
-`[k] = 𝟙 G ^ k`, factors; for `G` an abelian variety, `m = ℓ ^ (n + 1)`, `n = ℓ ^ n` and `k = ℓ`
-these are the transition maps of the inverse system defining the Tate module (blueprint
-`def-wf-abelian-tate-module`). -/
-noncomputable def torsionSubgroupSchemeMul (G : Over (Spec (.of K))) [GrpObj G] {m n : ℕ}
-    (k : ℕ) (h : m = k * n) : torsionSubgroupScheme G m ⟶ torsionSubgroupScheme G n :=
-  GrpObj.kerLift (𝟙 G ^ n) (torsionSubgroupScheme.ι G m ^ k) <| by
-    rw [comp_pow, Category.comp_id, ← pow_mul, ← h, torsionSubgroupScheme.ι_pow]
-    rfl
-
-@[reassoc (attr := simp)]
-theorem torsionSubgroupSchemeMul_ι (G : Over (Spec (.of K))) [GrpObj G] {m n : ℕ}
-    (k : ℕ) (h : m = k * n) :
-    torsionSubgroupSchemeMul G k h ≫ torsionSubgroupScheme.ι G n =
-      torsionSubgroupScheme.ι G m ^ k :=
-  GrpObj.kerLift_kerι _ _ _
 
 /-- Blueprint `def-sc-isogeny`: Isogenies and their degree.
 

@@ -41,11 +41,6 @@ namespace AlgebraicGeometry.Scheme
 
 section Pullback
 
-variable (X : Scheme.{u}) (n : ℕ) in
-/-- The inclusion `μₙ ⟶ 𝔾ₘ` of the sheaf of `n`-th roots of unity. -/
-noncomputable abbrev rootsOfUnitySheafι : X.rootsOfUnitySheaf n ⟶ X.gmSheaf :=
-  kernel.ι (n • 𝟙 X.gmSheaf)
-
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) (n : ℕ)
 
 /-- The comparison `g^* 𝔾ₘ ⟶ 𝔾ₘ` commutes with the `n`-th power maps. -/
@@ -74,15 +69,6 @@ noncomputable def rootsOfUnityCohomologyMap (q : ℕ) :
     Sheaf.H (Y.rootsOfUnitySheaf n) q →+ Sheaf.H (X.rootsOfUnitySheaf n) q :=
   (Sheaf.H.map (upperStarRootsOfUnitySheafToRootsOfUnitySheaf n g) q).comp
     (Etale.cohomologyMap g (Y.rootsOfUnitySheaf n) q)
-
-/-- The pullback maps on the cohomology of `μₙ` and of `𝔾ₘ` are compatible with the inclusion
-`μₙ ⟶ 𝔾ₘ`. -/
-lemma map_kernelι_rootsOfUnityCohomologyMap (q : ℕ) (x : Sheaf.H (Y.rootsOfUnitySheaf n) q) :
-    Sheaf.H.map (X.rootsOfUnitySheafι n) q (rootsOfUnityCohomologyMap g n q x) =
-      gmCohomologyMap g q (Sheaf.H.map (Y.rootsOfUnitySheafι n) q x) := by
-  simp only [rootsOfUnityCohomologyMap, gmCohomologyMap, AddMonoidHom.comp_apply]
-  rw [← Sheaf.H.map_comp_apply, upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι,
-    Sheaf.H.map_comp_apply, Etale.cohomologyMap_map]
 
 /-- **The Kummer boundary commutes with pullback.** For `g : X ⟶ Y` and `n` invertible on `Y`
 and on `X`, the square

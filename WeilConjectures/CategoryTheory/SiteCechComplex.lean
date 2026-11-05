@@ -395,23 +395,6 @@ theorem complexFunctor_additive :
   ext p s
   rfl
 
-/-- The integer-indexed complex functor, zero in all negative degrees.
-Source: Stacks 03AM, 03AO (blueprint: def-weil-pbc-site-cech-complex). -/
-noncomputable def integerComplexFunctor :
-    (Cᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤ CochainComplex AddCommGrpCat.{max r w} ℤ :=
-  S.complexFunctor ⋙ ComplexShape.embeddingUpNat.extendFunctor AddCommGrpCat.{max r w}
-
-/-- The integer-indexed Čech functor is additive. Source: Stacks 03AO.
-Proof: the nonnegative complex functor is additive, and extension by zero is additive
-componentwise. Their composite is additive.
-(blueprint: def-weil-pbc-site-cech-complex) -/
-@[instance]
-theorem integerComplexFunctor_additive :
-    (S.integerComplexFunctor : (Cᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤
-      CochainComplex AddCommGrpCat.{max r w} ℤ).Additive := by
-  dsimp [integerComplexFunctor]
-  infer_instance
-
 /-- Čech cohomology is the cohomology of the constructed complex, hence kernel modulo image;
 in degree zero the incoming differential is zero.
 Source: Stacks 03AM (blueprint: def-weil-pbc-site-cech-complex). -/
@@ -536,60 +519,6 @@ theorem comparison_exists (S' : SiteCechComplex f hom) :
   have h : i = (e p t).inv := S.projection_ext i _ (fun k ↦ (hi' k).trans (hi p t k).symm)
   subst i
   rfl
-
-/-- Short exact presheaf sequences give short exact sequences of integer-indexed complexes.
-Source: Stacks 03AQ.
-Proof: evaluate the sequence sectionwise, take products of the resulting exact sequences
-as in `degreewise_exact`, and use componentwise injectivity and surjectivity of the maps.
-Negative degrees are zero. A sequence of complexes is short exact exactly when it is
-short exact in each degree (lem-weil-pbc-cochain-complexes-degreewise-exact).
-(blueprint: def-weil-pbc-site-cech-complex) -/
-theorem shortExact_map (A : ShortComplex (Cᵒᵖ ⥤ AddCommGrpCat.{r})) (hA : A.ShortExact) :
-    (A.map S.integerComplexFunctor).ShortExact := by
-  classical
-  have hm := hA.mono_f
-  have hg := hA.epi_g
-  have hn (p : ℕ) :
-      ((A.map S.complexFunctor).map (HomologicalComplex.eval _ _ p)).ShortExact := by
-    refine { exact := ?_, mono_f := ?_, epi_g := ?_ }
-    · apply (ShortComplex.ab_exact_iff_function_exact _).mpr
-      exact S.degreewise_exact A hA.exact p
-    · apply (AddCommGrpCat.mono_iff_injective _).mpr
-      intro a b h
-      funext t
-      exact (AddCommGrpCat.mono_iff_injective (A.f.app (op (S.W p t)))).mp
-        inferInstance (congrFun h t)
-    · apply (AddCommGrpCat.epi_iff_surjective _).mpr
-      intro s
-      have hs (t : Fin (p + 1) → T) :=
-        (AddCommGrpCat.epi_iff_surjective (A.g.app (op (S.W p t)))).mp
-          inferInstance (s t)
-      choose a ha using hs
-      exact ⟨a, funext ha⟩
-  apply HomologicalComplex.shortExact_of_degreewise_shortExact
-  intro z
-  let e := ComplexShape.embeddingUpNat
-  by_cases hz : ∃ p, e.f p = z
-  · obtain ⟨p, hp⟩ := hz
-    let i (F : Cᵒᵖ ⥤ AddCommGrpCat.{r}) := (S.complex F).extendXIso e hp
-    apply ShortComplex.shortExact_of_iso
-      (ShortComplex.isoMk (i A.X₁).symm (i A.X₂).symm (i A.X₃).symm ?_ ?_) (hn p)
-    · change (i A.X₁).inv ≫ (HomologicalComplex.extendMap (S.complexMap A.f) e).f z =
-        S.cochainsMap A.f p ≫ (i A.X₂).inv
-      rw [HomologicalComplex.extendMap_f _ _ hp]
-      simp [i, complexMap]
-    · change (i A.X₂).inv ≫ (HomologicalComplex.extendMap (S.complexMap A.g) e).f z =
-        S.cochainsMap A.g p ≫ (i A.X₃).inv
-      rw [HomologicalComplex.extendMap_f _ _ hp]
-      simp [i, complexMap]
-  · have hz' (p) : e.f p ≠ z := fun hp ↦ hz ⟨p, hp⟩
-    have h₁ := (S.complex A.X₁).isZero_extend_X e z hz'
-    have h₂ := (S.complex A.X₂).isZero_extend_X e z hz'
-    have h₃ := (S.complex A.X₃).isZero_extend_X e z hz'
-    refine { exact := ?_, mono_f := ?_, epi_g := ?_ }
-    · exact ShortComplex.exact_of_isZero_X₂ _ h₂
-    · exact h₁.mono _
-    · exact h₃.epi _
 
 end SiteCechComplex
 end CategoryTheory

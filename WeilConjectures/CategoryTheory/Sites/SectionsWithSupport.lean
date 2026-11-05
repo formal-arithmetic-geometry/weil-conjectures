@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExact
@@ -280,20 +279,6 @@ instance mono_sigmaYonedaMap {U V : C} (p : U ⟶ V) [Mono p] (a : A) :
     exact (comp_id _).symm
   exact NatTrans.mono_of_mono_app _
 
-/-- For a monomorphism `p : U ⟶ V` of the site and an injective sheaf `I`, the restriction
-`I(V) ⟶ I(U)` is a split epimorphism. -/
-theorem Sheaf.isSplitEpi_map_of_injective {U V : C} (p : U ⟶ V) [Mono p] (I : Sheaf J A)
-    [Injective I] : IsSplitEpi (I.obj.map p.op) := by
-  obtain ⟨h, hh⟩ := Sheaf.exists_comp_eq_of_injective I (sigmaYonedaMap p _)
-    (sigmaYonedaToObj I.obj U)
-  refine ⟨⟨Sigma.ι (fun _ : V ⟶ V ↦ I.obj.obj (op U)) (𝟙 _) ≫ h.app (op V), ?_⟩⟩
-  have h₁ := Sigma.ι (fun _ : U ⟶ U ↦ I.obj.obj (op U)) (𝟙 _) ≫= congr_app hh (op U)
-  rw [assoc, ← h.naturality]
-  simp only [NatTrans.comp_app, sigmaYonedaMap_app, sigmaYonedaToObj_app, colimit.ι_desc_assoc,
-    colimit.ι_desc, Cofan.mk_pt, Cofan.mk_ι_app, Discrete.functor_obj_eq_as, id_comp, op_id,
-    Functor.map_id] at h₁
-  simpa using h₁
-
 /-- If every `Hom(W, U)` is a subsingleton (e.g. `U` is a subobject of a terminal object), then
 for an injective sheaf `I` the restriction `Γ(I) ⟶ I(U)` is a split epimorphism. -/
 theorem Sheaf.isSplitEpi_ΓRes_of_injective [HasGlobalSectionsFunctor J A] (U : C)
@@ -319,21 +304,6 @@ end Injective
 section ShortExact
 
 variable [∀ W U : C, HasCoproductsOfShape (W ⟶ U) A]
-
-/-- The short complex of a pair `p : U ⟶ V` with `p` a monomorphism is short exact on injective
-sheaves. -/
-theorem Sheaf.shortExactOnInjectives_pairShortComplex (p : Arrow C) [Mono p.hom] :
-    (Sheaf.pairShortComplex J A p).ShortExactOnInjectives := by
-  intro I _
-  have := Sheaf.isSplitEpi_map_of_injective p.hom I
-  have hκ := KernelFork.mapIsLimit _ (kernelIsKernel ((sheafSections J A).map p.hom.op))
-    ((evaluation _ A).obj I)
-  refine ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ hκ) ?_ ?_
-  · have : Mono (kernel.ι ((sheafSections J A).map p.hom.op)) := inferInstance
-    change Mono ((kernel.ι ((sheafSections J A).map p.hom.op)).app I)
-    infer_instance
-  · change Epi (I.obj.map p.hom.op)
-    infer_instance
 
 variable [HasGlobalSectionsFunctor J A]
 
@@ -364,22 +334,6 @@ variable [∀ W U : C, HasCoproductsOfShape (W ⟶ U) A] [HasDerivedCategory (Sh
 
 open DerivedCategory
 
-/-- The distinguished triangle `RΓ_{V ∖ U}(V, K) ⟶ RΓ(V, K) ⟶ RΓ(U, K) ⟶ RΓ_{V ∖ U}(V, K)[1]` of
-a pair `p : U ⟶ V` with `p` a monomorphism, as a functor of the bounded below complex `K`. -/
-noncomputable def Sheaf.pairRightDerivedTriangle (p : Arrow C) [Mono p.hom] :
-    Plus (Sheaf J A) ⥤ Pretriangulated.Triangle (DerivedCategory A) :=
-  ShortComplex.rightDerivedTriangle (Sheaf.shortExactOnInjectives_pairShortComplex J A p)
-
-lemma Sheaf.pairRightDerivedTriangle_obj_distinguished (p : Arrow C) [Mono p.hom]
-    (K : Plus (Sheaf J A)) :
-    (Sheaf.pairRightDerivedTriangle J A p).obj K ∈ distTriang _ :=
-  ShortComplex.rightDerivedTriangle_obj_distinguished _ K
-
-/-- The functoriality of the triangle of a pair in morphisms of pairs `p ⟶ q`. -/
-noncomputable def Sheaf.pairRightDerivedTriangleMap {p q : Arrow C} [Mono p.hom] [Mono q.hom]
-    (φ : p ⟶ q) : Sheaf.pairRightDerivedTriangle J A q ⟶ Sheaf.pairRightDerivedTriangle J A p :=
-  ShortComplex.rightDerivedTriangleMap _ _ (Sheaf.pairShortComplexMap J A φ)
-
 variable [HasGlobalSectionsFunctor J A]
 
 /-- The distinguished triangle `RΓ_U^c(K) ⟶ RΓ(K) ⟶ RΓ(U, K) ⟶ RΓ_U^c(K)[1]`, as a functor of
@@ -392,13 +346,6 @@ lemma Sheaf.ΓSupportRightDerivedTriangle_obj_distinguished (U : C) [∀ W, Subs
     (K : Plus (Sheaf J A)) :
     (Sheaf.ΓSupportRightDerivedTriangle J A U).obj K ∈ distTriang _ :=
   ShortComplex.rightDerivedTriangle_obj_distinguished _ K
-
-/-- The morphism of triangles from the triangle of `Γ_U^c ⟶ Γ ⟶ Γ(U, -)` to the triangle of a
-pair `p : U' ⟶ V` with a map `U' ⟶ U`. -/
-noncomputable def Sheaf.ΓSupportRightDerivedTriangleToPair (U : C) [∀ W, Subsingleton (W ⟶ U)]
-    (p : Arrow C) [Mono p.hom] (g : p.left ⟶ U) :
-    Sheaf.ΓSupportRightDerivedTriangle J A U ⟶ Sheaf.pairRightDerivedTriangle J A p :=
-  ShortComplex.rightDerivedTriangleMap _ _ (Sheaf.ΓSupportShortComplexToPair J A p g)
 
 end Derived
 

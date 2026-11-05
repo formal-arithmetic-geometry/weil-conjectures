@@ -46,20 +46,6 @@ def PreservesBoundedConstructible : Prop :=
 
 variable {Λ M}
 
-/-- The nearby cycles `Ψ : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X')⟦Λ⟧` of a model whose nearby cycles preserve bounded
-constructible complexes: the restriction of `nearbyCycles`. -/
-noncomputable def boundedConstructibleNearbyCycles (hM : M.PreservesBoundedConstructible Λ) :
-    Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X')⟦Λ⟧ :=
-  (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ M.nearbyCycles Λ)
-    fun K ↦ hM K.obj K.property
-
-/-- The restricted nearby cycles are compatible with the inclusions. -/
-noncomputable def boundedConstructibleNearbyCyclesCompatibility
-    (hM : M.PreservesBoundedConstructible Λ) :
-    boundedConstructibleNearbyCycles hM ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ M.nearbyCycles Λ :=
-  ObjectProperty.liftCompιIso _ _ _
-
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing

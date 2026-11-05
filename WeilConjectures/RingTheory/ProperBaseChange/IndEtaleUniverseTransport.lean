@@ -26,14 +26,4 @@ universe u v
 
 namespace RingHom
 
-/-- A ring map is ind-etale when its canonical transport to the common universe
-is ind-etale. The transported map is exactly `x ↦ ⟨f x.down⟩`, so the existing
-filtered-colimit definition applies without changing the ring extension.
-Source: blueprint, proper base change, definition of ind-etale algebras
-(blueprint: def-weil-pbc-ind-etale-algebra).
--/
-def IndEtaleAcrossUniverses {R : Type u} {S : Type v} [CommRing R] [CommRing S]
-    (f : R →+* S) : Prop :=
-  RingHom.IndEtale (RingHom.ulift.{v, u} f)
-
 end RingHom

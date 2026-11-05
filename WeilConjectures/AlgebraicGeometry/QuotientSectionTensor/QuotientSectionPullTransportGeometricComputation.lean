@@ -55,57 +55,11 @@ attribute [local implicit_reducible] QuotientChange.L
   AlgebraicGeometry.ProEtale.sheafBraidedCategory
   AlgebraicGeometry.ProEtale.sheafSymmetricCategory
 
-private theorem fifth_conj {a b c d e tail : Prop} (h : a ∧ b ∧ c ∧ d ∧ e ∧ tail) : e :=
-  h.2.2.2.2.1
-
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
 variable
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
-
-private theorem native_localization_hom (T : Scheme.{u})
-    (P : CochainComplex (Modules Λ T) ℤ) :
-    ((ModuleRingedComparison.equivalence Λ T).functor.mapDerivedCategoryFactors).hom.app P =
-      (ModuleRingedComparison.sectionLocalizationComparison Λ T P).hom := by
-  rfl
-
-set_option maxHeartbeats 300000 in
--- Unfold the two named interfaces once, preserving the fixed derived-functor instances.
-/-- The fixed geometric comparison commutes with the two localization computation maps.
-Source: Stacks 0D6D and 07A6, the geometric computation step of normalized section transport.
-(blueprint: lem-sfb-quotient-section-pull-transport-geometric-computation).
-Proof: use the fifth clause of the existing sectionDerivedPushpullNormalization theorem,
-in reverse. Its named internal pullback is the same total left derived functor L, and its
-section computation is the canonical mapDerivedCategoryFactors component. -/
-theorem section_pull_transport_geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (P : CochainComplex (Modules Λ Y) ℤ) :
-    @Eq ((ModuleRingedComparison.derivedEquivalence Λ X).functor.obj
-      ((L Λ f).obj (DerivedCategory.Q.obj P)) ⟶
-      DerivedCategory.Q.obj
-        (((ModuleRingedComparison.pullback Λ f).mapHomologicalComplex (.up ℤ)).obj
-          (((ModuleRingedComparison.equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj
-            P)))
-      ((ModuleRingedComparison.derivedEquivalence Λ X).functor.map
-        ((pullCounit (Λ := Λ) f).app ((HomotopyCategory.quotient _ _).obj P)) ≫
-      ((ModuleRingedComparison.equivalence Λ X).functor.mapDerivedCategoryFactors).hom.app
-        (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex (ModuleRingedComparison.pullComparison Λ f)
-          (.up ℤ)).hom.app P))
-      ((ModuleRingedComparison.derivedPullComparison Λ f).hom.app (DerivedCategory.Q.obj P) ≫
-      (ModuleRingedComparison.derivedPullback Λ f).map
-        (((ModuleRingedComparison.equivalence Λ Y).functor.mapDerivedCategoryFactors).hom.app P) ≫
-      ((ModuleRingedComparison.pullback Λ f).mapDerivedCategoryFactors.hom).app
-        (((ModuleRingedComparison.equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj P))
-    := by
-  have hh :=
-    (fifth_conj (ModuleRingedComparison.sectionDerivedPushpullNormalization Λ f) P).symm
-  unfold L CondensedRing.moduleObjectDerivedPullback pullCounit
-  dsimp only [_root_.id]
-  simpa only [native_localization_hom,
-    ModuleRingedComparison.internalDerivedPullback, ModuleRingedComparison.comparisonSource,
-    ModuleRingedComparison.derivedPullback, Functor.comp_obj] using hh
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

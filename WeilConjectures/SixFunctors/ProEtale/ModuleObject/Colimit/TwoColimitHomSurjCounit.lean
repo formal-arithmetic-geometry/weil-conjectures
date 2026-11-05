@@ -34,39 +34,4 @@ open Scheme PadicAlgCl
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- `derivedExtendScalarsCompIso` unfolded. -/
-lemma derivedExtendScalarsCompIso_eq {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    derivedExtendScalarsCompIso X ℓ h =
-      ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).leftDerivedFunctorCompIso
-        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F))).symm ≪≫
-      (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h) ⋙
-        Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).leftDerivedFunctorNatIso
-        (Mod.extendScalarsCompIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)) :=
-  rfl
-
-set_option maxHeartbeats 400000 in
--- Unifying the generic statement `leftDerivedFunctorCompIso_symm_trans_natIso_hom_app_Qh` with
--- the concrete derived categories of module objects (and their many instances) is slow.
-/-- The transitivity isomorphism `T^X_{E,F} ⋙ T^X_{F,Ω} ≅ T^X_{E,Ω}` on the image of an object
-`M` of the homotopy category, read through the counits of the derived extensions of scalars,
-is the isomorphism `ℚ̄_ℓ,X ⊗_{F_X} (F_X ⊗_{E_X} M) ≅ ℚ̄_ℓ,X ⊗_{E_X} M`. -/
-lemma derivedExtendScalarsCompIso_hom_app_Qh {E F : FiniteIntermediateField ℓ} (h : E ≤ F)
-    (M : HomotopyCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (padicSubfieldRingObj X ℓ E)) (ComplexShape.up ℤ)) :
-    (derivedExtendScalarsCompIso X ℓ h).hom.app (DerivedCategory.Qh.obj M) ≫
-        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).leftDerivedFunctorCounit.app
-          M =
-      (derivedExtendScalarsToPadicAlgCl X ℓ F).map
-          ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).leftDerivedFunctorCounit.app M) ≫
-        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).leftDerivedFunctorCounit.app
-          (((Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).mapHomotopyCategory _).obj M) ≫
-        DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-          (Mod.extendScalarsCompIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h))
-            (ComplexShape.up ℤ)).hom.app M) := by
-  simp only [derivedExtendScalarsCompIso_eq]
-  exact Functor.leftDerivedFunctorCompIso_symm_trans_natIso_hom_app_Qh
-    (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h))
-    (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F))
-    (Mod.extendScalarsCompIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)) M
-
 end AlgebraicGeometry.ProEtale

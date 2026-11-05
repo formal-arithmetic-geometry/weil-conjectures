@@ -41,38 +41,6 @@ variable {F : C ⥤ D} {G : D ⥤ E} {H : C ⥤ E} [F.Additive] [G.Additive] [H.
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
 
-/-- The isomorphism `D(F) ⋙ D(G) ≅ D(H)` induced by an isomorphism `γ : F ⋙ G ≅ H` of exact
-functors, through `D(F ⋙ G) ≅ D(F) ⋙ D(G)`. -/
-noncomputable def mapDerivedCategoryCompNatIso (γ : F ⋙ G ≅ H) :
-    F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso F G).symm ≪≫ mapDerivedCategoryNatIso γ
-
-/-- The morphism of complexes `G (F K) ⟶ H K` given in each degree by the component of
-`γ : F ⋙ G ≅ H`. -/
-noncomputable abbrev mapHomologicalComplexCompIsoHomOfIso (γ : F ⋙ G ≅ H)
-    (K : CochainComplex C ℤ) :
-    (G.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ⟶
-      (H.mapHomologicalComplex (ComplexShape.up ℤ)).obj K :=
-  (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).hom.app K ≫
-    (NatTrans.mapHomologicalComplex γ.hom (ComplexShape.up ℤ)).app K
-
-/-- On the image of a complex `K`, the isomorphism `D(F) ⋙ D(G) ≅ D(H)` is, up to the
-factorizations through the localization functors, the image of the levelwise components
-of `γ`. -/
-lemma mapDerivedCategoryCompNatIso_hom_app_Q (γ : F ⋙ G ≅ H) (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompNatIso γ).hom.app (DerivedCategory.Q.obj K) ≫
-        H.mapDerivedCategoryFactors.hom.app K =
-      G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
-        G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex _).obj K) ≫
-        DerivedCategory.Q.map (mapHomologicalComplexCompIsoHomOfIso γ K) := by
-  have h := mapDerivedCategoryCompIso_fac F G K
-  have h' := mapDerivedCategoryNatIso_fac γ K
-  simp only [mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Category.assoc, h', Functor.map_comp]
-  rw [← h]
-  simp
-
 end
 
 variable {A₁ A₂ A₃ A₄ : Type*} [Category A₁] [Category A₂] [Category A₃] [Category A₄]
@@ -86,46 +54,5 @@ variable {A₁ A₂ A₃ A₄ : Type*} [Category A₁] [Category A₂] [Category
   [PreservesFiniteLimits F₁₃] [PreservesFiniteColimits F₁₃]
   [PreservesFiniteLimits F₂₄] [PreservesFiniteColimits F₂₄]
   [PreservesFiniteLimits F₁₄] [PreservesFiniteColimits F₁₄]
-
-/-- **The cocycle condition passes to derived categories.** If isomorphisms
-`γ_{ijk} : F_{ij} ⋙ F_{jk} ≅ F_{ik}` of exact functors satisfy the cocycle condition of an
-associator, then so do the induced isomorphisms `D(F_{ij}) ⋙ D(F_{jk}) ≅ D(F_{ik})`. -/
-lemma mapDerivedCategoryCompNatIso_cocycle (γ₁₂₃ : F₁₂ ⋙ F₂₃ ≅ F₁₃)
-    (γ₁₃₄ : F₁₃ ⋙ F₃₄ ≅ F₁₄) (γ₂₃₄ : F₂₃ ⋙ F₃₄ ≅ F₂₄) (γ₁₂₄ : F₁₂ ⋙ F₂₄ ≅ F₁₄)
-    (h : ∀ X, F₃₄.map (γ₁₂₃.hom.app X) ≫ γ₁₃₄.hom.app X =
-      γ₂₃₄.hom.app (F₁₂.obj X) ≫ γ₁₂₄.hom.app X) (K : DerivedCategory A₁) :
-    F₃₄.mapDerivedCategory.map ((mapDerivedCategoryCompNatIso γ₁₂₃).hom.app K) ≫
-        (mapDerivedCategoryCompNatIso γ₁₃₄).hom.app K =
-      (mapDerivedCategoryCompNatIso γ₂₃₄).hom.app (F₁₂.mapDerivedCategory.obj K) ≫
-        (mapDerivedCategoryCompNatIso γ₁₂₄).hom.app K := by
-  suffices e : Functor.whiskerRight (mapDerivedCategoryCompNatIso γ₁₂₃).hom
-      F₃₄.mapDerivedCategory ≫ (mapDerivedCategoryCompNatIso γ₁₃₄).hom =
-      Functor.whiskerLeft F₁₂.mapDerivedCategory (mapDerivedCategoryCompNatIso γ₂₃₄).hom ≫
-        (mapDerivedCategoryCompNatIso γ₁₂₄).hom from congr_app e K
-  refine Localization.natTrans_ext DerivedCategory.Q
-    (HomologicalComplex.quasiIso A₁ (ComplexShape.up ℤ)) (fun L ↦ ?_)
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  rw [← cancel_mono (F₁₄.mapDerivedCategoryFactors.hom.app L), Category.assoc,
-    mapDerivedCategoryCompNatIso_hom_app_Q, ← Functor.map_comp_assoc,
-    mapDerivedCategoryCompNatIso_hom_app_Q, Category.assoc, Functor.map_comp,
-    Functor.map_comp, Category.assoc, Category.assoc]
-  have n₁ := F₃₄.mapDerivedCategoryFactors.hom.naturality
-    (mapHomologicalComplexCompIsoHomOfIso γ₁₂₃ L)
-  simp only [Functor.comp_map] at n₁
-  rw [reassoc_of% n₁, mapDerivedCategoryCompNatIso_hom_app_Q]
-  have n₂ := (mapDerivedCategoryCompNatIso γ₂₃₄).hom.naturality
-    (F₁₂.mapDerivedCategoryFactors.hom.app L)
-  simp only [Functor.comp_map] at n₂
-  erw [← reassoc_of% n₂]
-  have n₃ := mapDerivedCategoryCompNatIso_hom_app_Q γ₂₃₄ ((F₁₂.mapHomologicalComplex _).obj L)
-  erw [reassoc_of% n₃]
-  simp only [Category.assoc, ← DerivedCategory.Q.map_comp]
-  congr 4
-  ext n
-  simp only [mapHomologicalComplexCompIsoHomOfIso, Functor.mapHomologicalComplexCompIso_hom_app_f,
-    HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    NatTrans.mapHomologicalComplex_app_f, Iso.refl_hom, NatTrans.id_app, Functor.map_comp]
-  erw [F₃₄.map_id, Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp]
-  exact h (L.X n)
 
 end CategoryTheory.Functor

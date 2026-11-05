@@ -65,44 +65,6 @@ section
 
 open DerivedCategory ZeroObject
 
-variable {A} in
-/-- The derived tensor product `K ⊗ᴸ M` vanishes when `K` does. -/
-lemma isZero_derivedTensor_obj_obj_of_isZero_left {X : Scheme.{u}}
-    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : IsZero K)
-    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    IsZero (((-⊗ᴸ-(X)[A]).obj K).obj M) := by
-  -- Write `M ≅ Qh M₀` with `M₀` K-flat and `K ≅ Qh 0`; then `K ⊗ᴸ M ≅ Qh (0 ⊗ M₀) = 0`.
-  let R : (HomotopyCategory.quasiIso (Sheaf (Scheme.ProEt.topology X) A)
-      (.up ℤ)).localizerMorphismKFlat.LeftResolution (Qh.objPreimage M) :=
-    Classical.arbitrary _
-  let eM : Qh.obj R.X₁.obj ≅ M :=
-    Localization.isoOfHom Qh (HomotopyCategory.quasiIso _ (.up ℤ)) R.w R.hw ≪≫
-      Qh.objObjPreimageIso M
-  let Z : HomotopyCategory (Sheaf (Scheme.ProEt.topology X) A) (.up ℤ) :=
-    (HomotopyCategory.quotient _ _).obj 0
-  have hZ : IsZero Z := Functor.map_isZero _ (isZero_zero _)
-  have hZM : IsZero (Z ⊗ R.X₁.obj) := by
-    refine IsZero.of_iso ?_
-      (Functor.Monoidal.μIso (HomotopyCategory.quotient _ _) 0 R.X₁.obj.as).symm
-    have h :
-        IsZero ((0 : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ) ⊗ R.X₁.obj.as) := by
-      rw [IsZero.iff_id_eq_zero, ← id_whiskerRight, (isZero_zero _).eq_of_src (𝟙 _) 0,
-        MonoidalPreadditive.zero_whiskerRight]
-    exact Functor.map_isZero (HomotopyCategory.quotient _ _) h
-  have := isIso_μNatTrans_Qh_app_app_of_kFlat Z R.X₁.obj R.X₁.property
-  refine (Functor.map_isZero Qh hZM).of_iso ?_
-  exact ((-⊗ᴸ-(X)[A]).mapIso (hK.iso (Functor.map_isZero Qh hZ))).app M ≪≫
-    ((-⊗ᴸ-(X)[A]).obj _).mapIso eM.symm ≪≫
-    asIso (((Functor.LaxMonoidal.μNatTrans Qh).app Z).app R.X₁.obj)
-
-variable {A} in
-/-- The derived tensor product `K ⊗ᴸ M` vanishes when `M` does. -/
-lemma isZero_derivedTensor_obj_obj_of_isZero_right {X : Scheme.{u}}
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-    {M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hM : IsZero M) :
-    IsZero (((-⊗ᴸ-(X)[A]).obj K).obj M) :=
-  MonoidalCategory.isZero_tensorObj_of_isZero_right K hM
-
 end
 
 end

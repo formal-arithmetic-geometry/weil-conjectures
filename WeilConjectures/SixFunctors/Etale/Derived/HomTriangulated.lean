@@ -92,21 +92,6 @@ theorem derivedHom_mem_of_distTriang_left
   obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_left M T hT
   exact P.ext_of_isTriangulatedClosed₂ _ hw h₃ h₁
 
-/-- Blueprint `lem-sf-hom-triangulated`, dévissage in the second variable: if
-`M' ⟶ M ⟶ M'' ⟶ M'[1]` is a distinguished triangle and `RHom(K, M')`, `RHom(K, M'')` lie in a
-subcategory `P` of `D(X_ét, A)` closed under isomorphisms and extensions, then so does
-`RHom(K, M)`. -/
-theorem derivedHom_mem_of_distTriang_right
-    (P : ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
-    [P.IsTriangulatedClosed₂] [P.IsClosedUnderIsomorphisms]
-    (K : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ)
-    (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
-    (hT : T ∈ distTriang _) (h₁ : P (((RHom(X)[A]).obj K).obj T.obj₁))
-    (h₃ : P (((RHom(X)[A]).obj K).obj T.obj₃)) :
-    P (((RHom(X)[A]).obj K).obj T.obj₂) := by
-  obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_right K T hT
-  exact P.ext_of_isTriangulatedClosed₂ _ hw h₁ h₃
-
 end Etale
 
 end AlgebraicGeometry

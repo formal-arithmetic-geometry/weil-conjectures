@@ -28,29 +28,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{t})
 
-/-- The existing strict Roos construction localized on its flat-term K-flat class.
-Its universal normalized comparison determines the functor up to the unique
-comparison-preserving isomorphism. No site or coefficient universe is restricted.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
-def integralScalarExtensionOfUniverses :
-    DerivedCategory (integralTowerModules.{t, u} l E Y) ⥤
-      DerivedCategory (integralTowerModules.{t, u} l L Y) :=
-  (integralScalarExtensionWellDefined.{t, u} l E L ι Y).2.choose
-
-/-- The retained comparison with the actual strict-tower functor on resolving complexes.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
-def integralScalarExtensionComparisonOfUniverses :
-    integralOperationsGoodLocalization.{t, u} l E Y ⋙ integralScalarExtensionOfUniverses l E L ι Y ≅
-      integralScalarOnGood.{t, u} l E L ι Y :=
-  (integralScalarExtensionWellDefined.{t, u} l E L ι Y).2.choose_spec.choose
-
-/-- Additivity from the same universal localization witness.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
-instance integralScalarExtensionOfUniverses_additive :
-    (integralScalarExtensionOfUniverses l E L ι Y).Additive :=
-  (integralScalarExtensionWellDefined.{t, u} l E L ι Y).2.choose_spec.choose_spec.1
-
 end WeilConjectures

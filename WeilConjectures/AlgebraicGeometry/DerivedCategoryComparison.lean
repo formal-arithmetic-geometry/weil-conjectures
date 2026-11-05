@@ -76,15 +76,4 @@ noncomputable def modulesQhCompSchemeDerivedCategoryEquivInverse :
     modulesQh X ⋙ (schemeDerivedCategoryEquiv.{w} X).inverse ≅ DerivedCategory.Qh :=
   Localization.compUniqInverse _ _ _
 
-/-- The equivalence `schemeDerivedCategoryEquiv X` is compatible with the functors from cochain
-complexes. -/
-noncomputable def qCompSchemeDerivedCategoryEquivFunctor :
-    DerivedCategory.Q ⋙ (schemeDerivedCategoryEquiv.{w} X).functor ≅
-      (DerivedCategory.Q (C := X.Modules) :
-        CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ ⥤ _) :=
-  Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso _).symm _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (qhCompSchemeDerivedCategoryEquivFunctor X) ≪≫
-    DerivedCategory.quotientCompQhIso X.Modules
-
 end AlgebraicGeometry

@@ -90,31 +90,6 @@ section Proper
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [IsProper f]
 
-/-- **For a proper morphism `f`, the canonical comparison `ι_f : f_! ⟶ f_*` is an
-isomorphism.** By `AlgebraicGeometry.ProEtale.isIso_lowerShriekToLowerStar_of_isIso` this
-reduces to the comparison for the open immersion `i` of the chosen compactification.
-Properness of `f` enters only through
-`AlgebraicGeometry.Compactification.isClopen_range_openImmersion`: since the structure
-morphism `g` of the compactification is separated, `i` is proper as soon as `i ≫ g` is, and a
-proper open immersion has closed range.
-
-```
-       i
-   X ─────→ P            f_! = g_* ∘ i_! ──→ g_* ∘ i_* ≅ f_*
-    ╲       │
-   f ╲      │ g
-      ↘     ↓
-            Y
-```
--/
-instance ProEtale.isIso_lowerShriekToLowerStar :
-    IsIso (ProEtale.lowerShriekToLowerStar A f) :=
-  ProEtale.isIso_lowerShriekToLowerStar_of_isIso A f
-    (ProEtale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A
-      (HasCompactification.compactification f).i
-      ((HasCompactification.compactification f).isClopen_range_openImmersion
-        inferInstance).isClosed)
-
 end Proper
 
 end AlgebraicGeometry

@@ -44,37 +44,10 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   {R : Type*} [CommRing R] [Linear R A] [MonoidalLinear R A]
   (T : TensorStructure.{v} A R) (hT : T = tensorStructure.{v} A R)
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
-
 section Reduction
 
 variable {r : R} {M : A} {p : 𝟙_ A ⟶ M} (w : (r • 𝟙 (𝟙_ A)) ≫ p = 0)
   (hS : (ShortComplex.mk (r • 𝟙 (𝟙_ A)) p w).ShortExact)
-
-/-- The isomorphism `Q X ⊗ᴸ M ≅ Q (cone(r : X ⟶ X))` for a short exact sequence
-`0 ⟶ 𝟙 ⟶ 𝟙 ⟶ M ⟶ 0` whose first map is `r`, the tensor product being `T.monoidalCategory`. -/
-noncomputable def reductionIso (X : CochainComplex A ℤ) :
-    letI := T.monoidalCategory
-    Q.obj X ⊗ (singleFunctor A 0).obj M ≅ Q.obj (mappingCone (r • 𝟙 X)) := by
-  subst hT
-  exact DerivedCategory.reductionIso w hS X
-
-lemma reductionIso_hom_naturality {X Y : CochainComplex A ℤ} (f : X ⟶ Y) :
-    letI := T.monoidalCategory
-    (Q.map f ▷ _) ≫ (reductionIso T hT w hS Y).hom =
-      (reductionIso T hT w hS X).hom ≫
-        Q.map (mappingCone.map (r • 𝟙 X) (r • 𝟙 Y) f f (by simp)) := by
-  subst hT
-  exact DerivedCategory.reductionIso_hom_naturality w hS f
-
-/-- Under `reductionIso`, the reduction `X ⟶ X ⊗ᴸ M` is the inclusion `X ⟶ cone(r)`. -/
-lemma reduction_reductionIso_hom (X : CochainComplex A ℤ) :
-    letI := T.monoidalCategory
-    (ρ_ (Q.obj X)).inv ≫ Q.obj X ◁ (T.ε ≫ (singleFunctor A 0).map p) ≫
-        (reductionIso T hT w hS X).hom =
-      Q.map (mappingCone.inr (r • 𝟙 X)) := by
-  subst hT
-  exact DerivedCategory.reduction_reductionIso_hom w hS X
 
 end Reduction
 
@@ -86,16 +59,6 @@ variable {r₁ r₂ s : R} (hr : r₂ * s = r₁)
   (hS₁ : (ShortComplex.mk (r₁ • 𝟙 (𝟙_ A)) p₁ w₁).ShortExact)
   (hS₂ : (ShortComplex.mk (r₂ • 𝟙 (𝟙_ A)) p₂ w₂).ShortExact)
   (q : M₁ ⟶ M₂) (hq : p₁ ≫ q = p₂)
-
-include hr hq in
-/-- `reductionIso` is compatible with a change of the scalar `r₁ = r₂ s`. -/
-lemma whiskerLeft_reductionIso_hom (X : CochainComplex A ℤ) :
-    letI := T.monoidalCategory
-    (Q.obj X ◁ (singleFunctor A 0).map q) ≫ (reductionIso T hT w₂ hS₂ X).hom =
-      (reductionIso T hT w₁ hS₁ X).hom ≫ Q.map (mappingCone.map (r₁ • 𝟙 X) (r₂ • 𝟙 X) (s • 𝟙 X)
-        (𝟙 X) (smul_comp_smul_eq hr X).symm) := by
-  subst hT
-  exact DerivedCategory.whiskerLeft_reductionIso_hom hr w₁ w₂ hS₁ hS₂ q hq X
 
 end ChangeOfScalar
 

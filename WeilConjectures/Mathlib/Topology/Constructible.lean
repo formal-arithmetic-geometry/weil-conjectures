@@ -76,63 +76,6 @@ theorem exists_isOpen_inter_subset_of_isConstructible {X : Type*} [TopologicalSp
   have hsu : s ⊆ uᶜ := fun y hys hyu ↦ hus ⟨hyu, hst ▸ subset_closure hys⟩ hys
   exact (closure_minimal hsu hu.isClosed_compl) (hst ▸ hxt) hxu
 
-/-- Blueprint `lem-wf-affine-constructible-open`, clause (2): in a Noetherian space, a nonempty
-constructible set `s` contains a nonempty open subset of its closure.
-
-Write `closure s` as a finite union of irreducible closed sets and pick a maximal one `C`. The
-complement `Ω` of the members not containing `C` is open, and `Ω ∩ closure s` is a nonempty open
-subset of `C`. Then `s ∩ Ω` is a constructible set dense in `C`, and
-`IsConstructible.exists_isOpen_inter_subset_or` gives the open set. -/
-theorem exists_isOpen_inter_closure_subset_of_isConstructible {X : Type*} [TopologicalSpace X]
-    [TopologicalSpace.NoetherianSpace X] {s : Set X} (hs : IsConstructible s)
-    (hne : s.Nonempty) :
-    ∃ u : Set X, IsOpen u ∧ (u ∩ closure s).Nonempty ∧ u ∩ closure s ⊆ s := by
-  obtain ⟨S, hSf, hSc, hSi, hS⟩ :=
-    TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible
-      (isClosed_closure (s := s))
-  obtain ⟨C, hC⟩ := hSf.exists_maximal (by
-    by_contra h
-    rw [Set.not_nonempty_iff_eq_empty] at h
-    obtain ⟨x, hx⟩ := hne
-    have := subset_closure hx
-    simp [hS, h] at this)
-  set T := {D ∈ S | ¬C ⊆ D}
-  have hTf : T.Finite := hSf.subset fun _ h ↦ h.1
-  have hΩ : IsOpen (⋃₀ T)ᶜ :=
-    (Set.sUnion_eq_biUnion ▸ hTf.isClosed_biUnion fun D hD ↦ hSc D hD.1).isOpen_compl
-  have hCΩ : ((⋃₀ T)ᶜ ∩ C).Nonempty := by
-    by_contra h
-    rw [Set.not_nonempty_iff_eq_empty, ← Set.disjoint_iff_inter_eq_empty,
-      Set.disjoint_compl_left_iff_subset] at h
-    obtain ⟨D, hD, hCD⟩ := (isIrreducible_iff_sUnion_isClosed.1 (hSi C hC.prop)) hTf.toFinset
-      (by simpa using fun D hD ↦ hSc D hD.1) (by simpa using h)
-    exact (hTf.mem_toFinset.1 hD).2 hCD
-  have hΩZ : (⋃₀ T)ᶜ ∩ closure s ⊆ C := by
-    rintro x ⟨hxT, hxZ⟩
-    rw [hS] at hxZ
-    obtain ⟨D, hD, hxD⟩ := hxZ
-    by_cases hCD : C ⊆ D
-    · exact (hC.eq_of_subset hD hCD).symm ▸ hxD
-    · exact absurd ⟨D, ⟨hD, hCD⟩, hxD⟩ hxT
-  have hCZ : C ⊆ closure s := hS ▸ Set.subset_sUnion_of_mem hC.prop
-  have hdense : closure (s ∩ (⋃₀ T)ᶜ) = C := by
-    refine subset_antisymm (closure_minimal (fun x hx ↦ hΩZ ⟨hx.2, subset_closure hx.1⟩)
-      (hSc C hC.prop)) ?_
-    have h1 : C ∩ (⋃₀ T)ᶜ ⊆ closure (s ∩ (⋃₀ T)ᶜ) := fun x hx ↦
-      hΩ.closure_inter ⟨hCZ hx.1, hx.2⟩
-    calc C ⊆ closure (C ∩ (⋃₀ T)ᶜ) :=
-          subset_closure_inter_of_isPreirreducible_of_isOpen (hSi C hC.prop).2 hΩ
-            (by rwa [Set.inter_comm])
-      _ ⊆ _ := closure_minimal h1 isClosed_closure
-  have hsΩ : IsConstructible (s ∩ (⋃₀ T)ᶜ) :=
-    hs.inter ((TopologicalSpace.NoetherianSpace.isCompact _).isConstructible hΩ)
-  obtain ⟨u, hu, hut, hus⟩ := exists_isOpen_inter_subset_of_isConstructible hsΩ (hSc C hC.prop)
-    (hSi C hC.prop) hdense
-  obtain ⟨x, hxu, hxC⟩ := hut
-  refine ⟨u ∩ (⋃₀ T)ᶜ, hu.inter hΩ, ⟨x, ⟨hxu, (hus ⟨hxu, hxC⟩).2⟩, hCZ hxC⟩, ?_⟩
-  rintro y ⟨⟨hyu, hyΩ⟩, hyZ⟩
-  exact (hus ⟨hyu, hΩZ ⟨hyΩ, hyZ⟩⟩).1
-
 section Noetherian
 
 open Set TopologicalSpace

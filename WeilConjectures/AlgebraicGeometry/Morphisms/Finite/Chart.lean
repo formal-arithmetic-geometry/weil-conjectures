@@ -81,8 +81,6 @@ def algebra : Algebra Γ(Y, Y₀) ch.Ring := ch.map.hom.toAlgebra
 
 attribute [local instance] algebra
 
-lemma algebraMap_eq : algebraMap Γ(Y, Y₀) ch.Ring = ch.map.hom := rfl
-
 include hY₀ in
 /-- The ring of the chart is étale over `Γ(Y, Y₀)`. -/
 theorem etale : Algebra.Etale Γ(Y, Y₀) ch.Ring :=

@@ -100,13 +100,6 @@ lemma boundedConstructibleExceptionalProjectionMorphismOfCompactification_unit
   rw [boundedConstructibleUpperStar_ε_hom]
   exact exceptionalProjectionMorphismOfCompactification_unit 𝐐 c K.obj
 
-/-- `Rf_!^c` on bounded constructible complexes is `Rf_!(c)` on underlying objects. -/
-lemma boundedConstructibleLowerShriekOfCompactification_obj_obj (c : Compactification f.left)
-    (K : Dᵇc(X.left)⟦𝐐⟧) :
-    ((boundedConstructibleLowerShriekOfCompactification ℓ c).obj K).obj =
-      (Rf_!(c)⟦𝐐⟧).obj K.obj :=
-  rfl
-
 /-- The multiplication of the derived pullback on bounded constructible complexes is that of
 `Lf^*` on underlying objects. -/
 lemma boundedConstructibleUpperStar_μ_hom (B C : Dᵇc(Y.left)⟦𝐐⟧) :

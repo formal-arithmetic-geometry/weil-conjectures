@@ -138,23 +138,6 @@ end Biprod
 
 variable [HasShift C ℤ]
 
-variable (F) in
-/-- `F` induces bijections `(X⟦a⟧ ⟶ Y⟦b⟧) ≃ (F (X⟦a⟧) ⟶ F (Y⟦b⟧))` for all shifts. -/
-def HomBijectiveShifts (X Y : C) : Prop :=
-  ∀ a b : ℤ, F.HomBijective (X⟦a⟧) (Y⟦b⟧)
-
-lemma HomBijectiveShifts.homBijective {X Y : C} (h : F.HomBijectiveShifts X Y) :
-    F.HomBijective X Y :=
-  (h 0 0).of_iso ((shiftFunctorZero C ℤ).app X) ((shiftFunctorZero C ℤ).app Y)
-
-lemma HomBijectiveShifts.shift_left {X Y : C} (h : F.HomBijectiveShifts X Y) (c : ℤ) :
-    F.HomBijectiveShifts (X⟦c⟧) Y := fun a b ↦
-  (h (c + a) b).of_iso ((shiftFunctorAdd C c a).app X) (Iso.refl _)
-
-lemma HomBijectiveShifts.shift_right {X Y : C} (h : F.HomBijectiveShifts X Y) (c : ℤ) :
-    F.HomBijectiveShifts X (Y⟦c⟧) := fun a b ↦
-  (h a (c + b)).of_iso (Iso.refl _) ((shiftFunctorAdd C c b).app Y)
-
 section Shift
 
 variable [HasShift D ℤ] [F.CommShift ℤ]
@@ -176,13 +159,6 @@ lemma HomBijective.shift {X Y : C} (h : F.HomBijective X Y) (c : ℤ) :
   exact (Function.Bijective.of_comp_iff _
     ((Functor.FullyFaithful.ofFullyFaithful (shiftFunctor C c)).map_bijective _ _)).1 h₂
 
-/-- If `F` is bijective on the morphisms `X ⟶ Y⟦n⟧` for all `n`, it is bijective on the
-morphisms `X⟦a⟧ ⟶ Y⟦b⟧` for all `a`, `b`. -/
-lemma homBijectiveShifts_of_forall {X Y : C} (h : ∀ n : ℤ, F.HomBijective X (Y⟦n⟧)) :
-    F.HomBijectiveShifts X Y := fun a b ↦
-  ((h (b - a)).shift a).of_iso (Iso.refl _)
-    ((shiftFunctorAdd' C (b - a) a b (by lia)).app Y).symm
-
 end Shift
 
 variable [HasZeroObject C]
@@ -194,161 +170,9 @@ section Triangulated
 
 variable [F.CommShift ℤ] [F.IsTriangulated]
 
-/-- The five lemma for the covariant `Hom` sequence of a distinguished triangle
-`T₁ ⟶ T₂ ⟶ T₃ ⟶ T₁⟦1⟧`: if `F` is bijective on the morphisms from `X` to `T₁` and `T₃`,
-surjective on those to `T₃⟦-1⟧` and injective on those to `T₁⟦1⟧`, it is bijective on those
-to `T₂`. -/
-lemma homBijective_obj₂_of_triangle (X : C) (T : Triangle C) (hT : T ∈ distTriang C)
-    (h₁ : F.HomBijective X T.obj₁) (h₃ : F.HomBijective X T.obj₃)
-    (h₀ : Function.Surjective (F.map : (X ⟶ T.invRotate.obj₁) → _))
-    (h₄ : Function.Injective (F.map : (X ⟶ T.obj₁⟦(1 : ℤ)⟧) → _)) :
-    F.HomBijective X T.obj₂ := by
-  have hFT := F.map_distinguished _ hT
-  have hT' := inv_rot_of_distTriang _ hT
-  have hFT' := F.map_distinguished _ hT'
-  refine ⟨fun x y hxy ↦ ?_, fun y ↦ ?_⟩
-  · rw [← sub_eq_zero]
-    set z := x - y
-    have hz : F.map z = 0 := by simp [z, hxy]
-    have : z ≫ T.mor₂ = 0 := h₃.1 (by simp [hz])
-    obtain ⟨g, hg⟩ := Triangle.coyoneda_exact₂ T hT z this
-    have : F.map g ≫ (F.mapTriangle.obj T.invRotate).mor₂ = 0 := by
-      change F.map g ≫ F.map T.mor₁ = 0
-      rw [← F.map_comp, ← hg, hz]
-    obtain ⟨h, hh⟩ := Triangle.coyoneda_exact₂ _ hFT' (F.map g) this
-    obtain ⟨h', rfl⟩ := h₀ h
-    have : g = h' ≫ T.invRotate.mor₁ := h₁.1 (by rw [hh, F.map_comp]; rfl)
-    rw [hg, this, assoc]
-    change h' ≫ T.invRotate.mor₁ ≫ T.invRotate.mor₂ = 0
-    rw [comp_distTriang_mor_zero₁₂ _ hT', comp_zero]
-  · obtain ⟨c, hc⟩ := h₃.2 (y ≫ F.map T.mor₂)
-    have : c ≫ T.mor₃ = 0 := h₄ (by
-      rw [F.map_comp, hc, assoc, ← F.map_comp, comp_distTriang_mor_zero₂₃ _ hT,
-        F.map_zero, comp_zero, F.map_zero])
-    obtain ⟨b, rfl⟩ := Triangle.coyoneda_exact₃ T hT c this
-    have : (y - F.map b) ≫ (F.mapTriangle.obj T).mor₂ = 0 := by
-      change (y - F.map b) ≫ F.map T.mor₂ = 0
-      rw [sub_comp, ← hc, F.map_comp, sub_self]
-    obtain ⟨a, ha⟩ := Triangle.coyoneda_exact₂ _ hFT _ this
-    obtain ⟨a', rfl⟩ := h₁.2 a
-    refine ⟨b + a' ≫ T.mor₁, ?_⟩
-    rw [F.map_add, F.map_comp]
-    rw [sub_eq_iff_eq_add'] at ha
-    rw [ha]
-    rfl
-
-/-- The five lemma for the contravariant `Hom` sequence of a distinguished triangle
-`T₁ ⟶ T₂ ⟶ T₃ ⟶ T₁⟦1⟧`: if `F` is bijective on the morphisms from `T₁` and `T₃` to `Y`,
-surjective on those from `T₁⟦1⟧` and injective on those from `T₃⟦-1⟧`, it is bijective on
-those from `T₂`. -/
-lemma homBijective_obj₂_of_triangle' (Y : C) (T : Triangle C) (hT : T ∈ distTriang C)
-    (h₁ : F.HomBijective T.obj₁ Y) (h₃ : F.HomBijective T.obj₃ Y)
-    (h₀ : Function.Injective (F.map : (T.invRotate.obj₁ ⟶ Y) → _))
-    (h₄ : Function.Surjective (F.map : (T.obj₁⟦(1 : ℤ)⟧ ⟶ Y) → _)) :
-    F.HomBijective T.obj₂ Y := by
-  have hFT := F.map_distinguished _ hT
-  have hT' := inv_rot_of_distTriang _ hT
-  have hFT' := F.map_distinguished _ hT'
-  refine ⟨fun x y hxy ↦ ?_, fun y ↦ ?_⟩
-  · rw [← sub_eq_zero]
-    set z := x - y
-    have hz : F.map z = 0 := by simp [z, hxy]
-    have : T.mor₁ ≫ z = 0 := h₁.1 (by simp [hz])
-    obtain ⟨g, hg⟩ := Triangle.yoneda_exact₂ T hT z this
-    have : (F.mapTriangle.obj T).mor₂ ≫ F.map g = 0 := by
-      change F.map T.mor₂ ≫ F.map g = 0
-      rw [← F.map_comp, ← hg, hz]
-    obtain ⟨h, hh⟩ := Triangle.yoneda_exact₃ _ hFT (F.map g) this
-    obtain ⟨h', hh'⟩ := h₄ ((F.commShiftIso (1 : ℤ)).hom.app T.obj₁ ≫ h)
-    have : g = T.mor₃ ≫ h' := h₃.1 (by
-      rw [hh, F.map_comp, hh']
-      exact assoc _ _ _)
-    rw [hg, this, ← assoc, comp_distTriang_mor_zero₂₃ _ hT, zero_comp]
-  · obtain ⟨a, ha⟩ := h₁.2 (F.map T.mor₁ ≫ y)
-    have : T.invRotate.mor₁ ≫ a = 0 := h₀ (by
-      rw [F.map_comp, ha, ← assoc, ← F.map_comp]
-      change F.map (T.invRotate.mor₁ ≫ T.invRotate.mor₂) ≫ y = _
-      rw [comp_distTriang_mor_zero₁₂ _ hT', F.map_zero, zero_comp, F.map_zero])
-    obtain ⟨b, rfl⟩ := Triangle.yoneda_exact₂ _ hT' a this
-    change T.obj₂ ⟶ Y at b
-    have : (F.mapTriangle.obj T).mor₁ ≫ (y - F.map b) = 0 := by
-      change F.map T.mor₁ ≫ (y - F.map b) = 0
-      rw [comp_sub, ← ha, F.map_comp]
-      exact sub_self _
-    obtain ⟨c, hc⟩ := Triangle.yoneda_exact₂ _ hFT _ this
-    obtain ⟨c', rfl⟩ := h₃.2 c
-    refine ⟨b + T.mor₂ ≫ c', ?_⟩
-    rw [F.map_add, F.map_comp]
-    rw [sub_eq_iff_eq_add'] at hc
-    rw [hc]
-    rfl
-
 end Triangulated
 
 variable (F) [F.CommShift ℤ] [F.IsTriangulated]
-
-/-- For fixed `X`, the objects `Y` such that `F` is bijective on `X⟦a⟧ ⟶ Y⟦b⟧` for all `a`, `b`
-form a triangulated subcategory. -/
-def homBijectiveShiftsRight (X : C) : ObjectProperty C := fun Y ↦ F.HomBijectiveShifts X Y
-
-/-- For fixed `Y`, the objects `X` such that `F` is bijective on `X⟦a⟧ ⟶ Y⟦b⟧` for all `a`, `b`
-form a triangulated subcategory. -/
-def homBijectiveShiftsLeft (Y : C) : ObjectProperty C := fun X ↦ F.HomBijectiveShifts X Y
-
-instance (X : C) : (F.homBijectiveShiftsRight X).IsClosedUnderIsomorphisms where
-  of_iso e h a b := (h a b).of_iso (Iso.refl _) ((shiftFunctor C b).mapIso e)
-
-instance (Y : C) : (F.homBijectiveShiftsLeft Y).IsClosedUnderIsomorphisms where
-  of_iso e h a b := (h a b).of_iso ((shiftFunctor C a).mapIso e) (Iso.refl _)
-
-instance isTriangulated_homBijectiveShiftsRight (X : C) :
-    (F.homBijectiveShiftsRight X).IsTriangulated where
-  exists_zero := ⟨0, isZero_zero C, fun _ _ ↦
-    HomBijective.of_isZero_right ((shiftFunctor C _).map_isZero (isZero_zero C))⟩
-  isStableUnderShiftBy c := ⟨fun _ h ↦ HomBijectiveShifts.shift_right h c⟩
-  toIsTriangulatedClosed₂ := .mk' fun T hT h₁ h₃ a b ↦ by
-    have hT' := Triangle.shift_distinguished T hT b
-    refine homBijective_obj₂_of_triangle _ _ hT' (h₁ a b) (h₃ a b) ?_ ?_
-    · exact ((h₃ a (b - 1)).of_iso (Iso.refl _)
-        ((shiftFunctorAdd' C b (-1) (b - 1) (by lia)).app _)).2
-    · exact ((h₁ a (b + 1)).of_iso (Iso.refl _)
-        ((shiftFunctorAdd' C b 1 (b + 1) rfl).app _)).1
-
-instance isTriangulated_homBijectiveShiftsLeft (Y : C) :
-    (F.homBijectiveShiftsLeft Y).IsTriangulated where
-  exists_zero := ⟨0, isZero_zero C, fun _ _ ↦
-    HomBijective.of_isZero_left ((shiftFunctor C _).map_isZero (isZero_zero C))⟩
-  isStableUnderShiftBy c := ⟨fun _ h ↦ HomBijectiveShifts.shift_left h c⟩
-  toIsTriangulatedClosed₂ := .mk' fun T hT h₁ h₃ a b ↦ by
-    have hT' := Triangle.shift_distinguished T hT a
-    refine homBijective_obj₂_of_triangle' _ _ hT' (h₁ a b) (h₃ a b) ?_ ?_
-    · exact ((h₃ (a - 1) b).of_iso
-        ((shiftFunctorAdd' C a (-1) (a - 1) (by lia)).app _) (Iso.refl _)).1
-    · exact ((h₁ (a + 1) b).of_iso
-        ((shiftFunctorAdd' C a 1 (a + 1) rfl).app _) (Iso.refl _)).2
-
-/-- If every object of `C` lies in every triangulated subcategory, closed under isomorphisms,
-containing `G`, and `F` is bijective on the morphisms `G⟦a⟧ ⟶ G⟦b⟧`, then `F` is bijective on
-all morphisms. -/
-lemma homBijective_of_generator {G : C}
-    (hG : ∀ (P : ObjectProperty C) [P.IsTriangulated] [P.IsClosedUnderIsomorphisms], P G →
-      ∀ X, P X)
-    (hGG : F.HomBijectiveShifts G G) (X Y : C) : F.HomBijective X Y := by
-  have h₁ : ∀ Y, F.HomBijectiveShifts G Y := hG (F.homBijectiveShiftsRight G) hGG
-  exact (hG (F.homBijectiveShiftsLeft Y) (h₁ Y) X).homBijective
-
-/-- If every object of `C` lies in every triangulated subcategory, closed under isomorphisms,
-containing `G`, and `F` is bijective on the morphisms `G⟦a⟧ ⟶ G⟦b⟧`, then `F` is fully
-faithful. -/
-noncomputable def fullyFaithfulOfGenerator {G : C}
-    (hG : ∀ (P : ObjectProperty C) [P.IsTriangulated] [P.IsClosedUnderIsomorphisms], P G →
-      ∀ X, P X)
-    (hGG : F.HomBijectiveShifts G G) : F.FullyFaithful where
-  preimage {X Y} := (Equiv.ofBijective _ (F.homBijective_of_generator hG hGG X Y)).symm
-  map_preimage {X Y} f :=
-    (Equiv.ofBijective _ (F.homBijective_of_generator hG hGG X Y)).apply_symm_apply f
-  preimage_map {X Y} f :=
-    (Equiv.ofBijective _ (F.homBijective_of_generator hG hGG X Y)).symm_apply_apply f
 
 end Functor
 

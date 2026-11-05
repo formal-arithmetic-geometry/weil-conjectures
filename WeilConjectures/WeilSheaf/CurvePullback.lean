@@ -82,11 +82,6 @@ noncomputable def curvePullback : WeilSheaf k₀ l X ⥤ WeilSheaf L l Y where
   map_comp _ _ := ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
     (Algebra.Hom.ext ((j)^*ᵃ[l].map_comp _ _)))
 
-
-lemma curvePullback_obj (F : WeilSheaf k₀ l X) :
-    (curvePullback j hj).obj F = ⟨(ProEtaleWeilSheaf.equivariantPullback _ j hj).obj
-      (F.powIsoAlgebra N), F.isAdicConstructibleSheaf_carrier.upperStar j⟩ :=
-  rfl
 @[simp]
 lemma curvePullback_obj_obj_carrier (F : WeilSheaf k₀ l X) :
     ((curvePullback j hj).obj F).obj.carrier = (j)^*ᵃ[l].obj F.obj.carrier :=
@@ -98,7 +93,6 @@ lemma curvePullback_obj_obj_obj_str (F : WeilSheaf k₀ l X) :
       (adicUpperStarCompFrobeniusIsoOfComm _ j hj).hom.app (F.powIsoAlgebra N).carrier ≫
         (j)^*ᵃ[l].map (F.powIsoAlgebra N).obj.str :=
   IsoAlgebra.mapOfNatIso_obj_obj_str _ _
-
 
 -- Stated for an arbitrary isomorphism `α` and specialised to
 -- `ProEtale.upperStarIsoLowerStarInv` below: comparing two components of the concrete
@@ -178,7 +172,6 @@ lemma curvePullback_frobeniusStr_compatible (F : WeilSheaf k₀ l X) :
   rw [frobeniusStr_curvePullback, frobeniusPowStr_eq_powIsoAlgebra, CategoryTheory.Functor.map_id]
   erw [Category.id_comp, Category.comp_id]
   rw [Iso.hom_inv_id_app_assoc]
-
 
 /-- `j` intertwines the powers `Fr_Yᵐ` and `Fr^{N m}` of the geometric Galois Frobenii. -/
 lemma comp_geometricGaloisFrobenius_pow_mul_eq

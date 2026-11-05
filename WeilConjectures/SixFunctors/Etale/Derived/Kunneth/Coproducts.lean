@@ -214,18 +214,6 @@ instance preservesColimitsOfShape_rightDerived_globalSections (X : Scheme.{u}) [
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat)
   preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset ι _
 
-/-- Blueprint `lem-kun-0f11`, part (2): for a quasi-compact quasi-separated scheme `X` of finite
-cohomological dimension, `RΓ(X, -)` commutes with direct sums. -/
-theorem preservesCoproducts_rightDerivedGlobalSections (X : Scheme.{u})
-    [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
-    (ι : Type (u + 1)) :
-    PreservesColimitsOfShape (Discrete ι) (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X) := by
-  obtain ⟨d, hd⟩ := hX
-  exact (Sheaf.Γ X.smallEtaleTopology
-    (ModuleCat.{u + 1} Λ)).preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived ι d.toNat
-    (fun F q hq ↦ Functor.isZero_rightDerived_of_isZero_homology _ F q (hd F q (by lia)))
-    fun n ↦ inferInstance
-
 end Etale
 
 end AlgebraicGeometry

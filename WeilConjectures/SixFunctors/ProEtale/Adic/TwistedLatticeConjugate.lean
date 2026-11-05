@@ -35,24 +35,4 @@ variable {A : Type u₁} {B : Type u₂} {A' : Type u₃} {B' : Type u₄}
   {U₂ : B' ⥤ B} {L₂ : B ⥤ B'} (adjS : U₂ ⊣ L₂)
   (e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁)
 
-/-- **The adjoint of a morphism out of a pulled back extension of scalars.** For a morphism
-`β : E₁ (U₁ M) ⟶ B₀`, the adjoint `M ⟶ Res₂ (L₂ B₀)` of `U₂ (E₂ M) ≅ E₁ (U₁ M) ⟶ B₀` is the adjoint
-`M ⟶ L₁ (Res₁ B₀)` of `β` followed by `L₁ (Res₁ B₀) ≅ Res₂ (L₂ B₀)`. -/
-lemma homEquiv_homEquiv_pullIsoOfComapIso_inv (M : A') {B₀ : B} (β : E₁.obj (U₁.obj M) ⟶ B₀) :
-    adj₂.homEquiv _ _ (adjS.homEquiv _ _
-        ((pullIsoOfComapIso adj₁ adj₂ adjR adjS e).inv.app M ≫ β)) =
-      adjR.homEquiv _ _ (adj₁.homEquiv _ _ β) ≫ e.inv.app B₀ := by
-  set χ := pullIsoOfComapIso adj₁ adj₂ adjR adjS e
-  have hχ : conjugateEquiv (adj₂.comp adjS) (adjR.comp adj₁) χ.hom = e.hom := by
-    have := (conjugateIsoEquiv (adj₂.comp adjS) (adjR.comp adj₁)).apply_symm_apply e
-    exact congrArg Iso.hom this
-  have h := CategoryTheory.homEquiv_comp_conjugateEquiv_app (adj₂.comp adjS) (adjR.comp adj₁) χ.hom
-    (χ.inv.app M ≫ β)
-  rw [hχ, Iso.hom_inv_id_app_assoc] at h
-  have h' : (adj₂.comp adjS).homEquiv M B₀ (χ.inv.app M ≫ β) =
-      ((adjR.comp adj₁).homEquiv M B₀) β ≫ e.inv.app B₀ := by
-    rw [← h, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
-  simp only [comp_homEquiv] at h'
-  exact h'
-
 end CategoryTheory.Adjunction

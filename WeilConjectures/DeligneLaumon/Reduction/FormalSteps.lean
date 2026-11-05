@@ -121,21 +121,6 @@ theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar [IsImmersion h] {w : ℝ}
     ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=
   hF.map (WeilSheaf.upperStar h) fun _ _ hG ↦ WeilSheaf.IsPunctuallyPureOfWeight.upperStar hG h
 
-/-- Pulling back along an immersion `h : W ⟶ X` carries Weil complexes mixed of weights at most
-`w` to Weil complexes mixed of weights at most `w`: `h^*` is exact, so it commutes with taking
-cohomology sheaves, and it preserves mixed upper bounds of sheaves
-(blueprint: `lem-zl-morphism-open-closed-reduction`, restriction).
-
-The pullback of Weil complexes is triangulated and carries a Weil sheaf placed in degree zero to
-its pullback placed in degree zero, so the sheaf case and the passage from sheaves to complexes
-(`AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.map_of_forall_toComplex`) apply. -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar [IsImmersion h] {w : ℝ}
-    {K : WeilComplex k₀ l X} (hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.upperStar h).obj K).IsMixedOfWeightsAtMost ι w :=
-  WeilComplex.IsMixedOfWeightsAtMost.map_of_forall_toComplex _ (fun _ G hG ↦
-    ((WeilComplex.isMixedOfWeightsAtMost_toComplex_iff _).2 (hG.upperStar h)).of_iso
-      (WeilComplex.upperStarToComplexIso h G).symm) hK
-
 end UpperStar
 
 /-! ### Passage from sheaves to complexes -/
@@ -412,40 +397,6 @@ theorem WeilSheaf.exists_exact_higherLowerShriek_of_openClosed {U X Z Y : Scheme
       (WeilComplex.derivedLowerShriek k₀ l (i ≫ f)).mapIso
         (WeilComplex.upperStarToComplexIso i F))
 
-/-- Compact support base change for the total direct image: for a pullback square
-```
-X' --- g ---> X
-|             |
-f'            f
-v             v
-Y' --- h ---> Y
-```
-of `k₀`-schemes, `h₀^*Rf₀!K ≅ Rf'₀!g₀^*K`, so that `h₀^*Rf₀!K` is mixed of weights at most `w`
-as soon as `Rf'₀!g₀^*K` is (blueprint: `prop-functor-package`, item 4, used in
-`lem-zl-morphism-open-closed-reduction`, part 2). -/
-theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPullback
-    {X Y X' Y' : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
-    [X'.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
-    {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
-    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    {f' : X' ⟶ Y'} [f'.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f']
-    [LocallyOfFiniteType f'] [QuasiCompact f']
-    [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y' ↘ Spec (CommRingCat.of k₀))]
-    {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}
-    [h.IsOver (Spec (CommRingCat.of k₀))] (hH : IsPullback g f' f h) {w : ℝ}
-    {K : WeilComplex k₀ l X}
-    (hK : ((WeilComplex.derivedLowerShriek k₀ l f').obj
-      ((WeilComplex.upperStar g).obj K)).IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.upperStar h).obj
-      ((WeilComplex.derivedLowerShriek k₀ l f).obj K)).IsMixedOfWeightsAtMost ι w := by
-  obtain ⟨e⟩ := WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hH
-  exact hK.of_iso (e.app K).symm
-
 /-- Applying `Rʳf₀!` to a short exact sequence `0 ⟶ F' ⟶ F ⟶ F'' ⟶ 0` of Weil sheaves gives an
 exact sequence `Rʳf₀!F' ⟶ Rʳf₀!F ⟶ Rʳf₀!F''`, a piece of the long exact sequence of the
 distinguished triangle `F' ⟶ F ⟶ F'' ⟶ F'[1]`
@@ -504,37 +455,6 @@ theorem HasDirectImageWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
     ((hU w _ (hF.upperStar j) r).of_iso e₁.symm)
     ((hZ w _ (hF.upperStar i) r).of_iso e₃.symm)).of_iso e₂
 
-/-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`. If the complex
-form of the direct-image weight assertion holds for `j ≫ f` and for `i ≫ f`, then it holds for
-`f` (blueprint: `lem-zl-morphism-open-closed-reduction`, part 1, complex form).
-
-The blueprint argument applies `Rf₀!` to the open–closed triangle of `K` and uses the extension
-stability of complex weights (`lem-zl-complex-extension`). -/
-theorem HasDirectImageComplexWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
-    [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
-    [Z.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
-    {j : U ⟶ X} [IsOpenImmersion j] [QuasiCompact j]
-    [j.IsOver (Spec (CommRingCat.of k₀))] {i : Z ⟶ X} [IsClosedImmersion i]
-    [i.IsOver (Spec (CommRingCat.of k₀))] {f : X ⟶ Y}
-    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
-    [QuasiCompact f]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    (hij : IsCompl (Set.range j.base) (Set.range i.base))
-    (hU : HasDirectImageComplexWeightBound k₀ ι (j ≫ f))
-    (hZ : HasDirectImageComplexWeightBound k₀ ι (i ≫ f)) :
-    HasDirectImageComplexWeightBound k₀ ι f := by
-  have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
-  have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
-  have := locallyOfFiniteType_over_of_isOver i (S := Spec (CommRingCat.of k₀))
-  intro w K hK
-  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
-    WeilComplex.exists_distTriang_derivedLowerShriek_openClosed j i hij f K
-  exact (WeilComplex.IsMixedOfWeightsAtMost.of_distTriang T hT
-    ((hU w _ (hK.upperStar j)).of_iso e₁.symm)
-    ((hZ w _ (hK.upperStar i)).of_iso e₃.symm)).of_iso e₂
-
 section Target
 
 variable {X Y V T X_V X_T : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -556,51 +476,6 @@ variable {X Y V T X_V X_T : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType f_T] [QuasiCompact f_T] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (T ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (T ↘ Spec (CommRingCat.of k₀))]
   {g_T : X_T ⟶ X} [g_T.IsOver (Spec (CommRingCat.of k₀))]
-
-/-- Let `j : V ⟶ Y` be an open immersion whose closed complement is `i : T ⟶ Y`, and let
-`f_V : X_V ⟶ V` and `f_T : X_T ⟶ T` be the base changes of `f : X ⟶ Y`. If the complex form of
-the direct-image weight assertion holds for `f_V` and for `f_T`, then it holds for `f`
-(blueprint: `lem-zl-morphism-open-closed-reduction`, part 2, complex form).
-
-By compact support base change the restrictions of `Rf₀!K` to `V` and `T` are mixed of weights
-at most `w`; extension by zero along `j` and the direct image along `i` preserve this, and the
-open–closed devissage `lem-zl-open-closed-weight` concludes. -/
-theorem HasDirectImageComplexWeightBound.of_openClosed_target
-    (hij : IsCompl (Set.range j.base) (Set.range i.base)) (H_V : IsPullback g_V f_V f j)
-    (H_T : IsPullback g_T f_T f i) (h_V : HasDirectImageComplexWeightBound k₀ ι f_V)
-    (h_T : HasDirectImageComplexWeightBound k₀ ι f_T) :
-    HasDirectImageComplexWeightBound k₀ ι f := by
-  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
-  have : IsOpenImmersion g_V := MorphismProperty.of_isPullback H_V.flip ‹_›
-  have : IsClosedImmersion g_T := MorphismProperty.of_isPullback H_T.flip ‹_›
-  intro w K hK
-  exact WeilComplex.IsMixedOfWeightsAtMost.of_openClosed hij
-    (.derivedLowerShriek_of_isOpenImmersion j
-      (.upperStar_derivedLowerShriek_of_isPullback H_V (h_V w _ (hK.upperStar g_V))))
-    (.derivedLowerStar_of_isClosedImmersion i
-      (.upperStar_derivedLowerShriek_of_isPullback H_T (h_T w _ (hK.upperStar g_T))))
-
-/-- Let `j : V ⟶ Y` be an open immersion whose closed complement is `i : T ⟶ Y`, and let
-`f_V : X_V ⟶ V` and `f_T : X_T ⟶ T` be the base changes of `f : X ⟶ Y`. If the direct-image
-weight assertion holds for `f_V` and for `f_T`, then it holds for `f`
-(blueprint: `lem-zl-morphism-open-closed-reduction`, part 2, sheaf form).
-
-By the passage from sheaves to complexes the complex form of the assertion holds for `f_V` and
-`f_T`; the complex form of the target reduction gives it for `f`, and it is applied to `F` placed
-in degree zero. -/
-theorem HasDirectImageWeightBound.of_openClosed_target
-    (hij : IsCompl (Set.range j.base) (Set.range i.base)) (H_V : IsPullback g_V f_V f j)
-    (H_T : IsPullback g_T f_T f i) (h_V : HasDirectImageWeightBound k₀ ι f_V)
-    (h_T : HasDirectImageWeightBound k₀ ι f_T) :
-    HasDirectImageWeightBound k₀ ι f := by
-  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
-  intro w F hF r
-  exact HasDirectImageComplexWeightBound.of_openClosed_target hij H_V H_T
-    (fun _ _ hK ↦ h_V.isMixedOfWeightsAtMost_derivedLowerShriek hK)
-    (fun _ _ hK ↦ h_T.isMixedOfWeightsAtMost_derivedLowerShriek hK) w _
-    ((WeilComplex.isMixedOfWeightsAtMost_toComplex_iff F).2 hF) r
 
 end Target
 

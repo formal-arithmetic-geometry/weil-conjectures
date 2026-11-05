@@ -40,16 +40,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- For a structure morphism `p` of finite type over a field `k`, `E_a(X)` is the set
-of points whose residue field has transcendence degree at most the nonnegative integer `a`.
-The algebra structure is the one induced by `p`, not an independently chosen algebra.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-support.md`
-(blueprint: def-kun-support). -/
-def Hom.pointsOfTrdegLE {k : Type u} [Field k] {X : Scheme.{u}}
-    (p : X ⟶ Spec (.of k)) [LocallyOfFiniteType p] [QuasiCompact p] (a : ℕ) : Set X :=
-  {x | letI := (p.residueFieldAlgebraMap x).toAlgebra
-    Algebra.trdeg k (X.residueField x) ≤ (a : Cardinal.{u})}
-
 /-- The support of an abelian etale sheaf is the set of points `x` admitting a geometric
 point over `x` with nonzero stalk. No independence-of-geometric-point lemma is used here.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-support.md`
@@ -59,15 +49,5 @@ def etaleSheafSupport {X : Scheme.{u}}
   {x | ∃ (Ω : Type u) (_ : Field Ω) (_ : IsAlgClosed Ω)
       (s : Spec (.of Ω) ⟶ X), s default = x ∧
         ¬ IsZero (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj F)}
-
-/-- The support of a derived abelian etale sheaf is the union, over every integer `q`,
-of the supports of its cohomology sheaves `H^q`.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-support.md`
-(blueprint: def-kun-support). -/
-def etaleComplexSupport {X : Scheme.{u}}
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) : Set X :=
-  ⋃ q : ℤ, etaleSheafSupport
-    ((DerivedCategory.homologyFunctor
-      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj K)
 
 end AlgebraicGeometry.Scheme

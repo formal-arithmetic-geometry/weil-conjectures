@@ -29,13 +29,4 @@ namespace CochainComplex
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{max u v}}
 
-/-- K-flatness against acyclic complexes, with the legacy name.
-Source: Stacks Project, Definition 06YN (blueprint: def-pc-kflat-complex). -/
-def IsAcyclicTensorKFlat
-    (K : CochainComplex
-      (SheafOfModules.{max u v} ((sheafCompose J
-          (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) :
-    Prop :=
-  IsKFlatTensor K
-
 end CochainComplex

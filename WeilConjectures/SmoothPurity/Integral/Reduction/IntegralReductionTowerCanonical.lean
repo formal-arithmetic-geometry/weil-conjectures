@@ -42,29 +42,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
 
-/-- The inverse system of the restricted termwise reductions of P, with transitions
-[id⊗ρ_n]. For a K-flat resolution of K this represents Res_n(K⊗ᴸA_{E,n+1}).
-Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower). -/
-noncomputable def canonicalIntegralReductionTower
-    (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
-    ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource l E Y) :=
-  Functor.ofOpSequence
-    (X := fun n ↦ DerivedCategory.Q.obj (unrestrictedTowerComplex l E Y n P))
-    (fun n ↦
-    DerivedCategory.Q.map (unrestrictedTowerTransition l E Y P n))
-
-/-- The map c_n=[q]⁻¹≫[γ_n] to the reduction at exponent n+1, where γ_n(x)=x⊗1.
-Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower). -/
-noncomputable def canonicalIntegralReductionTowerMap
-    {P K : CochainComplex (scalarReductionSource l E Y) ℤ}
-    (q : P ⟶ K)
-    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
-      (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (R := completedIntegralCommRingSheafUnrestricted l E Y) q) (n : ℕ) :
-    DerivedCategory.Q.obj K ⟶ (canonicalIntegralReductionTower l E Y P).obj (op n) :=
-  (unrestrictedTowerAugmentationIso l E Y q hq).inv ≫
-    DerivedCategory.Q.map (unrestrictedTowerUnit l E Y P n)
-
 end WeilConjectures

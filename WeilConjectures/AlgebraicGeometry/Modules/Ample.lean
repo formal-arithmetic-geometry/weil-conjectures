@@ -129,15 +129,6 @@ This is also blueprint `def-sc-hilbert-degree`. -/
 noncomputable def Scheme.Hom.degree (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℤ :=
   Δ_[1] ^[((topologicalKrullDim X).unbotD 0).toNat] (f.hilbertFunction M) 0
 
-/-- The degree as an explicit alternating sum of Euler characteristics:
-`∑_{i=0}^{g} (-1)^(g-i) (g choose i) χ(X, M^{⊗ i})`. -/
-lemma Scheme.Hom.degree_eq_sum (f : X ⟶ Spec (.of K)) (M : X.Modules) :
-    f.degree M = ∑ i ∈ Finset.range (((topologicalKrullDim X).unbotD 0).toNat + 1),
-      ((-1 : ℤ) ^ (((topologicalKrullDim X).unbotD 0).toNat - i) *
-        (((topologicalKrullDim X).unbotD 0).toNat.choose i : ℤ)) • f.hilbertFunction M i := by
-  rw [degree, fwdDiff_iter_eq_sum_shift]
-  simp
-
 /-- On a `K`-scheme of dimension one, the degree with respect to `M` is the cohomological
 degree `χ(M) - χ(𝒪_X)` of `AlgebraicGeometry.Scheme.Modules.degree`. -/
 lemma Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one (f : X ⟶ Spec (.of K))
@@ -298,24 +289,6 @@ instance finiteDimensional_H [IsProper (X ↘ Spec (.of K))] (M : X.Modules) [M.
   have := SheafOfModules.IsFiniteLocallyFree.isFinitePresentation M
   finiteDimensional_H_of_isProper M q
 
-/-- **The degree is additive over a finite disjoint union.** If a noetherian scheme `X` of
-finite dimension is the disjoint union of finitely many open subschemes `U i`, then
-`deg M = ∑ᵢ deg (M|_{U i})`, provided the cohomology of `M` and `𝒪_X` is finite-dimensional. -/
-theorem degree_eq_sum_of_pairwise_disjoint [IsNoetherian X] {n : ℕ}
-    (hn : topologicalKrullDim X ≤ n) {ι : Type*}
-    [Fintype ι] (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤)
-    (M : X.Modules) [∀ q, FiniteDimensional K (M.H q)]
-    [∀ q, FiniteDimensional K ((𝟙_ X.Modules).H q)] :
-    M.degree K = ∑ i,
-      letI : (U i).toScheme.Over (Spec (.of K)) := ⟨(U i).ι ≫ X ↘ Spec (.of K)⟩
-      ((Scheme.Modules.pullback (U i).ι).obj M).degree K := by
-  let (i : ι) : (U i).toScheme.Over (Spec (.of K)) := ⟨(U i).ι ≫ X ↘ Spec (.of K)⟩
-  simp only [degree, Finset.sum_sub_distrib]
-  rw [eulerChar_eq_sum_of_pairwise_disjoint K hn U hU hcover M]
-  congr 1
-  exact (eulerChar_eq_sum_of_pairwise_disjoint K hn U hU hcover (𝟙_ X.Modules)).trans
-    (Finset.sum_congr rfl fun i _ ↦ eulerChar_congr K (pullbackObjUnitIso _))
-
 /-- **The degree is additive over a finite disjoint union**, for a quasi-coherent module on a
 quasi-compact separated scheme. This is
 `AlgebraicGeometry.Scheme.Modules.degree_eq_sum_of_pairwise_disjoint` without the appeal to
@@ -348,114 +321,6 @@ theorem degree_eq_zero_of_topologicalKrullDim_le_zero [IsLocallyNoetherian X] [C
 end Additivity
 
 end Scheme.Modules
-
-/-- **Very ampleness descends along a field extension.** Let `X` be proper over a field `k`, let
-`M` be an invertible `𝒪_X`-module and `K/k` a field extension such that `M_K` is very ample on
-`X_K`. Then `M` is very ample. The closed immersion `X_K ⟶ ℙ(n; K)` is given by finitely many
-sections of `M_K`, which lie in the `K`-span of finitely many sections of `M`, since
-`H⁰(X_K, M_K) = H⁰(X, M) ⊗_k K`; these define a morphism `X ⟶ ℙ(V)` whose base change to `K`
-is a closed immersion, hence which is a closed immersion by fpqc descent.
-
-(blueprint: `lem-pc-very-ample-descends`) -/
-theorem IsVeryAmple.of_pullback {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) [IsProper f]
-    (K : Type u) [Field K] [Algebra k K] (M : X.Modules) [M.IsInvertible]
-    (h : IsVeryAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
-      ((Scheme.Modules.pullback
-        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M)) :
-    IsVeryAmple f M := by
-  classical
-  set g := Spec.map (CommRingCat.ofHom (algebraMap k K))
-  set φ := pullback.fst f g
-  set p := pullback.snd f g
-  set MK := (Scheme.Modules.pullback φ).obj M
-  obtain ⟨n, i', hn, hi', hi'f, ⟨e⟩⟩ := h
-  have := Fintype.ofFinite n
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
-  have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible M
-  have hsurj : AlgebraicGeometry.Surjective g := ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
-  -- the sections `s' l = i'^* T_l` of `M_K` defining `i'`
-  have hle : (⊤ : (Limits.pullback f g).Opens) ≤ i' ⁻¹ᵁ ⊤ := fun _ _ ↦ trivial
-  let s' (l : n) : Γ(MK, ⊤) := MK.presheaf.map (homOfLE hle).op
-    (e.hom.app _ (Scheme.Modules.pullbackSection i' (ProjectiveSpace.twistOneSection n _ l)))
-  have hs' (l : n) : e.hom.app _
-      (Scheme.Modules.pullbackSection i' (ProjectiveSpace.twistOneSection n _ l)) =
-      MK.presheaf.map (homOfLE (le_top : i' ⁻¹ᵁ ⊤ ≤ ⊤)).op (s' l) := by
-    rw [Scheme.Modules.presheaf_map_homOfLE_map_homOfLE, Scheme.Modules.presheaf_map_id_apply]
-  -- they are `K`-linear combinations of pullbacks of sections `u r` of `M`
-  choose N c t ht using fun l ↦
-    Scheme.Modules.exists_eq_sum_smul_pullbackTopSection f (K := K) M (s' l)
-  let m : Type u := Σ l : n, ULift.{u} (Fin (N l))
-  let u : m → Γ(M, ⊤) := fun r ↦ t r.1 r.2.down
-  let C : n → m → Γ(Spec (.of K), ⊤) := fun l r ↦
-    if r.1 = l then (Scheme.ΓSpecIso (.of K)).inv (c r.1 r.2.down) else 0
-  have hv (l : n) : s' l = ∑ r, p.appTop (C l r) • Scheme.Modules.pullbackTopSection φ (u r) := by
-    rw [ht l, Fintype.sum_sigma, Finset.sum_eq_single l]
-    · exact Fintype.sum_equiv Equiv.ulift.symm _ _ fun q ↦ by simp [C, u]; rfl
-    · intro l' _ hl'
-      simp [C, hl']
-    · simp
-  -- the `u r` generate `M`, since the `s' l` generate `M_K`
-  have hU : ⨆ r, Scheme.Modules.generatingLocus (u r) = ⊤ := by
-    refine eq_top_iff.mpr fun x _ ↦ ?_
-    obtain ⟨y, rfl⟩ := φ.surjective x
-    obtain ⟨l, hl⟩ := Opens.mem_iSup.mp
-      ((ProjectiveSpace.iSup_standardOpen n _).ge (Set.mem_univ (i' y)))
-    have hgen : Scheme.Modules.GeneratesAt (s' l) y := by
-      rw [← Scheme.Modules.mem_generatingLocus,
-        ProjectiveSpace.generatingLocus_eq_preimage_standardOpen e.hom hs' l]
-      exact hl
-    rw [hv l] at hgen
-    obtain ⟨r, -, hr⟩ :=
-      Scheme.Modules.exists_generatesAt_of_generatesAt_sum φ Finset.univ _ u hgen
-    exact Opens.mem_iSup.mpr ⟨r, hr⟩
-  -- the morphism `j : X ⟶ ℙ(m; k)` given by the `u r`
-  obtain ⟨j, hj, εj, hεj_iso, hεj⟩ := ProjectiveSpace.exists_hom_twistRestrict u
-    (fun r ↦ Scheme.Modules.generatingLocus (u r))
-    (fun r ↦ Scheme.Modules.isFreeGenerator_generatingLocus (u r)) f hU
-  -- the morphism `ψ : X_K ⟶ ℙ(m; K)` given by the `φ^* u r`
-  have hU' : ⨆ r, Scheme.Modules.generatingLocus
-      (Scheme.Modules.pullbackTopSection φ (u r)) = ⊤ := eq_top_iff.mpr fun y _ ↦ by
-    obtain ⟨r, hr⟩ := Opens.mem_iSup.mp (hU.ge (Set.mem_univ (φ y)))
-    exact Opens.mem_iSup.mpr ⟨r, Scheme.Modules.preimage_generatingLocus_le φ (u r) hr⟩
-  obtain ⟨ψ, hψ, εψ, hεψ_iso, hεψ⟩ := ProjectiveSpace.exists_hom_twistRestrict
-    (fun r ↦ Scheme.Modules.pullbackTopSection φ (u r))
-    (fun r ↦ Scheme.Modules.generatingLocus (Scheme.Modules.pullbackTopSection φ (u r)))
-    (fun r ↦ Scheme.Modules.isFreeGenerator_generatingLocus _) p hU'
-  -- `ψ` is the base change of `j`
-  have hψj : ψ ≫ ProjectiveSpace.map m g = φ ≫ j :=
-    ProjectiveSpace.map_comp_eq_of_pullbackTopSection g φ εj hεj εψ hεψ
-      (by rw [reassoc_of% hψ, hj, pullback.condition])
-  have hpb : IsPullback ψ φ (ProjectiveSpace.map m g) j :=
-    IsPullback.of_right (h₂₂ := ℙ(m; Spec (.of k)) ↘ Spec (.of k))
-      (h₁₂ := ℙ(m; Spec (.of K)) ↘ Spec (.of K)) (v₁₃ := g)
-      (by rw [hψ, hj]; exact (IsPullback.of_hasPullback f g).flip) hψj
-      (ProjectiveSpace.isPullback_map m g).flip
-  -- `ψ` is a monomorphism, since `i'` is, hence a closed immersion
-  have : Mono i' := ((IsClosedImmersion.iff_isFinite_and_mono i').mp hi').2
-  have hmono : Mono ψ := ProjectiveSpace.mono_of_eq_sum_smul εψ hεψ e.hom hs' hψ hv hi'f
-  have : LocallyOfFiniteType (ψ ≫ ℙ(m; Spec (.of K)) ↘ Spec (.of K)) := by
-    rw [hψ]
-    infer_instance
-  have : LocallyOfFiniteType ψ := locallyOfFiniteType_of_comp ψ (ℙ(m; Spec (.of K)) ↘ Spec (.of K))
-  have : IsProper (ψ ≫ ℙ(m; Spec (.of K)) ↘ Spec (.of K)) := by
-    rw [hψ]
-    infer_instance
-  have : IsProper ψ := IsProper.of_comp ψ (ℙ(m; Spec (.of K)) ↘ Spec (.of K))
-  have : IsFinite ψ := IsFinite.of_isProper_of_locallyQuasiFinite ψ
-  have hψci : IsClosedImmersion ψ :=
-    (IsClosedImmersion.iff_isFinite_and_mono ψ).mpr ⟨inferInstance, hmono⟩
-  -- so `j` is a closed immersion by fpqc descent
-  have := IsClosedImmersion.descendsAlong_surjective_inf_flat_inf_quasicompact.{u}
-  have hflat : Flat g := Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
-  have hQ : (@AlgebraicGeometry.Surjective ⊓ @Flat ⊓ @QuasiCompact :
-      MorphismProperty Scheme.{u})
-      (ProjectiveSpace.map m g) :=
-    ⟨⟨MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map m g).flip hsurj,
-      MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map m g).flip hflat⟩,
-      MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map m g).flip inferInstance⟩
-  have hjci : IsClosedImmersion j := MorphismProperty.of_isPullback_of_descendsAlong
-    (P := @IsClosedImmersion) hpb hQ hψci
-  exact ⟨m, j, inferInstance, hjci, hj, ⟨asIso εj⟩⟩
 
 open scoped Scheme.Modules in
 /-- **The complement of an ample effective divisor is affine.** Let `X` be proper over a field
@@ -638,21 +503,6 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
   have := topologicalKrullDim_zero_of_discreteTopology X
   rw [hdim] at this
   exact absurd this (by decide)
-
-/-- **An ample module on a proper curve is not trivial.** Let `K` be algebraically closed, `X` a
-proper curve over `K` and `L` an ample invertible `𝒪_X`-module. Then `L ≇ 𝒪_X`: `L` has positive
-degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`), whereas `𝒪_X` has degree `0`.
-
-This is the last assertion of blueprint `lem-sc-ample-positive-degree`. -/
-theorem IsAmple.isEmpty_iso_unit [IsAlgClosed K] {f : X ⟶ Spec (.of K)} [IsProper f]
-    (hdim : topologicalKrullDim X = 1) {L : X.Modules} (hL : IsAmple f L) :
-    IsEmpty (L ≅ 𝟙_ X.Modules) := by
-  let : X.Over (Spec (.of K)) := ⟨f⟩
-  refine ⟨fun e ↦ ?_⟩
-  have := f.degree_pos_of_isAmple hdim L hL
-  rw [Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one f hdim,
-    Scheme.Modules.degree_congr K e] at this
-  exact this.ne' (Scheme.Modules.degree_unit K)
 
 /-- **No positive tensor power of an ample module on a proper curve is trivial.** Let `K` be
 algebraically closed, `X` a proper curve over `K` and `L` an ample invertible `𝒪_X`-module. For

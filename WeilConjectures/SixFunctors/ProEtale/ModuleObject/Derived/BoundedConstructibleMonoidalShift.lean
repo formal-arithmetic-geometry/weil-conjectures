@@ -90,30 +90,6 @@ instance commShift_boundedConstructible_curriedTensor_flip_map {K K' :
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))) (h := .int) g.hom
   exact ObjectProperty.commShift_curriedTensor_flip_map _ g
 
-instance commShift_boundedConstructible_associatorNatTrans₁ (K L :
-    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    NatTrans.CommShift (associatorNatTrans₁ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) K L) ℤ :=
-        by
-  let := commShiftTensorLeftFamily (Profinite.padicAlgClRingObj ℓ) X.left
-  let := commShiftTensorRightFamily (Profinite.padicAlgClRingObj ℓ) X.left
-  have : NatTrans.CommShift (associatorNatTrans₁ (DerivedCategory (Mod
-      (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj
-          (Profinite.padicAlgClRingObj ℓ) X.left))) K.obj L.obj)
-      ℤ := inferInstance
-  exact ObjectProperty.commShift_associatorNatTrans₁ _ K L
-
-instance commShift_boundedConstructible_associatorNatTrans₂ (K L :
-    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    NatTrans.CommShift (associatorNatTrans₂ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) K L) ℤ :=
-        by
-  let := commShiftTensorLeftFamily (Profinite.padicAlgClRingObj ℓ) X.left
-  let := commShiftTensorRightFamily (Profinite.padicAlgClRingObj ℓ) X.left
-  have : NatTrans.CommShift (associatorNatTrans₂ (DerivedCategory (Mod
-      (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj
-          (Profinite.padicAlgClRingObj ℓ) X.left))) K.obj L.obj)
-      ℤ := inferInstance
-  exact ObjectProperty.commShift_associatorNatTrans₂ _ K L
-
 instance commShift_boundedConstructible_leftUnitorNatTrans :
     NatTrans.CommShift (leftUnitorNatTrans (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ℤ := by
   let := commShiftTensorLeftFamily (Profinite.padicAlgClRingObj ℓ) X.left

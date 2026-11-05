@@ -29,12 +29,6 @@ namespace IsLocalization.Away
 
 variable {R : Type*} [CommRing R] {e : R}
 
-/-- The quotient by the ideal `(1 - e)` is the localization away from the idempotent `e`. -/
-theorem quotient_span_one_sub (he : IsIdempotentElem e) :
-    IsLocalization.Away e (R ⧸ Ideal.span {1 - e}) :=
-  IsLocalization.away_of_isIdempotentElem he
-    (by rw [Ideal.Quotient.algebraMap_eq, Ideal.mk_ker]) Ideal.Quotient.mk_surjective
-
 /-- The quotient by the ideal `(1 - e)` is a finite module for an idempotent `e`, over any
 ring of scalars. -/
 theorem _root_.Module.Finite.quotient_span_one_sub (S : Type*) [CommRing S] [Algebra S R]

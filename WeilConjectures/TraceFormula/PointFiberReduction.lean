@@ -87,16 +87,6 @@ noncomputable def pointSectionsComapAddEquiv (M : PointModIntegersModPow ℓ k E
       (Scheme.ProEt.isTerminalMkId (point k).left) M.X)
 
 omit [IsSepClosed k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- The sections over the point of a morphism `𝒪̲_E ⟶ M` are its value at the unit section. -/
-lemma pointSectionsComapAddEquiv_apply (M : PointModIntegersModPow ℓ k E n)
-    (x : 𝟙_ (PointModIntegral ℓ k E) ⟶
-      (Mod.comap (integersModPowReduction (point k).left ℓ E.1 n)).obj M) :
-    pointSectionsComapAddEquiv ℓ k E n M x =
-      Sheaf.unitHomEval (J := Scheme.ProEt.topology (point k).left) (pointProEtTerminal k)
-        (η[condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) (point k).left] ≫ x.hom) :=
-  rfl
-
-omit [IsSepClosed k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- The action of `a ∈ 𝒪_E` on the sections over the point, unfolded. -/
 lemma pointSectionsComapAddEquiv_smul_eq (M : PointModIntegersModPow ℓ k E n)
     (a : Shrink.{u + 1} (integers ℓ E.1))

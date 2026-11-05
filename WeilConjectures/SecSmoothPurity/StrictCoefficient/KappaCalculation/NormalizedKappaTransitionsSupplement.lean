@@ -23,7 +23,6 @@ inverse contracts the coefficient through the recorded ring square.
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
@@ -79,58 +78,6 @@ private theorem extension_map {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
       (((extensionAdjunction a).unit.app M).val.app U x) at h
   rw [extension_unit, extension_unit] at h
   rw [extension_smul a M, extension_smul a N, map_smul, h]
-
-private theorem extension_hom_ext {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
-    (M : Modules A) (N : Modules B) {f g : (extensionFunctor a).obj M ⟶ N}
-    (h : ∀ U x, f.val.app U (extensionTmul a M U 1 x) =
-      g.val.app U (extensionTmul a M U 1 x)) : f = g := by
-  apply ((extensionAdjunction a).homEquiv M N).injective
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  apply ModuleCat.hom_ext
-  ext x
-  change f.val.app U (((extensionAdjunction a).unit.app M).val.app U x) =
-    g.val.app U (((extensionAdjunction a).unit.app M).val.app U x)
-  simpa only [extension_unit] using h U x
-
-private theorem scalarComp_unit {A B H : Sheaf J CommRingCat.{w}}
-    (a : A ⟶ B) (b : B ⟶ H) (c : A ⟶ H) (hc : c = a ≫ b)
-    (P : Complex A) (p : ℤ) (U : Cᵒᵖ) (x : (P.X p).val.obj U) :
-    (((scalarComp a b c hc).hom.app P).f p).val.app U
-      (extensionTmul b ((extensionFunctor a).obj (P.X p)) U 1
-        (extensionTmul a (P.X p) U 1 x)) = extensionTmul c (P.X p) U 1 x := by
-  have h := Adjunction.homEquiv_leftAdjointUniq_hom_app
-    (((extensionAdjunction a).comp (extensionAdjunction b)).ofNatIsoRight
-      (SheafOfModules.systemScalarRestrictionComposition a b c hc))
-    (extensionAdjunction c) (P.X p)
-  rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv] at h
-  have h' := congrArg (fun z ↦ z.val.app U x) h
-  change (((extensionAdjunction a).homEquiv (P.X p) _
-    ((extensionAdjunction b).homEquiv _ _
-      ((Adjunction.leftAdjointUniq
-        (((extensionAdjunction a).comp (extensionAdjunction b)).ofNatIsoRight
-          (SheafOfModules.systemScalarRestrictionComposition a b c hc))
-        (extensionAdjunction c)).hom.app (P.X p)))).val.app U x) =
-    ((extensionAdjunction c).unit.app (P.X p)).val.app U x at h'
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit] at h'
-  unfold scalarComp
-  dsimp only [NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex]
-  change ((Adjunction.leftAdjointUniq
-    (((extensionAdjunction a).comp (extensionAdjunction b)).ofNatIsoRight
-      (SheafOfModules.systemScalarRestrictionComposition a b c hc))
-    (extensionAdjunction c)).hom.app (P.X p)).val.app U
-    (((extensionAdjunction b).unit.app ((extensionFunctor a).obj (P.X p))).val.app U
-      (((extensionAdjunction a).unit.app (P.X p)).val.app U x)) =
-    ((extensionAdjunction c).unit.app (P.X p)).val.app U x at h'
-  rw [extension_unit, extension_unit, extension_unit] at h'
-  change ((Adjunction.leftAdjointUniq
-    (((extensionAdjunction a).comp (extensionAdjunction b)).ofNatIsoRight
-      (SheafOfModules.systemScalarRestrictionComposition a b c hc))
-    (extensionAdjunction c)).hom.app (P.X p)).val.app U
-      (extensionTmul b ((extensionFunctor a).obj (P.X p)) U 1
-        (extensionTmul a (P.X p) U 1 x)) = extensionTmul c (P.X p) U 1 x
-  exact h'
 
 attribute [local irreducible] extensionFunctor Comparisons.pullArrow squareArrow
 

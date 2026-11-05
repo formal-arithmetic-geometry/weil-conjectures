@@ -40,13 +40,6 @@ variable {S X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
   [f.IsOver S] [g.IsOver S] [f'.IsOver S] [g'.IsOver S]
 
-/-- A commutative square of morphisms over a scheme, bundled in its over category. -/
-theorem _root_.CategoryTheory.CommSq.asOver (sq : CommSq g' f' f g) (S : Scheme.{u})
-    [X.Over S] [Y.Over S] [X'.Over S] [Y'.Over S]
-    [f.IsOver S] [g.IsOver S] [f'.IsOver S] [g'.IsOver S] :
-    CommSq (g'.asOver S) (f'.asOver S) (f.asOver S) (g.asOver S) :=
-  ⟨Over.OverMorphism.ext sq.w⟩
-
 /-- A cartesian square of morphisms over a scheme, bundled in its over category. -/
 theorem _root_.CategoryTheory.IsPullback.asOver (sq : IsPullback g' f' f g) (S : Scheme.{u})
     [X.Over S] [Y.Over S] [X'.Over S] [Y'.Over S]

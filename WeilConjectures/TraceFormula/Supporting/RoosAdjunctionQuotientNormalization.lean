@@ -28,7 +28,6 @@ universes remain independent. All categories are ordinary unbounded derived cate
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -52,80 +51,6 @@ variable (l : ℕ) [Fact l.Prime] (F : Type u) [Field F]
   {S : CoefficientDerivedSystemCalculus l F W}
   {M : CompletionUnit.OrdinaryModel l F W}
   (D : CompletionUnit.DerivedModel l F W S M)
-
-private theorem limitUnit_isIso
-    (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l F W) ℤ) [I.IsKInjective] :
-    IsIso (D.limitUnit.app I) := by
-  have : IsIso (D.limitUnit.app I ≫
-      ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l F W) ⥤
-        scalarReductionSource l F W).rightDerivedFunctorObjQIso I).hom) := by
-    rw [D.limitUnit_normalization]
-    infer_instance
-  exact IsIso.of_isIso_comp_right _
-    ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l F W) ⥤
-      scalarReductionSource l F W).rightDerivedFunctorObjQIso I).hom
-
-include D in
-private theorem inclusion_quasiIso
-    (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l F W) ℤ) [I.IsKInjective] :
-    QuasiIso (roosι I) := by
-  have := limitUnit_isIso l F W D I
-  have : IsIso (DerivedCategory.Q.map (roosι I) ≫ D.roos.hom.app I) := by
-    rw [D.roos_normalization]
-    infer_instance
-  have : IsIso (DerivedCategory.Q.map (roosι I)) :=
-    IsIso.of_isIso_comp_right _ (D.roos.hom.app I)
-  exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp this
-
-private theorem limitUnit_projection
-    (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l F W) ℤ) [I.IsKInjective]
-    (n : ℕ) :
-    D.limitUnit.app I ≫ (coefficientConstantTowerProjection l F W n).app
-        (DerivedCategory.Q.obj I) ≫
-      (coefficientConstantTowerEvaluationFactors l F W n).hom.app I =
-      DerivedCategory.Q.map (limit.π I.asFunctor (op n)) := by
-  have hp := (coefficientConstantTowerProjection_exists l F W n).choose_spec.1 I
-  change (coefficientConstantTowerProjection l F W n).app _ ≫ _ = _ at hp
-  rw [hp, ← Category.assoc, D.limitUnit_normalization,
-    ← DerivedCategory.Q.map_comp]
-  congr 1
-  apply (cancel_epi (D.towerLimitComparison.hom.app I)).1
-  rw [Iso.hom_inv_id_app_assoc]
-  apply HomologicalComplex.hom_ext
-  intro p
-  exact (D.towerLimitComparison_projection I n p).symm
-
-private theorem roos_projection
-    (X : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l F W) ℤ) (n : ℕ) :
-    D.roos.hom.app X ≫ (coefficientConstantTowerProjection l F W n).app
-        (DerivedCategory.Q.obj X) ≫
-      (coefficientConstantTowerEvaluationFactors l F W n).hom.app X =
-      DerivedCategory.Q.map (roosEval X n) := by
-  have hi (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l F W) ℤ)
-      [I.IsKInjective] :
-      D.roos.hom.app I ≫ (coefficientConstantTowerProjection l F W n).app
-          (DerivedCategory.Q.obj I) ≫
-        (coefficientConstantTowerEvaluationFactors l F W n).hom.app I =
-        DerivedCategory.Q.map (roosEval I n) := by
-    have := inclusion_quasiIso l F W D I
-    apply (cancel_epi (DerivedCategory.Q.map (roosι I))).1
-    rw [← Category.assoc, ← Category.assoc, D.roos_normalization, Category.assoc,
-      limitUnit_projection, ← DerivedCategory.Q.map_comp, roosι_eval]
-  obtain ⟨I, hI, q, _, hq⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective X
-  have : QuasiIso q := hq
-  let V := (evaluation ℕᵒᵖ (scalarReductionSource l F W)).obj (op n)
-  apply (cancel_mono (DerivedCategory.Q.map
-    ((V.mapHomologicalComplex (.up ℤ)).map q))).1
-  have hv := V.mapDerivedCategoryFactors.hom.naturality q
-  have hp := (coefficientConstantTowerProjection l F W n).naturality
-    (DerivedCategory.Q.map q)
-  have hr := D.roos.hom.naturality q
-  dsimp only [Functor.comp_map] at hv hr
-  simp only [Category.assoc]
-  rw [← hv]
-  erw [← reassoc_of% hp, ← reassoc_of% hr, hi I]
-  rw [← DerivedCategory.Q.map_comp, roosEval_natural, DerivedCategory.Q.map_comp]
-  rfl
 
 end Normalization
 

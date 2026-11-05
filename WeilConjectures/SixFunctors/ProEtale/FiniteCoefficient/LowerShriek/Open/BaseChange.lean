@@ -116,17 +116,6 @@ noncomputable def openImmersionLowerShriekBaseChangeIso (hsq : IsPullback g' j' 
   have := isIso_openImmersionLowerShriekBaseChangeMap A hsq
   asIso (openImmersionLowerShriekBaseChangeMap A hsq.toCommSq)
 
-/-- **Base change for the pro-étale extension by zero on complexes**: for a cartesian square
-with `j`, `j'` open immersions, the isomorphism `D(j'_!) D(g'^*) ≅ D(g''^*) D(j_!)` of functors
-`D(U_proét) ⥤ D(Z'_proét)` induced degreewise by
-`AlgebraicGeometry.ProEtale.openImmersionLowerShriekBaseChangeIso`, all four functors being
-exact (blueprint `lem-cbc-proetale-extension-zero-base-change`). -/
-noncomputable def derivedOpenImmersionLowerShriekBaseChangeIso (hsq : IsPullback g' j' j g'') :
-    D((g')^*[A]) ⋙ D((j')_!open[A]) ≅ D((j)_!open[A]) ⋙ D((g'')^*[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekBaseChangeIso A hsq) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
-
 end ProEtale
 
 end AlgebraicGeometry

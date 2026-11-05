@@ -242,48 +242,4 @@ theorem isFiniteLocallyFree_pushforward (g : X ⟶ Y) [IsFinite g] [Flat g]
   exact ⟨.trans Γ(Y, V) Γ((pushforward g).obj ℱ, V) Γ(X, g ⁻¹ᵁ V),
     .trans Γ(Y, V) Γ(X, g ⁻¹ᵁ V) Γ((pushforward g).obj ℱ, V)⟩
 
-/-- **The pushforward of the structure sheaf along a finite locally free morphism.** If
-`g : X ⟶ Y` is finite locally free of degree `d`, then `g_* 𝒪_X` is a finite locally free
-`𝒪_Y`-module of rank `d`. Over an affine open `Spec A` of `Y` it is the `𝒪`-module associated with
-the finite, flat and finitely presented, hence projective, `A`-module `B = Γ(X, g ⁻¹ᵁ Spec A)`, and
-its rank at a point `y` is the dimension `d` of the fibre `B ⊗_A κ(y) = Γ(X_y, 𝒪_{X_y})`.
-
-This is the first half of `lem-pc-flf-properties` (the second half, on the fibres, is
-`AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_tensorProduct_fiber`), and the pointer remark to
-the properties of finite locally free morphisms.
-
-(blueprint: `lem-pc-flf-properties`, `rem-ptr-pc-finite-locally-free-11`) -/
-theorem isFiniteLocallyFreeOfRank_pushforward_unit (g : X ⟶ Y) (d : ℕ)
-    [g.IsFiniteLocallyFreeOfDegree d] :
-    ((pushforward g).obj (𝟙_ X.Modules)).IsFiniteLocallyFreeOfRank d := by
-  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
-  have : ((pushforward g).obj (𝟙_ X.Modules)).IsQuasicoherent :=
-    isQuasicoherent_pushforward_of_isAffineHom g _
-  refine isFiniteLocallyFreeOfRank_of_isAffineOpen _ fun V hV ↦ ?_
-  have hV' : IsAffineOpen (g ⁻¹ᵁ V) := hV.preimage g
-  let := (g.app V).hom.toAlgebra
-  have : Module.Finite Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := g.finite_app V hV
-  have : Algebra.FinitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := by
-    have := g.finitePresentation_appLE hV hV' le_rfl
-    rwa [← Hom.app_eq_appLE] at this
-  have hfl : Module.Flat Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := by
-    have := g.flat_appLE hV hV' le_rfl
-    rwa [← Hom.app_eq_appLE] at this
-  have hfp : Module.FinitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V) :=
-    .of_finite_of_finitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V)
-  -- `Spec Γ(X, g ⁻¹ᵁ V) ⟶ Spec Γ(Y, V)` is the base change of `g` along `Spec Γ(Y, V) ⟶ Y`.
-  have hpb : IsPullback hV'.fromSpec
-      (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, V) Γ(X, g ⁻¹ᵁ V)))) g hV.fromSpec := by
-    refine (IsOpenImmersion.isPullback _ _ _ _ ?_ ?_).flip
-    · rw [← IsAffineOpen.SpecMap_appLE_fromSpec g hV hV' le_rfl, ← Hom.app_eq_appLE]
-      rfl
-    · rw [hV.opensRange_fromSpec, hV'.opensRange_fromSpec]
-  refine ⟨hfp, hfl, fun p ↦ ?_⟩
-  calc Module.rankAtStalk Γ(X, g ⁻¹ᵁ V) p = p.asIdeal.fiberDegree Γ(X, g ⁻¹ᵁ V) :=
-        Module.rankAtStalk_eq p
-    _ = (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, V) Γ(X, g ⁻¹ᵁ V)))).fiberDegree p :=
-        (Hom.fiberDegree_SpecMap _ _ p).symm
-    _ = g.fiberDegree (hV.fromSpec p) := g.fiberDegree_of_isPullback hpb p
-    _ = d := Hom.IsFiniteLocallyFreeOfDegree.fiberDegree_eq _
-
 end AlgebraicGeometry.Scheme.Modules

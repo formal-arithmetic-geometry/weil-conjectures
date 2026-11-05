@@ -50,31 +50,6 @@ def pfBaseChange (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z) (w 
     TwoSquare (F.pf r) (F.pb t) (F.pb b) (F.pf l) :=
   mateEquiv (F.adj r) (F.adj l) (F.sqIso t l r b w).inv
 
-/-- The inverse of the square isomorphism of the square `𝟙 ≫ j = j ≫ 𝟙`. -/
-lemma sqIso_id_horiz_inv {X Y : 𝒞} (j : X ⟶ Y) (w : 𝟙 X ≫ j = j ≫ 𝟙 Y) :
-    (F.sqIso (𝟙 X) j j (𝟙 Y) w).inv =
-      ((TwoSquare.mk (𝟭 _) (F.pb j) (F.pb j) (𝟭 _)
-        ((Functor.leftUnitor _).hom ≫ (Functor.rightUnitor _).inv)).whiskerTop
-          (F.pbId Y).hom).whiskerBottom (F.pbId X).inv := by
-  apply Iso.inv_ext
-  rw [sqIso_id_horiz_hom]
-  ext M
-  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, NatTrans.comp_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
-    Functor.rightUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
-    Category.id_comp, Category.assoc, NatTrans.id_app, Functor.comp_obj, Functor.id_obj]
-  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
-
-/-- The base change map of the pushforwards of the square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up
-to `(𝟙)^* ≅ 𝟭`. -/
-lemma pfBaseChange_id_horiz {X Y : 𝒞} (j : X ⟶ Y) (w : 𝟙 X ≫ j = j ≫ 𝟙 Y) :
-    F.pfBaseChange (𝟙 X) j j (𝟙 Y) w =
-      ((TwoSquare.mk (F.pf j) (𝟭 _) (𝟭 _) (F.pf j)
-        ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerRight
-          (F.pbId Y).hom).whiskerLeft (F.pbId X).inv := by
-  rw [pfBaseChange, sqIso_id_horiz_inv, mateEquiv_whiskerTop_whiskerBottom, mateEquiv_unitors]
-
 /-- **Horizontal pasting of the inverses of square isomorphisms.**
 ```
 U'' --t₁--> U' --t₂--> U
@@ -174,7 +149,6 @@ lemma pfBaseChange_paste_vert {U' U W' W Z' Z : 𝒞} (t : U' ⟶ U) (h : W' ⟶
     mateEquiv_conjugateEquiv_vcomp _ ((F.adj l₂).comp (F.adj l₁)),
     conjugateEquiv_mateEquiv_vcomp _ ((F.adj r₂).comp (F.adj r₁)), mateEquiv_hcomp, hP, hP']
   rfl
-
 
 end PushforwardBaseChange
 

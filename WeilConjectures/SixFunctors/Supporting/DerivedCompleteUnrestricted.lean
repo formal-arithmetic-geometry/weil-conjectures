@@ -30,15 +30,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t})
 
-/-- Derived completeness of the existing completed coefficient sheaf, with no
-finite-field condition. The finite-field datum is an auxiliary presentation only:
-all the completed rings, reductions and augmentation maps in IsDerivedComplete
-ignore it. Such a datum with characteristic different from l always exists (use
-F_2 if l differs from 2 and F_3 otherwise), so this existential changes no condition
-on K. Source: Bhatt--Scholze, Definition 3.5.2, p. 24
-(blueprint: def-weil-derived-complete). -/
-noncomputable def IsDerivedCompleteUnrestricted
-    (K : DerivedCategory (integralTowerModules.{t, u} l E Y)) : Prop :=
-  ∃ (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p), IsDerivedComplete l E Y D hl K
-
 end WeilConjectures

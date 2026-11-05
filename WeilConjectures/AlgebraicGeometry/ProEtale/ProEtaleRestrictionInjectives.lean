@@ -53,21 +53,4 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The sectionwise comparison evaluates restriction at the identity of `W`.
-Its components are the sheaf maps along the canonical identity-underlying-scheme
-isomorphism from `W` to the image of that terminal object under composition with `W.hom`.
-Source: blueprint node `lem-weil-pbc-proetale-restriction-injectives`, proof step 4;
-Stacks Project, `proetale.tex`, small-site localization and derived sections
-(blueprint: lem-weil-pbc-proetale-restriction-injectives). -/
-noncomputable def proEtaleLocalizationSectionsIso {X : Scheme.{u}} (W : X.ProEt)
-    (Λ : Type (u + 1)) [Ring Λ] :
-    ProEtale.sectionsFunctor (ModuleCat.{u + 1} Λ) W ≅
-      ProEtale.localizationRestriction (ModuleCat.{u + 1} Λ) W.hom W.prop ⋙
-        ProEtale.globalSectionsFunctor (ModuleCat.{u + 1} Λ) W.left :=
-  let e : W ≅ (MorphismProperty.Over.map ⊤ W.prop).obj
-      (MorphismProperty.Over.mk ⊤ (𝟙 W.left) (MorphismProperty.id_mem _ W.left)) :=
-    MorphismProperty.Over.isoMk (Iso.refl _) (Category.id_comp _)
-  NatIso.ofComponents (fun G ↦ G.obj.mapIso e.op)
-    (fun φ ↦ (φ.hom.naturality e.inv.op).symm)
-
 end AlgebraicGeometry

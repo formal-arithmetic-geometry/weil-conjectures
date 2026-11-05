@@ -220,15 +220,6 @@ theorem upperStarIterateFrobeniusIso_hom_app_upperStarFromPoint
   rw [upperStarFromPointComp_hom_app, ← h]
   exact (Category.comp_id _).symm
 
-/-- The trivialization `F_X^* ≅ 𝟭`, restricted to sheaves pulled back from the condensed point,
-is the canonical comparison `F_X^* p_X^* ≅ p_X^*`. -/
-theorem whiskerLeft_upperStarFromPoint_upperStarIterateFrobeniusIso_hom :
-    Functor.whiskerLeft (upperStarFromPoint X)
-        (upperStarIterateFrobeniusIso Ab.{u + 1} hp hX n).hom =
-      (upperStarFromPointComp (X.iterateFrobenius hp hX n)).hom := by
-  refine NatTrans.ext (funext fun H ↦ ?_)
-  exact upperStarIterateFrobeniusIso_hom_app_upperStarFromPoint hp hX n H
-
 end ProEtale
 
 end AlgebraicGeometry

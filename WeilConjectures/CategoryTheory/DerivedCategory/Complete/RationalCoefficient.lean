@@ -70,16 +70,6 @@ namespace PadicAlgCl
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
   [Small.{u + 1} E]
 
-/-- `E` as an algebra over the universe `u + 1` copy `Shrink 𝒪_E` of its ring of integers,
-through `Shrink.ringEquiv : Shrink 𝒪_E ≃+* 𝒪_E`. -/
-noncomputable instance algebraShrink : Algebra (Shrink.{u + 1} (integers l E)) E :=
-  ((algebraMap (integers l E) E).comp (Shrink.ringEquiv (integers l E)).toRingHom).toAlgebra
-
-/-- `E` is the fraction field of the universe `u + 1` copy `Shrink 𝒪_E` of its ring of
-integers, as it is of `𝒪_E` itself. -/
-instance isFractionRing_shrink : IsFractionRing (Shrink.{u + 1} (integers l E)) E :=
-  IsFractionRing.of_ringEquiv_left (Shrink.ringEquiv (integers l E)) fun _ ↦ rfl
-
 end PadicAlgCl
 
 end RingOfIntegers
@@ -90,25 +80,5 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
   [Algebra E (PadicAlgCl l)] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
   [FiniteDimensional ℚ_[l] E] [Small.{u + 1} E]
-
-/-- The category `D_comp(J, E)` of derived complete objects with coefficients in the
-`ℓ`-adic field `E`: the rationalization of `D_comp(J, 𝒪_E)` at the nonzero elements of
-`𝒪_E`, i.e. its Verdier quotient by the objects killed by a nonzero element of `𝒪_E`.
-Since `E = 𝒪_E[1/ℓ]`, this is `D_comp(J, 𝒪_E)[1/ℓ]`. It is triangulated and `E`-linear. -/
-@[reducible]
-def DerivedCategoryDerivedCompleteRational : Type _ :=
-  Rationalization (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
-    (DerivedCategoryDerivedCompleteIntegral J l E)
-
-/-- The `Hom` groups of `D_comp(J, E)` are `E`-vector spaces. -/
-noncomputable example : Linear E (DerivedCategoryDerivedCompleteRational J l E) := inferInstance
-
-example : IsTriangulated (DerivedCategoryDerivedCompleteRational J l E) := inferInstance
-
-/-- The localization functor `D_comp(J, 𝒪_E) ⥤ D_comp(J, E)`. -/
-@[reducible]
-noncomputable def DerivedCategoryDerivedCompleteRational.fromIntegral :
-    DerivedCategoryDerivedCompleteIntegral J l E ⥤ DerivedCategoryDerivedCompleteRational J l E :=
-  Rationalization.Q _ _
 
 end ECoefficient

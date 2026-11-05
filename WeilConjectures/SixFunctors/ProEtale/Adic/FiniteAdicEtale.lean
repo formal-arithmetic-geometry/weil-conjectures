@@ -63,25 +63,6 @@ noncomputable def zmodAddEquivQuotientPowOpenAddSubgroup (m : ℕ) :
       ext x
       exact (SetLike.ext_iff.1 (PadicInt.ker_toZModPow (p := l) m) x)))
 
-/-- **Finite-level pro-étale cohomology is étale `Ext`.** On a quasi-compact quasi-separated
-scheme `S`, `Hⁿ(S_proét, ℤ_ℓ/ℓᵐ)` is the group of morphisms `Λ_S ⟶ Λ_S[n]` in `D(S_ét, Λ)`,
-`Λ = ℤ/ℓᵐ`. -/
-theorem nonempty_addEquiv_finiteAdicH_unitShift (S : Scheme.{u}) [CompactSpace S]
-    [QuasiSeparatedSpace S] (m n : ℕ) :
-    Nonempty (FiniteAdicH S l m n ≃+
-      (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m))) S) ⟶
-        (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m))) S))⟦(n : ℤ)⟧)) := by
-  let Λ := ULift.{u + 1} (ZMod (l ^ m))
-  let A := ℤ_[l] ⧸ (PadicInt.powOpenAddSubgroup l m : AddSubgroup ℤ_[l])
-  obtain ⟨e₁⟩ := nonempty_addEquiv_H_continuousSheaf S A n
-  let eA : AddCommGrpCat.of (ULift.{u + 1} A) ≅ AddCommGrpCat.of Λ :=
-    (AddEquiv.ulift.trans ((zmodAddEquivQuotientPowOpenAddSubgroup l m).symm.trans
-      AddEquiv.ulift.symm)).toAddCommGrpIso
-  let e₂ := (Sheaf.functorH S.smallEtaleTopology n).mapIso
-    ((constantSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).mapIso eA ≪≫
-      (Etale.sheafForget₂ConstantRingIso Λ S).symm)
-  exact ⟨e₁.trans (e₂.addCommGroupIsoToAddEquiv.trans (Etale.unitShiftAddEquivH Λ S n).symm)⟩
-
 end ProEtale
 
 end AlgebraicGeometry

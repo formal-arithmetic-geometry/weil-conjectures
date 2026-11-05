@@ -38,31 +38,4 @@ open Scheme Etale Scheme.Hom
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- **Pulling back sections along `g` on stalks.** For a finite `f : Y ⟶ X`, a finite
-endomorphism `g` of `Y` over `X` and a geometric point `t` of `Y` over `y`, restricting a germ
-of `g^♯ s` to `t` is restricting the germ of `s` to `t ≫ g`, followed by the map
-`Λ_{t ≫ g} ⟶ Λ_t` given by the unit `ε : Λ ⟶ g_* Λ` and the restriction of germs along `g`:
-
-```
-  (f_* Λ)_y ----(g^♯)_y----> (f_* Λ)_y
-      |                          |
-  ρ_{t ≫ g}                      ρ_t
-      v                          v
-  Λ_{t ≫ g} --ε--> (g_* Λ)_{t ≫ g} --ρ_t--> Λ_t
-```
--/
-lemma Etale.sheafFiber_map_lowerStarConstantSheafEndOfOver_stalkRestrict {X Y : Scheme.{u}}
-    (f : Y ⟶ X) [IsFinite f] (g : Y ⟶ Y) [IsFinite g] (h : g ≫ f = f) {Ω : Type u} [Field Ω]
-    [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ X) (t : GeometricFiber f y) :
-    (pointSmallEtale y).sheafFiber.map (lowerStarConstantSheafEndOfOver (Λ := Λ) f g h) ≫
-        Etale.stalkRestrict (ModuleCat.{u + 1} Λ) f y t (𝟙_ _) =
-      Etale.stalkRestrict (ModuleCat.{u + 1} Λ) f y
-          ⟨t.1 ≫ g, by rw [Category.assoc, h, t.2]⟩ (𝟙_ _) ≫
-        (pointSmallEtale (t.1 ≫ g)).sheafFiber.map
-          (Functor.LaxMonoidal.ε (g)_*[ModuleCat.{u + 1} Λ]) ≫
-        Etale.stalkRestrict (ModuleCat.{u + 1} Λ) g (t.1 ≫ g) ⟨t.1, rfl⟩ (𝟙_ _) := by
-  rw [lowerStarConstantSheafEndOfOver_eq, Functor.map_comp, Category.assoc,
-    Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (ModuleCat.{u + 1} Λ) g f f h.symm
-      y t, ← Category.assoc, ← Etale.stalkRestrict_naturality, Category.assoc]
-
 end AlgebraicGeometry

@@ -57,11 +57,6 @@ on an `R`-module object `M`. -/
 def globalSmul (σ : 𝟙_ C ⟶ R) (M : Mod C R) : M.X ⟶ M.X :=
   (λ_ M.X).inv ≫ σ ▷ M.X ≫ act M.X
 
-/-- The action `globalSmul σ M` is the multiplication `Mod.smulHom σ M` by the global section
-`σ`. -/
-lemma globalSmul_eq_smulHom (σ : 𝟙_ C ⟶ R) (M : Mod C R) : globalSmul σ M = smulHom σ M :=
-  rfl
-
 @[simp]
 lemma globalSmul_one (M : Mod C R) : globalSmul η[R] M = 𝟙 M.X := by
   rw [globalSmul, one_act, Iso.inv_hom_id]
@@ -210,17 +205,6 @@ lemma functor_linear_of_map_smulNatTrans_app {D : Type u₂} [Category.{v₂} D]
   rw [linearOfRingHom_smul_id, linearOfRingHom_smul_id]
   exact Mod.hom_ext _ _ (h a M)
 
-/-- Restriction of scalars along a morphism of commutative algebra objects `f : R ⟶ S` is
-`K`-linear, for compatible ring homomorphisms `K →+* Γ R` and `K →+* Γ S`. -/
-lemma linear_comap {S : C} [MonObj S] [IsCommMonObj S] (f : R ⟶ S) [IsMonHom f]
-    (φ : K →+* Γ R) (ψ : K →+* Γ S) (h : ∀ a, Γ.map f (φ a) = ψ a) :
-    letI := linearOfRingHom φ
-    letI := linearOfRingHom ψ
-    (comap (D := C) f).Linear K :=
-  functor_linear_of_map_smulNatTrans_app _ ψ φ fun a M ↦ by
-    rw [globalSmul_comap, ← h a]
-    rfl
-
 section MapMod
 
 variable {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] [BraidedCategory D] [Preadditive D]
@@ -242,14 +226,6 @@ lemma linear_mapMod_comp_comap {S : D} [MonObj S] [IsCommMonObj S] (f : S ⟶ G.
     simp only [Functor.comp_obj, Functor.comp_map]
     rw [globalSmul_comap, h a, globalSmul_mapMod]
     rfl
-
-/-- The image of module objects under an additive lax monoidal functor `G` is `K`-linear, `K`
-acting on `G R` through `Γ R →+* Γ (G R)`, provided `G R` is commutative. -/
-lemma linear_mapMod [G.Additive] [IsCommMonObj (G.obj R)] (φ : K →+* Γ R) :
-    letI := linearOfRingHom φ
-    letI := linearOfRingHom ((Γ.mapFunctor G).comp φ)
-    (G.mapMod R).Linear K :=
-  functor_linear_of_map_smulNatTrans_app _ φ _ fun a M ↦ (globalSmul_mapMod G (φ a).hom M).symm
 
 end MapMod
 

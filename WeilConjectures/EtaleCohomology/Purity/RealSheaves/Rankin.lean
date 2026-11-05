@@ -139,90 +139,9 @@ theorem IsReal.tprod (hρ : W.IsReal l ρ ι) (hσ : W.IsReal l σ ι) :
   rw [localEigenvalues_tprod, Multiset.map_map_product_mul, Multiset.map_map_product_mul,
     hρ.map_conj_localEigenvalues, hσ.map_conj_localEigenvalues]
 
-/-- The tensor square `ℱ ⊗ ℱ` of a sheaf with weights at most `β` has weights at most `2 β`. -/
-theorem HasWeightsAtMost.tprod_self {β : ℝ} (hw : W.HasWeightsAtMost l ρ ι β) :
-    W.HasWeightsAtMost l (ρ.tprod ρ) ι (2 * β) := by
-  intro x γ hγ
-  rw [localEigenvalues_tprod] at hγ
-  obtain ⟨⟨a, b⟩, hab, rfl⟩ := Multiset.mem_map.1 hγ
-  rw [Multiset.mem_product] at hab
-  rw [frobeniusWeight_mul ι _ (fun h ↦ zero_notMem_localEigenvalues x (h ▸ hab.1))
-    (fun h ↦ zero_notMem_localEigenvalues x (h ▸ hab.2))]
-  linarith [hw x a hab.1, hw x b hab.2]
-
 end TensorProduct
 
 section TateTwist
-
-/-- The `ι`-weight of the Frobenius scalar `q ^ (-n e)` of the Tate line at a point of degree
-`e` is `-2 n`. -/
-private theorem frobeniusWeight_zpow_card {e : ℕ} (he : e ≠ 0) (n : ℤ) :
-    frobeniusWeight ι (Nat.card K ^ e) (((Nat.card K : PadicAlgCl l) ^ (-n)) ^ e) = -2 * n := by
-  have hq : (1 : ℝ) < Nat.card K := by
-    exact_mod_cast Finite.one_lt_card_iff_nontrivial.2 inferInstance
-  have hlog : Real.log (Nat.card K) ≠ 0 := (Real.log_pos hq).ne'
-  simp only [frobeniusWeight, map_pow, map_zpow₀, map_natCast, norm_pow, norm_zpow,
-    Complex.norm_natCast, Nat.cast_pow, Real.log_pow, Real.log_zpow, Int.cast_neg]
-  field_simp
-
-/-- The local eigenvalues of the Tate twist `ℱ (n) = ℱ ⊗ ℚ̄_ℓ (n)` at a closed point `x` of
-degree `e` are the `α q ^ (-n e)` for the local eigenvalues `α` of `ℱ`. -/
-theorem localEigenvalues_tprod_tateLine (n : ℤ) (x : C.finitePoints) :
-    W.localEigenvalues l (ρ.tprod (W.tateLine l n)) x =
-      (W.localEigenvalues l ρ x).map
-        (· * ((Nat.card K : PadicAlgCl l) ^ (-n)) ^ p.degreeOver x.1) := by
-  set c := ((Nat.card K : PadicAlgCl l) ^ (-n)) ^ p.degreeOver x.1
-  have h : W.tateLine l n (W.frobenius x) = c • LinearMap.id := by
-    ext
-    simp [c, tateLine, constLine, W.deg_frobenius x, Units.smul_def, inv_pow]
-  have hT : (W.tateLine l n (W.frobenius x)).charpoly.roots = {c} := by
-    have hc : c ∈ (W.tateLine l n (W.frobenius x)).charpoly.roots := by
-      rw [Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
-        ← Module.End.hasEigenvalue_iff_isRoot_charpoly, h]
-      refine Module.End.hasEigenvalue_of_hasEigenvector (x := 1) ⟨?_, one_ne_zero⟩
-      simp
-    obtain ⟨a, ha⟩ := Multiset.card_eq_one.1 (show Multiset.card
-        (W.tateLine l n (W.frobenius x)).charpoly.roots = 1 by
-      rw [LinearMap.card_roots_charpoly, Module.finrank_self])
-    rw [ha, Multiset.mem_singleton] at hc
-    rw [ha, hc]
-  unfold localEigenvalues
-  rw [Representation.tprod_apply, LinearMap.charpoly_roots_tensorProduct, hT]
-  induction (ρ (W.frobenius x)).charpoly.roots using Multiset.induction_on with
-  | empty => simp
-  | cons a s ih => simp [ih]
-
-/-- Blueprint `lem-tw-tate-twist-weight-shift`: Weight shift under a Tate twist.
-
-If `ℱ` is punctually `ι`-pure of weight `w`, its Tate twist `ℱ (n)` is punctually `ι`-pure of
-weight `w - 2 n`: at a closed point `y` of degree `e` the local Frobenius of the twist is
-`q ^ (-n e)` times that of `ℱ`, and `|ι (q ^ (-n e) α)| = q_y ^ ((w - 2 n) / 2)`. -/
-theorem IsPunctuallyPure.tprod_tateLine {w : ℝ} (h : W.IsPunctuallyPure l ρ ι w) (n : ℤ) :
-    W.IsPunctuallyPure l (ρ.tprod (W.tateLine l n)) ι (w - 2 * n) := by
-  intro x β hβ
-  rw [localEigenvalues_tprod_tateLine, Multiset.mem_map] at hβ
-  obtain ⟨α, hα, rfl⟩ := hβ
-  have he := p.degreeOver_ne_zero x.2
-  rw [frobeniusWeight_mul ι _ (fun h ↦ zero_notMem_localEigenvalues x (h ▸ hα))
-    (pow_ne_zero _ (zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne'))), h x α hα,
-    Scheme.Hom.pointNorm_eq_pow_degreeOver p x.2, frobeniusWeight_zpow_card ι he]
-  ring
-
-/-- Blueprint `lem-tw-tate-twist-weight-shift`: Weight shift under a Tate twist.
-
-If `ℱ` has weights at most `w`, its Tate twist `ℱ (n)` has weights at most `w - 2 n`. -/
-theorem HasWeightsAtMost.tprod_tateLine {w : ℝ} (h : W.HasWeightsAtMost l ρ ι w) (n : ℤ) :
-    W.HasWeightsAtMost l (ρ.tprod (W.tateLine l n)) ι (w - 2 * n) := by
-  intro x β hβ
-  rw [localEigenvalues_tprod_tateLine, Multiset.mem_map] at hβ
-  obtain ⟨α, hα, rfl⟩ := hβ
-  have he := p.degreeOver_ne_zero x.2
-  rw [frobeniusWeight_mul ι _ (fun h ↦ zero_notMem_localEigenvalues x (h ▸ hα))
-    (pow_ne_zero _ (zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne'))),
-    Scheme.Hom.pointNorm_eq_pow_degreeOver p x.2, frobeniusWeight_zpow_card ι he]
-  have := h x α hα
-  rw [Scheme.Hom.pointNorm_eq_pow_degreeOver p x.2] at this
-  linarith
 
 end TateTwist
 

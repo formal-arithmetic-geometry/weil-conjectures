@@ -135,17 +135,6 @@ namespace CoefficientClosedStructure
 variable {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
   (S : CoefficientClosedStructure H)
 
-/-- Internal composition is the transpose of the composite of the two evaluations.
-Source: Stacks 08J9, 0A98 (blueprint: def-coef-ringed-tensor-hom-model). -/
-def composition (P Q V : D) :
-    S.tensor.obj (H.obj (op Q, V), H.obj (op P, Q)) ⟶ H.obj (op P, V) :=
-  S.transpose _ P V
-    ((S.monoidal.associator (H.obj (op Q, V)) (H.obj (op P, Q)) P).hom ≫
-      S.tensor.map
-        (X := (H.obj (op Q, V), S.tensor.obj (H.obj (op P, Q), P)))
-        (Y := (H.obj (op Q, V), Q))
-        (Prod.mkHom (𝟙 (H.obj (op Q, V))) (S.evaluation P Q)) ≫ S.evaluation Q V)
-
 end CoefficientClosedStructure
 
 section TensorRepresentatives

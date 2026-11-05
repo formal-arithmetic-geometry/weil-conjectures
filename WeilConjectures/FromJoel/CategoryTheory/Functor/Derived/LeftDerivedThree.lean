@@ -80,25 +80,6 @@ section
 
 variable (F L₁ L₂ L₃) [HasLeftDerivedFunctor₃ F W₁ W₂ W₃]
 
-noncomputable def leftDerived₃ : D₁ ⥤ D₂ ⥤ D₃ ⥤ H :=
-    curry₃.obj ((uncurry₃.obj F).totalLeftDerived (L₁.prod (L₂.prod L₃)) (W₁.prod (W₂.prod W₃)))
-
-noncomputable def leftDerivedCounit₃ :
-    ((((whiskeringLeft₃ H).obj L₁).obj L₂).obj L₃).obj (leftDerived₃ F L₁ L₂ L₃ W₁ W₂ W₃) ⟶ F :=
-  whiskeringLeft₃Equiv.symm (whiskerLeft _ (currying₃.counitIso.hom.app _) ≫
-    ((uncurry₃.obj F).totalLeftDerivedCounit (L₁.prod (L₂.prod L₃)) (W₁.prod (W₂.prod W₃))))
-
-set_option backward.isDefEq.respectTransparency false in
-instance : (leftDerived₃ F L₁ L₂ L₃ W₁ W₂ W₃).IsLeftDerivedFunctor₃
-    (leftDerivedCounit₃ F L₁ L₂ L₃ W₁ W₂ W₃) W₁ W₂ W₃ := by
-  refine (isLeftDerivedFunctor_iff_of_iso _ _
-    ((uncurry₃.obj F).totalLeftDerivedCounit (L₁.prod (L₂.prod L₃)) (W₁.prod (W₂.prod W₃))) _ _
-    (currying₃.counitIso.symm.app
-      (((uncurry₃.obj F).totalLeftDerived
-      (L₁.prod (L₂.prod L₃)) (W₁.prod (W₂.prod W₃))))) ?_).1 inferInstance
-  ext
-  simp [leftDerivedCounit₃]
-
 end
 
 section

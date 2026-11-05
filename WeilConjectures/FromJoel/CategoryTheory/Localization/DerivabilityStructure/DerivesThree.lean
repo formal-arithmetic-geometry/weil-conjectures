@@ -15,7 +15,6 @@ Migrated from `Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives
 on the branch `jriou_localization` of Joël Riou's mathlib fork
 (leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
-
 -/
 
 @[expose] public section
@@ -47,19 +46,6 @@ variable {Φ₁ Φ₂ Φ₃ F} (h : Derives₃ Φ₁ Φ₂ Φ₃ F)
   [Φ₁.IsLeftDerivabilityStructure] [Φ₂.IsLeftDerivabilityStructure]
   [Φ₃.IsLeftDerivabilityStructure] [W₁.ContainsIdentities] [W₂.ContainsIdentities]
   [W₃.ContainsIdentities]
-
-include h in
-lemma hasLeftDerivedFunctor₃ : F.HasLeftDerivedFunctor₃ W₁ W₂ W₃ :=
-  Derives.hasLeftDerivedFunctor h
-
-include h in
-lemma isIso_of_isLeftDerivabilityStructure
-    {L₁ : C₁ ⥤ D₁} {L₂ : C₂ ⥤ D₂} {L₃ : C₃ ⥤ D₃} [L₁.IsLocalization W₁]
-    [L₂.IsLocalization W₂] [L₃.IsLocalization W₃] {LF : D₁ ⥤ D₂ ⥤ D₃ ⥤ H}
-    (α : ((((whiskeringLeft₃ H).obj L₁).obj L₂).obj L₃).obj LF ⟶ F)
-    (X₁ : C₁₀) (X₂ : C₂₀) (X₃ : C₃₀) [LF.IsLeftDerivedFunctor₃ α W₁ W₂ W₃] :
-    IsIso (((α.app (Φ₁.functor.obj X₁)).app (Φ₂.functor.obj X₂)).app (Φ₃.functor.obj X₃)) :=
-  h.isIso_of_isLeftDerivedFunctor (Functor.whiskeringLeft₃Equiv α) ⟨X₁, X₂, X₃⟩
 
 end Derives₃
 

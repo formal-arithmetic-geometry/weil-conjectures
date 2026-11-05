@@ -228,24 +228,6 @@ attribute [local instance] AlgebraicGeometry.cartierEtaleAbHasExt
 
 namespace AlgebraicGeometry.Etale
 
-private theorem supported_one_restrict {D Z : Scheme.{u}} (i : D ⟶ Z)
-    (U : Z.Etaleᵒᵖ) :
-    ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D)).obj.map
-      ((MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale Z).from U.unop).op
-      ((supportedIntegralUnit i).hom.app (op (Scheme.Etale.mk (𝟙 Z)))
-        (supportedIntegralOne Z)) =
-    (supportedIntegralUnit i).hom.app U ((toSheafify Z.smallEtaleTopology
-      ((Functor.const Z.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U ⟨1⟩) := by
-  let v := ((MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale Z).from U.unop).op
-  have hq := ConcreteCategory.congr_hom ((supportedIntegralUnit i).hom.naturality v)
-    (supportedIntegralOne Z)
-  have h1 := ConcreteCategory.congr_hom
-    ((toSheafify Z.smallEtaleTopology
-      ((Functor.const Z.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).naturality v)
-    (ULift.up 1)
-  simp only [ConcreteCategory.comp_apply, Functor.const_obj_map] at hq h1
-  exact hq.symm.trans (congrArg ((supportedIntegralUnit i).hom.app U) h1.symm)
-
 end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale
@@ -254,51 +236,10 @@ attribute [local irreducible] comparisonUpperStar Etale.cartierPoleBoundary
 attribute [local instance 0] IsGroupoid.all_isIso isIso_of_isDiscrete
   HasZeroObject.zero_to_zero_isIso to_initial_isIso terminal_isIso_from initial_isIso_to
 
-/-- Scalar forgetting is exact on the original pro-etale site.
-Source: Stacks 03D7 (blueprint: lem-sp-cartier-reduction-site-comparison).
-Proof: kernels are sectionwise, and cokernels are the sheafifications of the same
-abelian presheaf cokernels. The scalar action descends uniquely to these cokernels. -/
-theorem cartierForget_exact (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    PreservesFiniteLimits (cartierForget A Z) ∧
-      PreservesFiniteColimits (cartierForget A Z) := by
-  constructor
-  · have : PreservesFiniteLimits (cartierForget A Z ⋙ sheafToPresheaf _ _) :=
-      inferInstanceAs (PreservesFiniteLimits (sheafToPresheaf _ _ ⋙
-        (Functor.whiskeringRight _ _ _).obj
-          (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})))
-    exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf _ _)
-  · have := (Sheaf.forget₂CoinduceAdj (Scheme.ProEt.topology Z) A).isLeftAdjoint
-    infer_instance
-
-/-- Exactness on finite limits. Source: Stacks 03D7
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
-instance cartierForgetLimits (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    PreservesFiniteLimits (cartierForget A Z) := (cartierForget_exact A Z).1
-
-/-- Exactness on finite colimits. Source: Stacks 03D7
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
-instance cartierForgetColimits (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    PreservesFiniteColimits (cartierForget A Z) := (cartierForget_exact A Z).2
-
-/-- Additivity on sections. Source: Stacks 03D7
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
-instance cartierForgetAdditive (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    (cartierForget A Z).Additive where
-
 attribute [local irreducible] cartierIntegralConstantComparisonIso
 
 attribute [local irreducible] cartierIntegralSourceComparison cartierIntegralSourceIso
   cartierUnitsComparison
-
-private theorem unitsComparison_isIso (Z : Scheme.{u}) : IsIso (cartierUnitsComparison Z) := by
-  unfold cartierUnitsComparison
-  rw [Adjunction.homEquiv_counit]
-  let e : Z.gmSheaf ≅
-      (comparisonLowerStar AddCommGrpCat.{u + 1} Z).obj (Scheme.proEtaleUnitsSheaf Z) :=
-    ⟨⟨𝟙 _⟩, ⟨𝟙 _⟩, by ext U x; rfl, by ext U x; rfl⟩
-  have : IsIso e.hom := e.isIso_hom
-  have := proEtaleUnitsCounit_isIso Z
-  infer_instance
 
 attribute [local irreducible] cartierRootsComparison cartierRootsIso
 
@@ -308,62 +249,7 @@ attribute [local irreducible] cartierProBoundary cartierEtaleKummerUnit cartierP
 
 attribute [local irreducible] CartierEtaleReductionSpec CartierProReductionSpec
 
-private theorem cartierSourceComparison_isIso (A : Type (u + 1)) [CommRing A]
-    {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] :
-    IsIso (geoCartierSourceComparison A i) := by
-  have := isIso_lowerStarComparisonUpperStarBaseChange i (ModuleCat.{u + 1} A)
-  unfold geoCartierSourceComparison
-  infer_instance
-
-private theorem cartierProIntegralGenerator_ext_bijective
-    (A : Type (u + 1)) [CommRing A] [Finite A] (n : ℕ) (hn : 0 < n)
-    (hA : (n : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] :
-    Function.Bijective (fun c : GeoCartierClass A n hA i ↦
-      (Ext.mk₀.{u + 1} (cartierProIntegralGenerator A i)).comp
-        (c.mapExactFunctor (cartierForget A Z)) (zero_add 2)) := by
-  have hsource := Etale.supported_integral_derived_unit Z n hn A hA i
-  have hU := scalar_unit_ext_bijective
-    (Etale.RawModuleScalarComparison.forget A Z)
-    (Q := Scheme.finiteEtaleTateLine Z n A hA)
-    (Etale.supportedIntegralGenerator A i) hsource 2
-  have : IsIso (geoCartierSourceComparison A i) := cartierSourceComparison_isIso A i
-  have hF := comparison_mapExt_bijective (ModuleCat.{u + 1} A) Z
-    ((Etale.lowerStar (ModuleCat.{u + 1} A) i).obj (Etale.ordinaryFiniteConstant A D))
-    (Scheme.finiteEtaleTateLine Z n A hA) 2
-  have hG := comparison_mapExt_bijective AddCommGrpCat.{u + 1} Z
-    ((Etale.lowerStar AddCommGrpCat.{u + 1} i).obj (Etale.supportedIntegralConstant D))
-    ((Etale.RawModuleScalarComparison.forget A Z).obj
-      (Scheme.finiteEtaleTateLine Z n A hA)) 2
-  have h := Ext.scalar_unit_ext_comparison_bijective
-    (comparisonUpperStar (ModuleCat.{u + 1} A) Z)
-    (comparisonUpperStar AddCommGrpCat.{u + 1} Z)
-    (Etale.RawModuleScalarComparison.forget A Z) (cartierForget A Z)
-    (forgetComparisonIso A Z) (Etale.supportedIntegralGenerator A i)
-    (cartierIntegralSourceIso i) (asIso (geoCartierSourceComparison A i)) 2 hU hF hG
-  unfold cartierProIntegralGenerator cartierForgetComparison
-  simpa only [forgetComparisonIso_hom, asIso_hom, cartierForget, Functor.comp_obj,
-    GeoCartierClass, geoCartierLine] using h
-
 attribute [local irreducible] cartierReducedEtale cartierReducedPro
-
-/-- The Hom universal property of a derived scalar unit with a shifted sheaf target.
-It is tested against every unbounded complex, and therefore determines the target up
-to its unique unit-compatible isomorphism.
-Source: Stacks 09T5, 0FND and blueprint Cartier reduction paragraphs
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
-def CartierScalarUnit
-    {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
-    {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [HasExt.{wE} B]
-    (U : C ⥤ B) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
-    (F : B) (H : C) (n : ℕ) (e : Ext F (U.obj H) n) : Prop :=
-  U.DerivedExtUnit F H n e
-
-/-- The specified R-algebra structure on A, uniquely determined by its integer action.
-Source: blueprint Cartier finite coefficient extension paragraph
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
-def cartierResidueAlgebra (ℓ r : ℕ) (A : Type (u + 1)) [CommRing A]
-    (hA : ((ℓ ^ r : ℕ) : A) = 0) : cartierResidueRing.{u} ℓ r →+* A :=
-  (Scheme.finiteEtaleTwistScalar (ℓ ^ r) A hA).comp ULift.ringEquiv.toRingHom
 
 attribute [local irreducible] cartierResidueReducedPro
 

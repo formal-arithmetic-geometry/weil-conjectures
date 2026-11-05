@@ -160,9 +160,6 @@ noncomputable def rightDerivedUpperShriek :
 scoped notation "R(" f ")^![" Λ "]" =>
   rightDerivedUpperShriek Λ f
 
-lemma rightDerivedUpperShriek_eq : R(f)^![Λ] =
-    Rf^!(HasCompactification.compactification f)[Λ] := rfl
-
 end Unbounded
 
 section Adjunction
@@ -246,22 +243,6 @@ noncomputable def rightDerivedUpperShriekPlus :
 @[inherit_doc rightDerivedUpperShriekPlus]
 scoped notation "R(" f ")^![" Λ "]+" =>
   rightDerivedUpperShriekPlus Λ f
-
-/-- The bounded below `Rf^!` is the restriction of the unbounded one along the inclusions of the
-bounded below derived categories. -/
-noncomputable def rightDerivedUpperShriekPlusCompatibility :
-    R(f)^![Λ]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)^![Λ] :=
-  ObjectProperty.liftCompιIso _ _ _
-
-/-- The adjunction `Rf_! ⊣ Rf^!` on the bounded below derived categories of étale sheaves of
-`Λ`-modules, for a separated morphism `f`, locally of finite type, of quasi-compact
-quasi-separated schemes: the restriction of `rightDerivedUpperShriekAdjunction`. -/
-noncomputable def rightDerivedUpperShriekPlusAdjunction :
-    R(f)_![ModuleCat.{u + 1} Λ]+ ⊣ R(f)^![Λ]+ :=
-  (rightDerivedUpperShriekAdjunction Λ f).restrictFullyFaithful
-    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (rightDerivedLowerShriekPlusCompatibility _ f).symm
-    (rightDerivedUpperShriekPlusCompatibility Λ f).symm
 
 end Plus
 

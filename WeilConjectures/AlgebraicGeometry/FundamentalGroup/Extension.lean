@@ -136,16 +136,6 @@ instance : (fixingSubgroup s k G).Normal where
   conj_mem g hg h P x := by
     rw [mul_smul, mul_smul, hg, smul_inv_smul]
 
-lemma isClosed_fixingSubgroup [TopologicalSpace G] [∀ P, ContinuousSMul G ((fiber s).obj P)] :
-    IsClosed (fixingSubgroup s k G : Set G) := by
-  have : (fixingSubgroup s k G : Set G) =
-      ⋂ (P : Y.FiniteEtale) (x : (fiber s).obj ((pullback k).obj P)), {g : G | g • x = x} := by
-    ext g
-    simp [mem_fixingSubgroup_iff]
-  rw [this]
-  exact isClosed_iInter fun P ↦ isClosed_iInter fun x ↦
-    isClosed_eq (continuous_id.smul continuous_const) continuous_const
-
 variable [IsNaturalSMul (fiber s) G]
 
 /-- An element fixing the geometric fibre of a finite étale scheme fixes that of any isomorphic
@@ -155,9 +145,6 @@ lemma smul_eq_self_of_iso {P Q : U.FiniteEtale} (e : P ≅ Q) {g : G}
   obtain ⟨x, rfl⟩ : ∃ x, (fiber s).map e.hom x = y :=
     ⟨(fiber s).map e.inv y, ConcreteCategory.congr_hom ((fiber s).mapIso e).inv_hom_id y⟩
   rw [← IsNaturalSMul.naturality, h]
-
-lemma fixingSubgroup_le_comp (m : Y ⟶ Y') : fixingSubgroup s k G ≤ fixingSubgroup s (k ≫ m) G :=
-  fun _ hg P ↦ smul_eq_self_of_iso s G (pullbackCompIso k m P).symm (hg _)
 
 variable [ConnectedSpace Y] {Ω' : Type u} [Field Ω'] [IsSepClosed Ω'] {t : Spec (.of Ω') ⟶ Y}
   (τ : pullback k ⋙ fiber s ≅ fiber t)

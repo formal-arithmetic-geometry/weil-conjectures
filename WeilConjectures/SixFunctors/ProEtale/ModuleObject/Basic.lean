@@ -200,10 +200,6 @@ noncomputable def profiniteToProEt : Profinite.{u} ⥤ specZ.{u}.ProEt where
   map_id S := MorphismProperty.Over.Hom.ext (profiniteToScheme.map_id S)
   map_comp f g := MorphismProperty.Over.Hom.ext (profiniteToScheme.map_comp f g)
 
-lemma profiniteToProEt_obj_left (S : Profinite.{u}) :
-    (profiniteToProEt.obj S).left = Spec (.of (LocallyConstant S ℤ)) :=
-  rfl
-
 -- Ring maps from locally constant integer-valued functions are determined by their
 -- map on profinite components. Characteristic functions identify their values after
 -- localization; conversely, `liftPrimeSpectrum` glues integers along clopen partitions.
@@ -480,17 +476,6 @@ noncomputable def coefficientRing (X : Scheme.{u})
     Mon (Sheaf (ProEt.topology X) Ab.{u + 1}) :=
   (upperStarFromPoint X).mapMon.obj Λ
 
-lemma coefficientRing_X (X : Scheme.{u})
-    (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) :
-    (coefficientRing X Λ).X = (upperStarFromPoint X).obj Λ.X :=
-  rfl
-
-/-- The condensed ring `T̲ = C(-, T)` of continuous maps into a topological ring `T`, as a ring
-object of condensed abelian groups. -/
-noncomputable def continuousMapCondensedRing (T : Type) [TopologicalSpace T] [Ring T]
-    [IsTopologicalRing T] : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
-  Mon.mk (Profinite.continuousMapRingObj T)
-
 /-! ### The comparison `α_f : f^* Λ_Y ≅ Λ_X` -/
 
 section Comparison
@@ -532,14 +517,6 @@ instance isMonoidal_upperStarFromPointComp :
   unfold upperStarFromPointComp
   simp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom]
   infer_instance
-
-/-- The comparison `α_f : f^* Λ_Y ≅ Λ_X` of the coefficient rings pulled back from the point,
-an isomorphism of ring objects of abelian sheaves on `X_proét`. -/
-noncomputable def coefficientPullbackIso
-    (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) :
-    (f)^*[Ab.{u + 1}].mapMon.obj (coefficientRing Y Λ) ≅ coefficientRing X Λ :=
-  (Functor.mapMonCompIso (F := upperStarFromPoint Y) (G := (f)^*[Ab.{u + 1}])).symm.app Λ ≪≫
-    (Functor.mapMonNatIso (upperStarFromPointComp f)).app Λ
 
 end Comparison
 
@@ -584,13 +561,6 @@ instance isMonHom_condensedPullbackHom : IsMonHom (condensedPullbackHom Λ f) :=
 /-- `α_f` is an isomorphism, for every morphism of schemes `f`. -/
 instance isIso_condensedPullbackHom : IsIso (condensedPullbackHom Λ f) :=
   inferInstanceAs (IsIso ((upperStarFromPointComp f).hom.app Λ))
-
-omit [MonObj Λ] in
-/-- For an open immersion `j : U ⟶ X`, `α_j : j^* Λ_X ⟶ Λ_U` is an isomorphism. This is the
-special case of `ProEtale.isIso_condensedPullbackHom` used by the exceptional operations. -/
-lemma isIso_condensedPullbackHom_of_isOpenImmersion {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] : IsIso (condensedPullbackHom Λ j) :=
-  inferInstance
 
 /-- The canonical coefficient morphism `η_f : Λ_Y ⟶ f_* Λ_X`: the mate of `α_f` under the
 adjunction `f^* ⊣ f_*`, the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`. -/

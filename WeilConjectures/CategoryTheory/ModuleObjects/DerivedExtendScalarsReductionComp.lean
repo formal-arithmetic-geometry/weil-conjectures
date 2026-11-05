@@ -32,15 +32,4 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C] [Monoida
   [IsCommMonObj S] (φ' : R ⟶ S') [IsMonHom φ'] (ψ : S' ⟶ S) [IsMonHom ψ] (φ : R ⟶ S)
   [IsMonHom φ] (h : φ' ≫ ψ = φ)
 
-/-- The reduction of `S' ⊗ᴸ_R f ≫ s` is `S ⊗ᴸ_R f` followed by the reduction of `s`. -/
-lemma derivedExtendScalarsReduction_map_comp {A B B' : DerivedCategory (Mod C R)} (f : B' ⟶ B)
-    (s : (extendScalars φ').leftDerivedFunctor.obj B ⟶
-      (extendScalars φ').leftDerivedFunctor.obj A) :
-    derivedExtendScalarsReduction φ' ψ φ h ((extendScalars φ').leftDerivedFunctor.map f ≫ s) =
-      (extendScalars φ).leftDerivedFunctor.map f ≫ derivedExtendScalarsReduction φ' ψ φ h s := by
-  unfold derivedExtendScalarsReduction
-  have hn := (derivedExtendScalarsCompIso φ' ψ φ h).hom.naturality f
-  dsimp only [Functor.comp_map] at hn
-  rw [Functor.map_comp, reassoc_of% hn, Category.assoc]
-
 end CategoryTheory.Mod

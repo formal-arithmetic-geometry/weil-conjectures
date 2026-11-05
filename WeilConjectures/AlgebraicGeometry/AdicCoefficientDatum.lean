@@ -511,11 +511,6 @@ Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficie
 noncomputable abbrev AdicCoefficientDatum.finiteRing {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{t}) (n : ℕ) := reductionCoefficient T d n
 
-/-- The actual completed coefficient ring sheaf.
-Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
-noncomputable abbrev AdicCoefficientDatum.completedRing {A : Type (t + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) (T : Scheme.{t}) := completedReductionCoefficient T d
-
 /-- The specified coordinate of the completed coefficient sheaf.
 Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 noncomputable abbrev AdicCoefficientDatum.projection {A : Type (t + 1)} [CommRing A]

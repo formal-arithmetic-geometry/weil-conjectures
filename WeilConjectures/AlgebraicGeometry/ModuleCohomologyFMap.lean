@@ -303,13 +303,6 @@ def moduleCohomologyFMap {X Y : Scheme.{u}} (h : X ⟶ Y)
         ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :=
   (Classical.choice (moduleCohomologyFMapData_nonempty h G F φ)).map p
 
-/-- Pullback on module cohomology is the map of the tensor-pullback adjunction unit.
-Source: Stacks Project, Tag 01F7 (blueprint: def-weil-pbc-module-cohomology-fmap). -/
-def moduleCohomologyPullback {X Y : Scheme.{u}} (h : X ⟶ Y)
-    (G : SheafOfModules.{u} Y.ringCatSheaf) (p : ℕ) :=
-  moduleCohomologyFMap h
-    ((Classical.choose (exists_tensorPullbackAdjunction h)).unit.app G) p
-
 /-- Restriction on module cohomology is the map of the restriction-adjunction unit.
 Its components are precisely restriction from V to V ∩ U.
 Source: Stacks Project, Tag 01F7; Sheaves, Tag 00A1

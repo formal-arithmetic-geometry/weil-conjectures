@@ -61,29 +61,4 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   rationalPullbackScalarComparison rationalTensorScalarComparison
   commonStagePullbackComparison commonStageTensorComparison operationStageTransitionIso
 
-/-- The normalized pullback comparison is the prescribed pair endpoint comparison.
-
-Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
-Proof: Expand both comparisons into the recorded transition isomorphism, the rational
-pullback scalar comparison and the inverse source transition. Their component formulas
-are identical; equality of the hom components gives equality of the isomorphisms.
-(blueprint: lem-weil-common-stage-pullback-endpoint). -/
-theorem commonStagePullback_endpoint
-    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
-    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    {X Y : Scheme.{u}} (f : Y ⟶ X)
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (P : Pair l Ω X) (L : Index l Ω) (h : P.stage ≤ L) :
-    (rationalPullbackStageComparison l Ω f h).app P.obj =
-      commonStagePullbackComparison l Ω f P L h := by
-  cases P
-  apply Iso.ext
-  unfold rationalPullbackStageComparison commonStagePullbackComparison
-    operationStageTransitionIso
-  simp only [Iso.app, Iso.trans_hom, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Functor.mapIso_hom, Iso.symm_hom,
-    commonStagePullbackObject]
-
 end WeilConjectures

@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicReductionTriangle
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
@@ -22,13 +21,5 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
-
-private local instance restriction_faithful
-    (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
-    (φ : R ⟶ S) : (pbcRestrict φ).Faithful where
-  map_injective := by
-    intro M N f g h
-    ext U x
-    exact congrArg (fun k ↦ k.val.app U x) h
 
 end AlgebraicGeometry.Scheme

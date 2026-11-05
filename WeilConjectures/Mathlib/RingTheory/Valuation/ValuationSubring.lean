@@ -104,11 +104,6 @@ theorem mem_comapResidue {x : K} :
 theorem comapResidue_le : A.comapResidue A'' ≤ A := fun _ hx ↦
   ((A.mem_comapResidue A'').mp hx).1
 
-/-- The composite valuation ring contains the maximal ideal of `A`. -/
-theorem mem_comapResidue_of_not_isUnit {x : K} (hx : x ∈ A)
-    (h : ¬IsUnit (⟨x, hx⟩ : A)) : x ∈ A.comapResidue A'' :=
-  (A.mem_comapResidue A'').mpr ⟨hx, A.residue_mem_of_not_isUnit A'' h⟩
-
 /-- The residue map of `A` sends the composite valuation ring into `A''`. -/
 theorem residue_inclusion_mem (c : A.comapResidue A'') :
     residue A (inclusion _ _ (A.comapResidue_le A'') c) ∈ A'' :=
@@ -120,29 +115,5 @@ to `A''`. -/
 noncomputable def residueRestrict : A.comapResidue A'' →+* A'' :=
   ((residue A).comp (inclusion _ _ (A.comapResidue_le A''))).codRestrict A''
     (A.residue_inclusion_mem A'')
-
-/-- The residue map of the composite valuation ring onto `A''` is surjective. -/
-theorem residueRestrict_surjective : Function.Surjective (A.residueRestrict A'') := by
-  rintro ⟨b, hb⟩
-  obtain ⟨a, ha⟩ := IsLocalRing.residue_surjective (R := A) b
-  exact ⟨⟨(a : K), (A.mem_comapResidue A'').mpr ⟨a.2, by rwa [ha]⟩⟩, Subtype.ext ha⟩
-
-/-- The kernel of the residue map of the composite valuation ring is the trace of the
-maximal ideal of `A`. -/
-theorem ker_residueRestrict :
-    RingHom.ker (A.residueRestrict A'') =
-      (maximalIdeal A).comap (inclusion _ _ (A.comapResidue_le A'')) := by
-  ext c
-  rw [RingHom.mem_ker, Ideal.mem_comap, ← Ideal.Quotient.eq_zero_iff_mem, Subtype.ext_iff]
-  rfl
-
-/-- **The composite of two valuation rings has second factor `A''`**: the quotient of the
-composite `C` by the trace of the maximal ideal of `A` is `A''`. This is the
-identification `C/𝔪' ≅ A''` of `lemma:nagata-composite-valuation-ring`. -/
-noncomputable def residueRestrictEquiv :
-    (A.comapResidue A'' ⧸ (maximalIdeal A).comap
-      (inclusion _ _ (A.comapResidue_le A''))) ≃+* A'' :=
-  (Ideal.quotEquivOfEq (A.ker_residueRestrict A'').symm).trans
-    (RingHom.quotientKerEquivOfSurjective (A.residueRestrict_surjective A''))
 
 end ValuationSubring

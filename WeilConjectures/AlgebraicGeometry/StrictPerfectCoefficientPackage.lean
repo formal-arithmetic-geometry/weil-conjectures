@@ -91,20 +91,6 @@ namespace ModuleCat
 
 variable {Λ : Type u} [CommRing Λ]
 
-/-- A global coefficient package for a fixed representative. The standard finite free
-module is the module of finite tuples, with its standard basis.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
-structure StrictPerfectCoefficientPackage (F : CochainComplex (ModuleCat.{u} Λ) ℤ) where
-  /-- Finite ranks, allowed to be zero. -/
-  N : ℤ → ℕ
-  /-- Degreewise inclusions. -/
-  i (r : ℤ) : F.X r ⟶ ModuleCat.of Λ (Fin (N r) → Λ)
-  /-- Degreewise projections. -/
-  p (r : ℤ) : ModuleCat.of Λ (Fin (N r) → Λ) ⟶ F.X r
-  /-- The projections split the inclusions. -/
-  splitting (r : ℤ) : i r ≫ p r = 𝟙 (F.X r)
-
 end ModuleCat
 
 namespace SheafOfModules

@@ -152,16 +152,6 @@ lemma isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero [IsIso a
     ((Triangle.isZero₃_iff_isIso₁ _ (jUp.mapDerivedCategory.map_distinguished _ h₁)).2 hju)
   exact (Triangle.isZero₃_iff_isIso₁ _ h₁).1 hW
 
-/-- **Complexes killed by `j^*` come from the closed part**: under the hypotheses of
-`DerivedCategory.isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero`, a complex
-`K` with `D(j^*) K = 0` lies in the essential image of `Ri_*`. -/
-lemma rightDerivedFunctor_essImage_of_isZero [IsIso adj.counit]
-    (h₀ : ∀ M, IsZero (jUp.obj (iLow.obj M)))
-    (hdet : ∀ F, IsZero (iUp.obj F) → IsZero (jUp.obj F) → IsZero F) {K : DerivedCategory A}
-    (hK : IsZero (jUp.mapDerivedCategory.obj K)) : iLow.rightDerivedFunctor.essImage K :=
-  have := isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero adj h₀ hdet hK
-  ⟨_, ⟨(asIso (adj.mapDerivedCategoryRightDerivedAdjunction.unit.app K)).symm⟩⟩
-
 end DerivedCategory
 
 namespace AlgebraicGeometry.ProEtale
@@ -191,72 +181,12 @@ theorem AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl
   AdicSheaf.isZero_of_isZero_X (isZero_of_isZero_upperStar_of_isCompl i j hij F.X
     ((AdicSheaf.forget Z).map_isZero hi) ((AdicSheaf.forget U).map_isZero hj))
 
-/-- Blueprint `lem-exc-proetale-closed-essential-image` for `ℓ`-adic sheaves: a sheaf `F` of
-`ℚ̄_ℓ,X`-modules lies in the essential image of `i_*` if and only if `j^* F = 0`. -/
-theorem adicLowerStar_essImage_iff_of_isCompl
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : AdicSheaf l X) :
-    ((i)_*ᵃ[l]).essImage F ↔ IsZero ((j)^*ᵃ[l].obj F) := by
-  refine ⟨fun ⟨G, ⟨e⟩⟩ ↦ (isZero_adicUpperStar_obj_adicLowerStar_obj i j hij.disjoint G).of_iso
-    ((j)^*ᵃ[l].mapIso e.symm), fun hF ↦ ?_⟩
-  have := isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isCompl i j hij F hF
-  exact ⟨_, ⟨(asIso ((adicUpperStarLowerStarAdjunction l i).unit.app F)).symm⟩⟩
-
 /-! ### Derived categories -/
-
-variable (l) in
-/-- The adjunction `D(g^*) ⊣ Rg_*` on the unbounded derived categories of sheaves of modules over
-the constant `ℓ`-adic sheaves, `g^*` being exact
-(`CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction`). -/
-noncomputable def adicDerivedUpperStarLowerStarAdjunction {Y W : Scheme.{u}} (g : Y ⟶ W) :
-    (g)^*ᵃ[l].mapDerivedCategory ⊣ (g)_*ᵃ[l].rightDerivedFunctor :=
-  (adicUpperStarLowerStarAdjunction l g).mapDerivedCategoryRightDerivedAdjunction
-
-/-- For a closed immersion `i`, the counit `D(i^*) Ri_* ⟶ 𝟭` is an isomorphism, i.e. `Ri_*` is
-fully faithful. -/
-instance isIso_adicDerivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion :
-    IsIso (adicDerivedUpperStarLowerStarAdjunction l i).counit :=
-  Adjunction.isIso_mapDerivedCategoryRightDerivedAdjunction_counit _
-
-/-- For an open immersion `j`, the counit `D(j^*) Rj_* ⟶ 𝟭` is an isomorphism, i.e. `Rj_*` is
-fully faithful, since `j^* j_* ⟶ 𝟭` is an isomorphism. -/
-instance isIso_adicDerivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion :
-    IsIso (adicDerivedUpperStarLowerStarAdjunction l j).counit :=
-  Adjunction.isIso_mapDerivedCategoryRightDerivedAdjunction_counit _
 
 instance (g : U ⟶ X) [IsOpenImmersion g] : (g)_*ᵃ[l].Full :=
   (adicUpperStarLowerStarAdjunction l g).fullyFaithfulROfIsIsoCounit.full
 
 instance (g : U ⟶ X) [IsOpenImmersion g] : (g)_*ᵃ[l].Faithful :=
   (adicUpperStarLowerStarAdjunction l g).fullyFaithfulROfIsIsoCounit.faithful
-
-/-- `D(j^*) Ri_* = 0` for a closed immersion `i` with quasi-compact open complement `j`, on
-sheaves of modules over the constant `ℓ`-adic sheaves. -/
-lemma isZero_mapDerivedCategory_adicUpperStar_obj_rightDerivedFunctor_adicLowerStar_obj
-    (hij : IsCompl (Set.range i.base) (Set.range j.base))
-    (M : DerivedCategory (AdicSheaf l Z)) :
-    IsZero ((j)^*ᵃ[l].mapDerivedCategory.obj ((i)_*ᵃ[l].rightDerivedFunctor.obj M)) :=
-  have := preservesFiniteColimits_adicLowerStar_of_isCompl (l := l) i j hij
-  DerivedCategory.isZero_mapDerivedCategory_obj_rightDerivedFunctor_obj
-    (isZero_adicUpperStar_obj_adicLowerStar_obj i j hij.disjoint) M
-
-/-- For a closed immersion `i` with quasi-compact open complement `j`, a complex `K` of sheaves of
-`ℚ̄_ℓ,X`-modules with `D(j^*) K = 0` has invertible unit `K ⟶ Ri_* D(i^*) K`. -/
-lemma isIso_adicDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) {K : DerivedCategory (AdicSheaf l X)}
-    (hK : IsZero ((j)^*ᵃ[l].mapDerivedCategory.obj K)) :
-    IsIso ((adicDerivedUpperStarLowerStarAdjunction l i).unit.app K) :=
-  have := preservesFiniteColimits_adicLowerStar_of_isCompl (l := l) i j hij
-  DerivedCategory.isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero _
-    (isZero_adicUpperStar_obj_adicLowerStar_obj i j hij.disjoint)
-    (AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl i j hij) hK
-
-/-- For a closed immersion `i` with quasi-compact open complement `j`, a complex `K` of sheaves of
-`ℚ̄_ℓ,X`-modules with `D(j^*) K = 0` lies in the essential image of `Ri_*`. -/
-lemma rightDerivedFunctor_adicLowerStar_essImage_of_isZero
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) {K : DerivedCategory (AdicSheaf l X)}
-    (hK : IsZero ((j)^*ᵃ[l].mapDerivedCategory.obj K)) :
-    (i)_*ᵃ[l].rightDerivedFunctor.essImage K :=
-  have := isIso_adicDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero i j hij hK
-  ⟨_, ⟨(asIso ((adicDerivedUpperStarLowerStarAdjunction l i).unit.app K)).symm⟩⟩
 
 end AlgebraicGeometry.ProEtale

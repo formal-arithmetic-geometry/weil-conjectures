@@ -122,13 +122,4 @@ variable [J.HasSheafCompose (CategoryTheory.forget A)]
 
 include hA
 
-/-- **Flatness of sheaves is checked on stalks.** A sheaf is flat if and only if its fibres at
-all points of a conservative family of points are flat. -/
-theorem flat_iff_forall_flat_sheafFiber_obj {P : ObjectProperty J.Point.{u + 1}}
-    (hP : P.IsConservativeFamilyOfPoints) (F : Sheaf J A) :
-    ObjectProperty.flat F ↔
-      ∀ Φ : P.FullSubcategory, ObjectProperty.flat (Φ.obj.sheafFiber.obj F) :=
-  ⟨fun hF Φ ↦ Φ.obj.flat_sheafFiber_obj hF,
-    flat_of_forall_flat_sheafFiber_obj (hP.jointlyReflectIsomorphisms A) F⟩
-
 end CategoryTheory.GrothendieckTopology

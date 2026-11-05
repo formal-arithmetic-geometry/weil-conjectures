@@ -63,16 +63,4 @@ theorem HasWeightsAtMost.tensorPow {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf 
     have := h.tensorObj hF ih
     rwa [show ((k + 1 : ℕ) : ℝ) * β = β + k * β by push_cast; ring]
 
-/-- If `α` is an eigenvalue of the local Frobenius of a lisse Weil sheaf `F` at a closed point
-`x`, then `α ^ k` is an eigenvalue of that of the tensor power `F^{⊗ k}`. -/
-theorem hasEigenvalue_stalk_tensorPow {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
-    {x : X.finitePoints} {α : PadicAlgCl l} (hα : (F.stalk x).frobeniusEnd.HasEigenvalue α) :
-    ∀ k : ℕ, ((F.tensorPow hF k).stalk x).frobeniusEnd.HasEigenvalue (α ^ k)
-  | 0 => by
-    rw [pow_zero]
-    exact (hasEigenvalue_stalkAt_adicConstant_iff _ _ _).2 rfl
-  | k + 1 => by
-    rw [pow_succ']
-    exact hasEigenvalue_stalk_tensorObj hF hα (hasEigenvalue_stalk_tensorPow hF hα k)
-
 end AlgebraicGeometry.WeilSheaf

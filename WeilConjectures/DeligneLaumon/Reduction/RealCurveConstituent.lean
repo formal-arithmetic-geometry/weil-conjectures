@@ -117,15 +117,6 @@ theorem IsPureOfWeight.weight_eq [IsAlgClosed K] {M : FrobeniusModule.{u} K}
       (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 hα, hx0⟩))
   exact (hp w h).weight_eq (hp w' h') top_ne_bot (fun _ _ ↦ trivial) hq
 
-/-- A module which is pure on the whole space is pure. -/
-theorem isPureOfWeightOn_top_iff {M : FrobeniusModule.{u} K} :
-    M.IsPureOfWeightOn ι q ⊤ w ↔ M.IsPureOfWeight ι q w := by
-  refine ⟨fun h α hα ↦ ?_, fun h α x _ hx0 hα ↦ h α (Module.End.hasEigenvalue_of_hasEigenvector
-      (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 hα, hx0⟩))⟩
-  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
-  exact h α x trivial hx.2 hx.1
-
 end FrobeniusModule
 
 namespace AlgebraicGeometry.WeilSheaf

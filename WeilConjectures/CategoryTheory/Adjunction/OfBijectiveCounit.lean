@@ -37,30 +37,6 @@ variable {C D : Type*} [Category C] [Category D]
 
 namespace Adjunction
 
-/-- **An adjunction from a counit inducing bijections.** If `ε : R ⋙ L ⟶ 𝟭 D` is such that
-`g ↦ L g ≫ ε_Y` is a bijection `Hom(X, R Y) ≃ Hom(L X, Y)` for all `X` and `Y`, then `L ⊣ R`,
-with this bijection as hom-equivalence (inverted) and `ε` as counit. -/
-noncomputable def ofBijectiveCounit {L : C ⥤ D} {R : D ⥤ C} (ε : R ⋙ L ⟶ 𝟭 D)
-    (h : ∀ (X : C) (Y : D), Function.Bijective fun g : X ⟶ R.obj Y ↦ L.map g ≫ ε.app Y) :
-    L ⊣ R :=
-  mkOfHomEquiv
-    { homEquiv X Y := (Equiv.ofBijective (fun g : X ⟶ R.obj Y ↦ (L.map g ≫ ε.app Y : L.obj X ⟶ Y))
-        (h X Y)).symm
-      homEquiv_naturality_left_symm f g := by simp
-      homEquiv_naturality_right {X Y Y'} f g := by
-        have := ε.naturality g
-        dsimp at this
-        rw [Equiv.symm_apply_eq, Equiv.ofBijective_apply, Functor.map_comp, Category.assoc, this,
-          ← Category.assoc]
-        exact congrArg (· ≫ g) ((Equiv.ofBijective _ (h X Y)).apply_symm_apply f).symm }
-
-@[simp]
-lemma ofBijectiveCounit_counit {L : C ⥤ D} {R : D ⥤ C} (ε : R ⋙ L ⟶ 𝟭 D)
-    (h : ∀ (X : C) (Y : D), Function.Bijective fun g : X ⟶ R.obj Y ↦ L.map g ≫ ε.app Y) :
-    (ofBijectiveCounit ε h).counit = ε := by
-  ext Y
-  simp [ofBijectiveCounit]
-
 /-- The map `g ↦ L g ≫ ε` stays bijective after precomposition with an isomorphism. -/
 lemma bijective_map_comp_iff_of_iso (L : C ⥤ D) {X X' P : C} {T : D} (ε : L.obj P ⟶ T)
     (e : X ≅ X') :
@@ -100,14 +76,6 @@ lemma freeComparison_naturality {M N : C'} (f : M ⟶ N) :
   rw [freeComparison, freeComparison, ← homEquiv_naturality_left_symm, Equiv.symm_apply_eq,
     homEquiv_naturality_right, Equiv.apply_symm_apply, Category.assoc, ← h,
     ← L'.map_comp_assoc, ← L'.map_comp_assoc, ← adj₁.unit_naturality]
-
-/-- The free comparison is an isomorphism at `M` if it is one at an isomorphic object. -/
-lemma isIso_freeComparison_of_iso {M N : C'} (e : M ≅ N)
-    [IsIso (freeComparison adj₁ adj₂ L L' c N)] :
-    IsIso (freeComparison adj₁ adj₂ L L' c M) := by
-  rw [← Category.comp_id (freeComparison adj₁ adj₂ L L' c M), ← L.map_id, ← free₁.map_id,
-    ← e.hom_inv_id, free₁.map_comp, L.map_comp, ← freeComparison_naturality_assoc]
-  infer_instance
 
 /-- The free comparisons as a natural transformation `L' ⋙ free₂ ⟶ free₁ ⋙ L`. -/
 @[simps]

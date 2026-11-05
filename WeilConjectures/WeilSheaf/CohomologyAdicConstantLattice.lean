@@ -74,59 +74,6 @@ theorem exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback (r : �
     (injectiveResolution (WeilSheaf.adicConstant k₀ l Y).obj) r x)).symm.trans ?_
   exact hΘ x
 
-/-- **Frobenius-equivariant Poincaré duality for `Hʳ(Y ⊗ k̄, ℚ̄_ℓ)` from finite-level dualities**
-(the transport step of blueprint `thm-pod-derived-poincare-duality`, for the constant Weil
-sheaf). Let the geometric fiber `Ȳ` be connected, with finite cohomology groups
-`Hᵏ(Ȳ, ℤ/ℓᵐ)`. If for every `m` there is a pairing `Hⁱ(Ȳ, ℤ/ℓᵐ) × Hʲ(Ȳ, ℤ/ℓᵐ) ⟶ ℤ/ℓᵐ` in
-`D(Ȳ_ét, ℤ/ℓᵐ)`, nondegenerate on both sides and a `c`-similitude for the étale Frobenius
-operators of the Galois Frobenius, then there is a perfect pairing
-`Hⁱ(Y ⊗ k̄, ℚ̄_ℓ) × Hʲ(Y ⊗ k̄, ℚ̄_ℓ) ⟶ ℚ̄_ℓ` with `⟨F x, F y⟩ = c ⟨x, y⟩` for the geometric
-Frobenius `F` of the constant Weil sheaf. -/
-theorem exists_isPerfPair_cohomology_adicConstant_of_unitPairing
-    [CompactSpace (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber]
-    [QuasiSeparatedSpace (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber]
-    [ConnectedSpace (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber]
-    (hfin : ∀ m k, Finite (FiniteAdicH (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber l m k))
-    (i j c : ℕ)
-    (P : ∀ m : ℕ,
-      (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m)))
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) ⟶
-        (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m)))
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber))⟦(i : ℤ)⟧) →+
-      (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m)))
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) ⟶
-        (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m)))
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber))⟦(j : ℤ)⟧) →+
-      ULift.{u + 1} (ZMod (l ^ m)))
-    (hPl : ∀ m x, (∀ y, P m x y = 0) → x = 0) (hPr : ∀ m y, (∀ x, P m x y = 0) → y = 0)
-    (hPF : ∀ m x y, P m
-      (Etale.frobeniusOperator (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-        (Etale.shiftWeilDatum (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-          (Etale.leftDerivedUpperStarUnitIso _
-            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom i) x)
-      (Etale.frobeniusOperator (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-        (Etale.shiftWeilDatum (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-          (Etale.leftDerivedUpperStarUnitIso _
-            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom j) y) =
-        c • P m x y) :
-    ∃ P' : ((WeilSheaf.adicConstant k₀ l Y).cohomology i).carrier →ₗ[PadicAlgCl l]
-        ((WeilSheaf.adicConstant k₀ l Y).cohomology j).carrier →ₗ[PadicAlgCl l] PadicAlgCl l,
-      P'.IsPerfPair ∧ ∀ x y, P' (((WeilSheaf.adicConstant k₀ l Y).cohomology i).frobenius x)
-        (((WeilSheaf.adicConstant k₀ l Y).cohomology j).frobenius y) =
-          algebraMap ℤ_[l] (PadicAlgCl l) c * P' x y := by
-  obtain ⟨P₀, hP₀, hP₀F⟩ := exists_isPerfPair_adicConstantH_adicConstantHPullback l _
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius hfin i j c P hPl hPr hPF
-  obtain ⟨Θi, hΘi⟩ := exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback
-    (k₀ := k₀) (l := l) (Y := Y) i
-  obtain ⟨Θj, hΘj⟩ := exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback
-    (k₀ := k₀) (l := l) (Y := Y) j
-  refine ⟨P₀.compl₁₂ Θi.symm.toLinearMap Θj.symm.toLinearMap, inferInstance, fun x y ↦ ?_⟩
-  obtain ⟨x, rfl⟩ := Θi.surjective x
-  obtain ⟨y, rfl⟩ := Θj.surjective y
-  rw [← hΘi, ← hΘj]
-  simp only [LinearMap.compl₁₂_apply, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply]
-  exact hP₀F x y
-
 end WeilSheaf
 
 end AlgebraicGeometry

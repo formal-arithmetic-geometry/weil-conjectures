@@ -30,18 +30,6 @@ variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [PreservesFiniteLimits S] [PreservesFiniteColimits S]
 
-/-- The bounded-below derived square associated to an exact ordinary square.
-(auxiliary; not a blueprint node). -/
-noncomputable def mapDerivedCategoryPlusSquareIso (e : R ⋙ G ≅ L ⋙ S) :
-    R.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus ≅
-      L.mapDerivedCategoryPlus ⋙ S.mapDerivedCategoryPlus := by
-  letI : PreservesFiniteLimits (R ⋙ G) := comp_preservesFiniteLimits _ _
-  letI : PreservesFiniteColimits (R ⋙ G) := comp_preservesFiniteColimits _ _
-  letI : PreservesFiniteLimits (L ⋙ S) := comp_preservesFiniteLimits _ _
-  letI : PreservesFiniteColimits (L ⋙ S) := comp_preservesFiniteColimits _ _
-  exact (mapDerivedCategoryPlusCompIso R G).symm ≪≫
-    mapDerivedCategoryPlusNatIso e ≪≫ mapDerivedCategoryPlusCompIso L S
-
 section Composition
 
 variable {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}

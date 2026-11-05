@@ -58,12 +58,4 @@ lemma eq_closedPoint_of_strictLocalizationToBase_eq {S : Scheme.{u}} {Ω : Type 
   rw [hmax, Ideal.map_le_iff_le_comap, ← hqR]
   rfl
 
-/-- A point of the strict localization `S_(s)` other than the closed point does not lie over the
-image of the geometric point `s`. -/
-lemma strictLocalizationToBase_ne_of_ne_closedPoint {S : Scheme.{u}} {Ω : Type u} [Field Ω]
-    [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (q : strictLocalization s)
-    (hq : q ≠ IsLocalRing.closedPoint (strictHenselization s)) :
-    strictLocalizationToBase s q ≠ s (IsLocalRing.closedPoint Ω) :=
-  fun h ↦ hq (eq_closedPoint_of_strictLocalizationToBase_eq s q h)
-
 end AlgebraicGeometry.Scheme

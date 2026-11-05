@@ -33,51 +33,7 @@ section Action
 
 variable {A : Type*} [CommRing A] {F : C} (ρ : A →+* End F)
 
-/-- `Ext P F n` with the action of `A` induced by an action `ρ : A →+* End F` of `A` on `F`,
-`a • x = ρ(a)_* x`. -/
-@[nolint unusedArguments]
-def WithAction (_ρ : A →+* End F) (P : C) (n : ℕ) : Type w := Ext P F n
-
 namespace WithAction
-
-noncomputable instance (P : C) (n : ℕ) : AddCommGroup (WithAction ρ P n) :=
-  inferInstanceAs (AddCommGroup (Ext P F n))
-
-/-- The action of `A` on `Ext P F n` induced by `ρ`, as a ring homomorphism to the additive
-endomorphisms. -/
-noncomputable def smulEnd (P : C) (n : ℕ) : A →+* AddMonoid.End (Ext P F n) where
-  toFun a := (mk₀ (ρ a)).postcomp P (add_zero n)
-  map_one' := by
-    ext x
-    change x.comp (mk₀ (ρ 1)) (add_zero n) = x
-    rw [map_one, End.one_def]
-    exact comp_mk₀_id x
-  map_mul' a b := by
-    ext x
-    change x.comp (mk₀ (ρ (a * b))) (add_zero n) =
-      (x.comp (mk₀ (ρ b)) (add_zero n)).comp (mk₀ (ρ a)) (add_zero n)
-    rw [map_mul, End.mul_def, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀]
-  map_zero' := by
-    ext x
-    change x.comp (mk₀ (ρ 0)) (add_zero n) = 0
-    rw [map_zero, mk₀_zero]
-    exact comp_zero _ _ _ _ _
-  map_add' a b := by
-    ext x
-    change x.comp (mk₀ (ρ (a + b))) (add_zero n) =
-      x.comp (mk₀ (ρ a)) (add_zero n) + x.comp (mk₀ (ρ b)) (add_zero n)
-    rw [map_add, mk₀_add]
-    exact comp_add _ _ _ _
-
-noncomputable instance (P : C) (n : ℕ) : Module A (WithAction ρ P n) :=
-  Module.compHom (Ext P F n) (smulEnd ρ P n)
-
-/-- The identification of `WithAction ρ P n` with `Ext P F n`. -/
-noncomputable def toExt {P : C} {n : ℕ} : WithAction ρ P n ≃+ Ext P F n := AddEquiv.refl _
-
-lemma toExt_smul {P : C} {n : ℕ} (a : A) (x : WithAction ρ P n) :
-    toExt ρ (a • x) = (toExt ρ x).comp (mk₀ (ρ a)) (add_zero n) :=
-  rfl
 
 end WithAction
 

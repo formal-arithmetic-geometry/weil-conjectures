@@ -440,23 +440,6 @@ open scoped MonObj
 
 variable {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
 
-/-- If the closed subgroup scheme `V(J) ⊆ V(I)` contains the commutators of `V(I)`, then the
-commutators of `R`-points of `V(I)` are `R`-points of `V(J)`. -/
-theorem commutatorElement_mem_zeroLocus (h : I ≤ J)
-    [IsMonHom.ContainsCommutators (subgroupSchemeHom h)] {R : Type u} [CommRing R] [Algebra k R]
-    {g g' : GL n R} (hg : g ∈ zeroLocus I R) (hg' : g' ∈ zeroLocus I R) :
-    ⁅g, g'⁆ ∈ zeroLocus J R := by
-  obtain ⟨c, hc⟩ := IsMonHom.ContainsCommutators.exists_comp_eq_commutator (subgroupSchemeHom h)
-    (zeroLocusMulEquiv I R ⟨g, hg⟩) (zeroLocusMulEquiv I R ⟨g', hg'⟩)
-  set c' := (zeroLocusMulEquiv J R).symm c
-  have key : zeroLocusMulEquiv I R ⟨c', zeroLocus_anti h c'.2⟩ =
-      zeroLocusMulEquiv I R ⁅(⟨g, hg⟩ : zeroLocus I R), ⟨g', hg'⟩⁆ := by
-    rw [← zeroLocusMulEquiv_comp_subgroupSchemeHom h, MulEquiv.apply_symm_apply, hc,
-      map_commutatorElement, commutatorElement_def]
-  have := congrArg Subtype.val ((zeroLocusMulEquiv I R).injective key)
-  rw [show ⁅g, g'⁆ = (c' : GL n R) from this.symm]
-  exact c'.2
-
 /-- The standard representation of the `k`-points of `V(I)` is semisimple if and only if the
 matrix group `zeroLocus I k` acts semisimply on `kⁿ`: they have the same stable subspaces. -/
 theorem isSemisimpleRepresentation_standardRepresentation_iff (I : Ideal (CoordinateRing n k))
@@ -480,86 +463,6 @@ theorem isSemisimpleRepresentation_standardRepresentation_iff (I : Ideal (Coordi
     exact h _ v hv
 
 variable [IsAlgClosed k] [CharZero k]
-
-/-- The central–geometric product on `k`-points: every point of `G°` is a product `t h` of a point
-`t` of `Z(G°)°` and a point `h` of `H°`. This is `exists_mul_eq_of_commutator_mem` for the matrices
-of the points. (blueprint: `sk-p-product`) -/
-theorem exists_mul_eq_of_containsCommutators (h : I ≤ J)
-    [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
-    [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))]
-    (g : points (subgroupScheme (identityComponent I)) k) :
-    ∃ (t : points (subgroupScheme (identityComponent (center (identityComponent I)))) k)
-      (x : points (subgroupScheme (identityComponent J)) k),
-      t ≫ subgroupSchemeHom ((le_center _).trans (le_identityComponent _)) *
-        x ≫ subgroupSchemeHom (identityComponent_mono I h) = g := by
-  have := (isSemisimpleRepresentation_standardRepresentation_iff _).1 ‹_›
-  set g' := (zeroLocusMulEquiv (identityComponent I) k).symm g
-  obtain ⟨t, ht, x, hx, htx⟩ := exists_mul_eq_of_commutator_mem h
-    (fun a ha b hb ↦ commutatorElement_mem_zeroLocus h ha hb) g'.2
-  refine ⟨zeroLocusMulEquiv _ k ⟨t, ht⟩, zeroLocusMulEquiv _ k ⟨x, hx⟩, ?_⟩
-  rw [zeroLocusMulEquiv_comp_subgroupSchemeHom, zeroLocusMulEquiv_comp_subgroupSchemeHom, ← map_mul,
-    ← (zeroLocusMulEquiv (identityComponent I) k).apply_symm_apply g]
-  congr 1
-  exact Subtype.ext htx
-
-/-- **The central–geometric product.** Let `H = V(J) ⊆ G = V(I)` be closed subgroups of `GL_n` over
-an algebraically closed field of characteristic zero such that `H` contains the commutators of `G`
-and `G°` acts semisimply on `kⁿ`. Then `G° = Z(G°)° H°`: the multiplication morphism
-`Z(G°)° × H° ⟶ G°` is surjective.
-
-Its image contains the closed points of `G°`, which are `k`-points
-(`exists_mul_eq_of_containsCommutators`), and it is constructible (Chevalley); a constructible
-subset of the Jacobson space `G°` containing all its closed points is everything.
-(blueprint: `sk-p-product`) -/
-theorem surjective_mulCenterIdentityComponent (h : I ≤ J)
-    [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
-    [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))] :
-    Function.Surjective (mulCenterIdentityComponent h).left.base := by
-  set G := subgroupScheme (identityComponent I)
-  have : IsNoetherianRing (CoordinateRing n k ⧸ identityComponent I) :=
-    Algebra.FiniteType.isNoetherianRing k _
-  have : IsNoetherian G.left :=
-    inferInstanceAs (IsNoetherian (Spec (.of (CoordinateRing n k ⧸ identityComponent I))))
-  have : JacobsonSpace G.left := LocallyOfFiniteType.jacobsonSpace G.hom
-  -- the image contains the closed points
-  let X := (Spec (.of k)).asOver (Spec (.of k))
-  let e : X ≅ 𝟙_ (Over (Spec (.of k))) := Over.isoMk (Iso.refl (Spec (.of k))) (by
-    simp [X, specOverSpec_over, Algebra.algebraMap_self])
-  have hclosed (y : G.left) (hy : IsClosed {y}) :
-      y ∈ Set.range (mulCenterIdentityComponent h).left.base := by
-    set s := GrpObj.sectionOfIsClosed G y hy
-    obtain ⟨t, x, htx⟩ := exists_mul_eq_of_containsCommutators h (e.hom ≫ s)
-    have hs : (e.inv ≫ lift t x) ≫ mulCenterIdentityComponent h = s := by
-      unfold mulCenterIdentityComponent
-      rw [Category.assoc, ← Category.assoc (lift t x), lift_map,
-        ← Hom.mul_def, htx, ← Category.assoc, e.inv_hom_id, Category.id_comp]
-    obtain ⟨a⟩ : Nonempty (Spec (.of k)) := inferInstance
-    refine ⟨(e.inv ≫ lift t x).left a, ?_⟩
-    rw [← Scheme.Hom.comp_apply, ← Over.comp_left, hs, GrpObj.sectionOfIsClosed_left_apply]
-  -- the image is constructible
-  set f := mulCenterIdentityComponent h
-  have : LocallyOfFiniteType f.left := by
-    have : LocallyOfFiniteType (f.left ≫ G.hom) := by rw [Over.w f]; infer_instance
-    exact locallyOfFiniteType_of_comp f.left G.hom
-  have : QuasiCompact (subgroupScheme (identityComponent (center (identityComponent I))) ⊗
-      subgroupScheme (identityComponent J)).hom := by
-    rw [Over.tensorObj_hom]
-    infer_instance
-  have : CompactSpace (subgroupScheme (identityComponent (center (identityComponent I))) ⊗
-      subgroupScheme (identityComponent J)).left :=
-    QuasiCompact.compactSpace_of_compactSpace (Over.hom _)
-  have : QuasiCompact f.left := quasiCompact_of_compactSpace _
-  have hc : IsConstructible (Set.range f.left.base) := by
-    rw [← Set.image_univ]
-    exact f.left.isConstructible_image .univ
-  intro y
-  by_contra hy
-  replace hy : y ∈ (Set.range f.left.base)ᶜ := hy
-  obtain ⟨u, hu, hne, hsub⟩ := exists_isOpen_inter_closure_subset_of_isConstructible
-    hc.compl ⟨y, hy⟩
-  obtain ⟨z, ⟨hzu, hzcl⟩, hz⟩ := nonempty_inter_closedPoints hne
-    (hu.isLocallyClosed.inter isClosed_closure.isLocallyClosed)
-  exact hsub ⟨hzu, hzcl⟩ (hclosed z hz)
 
 end Scheme
 

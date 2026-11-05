@@ -119,16 +119,6 @@ theorem toSubmodule_iSup {ι : Sort*} (U : ι → Subrepresentation ρ) :
     (⨆ i, U i).toSubmodule = ⨆ i, (U i).toSubmodule := by
   rw [iSup, toSubmodule_sSup, iSup_range]
 
-theorem disjoint_toSubmodule_iff {S T : Subrepresentation ρ} :
-    Disjoint S.toSubmodule T.toSubmodule ↔ Disjoint S T := by
-  rw [disjoint_iff, disjoint_iff, ← toSubmodule_inf, ← toSubmodule_bot (ρ := ρ),
-    toSubmodule_injective.eq_iff]
-
-/-- A family of subrepresentations is independent if and only if the underlying submodules are. -/
-theorem iSupIndep_toSubmodule_iff {ι : Type*} {U : ι → Subrepresentation ρ} :
-    iSupIndep (fun i ↦ (U i).toSubmodule) ↔ iSupIndep U := by
-  simp only [iSupIndep, ← toSubmodule_iSup, disjoint_toSubmodule_iff]
-
 /-- The subrepresentations of a subrepresentation `S` are the subrepresentations of `ρ` contained
 in `S`. -/
 def orderIsoIic (S : Subrepresentation ρ) : Subrepresentation S.toRepresentation ≃o Set.Iic S where
@@ -232,10 +222,6 @@ def dualAnnihilator (U : Subrepresentation ρ) : Subrepresentation ρ.dual where
 theorem mem_dualAnnihilator {U : Subrepresentation ρ} {f : Module.Dual k V} :
     f ∈ U.dualAnnihilator ↔ ∀ x ∈ U, f x = 0 :=
   Submodule.mem_dualAnnihilator f
-
-/-- Taking annihilators reverses inclusions. -/
-theorem dualAnnihilator_antitone : Antitone (dualAnnihilator : Subrepresentation ρ → _) :=
-  fun _ _ h ↦ Submodule.dualAnnihilator_anti (toSubmodule_le_toSubmodule.2 h)
 
 @[simp]
 theorem dualAnnihilator_bot : (⊥ : Subrepresentation ρ).dualAnnihilator = ⊤ :=
@@ -350,12 +336,6 @@ theorem detCharacter_subquotient_orderIsoMapComap (e : ρ.Equiv σ) (S U : Subre
     ((orderIsoMapComap e S).subquotient (orderIsoMapComap e U)).detCharacter =
       (S.subquotient U).detCharacter :=
   (subquotientEquiv e S U).detCharacter_eq
-
-/-- Subquotients can be transported along an equivalence of representations `e : ρ ≅ σ`: every
-subquotient `S / U` of `σ` is equivalent to a subquotient `S' / U'` of `ρ`. -/
-theorem exists_subquotient_equiv_of_equiv (e : ρ.Equiv σ) (U S : Subrepresentation σ) :
-    ∃ U' S' : Subrepresentation ρ, Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) :=
-  ⟨_, _, ⟨(subquotientEquiv e.symm S U).symm⟩⟩
 
 end Equiv
 
@@ -503,9 +483,6 @@ theorem _root_.Representation.IsIrreducible.nontrivial (hirr : ρ.IsIrreducible)
 theorem mem_inf {U S : Subrepresentation ρ} {x : V} : x ∈ U ⊓ S ↔ x ∈ U ∧ x ∈ S :=
   Iff.rfl
 
-theorem mem_sup {U S : Subrepresentation ρ} {x : V} : x ∈ U ⊔ S ↔ ∃ a ∈ U, ∃ b ∈ S, a + b = x :=
-  Submodule.mem_sup
-
 instance [FiniteDimensional k V] : WellFoundedLT (Subrepresentation ρ) :=
   StrictMono.wellFoundedLT (f := toSubmodule) fun _ _ h ↦ h
 
@@ -576,31 +553,6 @@ noncomputable def subquotientComapEquiv (f : ρ.IntertwiningMap σ) (hf : Functi
       obtain ⟨x, rfl⟩ := hf y
       exact ⟨x, ‹f x ∈ S›, by rw [sub_self]; exact U.toSubmodule.zero_mem⟩
 
-/-- An injective intertwining map `f` identifies the subquotient `f(S) / f(U)` with `S / U`. -/
-noncomputable def subquotientMapEquiv (f : ρ.IntertwiningMap σ) (hf : Function.Injective f)
-    (U S : Subrepresentation ρ) : ((map f S).subquotient (map f U)).Equiv (S.subquotient U) :=
-  (subquotientEquivOfIntertwiningMap f (U := U) (S := S) (U' := map f U) (S' := map f S)
-    (fun x hx ↦ ⟨x, hx, rfl⟩) (fun x _ hx ↦ ⟨x, hx, rfl⟩)
-    (fun x _ hx ↦ by
-      obtain ⟨y, hy, hxy⟩ := mem_map.1 hx
-      exact hf hxy ▸ hy) fun y hy ↦ by
-      obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
-      exact ⟨x, hx, by rw [sub_self]; exact Submodule.zero_mem _⟩).symm
-
-theorem map_bot (f : ρ.IntertwiningMap σ) : map f ⊥ = ⊥ :=
-  toSubmodule_injective (Submodule.map_bot _)
-
-theorem comap_top (f : ρ.IntertwiningMap σ) : comap f ⊤ = ⊤ :=
-  toSubmodule_injective (Submodule.comap_top _)
-
-theorem map_mono (f : ρ.IntertwiningMap σ) {S T : Subrepresentation ρ} (h : S ≤ T) :
-    map f S ≤ map f T :=
-  fun _ ⟨x, hx, hxy⟩ ↦ ⟨x, h hx, hxy⟩
-
-theorem comap_mono (f : ρ.IntertwiningMap σ) {S T : Subrepresentation σ} (h : S ≤ T) :
-    comap f S ≤ comap f T :=
-  fun _ hx ↦ h hx
-
 end IntertwiningMap
 
 /-- The subquotient `S / (U ∩ S)` is the subquotient `S / U`. -/
@@ -609,17 +561,6 @@ noncomputable def subquotientInfEquiv (U S : Subrepresentation ρ) :
   subquotientEquivOfIntertwiningMap (.id ρ) (fun _ hx ↦ hx) (fun _ _ hx ↦ (mem_inf.1 hx).1)
     (fun _ hxS hx ↦ mem_inf.2 ⟨hx, hxS⟩) fun y hy ↦ ⟨y, hy, by
       rw [Representation.IntertwiningMap.id_apply, sub_self]; exact U.toSubmodule.zero_mem⟩
-
-/-- The **second isomorphism theorem** for subrepresentations: `S / (U ⊓ S) ≅ (U ⊔ S) / U`. -/
-noncomputable def subquotientSupEquiv (U S : Subrepresentation ρ) :
-    (S.subquotient (U ⊓ S)).Equiv ((U ⊔ S).subquotient U) :=
-  subquotientEquivOfIntertwiningMap (.id ρ) (fun x hx ↦
-    mem_sup.2 ⟨0, U.toSubmodule.zero_mem, x, hx, zero_add x⟩)
-    (fun _ _ hx ↦ (mem_inf.1 hx).1) (fun _ hxS hxU ↦ mem_inf.2 ⟨hxU, hxS⟩) fun y hy ↦ by
-      obtain ⟨a, ha, b, hb, rfl⟩ := mem_sup.1 hy
-      refine ⟨b, hb, ?_⟩
-      rw [Representation.IntertwiningMap.id_apply, sub_add_cancel_right]
-      exact U.toSubmodule.neg_mem ha
 
 /-- If the subquotient `S / U` is irreducible, then `U ∩ S < S`. -/
 theorem inf_lt_of_isIrreducible {U S : Subrepresentation ρ}

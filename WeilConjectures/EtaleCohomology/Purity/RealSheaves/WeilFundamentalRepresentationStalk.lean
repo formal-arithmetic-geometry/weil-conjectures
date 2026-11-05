@@ -250,29 +250,6 @@ noncomputable def frobeniusLoopAt
     eqToIso (congrArg fiber hs.symm) ≪≫
     pullbackPathIso ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom π
 
-/-- Transport along a path `π : F_s ≅ F_t` intertwines the operator
-`ℱ_s ≅ ℱ_{σᵐ ≫ s} = ℱ_{s ≫ Frᵐ} = ((Frᵐ)^* ℱ)_s ⟶ ℱ_s` of the iterated Weil structure with `Ψ_m`
-of the loop `frobeniusLoopAt`. -/
-theorem mono_comp_frobPowStalk_frobeniusLoopAt (F : WeilSheaf K l C) (hF : F.IsLisse)
-    (s : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber) (m : ℕ)
-    (hs : s ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius K ^ m).hom ≫ s) (π : fiber s ≅ fiber B.t) :
-    (M.mono (fiberReparamIso (specGeometricFrobenius K ^ m) s)).inv.app (F.toLisse hF) ≫
-        (M.mono (eqToIso (congrArg fiber hs.symm))).hom.app (F.toLisse hF) ≫
-        (upperStarStalkIso l ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom s
-          F.obj.carrier.X).hom ≫
-        (lisseStalk l s).map (F.lisseFrobPowStr hF m).hom ≫ (M.mono π).hom.app (F.toLisse hF) =
-      (M.mono π).hom.app (F.toLisse hF) ≫
-        frobPowStalk M B F hF m (frobeniusLoopAt s m hs π) := by
-  rw [frobPowStalk, frobeniusLoopAt]
-  exact M.reparam_comp_upperStar_comp_mono _ _ hs π _ _
-
-omit [Finite K] [Fact (ringChar K ≠ l)] [IsCurve (C ↘ Spec (.of K))] in
-/-- The `ℚ̄_ℓ`-linear map underlying a morphism of `WeilCoefficients`. -/
-lemma toModuleCat_map_hom_apply {A A' : WeilCoefficients.{u} l} (f : A ⟶ A') (x : A) :
-    ((WeilCoefficients.toModuleCat l).map f).hom x = f.hom x :=
-  rfl
-
 omit [IsCurve (C ↘ Spec (.of K))] in
 /-- The Frobenius of the stalk at a geometric point `s` with `s ≫ Frᵐ = σᵐ ≫ s`, on the
 underlying sheaves: the reparametrisation `ℱ_s ≅ ℱ_{σᵐ ≫ s}`, the identification

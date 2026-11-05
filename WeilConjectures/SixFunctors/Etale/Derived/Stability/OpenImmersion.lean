@@ -214,24 +214,6 @@ theorem constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek 
     Λ j hK.1.1 hK.1.2 hK.2
   ⟨⟨h.1, h.2.1⟩, h.2.2⟩
 
-/-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
-category.
-
-For a quasi-compact open immersion `j : U ⟶ Y` admitting a compactification and a finite ring
-`Λ`, extension by zero sends `Dctf(U, Λ)` into `Dctf(Y, Λ)` *without moving the interval*: if
-`K` is bounded constructible with homology concentrated in `[a, b]` and Tor amplitude in
-`[a, b]`, then so is `Rj_! K`. Indeed `Rj_! = j_!` is exact, the extension by zero of a
-constructible sheaf is constructible, and `j_!K ⊗ᴸ F ≅ j_!(K ⊗ᴸ j^*F)` by the projection
-formula. -/
-theorem constructibleTorAmplitudeIn_rightDerivedLowerShriek (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K) :
-    constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b
-      ((R(j)_![ModuleCat.{u + 1} Λ]).obj K) :=
-  constructibleTorAmplitudeIn_of_iso _
-    ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app K).symm
-    (constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ j a b hK)
-
 /-- For a quasi-compact open immersion `j`, the exceptional inverse image is the restriction,
 `Rj^! ≅ D(j^*)`: both are right adjoint to `Rj_! ≅ D(j_!)`. -/
 noncomputable def rightDerivedUpperShriekIsoOfIsOpenImmersion :
@@ -267,30 +249,6 @@ end OpenImmersion
 section Functors
 
 variable {X Y : Scheme.{u}}
-
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (i): the restriction
-`Lf^* : Dctf(Y, A) ⥤ Dctf(X, A)` of the derived pullback to the small categories. -/
-noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar [UpperStarPreservesFlat A]
-    (f : X ⟶ Y) :
-    DerivedCategoryFiniteTor A Y ⥤ DerivedCategoryFiniteTor A X :=
-  ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A Y ⋙ L((f)^*[A]))
-    fun K ↦ constructibleFiniteTor_leftDerivedUpperStar A f K.property
-
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): the restriction
-`𝔻_X : Dctf(X, A)ᵒᵖ ⥤ Dctf(X, A)` of the Verdier dual to the small categories, given that `𝔻_X`
-preserves `Dctf(X, A)`. For a finite `Λ` whose exponent is invertible on `k` and `X` separated of
-finite type over `k`, this is `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`; that
-the restriction is an anti-equivalence is
-`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`. -/
-noncomputable def DerivedCategoryFiniteTor.verdierDual {S : Scheme.{u}} (a : X ⟶ S)
-    [HasCompactification a]
-    (h : ∀ ⦃K⦄, constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
-      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ((Etale.verdierDual Λ a).obj (op K))) :
-    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ⥤ DerivedCategoryFiniteTor (ModuleCat.{u +
-        1} Λ) X :=
-  ObjectProperty.lift _ ((DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X).op ⋙ Etale.verdierDual
-      Λ a)
-    fun K ↦ h K.unop.property
 
 end Functors
 

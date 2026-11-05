@@ -26,32 +26,4 @@ variable {A B C A' B' C' : Type*}
   (h : H ≅ F ⋙ G) (h' : H' ≅ F' ⋙ G')
   {U : C} {U' : C'} (ε : TC.obj U ⟶ U')
 
-/-- A pasted unit base change is invertible for any specified factorizations of the
-left adjoints. The right-adjoint composition comparisons are their canonical mates. -/
-theorem isIso_unitBaseChange_pastedAdjunction
-    [IsIso ((mateEquiv adjF adjF' (inv eF.hom)).natTrans.app (GR.obj U))]
-    [IsIso (unitBaseChange adjG adjG' eG.hom ε)] :
-    IsIso (unitBaseChange adjH adjH'
-      (Functor.isoWhiskerRight h TC ≪≫ compForgetIso eF eG ≪≫
-        Functor.isoWhiskerLeft TA h'.symm).hom ε) := by
-  let ρ := conjugateIsoEquiv adjH (adjF.comp adjG) h.symm
-  let ρ' := conjugateIsoEquiv adjH' (adjF'.comp adjG') h'.symm
-  have hρ : ∀ K, G.map (F.map (ρ.hom.app K)) ≫ G.map (adjF.counit.app _) ≫
-      adjG.counit.app K = h.inv.app _ ≫ adjH.counit.app K := by
-    intro K
-    have he := conjugateEquiv_counit adjH (adjF.comp adjG) h.inv K
-    simp only [Adjunction.comp_counit_app, Functor.comp_map, Functor.comp_obj] at he
-    exact he
-  have hρ' : ∀ K, G'.map (F'.map (ρ'.hom.app K)) ≫ G'.map (adjF'.counit.app _) ≫
-      adjG'.counit.app K = h'.inv.app _ ≫ adjH'.counit.app K := by
-    intro K
-    have he := conjugateEquiv_counit adjH' (adjF'.comp adjG') h'.inv K
-    simp only [Adjunction.comp_counit_app, Functor.comp_map, Functor.comp_obj] at he
-    exact he
-  apply isIso_unitBaseChange_comp adjF adjG adjH adjF' adjG' adjH'
-    eF.hom eG.hom _ h h' _ ρ hρ ρ' hρ' ε
-  constructor
-  intro K
-  simp [compForgetIso]
-
 end CategoryTheory.Adjunction

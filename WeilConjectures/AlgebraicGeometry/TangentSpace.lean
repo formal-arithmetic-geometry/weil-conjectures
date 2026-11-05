@@ -180,50 +180,10 @@ noncomputable def pullbackPresheafHom :
 noncomputable def cotangentPresheaf : X.PresheafOfModules :=
   PresheafOfModules.DifferentialsConstruction.relativeDifferentials' f.pullbackPresheafHom
 
-/-- The universal relative derivation `d : 𝒪_X → Ω` into the presheaf of relative differentials. -/
-noncomputable def cotangentPresheafDerivation :
-    f.cotangentPresheaf.Derivation' f.pullbackPresheafHom :=
-  PresheafOfModules.DifferentialsConstruction.derivation' f.pullbackPresheafHom
-
 /-- The sheaf `Ω¹_{X/S}` of relative differentials of `f : X ⟶ S`: the sheafification of the
 presheaf of relative Kähler differentials. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def cotangentSheaf : X.Modules :=
   (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj f.cotangentPresheaf
-
-/-- The tangent sheaf `T_{X/S} = ℋom_{𝒪_X}(Ω¹_{X/S}, 𝒪_X)` of `f : X ⟶ S`: the sheaf of relative
-vector fields, that is of derivations of `𝒪_X` over `f⁻¹𝒪_S`. (blueprint:
-`def-wf-lie-algebra-derivation`) -/
-noncomputable def tangentSheaf : X.Modules :=
-  Modules.dual f.cotangentSheaf
-
-/-- The tangent sheaf of `f : X ⟶ S` along a section `e : S ⟶ X`: the dual
-`ℋom_{𝒪_S}(e^*Ω¹_{X/S}, 𝒪_S)` of the pullback of the cotangent sheaf, the sheaf of relative
-tangent vectors at the points of `e`. For the identity section of a group scheme this is the Lie
-algebra sheaf. (blueprint: `def-wf-lie-algebra-derivation`) -/
-noncomputable def tangentSheafAlong (e : S ⟶ X) : S.Modules :=
-  Modules.dual ((Modules.pullback e).obj f.cotangentSheaf)
-
-/-- For a smooth morphism `f` the cotangent sheaf is locally free, so the tangent sheaf along a
-section `e` is the pullback `e^*T_{X/S}` of the tangent sheaf.
-
-Source: Stacks Project, Tags 02G1 and 0FNV. The cotangent sheaf is definitionally the
-library's relative differential sheaf, which is finite locally free for a smooth morphism.
-The dual pairing of a finite locally free module is preserved by the monoidal pullback
-functor; uniqueness of left duals gives the claimed isomorphism.
-
-(blueprint: lem-ag-tangent-along-section-pullback) -/
-theorem tangentSheafAlong_iso_pullback_tangentSheaf [Smooth f] (e : S ⟶ X) (he : e ≫ f = 𝟙 S) :
-    Nonempty (f.tangentSheafAlong e ≅ (Modules.pullback e).obj f.tangentSheaf) := by
-  have _ := he
-  have h : f.cotangentSheaf = f.relativeDifferentials := by rfl
-  change Nonempty (Modules.dual ((Modules.pullback e).obj f.cotangentSheaf) ≅
-    (Modules.pullback e).obj (Modules.dual f.cotangentSheaf))
-  rw [h]
-  have : f.relativeDifferentials.IsFiniteLocallyFree :=
-    f.isFiniteLocallyFree_relativeDifferentials
-  obtain ⟨d⟩ := Modules.nonempty_pullback_dual_iso_of_isFiniteLocallyFree
-    e f.relativeDifferentials
-  exact ⟨d.symm⟩
 
 end Hom
 

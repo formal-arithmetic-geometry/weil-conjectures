@@ -32,20 +32,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Additivity of the canonical sectionwise direct image, from its recorded left-exactness
-statement. Source: blueprint order 1468; Stacks Tag 03DA
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable instance proEtaleConstantModuleDirectImage_additive {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] : (proEtaleConstantModuleDirectImage f A).Additive :=
-  (proEtaleConstantModuleDirectImage_additive_leftExact f A).1
-
-/-- The ordinary uncompleted unbounded right derived direct image, constructed using
-K-injective resolutions in all modules over the constant coefficient sheaf. The module
-functor is the recorded sectionwise direct image through the constant-section map.
-Source: blueprint `def-weil-derived-direct-image`, order 1468; Stacks Section 07A5
-(blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable abbrev proEtaleConstantDerivedDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A :=
-  (proEtaleConstantModuleDirectImage f A).rightDerivedFunctor
-
 end AlgebraicGeometry.Scheme

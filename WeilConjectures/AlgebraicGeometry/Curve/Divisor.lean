@@ -61,23 +61,6 @@ with integer coefficients: `Div(X)` is the free abelian group on the closed poin
 abbrev Divisor : Type u :=
   closedPoints X →₀ ℤ
 
-/-- Blueprint `def-sc-divisor`: Divisors, principal divisors, class group
-
-The *degree* `deg D = ∑_P n_P` of a divisor `D = ∑_P n_P [P]`. Over an algebraically closed
-field, where every closed point is rational, this is the usual degree. -/
-noncomputable def Divisor.degree : X.Divisor →+ ℤ :=
-  Finsupp.liftAddHom fun _ ↦ AddMonoidHom.id ℤ
-
-variable {X} in
-lemma Divisor.degree_apply (D : X.Divisor) : Divisor.degree X D = D.sum fun _ n ↦ n :=
-  rfl
-
-variable {X} in
-@[simp]
-lemma Divisor.degree_single (P : closedPoints X) (n : ℤ) :
-    Divisor.degree X (Finsupp.single P n) = n := by
-  simp [Divisor.degree_apply]
-
 /-- If two points `x ≠ y` of a scheme satisfy `y ⤳ x`, then `x < y` in the specialization
 order. -/
 lemma lt_of_specializes_of_ne {x y : X} (h : y ⤳ x) (hxy : x ≠ y) : x < y :=
@@ -220,12 +203,6 @@ noncomputable def Divisor.comap : X.Divisor →+ U.Divisor :=
 lemma Divisor.comap_apply (D : X.Divisor) (P : closedPoints U) :
     Divisor.comap i D P = D (i.closedPointsMap P) :=
   rfl
-
-lemma Divisor.surjective_comap : Function.Surjective (Divisor.comap i) := by
-  intro D
-  refine ⟨Finsupp.mapDomain i.closedPointsMap D, ?_⟩
-  ext P
-  rw [comap_apply, Finsupp.mapDomain_apply i.closedPointsMap_injective]
 
 /-- A divisor restricts to zero on `U` iff it is supported outside the image of `U`. -/
 lemma Divisor.comap_eq_zero_iff (D : X.Divisor) :

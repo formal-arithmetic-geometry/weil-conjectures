@@ -34,28 +34,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Naturality in the first variable of the specified counit mate for an arbitrary coefficient.
-Source: Stacks 0B56 and blueprint order 1274, paragraph 1
-(blueprint: lemma-weil-pbc-projection-formula-base-change-naturality).
-Proof: transpose both composites under adj. Naturality of alpha identifies the second
-transpose with counit tensor identity followed by u tensor identity. Naturality of the
-counit identifies it with the first transpose. Injectivity of the Hom equivalence
-proves equality. This applies to every u and in particular to endomorphisms. -/
-theorem derivedProjectionFormulaMate_naturality
-    {A : Type u} [Category.{v} A] {B : Type u'} [Category.{v'} B]
-    (L : A ⥤ B) (V : B ⥤ A) (adj : L ⊣ V)
-    (TR : A × A ⥤ A) (TS : B × B ⥤ B)
-    (alpha : TR ⋙ L ≅ (L.prod L) ⋙ TS)
-    (E E' : B) (Q : A) (q : E ⟶ E') :
-    derivedProjectionFormulaMate L V adj TR TS alpha E Q ≫
-        V.map (TS.map (Prod.mkHom q (𝟙 (L.obj Q)))) =
-      TR.map (Prod.mkHom (V.map q) (𝟙 Q)) ≫
-        derivedProjectionFormulaMate L V adj TR TS alpha E' Q := by
-  exact (congrArg (fun t ↦ t.app Q)
-    ((adj.rightAdjointProjectionMap (T_C := Functor.curry.obj TS)
-      (T_D := Functor.curry.obj TR)
-      (Functor.curry.map alpha.hom ≫ (Functor.curryObjProdComp L L TS).hom)).naturality q)).symm
-
 end CategoryTheory
 
 namespace SheafOfModules
@@ -63,20 +41,5 @@ namespace SheafOfModules
 end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme
-
-/-- The projection arrow for arbitrary coefficients on the small ringed pro-etale sites.
-It is exactly the existing counit mate using the uniquely normalized tensor comparison.
-Source: Stacks 0B56 (blueprint: lemma-weil-pbc-projection-formula-base-change-naturality). -/
-noncomputable def proEtaleProjectionFormulaMate
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
-    (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)
-    (K : DerivedCategory (proEtaleRingModules X S))
-    (Q : DerivedCategory (proEtaleRingModules Y R)) :=
-  derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c)
-    (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c)
-    a.tensor b.tensor (proEtaleCanonicalTensorComparison f R S c a b) K Q
 
 end AlgebraicGeometry.Scheme

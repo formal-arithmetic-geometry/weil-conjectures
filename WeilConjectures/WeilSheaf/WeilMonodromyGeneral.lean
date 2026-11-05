@@ -125,13 +125,6 @@ variable {K X}
 
 namespace FrobeniusBasePoint
 
-/-- Base point data exist as soon as the geometric fibre is connected and has a geometric
-point: any two fibre functors of the Galois category of finite étale covers are isomorphic. -/
-theorem nonempty [ConnectedSpace (X ↘ Spec (.of K)).geometricFiber]
-    (t : Spec (.of (AlgebraicClosure K)) ⟶ (X ↘ Spec (.of K)).geometricFiber) :
-    Nonempty (FrobeniusBasePoint K X) :=
-  ⟨⟨t, (PreGaloisCategory.nonempty_iso_of_fiberFunctor _ _).some⟩⟩
-
 variable (B : FrobeniusBasePoint K X)
 
 /-- The transport `g ↦ β ≫ Fr_* g ≫ β⁻¹` of loops at `t` along the Frobenius and the path `β`,
@@ -789,15 +782,6 @@ theorem isIrreducibleLisse_of_isIrreducible_fundamentalRep
     have : Epi i := Preadditive.epi_of_cokernel_zero hπ
     exact isIso_of_mono_of_epi i
 
-/-- A lisse Weil sheaf on `X₀` is irreducible lisse if and only if its Weil fundamental
-representation is irreducible. -/
-theorem isIrreducibleLisse_iff_isIrreducible_fundamentalRep
-    [LocallyOfFiniteType (X ↘ Spec (.of K))] (hM : M.IsEquivalenceAt B.t)
-    {F : WeilSheaf K l X} (hF : F.IsLisse) :
-    F.IsIrreducibleLisse ↔ (D.fundamentalRep M F hF).IsIrreducible :=
-  ⟨fun h ↦ D.isIrreducible_fundamentalRep M hM h,
-    D.isIrreducibleLisse_of_isIrreducible_fundamentalRep M hM hF⟩
-
 end WeilData
 
 end Irreducible
@@ -838,35 +822,6 @@ theorem exists_isBoundedOn_twist_fundamentalRep (hM : M.IsEquivalenceAt B.t)
   have := D.isIrreducible_fundamentalRep M hM hF
   exact exists_isBoundedOn_twist _ D.deg_surjective
     (D.isBoundedOn_fundamentalRep_geometric M hM F hF.1)
-
-/-- **Finite geometric monodromy** (cf. Deligne, Weil II, 1.3.14) in arbitrary dimension: if the
-geometric monodromy group of an irreducible lisse Weil sheaf `ℱ` is finite, then a twist
-`ρ_ℱ ⊗ b^{-deg}` of its Weil fundamental representation has finite image. -/
-theorem exists_finite_range_twist_fundamentalRep (hM : M.IsEquivalenceAt B.t)
-    {F : WeilSheaf K l X} (hF : F.IsIrreducibleLisse)
-    (hfin : (D.fundamentalRep M F hF.1 '' D.deg.ker).Finite) :
-    ∃ b : (PadicAlgCl l)ˣ,
-      (Set.range ((D.fundamentalRep M F hF.1).twist (degreeCharacter D.deg b⁻¹))).Finite := by
-  have : FiniteDimensional (PadicAlgCl l) (LisseMonodromy.StalkSpace B.t (F.toLisse hF.1)) :=
-    F.finiteDimensional_stalkObj B.t
-  have := D.isIrreducible_fundamentalRep M hM hF
-  exact exists_finite_range_twist _ D.deg_surjective hfin
-
-/-- **Trivial geometric monodromy** in arbitrary dimension: if the geometric fundamental group
-acts trivially on the stalk of an irreducible lisse Weil sheaf `ℱ`, then `ℱ` has rank one and its
-Weil fundamental representation is a character `b ^ deg`. -/
-theorem finrank_eq_one_and_exists_twist_eq_one_fundamentalRep (hM : M.IsEquivalenceAt B.t)
-    {F : WeilSheaf K l X} (hF : F.IsIrreducibleLisse)
-    (htriv : ∀ g, M.rep B.t (F.toLisse hF.1) g = 1) :
-    Module.finrank (PadicAlgCl l) (LisseMonodromy.StalkSpace B.t (F.toLisse hF.1)) = 1 ∧
-      ∃ b : (PadicAlgCl l)ˣ,
-        ∀ w, (D.fundamentalRep M F hF.1).twist (degreeCharacter D.deg b⁻¹) w = 1 := by
-  have : FiniteDimensional (PadicAlgCl l) (LisseMonodromy.StalkSpace B.t (F.toLisse hF.1)) :=
-    F.finiteDimensional_stalkObj B.t
-  have := D.isIrreducible_fundamentalRep M hM hF
-  refine finrank_eq_one_and_exists_twist_eq_one _ D.deg_surjective fun i hi ↦ ?_
-  rw [D.fundamentalRep_geometric M F hF.1 ⟨i, hi⟩]
-  exact htriv _
 
 /-- **Deligne, Weil II, 1.3.14**, sheaf-theoretic form in arbitrary dimension: an irreducible
 lisse Weil sheaf `ℱ` on `X₀` is the twist of an irreducible lisse Weil sheaf `ℱ'` with bounded
@@ -917,36 +872,6 @@ variable {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
   (M : LisseMonodromy l (X ↘ Spec (.of K)).geometricFiber K) {B : FrobeniusBasePoint K X}
   {W : Type u} [Group W] (D : B.WeilData W)
 
-/-- The finite-dimensional representations of `W` which are continuous on the geometric part
-`π₁(X, t) → W`. -/
-def isContinuousRep : ObjectProperty (Rep.{u} (PadicAlgCl l) W) :=
-  fun V ↦ FiniteDimensional (PadicAlgCl l) V.V ∧ V.ρ.IsContinuousOn D.geomHom
-
-/-- **The lisse sheaf–representation equivalence** on a scheme `X₀` of arbitrary dimension
-(`prop-wf-weil-sheaf-representation-equivalence`): if the monodromy at `t` is an equivalence,
-the Weil fundamental representation is an equivalence between lisse Weil sheaves on `X₀` and
-finite-dimensional representations of `W` continuous on `π₁(X, t)`, under which every lisse Weil
-sheaf goes to a representation isomorphic to its Weil fundamental representation. -/
-theorem exists_equivalence_fundamentalRep (hM : M.IsEquivalenceAt B.t) :
-    ∃ e : LisseWeilSheaf K l X ≌ (D.isContinuousRep (l := l)).FullSubcategory,
-      ∀ F : LisseWeilSheaf K l X, ∃ f : (e.functor.obj F).obj.V ≃ₗ[PadicAlgCl l]
-          LisseMonodromy.StalkSpace B.t (F.obj.toLisse F.property),
-        ∀ g v, f ((e.functor.obj F).obj.ρ g v) =
-          D.fundamentalRep M F.obj F.property g (f v) := by
-  have (F : LisseWeilSheaf K l X) : FiniteDimensional (PadicAlgCl l)
-      (LisseMonodromy.StalkSpace B.t (F.obj.toLisse F.property)) :=
-    F.obj.finiteDimensional_stalkObj B.t
-  refine Representation.exists_equivalence_of_realization D.geomHom
-    (fun F : LisseWeilSheaf K l X ↦ LisseMonodromy.StalkSpace B.t (F.obj.toLisse F.property))
-    (fun F ↦ D.fundamentalRep M F.obj F.property)
-    (fun F ↦ D.fundamentalRep_isContinuousOn M F.obj F.property hM)
-    (fun {F G : LisseWeilSheaf K l X} (f : F ⟶ G) ↦ B.stalkMap f.hom F.property G.property)
-    (fun F ↦ B.stalkMap_id F.property) (fun f g ↦ B.stalkMap_comp f.hom g.hom _ _ _)
-    (fun {F G : LisseWeilSheaf K l X} (f : F ⟶ G) w v ↦ D.stalkMap_fundamentalRep M f.hom _ _ w v)
-    (fun f f' h ↦ stalkMap_injective M B hM f f' h)
-    (fun φ hφ ↦ D.exists_stalkMap_eq M hM φ hφ)
-    (fun V _ _ _ ρ hρ ↦ D.exists_fundamentalRep_linearEquiv M hM V ρ hρ) _ fun _ ↦ Iff.rfl
-
 end WeilData
 
 end Equivalence
@@ -957,106 +882,8 @@ namespace WeilData
 
 variable {B : FrobeniusBasePoint K X} {W : Type*} [Group W] (D : B.WeilData W)
 
-/-- The Frobenius transport of loops is conjugation by the inverse of the lift of the
-Frobenius. -/
-lemma geomHom_frobConj (x : Aut (fiber B.t)) :
-    D.geomHom (B.frobConj x) = D.frobLift⁻¹ * D.geomHom x * D.frobLift :=
-  D.geomEquiv_conj x
-
-/-- The inverse of the Frobenius transport of loops is conjugation by the lift of the
-Frobenius. -/
-lemma geomHom_frobConj_symm (x : Aut (fiber B.t)) :
-    D.geomHom (B.frobConj.symm x) = D.frobLift * D.geomHom x * D.frobLift⁻¹ := by
-  have h := D.geomHom_frobConj (B.frobConj.symm x)
-  rw [MulEquiv.apply_symm_apply] at h
-  rw [h]
-  group
-
-/-- The action of `n ∈ ℤ` on `π₁(X, t)` defining `π₁(X, t) ⋊ ℤ` is conjugation by `γⁿ`. -/
-lemma geomHom_frobAction (n : ℤ) (x : Aut (fiber B.t)) :
-    D.geomHom (B.frobAction (Multiplicative.ofAdd n) x) =
-      D.frobLift ^ n * D.geomHom x * (D.frobLift ^ n)⁻¹ := by
-  simp only [frobAction, zpowersHom_apply, toAdd_ofAdd]
-  induction n using Int.induction_on generalizing x with
-  | zero => simp
-  | succ n ih =>
-    rw [zpow_add_one, MulAut.mul_apply, ih, MulAut.inv_apply, geomHom_frobConj_symm]
-    group
-  | pred n ih =>
-    rw [zpow_sub_one, MulAut.mul_apply, ih, inv_inv, geomHom_frobConj]
-    group
-
-/-- The comparison homomorphism `π₁(X, t) ⋊ ℤ → W`, `(g, n) ↦ θ(g) γⁿ`. -/
-noncomputable def toWeilGroupHom : B.WeilGroup →* W :=
-  SemidirectProduct.lift D.geomHom (zpowersHom W D.frobLift) fun g ↦ by
-    ext x
-    have h := D.geomHom_frobAction (Multiplicative.toAdd g) x
-    rw [ofAdd_toAdd] at h
-    simp only [MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, MulAut.conj_apply,
-      zpowersHom_apply]
-    exact h
-
-@[simp]
-lemma toWeilGroupHom_inl (g : Aut (fiber B.t)) :
-    D.toWeilGroupHom (SemidirectProduct.inl g) = D.geomHom g :=
-  SemidirectProduct.lift_inl _ _ _ g
-
-@[simp]
-lemma toWeilGroupHom_inr (n : Multiplicative ℤ) :
-    D.toWeilGroupHom (SemidirectProduct.inr n) = D.frobLift ^ n.toAdd :=
-  SemidirectProduct.lift_inr _ _ _ n
-
-/-- The comparison homomorphism preserves degrees. -/
-lemma deg_comp_toWeilGroupHom : D.deg.comp D.toWeilGroupHom = B.weilData.deg := by
-  refine SemidirectProduct.hom_ext (MonoidHom.ext fun g ↦ ?_) (MonoidHom.ext fun n ↦ ?_)
-  · simp only [MonoidHom.comp_apply, toWeilGroupHom_inl, geomHom_apply]
-    exact (D.geomEquiv g).2.trans (SemidirectProduct.rightHom_inl g).symm
-  · simp only [MonoidHom.comp_apply, toWeilGroupHom_inr, map_zpow, D.deg_frobLift]
-    rw [← ofAdd_zsmul, smul_eq_mul, mul_one, ofAdd_toAdd]
-    exact (SemidirectProduct.rightHom_inr n).symm
-
-/-- **Uniqueness of the Weil group**: any Weil data `(W, deg, θ, γ)` is canonically isomorphic
-to the semidirect product `π₁(X, t) ⋊ ℤ`, by `(g, n) ↦ θ(g) γⁿ`. -/
-lemma bijective_toWeilGroupHom : Function.Bijective D.toWeilGroupHom := by
-  refine ⟨(injective_iff_map_eq_one _).2 fun x hx ↦ ?_, fun w ↦ ?_⟩
-  · have hdeg := congrArg D.deg hx
-    rw [← MonoidHom.comp_apply, deg_comp_toWeilGroupHom, map_one] at hdeg
-    rw [← SemidirectProduct.inl_left_mul_inr_right x] at hx ⊢
-    replace hdeg : x.right = 1 := hdeg
-    rw [hdeg, map_one, mul_one] at hx ⊢
-    rw [toWeilGroupHom_inl, geomHom_apply, OneMemClass.coe_eq_one,
-      MulEquiv.map_eq_one_iff] at hx
-    rw [hx, map_one]
-  · refine ⟨SemidirectProduct.inl (D.geomEquiv.symm
-      ⟨_, D.degreeDatum.mul_inv_zpow_mem_ker w⟩) * SemidirectProduct.inr (D.deg w), ?_⟩
-    rw [map_mul, toWeilGroupHom_inl, toWeilGroupHom_inr, geomHom_apply,
-      MulEquiv.apply_symm_apply]
-    simp [degreeDatum]
-
-/-- The isomorphism `π₁(X, t) ⋊ ℤ ≅ W` attached to Weil data on `W`. -/
-noncomputable def weilGroupEquiv : B.WeilGroup ≃* W :=
-  MulEquiv.ofBijective D.toWeilGroupHom D.bijective_toWeilGroupHom
-
 variable {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
   (M : LisseMonodromy l (X ↘ Spec (.of K)).geometricFiber K)
-
-/-- The Weil fundamental representation of `W` restricts, along `π₁(X, t) ⋊ ℤ ≅ W`, to the Weil
-fundamental representation of the canonical Weil group: all Weil data give the same theory. -/
-theorem fundamentalRep_toWeilGroupHom (F : WeilSheaf K l X) (hF : F.IsLisse)
-    (w : B.WeilGroup) :
-    D.fundamentalRep M F hF (D.toWeilGroupHom w) = B.weilData.fundamentalRep M F hF w := by
-  refine LinearMap.ext fun v ↦ (B.weilData.intertwines_of_geometric_frobLift
-    (B.weilData.fundamentalRep M F hF) ((D.fundamentalRep M F hF).comp D.toWeilGroupHom)
-    LinearMap.id (fun u hu v ↦ ?_) (fun v ↦ ?_) w v).symm
-  · obtain ⟨g, hg⟩ := B.weilData.geomEquiv.surjective ⟨u, hu⟩
-    obtain rfl : u = SemidirectProduct.inl g := (congrArg Subtype.val hg).symm
-    rw [LinearMap.id_apply, LinearMap.id_apply, MonoidHom.comp_apply, toWeilGroupHom_inl,
-      geomHom_apply, fundamentalRep_geomEquiv]
-    exact congrArg (fun T ↦ T v) (B.weilData.fundamentalRep_geomEquiv M F hF g)
-  · rw [LinearMap.id_apply, LinearMap.id_apply, MonoidHom.comp_apply, fundamentalRep_frobLift]
-    have : D.toWeilGroupHom B.weilData.frobLift = D.frobLift :=
-      (D.toWeilGroupHom_inr _).trans (by simp)
-    rw [this, fundamentalRep_frobLift]
 
 end WeilData
 
@@ -1068,58 +895,6 @@ variable {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
 open Representation
 
-/-- **Deligne, Weil II, 1.3.14** for the canonical Weil group `π₁(X, t) ⋊ ℤ` of a scheme `X₀`
-of finite type over `K` of arbitrary dimension: for an irreducible lisse Weil sheaf `ℱ` some
-twist `ρ_ℱ ⊗ b^{-deg}` of its Weil fundamental representation is bounded on the whole Weil
-group. -/
-theorem exists_isBoundedOn_twist_fundamentalRep [LocallyOfFiniteType (X ↘ Spec (.of K))]
-    (M : LisseMonodromy l (X ↘ Spec (.of K)).geometricFiber K) (B : FrobeniusBasePoint K X)
-    (hM : M.IsEquivalenceAt B.t) {F : WeilSheaf K l X} (hF : F.IsIrreducibleLisse) :
-    ∃ b : (PadicAlgCl l)ˣ, ((B.weilData.fundamentalRep M F hF.1).twist
-      (degreeCharacter B.weilData.deg b⁻¹)).IsBoundedOn Set.univ :=
-  B.weilData.exists_isBoundedOn_twist_fundamentalRep M hM hF
-
-/-- **Deligne, Weil II, 1.3.14** in arbitrary dimension, without monodromy hypotheses: let `X₀`
-be of finite type over `K` with connected, regular geometric fibre `X` (Noetherian and
-quasi-compact), and `t` a geometric point of `X`. Then there are a monodromy `M` of lisse sheaves
-on `X` which is an equivalence at `t` and base point data `B` at `t` such that for every
-irreducible lisse Weil sheaf `ℱ` on `X₀` some twist `ρ_ℱ ⊗ b^{-deg}` of its Weil fundamental
-representation of `π₁(X, t) ⋊ ℤ` is bounded. -/
-theorem exists_lisseMonodromy_isBoundedOn_twist_fundamentalRep
-    [LocallyOfFiniteType (X ↘ Spec (.of K))]
-    [IsLocallyNoetherian (X ↘ Spec (.of K)).geometricFiber]
-    [CompactSpace (X ↘ Spec (.of K)).geometricFiber] [IsRegular (X ↘ Spec (.of K)).geometricFiber]
-    [ConnectedSpace (X ↘ Spec (.of K)).geometricFiber]
-    (t : Spec (.of (AlgebraicClosure K)) ⟶ (X ↘ Spec (.of K)).geometricFiber) :
-    ∃ (M : LisseMonodromy l (X ↘ Spec (.of K)).geometricFiber K) (B : FrobeniusBasePoint K X),
-      B.t = t ∧ M.IsEquivalenceAt B.t ∧ ∀ (F : WeilSheaf K l X) (hF : F.IsIrreducibleLisse),
-        ∃ b : (PadicAlgCl l)ˣ, ((B.weilData.fundamentalRep M F hF.1).twist
-          (degreeCharacter B.weilData.deg b⁻¹)).IsBoundedOn Set.univ := by
-  obtain ⟨M, hM⟩ := ProEtale.exists_lisseMonodromy (l := l)
-    (Y := (X ↘ Spec (.of K)).geometricFiber) (Ω := K)
-  let B : FrobeniusBasePoint K X := ⟨t, (PreGaloisCategory.nonempty_iso_of_fiberFunctor _ _).some⟩
-  exact ⟨M, B, rfl, hM B.t, fun F hF ↦ exists_isBoundedOn_twist_fundamentalRep M B (hM B.t) hF⟩
-
-/-- **Deligne, Weil II, 1.3.14** for smooth geometrically connected `X₀` of finite type over
-`K` of arbitrary dimension: the geometric fibre is then connected, regular, Noetherian and
-quasi-compact, so `exists_lisseMonodromy_isBoundedOn_twist_fundamentalRep` applies. -/
-theorem exists_lisseMonodromy_isBoundedOn_twist_fundamentalRep_of_smooth
-    [Smooth (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))]
-    [GeometricallyConnected (X ↘ Spec (.of K))]
-    (t : Spec (.of (AlgebraicClosure K)) ⟶ (X ↘ Spec (.of K)).geometricFiber) :
-    ∃ (M : LisseMonodromy l (X ↘ Spec (.of K)).geometricFiber K) (B : FrobeniusBasePoint K X),
-      B.t = t ∧ M.IsEquivalenceAt B.t ∧ ∀ (F : WeilSheaf K l X) (hF : F.IsIrreducibleLisse),
-        ∃ b : (PadicAlgCl l)ˣ, ((B.weilData.fundamentalRep M F hF.1).twist
-          (degreeCharacter B.weilData.deg b⁻¹)).IsBoundedOn Set.univ := by
-  have : ConnectedSpace (X ↘ Spec (.of K)).geometricFiber :=
-    GeometricallyConnected.geometrically_connectedSpace (f := X ↘ Spec (.of K))
-      (Scheme.specAlgebraicClosure K).hom (X ↘ Spec (.of K)).geometricFiberProj
-      (X ↘ Spec (.of K)).geometricFiberToAlgebraicClosure (IsPullback.of_hasPullback _ _)
-  have : Smooth (X ↘ Spec (.of K)).geometricFiberToAlgebraicClosure :=
-    inferInstanceAs (Smooth (Limits.pullback.snd _ _))
-  have := IsRegular.of_smooth (X ↘ Spec (.of K)).geometricFiberToAlgebraicClosure
-  exact exists_lisseMonodromy_isBoundedOn_twist_fundamentalRep t
-
 end Canonical
 
 end FrobeniusBasePoint
@@ -1128,29 +903,6 @@ namespace WeilGroup
 
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
   [IsCurve (C ↘ Spec (.of K))] {W : WeilGroup (C ↘ Spec (.of K))}
-
-/-- The base point data of a curve, as base point data in the sense of arbitrary dimension. -/
-def BasePointData.toFrobeniusBasePoint (B : BasePointData W) : FrobeniusBasePoint K C :=
-  ⟨B.t, B.frobPath⟩
-
-/-- The homotopy exact sequence data of a curve, as Weil data in the sense of arbitrary
-dimension for the Weil group of the curve. -/
-def WeilMonodromyData.toWeilData {B : BasePointData W} (D : WeilMonodromyData B) :
-    B.toFrobeniusBasePoint.WeilData W.carrier where
-  deg := W.deg
-  deg_surjective := W.deg_surjective
-  geomEquiv := D.geomEquiv.toMulEquiv
-  frobLift := D.frobLift
-  deg_frobLift := D.deg_frobLift
-  geomEquiv_conj g := D.geomEquiv_conj g
-
-/-- For curves, the Weil fundamental representation in the sense of arbitrary dimension is the
-Weil fundamental representation of `AlgebraicGeometry.WeilGroup.fundamentalRep`. -/
-theorem WeilMonodromyData.fundamentalRep_toWeilData {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
-    (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K) {B : BasePointData W}
-    (D : WeilMonodromyData B) (F : WeilSheaf K l C) (hF : F.IsLisse) :
-    D.toWeilData.fundamentalRep M F hF = fundamentalRep M D F hF :=
-  rfl
 
 end WeilGroup
 

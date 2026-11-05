@@ -152,10 +152,6 @@ lemma d_totalπ_zero_succ (n q : ℕ) :
   split_ifs <;> first | omega | (simp; done) | (exfalso; tauto) |
     (obtain ⟨rfl, rfl⟩ := ‹p' = _ ∧ q' = _›; simp)
 
-lemma d_totalπ_zero_zero (n : ℕ) :
-    (K.total (ComplexShape.up ℕ)).d n (n + 1) ≫ K.totalπ (n + 1) 0 0 = 0 := by
-  rw [totalπ_eq_zero _ _ _ _ (by omega), comp_zero]
-
 section Staircase
 
 /-- A morphism to the total complex in degree `m` all of whose components in the columns
@@ -205,71 +201,6 @@ lemma comp_d_totalπ_zero {A : C} {n : ℕ} (x : A ⟶ (K.total (ComplexShape.up
 variable (hrow : ∀ p q, (ShortComplex.mk ((K.d p (p + 1)).f q) ((K.d (p + 1) (p + 2)).f q)
   (K.d_f_comp_d_f _ _ _ q)).Exact)
 
-include hrow in
-/-- One step of the staircase: if the components of `x` vanish in the columns `≥ k + 2` and the
-component of `d x` in the column `k + 2` vanishes, then up to refinement and a coboundary the
-components of `x` vanish in the columns `≥ k + 1`. -/
-lemma exists_vanishesFrom_step {A : C} {m k : ℕ} (hk : k ≤ m)
-    (x : A ⟶ (K.total (ComplexShape.up ℕ)).X (m + 1)) (hx : K.VanishesFrom x (k + 2))
-    (hdx : x ≫ (K.total (ComplexShape.up ℕ)).d (m + 1) (m + 2) ≫
-      K.totalπ (m + 2) (k + 2) (m - k) = 0) :
-    ∃ (A' : C) (π : A' ⟶ A) (_ : Epi π) (w : A' ⟶ (K.total (ComplexShape.up ℕ)).X m),
-      K.VanishesFrom (π ≫ x - w ≫ (K.total (ComplexShape.up ℕ)).d m (m + 1)) (k + 1) := by
-  rw [comp_d_totalπ_succ x (k + 1) _ (fun q' ↦ hx _ _ le_rfl)] at hdx
-  obtain ⟨A', π, hπ, z, hz⟩ := (hrow k (m - k)).exact_up_to_refinements _ hdx
-  dsimp at z hz
-  refine ⟨A', π, hπ, z ≫ K.ιTotal (ComplexShape.up ℕ) k (m - k) m
-    (by rw [π_up_nat]; omega), fun p q hp ↦ ?_⟩
-  rw [sub_comp, Category.assoc, Category.assoc, Category.assoc, ιTotal_d_totalπ,
-    dif_neg (show ¬ (k = p ∧ m - k + 1 = q) by omega)]
-  simp only [comp_zero, smul_zero, add_zero]
-  by_cases hp' : p = k + 1 ∧ m - k = q
-  · obtain ⟨rfl, rfl⟩ := hp'
-    rw [dif_pos ⟨rfl, rfl⟩, hz]
-    simp
-  · rw [dif_neg (fun h ↦ hp' ⟨h.1.symm, h.2⟩), comp_zero, comp_zero, sub_zero]
-    by_cases hp'' : p = k + 1
-    · subst hp''
-      rw [totalπ_eq_zero _ _ _ _ (by omega), comp_zero, comp_zero]
-    · rw [hx p q (by omega), comp_zero]
-
-include hrow in
-/-- The staircase: if the components of `d x` vanish in the columns `p ≥ 2`, then up to
-refinement and a coboundary the components of `x` vanish in the columns `p ≥ 1`. -/
-lemma exists_vanishesFrom_one {A : C} {m : ℕ}
-    (x : A ⟶ (K.total (ComplexShape.up ℕ)).X m)
-    (hdx : K.VanishesFrom (x ≫ (K.total (ComplexShape.up ℕ)).d m (m + 1)) 2) :
-    ∃ (A' : C) (π : A' ⟶ A) (_ : Epi π) (w : A' ⟶ (K.total (ComplexShape.up ℕ)).X (m - 1)),
-      K.VanishesFrom (π ≫ x - w ≫ (K.total (ComplexShape.up ℕ)).d (m - 1) m) 1 := by
-  obtain _ | m := m
-  · exact ⟨A, 𝟙 A, inferInstance, 0, by simpa using vanishesFrom_of_lt x 1 (by omega)⟩
-  suffices H : ∀ (j : ℕ) {A : C} (x : A ⟶ (K.total (ComplexShape.up ℕ)).X (m + 1)),
-      K.VanishesFrom (x ≫ (K.total (ComplexShape.up ℕ)).d (m + 1) (m + 2)) 2 →
-      K.VanishesFrom x (j + 1) →
-      ∃ (A' : C) (π : A' ⟶ A) (_ : Epi π) (w : A' ⟶ (K.total (ComplexShape.up ℕ)).X m),
-        K.VanishesFrom (π ≫ x - w ≫ (K.total (ComplexShape.up ℕ)).d m (m + 1)) 1 from
-    H (m + 1) x hdx (vanishesFrom_of_lt x _ (by omega))
-  intro j
-  induction j with
-  | zero =>
-    intro A x _ hx
-    exact ⟨A, 𝟙 A, inferInstance, 0, by simpa using hx⟩
-  | succ j ih =>
-    intro A x hdx hx
-    by_cases hj : j ≤ m
-    · obtain ⟨A₁, π₁, hπ₁, w₁, hw₁⟩ := exists_vanishesFrom_step hrow hj x hx (by
-        rw [← Category.assoc]
-        exact hdx _ _ (by omega))
-      obtain ⟨A₂, π₂, hπ₂, w₂, hw₂⟩ := ih (π₁ ≫ x - w₁ ≫ (K.total _).d m (m + 1)) (by
-        rw [sub_comp, Category.assoc, Category.assoc, HomologicalComplex.d_comp_d, comp_zero,
-          sub_zero]
-        exact vanishesFrom_comp π₁ hdx) hw₁
-      refine ⟨A₂, π₂ ≫ π₁, epi_comp _ _, π₂ ≫ w₁ + w₂, ?_⟩
-      convert hw₂ using 1
-      simp only [comp_sub, add_comp, Category.assoc]
-      abel
-    · exact ih x hdx (vanishesFrom_of_lt x _ (by omega))
-
 end Staircase
 
 variable {L : CochainComplex C ℕ} (ε : L ⟶ K.X 0) (hε : ε ≫ K.d 0 1 = 0)
@@ -318,81 +249,5 @@ lemma exists_eq_comp_ε {A : C} {m : ℕ} {x : A ⟶ (K.total (ComplexShape.up �
       π ≫ x ≫ K.totalπ m 0 m = l ≫ ε.f m := by
   rw [comp_d_totalπ_succ x 0 m (fun q' ↦ hx _ _ le_rfl)] at hdx
   exact (h₁ m).exact_up_to_refinements _ hdx
-
-include h₀ h₁ hrow in
-/-- **Rows which are resolutions.** If the rows `0 ⟶ L^q ⟶ K^{0, q} ⟶ K^{1, q} ⟶ ⋯` of a first
-quadrant double complex `K` augmented by `ε : L ⟶ K.X 0` are exact, then the induced morphism
-`L ⟶ Tot K` is a quasi-isomorphism. -/
-theorem quasiIso_toTotalOfAugmentation : QuasiIso (K.toTotalOfAugmentation ε hε) := by
-  have : ∀ q, Mono (ε.f q) := h₀
-  rw [quasiIso_iff]
-  intro n
-  rw [quasiIsoAt_iff_isIso_homologyMap]
-  have hmono : Mono (HomologicalComplex.homologyMap (K.toTotalOfAugmentation ε hε) n) := by
-    rw [HomologicalComplex.mono_homologyMap_iff_up_to_refinements _ (n - 1) n (n + 1)
-      (by obtain _ | n := n <;> simp) (by simp)]
-    intro A x₂ hx₂ y₁ hy₁
-    obtain _ | m := n
-    · refine ⟨A, 𝟙 A, inferInstance, 0, ?_⟩
-      have : x₂ ≫ ε.f 0 = 0 := by
-        rw [← toTotalOfAugmentation_f_totalπ_zero K ε hε, ← Category.assoc, hy₁,
-          HomologicalComplex.shape _ _ _ (by simp), comp_zero, zero_comp]
-      have hx : x₂ = 0 := (cancel_mono (ε.f 0)).1 (by rw [this, zero_comp])
-      simp [hx]
-    · let y : A ⟶ (K.total (ComplexShape.up ℕ)).X m := y₁
-      have hy : y ≫ (K.total (ComplexShape.up ℕ)).d m (m + 1) =
-          x₂ ≫ (K.toTotalOfAugmentation ε hε).f (m + 1) := hy₁.symm
-      obtain ⟨A₁, π₁, hπ₁, w, hw⟩ := exists_vanishesFrom_one hrow y (by
-        rw [hy]
-        exact fun p q hp ↦ vanishesFrom_toTotalOfAugmentation K ε hε x₂ p q (by omega))
-      set y' := π₁ ≫ y - w ≫ (K.total (ComplexShape.up ℕ)).d (m - 1) m
-      have hdy' : y' ≫ (K.total (ComplexShape.up ℕ)).d m (m + 1) =
-          π₁ ≫ x₂ ≫ (K.toTotalOfAugmentation ε hε).f (m + 1) := by
-        simp only [y', sub_comp, Category.assoc, HomologicalComplex.d_comp_d, comp_zero,
-          sub_zero, hy]
-      obtain ⟨A₂, π₂, hπ₂, l, hl⟩ := exists_eq_comp_ε (hε := hε) h₁ hw (by
-        rw [← Category.assoc, hdy']
-        simp only [Category.assoc]
-        rw [← Category.assoc x₂, vanishesFrom_toTotalOfAugmentation K ε hε x₂ 1 m le_rfl,
-          comp_zero])
-      refine ⟨A₂, π₂ ≫ π₁, epi_comp _ _, l, ?_⟩
-      have e1 := comp_d_totalπ_zero y'
-      rw [← Category.assoc, hdy', Category.assoc, Category.assoc,
-        toTotalOfAugmentation_f_totalπ_zero] at e1
-      rw [← cancel_mono (ε.f (m + 1))]
-      calc ((π₂ ≫ π₁) ≫ x₂) ≫ ε.f (m + 1) =
-            π₂ ≫ (y' ≫ K.totalπ m 0 m) ≫ (K.X 0).d m (m + 1) := by
-            rw [← e1]
-            simp only [Category.assoc]
-        _ = (l ≫ L.d m (m + 1)) ≫ ε.f (m + 1) := by
-            rw [← Category.assoc, hl, Category.assoc, HomologicalComplex.Hom.comm,
-              Category.assoc]
-  have hepi : Epi (HomologicalComplex.homologyMap (K.toTotalOfAugmentation ε hε) n) := by
-    rw [HomologicalComplex.epi_homologyMap_iff_up_to_refinements _ (n - 1) n (n + 1)
-      (by obtain _ | n := n <;> simp) (by simp)]
-    intro A y₂ hy₂
-    obtain ⟨A₁, π₁, hπ₁, w, hw⟩ := exists_vanishesFrom_one hrow y₂ (by
-      rw [hy₂]
-      exact fun p q _ ↦ zero_comp)
-    set x' := π₁ ≫ y₂ - w ≫ (K.total (ComplexShape.up ℕ)).d (n - 1) n
-    have hdx' : x' ≫ (K.total (ComplexShape.up ℕ)).d n (n + 1) = 0 := by
-      simp [x', hy₂]
-    obtain ⟨A₂, π₂, hπ₂, l, hl⟩ := exists_eq_comp_ε (hε := hε) h₁ hw (by
-      rw [← Category.assoc, hdx', zero_comp])
-    refine ⟨A₂, π₂ ≫ π₁, epi_comp _ _, l, ?_, π₂ ≫ w, ?_⟩
-    · rw [← cancel_mono (ε.f (n + 1)), zero_comp]
-      have e1 := comp_d_totalπ_zero x'
-      rw [← Category.assoc, hdx', zero_comp] at e1
-      calc (l ≫ L.d n (n + 1)) ≫ ε.f (n + 1) = (l ≫ ε.f n) ≫ (K.X 0).d n (n + 1) := by
-            rw [Category.assoc, ← HomologicalComplex.Hom.comm, Category.assoc]
-        _ = 0 := by
-            rw [← hl, Category.assoc, ← e1, comp_zero]
-    · have hx' := eq_totalπ_ιTotal_of_vanishesFrom_one hw
-      have : π₂ ≫ x' = l ≫ (K.toTotalOfAugmentation ε hε).f n := by
-        rw [hx', ← Category.assoc, hl]
-        simp [toTotalOfAugmentation]
-      simp only [x', comp_sub] at this
-      rw [Category.assoc, ← sub_eq_iff_eq_add, ← this, Category.assoc]
-  exact isIso_of_mono_of_epi _
 
 end HomologicalComplex₂

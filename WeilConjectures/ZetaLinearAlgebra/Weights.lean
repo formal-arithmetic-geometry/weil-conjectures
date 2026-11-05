@@ -64,13 +64,6 @@ satisfies `‖z‖ = q ^ (-w / 2)`; equivalently every reciprocal root has absol
 def Polynomial.IsPureOfWeight (q w : ℕ) (P : Polynomial ℂ) : Prop :=
   P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, ‖z‖ = (q : ℝ) ^ (-(w : ℝ) / 2)
 
-/-- `P` is *mixed of weight at most `w`* for `q` if `P (0) = 1` and every complex root `z` of
-`P` satisfies `q ^ (-w / 2) ≤ ‖z‖`; equivalently every reciprocal root of `P` has absolute
-value at most `q ^ (w / 2)`. This is the `≤` half of `Polynomial.IsPureOfWeight` and the
-conclusion of Deligne's weight estimate. -/
-def Polynomial.IsMixedOfWeightLE (q w : ℕ) (P : Polynomial ℂ) : Prop :=
-  P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, (q : ℝ) ^ (-(w : ℝ) / 2) ≤ ‖z‖
-
 /-- `z : ℂ` is *universally* pure of weight `w`: it is algebraic over `ℚ` and every
 conjugate of `z` — every complex root of its minimal polynomial over `ℚ` — has absolute
 value `q ^ (-w/2)`. This is strictly stronger than purity under one embedding (blueprint
@@ -117,26 +110,6 @@ theorem IsPureOfWeight.ne_zero {q w : ℕ} {P : Polynomial ℂ} (hP : P.IsPureOf
   rintro rfl
   simpa using hP.1
 
-/-- A polynomial that is mixed of some weight is nonzero: its constant coefficient is `1`. -/
-theorem IsMixedOfWeightLE.ne_zero {q w : ℕ} {P : Polynomial ℂ} (hP : P.IsMixedOfWeightLE q w) :
-    P ≠ 0 := by
-  rintro rfl
-  simpa using hP.1
-
-/-- Purity of weight `w` implies mixedness of weight at most `w`. -/
-theorem IsPureOfWeight.isMixedOfWeightLE {q w : ℕ} {P : Polynomial ℂ}
-    (hP : P.IsPureOfWeight q w) : P.IsMixedOfWeightLE q w :=
-  ⟨hP.1, fun z hz ↦ (hP.2 z hz).ge⟩
-
-/-- Purity of weight `w` is mixedness of weight at most `w` together with the matching upper
-bound on the norms of the roots. -/
-theorem isPureOfWeight_iff {q w : ℕ} {P : Polynomial ℂ} :
-    P.IsPureOfWeight q w ↔
-      P.IsMixedOfWeightLE q w ∧ ∀ z ∈ P.roots, ‖z‖ ≤ (q : ℝ) ^ (-(w : ℝ) / 2) := by
-  refine ⟨fun h ↦ ⟨h.isMixedOfWeightLE, fun z hz ↦ (h.2 z hz).le⟩, ?_⟩
-  rintro ⟨⟨h0, hge⟩, hle⟩
-  exact ⟨h0, fun z hz ↦ le_antisymm (hle z hz) (hge z hz)⟩
-
 /-- Polynomials that are pure of distinct weights have no common root. -/
 theorem IsPureOfWeight.disjoint_roots {q v w : ℕ} (hq : 1 < q) {P Q : Polynomial ℂ}
     (hP : P.IsPureOfWeight q v) (hQ : Q.IsPureOfWeight q w) (hvw : v ≠ w) :
@@ -175,12 +148,6 @@ theorem isCoprime_prod_odd_prod_even {q r : ℕ} (hq : 1 < q) {P : Fin (r + 1) �
 theorem coeff_zero_prod_odd_eq_one {q r : ℕ} {P : Fin (r + 1) → Polynomial ℂ}
     (hP : ∀ i, (P i).IsPureOfWeight q i.1) :
     (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P i).coeff 0 = 1 :=
-  coeff_zero_prod_eq_one fun i _ ↦ hP i
-
-/-- The product of the even-indexed factors has constant coefficient `1`. -/
-theorem coeff_zero_prod_even_eq_one {q r : ℕ} {P : Fin (r + 1) → Polynomial ℂ}
-    (hP : ∀ i, (P i).IsPureOfWeight q i.1) :
-    (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P i).coeff 0 = 1 :=
   coeff_zero_prod_eq_one fun i _ ↦ hP i
 
 /-- **Identification of the two parity factors**. If the parity products of a family of pure
@@ -282,26 +249,6 @@ theorem eq_of_isPureOfWeight_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P P' : Fin
       simp [Nat.not_even_iff_odd.2 ho]
     rw [if_pos hoddj, if_neg hevenj, if_pos hoddj, if_neg hevenj, add_zero, add_zero] at hfil
     exact hfil
-
-
-/-- The weight-`i` part of the roots of a product of pure polynomials of pairwise distinct
-weights: if `P j` is pure of weight `j` for `j ∈ S` and `i ∈ S`, the roots of `∏_{j ∈ S} P j` of
-absolute value `q^{-i/2}` are the roots of `P i`. -/
-theorem roots_prod_filter_norm_eq {q : ℕ} (hq : 1 < q) {S : Finset ℕ}
-    {P : ℕ → Polynomial ℂ} (hP : ∀ j ∈ S, (P j).IsPureOfWeight q j) {i : ℕ} (hi : i ∈ S) :
-    (∏ j ∈ S, P j).roots.filter (fun z ↦ ‖z‖ = (q : ℝ) ^ (-(i : ℝ) / 2)) = (P i).roots := by
-  classical
-  rw [Polynomial.roots_prod _ _ (Finset.prod_ne_zero_iff.2 fun j hj ↦ (hP j hj).ne_zero),
-    Multiset.filter_bind, ← Finset.insert_erase hi, Finset.insert_val_of_notMem
-      (Finset.notMem_erase i S), Multiset.cons_bind,
-    Multiset.filter_eq_self.2 fun z hz ↦ (hP i hi).2 z hz]
-  convert add_zero (P i).roots
-  refine Multiset.eq_zero_of_forall_notMem fun z hz ↦ ?_
-  obtain ⟨j, hj, hz⟩ := Multiset.mem_bind.1 hz
-  obtain ⟨hz, hzi⟩ := Multiset.mem_filter.1 hz
-  have hji : j ≠ i := Finset.ne_of_mem_erase hj
-  have hzj := (hP j (Finset.mem_of_mem_erase hj)).2 z hz
-  exact hji (weight_eq_of_norm_eq hq hzj hzi)
 
 end Polynomial
 

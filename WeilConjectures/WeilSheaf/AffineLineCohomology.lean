@@ -88,22 +88,4 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant_affineLine {r : �
   exact (compactlySupportedCohomologyEquivOfIso (upperStarAdicConstantIso
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀))) r).toLinearEquiv.symm.toEquiv.subsingleton
 
-/-- **Constant cohomology of the affine line.** `Hʳ(𝔸¹_k̄, ℚ̄_ℓ) = 0` for `r ≠ 0`: by Poincaré
-duality on the smooth curve `𝔸¹`, `Hʳ(𝔸¹_k̄, ℚ̄_ℓ(1))`, which is `Hʳ(𝔸¹_k̄, ℚ̄_ℓ)` up to the
-Frobenius, is dual to `H_c^{2-r}(𝔸¹_k̄, ℚ̄_ℓ)`, which vanishes since `2 - r ≠ 2`.
-(blueprint: `lem-fd-affine-line-constant-cohomology`, subsection `sk-lem-as-properties`) -/
-theorem subsingleton_cohomology_adicConstant_affineLine {r : ℤ} (hr : r ≠ 0) :
-    Subsingleton ((adicConstant k₀ l (affineLine k₀)).cohomology r).carrier := by
-  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
-    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
-  obtain ⟨P, hP, -⟩ := exists_isPerfPair_compactlySupportedCohomology_adicConstant k₀ l
-    (affineLine k₀) 1 (2 - r) r (by push_cast; ring)
-  obtain ⟨E⟩ := nonempty_equiv_cohomology_tateTwistSheaf k₀ l (affineLine k₀) ((1 : ℕ) : ℤ) r
-  have := subsingleton_compactlySupportedCohomology_adicConstant_affineLine k₀ l
-    (r := 2 - r) (by omega)
-  have : Subsingleton ((tateTwistSheaf k₀ l (affineLine k₀) ((1 : ℕ) : ℤ)).cohomology
-      r).carrier :=
-    hP.bijective_right.injective.subsingleton
-  exact E.toLinearEquiv.symm.toEquiv.subsingleton
-
 end AlgebraicGeometry.WeilSheaf

@@ -245,14 +245,6 @@ lemma exists_mul_sub_eq {A : Type*} [AddCommGroup A] (f : G → A)
       rw [hidxτ, h', Nat.mod_self, Finset.sum_range_zero, zero_sub, neg_eq_iff_eq_neg]
       exact eq_neg_of_add_eq_zero_left hsum
 
-omit [Fact ℓ.Prime] hχ in
-/-- The coinduced module of an `ℓ`-primary module is `ℓ`-primary. -/
-lemma _root_.DiscreteModule.isPrimary_coind₁ {X : DiscreteModule.{w} G} (hX : IsPrimary ℓ X) :
-    IsPrimary ℓ ((coind₁ G).obj X.obj.V) := fun f ↦ by
-  obtain ⟨J, hJ⟩ := exists_pow_nsmul_eq_zero_of_finite ℓ (finite_range_smoothFunctions f)
-    (by rintro _ ⟨x, rfl⟩; exact hX _)
-  exact ⟨J, Subtype.ext (funext fun x ↦ hJ _ ⟨x, rfl⟩)⟩
-
 omit [IsTopologicalGroup G] [CompactSpace G] hχ in
 lemma ρ_mul_conj_apply {X : DiscreteModule.{w} G} {y : X.obj.V}
     (hy : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).hom y = y) {k : G}
@@ -483,20 +475,6 @@ lemma forall_ρ_eq {x : X.obj.V} (hxK : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ 
   have := hχ.eq_top_of_le (U := X.obj.stabilizer x) (X.isOpen_stabilizer x) hxK hxτ
   exact (this ▸ Subgroup.mem_top g : g ∈ X.obj.stabilizer x)
 
-/-- `H⁰(G, X)` is the kernel of `τ - 1` on the `ker χ`-invariants. -/
-noncomputable def HZeroAddEquiv : H G X 0 ≃+ (tauSubOne χ τ X).ker :=
-  (H_zero_addEquiv X).trans
-    { toFun x := ⟨⟨x.1, fun k _ ↦ x.2 k⟩, Subtype.ext (by
-        rw [coe_tauSubOne_apply]
-        exact sub_eq_zero.2 (x.2 τ))⟩
-      invFun x := ⟨x.1.1, hχ.forall_ρ_eq X x.1.2 (by
-        have h := congrArg Subtype.val (AddMonoidHom.mem_ker.1 x.2)
-        rw [coe_tauSubOne_apply, ZeroMemClass.coe_zero, sub_eq_zero] at h
-        exact h)⟩
-      left_inv _ := rfl
-      right_inv _ := rfl
-      map_add' _ _ := rfl }
-
 /-- The projection of `coindFixed` to the invariants of `C^sm(G, X) / X`. -/
 noncomputable def coindFixedToInvariants :
     coindFixed χ τ X →+ (invariants G).obj (coker₁ X) :=
@@ -598,75 +576,7 @@ section padicInt
 
 variable (ℓ)
 
-lemma isEllAdicQuotient_id :
-    IsEllAdicQuotient ℓ (ContinuousMonoidHom.id (Multiplicative ℤ_[ℓ])) (.ofAdd 1) where
-  map_τ := rfl
-  not_dvd_relIndex U _ := by
-    have : (ContinuousMonoidHom.id (Multiplicative ℤ_[ℓ])).toMonoidHom.ker = ⊥ := by
-      ext k
-      simp [MonoidHom.mem_ker]
-    rw [this, Subgroup.relIndex_bot_right]
-    exact (Fact.out : ℓ.Prime).not_dvd_one
-
 variable {ℓ} (M : DiscreteModule.{w} (Multiplicative ℤ_[ℓ]))
-
-/-- The endomorphism `τ - 1` of a discrete `ℤ_ℓ`-module, `τ = 1` the topological generator. -/
-noncomputable abbrev padicIntTauSubOne : M.obj.V →+ M.obj.V :=
-  (M.obj.ρ (.ofAdd 1)).hom - AddMonoidHom.id _
-
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-vanishing part.
-
-Let `M` be an `ℓ`-primary (e.g. killed by `ℓ ^ s`) discrete continuous module over
-`G = ℤ_ℓ` (written multiplicatively), with topological generator `τ = 1`. Its continuous
-cohomology is computed by the two-term complex `[M --τ-1--> M]` in degrees `0, 1`:
-`H⁰(G, M) = ker(τ - 1)` (`DiscreteModule.HZeroPadicIntAddEquiv`),
-`H¹(G, M) ≃ coker(τ - 1)` (`DiscreteModule.HOnePadicIntAddEquiv`), and `Hᵠ(G, M) = 0` for
-`q ≥ 2` (this statement). This is the case `χ = id` of
-`DiscreteModule.IsEllAdicQuotient.subsingleton_H`. -/
-theorem subsingleton_H_padicInt (hM : IsPrimary ℓ M) {q : ℕ} (hq : 2 ≤ q) :
-    Subsingleton (H (Multiplicative ℤ_[ℓ]) M q) :=
-  (isEllAdicQuotient_id ℓ).subsingleton_H M hM hq
-
-lemma mem_ker_id_iff {k : Multiplicative ℤ_[ℓ]} :
-    k ∈ (ContinuousMonoidHom.id (Multiplicative ℤ_[ℓ])).toMonoidHom.ker ↔ k = 1 := by
-  simp [MonoidHom.mem_ker]
-
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-degree zero: `H⁰(ℤ_ℓ, M) = ker(τ - 1)`. -/
-noncomputable def HZeroPadicIntAddEquiv :
-    H (Multiplicative ℤ_[ℓ]) M 0 ≃+ (padicIntTauSubOne M).ker :=
-  (H_zero_addEquiv M).trans
-    { toFun x := ⟨x.1, by simp [x.2 (.ofAdd 1)]⟩
-      invFun x := ⟨x.1, (isEllAdicQuotient_id ℓ).forall_ρ_eq M
-        (fun k hk ↦ by rw [mem_ker_id_iff.1 hk, ρ_one_apply])
-        (sub_eq_zero.1 (AddMonoidHom.mem_ker.1 x.2))⟩
-      left_inv _ := rfl
-      right_inv _ := rfl
-      map_add' _ _ := rfl }
-
-/-- The `ker id`-invariants of a discrete `ℤ_ℓ`-module are everything. -/
-noncomputable def fixedAddSubgroupIdAddEquiv :
-    fixedAddSubgroup M (ContinuousMonoidHom.id (Multiplicative ℤ_[ℓ])).toMonoidHom.ker ≃+
-      M.obj.V where
-  toFun x := x.1
-  invFun x := ⟨x, fun k hk ↦ by rw [mem_ker_id_iff.1 hk, ρ_one_apply]⟩
-  left_inv _ := rfl
-  right_inv _ := rfl
-  map_add' _ _ := rfl
-
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-degree one: `H¹(ℤ_ℓ, M) ≃ M / (τ - 1) M` for `ℓ`-primary `M`. -/
-noncomputable def HOnePadicIntAddEquiv (hM : IsPrimary ℓ M) :
-    H (Multiplicative ℤ_[ℓ]) M 1 ≃+ M.obj.V ⧸ (padicIntTauSubOne M).range :=
-  ((isEllAdicQuotient_id ℓ).HOneAddEquiv hM).trans <|
-    QuotientAddGroup.congr _ _ (fixedAddSubgroupIdAddEquiv M) (by
-      ext y
-      constructor
-      · rintro ⟨_, ⟨x, rfl⟩, rfl⟩
-        exact ⟨x.1, rfl⟩
-      · rintro ⟨x, rfl⟩
-        exact ⟨_, ⟨(fixedAddSubgroupIdAddEquiv M).symm x, rfl⟩, rfl⟩)
 
 end padicInt
 

@@ -438,18 +438,6 @@ noncomputable def quotientGluingData : Y.directedAffineCover.ColimitGluingData D
   prop_trans _ := hP' _ inferInstance inferInstance
 
 include hP hP' in
-/-- **Quotients of affine `Y`-schemes by finite monoid actions.** If `P` is a property of affine
-morphisms containing all morphisms of affine schemes, then `P.Over ⊤ Y` has quotients by finite
-monoid actions: over every affine open of `Y` the quotient is `Spec` of the invariants, and these
-glue. -/
-theorem hasColimitsOfShape_singleObj : HasColimitsOfShape (SingleObj G) (P.Over ⊤ Y) := by
-  have : ∀ {U V : Y.directedAffineCover.I₀} (hUV : U ⟶ V),
-      PreservesColimitsOfShape (SingleObj G)
-        (MorphismProperty.Over.pullback P ⊤ (Y.directedAffineCover.trans hUV)) :=
-    fun _ ↦ preservesColimitsOfShape_pullback hP hP' _
-  exact ⟨fun D ↦ ⟨_, (quotientGluingData hP hP' D).isColimitGluedCocone⟩⟩
-
-include hP hP' in
 /-- Restriction to an affine open of `Y` preserves quotients by finite monoid actions. -/
 lemma preservesColimit_pullback_directedAffineCover (U : Y.directedAffineCover.I₀) :
     PreservesColimit D (MorphismProperty.Over.pullback P ⊤ (Y.directedAffineCover.f U)) := by

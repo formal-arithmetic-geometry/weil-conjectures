@@ -41,26 +41,4 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {W X : Scheme.{u}} (g : W ⟶ X) [WeaklyEtale g]
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
--- take long to synthesize
-/-- **Pullback along a weakly étale morphism preserves flat sheaves of modules**, over an
-arbitrary commutative ring `Λ`: `g^*` is restriction along the cocontinuous localization
-functor, which preserves locally trivial relations. -/
-theorem flat_upperStar_obj_of_weaklyEtale
-    {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (hF : ObjectProperty.flat F) :
-    ObjectProperty.flat (((g)^*[ModuleCat.{u + 1} Λ]).obj F) := by
-  have := Scheme.ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale g)
-  have h := ((Sheaf.flat_iff_hasLocallyTrivialRelations' F).1 hF).comp
-    (J := Scheme.ProEt.topology W)
-    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale g))
-  refine ObjectProperty.prop_of_iso _
-    ((upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) g inferInstance).app F).symm ?_
-  exact (Sheaf.flat_iff_hasLocallyTrivialRelations' _).2 h
-
-/-- **Pullback along a weakly étale morphism preserves flat sheaves of modules**, over an
-arbitrary commutative ring `Λ`. -/
-theorem preservesFlat_upperStar_of_weaklyEtale : ((g)^*[ModuleCat.{u + 1} Λ]).PreservesFlat :=
-  ⟨flat_upperStar_obj_of_weaklyEtale g⟩
-
 end AlgebraicGeometry.ProEtale

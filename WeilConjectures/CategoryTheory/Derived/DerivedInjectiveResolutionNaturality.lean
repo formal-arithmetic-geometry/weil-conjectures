@@ -50,15 +50,6 @@ namespace CochainComplex.Plus
 
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-/-- The actual mapping cone in the category of bounded-below cochain complexes. -/
-noncomputable def mappingCone {K L : CochainComplex.Plus C} (f : K ⟶ L) :
-    CochainComplex.Plus C :=
-  ⟨CochainComplex.mappingCone f.hom, by
-    obtain ⟨n, hn⟩ := K.property
-    obtain ⟨m, hm⟩ := L.property
-    exact ⟨min (n - 1) m,
-      CochainComplex.isStrictlyGE_mappingCone f.hom n m _ (by omega) (by omega)⟩⟩
-
 end CochainComplex.Plus
 
 namespace CategoryTheory.Functor

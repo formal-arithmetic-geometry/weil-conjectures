@@ -420,17 +420,4 @@ theorem isHomotopyLimit_reductionTowerCone
   rw [reductionTower_map_succ]
   exact reductionTowerTransition_comp_δ K n
 
-/-- **A derived complete `𝒪_E`-complex is the homotopy limit of its reductions modulo `ℓⁿ`**:
-there is a homotopy limit cone with point `K` over the tower `reductionTower E K`, whose `n`-th
-term is `Res_{n+1} (red_{n+1} K)` (`ProEtale.reductionTower_obj`), the legs being the units of
-the adjunctions `red_{n+1} ⊣ Res_{n+1}`. -/
-theorem exists_isHomotopyLimit_reductionTower
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
-    (hK : derivedCompleteIntegers ℓ E X K) :
-    ∃ π : (Functor.const ℕᵒᵖ).obj K ⟶ reductionTower E K, IsHomotopyLimit (Cone.mk K π) ∧
-      ∀ n : ℕ, π.app (op n) = (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (integersModPowReduction X ℓ E (n + 1))).unit.app K :=
-  ⟨(reductionTowerCone E K).π, isHomotopyLimit_reductionTowerCone hK, fun _ ↦ rfl⟩
-
 end AlgebraicGeometry.ProEtale

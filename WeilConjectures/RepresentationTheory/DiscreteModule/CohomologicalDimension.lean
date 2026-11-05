@@ -132,11 +132,6 @@ lemma quotientπ_apply (x : X.obj.V) :
     (quotientπ X S hS).hom.hom.hom x = QuotientAddGroup.mk x :=
   rfl
 
-lemma quotient_ρ_mk (g : G) (x : X.obj.V) :
-    ((quotient X S hS).obj.ρ g).hom (QuotientAddGroup.mk x) =
-      QuotientAddGroup.mk ((X.obj.ρ g).hom x) :=
-  rfl
-
 end quotient
 
 lemma subsingleton_H_of_subsingleton (X : DiscreteModule.{w} G) [Subsingleton X.obj.V] (n : ℕ) :
@@ -644,20 +639,6 @@ theorem subsingleton_H_two
   refine subsingleton_H_two_of_finite ℓ h2 _ fun x ↦ ?_
   obtain ⟨j, hj⟩ := hM x.1
   exact ⟨j, Subtype.ext hj⟩
-
-/-- **A degree-two criterion for continuous cohomology.** Let `G` be a profinite (more
-generally, compact) group and `ℓ` a prime such that `H²(K, 𝔽_ℓ) = 0` for every open subgroup
-`K` of `G`. Then `Hⁿ(G, M) = 0` for every `n ≥ 2` and every discrete `ℓ`-primary `G`-module `M`.
-(blueprint: `lem-sc-group-cd-one`) -/
-theorem subsingleton_H_of_two_le
-    (h2 : ∀ K : Subgroup G, IsOpen (K : Set G) → Subsingleton (H K (trivialZMod.{w} K ℓ) 2))
-    (M : DiscreteModule.{w} G) (hM : IsPrimary ℓ M) {n : ℕ} (hn : 2 ≤ n) :
-    Subsingleton (H G M n) := by
-  induction n, hn using Nat.le_induction generalizing M with
-  | base => exact subsingleton_H_two ℓ h2 M hM
-  | succ n hn ih =>
-    exact subsingleton_ext_succ_of_shortExact (shortExact₁ M) (subsingleton_H_coind₁ _ n)
-      (ih _ (isPrimary_coker₁ hM))
 
 end main
 end DiscreteModule

@@ -220,37 +220,4 @@ instance absolutelyFlat_tensor_self (K L : Type u) [CommRing K] [CommRing L] [Al
 
 variable (K L : Type u) [CommRing K] [CommRing L] [Algebra K L]
 
-/-- The `L`-algebra evaluation `L[X] →ₐ[L] L ⊗[K] L` sending `X` to `1 ⊗ a`.
-The `L`-algebra structure on `L ⊗[K] L` is the standard `Algebra.TensorProduct`
-one, where `c ∈ L` acts as `c ⊗ 1`. Composed with multiplication
-`μ : L ⊗[K] L → L` this is `Polynomial.aeval a`. -/
-noncomputable def tensorEvalRight (a : L) : Polynomial L →ₐ[L] L ⊗[K] L :=
-  Polynomial.aeval (1 ⊗ₜ[K] a)
-
-@[simp]
-lemma tensorEvalRight_X (a : L) :
-    tensorEvalRight K L a Polynomial.X = (1 ⊗ₜ[K] a : L ⊗[K] L) := by
-  simp [tensorEvalRight]
-
-@[simp]
-lemma tensorEvalRight_C (a c : L) :
-    tensorEvalRight K L a (Polynomial.C c) = (c ⊗ₜ[K] 1 : L ⊗[K] L) := by
-  simp [tensorEvalRight, Algebra.TensorProduct.algebraMap_apply]
-
-/-- Composing `tensorEvalRight K L a : L[X] → L ⊗[K] L` with multiplication
-`μ : L ⊗[K] L → L` recovers `Polynomial.aeval a`. -/
-lemma lmul'_comp_tensorEvalRight (a : L) (p : Polynomial L) :
-    Algebra.TensorProduct.lmul' (R := K) (S := L) (tensorEvalRight K L a p) =
-      Polynomial.aeval a p := by
-  induction p using Polynomial.induction_on with
-  | C c => simp
-  | add p q hp hq => simp [hp, hq]
-  | monomial n c _ => simp [tensorEvalRight]
-
-/-- `tensorEvalRight K L a` sends `X - C a` to the diagonal `1 ⊗ a - a ⊗ 1`. -/
-lemma tensorEvalRight_X_sub_C (a : L) :
-    tensorEvalRight K L a (Polynomial.X - Polynomial.C a) =
-      (1 ⊗ₜ[K] a - a ⊗ₜ[K] 1 : L ⊗[K] L) := by
-  simp
-
 end Algebra.WeaklyEtale

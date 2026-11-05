@@ -68,40 +68,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 section Site
 
-/-- The structure morphism of the base change of `V` along `k` is the second projection. -/
-lemma ProEt.overPullback_obj_hom {X Y : Scheme.{u}} (k : X ⟶ Y) (V : Y.ProEt) :
-    ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ k).obj V).hom = pullback.snd V.hom k :=
-  rfl
-
-/-- The identification of base change along the identity with the identity is the first
-projection. -/
-lemma ProEt.overPullbackId_hom_app_left (X : Scheme.{u}) (W : X.ProEt) :
-    ((ProEt.overPullbackId X).hom.app W).left = pullback.fst W.hom (𝟙 X) := by
-  simp [ProEt.overPullbackId, conjugateEquiv_apply_app]
-
-/-- The inverse of `ProEt.overPullbackId` is a section of the first projection. -/
-@[reassoc (attr := simp)]
-lemma ProEt.overPullbackId_inv_app_left_fst (X : Scheme.{u}) (W : X.ProEt) :
-    ((ProEt.overPullbackId X).inv.app W).left ≫ pullback.fst W.hom (𝟙 X) = 𝟙 _ := by
-  rw [← ProEt.overPullbackId_hom_app_left, ← MorphismProperty.Comma.comp_left,
-    Iso.inv_hom_id_app]
-  rfl
-
-/-- The inverse of `ProEt.overPullbackId` is a morphism over `X`. -/
-@[reassoc (attr := simp)]
-lemma ProEt.overPullbackId_inv_app_left_snd (X : Scheme.{u}) (W : X.ProEt) :
-    ((ProEt.overPullbackId X).inv.app W).left ≫ pullback.snd W.hom (𝟙 X) = W.hom :=
-  MorphismProperty.Over.w ((ProEt.overPullbackId X).inv.app W)
-
-/-- The inverse of `ProEt.overPullbackId`, explicitly. -/
-lemma ProEt.overPullbackId_inv_app_left (X : Scheme.{u}) (W : X.ProEt) :
-    ((ProEt.overPullbackId X).inv.app W).left =
-      pullback.lift (𝟙 W.left) W.hom (by simp) := by
-  apply pullback.hom_ext
-  · rw [ProEt.overPullbackId_inv_app_left_fst, pullback.lift_fst]
-    rfl
-  · rw [ProEt.overPullbackId_inv_app_left_snd, pullback.lift_snd]
-
 end Site
 
 /-! ### The composition isomorphisms of the pushforwards -/

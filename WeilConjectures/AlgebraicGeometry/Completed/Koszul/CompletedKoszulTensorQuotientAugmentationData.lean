@@ -79,34 +79,4 @@ Source: Stacks Tag 099M
         (NatTrans.congr_app ((F.map₂CochainComplex).map_comp f g)
           (completedAdicKoszul T d r a n.unop)) q }
 
-/-- The actual finite quotient tensor map, specified independently of the Koszul complex.
-Source: Stacks Tag 099M
-(blueprint: lem-weil-pbc-completed-koszul-tensor-quotient-augmentation). -/
-def completedQuotientTensorUnit
-    (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) :
-    P ⟶ (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj P).asFunctor.obj
-      (op n) :=
-  (NatTrans.mapHomologicalComplex (reconstructionOrdinaryUnit T d) (.up ℤ)).app P ≫
-    (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app
-      (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj P)
-
-/-- The injection of one actual total tensor summand.
-Source: Stacks Tag 099M
-(blueprint: lem-weil-pbc-completed-koszul-tensor-quotient-augmentation). -/
-def completedKoszulTensorSummand (r : ℕ) (a : Fin r → A)
-    (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) :
-    ((curriedTensor (CompletedAdicModules T d)).obj (P.X p)).obj
-        ((completedAdicKoszul T d r a n).X q) ⟶
-      (completedAdicKoszulTensor T d r a P n).X (p + q) :=
-  letI := SheafOfModules.monoidalCategory (completedAdicCommRing T d)
-  letI : (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
-    SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
-      (completedAdicCommRing T d)
-  letI : ∀ M : CompletedAdicModules T d,
-      ((curriedTensor (CompletedAdicModules T d)).obj M).PreservesZeroMorphisms :=
-    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
-      (completedAdicCommRing T d) M
-  HomologicalComplex.ιMapBifunctor P (completedAdicKoszul T d r a n)
-    (curriedTensor _) (.up ℤ) p q (p + q) rfl
-
 end AlgebraicGeometry.Scheme

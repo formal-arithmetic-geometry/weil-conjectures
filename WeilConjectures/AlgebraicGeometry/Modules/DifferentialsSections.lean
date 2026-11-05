@@ -35,10 +35,6 @@ variable {X : Scheme.{u}} {R : CommRingCat.{u}} (g : X ⟶ Spec R)
 noncomputable def specStructureMap (U : X.Opens) : R ⟶ Γ(X, U) :=
   (Scheme.ΓSpecIso R).inv ≫ g.appLE ⊤ U le_top
 
-lemma specStructureMap_map {U V : X.Opens} (h : V ≤ U) :
-    g.specStructureMap U ≫ X.presheaf.map (homOfLE h).op = g.specStructureMap V := by
-  simp [specStructureMap]
-
 /-- The universal derivation `d : 𝒪_X → Ω¹_{X/R}` on sections over `U`. -/
 noncomputable def sectionsD (U : X.Opens) : Γ(X, U) →+ Γ(g.relativeDifferentials, U) :=
   g.relativeDifferentialsDerivation.d (X := op U)
@@ -249,7 +245,6 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {X : Scheme.{u}} {R : Type u} [CommRing R] (g : X ⟶ Spec (.of R)) (U : X.Opens)
   [Algebra R Γ(X, U)]
-
 
 /-- The universal derivation `d : Γ(X, U) → Γ(Ω¹_{X/R}, U)` as an `R`-derivation, for any
 `R`-algebra structure on `Γ(X, U)` given by the structure map and any compatible `R`-module

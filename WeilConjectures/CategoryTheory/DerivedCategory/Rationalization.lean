@@ -77,8 +77,6 @@ def torsion : ObjectProperty C :=
 
 variable {M C}
 
-lemma torsion_iff (X : C) : torsion M C X ↔ ∃ m ∈ M, m • 𝟙 X = 0 := Iff.rfl
-
 /-- Multiplication by `m` on an object, conjugated by an isomorphism. -/
 lemma smul_id_eq_conj {X Y : C} (e : X ≅ Y) (m : R) :
     m • 𝟙 Y = e.inv ≫ (m • 𝟙 X) ≫ e.hom := by
@@ -210,14 +208,6 @@ noncomputable instance linear : Linear A (Rationalization M C) :=
   Linear.ofRingMorphism (toCatCenter M C A)
 
 variable {M C}
-
-/-- The `A`-linear structure of the rationalization extends its `R`-linear structure. -/
-lemma algebraMap_smul (r : R) {X Y : Rationalization M C} (f : X ⟶ Y) :
-    algebraMap R A r • f = r • f := by
-  change (toCatCenter M C A (algebraMap R A r)).app X ≫ f = r • f
-  rw [toCatCenter, IsLocalization.lift_eq]
-  change (r • 𝟙 X) ≫ f = r • f
-  rw [Linear.smul_comp, id_comp]
 
 end Rationalization
 

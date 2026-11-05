@@ -62,15 +62,4 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasDerivedCategory.{wV}
     (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J V))]
 
-/-- A sheafified pure tensor, transported through the model's prescribed object equality.
-Source: Stacks 03EK, balanced formula in DAG proof step 1
-(blueprint: def-trf-scalar-tensor-section). -/
-noncomputable def scalarTensorSection
-    (F : SheafOfModules.DerivedChangeOfRingsCochainModel a)
-    (M : ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R))
-    (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) : (F.E.obj M).val.obj U :=
-  (eqToHom (F.obj_eq M).symm).val.app U
-    ((toSheafify J (SheafOfModules.changeOfRingsPresheaf a M).presheaf).app U
-      (s ⊗ₜ[R.obj.obj U, (a.hom.app U).hom] x))
-
 end CategoryTheory.PrincipalQuotientCompletion

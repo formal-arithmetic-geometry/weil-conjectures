@@ -50,13 +50,6 @@ instance [HasZeroMorphisms C₁] [HasZeroMorphisms C₂] [HasZeroObject C₂]
       HomologicalComplex.mem_quasiIso_iff]
     infer_instance⟩
 
-nonrec lemma HomologicalComplex.preservesQuasiIso.comp [HasZeroMorphisms C₁] [HasZeroMorphisms C₂]
-    [HasZeroMorphisms C₃] [CategoryWithHomology C₁] [CategoryWithHomology C₂]
-    [CategoryWithHomology C₃] {F : HomologicalComplex C₁ c₁ ⥤ HomologicalComplex C₂ c₂}
-    (hF : preservesQuasiIso F) {G : HomologicalComplex C₂ c₂ ⥤ HomologicalComplex C₃ c₃}
-    (hG : preservesQuasiIso G) : preservesQuasiIso (F ⋙ G) :=
-  hF.comp hG
-
 abbrev HomotopyCategory.preservesQuasiIso [Preadditive C₁] [Preadditive C₂]
     [CategoryWithHomology C₁] [CategoryWithHomology C₂] :
     ObjectProperty (HomotopyCategory C₁ c₁ ⥤ HomotopyCategory C₂ c₂) :=
@@ -79,26 +72,9 @@ variable [HasZeroMorphisms C] [HasZeroMorphisms D]
 
 namespace ShortComplex
 
-variable (C) in
-protected def quasiIso : MorphismProperty (ShortComplex C) :=
-  fun _ _ f ↦ QuasiIso f
-
-@[simp]
-lemma mem_quasiIso_iff {K L : ShortComplex C} (f : K ⟶ L) :
-    ShortComplex.quasiIso C f ↔ QuasiIso f := Iff.rfl
-
 end ShortComplex
 
 namespace Functor
-
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-lemma preserves_shortComplexQuasiIso [F.PreservesHomology] :
-    ShortComplex.quasiIso C ≤ (ShortComplex.quasiIso D).inverseImage F.mapShortComplex := by
-  intro _ _ _ hf
-  simp only [ShortComplex.mem_quasiIso_iff, MorphismProperty.inverseImage_iff,
-    mapShortComplex_obj] at hf ⊢
-  infer_instance
 
 instance [F.PreservesHomology] {ι : Type*} (c : ComplexShape ι) {K L : HomologicalComplex C c}
     (f : K ⟶ L) (i : ι) [hf : QuasiIsoAt f i] :
@@ -110,13 +86,6 @@ instance [F.PreservesHomology] {ι : Type*} (c : ComplexShape ι) {K L : Homolog
 
 instance [F.PreservesHomology] {ι : Type*} (c : ComplexShape ι) {K L : HomologicalComplex C c}
     (f : K ⟶ L) [QuasiIso f] : QuasiIso ((F.mapHomologicalComplex c).map f) where
-
-lemma preservesQuasiIso_mapHomologicalComplex
-    [F.PreservesHomology] {ι : Type*} (c : ComplexShape ι) :
-    HomologicalComplex.preservesQuasiIso (F.mapHomologicalComplex c) := by
-  intro _ _ _ hf
-  simp only [HomologicalComplex.mem_quasiIso_iff, MorphismProperty.inverseImage_iff] at hf ⊢
-  infer_instance
 
 noncomputable def mapHomologicalComplexCompShortComplexFunctorIso
     {C D : Type*} [Category C] [Category D] [HasZeroMorphisms C] [HasZeroMorphisms D]
@@ -204,12 +173,6 @@ lemma preservesQuasiIso_iff_of_factors
     rw [← HomotopyCategory.quotient_map_mem_quasiIso_iff] at h
     exact (MorphismProperty.arrow_mk_iso_iff _
       (((Functor.mapArrowFunctor _ _).mapIso e).app (Arrow.mk f))).2 h
-
-lemma preservesQuasiIso_mapHomotopyCategory_iff
-    (F : C ⥤ D) [F.Additive] {ι : Type*} (c : ComplexShape ι) :
-    HomotopyCategory.preservesQuasiIso (F.mapHomotopyCategory c) ↔
-      HomologicalComplex.preservesQuasiIso (F.mapHomologicalComplex c) :=
-  preservesQuasiIso_iff_of_factors (F.mapHomotopyCategoryFactors c)
 
 end Functor
 

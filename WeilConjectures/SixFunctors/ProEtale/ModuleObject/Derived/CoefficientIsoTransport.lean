@@ -83,16 +83,6 @@ lemma boundedConstructible_mapDerivedCategory_comap_iff
   exact ⟨fun h ↦ h.of_iso (((Mod.comap φ).mapDerivedCategoryHomologyFunctorIso n).app K).symm,
     fun h ↦ h.of_iso (((Mod.comap φ).mapDerivedCategoryHomologyFunctorIso n).app K)⟩
 
-omit [IsIso φ] in
-/-- The derived restriction of scalars reflects the upper bounds for the canonical
-t-structure, being faithful and exact. -/
-lemma isLE_of_isLE_mapDerivedCategory_comap
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)) (d : ℤ)
-    (h : ((Mod.comap φ).mapDerivedCategory.obj K).IsLE d) : K.IsLE d :=
-  (DerivedCategory.isLE_iff K d).2 fun i hi ↦
-    (Mod.comap φ).isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
-      ((DerivedCategory.isLE_iff _ d).1 h i hi)
-
 end ComapIso
 
 namespace CondensedRing
@@ -109,29 +99,6 @@ lemma preservesFiniteLimits_extendScalars_coefficientMap_of_isIso (a : Λ ⟶ Λ
     PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X)) :=
   preservesFiniteLimits_of_natIso (Mod.extendScalarsIsoComapInv _).symm
 
-omit [IsCommMonObj Λ] [IsCommMonObj Λ'] in
-/-- Restriction of scalars along an isomorphism of coefficient rings preserves and reflects
-constructibility. -/
-theorem isConstructibleModuleObject_comap_coefficientMap_iff (e : Λ ≅ Λ') [IsMonHom e.hom]
-    {X : Scheme.{u}}
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X)) :
-    IsConstructibleModuleObject (condensedRingObj Λ X)
-        ((Mod.comap (coefficientMap e.hom X)).obj M) ↔
-      IsConstructibleModuleObject (condensedRingObj Λ' X) M :=
-  isConstructibleModuleObject_comap_iff _ M
-
-omit [IsCommMonObj Λ] [IsCommMonObj Λ'] in
-/-- Restriction of scalars along an isomorphism of coefficient rings preserves and reflects
-bounded constructible complexes. -/
-theorem boundedConstructible_mapDerivedCategory_comap_coefficientMap_iff (e : Λ ≅ Λ')
-    [IsMonHom e.hom] {X : Scheme.{u}}
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ' X))) :
-    boundedConstructible (condensedRingObj Λ X)
-        ((Mod.comap (coefficientMap e.hom X)).mapDerivedCategory.obj K) ↔
-      boundedConstructible (condensedRingObj Λ' X) K :=
-  boundedConstructible_mapDerivedCategory_comap_iff _ K
-
 omit [IsCommMonObj Λ] in
 /-- Transport of the finiteness of `Rp_*` along an isomorphism of coefficient rings. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_iso (e : Λ ≅ Λ') [IsMonHom e.hom]
@@ -144,24 +111,6 @@ theorem boundedConstructible_rightDerivedLowerStar_of_iso (e : Λ ≅ Λ') [IsMo
   rw [← boundedConstructible_mapDerivedCategory_comap_iff (coefficientMap e.inv Y)]
   exact (boundedConstructible _).prop_of_iso ((derivedComapLowerStarIso e.inv p).app K).symm
     (h _ ((boundedConstructible_mapDerivedCategory_comap_iff _ K).2 hK))
-
-omit [IsCommMonObj Λ] in
-/-- Transport of an amplitude bound for `Rp_*` on constructible sheaves along an isomorphism of
-coefficient rings. -/
-theorem isLE_rightDerivedLowerStar_singleFunctor_of_iso (e : Λ ≅ Λ') [IsMonHom e.hom]
-    {Z Y : Scheme.{u}} (p : Z ⟶ Y) (d : ℤ)
-    (h : ∀ N, IsConstructibleModuleObject (condensedRingObj Λ' Z) N →
-      (R((p)_*⟦Λ'⟧).obj ((DerivedCategory.singleFunctor _ 0).obj N)).IsLE d)
-    (N) (hN : IsConstructibleModuleObject (condensedRingObj Λ Z) N) :
-    (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj N)).IsLE d := by
-  have := fun X : Scheme.{u} ↦ preservesFiniteLimits_extendScalars_coefficientMap_of_isIso e.inv X
-  refine isLE_of_isLE_mapDerivedCategory_comap (coefficientMap e.inv Y) _ d ?_
-  have : (R((p)_*⟦Λ'⟧).obj ((Mod.comap (coefficientMap e.inv Z) ⋙
-      DerivedCategory.singleFunctor _ 0).obj N)).IsLE d :=
-    h _ ((isConstructibleModuleObject_comap_iff (coefficientMap e.inv Z) N).2 hN)
-  exact DerivedCategory.TStructure.t.isLE_of_iso
-    (R((p)_*⟦Λ'⟧).mapIso (((Mod.comap (coefficientMap e.inv Z)).mapDerivedCategorySingleFunctor
-      0).app N).symm ≪≫ ((derivedComapLowerStarIso e.inv p).app _).symm) d
 
 end CondensedRing
 

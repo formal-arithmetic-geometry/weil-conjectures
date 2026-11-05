@@ -51,17 +51,4 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The commutative-ring version of the existing continuous-function ring sheaf.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-weil-pbc-lisse-lattice-etale-local). -/
-noncomputable def lisseContinuousCommRingSheaf (X : Scheme.{u}) (T : Type)
-    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
-    Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-  ⟨{ obj := fun U ↦ CommRingCat.of (ULift.{u + 1} C(U.unop.left, T))
-     map := fun f ↦ CommRingCat.ofHom ((continuousMapRingPresheaf X T).map f).hom
-     map_id := fun _ ↦ rfl
-     map_comp := fun _ _ ↦ rfl },
-   Presheaf.isSheaf_of_isSheaf_comp _ _ (forget₂ CommRingCat RingCat)
-     (isSheaf_continuousMapRingPresheaf X T)⟩
-
 end AlgebraicGeometry.ProEtale

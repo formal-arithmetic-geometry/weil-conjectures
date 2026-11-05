@@ -81,11 +81,6 @@ noncomputable abbrev padicCondensedRing :
     Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   continuousMapRingSheaf ℚ_[ℓ]
 
-/-- The inclusion `ℤ̲_ℓ ⟶ ℚ̲_ℓ`, a morphism of condensed rings. -/
-noncomputable def padicIntCondensedRingToPadicCondensedRing :
-    padicIntCondensedRing.{u} ℓ ⟶ padicCondensedRing ℓ :=
-  continuousMapRingSheafMap PadicInt.Coe.ringHom continuous_subtype_val
-
 /-! ### Subfields `E` of `ℚ̄_ℓ` -/
 
 section Subfield

@@ -104,21 +104,6 @@ noncomputable def forget :
     WeilBoundedConstructible ℓ Φ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   IsoAlgebra.forget (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
 
-/-- A Weil object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` is a Weil object of the ambient derived category
-`D(Mod_{ℚ̲̄_ℓ,X})` for the derived pullback `L((Φ)^*⟦ℚ̲̄_ℓ⟧)`: the transport of algebras along
-the inclusion, the structure isomorphism of `K` being
-`L((Φ)^*⟦ℚ̲̄_ℓ⟧) K ≅ LΦ^* K ≅ K` through `boundedConstructibleUpperStarCompatibility`. -/
-noncomputable def toDerivedCategory :
-    WeilBoundedConstructible ℓ Φ ⥤
-      IsoAlgebra L((Φ.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  IsoAlgebra.mapOfNatIso
-    (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ Φ).symm
-
-@[simp]
-lemma toDerivedCategory_obj_carrier (K : WeilBoundedConstructible ℓ Φ) :
-    ((toDerivedCategory ℓ Φ).obj K).carrier = K.carrier.obj :=
-  rfl
-
 end WeilBoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing

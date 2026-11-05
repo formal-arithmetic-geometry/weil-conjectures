@@ -172,8 +172,6 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-
-
 @[instance_reducible]
 private noncomputable def constantScalarSheaf_laxBraided :
     (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).LaxBraided := by
@@ -204,21 +202,11 @@ private noncomputable def scalarSections_laxBraided : scalarSections.{u}.LaxBrai
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
   [IsCommMonObj Λ]
 
-
-
 attribute [instance] scalarRingObj_comm
-
-
-
-
 
 attribute [instance] scalarCoefficientHom_isMonHom
 
-
 attribute [instance] scalarConstant_comm
-
-
-
 
 private noncomputable def scalarRegularIso (X : Scheme.{u}) :
     (finiteConstantScalarExtension Λ X).obj (Mod.regular (scalarRingObj Λ)) ≅
@@ -226,53 +214,6 @@ private noncomputable def scalarRegularIso (X : Scheme.{u}) :
   (Mod.extendScalars (scalarCoefficientHom Λ X)).mapIso
       (Mod.isoMk (Iso.refl _) (by simp)) ≪≫
     Mod.regularExtensionIso (scalarCoefficientHom Λ X)
-
-private theorem scalarRegular_entry (X : Scheme.{u})
-    (a : 𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ) :
-    (finiteConstantScalarExtension Λ X).map
-        (Mod.regularLift (Mod.regular (scalarRingObj Λ)) a) ≫
-      (scalarRegularIso Λ X).hom =
-    (scalarRegularIso Λ X).hom ≫
-      Mod.regularLift (Mod.regular (condensedRingObj Λ X)) (scalarSection Λ X a) := by
-  let F := scalarConstant X
-  let R := scalarRingObj Λ
-  let S := condensedRingObj Λ X
-  let φ := scalarCoefficientHom Λ X
-  have hm : (F.mapMod R).map (Mod.regularLift (Mod.regular R) a) ≫
-      (Mod.isoMk (Iso.refl _) (by simp) :
-        (F.mapMod R).obj (Mod.regular R) ≅ Mod.regular (F.obj R)).hom =
-      (Mod.isoMk (Iso.refl _) (by simp) :
-        (F.mapMod R).obj (Mod.regular R) ≅ Mod.regular (F.obj R)).hom ≫
-      Mod.regularLift (Mod.regular (F.obj R)) (Functor.LaxMonoidal.ε F ≫ F.map a) := by
-    apply Mod.regular_hom_ext
-    change (MonObj.one : 𝟙_ _ ⟶ F.obj R) ≫
-        (F.map (Mod.regularLift (Mod.regular R) a).hom ≫ 𝟙 _) =
-      (MonObj.one : 𝟙_ _ ⟶ F.obj R) ≫ (𝟙 _ ≫ _)
-    simp only [Category.comp_id, Category.id_comp]
-    rw [Mod.one_comp_regularLift, Functor.obj.η_def, Category.assoc,
-      ← F.map_comp, Mod.one_comp_regularLift]
-  have h : Mod.regularLift (Mod.regular (F.obj R))
-        (Functor.LaxMonoidal.ε F ≫ F.map a) ≫ Mod.regularCoefficientMap φ =
-      Mod.regularCoefficientMap φ ≫ (Mod.comap φ).map
-        (Mod.regularLift (Mod.regular S) (scalarSection Λ X a)) := by
-    apply Mod.regular_hom_ext
-    change MonObj.one ≫ (_ ≫ φ) = MonObj.one ≫ (φ ≫ _)
-    change (MonObj.one : 𝟙_ _ ⟶ F.obj R) ≫
-        ((Mod.regularLift (Mod.regular (F.obj R))
-          (Functor.LaxMonoidal.ε F ≫ F.map a)).hom ≫ φ) =
-      (MonObj.one : 𝟙_ _ ⟶ F.obj R) ≫
-        (φ ≫ (Mod.regularLift (Mod.regular S) (scalarSection Λ X a)).hom)
-    rw [← Category.assoc, Mod.one_comp_regularLift, ← Category.assoc,
-      IsMonHom.one_hom φ, Mod.one_comp_regularLift]
-    rfl
-  have he := Mod.regularExtensionIso_naturality φ
-    (Mod.regularLift (Mod.regular (F.obj R)) (Functor.LaxMonoidal.ε F ≫ F.map a))
-    (Mod.regularLift (Mod.regular S) (scalarSection Λ X a)) (congrArg Mod.Hom.hom h)
-  dsimp only [finiteConstantScalarExtension, scalarRegularIso, Functor.comp_map,
-    Iso.trans_hom, Functor.mapIso_hom]
-  rw [← Category.assoc, ← (Mod.extendScalars φ).map_comp, hm,
-    (Mod.extendScalars φ).map_comp, Category.assoc, he]
-  exact (Category.assoc _ _ _).symm
 
 private instance scalarConstant_preservesFiniteColimits (X : Scheme.{u}) :
     PreservesFiniteColimits (scalarConstant X) := by
@@ -299,76 +240,6 @@ private noncomputable def scalarFreeIso (X : Scheme.{u}) (n : ℕ) :
       (fun _ : Fin n ↦ Mod.regular (scalarRingObj Λ)) ≪≫
     biproduct.mapIso (fun _ ↦ scalarRegularIso Λ X)
 
-private theorem scalarMatrix_map (X : Scheme.{u}) {m n : ℕ}
-    (A : Fin m → Fin n → (𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ)) :
-    (scalarFreeIso Λ X m).inv ≫ (finiteConstantScalarExtension Λ X).map
-        (biproduct.matrix fun j k ↦ Mod.regularLift (Mod.regular (scalarRingObj Λ))
-          (A j k)) ≫ (scalarFreeIso Λ X n).hom = scalarMatrix Λ X A := by
-  apply biproduct.hom_ext'
-  intro j
-  apply biproduct.hom_ext
-  intro k
-  simp only [scalarFreeIso, Iso.trans_inv, Iso.trans_hom, biproduct.mapIso_inv,
-    biproduct.mapIso_hom, Category.assoc, biproduct.ι_map_assoc,
-    Functor.mapBiproduct_inv, Functor.mapBiproduct_hom,
-    biproduct.ι_desc_assoc, biproduct.map_π, biproduct.lift_π,
-    scalarMatrix, biproduct.matrix]
-  erw [biproduct.lift_π_assoc]
-  simp only [← Category.assoc, ← Functor.map_comp, biproduct.ι_desc,
-    biproduct.lift_π]
-  simp only [Category.assoc]
-  rw [scalarRegular_entry, Iso.inv_hom_id_assoc]
-
-omit [IsCommMonObj Λ] in
-private theorem scalarMatrix_reconstruct {m n : ℕ}
-    (f : Mod.finiteFree (scalarRingObj Λ) m ⟶ Mod.finiteFree (scalarRingObj Λ) n) :
-    (biproduct.matrix fun j k ↦ Mod.regularLift (Mod.regular (scalarRingObj Λ))
-      ((MonObj.one : 𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ) ≫
-        (biproduct.ι _ j ≫ f ≫ biproduct.π _ k).hom)) = f := by
-  apply biproduct.hom_ext'
-  intro j
-  apply biproduct.hom_ext
-  intro k
-  erw [biproduct.ι_matrix, biproduct.lift_π]
-  apply Mod.regular_hom_ext
-  simpa only [Category.assoc] using Mod.one_comp_regularLift (A := scalarRingObj Λ) _ _
-
-
-
-private noncomputable def pointScalarSection
-    (a : 𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ) :
-    𝟙_ (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ⟶ Λ :=
-  Functor.LaxMonoidal.ε (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ≫
-    (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map a ≫
-    (constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
-      Profinite.isTerminalPUnit).counit.app Λ
-
-omit [MonObj Λ] [IsCommMonObj Λ] in
-private theorem pointScalarSection_surjective :
-    Function.Surjective (pointScalarSection Λ) := by
-  intro b
-  let F := constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
-  let adj := constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
-    Profinite.isTerminalPUnit
-  refine ⟨adj.homEquiv _ _ (Functor.OplaxMonoidal.η F ≫ b), ?_⟩
-  change Functor.LaxMonoidal.ε F ≫
-    (F.map (adj.homEquiv _ _ _) ≫ adj.counit.app Λ) = b
-  have h := (adj.homEquiv _ _).symm_apply_apply (Functor.OplaxMonoidal.η F ≫ b)
-  rw [adj.homEquiv_counit] at h
-  calc
-    _ = Functor.LaxMonoidal.ε F ≫ (Functor.OplaxMonoidal.η F ≫ b) :=
-      congrArg (fun f ↦ Functor.LaxMonoidal.ε F ≫ f) h
-    _ = b := by rw [← Category.assoc, Functor.Monoidal.ε_η, Category.id_comp]
-
-omit [MonObj Λ] [IsCommMonObj Λ] in
-private theorem scalarSection_point (X : Scheme.{u})
-    (a : 𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ) :
-    scalarSection Λ X a = Functor.LaxMonoidal.ε (upperStarFromPoint X) ≫
-      (upperStarFromPoint X).map (pointScalarSection Λ a) := by
-  simp only [scalarSection, scalarCoefficientHom, pointScalarSection,
-    Functor.map_comp]
-  rfl
-
 private instance pointMod_preservesFiniteColimits (X : Scheme.{u}) :
     PreservesFiniteColimits ((upperStarFromPoint X).mapMod Λ) := by
   have : PreservesColimitsOfSize.{0, 0} pointUpperStar.{u} :=
@@ -383,72 +254,6 @@ private instance pointMod_additive (X : Scheme.{u}) :
   have : PreservesBinaryBiproducts ((upperStarFromPoint X).mapMod Λ) :=
     preservesBinaryBiproducts_of_preservesBinaryCoproducts _
   exact Functor.additive_of_preservesBinaryBiproducts _
-
-private noncomputable def pointRegularIso (X : Scheme.{u}) :
-    ((upperStarFromPoint X).mapMod Λ).obj (Mod.regular Λ) ≅
-      Mod.regular (condensedRingObj Λ X) :=
-  Mod.isoMk (Iso.refl _) (by simp)
-
-private noncomputable def pointFreeIso (X : Scheme.{u}) (n : ℕ) :
-    ((upperStarFromPoint X).mapMod Λ).obj (Mod.finiteFree Λ n) ≅
-      Mod.finiteFree (condensedRingObj Λ X) n :=
-  ((upperStarFromPoint X).mapMod Λ).mapBiproduct (fun _ : Fin n ↦ Mod.regular Λ) ≪≫
-    biproduct.mapIso (fun _ ↦ pointRegularIso Λ X)
-
-omit [IsCommMonObj Λ] in
-private theorem pointRegular_entry (X : Scheme.{u})
-    (a : 𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ) :
-    ((upperStarFromPoint X).mapMod Λ).map
-        (Mod.regularLift (Mod.regular Λ) (pointScalarSection Λ a)) ≫
-      (pointRegularIso Λ X).hom =
-    (pointRegularIso Λ X).hom ≫
-      Mod.regularLift (Mod.regular (condensedRingObj Λ X)) (scalarSection Λ X a) := by
-  apply Mod.regular_hom_ext
-  change (MonObj.one : 𝟙_ _ ⟶ (upperStarFromPoint X).obj Λ) ≫
-      ((upperStarFromPoint X).map
-        (Mod.regularLift (Mod.regular Λ) (pointScalarSection Λ a)).hom ≫ 𝟙 _) =
-    (MonObj.one : 𝟙_ _ ⟶ (upperStarFromPoint X).obj Λ) ≫ (𝟙 _ ≫ _)
-  simp only [Category.comp_id, Category.id_comp]
-  rw [Mod.one_comp_regularLift, Functor.obj.η_def, Category.assoc,
-    ← Functor.map_comp, Mod.one_comp_regularLift, scalarSection_point]
-
-omit [IsCommMonObj Λ] in
-private theorem pointMatrix_map (X : Scheme.{u}) {m n : ℕ}
-    (A : Fin m → Fin n → (𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ)) :
-    (pointFreeIso Λ X m).inv ≫ ((upperStarFromPoint X).mapMod Λ).map
-        (biproduct.matrix fun j k ↦
-          Mod.regularLift (Mod.regular Λ) (pointScalarSection Λ (A j k))) ≫
-      (pointFreeIso Λ X n).hom = scalarMatrix Λ X A := by
-  apply biproduct.hom_ext'
-  intro j
-  apply biproduct.hom_ext
-  intro k
-  simp only [pointFreeIso, Iso.trans_inv, Iso.trans_hom, biproduct.mapIso_inv,
-    biproduct.mapIso_hom, Category.assoc, biproduct.ι_map_assoc,
-    Functor.mapBiproduct_inv, Functor.mapBiproduct_hom,
-    biproduct.ι_desc_assoc, biproduct.map_π, biproduct.lift_π,
-    scalarMatrix, biproduct.matrix]
-  erw [biproduct.lift_π_assoc]
-  simp only [← Category.assoc, ← Functor.map_comp, biproduct.ι_desc,
-    biproduct.lift_π]
-  simp only [Category.assoc]
-  rw [pointRegular_entry, Iso.inv_hom_id_assoc]
-
-omit [IsCommMonObj Λ] in
-private theorem pointMatrix_reconstruct {m n : ℕ}
-    (f : Mod.finiteFree Λ m ⟶ Mod.finiteFree Λ n) :
-    (biproduct.matrix fun j k ↦ Mod.regularLift (Mod.regular Λ)
-      ((MonObj.one : 𝟙_ _ ⟶ Λ) ≫
-        (biproduct.ι _ j ≫ f ≫ biproduct.π _ k).hom)) = f := by
-  apply biproduct.hom_ext'
-  intro j
-  apply biproduct.hom_ext
-  intro k
-  erw [biproduct.ι_matrix, biproduct.lift_π]
-  apply Mod.regular_hom_ext
-  simpa only [Category.assoc] using Mod.one_comp_regularLift (A := Λ) _ _
-
-
 
 private theorem map_finitePresentation
     {C D : Type*} [Category C] [Category D]

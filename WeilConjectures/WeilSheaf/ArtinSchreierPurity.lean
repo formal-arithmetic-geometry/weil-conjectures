@@ -206,26 +206,4 @@ lemma AddChar.norm_map_apply_eq_one {K : Type*} [Field K] [Finite K] {R : Type*}
   rw [← map_pow, ← AddChar.map_nsmul_eq_pow, nsmul_eq_mul, ringChar.Nat.cast_ringChar, zero_mul,
     AddChar.map_zero_eq_one, map_one]
 
-/-- **Purity of the Artin–Schreier sheaf.** The Artin–Schreier sheaf `ℒ_{ψ(a x)}` on the affine
-line is punctually `ι`-pure of weight zero: at every closed point its local Frobenius is
-multiplication by a value of `ψ`, a root of unity
-(`AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier`).
-(blueprint: `lem-fd-as-purity`) -/
-theorem isPunctuallyPureOfWeight_artinSchreier (ι : PadicAlgCl l →+* ℂ)
-    (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
-    (artinSchreier ψ a).IsPunctuallyPureOfWeight ι 0 := by
-  intro x α hα
-  obtain ⟨c, hc⟩ := WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier (l := l) a x
-  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff, hc ψ,
-    LinearMap.smul_apply, LinearMap.id_apply] at hv
-  have hαc : α = ψ c := (smul_left_injective _ hv.2 hv.1).symm
-  rw [hαc, AddChar.norm_map_apply_eq_one ψ ι c, zero_div, Real.rpow_zero]
-
-/-- The Fourier kernel `μ^* ℒ_ψ` is punctually `ι`-pure of weight zero, as a pullback of the
-Artin–Schreier sheaf `ℒ_ψ`. -/
-theorem isPunctuallyPureOfWeight_fourierKernel (ι : PadicAlgCl l →+* ℂ)
-    (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierKernel ψ).IsPunctuallyPureOfWeight ι 0 :=
-  (isPunctuallyPureOfWeight_artinSchreier ι ψ 1).upperStar _
-
 end AlgebraicGeometry

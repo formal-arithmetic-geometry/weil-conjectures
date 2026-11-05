@@ -177,15 +177,6 @@ private noncomputable def proEtaleRingExtension
     (𝟙 ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S).obj)
 
-private theorem proEtaleRingModuleDirectImage_isAdditive :
-    (proEtaleRingModuleDirectImage f R S c).Additive := by
-  constructor
-  intro M N a b
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  rfl
-
 open scoped ChangeOfRings in
 private theorem proEtale_changeOfRingsMap_tmul
     (M : proEtaleRingModules X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))
@@ -363,98 +354,7 @@ private noncomputable def proEtaleModuleInverseImageAdjunction :
     intro U
     rfl
 
-private noncomputable def proEtaleRingModulePullbackAdjunction :
-    proEtaleRingModulePullback f R S c ⊣ proEtaleRingModuleDirectImage f R S c := by
-  let adj := (proEtaleModuleInverseImageAdjunction f R).comp
-    (proEtaleRingExtensionAdjunction f R S c)
-  change proEtaleRingModulePullback f R S c ⊣ _ at adj
-  apply adj.ofNatIsoRight
-  refine NatIso.ofComponents (fun M ↦ ?_) ?_
-  · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
-    exact PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; rfl)
-  · intro M N a
-    apply SheafOfModules.hom_ext
-    apply PresheafOfModules.hom_ext
-    intro U
-    rfl
-
-private theorem proEtaleRingExtension_preservesFiniteLimits :
-    PreservesFiniteLimits (proEtaleRingExtension f R S c) := by
-  let rc := (sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c
-  let e := proEtaleScalarEquivalence X rc
-  let T := SheafOfModules.restrictScalars rc.hom
-  let : T.IsEquivalence := inferInstanceAs e.functor.IsEquivalence
-  let adj := proEtaleRingExtensionAdjunction f R S c
-  let ei := adj.leftAdjointUniq e.symm.toAdjunction
-  exact preservesFiniteLimits_of_natIso ei.symm
-
-private theorem proEtaleModuleInverseImage_preservesFiniteLimits :
-    PreservesFiniteLimits (proEtaleModuleInverseImage f R) := by
-  let A := (sheafCompose (ProEt.topology Y)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
-  let B := (sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
-  let eY := proEtaleModuleModelEquivalence Y A
-  let eX := proEtaleModuleModelEquivalence X B
-  let L := SheafOfModules.pullback.{u + 1} (proEtaleModelRingUnit f R)
-  let V := SheafOfModules.toSheaf
-    (((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
-      RingCat.{u + 1} (proEtaleModelTopology X) (ProEt.topology X)).obj B)
-  let : (AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt).IsEquivalence :=
-    inferInstanceAs (AsSmall.equiv.{u, u + 1, u + 1} (C := Y.ProEt)).inverse.IsEquivalence
-  let : (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).IsEquivalence :=
-    inferInstanceAs (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).functor.IsEquivalence
-  let : PreservesFiniteLimits (proEtaleModelBaseChange f) := by
-    change PreservesFiniteLimits
-      ((AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt) ⋙ proEtaleBaseChange f ⋙ AsSmall.up)
-    infer_instance
-  let : RepresentablyFlat (proEtaleModelBaseChange f) := flat_of_preservesFiniteLimits _
-  obtain ⟨e⟩ := proEtaleModelModuleInverseImage_underlying f R
-  let : PreservesFiniteLimits (L ⋙ V) := preservesFiniteLimits_of_natIso e.symm
-  let : PreservesFiniteLimits L := preservesFiniteLimits_of_reflects_of_preserves L V
-  let : PreservesFiniteLimits (proEtaleModuleToModel A) :=
-    inferInstanceAs (PreservesFiniteLimits eY.inverse)
-  let : PreservesFiniteLimits (proEtaleModuleFromModel B) :=
-    inferInstanceAs (PreservesFiniteLimits eX.functor)
-  change PreservesFiniteLimits (proEtaleModuleToModel A ⋙ L ⋙ proEtaleModuleFromModel B)
-  infer_instance
-
 set_option backward.isDefEq.respectTransparency false in
 attribute [instance] proEtaleRingModules_hasKInjectiveResolutions
-
-/-- Ordinary uncompleted unbounded derived direct image via K-injectives in all modules.
-Source: Stacks, Section 07A5 (blueprint: def-weil-pbc-proetale-operations). -/
-noncomputable abbrev proEtaleRingDerivedDirectImage :
-    DerivedCategory (proEtaleRingModules X S) ⥤ DerivedCategory (proEtaleRingModules Y R) :=
-  (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctor
-
-/-- Direct image is computed on every K-injective representative, naturally in that
-representative. Source: Stacks, Section 07A5
-(blueprint: def-weil-pbc-proetale-operations).
-Proof: the K-injective right derivability structure gives an invertible component of the
-right-derived unit at each K-injective complex. Its naturality gives the formula for maps.
-A quasi-isomorphism between K-injectives is a homotopy equivalence by
-CochainComplex.IsKInjective.quasiIso_iff; additive termwise direct image preserves its
-homotopy inverse. Thus the resolution calculation descends through localization. -/
-theorem proEtaleRingDerivedDirectImage_kInjective
-    (I : CochainComplex (proEtaleRingModules X S) ℤ) [I.IsKInjective] :
-    IsIso ((proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient _ _).obj I)) := by
-  infer_instance
-
-/-- The ordinary derived adjunction on the full unbounded derived categories.
-Source: Stacks, Lemma 0DVC and Section 0735
-(blueprint: def-weil-pbc-proetale-operations).
-Proof: apply the source exact-left-adjoint/right-derived adjunction to the proved module
-adjunction. Exactness identifies the left derived functor with the specified termwise
-localization. K-injective resolutions provide the total right derived functor. The source
-construction applies the derived Hom adjunction to the homotopy-category adjunction;
-its derivability comparisons give the required unbounded adjunction. -/
-theorem proEtaleRingDerivedOperations_adjunction :
-    Nonempty (proEtaleRingDerivedPullback f R S c ⊣ proEtaleRingDerivedDirectImage f R S c) := by
-  obtain ⟨adj⟩ := (proEtaleRingModuleOperations_properties f R S c).2.2.2.2
-  exact ⟨adj.mapDerivedCategoryRightDerivedAdjunction⟩
 
 end AlgebraicGeometry.Scheme

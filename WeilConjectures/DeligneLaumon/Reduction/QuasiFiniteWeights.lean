@@ -176,33 +176,6 @@ theorem WeilSheaf.HasWeightsAtMost.compactlySupportedCohomology_zero {w : ℝ}
   exact (pow_le_natCast_pow_rpow_iff (norm_nonneg _) _
     (Scheme.Hom.degreeOver_ne_zero _ t.2) _).1 hw
 
-/-- On a scheme quasi-finite over `k₀`, punctual purity of weight `w` gives purity of weight `w`
-of `H_c^0`, relative to `q = #k₀`. -/
-theorem WeilSheaf.IsPunctuallyPureOfWeight.compactlySupportedCohomology_zero {w : ℝ}
-    (h : G.IsPunctuallyPureOfWeight ι w) :
-    (G.compactlySupportedCohomology 0).IsPureOfWeightOver k₀ ι w := by
-  intro β hβ
-  obtain ⟨t, ht⟩ :=
-    WeilSheaf.exists_hasEigenvalue_stalk_of_hasEigenvalue_compactlySupportedCohomology_zero hβ
-  have hw := h t _ ht
-  simp only [Scheme.Hom.residueCard, map_pow, norm_pow] at hw
-  exact (pow_eq_natCast_pow_rpow_iff (norm_nonneg _) _
-    (Scheme.Hom.degreeOver_ne_zero _ t.2) _).1 hw
-
-/-- On a scheme quasi-finite over `k₀`, `H_c^0` of an `ι`-real Weil sheaf is `ι`-real: its local
-polynomial is the product of the expansions `det (1 - T^{deg t} F_t)`. -/
-theorem WeilSheaf.IsReal.compactlySupportedCohomology_zero (h : G.IsReal ι) :
-    (G.compactlySupportedCohomology 0).IsReal ι := by
-  have : Finite T :=
-    Scheme.Hom.finite_of_locallyQuasiFinite_toSpecField (T ↘ Spec (CommRingCat.of k₀))
-  let : Fintype T.finitePoints := Fintype.ofFinite _
-  intro n
-  rw [FrobeniusModule.localPolynomial,
-    G.charpolyRev_compactlySupportedCohomology_zero_of_locallyQuasiFinite]
-  exact Polynomial.coeff_prod_fixed ι (starRingEnd ℂ) _ _ (fun t _ ↦
-    (Polynomial.forall_coeff_expand_fixed_iff ι _ (Scheme.Hom.degreeOver_ne_zero _ t.2) _).2
-      (h t)) n
-
 variable [Subsingleton T]
 
 /-- On a scheme with a single point, quasi-finite over `k₀`, weights at most `v` on `H_c^0`
@@ -218,29 +191,6 @@ theorem WeilSheaf.hasWeightsAtMost_of_compactlySupportedCohomology_zero {v : ℝ
     (FrobeniusModule.ne_zero_of_hasEigenvalue hγ)
   simp only [Scheme.Hom.residueCard, map_pow, norm_pow]
   exact (pow_le_natCast_pow_rpow_iff (norm_nonneg _) _ hd _).2 (h β hβ)
-
-/-- On a scheme with a single point, quasi-finite over `k₀`, purity of weight `v` of `H_c^0`
-(relative to `q = #k₀`) gives punctual purity of weight `v`. -/
-theorem WeilSheaf.isPunctuallyPureOfWeight_of_compactlySupportedCohomology_zero {v : ℝ}
-    (h : (G.compactlySupportedCohomology 0).IsPureOfWeightOver k₀ ι v) :
-    G.IsPunctuallyPureOfWeight ι v := by
-  intro t γ hγ
-  have hd := Scheme.Hom.degreeOver_ne_zero (T ↘ Spec (CommRingCat.of k₀)) t.2
-  obtain ⟨β, hβ, rfl⟩ := LinearMap.exists_hasEigenvalue_pow_eq_of_charpolyRev_eq_expand _ _ hd
-    (G.charpolyRev_compactlySupportedCohomology_zero_of_subsingleton t) hγ
-    (FrobeniusModule.ne_zero_of_hasEigenvalue hγ)
-  simp only [Scheme.Hom.residueCard, map_pow, norm_pow]
-  exact (pow_eq_natCast_pow_rpow_iff (norm_nonneg _) _ hd _).2 (h β hβ)
-
-/-- On a scheme with a single point, quasi-finite over `k₀`, if `H_c^0` is `ι`-real then so is
-the Weil sheaf: the local polynomial of `H_c^0` is the expansion `det (1 - T^d F_t)`. -/
-theorem WeilSheaf.isReal_of_compactlySupportedCohomology_zero
-    (h : (G.compactlySupportedCohomology 0).IsReal ι) : G.IsReal ι := by
-  intro t
-  rw [FrobeniusModule.IsReal, FrobeniusModule.localPolynomial,
-    G.charpolyRev_compactlySupportedCohomology_zero_of_subsingleton t] at h
-  exact (Polynomial.forall_coeff_expand_fixed_iff ι _
-    (Scheme.Hom.degreeOver_ne_zero _ t.2) _).1 h
 
 end CompactlySupportedCohomology
 

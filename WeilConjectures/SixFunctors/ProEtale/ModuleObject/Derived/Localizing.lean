@@ -66,11 +66,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-! ### The localizing closure of `Dbc` -/
 
-omit [IsCommMonObj Λ] in
-lemma le_localizingBoundedConstructible (X : Scheme.{u}) :
-    boundedConstructible (condensedRingObj Λ X) ≤ localizingBoundedConstructible Λ X :=
-  ObjectProperty.le_localizingClosure _
-
 instance (X : Scheme.{u}) : (localizingBoundedConstructible Λ X).IsLocalizing :=
   inferInstanceAs ((boundedConstructible _).localizingClosure).IsLocalizing
 
@@ -137,35 +132,6 @@ instance preservesColimitsOfShape_tensorLeft (K : 𝔻(X)) (J : Type (u + 1)) :
     (derivedTensorHomAdjunction Λ K).leftAdjoint_preservesColimits
   inferInstance
 
-/-- The derived tensor product `- ⊗ᴸ K` preserves direct sums, being isomorphic to `K ⊗ᴸ -`
-through the braiding. -/
-lemma preservesCoproductsOn_tensorRight (K : 𝔻(X)) (P : ObjectProperty 𝔻(X)) :
-    ((curriedTensor 𝔻(X)).flip.obj K).PreservesCoproductsOn.{u + 1} P := by
-  obtain ⟨β⟩ := DerivedCategory.nonempty_braidedCategory
-    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-  exact (Functor.preservesCoproductsOn_of_preservesColimitsOfShape
-    ((curriedTensor 𝔻(X)).obj K) P).of_iso (G := (curriedTensor 𝔻(X)).flip.obj K)
-    (NatIso.ofComponents (fun M ↦ @BraidedCategory.braiding _ _ _ β K M)
-      (fun f ↦ @BraidedCategory.braiding_naturality_right _ _ _ β K _ _ f))
-
-/-- Blueprint `det-thm-sf-pf-field-tensor` (2), for an arbitrary condensed ring `Λ`: if the
-bounded constructible complexes `Dbc(X, Λ)` are closed under `⊗ᴸ`, so is `Loc(Dbc(X, Λ))`.
-Fixing `B` in `Dbc(X, Λ)`, the objects `A` of `Loc(Dbc(X, Λ))` with `A ⊗ᴸ B ∈ Loc(Dbc(X, Λ))` form
-a localizing subcategory containing `Dbc(X, Λ)`, `- ⊗ᴸ B` being exact and preserving direct sums;
-then fix `A` in `Loc(Dbc(X, Λ))` and argue in `B`
-(`CategoryTheory.ObjectProperty.localizingClosure_map₂`). -/
-theorem localizingBoundedConstructible_tensor
-    (h : ∀ A B : 𝔻(X), boundedConstructible (condensedRingObj Λ X) A →
-      boundedConstructible (condensedRingObj Λ X) B →
-        boundedConstructible (condensedRingObj Λ X) (A ⊗ B))
-    {A B : 𝔻(X)} (hA : localizingBoundedConstructible Λ X A)
-    (hB : localizingBoundedConstructible Λ X B) :
-    localizingBoundedConstructible Λ X (A ⊗ B) :=
-  ObjectProperty.localizingClosure_map₂ _ _ _ (curriedTensor 𝔻(X))
-    (fun Y _ ↦ preservesCoproductsOn_tensorRight Λ Y _)
-    (fun _ _ ↦ Functor.preservesCoproductsOn_of_preservesColimitsOfShape _ _)
-    (fun A' B' hA' hB' ↦ le_localizingBoundedConstructible Λ X _ (h A' B' hA' hB')) hA hB
-
 end Tensor
 
 /-! ### The projection map and the base change map -/
@@ -186,14 +152,6 @@ noncomputable def projectionMap :
         ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((p)^*⟦Λ⟧)).obj (curriedTensor 𝔻(X))) :=
   (derivedUpperStarLowerStarAdjunction Λ p).rightAdjointProjectionMap
     (leftDerivedUpperStarTensor Λ p)
-
-lemma projectionMap_app_app (M : 𝔻(X)) (L : 𝔻(Y)) :
-    ((projectionMap Λ p).app M).app L =
-      (derivedUpperStarLowerStarAdjunction Λ p).homEquiv _ _
-        (((leftDerivedUpperStarTensor Λ p).app (R((p)_*⟦Λ⟧).obj M)).app L ≫
-          ((curriedTensor 𝔻(X)).map ((derivedUpperStarLowerStarAdjunction Λ p).counit.app M)).app
-            (L((p)^*⟦Λ⟧).obj L)) :=
-  rfl
 
 /-! The two sides of the projection map are triangulated in each variable. -/
 

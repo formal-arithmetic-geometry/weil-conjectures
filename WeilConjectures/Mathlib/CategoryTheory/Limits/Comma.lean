@@ -23,9 +23,6 @@ Ported from the `proetale` package (`Proetale.Mathlib.CategoryTheory.Limits.Morp
 
 namespace CategoryTheory
 
-lemma Limits.IsColimit.hasColimit {J C : Type*} [Category J] [Category C]
-    {D : J ⥤ C} {c : Cocone D} (hc : IsColimit c) : HasColimit D := ⟨_, hc⟩
-
 open Limits Comma
 
 variable {T : Type*} [Category T] (P : MorphismProperty T)

@@ -194,19 +194,6 @@ theorem Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre (A :
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- **The strictly henselian setup for the projective line.** For a local ring `A` with
-residue field `κ` — in the application `A` is strictly henselian — let `X = ℙ¹_A`, let
-`X₀ = ℙ¹_κ` be its closed fibre, and for an étale sheaf `F` on `X` let `F₀` be its inverse
-image on `X₀`. This is the restriction map `res_F : Γ(X, F) ⟶ Γ(X₀, F₀)`.
-(blueprint: `def-weil-pbc-strict-henselian-setup`) -/
-noncomputable def Etale.projectiveLineClosedFibreRestriction (A : Type u) [CommRing A]
-    [IsLocalRing A]
-    (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).obj F ⟶
-      (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).obj ((ProjectiveSpace.map _
-        (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1} Λ].obj F) :=
-  globalSectionsUpperStarMap _ _ F
-
 /-- **Étale henselian restriction in degree zero.** Let `(A, I)` be a henselian pair, let
 `p : Y ⟶ Spec A` be proper, and let `i : Y₀ ⟶ Y` be the closed fibre over `Spec (A ⧸ I)`.
 For every étale sheaf `F` of `Λ`-modules on `Y`, restriction `Γ(Y, F) ⟶ Γ(Y₀, F|_{Y₀})` is an
@@ -243,24 +230,5 @@ instance Etale.isIso_globalSectionsUpperStarMap_of_isUniversalHomeomorphism {X Y
   have := isEquivalence_upperStar (ModuleCat.{u + 1} Λ) f
   unfold globalSectionsUpperStarMap
   infer_instance
-
-/-- **Degree-zero comparison over a strictly henselian base.** Let `A` be a strictly henselian
-local ring with residue field `κ`, let `s : Spec κ̄ ⟶ Spec A` be the closed geometric point
-given by an algebraic closure `κ̄` of `κ`, and let `p : Z ⟶ Spec A` be proper. For every étale
-sheaf `F` of `Λ`-modules on `Z`, restriction `Γ(Z, F) ⟶ Γ(Z_s, F|_{Z_s})` to the closed
-geometric fibre `Z_s = Z ×_A κ̄` is an isomorphism.
-
-As `κ` is separably closed, `κ̄/κ` is purely inseparable, so `Z_s ⟶ Z₀ = Z ×_A κ` is a universal
-homeomorphism and induces an isomorphism on sections; the comparison for `Z₀` is
-`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing`.
-(blueprint: `lemma-weil-pbc-proper-strict-henselian-h0`) -/
-theorem Etale.isIso_globalSectionsUpperStarMap_geometricFibre (A : Type u) [CommRing A]
-    [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] {Z : Scheme.{u}}
-    (p : Z ⟶ Spec (.of A)) [IsProper p] (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (pullback.fst p
-      (Spec.map (CommRingCat.ofHom
-        (algebraMap A (AlgebraicClosure (IsLocalRing.ResidueField A)))))) F) :=
-  (isIso_globalSectionsUpperStarMap_iff_forget₂ Λ _ F).2
-    (Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre A p _)
 
 end AlgebraicGeometry

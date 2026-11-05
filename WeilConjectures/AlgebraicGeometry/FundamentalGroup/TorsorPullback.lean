@@ -77,10 +77,6 @@ noncomputable def pullback (t : EtaleTorsor M Y) : EtaleTorsor M X where
 
 variable (t : EtaleTorsor M Y)
 
-lemma toFiniteEtale_pullback :
-    (t.pullback f).toFiniteEtale = (FiniteEtale.pullback f).obj t.toFiniteEtale :=
-  rfl
-
 @[simp]
 lemma pullback_P : (t.pullback f).P = Limits.pullback t.π f :=
   rfl
@@ -109,25 +105,6 @@ lemma IsIsomorphic.nonempty_iso {Z : Scheme.{u}} {t₁ t₂ : EtaleTorsor M Z}
              rw [← hπ, ← Category.assoc, φ.inv_hom_id, Category.id_comp]))
            hom_inv_id := FiniteEtale.hom_ext φ.hom_inv_id
            inv_hom_id := FiniteEtale.hom_ext φ.inv_hom_id }⟩
-
-/-- Base change preserves isomorphism of torsors. -/
-lemma IsIsomorphic.pullback {t₁ t₂ : EtaleTorsor M Y} (h : t₁.IsIsomorphic t₂) :
-    (t₁.pullback f).IsIsomorphic (t₂.pullback f) := by
-  obtain ⟨φ, hπ, hv⟩ := h
-  let Φ : t₁.toFiniteEtale ≅ t₂.toFiniteEtale :=
-    { hom := ObjectProperty.homMk (MorphismProperty.Over.homMk φ.hom hπ)
-      inv := ObjectProperty.homMk (MorphismProperty.Over.homMk φ.inv (by
-        change φ.inv ≫ t₁.π = t₂.π
-        rw [← hπ, ← Category.assoc, φ.inv_hom_id, Category.id_comp]))
-      hom_inv_id := FiniteEtale.hom_ext φ.hom_inv_id
-      inv_hom_id := FiniteEtale.hom_ext φ.inv_hom_id }
-  have hΦ (m : M) : t₁.vaddHom m ≫ Φ.hom = Φ.hom ≫ t₂.vaddHom m := FiniteEtale.hom_ext (hv m)
-  let Ψ := (FiniteEtale.pullback f).mapIso Φ
-  refine ⟨⟨Ψ.hom.hom.left, Ψ.inv.hom.left, congrArg (fun g ↦ g.hom.left) Ψ.hom_inv_id,
-    congrArg (fun g ↦ g.hom.left) Ψ.inv_hom_id⟩, hom_left_comp Ψ.hom, fun m ↦ ?_⟩
-  have := congrArg (FiniteEtale.pullback f).map (hΦ m)
-  simp only [Functor.map_comp] at this
-  exact congrArg (fun g ↦ g.hom.left) this
 
 section Monodromy
 

@@ -180,22 +180,6 @@ namespace WeilBoundedConstructible
 
 variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ)
 
-/-- **The open piece coefficient and the counit** (blueprint `prop-trf-trace-class-additivity`,
-proof of item 2, step (a)): `ε ∘ u^U = φ_m ∘ LΦ_m^* ε` for the counit `ε : j_! Lj^* K ⟶ K` of an
-open immersion `j` and a cartesian square `Φ_{m,U} ≫ j = j ≫ Φ_m`. -/
-@[reassoc]
-theorem openPieceCoeff_comp_counit (m : ℕ) {ΦU : U ⟶ U}
-    (sq : IsPullback ΦU j j (frobeniusIterate Φ m)) :
-    K.openPieceCoeff j m sq ≫
-        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app
-          K.carrier =
-      (boundedConstructibleUpperStar _ ℓ (frobeniusIterate Φ m)).map
-          ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app
-            K.carrier) ≫ (K.iterateStr m).hom := by
-  rw [openPieceCoeff, Category.assoc]
-  refine (map_counit_comp_eq_openSquareExchange_hom_comp ℓ sq K.carrier _ _ ?_).symm
-  rw [boundedConstructiblePullbackSquareComparison_hom_app, Category.assoc, Category.assoc]
-
 end WeilBoundedConstructible
 
 end Frobenius

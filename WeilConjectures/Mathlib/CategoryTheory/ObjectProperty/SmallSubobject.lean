@@ -24,17 +24,4 @@ namespace CategoryTheory.ObjectProperty
 
 variable {C : Type u} [Category.{v} C] [LocallySmall.{w} C] [WellPowered.{w} C]
 
-/-- In a well-powered category, a property of objects is essentially small if each object
-satisfying it admits a monomorphism into a member of a family of objects indexed by a small
-type. -/
-lemma EssentiallySmall.of_forall_exists_mono (P : ObjectProperty C) {ι : Type w} (T : ι → C)
-    (h : ∀ X, P X → ∃ (i : ι) (f : X ⟶ T i), Mono f) :
-    ObjectProperty.EssentiallySmall.{w} P := by
-  refine ⟨ObjectProperty.ofObj (fun x : Σ i, Shrink.{w} (Subobject (T i)) ↦
-    Subobject.underlying.obj ((equivShrink (Subobject (T x.1))).symm x.2)), inferInstance,
-    fun X hX ↦ ?_⟩
-  obtain ⟨i, f, hf⟩ := h X hX
-  refine ⟨_, ObjectProperty.ofObj_apply _ ⟨i, equivShrink _ (Subobject.mk f)⟩, ⟨?_⟩⟩
-  exact (Subobject.underlyingIso f).symm ≪≫ eqToIso (by rw [Equiv.symm_apply_apply])
-
 end CategoryTheory.ObjectProperty

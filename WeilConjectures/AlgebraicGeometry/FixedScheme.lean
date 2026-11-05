@@ -149,30 +149,4 @@ instance [QuasiSeparated aX] : QuasiCompact (fixedSchemeι aX c₁ c₂ h) :=
 abbrev Hom.fixedScheme (g : X ⟶ X) (hg : g ≫ aX = aX) : Scheme.{u} :=
   Scheme.fixedScheme aX (𝟙 X) g (by rw [hg, Category.id_comp])
 
-/-- A scheme `F` *has finitely many open-and-closed components* if its set `π₀(F)` of connected
-components is finite (blueprint `def-trf-fixed-scheme`). The components are then open and closed
-(`isClopen_connectedComponent_of_hasFiniteClopenComponents`), and `F` is their disjoint union
-(`isIso_sigmaDesc_connectedComponents`). -/
-def HasFiniteClopenComponents (F : Scheme.{u}) : Prop :=
-  Finite (ConnectedComponents F)
-
-/-- The connected components of a scheme with finitely many components are open and closed:
-the complement of a component is a finite union of closed components. -/
-lemma isClopen_connectedComponent_of_hasFiniteClopenComponents {F : Scheme.{u}}
-    (hF : F.HasFiniteClopenComponents) (x : F) : IsClopen (connectedComponent x) := by
-  refine ⟨isClosed_connectedComponent, ?_⟩
-  have : Finite (ConnectedComponents F) := hF
-  have : (connectedComponent x)ᶜ =
-      ⋃ c ∈ ({ConnectedComponents.mk x}ᶜ : Set (ConnectedComponents F)),
-        ConnectedComponents.mk ⁻¹' {c} := by
-    ext y
-    simp only [Set.mem_compl_iff, Set.mem_iUnion, Set.mem_preimage, Set.mem_singleton_iff,
-      exists_prop, exists_eq_right']
-    rw [← ConnectedComponents.coe_eq_coe', eq_comm]
-  rw [← isClosed_compl_iff, this]
-  refine (Set.toFinite _).isClosed_biUnion fun c _ ↦ ?_
-  obtain ⟨y, rfl⟩ := ConnectedComponents.surjective_coe c
-  rw [connectedComponents_preimage_singleton]
-  exact isClosed_connectedComponent
-
 end AlgebraicGeometry.Scheme

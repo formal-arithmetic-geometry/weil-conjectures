@@ -61,23 +61,6 @@ private instance : IsJacobsonRing ℤ := by
   · have := IsPrime.to_maximal_ideal hbot
     exact Ideal.jacobson_eq_self_of_isMaximal
 
-/-- A field which is a finitely generated `ℤ`-module is finite. -/
-private lemma finite_of_field_of_moduleFinite_int (K : Type*) [Field K] [Module.Finite ℤ K] :
-    Finite K := by
-  have hint : Algebra.IsIntegral ℤ K := Algebra.IsIntegral.of_finite ℤ K
-  rcases CharP.char_is_prime_or_zero K (ringChar K) with hp | h0
-  · have : Fact (ringChar K).Prime := ⟨hp⟩
-    let : Algebra (ZMod (ringChar K)) K := ZMod.algebra K (ringChar K)
-    have : Module.Finite (ZMod (ringChar K)) K :=
-      Module.Finite.of_restrictScalars_finite ℤ (ZMod (ringChar K)) K
-    exact Module.finite_of_finite (ZMod (ringChar K))
-  · have : CharP K 0 := h0 ▸ ringChar.charP K
-    have : CharZero K := CharP.charP_to_charZero K
-    have hinj : Function.Injective (algebraMap ℤ K) := by
-      rw [algebraMap_int_eq]
-      exact Int.cast_injective
-    exact absurd (isField_of_isIntegral_of_isField hinj (Field.toIsField K)) Int.not_isField
-
 /-- The residue field of `X` at a point `x` of an affine open `U` is isomorphic to the
 residue field of the corresponding prime ideal of `Γ(X, U)`. -/
 private noncomputable def residueFieldEquivPrimeIdealOf {U : X.Opens} (hU : IsAffineOpen U)
@@ -144,46 +127,5 @@ lemma isClosed_singleton_of_mem_finitePoints {x : X} (hx : x ∈ X.finitePoints)
       exact hy ▸ y.2
     rw [heq]
     exact isClosed_empty
-
-/-- If `X` is locally of finite type over `ℤ`, the points with finite residue field are
-exactly the closed points. This is a consequence of the general Nullstellensatz. -/
-theorem finitePoints_eq_closedPoints (f : X ⟶ Spec (.of (ULift.{u} ℤ)))
-    [LocallyOfFiniteType f] :
-    X.finitePoints = {x | IsClosed ({x} : Set X)} := by
-  ext x
-  simp only [Set.mem_ofPred_eq]
-  refine ⟨fun hx => X.isClosed_singleton_of_mem_finitePoints hx, fun hx => ?_⟩
-  obtain ⟨U, hxU⟩ : ∃ U : X.affineOpens, x ∈ (U : X.Opens) := by
-    have hx' : x ∈ (⊤ : X.Opens) := trivial
-    rw [← iSup_affineOpens_eq_top X] at hx'
-    exact TopologicalSpace.Opens.mem_iSup.mp hx'
-  have hmax : (U.2.primeIdealOf ⟨x, hxU⟩).asIdeal.IsMaximal :=
-    U.2.primeIdealOf_isMaximal_of_isClosed ⟨x, hxU⟩ hx
-  rw [mem_finitePoints]
-  refine (finite_residueField_iff_primeIdealOf U.2 ⟨x, hxU⟩).mpr ?_
-  set m : Ideal Γ(X, U.1) := (U.2.primeIdealOf ⟨x, hxU⟩).asIdeal with hm
-  let : Field (Γ(X, U.1) ⧸ m) := Ideal.Quotient.field m
-  have e : (U : X.Opens) ≤ f ⁻¹ᵁ ⊤ := le_top
-  have h1 : (Int.castRingHom (ULift.{u} ℤ)).FiniteType :=
-    RingHom.FiniteType.of_surjective _ fun a => ⟨a.down, rfl⟩
-  have h2 : (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).inv.hom.FiniteType :=
-    RingHom.FiniteType.of_surjective _
-      (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).symm.commRingCatIsoToRingEquiv.surjective
-  have h3 : (f.appLE ⊤ (U : X.Opens) e).hom.FiniteType :=
-    f.finiteType_appLE (isAffineOpen_top _) U.2 e
-  have h4 : (Ideal.Quotient.mk m).FiniteType :=
-    RingHom.FiniteType.of_surjective _ Ideal.Quotient.mk_surjective
-  have hχ := ((h4.comp h3).comp h2).comp h1
-  have hft : (algebraMap ℤ (Γ(X, U.1) ⧸ m)).FiniteType := by
-    rw [algebraMap_int_eq, ← RingHom.eq_intCast'
-      ((((Ideal.Quotient.mk m).comp (f.appLE ⊤ (U : X.Opens) e).hom).comp
-        (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).inv.hom).comp
-        (Int.castRingHom (ULift.{u} ℤ)))]
-    exact hχ
-  have hFT : Algebra.FiniteType ℤ (Γ(X, U.1) ⧸ m) := RingHom.finiteType_algebraMap.mp hft
-  have hMF : Module.Finite ℤ (Γ(X, U.1) ⧸ m) :=
-    finite_of_finite_type_of_isJacobsonRing ℤ (Γ(X, U.1) ⧸ m)
-  have hKfin : Finite (Γ(X, U.1) ⧸ m) := finite_of_field_of_moduleFinite_int _
-  exact Finite.of_surjective _ (Ideal.bijective_algebraMap_quotient_residueField m).surjective
 
 end AlgebraicGeometry.Scheme

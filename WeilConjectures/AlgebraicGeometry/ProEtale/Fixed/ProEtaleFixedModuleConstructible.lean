@@ -38,22 +38,4 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite constructible locally closed stratification, local constancy on each
-stratum, and finite geometric stalks. No bound, common stratification, or etale
-origin is part of this sheaf predicate. Source: blueprint,
-def-weil-proetale-constructible-sheaf, second paragraph
-(blueprint: def-weil-proetale-constructible-sheaf). -/
-def IsConstructibleProEtaleFixedModuleSheaf (Y : Scheme.{u})
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop :=
-  ∃ S : Stratification Y, 0 < S.n ∧
-    (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
-    ∀ i : Fin S.n,
-      IsLocallyConstantProEtaleFixedModuleSheaf (S.domain i) A
-        ((ProEtale.upperStar (ModuleCat.{u + 1} A) (S.immersion i)).obj F) ∧
-      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
-        (y : Spec (.of Ω) ⟶ S.domain i),
-        Finite (proEtaleGeometricFixedModuleStalk y A
-          ((ProEtale.upperStar (ModuleCat.{u + 1} A) (S.immersion i)).obj F))
-
 end AlgebraicGeometry.Scheme

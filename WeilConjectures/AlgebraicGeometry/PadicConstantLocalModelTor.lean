@@ -99,26 +99,6 @@ variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalC
   {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]
   (S : D) [MonObj S] [IsCommMonObj (F.obj (G.obj S))]
 
-/-- Extending constant scalar modules along the counit is left adjoint to sections.
-Source: blueprint local boundary duality, Step 5, scalar extension adjunction.
-Proof: compose the module lift of the monoidal adjunction with extension/restriction
-of scalars. The resulting restriction is along the unit followed by the image of
-its counit; the right triangle identity identifies this with restriction along the
-identity. This also applies to the zero algebra and the zero module.
-(blueprint: lem-a1-condensed-point-scalar-adjunction) -/
-def counitScalarAdjunction :
-    F.mapMod (G.obj S) ⋙ Mod.extendScalars (adj.counitAlgHom S) ⊣ G.mapMod S := by
-  let a := (adj.mapModAdjunction (G.obj S)).comp
-    (Mod.extendRestrictAdjunction (adj.counitAlgHom S))
-  refine a.ofNatIsoRight ?_
-  exact (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (G.mapModComapIso (adj.counitAlgHom S)) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (G.mapMod S)
-      ((Mod.comapComp (adj.unitAlgHom (G.obj S)) (G.map (adj.counitAlgHom S))).symm ≪≫
-        Mod.comapCongr (adj.right_triangle_components S) ≪≫ Mod.comapId (G.obj S)) ≪≫
-    Functor.rightUnitor (G.mapMod S)
-
 end CounitScalar
 
 private instance constantScalarSheaf_laxBraided :
@@ -239,39 +219,6 @@ section PointAdjunction
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (k : Type u) [Field k] [IsSepClosed k]
-
-/-- The scalar module sections transported along the geometric-point equivalence.
-Source: blueprint local boundary duality, Step 5, sections adjunction
-(blueprint: lem-a1-condensed-point-scalar-adjunction). -/
-def pointInternalScalarSections :=
-  (((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence).inverse ⋙
-    scalarSections.mapMod Λ
-
-/-- The finite-constant-model scalar extension is left adjoint to point scalar sections.
-Source: blueprint local boundary duality, Step 5, scalar extension adjunction.
-Proof: factor scalar realization into constant sheaf, extension along the counit,
-and the point inverse image. The preceding monoidal scalar adjunction supplies the
-first two factors, and the point inverse image is an equivalence. Transport the
-composed adjunction through the canonical scalar realization factorization.
-(blueprint: lem-a1-condensed-point-scalar-adjunction) -/
-theorem finiteConstantPointAdjunction :
-    Nonempty (finiteConstantScalarExtension Λ (Spec (.of k)) ⊣
-      pointInternalScalarSections Λ k) := by
-  let C := constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
-  let G := scalarSections.{u}
-  let : C.LaxBraided := by
-    letI : (Functor.const Profinite.{u}ᵒᵖ :
-        Ab.{u + 1} ⥤ Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}).LaxBraided :=
-      { braided := by intros; ext; simp [Functor.LaxMonoidal.μ]; rfl }
-    exact inferInstanceAs (Functor.const Profinite.{u}ᵒᵖ ⋙
-      presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).LaxBraided
-  have : IsCommMonObj (C.obj (G.obj Λ)) :=
-    Functor.isCommMonObj_obj (F := C) (M := scalarRingObj Λ)
-  let a : C ⊣ G := constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
-    Profinite.isTerminalPUnit
-  let E := ((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence
-  exact ⟨((counitScalarAdjunction a Λ).comp E.toAdjunction).ofNatIsoLeft
-    (constantExtensionCompIso Λ (Spec (.of k))).symm⟩
 
 end PointAdjunction
 

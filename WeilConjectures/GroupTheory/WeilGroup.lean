@@ -62,45 +62,4 @@ def weilGroupDeg : weilGroup π Φ →* Multiplicative ℤ :=
 theorem weilGroupDeg_apply (w : weilGroup π Φ) : weilGroupDeg π Φ w = (w : G × _).2 :=
   rfl
 
-/-- The inclusion `ker π → W(π, Φ)`, `g ↦ (g, 0)`, of the geometric part. -/
-def kerToWeilGroup : π.ker →* weilGroup π Φ :=
-  ((π.ker.subtype).prod 1).codRestrict _ fun g ↦ by
-    rw [mem_weilGroup]
-    exact (mem_ker.1 g.2).trans (zpow_zero Φ).symm
-
-@[simp]
-theorem coe_kerToWeilGroup_apply (g : π.ker) :
-    (kerToWeilGroup π Φ g : G × Multiplicative ℤ) = ((g : G), 1) :=
-  rfl
-
-/-- **The Weil group sequence is exact.** For an element `Φ` of infinite order lifting to `G`,
-the degree map `deg : W(π, Φ) → ℤ` is surjective, the inclusion `ker π → W(π, Φ)` is injective
-with image `ker deg`, and every lift of `Φ` to `W(π, Φ)` has degree one; that is,
-`1 → ker π → W(π, Φ) → ℤ → 0` is exact.
-(blueprint: `lem-wf-weil-group-exact-sequence`) -/
-theorem exact_weilGroupDeg (hπ : Φ ∈ π.range) (hΦ : ¬IsOfFinOrder Φ) :
-    Function.Surjective (weilGroupDeg π Φ) ∧ Function.Injective (kerToWeilGroup π Φ) ∧
-      (kerToWeilGroup π Φ).range = (weilGroupDeg π Φ).ker ∧
-      ∀ w : weilGroup π Φ, π (w : G × Multiplicative ℤ).1 = Φ →
-        weilGroupDeg π Φ w = Multiplicative.ofAdd 1 := by
-  obtain ⟨s, hs⟩ := hπ
-  refine ⟨fun n ↦ ?_, fun g h hgh ↦ ?_, ?_, fun w hw ↦ ?_⟩
-  · refine ⟨⟨(s ^ n.toAdd, n), ?_⟩, rfl⟩
-    rw [mem_weilGroup, map_zpow, hs]
-  · exact Subtype.ext congr(($hgh : G × Multiplicative ℤ).1)
-  · ext w
-    constructor
-    · rintro ⟨g, rfl⟩
-      rfl
-    · intro hw
-      rw [mem_ker, weilGroupDeg_apply] at hw
-      have hg : (w : G × Multiplicative ℤ).1 ∈ π.ker := by
-        rw [mem_ker, mem_weilGroup.1 w.2, hw, toAdd_one, zpow_zero]
-      exact ⟨⟨_, hg⟩, Subtype.ext (Prod.ext rfl hw.symm)⟩
-  · have h := mem_weilGroup.1 w.2
-    rw [hw] at h
-    apply Multiplicative.toAdd.injective
-    have := (injective_zpow_iff_not_isOfFinOrder.2 hΦ) (h.symm.trans (zpow_one Φ).symm)
-    simpa using this
-
 end MonoidHom

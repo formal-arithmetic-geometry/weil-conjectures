@@ -35,30 +35,4 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   {πY : Y'.left ⟶ Y.left} {πZ : c'.Z ⟶ c.Z}
   (hg : IsPullback πZ c'.g c.g πY) [WeaklyEtale πZ] [WeaklyEtale πY]
 
-/-- The left-derived proper exchange is the usual derived base change map. -/
-lemma purityFieldProperAmbientExchange_hom :
-    (purityFieldProperAmbientExchange l f f' c c' hg).hom =
-      baseChangeMap (Profinite.padicAlgClRingObj l) hg.toCommSq := by
-  have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj l) hg
-  have he := Functor.isoWhisker_conjugate_cancel
-    (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πY)
-    (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πZ)
-    (asIso (baseChangeMap (Profinite.padicAlgClRingObj l) hg.toCommSq))
-  exact congrArg Iso.hom he
-
-/-- The restricted proper factor is precisely the proper base change used in the
-exceptional base change theorem. -/
-lemma purityFieldProperRestrictedExchange_hom :
-    (purityFieldProperRestrictedExchange l f f' c c' hg).hom =
-      boundedConstructibleBaseChangeOfMap l
-        (f := c.overG) (f' := c'.overG) hg.toCommSq := by
-  have he := ObjectProperty.preimageIso_liftSquareWithComparisons_lift_hom
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj l c.overG K)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj l c'.overG K)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πZ K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πY K.obj K.property)
-    (purityFieldProperAmbientExchange l f f' c c' hg)
-  rw [purityFieldProperAmbientExchange_hom] at he
-  exact he
-
 end AlgebraicGeometry.ProEtale.CondensedRing

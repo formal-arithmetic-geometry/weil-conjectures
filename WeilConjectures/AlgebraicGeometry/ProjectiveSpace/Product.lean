@@ -119,11 +119,4 @@ theorem exists_isClosedImmersion_pi :
     rw [Over.comp_left, Over.comp_left]
     infer_instance
 
-/-- A finite fibre product of projective spaces over `S` is proper over `S`. -/
-theorem isProper_pi_hom :
-    IsProper (∏ᶜ fun i ↦ Over.mk (ℙ(n i; S) ↘ S) : Over S).hom :=
-  have (i : ι) : IsProper (Over.mk (ℙ(n i; S) ↘ S)).hom :=
-    inferInstanceAs (IsProper (ℙ(n i; S) ↘ S))
-  AlgebraicGeometry.isProper_pi_hom _
-
 end AlgebraicGeometry.ProjectiveSpace

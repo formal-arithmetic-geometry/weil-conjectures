@@ -190,7 +190,6 @@ theorem isRegularLocalRing_strictHenselization_of_smoothOfRelativeDimension {k :
   exact ⟨(Algebra.isRegularLocalRing_iff_strictHenselization _ K _ hH).1 hreg,
     (Algebra.ringKrullDim_eq_of_isStrictHenselization _ K _ hH).symm.trans hdim⟩
 
-
 /-- A `k`-rational point of a scheme smooth of relative dimension one over `k` has an affine open
 chart over `k` in which its ideal is principal. -/
 theorem exists_affineChart_ker_eq_span_singleton {k : Type u} [Field k] {C : Scheme.{u}}
@@ -399,10 +398,6 @@ lemma mem_range_vertical {w : ↥(pullback M.f M.f)}
 lemma y_comp_graph : M.y ≫ M.graph = M.diagPoint :=
   pullback.hom_ext (by simp [graph, diagPoint, M.y_comp_h]) (by simp [graph, diagPoint])
 
-lemma y_comp_vertical : M.y ≫ M.vertical = M.diagPoint :=
-  pullback.hom_ext (by simp [vertical, diagPoint, reassoc_of% M.y_comp])
-    (by simp [vertical, diagPoint])
-
 lemma y_comp_horizontal : M.y ≫ M.horizontal = M.diagPoint :=
   pullback.hom_ext (by simp [horizontal, diagPoint])
     (by simp [horizontal, diagPoint, reassoc_of% M.y_comp])
@@ -604,7 +599,6 @@ lemma exists_mem_b_ne_closedPoint : ∃ P : D.T', D.π P ∈ Set.range M.b ∧
       rw [← Scheme.Hom.comp_apply, pullback.diagonal_fst]
       rfl
     rwa [e, ← Scheme.Hom.comp_apply D.s', D.s'_fst] at h2
-
 
 /-- The curves `D'`, `H'`, `B'` pass through the closed point of `T'`
 (blueprint `det-tf-restriction-zero-covers`). -/

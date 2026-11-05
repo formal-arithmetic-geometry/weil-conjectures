@@ -64,19 +64,6 @@ section EllAdic
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- A finite extension `E` of `ℚ_ℓ` (as a normed field) has condensed ring `E̲` isomorphic to that
-of a finite subextension of `ℚ̄_ℓ`. -/
-theorem exists_continuousMapRingObj_iso (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-    [FiniteDimensional ℚ_[ℓ] E] :
-    ∃ (E' : PadicAlgCl.FiniteIntermediateField ℓ)
-      (e : continuousMapRingObj.{u} E ≅ continuousMapRingObj.{u} E'.1), IsMonHom e.hom := by
-  let σ : E →ₐ[ℚ_[ℓ]] PadicAlgCl ℓ := IsAlgClosed.lift
-  let φ : E ≃ₐ[ℚ_[ℓ]] σ.fieldRange := AlgEquiv.ofInjectiveField σ
-  have hfin : FiniteDimensional ℚ_[ℓ] σ.fieldRange := φ.toLinearEquiv.finiteDimensional
-  have hφ : Continuous φ := φ.toLinearMap.continuous_of_finiteDimensional
-  have hφ' : Continuous φ.symm := φ.symm.toLinearMap.continuous_of_finiteDimensional
-  exact ⟨⟨σ.fieldRange, hfin⟩, continuousMapRingObjIso φ.toRingEquiv hφ hφ', inferInstance⟩
-
 /-- For a subfield `E ⊆ ℚ̄_ℓ` given by an embedding, finite over `ℚ_ℓ`, `𝒪̲_E` is isomorphic to
 `𝒪̲_{E'}` for the image `E'` of `E`. -/
 theorem exists_padicIntegersRingObj_iso (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]

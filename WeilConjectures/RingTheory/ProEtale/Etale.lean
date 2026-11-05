@@ -35,11 +35,6 @@ def ShortComplex.forget (C : Type*) [Category C] [HasZeroMorphisms C] :
   obj S := S.toComposableArrows
   map f := ShortComplex.mapToComposableArrows f
 
-def ComposableArrows.whiskeringRight (C D : Type*) [Category C] [Category D]
-    (n : ℕ) :
-    (C ⥤ D) ⥤ ComposableArrows C n ⥤ ComposableArrows D n :=
-  Functor.whiskeringRight _ _ _
-
 end CategoryTheory
 
 open TensorProduct CategoryTheory Limits
@@ -72,20 +67,6 @@ local instance
     [MonoidalCategory C] [BraidedCategory C] (c : C)
     [PreservesColimitsOfShape J (tensorLeft c)] :
     PreservesColimitsOfShape J (MonoidalCategory.tensorRight c) where
-
-lemma CategoryTheory.MorphismProperty.ind_inverseImage_le
-    {C : Type*} [Category C] {D : Type*} [Category D]
-    (F : C ⥤ D) (P : MorphismProperty D) [PreservesFilteredColimitsOfSize.{w, w} F] :
-    ind.{w} (P.inverseImage F) ≤ (ind.{w} P).inverseImage F := by
-  intro X Y f hf
-  rw [ind_iff_ind_underMk] at hf
-  simp only [inverseImage_iff, ind_iff_ind_underMk]
-  -- TODO: make separate instance
-  have : PreservesFilteredColimitsOfSize.{w, w} (Under.post (X := X) F) := by
-    constructor
-    intro
-    infer_instance
-  exact P.underObj.ind_inverseImage_le (Under.post F) _ hf
 
 namespace CommRingCat
 

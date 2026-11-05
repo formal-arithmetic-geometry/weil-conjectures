@@ -26,25 +26,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- A module sheaf is classical when its underlying sheaf of sets is classical in the
-continuity-map sense. Source: blueprint `sk-def-pe-classical-definition`, final module clause
-(blueprint: sk-def-pe-classical-definition). -/
-def IsClassicalModuleSheaf {X : Scheme.{u}}
-    {R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}}
-    (F : SheafOfModules.{u + 1} R) : Prop :=
-  IsClassical
-    ((sheafCompose (Scheme.ProEt.topology X) (forget AddCommGrpCat.{u + 1})).obj
-      ((SheafOfModules.toSheaf R).obj F))
-
-/-- A complex of module sheaves is classical when every cohomology sheaf is classical.
-Source: blueprint `sk-def-pe-classical-definition`, final complex clause
-(blueprint: sk-def-pe-classical-definition). -/
-def IsClassicalModuleComplex {X : Scheme.{u}}
-    {R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}}
-    [HasDerivedCategory (SheafOfModules.{u + 1} R)]
-    (K : DerivedCategory (SheafOfModules.{u + 1} R)) : Prop :=
-  ∀ q : ℤ,
-    IsClassicalModuleSheaf
-      ((DerivedCategory.homologyFunctor (SheafOfModules.{u + 1} R) q).obj K)
-
 end AlgebraicGeometry.ProEtale

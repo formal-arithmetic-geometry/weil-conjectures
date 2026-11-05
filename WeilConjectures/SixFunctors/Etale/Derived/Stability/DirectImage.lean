@@ -71,38 +71,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-! #### Direct image -/
 
-omit [Finite Λ] in
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
-
-Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, let `Λ` be a noetherian ring and `J` an
-ideal of `Λ` with `Λ ⧸ J` finite, and let `K` be a bounded constructible complex of étale sheaves
-of `Λ`-modules on `X` killed by `J`, where `J` contains an integer `N` invertible on `Y`. Then
-`Rf_* K` is bounded constructible on `Y_ét`. For a finite `Λ` one may take `J = 0`; the case of an
-infinite `Λ` is used at the integral stage `Λ = 𝒪_E`, for the reductions modulo `Iⁿ⁺¹`. This is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero`.
-
-Each hypothesis is needed. Without torsion the statement fails, `H³(ℙ¹, ℤ)` containing
-`ℚ_ℓ/ℤ_ℓ`; and for `N = p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier). -/
-theorem boundedConstructible_rightDerivedLowerStar [IsNoetherianRing Λ] (J : Ideal Λ)
-    [Finite (Λ ⧸ J)] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
-    (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (N : ℕ)
-    [NeZero N] (hNJ : (N : Λ) ∈ J) (hNY : IsUnit (N : Γ(Y, ⊤))) (hJ : ∀ r ∈ J, r • 𝟙 K = 0)
-    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    boundedConstructible (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
-  have : QuasiCompact f := by
-    subst hf
-    have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
-    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
-    have : IsNoetherian Y := {}
-    exact QuasiCompact.of_comp f aY
-  have : HasInvertibleExponent (Λ ⧸ J) X :=
-    ⟨N, Nat.pos_of_ne_zero (NeZero.ne N), by
-      rw [← map_natCast (Ideal.Quotient.mk J), Ideal.Quotient.eq_zero_iff_mem]
-      exact hNJ, by simpa using hNY.map f.appTop.hom⟩
-  exact boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero J f aX aY hf hbc hJ
-
 /-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude.
 
 Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes with `dim X ≤ d`, let `Λ` be a finite
@@ -128,33 +96,6 @@ theorem torAmplitudeIn_rightDerivedLowerStar
     torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
   torAmplitudeIn_rightDerivedLowerStar_of_finite Λ aX aY f hf d hd a b hta
-
-omit [Finite Λ] in
-/-- The Tor amplitude bound of blueprint `sk-thm-sf-direct-image-tor-amplitude` for Noetherian
-coefficients which need not be finite.
-
-Let `f : X ⟶ Y` be a separated morphism of finite-type `k`-schemes with `dim X ≤ d`, let `Λ` be a
-Noetherian ring, and let `K` be a bounded constructible complex of étale sheaves of `Λ`-modules
-on `X` of Tor amplitude in `[a, b]`, killed by an integer `N` invertible on `Y`. Then `Rf_* K` has
-Tor amplitude in `[a, b + 2d]`. This is used at the integral coefficient stage, for the reductions
-of an `𝒪_E`-complex modulo powers of the maximal ideal. For a finite ring `Λ` it is
-`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`; in general the residue test is
-not available and the proof goes through the geometric stalks, using that the stalks of `Rf_* K`
-are computed by a projection formula with arbitrary constant coefficients. -/
-theorem torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing [IsNoetherianRing Λ]
-    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-    [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    [IsSeparated f] (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (N : ℕ)
-    [NeZero N] (hN : N • 𝟙 K = 0) (hNY : IsUnit (N : Γ(Y, ⊤)))
-    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
-  -- neither the invertibility of `N` on `Y` nor the constructibility of `K` is needed
-  have _ := hNY
-  have _ := hbc
-  exact torAmplitudeIn_rightDerivedLowerStar_of_nsmul_id_eq_zero Λ aX aY f hf d hd a b N hN hta
 
 omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
@@ -202,32 +143,6 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   have : IsNoetherianRing Λ := inferInstance
   exact ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
-
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
-subcategories.
-
-Clause (iv): `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated finite-type `f`
-admitting a compactification, over a finite-type `k`-scheme `Y`, for a finite `Λ` whose exponent
-is invertible on `Y`. For the chosen compactification `X ⟶[j] Z ⟶[g] Y` of `f`, `Rf_!` is
-`Rg_* ∘ j_!`; extension by zero preserves `Dctf`
-(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`)
-and so does the direct image along the proper `g`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`).
-
-Some finiteness hypothesis on `Y` is needed: for `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, which is proper,
-`Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point, so it is not bounded. -/
-theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}}
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
-    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
-  let c := HasCompactification.compactification f
-  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
-  obtain ⟨hbc, a, b, hta⟩ := hK
-  have h := constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ c.i a b
-    ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
-  exact constructibleFiniteTor_rightDerivedLowerStar Λ (c.g ≫ aY) aY c.g rfl ⟨h.1.1, a, b, h.2⟩
 
 /-! #### Internal hom: local tools -/
 
@@ -318,20 +233,6 @@ theorem boundedConstructible_of_openCover {X : Scheme.{u}} [TopologicalSpace.Noe
     have : IsConstructibleSheaf ((D(((U i).ι)^*[ModuleCat.{u + 1} Λ]) ⋙
         _root_.DerivedCategory.homologyFunctor _ q).obj R) := (h i).2 q
     exact IsConstructibleSheaf.of_iso (e i q).symm
-
-omit [Finite Λ] in
-/-- A complex of finite Tor amplitude with bounded constructible homology restricts to one along
-a pullback. -/
-lemma constructibleFiniteTor_mapDerivedCategory_upperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
-    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y N) :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      (D((f)^*[ModuleCat.{u + 1} Λ]).obj N) := by
-  obtain ⟨hbc, c, d, hcd⟩ := hN
-  exact ⟨hbc.mapDerivedCategory_upperStar f, c, d,
-    (torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d).prop_of_iso
-      ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app N)
-      (torAmplitudeIn_leftDerivedUpperStar _ f c d hcd)⟩
 
 end Torsion
 

@@ -26,31 +26,4 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- The equivalence `schemeDerivedCategoryEquiv X` sends a module placed in degree `0` to the same
-module placed in degree `0`. -/
-noncomputable def schemeDerivedCategoryEquivFunctorSingleIso {X : Scheme.{u}}
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (M : X.Modules) :
-    (schemeDerivedCategoryEquiv.{w} X).functor.obj ((DerivedCategory.singleFunctor _ 0).obj M) ≅
-      (DerivedCategory.singleFunctor X.Modules 0).obj M :=
-  (schemeDerivedCategoryEquiv.{w} X).functor.mapIso
-      ((DerivedCategory.singleFunctorIsoCompQ
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).app M) ≪≫
-    (qCompSchemeDerivedCategoryEquivFunctor.{w} X).app _ ≪≫
-    ((DerivedCategory.singleFunctorIsoCompQ X.Modules 0).app M).symm
-
-/-- For flat `h`, the derived pullback of a module `M` placed in degree `0` is `h^* M` placed in
-degree `0`. -/
-noncomputable def derivedPullbackSingleFunctorIsoOfFlat
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    {T T' : Scheme.{u}} (h : T' ⟶ T) [Flat h] (M : T.Modules) :
-    (derivedPullback h).obj ((DerivedCategory.singleFunctor _ 0).obj M) ≅
-      (DerivedCategory.singleFunctor _ 0).obj ((Scheme.Modules.pullback h).obj M) :=
-  (eqToIso (derivedPullback_def h)).app _ ≪≫
-    (schemeDerivedCategoryEquiv T').inverse.mapIso
-      ((Scheme.Modules.derivedPullback h).mapIso (schemeDerivedCategoryEquivFunctorSingleIso M) ≪≫
-        (Scheme.Modules.pullback h).singleFunctorCompLeftDerivedFunctorIso.app M ≪≫
-        (schemeDerivedCategoryEquivFunctorSingleIso _).symm) ≪≫
-    (schemeDerivedCategoryEquiv T').unitIso.symm.app _
-
 end AlgebraicGeometry

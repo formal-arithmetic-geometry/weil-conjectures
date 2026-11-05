@@ -170,24 +170,6 @@ theorem upperStar_map_unit_comp_graphClosedPieceCoeff :
   simp only [Category.assoc, Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]
   exact e₃
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
-/-- The coefficient pushforward along a proper pushforward diagram only depends on the
-coefficient map of the correspondence. -/
-lemma ProperPushforwardDiagram.pushforwardCoeff_congr {S Y C D : Over (Spec (.of k))}
-    [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
-    [LocallyOfFiniteType D.hom] [QuasiCompact D.hom] [IsSeparated D.hom]
-    {A : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c₁ c₂ : C ⟶ S)
-    {u u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj A ⟶
-      (boundedConstructibleUpperShriek ℓ c₁).obj A}
-    (hu : u = u') (f : S ⟶ Y) [IsProper f.left] (b₁ b₂ : D ⟶ Y) (g : C ⟶ D) [IsProper g.left]
-    (w₁ : g ≫ b₁ = c₁ ≫ f) (w₂ : g ≫ b₂ = c₂ ≫ f) :
-    (ProperPushforwardDiagram.mk (c := ⟨C, c₁, c₂, u⟩) f D b₁ b₂ g w₁ w₂).pushforwardCoeff =
-      (ProperPushforwardDiagram.mk (c := ⟨C, c₁, c₂, u'⟩) f D b₁ b₂ g w₁ w₂).pushforwardCoeff := by
-  subst hu
-  rfl
-
 end Correspondence
 
 end AlgebraicGeometry.ProEtale.CondensedRing

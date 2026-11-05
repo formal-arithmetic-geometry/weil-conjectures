@@ -42,16 +42,6 @@ variable [Etale.UpperStarPreservesFlat A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOp
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
-/-- The projection formula `j_!(K ⊗ᴸ Lj^*M) ≅ j_!K ⊗ᴸ M` for an open immersion `j` and a fixed
-`M`, as a natural isomorphism of functors of `K`. -/
-noncomputable def derivedTensorRightCompOpenImmersionLowerShriekIso
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    derivedTensorRight A U (L((j)^*[A]).obj M) ⋙ D((j)_!open[A]) ≅
-      D((j)_!open[A]) ⋙ derivedTensorRight A X M :=
-  NatIso.ofComponents (fun K ↦ ((derivedOpenImmersionLowerShriekProjectionIso A j).app K).app M)
-    fun φ ↦
-      NatTrans.congr_app ((derivedOpenImmersionLowerShriekProjectionIso A j).hom.naturality φ) M
-
 end Etale
 
 end AlgebraicGeometry

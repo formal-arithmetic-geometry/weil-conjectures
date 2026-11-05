@@ -82,15 +82,6 @@ noncomputable def continuousMapRingPresheaf : Profinite.{u}ᵒᵖ ⥤ RingCat.{u
   map_id _ := rfl
   map_comp _ _ := rfl
 
-lemma continuousMapRingPresheaf_obj (S : Profinite.{u}ᵒᵖ) :
-    (continuousMapRingPresheaf T).obj S = RingCat.of (ULift.{u + 1} C(S.unop, T)) :=
-  rfl
-
-lemma continuousMapRingPresheaf_map_apply {S S' : Profinite.{u}ᵒᵖ} (f : S ⟶ S')
-    (a : ULift.{u + 1} C(S.unop, T)) :
-    (continuousMapRingPresheaf T).map f a = ULift.up (a.down.comp f.unop.hom.hom) :=
-  rfl
-
 /-- The presheaf of types underlying `continuousMapRingPresheaf T` is mathlib's presheaf
 `S ↦ C(S, T)` of continuous maps on `Profinite` (`ContinuousMap.yonedaPresheaf`), lifted by one
 universe. -/
@@ -129,10 +120,6 @@ noncomputable def continuousMapRingSheaf :
     Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   ⟨continuousMapRingPresheaf T, isSheaf_continuousMapRingPresheaf T⟩
 
-lemma continuousMapRingSheaf_obj :
-    (continuousMapRingSheaf.{u} T).obj = continuousMapRingPresheaf T :=
-  rfl
-
 /-- The condensed ring `T̲ = C(-, T)` as a ring object of condensed abelian groups: the abelian
 sheaf underlying `continuousMapRingSheaf T`, with the ring object structure
 `CategoryTheory.Sheaf.monObj_sheafCompose_obj`. -/
@@ -152,32 +139,11 @@ noncomputable def continuousMapRingPresheafMap :
       ((φ.compLeftContinuous _ hφ).comp ULift.ringEquiv.toRingHom))
   naturality _ _ _ := rfl
 
-lemma continuousMapRingPresheafMap_app_apply (S : Profinite.{u}ᵒᵖ)
-    (a : ULift.{u + 1} C(S.unop, T)) :
-    (continuousMapRingPresheafMap φ hφ).app S a = ULift.up ((⟨φ, hφ⟩ : C(T, T')).comp a.down) :=
-  rfl
-
 /-- Postcomposition with a continuous ring homomorphism `φ : T →+* T'`, as a morphism of
 condensed rings `T̲ ⟶ T̲'`. -/
 noncomputable def continuousMapRingSheafMap :
     continuousMapRingSheaf.{u} T ⟶ continuousMapRingSheaf T' :=
   ⟨continuousMapRingPresheafMap φ hφ⟩
-
-lemma continuousMapRingSheafMap_hom :
-    (continuousMapRingSheafMap.{u} φ hφ).hom = continuousMapRingPresheafMap φ hφ :=
-  rfl
-
-/-- Postcomposition with the identity is the identity. -/
-lemma continuousMapRingSheafMap_id :
-    continuousMapRingSheafMap.{u} (RingHom.id T) continuous_id = 𝟙 _ :=
-  rfl
-
-/-- Postcomposition is compatible with composition of continuous ring homomorphisms. -/
-lemma continuousMapRingSheafMap_comp {T'' : Type} [TopologicalSpace T''] [Ring T'']
-    [IsTopologicalRing T''] (ψ : T' →+* T'') (hψ : Continuous ψ) :
-    continuousMapRingSheafMap.{u} (ψ.comp φ) (hψ.comp hφ) =
-      continuousMapRingSheafMap φ hφ ≫ continuousMapRingSheafMap ψ hψ :=
-  rfl
 
 end Ring
 

@@ -197,17 +197,6 @@ lemma projective_constantSheaf_moduleCat_of_iso {k} [Field k] [IsSepClosed k]
     (preservesEpimorphisms_sheafSections_of_iso e) _
     (ModuleCat.projective_of_categoryTheory_projective (ModuleCat.of Λ Λ))
 
-/-- **Cohomology of `ℤ` on a geometric point.** For a separably closed field `k` (in
-particular an algebraically closed one), `H^q(Spec k_ét, ℤ) = 0` for all `q ≥ 1`. The
-blueprint argues via the equivalence of étale sheaves on `Spec k` with discrete Galois modules,
-the Galois group being trivial; we use directly that the constant sheaf `ℤ` is projective
-(`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`).
-(blueprint: `lem-sc-point-z-cohomology`) -/
-theorem subsingleton_H_constantSheaf_of_isSepClosed (q : ℕ) :
-    Subsingleton (Sheaf.H ((constantSheaf (Spec (.of k)).smallEtaleTopology
-      AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) (q + 1)) :=
-  Abelian.Ext.subsingleton_of_projective _ _ _
-
 end IsSepClosed
 
 section Sections
@@ -267,43 +256,6 @@ theorem isZero_of_subsingleton_sections_of_isSepClosed
   rw [IsZero.iff_id_eq_zero]
   ext U x
   exact Subsingleton.elim _ _
-
-/-- The map `Λ_k ⟶ G` from the constant sheaf `Λ` on `Spec k` to an étale sheaf of
-`Λ`-modules `G` corresponding to a global section `s` of `G`. -/
-noncomputable def homOfGlobalSection
-    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (s : G.obj.obj (op (etalePoint k))) :
-    (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-      (ModuleCat.of Λ Λ) ⟶ G :=
-  ((constantSheafAdj _ _ isTerminalEtalePoint).homEquiv
-    _ _).symm (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s))
-
-omit [IsSepClosed k] in
-/-- Composing the map attached to a global section `s` with `ψ : G ⟶ G'` gives the map attached
-to the global section `ψ(s)`. -/
-theorem homOfGlobalSection_comp
-    {G G' : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (s : G.obj.obj (op (etalePoint k))) (ψ : G ⟶ G') :
-    homOfGlobalSection s ≫ ψ = homOfGlobalSection (ψ.hom.app _ s) := by
-  rw [homOfGlobalSection, homOfGlobalSection, ← Adjunction.homEquiv_naturality_right_symm]
-  congr 1
-  ext
-  simp
-
-omit [IsSepClosed k] in
-/-- The map attached to a nonzero global section is nonzero. -/
-theorem homOfGlobalSection_ne_zero
-    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    {s : G.obj.obj (op (etalePoint k))} (hs : s ≠ 0) : homOfGlobalSection s ≠ 0 := by
-  intro h
-  apply hs
-  have := congrArg (fun f : (constantSheaf (Spec (.of k)).smallEtaleTopology
-      (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ) ⟶ G ↦ ModuleCat.Hom.hom
-    (((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-      isTerminalEtalePoint).homEquiv (ModuleCat.of Λ Λ) G) f) (1 : Λ)) h
-  simp only [homOfGlobalSection, Equiv.apply_symm_apply, Adjunction.homEquiv_unit, Functor.map_zero,
-    comp_zero] at this
-  simpa using this
 
 end Sections
 

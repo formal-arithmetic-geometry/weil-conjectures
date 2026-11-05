@@ -489,10 +489,6 @@ derived category of `DiscreteModule G`.
 abbrev H (n : ℕ) : Type (max u w) :=
   Abelian.Ext (intTrivial G) M n
 
-/-- `H⁰(G, M)` is the group of invariants `Mᴳ`. -/
-noncomputable def H_zero_addEquiv : H G M 0 ≃+ (invariants G).obj M :=
-  Abelian.Ext.addEquiv₀.trans (homIntTrivialEquiv M)
-
 end invariants
 
 end DiscreteModule

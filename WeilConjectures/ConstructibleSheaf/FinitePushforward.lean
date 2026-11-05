@@ -120,8 +120,6 @@ theorem Etale.isIso_unit_app_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : 
     rw [h]; infer_instance
   exact IsIso.of_isIso_comp_right _ ((lowerStarComp A h₁ h₂ (h₁ ≫ h₂) rfl).inv.app _)
 
-
-
 /-- The unit of `g^* ⊣ g_*` along an isomorphism `g` is an isomorphism. -/
 instance Etale.isIso_unit_app_of_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (F : Sheaf Y.smallEtaleTopology A) :
@@ -295,15 +293,6 @@ theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing 
 section Auxiliary
 
 /-! ### Auxiliary lemmas -/
-
-/-- The case of `AlgebraicGeometry.Etale.exists_isNoetherian_upperStar_iso` where `U` is already
-Noetherian: take `U' = U` and `ν = 𝟙 U`. This is the trivial end of the Noetherian approximation;
-the general case needs étale sheaves to descend along a limit `U = lim Uᵢ` (Stacks 01ZA). -/
-theorem Etale.exists_isNoetherian_upperStar_iso_of_isNoetherian {U : Scheme.{u}} [IsNoetherian U]
-    (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf C] :
-    ∃ (U' : Scheme.{u}) (ν : U ⟶ U') (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-      IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) :=
-  ⟨U, 𝟙 U, C, inferInstance, inferInstance, ⟨(Etale.upperStarId _ U).app C⟩⟩
 
 /-- **Descent of a constructible sheaf to a Noetherian scheme.** A constructible sheaf of
 `Λ`-modules on a quasi-compact quasi-separated scheme `U`, for `Λ` noetherian, is the pullback

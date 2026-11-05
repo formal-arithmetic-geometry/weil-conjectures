@@ -40,31 +40,12 @@ namespace AlgebraicGeometry.ProEtale.QuotientChange
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
-
-
-
-
-
-
-
-
-
-
-
 end AlgebraicGeometry.ProEtale.QuotientChange
 namespace AlgebraicGeometry.ProEtale.QuotientChange
 
 variable {Λ Λ' Λ'' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
   [MonObj Λ''] [IsCommMonObj Λ'']
-
-
-
-
-
-
-
-
 
 end AlgebraicGeometry.ProEtale.QuotientChange
 
@@ -87,19 +68,5 @@ def ordinaryComp (a : Λ ⟶ Λ') [IsMonHom a]
     exact (Mod.extendScalarsComp (coefficientMap a T) (coefficientMap b T)).symm ≪≫
       (Mod.extendRestrictAdjunction _).leftAdjointUniq
         ((Mod.extendRestrictAdjunction _).ofNatIsoRight (Mod.comapCongr hc).symm)
-
-/-- The universal-counit characterization of successive scalar balancing. On K-flat
-representatives the ordinary comparison sends (x tensor s) tensor t to x tensor bar(s)t.
-Source: Stacks 0D6D, 0G7E (blueprint: def-sfb-internal-derived-scalar-comparisons). -/
-def SuccessiveNormalized (a : Λ ⟶ Λ') [IsMonHom a]
-    (b : Λ' ⟶ Λ'') [IsMonHom b] (c : Λ ⟶ Λ'') [IsMonHom c]
-    (h : a ≫ b = c) (T : Scheme.{u})
-    (e : D a T ⋙ D b T ≅ D c T) : Prop :=
-  ∀ P : HomotopyCategory (Modules Λ T) (.up ℤ),
-    e.hom.app (DerivedCategory.Qh.obj P) ≫ (scalarCounit c T).app P =
-      (D b T).map ((scalarCounit a T).app P) ≫
-        (scalarCounit b T).app (((extension a T).mapHomotopyCategory (.up ℤ)).obj P) ≫
-        DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-          (ordinaryComp a b c h T) (.up ℤ)).hom.app P)
 
 end AlgebraicGeometry.ProEtale.QuotientChange

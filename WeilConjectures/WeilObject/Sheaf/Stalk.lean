@@ -240,61 +240,12 @@ namespace Scheme.Hom
 
 variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
-/-- The geometric fiber `X = X₀ ×_{Spec k} Spec k̄` as a scheme over `Spec k`, through the
-projection `p_X : X ⟶ X₀` followed by `f`. -/
-noncomputable def geometricFiberOverBase : Over (Spec (.of k)) :=
-  Over.mk (f.geometricFiberProj ≫ f)
-
-/-- The geometric Galois Frobenius `g_X = 𝟙 X₀ × σ` as an automorphism of the geometric fiber
-over `Spec k`. -/
-noncomputable def geometricFrobeniusOver : f.geometricFiberOverBase ≅ f.geometricFiberOverBase :=
-  Over.isoMk f.geometricFrobenius (by simp [geometricFiberOverBase])
-
-/-- The geometric point `x̄ = (x₀, 𝟙) : Spec k̄ ⟶ X₀ ×_{Spec k} Spec k̄` of the geometric fiber
-lying over a `k`-rational point `x₀` of `X₀`, that is a section of `f`. -/
-noncomputable def geometricPointOfSection (x₀ : Spec (.of k) ⟶ X₀) (hx₀ : x₀ ≫ f = 𝟙 _) :
-    Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber :=
-  pullback.lift ((Scheme.specAlgebraicClosure k).hom ≫ x₀) (𝟙 _) (by simp [hx₀])
-
-/-- The geometric point over a `k`-rational point is fixed by the geometric Galois Frobenius up
-to the Frobenius `σ` of `Spec k̄`: `x̄ ≫ g_X = σ ≫ x̄`. -/
-theorem geometricPointOfSection_comp_geometricFrobenius (x₀ : Spec (.of k) ⟶ X₀)
-    (hx₀ : x₀ ≫ f = 𝟙 _) :
-    f.geometricPointOfSection x₀ hx₀ ≫ f.geometricFrobenius.hom =
-      (geometricFrobeniusField k).hom ≫ f.geometricPointOfSection x₀ hx₀ := by
-  apply pullback.hom_ext
-  · change _ ≫ _ ≫ f.geometricFiberProj = _ ≫ _ ≫ f.geometricFiberProj
-    rw [geometricFrobenius_hom_comp_geometricFiberProj]
-    simp only [geometricPointOfSection, geometricFiberProj, pullback.lift_fst]
-    rw [← Category.assoc]
-    exact congrArg (· ≫ x₀) (geometricFrobeniusField_hom_comp_specAlgebraicClosure k).symm
-  · change _ ≫ _ ≫ f.geometricFiberToAlgebraicClosure =
-      _ ≫ _ ≫ f.geometricFiberToAlgebraicClosure
-    rw [geometricFrobenius_hom_comp_geometricFiberToAlgebraicClosure]
-    rw [geometricPointOfSection, geometricFiberToAlgebraicClosure, pullback.lift_snd_assoc,
-      pullback.lift_snd, Category.comp_id]
-    exact Category.id_comp _
-
 end Scheme.Hom
 
 namespace ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
   (f : X₀ ⟶ Spec (.of k))
-
-/-- The stalk of a Weil sheaf on `X₀`, that is a Weil sheaf for the geometric Galois Frobenius
-of the geometric fiber, at the geometric point `x̄` over a `k`-rational point `x₀` of `X₀`, as a
-Weil object for the identity functor of `Mod_{Spec k̄}`: its structure isomorphism is the action
-of Frobenius on the stalk. -/
-noncomputable def WeilSheaf.frobeniusStalkFunctor (x₀ : Spec (.of k) ⟶ X₀)
-    (hx₀ : x₀ ≫ f = 𝟙 _) :
-    WeilSheaf ℓ f.geometricFrobeniusOver ⥤
-      IsoAlgebra (𝟭 (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of (AlgebraicClosure k))))
-        Ab.{u + 1})
-        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of (AlgebraicClosure k)))))) :=
-  WeilSheaf.stalkFunctor ℓ f.geometricFrobeniusOver (geometricFrobeniusField k).hom
-    (f.geometricPointOfSection x₀ hx₀)
-    (f.geometricPointOfSection_comp_geometricFrobenius x₀ hx₀)
 
 end ProEtale.CondensedRing
 

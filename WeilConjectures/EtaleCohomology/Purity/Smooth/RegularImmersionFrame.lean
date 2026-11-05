@@ -243,14 +243,6 @@ noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i]
   restrictSupportedClass Λ F.e i _ F.toZ F.isPullback
     (leftDerivedUpperStarConstantComplexIso Λ F.e).inv (leftDerivedUpperStarTateShiftIso Λ F.e c) γ
 
-/-- A frame class restricts to the frame class of the pulled back functions. -/
-lemma frameRestriction_kummerBoundaryProduct [HasKummerClass Λ] {U W : Scheme.{u}}
-    [HasInvertibleExponent Λ U] (f : Fin c → Γ(U, ⊤)) (j : W ⟶ U) [AlgebraicGeometry.Etale j] :
-    frameRestriction Λ (Scheme.Hom.EtaleFrame.ofFunctions f j) (kummerBoundaryProduct Λ f) =
-      frameClass Λ (Scheme.Hom.EtaleFrame.ofFunctions f j) := by
-  have : HasInvertibleExponent Λ W := .of_hom j
-  exact restrictSupportedClass_kummerBoundaryProduct Λ j f _ (fun _ ↦ rfl) _ _
-
 /-- Restriction of classes with supports along a composite `e' = e₁ ≫ e`, with the standard
 identifications of the constant and Tate complexes: restricting `γ` along `e'` is restricting it
 along `e` and then along `e₁`.

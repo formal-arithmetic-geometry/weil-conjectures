@@ -47,25 +47,4 @@ noncomputable def Etale.rightDerivedFunctorPlusLowerStarSingleIso
   ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.app _ ≪≫
     (((f)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app F
 
-/-- **Higher direct images along a finite morphism vanish** (blueprint
-`lemma-weil-pbc-finite-direct-image-exact`): for a finite morphism `f : X ⟶ Y` and an étale
-sheaf `F` of `Λ`-modules on `X`, `R^q f_* F = 0` for every `q ≠ 0`, since `f_*` is exact. -/
-theorem Etale.isZero_higherDirectImage_of_isFinite
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℤ} (hq : q ≠ 0) :
-    IsZero (Etale.higherDirectImage Λ f q F) := by
-  refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor _ q).mapIso
-    (Etale.rightDerivedFunctorPlusLowerStarSingleIso Λ f F))
-  rcases lt_or_gt_of_ne hq with hq | hq
-  · exact DerivedCategory.Plus.isZero_homology_of_isGE _ 0 q hq
-  · exact DerivedCategory.Plus.isZero_homology_of_isLE _ 0 q hq
-
-/-- For a finite morphism `f`, the zeroth higher direct image `R^0 f_* F` is `f_* F`
-(blueprint `lemma-weil-pbc-finite-direct-image-exact`). -/
-noncomputable def Etale.higherDirectImageZeroIsoOfIsFinite
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    Etale.higherDirectImage Λ f 0 F ≅ (f)_*[ModuleCat.{u + 1} Λ].obj F :=
-  (DerivedCategory.Plus.homologyFunctor _ 0).mapIso
-      (Etale.rightDerivedFunctorPlusLowerStarSingleIso Λ f F) ≪≫
-    (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).app _
-
 end AlgebraicGeometry

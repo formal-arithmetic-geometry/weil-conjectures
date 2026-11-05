@@ -42,24 +42,6 @@ lemma Pi.eqToEquivalenceCompIso_naturality {I : Type*} (C D : I → Type*) [∀ 
       (eqToEquivalence D h).functor.map ((F j).map f) :=
   (eqToEquivalenceCompIso _ _ _ h).hom.naturality _
 
-def Functor.piCompEval {I : Type*} {C D : I → Type*} [∀ i, Category* (C i)]
-    [∀ i, Category* (D i)] (F : ∀ i, C i ⥤ D i) (i : I) :
-    Functor.pi F ⋙ Pi.eval _ i ≅ Pi.eval _ i ⋙ F i :=
-  Iso.refl _
-
-noncomputable def Pi.equivalenceOfEquivCompEvalIso {I J : Type*} (C : I → Type*)
-    [∀ i, Category* (C i)] (e : J ≃ I) (j : J) :
-    (Pi.equivalenceOfEquiv C e).functor ⋙ Pi.eval C (e j) ≅ Pi.eval _ j :=
-  (Functor.pi'CompEval _ _) ≪≫
-    Functor.isoWhiskerLeft _ (Pi.eqToEquivalenceFunctorIso _ _ _) ≪≫
-    Pi.evalCompEqToEquivalenceFunctor (fun j ↦ C (e j)) (show e.symm (e j) = j by simp)
-
-noncomputable def Pi.equivalenceOfEquivCompEvalIso' {I J : Type*} (C : I → Type*)
-    [∀ i, Category* (C i)] (e : J ≃ I) (i : I) :
-    (Pi.equivalenceOfEquiv C e).functor ⋙ Pi.eval C i ≅
-      Pi.eval _ (e.symm i) ⋙ (Pi.eqToEquivalence _ <| by simp).functor :=
-  Iso.refl _
-
 @[simp]
 lemma Pi.eqToEquivalence_rfl {I : Type*} (C : I → Type*) [∀ i, Category* (C i)] (i : I) :
     Pi.eqToEquivalence C (refl i) = .refl :=

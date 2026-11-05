@@ -52,30 +52,6 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
   [Finite T] {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
-/-- **The proper exchange of nearby cycles with finite coefficients** (blueprint
-`det-sp-nearby-cycles-exchanges` (2); SGA 7 XIII 2.1.7): let `φ : M ⟶ N` be a morphism of models
-whose morphism of total spaces and `f` are proper, whose squares of special fibres and of
-identifications `ε` are cartesian, and whose inclusion `j_M` of the geometric generic fibre is
-quasi-compact and quasi-separated. Then the pushforward exchange `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` with
-coefficients in a finite ring `T` is an isomorphism at every complex `K` bounded below of étale
-origin: by proper base change along `ε_N` and along `i_N`, both sides are
-`i_N^* Rt_* Rj_{M*} Lε_M^* K`. -/
-theorem isIso_pushforwardExchange_app_of_isProper_finiteCoefficient (φ : M.Hom N f f')
-    [IsProper φ.total] [IsProper f] [QuasiCompact M.j] [QuasiSeparated M.j]
-    (hi : IsPullback M.i f' φ.total N.i) (hε : IsPullback M.ε φ.generic f N.ε)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)))
-    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) X
-      ((finiteCoefficientDerivedEquivalence X T).functor.obj K)) :
-    IsIso ((φ.pushforwardExchange (Profinite.continuousMapRingObj T)).app K) := by
-  have h₁ := isIso_baseChangeMap_app_of_isProper_finiteCoefficient T hε K hK
-  have h₂ := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_rightDerivedLowerStar_obj T M.j
-    (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj T M.ε hK)
-  have h₃ := isIso_baseChangeMap_app_of_isProper_finiteCoefficient T hi _ h₂
-  have key := φ.isIso_pushforwardExchange_app_of_isIso_baseChangeMap
-    (Profinite.continuousMapRingObj T) K (by exact_mod_proofs h₁) (by exact_mod_proofs h₃)
-  exact_mod_proofs key
-
 end NearbyCyclesModel.Hom
 
 end AlgebraicGeometry.ProEtale.CondensedRing

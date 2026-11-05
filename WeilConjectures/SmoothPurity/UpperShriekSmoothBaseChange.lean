@@ -125,58 +125,6 @@ theorem isIso_upperShriekBaseChange_lowerStar_obj (sq : IsPullback g' f' f g)
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ g') _ N
 
-/-- **Smooth base change for `Rf^!` along a closed immersion**: for a cartesian square
-`g' ≫ f = f' ≫ g` with `f` smooth of relative dimension `d` and `g` a closed immersion, the
-exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an isomorphism for every bounded
-constructible `ℚ̄_ℓ`-complex `L`. With `j` the open complement of `g`, the open–closed triangle
-`Rj_! Lj^* L ⟶ L ⟶ Rg_* Lg^* L` reduces this to `L = Rg_* N`, using
-`Lg'^* Rf^! Rj_! = 0` (`isZero_upperStar_obj_upperShriek_obj_lowerShriek_obj_padicAlgCl`). -/
-theorem isIso_upperShriekBaseChange_of_isClosedImmersion (sq : IsPullback g' f' f g) (d : ℕ)
-    [SmoothOfRelativeDimension d f.left] [IsClosedImmersion g.left]
-    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (upperShriekBaseChange ℓ sq L) := by
-  have hsq : IsPullback g'.left f'.left f.left g.left := by
-    simpa only [Over.forget_map] using sq.map (Over.forget _)
-  have : IsClosedImmersion g'.left := MorphismProperty.of_isPullback hsq.flip inferInstance
-  let j := overOpenComplement g
-  have hcompl : IsCompl (Set.range j.left.base) (Set.range g.left.base) :=
-    (isCompl_range_overOpenComplement g).symm
-  obtain ⟨δ, hT⟩ := exists_distTriang_openClosed_boundedConstructible ℓ hcompl L
-  let F := boundedConstructibleUpperShriek ℓ f ⋙
-    boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'
-  have hF := F.map_distinguished _ hT
-  have h₁ : IsZero ((F.mapTriangle.obj (Triangle.mk
-      ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app L)
-      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app L) δ)).obj₁) :=
-    isZero_upperStar_obj_upperShriek_obj_lowerShriek_obj_padicAlgCl ℓ f d sq j
-      hcompl.symm.disjoint _
-  have hFη : IsIso (F.map ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app L)) :=
-    (Triangle.isZero₁_iff_isIso₂ _ hF).1 h₁
-  have hGη : IsIso ((boundedConstructibleUpperShriek ℓ f').map
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app L))) := by
-    have : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app L)) :=
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ g).isIso_map_unit_app_of_isIso_counit L
-    infer_instance
-  have hN := isIso_upperShriekBaseChange_lowerStar_obj ℓ sq
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).obj L)
-  rw [upperShriekBaseChange_eq_upperShriekBaseChangeNatTrans_app] at hN ⊢
-  have hn := (upperShriekBaseChangeNatTrans ℓ sq).naturality
-    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app L)
-  have : IsIso ((upperShriekBaseChangeNatTrans ℓ sq).app L ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
-        boundedConstructibleUpperShriek ℓ f').map
-        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app L)) := by
-    erw [← hn]
-    exact @IsIso.comp_isIso _ _ _ _ _ _ _ hFη hN
-  have : IsIso ((boundedConstructibleUpperStar _ ℓ g ⋙
-      boundedConstructibleUpperShriek ℓ f').map
-        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app L)) := hGη
-  exact IsIso.of_isIso_comp_right _ ((boundedConstructibleUpperStar _ ℓ g ⋙
-    boundedConstructibleUpperShriek ℓ f').map
-      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app L))
-
 /-! ### Base change along an open immersion -/
 
 omit [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom] in
@@ -329,16 +277,5 @@ theorem isIso_upperShriekBaseChange_of_forall_smoothOfRelativeDimension
   · obtain ⟨d, hd⟩ := hd i
     exact (isIso_upperStar_map_upperShriekBaseChange_iff ℓ sq (overRestrictι X (U i)) L).2
       (h (U i) d hd)
-
-/-- **Smooth base change for `Rf^!` along a closed immersion**, for `f` smooth (of locally constant
-relative dimension): the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an
-isomorphism for every bounded constructible `L` when `g` is a closed immersion. This is the
-`sorry`-free special case of `isIso_upperShriekBaseChange_of_smooth`, which rests on the `sorry`d
-`smoothOrientation_baseChange`. -/
-theorem isIso_upperShriekBaseChange_of_smooth_of_isClosedImmersion (sq : IsPullback g' f' f g)
-    [Smooth f.left] [IsClosedImmersion g.left] (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (upperShriekBaseChange ℓ sq L) :=
-  isIso_upperShriekBaseChange_of_forall_smoothOfRelativeDimension ℓ sq L fun _ d _ ↦
-    isIso_upperShriekBaseChange_of_isClosedImmersion ℓ _ d L
 
 end AlgebraicGeometry.ProEtale.CondensedRing

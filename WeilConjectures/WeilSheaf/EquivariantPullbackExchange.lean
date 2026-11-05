@@ -32,13 +32,6 @@ open ProEtale
 
 variable {l : ℕ} [Fact l.Prime]
 
-/-- The structure isomorphism of the transport of the algebra `(a, Φ)`. -/
-lemma _root_.CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso_obj_mk_str {C D : Type*}
-    [Category C] [Category D] {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D} (e : L ⋙ G ≅ F ⋙ L) (a : C)
-    (Φ : F.obj a ≅ a) :
-    ((IsoAlgebra.mapOfNatIso e).obj (IsoAlgebra.mk a Φ)).str = e.app a ≪≫ L.mapIso Φ :=
-  Iso.ext rfl
-
 -- Stated for arbitrary `a`, `b` and `c`, as `AlgebraicGeometry.ProEtale.exchange_hom_app_hom`,
 -- with a proof comparing the morphism terms by `rfl`: for the geometric Frobenii the kernel may
 -- time out otherwise.

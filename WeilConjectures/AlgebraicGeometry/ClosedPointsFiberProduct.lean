@@ -35,16 +35,6 @@ open CategoryTheory Limits Topology
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lem-kun-etale-lfp`: **étale morphisms are locally of finite presentation.** An
-étale morphism `f : U ⟶ X` is locally of finite presentation; if moreover `f` is quasi-compact
-and `X` is of finite type over a field `K` (via `a`), then `U` is of finite type over `K`, i.e.
-`f ≫ a` is locally of finite type and quasi-compact. -/
-theorem Etale.locallyOfFinitePresentation_and_finiteType_comp {U X : Scheme.{u}} (f : U ⟶ X)
-    [Etale f] {K : Type u} [Field K] (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a]
-    [QuasiCompact a] [QuasiCompact f] :
-    LocallyOfFinitePresentation f ∧ LocallyOfFiniteType (f ≫ a) ∧ QuasiCompact (f ≫ a) :=
-  ⟨inferInstance, inferInstance, inferInstance⟩
-
 /-- A scheme `T` locally of finite type over a field whose dimension is at most zero is
 discrete. -/
 theorem Scheme.discreteTopology_of_topologicalKrullDim_le_zero_of_field {K : Type u} [Field K]
@@ -86,20 +76,5 @@ theorem Scheme.Pullback.isClosed_singleton_iff {K : Type u} [Field K] {X Y : Sch
     (pullback.fst (ix ≫ f) (iy ≫ g) ≫ ix ≫ f) hdim
   rw [← hw, ← Set.image_singleton]
   exact m.isClosedEmbedding.isClosedMap _ (isClosed_discrete _)
-
-/-- Blueprint `lem-kun-finite-closed-subscheme`: **closed subsets consisting of closed points are
-finite.** Let `X` be a scheme of finite type over a field `K`. A closed subset `Z ⊆ X` all of
-whose points are closed is finite: `X` is a noetherian space, so `Z` has finitely many generic
-points of irreducible components, and every point of `Z`, being closed, is such a generic
-point. -/
-theorem Scheme.finite_of_isClosed_of_forall_isClosed_singleton {K : Type u} [Field K]
-    {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
-    {Z : Set X} (hZ : IsClosed Z) (hcl : ∀ z ∈ Z, IsClosed {z}) : Z.Finite := by
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
-  have : IsNoetherian X := ⟨⟩
-  refine hZ.finite_setOf_maximal_specializes.subset fun z hz ↦ ⟨hz, fun y hy hyz ↦ ?_⟩
-  rw [specializes_iff_mem_closure, (hcl y hy).closure_eq, Set.mem_singleton_iff] at hyz
-  exact hyz.symm
 
 end AlgebraicGeometry

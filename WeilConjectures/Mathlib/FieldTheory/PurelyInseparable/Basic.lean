@@ -153,67 +153,16 @@ universe u v
 
 variable (k : Type u) [Field k]
 
-/-- **The algebraic closure of a separably closed field is purely inseparable.** Let `k` be
-separably closed of exponential characteristic `p` and `K / k` algebraic (for instance
-`K = k̄`). Every `α ∈ K` has a power `α ^ p ^ n` which is separable over `k` (it even lies in
-`k`), hence `K / k` is purely inseparable.
-
-(blueprint: `lem-pc-kbar-pure-insep`) -/
-theorem IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable [IsSepClosed k] (p : ℕ)
-    [ExpChar k p] (K : Type v) [Field K] [Algebra k K] [Algebra.IsAlgebraic k K] :
-    (∀ α : K, ∃ n : ℕ, IsSeparable k (α ^ p ^ n)) ∧ IsPurelyInseparable k K := by
-  refine ⟨fun α ↦ ?_, inferInstance⟩
-  obtain ⟨n, a, ha⟩ := IsPurelyInseparable.pow_mem k p α
-  exact ⟨n, ha ▸ isSeparable_algebraMap a⟩
-
 end KBar
 
 section PowMem
 
 variable (F : Type*) {E : Type*} [Field F] [Field E] [Algebra F E] (q : ℕ) [ExpChar F q]
 
-/-- **Purely inseparable extensions.** A field extension `E / F` of exponential characteristic
-`q` is purely inseparable if and only if every `α ∈ E` satisfies `α ^ (q ^ n) ∈ F` for some `n`.
-In characteristic `0` we have `q = 1`, and this says `E = F`. This is
-`isPurelyInseparable_iff_pow_mem`, stated with an explicit preimage.
-
-The other notions of the blueprint definition are those of Mathlib: `Module.Finite F E`
-(finite), `Algebra.IsAlgebraic F E` (algebraic), `Algebra.IsSeparable F E` (separable), and
-`IsAlgClosure F E` (algebraic closure: `E` is algebraically closed and algebraic over `F`).
-
-(blueprint: `def-pc-field-tower`) -/
-theorem isPurelyInseparable_iff_exists_algebraMap_eq_pow :
-    IsPurelyInseparable F E ↔ ∀ α : E, ∃ n : ℕ, ∃ a : F, algebraMap F E a = α ^ q ^ n :=
-  isPurelyInseparable_iff_pow_mem F q
-
 end PowMem
 
 section SeparableClosure
 
 variable (F E : Type*) [Field F] [Field E] [Algebra F E] [Normal F E]
-
-/-- In a normal extension `E / F`, restriction to the separable closure `F^sep` of `F` in `E` is
-a bijection `Aut(E / F) → Gal(F^sep / F)`: automorphisms of `F^sep` extend to `E` as `E / F` is
-normal, and uniquely as `E / F^sep` is purely inseparable. -/
-theorem separableClosure.restrictNormalHom_bijective :
-    Function.Bijective (AlgEquiv.restrictNormalHom (F := F) (K₁ := E) (separableClosure F E)) := by
-  refine ⟨fun a b h ↦ ?_, AlgEquiv.restrictNormalHom_surjective E⟩
-  have hab : (a : E →+* E).comp (algebraMap (separableClosure F E) E) =
-      (b : E →+* E).comp (algebraMap (separableClosure F E) E) := by
-    ext s
-    simpa [AlgEquiv.restrictNormalHom_apply] using congrArg Subtype.val (AlgEquiv.congr_fun h s)
-  exact AlgEquiv.ext <| RingHom.congr_fun <|
-    IsPurelyInseparable.injective_comp_algebraMap (separableClosure F E) E E hab
-
-/-- In a normal extension `E / F`, the automorphism group of `E / F` is the Galois group of the
-separable closure `F^sep` of `F` in `E`, by restriction. -/
-noncomputable def separableClosure.autMulEquiv :
-    (E ≃ₐ[F] E) ≃* Gal(separableClosure F E / F) :=
-  MulEquiv.ofBijective _ (separableClosure.restrictNormalHom_bijective F E)
-
-@[simp]
-lemma separableClosure.autMulEquiv_apply_coe (σ : E ≃ₐ[F] E) (x : separableClosure F E) :
-    (separableClosure.autMulEquiv F E σ x : E) = σ x :=
-  AlgEquiv.restrictNormalHom_apply _ σ x
 
 end SeparableClosure

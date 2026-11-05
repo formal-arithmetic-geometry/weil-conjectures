@@ -17,11 +17,4 @@ variable {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D
   {G : C ⥤ C'} {H : D ⥤ D'} {bc bc' : a ⋙ H ⟶ G ⋙ b} [IsIso bc] [IsIso bc']
   {U : D} {U' : D'}
 
-/-- Equality of the left exchange identifies unit base changes, including the
-proofs of invertibility required by the definition. -/
-lemma unitBaseChange_congr (h : bc = bc') (e : H.obj U ⟶ U') :
-    unitBaseChange adj adj' bc e = unitBaseChange adj adj' bc' e := by
-  subst bc'
-  rfl
-
 end CategoryTheory.Adjunction

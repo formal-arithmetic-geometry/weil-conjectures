@@ -47,23 +47,4 @@ abbrev schemeDerivedDirectImage (f : X ⟶ S) :
     schemeDerivedCategory X ⥤ schemeDerivedCategory S :=
   RingedSpace.derivedModuleDirectImage f.toLRSHom.toShHom
 
-/-- The higher direct image of a derived object in integer degree `i` is `H^i(Rf_*E)`,
-a sheaf of `𝒪_S`-modules. Source: blueprint sec-picard-framework/det-thm-picard-coherence,
-node def-pc-derived-direct-image; Stacks, Tag 0A1G
-(blueprint: def-pc-derived-direct-image). -/
-def schemeHigherDirectImage (f : X ⟶ S) (i : ℤ) :
-    schemeDerivedCategory X ⥤ SheafOfModules.{u} (moduleRings S.toRingedSpace) :=
-  schemeDerivedDirectImage f ⋙
-    DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) i
-
-/-- For an `𝒪_X`-module, higher direct image means higher direct image of that module
-viewed as a complex in degree zero. Source: blueprint
-sec-picard-framework/det-thm-picard-coherence, node def-pc-derived-direct-image;
-Stacks, Tag 0A1G (blueprint: def-pc-derived-direct-image). -/
-def schemeModuleHigherDirectImage (f : X ⟶ S) (i : ℤ) :
-    SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings S.toRingedSpace) :=
-  DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0 ⋙
-    schemeHigherDirectImage f i
-
 end AlgebraicGeometry

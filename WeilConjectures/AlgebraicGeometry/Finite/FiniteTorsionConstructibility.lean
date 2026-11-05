@@ -36,43 +36,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The bounded constructible finite-torsion subcategory of the derived category of
-sheaves of `A_{E,n}`-modules on the small pro-etale site of `Y`.
-
-Source: Weil conjectures blueprint, node `def-weil-finite-torsion-constructibility`,
-order 1454 (blueprint: def-weil-finite-torsion-constructibility). The predicate is
-finite support of cohomology degrees and constructibility of every cohomology sheaf;
-the cited triangulated-closure theorem supplies the full triangulated structure.
--/
-noncomputable def finiteTorsionConstructible
-    (D : WeilConjectures.FiniteFieldDatum.{u})
-    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
-    (E : Type u) [Field E] [Algebra (Padic l) E]
-    [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n)
-    (Y : Scheme.{u}) : ObjectProperty (proEtaleDerivedCategory Y
-      (Padic.coefficientExtensionRing l E n)) :=
-  letI := Padic.finite_coefficientExtensionRing l E n _hn
-  fun K ↦
-    Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor
-      (proEtaleRingModules Y
-        (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E n))) i).obj K)} ∧
-      ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf Y
-        (Padic.coefficientExtensionRing l E n)
-        ((DerivedCategory.homologyFunctor
-          (proEtaleRingModules Y
-            (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E n))) i).obj K)
-
-/-- The finite-torsion predicate is closed under isomorphisms.
-Source: Weil blueprint, node order 1454
-(blueprint: def-weil-finite-torsion-constructibility). -/
-noncomputable instance finiteTorsionConstructible_isClosedUnderIsomorphisms
-    (D : WeilConjectures.FiniteFieldDatum.{u})
-    (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
-    (E : Type u) [Field E] [Algebra (Padic l) E]
-    [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) :
-    (finiteTorsionConstructible D l hl E n hn Y).IsClosedUnderIsomorphisms :=
-  letI := Padic.finite_coefficientExtensionRing l E n hn
-  (proEtale_bounded_constructible_isTriangulated Y
-    (Padic.coefficientExtensionRing l E n)).1
-
 end AlgebraicGeometry.Scheme

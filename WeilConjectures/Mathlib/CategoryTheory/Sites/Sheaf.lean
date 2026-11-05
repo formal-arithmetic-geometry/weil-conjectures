@@ -105,11 +105,6 @@ namespace CategoryTheory.Sheaf
 variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
   {A : Type u₂} [Category.{v₂} A]
 
-/-- A sheaf whose sections are all terminal is terminal. -/
-noncomputable def isTerminalOfIsTerminalObj (F : Sheaf J A) (h : ∀ U, IsTerminal (F.obj.obj U)) :
-    IsTerminal F :=
-  IsTerminal.isTerminalOfObj (sheafToPresheaf J A) _ (Functor.isTerminal h)
-
 /-- A sheaf whose sections are all zero objects is a zero object. Morphisms of sheaves are
 morphisms of the underlying presheaves, so this is `CategoryTheory.Functor.isZero` transported
 along `CategoryTheory.Sheaf.homEquiv`. -/
@@ -121,25 +116,8 @@ lemma isZero_of_isZero_obj (F : Sheaf J A) (h : ∀ U, IsZero (F.obj.obj U)) : I
   · obtain ⟨u⟩ := h1.unique_from G.obj
     exact ⟨Equiv.unique Sheaf.homEquiv⟩
 
-/-- A sheaf whose sections are all zero objects is initial. -/
-noncomputable def isInitialOfIsZeroObj (F : Sheaf J A) (h : ∀ U, IsZero (F.obj.obj U)) :
-    IsInitial F :=
-  (isZero_of_isZero_obj F h).isInitial
-
 end CategoryTheory.Sheaf
 
 namespace CategoryTheory.Presheaf
-
-/-- A presheaf `P` with values in a concrete category `A` whose forgetful functor preserves
-limits and reflects isomorphisms — for instance abelian groups or commutative rings — is a
-sheaf if and only if its underlying presheaf of sets `P ⋙ forget A` is a sheaf of sets. This
-is `CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget` for `s = forget A`.
-(blueprint: `lem-weil-pbc-algebraic-sheaf-iff-underlying-sets`) -/
-theorem isSheaf_iff_isSheaf_comp_forget {C : Type u₁} [Category.{v₁} C]
-    (J : GrothendieckTopology C) {A : Type u₂} [Category.{max v₁ u₁} A] {FA : A → A → Type*}
-    {CA : A → Type (max v₁ u₁)} [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
-    [HasLimits A] [PreservesLimits (forget A)] [(forget A).ReflectsIsomorphisms]
-    (P : Cᵒᵖ ⥤ A) : Presheaf.IsSheaf J P ↔ Presheaf.IsSheaf J (P ⋙ forget A) :=
-  Presheaf.isSheaf_iff_isSheaf_forget J P (forget A)
 
 end CategoryTheory.Presheaf

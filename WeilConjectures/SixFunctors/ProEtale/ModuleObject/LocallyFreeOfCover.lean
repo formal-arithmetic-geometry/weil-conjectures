@@ -33,25 +33,4 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X : Scheme.{u}} {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
 
-variable {Λ} in
-/-- A module object whose pullback `f^* M` over `Λ` is free is free as a module over the sheaf
-pullback `f^* Λ_X`, in the sense of `ProEtale.IsLocallyFree`. -/
-lemma isFree_mapMod_of_isFree_upperStar {Y : Scheme.{u}} (f : Y ⟶ X)
-    (h : Mod.IsFree (condensedRingObj Λ Y) ((f)^*⟦Λ⟧.obj M)) :
-    Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} f).obj (condensedRingObj Λ X))
-      (((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ X)).obj M) := by
-  obtain ⟨d, ⟨e⟩⟩ := h
-  let α := condensedPullbackHom Λ f
-  exact ⟨d, ⟨(comapUpperStarObjIso _ f M).symm ≪≫ (Mod.comap α).mapIso e ≪≫
-    Mod.finiteFreeIsoMap (Mod.comap α)
-      ((Mod.comapCongr (IsIso.inv_inv (f := α)).symm).app _ ≪≫ Mod.regularIsoOfIsIso (inv α)) d⟩⟩
-
-variable {Λ} in
-/-- A module object is locally free as soon as its pullbacks over `Λ` to the members of a
-pro-étale cover are free. -/
-lemma isLocallyFree_of_isFree_upperStar (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
-    (h : ∀ i, Mod.IsFree (condensedRingObj Λ (𝒰.X i)) ((𝒰.f i)^*⟦Λ⟧.obj M)) :
-    IsLocallyFree (condensedRingObj Λ X) M :=
-  ⟨𝒰, fun i ↦ isFree_mapMod_of_isFree_upperStar _ (h i)⟩
-
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -344,23 +344,6 @@ def IsIrreducibleLisse (F : WeilSheaf k₀ l X) : Prop :=
   F.IsLisse ∧ ¬ IsZero F ∧
     ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ F), Mono i → G.IsLisse → IsZero G ∨ IsIso i
 
-/-- A lisse Weil sheaf which is simple in the category of all Weil sheaves is irreducible
-lisse. -/
-theorem IsLisse.isIrreducibleLisse {F : WeilSheaf k₀ l X} (hF : F.IsLisse) [Simple F] :
-    F.IsIrreducibleLisse := by
-  refine ⟨hF, Simple.not_isZero F, fun G i _ _ ↦ ?_⟩
-  by_cases h : i = 0
-  · subst h
-    exact Or.inl (IsZero.of_mono_zero G F)
-  · exact Or.inr ((Simple.mono_isIso_iff_nonzero i).2 h)
-
-/-- A Weil sheaf `F` is *geometrically irreducible* if its underlying `ℓ`-adic sheaf on the
-geometric fiber `X̄` is an irreducible local system: it is lisse and nonzero, and every lisse
-subsheaf of it, with no Weil structure, is zero or all of it. For `X̄` connected this says that
-the geometric fundamental representation `π₁(X̄) → GL(F_η̄)` is irreducible. -/
-def IsGeometricallyIrreducible (F : WeilSheaf k₀ l X) : Prop :=
-  IsIrreducibleAdicLocalSystem F.obj.carrier
-
 /-- A Weil sheaf is zero if and only if its underlying sheaf is: the forgetful functor is
 additive, and a morphism of Weil sheaves is determined by the underlying morphism of sheaves. -/
 theorem isZero_iff_isZero_carrier {F : WeilSheaf k₀ l X} : IsZero F ↔ IsZero F.obj.carrier := by

@@ -167,65 +167,6 @@ variable {X X' Y Y' Z Z' X₁ X₁' Y₁ Y₁' Z₁ Z₁' : Scheme.{u}} {M : Nea
   {e₂ : Z₁ ⟶ Y₁} {e₂' : Z₁' ⟶ Y₁'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'} {h : Y ⟶ Y₁} {h' : Y' ⟶ Y₁'}
   {k : Z ⟶ Z₁} {k' : Z' ⟶ Z₁'}
 
-/-- **The Künneth map of nearby cycles and direct images** (blueprint `det-nearby-kunneth-proper`):
-for morphisms of models `ψ_M : M ⟶ M₁`, `ψ_N : N ⟶ N₁`, `ψ_P : P ⟶ P₁` compatible with
-`φ₁ : P ⟶ M`, `φ₂ : P ⟶ N`, `φ₁' : P₁ ⟶ M₁`, `φ₂' : P₁ ⟶ N₁`, the Künneth maps `Π` of nearby
-cycles, the ordinary Künneth maps `κ` and the pushforward exchanges `χ` form a commutative square
-`Rk'_* Π_{A,B} ∘ κ ∘ (χ ⊠ χ) = χ ∘ Ψ_{P₁}(κ) ∘ Π_{Rg_* A, Rh_* B}`. For proper morphisms the
-exchanges `χ` are the proper exchange isomorphisms, and this identifies `R(g × h)_* Π_{A,B}`
-with `Π_{Rg_* A, Rh_* B}`. -/
-lemma kunnethMap_comp_pushforwardExchange (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
-    (φ₁' : P₁.Hom M₁ e₁ e₁') (φ₂' : P₁.Hom N₁ e₂ e₂') (ψM : M.Hom M₁ g g')
-    (ψN : N.Hom N₁ h h') (ψP : P.Hom P₁ k k')
-    (htot₁ : φ₁.total ≫ ψM.total = ψP.total ≫ φ₁'.total)
-    (hgen₁ : φ₁.generic ≫ ψM.generic = ψP.generic ≫ φ₁'.generic)
-    (htot₂ : φ₂.total ≫ ψN.total = ψP.total ≫ φ₂'.total)
-    (hgen₂ : φ₂.generic ≫ ψN.generic = ψP.generic ≫ φ₂'.generic)
-    (hb₁ : f₁ ≫ g = k ≫ e₁) (hs₁ : f₁' ≫ g' = k' ≫ e₁') (hb₂ : f₂ ≫ h = k ≫ e₂)
-    (hs₂ : f₂' ≫ h' = k' ≫ e₂')
-    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)))
-    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))) :
-    (L((e₁')^*⟦Λ⟧).map ((ψM.pushforwardExchange Λ).app A) ⊗ₘ
-        L((e₂')^*⟦Λ⟧).map ((ψN.pushforwardExchange Λ).app B)) ≫
-        lowerStarKunnethMap' Λ ⟨hs₁⟩ ⟨hs₂⟩ ((M.nearbyCycles Λ).obj A)
-          ((N.nearbyCycles Λ).obj B) ≫
-        R((k')_*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B) =
-      kunnethMap Λ φ₁' φ₂' (R((g)_*⟦Λ⟧).obj A) (R((h)_*⟦Λ⟧).obj B) ≫
-        (P₁.nearbyCycles Λ).map (lowerStarKunnethMap' Λ ⟨hb₁⟩ ⟨hb₂⟩ A B) ≫
-        (ψP.pushforwardExchange Λ).app _ := by
-  have hμ : ∀ {U U' V V' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj Λ Z))} (x : U ⟶ U') (y : V ⟶ V'),
-      ((P.nearbyCycles Λ).map x ⊗ₘ (P.nearbyCycles Λ).map y) ≫ P.tensorMap Λ U' V' =
-        P.tensorMap Λ U V ≫ (P.nearbyCycles Λ).map (x ⊗ₘ y) :=
-    fun x y ↦ P.tensorMap_natural Λ x y
-  have h := kunnethMap_comp_pushforwardExchange_aux (derivedUpperStarLowerStarAdjunction Λ g)
-    (derivedUpperStarLowerStarAdjunction Λ h) (derivedUpperStarLowerStarAdjunction Λ k)
-    (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ h')
-    (derivedUpperStarLowerStarAdjunction Λ k') (P.tensorMap Λ) (P₁.tensorMap Λ) hμ
-    (φ₁.pullbackExchange Λ) (φ₂.pullbackExchange Λ) (φ₁'.pullbackExchange Λ)
-    (φ₂'.pullbackExchange Λ) (ψM.pullbackExchange Λ) (ψN.pullbackExchange Λ)
-    (ψP.pullbackExchange Λ) (ψM.pushforwardExchange Λ) (ψN.pushforwardExchange Λ)
-    (ψP.pushforwardExchange Λ) (ψM.map_pushforwardExchange_app_comp_counit_app Λ)
-    (ψN.map_pushforwardExchange_app_comp_counit_app Λ)
-    (ψP.map_pushforwardExchange_app_comp_counit_app Λ)
-    (pullbackSquareComparison Λ ⟨hb₁⟩).hom (pullbackSquareComparison Λ ⟨hb₂⟩).hom
-    (pullbackSquareComparison Λ ⟨hs₁⟩).hom (pullbackSquareComparison Λ ⟨hs₂⟩).hom
-    (baseChangeMap Λ ⟨hb₁⟩) (baseChangeMap Λ ⟨hb₂⟩) (baseChangeMap Λ ⟨hs₁⟩)
-    (baseChangeMap Λ ⟨hs₂⟩)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
-    (lowerStarTensorMap' Λ k) (lowerStarTensorMap' Λ k')
-    (fun U V ↦ lowerStarTensorMap'_comp_counit Λ k U V)
-    (fun U V ↦ lowerStarTensorMap'_comp_counit Λ k' U V)
-    (fun C ↦ Hom.pullbackExchange_square Λ φ₁ ψM ψP φ₁' htot₁ hgen₁ hb₁ hs₁ C)
-    (fun C ↦ Hom.pullbackExchange_square Λ φ₂ ψN ψP φ₂' htot₂ hgen₂ hb₂ hs₂ C)
-    (fun U V ↦ ψP.map_tensorMap_comp_pullbackExchange_app Λ U V) A B
-  convert h using 3 <;> rfl
-
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing

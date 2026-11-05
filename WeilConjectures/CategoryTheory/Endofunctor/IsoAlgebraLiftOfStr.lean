@@ -63,9 +63,6 @@ lemma liftOfStr_map_hom_f {K K' : IsoAlgebra F} (f : K ⟶ K') :
     ((liftOfStr G φ hφ).map f).hom.f = f.hom.f :=
   rfl
 
-lemma liftOfStr_comp_forget : liftOfStr G φ hφ ⋙ forget G = forget F :=
-  rfl
-
 section Map
 
 variable {D : Type u'} [Category.{v'} D] {G' : D ⥤ D} {L : C ⥤ D} (e : L ⋙ G' ≅ G ⋙ L)

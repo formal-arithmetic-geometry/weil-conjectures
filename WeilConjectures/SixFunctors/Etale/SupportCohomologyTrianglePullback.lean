@@ -212,31 +212,6 @@ lemma sectionsPullback_comp {V : X.Etale} {W : X'.Etale} {W'' : X''.Etale}
   rw [← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp,
     homToPullback_comp_pullbackComp]
 
-/-- The pullback of global sections is compatible with the composition of morphisms of
-schemes. -/
-lemma ΓPullback_comp :
-    ΓPullback A (e' ≫ e) ≫ Functor.whiskerRight (upperStarComp A e' e).hom _ =
-      ΓPullback A e ≫ Functor.whiskerLeft _ (ΓPullback A e') := by
-  ext F
-  have : IsIso ((((e')^*[A]).obj ((e)^*[A].obj F)).ΓRes (op (Scheme.Etale.mk (𝟙 X'')))) :=
-    (((e')^*[A]).obj ((e)^*[A].obj F)).isLimitConeΓ.isIso_π_app_of_isInitial _
-      (Scheme.Etale.isTerminalMkId X'').op
-  rw [← cancel_mono ((((e')^*[A]).obj ((e)^*[A].obj F)).ΓRes
-    (op (Scheme.Etale.mk (𝟙 X''))))]
-  have h := ΓPullback_app_comp_ΓRes A e' (V := Scheme.Etale.mk (𝟙 X'))
-    (W := Scheme.Etale.mk (𝟙 X'')) e' (etaleMkId_hom_comp e') ((e)^*[A].obj F)
-  have h' := ΓPullback_app_comp_ΓRes A (e' ≫ e) (V := Scheme.Etale.mk (𝟙 X))
-    (W := Scheme.Etale.mk (𝟙 X'')) (e' ≫ e) (etaleMkId_hom_comp _) F
-  have h'' := ΓPullback_app_comp_ΓRes A e (V := Scheme.Etale.mk (𝟙 X))
-    (W := Scheme.Etale.mk (𝟙 X')) e (etaleMkId_hom_comp e) F
-  have hc := sectionsPullback_comp A e e' (V := Scheme.Etale.mk (𝟙 X))
-    (W := Scheme.Etale.mk (𝟙 X')) (W'' := Scheme.Etale.mk (𝟙 X'')) e (etaleMkId_hom_comp e) e'
-    (etaleMkId_hom_comp e') F
-  have hn := Sheaf.ΓRes_naturality ((upperStarComp A e' e).hom.app F)
-    (op (Scheme.Etale.mk (𝟙 X'')))
-  dsimp at h h' h'' hc hn ⊢
-  rw [assoc, hn, reassoc_of% h', hc, assoc, h, reassoc_of% h'']
-
 end Comp
 
 end Sections
@@ -348,111 +323,13 @@ noncomputable def sectionsWithSupportTrianglePullback :
     (openComplementSectionsPullback A e i i' h) (sectionsWithSupportPullback_comp A e i i' h).symm
     (ΓPullback_comp_natTransΓRes A e i i' h).symm
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-(functoriality of the long exact sequence in the pair).
-
-The pullback maps along a morphism of pairs `e : (X', X' ∖ Z') ⟶ (X, X ∖ Z)` commute with all
-the maps of the long exact sequences
-
-`⋯ ⟶ H^q_Z(X, K) ⟶ H^q(X, K) ⟶ H^q(U, K) ⟶ H^{q+1}_Z(X, K) ⟶ ⋯`
-`⋯ ⟶ H^q_{Z'}(X', e^*K) ⟶ H^q(X', e^*K) ⟶ H^q(U', e^*K) ⟶ H^{q+1}_{Z'}(X', e^*K) ⟶ ⋯`,
-
-including the connecting maps. -/
-theorem homology_sectionsWithSupportTrianglePullback_comm
-    (K : Plus (Sheaf X.smallEtaleTopology A)) (q₀ q₁ : ℤ) (hq : q₀ + 1 = q₁) :
-    (homologyFunctor A q₀).map ((sectionsWithSupportTriangle A i).obj K).mor₁ ≫
-        (homologyFunctor A q₀).map ((sectionsWithSupportTrianglePullback A e i i' h).app K).hom₂ =
-      (homologyFunctor A q₀).map ((sectionsWithSupportTrianglePullback A e i i' h).app K).hom₁ ≫
-        (homologyFunctor A q₀).map
-          ((sectionsWithSupportTriangle A i').obj (D+((e)^*[A]).obj K)).mor₁ ∧
-    (homologyFunctor A q₀).map ((sectionsWithSupportTriangle A i).obj K).mor₂ ≫
-        (homologyFunctor A q₀).map ((sectionsWithSupportTrianglePullback A e i i' h).app K).hom₃ =
-      (homologyFunctor A q₀).map ((sectionsWithSupportTrianglePullback A e i i' h).app K).hom₂ ≫
-        (homologyFunctor A q₀).map
-          ((sectionsWithSupportTriangle A i').obj (D+((e)^*[A]).obj K)).mor₂ ∧
-    HomologySequence.δ ((sectionsWithSupportTriangle A i).obj K) q₀ q₁ hq ≫
-        (homologyFunctor A q₁).map ((sectionsWithSupportTrianglePullback A e i i' h).app K).hom₁ =
-      (homologyFunctor A q₀).map ((sectionsWithSupportTrianglePullback A e i i' h).app K).hom₃ ≫
-        HomologySequence.δ ((sectionsWithSupportTriangle A i').obj (D+((e)^*[A]).obj K)) q₀ q₁
-          hq := by
-  set φ := (sectionsWithSupportTrianglePullback A e i i' h).app K
-  refine ⟨?_, ?_, ?_⟩
-  · simp only [← Functor.map_comp, φ.comm₁]
-    rfl
-  · simp only [← Functor.map_comp, φ.comm₂]
-    rfl
-  · exact ((homologyFunctor A 0).homologySequenceδ_naturality _ _ φ q₀ q₁ hq).symm
-
 section Comp
 
 variable {X'' Z'' : Scheme.{u}} (e' : X'' ⟶ X') (i'' : Z'' ⟶ X'') [IsClosedImmersion i'']
   (h' : i''.openComplement ≤ e' ⁻¹ᵁ i'.openComplement)
   (h'' : i''.openComplement ≤ (e' ≫ e) ⁻¹ᵁ i.openComplement)
 
-lemma sectionsPullback_congr {V : X.Etale} {W : X'.Etale} {φ₁ φ₂ : W.left ⟶ V.left}
-    (hφ₁ : φ₁ ≫ V.hom = W.hom ≫ e) (hφ : φ₁ = φ₂) :
-    sectionsPullback A e φ₁ hφ₁ = sectionsPullback A e φ₂ (hφ ▸ hφ₁) := by
-  subst hφ
-  rfl
-
-/-- The pullback of sections over the open complements is compatible with the composition of
-morphisms of pairs. -/
-lemma openComplementSectionsPullback_comp :
-    openComplementSectionsPullback A (e' ≫ e) i i'' h'' ≫
-        Functor.whiskerRight (upperStarComp A e' e).hom _ =
-      openComplementSectionsPullback A e i i' h ≫
-        Functor.whiskerLeft _ (openComplementSectionsPullback A e' i' i'' h') := by
-  ext F
-  have hc := sectionsPullback_comp A e e' (V := Scheme.Etale.mk i.openComplement.ι)
-    (W := Scheme.Etale.mk i'.openComplement.ι) (W'' := Scheme.Etale.mk i''.openComplement.ι)
-    (e.resLE _ _ h) (Scheme.Hom.resLE_comp_ι _ _)
-    (e'.resLE _ _ h') (Scheme.Hom.resLE_comp_ι _ _) F
-  have hres : (e' ≫ e).resLE i.openComplement i''.openComplement h'' =
-      e'.resLE _ _ h' ≫ e.resLE _ _ h := by
-    rw [← cancel_mono i.openComplement.ι]
-    simp
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    openComplementSectionsPullback]
-  rw [sectionsPullback_congr A (e' ≫ e) _ hres]
-  exact hc
-
-/-- The pullback of the sections with support is compatible with the composition of morphisms
-of pairs. -/
-lemma sectionsWithSupportPullback_comp_comp :
-    sectionsWithSupportPullback A (e' ≫ e) i i'' h'' ≫
-        Functor.whiskerRight (upperStarComp A e' e).hom _ =
-      sectionsWithSupportPullback A e i i' h ≫
-        Functor.whiskerLeft _ (sectionsWithSupportPullback A e' i' i'' h') := by
-  ext F
-  rw [← cancel_mono ((Sheaf.ΓSupportι _ A (op (Scheme.Etale.mk i''.openComplement.ι))).app
-    ((e')^*[A].obj ((e)^*[A].obj F)))]
-  have n := (Sheaf.ΓSupportι _ A (op (Scheme.Etale.mk i''.openComplement.ι))).naturality
-    ((upperStarComp A e' e).hom.app F)
-  have hΓ := congr_app (ΓPullback_comp A e e') F
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.comp_obj, sectionsWithSupportPullback_app] at n hΓ ⊢
-  rw [assoc, n, sectionsWithSupportPullbackApp_comp_assoc, hΓ, assoc,
-    sectionsWithSupportPullbackApp_comp, sectionsWithSupportPullbackApp_comp_assoc]
-
 attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
-
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-(compatibility of the functoriality in the pair with composition).
-
-For morphisms of pairs `e : (X', Z') ⟶ (X, Z)` and `e' : (X'', Z'') ⟶ (X', Z')`, the morphism of
-triangles of cohomology with support along `e' ≫ e` is the composite of the morphisms of
-triangles along `e` and `e'`, up to the comparison `(e' ≫ e)^* K ≅ e'^* e^* K`. -/
-theorem sectionsWithSupportTrianglePullback_comp (K : Plus (Sheaf X.smallEtaleTopology A)) :
-    (sectionsWithSupportTrianglePullback A (e' ≫ e) i i'' h'').app K ≫
-        (sectionsWithSupportTriangle A i'').map
-          ((Functor.mapDerivedCategoryPlusNatIso (upperStarComp A e' e) ≪≫
-            Functor.mapDerivedCategoryPlusCompIso (e)^*[A] (e')^*[A]).hom.app K) =
-      (sectionsWithSupportTrianglePullback A e i i' h).app K ≫
-        (sectionsWithSupportTrianglePullback A e' i' i'' h').app (D+((e)^*[A]).obj K) :=
-  ShortComplex.rightDerivedTrianglePullback_comp (ε := upperStarComp A e' e)
-    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-    (sectionsWithSupportPullback_comp_comp A e i i' h e' i'' h' h'')
-    (ΓPullback_comp A e e') (openComplementSectionsPullback_comp A e i i' h e' i'' h' h'') K
 
 end Comp
 

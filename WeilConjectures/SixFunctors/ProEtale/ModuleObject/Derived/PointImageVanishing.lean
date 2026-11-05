@@ -79,49 +79,6 @@ instance (Y : Over (Spec (.of k))) [QuasiCompact Y.hom] : QuasiCompact (overRedu
 instance (Y : Over (Spec (.of k))) [IsSeparated Y.hom] : IsSeparated (overReduction Y).hom :=
   inferInstanceAs (IsSeparated (Y.left.nilradical.subschemeι ≫ Y.hom))
 
-/-- A morphism `f : Y ⟶ X` over `Spec k` whose image lies in the image of a closed immersion
-`e : P ⟶ X` factors through `e` after restriction to the reduction `Y_red ⟶ Y`. -/
-lemma exists_overReductionι_comp_eq_of_range_subset {X Y P : Over (Spec (.of k))} (f : Y ⟶ X)
-    (e : P ⟶ X) [IsClosedImmersion e.left]
-    (hf : Set.range f.left.base ⊆ Set.range e.left.base) :
-    ∃ g : overReduction Y ⟶ P, g ≫ e = overReductionι Y ≫ f := by
-  set t := (overReductionι Y).left ≫ f.left
-  have : Surjective (pullback.snd e.left t) := ⟨by
-    rw [← Set.range_eq_univ, Scheme.Pullback.range_snd, Set.preimage_eq_univ_iff]
-    exact (Set.range_comp_subset_range (overReductionι Y).left.base f.left.base).trans hf⟩
-  have := isIso_of_isClosedImmersion_of_surjective (pullback.snd e.left t)
-  have hl : (inv (pullback.snd e.left t) ≫ pullback.fst e.left t) ≫ e.left = t := by
-    rw [Category.assoc, pullback.condition, IsIso.inv_hom_id_assoc]
-  refine ⟨Over.homMk (inv (pullback.snd e.left t) ≫ pullback.fst e.left t) ?_,
-    Over.OverMorphism.ext hl⟩
-  rw [← Over.w e, ← Category.assoc, hl]
-  simp [t, overReduction, overReductionι]
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-/-- Let `e : P ⟶ X` be a closed immersion (for instance a rational point) and `f : Y ⟶ X` a
-morphism with image in the image of `e`. If `Le^* M = 0`, then `Lf^* M = 0`: the restriction of
-`f` to the reduction `r : Y_red ⟶ Y` factors through `e`, and `Lr^*` is an equivalence by
-topological invariance. -/
-theorem isZero_boundedConstructibleUpperStar_obj_of_range_subset {X Y P : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
-    (f : Y ⟶ X) (e : P ⟶ X) [IsClosedImmersion e.left]
-    (hf : Set.range f.left.base ⊆ Set.range e.left.base) (M :
-        Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (hM : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e).obj M)) :
-    IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M) := by
-  obtain ⟨g, hg⟩ := exists_overReductionι_comp_eq_of_range_subset f e hf
-  set r := overReductionι Y
-  have hr : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M)) :=
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map_isZero hM).of_iso
-      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r f).symm.app M ≪≫
-          eqToIso (by rw [hg]) ≪≫
-        (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g e).app M)
-  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction ℓ r
-  exact ((boundedConstructibleLowerStar ℓ r).map_isZero hr).of_iso
-    (asIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ r).unit.app _))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

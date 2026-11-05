@@ -60,29 +60,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-/-- An object of `D(Y_proet, O_E)` is derived complete when its canonical reduction
-  tower is a homotopy-limit tower. For a representative `G` of the object, choose a
-  K-flat resolution `q : P ⟶ G`; `integralReductionTowerCone q hq` has point `Q.obj G`
-  and legs the canonical maps `c_n : Q.obj G ⟶ K_n`. Thus its homotopy-limit condition
-  is exactly the distinguished Roos triangle
-  `K → ∏ₙ K_n →^{1-s} ∏ₙ K_n → K[1]`. The existential is independent of the chosen
-  representative by the recorded well-definedness theorem for the reduction tower.
-  Source: Bhatt--Scholze, Definition 3.5.2, p. 24; Stacks Tag 06YL
-  (blueprint: def-weil-derived-complete). -/
-noncomputable def IsDerivedComplete
-    (K : completedIntegralDerivedCategory l E Y D hl) : Prop :=
-  ∃ (P G : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
-    (q : P ⟶ G)
-    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
-      (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (R := completedIntegralCommRingSheaf l E Y D hl) q)
-    (e : DerivedCategory.Q.obj G ≅ K),
-    let F := integralReductionTower l E Y D hl P
-    let c := (integralReductionTowerCone l E Y D hl q hq).extend e.inv
-    ∃ hprod : HasProduct (fun n : ℕ ↦ F.obj (op n)),
-      letI := hprod
-      ∃ δ : (∏ᶜ fun n : ℕ ↦ F.obj (op n)) ⟶ K⟦(1 : ℤ)⟧,
-        IsDerivedLimitTriangle (fun n : ℕ ↦ F.map (homOfLE n.le_succ).op) K
-          (Pi.lift (fun n : ℕ ↦ c.π.app (op n))) δ
-
 end WeilConjectures

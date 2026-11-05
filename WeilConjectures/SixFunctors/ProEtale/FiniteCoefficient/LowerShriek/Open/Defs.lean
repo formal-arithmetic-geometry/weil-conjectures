@@ -128,14 +128,6 @@ def ProEtale.localizationRestriction :
     (Scheme.ProEt.topology V) (Scheme.ProEt.topology U)
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The sections of `j_f^* G` over `T → V` are the sections of `G` over `T → V → U`. -/
-lemma ProEtale.localizationRestriction_obj_val_obj (G : Sheaf (Scheme.ProEt.topology U) A)
-    (b : V.ProEt) :
-    ((ProEtale.localizationRestriction A f h).obj G).obj.obj (op b) =
-      G.obj.obj (op ((MorphismProperty.Over.map ⊤ h).obj b)) :=
-  rfl
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `j_f^*` acts on morphisms by whiskering along `(MorphismProperty.Over.map ⊤ h).op`. -/
 lemma ProEtale.localizationRestriction_map_hom_app
     {G G' : Sheaf (Scheme.ProEt.topology U) A} (φ : G ⟶ G') (b : V.ProEt) :
@@ -158,15 +150,6 @@ instance : (ProEtale.localizationLowerShriek A f h).IsLeftAdjoint :=
 
 instance : (ProEtale.localizationRestriction A f h).IsRightAdjoint :=
   (ProEtale.localizationLowerShriekAdjunction A f h).isRightAdjoint
-
-/-- The lower shriek agrees with mathlib's abstract left adjoint
-`(MorphismProperty.Over.map ⊤ h).sheafPullback` of the restriction functor. -/
-noncomputable def ProEtale.localizationLowerShriekIsoSheafPullback :
-    (MorphismProperty.Over.map ⊤ h).sheafPullback A
-        (Scheme.ProEt.topology V) (Scheme.ProEt.topology U) ≅
-      ProEtale.localizationLowerShriek A f h :=
-  Functor.sheafPullbackConstruction.sheafPullbackIso (MorphismProperty.Over.map ⊤ h) A
-    (Scheme.ProEt.topology V) (Scheme.ProEt.topology U)
 
 end Adjunction
 
@@ -229,21 +212,6 @@ noncomputable def ProEtale.localizationLowerShriekPresheaf :
     (V.ProEtᵒᵖ ⥤ A) ⥤ (U.ProEtᵒᵖ ⥤ A) :=
   (MorphismProperty.Over.map ⊤ h).op.lan
 
-/-- The presheaf-level adjunction between `j_{f,!}^{pre}` and restriction. -/
-noncomputable def ProEtale.localizationLowerShriekPresheafAdjunction :
-    ProEtale.localizationLowerShriekPresheaf A f h ⊣
-      (Functor.whiskeringLeft V.ProEtᵒᵖ U.ProEtᵒᵖ A).obj (MorphismProperty.Over.map ⊤ h).op :=
-  (MorphismProperty.Over.map ⊤ h).op.lanAdjunction A
-
-/-- The lower shriek is definitionally the left Kan extension on presheaves followed by
-sheafification. -/
-lemma ProEtale.localizationLowerShriek_eq :
-    ProEtale.localizationLowerShriek A f h =
-      sheafToPresheaf (Scheme.ProEt.topology V) A ⋙
-        ProEtale.localizationLowerShriekPresheaf A f h ⋙
-          presheafToSheaf (Scheme.ProEt.topology U) A :=
-  rfl
-
 end Presheaf
 
 /-! ### The extension by zero along an open immersion -/
@@ -260,15 +228,6 @@ pro-étale sites, given objectwise by `(j^* G)(T → U) = G(T → U → X)`. In 
 def ProEtale.openImmersionRestriction :
     Sheaf (Scheme.ProEt.topology X) A ⥤ Sheaf (Scheme.ProEt.topology U) A :=
   ProEtale.localizationRestriction A j inferInstance
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The sections of `j^* G` over `T → U` are the sections of `G` over `T → U → X`. -/
-lemma ProEtale.openImmersionRestriction_obj_val_obj (G : Sheaf (Scheme.ProEt.topology X) A)
-    (b : U.ProEt) :
-    ((ProEtale.openImmersionRestriction A j).obj G).obj.obj (op b) =
-      G.obj.obj (op ((MorphismProperty.Over.map ⊤
-        (inferInstance : @WeaklyEtale _ _ j)).obj b)) :=
-  rfl
 
 /-- Restriction along an open immersion is left adjoint to the pushforward `j_*`: this is
 the right half of the triple `j_! ⊣ j^* ⊣ j_*`. -/

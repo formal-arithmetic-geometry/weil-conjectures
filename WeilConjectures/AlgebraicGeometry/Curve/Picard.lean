@@ -105,12 +105,6 @@ lemma picDegreeHom_ofIsInvertible (ℳ : C.Modules) [ℳ.IsInvertible] :
   rw [picDegreeHom_apply, Hom.picDegree_eq]
   exact congrArg _ (Modules.degree_congr k (Pic.ofIsInvertibleIso ℳ))
 
-/-- The kernel of the degree homomorphism is `Pic⁰(C)`, the set of classes of degree zero. -/
-lemma coe_ker_picDegreeHom :
-    ((picDegreeHom k C).ker : Set C.Pic) = (C ↘ Spec (.of k)).picZero := by
-  ext L
-  simp [Hom.picZero, MonoidHom.mem_ker, picDegreeHom_apply]
-
 end Degree
 
 section Divisor
@@ -230,45 +224,6 @@ lemma Divisor.toMul_toPic_mapRange (E : closedPoints C →₀ ℕ) :
         (Pic.ofIsInvertible_toModules_pow hP n)
     rw [hpow, Finsupp.mapRange_single, Divisor.toPic_single, toMul_zsmul, toMul_ofMul,
       Pic.ofClosedPoint, Pic.ofIsInvertible_dual, inv_zpow, zpow_natCast]
-
-/-- **The two modules `𝒪_C(E)` of an effective divisor agree.** For an effective divisor
-`E = ∑_P n_P [P]` on a smooth curve `C`, the class `[𝒪_C(E)]` of the divisor theory
-(`AlgebraicGeometry.Scheme.Divisor.toPic`, i.e. `∏_P [𝓘_Pᵛ]^{n_P}`) is the class of the dual
-`𝓘_Eᵛ` of the ideal sheaf `𝓘_E = 𝒪_C(-E)` of the effective Cartier divisor `E`.
-
-The blueprint compares two sheaves: `𝒪_C(E) ⊆ k(C)` (functions `g` with `div g + E ≥ 0`) and
-`𝓘_Eᵛ = 𝓗om(𝓘_E, 𝒪_C)`. The constant sheaf `k(C)` is not available here, and the first module
-enters the formalisation only through its class `AlgebraicGeometry.Scheme.Divisor.toPic`; the
-statement is therefore the equality of the classes in `Pic(C)`, which is the content used
-downstream. See `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.toMul_toPic_eq` for the
-version starting from an effective Cartier divisor, an invertible ideal sheaf.
-
-(blueprint: `lem-pc-divisor-line-bundle-agrees-sc`, `rem-ptr-pc-divisor-line-bundle-4`) -/
-lemma Divisor.toMul_toPic_mapRange_eq_dual (E : closedPoints C →₀ ℕ) :
-    haveI := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E).isInvertible_dual_toModules
-    (Divisor.toPic k C (E.mapRange Nat.cast Nat.cast_zero)).toMul =
-      Pic.ofIsInvertible (Divisor.idealSheaf E).toModulesᵛ := by
-  have := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E).isInvertible_toModules
-  rw [Divisor.toMul_toPic_mapRange, Pic.ofIsInvertible_dual]
-
-/-- **The two modules `𝒪_C(D)` of an effective Cartier divisor agree.** Let `C` be a smooth
-integral Noetherian curve and `𝓘` an invertible ideal sheaf, i.e. an effective Cartier divisor,
-with divisor `D = ∑_P ord_P(𝓘) [P]`. Then the class `[𝒪_C(D)]` of the divisor theory
-(`AlgebraicGeometry.Scheme.Divisor.toPic`) is the class of `𝒪_C(D) = 𝓘ᵛ`. Indeed `𝓘` is the
-ideal sheaf of the effective divisor `D`
-(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.exists_eq_idealSheaf`), and
-`AlgebraicGeometry.Scheme.Divisor.toMul_toPic_mapRange_eq_dual` applies.
-
-(blueprint: `lem-pc-divisor-line-bundle-agrees-sc`) -/
-theorem IdealSheafData.IsInvertible.toMul_toPic_eq [IsIntegral C] [IsNoetherian C]
-    {I : C.IdealSheafData} (hI : I.IsInvertible) :
-    haveI := hI.isInvertible_dual_toModules
-    ∃ D : C.Divisor, (∀ P : closedPoints C, D P = I.ordAt P.1) ∧
-      (Divisor.toPic k C D).toMul = Pic.ofIsInvertible I.toModulesᵛ := by
-  obtain ⟨E, rfl⟩ := hI.exists_eq_idealSheaf (C ↘ Spec (.of k))
-  exact ⟨E.mapRange Nat.cast Nat.cast_zero, fun P ↦ by
-    rw [Finsupp.mapRange_apply, Divisor.ordAt_idealSheaf (C ↘ Spec (.of k))],
-    Divisor.toMul_toPic_mapRange_eq_dual E⟩
 
 /-- The class of a divisor `D = E₁ - E₂` with `E₁, E₂` effective is `[𝒪_C(-E₁)]⁻¹ [𝒪_C(-E₂)]`. -/
 lemma Divisor.toMul_toPic_mapRange_sub (E₁ E₂ : closedPoints C →₀ ℕ) :
@@ -399,18 +354,6 @@ lemma picDegreeHom_ofClosedPoint (P : closedPoints C) :
   have h := (C ↘ Spec (.of k)).finrankΓ_subschemeι_ker_fieldPoints (fieldPointOfClosedPoint P)
   rwa [fieldPointOfClosedPoint, ker_pointOfClosedPoint] at h
 
-/-- **The degree on `Pic(C)` is the degree of divisors.** Over an algebraically closed field,
-`deg 𝒪_C(D) = deg D` for every divisor `D` on a smooth proper curve `C`.
-
-(blueprint: `def-sc-pic0`) -/
-theorem picDegreeHom_toPic (D : C.Divisor) :
-    picDegreeHom k C (Divisor.toPic k C D).toMul = .ofAdd (Divisor.degree C D) := by
-  induction D using Finsupp.induction_linear with
-  | zero => simp
-  | add D D' hD hD' => simp [hD, hD']
-  | single P n =>
-    simp [picDegreeHom_ofClosedPoint, ← ofAdd_zsmul]
-
 /-- **The degree is surjective.** A nonempty smooth proper curve over an algebraically closed
 field has a closed point `P`, and `𝒪_C(P)` has degree one. -/
 theorem surjective_picDegreeHom [Nonempty C] : Function.Surjective (picDegreeHom k C) := by
@@ -479,55 +422,6 @@ lemma isClosed_of_ord_ne_zero {f : C.functionField} {x : C} (hx : C.ord f x ≠ 
   have hy1 : Order.coheight y = 1 := by exact_mod_cast hy1
   rw [hx1, hy1] at h
   exact absurd h (by decide)
-
-variable (k) in
-include k in
-/-- **Principal divisors have degree zero** on a smooth proper integral curve over an
-algebraically closed field: `deg div(f) = ∑_P v_P(f) = 0`
-(`AlgebraicGeometry.Scheme.finsum_ord_eq_zero`).
-
-(blueprint: `def-sc-pic0`) -/
-theorem degree_div_eq_zero (f : Additive C.functionFieldˣ) : Divisor.degree C (C.div f) = 0 := by
-  have := QuasiCompact.compactSpace_of_compactSpace (C ↘ Spec (.of k))
-  rw [← finsum_ord_eq_zero k C f.toMul.ne_zero, Divisor.degree_apply, Finsupp.sum,
-    ← finsum_eq_sum_of_support_subset _ (s := (C.div f).support) (by simp)]
-  simp only [div_apply]
-  rw [finsum_set_coe_eq_finsum_mem (f := fun x ↦ C.ord (f.toMul : C.functionField) x),
-    finsum_mem_def]
-  rw [(Set.indicator_eq_self (s := closedPoints C)).2 fun y hy ↦ isClosed_of_ord_ne_zero k hy]
-
-/-- Blueprint `det-def-pic`: Picard group, degree, `Pic⁰`
-
-Let `C` be a smooth proper integral (equivalently, connected) curve over an algebraically closed
-field `k`. Its Picard group `Pic(C)` is the group of invertible `𝒪_C`-modules up to isomorphism,
-with the degree homomorphism `deg : Pic(C) → ℤ` (`AlgebraicGeometry.Scheme.picDegreeHom`) and
-`Pic⁰(C) = ker deg`. The two facts asserted in the definition hold.
-
-- **(P1)** `Pic(C)` is in bijection with `H¹(C_Zar, 𝒪_Cˣ)` and with `H¹(C_ét, 𝔾ₘ)` (Hilbert 90,
-  `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_unitsSheaf`), and it is the divisor class
-  group `Div(C) / Princ(C)` via `D ↦ [𝒪_C(D)]`
-  (`AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic`).
-- **(P2)** The degree `deg (∑_P n_P [P]) = ∑_P n_P` kills principal divisors
-  (`AlgebraicGeometry.Scheme.degree_div_eq_zero`), so it descends to `Pic(C)`, where it is
-  `deg` (`AlgebraicGeometry.Scheme.picDegreeHom_toPic`); it is surjective since `C` has a
-  closed point (`AlgebraicGeometry.Scheme.surjective_picDegreeHom`).
-
-Only the existence of the bijections in (P1) is recorded, not that they are the canonical maps
-`ℒ ↦ [Isom(𝒪, ℒ)]`, nor that they are group isomorphisms. -/
-theorem nonempty_equiv_H_one_and_surjective_picDegreeHom :
-    (Nonempty (C.Pic ≃ Sheaf.H C.unitsSheaf 1) ∧
-        Nonempty (Sheaf.H C.unitsSheaf 1 ≃ C.CohomologicalPicardGroup) ∧
-        ∃ e : C.DivisorClassGroup ≃+ Additive C.Pic,
-          ∀ D : C.Divisor, e (QuotientAddGroup.mk D) = Divisor.toPic k C D) ∧
-      (∀ f, Divisor.degree C (C.div f) = 0) ∧
-      (∀ D, picDegreeHom k C (Divisor.toPic k C D).toMul = .ofAdd (Divisor.degree C D)) ∧
-      Function.Surjective (picDegreeHom k C) := by
-  have : IsCurve (C ↘ Spec (.of k)) :=
-    { krullDim_le_one := topologicalKrullDim_le_of_smoothOfRelativeDimension (C ↘ Spec (.of k)) 1 }
-  have : Nonempty C := ⟨genericPoint C⟩
-  exact ⟨⟨(nonempty_equiv_H_one_unitsSheaf C).1, (nonempty_equiv_H_one_unitsSheaf C).2,
-    exists_divisorClassGroup_addEquiv_pic⟩, degree_div_eq_zero k, picDegreeHom_toPic,
-    surjective_picDegreeHom⟩
 
 end AlgClosed
 

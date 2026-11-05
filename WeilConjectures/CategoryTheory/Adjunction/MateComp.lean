@@ -21,7 +21,6 @@ naturality bookkeeping for composite functors.
 
 namespace CategoryTheory
 
-
 /-- The exceptional adjoint of a map through a mate: for an exchange `E = mate(Ξ)` of
 `Ξ : G ⋙ L₂ ⟶ L₁ ⋙ H` along `L₁ ⊣ R₁`, `L₂ ⊣ R₂`, the `L₂ ⊣ R₂`-adjoint of
 `L₂ η ≫ Ξ ≫ H φ♭ ≫ ψ` is `η ≫ G φ ≫ E ≫ R₂ ψ`:
@@ -85,8 +84,6 @@ lemma Adjunction.unit_map_comp_unit_map {CA CB CC : Type*} [Category CA] [Catego
   congr 2
   rw [Functor.map_comp, ← reassoc_of% hη]
 
-
-
 /-- The adjoint for a composite adjunction through the conjugate composition isomorphism: for
 `Lpq ≅ Lq ⋙ Lp` and its conjugate `Rp ⋙ Rq ≅ Rpq`, `(φ♯)♯ ≫ (Rp ⋙ Rq ≅ Rpq) = (c ≫ φ)♯`. -/
 lemma Adjunction.homEquiv_homEquiv_comp_hom_app {CA CB CC : Type*} [Category CA] [Category CB]
@@ -101,7 +98,6 @@ lemma Adjunction.homEquiv_homEquiv_comp_hom_app {CA CB CC : Type*} [Category CA]
   rw [← cancel_mono (cR.inv.app oA)]
   simp only [Category.assoc, Iso.hom_inv_id_app]
   simpa [Adjunction.homEquiv_unit] using h
-
 
 /-- Moving maps into and out of an adjoint:
 `d ≫ (x₁ ≫ x₂)♯ ≫ R e ≫ t = (L d ≫ x₁ ≫ x₂ ≫ e)♯ ≫ t`. -/
@@ -119,7 +115,6 @@ lemma Adjunction.homEquiv_comp_map_comp {C D : Type*} [Category C] [Category D] 
     (t : R.obj N ⟶ T) :
     adj.homEquiv _ _ x ≫ R.map e ≫ t = adj.homEquiv _ _ (x ≫ e) ≫ t := by
   rw [Adjunction.homEquiv_naturality_right, Category.assoc]
-
 
 /-- The counit of a composite adjunction through the conjugate composition isomorphisms:
 ```
@@ -139,13 +134,6 @@ lemma Adjunction.map_map_conjugateIsoEquiv_comp_counit {CA CB CC : Type*} [Categ
   simp only [Functor.comp_map, Adjunction.comp_counit_app, Functor.comp_obj] at h
   rw [Functor.map_comp, Category.assoc]
   exact h
-
-
-lemma NatTrans.naturality_comp_assoc {C D E : Type*} [Category C] [Category D] [Category E]
-    {F₁ F₂ : C ⥤ D} {G₁ G₂ : D ⥤ E} (α : F₁ ⋙ G₁ ⟶ F₂ ⋙ G₂) {X Y : C} (x : X ⟶ Y) {Z : E}
-    (h : G₂.obj (F₂.obj Y) ⟶ Z) :
-    G₁.map (F₁.map x) ≫ α.app Y ≫ h = α.app X ≫ G₂.map (F₂.map x) ≫ h := by
-  simpa using α.naturality_assoc x h
 
 @[reassoc]
 lemma Functor.map_map_hom_app_comp_map_map_inv_app {B C D E : Type*} [Category B] [Category C]

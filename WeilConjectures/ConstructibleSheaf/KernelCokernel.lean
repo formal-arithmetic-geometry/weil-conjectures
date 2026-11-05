@@ -103,12 +103,6 @@ def Cover.ofSieveHom (y : Y) : Cover.ofSieveObj S hS y ⟶ Etale.mk (𝟙 Y) :=
 lemma Cover.ofSieveHom_mem (y : Y) : S (Cover.ofSieveHom S hS y) :=
   ((mem_smallEtaleTopology_iff S).mp hS y).choose_spec.choose_spec.1
 
-lemma Cover.ofSieve_f (y : Y) : (Cover.ofSieve S hS).f y = (Cover.ofSieveHom S hS y).left :=
-  rfl
-
-lemma Cover.ofSieve_X (y : Y) : (Cover.ofSieve S hS).X y = (Cover.ofSieveObj S hS y).left :=
-  rfl
-
 lemma Cover.ofSieveHom_left (y : Y) :
     (Cover.ofSieveHom S hS y).left = (Cover.ofSieveObj S hS y).hom :=
   (Category.comp_id _).symm.trans (MorphismProperty.Over.w (Cover.ofSieveHom S hS y))
@@ -372,28 +366,6 @@ theorem IsFiniteLocallyConstantSheaf.cokernel
   toIsLocallyConstantSheaf := (IsLocallyConstantSheaf.kernel_and_cokernel φ).2
   toIsFiniteSheaf := IsFiniteSheaf.cokernel φ
 
-/-- **The homology of a short complex of finite locally constant sheaves of modules over a
-noetherian ring is finite locally constant**: it is the cokernel of a morphism into the cycles,
-the kernel of the second morphism. -/
-theorem IsFiniteLocallyConstantSheaf.homology [IsNoetherianRing Λ]
-    (S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂]
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
-    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.homology := by
-  have := IsFiniteLocallyConstantSheaf.kernel S.g
-  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.cycles :=
-    IsFiniteLocallyConstantSheaf.of_iso (F := Limits.kernel S.g)
-      ((S.cyclesIsKernel.conePointUniqueUpToIso (kernelIsKernel S.g)).symm)
-  have := IsFiniteLocallyConstantSheaf.cokernel S.toCycles
-  exact IsFiniteLocallyConstantSheaf.of_iso (F := Limits.cokernel S.toCycles)
-    ((cokernelIsCokernel S.toCycles).coconePointUniqueUpToIso S.homologyIsCokernel)
-
 end FiniteStalks
 
 section Extension
@@ -602,7 +574,6 @@ lemma exists_isConstant_over_of_shortExact [Finite Λ]
     rintro V _ ⟨U, f, g, hg, hf, rfl⟩ hV
     exact hP g hg f hf hV⟩
 
-
 /-- Blueprint `lemma-constructible-flc-serre`: Kernels, cokernels and extensions of finite
 locally constant sheaves.
 
@@ -691,7 +662,6 @@ theorem IsFiniteLocallyConstantSheaf.of_shortExact [Finite Λ]
       (Module.Finite.of_exact
         ((ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).1 hs.exact)
         hs.moduleCat_surjective_g)⟩
-
 
 end Extension
 

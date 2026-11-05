@@ -47,23 +47,4 @@ end Underived
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The inverse of the canonical adjunction mate, applied termwise and localized,
-restricted to bounded below derived categories. Source: Stacks 03S6, 015F
-(blueprint: cor-cbc-derived-extension-zero-base-change).
-The `IsPullback` argument is the property underlying `OpenImmersionSquare`;
-its chosen pullback identification does not affect this canonical map. -/
-noncomputable def extensionZeroBaseChangeDerivedPlusIso
-    {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
-    {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
-    (sq : IsPullback gU j' j g) :
-    ((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
-        ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ≅
-      ((gU)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
-        ((j')_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus :=
-  (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryPlusNatIso
-      (@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap
-        (ModuleCat.{u + 1} Λ) sq)).symm ≪≫
-    Functor.mapDerivedCategoryPlusCompIso _ _
-
 end AlgebraicGeometry.Etale

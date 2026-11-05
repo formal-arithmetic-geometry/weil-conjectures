@@ -164,28 +164,4 @@ noncomputable def jCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J B f ≅ J B g :=
   eqToIso (J_congr B h)
 
-/-- The normalized open-extension identity.
-Source: Stacks, Tag 09AE (blueprint: def-cbc-strict-tower-open-extension). -/
-noncomputable def jId (X : Scheme.{u}) : J B (𝟙 X) ≅ 𝟭 (Derived B X) :=
-  Adjunction.leftAdjointIdIso (jAdj B (𝟙 X)) (gId B X)
-
-/-- Evaluation commutes with strict termwise extension by zero.
-Source: blueprint evaluation normalization
-(blueprint: def-cbc-strict-tower-open-extension).
-Proof: the two functors have the identical object and morphism maps: extension
-by zero of the n-th module and the n-th component of an extended tower. -/
-theorem evaluationOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
-    towerJ B j ⋙ (evaluation ℕᵒᵖ (Modules B X)).obj (op n) =
-      (evaluation ℕᵒᵖ (Modules B U)).obj (op n) ⋙ moduleJ B j := by
-  rfl
-
-/-- Evaluation of open extension uses precisely its termwise equality.
-Source: blueprint evaluation normalization
-(blueprint: def-cbc-strict-tower-open-extension). -/
-noncomputable def evalJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
-    J B j ⋙ ev B X n ≅ ev B U n ⋙ (moduleJ B j).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-  Functor.mapDerivedCategoryNatIso (eqToIso (evaluationOpen B j n)) ≪≫
-  Functor.mapDerivedCategoryCompIso _ _
-
 end AlgebraicGeometry.ProEtale.StrictTower

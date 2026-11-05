@@ -23,7 +23,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
   {X U : Scheme.{u}} (g : U ⟶ X)
 
-
 /-- Change coefficients after extending an isomorphism of pulled-back modules. -/
 noncomputable def purityChangeCoefficientPullbackIso
     (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
@@ -55,13 +54,5 @@ noncomputable def purityChangeCoefficientTrivialization
 variable [WeaklyEtale g] {K : Type u} [Field K] (f : U ⟶ Spec (.of K)) (l : ℕ) [Fact l.Prime]
   {ζ : ℕ → K} (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n))
   (hζ' : ∀ n, ζ (n + 1) ^ l = ζ n)
-
-/-- The root trivialization with only rational coefficient modules in its result. -/
-noncomputable def purityRationalTateTrivialization :
-    (g)^*⟦Profinite.padicAlgClRingObj l⟧.obj (tateTwistOne X l) ≅
-      (g)^*⟦Profinite.padicAlgClRingObj l⟧.obj (𝟙_ _) :=
-  purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[l])
-    (Profinite.padicIntRingObjToPadicAlgCl l) g (tateModule X l)
-    (upperStarMapModTateModuleIsoUnit g f l hζ hζ' ≪≫ (g)^*[Ab.{u + 1}].mapModUnitIso)
 
 end AlgebraicGeometry.ProEtale

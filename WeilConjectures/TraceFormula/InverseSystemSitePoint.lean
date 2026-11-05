@@ -64,14 +64,6 @@ noncomputable def inverseSystemHomFunctor {C : Type u} [Category.{u} C]
     {I : Type u} [PartialOrder I] (U : Iᵒᵖ ⥤ C) : C ⥤ Type u :=
   colimit (inverseSystemRepresentableDiagram U)
 
-/-- The section diagram `i ↦ F(U_i)` of a sheaf along an inverse system.
-Source: Stacks Project, Sites, Tags 00YA and 00YQ
-(auxiliary; not a blueprint node). -/
-def inverseSystemSectionDiagram {C : Type u} [Category.{u} C]
-    {I : Type u} [PartialOrder I] {J : GrothendieckTopology C}
-    (U : Iᵒᵖ ⥤ C) (F : Sheaf J (Type w)) : I ⥤ Type w :=
-  inverseSystemOppositeDiagram U ⋙ ObjectProperty.FullSubcategory.obj F
-
 /-- The functor `F ↦ colim_i F(U_i)` on sheaves of sets, acting on a morphism of
 sheaves by its section maps at the `U_i`; its value at `F` is the colimit of
 `inverseSystemSectionDiagram U F`.

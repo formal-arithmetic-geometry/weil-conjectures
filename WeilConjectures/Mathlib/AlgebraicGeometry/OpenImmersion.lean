@@ -156,21 +156,6 @@ end RestrictOfSection
 
 section PullbackRange
 
-/-- **The range of the base change of an open immersion**: in a cartesian square whose
-left vertical leg `f` is an open immersion, the parallel leg `snd` has range the inverse
-image of the range of `f`. -/
-theorem range_snd_of_isPullback {P X Y Z : Scheme.{u}} {fst : P ⟶ X} {snd : P ⟶ Y}
-    {f : X ⟶ Z} {g : Y ⟶ Z} [IsOpenImmersion f] (h : IsPullback fst snd f g) :
-    Set.range snd = g ⁻¹' Set.range f := by
-  have hsurj : Function.Surjective ⇑h.isoPullback.hom := by
-    have := (Scheme.homeoOfIso h.isoPullback).surjective
-    rwa [Scheme.coe_homeoOfIso] at this
-  have hcomp : snd = h.isoPullback.hom ≫ Limits.pullback.snd f g :=
-    (h.isoPullback_hom_snd).symm
-  rw [hcomp, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
-    Set.range_eq_univ.mpr hsurj, Set.image_univ, IsOpenImmersion.range_pullbackSnd]
-  rfl
-
 end PullbackRange
 
 section RestrictOfSectionRange
@@ -229,24 +214,7 @@ lemma Scheme.isClosed_of_openCover {Q : Scheme.{u}} {κ : Type*} {Z : κ → Sch
 
 section DisjointRange
 
-
 variable {U X : Scheme.{u}}
-
-set_option backward.isDefEq.respectTransparency false in
-/-- If `j` is an open immersion whose range is disjoint from the range of `f`, the fibre
-product `V ×_X U` is empty. -/
-lemma isEmpty_pullback_of_disjoint_range {V : Scheme.{u}} (f : V ⟶ X) (j : U ⟶ X)
-    [IsOpenImmersion j] (h : Set.range f.base ∩ Set.range j.base = ∅) :
-    IsEmpty ↥(Limits.pullback f j) := by
-  have hr : Set.range (Limits.pullback.fst f j).base = ∅ := by
-    rw [IsOpenImmersion.range_pullbackFst]
-    ext x
-    simp only [Set.mem_empty_iff_false, iff_false]
-    intro hx
-    have hmem : f.base x ∈ Set.range f.base ∩ Set.range j.base := ⟨⟨x, rfl⟩, hx⟩
-    rw [h] at hmem
-    exact hmem
-  exact Set.range_eq_empty_iff.mp hr
 
 end DisjointRange
 

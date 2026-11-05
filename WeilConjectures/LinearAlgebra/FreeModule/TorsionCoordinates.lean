@@ -30,31 +30,4 @@ variable {R M : Type*} [CommRing R] [IsDomain R] [IsPrincipalIdealRing R] [AddCo
   [Module R M] [Module.Finite R M] [TopologicalSpace R] [IsTopologicalRing R]
   [TopologicalSpace M] [IsModuleTopology R M]
 
-/-- **Coordinates modulo torsion**: a finitely generated module `M` over a principal ideal
-domain has elements `b₁, …, bᵣ`, a basis modulo torsion, and continuous linear coordinates
-`c₁, …, cᵣ` such that `d • (m - ∑ cᵢ(m) • bᵢ) = 0` for all `m` and a fixed nonzero `d`. -/
-theorem exists_coord_smul_sub_sum_eq_zero :
-    ∃ (b : Fin (finrank R (M ⧸ Submodule.torsion R M)) → M)
-      (c : Fin (finrank R (M ⧸ Submodule.torsion R M)) → C(M, R)) (d : R),
-      LinearIndependent R ((Submodule.torsion R M).mkQ ∘ b) ∧ d ≠ 0 ∧
-      ∀ m : M, d • (m - ∑ i, c i m • b i) = 0 := by
-  let N := Submodule.torsion R M
-  let B := Module.finBasis R (M ⧸ N)
-  choose b hb using fun i ↦ Submodule.Quotient.mk_surjective N (B i)
-  let c (i : Fin _) : C(M, R) :=
-    ⟨B.coord i ∘ₗ N.mkQ, continuous_of_linearMap (B.coord i ∘ₗ N.mkQ)⟩
-  obtain ⟨d, hdN, hd⟩ := Submodule.annihilator_top_inter_nonZeroDivisors
-    (Submodule.torsion_isTorsion (R := R) (M := M))
-  refine ⟨b, c, d, ?_, nonZeroDivisors.ne_zero hd, fun m ↦ ?_⟩
-  · convert B.linearIndependent
-    ext i
-    exact hb i
-  have hmem : m - ∑ i, c i m • b i ∈ N := by
-    rw [← Submodule.Quotient.mk_eq_zero, ← Submodule.mkQ_apply, map_sub, map_sum]
-    simp only [map_smul, Submodule.mkQ_apply, hb]
-    rw [sub_eq_zero]
-    exact (B.sum_repr (Submodule.Quotient.mk m)).symm
-  have := Submodule.mem_annihilator.1 hdN ⟨_, hmem⟩ Submodule.mem_top
-  exact congrArg Subtype.val this
-
 end IsModuleTopology

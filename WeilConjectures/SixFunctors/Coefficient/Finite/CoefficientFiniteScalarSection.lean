@@ -45,22 +45,4 @@ attribute [local implicit_reducible] CoefficientClosedStructure.tensor
 attribute [local semireducible] scalarReductionExtension
 attribute [local implicit_reducible] scalarReductionExtension
 
-set_option maxHeartbeats 600000 in
--- Match the recorded adjunction unit with the explicit scalar generator.
-/-- The prescribed finite scalar adjunction unit is the pure scalar section at 1.
-Source: Stacks 03CZ and 06YY.
-(blueprint: lem-coef-finite-scalar-section). -/
-theorem coefficientFiniteScalarSection (n : ℕ)
-    (M : scalarReductionSource l E W) (U : W.ProEtᵒᵖ) (x : M.val.obj U) :
-    ringedFiniteFreeScalarSection.{t+1, t, u} (Scheme.ProEt.topology W)
-        (completedIntegralCommRingProjectionUnrestricted l E W n)
-        (scalarReductionExtension l E W n)
-        (fun M ↦ by
-          with_unfolding_all exact (scalarReductionExistence l E W n).choose_spec.choose M)
-        M U 1 x = coefficientIntegralScalarUnitSection l E W n M U x := by
-  have h := (scalarReductionExtension_adjunction l E W n).choose_spec M U x
-  unfold coefficientIntegralScalarUnitSection coefficientRestrictionSection
-    coefficientOrdinaryScalarAdjunction ringedFiniteFreeScalarSection
-  with_unfolding_all exact h.symm
-
 end WeilConjectures

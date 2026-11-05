@@ -25,15 +25,4 @@ open CategoryTheory Category
 
 namespace CategoryTheory.ObjectProperty
 
-/-- The shift functors of a full subcategory stable under shifts are `R`-linear if those of
-the ambient category are. -/
-instance linear_shiftFunctor_fullSubcategory {R : Type*} [Ring R] {C : Type*} [Category* C]
-    [Preadditive C] [Linear R C] (P : ObjectProperty C) {A : Type*} [AddMonoid A]
-    [HasShift C A] [P.IsStableUnderShift A] (n : A) [(shiftFunctor C n).Linear R] :
-    (shiftFunctor P.FullSubcategory n).Linear R where
-  map_smul {X Y} f r := P.ι.map_injective <| by
-    rw [← cancel_mono ((P.ι.commShiftIso n).hom.app Y), P.ι.commShiftIso_hom_naturality,
-      Functor.map_smul, Functor.map_smul, Linear.comp_smul, Functor.map_smul, Linear.smul_comp,
-      P.ι.commShiftIso_hom_naturality]
-
 end CategoryTheory.ObjectProperty

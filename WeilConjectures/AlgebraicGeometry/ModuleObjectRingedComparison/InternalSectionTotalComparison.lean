@@ -211,7 +211,6 @@ namespace AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
 
 section GenericComparisonAPI
 
-
 attribute [local instance 1000001] sectionRingHasSheafCompose
 
 attribute [local implicit_reducible] sectionModuleEquivalence
@@ -238,40 +237,6 @@ variable {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
   [CochainComplex.HasMapBifunctor ((F.mapHomologicalComplex (.up ℤ)).obj P)
     ((F.mapHomologicalComplex (.up ℤ)).obj Q) (curriedTensor B)]
 
-/-- A total comparison together with its complete summand normalization.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-total-comparison).
-For an equivalence F, the images of the total summand inclusions are jointly epic,
-so the normalization determines the isomorphism, and all other fields are proofs. -/
-structure SectionTensorTotalData where
-  iso : (F.mapHomologicalComplex (.up ℤ)).obj
-      (CochainComplex.mapBifunctor P Q (curriedTensor A)) ≅
-    CochainComplex.mapBifunctor ((F.mapHomologicalComplex (.up ℤ)).obj P)
-      ((F.mapHomologicalComplex (.up ℤ)).obj Q) (curriedTensor B)
-  summand : ∀ (p q n : ℤ) (h : p + q = n),
-    F.map (CochainComplex.ιMapBifunctor P Q (curriedTensor A) p q n h) ≫ iso.hom.f n =
-      (e (P.X p) (Q.X q)).hom ≫ CochainComplex.ιMapBifunctor
-        ((F.mapHomologicalComplex (.up ℤ)).obj P)
-        ((F.mapHomologicalComplex (.up ℤ)).obj Q) (curriedTensor B) p q n h
-
-/-- The normalized total data is unique.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-total-comparison).
-Proof: in each degree, precompose with every mapped coproduct inclusion. Both
-normalizations give the same map. Coproduct extensionality and proof irrelevance
-identify the isomorphisms and the records. -/
-theorem SectionTensorTotalData.unique (s t : SectionTensorTotalData F e P Q) : s = t := by
-  cases s with
-  | mk a ha =>
-    cases t with
-    | mk b hb =>
-      have h : a = b := by
-        apply Iso.ext
-        ext n : 1
-        apply HomologicalComplex.mapBifunctor.hom_ext_of_map F
-        intro p q h
-        exact (ha p q n h).trans (hb p q n h).symm
-      cases h
-      rfl
-
 end TotalData
 
 section OrdinaryAtSite
@@ -286,110 +251,11 @@ attribute [local instance 30000] sectionComparisonBraiding
 
 variable (R : Sheaf J AddCommGrpCat.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R]
 
-
 attribute [local instance] sectionRingCommDirect
-
-
 
 attribute [local instance] sectionFunctorAdditiveForSite sectionFunctorEquivalenceForSite
 
-/-- The uniquely pure-tensor-normalized ordinary comparison at the generic site.
-Construct the coequalizer comparison and then the tensor-sheafification isomorphism.
-The formula on local pure tensors determines this data uniquely.
-Source: Stacks 03EK (blueprint: def-sfb-internal-section-total-comparison). -/
-@[irreducible]
-def ordinaryTensorIsoForSite (M N : Mod (Sheaf J AddCommGrpCat.{u + 1}) R) :
-    (sectionModuleFunctor.{u + 1, u + 1, u} J R).obj (M ⊗ N) ≅
-      (sectionModuleFunctor.{u + 1, u + 1, u} J R).obj M ⊗
-        (sectionModuleFunctor.{u + 1, u + 1, u} J R).obj N :=
-  (exists_sectionTensorIso J R M N).choose ≪≫
-    (SheafOfModules.tensorObjIsoSheafification
-      ((sectionModuleFunctor.{u + 1, u + 1, u} J R).obj M)
-      ((sectionModuleFunctor.{u + 1, u + 1, u} J R).obj N)).symm
-
-/-- The ordinary generic map has exactly the prescribed value on every local pure tensor.
-Source: Stacks 03EK (blueprint: def-sfb-internal-section-total-comparison).
-Proof: unfold the generic choice and take its pure-tensor specification. These
-values determine the map by the relative tensor's universal property. -/
-theorem ordinaryTensorIsoForSite_tmul
-    (M N : Mod (Sheaf J AddCommGrpCat.{u + 1}) R) (U : Cᵒᵖ)
-    (x : M.X.obj.obj U) (y : N.X.obj.obj U) :
-    ((ordinaryTensorIsoForSite J R M N).hom.val.app U)
-        (comparison_internalTmul J R M N U x y) =
-      comparison_sectionTmul J R
-        ((sectionModuleFunctor.{u + 1, u + 1, u} J R).obj M)
-        ((sectionModuleFunctor.{u + 1, u + 1, u} J R).obj N) U x y := by
-  unfold ordinaryTensorIsoForSite
-  exact comparison_tensorIso_tmul J R M N U x y
-
-/-- Both choices have the same formula on every local pure tensor, so relative-tensor
-extensionality identifies them. This certifies that the definition repair preserves
-all normalized comparison data, not only the isomorphism's existence.
-Source: Stacks 03EK (blueprint: def-sfb-internal-section-total-comparison). -/
-private theorem ordinaryTensorIsoForSite_eq_previous
-    (M N : Mod (Sheaf J AddCommGrpCat.{u + 1}) R) :
-    ordinaryTensorIsoForSite J R M N =
-      (internal_section_tensor_comparison J R).2.choose M N := by
-  apply Iso.ext
-  apply comparison_internalTensor_hom_ext J R M N
-  intro U x y
-  exact (ordinaryTensorIsoForSite_tmul J R M N U x y).trans
-    ((internal_section_tensor_comparison J R).2.choose_spec.choose_spec.1
-      M N U x y).symm
-
 attribute [local irreducible] sectionModuleFunctor
-
-/-- The uniquely summand-normalized total comparison before specializing the coefficient.
-Source: Stacks 03EK, 06YL (blueprint: def-sfb-internal-section-total-comparison).
-Proof: take the signed-total conjunct of the ordinary comparison theorem.
-Pure-tensor extensionality identifies its ordinary witness with the coequalizer
-construction. The total map then has the displayed formula on every summand. -/
-theorem ordinaryTensorIsoForSite_total
-    (P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ) :
-    Nonempty (SectionTensorTotalData (sectionModuleFunctor.{u + 1, u + 1, u} J R)
-      (ordinaryTensorIsoForSite J R) P Q) := by
-  obtain ⟨t, ht⟩ := (internal_section_tensor_comparison J R).2.choose_spec.choose_spec
-    |>.2.2.2.2.2.2.2.1 P Q
-  refine ⟨⟨t, ?_⟩⟩
-  intro p q n h
-  exact (ht p q n h).trans (congrArg (fun e ↦ e.hom ≫
-    CochainComplex.ιMapBifunctor
-      (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj P)
-      (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj Q)
-      (curriedTensor _) p q n h)
-        (ordinaryTensorIsoForSite_eq_previous J R (P.X p) (Q.X q)).symm)
-
-/-- The fixed total map, chosen at the generic site before any coefficient specialization.
-Its summand formula uniquely determines it, so this is normalized comparison data.
-Source: Stacks 03EK, 06YL (blueprint: def-sfb-internal-section-total-comparison). -/
-@[irreducible]
-def ordinaryComplexTensorIsoForSite
-    (P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ) :
-    ((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj
-        (CochainComplex.mapBifunctor P Q (curriedTensor _)) ≅
-      CochainComplex.mapBifunctor
-        (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj P)
-        (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj Q)
-        (curriedTensor _) :=
-  (Classical.choice (ordinaryTensorIsoForSite_total J R P Q)).iso
-
-/-- The generic total map retains every normalized summand equation.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-total-comparison).
-Proof: unfold the generic choice and take the summand specification of the
-existence theorem. The choice is made before specializing the site or coefficients. -/
-theorem ordinaryComplexTensorIsoForSite_summand
-    (P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ) :
-    ∀ (p q n : ℤ) (h : p + q = n),
-        (sectionModuleFunctor.{u + 1, u + 1, u} J R).map
-          (CochainComplex.ιMapBifunctor P Q (curriedTensor _) p q n h) ≫
-            (ordinaryComplexTensorIsoForSite J R P Q).hom.f n =
-        (ordinaryTensorIsoForSite J R (P.X p) (Q.X q)).hom ≫
-          CochainComplex.ιMapBifunctor
-            (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj P)
-            (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj Q)
-            (curriedTensor _) p q n h := by
-  unfold ordinaryComplexTensorIsoForSite
-  exact (Classical.choice (ordinaryTensorIsoForSite_total J R P Q)).summand
 
 end OrdinaryAtSite
 
@@ -400,49 +266,12 @@ section ProEtaleComparisonAPI
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 
-
 end ProEtaleComparisonAPI
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 
-
 attribute [instance 1000001] coefficientMonoid
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/-- The ordinary lax localization comparison, for the same total tensor.
-Source: Stacks 06YS (blueprint: def-sfb-internal-section-total-comparison). -/
-def localizationTensorMap (P Q : CochainComplex (Internal Λ X) ℤ) :
-    ((CondensedRing.derivedTensor Λ X).obj ((DerivedCategory.Q (C := Internal Λ X)).obj P)).obj
-      ((DerivedCategory.Q (C := Internal Λ X)).obj Q) ⟶
-      (DerivedCategory.Q (C := Internal Λ X)).obj (internalTotalTensor Λ X P Q) := by
-  letI := internalComplexMonoidal Λ X
-  exact Functor.LaxMonoidal.μ (DerivedCategory.Q (C := Internal Λ X)) P Q
-
-/-- Its termwise extension to ordinary unbounded derived categories.
-Source: Stacks 05RU (blueprint: def-sfb-internal-section-total-comparison). -/
-def forward : DerivedCategory (Internal Λ X) ⥤ DerivedCategory (Modules Λ X) :=
-  (sectionForward Λ X).mapDerivedCategory
-
-
-
-/-- The actual localization comparison for the termwise equivalence.
-Source: Stacks 05RU (blueprint: def-sfb-internal-section-total-comparison). -/
-def localizationIso : DerivedCategory.Q ⋙ forward Λ X ≅
-    complexForward Λ X ⋙ DerivedCategory.Q :=
-  (sectionForward Λ X).mapDerivedCategoryFactors
 
 attribute [local instance 1000001] sectionRingHasSheafCompose
 
@@ -458,31 +287,6 @@ attribute [local implicit_reducible] GrothendieckTopology.monoidalCategory_sheaf
   ProEtale.sheafMonoidalCategory ProEtale.sheafBraidedCategory ProEtale.sheafSymmetricCategory
 
 attribute [local implicit_reducible] Sheaf.symmetricCategory Sheaf.braidedCategory
-
-/-- The ordinary sectionwise tensor bifunctor, with its coefficient ring fixed.
-Source: Stacks 03EK (blueprint: def-sfb-internal-section-total-comparison). -/
-abbrev sectionTensor : Modules Λ X ⥤ Modules Λ X ⥤ Modules Λ X :=
-  @curriedTensor (Modules Λ X) _ (SheafOfModules.monoidalCategory (ring Λ X))
-
-/-- The dependency's ordinary tensor comparison, fixed by its pure-tensor formula.
-Source: Stacks 03EK; lem-pe-internal-section-tensor-comparison
-(blueprint: def-sfb-internal-section-total-comparison). -/
-def ordinaryTensorIso (M N : Internal Λ X) :
-    (equivalence Λ X).functor.obj (M ⊗ N) ≅
-      ((sectionTensor Λ X).obj ((equivalence Λ X).functor.obj M)).obj
-        ((equivalence Λ X).functor.obj N) :=
-  ordinaryTensorIsoForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X) M N
-
-/-- The existing total-complex comparison, pinned on every summand by the
-ordinary tensor comparison and hence on every local pure tensor.
-Source: Stacks 03EK, 06YL and lem-pe-internal-section-tensor-comparison
-(blueprint: def-sfb-internal-section-total-comparison). -/
-def complexTensorIso (P Q : CochainComplex (Internal Λ X) ℤ) :
-    (complexForward Λ X).obj
-      (CochainComplex.mapBifunctor P Q (curriedTensor (Internal Λ X))) ≅
-    CochainComplex.mapBifunctor ((complexForward Λ X).obj P)
-      ((complexForward Λ X).obj Q) (sectionTensor Λ X) :=
-  ordinaryComplexTensorIsoForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X) P Q
 
 attribute [local irreducible] ordinaryTensorIso
 

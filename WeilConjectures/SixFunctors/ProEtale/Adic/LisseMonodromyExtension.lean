@@ -59,10 +59,6 @@ noncomputable def pullbackPathHom (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') :
   map_mul' σ τ := by
     rw [Aut.Aut_mul_def, Aut.Aut_mul_def, pullbackPathIso_trans]
 
-lemma pullbackPathHom_apply (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') (σ : Aut (fiber y)) :
-    pullbackPathHom f y σ = pullbackPathIso f σ :=
-  rfl
-
 open PreGaloisCategory in
 /-- The homomorphism `π₁(Y', y) → π₁(Y, y ≫ f)` is continuous: its component at a finite étale
 `Y`-scheme `P` is determined by the component of the source at `P ×_Y Y'`. -/
@@ -137,59 +133,6 @@ open Scheme.FiniteEtale
 
 variable {l : ℕ} [Fact l.Prime] {Y Y' : Scheme.{u}} {Ω : Type u} [Field Ω] {f : Y' ⟶ Y}
   {M : LisseMonodromy l Y Ω} {M' : LisseMonodromy l Y' Ω}
-
-/-- **Lisse sheaves with monodromy trivial on the kernel extend.** Let `M`, `M'` be monodromies
-on `Y`, `Y'` compatible with `f : Y' ⟶ Y`, which are equivalences at `t ≫ f` and `t`, and assume
-that `π₁(Y', t) → π₁(Y, t ≫ f)` is surjective. If the monodromy representation of a lisse sheaf
-`G'` on `Y'` is trivial on the kernel of `π₁(Y', t) → π₁(Y, t ≫ f)`, then `G'` is the pullback
-of a lisse sheaf on `Y`: the representation of `π₁(Y', t)` factors through a representation of
-`π₁(Y, t ≫ f)`, continuous since `π₁(Y', t) → π₁(Y, t ≫ f)` is a quotient map of compact
-Hausdorff groups, which is the monodromy representation of a lisse `G` on `Y`; then `f^* G` and
-`G'` have the same representation of `π₁(Y', t)`, hence are isomorphic. -/
-theorem exists_upperStar_iso_of_rep_eq_self {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y'}
-    (hM : M.IsEquivalenceAt (t ≫ f)) (hM' : M'.IsEquivalenceAt t) (hc : IsCompatible f M M')
-    (hsurj : Function.Surjective (pullbackPathHom f t)) {G' : LisseSheaf l Y'}
-    (hG' : ∀ σ ∈ (pullbackPathHom f t).ker, ∀ v, M'.rep t G' σ v = v) :
-    ∃ G : LisseSheaf l Y, Nonempty (G.upperStar l f ≅ G') := by
-  set φ := pullbackPathHom f t
-  set ρ' := M'.rep t G'
-  have hker : φ.ker ≤ ρ'.asGroupHom.ker := fun σ hσ ↦ by
-    refine MonoidHom.mem_ker.2 (Units.ext ?_)
-    rw [Representation.asGroupHom_apply]
-    exact LinearMap.ext (hG' σ hσ)
-  let ρu : Aut (fiber (t ≫ f)) →* (Module.End (PadicAlgCl l) (StalkSpace t G'))ˣ :=
-    φ.liftOfSurjective hsurj ⟨ρ'.asGroupHom, hker⟩
-  let ρ : Representation (PadicAlgCl l) (Aut (fiber (t ≫ f))) (StalkSpace t G') :=
-    (Units.coeHom _).comp ρu
-  have hρ (σ : Aut (fiber t)) (v : StalkSpace t G') : ρ (φ σ) v = ρ' σ v := by
-    have h : ρu (φ σ) = ρ'.asGroupHom σ :=
-      MonoidHom.liftOfRightInverse_comp_apply _ _ _ ⟨ρ'.asGroupHom, hker⟩ σ
-    change ((ρu (φ σ) : Module.End (PadicAlgCl l) (StalkSpace t G'))) v = _
-    rw [h, Representation.asGroupHom_apply]
-  -- the representation of `π₁(Y, t ≫ f)` is continuous
-  have hq : Topology.IsQuotientMap φ :=
-    Topology.IsQuotientMap.of_surjective_continuous hsurj (continuous_pullbackPathHom f t)
-  have hcont (ψ : Module.Dual (PadicAlgCl l) (StalkSpace t G')) (v : StalkSpace t G') :
-      Continuous fun σ ↦ ψ (ρ σ v) := by
-    rw [hq.continuous_iff]
-    have h : ((fun σ ↦ ψ (ρ σ v)) ∘ φ) = fun σ ↦ ψ (ρ' σ v) := funext fun σ ↦ by
-      simp only [Function.comp_apply, hρ]
-    rw [h]
-    exact hM'.continuous_rep G' ψ v
-  obtain ⟨G, e, he⟩ := hM.essSurj (StalkSpace t G') ρ hcont
-  -- `f^* G` and `G'` have the same representation of `π₁(Y', t)`
-  let ψ : StalkSpace t (G.upperStar l f) ≃ₗ[PadicAlgCl l] StalkSpace t G' :=
-    (upperStarStalkLinearEquiv f t G).symm.trans e
-  have hψ (σ : Aut (fiber t)) (w : StalkSpace t (G.upperStar l f)) :
-      ψ (M'.rep t (G.upperStar l f) σ w) = ρ' σ (ψ w) := by
-    obtain ⟨v, rfl⟩ := (upperStarStalkLinearEquiv f t G).surjective w
-    rw [← hc.rep_apply]
-    simp only [ψ, LinearEquiv.trans_apply, LinearEquiv.symm_apply_apply]
-    rw [he, ← hρ]
-    rfl
-  obtain ⟨g, hg⟩ := hM'.full ψ.toLinearMap fun σ w ↦ hψ σ w
-  have := hM'.isIso_of_bijective g (by rw [hg]; exact ψ.bijective)
-  exact ⟨G, ⟨asIso g⟩⟩
 
 end LisseMonodromy
 

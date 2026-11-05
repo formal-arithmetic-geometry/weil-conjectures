@@ -47,14 +47,4 @@ lemma projective_unit_of_iso (e : X ≅ Spec (.of K)) :
   have := Scheme.projective_constantSheaf_moduleCat_of_iso e Λ
   Projective.of_iso (Functor.Monoidal.εIso (presheafToSheaf X.smallEtaleTopology _)).symm this
 
-/-- On a scheme `X` isomorphic to the spectrum of a separably closed field, every morphism
-`Λ_X ⟶ Λ_X[1]` in the derived category of étale sheaves of `Λ`-modules is zero, the unit `Λ_X`
-being projective (`AlgebraicGeometry.Etale.projective_unit_of_iso`): this is the vanishing of
-`H¹(X_ét, Λ)`. -/
-lemma DerivedCategory.unit_hom_shift_one_eq_zero_of_iso (e : X ≅ Spec (.of K))
-    (φ : 𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) ⟶
-      (𝟙_ _)⟦(1 : ℤ)⟧) : φ = 0 :=
-  have := projective_unit_of_iso Λ e
-  _root_.DerivedCategory.unit_hom_shift_eq_zero_of_projective 1 one_pos φ
-
 end AlgebraicGeometry.Etale

@@ -39,8 +39,6 @@ universe w v₁ v u
 
 namespace CategoryTheory
 
-
-
 set_option linter.checkUnivs false in
 /-- **A formalism of pullbacks, pushforwards and extensions by zero** indexed by a category `𝒞`
 with a class `𝒪` of morphisms (the open immersions): a category `obj X` for each `X : 𝒞`, a
@@ -101,12 +99,6 @@ def pbComp' (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h) :
 lemma pbComp'_rfl (f : X ⟶ Y) (g : Y ⟶ Z) : F.pbComp' f g (f ≫ g) rfl = F.pbComp f g := by
   ext; simp [pbComp']
 
-/-- The isomorphism `f^* ≅ g^*` for `f = g`. -/
-def pbCongr {f g : X ⟶ Y} (h : f = g) : F.pb f ≅ F.pb g := eqToIso (by rw [h])
-
-@[simp]
-lemma pbCongr_rfl (f : X ⟶ Y) : F.pbCongr (rfl : f = f) = Iso.refl _ := rfl
-
 @[reassoc]
 lemma pbComp'_assoc (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) (fg : X ⟶ Z) (gh : Y ⟶ W)
     (fgh : X ⟶ W) (hfg : f ≫ g = fg) (hgh : g ≫ h = gh) (hfgh : fg ≫ h = fgh)
@@ -133,7 +125,6 @@ lemma pbComp'_id_right (f : X ⟶ Y) (f' : X ⟶ Y) (hf : f ≫ 𝟙 Y = f') (M 
   simpa using F.pbComp_id f M
 
 end Pullback
-
 
 section Pushforward
 

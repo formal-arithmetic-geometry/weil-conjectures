@@ -48,31 +48,4 @@ attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
-/-- Common-stage pullback retains the literal coefficient stage.
-Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
-def commonStagePullbackObject {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Y) :
-    generalAlgebraicallyClosedConstructibleCategory l Ω X :=
-  ⟨P.stage, (rationalDerivedPullback l (Coefficient.{u} l Ω P.stage) f).obj P.obj⟩
-
-/-- The canonical pullback comparison includes the recorded transition identifications.
-Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
-def commonStagePullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
-    (L : Index l Ω) (h : P.stage ≤ L) :
-    (commonStagePullbackObject l Ω f P).toStage h ≅
-      (rationalDerivedPullback l (Coefficient.{u} l Ω L) f).obj (P.toStage h) :=
-  (operationStageTransitionIso l Ω X P.stage L h).app
-      (commonStagePullbackObject l Ω f P).obj ≪≫
-    (rationalPullbackScalarComparison l (Coefficient.{u} l Ω P.stage)
-      (Coefficient.{u} l Ω L) (coefficientInclusion l Ω P.stage L h) f).app P.obj ≪≫
-    (rationalDerivedPullback l (Coefficient.{u} l Ω L) f).mapIso
-      ((operationStageTransitionIso l Ω Y P.stage L h).app P.obj).symm
-
 end WeilConjectures

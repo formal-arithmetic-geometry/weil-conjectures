@@ -42,23 +42,6 @@ namespace AlgebraicGeometry
 
 /-! ### Open squares of schemes -/
 
-/-- Let `j : U ⟶ Y` be an open immersion and `g : U ⟶ U`, `f : Y ⟶ Y` with `g ≫ j = j ≫ f`. If
-`f` maps no point outside `U` into `U`, the square `g ≫ j = j ≫ f` is cartesian. -/
-lemma IsOpenImmersion.isPullback_of_preimage_range_subset {U Y : Scheme.{u}} (j : U ⟶ Y)
-    [IsOpenImmersion j] {g : U ⟶ U} {f : Y ⟶ Y} (w : g ≫ j = j ≫ f)
-    (h : f.base ⁻¹' Set.range j.base ⊆ Set.range j.base) : IsPullback g j j f :=
-  IsOpenImmersion.isPullback g j j f w.symm (TopologicalSpace.Opens.ext (subset_antisymm h
-    (by
-      rintro _ ⟨x, rfl⟩
-      exact ⟨g.base x, by rw [← Scheme.Hom.comp_apply, w, Scheme.Hom.comp_apply]⟩)))
-
-/-- The `Over S` version of `IsOpenImmersion.isPullback_of_preimage_range_subset`. -/
-lemma IsOpenImmersion.isPullback_over_of_preimage_range_subset {S : Scheme.{u}} {U Y : Over S}
-    (j : U ⟶ Y) [IsOpenImmersion j.left] {g : U ⟶ U} {f : Y ⟶ Y} (w : g ≫ j = j ≫ f)
-    (h : f.left.base ⁻¹' Set.range j.left.base ⊆ Set.range j.left.base) : IsPullback g j j f :=
-  IsPullback.of_map (Over.forget S) w
-    (IsOpenImmersion.isPullback_of_preimage_range_subset j.left (congrArg CommaMorphism.left w) h)
-
 end AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -72,33 +55,6 @@ section FrobeniusSquare
 variable {k : Type u} [Field k] {Y U : Over (Spec (.of k))} {ΦY : Y ⟶ Y}
   {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {Y₀ : Scheme.{u}}
   {f₀ : Y₀ ⟶ Spec (.of k₀)} {p : Y.left ⟶ Y₀}
-
-/-- **Frobenius preserves an open subscheme defined over the finite field** (blueprint
-`lem-trf-frobenius-open-square`): let `Φ_Y` be the model Frobenius of `Y = Y₀ ×_{k₀} k`, let
-`j : U ⟶ Y` be the base change of an open immersion `j₀ : U₀ ⟶ Y₀` (the square
-`q ≫ j₀ = j ≫ p` is cartesian) and let `Φ_U : U ⟶ U` satisfy `Φ_U ≫ j = j ≫ Φ_Y`. Then for every
-`m ≥ 0` the square `Φ_U^m ≫ j = j ≫ Φ_Y^m` is cartesian: the Frobenius of `Y₀` is the identity
-on points, so `Φ_Y⁻¹(U) = U`. -/
-theorem isPullback_frobeniusIterate_of_isOpenImmersion (hΦ : IsModelFrobenius ΦY f₀ p)
-    {U₀ : Scheme.{u}} (j₀ : U₀ ⟶ Y₀) {q : U.left ⟶ U₀} (j : U ⟶ Y) [IsOpenImmersion j.left]
-    (hq : IsPullback q j.left j₀ p) {ΦU : U ⟶ U} (hw : ΦU ≫ j = j ≫ ΦY) (m : ℕ) :
-    IsPullback (frobeniusIterate ΦU m) j j (frobeniusIterate ΦY m) := by
-  have h₁ : IsPullback ΦU j j ΦY := by
-    refine IsOpenImmersion.isPullback_over_of_preimage_range_subset j hw ?_
-    obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
-    rintro y ⟨x, hx⟩
-    have e : j₀.base (q.base x) = p.base y := by
-      rw [← Scheme.Hom.comp_apply, hq.w,Scheme.Hom.comp_apply, hx, ← Scheme.Hom.comp_apply,
-        hp, Scheme.Hom.comp_apply, hF₀.base_apply f₀]
-    obtain ⟨z, -, hz⟩ := exists_preimage_of_isPullback hq _ _ e
-    exact ⟨z, hz⟩
-  induction m with
-  | zero =>
-    rw [frobeniusIterate_zero, frobeniusIterate_zero]
-    exact IsPullback.of_horiz_isIso ⟨by simp⟩
-  | succ m ih =>
-    rw [frobeniusIterate_succ, frobeniusIterate_succ]
-    exact h₁.paste_horiz ih
 
 end FrobeniusSquare
 
@@ -183,75 +139,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-omit [Fact ℓ.Prime] in
-/-- Abstract form of `openSquareExchange_inv_app_of_id`: the exchange morphism of a square whose
-horizontal functors are identified with identities, compatibly with `θ`, is the identity up to
-these identifications. -/
-lemma Adjunction.exchangeLeft_app_of_iso_id {A B : Type*} [Category* A] [Category* B]
-    {jS : A ⥤ B} {jU : B ⥤ A} (aj : jS ⊣ jU) {H : A ⥤ A} {H' : B ⥤ B} (eA : H ≅ 𝟭 A)
-    (eB : H' ≅ 𝟭 B) (θ : jU ⋙ H ≅ H' ⋙ jU)
-    (hθ : ∀ M, θ.hom.app M = eA.hom.app (jU.obj M) ≫ jU.map (eB.inv.app M)) (K : A) :
-    (Adjunction.exchangeLeft aj aj θ).app K = jS.map (eA.hom.app K) ≫ eB.inv.app (jS.obj K) := by
-  have h₁ := eA.hom.naturality (aj.unit.app K)
-  have h₂ := aj.counit.naturality (eB.inv.app (jS.obj K))
-  simp only [Functor.id_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj] at h₁ h₂
-  rw [Adjunction.exchangeLeft_app, hθ]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, h₂,
-    Adjunction.left_triangle_components_assoc]
-
-/-- The pullback comparison of an identity square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up to the
-identifications `L(𝟙)^* ≅ 𝟭`. -/
-lemma boundedConstructiblePullbackSquareComparison_hom_app_of_id
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (j : U ⟶ Y) (sq : CommSq j (𝟙 U) (𝟙 Y) j) (M : Dᵇc(Y.left)⟦Λ⟧) :
-    (boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app M =
-      (boundedConstructibleUpperStarId Λ ℓ U).hom.app
-          ((boundedConstructibleUpperStar Λ ℓ j).obj M) ≫
-        (boundedConstructibleUpperStar Λ ℓ j).map
-          ((boundedConstructibleUpperStarId Λ ℓ Y).inv.app M) := by
-  have h₁ : (boundedConstructibleUpperStarComp Λ ℓ (𝟙 U) j).inv.app M =
-      (boundedConstructibleUpperStarId Λ ℓ U).hom.app _ ≫
-        eqToHom (by rw [Category.id_comp]; rfl) := by
-    rw [← cancel_epi ((boundedConstructibleUpperStarComp Λ ℓ (𝟙 U) j).hom.app M),
-      Iso.hom_inv_id_app, ← Category.assoc, boundedConstructibleUpperStarComp_id_left_app,
-      eqToHom_trans, eqToHom_refl]
-  have h₂ : (boundedConstructibleUpperStarComp Λ ℓ j (𝟙 Y)).hom.app M =
-      eqToHom (by rw [Category.comp_id]; rfl) ≫
-        (boundedConstructibleUpperStar Λ ℓ j).map
-          ((boundedConstructibleUpperStarId Λ ℓ Y).inv.app M) :=
-    (Iso.eq_comp_inv ((boundedConstructibleUpperStar Λ ℓ j).mapIso
-      ((boundedConstructibleUpperStarId Λ ℓ Y).app M))).2
-        (boundedConstructibleUpperStarComp_id_right_app Λ ℓ j M)
-  simp only [boundedConstructiblePullbackSquareComparison, Iso.trans_hom, Iso.symm_hom,
-    eqToIso.hom, NatTrans.comp_app, eqToHom_app]
-  rw [h₁, h₂]
-  simp only [Category.assoc, eqToHom_refl, Category.id_comp]
-
-/-- `openSquareExchange_inv_app_of_id` for an arbitrary coefficient ring `Λ`. -/
-lemma baseChangeIso_inv_app_of_id_aux
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (j : U ⟶ Y) [IsOpenImmersion j.left] (sq : IsPullback (𝟙 U) j j (𝟙 Y))
-    (K : Dᵇc(U.left)⟦Λ⟧) :
-    (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' Λ ℓ sq).inv.app K =
-      (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).map
-          ((boundedConstructibleUpperStarId Λ ℓ U).hom.app K) ≫
-        (boundedConstructibleUpperStarId Λ ℓ Y).inv.app _ := by
-  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_inv]
-  exact Adjunction.exchangeLeft_app_of_iso_id _ _ _ _
-    (boundedConstructiblePullbackSquareComparison_hom_app_of_id ℓ Λ j _) K
-
-/-- **The open-square exchange of an identity square is the identity** (blueprint
-`lem-trf-open-square-exchange`): for the square `𝟙 ≫ j = j ≫ 𝟙`, `b_𝟙 : L(𝟙)^* j_! ≅ j_! L(𝟙)^*`
-is `L(𝟙)^* j_! ≅ j_! ≅ j_! L(𝟙)^*`. -/
-lemma openSquareExchange_inv_app_of_id (j : U ⟶ Y) [IsOpenImmersion j.left]
-    (sq : IsPullback (𝟙 U) j j (𝟙 Y)) (K : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (openSquareExchange ℓ sq).inv.app K =
-      (boundedConstructibleOpenImmersionLowerShriek _ ℓ j).map
-          ((boundedConstructibleUpperStarId _ ℓ U).hom.app K) ≫
-        (boundedConstructibleUpperStarId _ ℓ Y).inv.app _ :=
-  baseChangeIso_inv_app_of_id_aux ℓ _ j sq K
-
 end IdSquare
 
 /-! ### The Weil extension by zero -/
@@ -264,46 +151,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {ΦU : U ⟶ U} {ΦY : Y ⟶ Y} {j : U ⟶ Y} [IsOpenImmersion j.left]
-
-/-- **The Weil extension by zero** (blueprint `def-trf-weil-extension-zero`): for an open
-immersion `j : U ⟶ Y` and a cartesian square `Φ_U ≫ j = j ≫ Φ_Y` (for instance that of
-`isPullback_frobeniusIterate_of_isOpenImmersion`), a Weil object `(K, φ)` for `Φ_U` is sent to
-`(j_! K, j_! φ ∘ b_{Φ_Y})`, with
-```
-LΦ_Y^* j_! K --b_{Φ_Y}--> j_! LΦ_U^* K --j_! φ--> j_! K,
-```
-`b_{Φ_Y}` the open-square exchange `openSquareExchange` (blueprint
-`rem-ptr-trf-weil-extension-zero-10`). Being a functor between categories of Weil objects, the
-pair `(j_! K, j_! φ ∘ b_{Φ_Y})` is again a Weil object and the construction is functorial in
-`(K, φ)` (blueprint `rem-ptr-trf-weil-extension-zero-11`). -/
-noncomputable def weilOpenLowerShriek (sq : IsPullback ΦU j j ΦY) :
-    WeilBoundedConstructible ℓ ΦU ⥤ WeilBoundedConstructible ℓ ΦY :=
-  IsoAlgebra.mapOfNatIso (openSquareExchange ℓ sq)
-
-@[simp]
-lemma weilOpenLowerShriek_obj_carrier (sq : IsPullback ΦU j j ΦY)
-    (K : WeilBoundedConstructible ℓ ΦU) :
-    ((weilOpenLowerShriek ℓ sq).obj K).carrier =
-      (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
-        K.carrier :=
-  rfl
-
-/-- The Weil structure of the extension by zero is `j_! φ ∘ b_{Φ_Y}` (blueprint
-`def-trf-weil-extension-zero`). -/
-lemma weilOpenLowerShriek_obj_str (sq : IsPullback ΦU j j ΦY)
-    (K : WeilBoundedConstructible ℓ ΦU) :
-    ((weilOpenLowerShriek ℓ sq).obj K).str =
-      (openSquareExchange ℓ sq).app K.carrier ≪≫
-        (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).mapIso
-          K.str :=
-  IsoAlgebra.mapOfNatIso_obj_str _ _
-
-/-- The Weil extension by zero lifts the extension by zero along the forgetful functors. -/
-lemma weilOpenLowerShriek_comp_forget (sq : IsPullback ΦU j j ΦY) :
-    weilOpenLowerShriek ℓ sq ⋙ WeilBoundedConstructible.forget ℓ ΦY =
-      WeilBoundedConstructible.forget ℓ ΦU ⋙
-        boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j :=
-  rfl
 
 end Weil
 

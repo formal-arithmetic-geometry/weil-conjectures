@@ -95,19 +95,6 @@ lemma pre_app_comp_ihomIsoIhomUnitTensor_hom {X Y : C} (f : X ⟶ Y) :
     pre_app_whiskerRight_comp_ihomTensorToIhom_assoc]
   simp only [Category.assoc, NatTrans.naturality, NatTrans.naturality_assoc]
 
-/-- Duality into an object `W` isomorphic to an invertible object `T` is the coefficient dual
-twisted by `T`: the natural isomorphism `θ : [-, W] ≅ [-, 𝟙_ C] ⊗ T` of contravariant functors
-with components `CategoryTheory.MonoidalClosed.ihomIsoIhomUnitTensor`. -/
-noncomputable def ihomFlipIsoIhomUnitTensor :
-    internalHom.flip.obj W ≅ internalHom.flip.obj (𝟙_ C) ⋙ tensorRight T :=
-  NatIso.ofComponents (fun X ↦ ihomIsoIhomUnitTensor γ hT X.unop)
-    (fun f ↦ pre_app_comp_ihomIsoIhomUnitTensor_hom γ hT f.unop)
-
-@[simp]
-lemma ihomFlipIsoIhomUnitTensor_app (X : Cᵒᵖ) :
-    (ihomFlipIsoIhomUnitTensor γ hT).app X = ihomIsoIhomUnitTensor γ hT X.unop :=
-  rfl
-
 /-- The isomorphism `θ_X : [X, W] ≅ [X, 𝟙_ C] ⊗ T` is compatible with the evaluations: the
 square
 ```
@@ -131,30 +118,6 @@ lemma whiskerLeft_ihomIsoIhomUnitTensor_hom_comp (X : C) :
   rw [this, MonoidalCategory.whiskerLeft_comp_assoc, ihom.ev_naturality_assoc,
     ihom.ev_naturality_assoc, Iso.inv_hom_id, Category.comp_id]
 
-/-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (compatibility with
-twisting the source).
-
-The isomorphism `θ` is compatible with internal currying: for all `K` and `A`, the square
-```
-  [K ⊗ A, W] ────────────────── θ_{K ⊗ A} ──────────────────→ [K ⊗ A, 𝟙_ C] ⊗ T
-       │                                                              │
-   ihomCurry                                                 ihomCurry ▷ T
-       ↓                                                              ↓
-  [A, [K, W]] ── [A, θ_K] ──→ [A, [K, 𝟙_ C] ⊗ T] ←── ihomTensorToIhom ── [A, [K, 𝟙_ C]] ⊗ T
-```
-commutes. For `A = Λ_X⟦n⟧` this is the compatibility of `θ` with shifts. -/
-lemma ihomCurry_comp_map_ihomIsoIhomUnitTensor_hom (K A : C) :
-    ihomCurry K A W ≫ (ihom A).map (ihomIsoIhomUnitTensor γ hT K).hom =
-      (ihomIsoIhomUnitTensor γ hT (K ⊗ A)).hom ≫ ihomCurry K A (𝟙_ C) ▷ T ≫
-        ihomTensorToIhom A ((ihom K).obj (𝟙_ C)) T := by
-  rw [← cancel_epi (ihomIsoIhomUnitTensor γ hT (K ⊗ A)).inv, Iso.inv_hom_id_assoc,
-    ← cancel_mono ((ihom A).map (ihomIsoIhomUnitTensor γ hT K).inv), Category.assoc,
-    Category.assoc, ← Functor.map_comp, Iso.hom_inv_id, Functor.map_id, Category.comp_id,
-    Category.assoc,
-    ihomIsoIhomUnitTensor_inv, ihomIsoIhomUnitTensor_inv, Category.assoc, Category.assoc,
-    map_comp_ihomCurry, map_comp_ihomCurry_assoc, ihomTensorToIhom_comp_ihomCurry_assoc]
-  simp only [Functor.map_comp]
-
 /-- The compatibility of `θ_X` with the evaluations, read along `θ_X⁻¹`. -/
 @[reassoc]
 lemma whiskerLeft_ihomIsoIhomUnitTensor_inv_comp (X : C) :
@@ -173,74 +136,8 @@ open Functor.LaxMonoidal Functor.OplaxMonoidal
 variable {D : Type*} [Category* D] [MonoidalCategory D] [MonoidalClosed D] (F : C ⥤ D)
   [F.Monoidal]
 
-/-- The comparison `F [X, 𝟙_ C] ⟶ [F X, 𝟙_ D]` of coefficient duals along a monoidal functor:
-the comparison map `F [X, 𝟙_ C] ⟶ [F X, F 𝟙_ C]`
-(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) followed by `F 𝟙_ C ≅ 𝟙_ D`. -/
-noncomputable def ihomUnitComparison (X : C) :
-    F.obj ((ihom X).obj (𝟙_ C)) ⟶ (ihom (F.obj X)).obj (𝟙_ D) :=
-  (ihomComparison F X).natTrans.app (𝟙_ C) ≫ (ihom (F.obj X)).map (η F)
-
 variable {T W : C} (γ : T ≅ W) (hT : IsInvertible T) {T' W' : D} (γ' : T' ≅ W')
   (hT' : IsInvertible T') (e : F.obj T ≅ T') (eW : F.obj W ≅ W')
-
-/-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (compatibility with finite
-reduction and scalar extension).
-
-The twist interchange `θ_X : [X, W] ≅ [X, 𝟙_ C] ⊗ T` is compatible with a monoidal functor
-`F` (for instance a change of coefficients: finite reduction or extension of scalars), given
-compatible identifications `F T ≅ T'` and `F W ≅ W'`: the square
-```
-  F [X, W] ──────────── F θ_X ───────────→ F ([X, 𝟙_ C] ⊗ T) ≅ F [X, 𝟙_ C] ⊗ F T
-     │                                                    │
-  comparison, e_W                              comparison ⊗ e
-     ↓                                                    ↓
-  [F X, W'] ─────────── θ'_{F X} ──────────────→ [F X, 𝟙_ D] ⊗ T'
-```
-commutes.
-
-This is only the formal core of the change-of-coefficients clause: it is not yet instantiated
-for finite reduction `Λ → Λ/ℓ^n` or extension of scalars on derived étale categories, and the
-compatibility of `θ` with shifts under a change of coefficients is not yet stated. Both remain
-to be done before the change-of-coefficients clause of `thm-sf-dual-perfect` is complete. -/
-lemma map_ihomIsoIhomUnitTensor_hom (h : F.map γ.hom ≫ eW.hom = e.hom ≫ γ'.hom) (X : C) :
-    F.map (ihomIsoIhomUnitTensor γ hT X).hom ≫ δ F _ _ ≫ (ihomUnitComparison F X ⊗ₘ e.hom) =
-      (ihomComparison F X).natTrans.app W ≫ (ihom (F.obj X)).map eW.hom ≫
-        (ihomIsoIhomUnitTensor γ' hT' (F.obj X)).hom := by
-  have core : F.obj X ◁ μ F _ T ≫ μ F X _ ≫
-      F.map ((α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ T ≫ (λ_ T).hom) =
-        (α_ _ _ _).inv ≫ (F.obj X ◁ ihomUnitComparison F X ≫ (ihom.ev (F.obj X)).app (𝟙_ D)) ▷
-          F.obj T ≫ (λ_ _).hom := by
-    simp only [Functor.map_comp, Functor.Monoidal.map_associator_inv,
-      Functor.Monoidal.map_whiskerRight, Functor.Monoidal.map_leftUnitor, Category.assoc,
-      Functor.Monoidal.μ_δ_assoc, Functor.Monoidal.whiskerLeft_μ_δ_assoc, ihomUnitComparison,
-      MonoidalCategory.whiskerLeft_comp_assoc, ihom.ev_naturality, ihomComparison_ev_assoc,
-      comp_whiskerRight]
-    erw [Functor.Monoidal.μ_δ_assoc, Functor.Monoidal.μ_δ_assoc]
-  have key : μ F _ _ ≫ F.map (ihomIsoIhomUnitTensor γ hT X).inv ≫
-      (ihomComparison F X).natTrans.app W ≫ (ihom (F.obj X)).map eW.hom =
-        (ihomUnitComparison F X ⊗ₘ e.hom) ≫ (ihomIsoIhomUnitTensor γ' hT' (F.obj X)).inv := by
-    apply uncurry_injective
-    have h₁ : X ◁ (ihomIsoIhomUnitTensor γ hT X).inv ≫ (ihom.ev X).app W =
-        ((α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ T ≫ (λ_ T).hom) ≫ γ.hom := by
-      rw [← Iso.comp_inv_eq, Category.assoc, whiskerLeft_ihomIsoIhomUnitTensor_inv_comp]
-    have h₂ : F.obj X ◁ (ihomIsoIhomUnitTensor γ' hT' (F.obj X)).inv ≫
-        (ihom.ev (F.obj X)).app W' =
-        ((α_ _ _ _).inv ≫ (ihom.ev (F.obj X)).app (𝟙_ D) ▷ T' ≫ (λ_ T').hom) ≫ γ'.hom := by
-      rw [← Iso.comp_inv_eq, Category.assoc, whiskerLeft_ihomIsoIhomUnitTensor_inv_comp]
-    rw [uncurry_eq, uncurry_eq]
-    simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
-    rw [h₂, ihom.ev_naturality, ihomComparison_ev_assoc, μ_natural_right_assoc,
-      ← F.map_comp_assoc, h₁, F.map_comp_assoc, h]
-    rw [reassoc_of% core]
-    simp only [tensorHom_def, MonoidalCategory.whiskerLeft_comp, Category.assoc, comp_whiskerRight]
-    rw [associator_inv_naturality_right_assoc, associator_inv_naturality_middle_assoc,
-      whisker_exchange_assoc]
-    dsimp only [Functor.id_obj]
-    rw [leftUnitor_naturality_assoc]
-  rw [← cancel_mono (ihomIsoIhomUnitTensor γ' hT' (F.obj X)).inv, Category.assoc,
-    Category.assoc, ← key, Category.assoc, Category.assoc, Iso.hom_inv_id, Category.comp_id,
-    Functor.Monoidal.δ_μ_assoc, ← F.map_comp_assoc, Iso.hom_inv_id, F.map_id,
-    Category.id_comp]
 
 end Functor
 
@@ -358,17 +255,6 @@ theorem isIso_toIhomIhom_of_isDualizable {X : C} (hX : IsDualizable X) :
   have := isIso_toIhomIhomUnit X
   rw [← toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom γ hT X] at this
   exact IsIso.of_isIso_comp_right _ (ihomIhomIsoIhomIhomUnit γ hT X).hom
-
-/-- Duality into an object `W` isomorphic to an invertible object restricts to an
-anti-equivalence of the dualizable objects, with quasi-inverse itself: the unit and the counit
-are the double-dual isomorphisms `X ≅ [[X, W], W]`
-(`CategoryTheory.MonoidalClosed.isIso_toIhomIhom_of_isDualizable`). -/
-noncomputable def dualizableIhomEquivalence :
-    (ObjectProperty.FullSubcategory (IsDualizable (C := C)))ᵒᵖ ≌
-      ObjectProperty.FullSubcategory (IsDualizable (C := C)) :=
-  ObjectProperty.liftDualEquivalence _ (internalHom.flip.obj W)
-    (fun _ hX ↦ isDualizable_ihom_obj γ hT hX) (toIhomIhomNatTrans W)
-    (fun _ hX ↦ isIso_toIhomIhom_of_isDualizable γ hT hX)
 
 end Braided
 

@@ -64,48 +64,6 @@ theorem rightAcyclic_lowerStar_of_isZero_rightDerived {U V : Scheme.{u}} (f : U 
     ← HomologicalComplex.exactAt_iff_isZero_homology] at h'
   exact h'
 
-private lemma affine_etale_sections_vanishing (X : Scheme.{u})
-    (I : Sheaf X.smallEtaleTopology A) [Injective I]
-    (W : X.AffineEtale) (q : ℕ) :
-    IsZero (((sectionsFunctor A ((toProEt X).obj ((AffineEtale.Spec X).obj W))).rightDerived
-      (q + 1)).obj ((comparisonUpperStar A X).obj I)) := by
-  let T := (toProEt X).obj ((AffineEtale.Spec X).obj W)
-  have : Etale T.hom := ((AffineEtale.Spec X).obj W).prop
-  have : IsAffine T.left := by
-    change IsAffine ((AffineEtale.Spec X).obj W).left
-    rw [AffineEtale.Spec_obj_left]
-    infer_instance
-  have hT : WeaklyEtale T.hom := T.prop
-  let j := ProEtale.localizationRestriction A T.hom hT
-  let Γ := sheafToPresheaf (ProEt.topology T.left) A ⋙
-    (evaluation _ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 T.left)
-      (MorphismProperty.id_mem _ T.left)))
-  let e : T ≅ (MorphismProperty.Over.map ⊤ hT).obj
-      (MorphismProperty.Over.mk ⊤ (𝟙 T.left) (MorphismProperty.id_mem _ T.left)) :=
-    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
-  have : j.Additive := {}
-  let eΓ : sectionsFunctor A T ≅ j ⋙ Γ :=
-    NatIso.ofComponents (fun G ↦ G.obj.mapIso e.op) (fun φ ↦ (φ.hom.naturality e.inv.op).symm)
-  have : PreservesFiniteColimits j :=
-    preservesFiniteColimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
-  have : PreservesFiniteLimits j :=
-    preservesFiniteLimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
-  have : Injective ((Etale.upperStar A T.hom).obj I) :=
-    Etale.injective_upperStar_obj_of_etale' A T.hom I
-  have h := isZero_rightDerived_globalSections_comparisonUpperStar_of_isAffine A T.left
-    ((Etale.upperStar A T.hom).obj I) q
-  let eR : (sectionsFunctor A T).rightDerived (q + 1) ≅
-      (j ⋙ Γ).rightDerived (q + 1) :=
-    { hom := NatTrans.rightDerived eΓ.hom (q + 1)
-      inv := NatTrans.rightDerived eΓ.inv (q + 1)
-      hom_inv_id := by rw [← NatTrans.rightDerived_comp, eΓ.hom_inv_id, NatTrans.rightDerived_id]
-      inv_hom_id := by rw [← NatTrans.rightDerived_comp, eΓ.inv_hom_id, NatTrans.rightDerived_id] }
-  refine IsZero.of_iso h (eR.app _ ≪≫
-    (Functor.rightDerivedCompIsoOfExact j Γ (q + 1)).app _ ≪≫ ?_)
-  exact (Γ.rightDerived (q + 1)).mapIso
-    (((ProEtale.upperStarIsoLocalizationRestriction A T.hom hT).app _).symm ≪≫
-      (comparisonUpperStarUpperStarIso A T.hom).app I)
-
 section Acyclicity
 
 /-- **Comparison of global cohomology.** The derived global sections of the comparison pullback

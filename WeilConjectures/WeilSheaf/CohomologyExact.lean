@@ -84,14 +84,6 @@ instance preservesEpimorphisms_Γ_geometricFiber_spec :
   exact Functor.PreservesEpimorphisms.of_iso
     (ProEtale.globalSectionsUpperStarIso (WeilCoefficients.{u} l) (geometricFiberSpecIso k₀))
 
-/-- The global sections of Weil sheaves on `Spec k₀` form an exact functor: they are left exact,
-and they preserve epimorphisms, being sections on the spectrum of `k̄`. -/
-theorem exact_map_globalSectionsFunctor {S : ShortComplex (WeilSheaf k₀ l (Spec (.of k₀)))}
-    (hS : S.Exact) : (S.map (globalSectionsFunctor k₀ l (Spec (.of k₀)))).Exact := by
-  have : (globalSectionsFunctor k₀ l (Spec (.of k₀))).PreservesHomology :=
-    Functor.preservesHomology_of_preservesEpis_and_kernels _
-  exact hS.map _
-
 end GlobalSectionsFunctor
 
 end WeilSheaf
@@ -102,25 +94,6 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-
-/-- The cohomology sheaves of the direct image with compact support of a distinguished triangle
-of Weil complexes form an exact sequence of Weil sheaves on `Spec k₀`. -/
-theorem exact_homologySheaf_derivedLowerShriek {T : Triangle (WeilComplex k₀ l X)}
-    (hT : T ∈ distTriang _) (r : ℤ) :
-    (ShortComplex.mk
-      ((homologySheaf r).map ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).map T.mor₁))
-      ((homologySheaf r).map ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).map T.mor₂))
-      (by rw [← Functor.map_comp, ← Functor.map_comp, comp_distTriang_mor_zero₁₂ T hT,
-        Functor.map_zero, Functor.map_zero])).Exact := by
-  let Φ := derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))
-  have hT' := (WeilComplex.objectProperty k₀ l (Spec (.of k₀))).ι.map_distinguished _
-    (Φ.map_distinguished T hT)
-  have h := (_root_.DerivedCategory.homologyFunctor _ r).map_distinguished_exact _ hT'
-  have := (WeilSheaf.objectProperty k₀ l (Spec (.of k₀))).preservesKernels_ι
-  have : (WeilSheaf.objectProperty k₀ l (Spec (.of k₀))).ι.PreservesHomology :=
-    Functor.preservesHomology_of_preservesEpis_and_kernels _
-  exact (ShortComplex.exact_map_iff_of_faithful _
-    (WeilSheaf.objectProperty k₀ l (Spec (.of k₀))).ι).1 h
 
 end WeilComplex
 

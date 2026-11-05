@@ -60,52 +60,6 @@ noncomputable def higherDirectImageIsoHomologyRightDerivedLowerStar {X Y : Schem
     (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusCompatibility.app
       ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F))
 
-/-- Blueprint `def-exc-open-complement-bound`: Open-complement cohomological-dimension condition.
-
-For a finite ring `Λ`, a quasi-compact open immersion `j : V ⟶ T` and `c ≥ 0`, the pair `(V, T)`
-satisfies the *open-complement condition with constant `c`* if `Rᵠj_* M = 0` for every `q > c`
-and every sheaf `M` of `Λ`-modules on `V_ét`, and if `Rᵠj_*` carries constructible sheaves to
-constructible sheaves in every degree. -/
-def OpenComplementBound {V T : Scheme.{u}} (j : V ⟶ T) (c : ℕ) : Prop :=
-  HasUniformDirectImageVanishingLE Λ j c ∧
-    ∀ (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsConstructibleSheaf F →
-      ∀ q : ℤ, IsConstructibleSheaf (higherDirectImage Λ j q F)
-
-variable {Λ} in
-/-- The open-complement condition is monotone in its constant. -/
-lemma OpenComplementBound.mono {V T : Scheme.{u}} {j : V ⟶ T} {c c' : ℕ} (hcc' : c ≤ c')
-    (h : OpenComplementBound Λ j c) : OpenComplementBound Λ j c' :=
-  ⟨fun M q hq ↦ h.1 M q (by omega), h.2⟩
-
-/-- Blueprint `thm-pur-open-complement-unconditional`: The open-complement condition is
-unconditional and uniform in the coefficient ring.
-
-Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invertible in `k` (for
-instance annihilated by a power of a prime `ℓ ≠ char k`), `T` a finite-type `k`-scheme of
-dimension at most `d`, and `j : V ⟶ T` a quasi-compact open immersion. Then `(V, T)` satisfies the
-open-complement condition with constant `2d`: `Rᵠj_* M = 0` for every `q > 2d` and every sheaf
-`M` of `Λ`-modules on `V_ét`, and `Rᵠj_* F` is constructible for every constructible `F`. The
-constant `2d` depends on `T` alone, not on `Λ`.
-
-The vanishing is `AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`
-(`lem-sf-etale-direct-image-vanishing`), `V` being of finite type over `k` of dimension at most
-`d`; the constructibility is the finiteness of `Rj_*`
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion`). -/
-theorem openComplementBound_two_mul [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
-    [HasInvertibleExponent Λ (Spec (.of k))] {V T : Scheme.{u}} (aT : T ⟶ Spec (.of k))
-    [LocallyOfFiniteType aT] [QuasiCompact aT] (j : V ⟶ T) [IsOpenImmersion j] [QuasiCompact j]
-    (d : ℕ) (hd : topologicalKrullDim T ≤ (d : WithBot ℕ∞)) :
-    OpenComplementBound Λ j (2 * d) := by
-  refine ⟨hasUniformDirectImageVanishingLE_two_mul Λ j (j ≫ aT) aT rfl d
-    ((j.isOpenEmbedding.isInducing.topologicalKrullDim_le).trans hd), fun F hF q ↦ ?_⟩
-  have hb := boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion Λ aT j
-    ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
-    (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)
-  have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj
-      ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) :=
-    hb.2 q
-  exact IsConstructibleSheaf.of_iso (higherDirectImageIsoHomologyRightDerivedLowerStar Λ j q F).symm
-
 end Etale
 
 end AlgebraicGeometry

@@ -127,23 +127,4 @@ theorem IsModelFrobenius.finite_fixedPoint [IsAlgClosed k] [Finite k₀] [QuasiC
       ((FiniteField.frobeniusAlgHom k₀ k ^ m : k →ₐ[k₀] k) : k →+* k)) := h.to_subtype
   exact Finite.of_equiv _ (hΦ.fixedPointEquiv m).symm
 
-/-- **Counting fixed points.** For a function `h` on the points of `X₀` and `m ≥ 1`, the sum of
-`h` over the closed points of `X₀` underlying the rational points of `X` fixed by `Φ_m` is
-`∑_{deg y ∣ m} deg y • h y`: a closed point `y` of degree `d ∣ m` carries exactly `d` fixed
-points (blueprint `thm-trf-frobenius-fixed-points`). The sum may be taken over any finite set
-`T` of closed points containing those of degree dividing `m`. -/
-theorem IsModelFrobenius.sum_fixedPoint [IsAlgClosed k] [Finite k₀]
-    (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : m ≠ 0) [Fintype (FixedPoint Φ m)] {M : Type*}
-    [AddCommMonoid M] (h : X₀ → M) {T : Finset X₀.finitePoints}
-    (hT : ∀ y : X₀.finitePoints, f₀.degreeOver y.1 ∣ m → y ∈ T) :
-    ∑ x : FixedPoint Φ m, h ((x.1.left ≫ p).base (default : Spec (.of k))) =
-      ∑ y ∈ T with f₀.degreeOver y.1 ∣ m, f₀.degreeOver y.1 • h y.1 := by
-  classical
-  let _ : Fintype k₀ := Fintype.ofFinite k₀
-  let _ : Fintype (f₀.fixedFieldPoints
-      ((FiniteField.frobeniusAlgHom k₀ k ^ m : k →ₐ[k₀] k) : k →+* k)) :=
-    Fintype.ofEquiv _ (hΦ.fixedPointEquiv m)
-  rw [← f₀.sum_fixedFieldPoints hm _ (frobeniusAlgHom_pow_apply (k := k) m) h hT]
-  exact Fintype.sum_equiv (hΦ.fixedPointEquiv m) _ _ (fun _ ↦ rfl)
-
 end AlgebraicGeometry.ProEtale.CondensedRing

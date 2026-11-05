@@ -54,24 +54,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-
-
-
-
-
-/-- The same completed sheaf with commutativity retained. Forgetting commutativity
-recovers the recorded completed ring sheaf definitionally.
-Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
-noncomputable def completedIntegralCommRingSheaf (D : FiniteFieldDatum.{d})
-    (hl : l ≠ D.p) :
-    Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)} :=
-  let _ := hl
-  completedIntegralCommRingSheafUnrestricted l E Y
-
-/-- The existing limit projection as a morphism of commutative ring sheaves.
-Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
-noncomputable def completedIntegralCommRingProjection (n : ℕ) :
-    completedIntegralCommRingSheaf l E Y D hl ⟶ integralCoefficientCommRingSheaf l E Y n :=
-  completedIntegralCommRingProjectionUnrestricted l E Y n
-
 end WeilConjectures

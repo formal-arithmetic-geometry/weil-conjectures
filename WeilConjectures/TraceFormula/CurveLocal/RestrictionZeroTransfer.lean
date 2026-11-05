@@ -88,7 +88,6 @@ theorem restrictionZero [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0) : RestrictionZ
   fun M _ _ _ hΛ L K hL hK hKy P eP ↦
     M.sectionsWithSupportRestriction_eq_zero ℓ hℓ hΛ L K hL hK hKy P eP
 
-
 variable (ℓ) in
 /-- **Classical coefficient data on a strictly local model**: a finite `ℓ`-primary coefficient
 ring `Λ`, complexes `L, K ∈ D^b_{ctf}(X, Λ)` with `K_ȳ = 0`, and a model `P` of `(L ⊠ K)|_T` on
@@ -191,69 +190,6 @@ noncomputable abbrev frobeniusLocalModel [IsAlgClosed k] [SmoothOfRelativeDimens
     (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (z : RationalPoint F.F) :
     Etale.CurveLocalModel k :=
   Etale.CurveLocalModel.ofModelFrobenius hΦ hm (z ≫ F.ι) (comp_ι_comp_frobeniusIterate v F z)
-
-variable (ℓ) in
-/-- A morphism `ρ` of the point category `Dᵇc(s)⟦ℚ̄_ℓ⟧` *has an integral model reducing to
-classical supported restrictions on the strictly local model `M`* if there is a morphism
-`f₀ : A₀ ⟶ B₀` of perfect `𝒪_E`-complexes with `Fib_s(ρ) ≅ ℚ̄_ℓ ⊗ᴸ f₀` (as arrows) such that for
-every `n` there are classical coefficient data on `M` (with coefficients `Λ`, a ring under
-`𝒪_E`) for which `f₀` followed by the reduction `B₀ ⟶ B₀ / ℓ^n` (part of a distinguished triangle
-on the multiplication by `ℓ^n`) is the reduction `A₀ ⟶ RΓ_a(T, P)` followed by the classical
-supported restriction `ρ_{a,b}`, read in `D(𝒪_E)`. -/
-def HasIntegralReductionModel [IsAlgClosed k] (M : Etale.CurveLocalModel k)
-    (E : FiniteIntermediateField ℓ) {A B : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (ρ : A ⟶ B) : Prop :=
-  ∃ (A₀ B₀ : DerivedCategory (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers ℓ E.1))))
-    (f₀ : A₀ ⟶ B₀),
-    A₀.IsPerfect ∧ B₀.IsPerfect ∧
-    Nonempty (Arrow.mk ((pointFiberFunctor ℓ k).map ρ) ≅
-      Arrow.mk ((ModuleCat.derivedExtendScalars (PadicAlgCl.integersToULift.{u} ℓ E.1)
-        (PadicAlgCl.flat_integersToULift ℓ E.1)).map f₀)) ∧
-    ∀ n : ℕ, ∃ (D : M.CoefficientDatum ℓ)
-      (φ : Shrink.{u + 1} (PadicAlgCl.integers ℓ E.1) →+* D.Λ)
-      (πA : A₀ ⟶ (ModuleCat.restrictScalars φ).mapDerivedCategory.obj D.source)
-      (πB : B₀ ⟶ (ModuleCat.restrictScalars φ).mapDerivedCategory.obj D.target)
-      (δ : (ModuleCat.restrictScalars φ).mapDerivedCategory.obj D.target ⟶ B₀⟦(1 : ℤ)⟧),
-      Pretriangulated.Triangle.mk (((ℓ : ℤ) ^ n) • 𝟙 B₀) πB δ ∈ distTriang _ ∧
-      πA ≫ (ModuleCat.restrictScalars φ).mapDerivedCategory.map D.supportedRestriction =
-        f₀ ≫ πB
-
-/-- **Integral vanishing criterion**: if `RestrictionZero` holds, a morphism of the point category
-with an integral model reducing to classical supported restrictions vanishes. The reductions of
-the integral model `f₀` modulo every `ℓ^n` vanish, so `f₀` is divisible by every `ℓ^n`, hence
-zero by the Krull intersection theorem (`DerivedCategory.IsPerfect.eq_zero_of_forall_eq_pow_smul`);
-the fibre functor of the point is faithful. -/
-lemma eq_zero_of_hasIntegralReductionModel [IsAlgClosed k] {M : Etale.CurveLocalModel k}
-    {E : FiniteIntermediateField ℓ} {A B : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    {ρ : A ⟶ B} (H : HasIntegralReductionModel ℓ M E ρ)
-    (hRZ : Etale.CurveLocalModel.RestrictionZero k ℓ) : ρ = 0 := by
-  obtain ⟨A₀, B₀, f₀, hA, hB, ⟨eArr⟩, hred⟩ := H
-  have hf₀ : f₀ = 0 := by
-    refine DerivedCategory.IsPerfect.eq_zero_of_forall_eq_pow_smul hA hB
-      (PadicAlgCl.natCast_mem_maximalIdeal_shrink ℓ E.1) fun n ↦ ?_
-    have hn := hred n
-    obtain ⟨D, hn⟩ := hn
-    obtain ⟨φ, hn⟩ := hn
-    obtain ⟨πA, πB, δ, hn⟩ := hn
-    obtain ⟨hT, hcomm⟩ := hn
-    have h0 := D.supportedRestriction_eq_zero hRZ
-    simp only [h0, Functor.map_zero, Limits.comp_zero] at hcomm
-    have hex := Pretriangulated.Triangle.coyoneda_exact₂ _ hT f₀ hcomm.symm
-    refine ⟨hex.choose, hex.choose_spec.trans ?_⟩
-    exact Linear.comp_zsmul_natCast_pow_id hex.choose ℓ n
-  have : (pointFiberFunctor ℓ k).Additive := by unfold pointFiberFunctor; infer_instance
-  have : (pointFiberFunctor ℓ k).PreservesZeroMorphisms :=
-    Functor.preservesZeroMorphisms_of_additive _
-  apply (bijective_pointFiberFunctor_map ℓ k _ _).1
-  have hw := eArr.hom.w
-  simp only [Arrow.mk_hom, hf₀, Functor.map_zero, Limits.comp_zero] at hw
-  simp only [Functor.map_zero]
-  have hr : eArr.hom.right ≫ eArr.inv.right = 𝟙 _ := by
-    rw [← Arrow.comp_right, Iso.hom_inv_id, Arrow.id_right]
-  calc (pointFiberFunctor ℓ k).map ρ
-      = ((pointFiberFunctor ℓ k).map ρ ≫ eArr.hom.right) ≫ eArr.inv.right := by
-        rw [Category.assoc, hr]; exact (Category.comp_id _).symm
-    _ = 0 := by rw [← hw, Limits.zero_comp]
 
 end Correspondence
 

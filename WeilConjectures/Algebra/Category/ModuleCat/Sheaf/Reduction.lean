@@ -296,29 +296,4 @@ noncomputable def reductionDatum (f : A →+* A') (hf : Function.Surjective f) (
     exact CochainComplex.quasiIso_map_of_iso_tensorRight _ _
       (reductionFunctorCompRestrictScalarsIso J f hf) φ h₁ h₂
 
-/-- **A flat sheaf preserves the exactness of `A --x--> A --y--> A`.** If `F` is a flat sheaf of
-`A`-modules and the multiplications by `x` and `y` form an exact sequence `A ⟶ A ⟶ A`, then so
-do the multiplications by `x` and `y` on `F`. -/
-lemma exact_smul_of_flat {F : Sheaf J (ModuleCat.{u + 1} A)} (hF : ObjectProperty.flat F)
-    (x y : A) (hxy : x * y = 0)
-    (hex : Function.Exact (fun b : A ↦ x * b) (fun b : A ↦ y * b)) :
-    (ShortComplex.mk (x • 𝟙 F) (y • 𝟙 F) (by simp [smul_smul, mul_comm y x, hxy])).Exact := by
-  have h₀ : (x • 𝟙 (ModuleCat.of A A)) ≫ (y • 𝟙 (ModuleCat.of A A)) = 0 := by
-    simp [smul_smul, mul_comm y x, hxy]
-  have hS₀ : (ShortComplex.mk _ _ h₀).Exact := by
-    rw [ShortComplex.moduleCat_exact_iff]
-    intro b hb
-    obtain ⟨c, rfl⟩ := (hex b).1 (by simpa using hb)
-    exact ⟨c, by simp⟩
-  have : PreservesFiniteLimits (tensorLeft F) := hF.tensorLeft.1
-  have : PreservesFiniteColimits (tensorLeft F) := hF.tensorLeft.2
-  exact MonoidalCategory.exact_smul_of_exact_map_tensorLeft _
-    ((exact_constantSheaf_map_smul J h₀ hS₀).map (tensorLeft F)) (ρ_ F) (by
-      have hy : (constantSheaf J (ModuleCat.{u + 1} A)).map (y • 𝟙 (ModuleCat.of A A)) =
-          y • 𝟙 (𝟙_ (Sheaf J (ModuleCat.{u + 1} A))) := by
-        rw [CategoryTheory.Functor.map_smul, CategoryTheory.Functor.map_id]
-        rfl
-      erw [hy]
-      simp) _
-
 end CategoryTheory.Sheaf

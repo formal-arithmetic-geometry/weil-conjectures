@@ -94,38 +94,6 @@ section BaseChange
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
   [WeaklyEtale j] [WeaklyEtale j']
 
-/-- **Weakly étale base change for the derived pushforward**: for a cartesian square with `j`
-(hence `j'`) weakly étale, `j^* ∘ Rg''_* ≅ Rg'_* ∘ j'^*`. -/
-noncomputable def derivedWeaklyEtaleBaseChangeIso (hsq : IsPullback g' j' j g'') :
-    (g'')_*[A].rightDerivedFunctor ⋙ (j)^*[A].mapDerivedCategory ≅
-      (j')^*[A].mapDerivedCategory ⋙ (g')_*[A].rightDerivedFunctor :=
-  have := isIso_baseChangeMap_of_isPullback A hsq
-  (Functor.rightDerivedFunctorCompMapDerivedCategoryIso (g'')_*[A] (j)^*[A]).symm ≪≫
-    Functor.rightDerivedFunctorNatIso (asIso (baseChangeMap A hsq.toCommSq)) ≪≫
-    Functor.rightDerivedFunctorCompIso (j')^*[A] (g')_*[A] ≪≫
-    Functor.isoWhiskerRight (j')^*[A].rightDerivedFunctorIsoMapDerivedCategory
-      (g')_*[A].rightDerivedFunctor
-
-/-- **The higher direct images commute with weakly étale base change**:
-`j^* Rⁱg''_* F ≅ Rⁱg'_* j'^* F`, naturally in `F`. -/
-noncomputable def rightDerivedWeaklyEtaleBaseChangeIso (hsq : IsPullback g' j' j g'') (i : ℕ) :
-    (g'')_*[A].rightDerived i ⋙ (j)^*[A] ≅ (j')^*[A] ⋙ (g')_*[A].rightDerived i :=
-  Functor.isoWhiskerRight
-      ((g'')_*[A].singleFunctorCompRightDerivedFunctorCompHomologyFunctorIso i).symm _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
-      ((j)^*[A].mapDerivedCategoryHomologyFunctorIso i)) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
-      (derivedWeaklyEtaleBaseChangeIso A hsq) _) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((j')^*[A].mapDerivedCategorySingleFunctor 0) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (j')^*[A]
-      ((g')_*[A].singleFunctorCompRightDerivedFunctorCompHomologyFunctorIso i)
-
 end BaseChange
 
 end AlgebraicGeometry.ProEtale

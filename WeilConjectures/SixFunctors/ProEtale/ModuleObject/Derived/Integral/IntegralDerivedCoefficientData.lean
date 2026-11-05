@@ -77,19 +77,4 @@ open AlgebraicGeometry Scheme
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The condensed integral coefficient ring used by the integral six-functor statements.
-Source: coefficient setup in `sk-cor-int-compactness-ii`
-(blueprint: def-sfb-integral-derived-coefficient-data). -/
-abbrev integralCoefficientRing (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
-    Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
-  DerivedNakayama.integerRing l E
-
-/-- The ordinary unbounded derived category of integral module objects on a scheme.
-Source: coefficient setup in `sk-cor-int-compactness-ii`
-(blueprint: def-sfb-integral-derived-coefficient-data). -/
-abbrev integralDerived (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :=
-  DerivedNakayama.Derived l E X
-
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -93,29 +93,6 @@ section
 
 variable (F L₁ L₂ L₃ L₄) [HasLeftDerivedFunctor₄ F W₁ W₂ W₃ W₄]
 
-noncomputable def leftDerived₄ : D₁ ⥤ D₂ ⥤ D₃ ⥤ D₄ ⥤ H :=
-    curry₄.obj ((uncurry₄.obj F).totalLeftDerived
-      (L₁.prod (L₂.prod (L₃.prod L₄))) (W₁.prod (W₂.prod (W₃.prod W₄))))
-
-noncomputable def leftDerivedCounit₄ :
-    (((((whiskeringLeft₄ H).obj L₁).obj L₂).obj L₃).obj L₄).obj
-      (leftDerived₄ F L₁ L₂ L₃ L₄ W₁ W₂ W₃ W₄) ⟶ F :=
-  whiskeringLeft₄Equiv.symm (whiskerLeft _ (currying₄.counitIso.hom.app _) ≫
-    ((uncurry₄.obj F).totalLeftDerivedCounit (L₁.prod (L₂.prod (L₃.prod L₄)))
-      (W₁.prod (W₂.prod (W₃.prod W₄)))))
-
-set_option backward.isDefEq.respectTransparency false in
-instance : (leftDerived₄ F L₁ L₂ L₃ L₄ W₁ W₂ W₃ W₄).IsLeftDerivedFunctor₄
-    (leftDerivedCounit₄ F L₁ L₂ L₃ L₄ W₁ W₂ W₃ W₄) W₁ W₂ W₃ W₄ := by
-  refine (isLeftDerivedFunctor_iff_of_iso _ _
-    ((uncurry₄.obj F).totalLeftDerivedCounit (L₁.prod (L₂.prod (L₃.prod L₄)))
-      (W₁.prod (W₂.prod (W₃.prod W₄)))) _ _
-    (currying₄.counitIso.symm.app
-      (((uncurry₄.obj F).totalLeftDerived
-      (L₁.prod (L₂.prod (L₃.prod L₄))) (W₁.prod (W₂.prod (W₃.prod W₄)))))) ?_).1 inferInstance
-  ext
-  simp [leftDerivedCounit₄]
-
 end
 
 section
@@ -125,34 +102,6 @@ variable [LF.IsLeftDerivedFunctor₄ α W₁ W₂ W₃ W₄]
   [LF''.IsLeftDerivedFunctor₄ α'' W₁ W₂ W₃ W₄]
   (G : D₁ ⥤ D₂ ⥤ D₃ ⥤ D₄ ⥤ H)
   (β : (((((whiskeringLeft₄ H).obj L₁).obj L₂).obj L₃).obj L₄).obj G ⟶ F)
-
-noncomputable def leftDerived₄Lift : G ⟶ LF :=
-  fullyFaithfulUncurry₄.preimage
-    (leftDerivedLift (LF := uncurry₄.obj LF)
-      (whiskeringLeft₄Equiv α) (W₁.prod (W₂.prod (W₃.prod W₄))) (uncurry₄.obj G)
-      (whiskeringLeft₄Equiv β))
-
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-@[reassoc (attr := simp)]
-lemma leftDerived₄_fac_app_app (X₁ : C₁) (X₂ : C₂) (X₃ : C₃) (X₄ : C₄) :
-    ((((leftDerived₄Lift LF α W₁ W₂ W₃ W₄ G β).app (L₁.obj X₁)).app (L₂.obj X₂)).app
-      (L₃.obj X₃)).app (L₄.obj X₄) ≫
-      (((α.app X₁).app X₂).app X₃).app X₄ = (((β.app X₁).app X₂).app X₃).app X₄ := by
-  simp only [leftDerived₄Lift, fullyFaithfulUncurry₄, Equivalence.fullyFaithfulFunctor, comp_obj,
-    NatTrans.comp_app, currying₄_unitIso_hom_app_app_app_app_app, id_obj,
-    curry₄_map_app_app_app_app, currying₄_unitIso_inv_app_app_app_app_app, Category.comp_id,
-    Category.id_comp]
-  exact (leftDerived_fac_app (LF := uncurry₄.obj LF)
-    (whiskeringLeft₄Equiv α) (W₁.prod (W₂.prod (W₃.prod W₄))) (uncurry₄.obj G)
-    (whiskeringLeft₄Equiv β)) (X₁, X₂, X₃, X₄)
-
-set_option backward.defeqAttrib.useBackward true in
-@[reassoc (attr := simp)]
-lemma leftDerived₄_fac :
-    (((((whiskeringLeft₄ H).obj L₁).obj L₂).obj L₃).obj L₄).map
-      (leftDerived₄Lift LF α W₁ W₂ W₃ W₄ G β) ≫ α = β := by
-  cat_disch
 
 include W₁ W₂ W₃ W₄ in
 lemma leftDerived₄_ext (G : D₁ ⥤ D₂ ⥤ D₃ ⥤ D₄ ⥤ H) (γ₁ γ₂ : G ⟶ LF)

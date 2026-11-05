@@ -58,7 +58,6 @@ noncomputable abbrev tautologicalElement :
   Functor.elementsMk _ (Scheme.Etale.mk (𝟙 (Spec (.of Ω))))
     (Over.homMk (𝟙 (Spec (.of Ω))) (Category.comp_id _))
 
-
 /-- The tautological pointed étale neighbourhood `(Spec Ω, 𝟙)` is initial among the pointed
 étale neighbourhoods of the geometric point `𝟙 : Spec Ω ⟶ Spec Ω`: a pointed neighbourhood
 `(V, x)` receives the unique morphism `x : Spec Ω ⟶ V`. -/
@@ -166,59 +165,9 @@ section SepClosure
 
 variable {K : Type u} [Field K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K))
 
-/-- The base change `X_{K^sep} ⟶ X` of a `K`-scheme `X` (with structure morphism `p`) to the
-separable closure `K^sep` of `K`. -/
-noncomputable abbrev sepClosureBaseChange :
-    pullback p (Spec.map (CommRingCat.ofHom (algebraMap K (SeparableClosure K)))) ⟶ X :=
-  pullback.fst _ _
-
 instance surjective_spec_map_algebraMap_separableClosure :
     Surjective (Spec.map (CommRingCat.ofHom (algebraMap K (SeparableClosure K)))) :=
   ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
-
-/-- Blueprint `lem-kun-sep-closure-conservative` (first part): every geometric point of a
-`K`-scheme `X` factors through `X_{K^sep}`: a separably closed field extension of `K` receives
-a `K`-embedding of `K^sep`. -/
-theorem exists_comp_eq_sepClosureBaseChange {Ω : Type u} [Field Ω] [IsSepClosed Ω]
-    (s : Spec (.of Ω) ⟶ X) : ∃ t, t ≫ sepClosureBaseChange p = s := by
-  let := (Spec.preimage (s ≫ p)).hom.toAlgebra
-  let ψ : SeparableClosure K →ₐ[K] Ω := IsSepClosed.lift
-  refine ⟨pullback.lift s (Spec.map (CommRingCat.ofHom ψ.toRingHom)) ?_,
-    pullback.lift_fst _ _ _⟩
-  rw [← Spec.map_comp, ← Spec.map_preimage (s ≫ p)]
-  congr 1
-  ext x
-  exact (ψ.commutes x).symm
-
-/-- Blueprint `lem-kun-sep-closure-conservative`: **conservativity of base change to a
-separable closure, for sheaves.** A morphism of étale sheaves of `Λ`-modules on a `K`-scheme
-`X` is an isomorphism if and only if its pullback to `X_{K^sep}` is: `X_{K^sep} ⟶ X` is
-surjective, being a base change of the surjective `Spec K^sep ⟶ Spec K`. -/
-theorem isIso_iff_isIso_upperStar_sepClosureBaseChange_map
-    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G) :
-    IsIso φ ↔ IsIso ((sepClosureBaseChange p)^*[ModuleCat.{u + 1} Λ].map φ) := by
-  refine ⟨fun _ ↦ inferInstance, fun h ↦ ?_⟩
-  refine isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ) (ι := PUnit)
-    (fun _ ↦ sepClosureBaseChange p) (fun x ↦ ?_) φ fun _ ↦ h
-  obtain ⟨y, hy⟩ := (sepClosureBaseChange p).surjective x
-  exact ⟨⟨⟩, y, hy⟩
-
-/-- Blueprint `lem-kun-sep-closure-conservative`: **conservativity of base change to a
-separable closure, for derived objects.** A morphism of `D(X_ét, Λ)` is an isomorphism if and
-only if its derived pullback to `X_{K^sep}` is: on cohomology sheaves this is the statement
-for sheaves, the pullback being exact. -/
-theorem isIso_iff_isIso_leftDerivedUpperStar_sepClosureBaseChange_map
-    {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (φ : M ⟶ N) :
-    IsIso φ ↔ IsIso ((L((sepClosureBaseChange p)^*[ModuleCat.{u + 1} Λ])).map φ) := by
-  refine ⟨fun _ ↦ inferInstance, fun h ↦ ?_⟩
-  rw [_root_.DerivedCategory.isIso_iff]
-  intro n
-  have := h
-  rw [isIso_iff_isIso_upperStar_sepClosureBaseChange_map Λ p]
-  exact (NatIso.isIso_map_iff (leftDerivedUpperStarHomologyFunctorIso _ _ n) φ).2
-    (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
-      ((L((sepClosureBaseChange p)^*[ModuleCat.{u + 1} Λ])).map φ))
 
 end SepClosure
 

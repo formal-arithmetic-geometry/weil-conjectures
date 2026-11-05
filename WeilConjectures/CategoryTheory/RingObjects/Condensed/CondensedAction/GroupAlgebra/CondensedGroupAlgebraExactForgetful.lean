@@ -97,22 +97,4 @@ variable (A : Profinite.CondensedRing.{u}) [IsCommMonObj A.X]
 variable (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
   [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
 
-/-- The condensed group as its representable sheaf of continuous maps, lifted into
-its coefficient universe. Source: paragraph (3), internal bar input
-(blueprint: lem-sfb-condensed-group-algebra-exact-forgetful). -/
-abbrev groupSet : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)) :=
-  ((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj (Profinite.of G)
-
-/-- The internal group algebra's underlying module is the existing free module.
-Source: paragraph (3), internal bar input
-(blueprint: lem-sfb-condensed-group-algebra-exact-forgetful). -/
-abbrev algebra : Modules A := (free A).obj (groupSet G)
-
-/-- The coefficient ring of sections, read through the fixed dependency interface.
-Source: paragraph (3), bilinear extension
-(blueprint: lem-sfb-condensed-group-algebra-exact-forgetful). -/
-abbrev scalars (S : Profinite.{u}) :=
-  (InternalAbelianSheafModule.sectionRings
-    (coherentTopology Profinite.{u}) A.X).obj (op S)
-
 end Profinite.CondensedAction.GroupAlgebra

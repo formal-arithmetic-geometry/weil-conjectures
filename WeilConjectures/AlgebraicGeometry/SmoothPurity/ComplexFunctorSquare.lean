@@ -17,17 +17,4 @@ set_option autoImplicit false
 open CategoryTheory
 namespace CategoryTheory.ConstantCompletion
 
-/-- Lift a square while retaining its two iterated complex functors as endpoints.
-Source: Stacks Tag 010V (blueprint: def-sf-complex-functor-square). -/
-@[irreducible]
-def mapComplexSquare
-    {C D D' E : Type*} [Category C] [Category D] [Category D'] [Category E]
-    [Preadditive C] [Preadditive D] [Preadditive D'] [Preadditive E]
-    (F : C ⥤ D) (G : D ⥤ E) (F' : C ⥤ D') (G' : D' ⥤ E)
-    [F.Additive] [G.Additive] [F'.Additive] [G'.Additive]
-    (e : F ⋙ G ≅ F' ⋙ G') :
-    F.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) ≅
-      F'.mapHomologicalComplex (.up ℤ) ⋙ G'.mapHomologicalComplex (.up ℤ) :=
-  NatIso.mapHomologicalComplex e (.up ℤ)
-
 end CategoryTheory.ConstantCompletion

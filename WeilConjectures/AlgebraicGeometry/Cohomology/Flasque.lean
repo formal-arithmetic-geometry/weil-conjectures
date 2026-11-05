@@ -65,14 +65,6 @@ theorem epi_of_epi_app {M N : X.Modules} (φ : M ⟶ N) (h : ∀ U, Epi (φ.app 
   have : Epi ((toPresheaf X).map φ) := NatTrans.epi_of_epi_app _
   exact (toPresheaf X).epi_of_epi_map this
 
-/-- The direct image of a flasque module is flasque. -/
-theorem isFlasque_pushforward (f : X ⟶ Y) (M : X.Modules)
-    (h : TopCat.Presheaf.IsFlasque M.presheaf) :
-    TopCat.Presheaf.IsFlasque ((pushforward f).obj M).presheaf where
-  epi {U V} i := by
-    rw [show i = i.unop.op from rfl, pushforward_obj_presheaf_map]
-    exact h.epi _
-
 /-- The restriction of a flasque module to an open subscheme is flasque. -/
 theorem isFlasque_restrict (g : Y ⟶ X) [IsOpenImmersion g] (M : X.Modules)
     (h : TopCat.Presheaf.IsFlasque M.presheaf) :

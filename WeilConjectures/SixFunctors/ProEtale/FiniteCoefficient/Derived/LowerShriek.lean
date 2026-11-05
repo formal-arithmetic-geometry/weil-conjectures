@@ -121,21 +121,6 @@ scoped notation "Rf_!("c")[" A "]" =>
 scoped notation "Rf_!("c")[" A "]+" =>
   rightDerivedLowerShriekOfCompactificationPlus A c
 
-/-- The bounded below derived lower shriek attached to a compactification
-`c = (X ⟶[i] Z ⟶[g] Y)` is the restriction of the unbounded one along the inclusions of the
-bounded below derived categories: on the `Di_!` factor this is
-`Functor.mapDerivedCategoryPlusCompatibility` (`i_!` is exact), on the `Rg_*` factor it is
-`Functor.rightDerivedFunctorPlusCompatibility`. -/
-noncomputable def rightDerivedLowerShriekOfCompactificationPlusCompatibility :
-    Rf_!(c)[A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ Rf_!(c)[A] :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft D+((c.i)_!open[A])
-      ((c.g)_*[A]).rightDerivedFunctorPlusCompatibility ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((c.i)_!open[A]).mapDerivedCategoryPlusCompatibility
-      R((c.g)_*[A]) ≪≫
-    Functor.associator _ _ _
-
 end ProEtale
 
 end OfCompactification
@@ -170,32 +155,6 @@ noncomputable def rightDerivedLowerShriekPlus :
 @[inherit_doc rightDerivedLowerShriekPlus]
 scoped notation "R(" f ")_![" A "]+" =>
   rightDerivedLowerShriekPlus A f
-
-lemma rightDerivedLowerShriek_eq : R(f)_![A] =
-    Rf_!(HasCompactification.compactification f)[A] := rfl
-
-lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
-    Rf_!(HasCompactification.compactification f)[A]+ := rfl
-
-/-- The bounded below derived lower shriek `Rf_! : D⁺(X_proét) ⥤ D⁺(Y_proét)` is the
-restriction of the unbounded `Rf_! : D(X_proét) ⥤ D(Y_proét)` along the inclusions of the
-bounded below derived categories. -/
-noncomputable def rightDerivedLowerShriekPlusCompatibility :
-    R(f)_![A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)_![A] :=
-  rightDerivedLowerShriekOfCompactificationPlusCompatibility A
-    (HasCompactification.compactification f)
-
-/-- Transport of the derived exceptional direct image along an equality of morphisms:
-`Rf_! ≅ Rg_!` for `f = g`. -/
-noncomputable def rightDerivedLowerShriekCongr {f g : X ⟶ Y} (h : f = g)
-    [HasCompactification f] [HasCompactification g] : R(f)_![A] ≅ R(g)_![A] :=
-  -- not `eqToIso`: the kernel would compare `Rf_!` and `Rg_!` when reducing the transport
-  by subst h; exact Iso.refl _
-
-@[simp]
-lemma rightDerivedLowerShriekCongr_rfl {f : X ⟶ Y} [HasCompactification f] :
-    rightDerivedLowerShriekCongr A (rfl : f = f) = Iso.refl _ :=
-  rfl
 
 end ProEtale
 

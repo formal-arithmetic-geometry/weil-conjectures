@@ -84,19 +84,6 @@ lemma surjective_app_of_epi_of_iso (e : X ≅ Spec (.of K))
     (Presheaf.imageSieve_mem (Scheme.ProEt.topology _) φ.hom s)
   exact ⟨t, by simpa using ht⟩
 
-/-- Taking sections over `X` preserves epimorphisms of pro-étale sheaves with values in a
-concrete category on a scheme `X` isomorphic to the spectrum of an algebraically closed
-field. -/
-lemma preservesEpimorphisms_sheafSections_of_iso (e : X ≅ Spec (.of K))
-    [(Scheme.ProEt.topology X).WEqualsLocallyBijective A]
-    [HasSheafify (Scheme.ProEt.topology X) A]
-    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
-    [Balanced (Sheaf (Scheme.ProEt.topology X) A)] :
-    ((sheafSections (Scheme.ProEt.topology X) A).obj
-      (op (Scheme.ProEt.mk (𝟙 X)))).PreservesEpimorphisms where
-  preserves φ _ := (CategoryTheory.forget A).epi_of_epi_map
-    ((epi_iff_surjective _).2 (surjective_app_of_epi_of_iso e φ))
-
 end Concrete
 
 end ProEtale

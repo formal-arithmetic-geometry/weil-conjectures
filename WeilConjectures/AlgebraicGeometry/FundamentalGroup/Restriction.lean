@@ -169,38 +169,6 @@ lemma fundamentalGroupMap_surjective [TopologicalSpace GX] [IsTopologicalGroup G
   obtain ⟨g, hg⟩ := MulAction.exists_smul_eq GX x' y'
   exact ⟨g, by rw [fundamentalGroupMap_smul, hg]⟩
 
-
-/-- The map of fundamental groups induced by a finite étale morphism `f : X ⟶ Y` is injective:
-a finite étale `X`-scheme `Q` is a finite étale `Y`-scheme through `f`, and `Q` embeds into the
-base change of the latter along `f`, so an element acting trivially on all base changes acts
-trivially on all finite étale `X`-schemes. -/
-lemma fundamentalGroupMap_injective [IsFinite f] [Etale f] [ConnectedSpace X]
-    [TopologicalSpace GX] [IsTopologicalGroup GX] [CompactSpace GX]
-    [IsFundamentalGroup (fiber s) GX] :
-    Function.Injective (fundamentalGroupMap τ GX GY) := by
-  refine (injective_iff_map_eq_one _).2 fun g hg ↦ IsFundamentalGroup.non_trivial (F := fiber s)
-    g fun Q y ↦ ?_
-  have : IsFinite Q.obj.hom := Q.property
-  have : Etale Q.obj.hom := Q.obj.prop
-  let P : Y.FiniteEtale := ⟨MorphismProperty.Over.mk ⊤ (Q.obj.hom ≫ f) inferInstance,
-    inferInstanceAs (IsFinite (Q.obj.hom ≫ f))⟩
-  let φ : Q ⟶ (pullback f).obj P := ObjectProperty.homMk (MorphismProperty.Over.homMk
-    (Limits.pullback.lift (𝟙 Q.obj.left) Q.obj.hom (by simp [P])) (Limits.pullback.lift_snd _ _ _))
-  have htriv (z : (fiber s).obj ((pullback f).obj P)) : g • z = z := by
-    have h := fundamentalGroupMap_smul τ GX GY g P z
-    rw [hg, one_smul] at h
-    exact ((ConcreteCategory.isIso_iff_bijective _).1 inferInstance).1 h.symm
-  have hinj : Function.Injective ((fiber s).map φ) := fun a b hab ↦ fiber_ext s (by
-    have := congrArg (fun z ↦ z.left ≫ Limits.pullback.fst (Q.obj.hom ≫ f) f) hab
-    simp only [fiber_map_left] at this
-    change (a.left ≫ Limits.pullback.lift _ _ _) ≫ _ = (b.left ≫ Limits.pullback.lift _ _ _) ≫ _
-      at this
-    rw [Category.assoc, Category.assoc] at this
-    erw [Limits.pullback.lift_fst] at this
-    simpa using this)
-  apply hinj
-  rw [IsNaturalSMul.naturality, htriv]
-
 end
 
 section OpenImmersion

@@ -235,12 +235,6 @@ def transportLowerStarIso :
         K.carrier)) _))
     (fun f ↦ IsoAlgebra.hom_ext ((adicLowerStarSquareIso l hsq).hom.naturality f.hom.f))
 
-include hsq in
-lemma transportLowerStarIso_hom_app_hom_f (K : ProEtaleWeilSheaf k₀ l X) :
-    ((transportLowerStarIso θ r hθ θY hθY φ φ' hsq).hom.app K).hom.f =
-      (adicLowerStarSquareIso l hsq).hom.app K.carrier :=
-  rfl
-
 end Transport
 
 section Constant
@@ -350,10 +344,6 @@ def adicConstantTransportIso :
     adicConstant k₀' l X' ≅ (transport θ r hθ).obj (adicConstant k₀ l X) :=
   IsoAlgebra.isoMk (adicLowerStarUnitIso l θ).symm
     (adicLowerStarUnitIso_inv_comp_transport_str θ r hθ)
-
-lemma adicConstantTransportIso_hom_hom_f :
-    (adicConstantTransportIso (l := l) θ r hθ).hom.hom.f = (adicLowerStarUnitIso l θ).inv :=
-  rfl
 
 end Constant
 

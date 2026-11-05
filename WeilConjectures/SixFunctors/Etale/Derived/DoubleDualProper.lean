@@ -160,21 +160,6 @@ theorem isIso_map_toIhomIhom_iff_of_isIso_projection
     (hπ ((ihom M).obj W))
   exact isIso_map_toIhomIhom_iff G (G.map e.hom ≫ q.counit.app W') M
 
-/-- Blueprint `lem-weil-delta-proper-pushforward` (formal core): under the hypotheses of
-`CategoryTheory.Adjunction.isIso_dualComparison_of_isIso_projection`, `G δ_M` and `δ_{G M}` are
-isomorphic arrows. -/
-theorem nonempty_arrowIso_map_toIhomIhom_of_isIso_projection
-    (h : ∀ X Y : C, F.map (β_ X Y).hom ≫ δ F Y X = δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
-    {Q' : C ⥤ D} (q : G ⊣ Q') {W : D} {W' : C} (e : W ≅ Q'.obj W') (M : D)
-    (hπ : ∀ (N : D) (T : C),
-      IsIso (adj.homEquiv _ _ (δ F (G.obj N) T ≫ adj.counit.app N ▷ F.obj T))) :
-    Nonempty (Arrow.mk (G.map (toIhomIhom W M)) ≅ Arrow.mk (toIhomIhom W' (G.obj M))) := by
-  let := adj.rightAdjointLaxBraidedOfδ h
-  have := isIso_dualComparison_of_isIso_projection adj h q e M (hπ M)
-  have := isIso_dualComparison_of_isIso_projection adj h q e ((ihom M).obj W)
-    (hπ ((ihom M).obj W))
-  exact ⟨mapToIhomIhomArrowIso G (G.map e.hom ≫ q.counit.app W') M⟩
-
 end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry
@@ -227,40 +212,6 @@ theorem isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff
         T))
   rw [verdierDualDoubleDual_app, verdierDualDoubleDual_app]
   exact p.isIso_map_toIhomIhom_iff_of_isIso_projection h q γ.symm K hπ
-
-/-- Blueprint `lem-weil-delta-proper-pushforward`: for a proper `f : X ⟶ Y`, under the
-hypotheses of
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff`,
-`Rf_* δ_K` and `δ_{Rf_* K}` are isomorphic arrows, through the canonical comparison
-`Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`. -/
-theorem nonempty_arrowIso_rightDerivedLowerStar_map_verdierDualDoubleDual
-    (hbr : LeftDerivedUpperStarBraided (ModuleCat.{u + 1} Λ) f)
-    [IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f)]
-    (γ : (R(f)^![Λ]).obj (dualizingComplex Λ aY) ≅ dualizingComplex Λ aX)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty (Arrow.mk ((R((f)_*[ModuleCat.{u + 1} Λ])).map ((verdierDualDoubleDual Λ aX).app K)) ≅
-      Arrow.mk ((verdierDualDoubleDual Λ aY).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K))) := by
-  let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) f
-  let p := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f
-  have h : ∀ M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-      (L((f)^*[ModuleCat.{u + 1} Λ])).map (β_ M N).hom ≫ δ (L((f)^*[ModuleCat.{u + 1} Λ])) N M =
-        δ (L((f)^*[ModuleCat.{u + 1} Λ])) M N ≫ (β_ ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)
-            ((L((f)^*[ModuleCat.{u + 1} Λ])).obj N)).hom := by
-    intro M N
-    rw [← cancel_epi (μ (L((f)^*[ModuleCat.{u + 1} Λ])) M N), reassoc_of% (hbr M N),
-        Functor.Monoidal.μ_δ,
-      Functor.Monoidal.μ_δ_assoc, Category.comp_id]
-  let q := (rightDerivedUpperShriekAdjunction Λ f).ofNatIsoLeft
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f)
-  have hπ : ∀ (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-      (T : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      IsIso (p.homEquiv _ _ (δ (L((f)^*[ModuleCat.{u + 1} Λ])) ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
-          N) T ≫
-        p.counit.app N ▷ (L((f)^*[ModuleCat.{u + 1} Λ])).obj T)) := fun N T ↦
-    inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app N).app
-        T))
-  rw [verdierDualDoubleDual_app, verdierDualDoubleDual_app]
-  exact p.nonempty_arrowIso_map_toIhomIhom_of_isIso_projection h q γ.symm K hπ
 
 end Proper
 

@@ -265,12 +265,6 @@ noncomputable def internalPresheafMap
     intro r m
     exact (f.app Z).hom.map_smul r m)
 
-noncomputable def presheafModuleFunctor_fullyFaithful :
-    (presheafModuleFunctor A).FullyFaithful where
-  preimage f := internalPresheafMap A f
-  map_preimage f := by ext Z m; rfl
-  preimage_map f := by apply Mod.hom_ext; ext Z m; rfl
-
 noncomputable def presheafModuleFunctor_counit
     (P : PresheafOfModules.{u} (presheafRings A)) :
     (presheafModuleFunctor A).obj (internalPresheafMod A P) ≅ P := by
@@ -436,7 +430,6 @@ noncomputable def sectionModuleEquivalenceCore
     ⟨fun M ↦ ⟨liftedSheafModule J R M, ⟨sectionModuleFunctor_counit J R M⟩⟩⟩
   let : F.IsEquivalence := {}
   exact F.asEquivalence
-
 
 /-- Internal modules over a commutative monoid in abelian sheaves are sectionwise
 module sheaves over its reconstructed ring sheaf, with unchanged underlying sheaves.

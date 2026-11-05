@@ -198,18 +198,6 @@ noncomputable irreducible_def derivedPullback :
   (schemeDerivedCategoryEquiv S).functor ⋙ Scheme.Modules.derivedPullback g ⋙
     (schemeDerivedCategoryEquiv T).inverse
 
-/-- The comparison isomorphism between `derivedPullback g` and `Scheme.Modules.derivedPullback g`
-across the equivalences `schemeDerivedCategoryEquiv`. -/
-noncomputable def derivedPullbackIso :
-    (schemeDerivedCategoryEquiv.{w} S).inverse ⋙ derivedPullback.{u, w} g ⋙
-        (schemeDerivedCategoryEquiv.{w} T).functor ≅ Scheme.Modules.derivedPullback g :=
-  Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight (eqToIso (derivedPullback_def g)) _) ≪≫
-  Functor.isoWhiskerRight (schemeDerivedCategoryEquiv S).counitIso
-      (Scheme.Modules.derivedPullback g ⋙ (schemeDerivedCategoryEquiv T).inverse ⋙
-        (schemeDerivedCategoryEquiv T).functor) ≪≫
-    Functor.isoWhiskerLeft (Scheme.Modules.derivedPullback g)
-      (schemeDerivedCategoryEquiv T).counitIso
-
 /-- The pullback of modules on homotopy categories, on the homotopy categories of
 `SheafOfModules (moduleRings _)`. -/
 noncomputable abbrev pullbackHomotopyCategory :

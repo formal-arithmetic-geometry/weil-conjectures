@@ -123,25 +123,3 @@ come from `HasDerivedCategory.ofIsGrothendieckAbelian`, which rests on
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution` and is proved.
 The checks below are run by the build.
 -/
-
-/--
-info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison'
-  depends on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison
-
-/--
-info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_id'
-  depends on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_id
-
-/--
-info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_comp'
-  depends on axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison_comp
-

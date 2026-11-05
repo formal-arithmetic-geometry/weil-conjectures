@@ -31,47 +31,4 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
 attribute [local implicit_reducible] coefficientSequenceInternalHom
 
-set_option maxHeartbeats 600000 in
--- The identity total tensor has to be compared across the two site universe parameters.
-/-- The representative tensor models commute with the canonical closed-tensor comparison.
-Source: Stacks 0A90, 0A95 and 08J9
-(blueprint: lem-coef-representative-tensor-model-comparison).
-
-Proof: curry the identity of the ordinary total tensor. The representative
-normalization in both closed structures identifies its uncurrying with the inverse
-representative tensor isomorphism. The canonical comparison preserves transpose;
-apply the two tensor-Hom bijections and their inverse laws to identify these maps.
-The argument applies also to zero complexes and the empty scheme. -/
-theorem coefficientTensorModelComparison (W : Scheme.{u})
-    (S T : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (C D : CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ)
-    (hC : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-      (R := coefficientSequenceCommRingSheaf.{u, u} l E W) C)
-    (hD : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-      (R := coefficientSequenceCommRingSheaf.{u, u} l E W) D) :
-    (CoefficientClosedStructure.comparison T.systemClosed S.systemClosed).hom.app
-        (DerivedCategory.Q.obj C, DerivedCategory.Q.obj D) ≫
-      (CoefficientTensorModels.iso.{u, u + 1, u, u + 2}
-        (coefficientSequenceTopology (Scheme.ProEt.topology W))
-        (coefficientSequenceCommRingSheaf.{u, u} l E W)
-        S.systemClosed S.systemTensorModel C D hC hD).inv =
-        (CoefficientTensorModels.iso.{u, u + 1, u, u + 2}
-        (coefficientSequenceTopology (Scheme.ProEt.topology W))
-        (coefficientSequenceCommRingSheaf.{u, u} l E W)
-        T.systemClosed T.systemTensorModel C D hC hD).inv := by
-  let J := coefficientSequenceTopology (Scheme.ProEt.topology W)
-  let R := coefficientSequenceCommRingSheaf.{u, u} l E W
-  let I := (coefficientTotalTensor.{u, u + 1, u} J R).obj (C, D)
-  obtain ⟨g, hg, _⟩ := coefficientCochainTensorCurry_exists J R C D I (𝟙 I)
-  have hs := coefficientTensorCurry_normalize.{u, u + 1, u, u + 2} J R
-    S.systemClosed S.systemTensorModel C D I hC hD (𝟙 I) g hg
-  have ht := coefficientTensorCurry_normalize.{u, u + 1, u, u + 2} J R
-    T.systemClosed T.systemTensorModel C D I hC hD (𝟙 I) g hg
-  have hid := (DerivedCategory.Q (C := coefficientSequenceModules.{u, u} l E W)).map_id I
-  erw [hid, Category.comp_id] at hs ht
-  apply (T.systemClosed.transpose _ _ _).injective
-  rw [CoefficientClosedStructure.comparison_transpose, ← hs, ← ht]
-  exact ((S.systemClosed.transpose _ _ _).apply_symm_apply _).trans
-    ((T.systemClosed.transpose _ _ _).apply_symm_apply _).symm
-
 end WeilConjectures

@@ -121,16 +121,6 @@ instance : (DerivedCategory.boundedConstructible A X).IsClosedUnderIsomorphisms 
 
 variable {A X}
 
-/-- A bounded constructible pro-étale complex is bounded for the canonical t-structure: `D(ν^*)`
-is induced by the exact functor `ν^*`, so it preserves boundedness. -/
-lemma DerivedCategory.boundedConstructible.bounded
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (hK : DerivedCategory.boundedConstructible A X K) :
-    _root_.DerivedCategory.TStructure.t.bounded K := by
-  obtain ⟨K', hK', ⟨e⟩⟩ := hK
-  exact _root_.DerivedCategory.TStructure.t.bounded.prop_of_iso e
-    ((ν^*(X)[A]).bounded_mapDerivedCategory_obj hK'.1)
-
 /-- A bounded constructible pro-étale complex is bounded below of étale origin: it is
 `D(ν^*) K'` for a bounded constructible, hence bounded, étale complex `K'`. -/
 lemma DerivedCategory.boundedConstructible.plusEtaleOrigin
@@ -152,58 +142,8 @@ noncomputable def DerivedCategoryBoundedConstructible : Type _ :=
 noncomputable instance : Category (DerivedCategoryBoundedConstructible A X) :=
   inferInstanceAs <| Category (DerivedCategory.boundedConstructible A X).FullSubcategory
 
-/-- The inclusion of `Dᵇc_proét(X, A)` into the derived category of pro-étale sheaves. -/
-noncomputable def DerivedCategoryBoundedConstructible.ι :
-    DerivedCategoryBoundedConstructible A X ⥤
-      _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  (DerivedCategory.boundedConstructible A X).ι
-
 @[inherit_doc DerivedCategoryBoundedConstructible]
 scoped notation "Dᵇc_proét(" X ", " A ")" => ProEtale.DerivedCategoryBoundedConstructible A X
-
-/-- Blueprint `sk-def-sf-categories`: the inclusion of the small category `Dᵇc_proét(X, A)` into
-the ambient bounded derived category `Dᵇ(X_proét, A)`. -/
-noncomputable def DerivedCategoryBoundedConstructible.toBounded :
-    DerivedCategoryBoundedConstructible A X ⥤
-      _root_.DerivedCategory.Bounded (Sheaf (Scheme.ProEt.topology X) A) :=
-  ObjectProperty.ιOfLE fun _ hK ↦ DerivedCategory.boundedConstructible.bounded hK
-
-/-- Blueprint `def-weil-constructible-intervals`: Constructible cohomological intervals.
-
-Membership in `D_c^[a, b](X, A)` as an object property of `D(X_proét)`: bounded
-constructible with homology concentrated in `[a, b]` (blueprint
-`def-weil-constructible-intervals`). -/
-noncomputable def DerivedCategory.constructibleIn (a b : ℤ) :
-    ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
-  DerivedCategory.boundedConstructible A X ⊓ _root_.DerivedCategory.homologyConcentratedIn a b
-
-lemma DerivedCategory.constructibleIn_iff (a b : ℤ)
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    DerivedCategory.constructibleIn A X a b K ↔
-      DerivedCategory.boundedConstructible A X K ∧
-        _root_.DerivedCategory.homologyConcentratedIn a b K :=
-  Iff.rfl
-
-/-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
-
-The small category `D_c^[a, b](X, A)` of bounded constructible complexes of pro-étale sheaves
-with homology concentrated in `[a, b]`, as a full subcategory of `D(X_proét)`. -/
-noncomputable def DerivedCategoryConstructibleIn (a b : ℤ) : Type _ :=
-  (DerivedCategory.constructibleIn A X a b).FullSubcategory
-
-noncomputable instance (a b : ℤ) : Category (DerivedCategoryConstructibleIn A X a b) :=
-  inferInstanceAs <| Category (DerivedCategory.constructibleIn A X a b).FullSubcategory
-
-/-- The inclusion of `D_c^[a, b](X, A)` into the derived category of pro-étale sheaves. -/
-noncomputable def DerivedCategoryConstructibleIn.ι (a b : ℤ) :
-    DerivedCategoryConstructibleIn A X a b ⥤
-      _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  (DerivedCategory.constructibleIn A X a b).ι
-
-/-- The inclusion `D_c^[a, b](X, A) ⊆ Dᵇc_proét(X, A)`. -/
-noncomputable def DerivedCategoryConstructibleIn.toBoundedConstructible (a b : ℤ) :
-    DerivedCategoryConstructibleIn A X a b ⥤ DerivedCategoryBoundedConstructible A X :=
-  ObjectProperty.ιOfLE inf_le_left
 
 end ProEtale
 

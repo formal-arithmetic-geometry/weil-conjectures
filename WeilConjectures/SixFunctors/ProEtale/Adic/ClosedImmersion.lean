@@ -61,22 +61,6 @@ instance isIso_adicUpperStarLowerStarAdjunction_counit :
 
 variable (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
 
-/-- Blueprint `lem-exc-proetale-closed-essential-image` for `ℓ`-adic sheaves: a sheaf `F`
-vanishing on the quasi-compact open complement of a closed immersion `i` is `i_* i^* F`: the unit
-`F ⟶ i_* i^* F` is an isomorphism
-(`AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl`). -/
-theorem isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isCompl
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : AdicSheaf l X)
-    (hF : IsZero ((j)^*ᵃ[l].obj F)) :
-    IsIso ((adicUpperStarLowerStarAdjunction l i).unit.app F) := by
-  have : IsIso ((adicUpperStarLowerStarAdjunction l i).unit.app F).hom := by
-    rw [adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
-    exact isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl i j hij F.X
-      ((AdicSheaf.forget U).map_isZero hF)
-  have : IsIso ((AdicSheaf.forget X).map ((adicUpperStarLowerStarAdjunction l i).unit.app F)) :=
-    this
-  exact isIso_of_reflects_iso _ (AdicSheaf.forget X)
-
 /-- Blueprint `lem-exc-proetale-closed-exact` for `ℓ`-adic sheaves: the pushforward along a
 closed immersion with quasi-compact open complement is exact
 (`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`). -/
@@ -111,34 +95,6 @@ lemma isZero_adicUpperStar_adicLowerStar_of_disjoint (i : Z ⟶ X) (hi : IsClose
   exact ((IsOpenImmersion.lift V.ι g hgV)^*ᵃ[l].map_isZero hV).of_iso
     ((adicUpperStarCongr l (IsOpenImmersion.lift_fac V.ι g hgV).symm).app _ ≪≫
       (adicUpperStarComp l _ _).app _)
-
-/-- **Restriction of an extension by zero to an open.** For a cartesian square of open
-immersions
-
-```
-  W' --j'--> W
-  |          |
-  w'         w
-  v          v
-  U  --j-->  X
-```
-
-the restriction `w^* j_! N` vanishes as soon as `w'^* N` does: the adjunctions and the base
-change isomorphism `j^* w_* ≅ w'_* j'^*` turn `Hom(w^* j_! N, H)` into `Hom(w'^* N, j'^* H)`. -/
-lemma isZero_adicUpperStar_adicOpenImmersionLowerShriek_of_isPullback {U W W' : Scheme.{u}}
-    {j : U ⟶ X} [IsOpenImmersion j] {w : W ⟶ X} {w' : W' ⟶ U} {j' : W' ⟶ W}
-    [IsOpenImmersion j'] (hsq : IsPullback w' j' j w) (N : AdicSheaf l U)
-    (hN : IsZero ((w')^*ᵃ[l].obj N)) :
-    IsZero ((w)^*ᵃ[l].obj ((j)_!ᵃ[l].obj N)) := by
-  have := isIso_adicBaseChangeMap_of_isPullback l hsq
-  refine (isZero_zero _).of_iso (IsInitial.uniqueUpToIso (IsInitial.ofUnique (h := fun H ↦ ?_))
-    HasZeroObject.zeroIsInitial)
-  haveI : Unique ((w')^*ᵃ[l].obj N ⟶ (j')^*ᵃ[l].obj H) :=
-    ⟨⟨hN.isInitial.to _⟩, fun _ ↦ hN.isInitial.hom_ext _ _⟩
-  exact Equiv.unique (((adicUpperStarLowerStarAdjunction l w).homEquiv _ H).trans
-    (((adicOpenImmersionLowerShriekAdjunction l j).homEquiv N _).trans
-      ((Iso.homCongr (Iso.refl N) ((asIso (adicBaseChangeMap l hsq.toCommSq)).app H)).trans
-        ((adicUpperStarLowerStarAdjunction l w').homEquiv N _).symm)))
 
 end Vanishing
 

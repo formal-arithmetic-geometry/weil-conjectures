@@ -34,26 +34,4 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {X : Scheme.{u}} {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [MonObj S]
 
-/-- Restriction of scalars along an isomorphism of ring objects preserves constructibility. -/
-lemma IsConstructibleModuleObject.comap_of_isIso (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S}
-    (hM : IsConstructibleModuleObject S M) :
-    IsConstructibleModuleObject R ((Mod.comap φ).obj M) :=
-  constructible_comap φ hM
-
-/-- The uniform `Ext` bound is invariant under isomorphisms of ring objects. -/
-theorem HasUniformConstructibleExtBound.of_isIso (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
-    (h : HasUniformConstructibleExtBound S) : HasUniformConstructibleExtBound R := by
-  intro M hM
-  let F := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (inv φ)
-  have : F.IsEquivalence := (Mod.comapEquivalenceOfIsIso (inv φ)).isEquivalence_functor
-  obtain ⟨N, hN⟩ := h (F.obj M) (hM.comap_of_isIso (inv φ))
-  refine ⟨N, fun B hB n hn f ↦ F.mapDerivedCategory.map_injective ?_⟩
-  have := hN (F.obj B) (hB.comap_of_isIso (inv φ)) n hn
-    ((F.mapDerivedCategorySingleFunctor 0).inv.app M ≫ F.mapDerivedCategory.map f ≫
-      (F.mapDerivedCategorySingleFunctor n).hom.app B)
-  rw [Functor.map_zero, ← cancel_epi ((F.mapDerivedCategorySingleFunctor 0).inv.app M),
-    ← cancel_mono ((F.mapDerivedCategorySingleFunctor n).hom.app B)]
-  simpa using this
-
 end AlgebraicGeometry.ProEtale

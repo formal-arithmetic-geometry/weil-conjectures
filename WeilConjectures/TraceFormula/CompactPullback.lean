@@ -119,7 +119,6 @@ lemma boundedConstructibleLowerShriekCompToPoint_inv_app (h : Y ⟶ X)
   simp only [boundedConstructibleLowerShriekCompToPoint, Iso.trans_inv, Iso.symm_inv,
     NatTrans.comp_app, eqToIso.inv, eqToHom_app]
 
-
 /-- The composition isomorphisms of the lower shriek along equal morphisms agree up to the
 casts. -/
 lemma boundedConstructibleLowerShriekComp_padicAlgCl_hom_app_congr (g : Z ⟶ Y) {b b' : Y ⟶ X}
@@ -355,26 +354,6 @@ lemma boundedConstructibleUpperStarId_inv_app_comp_baseChange_app
     (boundedConstructibleUpperStarLowerShriekAdjunction_id_unit_app ℓ (point k)) _
     (boundedConstructibleLowerShriekSquareIso_toPoint_hom_app ℓ sq.w) M
 
-
-variable (X) in
-/-- The pullback along the identity is the identity isomorphism `𝟭 ≅ L(𝟙 X)^*`. -/
-lemma compactPullback_id_app [IsProper (𝟙 X : X ⟶ X).left]
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (compactPullback ℓ (𝟙 X)).app K =
-      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
-        ((boundedConstructibleUpperStarId _ ℓ X).inv.app K) := by
-  have hl := boundedConstructibleLowerShriekComp_padicAlgCl_id_left ℓ (toPoint X)
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K)
-  have hu := boundedConstructibleUpperStarLowerShriekAdjunction_id_unit_app ℓ X K
-  simp only [boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl,
-    Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.trans_hom,
-    Iso.symm_hom, Category.assoc] at hu
-  rw [compactPullback_app, boundedConstructibleLowerShriekCompToPoint_hom_app, ← hu]
-  simp only [Functor.map_comp]
-  congr 2
-  rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ (𝟙 X) (toPoint X)).hom.app
-    _), Iso.hom_inv_id_app_assoc, ← Functor.map_comp, hl]
-
 end Identity
 
 /-! ### Compatibility with compact-support base change -/
@@ -557,16 +536,6 @@ noncomputable def frobeniusCompactOperator [IsProper Φ.left]
     (boundedConstructibleLowerShriek ℓ (toPoint X)).map
       (frobeniusCoefficientIterate ψ m)
 
-lemma frobeniusCompactOperator_zero [IsProper Φ.left]
-    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
-    frobeniusCompactOperator ℓ ψ 0 = 𝟙 _ := by
-  have : IsProper (𝟙 X : X ⟶ X).left := inferInstanceAs (IsProper (𝟙 X.left))
-  simp only [frobeniusCompactOperator, frobeniusCoefficientIterate]
-  rw [CategoryTheory.Functor.map_comp, ← Category.assoc,
-    compactPullback_app_congr ℓ (frobeniusIterate_zero Φ), compactPullback_id_app,
-    ← CategoryTheory.Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
-  rfl
-
 lemma frobeniusCompactOperator_one [IsProper Φ.left]
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K) :
     frobeniusCompactOperator ℓ ψ 1 =
@@ -574,35 +543,6 @@ lemma frobeniusCompactOperator_one [IsProper Φ.left]
         (boundedConstructibleLowerShriek ℓ (toPoint X)).map ψ := by
   rw [frobeniusCompactOperator, frobeniusCoefficientIterate_one, Functor.map_comp,
     ← Category.assoc, compactPullback_app_congr ℓ (frobeniusIterate_one Φ)]
-
-lemma frobeniusCompactOperator_succ [IsProper Φ.left]
-    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
-    (m : ℕ) :
-    frobeniusCompactOperator ℓ ψ (m + 1) =
-      frobeniusCompactOperator ℓ ψ m ≫ frobeniusCompactOperator ℓ ψ 1 := by
-  have : IsProper (Φ ≫ frobeniusIterate Φ m).left := by
-    rw [Over.comp_left]
-    infer_instance
-  rw [frobeniusCompactOperator_one, frobeniusCompactOperator, frobeniusCompactOperator,
-    ← compactPullback_app_congr ℓ (frobeniusIterate_succ Φ m).symm, frobeniusCoefficientIterate,
-    compactPullback_comp_app]
-  simp only [Category.assoc, ← Functor.map_comp, eqToHom_refl,
-    Category.id_comp, Iso.inv_hom_id_app_assoc]
-  rw [Functor.map_comp, compactPullback_naturality_assoc]
-
-/-- **Iteration of the global operator** (blueprint `lem-trf-weil-shriek-iterates`, for an
-arbitrary Frobenius coefficient morphism): `F_{c,m}(ψ) = F_{c,1}(ψ)^m`. -/
-lemma frobeniusCompactOperator_eq_pow [IsProper Φ.left]
-    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
-    (m : ℕ) :
-    frobeniusCompactOperator ℓ ψ m =
-      (show End ((boundedConstructibleLowerShriek ℓ
-        (toPoint X)).obj K) from frobeniusCompactOperator ℓ ψ 1) ^ m := by
-  induction m with
-  | zero => exact frobeniusCompactOperator_zero ℓ ψ
-  | succ m ih =>
-    rw [frobeniusCompactOperator_succ, ih, pow_succ']
-    rfl
 
 end Frobenius
 

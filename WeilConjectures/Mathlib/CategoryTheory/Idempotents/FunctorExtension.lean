@@ -20,18 +20,4 @@ namespace CategoryTheory.Idempotents
 
 variable {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
 
-instance faithful_functorExtension₂_obj [F.Faithful] :
-    ((functorExtension₂ C D).obj F).Faithful where
-  map_injective {P Q} f g h := by
-    ext
-    exact F.map_injective (by simpa using congrArg Karoubi.Hom.f h)
-
-instance full_functorExtension₂_obj [F.Full] [F.Faithful] :
-    ((functorExtension₂ C D).obj F).Full where
-  map_surjective {P Q} g := by
-    refine ⟨⟨F.preimage g.f, F.map_injective ?_⟩, ?_⟩
-    · simpa using g.comm
-    · ext
-      simp
-
 end CategoryTheory.Idempotents

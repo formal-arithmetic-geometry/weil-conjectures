@@ -64,42 +64,10 @@ variable (X : Scheme.{u})
 
 namespace ProEtale
 
-/-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
-internal Hom; the derived internal Hom, right adjoint to `- ⊗ᴸ -`
-(`AlgebraicGeometry.ProEtale.derivedTensorHomAdjunction₂`).
-
-The derived hom `RHom(-, -) : D(X_proét)ᵒᵖ ⥤ D(X_proét) ⥤ D(X_proét)` on the unbounded derived
-category of `A`-valued pro-étale sheaves on `X`: the internal hom of the monoidal closed
-structure on `D(X_proét)`, i.e. the right adjoint of the derived tensor product `- ⊗ᴸ -`. -/
-@[implicit_reducible]
-noncomputable def derivedHom :
-    (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))ᵒᵖ ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
-        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  MonoidalClosed.internalHom
-
 @[inherit_doc derivedHom]
 scoped notation "RHom(" X ")[" A "]" => derivedHom A X
 
-/-- The derived hom of pro-étale sheaves is right adjoint to the derived tensor product, as an
-adjunction with a parameter: `- ⊗ᴸ - ⊣₂ RHom(-, -)`. -/
-noncomputable def derivedTensorHomAdjunction₂ : -⊗ᴸ-(X)[A] ⊣₂ RHom(X)[A] :=
-  MonoidalClosed.internalHomAdjunction₂
-
 variable {X}
-
-/-- For a fixed `K : D(X_proét)`, the derived tensor product `K ⊗ᴸ -` is left adjoint to the
-derived hom `RHom(K, -)`. -/
-noncomputable def derivedTensorHomAdjunction
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    (-⊗ᴸ-(X)[A]).obj K ⊣ (RHom(X)[A]).obj (op K) :=
-  (derivedTensorHomAdjunction₂ A X).adj K
-
-/-- The derived hom `RHom(K, -)` is a right adjoint. -/
-instance isRightAdjoint_derivedHom_obj
-    (K : (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))ᵒᵖ) :
-    ((RHom(X)[A]).obj K).IsRightAdjoint :=
-  (derivedTensorHomAdjunction A K.unop).isRightAdjoint
 
 end ProEtale
 

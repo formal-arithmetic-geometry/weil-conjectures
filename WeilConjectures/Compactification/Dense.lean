@@ -53,12 +53,6 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 protected def Compactification.IsDense (c : Compactification f) : Prop :=
   IsSchemeTheoreticallyDominant c.i
 
-/-- The defining property of a dense compactification, in the form usable by typeclass
-search: if `c` is dense, then `c.i` is scheme-theoretically dominant. -/
-theorem Compactification.IsDense.isSchemeTheoreticallyDominant {c : Compactification f}
-    (hc : c.IsDense) : IsSchemeTheoreticallyDominant c.i :=
-  hc
-
 /-- The dense refinement of a compactification of a quasi-compact morphism is dense
 (blueprint: `prop:nagata-dense-refinement`). -/
 theorem Compactification.isDense_denseRefinement (c : Compactification f) [QuasiCompact f] :
@@ -76,21 +70,6 @@ theorem exists_isDense_compactification [IsSeparated f] [LocallyOfFiniteType f] 
     [CompactSpace Y] [QuasiSeparatedSpace Y] :
     ∃ c : Compactification f, c.IsDense :=
   ⟨_, (NagataCompactification f).isDense_denseRefinement⟩
-
-variable (f) in
-/-- The **chosen dense compactification** of a separated, quasi-compact morphism locally of
-finite type over a quasi-compact quasi-separated base: the dense refinement of the
-compactification produced by `AlgebraicGeometry.NagataCompactification`. -/
-noncomputable def denseCompactification [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [CompactSpace Y] [QuasiSeparatedSpace Y] : Compactification f :=
-  (NagataCompactification f).denseRefinement
-
-variable (f) in
-/-- The chosen dense compactification is dense. -/
-theorem denseCompactification_isDense [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [CompactSpace Y] [QuasiSeparatedSpace Y] :
-    (denseCompactification f).IsDense :=
-  (NagataCompactification f).isDense_denseRefinement
 
 /-! ### Axiom census
 

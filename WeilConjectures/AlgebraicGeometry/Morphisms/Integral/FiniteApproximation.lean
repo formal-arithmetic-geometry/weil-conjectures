@@ -85,7 +85,6 @@ lemma hom_ext_of_isLimit_opensCone [IsCofiltered I] (i₀ : I) {σ : Type*}
   rw [IsOpenImmersion.lift_fac_assoc, IsOpenImmersion.lift_fac_assoc, Category.assoc,
     Category.assoc, hm]
 
-
 variable {D c} in
 lemma lift_opensCone_ι_π_app [IsCofiltered I] {i₀ : I} {V : (D.obj i₀).Opens}
     (hV : IsLimit (opensCone D c i₀ V)) (s : Cone D) (j : I) :
@@ -181,7 +180,6 @@ def RingHom.dualSubringMap (α : R →+* A) (α' : R' →+* A') (ρR : R →+* R
     rw [DualNumber.fst_map, ← hr]
     exact (RingHom.congr_fun h r).symm
 
-
 @[simp]
 lemma RingHom.coe_dualSubringMap (α : R →+* A) (α' : R' →+* A') (ρR : R →+* R') (ρ : A →+* A')
     (h : ρ.comp α = α'.comp ρR) (z : α.dualSubring) :
@@ -247,7 +245,6 @@ lemma RingHom.isLocalization_dualSubringMap (α : R →+* A) (α' : R' →+* A')
         smul_eq_mul, mul_zero, pow_add]
       linear_combination (α r) ^ n * hm
 
-
 set_option backward.isDefEq.respectTransparency false in
 /-- Let `A'` be the localization of `A` away from `s`, let `B ⊆ A` be a subring containing `s`,
 and let `B' ⊆ A'` be a subring containing `ρ(B)` and the inverse of `ρ(s)`, every element of which
@@ -276,7 +273,6 @@ lemma Subring.isLocalization_away_of_le (ρ : A →+* A') (s : A)
     have h1 : algebraMap A A' x = algebraMap A A' y := congrArg Subtype.val hxy
     obtain ⟨n, hn⟩ := IsLocalization.Away.exists_of_eq (S := A') s h1
     exact ⟨n, Subtype.ext (by simpa using hn)⟩
-
 
 /-- If `α : R →+* A` is integral and `s ⊆ A` is finite, then `R →+* closure (α(R) ∪ s)` is
 finite. -/
@@ -354,7 +350,6 @@ lemma coequifibered_dualAlgMap (H : α.Coequifibered) : (dualAlgMap α).Coequifi
   exact RingHom.isLocalization_dualSubringMap _ _ _ _ (comp_hom_eq_of_naturality _) r hR
     (coequifibered_iff_forall_isLocalizationAway.mp H U r)
 
-
 section Approximation
 
 variable (H : α.Coequifibered)
@@ -410,7 +405,6 @@ lemma mem_ker_dualGluedι_iff (U : S.AffineZariskiSite)
     CommRingCat.comp_apply, ← map_zero ((relativeGluingData H).glued.presheaf.map
       (homOfLE hpre.ge).op).hom, hinj.eq_iff]
   exact Iff.rfl
-
 
 lemma dualAffineOpen_le {U V : S.AffineZariskiSite} (i : V ⟶ U) :
     dualAffineOpen H V ≤ dualAffineOpen H U :=
@@ -486,16 +480,10 @@ lemma map_mem_subAlg (J : (dualGlueData H).glued.IdealSheafData) {U V : S.Affine
     exact Subring.subset_closure (Or.inl ⟨_, rfl⟩)
   · exact Subring.subset_closure (Or.inr (map_mem_subMod H J i hx))
 
-
 lemma snd_dualInr_mul {U : S.AffineZariskiSite} (m : F.obj (.op U)) (y : (dualAlg α).obj (.op U)) :
     (dualInr m * y).1.snd = m * y.1.fst := by
   change (inr m * y.1 : DualNumber (F.obj (.op U))).snd = _
   simp [mul_comm]
-
-lemma fst_dualInr_mul {U : S.AffineZariskiSite} (m : F.obj (.op U)) (y : (dualAlg α).obj (.op U)) :
-    (dualInr m * y).1.fst = 0 := by
-  change (inr m * y.1 : DualNumber (F.obj (.op U))).fst = _
-  simp
 
 lemma exists_mul_pow_eq_of_mem_subMod (J : (dualGlueData H).glued.IdealSheafData)
     (hJ : J ≤ (dualGluedι H).ker) (U : S.AffineZariskiSite) (r : Γ(S, U.1))
@@ -540,7 +528,6 @@ lemma exists_mul_pow_eq_of_mem_subMod (J : (dualGlueData H).glued.IdealSheafData
       simp
       rfl
 
-
 lemma exists_mul_pow_eq_of_mem_subAlg (J : (dualGlueData H).glued.IdealSheafData)
     (hJ : J ≤ (dualGluedι H).ker) (U : S.AffineZariskiSite) (r : Γ(S, U.1))
     {b' : F.obj (.op (U.basicOpen r))} (hb' : b' ∈ subAlg J (U.basicOpen r)) :
@@ -583,7 +570,6 @@ lemma exists_mul_pow_eq_of_mem_subAlg (J : (dualGlueData H).glued.IdealSheafData
     rw [map_mul, ← h₁, ← h₂]
     ring
 
-
 variable {H} in
 /-- The restriction maps of the subalgebra attached to `J`. -/
 noncomputable def subAlgRes (J : (dualGlueData H).glued.IdealSheafData)
@@ -612,10 +598,6 @@ noncomputable def subAlgFunctor (J : (dualGlueData H).glued.IdealSheafData) :
       subAlgRes_apply_coe, CategoryTheory.Functor.map_comp, CommRingCat.hom_comp,
       RingHom.comp_apply]
 
-lemma subAlgFunctor_map (J : (dualGlueData H).glued.IdealSheafData)
-    {U V : S.AffineZariskiSiteᵒᵖ} (i : U ⟶ V) : (subAlgFunctor J).map i = subAlgRes J i :=
-  rfl
-
 variable {H} in
 /-- The components of the structure morphism `𝒪_S ⟶ subAlgFunctor J`. -/
 noncomputable def subAlgMapApp (J : (dualGlueData H).glued.IdealSheafData)
@@ -639,10 +621,6 @@ noncomputable def subAlgMap (J : (dualGlueData H).glued.IdealSheafData) :
       ((ConcreteCategory.congr_hom (α.naturality i) r).trans
       ((congrArg (F.map i).hom (subAlgMapApp_apply_coe H J U r)).symm.trans
         (subAlgRes_apply_coe H J i _).symm))
-
-lemma subAlgMap_app (J : (dualGlueData H).glued.IdealSheafData) (U : S.AffineZariskiSiteᵒᵖ) :
-    (subAlgMap J).app U = subAlgMapApp J U :=
-  rfl
 
 variable {H} in
 /-- The components of the inclusion of the subalgebras attached to `J ≤ J'`. -/
@@ -669,10 +647,6 @@ noncomputable def subAlgInclusion {J J' : (dualGlueData H).glued.IdealSheafData}
       ((congrArg (F.map i).hom (subAlgInclusionApp_apply_coe H h U b)).symm.trans
         (subAlgRes_apply_coe H J' i _).symm))
 
-lemma subAlgInclusion_app {J J' : (dualGlueData H).glued.IdealSheafData} (h : J ≤ J')
-    (U : S.AffineZariskiSiteᵒᵖ) : (subAlgInclusion h).app U = subAlgInclusionApp h U :=
-  rfl
-
 variable {H} in
 /-- The components of the inclusion of the subalgebra attached to `J` into `F`. -/
 noncomputable def subAlgιApp (J : (dualGlueData H).glued.IdealSheafData)
@@ -692,10 +666,6 @@ noncomputable def subAlgι (J : (dualGlueData H).glued.IdealSheafData) : subAlgF
     rw [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_comp, RingHom.comp_apply]
     exact (subAlgιApp_apply H J V _).trans ((subAlgRes_apply_coe H J i b).trans
       (congrArg (F.map i).hom (subAlgιApp_apply H J U b)).symm)
-
-lemma subAlgι_app (J : (dualGlueData H).glued.IdealSheafData) (U : S.AffineZariskiSiteᵒᵖ) :
-    (subAlgι J).app U = subAlgιApp J U :=
-  rfl
 
 lemma subAlgMap_comp_subAlgInclusion {J J' : (dualGlueData H).glued.IdealSheafData}
     (h : J ≤ J') : subAlgMap J ≫ subAlgInclusion h = subAlgMap J' := by
@@ -751,7 +721,6 @@ lemma coequifibered_subAlgMap (J : (dualGlueData H).glued.IdealSheafData)
       algebraMap_mem_subAlg H J _ _, ?_⟩
     fun b' hb' ↦ exists_mul_pow_eq_of_mem_subAlg H J hJ U r hb'
   rw [hnat, ← map_mul, IsUnit.val_inv_mul, map_one]
-
 
 lemma exists_finset_subAlg_eq_closure (J : (dualGlueData H).glued.IdealSheafData)
     (hJ : J ≤ (dualGluedι H).ker) (U : S.AffineZariskiSite)
@@ -819,7 +788,6 @@ lemma exists_fgSub_mem_subAlg [CompactSpace S] [QuasiSeparatedSpace S] (U : S.Af
   obtain ⟨J, hJK, hJfg, hJ⟩ := (dualGluedι H).ker.exists_finiteType_le_of_mem _ hs
   exact ⟨⟨J, hJK, hJfg⟩, subMod_subset_subAlg H J U hJ⟩
 
-
 /-- The index category of the finite approximation: the subideal sheaves of finite type of the
 kernel of `Spec_S F ⟶ Spec_S (𝒪_S + ε F)`, ordered by reverse inclusion. -/
 abbrev ApproxIndex : Type u := ((dualGluedι H).ker.FGSub)ᵒᵖ
@@ -866,7 +834,6 @@ lemma isFinite_approxP (hα : ∀ U, (α.app U).hom.IsIntegral) (j : ApproxIndex
     IsFinite (approxP H j) :=
   isFinite_toBase _ fun _ ↦ subAlgMap_app_finite H hα _ j.unop.2.1 j.unop.2.2 _
 
-
 /-- The diagram of the rings `B_J(U)`, for an affine open `U`. -/
 noncomputable def approxRingDiagram (U : S.AffineZariskiSite) :
     ApproxIndex H ⥤ CommRingCat.{u}ᵒᵖ where
@@ -910,7 +877,6 @@ noncomputable def isColimitApproxRingCocone [CompactSpace S] [QuasiSeparatedSpac
       (hxy.trans (subAlgιApp_apply H _ _ y)))
     rw [this]
 
-
 /-- `Spec_S F` as a cone over the stages. -/
 noncomputable abbrev approxCone : Cone (approxDiagram H) :=
   ⟨(relativeGluingData H).glued, approxπ H⟩
@@ -931,12 +897,6 @@ lemma approx_ι_map {j j' : ApproxIndex H} (f : j ⟶ j') (U : S.AffineZariskiSi
     colimit.ι (relativeGluingData (coequifibered_approx H j)).functor U ≫ (approxDiagram H).map f =
       Scheme.Spec.map ((approxRingDiagram H U).map f) ≫
         colimit.ι (relativeGluingData (coequifibered_approx H j')).functor U :=
-  ι_relativeGluingMap _ _ _ U
-
-lemma approx_ι_π (j : ApproxIndex H) (U : S.AffineZariskiSite) :
-    colimit.ι (relativeGluingData H).functor U ≫ (approxπ H).app j =
-      Spec.map ((subAlgι j.unop.1).app (.op U)) ≫
-        colimit.ι (relativeGluingData (coequifibered_approx H j)).functor U :=
   ι_relativeGluingMap _ _ _ U
 
 lemma approx_ι_π' (j₀ : ApproxIndex H) (j : Over j₀) (U : S.AffineZariskiSite) :
@@ -1001,7 +961,6 @@ noncomputable def isLimitApproxOpensCone [CompactSpace S] [QuasiSeparatedSpace S
   rw [← approx_ι_π', ← Category.assoc, approxConeOpensIso_hom_ι]
   exact (opensCone_π_ι (approxDiagram H) (approxCone H) j₀ _ j).symm.trans
     (congrArg _ (approxOpensIso_hom_ι H j₀ U j).symm)
-
 
 /-- The bottom index of the finite approximation. -/
 noncomputable abbrev approxBot : ApproxIndex H := Opposite.op ⊥

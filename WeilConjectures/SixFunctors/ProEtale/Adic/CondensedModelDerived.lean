@@ -151,16 +151,6 @@ noncomputable def adicSheafDerivedEquivCondensedMod :
         (condensedRingObj (Profinite.padicAlgClRingObj l) X)) :=
   (adicSheafEquivCondensedMod l X).mapDerivedCategory
 
-lemma adicSheafDerivedEquivCondensedMod_functor :
-    (adicSheafDerivedEquivCondensedMod l X).functor =
-      (adicSheafEquivCondensedMod l X).functor.mapDerivedCategory :=
-  rfl
-
-lemma adicSheafDerivedEquivCondensedMod_inverse :
-    (adicSheafDerivedEquivCondensedMod l X).inverse =
-      (adicSheafEquivCondensedMod l X).inverse.mapDerivedCategory :=
-  rfl
-
 /-- The derived comparison commutes with the shifts. -/
 noncomputable instance : (adicSheafDerivedEquivCondensedMod l X).functor.CommShift ℤ :=
   inferInstanceAs ((adicSheafEquivCondensedMod l X).functor.mapDerivedCategory.CommShift ℤ)
@@ -213,62 +203,7 @@ noncomputable def adicRightDerivedLowerStarCompIso {Y : Scheme.{u}} (f : Y ⟶ X
 
 /-! ### Extension by zero -/
 
-/-- **Extension by zero compatibility of the two models**: for an open immersion `j : U ⟶ X`,
-the comparison intertwines the extension by zero `j_!` of sheaves of `ℚ̄_ℓ,U`-modules with the
-extension by zero of module objects over `Λ_U`: `j_! ⋙ E_X ≅ E_U ⋙ j_!`. Both are left adjoint to
-the pullbacks `j^*`, so this is the conjugate of the pullback compatibility
-`AlgebraicGeometry.ProEtale.adicUpperStarCompCondensedModIso`. -/
-noncomputable def adicOpenImmersionLowerShriekCompCondensedModIso {U : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] :
-    (j)_!ᵃ[l] ⋙ (adicSheafEquivCondensedMod l X).functor ≅
-      (adicSheafEquivCondensedMod l U).functor ⋙
-        CondensedRing.openImmersionLowerShriek (Profinite.padicAlgClRingObj l) j :=
-  Adjunction.leftAdjointCompIsoOfEquivalence (adicOpenImmersionLowerShriekAdjunction l j)
-    (CondensedRing.openImmersionLowerShriekUpperStarAdjunction _ j) _ _
-    (adicUpperStarCompCondensedModIso l j)
-
-/-- The extension by zero compatibility on derived categories:
-`D(j_!) ⋙ D(E_X) ≅ D(E_U) ⋙ D(j_!)`, both extensions by zero being exact. -/
-noncomputable def adicOpenImmersionLowerShriekMapDerivedCategoryCompIso {U : Scheme.{u}}
-    (j : U ⟶ X) [IsOpenImmersion j] :
-    (j)_!ᵃ[l].mapDerivedCategory ⋙ (adicSheafDerivedEquivCondensedMod l X).functor ≅
-      (adicSheafDerivedEquivCondensedMod l U).functor ⋙
-        (CondensedRing.openImmersionLowerShriek (Profinite.padicAlgClRingObj l)
-          j).mapDerivedCategory :=
-  Functor.mapDerivedCategoryCompIsoOfIso (adicOpenImmersionLowerShriekCompCondensedModIso l X j)
-
 /-! ### Derived lower shriek -/
-
-/-- **Derived lower shriek compatibility of the two models**, for a compactification
-`c = (Y ⟶[i] Z ⟶[g] X)` of `f : Y ⟶ X`: the old-model direct image with compact support
-`Rf_! = Rg_* ∘ D(i_!)` (as in
-`AlgebraicGeometry.ProEtale.algClosedCompactlySupportedGlobalSections`)
-is intertwined by the derived comparisons with the new-model
-`AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification`. -/
-noncomputable def adicRightDerivedLowerShriekOfCompactificationCompIso {Y : Scheme.{u}}
-    {f : Y ⟶ X} (c : Compactification f) :
-    ((c.i)_!ᵃ[l].mapDerivedCategory ⋙ (c.g)_*ᵃ[l].rightDerivedFunctor) ⋙
-        (adicSheafDerivedEquivCondensedMod l X).functor ≅
-      (adicSheafDerivedEquivCondensedMod l Y).functor ⋙
-        CondensedRing.rightDerivedLowerShriekOfCompactification
-          (Profinite.padicAlgClRingObj l) c :=
-  Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (adicRightDerivedLowerStarCompIso l X c.g) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (adicOpenImmersionLowerShriekMapDerivedCategoryCompIso l c.Z c.i) _ ≪≫
-    Functor.associator _ _ _
-
-/-- **Derived lower shriek compatibility of the two models**, for the chosen compactification:
-`Rf_! ⋙ D(E_X) ≅ D(E_Y) ⋙ Rf_!`, where the old `Rf_!` is `Rḡ_* ∘ D(ī_!)` for the chosen
-compactification `Y ⟶[ī] Z ⟶[ḡ] X` and the new one is
-`AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriek`. -/
-noncomputable def adicRightDerivedLowerShriekCompIso {Y : Scheme.{u}} (f : Y ⟶ X)
-    [HasCompactification f] :
-    (((HasCompactification.compactification f).i)_!ᵃ[l].mapDerivedCategory ⋙
-        ((HasCompactification.compactification f).g)_*ᵃ[l].rightDerivedFunctor) ⋙
-        (adicSheafDerivedEquivCondensedMod l X).functor ≅
-      (adicSheafDerivedEquivCondensedMod l Y).functor ⋙
-        CondensedRing.rightDerivedLowerShriek (Profinite.padicAlgClRingObj l) f :=
-  adicRightDerivedLowerShriekOfCompactificationCompIso l X _
 
 /-! ### Derived global sections and compactly supported cohomology -/
 
@@ -279,52 +214,5 @@ instance : PreservesFiniteLimits (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1})
 
 instance : PreservesFiniteColimits (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1}) where
   preservesFiniteColimits _ := ⟨fun {_} ↦ inferInstance⟩
-
-/-- The global sections of an `ℓ`-adic sheaf, as an abelian group, are the global sections of the
-underlying abelian sheaf of the corresponding module object over `Λ_s`. -/
-noncomputable def condensedModGlobalSectionsIso :
-    (adicSheafEquivCondensedMod l s).functor ⋙
-        (Mod.forget (condensedRingObj (Profinite.padicAlgClRingObj l) s) ⋙
-          Sheaf.Γ (Scheme.ProEt.topology s) Ab.{u + 1}) ≅
-      adicGlobalSections l s ⋙ forget₂ (WeilCoefficients.{u} l) Ab.{u + 1} :=
-  Iso.refl (AdicSheaf.forget s ⋙ weilCoefficientsForgetAb l s ⋙
-      Sheaf.Γ (Scheme.ProEt.topology s) Ab.{u + 1}) ≪≫
-    Functor.isoWhiskerLeft (AdicSheaf.forget s) (globalSectionsForgetAbIso l s).symm ≪≫
-    (Functor.associator _ _ _).symm
-
-/-- **Derived global sections compatibility of the two models**: the derived global sections
-`RΓ(s, -)` of `ℓ`-adic complexes, as complexes of abelian groups, agree with the derived global
-sections of the underlying abelian sheaves of the corresponding module objects over `Λ_s`. -/
-noncomputable def adicRightDerivedGlobalSectionsCompForgetIso :
-    (adicGlobalSections l s).rightDerivedFunctor ⋙
-        (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1}).mapDerivedCategory ≅
-      (adicSheafDerivedEquivCondensedMod l s).functor ⋙
-        (Mod.forget (condensedRingObj (Profinite.padicAlgClRingObj l) s) ⋙
-          Sheaf.Γ (Scheme.ProEt.topology s) Ab.{u + 1}).rightDerivedFunctor :=
-  have := (adicSheafEquivCondensedMod l s).preservesKInjectiveComplexes_functor
-  (Functor.rightDerivedFunctorCompMapDerivedCategoryIso _ _).symm ≪≫
-    Functor.rightDerivedFunctorIsoMapDerivedCategoryComp (condensedModGlobalSectionsIso l s)
-
-/-- **Compactly supported cohomology in the two models**: for a compactification
-`c = (Y ⟶[i] Z ⟶[g] s)` of `a : Y ⟶ s`, the compactly supported derived global sections
-`RΓ_c(Y, -) = RΓ(s, -) ∘ Rg_* ∘ D(i_!)` of `ℓ`-adic complexes (the body of
-`AlgebraicGeometry.ProEtale.algClosedCompactlySupportedGlobalSections` for the chosen
-compactification), as complexes of abelian groups, agree with
-`RΓ(s, -) ∘ Rf_!(c)` on module objects over `Λ`. -/
-noncomputable def adicCompactlySupportedGlobalSectionsCompForgetIso {Y : Scheme.{u}}
-    {a : Y ⟶ s} (c : Compactification a) :
-    ((c.i)_!ᵃ[l].mapDerivedCategory ⋙ (c.g)_*ᵃ[l].rightDerivedFunctor ⋙
-        (adicGlobalSections l s).rightDerivedFunctor) ⋙
-        (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1}).mapDerivedCategory ≅
-      (adicSheafDerivedEquivCondensedMod l Y).functor ⋙
-        CondensedRing.rightDerivedLowerShriekOfCompactification
-          (Profinite.padicAlgClRingObj l) c ⋙
-        (Mod.forget (condensedRingObj (Profinite.padicAlgClRingObj l) s) ⋙
-          Sheaf.Γ (Scheme.ProEt.topology s) Ab.{u + 1}).rightDerivedFunctor :=
-  Functor.isoWhiskerRight (Functor.associator _ _ _).symm _ ≪≫ Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (adicRightDerivedGlobalSectionsCompForgetIso l s) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (adicRightDerivedLowerShriekOfCompactificationCompIso l s c) _ ≪≫
-    Functor.associator _ _ _
 
 end AlgebraicGeometry.ProEtale

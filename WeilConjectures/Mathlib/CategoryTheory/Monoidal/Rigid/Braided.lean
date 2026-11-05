@@ -103,36 +103,9 @@ lemma trace_eq_of_exactPairing {X : C} [HasRightDual X] (Y : C) [ExactPairing X 
     BraidedCategory.braiding_naturality_left_assoc,
     BraidedCategory.braiding_naturality_right_assoc, whisker_exchange_assoc]
 
-/-- **Conjugacy invariance of the trace**: for an isomorphism `e : X ≅ Y` of dualizable objects
-and an endomorphism `f` of `Y`, `tr(e ≫ f ≫ e⁻¹) = tr(f)`. -/
-lemma trace_conj {X Y : C} [HasRightDual X] [HasRightDual Y] (e : X ≅ Y) (f : Y ⟶ Y) :
-    trace (e.hom ≫ f ≫ e.inv) = trace f := by
-  let : ExactPairing X Yᘁ := exactPairingCongrLeft e
-  rw [trace_eq_of_exactPairing Yᘁ, trace]
-  change (η_ Y Yᘁ ≫ e.inv ▷ Yᘁ) ≫ (e.hom ≫ f ≫ e.inv) ▷ Yᘁ ≫ (β_ X Yᘁ).hom ≫
-    Yᘁ ◁ e.hom ≫ ε_ Y Yᘁ = _
-  rw [← BraidedCategory.braiding_naturality_left_assoc]
-  simp only [← comp_whiskerRight_assoc, Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
-    Category.comp_id]
-
 section
 
 variable {D : Type*} [Category D] [MonoidalCategory D] [BraidedCategory D]
-
-/-- **A braided monoidal functor preserves traces.** For a braided monoidal functor `F` and an
-endomorphism `f` of a dualizable object `X` such that `F X` is dualizable,
-`tr(F f) = ε⁻¹ ∘ F(tr f) ∘ ε`, where `ε : 𝟙_ ⟶ F 𝟙_` is the unit of `F`. -/
-lemma _root_.CategoryTheory.Functor.map_trace (F : C ⥤ D) [F.Braided] {X : C} [HasRightDual X]
-    [HasRightDual (F.obj X)] (f : X ⟶ X) :
-    trace (F.map f) = ε F ≫ F.map (trace f) ≫ η F := by
-  let := ExactPairing.map F X Xᘁ
-  rw [trace_eq_of_exactPairing (F.obj Xᘁ), trace]
-  change (ε F ≫ F.map (η_ X Xᘁ) ≫ δ F X Xᘁ) ≫ F.map f ▷ F.obj Xᘁ ≫ (β_ _ _).hom ≫
-    μ F Xᘁ X ≫ F.map (ε_ X Xᘁ) ≫ η F = _
-  simp only [Category.assoc, Functor.map_comp]
-  congr 2
-  rw [Functor.Monoidal.map_whiskerRight, Functor.map_braiding]
-  simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
 
 end
 /-- The trace is cyclic: `tr(g ≫ h) = tr(h ≫ g)` for `g : X ⟶ Y` and `h : Y ⟶ X`. -/
@@ -158,31 +131,6 @@ summand. If `e = π ≫ i` is an idempotent of `P` split by `i : Q ⟶ P`, `π :
 theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P ⟶ P)
     (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
   rw [← Category.assoc, trace_comp_comm]
-
-/-- Representative independence of the summand trace: if an isomorphism `w : P ≅ P'` transports the
-idempotent `e` to `e'` and the endomorphism `v` to `v'`, the summand traces `tr(v ∘ e ∣ P)` and
-`tr(v' ∘ e' ∣ P')` agree. -/
-theorem trace_comp_idempotent_eq_of_iso {P P' : C} [HasRightDual P] [HasRightDual P'] (w : P ≅ P')
-    (e : P ⟶ P) (e' : P' ⟶ P') (v : P ⟶ P) (v' : P' ⟶ P') (he : e ≫ w.hom = w.hom ≫ e')
-    (hv : v ≫ w.hom = w.hom ≫ v') : trace (v ≫ e) = trace (v' ≫ e') :=
-  trace_eq_of_iso w _ _ (by rw [Category.assoc, he, reassoc_of% hv])
-
-/-- The trace of the identity of the monoidal unit is the identity, for any right dual of the
-unit. -/
-theorem trace_id_tensorUnit [HasRightDual (𝟙_ C)] : trace (𝟙 (𝟙_ C)) = 𝟙 _ := by
-  have h := ExactPairing.evaluation_coevaluation (𝟙_ C) (𝟙_ C)ᘁ
-  rw [whiskerRight_id, id_whiskerLeft] at h
-  have hc : (ρ_ (𝟙_ C ⊗ (𝟙_ C)ᘁ)).inv ≫ (α_ _ _ _).hom ≫ (λ_ ((𝟙_ C)ᘁ ⊗ 𝟙_ C)).hom =
-      (λ_ (𝟙_ C)ᘁ).hom ≫ (ρ_ (𝟙_ C)ᘁ).inv := by
-    monoidal_coherence
-  have h' : (ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫ (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫
-      (λ_ (𝟙_ C)).inv = 𝟙 _ := by
-    rw [← reassoc_of% hc]
-    simpa [unitors_equal] using h
-  rw [trace, id_whiskerRight, Category.id_comp, braiding_tensorUnit_left]
-  calc _ = (ρ_ (𝟙_ C)).inv ≫ ((ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫
-        (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫ (λ_ (𝟙_ C)).inv) ≫ (λ_ (𝟙_ C)).hom := by simp
-    _ = 𝟙 _ := by rw [h']; simp [unitors_equal]
 
 /-- The trace of an endomorphism of the unit, for the canonical self-duality of the unit, is the
 endomorphism itself. -/
@@ -290,65 +238,6 @@ theorem isIso_toIhomIhomUnit (X : C) [HasRightDual X] : IsIso (toIhomIhomUnit X)
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((pre e.inv).app (𝟙_ C))
 
-/-- In a braided monoidal closed category, the canonical biduality map
-`X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a dualizable object is an isomorphism. -/
-theorem isIso_toIhomIhomUnit_of_isDualizable {X : C} (hX : IsDualizable X) :
-    IsIso (toIhomIhomUnit X) := by
-  obtain ⟨_⟩ := hX
-  exact isIso_toIhomIhomUnit X
-
-/-- A perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` of a dualizable object `X` is the evaluation of an
-exact pairing of `Y` and `X` (`IsPerfectPairing.evaluation_exactPairing`): `Y` is a
-left dual of `X`. -/
-@[instance_reducible]
-noncomputable def IsPerfectPairing.exactPairing {X Y : C} (hX : IsDualizable X)
-    {b : X ⊗ Y ⟶ 𝟙_ C} (h : IsPerfectPairing b) : ExactPairing Y X :=
-  have := h.isIso
-  have : IsIso (ihomUnitTensorToIhom X X) := by
-    obtain ⟨_⟩ := hX
-    let := BraidedCategory.exactPairing_swap X Xᘁ
-    exact isIso_ihomUnitTensorToIhom Xᘁ X X
-  let := exactPairingOfIsIso X
-  exactPairingCongrLeft (asIso (curry b))
-
-/-- The evaluation of the exact pairing `IsPerfectPairing.exactPairing` of a perfect pairing
-`b` is `b`. -/
-lemma IsPerfectPairing.evaluation_exactPairing {X Y : C} (hX : IsDualizable X)
-    {b : X ⊗ Y ⟶ 𝟙_ C}
-    (h : IsPerfectPairing b) :
-    letI := h.exactPairing hX
-    ε_ Y X = b :=
-  uncurry_curry b
-
-/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
-`def-pod-perfect-derived-pairing`): perfectness of a pairing is symmetric in the two variables.
-
-If `X` is dualizable and the pairing `b : X ⊗ Y ⟶ 𝟙_ C` is perfect, `Y ≅ [X, 𝟙_ C]`, then the
-swapped pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect as well, `X ≅ [Y, 𝟙_ C]`: `b` is the
-evaluation of an exact pairing of `Y` and `X`, and the braiding turns it into an exact pairing
-of `X` and `Y` whose evaluation is the swapped pairing. -/
-theorem IsPerfectPairing.braiding_hom_comp {X Y : C} (hX : IsDualizable X)
-    {b : X ⊗ Y ⟶ 𝟙_ C} (h : IsPerfectPairing b) : IsPerfectPairing ((β_ Y X).hom ≫ b) := by
-  let := h.exactPairing hX
-  let := BraidedCategory.exactPairing_swap Y X
-  have hε : ε_ X Y = (β_ Y X).hom ≫ b := by
-    rw [← h.evaluation_exactPairing hX]
-    rfl
-  exact ⟨hε ▸ isIso_curry_evaluation X Y⟩
-
-/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
-`def-pod-perfect-derived-pairing`): perfectness of a pairing is symmetric in the two variables.
-
-In a symmetric monoidal closed category, a pairing `b : X ⊗ Y ⟶ 𝟙_ C` of dualizable objects
-(for instance perfect point complexes) is perfect, `Y ≅ [X, 𝟙_ C]`, if and only if the swapped
-pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect, `X ≅ [Y, 𝟙_ C]`. -/
-theorem isPerfectPairing_braiding_hom_comp_iff {C : Type*} [Category C] [MonoidalCategory C]
-    [SymmetricCategory C] [MonoidalClosed C] {X Y : C} (hX : IsDualizable X)
-    (hY : IsDualizable Y) {b : X ⊗ Y ⟶ 𝟙_ C} :
-    IsPerfectPairing ((β_ Y X).hom ≫ b) ↔ IsPerfectPairing b := by
-  refine ⟨fun h ↦ ?_, fun h ↦ h.braiding_hom_comp hX⟩
-  simpa using h.braiding_hom_comp hY
-
 section
 
 variable (Y X : C) [ExactPairing Y X] (e : Y ⊗ X ≅ 𝟙_ C)
@@ -380,74 +269,11 @@ end
 
 end MonoidalClosed
 
-/-- **Duality into an invertible object.** In a braided monoidal closed category, for a
-dualizable `K` and an invertible `ω`, the double `ω`-dual of `K` is `K`:
-`[[K, ω], ω] ≅ K`. Indeed `[K, ω] ≅ Kᘁ ⊗ ω`, whose left dual is `M ⊗ K` for a tensor inverse `M`
-of `ω`, so `[[K, ω], ω] ≅ (M ⊗ K) ⊗ ω ≅ K ⊗ (M ⊗ ω) ≅ K`. -/
-theorem nonempty_iso_ihom_obj_ihom_obj_of_isInvertible {K ω : C} (hK : IsDualizable K)
-    (hω : IsInvertible ω) :
-    Nonempty ((ihom ((ihom K).obj ω)).obj ω ≅ K) := by
-  obtain ⟨_⟩ := hK
-  obtain ⟨M, ⟨e⟩, ⟨e'⟩⟩ := hω
-  let : ExactPairing M ω := exactPairingOfTensorIso e' e
-  let : ExactPairing Kᘁ K := BraidedCategory.exactPairing_swap K Kᘁ
-  let : ExactPairing (M ⊗ K) ((ihom K).obj ω) :=
-    exactPairingCongrRight (MonoidalClosed.ihomObjIsoTensor Kᘁ K ω)
-  exact ⟨MonoidalClosed.ihomObjIsoTensor (M ⊗ K) ((ihom K).obj ω) ω ≪≫
-    whiskerRightIso (β_ M K) ω ≪≫ α_ K M ω ≪≫ whiskerLeftIso K e' ≪≫ ρ_ K⟩
-
-
 section ExternalHom
 
 variable {C₁ C₂ : Type*} [Category C₁] [Category C₂] [MonoidalCategory C₁] [MonoidalCategory C₂]
   [BraidedCategory C₁] [BraidedCategory C₂] [MonoidalClosed C₁] [MonoidalClosed C₂]
   (F₁ : C₁ ⥤ C) (F₂ : C₂ ⥤ C) [F₁.Monoidal] [F₂.Monoidal]
-
-/-- The rearrangement `(a ⊗ b) ⊗ (c ⊗ d) ≅ (c ⊗ a) ⊗ (b ⊗ d)` in a braided monoidal category. -/
-noncomputable def tensorTensorRearrangeIso (a b c d : C) :
-    (a ⊗ b) ⊗ (c ⊗ d) ≅ (c ⊗ a) ⊗ (b ⊗ d) :=
-  α_ a b (c ⊗ d) ≪≫ whiskerLeftIso a (α_ b c d).symm ≪≫
-    whiskerLeftIso a (whiskerRightIso (β_ b c) d) ≪≫ whiskerLeftIso a (α_ c b d) ≪≫
-    (α_ a c (b ⊗ d)).symm ≪≫ whiskerRightIso (β_ a c) (b ⊗ d)
-
-/-- **The external Hom map for dualizable objects.** For monoidal functors `F₁ : C₁ ⥤ C`,
-`F₂ : C₂ ⥤ C` into a braided monoidal closed category and dualizable `E₁`, `E₂`,
-`F₁ [E₁, N₁] ⊗ F₂ [E₂, N₂] ≅ [F₁ E₁ ⊗ F₂ E₂, F₁ N₁ ⊗ F₂ N₂]`: both sides are
-`F₂ E₂ᘁ ⊗ F₁ E₁ᘁ ⊗ F₁ N₁ ⊗ F₂ N₂` up to rearrangement, internal homs out of dualizable objects
-being tensor products with their duals. -/
-theorem nonempty_iso_tensorObj_map_ihom_obj {E₁ N₁ : C₁} {E₂ N₂ : C₂} (h₁ : IsDualizable E₁)
-    (h₂ : IsDualizable E₂) :
-    Nonempty (F₁.obj ((ihom E₁).obj N₁) ⊗ F₂.obj ((ihom E₂).obj N₂) ≅
-      (ihom (F₁.obj E₁ ⊗ F₂.obj E₂)).obj (F₁.obj N₁ ⊗ F₂.obj N₂)) := by
-  obtain ⟨_⟩ := h₁
-  obtain ⟨_⟩ := h₂
-  let _ : ExactPairing E₁ᘁ E₁ := BraidedCategory.exactPairing_swap E₁ E₁ᘁ
-  let _ : ExactPairing E₂ᘁ E₂ := BraidedCategory.exactPairing_swap E₂ E₂ᘁ
-  let _ : ExactPairing (F₁.obj E₁) (F₁.obj E₁ᘁ) := ExactPairing.map F₁ E₁ E₁ᘁ
-  let _ : ExactPairing (F₂.obj E₂) (F₂.obj E₂ᘁ) := ExactPairing.map F₂ E₂ E₂ᘁ
-  let _ : ExactPairing (F₂.obj E₂ᘁ ⊗ F₁.obj E₁ᘁ) (F₁.obj E₁ ⊗ F₂.obj E₂) :=
-    BraidedCategory.exactPairing_swap _ _
-  exact ⟨(F₁.mapIso (MonoidalClosed.ihomObjIsoTensor E₁ᘁ E₁ N₁) ⊗ᵢ
-      F₂.mapIso (MonoidalClosed.ihomObjIsoTensor E₂ᘁ E₂ N₂)) ≪≫
-    ((Functor.Monoidal.μIso F₁ _ _).symm ⊗ᵢ (Functor.Monoidal.μIso F₂ _ _).symm) ≪≫
-    tensorTensorRearrangeIso _ _ _ _ ≪≫
-    (MonoidalClosed.ihomObjIsoTensor (F₂.obj E₂ᘁ ⊗ F₁.obj E₁ᘁ) _ _).symm⟩
-
-omit [MonoidalCategory C₁] [BraidedCategory C₁] [MonoidalClosed C₁] [F₁.Monoidal] in
-/-- **The Künneth–Verdier map for a dualizable second factor.** For monoidal functors
-`F₁ : C₁ ⥤ C`, `F₂ : C₂ ⥤ C` into a braided monoidal closed category and a dualizable `N`,
-`F₁ M ⊗ F₂ [N, ω] ≅ [F₂ N, F₁ M ⊗ F₂ ω]`: both sides are `F₂ Nᘁ ⊗ F₁ M ⊗ F₂ ω`. -/
-theorem nonempty_iso_tensorObj_map_ihom_obj_right (M : C₁) {N : C₂} (ω : C₂)
-    (hN : IsDualizable N) :
-    Nonempty (F₁.obj M ⊗ F₂.obj ((ihom N).obj ω) ≅
-      (ihom (F₂.obj N)).obj (F₁.obj M ⊗ F₂.obj ω)) := by
-  obtain ⟨_⟩ := hN
-  let _ : ExactPairing Nᘁ N := BraidedCategory.exactPairing_swap N Nᘁ
-  let _ : ExactPairing (F₂.obj Nᘁ) (F₂.obj N) := ExactPairing.map F₂ Nᘁ N
-  exact ⟨whiskerLeftIso (F₁.obj M) (F₂.mapIso (MonoidalClosed.ihomObjIsoTensor Nᘁ N ω) ≪≫
-      (Functor.Monoidal.μIso F₂ _ _).symm) ≪≫ (α_ _ _ _).symm ≪≫
-    whiskerRightIso (β_ _ _) _ ≪≫ α_ _ _ _ ≪≫
-    (MonoidalClosed.ihomObjIsoTensor (F₂.obj Nᘁ) (F₂.obj N) _).symm⟩
 
 end ExternalHom
 

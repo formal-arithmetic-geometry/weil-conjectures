@@ -120,14 +120,6 @@ lemma epi_app_homologyFunctor_obj_of_isZero
     Epi (z.app ((DerivedCategory.homologyFunctor C q).obj K)) :=
   (exact_app_homologyFunctor_map z hT q).epi_f (hq.eq_of_tgt _ _)
 
-/-- If `Hᵠ⁰ K₁ = 0`, the central element `z` acts injectively on `Hᵠ¹ K`, where
-`q₀ + 1 = q₁`. -/
-lemma mono_app_homologyFunctor_obj_of_isZero
-    (hT : Triangle.mk (z.derivedCategory.app K) g h ∈ distTriang _) (q₀ q₁ : ℤ)
-    (hq : q₀ + 1 = q₁) (h₀ : IsZero ((DerivedCategory.homologyFunctor C q₀).obj K₁)) :
-    Mono (z.app ((DerivedCategory.homologyFunctor C q₁).obj K)) :=
-  (exact_δ_app_homologyFunctor z hT q₀ q₁ hq).mono_g (h₀.eq_of_src _ _)
-
 /-- The kernel of the action of `z` on `Hᵠ¹ K` is a quotient of `Hᵠ⁰ K₁`, where `q₀ + 1 = q₁`. -/
 lemma exists_epi_kernel_app_homologyFunctor_obj
     (hT : Triangle.mk (z.derivedCategory.app K) g h ∈ distTriang _) (q₀ q₁ : ℤ)
@@ -383,70 +375,5 @@ theorem epi_padicIntegersCenter_homology_of_isZero
     Epi ((padicIntegersCenter X ℓ E ϖ).app ((DerivedCategory.homologyFunctor _ q).obj K)) :=
   have hT := (exists_distinguished_derivedUniformizer hϖ K).choose_spec.choose_spec
   CatCenter.epi_app_homologyFunctor_obj_of_isZero _ hT q hq
-
-/-- If `Hᵠ⁻¹ K₁ = 0`, then `ϖ` acts injectively on `Hᵠ K`, where `K₁ = 𝔽_{E,X} ⊗ᴸ K`. -/
-theorem mono_padicIntegersCenter_homology_of_isZero
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
-    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (q : ℤ)
-    (hq : IsZero ((DerivedCategory.homologyFunctor _ (q - 1)).obj
-      ((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
-        ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K)))) :
-    Mono ((padicIntegersCenter X ℓ E ϖ).app ((DerivedCategory.homologyFunctor _ q).obj K)) :=
-  have hT := (exists_distinguished_derivedUniformizer hϖ K).choose_spec.choose_spec
-  CatCenter.mono_app_homologyFunctor_obj_of_isZero _ hT (q - 1) q (sub_add_cancel q 1) hq
-
-/-- If `K₁ = 𝔽_{E,X} ⊗ᴸ K` has cohomology in degrees `[a, b]`, then `ϖ` acts surjectively on
-`Hᵠ K` for `q < a`. -/
-theorem epi_padicIntegersCenter_homology_of_lt
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))} {a b : ℤ}
-    (hab : ∀ i, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj
-      ((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
-        ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K))))
-    {q : ℤ} (hq : q < a) :
-    Epi ((padicIntegersCenter X ℓ E ϖ).app ((DerivedCategory.homologyFunctor _ q).obj K)) :=
-  epi_padicIntegersCenter_homology_of_isZero hϖ K q (hab q (Or.inl hq))
-
-/-- If `K₁ = 𝔽_{E,X} ⊗ᴸ K` has cohomology in degrees `[a, b]`, then `ϖ` acts surjectively on
-`Hᵠ K` for `q > b`. -/
-theorem epi_padicIntegersCenter_homology_of_gt
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))} {a b : ℤ}
-    (hab : ∀ i, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj
-      ((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
-        ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K))))
-    {q : ℤ} (hq : b < q) :
-    Epi ((padicIntegersCenter X ℓ E ϖ).app ((DerivedCategory.homologyFunctor _ q).obj K)) :=
-  epi_padicIntegersCenter_homology_of_isZero hϖ K q (hab q (Or.inr hq))
-
-/-- If `K₁ = 𝔽_{E,X} ⊗ᴸ K` has cohomology in degrees `[a, b]`, then `ϖ` acts injectively on
-`Hᵠ K` for `q ≤ a`. -/
-theorem mono_padicIntegersCenter_homology_of_le
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))} {a b : ℤ}
-    (hab : ∀ i, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj
-      ((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
-        ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K))))
-    {q : ℤ} (hq : q ≤ a) :
-    Mono ((padicIntegersCenter X ℓ E ϖ).app ((DerivedCategory.homologyFunctor _ q).obj K)) :=
-  mono_padicIntegersCenter_homology_of_isZero hϖ K q
-    (hab (q - 1) (Or.inl (Int.sub_one_lt_of_le hq)))
-
-/-- If `K₁ = 𝔽_{E,X} ⊗ᴸ K` has cohomology in degrees `[a, b]`, then `ϖ` acts injectively on
-`Hᵠ K` for `q > b + 1`. -/
-theorem mono_padicIntegersCenter_homology_of_gt
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))} {a b : ℤ}
-    (hab : ∀ i, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj
-      ((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
-        ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K))))
-    {q : ℤ} (hq : b + 1 < q) :
-    Mono ((padicIntegersCenter X ℓ E ϖ).app ((DerivedCategory.homologyFunctor _ q).obj K)) :=
-  mono_padicIntegersCenter_homology_of_isZero hϖ K q (hab (q - 1) (Or.inr (lt_sub_iff_add_lt.2 hq)))
 
 end AlgebraicGeometry.ProEtale

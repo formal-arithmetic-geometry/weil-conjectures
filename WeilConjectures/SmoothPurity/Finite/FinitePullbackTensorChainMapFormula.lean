@@ -51,25 +51,4 @@ attribute [local implicit_reducible] FinitePullbackTensorRep.pull
 attribute [local implicit_reducible] finiteIntrinsicDerivedTensor coefficientTotalTensor
   FinitePullbackTensorRep.totalTensor
 
-/-- The underlying map of the explicit intrinsic chain isomorphism.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-finite-pullback-tensor-chain-map-formula).
-Proof: the isomorphism is defined as the inverse realization on the total tensor,
-the inverse ordinary total comparison, and the tensor of the two realizations.
-Taking its hom gives precisely this threefold composite. -/
-theorem finitePullbackTensorChainIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
-    (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ) :
-    letI : (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).Additive :=
-      sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f
-    let e := NatIso.mapHomologicalComplex (pullbackTensorFiniteRealization l E f n) (.up ℤ)
-    (finitePullbackTensorChainIso l E f n P Q).hom =
-      e.inv.app ((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)
-        (integralCoefficientCommRingSheaf l E Y n)).obj (P, Q)) ≫
-      FinitePullbackTensorRep.comparison l E f n P Q ≫
-      (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology X)
-        (integralCoefficientCommRingSheaf l E X n)).map
-          (Prod.mkHom (e.hom.app P) (e.hom.app Q)) := by
-  unfold finitePullbackTensorChainIso FinitePullbackTensorRep.comparison
-  rfl
-
 end WeilConjectures

@@ -80,16 +80,6 @@ lemma map_unit_comp_mate_app (G : C ⥤ C') (G' : D ⥤ D') (θ : G ⋙ L' ⟶ L
   rw [reassoc_of% h₁, ← R'.map_comp_assoc, h₂, R'.map_comp_assoc, ← R'.map_comp, ← G'.map_comp,
     adj.left_triangle_components, G'.map_id, R'.map_id, Category.comp_id]
 
-/-- The form of `CategoryTheory.Adjunction.map_unit_comp_mate_app` in which the square and the
-counit are grouped under `R'`. -/
-lemma map_unit_comp_unit_app_comp_map (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S')
-    (F : C) :
-    S.map (adj.unit.app F) ≫ adj'.unit.app (S.obj (R.obj (L.obj F))) ≫
-        R'.map (s.app (R.obj (L.obj F)) ≫ S'.map (adj.counit.app (L.obj F))) =
-      adj'.unit.app (S.obj F) ≫ R'.map (s.app F) := by
-  rw [R'.map_comp]
-  exact adj.map_unit_comp_mate_app adj' S S' s F
-
 /-- The mate `S (R N) ⟶ R' (S' N)` of `L' (S (R N)) ≅ S' (L (R N)) ⟶ S' N` is natural in `N`. -/
 lemma unit_app_comp_map_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S')
     {N N' : D} (f : N ⟶ N') :
@@ -120,11 +110,6 @@ lemma mateApp_eq (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N :
       adj'.unit.app (S.obj (R.obj N)) ≫ R'.map (s.app (R.obj N) ≫ S'.map (adj.counit.app N)) :=
   rfl
 
-/-- `CategoryTheory.Adjunction.mateApp` is the component of Mathlib's `CategoryTheory.mateEquiv`. -/
-lemma mateApp_eq_mateEquiv_app (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
-    adj.mateApp adj' S S' s N = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s)).natTrans.app N := by
-  simp [mateApp]
-
 /-- The mate component `CategoryTheory.Adjunction.mateApp` is natural:
 ```
 S (R N) --mateApp N--> R' (S' N)
@@ -139,21 +124,6 @@ lemma mateApp_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ 
     adj.mateApp adj' S S' s N ≫ R'.map (S'.map f) =
       S.map (R.map f) ≫ adj.mateApp adj' S S' s N' :=
   adj.unit_app_comp_map_naturality adj' S S' s f
-
-/-- The image of the unit of `adj`, followed by the mate component, is the unit of `adj'` followed
-by the square:
-```
-S F ---S (η F)---> S (R (L F))
- |                     |
-η' (S F)          mateApp (L F)
- v                     v
-R' (L' (S F)) -R' (s F)-> R' (S' (L F))
-```
--/
-lemma map_unit_comp_mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (F : C) :
-    S.map (adj.unit.app F) ≫ adj.mateApp adj' S S' s (L.obj F) =
-      adj'.unit.app (S.obj F) ≫ R'.map (s.app F) :=
-  adj.map_unit_comp_unit_app_comp_map adj' S S' s F
 
 /-- The mate component precomposed with `S` of a morphism `a : A ⟶ R N` is the map adjoint to
 `L' (S A) ⟶ S' (L A) ⟶ S' N`:
@@ -415,22 +385,6 @@ lemma Etale.singleLowerStarComparison_naturality {T' T₁ : Scheme.{u}} (k : T�
     (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
     (DerivedCategory.Plus.singleFunctor _ 0)
     (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom f
-
-/-- The unit of `k^* ⊣ k_*` placed in degree `0`, followed by the comparison
-`AlgebraicGeometry.Etale.singleLowerStarComparison`, is the unit of the derived adjunction. -/
-lemma Etale.singleFunctor_map_unit_comp_singleLowerStarComparison {T' T₁ : Scheme.{u}}
-    (k : T₁ ⟶ T') (F : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    (DerivedCategory.Plus.singleFunctor _ 0).map
-        ((Etale.upperStarLowerStarAdjunction _ k).unit.app F) ≫
-      Etale.singleLowerStarComparison Λ k (((k)^*[ModuleCat.{u + 1} Λ]).obj F) =
-    (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫
-      R+((k)_*[ModuleCat.{u + 1} Λ]).map
-        ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F) :=
-  Adjunction.map_unit_comp_mateApp (Etale.upperStarLowerStarAdjunction _ k)
-    (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
-    (DerivedCategory.Plus.singleFunctor _ 0)
-    (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom F
 
 end DerivedUnit
 
@@ -768,7 +722,6 @@ theorem Etale.baseChangeHomologyMap_comp_pushforward {p : X ⟶ S} {g : T ⟶ S}
       (DerivedCategory.Plus.singleFunctor _ 0).map
         ((Etale.upperStarLowerStarAdjunction _ k).counit.app N))) ?_) <;> rfl
 
-
 /-- The image of a morphism of sheaves under the target functor of the base-change map. -/
 lemma Etale.baseChangeTargetFunctor_map (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
     {A B : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : A ⟶ B) :
@@ -1024,7 +977,6 @@ lemma Etale.mono_biprod_lift {T' V Z : Scheme.{u}} (j : V ⟶ T') [IsOpenImmersi
       (Etale.upperStarLowerStarAdjunction _ i).counit.app N₂), ← Category.assoc,
       ← Functor.map_comp, h₂, Functor.map_zero, zero_comp, zero_comp]
 
-
 section Summands
 
 variable {X S T Y T₁ Y₁ : Scheme.{u}}
@@ -1128,7 +1080,6 @@ theorem Etale.notMem_range_of_baseChangeProperty {p : X ⟶ S} {g : T ⟶ S} {e 
       ι)
   rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp, Functor.map_zero] at hz
   exact ModuleCat.notMem_range_of_mono_comm _ _ _ _ _ _ _ wn hz y hy
-
 
 end Summands
 

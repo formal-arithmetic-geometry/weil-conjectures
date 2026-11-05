@@ -180,56 +180,6 @@ lemma exists_finite_affine_flat_of_mem_fpqcTopology {V : Scheme.{u}} [IsAffine V
   rw [← φ.w₀ j]
   exact S.downward_closed (hle _ _ (h𝒰 _)) _
 
-/-- An fppf covering family of an affine scheme `U` is refined by a finite fppf covering family
-consisting of affine opens of its members. Source: Stacks Project, Topologies, Lemma 34.7.4
-(Tag 021P).
-
-Every point of `U` lies in the image of an affine open of some member. The composite of the
-inclusion of such an affine open with the original morphism is flat and locally of finite
-presentation, so its image is open; quasi-compactness of `U` selects finitely many of them. -/
-theorem exists_finite_fppf_affine_open_refinement {U : Scheme.{u}} [IsAffine U]
-    {I : Type v} (T : I → Scheme.{u}) (f : ∀ i, T i ⟶ U)
-    (hf : Presieve.ofArrows T f ∈ fppfPrecoverage U) :
-    ∃ (n : ℕ) (i : Fin n → I) (V : ∀ j, (T (i j)).Opens),
-      (∀ j, IsAffineOpen (V j)) ∧
-        Presieve.ofArrows (fun j ↦ (V j).toScheme)
-          (fun j ↦ (V j).ι ≫ f (i j)) ∈ fppfPrecoverage U := by
-  rw [fppfPrecoverage, ofArrows_mem_precoverage_iff] at hf
-  obtain ⟨hsurj, hP⟩ := hf
-  choose i t ht using hsurj
-  choose W hW htW _ using fun x ↦
-    exists_isAffineOpen_mem_and_subset (x := t x) (U := ⊤) trivial
-  have hP' (x : U) :
-      Flat ((W x).ι ≫ f (i x)) ∧ LocallyOfFinitePresentation ((W x).ι ≫ f (i x)) := by
-    obtain ⟨_, _⟩ := hP (i x)
-    exact ⟨inferInstance, inferInstance⟩
-  have hopen (x : U) : IsOpen (Set.range ((W x).ι ≫ f (i x))) := by
-    obtain ⟨_, _⟩ := hP' x
-    exact ((W x).ι ≫ f (i x)).isOpenMap.isOpen_range
-  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover _ hopen fun x _ ↦
-    Set.mem_iUnion.2 ⟨x, ⟨t x, htW x⟩, by simpa using ht x⟩
-  refine ⟨s.card, fun j ↦ i (s.equivFin.symm j), fun j ↦ W _, fun j ↦ hW _, ?_⟩
-  rw [fppfPrecoverage, ofArrows_mem_precoverage_iff]
-  refine ⟨fun x ↦ ?_, fun j ↦ hP' _⟩
-  obtain ⟨y, hy, hxy⟩ := Set.mem_iUnion₂.1 (hs (Set.mem_univ x))
-  obtain ⟨j, rfl⟩ : ∃ j, (s.equivFin.symm j : U) = y := ⟨s.equivFin ⟨y, hy⟩, by simp⟩
-  exact ⟨j, hxy⟩
-
-/-- A covering sieve of the fppf topology on an affine scheme `U` contains a finite fppf covering
-family of morphisms from affine schemes. -/
-lemma exists_finite_affine_of_mem_fppfTopology {U : Scheme.{u}} [IsAffine U] {S : Sieve U}
-    (hS : S ∈ fppfTopology U) :
-    ∃ (n : ℕ) (V : Fin n → Scheme.{u}) (g : ∀ j, V j ⟶ U), (∀ j, IsAffine (V j)) ∧
-      (∀ j, S (g j)) ∧ Presieve.ofArrows V g ∈ fppfPrecoverage U := by
-  have : (@Flat ⊓ @LocallyOfFinitePresentation : MorphismProperty Scheme.{u}).ContainsIdentities :=
-    ⟨fun X ↦ ⟨inferInstanceAs (Flat (𝟙 X)), inferInstanceAs (LocallyOfFinitePresentation (𝟙 X))⟩⟩
-  have : fppfPrecoverage.{u}.HasIsos := by unfold fppfPrecoverage; infer_instance
-  rw [Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition] at hS
-  obtain ⟨R, hR, hle⟩ := hS
-  obtain ⟨ι, T, f, rfl⟩ := R.exists_eq_ofArrows
-  obtain ⟨n, i, V, hV, hmem⟩ := exists_finite_fppf_affine_open_refinement T f hR
-  exact ⟨n, _, _, fun j ↦ hV j, fun j ↦ S.downward_closed (hle _ _ ⟨i j⟩) _, hmem⟩
-
 /-- A single flat, surjective, quasi-compact morphism `φ : Y₁ ⟶ Y` over `S` generates a covering
 sieve of the fpqc topology on `Over S`. -/
 lemma singleton_mem_over_fpqcTopology {S : Scheme.{u}} {Y Y₁ : Over S} (φ : Y₁ ⟶ Y)
@@ -310,15 +260,6 @@ lemma isSheafFor_singleton_of_isSheaf_overMap {S S' : Scheme.{u}} (g : S' ⟶ S)
 lemma etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
   Precoverage.toGrothendieck_mono
     (precoverage_mono fun _ _ _ _ ↦ ⟨inferInstance, inferInstance⟩)
-
-/-- **Zariski coverings are fppf coverings.** A family of open immersions covering a scheme `T` is
-an fppf covering of `T`: open immersions are flat and locally of finite presentation (on the level
-of covering families this is Mathlib's `zariskiPrecoverage_le_fppfPrecoverage`), so every Zariski
-covering sieve is an fppf covering sieve.
-
-(blueprint: `lem-pc-zariski-coverings-are-fppf`) -/
-lemma zariskiTopology_le_fppfTopology : zariskiTopology.{u} ≤ fppfTopology :=
-  Precoverage.toGrothendieck_mono zariskiPrecoverage_le_fppfPrecoverage
 
 instance : etaleTopology.{u}.Subcanonical :=
   .of_le etaleTopology_le_fppfTopology

@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
-
 /-!
 # Free modules on arbitrary sheaves of generators
 
@@ -94,31 +93,5 @@ noncomputable def generator (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w))
     E ⟶ (moduleSets B).obj ((free B).obj E) where
   hom := (generatorRaw B E).hom ≫ Functor.whiskerLeft
     (((free B).obj E).val.presheaf ⋙ forget AddCommGrpCat.{w}) uliftFunctorTrivial.inv
-
-/-- Simultaneous coefficient and generator change: the sheafified linear extension of
-`[s] ↦ [e(s)]`, semilinear along `b`. It is constructed by the two recorded adjunctions,
-with target scalars restricted along `b`. Source: Stacks 04BL and 03CY
-(auxiliary; not a blueprint node). -/
-noncomputable def change {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
-    {E E' : Sheaf J (Type w)} (e : E ⟶ E') :
-    (free B).obj E ⟶ (SheafOfModules.restrictScalars
-      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map b)).obj
-        ((free B').obj E') :=
-  letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
-  letI : ∀ U : Cᵒᵖ,
-      HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
-        AddCommGrpCat.{w} :=
-    fun _ ↦ HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
-  letI := GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
-    J (A := AddCommGrpCat.{w})
-  ((PresheafOfModules.sheafificationAdjunction (𝟙 (ring B).obj)).homEquiv _ _).symm
-    (PresheafOfModules.freeObjDesc (e.hom ≫ (generatorRaw B' E').hom))
-
-/-- The simultaneous change map on underlying lifted set sheaves.
-Source: Stacks 04BL (auxiliary; not a blueprint node). -/
-noncomputable def changeSets {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
-    {E E' : Sheaf J (Type w)} (e : E ⟶ E') :
-    (moduleSets B).obj ((free B).obj E) ⟶ (moduleSets B').obj ((free B').obj E') :=
-  (moduleSets B).map (change b e)
 
 end CategoryTheory.SheafFreeModule

@@ -36,36 +36,4 @@ open Scheme
 
 variable (X : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
-/-- The morphism of ring objects `ℤ_ℓ,X ⟶ ℚ̄_ℓ,X` of abelian sheaves on `X_proét`, into the image
-of `adicConstantSheaf ℓ X` under the lax monoidal forgetful functor `weilCoefficientsForgetAb`. -/
-noncomputable abbrev padicIntSheafToAdicConstantSheaf :
-    (sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-      (padicIntSheaf X l) ⟶ (weilCoefficientsForgetAb l X).obj (adicConstantSheaf l X) :=
-  padicIntSheafToPadicAlgClSheaf X l ≫ padicAlgClSheafToAdicConstantSheaf X l
-
-/-- Restriction of scalars from `ℚ̄_ℓ,X` to `ℤ_ℓ,X`: an `ℓ`-adic sheaf as a module object over
-`ℤ_ℓ,X` in abelian sheaves on `X_proét`. -/
-noncomputable abbrev AdicSheaf.restrictPadicInt :
-    AdicSheaf l X ⥤ Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      ((sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-        (padicIntSheaf X l)) :=
-  AdicSheaf.forgetAb l X ⋙ Mod.comap (padicIntSheafToAdicConstantSheaf X l)
-
-/-- Extension of scalars `M ↦ ℚ̄_ℓ,X ⊗_{ℤ_ℓ,X} M` from module objects over `ℤ_ℓ,X` to module
-objects over the image of `adicConstantSheaf ℓ X` in abelian sheaves on `X_proét`. -/
-noncomputable abbrev padicIntExtendScalarsAdicConstantSheaf :
-    Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        ((sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-          (padicIntSheaf X l)) ⥤
-      Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        ((weilCoefficientsForgetAb l X).obj (adicConstantSheaf l X)) :=
-  Mod.extendScalars (padicIntSheafToAdicConstantSheaf X l)
-
-/-- Extension of scalars from `ℤ_ℓ,X`-modules to `ℚ̄_ℓ,X`-modules in abelian sheaves is left
-adjoint to restriction of scalars. -/
-noncomputable def padicIntExtendScalarsAdicConstantSheafAdjunction :
-    padicIntExtendScalarsAdicConstantSheaf X l ⊣
-      Mod.comap (padicIntSheafToAdicConstantSheaf X l) :=
-  Mod.extendRestrictAdjunction _
-
 end AlgebraicGeometry.ProEtale

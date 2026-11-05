@@ -117,22 +117,6 @@ noncomputable def lowerStar :
   (MorphismProperty.Over.pullback P ⊤ g).sheafPushforwardContinuous A
     (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
-/-- The sections of `g_* G` over `V → U` are the sections of `G` over `V ×_U W → W`. -/
-lemma lowerStar_obj_val_obj
-    (G : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ U) :
-    ((lowerStar A P Q hQP g).obj G).obj.obj (op b) =
-      G.obj.obj (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
-  rfl
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
-/-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback P ⊤ g).op`. -/
-lemma lowerStar_map_hom_app
-    {G G' : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ U) :
-    (((lowerStar A P Q hQP g).map φ).hom).app (op b) =
-      φ.hom.app (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
-  rfl
-
 /-- `g_*` preserves limits of any shape that exists in the coefficient category: it is
 given by restriction along the base change functor, and limits of sheaves are computed
 pointwise on the underlying presheaves. -/
@@ -176,14 +160,6 @@ noncomputable def upperStarLowerStarAdjunction :
 
 instance : (lowerStar A P Q hQP g).IsRightAdjoint :=
   (upperStarLowerStarAdjunction A P Q hQP g).isRightAdjoint
-
-include hQP in
-/-- `g^*` is a left adjoint. Not an instance, since its statement does not determine the
-inequality `hQP : Q ≤ P` entering the adjunction `g^* ⊣ g_*`; for the small étale sites
-the corresponding instance is registered in
-`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence`. -/
-lemma isLeftAdjoint_upperStar : (upperStar A P Q g).IsLeftAdjoint :=
-  (upperStarLowerStarAdjunction A P Q hQP g).isLeftAdjoint
 
 /-- `g^*` is left exact as soon as the left Kan extension along the base change functor is:
 `g^*` is the composite of the inclusion of sheaves into presheaves, which preserves finite

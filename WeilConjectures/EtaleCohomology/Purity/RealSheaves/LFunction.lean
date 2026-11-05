@@ -120,17 +120,6 @@ product topology on `ℂ⟦X⟧`, in which it converges by
 noncomputable def eulerSeries : PowerSeries ℂ :=
   ∏' x : C.finitePoints, W.eulerFactor l ρ ι x
 
-/-- Blueprint `d-real-cohom`: Cohomology and the Euler series.
-
-The Euler series lies in `1 + T ℂ⟦X⟧`: every local factor has constant term `1`, because the
-local polynomial `P_x(ρ, T) = det (1 - T F_x)` does. -/
-theorem constantCoeff_eulerSeries :
-    PowerSeries.constantCoeff (W.eulerSeries l ρ ι) = 1 := by
-  have h := (W.multipliable_eulerFactors l ρ ι).hasProd.map (PowerSeries.constantCoeff (R := ℂ))
-    (PowerSeries.WithPiTopology.continuous_constantCoeff ℂ)
-  simp only [Function.comp_def, constantCoeff_eulerFactor] at h
-  exact h.unique hasProd_one
-
 end WeilGroup
 
 end AlgebraicGeometry

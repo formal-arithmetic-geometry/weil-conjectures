@@ -70,15 +70,6 @@ lemma isFinite_of_isPullback_spec : IsFinite π := by
   rw [IsFinite.SpecMap_iff]
   exact RingHom.finite_algebraMap.mpr inferInstance
 
-lemma flat_of_isPullback_spec : Flat π := by
-  refine MorphismProperty.of_isPullback (P := @Flat) H.flip ?_
-  rw [Flat.SpecMap_iff]
-  exact RingHom.flat_algebraMap_iff.mpr inferInstance
-
-omit [Module.Finite k k'] in
-lemma surjective_of_isPullback_spec : Surjective π :=
-  MorphismProperty.of_isPullback (P := @Surjective) H.flip surjective_specMap_algebraMap_of_field
-
 /-- Over an affine open `U`, the ring `Γ(Y, π⁻¹ U)` is finite free over `Γ(X, U)`: it is
 `Γ(X, U) ⊗_k k'`. -/
 lemma free_finite_app {U : X.Opens} (hU : IsAffineOpen U) :

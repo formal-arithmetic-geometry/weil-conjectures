@@ -87,28 +87,6 @@ section RightAdjointUniq
 
 variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G G' : D ⥤ C}
 
-/-- An isomorphism `e : G ≅ G'` between two right adjoints of `F` transports the first
-adjunction to the second if and only if it is `Adjunction.rightAdjointUniq`. -/
-lemma Adjunction.ofNatIsoRight_eq_iff (adj₁ : F ⊣ G) (adj₂ : F ⊣ G') (e : G ≅ G') :
-    adj₁.ofNatIsoRight e = adj₂ ↔ e = adj₁.rightAdjointUniq adj₂ := by
-  constructor
-  · rintro rfl
-    ext Y
-    rw [← Equiv.apply_symm_apply ((adj₁.ofNatIsoRight e).homEquiv _ _)
-      ((adj₁.rightAdjointUniq (adj₁.ofNatIsoRight e)).hom.app Y),
-      Adjunction.homEquiv_symm_rightAdjointUniq_hom_app, Adjunction.homEquiv_ofNatIsoRight_apply]
-    rw [Adjunction.homEquiv_unit, Adjunction.right_triangle_components, Category.id_comp]
-  · rintro rfl
-    apply Adjunction.ext
-    ext X
-    simp [Adjunction.ofNatIsoRight]
-
-/-- If `G` and `G'` are both right adjoint to `F`, there is a unique isomorphism `G ≅ G'`
-compatible with the two adjunctions, namely `Adjunction.rightAdjointUniq`. -/
-lemma Adjunction.existsUnique_ofNatIsoRight_eq (adj₁ : F ⊣ G) (adj₂ : F ⊣ G') :
-    ∃! e : G ≅ G', adj₁.ofNatIsoRight e = adj₂ :=
-  ⟨_, (adj₁.ofNatIsoRight_eq_iff adj₂ _).2 rfl, fun _ h ↦ (adj₁.ofNatIsoRight_eq_iff adj₂ _).1 h⟩
-
 end RightAdjointUniq
 
 end CategoryTheory

@@ -173,13 +173,6 @@ noncomputable def boundedConstructibleUnitEndRingHom :
           X.left))).comp
         (Mod.regularEndRingHom.comp (Γ.mapFunctor (upperStarFromPoint X.left))))))
 
-/-- The canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(X)⟦ℚ̲̄_ℓ⟧)`: a scalar `a` acts on `ℚ̄_ℓ,X` by
-multiplication by the constant global section `a` of `ℚ̲̄_ℓ`
-(`Profinite.PadicAlgCl.constRingHom`). -/
-noncomputable def padicAlgClUnitEndRingHom :
-    PadicAlgCl ℓ →+* End (𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  (boundedConstructibleUnitEndRingHom ℓ X).comp (Profinite.PadicAlgCl.constRingHom ℓ)
-
 end Scalars
 
 section PointMod
@@ -220,44 +213,6 @@ section ScalarsPoint
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-
-omit [Fact (ringChar k).Prime] in
-/-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
-`H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the canonical map `ℚ̄_ℓ →+* End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is
-bijective. It is the composite of the bijection `ℚ̄_ℓ ≅ End_{ℚ̲̄_ℓ,s} ℚ̲̄_ℓ,s`
-(`bijective_pointUnitEndRingHom`) and
-`End_{ℚ̲̄_ℓ,s} ℚ̲̄_ℓ,s ≅ End_{D(ℚ̲̄_ℓ,s)} ℚ̲̄_ℓ,s` (the functor `singleFunctor 0` being fully
-faithful). -/
-theorem bijective_padicAlgClUnitEndRingHom_point :
-    Function.Bijective (padicAlgClUnitEndRingHom ℓ (point k)) := by
-  let Λ := Profinite.padicAlgClRingObj.{u} ℓ
-  let A := Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
-    (condensedRingObj Λ (point k).left)
-  let F := HomologicalComplex.single A (ComplexShape.up ℤ) 0 ⋙
-    HomotopyCategory.quotient A (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
-  have : F.Full := Functor.Full.of_iso
-    ((DerivedCategory.singleFunctorIsoCompQ A 0).trans
-      (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso A).symm))
-  have : F.Faithful := Functor.Faithful.of_iso
-    ((DerivedCategory.singleFunctorIsoCompQ A 0).trans
-      (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso A).symm))
-  have hF :
-      Function.Bijective (F.mapEndRingHom (Mod.regular (condensedRingObj Λ (point k).left))) :=
-    (Functor.FullyFaithful.ofFullyFaithful F).map_bijective _ _
-  have h := bijective_pointUnitEndRingHom ℓ k
-  unfold padicAlgClUnitEndRingHom boundedConstructibleUnitEndRingHom
-  unfold pointUnitEndRingHom at h
-  simp only [RingHom.comp_assoc] at h ⊢
-  rw [RingHom.coe_comp, RingHom.coe_comp, RingHom.coe_comp]
-  refine Function.Bijective.comp ?_ (Function.Bijective.comp ?_ (hF.comp h)) <;>
-    exact RingEquiv.bijective _
-
-/-- For `k` separably closed, the endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are
-`H⁰(Spec k, ℚ̄_ℓ) = ℚ̄_ℓ`: the inverse of the canonical map `padicAlgClUnitEndRingHom`. The
-categorical traces of the trace formula take values here. -/
-noncomputable def unitEndRingEquiv :
-    End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≃+* PadicAlgCl ℓ :=
-  (RingEquiv.ofBijective _ (bijective_padicAlgClUnitEndRingHom_point ℓ k)).symm
 
 end ScalarsPoint
 

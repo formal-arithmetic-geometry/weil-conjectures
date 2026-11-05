@@ -52,95 +52,10 @@ variable {R₁ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuationRin
   [IsStrictlyHenselianLocalRing R₁] {Ω₁ : Type u} [Field Ω₁] {a₁ : R₁ →+* Ω₁}
   {κ₁ : Type u} [Field κ₁] {b₁ : R₁ →+* κ₁} (D : SliceTrait a₁ b₁)
 
-/-- The structure map `R₁ ⟶ R` of a slice trait is injective. -/
-lemma injective_φ : Function.Injective D.φ :=
-  let := D.φ.toAlgebra
-  IsDiscreteValuationRing.injective_algebraMap_of_maximalIdeal_eq_map D.maximalIdeal_eq
-
-/-- **The geometric generic fibre of `Spec R ⟶ Spec R₁` over `Spec Ω₁` is a single point**:
-`Spec(Ω₁ ⊗_{R₁} R)` has at most one point. -/
-theorem subsingleton_primeSpectrum (ha₁ : Function.Injective a₁)
-    (halg : letI := a₁.toAlgebra; Algebra.IsAlgebraic R₁ Ω₁) :
-    letI := D.φ.toAlgebra
-    letI := a₁.toAlgebra
-    Subsingleton (PrimeSpectrum (Ω₁ ⊗[R₁] D.R)) := by
-  let := D.φ.toAlgebra
-  let := a₁.toAlgebra
-  have : IsLocalHom (algebraMap R₁ D.R) := D.isLocalHom_φ
-  let F := FractionRing D.R
-  have hinj : Function.Injective ((algebraMap D.R F).comp D.φ) :=
-    (IsFractionRing.injective D.R F).comp D.injective_φ
-  let : Algebra (FractionRing R₁) F := (IsFractionRing.lift hinj).toAlgebra
-  have : IsScalarTower R₁ (FractionRing R₁) F := IsScalarTower.of_algebraMap_eq fun r ↦
-    (IsScalarTower.algebraMap_apply R₁ D.R F r).trans (IsFractionRing.lift_algebraMap hinj r).symm
-  exact IsDiscreteValuationRing.subsingleton_primeSpectrum_tensorProduct_of_injective
-    (F₁ := FractionRing R₁) (F := F) Ω₁ ha₁ D.maximalIdeal_eq D.mem_range_residueField
-
 section Galois
 
 variable [IsAlgClosed Ω₁] (ha₁ : Function.Injective a₁)
   (halg : letI := a₁.toAlgebra; Algebra.IsAlgebraic R₁ Ω₁)
-
-/-- **The Galois extension `L^sep / L` of a slice trait is pro-`p`**: with the algebra structures
-given by `φ`, `a₁`, `a` and `ωS`, every finite Galois subextension of `L^sep / L`
-(`L = Ω₁(R) ⊆ Ω'`) has degree a power of `p`, for a prime `p` such that every natural number
-vanishing in the residue field of `R₁` is divisible by `p`. -/
-theorem exists_finrank_eq_pow {p : ℕ} [Fact p.Prime]
-    (hp : ∀ n : ℕ, (n : ResidueField R₁) = 0 → p ∣ n) :
-    letI := D.φ.toAlgebra
-    letI := a₁.toAlgebra
-    letI := D.a.toAlgebra
-    letI := D.ωS.toAlgebra
-    letI : Algebra R₁ D.Ω := (D.a.comp D.φ).toAlgebra
-    haveI : IsScalarTower R₁ D.R D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-    haveI : IsScalarTower R₁ Ω₁ D.Ω := IsScalarTower.of_algebraMap_eq fun x ↦
-      (RingHom.congr_fun D.ωS_comp x).symm
-    ∀ L' : FiniteGaloisIntermediateField (traitTensorCompositum D.R Ω₁ D.Ω)
-      (traitTensorCompositumSep D.R Ω₁ D.Ω),
-      ∃ k : ℕ, Module.finrank (traitTensorCompositum D.R Ω₁ D.Ω) L' = p ^ k := by
-  intro L'
-  let := D.φ.toAlgebra
-  let := a₁.toAlgebra
-  let := D.a.toAlgebra
-  let := D.ωS.toAlgebra
-  let : Algebra R₁ D.Ω := (D.a.comp D.φ).toAlgebra
-  have : IsScalarTower R₁ D.R D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  have : IsScalarTower R₁ Ω₁ D.Ω := IsScalarTower.of_algebraMap_eq fun x ↦
-    (RingHom.congr_fun D.ωS_comp x).symm
-  let F := FractionRing D.R
-  let : Algebra F D.Ω := (IsFractionRing.lift D.injective_a).toAlgebra
-  have : IsScalarTower D.R F D.Ω := IsScalarTower.of_algebraMap_eq fun r ↦
-    (IsFractionRing.lift_algebraMap D.injective_a r).symm
-  have : Algebra.IsAlgebraic D.R D.Ω := D.isAlgebraic_a
-  have : Algebra.IsAlgebraic F D.Ω :=
-    Algebra.IsAlgebraic.extendScalars (IsFractionRing.injective D.R F)
-  obtain ⟨π₁, hπ₁⟩ := IsDiscreteValuationRing.exists_irreducible R₁
-  have hπ : Irreducible (D.φ π₁) :=
-    IsDiscreteValuationRing.irreducible_algebraMap_of_maximalIdeal_eq_map D.maximalIdeal_eq hπ₁
-  set L := traitTensorCompositum D.R Ω₁ D.Ω
-  have hpR : ∀ n : ℕ, (n : ResidueField D.R) = 0 → p ∣ n := fun n hn ↦ by
-    refine hp n ((ResidueField.map D.φ).injective ?_)
-    rw [map_natCast, map_zero, hn]
-  have hF : ∀ x : F, algebraMap F D.Ω x ∈ (algebraMap L D.Ω).range := fun x ↦ by
-    obtain ⟨r, s, -, rfl⟩ := IsFractionRing.div_surjective (A := D.R) x
-    rw [map_div₀, ← IsScalarTower.algebraMap_apply, ← IsScalarTower.algebraMap_apply]
-    exact ⟨⟨_, div_mem (IntermediateField.subset_adjoin _ _ ⟨r, rfl⟩)
-      (IntermediateField.subset_adjoin _ _ ⟨s, rfl⟩)⟩, rfl⟩
-  have hL : ∀ (n : ℕ) (ρ : D.Ω), (n : ResidueField D.R) ≠ 0 →
-      ρ ^ n = algebraMap D.R D.Ω (D.φ π₁) → ρ ∈ (algebraMap L D.Ω).range := by
-    intro n ρ hn hρ
-    have hn0 : 0 < n := Nat.pos_of_ne_zero (by rintro rfl; exact hn Nat.cast_zero)
-    have hsplit : (Polynomial.X ^ n - Polynomial.C (a₁ π₁) : Polynomial Ω₁).Splits :=
-      IsAlgClosed.splits _
-    obtain ⟨y, rfl⟩ := hsplit.mem_range_of_isRoot (Polynomial.X_pow_sub_C_ne_zero hn0 _)
-      (i := D.ωS) (by
-        rw [Polynomial.IsRoot, Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X,
-          Polynomial.map_C, Polynomial.eval_sub, Polynomial.eval_pow, Polynomial.eval_X,
-          Polynomial.eval_C, hρ, sub_eq_zero]
-        exact (RingHom.congr_fun D.ωS_comp π₁).symm)
-    exact ⟨⟨_, IntermediateField.algebraMap_mem L y⟩, rfl⟩
-  exact IsDiscreteValuationRing.exists_finrank_eq_pow_of_forall_pow_eq_mem (F := F) hπ hpR hF hL
-    (traitTensorCompositumSep D.R Ω₁ D.Ω) L'.toIntermediateField
 
 end Galois
 
@@ -163,45 +78,6 @@ variable [IsAlgClosed Ω₁] (ha₁ : Function.Injective a₁)
   {q : M.total ⟶ Spec (.of D.R)} {g : M.generic ⟶ Spec (.of D.Ω)}
   {q₁ : N.total ⟶ Spec (.of R₁)} {g₁ : N.generic ⟶ Spec (.of Ω₁)}
 
-include ha₁ halg in
-/-- **The change of geometric generic fibres over a slice trait splits** (torsion coefficients;
-SGA 4½, [Th. finitude], Lemme 3.4). Let `φ : M ⟶ N` be a morphism of models over the slice trait
-`Spec R ⟶ Spec R₁`, compatible with the geometric generic points `Spec Ω' ⟶ Spec Ω₁`, `T₀` a finite
-discrete ring in which a prime `p` is invertible, every natural number vanishing in the residue
-field of `R₁` being divisible by `p`. Then the pullback exchange of `φ.toCartesian` is a split
-monomorphism at every complex `C` on `Y` which is bounded below of étale origin: the change of
-generic fibres is a pro-`p` Galois layer up to universal homeomorphisms. -/
-theorem isSplitMono_toCartesian_pullbackExchange_app_of_sliceTrait
-    (hM : IsPullback M.j g q (Spec.map (CommRingCat.ofHom D.a)))
-    (hN : IsPullback N.j g₁ q₁ (Spec.map (CommRingCat.ofHom a₁)))
-    (hq : φ.total ≫ q₁ = q ≫ Spec.map (CommRingCat.ofHom D.φ))
-    (hg : φ.generic ≫ g₁ = g ≫ Spec.map (CommRingCat.ofHom D.ωS))
-    {p : ℕ} [Fact p.Prime] (hp : ∀ n : ℕ, (n : ResidueField R₁) = 0 → p ∣ n)
-    (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀] [DiscreteTopology T₀]
-    [Finite T₀] (hpT : IsUnit (p : T₀))
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T₀) Y)))
-    (hC : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀)) Y
-      ((finiteCoefficientDerivedEquivalence Y T₀).functor.obj C)) :
-    IsSplitMono ((φ.toCartesian.pullbackExchange (Profinite.continuousMapRingObj T₀)).app C) := by
-  have hsub := D.subsingleton_primeSpectrum ha₁ halg
-  have hdeg := D.exists_finrank_eq_pow hp
-  let := D.φ.toAlgebra
-  let := a₁.toAlgebra
-  let := D.a.toAlgebra
-  let := D.ωS.toAlgebra
-  let : Algebra R₁ D.Ω := (D.a.comp D.φ).toAlgebra
-  have : IsScalarTower R₁ D.R D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  have : IsScalarTower R₁ Ω₁ D.Ω := IsScalarTower.of_algebraMap_eq fun x ↦
-    (RingHom.congr_fun D.ωS_comp x).symm
-  have : FaithfulSMul D.R D.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D.injective_a
-  have : Algebra.IsAlgebraic D.R D.Ω := D.isAlgebraic_a
-  refine isSplitMono_toCartesian_pullbackExchange_app_of_traitChange (φ := φ) hM hN hq hg
-    T₀ (fun L' ↦ ?_) C hC
-  obtain ⟨k, hk⟩ := hdeg L'
-  rw [hk, Nat.cast_pow]
-  exact hpT.pow k
-
 end Split
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom
@@ -219,26 +95,5 @@ variable {R₁ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuationRin
   {g₁ : N.generic ⟶ Spec (.of Ω₁)}
   (hNj : IsPullback N.j g₁ q₁ (Spec.map (CommRingCat.ofHom a₁)))
   {p₁ : Y' ⟶ Spec (.of κ₁)} (hNi : IsPullback N.i p₁ q₁ (Spec.map (CommRingCat.ofHom b₁)))
-
-/-- **The slice exchange over a slice trait, cartesian part, torsion coefficients** (SGA 4½,
-[Th. finitude], Lemme 3.4): for the slice `σ` of a model `N` along `c : 𝒳_N ⟶ 𝔸¹_{S₁}` over a
-slice trait, the pullback exchange of `σ.toCartesian` is a split monomorphism at every complex of
-étale origin, with finite coefficients in which the residual characteristic exponent is
-invertible. -/
-theorem isSplitMono_pullbackExchange_app_toCartesian_sliceTraitHom
-    (ha₁ : Function.Injective a₁) (halg : letI := a₁.toAlgebra; Algebra.IsAlgebraic R₁ Ω₁)
-    {p : ℕ} [Fact p.Prime] (hp : ∀ n : ℕ, (n : ResidueField R₁) = 0 → p ∣ n)
-    (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀] [DiscreteTopology T₀]
-    [Finite T₀] (hpT : IsUnit (p : T₀))
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.total) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)))
-    (hC : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀)) N.total
-      ((finiteCoefficientDerivedEquivalence N.total T₀).functor.obj C)) :
-    IsSplitMono (((sliceTraitHom D N c hc hNj hNi).toCartesian.pullbackExchange
-      (Profinite.continuousMapRingObj T₀)).app C) :=
-  Hom.isSplitMono_toCartesian_pullbackExchange_app_of_sliceTrait D ha₁ halg
-    (sliceTraitHom D N c hc hNj hNi) (N := N.geometric) (isPullback_sliceTraitModel_j D N c) hNj
-    (sliceTrait_fst_comp D N c hc)
-    (hNj.lift_snd _ _ _) hp T₀ hpT C hC
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

@@ -45,7 +45,6 @@ Let `E ≤ F` be finite subextensions of `ℚ̄_ℓ / ℚ_ℓ` and `X` a scheme.
 
 @[expose] public section
 
-
 universe u
 
 open CategoryTheory Limits
@@ -218,10 +217,6 @@ of the six operations rather than on `ProEtale.PadicSubfieldConstructible`. -/
 noncomputable def boundedConstructibleExtendScalarsSubfield :
     Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X)⟦Profinite.continuousMapRingObj F⟧ :=
   constructibleExtendScalars X ℓ h
-
-lemma boundedConstructibleExtendScalarsSubfield_eq :
-    boundedConstructibleExtendScalarsSubfield X ℓ h = constructibleExtendScalars X ℓ h :=
-  rfl
 
 /-- The extension of scalars on bounded constructible complexes is compatible with the
 inclusions. -/

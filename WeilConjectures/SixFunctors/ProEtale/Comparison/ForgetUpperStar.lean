@@ -58,19 +58,4 @@ noncomputable def sheafComposeForget₂CompUpperStarIso :
         (upperStarLowerStarAdjunction _ g))).symm
     (Iso.refl _)
 
-variable (X) in
-/-- **The comparison pullback commutes with underlying abelian sheaves**:
-`ν^* (forget₂ F) ≅ forget₂ (ν^* F)` for étale sheaves of `Λ`-modules. -/
-noncomputable def sheafComposeForget₂CompComparisonUpperStarIso :
-    sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) ⋙
-        comparisonUpperStar AddCommGrpCat.{u + 1} X ≅
-      comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⋙
-        sheafCompose (ProEt.topology X) (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
-  (conjugateIsoEquiv
-    ((comparisonAdjunction _ X).comp (sheafComposeAdjunction _ (Adjunction.ofIsLeftAdjoint
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))))
-    ((sheafComposeAdjunction _ (Adjunction.ofIsLeftAdjoint
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).comp (comparisonAdjunction _ X))).symm
-    (Iso.refl _)
-
 end AlgebraicGeometry.ProEtale

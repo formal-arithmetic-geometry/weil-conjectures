@@ -72,16 +72,6 @@ noncomputable def Compactification.ofIsImmersion (g : X ⟶ Y) (p : Y ⟶ S)
   isProper := inferInstance
   isOpenImmersion := inferInstance
 
-/-- A quasi-compact morphism that factors as an immersion into a scheme proper over the
-base admits a compactification.
-(blueprint: `lemma:nagata-immersion-into-proper`) -/
-theorem HasCompactification.of_isImmersion {u : X ⟶ S} (g : X ⟶ Y) (p : Y ⟶ S)
-    [IsImmersion g] [IsProper p] [QuasiCompact u] (fac : g ≫ p = u) :
-    HasCompactification u := by
-  subst fac
-  have : QuasiCompact g := .of_comp g p
-  exact (Compactification.ofIsImmersion g p).hasCompactification
-
 /-- **Closed-subscheme compactification construction** (blueprint:
 `def:nagata-closed-subscheme-compactification`).
 
@@ -111,15 +101,5 @@ variable (i : X ⟶ X') {f' : X' ⟶ S} (c : Compactification f') [IsClosedImmer
     (ofIsClosedImmersion i c).g = (i ≫ c.i).imageι ≫ c.g := rfl
 
 end Compactification
-
-/-- **Compactifiability is inherited by closed subschemes**: if a quasi-compact morphism
-`f' : X' ⟶ S` admits a compactification, then so does its restriction `i ≫ f'` to a closed
-subscheme `i : X ⟶ X'`.
-(blueprint: `prop:nagata-closed-subscheme-compactifiable`) -/
-theorem HasCompactification.of_isClosedImmersion (i : X ⟶ X') (f' : X' ⟶ S)
-    [IsClosedImmersion i] [QuasiCompact f'] [HasCompactification f'] :
-    HasCompactification (i ≫ f') :=
-  (Compactification.ofIsClosedImmersion i
-    (HasCompactification.compactification f')).hasCompactification
 
 end AlgebraicGeometry

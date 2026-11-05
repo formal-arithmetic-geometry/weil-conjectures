@@ -98,41 +98,6 @@ lemma commShift_curriedTensor_flip_map {X X' : P.FullSubcategory} (g : X ⟶ X')
     Category.id_comp, Category.comp_id, Category.comp_id]
   rfl
 
-omit [∀ X : C, ((curriedTensor C).obj X).CommShift A] in
-set_option synthInstance.maxSize 4096 in
-set_option synthInstance.maxHeartbeats 1000000 in
--- the instance problems for the composite functors are large
-/-- The associator `(- ⊗ Y) ⊗ Z ≅ - ⊗ (Y ⊗ Z)` of `P`, natural in its first variable, commutes
-with the shifts if that of `C` does. -/
-lemma commShift_associatorNatTrans₁ (Y Z : P.FullSubcategory)
-    [NatTrans.CommShift (associatorNatTrans₁ C Y.obj Z.obj) A] :
-    NatTrans.CommShift (associatorNatTrans₁ P.FullSubcategory Y Z) A := by
-  have : P.ι.Faithful := P.faithful_ι
-  let eF : ((curriedTensor P.FullSubcategory).flip.obj Y ⋙ (curriedTensor _).flip.obj Z) ⋙ P.ι ≅
-      P.ι ⋙ ((curriedTensor C).flip.obj Y.obj ⋙ (curriedTensor C).flip.obj Z.obj) :=
-    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (P.tensorRightCompιIso Z) ≪≫
-      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (P.tensorRightCompιIso Y) _ ≪≫
-      Functor.associator _ _ _
-  have : NatTrans.CommShift eF.hom A := by
-    dsimp only [eF, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-      Iso.symm_hom]
-    infer_instance
-  refine NatTrans.CommShift.of_whiskerRight_eq _ P.ι eF (P.tensorRightCompιIso (Y ⊗ Z))
-    (Functor.whiskerLeft P.ι (associatorNatTrans₁ C Y.obj Z.obj)) ?_
-  ext X
-  simp only [Functor.comp_obj, Functor.flip_obj_obj, curriedTensor_obj_obj, ι_obj,
-    tensorObj_obj, Functor.whiskerRight_app, associatorNatTrans₁_app, associator_def,
-    isoMk_hom, ι_map, homMk_hom, tensorRightCompιIso, tensorRightIsoLift,
-    liftFullSubcategoryCompιIso, Iso.trans_refl, Functor.isoWhiskerRight_twice,
-    Iso.trans_assoc, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-    Iso.symm_hom, Iso.symm_inv, Functor.isoWhiskerRight_inv, Category.assoc,
-    NatTrans.comp_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
-    NatIso.ofComponents_inv_app, Iso.refl_inv, FullSubcategory.id_hom, Functor.comp_map,
-    Functor.flip_obj_map, curriedTensor_map_app, Functor.associator_inv_app,
-    NatIso.ofComponents_hom_app, Iso.refl_hom, Category.id_comp, eF]
-  erw [MonoidalCategory.id_whiskerRight, Category.id_comp, Category.comp_id]
-  exact (Category.id_comp _).symm
-
 end ObjectProperty
 
 namespace MonoidalCategory

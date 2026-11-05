@@ -42,39 +42,10 @@ section Flasque
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {U X : Scheme.{u}} (j : U ⟶ X)
 
-/-- Blueprint `def-pur-flasque-support`: Supported sections and flasque objects
-
-A pro-étale sheaf `I` on `X` is *flasque for the pair* `(Z, U)` if the restriction
-`I ⟶ j_* j^* I` to the open part `j : U ⟶ X` is an epimorphism; then
-`0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is exact, `𝒢_Z I` being the kernel
-(`AlgebraicGeometry.ProEtale.sectionsWithSupport`). -/
-def IsFlasqueFor (I : Sheaf (ProEt.topology X) A) : Prop :=
-  Epi ((upperStarLowerStarAdjunction A j).unit.app I)
-
 end Flasque
 
 variable {R : Type (u + 1)} [Ring R] {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
-
-/-- Blueprint `def-pur-flasque-support`: Supported sections and flasque objects
-
-For a closed immersion `i : Z ⟶ X` with quasi-compact open complement `j`, the pushforward of
-`i^! M = i^* 𝒢_Z M` is the sheaf of supported sections: `i_* i^! M ≅ 𝒢_Z M`, through the unit of
-`i^* ⊣ i_*`, which is invertible on sheaves vanishing on `U`
-(`AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl`). -/
-noncomputable def closedUpperShriekCompLowerStarIso
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
-    closedUpperShriek (ModuleCat.{u + 1} R) i j ⋙ (i)_*[ModuleCat.{u + 1} R] ≅
-      sectionsWithSupport (ModuleCat.{u + 1} R) j :=
-  NatIso.ofComponents (fun M ↦
-    haveI := isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl i j hij _
-      (isZero_upperStar_sectionsWithSupport _ j M)
-    (asIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).unit.app
-      ((sectionsWithSupport (ModuleCat.{u + 1} R) j).obj M))).symm)
-    (fun f ↦ by
-      dsimp [closedUpperShriek]
-      rw [IsIso.comp_inv_eq, Category.assoc, IsIso.eq_inv_comp]
-      exact ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).unit.naturality _).symm)
 
 end ProEtale
 

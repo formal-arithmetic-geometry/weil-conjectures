@@ -60,12 +60,6 @@ instance proEtaleBaseChange_preservesFiniteLimits {X Y : Scheme.{u}} (f : X ⟶ 
     PreservesFiniteLimits (proEtaleBaseChange f) :=
   inferInstanceAs (PreservesFiniteLimits (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f))
 
-/-- Base change preserves pro-etale covering sieves, by weakly etale and fpqc base change.
-Source: Stacks, Tag 09A5 (auxiliary; not a blueprint node). -/
-noncomputable abbrev proEtaleBaseChangeCoverPreserving {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    CoverPreserving (ProEt.topology Y) (ProEt.topology X) (proEtaleBaseChange f) :=
-  ProEt.coverPreserving_overPullback f
-
 /-- Direct image, by precomposition on sections and morphisms, for any value category.
 Source: Stacks, Tags 09A5, 00VC and 00WX (auxiliary; not a blueprint node). -/
 noncomputable abbrev proEtaleSheafDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -224,62 +218,5 @@ noncomputable abbrev proEtaleConstantRing (X : Scheme.{u}) (A : Type u) [CommRin
     Sheaf (ProEt.topology X) CommRingCat.{u + 1} :=
   (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj
     (CommRingCat.of (ULift.{u + 1, u} A))
-
-/-- The canonical `ρ_A^f`, with its sectionwise constant-section normalization.
-Source: Stacks, Tag 0H7J (auxiliary; not a blueprint node). -/
-noncomputable abbrev proEtaleCoefficientDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] :
-    proEtaleConstantRing Y A ⟶
-      (proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj (proEtaleConstantRing X A) :=
-  proEtaleConstantDirectImageMap f CommRingCat.{u + 1}
-    (CommRingCat.of (ULift.{u + 1, u} A))
-
-/-- The canonical `c_A^f = f⁻¹(ρ_A^f) ≫ ε_f`, retaining commutativity for tensor products.
-Source: Stacks, Tag 0H7J (auxiliary; not a blueprint node). -/
-noncomputable abbrev proEtaleCoefficientInverseImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] :
-    (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (proEtaleConstantRing Y A) ⟶
-      proEtaleConstantRing X A :=
-  proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
-    (CommRingCat.of (ULift.{u + 1, u} A))
-
-/-- Direct image of constant-coefficient modules: sectionwise precomposition and
-restriction of scalars through `ρ_A^f`. Morphisms are the original sectionwise linear maps.
-Source: Stacks, Tag 03D1 (auxiliary; not a blueprint node). -/
-noncomputable def proEtaleConstantModuleDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] :=
-  SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
-    (J := ProEt.topology Y) (K := ProEt.topology X)
-    (S := (sheafCompose (ProEt.topology Y)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing Y A))
-    (R := (sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A))
-    ⟨Functor.whiskerRight (proEtaleCoefficientDirectImageMap f A).hom
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
-
-/-- Module pullback: inverse image over `f⁻¹ A_Y`, followed by the specified sheaf
-extension of scalars along `c_A^f`. This is the sheafification of the sectionwise tensor,
-not a chosen arbitrary left adjoint or a replacement coefficient category.
-Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
-noncomputable def proEtaleConstantModulePullback {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A]
-    (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing Y A))) :
-    SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A)) :=
-  SheafOfModules.changeOfRings.{u, u + 1, u + 1} (proEtaleCoefficientInverseImageMap f A)
-    ((proEtaleModuleInverseImage f (proEtaleConstantRing Y A)).obj M)
-
-/-- The map on module pullbacks is inverse image of the linear map followed by
-extension of scalars, with the induced maps on pure tensors and sheafification.
-Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
-noncomputable def proEtaleConstantModulePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A]
-    {M N : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing Y A))}
-    (a : M ⟶ N) :
-    proEtaleConstantModulePullback f A M ⟶ proEtaleConstantModulePullback f A N :=
-  SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} (proEtaleCoefficientInverseImageMap f A) _
-    ((proEtaleModuleInverseImage f (proEtaleConstantRing Y A)).map a)
 
 end AlgebraicGeometry.Scheme

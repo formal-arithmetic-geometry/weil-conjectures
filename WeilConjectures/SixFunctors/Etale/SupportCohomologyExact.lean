@@ -121,43 +121,6 @@ lemma ΓRes_eq (M : Sheaf X.smallEtaleTopology A) :
 instance (M : Sheaf X.smallEtaleTopology A) : IsIso (M.ΓRes (op (Scheme.Etale.mk (𝟙 X)))) :=
   M.isLimitConeΓ.isIso_π_app_of_isInitial _ (Scheme.Etale.isTerminalMkId X).op
 
-/-- If the unit `M ⟶ j_* j^* M` of the restriction along the open immersion `j` is a split
-epimorphism, the restriction `Γ(X, M) ⟶ M(U)` of global sections is a split epimorphism. In the
-square
-
-```
-M(X) ───────────▶ M(U)
- │ η_X               │ η_U ≅
- ▼                   ▼
-(j_* j^* M)(X) ──≅──▶ (j_* j^* M)(U)
-```
-
-the bottom map and `η_U` are isomorphisms and `η_X` is split by the section of the unit. -/
-lemma isSplitEpi_ΓRes_of_isSplitEpi_unit (M : Sheaf X.smallEtaleTopology A)
-    [IsSplitEpi ((openImmersionRestrictionLowerStarAdjunction A j).unit.app M)] :
-    IsSplitEpi (M.ΓRes (op (Scheme.Etale.mk j))) := by
-  set η := (openImmersionRestrictionLowerStarAdjunction A j).unit.app M
-  set t := (Scheme.Etale.isTerminalMkId X).from (Scheme.Etale.mk j)
-  set σ := section_ η
-  have hσ : σ.hom.app (op (Scheme.Etale.mk (𝟙 X))) ≫ η.hom.app (op (Scheme.Etale.mk (𝟙 X))) =
-      𝟙 _ := by
-    have h := (sheafToPresheaf _ A).congr_map (IsSplitEpi.id η)
-    rw [Functor.map_comp, CategoryTheory.Functor.map_id] at h
-    exact congr_app h _
-  have hsq : M.obj.map t.op ≫ η.hom.app (op (Scheme.Etale.mk j)) =
-      η.hom.app (op (Scheme.Etale.mk (𝟙 X))) ≫
-        ((j)_*[A].obj (openImmersionRestriction A j |>.obj M)).obj.map t.op :=
-    η.hom.naturality t.op
-  have : IsSplitEpi (M.obj.map t.op) :=
-    ⟨⟨η.hom.app (op (Scheme.Etale.mk j)) ≫
-        inv (((j)_*[A].obj (openImmersionRestriction A j |>.obj M)).obj.map t.op) ≫
-          σ.hom.app (op (Scheme.Etale.mk (𝟙 X))), by
-      rw [← cancel_mono (η.hom.app (op (Scheme.Etale.mk j))), assoc, assoc, hsq]
-      simp only [assoc]
-      rw [reassoc_of% hσ, IsIso.inv_hom_id, comp_id, id_comp]⟩⟩
-  rw [ΓRes_eq]
-  infer_instance
-
 end Restriction
 
 section Concrete
@@ -171,23 +134,6 @@ variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   [hJZ : Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
   [hJX : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
-include hJX hJZ in
-/-- For an injective étale sheaf `I` on `X` and a closed immersion `i : Z ⟶ X` with open
-complement `U`, the restriction `Γ(X, I) ⟶ I(U)` is a split epimorphism: the restriction
-`I ⟶ j_* j^* I` to the open part is a split epimorphism
-(`AlgebraicGeometry.Etale.isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective`). -/
-theorem isSplitEpi_ΓRes_openComplement_of_injective (I : Sheaf X.smallEtaleTopology A)
-    [Injective I] : IsSplitEpi (I.ΓRes (op (Scheme.Etale.mk i.openComplement.ι))) := by
-  have := isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective A i.openComplement.ι i
-    i.range_eq_compl_range_openComplement_ι I
-  have : IsSplitEpi ((openImmersionRestrictionLowerStarAdjunction A i.openComplement.ι).unit.app
-      I) := by
-    rw [← Adjunction.unit_leftAdjointUniq_hom_app (upperStarLowerStarAdjunction A _)
-      (openImmersionRestrictionLowerStarAdjunction A i.openComplement.ι)]
-    infer_instance
-  exact isSplitEpi_ΓRes_of_isSplitEpi_unit A _ I
-
-
 /-- The sequence `Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I)` of complexes of a complex `I` of étale sheaves:
 the inclusion of the sections with support in `Z`, and the restriction to the open complement
 `U` of `Z`. -/
@@ -200,23 +146,6 @@ noncomputable def sectionsWithSupportShortComplex
     ((NatTrans.mapHomologicalComplex (Sheaf.natTransΓRes X.smallEtaleTopology A
       (op (Scheme.Etale.mk i.openComplement.ι))) _).app I)
     (by ext n; simp)
-
-include hJX hJZ in
-/-- For a complex `I` of injective sheaves, `0 ⟶ Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I) ⟶ 0` is a short
-exact sequence of complexes: degreewise, `Γ_Z` is the kernel of the restriction, which is a
-split epimorphism (`AlgebraicGeometry.Etale.isSplitEpi_ΓRes_openComplement_of_injective`). -/
-theorem shortExact_sectionsWithSupportShortComplex
-    (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)] :
-    (sectionsWithSupportShortComplex A i I).ShortExact := by
-  refine HomologicalComplex.shortExact_of_degreewise_shortExact _ fun n ↦ ?_
-  have := isSplitEpi_ΓRes_openComplement_of_injective A i (I.X n)
-  have hκ := KernelFork.mapIsLimit _ (kernelIsKernel (Sheaf.natTransΓRes X.smallEtaleTopology A
-    (op (Scheme.Etale.mk i.openComplement.ι)))) ((evaluation _ A).obj (I.X n))
-  refine ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ hκ) ?_ ?_
-  · change Mono ((Sheaf.ΓSupportι X.smallEtaleTopology A _).app (I.X n))
-    infer_instance
-  · change Epi ((I.X n).ΓRes _)
-    infer_instance
 
 end Concrete
 

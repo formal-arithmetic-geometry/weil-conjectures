@@ -335,22 +335,6 @@ lemma kunnethVerdierTargetRestrictionIso_hom (j : U ⟶ Y) [IsOpenImmersion j.le
         (pre ((prodMapUpperStarSndIso ℓ j).app N).inv).app _ :=
   rfl
 
-/-- The Künneth–Verdier pairing is an instance of `swapEvPairing`. -/
-lemma kunnethVerdierPairing_eq_swapEvPairing (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    kunnethVerdierPairing ℓ M N = swapEvPairing
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y))
-      (exceptionalKunnethMap ℓ M) N :=
-  rfl
-
-/-- The Künneth–Verdier map is the transpose of an instance of `swapEvPairing`. -/
-lemma kunnethVerdierMap_eq_curry_swapEvPairing (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    kunnethVerdierMap ℓ M N = curry (swapEvPairing
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y))
-      (exceptionalKunnethMap ℓ M) N) :=
-  rfl
-
 set_option maxHeartbeats 1000000 in
 -- the final comparison with the statement of `kunnethVerdierMap` is made termwise
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is

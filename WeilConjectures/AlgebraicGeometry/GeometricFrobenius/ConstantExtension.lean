@@ -45,11 +45,6 @@ namespace AlgebraicGeometry
 
 variable {k₀ k₁ : Type u} [Field k₀] [Field k₁] [Algebra k₀ k₁]
 
-/-- There is a `k₀`-embedding of the algebraic closure of `k₀` into that of an extension `k₁`. -/
-theorem nonempty_algHom_algebraicClosure :
-    Nonempty (AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure k₁) :=
-  ⟨IsAlgClosed.lift⟩
-
 /-- The square of spectra
 
 ```
@@ -231,99 +226,9 @@ namespace Scheme.Hom
 variable {Y : Scheme.{u}} (f₁ : Y ⟶ Spec (.of k₁)) (f₀ : Y ⟶ Spec (.of k₀))
   (hf : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁)) = f₀)
 
-omit [Finite k₁] in
-include hf in
-/-- The embedding of `k₀` into a residue field of `Y` factors through `k₁`. -/
-theorem residueFieldAlgebraMap_eq_comp_algebraMap (y : Y) :
-    f₀.residueFieldAlgebraMap y = (f₁.residueFieldAlgebraMap y).comp (algebraMap k₀ k₁) := by
-  subst hf
-  have h := specMap_residueFieldAlgebraMap
-    (f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁))) y
-  rw [← Category.assoc, ← f₁.specMap_residueFieldAlgebraMap, ← Spec.map_comp] at h
-  exact congrArg CommRingCat.Hom.hom (Spec.map_inj.1 h)
-
-include hf in
-/-- The degree over `k₀` of a point with finite residue field is `[k₁ : k₀]` times its degree
-over `k₁`. -/
-theorem degreeOver_eq_finrank_mul_degreeOver {y : Y} (hy : y ∈ Y.finitePoints) :
-    f₀.degreeOver y = Module.finrank k₀ k₁ * f₁.degreeOver y := by
-  let := (f₁.residueFieldAlgebraMap y).toAlgebra
-  let := (f₀.residueFieldAlgebraMap y).toAlgebra
-  have : IsScalarTower k₀ k₁ (Y.residueField y) := IsScalarTower.of_algebraMap_eq fun c ↦ by
-    change f₀.residueFieldAlgebraMap y c = _
-    rw [residueFieldAlgebraMap_eq_comp_algebraMap f₁ f₀ hf]
-    rfl
-  have : Finite (Y.residueField y) := hy
-  have : Module.Finite k₁ (Y.residueField y) := Module.Finite.of_finite
-  have : Module.Finite k₀ k₁ := Module.Finite.of_finite
-  exact (Module.finrank_mul_finrank k₀ k₁ (Y.residueField y)).symm
-
-include hf in
-/-- The residue cardinality of a point with finite residue field does not depend on the base
-field `k₀` or `k₁`. -/
-theorem residueCard_eq_residueCard {y : Y} (hy : y ∈ Y.finitePoints) :
-    f₀.residueCard y = f₁.residueCard y := by
-  have : Finite k₀ := Finite.of_injective _ (algebraMap k₀ k₁).injective
-  rw [residueCard, residueCard, degreeOver_eq_finrank_mul_degreeOver f₁ f₀ hf hy, pow_mul,
-    natCard_eq_natCard_pow_finrank (k₀ := k₀) (k₁ := k₁)]
-
 variable (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure k₁)
 
-/-- The geometric point of `Ȳ₀ = Y ×_{k₀} k̄₀` obtained from a geometric point `s` of
-`Ȳ₁ = Y ×_{k₁} k̄₁` through `Spec θ : Spec k̄₁ ≅ Spec k̄₀` and `ι : Ȳ₁ ⟶ Ȳ₀`, that is
-`(Spec θ)⁻¹ ≫ s ≫ ι`. -/
-def geometricFiberExtensionPoint
-    (s : Spec (.of (AlgebraicClosure k₁)) ⟶ f₁.geometricFiber) :
-    Spec (.of (AlgebraicClosure k₀)) ⟶ f₀.geometricFiber :=
-  (specAlgHomAlgebraicClosureIso θ).inv ≫ s ≫ geometricFiberExtensionMap f₁ f₀ hf θ
-
-/-- The transported geometric point lies over the same point of `Y`. -/
-theorem geometricFiberExtensionPoint_comp_geometricFiberProj_base
-    (s : Spec (.of (AlgebraicClosure k₁)) ⟶ f₁.geometricFiber) :
-    (geometricFiberExtensionPoint f₁ f₀ hf θ s ≫ f₀.geometricFiberProj).base
-        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
-      (s ≫ f₁.geometricFiberProj).base (IsLocalRing.closedPoint (AlgebraicClosure k₁)) := by
-  rw [geometricFiberExtensionPoint, Category.assoc, Category.assoc,
-    geometricFiberExtensionMap_comp_geometricFiberProj, Scheme.Hom.comp_apply]
-  exact congrArg _ (Subsingleton.elim _ _)
-
 variable [Finite k₀]
-
-/-- If a geometric point `s` of `Ȳ₁` satisfies `s ≫ Fr₁ⁿ = σ₁ⁿ ≫ s`, then the transported
-geometric point `t` of `Ȳ₀` satisfies `t ≫ Fr₀^{m n} = σ₀^{m n} ≫ t`, `m = [k₁ : k₀]`. -/
-theorem geometricFiberExtensionPoint_comp_geometricGaloisFrobenius_pow
-    {s : Spec (.of (AlgebraicClosure k₁)) ⟶ f₁.geometricFiber} {n : ℕ}
-    (hs : s ≫ (f₁.geometricGaloisFrobenius ^ n).hom = (specGeometricFrobenius k₁ ^ n).hom ≫ s) :
-    geometricFiberExtensionPoint f₁ f₀ hf θ s ≫
-        (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * n)).hom =
-      (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * n)).hom ≫
-        geometricFiberExtensionPoint f₁ f₀ hf θ s := by
-  have h := specGeometricFrobenius_pow_hom_comp_spec_map_algHom θ n
-  rw [← specAlgHomAlgebraicClosureIso_hom θ, ← Iso.inv_comp_eq, ← Category.assoc,
-    ← Iso.eq_comp_inv] at h
-  rw [geometricFiberExtensionPoint, Category.assoc, Category.assoc,
-    geometricFiberExtensionMap_comp_geometricGaloisFrobenius_pow, reassoc_of% hs,
-    reassoc_of% h]
-
-/-- The geometric point of `Ȳ₀` transported from the geometric point of `Ȳ₁` over a point `y`
-with finite residue field is fixed by `Fr₀^{deg₀ y}` up to `σ₀^{deg₀ y}`, where
-`deg₀ y = [k₁ : k₀] deg₁ y` is the degree over `k₀`. -/
-theorem geometricFiberExtensionPoint_geometricFiberPointOfFinitePoint_comp (y : Y.finitePoints) :
-    geometricFiberExtensionPoint f₁ f₀ hf θ (f₁.geometricFiberPointOfFinitePoint y) ≫
-        (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * f₁.degreeOver y.1)).hom =
-      (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * f₁.degreeOver y.1)).hom ≫
-        geometricFiberExtensionPoint f₁ f₀ hf θ (f₁.geometricFiberPointOfFinitePoint y) :=
-  geometricFiberExtensionPoint_comp_geometricGaloisFrobenius_pow f₁ f₀ hf θ
-    (f₁.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow y)
-
-omit [Finite k₀] in
-/-- The geometric point of `Ȳ₀` transported from the geometric point of `Ȳ₁` over a point `y`
-with finite residue field lies over `y`. -/
-theorem geometricFiberExtensionPoint_geometricFiberPointOfFinitePoint_base (y : Y.finitePoints) :
-    (geometricFiberExtensionPoint f₁ f₀ hf θ (f₁.geometricFiberPointOfFinitePoint y) ≫
-      f₀.geometricFiberProj).base (IsLocalRing.closedPoint (AlgebraicClosure k₀)) = y.1 :=
-  (geometricFiberExtensionPoint_comp_geometricFiberProj_base f₁ f₀ hf θ _).trans
-    (f₁.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base y)
 
 end Scheme.Hom
 

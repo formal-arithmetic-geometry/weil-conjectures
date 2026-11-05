@@ -35,30 +35,4 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- Proper morphisms have a reduction comparison for `Rf_!` and `Rf^!`
-(`exists_etaleReductionLowerShriekIso`). -/
-theorem hasEtaleReductionLowerShriekIso_of_isProper (f : X ⟶ Y) [IsProper f.left] :
-    HasEtaleReductionLowerShriekIso ℓ E n f :=
-  exists_etaleReductionLowerShriekIso ℓ E n f
-
-/-- Blueprint `det-prop-scalar-six-exceptional` (with the compact-support comparison `γ^!` of
-`det-prop-scalar-six-compact-support`), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
-étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` commutes with `Rf_!` and with
-`Rf^!`** for every morphism `f` of separated `k`-schemes of finite type: there is an
-isomorphism `γ : Rf_! ⋙ red_Y ≅ red_X ⋙ Rf_!` whose transpose under `Rf_! ⊣ Rf^!` is an
-isomorphism.
-
-Factor `f` through a compactification `X ⟶[i] P ⟶[p] Y`, with `i` an open immersion and `p`
-proper (`AlgebraicGeometry.Compactification.overI_overG`), and compose the comparisons for `i`
-(`hasEtaleReductionLowerShriekIso_of_isOpenImmersion`) and `p`
-(`hasEtaleReductionLowerShriekIso_of_isProper`) by `HasEtaleReductionLowerShriekIso.comp`.
-
-As for `exists_etaleReductionLowerShriekIso`, this only asserts that some isomorphism `γ` with
-invertible transpose exists, without identifying it with the canonical `γ^!`. -/
-theorem hasEtaleReductionLowerShriekIso (f : X ⟶ Y) : HasEtaleReductionLowerShriekIso ℓ E n f := by
-  let c := compactificationOverField f
-  have h := (hasEtaleReductionLowerShriekIso_of_isOpenImmersion ℓ E n c.overI).comp ℓ E n
-    (hasEtaleReductionLowerShriekIso_of_isProper ℓ E n c.overG)
-  rwa [c.overI_overG] at h
-
 end AlgebraicGeometry.ProEtale.CondensedRing

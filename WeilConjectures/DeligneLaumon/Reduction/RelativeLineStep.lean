@@ -134,17 +134,6 @@ theorem hasDirectImageWeightBound_affineLine :
   exact (key n (by omega) r).of_iso ((WeilSheaf.higherLowerShriek k₀ l _ r).mapIso hlast.some)
 
 variable (S) in
-/-- For the projection `p : 𝔸¹_S ⟶ S` of the relative affine line over a separated `k₀`-scheme
-of finite type and a Weil complex `K` on `𝔸¹_S` mixed of weights at most `w`, the complex `Rp₀!K`
-is mixed of weights at most `w` (blueprint: `thm-zl-relative-line-step`).
-
-By `lem-zl-sheaves-to-complexes` this follows from the sheaf form
-`AlgebraicGeometry.hasDirectImageWeightBound_affineLine`. -/
-theorem hasDirectImageComplexWeightBound_affineLine :
-    HasDirectImageComplexWeightBound k₀ ι (𝔸(PUnit.{u + 1}; S) ↘ S) :=
-  fun _ _ hK ↦ (hasDirectImageWeightBound_affineLine S).isMixedOfWeightsAtMost_derivedLowerShriek hK
-
-variable (S) in
 /-- The direct-image weight assertion holds for the projection of the `r`-fold relative affine line
 over a separated `k₀`-scheme of finite type, the composition of `r` affine-line projections
 (blueprint: `thm-zl-relative-line-step` and `det-l-dl-general-composition`). -/

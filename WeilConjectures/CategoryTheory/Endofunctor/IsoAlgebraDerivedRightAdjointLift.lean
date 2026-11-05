@@ -296,20 +296,4 @@ theorem exists_forget_mapDerivedCategory_map_eq {A B : DerivedCategory (IsoAlgeb
   rw [← h₂, ← hf', ← h₁]
   exact Equiv.apply_symm_apply _ g
 
-/-- **Lifting equivariant isomorphisms to the derived category of algebras.** If the underlying
-objects `U A` and `U B` of objects of `D(IsoAlgebra F)` are isomorphic through an isomorphism
-which commutes with the derived structure isomorphisms `F (U A) ≅ U A` and `F (U B) ≅ U B`,
-then `A` and `B` are isomorphic. -/
-theorem nonempty_iso_of_forget_mapDerivedCategory_iso {A B : DerivedCategory (IsoAlgebra F)}
-    (g : (forget F).mapDerivedCategory.obj A ≅ (forget F).mapDerivedCategory.obj B)
-    (hg : (derivedStrIso F).hom.app A ≫ g.hom =
-      F.mapDerivedCategory.map g.hom ≫ (derivedStrIso F).hom.app B) :
-    Nonempty (A ≅ B) := by
-  obtain ⟨f, hf⟩ := exists_forget_mapDerivedCategory_map_eq F g.hom hg
-  have : IsIso ((forget F).mapDerivedCategory.map f) := by
-    rw [hf]
-    infer_instance
-  have := isIso_of_isIso_forget_mapDerivedCategory_map f
-  exact ⟨asIso f⟩
-
 end CategoryTheory.Endofunctor.IsoAlgebra

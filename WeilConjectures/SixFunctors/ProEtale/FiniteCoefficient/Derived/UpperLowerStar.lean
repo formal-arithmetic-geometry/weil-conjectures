@@ -251,49 +251,6 @@ lemma leftDerivedUpperStarCongr_rfl {X Y : Scheme.{u}} {f : X ⟶ Y} :
     leftDerivedUpperStarCongr A (rfl : f = f) = Iso.refl _ :=
   rfl
 
-/-- The exactness comparison `H^n ∘ g^* ≅ g^* ∘ H^n`: since the underived pullback `g^*`
-on pro-étale sheaves is exact, applying it to the `n`-th homology sheaf of an object of
-the derived category computes the `n`-th homology sheaf of the derived pullback.
-
-```
-                    H^n
-D(Y_proét) -----------------> Sh(Y_proét)
-    |                              |
-  Lg^*                            g^*
-    |                              |
-    v                              v
-D(Z_proét) -----------------> Sh(Z_proét)
-                    H^n
-```
-
-This is `Functor.leftDerivedFunctorHomologyFunctorIso` at `g^*`. -/
-noncomputable def leftDerivedUpperStarHomologyFunctorIso (n : ℤ) :
-    DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) A) n ⋙ (g)^*[A] ≅
-      L((g)^*[A]) ⋙
-        DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Z) A) n :=
-  (g)^*[A].leftDerivedFunctorHomologyFunctorIso n
-
-/-- The single-degree comparison for the derived pullback: since the underived pullback
-`g^*` on pro-étale sheaves is exact, the derived pullback of a sheaf placed in degree `0`
-is the pullback of the sheaf placed in degree `0`, `Lg^*(F[0]) ≅ (g^* F)[0]`.
-
-```
-                     (-)[0]
-Sh(Y_proét) -----------------> D(Y_proét)
-     |                              |
-     g^*                          Lg^*
-     |                              |
-     v                              v
-Sh(Z_proét) -----------------> D(Z_proét)
-                     (-)[0]
-```
-
-This is `Functor.singleFunctorCompLeftDerivedFunctorIso` at `g^*`. -/
-noncomputable def singleFunctorCompLeftDerivedUpperStarIso :
-    DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology Y) A) 0 ⋙ L((g)^*[A]) ≅
-      (g)^*[A] ⋙ DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology Z) A) 0 :=
-  (g)^*[A].singleFunctorCompLeftDerivedFunctorIso
-
 end ProEtale
 
 end DerivedUpperStar

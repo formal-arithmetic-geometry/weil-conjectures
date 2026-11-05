@@ -139,23 +139,10 @@ mathlib's `ℓ`-adic sheaf `AlgebraicGeometry.Scheme.ellAdicSheaf`, see
 noncomputable abbrev padicIntSheaf : Sheaf (ProEt.topology X) RingCat.{u + 1} :=
   continuousMapRingSheaf X ℤ_[ℓ]
 
-/-- The abelian sheaf underlying `ℤ_ℓ,X` is mathlib's `ℓ`-adic sheaf
-`AlgebraicGeometry.Scheme.ellAdicSheaf`, lifted to the universe `u + 1`. -/
-lemma sheafCompose_obj_padicIntSheaf :
-    (sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-        (padicIntSheaf X ℓ) =
-      (sheafCompose (ProEt.topology X) AddCommGrpCat.uliftFunctor.{u + 1}).obj
-        (X.ellAdicSheaf ℓ) :=
-  rfl
-
 /-- The sheaf of rings `ℚ_ℓ,X` on `X_proét`: the sheaf of continuous maps `U ↦ C(U, ℚ_ℓ)` with
 the pointwise ring structure [Bhatt–Scholze, Definition 6.8.1]. -/
 noncomputable abbrev padicSheaf : Sheaf (ProEt.topology X) RingCat.{u + 1} :=
   continuousMapRingSheaf X ℚ_[ℓ]
-
-/-- The inclusion `ℤ_ℓ,X ⟶ ℚ_ℓ,X`, a morphism of sheaves of rings. -/
-noncomputable def padicIntSheafToPadicSheaf : padicIntSheaf X ℓ ⟶ padicSheaf X ℓ :=
-  continuousMapRingSheafMap X PadicInt.Coe.ringHom continuous_subtype_val
 
 /-! ### Subfields `E` of `ℚ̄_ℓ` -/
 
@@ -203,20 +190,6 @@ section Integers
 
 variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
 
-/-- The sheaf of rings `𝒪_{E,X}` on `X_proét`, for a subfield `E` of `ℚ̄_ℓ` given by an embedding
-`E → ℚ̄_ℓ`: the sheaf of continuous maps `U ↦ C(U, 𝒪_E)` with the pointwise ring structure
-into the ring of integers `𝒪_E = PadicAlgCl.integers ℓ E` of `E`, for the topology of `𝒪_E`
-restricted from `ℚ̄_ℓ` along the embedding. -/
-noncomputable abbrev padicIntegersSheaf : Sheaf (ProEt.topology X) RingCat.{u + 1} :=
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  continuousMapRingSheaf X (PadicAlgCl.integers ℓ E)
-
-/-- The inclusion `𝒪_{E,X} ⟶ E_X`, a morphism of sheaves of rings. -/
-noncomputable def padicIntegersSheafToPadicSubfieldSheaf :
-    padicIntegersSheaf X ℓ E ⟶ padicSubfieldSheaf X ℓ E :=
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  continuousMapRingSheafMap X (PadicAlgCl.integers ℓ E).subtype continuous_subtype_val
-
 variable [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
 
 /-- The structure map `ℚ_ℓ → E` sends `ℤ_ℓ` into the ring of integers `𝒪_E`: the valuation of
@@ -240,12 +213,6 @@ lemma continuous_padicIntToIntegers :
   refine continuous_induced_rng.mpr ?_
   exact (continuous_algebraMap_padic_of_algebra ℓ E).comp continuous_subtype_val
 
-/-- The inclusion `ℤ_ℓ,X ⟶ 𝒪_{E,X}`, a morphism of sheaves of rings. -/
-noncomputable def padicIntSheafToPadicIntegersSheaf :
-    padicIntSheaf X ℓ ⟶ padicIntegersSheaf X ℓ E :=
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  continuousMapRingSheafMap X (padicIntToIntegers ℓ E) (continuous_padicIntToIntegers ℓ E)
-
 end Integers
 
 /-! ### `ℚ̄_ℓ` -/
@@ -264,11 +231,6 @@ noncomputable def padicAlgClRingPresheaf : X.ProEtᵒᵖ ⥤ RingCat.{u + 1} whe
             exact ⟨E, hE, fun x ↦ hg _⟩)).comp ULift.ringEquiv.toRingHom))
   map_id _ := rfl
   map_comp _ _ := rfl
-
-lemma padicAlgClRingPresheaf_map_apply {U V : X.ProEtᵒᵖ} (f : U ⟶ V)
-    (g : ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ U.unop.left)) :
-    ((padicAlgClRingPresheaf X ℓ).map f g).down.1 = g.down.1.comp f.unop.left.base.hom :=
-  rfl
 
 /-- The ring object `ℚ̄_ℓ,X` of abelian sheaves on `X_proét`: the sheafification of the
 presheaf of rings `U ↦ {f ∈ C(U, ℚ̄_ℓ) | f takes values in a finite subextension of ℚ_ℓ}`,
@@ -315,19 +277,6 @@ instance : IsMonHom (continuousMapRingSheafToPadicAlgClSheaf X ℓ ψ hψ hE) :=
     (continuousMapRingSheaf X T) (continuousMapRingPresheafToPadicAlgCl X ℓ ψ hψ hE)))
 
 end ToPadicAlgCl
-
-/-- The inclusion `ℚ_ℓ,X ⟶ ℚ̄_ℓ,X`, a morphism of ring objects. -/
-noncomputable def padicSheafToPadicAlgClSheaf :
-    (sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-      (padicSheaf X ℓ) ⟶ padicAlgClSheaf X ℓ :=
-  continuousMapRingSheafToPadicAlgClSheaf X ℓ (algebraMap ℚ_[ℓ] (PadicAlgCl ℓ))
-    (continuous_algebraMap ℚ_[ℓ] (PadicAlgCl ℓ))
-    ⟨⊥, inferInstance, fun t ↦ IntermediateField.algebraMap_mem ⊥ t⟩
-
-instance : IsMonHom (padicSheafToPadicAlgClSheaf X ℓ) :=
-  inferInstanceAs (IsMonHom (continuousMapRingSheafToPadicAlgClSheaf X ℓ
-    (algebraMap ℚ_[ℓ] (PadicAlgCl ℓ)) (continuous_algebraMap ℚ_[ℓ] (PadicAlgCl ℓ))
-    ⟨⊥, inferInstance, fun t ↦ IntermediateField.algebraMap_mem ⊥ t⟩))
 
 section SubfieldToPadicAlgCl
 

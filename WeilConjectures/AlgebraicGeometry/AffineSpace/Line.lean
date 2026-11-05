@@ -130,17 +130,6 @@ theorem geometricallyConnected_of_isOpenImmersion [Nonempty V] :
   have := geometricallyIrreducible_of_isOpenImmersion v
   GeometricallyConnected.of_geometricallyIrreducible _
 
-/-- A nonempty open `U` of an affine space over an affine base contains a nonempty basic open
-`D(g)`, which is affine. -/
-theorem exists_basicOpen_le {n : Type u} {S : Scheme.{u}} [IsAffine S] (U : 𝔸(n; S).Opens)
-    (hU : (U : Set 𝔸(n; S)).Nonempty) :
-    ∃ g : Γ(𝔸(n; S), ⊤), 𝔸(n; S).basicOpen g ≤ U ∧
-      ((𝔸(n; S).basicOpen g : 𝔸(n; S).Opens) : Set 𝔸(n; S)).Nonempty := by
-  obtain ⟨x, hx⟩ := hU
-  obtain ⟨_, ⟨g, rfl⟩, hxg, hgU⟩ :=
-    TopologicalSpace.Opens.isBasis_iff_nbhd.mp (isBasis_basicOpen 𝔸(n; S)) (U := U) (x := x) hx
-  exact ⟨g, hgU, x, hxg⟩
-
 end AffineSpace
 
 /-- An affine scheme `X` smooth of relative dimension `n` over a field has
@@ -151,15 +140,5 @@ theorem ringKrullDim_le_of_smoothOfRelativeDimension {K : Type u} [Field K] {X :
   rw [← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
   exact (IsHomeomorph.topologicalKrullDim_eq _ X.isoSpec.hom.homeomorph.isHomeomorph).symm.trans_le
     (topologicalKrullDim_le_of_smoothOfRelativeDimension f n)
-
-/-- The affine fibres of a morphism `h` smooth of relative dimension `n` have Krull dimension at
-most `n`: the fibre `h.fiber y` is smooth of relative dimension `n` over the residue field of
-`y`, by base change. -/
-theorem Scheme.Hom.ringKrullDim_fiber_le {U Y : Scheme.{u}} (h : U ⟶ Y) (n : ℕ)
-    [SmoothOfRelativeDimension n h] (y : Y) [IsAffine (h.fiber y)] :
-    ringKrullDim Γ(h.fiber y, ⊤) ≤ n := by
-  have : SmoothOfRelativeDimension n (h.fiberToSpecResidueField y) :=
-    inferInstanceAs (SmoothOfRelativeDimension n (pullback.snd _ _))
-  exact ringKrullDim_le_of_smoothOfRelativeDimension (h.fiberToSpecResidueField y) n
 
 end AlgebraicGeometry

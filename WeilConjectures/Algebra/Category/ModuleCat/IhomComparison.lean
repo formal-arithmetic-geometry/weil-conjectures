@@ -38,29 +38,6 @@ variable {R : Type u} [CommRing R] {D : Type*} [Category* D] [Preadditive D]
   (F : ModuleCat.{u} R ⥤ D) [F.LaxMonoidal] [IsIso (ε F)] [F.Additive]
   [PreservesFiniteLimits F] [F.PreservesEpimorphisms]
 
-/-- **An exact monoidal functor preserves internal homs out of finitely presented modules**: the
-comparison map `F [P, Q] ⟶ [F P, F Q]` is an isomorphism for a finitely presented module `P`. -/
-theorem isIso_ihomComparison_app_of_finitePresentation (P : ModuleCat.{u} R)
-    [Module.FinitePresentation R P] (Q : ModuleCat.{u} R) :
-    IsIso ((ihomComparison F P).natTrans.app Q) := by
-  have hfree (n : ℕ) : IsIso ((ihomComparison F (ModuleCat.of R (Fin n → R))).natTrans.app Q) := by
-    have (_ : Fin n) : IsIso ((ihomComparison F (𝟙_ (ModuleCat.{u} R))).natTrans.app Q) :=
-      isIso_ihomComparison_app_unit F Q
-    have := @isIso_ihomComparison_app_biproduct _ _ _ _ _ _ _ _ F _ _ _ _ _ _ _ _
-      (fun _ : Fin n ↦ 𝟙_ (ModuleCat.{u} R)) _ Q this
-    let e : (⨁ fun _ : Fin n ↦ 𝟙_ (ModuleCat.{u} R)) ≅ ModuleCat.of R (Fin n → R) :=
-      biproductIsoPi _
-    exact (isIso_ihomComparison_app_iff_of_iso_left F e Q).1 inferInstance
-  obtain ⟨n, m, π, g, hπ, hexact⟩ := Module.FinitePresentation.exists_fin' R P
-  let S : ShortComplex (ModuleCat.{u} R) := ShortComplex.mk (ofHom g) (ofHom π)
-    (ModuleCat.hom_ext (LinearMap.ext hexact.apply_apply_eq_zero))
-  have hS : S.Exact := (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact S).2 hexact
-  have : Epi S.g := (ModuleCat.epi_iff_surjective _).2 hπ
-  have := hfree n
-  have := hfree m
-  have : Epi (F.map S.g) := F.map_epi _
-  exact isIso_ihomComparison_app_of_isColimit F S.zero hS.gIsCokernel Q
-
 end ModuleCat
 
 namespace Module.Finite

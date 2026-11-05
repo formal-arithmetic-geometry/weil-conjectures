@@ -90,13 +90,6 @@ noncomputable def toBase (x : PointedEtaleNeighborhood s) : x ⟶ base s :=
     obtain ⟨X, x⟩ := x
     exact CategoryTheory.Over.OverMorphism.ext (CategoryTheory.Over.w x))
 
-/-- The pointed étale neighbourhood `(S, s)` is terminal. -/
-noncomputable def isTerminalBase : IsTerminal (base s) :=
-  IsTerminal.ofUniqueHom (toBase s) fun x f ↦ by
-    apply Subtype.ext
-    apply MorphismProperty.Over.Hom.ext
-    exact f.1.w.trans (Category.comp_id _)
-
 /-- Every pointed étale neighbourhood `(V, v)` is refined by the spectrum of a ring with an
 étale morphism to `S`: take an affine open of `V` containing the image of `v`. -/
 lemma exists_precomp_hom (d : PointedEtaleNeighborhood s) :
@@ -211,8 +204,6 @@ noncomputable def strictLocalizationCone : Cone (affineNeighborhoodDiagram s) :=
   (Cone.postcompose (affineNeighborhoodDiagramIso s).inv).obj
     (Scheme.Spec.mapCone (coneRightOpOfCocone (colimit.cocone (strictHenselizationDiagram s))))
 
-lemma strictLocalizationCone_pt : (strictLocalizationCone s).pt = strictLocalization s := rfl
-
 lemma strictLocalizationCone_π_app (x : AffinePointedEtaleNeighborhood s) :
     (strictLocalizationCone s).π.app x =
       Spec.map (colimit.ι (strictHenselizationDiagram s) (op x)) ≫
@@ -293,57 +284,9 @@ noncomputable def isLimitStrictLocalizationConePullback {X : Scheme.{u}} (f : X 
   isLimitOfPreserves (CategoryTheory.Over.forget X)
     (isLimitOfPreserves (CategoryTheory.Over.pullback f) (isLimitStrictLocalizationConeOver s))
 
-/-- The point of the cone of `isLimitStrictLocalizationConePullback` is the fibre product
-`S_(s) ×_S X`. -/
-lemma isLimitStrictLocalizationConePullback_pt {X : Scheme.{u}} (f : X ⟶ S) :
-    ((CategoryTheory.Over.forget X).mapCone
-      ((CategoryTheory.Over.pullback f).mapCone (strictLocalizationConeOver s))).pt =
-      pullback (strictLocalizationToBase s) f :=
-  rfl
-
 section Stalk
 
 variable (A : Type*) [Category A] [HasColimitsOfSize.{u, u} A]
-
-/-- Blueprint `def-weil-pbc-geometric-stalks`: Geometric stalks
-
-The **geometric stalk** functor `F ↦ F_s = colim F(U)` at a geometric point `s` of `S`, the
-colimit running over the opposite of the category of pointed étale neighbourhoods `(U, u)`
-of `s`. This is the fibre functor on sheaves of Mathlib's point `pointSmallEtale s` of the
-small étale site.
-
-(blueprint: `def-weil-pbc-geometric-stalks`) -/
-noncomputable abbrev geometricStalkFunctor : Sheaf S.smallEtaleTopology A ⥤ A :=
-  (pointSmallEtale s).sheafFiber
-
-/-- The geometric stalk `F_s` is the colimit of the sections `F(U)` over the pointed étale
-neighbourhoods `(U, u)` of `s`. -/
-noncomputable def isColimitGeometricStalk (F : Sheaf S.smallEtaleTopology A) :
-    IsColimit ((pointSmallEtale s).presheafFiberCocone F.obj) :=
-  (pointSmallEtale s).isColimitPresheafFiberCocone F.obj
-
-/-- **Geometric stalks are left exact.**
-
-(blueprint: `prop-weil-pbc-geometric-stalks-exact`) -/
-instance preservesFiniteLimits_geometricStalkFunctor :
-    PreservesFiniteLimits (geometricStalkFunctor s AddCommGrpCat.{u}) :=
-  inferInstance
-
-/-- **Geometric stalks are right exact.**
-
-(blueprint: `prop-weil-pbc-geometric-stalks-exact`) -/
-instance preservesFiniteColimits_geometricStalkFunctor :
-    PreservesFiniteColimits (geometricStalkFunctor s AddCommGrpCat.{u}) :=
-  inferInstance
-
-/-- **Exactness of geometric stalks**: the stalk functor `Ab(S_ét) ⥤ Ab` at a geometric point
-carries short exact sequences of abelian étale sheaves to short exact sequences.
-
-(blueprint: `prop-weil-pbc-geometric-stalks-exact`) -/
-theorem shortExact_map_geometricStalkFunctor
-    {T : ShortComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})} (hT : T.ShortExact) :
-    (T.map (geometricStalkFunctor s AddCommGrpCat.{u})).ShortExact :=
-  hT.map_of_exact _
 
 end Stalk
 

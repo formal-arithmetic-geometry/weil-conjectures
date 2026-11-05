@@ -146,7 +146,6 @@ lemma unit_app_clopenUpperStarLowerShriekAdjunction_counit_app
   rw [CategoryTheory.Functor.map_id, Category.id_comp, ← Functor.map_inv, ← Functor.map_inv, hn,
     reassoc_of% ht, Iso.inv_hom_id_app_assoc, IsIso.hom_inv_id]
 
-
 /-- The counit of `Lσ^* ⊣ Dσ_!` is the inverse of the unit of `Dσ_! ⊣ Lσ^*`. -/
 lemma clopenUpperStarLowerShriekAdjunction_counit_app
     (S : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -207,16 +206,6 @@ lemma clopenTransfer_comp_right
     (b : T₂ ⟶ T₃) :
     clopenTransfer Λ (ψ ≫ L((σ)^*[ModuleCat.{u + 1} Λ]).map b) = clopenTransfer Λ ψ ≫ b := by
   simpa using clopenTransfer_comp Λ σ (𝟙 _) ψ b
-
-/-- On the piece `X`, `clopenTransfer ψ` is `ψ`. -/
-lemma leftDerivedUpperStar_map_clopenTransfer_self
-    {T₁ T₂ : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (ψ : L((σ)^*[ModuleCat.{u + 1} Λ]).obj T₁ ⟶ L((σ)^*[ModuleCat.{u + 1} Λ]).obj T₂) :
-    L((σ)^*[ModuleCat.{u + 1} Λ]).map (clopenTransfer Λ ψ) = ψ := by
-  simp only [clopenTransfer, Functor.map_comp,
-    leftDerivedUpperStar_map_clopenUpperStarLowerShriekAdjunction_unit_app]
-  rw [Adjunction.unit_naturality_assoc,
-    Adjunction.right_triangle_components, Category.comp_id]
 
 set_option maxHeartbeats 800000 in
 -- the base change of the unit of `Lσ^* ⊣ Dσ_!` unfolds large derived functors

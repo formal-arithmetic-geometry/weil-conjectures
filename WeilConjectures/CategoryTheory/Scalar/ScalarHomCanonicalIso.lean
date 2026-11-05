@@ -29,10 +29,4 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [∀ R : Sheaf J CommRingCat.{max c v r}, HasDerivedCategory.{w} (scalarModules J R)]
   (M : ScalarHomModels.{c, v, r, w} J) {R S : Sheaf J CommRingCat.{max c v r}}
 
-/-- The explicit comparison furnished by the five representing Hom bijections.
-Source: Stacks 07A6 and 08J9 (blueprint: def-sfb-scalar-hom-canonical-iso). -/
-noncomputable def scalarHomCanonicalIso (a : R ⟶ S) (μ : ScalarHomTensorComparison M a) :
-    scalarHomSource M a ≅ scalarHomTarget.{c, v, r, w} a :=
-  ClosedScalarHom.iso (M.closed R) (M.closed S) (M.scalar a).adjunction μ.iso
-
 end CategoryTheory

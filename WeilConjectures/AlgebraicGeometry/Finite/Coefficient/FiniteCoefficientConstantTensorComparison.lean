@@ -84,20 +84,6 @@ attribute [local irreducible] completedAdicChangeData
   SheafOfModules.tensorObjIsoSheafification
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-private abbrev layerLift (B : Type t) [CommRing B] :
-    ModuleCat.{t} B ⥤ ModuleCat.{t + 1} (ULift.{t + 1} B) :=
-  ModuleCat.uliftFunctor.{t + 1, t} B ⋙ ModuleCat.restrictScalars.{t + 1}
-    (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom
-
-private def layerLiftTensor {B : Type t} [CommRing B] (M N : ModuleCat.{t} B) :
-    (layerLift B).obj (M ⊗ N) ≅ (layerLift B).obj M ⊗ (layerLift B).obj N :=
-  (show ULift.{t + 1} (M ⊗[B] N) ≃ₗ[ULift.{t + 1} B]
-      (ULift.{t + 1} M ⊗[ULift.{t + 1} B] ULift.{t + 1} N) from
-    { (TensorProduct.AlgebraTensorModule.uliftEquiv B B M N).toAddEquiv with
-      map_smul' := fun b x ↦
-        (TensorProduct.AlgebraTensorModule.uliftEquiv B B M N).map_smul b.down x
-    }).toModuleIso
-
 @[irreducible] private def layerConstantTensor (X : Scheme.{t}) (B : Type t) [CommRing B]
     (N : ModuleCat.{t} B) :
     letI := SheafOfModules.monoidalCategory (adicConstantRing X B)
@@ -184,30 +170,5 @@ private def layerLiftTensor {B : Type t} [CommRing B] (M N : ModuleCat.{t} B) :
   exact Functor.isoWhiskerLeft (tensorRight N) e ≪≫ q ≪≫
     Functor.isoWhiskerLeft E' ((curriedTensor _).flip.mapIso (e.app N).symm) ≪≫
       Functor.isoWhiskerRight e.symm (tensorRight (E.obj N))
-
-/-- Ordinary constant realization carries tensor products to sheaf tensor products.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03EL and 0GMW.
-(blueprint: lem-weil-pbc-finite-coefficient-constant-tensor-comparison).
-
-Proof: the lifted pure-tensor equivalence identifies the constant presheaf of a
-module tensor with the sectionwise tensor of the constant presheaves. Apply the
-module-sheafification tensor comparison and its naturality. Ordinary coefficient
-extension preserves tensors by the balanced scalar-extension comparison. Identify
-that extension with the prescribed completedAdicChange functor using its object
-and morphism equalities, then compose the two natural isomorphisms. No flatness,
-finite generation, nonzero-ring or nonempty-site hypothesis is used. -/
-theorem finiteCoefficient_constant_tensor_comparison (X : Scheme.{t})
-    (B : Type t) [CommRing B]
-    {R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}
-    (φ : adicConstantRing X B ⟶ R) (N : ModuleCat.{t} B) :
-    letI := SheafOfModules.monoidalCategory R
-    Nonempty (finiteCoefficientConstantFunctor X B φ ⋙
-        tensorRight ((finiteCoefficientConstantFunctor X B φ).obj N) ≅
-      tensorRight N ⋙ finiteCoefficientConstantFunctor X B φ) := by
-  let := SheafOfModules.monoidalCategory R
-  exact ⟨Functor.isoWhiskerLeft (baseConstantFunctor X B)
-      (layerChangeTensor X φ ((baseConstantFunctor X B).obj N)).symm ≪≫
-    Functor.isoWhiskerRight (layerConstantTensor X B N) (completedAdicChange X φ)⟩
 
 end AlgebraicGeometry.Scheme

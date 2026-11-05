@@ -146,20 +146,6 @@ noncomputable def rightDerivedLowerStarCongr {g₁ g₂ : Z ⟶ Y} (h : g₁ = g
 lemma rightDerivedLowerStarCongr_refl : rightDerivedLowerStarCongr A (g₁ := g) rfl = Iso.refl _ :=
   rfl
 
-@[simp]
-lemma rightDerivedLowerStarCongr_hom_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
-    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    (rightDerivedLowerStarCongr A h).hom.app K = eqToHom (by subst h; rfl) := by
-  subst h
-  rfl
-
-@[simp]
-lemma rightDerivedLowerStarCongr_inv_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
-    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    (rightDerivedLowerStarCongr A h).inv.app K = eqToHom (by subst h; rfl) := by
-  subst h
-  rfl
-
 /-- The composition isomorphism `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*` of the derived direct images.
 It is the conjugate, under the adjunctions `D(g^*) ⊣ Rg_*` of
 `AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`, of the composition

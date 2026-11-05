@@ -244,42 +244,7 @@ open CondensedRing
 
 variable (X : Scheme.{u})
 
-/-- For a finite discrete ring `T`, the bounded constructible complexes of `T_X`-modules on a
-topologically noetherian scheme form a triangulated subcategory. -/
-instance isTriangulated_boundedConstructible_finiteDiscreteRingObj
-    [TopologicalSpace.NoetherianSpace X] (T : Type) [CommRing T] [TopologicalSpace T]
-    [IsTopologicalRing T] [DiscreteTopology T] [Finite T] :
-    (boundedConstructible
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X)).IsTriangulated := by
-  obtain ⟨hc, he⟩ := constructible_cokernels_extensions X
-    (condensedRingObj (Profinite.continuousMapRingObj T) X)
-  exact isTriangulated_boundedConstructible_of_serre _
-    (fun M N f hM hN ↦ ⟨finiteDiscrete_constructible_kernel T X M N f hM hN,
-      ObjectProperty.prop_cokernel _ f hM hN⟩)
-    (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
-
 -- The prime `ℓ` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
 -- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
-set_option synthInstance.checkSynthOrder false in
-/-- For the closed unit ball `O` of a finite normed extension `E` of `ℚ_ℓ`, the bounded
-constructible complexes of `O_X`-modules on a topologically noetherian scheme form a triangulated
-subcategory. -/
-instance isTriangulated_boundedConstructible_unitBallRingObj
-    [TopologicalSpace.NoetherianSpace X] (ℓ : ℕ) [Fact ℓ.Prime] {E : Type} [NormedField E]
-    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (O : Subring E)
-    [hO : Fact (∀ x : E, x ∈ O ↔ ‖x‖ ≤ 1)] :
-    (boundedConstructible
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} O) X)).IsTriangulated := by
-  obtain rfl : O = continuousIntegers ℓ E := by
-    ext x
-    rw [hO.out]
-    change ‖x‖ ≤ 1 ↔ ‖x‖₊ ≤ 1
-    simpa only [NNReal.coe_one, coe_nnnorm] using
-      (NNReal.coe_le_coe : (‖x‖₊ : ℝ) ≤ ((1 : NNReal) : ℝ) ↔ ‖x‖₊ ≤ 1)
-  obtain ⟨hker, hcok, hext⟩ := integralConstructible_serre ℓ E X
-  exact isTriangulated_boundedConstructible_of_serre _
-    (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
-      ObjectProperty.prop_cokernel _ f hM hN⟩)
-    (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
 
 end AlgebraicGeometry.ProEtale

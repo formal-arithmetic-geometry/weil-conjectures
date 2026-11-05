@@ -26,17 +26,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A specified bounded-below etale antecedent and the specified comparison isomorphism.
-The target is already in D+; no constructibility or chosen preimage is imposed.
-Source: blueprint def-weil-pbc-etale-origin-witness, displayed pair (L,alpha),
-Stacks Tag 099R (blueprint: def-weil-pbc-etale-origin-witness). -/
-structure FixedEtaleOriginWitness (T : Scheme.{u}) (A : Type (u + 1))
-    [Ring A]
-    (K : DerivedCategory.Plus (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} A))) where
-  /-- The retained bounded-below antecedent. -/
-  complex : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
-  /-- Its specified ordinary derived comparison isomorphism. -/
-  iso : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.obj
-    complex.obj ≅ K.obj
-
 end AlgebraicGeometry.Scheme

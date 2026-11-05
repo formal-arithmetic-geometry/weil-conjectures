@@ -21,32 +21,4 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
-/-- Sections on an open preserve finite limits.
-Source: Stacks Project, Tag 01DZ.
-(blueprint: lem-sc-open-cohomology-zero-sections). -/
-instance openModuleSections_preservesFiniteLimits (X : RingedSpace.{u}) (U : Opens X) :
-    PreservesFiniteLimits (openModuleSections X U) := by
-  unfold openModuleSections
-  infer_instance
-
-/-- The canonical comparison from zeroth derived sections to sections.
-Source: Stacks Project, Tag 01DZ.
-(blueprint: lem-sc-open-cohomology-zero-sections). -/
-noncomputable def openCohomologyZeroSectionsIso (X : RingedSpace.{u}) (U : Opens X) :
-    openModuleCohomology X 0 U ≅ openModuleSections X U :=
-  letI : EnoughInjectives (SheafOfModules.{u} (moduleRings X)) :=
-    (moduleSheaves_abelian_enoughInjectives X).2
-  (openModuleSections X U).rightDerivedZeroIsoSelf
-
-/-- The section comparison intertwines coefficient morphisms.
-Source: Stacks Project, Tag 01DZ.
-(blueprint: lem-sc-open-cohomology-zero-sections).
-
-Proof: This is the naturality square of rightDerivedZeroIsoSelf. -/
-theorem openCohomologyZeroSectionsIso_naturality (X : RingedSpace.{u}) (U : Opens X)
-    {M N : SheafOfModules.{u} (moduleRings X)} (f : M ⟶ N) :
-    (openModuleCohomology X 0 U).map f ≫ (openCohomologyZeroSectionsIso X U).hom.app N =
-      (openCohomologyZeroSectionsIso X U).hom.app M ≫ (openModuleSections X U).map f :=
-  (openCohomologyZeroSectionsIso X U).hom.naturality f
-
 end AlgebraicGeometry.RingedSpace

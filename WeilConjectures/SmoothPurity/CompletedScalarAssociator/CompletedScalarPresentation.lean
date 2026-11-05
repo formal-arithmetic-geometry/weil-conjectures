@@ -63,7 +63,6 @@ This bundles existing scalar functors and counits without choosing a new model.
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 set_option Elab.async false
 attribute [local instance 5000] CategoryTheory.HasSheafify.isRightAdjoint
@@ -119,43 +118,6 @@ attribute [local semireducible] completedOrdinaryScalarExtension
   fun R ↦ HasDerivedCategory.standard
     (Modules.{t + 1, t, max u (t + 1)}
       (J := AlgebraicGeometry.Scheme.ProEt.topology X) R)
-
-private def canonicalPresentation :
-    letI := scalarSiteDerived.{t, u} X
-    letI : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
-    letI := integralCoefficientAbLocallyBijective.{t, u} X
-    letI := integralCoefficientAbSheafify.{t, u} X
-    Presentation (J := AlgebraicGeometry.Scheme.ProEt.topology X)
-      (completedCoefficientMap l E F ι X) :=
-  { ordinary := completedOrdinaryScalarExtension l E F ι X
-    obj_eq := completedOrdinaryScalarExtension_obj l E F ι X
-    map_eq := completedOrdinaryScalarExtension_map l E F ι X
-    additive := completedOrdinaryScalarExtension_additive l E F ι X
-    derived := completedDerivedScalarExtension l E F ι X
-    counit :=
-      ((completedScalarChangeData l E F ι X).choose_spec.choose_spec.choose_spec.choose_spec.2.2)
-        |>.choose_spec.choose
-    universal :=
-      ((completedScalarChangeData l E F ι X).choose_spec.choose_spec.choose_spec.choose_spec.2.2)
-        |>.choose_spec.choose_spec.1 }
-
-private theorem canonicalPresentation_ordinary :
-    (canonicalPresentation l E X F ι).ordinary =
-      completedOrdinaryScalarExtension l E F ι X := rfl
-
-private theorem canonicalPresentation_derived :
-    (canonicalPresentation l E X F ι).derived =
-      completedDerivedScalarExtension l E F ι X := rfl
-
-private theorem canonicalPresentation_sectionTensor
-    (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
-    (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U) (x : M.val.obj U) :
-    sectionTensor (canonicalPresentation l E X F ι) M U s x =
-      completedScalarTensorSection l E F ι X M U s x := rfl
-
-private theorem canonicalPresentation_counit (P : CochainComplex (integralTowerModules l E X) ℤ) :
-    (canonicalPresentation l E X F ι).counit.app ((HomotopyCategory.quotient _ _).obj P) =
-      completedScalarCounit l E F ι X P := rfl
 
 attribute [local irreducible] completedOrdinaryScalarExtension completedDerivedScalarExtension
   completedScalarCounit completedScalarTensorSection

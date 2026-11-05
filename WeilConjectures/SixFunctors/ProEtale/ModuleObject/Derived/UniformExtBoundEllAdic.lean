@@ -57,87 +57,9 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
 
-/-- Blueprint `sk-lem-base-field-cd`: a field `k` which is finite or separably closed has finite
-étale cohomological dimension for sheaves of modules over the residue field `𝔽_E` of `𝒪_E`. -/
-lemma hasFiniteCohomologicalDimension_residueFieldCoeff (E : FiniteIntermediateField ℓ)
-    (hk : Finite k ∨ IsSepClosed k) :
-    Etale.HasFiniteCohomologicalDimension (ResidueFieldCoeff.{u} ℓ E) (Spec (.of k)) := by
-  rcases hk with hk | hk
-  · exact Etale.hasFiniteCohomologicalDimension_of_finite ℓ (natCast_eq_zero_residueFieldCoeff ℓ E)
-  · refine Etale.hasFiniteCohomologicalDimension_of_isSepClosed _ (fun x ↦ ?_) (𝟙 _)
-    refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨ℓ, (Fact.out : ℓ.Prime).pos, ?_⟩
-    rw [nsmul_eq_mul, natCast_eq_zero_residueFieldCoeff, zero_mul]
-
 variable {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
   [IsSeparated aX]
 
 include aX
-
-/-- Blueprint `sk-lem-int-ext` (2), for a subfield `E ⊆ ℚ̄_ℓ` finite over `ℚ_ℓ`. -/
-theorem hasUniformConstructibleExtBound_padicIntegersRingObj_of_locallyOfFiniteType (E : Type)
-    [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
-    [FiniteDimensional ℚ_[ℓ] E] (hk : Finite k ∨ IsSepClosed k) :
-    HasUniformConstructibleExtBound
-      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X) :=
-  hasUniformConstructibleExtBound_padicIntegersRingObj_of_finiteIntermediateField ℓ E X
-    (hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomologicalDimension ℓ
-      (finiteIntermediateFieldOfAlgebra ℓ E) aX
-      (hasFiniteCohomologicalDimension_residueFieldCoeff ℓ _ hk))
-
-/-- Blueprint `sk-lem-uniform-constructible-ext`, for a finite subextension `E ⊆ ℚ̄_ℓ` of
-`ℚ_ℓ`, over a perfect base field: the bound for `𝒪_E` and the continuity of `Ext` give the bound
-for `E` by dévissage to lisse sheaves on connected regular schemes, which have lattices
-(`ProEtale.hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRingObj`). -/
-theorem hasUniformConstructibleExtBound_padicSubfieldRingObj_of_perfectField [PerfectField k]
-    (E : FiniteIntermediateField ℓ) (hk : Finite k ∨ IsSepClosed k) :
-    HasUniformConstructibleExtBound
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} E.1) X) := by
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
-  have : IsNoetherian X := {}
-  exact hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRingObj ℓ E aX
-    (hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomologicalDimension ℓ E
-      aX (hasFiniteCohomologicalDimension_residueFieldCoeff ℓ E hk))
-    (CondensedRing.hasConstructibleExtContinuity_padicIntegersRingObj_of_locallyOfFiniteType ℓ
-      E.1 aX)
-
-/-- Blueprint `sk-lem-uniform-constructible-ext`, for a finite subextension `E ⊆ ℚ̄_ℓ` of
-`ℚ_ℓ`. A finite field is perfect; for `k` separably closed, the base change
-`X_{k̄} ⟶ X` to an algebraic closure is a universal homeomorphism, `k̄/k` being purely
-inseparable, along which the bound descends
-(`ProEtale.CondensedRing.HasUniformConstructibleExtBound.of_isUniversalHomeomorphism`). -/
-theorem hasUniformConstructibleExtBound_padicSubfieldRingObj_of_locallyOfFiniteType
-    (E : FiniteIntermediateField ℓ) (hk : Finite k ∨ IsSepClosed k) :
-    HasUniformConstructibleExtBound
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} E.1) X) := by
-  rcases hk with hk | hk
-  · exact hasUniformConstructibleExtBound_padicSubfieldRingObj_of_perfectField ℓ aX E (Or.inl hk)
-  · let φ := Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))
-    have : IsUniversalHomeomorphism φ := Algebra.IsUniversalHomeomorphism.isUniversalHomeomorphism
-    exact CondensedRing.HasUniformConstructibleExtBound.of_isUniversalHomeomorphism _
-      (Limits.pullback.fst aX φ)
-      (hasUniformConstructibleExtBound_padicSubfieldRingObj_of_perfectField ℓ
-        (Limits.pullback.snd aX φ) E (Or.inr inferInstance))
-
-/-- Blueprint `sk-lem-uniform-constructible-ext`, for a finite extension `E` of `ℚ_ℓ`. -/
-theorem hasUniformConstructibleExtBound_continuousMapRingObj_of_locallyOfFiniteType (E : Type)
-    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    (hk : Finite k ∨ IsSepClosed k) :
-    HasUniformConstructibleExtBound
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X) := by
-  obtain ⟨E', h⟩ := hasUniformConstructibleExtBound_continuousMapRingObj_of_finiteIntermediateField
-    ℓ E
-  exact h X (hasUniformConstructibleExtBound_padicSubfieldRingObj_of_locallyOfFiniteType ℓ aX E' hk)
-
-/-- Blueprint `sk-lem-uniform-constructible-ext`, for `ℚ̄_ℓ`. -/
-theorem hasUniformConstructibleExtBound_padicAlgClRingObj_of_locallyOfFiniteType
-    (hk : Finite k ∨ IsSepClosed k) :
-    HasUniformConstructibleExtBound
-      (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X) := by
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
-  have : IsNoetherian X := {}
-  exact hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield ℓ
-    fun E ↦ hasUniformConstructibleExtBound_padicSubfieldRingObj_of_locallyOfFiniteType ℓ aX E hk
 
 end AlgebraicGeometry.ProEtale

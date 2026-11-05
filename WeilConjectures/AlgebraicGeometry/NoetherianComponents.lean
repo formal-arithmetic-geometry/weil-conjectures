@@ -38,21 +38,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lem-weil-pbc-noetherian-finite-components`: Finitely many irreducible components.
-
-A Noetherian scheme has finitely many irreducible components. -/
-theorem Scheme.finite_irreducibleComponents (X : Scheme.{u}) [IsNoetherian X] :
-    (irreducibleComponents X).Finite :=
-  TopologicalSpace.NoetherianSpace.finite_irreducibleComponents
-
-/-- Blueprint `lem-weil-pbc-flat-lfp-open`: Flat finite-presentation morphisms are open.
-
-A flat morphism locally of finite presentation is universally open: it is open, and so is every
-base change of it. This is Mathlib's `AlgebraicGeometry.UniversallyOpen.of_flat`. -/
-theorem universallyOpen_of_flat_of_locallyOfFinitePresentation {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f :=
-  UniversallyOpen.of_flat f
-
 /-- The local rings of a scheme étale over an integral scheme with integrally closed local rings
 are integrally closed domains (the étale case of Stacks 033C). -/
 theorem Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale {W Y : Scheme.{u}} (f : W ⟶ Y)
@@ -128,19 +113,5 @@ theorem Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk (W : Schem
   refine ⟨isIntegral_of_irreducibleSpace_of_isReduced _, fun w ↦ ?_⟩
   have := (hW ((U a).ι w)).2
   exact .of_equiv (hst w)
-
-/-- Blueprint `lem-fin-etale-normal-components`: Normal components after étale pullback.
-
-Let `f : W ⟶ Y` be étale with `W` Noetherian and `Y` normal integral (an integral scheme all
-of whose local rings are integrally closed). Then `W` is a finite disjoint union of open and
-closed subschemes `W_a` which are normal integral. -/
-theorem Scheme.exists_isClopen_isIntegral_of_etale {W Y : Scheme.{u}} (f : W ⟶ Y) [Etale f]
-    [IsNoetherian W] [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) :
-    ∃ (n : ℕ) (U : Fin n → W.Opens), (∀ a, IsClopen (U a : Set W)) ∧
-      Pairwise (fun a b ↦ Disjoint (U a) (U b)) ∧ ⨆ a, U a = ⊤ ∧
-      ∀ a, IsIntegral (U a).toScheme ∧
-        ∀ w : (U a).toScheme, IsIntegrallyClosed ((U a).toScheme.presheaf.stalk w) :=
-  W.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk
-    (Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale f hY)
 
 end AlgebraicGeometry

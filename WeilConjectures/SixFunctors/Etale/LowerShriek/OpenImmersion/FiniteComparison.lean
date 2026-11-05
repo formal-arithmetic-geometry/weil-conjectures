@@ -230,19 +230,6 @@ lemma Etale.isIso_finiteOpenComparison_app (sq : IsPullback jX v vbar jY)
     rw [id_comp] at h
     exact h
 
-/-- **Finite pushforward commutes with extension by zero**: for a cartesian square with
-`jX`, `jY` open immersions and `v̄` finite, the comparison map
-`β : (jY)_! v_* ⟶ v̄_* (jX)_!` of `Etale.finiteOpenComparison` is a natural isomorphism;
-naturality in `G` is built into the construction of `β` as a natural transformation.
-
-The compatibilities of `β` with identity and composite finite maps and with base change,
-also part of the blueprint statement, are not formalised here.
-(blueprint: `lemma-weil-pbc-finite-pushforward-extension-zero`) -/
-lemma Etale.isIso_finiteOpenComparison (sq : IsPullback jX v vbar jY) :
-    IsIso (Etale.finiteOpenComparison A sq) :=
-  have := Etale.isIso_finiteOpenComparison_app A sq
-  NatIso.isIso_of_isIso_app _
-
 end Comparison
 
 end AlgebraicGeometry

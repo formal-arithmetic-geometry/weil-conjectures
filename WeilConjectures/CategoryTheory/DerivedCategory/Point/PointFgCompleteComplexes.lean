@@ -30,14 +30,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
 
-/-- The full-subcategory predicate: cohomology has finite support and the specified
-finiteness property, and the object is derived complete for I.
-Source: blueprint order 1509 (blueprint: def-weil-point-fg-complete-complexes). -/
-noncomputable def pointFgComplete (R : Type u) [CommRing R] (I : Ideal R) :
-    ObjectProperty (DerivedCategory (ModuleCat.{u} R)) :=
-  fun K ↦ (∃ s : Finset ℤ, ∀ i : ℤ, i ∉ s →
-    IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj K)) ∧
-    (∀ i : ℤ, Module.Finite R ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj K)) ∧
-    DerivedCategory.IsDerivedComplete I K
-
 end DerivedCategory

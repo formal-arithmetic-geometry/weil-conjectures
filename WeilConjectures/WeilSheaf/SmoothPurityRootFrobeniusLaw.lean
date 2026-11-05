@@ -25,13 +25,6 @@ section Factor
 
 variable {U X : Scheme.{u}} (g₁ : U ⟶ U) (g : U ⟶ X) (h : g₁ ≫ g = g)
 
-/-- The factorization isomorphism `g₁^* g^* ≅ g^*` along `g₁ ≫ g = g` is the inverse of the
-composition isomorphism `ProEtale.upperStarComp'`. -/
-lemma upperStarComp'_symm_inv_app_eq (Y : Sheaf (ProEt.topology X) Ab.{u + 1}) :
-    (ProEtale.upperStarComp' Ab.{u + 1} g₁ g g h.symm).symm.inv.app Y =
-      (upperStarFactorIso g₁ g h).inv.app Y := by
-  simp [ProEtale.upperStarComp', upperStarFactorIso, upperStarCongr]
-
 end Factor
 
 /-! ### The semilinear structure of the trivialization -/

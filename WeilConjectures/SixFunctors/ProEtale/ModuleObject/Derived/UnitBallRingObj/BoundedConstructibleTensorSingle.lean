@@ -207,25 +207,6 @@ end PadicIntegersRingObj
 
 namespace UnitBallRingObj
 
-/-- The tensor calculation for two constructible sheaves in degree zero, `O̲` coefficients for
-`O` the closed unit ball of a finite normed extension `E` of `ℚ_ℓ`.
-(blueprint: lem-sfb-dc-tensor-single) -/
-theorem boundedConstructible_tensor_single
-    (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] {E : Type} [NormedField E]
-    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    (O : Subring E) [Fact (∀ x : E, x ∈ O ↔ ‖x‖ ≤ 1)]
-    (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj O) X.left))
-    (hF : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.continuousMapRingObj O) X.left) F)
-    (hG : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.continuousMapRingObj O) X.left) G) :
-    boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj O) X.left)
-      ((DerivedCategory.singleFunctor _ 0).obj F ⊗
-        (DerivedCategory.singleFunctor _ 0).obj G) :=
-  boundedConstructible_tensor_single_of_lfp _ X
-    (fun Y _ F G hF hG ↦ UnitBallRingObj.lfp_tensor_single Y ℓ O F G hF hG) F G hF hG
-
 end UnitBallRingObj
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -156,70 +156,11 @@ lemma weilLowerShriek_obj_str (K : WeilBoundedConstructible ℓ eX.hom) :
         (boundedConstructibleLowerShriek ℓ f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
-/-- The lower shriek of Weil objects lifts the lower shriek on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the forgetful
-functors. -/
-lemma weilLowerShriek_comp_forget :
-    weilLowerShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eY.hom =
-      WeilBoundedConstructible.forget ℓ eX.hom ⋙
-        boundedConstructibleLowerShriek ℓ f :=
-  rfl
-
 end LowerShriek
 
 /-! ### The upper shriek -/
 
 section UpperShriek
-
-/-- The Frobenius comparison `b^! : Rf^! ⋙ Le_X^* ⟶ Le_Y^* ⋙ Rf^!` of the upper shriek `Rf^!`
-for the chosen compactification of `f` (`ℚ̄_ℓ`-coefficient): the mate, for the adjunction `Rf_! ⊣
-Rf^!` on both sides, of the inverse `Φ_X ⋙ Rf_! ⟶ Rf_! ⋙ Φ_Y` of the lower shriek comparison
-`weilLowerShriekComparison`. -/
-noncomputable def weilUpperShriekComparison :
-    boundedConstructibleUpperShriek ℓ f ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eX.hom ⟶
-      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ eY.hom ⋙
-        boundedConstructibleUpperShriek ℓ f :=
-  (mateEquiv
-    (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (TwoSquare.mk _ _ _ _ (weilLowerShriekComparison ℓ eX eY hf).inv)).natTrans
-
-/-- The Frobenius comparison of the upper shriek is an isomorphism: it is the mate of an
-isomorphism along the Frobenius pullbacks, which are equivalences
-(`ProEtale.CondensedRing.isEquivalence_boundedConstructibleUpperStar_of_iso`). -/
-instance isIso_weilUpperShriekComparison :
-    IsIso (weilUpperShriekComparison ℓ eX eY hf) :=
-  isIso_mateEquiv_of_isEquivalence _ _
-    (TwoSquare.mk _ _ _ _ (weilLowerShriekComparison ℓ eX eY hf).inv)
-
-/-- The upper shriek `Rf^!` of Weil objects: a Weil object `(K, φ_K)` for `e_Y` is sent to
-`Rf^! K` with the structure isomorphism `Φ_X Rf^! K ≅ Rf^! Φ_Y K ≅ Rf^! K` given by
-`weilUpperShriekComparison` and `Rf^! φ_K`. -/
-noncomputable def weilUpperShriek :
-    WeilBoundedConstructible ℓ eY.hom ⥤ WeilBoundedConstructible ℓ eX.hom :=
-  IsoAlgebra.mapOfNatIso (asIso (weilUpperShriekComparison ℓ eX eY hf))
-
-/-- The underlying complex of the image under `weilUpperShriek` (`ℚ̄_ℓ`-coefficient). -/
-@[simp]
-lemma weilUpperShriek_obj_carrier (K : WeilBoundedConstructible ℓ eY.hom) :
-    ((weilUpperShriek ℓ eX eY hf).obj K).carrier =
-      (boundedConstructibleUpperShriek ℓ f).obj K.carrier :=
-  rfl
-
-/-- The Weil structure of the image under `weilUpperShriek` (`ℚ̄_ℓ`-coefficient). -/
-lemma weilUpperShriek_obj_str (K : WeilBoundedConstructible ℓ eY.hom) :
-    ((weilUpperShriek ℓ eX eY hf).obj K).str =
-      (asIso (weilUpperShriekComparison ℓ eX eY hf)).app K.carrier ≪≫
-        (boundedConstructibleUpperShriek ℓ f).mapIso K.str :=
-  IsoAlgebra.mapOfNatIso_obj_str _ K
-
-/-- The upper shriek of Weil objects lifts the upper shriek on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the
-forgetful functors. -/
-lemma weilUpperShriek_comp_forget :
-    weilUpperShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eX.hom =
-      WeilBoundedConstructible.forget ℓ eY.hom ⋙
-        boundedConstructibleUpperShriek ℓ f :=
-  rfl
 
 end UpperShriek
 

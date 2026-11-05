@@ -25,23 +25,4 @@ attribute [local irreducible] Functor.leftAdjoint HasDerivedCategory.standard
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Tensor the two inverse reduction evaluations and restrict scalars.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-finite-tensor-reduction-comparison). -/
-def pullbackTensorFiniteReductionComparison (W : Scheme.{u}) (n : ℕ) :
-    ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).prod
-      ((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ))) ⋙
-      (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).prod
-        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)))) ⋙
-      coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
-        (integralCoefficientCommRingSheaf l E W n) ⋙
-      (scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ) ≅
-      integralOperationsTensorLevel l E W n :=
-  Functor.isoWhiskerRight
-    (Functor.isoWhiskerRight
-      (NatIso.prod (pullbackTensorReductionEvaluationComplex l E W n).symm
-        (pullbackTensorReductionEvaluationComplex l E W n).symm)
-      (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
-        (integralCoefficientCommRingSheaf l E W n)))
-    ((scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ))
-
 end WeilConjectures

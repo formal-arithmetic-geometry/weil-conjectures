@@ -37,67 +37,10 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {Λ : Type} [NormedCommRing Λ] [IsUltrametricDist Λ]
 
-instance (X : Scheme.{u}) : IsCommMonObj (fieldConstantSheaf Λ X).obj where
-  mul_comm := by
-    refine NatTrans.ext (funext fun U ↦ ModuleCat.MonoidalCategory.tensor_ext fun s t ↦ ?_)
-    exact congrArg ULift.up (mul_comm t.down s.down)
-
-/-- **The constant sheaf is a commutative sheaf of rings.** -/
-instance fieldConstantSheaf.isCommMonObj (X : Scheme.{u}) :
-    IsCommMonObj (fieldConstantSheaf Λ X) where
-  mul_comm := Sheaf.tensor_hom_ext (by
-    rw [Functor.map_comp, ← Category.assoc, Functor.LaxBraided.braided, Category.assoc,
-      fieldConstantSheaf_μ_comp_map_mul']
-    exact IsCommMonObj.mul_comm (fieldConstantSheaf Λ X).obj)
-
-instance (X : Scheme.{u}) (M : Sheaf (Scheme.ProEt.topology X) (FieldCoefficients.{u} Λ)) :
-    PreservesColimitsOfSize.{u + 1, u + 1} (MonoidalCategory.tensorLeft M) :=
-  inferInstance
-
-instance (X : Scheme.{u}) (M : Sheaf (Scheme.ProEt.topology X) (FieldCoefficients.{u} Λ)) :
-    PreservesColimitsOfSize.{u + 1, u + 1} (MonoidalCategory.tensorRight M) :=
-  preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
-
 namespace FieldSheaf
-
-/-- The internal hom `𝓗om_{Λ_X}(M, -)` of sheaves of `Λ_X`-modules, right adjoint to
-`- ⊗_{Λ_X} M`. -/
-noncomputable abbrev ihom {X : Scheme.{u}} (M : FieldSheaf Λ X) : FieldSheaf Λ X ⥤ FieldSheaf Λ X :=
-  Mod.ihom M
 
 end FieldSheaf
 
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
-
-omit [IsUltrametricDist Λ] in
-lemma fieldConstantSheafToLowerStar_eq [IsIso g] :
-    fieldConstantSheafToLowerStar Λ g = (fieldConstantSheafLowerStarIso Λ (asIso g)).inv :=
-  rfl
-
-instance [IsIso g] : IsIso (fieldConstantSheafToLowerStar Λ g) := by
-  rw [fieldConstantSheafToLowerStar_eq]
-  infer_instance
-
-variable (Λ) in
-/-- The pushforward of sheaves of `Λ`-modules along an automorphism commutes with the
-internal hom: `g_* 𝓗om(M, N) ≅ 𝓗om(g_* M, g_* N)`. -/
-noncomputable def fieldLowerStarCompIhomIso (g : X ⟶ X) [IsIso g] (M : FieldSheaf Λ X) :
-    (g)_*ᶠ[Λ] ⋙ FieldSheaf.ihom ((g)_*ᶠ[Λ].obj M) ≅ FieldSheaf.ihom M ⋙ (g)_*ᶠ[Λ] :=
-  haveI : (Mod.mapModComap (G := (g)_*[FieldCoefficients.{u} Λ])
-      (fieldConstantSheafToLowerStar Λ g)).IsEquivalence :=
-    isEquivalence_fieldLowerStar Λ g
-  Mod.mapModComapCompIhomIso (fieldConstantSheafToLowerStar Λ g)
-    (fun _ _ ↦ Functor.LaxBraided.braided _ _) M
-
-variable (Λ) in
-/-- The pushforward of sheaves of `Λ`-modules along an automorphism commutes with the
-tensor product: `g_* (P ⊗ M) ≅ g_* P ⊗ g_* M`. -/
-noncomputable def fieldLowerStarTensorLeftIso (g : X ⟶ X) [IsIso g] (M : FieldSheaf Λ X) :
-    Mod.tensorLeft M ⋙ (g)_*ᶠ[Λ] ≅ (g)_*ᶠ[Λ] ⋙ Mod.tensorLeft ((g)_*ᶠ[Λ].obj M) :=
-  haveI : (Mod.mapModComap (G := (g)_*[FieldCoefficients.{u} Λ])
-      (fieldConstantSheafToLowerStar Λ g)).IsEquivalence :=
-    isEquivalence_fieldLowerStar Λ g
-  Mod.tensorLeftCompMapModComapIso (fieldConstantSheafToLowerStar Λ g)
-    (fun _ _ ↦ Functor.LaxBraided.braided _ _) M
 
 end AlgebraicGeometry.ProEtale

@@ -71,16 +71,6 @@ attribute [local instance 20000]
 section CachedInstances
 variable (A : Profinite.CondensedRing.{u}) [IsCommMonObj A.X]
 variable (T : Scheme.{u})
-private theorem schemeFour : ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ (Modules A T)),
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
-private theorem schemeGood12 : ∀ (X₁ X₂ X₃ : GradedObject ℤ (Modules A T)),
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
-private theorem schemeGood23 : ∀ (X₁ X₂ X₃ : GradedObject ℤ (Modules A T)),
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
-private theorem schemeLeft : ∀ (X : Modules A T),
-    PreservesColimitsOfShape ℤ ((curriedTensor (Modules A T)).obj X) := inferInstance
-private theorem schemeRight : ∀ (X : Modules A T),
-    PreservesColimitsOfShape ℤ ((curriedTensor (Modules A T)).flip.obj X) := inferInstance
 end CachedInstances
 attribute [local instance] schemeFour schemeGood12 schemeGood23 schemeLeft schemeRight
 
@@ -89,23 +79,6 @@ variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 section Scalars
 variable (S : Profinite.CondensedRing.{u}) [IsCommMonObj S.X]
   (φ : R.X ⟶ S.X) [IsMonHom φ]
-
-/-- K-flat derived extension of scalars, with its recorded scalar adjunction.
-Source: Stacks 07A6 (blueprint: def-sfb-free-parameter-scalar-maps). -/
-abbrev extendPoint := (Mod.extendScalars φ).leftDerivedFunctor
-
-/-- The derived tensorator of scalar extension, normalized by scalar units at the
-ordinary level. This uses preservation of flat objects, never exact scalar extension.
-Source: Stacks 07A4 (blueprint: def-sfb-free-parameter-scalar-maps). -/
-def scalarTensor (K L : DerivedCategory (PointModules R)) :
-    (extendPoint R S φ).obj K ⊗ (extendPoint R S φ).obj L ≅
-      (extendPoint R S φ).obj (K ⊗ L) :=
-  letI := (Mod.exists_extendScalarsMonoidal φ).choose
-  letI := Mod.extendScalars_preservesFlat φ
-  letI := (Mod.extendRestrictAdjunction φ).isLeftAdjoint
-  letI := (Mod.extendScalars φ).leftDerivedFunctorMonoidal
-  Functor.Monoidal.μIso (extendPoint R S φ) K L
-
 
 omit [IsCommMonObj S.X] in
 set_option backward.defeqAttrib.useBackward false

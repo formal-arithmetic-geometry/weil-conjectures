@@ -31,12 +31,4 @@ variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasZeroObj
   [Pretriangulated C] [Pretriangulated D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
   [F.CommShift ℤ] [F.IsTriangulated]
 
-/-- For an adjunction `F ⊣ G` of pretriangulated categories with `F` triangulated, the objects at
-which the unit of the adjunction is an isomorphism form a triangulated subcategory. -/
-instance isTriangulated_isoLocus_unit : adj.unit.isoLocus.IsTriangulated := by
-  let := adj.rightAdjointCommShift ℤ
-  have := adj.commShift_of_leftAdjoint ℤ
-  have := adj.isTriangulated_rightAdjoint
-  infer_instance
-
 end CategoryTheory.Adjunction

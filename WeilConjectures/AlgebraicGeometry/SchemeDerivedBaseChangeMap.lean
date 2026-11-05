@@ -30,7 +30,6 @@ set_option backward.isDefEq.respectTransparency.types false
 noncomputable section
 namespace AlgebraicGeometry
 
-
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option synthInstance.maxSize 2048 in
@@ -164,51 +163,6 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
     _ = _ := by
       erw [← Category.assoc, ← DerivedCategory.Qh.map_comp]
       rfl
-
-
-
-/-- The canonical base-change map for a commutative square of schemes. In particular
-apply this to the chosen fibre product, or to the cartesian square obtained by
-restricting its upper row to an open W and its inverse image W'.
-
-This is the counit description of Stacks, Remark 08HY: transpose under Lf'^* ⊣ Rf'_*
-the composite Lf'^* Lg^* Rf_* E ≅ Lg'^* Lf^* Rf_* E → Lg'^* E.
-It is equivalently the unit description of Lemma 02N7 in the node: transpose under
-Lg^* ⊣ Rg_* the unit map followed by direct-image composition comparisons.
-Those comparisons are the mates of the same derived-pullback composition comparisons.
-The functor comparisons below are selected from their left-derived universal property,
-not arbitrary isomorphisms. The adjunction Hom equivalences are pinned to the same
-left-derived counits as these comparisons and to the recorded right-derived units, via
-`exists_schemeDerivedAdjunction`; no independent adjunction choice is allowed.
-Source: Stacks, cohomology.tex, Remark 08HY and Lemma 02N7
-(blueprint: def-pc-derived-base-change-map). -/
-def schemeDerivedBaseChangeMap
-    [∀ Y : Scheme.{uBC},
-      HasDerivedCategory.{wBC} (SheafOfModules.{uBC} (moduleRings Y.toRingedSpace))]
-    {X S X' S' : Scheme.{uBC}}
-    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
-    (h : g' ≫ f = f' ≫ g) (E : schemeDerivedCategory X) :
-    (derivedPullback g).obj ((schemeDerivedDirectImage f).obj E) ⟶
-      (schemeDerivedDirectImage f').obj ((derivedPullback g').obj E) :=
-  (Classical.choose (exists_schemeDerivedAdjunction f'
-    (hAdd := (Classical.choose exists_derivedPullbackComposition) f')
-    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f')
-    ((Classical.choose (Classical.choose_spec
-      (Classical.choose_spec exists_derivedPullbackComposition))) f'))).homEquiv _ _
-    (((Classical.choose (Classical.choose_spec (Classical.choose_spec
-        (Classical.choose_spec exists_derivedPullbackComposition)))) f' g).hom.app
-        ((schemeDerivedDirectImage f).obj E) ≫
-      eqToHom (congrArg (fun k =>
-        (derivedPullback k).obj ((schemeDerivedDirectImage f).obj E)) h.symm) ≫
-      ((Classical.choose (Classical.choose_spec (Classical.choose_spec
-        (Classical.choose_spec exists_derivedPullbackComposition)))) g' f).inv.app
-        ((schemeDerivedDirectImage f).obj E) ≫
-      (derivedPullback g').map
-        ((Classical.choose (exists_schemeDerivedAdjunction f
-          (hAdd := (Classical.choose exists_derivedPullbackComposition) f)
-          ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f)
-          ((Classical.choose (Classical.choose_spec
-            (Classical.choose_spec exists_derivedPullbackComposition))) f))).counit.app E))
 
 end AlgebraicGeometry
 end

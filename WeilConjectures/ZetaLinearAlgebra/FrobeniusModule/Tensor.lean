@@ -66,21 +66,6 @@ theorem hasEigenvalue_of_rTensor_apply_eq_smul {f : End K V} {a : K} {T : V ⊗[
   rw [LinearMap.rTensor_sub, LinearMap.rTensor_smul, one_eq_id, LinearMap.rTensor_id]
   simp [h]
 
-/-- If `a` is an eigenvalue of `f` and `b` one of `g`, then `a b` is an eigenvalue of `f ⊗ g`:
-the tensor product of eigenvectors is an eigenvector. -/
-theorem hasEigenvalue_map_mul {f : End K V} {g : End K W} {a b : K} (ha : f.HasEigenvalue a)
-    (hb : g.HasEigenvalue b) : HasEigenvalue (TensorProduct.map f g) (a * b) := by
-  obtain ⟨v, hv⟩ := ha.exists_hasEigenvector
-  obtain ⟨w, hw⟩ := hb.exists_hasEigenvector
-  rw [hasEigenvector_iff, mem_eigenspace_iff] at hv hw
-  obtain ⟨φ, hφ⟩ : ∃ φ : Module.Dual K V, φ v ≠ 0 := by
-    by_contra! H
-    exact hv.2 ((Module.forall_dual_apply_eq_zero_iff K v).1 H)
-  refine hasEigenvalue_of_hasEigenvector (x := v ⊗ₜ w) (hasEigenvector_iff.2 ⟨?_, fun h ↦ ?_⟩)
-  · rw [mem_eigenspace_iff, map_tmul, hv.1, hw.1, smul_tmul_smul]
-  · have := congrArg (fun T ↦ TensorProduct.lid K W (TensorProduct.map φ LinearMap.id T)) h
-    simp [hφ, hw.2] at this
-
 /-- Over an algebraically closed field, every eigenvalue `μ` of `f ⊗ g` on `V ⊗ W`, for `f`
 invertible and `V`, `W` finite-dimensional, is a product `a b` of an eigenvalue `a` of `f` and an
 eigenvalue `b` of `g`. -/
@@ -220,14 +205,6 @@ noncomputable def homDualEquiv (M N : FrobeniusModule.{max u v, v} K) :
     exact ((homDualLinearEquiv M N).apply_symm_apply _).trans
       (congrArg _ ((homDualLinearEquiv M N).apply_symm_apply T).symm)
 
-/-- `homDualEquiv` sends the map `φ ↦ φ(x) y` to `x ⊗ y`. -/
-lemma homDualEquiv_symm_tmul (M N : FrobeniusModule.{max u v, v} K) (x : M.carrier)
-    (y : N.carrier) (φ : Module.Dual K M.carrier) :
-    (show M.dual.carrier →ₗ[K] N.carrier from
-      (homDualEquiv M N).toLinearEquiv.symm (x ⊗ₜ y)) φ =
-      φ x • y :=
-  homDualLinearEquiv_symm_tmul M N x y φ
-
 /-- An isomorphism `P ≅ Hom(A, N)` together with `A ≅ M^∨` gives `P ≅ M ⊗ N`, through
 `Hom(M^∨, N) ≅ M ⊗ N` (`FrobeniusModule.homDualEquiv`). -/
 noncomputable def Equiv.tensorOfHomDual {P A M N : FrobeniusModule.{max u v, v} K}
@@ -238,14 +215,6 @@ noncomputable def Equiv.tensorOfHomDual {P A M N : FrobeniusModule.{max u v, v} 
     (homDualEquiv M N).toLinearEquiv
   map_frobenius x := by
     simp only [LinearEquiv.trans_apply, Equiv.map_frobenius]
-
-/-- `a b` is an eigenvalue of the Frobenius of `M ⊗ N` if `a` is one of `M` and `b` one of `N`.
--/
-theorem hasEigenvalue_tensor_mul {M : FrobeniusModule.{u, v} K} {N : FrobeniusModule.{t, v} K}
-    {a b : K} (ha : M.frobeniusEnd.HasEigenvalue a) (hb : N.frobeniusEnd.HasEigenvalue b) :
-    (M.tensor N).frobeniusEnd.HasEigenvalue (a * b) := by
-  rw [frobeniusEnd_tensor]
-  exact Module.End.hasEigenvalue_map_mul ha hb
 
 /-- Over an algebraically closed field, the eigenvalues of the Frobenius of `M ⊗ N` are the
 products of eigenvalues of `M` and of `N`. -/

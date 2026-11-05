@@ -41,32 +41,6 @@ variable {l : ℕ} [Fact l.Prime] {X W Z₁ W₁ : Scheme.{u}} (π : W ⟶ X) (�
   (τ : G → (W ≅ W)) (hτ : ∀ g, (τ g).hom ≫ π = π)
   (τ₁ : G₁ → (W₁ ≅ W₁)) (hτ₁ : ∀ g, (τ₁ g).hom ≫ π₁ = π₁)
 
-/-- Pulling back functions along a morphism of torsors intertwines the translations. -/
-lemma lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation (g : G) (g₁ : G₁)
-    (hτs : (τ g).hom ≫ s = s ≫ (τ₁ g₁).hom) :
-    (π₁)_*[WeilCoefficients.{u} l].map (adicConstantSheafToLowerStar l s) ≫
-      (lowerStarComp (WeilCoefficients.{u} l) s π₁).hom.app _ ≫
-      (lowerStarCongr (WeilCoefficients.{u} l) hs).hom.app _ ≫
-      (lowerStarComp (WeilCoefficients.{u} l) π h).inv.app _ ≫
-      (h)_*[WeilCoefficients.{u} l].map (torsorTranslation l π τ hτ g).hom =
-    (torsorTranslation l π₁ τ₁ hτ₁ g₁).hom ≫
-      (π₁)_*[WeilCoefficients.{u} l].map (adicConstantSheafToLowerStar l s) ≫
-      (lowerStarComp (WeilCoefficients.{u} l) s π₁).hom.app _ ≫
-      (lowerStarCongr (WeilCoefficients.{u} l) hs).hom.app _ ≫
-      (lowerStarComp (WeilCoefficients.{u} l) π h).inv.app _ := by
-  ext ⟨U⟩ : 3
-  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    lowerStar_map_hom_app', lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
-    lowerStarComp_inv_app_hom_app, torsorTranslation_hom_app, adicConstantSheafToLowerStar_hom_app,
-    adicConstantSheaf_obj_map]
-  simp only [← Functor.map_comp, ← op_comp]
-  congr 2
-  apply pullback.hom_ext
-  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
-      MorphismProperty.Over.pullback, MorphismProperty.Over.mk]
-  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
-      MorphismProperty.Over.pullback, MorphismProperty.Over.mk, hτs]
-
 /-- Pulling back functions along `s` commutes with pulling back along automorphisms `e_W`,
 `e_{W₁}` with `s ≫ e_{W₁} = e_W ≫ s`. -/
 lemma adicConstantSheafToLowerStar_lowerStarExchange (eW : W ⟶ W) (eW₁ : W₁ ⟶ W₁)

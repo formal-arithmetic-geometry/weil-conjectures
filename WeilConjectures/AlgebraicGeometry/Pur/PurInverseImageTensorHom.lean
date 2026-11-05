@@ -114,9 +114,4 @@ attribute [local irreducible] AlgebraicGeometry.Scheme.proEtaleModuleInverseImag
 
 namespace AlgebraicGeometry.Scheme
 
-private instance commRingSheafify (Z : Scheme.{u}) :
-    HasWeakSheafify (ProEt.topology Z) CommRingCat.{u + 1} := inferInstance
-private instance abelianSheafify (Z : Scheme.{u}) :
-    HasWeakSheafify (ProEt.topology Z) AddCommGrpCat.{u + 1} := inferInstance
-
 end AlgebraicGeometry.Scheme

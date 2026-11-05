@@ -64,34 +64,4 @@ theorem IsFlatOver.of_iso {ℱ ℱ' : X.Modules} (e : ℱ ≅ ℱ') {f : X ⟶ T
     (ConcreteCategory.bijective_of_isIso (e.hom.app U.1)) (fun _ _ ↦ Hom.app_smul _ _ _)
     (h V U hUV)
 
-/-- Flatness over the base passes to the pullback along an open immersion into the source. -/
-theorem IsFlatOver.pullback_of_isOpenImmersion {ℱ : X.Modules} {f : X ⟶ T} (h : ℱ.IsFlatOver f)
-    (j : X' ⟶ X) [IsOpenImmersion j] : ((Modules.pullback j).obj ℱ).IsFlatOver (j ≫ f) := by
-  rintro V ⟨U', hU'⟩ hUV
-  obtain ⟨W, hW, hWr, hWV, rfl⟩ : ∃ W : X.Opens, IsAffineOpen W ∧ W ≤ j.opensRange ∧
-      W ≤ f ⁻¹ᵁ V.1 ∧ j ⁻¹ᵁ W = U' :=
-    ⟨j ''ᵁ U', hU'.image_of_isOpenImmersion j, Set.image_subset_range _ _,
-      fun _ ⟨_, hy, hx⟩ ↦ hx ▸ hUV hy, j.preimage_image_eq U'⟩
-  refine Module.Flat.of_bijective_compHom (f.appLE V.1 W hWV).hom
-    ((j ≫ f).appLE V.1 (j ⁻¹ᵁ W) hUV).hom (RingHom.id _) Function.bijective_id
-    (pullbackUnitApp j ℱ W).hom (bijective_pullbackUnit_app_of_isOpenImmersion j ℱ hWr)
-    (fun r m ↦ ?_) (h V ⟨W, hW⟩ hWV)
-  rw [RingHom.id_apply, ← Scheme.Hom.appLE_comp_appLE j f V.1 W (j ⁻¹ᵁ W) hWV le_rfl,
-    Scheme.Hom.appLE_eq_app, CommRingCat.comp_apply]
-  exact Hom.app_smul _ _ _
-
-/-- Flatness over the base can be checked after composing with an open immersion of the base. -/
-theorem IsFlatOver.of_comp_isOpenImmersion {ℱ : X.Modules} {f : X ⟶ T} (ι : T ⟶ T')
-    [IsOpenImmersion ι] (h : ℱ.IsFlatOver (f ≫ ι)) : ℱ.IsFlatOver f := by
-  intro V U hUV
-  have hUV' : U.1 ≤ (f ≫ ι) ⁻¹ᵁ (ι ''ᵁ V.1) := by
-    intro x hx
-    exact ⟨f x, hUV hx, rfl⟩
-  refine Module.Flat.of_bijective_compHom ((f ≫ ι).appLE _ U.1 hUV').hom
-    (f.appLE V.1 U.1 hUV).hom (ι.appIso V.1).hom.hom
-    (ConcreteCategory.bijective_of_isIso (ι.appIso V.1).hom) (AddMonoidHom.id _)
-    Function.bijective_id (fun r m ↦ ?_) (h ⟨_, V.2.image_of_isOpenImmersion ι⟩ U hUV')
-  rw [AddMonoidHom.id_apply, AddMonoidHom.id_apply, Scheme.Hom.appIso_hom',
-    ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
-
 end AlgebraicGeometry.Scheme.Modules

@@ -34,16 +34,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Tor amplitude in `[a, ∞)`: for every etale sheaf of `Λ`-modules placed in degree zero,
-all cohomology sheaves of its derived tensor with `E` vanish below `a`.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-tor-amplitude.md`
-(blueprint: def-kun-tor-amplitude), and Stacks Project, Tag 0F1M, first paragraph of proof.
-The bounded variant is the existing `DerivedCategory.hasTorAmplitudeIn`. -/
-def DerivedCategory.hasTorAmplitudeGE (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u})
-    (a : ℤ) : ObjectProperty (DerivedCategoryModule Λ T) :=
-  fun E ↦ ∀ (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (i : ℤ), i < a →
-    IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj
-      (((derivedTensor (ModuleCat.{u + 1} Λ) T).obj E).obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj M)))
-
 end AlgebraicGeometry.Etale

@@ -29,31 +29,4 @@ namespace CategoryTheory
 
 open Limits
 
-/-- A composable pair of left exact additive functors between Grothendieck abelian
-categories (Stacks Project, Tag 015M). (blueprint: def-sp-composite-acyclicity) -/
-structure GrothendieckComposablePair
-    (A : Type u₁) (B : Type u₂) (C : Type u₃)
-    [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
-    [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
-    [Category.{v₃} C] [Abelian C] [IsGrothendieckAbelian.{v₃} C] where
-  F : A ⥤ B
-  G : B ⥤ C
-  [additiveF : F.Additive]
-  [additiveG : G.Additive]
-  [leftExactF : PreservesFiniteLimits F]
-  [leftExactG : PreservesFiniteLimits G]
-
-/-- The first functor of a composable pair sends injectives to objects acyclic for the
-second precisely when all positive right derived functors of the second vanish on their
-images (Stacks Project, Tag 015M). (blueprint: def-sp-composite-acyclicity) -/
-def GrothendieckComposablePair.SendsInjectivesToAcyclics
-    {A : Type u₁} {B : Type u₂} {C : Type u₃}
-    [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
-    [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
-    [Category.{v₃} C] [Abelian C] [IsGrothendieckAbelian.{v₃} C]
-    (P : GrothendieckComposablePair A B C) : Prop := by
-  letI := P.additiveF
-  letI := P.additiveG
-  exact P.F.IsAcyclicComposablePair P.G
-
 end CategoryTheory

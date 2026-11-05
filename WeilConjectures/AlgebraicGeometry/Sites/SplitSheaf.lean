@@ -228,15 +228,6 @@ lemma zmodHom_apply (n : ℤ) : (zmodHom ℓ hz).hom (ULift.up (n : ZMod ℓ)) =
   rw [ZMod.lift_coe]
   rfl
 
-lemma range_zmodHom : AddMonoidHom.range (zmodHom ℓ hz).hom = AddSubgroup.zmultiples z := by
-  ext x
-  constructor
-  · rintro ⟨⟨c⟩, rfl⟩
-    obtain ⟨n, rfl⟩ := ZMod.intCast_surjective c
-    exact ⟨n, (zmodHom_apply ℓ hz n).symm⟩
-  · rintro ⟨n, rfl⟩
-    exact ⟨⟨(n : ZMod ℓ)⟩, zmodHom_apply ℓ hz n⟩
-
 lemma injective_zmodHom (hℓ : addOrderOf z = ℓ) : Function.Injective (zmodHom ℓ hz).hom := by
   refine (injective_iff_map_eq_zero _).2 fun ⟨c⟩ hc ↦ ?_
   obtain ⟨n, rfl⟩ := ZMod.intCast_surjective c
@@ -265,7 +256,6 @@ lemma constantZModHom_app_toSheafify (W : (Spec (.of F)).Etale) (b : ULift.{u + 
   refine (congrArg _ h₁).trans ?_
   exact (NatTrans.naturality_apply (constantZModHom ℓ hz).hom _ _).trans
     (congrArg _ (ConcreteCategory.congr_hom h b).symm)
-
 
 lemma exists_toSheafify_app_eq (W : (Spec (.of F)).Etale) [Subsingleton W.left]
     [Nonempty W.left] (c : ((Spec (.of F)).constantZMod ℓ).obj.obj (op W)) :
@@ -471,7 +461,6 @@ lemma exists_addOrderOf_eq (hP : IsPGroup ℓ (L ≃ₐ[F] L))
   rw [← hyℓ, AddSubgroup.addOrderOf_mk]
   exact (addOrderOf_injective (N.obj.map (etaleSpecToTerminal L).op).hom
     (injective_map_of_subsingleton N _) z).symm
-
 
 /-- **Filtration of a split `ℓ`-primary sheaf by constant sheaves `ℤ/ℓ`.** Let `L / F` be a
 finite Galois extension whose Galois group is an `ℓ`-group. A property of sheaves on `Spec F`
@@ -739,18 +728,6 @@ variable (M L A) in
 noncomputable def splitSheaf : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1} :=
   ⟨splitPresheaf M L A, isSheaf_splitPresheaf⟩
 
-variable (M L A) in
-/-- The inclusion of `splitSheaf M L A` into `M`. -/
-noncomputable def splitSheafι : splitSheaf M L A ⟶ M :=
-  ⟨{ app V := AddCommGrpCat.ofHom (splitSubgroup M L A V.unop).subtype
-     naturality _ _ _ := rfl }⟩
-
-instance : Mono (splitSheafι M L A) := by
-  have (V : (Spec (.of F)).Etaleᵒᵖ) : Mono ((splitSheafι M L A).hom.app V) :=
-    (AddCommGrpCat.mono_iff_injective _).2 Subtype.val_injective
-  have : Mono (splitSheafι M L A).hom := NatTrans.mono_of_mono_app _
-  exact Sheaf.Hom.mono_of_presheaf_mono _ _ _
-
 lemma mem_of_mem_splitSubgroup_etaleSpec {s : M.obj.obj (op (etaleSpec F L))}
     (hs : s ∈ splitSubgroup M L A (etaleSpec F L)) : s ∈ A := by
   obtain ⟨a, ha, has⟩ := AddSubgroup.mem_map.1 (hs _ (𝟙 _) (𝟙 _))
@@ -962,7 +939,6 @@ instance : IsDirected (SplitFamily M) (· ≤ ·) where
     refine ⟨⟨_, L, inferInstance, inferInstance, inferInstance, inferInstance, B, hB, ht, rfl⟩,
       fun V ↦ splitSubgroup_mono ι₁ (fun a ha ↦ subset_orbitClosure _ (Or.inl ⟨a, ha, rfl⟩)) V,
       fun V ↦ splitSubgroup_mono ι₂ (fun a ha ↦ subset_orbitClosure _ (Or.inr ⟨a, ha, rfl⟩)) V⟩
-
 
 variable {M} in
 lemma SplitFamily.map_mem (j : SplitFamily M) {V V' : (Spec (.of F)).Etale} (h : V' ⟶ V)

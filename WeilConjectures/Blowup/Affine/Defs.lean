@@ -103,25 +103,6 @@ lemma iSup_basicOpen_reesX_eq_top :
   Proj.iSup_basicOpen_eq_top (reesGrading I) (fun a : I ↦ reesX I a a.2)
     (irrelevant_le_span_range_reesX I)
 
-/-- Hom extensionality over the standard chart cover of the blow-up. -/
-lemma hom_ext {Y : Scheme.{u}} {f g : AffineBlowup I ⟶ Y}
-    (h : ∀ (a : A) (ha : a ∈ I),
-      chart I (reesX I a ha) (reesX_mem I a ha) ≫ f =
-        chart I (reesX I a ha) (reesX_mem I a ha) ≫ g) :
-    f = g := by
-  refine (Scheme.Cover.mkOfCovers (P := @IsOpenImmersion) I
-      (fun a : I ↦ Spec (.of (HomogeneousLocalization.Away (reesGrading I) (reesX I a a.2))))
-      (fun a : I ↦ chart I (reesX I a a.2) (reesX_mem I a a.2))
-      (fun x ↦ ?_) (fun a ↦ inferInstance)).hom_ext f g fun a ↦ ?_
-  · have hx : x ∈ ⨆ a : I, Proj.basicOpen (reesGrading I) (reesX I a a.2) := by
-      rw [iSup_basicOpen_reesX_eq_top]; trivial
-    obtain ⟨a, ha⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
-    rw [← opensRange_chart I (reesX I a a.2) (reesX_mem I a a.2)] at ha
-    obtain ⟨y, hy⟩ := ha
-    exact ⟨a, y, hy⟩
-  · let a' : I := a
-    exact h a' a'.2
-
 section Principal
 
 variable {I} {a : A}
@@ -199,27 +180,11 @@ theorem isIso_toSpec_of_eq_span (ha : a ∈ I) (h : I = Ideal.span {a})
     simpa using bijective_awayAlgebraMap_of_eq_span ha h hreg
   exact IsIso.of_isIso_comp_left (chart I (reesX I a ha) (reesX_mem I a ha)) (toSpec I)
 
-/-- **Blowing up an already-invertible centre is an isomorphism**, affine case.
-(blueprint: part of `cor:nagata-blowup-cartier-iso`) -/
-theorem isIso_toSpec_of_isRegularPrincipal (hI : I.IsRegularPrincipal) : IsIso (toSpec I) := by
-  obtain ⟨s, hs, rfl⟩ := hI
-  exact isIso_toSpec_of_eq_span (Ideal.mem_span_singleton_self s) rfl hs
-
 end Principal
 
 section Top
 
 variable {I}
-
-/-- For the unit ideal, the basic open at `1·X` is everything. -/
-lemma basicOpen_reesX_one_eq_top (h : I = ⊤) :
-    Proj.basicOpen (reesGrading I) (reesX I 1 (by rw [h]; trivial)) = ⊤ :=
-  basicOpen_reesX_eq_top_of_eq_span _ (by rw [h, Ideal.span_singleton_one])
-
-/-- For the unit ideal, the canonical map `A → Away (reesGrading I) (1·X)` is bijective. -/
-lemma bijective_awayAlgebraMap_of_eq_top (h : I = ⊤) :
-    Function.Bijective (awayAlgebraMap I (reesX I 1 (by rw [h]; trivial))) :=
-  bijective_awayAlgebraMap_of_eq_span _ (by rw [h, Ideal.span_singleton_one]) (one_mem _)
 
 /-- The blow-up of the unit ideal is trivial: the structure morphism is an isomorphism.
 (blueprint: `lemma:nagata-affine-blowup-top`) -/

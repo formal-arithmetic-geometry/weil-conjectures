@@ -169,7 +169,6 @@ lemma leftDerivedFunctorCompMapDerivedCategoryIso_inv_app_comp_counit
 
 end CompositionKFlat
 
-
 /-- **The left derived functor of an exact functor and the connecting morphisms of short exact
 sequences**: for an exact functor `F` whose left derived functor commutes with the shifts
 compatibly with `Functor.leftDerivedFunctorIsoMapDerivedCategory`, `L(F)` of the connecting
@@ -263,7 +262,6 @@ end MapDerivedCategory
 
 end CategoryTheory.Functor
 
-
 namespace CategoryTheory.Functor
 
 variable {V W V' : Type*} [Category* V] [Category* W] [Category* V'] [Preadditive V]
@@ -281,12 +279,6 @@ lemma mapHomotopyCategoryCompIso_inv_app_quotient_obj {F : V ⥤ W} {G : W ⥤ V
     [F.Additive] [G.Additive] [H.Additive] (e : F ⋙ G ≅ H) (K : HomologicalComplex V c) :
     (mapHomotopyCategoryCompIso e c).inv.app ((HomotopyCategory.quotient V c).obj K) =
       (HomotopyCategory.quotient V' c).map ((mapHomologicalComplexCompIso e c).inv.app K) :=
-  rfl
-
-/-- The functor induced on homotopy categories, on the image of a complex. -/
-lemma mapHomotopyCategory_obj_quotient_obj (F : V ⥤ W) [F.Additive] (K : HomologicalComplex V c) :
-    (F.mapHomotopyCategory c).obj ((HomotopyCategory.quotient V c).obj K) =
-      (HomotopyCategory.quotient W c).obj ((F.mapHomologicalComplex c).obj K) :=
   rfl
 
 end CategoryTheory.Functor

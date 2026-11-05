@@ -127,24 +127,6 @@ noncomputable def extendScalarsIsoReductionFunctor :
     extendScalars J f ≅ reductionFunctor J f hf :=
   (extendScalarsAdjunction J f).leftAdjointUniq (reductionAdjunction J hf ha)
 
-include ha in
-/-- The unit of the extension of scalars is the reduction map, up to the identification of
-`CategoryTheory.Sheaf.extendScalarsIsoReductionFunctor`. -/
-lemma extendScalarsAdjunction_unit_app (F : Sheaf J (ModuleCat.{u + 1} A)) :
-    (extendScalarsAdjunction J f).unit.app F =
-      (reductionNatTrans J f hf).app F ≫
-        (restrictScalars J f).map ((extendScalarsIsoReductionFunctor J hf ha).inv.app F) := by
-  have h := (extendScalarsAdjunction J f).unit_leftAdjointUniq_hom_app
-    (reductionAdjunction J hf ha) F
-  have := restrictScalars_full J f hf
-  have h' : (reductionAdjunction J hf ha).unit.app F = (reductionNatTrans J f hf).app F := by
-    rw [reductionAdjunction, Functor.ReductionDatum.adjunction_unit_app]
-    rfl
-  rw [h'] at h
-  unfold extendScalarsIsoReductionFunctor
-  rw [← h, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id]
-  exact (Category.comp_id _).symm
-
 /-- With scalars restricted back to `A`, the extension of scalars of `F` is
 `F ⊗ A ⧸ ker f`: the form of `CategoryTheory.Sheaf.extendScalarsCompRestrictScalarsIso` for a
 surjective `f` with principal kernel, obtained through the reduction functor. -/
@@ -154,43 +136,6 @@ noncomputable def extendScalarsCompRestrictScalarsQuotientIso :
         (ModuleCat.of A (A ⧸ RingHom.ker f))) :=
   Functor.isoWhiskerRight (extendScalarsIsoReductionFunctor J hf ha) _ ≪≫
     reductionFunctorCompRestrictScalarsIso J f hf
-
-include hf in
-/-- The counit `A' ⊗_A M ⟶ M` of extension of scalars is an isomorphism, restriction of scalars
-along a surjective ring morphism being fully faithful. -/
-lemma isIso_extendScalarsAdjunction_counit : IsIso (extendScalarsAdjunction J f).counit :=
-  have := restrictScalars_full J f hf
-  (extendScalarsAdjunction J f).counit_isIso_of_R_fully_faithful
-
-/-- The extension of scalars along a surjective ring morphism with principal kernel `(a)` is a
-reduction datum for restriction of scalars and the multiplication by `a`, its reduction map
-being the unit of the adjunction. -/
-noncomputable def extendScalarsReductionDatum :
-    Functor.ReductionDatum (restrictScalars J f) (smulNatTrans J a) where
-  Φ := extendScalars J f
-  r := (extendScalarsAdjunction J f).unit
-  σ_app_obj := smulNatTrans_app_restrictScalars_obj J ha
-  σ_comp_r F := by
-    have h₀ : a • 𝟙 ((extendScalars J f ⋙ restrictScalars J f).obj F) = 0 :=
-      smulNatTrans_app_restrictScalars_obj J ha _
-    change (a • 𝟙 F) ≫ _ = 0
-    rw [Linear.smul_comp, Category.id_comp,
-      ← Category.comp_id ((extendScalarsAdjunction J f).unit.app F), ← Linear.comp_smul, h₀,
-      comp_zero]
-  epi_r F := by
-    rw [extendScalarsAdjunction_unit_app J hf ha]
-    have := epi_reductionNatTrans_app J hf F
-    infer_instance
-  exact F := by
-    refine (ShortComplex.exact_iff_of_iso ?_).1 (exact_reductionNatTrans_app J hf ha F)
-    exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _)
-      ((restrictScalars J f).mapIso ((extendScalarsIsoReductionFunctor J hf ha).app F).symm)
-      (by simp) (by simp [extendScalarsAdjunction_unit_app J hf ha])
-  quasiIso_map φ _ h₁ h₂ := by
-    have := restrictScalars_full J f hf
-    have := reflectsIsomorphisms_of_full_and_faithful (restrictScalars J f)
-    exact CochainComplex.quasiIso_map_of_iso_tensorRight _ _
-      (extendScalarsCompRestrictScalarsQuotientIso J hf ha) φ h₁ h₂
 
 /-- Extension of scalars of sheaves of modules preserves flat objects
 (`CategoryTheory.Sheaf.flat_extendScalars_obj`). -/

@@ -32,13 +32,4 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
   (Φ : C ⥤ D) [Φ.Additive] [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ]
   [PreservesLimitsOfShape (Discrete ℕ) Φ]
 
-/-- **Exact functors preserving countable products preserve derived limits of towers**: the
-induced functor on derived categories is triangulated and preserves countable products, so it
-sends Milnor triangles to Milnor triangles. -/
-lemma isHomotopyLimit_mapDerivedCategory_mapCone {F : ℕᵒᵖ ⥤ DerivedCategory C}
-    {c : Cone F} (hc : IsHomotopyLimit c) :
-    IsHomotopyLimit (Φ.mapDerivedCategory.mapCone c) :=
-  have := Φ.preservesLimitsOfShape_discrete_mapDerivedCategory (β := ℕ)
-  hc.map Φ.mapDerivedCategory
-
 end CategoryTheory.Functor

@@ -320,16 +320,6 @@ noncomputable def leftDerivedUpperStarMonoidal : L((g)^*[A]).Monoidal :=
 
 end Monoidal
 
-/-- The derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)` is a monoidal functor for the derived tensor
-products. This is the monoidality of derived pullback in blueprint
-`def-weil-derived-pullback-tensor-hom` (within `det-def-sf-operations`).
-
-The monoidal structure is `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`, whose
-tensor comparison is `leftDerivedUpperStarTensorIso`. -/
-theorem nonempty_monoidal_leftDerivedUpperStar [Etale.UpperStarPreservesFlat A] :
-    Nonempty (L((g)^*[A])).Monoidal :=
-  ⟨leftDerivedUpperStarMonoidal A g⟩
-
 end Etale
 
 end AlgebraicGeometry

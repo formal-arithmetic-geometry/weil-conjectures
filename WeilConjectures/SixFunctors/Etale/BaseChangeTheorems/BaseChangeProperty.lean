@@ -197,21 +197,6 @@ def Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
               (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj
                 ((g')^*[ModuleCat.{u + 1} Λ].obj I))))
 
-/-- **Injective acyclicity with `𝐅_r`-coefficients** `IA_r(f)` of a morphism of schemes
-`f : X ⟶ Y`: the property `AlgebraicGeometry.Etale.HasInjectiveAcyclicity` for the coefficient
-ring `ZMod r`, lifted to the coefficient universe of the étale sheaf functors. For `r ≠ 0`
-every sheaf of `ZMod r`-modules is torsion, so this says that the pullback of every injective
-sheaf of `ZMod r`-modules along any base change of `f` has no higher direct images.
-(blueprint: `def-weil-pbc-injective-acyclicity-property`) -/
-def Etale.HasPrimeInjectiveAcyclicity (f : X ⟶ Y) (r : ℕ) : Prop :=
-  Etale.HasInjectiveAcyclicity (ULift.{u + 1} (ZMod r)) f
-
-/-- **Injective acyclicity for all primes** `IA(f)` of a morphism of schemes `f : X ⟶ Y`: the
-property `IA_r(f)` (`AlgebraicGeometry.Etale.HasPrimeInjectiveAcyclicity`) holds for every
-prime `r`. (blueprint: `def-weil-pbc-injective-acyclicity-property`) -/
-def Etale.HasAllPrimeInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
-  ∀ r : ℕ, r.Prime → Etale.HasPrimeInjectiveAcyclicity f r
-
 /-- **`PBC ⇒ IA`**: a morphism with the base change property for torsion coefficients has
 injective acyclicity. For an injective torsion sheaf `I` on `X`, apply the base change property
 to `I` placed in degree `0`: the source `g^*(Rf_* I[0]) ≅ g^*((f_* I)[0])` has no homology

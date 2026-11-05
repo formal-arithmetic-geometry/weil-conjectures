@@ -124,25 +124,6 @@ lemma eq_of_comp_eq_id_of_apply_eq (a : Z ⟶ Spec (.of K)) [FormallyUnramified 
       _ = 𝟙 _ := ht
   rw [← he, hid, Category.id_comp]
 
-/-- A formally unramified scheme `Z` locally of finite type over an algebraically closed field
-`K` is the disjoint union of copies of `Spec K`: for a family `s` of sections `Spec K ⟶ Z` of
-the structure morphism hitting every section exactly once, `∐ Spec K ⟶ Z` is an isomorphism. -/
-theorem isIso_sigmaDesc_of_isAlgClosed (a : Z ⟶ Spec (.of K)) [FormallyUnramified a]
-    [LocallyOfFiniteType a] {σ : Type u} (s : σ → (Spec (.of K) ⟶ Z))
-    (hs : ∀ i, s i ≫ a = 𝟙 _) (hinj : Function.Injective s)
-    (hsurj : ∀ t : Spec (.of K) ⟶ Z, t ≫ a = 𝟙 _ → ∃ i, s i = t) :
-    IsIso (Sigma.desc s) := by
-  have (i : σ) : IsOpenImmersion (s i) := isOpenImmersion_of_comp_eq_id a (s i) (hs i)
-  have : IsOpenImmersion (Sigma.desc s) := by
-    refine isOpenImmersion_sigmaDesc _ _ fun i j hij ↦ ?_
-    rw [Function.onFun, Set.disjoint_left]
-    rintro _ ⟨x, rfl⟩ ⟨y, hy⟩
-    exact hij (hinj (eq_of_comp_eq_id_of_apply_eq a (hs i) (hs j) hy.symm))
-  refine isIso_of_isOpenImmersion_of_opensRange_eq_top _ (eq_top_iff.2 fun z _ ↦ ?_)
-  obtain ⟨t, ht, x, rfl⟩ := exists_comp_eq_id_of_isAlgClosed a z
-  obtain ⟨i, rfl⟩ := hsurj t ht
-  exact ⟨(Sigma.ι (fun _ : σ ↦ Spec (.of K)) i) x, by rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]⟩
-
 end FormallyUnramified
 
 end AlgebraicGeometry

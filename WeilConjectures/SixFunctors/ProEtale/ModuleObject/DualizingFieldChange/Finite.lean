@@ -76,19 +76,6 @@ lemma isIso_pre_app_of_isIso {A B : C} (f : B ⟶ A) [IsIso f] (Z : C) : IsIso (
     NatTrans.id_app], by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id,
     NatTrans.id_app]⟩
 
-/-- If the duality map at the unit of a lax monoidal functor with invertible unit map is
-invertible, so is the dualizing map. -/
-lemma isIso_of_isIso_nearbyDualityMap_unit (F : C ⥤ C') [F.LaxMonoidal]
-    [IsIso (Functor.LaxMonoidal.ε F)] {ω : C} {ω' : C'} (θ : F.obj ω ⟶ ω')
-    (h : IsIso (nearbyDualityMap (fun A B ↦ Functor.LaxMonoidal.μ F A B) θ (𝟙_ C))) :
-    IsIso θ := by
-  have := isIso_pre_app_of_isIso (Functor.LaxMonoidal.ε F) ω'
-  have e := map_unitNatIso_hom_app_comp_nearbyDualityMap_comp_pre F θ
-  have : IsIso (θ ≫ unitNatIso.hom.app ω') := by
-    rw [← e]
-    infer_instance
-  exact IsIso.of_isIso_comp_right θ (unitNatIso.hom.app ω')
-
 /-- For a functor `G` and a lax monoidal functor `F` with invertible unit map, if `G` inverts the
 duality map at the unit, it inverts the dualizing map. -/
 lemma isIso_map_of_isIso_map_nearbyDualityMap_unit {D : Type*} [Category* D] (G : C' ⥤ D)
@@ -121,35 +108,6 @@ section Conservative
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-
-/-- **Finite pushforward is conservative on bounded constructible complexes**: for a finite
-morphism `q : Y ⟶ B`, a morphism `f` of bounded constructible complexes on `Y` with `Rq_* f`
-invertible is invertible. Its cone is bounded constructible with vanishing pushforward, hence
-vanishes (`ProEtale.CondensedRing.isZero_of_isZero_rightDerivedLowerStar_of_isFinite`). -/
-theorem isIso_of_isIso_map_boundedConstructibleLowerStar_of_isFinite {Y B : Over (Spec (.of k))}
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom] (q : Y ⟶ B)
-    [IsFinite q.left] {K L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (f : K ⟶ L)
-    (h : IsIso ((boundedConstructibleLowerStar ℓ q).map f)) : IsIso f := by
-  have : (boundedConstructible
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)).IsTriangulated :=
-    isTriangulated_boundedConstructible_padicAlgClRingObj _ ℓ
-  obtain ⟨C, b, c, hT⟩ := distinguished_cocone_triangle f.hom
-  have hC := (boundedConstructible _).ext_of_isTriangulatedClosed₃ _ hT K.property L.property
-  have h' : IsIso ((R((q.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).map f.hom) :=
-    inferInstanceAs (IsIso ((boundedConstructible _).ι.map
-      ((boundedConstructibleLowerStar ℓ q).map f)))
-  have hq : IsZero ((R((q.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C) :=
-    (Triangle.isZero₃_iff_isIso₁ _
-      ((R((q.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_distinguished _ hT)).2 h'
-  have : IsFinite (𝟙 Y.left ≫ q.left) := by
-    rw [Category.id_comp]
-    infer_instance
-  have hZ := isZero_of_isZero_rightDerivedLowerStar_of_isFinite q (𝟙 Y.left) ⟨C, hC⟩
-    (fun y hy ↦ absurd ⟨y, rfl⟩ hy) hq
-  have : IsIso f.hom := (Triangle.isZero₃_iff_isIso₁ _ hT).1 hZ
-  have : IsIso ((boundedConstructible _).ι.map f) := this
-  exact isIso_of_reflects_iso f (boundedConstructible _).ι
 
 end Conservative
 

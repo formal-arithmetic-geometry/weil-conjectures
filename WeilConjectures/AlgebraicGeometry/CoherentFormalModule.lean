@@ -483,14 +483,6 @@ def AnnihilatedBy {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I) : Prop :=
   ∀ n : ℕ, IsZero (Scheme.idealModuleProduct K.toModulesι (M.obj.obj (op n)))
 
-/-- Uniform annihilation by a positive power of I, as opposed to the termwise adic condition.
-Source: Stacks, paragraph before Lemma 0889
-(blueprint: def-weil-pbc-coherent-formal-module). -/
-def IsIdealPowerTorsion {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
-    (M : CoherentFormalModule X I) : Prop :=
-  ∃ c : ℕ, 1 ≤ c ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct
-    (Scheme.idealSheafPower I.toModulesι c).2 (M.obj.obj (op n)))
-
 /-- Uniform annihilation by I^(c+1) is equivalent to stabilization at level c+1.
 Proof: node step 7. Inclusions of higher ideal powers into lower ones transfer
 annihilation to all higher powers. Uniform annihilation therefore makes each successive
@@ -562,88 +554,6 @@ Source: Stacks, proof of Theorem 088E (blueprint: def-weil-pbc-coherent-formal-m
 def CoherentModuleSupportedOn {X Z : Scheme.{u}} (F : CoherentModules X)
     (i : Z ⟶ X) [IsClosedImmersion i] : Prop :=
   IsZero (Scheme.idealModuleProduct i.ker.toModulesι F.obj)
-
-/-- Full subcategory of formal modules whose level 1 has support proper over the base.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
-abbrev CohSupportProper {X S : Scheme.{u}} [IsNoetherian X]
-    (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData) :=
-  ObjectProperty.FullSubcategory
-    (fun M : CoherentFormalModule X I ↦
-      Scheme.Modules.HasSupportProperOver f (M.obj.obj (op 0)))
-
-/-- Full subcategory of coherent modules with support proper over the base.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
-abbrev CohModuleSupportProper {X S : Scheme.{u}} [IsNoetherian X]
-    (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :=
-  ObjectProperty.FullSubcategory
-    (fun F : CoherentModules X ↦ Scheme.Modules.HasSupportProperOver f F.obj)
-
-/-- The support of F/IF is contained in the support of F.
-Proof: node step 8. The quotient projection is surjective on sections over affine opens,
-by lem-weil-pbc-quasi-coherent-module-cokernel-image, hence on stalks by the affine-basis
-colimit description in def-weil-pbc-module-stalk. A quotient of a zero stalk is zero.
-Therefore a nonzero quotient stalk can occur only at a nonzero original stalk.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
-theorem formalCompletion_support_subset {X : Scheme.{u}} [IsNoetherian X]
-    (I : X.IdealSheafData) (F : CoherentModules X) :
-    {x : X | ¬ Subsingleton ((formalModuleQuotient I 1 F.obj).presheaf.stalk x)} ⊆
-      {x : X | ¬ Subsingleton (F.obj.presheaf.stalk x)} := by
-  intro x hx hF
-  let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
-  let ι := Scheme.idealModuleProductι I.toModulesι F.obj
-  have : Epi (S.map (cokernel.π ι)) :=
-    ((RingedSpace.module_stalk_exact X.toRingedSpace ι).2.2.1 x).1
-  have : Subsingleton (S.obj F.obj) := hF
-  have hQ : Subsingleton (S.obj (cokernel ι)) :=
-    Function.Surjective.subsingleton
-      ((ModuleCat.epi_iff_surjective (S.map (cokernel.π ι))).mp inferInstance)
-  exact hx hQ
-
-/-- Completion preserves proper support. Proof: node step 8. A coherent module has closed
-support on a Noetherian scheme. The quotient projection is surjective on affine sections,
-hence on stalks. A zero stalk of F therefore gives a zero stalk of F/IF. Its closed support
-is contained in the closed support of F, and a closed subset of a support proper over the
-base is proper (Lemma 0CYN). Thus the level-1 support has the required properness.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
-theorem formalCompletion_support_proper {X S : Scheme.{u}} [IsNoetherian X]
-    (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData)
-    (F : CohModuleSupportProper f) :
-    Scheme.Modules.HasSupportProperOver f (((completion X I).obj F.obj).obj.obj (op 0)) := by
-  obtain ⟨Z, hZ, hproper⟩ := F.property
-  have hcoh := ((completion X I).obj F.obj).property.1 0
-  have hft := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
-    X _).mp hcoh
-  let Q := (((completion X I).obj F.obj).obj.obj (op 0))
-  have : Q.IsQuasicoherent := hft.1
-  have : Q.IsFiniteType := hft.2
-  obtain ⟨Y, hY⟩ := (Scheme.Modules.module_support_proper_over_base f Q).1
-  refine ⟨Y, hY, ?_⟩
-  apply (Scheme.closed_subset_proper_over_base_properties f Z).2.2.1 Y _ hproper
-  intro x hx
-  change x ∈ (Z : Set X)
-  rw [hZ]
-  apply formalCompletion_support_subset I F.obj
-  have hxQ : x ∈ {x : X | ¬ Subsingleton (Q.presheaf.stalk x)} := by
-    rw [← hY]
-    exact hx
-  exact hxQ
-
-/-- Restriction of completion to the two proper-support full subcategories.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
-def completionSupportProper {X S : Scheme.{u}} [IsNoetherian X]
-    (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData) :
-    CohModuleSupportProper f ⥤ CohSupportProper f I :=
-  ObjectProperty.lift
-    (fun M : CoherentFormalModule X I ↦
-      Scheme.Modules.HasSupportProperOver f (M.obj.obj (op 0)))
-    (ObjectProperty.ι
-      (fun F : CoherentModules X ↦ Scheme.Modules.HasSupportProperOver f F.obj) ⋙
-      completion X I) (formalCompletion_support_proper f I)
 
 end
 

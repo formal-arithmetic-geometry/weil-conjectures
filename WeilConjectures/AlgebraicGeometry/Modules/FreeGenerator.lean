@@ -107,11 +107,6 @@ lemma presheaf_map_map_apply {U V W : X.Opens} (f : V ⟶ U) (g : W ⟶ V) (e : 
   rw [op_comp, Functor.map_comp]
   rfl
 
-/-- Morphisms of `𝒪_X`-modules commute with restriction of sections. -/
-lemma Hom.app_presheaf_map_apply (φ : M ⟶ N) {V W : X.Opens} (i : W ⟶ V) (s : Γ(M, V)) :
-    φ.app W (M.presheaf.map i.op s) = N.presheaf.map i.op (φ.app V s) :=
-  ConcreteCategory.congr_hom (φ.mapPresheaf.naturality i.op) s
-
 /-- Restricting a section of `M` along an endomorphism of an open does nothing. -/
 lemma presheaf_map_id_apply {U : X.Opens} (f : U ⟶ U) (e : Γ(M, U)) :
     M.presheaf.map f.op e = e := by
@@ -463,7 +458,6 @@ lemma exists_isGlueValue {V : X.Opens} (m : Γ(M, V)) : ∃ n, IsGlueValue e f m
   rw [ha, ← presheaf_map_homOfLE_map_homOfLE (inf_le_right : V ⊓ U i ≤ U i) hWV, ← map_smul,
     (hi i).coeff_smul, presheaf_map_homOfLE_map_homOfLE]
 
-
 include he in
 lemma isGlueValue_zero {V : X.Opens} : IsGlueValue e f (0 : Γ(M, V)) (0 : Γ(N, V)) := by
   intro i W hW hWi a ha
@@ -534,7 +528,6 @@ lemma isGlueValue_glueHom_app {V : X.Opens} (m : Γ(M, V)) :
     IsGlueValue e f m ((glueHom hU he hc).app V m) :=
   (exists_isGlueValue hU he hc m).choose_spec
 
-
 include hU he hc in
 /-- **Invertible modules with the same transition functions are isomorphic.** Let `U i` be an
 open cover of `X`, `e i` a free generator of `M` on `U i` and `f i` a free generator of `N` on
@@ -585,7 +578,6 @@ lemma isFreeGenerator_of_isIso_restrict (φ : Modules.unit X ⟶ M)
     exact mul_one r
   rw [key]
   exact ConcreteCategory.bijective_of_isIso (((restrictFunctor U.ι).map φ).app V')
-
 
 section Pullback
 

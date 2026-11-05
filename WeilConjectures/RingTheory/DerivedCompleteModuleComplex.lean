@@ -42,11 +42,4 @@ end DerivedCategory
 
 namespace ModuleCat
 
-/-- A module is derived complete for `I` if its complex concentrated in degree zero is
-derived complete. Source: Stacks Project, Definition 15.93.4 (Tag 091S)
-(auxiliary; not a blueprint node). -/
-noncomputable def IsDerivedComplete {A : Type u} [CommRing A]
-    [HasDerivedCategory.{w} (ModuleCat.{v} A)] (I : Ideal A) (M : ModuleCat.{v} A) : Prop :=
-  DerivedCategory.IsDerivedComplete I ((DerivedCategory.singleFunctor (ModuleCat.{v} A) 0).obj M)
-
 end ModuleCat

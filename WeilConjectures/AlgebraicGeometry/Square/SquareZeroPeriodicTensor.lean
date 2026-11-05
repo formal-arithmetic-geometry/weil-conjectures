@@ -407,16 +407,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
-private noncomputable def basisConst {C : Type uC} [Category.{vC} C]
-    (A : CommRingCat.{r}) : ModuleCat.{r} A ⥤
-      PresheafOfModules.{r} ((Functor.const Cᵒᵖ).obj (RingCat.of A)) where
-  obj M :=
-    { obj := fun _ ↦ M
-      map := fun _ ↦ ModuleCat.ofHom LinearMap.id
-      map_id := fun _ ↦ by ext; rfl
-      map_comp := fun _ _ ↦ by ext; rfl }
-  map f := { app := fun _ ↦ f }
-
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   (J : GrothendieckTopology C)
   [HasSheafify J CommRingCat.{r}]
@@ -434,94 +424,11 @@ private local instance basisRingLocallyBijective :
     J.WEqualsLocallyBijective CommRingCat.{r} := by
   exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{vC, r,
     uC, (r) + 1, r, r, r} _
-private noncomputable abbrev basisRing (A : CommRingCat.{r}) :=
-  (sheafCompose J (forget₂ CommRingCat RingCat)).obj
-    ((constantSheaf J CommRingCat.{r}).obj A)
-private noncomputable def basisRingUnit (A : CommRingCat.{r}) :
-    (Functor.const Cᵒᵖ).obj (RingCat.of A) ⟶ (basisRing.{r, uC, vC} J A).obj :=
-  Functor.whiskerRight (toSheafify J ((Functor.const Cᵒᵖ).obj A)) (forget₂ CommRingCat RingCat)
-private local instance basisRingUnit_li :
-    Presheaf.IsLocallyInjective J (basisRingUnit.{r, uC, vC} J A) := by
-  let := basisRingLocallyBijective.{r, uC, vC} J
-  exact ⟨fun x y h ↦ Presheaf.equalizerSieve_mem J
-    (toSheafify J ((Functor.const Cᵒᵖ).obj (show CommRingCat.{r} from A))) x y h⟩
-private local instance basisRingUnit_ls :
-    Presheaf.IsLocallySurjective J (basisRingUnit.{r, uC, vC} J A) := by
-  let := basisRingLocallyBijective.{r, uC, vC} J
-  exact ⟨fun x ↦ Presheaf.imageSieve_mem J
-    (toSheafify J ((Functor.const Cᵒᵖ).obj (show CommRingCat.{r} from A))) x⟩
-private noncomputable def basisTarget : SheafOfModules.{r} (basisRing.{r, uC, vC} J A) :=
-  (SheafOfModules.restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map
-    ((constantSheaf J CommRingCat.{r}).map (CommRingCat.ofHom (algebraMap A B))))).obj
-      (SheafOfModules.unit (basisRing.{r, uC, vC} J B))
-private noncomputable def basisConstToTarget :
-    (basisConst A).obj (ModuleCat.of A B) ⟶
-      (PresheafOfModules.restrictScalars (basisRingUnit.{r, uC, vC} J A)).obj
-        (basisTarget.{r, uC, vC} J A B).val where
-  app U := ModuleCat.ofHom (Y :=
-    ((PresheafOfModules.restrictScalars (basisRingUnit.{r, uC, vC} J A)).obj
-      (basisTarget.{r, uC, vC} J A B).val).obj U)
-    { toFun := (toSheafify J ((Functor.const Cᵒᵖ).obj B)).app U
-      map_add' := map_add _
-      map_smul' := fun a b ↦ by
-        rw [Algebra.smul_def]
-        change (toSheafify J ((Functor.const Cᵒᵖ).obj B)).app U
-          (algebraMap A B a * b) = _
-        rw [map_mul]
-        congr 1
-        exact congrArg (fun t ↦ t a) (NatTrans.congr_app
-          (toSheafify_naturality J
-            ((Functor.const Cᵒᵖ).map (CommRingCat.ofHom (algebraMap A B)))) U) }
-  naturality {U V} f := by
-    ext b
-    exact ConcreteCategory.congr_hom
-      ((toSheafify J ((Functor.const Cᵒᵖ).obj B)).naturality f) b
-
-@[irreducible]
-private noncomputable def basisLift :
-    (PresheafOfModules.sheafification (basisRingUnit.{r, uC, vC} J A)).obj
-      ((basisConst A).obj (ModuleCat.of A B)) ⟶ basisTarget.{r, uC, vC} J A B :=
-  (PresheafOfModules.sheafificationHomEquiv _).symm (basisConstToTarget.{r, uC, vC} J A B)
-
-private instance basisLift_iso : IsIso (basisLift.{r, uC, vC} J A B) := by
-  apply (isIso_iff_of_reflects_iso _ (SheafOfModules.toSheaf _)).mp
-  apply (Sheaf.isLocallyBijective_iff_isIso _).mp
-  rw [← Sheaf.isLocallyInjective_sheafToPresheaf_map_iff,
-    ← Sheaf.isLocallySurjective_sheafToPresheaf_map_iff]
-  let P := ((basisConst (C := C) A).obj (ModuleCat.of A B)).presheaf
-  have h : toSheafify J P ≫
-      ((SheafOfModules.toSheaf _).map (basisLift.{r, uC, vC} J A B)).hom =
-        (PresheafOfModules.toPresheaf _).map
-          (basisConstToTarget.{r, uC, vC} J A B) := by
-    let E := PresheafOfModules.sheafificationHomEquiv
-      (basisRingUnit.{r, uC, vC} J A)
-      (P := (basisConst (C := C) A).obj (ModuleCat.of A B))
-      (F := basisTarget.{r, uC, vC} J A B)
-    have hh := E.apply_symm_apply (basisConstToTarget.{r, uC, vC} J A B)
-    have hh' := congrArg (fun g ↦
-      (PresheafOfModules.toPresheaf ((Functor.const Cᵒᵖ).obj (RingCat.of A))).map g) hh
-    change toSheafify J P ≫ (PresheafOfModules.toPresheaf _).map
-      (basisLift.{r, uC, vC} J A B).val = _
-    rw [basisLift]
-    exact hh'
-  rw [← Presheaf.comp_isLocallyInjective_iff J (toSheafify J P),
-    ← Presheaf.comp_isLocallySurjective_iff J (toSheafify J P)]
-  change Presheaf.IsLocallyInjective J
-    (toSheafify J P ≫ ((SheafOfModules.toSheaf _).map
-      (basisLift.{r, uC, vC} J A B)).hom) ∧ _
-  erw [h]
-  let := basisRingLocallyBijective.{r, uC, vC} J
-  constructor
-  · exact ⟨fun x y h ↦ Presheaf.equalizerSieve_mem J
-      (toSheafify J ((Functor.const Cᵒᵖ).obj B)) x y h⟩
-  · exact ⟨fun x ↦ Presheaf.imageSieve_mem J
-      (toSheafify J ((Functor.const Cᵒᵖ).obj B)) x⟩
 
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
-
 
 end CategoryTheory
 

@@ -64,25 +64,4 @@ noncomputable def rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
       rightDerivedGlobalSections A X :=
   Functor.rightDerivedFunctorCompIso' _ _ (lowerStarCompGlobalSectionsIso A f)
 
-/-- Derived global sections are invariant under the pullback along an isomorphism
-`e : X ≅ Y`: `RΓ(X, e^* K) ≅ RΓ(Y, K)`. It is the composite
-
-```
-            D(e^*)                RΓ_X
-  D(Y) ──────────────▶ D(X) ──────────────▶ D(A)
-    │      ≅ R(e^*) ≅ R((e⁻¹)_*)               ▲
-    └──────────── R((e⁻¹)_*) ⋙ RΓ_X ≅ RΓ_Y ────┘
-```
-
-of `Functor.rightDerivedFunctorIsoMapDerivedCategory` (the pullback `e^*` is exact), of the
-derived isomorphism `e^* ≅ (e⁻¹)_*` (`AlgebraicGeometry.Etale.upperStarInvIsoLowerStarHom`),
-and of the Leray isomorphism
-`AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso` for `e⁻¹`. -/
-noncomputable def upperStarCompRightDerivedGlobalSectionsIso {X Y : Scheme.{u}} (e : X ≅ Y) :
-    ((e.hom)^*[A]).mapDerivedCategory ⋙ rightDerivedGlobalSections A X ≅
-      rightDerivedGlobalSections A Y :=
-  Functor.isoWhiskerRight (((e.hom)^*[A]).rightDerivedFunctorIsoMapDerivedCategory.symm ≪≫
-      Functor.rightDerivedFunctorNatIso (upperStarInvIsoLowerStarHom A e.symm)) _ ≪≫
-    rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A e.inv
-
 end AlgebraicGeometry.Etale

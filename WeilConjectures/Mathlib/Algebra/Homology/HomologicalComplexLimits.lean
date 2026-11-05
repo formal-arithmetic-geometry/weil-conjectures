@@ -126,25 +126,11 @@ noncomputable def isColimitCofanMkX {s : Cofan K} (hs : IsColimit s) (i : ι)
   isColimitCofanMkObjOfIsColimit (eval C c i) K s.inj
     (hs.ofIsoColimit (Cofan.ext (Iso.refl _) (by simp)))
 
-/-- A product of homological complexes is a product in each degree, provided the evaluation
-functors preserve it. -/
-noncomputable def isLimitFanMkX {s : Fan K} (hs : IsLimit s) (i : ι)
-    [PreservesLimit (Discrete.functor K) (eval C c i)] :
-    IsLimit (Fan.mk (s.pt.X i) fun j ↦ (s.proj j).f i) :=
-  isLimitFanMkObjOfIsLimit (eval C c i) K s.proj
-    (hs.ofIsoLimit (Fan.ext (Iso.refl _) (by simp)))
-
 @[reassoc (attr := simp)]
 lemma inj_f_desc_isColimitCofanMkX {s : Cofan K} (hs : IsColimit s) (i : ι)
     [PreservesColimit (Discrete.functor K) (eval C c i)] {A : C} (f : ∀ j, (K j).X i ⟶ A)
     (j : β) : (s.inj j).f i ≫ Cofan.IsColimit.desc (isColimitCofanMkX hs i) f = f j :=
   Cofan.IsColimit.fac (isColimitCofanMkX hs i) f j
-
-@[reassoc (attr := simp)]
-lemma lift_isLimitFanMkX_proj_f {s : Fan K} (hs : IsLimit s) (i : ι)
-    [PreservesLimit (Discrete.functor K) (eval C c i)] {A : C} (f : ∀ j, A ⟶ (K j).X i)
-    (j : β) : Fan.IsLimit.lift (isLimitFanMkX hs i) f ≫ (s.proj j).f i = f j :=
-  Fan.IsLimit.fac (isLimitFanMkX hs i) f j
 
 end Degreewise
 

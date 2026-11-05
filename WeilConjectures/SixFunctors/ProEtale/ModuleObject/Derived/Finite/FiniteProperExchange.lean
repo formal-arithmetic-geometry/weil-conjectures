@@ -36,16 +36,6 @@ Source: the reflexivity equation for equality transport
     finitePullbackCongr Λ (rfl : f = f) = Iso.refl _ := by
   rfl
 
-/-- Equality-induction transport is the original equality-to-isomorphism transport.
-Source: equality induction for the published derived inverse-image functor
-(blueprint: def-sfb-finite-proper-exchange). -/
-theorem finitePullbackCongr_eqToIso
-    {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
-    finitePullbackCongr Λ h =
-      eqToIso (congrArg (fun (k : X ⟶ Y) ↦ (upperStar Λ k).leftDerivedFunctor) h) := by
-  cases h
-  rfl
-
 /-- The canonical internal derived inverse-image square, kept as a named isomorphism.
 Source: the published pullback compositors and equality transport
 (blueprint: def-sfb-finite-proper-exchange). -/
@@ -72,17 +62,5 @@ Source: blueprint proper-base-change-finite, clause (2), and the canonical mate 
     (derivedUpperStarLowerStarAdjunction Λ p)
     (derivedUpperStarLowerStarAdjunction Λ p')
     (TwoSquare.mk _ _ _ _ (finitePullbackSquare Λ sq).hom)).natTrans
-
-/-- The canonical exchange is its defining mate, without exposing the construction.
-Source: the definition of the unit-square-counit exchange
-(blueprint: def-sfb-finite-proper-exchange). -/
-theorem finiteProperExchange_eq_mate
-    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {p' : X' ⟶ Y'}
-    {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' p' p g) :
-    finiteProperExchange Λ sq =
-      (mateEquiv (derivedUpperStarLowerStarAdjunction Λ p)
-        (derivedUpperStarLowerStarAdjunction Λ p')
-        (TwoSquare.mk _ _ _ _ (finitePullbackSquare Λ sq).hom)).natTrans := by
-  rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing

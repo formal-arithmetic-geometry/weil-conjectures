@@ -315,10 +315,6 @@ def adicConstructibleSheaf :
     ObjectProperty (AdicSheaf l X) :=
   fun F ↦ IsAdicConstructibleSheaf F
 
-lemma adicConstructibleSheaf_iff (F : AdicSheaf l X) :
-    adicConstructibleSheaf l X F ↔ IsAdicConstructibleSheaf F :=
-  Iff.rfl
-
 instance : (adicConstructibleSheaf l X).IsClosedUnderIsomorphisms where
   of_iso e hF := IsAdicConstructibleSheaf.of_iso e hF
 

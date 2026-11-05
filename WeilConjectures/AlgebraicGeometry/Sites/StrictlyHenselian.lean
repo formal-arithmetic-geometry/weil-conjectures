@@ -167,33 +167,4 @@ theorem subsingleton_H_of_isStrictlyHenselianLocalRing
     Subsingleton (Sheaf.H F (n + 1)) :=
   Abelian.Ext.subsingleton_of_projective _ _ _
 
-/-- Over a strictly henselian local ring `R`, the sections over `Spec R` of an étale presheaf of
-abelian groups and of its sheafification agree. -/
-lemma bijective_toSheafify_app_of_isStrictlyHenselianLocalRing
-    (P : (Spec (.of R)).Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1}) :
-    Function.Bijective
-      ((toSheafify (Spec (.of R)).smallEtaleTopology P).app (op (etaleTerminal R))) := by
-  refine ⟨fun a b hab ↦ ?_, fun s ↦ ?_⟩
-  · have hmem := Presheaf.equalizerSieve_mem (Spec (.of R)).smallEtaleTopology
-      (toSheafify (Spec (.of R)).smallEtaleTopology P) a b hab
-    simpa using id_mem_of_mem_smallEtaleTopology_of_isStrictlyHenselianLocalRing R _ hmem
-  · obtain ⟨t, ht⟩ := id_mem_of_mem_smallEtaleTopology_of_isStrictlyHenselianLocalRing R _
-      (Presheaf.imageSieve_mem (Spec (.of R)).smallEtaleTopology
-        (toSheafify (Spec (.of R)).smallEtaleTopology P) s)
-    exact ⟨t, ht.trans (by simp)⟩
-
-/-- Blueprint `sbc-lem-strict-henselian-constant-cohomology`, degree zero: over a strictly
-henselian local ring `R`, the cohomology in degree `0` of the constant étale sheaf on `Spec R`
-with value `A` is `A`: the global sections of the constant sheaf, computed through the
-identification `H⁰ = Γ` (`CategoryTheory.Sheaf.H.equiv₀`), are the sections of the constant
-presheaf, since sheafification does not change sections over `Spec R`. -/
-noncomputable def hZeroConstantSheafAddEquiv
-    (A : AddCommGrpCat.{u + 1}) :
-    Sheaf.H ((constantSheaf (Spec (.of R)).smallEtaleTopology
-      AddCommGrpCat.{u + 1}).obj A) 0 ≃+ A :=
-  (Sheaf.H.equiv₀ _ (isTerminalEtaleTerminal R)).trans
-    (AddEquiv.ofBijective _
-      (bijective_toSheafify_app_of_isStrictlyHenselianLocalRing R
-        ((Functor.const _).obj A))).symm
-
 end AlgebraicGeometry.Scheme

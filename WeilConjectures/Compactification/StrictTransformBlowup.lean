@@ -128,19 +128,6 @@ theorem exists_blowup_comap_iso_strictTransform (I : X.IdealSheafData) (f : Y �
   · rw [asIso_hom, hMap, ← Category.assoc, hfac, hψdef, Category.assoc,
       pullback.lift_snd_assoc, hρ]
 
-/-- **Tag 080E for a closed immersion** (blueprint:
-`lemma:nagata-strict-transform-ambient-closed`).
-
-This is the specialisation of `exists_blowup_comap_iso_strictTransform` to a closed
-immersion: the strict transform is a closed subscheme of `Z ×_X Bl_I(X)`, which in turn is
-a closed subscheme of `Bl_I(X)` because `j` is. -/
-theorem exists_isClosedImmersion_blowup_comap {Z : Scheme.{u}} (I : X.IdealSheafData)
-    (j : Z ⟶ X) [IsClosedImmersion j] :
-    ∃ k : (I.comap j).blowup ⟶ I.blowup, IsClosedImmersion k ∧
-      k ≫ I.blowupMap = (I.comap j).blowupMap ≫ j := by
-  obtain ⟨e, -, hmap⟩ := I.exists_blowup_comap_iso_strictTransform j
-  exact ⟨e.hom ≫ strictTransformMap j I.blowupMap I.support.compl, inferInstance, hmap⟩
-
 end Scheme.IdealSheafData
 
 end AlgebraicGeometry

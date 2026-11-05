@@ -185,54 +185,7 @@ section Cospecialization
 
 variable {Ω' : Type u} [Field Ω'] [IsSepClosed Ω'] (t : Spec (.of Ω') ⟶ strictLocalization s)
 
-/-- A pointed étale neighbourhood `(V, v)` of `s` is a pointed étale neighbourhood of the
-geometric point `t ≫ (S_(s) ⟶ S)` for a geometric point `t` of the strict localization `S_(s)`,
-pointed by `t` followed by the leg `S_(s) ⟶ V`. -/
-noncomputable def cospecializationNeighborhoodFunctor :
-    PointedEtaleNeighborhood s ⥤ PointedEtaleNeighborhood (t ≫ strictLocalizationToBase s) where
-  obj x := ⟨x.1, CategoryTheory.Over.homMk (t ≫ (strictLocalizationConeAll s).π.app x)
-    (by simp)⟩
-  map {x y} f := CategoryOfElements.homMk _ _ f.1 (by
-    apply CategoryTheory.Over.OverMorphism.ext
-    exact (Category.assoc _ _ _).trans (congrArg (t ≫ ·) ((strictLocalizationConeAll s).w f)))
-
-@[simp]
-lemma cospecializationNeighborhoodFunctor_obj_fst (x : PointedEtaleNeighborhood s) :
-    ((cospecializationNeighborhoodFunctor s t).obj x).1 = x.1 :=
-  rfl
-
-@[simp]
-lemma cospecializationNeighborhoodFunctor_obj_snd_left (x : PointedEtaleNeighborhood s) :
-    ((cospecializationNeighborhoodFunctor s t).obj x).2.left =
-      t ≫ (strictLocalizationConeAll s).π.app x :=
-  rfl
-
 variable (A : Type*) [Category A] [HasColimitsOfSize.{u, u} A]
-
-/-- The **cospecialization map** `F_s ⟶ F_t` of a sheaf `F` on the small étale site of `S`,
-from the stalk at a geometric point `s` to the stalk at a geometric point
-`t ≫ (S_(s) ⟶ S)` coming from a geometric point `t` of the strict localization `S_(s)`: the
-germ of a section at a pointed étale neighbourhood `(V, v)` of `s` is sent to its germ at the
-point `t` followed by the leg `S_(s) ⟶ V`. For `F` a sheaf, `F_s = Γ(S_(s), F|_{S_(s)})`, and
-this is the restriction to the geometric point `t`. -/
-noncomputable def cospecializationMap (F : Sheaf S.smallEtaleTopology A) :
-    (pointSmallEtale s).sheafFiber.obj F ⟶
-      (pointSmallEtale (t ≫ strictLocalizationToBase s)).sheafFiber.obj F :=
-  colimit.pre ((CategoryOfElements.π
-      (pointSmallEtale (t ≫ strictLocalizationToBase s)).fiber).op ⋙ F.obj)
-    (cospecializationNeighborhoodFunctor s t).op
-
-/-- The cospecialization map on germs: the germ at `(V, v)` of a section is sent to its germ at
-`(V, t ≫ (S_(s) ⟶ V))`. -/
-@[reassoc (attr := simp)]
-lemma toPresheafFiber_cospecializationMap (F : Sheaf S.smallEtaleTopology A)
-    (x : PointedEtaleNeighborhood s) :
-    (pointSmallEtale s).toPresheafFiber x.1 x.2 F.obj ≫ cospecializationMap s t A F =
-      (pointSmallEtale (t ≫ strictLocalizationToBase s)).toPresheafFiber x.1
-        ((cospecializationNeighborhoodFunctor s t).obj x).2 F.obj :=
-  colimit.ι_pre ((CategoryOfElements.π
-      (pointSmallEtale (t ≫ strictLocalizationToBase s)).fiber).op ⋙ F.obj)
-    (cospecializationNeighborhoodFunctor s t).op (op x)
 
 end Cospecialization
 

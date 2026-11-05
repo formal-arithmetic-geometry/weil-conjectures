@@ -88,32 +88,6 @@ theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
 
-Clause (b), étale form: for composable `f : X ⟶ Y` and `g : Y ⟶ S` admitting compactifications
-and torsion coefficients, there is a composition isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
-(`sk-thm-sf-comp-composition`) whose mate `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` under the adjunctions
-`Rf_! ⊣ Rf^!` on the unbounded derived categories of the small étale sites carries the
-adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` to the composite adjunction `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`:
-the unit and counit of the composite adjunction are the pasted ones. The mate statement is
-formal (`CategoryTheory.Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv`); the
-composition isomorphism is `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`.
-The constructible form, on the small pro-étale sites, is
-`AlgebraicGeometry.ProEtale.exists_rightDerivedUpperShriekAdjunction_comp_eq`. -/
-theorem exists_rightDerivedUpperShriekAdjunction_comp_eq (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact (f ≫ g)] :
-    ∃ e : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
-        R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ],
-      ((rightDerivedUpperShriekAdjunction _ (f ≫ g)).ofNatIsoLeft e).ofNatIsoRight
-        (conjugateIsoEquiv
-          ((rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g))
-          (rightDerivedUpperShriekAdjunction _ (f ≫ g)) e).symm =
-        (rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f g
-  exact ⟨e, Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ e⟩
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
-/-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
-
 **The mate of the composition isomorphism.** For composable `f : X ⟶ Y` and `g : Y ⟶ S` and
 torsion coefficients,
 

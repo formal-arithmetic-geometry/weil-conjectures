@@ -48,21 +48,6 @@ lemma affineLine.translationIso_comp_artinSchreierMap (c : k₀) :
   affineLine.translation_comp_artinSchreierMap k₀ c
 
 omit [Finite k₀] in
-/-- Translation by `c + d` is translation by `c` followed by translation by `d`
-(blueprint `lem-fd-as-characters`). -/
-lemma affineLine.translationIso_add (c d : k₀) :
-    (affineLine.translationIso k₀ (c + d)).hom =
-      (affineLine.translationIso k₀ c).hom ≫ (affineLine.translationIso k₀ d).hom :=
-  affineLine.translation_add k₀ c d
-
-/-- The Artin–Schreier map is a split `k₀`-torsor under the translations
-(blueprint `lem-fd-as-characters`). -/
-lemma affineLine.isTorsorSplit_artinSchreierMap :
-    IsTorsorSplit (affineLine.artinSchreierMap k₀) (affineLine.translationIso k₀)
-      (affineLine.translationIso_comp_artinSchreierMap) :=
-  affineLine.isIso_sigmaDesc_lift_translation k₀
-
-omit [Finite k₀] in
 /-- The base change of the translations of the affine line are the geometric translations
 (blueprint `lem-fd-as-characters`). -/
 lemma affineLine.geometricTorsorAut_translationIso :
@@ -108,7 +93,6 @@ lemma ProEtaleWeilSheaf.artinSchreierImageι_hom_f :
       (image.ι (WeilSheaf.artinSchreierIdempotent ψ)).hom.hom.f :=
   rfl
 
-
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The translations of `ĀS_* ℚ̄_ℓ` are the torsor translations
 (blueprint `lem-fd-as-characters`). -/
@@ -119,7 +103,6 @@ lemma artinSchreierTranslationSheafHom_eq_torsorTranslation (c : k₀) :
         affineLine.translationIso_comp_artinSchreierMap) c := by
   exact (ProEtale.torsorTranslation_congr ĀS affineLine.geometricTorsorAut_translationIso _
     (affineLine.geometricTranslation_comp_artinSchreierMap k₀) c).symm
-
 
 /-- The translations act on the adjoint `ĀS^* ℒ_ψ ⟶ ℚ̄_ℓ` of the inclusion through `ψ`. -/
 lemma affineLine.homEquiv_symm_artinSchreierImageι_comp (c : k₀) :

@@ -40,35 +40,4 @@ open Scheme
 variable {k' : Type u} [Field k'] [IsSepClosed k'] (D : GenericSliceTrait k') (n : ℕ)
   (i : Fin (n + 1))
 
-/-- **(M2) with torsion coefficients** (SGA 4½, [Th. finitude], Lemme 3.4): for a generic slice
-trait `D` and a finite discrete ring `T₀` in which a prime `p` is invertible, every natural number
-vanishing in `k'` being divisible by `p`, the pullback exchange of the cartesian part
-`σ.toCartesian` of the slice `σ = genericSliceTraitHom D n i` is a split monomorphism at every
-complex on `𝔸ⁿ⁺¹_S` which is bounded below of étale origin. -/
-theorem isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom_of_finite
-    {p : ℕ} [Fact p.Prime] (hp : ∀ m : ℕ, (m : k') = 0 → p ∣ m)
-    (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀] [DiscreteTopology T₀]
-    [Finite T₀] (hpT : IsUnit (p : T₀))
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
-      Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj T₀)
-        (affineSpaceModel k' (n + 1)).total)))
-    (hC : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀))
-      (affineSpaceModel k' (n + 1)).total
-      ((finiteCoefficientDerivedEquivalence (affineSpaceModel k' (n + 1)).total T₀).functor.obj
-        C)) :
-    IsSplitMono (((genericSliceTraitHom D n i).toCartesian.pullbackExchange
-      (Profinite.continuousMapRingObj T₀)).app C) := by
-  have hp' : ∀ m : ℕ, (m : ResidueField (PowerSeries k')) = 0 → p ∣ m := fun m hm ↦
-    hp m ((PowerSeries.residueFieldEquiv k').injective (by rw [map_natCast, hm, map_zero]))
-  refine Hom.isSplitMono_toCartesian_pullbackExchange_app_of_sliceTrait D.toSliceTrait
-    (algebraMap_traitGenericField_injective k') (isAlgebraic_traitGenericField k')
-    (genericSliceTraitHom D n i) (N := (affineSpaceModel k' (n + 1)).geometric)
-    (q := genericSliceTraitStructure D n i) (g := pullback.snd _ _)
-    (q₁ := 𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k') (g₁ := pullback.snd _ _)
-    (IsPullback.of_hasPullback _ _) (IsPullback.of_hasPullback _ _) ?_ ?_ hp' T₀ hpT C hC
-  · change genericSliceTraitProj D n i ≫ _ = _
-    rw [genericSliceTraitProj, genericSliceTrait_fst_comp_over]
-    exact congrArg (genericSliceTraitStructure D n i ≫ ·) D.spec_φ.symm
-  · exact pullback.lift_snd _ _ _
-
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

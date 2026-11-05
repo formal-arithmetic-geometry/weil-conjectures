@@ -37,18 +37,4 @@ noncomputable def preimageIso_liftSquareWithComparisons :
       Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ cF'.symm ≪≫
       (Functor.associator _ _ _).symm)
 
-/-- Forward components retain precisely the two direct-image comparisons. -/
-lemma preimageIso_liftSquareWithComparisons_hom_app_hom (K : PA.FullSubcategory) :
-    ((preimageIso_liftSquareWithComparisons cF cF' hT hT' e).hom.app K).hom =
-      T'.map (cF.hom.app K) ≫ e.hom.app K.obj ≫
-        cF'.inv.app ((PA'.lift (PA.ι ⋙ T) hT).obj K) := by
-  simp [preimageIso_liftSquareWithComparisons, liftCompιIso]
-
-/-- Inverse components retain precisely the inverse direct-image comparisons. -/
-lemma preimageIso_liftSquareWithComparisons_inv_app_hom (K : PA.FullSubcategory) :
-    ((preimageIso_liftSquareWithComparisons cF cF' hT hT' e).inv.app K).hom =
-      cF'.hom.app ((PA'.lift (PA.ι ⋙ T) hT).obj K) ≫ e.inv.app K.obj ≫
-        T'.map (cF.inv.app K) := by
-  simp [preimageIso_liftSquareWithComparisons, liftCompιIso]
-
 end CategoryTheory.ObjectProperty

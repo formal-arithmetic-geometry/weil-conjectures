@@ -42,10 +42,4 @@ def IsLisseRankOneSheaf (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 
     Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj L ≅
       (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
 
-/-- Being lisse of rank one is invariant under isomorphism. -/
-lemma IsLisseRankOneSheaf.of_iso {L L' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (e : L ≅ L') (hL : IsLisseRankOneSheaf L) : IsLisseRankOneSheaf L' := by
-  obtain ⟨𝒰, h⟩ := hL
-  exact ⟨𝒰, fun i ↦ (h i).map fun f ↦ (Etale.upperStar _ (𝒰.f i)).mapIso e.symm ≪≫ f⟩
-
 end AlgebraicGeometry.Scheme

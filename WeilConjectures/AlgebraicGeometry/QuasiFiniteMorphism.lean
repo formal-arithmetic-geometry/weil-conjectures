@@ -65,9 +65,4 @@ def IsQuasiFinite {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) : Prop :=
   AlgebraicGeometry.LocallyOfFiniteType f ∧ AlgebraicGeometry.QuasiCompact f ∧
     ∀ x : X, IsOpen ({f.asFiber x} : Set (f.fiber (f x)))
 
-/-- Finite fibres as in the blueprint's convention appended to Stacks Tag 01TD
-(blueprint: pqf-def-quasifinite): the inverse image of every singleton is finite. -/
-def HasFiniteFibres {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) : Prop :=
-  ∀ s : S, (f ⁻¹' {s}).Finite
-
 end AlgebraicGeometry.Scheme.Hom

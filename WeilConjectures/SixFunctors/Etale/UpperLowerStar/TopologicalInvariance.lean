@@ -118,12 +118,6 @@ noncomputable def sheafEquivalence :
       Y.smallEtaleTopology X.smallEtaleTopology := Scheme.Hom.isDenseSubsite_etale f
   f.etaleEquivalence.symm.sheafCongr X.smallEtaleTopology Y.smallEtaleTopology A
 
-/-- The pushforward along a universal homeomorphism is the functor of
-`AlgebraicGeometry.Etale.sheafEquivalence`: both are restriction along the base change
-functor `AlgebraicGeometry.Scheme.Hom.Etale`. -/
-lemma lowerStar_eq_sheafEquivalence_functor : (f)_*[A] = (sheafEquivalence A f).functor :=
-  rfl
-
 /-- **Topological invariance of the small étale topos**, [Stacks 03SI]: the pushforward along
 a universal homeomorphism is an equivalence of categories of étale sheaves.
 (blueprint: `prop-weil-pbc-universal-homeomorphism-topos`) -/

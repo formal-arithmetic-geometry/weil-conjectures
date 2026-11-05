@@ -159,11 +159,6 @@ lemma moduleLift_obj_obj_obj (a : 𝒜) (U : Cᵒᵖ) :
       (P.obj a).obj.obj U :=
   rfl
 
-lemma moduleLift_obj_obj_smul (a : 𝒜) (U : Cᵒᵖ) (c : Λ)
-    (x : ((moduleLift P ρ hρ).obj a).obj.obj U) :
-    c • x = (ρ a c).hom.app U x :=
-  rfl
-
 @[simp]
 lemma moduleLift_map_hom_app_apply {a b : 𝒜} (f : a ⟶ b) (U : Cᵒᵖ)
     (x : (P.obj a).obj.obj U) :
@@ -185,11 +180,6 @@ lemma moduleLiftCompIso_hom_app (a : 𝒜) :
 @[simp]
 lemma moduleLiftCompIso_inv_app (a : 𝒜) :
     (moduleLiftCompIso P ρ hρ).inv.app a = 𝟙 (P.obj a) :=
-  rfl
-
-/-- The lift `moduleLift P ρ hρ` composed with the forgetful functor is equal to `P`. -/
-lemma moduleLift_comp_sheafCompose :
-    moduleLift P ρ hρ ⋙ sheafCompose J (forget₂ _ AddCommGrpCat.{w}) = P :=
   rfl
 
 /-- `moduleLift P ρ hρ` maps a morphism to an isomorphism if and only if `P` does. -/
@@ -288,11 +278,5 @@ example : (Sheaf.moduleLift (Λ := Λ) (Mod.forget R)
 example : (Sheaf.moduleLift (Λ := Λ) (Mod.forget R)
     (fun M ↦ (Mod.sectionActRingHom M).comp φ)
     (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c))).Faithful := inferInstance
-
-example : Sheaf.moduleLift (Λ := Λ) (Mod.forget R)
-    (fun M ↦ (Mod.sectionActRingHom M).comp φ)
-    (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c)) ⋙
-      sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) = Mod.forget R :=
-  Sheaf.moduleLift_comp_sheafCompose (Λ := Λ) (Mod.forget R) _ _
 
 end Example

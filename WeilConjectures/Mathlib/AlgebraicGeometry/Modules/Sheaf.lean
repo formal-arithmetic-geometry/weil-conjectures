@@ -158,9 +158,6 @@ lemma presheafModuleCat_obj (ℱ : X.Modules) (V : X.Opensᵒᵖ) :
 
 -- Not a `simp` lemma, for the same reason as
 -- `PresheafOfModules.forgetToPresheafModuleCatObjObj_coe`.
-lemma presheafModuleCat_obj_coe (ℱ : X.Modules) (V : X.Opensᵒᵖ) :
-    (ℱ.presheafModuleCat.obj V : Type u) = ℱ.val.obj V :=
-  rfl
 
 /-- An invertible `𝒪_X`-module is trivial on a neighbourhood of every point: every `x : X` lies
 in an open `Y` over which `M` is isomorphic to the unit sheaf of modules. -/
@@ -543,7 +540,6 @@ noncomputable def overIsoFreeEquiv (M : X.Modules) (U : X.Opens) (I : Type u) :
     SheafOfModules.mapFreeIso _ I (overEquivFunctorObjUnitIso U))
   left_inv e := by ext1; simp
   right_inv e := by ext1; simp
-
 
 /-- The restriction of a free module along an open immersion is free. -/
 noncomputable def restrictFreeIso {Y : Scheme.{u}} (f : Y ⟶ X) [IsOpenImmersion f] (I : Type u) :

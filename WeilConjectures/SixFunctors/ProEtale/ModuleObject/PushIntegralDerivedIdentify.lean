@@ -99,34 +99,6 @@ variable {C : Type u} [Category.{u + 1} C] [Abelian C] [MonoidalCategory C] [Mon
   [Abelian.HasFunctorialFlatResolution C]
   {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ]
 
-/-- The counit of the derived adjunction `S ⊗ᴸ_R - ⊣ D(comap φ)` on the image of a complex `M`,
-read through the comparison for the exact restriction of scalars and the counit of the derived
-extension of scalars, is the levelwise counit `S ⊗_R M ⟶ M`. -/
-lemma derivedExtendMapDerivedCategoryAdjunction_counit_app_fac
-    (M : HomotopyCategory (Mod C S) (ComplexShape.up ℤ)) :
-    (extendScalars φ).leftDerivedFunctor.map
-        ((comap φ).mapDerivedCategoryFactorsh.inv.app M) ≫
-      (derivedExtendMapDerivedCategoryAdjunction φ).counit.app (DerivedCategory.Qh.obj M) =
-    (extendScalars φ).leftDerivedFunctorCounit.app
-        (((comap φ).mapHomotopyCategory (ComplexShape.up ℤ)).obj M) ≫
-      DerivedCategory.Qh.map
-        (((extendRestrictAdjunction φ).mapHomotopyCategory (ComplexShape.up ℤ)).counit.app M) := by
-  have h₁ := (extendRestrictAdjunction φ).mapHomotopyCategory (ComplexShape.up ℤ)
-    |>.derivedε_fac_app
-    (HomotopyCategory.quasiIso (Mod C S) (ComplexShape.up ℤ))
-    (extendScalars φ).leftDerivedFunctorCounit (comap φ).rightDerivedFunctorUnit M
-  have h₃ := NatTrans.congr_app (comap φ).rightDerivedFunctorIsoMapDerivedCategory_hom_fac M
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h₃
-  simp only [derivedExtendMapDerivedCategoryAdjunction, derivedExtendRestrictAdjunction,
-    rightDerivedComapIsoMapDerivedCategory, Adjunction.derivedAdjunction,
-    Adjunction.ofNatIsoRight_counit, NatTrans.comp_app]
-  rw [← h₃]
-  rw [Functor.whiskerRight_app, Adjunction.derived_counit, Functor.map_comp, Category.assoc,
-    ← Functor.map_comp_assoc (extendScalars φ).leftDerivedFunctor
-      ((comap φ).rightDerivedFunctorIsoMapDerivedCategory.hom.app _), Iso.hom_inv_id_app,
-    Functor.map_id, Category.id_comp]
-  exact h₁
-
 end CategoryTheory.Mod
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -137,66 +109,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
   [MonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The underived (Push) as the mate of `comapLowerStarIso`, pointwise. -/
-lemma pushHom_app_eq (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    (pushHom a f).app M =
-      (Mod.extendScalars (coefficientMap a Y)).map
-        (((f)_*⟦Λ⟧).map ((Mod.extendRestrictAdjunction (coefficientMap a X)).unit.app M) ≫
-          (comapLowerStarIso a f).inv.app ((Mod.extendScalars (coefficientMap a X)).obj M)) ≫
-        (Mod.extendRestrictAdjunction (coefficientMap a Y)).counit.app
-          (((f)_*⟦Λ'⟧).obj ((Mod.extendScalars (coefficientMap a X)).obj M)) := by
-  simp only [pushHom, Adjunction.pushHomOfComapIso, mateEquiv, Equiv.coe_fn_symm_mk,
-    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_inv_app,
-    Functor.rightUnitor_hom_app, Functor.comp_map, CategoryTheory.Functor.map_comp,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc, Functor.comp_obj]
-  rfl
-
-/-- The underived (Push) on the homotopy category, as the mate of `comapLowerStarIso` along the
-adjunctions induced on homotopy categories. -/
-lemma mapHomotopyCategory_pushHom_app
-    (K : HomotopyCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-      (ComplexShape.up ℤ)) :
-    ((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory _).map
-        ((((f)_*⟦Λ⟧).mapHomotopyCategory _).map
-          (((Mod.extendRestrictAdjunction (coefficientMap a X)).mapHomotopyCategory
-            (ComplexShape.up ℤ)).unit.app K) ≫
-          (NatTrans.mapHomotopyCategory (comapLowerStarIso a f).inv _).app
-            (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj K)) ≫
-      ((Mod.extendRestrictAdjunction (coefficientMap a Y)).mapHomotopyCategory
-        (ComplexShape.up ℤ)).counit.app
-          ((((f)_*⟦Λ'⟧).mapHomotopyCategory _).obj
-            (((Mod.extendScalars (coefficientMap a X)).mapHomotopyCategory _).obj K)) =
-    (NatTrans.mapHomotopyCategory (pushHom a f) _).app K := by
-  obtain ⟨I, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
-  erw [Adjunction.mapHomotopyCategory_counit_app_quotient]
-  simp only [NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_map]
-  rw [← Functor.map_comp, Functor.mapHomotopyCategory_map, ← Functor.map_comp]
-  refine congrArg _ ?_
-  refine HomologicalComplex.hom_ext _ _ fun n => ?_
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    NatTrans.mapHomologicalComplex_app_f, Functor.map_comp, Category.assoc]
-  erw [pushHom_app_eq a f (I.X n)]
-  simp only [Functor.map_comp, Category.assoc]
-  rfl
 variable [IsCommMonObj Λ']
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
-
-/-- The derived (Push) as the mate of `derivedComapLowerStarIso`, pointwise. -/
-lemma derivedPushHom_app_eq
-    (Z : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
-    (derivedPushHom a f).app Z =
-      (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.map
-        (((f)_*⟦Λ⟧).rightDerivedFunctor.map
-          ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app Z)) ≫
-      (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.map
-        ((derivedComapLowerStarIso a f).inv.app _) ≫
-      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).counit.app _ := by
-  simp only [derivedPushHom, Adjunction.pushHomOfComapIso, mateEquiv, Equiv.coe_fn_symm_mk,
-    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_inv_app,
-    Functor.rightUnitor_hom_app, Functor.comp_map, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, Functor.comp_obj, Functor.id_obj]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

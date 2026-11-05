@@ -66,11 +66,6 @@ noncomputable abbrev tensorPowSectionOne {L : X.Modules} (s : 𝟙_ X.Modules �
     (U : X.Opens) : Γ(L.tensorPow m, U) :=
   (tensorPowSection s m).app U (unitSectionsEquiv U 1)
 
-/-- `s^{⊗ 0}(1) = 1`. -/
-lemma tensorPowSectionOne_zero {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (U : X.Opens) :
-    tensorPowSectionOne s 0 U = unitSectionsEquiv U 1 :=
-  rfl
-
 /-- `s^{⊗ (m + 1)}(1) = s(1) ⊗ s^{⊗ m}(1)`. -/
 lemma tensorPowSectionOne_succ {L : X.Modules} (s : 𝟙_ X.Modules ⟶ L) (m : ℕ) (U : X.Opens) :
     tensorPowSectionOne s (m + 1) U =

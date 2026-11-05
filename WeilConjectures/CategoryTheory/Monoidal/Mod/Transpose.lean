@@ -51,28 +51,6 @@ lemma IsBilinear.comp {u : P.X ⊗ M.X ⟶ N.X} (hu : IsBilinear (P := P) (M := 
   balanced := by
     rw [reassoc_of% hu.balanced]
 
-/-- Bilinearity is preserved by precomposition with a linear map in the first variable. -/
-lemma IsBilinear.whiskerRight {u : P.X ⊗ M.X ⟶ N.X} (hu : IsBilinear (P := P) (M := M) u)
-    (g : P' ⟶ P) : IsBilinear (P := P') (M := M) (g.hom ▷ M.X ≫ u) where
-  linear := by
-    rw [← comp_whiskerRight_assoc, act_hom, comp_whiskerRight_assoc,
-      ← associator_inv_naturality_middle_assoc, hu.linear, MonoidalCategory.whiskerLeft_comp_assoc]
-  balanced := by
-    have key : g.hom ▷ A ≫ rightAct P = rightAct P' ≫ g.hom := by
-      simp only [rightAct, BraidedCategory.braiding_naturality_left_assoc, Category.assoc, act_hom]
-    rw [whisker_exchange_assoc, hu.balanced, associator_inv_naturality_left_assoc,
-      ← comp_whiskerRight_assoc, key, comp_whiskerRight_assoc]
-
-/-- Bilinearity is preserved by precomposition with a linear map in the second variable. -/
-lemma IsBilinear.whiskerLeft {u : P.X ⊗ M.X ⟶ N.X} (hu : IsBilinear (P := P) (M := M) u)
-    (g : M' ⟶ M) : IsBilinear (P := P) (M := M') (P.X ◁ g.hom ≫ u) where
-  linear := by
-    rw [← whisker_exchange_assoc, ← associator_inv_naturality_right_assoc, hu.linear,
-      MonoidalCategory.whiskerLeft_comp_assoc]
-  balanced := by
-    rw [← MonoidalCategory.whiskerLeft_comp_assoc, act_hom, MonoidalCategory.whiskerLeft_comp_assoc,
-      hu.balanced, associator_inv_naturality_right_assoc, whisker_exchange_assoc]
-
 end Bilinear
 
 section Symmetric

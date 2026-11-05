@@ -135,27 +135,6 @@ private lemma shortExact_of_localization
     exact ⟨(ShortComplex.exact_iff_epi _ hg).2
       (inferInstanceAs (Epi (P.map (aj.counit.app M))))⟩
 
-private lemma coefficient_square (l : ℕ) [Fact l.Prime]
-    {Y A B T : Scheme.{u}} (a : Y ⟶ A) (b : A ⟶ T) (c : Y ⟶ B) (d : B ⟶ T)
-    (h : a ≫ b = c ≫ d) :
-    (a)^*[WeilCoefficients.{u} l].map (upperStarAdicConstantSheafHom l b) ≫
-        upperStarAdicConstantSheafHom l a =
-      (upperStarCompIso (WeilCoefficients.{u} l) h).hom.app (adicConstantSheaf l T) ≫
-        (c)^*[WeilCoefficients.{u} l].map (upperStarAdicConstantSheafHom l d) ≫
-          upperStarAdicConstantSheafHom l c := by
-  rw [← cancel_epi ((upperStarComp (WeilCoefficients.{u} l) a b).hom.app
-    (adicConstantSheaf l T))]
-  simp only [upperStarCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Category.assoc, Iso.hom_inv_id_app_assoc]
-  rw [upperStarAdicConstantSheafHom_comp, upperStarAdicConstantSheafHom_comp]
-  have hc : ∀ (f g : Y ⟶ T) (h : f = g),
-      (upperStarCongr (WeilCoefficients.{u} l) h).hom.app (adicConstantSheaf l T) ≫
-        upperStarAdicConstantSheafHom l g = upperStarAdicConstantSheafHom l f := by
-    intro f g h
-    subst g
-    simp [upperStarCongr]
-  exact (hc _ _ h).symm
-
 attribute [local irreducible] Scheme.Hom.geometricFiber
   Scheme.Hom.geometricFiberMap Scheme.Hom.geometricGaloisFrobenius
 

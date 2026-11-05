@@ -34,21 +34,4 @@ variable {Y : Scheme.{u}} {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R 
   (Φ₁ : C ⥤ Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R))
   (Φ₀ : C ⥤ Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} S)) [Φ₁.Additive] [Φ₀.Additive]
 
-/-- A localized termwise arrow to restriction of pro-étale scalars is universal on a complex
-whose image is K-flat, when the transposes of the arrow are invertible on its terms. -/
-theorem strictSquareArrow_isUniversal_restrictScalars
-    (δ : Φ₁ ⟶ Φ₀ ⋙ sheafCompose (Scheme.ProEt.topology Y)
-      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))
-    (P : CochainComplex C ℤ)
-    (hK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
-      ((Φ₁.mapHomologicalComplex (.up ℤ)).obj P))
-    (hδ : ∀ i, IsIso (((sheafExtendScalarsAdjunction q Y).homEquiv _ _).symm
-      (δ.app (P.X i)))) :
-    Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk
-      (Functor.strictSquareArrow Φ₁ Φ₀ (sheafCompose (Scheme.ProEt.topology Y)
-        (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)) δ P))) := by
-  let : Algebra R S := q.toAlgebra
-  exact Functor.strictSquareArrow_isUniversal Φ₁ Φ₀
-    (sheafExtendScalarsAdjunction (algebraMap R S) Y) δ P hK hδ
-
 end AlgebraicGeometry.ProEtale

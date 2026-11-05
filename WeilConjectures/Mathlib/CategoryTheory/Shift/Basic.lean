@@ -24,20 +24,6 @@ namespace CategoryTheory
 
 variable {C : Type*} [Category C] [HasShift C ℤ]
 
-/-- A morphism `u : X ⟶ Y` is an isomorphism as soon as composition with `u` is bijective on
-morphisms out of every shifted object `N⟦n⟧`, for a fixed `n : ℤ`. -/
-theorem isIso_of_bijective_comp_shift (n : ℤ) {X Y : C} (u : X ⟶ Y)
-    (h : ∀ N : C, Function.Bijective (fun g : N⟦n⟧ ⟶ X ↦ g ≫ u)) : IsIso u := by
-  refine isIso_of_yoneda_map_bijective u (fun Z ↦ ?_)
-  let e : (Z⟦-n⟧)⟦n⟧ ≅ Z := (shiftFunctorCompIsoId C (-n) n (by omega)).app Z
-  have hc : (fun x : Z ⟶ X ↦ x ≫ u) =
-      (fun g : (Z⟦-n⟧)⟦n⟧ ⟶ Y ↦ e.inv ≫ g) ∘ (fun g ↦ g ≫ u) ∘ (fun x ↦ e.hom ≫ x) := by
-    funext x
-    simp
-  rw [hc]
-  exact ((isIso_iff_coyoneda_map_bijective e.inv).1 inferInstance _).comp
-    ((h _).comp ((isIso_iff_coyoneda_map_bijective e.hom).1 inferInstance _))
-
 omit [HasShift C ℤ] in
 /-- Changing the sum in `shiftFunctorAdd'` amounts to composing with an `eqToHom`. -/
 @[reassoc]

@@ -82,11 +82,6 @@ noncomputable def geometricFrobeniusPowFixedField (N : ℕ) :
       rw [map_inv₀]
       exact congrArg (·⁻¹) hy)
 
-lemma mem_geometricFrobeniusPowFixedField {N : ℕ} {y : AlgebraicClosure k} :
-    y ∈ geometricFrobeniusPowFixedField k N ↔
-      ((geometricFrobenius k (AlgebraicClosure k)) ^ N) y = y :=
-  Iff.rfl
-
 /-- The field fixed by a positive power of the geometric Frobenius is finite. -/
 lemma finite_geometricFrobeniusPowFixedField {N : ℕ} (hN : N ≠ 0) :
     Finite (geometricFrobeniusPowFixedField k N) := by
@@ -131,7 +126,6 @@ lemma exists_comp_eq_of_geometricFrobenius_pow {T : Scheme.{u}} (N : ℕ)
   refine ⟨Spec.map φ ≫ T.fromSpecResidueField (e x).1, ?_⟩
   rw [← Category.assoc, ← Spec.map_comp, hφ]
   exact e.left_inv x
-
 
 /-- **Finiteness of the points of degree `n + 1`** for an automorphism `e` of finite order of a
 scheme of finite type over a finite field (the finiteness part of blueprint

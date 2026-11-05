@@ -312,8 +312,6 @@ noncomputable def eliminationBlowup : IsAdmissible X U where
   finiteType := (eliminationCentre_spec hU q hq).1
   disjoint_support := by rw [coe_support_eliminationCentre]; exact disjoint_compl_right
 
-lemma eliminationBlowup_I : (eliminationBlowup hU q hq).I = eliminationCentre hU q hq := rfl
-
 end EliminationConstruction
 
 /-- The final step of elimination of indeterminacy, for arbitrary data of the shape produced

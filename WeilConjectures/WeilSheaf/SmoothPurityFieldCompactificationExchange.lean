@@ -38,8 +38,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k
   (f : X ⟶ Y) (f' : X' ⟶ Y')
   {πX : X'.left ⟶ X.left} {πY : Y'.left ⟶ Y.left}
 
-
-
 /-- The bounded cross-field pullback agrees with the ambient left-derived pullback. -/
 noncomputable def purityFieldPullbackCompatibility :
     boundedConstructibleUpperStarOfMap ℓ (X := Y) (Y := Y') πY ⋙
@@ -73,25 +71,6 @@ noncomputable def purityFieldCompactificationExchange :
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πY K.obj K.property)
     (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg)
 
-/-- Forgetting the bounded restriction gives the specified ambient exchange, with
-the two lower-shriek inclusion comparisons made explicit. -/
-lemma purityFieldCompactificationExchange_hom_app_hom
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((purityFieldCompactificationExchange ℓ f f' c c' hi hg).hom.app K).hom =
-      L((πY)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-        ((boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c).hom.app K) ≫
-      (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg).hom.app K.obj ≫
-      (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c').inv.app
-        ((boundedConstructibleUpperStarOfMap ℓ πX).obj K) := by
-  have he := ObjectProperty.preimageIso_liftSquareWithComparisons_hom_app_hom
-    (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c)
-    (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c')
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πX K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πY K.obj K.property)
-    (purityFieldCompactificationAmbientExchange ℓ f f' c c' hi hg) K
-  dsimp only [purityFieldCompactificationExchange]
-  exact_mod_proofs he
-
 /-- The same cross-field exchange for the lower-shriek functors chosen by Nagata. -/
 noncomputable def purityFieldLowerShriekExchange :
     boundedConstructibleLowerShriek ℓ f ⋙ boundedConstructibleUpperStarOfMap ℓ πY ≅
@@ -103,16 +82,5 @@ noncomputable def purityFieldLowerShriekExchange :
     Functor.isoWhiskerLeft _
       (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
         c' (compactificationOverField f'))
-
-/-- Compact-support base change for an arbitrary cartesian cross-field square along
-weakly étale base change, with both lower-shriek functors chosen by Nagata. -/
-noncomputable def purityFieldLowerShriekBaseChange
-    (sq : IsPullback πX f'.left f.left πY) [WeaklyEtale πY] :
-    boundedConstructibleLowerShriek ℓ f ⋙ boundedConstructibleUpperStarOfMap ℓ πY ≅
-      boundedConstructibleUpperStarOfMap ℓ πX ⋙ boundedConstructibleLowerShriek ℓ f' :=
-  purityFieldLowerShriekExchange ℓ f f' (compactificationOverField f)
-    ((compactificationOverField f).ofIsPullback sq)
-    ((compactificationOverField f).isPullback_i_ofIsPullback sq).flip
-    ((compactificationOverField f).isPullback_g_ofIsPullback sq).flip
 
 end AlgebraicGeometry.ProEtale.CondensedRing

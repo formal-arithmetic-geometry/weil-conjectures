@@ -87,19 +87,6 @@ theorem IsStrictlyHenselianLocalRing.isWContractibleRing (R : Type u) [CommRing 
     have := IsLocalRing.subsingleton_connectedComponents R
     .of_subsingleton _
 
-/-- A faithfully flat weakly étale algebra over a strictly henselian local ring has a
-retraction. -/
-theorem IsStrictlyHenselianLocalRing.exists_retraction_of_weaklyEtale {R S : Type u}
-    [CommRing R] [CommRing S] [Algebra R S] [IsStrictlyHenselianLocalRing R]
-    [Algebra.WeaklyEtale R S] [Module.FaithfullyFlat R S] :
-    ∃ f : S →+* R, f.comp (algebraMap R S) = RingHom.id R := by
-  obtain ⟨T, _, _, _, _, -, _, _⟩ := Algebra.WeaklyEtale.exists_indEtale R S
-  have : Module.FaithfullyFlat R T := .trans R S T
-  have := isWContractibleRing R
-  obtain ⟨g, hg⟩ := IsWContractibleRing.exists_retraction (R := R) T
-  refine ⟨g.comp (algebraMap S T), ?_⟩
-  rw [RingHom.comp_assoc, ← IsScalarTower.algebraMap_eq, hg]
-
 /-- The power series ring over a field is a henselian local ring, being complete for its
 maximal ideal `(X)`. -/
 instance PowerSeries.henselianLocalRing (k : Type u) [Field k] :

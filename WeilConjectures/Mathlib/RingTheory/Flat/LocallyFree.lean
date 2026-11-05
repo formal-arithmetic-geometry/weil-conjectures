@@ -58,7 +58,6 @@ lemma surjective_baseChange_of_smul_mem_range {N : Type*} [AddCommGroup N] [Modu
     rw [LinearMap.baseChange_tmul, hc, tmul_smul, smul_tmul', Algebra.smul_def, mul_comm,
       mul_assoc, inv_mul_cancel₀ hak, mul_one]
 
-
 /-- **Nakayama at a prime.** Let `M` be a finite `R`-module and `p` a prime of `R`, and let
 `d = dim κ(p) ⊗[R] M`. Elements `v : Fin d → M` lifting a basis of `κ(p) ⊗[R] M` generate `M`
 after inverting some `a ∉ p`: `a • M` lies in the span of `v`. -/
@@ -111,30 +110,6 @@ theorem exists_smul_mem_range_linearCombination [Module.Finite R M] (p : Ideal R
   refine ⟨v, a, hap, fun m ↦ ?_⟩
   rw [← Submodule.Quotient.mk_eq_zero, Submodule.Quotient.mk_smul]
   exact Module.mem_annihilator.mp haC _
-
-/-- **Upper semicontinuity of the fibre dimension.** Let `M` be a finite `R`-module and `p` a
-prime of `R`. There is `a ∉ p` such that `dim κ(q) ⊗[R] M ≤ dim κ(p) ⊗[R] M` for every prime `q`
-not containing `a`: by `Module.exists_smul_mem_range_linearCombination`, lifts of a basis of
-`κ(p) ⊗[R] M` span every fibre over `D(a)`. -/
-theorem exists_finrank_fiber_le [Module.Finite R M] (p : Ideal R) [p.IsPrime] :
-    ∃ a ∉ p, ∀ (q : Ideal R) [q.IsPrime], a ∉ q →
-      finrank q.ResidueField (q.Fiber M) ≤ finrank p.ResidueField (p.Fiber M) := by
-  have : Nontrivial R :=
-    nontrivial_of_ne 0 1 fun h ↦ ‹p.IsPrime›.ne_top ((p.eq_top_iff_one).mpr (h ▸ p.zero_mem))
-  obtain ⟨v, a, hap, ha⟩ := exists_smul_mem_range_linearCombination (M := M) p
-  refine ⟨a, hap, fun q _ haq ↦ ?_⟩
-  have hak : algebraMap R q.ResidueField a ≠ 0 := by
-    rwa [ne_eq, Ideal.algebraMap_residueField_eq_zero]
-  let φ := Fintype.linearCombination R v
-  have hsurj := surjective_baseChange_of_smul_mem_range φ ha hak
-  calc finrank q.ResidueField (q.Fiber M)
-      = finrank q.ResidueField (LinearMap.range (φ.baseChange q.ResidueField)) := by
-        rw [LinearMap.range_eq_top.mpr hsurj, finrank_top]
-    _ ≤ finrank q.ResidueField
-          (q.ResidueField ⊗[R] (Fin (finrank p.ResidueField (p.Fiber M)) → R)) :=
-        LinearMap.finrank_range_le _
-    _ = finrank p.ResidueField (p.Fiber M) := by
-        rw [Module.finrank_baseChange, Module.finrank_fin_fun]
 
 variable [IsReduced R] [Module.Finite R M] {n : ℕ}
 

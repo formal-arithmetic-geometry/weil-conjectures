@@ -34,25 +34,6 @@ variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
     (ha : (Functor.const Cᵒᵖ).map (RingCat.ofHom r) ≫ β = α ≫ a.hom)
 
-theorem rawMap_isIso
-    (P : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of S))) :
-    IsIso (rawMap J r a α β ha P) := by
-  have : IsIso ((SheafOfModules.toSheaf T).map (rawMap J r a α β ha P)) := by
-    rw [rawMap_forget]
-    infer_instance
-  exact isIso_of_reflects_iso _ (SheafOfModules.toSheaf T)
-
-theorem rawMap_naturality
-    {P Q : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of S))}
-    (f : P ⟶ Q) :
-    (PresheafOfModules.sheafification α).map ((rawRestriction r).map f) ≫
-        rawMap J r a α β ha Q =
-      rawMap J r a α β ha P ≫ (SheafOfModules.restrictScalars a).map
-        ((PresheafOfModules.sheafification β).map f) := by
-  apply (SheafOfModules.toSheaf T).map_injective
-  simp only [Functor.map_comp, rawMap_forget]
-  rfl
-
 include ha in
 @[irreducible] def rawIso :
     rawRestriction r ⋙ PresheafOfModules.sheafification α ≅

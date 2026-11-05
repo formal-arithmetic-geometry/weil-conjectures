@@ -20,8 +20,5 @@ set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian Opposite
 namespace AlgebraicGeometry.Etale
-local instance : MorphismProperty.ContainsIdentities
-    (@AlgebraicGeometry.Etale : MorphismProperty Scheme.{u}) :=
-  AlgebraicGeometry.Etale.instIsMultiplicativeScheme.toContainsIdentities
 
 end AlgebraicGeometry.Etale

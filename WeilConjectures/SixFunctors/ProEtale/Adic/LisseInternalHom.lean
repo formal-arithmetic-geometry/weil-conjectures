@@ -159,16 +159,6 @@ noncomputable def adicUpperStarTensorLeftIso (M : AdicSheaf l Y) :
   Mod.tensorLeftCompMapModComapIso (adicUpperStarRingHom l g)
     (fun _ _ ↦ Adjunction.μ_comp_map_braiding (upperStarLowerStarAdjunction _ g) _ _) M
 
-variable (l) in
-/-- **The projection formula for the internal hom**: `g_* 𝓗om(g^* M, N) ≅ 𝓗om(M, g_* N)`,
-naturally in `N`, for any morphism `g`. The left adjoints `g^*(- ⊗_A M)` and
-`g^* - ⊗_A g^* M` agree (`AlgebraicGeometry.ProEtale.adicUpperStarTensorLeftIso`). -/
-noncomputable def adicLowerStarCompIhomUpperStarIso (M : AdicSheaf l Y) :
-    (g)_*ᵃ[l] ⋙ AdicSheaf.ihom M ≅ AdicSheaf.ihom ((g)^*ᵃ[l].obj M) ⋙ (g)_*ᵃ[l] :=
-  conjugateIsoEquiv ((Mod.ihomAdjunction M).comp (adicUpperStarLowerStarAdjunction l g))
-    ((adicUpperStarLowerStarAdjunction l g).comp (Mod.ihomAdjunction ((g)^*ᵃ[l].obj M)))
-    (adicUpperStarTensorLeftIso l g M).symm
-
 end ProjectionFormula
 
 end AlgebraicGeometry.ProEtale

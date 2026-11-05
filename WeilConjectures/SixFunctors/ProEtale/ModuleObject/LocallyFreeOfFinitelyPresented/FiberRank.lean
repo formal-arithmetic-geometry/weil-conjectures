@@ -122,12 +122,6 @@ lemma HasFiberRank.of_iso {W : Scheme.{u}}
   let ⟨e'⟩ := h
   ⟨(W.fromSpecResidueField x)^*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧.mapIso e.symm ≪≫ e'⟩
 
-/-- A free module of rank `d` has fibre rank `d` everywhere. -/
-lemma hasFiberRank_finiteFree {W : Scheme.{u}} (x : W) (d : ℕ) :
-    HasFiberRank ℓ (Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) W) d)
-      x d :=
-  ⟨upperStarFiniteFreeIso _ _ d⟩
-
 /-- Fibre ranks are compatible with pullback. -/
 lemma HasFiberRank.upperStar {W' W : Scheme.{u}} (g : W' ⟶ W)
     {N : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})

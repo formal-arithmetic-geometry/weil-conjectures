@@ -82,42 +82,4 @@ Source: the generic derived monoidal construction; Stacks 07A4
   unfold D
   exact (extension a T).leftDerivedFunctorOplaxMonoidal
 
-/-- The derived oplax unit is the specified localization-unit composite.
-Source: the definition of the generic derived oplax structure
-(blueprint: def-sfb-quotient-scalar-derived-oplax). -/
-theorem scalarDerivedOplax_η (T : Scheme.{u}) :
-    letI := scalarDerivedOplax a T
-    Functor.OplaxMonoidal.η (D a T) = derivedScalarUnit a T := by
-  let := scalarModuleClosed Λ T
-  let := scalarModuleClosed Λ' T
-  let := scalarModuleBraided Λ T
-  let := scalarModuleBraided Λ' T
-  have := scalarModuleFlat Λ T
-  have := scalarModuleFlat Λ' T
-  have := scalarPreservesKFlat a T
-  let := CondensedRing.internalScalarMonoidal a T
-  have := CondensedRing.internalScalar_preservesFlat a T
-  unfold scalarDerivedOplax derivedScalarUnit D scalarCounit
-  change _ ≫ _ ≫ _ ≫ _ = _
-  rw [Functor.mapHomotopyCategory_η]
-  rfl
-
-/-- The derived oplax unit is invertible on the K-flat regular module.
-Source: the generic derived-unit theorem; Stacks 07A4
-(blueprint: def-sfb-quotient-scalar-derived-oplax). -/
-theorem scalarDerivedOplax_η_isIso (T : Scheme.{u}) :
-    letI := scalarDerivedOplax a T
-    IsIso (Functor.OplaxMonoidal.η (D a T)) := by
-  let := scalarModuleClosed Λ T
-  let := scalarModuleClosed Λ' T
-  let := scalarModuleBraided Λ T
-  let := scalarModuleBraided Λ' T
-  have := scalarModuleFlat Λ T
-  have := scalarModuleFlat Λ' T
-  have := scalarPreservesKFlat a T
-  let := CondensedRing.internalScalarMonoidal a T
-  have := CondensedRing.internalScalar_preservesFlat a T
-  unfold scalarDerivedOplax D
-  exact (extension a T).isIso_leftDerivedFunctorOplaxMonoidal_η
-
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

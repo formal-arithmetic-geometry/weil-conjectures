@@ -565,38 +565,10 @@ theorem alternatingCechAugmentation_naturality
     ((alternatingCechDoubleFunctor U).obj G).ιTotal (ComplexShape.up ℤ) 0 n n
       (Int.zero_add n)) (alternatingCechZero_naturality U (g.f n))
 
-/-- The section-to-total augmentation as a natural transformation.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex (blueprint: def-sc-alternating-cech-total-complex). -/
-def alternatingCechAugmentation :
-    (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-      (ComplexShape.up ℤ) ⟶ alternatingCechTotalFunctor U where
-  app := alternatingCechAugmentationMap U
-  naturality := fun F G g ↦ alternatingCechAugmentation_naturality U F G g
-
 variable
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
   [HasDerivedCategory.{v}
     (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]
-
-/-- The canonical comparison is characterized through every K-injective resolution.
-This equation specifies the roof without choosing any unproved data.
-The resolution need not have injective terms: compare it with one that does. The
-comparison is a homotopy equivalence, preserved by sections and by the explicit
-Čech totalization, so naturality transports the equation to this resolution.
-Source: Stacks, Cohomology, equation-global-sections-to-alternating-cech and
-lemma-alternating-cech-complex-complex (blueprint: def-sc-alternating-cech-total-complex). -/
-def IsAlternatingCechDerivedComparison
-    (β : DerivedCategory.Q.obj ((alternatingCechTotalFunctor U).obj F) ⟶
-      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj
-        (DerivedCategory.Q.obj F)) : Prop :=
-  ∀ (J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    [J.IsKInjective] (i : F ⟶ J) [QuasiIso i],
-    β ≫ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map
-        (DerivedCategory.Q.map i) ≫
-      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorObjQIso J).hom ≫
-      DerivedCategory.Q.map ((alternatingCechAugmentation U).app J) =
-        DerivedCategory.Q.map ((alternatingCechTotalFunctor U).map i)
 
 end
 end AlgebraicGeometry

@@ -112,7 +112,6 @@ comparison. Source: blueprint def-weil-pbc-intrinsic-completion.
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -140,33 +139,6 @@ end AdicTensorNaturality
 section AdicCompletionDescent
 attribute [local irreducible] completedAdicRing HasDerivedCategory.standard
 variable (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-
-private local instance adicComparisonLocallyBijective :
-    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} T
-
-private local instance adicComparisonMonoidal : MonoidalCategory (CompletedAdicModules T d) :=
-  SheafOfModules.monoidalCategory.{t, t + 1, t + 1} (completedAdicCommRing T d)
-private local instance adicComparisonTensorZero :
-    (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
-    (completedAdicCommRing T d)
-private local instance adicComparisonTensorObjZero (M : CompletedAdicModules T d) :
-    ((curriedTensor (CompletedAdicModules T d)).obj M).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
-    (completedAdicCommRing T d) M
-private local instance adicComparisonTensorAdditive :
-    MonoidalPreadditive (CompletedAdicModules T d) :=
-  SheafOfModules.tensorPreadditive.{t + 1, t, t + 1} (completedAdicCommRing T d)
-
-private local instance adicComparisonCoproducts :
-    HasColimitsOfSize.{0, 0} (CompletedAdicModules T d) :=
-  @SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf.{
-    0, 0, t + 1, t, t + 1, t + 1} _ _ _ (completedAdicRing T d)
-    (inferInstance : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{t + 1})
-    (WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} T)
-    (inferInstance : HasColimitsOfSize.{0, 0}
-      (_root_.PresheafOfModules.{t + 1} (completedAdicRing T d).obj))
 
 end AdicCompletionDescent
 

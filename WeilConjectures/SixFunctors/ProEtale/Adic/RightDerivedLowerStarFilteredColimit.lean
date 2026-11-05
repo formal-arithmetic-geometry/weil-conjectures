@@ -90,23 +90,6 @@ theorem preservesColimitsOfShape_discrete_rightDerived_lowerStar (B : Type) (q :
   have := preservesColimitsOfShape_rightDerived_lowerStar f (Finset (Discrete B)) q
   preservesColimitsOfShape_discrete_of_preservesFiniteCoproducts _
 
-/-- For a quasi-compact quasi-separated morphism `f`, the pushforward `f_*` of abelian sheaves on
-the small pro-étale sites commutes with direct sums. -/
-theorem preservesColimitsOfShape_discrete_lowerStar (B : Type) :
-    PreservesColimitsOfShape (Discrete B) (f)_*[Ab.{u + 1}] :=
-  have := preservesColimitsOfShape_discrete_rightDerived_lowerStar f B 0
-  preservesColimitsOfShape_of_natIso ((f)_*[Ab.{u + 1}]).rightDerivedZeroIsoSelf
-
-/-- For a quasi-compact quasi-separated morphism `f`, a direct sum of `f_*`-acyclic abelian
-sheaves is `f_*`-acyclic. -/
-lemma rightAcyclic_lowerStar_of_isColimit_discrete {B : Type}
-    {D : Discrete B ⥤ Sheaf (ProEt.topology X) Ab.{u + 1}} {c : Cocone D} (hc : IsColimit c)
-    (hD : ∀ j, ((f)_*[Ab.{u + 1}]).rightAcyclic (D.obj j)) :
-    ((f)_*[Ab.{u + 1}]).rightAcyclic c.pt := fun q ↦
-  have := preservesColimitsOfShape_discrete_rightDerived_lowerStar f B (q + 1)
-  (isColimitOfPreserves (((f)_*[Ab.{u + 1}]).rightDerived (q + 1)) hc).isZero_pt
-    (Functor.isZero _ fun j ↦ hD j q)
-
 /-- For a quasi-compact quasi-separated morphism `f`, a filtered colimit of `f_*`-acyclic abelian
 sheaves is `f_*`-acyclic. -/
 lemma rightAcyclic_lowerStar_of_isColimit {J : Type} [SmallCategory J] [IsFiltered J]

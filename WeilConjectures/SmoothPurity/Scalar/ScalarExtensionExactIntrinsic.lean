@@ -39,41 +39,6 @@ open CategoryTheory
 open scoped TensorProduct
 open TensorProduct
 
-private noncomputable def rawComparison
-    (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
-    [Preadditive C] [Linear R C] [Limits.HasZeroObject C] [HasShift C ℤ]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
-    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
-    ScalarLocalization R C p ⥤ Rationalization (Submonoid.powers p) C where
-  obj X := (Rationalization.Q (Submonoid.powers p) C).obj X.obj
-  map {X Y} f := Rationalization.tensorHomEquiv (Submonoid.powers p)
-    (Localization.Away p) X.obj Y.obj f
-  map_id X := by
-    change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
-    simp
-  map_comp {X Y Z} f g := by
-    induction f using TensorProduct.induction_on with
-    | zero => simp only [Limits.zero_comp, map_zero, Limits.zero_comp]
-    | tmul a f =>
-      induction g using TensorProduct.induction_on with
-      | zero => simp only [Limits.comp_zero, map_zero, Limits.comp_zero]
-      | tmul b g =>
-        change Rationalization.tensorHomEquiv _ _ _ _
-          (ScalarLocalization.composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _
-        rw [ScalarLocalization.composition_tmul]
-        simp only [Rationalization.tensorHomEquiv_tmul, Functor.map_comp,
-          Linear.smul_comp, Linear.comp_smul, smul_smul, mul_comm]
-      | add g h hg hh =>
-        rw [Preadditive.comp_add X Y Z (a ⊗ₜ[R] f) g h]
-        simp only [_root_.map_add]
-        rw [hg, hh]
-        exact (Preadditive.comp_add _ _ _ _ _ _).symm
-    | add f h hf hh =>
-      rw [Preadditive.add_comp X Y Z f h g]
-      simp only [_root_.map_add]
-      rw [hf, hh]
-      exact (Preadditive.add_comp _ _ _ _ _ _).symm
-
 namespace WeilConjectures
 
 attribute [local irreducible] sfRationalTriangulationDatum

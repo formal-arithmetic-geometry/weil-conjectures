@@ -111,58 +111,15 @@ noncomputable instance : Category (Etale.DerivedCategoryBoundedConstructible A X
   inferInstanceAs <|
     Category (Etale.DerivedCategory.boundedConstructible A X).FullSubcategory
 
-/-- The inclusion of `Dᵇc(X, A)` into the derived category of étale sheaves. -/
-noncomputable def Etale.DerivedCategoryBoundedConstructible.ι :
-    Etale.DerivedCategoryBoundedConstructible A X ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology A) :=
-  (Etale.DerivedCategory.boundedConstructible A X).ι
-
 @[inherit_doc Etale.DerivedCategoryBoundedConstructible]
 scoped notation "Dᵇc(" X ", " A ")" =>
   Etale.DerivedCategoryBoundedConstructible A X
-
-/-- Blueprint `sk-def-sf-categories`: the inclusion of the small category `Dᵇc(X, A)` into the
-ambient bounded derived category `Dᵇ(X, A)` of étale sheaves. -/
-noncomputable def Etale.DerivedCategoryBoundedConstructible.toBounded :
-    Etale.DerivedCategoryBoundedConstructible A X ⥤
-      DerivedCategory.Bounded (Sheaf X.smallEtaleTopology A) :=
-  ObjectProperty.ιOfLE inf_le_left
 
 /-- Membership in `D_c^[a, b](X, A)` as an object property of `D(X_ét)`: bounded constructible
 with homology concentrated in `[a, b]` (blueprint `def-weil-constructible-intervals`). -/
 noncomputable def Etale.DerivedCategory.constructibleIn (a b : ℤ) :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
   Etale.DerivedCategory.boundedConstructible A X ⊓ DerivedCategory.homologyConcentratedIn a b
-
-omit [HasSmallSiteSheafify A] in
-lemma Etale.DerivedCategory.constructibleIn_iff (a b : ℤ)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    Etale.DerivedCategory.constructibleIn A X a b K ↔
-      Etale.DerivedCategory.boundedConstructible A X K ∧
-        DerivedCategory.homologyConcentratedIn a b K :=
-  Iff.rfl
-
-/-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
-
-The small category `D_c^[a, b](X, A)` of bounded constructible complexes of étale sheaves with
-homology concentrated in `[a, b]`, as a full subcategory of `D(X_ét)`. -/
-noncomputable def Etale.DerivedCategoryConstructibleIn (a b : ℤ) : Type _ :=
-  (Etale.DerivedCategory.constructibleIn A X a b).FullSubcategory
-
-noncomputable instance (a b : ℤ) : Category (Etale.DerivedCategoryConstructibleIn A X a b) :=
-  inferInstanceAs <| Category (Etale.DerivedCategory.constructibleIn A X a b).FullSubcategory
-
-/-- The inclusion of `D_c^[a, b](X, A)` into the derived category of étale sheaves. -/
-noncomputable def Etale.DerivedCategoryConstructibleIn.ι (a b : ℤ) :
-    Etale.DerivedCategoryConstructibleIn A X a b ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology A) :=
-  (Etale.DerivedCategory.constructibleIn A X a b).ι
-
-/-- The inclusion `D_c^[a, b](X, A) ⊆ Dᵇc(X, A)`. -/
-noncomputable def Etale.DerivedCategoryConstructibleIn.toBoundedConstructible (a b : ℤ) :
-    Etale.DerivedCategoryConstructibleIn A X a b ⥤
-      Etale.DerivedCategoryBoundedConstructible A X :=
-  ObjectProperty.ιOfLE inf_le_left
 
 end BoundedConstructible
 
@@ -208,38 +165,6 @@ instance : (Etale.DerivedCategory.boundedConstructible A X).IsStableUnderShift �
   infer_instance
 
 variable {A X}
-
-/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
-
-At a finite coefficient stage, `Dᵇc(X, A)` is stable under the truncation `τ^{≤ n}` of the
-canonical t-structure: the homology sheaves of `τ^{≤ n} K` are those of `K` in degrees `≤ n`,
-and zero above. So the canonical truncations restrict to `Dᵇc(X, A)`. -/
-lemma Etale.DerivedCategory.boundedConstructible_truncLE
-    [PreservesFiniteLimits (CategoryTheory.forget A)]
-    {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : Etale.DerivedCategory.boundedConstructible A X K) (n : ℤ) :
-    Etale.DerivedCategory.boundedConstructible A X
-      ((DerivedCategory.TStructure.t.truncLE n).obj K) := by
-  obtain ⟨⟨⟨a, ha⟩, -⟩, hc⟩ := hK
-  refine ⟨⟨⟨a, inferInstance⟩, ⟨n, inferInstance⟩⟩, ?_⟩
-  rw [Etale.DerivedCategory.constructibleHomology_eq] at hc ⊢
-  exact DerivedCategory.homologyProperty_truncLE hc n
-
-/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
-
-At a finite coefficient stage, `Dᵇc(X, A)` is stable under the truncation `τ^{≥ n}` of the
-canonical t-structure: the homology sheaves of `τ^{≥ n} K` are those of `K` in degrees `≥ n`,
-and zero below. -/
-lemma Etale.DerivedCategory.boundedConstructible_truncGE
-    [PreservesFiniteLimits (CategoryTheory.forget A)]
-    {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : Etale.DerivedCategory.boundedConstructible A X K) (n : ℤ) :
-    Etale.DerivedCategory.boundedConstructible A X
-      ((DerivedCategory.TStructure.t.truncGE n).obj K) := by
-  obtain ⟨⟨-, ⟨b, hb⟩⟩, hc⟩ := hK
-  refine ⟨⟨⟨n, inferInstance⟩, ⟨b, inferInstance⟩⟩, ?_⟩
-  rw [Etale.DerivedCategory.constructibleHomology_eq] at hc ⊢
-  exact DerivedCategory.homologyProperty_truncGE hc n
 
 /-- A constructible sheaf placed in degree `n` is a bounded constructible complex: its only
 nonzero homology sheaf is itself, in degree `n`. -/

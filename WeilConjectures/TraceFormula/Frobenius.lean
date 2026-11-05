@@ -97,27 +97,9 @@ lemma frobeniusIterate_succ (m : ℕ) :
   rw [frobeniusIterate, pow_succ]
   rfl
 
-lemma frobeniusIterate_add (m n : ℕ) :
-    frobeniusIterate Φ (m + n) = frobeniusIterate Φ n ≫ frobeniusIterate Φ m := by
-  rw [frobeniusIterate, pow_add]
-  rfl
-
-lemma frobeniusIterate_mul (d n : ℕ) :
-    frobeniusIterate Φ (d * n) = frobeniusIterate (frobeniusIterate Φ d) n := by
-  rw [frobeniusIterate, pow_mul]
-  rfl
-
 @[simp]
 lemma frobeniusIterate_one : frobeniusIterate Φ 1 = Φ := by
   rw [frobeniusIterate_succ, frobeniusIterate_zero, Category.comp_id]
-
-/-- `Φ` commutes with its iterates. -/
-lemma comp_frobeniusIterate_comm (m : ℕ) :
-    Φ ≫ frobeniusIterate Φ m = frobeniusIterate Φ m ≫ Φ := by
-  have h₁ := frobeniusIterate_add Φ m 1
-  have h₂ := frobeniusIterate_add Φ 1 m
-  rw [frobeniusIterate_one] at h₁ h₂
-  rw [← h₁, ← h₂, add_comm]
 
 /-- The underlying morphism of schemes of `Φ_m` is the `m`-th iterate of `Φ.left`. -/
 lemma frobeniusIterate_left (m : ℕ) :
@@ -127,14 +109,6 @@ lemma frobeniusIterate_left (m : ℕ) :
   | succ m ih =>
     rw [frobeniusIterate_succ, Over.comp_left, ih, pow_succ]
     rfl
-
-variable {Φ} in
-/-- A point fixed by `Φ` is fixed by every iterate `Φ_m`. -/
-lemma comp_frobeniusIterate_of_comp {T : Over (Spec (.of k))} {x : T ⟶ X} (hx : x ≫ Φ = x)
-    (m : ℕ) : x ≫ frobeniusIterate Φ m = x := by
-  induction m with
-  | zero => simp
-  | succ m ih => rw [frobeniusIterate_succ, ← Category.assoc, hx, ih]
 
 /-- The rational points `x : s ⟶ X` fixed by the iterate `Φ_m`. -/
 abbrev FixedPoint (m : ℕ) : Type u :=
@@ -158,12 +132,6 @@ lemma comp_comp_frobeniusIterate_of_comp {Y T : Over (Spec (.of k))} {ΦY : Y �
     (hf : Φ ≫ f = f ≫ ΦY) {x : T ⟶ X} {m : ℕ} (hx : x ≫ frobeniusIterate Φ m = x) :
     (x ≫ f) ≫ frobeniusIterate ΦY m = x ≫ f := by
   rw [Category.assoc, ← frobeniusIterate_comp_of_comp hf, ← Category.assoc, hx]
-
-variable {Φ} in
-/-- If `x` is fixed by `Φ_m`, so is its Frobenius translate `x ≫ Φ`. -/
-lemma comp_comp_frobeniusIterate {T : Over (Spec (.of k))} {x : T ⟶ X} {m : ℕ}
-    (hx : x ≫ frobeniusIterate Φ m = x) : (x ≫ Φ) ≫ frobeniusIterate Φ m = x ≫ Φ := by
-  rw [Category.assoc, comp_frobeniusIterate_comm, ← Category.assoc, hx]
 
 end Iterate
 
@@ -225,35 +193,6 @@ lemma iterate_str (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
     ext
     simp
   exact key _ _
-
-/-- The iterates are a cocycle: `φ_{m+n}` is `φ_n` composed with the pullback of `φ_m` along
-`Φ_n`, through the composition isomorphism `L(Φ_n ≫ Φ_m)^* ≅ LΦ_n^* LΦ_m^*` (blueprint
-`lem-trf-iterated-weil-cocycle`). -/
-lemma iterateStr_add (K : WeilBoundedConstructible ℓ Φ) (m n : ℕ) :
-    (K.iterateStr (m + n)).hom =
-      eqToHom (by rw [frobeniusIterate_add]) ≫
-        (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
-          (frobeniusIterate Φ n) (frobeniusIterate Φ m)).hom.app K.carrier ≫
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (frobeniusIterate Φ n)).map (K.iterateStr m).hom ≫
-        (K.iterateStr n).hom := by
-  induction n with
-  | zero =>
-    have h₀ : (K.iterateStr 0).hom =
-        eqToHom (show _ = (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (𝟙 X)).obj K.carrier by rw [frobeniusIterate_zero]) ≫
-          (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app
-            K.carrier :=
-      (Category.id_comp _).symm
-    rw [h₀]
-    exact (boundedConstructibleUpperStarComp_id_aux _ ℓ (frobeniusIterate_zero Φ)
-      (frobeniusIterate_add Φ m 0) (K.iterateStr m).hom).symm
-  | succ n ih =>
-    have h := boundedConstructibleUpperStarComp_cocycle_aux (Profinite.padicAlgClRingObj ℓ) ℓ
-      (frobeniusIterate_succ Φ (m + n)) (frobeniusIterate_add Φ m n)
-      (frobeniusIterate_add Φ m (n + 1)) (frobeniusIterate_succ Φ n) (K.iterateStr m).hom
-      (K.iterateStr n).hom K.str.hom (K.iterateStr (m + n)).hom ih
-    exact h
 
 end WeilBoundedConstructible
 

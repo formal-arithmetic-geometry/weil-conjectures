@@ -223,39 +223,6 @@ lemma Functor.exists_rightDerivedFunctorCompMapDerivedCategoryUnit_app_eq
 variable [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
 
-/-- **The comparison of right derived functors is the mate of the comparison of the exact left
-adjoints.** Let `G ⊣ F` and `G' ⊣ F'` be adjunctions with exact left adjoints and let
-`P₁`, `P₂` be exact functors with isomorphisms `e : P₁ ⋙ G ≅ G' ⋙ P₂` and
-`k : F' ⋙ P₁ ≅ P₂ ⋙ F` compatible with the units. Then the isomorphism
-`RF' ⋙ D(P₁) ≅ D(P₂) ⋙ RF` induced by `k` is the mate of `D(P₁) ⋙ D(G) ≅ D(G') ⋙ D(P₂)`
-for the adjunctions `D(G) ⊣ RF` and `D(G') ⊣ RF'`. -/
-lemma Adjunction.mateEquiv_mapDerivedCategoryRightDerivedAdjunction_restrict (adj : G ⊣ F)
-    (adj' : G' ⊣ F') (e : P₁ ⋙ G ≅ G' ⋙ P₂) (k : F' ⋙ P₁ ≅ P₂ ⋙ F)
-    (h : ∀ N, P₁.map (adj'.unit.app N) ≫ k.hom.app (G'.obj N) =
-      adj.unit.app (P₁.obj N) ≫ F.map (e.hom.app N))
-    (hG : ∀ (K : CochainComplex C₂' ℤ) [K.IsKInjective], IsIso (F.rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient C₂ (ComplexShape.up ℤ)).obj
-        ((P₂.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)))) :
-    mateEquiv adj'.mapDerivedCategoryRightDerivedAdjunction
-        adj.mapDerivedCategoryRightDerivedAdjunction (Functor.mapDerivedCategorySquareIso e).hom =
-      ((Functor.mapDerivedCategoryCompRightDerivedFunctorIsoOfIsIso P₂ F hG).symm ≪≫
-        Functor.rightDerivedFunctorNatIso k.symm ≪≫
-        Functor.rightDerivedFunctorCompMapDerivedCategoryIso F' P₁).inv :=
-  mateEquiv_eq_of_isRightDerivedFunctor (adj.mapHomotopyCategory _) (adj'.mapHomotopyCategory _)
-    (NatTrans.mapHomotopyCategorySquare e.hom _) (NatTrans.mapHomotopyCategorySquare k.hom _)
-    (Adjunction.mapHomotopyCategory_unit_square adj adj' e.hom k.hom h)
-    adj.mapDerivedCategoryRightDerivedAdjunction adj'.mapDerivedCategoryRightDerivedAdjunction
-    G.mapDerivedCategoryFactorsh.hom F.rightDerivedFunctorUnit G'.mapDerivedCategoryFactorsh.hom
-    F'.rightDerivedFunctorUnit
-    ((adj.mapHomotopyCategory _).derivedη_fac_app (HomotopyCategory.quasiIso C₁ (.up ℤ)) _ _)
-    ((adj'.mapHomotopyCategory _).derivedε_fac_app (HomotopyCategory.quasiIso C₂' (.up ℤ)) _ _)
-    P₁.mapDerivedCategoryFactorsh P₂.mapDerivedCategoryFactorsh _
-    (Functor.mapDerivedCategorySquareIso_hom_app_Qh_obj_comp e)
-    (HomotopyCategory.quasiIso C₂' (.up ℤ))
-    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F' P₁)
-    Functor.exists_rightDerivedFunctorCompMapDerivedCategoryUnit_app_eq _
-    (Functor.map_rightDerivedFunctorUnit_app_comp_restrictIso_inv_app k hG)
-
 end MateRestrict
 section DerivedAdjunctionRestrict
 

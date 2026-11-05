@@ -43,40 +43,4 @@ namespace AlgebraicGeometry.Scheme
 
 open Opposite
 
-private noncomputable def fixedModelSchemeIso {X : Scheme.{u}}
-    {B : Type (u + 1)} [CommRing B]
-    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B)) (U : X.ProEt)
-    (M : ModuleCat.{u + 1} B) :
-    (F.over U ≅ (constantSheaf ((ProEt.topology X).over U) _).obj M) ≃
-      ((ProEtale.upperStar (ModuleCat.{u + 1} B) U.hom).obj F ≅
-        (constantSheaf (ProEt.topology U.left) _).obj M) := by
-  have : (ProEt.sliceEquiv X U).inverse.IsDenseSubsite
-      (ProEt.topology U.left) ((ProEt.topology X).over U) := ProEt.sliceDense X U
-  let E := (ProEt.sliceEquiv X U).sheafCongr
-    ((ProEt.topology X).over U) (ProEt.topology U.left) (ModuleCat.{u + 1} B)
-  let r : E.functor.obj (F.over U) ≅
-      (ProEtale.upperStar (ModuleCat.{u + 1} B) U.hom).obj F :=
-    (ObjectProperty.isoMk _ (NatIso.ofComponents (fun _ ↦ Iso.refl _))) ≪≫
-      ((ProEtale.upperStarIsoLocalizationRestriction _ U.hom U.prop).app F).symm
-  let c := ((ProEt.sliceEquiv X U).constantSheafSheafCongrIso
-    ((ProEt.topology X).over U) (ProEt.topology U.left)
-    (ModuleCat.{u + 1} B) (Over.mkIdTerminal (X := U))).app M
-  exact
-    { toFun := fun e ↦ r.symm ≪≫ E.functor.mapIso e ≪≫ c
-      invFun := fun e ↦ E.functor.preimageIso (r ≪≫ e ≪≫ c.symm)
-      left_inv := by intro e; apply Iso.ext; apply E.functor.map_injective; simp [r, c]
-      right_inv := by intro e; apply Iso.ext; simp }
-
-private noncomputable def fixedConstantPullbackIso {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (B : Type (u + 1)) [CommRing B] (M : ModuleCat.{u + 1} B) :
-    (ProEtale.upperStar (ModuleCat.{u + 1} B) f).obj
-        ((constantSheaf (ProEt.topology Y) _).obj M) ≅
-      (constantSheaf (ProEt.topology X) _).obj M :=
-  (Functor.isoWhiskerLeft (constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} B))
-    (Functor.sheafPullbackConstruction.sheafPullbackIso (proEtaleBaseChange f) _
-      (ProEt.topology Y) (ProEt.topology X)).symm).app M ≪≫
-    ((proEtaleBaseChange f).constantSheafsheafPullbackIso (ModuleCat.{u + 1} B)
-      (ProEt.topology Y) (ProEt.topology X) (ProEt.isTerminalMkId Y)
-      ((ProEt.isTerminalMkId Y).isTerminalObj (proEtaleBaseChange f) _)).app M
-
 end AlgebraicGeometry.Scheme

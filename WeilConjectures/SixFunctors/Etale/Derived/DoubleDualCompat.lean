@@ -305,22 +305,6 @@ theorem isIso_of_forall_isIso_leftDerivedUpperStar_map (Λ : Type (u + 1)) [Comm
     (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
       (D((u i)^*[ModuleCat.{u + 1} Λ]).map φ))
 
-/-- Blueprint `lem-weil-delta-restriction`: biduality is local. For a jointly surjective family of
-quasi-compact open immersions `j_i : W_i ⟶ Y` and finite coefficients, `δ_K` is an isomorphism if
-and only if every `δ_{Lj_i^* K}` (relative to `ω_{W_i} = R(j_i ≫ a)^! Λ`) is one. -/
-theorem isIso_verdierDualDoubleDual_app_iff_of_openCover (Λ : Type (u + 1)) [CommRing Λ]
-    [Finite Λ] {Y S : Scheme.{u}} (a : Y ⟶ S) [HasCompactification a] {ι : Type u}
-    {W : ι → Scheme.{u}} (j : ∀ i, W i ⟶ Y) [∀ i, IsOpenImmersion (j i)]
-    [∀ i, HasCompactification (j i)] [∀ i, QuasiCompact (j i)]
-    [∀ i, HasCompactification (j i ≫ a)] [∀ i, QuasiCompact (j i ≫ a)]
-    (hj : ∀ y : Y, ∃ (i : ι) (x : W i), (j i).base x = y)
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso ((verdierDualDoubleDual Λ a).app K) ↔
-      ∀ i, IsIso ((verdierDualDoubleDual Λ (j i ≫ a)).app
-        ((L((j i)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
-  simp only [isIso_verdierDualDoubleDual_app_leftDerivedUpperStar_iff]
-  exact ⟨fun _ _ ↦ inferInstance, isIso_of_forall_isIso_leftDerivedUpperStar_map Λ j hj _⟩
-
 section Proper
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
@@ -331,45 +315,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `lem-weil-delta-proper-pushforward` (formal core): for any square
-`α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` (components `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_* K`), its mate `m` under the
-self-adjunctions of `𝔻_X` and `𝔻_Y` satisfies `Rf_* δ_K ≫ m_{𝔻_X K} = δ_{Rf_* K} ≫ 𝔻_Y α_K`. -/
-theorem map_verdierDualDoubleDual_app_comp_mateEquiv
-    (α : TwoSquare R((f)_*[A]) ((RHom(X)[A]).flip.obj ωX).rightOp ((RHom(Y)[A]).flip.obj ωY).rightOp
-      (R((f)_*[A])).op)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (R((f)_*[A])).map ((derivedHomToIhomIhomNatTrans A X ωX).app K) ≫
-        (mateEquiv (MonoidalClosed.ihomFlipSelfAdjunction (ωX))
-          (MonoidalClosed.ihomFlipSelfAdjunction (ωY)) α).app
-            (op (((RHom(X)[A]).flip.obj ωX).obj (op K))) =
-      (derivedHomToIhomIhomNatTrans A Y ωY).app ((R((f)_*[A])).obj K) ≫
-        ((RHom(Y)[A]).flip.obj ωY).map (α.app K) := by
-  have := unit_mateEquiv
-    (MonoidalClosed.ihomFlipSelfAdjunction (ωX))
-    (MonoidalClosed.ihomFlipSelfAdjunction (ωY)) α K
-  rw [MonoidalClosed.ihomFlipSelfAdjunction_unit_app,
-    MonoidalClosed.ihomFlipSelfAdjunction_unit_app] at this
-  exact this
-
-/-- Blueprint `lem-weil-delta-proper-pushforward`, conditional form over a general coefficient
-category: if the square `α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` is invertible at `K` and its mate is
-invertible at `𝔻_X K`, then `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is.
-It is stated for arbitrary objects `ω_X`, `ω_Y` in place of the dualizing complexes; for proper
-`f` and finite coefficients the square is
-`AlgebraicGeometry.Etale.verdierDualRightDerivedLowerStarSquare`. -/
-theorem isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv
-    (α : TwoSquare R((f)_*[A]) ((RHom(X)[A]).flip.obj ωX).rightOp ((RHom(Y)[A]).flip.obj ωY).rightOp
-      (R((f)_*[A])).op)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [IsIso (α.app K)]
-    (hm : IsIso ((mateEquiv (MonoidalClosed.ihomFlipSelfAdjunction (ωX))
-      (MonoidalClosed.ihomFlipSelfAdjunction (ωY)) α).app
-        (op (((RHom(X)[A]).flip.obj ωX).obj (op K))))) :
-    IsIso ((R((f)_*[A])).map ((derivedHomToIhomIhomNatTrans A X ωX).app K)) ↔
-      IsIso ((derivedHomToIhomIhomNatTrans A Y ωY).app ((R((f)_*[A])).obj K)) := by
-  rw [← isIso_comp_right_iff ((derivedHomToIhomIhomNatTrans A Y ωY).app _)
-    (((RHom(Y)[A]).flip.obj ωY).map (α.app K)),
-    ← map_verdierDualDoubleDual_app_comp_mateEquiv A ωX ωY f α K, isIso_comp_right_iff]
-
 end Proper
 
 section ProperFinite
@@ -379,24 +324,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (a :
   [HasCompactification (f ≫ a)]
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
-
-/-- Blueprint `lem-weil-delta-proper-pushforward`: the Verdier exchange `𝔻_Y Rf_* ≅ Rf_* 𝔻_X`
-for proper `f` (`Rf_! ≅ Rf_*`) and finite coefficients, as a square. -/
-noncomputable def verdierDualRightDerivedLowerStarSquare :
-    TwoSquare R((f)_*[ModuleCat.{u + 1} Λ]) (verdierDual Λ (f ≫ a)).rightOp
-      (verdierDual Λ a).rightOp (R((f)_*[ModuleCat.{u + 1} Λ])).op :=
-  (verdierDualLowerShriekIso _ f (dualizingComplex Λ a) (dualizingComplex Λ (f ≫ a))
-    (derivedHomRightDerivedLowerShriekIsoOfFinite Λ f)
-    (nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f a).some
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f)).hom
-
-/-- Blueprint `lem-weil-delta-proper-pushforward`: the components of the Verdier exchange square
-are isomorphisms. -/
-instance isIso_verdierDualRightDerivedLowerStarSquare_app
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso ((verdierDualRightDerivedLowerStarSquare Λ a f).app K) := by
-  dsimp only [verdierDualRightDerivedLowerStarSquare]
-  infer_instance
 
 end ProperFinite
 

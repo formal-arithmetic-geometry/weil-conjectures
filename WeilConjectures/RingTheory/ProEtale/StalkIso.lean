@@ -328,18 +328,6 @@ lemma bijective_of_bijective {f : R →+* S} (hf : f.BijectiveOnStalks)
       exact ⟨hr₁m, hqm' ▸ hb⟩)
   exact ⟨hinj, hsurj⟩
 
-/-- The first projection `S × T →+* S` is bijective on stalks. -/
-lemma fst (T : Type*) [CommRing T] : (RingHom.fst S T).BijectiveOnStalks := by
-  let _ : Algebra (S × T) S := (RingHom.fst S T).toAlgebra
-  have : Algebra.IsStandardOpenImmersion (S × T) S := ⟨(1, 0), inferInstance⟩
-  exact of_isStandardOpenImmersion (S × T) S
-
-/-- The second projection `S × T →+* T` is bijective on stalks. -/
-lemma snd (T : Type*) [CommRing T] : (RingHom.snd S T).BijectiveOnStalks := by
-  let _ : Algebra (S × T) T := (RingHom.snd S T).toAlgebra
-  have : Algebra.IsStandardOpenImmersion (S × T) T := ⟨(0, 1), inferInstance⟩
-  exact of_isStandardOpenImmersion (S × T) T
-
 /-- A finite product of ring homomorphisms that are bijective on stalks is bijective on stalks,
 provided each factor is bijective on stalks. -/
 lemma pi {ι : Type*} [_root_.Finite ι] {B : ι → Type v} [∀ i, CommRing (B i)]
@@ -384,15 +372,6 @@ end RingHom.BijectiveOnStalks
 
 namespace Algebra.BijectiveOnStalks
 
-lemma comp (R S T : Type*) [CommRing R] [CommRing S] [CommRing T]
-    [Algebra R S] [Algebra S T] [Algebra R T] [IsScalarTower R S T]
-    [Algebra.BijectiveOnStalks R S] [Algebra.BijectiveOnStalks S T] :
-    Algebra.BijectiveOnStalks R T := by
-  refine RingHom.bijectiveOnStalks_algebraMap.mp ?_
-  rw [IsScalarTower.algebraMap_eq R S T]
-  exact (RingHom.bijectiveOnStalks_algebraMap.mpr ‹_›).comp
-    (RingHom.bijectiveOnStalks_algebraMap.mpr ‹_›)
-
 /-- If `R → S → T` is a tower of `R`-algebras such that `R → S` and `R → T` are both bijective
 on stalks, then `S → T` is bijective on stalks. -/
 @[stacks 096D]
@@ -412,12 +391,5 @@ instance (priority := 100) of_isStandardOpenImmersion (R T : Type*) [CommRing R]
     [Algebra R T] [Algebra.IsStandardOpenImmersion R T] : Algebra.BijectiveOnStalks R T :=
   RingHom.bijectiveOnStalks_algebraMap.mp <|
     RingHom.BijectiveOnStalks.of_isStandardOpenImmersion R T
-
-/-- An algebra `R → S` that is bijective on stalks and induces a bijection on prime spectra
-has a bijective algebra map. -/
-lemma bijective_of_bijective [Algebra R S] [Algebra.BijectiveOnStalks R S]
-    (hb : Function.Bijective <| PrimeSpectrum.comap (algebraMap R S)) :
-    Function.Bijective (algebraMap R S) :=
-  (RingHom.bijectiveOnStalks_algebraMap.mpr ‹_›).bijective_of_bijective hb
 
 end Algebra.BijectiveOnStalks

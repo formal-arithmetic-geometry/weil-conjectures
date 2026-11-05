@@ -107,31 +107,4 @@ noncomputable def koszulComplex
   ChainComplex.of (fun n ↦ ModuleCat.of R (⋀[R]^n (Fin r →₀ R)))
     (fun n ↦ ModuleCat.ofHom (koszulBoundary R r f n)) (koszulBoundary_comp R r f)
 
-/-- Tensoring the Koszul differentials with the identity of `M` still gives square zero.
-Source: Stacks, Tag 0623 (blueprint: def-weil-pbc-koszul-complex).
-
-Proof: by `def-weil-pbc-module-tensor-product`, the composite of `rTensor` maps is the
-`rTensor` of the composite and `rTensor` sends zero to zero; apply
-`koszulBoundary_comp`. -/
-theorem koszulBoundary_rTensor_comp (f : Fin r → R)
-    (M : Type v) [AddCommGroup M] [Module R M] (n : ℕ) :
-    ModuleCat.ofHom ((koszulBoundary R r f (n + 1)).rTensor M) ≫
-      ModuleCat.ofHom ((koszulBoundary R r f n).rTensor M) = 0 := by
-  have h : (koszulBoundary R r f n).comp (koszulBoundary R r f (n + 1)) = 0 := by
-    exact congrArg ModuleCat.Hom.hom (koszulBoundary_comp R r f n)
-  apply ModuleCat.hom_ext
-  change ((koszulBoundary R r f n).rTensor M).comp
-    ((koszulBoundary R r f (n + 1)).rTensor M) = 0
-  rw [← LinearMap.rTensor_comp, h, LinearMap.rTensor_zero]
-
-/-- The degreewise tensor product `K_•(f) ⊗_R M`, terms `K_n ⊗_R M`, differentials
-`d_n ⊗ id_M`. Source: Stacks, Tag 0623 and the tensor convention of the node
-(blueprint: def-weil-pbc-koszul-complex). -/
-noncomputable def koszulComplexTensor (f : Fin r → R)
-    (M : Type v) [AddCommGroup M] [Module R M] :
-    ChainComplex (ModuleCat.{max u v} R) ℕ :=
-  ChainComplex.of (fun n ↦ ModuleCat.of R (⋀[R]^n (Fin r →₀ R) ⊗[R] M))
-    (fun n ↦ ModuleCat.ofHom ((koszulBoundary R r f n).rTensor M))
-    (koszulBoundary_rTensor_comp R r f M)
-
 end ExteriorAlgebra

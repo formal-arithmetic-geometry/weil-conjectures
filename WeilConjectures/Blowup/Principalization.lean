@@ -87,12 +87,4 @@ theorem isInvertible_comap_blowupMap : (I.comap I.blowupMap).IsInvertible := by
     exact Ideal.isRegularPrincipal_span_singleton_of_isRegular
       (AffineBlowup.isRegular_awayAlgebraMap_reesX (I.ideal U) a a.2)
 
-/-- **The exceptional divisor is an effective Cartier centre.** The closed subscheme of the
-blow-up cut out by the extended ideal `I · 𝒪_{Bl_I(X)}` is an effective Cartier centre, since
-that ideal is invertible. This is the second half of the blueprint's principalization
-theorem. (blueprint: `thm:nagata-blowup-principalizes-center`, (MLCI1) half) -/
-theorem isEffectiveCartierCenter_subschemeι_comap_blowupMap :
-    IsEffectiveCartierCenter (I.comap I.blowupMap).subschemeι :=
-  I.isInvertible_comap_blowupMap.isEffectiveCartierCenter
-
 end AlgebraicGeometry.Scheme.IdealSheafData

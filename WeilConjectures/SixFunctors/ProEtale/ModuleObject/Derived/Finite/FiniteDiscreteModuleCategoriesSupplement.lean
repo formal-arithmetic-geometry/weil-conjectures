@@ -25,11 +25,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
-/-- The bounded below etale category for these coefficients. -/
-abbrev FiniteDiscreteEtalePlus (T : Scheme.{u}) :=
-  DerivedCategory.Plus (Sheaf T.smallEtaleTopology
-    (ModuleCat.{u + 1} (ULift.{u + 1} B)))
-
 variable (T : Scheme.{u})
   (E : FiniteDiscreteProEtaleSheaves B T ≌ FiniteDiscreteInternalModules B T)
 

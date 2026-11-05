@@ -93,12 +93,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [instance] Encoding.additive Encoding.inverseAdditive
 
-/-- Termwise localization of the specified additive coefficient equivalence.
-Source: Stacks 05RU and 06YY
-(blueprint: def-pe-integral-presentation-encoding). -/
-def Encoding.derived (A : Encoding l E X) :
-    DerivedCategory.{u + 1} (AdicCompletion.Modules l E X) ≌
-      DerivedCategory.{u + 2} (WeilConjectures.scalarReductionSource.{u, u} l E X) :=
-  A.modules.mapDerivedCategory
-
 end AlgebraicGeometry.ProEtale.IntegralPresentation

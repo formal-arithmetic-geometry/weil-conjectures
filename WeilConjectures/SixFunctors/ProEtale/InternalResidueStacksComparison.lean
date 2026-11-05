@@ -140,35 +140,4 @@ noncomputable def coefficientExtensionRingOneField (l : ℕ) [Fact l.Prime] (E :
     exact h.2.2.2.2.1
   Ideal.Quotient.field _
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.integralCoefficientAbLocallyBijective
-  WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
-/-- A bounded constructible complex over the first residue ring `𝒪_E/ϖ_E` has finite Tor
-amplitude. Hence the finite Tor clause in (2) of `sk-prop-integral-criterion` holds
-automatically, `𝒪_E/ϖ_E` being a field.
-Source: Bhatt--Scholze, Remark 6.3.2; Stacks Tags 0651 and 08FC
-(auxiliary; not a blueprint node).
-
-Proof: transport along the coefficient isomorphism of
-`internal_first_residue_reduction_comparison` to the pulled-back discrete residue field, where
-every bounded complex has finite Tor amplitude by `finiteTorAmplitude_of_discreteField`;
-restriction of scalars along an isomorphism preserves and reflects Tor amplitude. -/
-theorem finiteTorAmplitude_of_constantModelBoundedConstructible_residue
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (X : Scheme.{u}) [IsNoetherian X]
-    {L : AdicCompletion.FiniteDerived l E X 0}
-    (hL : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X L) :
-    _root_.DerivedCategory.finiteTorAmplitude _ L := by
-  obtain ⟨e, -⟩ := internal_first_residue_reduction_comparison l E X
-  let F := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientMap e.inv.hom X)
-  have : IsIso e.inv.hom := inferInstanceAs (IsIso ((Mon.forget _).map e.inv))
-  have : F.IsEquivalence := (Mod.comapEquivalenceOfIsIso _).isEquivalence_functor
-  have : F.PreservesFlat := Functor.preservesFlat_of_isEquivalence F
-  let := coefficientExtensionRingOneField l E
-  obtain ⟨a, b, h⟩ := IntegralModelsStacks.finiteTorAmplitude_of_discreteField X
-    (Padic.coefficientExtensionRing l E 1) (F.bounded_mapDerivedCategory_obj hL.1)
-  exact ⟨a, b, (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff F a b L).mp h⟩
-
 end AlgebraicGeometry.ProEtale

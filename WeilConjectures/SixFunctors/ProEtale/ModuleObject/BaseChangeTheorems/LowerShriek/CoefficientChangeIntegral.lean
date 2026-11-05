@@ -73,43 +73,11 @@ lemma boundedConstructibleUpperStarExtendScalarsIso_hom_app_hom
     ObjectProperty.lift_obj_obj, Functor.associator_inv_app, Functor.whiskerRight_app,
     CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp, ObjectProperty.homMk_hom]
 
-lemma boundedConstructibleUpperStarExtendScalarsIso_inv_app_hom
-    (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
-    ((boundedConstructibleUpperStarExtendScalarsIso ℓ E f).inv.app K).hom =
-      (derivedPullIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) f.left).inv.app K.obj := by
-  simp only [Functor.comp_obj, boundedConstructibleUpperStar_obj_obj,
-    boundedConstructibleExtendScalars_obj_obj, boundedConstructibleUpperStarExtendScalarsIso,
-    Functor.whiskeringRight_obj_obj, boundedConstructibleExtendScalarsCompatibility,
-    ObjectProperty.liftCompιIso, boundedConstructibleUpperStarCompatibility,
-    Functor.FullyFaithful.preimageIso_inv, Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerLeft_inv,
-    Iso.refl_hom, Category.assoc, Functor.isoWhiskerRight_inv, Iso.refl_inv,
-    Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.comp_app, ObjectProperty.ι_obj,
-    Functor.associator_hom_app, Functor.whiskerLeft_app, NatTrans.id_app,
-    ObjectProperty.lift_obj_obj, Functor.associator_inv_app, Functor.whiskerRight_app,
-    CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp, ObjectProperty.homMk_hom]
-
 end Components
 
 section OpenImmersion
 
 variable (j : X ⟶ Y) [IsOpenImmersion j.left]
-
-lemma boundedConstructibleOpenImmersionLowerShriekExtendScalarsIso_hom_app_hom
-    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
-    ((boundedConstructibleOpenImmersionLowerShriekExtendScalarsIso ℓ E j).hom.app K).hom =
-      (derivedOpenImmersionShriekIso (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-        j.left).hom.app K.obj := by
-  simp only [Functor.comp_obj, boundedConstructibleExtendScalars_obj_obj,
-    boundedConstructibleOpenImmersionLowerShriek_obj_obj,
-    boundedConstructibleOpenImmersionLowerShriekExtendScalarsIso, Functor.whiskeringRight_obj_obj,
-    boundedConstructibleExtendScalarsCompatibility, ObjectProperty.liftCompιIso,
-    boundedConstructibleOpenImmersionLowerShriekCompatibility,
-    Functor.FullyFaithful.preimageIso_hom, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.refl_hom,
-    Iso.symm_hom, Functor.isoWhiskerRight_hom, Iso.refl_inv,
-    Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.comp_app, ObjectProperty.ι_obj,
-    Functor.associator_hom_app, Functor.whiskerLeft_app, NatTrans.id_app,
-    ObjectProperty.lift_obj_obj, Functor.associator_inv_app, Functor.whiskerRight_app,
-    CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp, ObjectProperty.homMk_hom]
 
 lemma boundedConstructibleOpenImmersionLowerShriekExtendScalarsIso_inv_app_hom
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :

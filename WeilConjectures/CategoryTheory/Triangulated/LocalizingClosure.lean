@@ -75,21 +75,6 @@ containing `P`. -/
 def localizingClosure : ObjectProperty C :=
   fun X ↦ ∀ Q : ObjectProperty C, P ≤ Q → Q.IsLocalizing → Q X
 
-/-- `P` is contained in its localizing closure. -/
-lemma le_localizingClosure : P ≤ P.localizingClosure :=
-  fun _ hX _ hPQ _ ↦ hPQ _ hX
-
-variable {P} in
-/-- The localizing closure of `P` is contained in every localizing property containing `P`. -/
-lemma localizingClosure_le {Q : ObjectProperty C} [Q.IsLocalizing] (h : P ≤ Q) :
-    P.localizingClosure ≤ Q :=
-  fun _ hX ↦ hX Q h inferInstance
-
-/-- The localizing closure is monotone. -/
-lemma localizingClosure_monotone {Q : ObjectProperty C} (h : P ≤ Q) :
-    P.localizingClosure ≤ Q.localizingClosure :=
-  fun _ hX R hQR hR ↦ hX R (h.trans hQR) hR
-
 instance : P.localizingClosure.IsClosedUnderIsomorphisms where
   of_iso e hX Q hPQ hQ := Q.prop_of_iso e (hX Q hPQ hQ)
 
@@ -112,25 +97,5 @@ instance hasCoproducts_fullSubcategory [HasCoproducts.{v} C] (Q : ObjectProperty
 instance preservesColimitsOfShape_ι [HasCoproducts.{v} C] (Q : ObjectProperty C)
     [Q.IsLocalizing] (J : Type v) : PreservesColimitsOfShape (Discrete J) Q.ι :=
   inferInstance
-/-- A localizing property is its own localizing closure. -/
-lemma localizingClosure_eq_self [P.IsLocalizing] : P.localizingClosure = P :=
-  le_antisymm (localizingClosure_le le_rfl) (le_localizingClosure P)
-
-/-- Blueprint `det-proper-image-localizing-principle`: a triangulated functor `F : C ⥤ D`
-preserving coproducts indexed by `Type v` which maps the objects of `P` into `Loc(P')` maps
-`Loc(P)` into `Loc(P')`: the objects `X` with `F X ∈ Loc(P')` form a localizing property. -/
-lemma localizingClosure_le_inverseImage {D : Type*} [Category.{v} D] [HasZeroObject D]
-    [HasShift D ℤ] [Preadditive D] [∀ (n : ℤ), (shiftFunctor D n).Additive] [Pretriangulated D]
-    (P' : ObjectProperty D) {F : C ⥤ D} [F.CommShift ℤ]
-    [F.IsTriangulated] [∀ J : Type v, PreservesColimitsOfShape (Discrete J) F]
-    (h : P ≤ P'.localizingClosure.inverseImage F) :
-    P.localizingClosure ≤ P'.localizingClosure.inverseImage F := by
-  have : (P'.localizingClosure.inverseImage F).IsLocalizing :=
-    { isClosedUnderColimitsOfShape_discrete J :=
-        { colimitsOfShape_le := by
-            rintro X ⟨h⟩
-            exact P'.localizingClosure.prop_of_isColimit
-              (isColimitOfPreserves F h.isColimit) h.prop_diag_obj } }
-  exact localizingClosure_le h
 
 end CategoryTheory.ObjectProperty

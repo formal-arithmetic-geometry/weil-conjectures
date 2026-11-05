@@ -82,7 +82,6 @@ Source: blueprint integral-criterion-reductions, final interpretation; Stacks 00
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -94,16 +93,5 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralPresentation
 attribute [local irreducible] upperStarFromPoint
   InternalAbelianSheafModule.sectionScalarMap
-
-private def restrictComp
-    {C : Type*} [Category C] {J : GrothendieckTopology C}
-    {R S T : Sheaf J RingCat.{u + 1}} (f : R ⟶ S) (g : S ⟶ T) :
-    SheafOfModules.restrictScalars.{u + 1} g ⋙ SheafOfModules.restrictScalars f ≅
-      SheafOfModules.restrictScalars (f ≫ g) :=
-  NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
-    (PresheafOfModules.isoMk (fun U ↦
-      (ModuleCat.restrictScalarsComp'App (f.hom.app U).hom (g.hom.app U).hom
-        ((f ≫ g).hom.app U).hom rfl (M.val.obj U)).symm)
-      (by intros; ext x; rfl))) (by intros; ext U x; rfl)
 
 end AlgebraicGeometry.ProEtale.IntegralPresentation

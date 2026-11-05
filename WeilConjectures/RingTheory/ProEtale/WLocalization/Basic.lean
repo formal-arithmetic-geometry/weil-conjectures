@@ -344,14 +344,6 @@ lemma Stratification.Index.ext_of_left {E : Finset A} {i j : Stratification.Inde
   simp_rw [mem_right_iff, h]
 
 omit [CommRing A] in
-/-- In a disjoint union decomposition `E = E' ⨿ E''`, the right part is determined by the
-left part as `E \ E'`. -/
-lemma Stratification.Index.right_eq_sdiff {E : Finset A} [DecidableEq A]
-    (i : Stratification.Index E) : i.right = E \ i.left := by
-  ext a
-  rw [Finset.mem_sdiff, mem_right_iff]
-
-omit [CommRing A] in
 instance (E : Finset A) : Finite (Stratification.Index E) :=
   Finite.of_injective (β := ↥E.powerset)
     (fun i ↦ ⟨i.left, Finset.mem_powerset.mpr fun _ ha ↦
@@ -553,12 +545,6 @@ lemma ProdStrata.exists_specializes_zeroLocus_ideal {E : Finset A}
   rw [← hq]
   exact Specializes.map hy_spec (PrimeSpectrum.continuous_comap _)
 
-lemma ProdStrata.mem_zeroLocus_ideal_of_isClosed {E : Finset A} {x : PrimeSpectrum (ProdStrata E)}
-    (hx : IsClosed {x}) : x ∈ zeroLocus (ProdStrata.ideal E) := by
-  obtain ⟨y, hmem, hy⟩ := exists_specializes_zeroLocus_ideal x
-  have := hy.mem_closed hx (by simp)
-  grind only [= Set.mem_singleton_iff]
-
 lemma ProdStrata.locClosedSubset_subset_restrict {E F : Finset A} (h : E ⊆ F)
     (i : Stratification.Index F) :
     Generalization.locClosedSubset i.function i.ideal ⊆
@@ -587,14 +573,6 @@ lemma ProdStrata.map_ideal_le {E F : Finset A} (h : E ⊆ F) :
   simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_coe, map_apply]
   exact Generalization.map_ideal_le _ (i.ideal_restrict_le h) (i.function_restrict_dvd_function h)
     (Ideal.mem_map_of_mem _ ((Ideal.mem_pi _ _).mp hx _))
-
-lemma ProdStrata.mapsTo_map_specComap {E F : Finset A} (h : E ⊆ F) :
-    Set.MapsTo (PrimeSpectrum.comap (map h).toRingHom)
-      (zeroLocus (ideal F)) (zeroLocus (ideal E)) := by
-  intro p hp
-  simp only [mem_zeroLocus, SetLike.coe_subset_coe, comap_asIdeal,
-    ← Ideal.map_le_iff_le_comap] at hp ⊢
-  exact (map_ideal_le h).trans hp
 
 variable (A) in
 /-- The diagram whose colimit is the w-localization of `A`. -/

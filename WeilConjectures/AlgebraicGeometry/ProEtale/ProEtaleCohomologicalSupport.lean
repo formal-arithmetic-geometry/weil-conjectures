@@ -25,17 +25,4 @@ universe t
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The cohomological support of a complex of sheaves of `A`-modules on the small
-pro-etale site of `Y` is the set of integers where its cohomology sheaf is nonzero.
-The complex is viewed in `proEtaleDerivedCategory Y A`; cohomology depends only on
-its quasi-isomorphism class. Here nonzero means not a zero object of the category
-of sheaves of modules, rather than inequality with a chosen zero object.
-
-Source: the Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-operations`,
-order 1458 (blueprint: def-weil-cohomological-support). -/
-def proEtaleCohomologicalSupport {Y : Scheme.{t}} {A : Type t} [CommRing A]
-    (K : proEtaleDerivedCategory Y A) : Set ℤ :=
-  {r | ¬ CategoryTheory.Limits.IsZero
-    ((@DerivedCategory.homologyFunctor _ _ _ (HasDerivedCategory.standard _) r).obj K)}
-
 end AlgebraicGeometry.Scheme

@@ -95,10 +95,6 @@ namespace NatTrans.SquareCompatible
 variable {F G H : A ⥤ B} {F' G' H' : A' ⥤ B'} {ιF : F ⋙ T' ≅ T ⋙ F'} {ιG : G ⋙ T' ≅ T ⋙ G'}
   {ιH : H ⋙ T' ≅ T ⋙ H'}
 
-lemma app {α : F ⟶ G} {α' : F' ⟶ G'} (h : SquareCompatible ιF ιG α α') (K : A) :
-    T'.map (α.app K) ≫ ιG.hom.app K = ιF.hom.app K ≫ α'.app (T.obj K) :=
-  h K
-
 lemma id (ι : F ⋙ T' ≅ T ⋙ F') : SquareCompatible ι ι (𝟙 F) (𝟙 F') := by
   intro K
   simp
@@ -120,17 +116,6 @@ lemma isIso_inv {α : F ⟶ G} {α' : F' ⟶ G'} [IsIso α] [IsIso α']
     (h : SquareCompatible ιF ιG α α') :
     SquareCompatible ιG ιF (CategoryTheory.inv α) (CategoryTheory.inv α') :=
   inv (e := asIso α) (e' := asIso α') h
-
-lemma of_eq {ιF₁ ιF₂ : F ⋙ T' ≅ T ⋙ F'} {ιG₁ ιG₂ : G ⋙ T' ≅ T ⋙ G'} {α : F ⟶ G}
-    {α' : F' ⟶ G'} (h : SquareCompatible ιF₁ ιG₁ α α') (hF : ιF₁ = ιF₂) (hG : ιG₁ = ιG₂) :
-    SquareCompatible ιF₂ ιG₂ α α' := by
-  subst hF hG
-  exact h
-
-lemma of_eq_natTrans {α β : F ⟶ G} {α' β' : F' ⟶ G'} (h : SquareCompatible ιF ιG α α')
-    (hα : α = β) (hα' : α' = β') : SquareCompatible ιF ιG β β' := by
-  subst hα hα'
-  exact h
 
 section Whisker
 

@@ -64,22 +64,4 @@ namespace AlgebraicGeometry.ProEtale
 
 open AlgebraicGeometry Scheme
 
-/-- The localizing closure of bounded constructible finite-Tor complexes on a
-pro-etale scheme.
-
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node sk-def-localizing-closure (blueprint: sk-def-localizing-closure).
-The coefficient ring is the condensed ring `Λ`; `condensedRingObj Λ X` is its
-pullback `Λ_X`, and `ConstantModelConstructibleFiniteTor Λ X` is `Dctf(X, Λ)`.
-The localizing closure is the intersection defining the smallest full replete
-triangulated subcategory closed under all ambient coproducts; no completeness
-condition is imposed.
--/
-noncomputable def localizingClosureProEtale
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :=
-  CategoryTheory.localizingClosure
-    (constantModelBoundedConstructible Λ X ⊓ fun K ↦
-      DerivedCategory.finiteTorAmplitude _ K)
-
 end AlgebraicGeometry.ProEtale

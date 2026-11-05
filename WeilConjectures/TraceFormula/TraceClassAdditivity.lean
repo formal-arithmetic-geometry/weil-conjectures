@@ -110,19 +110,6 @@ variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ) {U : Over (Spec (.
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ X)
   [IsOpenImmersion j.left]
 
-/-- The graph correspondence `(𝟙, Φ_m)` with the closed curve piece `K^Z = Rx_* Lx^* K` and its
-coefficient map `u^Z` (blueprint `d-curve-pieces`). -/
-noncomputable abbrev closedPieceGraph (m : ℕ) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) : Correspondence ℓ (K.closedPiece x) :=
-  (K.graph m).withCoeff (K.closedPiece x) (K.closedPieceCoeff m x hx)
-
-/-- The graph correspondence `(𝟙, Φ_m)` with the open curve piece `K^U = j_! Lj^* K` and its
-coefficient map `u^U` (blueprint `d-curve-pieces`). -/
-noncomputable abbrev openPieceGraph (m : ℕ) {ΦU : U ⟶ U}
-    (sq : IsPullback ΦU j j (frobeniusIterate Φ m)) : Correspondence ℓ (K.openPiece j) :=
-  (K.graph m).withCoeff (K.openPiece j)
-    (K.openPieceCoeff j m sq ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app _)
-
 end WeilBoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing

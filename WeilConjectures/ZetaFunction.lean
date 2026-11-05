@@ -74,31 +74,4 @@ with junk value `0` if the residue field is infinite. -/
 noncomputable def pointNorm (x : X) : ℕ :=
   Nat.card (X.residueField x)
 
-lemma pointNorm_pos {x : X} (hx : x ∈ X.finitePoints) : 0 < X.pointNorm x :=
-  have : Finite (X.residueField x) := hx
-  Nat.card_pos
-
-lemma one_lt_pointNorm {x : X} (hx : x ∈ X.finitePoints) : 1 < X.pointNorm x :=
-  have : Finite (X.residueField x) := hx
-  Finite.one_lt_card
-
-/-- The Euler factor `(1 - N(x) ^ (-s))⁻¹` of the zeta function of `X` at a point `x`. -/
-noncomputable def eulerFactor (x : X) (s : ℂ) : ℂ :=
-  (1 - (X.pointNorm x : ℂ) ^ (-s))⁻¹
-
-/-- The (Hasse-Weil) zeta function of an arbitrary scheme `X`: the Euler product
-`ζ_X(s) = ∏ (1 - #κ(x) ^ (-s))⁻¹` over all points `x` of `X` with finite residue field.
-
-The product is an unconditional infinite product (`tprod`) and takes the junk value `1`
-if the family of Euler factors is not multipliable. For `X` of finite type over `ℤ` it
-converges for `re s` sufficiently large (see `multipliable_eulerFactor_of_finiteType`),
-and this definition recovers the classical arithmetic zeta function of `X`. -/
-noncomputable def zeta (s : ℂ) : ℂ :=
-  ∏' x : X.finitePoints, X.eulerFactor x.1 s
-
-@[simp]
-lemma zeta_of_isEmpty [IsEmpty X] (s : ℂ) : X.zeta s = 1 := by
-  have : IsEmpty X.finitePoints := ⟨fun x ↦ IsEmpty.false x.1⟩
-  rw [zeta, tprod_empty]
-
 end AlgebraicGeometry.Scheme

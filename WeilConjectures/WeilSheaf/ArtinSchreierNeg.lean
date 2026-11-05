@@ -137,7 +137,6 @@ lemma lowerStar_map_lowerStarDeckAction_comp_lowerStarExchangeStr {X Y : Scheme.
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk, hσa]
 
-
 /-- `AlgebraicGeometry.ProEtale.pullbackLeftPullbackSndIso_inv_fst` with the base change of an
 object of the pro-étale site written as such. -/
 @[reassoc]
@@ -375,11 +374,6 @@ noncomputable def affineLine.geometricNegIso :
     rw [← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_id]
     congr 1
     exact affineLine.smul_neg_one_comp_smul_neg_one k₀
-
-omit [Finite k₀] in
-lemma affineLine.geometricNegIso_inv :
-    (affineLine.geometricNegIso k₀).inv = (affineLine.geometricNegIso k₀).hom :=
-  rfl
 
 /-- The base change of `AS ≫ [-1] = [-1] ≫ AS`. -/
 lemma affineLine.geometricArtinSchreierMap_comp_geometricNegIso :

@@ -75,24 +75,6 @@ lemma IsMonoidal.of_isIso_of_δ {F G : C ⥤ D} [F.Monoidal] [G.Monoidal] (τ : 
   refine ⟨?_, hμ⟩
   rw [e (ε F ≫ τ.app (𝟙_ C)), key, ← e]
 
-/-- A natural transformation `τ` between lax monoidal functors is monoidal as soon as its
-whiskering `τ ◫ H` with a faithful strong monoidal functor `H` is. -/
-lemma IsMonoidal.of_whiskerRight {F G : C ⥤ D} [F.LaxMonoidal] [G.LaxMonoidal] (τ : F ⟶ G)
-    (H : D ⥤ E) [H.Monoidal] [H.Faithful] [IsMonoidal (Functor.whiskerRight τ H)] :
-    IsMonoidal τ where
-  unit := by
-    have h := IsMonoidal.unit (τ := Functor.whiskerRight τ H)
-    simp only [Functor.LaxMonoidal.comp_ε, Functor.whiskerRight_app, Category.assoc] at h
-    apply H.map_injective
-    rw [← cancel_epi (ε H), H.map_comp, h]
-  tensor X Y := by
-    have h := IsMonoidal.tensor (τ := Functor.whiskerRight τ H) X Y
-    simp only [Functor.LaxMonoidal.comp_μ, Functor.whiskerRight_app, Category.assoc,
-      Functor.comp_obj] at h
-    apply H.map_injective
-    rw [← cancel_epi (μ H (F.obj X) (F.obj Y)), H.map_comp, h, H.map_comp,
-      Functor.LaxMonoidal.μ_natural_assoc]
-
 end NatTrans
 
 namespace Adjunction

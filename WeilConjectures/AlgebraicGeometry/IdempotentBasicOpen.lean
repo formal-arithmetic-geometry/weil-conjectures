@@ -45,29 +45,6 @@ lemma mem_basicOpen_iff_germ_eq_one_of_isIdempotentElem (he : IsIdempotentElem e
   rw [mem_basicOpen_top]
   rcases germ_eq_zero_or_eq_one_of_isIdempotentElem he x with h | h <;> simp [h]
 
-/-- The basic open of an idempotent global section is open and closed. -/
-lemma isClopen_basicOpen_of_isIdempotentElem (he : IsIdempotentElem e) :
-    IsClopen (X.basicOpen e : Set X) := by
-  have hcompl : (X.basicOpen e : Set X)ᶜ = X.basicOpen (1 - e) := by
-    ext x
-    simp only [Set.mem_compl_iff, SetLike.mem_coe, mem_basicOpen_top, map_sub, map_one]
-    rcases germ_eq_zero_or_eq_one_of_isIdempotentElem he x with h | h <;> simp [h]
-  exact ⟨isOpen_compl_iff.mp (hcompl ▸ (X.basicOpen (1 - e)).isOpen), (X.basicOpen e).isOpen⟩
-
-/-- An idempotent global section is determined by its basic open. -/
-lemma eq_of_basicOpen_eq_of_isIdempotentElem {e' : Γ(X, ⊤)} (he : IsIdempotentElem e)
-    (he' : IsIdempotentElem e') (h : X.basicOpen e = X.basicOpen e') : e = e' := by
-  refine TopCat.Presheaf.section_ext X.sheaf ⊤ e e' fun x _ ↦ ?_
-  change X.presheaf.germ ⊤ x trivial e = X.presheaf.germ ⊤ x trivial e'
-  have hx := (mem_basicOpen_iff_germ_eq_one_of_isIdempotentElem he x).symm.trans
-    (h ▸ mem_basicOpen_iff_germ_eq_one_of_isIdempotentElem he' x)
-  rcases germ_eq_zero_or_eq_one_of_isIdempotentElem he x with h₁ | h₁ <;>
-  rcases germ_eq_zero_or_eq_one_of_isIdempotentElem he' x with h₂ | h₂
-  · exact h₁.trans h₂.symm
-  · exact absurd (hx.2 h₂) (by rw [h₁]; exact zero_ne_one)
-  · exact absurd (hx.1 h₁) (by rw [h₂]; exact zero_ne_one)
-  · exact h₁.trans h₂.symm
-
 /-- Every open and closed subset of a scheme is the basic open of an idempotent global section:
 the section which is `1` on the subset and `0` on its complement. -/
 lemma exists_isIdempotentElem_basicOpen_eq {S : Set X} (hS : IsClopen S) :

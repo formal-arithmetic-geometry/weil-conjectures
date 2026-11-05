@@ -40,28 +40,4 @@ namespace CategoryTheory.InternalActionSite
 variable {C : Type u} [SmallCategory C]
   {K L : Cᵒᵖ ⥤ GrpCat.{u}} {R : Cᵒᵖ ⥤ RingCat.{u}}
 
-private theorem forget_additive (J : GrothendieckTopology C) (S : Sheaf J RingCat.{u}) :
-    (forgetSheaf (K := K) J S).Additive where
-  map_add := by intros; rfl
-
-private theorem forget_faithful (J : GrothendieckTopology C) (S : Sheaf J RingCat.{u}) :
-    (forgetSheaf (K := K) J S).Faithful where
-  map_injective := by
-    intro M N f g h
-    apply ObjectProperty.hom_ext
-    apply Subtype.ext
-    exact congrArg SheafOfModules.Hom.val h
-
-@[instance_reducible]
-private noncomputable def actionAbelian [HasFiniteLimits C]
-    (J : Precoverage C) (hJ : J.IsSiteForCoverings)
-    (S : Sheaf J.toGrothendieck CommRingCat.{u}) (P : Presentation K J hJ S) :
-    Abelian (EquivariantSheaf (K := K) J.toGrothendieck
-      (baseRing J.toGrothendieck S)) := by
-  let E := P.sheafEquivalence
-  have : HasFiniteProducts (EquivariantSheaf (K := K) J.toGrothendieck
-      (baseRing J.toGrothendieck S)) :=
-    ⟨fun _ ↦ Adjunction.hasLimitsOfShape_of_equivalence E.functor⟩
-  exact abelianOfEquivalence E.functor
-
 end CategoryTheory.InternalActionSite

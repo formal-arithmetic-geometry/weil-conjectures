@@ -198,7 +198,6 @@ theorem nonempty (p : C ⟶ Spec (.of K)) [IsCurve p] [GeometricallyConnected p]
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
   exact ⟨ofFundamentalGroup p s G⟩
 
-
 section Restriction
 
 variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
@@ -322,18 +321,6 @@ noncomputable def restrictionOfPath [Smooth p] :
         Multiplicative.ofAdd (pU.degreeOver x : ℤ)
       rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one, degreeOver_eq j x hx]
 
-include hj in
-/-- A nonempty open `j : U₀ ⟶ C₀` of a smooth geometrically connected curve over a finite field,
-itself geometrically connected, has a restriction of Weil groups. -/
-theorem Restriction.nonempty [Smooth p] :
-    ∃ (WU : WeilGroup pU) (WC : WeilGroup p), Nonempty (Restriction j WU WC) := by
-  obtain ⟨sU⟩ := pU.nonempty_algebraicClosure_point
-  obtain ⟨sC⟩ := p.nonempty_algebraicClosure_point
-  obtain ⟨GU, _, _⟩ := exists_isFundamentalGroup sU
-  obtain ⟨GC, _, _⟩ := exists_isFundamentalGroup sC
-  obtain ⟨τ⟩ := nonempty_iso_of_fiberFunctor (fiber (sU ≫ j)) (fiber sC)
-  exact ⟨_, _, ⟨restrictionOfPath j hj τ GU GC⟩⟩
-
 end Restriction
 
 section RestrictionRegular
@@ -367,77 +354,6 @@ variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.
   [∀ P, MulAction GU ((fiber sU).obj P)] [IsFundamentalGroup (fiber sU) GU]
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
-
-omit [IsOpenImmersion j] [Nonempty U] in
-/-- The restriction of Weil groups commutes with the degree maps (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (2)). -/
-lemma weilGroupDeg_restrictionHom (w : weilGroup pU sU GU) :
-    weilGroupDeg p sC GC (restrictionHom j hj τ GU GC w) = weilGroupDeg pU sU GU w :=
-  rfl
-
-omit [IsOpenImmersion j] [Nonempty U] in
-/-- The restriction of Weil groups maps the geometric subgroup `ker deg` of `W(U₀)` onto that of
-`W(C₀)` if it is surjective (e.g. for `C₀` regular or normal,
-`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`,
-`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isIntegrallyClosed_stalk`), since it
-preserves degrees. On the underlying elements of `π₁(U₀)` it is the map of fundamental groups
-`AlgebraicGeometry.WeilGroup.restrictionMap` (`AlgebraicGeometry.WeilGroup.restrictionHom_apply`),
-so on the geometric subgroups it is the surjection of part (1) of
-`lem-wf-dense-open-pi1-surjective`. -/
-lemma map_ker_weilGroupDeg_restrictionHom
-    (hsurj : Function.Surjective (restrictionHom j hj τ GU GC)) :
-    (weilGroupDeg pU sU GU).ker.map (restrictionHom j hj τ GU GC) =
-      (weilGroupDeg p sC GC).ker := by
-  have h : weilGroupDeg pU sU GU = (weilGroupDeg p sC GC).comp (restrictionHom j hj τ GU GC) :=
-    rfl
-  rw [h, ← MonoidHom.comap_ker, Subgroup.map_comap_eq_self_of_surjective hsurj]
-
-omit [IsOpenImmersion j] [Nonempty U] in
-/-- **The restriction of Weil groups is surjective** if the map of fundamental groups is: an
-element of degree `n` of `W(C₀)` differs from the image of an element of degree `n` of `W(U₀)`
-by an element of the geometric subgroup, which lifts (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (2)). -/
-lemma restrictionHom_surjective_of_surjective
-    (hsurj : Function.Surjective (restrictionMap j τ GU GC)) :
-    Function.Surjective (restrictionHom j hj τ GU GC) := by
-  rintro ⟨⟨h, n⟩, hw⟩
-  obtain ⟨γ, hγ⟩ := exists_mem_weilGroup_snd_eq_one pU sU GU
-  let g₀ : weilGroup pU sU GU := ⟨(γ, Multiplicative.ofAdd 1), hγ⟩ ^ n.toAdd
-  have hg₀ : (g₀ : GU × Multiplicative ℤ).2 = n := by
-    rw [Subgroup.coe_zpow, Prod.pow_snd, ← ofAdd_zsmul, smul_eq_mul, mul_one, ofAdd_toAdd]
-  have hρg₀ := (restrictionHom j hj τ GU GC g₀).2
-  rw [restrictionHom_apply, hg₀] at hρg₀
-  have h' : (((restrictionMap j τ GU GC g₀.1.1)⁻¹ * h, 1) : GC × Multiplicative ℤ) ∈
-      weilGroup p sC GC := by
-    convert (weilGroup p sC GC).mul_mem ((weilGroup p sC GC).inv_mem hρg₀) hw using 1
-    simp
-  obtain ⟨g₁, hg₁⟩ := hsurj ((restrictionMap j τ GU GC g₀.1.1)⁻¹ * h)
-  have hg₁W : (g₁, (1 : Multiplicative ℤ)) ∈ weilGroup pU sU GU :=
-    (mem_weilGroup_fundamentalGroupMap_iff j hj sU τ GU GC _ _).2 (hg₁ ▸ h')
-  refine ⟨g₀ * ⟨_, hg₁W⟩, Subtype.ext ?_⟩
-  rw [restrictionHom_apply]
-  simp only [Subgroup.coe_mul, Prod.fst_mul, Prod.snd_mul, map_mul, hg₁, hg₀, mul_one,
-    mul_inv_cancel_left]
-
-/-- **The restriction of Weil groups along a dense open of a regular scheme is surjective**
-(blueprint `lem-wf-dense-open-pi1-surjective`, part (2), for `C₀` regular, e.g. smooth over
-`K`): the map of fundamental groups is surjective
-(`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isRegular`). -/
-lemma restrictionHom_surjective_of_isRegular [IsRegular C] [IsLocallyNoetherian C] :
-    Function.Surjective (restrictionHom j hj τ GU GC) :=
-  restrictionHom_surjective_of_surjective j hj τ GU GC
-    (fundamentalGroupMap_surjective_of_isRegular j _ GU GC)
-
-/-- **The restriction of Weil groups along a dense open of a normal scheme is surjective**
-(blueprint `lem-wf-dense-open-pi1-surjective`, part (2)): if the local rings of the locally
-noetherian scheme `C₀` are integrally closed domains, the map of fundamental groups is surjective
-(`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isIntegrallyClosed_stalk`).
--/
-lemma restrictionHom_surjective_of_isIntegrallyClosed_stalk [IsLocallyNoetherian C]
-    (hC : ∀ x : C, IsDomain (C.presheaf.stalk x) ∧ IsIntegrallyClosed (C.presheaf.stalk x)) :
-    Function.Surjective (restrictionHom j hj τ GU GC) :=
-  restrictionHom_surjective_of_surjective j hj τ GU GC
-    (fundamentalGroupMap_surjective_of_isIntegrallyClosed_stalk j _ GU GC hC)
 
 end RestrictionRegular
 
@@ -483,10 +399,6 @@ noncomputable def toStandard : W.carrier ≃ₜ* W.standard.carrier where
       rfl
     exact continuous_subtype_val.comp hψ
 
-lemma toStandard_apply (g : W.carrier) : (W.toStandard g : W.standard.carrier) =
-    W.weilGroupEquiv g :=
-  rfl
-
 /-- The isomorphism with the standard Weil group carries each local Frobenius element to a
 conjugate of the local Frobenius element of the standard Weil group. -/
 lemma isConj_toStandard_frobenius (x : C.finitePoints) :
@@ -501,31 +413,6 @@ lemma isConj_toStandard_frobenius (x : C.finitePoints) :
     Multiplicative.ofAdd (p.degreeOver x.1 : ℤ)
   rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
   exact (W.deg_eq _).symm.trans (W.deg_frobenius x)
-
-/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
-
-The local Frobenius `F_x` at a closed point `x` is well defined up to conjugacy in `W(C₀)`: every
-Frobenius element `f` at `x` of `π₁(C₀, s)`, whatever path from a geometric point over `x` to the
-base point it is transported along, is the image of an element of `W(C₀)` of degree `e_x`, and
-that element is conjugate to `F_x` in `W(C₀)` (and not merely in `π₁(C₀, s)`). -/
-theorem isConj_frobenius_of_isFrobeniusElement (x : C.finitePoints) {f : W.fundamentalGroup}
-    (hf : haveI : Finite (C.residueField x.1) := x.2
-      Scheme.FiniteEtale.IsFrobeniusElement W.basePoint W.fundamentalGroup x.1 f) :
-    IsConj (W.frobenius x) (W.weilGroupEquiv.symm
-      ⟨(f, Multiplicative.ofAdd (p.degreeOver x.1 : ℤ)),
-        haveI : Finite (C.residueField x.1) := x.2
-        hf.mem_weilGroup p⟩) := by
-  have := W.connectedSpace
-  have : Finite (C.residueField x.1) := x.2
-  obtain ⟨c, n, hcW, hc⟩ := (W.isFrobeniusElement_frobenius x).exists_mem_weilGroup_conj p
-    W.basePoint W.fundamentalGroup hf
-  refine isConj_iff.2 ⟨W.weilGroupEquiv.symm ⟨(c, n), hcW⟩,
-    W.weilGroupEquiv.injective (Subtype.ext (Prod.ext ?_ ?_))⟩
-  · simpa using hc
-  · simp only [map_mul, map_inv, MulEquiv.apply_symm_apply, Subgroup.coe_mul,
-      Subgroup.coe_inv, Prod.snd_mul, Prod.snd_inv]
-    rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
-    exact (W.deg_eq _).symm.trans (W.deg_frobenius x)
 
 end Standard
 

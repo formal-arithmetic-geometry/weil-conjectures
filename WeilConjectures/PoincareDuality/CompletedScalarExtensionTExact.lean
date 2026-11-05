@@ -98,34 +98,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-local instance (priority := 6000) instCompletedScalarExtensionTExact1 :
-    (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  integralCoefficientAbLocallyBijective.{u, u} Y
-
-local instance (priority := 6000) instCompletedScalarExtensionTExact2 :
-    HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1} :=
-  integralCoefficientAbSheafify.{u, u} Y
-
-private theorem ordinary_exact :
-    PreservesFiniteLimits (completedOrdinaryScalarExtension.{u, u} l E L ι Y) ∧
-      PreservesFiniteColimits (completedOrdinaryScalarExtension.{u, u} l E L ι Y) := by
-  classical
-  let f : Fin (completedScalarRelativeDegree l E L ι) → integralTowerModules.{u, u} l E Y :=
-    fun _ ↦ SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted.{u, u} l E Y)
-  let : HasBiproduct f :=
-    (Abelian.hasFiniteBiproducts (C := integralTowerModules.{u, u} l E Y)).out _ |>.has_biproduct f
-  obtain ⟨b⟩ := (finiteFreeCompletedScalarComparison.{u, u} l E L ι Y).1
-  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{u} _
-  have h := SheafOfModules.scalarFiniteExact.{u + 1, u, u + 1, u + 2}
-    (completedCoefficientMap.{u, u} l E L ι Y)
-    (completedScalarCochainModel.{u, u} l E L ι Y)
-    ⟨completedScalarRelativeDegree l E L ι, ⟨
-      Sigma.reindex (Equiv.ulift : ULift.{u + 1} (Fin _) ≃ Fin _) f ≪≫
-        (biproductIso f).symm ≪≫ b.symm⟩⟩
-  have : PreservesLimitsOfSize.{0, 0}
-      (completedOrdinaryScalarExtension.{u, u} l E L ι Y) := h.1
-  exact ⟨inferInstance, h.2⟩
-
 /-- Ordinary completed-coefficient extension preserves finite limits.
 Source: Bhatt--Scholze Lemma 6.8.2(1), finite-free coordinate argument, and the
 integral paragraph of prop-constructible-truncations
@@ -150,15 +122,5 @@ Equivalently ordinary sheafified extension is left adjoint to restriction. -/
 @[instance] theorem podCompletedOrdinaryScalarExtension_preservesFiniteColimits :
     PreservesFiniteColimits (completedOrdinaryScalarExtension.{u, u} l E L ι Y) := by
   exact (ordinary_exact l E L ι Y).2
-
-private theorem ordinary_derived_comparison :
-    ∃ e : completedDerivedScalarExtension.{u, u} l E L ι Y ≅
-        (completedOrdinaryScalarExtension.{u, u} l E L ι Y).mapDerivedCategory,
-      ∀ P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ,
-        e.hom.app (DerivedCategory.Q.obj P) ≫
-          (completedOrdinaryScalarExtension.{u, u} l E L ι Y).mapDerivedCategoryFactors.hom.app P =
-          completedScalarCounit.{u, u} l E L ι Y P := by
-  obtain ⟨c, hc⟩ := scalar_exact_comparison (l := l) (E := E) (L := L) (ι := ι) Y
-  exact ⟨c.symm, hc⟩
 
 end WeilConjectures

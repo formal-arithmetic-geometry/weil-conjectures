@@ -48,16 +48,6 @@ namespace CategoryTheory.Adjunction
 
 variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G G' : D ⥤ C}
 
-/-- A variant of `CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit` for an isomorphism
-`e` which is equal to `rightAdjointUniq adj₁ adj₂`. Applied with `he := rfl`, it avoids unifying
-`e` with `rightAdjointUniq adj₁ adj₂` under the projections `Iso.hom` and `NatTrans.app`, which
-can be very expensive for functors between derived categories. -/
-lemma map_hom_app_counit_of_eq_rightAdjointUniq (adj₁ : F ⊣ G) (adj₂ : F ⊣ G') (e : G ≅ G')
-    (he : e = adj₁.rightAdjointUniq adj₂) (x : D) :
-    F.map (e.hom.app x) ≫ adj₂.counit.app x = adj₁.counit.app x := by
-  subst he
-  exact rightAdjointUniq_hom_app_counit adj₁ adj₂ x
-
 end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry

@@ -31,82 +31,11 @@ open scoped TensorProduct
 
 namespace LocalizedModule
 
-/-- Localization preserves composition, addition and identity (clause (1)).
-Source: Stacks Project, Algebra, Definition 07JZ and Lemma 07K0
-(blueprint: lem-weil-pbc-formal-glueing-canonical-maps).
-Proof, step 1: both composites take q/e^n to h(k(q))/e^n; both sums take it to
-(h(q)+h'(q))/e^n; the localized identity fixes every fraction. Fractions exhaust the module. -/
-theorem away_map_functorial {R : Type u} [CommRing R]
-    {Q : Type v₁} {Q' : Type v₂} {Q'' : Type v₃}
-    [AddCommGroup Q] [Module R Q] [AddCommGroup Q'] [Module R Q']
-    [AddCommGroup Q''] [Module R Q''] (e : R)
-    (k : Q →ₗ[R] Q') (h h' : Q' →ₗ[R] Q'') :
-    let T := Submonoid.powers e
-    let lQ := mkLinearMap T Q
-    let lQ' := mkLinearMap T Q'
-    let lQ'' := mkLinearMap T Q''
-    IsLocalizedModule.map T lQ lQ'' (h.comp k) =
-      (IsLocalizedModule.map T lQ' lQ'' h).comp (IsLocalizedModule.map T lQ lQ' k) ∧
-    IsLocalizedModule.map T lQ' lQ'' (h + h') =
-      IsLocalizedModule.map T lQ' lQ'' h + IsLocalizedModule.map T lQ' lQ'' h' ∧
-    IsLocalizedModule.map T lQ lQ LinearMap.id = LinearMap.id := by
-  dsimp only
-  exact ⟨IsLocalizedModule.map_comp' _ _ _ _ k h,
-    (IsLocalizedModule.map _ _ _).map_add h h', IsLocalizedModule.map_id _ _⟩
-
 end LocalizedModule
 
 namespace FormalGlueing
 
 open CategoryTheory
-
-/-- The induced S-action has the given restricted R-action, the localization map is
-S-linear, and localizing an S-linear map gives an S-linear map (clause (1)).
-Source: Stacks Project, More on Algebra, Remark 05EL and Algebra, Definition 07JZ
-(blueprint: lem-weil-pbc-formal-glueing-canonical-maps).
-Proof, step 2: localize the R-linear endomorphisms q ↦ s • q. Step 1 preserves
-m₁ = id, mₛ₊ₜ = mₛ + mₜ and mₛₜ = mₛ ∘ mₜ, giving the module laws.
-The formula on fractions identifies the restricted R-action and makes the localization
-map S-linear. For an S-linear h, h(sq)/e^n = s h(q)/e^n, proving its S-linearity.
-The action is the existing `localizedSModule`, defined by exactly this fraction formula. -/
-theorem localizedSModule_properties {R : Type u} {S : Type w}
-    [CommRing R] [CommRing S] (φ : R →+* S) (e : R)
-    (Q : ModuleCat.{v₁} S) (Q' : ModuleCat.{v₂} S) (h : Q →ₗ[S] Q') :
-    let m := localizedSModule φ e Q
-    let m' := localizedSModule φ e Q'
-    (∀ (s : S) (q : Q) (n : ℕ),
-      m.smul s (LocalizedModule.mk (show restrict φ Q from q)
-        ⟨e ^ n, ⟨n, rfl⟩⟩) =
-        LocalizedModule.mk (S := Submonoid.powers e)
-          (show restrict φ Q from s • q) ⟨e ^ n, ⟨n, rfl⟩⟩) ∧
-    (∀ (r : R) (x : localize e (restrict φ Q)), m.smul (φ r) x = r • x) ∧
-    (∀ (s : S) (q : Q),
-      LocalizedModule.mk (show restrict φ Q from s • q) 1 =
-        m.smul s (LocalizedModule.mk (show restrict φ Q from q) 1)) ∧
-    (∀ (s : S) (x : localize e (restrict φ Q)),
-      localMap e (restrictMap φ h) (m.smul s x) =
-        m'.smul s (localMap e (restrictMap φ h) x)) := by
-  dsimp only
-  have action (M : ModuleCat.{v₁} S) (s : S) (q : M) (t : Submonoid.powers e) :=
-    (exists_localized_s_module φ e M).choose_spec s q t
-  have action' (s : S) (q : Q') (t : Submonoid.powers e) :=
-    (exists_localized_s_module φ e Q').choose_spec s q t
-  refine ⟨fun s q n ↦ action Q s q _, ?_, ?_, ?_⟩
-  · intro r x
-    induction x using LocalizedModule.induction_on with
-    | _ q t =>
-      rw [action]
-      exact (LocalizedModule.smul'_mk r q t).symm
-  · intro s q
-    exact (action Q s q 1).symm
-  · intro s x
-    induction x using LocalizedModule.induction_on with
-    | _ q t =>
-      rw [action]
-      simp only [localMap, IsLocalizedModule.map_LocalizedModules]
-      rw [action']
-      exact congrArg (fun q ↦ LocalizedModule.mk (show restrict φ Q' from q) t)
-        (h.map_smul s q)
 
 private theorem fraction_cancel {R : Type u} [CommRing R]
     {M : Type v} [AddCommGroup M] [Module R M] {T : Submonoid R} (m : M) (t : T) :
@@ -344,7 +273,5 @@ theorem compare_properties {R : Type u} {S : Type w}
       intro x
       exact (IsLocalizedModule.linearEquiv_apply T _ t x).symm
     exact hE.symm ▸ E.bijective
-
-
 
 end FormalGlueing

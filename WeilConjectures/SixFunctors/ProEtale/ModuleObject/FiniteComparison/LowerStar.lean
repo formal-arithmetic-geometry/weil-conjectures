@@ -47,14 +47,6 @@ namespace CategoryTheory.Adjunction
 variable {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Category* D']
   (eC : C ≌ C') (eD : D ≌ D') {L : D ⥤ C} {R : C ⥤ D} {L' : D' ⥤ C'} {R' : C' ⥤ D'}
 
-/-- Given equivalences `eC : C ≌ C'`, `eD : D ≌ D'` and adjunctions `L ⊣ R`, `L' ⊣ R'`, an
-isomorphism `eC ⋙ R' ≅ R ⋙ eD` of right adjoints induces the conjugate isomorphism
-`eD ⋙ L' ≅ L ⋙ eC` of left adjoints. -/
-noncomputable def leftAdjointCompEquivalenceIso (adj : L ⊣ R) (adj' : L' ⊣ R')
-    (i : eC.functor ⋙ R' ≅ R ⋙ eD.functor) : eD.functor ⋙ L' ≅ L ⋙ eC.functor :=
-  (conjugateIsoEquiv (adj.comp eC.toAdjunction) (eD.toAdjunction.comp adj')).symm
-    (Iso.inverseCompIso (Iso.isoCompInverse i.symm ≪≫ Functor.associator _ _ _))
-
 end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry.ProEtale
@@ -81,32 +73,5 @@ noncomputable def finiteCoefficientDerivedLowerStarIso :
       (finiteCoefficientModEquivalence Y T).functor
 
 /-! ### Extension by zero -/
-
-/-- **The finite-coefficient comparison commutes with extension by zero** along an open
-immersion `j`: `Φ_U ⋙ j_! ≅ j_!⟦T̲⟧ ⋙ Φ_X`, the conjugate of
-`upperStarFiniteCoefficientModEquivalenceIso` along the adjunctions `j_! ⊣ j^*`. -/
-noncomputable def finiteCoefficientModOpenImmersionLowerShriekIso {U : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] :
-    (finiteCoefficientModEquivalence U T).functor ⋙
-        (j)_!open[ModuleCat.{u + 1} (ULift.{u + 1} T)] ≅
-      (j)_!open⟦Profinite.continuousMapRingObj T⟧ ⋙
-        (finiteCoefficientModEquivalence X T).functor :=
-  Adjunction.leftAdjointCompEquivalenceIso _ _
-    (CondensedRing.openImmersionLowerShriekUpperStarAdjunction
-      (Profinite.continuousMapRingObj T) j)
-    (ProEtale.openImmersionLowerShriekUpperStarAdjunction _ j)
-    (upperStarFiniteCoefficientModEquivalenceIso j T).symm
-
-/-- **The derived finite-coefficient comparison commutes with extension by zero** along an open
-immersion `j`: `Φ_U ⋙ Dj_! ≅ Dj_!⟦T̲⟧ ⋙ Φ_X`, both extensions by zero being exact. -/
-noncomputable def finiteCoefficientDerivedOpenImmersionLowerShriekIso {U : Scheme.{u}}
-    (j : U ⟶ X) [IsOpenImmersion j] :
-    (finiteCoefficientDerivedEquivalence U T).functor ⋙
-        D((j)_!open[ModuleCat.{u + 1} (ULift.{u + 1} T)]) ≅
-      D((j)_!open⟦Profinite.continuousMapRingObj T⟧) ⋙
-        (finiteCoefficientDerivedEquivalence X T).functor :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (finiteCoefficientModOpenImmersionLowerShriekIso T j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
 
 end AlgebraicGeometry.ProEtale

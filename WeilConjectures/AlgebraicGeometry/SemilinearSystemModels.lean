@@ -599,108 +599,7 @@ variable (F : ℕ → Sheaf J CommRingCat.{r})
 
 include hα
 
-/-- A compatible coefficient map induces the unique sectionwise ring-system map.
-Source: Zheng 4.1; Stacks 03CZ (auxiliary; not a blueprint node).
-Proof: use α_n on each section at (n,U). Naturality in U is sheaf-map naturality;
-horizontal naturality follows by induction from hα. Component extensionality proves
-uniqueness. Thus this is the given coefficient map, not a chosen unrelated morphism. -/
-theorem systemMap_existsUnique :
-    ∃! f : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ,
-      ∀ (n : ℕ) (U : Cᵒᵖ), f.hom.app (op (n, U.unop)) = (α n).hom.app U := by
-  let a : rings.{c, v, r} J B τ ⟶ rings.{c, v, r} J F σ :=
-    NatTrans.ofOpSequence α (fun n ↦ by
-      simpa only [rings, Functor.ofOpSequence_map_homOfLE_succ] using (hα n).symm)
-  let f : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ :=
-    ⟨Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := C)).functor
-      (Functor.uncurry.map (Functor.whiskerRight a (sheafToPresheaf J CommRingCat.{r})))⟩
-  refine ⟨f, fun _ _ ↦ rfl, ?_⟩
-  intro g hg
-  apply Sheaf.hom_ext
-  apply NatTrans.ext
-  funext U
-  exact hg U.unop.1 (op U.unop.2)
-
-/-- The coefficient-system map uniquely specified by its components α_n.
-Source: Zheng 4.1 (auxiliary; not a blueprint node). -/
-def systemMap : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ :=
-  (systemMap_existsUnique.{c, v, r} J B τ F σ α hα).exists.choose
-
-/-- Restriction of scalars commutes with evaluation by the identity on sections.
-Source: Stacks 03CZ (auxiliary; not a blueprint node).
-Proof: both functors keep the same section groups and restrict the B_n action along
-α_n. The component identity is linear and natural, and determines the comparison
-uniquely. Its inverse is the same section identity. -/
-theorem restrictionEvaluation_existsUnique (n : ℕ) :
-    ∃! δ : res.{c, v, r} (systemMap.{c, v, r} J B τ F σ α hα) ⋙
-        evaluation.{c, v, r} J B τ n ≅
-      evaluation.{c, v, r} J F σ n ⋙ res.{c, v, r} (α n),
-      ∀ (M : Systems.{c, v, r} J F σ) (U : Cᵒᵖ),
-        HEq (fun x ↦ ((δ.hom.app M).val.app U) x)
-          (fun x : M.val.obj (op (n, U.unop)) ↦ x) := by
-  let φB := eqToHom (evaluation_ring.{c, v, r} J B τ n).symm
-  let φF := eqToHom (evaluation_ring.{c, v, r} J F σ n).symm
-  let a := (sheafCompose (coefficientSequenceTopology J)
-    (forget₂ CommRingCat.{r} RingCat.{r})).map (systemMap.{c, v, r} J B τ F σ α hα)
-  let b := (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map (α n)
-  have he : φB ≫ ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{r}
-      J (coefficientSequenceTopology J)).map a = b ≫ φF := by
-    apply Sheaf.hom_ext
-    apply NatTrans.ext
-    funext U
-    have hB : φB.hom.app U = 𝟙 _ := by
-      dsimp only [φB]
-      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
-      rfl
-    have hF : φF.hom.app U = 𝟙 _ := by
-      dsimp only [φF]
-      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
-      rfl
-    change φB.hom.app U ≫ _ = _ ≫ φF.hom.app U
-    rw [hB, hF, Category.id_comp, Category.comp_id]
-    exact congrArg (fun f ↦ (forget₂ CommRingCat.{r} RingCat.{r}).map f)
-      ((systemMap_existsUnique.{c, v, r} J B τ F σ α hα).exists.choose_spec n U)
-  let δ : res.{c, v, r} (systemMap.{c, v, r} J B τ F σ α hα) ⋙
-      evaluation.{c, v, r} J B τ n ≅
-        evaluation.{c, v, r} J F σ n ⋙ res.{c, v, r} (α n) :=
-    SheafOfModules.pushforwardComp (F := Prod.sectR n C) (G := 𝟭 (ℕ × C))
-      (K' := coefficientSequenceTopology J)
-      (R' := ring.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J F σ))
-      φB a ≪≫
-      SheafOfModules.pushforwardCongr he ≪≫
-      (SheafOfModules.pushforwardComp (F := 𝟭 C) (G := Prod.sectR n C)
-        (K := J) (K' := coefficientSequenceTopology J)
-        (R := ring.{c, v, r} J (F n))
-        (R' := ring.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J F σ))
-        b φF).symm
-  refine ⟨δ, fun _ _ ↦ HEq.rfl, ?_⟩
-  intro δ' hδ'
-  apply Iso.ext
-  apply NatTrans.ext
-  funext M
-  ext U x
-  exact congrFun (eq_of_heq (hδ' M U)) x
-
-/-- The derived restriction comparison is the localization of the identity on sections.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
-def restrictionEvaluation (n : ℕ) :
-    resD.{c, v, r} (systemMap.{c, v, r} J B τ F σ α hα) ⋙ e.{c, v, r} J B τ n ≅
-      e.{c, v, r} J F σ n ⋙ resD.{c, v, r} (α n) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso
-      (restrictionEvaluation_existsUnique.{c, v, r} J B τ F σ α hα n).exists.choose ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
-
 end RingSystemMap
-
-/-- Termwise localization with the standard derived-category instances explicit.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
-def derivedExact {C₂ : Type c₂} [Category.{v₂} C₂] [EssentiallySmall.{r} C₂]
-    (J₂ : GrothendieckTopology C₂) (R : Sheaf J CommRingCat.{r})
-    (R₂ : Sheaf J₂ CommRingCat.{r}) (F : Mod.{c, v, r} J R ⥤ Mod.{c₂, v₂, r} J₂ R₂)
-    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
-    D.{c, v, r} J R ⥤ D.{c₂, v₂, r} J₂ R₂ :=
-  @Functor.mapDerivedCategory _ _ _ (hasDerived.{c, v, r} J R)
-    _ _ _ (hasDerived.{c₂, v₂, r} J₂ R₂) F _ _ _
 
 end Foundation
 
@@ -761,18 +660,6 @@ abbrev totalTensor (R : Sheaf J CommRingCat.{max c v r}) :=
   @coefficientTotalTensor.{r, c, v} C _ J
     (abelianSheafify.{c, v, max c v r} J)
     (locallyBijective.{c, v, max c v r} J) R
-
-/-- Tensor of ordinary morphisms in the same canonical monoidal structure.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
-def ordinaryTensorHom (R : Sheaf J CommRingCat.{max c v r})
-    {M N M' N' : Mod.{c, v, max c v r} J R} (f : M ⟶ M') (g : N ⟶ N') :
-    ordinaryTensor.{c, v, r} J R M N ⟶ ordinaryTensor.{c, v, r} J R M' N' :=
-  letI : HasSheafify J AddCommGrpCat.{max c v r} :=
-    abelianSheafify.{c, v, max c v r} J
-  letI : J.WEqualsLocallyBijective AddCommGrpCat.{max c v r} :=
-    locallyBijective.{c, v, max c v r} J
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients.{c, v, max c v r} R
-  (SheafOfModules.monoidalCategory.{v, c, max c v r} R).tensorHom f g
 
 /-- The actual total-tensor summand inclusion, with the required instances explicit.
 Source: Stacks 06YN (auxiliary; not a blueprint node). -/

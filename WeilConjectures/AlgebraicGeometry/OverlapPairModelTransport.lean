@@ -31,13 +31,6 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The tensor and abstract pullbacks are canonically identified by their adjunctions.
-Source: Stacks Project, Tag 0096.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
-abbrev overlapTensorComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
-    Scheme.Modules.tensorPullback p ≅ Scheme.Modules.pullback p :=
-  overlapAdjunctionComparison p
-
 variable {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
   (c : Cone (R.op ⋙ Scheme.Spec)) {i : I} {Xi : Scheme.{u}}
   (f : Xi ⟶ Spec (R.obj i)) {j : I} (hij : i ≤ j)
@@ -160,7 +153,6 @@ abbrev overlapModelConjugate
   exact overlapConjugatedTransition U (overlapLimitMap R c f hij) N M e a b
     (overlapModelLimitToBase R c f hij U a b) ha hb
     (pullback.lift_fst _ _ _) (pullback.lift_fst _ _ _) _ _ ta tb
-
 
 /-- The map from a stage overlap to the original overlap, by its two projections.
 Source: Stacks Project, Tag 01ZR (2).
@@ -307,10 +299,6 @@ attribute [local irreducible] Scheme.Modules.pullback Scheme.Modules.tensorPullb
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-
-
-
-
 
 private theorem overlap_model_restrictions_compose
     {X Y Z H₀ Hₖ Hlim : Scheme.{u}} (U : X.OpenCover.{u})

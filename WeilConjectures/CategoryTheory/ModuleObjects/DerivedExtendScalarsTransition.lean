@@ -131,24 +131,4 @@ lemma map_comp_derivedReductionTransition_app {A B : DerivedCategory (Mod C R)}
   congr 1
   exact (mapDerivedCategoryComapCompIso φ' ψ φ h).hom.naturality _
 
-/-- The reduction of the derived extension of scalars `S' ⊗ᴸ_R f` of a morphism `f` is
-`S ⊗ᴸ_R f`. -/
-lemma derivedExtendScalarsReduction_map {A B : DerivedCategory (Mod C R)} (f : B ⟶ A) :
-    derivedExtendScalarsReduction φ' ψ φ h ((extendScalars φ').leftDerivedFunctor.map f) =
-      (extendScalars φ).leftDerivedFunctor.map f := by
-  rw [derivedExtendScalarsReduction, ← Functor.comp_map,
-    ← (derivedExtendScalarsCompIso φ' ψ φ h).hom.naturality_assoc, Iso.hom_inv_id_app,
-    Category.comp_id]
-
-/-- The reduction of a composite is the composite of the reductions. -/
-lemma derivedExtendScalarsReduction_comp {A B D : DerivedCategory (Mod C R)}
-    (s : (extendScalars φ').leftDerivedFunctor.obj B ⟶
-      (extendScalars φ').leftDerivedFunctor.obj A)
-    (s' : (extendScalars φ').leftDerivedFunctor.obj A ⟶
-      (extendScalars φ').leftDerivedFunctor.obj D) :
-    derivedExtendScalarsReduction φ' ψ φ h (s ≫ s') =
-      derivedExtendScalarsReduction φ' ψ φ h s ≫ derivedExtendScalarsReduction φ' ψ φ h s' := by
-  simp only [derivedExtendScalarsReduction, Functor.map_comp, Category.assoc,
-    Iso.inv_hom_id_app_assoc]
-
 end CategoryTheory.Mod

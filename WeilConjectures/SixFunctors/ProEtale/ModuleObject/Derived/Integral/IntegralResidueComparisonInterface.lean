@@ -44,8 +44,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-
-
 /-- Derived direct image with its domain and codomain exposed explicitly. -/
 @[irreducible] noncomputable def residueExchangeLowerStar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -62,47 +60,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
     unfold residueExchangeUpperStar residueExchangeLowerStar
     exact derivedUpperStarLowerStarAdjunction Λ f
 
-
-
-
 namespace IntegralResiduePullComparisons
 
 variable {ℓ E} (c : IntegralResiduePullComparisons.{u} ℓ E)
-
-/-- The direct-image comparison is the adjunction mate of the inverse pull comparison.
-This is an actual construction; no direct-image isomorphism is chosen.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), projection comparison by adjunction.
-(blueprint: def-weil-pbc-residue-exchange-comparison-interface). -/
-noncomputable def push {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    residueExchangeLowerStar (integralCoeff ℓ E) f ⋙ residueExchangeReduction ℓ E Y ⟶
-      residueExchangeReduction ℓ E X ⋙
-        residueExchangeLowerStar
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f :=
-  (mateEquiv (residueExchangeAdjunction (integralCoeff ℓ E) f)
-      (residueExchangeAdjunction
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f)
-      (TwoSquare.mk _ _ _ _ (c.pull f).inv)).natTrans
-
-/-- The defining counit equation for the actual direct-image comparison.
-Source: Mathlib, mateEquiv_counit.
-(blueprint: lem-weil-pbc-integral-residue-push-counit)
-Proof. Apply the counit identity of the mates equivalence to the inverse pull comparison.
--/
-theorem push_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : residueExchangeDerived (integralCoeff ℓ E) X) :
-    (residueExchangeUpperStar
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map
-        ((c.push f).app K) ≫
-      (residueExchangeAdjunction
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).counit.app
-        ((residueExchangeReduction ℓ E X).obj K) =
-    (c.pull f).inv.app ((residueExchangeLowerStar (integralCoeff ℓ E) f).obj K) ≫
-      (residueExchangeReduction ℓ E X).map
-        ((residueExchangeAdjunction (integralCoeff ℓ E) f).counit.app K) := by
-  exact mateEquiv_counit (residueExchangeAdjunction (integralCoeff ℓ E) f)
-    (residueExchangeAdjunction
-      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f)
-    (TwoSquare.mk _ _ _ _ (c.pull f).inv) K
 
 end IntegralResiduePullComparisons
 
@@ -133,13 +93,5 @@ composite right adjoints. No exactness of extension of scalars is used. -/
       (residueExchangeReductionAdjunction ℓ E X)).ofNatIsoLeft (c.pull f))
 
 end IntegralResiduePullComparisons
-
-/-- The restricted residue coefficient, viewed in degree zero. -/
-noncomputable abbrev residueExchangeCoefficient (T : Scheme.{u}) :
-    residueExchangeDerived (integralCoeff ℓ E) T :=
-  (DerivedCategory.singleFunctor _ 0).obj
-    ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj
-      (Mod.regular (condensedRingObj
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

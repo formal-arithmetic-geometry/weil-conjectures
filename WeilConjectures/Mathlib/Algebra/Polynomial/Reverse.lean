@@ -70,12 +70,4 @@ theorem reverse_multiset_prod_X_sub_C [NoZeroDivisors R] (s : Multiset R) :
   | empty => simpa using reverse_C (1 : R)
   | cons a s ih => simp [ih]
 
-/-- Over a domain, the reverse of a finite product is the product of the reverses. -/
-theorem reverse_prod_of_domain [NoZeroDivisors R] {ι : Type*} (s : Finset ι) (f : ι → R[X]) :
-    (∏ i ∈ s, f i).reverse = ∏ i ∈ s, (f i).reverse := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => simpa using reverse_C (1 : R)
-  | insert a s ha ih => rw [Finset.prod_insert ha, Finset.prod_insert ha, reverse_mul_of_domain, ih]
-
 end Polynomial

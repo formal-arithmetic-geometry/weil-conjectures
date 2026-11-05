@@ -109,17 +109,6 @@ lemma IsConnectedCurve.nonempty (f : C ⟶ Spec (.of K)) [IsConnectedCurve f] : 
   have := IsConnectedCurve.connectedSpace' f
   inferInstance
 
-variable (K) in
-/-- Blueprint `def-sc-curves`: the category `𝒞` of smooth separated connected curves over `K`,
-the full subcategory of `K`-schemes `C` whose structure morphism is smooth and a connected curve
-(`AlgebraicGeometry.IsConnectedCurve`, which includes separatedness). -/
-def SmoothConnectedCurve : Type (u + 1) :=
-  ObjectProperty.FullSubcategory fun C : Over (Spec (.of K)) ↦
-    Smooth C.hom ∧ IsConnectedCurve C.hom
-
-noncomputable instance : Category (SmoothConnectedCurve K) :=
-  inferInstanceAs (Category (ObjectProperty.FullSubcategory _))
-
 /-- Blueprint `def-sc-curves`: Curves and genus
 
 The *genus* of a smooth proper connected curve `C` over `K` is
@@ -181,21 +170,5 @@ lemma Scheme.Hom.picDegree_mk (f : C ⟶ Spec (.of K)) (M : C.Modules)
     f.picDegree (Pic.mk M) = Modules.degree K M :=
   letI : C.Over (Spec (.of K)) := ⟨f⟩
   Modules.degree_congr K (fromSkeletonToSkeletonIso M)
-
-/-- Blueprint `def-sc-picard-group`: Pic, degree, Pic⁰
-
-Let `C` be a smooth projective geometrically integral curve over a field `K`. Its Picard group
-`Pic(C) = H¹(C_ét, 𝔾ₘ)` is the group of invertible `𝒪_C`-modules up to isomorphism; it is
-`AlgebraicGeometry.Scheme.Pic`. The degree homomorphism `deg : Pic(C) → ℤ` is
-`AlgebraicGeometry.Scheme.Hom.picDegree`, and `Pic⁰(C) := ker(deg)` is the subgroup of classes
-of degree zero, recorded here as the subset `f.picZero` of `C.Pic`.
-
-For a smooth proper curve the degree is the group homomorphism
-`AlgebraicGeometry.Scheme.picDegreeHom`, whose kernel is `picZero`
-(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`).
-
-(blueprint: `def-sc-pic0`) -/
-def Scheme.Hom.picZero (f : C ⟶ Spec (.of K)) : Set C.Pic :=
-  {L | f.picDegree L = 0}
 
 end AlgebraicGeometry

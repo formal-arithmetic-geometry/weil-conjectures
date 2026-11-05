@@ -42,65 +42,6 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   ModuleRingedComparison.totalComparison ModuleRingedComparison.ordinaryTensorComparison
   Localization.Monoidal.tensorBifunctor
 
-/-- The fixed scalar complex comparison is the derived counit.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, scalar localization comparison.
-Expand the fixed complex comparison and use the factorization equation for the
-isomorphism between the exact derived functor and the total left derived functor.
-The comparison between complex and homotopy localizations has identity components.
-Its images under the two functors are identities, so cancellation leaves the counit.
-(blueprint: lem-sfb-coefficient-scalar-complex-counit). -/
-theorem coefficientScalarTensor_complexCounit (Z : Scheme.{u})
-    (K : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
-    coefficientInternalScalarComplex a Z K =
-      (Mod.extendScalars (coefficientMap a Z)).leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj K) := by
-  unfold coefficientInternalScalarComplex
-  rw [← Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac]
-  congr 1
-  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-  change _ = (Mod.extendScalars (coefficientMap a Z)).mapDerivedCategory.map (𝟙 _) ≫
-    _ ≫ 𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _)
-  erw [(Mod.extendScalars (coefficientMap a Z)).mapDerivedCategory.map_id _,
-    DerivedCategory.Qh.map_id _]
-  simp only [Category.id_comp, Category.comp_id]
-
 attribute [local irreducible] coefficientInternalScalarComplex
-
-set_option maxHeartbeats 800000 in
--- Check the counit and localization corner with native functor object types.
-/-- The tensor of the two scalar complex comparisons, followed by localization,
-is the tensor of the two derived counits followed by homotopy localization.
-Use the two scalar-counit equations, tensor their components, and compose with
-the equality of complex and homotopy localization tensorators. -/
-private theorem scalar_complex_tensor_factors (Z : Scheme.{u})
-    (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
-    let F := Mod.extendScalars (coefficientMap a Z)
-    let Fc := F.mapHomologicalComplex (.up ℤ)
-    let qR := HomotopyCategory.quotient (ModuleRingedComparison.internalModules R Z) (.up ℤ)
-    let qS := HomotopyCategory.quotient (ModuleRingedComparison.internalModules S Z) (.up ℤ)
-    let c (K : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
-        F.leftDerivedFunctor.obj (DerivedCategory.Q.obj K) ⟶ DerivedCategory.Q.obj (Fc.obj K) :=
-      coefficientInternalScalarComplex a Z K
-    (c P ⊗ₘ c Q) ≫ Functor.LaxMonoidal.μ DerivedCategory.Q (Fc.obj P) (Fc.obj Q) =
-      (F.leftDerivedFunctorCounit.app (qR.obj P) ⊗ₘ
-        F.leftDerivedFunctorCounit.app (qR.obj Q)) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Qh (qS.obj (Fc.obj P)) (qS.obj (Fc.obj Q)) := by
-  dsimp only
-  let F := Mod.extendScalars (coefficientMap a Z)
-  let Fc := F.mapHomologicalComplex (.up ℤ)
-  let qR := HomotopyCategory.quotient (ModuleRingedComparison.internalModules R Z) (.up ℤ)
-  let qS := HomotopyCategory.quotient (ModuleRingedComparison.internalModules S Z) (.up ℤ)
-  let c (K : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
-      F.leftDerivedFunctor.obj (DerivedCategory.Q.obj K) ⟶ DerivedCategory.Q.obj (Fc.obj K) :=
-    coefficientInternalScalarComplex a Z K
-  have hct : (c P ⊗ₘ c Q) =
-      (F.leftDerivedFunctorCounit.app (qR.obj P) ⊗ₘ
-        F.leftDerivedFunctorCounit.app (qR.obj Q)) :=
-    congrArg₂ (fun f g ↦ f ⊗ₘ g)
-      (coefficientScalarTensor_complexCounit a Z P) (coefficientScalarTensor_complexCounit a Z Q)
-  have hμ : Functor.LaxMonoidal.μ DerivedCategory.Q (Fc.obj P) (Fc.obj Q) =
-      Functor.LaxMonoidal.μ DerivedCategory.Qh (qS.obj (Fc.obj P)) (qS.obj (Fc.obj Q)) :=
-    coefficientScalarTensor_complexLocalization S Z (Fc.obj P) (Fc.obj Q)
-  exact congrArg₂ (fun v u ↦ v ≫ u) hct hμ
 
 end AlgebraicGeometry.ProEtale.CondensedRing

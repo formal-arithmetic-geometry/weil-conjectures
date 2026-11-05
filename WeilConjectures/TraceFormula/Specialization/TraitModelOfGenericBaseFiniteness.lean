@@ -45,49 +45,4 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] {X' : Over (Spec (.of k'))}
   {F : Type u} [Field F]
 
-/-- **Deligne's finiteness theorem for trait models over a generic base**: the nearby cycles
-`Ψ = Li^* Rj_* Lε^*` of a trait model over the generic base `(F, X₁)` preserve bounded
-constructible complexes. For bounded constructible `K` on `X₁`, its pullback `A` to the generic
-fibre `𝒳_η` extends by zero along the open immersion `v : 𝒳_η ⟶ 𝒳` to a bounded constructible
-`B = v_! A` on `𝒳` with `Lj^* B ≅ Lε^* K`, as `j` factors through `v` and `Lv^* v_! A ≅ A`; so
-`Ψ K ≅ Li^* Rj_* Lj^* B` is bounded constructible
-(`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`). -/
-theorem IsTraitModelOfGenericBase.preservesBoundedConstructible {X₁ : Over (Spec (.of F))}
-    {ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ Spec (.of F)}
-    {M : NearbyCyclesModel X₁.left X'.left} {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
-    (h : M.IsTraitModelOfGenericBase X₁ ι q g) :
-    M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) := by
-  obtain ⟨w, -, -, hw⟩ := h.exists_openImmersion_genericFibre
-  have hM := h.isTraitModelOver.isTraitModel
-  have := hM.isNoetherian_total
-  intro K hK
-  let v := pullback.fst q (traitGenericSpec k')
-  let s := genericFibreInclusion M q g h.isTraitModelOver.isPullback_j.w
-  let A := (L((w ≫ pullback.fst _ _)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K
-  have hB := boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj
-    (Profinite.padicAlgClRingObj ℓ) v A
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ K hK)
-  have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) v).unit :=
-    Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
-  have e₁ := (nonempty_leftDerivedUpperStar_obj_iso_of_eq (Profinite.padicAlgClRingObj ℓ)
-    (genericFibreInclusion_fst M q g h.isTraitModelOver.isPullback_j.w).symm
-    ((D((v)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj A)).some
-  have e₂ := (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) s v).app
-    ((D((v)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj A)
-  have e₃ := (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion
-    (Profinite.padicAlgClRingObj ℓ) v).app ((D((v)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj A)
-  have e₄ := asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction
-    (Profinite.padicAlgClRingObj ℓ) v).unit.app A)
-  have e₅ := (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) s
-    (w ≫ pullback.fst _ _)).app K
-  have e₆ := (nonempty_leftDerivedUpperStar_obj_iso_of_eq (Profinite.padicAlgClRingObj ℓ) hw K).some
-  exact (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-      X'.left)).prop_of_iso
-    ((L((M.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso
-      ((R((M.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso (e₁ ≪≫ e₂ ≪≫
-        (L((s)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso (e₃ ≪≫ e₄.symm) ≪≫ e₅.symm ≪≫ e₆)))
-    (boundedConstructible_geometricNearbyCycles_obj M hM hB)
-
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

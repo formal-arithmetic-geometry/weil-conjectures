@@ -67,13 +67,6 @@ lemma antitone : Antitone F.F :=
 noncomputable def gr (n : ℤ) : C :=
   cokernel (Subobject.ofLE _ _ (F.F_succ_le n))
 
-/-- A filtration is *finite and separated* if `F⁰ A = A`, `Fᴺ A = 0` for some `N`, and the
-intersection of all `Fⁿ A` is `0`.
-
-(blueprint: `def-sp-filtration`) -/
-def IsFiniteSeparated : Prop :=
-  F.F 0 = ⊤ ∧ (∃ N, F.F N = ⊥) ∧ ∀ P : Subobject A, (∀ n, P ≤ F.F n) → P = ⊥
-
 /-- The *image filtration* on `B` of a filtration `F` of `A` along a morphism `φ : A ⟶ B`:
 `Fⁿ B = im (Fⁿ A ⟶ B)`.
 
@@ -83,10 +76,6 @@ noncomputable def image {B : C} (φ : A ⟶ B) : DecreasingFiltration B where
   F_succ_le n := by
     rw [← Subobject.ofLE_arrow (F.F_succ_le n), Category.assoc]
     exact imageSubobject_comp_le _ _
-
-lemma image_F {B : C} (φ : A ⟶ B) (n : ℤ) :
-    (F.image φ).F n = imageSubobject ((F.F n).arrow ≫ φ) :=
-  rfl
 
 end DecreasingFiltration
 

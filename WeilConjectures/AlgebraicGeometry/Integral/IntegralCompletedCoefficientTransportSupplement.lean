@@ -26,22 +26,4 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Transport the detailed category along the canonical coefficient isomorphism.
-The valuation ring is lifted to the small site's coefficient universe u+1. The
-finite extension E itself retains the recorded coefficient convention E : Type u.
-Source: Bhatt--Scholze, Definition 6.5.1
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization). -/
-def integralDetailedTransport
-    (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
-    DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T) ⥤
-      DerivedCategory (pbcModules T
-        (pbcAdicCompletion T (pbcIntegralDatum l E))) :=
-  letI := HasDerivedCategory.standard
-    (WeilConjectures.scalarReductionSource.{u, u} l E T)
-  letI := (integralDetailedCoefficientRestriction_exact T l E).1
-  letI := (integralDetailedCoefficientRestriction_exact T l E).2
-  (SheafOfModules.restrictScalars.{u + 1}
-    (integralDetailedCoefficientComparison T l E).hom).mapDerivedCategory
-
 end AlgebraicGeometry.Scheme

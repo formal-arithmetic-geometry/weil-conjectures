@@ -49,44 +49,10 @@ variable {A : Type uE} [Category.{vE} A] [MonoidalCategory A]
 end Generic
 
 -- The graded tensor coproduct choices are shared throughout this module.
-private theorem gradedTensorLeftR (X Y Z : GradedObject ℤ (Modules R)) :
-    GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
-private theorem gradedTensorLeftS (X Y Z : GradedObject ℤ (Modules S)) :
-    GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
-private theorem gradedTensorRightR (X Y Z : GradedObject ℤ (Modules R)) :
-    GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
-private theorem gradedTensorRightS (X Y Z : GradedObject ℤ (Modules S)) :
-    GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
 attribute [local instance] gradedTensorLeftR gradedTensorLeftS gradedTensorRightR
   gradedTensorRightS
 
-set_option maxHeartbeats 80000 in
--- Normalize the uniquely determined module unit without unfolding the sheaf tensor.
-private theorem module_right_unit (f : RingedPullback R S) (k : Comparison f)
-    (M : Modules R) :
-    (k.mu M (𝟙_ _)).hom ≫ (𝟙 _ ⊗ₘ (moduleUnit f k).hom) ≫
-      (ρ_ (f.L.obj M)).hom = f.L.map (ρ_ M).hom :=
-  (Classical.choose_spec
-    (SheafOfModules.CochainTensorComparison.canonicalRingedTensorComparison_unit
-      R S f.RI f.uInv f.I f.coefficient f.L f.hobj f.hmap k)).1 M
-
 attribute [local irreducible] SheafOfModules.monoidalCategory
-
-@[reassoc]
-private theorem comparison_ι (f : RingedPullback R S) (k : Comparison f)
-    (P Q : Complex R) (p q n : ℤ) (hpq : p + q = n) :
-    f.L.map (CochainComplex.ιMapBifunctor P Q (curriedTensor (Modules R)) p q n hpq) ≫
-        (comparison f k P Q).hom.f n =
-      (k.mu (P.X p) (Q.X q)).hom ≫ CochainComplex.ιMapBifunctor
-        ((pull f).obj P) ((pull f).obj Q) (curriedTensor (Modules S)) p q n hpq := by
-  apply (cancel_mono ((comparison f k P Q).inv.f n)).1
-  simp only [Category.assoc, ← HomologicalComplex.comp_f,
-    Iso.hom_inv_id, HomologicalComplex.id_f]
-  change _ = (k.mu (P.X p) (Q.X q)).hom ≫ _ ≫
-    (tensorPullbackTotal f.L k.mu k.naturality P Q).f n
-  simp only [tensorPullbackTotal, tensorPullbackTotalComponent,
-    HomologicalComplex.ι_mapBifunctorDesc, Iso.hom_inv_id_assoc]
-  exact Category.comp_id _
 
 -- Work only with the normalized total comparison, before introducing lifted instances.
 -- Assemble the ordinary structure and identify its total comparison.

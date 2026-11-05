@@ -26,20 +26,4 @@ open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry.RingedSpace
 
-/-- `RΓ(U,-)` is the unbounded right derived functor of sections over `U`, computed
-by K-injective resolutions: on a K-injective complex it is represented by its
-termwise sections (`Functor.rightDerivedFunctorObjQIso`). The K-injective resolutions
-of module sheaves come from `moduleGrothendieckAbelian` (as for
-`derivedModuleDirectImage`) through
-`Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`. Cohomology over `U` in
-integer degree `m` is the composite with `DerivedCategory.homologyFunctor`.
-Source: Stacks Project, Cohomology, Tag 0D60
-(blueprint: def-pc-open-module-derived-sections). -/
-noncomputable abbrev openModuleDerivedSections (X : RingedSpace.{a}) (U : Opens X)
-    [HasDerivedCategory.{b} (SheafOfModules.{a} (moduleRings X))]
-    [HasDerivedCategory.{c} AddCommGrpCat.{a}] :
-    DerivedCategory (SheafOfModules.{a} (moduleRings X)) ⥤
-      DerivedCategory AddCommGrpCat.{a} :=
-  (openModuleSections X U).rightDerivedFunctor
-
 end AlgebraicGeometry.RingedSpace

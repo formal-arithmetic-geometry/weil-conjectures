@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in several independent groups.
 
-
 ## Basic characterizations
 
 - `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι`: a morphism is
@@ -119,13 +118,6 @@ namespace AlgebraicGeometry
 
 variable {T Y : Scheme.{u}}
 
-/-- A morphism is scheme-theoretically dominant if and only if the closed immersion of
-its scheme-theoretic image into the target is an isomorphism. -/
-theorem isSchemeTheoreticallyDominant_iff_isIso_imageι (g : T ⟶ Y) :
-    IsSchemeTheoreticallyDominant g ↔ IsIso g.imageι :=
-  (isSchemeTheoreticallyDominant_iff g).trans
-    (Scheme.isIso_subschemeι_iff_eq_bot g.ker).symm
-
 /-- Precomposition with a scheme-theoretically dominant morphism does not change the
 kernel ideal sheaf. -/
 lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
@@ -218,88 +210,6 @@ theorem Scheme.Hom.ker_of_isPullback {T' : Scheme.{u}} {p₁ : T' ⟶ T} {p₂ :
     (H : IsPullback p₁ p₂ g q) : p₂.ker = g.ker.comap q := by
   rw [← H.isoPullback_hom_snd, Scheme.Hom.ker_comp_of_isIso, ker_pullback_snd]
 
-/-- Restriction of a scheme-theoretic image to an open subscheme of the target: the
-kernel of `g ∣_ U` is the restriction of the kernel of `g`. This is the special case of
-`AlgebraicGeometry.Scheme.Hom.ker_of_isPullback` for the open immersion `U.ι`, which is
-flat. (blueprint: `lemma:nagata-scheme-image-restrict-open`) -/
-theorem Scheme.Hom.ker_morphismRestrict (U : Y.Opens) :
-    (g ∣_ U).ker = g.ker.comap U.ι :=
-  g.ker_of_isPullback U.ι (isPullback_morphismRestrict g U).flip
-
-/-- The two closed subschemes of `Y'` occurring in flat base change for
-scheme-theoretic images have the same kernel ideal sheaf.
-
-For `q` an open immersion this is
-`AlgebraicGeometry.Scheme.ker_imageι_pullback_snd`, up to swapping the two factors of
-the pullback. -/
-theorem Scheme.Hom.ker_pullback_fst_imageι :
-    (pullback.fst q g.imageι).ker = (pullback.snd g q).imageι.ker := by
-  rw [Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, Scheme.IdealSheafData.ker_subschemeι,
-    Scheme.IdealSheafData.ker_subschemeι, ker_pullback_snd]
-
-/-- Flat base change for scheme-theoretic images: for a quasi-compact morphism
-`g : T ⟶ Y` and a flat `q : Y' ⟶ Y`, the scheme-theoretic image of the base change of
-`g` to `Y'` is canonically isomorphic to the pullback of the scheme-theoretic image of
-`g`, compatibly with the closed immersions into `Y'`
-(`AlgebraicGeometry.Scheme.Hom.image.pullbackIso_hom_fst`) and with the factor maps
-(`AlgebraicGeometry.Scheme.Hom.image.toImage_pullbackIso_hom_snd`). It is the unique
-isomorphism over `Y'`, see
-`AlgebraicGeometry.Scheme.Hom.image.eq_pullbackIso_hom`. -/
-def Scheme.Hom.image.pullbackIso : (pullback.snd g q).image ≅ pullback q g.imageι :=
-  have := IsClosedImmersion.isIso_lift (pullback.fst q g.imageι) (pullback.snd g q).imageι
-    (g.ker_pullback_fst_imageι q)
-  asIso (IsClosedImmersion.lift (pullback.fst q g.imageι) (pullback.snd g q).imageι
-    (g.ker_pullback_fst_imageι q).le)
-
-@[reassoc (attr := simp)]
-lemma Scheme.Hom.image.pullbackIso_hom_fst :
-    (pullbackIso g q).hom ≫ pullback.fst q g.imageι = (pullback.snd g q).imageι :=
-  IsClosedImmersion.lift_fac _ _ _
-
-@[reassoc (attr := simp)]
-lemma Scheme.Hom.image.pullbackIso_inv_imageι :
-    (pullbackIso g q).inv ≫ (pullback.snd g q).imageι = pullback.fst q g.imageι := by
-  rw [Iso.inv_comp_eq, pullbackIso_hom_fst]
-
-/-- The base change isomorphism is the unique morphism over `Y'`, since both closed
-immersions into `Y'` are monomorphisms. -/
-lemma Scheme.Hom.image.eq_pullbackIso_hom (c : (pullback.snd g q).image ⟶ pullback q g.imageι)
-    (hc : c ≫ pullback.fst q g.imageι = (pullback.snd g q).imageι) :
-    c = (pullbackIso g q).hom := by
-  rw [← cancel_mono (pullback.fst q g.imageι), hc, pullbackIso_hom_fst]
-
-/-- The base change isomorphism is compatible with the factor maps through the
-scheme-theoretic images. -/
-@[reassoc (attr := simp)]
-lemma Scheme.Hom.image.toImage_pullbackIso_hom_snd :
-    (pullback.snd g q).toImage ≫ (pullbackIso g q).hom ≫ pullback.snd q g.imageι =
-      pullback.fst g q ≫ g.toImage := by
-  rw [← cancel_mono g.imageι, Category.assoc, Category.assoc, Category.assoc,
-    -- cross the square `pullback q g.imageι` from `pullback.snd` to `pullback.fst`, ...
-    ← pullback.condition (f := q) (g := g.imageι), pullbackIso_hom_fst_assoc,
-    Scheme.Hom.toImage_imageι_assoc, Scheme.Hom.toImage_imageι,
-    -- ... and cross the *other* square `pullback g q` in the opposite direction
-    pullback.condition (f := g) (g := q)]
-
-/-- Flat base change for scheme-theoretic images in the form of a cartesian square, for
-an arbitrary morphism `f'` making the square commute rather than the canonical one used
-in `AlgebraicGeometry.Scheme.Hom.image.isPullback_imageι`. -/
-lemma Scheme.Hom.image.isPullback_imageι_of_comp (f' : (pullback.snd g q).image ⟶ g.image)
-    (h : (pullback.snd g q).imageι ≫ q = f' ≫ g.imageι) :
-    IsPullback (pullback.snd g q).imageι f' q g.imageι :=
-  isPullback_of_isClosedImmersion _ _ _ _ h <| by
-    rw [Scheme.IdealSheafData.ker_subschemeι, Scheme.IdealSheafData.ker_subschemeι,
-      ker_pullback_snd]
-
-/-- Flat base change for scheme-theoretic images, in the form of a cartesian square: the
-closed immersion of the scheme-theoretic image of the base change is the base change of
-the closed immersion of the scheme-theoretic image of `g`. -/
-lemma Scheme.Hom.image.isPullback_imageι :
-    IsPullback (pullback.snd g q).imageι ((pullbackIso g q).hom ≫ pullback.snd q g.imageι)
-      q g.imageι :=
-  isPullback_imageι_of_comp g q _ <| by
-    rw [← pullbackIso_hom_fst_assoc, pullback.condition, Category.assoc]
-
 section Opens
 
 variable {X' X : Scheme.{u}}
@@ -329,30 +239,6 @@ theorem isIso_morphismRestrict_of_le (f : X' ⟶ X) {U W : X.Opens} (h : U ≤ W
   have hiso : IsIso ((f ∣_ W) ∣_ (W.ι ⁻¹ᵁ U)) := inferInstance
   exact (MorphismProperty.arrow_mk_iso_iff (.isomorphisms Scheme)
     (morphismRestrictRestrict f W (W.ι ⁻¹ᵁ U) ≪≫ morphismRestrictEq f himg)).mp hiso
-
-/-- **Scheme-theoretic density descends along partial isomorphisms**: let
-`f : X' ⟶ X` be a morphism restricting to an isomorphism over an open `W ⊆ X` whose
-preimage is scheme-theoretically dense in `X'`. Then the preimage of any
-scheme-theoretically dense open `U ≤ W` of `X` is scheme-theoretically dense
-in `X'`. -/
-theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.Opens}
-    (hUW : U ≤ W) [QuasiCompact U.ι] [IsSchemeTheoreticallyDominant U.ι]
-    (hW : IsIso (f ∣_ W)) [IsSchemeTheoreticallyDominant (f ⁻¹ᵁ W).ι] :
-    IsSchemeTheoreticallyDominant (f ⁻¹ᵁ U).ι := by
-  have hU : IsIso (f ∣_ U) := isIso_morphismRestrict_of_le f hUW hW
-  have := hW
-  have hpre : f ⁻¹ᵁ U ≤ f ⁻¹ᵁ W := f.preimage_mono hUW
-  -- the square `(f ∣_ U) ≫ homOfLE hUW = homOfLE hpre ≫ (f ∣_ W)`
-  have hsq : X'.homOfLE hpre = (f ∣_ U) ≫ X.homOfLE hUW ≫ inv (f ∣_ W) := by
-    rw [eq_comm, ← Category.assoc, IsIso.comp_inv_eq, ← cancel_mono W.ι]
-    simp [morphismRestrict_ι, Scheme.homOfLE_ι_assoc, Scheme.homOfLE_ι]
-  have : IsSchemeTheoreticallyDominant (X.homOfLE hUW) := .homOfLE hUW
-  have : IsSchemeTheoreticallyDominant (X'.homOfLE hpre) := by
-    rw [hsq]
-    infer_instance
-  have he : (f ⁻¹ᵁ U).ι = X'.homOfLE hpre ≫ (f ⁻¹ᵁ W).ι := (Scheme.homOfLE_ι _ _).symm
-  rw [he]
-  infer_instance
 
 /-- **Scheme-theoretic density of an open transports along an isomorphism**: if `f` is an
 isomorphism and `U` is a scheme-theoretically dense open of its target, then `f ⁻¹ᵁ U` is
@@ -456,28 +342,6 @@ lemma Scheme.Hom.toImage_imageMap : g.toImage ≫ imageMap g g' u v w = u ≫ g'
   rw [← cancel_mono g'.imageι, Category.assoc, imageMap_imageι, ← Category.assoc,
     g.toImage_imageι, w, Category.assoc, g'.toImage_imageι]
 
-/-- The induced morphism between the scheme-theoretic images is the unique morphism
-compatible with the closed immersions into `Y` and `Y'`, since `g'.imageι` is a
-monomorphism. -/
-lemma Scheme.Hom.eq_imageMap (c : g.image ⟶ g'.image)
-    (hc : c ≫ g'.imageι = g.imageι ≫ v) :
-    c = imageMap g g' u v w := by
-  rw [← cancel_mono g'.imageι, hc, imageMap_imageι]
-
-/-- The morphism induced by the identity square is the identity. -/
-@[simp]
-lemma Scheme.Hom.imageMap_id : imageMap g g (𝟙 X) (𝟙 Y) (by simp) = 𝟙 g.image :=
-  (eq_imageMap g g (𝟙 X) (𝟙 Y) _ _ (by simp)).symm
-
-/-- The morphism induced by a horizontally pasted pair of squares is the composite of the
-induced morphisms. -/
-lemma Scheme.Hom.imageMap_comp {X'' Y'' : Scheme.{u}} (g'' : X'' ⟶ Y'') (u' : X' ⟶ X'')
-    (v' : Y' ⟶ Y'') (w' : g' ≫ v' = u' ≫ g'') [QuasiCompact g'] :
-    imageMap g g'' (u ≫ u') (v ≫ v')
-        (by rw [← Category.assoc, w, Category.assoc, w', Category.assoc]) =
-      imageMap g g' u v w ≫ imageMap g' g'' u' v' w' :=
-  (eq_imageMap g g'' (u ≫ u') (v ≫ v') _ _ (by simp)).symm
-
 end Image
 
 section ImageOverOpen
@@ -510,23 +374,6 @@ theorem Scheme.Hom.preimage_subset_range_toImage_of_isClosed {V Y : Scheme.{u}} 
 end ImageOverOpen
 
 section AppInjective
-
-/-- **Scheme-theoretic density via sections**: a quasi-compact morphism `f : X ⟶ Y` is
-scheme-theoretically dominant if and only if every map on sections `f.app U` is injective,
-i.e. the sheaf map `𝒪_Y ⟶ f_* 𝒪_X` is injective.
-
-For a quasi-compact open immersion `j : U ⟶ X` this is the blueprint's definition of a
-scheme-theoretically dense open (`𝒪_X → j_* 𝒪_U` injective). The project uses Mathlib's
-`IsSchemeTheoreticallyDominant` (kernel ideal sheaf `⊥`) as the definition, and this
-lemma identifies it with the blueprint's formulation.
-(blueprint: `def-nagata-scheme-theoretically-dense-open`) -/
-theorem isSchemeTheoreticallyDominant_iff_app_injective {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [QuasiCompact f] :
-    IsSchemeTheoreticallyDominant f ↔ ∀ U : Y.Opens, Function.Injective (f.app U) := by
-  refine ⟨fun _ U ↦ f.app_injective U, fun h ↦ ⟨Scheme.IdealSheafData.ext ?_⟩⟩
-  funext U
-  rw [f.ker_apply U, Scheme.IdealSheafData.ideal_bot, Pi.bot_apply]
-  exact (RingHom.injective_iff_ker_eq_bot _).mp (h U)
 
 end AppInjective
 

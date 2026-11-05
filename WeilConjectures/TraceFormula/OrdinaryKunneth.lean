@@ -143,56 +143,6 @@ lemma isIso_exchangeRight_prodMapUpperStarSndIso (j : U ⟶ Y) :
     ← boundedConstructibleBaseChange_eq_exchangeRight]
   exact isIso_boundedConstructibleBaseChange_prodMap ℓ j
 
-/-- `isIso_homEquiv_prodMapUpperStarSndIso_hom_app_comp_map_counit` for an abstract
-isomorphism `θ` in place of `prodMapUpperStarSndIso`, so that neither the elaborator nor the
-kernel unfolds `prodMapUpperStarSndIso`. -/
-lemma isIso_homEquiv_hom_app_comp_map_counit_aux (j : U ⟶ Y)
-    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (θ : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ Y ⟶ Y) ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j) ≅
-      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.snd : X ⨯ U ⟶ U))
-    (hθ : IsIso (Adjunction.exchangeRight
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ j)
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-        (prod.map (𝟙 X) j)) θ)) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
-      (prod.map (𝟙 X) j)).homEquiv
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (prod.snd : X ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar ℓ j).obj B))
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (prod.snd : X ⨯ U ⟶ U)).obj B)
-        (θ.hom.app
-          ((boundedConstructibleLowerStar ℓ j).obj B) ≫
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (prod.snd : X ⨯ U ⟶ U)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
-            j).counit.app B))) :=
-  Adjunction.isIso_homEquiv_hom_app_comp_map_counit _ _ θ B hθ
-
-/-- The transpose `Lp_Y^* Rj_* B ⟶ R(𝟙 × j)_* Lp_U^* B` of the second factor of the Künneth map,
-the counit of `Lj^* ⊣ Rj_*` transported along `prodMapUpperStarSndIso`, is an isomorphism: it is
-the exchange morphism of `prodMapUpperStarSndIso`
-(`isIso_exchangeRight_prodMapUpperStarSndIso`). -/
-lemma isIso_homEquiv_prodMapUpperStarSndIso_hom_app_comp_map_counit (j : U ⟶ Y)
-    (B : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
-      (prod.map (𝟙 X) j)).homEquiv
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (prod.snd : X ⨯ Y ⟶ Y)).obj
-          ((boundedConstructibleLowerStar ℓ j).obj B))
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (prod.snd : X ⨯ U ⟶ U)).obj B)
-        ((prodMapUpperStarSndIso ℓ (X := X) j).hom.app
-          ((boundedConstructibleLowerStar ℓ j).obj B) ≫
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-          (prod.snd : X ⨯ U ⟶ U)).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
-            j).counit.app B))) :=
-  isIso_homEquiv_hom_app_comp_map_counit_aux ℓ j B _
-    (isIso_exchangeRight_prodMapUpperStarSndIso ℓ j)
-
 /-- `openKunnethSecondFactor` for an abstract isomorphism `θ` in place of
 `prodMapUpperStarSndIso`. As a definition in this file, its body is elaborated with the same
 auxiliary proof constants as that of `openKunnethSecondFactor`, so that

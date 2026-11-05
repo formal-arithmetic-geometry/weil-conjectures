@@ -57,11 +57,6 @@ noncomputable def ProEtaleWeilSheaf.adicConstant : ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mk (AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)
 
-lemma ProEtaleWeilSheaf.adicConstant_carrier :
-    (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier =
-      AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  rfl
-
 end
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
@@ -88,23 +83,6 @@ lemma Scheme.Hom.nonempty_geometricFiber [Nonempty X] :
   have : Surjective (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj :=
     MorphismProperty.pullback_fst _ _ this
   exact ⟨((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.surjective x).choose⟩
-
-/-- **Non-degeneracy of Weil sheaves.** The constant Weil sheaf `ℚ̄_ℓ` on a nonempty
-`k₀`-scheme is nonzero: its underlying sheaf has the nonzero global section `1`. In particular
-the category of Weil sheaves on a nonempty `k₀`-scheme is not zero. -/
-theorem WeilSheaf.not_isZero_adicConstant [Nonempty X] :
-    ¬ IsZero (WeilSheaf.adicConstant k₀ l X) := by
-  have := Scheme.Hom.nonempty_geometricFiber k₀ X
-  rw [WeilSheaf.isZero_iff_isZero_carrier]
-  exact fun h ↦ not_isZero_adicConstantSheaf l _ ((AdicSheaf.forget _).map_isZero h)
-
-/-- **Non-degeneracy of Weil complexes.** The constant Weil sheaf `ℚ̄_ℓ` placed in degree zero is
-a nonzero Weil complex on a nonempty `k₀`-scheme: its cohomology sheaf `𝓗⁰` is `ℚ̄_ℓ`. -/
-theorem WeilComplex.not_isZero_toComplex_adicConstant [Nonempty X] :
-    ¬ IsZero (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) := fun h ↦
-  WeilSheaf.not_isZero_adicConstant k₀ l X
-    (((WeilComplex.homologySheaf 0).map_isZero h).of_iso
-      (WeilSheaf.toComplexCompHomologySheafIso.app _).symm)
 
 end AlgebraicGeometry
 

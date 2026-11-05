@@ -219,23 +219,6 @@ theorem HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective
       ((isIso_derivedBaseChangeMapPlus_app_paste_horiz_iff sqT.toCommSq ha'.toCommSq _ K
         inferInstance).1 hI)
 
-/-- Blueprint `lem-fin-radicial-exchange-descent`: Descending the exchange property through a
-universal homeomorphism, for a sheaf: the case of
-`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective` for a sheaf
-placed in degree `0`. -/
-theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective'
-    {S S' X Y X' Y' : Scheme.{u}} (π : S' ⟶ S) [IsFinite π] [Surjective π]
-    [UniversallyInjective π] (fY : Y ⟶ S) (j : X ⟶ Y) (g : Y' ⟶ Y)
-    (fY' : Y' ⟶ S') (hY : IsPullback g fY' fY π) (g' : X' ⟶ X) (j' : X' ⟶ Y')
-    (hX : IsPullback g' j' j g) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    {U : Set S}
-    (h : HasConstructibleDirectImageBaseChangeOn Λ fY' j'
-      ((Etale.upperStar (ModuleCat.{u + 1} Λ) g').obj F) (π ⁻¹' U)) :
-    HasConstructibleDirectImageBaseChangeOn Λ fY j F U := by
-  rw [hasConstructibleDirectImageBaseChangeOn_iff] at h ⊢
-  exact HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective π fY j g fY' hY g' j' hX _
-    (h.of_iso ((((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app F).symm)
-
 end Etale
 
 end AlgebraicGeometry

@@ -23,33 +23,4 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The fixed-scalar encoding followed by restriction to a weakly etale chart carries K-flat
-complexes over the constant ring sheaf to K-flat complexes of sheaves of `B`-modules on the
-chart.
-Source: Stacks Project, Tags 03CY, 06YN, 0E8K and 03DH.
-
-Proof: restriction of modules to the slice at the chart preserves K-flatness
-(`SheafOfModules.ringedSite_restriction_exact_kflat`, Tag 0E8K). Sheaves of `B`-modules on
-the chart are identified with modules over the restricted constant ring sheaf by an additive
-equivalence compatible with the sheafified tensor products
-(`proEtaleSliceRealization_tensor`), which carries the chart coordinates to the slice
-restriction (`finiteCoefficientSliceRestrictionRealizationIso`). Such an equivalence preserves
-and reflects the acyclic tensor test
-(`finiteCoefficientSliceRestriction_acyclicTensorTest`), and the acyclic tensor test gives
-K-flatness for quasi-isomorphisms by the symmetry of the tensor product. -/
-theorem finiteCoefficientSliceRestriction_kFlat_of_constant
-    (X : Scheme.{t}) (B : Type t) [CommRing B]
-    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
-    (φ : adicConstantRing X B ⟶ R) (V : X.Etale)
-    (K : CochainComplex (SheafOfModules.{t + 1}
-      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) ℤ)
-    (hK : CochainComplex.IsAcyclicTensorKFlat (R := adicConstantRing X B)
-      ((Functor.mapHomologicalComplex (SheafOfModules.restrictScalars.{t + 1}
-        ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ))
-          (.up ℤ)).obj K)) :
-    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
-      (((finiteCoefficientSliceRestriction X B R φ V).mapHomologicalComplex (.up ℤ)).obj K) := by
-  exact ProEt.sheafModule_kFlat_of_acyclicTensorTest B _ _
-    (finiteCoefficientSliceRestriction_acyclicTensorTest X B R φ V K hK _ (Iso.refl _))
-
 end AlgebraicGeometry.Scheme

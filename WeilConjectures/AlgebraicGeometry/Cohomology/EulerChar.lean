@@ -381,45 +381,6 @@ theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι �
   rw [← hcover]
   exact (e.symm.surjective.iSup_comp U)
 
-/-- On a noetherian scheme, `h^q(X, M) = 0` above the dimension of `X`, by Grothendieck
-vanishing. -/
-theorem finrankH_eq_zero_of_topologicalKrullDim_lt [IsNoetherian X] (M : X.Modules) {q : ℕ}
-    (hq : topologicalKrullDim X < q) : M.finrankH k q = 0 :=
-  have := subsingleton_H_of_topologicalKrullDim_lt M hq
-  Module.finrank_zero_of_subsingleton
-
-/-- On a noetherian scheme of dimension at most `n`, the Euler characteristic is the finite sum
-`∑_{q ≤ n} (-1)^q h^q(X, M)`. -/
-theorem eulerChar_eq_sum_range [IsNoetherian X] (M : X.Modules) {n : ℕ}
-    (hn : topologicalKrullDim X ≤ n) :
-    M.eulerChar k = ∑ q ∈ Finset.range (n + 1), (-1) ^ q * (M.finrankH k q : ℤ) := by
-  refine finsum_eq_sum_of_support_subset _ fun q hq ↦ ?_
-  by_contra h
-  refine hq ?_
-  change (-1) ^ q * (M.finrankH k q : ℤ) = 0
-  rw [finrankH_eq_zero_of_topologicalKrullDim_lt k M (hn.trans_lt ?_), Nat.cast_zero, mul_zero]
-  simp only [Finset.coe_range, Set.mem_Iio, not_lt] at h
-  exact_mod_cast Nat.lt_of_lt_of_le n.lt_succ_self h
-
-/-- **The Euler characteristic is additive over a finite disjoint union.** If a noetherian
-scheme `X` of finite dimension is the disjoint union of finitely many open subschemes `U i`,
-and the cohomology of `M` is finite-dimensional, then `χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`. -/
-theorem eulerChar_eq_sum_of_pairwise_disjoint [IsNoetherian X] {n : ℕ}
-    (hn : topologicalKrullDim X ≤ n) {ι : Type*}
-    [Fintype ι] (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤)
-    (M : X.Modules) [∀ q, FiniteDimensional k (M.H q)] :
-    M.eulerChar k = ∑ i,
-      letI : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
-      ((Scheme.Modules.pullback (U i).ι).obj M).eulerChar k := by
-  let (i : ι) : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
-  have (i : ι) : IsNoetherian (U i) :=
-    { toCompactSpace := isCompact_iff_compactSpace.mp (NoetherianSpace.isCompact _) }
-  rw [eulerChar_eq_sum_range k M hn]
-  simp_rw [finrankH_eq_sum_of_pairwise_disjoint k U hU hcover M, Nat.cast_sum, Finset.mul_sum]
-  rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl fun i _ ↦ ?_
-  rw [eulerChar_eq_sum_range k _ ((topologicalKrullDim_subspace_le X (U i)).trans hn)]
-
 /-- If `H^q(X, M) = 0` for `q > D`, the Euler characteristic of `M` is the finite sum
 `∑_{q ≤ D} (-1)^q h^q(X, M)`. -/
 theorem eulerChar_eq_sum_range_of_subsingleton (M : X.Modules) {D : ℕ}

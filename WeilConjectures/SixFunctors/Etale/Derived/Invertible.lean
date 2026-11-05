@@ -124,16 +124,4 @@ noncomputable def singleFunctorObjTensorIso (L F : Sheaf X.smallEtaleTopology A)
       ((HomologicalComplex.singleMapHomologicalComplex (tensorLeft L) (.up ℤ) 0).app F))) ≪≫
     (singleFunctorObjIsoQh (L ⊗ F)).symm
 
-/-- A sheaf `L` with a tensor inverse `L'`, placed in degree zero, is dualizable in `D(X_ét)`:
-both are flat, so `L[0] ⊗ᴸ L'[0] ≅ (L ⊗ L')[0] ≅ 𝟙[0]`, and symmetrically using the braiding. -/
-theorem isDualizable_singleFunctor_obj_of_tensorIso {L L' : Sheaf X.smallEtaleTopology A}
-    (e : L ⊗ L' ≅ 𝟙_ _) :
-    IsDualizable ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj L) :=
-  isDualizable_of_tensorIso
-    (singleFunctorObjTensorIso L L' (ObjectProperty.flat_of_tensorIso e) ≪≫
-      (_root_.DerivedCategory.singleFunctor _ 0).mapIso e ≪≫ singleFunctorObjUnitIso A X)
-    (singleFunctorObjTensorIso L' L (ObjectProperty.flat_of_tensorIso (β_ L' L ≪≫ e)) ≪≫
-      (_root_.DerivedCategory.singleFunctor _ 0).mapIso (β_ L' L ≪≫ e) ≪≫
-      singleFunctorObjUnitIso A X)
-
 end AlgebraicGeometry.Etale

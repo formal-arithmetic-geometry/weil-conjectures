@@ -101,16 +101,6 @@ lemma ofAlgebraMap_bijective :
     apply MorphismProperty.Over.Hom.ext
     simp [← hg]
 
-/-- The bijection between `Γ(S, U)`-algebra maps `D₁ →ₐ D₂` and morphisms of affine models
-`ofAlgebra hU D₂ ⟶ ofAlgebra hU D₁`. -/
-noncomputable def ofAlgebraMapEquiv :
-    (D₁ →ₐ[Γ(S, U)] D₂) ≃ (ofAlgebra hU D₂ ⟶ ofAlgebra hU D₁) :=
-  Equiv.ofBijective _ (ofAlgebraMap_bijective hU)
-
-@[simp]
-lemma ofAlgebraMapEquiv_apply (f : D₁ →ₐ[Γ(S, U)] D₂) :
-    ofAlgebraMapEquiv hU f = ofAlgebraMap hU f := rfl
-
 /-- The morphism of affine models induced by a faithfully flat algebra map spans a pro-étale
 covering sieve. -/
 lemma generate_singleton_ofAlgebraMap_mem_topology (f : D₁ →ₐ[Γ(S, U)] D₂)
@@ -146,19 +136,6 @@ lemma etale_presheafMap_homOfLE : (S.presheaf.map (homOfLE hle).op).hom.Etale :=
 variable (D : Type u) [CommRing D] [Algebra Γ(S, U'') D] [Algebra Γ(S, U) D]
   (hD : algebraMap Γ(S, U) D =
     (algebraMap Γ(S, U'') D).comp (S.presheaf.map (homOfLE hle).op).hom)
-
-include hU hU'' hD in
-/-- For affine opens `U'' ≤ U`, an ind-étale `Γ(S, U'')`-algebra is ind-étale over `Γ(S, U)`
-(through the restriction map, which is étale). -/
-lemma indEtale_of_le [Algebra.IndEtale Γ(S, U'') D] : Algebra.IndEtale Γ(S, U) D := by
-  have h := etale_presheafMap_homOfLE hU hU'' hle
-  algebraize [(S.presheaf.map (homOfLE hle).op).hom]
-  have : Algebra.IndEtale Γ(S, U) Γ(S, U'') := by
-    rw [Algebra.IndEtale.iff_ind_etale]
-    exact ObjectProperty.le_ind _ _ h
-  rw [← RingHom.IndEtale.algebraMap_iff, hD]
-  exact RingHom.IndEtale.comp ((RingHom.IndEtale.algebraMap_iff _ _).mpr ‹_›)
-    ((RingHom.IndEtale.algebraMap_iff _ _).mpr this)
 
 include hU hU'' hD in
 /-- For affine opens `U'' ≤ U`, a weakly étale `Γ(S, U'')`-algebra is weakly étale over

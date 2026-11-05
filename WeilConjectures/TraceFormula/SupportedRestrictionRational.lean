@@ -30,7 +30,6 @@ vanishing of a stalk of the supported restriction from `E` to `ℚ̄_ℓ`
 
 @[expose] public section
 
-
 universe u
 
 open CategoryTheory Limits MonoidalCategory
@@ -118,27 +117,6 @@ theorem upperStar_map_supportedRestriction_eq_zero_of_supportedRestrictionE
   simp only [Functor.map_comp, h, Limits.zero_comp] at h1
   exact (Preadditive.IsIso.comp_left_eq_zero _ _).1
     ((Preadditive.IsIso.comp_left_eq_zero _ _).1 h1.symm)
-
-/-- **Transport of the vanishing of a stalk of the supported restriction from `E` to `ℚ̄_ℓ`**: if
-the stalk along `z : T ⟶ Fix(c)` of the `E`-supported restriction of `P` vanishes, so does the
-stalk of the `ℚ̄_ℓ`-supported restriction of `ℚ̄_ℓ ⊗ P`. -/
-theorem upperStar_map_supportedRestriction_eq_zero_of_upperStar_map_supportedRestrictionE
-    {T : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
-    [IsSeparated T.hom] (z : T ⟶ F.F)
-    (P : Dᵇc((X ⨯ X).left)⟦Profinite.continuousMapRingObj E⟧)
-    (h : (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ z).map
-      (F.supportedRestrictionE E P) = 0) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
-      (F.supportedRestriction ((boundedConstructibleToPadicAlgCl (X ⨯ X).left ℓ E).obj P)) = 0 := by
-  refine F.upperStar_map_supportedRestriction_eq_zero_of_supportedRestrictionE E z P ?_
-  have h1 := NatIso.map_eq_zero_of_map_eq_zero (boundedConstructibleUpperStarToPadicAlgClIso ℓ E z)
-    (f := F.supportedRestrictionE E P) (by
-      dsimp only [Functor.comp_map]
-      refine (congrArg (boundedConstructibleToPadicAlgCl T.left ℓ E).map ?_).trans
-        (Functor.map_zero _ _ _)
-      with_reducible exact h)
-  dsimp only [Functor.comp_map] at h1
-  with_reducible exact h1
 
 end Correspondence.FixedLocus
 

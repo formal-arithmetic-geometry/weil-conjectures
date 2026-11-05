@@ -196,23 +196,6 @@ lemma pf_naturality_right (K : C) {B B' : D} (h : B ⟶ B') :
 
 section CupProduct
 
-omit [MonoidalClosed C] [MonoidalClosed D] in
-/-- The **compact-support cup product** `P K ⊗ G L ⟶ P (K ⊗ L)`, i.e.
-`Rf_! K ⊗ Rf_* L ⟶ Rf_!(K ⊗ Lf^* Rf_* L) ⟶ Rf_!(K ⊗ L)`, for arbitrary `K` and `L`: the
-projection morphism `pf` followed by the counit `F G ⟶ 𝟭`. -/
-noncomputable def cupProduct (K L : C) : P.obj K ⊗ G.obj L ⟶ P.obj (K ⊗ L) :=
-  (pf.app K).app (G.obj L) ≫ P.map (K ◁ adj.counit.app L)
-
-omit [MonoidalClosed C] [MonoidalClosed D] in
-/-- The cup product is natural in its second variable. -/
-@[reassoc]
-lemma cupProduct_natural_right (K : C) {L L' : C} (h : L ⟶ L') :
-    P.obj K ◁ G.map h ≫ cupProduct adj pf K L' = cupProduct adj pf K L ≫ P.map (K ◁ h) := by
-  rw [cupProduct, cupProduct, pf_naturality_right_assoc, Category.assoc, ← P.map_comp,
-    ← P.map_comp, ← MonoidalCategory.whiskerLeft_comp, ← MonoidalCategory.whiskerLeft_comp]
-  congr 3
-  exact adj.counit_naturality h
-
 end CupProduct
 
 section Exchange
@@ -230,16 +213,6 @@ tensor-hom adjunction. -/
 noncomputable def exchange (K : C) (L : D) :
     G.obj ((ihom K).obj (S.obj L)) ⟶ (ihom (P.obj K)).obj L :=
   curry (exchangePairing adj adj' pf K L)
-
-omit [MonoidalClosed D] in
-/-- The pairing defining the Verdier exchange morphism is the cup product
-`P K ⊗ G RHom(K, S L) ⟶ P (K ⊗ RHom(K, S L))`, followed by the evaluation and the counit of
-`P ⊣ S`. -/
-lemma exchangePairing_eq_cupProduct (K : C) (L : D) :
-    exchangePairing adj adj' pf K L =
-      cupProduct adj pf K ((ihom K).obj (S.obj L)) ≫ P.map ((ihom.ev K).app _) ≫
-        adj'.counit.app L := by
-  simp only [exchangePairing, cupProduct, Category.assoc]
 
 lemma uncurry_exchange (K : C) (L : D) :
     uncurry (exchange adj adj' pf K L) = exchangePairing adj adj' pf K L :=
@@ -284,49 +257,6 @@ twist `ℚ̄_ℓ,X(d)[2d]`, and `pur : Rp^! ℚ̄_ℓ,S ≅ ℚ̄_ℓ,X(d)[2d]` 
 
 variable {T : C} (pur : S.obj (𝟙_ D) ≅ T)
 
-/-- The **trace** `Tr : P T ⟶ 𝟙`, i.e. `Rf_! Λ(d)[2d] ⟶ Rf_! Rf^! Λ ⟶ Λ`: the inverse of the
-chosen purity isomorphism `pur : S 𝟙 ≅ T`, followed by the counit of `P ⊣ S`. -/
-noncomputable def trace : P.obj T ⟶ 𝟙_ D :=
-  P.map pur.inv ≫ adj'.counit.app (𝟙_ D)
-
-/-- The identification `X ⟶ RHom(𝟙, X)`, the transpose of the left unitor. -/
-noncomputable def toIhomUnit (X : C) : X ⟶ (ihom (𝟙_ C)).obj X :=
-  curry (λ_ X).hom
-
-/-- The identification `X ⟶ RHom(𝟙, X)` is an isomorphism, its inverse being the evaluation
-`RHom(𝟙, X) ≅ 𝟙 ⊗ RHom(𝟙, X) ⟶ X` (cf. `MonoidalClosed.unitIsoSelf`). -/
-instance isIso_toIhomUnit (X : C) : IsIso (toIhomUnit X) := by
-  refine ⟨(λ_ _).inv ≫ (ihom.ev (𝟙_ C)).app X, ?_, ?_⟩
-  · rw [toIhomUnit, leftUnitor_inv_naturality_assoc, whiskerLeft_curry_ihom_ev_app,
-      Iso.inv_hom_id]
-  · apply uncurry_injective
-    rw [toIhomUnit, uncurry_natural_left, uncurry_curry, leftUnitor_naturality,
-      Iso.hom_inv_id_assoc, uncurry_id_eq_ev]
-
-/-- The **Poincaré duality morphism** `PD : G T ⟶ RHom(P 𝟙, 𝟙)`, i.e.
-`Rf_* Λ(d)[2d] ⟶ Rf_* Rf^! Λ ⟶ Rf_* RHom(Λ, Rf^! Λ) ⟶ RHom(Rf_! Λ, Λ)`: the inverse of the
-purity isomorphism, the identification `X ≅ RHom(𝟙, X)`, and the Verdier exchange morphism
-`Φ_{𝟙,𝟙}`. -/
-noncomputable def poincareMap : G.obj T ⟶ (ihom (P.obj (𝟙_ C))).obj (𝟙_ D) :=
-  G.map (pur.inv ≫ toIhomUnit _) ≫ exchange adj adj' pf (𝟙_ C) (𝟙_ D)
-
-/-- **Poincaré duality is the trace–cup pairing.** The transpose `P 𝟙 ⊗ G T ⟶ 𝟙` of the
-Poincaré duality morphism is exactly the cup product
-`Rf_! Λ ⊗ Rf_* Λ(d)[2d] ⟶ Rf_!(Λ ⊗ Λ(d)[2d]) ≅ Rf_! Λ(d)[2d]` followed by the trace. In
-particular the Poincaré duality morphism, the trace and the pairing share the normalization of
-the purity isomorphism. -/
-theorem uncurry_poincareMap :
-    uncurry (poincareMap adj adj' pf pur) =
-      cupProduct adj pf (𝟙_ C) T ≫ P.map (λ_ T).hom ≫ trace adj' pur := by
-  rw [poincareMap, uncurry_natural_left, uncurry_exchange, exchangePairing,
-    pf_naturality_right_assoc, cupProduct, trace]
-  simp only [Category.assoc, ← P.map_comp_assoc]
-  congr 3
-  have hc := adj.counit_naturality (pur.inv ≫ toIhomUnit (S.obj (𝟙_ D)))
-  rw [← MonoidalCategory.whiskerLeft_comp_assoc, hc, MonoidalCategory.whiskerLeft_comp_assoc,
-    MonoidalCategory.whiskerLeft_comp_assoc, toIhomUnit, whiskerLeft_curry_ihom_ev_app]
-  simp
-
 end Poincare
 
 section Biduality
@@ -367,21 +297,6 @@ noncomputable def absoluteExchange (K : C) :
   G.map ((ihom K).map γ.inv) ≫ exchange adj adj' pf K ωY
 
 variable [BraidedCategory C] [BraidedCategory D]
-
-/-- The morphism `a_K : G K ⟶ D_Y P D_X K`, i.e. `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y Rf_! 𝔻_X K`:
-the double-dual morphism followed by the absolute exchange morphism. -/
-noncomputable def dualExchangeAux (K : C) :
-    G.obj K ⟶ (ihom (P.obj ((ihom K).obj ωX))).obj ωY :=
-  G.map (bidualityMap ωX K) ≫ absoluteExchange adj adj' pf ωX ωY γ ((ihom K).obj ωX)
-
-/-- The **opposite Verdier exchange morphism** `Θ_K : P D_X K ⟶ D_Y G K`, i.e.
-`Rf_! 𝔻_X K ⟶ 𝔻_Y 𝔻_Y Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`: the double-dual morphism followed by the dual
-of `dualExchangeAux`. It is determined by the exchange and double-dual morphisms rather than
-chosen independently; the familiar `𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its inverse when it is
-invertible. -/
-noncomputable def dualExchange (K : C) :
-    P.obj ((ihom K).obj ωX) ⟶ (ihom (G.obj K)).obj ωY :=
-  bidualityMap ωY _ ≫ (pre (dualExchangeAux adj adj' pf ωX ωY γ K)).app ωY
 
 end AbsoluteExchange
 

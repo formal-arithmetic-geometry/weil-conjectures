@@ -66,10 +66,6 @@ lemma subfieldSectionRingHom_bijective :
   refine Function.bijective_iff_has_inverse.2 ⟨Γ.map (continuousMapComparison X E), fun s ↦ ?_,
     fun s ↦ ?_⟩ <;> exact Γ.ext (by simp)
 
-/-- **The global sections of `E_X` are the continuous maps `X → E`.** -/
-noncomputable def subfieldSectionRingEquiv : C(X, E) ≃+* Γ (padicSubfieldRingObj X ℓ E) :=
-  RingEquiv.ofBijective _ (subfieldSectionRingHom_bijective ℓ X E)
-
 variable {E} in
 /-- The values at the unit section of the global sections of `E_X` given by continuous maps. -/
 lemma unitHomEval_subfieldSectionRingHom (f : C(X, E)) :
@@ -110,7 +106,6 @@ lemma Γ_map_padicSubfieldRingObjMap_subfieldSectionRingHom {F : FiniteIntermedi
   rfl
 
 end Subfield
-
 
 /-! ### Global sections of `ℚ̄_ℓ,X` -/
 
@@ -309,7 +304,6 @@ noncomputable def padicAlgClSectionRingEquiv :
   RingEquiv.ofBijective _ (padicAlgClSectionRingHom_bijective ℓ X)
 
 end PadicAlgCl
-
 
 /-! ### Compatibility with pullback -/
 

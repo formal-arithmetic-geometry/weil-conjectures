@@ -131,26 +131,6 @@ lemma isIso_openImmersionOrientation (j : X ⟶ Y) [IsOpenImmersion j.left] :
   rw [openImmersionOrientation]
   infer_instance
 
-/-- The orientation of an open immersion is compatible with composition with an open immersion:
-the orientation of `g ≫ ι` is that of `g` followed by
-`Rg^! ℚ̄_ℓ ≅ R(g ≫ ι)^! ℚ̄_ℓ` (`boundedConstructibleUpperShriekUnitCompIso_padicAlgCl`). -/
-lemma openImmersionOrientation_comp {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom]
-    [QuasiCompact U.hom] [IsSeparated U.hom] (g : X ⟶ U) (ι : U ⟶ Y) [IsOpenImmersion g.left]
-    [IsOpenImmersion ι.left] [IsOpenImmersion (g ≫ ι).left] :
-    openImmersionOrientation ℓ (g ≫ ι) =
-      openImmersionOrientation ℓ g ≫
-        (boundedConstructibleUpperShriekUnitCompIso_padicAlgCl ℓ g ι).inv := by
-  have hU : boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ (g ≫ ι) =
-      boundedConstructibleUpperShriekUnitCompIso_padicAlgCl ℓ g ι ≪≫
-        boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ g :=
-    Iso.ext (by
-      simpa only [boundedConstructibleUpperShriekUnitCompIso_padicAlgCl, Iso.trans_hom,
-        Iso.app_hom, Functor.mapIso_hom, Category.assoc] using
-        (boundedConstructibleUpperShriekUnitIso_padicAlgCl_comp ℓ g ι).symm)
-  refine (ObjectProperty.fullyFaithfulι _).map_injective ?_
-  rw [openImmersionOrientation, openImmersionOrientation, hU]
-  simp [Functor.FullyFaithful.preimageIso]
-
 /-- The orientation `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` attached to `f` itself, before the
 normalization along open immersions of the target: the canonical identification
 `openImmersionOrientation` for an open immersion (relative dimension zero), and otherwise
@@ -178,12 +158,6 @@ instance isIso_smoothOrientationBase : IsIso (smoothOrientationBase ℓ f d) := 
   · infer_instance
 
 omit [SmoothOfRelativeDimension d f.left] in
-/-- For an open immersion, `smoothOrientationBase` is `openImmersionOrientation`. -/
-lemma smoothOrientationBase_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j.left] :
-    smoothOrientationBase ℓ j 0 = openImmersionOrientation ℓ j := by
-  rw [smoothOrientationBase, dif_pos (⟨rfl, inferInstance⟩ : 0 = 0 ∧ IsOpenImmersion j.left)]
-
-omit [SmoothOfRelativeDimension d f.left] in
 /-- The orientation of `f` attached to a factorization `f = g ≫ ι` through an open immersion `ι`:
 the orientation `smoothOrientationBase` of `g`, followed by the comparison
 `Rg^! ℚ̄_ℓ ≅ R(g ≫ ι)^! ℚ̄_ℓ = Rf^! ℚ̄_ℓ`
@@ -207,53 +181,6 @@ instance isIso_smoothOrientationOfFactor {U : Over (Spec (.of k))} [LocallyOfFin
   infer_instance
 
 omit [SmoothOfRelativeDimension d f.left] in
-/-- The orientation attached to a factorization only depends on the open immersion `ι`. -/
-lemma smoothOrientationOfFactor_congr {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom]
-    [QuasiCompact U.hom] [IsSeparated U.hom] (g : X ⟶ U) [SmoothOfRelativeDimension d g.left]
-    {ι ι' : U ⟶ Y} [IsOpenImmersion ι.left] [IsOpenImmersion ι'.left] (e : ι = ι')
-    (h : g ≫ ι = f) (h' : g ≫ ι' = f) :
-    smoothOrientationOfFactor ℓ f d g ι h = smoothOrientationOfFactor ℓ f d g ι' h' := by
-  subst e
-  rfl
-
-omit [SmoothOfRelativeDimension d f.left] in
-/-- The orientations attached to factorizations are compatible with composition with an open
-immersion `j` on the target, through `R(f ≫ j)^! ℚ̄_ℓ ≅ Rf^! ℚ̄_ℓ`
-(`boundedConstructibleUpperShriekUnitCompIso_padicAlgCl`); this is the cocycle condition
-`boundedConstructibleUpperShriekUnitCompIso_padicAlgCl_comp`. -/
-lemma smoothOrientationOfFactor_comp {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom]
-    [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
-    [IsSeparated Z.hom] (g : X ⟶ U) [SmoothOfRelativeDimension d g.left] (ι : U ⟶ Y)
-    [IsOpenImmersion ι.left] (j : Y ⟶ Z) [IsOpenImmersion j.left] [IsOpenImmersion (ι ≫ j).left]
-    (h : g ≫ ι = f) (h' : g ≫ ι ≫ j = f ≫ j) :
-    smoothOrientationOfFactor ℓ (f ≫ j) d g (ι ≫ j) h' =
-      smoothOrientationOfFactor ℓ f d g ι h ≫
-        (boundedConstructibleUpperShriekUnitCompIso_padicAlgCl ℓ f j).inv := by
-  subst h
-  have hc := congrArg Iso.inv (Iso.ext
-    (α := boundedConstructibleUpperShriekUnitCompIso_padicAlgCl ℓ g (ι ≫ j))
-    (β := eqToIso (congrArg (fun m ↦ (boundedConstructibleUpperShriek ℓ m).obj
-        (𝟙_ (Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) (Category.assoc g ι j).symm) ≪≫
-      boundedConstructibleUpperShriekUnitCompIso_padicAlgCl ℓ (g ≫ ι) j ≪≫
-      boundedConstructibleUpperShriekUnitCompIso_padicAlgCl ℓ g ι)
-    (boundedConstructibleUpperShriekUnitCompIso_padicAlgCl_comp ℓ g ι j))
-  simp only [Iso.trans_inv, eqToIso.inv, Category.assoc] at hc
-  rw [smoothOrientationOfFactor, smoothOrientationOfFactor, hc]
-  simp only [Category.assoc, eqToHom_refl, Category.comp_id]
-
-omit [SmoothOfRelativeDimension d f.left] in
-/-- For a factorization `f = g ≫ ι` of an open immersion `f` through open immersions, the
-attached orientation is `openImmersionOrientation`. -/
-lemma smoothOrientationOfFactor_of_isOpenImmersion {U : Over (Spec (.of k))}
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (g : X ⟶ U)
-    [IsOpenImmersion g.left] (ι : U ⟶ Y) [IsOpenImmersion ι.left] [IsOpenImmersion f.left]
-    (h : g ≫ ι = f) :
-    smoothOrientationOfFactor ℓ f 0 g ι h = openImmersionOrientation ℓ f := by
-  subst h
-  rw [smoothOrientationOfFactor, smoothOrientationBase_of_isOpenImmersion,
-    openImmersionOrientation_comp, eqToHom_refl, Category.comp_id]
-
-omit [SmoothOfRelativeDimension d f.left] in
 /-- The orientation of `f` attached to an image factorization `p` (`IsSmoothImageFactor`):
 `smoothOrientationOfFactor` for the factorization `f = g ≫ ι` it provides. -/
 noncomputable def smoothOrientationOfImageFactor (p : Σ U : Over (Spec (.of k)), X ⟶ U)
@@ -274,26 +201,6 @@ instance isIso_smoothOrientationOfImageFactor (p : Σ U : Over (Spec (.of k)), X
     (hp : IsSmoothImageFactor f d p) : IsIso (smoothOrientationOfImageFactor ℓ f d p hp) := by
   rw [smoothOrientationOfImageFactor]
   infer_instance
-
-omit [SmoothOfRelativeDimension d f.left] in
-/-- The orientation attached to an image factorization `(U, g)` is the orientation attached to the
-factorization `f = g ≫ ι`, for the (unique) open immersion `ι`. -/
-lemma smoothOrientationOfImageFactor_eq {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom]
-    [QuasiCompact U.hom] [IsSeparated U.hom] (g : X ⟶ U) [SmoothOfRelativeDimension d g.left]
-    (ι : U ⟶ Y) [IsOpenImmersion ι.left] (h : g ≫ ι = f)
-    (hp : IsSmoothImageFactor f d ⟨U, g⟩) :
-    smoothOrientationOfImageFactor ℓ f d ⟨U, g⟩ hp = smoothOrientationOfFactor ℓ f d g ι h := by
-  rw [smoothOrientationOfImageFactor]
-  have := hp.2.2.2.2.2.choose_spec.1
-  exact smoothOrientationOfFactor_congr ℓ f d g (hp.ι_eq hp.2.2.2.2.2.choose_spec.2 h) _ _
-
-omit [SmoothOfRelativeDimension d f.left] in
-/-- The orientation attached to an image factorization only depends on the factorization. -/
-lemma smoothOrientationOfImageFactor_congr {p p' : Σ U : Over (Spec (.of k)), X ⟶ U}
-    (e : p = p') (hp : IsSmoothImageFactor f d p) (hp' : IsSmoothImageFactor f d p') :
-    smoothOrientationOfImageFactor ℓ f d p hp = smoothOrientationOfImageFactor ℓ f d p' hp' := by
-  subst e
-  rfl
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- Blueprint `sk-thm-purity-transport` (`γ_{f,ℚ̄_ℓ}(ℚ̄_ℓ,Y)`, used in `def-pur-smooth-trace`): the
@@ -325,55 +232,6 @@ noncomputable def smoothOrientation :
   exact if h : IsSmoothImageFactor f d (smoothImageFactor f d) then
     smoothOrientationOfImageFactor ℓ f d _ h
   else 0
-
-omit [SmoothOfRelativeDimension d f.left] in
-/-- The orientation of `f` is the orientation attached to the factorization `f = g ≫ ι` given by
-the chosen image factorization `(U, g)` of `f`. -/
-lemma smoothOrientation_eq_smoothOrientationOfFactor {U : Over (Spec (.of k))}
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (g : X ⟶ U)
-    [SmoothOfRelativeDimension d g.left] (ι : U ⟶ Y) [IsOpenImmersion ι.left] (h : g ≫ ι = f)
-    (e : smoothImageFactor f d = ⟨U, g⟩) (hp : IsSmoothImageFactor f d ⟨U, g⟩) :
-    smoothOrientation ℓ f d = smoothOrientationOfFactor ℓ f d g ι h := by
-  rw [smoothOrientation, dif_pos (e ▸ hp)]
-  exact (smoothOrientationOfImageFactor_congr ℓ f d e _ hp).trans
-    (smoothOrientationOfImageFactor_eq ℓ f d g ι h hp)
-
-omit [SmoothOfRelativeDimension d f.left] in
-/-- For an open immersion `j`, the orientation is the canonical identification
-`openImmersionOrientation`. -/
-lemma smoothOrientation_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j.left] :
-    smoothOrientation ℓ j 0 = openImmersionOrientation ℓ j := by
-  obtain ⟨⟨U, g⟩, e⟩ : ∃ p, smoothImageFactor j 0 = p := ⟨_, rfl⟩
-  have hp : IsSmoothImageFactor j 0 ⟨U, g⟩ := e ▸ isSmoothImageFactor_smoothImageFactor j 0
-  obtain ⟨_, _, _, _, _, ι, _, h⟩ := id hp
-  have : IsOpenImmersion g.left := MorphismProperty.of_postcomp _ (W' := @IsOpenImmersion) _
-    ι.left inferInstance (by rw [← Over.comp_left, h]; infer_instance)
-  rw [smoothOrientation_eq_smoothOrientationOfFactor ℓ j 0 g ι h e hp,
-    smoothOrientationOfFactor_of_isOpenImmersion]
-
-omit [SmoothOfRelativeDimension d f.left] in
-/-- **Compatibility of the orientation with composition with an open immersion** `j` on the
-target: `γ_{f ≫ j}` is `γ_f` followed by `Rf^! ℚ̄_ℓ ≅ R(f ≫ j)^! ℚ̄_ℓ`
-(`boundedConstructibleUpperShriekUnitCompIso_padicAlgCl`). -/
-lemma smoothOrientation_comp_openImmersion {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom]
-    [QuasiCompact Z.hom] [IsSeparated Z.hom] (j : Y ⟶ Z) [IsOpenImmersion j.left]
-    [SmoothOfRelativeDimension d f.left] :
-    smoothOrientation ℓ (f ≫ j) d =
-      smoothOrientation ℓ f d ≫
-        (boundedConstructibleUpperShriekUnitCompIso_padicAlgCl ℓ f j).inv := by
-  obtain ⟨⟨U, g⟩, e⟩ : ∃ p, smoothImageFactor f d = p := ⟨_, rfl⟩
-  have hp : IsSmoothImageFactor f d ⟨U, g⟩ := e ▸ isSmoothImageFactor_smoothImageFactor f d
-  obtain ⟨_, _, _, _, _, ι, _, h⟩ := id hp
-  have : IsOpenImmersion (ι ≫ j).left := by
-    rw [Over.comp_left]
-    infer_instance
-  have hp' : IsSmoothImageFactor (f ≫ j) d ⟨U, g⟩ := by
-    rw [isSmoothImageFactor_comp_openImmersion]
-    exact hp
-  rw [smoothOrientation_eq_smoothOrientationOfFactor ℓ (f ≫ j) d g (ι ≫ j)
-      (by rw [← Category.assoc, h]) ((smoothImageFactor_comp_openImmersion f j d).trans e) hp',
-    smoothOrientation_eq_smoothOrientationOfFactor ℓ f d g ι h e hp,
-    smoothOrientationOfFactor_comp]
 
 -- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
 -- instance-implicit section variables, even under `include`. The elaborated signature has it
@@ -441,64 +299,6 @@ instance isIso_smoothPurityMap [SmoothOfRelativeDimension d f.left] :
     IsIso (smoothPurityMap ℓ f d) := by
   rw [smoothPurityMap_eq_smoothOrientation]
   infer_instance
-
-/-- **Smooth purity**: for a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type
-which is smooth of pure relative dimension `d`, the exceptional inverse image of the constant
-coefficient object is the shifted Tate twist, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X(d)[2d]`. It is the inverse of
-the adjoint of the trace (`smoothPurityMap`), after the inclusion
-`Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`. -/
-noncomputable def smoothPurityIso :
-    ((boundedConstructibleUpperShriek ℓ f).obj
-      (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))).obj ≅
-      (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
-  (ObjectProperty.ι _).mapIso (asIso (smoothPurityMap ℓ f d)).symm
-
-/-- Blueprint `sk-thm-purity-transport`, étale case: **normalization of purity in relative
-dimension zero**: for an open immersion `j`, the purity isomorphism `Rj^! ℚ̄_ℓ ≅ ℚ̄_ℓ(0)[0]` is
-the canonical identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
-(`boundedConstructibleUpperShriekUnitIso_padicAlgCl`); equivalently, the trace of `j` is the
-counit `Rj_! Rj^! ℚ̄_ℓ ⟶ ℚ̄_ℓ` read through it. -/
-theorem smoothPurityIso_zero_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j.left] :
-    smoothPurityIso ℓ j 0 =
-      (ObjectProperty.ι _).mapIso (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j) ≪≫
-        (tateTwistDerivedZeroIso ℓ X.left).symm ≪≫
-        ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).symm := by
-  have h : smoothOrientation ℓ j 0 = openImmersionOrientation ℓ j :=
-    smoothOrientation_of_isOpenImmersion ℓ j
-  have h' : asIso (smoothPurityMap ℓ j 0) = ((ObjectProperty.fullyFaithfulι _).preimageIso
-      (Y := boundedConstructibleTateTwist ℓ X ((0 : ℕ) : ℤ) (2 * ((0 : ℕ) : ℤ)))
-      ((ObjectProperty.ι _).mapIso (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j) ≪≫
-        (tateTwistDerivedZeroIso ℓ X.left).symm ≪≫
-        ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).symm)).symm :=
-    Iso.ext ((smoothPurityMap_eq_smoothOrientation ℓ j 0).trans h)
-  rw [smoothPurityIso, h', Iso.symm_symm_eq]
-  ext1
-  simp [Functor.FullyFaithful.preimageIso]
-
-/-- Blueprint `sk-prop-sp-composition`, case of an open immersion: **compatibility of purity
-with composition with an open immersion**: for `f` smooth of pure relative dimension `d` and an
-open immersion `j` on its target, the purity isomorphism of `f ≫ j` is that of `f` precomposed with
-`R(f ≫ j)^! ℚ̄_ℓ ≅ Rf^! Rj^! ℚ̄_ℓ ≅ Rf^! ℚ̄_ℓ`, the composition isomorphism of the exceptional
-inverse images followed by purity for `j` (`boundedConstructibleUpperShriekUnitIso_padicAlgCl`). -/
-theorem smoothPurityIso_comp_openImmersion {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom]
-    [QuasiCompact Z.hom] [IsSeparated Z.hom] (j : Y ⟶ Z) [IsOpenImmersion j.left]
-    [SmoothOfRelativeDimension d (f ≫ j).left] :
-    smoothPurityIso ℓ (f ≫ j) d =
-      (ObjectProperty.ι _).mapIso
-          ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).app _ ≪≫
-            (boundedConstructibleUpperShriek ℓ f).mapIso
-              (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j)) ≪≫
-        smoothPurityIso ℓ f d := by
-  have hP : asIso (smoothPurityMap ℓ (f ≫ j) d) = asIso (smoothPurityMap ℓ f d) ≪≫
-      (boundedConstructibleUpperShriekUnitCompIso_padicAlgCl ℓ f j).symm :=
-    Iso.ext (by
-      rw [asIso_hom, Iso.trans_hom, asIso_hom, Iso.symm_hom, smoothPurityMap_eq_smoothOrientation,
-        smoothPurityMap_eq_smoothOrientation, smoothOrientation_comp_openImmersion])
-  rw [smoothPurityIso, smoothPurityIso, hP]
-  refine Iso.ext ?_
-  rw [Functor.mapIso_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, Functor.map_comp,
-    Iso.trans_hom, Functor.mapIso_hom, Functor.mapIso_hom, Iso.symm_hom]
-  rfl
 
 end Purity
 

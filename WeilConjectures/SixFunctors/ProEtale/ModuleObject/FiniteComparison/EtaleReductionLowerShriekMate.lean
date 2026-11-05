@@ -36,18 +36,4 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {Z Y : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- The closed-immersion case of `exists_etaleReductionLowerShriekIso`: for a closed immersion
-`f`, reduction modulo `ℓⁿ` read on the étale site commutes with `Rf_!` through an isomorphism
-`γ` whose transpose under `Rf_! ⊣ Rf^!` is an isomorphism. -/
-theorem exists_etaleReductionLowerShriekIso_of_isClosedImmersion (f : Z ⟶ Y)
-    [IsClosedImmersion f.left] :
-    ∃ γ : PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f ⋙
-        etaleReduction ℓ E n Y ≅
-      etaleReduction ℓ E n Z ⋙
-        Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left,
-      IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-        (Etale.rightDerivedUpperShriekAdjunction _ f.left) (TwoSquare.mk _ _ _ _ γ.inv)) :=
-  ⟨etaleReductionLowerShriekIsoOfIsClosedImmersion ℓ E n f,
-    isIso_mateEquiv_etaleReduction_of_isClosedImmersion ℓ E n f _⟩
-
 end AlgebraicGeometry.ProEtale.CondensedRing

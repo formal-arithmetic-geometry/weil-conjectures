@@ -141,14 +141,6 @@ noncomputable def Etale.openClosedShortComplexFunctor :
   zero := NatTrans.ext (funext fun F ↦ (Etale.openClosedShortComplex A j i hji F).zero)
 
 omit [HasSmallSiteSheafify A] in
-/-- The open–closed short complex at `F` is the complex of endofunctors evaluated at `F`; this
-is what "naturally in `F`" means. -/
-lemma Etale.openClosedShortComplexFunctor_map_evaluation (F : Sheaf X.smallEtaleTopology A) :
-    (Etale.openClosedShortComplexFunctor A j i hji).map ((evaluation _ _).obj F) =
-      Etale.openClosedShortComplex A j i hji F :=
-  rfl
-
-omit [HasSmallSiteSheafify A] in
 /-- **The `j^*`-image of the open–closed short complex is short exact**, i.e.
 
 `0 ⟶ j^* j_! j^* F ⟶ j^* F ⟶ j^* i_* i^* F ⟶ 0`

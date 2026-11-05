@@ -568,21 +568,6 @@ theorem dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap
     (baseChange_comp_map_dualizingComplexBaseChange_comp_trace ℓ e sqX)
   exact (eq_dualizingComplexBaseChange_of_trace ℓ e sqZ h).symm
 
-
-/-- `ProEtale.CondensedRing.dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap`, read
-through the composition isomorphisms `Rf^! ω_X ≅ ω_Z` and `Rf'^! ω_{X'} ≅ ω_{Z'}`:
-`φ_Z ∘ ρ' ⁻¹ = Rf'^!(φ_X) ∘ γ(ω_X) ∘ πZ^*(ρ⁻¹)`. -/
-theorem dualizingComplexBaseChange_comp_upperShriekDualizingComplexIso_inv
-    (sqX : IsPullback πX (toPoint X').left (toPoint X).left πₛ)
-    (sqZ : IsPullback πZ (toPoint Z').left (toPoint Z).left πₛ)
-    (sqf : IsPullback πZ f'.left f.left πX) :
-    dualizingComplexBaseChange ℓ e sqZ ≫ (upperShriekDualizingComplexIso ℓ f').inv =
-      (boundedConstructibleUpperStarOfMap ℓ πZ).map (upperShriekDualizingComplexIso ℓ f).inv ≫
-        (upperShriekBaseChangeOfMap ℓ sqf).app (dualizingComplex ℓ X) ≫
-        (boundedConstructibleUpperShriek ℓ f').map (dualizingComplexBaseChange ℓ e sqX) := by
-  rw [dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap ℓ e sqX sqZ sqf]
-  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-
 end Dualizing
 
 /-! ### Closed immersions of proper schemes -/
@@ -630,18 +615,6 @@ theorem isIso_dualizingComplexBaseChange_iff_of_isClosedImmersion
     ((boundedConstructibleUpperShriek ℓ i').map (dualizingComplexBaseChange ℓ e sqX) ≫
       (upperShriekDualizingComplexIso ℓ i').hom)
   exact IsIso.of_isIso_comp_right _ (upperShriekDualizingComplexIso ℓ i').hom
-
-/-- **Base change of dualizing complexes and closed immersions**: if the comparison `φ_X` of the
-dualizing complexes of a proper `F`-scheme `X` along a field extension `L/F` is an isomorphism,
-then so is that of every closed subscheme `Z` of `X`. -/
-theorem isIso_dualizingComplexBaseChange_of_isClosedImmersion
-    (sqX : IsPullback πX (toPoint X').left (toPoint X).left
-      (Spec.map (CommRingCat.ofHom (algebraMap F L))))
-    (sqZ : IsPullback πZ (toPoint Z').left (toPoint Z).left
-      (Spec.map (CommRingCat.ofHom (algebraMap F L))))
-    (sqi : IsPullback πZ i'.left i.left πX) [IsIso (dualizingComplexBaseChange ℓ e sqX)] :
-    IsIso (dualizingComplexBaseChange ℓ e sqZ) :=
-  (isIso_dualizingComplexBaseChange_iff_of_isClosedImmersion ℓ e sqX sqZ sqi).2 inferInstance
 
 end ClosedDualizing
 

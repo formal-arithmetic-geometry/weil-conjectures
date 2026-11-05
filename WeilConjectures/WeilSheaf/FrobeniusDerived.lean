@@ -36,15 +36,6 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 variable {C : Type*} [Category C] (F : C ⥤ C)
 
-/-- The structure isomorphisms `F a ≅ a` of the algebras with invertible structure morphism of
-`F` form a natural isomorphism `F ∘ forget ≅ forget`. -/
-noncomputable def forgetCompIso : forget F ⋙ F ≅ forget F :=
-  NatIso.ofComponents (fun K ↦ K.str) (fun φ ↦ φ.hom.h)
-
-@[simp]
-lemma forgetCompIso_hom_app (K : IsoAlgebra F) : (forgetCompIso F).hom.app K = K.obj.str :=
-  rfl
-
 end CategoryTheory.Endofunctor.IsoAlgebra
 
 namespace AlgebraicGeometry
@@ -55,23 +46,6 @@ open Endofunctor
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex.
-
-The derived Frobenius isomorphism `θ_K : Fr_X^* For(K) ≅ For(K)` of a Weil complex `K`, natural
-in `K`: the isomorphism induced on derived categories by the structure isomorphisms
-`φ : Fr_X^* F ≅ F` of pro-étale Weil sheaves, through
-`D(Fr_X^*) ∘ D(forget) ≅ D(Fr_X^* ∘ forget) ≅ D(forget)`. Here `Fr_X^*`
-(`AlgebraicGeometry.WeilSheaf.frobeniusPullback`) is the pullback along the geometric Frobenius
-`g_X` of the blueprint; it is exact, so its derived functor `Lg_X^*` is the functor it induces on
-derived categories. -/
-noncomputable def frobeniusIso :
-    forget (k₀ := k₀) (l := l) (X := X) ⋙ (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory ≅
-      forget (X := X) :=
-  Functor.isoWhiskerLeft (ObjectProperty.ι _)
-    ((Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
-        (WeilSheaf.frobeniusPullback k₀ l X)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso (IsoAlgebra.forgetCompIso _))
 
 end WeilComplex
 

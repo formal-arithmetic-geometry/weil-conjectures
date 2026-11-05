@@ -79,76 +79,6 @@ namespace Homotopy
 
 variable {C : Type*} [Category* C] [Preadditive C] {K : CochainComplex C ℤ} {v v' : K ⟶ K}
 
-/-- Blueprint `lem-trf-chain-supertrace` (homotopy invariance): let `τ` be a family of additive
-functions on the endomorphisms of the terms of a bounded complex `K` which is cyclic,
-`τ (g ≫ h) = τ (h ≫ g)`. Then `∑ₚ (-1)ᵖ τ(vᵖ)` only depends on the homotopy class of
-`v : K ⟶ K`: if `v - v' = d h + h d`, the terms `τ(dh)` and `τ(hd)` cancel in pairs. -/
-theorem sum_negOnePow_smul_eq (ho : Homotopy v v') (a b : ℤ) [K.IsStrictlyGE a]
-    [K.IsStrictlyLE b] {M : Type*} [AddCommGroup M] (τ : ∀ p, (K.X p ⟶ K.X p) →+ M)
-    (hτ : ∀ p q (g : K.X p ⟶ K.X q) (h : K.X q ⟶ K.X p), τ p (g ≫ h) = τ q (h ≫ g)) :
-    ∑ p ∈ Finset.Icc a b, p.negOnePow • τ p (v.f p) =
-      ∑ p ∈ Finset.Icc a b, p.negOnePow • τ p (v'.f p) := by
-  let g : ℤ → M := fun p ↦ p.negOnePow • τ p (prevD p ho.hom)
-  have hg (p : ℤ) (hp : p ∉ Finset.Icc a b) : g p = 0 := by
-    simp only [g]
-    simp only [Finset.mem_Icc, not_and_or, not_le] at hp
-    rcases hp with hp | hp
-    · rw [(K.isZero_of_isStrictlyGE a p hp).eq_of_src (prevD p ho.hom) 0, map_zero, smul_zero]
-    · rw [(K.isZero_of_isStrictlyLE b p hp).eq_of_src (prevD p ho.hom) 0, map_zero, smul_zero]
-  have hg' (p : ℤ) (hp : p ∉ Finset.Icc a b) : g (p + 1) = 0 := by
-    by_cases hp' : p + 1 ∈ Finset.Icc a b
-    · obtain rfl : p = a - 1 := by
-        simp only [Finset.mem_Icc] at hp hp'
-        omega
-      simp only [g]
-      rw [prevD_eq _ (rfl : (ComplexShape.up ℤ).Rel (a - 1) (a - 1 + 1)),
-        (K.isZero_of_isStrictlyGE a (a - 1) (by omega)).eq_of_tgt (ho.hom (a - 1 + 1) (a - 1)) 0,
-        zero_comp, map_zero, smul_zero]
-    · exact hg _ hp'
-  have e (p : ℤ) : p.negOnePow • τ p (v.f p) = p.negOnePow • τ p (v'.f p) + (g p - g (p + 1)) := by
-    rw [ho.comm p, map_add, map_add,
-      dNext_eq _ (rfl : (ComplexShape.up ℤ).Rel p (p + 1)), hτ,
-      ← prevD_eq _ (rfl : (ComplexShape.up ℤ).Rel p (p + 1))]
-    simp only [g, Int.negOnePow_succ, Units.neg_smul, smul_add]
-    abel
-  rw [Finset.sum_congr rfl (fun p _ ↦ e p), Finset.sum_add_distrib, Finset.sum_sub_distrib,
-    ← finsum_eq_sum_of_support_subset g (s := Finset.Icc a b) ?_,
-    ← finsum_eq_sum_of_support_subset (fun p ↦ g (p + 1)) (s := Finset.Icc a b) ?_]
-  · erw [finsum_comp_equiv (Equiv.addRight 1) (f := g)]
-    rw [sub_self, add_zero]
-  · intro p hp
-    by_contra hp'
-    exact hp (hg' p hp')
-  · intro p hp
-    by_contra hp'
-    exact hp (hg p hp')
-
-/-- Blueprint `lem-trf-chain-supertrace` (homotopy invariance): the alternating sum
-`∑ₚ (-1)ᵖ tr(vᵖ | Kᵖ)` of the categorical traces of the components of a chain endomorphism `v` of
-a bounded complex only depends on the homotopy class of `v`. -/
-theorem sum_negOnePow_smul_trace_eq {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C]
-    [MonoidalPreadditive C] [BraidedCategory C] {K : CochainComplex C ℤ}
-    [∀ n, HasRightDual (K.X n)] {v v' : K ⟶ K} (ho : Homotopy v v') (a b : ℤ)
-    [K.IsStrictlyGE a] [K.IsStrictlyLE b] :
-    ∑ p ∈ Finset.Icc a b, (p.negOnePow : ℤ) • trace (v.f p) =
-      ∑ p ∈ Finset.Icc a b, (p.negOnePow : ℤ) • trace (v'.f p) :=
-  ho.sum_negOnePow_smul_eq a b (fun p ↦ traceAddMonoidHom (K.X p))
-    (fun _ _ g h ↦ trace_comp_comm g h)
-
-/-- Blueprint `lem-trf-chain-supertrace` (homotopy invariance): for a bounded complex `P` of
-finite free modules over a commutative ring `R`, the supertrace `∑ᵢ (-1)ⁱ Tr(vⁱ | Pⁱ)` of a chain
-endomorphism `v` only depends on the homotopy class of `v`. -/
-theorem sum_negOnePow_smul_linearMapTrace_eq {R : Type*} [CommRing R]
-    {P : CochainComplex (ModuleCat R) ℤ} [∀ n, Module.Free R (P.X n)]
-    [∀ n, Module.Finite R (P.X n)] {v v' : P ⟶ P} (ho : Homotopy v v') (a b : ℤ)
-    [P.IsStrictlyGE a] [P.IsStrictlyLE b] :
-    ∑ i ∈ Finset.Icc a b, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom =
-      ∑ i ∈ Finset.Icc a b, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v'.f i).hom :=
-  ho.sum_negOnePow_smul_eq a b
-    (fun i ↦ (LinearMap.trace R (P.X i)).toAddMonoidHom.comp
-      (ModuleCat.homAddEquiv (M := P.X i) (N := P.X i)).toAddMonoidHom)
-    (fun _ _ g h ↦ LinearMap.trace_comp_comm' g.hom h.hom)
-
 end Homotopy
 
 namespace CochainComplex
@@ -169,7 +99,6 @@ lemma rightDual.coevPQ_comp_evalPQ (v : K ⟶ K) (p : ℤ) :
     (by simp [HomologicalComplex.XIsoOfEq])
 
 end
-
 
 variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
   [BraidedCategory C] [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
@@ -239,15 +168,5 @@ variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [Monoidal
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   {K : CochainComplex C ℤ} [∀ n, HasRightDual (K.X n)]
-
-/-- Blueprint `lem-trf-chain-supertrace`: the categorical trace of a chain endomorphism of a
-bounded complex only depends on its homotopy class. -/
-theorem trace_eq {v v' : K ⟶ K} (ho : Homotopy v v') (a b : ℤ) [K.IsStrictlyGE a]
-    [K.IsStrictlyLE b] :
-    letI := hasRightDual K a b
-    trace v = trace v' := by
-  let := hasRightDual K a b
-  refine HomologicalComplex.from_single_hom_ext ?_
-  rw [trace_f_zero_eq K a b v, trace_f_zero_eq K a b v', ho.sum_negOnePow_smul_trace_eq a b]
 
 end Homotopy

@@ -19,16 +19,4 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The exact composition family already used by `schemeDerivedBaseChangeMap`.
-This name shares the pinned expression; it does not select new comparison data.
-Source: Stacks Project, Tag 0D5S, and `exists_derivedPullbackComposition`.
-(blueprint: def-pc-t2-open-pinned-composition). -/
-noncomputable abbrev singleComplexOpenPinnedComposition
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :
-    ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
-      derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
-  @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
-    (Classical.choose_spec exists_derivedPullbackComposition)))
-
 end AlgebraicGeometry

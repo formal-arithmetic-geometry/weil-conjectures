@@ -104,10 +104,6 @@ noncomputable def dualTranspose {M N : WeilSheaf k₀ l X} (hM : M.IsLisse) (hN 
         (congrArg Mod.Hom.hom N.obj.str.inv_hom_id) (dual_evaluation_str M hM)
         (dualStr_whiskerRight_evaluation N hN))⟩)
 
-lemma dualTranspose_hom_hom_f {M N : WeilSheaf k₀ l X} (hM : M.IsLisse) (hN : N.IsLisse)
-    (i : N ⟶ M.dual hM) : (dualTranspose hM hN i).hom.hom.f = Mod.transpose i.hom.hom.f :=
-  rfl
-
 end Transpose
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

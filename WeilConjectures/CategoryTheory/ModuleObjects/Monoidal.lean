@@ -46,7 +46,6 @@ universe v u
 
 open CategoryTheory MonoidalCategory BraidedCategory MonObj Limits
 
-
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
   [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
@@ -61,23 +60,6 @@ noncomputable def monoidalCategory (A : Mon C) : MonoidalCategory (Bimod A A) :=
   @instMonoidalCategoryHom (Mon C) monBicategory A
 
 attribute [local instance] monoidalCategory
-
-lemma tensorObj_eq {A : Mon C} (P Q : Bimod A A) : P ⊗ Q = P.tensorBimod Q := rfl
-
-lemma tensorUnit_eq {A : Mon C} : 𝟙_ (Bimod A A) = regular A := rfl
-
-lemma whiskerLeft_eq {A : Mon C} (P : Bimod A A) {Q Q' : Bimod A A} (f : Q ⟶ Q') :
-    P ◁ f = whiskerLeft P f := rfl
-
-lemma whiskerRight_eq {A : Mon C} {P P' : Bimod A A} (f : P ⟶ P') (Q : Bimod A A) :
-    f ▷ Q = whiskerRight f Q := rfl
-
-lemma associator_eq {A : Mon C} (P Q S : Bimod A A) :
-    α_ P Q S = associatorBimod P Q S := rfl
-
-lemma leftUnitor_eq {A : Mon C} (P : Bimod A A) : λ_ P = leftUnitorBimod P := rfl
-
-lemma rightUnitor_eq {A : Mon C} (P : Bimod A A) : ρ_ P = rightUnitorBimod P := rfl
 
 end Bimod
 
@@ -171,12 +153,6 @@ noncomputable instance monoidalCategory : MonoidalCategory (Mod C R) :=
 section TensorProduct
 
 variable (M N : Mod C R)
-
-/-- The relative tensor product `M ⊗_R N` is the coequalizer of the right action of `R` on `M`
-and the left action of `R` on `N`. -/
-lemma tensorObj_X : (M ⊗ N).X =
-    coequalizer (((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X) ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) :=
-  rfl
 
 /-- The projection `M ⊗ N ⟶ M ⊗_R N`. -/
 noncomputable def tensorObjπ : M.X ⊗ N.X ⟶ (M ⊗ N).X :=

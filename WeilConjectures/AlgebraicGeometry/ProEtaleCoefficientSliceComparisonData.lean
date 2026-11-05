@@ -115,10 +115,6 @@ abbrev b := proEtaleSliceCoefficientIso U O B c delta
 Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
 abbrev e := proEtaleSliceScalarTransport U O B (b U O B c delta)
 
-/-- Actual exact module inverse image with the specified coefficient isomorphism c.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
-abbrev f := proEtaleRingModulePullback U.hom O B c
-
 variable (S : CoefficientClosedStructure (proEtaleCoefficientHom X O))
   (SR : CoefficientClosedStructure (proEtaleCoefficientHom U.left (proEtaleSliceRing U O)))
   (SB : CoefficientClosedStructure (proEtaleCoefficientHom U.left B))

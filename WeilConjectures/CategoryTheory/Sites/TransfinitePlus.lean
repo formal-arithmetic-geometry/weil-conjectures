@@ -83,10 +83,6 @@ noncomputable def transfinitePlus : (Cᵒᵖ ⥤ A) ⥤ (Cᵒᵖ ⥤ A) :=
 noncomputable def toTransfinitePlus : 𝟭 (Cᵒᵖ ⥤ A) ⟶ J.transfinitePlus A κ :=
   (J.plusSuccStruct A).ιIteration κ.ord.ToType
 
-/-- The stage at the least element is the identity functor. -/
-noncomputable def transfinitePlusStageBotIso : J.transfinitePlusStage A κ ⊥ ≅ 𝟭 (Cᵒᵖ ⥤ A) :=
-  (J.plusSuccStruct A).iterationFunctorObjBotIso κ.ord.ToType
-
 variable [Fact κ.IsRegular] in
 /-- The successor stage is obtained from the previous one by applying the plus construction. -/
 noncomputable def transfinitePlusStageSuccIso (j : κ.ord.ToType) :
@@ -176,10 +172,5 @@ lemma W_toTransfinitePlus_app (P : Cᵒᵖ ⥤ A) : J.W ((J.toTransfinitePlus A 
     ((J.plusSuccStruct A).transfiniteCompositionOfShapeιIteration κ.ord.ToType).ofLE
       (by rintro _ _ _ ⟨F⟩; exact J.W_toPlus _)
   exact J.W.transfiniteCompositionsOfShape_le κ.ord.ToType _ h.map.mem
-
-/-- The natural transformation `𝟭 _ ⟶ J.transfinitePlus A κ` lies in `J.W` objectwise. -/
-lemma functorCategory_W_toTransfinitePlus :
-    J.W.functorCategory (Cᵒᵖ ⥤ A) (J.toTransfinitePlus A κ) :=
-  J.W_toTransfinitePlus_app A κ
 
 end CategoryTheory.GrothendieckTopology

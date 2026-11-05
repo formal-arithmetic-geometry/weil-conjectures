@@ -93,19 +93,6 @@ def Universal (F : V ⥤ W) [F.Additive]
   ∀ N : DerivedCategory V,
     Function.Bijective (fun f : obj V M ⟶ N ↦ unit F η ≫ F.mapDerivedCategory.map f)
 
-/-- Degree-zero maps preserve composition.
-(auxiliary; not a blueprint node) -/
-theorem map_comp {M N P : V} (f : M ⟶ N) (g : N ⟶ P) :
-    map (f ≫ g) = map f ≫ map g := by
-  unfold map obj
-  exact (DerivedCategory.singleFunctor V 0).map_comp f g
-
-/-- Degree-zero maps preserve identities.
-(auxiliary; not a blueprint node) -/
-theorem map_id (M : V) : map (𝟙 M) = 𝟙 (obj V M) := by
-  unfold map obj
-  exact (DerivedCategory.singleFunctor V 0).map_id M
-
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- The named universal property is exactly the usual single-functor formula.

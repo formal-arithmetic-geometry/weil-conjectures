@@ -85,11 +85,6 @@ lemma baseChangeAction_app_left_snd (s : Y ⟶ Y) (hs : s ≫ g = g) (V : X.ProE
     ((baseChangeAction g s hs).app V).left ≫ pullback.snd V.hom g = pullback.snd V.hom g ≫ s := by
   simp [baseChangeAction]
 
-lemma baseChangeAction_comp_proj (s : Y ⟶ Y) (hs : s ≫ g = g) :
-    baseChangeAction g s hs ≫ baseChangeProj g = baseChangeProj g := by
-  refine NatTrans.ext (funext fun V ↦ MorphismProperty.Over.Hom.ext ?_)
-  simp
-
 lemma baseChangeAction_comp (s s' : Y ⟶ Y) (hs : s ≫ g = g) (hs' : s' ≫ g = g) :
     baseChangeAction g s hs ≫ baseChangeAction g s' hs' =
       baseChangeAction g (s ≫ s') (by rw [assoc, hs', hs]) := by
@@ -152,8 +147,6 @@ lemma isGalois_baseChangeAction (hgal : IsGaloisAction g ρ) (V T : X.ProEt)
         overHomMk_left, assoc, baseChangeAction_app_left_snd]
       simpa only [assoc] using hUρ i
 
-
-
 section Trace
 
 variable [Group Γ] [Fintype Γ] (hmul : ∀ a b, ρ a ≫ ρ b = ρ (a * b)) (hgal : IsGaloisAction g ρ)
@@ -183,50 +176,6 @@ noncomputable def galoisTraceRestriction (H : Sheaf (ProEt.topology X) AddCommGr
     (generate_singleton_baseChangeProj_mem g) (isGalois_baseChangeAction g hρ hgal)
     (isSheaf_comp_forget H))
 
-/-- The action of `a : Γ` on `g_* j_g^* H`. -/
-noncomputable def galoisActionRestriction (a : Γ)
-    (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    (g)_*[AddCommGrpCat.{u + 1}].obj
-      ((localizationRestriction AddCommGrpCat.{u + 1} g inferInstance).obj H) ⟶
-    (g)_*[AddCommGrpCat.{u + 1}].obj
-      ((localizationRestriction AddCommGrpCat.{u + 1} g inferInstance).obj H) :=
-  ObjectProperty.homMk (Presheaf.baseChangeAction (baseChangeAction g (ρ a) (hρ a)) H.obj)
-
-omit [Surjective g] [QuasiCompact g] in
-lemma localizationRestrictionLowerStarAdjunction_unit_app_hom
-    (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    ((localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
-      inferInstance).unit.app H).hom = Presheaf.baseChangeUnit (baseChangeProj g) H.obj := by
-  rfl
-
-/-- The unit followed by the trace is multiplication by the order of `Γ`. -/
-lemma unit_comp_galoisTraceRestriction (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
-      inferInstance).unit.app H ≫
-      galoisTraceRestriction g hρ hmul hgal H = Fintype.card Γ • 𝟙 H := by
-  apply (sheafToPresheaf _ _).map_injective
-  rw [Functor.map_comp, Functor.map_nsmul]
-  erw [CategoryTheory.Functor.map_id]
-  exact Presheaf.baseChangeUnit_comp_baseChangeTrace (ProEt.topology X)
-    (fun a ↦ baseChangeAction g (ρ a) (hρ a)) (baseChangeAction_comp_mul g hρ hmul)
-    (generate_singleton_baseChangeProj_mem g) (isGalois_baseChangeAction g hρ hgal)
-    (isSheaf_comp_forget H)
-    fun a ↦ baseChangeAction_comp_proj g (ρ a) (hρ a)
-
-/-- The trace followed by the unit is the norm `∑ a, ρ a`. -/
-@[reassoc]
-lemma galoisTraceRestriction_comp_unit (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    galoisTraceRestriction g hρ hmul hgal H ≫
-      (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
-        inferInstance).unit.app H =
-      ∑ a, galoisActionRestriction g hρ a H := by
-  apply (sheafToPresheaf _ _).map_injective
-  rw [Functor.map_comp, Functor.map_sum]
-  exact Presheaf.baseChangeTrace_comp_baseChangeUnit (ProEt.topology X)
-    (fun a ↦ baseChangeAction g (ρ a) (hρ a)) (baseChangeAction_comp_mul g hρ hmul)
-    (generate_singleton_baseChangeProj_mem g) (isGalois_baseChangeAction g hρ hgal)
-    (isSheaf_comp_forget H)
-
 /-- The trace is natural. -/
 lemma galoisTraceRestriction_naturality {H H' : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}}
     (φ : H ⟶ H') :
@@ -251,14 +200,6 @@ noncomputable def galoisTrace (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1
   (g)_*[AddCommGrpCat.{u + 1}].map ((upperStarIsoRestriction g).hom.app H) ≫
     galoisTraceRestriction g hρ hmul hgal H
 
-/-- The action of `a : Γ` on `g_* g^* H`. -/
-noncomputable def galoisAction (a : Γ) (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    (g)_*[AddCommGrpCat.{u + 1}].obj ((g)^*[AddCommGrpCat.{u + 1}].obj H) ⟶
-      (g)_*[AddCommGrpCat.{u + 1}].obj ((g)^*[AddCommGrpCat.{u + 1}].obj H) :=
-  (g)_*[AddCommGrpCat.{u + 1}].map ((upperStarIsoRestriction g).hom.app H) ≫
-    galoisActionRestriction g hρ a H ≫
-      (g)_*[AddCommGrpCat.{u + 1}].map ((upperStarIsoRestriction g).inv.app H)
-
 omit [Surjective g] [QuasiCompact g] in
 @[reassoc]
 lemma upperStarLowerStarAdjunction_unit_app_comp
@@ -268,31 +209,6 @@ lemma upperStarLowerStarAdjunction_unit_app_comp
       (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
         inferInstance).unit.app H :=
   Adjunction.unit_leftAdjointUniq_hom_app _ _ H
-
-/-- **The unit followed by the trace is the degree**: `u ≫ t = |Γ| • 𝟙` for the unit
-`u : H ⟶ g_* g^* H` of a Galois covering with group `Γ`. -/
-theorem unit_comp_galoisTrace (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app H ≫
-      galoisTrace g hρ hmul hgal H = Fintype.card Γ • 𝟙 H := by
-  rw [galoisTrace]
-  erw [upperStarLowerStarAdjunction_unit_app_comp_assoc]
-  exact unit_comp_galoisTraceRestriction g hρ hmul hgal H
-
-/-- **The trace followed by the unit is the norm**: `t ≫ u = ∑ a, ρ a`. -/
-theorem galoisTrace_comp_unit (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    galoisTrace g hρ hmul hgal H ≫
-      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app H =
-      ∑ a, galoisAction g hρ a H := by
-  have h : (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app H =
-      (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
-        inferInstance).unit.app H ≫
-        (g)_*[AddCommGrpCat.{u + 1}].map ((upperStarIsoRestriction g).inv.app H) := by
-    erw [← upperStarLowerStarAdjunction_unit_app_comp_assoc g H]
-    rw [← Functor.map_comp, Iso.hom_inv_id_app]
-    erw [CategoryTheory.Functor.map_id, comp_id]
-  rw [galoisTrace, h, assoc, galoisTraceRestriction_comp_unit_assoc, Preadditive.sum_comp,
-    Preadditive.comp_sum]
-  rfl
 
 /-- The trace of a Galois covering is natural. -/
 theorem galoisTrace_naturality {H H' : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}}

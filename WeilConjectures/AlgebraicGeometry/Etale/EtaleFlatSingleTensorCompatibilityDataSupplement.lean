@@ -33,14 +33,4 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
   {X X' : AlgebraicGeometry.Scheme.{u}}
 
-/-- Map a pair of arrows with the specified derived tensor bifunctor.
-Source: Stacks Tag 06YU;
-(blueprint: lem-pur-etale-single-functor-monoidal-compatibility).
-The coefficient category stays abstract when this composite is checked. -/
-noncomputable def derivedTensorPairMap (X : AlgebraicGeometry.Scheme.{u})
-    {K K' L L' : DerivedCategory (Sheaf X.smallEtaleTopology B)}
-    (f : K ⟶ K') (g : L ⟶ L') :
-    ((derivedTensor B X).obj K).obj L ⟶ ((derivedTensor B X).obj K').obj L' :=
-  ((derivedTensor B X).map f).app L ≫ ((derivedTensor B X).obj K').map g
-
 end AlgebraicGeometry.Etale

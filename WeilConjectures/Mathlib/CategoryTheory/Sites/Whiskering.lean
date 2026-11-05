@@ -81,14 +81,4 @@ instance sheafCompose_additive : (sheafCompose J F).Additive where
 
 end Additive
 
-/-- Composing sheaves with an equivalence of coefficient categories is an equivalence. -/
-lemma isEquivalence_sheafCompose_of_isEquivalence {C A B : Type*} [Category C] [Category A]
-    [Category B] (J : GrothendieckTopology C) (E : A ⥤ B) [E.IsEquivalence]
-    [J.HasSheafCompose E] [J.HasSheafCompose E.inv] :
-    (sheafCompose J E).IsEquivalence :=
-  ((E.adjunction.whiskerRight Cᵒᵖ).restrictFullyFaithful
-    (fullyFaithfulSheafToPresheaf J A) (fullyFaithfulSheafToPresheaf J B)
-    (L := sheafCompose J E) (R := sheafCompose J E.inv)
-    (Iso.refl _) (Iso.refl _)).toEquivalence.isEquivalence_functor
-
 end CategoryTheory

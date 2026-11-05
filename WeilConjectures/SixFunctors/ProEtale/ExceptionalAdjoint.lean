@@ -105,105 +105,12 @@ namespace ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-sf-admissible`: the bound `FullCD(p, A; c)`. This is blueprint
-`def-weil-full-cohomological-dimension` (Full cohomological dimension).
-
-Blueprint `def-weil-full-cohomological-dimension`: Full cohomological dimension
-
-`p : X ⟶ Y` *has uniform cohomological dimension at most `c` at `A`* if the higher direct
-images of `p`, and of all its base changes along objects of `Y_proét`, vanish above `c` on
-*every* pro-étale sheaf of `A`-modules:
-
-```
-  X' --g'--> X
-  |          |          R^r p'_* F = 0 for r > c, all F on X'_proét
-  p'         p
-  |          |
-  v          v
-  V.left --V.hom--> Y        V an object of Y_proét
-```
-
-This is the uniform bound that makes `Rp_*` preserve coproducts on the unbounded derived
-category. The base changes are taken along the pro-étale site of `Y`, as in the blueprint, and
-not along arbitrary morphisms of schemes: the latter is a strictly stronger hypothesis than
-`sk-prop-sf-fullcd-etale-origin` can deliver.
-
-Not satisfied in general, even for proper smooth `p`; see `sk-rem-sf-fullcd-scope` and the
-module docstring. -/
-def HasUniformCohomologicalDimensionLE (p : X ⟶ Y) (c : ℕ) : Prop :=
-  ∀ (V : Y.ProEt) ⦃X' : Scheme.{u}⦄ (g' : X' ⟶ X) (p' : X' ⟶ V.left),
-    IsPullback g' p' p V.hom →
-      ∀ (F : Sheaf (Scheme.ProEt.topology X') A) (r : ℤ), (c : ℤ) < r →
-        IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
-          ((R((p')_*[A])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
-
-/-- Blueprint `sk-def-sf-admissible`, clause (1): the ambient exceptional right adjoint datum.
-This is blueprint `def-weil-ambient-exceptional-adjoint` (Ambient exceptional right adjoint
-datum).
-
-For a morphism `f : X ⟶ Y` with a chosen compactification: a uniform cohomological-dimension
-bound `FullCD(p, A; c)` for the proper part `p` of the compactification, for some `c`, and the
-existence of a right adjoint `Rf^×` of `Rf_!` on the unbounded derived categories of the small
-pro-étale sites. The blueprint also asks that units, counits and comparison maps agree for
-every refinement of the compactification; here `Rf_!` is formed with the one chosen
-compactification, so this clause is empty.
-
-Not satisfied in general; see `sk-rem-sf-fullcd-scope` and the module docstring. -/
-structure HasAmbientExceptionalRightAdjoint (f : X ⟶ Y) [HasCompactification f] : Prop where
-  /-- A uniform cohomological-dimension bound for the proper part of the compactification. -/
-  exists_hasUniformCohomologicalDimensionLE :
-    ∃ c : ℕ, HasUniformCohomologicalDimensionLE A (HasCompactification.compactification f).g c
-  /-- The derived lower shriek `Rf_!` has a right adjoint `Rf^×`. -/
-  isLeftAdjoint_rightDerivedLowerShriek : (R(f)_![A]).IsLeftAdjoint
-
-/-- Blueprint `def-weil-ambient-exceptional-adjoint`: under the ambient exceptional right adjoint
-datum, the derived lower shriek `Rf_!` is a left adjoint on the unbounded derived categories of
-the small pro-étale sites. This is part of the datum. -/
-theorem HasAmbientExceptionalRightAdjoint.isLeftAdjoint {f : X ⟶ Y} [HasCompactification f]
-    (h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint :=
-  h.isLeftAdjoint_rightDerivedLowerShriek
-
 section Admissibility
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-
-/-- Blueprint `sk-def-sf-admissible`: exceptional-adjoint admissibility, clauses (1)–(3).
-This is blueprint `def-weil-exceptional-adjoint-admissibility` (Exceptional-adjoint
-admissibility), at a finite coefficient stage.
-
-Blueprint `def-weil-exceptional-adjoint-admissibility`: Exceptional-adjoint admissibility
-
-The ambient exceptional right adjoint datum (1), together with the preservation clauses for
-every right adjoint `G` of `Rf_!`: `G` preserves bounded constructibility and carries each
-constructible interval `D_c^[a, b](Y, A)` into `D_c^[a + c₁, b + c₂](X, A)` for constants
-`c₁, c₂` independent of `a, b` (2), and `G` carries `Dctf(Y, A)` into `Dctf(X, A)` (3).
-
-Not satisfied in general; see `sk-rem-sf-fullcd-scope` and the module docstring. -/
-structure IsExceptionalAdjointAdmissible (f : X ⟶ Y) [HasCompactification f] : Prop
-    extends HasAmbientExceptionalRightAdjoint A f where
-  /-- A right adjoint of `Rf_!` preserves bounded constructibility. -/
-  boundedConstructible_le_inverseImage :
-    ∀ ⦃G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-        _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)⦄, (R(f)_![A] ⊣ G) →
-      DerivedCategory.boundedConstructible A Y ≤
-        (DerivedCategory.boundedConstructible A X).inverseImage G
-  /-- A right adjoint of `Rf_!` shifts the constructible intervals by constants independent of
-  the interval. -/
-  exists_homologyConcentratedIn_le_inverseImage :
-    ∃ c₁ c₂ : ℤ, ∀ ⦃G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-        _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)⦄, (R(f)_![A] ⊣ G) →
-      ∀ a b : ℤ, DerivedCategory.boundedConstructible A Y ⊓
-          _root_.DerivedCategory.homologyConcentratedIn a b ≤
-        (_root_.DerivedCategory.homologyConcentratedIn (a + c₁) (b + c₂)).inverseImage G
-  /-- A right adjoint of `Rf_!` preserves `Dctf`. -/
-  constructibleFiniteTor_le_inverseImage :
-    ∀ ⦃G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-        _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)⦄, (R(f)_![A] ⊣ G) →
-      DerivedCategory.constructibleFiniteTor A Y ≤
-        (DerivedCategory.constructibleFiniteTor A X).inverseImage G
 
 end Admissibility
 

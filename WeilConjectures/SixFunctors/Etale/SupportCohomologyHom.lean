@@ -201,64 +201,6 @@ noncomputable instance (A : Type u') [Category.{u + 1} A] [Abelian A]
     (rightDerivedSectionsWithSupport A i).CommShift ℤ :=
   inferInstanceAs ((globalSectionsWithSupport A i).rightDerivedFunctor.CommShift ℤ)
 
-/-- The functor `K ↦ Hom_{D(X)}(i_* Λ_Z, K[a])` to abelian groups is `K ↦ H^a_Z(X, K)`:
-
-`Hom(i_* Λ_Z, K[a]) ≅ Hom(Λ_Z, Ri^!(K[a])) ≅ Hom(Λ, RΓ(Z, Ri^!(K[a]))) ≅ Hom(Λ, RΓ_Z(X, K)[a])
-  ≅ H^a(RΓ_Z(X, K))`,
-
-by the adjunctions `i_* ⊣ Ri^!` and `Λ_Z ⊣ RΓ(Z, -)` (both left adjoints being exact), the
-identification `RΓ(Z, Ri^! -) ≅ RΓ_Z(X, -)`
-(`AlgebraicGeometry.Etale.rightDerivedClosedUpperShriekCompIso`), and `Hom(Λ[0], M[a]) ≅ H^a(M)`
-for complexes of `Λ`-modules. -/
-noncomputable def shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso (a : ℤ) :
-    shiftFunctor (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) a ⋙
-        preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor _ 0).obj
-          ((i)_*[ModuleCat.{u + 1} Λ].obj ((constantSheaf Z.smallEtaleTopology
-            (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))))) ≅
-      derivedSupportCohomology (ModuleCat.{u + 1} Λ) i a ⋙
-        forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat :=
-  let C := ModuleCat.{u + 1} Λ
-  let adj₁ := (lowerStarClosedUpperShriekAdjunction C i i.openComplement.ι
-    i.range_eq_compl_range_openComplement_ι).mapDerivedCategoryRightDerivedAdjunction
-  let adj₂ := (constantSheafΓAdj Z.smallEtaleTopology C).mapDerivedCategoryRightDerivedAdjunction
-  let e₁ := ((i)_*[C].mapDerivedCategorySingleFunctor 0).app
-    ((constantSheaf Z.smallEtaleTopology C).obj (ModuleCat.of Λ Λ))
-  let e₂ := ((constantSheaf Z.smallEtaleTopology C).mapDerivedCategorySingleFunctor 0).app
-    (ModuleCat.of Λ Λ)
-  Functor.isoWhiskerLeft _
-      (preadditiveCoyoneda.mapIso e₁.op ≪≫ adj₁.preadditiveCoyonedaObjIso _ ≪≫
-        Functor.isoWhiskerLeft _ (preadditiveCoyoneda.mapIso e₂.op ≪≫
-          adj₂.preadditiveCoyonedaObjIso _) ≪≫
-        (Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (rightDerivedClosedUpperShriekCompIso C i) _) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((rightDerivedSectionsWithSupport C i).commShiftIso a) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _
-      (DerivedCategory.shiftFunctorCompPreadditiveCoyonedaObjSingleFunctorZeroIso
-        (ModuleCat.of Λ Λ) a) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerLeft _ (ModuleCat.preadditiveCoyonedaObjSelfIso Λ)
-
-/-- Blueprint `lem-pur-supported-hom`: Supported cohomology as morphisms
-
-For a closed immersion `i : Z ⟶ X` and a complex `K` of étale sheaves of `Λ`-modules on `X`, the
-cohomology with support has a natural identification
-
-`H^a_Z(X, K) ≅ Hom_{D(X, Λ)}(i_* Λ_Z, K[a])`
-
-(naturality: `AlgebraicGeometry.Etale.shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso`).
-Here `H^a_Z(X, K)` is `AlgebraicGeometry.Etale.derivedSupportCohomology` and `i_* Λ_Z` is the
-pushforward of the constant sheaf, placed in degree `0`. -/
-noncomputable def derivedSupportCohomologyAddEquiv
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) :
-    (derivedSupportCohomology (ModuleCat.{u + 1} Λ) i a).obj K ≃+
-      ((DerivedCategory.singleFunctor _ 0).obj ((i)_*[ModuleCat.{u + 1} Λ].obj
-        ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))) ⟶
-          K⟦a⟧) :=
-  ((shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso Λ i a).app
-    K).symm.addCommGroupIsoToAddEquiv
-
 end Hom
 
 end Etale

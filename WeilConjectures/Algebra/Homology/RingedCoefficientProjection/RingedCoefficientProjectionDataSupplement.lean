@@ -189,15 +189,6 @@ variable {uInv : Sheaf J (Type r) ⥤ Sheaf K (Type r)}
   {uPush : Sheaf K (Type r) ⥤ Sheaf J (Type r)} {adj : uInv ⊣ uPush}
   (g : Geometry uInv uPush adj)
 
-/-- The actual K-injective derived module direct image.
-Source: Stacks 0D6E (blueprint: def-pur-ringed-coefficient-projection-data). -/
-abbrev Geometry.right (R : Sheaf J CommRingCat.{r}) := (g.push R).rightDerivedFunctor
-
-/-- The canonical derived adjunction, with no independently chosen unit or counit.
-Source: Stacks 07A6 (blueprint: def-pur-ringed-coefficient-projection-data). -/
-abbrev Geometry.adjunction (R : Sheaf J CommRingCat.{r}) :=
-  (g.ordinaryAdjunction R).mapDerivedCategoryRightDerivedAdjunction
-
 variable {pY : Scalars.{c, v, r} J} {pX : Scalars.{c, v, r} K}
   (nY : _root_.SheafOfModules.SuccessiveDerivedQuotient.Normalization.{c, v, r, max c v (r + 1)}
       (J := J) pY)
@@ -205,14 +196,5 @@ variable {pY : Scalars.{c, v, r} J} {pX : Scalars.{c, v, r} K}
       (J := K) pX)
 
 variable (e : Comparisons g nY nX)
-
-/-- The specified coefficient projection is exactly the mate under the B-adjunction.
-It is not assumed invertible. The mate formula gives the unit--comparison--counit
-word, whose transpose is S_a applied to the A-counit after the comparison.
-Source: Stacks 07A7 (blueprint: def-pur-ringed-coefficient-projection-data). -/
-def comparison {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
-    g.right R ⋙ (pY a).derived ⟶ (pX (g.rings.map a)).derived ⋙ g.right S :=
-  (mateEquiv (g.adjunction R) (g.adjunction S)
-    (TwoSquare.mk _ _ _ _ (e.derived a).hom)).natTrans
 
 end SheafOfModules.RingedCoefficientProjection

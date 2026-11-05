@@ -128,39 +128,9 @@ noncomputable def projectionMapFlipApp (M : D) : T.flip.obj (G'.obj M) ⋙ F ⟶
     dsimp at this ⊢
     exact this
 
-/-- The projection map for a fixed `M`, written as a composite of the whiskered unit, the
-comparison `δ` and the whiskered counit. -/
-lemma projectionMapFlipApp_eq (M : D) :
-    adj.projectionMapFlipApp G' T T' δ M =
-      whiskerRight ((Functor.leftUnitor _).inv ≫
-          whiskerRight adj.unit (T.flip.obj (G'.obj M)) ≫
-          (Functor.associator F G (T.flip.obj (G'.obj M))).hom ≫
-          whiskerLeft F (comparisonFlipApp' G' T T' δ M) ≫
-          (Functor.associator F (T'.flip.obj M) G).inv) F ≫
-        (Functor.associator (F ⋙ T'.flip.obj M) G F).hom ≫
-        whiskerLeft (F ⋙ T'.flip.obj M) adj.counit ≫ (Functor.rightUnitor _).hom := by
-  ext K
-  simp [projectionMap, projectionMapTranspose]
-
 variable (A : Type*) [AddMonoid A] [HasShift C A] [HasShift D A] [F.CommShift A] [G.CommShift A]
   [adj.CommShift A] [∀ M : D, (T.flip.obj (G'.obj M)).CommShift A]
   [∀ M : D, (T'.flip.obj M).CommShift A]
-
-/-- If `δ` commutes with the shifts in its first variable, so does the projection map: for every
-`a : A` the square in `D`
-```
-F (T (K⟦a⟧) (G' M)) ─────────▶ T' (F (K⟦a⟧)) M
-         │                             │
-         ▼                             ▼
-(F (T K (G' M)))⟦a⟧ ─────────▶ (T' (F K) M)⟦a⟧
-```
-commutes, where the horizontal maps are projection maps and the vertical maps are built from
-the shift isomorphisms. -/
-lemma commShift_projectionMapFlipApp (M : D)
-    [NatTrans.CommShift (comparisonFlipApp' G' T T' δ M) A] :
-    NatTrans.CommShift (adj.projectionMapFlipApp G' T T' δ M) A := by
-  rw [projectionMapFlipApp_eq]
-  infer_instance
 
 end LeftAdjoint
 

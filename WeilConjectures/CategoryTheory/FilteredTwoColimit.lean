@@ -99,19 +99,6 @@ structure IsFilteredTwoColimit : Prop where
   homSurj : c.HomSurj
   homInj : c.HomInj
 
-/-- If a cocone of categories is a filtered 2-colimit, every object of the vertex is
-isomorphic to one coming from a finite stage. -/
-lemma IsFilteredTwoColimit.exists_iso (hc : c.IsFilteredTwoColimit) (d : D) :
-    ∃ (i : I) (x : C i), Nonempty ((c.Φ i).obj x ≅ d) :=
-  hc.essSurjObj d
-
-/-- In a filtered 2-colimit, the functors `Φ k` are jointly faithful up to enlarging the
-index: this is the (Hom) injectivity property restated. -/
-lemma IsFilteredTwoColimit.exists_map_eq (hc : c.IsFilteredTwoColimit) {k : I} {x y : C k}
-    {g g' : x ⟶ y} (h : (c.Φ k).map g = (c.Φ k).map g') :
-    ∃ (k' : I) (h : k ≤ k'), (c.T h).map g = (c.T h).map g' :=
-  hc.homInj k x y g g' h
-
 end CategoryCocone
 
 end CategoryTheory

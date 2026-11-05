@@ -255,25 +255,6 @@ theorem lowerShriekBaseChange_of_isProper (hP : P.IsIsoRefinementPushforward)
     Functor.whiskerRight_comp, Category.assoc]
   rw [reassoc_of% hc, P.lowerShriekOfCompactificationBaseChange_ofIsProper sq]
 
-/-- **`Ex_!` of `P` for proper vertical maps is the mate of the pullback square comparison**:
-under the identifications `κ_f : Rf_! ≅ Rf_*` and `κ_{f'} : Rf'_! ≅ Rf'_*`
-(`lowerShriekIsoLowerStar`), the compact-support base change `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!`
-of a cartesian square with `f` and `f'` proper is the mate `Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` of the
-pullback square comparison `θ : Lg^* ⋙ Lf'^* ≅ Lf^* ⋙ Lg'^*` under the adjunctions
-`Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`: `κ_f ≫ mate(θ) = Ex_! ≫ κ_{f'}`. -/
-theorem lowerShriekBaseChange_of_isProper_mateEquiv (hP : P.IsIsoRefinementPushforward)
-    (sq : IsPullback g' f' f g) :
-    Functor.whiskerRight (lowerShriekIsoLowerStar hP f).hom
-        (boundedConstructibleUpperStar Λ ℓ g) ≫
-      (mateEquiv (P.adj (Compactification.ofIsProper f.left).overG)
-        (P.adj (Compactification.ofIsProper f'.left).overG)
-        (boundedConstructiblePullbackSquareComparison Λ ℓ
-          (isPullback_ofIsProper_overG sq).toCommSq).hom).natTrans =
-    lowerShriekBaseChange hP sq ≫
-      Functor.whiskerLeft (boundedConstructibleUpperStar Λ ℓ g')
-        (lowerShriekIsoLowerStar hP f').hom := by
-  rw [lowerShriekBaseChange_of_isProper hP sq, baseChange, Adjunction.exchangeRight_eq_mateEquiv]
-
 end BoundedConstructiblePushforwardData
 
 end AlgebraicGeometry.ProEtale.CondensedRing

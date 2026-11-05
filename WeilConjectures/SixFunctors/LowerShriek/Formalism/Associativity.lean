@@ -90,7 +90,6 @@ theorem compIso_tower (𝒯 : Compactification.Tower f g h) :
   erw [← hP]
   simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc, hSC]
 
-
 section
 
 variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
@@ -118,12 +117,6 @@ private lemma hcomp_eq_whiskerRight_comp_whiskerLeft {G G' : A ⥤ B} {H H' : B 
     (α : G ⟶ G') (β : H ⟶ H') :
     NatTrans.hcomp α β = Functor.whiskerRight α H ≫ Functor.whiskerLeft G' β := by
   ext; simp
-
-omit [F.HasProperExchange] in
-private lemma hcomp_comp_hcomp {G G' G'' : A ⥤ B} {H H' H'' : B ⥤ C} (α : G ⟶ G')
-    (α' : G' ⟶ G'') (β : H ⟶ H') (β' : H' ⟶ H'') :
-    NatTrans.hcomp α β ≫ NatTrans.hcomp α' β' = NatTrans.hcomp (α ≫ α') (β ≫ β') :=
-  (NatTrans.exchange _ _ _ _).symm
 
 omit [F.HasProperExchange] in
 private lemma hcomp_hcomp_associator {G G' : A ⥤ B} {H H' : B ⥤ C} {K K' : C ⥤ D}

@@ -162,62 +162,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (r
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- The lower shriek `Rf_!^c` of bounded constructible complexes, for a compactification `c` of
-`f.left`, commutes with the pullback to the geometric fibres, with Weil structures:
-`ι ⋙ D(p_Y^*)` of `Rf_!^c K` is the condensed Weil `Rf̄_!` of `D(p_X^*) (ι K)`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationGeometricFiberWeilIso
-    {f : X ⟶ Y} (c : Compactification f.left) :
-    boundedConstructibleLowerShriekOfCompactification ℓ c ⋙ (boundedConstructible _).ι ⋙
-        (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ) Y.hom).mapDerivedCategory ≅
-      (boundedConstructible _).ι ⋙
-        (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ) X.hom).mapDerivedCategory ⋙
-          weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj ℓ) c (Over.w f) :=
-  (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ c)
-      _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (geometricFiberWeilRightDerivedLowerShriekIso' c (Over.w f)).symm
-
-/-- **The compactly supported direct image of bounded constructible complexes commutes with the
-pullback to the geometric fibres, with Weil structures**: for `K` bounded constructible on `X`,
-`p_Y^* (Rf_! K) ≅ Rf̄_! (p_X^* K)` as condensed Weil objects, where `Rf_!` is
-`boundedConstructibleLowerShriek ℓ f` (for the compactification chosen by Nagata's theorem) and
-`Rf̄_!` is the condensed Weil lower shriek of its base change to the geometric fibres. -/
-noncomputable def boundedConstructibleLowerShriekGeometricFiberWeilIso (f : X ⟶ Y) :
-    boundedConstructibleLowerShriek ℓ f ⋙ (boundedConstructible _).ι ⋙
-        (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ) Y.hom).mapDerivedCategory ≅
-      (boundedConstructible _).ι ⋙
-        (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ) X.hom).mapDerivedCategory ⋙
-          weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj ℓ)
-            (compactificationOverField f) (Over.w f) :=
-  boundedConstructibleLowerShriekOfCompactificationGeometricFiberWeilIso ℓ
-    (compactificationOverField f)
-
 variable (e : X ≅ X)
-
-/-- **Compactly supported cohomology and the geometric fibre**: for Weil objects `K` on `X` (for
-any `e : X ≅ X`), the pullback to `Spec k̄` of the underlying complex of the compactly supported
-cohomology `RΓ_c(X, K)` (`weilCompactSupportCohomology`), with its canonical Frobenius structure,
-is the condensed Weil `Rā_!` of the pullback of `K` to the geometric fibre `X̄`, naturally in
-`K`. -/
-noncomputable def weilCompactSupportCohomologyGeometricFiberWeilIso :
-    weilCompactSupportCohomology ℓ e ⋙ WeilBoundedConstructible.forget ℓ _ ⋙
-        (boundedConstructible _).ι ⋙
-          (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ)
-            (point k).hom).mapDerivedCategory ≅
-      WeilBoundedConstructible.forget ℓ e.hom ⋙ (boundedConstructible _).ι ⋙
-        (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ) X.hom).mapDerivedCategory ⋙
-          weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj ℓ)
-            (compactificationOverField (toPoint X)) (Over.w (toPoint X)) :=
-  Functor.isoWhiskerLeft (WeilBoundedConstructible.forget ℓ e.hom)
-    (boundedConstructibleLowerShriekGeometricFiberWeilIso ℓ (toPoint X))
-
-/-- The components of `weilCompactSupportCohomologyGeometricFiberWeilIso`: for a Weil object `K`
-on `X`, `p^* RΓ_c(X, K) ≅ Rā_! (p_X^* K)` as condensed Weil objects on `Spec k̄`. -/
-lemma weilCompactSupportCohomologyGeometricFiberWeilIso_app
-    (K : WeilBoundedConstructible ℓ e.hom) :
-    (weilCompactSupportCohomologyGeometricFiberWeilIso ℓ e).app K =
-      (boundedConstructibleLowerShriekGeometricFiberWeilIso ℓ (toPoint X)).app K.carrier :=
-  rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing

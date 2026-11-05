@@ -129,7 +129,6 @@ theorem extensionByZeroPresheafMap_id
   | add x y hx hy =>
     rw [(extensionByZeroPresheafRestrictAdd R U G (𝟙 V)).map_add, hx, hy]
 
-
 /-- Composition of restrictions follows on each summand from the
 composition law for `G`.
 Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
@@ -175,7 +174,6 @@ theorem extensionByZeroPresheafMap_comp
     rw [(extensionByZeroPresheafRestrictAdd R U G (a ≫ b)).map_add,
       (extensionByZeroPresheafRestrictAdd R U G a).map_add,
       (extensionByZeroPresheafRestrictAdd R U G b).map_add, hx, hy]
-
 
 /-- The presheaf `V ↦ ⨁ (φ : V ⟶ U), G(V ⟶ U)` of `R`-modules. Its
 restriction along `a : V' ⟶ V` sends the `φ` summand into the `a ≫ φ`
@@ -231,7 +229,6 @@ theorem extensionByZeroPresheafHom_naturality
   | add x y hx hy =>
     rw [(extensionByZeroPresheafRestrictAdd R U G a).map_add, map_add, map_add,
       (extensionByZeroPresheafRestrictAdd R U H a).map_add, hx, hy]
-
 
 /-- The morphism of presheaves induced by `α` acts by `α_(V ⟶ U)` on the
 corresponding summand. Stacks Project, Lemma 03DI
@@ -292,36 +289,5 @@ theorem extensionByZeroPresheafSection_isEmpty
   apply DirectSum.ext
   intro i
   exact isEmptyElim i
-
-/-- When `V ⟶ U` is unique, the canonical isomorphism sends the injection
-of a section into the sole summand to that section, lifted in universe.
-Stacks Project, Lemma 03DI and Lemma 0F6Z
-(blueprint: def-weil-extension-by-zero-presheaf). -/
-theorem extensionByZeroPresheafSection_unique
-    (G : SheafOfModules.{v} (R.over U)) (V : Cᵒᵖ)
-    [Unique (V.unop ⟶ U)] :
-    ∃ e : extensionByZeroPresheafSection R U G V ≅
-        (ModuleCat.uliftFunctor.{v₁} (R.obj.obj V)).obj
-          (G.val.obj (Opposite.op (Over.mk (default : V.unop ⟶ U)))),
-      ∀ s : G.val.obj (Opposite.op (Over.mk (default : V.unop ⟶ U))),
-        e.hom (DirectSum.of (fun φ : V.unop ⟶ U =>
-          G.val.obj (Opposite.op (Over.mk φ))) default s) = ULift.up s := by
-  classical
-  let M : (V.unop ⟶ U) → Type v := fun φ => G.val.obj (Opposite.op (Over.mk φ))
-  let e : DirectSum (V.unop ⟶ U) M ≃ₗ[R.obj.obj V] M default :=
-    { DirectSum.component (R.obj.obj V) (V.unop ⟶ U) M default with
-      invFun := DirectSum.of M default
-      left_inv := fun s => by
-        apply DirectSum.ext
-        intro i
-        have hi : i = default := Unique.eq_default i
-        subst i
-        exact DFinsupp.single_eq_same
-      right_inv := fun s => DFinsupp.single_eq_same }
-  refine ⟨(e.trans ULift.moduleEquiv.symm).toModuleIso, ?_⟩
-  intro s
-  change ULift.up (e (DirectSum.of M default s)) = ULift.up s
-  congr 1
-
 
 end SheafOfModules

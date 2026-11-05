@@ -98,21 +98,6 @@ scoped notation "Rf_!(" c ")⟦" Λ "⟧" =>
 scoped notation "Rf_!(" c ")⟦" Λ "⟧+" =>
   rightDerivedLowerShriekOfCompactificationPlus Λ c
 
-/-- The bounded below derived lower shriek attached to a compactification
-`c = (X ⟶[i] Z ⟶[g] Y)` is the restriction of the unbounded one along the inclusions of the
-bounded below derived categories: on the `Di_!` factor this is
-`Functor.mapDerivedCategoryPlusCompatibility` (`i_!` is exact), on the `Rg_*` factor it is
-`Functor.rightDerivedFunctorPlusCompatibility`. -/
-noncomputable def rightDerivedLowerShriekOfCompactificationPlusCompatibility :
-    Rf_!(c)⟦Λ⟧+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ Rf_!(c)⟦Λ⟧ :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft D+((c.i)_!open⟦Λ⟧)
-      ((c.g)_*⟦Λ⟧).rightDerivedFunctorPlusCompatibility ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((c.i)_!open⟦Λ⟧).mapDerivedCategoryPlusCompatibility
-      R((c.g)_*⟦Λ⟧) ≪≫
-    Functor.associator _ _ _
-
 end OfCompactification
 
 section Chosen
@@ -143,21 +128,6 @@ noncomputable def rightDerivedLowerShriekPlus :
 
 @[inherit_doc rightDerivedLowerShriekPlus]
 scoped notation "R(" f ")_!⟦" Λ "⟧+" => rightDerivedLowerShriekPlus Λ f
-
-omit [IsCommMonObj Λ] in
-lemma rightDerivedLowerShriek_eq :
-    R(f)_!⟦Λ⟧ = Rf_!(HasCompactification.compactification f)⟦Λ⟧ := rfl
-
-omit [IsCommMonObj Λ] in
-lemma rightDerivedLowerShriekPlus_eq :
-    R(f)_!⟦Λ⟧+ = Rf_!(HasCompactification.compactification f)⟦Λ⟧+ := rfl
-
-/-- The bounded below derived lower shriek on module objects is the restriction of the
-unbounded one along the inclusions of the bounded below derived categories. -/
-noncomputable def rightDerivedLowerShriekPlusCompatibility :
-    R(f)_!⟦Λ⟧+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)_!⟦Λ⟧ :=
-  rightDerivedLowerShriekOfCompactificationPlusCompatibility Λ
-    (HasCompactification.compactification f)
 
 end Chosen
 

@@ -36,14 +36,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace Algebra
 
-/-- An `A`-algebra `B` is ind-Zariski in the blueprint's principal-localization sense if it
-is a filtered colimit of finite products of algebras `A_f`. The empty finite product is
-allowed. Source: blueprint, proper base change, definition of ind-etale and ind-Zariski
-algebras (blueprint: def-weil-pbc-ind-etale-algebra). -/
-def IsIndPrincipalZariski (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] : Prop :=
-  ∃ (I : Type u) (_ : SmallCategory I) (_ : IsFiltered I)
-    (P : ColimitPresentation I (CommAlgCat.of A B)),
-    ∀ i : I, ∃ (n : ℕ) (f : Fin n → A),
-      Nonempty (P.diag.obj i ≃ₐ[A] ((j : Fin n) → Localization.Away (f j)))
-
 end Algebra

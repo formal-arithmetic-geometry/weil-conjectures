@@ -55,17 +55,6 @@ noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ 
     modulePullback B i ⋙ modulePullback B r ≅ modulePullback B p ⋙ modulePullback B k :=
   (moduleSquareG_existsUnique B k r p i h).choose
 
-/-- The specified square compositor equals the original explicit composite.
-Source: Stacks, Tag 09AE
-(blueprint: lem-fix-constant-square-compositor-specification).
-Proof: this is the equality clause of the unique specification. -/
-theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
-    (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
-    moduleSquareG B k r p i h =
-      (moduleGComp B r i).symm ≪≫ eqToIso (congrArg (modulePullback B) h.symm) ≪≫
-        moduleGComp B k p :=
-  (moduleSquareG_existsUnique B k r p i h).choose_spec.1
-
 /-- The inverse open-base-change component, specified by the original open-unit transpose.
 Source: Stacks, Tag 09AE
 (blueprint: lem-cbc-proetale-extension-zero-base-change). -/
@@ -297,21 +286,5 @@ theorem singleBetaInv_isIso [Finite B] {U' U X' X : Scheme.{u}}
     rw [Adjunction.homEquiv_counit]
     infer_instance
   exact NatIso.isIso_of_isIso_app _
-
-/-- The existing finite open-base-change comparison, in constant-ring module coordinates.
-Its inverse has the prescribed open-unit transpose; no new map is chosen.
-Source: Stacks, Tag 09AE
-(blueprint: lem-cbc-proetale-extension-zero-base-change). -/
-noncomputable def singleBeta [Finite B] {U' U X' X : Scheme.{u}}
-    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
-    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
-    (hsq : IsPullback a j' j g) :
-    (moduleJ B j).mapDerivedCategory ⋙ (modulePullback B g).mapDerivedCategory ≅
-      (modulePullback B a).mapDerivedCategory ⋙ (moduleJ B j').mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso
-      (@asIso _ _ _ _ (singleBetaInv B a j' j g h)
-        (singleBetaInv_isIso B a j' j g h hsq)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
 
 end AlgebraicGeometry.ProEtale.StrictTower

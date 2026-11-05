@@ -43,13 +43,6 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C] [Brai
 lemma bidualityMap_eq_toIhomIhom (ω K : C) : bidualityMap ω K = toIhomIhom ω K :=
   rfl
 
-/-- **Biduality for dualizable objects** (the formal lisse step of the blueprint theorem
-`det-pd-biduality-coefficients`): if `ω` is isomorphic to an invertible object and `K` is
-dualizable, the double-dual morphism `δ_K : K ⟶ D D K`, `D = RHom(-, ω)`, is an isomorphism. -/
-theorem isIso_bidualityMap_of_isDualizable {T ω : C} (γ : T ≅ ω) (hT : IsInvertible T) {K : C}
-    (hK : IsDualizable K) : IsIso (bidualityMap ω K) :=
-  isIso_toIhomIhom_of_isDualizable γ hT hK
-
 /-- The double-dual morphism `δ_K` is an isomorphism if and only if `δ_{K'}` is, for `K ≅ K'`:
 the double-dual morphisms form a natural transformation. -/
 lemma isIso_bidualityMap_iff_of_iso (ω : C) {K K' : C} (e : K ≅ K') :

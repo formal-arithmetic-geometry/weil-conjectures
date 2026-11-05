@@ -41,17 +41,4 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical closed-immersion exchange on the constant sheaf.
-Source: Stacks 0A45, base change (blueprint: def-asd-ordinary-supported-kummer-boundary). -/
-def supportedConstantExchange (A : Type (u + 1)) [CommRing A]
-    {D D' T T' : Scheme.{u}} (i : D ⟶ T) (i' : D' ⟶ T')
-    (v : T' ⟶ T) (w : D' ⟶ D) (sq : CommSq w i' i v) :
-    (upperStar (ModuleCat.{u + 1} A) v).obj
-        ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) ⟶
-      (lowerStar (ModuleCat.{u + 1} A) i').obj (ordinaryFiniteConstant A D') :=
-  (baseChangeMap (ModuleCat.{u + 1} A) sq).app (ordinaryFiniteConstant A D) ≫
-    (lowerStar (ModuleCat.{u + 1} A) i').map
-      ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) w).app
-        (ModuleCat.of A A)).hom
-
 end AlgebraicGeometry.Etale

@@ -31,14 +31,4 @@ universe u v
 
 namespace FieldExtension
 
-/-- (blueprint: def-pc-field-tower) The degree `[K : k]`, equal to `∞` when `K` is not
-finite-dimensional over `k`.
-
-This is `Module.finrank k K` in the finite-dimensional case and `⊤` otherwise.
-(Stacks, Tag 09G3). -/
-noncomputable def degree (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] :
-    WithTop ℕ := by
-  classical
-  exact if Module.Finite k K then (Module.finrank k K : WithTop ℕ) else ⊤
-
 end FieldExtension

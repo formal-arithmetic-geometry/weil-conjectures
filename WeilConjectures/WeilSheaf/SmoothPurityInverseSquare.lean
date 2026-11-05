@@ -20,12 +20,6 @@ lemma purity_inverse_square {C : Type*} [Category C]
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id, h,
     Iso.inv_hom_id_assoc]
 
-/-- Cancel a leading compositor without expanding a concrete category instance. -/
-lemma purity_factor_from_compositor {C : Type*} [Category C]
-    {A B T : C} (i : A ≅ B) (v : B ⟶ T) (w : A ⟶ T)
-    (h : i.hom ≫ v = w) : v = i.inv ≫ w := by
-  rw [← h, Iso.inv_hom_id_assoc]
-
 /-- A factorization equation with all compositor components left functor-indexed. -/
 lemma purity_factor_component
     {C₀ C : Type*} [Category C₀] [Category C]

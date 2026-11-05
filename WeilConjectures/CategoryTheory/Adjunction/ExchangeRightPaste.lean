@@ -90,41 +90,6 @@ lemma exchangeRight_app_paste {G₁ : B ⥤ B'} {G₁' : A ⥤ A'} {G₂ : B' �
     reassoc_of% h, ← hc]
   simp only [Functor.map_comp, Category.assoc]
 
-/-- **Pointwise two-out-of-three for pasted exchange morphisms**: in the situation of
-`CategoryTheory.Adjunction.exchangeRight_app_paste`, with the two pasted squares
-```
-B --G₁--> B' --G₂--> B''
-|Lf        |Lf'       |Lf''
-v          v           v
-A --G₁'-> A' --G₂'-> A''
-```
-if the exchange morphism of the second square (`θ₂`) is invertible, then the exchange morphism
-of the outer square (`θ`) is invertible at `K` if and only if the image under `G₂` of the exchange
-morphism of the first square (`θ₁`) at `K` is invertible. -/
-lemma isIso_exchangeRight_app_paste_iff {G₁ : B ⥤ B'} {G₁' : A ⥤ A'} {G₂ : B' ⥤ B''}
-    {G₂' : A' ⥤ A''} {G : B ⥤ B''} {G' : A ⥤ A''} (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf')
-    (af'' : Lf'' ⊣ Rf'') (θ₁ : G₁ ⋙ Lf' ≅ Lf ⋙ G₁') (θ₂ : G₂ ⋙ Lf'' ≅ Lf' ⋙ G₂')
-    (θ : G ⋙ Lf'' ≅ Lf ⋙ G') (c : G ≅ G₁ ⋙ G₂) (c' : G' ≅ G₁' ⋙ G₂')
-    (h : ∀ N : B, Lf''.map (c.hom.app N) ≫ θ₂.hom.app (G₁.obj N) ≫ G₂'.map (θ₁.hom.app N) =
-      θ.hom.app N ≫ c'.hom.app (Lf.obj N)) (hθ₂ : IsIso (exchangeRight af' af'' θ₂)) (K : A) :
-    IsIso ((exchangeRight af af'' θ).app K) ↔
-      IsIso (G₂.map ((exchangeRight af af' θ₁).app K)) := by
-  have e := exchangeRight_app_paste af af' af'' θ₁ θ₂ θ c c' h K
-  constructor
-  · intro _
-    have : IsIso (c.hom.app (Rf.obj K) ≫ G₂.map ((exchangeRight af af' θ₁).app K) ≫
-        (exchangeRight af' af'' θ₂).app (G₁'.obj K)) := by
-      rw [e]
-      infer_instance
-    have := IsIso.of_isIso_comp_left (c.hom.app (Rf.obj K))
-      (G₂.map ((exchangeRight af af' θ₁).app K) ≫ (exchangeRight af' af'' θ₂).app (G₁'.obj K))
-    exact IsIso.of_isIso_comp_right _ ((exchangeRight af' af'' θ₂).app (G₁'.obj K))
-  · intro _
-    have : IsIso ((exchangeRight af af'' θ).app K ≫ Rf''.map (c'.hom.app K)) := by
-      rw [← e]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ (Rf''.map (c'.hom.app K))
-
 end ExchangeRight
 
 end CategoryTheory.Adjunction

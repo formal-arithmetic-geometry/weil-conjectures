@@ -69,21 +69,6 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
   (φ : (postcompose₂.obj F).obj (curriedTensor D) ⟶
     (((whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))
 
-/-- The cup product `G M ⊗ G L ⟶ G (M ⊗ L)` of a right adjoint `G`: the projection map
-`G M ⊗ G L ⟶ G (M ⊗ F (G L))` followed by `G (M ◁ ε_L)` for the counit `ε` of `F ⊣ G`. -/
-noncomputable def rightAdjointCupProduct (M L : C) : G.obj M ⊗ G.obj L ⟶ G.obj (M ⊗ L) :=
-  ((adj.rightAdjointProjectionMap φ).app M).app (G.obj L) ≫ G.map (M ◁ adj.counit.app L)
-
-/-- The transpose of the cup product of a right adjoint is `φ` followed by `ε ⊗ ε`. -/
-@[reassoc]
-lemma map_rightAdjointCupProduct_comp_counit (M L : C) :
-    F.map (adj.rightAdjointCupProduct φ M L) ≫ adj.counit.app _ =
-      (φ.app (G.obj M)).app (G.obj L) ≫ adj.counit.app M ▷ F.obj (G.obj L) ≫
-        M ◁ adj.counit.app L := by
-  rw [rightAdjointCupProduct, F.map_comp, Category.assoc]
-  erw [adj.counit_naturality]
-  rw [map_rightAdjointProjectionMap_app_app_comp_counit_assoc, curriedTensor_map_app]
-
 /-- The right adjoint projection map is natural in its first variable. -/
 @[reassoc]
 lemma rightAdjointProjectionMap_naturality_left {M M' : C} (x : M ⟶ M') (L : D) :
@@ -114,105 +99,7 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
     (((whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))
   (P : C ⥤ D) (pm : ∀ (K : C) (L : D), P.obj K ⊗ L ⟶ P.obj (K ⊗ F.obj L))
 
-/-- The cup product `P K ⊗ G M ⟶ P (K ⊗ M)` attached to a projection map
-`pm K L : P K ⊗ L ⟶ P (K ⊗ F L)`: `pm` followed by `P (K ◁ ε_M)`. -/
-noncomputable def cupProductOfProjection (K M : C) : P.obj K ⊗ G.obj M ⟶ P.obj (K ⊗ M) :=
-  pm K (G.obj M) ≫ P.map (K ◁ adj.counit.app M)
-
 variable {P pm}
-
-/-- The cup product attached to a projection map is natural in its first variable. -/
-lemma cupProductOfProjection_naturality_left
-    (hpm : ∀ {K K' : C} (x : K ⟶ K') (L : D),
-      P.map x ▷ L ≫ pm K' L = pm K L ≫ P.map (x ▷ F.obj L))
-    {K K' : C} (x : K ⟶ K') (M : C) :
-    P.map x ▷ G.obj M ≫ adj.cupProductOfProjection P pm K' M =
-      adj.cupProductOfProjection P pm K M ≫ P.map (x ▷ M) := by
-  simp only [cupProductOfProjection, Category.assoc, reassoc_of% (hpm x (G.obj M)),
-    ← P.map_comp,
-    whisker_exchange]
-
-/-- The cup product attached to a projection map is natural in its second variable. -/
-lemma cupProductOfProjection_naturality_right
-    (hpm : ∀ (K : C) {L L' : D} (y : L ⟶ L'),
-      P.obj K ◁ y ≫ pm K L' = pm K L ≫ P.map (K ◁ F.map y))
-    (K : C) {M M' : C} (y : M ⟶ M') :
-    P.obj K ◁ G.map y ≫ adj.cupProductOfProjection P pm K M' =
-      adj.cupProductOfProjection P pm K M ≫ P.map (K ◁ y) := by
-  simp only [cupProductOfProjection, Category.assoc, reassoc_of% (hpm K (G.map y)),
-    ← P.map_comp,
-    ← MonoidalCategory.whiskerLeft_comp, adj.counit_naturality]
-
-/-- **Associativity of the cup product attached to a projection map**, given the naturality and
-associativity of the projection map. Writing `⌣` for `cupProductOfProjection` and `∪` for
-`rightAdjointCupProduct`:
-```
-(P K ⊗ G L) ⊗ G M --⌣ ▷ G M--> P (K ⊗ L) ⊗ G M --⌣--> P ((K ⊗ L) ⊗ M)
-        | α                                               | P α
-        v                                                 v
-P K ⊗ (G L ⊗ G M) --P K ◁ ∪--> P K ⊗ G (L ⊗ M) --⌣--> P (K ⊗ (L ⊗ M))
-```
--/
-lemma cupProductOfProjection_associativity
-    (hpml : ∀ {K K' : C} (x : K ⟶ K') (L : D),
-      P.map x ▷ L ≫ pm K' L = pm K L ≫ P.map (x ▷ F.obj L))
-    (hpmr : ∀ (K : C) {L L' : D} (y : L ⟶ L'),
-      P.obj K ◁ y ≫ pm K L' = pm K L ≫ P.map (K ◁ F.map y))
-    (hpm : ∀ (K : C) (L L' : D), pm K L ▷ L' ≫ pm (K ⊗ F.obj L) L' ≫ P.map (α_ _ _ _).hom =
-      (α_ _ _ _).hom ≫ pm K (L ⊗ L') ≫ P.map (K ◁ (φ.app L).app L'))
-    (K L M : C) :
-    adj.cupProductOfProjection P pm K L ▷ G.obj M ≫
-        adj.cupProductOfProjection P pm (K ⊗ L) M ≫ P.map (α_ K L M).hom =
-      (α_ _ _ _).hom ≫ P.obj K ◁ adj.rightAdjointCupProduct φ L M ≫
-        adj.cupProductOfProjection P pm K (L ⊗ M) := by
-  have h₁ : pm K (G.obj L) ▷ G.obj M ≫ pm (K ⊗ F.obj (G.obj L)) (G.obj M) =
-      (α_ _ _ _).hom ≫ pm K (G.obj L ⊗ G.obj M) ≫
-        P.map (K ◁ (φ.app (G.obj L)).app (G.obj M) ≫ (α_ _ _ _).inv) := by
-    rw [← cancel_mono (P.map (α_ _ _ _).hom), Category.assoc, hpm]
-    simp only [Category.assoc, ← P.map_comp, Iso.inv_hom_id, Category.comp_id]
-  have h₂ := hpmr K (adj.rightAdjointCupProduct φ L M)
-  simp only [cupProductOfProjection, comp_whiskerRight, Category.assoc]
-  rw [reassoc_of% (hpml (K ◁ adj.counit.app L) (G.obj M)), reassoc_of% h₁, reassoc_of% h₂]
-  simp only [← P.map_comp, ← MonoidalCategory.whiskerLeft_comp,
-    map_rightAdjointCupProduct_comp_counit]
-  congr 3
-  simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
-  monoidal
-
-/-- **Unitality of the cup product attached to a projection map**: the unit
-`1 : 𝟙_ ⟶ G (𝟙_)`, the transpose of `η : F (𝟙_) ⟶ 𝟙_`, acts as the identity, given the
-naturality and unitality of the projection map. -/
-lemma cupProductOfProjection_rightUnitality (η : F.obj (𝟙_ D) ⟶ 𝟙_ C)
-    (hpmr : ∀ (K : C) {L L' : D} (y : L ⟶ L'),
-      P.obj K ◁ y ≫ pm K L' = pm K L ≫ P.map (K ◁ F.map y))
-    (hpm : ∀ K : C, pm K (𝟙_ D) ≫ P.map (K ◁ η ≫ (ρ_ K).hom) = (ρ_ _).hom)
-    (K : C) :
-    P.obj K ◁ adj.homEquiv _ _ η ≫ adj.cupProductOfProjection P pm K (𝟙_ C) ≫
-        P.map (ρ_ K).hom =
-      (ρ_ _).hom := by
-  rw [cupProductOfProjection, Category.assoc, reassoc_of% (hpmr K (adj.homEquiv _ _ η)),
-    ← P.map_comp,
-    ← P.map_comp, ← MonoidalCategory.whiskerLeft_comp_assoc, ← homEquiv_counit,
-    Equiv.symm_apply_apply, hpm]
-
-/-- **Compatibility of the cup product with a map to `G`**: if `s : P ⟶ G` intertwines `pm` with
-the projection map of `G`, it intertwines the cup products `⌣` (`cupProductOfProjection`) and
-`∪` (`rightAdjointCupProduct`):
-```
-P K ⊗ G M --⌣--> P (K ⊗ M)
-   | s ▷ G M         | s
-   v                 v
-G K ⊗ G M --∪--> G (K ⊗ M)
-```
--/
-lemma cupProductOfProjection_comp (s : P ⟶ G)
-    (hs : ∀ (K : C) (L : D), pm K L ≫ s.app (K ⊗ F.obj L) =
-      s.app K ▷ L ≫ ((adj.rightAdjointProjectionMap φ).app K).app L)
-    (K M : C) :
-    adj.cupProductOfProjection P pm K M ≫ s.app (K ⊗ M) =
-      s.app K ▷ G.obj M ≫ adj.rightAdjointCupProduct φ K M := by
-  rw [cupProductOfProjection, Category.assoc, s.naturality, reassoc_of% hs]
-  rfl
 
 end CupProduct
 
@@ -380,22 +267,6 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
   (φ : (postcompose₂.obj F).obj (curriedTensor D) ⟶
     (((whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))
-
-/-- **Associativity of the cup product of a right adjoint**, if `φ` satisfies the associativity
-axiom of an oplax monoidal functor. -/
-lemma rightAdjointCupProduct_associativity
-    (hφ : ∀ X Y Z : D, (φ.app (X ⊗ Y)).app Z ≫ (φ.app X).app Y ▷ F.obj Z ≫
-      (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom =
-        F.map (α_ X Y Z).hom ≫ (φ.app X).app (Y ⊗ Z) ≫ F.obj X ◁ (φ.app Y).app Z)
-    (K L M : C) :
-    adj.rightAdjointCupProduct φ K L ▷ G.obj M ≫ adj.rightAdjointCupProduct φ (K ⊗ L) M ≫
-        G.map (α_ K L M).hom =
-      (α_ _ _ _).hom ≫ G.obj K ◁ adj.rightAdjointCupProduct φ L M ≫
-        adj.rightAdjointCupProduct φ K (L ⊗ M) :=
-  adj.cupProductOfProjection_associativity φ
-    (fun x L ↦ adj.rightAdjointProjectionMap_naturality_left φ x L)
-    (fun K _ _ y ↦ adj.rightAdjointProjectionMap_naturality_right φ K y)
-    (fun K L L' ↦ adj.rightAdjointProjectionMap_associativity φ hφ K L L') K L M
 
 end RightAdjointCupProduct
 

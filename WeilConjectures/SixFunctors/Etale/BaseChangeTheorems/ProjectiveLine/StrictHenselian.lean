@@ -515,38 +515,6 @@ theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
   change b₂ (a₂ _) = Etale.cohomologyMap k _ q (b₁ (a₁ x))
   rw [ha, hb]
 
-
-/-- If the residue field map `κ_A ⟶ κ_B` of a local morphism of strictly henselian local
-rings is an isomorphism, the stalk at the closed geometric point of `Spec B` of the
-exchange morphism of `ℙ¹` is an isomorphism. This is the second assertion of the
-blueprint node `prop-weil-pbc-strict-local-exchange`, deduced from
-`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal`: the
-pullback along the isomorphism `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}` is bijective on cohomology. -/
-theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal
-    (hφ : Function.Bijective (IsLocalRing.ResidueField.map φ))
-    (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionModuleSheaf F] (q : ℕ) :
-    IsIso (((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
-      (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ
-        (ProjectiveSpace.isPullback_map _ (Spec.map (CommRingCat.ofHom φ))) q F)) := by
-  obtain ⟨e₁, e₂, he⟩ := Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
-    Λ φ F q
-  have : IsIso (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) :=
-    (ConcreteCategory.isIso_iff_bijective _).mpr hφ
-  have : IsIso (ProjectiveSpace.map (ULift.{u} (Fin 2))
-      (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)))) :=
-    ⟨ProjectiveSpace.map _ (inv (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)))),
-      by rw [← ProjectiveSpace.map_comp, IsIso.hom_inv_id, ProjectiveSpace.map_id],
-      by rw [← ProjectiveSpace.map_comp, IsIso.inv_hom_id, ProjectiveSpace.map_id]⟩
-  rw [ConcreteCategory.isIso_iff_bijective, ← e₂.bijective.of_comp_iff']
-  have hfun : e₂ ∘ _ = Etale.cohomologyMap (ProjectiveSpace.map (ULift.{u} (Fin 2))
-      (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ))))
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[
-          ModuleCat.{u + 1} Λ].obj F)) q ∘ e₁ := funext he
-  rw [hfun]
-  exact (Etale.cohomologyMap_bijective _ _ q).comp e₁.bijective
-
 end StrictLocalExchange
 
 end AlgebraicGeometry

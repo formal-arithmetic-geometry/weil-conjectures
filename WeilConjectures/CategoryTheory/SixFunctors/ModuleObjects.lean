@@ -31,28 +31,10 @@ open CategoryTheory
 
 namespace CategoryTheory
 
-/-- The category of left module objects over a monoid object.
-
-Source: blueprint sk-def-sfb-module-objects, clauses 1--3
-(blueprint: sk-def-sfb-module-objects). -/
-abbrev moduleObjects (C : Type u) [Category.{v, u} C] [MonoidalCategory C]
-    (R : Mon C) : Type (max u v) :=
-  Mod C R.X
-
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
 open AlgebraicGeometry Scheme
-
-/-- The sheaf category of modules over the pulled-back condensed ring `Λ_X`.
-
-Source: blueprint sk-def-sfb-module-objects, clause 3
-(blueprint: sk-def-sfb-module-objects). -/
-abbrev pulledBackModuleObjects
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :=
-  moduleObjects (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientRing X (Mon.mk Λ))
 
 end AlgebraicGeometry.ProEtale

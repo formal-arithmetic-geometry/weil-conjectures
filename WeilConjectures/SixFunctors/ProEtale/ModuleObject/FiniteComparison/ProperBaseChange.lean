@@ -48,42 +48,9 @@ open Scheme CondensedRing
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
   [Finite T]
 
-/-- **Direct images preserve module complexes of étale origin**: for `f` quasi-compact and
-quasi-separated, if `Φ C` is bounded below of étale origin, so is `Φ (Rf_* C)`: `Φ` commutes with
-the derived direct images (`ProEtale.finiteCoefficientDerivedLowerStarIso`), and the pro-étale
-direct image of a complex of étale origin is of étale origin
-(`ProEtale.DerivedCategory.plusEtaleOrigin_rightDerivedLowerStar_obj`). -/
-lemma plusEtaleOrigin_finiteCoefficientDerivedEquivalence_rightDerivedLowerStar_obj
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
-    {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X))}
-    (hC : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) X
-      ((finiteCoefficientDerivedEquivalence X T).functor.obj C)) :
-    DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) Y
-      ((finiteCoefficientDerivedEquivalence Y T).functor.obj
-        (R((f)_*⟦Profinite.continuousMapRingObj T⟧).obj C)) :=
-  ObjectProperty.prop_of_iso _ ((finiteCoefficientDerivedLowerStarIso T f).app C)
-    (DerivedCategory.plusEtaleOrigin_rightDerivedLowerStar_obj _ f hC)
-
 namespace CondensedRing
 
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-/-- **Proper base change for module objects with finite coefficients** (blueprint
-`thm-weil-pbc-finite-level-proetale`, read on module objects): for a cartesian square
-`g' ≫ f = f' ≫ g` with `f` proper and a complex `M` of module objects over `T̲_X` bounded below of
-étale origin, the base change morphism `Lg^* Rf_* M ⟶ Rf'_* Lg'^* M` is an isomorphism. It is
-the finite-level pro-étale proper base change `ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`
-at `Φ M`, transported along `Φ` (`ProEtale.isIso_baseChangeMap_app_finiteCoefficient_iff`). -/
-theorem isIso_baseChangeMap_app_of_isProper_finiteCoefficient [IsProper f]
-    (sq : IsPullback g' f' f g)
-    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X)))
-    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) X
-      ((finiteCoefficientDerivedEquivalence X T).functor.obj M)) :
-    IsIso ((baseChangeMap (Profinite.continuousMapRingObj T) sq.toCommSq).app M) :=
-  (isIso_baseChangeMap_app_finiteCoefficient_iff sq.toCommSq M).2
-    (isIso_derivedBaseChangeMap_app_of_isProper _ sq _ hM)
 
 end CondensedRing
 

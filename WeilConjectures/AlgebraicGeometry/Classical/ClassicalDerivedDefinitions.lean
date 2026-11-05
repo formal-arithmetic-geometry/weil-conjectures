@@ -30,38 +30,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- A module sheaf is classical when its canonical continuity map is invertible on
-every affine pro-étale presentation.
-Source: current blueprint, `sk-def-pe-classical-definition/_section.md`
-(blueprint: sk-def-pe-classical-definition). -/
-def IsClassicalModuleFor (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
-    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) : Prop :=
-  ∀ {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
-    (P : AffinePresentation X I),
-    IsIso (continuityMap P F.obj)
-
-/-- A derived pro-étale object is classical when all of its cohomology module sheaves
-are classical.
-Source: current blueprint, `sk-def-pe-classical-definition/_section.md`
-(blueprint: sk-def-pe-classical-definition). -/
-def IsClassicalComplexFor (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X)
-      (ModuleCat.{u + 1} Λ))) : Prop :=
-  ∀ q : ℤ,
-    IsClassicalModuleFor X Λ
-      ((@DerivedCategory.homologyFunctor
-        (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) _ _
-        (HasDerivedCategory.standard _) q).obj K)
-
-/-- The full subcategory of bounded-below pro-étale complexes with classical cohomology.
-Source: the blueprint definition of classical complexes and its bounded-below
-derived-equivalence detail (blueprint: sk-def-pe-classical-definition).
--/
-def ClassicalPlus (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
-    ObjectProperty (DerivedCategory.Plus
-      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :=
-  fun K ↦ IsClassicalComplexFor X Λ (DerivedCategory.Plus.ι.obj K)
-
 end AlgebraicGeometry.ProEtale
 
 end

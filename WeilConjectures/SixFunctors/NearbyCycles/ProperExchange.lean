@@ -51,64 +51,6 @@ namespace NearbyCyclesModel.Hom
 variable {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f')
 
-/-- The comparison `Rj_{N*} Rg_* ⟶ Rt_* Rj_{M*}` of the direct images along the two sides of the
-square of geometric generic fibres `g ≫ j_N = j_M ≫ t` of a morphism of models: the mate, along
-`Lg^* ⊣ Rg_*` and `Lt^* ⊣ Rt_*`, of the base change morphism `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` used
-in the pullback exchange. It is invertible
-(`NearbyCyclesModel.Hom.isIso_lowerStarExchange`). -/
-noncomputable def lowerStarExchange :
-    R((φ.generic)_*⟦Λ⟧) ⋙ R((N.j)_*⟦Λ⟧) ⟶ R((M.j)_*⟦Λ⟧) ⋙ R((φ.total)_*⟦Λ⟧) :=
-  (mateEquiv (derivedUpperStarLowerStarAdjunction Λ φ.generic)
-    (derivedUpperStarLowerStarAdjunction Λ φ.total)
-    (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
-      (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom)).natTrans
-
-/-- The comparison `Rj_{N*} Rg_* ⟶ Rt_* Rj_{M*}` is invertible: it is the conjugate of the
-pullback comparison `Lt^* Lj_M^* ≅ Lj_N^* Lg^*`
-(`CategoryTheory.iterated_mateEquiv_conjugateEquiv`). -/
-instance isIso_lowerStarExchange : IsIso (φ.lowerStarExchange Λ) := by
-  rw [lowerStarExchange, iterated_mateEquiv_conjugateEquiv]
-  infer_instance
-
-/-- **The pushforward exchange through base change morphisms** (proof of blueprint
-`det-sp-nearby-cycles-exchanges` (2)): the component of `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` at `K` is
-`Li_N^* Rj_{N*}` of the base change morphism `Lε_N^* Rf_* K ⟶ Rg_* Lε_M^* K` of the square of
-identifications, followed by `Li_N^*` of the comparison `Rj_{N*} Rg_* ⟶ Rt_* Rj_{M*}`
-(`NearbyCyclesModel.Hom.lowerStarExchange`) and by the base change morphism
-`Li_N^* Rt_* ⟶ Rf'_* Li_M^*` of the square of special fibres at `Rj_{M*} Lε_M^* K`. -/
-theorem pushforwardExchange_app
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) :
-    (φ.pushforwardExchange Λ).app K =
-      L((N.i)^*⟦Λ⟧).map (R((N.j)_*⟦Λ⟧).map ((baseChangeMap Λ φ.commSq_ε).app K)) ≫
-        L((N.i)^*⟦Λ⟧).map ((φ.lowerStarExchange Λ).app (L((M.ε)^*⟦Λ⟧).obj K)) ≫
-          (baseChangeMap Λ φ.commSq_i).app (R((M.j)_*⟦Λ⟧).obj (L((M.ε)^*⟦Λ⟧).obj K)) :=
-  app_eq_comp_of_eq_mateEquiv_pasting (derivedUpperStarLowerStarAdjunction Λ f)
-    (derivedUpperStarLowerStarAdjunction Λ φ.generic)
-    (derivedUpperStarLowerStarAdjunction Λ φ.total) (derivedUpperStarLowerStarAdjunction Λ f')
-    (pullbackSquareComparison Λ φ.commSq_ε).hom
-    (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
-      (derivedUpperStarLowerStarAdjunction Λ M.j) (pullbackSquareComparison Λ φ.commSq_j).hom)
-    (pullbackSquareComparison Λ φ.commSq_i).hom (φ.pullbackExchange Λ) rfl
-    (φ.pushforwardExchange Λ) rfl (baseChangeMap Λ φ.commSq_ε)
-    (Adjunction.exchangeRight_eq_mateEquiv _ _ _) (φ.lowerStarExchange Λ) rfl
-    (baseChangeMap Λ φ.commSq_i) (Adjunction.exchangeRight_eq_mateEquiv _ _ _) K
-
-/-- The pushforward exchange `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` is invertible at `K` if the base change
-morphism `Lε_N^* Rf_* ⟶ Rg_* Lε_M^*` of the square of identifications is invertible at `K` and
-the base change morphism `Li_N^* Rt_* ⟶ Rf'_* Li_M^*` of the square of special fibres is
-invertible at `Rj_{M*} Lε_M^* K` (`NearbyCyclesModel.Hom.pushforwardExchange_app`). -/
-theorem isIso_pushforwardExchange_app_of_isIso_baseChangeMap
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)))
-    (hε : IsIso ((baseChangeMap Λ φ.commSq_ε).app K))
-    (hi : IsIso ((baseChangeMap Λ φ.commSq_i).app
-      (R((M.j)_*⟦Λ⟧).obj (L((M.ε)^*⟦Λ⟧).obj K)))) :
-    IsIso ((φ.pushforwardExchange Λ).app K) := by
-  rw [pushforwardExchange_app]
-  infer_instance
-
 end NearbyCyclesModel.Hom
 
 end AlgebraicGeometry.ProEtale.CondensedRing

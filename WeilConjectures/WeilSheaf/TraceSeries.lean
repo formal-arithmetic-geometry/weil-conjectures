@@ -45,41 +45,4 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- The alternating trace series
-
-`str_F(T) = ∑_{n ≥ 1} (∑_{i = 0}^{2d} (-1) ^ i tr (F ^ n ∣ Hⁱ(X ⊗ k̄, ℚ̄_ℓ))) T ^ n / n`
-
-of the finite graded family of Frobenius modules `(Hⁱ(X ⊗ k̄, ℚ̄_ℓ), F)_{0 ≤ i ≤ 2d}`, the
-cohomology of the constant Weil sheaf `ℚ̄_ℓ` with its global geometric Frobenius `F`
-(blueprint: `def-zl-frobenius-trace-series`, geometric situation, `sk-def-frobmod`). -/
-noncomputable def adicConstantAlternatingTraceSeries (d : ℕ) : (PadicAlgCl l)⟦X⟧ :=
-  FrobeniusModule.alternatingTraceSeries (Finset.Icc 0 (2 * d : ℤ))
-    (adicConstant k₀ l X).cohomology
-
-/-- The `n`-th coefficient of the alternating trace series of the cohomology of `X` is
-`(∑_{i = 0}^{2d} (-1) ^ i tr (F ^ n ∣ Hⁱ(X ⊗ k̄, ℚ̄_ℓ))) / n`, and `0` for `n = 0`
-(blueprint: `def-zl-frobenius-trace-series`). -/
-theorem coeff_adicConstantAlternatingTraceSeries (d n : ℕ) :
-    coeff n (adicConstantAlternatingTraceSeries k₀ l X d) =
-      if n = 0 then 0
-      else (∑ i ∈ Finset.Icc 0 (2 * d : ℤ), (i.negOnePow : ℤ) •
-        LinearMap.trace (PadicAlgCl l) ((adicConstant k₀ l X).cohomology i).carrier
-          (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ n)) / n :=
-  FrobeniusModule.coeff_alternatingTraceSeries _ _ n
-
-/-- The alternating trace series of the cohomology of `X` is the alternating sum
-`∑_{i = 0}^{2d} (-1) ^ i tr_{F ∣ Hⁱ}(T)` of the trace series of the individual cohomology
-groups (blueprint: `def-zl-frobenius-trace-series`). -/
-theorem adicConstantAlternatingTraceSeries_eq_sum (d : ℕ) :
-    adicConstantAlternatingTraceSeries k₀ l X d =
-      ∑ i ∈ Finset.Icc 0 (2 * d : ℤ), (i.negOnePow : ℤ) •
-        ((adicConstant k₀ l X).cohomology i).traceSeries :=
-  rfl
-
-/-- The alternating trace series of the cohomology of `X` lies in `T ℚ̄_ℓ⟦T⟧`. -/
-@[simp]
-theorem constantCoeff_adicConstantAlternatingTraceSeries (d : ℕ) :
-    constantCoeff (adicConstantAlternatingTraceSeries k₀ l X d) = 0 :=
-  FrobeniusModule.constantCoeff_alternatingTraceSeries _ _
-
 end AlgebraicGeometry.WeilSheaf

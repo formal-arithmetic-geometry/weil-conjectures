@@ -76,17 +76,6 @@ theorem isProper_pi_hom {S : Scheme.{u}} {ι : Type*} [Finite ι] (F : ι → Ov
     [HasProduct F] [∀ i, IsProper (F i).hom] : IsProper (∏ᶜ F).hom :=
   MorphismProperty.pi_hom _ F fun _ ↦ inferInstance
 
-/-- **Proper and smooth morphisms are stable under base change.** Let `f : X ⟶ S` be proper,
-`g : S' ⟶ S` arbitrary and `f' : X' ⟶ S'` the base change of `f` along `g`. Then `f'` is proper,
-and if `f` is smooth, then so is `f'`.
-
-(blueprint: `lem-pc-proper-base-change`) -/
-theorem isProper_and_smooth_of_isPullback {X S X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S}
-    {f' : X' ⟶ S'} {g' : X' ⟶ X} (h : IsPullback g' f' f g) [IsProper f] :
-    IsProper f' ∧ (Smooth f → Smooth f') :=
-  ⟨IsProper.isStableUnderBaseChange.of_isPullback h ‹_›,
-    fun hf ↦ smooth_isStableUnderBaseChange.of_isPullback h hf⟩
-
 /-- An immersion `f : X ⟶ Y` whose composite with a separated morphism `g : Y ⟶ Z` is
 universally closed is a closed immersion: `f` is then itself universally closed, so its image is
 closed. In particular, an immersion of a proper `Z`-scheme into a separated `Z`-scheme is a
@@ -161,17 +150,6 @@ theorem Scheme.Opens.eq_of_isProper_of_dense {V W : Z.Opens} (h : V ≤ W) (q : 
     UniversallyClosed.of_comp_of_isSeparated (f := Z.homOfLE h) (g := q)
   eq_of_universallyClosed_of_dense h hd
 
-/-- An open subscheme `V ≤ W` that is proper over a base `T` over which `W` is separated and
-that contains a quasi-compact scheme-theoretically dense open of `Z` is all of `W`. -/
-theorem Scheme.Opens.eq_of_isProper_of_isSchemeTheoreticallyDominant {V W : Z.Opens} (h : V ≤ W)
-    (q : W.toScheme ⟶ T) [IsProper (Z.homOfLE h ≫ q)] [IsSeparated q]
-    (D : Z.Opens) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι] (hD : D ≤ V) :
-    V = W :=
-  eq_of_isProper_of_dense h q <| by
-    have : closure (D : Set Z) = Set.univ := by
-      simpa using D.ι.denseRange.closure_range
-    exact fun x _ ↦ closure_mono hD (this ▸ Set.mem_univ x)
-
 section Basic
 
 /-! ### Basic properties of proper morphisms
@@ -181,98 +159,16 @@ estimates; all of them are instances or direct consequences of results of Mathli
 
 variable {X Y Z : Scheme.{u}}
 
-/-- A closed immersion is proper, and so is a closed immersion followed by a proper morphism.
-(blueprint: `lem-weil-pbc-closed-immersion-proper`) -/
-theorem IsProper.of_isClosedImmersion (i : X ⟶ Y) [IsClosedImmersion i] : IsProper i :=
-  inferInstance
-
-/-- A closed immersion followed by a proper morphism is proper.
-(blueprint: `lem-weil-pbc-closed-immersion-proper`) -/
-theorem IsProper.isClosedImmersion_comp (i : X ⟶ Y) (f : Y ⟶ Z) [IsClosedImmersion i]
-    [IsProper f] : IsProper (i ≫ f) :=
-  inferInstance
-
-/-- A proper morphism is a closed map.
-(blueprint: `pqf-lem-proper-closed-map`) -/
-theorem IsProper.isClosedMap (f : X ⟶ Y) [IsProper f] : IsClosedMap f :=
-  f.isClosedMap
-
-/-- The image of a proper morphism is closed.
-(blueprint: `lem-weil-pbc-proper-closed-image`) -/
-theorem IsProper.isClosed_range (f : X ⟶ Y) [IsProper f] : IsClosed (Set.range f) :=
-  f.isClosedMap.isClosed_range
-
-/-- If `f : X ⟶ Y` is proper and `g : X ⟶ W` is a morphism over `Y` to a separated `Y`-scheme,
-then `g` is proper.
-(blueprint: `lem-weil-pbc-proper-to-separated`) -/
-theorem IsProper.of_comp_eq {W : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (g : X ⟶ W) (h : W ⟶ Y)
-    [IsSeparated h] (hgh : g ≫ h = f) : IsProper g := by
-  subst hgh
-  exact IsProper.of_comp g h
-
-/-- The composite of proper morphisms is proper.
-(blueprint: `lem-weil-pbc-proper-composition`) -/
-theorem IsProper.comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f] [IsProper g] : IsProper (f ≫ g) :=
-  inferInstance
-
 /-- Proper morphisms are stable under base change.
 (blueprint: `lem-weil-pbc-proper-base-change`) -/
 theorem IsProper.pullback_snd (f : X ⟶ Y) [IsProper f] {Y' : Scheme.{u}} (g : Y' ⟶ Y) :
     IsProper (pullback.snd f g) :=
   inferInstance
 
-/-- The composite of closed immersions is a closed immersion.
-(blueprint: `lem-weil-pbc-closed-immersion-products`) -/
-theorem IsClosedImmersion.comp' (f : X ⟶ Y) (g : Y ⟶ Z) [IsClosedImmersion f]
-    [IsClosedImmersion g] : IsClosedImmersion (f ≫ g) :=
-  inferInstance
-
-/-- A product over a common base of closed immersions is a closed immersion.
-(blueprint: `lem-weil-pbc-closed-immersion-products`) -/
-theorem IsClosedImmersion.pullback_map {S X' Y' : Scheme.{u}} {f : X ⟶ S} {g : Y ⟶ S}
-    {f' : X' ⟶ S} {g' : Y' ⟶ S} (i₁ : X ⟶ X') (i₂ : Y ⟶ Y') [IsClosedImmersion i₁]
-    [IsClosedImmersion i₂] (e₁ : f = i₁ ≫ f') (e₂ : g = i₂ ≫ g') :
-    IsClosedImmersion (pullback.map f g f' g' i₁ i₂ (𝟙 _) ((Category.comp_id _).trans e₁)
-      ((Category.comp_id _).trans e₂)) :=
-  MorphismProperty.pullbackMap (P := @IsClosedImmersion) inferInstance inferInstance e₁ e₂
-
-/-- An open immersion is locally of finite type.
-(blueprint: `lem-weil-pbc-closed-immersion-products`) -/
-theorem IsOpenImmersion.locallyOfFiniteType (f : X ⟶ Y) [IsOpenImmersion f] :
-    LocallyOfFiniteType f :=
-  inferInstance
-
 end Basic
 
 section Subsingleton
 
-/-- A morphism of finite type from a scheme with at most one point to a Jacobson scheme
-(e.g. the spectrum of a field) is proper. -/
-lemma isProper_of_subsingleton {X Y : Scheme.{u}} (f : X ⟶ Y) [Subsingleton X]
-    [LocallyOfFiniteType f] [IsSeparated f] [JacobsonSpace Y] : IsProper f := by
-  cases isEmpty_or_nonempty X
-  · have : IsClosedImmersion f := .of_isPreimmersion _ (by
-      rw [Set.range_eq_empty]
-      exact isClosed_empty)
-    infer_instance
-  obtain ⟨p⟩ := ‹Nonempty X›
-  have : IsClosedImmersion (X.fromSpecResidueField p) := by
-    rw [← isClosed_singleton_iff_isClosedImmersion, Set.Subsingleton.eq_singleton_of_mem
-      (s := Set.univ) Set.subsingleton_of_subsingleton (Set.mem_univ p) |>.symm]
-    exact isClosed_univ
-  have : Surjective (X.fromSpecResidueField p) :=
-    ⟨fun q ↦ ⟨default, (Subsingleton.elim _ _)⟩⟩
-  have : IsFinite (X.fromSpecResidueField p ≫ f) :=
-    isFinite_iff_locallyOfFiniteType_of_jacobsonSpace.mpr inferInstance
-  have := UniversallyClosed.of_comp_surjective (X.fromSpecResidueField p) f
-  exact ⟨⟩
-
 end Subsingleton
-
-/-- A morphism over `S` from a proper `S`-scheme to a separated `S`-scheme is proper. -/
-lemma isProper_left_of_isProper_of_isSeparated {S : Scheme.{u}} {B Y : Over S} [IsProper B.hom]
-    [IsSeparated Y.hom] (f : B ⟶ Y) : IsProper f.left := by
-  have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
-  exact IsProper.of_comp _ Y.hom
 
 end AlgebraicGeometry

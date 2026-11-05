@@ -354,13 +354,4 @@ variable [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
 
 set_option backward.isDefEq.respectTransparency true
 
-/-- The existing ambient derived category.
-Source: Stacks 08J7 (auxiliary; not a blueprint node). -/
-abbrev D := DerivedCategory (Modules.{c, v, r} J R)
-
-/-- The recorded derived internal Hom with its source fixed.
-Source: Stacks 08J7 (auxiliary; not a blueprint node). -/
-abbrev hom (M : D.{c, v, r, w} J R) : D.{c, v, r, w} J R ⥤ D.{c, v, r, w} J R :=
-  (Functor.curry.obj (derivedInternalHomOfUniverses.{c, v, r, w} J R)).obj (op M)
-
 end CategoryTheory.RingedHomUniverses

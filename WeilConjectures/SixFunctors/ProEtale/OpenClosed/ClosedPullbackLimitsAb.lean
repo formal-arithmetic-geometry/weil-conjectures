@@ -78,14 +78,4 @@ lemma preservesLimitsOfSize_upperStar_ab_of_moduleCat
     preservesLimits_of_natIso (sheafComposeInverseCompUpperStarIso g)
   exact preservesLimits_of_reflects_of_preserves _ (sheafComposeUliftIntModuleToAb Y).inv
 
-/-- **The closed inverse image of abelian sheaves preserves limits**: for `X` quasi-compact and
-quasi-separated and `i : Z ⟶ X` a closed immersion with quasi-compact open complement `j`, the
-pullback `i^*` of abelian pro-étale sheaves preserves all small limits. -/
-theorem preservesLimitsOfSize_upperStar_ab_of_isCompl {X Z U : Scheme.{u}} [CompactSpace X]
-    [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
-    [QuasiCompact j] (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
-    PreservesLimitsOfSize.{u + 1, u + 1} ((i)^*[Ab.{u + 1}]) :=
-  have := preservesLimitsOfSize_upperStar_of_isCompl (R := ULift.{u + 1} ℤ) i j hij
-  preservesLimitsOfSize_upperStar_ab_of_moduleCat i
-
 end AlgebraicGeometry.ProEtale

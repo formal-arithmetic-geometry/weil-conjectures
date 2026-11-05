@@ -208,7 +208,6 @@ lemma leftDerivedUpperStarComp_id_left_hom_app (p : Y ⟶ X)
     Category.comp_id,
     Category.id_comp]
 
-
 /-- **Sections commute with base change.** Let `a : P ⟶ B` have a section `i`, let `a' : P' ⟶ B'`
 have a section `i'`, and let `v : P' ⟶ P` lie over `u : B' ⟶ B` and carry `i'` to `i`. Then the
 two identifications `Li'^* Lv^* La^* C ≅ Lu^* C` — through `Lv^* La^* ≅ La'^* Lu^*` and
@@ -257,72 +256,10 @@ section SectionRestriction
 variable {B B' P P' : Scheme.{u}} (u : B' ⟶ B) {a : P ⟶ B} {a' : P' ⟶ B'} (v : P' ⟶ P)
   {i : B ⟶ P} {i' : B' ⟶ P'} (hi : i' ≫ v = u ≫ i) (h' : i' ≫ a' = 𝟙 B')
 
-/-- *Reading a local trivialization at a section.* Let `v : P' ⟶ P` lie over `u : B' ⟶ B`, let
-`i, i'` be sections of `a : P ⟶ B` and `a' : P' ⟶ B'` with `i' ≫ v = u ≫ i`, and let
-`F ∈ D(P)` be trivialized over `P'` as `e : Lv^* F ≅ La'^* C₀`. An identification
-`θ : Li^* F ≅ C` of the fibre of `F` along `i` gives `Lu^* C ≅ C₀`: restrict `e` along `i'`. -/
-noncomputable def sectionRestrictionIso {F : _root_.DerivedCategory (Sheaf P.smallEtaleTopology A)}
-    {C : _root_.DerivedCategory (Sheaf B.smallEtaleTopology A)}
-    {C₀ : _root_.DerivedCategory (Sheaf B'.smallEtaleTopology A)} (θ : L((i)^*[A]).obj F ≅ C)
-    (e : L((v)^*[A]).obj F ≅ L((a')^*[A]).obj C₀) : L((u)^*[A]).obj C ≅ C₀ :=
-  (((leftDerivedUpperStarComp A i' v).app F).symm ≪≫
-      (leftDerivedUpperStarComp A u i (i' ≫ v) hi).app F ≪≫ L((u)^*[A]).mapIso θ).symm ≪≫
-    L((i')^*[A]).mapIso e ≪≫ (leftDerivedUpperStarCompSectionIso A i' a' h').app C₀
-
 variable {F : _root_.DerivedCategory (Sheaf P.smallEtaleTopology A)}
   {C : _root_.DerivedCategory (Sheaf B.smallEtaleTopology A)}
   {C₀ : _root_.DerivedCategory (Sheaf B'.smallEtaleTopology A)}
 
-lemma sectionRestrictionIso_trans_left {C' : _root_.DerivedCategory (Sheaf B.smallEtaleTopology A)}
-    (θ : L((i)^*[A]).obj F ≅ C) (ψ : C ≅ C') (e : L((v)^*[A]).obj F ≅ L((a')^*[A]).obj C₀) :
-    sectionRestrictionIso A u v hi h' (θ ≪≫ ψ) e =
-      L((u)^*[A]).mapIso ψ.symm ≪≫ sectionRestrictionIso A u v hi h' θ e := by
-  ext
-  simp [sectionRestrictionIso]
-
-lemma sectionRestrictionIso_trans_right
-    {C₁ : _root_.DerivedCategory (Sheaf B'.smallEtaleTopology A)} (θ : L((i)^*[A]).obj F ≅ C)
-    (e : L((v)^*[A]).obj F ≅ L((a')^*[A]).obj C₀) (χ : C₀ ≅ C₁) :
-    sectionRestrictionIso A u v hi h' θ (e ≪≫ L((a')^*[A]).mapIso χ) =
-      sectionRestrictionIso A u v hi h' θ e ≪≫ χ := by
-  ext
-  have := (leftDerivedUpperStarCompSectionIso A i' a' h').hom.naturality χ.hom
-  simp only [Functor.comp_map, Functor.id_map] at this
-  simp [sectionRestrictionIso, this]
-
-/-- Reading the restriction of a comparison `κ : F ≅ La^* C` at a section gives back the identity:
-`κ` restricted to `P'` and read at `i'` against `κ` read at `i` is `𝟙 (Lu^* C)`. -/
-lemma sectionRestrictionIso_restrict (hv : v ≫ a = a' ≫ u) (h : i ≫ a = 𝟙 B)
-    (κ : F ≅ L((a)^*[A]).obj C) :
-    sectionRestrictionIso A u v hi h'
-        (L((i)^*[A]).mapIso κ ≪≫ (leftDerivedUpperStarCompSectionIso A i a h).app C)
-        (L((v)^*[A]).mapIso κ ≪≫ ((leftDerivedUpperStarComp A v a).app C).symm ≪≫
-          (leftDerivedUpperStarComp A a' u (v ≫ a) hv).app C) = Iso.refl _ := by
-  ext
-  have n₁ := (leftDerivedUpperStarComp A i' v).inv.naturality κ.hom
-  have n₂ := (leftDerivedUpperStarComp A u i (i' ≫ v) hi).hom.naturality κ.hom
-  simp only [Functor.comp_map] at n₁ n₂
-  have H := leftDerivedUpperStar_map_comp_compSectionIso A u a a' v i i' hv hi h h' C
-  simp only [sectionRestrictionIso, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv,
-    Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv, Iso.refl_hom,
-    Functor.map_comp, Category.assoc]
-  have H' := H
-  simp only [Functor.map_comp, Category.assoc] at H'
-  rw [H', reassoc_of% n₁, Iso.hom_inv_id_app_assoc, reassoc_of% n₂, Iso.inv_hom_id_app_assoc]
-  simp
-
-
-/-- Reading at a section determines the restriction along the section: two trivializations with
-the same reading at `i'` against the same `θ` agree after `Li'^*`. -/
-lemma leftDerivedUpperStar_map_eq_of_sectionRestrictionIso_eq (θ : L((i)^*[A]).obj F ≅ C)
-    (e e' : L((v)^*[A]).obj F ≅ L((a')^*[A]).obj C₀)
-    (H : sectionRestrictionIso A u v hi h' θ e = sectionRestrictionIso A u v hi h' θ e') :
-    L((i')^*[A]).map e.hom = L((i')^*[A]).map e'.hom := by
-  have := congrArg Iso.hom H
-  simp only [sectionRestrictionIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Iso.app_hom] at this
-  rw [cancel_epi, cancel_mono] at this
-  exact this
 end SectionRestriction
 end Etale
 

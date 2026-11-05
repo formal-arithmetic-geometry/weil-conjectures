@@ -254,8 +254,6 @@ noncomputable def modObj (M : C) [ModObj (S.obj B) M] : ModObj B (P.obj M) where
     simp only [Category.assoc]
     rw [MonoidalCategory.whiskerLeft_comp, Category.assoc, whiskerLeft_iso_inv_assoc]
 
-lemma modObj_smul (M : C) [ModObj (S.obj B) M] : (pf.modObj B M).smul = pf.smul B M := rfl
-
 /-- The linearization `P_B : Mod C (S B) ⥤ Mod D B` of `P`: an `S B`-module object `M` is sent
 to `P M` with the `B`-action induced by the projection formula. -/
 noncomputable def mapModLeft : Mod C (S.obj B) ⥤ Mod D B where
@@ -270,16 +268,8 @@ noncomputable def mapModLeft : Mod C (S.obj B) ⥤ Mod D B where
   map_id _ := by ext; simp
   map_comp _ _ := by ext; simp
 
-lemma mapModLeft_obj_X (M : Mod C (S.obj B)) : ((pf.mapModLeft B).obj M).X = P.obj M.X := rfl
-
 lemma mapModLeft_map_hom {M N : Mod C (S.obj B)} (f : M ⟶ N) :
     ((pf.mapModLeft B).map f).hom = P.map f.hom := rfl
-
-lemma mapModLeft_obj_smul (M : Mod C (S.obj B)) :
-    γ[B,((pf.mapModLeft B).obj M).X] = pf.smul B M.X := rfl
-
-/-- The linearization of `P` commutes with the forgetful functors. -/
-lemma mapModLeft_comp_forget : pf.mapModLeft B ⋙ Mod.forget B = Mod.forget (S.obj B) ⋙ P := rfl
 
 section Preadditive
 
@@ -417,76 +407,9 @@ noncomputable def rightModObj (N : D) [ModObj B N] : ModObj (S.obj B) (G.obj N) 
       theta_assoc_assoc, MonoidalCategory.whiskerLeft_comp, Category.assoc,
       theta_natural_right_assoc]
 
-lemma rightModObj_smul (N : D) [ModObj B N] :
-    (pf.rightModObj adj B N).smul = pf.rightSMul adj B N :=
-  rfl
-
-/-- The linearization `G_B : Mod D B ⥤ Mod C (S B)` of a right adjoint `G` of `P`: a
-`B`-module object `N` is sent to `G N` with the `S B`-action induced by the mate of the
-projection formula. -/
-noncomputable def mapModRight : Mod D B ⥤ Mod C (S.obj B) where
-  obj N := letI := pf.rightModObj adj B N.X; ⟨G.obj N.X⟩
-  map {N N'} f :=
-    letI := pf.rightModObj adj B N.X
-    letI := pf.rightModObj adj B N'.X
-    Mod.Hom.mk' (G.map f.hom) (by
-      change pf.rightSMul adj B N.X ≫ G.map f.hom =
-        S.obj B ◁ G.map f.hom ≫ pf.rightSMul adj B N'.X
-      rw [rightSMul, rightSMul, Category.assoc, ← G.map_comp, Mod.act_hom, G.map_comp,
-        theta_natural_right_assoc])
-  map_id _ := by ext; simp
-  map_comp _ _ := by ext; simp
-
-lemma mapModRight_obj_X (N : Mod D B) : ((pf.mapModRight adj B).obj N).X = G.obj N.X := rfl
-
-lemma mapModRight_map_hom {N N' : Mod D B} (f : N ⟶ N') :
-    ((pf.mapModRight adj B).map f).hom = G.map f.hom := rfl
-
-lemma mapModRight_obj_smul (N : Mod D B) :
-    γ[S.obj B,((pf.mapModRight adj B).obj N).X] = pf.rightSMul adj B N.X := rfl
-
-/-- The linearization of `G` commutes with the forgetful functors. -/
-lemma mapModRight_comp_forget :
-    pf.mapModRight adj B ⋙ Mod.forget (S.obj B) = Mod.forget B ⋙ G := rfl
-
 /-! ### The adjunction `P_B ⊣ G_B` -/
 
 variable {B}
-
-/-- A map `P M ⟶ N` is `B`-linear iff its adjoint `M ⟶ G N` is `S B`-linear, for the action of
-`B` on `P M` through the projection formula and of `S B` on `G N` through its mate. -/
-lemma smul_comp_eq_iff (M : Mod C (S.obj B)) (N : Mod D B) (φ : P.obj M.X ⟶ N.X) :
-    pf.smul B M.X ≫ φ = B ◁ φ ≫ γ[B,N.X] ↔
-      γ[S.obj B,M.X] ≫ adj.homEquiv M.X N.X φ =
-        S.obj B ◁ adj.homEquiv M.X N.X φ ≫ pf.rightSMul adj B N.X := by
-  rw [smul, Category.assoc, Iso.inv_comp_eq]
-  refine Iff.trans ?_ (adj.homEquiv _ _).symm.apply_eq_iff_eq
-  rw [
-    homEquiv_naturality_left_symm, Equiv.symm_apply_apply, homEquiv_naturality_left_symm,
-    rightSMul, homEquiv_naturality_right_symm, homEquiv_symm_theta]
-  simp only [Category.assoc]
-  have h : P.map (adj.homEquiv M.X N.X φ) ≫ adj.counit.app N.X = φ := by
-    have := adj.homEquiv_counit (g := adj.homEquiv M.X N.X φ)
-    rw [Equiv.symm_apply_apply] at this; exact this.symm
-  rw [pf.natural_right_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, h]
-
-/-- The linearization of `P` is left adjoint to the linearization of `G`: a `B`-linear map
-`P M ⟶ N` is the same as an `S B`-linear map `M ⟶ G N`. -/
-noncomputable def mapModAdjunction : pf.mapModLeft B ⊣ pf.mapModRight adj B :=
-  Adjunction.mkOfHomEquiv
-    { homEquiv M N :=
-        { toFun φ := Mod.Hom.mk' (adj.homEquiv M.X N.X φ.hom)
-            ((pf.smul_comp_eq_iff adj M N φ.hom).1 (Mod.act_hom φ))
-          invFun ψ := Mod.Hom.mk' ((adj.homEquiv M.X N.X).symm ψ.hom)
-            ((pf.smul_comp_eq_iff adj M N _).2
-              (by simp only [Equiv.apply_symm_apply]; exact Mod.act_hom ψ))
-          left_inv φ := by ext; simp
-          right_inv ψ := by ext; simp }
-      homEquiv_naturality_left_symm _ _ := Mod.hom_ext _ _ (adj.homEquiv_naturality_left_symm _ _)
-      homEquiv_naturality_right _ _ := Mod.hom_ext _ _ (adj.homEquiv_naturality_right _ _) }
-
-lemma isLeftAdjoint_mapModLeft {G : D ⥤ C} (adj : P ⊣ G) : (pf.mapModLeft B).IsLeftAdjoint :=
-  (pf.mapModAdjunction adj (B := B)).isLeftAdjoint
 
 end MapModRight
 
@@ -502,18 +425,6 @@ variable {P : C ⥤ D} {S : D ⥤ C} (adj : P ⊣ S) [S.Monoidal] [adj.HasProjec
 /-- The linearization of the left adjoint `P` of a strong monoidal functor `S` satisfying the
 projection formula. -/
 noncomputable abbrev mapModLeft : Mod C (S.obj B) ⥤ Mod D B := adj.projectionFormula.mapModLeft B
-
-/-- The linearization of `P` commutes with the forgetful functors. -/
-lemma mapModLeft_comp_forget : adj.mapModLeft B ⋙ Mod.forget B = Mod.forget (S.obj B) ⋙ P := rfl
-
-/-- For `G = S`, the mate `θ` of the projection formula is the lax structure `μ S`. -/
-lemma projectionFormula_theta (L N : D) :
-    adj.projectionFormula.theta adj L N = Functor.LaxMonoidal.μ S L N := by
-  rw [Functor.ProjectionFormula.theta, projectionFormula_iso, asIso_hom, homEquiv_naturality_right,
-    homEquiv_projectionFormulaMap, Category.assoc, ← μ_natural_right,
-    ← MonoidalCategory.whiskerLeft_comp_assoc]
-  erw [adj.right_triangle_components]
-  erw [MonoidalCategory.whiskerLeft_id, Category.id_comp]
 
 variable {B}
 

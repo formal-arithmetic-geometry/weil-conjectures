@@ -521,10 +521,6 @@ lemma sub_vadd_right {U : Cᵒᵖ} (x y : P.sheaf.obj.obj U) (a : G.obj.obj U) :
     P.sub x (P.vadd U a y) = a + P.sub x y := by
   rw [sub_eq_iff, P.add_vadd, sub_vadd]
 
-lemma sub_vadd_left {U : Cᵒᵖ} (x y : P.sheaf.obj.obj U) (a : G.obj.obj U) :
-    P.sub (P.vadd U a x) y = P.sub x y - a := by
-  rw [sub_eq_iff, ← P.add_vadd, sub_add_cancel, sub_vadd]
-
 @[simp]
 lemma sub_self {U : Cᵒᵖ} (x : P.sheaf.obj.obj U) : P.sub x x = 0 := by
   rw [sub_eq_iff, zero_vadd]
@@ -918,7 +914,6 @@ theorem classH1_eq_add_of_equivariant (P P' P'' : Torsor G)
   change d.hom.app (op W) (b' _ _) = _ at h₃
   rw [h₁, h₂, h₃]
   abel
-
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
   [EnoughInjectives (Sheaf J AddCommGrpCat.{w})] in

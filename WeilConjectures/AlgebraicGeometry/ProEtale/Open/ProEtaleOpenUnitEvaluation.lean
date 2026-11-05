@@ -46,11 +46,4 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Compose a pro-etale object's structure map with an open immersion, retaining its
-underlying scheme and arrows. Source: Stacks Project, Tags 00XZ and 09BN
-(blueprint: lem-pur-proetale-open-unit-evaluation). -/
-def proEtaleOpenComposition {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    U.ProEt ⥤ X.ProEt :=
-  MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)
-
 end AlgebraicGeometry.Scheme

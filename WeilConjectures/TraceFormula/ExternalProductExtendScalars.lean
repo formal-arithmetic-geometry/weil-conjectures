@@ -159,21 +159,6 @@ noncomputable def boundedConstructibleIntegersToPadicAlgClVerdierDualIso :
   have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K₀
   Functor.LaxMonoidal.mapIhomObjIso _ e (boundedConstructibleIntegersToPadicAlgClDualizingIso ℓ E a)
 
-/-- **The identification of the Verdier duals is compatible with the evaluation maps**: the
-extension of scalars of the integral evaluation `K₀ ⊗ 𝔻 K₀ ⟶ ω_{X,𝒪_E}` is, under the tensorator
-of `T`, the isomorphisms `T K₀ ≅ K`, `T 𝔻 K₀ ≅ 𝔻 K` and `T ω_{X,𝒪_E} ≅ ω_X`, the evaluation
-`K ⊗ 𝔻 K ⟶ ω_X`. -/
-lemma μ_comp_map_ev_comp_boundedConstructibleIntegersToPadicAlgClDualizingIso :
-    Functor.LaxMonoidal.μ (boundedConstructibleIntegersToPadicAlgCl ℓ E X) K₀
-        (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ E.1 a K₀) ≫
-      (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map
-        ((ihom.ev K₀).app (PadicIntegersRingObj.boundedConstructibleDualizingComplex ℓ E.1 a)) ≫
-      (boundedConstructibleIntegersToPadicAlgClDualizingIso ℓ E a).hom =
-    (e.hom ⊗ₘ (boundedConstructibleIntegersToPadicAlgClVerdierDualIso ℓ E a e).hom) ≫
-      (ihom.ev K).app ((boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)) := by
-  have := isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl ℓ E K₀
-  exact Functor.LaxMonoidal.μ_comp_map_ev_comp_hom _ e _
-
 end Dualizing
 
 /-! ### The external product with the Verdier dual -/

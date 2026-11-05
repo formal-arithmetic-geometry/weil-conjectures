@@ -132,40 +132,4 @@ attribute [local irreducible] homComplexFunctor homComplexπ derivedInternalHomO
   coefficientHomResolution coefficientHomResolutionIso coefficientHomResolutionInverse
   coefficientTotalTensor coefficientTensorGenerator CoefficientTensorModels.iso
 
-private def makeComparisonData
-    {B : Type b} [Category.{vb} B] {A : Type a} [Category.{va} A]
-    (HB : Bᵒᵖ × B ⥤ B) (HA : Aᵒᵖ × A ⥤ A) (F : B ⥤ A)
-    (S : CoefficientClosedStructure HB) (T : CoefficientClosedStructure HA)
-    (β : @SymmetricCategory B _ S.monoidal)
-    (γ : @SymmetricCategory A _ T.monoidal)
-    (μ : S.tensor ⋙ F ≅ (F.prod F) ⋙ T.tensor)
-    (η : HB ⋙ F ≅ (F.op.prod F) ⋙ HA) :
-    RingedSliceEvaluationComparisons HB HA F S T True where
-  rho M K := μ.app (M, K)
-  eta K L := η.app (op K, L)
-  rho_naturality M K M' K' f g :=
-    μ.hom.naturality (X := (M, K)) (Y := (M', K')) (f, g)
-  eta_naturality K L K' L' f g :=
-    η.hom.naturality (X := (op K, L)) (Y := (op K', L')) (f.op, g)
-  sigma M K := β.toBraidedCategory.braiding M K
-  sigma_naturality M K M' K' f g := by
-    let := S.monoidal
-    let := β
-    exact BraidedCategory.braiding_naturality f g
-  sigmaU M K := γ.toBraidedCategory.braiding M K
-  sigmaU_naturality M K M' K' f g := by
-    let := T.monoidal
-    let := γ
-    exact BraidedCategory.braiding_naturality f g
-  kflat := True.intro
-
-private def comparisonData
-    (m : TensorComparison.{c, v, r, d, vd, s, wb, wa}
-      J R J' R' U u SB TB βB cB SA TA βA cA) :
-    RingedSliceEvaluationComparisons
-      (derivedInternalHomOfUniverses.{c, v, r, wb} J R)
-      (derivedInternalHomOfUniverses.{d, vd, s, wa} J' R')
-      U.mapDerivedCategory SB SA True :=
-  makeComparisonData _ _ U.mapDerivedCategory SB SA βB βA m.derived χ.derived
-
 end CategoryTheory.RingedForgetTensorTransposition

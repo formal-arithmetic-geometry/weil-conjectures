@@ -34,18 +34,10 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open scoped ChangeOfRings
 
-private noncomputable abbrev rb
-    {C : Type u} [SmallCategory C] {K : GrothendieckTopology C}
-    (R : Sheaf K CommRingCat.{u}) :=
-  (sheafCompose K (forget₂ CommRingCat RingCat)).obj R
-
 section Construction
 
 variable {C : Type u} [SmallCategory C] {K : GrothendieckTopology C}
   {R S : Sheaf K CommRingCat.{u}} (a : R ⟶ S)
-
-private noncomputable abbrev scalarUnit : SheafOfModules.{u} (rb R) :=
-  (restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map a)).obj (unit (rb S))
 
 end Construction
 

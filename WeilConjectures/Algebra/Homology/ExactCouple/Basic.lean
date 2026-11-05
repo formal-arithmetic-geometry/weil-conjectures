@@ -423,25 +423,6 @@ lemma homology_dComplex_derivedIter (n m : ℕ) (h : m = n + 1) (pq : κ) :
   subst h
   rfl
 
-variable (a b c) in
-/-- The complex shapes of the pages of the spectral sequence of an exact couple, starting on
-page `r₀`: the differential of the `r`-th page has degree `b + c - (r - r₀) • a`. -/
-def pageShape (r₀ r : ℤ) : ComplexShape κ :=
-  ComplexShape.up' (b + degIter a c (r - r₀).toNat)
-
-/-- The **spectral sequence of an exact couple**, starting on page `r₀`: its `r`-th page is the
-complex `(E, d)` of the `(r - r₀)`-th derived couple, whose homology is the `E`-object of the
-next derived couple.
-
-(blueprint: `def-sp-exact-couple`) -/
-noncomputable def spectralSequence (r₀ : ℤ) : SpectralSequence C (pageShape a b c r₀) r₀ where
-  page r _ := (X.derivedIter (r - r₀).toNat).dComplex
-  iso r r' pq hrr' hr := eqToIso (X.homology_dComplex_derivedIter _ _ (by omega) pq)
-
-lemma spectralSequence_page (r₀ r : ℤ) (hr : r₀ ≤ r) :
-    (X.spectralSequence r₀).page r hr = (X.derivedIter (r - r₀).toNat).dComplex :=
-  rfl
-
 /-! ### The `D`-objects of the iterated derived couples -/
 
 open Classical in

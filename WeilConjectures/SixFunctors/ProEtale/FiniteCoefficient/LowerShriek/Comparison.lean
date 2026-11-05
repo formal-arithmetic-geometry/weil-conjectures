@@ -129,32 +129,6 @@ section Comparison
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- The canonical comparison `ι_f : f_! ⟶ f_*` from the lower shriek to the pushforward
-along a morphism `f` admitting a compactification `X --i--> Z --g--> Y`: it is induced by
-the canonical map `i_! ⟶ i_*` for the open immersion `i`, using `f_! = g_* ∘ i_!` and the
-composition isomorphism `g_* ∘ i_* ≅ (i ≫ g)_* = f_*`. -/
-noncomputable def ProEtale.lowerShriekToLowerStar :
-    ProEtale.lowerShriek A f ⟶ (f)_*[A] :=
-  Functor.whiskerRight
-      (ProEtale.openImmersionLowerShriekToLowerStar A
-        (HasCompactification.compactification f).i)
-      ((HasCompactification.compactification f).g)_*[A] ≫
-    (ProEtale.lowerStarComp A (HasCompactification.compactification f).i
-      (HasCompactification.compactification f).g).hom ≫
-    eqToHom (by rw [← (HasCompactification.compactification f).comm])
-
-/-- The comparison `ι_f` is an isomorphism as soon as the comparison for the open immersion
-`i` of the chosen compactification is: the remaining two factors of `ι_f` are an isomorphism
-and an `eqToHom` by construction, and whiskering preserves isomorphisms.
-
-This step is purely formal; it uses nothing about `f`. -/
-lemma ProEtale.isIso_lowerShriekToLowerStar_of_isIso
-    (h : IsIso (ProEtale.openImmersionLowerShriekToLowerStar A
-      (HasCompactification.compactification f).i)) :
-    IsIso (ProEtale.lowerShriekToLowerStar A f) := by
-  rw [ProEtale.lowerShriekToLowerStar]
-  infer_instance
-
 end Comparison
 
 end AlgebraicGeometry

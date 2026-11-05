@@ -98,39 +98,7 @@ instance isIso_leftDerivedUpperStarTensorComparison :
     IsIso (leftDerivedUpperStarTensorComparison A g) :=
   (leftDerivedUpperStarTensorNatIso A g).isIso_hom
 
-/-- The isomorphism `Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M` in `D(Z_proét)`, for `K, M` in `D(Y_proét)`. -/
-noncomputable def leftDerivedUpperStarTensorIso
-    (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
-    L((g)^*[A]).obj (((-⊗ᴸ-(Y)[A]).obj K).obj M) ≅
-      ((-⊗ᴸ-(Z)[A]).obj (L((g)^*[A]).obj K)).obj (L((g)^*[A]).obj M) :=
-  ((leftDerivedUpperStarTensorNatIso A g).app K).app M
-
-@[simp]
-lemma leftDerivedUpperStarTensorIso_hom
-    (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
-    (leftDerivedUpperStarTensorIso A g K M).hom =
-      ((leftDerivedUpperStarTensorComparison A g).app K).app M :=
-  rfl
-
 end
-
-/-- The canonical identification `Lg^* Λ_Y ≅ Λ_Z` of the units.
-
-The unit `Λ_Y` is the image in `D(Y_proét)` of the unit sheaf placed in degree `0`. Since `g^*` is
-exact, `Lg^*` is computed by applying `g^*` degreewise, and `g^*` sends the unit sheaf of `Y`
-to that of `Z` because it is strong monoidal. -/
-noncomputable def leftDerivedUpperStarUnitIso : (L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _ :=
-  (leftDerivedUpperStarIsoMapDerivedCategory A g).app _ ≪≫
-    ((g)^*[A].mapDerivedCategoryFactors).app _ ≪≫
-    DerivedCategory.Q.mapIso
-      (((HomologicalComplex.singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).app _) ≪≫
-        (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso (g)^*[A]).symm)
-
-/-- The derived pullback preserves the unit, `Lg^* Λ_Y ≅ Λ_Z`
-(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarUnitIso`). -/
-theorem nonempty_iso_leftDerivedUpperStar_unit :
-    Nonempty ((L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) :=
-  ⟨leftDerivedUpperStarUnitIso A g⟩
 
 end ProEtale
 

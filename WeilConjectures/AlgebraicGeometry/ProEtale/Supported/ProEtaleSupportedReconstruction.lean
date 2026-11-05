@@ -47,22 +47,6 @@ universe u₁ u₂ v₁ v₂
 variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
 variable {L : D ⥤ C} {H : C ⥤ D} (a : L ⊣ H)
 variable {N : C} {M : D} (σ : H.obj N ≅ M)
-private theorem normalized_unique
-    [IsIso (L.map σ.inv ≫ a.counit.app N)] (q : N ⟶ L.obj M)
-    (hq : H.map q = σ.hom ≫ a.unit.app M) :
-    q = inv (L.map σ.inv ≫ a.counit.app N) := by
-  apply (cancel_epi (L.map σ.inv ≫ a.counit.app N)).1
-  rw [IsIso.hom_inv_id]
-  calc
-    (L.map σ.inv ≫ a.counit.app N) ≫ q =
-        L.map σ.inv ≫ L.map (H.map q) ≫ a.counit.app (L.obj M) := by
-      have hc := a.counit.naturality q
-      dsimp at hc
-      rw [Category.assoc, hc]
-    _ = L.map (a.unit.app M) ≫ a.counit.app (L.obj M) := by
-      rw [hq, ← L.map_comp_assoc]
-      simp
-    _ = 𝟙 _ := a.left_triangle_components M
 
 end AdjunctionAlgebra
 

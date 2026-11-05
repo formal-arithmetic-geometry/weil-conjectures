@@ -85,26 +85,6 @@ noncomputable def upperStarCompForgetIso :
       Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
         ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l]))
 
-/-- Blueprint `prop-weil-operations`: Six operations on Weil complexes.
-
-The forgetful functor commutes with the derived pushforward of Weil complexes:
-`For(Rφ_* K) ≅ Rφ̄_* For(K)`, where `φ̄ : X̄ ⟶ Ȳ` is the base change of `φ` to the geometric
-fibers. The forgetful functor from pro-étale Weil sheaves has an exact left adjoint, the
-induction `F ↦ ⨁ₙ (Frⁿ)^* F`, so it preserves K-injective complexes, and it commutes with the
-underived pushforward. -/
-theorem nonempty_derivedLowerStar_comp_forget_iso [QuasiCompact φ] [QuasiSeparated φ]
-    [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :
-    Nonempty (derivedLowerStar (k₀ := k₀) (l := l) φ ⋙ forget ≅
-      forget ⋙
-        R(((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*ᵃ[l]))) := by
-  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  exact ⟨Functor.isoWhiskerLeft (ObjectProperty.ι _)
-    (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _ _)⟩
-
 end WeilComplex
 
 end AlgebraicGeometry

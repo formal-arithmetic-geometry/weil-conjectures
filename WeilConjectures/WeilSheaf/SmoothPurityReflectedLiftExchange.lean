@@ -23,16 +23,4 @@ variable {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B
   (hT' : ∀ K : PB.FullSubcategory, PB' ((PB.ι ⋙ T').obj K))
   (e : F ⋙ T' ≅ T ⋙ F')
 
-/-- The reflected square agrees with the componentwise restriction. -/
-lemma preimageIso_liftSquareWithComparisons_lift_hom :
-    (preimageIso_liftSquareWithComparisons
-      (PB.liftCompιIso (PA.ι ⋙ F) hF)
-      (PB'.liftCompιIso (PA'.ι ⋙ F') hF') hT hT' e).hom =
-      AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.liftExchange
-        e.hom hF hF' hT' hT := by
-  apply NatTrans.ext
-  funext K
-  apply PB'.ι.map_injective
-  simp [preimageIso_liftSquareWithComparisons_hom_app_hom, liftCompιIso]
-
 end CategoryTheory.ObjectProperty

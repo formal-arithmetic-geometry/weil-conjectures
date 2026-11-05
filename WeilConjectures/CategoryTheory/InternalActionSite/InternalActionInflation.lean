@@ -31,12 +31,4 @@ variable {C : Type u} [SmallCategory C]
 
 variable {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
 
-/-- Give an existing module sheaf the trivial sectionwise action.
-Source: trivial action in paragraph (3)
-(blueprint: def-sfb-internal-action-inflation). -/
-def trivialSheafAction (P : Cᵒᵖ ⥤ GrpCat.{u}) :
-    ringedSiteModules.{u} R ⥤ EquivariantSheaf (K := P) J R where
-  obj M := ⟨⟨M.val, ⟨fun _ ↦ 1, fun _ _ _ ↦ rfl⟩⟩, M.isSheaf⟩
-  map f := ObjectProperty.homMk ⟨f.val, fun _ _ _ ↦ rfl⟩
-
 end CategoryTheory.InternalActionSite

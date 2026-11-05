@@ -42,35 +42,4 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X U Z : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X)
   [IsClosedImmersion i] (hij : IsCompl (Set.range i.base) (Set.range j.base))
 
-include hij in
-/-- **The open–closed triangle** `Dj_! Lj^* K ⟶ K ⟶ Ri_* Li^* K ⟶` on the ambient derived
-category of module objects, for a quasi-compact open immersion `j` and a closed immersion `i`
-onto its complement. -/
-theorem exists_distTriang_openClosed_derived
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) :
-    ∃ δ, Triangle.mk
-      ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).counit.app K)
-      ((derivedUpperStarLowerStarAdjunction Λ i).unit.app K) δ ∈ distTriang _ := by
-  have hN : IsZero ((L((j)^*⟦Λ⟧)).obj ((R((i)_*⟦Λ⟧)).obj ((L((i)^*⟦Λ⟧)).obj K))) :=
-    isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint Λ j i
-      hij.symm.disjoint _
-  have hA : IsZero ((L((i)^*⟦Λ⟧)).obj (D((j)_!open⟦Λ⟧).obj ((L((j)^*⟦Λ⟧)).obj K))) :=
-    isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint Λ j i
-      hij.symm.disjoint _
-  have hfg : (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).counit.app K ≫
-      (derivedUpperStarLowerStarAdjunction Λ i).unit.app K = 0 :=
-    ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).homEquiv _ _).injective
-      (hN.eq_of_tgt _ _)
-  have h₁ : IsIso ((L((j)^*⟦Λ⟧)).map
-      ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).counit.app K)) :=
-    IsIso.of_isIso_fac_left (hh := IsIso.id _)
-      ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ
-        j).right_triangle_components K)
-  have h₂ : IsIso ((L((i)^*⟦Λ⟧)).map ((derivedUpperStarLowerStarAdjunction Λ i).unit.app K)) :=
-    IsIso.of_isIso_fac_right (hh := IsIso.id _)
-      ((derivedUpperStarLowerStarAdjunction Λ i).left_triangle_components K)
-  exact exists_distTriang_of_jointlyReflectIsomorphisms
-    (jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl Λ i j hij) _ _ hfg h₁ hN hA h₂
-
 end AlgebraicGeometry.ProEtale.CondensedRing

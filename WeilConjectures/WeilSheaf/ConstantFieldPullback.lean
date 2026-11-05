@@ -54,12 +54,6 @@ def adicUpperStarFactorIso {X Y Z : Scheme.{u}} {g₁ : X ⟶ Y} {g₂ : Y ⟶ Z
     (g₁)^*ᵃ[l].obj ((g₂)^*ᵃ[l].obj M) ≅ (g)^*ᵃ[l].obj M :=
   (adicUpperStarComp l g₁ g₂).symm.app M ≪≫ (adicUpperStarCongr l h).app M
 
-lemma adicUpperStarFactorIso_hom {X Y Z : Scheme.{u}} {g₁ : X ⟶ Y} {g₂ : Y ⟶ Z} {g : X ⟶ Z}
-    (h : g₁ ≫ g₂ = g) (M : AdicSheaf l Z) :
-    (adicUpperStarFactorIso h M).hom =
-      (adicUpperStarComp l g₁ g₂).inv.app M ≫ (adicUpperStarCongr l h).hom.app M :=
-  rfl
-
 /-- **The cocycle law of the factorisation isomorphisms**: for `b ≫ f = g` and `a ≫ g = h`,
 the composite `a^* b^* f^* M ≅ a^* g^* M ≅ h^* M` is `a^* b^* f^* M ≅ (a ≫ b)^* f^* M ≅ h^* M`. -/
 @[reassoc]
@@ -161,17 +155,6 @@ lemma pieceMap_comp_geometricFiberProj (i : Fin (m + 1)) :
     pieceMap hc i ≫ (V ↘ Spec (CommRingCat.of k₀)).geometricFiberProj =
       (V ↘ Spec (CommRingCat.of k')).geometricFiberProj := by
   simp [pieceMap]
-
-lemma cyclicDecomposition_J (i : Fin (m + 1)) :
-    (cyclicDecomposition l hc hm).J i = (pieceMap hc i)^*ᵃ[l] :=
-  rfl
-
-lemma cyclicDecomposition_α (k : Fin m) :
-    (cyclicDecomposition l hc hm).α k =
-      Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l
-        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm _ ≪≫
-      (adicUpperStarComp l _ _).symm ≪≫ adicUpperStarCongr l (pieceMap_comp_frobenius hc k) :=
-  rfl
 
 lemma cyclicDecomposition_β :
     (cyclicDecomposition l hc hm).β =

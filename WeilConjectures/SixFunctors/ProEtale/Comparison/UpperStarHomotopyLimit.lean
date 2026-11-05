@@ -35,48 +35,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [hf : WeaklyEtale f]
 
-/-- Pullback along a weakly étale morphism preserves countable products: it is restriction along
-the localization functor, computed sectionwise. -/
-instance preservesLimitsOfShape_discrete_upperStar_ab :
-    PreservesLimitsOfShape (Discrete ℕ) (ProEtale.upperStar Ab.{u + 1} f) :=
-  have := Scheme.ProEt.isContinuous_overMap hf
-  have : PreservesLimitsOfShape (Discrete ℕ) (ProEtale.localizationRestriction Ab.{u + 1} f hf ⋙
-      sheafToPresheaf _ _) :=
-    preservesLimitsOfShape_of_natIso (Functor.sheafPushforwardContinuousCompSheafToPresheafIso
-      _ _ _ _).symm
-  have : PreservesLimitsOfShape (Discrete ℕ) (ProEtale.localizationRestriction Ab.{u + 1} f hf) :=
-    preservesLimitsOfShape_of_reflects_of_preserves _ (sheafToPresheaf _ _)
-  preservesLimitsOfShape_of_natIso (ProEtale.upperStarIsoLocalizationRestriction _ f hf).symm
-
-/-- **Pullback along a weakly étale morphism commutes with derived limits of towers** of
-complexes of abelian pro-étale sheaves. -/
-lemma isHomotopyLimit_upperStar_mapDerivedCategory_mapCone
-    {F : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})} {c : Cone F}
-    (hc : IsHomotopyLimit c) :
-    IsHomotopyLimit ((ProEtale.upperStar Ab.{u + 1} f).mapDerivedCategory.mapCone c) :=
-  (ProEtale.upperStar Ab.{u + 1} f).isHomotopyLimit_mapDerivedCategory_mapCone hc
-
 variable (Λ : Type (u + 1)) [CommRing Λ]
-
-/-- Pullback along a weakly étale morphism preserves countable products of sheaves of modules. -/
-instance preservesLimitsOfShape_discrete_upperStar_moduleCat :
-    PreservesLimitsOfShape (Discrete ℕ) (ProEtale.upperStar (ModuleCat.{u + 1} Λ) f) :=
-  have := Scheme.ProEt.isContinuous_overMap hf
-  have : PreservesLimitsOfShape (Discrete ℕ)
-      (ProEtale.localizationRestriction (ModuleCat.{u + 1} Λ) f hf ⋙ sheafToPresheaf _ _) :=
-    preservesLimitsOfShape_of_natIso (Functor.sheafPushforwardContinuousCompSheafToPresheafIso
-      _ _ _ _).symm
-  have : PreservesLimitsOfShape (Discrete ℕ)
-      (ProEtale.localizationRestriction (ModuleCat.{u + 1} Λ) f hf) :=
-    preservesLimitsOfShape_of_reflects_of_preserves _ (sheafToPresheaf _ _)
-  preservesLimitsOfShape_of_natIso (ProEtale.upperStarIsoLocalizationRestriction _ f hf).symm
-
-/-- **Pullback along a weakly étale morphism commutes with derived limits of towers** of
-complexes of sheaves of modules. -/
-lemma isHomotopyLimit_upperStar_mapDerivedCategory_mapCone_moduleCat
-    {F : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
-    {c : Cone F} (hc : IsHomotopyLimit c) :
-    IsHomotopyLimit ((ProEtale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategory.mapCone c) :=
-  (ProEtale.upperStar (ModuleCat.{u + 1} Λ) f).isHomotopyLimit_mapDerivedCategory_mapCone hc
 
 end AlgebraicGeometry.ProEtale

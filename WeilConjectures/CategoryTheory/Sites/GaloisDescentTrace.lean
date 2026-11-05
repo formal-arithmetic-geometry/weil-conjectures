@@ -213,13 +213,6 @@ lemma baseChangeTrace_comp_baseChangeUnit :
     baseChangeTrace J σ hσ hcov hgal hH ≫ baseChangeUnit ε H = ∑ a, baseChangeAction (σ a) H :=
   baseChangeDescend_comp ..
 
-/-- The unit followed by the trace is multiplication by the order of `Γ`. -/
-lemma baseChangeUnit_comp_baseChangeTrace (hσε : ∀ a, σ a ≫ ε = ε) :
-    baseChangeUnit ε H ≫ baseChangeTrace J σ hσ hcov hgal hH = Fintype.card Γ • 𝟙 H := by
-  have := mono_baseChangeUnit J hcov hH
-  exact comp_eq_nsmul_of_comp_eq_sum _ (fun a ↦ baseChangeUnit_comp_baseChangeAction (hσε a) H)
-    (baseChangeTrace_comp_baseChangeUnit J σ hσ hcov hgal hH)
-
 /-- The trace is natural in the sheaf `H`. -/
 lemma baseChangeTrace_naturality {H' : Cᵒᵖ ⥤ AddCommGrpCat.{w}}
     (hH' : Presieve.IsSheaf J (H' ⋙ forget AddCommGrpCat)) (φ : H ⟶ H') :

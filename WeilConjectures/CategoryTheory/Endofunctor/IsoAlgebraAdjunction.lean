@@ -179,16 +179,6 @@ instance isIso_mateEquiv : IsIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv
     all_goals first | exact IsIso.id _ | exact h1 | exact h2 | exact Functor.map_isIso _ _
   exact NatIso.isIso_of_isIso_app _
 
-/-- If `F` and `G` are equivalences, the mate `R ⋙ F ≅ G ⋙ R` of `eL⁻¹`. Its hom is the mate
-of `eL⁻¹` by definition, so `L ⊣ R` lifts along `eL` and `mateIso adj eL`
-(`CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction`). -/
-noncomputable def mateIso : R ⋙ F ≅ G ⋙ R :=
-  asIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans
-
-lemma mateEquiv_natTrans_eq_mateIso_hom :
-    (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = (mateIso adj eL).hom :=
-  rfl
-
 end Equivalence
 
 end CategoryTheory.Endofunctor.IsoAlgebra

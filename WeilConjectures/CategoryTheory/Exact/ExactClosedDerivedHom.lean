@@ -19,15 +19,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open CategoryTheory.MonoidalClosed
 namespace CategoryTheory
 namespace Functor
-/-- The canonical internal-Hom comparison component, shared without unfolding the closed
-adjunction. Source: the tensor-Hom evaluation transpose
-(blueprint: lem-sf-exact-closed-derived-hom). -/
-@[irreducible]
-def closedComparison {C D : Type*} [Category C] [Category D]
-    [MonoidalCategory C] [MonoidalCategory D] [MonoidalClosed C] [MonoidalClosed D]
-    (F : C ⥤ D) [F.LaxMonoidal] (K M : C) :
-    F.obj ((ihom K).obj M) ⟶ (ihom (F.obj K)).obj (F.obj M) :=
-  (LaxMonoidal.ihomComparison F K).natTrans.app M
 end Functor
 section Square
 open Category Functor.LaxMonoidal
@@ -37,22 +28,6 @@ variable {A B E H : Type*} [Category A] [Category B] [Category E] [Category H]
   (Q : A ⥤ B) (R : E ⥤ H) (F : A ⥤ E) (G : B ⥤ H)
   [Q.LaxMonoidal] [R.LaxMonoidal] [F.LaxMonoidal] [G.LaxMonoidal]
   (e : Q ⋙ G ≅ F ⋙ R) [NatTrans.IsMonoidal e.hom] (K M : A)
-private theorem comparison_square :
-    G.map ((ihomComparison Q K).natTrans.app M) ≫
-        (ihomComparison G (Q.obj K)).natTrans.app (Q.obj M) ≫
-        (pre (e.inv.app K)).app (G.obj (Q.obj M)) ≫
-        (ihom (R.obj (F.obj K))).map (e.hom.app M) =
-      e.hom.app ((ihom K).obj M) ≫
-        R.map ((ihomComparison F K).natTrans.app M) ≫
-        (ihomComparison R (F.obj K)).natTrans.app (F.obj M) := by
-  have q := ihomComparison_app_comp_map_app e.inv K M
-  have q' := congrArg (fun f ↦ e.hom.app ((ihom K).obj M) ≫ f ≫
-    (ihom (R.obj (F.obj K))).map (e.hom.app M)) q
-  simp only [Functor.comp_obj, ihomComparison_comp_app] at q'
-  simp only [← Functor.map_comp, Iso.inv_hom_id_app, Category.assoc,
-    Iso.hom_inv_id_app_assoc] at q'
-  erw [Functor.map_id, Category.comp_id] at q'
-  exact q'.symm
 end Square
 end CategoryTheory
 namespace CategoryTheory.Functor

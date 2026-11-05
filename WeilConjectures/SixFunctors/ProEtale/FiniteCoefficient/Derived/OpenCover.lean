@@ -94,33 +94,6 @@ section Hom
 
 variable [ProEtale.UpperStarPreservesFlat A]
 
-/-- **Restriction to an open commutes with the internal hom**, `j^* RHom(K, N) ≅
-RHom(j^* K, j^* N)`: the two sides are right adjoint to `G ↦ K ⊗ᴸ j_! G` and to
-`G ↦ j_!(j^* K ⊗ᴸ G)`, which agree by the projection formula for `j_!` (and the symmetry of the
-derived tensor product). This is the pro-étale counterpart of
-`AlgebraicGeometry.Etale.nonempty_iso_mapDerivedCategory_upperStar_derivedHom`. -/
-theorem nonempty_iso_mapDerivedCategory_upperStar_derivedHom {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] (K N : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    Nonempty (D((j)^*[A]).obj (((ProEtale.derivedHom A X).obj (op K)).obj N) ≅
-      ((ProEtale.derivedHom A U).obj (op (D((j)^*[A]).obj K))).obj (D((j)^*[A]).obj N)) := by
-  obtain ⟨_⟩ :=
-    _root_.DerivedCategory.nonempty_braidedCategory (Sheaf (Scheme.ProEt.topology X) A)
-  obtain ⟨_⟩ :=
-    _root_.DerivedCategory.nonempty_braidedCategory (Sheaf (Scheme.ProEt.topology U) A)
-  let adj₁ := (ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction A j).comp
-    (ProEtale.derivedTensorHomAdjunction A K)
-  let adj₂ := (ProEtale.derivedTensorHomAdjunction A (D((j)^*[A]).obj K)).comp
-      (ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
-  let e : D((j)_!open[A]) ⋙ (ProEtale.derivedTensor A X).obj K ≅
-      (ProEtale.derivedTensor A U).obj (D((j)^*[A]).obj K) ⋙ D((j)_!open[A]) :=
-    Functor.isoWhiskerLeft _ (BraidedCategory.tensorLeftIsoTensorRight K) ≪≫
-      (((flipFunctor _ _ _).mapIso
-        (derivedOpenImmersionLowerShriekProjectionIso A j)).app K).symm ≪≫
-      Functor.isoWhiskerRight ((curriedTensor _).flip.mapIso
-        ((leftDerivedUpperStarIsoMapDerivedCategory A j).app K) ≪≫
-          (BraidedCategory.tensorLeftIsoTensorRight _).symm) D((j)_!open[A])
-  exact ⟨((adj₁.ofNatIsoLeft e).rightAdjointUniq adj₂).app N⟩
-
 end Hom
 
 section Gluing

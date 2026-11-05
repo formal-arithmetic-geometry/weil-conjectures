@@ -41,72 +41,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include ℓ k
 
-private theorem torsion_single_bound
-    (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
-    [DiscreteTopology T] [Finite T] (n : ℕ) (hn : (ℓ : T) ^ n = 0)
-    (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X.left))
-    (hF : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.continuousMapRingObj T) X.left) F) :
-    ∃ b : ℤ, ((R((f.left)_*⟦Profinite.continuousMapRingObj T⟧)).obj
-      ((DerivedCategory.singleFunctor _ 0).obj F)).IsLE b := by
-  obtain ⟨eR, heR⟩ := Profinite.finiteDiscreteCondensedRing_constant.{u} T
-  have : IsMonHom eR.hom := heR
-  obtain ⟨G, hG, hforget⟩ := internalModuleAb_equivalence (ULift.{u + 1} T)
-  have : G.IsEquivalence := hG
-  let ES := finiteDiscreteCoefficientEquivalence T eR G hforget X.left
-  let ET := finiteDiscreteCoefficientEquivalence T eR G hforget Y.left
-  obtain ⟨L, hL, ⟨eL⟩⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj
-    (ULift.{u + 1} T) (finiteDiscreteCoefficient_constructible T eR G hforget X.left F hF)
-  have : Scheme.IsConstructibleSheaf L := hL
-  let A := ModuleCat.{u + 1} (ULift.{u + 1} T)
-  let K := (DerivedCategory.singleFunctor _ 0).obj L
-  have hell : IsUnit (ℓ : k) := isUnit_iff_ne_zero.mpr
-    (CharP.cast_ne_zero_of_ne_of_prime k (p := ringChar k) (Fact.out : ℓ.Prime)
-      (Fact.out : ringChar k ≠ ℓ))
-  have : HasInvertibleExponent (ULift.{u + 1} T) (Spec (.of k)) := by
-    refine ⟨ℓ ^ n, pow_pos (Fact.out : ℓ.Prime).pos _, ?_, ?_⟩
-    · apply (ULift.ringEquiv : ULift.{u + 1} T ≃+* T).injective
-      simpa only [map_pow, map_natCast, map_zero, Nat.cast_pow] using hn
-    · simpa only [← Nat.cast_pow, map_natCast] using
-        (hell.pow n).map (Scheme.ΓSpecIso (.of k)).inv.hom
-  have hK := Etale.DerivedCategory.boundedConstructible_singleFunctor_obj L (0 : ℤ)
-  have hb := Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType
-    (ULift.{u + 1} T) f.left X.hom Y.hom (Over.w f) K hK
-  let N := comparisonUpperStar A Y.left
-  have hNb := N.bounded_mapDerivedCategory_obj hb.1
-  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
-  have : QuasiSeparatedSpace X.left := quasiSeparatedSpace_of_quasiSeparated X.hom
-  have : QuasiSeparatedSpace Y.left := quasiSeparatedSpace_of_quasiSeparated Y.hom
-  have : QuasiCompact f.left := inferInstance
-  have : QuasiSeparated f.left := inferInstance
-  have hm : IsIso (unboundedDirectImageComparisonMap (ULift.{u + 1} T) f.left K) :=
-    unboundedDirectImageComparison_boundedBelow (ULift.{u + 1} T) f.left K 0
-  let I := lowerStar (Profinite.continuousMapRingObj T) f.left
-  let H := ProEtale.lowerStar A f.left
-  let i := encodingPushforwardNatIso T eR G hforget Y.left X.left f.left
-  let j : (ES.functor ⋙ I) ⋙ ET.inverse ≅ H :=
-    Functor.associator _ _ _ ≪≫ Iso.inverseCompIso (G := ES.symm) i
-  let k : H ⋙ ET.functor ≅ ES.functor ⋙ I :=
-    (Iso.isoCompInverse (H := ET.symm) j).symm
-  let d : R(H) ⋙ D(ET.functor) ≅ D(ES.functor) ⋙ R(I) :=
-    (Functor.rightDerivedFunctorCompMapDerivedCategoryIso H ET.functor).symm ≪≫
-      Functor.rightDerivedFunctorNatIso k ≪≫
-      Functor.rightDerivedFunctorCompIso ES.functor I ≪≫
-      Functor.isoWhiskerRight ES.functor.rightDerivedFunctorIsoMapDerivedCategory R(I)
-  let eF : ES.functor.obj ((comparisonUpperStar A X.left).obj L) ≅ F :=
-    ES.functor.mapIso eL ≪≫ ES.counitIso.app F
-  let eS := ES.functor.mapDerivedCategory.mapIso
-      (((comparisonUpperStar A X.left).mapDerivedCategorySingleFunctor 0).app L) ≪≫
-    (ES.functor.mapDerivedCategorySingleFunctor 0).app _ ≪≫
-    (DerivedCategory.singleFunctor _ 0).mapIso eF
-  let e := ET.functor.mapDerivedCategory.mapIso
-      (asIso (unboundedDirectImageComparisonMap (ULift.{u + 1} T) f.left K)) ≪≫
-    d.app ((comparisonUpperStar A X.left).mapDerivedCategory.obj K) ≪≫
-    R(I).mapIso eS
-  exact (DerivedCategory.TStructure.t.bounded.prop_of_iso e
-    (ET.functor.bounded_mapDerivedCategory_obj hNb)).2
-
 private theorem rational_single_bound
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E]
@@ -250,44 +184,9 @@ end PadicIntegersRingObj
 
 namespace UnitBallRingObj
 
-/-- The direct image of a constructible `O̲`-sheaf placed in degree zero is bounded above, for the
-closed unit ball `O` of a finite normed extension `E` of `ℚ_ℓ` (the case `O̲` of
-`ProEtale.CondensedRing.finiteTypeDirectImage_single_boundedAbove`). -/
-theorem finiteTypeDirectImage_single_boundedAbove
-    {E : Type} [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    (O : Subring E) [hO : Fact (∀ x : E, x ∈ O ↔ ‖x‖ ≤ 1)]
-    (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj O) X.left))
-    (hF : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.continuousMapRingObj O) X.left) F) :
-    ∃ b : ℤ, ((R((f.left)_*⟦Profinite.continuousMapRingObj O⟧)).obj
-      ((DerivedCategory.singleFunctor _ 0).obj F)).IsLE b := by
-  have h : O = continuousIntegers ℓ E := by
-    ext x
-    rw [hO.out]
-    change ‖x‖ ≤ 1 ↔ ‖x‖₊ ≤ 1
-    simpa only [NNReal.coe_one, coe_nnnorm] using
-      (NNReal.coe_le_coe : (‖x‖₊ : ℝ) ≤ ((1 : NNReal) : ℝ) ↔ ‖x‖₊ ≤ 1)
-  exact integral_subring_single_bound ℓ f E O h F hF
-
 end UnitBallRingObj
 
 namespace FiniteDiscreteRingObj
-
-/-- The direct image of a constructible `T̲`-sheaf placed in degree zero is bounded above, for a
-finite discrete ring `T` in which `ℓ` is nilpotent (the case `T̲` of
-`ProEtale.CondensedRing.finiteTypeDirectImage_single_boundedAbove`). -/
-theorem finiteTypeDirectImage_single_boundedAbove
-    (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
-    [DiscreteTopology T] [Finite T] [hT : Fact (IsNilpotent (ℓ : T))]
-    (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X.left))
-    (hF : IsConstructibleModuleObject
-      (condensedRingObj (Profinite.continuousMapRingObj T) X.left) F) :
-    ∃ b : ℤ, ((R((f.left)_*⟦Profinite.continuousMapRingObj T⟧)).obj
-      ((DerivedCategory.singleFunctor _ 0).obj F)).IsLE b := by
-  obtain ⟨n, hn⟩ := hT.out
-  exact torsion_single_bound ℓ f T n hn F hF
 
 end FiniteDiscreteRingObj
 

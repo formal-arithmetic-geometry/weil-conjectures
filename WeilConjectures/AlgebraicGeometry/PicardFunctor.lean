@@ -190,11 +190,6 @@ def mk (M : Y.Modules) [M.IsInvertible] : Y.Pic :=
 lemma val_mk (M : Y.Modules) [M.IsInvertible] : (mk M).val = toSkeleton M :=
   rfl
 
-lemma mk_eq_mk_iff (M N : Y.Modules) [M.IsInvertible] [N.IsInvertible] :
-    mk M = mk N ↔ Nonempty (M ≅ N) := by
-  rw [← toSkeleton_eq_toSkeleton_iff]
-  exact ⟨fun h ↦ congrArg val h, fun h ↦ ext h⟩
-
 /-- Two classes in the Picard group agree if and only if their chosen representatives are
 isomorphic. -/
 lemma eq_iff_nonempty_iso {L L' : Y.Pic} :

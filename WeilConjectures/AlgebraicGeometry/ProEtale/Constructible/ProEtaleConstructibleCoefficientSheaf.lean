@@ -31,19 +31,4 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Intrinsic finite-stratification constructibility for a finite coefficient ring in the
-site object universe. Each restricted sheaf is locally a finite constant module; this is
-local constancy with finite geometric stalks. The positive number of strata includes the
-empty scheme by a single empty stratum. No etale-origin condition is part of this notion.
-Source: blueprint def-weil-finite-torsion-constructibility, second paragraph; Stacks 09AJ
-(blueprint: def-weil-proetale-constructible-sheaf). -/
-def IsConstructibleProEtaleCoefficientModuleSheaf
-    (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
-    (F : pbcModules Y (adicLisseConstantRing Y A)) : Prop :=
-  ∃ S : Stratification Y, 0 < S.n ∧
-    (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
-    ∀ i : Fin S.n,
-      IsRelativelyFiniteLisseModule (S.immersion i) A
-        ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing Y A)).obj F)
-
 end AlgebraicGeometry.Scheme

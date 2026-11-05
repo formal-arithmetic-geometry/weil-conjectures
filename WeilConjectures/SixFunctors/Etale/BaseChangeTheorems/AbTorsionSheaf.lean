@@ -53,13 +53,4 @@ lemma Scheme.IsTorsionSheaf.of_iso {X : Scheme.{u}}
 
 variable (X : Scheme.{u})
 
-/-- An object of the bounded below derived category of abelian étale sheaves has
-*torsion cohomology* if all its cohomology sheaves are torsion
-(`AlgebraicGeometry.Scheme.IsTorsionSheaf`). This is the hypothesis on the coefficient
-complex in the general proper base change theorem. -/
-noncomputable def Etale.DerivedCategory.Plus.torsionHomology :
-    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1})) :=
-  fun K ↦ ∀ n : ℤ, IsTorsionSheaf
-    ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology Ab.{u + 1}) n).obj K)
-
 end AlgebraicGeometry

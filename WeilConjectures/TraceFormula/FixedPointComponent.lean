@@ -91,15 +91,6 @@ lemma range_rationalPoint_left_base {Y : Over (Spec (.of k))} (g : RationalPoint
   · rintro rfl
     exact ⟨_, rfl⟩
 
-variable (k) in
-/-- Reindexing the disjoint union `∐_σ Spec k` along a bijection `σ ≃ σ'`. -/
-noncomputable def sigmaPointCongr {σ σ' : Type u} (e : σ ≃ σ') :
-    sigmaPoint k σ ≅ sigmaPoint k σ' :=
-  Over.isoMk (Sigma.whiskerEquiv (f := fun _ : σ ↦ Spec (.of k)) (g := fun _ : σ' ↦ Spec (.of k))
-    e fun _ ↦ Iso.refl _) (by
-    refine Sigma.hom_ext _ _ fun i ↦ ?_
-    simp [sigmaPoint])
-
 section FixedLocus
 
 variable {X : Over (Spec (.of k))} [IsAlgClosed k] [LocallyOfFiniteType X.hom] {k₀ : Type u}
@@ -184,62 +175,6 @@ lemma FixedLocus.isoPointOfRangeEq_inv_comp_eq (hΦ : IsModelFrobenius Φ f₀ p
   rw [isoPointOfRangeEq_inv_comp_left_base]
   exact congrArg z'.left.base (Subsingleton.elim (α := Spec (.of k)) _ _)
 /-! ### The fixed locus as a disjoint union of points -/
-
-/-- **The Frobenius fixed scheme** (blueprint `sk-lem-tf-fixed-points`): for the fixed locus `F`
-of the graph correspondence `(𝟙, Φ_m)` of the model Frobenius, `m ≥ 1`, the isomorphism
-`Fix(Φ_m) ≅ ∐_{x ∈ X(k)^{Φ_m}} Spec k` over `Spec k`. -/
-noncomputable def FixedLocus.isoSigmaPoint (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus)
-    (hΦ : IsModelFrobenius Φ f₀ p) (hm : 1 ≤ m) : F.F ≅ sigmaPoint k (FixedPoint Φ m) :=
-  IsLimit.conePointUniqueUpToIso F.isLimit (hΦ.nonempty_isLimit_fixedPointsFork hm).some
-
-@[reassoc (attr := simp)]
-lemma FixedLocus.isoSigmaPoint_hom_fixedPointsι
-    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (hΦ : IsModelFrobenius Φ f₀ p)
-    (hm : 1 ≤ m) : (F.isoSigmaPoint hΦ hm).hom ≫ fixedPointsι Φ m = F.ι :=
-  IsLimit.conePointUniqueUpToIso_hom_comp _ _ WalkingParallelPair.zero
-
-/-- **The Frobenius fixed scheme** (blueprint `sk-lem-tf-fixed-points`): the fixed locus of
-`(𝟙, Φ_m)`, `m ≥ 1`, is isomorphic to `∐_{x ∈ X(k)^{Φ_m}} Spec k`. -/
-theorem FixedLocus.nonempty_iso_sigmaPoint (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus)
-    (hΦ : IsModelFrobenius Φ f₀ p) (hm : 1 ≤ m) :
-    Nonempty (F.F ≅ sigmaPoint k (FixedPoint Φ m)) :=
-  ⟨F.isoSigmaPoint hΦ hm⟩
-
-/-- **The Frobenius fixed scheme** (blueprint `sk-lem-tf-fixed-points`):
-`Fix(Φ_m) ≅ ∐_{x ∈ X₀(𝔽_{q^m})} Spec k`, the disjoint union indexed by the `k`-points of `X₀`
-fixed by the `m`-th power of the arithmetic Frobenius of `k`, i.e. the `𝔽_{q^m}`-points of
-`X₀` (`IsModelFrobenius.fixedPointEquiv`). -/
-noncomputable def FixedLocus.isoSigmaPointFixedFieldPoints [Fintype k₀]
-    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (hΦ : IsModelFrobenius Φ f₀ p)
-    (hm : 1 ≤ m) : F.F ≅ sigmaPoint k
-      (f₀.fixedFieldPoints ((FiniteField.frobeniusAlgHom k₀ k ^ m : k →ₐ[k₀] k) : k →+* k)) :=
-  F.isoSigmaPoint hΦ hm ≪≫ sigmaPointCongr k (hΦ.fixedPointEquiv m)
-
-/-- **The Frobenius fixed scheme is finite** (blueprint `sk-lem-tf-fixed-points`): for a model
-`X₀` of finite type over `k₀` and `m ≥ 1`, the fixed locus of `(𝟙, Φ_m)` is finite over
-`Spec k`. -/
-theorem FixedLocus.isFinite_hom [QuasiCompact f₀] [LocallyOfFiniteType f₀]
-    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (hΦ : IsModelFrobenius Φ f₀ p)
-    (hm : 1 ≤ m) : IsFinite F.F.hom := by
-  have := hΦ.finite_fixedPoint (m := m) (by omega)
-  rw [← Over.w (F.isoSigmaPoint hΦ hm).hom]
-  infer_instance
-
-/-- **The Frobenius fixed scheme is proper** (blueprint `sk-lem-tf-fixed-points`). -/
-theorem FixedLocus.isProper_hom [QuasiCompact f₀] [LocallyOfFiniteType f₀]
-    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (hΦ : IsModelFrobenius Φ f₀ p)
-    (hm : 1 ≤ m) : IsProper F.F.hom :=
-  have := F.isFinite_hom hΦ hm
-  inferInstance
-
-/-- **The Frobenius fixed scheme is reduced** (blueprint `sk-lem-tf-fixed-points`): it is
-isomorphic to `Spec (∏_{x} k)`. -/
-theorem FixedLocus.isReduced [QuasiCompact f₀] [LocallyOfFiniteType f₀]
-    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (hΦ : IsModelFrobenius Φ f₀ p)
-    (hm : 1 ≤ m) : IsReduced F.F.left := by
-  have := hΦ.finite_fixedPoint (m := m) (by omega)
-  exact isReduced_of_isOpenImmersion
-    ((F.isoSigmaPoint hΦ hm).hom.left ≫ sigmaSpec fun _ : FixedPoint Φ m ↦ CommRingCat.of k)
 
 end Correspondence
 

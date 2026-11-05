@@ -135,63 +135,6 @@ lemma upperStarComp_hom_app_comp_map_upperStarComp_hom_app {S T U V : Scheme.{u}
 
 variable {X'' Y'' : Scheme.{u}} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' ⟶ Y''}
 
-/-- **Pasting law of the pullback comparisons**: the comparison of the outer square of two
-horizontally pasted squares is the pasting of their comparisons, through the composition
-isomorphisms `upperStarComp`. The squares are
-```
-X'' --h'--> X' --g'--> X
- |f''       |f'        |f
- v          v          v
-Y'' --h---> Y' --g---> Y
-```
--/
-lemma upperStarSquareComparison_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
-    (sq : CommSq (h' ≫ g') f'' f (h ≫ g))
-    (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    (f'')^*⟦Λ⟧.map ((upperStarComp Λ h g).hom.app N) ≫
-        (upperStarSquareComparison Λ sq₂).hom.app ((g)^*⟦Λ⟧.obj N) ≫
-          (h')^*⟦Λ⟧.map ((upperStarSquareComparison Λ sq₁).hom.app N) =
-      (upperStarSquareComparison Λ sq).hom.app N ≫
-        (upperStarComp Λ h' g').hom.app ((f)^*⟦Λ⟧.obj N) := by
-  rw [← cancel_epi ((upperStarComp Λ f'' (h ≫ g)).hom.app N),
-    upperStarSquareComparison_hom_app, upperStarSquareComparison_hom_app,
-    upperStarSquareComparison_hom_app]
-  simp only [Category.assoc, Functor.map_comp, Iso.hom_inv_id_app_assoc]
-  rw [upperStarComp_hom_app_comp_map_upperStarComp_hom_app_assoc Λ f'' h g,
-    Iso.hom_inv_id_app_assoc,
-    upperStarComp_hom_app_upperStarCongr_hom_app_assoc Λ sq₂.w.symm g,
-    upperStarComp_hom_app_comp_upperStarComp_hom_app_assoc Λ h' f' g,
-    ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
-    upperStarComp_hom_app_map_upperStarCongr_hom_app_assoc Λ h' sq₁.w.symm,
-    upperStarComp_hom_app_comp_map_upperStarComp_hom_app Λ h' g' f]
-  simp only [upperStarCongr_hom_app_eq_eqToHom, eqToHom_trans_assoc]
-
-/-- **Pasting law of the base-change morphisms**: the base-change morphism of the outer square of
-two horizontally pasted squares is the pasting of their base-change morphisms, through the
-composition isomorphisms `upperStarComp`. The squares are
-```
-X'' --h'--> X' --g'--> X
- |f''       |f'        |f
- v          v          v
-Y'' --h---> Y' --g---> Y
-```
--/
-lemma lowerStarBaseChange_app_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
-    (sq : CommSq (h' ≫ g') f'' f (h ≫ g))
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    (upperStarComp Λ h g).hom.app ((f)_*⟦Λ⟧.obj M) ≫
-        (h)^*⟦Λ⟧.map ((lowerStarBaseChange Λ sq₁).app M) ≫
-          (lowerStarBaseChange Λ sq₂).app ((g')^*⟦Λ⟧.obj M) =
-      (lowerStarBaseChange Λ sq).app M ≫ (f'')_*⟦Λ⟧.map ((upperStarComp Λ h' g').hom.app M) := by
-  rw [lowerStarBaseChange_eq, lowerStarBaseChange_eq, lowerStarBaseChange_eq]
-  have hp := Adjunction.exchangeRight_app_paste (G := (h ≫ g)^*⟦Λ⟧) (G' := (h' ≫ g')^*⟦Λ⟧)
-    (G₁ := (g)^*⟦Λ⟧) (G₁' := (g')^*⟦Λ⟧) (G₂ := (h)^*⟦Λ⟧) (G₂' := (h')^*⟦Λ⟧)
-    (upperStarLowerStarAdjunction Λ f) (upperStarLowerStarAdjunction Λ f')
-    (upperStarLowerStarAdjunction Λ f'') (upperStarSquareComparison Λ sq₁)
-    (upperStarSquareComparison Λ sq₂) (upperStarSquareComparison Λ sq) (upperStarComp Λ h g)
-    (upperStarComp Λ h' g') (upperStarSquareComparison_paste Λ sq₁ sq₂ sq) M
-  exact hp
-
 end BaseChange
 
 end AlgebraicGeometry.ProEtale.CondensedRing

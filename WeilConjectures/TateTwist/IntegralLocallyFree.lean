@@ -162,21 +162,4 @@ noncomputable def integralTateTwistBoundedConstructible (d : ℕ) :
 
 variable [FiniteDimensional ℚ_[ℓ] E]
 
-/-- The extension of scalars of `𝒪_{E,X}(d)` along `𝒪_{E,X} ⟶ ℚ̄_ℓ,X` is `ℚ̄_ℓ,X(d)`, for every
-`d ∈ ℤ`. For `d ≥ 0` this is `ProEtale.extendScalarsIntegralTateTwistNatIso`; for `d < 0`,
-`𝒪_{E,X}(-d)` is locally free, hence dualizable, and the strong monoidal extension of scalars
-commutes with the duals of dualizable objects. -/
-noncomputable def extendScalarsIntegralTateTwistIso :
-    (d : ℤ) → (Mod.extendScalars
-        (coefficientMap (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X)).obj
-        (integralTateTwist X ℓ E d) ≅ tateTwist X ℓ d
-  | (d : ℕ) => extendScalarsIntegralTateTwistNatIso X ℓ E d
-  | .negSucc d =>
-    letI := Mod.extendScalarsMonoidal
-      (coefficientMap (Profinite.padicIntegersRingObjToPadicAlgCl ℓ E) X)
-    Functor.mapIhomUnitIsoOfIsDualizable _
-        (isLocallyFree_integralTateTwistNat ℓ E f (d + 1)).isDualizable ≪≫
-      ((internalHom.mapIso (extendScalarsIntegralTateTwistNatIso X ℓ E (d + 1)).op).app
-        (𝟙_ _)).symm
-
 end AlgebraicGeometry.ProEtale

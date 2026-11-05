@@ -72,43 +72,6 @@ noncomputable def mapDerivedCategoryUpperStarRightDerivedLowerShriekIso {Z T : S
     Functor.mapDerivedCategoryNatIso (asIso (Etale.upperStarLowerStarAdjunction A i).counit) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
-omit [HasSmallSiteSheafify A] [PreservesFiniteLimits (CategoryTheory.forget A)] in
-/-- Extension by zero along a closed immersion `i` preserves Tor amplitude: if the projection
-formula holds for `i` at `P` and `P` has Tor amplitude in `[a, b]`, so does `Ri_! P`, since
-`Ri_! P ⊗ᴸ G ≅ Ri_!(P ⊗ᴸ i^* G)` and `Ri_! = D(i_*)` is exact. -/
-lemma torAmplitudeIn_rightDerivedLowerShriek_of_isClosedImmersion [UpperStarPreservesFlat A]
-    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-    {Z T : Scheme.{u}}
-    (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
-    {a b : ℤ} {P : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)}
-    (hPF : ∀ L, HasProjectionFormula A i P L) (hP : torAmplitudeIn A Z a b P) :
-    torAmplitudeIn A T a b ((R(i)_![A]).obj P) := fun G ↦ by
-  have : IsIso (((projectionMap A i).app P).app
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) :=
-    hPF ((_root_.DerivedCategory.singleFunctor _ 0).obj G)
-  -- `Ri_! (P ⊗ᴸ i^* G) ≅ Ri_! P ⊗ᴸ G` by the projection formula
-  let e : (R(i)_![A]).obj (((-⊗ᴸ-(Z)[A]).obj P).obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)^*[A].obj G))) ≅
-        ((-⊗ᴸ-(T)[A]).obj ((R(i)_![A]).obj P)).obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj G) :=
-    (R(i)_![A]).mapIso (((-⊗ᴸ-(Z)[A]).obj P).mapIso
-      ((singleFunctorCompLeftDerivedUpperStarIso A i).app G).symm) ≪≫
-      (asIso (((projectionMap A i).app P).app
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj G))).symm
-  -- `Ri_! ≅ D(i_*)` is exact
-  let e' := (rightDerivedLowerShriekIsoRightDerivedLowerStar A i ≪≫
-    Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory (FC := FC) A i).app
-      (((-⊗ᴸ-(Z)[A]).obj P).obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)^*[A].obj G)))
-  obtain ⟨h₁, h₂⟩ :=
-    ((i)_*[A]).homologyConcentratedIn_mapDerivedCategory_obj (hP ((i)^*[A].obj G))
-  have : _root_.DerivedCategory.TStructure.t.IsGE (D((i)_*[A]).obj (((-⊗ᴸ-(Z)[A]).obj P).obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)^*[A].obj G)))) a := h₁
-  have : _root_.DerivedCategory.TStructure.t.IsLE (D((i)_*[A]).obj (((-⊗ᴸ-(Z)[A]).obj P).obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)^*[A].obj G)))) b := h₂
-  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso (e'.symm ≪≫ e) a,
-    _root_.DerivedCategory.TStructure.t.isLE_of_iso (e'.symm ≪≫ e) b⟩
-
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A] in
 /-- Concentration in `[a, b]` is invariant under isomorphism. -/
@@ -143,85 +106,6 @@ lemma homologyConcentratedIn_obj₁ {X : Scheme.{u}}
       (_root_.DerivedCategory.TStructure.t.isGE_of_ge _ a (a + 1)) ‹_›,
     _root_.DerivedCategory.TStructure.t.isLE₂ _ hT' (e + 1) ‹_›
       (_root_.DerivedCategory.TStructure.t.isLE_of_le _ b (e + 1))⟩
-
-
-omit [HasSmallSiteSheafify A] in
-/-- In a distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]` with `X₂` of Tor amplitude in `[a, b]`
-and `X₃` of Tor amplitude in `[a, e]`, `b ≤ e`, the first term has Tor amplitude in
-`[a, e + 1]`. -/
-lemma torAmplitudeIn_obj₁ {X : Scheme.{u}}
-    (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
-    (hT : T ∈ distTriang _) {a b e : ℤ} (hbe : b ≤ e)
-    (h₂ : torAmplitudeIn A X a b T.obj₂) (h₃ : torAmplitudeIn A X a e T.obj₃) :
-    torAmplitudeIn A X a (e + 1) T.obj₁ := fun F ↦ by
-  let G := (-⊗ᴸ-(X)[A]).flip.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
-  let := _root_.DerivedCategory.commShiftTensorRight
-    (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
-  have : G.IsTriangulated := _root_.DerivedCategory.isTriangulated_tensorRight
-    (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
-  exact homologyConcentratedIn_obj₁ A _ (G.map_distinguished _ hT) hbe (h₂ F) (h₃ F)
-/-- **The exceptional inverse image along a closed immersion, from the open complement.**
-Let `i : Z ⟶ T` be a closed immersion with open complement `j`. If `K` lies in `D_c^[a, b]` with
-Tor amplitude in `[a, b]`, and `Rj_* j^* K` in `D_c^[a, e]` with Tor amplitude in `[a, e]`,
-`b ≤ e`, then `Ri^! K` lies in `D_c^[a, e + 1]` with Tor amplitude in `[a, e + 1]`: the
-localization triangle `Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` bounds `Ri_! Ri^! K`, and for the Tor
-amplitude the projection formula identifies `Ri_!(Ri^! K ⊗ᴸ G)` with `Ri_! Ri^! K ⊗ᴸ i_* G`. -/
-theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion_of_lowerStar
-    [UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)] {Z T U : Scheme.{u}}
-    [(Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) T).IsClosedUnderKernels]
-    [(Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) T).IsClosedUnderCokernels]
-    [(Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) T).IsClosedUnderExtensions]
-    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget (ModuleCat.{u +
-        1} Λ))]
-    (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
-    (j : U ⟶ T) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    {a b e : ℤ} (hbe : b ≤ e) {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u
-        + 1} Λ))}
-    (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) T a b K)
-    (hM : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) T a e ((R((j)_*[ModuleCat.{u + 1}
-        Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)))
-    (hPF : ∀ L, HasProjectionFormula (ModuleCat.{u + 1} Λ) i ((R(i)^![Λ]).obj K) L) :
-    constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (e + 1) ((R(i)^![Λ]).obj K) := by
-  obtain ⟨⟨hKbc, hKc⟩, hKt⟩ := hK
-  obtain ⟨⟨hMbc, hMc⟩, hMt⟩ := hM
-  have hT := supportedLocalizationTriangle_mem_distTriang Λ i j hij K
-  set N := (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj K)
-  -- `N` is bounded constructible
-  have hNbc : boundedConstructible (ModuleCat.{u + 1} Λ) T N :=
-    (boundedConstructible (ModuleCat.{u + 1} Λ) T).ext_of_isTriangulatedClosed₂ _
-        (inv_rot_of_distTriang _ hT)
-      ((boundedConstructible (ModuleCat.{u + 1} Λ) T).le_shift (-1) _ hMbc) hKbc
-  -- `N` lies in `[a, e + 1]` with Tor amplitude in `[a, e + 1]`
-  have hNc := homologyConcentratedIn_obj₁ (ModuleCat.{u + 1} Λ) _ hT hbe hKc hMc
-  have hNt : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a (e + 1) N :=
-    torAmplitudeIn_obj₁ (ModuleCat.{u + 1} Λ) _ hT hbe hKt hMt
-  -- `Ri^! K ≅ i^* N`
-  let ε := mapDerivedCategoryUpperStarRightDerivedLowerShriekIso (ModuleCat.{u + 1} Λ) i
-  refine ⟨⟨(boundedConstructible (ModuleCat.{u + 1} Λ) Z).prop_of_iso (ε.app _)
-      (hNbc.mapDerivedCategory_upperStar i),
-    homologyConcentratedIn_of_iso (ModuleCat.{u + 1} Λ) (ε.app _)
-      (((i)^*[ModuleCat.{u + 1} Λ]).homologyConcentratedIn_mapDerivedCategory_obj hNc)⟩, fun G ↦ ?_⟩
-  -- `i_! (Ri^! K ⊗ᴸ G) ≅ N ⊗ᴸ i_* G` by the projection formula
-  have : IsIso (((projectionMap (ModuleCat.{u + 1} Λ) i).app ((R(i)^![Λ]).obj K)).app
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)_*[ModuleCat.{u + 1} Λ].obj G))) :=
-    hPF ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)_*[ModuleCat.{u + 1} Λ].obj G))
-  let e₁ : (L((i)^*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
-      ((i)_*[ModuleCat.{u + 1} Λ].obj G)) ≅
-      (_root_.DerivedCategory.singleFunctor _ 0).obj G :=
-    (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} Λ) i).app _ ≪≫
-      (_root_.DerivedCategory.singleFunctor _ 0).mapIso
-        ((asIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit).app G)
-  let e₂ : (R(i)_![ModuleCat.{u + 1} Λ]).obj (((-⊗ᴸ-(Z)[ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj
-      K)).obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) ≅
-        ((-⊗ᴸ-(T)[ModuleCat.{u + 1} Λ]).obj N).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
-          ((i)_*[ModuleCat.{u + 1} Λ].obj G)) :=
-    (R(i)_![ModuleCat.{u + 1} Λ]).mapIso (((-⊗ᴸ-(Z)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₁.symm) ≪≫
-      (asIso (((projectionMap (ModuleCat.{u + 1} Λ) i).app ((R(i)^![Λ]).obj K)).app
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)_*[ModuleCat.{u + 1} Λ].obj G)))).symm
-  exact homologyConcentratedIn_of_iso (ModuleCat.{u + 1} Λ) ((ε.app _).symm ≪≫ (D((i)^*[ModuleCat.{u
-      + 1} Λ])).mapIso e₂).symm
-    (((i)^*[ModuleCat.{u + 1} Λ]).homologyConcentratedIn_mapDerivedCategory_obj (hNt _))
 
 end ClosedImmersion
 

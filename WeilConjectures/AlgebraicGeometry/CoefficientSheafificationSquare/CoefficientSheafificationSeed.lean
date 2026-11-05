@@ -35,10 +35,6 @@ variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
     (ha : (Functor.const Cᵒᵖ).map (RingCat.ofHom r) ≫ β = α ≫ a.hom)
 
-abbrev rawRestriction :=
-  PresheafOfModules.restrictScalars.{u + 1}
-    ((Functor.const Cᵒᵖ).map (RingCat.ofHom r))
-
 include ha in
 @[irreducible] def rawSeed
     (P : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of S))) :
@@ -70,31 +66,12 @@ include ha in
     ext x
     exact PresheafOfModules.naturality_apply η f x
 
-omit [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] in
-theorem rawSeed_forget
-    (P : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of S))) :
-    (PresheafOfModules.toPresheaf _).map (rawSeed J r a α β ha P) =
-      toSheafify J P.presheaf := by
-  unfold rawSeed
-  change (PresheafOfModules.toPresheaf _).map
-    ((PresheafOfModules.sheafificationAdjunction β).unit.app P) = _
-  exact PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app β P
-
 @[irreducible] def rawMap
     (P : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of S))) :
     (PresheafOfModules.sheafification α).obj ((rawRestriction r).obj P) ⟶
       (SheafOfModules.restrictScalars a).obj
         ((PresheafOfModules.sheafification β).obj P) :=
   (PresheafOfModules.sheafificationHomEquiv α).symm (rawSeed J r a α β ha P)
-
-theorem rawMap_forget
-    (P : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of S))) :
-    (SheafOfModules.toSheaf T).map (rawMap J r a α β ha P) = 𝟙 _ := by
-  unfold rawMap
-  rw [PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, rawSeed_forget]
-  apply ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).homEquiv _ _).injective
-  rw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
-  rfl
 
 end
 end AlgebraicGeometry.Scheme.CoefficientSheafificationSquare

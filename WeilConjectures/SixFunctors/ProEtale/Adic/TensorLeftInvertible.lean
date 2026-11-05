@@ -132,43 +132,6 @@ lemma tensorLeftIhomIso_hom (N : AdicSheaf l Y) :
     (tensorLeftIhomIso π e N).hom = (Mod.ihomAdjunction M).counit.app N :=
   rfl
 
-/-- If `π^* M ≅ ℚ̄_ℓ` for a quasi-compact surjective weakly étale `π`, then `- ⊗_{ℚ̄_ℓ} M`
-reflects isomorphisms: after pullback along `π` it becomes `- ⊗_{ℚ̄_ℓ} ℚ̄_ℓ ≅ 𝟭`. -/
-lemma reflectsIsomorphisms_tensorLeft : (Mod.tensorLeft M).ReflectsIsomorphisms := by
-  have := AdicSheaf.reflectsIsomorphisms_upperStar (l := l) π
-  have : (Mod.tensorLeft ((π)^*ᵃ[l].obj M)).ReflectsIsomorphisms :=
-    reflectsIsomorphisms_of_iso (Mod.tensorLeftMapIso e ≪≫ Mod.tensorLeftRegularIso).symm
-  have : (Mod.tensorLeft M ⋙ (π)^*ᵃ[l]).ReflectsIsomorphisms :=
-    reflectsIsomorphisms_of_iso (adicUpperStarTensorLeftIso l π M).symm
-  exact reflectsIsomorphisms_of_comp _ (π)^*ᵃ[l]
-
-/-- If `π^* M ≅ ℚ̄_ℓ` for a quasi-compact surjective weakly étale `π`, the unit
-`N ⟶ 𝓗om(M, N ⊗_{ℚ̄_ℓ} M)` is an isomorphism: by the triangle identity its image under
-`- ⊗ M` is inverse to a counit, and `- ⊗ M` reflects isomorphisms. -/
-theorem isIso_ihomAdjunction_unit_app (N : AdicSheaf l Y) :
-    IsIso ((Mod.ihomAdjunction M).unit.app N) := by
-  have := reflectsIsomorphisms_tensorLeft π e
-  have := isIso_ihomAdjunction_counit_app π e ((Mod.tensorLeft M).obj N)
-  have : IsIso ((Mod.tensorLeft M).map ((Mod.ihomAdjunction M).unit.app N) ≫
-      (Mod.ihomAdjunction M).counit.app ((Mod.tensorLeft M).obj N)) := by
-    erw [(Mod.ihomAdjunction M).left_triangle_components N]
-    exact IsIso.id _
-  have : IsIso ((Mod.tensorLeft M).map ((Mod.ihomAdjunction M).unit.app N)) :=
-    IsIso.of_isIso_comp_right _ ((Mod.ihomAdjunction M).counit.app ((Mod.tensorLeft M).obj N))
-  exact isIso_of_reflects_iso _ (Mod.tensorLeft M)
-
-/-- If `π^* M ≅ ℚ̄_ℓ` for a quasi-compact surjective weakly étale `π`, then
-`N ≅ 𝓗om(M, N ⊗_{ℚ̄_ℓ} M)` through the unit. -/
-noncomputable def ihomTensorLeftIso (N : AdicSheaf l Y) :
-    N ≅ (AdicSheaf.ihom M).obj ((Mod.tensorLeft M).obj N) :=
-  have := isIso_ihomAdjunction_unit_app π e N
-  asIso ((Mod.ihomAdjunction M).unit.app N)
-
-@[simp]
-lemma ihomTensorLeftIso_hom (N : AdicSheaf l Y) :
-    (ihomTensorLeftIso π e N).hom = (Mod.ihomAdjunction M).unit.app N :=
-  rfl
-
 end AdicSheaf
 
 end AlgebraicGeometry.ProEtale

@@ -59,64 +59,9 @@ open CategoryTheory.Abelian.Ext
 
 variable {X : Scheme.{u}}
 
-/-- Multiplication by global functions on the underlying abelian sheaf of a sheaf of modules, as
-a ring homomorphism to its endomorphisms. -/
-noncomputable def smulRingHom (M : X.Modules) :
-    Γ(X, ⊤) →+* End ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) where
-  toFun a := (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a)
-  map_one' := by rw [smulHom_one, CategoryTheory.Functor.map_id]; rfl
-  map_mul' a b := by rw [smulHom_mul, CategoryTheory.Functor.map_comp, End.mul_def]
-  map_zero' := by rw [smulHom_zero, CategoryTheory.Functor.map_zero]
-  map_add' a b := by rw [smulHom_add, CategoryTheory.Functor.map_add]
-
 variable [∀ Z : Scheme.{u},
     HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
   [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
-
-/-- The derived global sections `RΓ(X, ℱ)` of an `𝒪_X`-module `ℱ`, as an object of `D(A)` for
-`A = Γ(S, ⊤)` acting through `f^♯`. -/
-noncomputable abbrev derivedGlobalSectionsOver {S : Scheme.{u}} (f : X ⟶ S) (ℱ : X.Modules) :
-    DerivedCategory (ModuleCat.{u} Γ(S, ⊤)) :=
-  (schemeGlobalScalarRestriction f).obj
-    ((schemeDerivedGlobalSections X).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ))
-
-/-- The cohomology of `RΓ(X, ℱ)` in degree `n` is `H^n(X, ℱ)`, as `Γ(X, ⊤)`-modules. -/
-noncomputable def homologyDerivedGlobalSectionsLinearEquiv (ℱ : X.Modules) (n : ℕ) :
-    (DerivedCategory.homologyFunctor (ModuleCat.{u} Γ(X, ⊤)) n).obj
-        ((schemeDerivedGlobalSections X).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ))
-          ≃ₗ[Γ(X, ⊤)]
-      WithAction (smulRingHom ℱ) ((constantSheaf (Opens.grothendieckTopology X)
-        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) n :=
-  have : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
-  let e₁ : _ ≃ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace n).obj ℱ :=
-    ((RingedSpace.globalSectionsFunctor
-      X.toRingedSpace).homologyRightDerivedFunctorObjSingleFunctorIso ℱ n).toLinearEquiv
-  let e₂ := moduleCohomologyExtResolutionEquiv X ℱ n
-  let e₃ : (RingedSpace.moduleCohomology X.toRingedSpace n).obj ℱ ≃ₗ[Γ(X, ⊤)]
-      WithAction (smulRingHom ℱ) ((constantSheaf (Opens.grothendieckTopology X)
-        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) n :=
-    { e₂ with
-      map_smul' := fun a x ↦ by
-        change e₂ (a • x) = (mk₀ ((smulRingHom ℱ) a)).postcomp _ (add_zero n) (e₂ x)
-        rw [← moduleCohomology_map_smulHom ℱ (injectiveResolution ℱ) n a x,
-          moduleCohomologyExtResolutionEquiv_naturality]
-        rfl }
-  e₁.trans e₃
-
-/-- The cohomology of `RΓ(X, ℱ) ∈ D(Γ(S, ⊤))` in degree `n` is `H^n(X, ℱ)`, as
-`Γ(S, ⊤)`-modules, `Γ(S, ⊤)` acting on both sides through `f^♯`. -/
-noncomputable def homologyDerivedGlobalSectionsOverLinearEquiv {S : Scheme.{u}} (f : X ⟶ S)
-    (ℱ : X.Modules) (n : ℕ) :
-    (DerivedCategory.homologyFunctor (ModuleCat.{u} Γ(S, ⊤)) n).obj
-        (derivedGlobalSectionsOver f ℱ) ≃ₗ[Γ(S, ⊤)]
-      WithAction ((smulRingHom ℱ).comp f.appTop.hom) ((constantSheaf
-        (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) n :=
-  let e₀ := (((ModuleCat.restrictScalars.{u} f.appTop.hom).mapDerivedCategoryHomologyFunctorIso
-    n).app ((schemeDerivedGlobalSections X).obj ((DerivedCategory.singleFunctor _ 0).obj ℱ))).symm
-  let e := homologyDerivedGlobalSectionsLinearEquiv ℱ n
-  e₀.toLinearEquiv.trans
-    { e with map_smul' := fun a x ↦ e.map_smul (f.appTop a) x }
 
 end Scheme.Modules
 

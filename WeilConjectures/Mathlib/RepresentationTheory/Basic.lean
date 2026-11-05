@@ -226,43 +226,7 @@ section Dual
 variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
   (ρ : Representation k G V)
 
-/-- If `α` is an eigenvalue of `ρ g`, then `α⁻¹` is an eigenvalue of `ρ g⁻¹`. -/
-theorem hasEigenvalue_inv {g : G} {α : k} (h : Module.End.HasEigenvalue (ρ g) α) :
-    Module.End.HasEigenvalue (ρ g⁻¹) α⁻¹ := by
-  obtain ⟨v, hv⟩ := h.exists_hasEigenvector
-  have hgv : ρ g v = α • v := hv.apply_eq_smul
-  have hα : α ≠ 0 := by
-    rintro rfl
-    rw [zero_smul] at hgv
-    have : v = ρ g⁻¹ (ρ g v) := by
-      rw [← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
-    exact hv.2 (by rw [this, hgv, map_zero])
-  refine Module.End.hasEigenvalue_of_hasEigenvector (x := v) ⟨?_, hv.2⟩
-  rw [Module.End.mem_eigenspace_iff]
-  calc ρ g⁻¹ v = α⁻¹ • ρ g⁻¹ (α • v) := by rw [map_smul, smul_smul, inv_mul_cancel₀ hα, one_smul]
-    _ = α⁻¹ • v := by
-      rw [← hgv, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
-
-/-- The eigenvalues of `g` on the dual representation are those of `g⁻¹` on `V`
-(`p-linear-spectra`). -/
-theorem hasEigenvalue_dual_iff [FiniteDimensional k V] {g : G} {α : k} :
-    Module.End.HasEigenvalue (ρ.dual g) α ↔ Module.End.HasEigenvalue (ρ g⁻¹) α := by
-  have h : ρ.dual g = (ρ g⁻¹).dualMap := by
-    ext f v
-    simp [dual_apply, Module.Dual.transpose_apply]
-  rw [Module.End.hasEigenvalue_iff_isRoot_charpoly, Module.End.hasEigenvalue_iff_isRoot_charpoly,
-    h, LinearMap.charpoly_dualMap]
-
 variable {ρ} {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k G V'}
-
-/-- Equivalent representations have equivalent contragredients. -/
-noncomputable def Equiv.dualCongr (e : ρ.Equiv σ) : ρ.dual.Equiv σ.dual :=
-  .mk e.toLinearEquiv.symm.dualMap fun w ↦ by
-    refine LinearMap.ext fun f ↦ LinearMap.ext fun x ↦ ?_
-    simp only [LinearEquiv.coe_coe, LinearEquiv.dualMap_apply, dual_apply,
-      Module.Dual.transpose_apply, LinearMap.comp_apply]
-    congr 1
-    exact (e.symm.apply_apply w⁻¹ x).symm
 
 end Dual
 

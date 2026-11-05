@@ -169,21 +169,11 @@ noncomputable def tateTwist :
   | (d : ℕ) => tateTwistNat X ℓ d
   | .negSucc d => (ihom (tateTwistNat X ℓ (d + 1))).obj (𝟙_ _)
 
-lemma tateTwist_natCast (d : ℕ) : tateTwist X ℓ d = tateTwistNat X ℓ d := rfl
-
 /-- The Tate twist `ℚ̄_ℓ,X(d)`, placed in degree `0` of the derived category
 `D(Mod_{ℚ̄_ℓ,X})`. -/
 noncomputable def tateTwistDerived (d : ℤ) :
     DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)) :=
   (DerivedCategory.singleFunctor _ 0).obj (tateTwist X ℓ d)
-
-/-- The Tate twist functor `K ↦ K(d) = K ⊗ᴸ_{ℚ̄_ℓ,X} ℚ̄_ℓ,X(d)` on `D(Mod_{ℚ̄_ℓ,X})`. -/
-noncomputable def tateTwistFunctor (d : ℤ) :
-    DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)) :=
-  tensorRight (tateTwistDerived X ℓ d)
 
 end AlgebraicGeometry.ProEtale

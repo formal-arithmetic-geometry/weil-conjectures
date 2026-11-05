@@ -157,13 +157,6 @@ from `K` up to homotopy. -/
 noncomputable def homotopyEquivHomotopy : Homotopy (R.ι ≫ (R.homotopyEquiv R').hom) R'.ι :=
   R.liftHomotopy R'.ι
 
-/-- A morphism between two K-injective resolutions of `K` which is compatible with the maps
-from `K` up to homotopy is homotopic to the homotopy equivalence
-`KInjectiveResolution.homotopyEquiv`. -/
-noncomputable def homotopyEquivUnique (φ : R.I ⟶ R'.I) (h : Homotopy (R.ι ≫ φ) R'.ι) :
-    Homotopy φ (R.homotopyEquiv R').hom :=
-  R.homotopyOfComp _ _ (h.trans (R.homotopyEquivHomotopy R').symm)
-
 section Functoriality
 
 variable {L : CochainComplex C ℤ} (S : L.KInjectiveResolution)
@@ -175,26 +168,6 @@ noncomputable def map (φ : K ⟶ L) : R.I ⟶ S.I := R.lift (φ ≫ S.ι)
 /-- The morphism `R.map S φ` is compatible with `φ` up to homotopy. -/
 noncomputable def mapHomotopy (φ : K ⟶ L) : Homotopy (R.ι ≫ R.map S φ) (φ ≫ S.ι) :=
   R.liftHomotopy _
-
-/-- The morphism `R.map R (𝟙 K)` is the identity in the homotopy category. -/
-lemma quotient_map_map_id :
-    (HomotopyCategory.quotient C (.up ℤ)).map (R.map R (𝟙 K)) = 𝟙 _ := by
-  rw [← (HomotopyCategory.quotient C (.up ℤ)).map_id]
-  exact HomotopyCategory.eq_of_homotopy _ _ (R.homotopyOfComp _ _
-    ((R.mapHomotopy R (𝟙 K)).trans (Homotopy.ofEq (by simp))))
-
-/-- The morphisms `R.map S φ` are compatible with composition in the homotopy category. -/
-lemma quotient_map_map_comp {M : CochainComplex C ℤ} (T : M.KInjectiveResolution)
-    (φ : K ⟶ L) (ψ : L ⟶ M) :
-    (HomotopyCategory.quotient C (.up ℤ)).map (R.map T (φ ≫ ψ)) =
-      (HomotopyCategory.quotient C (.up ℤ)).map (R.map S φ ≫ S.map T ψ) := by
-  refine HomotopyCategory.eq_of_homotopy _ _ (R.homotopyOfComp _ _ ?_)
-  refine (R.mapHomotopy T (φ ≫ ψ)).trans ?_
-  refine (Homotopy.ofEq (Category.assoc _ _ _)).trans ?_
-  refine (((S.mapHomotopy T ψ).compLeft φ).symm.trans ?_)
-  refine (Homotopy.ofEq (Category.assoc _ _ _).symm).trans ?_
-  refine (((R.mapHomotopy S φ).symm.compRight _).trans ?_)
-  exact Homotopy.ofEq (Category.assoc _ _ _)
 
 end Functoriality
 
@@ -230,43 +203,6 @@ noncomputable def rightDerivedHomologyIso (p : ℤ) :
     (HomotopyCategory.homologyFunctor D (.up ℤ) p).mapIso (R.rightDerivedIso R' v) ≪≫
     (HomotopyCategory.homologyFunctorFactors D (.up ℤ) p).app _
 
-
-/-- **Functoriality of `Rv`**: the morphism `Rv(K) ⟶ Rv(L)` induced by a morphism `K ⟶ L`.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
-noncomputable def rightDerivedMap (φ : K ⟶ L) : R.rightDerived v ⟶ S.rightDerived v :=
-  (HomotopyCategory.quotient D (.up ℤ)).map ((v.mapHomologicalComplex _).map (R.map S φ))
-
-/-- An additive functor preserves equalities in the homotopy category. -/
-lemma quotient_map_mapHomologicalComplex_map {I J : CochainComplex C ℤ} (φ₁ φ₂ : I ⟶ J)
-    (h : (HomotopyCategory.quotient C (.up ℤ)).map φ₁ =
-      (HomotopyCategory.quotient C (.up ℤ)).map φ₂) :
-    (HomotopyCategory.quotient D (.up ℤ)).map ((v.mapHomologicalComplex _).map φ₁) =
-      (HomotopyCategory.quotient D (.up ℤ)).map ((v.mapHomologicalComplex _).map φ₂) :=
-  HomotopyCategory.eq_of_homotopy _ _ (v.mapHomotopy (HomotopyCategory.homotopyOfEq _ _ h))
-
-/-- Functoriality of `Rv`: identities. -/
-@[simp]
-lemma rightDerivedMap_id : R.rightDerivedMap R v (𝟙 K) = 𝟙 _ := by
-  rw [rightDerivedMap, quotient_map_mapHomologicalComplex_map v _ (𝟙 _)
-    (by rw [quotient_map_map_id, CategoryTheory.Functor.map_id])]
-  simp [rightDerived]
-
-/-- Functoriality of `Rv`: composition. -/
-lemma rightDerivedMap_comp {M : CochainComplex C ℤ} (T : M.KInjectiveResolution)
-    (φ : K ⟶ L) (ψ : L ⟶ M) :
-    R.rightDerivedMap T v (φ ≫ ψ) = R.rightDerivedMap S v φ ≫ S.rightDerivedMap T v ψ := by
-  rw [rightDerivedMap, quotient_map_mapHomologicalComplex_map v _ _
-    (R.quotient_map_map_comp S T φ ψ), Functor.map_comp, Functor.map_comp]
-  rfl
-
-/-- The isomorphism `Rv(K) ≅ Rv(K)` between the complexes computed from two K-injective
-resolutions of `K` is the map induced by the identity of `K`. -/
-lemma rightDerivedIso_hom : (R.rightDerivedIso R' v).hom = R.rightDerivedMap R' v (𝟙 K) := by
-  refine quotient_map_mapHomologicalComplex_map v _ _ (HomotopyCategory.eq_of_homotopy _ _ ?_)
-  exact (R.homotopyEquivUnique R' _ ((R.mapHomotopy R' (𝟙 K)).trans
-    (Homotopy.ofEq (Category.id_comp _)))).symm
-
 end RightDerived
 
 section Existence
@@ -283,21 +219,6 @@ lemma exists_of_isStrictlyGE [EnoughInjectives C] (K : CochainComplex C ℤ) (n 
   have := isKInjective_of_injective L n
   exact ⟨⟨L, i, inferInstance, inferInstance⟩, inferInstance, hL⟩
 
-/-- **Existence of K-injective resolutions.** In an abelian category with enough injectives
-(e.g. a Grothendieck abelian category), every cohomologically bounded below complex has a
-K-injective resolution.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
-lemma nonempty_of_isGE [EnoughInjectives C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n] :
-    Nonempty K.KInjectiveResolution := by
-  obtain ⟨R, -, -⟩ := exists_of_isStrictlyGE (K.truncGE n) n
-  exact ⟨⟨R.I, K.πTruncGE n ≫ R.ι, inferInstance, inferInstance⟩⟩
-
-/-- A chosen K-injective resolution of a cohomologically bounded below complex. -/
-noncomputable def ofIsGE [EnoughInjectives C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n] :
-    K.KInjectiveResolution :=
-  (nonempty_of_isGE K n).some
-
 end Existence
 
 section Shift
@@ -312,24 +233,6 @@ noncomputable def shift (n : ℤ) : (K⟦n⟧).KInjectiveResolution where
   ι := R.ι⟦n⟧'
 
 variable {D : Type*} [Category* D] [Abelian D] (v : C ⥤ D) [v.Additive]
-
-/-- **`Rv` commutes with shifts**: `Rv(K[n]) ≅ Rv(K)[n]`, computed from the shifted
-resolution.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
-noncomputable def rightDerivedShiftIso (n : ℤ) :
-    (R.shift n).rightDerived v ≅ (R.rightDerived v)⟦n⟧ :=
-  (HomotopyCategory.quotient D (.up ℤ)).mapIso
-      (((v.mapHomologicalComplex (.up ℤ)).commShiftIso n).app R.I) ≪≫
-    ((HomotopyCategory.quotient D (.up ℤ)).commShiftIso n).app _
-
-/-- **`Rv` commutes with shifts**: for any K-injective resolution `S` of `K[n]`,
-`Rv(K[n]) ≅ Rv(K)[n]`.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
-noncomputable def rightDerivedShiftIso' (n : ℤ) (S : (K⟦n⟧).KInjectiveResolution) :
-    S.rightDerived v ≅ (R.rightDerived v)⟦n⟧ :=
-  S.rightDerivedIso (R.shift n) v ≪≫ R.rightDerivedShiftIso v n
 
 end Shift
 

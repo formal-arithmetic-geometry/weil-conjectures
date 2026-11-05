@@ -53,19 +53,6 @@ namespace IsSmoothImageFactor
 
 variable {f : X ⟶ Y} {d : ℕ} {p : Σ U : Over (Spec (.of k)), X ⟶ U}
 
-/-- The surjective smooth part of an image factorization is an epimorphism. -/
-lemma epi (hp : IsSmoothImageFactor f d p) : Epi p.2 := by
-  obtain ⟨-, -, -, h, h', -⟩ := hp
-  have : Smooth p.2.left := SmoothOfRelativeDimension.smooth (n := d) _
-  have : Epi p.2.left := Flat.epi_of_flat_of_surjective _
-  exact Over.epi_of_epi_left _
-
-/-- The open immersion of an image factorization is unique. -/
-lemma ι_eq (hp : IsSmoothImageFactor f d p) {ι ι' : p.1 ⟶ Y} (h : p.2 ≫ ι = f)
-    (h' : p.2 ≫ ι' = f) : ι = ι' := by
-  have := hp.epi
-  exact (cancel_epi p.2).1 (h.trans h'.symm)
-
 end IsSmoothImageFactor
 
 /-- A morphism smooth of pure relative dimension `d` admits an image factorization: the
@@ -96,34 +83,6 @@ lemma exists_isSmoothImageFactor [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom
   rw [← hy, ← Scheme.Hom.comp_apply]
   exact congrArg (fun φ ↦ φ.base y) hg₀
 
-/-- The image factorizations of `f ≫ j`, for an open immersion `j`, are those of `f`. -/
-lemma isSmoothImageFactor_comp_openImmersion {Z : Over (Spec (.of k))} (f : X ⟶ Y) (j : Y ⟶ Z)
-    [IsOpenImmersion j.left] (d : ℕ) :
-    IsSmoothImageFactor (f ≫ j) d = IsSmoothImageFactor f d := by
-  funext p
-  refine propext ⟨fun ⟨h₁, h₂, h₃, h₄, h₅, ι, hι, h⟩ ↦ ⟨h₁, h₂, h₃, h₄, h₅, ?_⟩,
-    fun ⟨h₁, h₂, h₃, h₄, h₅, ι, hι, h⟩ ↦ ⟨h₁, h₂, h₃, h₄, h₅, ι ≫ j, ?_,
-      by rw [← h, Category.assoc]⟩⟩
-  · have hr : Set.range ι.left.base ⊆ Set.range j.left.base := by
-      rintro _ ⟨u, rfl⟩
-      obtain ⟨x, rfl⟩ := h₅.surj u
-      refine ⟨f.left.base x, ?_⟩
-      rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, ← Over.comp_left, ← Over.comp_left, h]
-    let ι₀ : p.1.left ⟶ Y.left := IsOpenImmersion.lift _ _ hr
-    have hι₀ : ι₀ ≫ j.left = ι.left := IsOpenImmersion.lift_fac _ _ _
-    let ι' : p.1 ⟶ Y := Over.homMk ι₀ (by
-      rw [← Over.w j, ← Category.assoc, hι₀]
-      exact Over.w ι)
-    refine ⟨ι', MorphismProperty.of_postcomp _ (W' := @IsOpenImmersion) _ j.left
-      inferInstance (hι₀.symm ▸ hι), ?_⟩
-    have : Mono j := Over.mono_of_mono_left _
-    refine (cancel_mono j).1 ?_
-    rw [Category.assoc, ← h]
-    congr 1
-    exact Over.OverMorphism.ext hι₀
-  · rw [Over.comp_left]
-    infer_instance
-
 /-- The **chosen image factorization** of `f` in relative dimension `d`: a pair `(U, g)` which is
 an image factorization of `f` (`IsSmoothImageFactor`) when one exists, chosen by
 `Classical.epsilon` on the property, so that it only depends on `f` up to composition with open
@@ -139,11 +98,5 @@ lemma isSmoothImageFactor_smoothImageFactor [LocallyOfFiniteType Y.hom] [QuasiCo
     IsSmoothImageFactor f d (smoothImageFactor f d) :=
   haveI : Nonempty (Σ U : Over (Spec (.of k)), X ⟶ U) := ⟨⟨X, 𝟙 X⟩⟩
   Classical.epsilon_spec (exists_isSmoothImageFactor f d)
-
-/-- The chosen image factorization of `f ≫ j`, for an open immersion `j`, is that of `f`. -/
-lemma smoothImageFactor_comp_openImmersion {Z : Over (Spec (.of k))} (f : X ⟶ Y) (j : Y ⟶ Z)
-    [IsOpenImmersion j.left] (d : ℕ) :
-    smoothImageFactor (f ≫ j) d = smoothImageFactor f d := by
-  rw [smoothImageFactor, smoothImageFactor, isSmoothImageFactor_comp_openImmersion]
 
 end AlgebraicGeometry

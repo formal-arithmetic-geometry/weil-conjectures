@@ -54,16 +54,6 @@ noncomputable def restrictCoextendScalarsAdj :
 instance : (restrictScalars J f).IsLeftAdjoint :=
   (restrictCoextendScalarsAdj J f).isLeftAdjoint
 
-/-- If a functor `G` on modules is left adjoint to restriction of scalars and composing with `G`
-preserves sheaves, then composing sheaves with `G` is left adjoint to restriction of scalars of
-sheaves, both being computed objectwise. -/
-noncomputable def sheafComposeRestrictScalarsAdj {G : ModuleCat.{w} R ⥤ ModuleCat.{w} S}
-    [J.HasSheafCompose G] (adj : G ⊣ ModuleCat.restrictScalars f) :
-    sheafCompose J G ⊣ restrictScalars J f :=
-  Adjunction.restrictFullyFaithful (adj.whiskerRight Cᵒᵖ)
-    (fullyFaithfulSheafToPresheaf J _) (fullyFaithfulSheafToPresheaf J _) (Iso.refl _)
-    (Iso.refl _)
-
 instance [HasWeakSheafify J (ModuleCat.{w} S)] : (restrictScalars J f).IsRightAdjoint := by
   have := (ModuleCat.extendRestrictScalarsAdj f).isRightAdjoint
   infer_instance

@@ -47,16 +47,6 @@ open Limits MonoidalCategory
 
 namespace MonoidalClosed
 
-/-- The internal hom `[𝟙_ C, X]` out of the unit is `X`, through evaluation. -/
-lemma isIso_leftUnitor_inv_comp_ev {C : Type*} [Category* C] [MonoidalCategory C]
-    [MonoidalClosed C] (X : C) :
-    IsIso ((λ_ ((ihom (𝟙_ C)).obj X)).inv ≫ (ihom.ev (𝟙_ C)).app X) := by
-  refine ⟨curry (λ_ X).hom, ?_, ?_⟩
-  · rw [← curry_natural_left, leftUnitor_naturality, Iso.hom_inv_id_assoc, ← uncurry_id_eq_ev,
-      curry_uncurry]
-  · rw [leftUnitor_inv_naturality_assoc, ← uncurry_eq, uncurry_curry]
-    exact (λ_ X).inv_hom_id
-
 section Braided
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C] [BraidedCategory C]
@@ -74,12 +64,6 @@ lemma mono_pre_app {A B : C} (f : B ⟶ A) [Epi f] (X : C) : Mono ((pre f).app X
   refine ⟨fun {T} a b h ↦ uncurry_injective ?_⟩
   have := epi_whiskerRight f T
   rw [← cancel_epi (f ▷ T), ← uncurry_pre_app, ← uncurry_pre_app, h]
-
-/-- In a braided monoidal closed category, tensoring on the right preserves colimits, being
-isomorphic to tensoring on the left. -/
-lemma preservesColimitsOfSize_tensorRight (Z : C) : PreservesColimitsOfSize (tensorRight Z) :=
-  have := (ihom.adjunction Z).leftAdjoint_preservesColimits
-  preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight Z)
 
 /-- A preadditive braided monoidal closed category is monoidal preadditive: tensoring on the left
 is a left adjoint, hence additive, and tensoring on the right is isomorphic to it. -/
@@ -129,31 +113,6 @@ def preAppAddHom (A B X : C) : (B ⟶ A) →+ ((ihom A).obj X ⟶ (ihom B).obj X
 
 variable [BraidedCategory C]
 
-/-- **The internal hom turns cokernels into kernels**: if `π : P₀ ⟶ P` is a cokernel of
-`f : P₁ ⟶ P₀`, then `[π, Q] : [P, Q] ⟶ [P₀, Q]` is a kernel of `[f, Q] : [P₀, Q] ⟶ [P₁, Q]`. -/
-noncomputable def isLimitKernelForkPreApp {P₁ P₀ P : C} {f : P₁ ⟶ P₀} {π : P₀ ⟶ P}
-    (w : f ≫ π = 0) (hπ : IsColimit (CokernelCofork.ofπ π w)) (Q : C) :
-    IsLimit (KernelFork.ofι (f := (pre f).app Q) ((pre π).app Q)
-      (by rw [← NatTrans.comp_app, ← pre_map, w, pre_zero_app])) := by
-  have hT (T : C) : IsColimit (CokernelCofork.ofπ (f := f ▷ T) (π ▷ T)
-      (by rw [← comp_whiskerRight, w, MonoidalPreadditive.zero_whiskerRight])) :=
-    have := preservesColimitsOfSize_tensorRight T
-    CokernelCofork.mapIsColimit _ hπ (tensorRight T)
-  refine KernelFork.IsLimit.ofι _ _
-    (fun {T} g hg ↦ curry ((hT T).desc (CokernelCofork.ofπ (uncurry g) ?_))) ?_ ?_
-  · rw [← uncurry_pre_app, hg]
-    simp [uncurry_eq]
-  · intro T g hg
-    refine uncurry_injective ?_
-    rw [uncurry_pre_app, uncurry_curry]
-    exact (hT T).fac _ WalkingParallelPair.one
-  · intro T g hg m hm
-    rw [eq_curry_iff]
-    refine Cofork.IsColimit.hom_ext (hT T) ?_
-    simp only [CokernelCofork.π_ofπ]
-    rw [← uncurry_pre_app, hm]
-    exact ((hT T).fac (CokernelCofork.ofπ (uncurry g) _) WalkingParallelPair.one).symm
-
 end Preadditive
 
 end MonoidalClosed
@@ -164,28 +123,6 @@ open MonoidalClosed
 
 variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
   [MonoidalClosed C] [MonoidalClosed D] (F : C ⥤ D) [F.LaxMonoidal]
-
-/-- **A lax monoidal functor with invertible unit map preserves internal homs out of the unit**:
-the comparison map `F [𝟙_ C, Q] ⟶ [F (𝟙_ C), F Q]` is an isomorphism, since composed with
-`[ε F, F Q]` and evaluation it is `F` applied to the evaluation `[𝟙_ C, Q] ≅ Q`. -/
-theorem isIso_ihomComparison_app_unit [IsIso (ε F)] (Q : C) :
-    IsIso ((ihomComparison F (𝟙_ C)).natTrans.app Q) := by
-  have h : (ihomComparison F (𝟙_ C)).natTrans.app Q ≫ (pre (ε F)).app (F.obj Q) ≫
-      (λ_ _).inv ≫ (ihom.ev (𝟙_ D)).app (F.obj Q) =
-      F.map ((λ_ _).inv ≫ (ihom.ev (𝟙_ C)).app Q) := by
-    rw [leftUnitor_inv_naturality_assoc, leftUnitor_inv_naturality_assoc,
-      id_tensor_pre_app_comp_ev]
-    dsimp only [Functor.comp_obj]
-    rw [whisker_exchange_assoc, ihomComparison_ev, F.map_comp,
-      ← left_unitality_inv_assoc]
-  have := isIso_leftUnitor_inv_comp_ev (F.obj Q)
-  have := isIso_leftUnitor_inv_comp_ev Q
-  have : IsIso ((ihomComparison F (𝟙_ C)).natTrans.app Q ≫ (pre (ε F)).app (F.obj Q) ≫
-      (λ_ _).inv ≫ (ihom.ev (𝟙_ D)).app (F.obj Q)) := by
-    rw [h]
-    infer_instance
-  exact IsIso.of_isIso_comp_right _ ((pre (ε F)).app (F.obj Q) ≫
-      (λ_ _).inv ≫ (ihom.ev (𝟙_ D)).app (F.obj Q))
 
 /-- The comparison map `F [A, B] ⟶ [F A, F B]` is an isomorphism at `B` if and only if it is one
 at any `B'` isomorphic to `B`. -/
@@ -213,70 +150,7 @@ section Preadditive
 
 variable [Preadditive C] [Preadditive D] [MonoidalPreadditive C] [MonoidalPreadditive D]
 
-/-- **An additive lax monoidal functor preserves internal homs out of finite biproducts** of
-objects out of which it preserves internal homs: an inverse of the comparison map of `⨁ P` is
-assembled from the inverses for the summands, `[-, Q]` being additive. -/
-theorem isIso_ihomComparison_app_biproduct [F.Additive] {J : Type} [Finite J] (P : J → C)
-    [HasBiproduct P] (Q : C) [∀ j, IsIso ((ihomComparison F (P j)).natTrans.app Q)] :
-    IsIso ((ihomComparison F (⨁ P)).natTrans.app Q) := by
-  have := Fintype.ofFinite J
-  refine ⟨∑ j, (pre (F.map (biproduct.ι P j))).app (F.obj Q) ≫
-    CategoryTheory.inv ((ihomComparison F (P j)).natTrans.app Q) ≫
-      F.map ((pre (biproduct.π P j)).app Q),
-    ?_, ?_⟩
-  · rw [Preadditive.comp_sum]
-    simp_rw [← map_pre_app_comp_ihomComparison_app_assoc, IsIso.hom_inv_id_assoc,
-      ← F.map_comp, ← NatTrans.comp_app, ← pre_map]
-    rw [← F.map_sum]
-    have h := _root_.map_sum (preAppAddHom (⨁ P) (⨁ P) Q)
-      (fun j ↦ biproduct.π P j ≫ biproduct.ι P j) Finset.univ
-    simp only [preAppAddHom_apply] at h
-    rw [← h, biproduct.total, pre_id, NatTrans.id_app, F.map_id]
-    rfl
-  · rw [Preadditive.sum_comp]
-    simp_rw [Category.assoc, map_pre_app_comp_ihomComparison_app, IsIso.inv_hom_id_assoc,
-      ← NatTrans.comp_app, ← pre_map, ← F.map_comp]
-    have h := _root_.map_sum (preAppAddHom (F.obj (⨁ P)) (F.obj (⨁ P)) (F.obj Q))
-      (fun j ↦ F.map (biproduct.π P j ≫ biproduct.ι P j)) Finset.univ
-    simp only [preAppAddHom_apply] at h
-    rw [← h, ← F.map_sum, biproduct.total, F.map_id, pre_id, NatTrans.id_app]
-    rfl
-
 variable [BraidedCategory C] [BraidedCategory D]
-
-/-- **A lax monoidal functor preserves internal homs out of cokernels** of morphisms between
-objects out of which it preserves internal homs, provided it preserves the kernel of
-`[P₀, Q] ⟶ [P₁, Q]` and maps the projection onto the cokernel to an epimorphism: the
-comparison map is then a morphism between two kernels of isomorphic morphisms. -/
-theorem isIso_ihomComparison_app_of_isColimit [F.PreservesZeroMorphisms] {P₁ P₀ P : C}
-    {f : P₁ ⟶ P₀} {π : P₀ ⟶ P} (w : f ≫ π = 0) (hπ : IsColimit (CokernelCofork.ofπ π w))
-    (Q : C) [PreservesLimit (parallelPair ((pre f).app Q) 0) F] [Epi (F.map π)]
-    [IsIso ((ihomComparison F P₀).natTrans.app Q)]
-    [IsIso ((ihomComparison F P₁).natTrans.app Q)] :
-    IsIso ((ihomComparison F P).natTrans.app Q) := by
-  have ht : IsLimit (KernelFork.ofι (f := F.map ((pre f).app Q)) (F.map ((pre π).app Q))
-      (by rw [← F.map_comp, ← NatTrans.comp_app, ← pre_map, w, pre_zero_app, F.map_zero])) :=
-    KernelFork.mapIsLimit _ (isLimitKernelForkPreApp w hπ Q) F
-  have := mono_pre_app (F.map π) (F.obj Q)
-  have h₀ := map_pre_app_comp_ihomComparison_app F π Q
-  have h₁ : CategoryTheory.inv ((ihomComparison F P₀).natTrans.app Q) ≫
-      F.map ((pre f).app Q) = (pre (F.map f)).app (F.obj Q) ≫
-        CategoryTheory.inv ((ihomComparison F P₁).natTrans.app Q) := by
-    rw [IsIso.inv_comp_eq, ← Category.assoc, IsIso.eq_comp_inv,
-      map_pre_app_comp_ihomComparison_app]
-  obtain ⟨d, hd⟩ := KernelFork.IsLimit.lift' ht
-    ((pre (F.map π)).app (F.obj Q) ≫
-      CategoryTheory.inv ((ihomComparison F P₀).natTrans.app Q)) (by
-      rw [Category.assoc, h₁, ← Category.assoc, ← NatTrans.comp_app,
-        ← pre_map, ← F.map_comp, w, F.map_zero, pre_zero_app, zero_comp])
-  simp only [Fork.ι_ofι] at hd
-  refine ⟨d, ?_, ?_⟩
-  · refine Fork.IsLimit.hom_ext ht ?_
-    simp only [Fork.ι_ofι, Category.assoc, hd, Category.id_comp]
-    rw [← Category.assoc, ← h₀, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
-  · rw [← cancel_mono ((pre (F.map π)).app (F.obj Q)), Category.assoc, ← h₀,
-      ← Category.assoc, hd, Category.assoc, IsIso.inv_hom_id, Category.comp_id,
-      Category.id_comp]
 
 end Preadditive
 

@@ -230,16 +230,6 @@ private theorem flat_representative_localization
       (ρ := T) π (fun X ↦ hπ X) rfl
   exact LocalizerMorphism.IsLocalizedEquivalence.isLocalization Φ DerivedCategory.Q
 
-private theorem projection_transport
-    {E : Type*} [Category* E] {X Y L U V : E}
-    (a : X ⟶ Y) (d : L ⟶ X) (η : L ⟶ Y) (p : X ⟶ U) (q : Y ⟶ V)
-    (l : L ⟶ V) (ev : U ≅ V)
-    (hd : d ≫ a = η) (hne : a ≫ q = p ≫ ev.hom) (he : η ≫ q = l) :
-    d ≫ p = l ≫ ev.inv := by
-  apply (cancel_mono ev.hom).1
-  rw [Category.assoc, ← hne, ← Category.assoc, hd, he]
-  simp
-
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 

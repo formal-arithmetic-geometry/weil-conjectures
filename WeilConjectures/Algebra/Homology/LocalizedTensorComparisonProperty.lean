@@ -39,20 +39,4 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
-/-- All K-flat representatives of X satisfy tensor comparison in every degree.
-This is an explicit predicate; it assumes no comparison map to be invertible.
-Source: Stacks Project, Tag 0DJA(1).
-(blueprint: def-pc-localized-tensor-comparison-property). -/
-def localizedTensorComparisonProperty : ObjectProperty (DerivedCategory (ModuleCat.{u} A)) :=
-  fun X ↦ ∀ (U : CochainComplex (ModuleCat.{u} A) ℤ),
-    Nonempty (DerivedCategory.Q.obj U ≅ X) →
-    (∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
-      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic) →
-    ∀ (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C) (i : ℤ),
-    let F := (extendScalars.{u, u, u}
-      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
-        (.up ℤ)
-    IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
-      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i)
-
 end ModuleCat

@@ -39,26 +39,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
   {X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **Flat extension of scalars and split restricted base change maps**: if the restricted base
-change map with coefficients `Λ` is a split monomorphism at `K` and the comparisons
-`derivedPushHom a` are invertible at `K` and `Lg'^* K`, the one with coefficients `Λ'` is a split
-monomorphism at `T K`. -/
-theorem isSplitMono_map_baseChangeMap_app_derivedExtendScalars
-    (H : DerivedPullIsoCompCoherence a) (sq : CommSq g' p' p g) (i : Z ⟶ Y')
-    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
-    (h₁ : IsIso ((derivedPushHom a p).app K))
-    (h₂ : IsIso ((derivedPushHom a p').app ((g')^*⟦Λ⟧.leftDerivedFunctor.obj K)))
-    (hK : IsSplitMono ((L((i)^*⟦Λ⟧)).map ((Adjunction.exchangeRight
-          (derivedUpperStarLowerStarAdjunction Λ p)
-          (derivedUpperStarLowerStarAdjunction Λ p') (pullbackSquareComparison Λ sq)).app K))) :
-    IsSplitMono ((L((i)^*⟦Λ'⟧)).map ((Adjunction.exchangeRight
-          (derivedUpperStarLowerStarAdjunction Λ' p)
-          (derivedUpperStarLowerStarAdjunction Λ' p') (pullbackSquareComparison Λ' sq)).app
-      ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.obj K))) :=
-  Arrow.isSplitMono_of_iso
-    (nonempty_arrowIso_map_leftDerivedUpperStar_map_baseChangeMap_app_of_flat a H sq i K h₁
-      h₂).some.symm
-
 end Flat
 
 end AlgebraicGeometry.ProEtale.CondensedRing

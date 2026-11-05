@@ -146,18 +146,6 @@ def HasProjectionFormula (f : X ⟶ Y) [HasCompactification f]
   HasProjectionFormulaOfCompactification A (HasCompactification.compactification f) K L
 
 omit [HasSmallSiteSheafify A] in
-/-- If the projection formula holds for `f` at every `K` and a fixed `L`, the projection map is
-a natural isomorphism `Rf_!(-) ⊗ᴸ L ≅ Rf_!(- ⊗ᴸ Lf^* L)` of functors `D(X_ét) ⥤ D(Y_ét)`. -/
-theorem nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight (f : X ⟶ Y)
-    [HasCompactification f] (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
-    (h : ∀ K, HasProjectionFormula A f K L) :
-    Nonempty (R(f)_![A] ⋙ derivedTensorRight A Y L ≅
-      derivedTensorRight A X ((L((f)^*[A])).obj L) ⋙ R(f)_![A]) :=
-  have : ∀ K, IsIso ((((flipFunctor _ _ _).map (projectionMap A f)).app L).app K) := h
-  have := NatIso.isIso_of_isIso_app (((flipFunctor _ _ _).map (projectionMap A f)).app L)
-  ⟨asIso (((flipFunctor _ _ _).map (projectionMap A f)).app L)⟩
-
-omit [HasSmallSiteSheafify A] in
 /-- If the projection formula holds for `f` at a fixed `K` and every `L`, the projection map is
 a natural isomorphism `Rf_! K ⊗ᴸ - ≅ Rf_!(K ⊗ᴸ Lf^*(-))` of functors `D(Y_ét) ⥤ D(Y_ét)`. -/
 theorem nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek (f : X ⟶ Y)
@@ -327,147 +315,11 @@ variable [Etale.UpperStarPreservesFlat A]
 
 variable {X Y Z : Scheme.{u}}
 
-omit [HasSmallSiteSheafify A] in
-include FC CC in
-/-- The projection formula for a compactification `c = (X ⟶[i] Z ⟶[g] Y)` holds at `(K, L)` as
-soon as the projection map of `Rg_*` is an isomorphism at `(i_!K, L)`, the open part of the
-projection map being an isomorphism. -/
-lemma hasProjectionFormulaOfCompactification_of_isIso {f : X ⟶ Y} (c : Compactification f)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
-    (h : IsIso (((rightDerivedLowerStarProjectionMap A c.g).app (D((c.i)_!open[A]).obj K)).app L)) :
-    HasProjectionFormulaOfCompactification A c K L := by
-  rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
-  infer_instance
-
-include FC CC in
-/-- **The projection map of `Rg_*` at an extension by zero from an open and closed section.**
-Let `i : X ⟶ Z` be an open and closed immersion with `i ≫ g = 𝟙 X`. Then the projection map
-`Rg_*(i_!K) ⊗ᴸ L ⟶ Rg_*(i_!K ⊗ᴸ Lg^*L)` is an isomorphism.
-
-It is checked through the second adjunction `Li^* ⊣ Ri_*`
-(`CategoryTheory.Adjunction.isIso_rightAdjointProjectionMap_app_app_of_comp`): the composite
-left adjoint `Li^* Lg^* ≅ L(i ≫ g)^* = L(𝟙 X)^*` is an equivalence, `Ri_*` is fully faithful
-as `i` is an open immersion, and `i_!K ≅ Ri_*K` and `i_!K ⊗ᴸ Lg^*L ≅ i_!(K ⊗ᴸ Li^*Lg^*L)`
-lie in the essential image of `Ri_*`, `i` being also closed. No monoidal coherence of the
-comparison `Lg^*(- ⊗ᴸ -) ≅ Lg^* - ⊗ᴸ Lg^* -` is needed. -/
-lemma isIso_rightDerivedLowerStarProjectionMap_app_app_of_section {X Z : Scheme.{u}}
-    (i : X ⟶ Z) (g : Z ⟶ X) [IsOpenImmersion i] [IsClosedImmersion i] (hig : i ≫ g = 𝟙 X)
-    (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso (((rightDerivedLowerStarProjectionMap A g).app (D((i)_!open[A]).obj K)).app L) := by
-  let adj := derivedUpperStarLowerStarAdjunction A g
-  let adj' := derivedUpperStarLowerStarAdjunction A i
-  -- the composite left adjoint `Lg^* ⋙ Li^*` is an equivalence
-  let e : L((g)^*[A]) ⋙ L((i)^*[A]) ≅ 𝟭 _ :=
-    (leftDerivedUpperStarComp A i g (𝟙 X) hig.symm).symm ≪≫
-      leftDerivedUpperStarIsoMapDerivedCategory A (𝟙 X) ≪≫
-      Functor.mapDerivedCategoryNatIso (upperStarId A X) ≪≫ Functor.mapDerivedCategoryIdIso _
-  have : (L((g)^*[A]) ⋙ L((i)^*[A])).IsEquivalence := Functor.isEquivalence_of_iso e.symm
-  -- `Ri_*` is fully faithful
-  have : IsIso (mapDerivedUpperStarLowerStarAdjunction A i).counit :=
-    (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction A i)
-      (mapDerivedUpperStarLowerStarAdjunction A i)).isIso_unit_iff_isIso_counit.1
-        inferInstance
-  have : R((i)_*[A]).Full :=
-    (mapDerivedUpperStarLowerStarAdjunction A i).fullyFaithfulROfIsIsoCounit.full
-  have : R((i)_*[A]).Faithful :=
-    (mapDerivedUpperStarLowerStarAdjunction A i).fullyFaithfulROfIsIsoCounit.faithful
-  -- `Li^*` of the counit of `Lg^* ⊣ Rg_*` at `i_!K` is an isomorphism
-  let M := D((i)_!open[A]).obj K
-  let eM : M ≅ R((i)_*[A]).obj K :=
-    asIso ((derivedOpenImmersionLowerShriekToLowerStar A i).app K)
-  have hε : IsIso (L((i)^*[A]).map (adj.counit.app M)) := by
-    have h₁ : IsIso (L((i)^*[A]).map (adj.counit.app (R((i)_*[A]).obj K))) := by
-      have h₀ : IsIso ((adj.comp adj').counit.app K) := inferInstance
-      rw [Adjunction.comp_counit_app] at h₀
-      exact IsIso.of_isIso_comp_right _ (adj'.counit.app K)
-    have h₂ := adj.counit.naturality eM.hom
-    dsimp at h₂
-    rw [← cancel_mono eM.inv, Category.assoc, Category.assoc, eM.hom_inv_id,
-      Category.comp_id] at h₂
-    rw [← h₂]
-    simp only [Functor.map_comp]
-    infer_instance
-  have hT : IsIso (L((i)^*[A]).map (((-⊗ᴸ-(Z)[A]).map (adj.counit.app M)).app
-      ((L((g)^*[A])).obj L))) := by
-    let ψ := leftDerivedUpperStarTensorNatIso A i
-    let b := (L((g)^*[A])).obj L
-    let ψb : (leftDerivedUpperStarDerivedTensor A i).flip.obj b ≅
-        (derivedTensorLeftDerivedUpperStar A i).flip.obj b :=
-      NatIso.ofComponents (fun a ↦ (ψ.app a).app b)
-        (fun f ↦ NatTrans.congr_app (ψ.hom.naturality f) b)
-    exact (NatIso.isIso_map_iff ψb (adj.counit.app M)).2
-      (inferInstanceAs (IsIso (((-⊗ᴸ-(X)[A]).map (L((i)^*[A]).map (adj.counit.app M))).app
-        ((L((i)^*[A])).obj b))))
-  -- the unit of `Li^* ⊣ Ri_*` at `i_!K ⊗ᴸ Lg^*L` is an isomorphism
-  have hN : IsIso (adj'.unit.app (((-⊗ᴸ-(Z)[A]).obj M).obj ((L((g)^*[A])).obj L))) :=
-    adj'.isIso_unit_app_of_iso
-      ((((derivedOpenImmersionLowerShriekProjectionIso A i).app K).app
-        ((L((g)^*[A])).obj L)).symm ≪≫
-        asIso ((derivedOpenImmersionLowerShriekToLowerStar A i).app _))
-  exact adj.isIso_rightAdjointProjectionMap_app_app_of_comp _ adj' M L
-
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
-
-The identity case: the projection formula holds for `f = 𝟙 X`.
-
-The chosen compactification `X ⟶[i] Z ⟶[g] X` of `𝟙 X` need not be trivial, but `i` is then
-also a closed immersion, a section of the proper `g`, and the projection map of `Rg_*` at `i_!K`
-is an isomorphism by
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_of_section`. -/
-theorem hasProjectionFormula_id (X : Scheme.{u})
-    (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    HasProjectionFormula A (𝟙 X) K L := by
-  let c := HasCompactification.compactification (𝟙 X)
-  have : IsClosedImmersion c.i := c.isClosedImmersion_openImmersion inferInstance
-  exact hasProjectionFormulaOfCompactification_of_isIso A c K L
-    (isIso_rightDerivedLowerStarProjectionMap_app_app_of_section A c.i c.g c.comm.symm K L)
-
 end Coherence
 
 section TorsionCoherence
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y Z : Scheme.{u}}
-
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
-
-Compatibility of the projection formula with the composition law: if the formula holds for
-`f` at `K` and `Lg^* M`, and for `g` at `Rf_! K` and `M`, then it holds for `f ≫ g` at `K`
-and `M`. For torsion coefficients the projection formula holds for every morphism admitting a
-compactification and all objects (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`), so
-the two hypotheses are not used in the proof; they are kept so that the statement is the
-coherence of the blueprint, meaningful for other coefficients. This is the objectwise shadow
-of the blueprint's associativity pentagon; the pentagon itself is an identity between canonical
-transformations and is not stated, see the module docstring. -/
-theorem hasProjectionFormula_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hf : HasProjectionFormula (ModuleCat.{u + 1} Λ) f K ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M))
-    (_hg : HasProjectionFormula (ModuleCat.{u + 1} Λ) g ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) M) :
-    HasProjectionFormula (ModuleCat.{u + 1} Λ) (f ≫ g) K M :=
-  hasProjectionFormula_of_finite Λ (f ≫ g) K M
-
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
-
-Independence of the compactification, for torsion coefficients: the formula computed with an
-arbitrary compactification `c` of `f` holds if and only if it holds for the chosen one, i.e. for
-`AlgebraicGeometry.Etale.HasProjectionFormula`. For torsion coefficients both sides hold: the
-argument for the chosen compactification (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`)
-applies to any compactification. -/
-theorem hasProjectionFormulaOfCompactification_iff [Finite Λ] {f : X ⟶ Y}
-    [HasCompactification f]
-    (c : Compactification f)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L ↔
-      HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L := by
-  have h (c : Compactification f) :
-      HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
-    have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
-    rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
-    infer_instance
-  exact iff_of_true (h c) (h _)
 
 end TorsionCoherence
 

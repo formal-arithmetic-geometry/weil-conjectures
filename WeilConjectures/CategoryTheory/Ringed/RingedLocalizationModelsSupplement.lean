@@ -71,7 +71,6 @@ Algebraization of Formal Spaces, Tag 0996
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
-
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -85,27 +84,5 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace CategoryTheory
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-
-private theorem localization_isFlat (R : Sheaf J CommRingCat.{u})
-    (g : (R.obj ⋙ forget CommRingCat.{u}).sections) :
-    SheafOfModules.IsFlat (ringedSectionLocalization R g) := by
-  let O := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
-  let F := ringedSectionLocalizationPresheaf R g
-  have hflat (V : Cᵒᵖ) : Module.Flat (R.obj.obj V) (F.obj V) := by
-    dsimp [F, ringedSectionLocalizationPresheaf, ringedSectionLocalizationCarrier]
-    infer_instance
-  have hF : PreservesFiniteLimits (tensorRight F) := by
-    constructor
-    intro K _ _
-    have (V : Cᵒᵖ) : Module.Flat (R.obj.obj V) (F.obj V) := hflat V
-    exact ⟨⟨fun hc ↦ ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _
-      (fun V ↦ isLimitOfPreserves
-        (tensorRight (show ModuleCat (R.obj.obj V) from F.obj V))
-        (isLimitOfPreserves (PresheafOfModules.evaluation O.obj V) hc))⟩⟩⟩
-  have : Presheaf.IsLocallyInjective J (𝟙 O.obj) :=
-    Presheaf.isLocallyInjective_of_injective J _ (fun _ ↦ Function.injective_id)
-  have : Presheaf.IsLocallySurjective J (𝟙 O.obj) :=
-    Presheaf.isLocallySurjective_of_surjective J _ (fun _ ↦ Function.surjective_id)
-  exact (PresheafOfModules.isFlat_sheafification_obj (R := R) (𝟙 O.obj) F hF).2
 
 end CategoryTheory

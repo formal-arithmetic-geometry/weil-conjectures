@@ -39,31 +39,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-/-- **Transports commute with restrictions.** For `ε : S₂ ⟶ S₁` over `Y` (`ε ≫ t₁ = t₂`) and
-squares `τᵢ ≫ tᵢ = tᵢ ≫ g` with `τ₂ ≫ ε = ε ≫ τ₁`, the transport along the square at `S₁`
-followed by the restriction along `ε` is the restriction followed by the transport at `S₂`. -/
-lemma globalSectionsTransport_comp_resOver {Y S₁ S₂ : Scheme.{u}} {t₁ : S₁ ⟶ Y} {t₂ : S₂ ⟶ Y}
-    {g : Y ⟶ Y} {τ₁ : S₁ ⟶ S₁} {τ₂ : S₂ ⟶ S₂} (h₁ : τ₁ ≫ t₁ = t₁ ≫ g) (h₂ : τ₂ ≫ t₂ = t₂ ≫ g)
-    (ε : S₂ ⟶ S₁) (hε : ε ≫ t₁ = t₂) (hτ : τ₂ ≫ ε = ε ≫ τ₁)
-    (P : Sheaf (Scheme.ProEt.topology Y) A) (ψ : (g)^*[A].obj P ⟶ P) :
-    globalSectionsTransport A h₁ ψ ≫ (resOver A ε hε).app P =
-      (resOver A ε hε).app P ≫ globalSectionsTransport A h₂ ψ := by
-  have hψr : (upperStarComp A g (𝟙 Y)).hom.app P ≫ (g)^*[A].map ((upperStarId A Y).hom.app P) ≫
-      ψ = (upperStarCongr A (Category.comp_id g)).hom.app P ≫ ψ := by
-    rw [reassoc_of% upperStarComp_id_right_hom_app]
-  have hψl : (upperStarComp A (𝟙 Y) g).hom.app P ≫ ((𝟙 Y))^*[A].map ψ ≫
-      (upperStarId A Y).hom.app P = (upperStarCongr A (Category.id_comp g)).hom.app P ≫ ψ := by
-    have n := (upperStarId A Y).hom.naturality ψ
-    simp only [Functor.id_map] at n
-    rw [n, reassoc_of% upperStarComp_id_left_hom_app]
-  have hε' : ε ≫ t₁ = t₂ ≫ 𝟙 Y := hε.trans (Category.comp_id t₂).symm
-  have k₁ : (ε ≫ τ₁) ≫ t₁ = t₂ ≫ g := by rw [Category.assoc, h₁, ← Category.assoc, hε]
-  have k₂ : (τ₂ ≫ ε) ≫ t₁ = t₂ ≫ g := by rw [Category.assoc, hε, h₂]
-  rw [resOver_app_eq_transport, globalSectionsTransport_comp_eq A h₁ hε' k₁ rfl
-    (Category.id_comp g) _ _ ψ hψl, globalSectionsTransport_comp_eq A hε' h₂ k₂ rfl
-    (Category.comp_id g) _ _ ψ hψr]
-  exact globalSectionsTransport_congr_left A k₁ hτ.symm ψ
-
 /-- The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` for `f = 𝟙`, followed by `f^* = (𝟙)^* ≅ 𝟭`,
 is the identification `(f ≫ g)^* = g^*`. -/
 lemma upperStarComp_hom_app_comp_upperStarCongr_id {Y Y' : Scheme.{u}} {f : Y' ⟶ Y'}
@@ -157,80 +132,6 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
 
 set_option hygiene false in
 local notation "φ̄" => Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))
-
-/-- The transports along the first iterates of the Weil structures, over an arbitrary scheme `P`,
-are intertwined by a morphism `θ : φ̄^* G ⟶ F` compatible with the Weil structures. -/
-lemma globalSectionsTransport_frobeniusPowStr_one_comp_upperStar
-    (hθ : (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-      (φ̄)).hom.app G.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map θ ≫ F.frobeniusStr =
-      (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
-          φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app G.obj.carrier.X ≫
-        (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app G.obj.carrier.X ≫
-        (φ̄)^*[_].map G.frobeniusStr ≫ θ)
-    {P : Scheme.{u}} {t t' : P ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {τ : P ⟶ P}
-    (hX : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom)
-    (hY : τ ≫ (t ≫ φ̄) =
-      (t' ≫ φ̄) ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom) :
-    ProEtale.globalSectionsTransport _ hY (G.frobeniusPowStr 1) ≫
-        ProEtale.globalSectionsTransport _ (τ := (Iso.refl _).hom) (Category.id_comp (t' ≫ φ̄)) θ =
-      ProEtale.globalSectionsTransport _ (τ := (Iso.refl _).hom) (Category.id_comp (t ≫ φ̄)) θ ≫
-        ProEtale.globalSectionsTransport _ hX (F.frobeniusPowStr 1) := by
-  have pX := congrArg Iso.hom (pow_one (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
-  have pY := congrArg Iso.hom (pow_one (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
-  rw [ProEtale.globalSectionsTransport_congr _ hX pX _ _ (F.frobeniusPowStr_one pX),
-    ProEtale.globalSectionsTransport_congr _ hY pY _ _ (G.frobeniusPowStr_one pY)]
-  exact ProEtale.globalSectionsTransport_comm_of_upperStar _ (φ̄)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
-      (comp_over φ (Spec (CommRingCat.of k₀)))).symm G.frobeniusStr F.frobeniusStr θ hθ _ _
-
-/-- **Transports along the Weil structures and pullbacks**, over an arbitrary scheme `P`: a
-morphism `θ : φ̄^* G ⟶ F` compatible with the Weil structures intertwines the transports along
-the iterated Weil structures `φ_m`, `m ≥ 1`. -/
-lemma globalSectionsTransport_frobeniusPowStr_comp_upperStar
-    (hθ : (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-      (φ̄)).hom.app G.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map θ ≫ F.frobeniusStr =
-      (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
-          φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app G.obj.carrier.X ≫
-        (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app G.obj.carrier.X ≫
-        (φ̄)^*[_].map G.frobeniusStr ≫ θ)
-    (m : ℕ) (hm : 1 ≤ m) {P : Scheme.{u}}
-    {t t' : P ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} {τ : P ⟶ P}
-    (hX : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)
-    (hY : τ ≫ (t ≫ φ̄) =
-      (t' ≫ φ̄) ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom) :
-    ProEtale.globalSectionsTransport _ hY (G.frobeniusPowStr m) ≫
-        ProEtale.globalSectionsTransport _ (τ := (Iso.refl _).hom) (Category.id_comp (t' ≫ φ̄)) θ =
-      ProEtale.globalSectionsTransport _ (τ := (Iso.refl _).hom) (Category.id_comp (t ≫ φ̄)) θ ≫
-        ProEtale.globalSectionsTransport _ hX (F.frobeniusPowStr m) := by
-  induction m, hm using Nat.le_induction generalizing t t' τ with
-  | base => exact globalSectionsTransport_frobeniusPowStr_one_comp_upperStar hθ hX hY
-  | succ m hm ih =>
-    have pc := Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow φ
-      (comp_over φ (Spec (CommRingCat.of k₀)))
-    set FX := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    set FY := (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    have e₁ := FX.pow_hom_comp_pow_hom m 1
-    have haX : (Iso.refl _).hom ≫ t = (t ≫ (FX ^ m).inv) ≫ (FX ^ m).hom := by simp
-    have hbX : τ ≫ (t ≫ (FX ^ m).inv) = t' ≫ (FX ^ 1).hom := by
-      rw [← cancel_mono (FX ^ m).hom, Category.assoc, Category.assoc, Iso.inv_hom_id,
-        Category.comp_id, hX, Category.assoc, e₁]
-    have haY : (Iso.refl _).hom ≫ (t ≫ φ̄) = ((t ≫ (FX ^ m).inv) ≫ φ̄) ≫ (FY ^ m).hom := by
-      rw [Category.assoc, pc]
-      simp
-    have hbY : τ ≫ ((t ≫ (FX ^ m).inv) ≫ φ̄) = (t' ≫ φ̄) ≫ (FY ^ 1).hom := by
-      rw [Category.assoc t', pc, ← Category.assoc t', ← hbX]
-      simp
-    have hτ : τ ≫ (Iso.refl _).hom = τ := Category.comp_id τ
-    rw [← G.globalSectionsTransport_frobeniusPowStr_comp' m 1 haY hbY hτ hY,
-      ← F.globalSectionsTransport_frobeniusPowStr_comp' m 1 haX hbX hτ hX,
-      Category.assoc, globalSectionsTransport_frobeniusPowStr_one_comp_upperStar hθ
-        hbX hbY, ← Category.assoc, ih haX haY, Category.assoc]
 
 end UpperStar
 

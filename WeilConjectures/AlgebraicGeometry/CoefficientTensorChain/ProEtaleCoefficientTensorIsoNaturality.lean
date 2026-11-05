@@ -103,22 +103,4 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
-/-- Naturality of the given normalized total comparison.
-Source: RingIsoTensorTransport.total_naturality
-(blueprint: lem-pbc-coefficient-restriction-tensor-iso-naturality). -/
-theorem tensorIso_naturality (o : SheafOfModules.RingIsoTensorTransport
-    (J := ProEt.topology X)
-    (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)
-    (Z W : CochainComplex (proEtaleRingModules X S) ℤ ×
-      CochainComplex (proEtaleRingModules X S) ℤ) (v : Z ⟶ W) :
-    (total X S ⋙ (pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).map v ≫
-        (o.totalIso W.1 W.2).hom =
-      (o.totalIso Z.1 Z.2).hom ≫
-        (((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).prod
-          ((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)) ⋙
-            total X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)).map v := by
-  dsimp only [Functor.comp_map, Functor.prod_map]
-  rw [HomologicalComplex.mapTotalBifunctor, HomologicalComplex.mapTotalBifunctor]
-  exact o.total_naturality v.1 v.2
-
 end AlgebraicGeometry.Scheme.CoefficientTensorChain

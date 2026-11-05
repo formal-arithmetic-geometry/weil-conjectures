@@ -66,8 +66,6 @@ lemma liftExchange_app_hom {DY DX DY' DX' : Type*} [Category DY] [Category DX]
     ((liftExchange χ hR hR' hN hM).app Z).hom = χ.app Z.obj :=
   rfl
 
-
-
 end Abstract
 
 section Exchange
@@ -82,27 +80,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
   {M : NearbyCyclesModel X.left X'.left} {N : NearbyCyclesModel Y.left Y'.left}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
-/-- The specialization unit `σ : ℚ̲̄_ℓ ⟶ Ψ ℚ̲̄_ℓ` on bounded constructible complexes: the ambient
-specialization unit `NearbyCyclesModel.unit`. -/
-noncomputable def boundedConstructibleUnit
-    (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ)) :
-    𝟙_ (Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
-      (boundedConstructibleNearbyCycles hM).obj (𝟙_ _) :=
-  ObjectProperty.homMk (M.unit (Profinite.padicAlgClRingObj ℓ))
-
 namespace Hom
 
 variable (φ : M.Hom N f.left f'.left)
   (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
   (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-
-/-- The pushforward exchange `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` on bounded constructible complexes: the
-restriction of `NearbyCyclesModel.Hom.pushforwardExchange`. -/
-noncomputable def boundedConstructiblePushforwardExchange :
-    boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleNearbyCycles hN ⟶
-      boundedConstructibleNearbyCycles hM ⋙ boundedConstructibleLowerStar ℓ f' :=
-  liftExchange (φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) _ _ _ _
-
 
 end Hom
 

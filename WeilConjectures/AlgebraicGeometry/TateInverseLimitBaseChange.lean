@@ -165,21 +165,6 @@ private noncomputable def tensorHomEquiv
 
 attribute [local irreducible] restrictionToTensor
 
-private def constantUnit (T : Scheme.{u}) (R : Type u) [CommRing R] :
-    (Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} R)) ⟶
-      ((sheafCompose (ProEt.topology T)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-          (proEtaleConstantRing T R)).obj :=
-  adicLisseConstantUnit T (ULift.{u + 1, u} R)
-
-private instance tateInverseLimitBaseChangeInst1 (T : Scheme.{u}) (R : Type u) [CommRing R] :
-    Presheaf.IsLocallyInjective (ProEt.topology T) (constantUnit T R) :=
-  adicLisseConstantUnit_locallyInjective T (ULift.{u + 1, u} R)
-
-private instance tateInverseLimitBaseChangeInst2 (T : Scheme.{u}) (R : Type u) [CommRing R] :
-    Presheaf.IsLocallySurjective (ProEt.topology T) (constantUnit T R) :=
-  adicLisseConstantUnit_locallySurjective T (ULift.{u + 1, u} R)
-
 attribute [local irreducible] tensorHomEquiv tensorPresheafHomEquiv tensorToRestriction
 
 attribute [local irreducible] exchangeModuleComposition

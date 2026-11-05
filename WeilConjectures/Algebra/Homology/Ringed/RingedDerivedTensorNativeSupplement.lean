@@ -208,23 +208,8 @@ local instance : MonoidalCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
   monoidal.{c, v, u, w} J R
 
 omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
-/-- The native complex tensor is precisely the recorded total tensor.
-Source: Stacks Project, Tag 06YN. -/
-theorem totalTensor_eq (P L : CochainComplex (Modules.{c, v, u} J R) ℤ) :
-    (coefficientTotalTensor.{u, c, v} J R).obj (P, L) = P ⊗ L := by
-  rfl
-
-omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 local instance : (DerivedCategory.Q : CochainComplex (Modules.{c, v, u} J R) ℤ ⥤
     DerivedCategory (Modules.{c, v, u} J R)).LaxMonoidal := lax.{c, v, u, w} J R
-
-/-- The comparison is the inverse of the native lax tensorator. -/
-theorem tensorIso_hom (P L : CochainComplex (Modules.{c, v, u} J R) ℤ)
-    (h : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P ∨
-      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) L)
-    [IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q.{w} P L)] :
-    (tensorIso.{c, v, u, w} J R P L h).hom =
-      inv (Functor.LaxMonoidal.μ DerivedCategory.Q.{w} P L) := rfl
 
 /-- The simultaneous comparison has the specified one-K-flat components. -/
 theorem comparison_app
@@ -271,12 +256,6 @@ def unitIso : 𝟙_ (DerivedCategory (Modules.{c, v, u} J R)) ≅
     DerivedCategory.Q.{w}.obj (𝟙_ (CochainComplex (Modules.{c, v, u} J R) ℤ)) := by
   have := isIso_ε.{c, v, u, w} J R
   exact asIso (Functor.LaxMonoidal.ε DerivedCategory.Q.{w})
-
-/-- The inverse unit comparison is the inverse of the lax unit map. -/
-theorem unitIso_inv [IsIso (Functor.LaxMonoidal.ε
-    (DerivedCategory.Q.{w} (C := Modules.{c, v, u} J R)))] :
-    (unitIso.{c, v, u, w} J R).inv =
-      inv (Functor.LaxMonoidal.ε DerivedCategory.Q.{w}) := rfl
 
 /-- The fixed tensor comparison preserves reassociation. -/
 theorem associator_square (P Q N : CochainComplex (Modules.{c, v, u} J R) ℤ)

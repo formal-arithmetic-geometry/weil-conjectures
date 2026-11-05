@@ -379,16 +379,6 @@ def HasSplitHomology (A₁ : Matrix ι₁ ι₀ R) (A₂ : Matrix ι₂ ι₁ R)
 
 variable {A₁ : Matrix ι₁ ι₀ R} {A₂ : Matrix ι₂ ι₁ R} {k : Type*} [Fintype k] [DecidableEq k]
 
-lemma HasSplitHomology.map {S : Type*} [CommRing S] (f : R →+* S)
-    (h : HasSplitHomology A₁ A₂ k) : HasSplitHomology (A₁.map f) (A₂.map f) k := by
-  obtain ⟨I, P, σ, τ, h₁, h₂, h₃, h₄⟩ := h
-  refine ⟨I.map f, P.map f, σ.map f, τ.map f, ?_, ?_, ?_, ?_⟩
-  · rw [← Matrix.map_mul, h₁, Matrix.map_one _ (map_zero f) (map_one f)]
-  · rw [← Matrix.map_mul, h₂, Matrix.map_zero _ (map_zero f)]
-  · rw [← Matrix.map_mul, h₃, Matrix.map_zero _ (map_zero f)]
-  · rw [← Matrix.map_mul, ← Matrix.map_mul, ← Matrix.map_mul, ← Matrix.map_add _ (map_add f),
-      ← Matrix.map_add _ (map_add f), h₄, Matrix.map_one _ (map_zero f) (map_one f)]
-
 lemma HasSplitHomology.of_equiv {k' : Type*} [Fintype k'] [DecidableEq k'] (e : k ≃ k')
     (h : HasSplitHomology A₁ A₂ k) : HasSplitHomology A₁ A₂ k' := by
   obtain ⟨I, P, σ, τ, h₁, h₂, h₃, h₄⟩ := h

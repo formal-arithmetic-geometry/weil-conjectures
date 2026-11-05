@@ -78,20 +78,6 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The set of primes invertible on a scheme `S`. -/
-def Scheme.invertiblePrimes (S : Scheme.{u}) : Set ℕ :=
-  {p | p.Prime ∧ IsUnit (p : Γ(S, ⊤))}
-
-/-- A sheaf which is torsion with prime divisors invertible on `S` is torsion of orders
-invertible on `S`. -/
-lemma Scheme.IsTorsionSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes {S T : Scheme.{u}}
-    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheafOfPrimes S.invertiblePrimes F] : IsTorsionSheafOfInvertibleOrder S F where
-  exists_isUnit_nsmul_eq_zero Ω _ _ s x := by
-    obtain ⟨n, hn, hP, hx⟩ :=
-      IsTorsionSheafOfPrimes.exists_nsmul_eq_zero (P := S.invertiblePrimes) Ω s x
-    exact ⟨n, hn, isUnit_natCast_of_forall_mem_primeFactors n hn fun p hp ↦ (hP p hp).2, hx⟩
-
 /-- Being torsion of orders invertible on `S` is invariant under isomorphisms of sheaves. -/
 lemma Scheme.IsTorsionSheafOfInvertibleOrder.of_iso {S T : Scheme.{u}}
     {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ≅ G)
@@ -116,48 +102,6 @@ instance (S T : Scheme.{u}) :
   of_iso φ h := by
     have : IsTorsionSheafOfInvertibleOrder S _ := h
     exact IsTorsionSheafOfInvertibleOrder.of_iso Λ φ
-
-/-- Blueprint `sk-rem-rest`: the *classical form* of the smooth base change theorem, in which
-the roles of the two legs of the square are exchanged with respect to `sk-def-bc`. For a
-Cartesian square
-
-```
-X' --v--> X
-|         |
-f'        f
-v         v
-S' --g--> S
-```
-
-with `g` **smooth** and `f` quasi-compact and quasi-separated, and a sheaf `F` of `Λ`-modules
-on `X_ét` all of whose geometric stalks are torsion of orders invertible on `S`, the
-base-change map `g⁻¹ R^q f_* F ⟶ R^q f'_* v⁻¹ F` is an isomorphism in every degree `q`.
-
-The base-change map of `AlgebraicGeometry.Etale.baseChangeHomologyMap` attached to the square
-`sq : IsPullback v f' f g` is by construction `g⁻¹ R^q f_* F ⟶ R^q f'_* v⁻¹ F`: it pulls back
-along the bottom leg and pushes forward along the right leg. So the classical form is
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth` for this square, with the smooth
-morphism `g` in the role of the morphism pulled back along. -/
-theorem Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs {X S S' X' : Scheme.{u}}
-    (f : X ⟶ S) (g : S' ⟶ S) (v : X' ⟶ X) (f' : X' ⟶ S') [Smooth g] [QuasiCompact f]
-    [QuasiSeparated f] (sq : IsPullback v f' f g) (q : ℤ)
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheafOfInvertibleOrder S F] :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
-  Etale.isIso_baseChangeHomologyMap_of_smooth Λ g f v f' sq q F
-
-/-- Blueprint `sk-rem-rest`: the isomorphism `g⁻¹ R^q f_* F ≅ R^q f'_* v⁻¹ F` of the classical
-form of the smooth base change theorem
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs`). -/
-noncomputable def Etale.smoothBaseChangeHomologyIso {X S S' X' : Scheme.{u}}
-    (f : X ⟶ S) (g : S' ⟶ S) (v : X' ⟶ X) (f' : X' ⟶ S') [Smooth g] [QuasiCompact f]
-    [QuasiSeparated f] (sq : IsPullback v f' f g) (q : ℤ)
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheafOfInvertibleOrder S F] :
-    (Etale.baseChangeSourceFunctor Λ g f q).obj F ≅
-      (Etale.baseChangeTargetFunctor Λ v f' q).obj F :=
-  have := Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs Λ f g v f' sq q F
-  asIso (Etale.baseChangeHomologyMap Λ sq q F)
 
 variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
@@ -198,37 +142,6 @@ lemma Etale.isZero_homologyFunctor_baseChangeTarget_obj (e : Y ⟶ T) (h : Y ⟶
     exact Functor.map_isZero (e)^*[ModuleCat.{u + 1} Λ]
       (DerivedCategory.Plus.isZero_homology_of_isGE K n i hi)
   exact Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE _ _ n hq
-
-/-- Blueprint `sbc-lem-bounded-below-truncation-criterion`: for `K ∈ D⁺(T_ét)`, only the
-cohomology sheaves of `K` in degrees `≤ n` contribute to `Hⁿ(Rg_* K)`: the map
-`Hⁿ(Rg_* τ_{≤ n} K) ⟶ Hⁿ(Rg_* K)` is an isomorphism. -/
-lemma Etale.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLEι_app (g : T ⟶ S)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
-    IsIso ((DerivedCategory.Plus.homologyFunctor _ n).map
-      (R+((g)_*[ModuleCat.{u + 1} Λ]).map ((t.truncLEι n).app K))) :=
-  DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app _
-    (fun K n _ _ hq ↦ Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE _ K n hq)
-    K n
-
-/-- Blueprint `sbc-lem-bounded-below-truncation-criterion`, after pullback: the map
-`Hⁿ(p^* Rg_* τ_{≤ n} K) ⟶ Hⁿ(p^* Rg_* K)` is an isomorphism. -/
-lemma Etale.isIso_homologyFunctor_map_baseChangeSource_map_truncLEι_app (p : X ⟶ S) (g : T ⟶ S)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
-    IsIso ((DerivedCategory.Plus.homologyFunctor _ n).map
-      ((R+((g)_*[ModuleCat.{u + 1} Λ]) ⋙ D+((p)^*[ModuleCat.{u + 1} Λ])).map
-        ((t.truncLEι n).app K))) :=
-  DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app _
-    (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ p g K n q hq) K n
-
-/-- Blueprint `sbc-lem-bounded-below-truncation-criterion`, for `h_*`: the map
-`Hⁿ(Rh_* e^* τ_{≤ n} K) ⟶ Hⁿ(Rh_* e^* K)` is an isomorphism. -/
-lemma Etale.isIso_homologyFunctor_map_baseChangeTarget_map_truncLEι_app (e : Y ⟶ T) (h : Y ⟶ X)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
-    IsIso ((DerivedCategory.Plus.homologyFunctor _ n).map
-      ((D+((e)^*[ModuleCat.{u + 1} Λ]) ⋙ R+((h)_*[ModuleCat.{u + 1} Λ])).map
-        ((t.truncLEι n).app K))) :=
-  DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app _
-    (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ e h K n q hq) K n
 
 /-- Blueprint `sbc-lem-finite-range-comparison`: let `K ∈ D⁺(T_ét)` have cohomology sheaves
 concentrated in `[a, b]`. If the comparison of the two hypercohomology spectral sequences is an
@@ -275,47 +188,6 @@ theorem Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder 
       Etale.isIso_baseChange_app_singleFunctor_obj_of_smooth Λ p sq F)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ p g K n q hq)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ e h K n q hq) K hK
-
-/-- Blueprint `sbc-def-derived-categories-with-allowable-torsion`, bounded version: the objects of
-`D^b_P-tor(X_ét)`, the bounded complexes of `D⁺(X_ét, Λ)` whose cohomology sheaves have
-`P`-torsion geometric stalks, for a set `P` of primes. The bounded below version is
-`AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomologyOfPrimes`. -/
-noncomputable def Etale.DerivedCategory.Plus.boundedTorsionHomologyOfPrimes (X : Scheme.{u})
-    (P : Set ℕ) :
-    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  t.bounded ⊓ Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P
-
-variable (p) in
-/-- Blueprint `sbc-thm-bounded-allowable-torsion`: for a Cartesian square with `p` smooth and
-`g` quasi-compact and quasi-separated, and `P` the set of primes invertible on `S`, the derived
-base-change map `BC(K) : p^*(Rg_* K) ⟶ Rh_*(e^* K)` is an isomorphism for every
-`K ∈ D^b_P-tor(T_ét)`. Both sides are then bounded below; the comparison is made in
-`D⁺(X_ét, Λ)`. -/
-theorem Etale.isIso_baseChange_app_of_bounded_of_smooth [Smooth p] [QuasiCompact g]
-    [QuasiSeparated g] (sq : IsPullback e h g p)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : Etale.DerivedCategory.Plus.boundedTorsionHomologyOfPrimes Λ T S.invertiblePrimes K) :
-    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
-  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hK⟩ := hK
-  exact DerivedCategory.Plus.isIso_app_of_bounded _ (isTorsionSheafOfInvertibleOrder Λ S T)
-    (fun F hF ↦ have : IsTorsionSheafOfInvertibleOrder S F := hF
-      Etale.isIso_baseChange_app_singleFunctor_obj_of_smooth Λ p sq F) K a b fun j ↦
-    have := hK j
-    IsTorsionSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes Λ _
-
-variable (p) in
-/-- Blueprint `sbc-thm-bounded-below-derived-smooth-base-change`: for a Cartesian square with `p`
-smooth and `g` quasi-compact and quasi-separated, and a bounded below complex
-`K ∈ D⁺_P-tor(T_ét)` whose cohomology sheaves are torsion with prime divisors invertible on `S`,
-the derived base-change map `BC(K) : p^*(Rg_* K) ⟶ Rh_*(e^* K)` is an isomorphism. -/
-theorem Etale.isIso_baseChange_app_of_smooth [Smooth p] [QuasiCompact g] [QuasiSeparated g]
-    (sq : IsPullback e h g p)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ T S.invertiblePrimes K) :
-    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
-  Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ p sq K fun j ↦
-    have := hK j
-    IsTorsionSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes Λ _
 
 /-- If a nonzero integer `N` kills the coefficient ring `Λ` and is invertible on `S`, then every
 sheaf of `Λ`-modules is torsion of orders invertible on `S`. -/

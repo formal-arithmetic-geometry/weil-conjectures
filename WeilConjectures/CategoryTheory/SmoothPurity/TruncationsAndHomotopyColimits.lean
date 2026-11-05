@@ -61,19 +61,4 @@ open CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace CategoryTheory
 
-/-- A sequential homotopy colimit is any cone object in the distinguished triangle
-`B --(1 - s)--> B --> H --> B[1]`, where `B` is the countable coproduct of `E j`
-and `s` is determined by `Sigma.ι E j ≫ s = u j ≫ Sigma.ι E (j + 1)`.
-The two remaining arrows are existentially quantified: no cone or functorial choice
-is part of the definition. Source: blueprint sec-smooth-purity,
-sk-prop-sf-kunneth-ordinary, node order 1690 (blueprint: def-kun-truncations). -/
-def IsSequentialHomotopyColimit
-    {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
-    [HasCountableCoproducts C] (E : ℕ → C) (u : ∀ j : ℕ, E j ⟶ E (j + 1))
-    (H : C) : Prop :=
-  ∃ (g : (∐ E) ⟶ H) (h : H ⟶ (∐ E)⟦(1 : ℤ)⟧),
-    Triangle.mk (𝟙 (∐ E) - Sigma.desc (fun j : ℕ ↦ u j ≫ Sigma.ι E (j + 1))) g h ∈
-      distTriang C
-
 end CategoryTheory

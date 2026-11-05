@@ -62,45 +62,4 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   rationalPullbackScalarComparison rationalTensorScalarComparison
   commonStagePullbackComparison commonStageTensorComparison operationStageTransitionIso
 
-/-- The normalized tensor comparison followed by input associators is the pair endpoint.
-
-Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
-Proof: Expand the normalized tensor comparison, keeping its transition isomorphisms.
-Functoriality combines the two input corrections with the inverses of the transition
-isomorphisms. This is exactly the defining common-stage tensor endpoint. The calculation
-is the existing tensorStageComparison_endpoint applied to the two stage associators.
-(blueprint: lem-weil-common-stage-tensor-endpoint). -/
-theorem commonStageTensor_endpoint
-    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
-    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
-    (P Q : Pair l Ω W) (L : Index l Ω)
-    (h : (commonStageTensorObject l Ω W P Q).stage ≤ L) :
-    (rationalTensorStageComparison l Ω W h).app
-        (P.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1,
-          Q.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2) ≪≫
-      (rationalDerivedTensor l (Coefficient.{u} l Ω L) W).mapIso
-        (Iso.prod
-          (((stageSystem l Ω W).assoc
-            ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1 h).app P.obj)
-          (((stageSystem l Ω W).assoc
-            ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).app Q.obj)) =
-      commonStageTensorComparison l Ω W P Q L h := by
-  delta rationalTensorStageComparison commonStageTensorComparison operationStageTransitionIso
-  have hh := tensorStageComparison_endpoint
-    (C := Stage l Ω W (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage))
-    (D := Stage l Ω W L)
-    (rationalDerivedTensor l
-      (Coefficient.{u} l Ω (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage)) W)
-    (rationalDerivedTensor l (Coefficient.{u} l Ω L) W)
-    (operationStageTransitionIso l Ω W _ L h)
-    (rationalTensorScalarComparison l _ _ (coefficientInclusion l Ω _ L h) W)
-    (P.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1)
-    (Q.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2)
-    (((stageSystem l Ω W).assoc
-      ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1 h).app P.obj)
-    (((stageSystem l Ω W).assoc
-      ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).app Q.obj)
-  simpa only [operationStageTransitionIso, commonStageTensorObject] using hh
-
 end WeilConjectures

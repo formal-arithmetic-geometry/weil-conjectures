@@ -201,22 +201,6 @@ lemma finite_of_isFinitelyGenerated [Finite R] {M : ModuleCat.{v} R}
   have := (isFinitelyGenerated_iff M).1 h
   Module.finite_of_finite R
 
-/-- **Finite generation as an epimorphism from a finite free module.** A module `M` is finitely
-generated, as an object of the concrete category of modules, if and only if there is an
-epimorphism `R^n ⟶ M` from a finite free module. This is the form in which finite generation can
-be stated without reference to elements, see
-`AlgebraicGeometry.Scheme.isFiniteSheaf_iff_exists_epi`. -/
-lemma isFinitelyGenerated_iff_exists_epi (M : ModuleCat.{u} R) :
-    IsFinitelyGenerated M ↔
-      ∃ (n : ℕ) (f : ModuleCat.of R (Fin n → R) ⟶ M), Epi f := by
-  rw [isFinitelyGenerated_iff]
-  constructor
-  · intro _
-    obtain ⟨n, f, hf⟩ := Module.Finite.exists_fin' R M
-    exact ⟨n, ModuleCat.ofHom f, (ModuleCat.epi_iff_surjective _).2 hf⟩
-  · rintro ⟨n, f, hf⟩
-    exact Module.Finite.of_surjective f.hom ((ModuleCat.epi_iff_surjective f).1 hf)
-
 /-- Over a finite ring, finitely generated modules are finite. -/
 instance finiteOfIsFinitelyGenerated [Finite R] :
     FiniteOfIsFinitelyGenerated (ModuleCat.{v} R) where

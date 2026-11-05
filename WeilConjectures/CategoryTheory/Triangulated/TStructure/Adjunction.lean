@@ -34,25 +34,4 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
   [Pretriangulated C] [Pretriangulated D] (t₁ : TStructure C) (t₂ : TStructure D)
   {F : C ⥤ D} {G : D ⥤ C}
 
-/-- If `F` sends `t₁.IsLE X n` to `t₂.IsLE (F X) (n + N)`, then its right adjoint `G` sends
-`t₂.IsGE Y m` to `t₁.IsGE (G Y) (m - N)`: a morphism `X ⟶ G Y` with `X ≤ m - N - 1` is adjoint to
-a morphism `F X ⟶ Y` with `F X ≤ m - 1`, which vanishes. -/
-lemma isGE_rightAdjoint_obj [F.Additive] (adj : F ⊣ G) (N : ℤ)
-    (hF : ∀ (X : C) (n : ℤ), t₁.IsLE X n → t₂.IsLE (F.obj X) (n + N)) (Y : D) (m : ℤ)
-    [t₂.IsGE Y m] : t₁.IsGE (G.obj Y) (m - N) := by
-  have := adj.right_adjoint_additive
-  rw [t₁.isGE_iff_orthogonal (m - N - 1) (m - N) (by lia)]
-  intro X f hX
-  have := hF X _ hX
-  have h0 : (adj.homEquiv _ _).symm f = 0 := t₂.zero _ (m - N - 1 + N) m (by lia)
-  rw [← (adj.homEquiv _ _).apply_symm_apply f, h0, adj.homEquiv_unit, G.map_zero, comp_zero]
-
-/-- If `F` raises the upper bound by a constant, its right adjoint preserves bounded below
-objects. -/
-lemma plus_rightAdjoint_obj [F.Additive] (adj : F ⊣ G) (N : ℤ)
-    (hF : ∀ (X : C) (n : ℤ), t₁.IsLE X n → t₂.IsLE (F.obj X) (n + N)) (Y : D)
-    (hY : t₂.plus Y) : t₁.plus (G.obj Y) := by
-  obtain ⟨m, hm⟩ := hY
-  exact ⟨m - N, t₁.isGE_rightAdjoint_obj t₂ adj N hF Y m⟩
-
 end CategoryTheory.Triangulated.TStructure

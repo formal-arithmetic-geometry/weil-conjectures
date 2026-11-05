@@ -63,21 +63,4 @@ theorem isIso_baseChange_app_of_fieldExtension
     (fun M n _ q hq ↦ isZero_homologyFunctor_baseChangeSource_obj Λ p g M n q hq)
     (fun M n _ q hq ↦ isZero_homologyFunctor_baseChangeTarget_obj Λ e h M n q hq) M hM
 
-include σ σ' hS in
-/-- Stacks 0F1C, unbounded derived form for coefficients killed by an integer `N` invertible in
-`K`: the derived base change map `p^* Rg_* M ⟶ Rh_* e^* M` of
-`AlgebraicGeometry.Etale.derivedBaseChangeMap` is an isomorphism at every bounded below `M`. -/
-theorem isIso_derivedBaseChangeMap_app_of_fieldExtension (N : ℕ) (hN₀ : N ≠ 0)
-    (hN : (N : Λ) = 0)
-    (hNK : IsUnit (N : Γ(Spec (.of K), ⊤)))
-    (M : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ)
-    [M.IsGE n] :
-    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app M) := by
-  let M' : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-    ⟨M, n, inferInstance⟩
-  have h := isIso_baseChange_app_of_fieldExtension Λ σ σ' hS sq M' fun _ ↦
-    IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ N hN₀ hN hNK _
-  rw [baseChange_eq_derivedBaseChangeMapPlus] at h
-  exact (isIso_derivedBaseChangeMap_app_ι_obj_iff _ sq.toCommSq M').2 h
-
 end AlgebraicGeometry.Etale

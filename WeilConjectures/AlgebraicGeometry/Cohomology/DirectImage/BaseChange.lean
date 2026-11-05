@@ -199,15 +199,6 @@ theorem isOpen_perfectLocusOfRank (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
     exists_eq_right, Set.domRestrict_apply]
   exact ⟨fun ⟨ht, hr⟩ ↦ ⟨ht, hr⟩, fun ⟨ht, hr⟩ ↦ ⟨ht, hr⟩⟩
 
-/-- **Openness of `U_{i,r}`.** The locus of points `t` of `T` at which the fibre cohomology
-`H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension `r` in degree `i` is open in `T`. This
-is `AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`.
-
-(blueprint: `sk-thm-picard-perfect`) -/
-theorem isOpen_setOf_hFiber_eq (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
-    IsOpen {t : T | (∀ q ≠ i, ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r} :=
-  isOpen_perfectLocusOfRank f ℱ hℱ i r
-
 end Coherence
 
 end AlgebraicGeometry.Scheme.Modules

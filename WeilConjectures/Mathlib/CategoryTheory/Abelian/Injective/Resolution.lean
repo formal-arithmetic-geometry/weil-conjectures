@@ -140,12 +140,6 @@ theorem descOfQuasiIso_commutes (f : Z ⟶ Y) (I : InjectiveResolution Y)
   ext
   simp [descOfQuasiIso]
 
-/-- Every resolution `ι : single₀ Z ⟶ K` of `Z` maps to any injective resolution `I` of `Z`
-by a cochain map `φ : K ⟶ I.cocomplex` compatible with the augmentations. -/
-theorem exists_comp_eq_ι_of_quasiIso (I : InjectiveResolution Z) (ι : (single₀ C).obj Z ⟶ K)
-    [QuasiIso ι] : ∃ φ : K ⟶ I.cocomplex, ι ≫ φ = I.ι :=
-  ⟨descOfQuasiIso (𝟙 Z) I ι, by simp⟩
-
 /-- The lift `descOfQuasiIso (𝟙 Z) I ι` of the identity from a resolution `ι` of `Z` to an
 injective resolution `I` of `Z` is a quasi-isomorphism. -/
 instance quasiIso_descOfQuasiIso_id (I : InjectiveResolution Z) (ι : (single₀ C).obj Z ⟶ K)
@@ -154,7 +148,6 @@ instance quasiIso_descOfQuasiIso_id (I : InjectiveResolution Z) (ι : (single₀
     rw [descOfQuasiIso_commutes, Functor.map_id, id_comp]
     infer_instance
   exact quasiIso_of_comp_left ι _
-
 
 section CyclesZero
 

@@ -124,15 +124,6 @@ noncomputable def derivedHomToIhomIhomNatTrans (X : Scheme.{u})
 
 /-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
 
-The evaluation `ev_K : K ⊗ᴸ 𝔻_X K ⟶ ω_X` of the internal hom, a pairing natural in `K`. No
-finiteness of `K` or of `𝔻_X K` is needed. -/
-noncomputable def verdierDualEvaluation
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    K ⊗ (verdierDual Λ a).obj (op K) ⟶ dualizingComplex Λ a :=
-  (ihom.ev K).app (dualizingComplex Λ a)
-
-/-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
-
 The double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, natural in `K`: the transpose of the
 evaluation pairing `AlgebraicGeometry.Etale.verdierDualEvaluation` precomposed with the
 symmetry `𝔻_X K ⊗ᴸ K ≅ K ⊗ᴸ 𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualDoubleDual_app`).
@@ -148,20 +139,6 @@ lemma verdierDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEtaleT
     (ModuleCat.{u + 1} Λ))) :
     (verdierDualDoubleDual Λ a).app K = MonoidalClosed.toIhomIhom (dualizingComplex Λ a) K :=
   rfl
-
-/-- **Verdier biduality for dualizable complexes when `ω_X` is invertible.** If the dualizing
-complex `ω_X` is invertible — for instance for `X` smooth over a field, where an orientation
-gives `ω_X ≅ Λ_X(d)[2d]` — then the double Verdier dual of a dualizable `K` is `K`:
-`𝔻_X 𝔻_X K ≅ K`. This is the duality `[[K, ω], ω] ≅ K` of
-`CategoryTheory.nonempty_iso_ihom_obj_ihom_obj_of_isInvertible`, the derived category of étale
-sheaves being braided (`AlgebraicGeometry.Etale.derivedBraidedCategory`). -/
-theorem nonempty_iso_verdierDual_verdierDual_of_isInvertible
-    (hω : IsInvertible (dualizingComplex Λ a))
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hK :
-        IsDualizable K) :
-    Nonempty (K ≅ (verdierDual Λ a).obj (op ((verdierDual Λ a).obj (op K)))) := by
-  obtain ⟨e⟩ := nonempty_iso_ihom_obj_ihom_obj_of_isInvertible hK hω
-  exact ⟨e.symm⟩
 
 end Etale
 

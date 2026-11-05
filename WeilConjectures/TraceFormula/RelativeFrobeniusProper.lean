@@ -284,22 +284,6 @@ theorem weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq [
     (fun N ↦ boundedConstructiblePullbackSquareComparison_hom_app_comp_upperStarComp ℓ r p f' ΦY
       sq.toCommSq W N) K
 
-/-- **The Frobenius comparison of the lower shriek of a proper morphism is the direct-image base
-change** (blueprint `sk-d-weil-push`, `def-exchange-projection`): for proper `f`, under the
-identification `Rf_! ≅ Rf_*`, the Frobenius comparison `θ_f : LΦ_Y^* Rf_! ≅ Rf_! LΦ_X^*` is the
-base-change morphism `Ex_* : LΦ_Y^* Rf_* ⟶ Rf_* LΦ_X^*` of the commutative square
-`Φ_X ≫ f = f ≫ Φ_Y`. -/
-theorem weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar [IsProper f.left]
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf).hom.app K ≫
-        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K) =
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦY).map
-          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) ≫
-        (boundedConstructibleBaseChange ℓ
-          (⟨frobenius_comp_eq_comp_frobenius ΦX ΦY f sq r hrp hrf⟩ : CommSq ΦX f f ΦY)).app K :=
-  weilLowerShriekFrobeniusComparison_hom_app_comp_isoLowerStar_of_commSq ℓ ΦX ΦY f sq r hrp hrf _ K
-
 end LowerShriek
 
 end AlgebraicGeometry.ProEtale.CondensedRing

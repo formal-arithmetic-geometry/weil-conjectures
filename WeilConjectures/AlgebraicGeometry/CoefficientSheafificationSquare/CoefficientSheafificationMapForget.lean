@@ -34,17 +34,5 @@ variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
     (ha : (Functor.const Cᵒᵖ).map (RingCat.ofHom r) ≫ β = α ≫ a.hom)
 
-theorem rawIso_map_forget
-    {P : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of R))}
-    {Q : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of S))}
-    (p : P ⟶ (rawRestriction r).obj Q) :
-    (SheafOfModules.toSheaf T).map
-        ((PresheafOfModules.sheafification α).map p ≫ (rawIso J r a α β ha).hom.app Q) =
-      (presheafToSheaf J AddCommGrpCat.{u + 1}).map
-        ((PresheafOfModules.toPresheaf _).map p) := by
-  rw [Functor.map_comp, rawIso_forget]
-  erw [Category.comp_id]
-  rfl
-
 end
 end AlgebraicGeometry.Scheme.CoefficientSheafificationSquare

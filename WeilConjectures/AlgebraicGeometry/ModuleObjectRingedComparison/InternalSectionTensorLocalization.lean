@@ -152,41 +152,6 @@ variable {A B : Type*} [Category A] [Category B]
   (hr : ∀ M, (e M (𝟙_ A)).hom ≫ F.obj M ◁ e₀.hom ≫ (ρ_ _).hom =
     F.map (ρ_ M).hom)
 
-@[instance_reducible]
-private def ordinaryMonoidal : F.Monoidal :=
-  (Functor.CoreMonoidal.mk' (F := F) e₀.symm (fun M N ↦ (e M N).symm)
-    (fun f N ↦ by
-      simpa only [Iso.symm_inv, CategoryTheory.Functor.map_id, tensorHom_id] using
-        (hn _ _ _ _ f (𝟙 N)).symm)
-    (fun M f ↦ by
-      simpa only [Iso.symm_inv, CategoryTheory.Functor.map_id, id_tensorHom] using
-        (hn _ _ _ _ (𝟙 M) f).symm)
-    ha
-    (fun M ↦ by
-      apply (cancel_mono (λ_ (F.obj M)).hom).mp
-      rw [Iso.symm_inv, Iso.symm_inv, Iso.inv_hom_id, Category.assoc, Category.assoc, hl,
-        ← F.map_comp, Iso.inv_hom_id, F.map_id])
-    (fun M ↦ by
-      apply (cancel_mono (ρ_ (F.obj M)).hom).mp
-      rw [Iso.symm_inv, Iso.symm_inv, Iso.inv_hom_id, Category.assoc, Category.assoc, hr,
-        ← F.map_comp, Iso.inv_hom_id, F.map_id])).toMonoidal
-
-private theorem ordinaryMonoidal_delta (M N : A) :
-    let := ordinaryMonoidal F e e₀ hn ha hl hr
-    Functor.OplaxMonoidal.δ F M N = (e M N).hom := by
-  rfl
-
-private structure OrdinaryMonoidalData where
-  monoidal : F.Monoidal
-  delta : ∀ M N : A, letI := monoidal
-    Functor.OplaxMonoidal.δ F M N = (e M N).hom
-
-include e₀ hn ha hl hr in
-private theorem ordinary_monoidal_data : Nonempty (OrdinaryMonoidalData F e) := by
-  refine ⟨⟨ordinaryMonoidal F e e₀ hn ha hl hr, ?_⟩⟩
-  intro M N
-  exact ordinaryMonoidal_delta F e e₀ hn ha hl hr M N
-
 end Ordinary
 
 attribute [local irreducible] ordinaryMonoidal
@@ -198,21 +163,6 @@ variable {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
   (q : C ⥤ D) (r : E ⥤ H) (f : C ⥤ E) (g : D ⥤ H)
   [q.LaxMonoidal] [r.LaxMonoidal] [f.Monoidal] [g.Monoidal]
   (k : q ⋙ g ≅ f ⋙ r) [NatTrans.IsMonoidal k.hom]
-
-private theorem monoidal_square (P Q : C) :
-    Functor.OplaxMonoidal.δ g (q.obj P) (q.obj Q) ≫
-      (k.hom.app P ⊗ₘ k.hom.app Q) ≫ Functor.LaxMonoidal.μ r (f.obj P) (f.obj Q) =
-    g.map (Functor.LaxMonoidal.μ q P Q) ≫ k.hom.app (P ⊗ Q) ≫
-      r.map (Functor.OplaxMonoidal.δ f P Q) := by
-  have h := NatTrans.IsMonoidal.tensor (τ := k.hom) P Q
-  simp only [Functor.LaxMonoidal.comp_μ, Category.assoc] at h
-  apply (cancel_mono (r.map (Functor.LaxMonoidal.μ f P Q))).mp
-  simp only [Category.assoc, ← CategoryTheory.Functor.map_comp,
-    Functor.Monoidal.δ_μ, CategoryTheory.Functor.map_id]
-  rw [← h, Functor.Monoidal.δ_μ_assoc]
-  let b : g.obj (q.obj (P ⊗ Q)) ⟶ r.obj (f.obj (P ⊗ Q)) := k.hom.app (P ⊗ Q)
-  change _ = g.map (Functor.LaxMonoidal.μ q P Q) ≫ b ≫ 𝟙 _
-  rw [CategoryTheory.Category.comp_id]
 
 end MonoidalSquare
 
@@ -227,103 +177,10 @@ variable {A : Type a} [Category.{u + 1} A] [Abelian A]
   [MonoidalPreadditive B] [BraidedCategory B] [Abelian.HasFunctorialFlatResolution B]
   (F : A ⥤ B) [F.Additive] [F.Monoidal] [F.IsEquivalence]
 
-private local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
-private local instance : HasColimitsOfSize.{0, 0} B := hasColimitsOfSizeShrink B
-private local instance (P Q : GradedObject ℤ A) : P.HasTensor Q := inferInstance
-private local instance (P Q : GradedObject ℤ B) : P.HasTensor Q := inferInstance
-
-private theorem total_eq_native (P Q : CochainComplex A ℤ)
-    (c : (F.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ≅
-      (F.mapHomologicalComplex (.up ℤ)).obj P ⊗
-        (F.mapHomologicalComplex (.up ℤ)).obj Q)
-    (hc : ∀ (p q n : ℤ) (h : p + q = n),
-      F.map (HomologicalComplex.ιTensorObj P Q p q n h) ≫ c.hom.f n =
-        Functor.OplaxMonoidal.δ F (P.X p) (Q.X q) ≫
-          HomologicalComplex.ιTensorObj
-            ((F.mapHomologicalComplex (.up ℤ)).obj P)
-            ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h) :
-    c = (F.mapCochainComplexμIso P Q).symm := by
-  apply Iso.ext
-  change c.hom = (F.mapCochainComplexμIso P Q).inv
-  rw [Functor.mapCochainComplexμIso_inv]
-  ext n : 1
-  apply HomologicalComplex.mapBifunctor.hom_ext_of_map F
-  intro p q h
-  rw [hc]
-  exact (HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
-    (Functor.OplaxMonoidal.δNatTrans F) (.up ℤ) P Q p q n h).symm
-
-private structure NativeDescentData where
-  iso : MonoidalCategory.tensor (DerivedCategory A) ⋙ F.mapDerivedCategory ≅
-    (F.mapDerivedCategory.prod F.mapDerivedCategory) ⋙ MonoidalCategory.tensor (DerivedCategory B)
-  square : ∀ P Q : CochainComplex A ℤ,
-    iso.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-      (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ
-        F.mapDerivedCategoryFactors.hom.app Q) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q
-        ((F.mapHomologicalComplex (.up ℤ)).obj P)
-        ((F.mapHomologicalComplex (.up ℤ)).obj Q) =
-    F.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
-      F.mapDerivedCategoryFactors.hom.app (P ⊗ Q) ≫
-      DerivedCategory.Q.map (F.mapCochainComplexμIso P Q).inv
-
-private theorem NativeDescentData.normalized_with (d : NativeDescentData F)
-    (P Q : CochainComplex A ℤ)
-    (c : (F.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ≅
-      (F.mapHomologicalComplex (.up ℤ)).obj P ⊗
-        (F.mapHomologicalComplex (.up ℤ)).obj Q)
-    (hc : c = (F.mapCochainComplexμIso P Q).symm)
-    [IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q
-      ((F.mapHomologicalComplex (.up ℤ)).obj P)
-      ((F.mapHomologicalComplex (.up ℤ)).obj Q))] :
-    d.iso.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-      (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ
-        F.mapDerivedCategoryFactors.hom.app Q) =
-    F.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
-      F.mapDerivedCategoryFactors.hom.app (P ⊗ Q) ≫
-      DerivedCategory.Q.map c.hom ≫
-      inv (Functor.LaxMonoidal.μ DerivedCategory.Q
-        ((F.mapHomologicalComplex (.up ℤ)).obj P)
-        ((F.mapHomologicalComplex (.up ℤ)).obj Q)) := by
-  rw [hc]
-  apply (cancel_mono (Functor.LaxMonoidal.μ DerivedCategory.Q
-    ((F.mapHomologicalComplex (.up ℤ)).obj P)
-    ((F.mapHomologicalComplex (.up ℤ)).obj Q))).mp
-  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
-  exact d.square P Q
-
-private theorem nativeDescent : Nonempty (NativeDescentData F) := by
-  obtain ⟨d⟩ := ExactMonoidalEquivalenceDerived.left_data F
-  let := d.homotopyMonoidal
-  let := d.derivedMonoidal
-  have := d.homotopyFactors
-  have := d.derivedFactors
-  have := ExactMonoidalEquivalenceDerived.derivedFactors_monoidal F
-  let c : MonoidalCategory.tensor (DerivedCategory A) ⋙ F.mapDerivedCategory ≅
-      (F.mapDerivedCategory.prod F.mapDerivedCategory) ⋙
-        MonoidalCategory.tensor (DerivedCategory B) :=
-    NatIso.ofComponents
-      (fun p ↦ (Functor.Monoidal.μIso F.mapDerivedCategory p.1 p.2).symm)
-      (fun f ↦ (Functor.OplaxMonoidal.δ_natural F.mapDerivedCategory f.1 f.2).symm)
-  refine ⟨⟨c, ?_⟩⟩
-  intro P Q
-  have h := monoidal_square DerivedCategory.Q DerivedCategory.Q
-    (F.mapHomologicalComplex (.up ℤ)) F.mapDerivedCategory F.mapDerivedCategoryFactors P Q
-  exact h
-
 end Abstract
 
 attribute [local instance 1000001] sectionRingHasSheafCompose
 attribute [local instance 2000] HasDerivedCategory.ofIsGrothendieckAbelian
-
-private def uncurryComparison {D E : Type*} [Category D] [Category E]
-    [MonoidalCategory D] {F : D ⥤ E} {G : D × D ⥤ E}
-    (c : MonoidalCategory.tensor D ⋙ F ≅ G) :
-    Functor.uncurry.obj (curriedTensor D) ⋙ F ≅ G :=
-  NatIso.ofComponents (fun p ↦ c.app p) (fun f ↦ by
-    change F.map (f.1 ▷ _ ≫ _ ◁ f.2) ≫ c.hom.app _ = c.hom.app _ ≫ G.map f
-    simpa only [Functor.comp_map, MonoidalCategory.tensor_map,
-      MonoidalCategory.tensorHom_def] using c.hom.naturality f)
 
 section NormalizationUncurry
 universe u₀ v₀ u₁ v₁ u₂ v₂ u₃ v₃
@@ -341,14 +198,6 @@ variable {C₀ : Type u₀} [Category.{v₀} C₀] {D₀ : Type u₁} [Category.
     (qD.obj (s₀.obj (P, Q)) ≅ s.obj (qD.obj P, qD.obj Q))}
   {c : MonoidalCategory.tensor C ⋙ f ≅ (f.prod f) ⋙ s}
 
-private theorem uncurryComparison_square
-    (h : tensorLocalizationSquareHEq qC qD f₀ f factor (MonoidalCategory.tensor C)
-      t₀ s s₀ μ c₀ flat model c) :
-    tensorLocalizationSquareHEq qC qD f₀ f factor
-      (Functor.uncurry.obj (curriedTensor C)) t₀ s s₀ μ c₀ flat model
-      (uncurryComparison c) := by
-  intro P Q hP hQ
-  exact h P Q hP hQ
 end NormalizationUncurry
 
 section Ringed
@@ -358,41 +207,12 @@ variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
   (R : Sheaf J CommRingCat.{u + 1})
 
-private local instance ringedMonoidal : MonoidalCategory (SheafOfModules.{u + 1}
-    ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :=
-  RingedDerivedNative.moduleMonoidal.{u + 1, u, u} J R
-private local instance ringedSymmetric : SymmetricCategory (SheafOfModules.{u + 1}
-    ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :=
-  RingedDerivedNative.moduleSymmetric.{u + 1, u, u} J R
-private local instance ringedPreadditive : MonoidalPreadditive (SheafOfModules.{u + 1}
-    ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :=
-  RingedDerivedNative.modulePreadditive.{u + 1, u, u} J R
-private local instance ringedClosed : MonoidalClosed (SheafOfModules.{u + 1}
-    ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :=
-  RingedDerivedNative.moduleClosed.{u + 1, u, u} J R
-private local instance ringedGrothendieck : IsGrothendieckAbelian.{u + 1}
-    (SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :=
-  RingedDerivedNative.moduleGrothendieck.{u + 1, u, u} J R
-private local instance ringedFlat : Abelian.HasFunctorialFlatResolution
-    (SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :=
-  RingedDerivedNative.moduleFlat.{u + 1, u, u} J R
-
-private local instance ringedComplexTensor
-    (P Q : CochainComplex (SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ℤ) :
-    P.HasTensor Q := inferInstance
-
 variable {A : Type*} [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalClosed A]
   [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
   (F : A ⥤ SheafOfModules.{u + 1}
     ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))
   [F.Additive] [F.IsEquivalence] [fMonoidal : F.Monoidal]
-
-private local instance sourceComplexTensor (P Q : CochainComplex A ℤ) :
-    P.HasTensor Q := inferInstance
 
 variable
   (raw : ∀ P Q : CochainComplex A ℤ,
@@ -406,92 +226,6 @@ variable
         HomologicalComplex.ιTensorObj
           ((F.mapHomologicalComplex (.up ℤ)).obj P)
           ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)
-
-private def ringedSquare
-    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
-      J R))
-    (T : CoefficientTensorModels.{u, u + 1, u, u + 1} J R S)
-    (c : MonoidalCategory.tensor
-          (DerivedCategory A) ⋙
-          F.mapDerivedCategory ≅
-        (F.mapDerivedCategory.prod
-          F.mapDerivedCategory) ⋙ S.tensor) : Prop :=
-  tensorLocalizationSquareHEq DerivedCategory.Q DerivedCategory.Q
-        (F.mapHomologicalComplex (.up ℤ))
-        F.mapDerivedCategory
-        F.mapDerivedCategoryFactors
-        (MonoidalCategory.tensor _) (MonoidalCategory.tensor _) S.tensor
-        (coefficientTotalTensor.{u, u + 1, u} J R)
-        (Functor.LaxMonoidal.μ DerivedCategory.Q)
-        raw
-        (CochainComplex.IsKFlatIndependentCoefficients
-          (J := J) (R := R))
-        (CoefficientTensorModels.iso.{u, u + 1, u, u + 1} J R S T) c
-
-private structure ClosedComparisonData
-    {S : Type*} (M : S → Type*) (I : S → Type*)
-    (N : ∀ s (_m : M s), I s → Prop) where
-  closed : S
-  models : M closed
-  iso : I closed
-  square : N closed models iso
-
-private theorem ClosedComparisonData.to_exists
-    {S : Type*} {M : S → Type*} {I : S → Type*}
-    {N : ∀ s (_m : M s), I s → Prop} {K : ∀ s, M s → Type*}
-    (mk : ∀ s m i, N s m i → K s m)
-    (h : Nonempty (ClosedComparisonData M I N)) : ∃ s m, Nonempty (K s m) := by
-  obtain ⟨d⟩ := h
-  exact ⟨d.closed, d.models, ⟨mk _ _ d.iso d.square⟩⟩
-
-private abbrev RingedNormalizationData :=
-  ClosedComparisonData
-    (CoefficientTensorModels.{u, u + 1, u, u + 1} J R)
-    (fun S ↦ MonoidalCategory.tensor (DerivedCategory A) ⋙ F.mapDerivedCategory ≅
-      (F.mapDerivedCategory.prod F.mapDerivedCategory) ⋙ S.tensor)
-    (ringedSquare J R F raw)
-
-include hraw in
-private theorem ringed_normalized : Nonempty (RingedNormalizationData J R F raw) := by
-  obtain ⟨d⟩ := nativeDescent F
-  obtain ⟨S, hS, T, hT⟩ := RingedDerivedNative.closedAdjunction.{u + 1, u, u, u + 1}
-    J R
-  rcases S with ⟨ss, adj, hn⟩
-  dsimp only at hS
-  subst ss
-  refine ⟨⟨⟨_, adj, hn⟩, T, d.iso, ?_⟩⟩
-  intro P Q hP hQ
-  dsimp only [CoefficientTensorModels.iso]
-  rw [eq_of_heq hT]
-  have := RingedDerivedNative.isIso_mu.{u + 1, u, u, u + 1} J R
-    ((F.mapHomologicalComplex (.up ℤ)).obj P)
-    ((F.mapHomologicalComplex (.up ℤ)).obj Q)
-    (Or.inl hP)
-  apply heq_of_eq
-  exact NativeDescentData.normalized_with F d P Q (raw P Q)
-    (total_eq_native F P Q (raw P Q) (hraw P Q))
-
-include hraw in
-private theorem ringed_normalized_transport
-    (B : Sheaf J CommRingCat.{u + 1}) (e : R = B)
-    (E : A ⥤ SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B))
-    [E.Additive] [E.IsEquivalence] (he : HEq E F)
-    (t : ∀ P Q : CochainComplex A ℤ,
-      (E.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ≅
-        (coefficientTotalTensor.{u, u + 1, u} J B).obj
-          ((E.mapHomologicalComplex (.up ℤ)).obj P,
-            (E.mapHomologicalComplex (.up ℤ)).obj Q))
-    (ht : ∀ P Q, HEq (t P Q) (raw P Q)) :
-    Nonempty (RingedNormalizationData J B E t) := by
-  subst B
-  have hE : E = F := eq_of_heq he
-  subst E
-  have hh : t = raw := by
-    funext P Q
-    exact eq_of_heq (ht P Q)
-  subst t
-  exact ringed_normalized J R F raw hraw
 
 end Ringed
 
@@ -522,16 +256,6 @@ attribute [local instance 30000] sectionComparisonBraiding
 variable
   (R : Sheaf J AddCommGrpCat.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R]
 
-private local instance directComm :
-    @IsCommMonObj (Sheaf J AddCommGrpCat.{u + 1}) _ _
-      (Sheaf.braidedCategory J AddCommGrpCat.{u + 1}) R _ := by
-  exact hcomm
-
-private local instance symmetricComm :
-    @IsCommMonObj (Sheaf J AddCommGrpCat.{u + 1}) _ _
-      (Sheaf.symmetricCategory J AddCommGrpCat.{u + 1}).toBraidedCategory R _ := by
-  exact hcomm
-
 open CategoryTheory.InternalAbelianSheafModule
 
 attribute [local irreducible] sectionModuleFunctor
@@ -539,88 +263,11 @@ attribute [local implicit_reducible] sectionModuleEquivalence
 
 attribute [local irreducible] comparison_tensorIso comparison_unitIso
 
-private local instance sectionFunctorAdditive :
-    (sectionModuleFunctor.{u + 1, u + 1, u} J R).Additive :=
-  comparison_EAdditive J R
-
-private local instance sectionFunctorEquivalence :
-    (sectionModuleFunctor.{u + 1, u + 1, u} J R).IsEquivalence :=
-  comparison_EEquiv J R
-
-private def SectionMonoidalData :=
-  OrdinaryMonoidalData _ (comparison_tensorIso J R)
-
-private theorem section_monoidal_data : Nonempty (SectionMonoidalData.{u} J R) := by
-  exact ordinary_monoidal_data _ (comparison_tensorIso J R) (comparison_unitIso J R)
-    (comparison_tensorIso_natural J R) (comparison_tensorIso_assoc J R)
-    (comparison_tensorIso_leftUnitor J R) (comparison_tensorIso_rightUnitor J R)
-
-private theorem canonicalOrdinaryForSite_eq_comparison
-    (M N : Mod (Sheaf J AddCommGrpCat.{u + 1}) R) :
-    ordinaryTensorIsoForSite J R M N = comparison_tensorIso J R M N := by
-  unfold ordinaryTensorIsoForSite comparison_tensorIso
-  rfl
-
 variable
   [sourceClosed : MonoidalClosed (Mod (Sheaf J AddCommGrpCat.{u + 1}) R)]
   [sourceGroth : IsGrothendieckAbelian.{u + 1} (Mod (Sheaf J AddCommGrpCat.{u + 1}) R)]
   [sourceFlat : Abelian.HasFunctorialFlatResolution
     (Mod (Sheaf J AddCommGrpCat.{u + 1}) R)]
-
-private local instance internalComplexTensor
-    (P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ) :
-    P.HasMapBifunctor Q (curriedTensor _) :=
-  InternalAbelianSheafModule.comparison_internalTotalExists J R P Q
-
-private theorem ordinary_raw_summand (m : SectionMonoidalData.{u} J R)
-    (P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ)
-    (p q n : ℤ) (h : p + q = n) :
-    let := m.monoidal
-    (sectionModuleFunctor.{u + 1, u + 1, u} J R).map
-      (HomologicalComplex.ιTensorObj P Q p q n h) ≫
-        (ordinaryComplexTensorIsoForSite J R P Q).hom.f n =
-      Functor.OplaxMonoidal.δ
-        (sectionModuleFunctor.{u + 1, u + 1, u} J R) (P.X p) (Q.X q) ≫
-        HomologicalComplex.ιTensorObj
-          (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex
-            (.up ℤ)).obj P)
-          (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex
-            (.up ℤ)).obj Q) p q n h := by
-  let := m.monoidal
-  have hd := m.delta (P.X p) (Q.X q)
-  rw [← canonicalOrdinaryForSite_eq_comparison] at hd
-  exact (ordinaryComplexTensorIsoForSite_summand J R P Q p q n h).trans
-    (congrArg (fun f ↦ f ≫ HomologicalComplex.ιTensorObj
-      (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex
-        (.up ℤ)).obj P)
-      (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex
-        (.up ℤ)).obj Q) p q n h) hd.symm)
-
-private theorem section_normalized
-    (B : Sheaf J CommRingCat.{u + 1}) (e : sectionRingSheaf.{u + 1, u + 1, u} J R = B)
-    (E : Mod (Sheaf J AddCommGrpCat.{u + 1}) R ⥤ SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B))
-    [E.Additive] [E.IsEquivalence]
-    (he : HEq E (sectionModuleEquivalence.{u + 1, u + 1, u} J R).functor)
-    (t : ∀ P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ,
-      (E.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ≅
-        (coefficientTotalTensor.{u, u + 1, u} J B).obj
-          ((E.mapHomologicalComplex (.up ℤ)).obj P,
-            (E.mapHomologicalComplex (.up ℤ)).obj Q))
-    (ht : ∀ P Q, HEq (t P Q) (ordinaryComplexTensorIsoForSite J R P Q)) :
-    Nonempty (@RingedNormalizationData.{u, u + 2} C inferInstance J inferInstance inferInstance B
-      (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) inferInstance inferInstance sourceGroth
-      inferInstance sourceClosed inferInstance inferInstance sourceFlat E inferInstance
-      inferInstance t) := by
-  obtain ⟨m⟩ := section_monoidal_data J R
-  let := m.monoidal
-  exact @ringed_normalized_transport.{u, u + 2} C inferInstance J inferInstance
-    inferInstance (sectionRingSheaf.{u + 1, u + 1, u} J R)
-    (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) inferInstance inferInstance sourceGroth
-    inferInstance sourceClosed inferInstance inferInstance sourceFlat
-    (sectionModuleFunctor.{u + 1, u + 1, u} J R) inferInstance inferInstance
-    m.monoidal (ordinaryComplexTensorIsoForSite J R)
-    (ordinary_raw_summand J R m) B e E inferInstance inferInstance he t ht
 
 end Generic
 
@@ -645,109 +292,4 @@ attribute [local implicit_reducible] sectionModuleEquivalence
 
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The section equivalence identifies the native derived tensors with the ringed
-closed tensor, with the prescribed K-flat representative squares, globally and on
-all localized sites. This statement contains no comparison of internal Homs.
-
-Source: Stacks 03CV, 03EK, 06YL, 06YS and 08J9
-(blueprint: lem-sfb-internal-section-tensor-localization).
-
-Proof: The ordinary section-action equivalence is exact and comes with tensor and
-unit isomorphisms normalized on pure tensors. Its associator and unitor equations
-construct a strong monoidal structure. On each signed total summand, the specified
-complex comparison is the inverse of its mapCochainComplex tensorator; the coproduct
-universal property makes this identification unique. Closedness makes both tensor
-variables preserve countable coproducts. Use coherent derived monoidal descent of the
-exact equivalence. The monoidality
-equation of its localization factor supplies the representative tensor square.
-Take the ringed closed structure and K-flat tensor models from the native tensor-Hom
-adjunction. On K-flat pairs, cancel the target localization tensorator. Its inverse
-is precisely the representative model comparison, giving TensorComparison with its
-stated normalization. For every slice repeat this construction for the actual
-restricted coefficient monoid. The equality between its reconstructed section ring
-and the literal restricted section ring transports the same normalized construction
-to SliceTensorComparison. Total-summand uniqueness identifies the transported raw
-comparison with sliceTotalComparison. These arguments use arbitrary unbounded
-complexes and apply also to zero rings and empty sites. -/
-theorem internalSection_tensorLocalization :
-    (∃ (S : CoefficientClosedStructure (hom Λ X))
-      (T : CoefficientTensorModels.{u, u + 1, u, u + 1}
-        (Scheme.ProEt.topology X) (ring Λ X) S),
-      Nonempty (TensorComparison Λ X S T)) ∧
-    (∀ U : X.ProEt,
-      ∃ (S : CoefficientClosedStructure
-          (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
-            ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U)))
-        (T : CoefficientTensorModels.{u, u + 1, u, u + 1}
-          ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) S),
-        Nonempty (SliceTensorComparison Λ X U S T)) := by
-  constructor
-  · have hcomm := (inferInstance : IsCommMonObj (condensedRingObj Λ X))
-    let : BraidedCategory (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) :=
-      (Sheaf.symmetricCategory (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).toBraidedCategory
-    have : IsCommMonObj (condensedRingObj Λ X) := hcomm
-    have : HasSheafify (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} := inferInstance
-    have : (Scheme.ProEt.topology X).WEqualsLocallyBijective
-        AddCommGrpCat.{u + 1} := inferInstance
-    have : ((Scheme.ProEt.topology X).W (A := AddCommGrpCat.{u + 1})).IsMonoidal :=
-      inferInstance
-    let : MonoidalClosed (Internal Λ X) := CategoryTheory.Mod.monoidalClosed
-    have : IsGrothendieckAbelian.{u + 1} (Internal Λ X) := inferInstance
-    have : Abelian.HasFunctorialFlatResolution (Internal Λ X) := inferInstance
-    have ht (P Q : CochainComplex (Internal Λ X) ℤ) :
-        HEq (totalComparison Λ X P Q)
-          (ordinaryComplexTensorIsoForSite (Scheme.ProEt.topology X)
-            (condensedRingObj Λ X) P Q) :=
-      totalComparison_heq Λ X P Q
-    let h := section_normalized.{u} (Scheme.ProEt.topology X) (condensedRingObj Λ X)
-      (ring Λ X) rfl (sectionForward Λ X)
-      (heq_of_eq (sectionForward_eq Λ X)) (totalComparison Λ X) ht
-    refine ClosedComparisonData.to_exists
-      (K := fun S T ↦ TensorComparison Λ X S T) ?_ h
-    intro S T c hc
-    exact ⟨uncurryComparison c, uncurryComparison_square hc⟩
-  · intro U
-    have : HasSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} :=
-      inferInstance
-    have : ((Scheme.ProEt.topology X).over U).WEqualsLocallyBijective
-        AddCommGrpCat.{u + 1} := inferInstance
-    have : (((Scheme.ProEt.topology X).over U).W (A := AddCommGrpCat.{u + 1})).IsMonoidal :=
-      inferInstance
-    have : IsGrothendieckAbelian.{u + 1} (SliceInternal Λ X U) := inferInstance
-    have hcomm := sliceRingComm Λ X U
-    let : BraidedCategory
-        (Sheaf ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1}) :=
-      (Sheaf.symmetricCategory ((Scheme.ProEt.topology X).over U)
-        AddCommGrpCat.{u + 1}).toBraidedCategory
-    have : IsCommMonObj (sliceRingObject Λ X U) := hcomm
-    let : SymmetricCategory
-        (Sheaf ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1}) :=
-      Sheaf.symmetricCategory ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1}
-    let : MonoidalClosed
-        (Sheaf ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1}) :=
-      GrothendieckTopology.monoidalClosed_sheaf_of_essentiallySmall
-        AddCommGrpCat.{u + 1} ((Scheme.ProEt.topology X).over U)
-    let : MonoidalClosed (SliceInternal Λ X U) := CategoryTheory.Mod.monoidalClosed
-    have : Abelian.HasFunctorialFlatResolution
-        (Sheaf ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1}) :=
-      GrothendieckTopology.hasFunctorialFlatResolution_sheaf_of_essentiallySmall
-        AddCommGrpCat.{u + 1} ((Scheme.ProEt.topology X).over U)
-    have : Abelian.HasFunctorialFlatResolution (SliceInternal Λ X U) :=
-      CategoryTheory.Mod.hasFunctorialFlatResolution
-    have he : HEq (sliceEquivalence Λ X U).functor
-        (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
-          (sliceRingObject Λ X U)).functor := by
-      exact sliceEquivalence_functor_heq Λ X U
-    have ht (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
-        HEq (sliceTotalComparison Λ X U P Q)
-          (ordinaryComplexTensorIsoForSite ((Scheme.ProEt.topology X).over U)
-            (sliceRingObject Λ X U) P Q) := by
-      exact sliceTotalComparison_heq Λ X U P Q
-    let h := section_normalized.{u} ((Scheme.ProEt.topology X).over U) (sliceRingObject Λ X U)
-      ((ring Λ X).over U) (sliceSectionRing_eq Λ X U)
-      (sliceEquivalence Λ X U).functor he (sliceTotalComparison Λ X U) ht
-    refine ClosedComparisonData.to_exists
-      (K := fun S T ↦ SliceTensorComparison Λ X U S T) ?_ h
-    intro S T c hc
-    exact ⟨c, hc⟩
 end AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison

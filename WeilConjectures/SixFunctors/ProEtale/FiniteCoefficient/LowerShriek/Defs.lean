@@ -70,52 +70,9 @@ namespace Compactification
 
 variable {f : X ⟶ Y} (c : Compactification f)
 
-/-- The lower shriek associated with a compactification `X ⟶[i] Z ⟶[g] Y` of `f`: the
-extension by zero `i_!` followed by the pushforward `g_*`. -/
-noncomputable def lowerShriek :
-    Sheaf (Scheme.ProEt.topology X) A ⥤ Sheaf (Scheme.ProEt.topology Y) A :=
-  (c.i)_!open[A] ⋙ (c.g)_*[A]
-
 end Compactification
 
 variable (f : X ⟶ Y) [HasCompactification f]
-
-/-- The lower shriek `f_!` along a morphism `f : X ⟶ Y` admitting a compactification, on
-sheaves for the small pro-étale sites: the composition `i_! ⋙ g_*` associated with the
-chosen compactification `HasCompactification.compactification f`. -/
-noncomputable def lowerShriek :
-    Sheaf (Scheme.ProEt.topology X) A ⥤ Sheaf (Scheme.ProEt.topology Y) A :=
-  Compactification.lowerShriek A (HasCompactification.compactification f)
-
-/-- The lower shriek `f_!` on pro-étale sheaves is the extension by zero along the open
-immersion of the chosen compactification followed by the pushforward `ProEtale.lowerStar`
-along its proper structure morphism. -/
-lemma lowerShriek_eq :
-    lowerShriek A f =
-      ((HasCompactification.compactification f).i)_!open[A] ⋙
-        ((HasCompactification.compactification f).g)_*[A] :=
-  rfl
-
-/-- The lower shriek `f_!` on pro-étale sheaves with values in a preadditive category is
-additive, being the composition of the extension by zero along the open immersion of the
-chosen compactification with the pushforward along its proper structure morphism. -/
-instance lowerShriek_additive : (lowerShriek A f).Additive := by
-  rw [lowerShriek_eq]
-  infer_instance
-
-/-- The lower shriek `f_!` on pro-étale sheaves with values in an abelian category is left
-exact, being the composition of the exact extension by zero along the open immersion of
-the chosen compactification with the left exact pushforward along its proper structure
-morphism.
-
-The extension by zero is sheafification composed with a left Kan extension, so left
-exactness of sheafification is needed here; see
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek`. This is why
-`HasSheafify` appears in addition to the `HasWeakSheafify` that defines `f_!`. -/
-instance preservesFiniteLimits_lowerShriek :
-    PreservesFiniteLimits (lowerShriek A f) := by
-  rw [lowerShriek_eq]
-  exact comp_preservesFiniteLimits _ _
 
 end ProEtale
 

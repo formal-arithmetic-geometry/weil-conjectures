@@ -34,26 +34,5 @@ variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
     (ha : (Functor.const Cᵒᵖ).map (RingCat.ofHom r) ≫ β = α ≫ a.hom)
 
-private theorem forgetIso_quotient (F : Sheaf J (ModuleCat.{u + 1} B')) :
-    (forgetIso J B' S b' U β).hom.app F =
-      (forgetIso J B R b T α).hom.app
-        ((sheafCompose J
-          (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)).obj F) := by
-  unfold forgetIso
-  rfl
-
-theorem coefficientScalarIso_normalized :
-    normalized
-      (coefficientScalarIso (J := J) (q := q) (b := b) (b' := b')
-        (r := r) (h := h) (a := a) (α := α) (β := β) (ha := ha))
-      (restrictForgetIso a) (forgetIso J B' S b' U β) (forgetIso J B R b T α)
-      (fixedRestrictForgetIso J q) := by
-  apply normalized_of_app
-  intro F
-  erw [coefficientScalarIso_forget]
-  simp only [restrictForgetIso, fixedRestrictForgetIso, Iso.refl_hom,
-    NatTrans.id_app, Category.id_comp]
-  exact forgetIso_quotient J q b b' α β F
-
 end CoefficientSquare
 end AlgebraicGeometry.Scheme.CoefficientSheafificationSquare

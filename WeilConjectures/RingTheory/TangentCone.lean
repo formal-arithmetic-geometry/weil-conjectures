@@ -61,22 +61,6 @@ def TangentConesMeetAtOrigin (I J : Ideal R) : Prop :=
 
 variable {R}
 
-theorem TangentConesMeetAtOrigin.mono {I J I' J' : Ideal R} (h : TangentConesMeetAtOrigin R I J)
-    (hI : I ≤ I') (hJ : J ≤ J') : TangentConesMeetAtOrigin R I' J' := by
-  obtain ⟨n, hn⟩ := h
-  refine ⟨n, fun N hN => (hn N hN).trans ?_⟩
-  gcongr
-
-theorem TangentConesMeetAtOrigin.symm {I J : Ideal R} (h : TangentConesMeetAtOrigin R I J) :
-    TangentConesMeetAtOrigin R J I := by
-  obtain ⟨n, hn⟩ := h
-  refine ⟨n, fun N hN => (hn N hN).trans_eq ?_⟩
-  rw [sup_comm (I ⊓ _)]
-
-theorem tangentConesMeetAtOrigin_comm {I J : Ideal R} :
-    TangentConesMeetAtOrigin R I J ↔ TangentConesMeetAtOrigin R J I :=
-  ⟨.symm, .symm⟩
-
 /-- Multiplying an element of `I ∩ 𝔪^M + J ∩ 𝔪^M + 𝔪^(M+1)` by an element of `𝔪^k` gives an
 element of `I ∩ 𝔪^(k+M) + J ∩ 𝔪^(k+M) + 𝔪^(k+M+1)`. -/
 theorem mul_mem_inf_sup_inf_sup_pow {I J : Ideal R} {k M N : ℕ} {x y : R}

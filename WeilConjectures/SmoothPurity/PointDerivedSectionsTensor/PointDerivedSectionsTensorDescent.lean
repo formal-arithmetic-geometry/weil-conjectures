@@ -93,68 +93,6 @@ variable {l : ℕ} [Fact l.Prime]
 
 attribute [local irreducible] completedScalarChangeData
   completedIntegralCoefficientSheafUnrestricted
-private theorem exact_derived_comparison
-    {C₁ : Type*} [Category C₁] [Abelian C₁] [HasDerivedCategory C₁]
-    {C₂ : Type*} [Category C₂] [Abelian C₂] [HasDerivedCategory C₂]
-    (F : C₁ ⥤ C₂) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (LF : DerivedCategory C₁ ⥤ DerivedCategory C₂)
-    (ε : DerivedCategory.Qh (C := C₁) ⋙ LF ⟶
-      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh (C := C₂))
-    [LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C₁ (.up ℤ))] :
-    ∃ c : F.mapDerivedCategory ≅ LF, ∀ X : CochainComplex C₁ ℤ,
-      c.inv.app ((DerivedCategory.Q (C := C₁)).obj X) ≫ F.mapDerivedCategoryFactors.hom.app X =
-        ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj X) := by
-  let : F.mapDerivedCategory.IsLeftDerivedFunctor F.mapDerivedCategoryFactorsh.hom
-      (HomotopyCategory.quasiIso C₁ (.up ℤ)) :=
-    Functor.isLeftDerivedFunctor_of_inverts _ _ F.mapDerivedCategoryFactorsh
-  let c := Functor.leftDerivedUnique LF F.mapDerivedCategory
-    F.mapDerivedCategoryFactorsh.hom ε (HomotopyCategory.quasiIso C₁ (.up ℤ))
-  refine ⟨c, ?_⟩
-  intro X
-  have hh := Functor.leftDerivedNatTrans_app LF F.mapDerivedCategory ε
-    F.mapDerivedCategoryFactorsh.hom (HomotopyCategory.quasiIso C₁ (.up ℤ))
-    (𝟙 _) ((HomotopyCategory.quotient _ (.up ℤ)).obj X)
-  have hφ : F.mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj X) =
-        F.mapDerivedCategoryFactors.hom.app X := by
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    change F.mapDerivedCategory.map (𝟙 _) ≫ _ ≫ 𝟙 _ ≫ (DerivedCategory.Qh (C := C₂)).map (𝟙 _) = _
-    erw [F.mapDerivedCategory.map_id, (DerivedCategory.Qh (C := C₂)).map_id]
-    simp only [Category.id_comp, Category.comp_id]
-  change c.inv.app ((DerivedCategory.Q (C := C₁)).obj X) ≫
-    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj X) =
-      ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj X) ≫ 𝟙 _ at hh
-  simpa only [hφ, Category.comp_id] using hh
-
-private theorem scalar_exact_comparison (Y : Scheme.{t})
-    [PreservesFiniteLimits (completedOrdinaryScalarExtension l E L ι Y)]
-    [PreservesFiniteColimits (completedOrdinaryScalarExtension l E L ι Y)] :
-    ∃ c : (completedOrdinaryScalarExtension l E L ι Y).mapDerivedCategory ≅
-      completedDerivedScalarExtension l E L ι Y,
-      ∀ X : CochainComplex (integralTowerModules l E Y) ℤ,
-        c.inv.app (DerivedCategory.Q.obj X) ≫
-            (completedOrdinaryScalarExtension l E L ι Y).mapDerivedCategoryFactors.hom.app X =
-          completedScalarCounit l E L ι Y X := by
-  let T := (completedScalarChangeData l E L ι Y).choose
-  have : T.Additive :=
-    (completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose_spec.choose
-  have : PreservesFiniteLimits T :=
-    inferInstanceAs (PreservesFiniteLimits (completedOrdinaryScalarExtension l E L ι Y))
-  have : PreservesFiniteColimits T :=
-    inferInstanceAs (PreservesFiniteColimits (completedOrdinaryScalarExtension l E L ι Y))
-  let LF := (completedScalarChangeData l E L ι Y)
-    |>.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
-  let ε := (completedScalarChangeData l E L ι Y)
-    |>.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose_spec.choose
-  have hLF := (completedScalarChangeData l E L ι Y)
-    |>.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose_spec.choose_spec.1
-  have hk := exact_derived_comparison T LF ε
-  run_tac do
-    Lean.Elab.Tactic.withMainContext do
-      let some hd := (← Lean.getLCtx).findFromUserName? `hk
-        | throwError "missing universal comparison proof"
-      (← Lean.Elab.Tactic.getMainGoal).assign (Lean.mkFVar hd.fvarId)
-    Lean.Elab.Tactic.replaceMainGoal []
 
 end ScalarComparison
 
@@ -164,22 +102,6 @@ variable {k : Type t} [Field k] {l : ℕ} [Fact l.Prime]
   {E L : Type u} [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   {ι : E →ₐ[ℚ_[l]] L} (d : PointFiniteFreeSectionsTensorData k l E L ι)
-
-/-- Sections with their constant-value integral action, at the source coefficient field.
-Source: Stacks 03CW (blueprint: lem-weil-point-derived-sections-tensor-descent). -/
-abbrev sectionsE := pointFiniteFreeEvaluation k l E d.coefficientE
-
-/-- Sections with their constant-value integral action, at the target coefficient field.
-Source: Stacks 03CW (blueprint: lem-weil-point-derived-sections-tensor-descent). -/
-abbrev sectionsL := pointFiniteFreeEvaluation k l L d.coefficientL
-
-/-- The source ordinary composite A(C) = Gamma(C) tensor O_L, before localization.
-Source: Stacks 06YY (blueprint: lem-weil-point-derived-sections-tensor-descent). -/
-abbrev A := sectionsE d ⋙ pointFiniteFreeModuleTensor.{t, u} l E L ι
-
-/-- The target ordinary composite B(C) = Gamma(C tensor R_L), before localization.
-Source: Stacks 06YY (blueprint: lem-weil-point-derived-sections-tensor-descent). -/
-abbrev B := completedOrdinaryScalarExtension l E L ι (Spec (.of k)) ⋙ sectionsL d
 
 end PointDerivedSectionsTensor
 

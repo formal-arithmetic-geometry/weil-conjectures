@@ -15,7 +15,6 @@ Migrated from `Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives
 on the branch `jriou_localization` of Joël Riou's mathlib fork
 (leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
-
 -/
 
 @[expose] public section
@@ -51,21 +50,6 @@ variable {Φ₁ Φ₂ Φ₃ Φ₄ F} (h : Derives₄ Φ₁ Φ₂ Φ₃ Φ₄ F)
   [Φ₃.IsLeftDerivabilityStructure] [Φ₄.IsLeftDerivabilityStructure]
   [W₁.ContainsIdentities] [W₂.ContainsIdentities]
   [W₃.ContainsIdentities] [W₄.ContainsIdentities]
-
-include h in
-lemma hasLeftDerivedFunctor₄ : F.HasLeftDerivedFunctor₄ W₁ W₂ W₃ W₄ :=
-  Derives.hasLeftDerivedFunctor h
-
-include h in
-lemma isIso_of_isLeftDerivabilityStructure
-    {L₁ : C₁ ⥤ D₁} {L₂ : C₂ ⥤ D₂} {L₃ : C₃ ⥤ D₃} {L₄ : C₄ ⥤ D₄} [L₁.IsLocalization W₁]
-    [L₂.IsLocalization W₂] [L₃.IsLocalization W₃] [L₄.IsLocalization W₄]
-    {LF : D₁ ⥤ D₂ ⥤ D₃ ⥤ D₄ ⥤ H}
-    (α : (((((whiskeringLeft₄ H).obj L₁).obj L₂).obj L₃).obj L₄).obj LF ⟶ F)
-    (X₁ : C₁₀) (X₂ : C₂₀) (X₃ : C₃₀) (X₄ : C₄₀) [LF.IsLeftDerivedFunctor₄ α W₁ W₂ W₃ W₄] :
-    IsIso ((((α.app (Φ₁.functor.obj X₁)).app (Φ₂.functor.obj X₂)).app
-      (Φ₃.functor.obj X₃)).app (Φ₄.functor.obj X₄)) :=
-  h.isIso_of_isLeftDerivedFunctor (Functor.whiskeringLeft₄Equiv α) ⟨X₁, X₂, X₃, X₄⟩
 
 end Derives₄
 

@@ -38,20 +38,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Integral component of higher pullback/tensor composition coherence.
-Source: Stacks 07A4 and 0941; quotient-tower composition calculation.
-(blueprint: lem-pur-pullback-tensor-composition-coherence). -/
-theorem pullbackTensorIntegralCompositionCoherence {X Y Z : Scheme.{u}}
-    (f : X ⟶ Y) (h : Z ⟶ X)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
-    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)] :
-    ∀ M N : sfIntegralConstructibleCategory l E Y,
-      canonicalIntegralPullbackTensor_composition l E f h M N := by
-  intro M N
-  change _ = _
-  have hfaithful := (integralSystemReduction_fullyFaithful l E Z).2
-  apply hfaithful.map_injective
-  exact integralPullbackTensorCompositionReduced l E f h M N
-
 end WeilConjectures

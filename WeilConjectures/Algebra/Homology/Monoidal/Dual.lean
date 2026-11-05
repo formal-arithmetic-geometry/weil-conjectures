@@ -111,8 +111,6 @@ noncomputable def rightDual : CochainComplex C ℤ where
     rw [Linear.units_smul_comp, Linear.comp_units_smul, ← comp_rightAdjointMate, K.d_comp_d,
       rightAdjointMate_zero, smul_zero, smul_zero]
 
-lemma rightDual_X (n : ℤ) : K.rightDual.X n = (K.X (-n))ᘁ := rfl
-
 lemma rightDual_d (i j : ℤ) : K.rightDual.d i j = j.negOnePow • (K.d (-j) (-i))ᘁ := rfl
 
 namespace rightDual
@@ -185,7 +183,6 @@ noncomputable def eval : K.rightDual ⊗ K ⟶ 𝟙_ (CochainComplex C ℤ) :=
       rw [Preadditive.add_comp, assoc, Linear.units_smul_comp, assoc]
       erw [HomologicalComplex.ι_mapBifunctorDesc, HomologicalComplex.ι_mapBifunctorDesc]
       exact evalPQ_comm K q p (by omega))
-
 
 /-- The differential of `K ⊗ K^∨` applied to `coevPQ`, first part. -/
 noncomputable def coevD₁ (p q p₁ : ℤ) (h : p + q = 0) (hp : p + 1 = p₁) :
@@ -263,14 +260,12 @@ lemma coevZero_comp_d : coevZero K a b ≫ (K ⊗ K.rightDual).d 0 1 = 0 := by
     by_contra hp'
     exact hp (hf p hp')
 
-
 /-- The coevaluation `𝟙_ ⟶ K ⊗ K^∨` of the termwise dual of a bounded complex. -/
 noncomputable def coev : 𝟙_ (CochainComplex C ℤ) ⟶ K ⊗ K.rightDual :=
   HomologicalComplex.mkHomFromSingle (coevZero K a b) (by
     rintro k hk
     obtain rfl : k = 1 := by simpa using hk.symm
     exact coevZero_comp_d K a b)
-
 
 lemma eval_f_eq_zero (k : ℤ) (hk : k ≠ 0) : (eval K).f k = 0 :=
   (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (𝟙_ C) k hk).eq_of_tgt _ _
@@ -280,7 +275,6 @@ lemma ι_eval_f (q p : ℤ) (h : q + p = 0) :
       evalPQ K q p h ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv := by
   rw [eval, HomologicalComplex.mkHomToSingle_f]
   erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
-
 
 end rightDual
 

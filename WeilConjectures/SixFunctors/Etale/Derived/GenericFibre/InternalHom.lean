@@ -80,24 +80,6 @@ noncomputable def derivedHomUpperStarComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
   letI := leftDerivedUpperStarMonoidal A g
   (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).natTrans.app M
 
-/-- Blueprint `lem-weil-geometric-generic-exchange`: the internal-hom comparison preserves
-evaluation. The square
-```
-  Lg^*K ⊗ᴸ Lg^* RHom(K, M) ──1 ⊗ ρ──▶ Lg^*K ⊗ᴸ RHom(Lg^*K, Lg^*M)
-            │ μ                                   │ ev
-            ▼                                     ▼
-  Lg^*(K ⊗ᴸ RHom(K, M)) ───────Lg^* ev──────▶ Lg^* M
-```
-commutes, `μ` being the tensor comparison of the monoidal functor `Lg^*`. -/
-lemma derivedHomUpperStarComparison_ev {X Y : Scheme.{u}} (g : Y ⟶ X)
-    (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarMonoidal A g
-    (L((g)^*[A])).obj K ◁ derivedHomUpperStarComparison A g K M ≫
-        (ihom.ev ((L((g)^*[A])).obj K)).app ((L((g)^*[A])).obj M) =
-      Functor.LaxMonoidal.μ (L((g)^*[A])) K _ ≫ (L((g)^*[A])).map ((ihom.ev K).app M) :=
-  letI := leftDerivedUpperStarMonoidal A g
-  Functor.LaxMonoidal.ihomComparison_ev _ K M
-
 /-- The internal-hom comparison is natural in the second variable. -/
 @[reassoc]
 lemma derivedHomUpperStarComparison_naturality {X Y : Scheme.{u}} (g : Y ⟶ X)

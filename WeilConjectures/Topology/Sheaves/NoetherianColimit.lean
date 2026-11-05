@@ -216,21 +216,6 @@ theorem exists_app_eq_of_isColimit (hc : IsColimit c) {U : Opens X}
   rw [← hz i, ← hy i]
   exact (NatTrans.naturality_apply (c.ι.app j').hom (f i).op y).symm
 
-/-- **Sections over an open of a noetherian space commute with filtered colimits**: the image of
-a colimit cocone of a filtered diagram of abelian sheaves under the sections functor over `U` is
-a colimit cocone. -/
-noncomputable def isColimitSheafSectionsMapCocone (hc : IsColimit c) (U : Opens X) :
-    IsColimit (((sheafSections (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
-      (op U)).mapCocone c) := by
-  have : ReflectsColimit
-      (D ⋙ (sheafSections (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (op U))
-      (CategoryTheory.forget AddCommGrpCat.{u}) := reflectsColimit_of_reflectsIsomorphisms _ _
-  refine isColimitOfReflects (CategoryTheory.forget AddCommGrpCat.{u}) ?_
-  refine Types.FilteredColimit.isColimitOf' _ _ (fun s ↦ ?_) (fun k t t' h ↦ ?_)
-  · obtain ⟨k, t, ht⟩ := exists_app_eq_of_isColimit hc s
-    exact ⟨k, t, ht.symm⟩
-  · exact exists_map_eq_of_isColimit hc t t' h
-
 /-- A filtered colimit of flasque sheaves on a noetherian space is flasque. -/
 theorem isFlasque_of_isColimit (hc : IsColimit c) (hD : ∀ j, Presheaf.IsFlasque (D.obj j).obj) :
     Presheaf.IsFlasque c.pt.obj where
@@ -378,33 +363,6 @@ theorem hColimitProp (n : ℕ) (D : J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X) : HC
       (ShortComplex.mk (toGodementDiagram D) (cokernel.π _) (cokernel.condition _))
       (ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance)
       fun j ↦ (inferInstance : Presheaf.IsFlasque (godementFunctor.obj (D.obj j)).obj)
-
-/-- Blueprint `lem-sc-zariski-filtered-cohomology`: Filtered colimits on a Noetherian Zariski
-site.
-
-On a noetherian topological space `X` (for instance the underlying space of a noetherian
-scheme), sheaf cohomology commutes with filtered colimits of abelian sheaves:
-`colimᵢ Hⁿ(X, Fᵢ) ≅ Hⁿ(X, colimᵢ Fᵢ)` for every `n`. -/
-theorem preservesColimitsOfShape_functorH (J : Type u) [SmallCategory J] [IsFiltered J]
-    (n : ℕ) :
-    PreservesColimitsOfShape J (Sheaf.functorH.{u} (Opens.grothendieckTopology X) n) := by
-  constructor
-  intro D
-  refine preservesColimit_of_preserves_colimit_cocone (colimit.isColimit D) ?_
-  have : ReflectsColimit (D ⋙ Sheaf.functorH.{u} (Opens.grothendieckTopology X) n)
-      (CategoryTheory.forget AddCommGrpCat.{u}) := reflectsColimit_of_reflectsIsomorphisms _ _
-  refine isColimitOfReflects (CategoryTheory.forget AddCommGrpCat.{u}) ?_
-  refine Types.FilteredColimit.isColimitOf' _ _ (fun x ↦ ?_) (fun j y y' h ↦ ?_)
-  · obtain ⟨j, y, hy⟩ := (hColimitProp n D).1 x
-    exact ⟨j, y, hy.symm⟩
-  · let y₁ : CategoryTheory.Sheaf.H (D.obj j) n := y
-    let y₂ : CategoryTheory.Sheaf.H (D.obj j) n := y'
-    have h' : CategoryTheory.Sheaf.H.map (colimit.ι D j) n y₁ =
-        CategoryTheory.Sheaf.H.map (colimit.ι D j) n y₂ := h
-    obtain ⟨j', a, ha⟩ := (hColimitProp n D).2 j (y₁ - y₂) (by rw [map_sub, h', sub_self])
-    refine ⟨j', a, ?_⟩
-    change CategoryTheory.Sheaf.H.map (D.map a) n y₁ = CategoryTheory.Sheaf.H.map (D.map a) n y₂
-    rwa [map_sub, sub_eq_zero] at ha
 
 end Cohomology
 

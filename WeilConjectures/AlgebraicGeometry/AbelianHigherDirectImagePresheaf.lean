@@ -38,7 +38,6 @@ WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPreshe
 The local lifting argument is Stacks 072W/03Q8; it avoids restricting injectives to
 individual etale schemes by working directly with derived Hom and local cycles. -/
 
-
 namespace AbelianComparison
 
 section LocalComparison
@@ -93,7 +92,6 @@ noncomputable def freeSheafSections
           (uliftYoneda.{u + 1}.obj W.unop ⋙ AddCommGrpCat.free)).app W').hom x)) h₀).trans
         ((congr_arg (f.hom.app W').hom h₂).trans h₃))
 
-
 /-- The free sheaf `ℤ[W]` corepresents sections over `W`. -/
 private noncomputable def freeSheafHomEquiv (W : C)
     (G : Sheaf J (AddCommGrpCat.{u + 1})) :
@@ -123,8 +121,6 @@ private lemma freeSheafHomEquiv_map {W W' : C} (v : W' ⟶ W)
       G.obj.map v.op (freeSheafHomEquiv W G f) := by
   simp only [freeSheafHomEquiv_apply]
   exact congrArg (fun k ↦ k f) ((freeSheafSections G).naturality v.op)
-
-
 
 variable [HasDerivedCategory.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})]
 
@@ -184,7 +180,6 @@ private lemma freeSheafSections_naturality
   rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply,
     ← freeSheafHomEquiv_apply, ← freeSheafHomEquiv_apply]
   exact (freeSheafHomEquiv_comp W.unop f g).symm
-
 
 section Key
 
@@ -451,7 +446,6 @@ private theorem isLocallyBijective_derivedHomToHomology
   rw [hfac]
   constructor <;> infer_instance
 
-
 noncomputable def sheafifyIsoOfLocallyBijective
     {P : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1}} {G : Sheaf J AddCommGrpCat.{u + 1}}
     (φ : P ⟶ G.obj) [Presheaf.IsLocallyInjective J φ] [Presheaf.IsLocallySurjective J φ] :
@@ -474,26 +468,6 @@ noncomputable def sheafifyIsoOfLocallyBijective
         infer_instance
       exact Presheaf.isLocallySurjective_of_isLocallySurjective J (toSheafify J P) ψ.hom
   exact asIso ψ
-
-omit [HasSheafify J AddCommGrpCat.{u + 1}]
-  [HasDerivedCategory.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})]
-  [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})] in
-lemma toSheafify_comp_sheafifyIsoOfLocallyBijective_hom
-    {P : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1}} {G : Sheaf J AddCommGrpCat.{u + 1}}
-    (φ : P ⟶ G.obj) [Presheaf.IsLocallyInjective J φ] [Presheaf.IsLocallySurjective J φ] :
-    toSheafify J P ≫ (sheafifyIsoOfLocallyBijective φ).hom.hom = φ := by
-  have he := ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).homEquiv
-    _ _).apply_symm_apply φ
-  rw [Adjunction.homEquiv_unit] at he
-  exact he
-
-private theorem nonempty_sheafifyDerivedHomIso
-    (L : DerivedCategory.Plus (Sheaf J AddCommGrpCat.{u + 1})) :
-    Nonempty ((presheafToSheaf J AddCommGrpCat.{u + 1}).obj
-      ((freeSheaf J ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj L) ≅
-        (DerivedCategory.Plus.homologyFunctor _ 0).obj L) := by
-  obtain ⟨_, _⟩ := isLocallyBijective_derivedHomToHomology L
-  exact ⟨sheafifyIsoOfLocallyBijective (derivedHomToHomology L ≫ freeSheafSections _)⟩
 
 end LocalComparison
 
@@ -538,7 +512,6 @@ noncomputable def homologyShiftIso
     ((DerivedCategory.Plus.homologyFunctor E 0).shiftIso q 0 q (add_zero q)).app _
 
 end AbelianComparison
-
 
 /-- The restricted cohomology presheaf `U ↦ Hom(h^* ℤ[U][0], K[q]) = H^q(U ×_X Y, K)` on `X_ét`,
 for `h : Y ⟶ X` and `K ∈ D⁺(Y_ét)`, where `ℤ[U]` is the sheafification of the free presheaf of
@@ -626,19 +599,6 @@ noncomputable def higherDirectImageIsoSheafificationAbelian {X Y : Scheme.{u}} (
   have := (isLocallyBijective_higherDirectImagePresheafToHomologyAbelian h q K).2
   AbelianComparison.sheafifyIsoOfLocallyBijective
     (higherDirectImagePresheafToHomologyAbelian h q K)
-
-/-- The isomorphism `higherDirectImageIsoSheafificationAbelian` is compatible with the
-sheafification unit: composed with `toSheafify`, it is the canonical map
-`higherDirectImagePresheafToHomologyAbelian`. -/
-theorem toSheafify_comp_higherDirectImageIsoSheafificationAbelian_hom {X Y : Scheme.{u}}
-    (h : Y ⟶ X) (q : ℤ)
-    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
-    toSheafify X.smallEtaleTopology (higherDirectImageRawPresheafAbelian h q K) ≫
-        (higherDirectImageIsoSheafificationAbelian h q K).hom.hom =
-      higherDirectImagePresheafToHomologyAbelian h q K := by
-  have := (isLocallyBijective_higherDirectImagePresheafToHomologyAbelian h q K).1
-  have := (isLocallyBijective_higherDirectImagePresheafToHomologyAbelian h q K).2
-  exact AbelianComparison.toSheafify_comp_sheafifyIsoOfLocallyBijective_hom _
 
 /-- The sheafified restricted cohomology presheaf is isomorphic to `Rᵠh_* K`; the canonical
 isomorphism is `higherDirectImageIsoSheafificationAbelian`.

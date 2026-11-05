@@ -43,31 +43,6 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `lem-pur-etale-iso-descent`: Isomorphisms descend along étale surjections.
-
-Let `u : U ⟶ X` be a surjective étale morphism and `φ : M ⟶ N` a morphism of `D(X_ét, Λ)`. If
-`Lu^* φ` is an isomorphism, then so is `φ`. It suffices that the cohomology sheaves `ℋʳ(φ)` are
-isomorphisms; as `u^*` is exact, `u^* ℋʳ(φ) ≅ ℋʳ(Lu^* φ)` is an isomorphism, and since `u` is
-surjective every geometric point of `X` lifts to `U`, where the stalks of `u^* ℋʳ(φ)` are those
-of `ℋʳ(φ)` (`AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective`).
-
-The blueprint states this for bounded constructible complexes on separated schemes of finite
-type over a field; neither hypothesis is needed. -/
-theorem isIso_of_isIso_leftDerivedUpperStar_map_of_surjective {U X : Scheme.{u}} (u : U ⟶ X)
-    [Etale u] [Surjective u]
-    {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (φ : M ⟶ N) (h : IsIso ((L((u)^*[ModuleCat.{u + 1} Λ])).map φ)) : IsIso φ := by
-  have h' : IsIso (D((u)^*[ModuleCat.{u + 1} Λ]).map φ) :=
-    (NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory _ u) φ).1 h
-  rw [_root_.DerivedCategory.isIso_iff]
-  intro n
-  refine Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ)
-    (fun _ : PUnit.{u + 1} ↦ u) (fun x ↦ ⟨⟨⟩, u.surjective x⟩) _ fun _ ↦ ?_
-  exact (NatIso.isIso_map_iff
-    (((u)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso n) φ).2
-    (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
-      (D((u)^*[ModuleCat.{u + 1} Λ]).map φ))
-
 end Etale
 
 end AlgebraicGeometry

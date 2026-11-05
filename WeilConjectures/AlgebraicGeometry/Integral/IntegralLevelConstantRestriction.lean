@@ -36,39 +36,4 @@ attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyB
 
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The completed realization of a module over `A/I^{n+1}` is its constant sheaf, restricted
-to the completed coefficients through the `n`-th projection.
-
-Proof: the completed realization is scalar extension of the constant sheaf along the
-constant-to-completed map, and the comparison with the restricted constant sheaf of the
-quotient module is invertible by the quotient assertion of
-`completed_constant_algebra_flat_quotients`, extended from the regular module by right
-exactness and compatibility with direct sums. -/
-theorem nonempty_integralConstantModule_restrictScalars_iso (n : ℕ)
-    (N : ModuleCat.{u + 1} (A ⧸ d.ideal ^ (n + 1))) :
-    Nonempty ((integralConstantModule T d).obj
-        ((ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).obj N) ≅
-      (pbcRestrict (pbcAdicProjection T d n)).obj
-        ((pbcRestrict (pbcLevelConstantComparison T d n).inv).obj
-          ((adicLisseConstantModules T (A ⧸ d.ideal ^ (n + 1))).obj N))) := by
-  have := d.noetherian
-  let e := pbcCompletedComparison T d
-  let π := limit.π (adicLisseRingSystem T d.ideal) (op n)
-  let c := CompletedConstantReduction.base T d.ideal ≫ e.hom
-  have hc (m : ℕ) : c ≫ e.inv ≫ limit.π (adicLisseRingSystem T d.ideal) (op m) =
-      (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
-        (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (m + 1)))) := by
-    simp only [c, Category.assoc, Iso.hom_inv_id_assoc]
-    exact (CompletedConstantReduction.base_exists T d.ideal).choose_spec.1 m
-  have hp : pbcAdicProjection T d n ≫ (pbcLevelConstantComparison T d n).inv = e.inv ≫ π := by
-    dsimp only [e, π, pbcAdicProjection, pbcCompletedComparison]
-    rw [HasLimit.isoOfNatIso_inv_π]
-    rfl
-  have := scalarResidueMap_isIso T d.ideal e c hc n N
-  exact ⟨(ordinaryConstantModel T d).app _ ≪≫
-    asIso ((scalarResidueMap T (Ideal.Quotient.mk (d.ideal ^ (n + 1))) c (e.inv ≫ π)
-      (hc n)).app N) ≪≫
-    ((pbcRestrictComp (pbcAdicProjection T d n) (pbcLevelConstantComparison T d n).inv
-      (e.inv ≫ π) hp).app _).symm⟩
-
 end AlgebraicGeometry.Scheme

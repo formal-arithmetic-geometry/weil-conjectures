@@ -107,17 +107,6 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V)
 
-/-- Blueprint `def-wf-geometric-monodromy-group`: Arithmetic monodromy and a central representative.
-
-The Weil representation `ρ` viewed as a homomorphism to the automorphism group of `V`: every
-`ρ g` is invertible because `g` is invertible, so `ρ` factors through `GL V = (V →ₗ V)ˣ`,
-which is multiplicatively equivalent to `V ≃ₗ V`. The arithmetic and geometric monodromy
-groups of `d-monodromy` are the Zariski closures of the images of `W (C₀)` and of `π₁ C`
-under this map. -/
-noncomputable def toLinearAut : W.carrier →* (V ≃ₗ[PadicAlgCl l] V) :=
-  (LinearMap.GeneralLinearGroup.generalLinearEquiv (PadicAlgCl l) V).toMonoidHom.comp
-    ρ.asGroupHom
-
 variable (ι : PadicAlgCl l →+* ℂ)
 
 variable {W l} in
@@ -548,34 +537,6 @@ theorem hasWeightsAtMost_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
   rw [one_div_pow] at hj
   linarith
 
-/-- Blueprint `lem-rp-upper-bound`: Upper bound via the largest determinant weight.
-
-Let `U₀` be a smooth geometrically connected affine curve, `ℱ` an `ι`-real lisse Weil sheaf on
-it and `d` an upper bound for the determinant weights of its constituents. Then every local
-eigenvalue `α` of `ℱ` at a closed point `x` satisfies `|ι α| ^ 2 ≤ q_x ^ d`.
-
-This is `AlgebraicGeometry.WeilGroup.hasWeightsAtMost_of_isReal` with the weight unfolded: the
-Rankin–Selberg bound for the iterated tensor squares
-(`AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_inv_two_pow_of_isReal`) gives
-`|ι α| ^ 2 ≤ q_x ^ (d + 2 ^ (-j))` for every `j`. -/
-theorem sq_norm_le_rpow_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] [Nontrivial V]
-    (hρ : W.IsLisse l ρ)
-    (hreal : W.IsReal l ρ ι) {d : ℝ}
-    (hd : ∀ {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
-      [FiniteDimensional (PadicAlgCl l) V'] (σ : Representation (PadicAlgCl l) W.carrier V')
-      (γ : ℝ), σ.IsConstituent ρ → W.HasDetWeight l σ ι γ → γ ≤ d)
-    (x : C.finitePoints) {α : PadicAlgCl l} (hα : α ∈ W.localEigenvalues l ρ x) :
-    ‖ι α‖ ^ 2 ≤ (C.pointNorm x.1 : ℝ) ^ d := by
-  have h := hasWeightsAtMost_of_isReal W l ρ ι hρ hreal hd x α hα
-  have hα0 : 0 < ‖ι α‖ := norm_pos_iff.2 <|
-    (map_ne_zero ι).2 fun h ↦ zero_notMem_localEigenvalues (ρ := ρ) x (h ▸ hα)
-  have hq : (1 : ℝ) < C.pointNorm x.1 := by exact_mod_cast C.one_lt_pointNorm x.2
-  rw [frobeniusWeight, div_le_iff₀ (Real.log_pos hq)] at h
-  rw [← Real.exp_log (pow_pos hα0 2), Real.rpow_def_of_pos (zero_lt_one.trans hq),
-    Real.log_pow]
-  exact Real.exp_le_exp.2 (by push_cast; linarith)
-
 end WeilGroup
 
 namespace BoundaryDatum
@@ -585,70 +546,6 @@ variable {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] {j : U ⟶ C}
   (D : BoundaryDatum j WU WC) (l : ℕ) [Fact l.Prime] {V : Type u}
   [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ι : PadicAlgCl l →+* ℂ)
-
-/-- Semi-continuity of weights, the first assertion of `sk-p-real-semi`, on the representation
-side and conditional on the Euler-product hypothesis `hD`; this is not a proof of that assertion.
-
-For a boundary datum `D` on a smooth geometrically connected curve `C₀`, if the lisse Weil sheaf
-`ℱ` on `U₀` has weights at most `w`, then `j_* ℱ` has weights at most `w` on `C₀`. Concretely:
-at a boundary point `s`, the residue Frobenius acts on the boundary stalk `V ^ (I_s)`, and every
-one of its eigenvalues `α`, witnessed by a nonzero invariant eigenvector `v`, has `ι`-weight at
-most `w` relative to the residue cardinality `q_s`.
-
-Shrinking to an affine neighbourhood, the counting bound `N_e ≤ A q ^ e` for closed points of
-degree `e` shows that `L_ι (U₀, ℱ, T)⁻¹` has radius at least `q ^ (-(w + 2) / 2)`, while the
-open–closed sequence identifies `H_c² (C, j_* ℱ)` with a coinvariant Tate twist whose
-eigenvalues are bounded by `q ^ ((w + 2) / 2)`. The trace formula then confines the zeros of
-the boundary factor, giving the preliminary bound `|ι α| ≤ q_s ^ ((w + 2) / 2)`; applying it
-to the tensor powers `ℱ ^ ⊗ n`, whose boundary stalks receive `(V ^ (I_s)) ^ ⊗ n`, improves it
-to `|ι α| ≤ q_s ^ (w / 2 + 1 / n)` for every `n`, and `n → ∞` finishes
-(`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius`).
-
-The curve `C₀` is smooth and geometrically connected and `ℓ ≠ char 𝔽_q`, as in the setting
-`d-real-setup` of the block, and `ℱ` is lisse. The trace formula used in the proof, in its
-Euler-product form for middle extensions (`lem-wf-euler-product-middle-extension`), is the
-hypothesis `hD`: it does not follow from the fields of a `BoundaryDatum` (see
-`AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`). The unconditional, sheaf-level
-form of this assertion is
-`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`. -/
-theorem frobeniusWeight_le_of_hasWeightsAtMost [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hD : D.HasMiddleExtensionEulerProduct l ι)
-    (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {w : ℝ}
-    (hw : WU.HasWeightsAtMost l ρ ι w) (s : ↥((Set.range j.base)ᶜ)) {α : PadicAlgCl l} {v : V}
-    (hv : v ∈ D.boundaryStalk l ρ s) (hv0 : v ≠ 0) (hα : ρ (D.residueFrobenius s) v = α • v) :
-    WeilGroup.frobeniusWeight ι (C.pointNorm s.1) α ≤ w := by
-  refine D.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius l ι hD ρ hρ hw s
-    (Module.End.hasEigenvalue_of_hasEigenvector (x := ⟨v, hv⟩) ⟨?_, ?_⟩)
-  · rw [Module.End.mem_eigenspace_iff]
-    ext
-    simp [boundaryFrobenius, hα]
-  · exact fun h ↦ hv0 (congrArg Subtype.val h)
-
-/-- Blueprint `sk-p-real-semi`: Semi-continuity of weights, the second assertion.
-
-The consequence of the weight bound for `j_* ℱ`: a lisse Weil sheaf `𝒢` on a smooth
-geometrically connected curve `C₀` whose restriction to the open `U₀` is punctually `ι`-pure of
-weight `w` is punctually `ι`-pure of weight `w` on all of `C₀`.
-
-At a closed point of `U₀` this is the hypothesis, the local Frobenius of `C₀` being conjugate to
-the image of that of `U₀`. At a boundary point `s` the middle extension of `𝒢|_{U₀}` is `𝒢`
-itself (`lem-a1-lisse-middle-extension`), so the semi-continuity argument runs with the Euler
-product of the lisse sheaf `𝒢` on an affine neighbourhood of `s` (`cor-rp-euler-product`); applied
-to `𝒢` and to its dual `𝒢 ^ ∨`, whose eigenvalues are the inverses of those of `𝒢`, it gives an
-upper bound `w` and a lower bound `w` (`cor-wf-unramified-boundary-purity`,
-`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_forall_mem_range`). -/
-theorem isPunctuallyPure_of_isPunctuallyPure_restrict [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
-    (ρ : Representation (PadicAlgCl l) WC.carrier V) {w : ℝ} (hρ : WC.IsLisse l ρ)
-    (hpure : WU.IsPunctuallyPure l (ρ.comp D.restrict) ι w) :
-    WC.IsPunctuallyPure l ρ ι w := by
-  refine WC.isPunctuallyPure_of_forall_mem_range l ρ ι j hρ fun x hx α hα ↦ ?_
-  obtain ⟨y, hy⟩ := hx
-  have hyfin : y ∈ U.finitePoints :=
-    (Scheme.Hom.mem_finitePoints_iff_of_isIso j y).1 (hy ▸ x.2)
-  have hxy : j.mapFinitePoints ⟨y, hyfin⟩ = x := Subtype.ext hy
-  rw [← hxy] at hα ⊢
-  exact D.toRestriction.frobeniusWeight_eq_of_isPunctuallyPure_comp l ρ ι hpure _ α hα
 
 end BoundaryDatum
 
@@ -962,20 +859,6 @@ theorem frobeniusWeight_eq_of_isPunctuallyPure_comp {ι : PadicAlgCl l →+* ℂ
   exact hpure x α hα
 
 end Transfer
-
-/-- **Local eigenvalues are compatible with restriction to an open.** For a restriction
-`W(U₀) → W(C₀)` of Weil groups along `j : U₀ ⟶ C₀`, the local Frobenius eigenvalues of
-`ρ ∘ restrict` at a closed point `x` of `U₀` are those of `ρ` at `j x`: the restriction carries
-the local Frobenius at `x` into the Frobenius conjugacy class at `j x`. This is the first step of
-reducing purity on `C₀` to purity on an affine open subcurve. -/
-theorem localEigenvalues_comp_restrict {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)}
-    [IsCurve pU] {j : U ⟶ C} [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU}
-    {WC : WeilGroup p} (R : Restriction j WU WC) {l : ℕ} [Fact l.Prime] {V : Type u}
-    [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
-    (ρ : Representation (PadicAlgCl l) WC.carrier V) (x : U.finitePoints) (y : C.finitePoints)
-    (hxy : j.base x.1 = y.1) :
-    WU.localEigenvalues l (ρ.comp R.restrict) x = WC.localEigenvalues l ρ y :=
-  localEigenvalues_comp_of_isConj R.restrict_frobenius ρ x y hxy
 
 /-- **Restriction of a Weil group to an affine open.** Every closed point `y` of a smooth
 geometrically connected curve `C₀` lies in a nonempty affine open `j : U₀ ⟶ C₀`, itself a smooth

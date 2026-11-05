@@ -86,29 +86,4 @@ variable {B' : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}}
   {s' : (g)_*[AddCommGrpCat.{u + 1}].obj B' ⟶ B'} {R' : InjectiveResolution B'}
   (ψ' : InjectiveResolution.Hom (R'.map (g)_*[AddCommGrpCat.{u + 1}]) R' s')
 
-/-- **Naturality of the Frobenius on `Ext`.** For `ι : B ⟶ B'` compatible with the structure
-morphisms, `ι_*` commutes with the Frobenius. -/
-theorem extFrobeniusOfResolution_comp_mk₀ (ι : B ⟶ B')
-    (hι : (g)_*[AddCommGrpCat.{u + 1}].map ι ≫ s' = s ≫ ι) {n : ℕ}
-    (x : Ext (constantIntSheaf X) B n) :
-    extFrobeniusOfResolution g ψ' n (x.comp (Ext.mk₀ ι) (add_zero n)) =
-      (extFrobeniusOfResolution g ψ n x).comp (Ext.mk₀ ι) (add_zero n) := by
-  obtain ⟨f, hf, rfl⟩ := R.extMk_surjective x (n + 1) rfl
-  let θ := InjectiveResolution.descHom ι R R'
-  have hε : (constantIntSheafToLowerStar g ≫ (g)_*[AddCommGrpCat.{u + 1}].map f) ≫
-      (R.map (g)_*[AddCommGrpCat.{u + 1}]).cocomplex.d n (n + 1) = 0 := by
-    rw [InjectiveResolution.map_cocomplex_d, Category.assoc, ← Functor.map_comp, hf,
-      Functor.map_zero, Limits.comp_zero]
-  rw [R.extMk_comp_mk₀ f (n + 1) rfl hf θ, extFrobeniusOfResolution_extMk,
-    extFrobeniusOfResolution_extMk, R.extMk_comp_mk₀ _ (n + 1) rfl _ θ]
-  have h₁ := (R.map (g)_*[AddCommGrpCat.{u + 1}]).extMk_comp_mk₀ _ (n + 1) rfl hε
-    ((InjectiveResolution.Hom.map (g)_*[AddCommGrpCat.{u + 1}] θ).comp ψ')
-  have h₂ := (R.map (g)_*[AddCommGrpCat.{u + 1}]).extMk_comp_mk₀ _ (n + 1) rfl hε
-    ((ψ.comp θ).ofEq hι.symm)
-  simp only [InjectiveResolution.Hom.comp_hom, InjectiveResolution.Hom.map_hom,
-    InjectiveResolution.Hom.ofEq_hom, HomologicalComplex.comp_f,
-    Functor.mapHomologicalComplex_map_f, Category.assoc] at h₁ h₂
-  simp only [resolutionFrobeniusCocycle_apply, Functor.map_comp, Category.assoc]
-  exact h₁.symm.trans h₂
-
 end AlgebraicGeometry.ProEtale

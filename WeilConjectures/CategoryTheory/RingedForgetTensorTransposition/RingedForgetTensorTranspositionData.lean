@@ -98,60 +98,6 @@ structure TensorCoherence (mB : MonoidalCategory B) (mA : MonoidalCategory A)
     F.map (βB.toBraidedCategory.braiding X Y).hom ≫ μ.hom.app (Y, X) =
       μ.hom.app (X, Y) ≫ (βA.toBraidedCategory.braiding (F.obj X) (F.obj Y)).hom
 
-/-- The actual double-dual arrow, defined by the fixed adjunction and symmetry.
-Source: Stacks 08J9, 0FPT and the blueprint transposition paragraph
-(blueprint: lem-sf-ringed-forget-tensor-transposition). -/
-def delta {H : Bᵒᵖ × B ⥤ B} (S : CoefficientClosedStructure H)
-    (β : @SymmetricCategory B _ S.monoidal) (W K : B) :
-    K ⟶ H.obj (op (H.obj (op K, W)), W) :=
-  S.transpose K (H.obj (op K, W)) W
-    ((β.toBraidedCategory.braiding K (H.obj (op K, W))).hom ≫ S.evaluation K W)
-
-/-- The normalized uncurrying, evaluation and double-dual equations for fixed comparisons.
-Source: Stacks 08J9 and the blueprint transposition paragraph
-(blueprint: lem-sf-ringed-forget-tensor-transposition). -/
-structure TranspositionLaws
-    (HB : Bᵒᵖ × B ⥤ B) (HA : Aᵒᵖ × A ⥤ A)
-    (SB : CoefficientClosedStructure HB) (SA : CoefficientClosedStructure HA)
-    (βB : @SymmetricCategory B _ SB.monoidal)
-    (βA : @SymmetricCategory A _ SA.monoidal) (F : B ⥤ A)
-    (χ : HB ⋙ F ≅ (F.op.prod F) ⋙ HA)
-    (μ : SB.tensor ⋙ F ≅ (F.prod F) ⋙ SA.tensor) : Prop where
-  /-- The uncurrying equality for every derived arrow. -/
-  uncurry (M K L : B) (f : M ⟶ HB.obj (op K, L)) :
-    (SA.transpose (F.obj M) (F.obj K) (F.obj L)).symm
-        (F.map f ≫ χ.hom.app (op K, L)) =
-      μ.inv.app (M, K) ≫ F.map ((SB.transpose M K L).symm f)
-  /-- The displayed evaluation square. -/
-  evaluation (K L : B) :
-    μ.hom.app (HB.obj (op K, L), K) ≫
-        SA.tensor.map
-          (X := (F.obj (HB.obj (op K, L)), F.obj K))
-          (Y := (HA.obj (op (F.obj K), F.obj L), F.obj K))
-          (χ.hom.app (op K, L), 𝟙 _) ≫
-        SA.evaluation (F.obj K) (F.obj L) = F.map (SB.evaluation K L)
-  /-- Naturality of the source double-dual arrow. -/
-  delta_source (W K K' : B) (f : K ⟶ K') :
-    delta SB βB W K ≫
-        HB.map (X := (op (HB.obj (op K, W)), W))
-          (Y := (op (HB.obj (op K', W)), W))
-          ((HB.map (X := (op K', W)) (Y := (op K, W)) (f.op, 𝟙 W)).op, 𝟙 W) =
-      f ≫ delta SB βB W K'
-  /-- Naturality on the target site, for every target derived object and arrow. -/
-  delta_target (W K K' : A) (f : K ⟶ K') :
-    delta SA βA W K ≫
-        HA.map (X := (op (HA.obj (op K, W)), W))
-          (Y := (op (HA.obj (op K', W)), W))
-          ((HA.map (X := (op K', W)) (Y := (op K, W)) (f.op, 𝟙 W)).op, 𝟙 W) =
-      f ≫ delta SA βA W K'
-  /-- The iterated comparison uses the inverse in the contravariant Hom variable. -/
-  delta_forget (W K : B) :
-    F.map (delta SB βB W K) ≫ χ.hom.app (op (HB.obj (op K, W)), W) ≫
-        HA.map (X := (op (F.obj (HB.obj (op K, W))), F.obj W))
-          (Y := (op (HA.obj (op (F.obj K), F.obj W)), F.obj W))
-          ((χ.inv.app (op K, W)).op, 𝟙 _) =
-      delta SA βA (F.obj W) (F.obj K)
-
 end Coherence
 
 section Sites
@@ -283,46 +229,6 @@ def RepresentativeModel
         DerivedCategory.Q.map (chain.hom.app (P, Q)) ≫
         (TA.iso.{s, d, vd, wa} J' R' SA ((U.mapHomologicalComplex (.up ℤ)).obj P)
           ((U.mapHomologicalComplex (.up ℤ)).obj Q) hUP hUQ).hom
-
-/-- The total-tensor comparison and its unique, coherent derived extension, for the fixed χ.
-Source: Stacks 06YU, 0G7D, 08J9 and blueprint transposition paragraph
-(blueprint: lem-sf-ringed-forget-tensor-transposition). -/
-structure Comparison where
-  /-- The sum of the specified underived comparisons, on actual total tensor complexes. -/
-  chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅
-    ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙
-      coefficientTotalTensor.{s, d, vd} J' R'
-  /-- Every summand is the specified underived tensor comparison. -/
-  summand (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
-      (p q n : ℤ) (hpq : p + q = n) :
-    U.map (tensorSummand.{c, v, r} J R P Q p q n hpq) ≫ (chain.hom.app (P, Q)).f n =
-      u.tensor.hom.app (P.X p, Q.X q) ≫
-        tensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)
-          ((U.mapHomologicalComplex (.up ℤ)).obj Q) p q n hpq
-  /-- The natural derived isomorphism μ, in the orientation of the node. -/
-  derived : SB.tensor ⋙ U.mapDerivedCategory ≅
-    (U.mapDerivedCategory.prod U.mapDerivedCategory) ⋙ SA.tensor
-  /-- The extension agrees with the total comparison on all flat-term K-flat models. -/
-  representative : RepresentativeModel.{c, v, r, d, vd, s, wb, wa}
-    J R J' R' U SB TB SA TA chain derived.hom
-  /-- μ preserves units, associators and the specified signed symmetry. -/
-  coherence : TensorCoherence SB.monoidal SA.monoidal βB βA U.mapDerivedCategory derived
-  /-- Its unit is the localization of the given underived unit comparison. -/
-  unit_normalization :
-    coherence.unit.hom ≫ cA.unitIso.hom =
-      U.mapDerivedCategory.map cB.unitIso.hom ≫
-        U.mapDerivedCategoryFactors.hom.app (ringedTensorUnitComplex.{c, v, r} J R) ≫
-        DerivedCategory.Q.map
-          ((HomologicalComplex.singleMapHomologicalComplex U (.up ℤ) 0).hom.app
-            (SheafOfModules.unit
-              ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))) ≫
-        DerivedCategory.Q.map
-          ((HomologicalComplex.single _ (.up ℤ) (0 : ℤ)).map (u.coherence.unit).hom)
-  /-- These are the specified, evaluation-normalized adjunction equations. -/
-  transposition : TranspositionLaws
-    (derivedInternalHomOfUniverses.{c, v, r, wb} J R)
-    (derivedInternalHomOfUniverses.{d, vd, s, wa} J' R')
-    SB SA βB βA U.mapDerivedCategory χ.derived derived
 
 end Sites
 end CategoryTheory.RingedForgetTensorTransposition

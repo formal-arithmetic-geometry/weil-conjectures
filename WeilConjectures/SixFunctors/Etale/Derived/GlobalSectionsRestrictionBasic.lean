@@ -110,15 +110,4 @@ lemma globalSectionsRestriction_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z �
         globalSectionsRestriction g (((f)^*[A]).mapDerivedCategory.obj K) := by
   simpa only [globalSectionsRestriction, Category.assoc] using derivedUnitLeray_comp f g K
 
-/-- Restriction along the identity is the identity, up to the isomorphism `(𝟙 X)^* ≅ 𝟭`. -/
-lemma globalSectionsRestriction_id (X : Scheme.{u})
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    globalSectionsRestriction (𝟙 X) K ≫
-        (rightDerivedGlobalSections A X).map
-          ((Functor.mapDerivedCategoryNatIso (upperStarId A X) ≪≫
-            Functor.mapDerivedCategoryIdIso (Sheaf X.smallEtaleTopology A)).hom.app K) =
-      𝟙 _ := by
-  rw [globalSectionsRestriction, Category.assoc]
-  exact derivedUnitLeray_id X K
-
 end AlgebraicGeometry.Etale

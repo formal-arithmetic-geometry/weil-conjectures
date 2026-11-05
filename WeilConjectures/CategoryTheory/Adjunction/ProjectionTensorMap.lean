@@ -63,11 +63,6 @@ of `L ⊣ R` tensored with `N`. -/
 noncomputable def projectionTensorMap (M N : D) : R.obj M ⊗ F.obj N ⟶ R.obj (M ⊗ N) :=
   adj.homEquiv _ _ (inv (π (R.obj M) N) ≫ adj.counit.app M ▷ N)
 
-lemma homEquiv_symm_projectionTensorMap (M N : D) :
-    (adj.homEquiv _ _).symm (adj.projectionTensorMap π M N) =
-      inv (π (R.obj M) N) ≫ adj.counit.app M ▷ N :=
-  Equiv.symm_apply_apply _ _
-
 /-- The transpose of the tensor map along `L ⊣ R`. -/
 @[reassoc]
 lemma map_projectionTensorMap_comp_counit (M N : D) :
@@ -197,7 +192,6 @@ theorem projectionTensorMap_assoc
     whiskerLeft_id, Functor.map_id, Category.id_comp, IsIso.hom_inv_id_assoc, comp_whiskerRight]
   erw [associator_naturality_left]
   rfl
-
 
 /-- The tensor map at `(M, N')` is an isomorphism if it is one at `(M, N)` for an isomorphic
 `N`, provided the projection map is natural in its second variable. -/
@@ -339,7 +333,6 @@ theorem projectionTensorMap_comp
   congr 1
   rw [Lg.map_comp, Category.assoc, hρ, Iso.hom_inv_id_app_assoc]
 
-
 /-- A composition isomorphism `e : Lh ≅ Lf ⋙ Lg` of left adjoints is compatible with the
 projection maps through comparisons `γ N : Fh N ⟶ Ff (Fg N)` if the square of
 `CategoryTheory.Adjunction.projectionTensorMap_comp` commutes. -/
@@ -478,7 +471,6 @@ theorem projectionTensorMap_mateEquiv
     IsIso.hom_inv_id_assoc]
   exact hδb (adj.counit.app M) N
 
-
 /-- Exchange maps `Exf`, `Exg`, `Exh` of two stacked squares and of the pasted square are
 compatible with composition isomorphisms `e : Lh ≅ Lf ⋙ Lg` and `e' : Lh' ≅ Lf' ⋙ Lg'` if
 `Gc e ≫ Exg ≫ Lg' Exf = Exh ≫ e'`. -/
@@ -525,52 +517,6 @@ theorem mateEquiv_inv_comp_rightAdjointUniq
   simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   exact h
 
-/-- **Base change at an invertible object.** In the situation of
-`CategoryTheory.Adjunction.projectionTensorMap_mateEquiv`, with invertible comparisons, if the
-base change map `β` is an isomorphism at `𝟙_`, then it is one at every invertible `N` (with
-`F N`, `Gb N` and `F' (Gb N)` invertible): `β` at `𝟙_ ⊗ N` is, through the tensor maps, `β` at
-`𝟙_` tensored with `κ N`. -/
-theorem isIso_mateEquiv_app_of_isInvertible
-    {Cx Cy Cx' Cy' : Type*} [Category* Cx] [Category* Cy] [Category* Cx'] [Category* Cy']
-    [MonoidalCategory Cx] [MonoidalCategory Cy] [MonoidalCategory Cx'] [MonoidalCategory Cy']
-    {F : Cy ⥤ Cx} {L : Cx ⥤ Cy} {R : Cy ⥤ Cx} (adj : L ⊣ R)
-    {F' : Cy' ⥤ Cx'} {L' : Cx' ⥤ Cy'} {R' : Cy' ⥤ Cx'} (adj' : L' ⊣ R')
-    (π : ∀ (M : Cx) (N : Cy), L.obj M ⊗ N ⟶ L.obj (M ⊗ F.obj N)) [∀ M N, IsIso (π M N)]
-    (π' : ∀ (M : Cx') (N : Cy'), L'.obj M ⊗ N ⟶ L'.obj (M ⊗ F'.obj N)) [∀ M N, IsIso (π' M N)]
-    (hπ : ∀ {M M' : Cx} (φ : M ⟶ M') (N : Cy),
-      L.map φ ▷ N ≫ π M' N = π M N ≫ L.map (φ ▷ F.obj N))
-    (hπ' : ∀ {M M' : Cx'} (φ : M ⟶ M') (N : Cy'),
-      L'.map φ ▷ N ≫ π' M' N = π' M N ≫ L'.map (φ ▷ F'.obj N))
-    {Ga : Cx ⥤ Cx'} {Gb : Cy ⥤ Cy'}
-    (δa : ∀ M M' : Cx, Ga.obj (M ⊗ M') ⟶ Ga.obj M ⊗ Ga.obj M') [∀ M M', IsIso (δa M M')]
-    (δb : ∀ N N' : Cy, Gb.obj (N ⊗ N') ⟶ Gb.obj N ⊗ Gb.obj N') [∀ N N', IsIso (δb N N')]
-    (hδb : ∀ {N N' : Cy} (φ : N ⟶ N') (N'' : Cy),
-      Gb.map (φ ▷ N'') ≫ δb N' N'' = δb N N'' ≫ Gb.map φ ▷ Gb.obj N'')
-    (κ : ∀ N : Cy, Ga.obj (F.obj N) ⟶ F'.obj (Gb.obj N)) [∀ N, IsIso (κ N)]
-    (Ex : L ⋙ Gb ⟶ Ga ⋙ L') [IsIso Ex] (ξ : TwoSquare Ga L L' Gb)
-    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.natTrans.app M = 𝟙 _)
-    (hEx : ∀ (M : Cx) (N : Cy), Gb.map (π M N) ≫ Ex.app (M ⊗ F.obj N) ≫
-      L'.map (δa M (F.obj N)) ≫ L'.map (Ga.obj M ◁ κ N) =
-        δb (L.obj M) N ≫ Ex.app M ▷ Gb.obj N ≫ π' (Ga.obj M) (Gb.obj N))
-    (h₁ : IsIso ((mateEquiv adj adj' ξ).natTrans.app (𝟙_ Cy))) {N : Cy} (hN : IsInvertible N)
-    (hFN : IsInvertible (F.obj N)) (hGN : IsInvertible (Gb.obj N))
-    (hF'GN : IsInvertible (F'.obj (Gb.obj N))) :
-    IsIso ((mateEquiv adj adj' ξ).natTrans.app N) := by
-  have key := projectionTensorMap_mateEquiv adj adj' π π' hπ' δa δb hδb κ Ex ξ hExξ hEx (𝟙_ _) N
-  have := isIso_projectionTensorMap_of_isInvertible adj π hπ hN hFN (𝟙_ _)
-  have := isIso_projectionTensorMap_of_isInvertible adj' π' hπ' hGN hF'GN (Gb.obj (𝟙_ _))
-  have h₂ : IsIso (Ga.map (adj.projectionTensorMap π (𝟙_ _) N) ≫
-      (mateEquiv adj adj' ξ).natTrans.app (𝟙_ _ ⊗ N) ≫ R'.map (δb (𝟙_ _) N)) := by
-    rw [key]
-    infer_instance
-  have := (isIso_comp_left_iff _ _).1 h₂
-  have : IsIso ((mateEquiv adj adj' ξ).natTrans.app (𝟙_ _ ⊗ N)) :=
-    IsIso.of_isIso_comp_right _ (R'.map (δb (𝟙_ _) N))
-  have hn := (mateEquiv adj adj' ξ).natTrans.naturality (λ_ N).hom
-  have h₄ : IsIso ((R ⋙ Ga).map (λ_ N).hom ≫ (mateEquiv adj adj' ξ).natTrans.app N) := by
-    rw [hn]
-    infer_instance
-  exact (isIso_comp_left_iff _ _).1 h₄
 end BaseChange
 
 end CategoryTheory.Adjunction

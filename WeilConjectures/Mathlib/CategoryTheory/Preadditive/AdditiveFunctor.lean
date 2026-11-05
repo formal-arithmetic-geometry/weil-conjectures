@@ -37,7 +37,6 @@ lemma CategoryTheory.Functor.exists_sum_comp_eq_id_of_iso {C D : Type*} [Categor
   simp only [Category.assoc, ← F.map_comp, ← F.map_sum, h, F.map_id, Category.id_comp,
     Iso.inv_hom_id]
 
-
 namespace CategoryTheory.Functor
 
 open Limits
@@ -76,37 +75,6 @@ section Biproduct
 variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
   [HasFiniteBiproducts C] {ι : Type} [Finite ι]
 
-/-- An additive functor carries a morphism `⨁ X ⟶ Y` out of a finite biproduct of copies of `X`
-which is an isomorphism to a morphism out of a biproduct which is an isomorphism. -/
-lemma Functor.isIso_biproductDesc_map (F : C ⥤ D) [F.Additive] {X Y : C} (φ : ι → (X ⟶ Y))
-    [HasFiniteBiproducts D] [IsIso (biproduct.desc φ)] :
-    IsIso (biproduct.desc fun i ↦ F.map (φ i)) := by
-  have hc : biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) =
-      (F.mapBiproduct fun _ : ι ↦ X).inv := by
-    ext i
-    simp [Functor.mapBiproduct]
-  have h : (biproduct.desc fun i ↦ F.map (φ i)) =
-      biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
-        F.map (biproduct.desc φ) := by
-    ext i
-    simp [← F.map_comp]
-  rw [h, hc]
-  infer_instance
-
-
-/-- The property that a morphism `⨁ X ⟶ Y` out of a biproduct of copies of `X`, given by maps
-`φ i : X ⟶ Y`, is an isomorphism is invariant under isomorphisms of `X` and `Y` compatible with
-the maps. -/
-lemma isIso_biproductDesc_of_iso {X Y X' Y' : C} (φ : ι → (X ⟶ Y)) (φ' : ι → (X' ⟶ Y'))
-    (e : X ≅ X') (e' : Y ≅ Y') (h : ∀ i, φ i ≫ e'.hom = e.hom ≫ φ' i)
-    (h' : IsIso (biproduct.desc φ')) : IsIso (biproduct.desc φ) := by
-  have hφ : biproduct.desc φ = biproduct.map (fun _ ↦ e.hom) ≫ biproduct.desc φ' ≫ e'.inv := by
-    ext i
-    simp [← reassoc_of% h i]
-  have : IsIso (biproduct.map fun _ : ι ↦ e.hom) := (biproduct.mapIso fun _ ↦ e).isIso_hom
-  rw [hφ]
-  infer_instance
-
 end Biproduct
 
 end CategoryTheory
@@ -132,12 +100,5 @@ lemma isIso_map_biproductDesc :
 end CategoryTheory.Functor
 
 namespace CategoryTheory.Functor
-
-/-- The image under an additive functor of an identity `∑ _a, i ≫ E = ∑ a, i ≫ U a`. -/
-lemma sum_const_map_comp_map_eq_sum {C D : Type*} [Category C] [Preadditive C] [Category D]
-    [Preadditive D] (F : C ⥤ D) [F.Additive] {P Q R : C} {κ : Type*} [Fintype κ] (i : P ⟶ Q)
-    (E : Q ⟶ R) (U : κ → (Q ⟶ R)) (h : ∑ _a : κ, i ≫ E = ∑ a, i ≫ U a) :
-    ∑ _a : κ, F.map i ≫ F.map E = ∑ a, F.map i ≫ F.map (U a) := by
-  simp only [← F.map_comp, ← F.map_sum, h]
 
 end CategoryTheory.Functor

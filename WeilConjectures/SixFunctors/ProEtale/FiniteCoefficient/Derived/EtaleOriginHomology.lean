@@ -62,20 +62,6 @@ abbrev etaleOriginHomology :
 
 variable {Λ X}
 
-/-- The cohomology sheaves of a pro-étale complex of étale origin are of étale origin. -/
-lemma etaleOriginHomology_mapDerivedCategory_obj
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    etaleOriginHomology Λ X (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K) := fun n ↦
-  ⟨_, ⟨((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso n).app K⟩⟩
-
-/-- A bounded constructible pro-étale complex has cohomology sheaves of étale origin. -/
-lemma etaleOriginHomology_of_boundedConstructible
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    etaleOriginHomology Λ X K := by
-  obtain ⟨K', -, ⟨e⟩⟩ := hK
-  exact (etaleOriginHomology Λ X).prop_of_iso e (etaleOriginHomology_mapDerivedCategory_obj K')
-
 variable (Λ X)
 
 /-- Complexes with cohomology sheaves of étale origin are closed under coproducts. -/
@@ -98,32 +84,6 @@ instance isLocalizing_etaleOriginHomology :
       (h.isColimit.coconePointUniqueUpToIso (colimit.isColimit _) ≪≫
         (HasColimit.isoOfNatIso Discrete.natIsoFunctor) ≪≫ Iso.refl _).symm
       (etaleOriginHomology_sigma Λ X _ fun j ↦ h.prop_diag_obj ⟨j⟩)⟩
-
-/-- `Dctf(X, Λ)` consists of complexes with cohomology sheaves of étale origin. -/
-lemma constructibleFiniteTor_le_etaleOriginHomology :
-    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X ≤ etaleOriginHomology Λ X :=
-  fun _ hK ↦ etaleOriginHomology_of_boundedConstructible hK.1
-
-/-- `Loc(Dctf(X, Λ))` consists of complexes with cohomology sheaves of étale origin. -/
-lemma localizingClosure_constructibleFiniteTor_le :
-    (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).localizingClosure ≤
-      etaleOriginHomology Λ X :=
-  ObjectProperty.localizingClosure_le (constructibleFiniteTor_le_etaleOriginHomology Λ X)
-
-/-- The extension by zero along an open immersion preserves complexes with cohomology sheaves
-of étale origin: `j_!` is exact and `j_! ν^* ≅ ν^* j_!`. -/
-lemma etaleOriginHomology_openImmersionLowerShriek {U : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j]
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} Λ))}
-    (hK : etaleOriginHomology Λ U K) :
-    etaleOriginHomology Λ X
-      ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj K) :=
-  fun n ↦ by
-    obtain ⟨G, ⟨e⟩⟩ := hK n
-    exact ⟨(Etale.openImmersionLowerShriek _ j).obj G,
-      ⟨(openImmersionLowerShriekComparisonUpperStarIso _ j).app G ≪≫
-        (ProEtale.openImmersionLowerShriek _ j).mapIso e ≪≫
-        ((ProEtale.openImmersionLowerShriek _ j).mapDerivedCategoryHomologyFunctorIso n).app K⟩⟩
 
 end DerivedCategory
 

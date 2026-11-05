@@ -97,14 +97,6 @@ noncomputable instance monoidalCategory_sheaf_of_essentiallySmall :
     MonoidalCategory (Sheaf J A) :=
   Sheaf.monoidalCategory _ _
 
-/-- The monoidal structure `monoidalCategory_sheaf_of_essentiallySmall` is
-`CategoryTheory.Sheaf.monoidalCategory` for any proof that `J.W` is monoidal. Results stated
-for `Sheaf.monoidalCategory` under a hypothesis `(J.W (A := A)).IsMonoidal`, such as the oplax
-monoidal structure on the pullback of étale sheaves, therefore apply to this instance. -/
-lemma monoidalCategory_sheaf_of_essentiallySmall_eq [(J.W (A := A)).IsMonoidal] :
-    monoidalCategory_sheaf_of_essentiallySmall A J = Sheaf.monoidalCategory J A :=
-  rfl
-
 /-- The braiding of the monoidal structure on `A`-valued sheaves on an essentially small
 site, induced by the braiding of the coefficient category `A`. -/
 noncomputable instance braidedCategory_sheaf_of_essentiallySmall :
@@ -118,7 +110,6 @@ noncomputable instance symmetricCategory_sheaf_of_essentiallySmall {A : Type u'}
     [SymmetricCategory A] [MonoidalClosed A] :
     SymmetricCategory (Sheaf J A) :=
   Sheaf.symmetricCategory _ _
-
 
 end CategoryTheory.GrothendieckTopology
 
@@ -162,6 +153,5 @@ noncomputable instance ProEtale.sheafSymmetricCategory {A : Type u'} [Category.{
     [MonoidalClosed A] :
     SymmetricCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
   inferInstance
-
 
 end AlgebraicGeometry

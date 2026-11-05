@@ -55,44 +55,6 @@ variable {X Yinf : Scheme.{u}} {ginf : Yinf ⟶ X} [WeaklyEtale ginf] (T : Galoi
     (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
   (hc : ∀ n, IsColimit (T.moduleCocone Λ (K.X n)))
 
-/-- A **Möbius decomposition** of `g_{∞*} g_∞^* K`: a locally finite family of endomorphisms `e i`
-of complexes with sum the identity, one of which is the invariant projector `τ ≫ u`, the others
-being killed by the sum of the actions of finitely many automorphisms (in number invertible). -/
-structure MoebiusDecomposition where
-  /-- the index type. -/
-  ι : Type u
-  /-- the index of the invariant projector. -/
-  i₀ : ι
-  /-- the indices of the components which are nonzero on the finite level `j`. -/
-  F : T.J → Finset ι
-  /-- the components, on each term of the complex. -/
-  e : ι → ∀ n, (infFunctor Λ ginf).obj (K.X n) ⟶ (infFunctor Λ ginf).obj (K.X n)
-  /-- the components commute with the differentials. -/
-  comm : ∀ i n m, e i n ≫ (infFunctor Λ ginf).map (K.d n m) =
-    (infFunctor Λ ginf).map (K.d n m) ≫ e i m
-  /-- the distinguished component is the invariant projector `τ ≫ u`. -/
-  e_i₀ : ∀ n, e i₀ n = T.trace Λ (K.X n) hd (hc n) ≫ (infUnit Λ ginf).app (K.X n)
-  /-- the automorphisms averaging out the other components. -/
-  A : ι → Type
-  [fintype : ∀ i, Fintype (A i)]
-  /-- the automorphisms of `Y_∞` over `X`. -/
-  σ : ∀ i, A i → (Yinf ⟶ Yinf)
-  hσ : ∀ i a, σ i a ≫ ginf = ginf
-  /-- the automorphisms cover elements of the Galois groups of all the finite levels. -/
-  hσj : ∀ i a j, ∃ b, σ i a ≫ T.π j = T.π j ≫ T.ρ j b
-  /-- the number of automorphisms is invertible. -/
-  card : ∀ i
-    (N : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
-      IsIso (Fintype.card (A i) • 𝟙 N)
-  /-- the sum of the actions kills the components other than the invariant projector. -/
-  sum_comp_infAction : ∀ i, i ≠ i₀ → ∀ n,
-    ∑ a, e i n ≫ infAction Λ (K.X n) (σ i a) (hσ i a) = 0
-  /-- on the finite level `j`, the components outside `F j` vanish. -/
-  infTransport_comp_eq_zero : ∀ j n i, i ∉ F j → T.infTransport Λ (K.X n) j ≫ e i n = 0
-  /-- on the finite level `j`, the components in `F j` sum to the identity. -/
-  infTransport_comp_sum : ∀ j n,
-    T.infTransport Λ (K.X n) j ≫ ∑ i ∈ F j, e i n = T.infTransport Λ (K.X n) j
-
 attribute [instance] MoebiusDecomposition.fintype
 
 end AlgebraicGeometry.ProEtale.GaloisTower

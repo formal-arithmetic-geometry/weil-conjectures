@@ -216,17 +216,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {s : X₀ ⟶ Spec (.of k)}
   {t : Y₀ ⟶ Spec (.of k)} {f : X₀ ⟶ Y₀}
 
-/-- **The direct image with compact support commutes with the pullback to the geometric fibres**:
-for a compactification `c` of a morphism `f : X₀ ⟶ Y₀` of `k`-schemes and its base change `c̄`
-to the geometric fibres, `Rf_!(c) ⋙ D(p_Y^*) ≅ D(p_X^*) ⋙ Rf̄_!(c̄)`. -/
-noncomputable def rightDerivedLowerShriekGeometricFiberIso (c : Compactification f)
-    (h : f ≫ t = s) :
-    Rf_!(c)⟦Λ⟧ ⋙ D((t.geometricFiberProj)^*⟦Λ⟧) ≅
-      D((s.geometricFiberProj)^*⟦Λ⟧) ⋙ Rf_!(c.geometricFiber h)⟦Λ⟧ :=
-  rightDerivedLowerShriekOfCompactificationBaseChangeIso Λ c (c.geometricFiber h)
-    (Scheme.Hom.isPullback_geometricFiberMap c.i (c.i_comp_g_comp h))
-    (Scheme.Hom.isPullback_geometricFiberMap c.g rfl).flip
-
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 /-! ### Right derived functors of transports precomposed with exact functors to algebras -/
@@ -351,7 +340,6 @@ lemma mateEquiv_symm_mapOfNatIsoAdjunction_app_hom_f
       ((mateEquiv adjB adj).symm (TwoSquare.mk r (PB' ⋙ forget G) (PB ⋙ forget F) R
         (Functor.whiskerRight β.natTrans (forget F)))).natTrans.app b := by
   simp [mateEquiv_symm_apply, mapOfNatIsoAdjunction]
-
 
 /-- **Isomorphism criterion for mates of algebras.** Let `θ : PB ⋙ L ≅ l ⋙ PB'` be an
 isomorphism of functors to algebras whose underlying isomorphism is `θ₀ : P₀ ⋙ L ≅ l ⋙ P₀'`.
@@ -538,7 +526,6 @@ instance isIso_lowerStarGeometricFiberWeilBaseChange (hc : UpperStarWeilCompatib
     (upperStarCompGeometricFiberWeilLowerStarIso hc) (geometricFiberUpperStarComparison Λ φ h)
     (fun N ↦ by simp [upperStarCompGeometricFiberWeilLowerStarIso])
 
-
 /-- The comparison of the pullbacks around the flipped square is the inverse comparison. -/
 lemma upperStarSquareComparison_flip_inv {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g) :
@@ -693,15 +680,5 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
 
 attribute [local instance] Compactification.over
-
-/-- The new-model `Rf_!` of `AlgebraicGeometry.ProEtaleWeilSheaf.condensedRightDerivedLowerShriek`
-is the condensed Weil `Rf_!` of
-`AlgebraicGeometry.ProEtale.CondensedRing.weilRightDerivedLowerShriek` for `Λ = ℚ̲̄_ℓ`. -/
-lemma condensedRightDerivedLowerShriek_eq (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
-    (c : Compactification f) :
-    condensedRightDerivedLowerShriek k₀ l f c =
-      ProEtale.CondensedRing.weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l) c
-        (comp_over f _) :=
-  rfl
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

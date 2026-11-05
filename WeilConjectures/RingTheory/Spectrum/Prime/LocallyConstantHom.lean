@@ -31,13 +31,6 @@ namespace LocallyConstant
 
 variable {T : Type*} [TopologicalSpace T] {R : Type*} [CommRing R]
 
-/-- On prime spectra, the precomposition with `g` is `(t, p) ↦ (g t, p)`. -/
-lemma comap_comapRingHom_toPrimeSpectrum {T' : Type*} [TopologicalSpace T'] (g : C(T', T))
-    (tp : T' × PrimeSpectrum R) :
-    PrimeSpectrum.comap (comapRingHom (Z := R) g) (toPrimeSpectrum tp) =
-      toPrimeSpectrum (g tp.1, tp.2) :=
-  rfl
-
 variable [CompactSpace T] [T2Space T] [TotallyDisconnectedSpace T] {B : Type*} [CommRing B]
 
 /-- The continuous map `Spec B → T` induced by a ring map `φ : LocallyConstant T R →+* B`. -/
@@ -103,16 +96,5 @@ lemma ringHom_ext_of_specMap {φ φ' : LocallyConstant T R →+* B}
     (h₂ : specMap φ = specMap φ') :
     φ = φ' := by
   rw [← liftPrimeSpectrum_specMap φ, ← liftPrimeSpectrum_specMap φ', h₁, h₂]
-
-/-- `specMap` is natural in `T`. -/
-lemma specMap_comp_comapRingHom {T' : Type*} [TopologicalSpace T'] [CompactSpace T']
-    [T2Space T'] [TotallyDisconnectedSpace T'] (g : C(T', T))
-    (φ : LocallyConstant T' R →+* B) :
-    specMap (φ.comp (comapRingHom g)) = g.comp (specMap φ) := by
-  ext p
-  change (homeomorphPrimeSpectrum.symm _).1 = g (specMap φ p)
-  rw [PrimeSpectrum.comap_comp_apply, comap_eq_toPrimeSpectrum_specMap φ,
-    comap_comapRingHom_toPrimeSpectrum,
-    ← homeomorphPrimeSpectrum_apply, Homeomorph.symm_apply_apply]
 
 end LocallyConstant

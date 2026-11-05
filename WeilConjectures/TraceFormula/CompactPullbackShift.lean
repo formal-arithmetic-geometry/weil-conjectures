@@ -35,27 +35,4 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- The composition isomorphism `Rh_! ⋙ Ra_{X!} ≅ Ra_{Y!}` commutes with the shifts. -/
-instance commShift_boundedConstructibleLowerShriekCompToPoint_hom (h : Y ⟶ X) :
-    NatTrans.CommShift (boundedConstructibleLowerShriekCompToPoint ℓ h).hom ℤ := by
-  have : NatTrans.CommShift (eqToHom (show boundedConstructibleLowerShriek
-      ℓ (h ≫ toPoint X) =
-        boundedConstructibleLowerShriek ℓ (toPoint Y) by
-      rw [comp_toPoint])) ℤ :=
-    NatTrans.CommShift.eqToHom_congrArg
-      (fun m : Y ⟶ point k ↦ boundedConstructibleLowerShriek ℓ m)
-      (comp_toPoint h)
-  unfold boundedConstructibleLowerShriekCompToPoint
-  dsimp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom]
-  infer_instance
-
-set_option synthInstance.maxSize 1024 in
-/-- **The pullback on compactly supported cohomology commutes with the shifts**: for a proper
-`h : Y ⟶ X`, `h^♯ : RΓ_c(X, -) ⟶ RΓ_c(Y, Lh^* -)` is compatible with the shift structures of the
-bounded constructible lower shrieks and pullbacks. -/
-instance commShift_compactPullback (h : Y ⟶ X) [IsProper h.left] :
-    NatTrans.CommShift (compactPullback ℓ h) ℤ := by
-  unfold compactPullback
-  infer_instance
-
 end AlgebraicGeometry.ProEtale.CondensedRing

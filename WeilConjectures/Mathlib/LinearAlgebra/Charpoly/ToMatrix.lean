@@ -94,12 +94,6 @@ theorem charpolyRev_smul_one [Nontrivial R] (c : R) :
 theorem charpolyRev_one [Nontrivial R] : (1 : M →ₗ[R] M).charpolyRev = (1 - X) ^ finrank R M := by
   simpa using charpolyRev_smul_one (M := M) (1 : R)
 
-/-- The reverse characteristic polynomial of an endomorphism of the zero module is `1`. -/
-theorem charpolyRev_of_subsingleton [Nontrivial R] [Subsingleton M] (f : M →ₗ[R] M) :
-    f.charpolyRev = 1 := by
-  rw [Subsingleton.elim f ((0 : R) • 1), charpolyRev_smul_one, finrank_zero_of_subsingleton,
-    pow_zero]
-
 /-- Conjugate endomorphisms have the same characteristic polynomial. -/
 theorem charpoly_of_isConj {f g : Module.End R M} (h : IsConj f g) :
     f.charpoly = g.charpoly := by
@@ -150,22 +144,6 @@ theorem natDegree_charpolyRev {f : V →ₗ[K] V} (hf : IsUnit (LinearMap.det f)
     f.charpolyRev.natDegree = finrank K V := by
   rw [charpolyRev_def, reverse_natDegree, charpoly_natDegree,
     natTrailingDegree_eq_zero.2 (Or.inr (charpoly_coeff_zero_ne_zero hf)), Nat.sub_zero]
-
-/-- For an endomorphism with invertible determinant, the leading coefficient of the reverse
-characteristic polynomial `det (1 - t • f)` is `(-1) ^ finrank K V * det f`. -/
-theorem leadingCoeff_charpolyRev {f : V →ₗ[K] V} (hf : IsUnit (LinearMap.det f)) :
-    f.charpolyRev.leadingCoeff = (-1) ^ finrank K V * LinearMap.det f := by
-  rw [charpolyRev_def, reverse_leadingCoeff, trailingCoeff,
-    natTrailingDegree_eq_zero.2 (Or.inr (charpoly_coeff_zero_ne_zero hf)),
-    LinearMap.det_eq_sign_charpoly_coeff, ← mul_assoc, ← mul_pow, neg_one_mul, neg_neg,
-    one_pow, one_mul]
-
-/-- Mapping the coefficients along a ring homomorphism out of a field preserves the degree of
-the reverse characteristic polynomial. -/
-theorem natDegree_map_charpolyRev {f : V →ₗ[K] V} (hf : IsUnit (LinearMap.det f))
-    {S : Type*} [CommRing S] [Nontrivial S] (φ : K →+* S) :
-    (f.charpolyRev.map φ).natDegree = finrank K V := by
-  rw [natDegree_map_eq_of_injective φ.injective, natDegree_charpolyRev hf]
 
 /-- The characteristic polynomial of the transpose of an endomorphism agrees with the
 characteristic polynomial of the endomorphism. -/

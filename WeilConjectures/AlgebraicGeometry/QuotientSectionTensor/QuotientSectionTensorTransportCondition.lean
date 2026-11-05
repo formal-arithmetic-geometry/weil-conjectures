@@ -49,26 +49,4 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- A normalized section tensor comparison is the image of the prescribed
-internal tensorator.  This is the final conjugation step after the ordinary and
-derived section computations have been normalized.
-Source: Stacks 06YY, 07A4 and 07A6; parent proof steps 6--8.
-(blueprint: lem-sfb-quotient-section-tensor-transport-condition).
-
-Proof: conjugate the supplied internal tensorator through the scalar and tensor
-comparisons.  On flat-term K-flat generators, the normalization equation from
-`SectionTensorNormalized` identifies this conjugate with the totalized balancing
-map.  Exactness and essential surjectivity of the section equivalence extend the
-identity to every derived pair; naturality then gives `TensorSectionCondition`.
-The argument includes zero objects, empty schemes, and nonflat coefficient maps. -/
-theorem section_tensor_transport_condition (T : Scheme.{u})
-    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
-    (b : TensorIso a T) (hb : TensorNormalized a T b)
-    (barB : tensor Λ T ⋙ c.model.T ≅
-      (c.model.T.prod c.model.T) ⋙ tensor Λ' T)
-    (hbarB : SectionTensorNormalized a T c barB) :
-    TensorSectionCondition a T c b barB := by
-  apply tensor_section_condition_of_kflat a T c b barB
-  exact section_tensor_transport_kflat a T c hc b hb barB hbarB
-
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

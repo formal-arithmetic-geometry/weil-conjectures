@@ -152,20 +152,6 @@ lemma isIso_forget₂_mapDerivedCategoryPlus_map_iff {X : Scheme.{u}}
     (NatIso.isIso_map_iff ((Φ X).mapDerivedCategoryPlusHomologyFunctorIso n) a).2 this
   exact isIso_of_reflects_iso _ (Φ X)
 
-/-- Every object of `D⁺(X_ét, Ab)` is, up to isomorphism, the underlying complex of abelian
-sheaves of an object of `D⁺(X_ét, ULift ℤ)`. -/
-lemma exists_forget₂_mapDerivedCategoryPlus_obj_iso {X : Scheme.{u}}
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
-    ∃ K' : DerivedCategory.Plus (Sheaf X.smallEtaleTopology
-      (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))),
-      Nonempty ((Φ X).mapDerivedCategoryPlus.obj K' ≅ K) := by
-  let E := (Φ X).asEquivalence
-  have : E.functor.Additive := inferInstanceAs (Φ X).Additive
-  exact ⟨E.inverse.mapDerivedCategoryPlus.obj K,
-    ⟨((Functor.mapDerivedCategoryPlusCompIso E.inverse E.functor).app K).symm ≪≫
-      (Functor.mapDerivedCategoryPlusNatIso E.counitIso).app K ≪≫
-      (Functor.mapDerivedCategoryPlusIdIso _).app K⟩⟩
-
 /-- The comparison `forget₂ (R⁺f_* K) ⟶ R⁺f_*(forget₂ K)` between taking underlying abelian
 sheaves and the derived direct image on `D⁺`. It is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarForget₂`). -/

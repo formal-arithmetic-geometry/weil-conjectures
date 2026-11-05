@@ -57,31 +57,4 @@ noncomputable def descendedShriekGeometricExchange :
       ((compactificationOverField f).i_comp_g_comp (Over.w f)))
     (Scheme.Hom.isPullback_geometricFiberMap (compactificationOverField f).g rfl).flip
 
-/-- The actual descended smooth trace is universal in the Weil category if its
-unit base-change component is invertible. This is the non-proper shriek bridge. -/
-theorem geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange
-    (e : (boundedConstructibleUpperStarOfMap l (X := Y)
-      (Y := Over.mk Y.hom.geometricFiberToAlgebraicClosure)
-      Y.hom.geometricFiberProj).obj (𝟙_ _) ≅ 𝟙_ _)
-    [hbc : IsIso (smoothUnitBaseChange l f (traceGeometricFiberOverMap f)
-      (πX := X.hom.geometricFiberProj) (πY := Y.hom.geometricFiberProj)
-      (descendedShriekGeometricExchange l f) e.hom)]
-    (d : ℕ) [SmoothOfRelativeDimension d f.left]
-    (K : DerivedCategory (Endofunctor.IsoAlgebra
-      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.inv)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
-      X.hom.geometricFiber) ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K)) :
-    (weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l)
-      (compactificationOverField f) (Over.w f)).TraceUniversalAt K
-        (geometricFiberWeilSmoothTrace l f d) := by
-  dsimp only [descendedShriekGeometricExchange] at hbc
-  apply geometricFiberWeilSmoothTrace_weilUniversal l f d K hK
-  intro Q
-  have he := baseChangedSmoothTrace_levelwise_universal l f (traceGeometricFiberOverMap f)
-    ((compactificationOverField f).geometricFiber (Over.w f))
-    (Scheme.Hom.isPullback_geometricFiberMap (compactificationOverField f).i
-      ((compactificationOverField f).i_comp_g_comp (Over.w f)))
-    (Scheme.Hom.isPullback_geometricFiberMap (compactificationOverField f).g rfl).flip e d Q
-  exact he
-
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -304,39 +304,6 @@ theorem Adjunction.mapDerivedCategoryAdjunction_unit_app_fac {f : C ⥤ D} {g : 
   rw [reassoc_of% h₃, Iso.inv_hom_id_app]
   exact Category.comp_id _
 
-/-- The unit of the bounded below levelwise derived adjunction
-`Adjunction.mapDerivedCategoryPlusAdjunction` is, on the image of a bounded below complex `K` and
-modulo the factorizations `Functor.mapDerivedCategoryPlusFactorsh`, the levelwise unit of `adj`.
--/
-theorem Adjunction.mapDerivedCategoryPlusAdjunction_unit_app_fac {f : C ⥤ D} {g : D ⥤ C}
-    (adj : f ⊣ g) [f.Additive] [g.Additive]
-    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
-    [PreservesFiniteLimits g] [PreservesFiniteColimits g]
-    (K : HomotopyCategory.Plus C) :
-    adj.mapDerivedCategoryPlusAdjunction.unit.app (DerivedCategory.Plus.Qh.obj K) ≫
-        g.mapDerivedCategoryPlus.map (f.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
-        g.mapDerivedCategoryPlusFactorsh.hom.app (f.mapHomotopyCategoryPlus.obj K) =
-      DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K) := by
-  apply DerivedCategory.Plus.ι.map_injective
-  have h := adj.mapDerivedCategoryAdjunction_unit_app_fac K.obj
-  rw [Functor.map_comp, Functor.map_comp, Adjunction.mapDerivedCategoryPlusAdjunction,
-    Adjunction.map_restrictFullyFaithful_unit_app]
-  erw [Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app]
-  dsimp only [Functor.mapDerivedCategoryPlusCompatibility, Iso.symm_hom, Iso.refl_inv,
-    NatTrans.id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
-  have e : DerivedCategory.Plus.ι.map
-      (g.mapDerivedCategoryPlus.map (f.mapDerivedCategoryPlusFactorsh.hom.app K)) =
-      g.mapDerivedCategory.map
-        (DerivedCategory.Plus.ι.map (f.mapDerivedCategoryPlusFactorsh.hom.app K)) := rfl
-  have e₂ : DerivedCategory.Plus.ι.map
-      (DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K)) =
-      DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι C).map
-        (adj.mapHomotopyCategoryPlus.unit.app K)) := rfl
-  rw [e, Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app, e₂,
-    Adjunction.ι_map_mapHomotopyCategoryPlus_unit_app, ← h]
-  rfl
-
 /-- The unit of the bounded below derived adjunction `Adjunction.derivedAdjunctionPlus` is
 computed on the image of a bounded below complex `K` by the unit of `adj` followed by the unit of
 the right derived functor, as for `Adjunction.derivedPlus` (`Adjunction.derivedPlus_unit_app_fac`).

@@ -56,74 +56,7 @@ local notation:max "Res" f:arg => restrictScalars
 section QuotientKernel
 variable {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
 
-private def K (U : Cᵒᵖ) : Ideal (R.obj.obj U) := RingHom.ker (q.hom.app U).hom
-
 end QuotientKernel
-
-/-- The sectionwise quotient unit, sending x to 1 tensor x.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
-noncomputable def commonQuotientPresheafUnit
-    {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :
-    M.val ⟶ (PresheafOfModules.restrictScalars
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).map q).hom).obj
-        (changeOfRingsPresheaf q M) where
-  app U := (ModuleCat.ExtendRestrictScalarsAdj.unit (q.hom.app U).hom).app (M.val.obj U)
-  naturality {U V} f := by
-    apply ModuleCat.hom_ext
-    ext x
-    change (1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.map f x =
-      changeOfRingsMap q M f ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x)
-    rw [show changeOfRingsMap q M f
-        ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x) =
-        S.obj.map f 1 ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.map f x from
-      Classical.choose_spec (exists_changeOfRingsMap q M f) 1 x, map_one]
-
-/-- The actual sheaf quotient unit constructed from the sheafification adjunction.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
-noncomputable def commonQuotientUnit
-    {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :
-    M ⟶ (Res q).obj (changeOfRings q M) where
-  val := commonQuotientPresheafUnit q M ≫
-    (PresheafOfModules.restrictScalars
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).map q).hom).map
-        (PresheafOfModules.sheafificationHomEquiv
-          (𝟙 (derivedChangeRingIndependentCoefficients J S).obj)
-          (𝟙 (changeOfRings q M)))
-
-/-- The actual quotient units are natural in the module.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
-theorem commonQuotientUnit_naturality
-    {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
-    {M N : Mod R} (f : M ⟶ N) :
-    f ≫ commonQuotientUnit q N = commonQuotientUnit q M ≫ (Res q).map (changeOfRingsHom q M f) := by
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro x
-  let g := changePresheafHom q f
-  have h := congrArg (fun a ↦ a.app U
-    ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U,(q.hom.app U).hom] x))
-      (toSheafify_naturality J ((PresheafOfModules.toPresheaf _).map g))
-  exact h
-
-/-- The quotient unit transported to a prescribed ordinary scalar-extension model.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
-noncomputable def commonQuotientModelUnit
-    {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
-    [HasDerivedCategory.{wR} (Mod R)] [HasDerivedCategory.{wS} (Mod S)]
-    (F : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} q) :
-    𝟭 (Mod R) ⟶ F.E ⋙ Res q where
-  app M := commonQuotientUnit q M ≫ (Res q).map (eqToHom (F.obj_eq M).symm)
-  naturality {M N} f := by
-    dsimp only [Functor.id_map, Functor.comp_map]
-    rw [← Category.assoc, commonQuotientUnit_naturality q f, Category.assoc]
-    rw [F.map_eq, Functor.map_comp, Functor.map_comp]
-    simp only [Category.assoc, ← Functor.map_comp]
-    apply congrArg (fun g ↦ commonQuotientUnit q M ≫ (Res q).map g)
-    rw [← Category.assoc (eqToHom (F.obj_eq M).symm) (eqToHom (F.obj_eq M)),
-      eqToHom_trans, eqToHom_refl, Category.id_comp]
 
 section RingPushout
 
@@ -542,42 +475,7 @@ variable {R B : Sheaf J CommRingCat.{r}} {φ : R ⟶ B}
   (b : ∀ n : ℕ,
     DerivedChangeOfRingsCochainModel.{u, v, r, wB, wS} (D.extensionProjection n))
 
-/-- Ordinary common-quotient maps, characterized on the sheafification-unit images
-of pure tensors. There are no complexes, K-flatness, or derived comparisons here.
-Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
-structure OrdinaryCommonQuotientTower where
-  ordinary : ∀ n : ℕ, Res φ ⋙ (a n).E ≅ (b n).E
-  ordinary_sections : ∀ (n : ℕ) (M : Mod B) (U : Cᵒᵖ)
-    (s : (D.S.obj (op n)).obj.obj U) (x : M.val.obj U),
-    ((ordinary n).hom.app M).val.app U
-      ((eqToHom ((a n).obj_eq ((Res φ).obj M)).symm).val.app U
-        ((toSheafify J (changeOfRingsPresheaf (D.projection n)
-          ((Res φ).obj M)).presheaf).app U
-            (s ⊗ₜ[R.obj.obj U, ((D.projection n).hom.app U).hom] x))) =
-      (eqToHom ((b n).obj_eq M).symm).val.app U
-        ((toSheafify J (changeOfRingsPresheaf (D.extensionProjection n) M).presheaf).app U
-          (s ⊗ₜ[B.obj.obj U, ((D.extensionProjection n).hom.app U).hom] x))
-  transition : ∀ n : ℕ,
-    (a (n + 1)).E ⋙ Res (D.projection (n + 1)) ⟶ (a n).E ⋙ Res (D.projection n)
-  transition_sections : ∀ (n : ℕ) (M : Mod R) (U : Cᵒᵖ)
-    (s : (D.S.obj (op (n + 1))).obj.obj U) (x : M.val.obj U),
-    ((transition n).app M).val.app U
-      ((eqToHom ((a (n + 1)).obj_eq M).symm).val.app U
-        ((toSheafify J (changeOfRingsPresheaf (D.projection (n + 1)) M).presheaf).app U
-          (s ⊗ₜ[R.obj.obj U, ((D.projection (n + 1)).hom.app U).hom] x))) =
-      (eqToHom ((a n).obj_eq M).symm).val.app U
-        ((toSheafify J (changeOfRingsPresheaf (D.projection n) M).presheaf).app U
-          (((D.S.map (homOfLE (Nat.le_succ n)).op).hom.app U s)
-            ⊗ₜ[R.obj.obj U, ((D.projection n).hom.app U).hom] x))
-
 variable {D a b}
-
-/-- The quotient units are constructed, rather than chosen as part of the comparison.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
-def OrdinaryCommonQuotientTower.unit (_O : OrdinaryCommonQuotientTower D a b) (n : ℕ) :
-    𝟭 (Mod R) ⟶ (a n).E ⋙ Res (D.projection n) :=
-  commonQuotientModelUnit (D.projection n) (a n)
 
 variable (D a b)
 

@@ -36,26 +36,4 @@ open CategoryTheory.Limits CategoryTheory.Functor Opposite
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The explicit finite component used by the normalized coherent tensor tower.
-Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations).
--/
-def pullbackTensorTensorTowerLevel (W : Scheme.{u})
-    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
-    (pullbackTensorRestrictedTower l E W
-      ((coefficientTotalTensor.{u, u + 1, u}
-        (coefficientSequenceTopology (ProEt.topology W))
-        (coefficientSequenceCommRingSheaf l E W)).obj
-        ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P),
-          (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q))) ).obj
-            (op n) ≅
-      ((integralOperationsTensorTowerFunctor l E W).obj (P,Q)).obj (op n) :=
-  pullbackTensorRestrictedLevel l E W _ n ≪≫
-  ((scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ)).mapIso
-    (coefficientEvaluationTensorIso l E W n _ _) ≪≫
-  ((scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ)).mapIso
-    ((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
-      (integralCoefficientCommRingSheaf l E W n)).mapIso
-        (Iso.prod ((pullbackTensorReductionEvaluationComplex l E W n).app P).symm
-          ((pullbackTensorReductionEvaluationComplex l E W n).app Q).symm))
-
 end WeilConjectures

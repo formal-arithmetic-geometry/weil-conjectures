@@ -78,19 +78,6 @@ section Generic
 variable {C Y : Over (Spec (.of k))} [LocallyOfFiniteType C.hom] [QuasiCompact C.hom]
   [IsSeparated C.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-lemma lowerShriek_map_comp_eqToHom_comp_counit {s t : C ⟶ Y} (h : t = s)
-    {N : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj
-        ℓ⟧}
-    (w : N ⟶ (boundedConstructibleUpperShriek ℓ t).obj M) :
-    (boundedConstructibleLowerShriek ℓ s).map
-        (w ≫ eqToHom (congrArg (fun r ↦ (boundedConstructibleUpperShriek ℓ r).obj M) h)) ≫
-      (boundedConstructibleUpperShriekAdjunction ℓ s).counit.app M =
-    eqToHom (congrArg (fun r ↦ (boundedConstructibleLowerShriek ℓ r).obj N) h.symm) ≫
-      (boundedConstructibleLowerShriek ℓ t).map w ≫
-      (boundedConstructibleUpperShriekAdjunction ℓ t).counit.app M := by
-  subst h
-  simp
-
 lemma lowerShriek_map_comp_comp_eqToHom_comp_counit {s t : C ⟶ Y} (h : t = s)
     {N N' : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     {M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (v : N' ⟶ N)
@@ -249,26 +236,6 @@ lemma map_leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (
   simp only [Functor.map_comp, MonoidalCategory.whiskerLeft_comp, Category.assoc] at e
   simpa only [eqToHom_refl, MonoidalCategory.whiskerLeft_id, CategoryTheory.Functor.map_id,
     Category.id_comp] using e
-
-@[reassoc]
-lemma eqToHom_comp_lowerShriek_map {s t : C ⟶ Y} (h : s = t)
-    {N N' : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (φ : N ⟶ N') :
-    eqToHom (by rw [h]) ≫ (boundedConstructibleLowerShriek ℓ t).map φ =
-      (boundedConstructibleLowerShriek ℓ s).map φ ≫ eqToHom (by rw [h]) := by
-  subst h
-  simp
-
-@[reassoc]
-lemma whiskerLeft_eqToHom_comp_leftProjection {u v : C ⟶ Y} (h : u = v)
-    (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-        (T : Dᵇc(C.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    M ◁ eqToHom (by rw [h] : (boundedConstructibleLowerShriek ℓ u).obj T =
-        (boundedConstructibleLowerShriek ℓ v).obj T) ≫
-      Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ v) M T =
-    Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ u) M T ≫
-      eqToHom (by rw [h]) := by
-  subst h
-  simp
 
 end Generic
 

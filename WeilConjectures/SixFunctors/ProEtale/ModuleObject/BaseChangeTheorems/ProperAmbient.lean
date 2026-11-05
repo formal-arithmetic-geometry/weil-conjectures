@@ -80,44 +80,4 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquare
     ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom, hinv,
     boundedConstructibleUpperStarComp_hom_app_hom, e]
 
-set_option maxHeartbeats 1000000 in
--- the bounded constructible and the ambient exchange morphisms are unified
-/-- The base change map of the ambient derived categories of module objects over `ℚ̲̄_ℓ` at a
-bounded constructible `K` is an isomorphism as soon as the base-change morphism of the bounded
-constructible derived categories is an isomorphism at `K`: the latter is the restriction of the
-former (`Adjunction.exchangeRight_restrictFullyFaithful_app_hom`). -/
-lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
-    (sq : CommSq g' f' f g)
-    (sq' : CommSq g'.left f'.left f.left g.left) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (hres : IsIso ((Adjunction.exchangeRight
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
-      (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
-      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)).app
-        K)) :
-    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq').app K.obj) := by
-  unfold baseChangeMap
-  rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
-  have hθ (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-      ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
-        K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicAlgClRingObj ℓ) sq')).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
-      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
-  have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
-    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
-    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f'.left)
-    (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicAlgClRingObj ℓ) sq'))
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
-    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g K)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g' K)
-    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
-    hθ K
-  rw [← key, ObjectProperty.isIso_hom_iff]
-  convert hres using 3
-  all_goals rfl
-
 end AlgebraicGeometry.ProEtale.CondensedRing

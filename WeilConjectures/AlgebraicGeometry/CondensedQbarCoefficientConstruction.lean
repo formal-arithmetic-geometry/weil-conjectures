@@ -386,37 +386,6 @@ noncomputable def boundedComp {T T' : Type u} [TopologicalSpace T] [TopologicalS
         obtain ⟨E, hE, ha⟩ := a.property
         exact ⟨E, hE, fun x ↦ ha (g x)⟩))
 
-/-- Bounded continuous functions descend uniquely to the actual component quotient.
-The quotient is surjective, so the same finite extension bounds the descended function.
-This includes the empty space.
-Source: RefactorInstruction, Section 4, coefficient realization on the component quotient
-(auxiliary; not a blueprint node). -/
-noncomputable def boundedComponentsIso (ℓ : ℕ) [Fact ℓ.Prime]
-    (T : Type u) [TopologicalSpace T] :
-    PadicAlgCl.finiteIntermediateFieldValued ℓ (ConnectedComponents T) ≃+*
-      PadicAlgCl.finiteIntermediateFieldValued ℓ T := by
-  let q : C(T, ConnectedComponents T) := ⟨ConnectedComponents.mk,
-    ConnectedComponents.continuous_coe⟩
-  refine RingEquiv.ofBijective (boundedComp ℓ q) ⟨?_, ?_⟩
-  · intro a b h
-    apply Subtype.ext
-    ext t
-    obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe t
-    exact congrArg (fun c ↦ c.1 x) h
-  · intro a
-    let b : C(ConnectedComponents T, PadicAlgCl ℓ) :=
-      ⟨a.1.continuous.connectedComponentsLift, a.1.continuous.connectedComponentsLift_continuous⟩
-    have hb : b ∈ PadicAlgCl.finiteIntermediateFieldValued ℓ (ConnectedComponents T) := by
-      obtain ⟨E, hE, ha⟩ := a.property
-      refine ⟨E, hE, ?_⟩
-      intro t
-      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe t
-      exact (Continuous.connectedComponentsLift_apply_coe a.1.continuous x) ▸ ha x
-    refine ⟨⟨b, hb⟩, ?_⟩
-    apply Subtype.ext
-    ext x
-    exact Continuous.connectedComponentsLift_apply_coe a.1.continuous x
-
 /-- Restriction of a bounded function to a small pro-etale object.
 Source: RefactorInstruction, Section 4, coefficient realization
 (auxiliary; not a blueprint node). -/
@@ -494,32 +463,6 @@ noncomputable def presheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ 
     change s.down * restrictBounded ℓ Y U.unop (a + b) =
       s.down * restrictBounded ℓ Y U.unop a + s.down * restrictBounded ℓ Y U.unop b
     rw [map_add, mul_add]
-
-/-- Every regular-module endomorphism of the bounded-function presheaf is multiplication
-by a bounded function. Evaluate at one on the terminal object; naturality transports
-this section and module linearity determines the endomorphism at every object.
-Source: RefactorInstruction, Section 4, regular-module scalar realization
-(auxiliary; not a blueprint node). -/
-lemma presheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
-    Function.Surjective (presheafScalar ℓ Y) := by
-  intro f
-  let T := Scheme.ProEt.mk (𝟙 Y)
-  let a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y :=
-    ((f.hom.app (op T)) (ULift.up 1)).down
-  refine ⟨a, ?_⟩
-  apply Mod.hom_ext
-  ext U s
-  let t : U.unop ⟶ T := MorphismProperty.Over.homMk U.unop.hom
-  have hn := ConcreteCategory.congr_hom (f.hom.naturality t.op) (ULift.up 1)
-  have hf := IsModHom.smul_hom (A := boundedP ℓ Y) (f := f.hom)
-  have h := ConcreteCategory.congr_hom (congr_app hf U) (s ⊗ₜ[ℤ] ULift.up 1)
-  change (f.hom.app U) (ULift.up (s.down * 1)) =
-    ULift.up (s.down * ((f.hom.app U) (ULift.up 1)).down) at h
-  rw [mul_one] at h
-  change ((f.hom.app U) (ULift.up 1)) =
-    (boundedP ℓ Y).map t.op ((f.hom.app (op T)) (ULift.up 1)) at hn
-  rw [hn] at h
-  exact h.symm
 
 /-- Monoidal sheafification carries the regular module to the regular module.
 Source: RefactorInstruction, Section 4, coefficient realization

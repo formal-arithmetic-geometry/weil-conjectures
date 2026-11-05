@@ -171,13 +171,6 @@ end ProEtale
 open ProEtale
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The sections of `g_* G` over `V → Y` are the sections of `G` over `V ×_Y Z → Z`. -/
-lemma ProEtale.lowerStar_obj_val_obj (G : Sheaf (Scheme.ProEt.topology Z) A) (b : Y.ProEt) :
-    ((g)_*[A].obj G).obj.obj (op b) =
-      G.obj.obj (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj b)) :=
-  rfl
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `g_*` acts on morphisms by whiskering along
 `(MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op`. -/
 lemma ProEtale.lowerStar_map_hom_app {G G' : Sheaf (Scheme.ProEt.topology Z) A} (φ : G ⟶ G')
@@ -352,15 +345,6 @@ end UpperStar
 section Id
 
 variable (X : Scheme.{u})
-
-/-- Base change along the identity of `X` is the identity of the small pro-étale site of `X`,
-by uniqueness of right adjoints: it is right adjoint to the localization functor along the
-identity, which is the identity functor by `MorphismProperty.Over.mapId`. -/
-noncomputable def ProEt.overPullbackId :
-    MorphismProperty.Over.pullback @WeaklyEtale ⊤ (𝟙 X) ≅ 𝟭 X.ProEt :=
-  (conjugateIsoEquiv
-    (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ (𝟙 X) inferInstance _root_.trivial)
-    (Adjunction.id (C := X.ProEt)) (MorphismProperty.Over.mapId ⊤ X).symm)
 
 end Id
 

@@ -918,7 +918,6 @@ lemma affineLine.localizationRestrictionLowerStarAdjunction_counit_app_hom_app
         (pullback.lift (𝟙 V.left) V.hom (by simp) : V.left ⟶ pullback (V.hom ≫ ĀS) ĀS).op :=
   rfl
 
-
 variable (l) in
 /-- The evaluation `ĀS^* ĀS_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` along the section `x ↦ (x, σ̄_c (v x))`, as a morphism
 of sheaves of `ℚ̄_ℓ`-modules: the pullback of the translation `σ_c` followed by the counit of
@@ -965,7 +964,6 @@ lemma affineLine.artinSchreierEvalHom_hom_app (c : k₀)
   · rw [Category.assoc]
     erw [pullback.lift_snd, pullback.lift_snd_assoc, affineLine.artinSchreierSection_snd]
 
-
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- Morphisms into `ĀS^* ĀS_* ℚ̄_ℓ` are determined by their composites with the evaluations
 along the sections `x ↦ (x, σ̄_c (v x))`, which cover `V ×_{𝔸¹_{k̄}} 𝔸¹_{k̄}`. -/
@@ -1002,7 +1000,6 @@ lemma affineLine.artinSchreierEvalHom_hom_ext
   rw [← affineLine.artinSchreierSection_artinSchreierIndex V.hom z]
   exact this
 
-
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- Evaluating the splitting `g ↦ ((x, σ̄_d (v x)) ↦ ψ(d) g(x))` along the section
 `x ↦ (x, σ̄_c (v x))` is multiplication by `ψ(c)`. -/
@@ -1021,7 +1018,6 @@ lemma affineLine.artinSchreierSplitHom_comp_evalHom (ψ : AddChar k₀ (PadicAlg
   change ψ (affineLine.artinSchreierIndex V.hom (affineLine.artinSchreierSection V.hom c x)) *
     g.1 (pullback.fst (V.hom ≫ ĀS) ĀS (affineLine.artinSchreierSection V.hom c x)) = ψ c * g.1 x
   rw [affineLine.artinSchreierIndex_artinSchreierSection, affineLine.artinSchreierSection_fst_apply]
-
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The averaging map `h ↦ (x ↦ q⁻¹ ∑_c ψ(-c) h(x, σ̄_c (v x)))` is the corresponding linear
@@ -1060,7 +1056,6 @@ lemma affineLine.artinSchreierAverageHom_eq_sum (ψ : AddChar k₀ (PadicAlgCl l
         (ULift.up h)).down.1 x
   erw [affineLine.artinSchreierEvalHom_hom_app]
   rfl
-
 
 variable (l) in
 /-- The averaging map, as a morphism of sheaves of `ℚ̄_ℓ`-modules: a linear combination of the
@@ -1125,7 +1120,6 @@ lemma affineLine.artinSchreierSplitModHom_averageModHom (ψ : AddChar k₀ (Padi
     affineLine.artinSchreierAverageModHom_hom, Category.assoc, Iso.inv_hom_id_app_assoc,
     affineLine.artinSchreierSplitHom_artinSchreierAverageHom]
   rfl
-
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- An endomorphism of `ĀS_* ℚ̄_ℓ` which, after pullback along `ĀS`, is averaging followed by
@@ -1358,11 +1352,6 @@ internal hom out of the dual `G^∨`, `G` being locally free of finite rank over
 noncomputable def WeilComplex.tensorLisse (G : WeilSheaf k₀ l X) (hG : G.IsLisse) :
     WeilComplex k₀ l X ⥤ WeilComplex k₀ l X :=
   WeilComplex.ihomLisse (G.dual hG) hG.dual
-
-/-- The affine plane `𝔸¹ ×_{k₀} 𝔸¹` over `k₀`, with its two projections and the multiplication
-map to the affine line. -/
-noncomputable def affinePlane : Scheme.{u} :=
-  pullback (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
 
 instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) : (WeilComplex.tensorLisse G hG).Additive := by
   unfold WeilComplex.tensorLisse

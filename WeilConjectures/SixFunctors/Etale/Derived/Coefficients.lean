@@ -118,46 +118,6 @@ lemma nsmul_id_eq_zero_of_natCast_eq_zero {N : ℕ} (hN : (N : Λ) = 0)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : N • 𝟙 K = 0 := by
   rw [← Nat.cast_smul_eq_nsmul Λ, hN, zero_smul]
 
-/-- An integer `N` lying in the ideal `J` kills the reduction `K ⊗^L (Λ/J)_X` of every object
-`K` of `D(X_ét, Λ)`: it kills `Λ/J`, hence the constant complex `(Λ/J)_X`, and tensoring with
-`K` is additive. -/
-lemma nsmul_id_reductionModIdeal {J : Ideal Λ} {N : ℕ} (hN : (N : Λ) ∈ J)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    N • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
-  have hM : N • 𝟙 (ModuleCat.of Λ (Λ ⧸ J)) = 0 := by
-    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
-    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
-    simp only [ModuleCat.hom_nsmul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
-      id_eq, ModuleCat.hom_zero, LinearMap.zero_apply]
-    rw [← Nat.cast_smul_eq_nsmul Λ, Algebra.smul_def, Ideal.Quotient.algebraMap_eq,
-      ← map_mul (Ideal.Quotient.mk J), Ideal.Quotient.eq_zero_iff_mem]
-    exact J.mul_mem_right _ hN
-  change N • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj _) = 0
-  rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul,
-    ← (DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_nsmul,
-    ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_nsmul, hM,
-    Functor.map_zero, Functor.map_zero, Functor.map_zero]
-
-/-- An element `r` of the ideal `J` kills the reduction `K ⊗ᴸ (Λ ⧸ J)_X` of every object `K` of
-`D(X_ét, Λ)`: it kills `Λ ⧸ J`, hence the constant complex `(Λ ⧸ J)_X`, and tensoring with `K`
-is `Λ`-linear. -/
-lemma smul_id_reductionModIdeal {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    r • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
-  have hM : r • 𝟙 (ModuleCat.of Λ (Λ ⧸ J)) = 0 := by
-    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
-    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
-    simp only [ModuleCat.hom_smul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
-      id_eq, ModuleCat.hom_zero, LinearMap.zero_apply]
-    rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul (Ideal.Quotient.mk J),
-      Ideal.Quotient.eq_zero_iff_mem]
-    exact J.mul_mem_right _ hr
-  change r • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj _) = 0
-  rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul,
-    ← (DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_smul,
-    ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_smul, hM,
-    Functor.map_zero, Functor.map_zero, Functor.map_zero]
-
 end Etale
 
 end AlgebraicGeometry

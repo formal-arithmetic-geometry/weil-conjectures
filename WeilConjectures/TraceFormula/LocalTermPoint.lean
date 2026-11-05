@@ -59,26 +59,6 @@ lemma FixedLocus.liftPoint_ι (F : c.FixedLocus) (y : RationalPoint c.C)
     (hy : y ≫ c.c₁ = y ≫ c.c₂) : F.liftPoint y hy ≫ F.ι = y :=
   Fork.IsLimit.lift_ι F.isLimit
 
-lemma FixedLocus.liftPoint_withCoeff (F : c.FixedLocus)
-    (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek ℓ c.c₁).obj K')
-    (y : RationalPoint c.C) (hy : y ≫ c.c₁ = y ≫ c.c₂) :
-    (F.withCoeff K' u').liftPoint y hy = F.liftPoint y hy :=
-  rfl
-
-variable (c) in
-/-- The trace class of a correspondence whose pulled back coefficient `Lc₂^* K` vanishes is
-zero: the mate of `u` is a map out of the zero object. -/
-lemma traceClass_eq_zero_of_isZero (F : c.FixedLocus)
-    (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K)) :
-    c.traceClass F = 0 := by
-  have hm : c.mate = 0 := by
-    rw [mate, ← MonoidalClosed.curry'_uncurry' (0 : 𝟙_ _ ⟶ _)]
-    exact congrArg _ (hK.eq_of_src _ _)
-  rw [traceClass, hm, zero_comp, Adjunction.homEquiv_counit, Functor.map_zero, zero_comp,
-    comp_zero]
-
 /-- The local term along an open and closed subscheme `B` of the fixed locus with underlying set
 `{y}` is the integral of a Borel–Moore section `γ` of the point if the restriction of the trace
 class to `B` is the pushforward of `γ` along the point of `B`. -/

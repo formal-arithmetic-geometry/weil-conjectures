@@ -355,32 +355,4 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace CategoryTheory
 
-private theorem compose_three_squares {D : Type*} [Category D]
-    {A₁ A₂ B₁ B₂ C₁ C₂ D₁ D₂ : D}
-    {f : A₁ ⟶ A₂} {g : B₁ ⟶ B₂} {h : C₁ ⟶ C₂} {k : D₁ ⟶ D₂}
-    {a : A₁ ⟶ B₁} {a' : A₂ ⟶ B₂} {b : B₁ ⟶ C₁} {b' : B₂ ⟶ C₂}
-    {c : C₁ ⟶ D₁} {c' : C₂ ⟶ D₂}
-    (ha : f ≫ a' = a ≫ g) (hb : g ≫ b' = b ≫ h) (hc : h ≫ c' = c ≫ k) :
-    f ≫ (a' ≫ b' ≫ c') = (a ≫ b ≫ c) ≫ k := by
-  calc
-    _ = (f ≫ a') ≫ b' ≫ c' := by simp only [Category.assoc]
-    _ = a ≫ (g ≫ b') ≫ c' := by rw [ha]; simp only [Category.assoc]
-    _ = a ≫ b ≫ (h ≫ c') := by rw [hb]; simp only [Category.assoc]
-    _ = _ := by rw [hc]; simp only [Category.assoc]
-
-set_option maxHeartbeats 1200000 in
--- Descending evaluation compares several expanded product-localization functors.
-set_option backward.isDefEq.respectTransparency false in
-private theorem unit_isIso_of_complete_universal
-    {D : Type*} [Category D] (P : D → Prop) (F : D ⥤ D)
-    (η : ∀ E, E ⟶ F.obj E)
-    (hc : ∀ E, P (F.obj E))
-    (hu : ∀ E L, P L → Function.Bijective (fun h : F.obj E ⟶ L ↦ η E ≫ h))
-    (E : D) (hE : P E) : IsIso (η E) := by
-  obtain ⟨r, hr⟩ := (hu E E hE).2 (𝟙 E)
-  have hs : r ≫ η E = 𝟙 (F.obj E) := by
-    apply (hu E (F.obj E) (hc E)).1
-    simp only [← Category.assoc, hr, Category.id_comp, Category.comp_id]
-  exact ⟨⟨r, hr, hs⟩⟩
-
 end CategoryTheory

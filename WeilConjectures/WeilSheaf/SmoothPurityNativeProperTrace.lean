@@ -147,7 +147,6 @@ theorem bijective_map_comp_condensedProperTrace [IsIso γ]
     ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K.obj)
     (boundedConstructible_condensedCarrier K)
 
-
 /-- The adjunct of the native descended trace is invertible when exceptional
 base change and the finite-base orientation are invertible. -/
 theorem isIso_homEquiv_nativeProperTrace_of_isIso [IsIso γ]
@@ -169,19 +168,5 @@ theorem isIso_homEquiv_nativeProperTrace_of_isIso [IsIso γ]
     (nativeProperTrace_map f γ T U eT eU)
   intro K
   exact bijective_map_comp_condensedProperTrace f γ T U eT eU K
-
-/-- The adjunct of the native descended trace is invertible for a smooth proper
-map and an invertible finite-base orientation. -/
-theorem isIso_homEquiv_nativeProperTrace [IsIso γ] (d : ℕ)
-    [SmoothOfRelativeDimension d f]
-    {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}
-    (adj : derivedLowerStar (k₀ := k₀) (l := l) f ⊣ J) :
-    IsIso (adj.homEquiv T U (nativeProperTrace f γ T U eT eU)) := by
-  have : SmoothOfRelativeDimension d (properTraceBaseMap (k₀ := k₀) f).left := ‹_›
-  have := CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale l
-    (f := properTraceBaseMap (k₀ := k₀) f)
-    (f' := CondensedRing.traceGeometricFiberOverMap (properTraceBaseMap (k₀ := k₀) f)) d
-    (Scheme.Hom.isPullback_geometricFiberMap f (comp_over f _)).flip N
-  exact isIso_homEquiv_nativeProperTrace_of_isIso f γ T U eT eU inferInstance adj
 
 end AlgebraicGeometry.WeilComplex

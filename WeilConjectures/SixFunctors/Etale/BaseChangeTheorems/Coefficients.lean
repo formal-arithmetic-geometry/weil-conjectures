@@ -117,17 +117,6 @@ lemma Etale.isIso_restrictCoextendScalarsAdj_counit_app_of_nsmul_eq_zero {X : Sc
     NatIso.isIso_of_isIso_app _
   exact isIso_of_reflects_iso _ (sheafToPresheaf _ _)
 
-/-- **Base change property along a change of coefficient rings.** If `f` satisfies the base
-change property with `Λ`-coefficients, then also with `Λ'`-coefficients for every ring
-homomorphism `φ : Λ →+* Λ'`: restriction of scalars along `φ` reflects isomorphisms, preserves
-torsion cohomology, and carries the derived base change map over `Λ'` to the one over `Λ`. -/
-theorem Etale.HasTorsionBaseChange.of_ringHom {Λ' : Type (u + 1)} [CommRing Λ'] (φ : Λ →+* Λ')
-    {X Y : Scheme.{u}} {f : X ⟶ Y} (hf : Etale.HasTorsionBaseChange Λ f) :
-    Etale.HasTorsionBaseChange Λ' f := by
-  intro Y' X' g f' g' sq K hK
-  rw [← Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff φ sq.toCommSq K]
-  exact hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars φ K hK)
-
 /-- **Base change property for a quotient coefficient ring.** If `f` satisfies the base change
 property with `Λ`-coefficients, then also with `Λ ⧸ NΛ`-coefficients: restriction of scalars
 along `Λ ⟶ Λ ⧸ NΛ` is conservative, sends complexes of `Λ ⧸ NΛ`-modules to complexes with

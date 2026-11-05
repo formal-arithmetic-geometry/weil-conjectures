@@ -605,34 +605,6 @@ theorem mem_lieSubalgebra_center_iff [IsAlgClosed k] [CharZero k] [I.IsPrime]
   refine and_congr Iff.rfl ⟨fun h Y hY ↦ (hc.1 fun g hg ↦ (h hg).symm) Y hY,
     fun h g hg ↦ (hc.2 h g hg).symm⟩
 
-/-- The tangent vectors of the centre of a reduced `G = V(I)` commute with the Lie algebra of `G`:
-they commute with `G(k)`, hence with `Lie G`. -/
-theorem commute_of_mem_lieSubalgebra_center [IsAlgClosed k] (hI : I.IsRadical) {X Y : Matrix n n k}
-    (hX : X ∈ lieSubalgebra (center I)) (hY : Y ∈ lieSubalgebra I) : X * Y = Y * X := by
-  -- `X` commutes with `G(k)`
-  have hXG (g : GL n k) (hg : g ∈ zeroLocus I k) : X * g = g * X := by
-    have hmem : ∀ e ∈ centralizerEquations {(g : Matrix n n k)}, e ∈ center I := fun e he ↦
-      mem_vanishingIdeal.2 fun z hz ↦ (forall_centralizerEquations_iff z).2 (by
-        simp only [Subalgebra.mem_centralizer_iff, Set.image_singleton, Set.mem_singleton_iff,
-          forall_eq, Algebra.algebraMap_self, RingHom.mapMatrix_id, RingHom.id_apply]
-        rw [← Units.val_mul, ← Units.val_mul, (mem_centerPoints_iff I).1 hz |>.2 g hg]) e he
-    have hX' : dualUnit X ∈ zeroLocus (center I) (DualNumber k) := hX
-    have := (forall_centralizerEquations_iff (R := DualNumber k) (dualUnit X)).1
-      fun e he ↦ hX' e (hmem e he)
-    simp only [Subalgebra.mem_centralizer_iff, Set.image_singleton, Set.mem_singleton_iff,
-      forall_eq, commute_dualUnit_iff] at this
-    exact this.symm
-  have hE : ∀ g ∈ zeroLocus I k, ∀ e ∈ centralizerEquations {X}, evalAlgHom g e = 0 :=
-    fun g hg ↦ (forall_centralizerEquations_iff g).2 (by
-      simp only [Subalgebra.mem_centralizer_iff, Set.image_singleton, Set.mem_singleton_iff,
-        forall_eq, Algebra.algebraMap_self, RingHom.mapMatrix_id, RingHom.id_apply]
-      exact hXG g hg)
-  have hc := (forall_centralizerEquations_iff (R := DualNumber k) (dualUnit Y)).1 fun e he ↦
-    forall_mem_lieSubalgebra_of_forall_mem_zeroLocus hI hE hY he
-  simp only [Subalgebra.mem_centralizer_iff, Set.image_singleton, Set.mem_singleton_iff,
-    forall_eq, commute_dualUnit_iff] at hc
-  exact hc
-
 end Comparison
 
 end AlgebraicGeometry.GeneralLinearGroup

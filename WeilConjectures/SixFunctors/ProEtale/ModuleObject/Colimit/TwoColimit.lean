@@ -248,7 +248,6 @@ attribute [local instance 2000] CategoryTheory.Mod.monoidalClosed
   AlgebraicGeometry.ProEtale.sheafMonoidalClosed
   AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf
 
-
 set_option backward.isDefEq.respectTransparency false
 
 open ZeroObject
@@ -355,10 +354,6 @@ private lemma bounded_factors_cocone
   exact CategoryTheory.factors_of_colimit_cocone N DerivedCategory.Q c hc K
     (CategoryTheory.factors_iso _ ((shiftFunctorZero _ ℤ).app K)
       (CategoryTheory.shiftFactors_of_hom_colimit N DerivedCategory.Q K h 0))
-
-omit [TopologicalSpace.NoetherianSpace X] in
-private lemma tensorComp_eq {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    derivedExtendScalarsCompIso X ℓ h = finiteCoefficientDerivedTensorCompIso X ℓ h := rfl
 
 attribute [local irreducible] derivedExtendScalarsCompIso
 

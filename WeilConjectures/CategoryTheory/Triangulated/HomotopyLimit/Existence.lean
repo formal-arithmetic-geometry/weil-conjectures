@@ -118,43 +118,6 @@ lemma isHomotopyLimit_homotopyLimitCone : IsHomotopyLimit (homotopyLimitCone F) 
   rw [hι]
   exact hT
 
-
-/-- The connecting map `∏ₙ Fₙ ⟶ (R lim F)⟦1⟧` of the chosen Milnor triangle. -/
-noncomputable def homotopyLimitδ :
-    (∏ᶜ fun n : ℕ ↦ F.obj (op n)) ⟶ (homotopyLimit F)⟦(1 : ℤ)⟧ :=
-  (exists_distTriang_homotopyLimitι F).choose
-
-/-- The chosen Milnor triangle `R lim F ⟶ ∏ₙ Fₙ ⟶ ∏ₙ Fₙ ⟶ (R lim F)⟦1⟧`. -/
-noncomputable abbrev homotopyLimitTriangle : Triangle C :=
-  Triangle.mk (homotopyLimitι F) (𝟙 _ - piTowerShift F) (homotopyLimitδ F)
-
-lemma homotopyLimitTriangle_distinguished : homotopyLimitTriangle F ∈ distTriang C :=
-  (exists_distTriang_homotopyLimitι F).choose_spec
-
-/-- A cone `s` over a tower lifts to the chosen homotopy limit: there is a map
-`s.pt ⟶ R lim F` compatible with the legs. -/
-lemma exists_lift_homotopyLimitCone (s : Cone F) :
-    ∃ φ : s.pt ⟶ homotopyLimit F, ∀ n : ℕ,
-      φ ≫ (homotopyLimitCone F).π.app (op n) = s.π.app (op n) := by
-  have hf : (Pi.lift fun n ↦ s.π.app (op n)) ≫ (𝟙 _ - piTowerShift F) = 0 :=
-    Pi.hom_ext _ _ fun n ↦ by
-      have h := s.w (homOfLE (n.le_add_right 1)).op
-      rw [zero_comp, Category.assoc, Preadditive.sub_comp, Category.id_comp, piTowerShift_π,
-        Preadditive.comp_sub, Pi.lift_π, Pi.lift_π_assoc, h, sub_self]
-  obtain ⟨φ, hφ⟩ := Triangle.coyoneda_exact₂ _ (homotopyLimitTriangle_distinguished F) _ hf
-  have hφ' : φ ≫ homotopyLimitι F = Pi.lift fun n ↦ s.π.app (op n) := hφ.symm
-  exact ⟨φ, fun n ↦ by rw [homotopyLimitCone_π_app, ← Category.assoc, hφ', Pi.lift_π]⟩
-
-/-- A (non-canonical) lift `s.pt ⟶ R lim F` of a cone over a tower into the chosen homotopy
-limit, compatible with the legs (`homotopyLimitLift_π`). -/
-noncomputable def homotopyLimitLift (s : Cone F) : s.pt ⟶ homotopyLimit F :=
-  (exists_lift_homotopyLimitCone F s).choose
-
-@[reassoc (attr := simp)]
-lemma homotopyLimitLift_π (s : Cone F) (n : ℕ) :
-    homotopyLimitLift F s ≫ (homotopyLimitCone F).π.app (op n) = s.π.app (op n) :=
-  (exists_lift_homotopyLimitCone F s).choose_spec n
-
 end Existence
 
 section Map
@@ -162,75 +125,9 @@ section Map
 variable {F G : ℕᵒᵖ ⥤ C} [HasProduct fun n : ℕ ↦ F.obj (op n)]
   [HasProduct fun n : ℕ ↦ G.obj (op n)] (a : F ⟶ G)
 
-/-- The map `∏ₙ Fₙ ⟶ ∏ₙ Gₙ` induced by a morphism of towers. -/
-noncomputable abbrev piTowerMap :
-    (∏ᶜ fun n : ℕ ↦ F.obj (op n)) ⟶ ∏ᶜ fun n : ℕ ↦ G.obj (op n) :=
-  Limits.Pi.map fun n ↦ a.app (op n)
-
-omit [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
-  [Pretriangulated C] in
-lemma piTowerMap_comp_sub_piTowerShift :
-    (𝟙 _ - piTowerShift F) ≫ piTowerMap a = piTowerMap a ≫ (𝟙 _ - piTowerShift G) :=
-  Pi.hom_ext _ _ fun n ↦ by
-    simp only [Preadditive.sub_comp, Preadditive.comp_sub, Category.id_comp, Category.comp_id,
-      Category.assoc, piTowerShift_π, Limits.Pi.map_π, Limits.Pi.map_π_assoc]
-    rw [← a.naturality, ← piTowerShift_π_assoc]
-
-lemma exists_homotopyLimitTriangle_hom :
-    ∃ u : homotopyLimit F ⟶ homotopyLimit G,
-      homotopyLimitι F ≫ piTowerMap a = u ≫ homotopyLimitι G ∧
-        homotopyLimitδ F ≫ u⟦(1 : ℤ)⟧' = piTowerMap a ≫ homotopyLimitδ G :=
-  complete_distinguished_triangle_morphism₁ _ _ (homotopyLimitTriangle_distinguished F)
-    (homotopyLimitTriangle_distinguished G) (piTowerMap a) (piTowerMap a)
-    (piTowerMap_comp_sub_piTowerShift a)
-
-/-- A map `R lim F ⟶ R lim G` between the chosen homotopy limits induced by a morphism of
-towers `a : F ⟶ G`: the first component of a morphism of Milnor triangles extending the map
-`∏ a : ∏ₙ Fₙ ⟶ ∏ₙ Gₙ`. It is a choice, unique only up to phantom maps; it is compatible with
-the legs (`homotopyLimitMap_π`) and an isomorphism if `a` is (`isIso_homotopyLimitMap`). -/
-noncomputable def homotopyLimitMap : homotopyLimit F ⟶ homotopyLimit G :=
-  (exists_homotopyLimitTriangle_hom a).choose
-
-/-- The morphism of chosen Milnor triangles induced by a morphism of towers. -/
-noncomputable def homotopyLimitTriangleHom : homotopyLimitTriangle F ⟶ homotopyLimitTriangle G :=
-  Triangle.homMk _ _ (homotopyLimitMap a) (piTowerMap a) (piTowerMap a)
-    (exists_homotopyLimitTriangle_hom a).choose_spec.1 (piTowerMap_comp_sub_piTowerShift a)
-    (exists_homotopyLimitTriangle_hom a).choose_spec.2
-
-@[reassoc (attr := simp)]
-lemma homotopyLimitMap_π (n : ℕ) :
-    homotopyLimitMap a ≫ (homotopyLimitCone G).π.app (op n) =
-      (homotopyLimitCone F).π.app (op n) ≫ a.app (op n) := by
-  have h := (exists_homotopyLimitTriangle_hom a).choose_spec.1 =≫ Pi.π _ n
-  simp only [Category.assoc, Limits.Pi.map_π] at h
-  simp only [homotopyLimitCone_π_app, Category.assoc]
-  exact h.symm.trans rfl
-
-/-- The map of chosen homotopy limits induced by an isomorphism of towers is an isomorphism. -/
-lemma isIso_homotopyLimitMap [∀ n : ℕ, IsIso (a.app (op n))] : IsIso (homotopyLimitMap a) :=
-  have : IsIso (piTowerMap a) := ⟨Limits.Pi.map fun n ↦ inv (a.app (op n)),
-    Pi.hom_ext _ _ fun n ↦ by simp, Pi.hom_ext _ _ fun n ↦ by simp⟩
-  isIso₁_of_isIso₂₃ (homotopyLimitTriangleHom a) (homotopyLimitTriangle_distinguished F)
-    (homotopyLimitTriangle_distinguished G) this this
-
 end Map
 
 variable {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
   [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
-
-/-- Blueprint `lem-cbc-exact-functor-rlim`: Exact functors commute with derived limits of
-towers.
-
-Let `Φ : C ⥤ D` be a triangulated functor which commutes with the countable product `∏ₙ Mₙ` of
-a tower `M`. If `c` is a homotopy limit cone `R lim M` and `c'` a homotopy limit cone
-`R lim Φ(M)`, then there is an isomorphism `Φ(R lim M) ≅ R lim Φ(M)` compatible with the maps to
-the terms of the towers: it is the comparison of the two homotopy limit cones `Φ(c)`
-(`CategoryTheory.Pretriangulated.IsHomotopyLimit.map`) and `c'` over `M ⋙ Φ`. -/
-lemma IsHomotopyLimit.exists_iso_map {M : ℕᵒᵖ ⥤ C} {c : Cone M} (hc : IsHomotopyLimit c)
-    (Φ : C ⥤ D) [Φ.CommShift ℤ] [Φ.IsTriangulated] [Φ.Additive]
-    [PreservesLimit (Discrete.functor fun n : ℕ ↦ M.obj (op n)) Φ]
-    {c' : Cone (M ⋙ Φ)} (hc' : IsHomotopyLimit c') :
-    ∃ e : Φ.obj c.pt ≅ c'.pt, ∀ n : ℕ, e.hom ≫ c'.π.app (op n) = Φ.map (c.π.app (op n)) :=
-  (hc.map Φ).exists_iso hc'
 
 end CategoryTheory.Pretriangulated

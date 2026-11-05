@@ -42,39 +42,6 @@ lemma mul_one_submatrix_id [DecidableEq n] {o : Type*} {k : Type*} (e : k → n)
   ext i j
   simp [Matrix.mul_apply, Matrix.one_apply]
 
-/-- **Split rank factorisation.** Let `A` be a matrix over a commutative ring with an invertible
-`ρ × ρ` minor `B` (rows `e₁`, columns `e₂`) and all of whose `(ρ + 1) × (ρ + 1)` minors vanish.
-Then `A = L * M` with `L' * L = 1` and `M * M' = 1`, where `L = A[:, e₂] B⁻¹` and `M = A[e₁, :]`. -/
-theorem exists_mul_eq_of_isUnit_det_submatrix (A : Matrix m n R) {ρ : ℕ} (e₁ : Fin ρ → m)
-    (e₂ : Fin ρ → n) (hB : IsUnit (A.submatrix e₁ e₂).det)
-    (hA : ∀ (f₁ : Fin (ρ + 1) → m) (f₂ : Fin (ρ + 1) → n), (A.submatrix f₁ f₂).det = 0) :
-    ∃ (L : Matrix m (Fin ρ) R) (M : Matrix (Fin ρ) n R) (L' : Matrix (Fin ρ) m R)
-      (M' : Matrix n (Fin ρ) R), A = L * M ∧ L' * L = 1 ∧ M * M' = 1 := by
-  classical
-  set B := A.submatrix e₁ e₂ with hBdef
-  let := invertibleOfIsUnitDet B hB
-  refine ⟨A.submatrix id e₂ * B⁻¹, A.submatrix e₁ id, (1 : Matrix m m R).submatrix e₁ id,
-    (1 : Matrix n n R).submatrix id e₂ * B⁻¹, ?_, ?_, ?_⟩
-  · ext i j
-    -- the bordered minor with rows `e₁, i` and columns `e₂, j` vanishes
-    let N : Matrix (Fin ρ ⊕ Fin 1) (Fin ρ ⊕ Fin 1) R :=
-      A.submatrix (Sum.elim e₁ fun _ ↦ i) (Sum.elim e₂ fun _ ↦ j)
-    have hN : N.det = 0 := by
-      rw [← det_submatrix_equiv_self finSumFinEquiv.symm N]
-      exact hA _ _
-    have hN' : N = fromBlocks B (A.submatrix e₁ fun _ : Fin 1 ↦ j)
-        (A.submatrix (fun _ : Fin 1 ↦ i) e₂) (fun _ _ ↦ A i j) := by
-      ext (a | a) (b | b) <;> rfl
-    rw [hN', det_fromBlocks₁₁, Matrix.det_unique (n := Fin 1)] at hN
-    have h2 := ((isUnit_det_of_invertible B).mul_right_eq_zero).1 hN
-    rw [sub_apply, sub_eq_zero, invOf_eq_nonsing_inv] at h2
-    refine h2.trans ?_
-    simp only [Matrix.mul_apply, Matrix.submatrix_apply, id]
-  · rw [← Matrix.mul_assoc, one_submatrix_id_mul]
-    exact mul_nonsing_inv B hB
-  · rw [← Matrix.mul_assoc, mul_one_submatrix_id]
-    exact mul_nonsing_inv B hB
-
 end Matrix
 
 namespace Matrix

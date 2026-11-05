@@ -525,14 +525,6 @@ theorem Etale.baseChangeProperty_zero [Flat p] [LocallyOfFinitePresentation p]
   exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff φ).2
     (Etale.isIso_baseChangeMap_app_of_flat Λ sq F)
 
-/-- The smooth case of `AlgebraicGeometry.Etale.baseChangeProperty_zero`: a smooth morphism
-is flat and locally of finite presentation and its geometric fibres are smooth varieties,
-hence reduced, so `BC(p, Λ, 0)` holds for `p` smooth. This is the degree-zero start of the
-induction in the smooth base change theorem. -/
-theorem Etale.baseChangeProperty_zero_of_smooth [Smooth p] :
-    Etale.BaseChangeProperty Λ p 0 :=
-  Etale.baseChangeProperty_zero Λ p
-
 /-- `AlgebraicGeometry.Etale.baseChangeProperty_zero` holds universally: flatness, local finite
 presentation and geometric reducedness of the fibres are stable under base change. -/
 theorem Etale.universalBaseChangeProperty_zero [Flat p] [LocallyOfFinitePresentation p]

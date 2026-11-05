@@ -104,7 +104,6 @@ lemma sqIso_id_vert_hom (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g) :
 
 end Unit
 
-
 section IdentitySquares
 
 variable [𝒪.ContainsIdentities] {X Y : 𝒞}
@@ -185,7 +184,6 @@ lemma exchange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g)
 
 end IdentitySquares
 
-
 section PushforwardUnit
 
 variable {X Y : 𝒞}
@@ -228,7 +226,6 @@ lemma pfComp'_id_right (f : X ⟶ Y) :
   rw [pfComp'_hom, pfId_hom, ← conjugateEquiv_whiskerRight _ _ (F.adj f), ← hr,
     conjugateEquiv_comp, conjugateEquiv_comp, Category.assoc, hpb, conjugateEquiv_id]
 
-
 lemma pfComp'_id_left_inv_app (f : X ⟶ Y) (M : F.obj X) :
     (F.pfComp' (𝟙 X) f f (Category.id_comp f)).inv.app M =
       (F.pf f).map ((F.pfId X).hom.app M) := by
@@ -241,14 +238,12 @@ lemma pfComp'_id_right_inv_app (f : X ⟶ Y) (M : F.obj X) :
   rw [← cancel_epi ((F.pfComp' f (𝟙 Y) f (Category.comp_id f)).hom.app M), Iso.hom_inv_id_app]
   simpa using (congr_app (F.pfComp'_id_right f) M).symm
 
-
 lemma pfComp'_id_left_hom_app (f : X ⟶ Y) (M : F.obj X) :
     (F.pfComp' (𝟙 X) f f (Category.id_comp f)).hom.app M =
       (F.pf f).map ((F.pfId X).inv.app M) := by
   rw [← cancel_mono ((F.pfComp' (𝟙 X) f f (Category.id_comp f)).inv.app M), Iso.hom_inv_id_app,
     pfComp'_id_left_inv_app, ← Functor.map_comp, Iso.inv_hom_id_app]
   exact (CategoryTheory.Functor.map_id _ _).symm
-
 
 lemma pfComp'_id_right_hom_app (f : X ⟶ Y) (M : F.obj X) :
     (F.pfComp' f (𝟙 Y) f (Category.comp_id f)).hom.app M =
@@ -258,7 +253,6 @@ lemma pfComp'_id_right_hom_app (f : X ⟶ Y) (M : F.obj X) :
   rfl
 
 end PushforwardUnit
-
 
 section ExtensionByZeroUnit
 
@@ -300,7 +294,6 @@ lemma shComp'_id_right (j : X ⟶ Y) [Fact (𝒪 j)] :
   ext M
   simp [pbComp'_id_right_inv_app, ← Functor.map_comp]
 
-
 /-- The identity isomorphism `(𝟙 X)_! ≅ 𝟭` is characterized by the counit of `(𝟙 X)_! ⊣ (𝟙 X)^*`:
 `(𝟙 X)^* W ≅ (𝟙 X)_! (𝟙 X)^* W ⟶ W` is `(𝟙 X)^* ≅ 𝟭`. -/
 @[reassoc]
@@ -325,25 +318,9 @@ lemma shId_inv_app_comp_counit (X : 𝒞) (W : F.obj X) :
 
 end ExtensionByZeroUnit
 
-
 section Restriction
 
 variable {U' U Z' Z : 𝒞}
-
-/-- The base change map of the extension by zero becomes an isomorphism after restriction to the
-open `l : U' ⟶ Z'`, when the extensions by zero along `l` and `r` are fully faithful. -/
-lemma isIso_map_baseChange_app (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
-    [Fact (𝒪 l)] [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.shAdj r).unit]
-    [IsIso (F.shAdj l).unit] (M : F.obj U) :
-    IsIso ((F.pb l).map ((F.baseChange t l r b w).natTrans.app M)) := by
-  have h := unit_mateEquiv_symm (F.shAdj r) (F.shAdj l) (F.sqIso t l r b w).hom M
-  have h' : (F.pb l).map ((F.baseChange t l r b w).natTrans.app M) =
-      inv ((F.shAdj l).unit.app _) ≫ (F.pb t).map ((F.shAdj r).unit.app M) ≫
-        (F.sqIso t l r b w).hom.app _ := by
-    rw [IsIso.eq_inv_comp]
-    exact h.symm
-  rw [h']
-  infer_instance
 
 end Restriction
 

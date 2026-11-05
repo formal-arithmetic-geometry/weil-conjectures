@@ -55,19 +55,6 @@ lemma etaleReductionUpperStarIso_hom_app (f : Z ⟶ Y)
           ((boundedConstructibleIntegersModPowReduction Y.left ℓ E n).obj K) := by
   simp [etaleReductionUpperStarIso, finiteEtaleReadingUpperStarIso, finiteEtaleReading]
 
-/-- **The pullback comparison of the étale reduction factors through the étale reading**:
-`etaleReductionUpperStarIso` is the condensed comparison
-`boundedConstructibleUpperStarIntegersModPowReductionIso`, read by `ρ_Z`, followed by the pullback
-comparison `finiteEtaleReadingUpperStarIso` of `ρ`. -/
-theorem etaleReductionUpperStarIso_eq (f : Z ⟶ Y) :
-    etaleReductionUpperStarIso ℓ E n f =
-      Functor.isoWhiskerRight (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n f)
-          (finiteEtaleReading ℓ E n Z) ≪≫
-        Functor.isoWhiskerLeft (boundedConstructibleIntegersModPowReduction Y.left ℓ E n)
-          (finiteEtaleReadingUpperStarIso ℓ E n f) := by
-  ext K
-  exact etaleReductionUpperStarIso_hom_app ℓ E n f K
-
 end EtaleReduction
 
 end AlgebraicGeometry.ProEtale.CondensedRing

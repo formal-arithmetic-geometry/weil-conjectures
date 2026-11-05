@@ -41,13 +41,6 @@ variable {A : Type*} [AddMonoid A] {B B' C C' : Type*} [Category* B] [Category* 
   [Lf.CommShift A] [Rf.CommShift A] [Lf'.CommShift A] [Rf'.CommShift A] [G.CommShift A]
   [G'.CommShift A] (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') [af.CommShift A] [af'.CommShift A]
 
-/-- The exchange morphism `Rf ⋙ G ⟶ G' ⋙ Rf'` of adjunctions commuting with the shifts, along an
-isomorphism `G ⋙ Lf' ≅ Lf ⋙ G'` commuting with the shifts, commutes with the shifts. -/
-instance exchangeRight (θ : G ⋙ Lf' ≅ Lf ⋙ G') [NatTrans.CommShift θ.hom A] :
-    NatTrans.CommShift (Adjunction.exchangeRight af af' θ) A := by
-  dsimp only [Adjunction.exchangeRight, Functor.squareTransport]
-  infer_instance
-
 end CategoryTheory.NatTrans.CommShift
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -62,67 +55,6 @@ local notation "𝔻(" X ")" =>
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y X' Y' : Scheme.{u}}
 
-/-- The transport `L(a)^* = L(b)^*` along an equality `a = b` commutes with the shifts. -/
-lemma commShift_eqToHom_leftDerivedUpperStar {a b : X ⟶ Y} (h : a = b)
-    (e : L((a)^*⟦Λ⟧) = L((b)^*⟦Λ⟧)) : NatTrans.CommShift (eqToHom e) ℤ := by
-  subst h
-  exact inferInstanceAs (NatTrans.CommShift (𝟙 _) ℤ)
-
-omit [MonObj Λ] [IsCommMonObj Λ] in
-private lemma commShift_symm_trans_eqToIso_trans_hom_aux {C D : Type*} [Category C]
-    [Category D] [HasShift C ℤ] [HasShift D ℤ] {F₁ F₂ F₃ F₄ : C ⥤ D} [F₁.CommShift ℤ]
-    [F₂.CommShift ℤ] [F₃.CommShift ℤ] [F₄.CommShift ℤ] (c₁ : F₂ ≅ F₁) (c₂ : F₃ ≅ F₄)
-    (e : F₂ = F₃) [NatTrans.CommShift c₁.hom ℤ] [NatTrans.CommShift c₂.hom ℤ]
-    [NatTrans.CommShift (eqToHom e) ℤ] :
-    NatTrans.CommShift (c₁.symm ≪≫ eqToIso e ≪≫ c₂).hom ℤ :=
-  inferInstanceAs (NatTrans.CommShift (c₁.inv ≫ eqToHom e ≫ c₂.hom) ℤ)
-
 variable {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-/-- The pullback comparison `Lg^* ⋙ Lp'^* ≅ Lp^* ⋙ Lg'^*` of a commutative square commutes with
-the shifts. -/
-instance commShift_pullbackSquareComparison_hom (sq : CommSq g' p' p g) :
-    NatTrans.CommShift (pullbackSquareComparison Λ sq).hom ℤ := by
-  obtain e : L((p' ≫ g)^*⟦Λ⟧) = L((g' ≫ p)^*⟦Λ⟧) := by rw [sq.w]
-  have := commShift_eqToHom_leftDerivedUpperStar Λ sq.w.symm e
-  have he : pullbackSquareComparison Λ sq =
-      (leftDerivedUpperStarComp Λ p' g).symm ≪≫ eqToIso e ≪≫ leftDerivedUpperStarComp Λ g' p :=
-    rfl
-  rw [he]
-  exact commShift_symm_trans_eqToIso_trans_hom_aux _ _ e
-
-/-- The base change map `Lg^* Rp_* ⟶ Rp'_* Lg'^*` of a commutative square commutes with the
-shifts. -/
-instance commShift_baseChangeMap (sq : CommSq g' p' p g) :
-    NatTrans.CommShift (baseChangeMap Λ sq) ℤ :=
-  NatTrans.CommShift.exchangeRight (derivedUpperStarLowerStarAdjunction Λ p)
-    (derivedUpperStarLowerStarAdjunction Λ p') (pullbackSquareComparison Λ sq)
-
-/-- The formal part of blueprint `sk-prop-proper-base-change-unbounded` and
-`det-proper-base-change-unbounded-extension`, for an arbitrary condensed ring `Λ`: proper base
-change extends from `Dbc` to `Loc(Dbc)`.
-
-Let `g' ≫ p = p' ≫ g` be a commutative square. Assume that `Rp_*` and `Rp'_*` preserve the
-direct sums of objects of `Loc(Dbc(X, Λ))`, resp. `Loc(Dbc(X', Λ))`, that `Lg'^*` maps
-`Dbc(X, Λ)` into `Dbc(X', Λ)` and that the base change map `Lg^* Rp_*K ⟶ Rp'_* Lg'^*K` is an
-isomorphism for `K` in `Dbc(X, Λ)`. Then it is an isomorphism for `K` in `Loc(Dbc(X, Λ))`: both
-sides are triangulated functors of `K` preserving the direct sums of objects of
-`Loc(Dbc(X, Λ))`. -/
-theorem isIso_baseChangeMap_of_localizingBoundedConstructible (sq : CommSq g' p' p g)
-    (hsum : R((p)_*⟦Λ⟧).PreservesCoproductsOn.{u + 1} (localizingBoundedConstructible Λ X))
-    (hsum' : R((p')_*⟦Λ⟧).PreservesCoproductsOn.{u + 1} (localizingBoundedConstructible Λ X'))
-    (hpull : ∀ K : 𝔻(X), boundedConstructible (condensedRingObj Λ X) K →
-      boundedConstructible (condensedRingObj Λ X') (L((g')^*⟦Λ⟧).obj K))
-    (h : ∀ K : 𝔻(X), boundedConstructible (condensedRingObj Λ X) K →
-      IsIso ((baseChangeMap Λ sq).app K))
-    {K : 𝔻(X)} (hK : localizingBoundedConstructible Λ X K) :
-    IsIso ((baseChangeMap Λ sq).app K) :=
-  NatTrans.isIso_app_of_localizingClosure (baseChangeMap Λ sq)
-    (P := boundedConstructible (condensedRingObj Λ X))
-    (hsum.comp (Functor.preservesCoproductsOn_of_preservesColimitsOfShape L((g)^*⟦Λ⟧) ⊤)
-      (fun _ _ ↦ trivial))
-    ((Functor.preservesCoproductsOn_of_preservesColimitsOfShape L((g')^*⟦Λ⟧) _).comp hsum'
-      (fun _ hM ↦ localizingBoundedConstructible_leftDerivedUpperStar Λ g' hpull hM))
-    h hK
 
 end AlgebraicGeometry.ProEtale.CondensedRing

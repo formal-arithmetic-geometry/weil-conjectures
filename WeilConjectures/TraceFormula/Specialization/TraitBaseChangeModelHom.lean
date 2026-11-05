@@ -43,34 +43,4 @@ variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
   {vP : trait K ⟶ YP} (hvP : vP ≫ pP = traitMap k' K)
   (φ : P.Hom M f f') (κ : YP ⟶ YM) (hκb : bP ≫ κ = φ.total ≫ bM) (hκv : vP ≫ κ = vM)
 
-/-- The morphism of base changes commutes with the projections on total spaces. -/
-lemma Hom.baseChange_total_comp (hgP : gP = φ.generic ≫ gM) :
-    (φ.baseChange hM hP hbM hvM hbP hvP κ hκb hκv hgP).total ≫
-        (baseChangeHom hM bM hbM vM hvM).total =
-      (baseChangeHom hP bP hbP vP hvP).total ≫ φ.total :=
-  pullback.lift_fst _ _ _
-
-/-- The morphism of base changes commutes with the projections on geometric generic fibres. -/
-lemma Hom.baseChange_generic_comp (hgP : gP = φ.generic ≫ gM) :
-    (φ.baseChange hM hP hbM hvM hbP hvP κ hκb hκv hgP).generic ≫
-        (baseChangeHom hM bM hbM vM hvM).generic =
-      (baseChangeHom hP bP hbP vP hvP).generic ≫ φ.generic := by
-  refine hM.isPullback_j.hom_ext ?_ ?_
-  · simp [φ.comm_j]
-  · simp [← hgP]
-
-/-- The morphism of base changes commutes with the projections on special fibres. -/
-lemma Hom.baseChangeSpecial_comp :
-    φ.baseChangeSpecial κ hκb hκv ≫ baseChangeSpecialMap hM bM hbM vM hvM =
-      baseChangeSpecialMap hP bP hbP vP hvP ≫ f' := by
-  have h₁ : (φ.baseChangeSpecial κ hκb hκv ≫ baseChangeSpecialMap hM bM hbM vM hvM) ≫ M.i =
-      (baseChangeSpecialMap hP bP hbP vP hvP ≫ f') ≫ M.i := by
-    simp [Hom.baseChangeSpecial, φ.comm_i]
-  refine hM.isPullback_i.hom_ext h₁ ?_
-  have : IsClosedImmersion (traitClosedPoint k') :=
-    IsClosedImmersion.spec_of_surjective _ fun a ↦ ⟨PowerSeries.C a, by simp⟩
-  rw [← cancel_mono (traitClosedPoint k')]
-  simp only [Category.assoc, ← hM.isPullback_i.w]
-  simpa only [Category.assoc] using congrArg (· ≫ qM) h₁
-
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

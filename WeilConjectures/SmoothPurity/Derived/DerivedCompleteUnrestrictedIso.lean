@@ -29,29 +29,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
 
-/-- Unrestricted completeness is invariant under an isomorphism of derived objects.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Project, Tag 08TC
-(blueprint: lem-pur-unrestricted-completeness-iso).
-Proof: retain the K-flat representative, its resolution and reduction tower.
-Compose its identification with the given isomorphism and postcompose the connecting
-arrow by its shifted hom. The new canonical augmentation is the old one precomposed
-with the inverse isomorphism. Projectionwise product extensionality identifies the
-first triangle square; the other two squares are identity and inverse cancellation.
-Thus the new Roos triangle is isomorphic to the original distinguished triangle. -/
-theorem isDerivedCompleteUnrestricted_of_iso
-  {K M : DerivedCategory (integralTowerModules l E X)} (e : K ≅ M)
-  (hK : IsDerivedCompleteUnrestricted l E X K) :
-  IsDerivedCompleteUnrestricted l E X M := by
-  obtain ⟨D, hlD, P, G, q, hq, a, hprod, δ, hδ⟩ := hK
-  let := hprod
-  refine ⟨D, hlD, P, G, q, hq, a ≪≫ e, hprod,
-    δ ≫ (shiftFunctor _ (1 : ℤ)).map e.hom, ?_⟩
-  apply Pretriangulated.isomorphic_distinguished _ hδ _
-  refine Pretriangulated.Triangle.isoMk _ _ e.symm (Iso.refl _) (Iso.refl _) ?_ ?_ ?_
-  · apply Pi.hom_ext
-    intro n
-    simp [Category.assoc]
-  · simp
-  · simp [Category.assoc, ← Functor.map_comp]
-
 end WeilConjectures

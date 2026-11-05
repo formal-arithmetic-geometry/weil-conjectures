@@ -98,7 +98,6 @@ theorem WeilSheaf.trace_compactlySupportedCohomology_zero_of_locallyQuasiFinite
     rw [Subsingleton.elim ((G.compactlySupportedCohomology i).frobeniusEnd ^ m) 0, map_zero,
       smul_zero]
 
-
 /-- **The local polynomial of `H_c^0` of a scheme quasi-finite over `k₀`**:
 `det (1 - T F ∣ H_c^0(T ⊗ k̄, G)) = ∏_t det (1 - T^{deg t} F_t ∣ G_t̄)`, the product running over
 the (finitely many) closed points `t` of `T`. Both sides are determined by the traces of the
@@ -127,34 +126,6 @@ theorem WeilSheaf.charpolyRev_compactlySupportedCohomology_zero_of_subsingleton 
 end QuasiFiniteCohomology
 
 section Helpers
-
-/-- The trace bookkeeping behind the Frobenius at a point of a quasi-finite direct image: if the
-traces of the powers of `H₁ ≃ H₂` are `d tr (A^{m / d})` (for `d ∣ m`) on the one hand and
-`∑ₓ dₓ tr (Bₓ^{m / dₓ})` (for `dₓ ∣ m`) on the other, with `dₓ = d eₓ`, then
-`tr (Aⁿ) = ∑_{eₓ ∣ n} eₓ tr (Bₓ^{n / eₓ})`. -/
-theorem _root_.FrobeniusModule.trace_pow_eq_sum_of_equiv {K : Type} [Field K] [CharZero K]
-    {H₁ H₂ A : FrobeniusModule.{u + 1, 0} K} (E : H₁.Equiv H₂) {ι : Type*} [Fintype ι]
-    (B : ι → FrobeniusModule.{u + 1, 0} K) {d : ℕ} (hd : d ≠ 0) (e : ι → ℕ)
-    (h₁ : ∀ m : ℕ, m ≠ 0 → LinearMap.trace K H₁.carrier (H₁.frobeniusEnd ^ m) =
-      if d ∣ m then (d : K) * LinearMap.trace K A.carrier (A.frobeniusEnd ^ (m / d)) else 0)
-    (h₂ : ∀ m : ℕ, m ≠ 0 → LinearMap.trace K H₂.carrier (H₂.frobeniusEnd ^ m) =
-      ∑ x, if d * e x ∣ m then ((d * e x : ℕ) : K) *
-        LinearMap.trace K (B x).carrier ((B x).frobeniusEnd ^ (m / (d * e x))) else 0)
-    (n : ℕ) (hn : n ≠ 0) :
-    LinearMap.trace K A.carrier (A.frobeniusEnd ^ n) =
-      ∑ x, if e x ∣ n then (e x : K) *
-        LinearMap.trace K (B x).carrier ((B x).frobeniusEnd ^ (n / e x)) else 0 := by
-  have hdn : d * n ≠ 0 := mul_ne_zero hd hn
-  have h := E.trace_frobeniusEnd_pow (d * n)
-  rw [h₁ _ hdn, h₂ _ hdn, if_pos (dvd_mul_right d n),
-    Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero hd)] at h
-  have hdK : (d : K) ≠ 0 := Nat.cast_ne_zero.2 hd
-  refine mul_left_cancel₀ hdK (h.symm.trans ?_)
-  rw [Finset.mul_sum]
-  refine Finset.sum_congr rfl fun x _ ↦ ?_
-  rw [Nat.mul_div_mul_left _ _ (Nat.pos_of_ne_zero hd)]
-  simp only [Nat.mul_dvd_mul_iff_left (Nat.pos_of_ne_zero hd)]
-  split_ifs <;> push_cast <;> ring
 
 end Helpers
 

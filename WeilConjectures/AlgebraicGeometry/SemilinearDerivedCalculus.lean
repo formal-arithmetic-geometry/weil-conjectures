@@ -614,63 +614,11 @@ variable (A : Data.{c, v, r} J B τ)
 
 end Data
 
-/-- The actual underlying sheaf of sets of a module sheaf.
-Source: Stacks 03D1 (auxiliary; not a blueprint node). -/
-abbrev underlying (R : Sheaf J CommRingCat.{max c v r}) :=
-  SheafOfModules.toSheaf (ring.{c, v, max c v r} J R) ⋙
-    sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max c v r})
-
-/-- Pure-tensor normalization of the inverse-image tensor comparison, tested
-on all generalized sections. It fixes the ordinary comparison before deriving.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
-def InverseTensorPure {C' : Type c} [Category.{v} C']
-    [EssentiallySmall.{max c v r} C'] (J' : GrothendieckTopology C')
-    (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))
-    (R : Sheaf J CommRingCat.{max c v r}) (S : Sheaf J' CommRingCat.{max c v r})
-    (I : SheafOfModules.AlgebraicInverseImage uInv R S)
-    (μ : ∀ M N : Mod.{c, v, max c v r} J R,
-      I.modules.obj (ordinaryTensor.{c, v, r} J R M N) ≅
-        ordinaryTensor.{c, v, r} J' S (I.modules.obj M) (I.modules.obj N)) : Prop :=
-  ∀ (M N : Mod.{c, v, max c v r} J R) (Z : Sheaf J (Type (max c v r)))
-    (x : Z ⟶ (underlying.{c, v, r} J R).obj M) (y : Z ⟶ (underlying.{c, v, r} J R).obj N)
-    (z : Z ⟶ (underlying.{c, v, r} J R).obj (ordinaryTensor.{c, v, r} J R M N)),
-    (∀ (U : Cᵒᵖ) (a : Z.obj.obj U),
-      z.hom.app U a = tensorSection.{c, v, r} J R M N U (x.hom.app U a) (y.hom.app U a)) →
-    ∀ (V : C'ᵒᵖ) (a : (uInv.obj Z).obj.obj V),
-      ((μ M N).hom.val.app V)
-        (((I.moduleUnderlying.inv.app (ordinaryTensor.{c, v, r} J R M N)).hom.app V)
-          ((uInv.map z).hom.app V a)) =
-        tensorSection.{c, v, r} J' S (I.modules.obj M) (I.modules.obj N) V
-          (((I.moduleUnderlying.inv.app M).hom.app V) ((uInv.map x).hom.app V a))
-          (((I.moduleUnderlying.inv.app N).hom.app V) ((uInv.map y).hom.app V a))
-
 section ScalarSystems
 
 variable (F : ℕ → Sheaf J CommRingCat.{max c v r})
   (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)
   (hα : ∀ n : ℕ, α (n + 1) ≫ σ n = τ n ≫ α n)
-
-/-- Derived extension for a compatible coefficient-system morphism.
-Its level comparison is fixed by transposition against the identity-on-sections
-restriction comparison, so it describes the canonical extension and its maps.
-Source: Stacks 06YY, 07A6 (auxiliary; not a blueprint node). -/
-structure ScalarSystems where
-  /-- The actual ringed-system derived change of rings. -/
-  scalar : ScalarData.{c, v, max c v r}
-    (systemMap.{c, v, max c v r} J B τ F σ α hα)
-  /-- The actual derived change of rings at each coefficient level. -/
-  levels : ∀ n : ℕ, ScalarData.{c, v, max c v r} (α n)
-  /-- Extension evaluates to tensor with F_n over B_n. -/
-  evaluation : ∀ n : ℕ,
-    scalar.T ⋙ e.{c, v, max c v r} J F σ n ≅
-      e.{c, v, max c v r} J B τ n ⋙ (levels n).T
-  /-- The comparison is precisely the adjunction transpose of restriction evaluation. -/
-  transpose_evaluation : ∀ (n : ℕ) (M : DS.{c, v, max c v r} J B τ)
-    (N : DS.{c, v, max c v r} J F σ) (f : scalar.T.obj M ⟶ N),
-    (e.{c, v, max c v r} J B τ n).map ((scalar.adjunction.homEquiv _ _) f) ≫
-        (restrictionEvaluation.{c, v, max c v r} J B τ F σ α hα n).hom.app N =
-      ((levels n).adjunction.homEquiv _ _)
-        ((evaluation n).inv.app M ≫ (e.{c, v, max c v r} J F σ n).map f)
 
 end ScalarSystems
 

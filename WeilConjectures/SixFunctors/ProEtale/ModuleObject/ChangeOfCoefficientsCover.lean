@@ -66,55 +66,6 @@ section Adjoint
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
 
-/-- The pullback of the adjoint `Λ'_S ⊗ K ⟶ L` of `φ : K ⟶ Res L` is, through (Pull), the adjoint
-of `f^* φ` followed by `f^* Res L ≅ Res f^* L`. -/
-lemma pullIso_hom_app_comp_upperStar_map_homEquiv_symm {X S : Scheme.{u}} (f : X ⟶ S)
-    {K : Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)}
-    {L : Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ' S)}
-    (φ : K ⟶ (Mod.comap (coefficientMap a S)).obj L) :
-    (pullIso a f).hom.app K ≫ (f)^*⟦Λ'⟧.map
-        (((Mod.extendRestrictAdjunction (coefficientMap a S)).homEquiv _ _).symm φ) =
-      ((Mod.extendRestrictAdjunction (coefficientMap a X)).homEquiv _ _).symm
-        ((f)^*⟦Λ⟧.map φ ≫ (comapUpperStarIso a f).inv.app L) := by
-  set adj₁ := Mod.extendRestrictAdjunction (coefficientMap a X)
-  set adj₂ := Mod.extendRestrictAdjunction (coefficientMap a S)
-  set adjR := upperStarLowerStarAdjunction Λ f
-  set adjS := upperStarLowerStarAdjunction Λ' f
-  set β := (adj₁.homEquiv _ _).symm ((f)^*⟦Λ⟧.map φ ≫ (comapUpperStarIso a f).inv.app L)
-  have H : adj₂.homEquiv _ _ (adjS.homEquiv _ _ ((pullIso a f).inv.app K ≫ β)) =
-      adjR.homEquiv _ _ (adj₁.homEquiv _ _ β) ≫ (comapLowerStarIso a f).inv.app _ :=
-    Adjunction.homEquiv_homEquiv_pullIsoOfComapIso_inv adj₁ adj₂ adjR adjS _ K β
-  have hc := squareCompatible_upperStarLowerStarAdjunction_unit a f L
-  simp only [Functor.idSquareIso_hom_app, Functor.pasteSquareIso_hom_app, Category.id_comp,
-    Functor.comp_obj, Functor.id_obj] at hc
-  have H' : adj₂.homEquiv _ _ (adjS.homEquiv _ _ ((f)^*⟦Λ'⟧.map (((adj₂.homEquiv _ _).symm φ)))) =
-      adj₂.homEquiv _ _ (adjS.homEquiv _ _ ((pullIso a f).inv.app K ≫ β)) := by
-    rw [H, Equiv.apply_symm_apply, adjR.homEquiv_naturality_left, adjR.homEquiv_unit,
-      adjS.homEquiv_unit, adjS.unit_naturality, adj₂.homEquiv_naturality_right,
-      Equiv.apply_symm_apply, Category.assoc, Category.assoc]
-    congr 1
-    rw [← hc]
-    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
-    erw [CategoryTheory.Functor.map_id]
-    rw [Category.id_comp, Iso.hom_inv_id_app]
-    exact (Category.comp_id _).symm
-  rw [(adjS.homEquiv _ _).injective ((adj₂.homEquiv _ _).injective H'), Iso.hom_inv_id_app_assoc]
-
-/-- A morphism `Λ'_S ⊗_{Λ_S} K ⟶ L` adjoint to `φ : K ⟶ Res L` is an isomorphism as soon as, for
-a pro-étale cover `{f_i}`, all the adjoints of the `f_i^* φ` are. -/
-theorem isIso_homEquiv_symm_of_cover {S : Scheme.{u}}
-    {K : Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)}
-    {L : Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ' S)}
-    (φ : K ⟶ (Mod.comap (coefficientMap a S)).obj L)
-    (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S)
-    (h : ∀ i, IsIso (((Mod.extendRestrictAdjunction (coefficientMap a (𝒰.X i))).homEquiv _ _).symm
-      ((𝒰.f i)^*⟦Λ⟧.map φ ≫ (comapUpperStarIso a (𝒰.f i)).inv.app L))) :
-    IsIso (((Mod.extendRestrictAdjunction (coefficientMap a S)).homEquiv _ _).symm φ) := by
-  refine isIso_of_isIso_upperStar_map_of_cover Λ' _ 𝒰 fun i ↦ ?_
-  have := h i
-  rw [← pullIso_hom_app_comp_upperStar_map_homEquiv_symm] at this
-  exact IsIso.of_isIso_comp_left ((pullIso a (𝒰.f i)).hom.app K) _
-
 end Adjoint
 
 end AlgebraicGeometry.ProEtale.CondensedRing

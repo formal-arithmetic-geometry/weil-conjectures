@@ -88,15 +88,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- A sheaf of `Λ`-modules on the small étale site is torsion if and only if its underlying
-abelian sheaf is: both conditions say that every section is locally torsion. -/
-lemma Scheme.isTorsionSheaf_sheafCompose_forget₂_obj_iff
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsTorsionSheaf
-        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) ↔
-      IsTorsionModuleSheaf F := by
-  rw [isTorsionSheaf_iff_isTorsion, isTorsionModuleSheaf_iff_isTorsion]
-
 /-- **The proper base change theorem** in étale cohomology for sheaves of `Λ`-modules: for a
 cartesian square of schemes
 
@@ -120,41 +111,6 @@ theorem Etale.isIso_baseChange_of_isProper_of_torsionHomology [IsProper f]
     (hK : Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X K) :
     IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
   Etale.hasTorsionBaseChange_of_isProper Λ f sq K hK
-
-/-- **The proper base change theorem** in étale cohomology: for a cartesian square of
-schemes
-
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-
-with `f` proper and every bounded below complex `K ∈ D⁺(X_ét, Ab)` of abelian sheaves all of
-whose cohomology sheaves are torsion, the derived base-change morphism
-
-`BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
-
-is an isomorphism in `D⁺(Y'_ét, Ab)`. No hypothesis is imposed on `g`. This is
-[SGA 4, Exp. XII, Thm 5.1]. It is deduced from
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology` for `Λ = ULift ℤ`,
-through the equivalence between sheaves of `ULift ℤ`-modules and abelian sheaves. -/
-@[stacks 0DDE]
-theorem Etale.isIso_baseChange_of_isProper [IsProper f] (sq : IsPullback g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1}))
-    (hK : Etale.DerivedCategory.Plus.torsionHomology X K) :
-    IsIso ((Etale.baseChange Ab.{u + 1} sq.toCommSq).app K) := by
-  obtain ⟨K', ⟨e⟩⟩ := Etale.exists_forget₂_mapDerivedCategoryPlus_obj_iso K
-  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus, ← NatTrans.isIso_app_iff_of_iso _ e,
-    Etale.isIso_derivedBaseChangeMapPlus_app_forget₂_iff]
-  refine Etale.isIso_baseChange_of_isProper_of_torsionHomology _ sq K' fun n ↦ ?_
-  rw [← Scheme.isTorsionSheaf_sheafCompose_forget₂_obj_iff]
-  have := hK n
-  exact IsTorsionSheaf.of_iso ((DerivedCategory.Plus.homologyFunctor _ n).mapIso e.symm ≪≫
-    (((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
-      AddCommGrpCat.{u + 1})).mapDerivedCategoryPlusHomologyFunctorIso n).app K').symm)
 
 /-- **Proper base change as an isomorphism of functors**: if the coefficient ring `Λ` is
 torsion as an additive group — in particular if `Λ` is finite, e.g. `Λ = ℤ/ℓⁿℤ` — then

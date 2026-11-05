@@ -351,13 +351,6 @@ theorem isIso_mateEquiv_etaleReductionLowerShriekIsoOfCompactification
     (isIso_mateEquiv_etaleReductionLowerShriekIsoOfIsOpenImmersion ℓ E n c.overI)
     (isIso_mateEquiv_etaleReductionLowerShriekIso ℓ E n c.overG)
 
-/-- Every morphism of separated `k`-schemes of finite type has a reduction comparison for `Rf_!`
-and `Rf^!`, witnessed by the canonical `etaleReductionLowerShriekIsoOfCompactification` of any
-compactification of `f`. -/
-theorem hasEtaleReductionLowerShriekIso_of_compactification (c : Compactification f.left) :
-    HasEtaleReductionLowerShriekIso ℓ E n f :=
-  ⟨_, isIso_mateEquiv_etaleReductionLowerShriekIsoOfCompactification ℓ E n c⟩
-
 variable (f) in
 /-- Blueprint `det-prop-scalar-six-exceptional` for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read
 on the étale site. **Reduction modulo `ℓⁿ` commutes with `Rf^!`, canonically**:
@@ -378,17 +371,6 @@ noncomputable def etaleReductionUpperShriekIso :
     (Etale.rightDerivedUpperShriekAdjunction _ f.left)
     (TwoSquare.mk _ _ _ _
       (etaleReductionLowerShriekIsoOfCompactification ℓ E n (compactificationOverField f)).inv))
-
-variable (f) in
-lemma etaleReductionUpperShriekIso_hom :
-    have := HasCompactification.of_over f
-    (etaleReductionUpperShriekIso ℓ E n f).hom =
-      mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-        (Etale.rightDerivedUpperShriekAdjunction _ f.left)
-        (TwoSquare.mk _ _ _ _
-          (etaleReductionLowerShriekIsoOfCompactification ℓ E n
-            (compactificationOverField f)).inv) :=
-  rfl
 
 end General
 

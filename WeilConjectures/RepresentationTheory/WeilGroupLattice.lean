@@ -75,115 +75,6 @@ namespace MonoidHom
 variable {ℓ : ℕ} [Fact ℓ.Prime] {W M κ : Type*} [Group W] [AddCommGroup M] [Module ℚ_[ℓ] M]
   [Module ℤ_[ℓ] M] [IsScalarTower ℤ_[ℓ] ℚ_[ℓ] M]
 
-/-- The `W`-stable `ℤ_ℓ`-lattice cut out by the coordinate functionals `c i`: the vectors whose
-whole orbit `{ρ(w) x | w ∈ W}` has coordinates in `ℤ_ℓ`. -/
-def orbitLattice (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) (c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]) :
-    Submodule ℤ_[ℓ] M where
-  carrier := {x | ∀ w i, ‖c i (ρ w x)‖ ≤ 1}
-  add_mem' {x y} hx hy w i := by
-    rw [map_add, map_add]
-    exact (Padic.nonarchimedean _ _).trans (max_le (hx w i) (hy w i))
-  zero_mem' w i := by simp
-  smul_mem' a x hx w i := by
-    rw [← algebraMap_smul ℚ_[ℓ] a x, map_smul, (c i).map_smul, smul_eq_mul, norm_mul,
-      PadicInt.algebraMap_apply, PadicInt.padic_norm_e_of_padicInt]
-    exact mul_le_one₀ a.norm_le_one (norm_nonneg _) (hx w i)
-
-theorem mem_orbitLattice {ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)} {c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]} {x : M} :
-    x ∈ ρ.orbitLattice c ↔ ∀ w i, ‖c i (ρ w x)‖ ≤ 1 :=
-  Iff.rfl
-
-theorem apply_mem_orbitLattice_iff {ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)} {c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]}
-    (w : W) {x : M} : ρ w x ∈ ρ.orbitLattice c ↔ x ∈ ρ.orbitLattice c := by
-  simp only [mem_orbitLattice, ← LinearEquiv.mul_apply, ← map_mul]
-  exact ⟨fun hx w' ↦ by simpa using hx (w' * w⁻¹), fun hx w' ↦ hx (w' * w)⟩
-
-theorem map_orbitLattice (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) (c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]) (w : W) :
-    (ρ.orbitLattice c).map ((ρ w).restrictScalars ℤ_[ℓ] : M →ₗ[ℤ_[ℓ]] M) =
-      ρ.orbitLattice c := by
-  rw [Submodule.map_equiv_eq_comap_symm]
-  ext x
-  rw [Submodule.mem_comap, ← apply_mem_orbitLattice_iff w]
-  simp
-
-/-- The action of `W` on its orbit lattice. -/
-noncomputable def restrictOrbitLattice (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M))
-    (c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]) : W →* (ρ.orbitLattice c ≃ₗ[ℤ_[ℓ]] ρ.orbitLattice c) where
-  toFun w := ((ρ w).restrictScalars ℤ_[ℓ]).ofSubmodules _ _ (ρ.map_orbitLattice c w)
-  map_one' := by
-    ext
-    simp
-  map_mul' w w' := by
-    ext
-    simp
-
-@[simp]
-theorem coe_restrictOrbitLattice_apply (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M))
-    (c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]) (w : W) (x : ρ.orbitLattice c) :
-    (ρ.restrictOrbitLattice c w x : M) = ρ w x :=
-  rfl
-
-/-- The coordinates of a vector of the orbit lattice, as a `ℤ_ℓ`-linear map. -/
-noncomputable def orbitLatticeCoord (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) (c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]) :
-    ρ.orbitLattice c →ₗ[ℤ_[ℓ]] κ → ℤ_[ℓ] where
-  toFun x i := ⟨c i x, by simpa using x.2 1 i⟩
-  map_add' x y := by
-    ext i
-    simp
-    rfl
-  map_smul' a x := by
-    ext i
-    simp [← algebraMap_smul ℚ_[ℓ] a (x : M)]
-
-theorem orbitLatticeCoord_injective (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) {c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]}
-    (hc : ∀ x, (∀ i, c i x = 0) → x = 0) : Function.Injective (ρ.orbitLatticeCoord c) := by
-  rw [← LinearMap.ker_eq_bot, LinearMap.ker_eq_bot']
-  intro x hx
-  ext1
-  exact hc x fun i ↦ congrArg (fun f ↦ (f i : ℚ_[ℓ])) hx
-
-/-- The orbit lattice is a finitely generated `ℤ_ℓ`-module as soon as the coordinate functionals
-are finitely many and jointly injective: it embeds into `ℤ_ℓ^κ`, and `ℤ_ℓ` is noetherian. -/
-theorem finite_orbitLattice [Finite κ] (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M))
-    {c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]} (hc : ∀ x, (∀ i, c i x = 0) → x = 0) :
-    Module.Finite ℤ_[ℓ] (ρ.orbitLattice c) :=
-  haveI := isNoetherian_of_injective _ (ρ.orbitLatticeCoord_injective hc)
-  inferInstance
-
-/-- The orbit lattice is torsion-free, being contained in a `ℚ_ℓ`-vector space. -/
-theorem isTorsionFree_orbitLattice (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) (c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]) :
-    IsTorsionFree ℤ_[ℓ] (ρ.orbitLattice c) := by
-  refine .of_smul_eq_zero fun a x h ↦ ?_
-  have h' : (a : ℚ_[ℓ]) • (x : M) = 0 := by
-    rw [← PadicInt.algebraMap_apply, algebraMap_smul]
-    exact congrArg Subtype.val h
-  rcases smul_eq_zero.1 h' with h' | h'
-  · exact Or.inl (PadicInt.coe_eq_zero.1 h')
-  · exact Or.inr (Subtype.ext h')
-
-/-- The orbit lattice is a finite free `ℤ_ℓ`-module. -/
-theorem free_orbitLattice [Finite κ] (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M)) {c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]}
-    (hc : ∀ x, (∀ i, c i x = 0) → x = 0) : Module.Free ℤ_[ℓ] (ρ.orbitLattice c) :=
-  haveI := ρ.finite_orbitLattice hc
-  haveI := ρ.isTorsionFree_orbitLattice c
-  inferInstance
-
-/-- **The orbit lattice spans.** If the orbit `{ρ(w) x | w ∈ W}` of `x` has bounded coordinates,
-then `ℓᴺ x` lies in the orbit lattice for some `N`. -/
-theorem exists_pow_smul_mem_orbitLattice [Finite κ] (ρ : W →* (M ≃ₗ[ℚ_[ℓ]] M))
-    {c : κ → M →ₗ[ℚ_[ℓ]] ℚ_[ℓ]} {x : M} (hx : ∀ i, ∃ C, ∀ w, ‖c i (ρ w x)‖ ≤ C) :
-    ∃ N : ℕ, (ℓ : ℤ_[ℓ]) ^ N • x ∈ ρ.orbitLattice c := by
-  choose C hC using hx
-  obtain ⟨C', hC'⟩ := Finite.exists_le C
-  have hℓ : (1 : ℝ) < ℓ := by exact_mod_cast (Fact.out : ℓ.Prime).one_lt
-  obtain ⟨N, hN⟩ := pow_unbounded_of_one_lt C' hℓ
-  refine ⟨N, fun w i ↦ ?_⟩
-  rw [← algebraMap_smul ℚ_[ℓ], map_smul, (c i).map_smul, smul_eq_mul, norm_mul, map_pow,
-    map_natCast, Padic.norm_p_pow, zpow_neg, zpow_natCast]
-  have hpos : (0 : ℝ) < (ℓ : ℝ) ^ N := by positivity
-  rw [inv_mul_le_iff₀ hpos, mul_one]
-  exact ((hC i w).trans (hC' i)).trans hN.le
-
 end MonoidHom
 
 /-! ### Points with coordinates in a subalgebra -/
@@ -201,34 +92,6 @@ noncomputable def ofSubalgebraCoord (b : Basis ι Ω V) (A : Subalgebra K Ω) :
   map_add' x y := by
     rw [← map_add]
     rfl
-
-theorem equivFun_ofSubalgebraCoord (b : Basis ι Ω V) (A : Subalgebra K Ω) (x : ι → A) :
-    b.equivFun (b.ofSubalgebraCoord A x) = fun i ↦ (x i : Ω) :=
-  b.equivFun.apply_symm_apply _
-
-theorem ofSubalgebraCoord_injective (b : Basis ι Ω V) (A : Subalgebra K Ω) :
-    Function.Injective (b.ofSubalgebraCoord A) := by
-  intro x y h
-  have := congrArg b.equivFun h
-  rw [equivFun_ofSubalgebraCoord, equivFun_ofSubalgebraCoord] at this
-  funext i
-  exact Subtype.ext (congrFun this i)
-
-theorem ofSubalgebraCoord_smul (b : Basis ι Ω V) (A : Subalgebra K Ω) {R : Type*}
-    [CommSemiring R] [Algebra R K] [Algebra R Ω] [IsScalarTower R K Ω] (a : R) (x : ι → A) :
-    b.ofSubalgebraCoord A (a • x) = algebraMap R Ω a • b.ofSubalgebraCoord A x := by
-  apply b.equivFun.injective
-  rw [LinearEquiv.map_smul, equivFun_ofSubalgebraCoord, equivFun_ofSubalgebraCoord]
-  funext i
-  simp [Algebra.smul_def, IsScalarTower.algebraMap_apply R K Ω]
-
-theorem ofSubalgebraCoord_single [DecidableEq ι] (b : Basis ι Ω V) (A : Subalgebra K Ω)
-    (i : ι) : b.ofSubalgebraCoord A (Pi.single i 1) = b i := by
-  apply b.equivFun.injective
-  rw [equivFun_ofSubalgebraCoord]
-  funext k
-  rw [Basis.equivFun_self]
-  by_cases hk : i = k <;> simp [hk]
 
 end Module.Basis
 
@@ -276,71 +139,6 @@ theorem mem_definedOverSubgroup {b : Basis ι Ω V} {A : Subalgebra K Ω} {F : V
     F ∈ definedOverSubgroup b A ↔ F.IsDefinedOver b A :=
   Iff.rfl
 
-/-- The matrix of `F` in the basis `b`, with entries in a subalgebra `A` over which `F` is
-defined. -/
-noncomputable def matrixOver {F : V ≃ₗ[Ω] V} {b : Basis ι Ω V} {A : Subalgebra K Ω}
-    (h : F.IsDefinedOver b A) : Matrix ι ι A :=
-  Matrix.of fun i k ↦ ⟨_, (h i k).1⟩
-
-theorem matrixOver_map_val {F : V ≃ₗ[Ω] V} {b : Basis ι Ω V} {A : Subalgebra K Ω}
-    (h : F.IsDefinedOver b A) :
-    (matrixOver h).map A.val = LinearMap.toMatrix b b F.toLinearMap :=
-  rfl
-
-theorem matrixOver_mul_matrixOver_symm {F : V ≃ₗ[Ω] V} {b : Basis ι Ω V} {A : Subalgebra K Ω}
-    (h : F.IsDefinedOver b A) : matrixOver h * matrixOver (isDefinedOver_symm h) = 1 := by
-  refine Matrix.map_injective (f := (A.val : A → Ω)) Subtype.val_injective ?_
-  beta_reduce
-  rw [← AlgHom.mapMatrix_apply, map_mul, AlgHom.mapMatrix_apply, AlgHom.mapMatrix_apply,
-    matrixOver_map_val, matrixOver_map_val, ← LinearMap.toMatrix_mul, Module.End.mul_eq_comp,
-    comp_symm]
-  simp
-
-/-- An automorphism `F` of `V` defined over the subalgebra `A`, as a `K`-linear automorphism of
-the `A`-points `A^ι` (coordinates in the basis `b`). -/
-noncomputable def restrictOver {F : V ≃ₗ[Ω] V} {b : Basis ι Ω V} {A : Subalgebra K Ω}
-    (h : F.IsDefinedOver b A) : (ι → A) ≃ₗ[K] (ι → A) :=
-  LinearEquiv.ofLinearMap ((Matrix.toLin' (matrixOver h)).restrictScalars K)
-    ((Matrix.toLin' (matrixOver (isDefinedOver_symm h))).restrictScalars K)
-    (LinearMap.ext fun x ↦ by simp [Matrix.mulVec_mulVec, matrixOver_mul_matrixOver_symm h])
-    (LinearMap.ext fun x ↦ by
-      simpa [Matrix.mulVec_mulVec] using congrArg (· *ᵥ x)
-        (matrixOver_mul_matrixOver_symm (isDefinedOver_symm h)))
-
-theorem restrictOver_apply {F : V ≃ₗ[Ω] V} {b : Basis ι Ω V} {A : Subalgebra K Ω}
-    (h : F.IsDefinedOver b A) (x : ι → A) : restrictOver h x = matrixOver h *ᵥ x :=
-  rfl
-
-/-- The `A`-points of `V` are stable under `F`. -/
-theorem ofSubalgebraCoord_restrictOver {F : V ≃ₗ[Ω] V} {b : Basis ι Ω V} {A : Subalgebra K Ω}
-    (h : F.IsDefinedOver b A) (x : ι → A) :
-    b.ofSubalgebraCoord A (restrictOver h x) = F (b.ofSubalgebraCoord A x) := by
-  apply b.equivFun.injective
-  rw [Basis.equivFun_ofSubalgebraCoord, Basis.equivFun_apply, ← coe_coe (e := F),
-    ← LinearMap.toMatrix_mulVec_repr b b,
-    ← Basis.equivFun_apply, Basis.equivFun_ofSubalgebraCoord, ← matrixOver_map_val h]
-  funext i
-  exact RingHom.map_mulVec A.val.toRingHom (matrixOver h) x i
-
-/-- **Finite field of definition.** If `Ω` is algebraic over `K` (e.g. `ℚ̄_ℓ` over `ℚ_ℓ`), the
-group generated by finitely many automorphisms of a finite-dimensional `Ω`-vector space is, in a
-given basis, defined over a finite extension `E` of `K` inside `Ω`: take `E` generated by the
-matrix entries of the generators and their inverses. -/
-theorem exists_isDefinedOver_closure [Algebra.IsAlgebraic K Ω] {S : Set (V ≃ₗ[Ω] V)}
-    (hS : S.Finite) (b : Basis ι Ω V) :
-    ∃ E : IntermediateField K Ω, FiniteDimensional K E ∧
-      ∀ F ∈ Subgroup.closure S, F.IsDefinedOver b E.toSubalgebra := by
-  set T : Set Ω := ⋃ F ∈ S,
-    (Set.range (fun p : ι × ι ↦ LinearMap.toMatrix b b F.toLinearMap p.1 p.2) ∪
-      Set.range (fun p : ι × ι ↦ LinearMap.toMatrix b b F.symm.toLinearMap p.1 p.2))
-  have : Finite T :=
-    (hS.biUnion fun _ _ ↦ (Set.finite_range _).union (Set.finite_range _)).to_subtype
-  refine ⟨IntermediateField.adjoin K T,
-    IntermediateField.finiteDimensional_adjoin fun x _ ↦ Algebra.IsIntegral.isIntegral x,
-    fun F hF ↦ (Subgroup.closure_le (definedOverSubgroup b _)).2 (fun F hF i k ↦ ?_) hF⟩
-  exact ⟨IntermediateField.subset_adjoin K T (Set.mem_biUnion hF (Or.inl ⟨(i, k), rfl⟩)),
-    IntermediateField.subset_adjoin K T (Set.mem_biUnion hF (Or.inr ⟨(i, k), rfl⟩))⟩
-
 end LinearEquiv
 
 namespace MonoidHom
@@ -348,46 +146,13 @@ namespace MonoidHom
 variable {K Ω V ι W : Type*} [Field K] [Field Ω] [Algebra K Ω] [AddCommGroup V] [Module Ω V]
   [Fintype ι] [DecidableEq ι] [Group W]
 
-/-- A group acting on `V` through automorphisms defined over `A` acts on the `A`-points. -/
-noncomputable def restrictOver (ρ : W →* (V ≃ₗ[Ω] V)) {b : Basis ι Ω V} {A : Subalgebra K Ω}
-    (h : ∀ w, (ρ w).IsDefinedOver b A) : W →* ((ι → A) ≃ₗ[K] (ι → A)) where
-  toFun w := LinearEquiv.restrictOver (h w)
-  map_one' := LinearEquiv.ext fun x ↦ b.ofSubalgebraCoord_injective A (by
-    simp [LinearEquiv.ofSubalgebraCoord_restrictOver])
-  map_mul' w w' := LinearEquiv.ext fun x ↦ b.ofSubalgebraCoord_injective A (by
-    simp [LinearEquiv.ofSubalgebraCoord_restrictOver])
-
-theorem ofSubalgebraCoord_restrictOver (ρ : W →* (V ≃ₗ[Ω] V)) {b : Basis ι Ω V}
-    {A : Subalgebra K Ω} (h : ∀ w, (ρ w).IsDefinedOver b A) (w : W) (x : ι → A) :
-    b.ofSubalgebraCoord A (ρ.restrictOver h w x) = ρ w (b.ofSubalgebraCoord A x) :=
-  LinearEquiv.ofSubalgebraCoord_restrictOver (h w) x
-
 end MonoidHom
 
 /-! ### Bounded actions over `ℚ̄_ℓ` -/
 
-/-- A linear form on a finite-dimensional subalgebra `A` of a normed algebra `Ω` over a complete
-field `K` is bounded with respect to the norm of `Ω`. -/
-theorem Subalgebra.exists_norm_le_of_finiteDimensional {K Ω : Type*} [NontriviallyNormedField K]
-    [CompleteSpace K] [NormedField Ω] [NormedAlgebra K Ω] (A : Subalgebra K Ω)
-    [FiniteDimensional K A] (f : A →ₗ[K] K) : ∃ C, 0 ≤ C ∧ ∀ a : A, ‖f a‖ ≤ C * ‖(a : Ω)‖ :=
-  ⟨‖LinearMap.toContinuousLinearMap f‖, norm_nonneg _,
-    fun a ↦ (LinearMap.toContinuousLinearMap f).le_opNorm a⟩
-
 namespace Subalgebra
 
 variable {ℓ : ℕ} [Fact ℓ.Prime]
-
-/-- The `ℚ_ℓ`-coordinates of `A^ι`, for a finite-dimensional `ℚ_ℓ`-subalgebra `A` of `ℚ̄_ℓ`. -/
-noncomputable def piCoord (A : Subalgebra ℚ_[ℓ] (PadicAlgCl ℓ)) [FiniteDimensional ℚ_[ℓ] A]
-    (ι : Type*) (p : ι × Fin (Module.finrank ℚ_[ℓ] A)) : (ι → A) →ₗ[ℚ_[ℓ]] ℚ_[ℓ] :=
-  ((Module.finBasis ℚ_[ℓ] A).coord p.2).comp (LinearMap.proj p.1)
-
-theorem piCoord_eq_zero {ι : Type*} {A : Subalgebra ℚ_[ℓ] (PadicAlgCl ℓ)}
-    [FiniteDimensional ℚ_[ℓ] A] (x : ι → A) (hx : ∀ p, A.piCoord ι p x = 0) : x = 0 := by
-  funext i
-  refine (Module.finBasis ℚ_[ℓ] A).ext_elem fun k ↦ ?_
-  simpa [piCoord] using hx (i, k)
 
 end Subalgebra
 
@@ -396,162 +161,11 @@ namespace MonoidHom
 variable {ℓ : ℕ} [Fact ℓ.Prime] {V ι W : Type*} [AddCommGroup V] [Module (PadicAlgCl ℓ) V]
   [Fintype ι] [DecidableEq ι] [Group W]
 
-/-- Weak boundedness of the orbits of `ρ` over `ℚ̄_ℓ` gives bounded `ℚ_ℓ`-coordinates of the
-orbits of its restriction to the `A`-points. -/
-theorem exists_bound_piCoord_restrictOver {ρ : W →* (V ≃ₗ[PadicAlgCl ℓ] V)}
-    (hρ : ∀ v, IsWeaklyBounded (PadicAlgCl ℓ) (Set.range fun w ↦ ρ w v))
-    {b : Basis ι (PadicAlgCl ℓ) V} {A : Subalgebra ℚ_[ℓ] (PadicAlgCl ℓ)}
-    [FiniteDimensional ℚ_[ℓ] A] (h : ∀ w, (ρ w).IsDefinedOver b A) (x : ι → A) (p) :
-    ∃ C, ∀ w, ‖A.piCoord ι p (ρ.restrictOver h w x)‖ ≤ C := by
-  obtain ⟨C₀, h₀, hC₀⟩ :=
-    A.exists_norm_le_of_finiteDimensional ((Module.finBasis ℚ_[ℓ] A).coord p.2)
-  obtain ⟨C₁, hC₁⟩ := hρ (b.ofSubalgebraCoord A x) (b.coord p.1)
-  refine ⟨C₀ * C₁, fun w ↦ (hC₀ _).trans (mul_le_mul_of_nonneg_left ?_ h₀)⟩
-  have hw : ((ρ.restrictOver h w x p.1 : A) : PadicAlgCl ℓ) =
-      b.coord p.1 (ρ w (b.ofSubalgebraCoord A x)) := by
-    rw [← ofSubalgebraCoord_restrictOver, Basis.coord_apply, ← Basis.equivFun_apply,
-      Basis.equivFun_ofSubalgebraCoord]
-  rw [LinearMap.proj_apply, hw]
-  exact hC₁ _ ⟨w, rfl⟩
-
-/-- **A bounded group action over `ℚ̄_ℓ`, defined over a finite extension, stabilises a lattice.**
-Let `W` act on a finite-dimensional `ℚ̄_ℓ`-vector space `V` through automorphisms `ρ(w)` whose
-matrices have entries in a common finite-dimensional `ℚ_ℓ`-subalgebra `A` (e.g. a finite
-extension `E` of `ℚ_ℓ`), and assume that the orbits `{ρ(w) v | w ∈ W}` are bounded. Then there is
-a finite free `ℤ_ℓ`-module `L` with an action `ρ_L` of `W`, and a `W`-equivariant injective
-`ℤ_ℓ`-semilinear map `j : L → V` whose image spans `V`; in particular `ρ(W)` lies in `GL(L)`.
-
-Following Deligne (Weil II, 1.1.7 and the proof of 1.3.14), `L` is the set of vectors of `A^r`
-(a finite-dimensional `ℚ_ℓ`-vector space) whose whole orbit has `ℤ_ℓ`-coordinates
-(`MonoidHom.orbitLattice`): it is finitely generated since `ℤ_ℓ` is noetherian, and spans by
-boundedness. -/
-theorem exists_lattice_of_isWeaklyBounded {ι : Type} [Fintype ι] [DecidableEq ι]
-    (ρ : W →* (V ≃ₗ[PadicAlgCl ℓ] V)) (b : Basis ι (PadicAlgCl ℓ) V)
-    (A : Subalgebra ℚ_[ℓ] (PadicAlgCl ℓ)) [FiniteDimensional ℚ_[ℓ] A]
-    (hA : ∀ w, (ρ w).IsDefinedOver b A)
-    (hρ : ∀ v, IsWeaklyBounded (PadicAlgCl ℓ) (Set.range fun w ↦ ρ w v)) :
-    ∃ (L : Type) (_ : AddCommGroup L) (_ : Module ℤ_[ℓ] L) (_ : Module.Free ℤ_[ℓ] L)
-      (_ : Module.Finite ℤ_[ℓ] L) (ρ_L : W →* (L ≃ₗ[ℤ_[ℓ]] L)) (j : L →+ V),
-      Function.Injective j ∧
-      (∀ (a : ℤ_[ℓ]) x, j (a • x) = algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) a • j x) ∧
-      (∀ w x, j (ρ_L w x) = ρ w (j x)) ∧ Submodule.span (PadicAlgCl ℓ) (Set.range j) = ⊤ := by
-  set G := ρ.restrictOver hA
-  have hc := A.piCoord_eq_zero (ι := ι)
-  refine ⟨G.orbitLattice (A.piCoord ι), inferInstance, inferInstance,
-    G.free_orbitLattice hc, G.finite_orbitLattice hc, G.restrictOrbitLattice _,
-    (b.ofSubalgebraCoord A).comp (Submodule.subtype _).toAddMonoidHom,
-    (b.ofSubalgebraCoord_injective A).comp Subtype.val_injective, fun a x ↦ ?_,
-    fun w x ↦ ofSubalgebraCoord_restrictOver ρ hA w x, ?_⟩
-  · have := b.ofSubalgebraCoord_smul A (R := ℤ_[ℓ]) a (x : _ → A)
-    exact this
-  · refine eq_top_iff.2 (b.span_eq ▸ Submodule.span_le.2 ?_)
-    rintro _ ⟨i, rfl⟩
-    obtain ⟨N, hN⟩ := G.exists_pow_smul_mem_orbitLattice (x := Pi.single i 1)
-      (exists_bound_piCoord_restrictOver hρ hA _)
-    have hmem : algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) ((ℓ : ℤ_[ℓ]) ^ N) • b i ∈
-        Submodule.span (PadicAlgCl ℓ) (Set.range
-          ((b.ofSubalgebraCoord A).comp (Submodule.subtype _).toAddMonoidHom)) :=
-      Submodule.subset_span ⟨⟨_, hN⟩, by
-        simp [b.ofSubalgebraCoord_smul A, b.ofSubalgebraCoord_single]⟩
-    have hne : algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) ((ℓ : ℤ_[ℓ]) ^ N) ≠ 0 := by
-      simp [(Fact.out : ℓ.Prime).ne_zero]
-    simpa [smul_smul, inv_mul_cancel₀ hne] using Submodule.smul_mem _
-      (algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) ((ℓ : ℤ_[ℓ]) ^ N))⁻¹ hmem
-
-/-- **A bounded finitely generated group of automorphisms over `ℚ̄_ℓ` stabilises a lattice.**
-If `W` is generated by a finite set `S` and acts on a finite-dimensional `ℚ̄_ℓ`-vector space `V`
-with bounded orbits, then `ρ(W)` is defined over a finite extension of `ℚ_ℓ`
-(`LinearEquiv.exists_isDefinedOver_closure`) and stabilises a lattice. -/
-theorem exists_lattice_of_isWeaklyBounded_of_closure [FiniteDimensional (PadicAlgCl ℓ) V]
-    (ρ : W →* (V ≃ₗ[PadicAlgCl ℓ] V)) {S : Set W} (hS : S.Finite)
-    (hSW : Subgroup.closure S = ⊤)
-    (hρ : ∀ v, IsWeaklyBounded (PadicAlgCl ℓ) (Set.range fun w ↦ ρ w v)) :
-    ∃ (L : Type) (_ : AddCommGroup L) (_ : Module ℤ_[ℓ] L) (_ : Module.Free ℤ_[ℓ] L)
-      (_ : Module.Finite ℤ_[ℓ] L) (ρ_L : W →* (L ≃ₗ[ℤ_[ℓ]] L)) (j : L →+ V),
-      Function.Injective j ∧
-      (∀ (a : ℤ_[ℓ]) x, j (a • x) = algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) a • j x) ∧
-      (∀ w x, j (ρ_L w x) = ρ w (j x)) ∧ Submodule.span (PadicAlgCl ℓ) (Set.range j) = ⊤ := by
-  set b := Module.finBasis (PadicAlgCl ℓ) V
-  obtain ⟨E, hE, h⟩ := LinearEquiv.exists_isDefinedOver_closure (K := ℚ_[ℓ]) (hS.image ρ) b
-  have hA : FiniteDimensional ℚ_[ℓ] E.toSubalgebra := hE
-  refine exists_lattice_of_isWeaklyBounded ρ b E.toSubalgebra (fun w ↦ h _ ?_) hρ
-  rw [← MonoidHom.map_closure, hSW]
-  exact Subgroup.mem_map_of_mem ρ (Subgroup.mem_top w)
-
 end MonoidHom
 
 namespace LinearEquiv
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {V : Type*} [AddCommGroup V] [Module (PadicAlgCl ℓ) V]
-
-omit [Fact ℓ.Prime] in
-/-- `ℤ` is generated by `1`, multiplicatively. -/
-theorem _root_.Multiplicative.closure_ofAdd_one :
-    Subgroup.closure {Multiplicative.ofAdd (1 : ℤ)} = ⊤ := by
-  refine (Subgroup.eq_top_iff' _).2 fun n ↦ ?_
-  have := Subgroup.zpow_mem _
-    (Subgroup.subset_closure (Set.mem_singleton (Multiplicative.ofAdd (1 : ℤ)))) n.toAdd
-  rwa [← ofAdd_zsmul, smul_eq_mul, mul_one, ofAdd_toAdd] at this
-
-/-- **A bounded automorphism of a `ℚ̄_ℓ`-vector space stabilises a lattice.** Let `F` be an
-automorphism of a finite-dimensional `ℚ̄_ℓ`-vector space `V` whose orbits `{Fⁿ v | n ∈ ℤ}` are
-bounded. Then there is a finite free `ℤ_ℓ`-module `L` with an automorphism `F_L`, and an
-injective `ℤ_ℓ`-semilinear map `j : L → V` with `j ∘ F_L = F ∘ j` whose image spans `V`. -/
-theorem exists_lattice_of_isWeaklyBounded [FiniteDimensional (PadicAlgCl ℓ) V]
-    (F : V ≃ₗ[PadicAlgCl ℓ] V)
-    (hF : ∀ v, IsWeaklyBounded (PadicAlgCl ℓ) (Set.range fun n : ℤ ↦ (F ^ n) v)) :
-    ∃ (L : Type) (_ : AddCommGroup L) (_ : Module ℤ_[ℓ] L) (_ : Module.Free ℤ_[ℓ] L)
-      (_ : Module.Finite ℤ_[ℓ] L) (F_L : L ≃ₗ[ℤ_[ℓ]] L) (j : L →+ V), Function.Injective j ∧
-      (∀ (a : ℤ_[ℓ]) x, j (a • x) = algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) a • j x) ∧
-      (∀ x, j (F_L x) = F (j x)) ∧ Submodule.span (PadicAlgCl ℓ) (Set.range j) = ⊤ := by
-  have hb (v : V) : IsWeaklyBounded (PadicAlgCl ℓ) (Set.range fun w ↦ zpowersHom _ F w v) := by
-    refine (hF v).mono ?_
-    rintro _ ⟨w, rfl⟩
-    exact ⟨w.toAdd, by beta_reduce; rw [zpowersHom_apply]⟩
-  obtain ⟨L, _, _, _, _, ρ_L, j, hj, hsmul, hρ_L, hspan⟩ :=
-    MonoidHom.exists_lattice_of_isWeaklyBounded_of_closure (zpowersHom _ F)
-      (Set.finite_singleton (Multiplicative.ofAdd (1 : ℤ))) Multiplicative.closure_ofAdd_one hb
-  refine ⟨L, inferInstance, inferInstance, inferInstance, inferInstance,
-    ρ_L (Multiplicative.ofAdd 1), j, hj, hsmul, fun x ↦ ?_, hspan⟩
-  rw [hρ_L, zpowersHom_apply, toAdd_ofAdd, zpow_one]
-
-/-- If an additive map `j` intertwines two linear automorphisms, it intertwines all their
-integral powers. -/
-theorem map_zpow_apply_of_map_apply {R S M N : Type*} [Semiring R] [Semiring S]
-    [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module S N] {F : M ≃ₗ[R] M}
-    {G : N ≃ₗ[S] N} (j : M → N) (hj : ∀ x, j (F x) = G (j x)) (n : ℤ) (x : M) :
-    j ((F ^ n) x) = (G ^ n) (j x) := by
-  have hj' (x : M) : j (F.symm x) = G.symm (j x) := by
-    rw [← G.symm_apply_apply (j (F.symm x)), ← hj, F.apply_symm_apply]
-  induction n using Int.induction_on generalizing x with
-  | zero => simp
-  | succ n ih => rw [zpow_add_one, mul_apply, ih, zpow_add_one, mul_apply, hj]
-  | pred n ih =>
-    rw [zpow_sub_one, mul_apply, ih, zpow_sub_one, mul_apply]
-    exact congrArg _ (hj' x)
-
-/-- **Weil II, 1.3.14, for `W = ℤ` over `ℚ̄_ℓ`: bounded Frobenius actions extend continuously to
-`ℤ̂`.** Let `F` be an automorphism of a finite-dimensional `ℚ̄_ℓ`-vector space `V` with bounded
-orbits `{Fⁿ v | n ∈ ℤ}`. Then there is a finite free `ℤ_ℓ`-module `L` with an injective
-`ℤ_ℓ`-semilinear map `j : L → V` whose image spans `V`, and a homomorphism `φ : ℤ̂ →* GL(L)`,
-continuous for the `ℓ`-adic topology of `L`, such that `j ∘ φ(n) = Fⁿ ∘ j` for `n ∈ ℤ`. -/
-theorem exists_zhat_extension_of_isWeaklyBounded [FiniteDimensional (PadicAlgCl ℓ) V]
-    (F : V ≃ₗ[PadicAlgCl ℓ] V)
-    (hF : ∀ v, IsWeaklyBounded (PadicAlgCl ℓ) (Set.range fun n : ℤ ↦ (F ^ n) v)) :
-    ∃ (L : Type) (_ : AddCommGroup L) (_ : Module ℤ_[ℓ] L) (_ : Module.Free ℤ_[ℓ] L)
-      (_ : Module.Finite ℤ_[ℓ] L) (j : L →+ V), Function.Injective j ∧
-      (∀ (a : ℤ_[ℓ]) x, j (a • x) = algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) a • j x) ∧
-      Submodule.span (PadicAlgCl ℓ) (Set.range j) = ⊤ ∧
-      ∃ φ : ProfiniteGrp.ProfiniteCompletion.Zhat →* (L ≃ₗ[ℤ_[ℓ]] L),
-        (∀ (n : ℤ) x, j (φ (ProfiniteGrp.ProfiniteCompletion.Zhat.ofInt n) x) = (F ^ n) (j x)) ∧
-        ∀ x k, IsLocallyConstant fun a ↦
-          (Ideal.span {(ℓ : ℤ_[ℓ])} ^ k • ⊤ : Submodule ℤ_[ℓ] L).mkQ (φ a x) := by
-  obtain ⟨L, _, _, _, _, F_L, j, hj, hsmul, hF_L, hspan⟩ := exists_lattice_of_isWeaklyBounded F hF
-  obtain ⟨φ, ⟨hφ, hcont⟩, -⟩ := PadicInt.existsUnique_zhat_extension_of_free F_L
-  refine ⟨L, inferInstance, inferInstance, inferInstance, inferInstance, j, hj, hsmul, hspan, φ,
-    fun n x ↦ ?_, hcont⟩
-  rw [hφ]
-  exact map_zpow_apply_of_map_apply j hF_L n x
 
 end LinearEquiv
 
@@ -715,76 +329,5 @@ namespace MonoidHom
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {V W : Type*} [AddCommGroup V] [Module (PadicAlgCl ℓ) V]
   [Group W]
-
-/-- **Bounded representations of Weil-type groups stabilise a lattice** (Weil II, 1.1.7 and the
-proof of 1.3.14). Let `W` be generated by the image of a compact Hausdorff group `G` (e.g. the
-geometric part `ker deg`, a profinite group) and finitely many elements (e.g. a Frobenius), and
-let `W` act on a finite-dimensional `ℚ̄_ℓ`-vector space `V` with bounded orbits, continuously on
-`G`. Then `ρ(W)` is defined over a finite extension of `ℚ_ℓ`
-(`LinearEquiv.exists_isDefinedOver_of_compactSpace`, Baire category, and
-`PadicAlgCl.exists_monotone_finiteDimensional_cover`, Krasner's lemma) and stabilises a lattice:
-there is a finite free `ℤ_ℓ`-module `L` with an action of `W` and a `W`-equivariant injective
-`ℤ_ℓ`-semilinear map `L → V` whose image spans `V`. -/
-theorem exists_lattice_of_isWeaklyBounded_of_compactSpace [FiniteDimensional (PadicAlgCl ℓ) V]
-    {G : Type*} [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
-    [T2Space G] (ρ : W →* (V ≃ₗ[PadicAlgCl ℓ] V)) (ι : G →* W) {S : Set W} (hS : S.Finite)
-    (hW : Subgroup.closure (Set.range ι ∪ S) = ⊤)
-    (hcont : ∀ v (φ : Module.Dual (PadicAlgCl ℓ) V), Continuous fun g ↦ φ (ρ (ι g) v))
-    (hρ : ∀ v, IsWeaklyBounded (PadicAlgCl ℓ) (Set.range fun w ↦ ρ w v)) :
-    ∃ (L : Type) (_ : AddCommGroup L) (_ : Module ℤ_[ℓ] L) (_ : Module.Free ℤ_[ℓ] L)
-      (_ : Module.Finite ℤ_[ℓ] L) (ρ_L : W →* (L ≃ₗ[ℤ_[ℓ]] L)) (j : L →+ V),
-      Function.Injective j ∧
-      (∀ (a : ℤ_[ℓ]) x, j (a • x) = algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) a • j x) ∧
-      (∀ w x, j (ρ_L w x) = ρ w (j x)) ∧ Submodule.span (PadicAlgCl ℓ) (Set.range j) = ⊤ := by
-  set b := Module.finBasis (PadicAlgCl ℓ) V
-  obtain ⟨E, hE, hEfd, hEcover⟩ := PadicAlgCl.exists_monotone_finiteDimensional_cover (ℓ := ℓ)
-  set A : ℕ → Subalgebra ℚ_[ℓ] (PadicAlgCl ℓ) := fun m ↦ (E m).toSubalgebra
-  have hA : Monotone A := fun m n h ↦ hE h
-  have hσ (i k) : Continuous fun g ↦ LinearMap.toMatrix b b ((ρ.comp ι) g).toLinearMap i k := by
-    simp_rw [LinearMap.toMatrix_apply, ← Basis.coord_apply]
-    exact hcont (b k) (b.coord i)
-  have hclosed (m : ℕ) : IsClosed (A m : Set (PadicAlgCl ℓ)) := by
-    have := hEfd m
-    exact Submodule.closed_of_finiteDimensional (Subalgebra.toSubmodule (E m).toSubalgebra)
-  obtain ⟨m₀, hm₀⟩ := LinearEquiv.exists_isDefinedOver_of_compactSpace (ρ.comp ι) b hσ hA
-    hclosed hEcover
-  choose ms hms using fun s : S ↦ LinearEquiv.exists_isDefinedOver_of_monotone hA hEcover (ρ s) b
-  have : Finite S := hS.to_subtype
-  obtain ⟨M, hM⟩ := Finite.exists_le ms
-  have hFD : FiniteDimensional ℚ_[ℓ] (A (max m₀ M)) := hEfd (max m₀ M)
-  refine exists_lattice_of_isWeaklyBounded ρ b (A (max m₀ M)) (fun w ↦ ?_) hρ
-  have hw : w ∈ (LinearEquiv.definedOverSubgroup b (A (max m₀ M))).comap ρ := by
-    refine (Subgroup.closure_le _).2 ?_ (hW ▸ Subgroup.mem_top w)
-    rintro _ (⟨g, rfl⟩ | hs)
-    · exact (hm₀ g).mono (hA (le_max_left _ _))
-    · exact (hms ⟨_, hs⟩).mono (hA ((hM _).trans (le_max_right _ _)))
-  exact hw
-
-/-- **Weil II, 1.3.14 and 1.1.7: a bounded representation of a Weil group stabilises a
-lattice.** Let `deg : W → ℤ` be a homomorphism with a Frobenius `F` of degree one, whose kernel
-(the geometric part) is a compact Hausdorff topological group acting continuously on a
-finite-dimensional `ℚ̄_ℓ`-vector space `V`, and suppose the action of `W` is bounded. Then `ρ(W)`
-lies in `GL(L)` for a lattice `L` (a finite free `ℤ_ℓ`-module spanning `V`). -/
-theorem exists_lattice_of_isWeaklyBounded_of_deg [FiniteDimensional (PadicAlgCl ℓ) V]
-    {deg : W →* Multiplicative ℤ} [TopologicalSpace deg.ker] [IsTopologicalGroup deg.ker]
-    [CompactSpace deg.ker] [T2Space deg.ker] {F : W} (hF : deg F = Multiplicative.ofAdd 1)
-    (ρ : W →* (V ≃ₗ[PadicAlgCl ℓ] V))
-    (hcont : ∀ v (φ : Module.Dual (PadicAlgCl ℓ) V),
-      Continuous fun g : deg.ker ↦ φ (ρ g v))
-    (hρ : ∀ v, IsWeaklyBounded (PadicAlgCl ℓ) (Set.range fun w ↦ ρ w v)) :
-    ∃ (L : Type) (_ : AddCommGroup L) (_ : Module ℤ_[ℓ] L) (_ : Module.Free ℤ_[ℓ] L)
-      (_ : Module.Finite ℤ_[ℓ] L) (ρ_L : W →* (L ≃ₗ[ℤ_[ℓ]] L)) (j : L →+ V),
-      Function.Injective j ∧
-      (∀ (a : ℤ_[ℓ]) x, j (a • x) = algebraMap ℤ_[ℓ] (PadicAlgCl ℓ) a • j x) ∧
-      (∀ w x, j (ρ_L w x) = ρ w (j x)) ∧ Submodule.span (PadicAlgCl ℓ) (Set.range j) = ⊤ := by
-  refine exists_lattice_of_isWeaklyBounded_of_compactSpace ρ deg.ker.subtype
-    (Set.finite_singleton F) ?_ hcont hρ
-  refine (Subgroup.eq_top_iff' _).2 fun w ↦ ?_
-  have h₁ : w * F ^ (-Multiplicative.toAdd (deg w)) ∈ Subgroup.closure
-      (Set.range deg.ker.subtype ∪ {F}) :=
-    Subgroup.subset_closure (Or.inl ⟨⟨_, Representation.mul_zpow_neg_mem_ker hF w⟩, rfl⟩)
-  have h₂ : F ∈ Subgroup.closure (Set.range deg.ker.subtype ∪ {F}) :=
-    Subgroup.subset_closure (Or.inr rfl)
-  simpa using mul_mem h₁ (Subgroup.zpow_mem _ h₂ (Multiplicative.toAdd (deg w)))
 
 end MonoidHom

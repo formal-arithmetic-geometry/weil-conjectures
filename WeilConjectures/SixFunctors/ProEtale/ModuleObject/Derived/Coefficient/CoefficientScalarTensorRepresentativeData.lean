@@ -25,20 +25,4 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 
-/-- All comparison data occurring in the signed scalar tensor equation.
-The fields are the already normalized comparison maps and their stated formulas;
-no object is chosen from a bare existence proposition. -/
-structure CoefficientScalarTensorRepresentativeBasicData (Z : Scheme.{u}) where
-  b : SheafOfModules.ScalarDerivedPair.{u + 1, u, u + 1, u + 1}
-    (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (coefficientSectionScalarMap a Z)
-  o : Mod.extendScalars (coefficientMap a Z) ⋙
-      (ModuleRingedComparison.equivalence S Z).functor ≅
-    (ModuleRingedComparison.equivalence R Z).functor ⋙ b.extension
-  p : internalScalarExtension a Z ⋙
-      (ModuleRingedComparison.derivedEquivalence S Z).functor ≅
-    (ModuleRingedComparison.derivedEquivalence R Z).functor ⋙ b.derived
-  m : b.extension.Monoidal
-  t : ModuleRingedComparison.tensor R Z ⋙ b.derived ≅
-    b.derived.prod b.derived ⋙ ModuleRingedComparison.tensor S Z
-
 end AlgebraicGeometry.ProEtale.CondensedRing

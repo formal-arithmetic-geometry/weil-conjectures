@@ -98,14 +98,6 @@ lemma IsTorsion.of_isAddTorsion_sheafFiber (hP : P.IsConservativeFamilyOfPoints)
   obtain ⟨W, a, b, ⟨i⟩, rfl⟩ := hgS
   exact ⟨i, Φ.obj.fiber.map a y, by simp⟩
 
-/-- A sheaf of abelian groups is torsion if and only if its stalks at the points of a
-conservative family are torsion groups. -/
-lemma isTorsion_iff_isAddTorsion_sheafFiber (hP : P.IsConservativeFamilyOfPoints)
-    (F : Sheaf J AddCommGrpCat.{w}) :
-    F.IsTorsion ↔ ∀ Φ : P.FullSubcategory,
-      IsAddTorsion ((Φ.obj.sheafFiber (A := AddCommGrpCat.{w})).obj F) :=
-  ⟨fun hF Φ ↦ Φ.obj.isAddTorsion_sheafFiber hF, IsTorsion.of_isAddTorsion_sheafFiber hP⟩
-
 end Sheaf
 
 end CategoryTheory

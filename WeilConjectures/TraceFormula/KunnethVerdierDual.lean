@@ -105,13 +105,6 @@ lemma homIhomSwap_comp_left (ω : 𝒞) {A A' : 𝒞} (B : 𝒞) (a : A' ⟶ A)
   rw [uncurry_curry, uncurry_pre_app, uncurry_curry, uncurry_natural_left,
     ← BraidedCategory.braiding_naturality_left_assoc]
 
-lemma homIhomSwap_comp_pre (ω A : 𝒞) {B B' : 𝒞} (b : B' ⟶ B) (f : A ⟶ (ihom B).obj ω) :
-    homIhomSwap ω A B' (f ≫ (pre b).app ω) = b ≫ homIhomSwap ω A B f := by
-  apply uncurry_injective
-  simp only [homIhomSwap, Equiv.coe_fn_mk]
-  rw [uncurry_curry, uncurry_pre_app, uncurry_natural_left, uncurry_curry,
-    BraidedCategory.braiding_naturality_right_assoc]
-
 /-- In a braided category with zero morphisms whose functors `X ⊗ -` preserve zero morphisms,
 `0 ▷ Z = 0`. -/
 lemma zero_whiskerRight_of_braided [HasZeroMorphisms 𝒞] (X Y Z : 𝒞) :

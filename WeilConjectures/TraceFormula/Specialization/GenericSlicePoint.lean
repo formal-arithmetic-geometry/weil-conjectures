@@ -30,10 +30,4 @@ namespace AlgebraicGeometry
 
 variable (k' : Type u) [Field k']
 
-/-- The geometric point `Spec K ⟶ 𝔸¹_S` (`K = k'(x)^alg`, `S = Spec k'⟦t⟧`) at the generic point of
-the special fibre: the closed point of the generic slice `Spec K⟦t⟧ ⟶ 𝔸¹_S`. -/
-noncomputable def genericSlicePoint :
-    Spec (.of (traitSliceField k')) ⟶ 𝔸(ULift.{u} (Fin 1); trait k') :=
-  traitClosedPoint (traitSliceField k') ≫ traitSlice (traitSliceCoord k')
-
 end AlgebraicGeometry

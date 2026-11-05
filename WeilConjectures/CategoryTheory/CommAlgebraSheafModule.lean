@@ -29,36 +29,4 @@ variable {X : Type uA} [TopologicalSpace X]
 
 local notation "J" => Opens.grothendieckTopology X
 
-/-- The underlying module of an algebra sheaf is its unit module restricted along the
-structure map. Source: Stacks Project, Modules, Lemma 01AH and Sheaves, Lemma 0087
-(blueprint: def-weil-pbc-ringed-space-algebra-module). -/
-noncomputable def commAlgebraSheafModule (O : Sheaf J CommRingCat.{uA})
-    (A : Under O) :
-    SheafOfModules.{uA} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) :=
-  (SheafOfModules.restrictScalars
-    ((sheafCompose J (forget₂ CommRingCat RingCat)).map A.hom)).obj
-    (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A.right))
-
-set_option backward.isDefEq.respectTransparency false in
-/-- Algebra-sheaf morphisms act on the underlying modules by the same section maps.
-Source: Stacks Project, Modules, Lemma 01AH and Sheaves, Lemma 0087
-(blueprint: def-weil-pbc-ringed-space-algebra-module). -/
-noncomputable def commAlgebraSheafModuleFunctor (O : Sheaf J CommRingCat.{uA}) :
-    Under O ⥤
-      SheafOfModules.{uA} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) where
-  obj := commAlgebraSheafModule O
-  map := fun {A B} f ↦
-    { val := PresheafOfModules.homMk
-        (Functor.whiskerRight f.right.hom
-          (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) (by
-          intro U r a
-          change A.right.obj.obj U at a
-          change O.obj.obj U at r
-          change (f.right.hom.app U).hom ((A.hom.hom.app U).hom r * a) =
-            (B.hom.hom.app U).hom r * (f.right.hom.app U).hom a
-          rw [map_mul]
-          congr 1
-          exact congrArg (fun t ↦ t.hom.app U r) (Under.w f)
-        ) }
-
 end CategoryTheory

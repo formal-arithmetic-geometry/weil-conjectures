@@ -219,24 +219,4 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
       (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M,
     upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
 
-set_option maxHeartbeats 1000000 in
--- the instances of the general lemma are found for each of the categories of module objects
-/-- **Naturality of the derived Frobenius trivialization**: for `g : T ⟶ X` between schemes in
-which the prime `p` vanishes, the derived trivializations `L(F_X)^* ≅ 𝟭`, `L(F_T)^* ≅ 𝟭` of
-the `p ^ n`-power absolute Frobenii are compatible with `Lg^*`. -/
-theorem leftDerivedUpperStarComp_hom_app_comp_map_upperStarIterateFrobeniusIso
-    {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0) (hT : (p : Γ(T, ⊤)) = 0) (n : ℕ)
-    (g : T ⟶ X)
-    (M : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
-    (leftDerivedUpperStarComp Λ g (X.iterateFrobenius hp hX n)).hom.app M ≫
-        L((g)^*⟦Λ⟧).map
-          ((Functor.leftDerivedFunctorIdIso (upperStarIterateFrobeniusIso Λ hp hX n)).hom.app M) =
-      eqToHom (congrArg (fun s ↦ L((s)^*⟦Λ⟧).obj M) (comp_iterateFrobenius hp g hX hT n)) ≫
-        (leftDerivedUpperStarComp Λ (T.iterateFrobenius hp hT n) g).hom.app M ≫
-          (Functor.leftDerivedFunctorIdIso (upperStarIterateFrobeniusIso Λ hp hT n)).hom.app
-            (L((g)^*⟦Λ⟧).obj M) :=
-  leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso Λ g
-    (comp_iterateFrobenius hp g hX hT n) _ _
-    (upperStarComp_hom_app_comp_map_upperStarIterateFrobeniusIso_hom_app Λ hp hX hT n g) M
-
 end AlgebraicGeometry.ProEtale.CondensedRing

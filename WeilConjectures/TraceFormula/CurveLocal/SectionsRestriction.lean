@@ -92,12 +92,6 @@ noncomputable def sectionsRestriction {V : X.Etale} {W : X'.Etale} (φ : W.left 
         ((sheafSections X'.smallEtaleTopology A).obj (op W)).rightDerivedFunctor :=
   Functor.rightDerivedPullback (e)^*[A] (sectionsPullback A e φ hφ)
 
-lemma sectionsRestriction_congr {V : X.Etale} {W : X'.Etale} {φ φ' : W.left ⟶ V.left}
-    (hφ : φ ≫ V.hom = W.hom ≫ e) (h : φ = φ') :
-    sectionsRestriction A e φ hφ = sectionsRestriction A e φ' (h ▸ hφ) := by
-  subst h
-  rfl
-
 /-- The third component of the morphism of localization triangles along a morphism of pairs is
 the restriction of derived sections over the open complements. -/
 lemma sectionsWithSupportTrianglePullback_app_hom₃ {Z Z' : Scheme.{u}} (i : Z ⟶ X)

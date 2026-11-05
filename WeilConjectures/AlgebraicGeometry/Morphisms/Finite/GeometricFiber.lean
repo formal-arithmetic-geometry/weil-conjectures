@@ -66,8 +66,6 @@ variable {f y}
 @[ext]
 lemma ext {x x' : GeometricFiber f y} (h : x.1 = x'.1) : x = x' := Subtype.ext h
 
-lemma comp_eq (x : GeometricFiber f y) : x.1 ≫ f = y := x.2
-
 end GeometricFiber
 
 section Affine
@@ -93,8 +91,6 @@ lemma SpecMap_affinePoint_fromSpec :
 def affineAlgebra : Algebra Γ(Y, Y₀) Γ(X, f ⁻¹ᵁ Y₀) := (f.app Y₀).hom.toAlgebra
 
 attribute [local instance] affineAlgebra
-
-lemma algebraMap_affineAlgebra : algebraMap Γ(Y, Y₀) Γ(X, f ⁻¹ᵁ Y₀) = (f.app Y₀).hom := rfl
 
 include hY₀ in
 theorem finite_affineAlgebra [IsFinite f] : Module.Finite Γ(Y, Y₀) Γ(X, f ⁻¹ᵁ Y₀) :=
@@ -279,11 +275,6 @@ lemma baseChangeEquiv_symm_apply_coe_comp_snd (h : IsPullback g' f' f g)
     (y' : Spec (.of Ω) ⟶ Y') (x : f.GeometricFiber (y' ≫ g)) :
     ((baseChangeEquiv h y').symm x).1 ≫ f' = y' :=
   ((baseChangeEquiv h y').symm x).2
-
-/-- **The geometric fibre of a base change of a finite morphism is finite.** -/
-lemma finite_of_isPullback [IsFinite f] (h : IsPullback g' f' f g) (y' : Spec (.of Ω) ⟶ Y') :
-    Finite (f'.GeometricFiber y') :=
-  .of_equiv _ (baseChangeEquiv h y').symm
 
 variable (f g)
 

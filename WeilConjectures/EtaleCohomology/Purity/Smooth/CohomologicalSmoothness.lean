@@ -91,40 +91,6 @@ omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
-*Clause (b), the tensor formula.* For `f` smooth separated of pure relative dimension `d` and
-`K ∈ D^b_{ctf}(Y, Λ)`,
-
-`Rf^! K ≅ Lf^* K ⊗^L ω_f`.
-
-Equivalently, `Rf^!` is `Lf^*` twisted by the invertible object `ω_f` of clause (a); this is
-what turns the computation of `ω_f` into a computation of `Rf^!` on all coefficients. The
-blueprint statement is that the mate `φ_K` of the projection formula is this isomorphism, which
-is `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-          (dualizingComplex Λ f) ≅
-      (rightDerivedUpperShriek Λ f).obj K) :=
-  nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d K
-
-omit [HasTateTwist Λ] [IsSeparated f] in
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
-*Clause (b), the tensor formula, canonical form.* For `f` smooth of pure relative dimension `d`,
-the mate of the projection formula, `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
-(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`), is an isomorphism for every `K`. -/
-theorem isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (dualizingComplexTensorMap Λ f K) :=
-  (exists_dualizingComplex_iso_and_tensor Λ f d).choose_spec.2.2.2 K
-
-omit [HasTateTwist Λ] [IsSeparated f] in
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
 *Clause (c), smooth base change for `R^!`.* In the cartesian square
 
 ```
@@ -152,37 +118,6 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek [QuasiSep
       L((g)^*[ModuleCat.{u + 1} Λ]) ⋙
         rightDerivedUpperShriek Λ f') :=
   nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ f d sq
-
-omit [HasTateTwist Λ] in
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-etale locality, without derived descent
-
-*Étale morphisms.* Every étale morphism `e : X ⟶ Y` is cohomologically smooth, with trivial
-dualizing complex `ω_e = Re^! Λ_Y ≅ Λ_X`. -/
-theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
-    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] :
-    Nonempty (dualizingComplex Λ e ≅ constantComplex Λ X) := by
-  let c := HasCompactification.compactification e
-  have : IsIso (compactificationEtaleComparison Λ e c) :=
-    isIso_compactificationEtaleComparison Λ e c
-  exact ⟨((rightDerivedUpperShriekAdjunction Λ e).rightAdjointUniq
-    (compactificationEtaleAdjunction Λ e c)).app (𝟙_ _) ≪≫
-      leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) e⟩
-
-omit [HasTateTwist Λ] in
-/-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the
-ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of `sk-prop-cohsm` (b) for `e`,
-smooth of relative dimension zero, together with `ω_e ≅ Λ_X`
-(`lem-pur-co-smooth-etale-locality`). -/
-theorem nonempty_iso_rightDerivedUpperShriek_obj_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
-    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ X]
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty ((rightDerivedUpperShriek Λ e).obj K ≅
-      (L((e)^*[ModuleCat.{u + 1} Λ])).obj K) := by
-  obtain ⟨t⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := 0) e K hK
-  obtain ⟨ω⟩ := nonempty_dualizingComplex_iso_constantComplex_of_etale Λ e
-  exact ⟨t.symm ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso ω ≪≫
-    derivedTensorRightUnitor _ X _⟩
 
 end Etale
 

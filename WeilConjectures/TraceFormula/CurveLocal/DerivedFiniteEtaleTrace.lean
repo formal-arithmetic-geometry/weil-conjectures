@@ -180,7 +180,6 @@ lemma ΓPullback_app_comp_lowerStarCompGlobalSectionsIso_inv_app
 
 end GlobalSections
 
-
 section DerivedTrace
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
@@ -227,32 +226,6 @@ theorem exists_rightDerivedPullback_app_comp_eq_smul
   rw [← assoc, ← hcomp, assoc, ← Functor.map_comp, Iso.hom_inv_id_app_assoc]
   exact Functor.rightDerivedPullback_app_comp_map_mapDerivedCategoryToId_app _ τ d hτ M
 
-/-- The bounded below version of
-`AlgebraicGeometry.Etale.exists_rightDerivedPullback_app_comp_eq_smul`. -/
-theorem exists_rightDerivedPullback_app_obj_comp_eq_smul
-    (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
-      Nat.card (π.GeometricFiber s) = d)
-    (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ∃ t : (Sheaf.Γ Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctor.obj
-        ((Functor.mapDerivedCategoryPlus (π)^*[ModuleCat.{u + 1} Λ]).obj M).obj ⟶
-          (Sheaf.Γ Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctor.obj M.obj,
-      (Functor.rightDerivedPullback (π)^*[ModuleCat.{u + 1} Λ]
-        (ΓPullback (ModuleCat.{u + 1} Λ) π)).app M.obj ≫ t = (d : ℤ) • 𝟙 _ :=
-  exists_rightDerivedPullback_app_comp_eq_smul π d hdeg M.obj
-
-/-- The finite étale trace on the middle term of the morphism of localization triangles
-`AlgebraicGeometry.Etale.sectionsWithSupportTrianglePullback`: the pullback
-`RΓ(Y, M) ⟶ RΓ(Y', π^* M)` composed with the trace is multiplication by the degree `d`. -/
-theorem exists_sectionsWithSupportTrianglePullback_app_hom₂_comp_eq_smul
-    {Z Z' : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (i' : Z' ⟶ Y')
-    [IsClosedImmersion i'] (h : i'.openComplement ≤ π ⁻¹ᵁ i.openComplement)
-    (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
-      Nat.card (π.GeometricFiber s) = d)
-    (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ∃ t, ((sectionsWithSupportTrianglePullback (ModuleCat.{u + 1} Λ) π i i' h).app M).hom₂ ≫
-      t = (d : ℤ) • 𝟙 _ :=
-  exists_rightDerivedPullback_app_obj_comp_eq_smul π d hdeg M
-
 end DerivedTrace
 
 section Pair
@@ -260,15 +233,6 @@ section Pair
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {X X' Z Z' : Scheme.{u}} (e : X' ⟶ X) (i : Z ⟶ X) [IsClosedImmersion i]
   (i' : Z' ⟶ X') [IsClosedImmersion i'] (h : i'.openComplement ≤ e ⁻¹ᵁ i.openComplement)
-
-/-- The middle component of the morphism of localization triangles
-`AlgebraicGeometry.Etale.sectionsWithSupportTrianglePullback` is the pullback
-`RΓ(X, K) ⟶ RΓ(X', e^* K)` of derived global sections. -/
-lemma sectionsWithSupportTrianglePullback_app_hom₂
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    ((sectionsWithSupportTrianglePullback A e i i' h).app K).hom₂ =
-      (Functor.rightDerivedPullback (e)^*[A] (ΓPullback A e)).app K.obj :=
-  rfl
 
 end Pair
 
@@ -278,12 +242,6 @@ namespace CategoryTheory.Functor
 
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] [HasDerivedCategory C]
   [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
-
-lemma rightDerivedFunctorNatTrans_id (F : C ⥤ D) [F.Additive] :
-    rightDerivedFunctorNatTrans (𝟙 F) = 𝟙 _ := by
-  simp only [rightDerivedFunctorNatTrans, NatTrans.mapHomotopyCategory_id,
-    Functor.whiskerRight_id', rightDerivedNatTrans_id]
-
 
 end CategoryTheory.Functor
 

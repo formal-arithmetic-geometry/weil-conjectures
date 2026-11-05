@@ -156,32 +156,6 @@ theorem Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact 
     (Abelian.Ext.precompAddEquiv (Etale.upperStarFreeSheafIso Λ f W) M (n + 1)).symm.toEquiv
     ).subsingleton
 
-/-- **Vanishing of the higher direct images above twice the dimension.** Let `k` be a separably
-closed field, `f : X ⟶ Y` a quasi-compact morphism locally of finite type between `k`-schemes
-locally of finite type with `dim X ≤ d`, and `Λ` a coefficient ring such that, for every étale
-`X`-scheme `V`, the underlying abelian sheaves of injective sheaves of `Λ`-modules on `V` are
-acyclic. Then `R^q f_* M = 0` for every `q > 2d` and every étale sheaf `M` of `Λ`-modules on `X`
-whose restrictions to étale `X`-schemes are torsion.
-
-This is `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact`,
-as `X` is locally of finite type over `k`. -/
-theorem Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic {k : Type u}
-    [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f]
-    [QuasiCompact f] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
-    (hf : f ≫ aY = aX) (d : ℕ) (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
-    (hI : ∀ (V : X.Etale) (I : Sheaf V.left.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-      [Injective I] (m : ℕ), Subsingleton (Sheaf.H ((sheafCompose V.left.smallEtaleTopology
-        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj I) (m + 1)))
-    (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hM : ∀ V : X.Etale, ((sheafCompose V.left.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        ((V.hom)^*[ModuleCat.{u + 1} Λ].obj M)).IsTorsion)
-    (q : ℤ) (hq : (2 * d : ℤ) < q) :
-    IsZero (Etale.higherDirectImage Λ f q M) := by
-  have : LocallyOfFiniteType aX := hf ▸ inferInstance
-  exact Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact f aX d hX hI M hM q
-    hq
-
 /-- **Injective sheaves of `ULift ℤ`-modules are acyclic.** The underlying abelian sheaf of an
 injective étale sheaf of `ULift ℤ`-modules is injective, taking underlying abelian sheaves being
 an equivalence (`AlgebraicGeometry.Etale.isEquivalence_sheafCompose_forget₂_uliftInt`), hence it

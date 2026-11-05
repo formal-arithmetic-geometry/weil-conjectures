@@ -118,21 +118,6 @@ scoped notation "Rf_!("c")[" A "]" =>
 scoped notation "Rf_!("c")[" A "]+" =>
   rightDerivedLowerShriekOfCompactificationPlus A c
 
-/-- The bounded below derived lower shriek attached to a compactification
-`c = (X ⟶[i] Z ⟶[g] Y)` is the restriction of the unbounded one along the inclusions of the
-bounded below derived categories: on the `Di_!` factor this is
-`Functor.mapDerivedCategoryPlusCompatibility` (`i_!` is exact), on the `Rg_*` factor it is
-`Functor.rightDerivedFunctorPlusCompatibility`. -/
-noncomputable def rightDerivedLowerShriekOfCompactificationPlusCompatibility :
-    Rf_!(c)[A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ Rf_!(c)[A] :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft D+((c.i)_!open[A])
-      ((c.g)_*[A]).rightDerivedFunctorPlusCompatibility ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight ((c.i)_!open[A]).mapDerivedCategoryPlusCompatibility
-      R((c.g)_*[A]) ≪≫
-    Functor.associator _ _ _
-
 /-- The derived lower shriek attached to a compactification is additive. -/
 instance : Rf_!(c)[A].Additive :=
   -- `D(i_!)` is additive, and so is `R(g_*)`, being a right adjoint
@@ -182,18 +167,6 @@ scoped notation "R(" f ")_![" A "]+" =>
 omit [HasSmallSiteSheafify A] in
 lemma rightDerivedLowerShriek_eq : R(f)_![A] =
     Rf_!(HasCompactification.compactification f)[A] := rfl
-
-omit [HasSmallSiteSheafify A] in
-lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
-    Rf_!(HasCompactification.compactification f)[A]+ := rfl
-
-/-- The bounded below derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` is the restriction
-of the unbounded `Rf_! : D(X_ét) ⥤ D(Y_ét)` along the inclusions of the bounded below
-derived categories. -/
-noncomputable def rightDerivedLowerShriekPlusCompatibility :
-    R(f)_![A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)_![A] :=
-  rightDerivedLowerShriekOfCompactificationPlusCompatibility A
-    (HasCompactification.compactification f)
 
 /-- The derived lower shriek along a morphism admitting a compactification is additive. -/
 instance : R(f)_![A].Additive :=

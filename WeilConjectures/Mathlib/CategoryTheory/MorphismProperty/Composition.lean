@@ -34,14 +34,4 @@ instance HasTwoOutOfThreeProperty.iInf {ι : Type*} {W : ι → MorphismProperty
     rw [iInf_iff] at hf hfg ⊢
     exact fun i ↦ (W i).of_precomp f g (hf i) (hfg i)
 
-
-/-- A multiplicative morphism property containing an endomorphism contains its powers. -/
-lemma endAsHom_pow_mem (P : MorphismProperty C) [P.IsMultiplicative] {Z : C} {Φ : Z ⟶ Z}
-    (hΦ : P Φ) (m : ℕ) : P (End.asHom (End.of Φ ^ m)) := by
-  induction m with
-  | zero => exact P.id_mem Z
-  | succ m ih =>
-    rw [pow_succ, End.mul_def]
-    exact P.comp_mem _ _ hΦ ih
-
 end CategoryTheory.MorphismProperty

@@ -86,13 +86,6 @@ lemma coe_support_comap (I : Y.IdealSheafData) (f : X ⟶ Y) :
     ((I.comap f).support : Set X) = f ⁻¹' (I.support : Set Y) := by
   rw [support_comap, TopologicalSpace.Closeds.coe_preimage]
 
-/-- An ideal sheaf has support disjoint from an open exactly when it restricts to the unit
-ideal sheaf on that open. -/
-lemma disjoint_support_iff_comap_ι_eq_top (I : X.IdealSheafData) (V : X.Opens) :
-    Disjoint (V : Set X) (I.support : Set X) ↔ I.comap V.ι = ⊤ := by
-  rw [← support_eq_bot_iff, TopologicalSpace.Closeds.ext_iff, coe_support_comap]
-  simp [Set.preimage_eq_empty_iff, Scheme.Opens.range_ι, disjoint_comm]
-
 end Support
 
 section Subscheme
@@ -101,11 +94,6 @@ section Subscheme
 out: the inclusion is a monomorphism, so it is its own kernel pair. -/
 lemma comap_subschemeι (I : X.IdealSheafData) : I.comap I.subschemeι = ⊥ :=
   Scheme.Hom.ker_eq_bot_of_isIso (pullback.fst I.subschemeι I.subschemeι)
-
-/-- The ideal `I` is contained in the pushforward of the zero ideal along `V(I) ⟶ X`. -/
-lemma le_map_bot_subschemeι (I : X.IdealSheafData) :
-    I ≤ (⊥ : I.subscheme.IdealSheafData).map I.subschemeι := by
-  rw [map_bot, ker_subschemeι]
 
 /-- Every morphism is scheme-theoretically dense in its scheme-theoretic image: the ideal
 sheaf cutting the image out pulls back to zero. -/
@@ -354,16 +342,6 @@ lemma ideal_map_appLE_le_ideal_comap (K : Y.IdealSheafData) (g : X ⟶ Y) (V : Y
   rw [Ideal.mem_comap, ← ker_subschemeι_app, RingHom.mem_ker, ← CommRingCat.comp_apply,
     Scheme.Hom.app_eq_appLE, key]
   simp only [Scheme.Hom.appLE, CommRingCat.comp_apply, h1, map_zero]
-
-/-- Membership in the kernel ideal of a composite `w ≫ g` over an affine open `V` is
-detected on the preimage `g ⁻¹ᵁ V`, provided the latter is affine. -/
-lemma _root_.AlgebraicGeometry.Scheme.Hom.mem_ker_comp {W : Scheme.{u}} (w : W ⟶ X) (g : X ⟶ Y)
-    [QuasiCompact w] [QuasiCompact g] (V : Y.affineOpens) (hV : IsAffineOpen (g ⁻¹ᵁ V.1))
-    (s : Γ(Y, V.1)) :
-    s ∈ (w ≫ g).ker.ideal V ↔ (g.app V.1).hom s ∈ w.ker.ideal ⟨g ⁻¹ᵁ V.1, hV⟩ := by
-  rw [Scheme.Hom.ker_apply, Scheme.Hom.ker_apply, RingHom.mem_ker, RingHom.mem_ker,
-    Scheme.Hom.comp_app, CommRingCat.hom_comp, RingHom.comp_apply]
-  exact Iff.rfl
 
 end Sections
 

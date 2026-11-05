@@ -98,24 +98,6 @@ namespace Ideal.Quotient
 variable {R K Ω} [IsGalois K Ω] [IsIntegrallyClosedIn R K] (P : Ideal R)
   (Q : Ideal (integralClosure R Ω)) [Q.IsPrime] [Q.LiesOver P]
 
-/-- The decomposition group in `Gal(Ω / K)` of a prime `Q` of the integral closure of `R` in `Ω`
-surjects onto the automorphism group of the residue extension. -/
-theorem stabilizerHom_surjective_integralClosure :
-    Function.Surjective (stabilizerHom Q P Gal(Ω/K)) := by
-  let : TopologicalSpace (integralClosure R Ω) := ⊥
-  have : DiscreteTopology (integralClosure R Ω) := ⟨rfl⟩
-  have := Algebra.continuousSMul_integralClosure R K Ω
-  have := Algebra.isInvariant_integralClosure R K Ω
-  exact stabilizerHom_surjective_of_profinite P Q
-
-/-- **Decomposition modulo inertia.** The decomposition group of `Q` modulo the inertia group is
-the automorphism group of the residue extension `(B ⧸ Q) / (R ⧸ P)`. -/
-noncomputable def stabilizerQuotientInertiaEquivIntegralClosure :
-    MulAction.stabilizer Gal(Ω/K) Q ⧸ Q.inertia (MulAction.stabilizer Gal(Ω/K) Q) ≃*
-      ((integralClosure R Ω ⧸ Q) ≃ₐ[R ⧸ P] (integralClosure R Ω ⧸ Q)) :=
-  QuotientGroup.liftEquiv (N := Q.inertia (MulAction.stabilizer Gal(Ω/K) Q))
-    (stabilizerHom_surjective_integralClosure P Q) (ker_stabilizerHom Q P Gal(Ω/K)).symm
-
 end Ideal.Quotient
 
 namespace Ideal
@@ -239,38 +221,3 @@ instance integralClosure.isIntegrallyClosedIn_self :
   ⟨Subtype.val_injective, fun {x} ↦ ⟨fun hx ↦ ⟨⟨x, isIntegral_trans (R := R) _ hx⟩, rfl⟩,
     by rintro ⟨y, rfl⟩; exact isIntegral_algebraMap⟩⟩
 
-variable (K) in
-include K in
-/-- The integral closure of `R` in an algebraic extension `Ω` of its fraction field has fraction
-field `Ω`. -/
-lemma integralClosure.isFractionRing_of_isAlgebraic :
-    IsFractionRing (integralClosure R Ω) Ω := by
-  have : Algebra.IsAlgebraic R K := IsLocalization.isAlgebraic (S := K) (nonZeroDivisors R)
-  have : Algebra.IsAlgebraic R Ω := Algebra.IsAlgebraic.trans R K Ω
-  have hinj : Function.Injective (algebraMap R Ω) := by
-    rw [IsScalarTower.algebraMap_eq R K Ω]
-    exact (algebraMap K Ω).injective.comp (IsFractionRing.injective R K)
-  exact integralClosure.isFractionRing_of_algebraic fun x hx ↦
-    hinj (hx.trans (map_zero _).symm)
-
-variable (K) in
-include K in
-/-- The residue fields at maximal ideals of the integral closure of `R` in a separably closed
-algebraic extension of its fraction field are separably closed. -/
-lemma Ideal.isSepClosed_quotient_integralClosure [IsSepClosed Ω] (Q : Ideal (integralClosure R Ω))
-    [Q.IsMaximal] :
-    letI := Ideal.Quotient.field Q
-    IsSepClosed (integralClosure R Ω ⧸ Q) := by
-  let := Ideal.Quotient.field Q
-  have := integralClosure.isFractionRing_of_isAlgebraic (R := R) K (Ω := Ω)
-  have : IsIntegrallyClosed (integralClosure R Ω) :=
-    (isIntegrallyClosed_iff_isIntegrallyClosedIn Ω).2 inferInstance
-  have : IsIntegrallyClosed (Localization.AtPrime Q) :=
-    isIntegrallyClosed_of_isLocalization _ Q.primeCompl Q.primeCompl_le_nonZeroDivisors
-  have : IsSepClosed (FractionRing (integralClosure R Ω)) :=
-    IsSepClosed.of_ringEquiv (FractionRing.algEquiv (integralClosure R Ω) Ω).symm.toRingEquiv
-  have := IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing
-    (A := Localization.AtPrime Q) (FractionRing (integralClosure R Ω))
-  have : IsSepClosed Q.ResidueField := this
-  exact IsSepClosed.of_ringEquiv (RingEquiv.ofBijective _
-    (Ideal.bijective_algebraMap_quotient_residueField Q)).symm

@@ -85,16 +85,7 @@ def IsCompactObj [Preadditive C] (s : C) : Prop :=
   ∀ ⦃J : Type v⦄ ⦃X : J → C⦄ (c : Cofan X), IsColimit c → ∀ f : s ⟶ c.pt,
     ∃ (S : Finset J) (g : ∀ j, s ⟶ X j), f = ∑ j ∈ S, g j ≫ c.inj j
 
-/-- Compactness is invariant under isomorphism. -/
-lemma IsCompactObj.of_iso [Preadditive C] {s s' : C} (hs : IsCompactObj s) (e : s' ≅ s) :
-    IsCompactObj s' := by
-  intro J X c hc f
-  obtain ⟨S, g, hg⟩ := hs c hc (e.inv ≫ f)
-  refine ⟨S, fun j ↦ e.hom ≫ g j, ?_⟩
-  simp only [assoc, ← Preadditive.comp_sum, ← hg, Iso.hom_inv_id_assoc]
-
 section Shift
-
 
 variable [Preadditive C] [HasShift C ℤ]
 

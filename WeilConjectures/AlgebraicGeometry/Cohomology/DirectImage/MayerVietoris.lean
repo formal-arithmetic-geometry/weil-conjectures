@@ -366,14 +366,6 @@ lemma exists_finset_affineOpens_sup_eq {W : X.Opens} (hW : IsCompact (W : Set X)
     exact (Finset.le_sup (f := fun V : X.affineOpens ↦ (V : X.Opens))
       (Finset.mem_insert_of_mem (Finset.mem_map_of_mem _ hV))) hxV
 
-/-- Preimages commute with finite unions of opens. -/
-lemma preimage_finset_sup {Y Z : Scheme.{u}} (φ : Y ⟶ Z) {ι : Type*} (s : Finset ι)
-    (U : ι → Z.Opens) : φ ⁻¹ᵁ s.sup U = s.sup fun i ↦ φ ⁻¹ᵁ U i := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => simp
-  | insert a s ha ih => rw [Finset.sup_insert, Finset.sup_insert, Scheme.Hom.preimage_sup, ih]
-
 end AffineCovers
 
 section Derived

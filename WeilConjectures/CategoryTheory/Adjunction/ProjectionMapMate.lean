@@ -162,14 +162,6 @@ lemma isIso_mateEquiv_app_of_isIso (M : C) [IsIso (adj_C.unit.app M)]
     infer_instance
   exact IsIso.of_isIso_comp_left (adj_D.counit.app (N_D.obj (G.obj M))) _
 
-/-- The mate along `N_C ⊣ R_C` and `N_D ⊣ R_D` of the base change map, the map
-`G (R_C M') ⟶ R_D (G' M')`, is an isomorphism: it is the conjugate of `α`. -/
-lemma isIso_mateEquiv_mateEquiv :
-    IsIso (mateEquiv adj_C adj_D (mateEquiv adj adj' α.hom)) := by
-  have hconj : IsIso (conjugateEquiv (adj.comp adj_C) (adj_D.comp adj') α.hom) :=
-    inferInstance
-  rwa [← iterated_mateEquiv_conjugateEquiv adj adj' adj_D adj_C α.hom] at hconj
-
 variable [Preadditive C] [Preadditive D] [HasFiniteBiproducts C]
   [G.Additive] [R_D.ReflectsIsomorphisms]
 
@@ -219,27 +211,6 @@ lemma isIso_app_of_isIso_mateEquiv_of_isIso_biproductDesc (β : TwoSquare G N_C 
     exact IsIso.of_isIso_comp_left
       (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i)) _
   exact isIso_of_reflects_iso _ R_D
-
-/-- The base change map `β : N_D (G M) ⟶ G' (N_C M)`, the mate of an isomorphism
-`α : N_D ⋙ F' ≅ F ⋙ N_C`, is an isomorphism at `M` in the following situation: `N_C ⊣ R_C` and
-`N_D ⊣ R_D` are adjunctions with `R_D` conservative, and there are finitely many endomorphisms
-`e i` of `N_C M` and `e' i` of `N_D (G M)` compatible with `β`, such that the maps
-`M ⟶ R_C (N_C M)` and `G M ⟶ R_D (N_D (G M))` obtained by composing the units with `R_C (e i)`
-and `R_D (e' i)` exhibit the targets as biproducts of copies of `M` and of `G M`.
-
-This applies to extension of scalars `N` along a finite free ring map, with right adjoint the
-restriction of scalars `R`, and to the multiplications `e i` by the elements of a basis: on each
-summand, `R_D β` is then the iterated mate of `α`, which is invertible
-(`CategoryTheory.Adjunction.isIso_app_of_isIso_mateEquiv_of_isIso_biproductDesc`). -/
-lemma isIso_mateEquiv_app_of_isIso_biproductDesc {ι : Type} [Finite ι] (M : C)
-    (e : ι → (N_C.obj M ⟶ N_C.obj M)) (e' : ι → (N_D.obj (G.obj M) ⟶ N_D.obj (G.obj M)))
-    (he : ∀ i, e' i ≫ (mateEquiv adj adj' α.hom).app M =
-      (mateEquiv adj adj' α.hom).app M ≫ G'.map (e i))
-    [IsIso (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i))]
-    [IsIso (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i))] :
-    IsIso ((mateEquiv adj adj' α.hom).app M) := by
-  have := isIso_mateEquiv_mateEquiv adj adj' α adj_D adj_C
-  exact isIso_app_of_isIso_mateEquiv_of_isIso_biproductDesc adj_D adj_C _ M e e' he
 
 end BaseChange
 
