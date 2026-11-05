@@ -256,3 +256,14 @@
 - The assigned CoefficientConstantTowerRoos source is unchanged.
 - Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ877 in progress
+
+- Branch: `u9/BZ877`; baseline: `e167a50a4`.
+- The user instructed continuation after the explicit two-cast proposal in the public hμ assumption.
+- Applied exactly `BZ877-proposed-statement-casts.patch`, plus Localization public/implementation imports.
+- Reviewed pinned Mathlib b63f6e8a: Qh is no_expose; reflexive casts preserve the counit morphisms.
+- Current source commit: `7a6c2085b`; existing `ucheck-bump` is queued.
+- Next: validate DerivedPullbackTensorUnit, then DerivedPullbackMonoidalDescent and later importers.
+- Patterns and exact diagnostic: `/home/ubuntu/u9/bz/FIXES-BZ877.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, deletions, or heartbeat changes.
