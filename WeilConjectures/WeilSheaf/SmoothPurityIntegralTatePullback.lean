@@ -59,8 +59,7 @@ noncomputable def upperStarShiftIntegralTateTwistDerivedIso (d : ℕ) (n : ℤ) 
   (L((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).commShiftIso n).app _ ≪≫
     (shiftFunctor _ n).mapIso
       ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory _ g).app _ ≪≫
-        ((CondensedRing.upperStar (Profinite.padicIntegersRingObj ℓ E) g).
-          mapDerivedCategorySingleFunctor 0).app _ ≪≫
+        ((CondensedRing.upperStar (Profinite.padicIntegersRingObj ℓ E) g).mapDerivedCategorySingleFunctor 0).app _ ≪≫
         (DerivedCategory.singleFunctor _ 0).mapIso
           (upperStarIntegralTateTwistNatIso ℓ E g f d))
 
