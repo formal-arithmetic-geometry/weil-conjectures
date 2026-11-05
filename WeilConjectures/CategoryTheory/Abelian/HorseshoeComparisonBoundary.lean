@@ -98,6 +98,8 @@ private theorem comparison_eq_unit
       DerivedCategory.Plus.Qh.obj
         (v.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.quotient A).obj
           (resolutionPlus R))) := rfl
+  let ui := inv (v.rightDerivedFunctorPlusUnith.app
+    ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))
   simp only [injectiveResolutionDerivedComparison, boundedBelowInjectiveComparison,
     Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_hom,
     Iso.symm_hom, asIso_inv, Functor.map_comp, Category.assoc, Functor.comp_map]
@@ -105,9 +107,8 @@ private theorem comparison_eq_unit
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
       (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).map
         ((DerivedCategory.Plus.quotientCompQhIso A).inv.app (resolutionPlus R)) ≫
+      DerivedCategory.Plus.ι.map ui ≫
       (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).map (eqToHom e) ≫
-      DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
-        ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
       (DerivedCategory.Plus.QhCompιIsoιCompQh B).hom.app
         (v.mapHomotopyCategoryPlus.obj
           ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
@@ -229,12 +230,6 @@ private theorem augmentation_boundary
     DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
     DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
     Category.id_comp]
-  change (DerivedCategory.triangleOfSESδ
-        (hS.map_of_exact (HomologicalComplex.single A (.up ℤ) 0)) ≫
-      (𝟙 _)⟦(1 : ℤ)⟧') ≫ (DerivedCategory.Q.map IA.ι')⟦(1 : ℤ)⟧' ≫
-      ((DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' =
-    DerivedCategory.Q.map IC.ι' ≫ DerivedCategory.triangleOfSESδ hH ≫
-      ((DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' ≫ 𝟙 _
   simp only [Functor.map_id, Category.comp_id]
   erw [reassoc_of% hn]
 
@@ -321,10 +316,8 @@ theorem horseshoe_comparison_boundary
     Category.assoc]
   rw [← Functor.commShiftIso_hom_naturality_assoc,
     ← Functor.map_comp_assoc, haug, Functor.map_comp, Category.assoc]
-  simp only [Functor.comp_map]
-  have hunit' := hunit
-  dsimp [H] at hunit'
-  erw [reassoc_of% hunit', he]
+  simp only [Functor.comp_map] at hunit ⊢
+  erw [reassoc_of% hunit, he]
   rfl
 
 end CategoryTheory
