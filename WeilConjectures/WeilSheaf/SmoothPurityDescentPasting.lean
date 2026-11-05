@@ -50,12 +50,13 @@ lemma traceCompDescentIso_forget
   simp only [Adjunction.compForgetIso, traceCompDescentIso, Iso.trans_hom, Iso.trans_inv,
     Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, isoWhiskerLeft_hom, isoWhiskerLeft_inv,
     isoWhiskerRight_hom, isoWhiskerRight_inv, whiskerLeft_app, whiskerRight_app,
-    associator_hom_app, associator_inv_app, Functor.map_comp, Functor.map_id,
+    associator_hom_app, associator_inv_app, Functor.map_comp,
     Functor.comp_obj, Functor.comp_map, Category.id_comp, Category.comp_id, Category.assoc]
   rw [h₁, h₂]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← R₂.map_comp_assoc, Iso.hom_inv_id_app, R₂.map_id, Category.id_comp]
-  rw [← c₂.hom.naturality_assoc]
+  rw [← R₂.map_comp_assoc, Iso.hom_inv_id_app]
+  simp only [Functor.comp_obj, Functor.map_id, Category.id_comp]
+  erw [← c₂.hom.naturality_assoc]
   rfl
 
 end CategoryTheory.Functor
