@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedOpenForget
+public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionForgetSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProjectionIso
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedForgetNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.GeometricProjectionNaturality
@@ -57,12 +58,8 @@ theorem projectionForgetSquare_open :
       (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l U)
       (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l Z)
       (ProEtaleWeilSheaf.nativeOpenProjectionIso k₀ l j).hom
-      (B.uncurriedInvProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) := by
-    intro M N
-    simpa only [Adjunction.uncurriedInvProjectionComparisonNatTrans, Functor.uncurry_obj_map,
-      curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
-      Category.id_comp, Category.comp_id] using
-      ProEtaleWeilSheaf.map_nativeOpenProjectionIso_hom_app k₀ l j M N
+      (B.uncurriedInvProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) :=
+    ProEtaleWeilSheaf.nativeOpenProjection_forgetSquare k₀ l j
   have h := projectionForgetSquare_of_iso _ _ _ _
     (projectionRealizationCompIso k₀ l U) (projectionRealizationCompIso k₀ l Z) _ _ h₀
   intro M N

@@ -67,57 +67,7 @@ def nativeOpenForgetIso :
     (CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ jb)).symm
     (TwoSquare.mk _ _ _ _ (derivedCondensedRealizationUpperStarIso k₀ l j).inv)).natTrans).symm
 
-/-- The canonical open projection isomorphism lies over the geometric projection formula. -/
-lemma map_nativeOpenProjectionIso_hom_app
-    (M : DerivedCategory (ProEtaleWeilSheaf k₀ l U))
-    (N : DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) :
-    (derivedCondensedRealization k₀ l Z).map ((nativeOpenProjectionIso k₀ l j).hom.app (M, N)) ≫
-      (nativeOpenForgetIso k₀ l j).hom.app
-        ((nativeDerivedTensor k₀ l U).obj (M, (nativeOpenPull k₀ l j).obj N)) ≫
-      (CondensedRing.openImmersionLowerShriek Λ jb).mapDerivedCategory.map
-        ((condensedRealizationTensor k₀ l U).hom.app (M, (nativeOpenPull k₀ l j).obj N) ≫
-          (derivedCondensedRealization k₀ l U).obj M ◁
-            (derivedCondensedRealizationUpperStarIso k₀ l j).inv.app N) =
-    (condensedRealizationTensor k₀ l Z).hom.app ((nativeOpenExtension k₀ l j).obj M, N) ≫
-      (nativeOpenForgetIso k₀ l j).hom.app M ▷ (derivedCondensedRealization k₀ l Z).obj N ≫
-      inv (CondensedRing.openImmersionProjectionComparison Λ jb
-        ((derivedCondensedRealization k₀ l U).obj M)
-        ((derivedCondensedRealization k₀ l Z).obj N)) := by
-  let adj := derivedExtensionByZeroUpperStarAdjunction k₀ l j
-  let adj' := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ jb
-  let ρ' := Functor.uncurryCompIsoOfIso (CondensedRing.leftDerivedUpperStarTensorIso Λ jb)
-  have : IsIso ((mateEquiv adj adj').symm
-      (TwoSquare.mk _ _ _ _ (derivedCondensedRealizationUpperStarIso k₀ l j).symm.hom)).natTrans :=
-    isIso_nativeOpenForgetInverseMate k₀ l j
-  have hu := compactProjectionOpen_unitSquare_of_inverseMate adj adj'
-    (derivedCondensedRealizationUpperStarIso k₀ l j).symm
-  have hr := Functor.comparisonCompatible_uncurried
-    (derivedCondensedRealizationUpperStarIso k₀ l j).symm
-    (condensedRealizationTensor k₀ l U) (condensedRealizationTensor k₀ l Z)
-    (nativePullTensor k₀ l j) (CondensedRing.leftDerivedUpperStarTensorIso Λ jb)
-    (comparisonCompatible_derivedCondensedRealization k₀ l j)
-  have hg' : adj'.homEquiv _ _
-      (CondensedRing.openImmersionProjectionComparison Λ jb
-        ((derivedCondensedRealization k₀ l U).obj M)
-        ((derivedCondensedRealization k₀ l Z).obj N)) =
-      (Functor.uncurry.obj (curriedTensor _)).map
-        (Prod.mkHom (adj'.unit.app ((derivedCondensedRealization k₀ l U).obj M)) (𝟙 _)) ≫
-          ρ'.inv.app
-            ((CondensedRing.openImmersionLowerShriek Λ jb).mapDerivedCategory.obj
-              ((derivedCondensedRealization k₀ l U).obj M),
-                (derivedCondensedRealization k₀ l Z).obj N) := by
-    exact CondensedRing.projection_open_homEquiv Λ jb _ _
-  have h := compactProjectionOpen_forget_of_unit_at adj adj'
-    (derivedCondensedRealization k₀ l U) (derivedCondensedRealization k₀ l Z)
-    (nativeOpenForgetIso k₀ l j) (derivedCondensedRealizationUpperStarIso k₀ l j).symm
-    (condensedRealizationTensor k₀ l U) (condensedRealizationTensor k₀ l Z)
-    (nativePullTensor k₀ l j) ρ' M N ((nativeOpenProjectionIso k₀ l j).app (M, N))
-    (asIso (CondensedRing.openImmersionProjectionComparison Λ jb
-      ((derivedCondensedRealization k₀ l U).obj M)
-      ((derivedCondensedRealization k₀ l Z).obj N))).symm hu hr
-    (nativeOpenProjectionIso_inverse_unit k₀ l j M N) hg'
-  simpa only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-    id_whiskerRight, whiskerLeft_id, Category.id_comp, Category.comp_id,
-    Iso.symm_hom, Iso.symm_inv, asIso_hom, asIso_inv] using h
+-- The forget square of the open projection isomorphism is `nativeOpenProjection_forgetSquare`
+-- (`WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionForgetSquare`).
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
