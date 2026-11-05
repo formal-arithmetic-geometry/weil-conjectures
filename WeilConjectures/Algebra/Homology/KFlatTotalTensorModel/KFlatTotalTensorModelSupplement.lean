@@ -114,6 +114,19 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{r})
 
+private local instance (I : Type r) : HasColimitsOfShape (Discrete I)
+    (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
+private local instance (I : Type r) : HasColimitsOfShape (Discrete I) (Modules R) :=
+  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
+private local instance (I : Type) : HasColimitsOfShape (Discrete I) (Modules R) := by
+  let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 
 
@@ -220,7 +233,11 @@ private theorem derivedComparison
     (hS _).2 ⟨hP, hPflat⟩⟩
   let q : S.FullSubcategory := ⟨(HomotopyCategory.quotient _ _).obj Q,
     (hS _).2 ⟨hQ, hQflat⟩⟩
-  exact ⟨(DerivedCategory.Qh.mapIso (c.app (P, Q))).symm ≪≫ d.app (p, q)⟩
+  exact ⟨((DerivedCategory.quotientCompQhIso (Modules R)).app ((total R).obj (P, Q))).symm ≪≫
+    (DerivedCategory.Qh.mapIso (c.app (P, Q))).symm ≪≫ d.app (p, q) ≪≫
+    (SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R).mapIso
+      (((DerivedCategory.quotientCompQhIso (Modules R)).app P).prod
+        ((DerivedCategory.quotientCompQhIso (Modules R)).app Q))⟩
 
 
 end SheafOfModules.KFlatTotalTensorModel
