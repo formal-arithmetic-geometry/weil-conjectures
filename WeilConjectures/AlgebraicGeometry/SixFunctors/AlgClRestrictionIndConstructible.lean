@@ -289,7 +289,6 @@ import Mathlib.CategoryTheory.Abelian.Basic
 import WeilConjectures.Algebra.Homology.FunctorialObjectResolution
 import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.Algebra.Homology.SingleHomology
-import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
