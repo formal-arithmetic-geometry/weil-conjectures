@@ -165,7 +165,8 @@ private theorem scalarTensorTotal
       (eqToHom (hF M)).val.app V ((am.unit.app M).val.app V x) =
         (toSheafify J (SheafOfModules.changeOfRingsPresheaf a M).presheaf).app V
           ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x) := by
-    have hh := hUnit M (SheafOfModules.changeOfRings a M) (𝟙 _) V x
+    have hh := hUnit M (SheafOfModules.changeOfRings a M)
+      (𝟙 (SheafOfModules.changeOfRings a M)) V x
     simp only [Category.comp_id] at hh
     have he := am.homEquiv_naturality_right (𝟙 (F.obj M)) (eqToHom (hF M))
     simp only [Category.id_comp, am.homEquiv_id] at he
@@ -205,7 +206,7 @@ private theorem scalarTensorTotal
           ((SheafOfModules.changeOfRingsHomOfUniverses a _
             (SheafOfModules.ScalarHomOrdinary.tensorIsoSite R M N).hom).val.app V
             ((eF _).hom.val.app V _)))) = _
-    rw [eF_unit, SheafOfModules.scalarExtension_map_tmul,
+    erw [eF_unit, SheafOfModules.scalarExtension_map_tmul,
       SheafOfModules.ScalarHomOrdinary.tensorIsoSite_pure, core.tensor_tmul,
       SheafOfModules.ScalarHomOrdinary.tensorIsoSite_inv_pure,
       SheafOfModules.ScalarHomOrdinary.pure_map, eF_inv_unit, eF_inv_unit]
@@ -226,7 +227,7 @@ private theorem scalarTensorTotal
       (F.map f ⊗ₘ F.map g).val.app V
         ((e M N).hom.val.app V
           ((am.unit.app _).val.app V (SheafOfModules.ScalarHomOrdinary.pure R M N V x y)))
-    rw [hun, SheafOfModules.ScalarHomOrdinary.pure_map, hgen, hgen,
+    erw [hun, SheafOfModules.ScalarHomOrdinary.pure_map, hgen, hgen,
       SheafOfModules.ScalarHomOrdinary.pure_map, hun, hun]
   let EC := F.mapHomologicalComplex (.up ℤ)
   let tR := coefficientTotalTensor.{r, c, v} J R
