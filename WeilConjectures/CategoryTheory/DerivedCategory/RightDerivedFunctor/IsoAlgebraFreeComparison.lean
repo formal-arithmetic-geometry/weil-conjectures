@@ -47,7 +47,7 @@ section RightDerivedFunctorUnitQ
 variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B] [HasDerivedCategory A]
   [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A] (P : A ⥤ B) [P.Additive]
 
-lemma rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app (K : CochainComplex A ℤ) :
+private lemma rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app (K : CochainComplex A ℤ) :
     P.rightDerivedFunctorUnitQ K =
       P.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj K) := by
   simp only [rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
@@ -69,7 +69,7 @@ variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B] [HasDer
 
 /-- On the image of a complex `K` in the homotopy category, the inverse of the comparison
 `P.mapDerivedCategoryFactorsh` is that of `P.mapDerivedCategoryFactors` at `K`. -/
-lemma mapDerivedCategoryFactorsh_inv_app_quotient_obj (K : CochainComplex A ℤ) :
+private lemma mapDerivedCategoryFactorsh_inv_app_quotient_obj (K : CochainComplex A ℤ) :
     P.mapDerivedCategoryFactorsh.inv.app
         ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj K) =
       P.mapDerivedCategoryFactors.inv.app K := by

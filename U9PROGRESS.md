@@ -164,3 +164,10 @@
   are `AffineLineBundle` and `SmoothPurityNativeTraceCriterion`.
 - No BZ585 module is claimed green yet; no DONE marker written.
 - No local Lean/Lake, statement edits, proof shortcuts, or limit increases.
+
+# BZ585 resumed
+
+- The user instructed continuation after the concrete two-helper visibility proposal.
+  Applied exactly the two private modifiers; statements and proof bodies are unchanged.
+- Refreshed the remote notes and reread the brief; no new applicable LEAD instructions.
+- Next: validate the assigned module with ucheck-bump, then its direct importer.
