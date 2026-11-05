@@ -63,7 +63,8 @@ lemma purity_comparisonUpperStarFreeIso_factor :
       ((Mod.freeForgetAdjunction _).comp (finiteCoefficientModEquivalence X T).toAdjunction)),
     conjugateIsoEquiv_trans _
       ((comparisonAdjunction Ab.{u + 1} X).comp (purityFiniteFreeSheafAdjunction T X)),
-    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_associator]
+    conjugateIsoEquiv_isoWhiskerLeft]
+  erw [conjugateIsoEquiv_associator]
   simp only [purityComparisonFreeSheafIso, purityFiniteCoefficientFreeIso,
     Equiv.apply_symm_apply]
   ext N
