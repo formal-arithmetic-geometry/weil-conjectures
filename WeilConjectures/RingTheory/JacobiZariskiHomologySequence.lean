@@ -69,7 +69,7 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
     constructor
     · intro hx
       obtain ⟨y, hy⟩ := (hdp x.down).mp (congrArg ULift.down hx)
-      exact ⟨⟨y⟩, ULift.ext _ _ hy⟩
+      exact ⟨⟨y⟩, congrArg ULift.up hy⟩
     · rintro ⟨y, hy⟩
       apply ULift.ext
       exact (hdp x.down).mpr ⟨y.down, congrArg ULift.down hy⟩

@@ -111,7 +111,7 @@ lemma flat_sheafFiber_obj {F : Sheaf J A} (hF : ObjectProperty.flat F) :
   -- tensoring with `F_Φ` is right exact, and preserves monomorphisms by
   -- `CategoryTheory.GrothendieckTopology.Point.mono_sheafFiber_obj_whiskerLeft`
   rw [ObjectProperty.flat_iff_preservesFiniteLimits]
-  refine ((Functor.preservesFiniteLimits_tfae _).out 0 3).1 fun S hS ↦ ?_
+  refine ((Functor.preservesFiniteLimits_tfae _).out 1 4).1 fun S hS ↦ ?_
   have := hS.mono_f
   refine ⟨?_, Φ.mono_sheafFiber_obj_whiskerLeft hF S.f⟩
   exact ((Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi _).1 inferInstance S hS).1
