@@ -16,9 +16,13 @@ open CategoryTheory MonoidalCategory Limits
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-variable {C D A B : Type*} [Category* C] [Category* D] [Category* A] [Category* B]
+universe u v
+
+variable {C D A B : Type u} [Category.{v} C] [Category.{v} D]
+  [Category.{v} A] [Category.{v} B]
   [Abelian C] [Abelian D] [Abelian A] [Abelian B]
-  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory A] [HasDerivedCategory B]
+  [HasDerivedCategory.{v} C] [HasDerivedCategory.{v} D]
+  [HasDerivedCategory.{v} A] [HasDerivedCategory.{v} B]
   [MonoidalCategory (CochainComplex A ℤ)] [MonoidalCategory (CochainComplex B ℤ)]
   [MonoidalCategory (DerivedCategory A)] [MonoidalCategory (DerivedCategory B)]
   [Functor.LaxMonoidal (DerivedCategory.Q (C := A))]
