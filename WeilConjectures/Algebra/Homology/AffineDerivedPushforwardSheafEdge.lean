@@ -232,10 +232,21 @@ theorem exists_affineDerivedPushforwardSheafEdge
   have hepi : Epi ((F ⋙ S).map (M.sc i).homologyData.left.π) := by
     change Epi U.π
     infer_instance
+  have hhom {Z : D}
+      (g : H.obj (S.rightDerivedFunctor.obj (DerivedCategory.Q.obj K)) ⟶ Z) :
+      H.map (S.rightDerivedFunctor.map
+        ((DerivedCategory.quotientCompQhIso C).hom.app K)) ≫ g = g := by
+    change H.map (S.rightDerivedFunctor.map (𝟙 (DerivedCategory.Q.obj K))) ≫ g = g
+    rw [S.rightDerivedFunctor.map_id, H.map_id, Category.id_comp]
+  have hinv {Z : D}
+      (g : H.obj (DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj K)) ⟶ Z) :
+      H.map ((DerivedCategory.quotientCompQhIso D).inv.app
+        ((S.mapHomologicalComplex (.up ℤ)).obj K)) ≫ g = g := by
+    change H.map (𝟙 (DerivedCategory.Q.obj
+      ((S.mapHomologicalComplex (.up ℤ)).obj K))) ≫ g = g
+    rw [H.map_id, Category.id_comp]
   simp only [Functor.map_comp] at hn
-  simp only [map_map_quotientCompQhIso_hom, map_quotientCompQhIso_inv,
-    Category.id_comp] at hn
-  erw [Category.comp_id] at hn
+  simp only [Category.assoc, hhom, hinv] at hn
   apply (cancel_epi ((F ⋙ S).map (M.sc i).homologyData.left.π)).mp
   apply (cancel_mono (γ.app ⟨_, hM⟩ ≫ δ.hom.app (DerivedCategory.Q.obj K))).mp
   simpa only [ε, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
