@@ -257,3 +257,22 @@
 - Assigned theorem remains intact: it has live callers and cannot be pruned.
 - Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
 - No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
+
+## BZ856 resumed build progress
+
+- Four restored prerequisites built green at `aacaa1bc8c`: StalkDerivedExtensionComparison,
+  StalkDerivedExtensionComparisonIso, StalkDerivedExtensionComparisonIsoCore, and
+  StalkDerivedExtensionComparisonIsIso. Full log: BUILD-BZ856-restored2-full.log.
+- Their public endpoint conversions use proof-local reflexive casts with Localization
+  implementation imports. The assigned theorem's statement is unchanged.
+- The comparison definition's explicit annotation exposed a Scheme.Modules alias
+  instance failure. Fixed by naming `SheafOfModules (moduleRings X'.toRingedSpace)`.
+- Latest pushed source: `928159606`. BUILD-BZ856-restored3.log is queued and reads
+  the pushed branch when a tree becomes available.
+- This next build also checks default heartbeat limits: the restored legacy 800000
+  and 1600000 overrides were removed pending measurement. Core previously built in
+  40 seconds under its original override.
+- Direct downstream targets: AffineSpectrumStalkCondition and
+  SingleComplexOpenRestrictionComparison. Their next importers are
+  SingleComplexAffineSpectrumCoordinates and SingleComplexTargetLocality.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ856.md. No DONE marker yet.
