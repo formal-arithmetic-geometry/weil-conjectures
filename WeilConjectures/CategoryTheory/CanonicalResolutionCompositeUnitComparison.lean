@@ -9,9 +9,11 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
 public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.CategoryTheory.CanonicalResolutionHomologyComparison
 import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-! # Resolution comparisons and the composite derived unit
 
@@ -243,6 +245,10 @@ theorem resolution_composite_unit_transport
     (DerivedCategory.Plus.homologyFunctorObjQIso _ n).hom]
   erw [← hn]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rfl
+  congr 3
+  erw [Functor.rightDerivedFunctorPlusUnit_app]
+  change _ = (𝟙 _) ≫ DerivedCategory.Plus.Qh.map (𝟙 _) ≫ _ ≫
+    G.rightDerivedFunctorPlus.map (𝟙 _)
+  erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
 
 end CategoryTheory

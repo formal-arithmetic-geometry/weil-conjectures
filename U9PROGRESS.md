@@ -63,19 +63,20 @@
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ190 complete
 
-# BZ189 complete
-
-- Branch: `u9/BZ189`, starting commit `c6f0e1da9`.
-- Assigned module: `WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnitShift`.
-- `ucheck-bump` passed: rc=0, failed=0, 1925 jobs; target rebuilt in 1.9 seconds.
-- Validated source commit: `ad00a1745c51c41706839a8b38b06a57f64a70d1`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ189-final-full.log`.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ189.md`.
-- The user instructed continuation after the exact two-term statement proposal.
-  The single comparison now targets Q directly and uses the cochain-level unit;
-  the proof relates both to the existing homotopy-level shift and cycles comparisons.
-- Binders, mathematical assertion, and existing docstring are preserved.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- This final progress commit changes no Lean source after the successful build.
-- Completion marker: `/home/ubuntu/u9/state/BZ189.DONE`.
+- Branch: `u9/BZ190`.
+- Assigned module: `WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison`.
+- The module passed `ucheck-bump`: rc=0, failed=0, 2090 jobs.
+- Tested source commit: `a20255451c8530a95240e9634ea6bab8a027d11d`.
+- Final log: `/home/ubuntu/u9/bz/BUILD-BZ190-final-full.log`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw7`; both requested pins verified.
+- The user instructed continuation after the exact canonical unit proposal.
+  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the public statement.
+  The proof expands the unit and cancels its canonical comparison identities.
+  All other declaration statements and existing docstrings are unchanged.
+- Private helpers use implementation imports and explicit comparison cancellation.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
+- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
+- This final commit changes only progress documentation after the successful build.
