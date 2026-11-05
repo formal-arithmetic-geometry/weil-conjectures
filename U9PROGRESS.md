@@ -1,14 +1,23 @@
-# BZ150 in progress
+# BZ151 complete
 
-- Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
-- Three modules passed together with `ucheck-bump` at commit `1fd21ddd01`.
-- The user instructed continuation after the exact one-line statement migration proposal.
-  `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
-  Mathlib owns the old name with the opposite orientation; the intended map is preserved.
-- All remaining declaration statements and existing docstrings are unchanged.
-- Next: validate all four assigned modules together, then write `~/u9/state/BZ150.DONE`.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Unit: BZ151, branch `u9/BZ151`.
+- All four assigned modules pass `ucheck-bump` together: rc=0, failed=0, 4013 jobs.
+- Validated source commit: `2c0c45e4a0cac7aea18dc549888feca5e6f8fb1e`. This completion commit changes only documentation.
+- Modules: CompConjugate, AbelianHigherDirectImagePresheaf,
+  RawModuleScalarSourceSquareCore, DerivedSourceComparisonInjective.
+- Final build: `newsrv:/home/ubuntu/u9n/bumpw3`;
+  remote log `/home/ubuntu/u9/logs/BZ151-20261106T004440.log`.
+- Full local log: `/home/ubuntu/u9/bz/BUILD-BZ151-final-full.log`.
+- The user instructed continuation after the exact four declaration-type API substitutions
+  in `/home/ubuntu/u9/bz/BZ151-statement-api.patch`; those substitutions are applied.
+  They use the inverse Mathlib composition comparison and direct Q instead of the obsolete
+  quotient-to-Qh transport. All other declaration-type expressions and docstrings are unchanged.
+- Public Grp.Zero import, redundant-rfl removal, and invalid-omit correction also pass.
+- Existing axiom checks in DerivedSourceComparisonInjective report only propext,
+  Classical.choice, and Quot.sound. No prohibited proof escapes or heartbeat increases.
+- No local Lean/Lake execution. Only the four assigned Lean modules and this file changed.
+- Fix patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ151.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ151.DONE`.
 
 # BZ133 complete
 
@@ -61,18 +70,3 @@
   all other declaration statements and all existing docstrings are unchanged.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
-
-# BZ148 complete
-
-- Branch: `u9/BZ148`; starting commit: `80aeb4bf4`.
-- All four assigned modules pass `ucheck-bump` together: rc=0, failed=0, 2916 jobs.
-- Validated source commit: `811a71f8249e8724bd7a1e8f1f998fceb8736596`.
-  This completion update changes only progress documentation.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ148-final-full.log`.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ148.md`.
-- Reversed the derived-composition isomorphism uses, restricted counit simplification,
-  and supplied the ring-presheaf Kan-extension family through the pointwise API.
-- The user instructed continuation after the exact two statement-local `cD` adaptations
-  were proposed; that patch is applied. All other declaration types and docstrings are unchanged.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ148.DONE`.
