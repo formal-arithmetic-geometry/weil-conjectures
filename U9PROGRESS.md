@@ -80,3 +80,16 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
+
+# BZ275 in progress
+
+- Branch: `u9/BZ275`, starting commit `18e44f2d5`.
+- Assigned target: `WeilConjectures.CategoryTheory.DerivedSectionScalarTransport`.
+- The user instructed continuation after the exact three-statement API proposal; applied
+  `/home/ubuntu/u9/bz/BZ275-statement-api.patch` to preserve the comparison under Mathlib's
+  reversed `mapDerivedCategoryCompIso` orientation.
+- Proofs use the corresponding inverse factors and cancellation. Localization API and
+  implementation imports fix the private `Qh` definitional reductions.
+- Next: remote validation, direct importers, then DONE with all green modules.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ275.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
