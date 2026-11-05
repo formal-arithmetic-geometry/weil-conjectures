@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 
 /-!
 # The internal hom of presheaves of modules
