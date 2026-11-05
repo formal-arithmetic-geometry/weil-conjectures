@@ -133,13 +133,13 @@ noncomputable def relativeDifferentialsHomEquiv (M : X.Modules) :
     apply ((sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).homEquiv _ _).injective
     rw [Equiv.apply_symm_apply]
     apply (isUniversal' f.pullbackPresheafToPresheaf).postcomp_injective
-    rw [Derivation.Universal.fac]
+    rw [PresheafOfModulesOfCommRing.Derivation.Universal.fac]
     rfl
   right_inv D := by
     change (derivation' f.pullbackPresheafToPresheaf).postcomp
       (((sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).homEquiv _ _)
         (((sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).homEquiv _ _).symm _)) = D
-    rw [Equiv.apply_symm_apply, Derivation.Universal.fac]
+    rw [Equiv.apply_symm_apply, PresheafOfModulesOfCommRing.Derivation.Universal.fac]
 
 @[simp]
 lemma relativeDifferentialsHomEquiv_apply {M : X.Modules} (g : f.relativeDifferentials ⟶ M) :
@@ -154,7 +154,7 @@ lemma isZero_relativeDifferentials_of_surjective
   apply (f.relativeDifferentialsHomEquiv _).injective
   ext U x
   obtain ⟨a, rfl⟩ := h U x
-  simp only [relativeDifferentialsHomEquiv_apply, Derivation.postcomp_d_apply]
+  simp only [relativeDifferentialsHomEquiv_apply, PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
   erw [Derivation'.d_app]
   simp
 
@@ -260,7 +260,7 @@ noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} 
     apply (f₁.relativeDifferentialsHomEquiv _).injective
     ext U x
     simp only [relativeDifferentialsHomEquiv_apply]
-    erw [Derivation.postcomp_d_apply, Derivation.postcomp_d_apply]
+    erw [PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply, PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
     erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.hom_comp,
       LinearMap.comp_apply, relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₂.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
@@ -268,7 +268,7 @@ noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} 
     apply (f₂.relativeDifferentialsHomEquiv _).injective
     ext U x
     simp only [relativeDifferentialsHomEquiv_apply]
-    erw [Derivation.postcomp_d_apply, Derivation.postcomp_d_apply]
+    erw [PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply, PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
     erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.hom_comp,
       LinearMap.comp_apply, relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₁.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
