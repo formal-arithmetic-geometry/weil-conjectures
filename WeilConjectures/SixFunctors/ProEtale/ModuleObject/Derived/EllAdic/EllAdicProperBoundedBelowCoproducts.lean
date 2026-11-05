@@ -84,6 +84,18 @@ private theorem preservesCoproduct_of_finitePartialSums
     erw [colimit.ι_desc]
     exact hm a.1.as
 
+private theorem isStrictlyGE_finitePartialSums
+    {C : Type*} [Category* C] [Abelian C]
+    {I : Type*} (E : I → CochainComplex C ℤ) (N : ℤ)
+    (hE : ∀ i, (E i).IsStrictlyGE N) (s : Finset (Discrete I)) :
+    ((liftToFinsetObj (Discrete.functor E)).obj s).IsStrictlyGE N := by
+  have : ∀ i, (E i).IsStrictlyGE N := hE
+  rw [CochainComplex.isStrictlyGE_iff]
+  intro n hn
+  exact (isColimitOfPreserves (HomologicalComplex.eval C (.up ℤ) n)
+    (coproductIsCoproduct (fun x : s ↦ E x.1.as))).isZero_pt
+      (Functor.isZero _ fun x ↦ (E x.as.1.as).isZero_of_isStrictlyGE N n hn)
+
 end CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -163,12 +175,8 @@ theorem condensed_boundedBelow_preservesCoproduct
   choose E hE he using representatives
   have : ∀ i, (E i).IsStrictlyGE N := hE
   let S := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor E)
-  have hS (s : Finset (Discrete I)) : (S.obj s).IsStrictlyGE N := by
-    rw [CochainComplex.isStrictlyGE_iff]
-    intro n hn
-    exact (isColimitOfPreserves (HomologicalComplex.eval C (.up ℤ) n)
-      (coproductIsCoproduct (fun x : s ↦ E x.1.as))).isZero_pt
-        (Functor.isZero _ fun x ↦ (E x.as.1.as).isZero_of_isStrictlyGE N n hn)
+  have hS (s : Finset (Discrete I)) : (S.obj s).IsStrictlyGE N :=
+    isStrictlyGE_finitePartialSums E N hE s
   have hT (q : ℤ) : PreservesColimit (Discrete.functor E)
       (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor D q) := by
     have : PreservesColimit S
