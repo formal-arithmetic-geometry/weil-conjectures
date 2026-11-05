@@ -31,7 +31,7 @@ of its underlying complex of `ℓ`-adic sheaves on the geometric fibre:
   (`AlgebraicGeometry.ProEtaleWeilSheaf.native_two_sided_kflat_forget`);
 * conversely, forgetting is exact, reflects isomorphisms and commutes with the tensor product of
   complexes, so a native tensor test may be checked after forgetting
-  (`AlgebraicGeometry.ProEtaleWeilSheaf.nativeIsKFlat_of_kFlat_forget`).
+  (`AlgebraicGeometry.ProEtaleWeilSheaf.nativeIsKFlat_of_kFlat_forget_via_ordinary`).
 
 The underlying complex of `p^* P` is the pullback along the geometric fibre `p̄` of the underlying
 complex of `P`, and the pullback of `ℓ`-adic sheaves preserves K-flat complexes
@@ -70,7 +70,7 @@ section Forget
 variable (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The underlying complex of `ℓ`-adic sheaves of a natively K-flat complex is K-flat. -/
-theorem kFlat_forget_of_nativeIsKFlat
+theorem kFlat_forget_of_nativeIsKFlat_via_ordinary
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (hP : NativeIsKFlat k₀ l X P) :
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
       (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex
@@ -97,7 +97,7 @@ set_option maxHeartbeats 800000 in
 natively K-flat: forgetting the Weil structure is exact, reflects isomorphisms and commutes with
 the total tensor product, so both native tensor tests may be checked after forgetting, where they
 are the two halves of K-flatness. -/
-theorem nativeIsKFlat_of_kFlat_forget (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
+theorem nativeIsKFlat_of_kFlat_forget_via_ordinary (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
       (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex
         (.up ℤ)).obj P)) :
@@ -177,10 +177,10 @@ native K-flatness. -/
 theorem nativeIsKFlat_upperStar_mapHomologicalComplex_obj
     (T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (hT : NativeIsKFlat k₀ l Y T) :
     NativeIsKFlat k₀ l Z (((upperStar k₀ l p).mapHomologicalComplex (.up ℤ)).obj T) := by
-  have h₁ := kFlat_forget_of_nativeIsKFlat k₀ l Y T hT
+  have h₁ := kFlat_forget_of_nativeIsKFlat_via_ordinary k₀ l Y T hT
   have h₂ := ProEtale.kFlat_adicUpperStar_mapHomologicalComplex_obj l
     (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀)))) h₁
-  apply nativeIsKFlat_of_kFlat_forget
+  apply nativeIsKFlat_of_kFlat_forget_via_ordinary
   refine ObjectProperty.prop_of_iso _
     (HomologicalComplex.Hom.isoOfComponents (fun _ ↦ Iso.refl _) ?_) h₂
   intro i j _

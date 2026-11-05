@@ -50,9 +50,9 @@ def properProjectionAdicForgetIso :
       forgetBoundedConstructibleAdic k₀ l Z ⋙ properProjectionAdicPush k₀ l g :=
   NatIso.ofComponents
     (fun M ↦ ObjectProperty.isoMk _ ((IsoAlgebra.derivedForgetCommIso
-      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _))).app M.obj))
+      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))).app M.obj))
     (fun φ ↦ ObjectProperty.hom_ext _ ((IsoAlgebra.derivedForgetCommIso
-      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _))).hom.naturality
+      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))).hom.naturality
         φ.hom))
 
 /-- The mate of the proper forget comparison is invertible for any choices of the exceptional
@@ -68,7 +68,7 @@ theorem isIso_mateEquiv_properProjectionAdicForgetIso
     IsIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _
       (properProjectionAdicForgetIso k₀ l g).inv)).app M) := by
   exact IsoAlgebra.isIso_mateEquiv_restrictedDerivedForget_app
-    (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _))
+    (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g (Spec (CommRingCat.of k₀))))
     (DerivedCategory.boundedConstructibleAdic l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (DerivedCategory.boundedConstructibleAdic l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (fun _ hK ↦ hK.1) (fun K n hK ↦ ObjectProperty.le_shift _ n K hK)

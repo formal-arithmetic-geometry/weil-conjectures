@@ -44,7 +44,7 @@ instance isIso_nativeOpenForgetInverseMate :
     IsIso ((mateEquiv (derivedExtensionByZeroUpperStarAdjunction k₀ l j)
       (CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ jb)).symm
       (TwoSquare.mk _ _ _ _ (derivedCondensedRealizationUpperStarIso k₀ l j).inv)).natTrans := by
-  apply NatIso.isIso_of_isIso_app
+  rw [NatTrans.isIso_iff_isIso_app]
   intro M
   let e := Functor.isoHComp
     (IsoAlgebra.mapOfNatIsoCompForgetIso
