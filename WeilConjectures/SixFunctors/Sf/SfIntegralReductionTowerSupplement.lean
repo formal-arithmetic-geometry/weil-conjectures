@@ -266,12 +266,12 @@ noncomputable def sfReductionRepresentativeComparison (n : ℕ)
     (sfDerivedReductionRestricted l E X n).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj
         (((sfReductionRestricted l E X n).mapHomologicalComplex (.up ℤ)).obj P) :=
-  (scalarReductionDerivedRestriction.{u, u} l E X n).map
+  cast (by rfl) ((scalarReductionDerivedRestriction.{u, u} l E X n).map
       ((scalarReductionCounit.{u, u} l E X n).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
     (scalarReductionRestriction.{u, u} l E X n).mapDerivedCategoryFactorsh.hom.app
       (((scalarReductionExtension.{u, u} l E X n).mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
 
 /-- The reduction unit, normalized by the published tensor/restriction adjunction.
 Source: Stacks Tags 03CZ and 06YY
