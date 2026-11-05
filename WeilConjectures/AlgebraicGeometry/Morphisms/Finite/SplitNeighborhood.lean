@@ -295,7 +295,7 @@ def pieceFunctor (t : GeometricFiber f y) : SplitNbhd f y ⥤ (pointSmallEtale t
     change (c.piecePt t).left ≫ (pieceMap g t).left ≫ (c'.piece t).ι = _
     rw [pieceMap_left_ι, piecePt_left_ι_assoc, basePt_comp_etale_map_left, piecePt_left_ι])
   map_id c := by
-    apply CategoryOfElements.ext
+    apply Functor.Elements.hom_ext
     apply MorphismProperty.Over.Hom.ext
     apply (cancel_mono (c.piece t).ι).mp
     change (pieceMap (𝟙 c) t).left ≫ (c.piece t).ι = 𝟙 _ ≫ _
@@ -304,7 +304,7 @@ def pieceFunctor (t : GeometricFiber f y) : SplitNbhd f y ⥤ (pointSmallEtale t
       Category.id_comp]
     rfl
   map_comp {c c' c''} g g' := by
-    apply CategoryOfElements.ext
+    apply Functor.Elements.hom_ext
     apply MorphismProperty.Over.Hom.ext
     apply (cancel_mono (c''.piece t).ι).mp
     change (pieceMap (g ≫ g') t).left ≫ (c''.piece t).ι =
