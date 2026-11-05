@@ -58,9 +58,11 @@ private theorem strictlyPerfect_mappingCone (X : Scheme.{u}) (U : X.Opens)
           Category.assoc, hj₁, Category.comp_id, Category.id_comp]
       · rw [Category.assoc, biprod.map_snd, ← Category.assoc, biprod.map_snd,
           Category.assoc, hj₂, Category.comp_id, Category.id_comp]
-    rw [← Category.assoc (biprod.map j₁ j₂), hbip]
-    rw [Category.id_comp e₁.inv]
-    exact e₁.hom_inv_id
+    calc
+      e₁.hom ≫ biprod.map j₁ j₂ ≫ biprod.map r₁ r₂ ≫ e₁.inv =
+          e₁.hom ≫ 𝟙 _ ≫ e₁.inv := by rw [hbip]
+      _ = e₁.hom ≫ e₁.inv := by rw [Category.id_comp]
+      _ = 𝟙 _ := e₁.hom_inv_id
 
 /-- On an affine open, strictly perfect models of the first two objects of a distinguished
 triangle give a strictly perfect model of its third object. Source: Stacks Project, Tag 08CR,
