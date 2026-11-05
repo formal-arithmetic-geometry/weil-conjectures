@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModels
+public import WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
 public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
@@ -116,15 +117,26 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       with_reducible_and_instances cast_proofs hmU)
     (R.mapCochainComplexμIso FP FT).symm
     (by
-      have ht := htotal P T
-      dsimp only [TotalPullTensorSquare, PullTensorSquareWithComparison,
-        condensedRealizationPullComplexIso] at ht
-      dsimp only [projection_model_complex_square, tr, NativeRestrictionDescentProof.totalFamily,
-        WZ, WU, cZ, cU, L, V, F, R, LP, LT, FP, FT]
+      have ht := projection_model_square_from_tensor_square
+        (L.mapHomologicalComplex (.up ℤ)) (V.mapHomologicalComplex (.up ℤ))
+        (F.mapHomologicalComplex (.up ℤ)) (R.mapHomologicalComplex (.up ℤ))
+        (Functor.uncurry.obj (nativeTensorTotal k₀ l Y))
+        (Functor.uncurry.obj (nativeTensorTotal k₀ l Z))
+        (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
+        (condensedRealizationTotalTensorIso k₀ l Z)
+        (projection_model_complex_square L V F R
+          (condensedRealizationUpperStarIso k₀ l g).symm)
+        (fun A B ↦ (R.mapCochainComplexμIso A B).symm) P T
+        (by
+          have h := htotal P T
+          dsimp only [TotalPullTensorSquare, condensedRealizationPullComplexIso] at h
+          dsimp only [projection_model_complex_square, L, V, F, R]
+          with_reducible_and_instances exact_mod_proofs h)
+      dsimp only [tr, NativeRestrictionDescentProof.totalFamily,
+        WZ, WU, cZ, cU, LP, LT, FP, FT]
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at ht ⊢
-      dsimp only [Iso.app, Iso.symm, MonoidalCategory.tensor_map] at ht ⊢
-      with_reducible_and_instances cast_proofs ht)
+      with_reducible_and_instances exact_mod_proofs ht)
     (by
       have hh := projection_condensed_model_normalization k₀ l Y P T hP hT
       dsimp only [F, FP, FT, WZ, cZ]
