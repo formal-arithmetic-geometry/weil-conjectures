@@ -706,3 +706,5 @@ Correction: K4-20261105T163612 ran b9ce7e2a08 (the provisional hash in the prece
 2026-11-05T19:53:56.009581+08:00 — Run195251/9947fd9a4 CLOSED rc1: RationalRootIsoLaw5.1s reports the SAME X/geometricFiber structural mismatch even in raw coefficient vocabulary. Thus this is not just named object unfolding. Added a temporary three-parent structural mismatch diagnostic (no proof construction changes) to locate the exact application argument at which the raw law and iso-transport premise diverge. Whole-iso equalities remain checked. Previous manually entered19:54 timestamp was two minutes ahead; use actual build times as authoritative.
 
 Diagnostic195357 CLOSED rc1: same raw mismatch; logger messages in recursive catches were rolled back when rethrowing. Carry the three nearest application contexts in the exception text instead. No mathematical or proof change.
+
+Diagnostic195431 CLOSED rc1: nearest three parents are ProEt(X) vs ProEt(geometricFiber), then Sheaf, then Mod. Need three more parents to identify the enclosing application whose arguments use the two different presentations. The failure is reproducible in5s, not a kernel result.

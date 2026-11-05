@@ -34,6 +34,6 @@ elab "trace_proof_mismatch " h:term : tactic => withMainContext do
   let e ← elabTerm h none
   let H := ExactModProofs.stripMData (← instantiateMVars (← inferType e))
   let G := ExactModProofs.stripMData (← instantiateMVars (← getMainTarget))
-  let remaining ← IO.mkRef 3
+  let remaining ← IO.mkRef 6
   try traceFirstProofMismatch H G remaining
   catch err => logInfo err.toMessageData
