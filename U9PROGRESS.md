@@ -181,3 +181,9 @@
   helper hypotheses. No local Lean/Lake, proof escapes, heartbeat changes, or profiler probes.
 - Next: remote validation of the unit and four direct importers, then one more downstream layer.
 - Fixes and build logs: `/home/ubuntu/u9/bz/FIXES-BZ605.md`.
+
+- BZ605 unit and all four selected direct importers are green together:
+  `ucheck-bump` returned rc=0, built=27, failed=0 at `d3dc5d8650`.
+- Remote log: `/home/ubuntu/u9/logs/BZ605-20261106T045422.log`;
+  tree: `poolb:43.157.189.27`. No downstream edits were required.
+- Next: one second-layer batch (four raw triangle pullback importers), then DONE.
