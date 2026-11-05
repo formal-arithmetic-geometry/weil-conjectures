@@ -28,8 +28,9 @@ lemma purity_scalarDatum_conjugate
     Preadditive.comp_zsmul]
   rw [← Category.assoc, ha]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rw [← Q.map_comp_assoc, Iso.hom_inv_id, Q.map_id, Category.id_comp, hb,
-    ← Preadditive.zsmul_comp, he, Category.assoc]
+  rw [← Q.map_comp_assoc, Iso.hom_inv_id, Q.map_id, Category.id_comp, hb]
+  simpa only [Preadditive.zsmul_comp, Category.assoc] using
+    congrArg (fun v ↦ v ≫ β.hom) he
 
 /-- The scalar law with factor c is equivariance for the inverse scalar datum. -/
 lemma purity_scalarDatum_inverse
