@@ -221,19 +221,30 @@
 # BZ780 leaf and first two downstream layers green
 
 - Branch: `u9/BZ780`; starting commit: `8027d88a3`.
-- Green source commit: `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`.
-- `ucheck-bump` completed successfully (3930 jobs) on `poolb:43.166.82.34`:
-  `DerivedPullbackTensorUnitKFlat` rebuilt in 56 seconds, and its direct importer
-  `DerivedPullbackTensorUnit` rebuilt in 16 seconds.
+- `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit` passed `ucheck-bump`
+  at `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`, 3930 jobs, poolb:43.166.82.34.
+- `DerivedPullbackMonoidalDescent` passed at `453fb49d85`: rc=0, failed=0.
+  Its associativity dependency also built successfully in this checkout.
 - The user instructed continuation after the concrete two-identity-cast proposal.
-  Retained those `cast (by rfl)` wrappers in the public counit hypothesis; they preserve
-  the original morphisms and all mathematical assumptions and conclusions.
+  The retained casts preserve the original morphisms and mathematical assumptions.
 - Added public and implementation Localization imports, normalized identity casts
   with `cast_eq`, and used `erw` through the local functor aliases.
-- All six declarations are retained; no local Lean/Lake, proof placeholders, trust
-  bypasses, profiler probes, or heartbeat changes.
-- `DerivedPullbackMonoidalDescent` also passed `ucheck-bump` at `453fb49d85`: rc=0,
-  failed=0. Its associativity dependency built successfully in this checkout.
-- Next: `DerivedPullbackMonoidalModel` and its direct importers, in batches of at most six.
-- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ780-leaf-and-unit-green-full.log`.
-- Five fix patterns and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ780.md`.
+- Applied the same cast/import pattern inside the proposition-construction body of
+  `IsDerivedPullbackMonoidalModel`; its signature and theorem statements are unchanged.
+- Six machine rules exactly replay the two changed Lean files and are idempotent.
+- Four direct importers are blocked by unowned `SingleComplexBaseChangeStalkCondition`:
+  CanonicalPullbackTensorComparison, CanonicalPullbackTensorMonoidalRealization,
+  PerfectRHomTensorComparison, PerfectTensorHomDuality. Full diagnostics are saved.
+- Active repair batch: exec 32751, Weil bbuild PID 2557462, summary log
+  `BUILD-BZ780-downstream3-fix1.log`; targets Model, AcrossUniversesMonoidalAdjunction,
+  DerivedRestrictionTensorNaturality, OpenRestrictionDerivedMonoidal.
+- Active next-layer batch: exec 92062, Weil bbuild PID 2651696, summary log
+  `BUILD-BZ780-downstream4.log`; targets SchemeIsoDerivedFunctorComparisons,
+  DerivedRestrictionTensorHomCoherence, OpenRestrictionClosedMonoidal.
+- Both requests are queued; do not submit duplicates. All current tree slots are occupied.
+- Prune lists mark the potentially failing open-restriction theorem unused. Delete it
+  if its obsolete compositor direction fails; all its caller's declarations are unused too.
+- Next: finish downstream validation and fixes, then write `BZ780.DONE`.
+- Fix records, exact errors, counts, replay rules, and log names:
+  `/home/ubuntu/u9/bz/FIXES-BZ780.md`. Audit: `BZ780-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
