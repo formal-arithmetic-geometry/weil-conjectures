@@ -40,8 +40,8 @@ lemma purity_adicLowerStarUnit_condensed {X : Scheme.{u}} (e : X ≅ X) :
       (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj l) e).inv.app
           (𝟙_ _) ≫
         (Functor.Monoidal.εIso
-          (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)).inv := by
-  apply purity_unitDatum_transport_of_square (adicSheafEquivCondensedMod l X).functor
+          (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)).inv :=
+  purity_unitDatum_transport_of_square (adicSheafEquivCondensedMod l X).functor
     (e.hom)^*ᵃ[l] (e.inv)_*ᵃ[l]
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)
     (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.inv)
@@ -51,9 +51,11 @@ lemma purity_adicLowerStarUnit_condensed {X : Scheme.{u}} (e : X ≅ X) :
     (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj l) e)
     (adicSheafEquivCondensedModTensorUnitIso l X)
     (adicUpperStarUnitIso l e.hom).hom (adicLowerStarUnitIso l e.symm).hom
-  · exact adicUpperStarCompCondensedModIso_inv_of_iso l e
-  · exact adicUpperStarIsoLowerStarInv_hom_comp_unit e
-  · exact upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (l := l) e.hom
+    (Functor.Monoidal.εIso
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)).inv
+    (adicUpperStarCompCondensedModIso_inv_of_iso l e)
+    (adicUpperStarIsoLowerStarInv_hom_comp_unit (l := l) e)
+    (upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (l := l) e.hom)
 
 end AlgebraicGeometry.ProEtale
 

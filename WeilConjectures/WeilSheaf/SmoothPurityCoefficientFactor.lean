@@ -46,25 +46,14 @@ lemma purity_extendScalars_map_factor_hom_comp_pullIso
         (s)^*⟦Λ'⟧.map ((pullIso a p).hom.app M) ≫
           (purityModuleFactorIso Λ' p s hs).hom.app
             ((Mod.extendScalars (coefficientMap a X)).obj M) := by
-  have key : (Mod.extendScalars (coefficientMap a U)).map
-        ((upperStarComp Λ s p).inv.app M) ≫
-        (pullIso a (s ≫ p)).hom.app M =
-      (pullIso a s).hom.app ((p)^*⟦Λ⟧.obj M) ≫
-        (s)^*⟦Λ'⟧.map ((pullIso a p).hom.app M) ≫
-          (upperStarComp Λ' s p).inv.app
-            ((Mod.extendScalars (coefficientMap a X)).obj M) := by
-    simpa only [Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv] using
-      purity_inverse_square
-        ((Mod.extendScalars (coefficientMap a U)).mapIso ((upperStarComp Λ s p).app M))
-        ((upperStarComp Λ' s p).app ((Mod.extendScalars (coefficientMap a X)).obj M))
-        ((pullIso a (s ≫ p)).hom.app M)
-        ((pullIso a s).hom.app ((p)^*⟦Λ⟧.obj M) ≫
-          (s)^*⟦Λ'⟧.map ((pullIso a p).hom.app M))
-        (pullIso_hom_app_comp a s p M)
-  simp only [purityModuleFactorIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.map_comp, Category.assoc]
-  rw [← purity_pullIso_hom_app_comp_upperStarCongr_hom_app a
-    hs M, reassoc_of% key]
-
+  exact purity_coefficient_factor_component
+    (p)^*⟦Λ⟧ (s)^*⟦Λ⟧ (s ≫ p)^*⟦Λ⟧
+    (p)^*⟦Λ'⟧ (s)^*⟦Λ'⟧ (s ≫ p)^*⟦Λ'⟧
+    (Mod.extendScalars (coefficientMap a X)) (Mod.extendScalars (coefficientMap a U))
+    (pullIso a p) (pullIso a s) (pullIso a (s ≫ p))
+    (upperStarComp Λ s p) (upperStarComp Λ' s p)
+    (upperStarCongr Λ hs) (upperStarCongr Λ' hs) M
+    (pullIso_hom_app_comp a s p M)
+    (purity_pullIso_hom_app_comp_upperStarCongr_hom_app a hs M)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

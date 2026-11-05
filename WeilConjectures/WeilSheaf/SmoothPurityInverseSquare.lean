@@ -26,4 +26,38 @@ lemma purity_factor_from_compositor {C : Type*} [Category C]
     (h : i.hom ≫ v = w) : v = i.inv ≫ w := by
   rw [← h, Iso.inv_hom_id_assoc]
 
+/-- A factorization equation with all compositor components left functor-indexed. -/
+lemma purity_factor_component
+    {C₀ C : Type*} [Category C₀] [Category C]
+    (P Q R : C₀ ⥤ C) (i : P ≅ Q) (j : P ≅ R) (M : C₀) {T : C}
+    (u : Q.obj M ⟶ T) (v : R.obj M ⟶ T) (w : P.obj M ⟶ T)
+    (hi : i.hom.app M ≫ u = w) (hj : j.hom.app M ≫ v = w) :
+    u = (i.symm ≪≫ j).hom.app M ≫ v := by
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  rw [hj, ← hi, Iso.inv_hom_id_app_assoc]
+
+/-- Coefficient change preserves a factorization through compatible compositors. -/
+lemma purity_coefficient_factor_component
+    {C₀ C D₀ D : Type*} [Category C₀] [Category C] [Category D₀] [Category D]
+    (P : C₀ ⥤ C) (Q : C ⥤ C) (R : C₀ ⥤ C)
+    (P' : D₀ ⥤ D) (Q' : D ⥤ D) (R' : D₀ ⥤ D)
+    (F₀ : C₀ ⥤ D₀) (F : C ⥤ D)
+    (α : P ⋙ F ≅ F₀ ⋙ P') (β : Q ⋙ F ≅ F ⋙ Q') (γ : R ⋙ F ≅ F₀ ⋙ R')
+    (i : R ≅ P ⋙ Q) (j : R' ≅ P' ⋙ Q') (k : R ≅ P) (k' : R' ≅ P') (M : C₀)
+    (hcomp : γ.hom.app M ≫ j.hom.app (F₀.obj M) =
+      F.map (i.hom.app M) ≫ β.hom.app (P.obj M) ≫ Q'.map (α.hom.app M))
+    (hcongr : γ.hom.app M ≫ k'.hom.app (F₀.obj M) =
+      F.map (k.hom.app M) ≫ α.hom.app M) :
+    F.map ((i.symm ≪≫ k).hom.app M) ≫ α.hom.app M =
+      β.hom.app (P.obj M) ≫ Q'.map (α.hom.app M) ≫
+        (j.symm ≪≫ k').hom.app (F₀.obj M) := by
+  have hi : F.map (i.inv.app M) ≫ γ.hom.app M =
+      (β.hom.app (P.obj M) ≫ Q'.map (α.hom.app M)) ≫ j.inv.app (F₀.obj M) := by
+    simpa only [Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv] using
+      purity_inverse_square (F.mapIso (i.app M)) (j.app (F₀.obj M))
+        (γ.hom.app M) (β.hom.app (P.obj M) ≫ Q'.map (α.hom.app M)) hcomp
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
+    Category.assoc]
+  rw [← hcongr, ← Category.assoc, hi, Category.assoc, Category.assoc]
+
 end CategoryTheory

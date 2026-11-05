@@ -50,18 +50,16 @@ lemma purity_upperStarTateTwistOneIso_factor
         (upperStarTateTwistOneIso ℓ s (p ≫ a)).hom =
       (purityModuleFactorIso (Profinite.padicAlgClRingObj ℓ) p s hs).hom.app
           (tateTwistOne X ℓ) ≫ (upperStarTateTwistOneIso ℓ p a).hom := by
-  have h := purity_upperStarTateTwistOneIso_comp ℓ s p a
-  have hg := purity_upperStarTateTwistOneIso_congr ℓ hs a
-  have hi := purity_factor_from_compositor
-    ((CondensedRing.upperStarComp (Profinite.padicAlgClRingObj ℓ) s p).app
-      (tateTwistOne X ℓ))
-    ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) s).map
-      (upperStarTateTwistOneIso ℓ p a).hom ≫ (upperStarTateTwistOneIso ℓ s (p ≫ a)).hom)
-    ((CondensedRing.upperStarCongr (Profinite.padicAlgClRingObj ℓ) hs).hom.app
-      (tateTwistOne X ℓ) ≫ (upperStarTateTwistOneIso ℓ p a).hom)
-    (by simpa only [Iso.app_hom, Category.assoc] using h.trans hg.symm)
-  simpa only [purityModuleFactorIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Iso.app_inv, Category.assoc] using hi
+  exact purity_factor_component
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (s ≫ p))
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) p ⋙
+      CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) s)
+    (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) p)
+    (CondensedRing.upperStarComp (Profinite.padicAlgClRingObj ℓ) s p)
+    (CondensedRing.upperStarCongr (Profinite.padicAlgClRingObj ℓ) hs)
+    (tateTwistOne X ℓ) _ _ _
+    (purity_upperStarTateTwistOneIso_comp ℓ s p a)
+    (purity_upperStarTateTwistOneIso_congr ℓ hs a)
 
 section Unit
 
@@ -81,16 +79,10 @@ lemma purity_upperStar_unit_factor {X U : Scheme.{u}}
         (Functor.Monoidal.εIso (CondensedRing.upperStar Λ s)).inv =
       (purityModuleFactorIso Λ p s hs).hom.app (𝟙_ _) ≫
         (Functor.Monoidal.εIso (CondensedRing.upperStar Λ p)).inv := by
-  have h := upperStarComp_hom_app_unit Λ s p
-  have hg := purity_upperStar_unit_congr Λ hs
-  have hi := purity_factor_from_compositor ((CondensedRing.upperStarComp Λ s p).app (𝟙_ _))
-    ((CondensedRing.upperStar Λ s).map (Functor.Monoidal.εIso (CondensedRing.upperStar Λ p)).inv ≫
-      (Functor.Monoidal.εIso (CondensedRing.upperStar Λ s)).inv)
-    ((CondensedRing.upperStarCongr Λ hs).hom.app (𝟙_ _) ≫
-      (Functor.Monoidal.εIso (CondensedRing.upperStar Λ p)).inv)
-    (by simpa only [Iso.app_hom, Category.assoc] using h.trans hg.symm)
-  simpa only [purityModuleFactorIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Iso.app_inv, Category.assoc] using hi
+  exact purity_factor_component (CondensedRing.upperStar Λ (s ≫ p))
+    (CondensedRing.upperStar Λ p ⋙ CondensedRing.upperStar Λ s) (CondensedRing.upperStar Λ p)
+    (CondensedRing.upperStarComp Λ s p) (CondensedRing.upperStarCongr Λ hs) (𝟙_ _) _ _ _
+    (upperStarComp_hom_app_unit Λ s p) (purity_upperStar_unit_congr Λ hs)
 
 end Unit
 

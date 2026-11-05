@@ -66,7 +66,6 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     (ringChar_integersModPowCoeff ℓ E n) hzero g
     (isUnit_natCast_pow_of_neZero ℓ n f) (isUnit_natCast_pow_of_neZero ℓ n (g ≫ f))
   have hr := upperStarIntegralTateTwistOneIso_hom_comp_reduction ℓ E g f n
-  simp only [purityTateRootPullbackIso, upperStarRootsOfUnitySheafIsoOfInvertible_hom] at hr
   have h := purity_reading_composition
     (CondensedRing.upperStar (Profinite.integersModPowRingObj ℓ E n) g)
     (finiteCoefficientModEquivalence Y (PadicAlgCl.integersModPow ℓ E n)).functor
@@ -94,6 +93,6 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
         (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
       ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
         (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g)) hr hf
-  simpa only [purity_finiteCoefficientIntegralTateOneReading_eq, Category.assoc] using h
+  exact h
 
 end AlgebraicGeometry.ProEtale
