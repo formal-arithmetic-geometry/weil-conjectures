@@ -415,3 +415,7 @@ GREEN at ef09cfe05c in K4-20261105T090443.log: SmoothPurityCanonicalFinite (27s:
 ## 2026-11-05T09:24:55.439453+08:00 — canonical reconstruction and finite relative equivariance GREEN
 - K4-20261105T092020.log at f239f75a20 rc=1: CanonicalCriterion GREEN (7.4s), CanonicalLift GREEN (128s), ReductionHomShift GREEN (14s), FiniteEquivariance GREEN (3.6s). Conditional canonical existence is now checked; its transition-compatibility hypothesis remains unproved.
 - CanonicalUnique failed to synthesize the shifted-Hom finiteness instance at an inferred source; pinned K/L explicitly. TraceNormalization fails while elaborating the finite orientation morphism argument (14s), ConstrainedLift fails at declaration-level whnf (17s). Added scoped profiling to distinguish expensive conversions before further repairs. No resource raises.
+
+## 2026-11-05 09:29 +0800 — profile-guided reduction of inference
+- K4-20261105T092457.log rc=1: finite equivariance remains GREEN. Trace profile pinpoints expected-type propagation of `finiteEtaleReading.map` with unresolved source/target: Lean attempts to equate the full reduction functor with its reading factor (10.75s). Bound the fully inferred morphism before applying the mate criterion.
+- ConstrainedLift spends its declaration budget re-elaborating leftDerivedFunctor, reaching timeout at the first local T definition. Added a transparent named reduction functor to shrink repeated inference in this new API. Unique missing-instance error resolved by explicit K/L; profiling its remaining whnf timeout next. No resource raises.

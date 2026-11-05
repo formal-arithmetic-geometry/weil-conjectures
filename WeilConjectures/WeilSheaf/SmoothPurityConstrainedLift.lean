@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import WeilConjectures.WeilSheaf.SmoothPurityReductionFunctor
 public import WeilConjectures.WeilSheaf.SmoothPurityFiniteChoice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LiftIsomorphisms
 
@@ -46,30 +47,28 @@ lemma derivedReductionStep_compatible
     (integersModPowReduction X ℓ E (n + 1))
     (integersModPowReduction_comp_integersModPowTransition X ℓ E (n + 1)) s
 
-set_option trace.profiler true in
-set_option trace.profiler.threshold 1000 in
 /-- A property stable under reduction can be imposed on every reduction of the lift. -/
 theorem exists_forall_isIso_property_derivedReduction_map
     {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
     (hL : derivedCompleteIntegers ℓ E X L)
     (P : ∀ n : ℕ,
-      ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ⟶
-        (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L) → Prop)
+      ((purityIntegralReduction X ℓ E (n + 1)).obj K ⟶
+        (purityIntegralReduction X ℓ E (n + 1)).obj L) → Prop)
     (hfin : ∀ n : ℕ, Finite
-      ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ⟶
-        (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L))
+      ((purityIntegralReduction X ℓ E (n + 1)).obj K ⟶
+        (purityIntegralReduction X ℓ E (n + 1)).obj L))
     (hne : ∀ n : ℕ, ∃ e :
-      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ≅
-        (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L,
+      (purityIntegralReduction X ℓ E (n + 1)).obj K ≅
+        (purityIntegralReduction X ℓ E (n + 1)).obj L,
       P n e.hom)
     (hP : ∀ n s, P (n + 1) s → P n (derivedReductionStep (n + 1) s)) :
     ∃ f : K ⟶ L, ∀ n : ℕ,
-      IsIso ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map f) ∧
-        P n ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map f) := by
+      IsIso ((purityIntegralReduction X ℓ E (n + 1)).map f) ∧
+        P n ((purityIntegralReduction X ℓ E (n + 1)).map f) := by
   let T := fun n : ℕ ↦
-    (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ⟶
-      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L
+    (purityIntegralReduction X ℓ E (n + 1)).obj K ⟶
+      (purityIntegralReduction X ℓ E (n + 1)).obj L
   let r (n : ℕ) (s : T (n + 1)) : T n := derivedReductionStep (n + 1) s
   let Q (n : ℕ) (s : T n) : Prop := IsIso s ∧ P n s
   have hne' (n : ℕ) : ∃ s, Q n s := by

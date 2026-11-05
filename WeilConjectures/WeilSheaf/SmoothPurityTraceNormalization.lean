@@ -86,8 +86,6 @@ noncomputable def canonicalFiniteIntegralOrientationTrace (n : ℕ) :
           (canonicalFiniteIntegralOrientationIso ℓ E f d n).hom ≫
         (etaleReductionUpperShriekIso ℓ E.1 n f).hom.app (𝟙_ _))
 
-set_option trace.profiler true in
-set_option trace.profiler.threshold 1000 in
 /-- Finite trace normalization is equivalent to the prescribed finite orientation equation. -/
 theorem isIntegralSmoothOrientation_iff_trace
     (φ : (shiftFunctor (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) (2 * d : ℤ)).obj
@@ -104,6 +102,9 @@ theorem isIntegralSmoothOrientation_iff_trace
   unfold IsIntegralSmoothOrientation
   apply forall_congr'
   intro n
+  let θ := (finiteEtaleReading ℓ E.1 (n + 1) X).map
+    (canonicalFiniteIntegralOrientationIso ℓ E f d (n + 1)).hom
+  have hθ := canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1)
   have h := purity_orientation_map_eq_iff_trace_eq
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
     (Etale.rightDerivedUpperShriekAdjunction _ f.left)
@@ -111,9 +112,7 @@ theorem isIntegralSmoothOrientation_iff_trace
     (etaleReductionLowerShriekIsoOfCompactification ℓ E.1 (n + 1)
       (compactificationOverField f))
     (etaleReductionUpperShriekIso ℓ E.1 (n + 1) f) rfl φ
-    ((finiteEtaleReading ℓ E.1 (n + 1) X).map
-      (canonicalFiniteIntegralOrientationIso ℓ E f d (n + 1)).hom)
-    _ (canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1))
+    θ _ hθ
   dsimp only [etaleReduction, Functor.comp_map, canonicalFiniteIntegralOrientationTrace] at h ⊢
   exact_mod_proofs h
 
