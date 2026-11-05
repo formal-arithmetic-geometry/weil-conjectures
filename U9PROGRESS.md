@@ -725,3 +725,4 @@ Diagnostic195431 CLOSED rc1: nearest three parents are ProEt(X) vs ProEt(geometr
   structureCompactificationOpenBaseChange, isIso_smoothUnitBaseChange_toPoint_structure (A1' over the point, only [IsIso e]).
 - Adopted from u9/K9: SmoothPurityFullyFaithfulBaseChange.lean (GREEN on K9), SmoothPurityOpenFieldBaseChange.lean (unverified).
 - Build 110 queued (module SmoothPurityOpenImmersionBaseChange) on tree pool:43.157.168.235 behind the A3-consumer build 109. NOT GREEN yet.
+- 00:30 LEAD 01:35: piece (A) STOPPED (superseded by Houyi #2144). Draft unbuilt at 8605351bd56; build 110 cancelled before launch. Idle.
