@@ -67,25 +67,4 @@ def openPinnedSingleTargetRestrictionIso
     Functor.isoWhiskerRight (openPinnedTensorRestrictionIso k U U' j hj) _ ≪≫
     Functor.associator _ _ _
 
-/-- Termwise tensor restriction comparison on the homotopy categories.
-Source: Stacks Project, Tags 08DW and 08HY.
-(blueprint: def-pc-open-pinned-single-tensor-restriction-iso). -/
-def openPinnedHomotopyTensorRestrictionIso
-    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
-    {X X' : Scheme.{u}} (k : X' ⟶ X)
-    (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)
-    (hj : j ≫ U.ι = U'.ι ≫ k) :
-    (Scheme.Modules.tensorPullback k).mapHomotopyCategory (.up ℤ) ⋙
-        (schemeOpenRestriction X' U').mapHomotopyCategory (.up ℤ) ≅
-      (schemeOpenRestriction X U).mapHomotopyCategory (.up ℤ) ⋙
-        (Scheme.Modules.tensorPullback j).mapHomotopyCategory (.up ℤ) :=
-  by
-    dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-    letI := schemeOpenRestriction_additive X U
-    letI := schemeOpenRestriction_additive X' U'
-    exact Functor.mapHomotopyCategoryCompIso (openPinnedTensorRestrictionIso k U U' j hj) (.up ℤ) ≪≫
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).symm
-
 end AlgebraicGeometry
