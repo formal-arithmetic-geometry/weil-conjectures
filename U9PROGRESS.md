@@ -173,12 +173,22 @@
 # BZ616 in progress
 
 - Branch: `u9/BZ616`; starting commit: `b7a97a5ed`.
-- Reread the brief and existing progress notes on user continuation; no new LEAD lines.
-- The user instructed continuation after the exact one-token statement correction proposal.
-  Applied `.hom` -> `.inv` in private `derivedComposition_fac`, preserving its original
-  map under Mathlib's reversed composition comparison. Other statement types and docstrings
-  are unchanged. Comparison construction and cancellation proof use the new orientation.
-- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after acquiring a tree.
-- Next: validate the assigned module, then check up to four direct importers and another layer.
-- Fix patterns, whole-tree counts, and archived diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ616.md`.
+- Assigned module `WeilConjectures.CategoryTheory.SmoothBaseChange.TowerDerivedEvaluationNormalization`
+  is GREEN at `914b9a49bd`: 2892 jobs completed successfully, target rebuilt in 3.0s.
+  Full log: `/home/ubuntu/u9/bz/BUILD-BZ616-unit-full.log`; tree `poolb:43.166.74.12`.
+- The user instructed continuation after the exact one-token private-helper statement proposal.
+  Applied `.hom` -> `.inv` in `derivedComposition_fac`, preserving the original map under
+  Mathlib's reversed comparison. All other statement types and all docstrings are unchanged.
+- First downstream batch is queued via `ucheck-bump`: `TowerRightDerivedEvaluation`,
+  `UnboundedExactAdjunctionSquare`, and `RingedConstantTowerPushforwardNormalization`.
+  Full module names and inventories are in `/home/ubuntu/u9/bz/FIXES-BZ616.md`.
+- Known compositor direction/cancellation fixes and Localization public/import-all imports
+  are applied to the latter two importers. Their declaration headers and docstrings are
+  unchanged. These downstream changes await compilation; source commit `38a9cb455`.
+- Active remote scheduler PID at last check: `3371436` on Weil; it reads the pushed branch
+  after acquiring a tree. Local wrapper log: `/home/ubuntu/u9/bz/BUILD-BZ616-downstream1.log`.
+- After the first batch, optionally check the three smallest second-layer importers in
+  `BZ616-downstream2-inventory.json`. Skip unowned dependency failures as the brief requires.
+- Fix patterns, exact archived diagnostics, whole-tree occurrence counts, and contract audits
+  are recorded under `/home/ubuntu/u9/bz/`. No DONE claim until downstream validation finishes.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
