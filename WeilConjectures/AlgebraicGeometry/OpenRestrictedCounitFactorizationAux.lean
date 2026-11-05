@@ -228,8 +228,8 @@ private theorem openRestricted_counit_compatibility_aux
       (DerivedCategory.Q.mapIso (openTensorRestrictionComplexIso g' U P)).inv at ht
   have hj' : (derivedPullback q).map eR.hom ≫ (derivedPullback q).map εj =
       (derivedPullback q).map (DerivedCategory.Q.map θ.inv) := by
-    rw [← Functor.map_comp, hj]
-    rfl
+    exact ((derivedPullback q).map_comp eR.hom εj).symm.trans
+      (congrArg (derivedPullback q).map hj)
   have h := restriction_counit_glue ((derivedPullback q).map eR.hom) b m εp
     (DerivedCategory.Q.mapIso θP).hom ((derivedPullback q).map εj) εqT b₁.inv b₂.hom
     ((derivedPullback q).map (DerivedCategory.Q.map θ.inv)) εqR
