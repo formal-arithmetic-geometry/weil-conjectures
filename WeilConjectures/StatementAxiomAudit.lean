@@ -14,8 +14,10 @@ Declaration-level closure check (C9, 2026-11-06): the lean-eval statement must n
 `sorryAx`; in particular not on
 `AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`
 (SmoothPurity.lean), whose two former consumers (`nonempty_dualizingComplex_iso`, Y = Spec k₀, and
-the affine-line Thom user in `FourierInversion.OtherSections`) are routed through absolute purity. -/
+the affine-line Thom user in `FourierInversion.OtherSections`) are routed through absolute purity.
+-/
 
 #print axioms AlgebraicGeometry.Scheme.weil_conjectures
 #print axioms LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures
+set_option linter.style.longLine false in
 #print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso

@@ -13,7 +13,7 @@ public import WeilConjectures.WeilSheaf.UpperShriekWeilDatum
 /-!
 # The exceptional datum in the condensed model
 
-The framework `CategoryTheory.Endofunctor.IsoAlgebra.exists_forget_obj_iso_isWeilEquivariant_rightWeilDatum`
+The framework `Endofunctor.IsoAlgebra.exists_forget_obj_iso_isWeilEquivariant_rightWeilDatum`
 instantiated in the condensed model of Weil sheaves (`IsoAlgebra ((Fr⁻¹)_*)` on condensed module
 objects over `ℚ̲̄_ℓ`), for the proper morphism `ḡ : Z̄ ⟶ Ȳ` of the compactification of `f̄`:
 - the bounded constructible complexes are stable under shifts
@@ -25,7 +25,8 @@ objects over `ℚ̲̄_ℓ`), for the proper morphism `ḡ : Z̄ ⟶ Ȳ` of the c
   adjoint as soon as the geometric one is
   (`AlgebraicGeometry.WeilComplex.isLeftAdjoint_condensedWeilLowerStar`), and the underlying
   object of its right adjoint carries the Frobenius structure to the right Weil datum of the
-  geometric adjunction (`AlgebraicGeometry.WeilComplex.exists_condensedForget_obj_iso_isWeilEquivariant_rightWeilDatum`).
+  geometric adjunction
+  (`AlgebraicGeometry.WeilComplex.exists_condensedForget_obj_iso_isWeilEquivariant_rightWeilDatum`).
 -/
 
 @[expose] public section
@@ -104,14 +105,17 @@ noncomputable abbrev condensedWeilObjectProperty (S : Scheme.{u})
 
 instance : IsProper (shriekCompactification k₀ f).g := (shriekCompactification k₀ f).isProper
 
+set_option linter.style.show false in
 instance : IsSeparated ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)) := by
   show IsSeparated ((shriekCompactification k₀ f).g ≫ (Y ↘ Spec (CommRingCat.of k₀)))
   infer_instance
 
+set_option linter.style.show false in
 instance : LocallyOfFiniteType ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)) := by
   show LocallyOfFiniteType ((shriekCompactification k₀ f).g ≫ (Y ↘ Spec (CommRingCat.of k₀)))
   infer_instance
 
+set_option linter.style.show false in
 instance : QuasiCompact ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)) := by
   show QuasiCompact ((shriekCompactification k₀ f).g ≫ (Y ↘ Spec (CommRingCat.of k₀)))
   infer_instance
@@ -136,6 +140,8 @@ noncomputable abbrev condensedProperExchange :=
     (comp_over (shriekCompactification k₀ f).g (Spec (CommRingCat.of k₀)))
 
 variable (k₀) in
+set_option linter.style.longLine false in
+set_option linter.unusedSectionVars false in
 /-- The Weil derived direct image along `g` in the condensed model preserves bounded
 constructible condensed Weil complexes, as soon as the geometric one preserves bounded
 constructible complexes (`hR`). -/
@@ -152,6 +158,7 @@ theorem condensedWeilObjectProperty_rightDerivedFunctor
     ((IsoAlgebra.derivedForgetCommIso (condensedProperExchange k₀ l f)).app M).symm (hR _ hM)
 
 variable (k₀) in
+set_option linter.style.longLine false in
 /-- **The Weil derived direct image is a left adjoint in the condensed model**, as soon as the
 geometric derived direct image on bounded constructible complexes is. -/
 theorem isLeftAdjoint_condensedWeilLowerStar
@@ -185,6 +192,7 @@ theorem isLeftAdjoint_condensedWeilLowerStar
     (condensedWeilObjectProperty_rightDerivedFunctor k₀ l f hR)
 
 variable (k₀) in
+set_option linter.style.longLine false in
 /-- **The Frobenius structure of the Weil `Rg^!` is the exceptional datum, condensed model**: for a
 right adjoint `R'` of the geometric `Rḡ_*` on bounded constructible condensed complexes and a right
 adjoint `RW` of the Weil `Rg_*` on bounded constructible condensed Weil complexes, the underlying

@@ -17,7 +17,8 @@ public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 The Frobenius `(Fr_X⁻¹)_*` of the condensed model preserves and reflects bounded constructible
 complexes on the geometric fibre `X̄`
 (`AlgebraicGeometry.ProEtale.boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff`):
-transported from the `ℓ`-adic model (`WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff`)
+transported from the `ℓ`-adic model
+(`WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff`)
 along `adicSheafDerivedEquivCondensedMod`, using the comparison of the two Frobenii
 `AlgebraicGeometry.ProEtaleWeilSheaf.condensedFrobeniusComparison`.
 -/
@@ -38,6 +39,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
+set_option linter.style.haveILetI false in
 /-- **The condensed Frobenius preserves and reflects bounded constructible complexes.** -/
 theorem boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff
     (M : _root_.DerivedCategory (CategoryTheory.Mod

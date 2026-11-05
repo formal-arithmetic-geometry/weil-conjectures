@@ -63,6 +63,7 @@ noncomputable def ihomTateSheafIso (d : ℤ) :
     ihomFunctorConstantTwistLeftIso _ (WeilSheaf.cyclotomicUnit k₀ l ^ d) ≪≫
     Functor.isoWhiskerRight (ihomFunctorAdicConstantIso k₀ l X) _ ≪≫ Functor.leftUnitor _
 
+set_option linter.style.longLine false in
 /-- The native derived internal Hom from the Tate complex is the inverse twist. -/
 noncomputable def nativeHomTateIso (d : ℤ) :
     Prod.sectR (Opposite.op ((DerivedCategory.singleFunctor _ 0).obj

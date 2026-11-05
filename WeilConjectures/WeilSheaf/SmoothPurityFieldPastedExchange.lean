@@ -56,6 +56,7 @@ noncomputable def purityFieldProperAmbientExchange :
     rightDerivedLowerStarBaseChangeIso _ hg ≪≫
     Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory _ πZ).symm _
 
+set_option linter.unusedSectionVars false in
 /-- The ambient compactification exchange pastes the open and proper exchanges; the
 left-derived/levelwise comparison at the compactifying scheme cancels. -/
 lemma purityFieldCompactificationAmbientExchange_eq_paste :

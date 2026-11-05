@@ -10,8 +10,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The scalar law immediately after rational coefficient change -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 

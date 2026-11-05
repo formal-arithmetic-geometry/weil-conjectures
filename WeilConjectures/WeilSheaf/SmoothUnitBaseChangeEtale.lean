@@ -34,7 +34,8 @@ invertible.
   adjunctions `Rh_! ⊣ h^*`, `Rh'_! ⊣ h'^*` compatible with `bc`.
 * `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_counit`: the same at the unit, for
   `smoothUnitBaseChange` with `e` invertible.
-* `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_isOpenImmersion_of_counit`: the case of an open
+* `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_isOpenImmersion_of_counit`: the case of an
+open
   immersion, where `Rj_! ≅ j_!` and `j_! ⊣ j^*` are in the library. The compatibility asked of
   `bc` is that of the extension by zero.
 * `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_etale`: the case of an étale morphism,

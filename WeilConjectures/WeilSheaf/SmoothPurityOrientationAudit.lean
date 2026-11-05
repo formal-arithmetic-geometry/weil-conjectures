@@ -38,4 +38,5 @@ open AlgebraicGeometry.ProEtale.CondensedRing AlgebraicGeometry.Etale
 #print axioms purityFiniteEtaleReadingUpperStarIso
 #print axioms AlgebraicGeometry.ProEtale.upperStarExtendScalarsLimitFreeTowerIso_hom_comp_map_π
 
+set_option linter.style.longLine false in
 #print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_trace

@@ -25,6 +25,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {s : X ⟶ Spec (.of k)} {t : Y ⟶ Spec (.of k)} {f : X ⟶ Y}
   (c : Compactification f) (h : f ≫ t = s)
 
+set_option linter.style.longLine false in
 /-- Forgetting the Weil structure of compact support gives the compact support
 attached to the base-changed compactification. -/
 noncomputable def weilRightDerivedLowerShriekCompForgetIso :
@@ -36,6 +37,7 @@ noncomputable def weilRightDerivedLowerShriekCompForgetIso :
     (openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso Λ c.i (c.i_comp_g_comp h))
     (lowerStarGeometricFiberMapCompFrobeniusIso Λ c.g rfl)
 
+set_option linter.style.longLine false in
 /-- The free Weil resolution lifts universality for compact support, without a
 properness assumption on the original morphism. -/
 theorem bijective_map_comp_weilRightDerivedLowerShriek_of_bounded

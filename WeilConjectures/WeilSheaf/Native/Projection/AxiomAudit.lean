@@ -86,6 +86,7 @@ The remote build records the remaining proof leaves reachable from the theorem.
 #print axioms AlgebraicGeometry.ProEtaleWeilSheaf.native_two_sided_kflat_representatives
 #print axioms AlgebraicGeometry.ProEtaleWeilSheaf.isIso_projectionMap_derivedCondensedRealization
 
+set_option linter.style.longLine false in
 open Lean in
 run_elab do
   let env ← getEnv

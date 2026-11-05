@@ -16,7 +16,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerShriekFiniteness
 
 For the compactification `X ⟶[i] Z ⟶[g] Y` of `f` and a right adjoint `ḡ^!` of `Rḡ_*` on bounded
 constructible adic complexes (`adjR'`), the functor `f̄^! := ī^* ∘ ḡ^!` is right adjoint to
-`f̄_! = Rḡ_* ∘ ī_!` (the composite adjunction `AlgebraicGeometry.WeilComplex.compactifiedAdjunction`),
+`f̄_! = Rḡ_* ∘ ī_!` (the composite adjunction
+`AlgebraicGeometry.WeilComplex.compactifiedAdjunction`),
 and the Frobenius exchange of `f̄_!` is the composite of the exchanges of `ī_!` and `Rḡ_*`
 (`AlgebraicGeometry.WeilComplex.compactifiedExchange`). The exceptional datum
 `AlgebraicGeometry.WeilComplex.upperShriekExceptionalDatum` is the right Weil datum
@@ -24,7 +25,8 @@ and the Frobenius exchange of `f̄_!` is the composite of the exchanges of `ī_!
 (`AlgebraicGeometry.WeilComplex.upperShriekExceptionalDatum_eq_rightWeilDatum`): the unique
 Weil datum on `f̄^! L̄` for which the counit `f̄_! f̄^! L̄ ⟶ L̄` is Frobenius equivariant.
 
-Combined with the trace square (`CategoryTheory.Adjunction.isWeilEquivariant_rightWeilDatum_iff_trace`),
+Combined with the trace square
+(`CategoryTheory.Adjunction.isWeilEquivariant_rightWeilDatum_iff_trace`),
 an orientation `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` is equivariant for the exceptional datum as soon as its
 trace `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` is Frobenius equivariant.
 -/
@@ -64,11 +66,13 @@ noncomputable abbrev compactificationOpenImmersion :=
   Scheme.Hom.geometricFiberMap (shriekCompactification k₀ f).i
     (comp_over (shriekCompactification k₀ f).i (Spec (CommRingCat.of k₀)))
 
+set_option linter.style.longLine false in
 instance : IsOpenImmersion (compactificationOpenImmersion k₀ f) :=
   have : IsOpenImmersion (shriekCompactification k₀ f).i := (shriekCompactification k₀ f).isOpenImmersion
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion)
     (shriekCompactification k₀ f).i _ ‹_›
 
+set_option linter.style.longLine false in
 instance : QuasiCompact (compactificationOpenImmersion k₀ f) :=
   have : IsOpenImmersion (shriekCompactification k₀ f).i := (shriekCompactification k₀ f).isOpenImmersion
   have : IsLocallyNoetherian Y :=
@@ -87,6 +91,7 @@ instance : QuasiCompact (compactificationOpenImmersion k₀ f) :=
     (shriekCompactification k₀ f).i _ ‹_›
 
 variable (k₀) in
+set_option linter.style.longLine false in
 /-- The levelwise derived adjunction `D(ī_!) ⊣ D(ī^*)`, restricted to bounded constructible adic
 complexes. -/
 noncomputable abbrev openImmersionBoundedConstructibleAdjunction :
@@ -148,6 +153,7 @@ noncomputable def openImmersionBoundedConstructibleExchange :
 
 variable {f} [HasUpperShriek k₀ l f]
 
+set_option linter.style.whitespace false in
 /-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ ī_!` and `f̄^! = ī^* ∘ ḡ^!`. -/
 noncomputable abbrev compactifiedAdjunction
     (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
@@ -181,6 +187,7 @@ noncomputable def compactifiedExchange (hR : PreservesBoundedConstructibleAdicLo
     Functor.isoWhiskerRight (openImmersionBoundedConstructibleExchange k₀ f) _ ≪≫
     Functor.associator _ _ _
 
+set_option linter.unusedSectionVars false in
 lemma compactifiedExchange_hom_app (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     (K) :
     (compactifiedExchange (f := f) hR).hom.app K =
@@ -203,6 +210,7 @@ lemma compactifiedExchange_hom_app (hR : PreservesBoundedConstructibleAdicLowerS
   simp [compactifiedExchange]
   rfl
 
+set_option linter.style.whitespace false in
 /-- **The exceptional datum is the right Weil datum of `f̄_! ⊣ f̄^!`**: the unique Weil datum on
 `f̄^! L̄ = ī^* ḡ^! L̄` for which the counit `f̄_! f̄^! L̄ ⟶ L̄` is Frobenius equivariant, for the
 composite exchange of `f̄_! = Rḡ_* ∘ ī_!`. -/

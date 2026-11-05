@@ -20,7 +20,8 @@ complexes, it is Frobenius equivariant for the derived structure isomorphisms, a
 shift (`AlgebraicGeometry.WeilComplex.isWeilEquivariant_tateTwistObjAdicConstantIso_shift`).
 Together with `CategoryTheory.Endofunctor.IsoAlgebra.derivedStrIso_hom_app_singleFunctor_obj`
 and `derivedStrIso_hom_app_shift`, this reads the Frobenius structure of `ℚ̄_ℓ(m)[n]` as the shift
-of `χ_ℓ(σ)ᵐ` times the structure of `ℚ̄_ℓ` (`AlgebraicGeometry.WeilSheaf.constantTwist_obj_str_hom`).
+of `χ_ℓ(σ)ᵐ` times the structure of `ℚ̄_ℓ`
+(`AlgebraicGeometry.WeilSheaf.constantTwist_obj_str_hom`).
 -/
 
 @[expose] public section
@@ -54,6 +55,7 @@ noncomputable def tateTwistObjAdicConstantIso (m : ℤ) :
         constantTwistCongrIso (mul_one _) _ ≪≫
         ((WeilSheaf.adicConstant k₀ l X).constantTwistObjIso _).symm))
 
+set_option linter.unusedSectionVars false in
 /-- Isomorphisms of Weil complexes are Frobenius equivariant for the derived structure
 isomorphisms. -/
 lemma isWeilEquivariant_forget_map {M N : WeilComplex k₀ l X} (u : M ⟶ N) :

@@ -43,7 +43,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 local instance : (objectProperty k₀ l X).ι.Full := (objectProperty k₀ l X).fullyFaithfulι.full
 local instance : (objectProperty k₀ l Y).ι.Full := (objectProperty k₀ l Y).fullyFaithfulι.full
+set_option linter.style.longLine false in
 local instance : (objectProperty k₀ l X).ι.Faithful := (objectProperty k₀ l X).fullyFaithfulι.faithful
+set_option linter.style.longLine false in
 local instance : (objectProperty k₀ l Y).ι.Faithful := (objectProperty k₀ l Y).fullyFaithfulι.faithful
 
 local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
@@ -90,6 +92,7 @@ local instance : IsProper
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)
     f (comp_over f _) inferInstance
 
+set_option linter.style.longLine false in
 variable {P : Dᵇc(X)⟦Profinite.padicAlgClRingObj l⟧}
   {N : Dᵇc(Y)⟦Profinite.padicAlgClRingObj l⟧}
   (γ : P ⟶ (CondensedRing.boundedConstructibleUpperShriek l (properTraceBaseMap (k₀ := k₀) f)).obj N)
@@ -101,6 +104,7 @@ variable {P : Dᵇc(X)⟦Profinite.padicAlgClRingObj l⟧}
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
       (Y ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj N.obj)
 
+set_option linter.style.longLine false in
 /-- The descended proper trace in the condensed coordinates of the native objects. -/
 noncomputable def condensedProperTrace :
     (CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l)

@@ -35,6 +35,7 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   {πY : Y'.left ⟶ Y.left} {πZ : c'.Z ⟶ c.Z}
   (hg : IsPullback πZ c'.g c.g πY) [WeaklyEtale πZ] [WeaklyEtale πY]
 
+set_option linter.unusedSectionVars false in
 /-- The left-derived proper exchange is the usual derived base change map. -/
 lemma purityFieldProperAmbientExchange_hom :
     (purityFieldProperAmbientExchange l f f' c c' hg).hom =

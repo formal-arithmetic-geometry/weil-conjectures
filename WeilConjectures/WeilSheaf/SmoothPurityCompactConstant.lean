@@ -68,6 +68,7 @@ noncomputable def nativeConstructibleTensorConstantIso :
 variable (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
+set_option linter.flexible false in
 /-- Compact pushforward after pullback is tensoring with compact pushforward of
 the constant object, naturally in the input complex. -/
 theorem nonempty_upperStar_comp_shriek_iso_tensor_constant :

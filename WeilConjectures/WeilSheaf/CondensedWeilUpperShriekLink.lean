@@ -136,6 +136,8 @@ noncomputable abbrev condensedOpenImmersionShriekExchange :=
     (comp_over (shriekCompactification k₀ f).i (Spec (CommRingCat.of k₀)))
 
 variable (k₀) in
+set_option linter.style.longLine false in
+set_option linter.unusedSectionVars false in
 /-- The condensed Weil extension by zero `D(i_!)` along the open immersion of the
 compactification preserves bounded constructible condensed Weil complexes. -/
 theorem condensedWeilObjectProperty_extensionByZero
@@ -236,6 +238,7 @@ noncomputable def condensedWeilEquivUpperShriekObjIso (L : WeilComplex k₀ l Y)
     (condensedWeilEquiv k₀ l X).counitIso.app _
 
 variable (k₀) in
+set_option linter.style.longLine false in
 /-- **The Frobenius structure of the adic Weil `Rf^!` is the condensed exceptional datum.** For a
 Weil complex `L` on `Y`, the condensed model `E (Rf^! L)` of the underlying complex of `Rf^! L` is
 the geometric `ī^* ḡ^! L̄` (condensed model), by an isomorphism `θ` which carries the transport

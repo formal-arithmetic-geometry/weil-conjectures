@@ -17,7 +17,8 @@ The exceptional datum `WeilComplex.condensedUpperShriekExceptionalDatum` is the 
 of the composite adjunction `f̄_! = Rḡ_* ∘ D(ī_!) ⊣ ī^* ∘ ḡ^! = f̄^!` on bounded constructible
 condensed complexes (`WeilComplex.condensedCompactifiedAdjunction`), for the composite Frobenius
 exchange `WeilComplex.condensedCompactifiedExchange`. Hence an orientation
-`o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` (condensed model of the Tate twist) whose trace `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ`
+`o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` (condensed model of the Tate twist) whose trace `f̄_! ℚ̄_ℓ(d)[2d] ⟶
+ℚ̄_ℓ`
 is Frobenius equivariant gives the Weil orientation of the smooth purity leaf
 `WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`
 (`WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condensed_trace`).
@@ -95,14 +96,17 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
   [QuasiCompact f]
 
+set_option linter.style.longLine false in
 instance : CompactSpace ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   QuasiCompact.compactSpace_of_compactSpace
     ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
 
+set_option linter.style.longLine false in
 instance : IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   ⟨⟩
 
 variable (k₀) in
+set_option linter.style.longLine false in
 /-- The lift of the condensed Frobenius `(Fr_S⁻¹)_*` to bounded constructible condensed
 complexes. -/
 noncomputable abbrev condensedFrobeniusLift (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))]
@@ -154,6 +158,7 @@ noncomputable def condensedOpenImmersionGeometricExchange :
         φ.hom))
 
 variable (k₀) in
+set_option linter.style.longLine false in
 /-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ D(ī_!)` and `f̄^! = ī^* ∘ ḡ^!`, condensed model. -/
 noncomputable abbrev condensedCompactifiedAdjunction :=
   (condensedOpenImmersionGeometricAdjunction k₀ l f).comp (condensedProperAdjunction k₀ l f)
@@ -172,6 +177,7 @@ noncomputable def condensedCompactifiedExchange :=
     Functor.isoWhiskerRight (condensedOpenImmersionGeometricExchange k₀ l f) _ ≪≫
     Functor.associator _ _ _
 
+set_option linter.style.longLine false in
 lemma condensedCompactifiedExchange_hom_app (K) :
     (condensedCompactifiedExchange k₀ l f).hom.app K =
       (IsoAlgebra.liftedDerivedCommIso (condensedProperExchange k₀ l f) _ _
@@ -192,6 +198,7 @@ lemma condensedCompactifiedExchange_hom_app (K) :
         ((condensedOpenImmersionGeometricExchange k₀ l f).hom.app K) := by
   simp [condensedCompactifiedExchange]
 
+set_option linter.unusedSectionVars false in
 /-- The exchange of `D(ī_!)` is the left mate of the exchange of `ī^*` (at the level of
 isomorphisms; stated to be rewritten before any component is unfolded). -/
 lemma condensedOpenImmersionShriekExchange_eq :
@@ -285,6 +292,7 @@ lemma isWeilEquivariant_condensedForgetObjIso_hom (L : WeilComplex k₀ l X) :
 
 variable {f} [HasUpperShriek k₀ l f]
 
+set_option linter.style.longLine false in
 /-- **The Weil orientation from the trace square, condensed model** (the uniqueness route,
 blueprint `thm-pur-weil-equivariance-of-purity-and-trace`): let
 `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an orientation on `X̄` in the condensed model
@@ -369,7 +377,8 @@ noncomputable abbrev tateShift (d : ℕ) : WeilComplex k₀ l X :=
   ((tateTwist k₀ l X d).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧
 
 /-- **The Weil orientation from the trace square, condensed model, with the condensed Weil
-structure of the Tate twist**: as `exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condensed_trace`,
+structure of the Tate twist**: as
+`exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condensed_trace`,
 with the orientation landing in the condensed model `E_W ℚ̄_ℓ(d)[2d]` of the Tate twist as a
 condensed Weil complex, whose Frobenius structure is the derived structure isomorphism of the
 condensed Weil complex. -/

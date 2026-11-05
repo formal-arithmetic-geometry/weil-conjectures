@@ -38,6 +38,7 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   (e : (boundedConstructibleUpperStarOfMap l πY).obj (𝟙_ _) ≅ 𝟙_ _)
   (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
+set_option linter.style.longLine false in
 /-- Unit base change proves universality in the ambient left-derived coordinates. -/
 theorem baseChangedSmoothTrace_ambient_universal
     [IsIso (smoothUnitBaseChange l f f'
@@ -60,6 +61,7 @@ theorem baseChangedSmoothTrace_ambient_universal
     ((purityFieldPullbackCompatibility l (πY := πY)).app (𝟙_ _)) _ ?_
   simpa only [Iso.app_hom, Iso.app_inv, Category.assoc] using ht
 
+set_option linter.unusedSimpArgs false in
 /-- Pass from left-derived to levelwise pullback coordinates, as used by the
 specified geometric descent comparison. -/
 theorem baseChangedSmoothTrace_levelwise_universal

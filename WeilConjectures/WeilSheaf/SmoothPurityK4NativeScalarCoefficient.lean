@@ -12,8 +12,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Changing coefficients in a scalar Frobenius relation -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 
@@ -52,6 +50,7 @@ variable (M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X
     ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj N)
   (c : ℤ)
 
+set_option linter.style.longLine false in
 /-- Changing coefficients preserves the scalar relation of an underlying trivialization. -/
 theorem purityChangeCoefficientPullbackIso_weil
     (he : (f.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map e.hom.hom ≫

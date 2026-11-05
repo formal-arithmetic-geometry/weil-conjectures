@@ -85,6 +85,7 @@ lemma geometricFiberWeilSmoothTrace_eq_shriekTrace :
     boundedConstructibleLowerShriekOfCompactificationGeometricFiberWeilIso,
     geometricFiberWeilRightDerivedLowerShriekIso', Functor.map_comp, Category.assoc]
 
+set_option linter.style.longLine false in
 /-- Universality of the specified ordinary geometric trace lifts to the actual
 Weil smooth trace for an arbitrary, possibly non-proper, smooth morphism. -/
 theorem geometricFiberWeilSmoothTrace_weilUniversal
