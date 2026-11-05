@@ -9,6 +9,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 /-!
 # The derived unit and the classical degree-zero augmentation
 
@@ -109,14 +110,13 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     apply DerivedCategory.Plus.ι.map_injective
     simp [DerivedCategory.Plus.quotientCompQhIso, DerivedCategory.singleFunctorIsoCompQ, S]
     change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
-    rw [Functor.map_preimage, Category.comp_id]
+    rw [Functor.map_preimage]
+    exact Category.comp_id _
   have hsingleUnit : G.rightDerivedPlusSingleUnit Y =
       DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S := by
-    simp only [rightDerivedPlusSingleUnit, hsource, htarget,
-      rightDerivedFunctorPlusUnit_app, quotientCompMapHomotopyCategoryPlusIso,
-      Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.id_comp, Category.assoc]
-    erw [Functor.map_id]
-    rw [Category.id_comp]
+    simp [rightDerivedPlusSingleUnit, hsource, htarget,
+      rightDerivedFunctorPlusUnit, quotientCompMapHomotopyCategoryPlusIso, Category.assoc] <;>
+      (erw [Functor.map_id]; simp)
   have : ∀ n, Injective (L.obj.X n) := fun n ↦
     inferInstanceAs (Injective (R.cochainComplex.X n))
   have : IsIso (G.rightDerivedFunctorPlusUnit.app L) := by
