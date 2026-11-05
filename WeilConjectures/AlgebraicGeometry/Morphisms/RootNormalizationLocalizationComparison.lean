@@ -107,7 +107,7 @@ theorem root_normalization_localization_comparison
       (a.fromNormalization x).asIdeal = Ideal.span
         {AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)} →
       (Ideal.span {AdjoinRoot.root
-        ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)}).comap
+                    ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)}).comap
         (algebraMap H A) = Ideal.span {g} →
       let C := a.normalization.presheaf.stalk x
       let t := AlgebraicGeometry.StructureSheaf.toStalk A (a.fromNormalization x)

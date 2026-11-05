@@ -103,7 +103,10 @@ lemma isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app (X : C) :
     rw [h]
     infer_instance
   have hF' : IsIso ((DerivedCategory.Plus.homologyFunctor D 0).map (DerivedCategory.Plus.Qh.map
-      (F.mapHomotopyCategoryPlus.map ((HomotopyCategory.Plus.quotient C).map f)))) := hF
+      (F.mapHomotopyCategoryPlus.map ((HomotopyCategory.Plus.quotient C).map f)))) := by
+    exact (NatIso.isIso_map_iff
+      (isoWhiskerRight (DerivedCategory.Plus.quotientCompQhIso D)
+        (DerivedCategory.Plus.homologyFunctor D 0)) (F.mapCochainComplexPlus.map f)).mpr hF
   have h := congrArg (DerivedCategory.Plus.homologyFunctor D 0).map hn
   simp only [Functor.comp_map, Functor.map_comp] at h
   rw [← IsIso.comp_inv_eq] at h
