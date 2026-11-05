@@ -1169,7 +1169,7 @@ theorem profinite_point_pullback_abelianderived_coherence
       funext N
       exact profinite_point_pullback_abelian_coherence.1 X Y f N
     simpa only [profinitePointAbelianDerivedComp, profinitePointAbelianDerivedIdentity,
-      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedLeftUnit (upperStar Ab.{u + 1} f)
         (upperStar Ab.{u + 1} (𝟙 X)) (upperStar Ab.{u + 1} (𝟙 X ≫ f))
         (upperStarComp Ab.{u + 1} (𝟙 X) f) (upperStarId Ab.{u + 1} X)
@@ -1183,7 +1183,7 @@ theorem profinite_point_pullback_abelianderived_coherence
       funext N
       exact profinite_point_pullback_abelian_coherence.2.1 X Y f N
     simpa only [profinitePointAbelianDerivedComp, profinitePointAbelianDerivedIdentity,
-      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedRightUnit (upperStar Ab.{u + 1} f)
         (upperStar Ab.{u + 1} (𝟙 Y)) (upperStar Ab.{u + 1} (f ≫ 𝟙 Y))
         (upperStarComp Ab.{u + 1} f (𝟙 Y)) (upperStarId Ab.{u + 1} Y)
@@ -1201,8 +1201,8 @@ theorem profinite_point_pullback_abelianderived_coherence
         Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
         eqToIso.hom, Category.assoc] using
         profinite_point_pullback_abelian_coherence.2.2.1 X Y Z W f g h N
-    simpa only [profinitePointAbelianDerivedComp, Iso.trans_hom, NatTrans.comp_app,
-      Category.assoc] using
+    simpa only [profinitePointAbelianDerivedComp, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedAssociativity
         (upperStar Ab.{u + 1} h) (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)
         (upperStar Ab.{u + 1} (g ≫ h)) (upperStar Ab.{u + 1} (f ≫ g))
@@ -1212,7 +1212,7 @@ theorem profinite_point_pullback_abelianderived_coherence
         (congrArg (upperStar Ab.{u + 1}) (Category.assoc f g h)) hc M
   · intro X' X Y' Y b f f' g w M
     simp only [profinitePointAbelianDerivedComp, Iso.trans_inv, Iso.trans_hom,
-      NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
+      Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
       Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
     rw [abelianDerived_congr w]
 
@@ -1320,7 +1320,7 @@ theorem profinite_point_pullback_modulederived_coherence
       funext N
       exact (profinite_point_pullback_module_coherence Λ).1 X Y f N
     simpa only [profinitePointModuleDerivedComp, profinitePointModuleDerivedIdentity,
-      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedLeftUnit (CondensedRing.upperStar Λ f)
         (CondensedRing.upperStar Λ (𝟙 X)) (CondensedRing.upperStar Λ (𝟙 X ≫ f))
         (CondensedRing.upperStarComp Λ (𝟙 X) f) (profinitePointModuleIdentity Λ X)
@@ -1334,7 +1334,7 @@ theorem profinite_point_pullback_modulederived_coherence
       funext N
       exact (profinite_point_pullback_module_coherence Λ).2.1 X Y f N
     simpa only [profinitePointModuleDerivedComp, profinitePointModuleDerivedIdentity,
-      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedRightUnit (CondensedRing.upperStar Λ f)
         (CondensedRing.upperStar Λ (𝟙 Y)) (CondensedRing.upperStar Λ (f ≫ 𝟙 Y))
         (CondensedRing.upperStarComp Λ f (𝟙 Y)) (profinitePointModuleIdentity Λ Y)
@@ -1353,8 +1353,8 @@ theorem profinite_point_pullback_modulederived_coherence
         Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
         eqToIso.hom, Category.assoc] using
         (profinite_point_pullback_module_coherence Λ).2.2 X Y Z W f g h N
-    simpa only [profinitePointModuleDerivedComp, Iso.trans_hom, NatTrans.comp_app,
-      Category.assoc] using
+    simpa only [profinitePointModuleDerivedComp, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedAssociativity
         (CondensedRing.upperStar Λ h) (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)
         (CondensedRing.upperStar Λ (g ≫ h)) (CondensedRing.upperStar Λ (f ≫ g))
@@ -1364,7 +1364,7 @@ theorem profinite_point_pullback_modulederived_coherence
         (congrArg (CondensedRing.upperStar Λ) (Category.assoc f g h)) hc M
   · intro X' X Y' Y b f f' g w M
     simp only [profinitePointModuleDerivedComp, Iso.trans_inv, Iso.trans_hom,
-      NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
+      Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
       Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
     rw [moduleDerived_congr Λ w]
 
