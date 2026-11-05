@@ -182,7 +182,7 @@ private theorem completeElementHom_comparison
   let F := SheafOfModules.overMap.{u} O a
   let FU := SheafOfModules.overFunctor.{u} O U
   let FV := SheafOfModules.overFunctor.{u} O V
-  let : ∀ W : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
+  letI : ∀ W : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
       ((sheafCompose (J.over W) (forget₂ CommRingCat RingCat)).obj (R.over W))) :=
     fun W ↦ inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over W)))
   let Q : CochainComplex A ℤ ⥤ DerivedCategory A := DerivedCategory.Q
