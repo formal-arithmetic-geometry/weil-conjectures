@@ -22,6 +22,7 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -66,6 +67,7 @@ import all Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import all Mathlib.CategoryTheory.Limits.EssentiallySmall
 import all WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import all Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.Localization
 import all Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import all Mathlib.CategoryTheory.Adjunction.Additive
 import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
