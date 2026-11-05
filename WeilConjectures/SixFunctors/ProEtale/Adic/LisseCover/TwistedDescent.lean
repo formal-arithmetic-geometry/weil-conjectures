@@ -163,7 +163,7 @@ lemma coact_counit : coactionUnit p (trivπ N W) ≫ coact hc hjp = 𝟙 (triv N
   · have hk : coactionUnit p (trivπ N W) ≫ kappa hjp ≫ pairRestrict j =
         trivπ N W ≫ j ≫ pullback.diagonal f := by
       apply pullback.hom_ext
-      · simp [kappa_fst_assoc]; rfl
+      · simp [kappa_fst_assoc]
       · simp [kappa_snd_assoc]
     rw [Scheme.Hom.comp_apply, idx_coact]
     have e₁ : (pairRestrict j).base ((kappa hjp).base ((coactionUnit p (trivπ N W)).base x)) =
