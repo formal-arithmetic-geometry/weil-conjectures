@@ -66,7 +66,9 @@ lemma purity_comparisonUpperStarRootsOfUnityIso_pullback (hX : IsUnit (N : Γ(X,
   simp only [comparisonUpperStarRootsOfUnityIso, Iso.trans_hom, Iso.symm_hom,
     Functor.map_comp, Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rw [← purity_rootsOfUnitySheafIsoKernel_upperStar]
-  rw [← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
+  rw [← (g)^*[Ab.{u + 1}].map_comp_assoc
+      (rootsOfUnitySheafIsoKernel Y N).inv (rootsOfUnitySheafIsoKernel Y N).hom,
+    Iso.inv_hom_id, CategoryTheory.Functor.map_id,
     Category.id_comp]
   exact purity_cartierRootsIso_pullback A N hN hA g hY hX
 

@@ -22,9 +22,6 @@ open Scheme
 
 attribute [local implicit_reducible] MorphismProperty Scheme.ProEt
 
-set_option trace.profiler true
-set_option trace.profiler.threshold 1000
-
 /-- The two section identifications of the kernel of the power map agree, because
 both identify a section with its image in the sheaf of units. -/
 lemma purity_proEtaleRootsOfUnitySections_eq (X : Scheme.{u}) (N : ℕ) (V : X.ProEtᵒᵖ) :

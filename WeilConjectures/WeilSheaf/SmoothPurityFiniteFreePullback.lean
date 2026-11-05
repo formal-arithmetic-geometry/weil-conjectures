@@ -97,10 +97,10 @@ lemma purity_finiteCoefficient_free_right_square {X Y : Scheme.{u}} (g : X ⟶ Y
   rw [purity_finiteCoefficientInverseForget_inv_app,
     purity_finiteCoefficientInverseForget_inv_app, purity_finiteCoefficient_forget_map,
     Adjunction.functor_map_inverseCompIso_isoCompInverse_inv_app]
-  simp only [Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc,
-    Equivalence.counitIso_inv_hom_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, purity_lowerStarFiniteCoefficient_forget_inv,
-    Functor.comp_obj, Category.comp_id]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc, Equivalence.counitIso_inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp,
+    purity_lowerStarFiniteCoefficient_forget_inv, Category.comp_id]
   rfl
 
 /-- The actual finite coefficient pullback comparison respects the free-module
@@ -108,7 +108,8 @@ comparisons. This is the coefficient-reading part of the finite Tate line square
 lemma purity_upperStarFiniteCoefficient_free {X Y : Scheme.{u}} (g : X ⟶ Y)
     (M : Sheaf (ProEt.topology Y) Ab.{u + 1}) :
     (finiteCoefficientModEquivalence X T).functor.map
-          ((CondensedRing.freeFunctorCompUpperStarIso (Profinite.continuousMapRingObj T) g).hom.app M) ≫
+          ((CondensedRing.freeFunctorCompUpperStarIso
+            (Profinite.continuousMapRingObj T) g).hom.app M) ≫
         (purityFiniteCoefficientFreeIso T X).hom.app ((g)^*[Ab.{u + 1}].obj M) =
       (upperStarFiniteCoefficientModEquivalenceIso g T).hom.app
           ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) Y)).obj M) ≫
@@ -127,7 +128,7 @@ lemma purity_upperStarFiniteCoefficient_free {X Y : Scheme.{u}} (g : X ⟶ Y)
   simp only [purityFiniteCoefficientFreeIso, purityFiniteFreeSheafPullbackIso,
     CondensedRing.freeFunctorCompUpperStarIso, upperStarFiniteCoefficientModEquivalenceIso,
     Adjunction.symm_conjugateIsoEquiv_symm_apply, Equiv.apply_symm_apply,
-    Iso.refl_hom, NatTrans.id_app, Category.comp_id, Category.id_comp, Iso.symm_hom]
+    Iso.refl_hom, NatTrans.id_app, Category.id_comp, Iso.symm_hom]
   simpa only [Functor.comp_obj, Category.comp_id] using
     purity_finiteCoefficient_free_right_square T g N
 
