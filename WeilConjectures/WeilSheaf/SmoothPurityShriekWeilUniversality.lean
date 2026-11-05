@@ -53,8 +53,10 @@ theorem bijective_map_comp_weilRightDerivedLowerShriek_of_bounded
         ((weilRightDerivedLowerShriekCompForgetIso Λ c h).inv.app P ≫
           (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map ε)) :
     (weilRightDerivedLowerShriek Λ c h).TraceUniversalAt K ε := by
-  have := (openImmersionLowerShriekUpperStarAdjunction Λ
-    (Scheme.Hom.geometricFiberMap c.i (c.i_comp_g_comp h))).leftAdjoint_preservesColimits
+  have : PreservesColimitsOfShape (Discrete ℤ)
+      (openImmersionLowerShriek Λ (Scheme.Hom.geometricFiberMap c.i (c.i_comp_g_comp h))) :=
+    (openImmersionLowerShriekUpperStarAdjunction Λ
+      (Scheme.Hom.geometricFiberMap c.i (c.i_comp_g_comp h))).leftAdjoint_preservesColimits
   exact bijective_map_comp_exact_rightDerived_of_bounded
     (openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso Λ c.i (c.i_comp_g_comp h))
     (lowerStarGeometricFiberMapCompFrobeniusIso Λ c.g rfl)
