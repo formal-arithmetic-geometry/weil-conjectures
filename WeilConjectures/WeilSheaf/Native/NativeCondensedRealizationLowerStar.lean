@@ -165,6 +165,7 @@ lemma mateEquiv_derivedCondensedRealizationUpperStarIso :
     (condensedRealization k₀ l Y) (condensedRealization k₀ l Z)
     (condensedRealizationUpperStarIso k₀ l g).symm (condensedRealizationLowerStarIso k₀ l g) rfl
 set_option maxHeartbeats 1000000 in
+-- the derived categories of condensed modules are slow to elaborate
 /-- **The derived base change map of the condensed realization along a pushforward, through
 the two factors of the condensed realization.** As `N = forget ⋙ Φ`, the derived base change map
 `Rg_* ⋙ D(N_Y) ⟶ D(N_Z) ⋙ Rḡ_*` is the comparison of forgetting the Weil structure with the
@@ -194,9 +195,9 @@ lemma mateEquiv_derivedCondensedRealizationUpperStarIso_app
             (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))
             (adicSheafEquivCondensedMod l
               (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app K) := by
-  letI := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+  let := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
     (AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  letI := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+  let := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
     (AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
   have hd : IsoAlgebra.derivedForgetCommIso.{u + 1, u + 1, u + 2, u + 2}
       (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _)) =
@@ -246,9 +247,10 @@ lemma mateEquiv_derivedCondensedRealizationUpperStarIso_app
     erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 set_option maxHeartbeats 1000000 in
+-- the derived categories of condensed modules are slow to elaborate
 /-- `AlgebraicGeometry.ProEtaleWeilSheaf.mateEquiv_derivedCondensedRealizationUpperStarIso_app`,
 with the identifications `D(forget ⋙ Φ) ≅ D(forget) ⋙ D(Φ)` moved to the source. -/
-lemma mapDerivedCategoryCompIso_inv_app_mateEquiv_derivedCondensedRealizationUpperStarIso_app
+lemma mateEquiv_derivedCondensedRealizationUpperStarIso_app'
     (K : DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) :
     (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
           (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app

@@ -104,28 +104,29 @@ theorem exists_derivedLowerStar_forget_iso_projection :
               ((geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T) := by
   have : IsProper (nativeProjectionCompactification k₀ f).g :=
     (nativeProjectionCompactification k₀ f).isProper
-  refine ⟨geometricFiberBoundedConstructibleFunctorLowerStarIso (nativeProjectionCompactification k₀ f).g,
-    fun adj' adj L ↦ isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso _ adj' adj L,
-    geometricFiberBoundedConstructibleFunctorUpperStarIso (nativeProjectionCompactification k₀ f).g,
-    derivedLowerStarNativeConstructibleTensorIso (nativeProjectionCompactification k₀ f).g,
-    fun A T ↦ ?_⟩
+  refine ⟨geometricFiberBoundedConstructibleFunctorLowerStarIso _,
+    fun adj' adj L ↦
+      isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso _ adj' adj L,
+    geometricFiberBoundedConstructibleFunctorUpperStarIso _,
+    derivedLowerStarNativeConstructibleTensorIso _, fun A T ↦ ?_⟩
+  -- compare the two sides on the ambient derived categories
   apply (ObjectProperty.fullyFaithfulι _).map_injective
   simp only [Functor.map_comp]
-  rw [ι_map_geometricFiberBoundedConstructibleFunctor_map]
-  rw [ι_map_derivedLowerStarNativeConstructibleTensorIso_hom_app]
-  rw [ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app]
+  rw [ι_map_geometricFiberBoundedConstructibleFunctor_map,
+    ι_map_derivedLowerStarNativeConstructibleTensorIso_hom_app,
+    ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app]
   simp only [ι_map_boundedConstructibleLowerStar_geometricFiberHom_map,
     ι_map_geometricFiberBoundedConstructibleFunctorTensorIso_hom_app,
-    boundedConstructible_ι_map_whiskerLeft',
-    ι_map_geometricFiberBoundedConstructibleFunctorUpperStarIso_hom_app,
     boundedConstructible_ι_map_whiskerRight,
     ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app,
     ι_map_boundedConstructibleProjectionMorphism_geometricFiberHom]
-  have hCT := ι_map_geometricFiberBoundedConstructibleFunctorTensorIso_hom_app
-    (nativeProjectionCompactification k₀ f).Z A ((upperStar (nativeProjectionCompactification k₀ f).g).obj T)
-  have hW := boundedConstructible_ι_map_whiskerLeft' (nativeProjectionCompactification k₀ f).Z
+  -- the remaining comparisons, with the geometric fibres written uniformly
+  have hCT := ι_map_geometricFiberBoundedConstructibleFunctorTensorIso_hom_app _ A
+    ((upperStar (nativeProjectionCompactification k₀ f).g).obj T)
+  have hW := boundedConstructible_ι_map_whiskerLeft' _
     ((geometricFiberBoundedConstructibleFunctor k₀ l _).obj A)
-    ((geometricFiberBoundedConstructibleFunctorUpperStarIso (nativeProjectionCompactification k₀ f).g).hom.app T)
+    ((geometricFiberBoundedConstructibleFunctorUpperStarIso
+      (nativeProjectionCompactification k₀ f).g).hom.app T)
   have hγ := ι_map_geometricFiberBoundedConstructibleFunctorUpperStarIso_hom_app
     (nativeProjectionCompactification k₀ f).g T
   dsimp only [Over.mk_left] at hCT hW hγ ⊢

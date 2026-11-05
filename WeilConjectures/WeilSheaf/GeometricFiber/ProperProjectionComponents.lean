@@ -89,8 +89,9 @@ noncomputable def geometricFiberBoundedConstructibleFunctorUpperStarIso :
           (geometricFiberHom (k₀ := k₀) g)).symm ≪≫
       (Functor.associator _ _ _).symm)
 
-/-- The components of `AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorUpperStarIso`
-on the ambient derived categories. -/
+/-- The components of the pullback comparison of forgetting the Weil structure
+(`AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorUpperStarIso`) on the
+ambient derived categories. -/
 lemma ι_map_geometricFiberBoundedConstructibleFunctorUpperStarIso_hom_app (T : WeilComplex k₀ l Y) :
     (ObjectProperty.ι _).map ((geometricFiberBoundedConstructibleFunctorUpperStarIso g).hom.app T) =
       (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))
@@ -121,10 +122,12 @@ lemma ι_map_geometricFiberBoundedConstructibleFunctorUpperStarIso_hom_app (T : 
   erw [Category.id_comp]
 
 set_option maxHeartbeats 1000000 in
+-- the derived categories of condensed modules are slow to elaborate
 set_option synthInstance.maxHeartbeats 400000 in
 -- the monoidal structure of the derived category of condensed modules is found slowly
-/-- The components of `AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorTensorIso`
-on the ambient derived categories. -/
+/-- The components of the tensor comparison of forgetting the Weil structure
+(`AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorTensorIso`) on the
+ambient derived categories. -/
 lemma ι_map_geometricFiberBoundedConstructibleFunctorTensorIso_hom_app (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -228,9 +231,9 @@ lemma ι_map_derivedLowerStarNativeConstructibleTensorIso_hom_app (A : WeilCompl
     ObjectProperty.homMk_hom]
   rfl
 
-omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
 set_option synthInstance.maxHeartbeats 400000 in
 -- the monoidal structure of the derived category of condensed modules is found slowly
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
 /-- The comonoidal structure of the derived pullback `Lf^*` of condensed `ℚ̄_ℓ`-modules is the
 comparison `Lf^*(a ⊗ b) ⟶ Lf^* a ⊗ Lf^* b`. -/
 lemma δNatTrans_leftDerivedUpperStar {X₀ Y₀ : Scheme.{u}} (f : X₀ ⟶ Y₀) :
@@ -240,9 +243,9 @@ lemma δNatTrans_leftDerivedUpperStar {X₀ Y₀ : Scheme.{u}} (f : X₀ ⟶ Y�
   ext K L
   rfl
 
-omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
 set_option synthInstance.maxHeartbeats 400000 in
 -- the monoidal structure of the derived category of condensed modules is found slowly
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
 /-- The right adjoint projection map of `Lf^* ⊣ Rf_*` for the comparison
 `Lf^*(a ⊗ b) ⟶ Lf^* a ⊗ Lf^* b` is the projection morphism of the monoidal functor `Lf^*`. -/
 lemma rightAdjointProjectionMap_leftDerivedUpperStarTensor_app_app {X₀ Y₀ : Scheme.{u}}

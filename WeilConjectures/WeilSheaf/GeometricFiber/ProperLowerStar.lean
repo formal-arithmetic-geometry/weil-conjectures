@@ -160,8 +160,8 @@ theorem isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso
     (DerivedCategory.boundedConstructibleAdic l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (adicLowerStar l (Scheme.Hom.geometricFiberMap g
       (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor hR
-  have : T_A.IsLeftAdjoint := isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper
-    k₀ (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure hk _
+  have : T_A.IsLeftAdjoint :=
+    isLeftAdjoint_boundedConstructibleAdicRightDerivedLowerStar_of_isProper k₀ (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure hk _
   let adjA := Adjunction.ofIsLeftAdjoint T_A
   let U_Z := (objectProperty k₀ l Z).liftFullSubcategory
     (DerivedCategory.boundedConstructibleAdic l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -217,8 +217,7 @@ theorem isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso
       adicSheafDerivedEquivCondensedMod_functor]
     erw [Category.id_comp, Category.id_comp, CategoryTheory.Functor.map_id, Category.id_comp,
       Category.comp_id, CategoryTheory.Functor.map_id, Category.comp_id]
-    erw [ProEtaleWeilSheaf.mapDerivedCategoryCompIso_inv_app_mateEquiv_derivedCondensedRealizationUpperStarIso_app
-      k₀ l g M.obj]
+    erw [ProEtaleWeilSheaf.mateEquiv_derivedCondensedRealizationUpperStarIso_app' k₀ l g M.obj]
     rfl
   · intro L'
     obtain ⟨eH, heH⟩ := IsoAlgebra.exists_forget_map_counit_eq
