@@ -127,7 +127,7 @@ theorem mapExactFunctor_comp_mk₀_eq_sheaf
     ext
     simp only [Ext.comp_hom, Ext.mk₀_hom, Ext.mapExactFunctor_hom]
     have : NatTrans.CommShift
-        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).hom ℤ := by
+        (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom ℤ := by
       dsimp only [Iso.trans_hom]
       infer_instance
     have hi (A : C) :

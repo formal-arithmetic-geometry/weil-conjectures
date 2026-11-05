@@ -30,6 +30,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.LocallyFreeDerivedHom
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Derived Hom from a locally finite free module on a ringed site
 

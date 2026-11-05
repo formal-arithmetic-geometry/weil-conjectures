@@ -166,7 +166,7 @@ variable [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} (IsoAlgebra F)]
 algebras, where `U` is induced by the forgetful functor. -/
 def derivedStrIso :
     (forget F).mapDerivedCategory ⋙ F.mapDerivedCategory ≅ (forget F).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (forget F) F) ≪≫
     Functor.mapDerivedCategoryNatIso (strNatIso F)
 
 omit [IsGrothendieckAbelian.{w} C] in
@@ -191,7 +191,7 @@ def derivedFreeShift :
     (Free.functor F).mapDerivedCategory ⟶
       F.mapDerivedCategory ⋙ (Free.functor F).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatTrans (Free.shiftNatTrans F) ≫
-    (Functor.mapDerivedCategoryCompIso F (Free.functor F)).hom
+    (Functor.mapDerivedCategoryCompIso F (Free.functor F)).inv
 
 @[reassoc]
 lemma derivedFreeShift_app_Q_obj (X : CochainComplex C ℤ) :

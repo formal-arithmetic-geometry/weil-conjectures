@@ -53,7 +53,7 @@ lemma mapDerivedCategoryFactors_inv_app_comp_mapDerivedCategoryCompIso_hom_app
           ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app L) ≫
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app L) := by
-  have h := congrArg Iso.inv (Iso.ext (mapDerivedCategoryCompIso_fac F G L) :
+  have h := congrArg Iso.inv (Iso.ext ((mapDerivedCategoryCompIso_fac F).symm G L) :
     (mapDerivedCategoryCompIso F G).app (DerivedCategory.Q.obj L) ≪≫
       G.mapDerivedCategory.mapIso (F.mapDerivedCategoryFactors.app L) ≪≫
       G.mapDerivedCategoryFactors.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≪≫
@@ -79,7 +79,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_comp_map_mapDerivedCategoryCo
   have h := Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
     (τ := ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom ≫
-      whiskerRight (mapDerivedCategoryCompIso F G).hom (DerivedCategory.homologyFunctor E n))
+      whiskerRight (mapDerivedCategoryCompIso F G).inv (DerivedCategory.homologyFunctor E n))
     (τ' := (whiskerRight (F.mapDerivedCategoryHomologyFunctorIso n).hom G ≫
       (associator _ _ _).hom ≫
       whiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso n).hom ≫

@@ -212,7 +212,7 @@ lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
     ext
     simp only [Ext.comp_hom, Ext.mk₀_hom, Ext.mapExactFunctor_hom]
     have : NatTrans.CommShift
-        (Functor.mapDerivedCategoryNatIso τ ≪≫ Functor.mapDerivedCategoryCompIso G₁ G₂).hom ℤ := by
+        (Functor.mapDerivedCategoryNatIso τ ≪≫ (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom ℤ := by
       dsimp only [Iso.trans_hom]
       infer_instance
     have hi (A : C) :
