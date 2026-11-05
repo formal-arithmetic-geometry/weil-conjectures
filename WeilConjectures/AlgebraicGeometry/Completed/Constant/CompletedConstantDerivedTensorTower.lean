@@ -121,7 +121,6 @@ private noncomputable def pointwise_change_iso
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
   simp [Category.assoc]
-  rfl
 
 private theorem resolving_class_left_derived
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
