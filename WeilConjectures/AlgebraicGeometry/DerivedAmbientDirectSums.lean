@@ -26,6 +26,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+local instance (X : Scheme.{u}) (I : Type u)
+    (K : I → CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    HasCoproduct K := HasColimitsOfShape.has_colimit _
+
 /-- Termwise direct sums of any representatives give direct sums in `D(𝒪_X)`, and their
 cohomology is canonically the direct sum of the cohomology sheaves.
 Source: Stacks Project, Lemma 07D9 (1)-(2), and proof of Lemma 08DT
