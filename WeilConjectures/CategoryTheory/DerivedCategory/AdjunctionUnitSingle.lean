@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
 
 /-!
@@ -104,17 +106,11 @@ theorem isIso_mapDerivedCategory_map_derivedAdjunction_unit_app (M : C)
   have h₃ : g.rightDerivedFunctorUnit.app
       ((HomotopyCategory.quotient D (.up ℤ)).obj ((CochainComplex.singleFunctor D 0).obj
         (f.obj M))) =
-      DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map
-          ((g.mapCochainComplexSingleFunctor 0).hom.app (f.obj M))) ≫
-        (DerivedCategory.quotientCompQhIso C).hom.app
-          ((CochainComplex.singleFunctor C 0).obj (g.obj (f.obj M))) ≫
-        g.rightDerivedSingleUnit (f.obj M) ≫
-        g.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso D).inv.app
-          ((CochainComplex.singleFunctor D 0).obj (f.obj M))) := by
-    dsimp [Functor.rightDerivedSingleUnit]
-    erw [← DerivedCategory.quotientCompQhIso_hom_naturality]
-    simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app, Functor.map_id,
-      Category.id_comp]
+      DerivedCategory.Q.map ((g.mapCochainComplexSingleFunctor 0).hom.app (f.obj M)) ≫
+        g.rightDerivedSingleUnit (f.obj M) := by
+    rw [Functor.rightDerivedSingleUnit]
+    erw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+    rfl
   have h₄ := Adjunction.mapHomotopyCategory_unit_app_quotient (c := .up ℤ) adj
     ((CochainComplex.singleFunctor C 0).obj M)
   have key : adj.derivedAdjunction.unit.app ((DerivedCategory.singleFunctor C 0).obj M) ≫
@@ -124,13 +120,8 @@ theorem isIso_mapDerivedCategory_map_derivedAdjunction_unit_app (M : C)
       DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map u) ≫
         DerivedCategory.Qh.map ((g.mapHomotopyCategory (.up ℤ)).map
           ((HomotopyCategory.quotient D (.up ℤ)).map e.hom)) ≫
-        DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map
-          ((g.mapCochainComplexSingleFunctor 0).hom.app (f.obj M))) ≫
-        (DerivedCategory.quotientCompQhIso C).hom.app
-          ((CochainComplex.singleFunctor C 0).obj (g.obj (f.obj M))) ≫
-        g.rightDerivedSingleUnit (f.obj M) ≫
-        g.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso D).inv.app
-          ((CochainComplex.singleFunctor D 0).obj (f.obj M))) := by
+        DerivedCategory.Q.map ((g.mapCochainComplexSingleFunctor 0).hom.app (f.obj M)) ≫
+        g.rightDerivedSingleUnit (f.obj M) := by
     erw [reassoc_of% h₁]
     rw [h₄]
     erw [← h₂, h₃]
