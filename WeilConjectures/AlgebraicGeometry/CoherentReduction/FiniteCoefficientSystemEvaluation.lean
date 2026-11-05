@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedMorphismSheafComp
 public import WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
 public import WeilConjectures.Algebra.Homology.RingIsomorphismTensorTransport
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTrans
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 
 /-! # Finite-coefficient presentations of the genuine system evaluations
 
@@ -278,6 +279,43 @@ noncomputable def nuFixedScalarExtensionComparisonMap (X : Scheme.{u})
       (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ))
     ).symm (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom)).natTrans
 
+/-- The scalar-restriction comparison map of `DerivedMorphismSheafComparison` is the inverse of
+the conjugate comparison `pbcComparisonRestrict`: both are the unique comparison of left adjoints
+of the composite of comparison direct image and coextension of scalars. -/
+lemma comparisonRestrictScalarsMap_eq_pbcComparisonRestrict_inv_app (X : Scheme.{u})
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+    Scheme.comparisonRestrictScalarsMap X A φ M = (pbcComparisonRestrict X φ).inv.app M := by
+  let adj₁ := (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).comp
+    (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) X)
+  let adj₂ := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X).comp
+    (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
+  have h : (pbcComparisonRestrict X φ).inv.app M =
+      (Adjunction.leftAdjointUniq adj₁ adj₂).hom.app M := rfl
+  rw [h]
+  apply (adj₁.homEquiv _ _).injective
+  refine Eq.trans ?_ (Adjunction.homEquiv_leftAdjointUniq_hom_app adj₁ adj₂ M).symm
+  change (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).homEquiv _ _
+      ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) X).homEquiv _ _
+        (Scheme.comparisonRestrictScalarsMap X A φ M)) = adj₂.unit.app M
+  rw [Scheme.comparisonRestrictScalarsMap, Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
+  dsimp only [adj₂]
+  rw [Adjunction.comp_unit_app]
+  exact ((Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).unit.naturality
+    ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X).unit.app M)).symm
+
+/-- The derived scalar-restriction comparison is the inverse of `pbcDerivedComparisonRestrict`. -/
+lemma comparisonRestrictScalarsIso_eq_pbcDerivedComparisonRestrict_symm (X : Scheme.{u})
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
+    Scheme.comparisonRestrictScalarsIso X A φ = (pbcDerivedComparisonRestrict X φ).symm := by
+  have h : Scheme.comparisonRestrictScalarsSheafIso X A φ = (pbcComparisonRestrict X φ).symm := by
+    refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+    exact comparisonRestrictScalarsMap_eq_pbcComparisonRestrict_inv_app X φ M
+  ext1
+  simp only [Scheme.comparisonRestrictScalarsIso, pbcDerivedComparisonRestrict, h,
+    Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, Functor.mapDerivedCategoryNatIso_symm,
+    Category.assoc]
+
 /-- The canonical `nu^*`/scalar-extension comparison is invertible.
 Source: Stacks 09B1 and 0F63 (blueprint: def-sfb-finite-coefficient-system-evaluation).
 Proof: compute derived scalar extension on K-flat complexes. Exact comparison
@@ -288,7 +326,10 @@ exactly comparisonRestrictScalarsIso. Hence the derived mate is invertible. -/
 theorem nuFixedScalarExtensionComparisonMap_isIso (X : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     IsIso (nuFixedScalarExtensionComparisonMap X φ) := by
-  sorry
+  have := pbcComparisonReductionMap_isIso X φ
+  rw [pbcComparisonReductionMap, ← Iso.symm_hom,
+    ← comparisonRestrictScalarsIso_eq_pbcDerivedComparisonRestrict_symm] at this
+  exact this
 
 /-- The canonical comparison isomorphism used by the finite reduction maps.
 Source: Stacks 09B1 and 0F63 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
@@ -302,6 +343,196 @@ noncomputable def nuFixedScalarExtensionComparison (X : Scheme.{u})
       (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory := by
   letI := nuFixedScalarExtensionComparisonMap_isIso X φ
   exact asIso (nuFixedScalarExtensionComparisonMap X φ)
+
+/-- The constant-section homomorphisms commute with the composite coefficient maps of the
+finite coefficient system. -/
+theorem constantSections_comp_coefficientMap (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
+    constantSections X (Etale.FiniteProperQuotient.Ring l E m) ≫
+        WeilConjectures.SemilinearSections.coefficientMap (Scheme.ProEt.topology X)
+          (coefficients l E X) (transitions l E X) h =
+      (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom (Etale.FiniteProperQuotient.quotient l E h)) ≫
+        constantSections X (Etale.FiniteProperQuotient.Ring l E n) := by
+  induction m, h using Nat.le_induction with
+  | base =>
+    have hid : WeilConjectures.SemilinearSections.coefficientMap (Scheme.ProEt.topology X)
+        (coefficients l E X) (transitions l E X) (le_refl n) = 𝟙 (coefficients l E X n) :=
+      (WeilConjectures.SemilinearSections.rings (Scheme.ProEt.topology X)
+        (coefficients l E X) (transitions l E X)).map_id (op n)
+    rw [hid, Category.comp_id, Etale.FiniteProperQuotient.quotient_refl,
+      CommRingCat.ofHom_id, CategoryTheory.Functor.map_id, Category.id_comp]
+  | succ m hnm ih =>
+    have hsplit : WeilConjectures.SemilinearSections.coefficientMap (Scheme.ProEt.topology X)
+        (coefficients l E X) (transitions l E X) (hnm.trans (Nat.le_add_right m 1)) =
+        transitions l E X m ≫
+          WeilConjectures.SemilinearSections.coefficientMap (Scheme.ProEt.topology X)
+            (coefficients l E X) (transitions l E X) hnm := by
+      rw [← Functor.ofOpSequence_map_homOfLE_succ (transitions l E X) m]
+      exact (WeilConjectures.SemilinearSections.rings (Scheme.ProEt.topology X)
+        (coefficients l E X) (transitions l E X)).map_comp
+          (homOfLE (Nat.le_add_right m 1)).op (homOfLE hnm).op
+    rw [hsplit, transitions, ← Category.assoc, constantSections_comp_sectionMap,
+      Category.assoc, ih, ← Category.assoc, ← Functor.map_comp, ← CommRingCat.ofHom_comp,
+      Etale.FiniteProperQuotient.quotient_comp_quotient]
+
+/-- The constant-ring sheafification unit commutes with the constant-sheaf map of a ring
+homomorphism, after forgetting commutativity. -/
+theorem constantCommuteCompose_inv_toSheafify_naturality (X : Scheme.{u})
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (q : A →+* B) (U : X.ProEtᵒᵖ) (a : A) :
+    ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+        ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
+          (CommRingCat.ofHom q))).hom.app U
+        (((constantCommuteCompose (Scheme.ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.app (CommRingCat.of A)).hom.app U
+          ((toSheafify (Scheme.ProEt.topology X)
+            ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of A))).app U a)) =
+      ((constantCommuteCompose (Scheme.ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.app (CommRingCat.of B)).hom.app U
+          ((toSheafify (Scheme.ProEt.topology X)
+            ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of B))).app U (q a)) := by
+  have h1 := congrArg (fun g ↦ g.hom.app U ((toSheafify (Scheme.ProEt.topology X)
+            ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of A))).app U a))
+    ((constantCommuteCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.naturality (CommRingCat.ofHom q))
+  have h2 := congrArg (fun g ↦ g.app U a)
+    (toSheafify_naturality (Scheme.ProEt.topology X)
+      ((Functor.const X.ProEtᵒᵖ).map (RingCat.ofHom q)))
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    ConcreteCategory.comp_apply] at h1 h2
+  exact h1.symm.trans (congrArg (fun y ↦ ConcreteCategory.hom
+    (((constantCommuteCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.app (CommRingCat.of B)).hom.app U) y)
+    h2.symm)
+
+/-- A semilinear map of section-ring module sheaves, over a ring map compatible with the
+constant sections, as a map of fixed-coefficient module sheaves at a single object. -/
+noncomputable def finiteUnrealizationHomApp (X : Scheme.{u}) {A B : Type (u + 1)} [CommRing A]
+    [Finite A] [TopologicalSpace A] [DiscreteTopology A] [CommRing B] [Finite B]
+    [TopologicalSpace B] [DiscreteTopology B] (q : A →+* B)
+    {N : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X) (sectionRing X A)}
+    {N' : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X) (sectionRing X B)}
+    (φ : sectionRing X A ⟶ sectionRing X B)
+    (hφ : constantSections X A ≫ φ =
+      (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom q) ≫ constantSections X B)
+    (f : N ⟶ (res.{u + 1, u, u + 1} φ).obj N') (U : X.ProEtᵒᵖ) :
+    ((finiteUnrealization X A).obj N).obj.obj U ⟶
+      ((Sheaf.restrictScalars (Scheme.ProEt.topology X) q).obj
+        ((finiteUnrealization X B).obj N')).obj.obj U :=
+  ModuleCat.ofHom (R := A) (X := ((finiteUnrealization X A).obj N).obj.obj U)
+    (Y := ((Sheaf.restrictScalars (Scheme.ProEt.topology X) q).obj
+        ((finiteUnrealization X B).obj N')).obj.obj U)
+    { toFun := fun x ↦ f.val.app U x
+      map_add' := fun x y ↦ map_add _ x y
+      map_smul' := fun a x ↦ by
+        have h3 := congrArg (fun g ↦ g.hom.app U
+          (((constantCommuteCompose (Scheme.ProEt.topology X)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).inv.app (CommRingCat.of A)).hom.app U
+            ((toSheafify (Scheme.ProEt.topology X)
+              ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of A))).app U a))) hφ
+        simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+          ConcreteCategory.comp_apply] at h3
+        refine ((f.val.app U).hom.map_smul _ x).trans ?_
+        exact congrArg (fun r : (WeilConjectures.SemilinearSections.ring
+            (Scheme.ProEt.topology X) (sectionRing X B)).obj.obj U ↦
+              r • @id (N'.val.obj U) ((f.val.app U).hom x))
+          (h3.trans (congrArg (fun y ↦ ConcreteCategory.hom ((constantSections X B).hom.app U) y)
+            (constantCommuteCompose_inv_toSheafify_naturality X q U a))) }
+
+/-- A semilinear map of section-ring module sheaves, over a ring map compatible with the
+constant sections, as a map of fixed-coefficient module sheaves. -/
+noncomputable def finiteUnrealizationHom (X : Scheme.{u}) {A B : Type (u + 1)} [CommRing A]
+    [Finite A] [TopologicalSpace A] [DiscreteTopology A] [CommRing B] [Finite B]
+    [TopologicalSpace B] [DiscreteTopology B] (q : A →+* B)
+    {N : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X) (sectionRing X A)}
+    {N' : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X) (sectionRing X B)}
+    (φ : sectionRing X A ⟶ sectionRing X B)
+    (hφ : constantSections X A ≫ φ =
+      (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom q) ≫ constantSections X B)
+    (f : N ⟶ (res.{u + 1, u, u + 1} φ).obj N') :
+    (finiteUnrealization X A).obj N ⟶
+      (Sheaf.restrictScalars (Scheme.ProEt.topology X) q).obj
+        ((finiteUnrealization X B).obj N') :=
+  ⟨{ app := finiteUnrealizationHomApp X q φ hφ f
+     naturality := fun _ _ g ↦ by
+       ext x
+       exact PresheafOfModules.naturality_apply f.val g x }⟩
+
+/-- The fixed-coefficient map has the original underlying map of abelian sheaves. -/
+theorem finiteUnrealizationHom_heq (X : Scheme.{u}) {A B : Type (u + 1)} [CommRing A]
+    [Finite A] [TopologicalSpace A] [DiscreteTopology A] [CommRing B] [Finite B]
+    [TopologicalSpace B] [DiscreteTopology B] (q : A →+* B)
+    {N : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X) (sectionRing X A)}
+    {N' : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X) (sectionRing X B)}
+    (φ : sectionRing X A ⟶ sectionRing X B)
+    (hφ : constantSections X A ≫ φ =
+      (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom q) ≫ constantSections X B)
+    (f : N ⟶ (res.{u + 1, u, u + 1} φ).obj N') :
+    HEq ((sheafCompose (Scheme.ProEt.topology X)
+        (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})).map
+          (finiteUnrealizationHom X q φ hφ f))
+      ((SheafOfModules.toSheaf (WeilConjectures.SemilinearSections.ring.{u + 1, u, u + 1}
+        (Scheme.ProEt.topology X) (sectionRing X A))).map f) :=
+  heq_of_eq (by
+    ext U x
+    rfl)
+
+/-- The fixed-coefficient presentation of semilinear maps is natural. -/
+theorem finiteUnrealizationHom_naturality (X : Scheme.{u}) {A B : Type (u + 1)} [CommRing A]
+    [Finite A] [TopologicalSpace A] [DiscreteTopology A] [CommRing B] [Finite B]
+    [TopologicalSpace B] [DiscreteTopology B] (q : A →+* B)
+    {N₁ N₂ : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X) (sectionRing X A)}
+    {N₁' N₂' : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X) (sectionRing X B)}
+    (φ : sectionRing X A ⟶ sectionRing X B)
+    (hφ : constantSections X A ≫ φ =
+      (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom q) ≫ constantSections X B)
+    (f₁ : N₁ ⟶ (res.{u + 1, u, u + 1} φ).obj N₁') (f₂ : N₂ ⟶ (res.{u + 1, u, u + 1} φ).obj N₂')
+    (g : N₁ ⟶ N₂) (g' : N₁' ⟶ N₂') (hg : g ≫ f₂ = f₁ ≫ (res.{u + 1, u, u + 1} φ).map g') :
+    (finiteUnrealization X A).map g ≫ finiteUnrealizationHom X q φ hφ f₂ =
+      finiteUnrealizationHom X q φ hφ f₁ ≫
+        (Sheaf.restrictScalars (Scheme.ProEt.topology X) q).map
+          ((finiteUnrealization X B).map g') := by
+  ext U x
+  exact congrArg (fun k ↦ k.val.app U x) hg
+
+/-- The fixed-coefficient presentation of the horizontal transition of module systems. -/
+noncomputable def fixedTransitionMap (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
+    evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
+        (coefficients l E X) (transitions l E X) m ⋙
+      finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E m) ⟶
+    (evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
+        (coefficients l E X) (transitions l E X) n ⋙
+      finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E n)) ⋙
+      Sheaf.restrictScalars (Scheme.ProEt.topology X)
+        (Etale.FiniteProperQuotient.quotient l E h) where
+  app M := finiteUnrealizationHom X (Etale.FiniteProperQuotient.quotient l E h)
+    (WeilConjectures.SemilinearSections.coefficientMap (Scheme.ProEt.topology X)
+      (coefficients l E X) (transitions l E X) h)
+    (constantSections_comp_coefficientMap l E X h)
+    ((transition.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
+      (coefficients l E X) (transitions l E X) h).app M)
+  naturality _ _ g := finiteUnrealizationHom_naturality X
+    (Etale.FiniteProperQuotient.quotient l E h)
+    (WeilConjectures.SemilinearSections.coefficientMap (Scheme.ProEt.topology X)
+      (coefficients l E X) (transitions l E X) h)
+    (constantSections_comp_coefficientMap l E X h) _ _
+    ((evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
+      (coefficients l E X) (transitions l E X) m).map g)
+    ((evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
+      (coefficients l E X) (transitions l E X) n).map g)
+    ((transition.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
+      (coefficients l E X) (transitions l E X) h).naturality g)
 
 /-- The fixed coefficient transition is the original horizontal additive map.
 Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation).
@@ -327,7 +558,13 @@ theorem fixedTransition_existsUnique (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) 
             (Scheme.ProEt.topology X) (coefficients l E X m))).map
               ((transition.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
                 (coefficients l E X) (transitions l E X) h).app M)) := by
-  sorry
+  refine ⟨fixedTransitionMap l E X h, fun M ↦ finiteUnrealizationHom_heq X _ _ _ _,
+    fun δ' hδ' ↦ ?_⟩
+  ext M : 2
+  apply (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ (ModuleCat.{u + 1} (Etale.FiniteProperQuotient.Ring l E m))
+      AddCommGrpCat.{u + 1})).map_injective
+  exact eq_of_heq ((hδ' M).trans (finiteUnrealizationHom_heq X _ _ _ _).symm)
 
 /-- The uniquely normalized fixed-coefficient horizontal map.
 Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
