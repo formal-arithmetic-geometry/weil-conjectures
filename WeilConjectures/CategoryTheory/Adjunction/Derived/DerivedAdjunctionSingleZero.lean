@@ -78,7 +78,7 @@ private theorem unit_single (M : C) :
         DerivedCategory.Plus.ι.preimageIso
           ((DerivedCategory.Plus.singleFunctorιIso C 0).app M ≪≫
             (DerivedCategory.singleFunctorIsoCompQ C 0).app M)
-      s.hom ≫ L.mapDerivedCategoryPlus.map
+      L.mapDerivedCategoryPlus.map s.hom ≫ L.mapDerivedCategoryPlus.map
           ((DerivedCategory.Plus.quotientCompQhIso C).inv.app S) ≫
         L.mapDerivedCategoryPlusFactorsh.hom.app
           ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
