@@ -170,25 +170,23 @@
 - Final documentation commit leaves Lean source identical to the green revision.
 
 
-# BZ616 in progress
+# BZ616 complete
 
-- Branch: `u9/BZ616`; starting commit: `b7a97a5ed`.
-- Assigned module `WeilConjectures.CategoryTheory.SmoothBaseChange.TowerDerivedEvaluationNormalization`
-  is GREEN at `914b9a49bd`: 2892 jobs completed successfully, target rebuilt in 3.0s.
-  Full log: `/home/ubuntu/u9/bz/BUILD-BZ616-unit-full.log`; tree `poolb:43.166.74.12`.
+- Branch: `u9/BZ616`; baseline: `b7a97a5ed`.
+- Assigned leaf `TowerDerivedEvaluationNormalization` and five downstream modules
+  across two layers pass `ucheck-bump`; all three build batches completed successfully.
+- Direct importers: `TowerRightDerivedEvaluation`, `UnboundedExactAdjunctionSquare`,
+  and `RingedConstantTowerPushforwardNormalization` (rc=0, failed=0, 2913 jobs).
+- Second layer: `ExactTowerAugmentedCounitEvaluation` and `RightDerivedMateIndependence`
+  (rc=0, failed=0, 2958 jobs; validated source commit `989023db75`).
+- Ported compositor directions and cancellation proofs; added Localization public/import-all
+  imports in two private-proof consumers. Only three Lean files differ from baseline.
 - The user instructed continuation after the exact one-token private-helper statement proposal.
-  Applied `.hom` -> `.inv` in `derivedComposition_fac`, preserving the original map under
-  Mathlib's reversed comparison. All other statement types and all docstrings are unchanged.
-- First downstream batch is queued via `ucheck-bump`: `TowerRightDerivedEvaluation`,
-  `UnboundedExactAdjunctionSquare`, and `RingedConstantTowerPushforwardNormalization`.
-  Full module names and inventories are in `/home/ubuntu/u9/bz/FIXES-BZ616.md`.
-- Known compositor direction/cancellation fixes and Localization public/import-all imports
-  are applied to the latter two importers. Their declaration headers and docstrings are
-  unchanged. These downstream changes await compilation; source commit `38a9cb455`.
-- Active remote scheduler PID at last check: `3371436` on Weil; it reads the pushed branch
-  after acquiring a tree. Local wrapper log: `/home/ubuntu/u9/bz/BUILD-BZ616-downstream1.log`.
-- After the first batch, optionally check the three smallest second-layer importers in
-  `BZ616-downstream2-inventory.json`. Skip unowned dependency failures as the brief requires.
-- Fix patterns, exact archived diagnostics, whole-tree occurrence counts, and contract audits
-  are recorded under `/home/ubuntu/u9/bz/`. No DONE claim until downstream validation finishes.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+  Its `.hom` -> `.inv` correction is applied. All other declaration headers and all
+  existing docstrings are unchanged; audit covers 59 headers across the six green modules.
+- Full module names, exact errors, fix patterns, occurrence counts, and all build logs:
+  `/home/ubuntu/u9/bz/FIXES-BZ616.md`. Audit: `/home/ubuntu/u9/bz/BZ616-contract-audit.txt`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, heartbeat increases,
+  profiler probes, or unowned dependency edits. `git diff --check` passes.
+- Completion marker: `/home/ubuntu/u9/state/BZ616.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green builds.
