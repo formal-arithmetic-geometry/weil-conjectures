@@ -909,7 +909,9 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (HomologicalComplex.quasiIso_map_iff_of_preservesHomology i (equivalence Λ T).functor)
       (hK T I)
   · intro P
-    rw [counit_quotient_transport]
+    conv_rhs =>
+      lhs
+      rw [counit_quotient_transport]
     exact pullSquareFactors (CondensedRing.upperStar Λ f) (equivalence Λ X).functor
       (equivalence Λ Y).functor (pullback Λ f)
       (CondensedRing.upperStar Λ f).leftDerivedFunctor
@@ -918,7 +920,13 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (CondensedRing.upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory_hom_fac
       (pullComparison Λ f) P
   · intro P
-    rw [unit_quotient_transport, unit_quotient_transport]
+    conv_lhs =>
+      lhs
+      rw [unit_quotient_transport]
+    conv_rhs =>
+      rhs
+      rhs
+      rw [unit_quotient_transport]
     exact rightSquareFactors (CondensedRing.lowerStar Λ f) (equivalence Λ Y).functor
       (equivalence Λ X).functor (pushforward Λ f) (pushComparison Λ f) P
   · intro M N q

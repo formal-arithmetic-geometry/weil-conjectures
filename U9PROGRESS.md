@@ -218,25 +218,23 @@
 - This final documentation update leaves Lean sources identical to the successful unit build.
 
 
-# BZ713 complete
+# BZ721 in progress
 
-- Branch: `u9/BZ713`; starting commit: `a5261dcee`.
-- Assigned leaf `WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition`
-  passed `ucheck-bump`: rc=0, failed=0, 3970 jobs at `0be3f32f55`.
-- User continuation authorized the exact identity cast in `Coordinates.represents`.
-  Added Localization imports and `cast_eq` in the final proof simplification.
-  All other statement text, docstrings and heartbeat settings are unchanged.
-- Two downstream layers completed: seven requested importer targets green, plus
-  `StalkComparisonSourceTransport` and `IsoPullbackStalkCohomology` rebuilt successfully.
-- Final second-layer build: rc=0, failed=0, 3982 jobs at `2a79c76f24`,
-  on `poolb:43.166.85.105`; assigned leaf rebuilt successfully in 40 seconds.
-- Skipped `CanonicalPullbackTensorComparison` because its unowned BZ671 dependency
-  `DerivedPullbackKFlatTensorModel` fails at line 317. Neither module was changed.
-- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ713-green-full.log`,
-  `BUILD-BZ713-downstream1-full.log`, and `BUILD-BZ713-downstream2-full.log`.
-- Fix patterns, exact errors and machine rules: `/home/ubuntu/u9/bz/FIXES-BZ713.md`.
-  Rule replay is exact and idempotent; audit: `BZ713-rule-audit.txt`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ713-contract-audit.txt`.
-  No local Lean/Lake, sorries, trust bypasses, profiler probes, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ713.DONE`.
-- This final documentation update leaves Lean source identical to the green build.
+- Branch: `u9/BZ721`; starting source commit: `a5261dcee`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization`
+  passed `ucheck-bump`: rc=0, failed=0, 4689 jobs; target rebuilt in 42 seconds.
+- Validated source: `ef6cc704368fff17895dd6f3be02732a5d3b0ba0`.
+- Tree: `poolb:43.157.187.72`; exact Lean v4.35.0-rc3 and Mathlib b63f6e8a pins verified.
+- User instructed continuation after the exact public endpoint-transport proposal.
+  That patch is applied. Two generic private cancellation lemmas and targeted `conv`
+  rewrites prove the transported equalities without raising heartbeat limits.
+- Existing private declarations, binders, assumptions, other conjuncts, and docstrings
+  are unchanged; no declarations qualified for deletion under the prune lists.
+- Full unit log: `/home/ubuntu/u9/bz/BUILD-BZ721-unit-full.log`.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ721.md`; audit: `/home/ubuntu/u9/bz/BZ721-contract-audit.txt`.
+- Four direct importers submitted at `6a187f55d4ff9f16bb2421bb8a75ad3aa0ac1c37`:
+  `SectionResolvingOplaxConstraintData`, `SectionResolutionConjugationIdentities`,
+  `SectionPullComputationOfRealization`, and `SectionDerivedRepresentativeSquare`.
+- Next: inspect downstream results, fix owned importer failures or skip unowned blockers,
+  then commit final documentation and write `/home/ubuntu/u9/state/BZ721.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat increases, or profiler probes.
