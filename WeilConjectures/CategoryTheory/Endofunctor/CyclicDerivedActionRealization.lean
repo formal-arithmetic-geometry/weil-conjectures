@@ -242,14 +242,14 @@ private theorem action_comparison
   have hid : (Functor.mapHomologicalComplexCompIso (Iso.refl (forget F ⋙ F))
       (.up ℤ)).hom.app B = 𝟙 _ := by rfl
   erw [hid, Functor.map_id, Category.comp_id] at hc
-  change ((Functor.mapDerivedCategoryCompIso (forget F) F).hom.app
+  change ((Functor.mapDerivedCategoryCompIso (forget F) F).inv.app
       (DerivedCategory.Q.obj B)) ≫
     F.mapDerivedCategory.map ((forget F).mapDerivedCategoryFactors.hom.app B) ≫
       F.mapDerivedCategoryFactors.hom.app Y = _ at hc
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [h, he, ← hc]
   simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
 
 /-- Realize a bounded derived object with its prescribed invertible twisted action in
 the ordinary derived category of fixed pairs, preserving its cohomology intervals
