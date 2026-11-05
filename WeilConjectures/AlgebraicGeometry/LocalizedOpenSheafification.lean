@@ -61,6 +61,7 @@ private noncomputable def presheafTransportAdjunction
     (botModuleLiftFullyFaithful R) (botModuleLiftFullyFaithful S)
     (Iso.refl _) (Iso.refl _)
 
+set_option diagnostics true in
 /-- Sheafification commutes with transport along the localized open-site equivalence.
 Source: Stacks Project, Tag 01CD, sheafification step in the localized-site construction.
 (blueprint: lem-sc-localized-open-sheafification).
@@ -88,12 +89,14 @@ theorem exists_localizedOpen_sheafification_iso (X : Scheme.{u}) (U : X.Opens) :
             (R₀ := (moduleRings U.toScheme.toRingedSpace).obj)
             (R := moduleRings U.toScheme.toRingedSpace)
             (𝟙 (moduleRings U.toScheme.toRingedSpace).obj)) := by
+  trace "BZ346: theorem body"
   let R := moduleRings X.toRingedSpace
   let e := (TopologicalSpace.Opens.overEquivalence U).symm
   let φ := (U.overPullbackSheafEquivOver.app R).inv
   let ψ := (U.sheafRestrictSheafEquivOver.app R).inv
   have h₁ : Functor.whiskerRight (NatTrans.op e.counit) (R.over U).obj =
       ψ.hom ≫ e.inverse.op.whiskerLeft φ.hom := rfl
+  trace "BZ346: h1 complete"
   have h₂ : φ.hom ≫ e.functor.op.whiskerLeft ψ.hom ≫
       Functor.whiskerRight (NatTrans.op e.unit) (U.sheafRestrict.obj R).obj =
         𝟙 (U.sheafRestrict.obj R).obj := by
@@ -102,7 +105,9 @@ theorem exists_localizedOpen_sheafification_iso (X : Scheme.{u}) (U : X.Opens) :
       TopologicalSpace.Opens.sheafRestrictSheafEquivOver,
       TopologicalSpace.Opens.overEquivalence, eqToHom_map, IsOpenMap.functor]
     rfl
+  trace "BZ346: h2 complete"
   let adj := presheafTransportAdjunction e.toAdjunction φ.hom ψ.hom h₁ h₂
+  trace "BZ346: transport adjunction complete"
   exact ⟨Adjunction.leftAdjointUniq
     ((PresheafOfModules.sheafificationAdjunction.{u}
       (𝟙 (R.over U).obj)).comp (Scheme.Modules.overEquiv U).toAdjunction)
