@@ -65,8 +65,9 @@ def projectionCompactificationForgetIso :
         CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb := by
   let e₁ := Functor.isoWhiskerLeft (extensionByZero (c).i)
     (projectionProperForgetIso k₀ l (c).g)
+  let G' := CondensedRing.boundedConstructibleLowerStar l (cb).overG
   let e₂ := Functor.isoWhiskerRight (projectionOpenForgetIso k₀ l (c).i)
-    (CondensedRing.boundedConstructibleLowerStar l (cb).overG)
+    G'
   let e := e₁ ≪≫ e₂
   exact e
 
@@ -80,8 +81,9 @@ def projectionCompactPullForgetIso :
     (compactProjectionForget k₀ l X)
   let e₂ := Functor.isoWhiskerLeft (upperStar (c).g)
     (compactProjectionForgetUpperStarIso k₀ l (c).i)
+  let P' := CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI
   let e₃ := Functor.isoWhiskerRight (compactProjectionForgetUpperStarIso k₀ l (c).g)
-    (CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI)
+    P'
   let e₄ := Functor.isoWhiskerLeft (compactProjectionForget k₀ l Y)
     (projectionGeometricPullComp k₀ l f)
   let e := e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄
@@ -119,6 +121,12 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
         (projectionCompactificationForgetIso k₀ l f).hom.app M ▷
           (compactProjectionForget k₀ l Y).obj N ≫
         ObjectProperty.homMk
+          (X := (CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb).obj
+            ((compactProjectionForget k₀ l X).obj M) ⊗ (compactProjectionForget k₀ l Y).obj N)
+          (Y := (CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb).obj
+            ((compactProjectionForget k₀ l X).obj M ⊗
+              (CondensedRing.boundedConstructibleUpperStar Λ l fb).obj
+                ((compactProjectionForget k₀ l Y).obj N)))
           (CondensedRing.exceptionalProjectionMorphismOfCompactification Λ cb
             ((compactProjectionForget k₀ l X).obj M).obj
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
@@ -159,15 +167,16 @@ theorem isIso_mateEquiv_projectionCompactificationForgetIso
     NatIso.ofComponents (fun M ↦ Iso.refl _) (fun φ ↦ by
       simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
       rfl)
+  let e' := Iso.refl (CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb)
   have h := isIso_mateEquiv_vComp_whiskerLeft_whiskerRight ai bi ag bg adj
     (CondensedRing.boundedConstructibleUpperShriekOfCompactificationAdjunction l cb)
-    e (Iso.refl _) (projectionOpenForgetIso k₀ l (c).i).inv (projectionProperForgetIso k₀ l (c).g).inv
+    e e' (projectionOpenForgetIso k₀ l (c).i).inv (projectionProperForgetIso k₀ l (c).g).inv
   -- identify the stacked square with the compactification comparison, by components
-  rw [TwoSquare.vComp_whiskerLeft_whiskerRight_eq e (Iso.refl _)
+  rw [TwoSquare.vComp_whiskerLeft_whiskerRight_eq e e'
     (TwoSquare.mk _ _ _ _ (projectionOpenForgetIso k₀ l (c).i).inv)
     (TwoSquare.mk _ _ _ _ (projectionProperForgetIso k₀ l (c).g).inv)
     (TwoSquare.mk _ _ _ _ (projectionCompactificationForgetIso k₀ l f).inv) (fun M ↦ by
-      simp only [e, NatIso.ofComponents_inv_app, Iso.refl_inv, Iso.refl_hom, NatTrans.id_app,
+      simp only [e, e', NatIso.ofComponents_inv_app, Iso.refl_inv, Iso.refl_hom, NatTrans.id_app,
         CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
         projectionCompactificationForgetIso,
         Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
