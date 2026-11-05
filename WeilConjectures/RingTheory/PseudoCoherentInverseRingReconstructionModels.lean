@@ -5,9 +5,11 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRings
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.RingTheory.RingPseudoCoherent
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import Mathlib.RingTheory.Nilpotent.Basic
@@ -596,7 +598,7 @@ private theorem bijective_of_nilpotent_scalarExtension
     (f : P ⟶ Q) [IsIso ((ModuleCat.extendScalars φ).map f)] : Function.Bijective f := by
   let F := ModuleCat.extendScalars.{u, u, max u v} φ
   have hfs : Function.Surjective f := surjective_of_nilpotent_scalarExtension φ hs hn P Q f
-    ((ModuleCat.epi_iff_surjective _).1 inferInstance)
+    ((ModuleCat.epi_iff_surjective (F.map f)).1 inferInstance)
   obtain ⟨g, hg⟩ := Module.projective_lifting_property f.hom LinearMap.id hfs
   let g' : Q ⟶ P := ModuleCat.ofHom g
   have hgf : g' ≫ f = 𝟙 Q := by ext x; exact DFunLike.congr_fun hg x
