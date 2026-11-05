@@ -67,7 +67,8 @@ def openPinnedSingleTargetRestrictionIso
     Functor.isoWhiskerRight (openPinnedTensorRestrictionIso k U U' j hj) _ ≪≫
     Functor.associator _ _ _
 
-private def mapHomotopyCategorySquareIso
+/-- Map a square of additive functors to homotopy categories. -/
+def mapHomotopyCategorySquareIso
     {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
     [Preadditive C] [Preadditive D] [Preadditive B] [Preadditive E]
     (F : C ⥤ D) (G : D ⥤ E) (R : C ⥤ B) (J : B ⥤ E)

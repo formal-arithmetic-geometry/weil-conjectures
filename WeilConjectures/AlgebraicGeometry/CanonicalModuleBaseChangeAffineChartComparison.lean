@@ -67,9 +67,9 @@ that it is invertible. Both the restricted scheme and its module are explicit.
 Source: Stacks Project, Tag 08IB, first paragraph of the proof; Tag 08HY and Tag 08FE.
 (blueprint: lem-pc-canonical-module-base-change-affine-chart-comparison).
 
-Proof: first apply exists_canonicalModuleBaseChange_open_comparison to V and W.
-This gives the comparison cV on the chosen pullback of f restricted to V and
-g.resLE V W, and endpoint isomorphisms aV and bV with a commuting square.
+Proof: use the pinned degree-zero open square on V and W, then conjugate its
+target isomorphisms to the chosen comparisons c and cV using their target
+automorphisms. This gives endpoint isomorphisms aV and bV with a commuting square.
 Apply exists_canonicalModuleBaseChange_iso_comparison to that chosen cartesian
 square and the spectrum charts V.isoSpec and W.isoSpec. Its module is exactly
 H = G restricted to U. It gives c0, endpoint isomorphisms a0 and b0, and a second
