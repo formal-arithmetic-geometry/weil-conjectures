@@ -18,6 +18,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 import WeilConjectures.WeilSheaf.Native.Projection.StrictProof
 import WeilConjectures.Tactic.TransportExact
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Localization of the native pullback tensor square -/
 
@@ -90,7 +91,8 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         have hn := projection_nativePullTensor_normalization k₀ l g
         dsimp only [ProjectionRestrictionTensorNormalization] at hn
         dsimp only [L, nativeOpenPull]
-        with_reducible_and_instances transport_exact hn)
+        with_reducible exact_mod_proofs hn
+        run_tac throwError "K5 diagnostic: restriction normalization matches at reducible transparency")
       (by
         have hF := projection_native_realization_model_normalization k₀ l Y
         dsimp only [F, derivedCondensedRealization]
