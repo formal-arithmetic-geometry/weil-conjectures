@@ -147,7 +147,7 @@ lemma coeffTateReadingIso_eq {Z : Scheme.{u}} (h : Z ⟶ Spec (.of k)) :
 
 /-- The étale Tate pullback `w`, written with the synonym (no restatement needed: the
 coefficient type is a parameter). -/
-noncomputable abbrev coeffTatePull :
+noncomputable def coeffTatePull :
     (ProEtale.upperStar (ModuleCat.{u + 1} (coeffType.{u} ℓ E n)) g).obj
         (ν^*(Y)[ModuleCat.{u + 1} (coeffType.{u} ℓ E n)].obj
           (Etale.tateSheaf (coeffType.{u} ℓ E n) Y)) ⟶
