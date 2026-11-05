@@ -65,11 +65,11 @@ abbrev Modules := ringedSiteModules.{max u v w, max u v w, v, u}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
 local instance (B : Modules.{u, v, w} R) {U V : Cᵒᵖ} (f : U ⟶ V) :
-    SMul (R.obj.obj V)
+    Module (R.obj.obj V)
       ((ModuleCat.restrictScalars
         (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
           (B.val.obj V)) :=
-  inferInstanceAs (SMul (R.obj.obj V) (B.val.obj V))
+  inferInstanceAs (Module (R.obj.obj V) (B.val.obj V))
 
 local instance (B : Modules.{u, v, w} R) (U : Cᵒᵖ) (V : (Over U.unop)ᵒᵖ) :
     SMul (((PresheafOfModules.restrictOver R.obj U.unop).obj
