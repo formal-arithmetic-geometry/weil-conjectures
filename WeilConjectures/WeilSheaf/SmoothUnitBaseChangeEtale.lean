@@ -33,7 +33,7 @@ invertible.
   adjunctions `Rh_! ⊣ h^*`, `Rh'_! ⊣ h'^*` compatible with `bc`.
 * `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_counit`: the same at the unit, for
   `smoothUnitBaseChange` with `e` invertible.
-* `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_isOpenImmersion`: the case of an open
+* `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_isOpenImmersion_of_counit`: the case of an open
   immersion, where `Rj_! ≅ j_!` and `j_! ⊣ j^*` are in the library. The compatibility asked of
   `bc` is that of the extension by zero.
 * `ProEtale.CondensedRing.isIso_smoothUnitBaseChange_of_etale`: the case of an étale morphism,
@@ -253,7 +253,7 @@ def boundedConstructibleLowerShriekUpperStarAdjunctionOfIsOpenImmersion (j : U �
 /-- **The exceptional base change at the unit of an open immersion**: `smoothUnitBaseChange` is
 invertible for an invertible `e`, provided `bc` carries, through `Rj_! ≅ j_!` and
 `πU^* j^* ≅ j'^* πV^*`, the counit of `j_! ⊣ j^*` to that of `j'_! ⊣ j'^*`. -/
-theorem isIso_smoothUnitBaseChange_of_isOpenImmersion
+theorem isIso_smoothUnitBaseChange_of_isOpenImmersion_of_counit
     {j : U ⟶ V} {j' : U' ⟶ V'} [IsOpenImmersion j.left] [IsOpenImmersion j'.left]
     (bc : boundedConstructibleLowerShriek l j ⋙ boundedConstructibleUpperStarOfMap l πV ≅
       boundedConstructibleUpperStarOfMap l πU ⋙ boundedConstructibleLowerShriek l j')
