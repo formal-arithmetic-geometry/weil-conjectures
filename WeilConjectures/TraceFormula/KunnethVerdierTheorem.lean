@@ -176,14 +176,4 @@ instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingOb
   rw [isIso_kunnethVerdierMap_lowerShriek_iff_of_isClosedImmersion ℓ g]
   exact isIso_kunnethVerdierMap_lowerShriek_of_isDualizable ℓ j M (IsDualizable.shift ℓ hL n)
 
-/-- **The exceptional Künneth map is an isomorphism** (blueprint
-`proposition-exceptional-external-kunneth`, for `f₁ = 𝟙_X`, `f₂ = a_Y : Y ⟶ s`, `L₁ = M` and
-`L₂ = ℚ̄_ℓ`): for every separated `k`-scheme of finite type `Y` and bounded constructible `M` on
-`X`, the morphism `α : M ⊠ ω_Y ⟶ Rp_X^! M` adjoint to the composite of the Künneth formula for
-`Rp_X!` and the counit of `Ra_{Y!} ⊣ Ra_Y^!` is invertible. It is `κ_{M,ℚ̄_ℓ}` up to
-isomorphisms (`isIso_kunnethVerdierMap_unit_iff`). -/
-instance isIso_exceptionalKunnethMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (exceptionalKunnethMap ℓ (Y := Y) M) :=
-  (isIso_kunnethVerdierMap_unit_iff ℓ M).1 inferInstance
-
 end AlgebraicGeometry.ProEtale.CondensedRing

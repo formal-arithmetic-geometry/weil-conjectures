@@ -20833,6 +20833,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DualReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHomMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FailureNormalBase
@@ -24973,6 +24974,7 @@ public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.DualizingSmooth
 public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
+public import WeilConjectures.TraceFormula.ExceptionalKunnethIsIso
 public import WeilConjectures.TraceFormula.ExceptionalKunnethRestriction
 public import WeilConjectures.TraceFormula.ExternalProductCoefficients
 public import WeilConjectures.TraceFormula.ExternalProductExtendScalars

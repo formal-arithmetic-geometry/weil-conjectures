@@ -50,7 +50,7 @@ section General
 
 variable {R : Type u} [CommRing R]
 
-lemma free_finite_of_isZero_or_iso {M : ModuleCat.{u} R}
+private lemma free_finite_of_isZero_or_iso {M : ModuleCat.{u} R}
     (h : IsZero M ∨ Nonempty (M ≅ ModuleCat.of R R)) :
     Module.Free R M ∧ Module.Finite R M := by
   obtain h | h := h
@@ -59,13 +59,7 @@ lemma free_finite_of_isZero_or_iso {M : ModuleCat.{u} R}
   · obtain ⟨e⟩ := h
     exact ⟨Module.Free.of_equiv e.symm.toLinearEquiv, Module.Finite.equiv e.symm.toLinearEquiv⟩
 
-lemma linearMapTrace_smul_id [Nontrivial R] {M : ModuleCat.{u} R} [Module.Free R M]
-    [Module.Finite R M] (e : M ≅ ModuleCat.of R R) (c : R) :
-    LinearMap.trace R M (ModuleCat.Hom.hom (c • 𝟙 M)) = c := by
-  rw [ModuleCat.hom_smul, ModuleCat.hom_id, map_smul, LinearMap.trace_id,
-    e.toLinearEquiv.finrank_eq, Module.finrank_self, Nat.cast_one, smul_eq_mul, mul_one]
-
-lemma _root_.HomologicalComplex.homologyMap_eq_zero_of_iCycles_comp {C ι : Type*} [Category C]
+private lemma homologyMap_eq_zero_of_iCycles_comp {C ι : Type*} [Category C]
     [HasZeroMorphisms C] {c : ComplexShape ι} {K L : HomologicalComplex C c} (φ : K ⟶ L) (i : ι)
     [K.HasHomology i] [L.HasHomology i] (h : K.iCycles i ≫ φ.f i = 0) :
     HomologicalComplex.homologyMap φ i = 0 := by
@@ -73,6 +67,12 @@ lemma _root_.HomologicalComplex.homologyMap_eq_zero_of_iCycles_comp {C ι : Type
     rw [← cancel_mono (L.iCycles i), HomologicalComplex.cyclesMap_i, h, zero_comp]
   rw [← cancel_epi (K.homologyπ i), HomologicalComplex.homologyπ_naturality, this, zero_comp,
     comp_zero]
+
+private lemma linearMapTrace_smul_id [Nontrivial R] {M : ModuleCat.{u} R} [Module.Free R M]
+    [Module.Finite R M] (e : M ≅ ModuleCat.of R R) (c : R) :
+    LinearMap.trace R M (ModuleCat.Hom.hom (c • 𝟙 M)) = c := by
+  rw [ModuleCat.hom_smul, ModuleCat.hom_id, map_smul, LinearMap.trace_id,
+    e.toLinearEquiv.finrank_eq, Module.finrank_self, Nat.cast_one, smul_eq_mul, mul_one]
 
 variable [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
@@ -111,6 +111,8 @@ end General
 section Counterexample
 
 variable (ℓ : ℕ)
+
+namespace TraceCounterexample
 
 lemma natCast_mul_self_eq_zero : (ℓ : ZMod (ℓ ^ 2)) * ℓ = 0 := by
   rw [← Nat.cast_mul, ← sq, ZMod.natCast_self]
@@ -190,7 +192,7 @@ lemma iCycles_comp_endComplexMulNat_sub_id_f (i : ℤ) :
 lemma homologyMap_endComplexMulNat (i : ℤ) :
     HomologicalComplex.homologyMap (endComplexMulNat ℓ) i = 𝟙 _ := by
   rw [← sub_add_cancel (endComplexMulNat ℓ) (𝟙 _), HomologicalComplex.homologyMap_add,
-    HomologicalComplex.homologyMap_eq_zero_of_iCycles_comp _ _
+    homologyMap_eq_zero_of_iCycles_comp _ _
       (iCycles_comp_endComplexMulNat_sub_id_f ℓ i), HomologicalComplex.homologyMap_id, zero_add]
 
 instance : (complexMulNat ℓ).IsStrictlyGE 0 :=
@@ -362,6 +364,10 @@ lemma nonempty_hasRightDual_Q_obj_singleUnit (n : ℤ) :
     Nonempty (HasRightDual (Q.obj (singleUnit ℓ n))) :=
   nonempty_hasRightDual_Q_obj _ n n (fun i ↦ (free_finite_singleUnit_X ℓ n i).1)
     (fun i ↦ (free_finite_singleUnit_X ℓ n i).2)
+
+end TraceCounterexample
+
+open TraceCounterexample
 
 variable [Fact ℓ.Prime]
 
