@@ -1,3 +1,14 @@
+# BZ152 in progress
+
+- Branch: `u9/BZ152`.
+- The user instructed continuation after the exact statement-compatibility proposal;
+  the proposed compositor orientation and explicit homotopy-localization edits are applied.
+- DVR and identity homology comparison modules already passed `ucheck-bump`.
+- Next: build all four assigned modules together, repair any remaining proof errors,
+  and write `/home/ubuntu/u9/state/BZ152.DONE` only after success.
+- Patterns, proposal, and build logs: `/home/ubuntu/u9/bz/FIXES-BZ152.md`.
+- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
