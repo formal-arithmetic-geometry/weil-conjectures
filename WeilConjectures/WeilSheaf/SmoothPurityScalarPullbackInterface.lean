@@ -8,7 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFactor
 public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
-import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.Tactic.ExactModProofsFallback
 
 /-! # A module interface for the scalar Tate comparison
 
@@ -145,7 +145,7 @@ lemma purityScalarRootTrivialization_weil :
     purityScalarFrobeniusPull purityScalarSourceUnitDatum
   dsimp only [purityScalarSourceObject, purityScalarSourceUnit,
     tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+  exact_mod_proofs_fallback h
 
 /-- The canonical geometric trivialization in the scalar interface. -/
 noncomputable def purityScalarCanonicalTrivialization :
