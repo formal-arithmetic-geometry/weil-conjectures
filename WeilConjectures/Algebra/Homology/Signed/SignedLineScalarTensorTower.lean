@@ -676,11 +676,17 @@ noncomputable def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}}
   | .negSucc n => homObj (scalarTensorPower R L (n + 1))
       (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
 
-noncomputable local instance {A B : Type*} [Ring A] [Ring B] (f : A →+* B)
-    (M : ModuleCat.{u} B) : Module B ((ModuleCat.restrictScalars f).obj M) :=
-  inferInstanceAs (Module B M)
+noncomputable local instance
+    {R : Sheaf J CommRingCat.{max uC vC u}}
+    (M : ringedSiteModules.{max uC vC u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    {U V : Cᵒᵖ} (f : U ⟶ V) :
+    SMul (R.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+          (M.val.obj V)) :=
+  (M.val.obj V).isModule.toSMul
 
-set_option trace.Meta.synthInstance true in
 /-- Local signed basis normalization: a genuine basis after every restriction, positive
 powers by tensors, and negative powers dual to the positive ones on every slice object.
 Source: Stacks 03EK and 04TT, local rank-one coordinates.
