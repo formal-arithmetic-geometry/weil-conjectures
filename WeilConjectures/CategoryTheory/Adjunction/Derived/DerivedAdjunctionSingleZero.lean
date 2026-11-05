@@ -88,6 +88,9 @@ private theorem unit_single (M : C) :
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
       Iso.symm_hom, NatTrans.comp_app, Functor.mapIso_hom,
       Category.id_comp]
+    apply (cancel_mono (DerivedCategory.Q.map
+      ((HomologicalComplex.singleMapHomologicalComplex L (.up ℤ) 0).hom.app M))).1
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
     rw [← Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app]
     simp [DerivedCategory.Plus.quotientCompQhIso,
       DerivedCategory.Plus.QhCompιIsoιCompQh, Functor.mapDerivedCategoryPlusCompatibility,
