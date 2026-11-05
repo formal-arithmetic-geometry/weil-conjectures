@@ -57,7 +57,8 @@ set_option synthInstance.maxHeartbeats 400000 in
 -- the monoidal structure of the derived category of condensed modules is found slowly
 /-- The derived condensed realization carries the inverse of the native pullback–tensor
 comparison to the lax monoidal structure of the derived pullback `Lḡ^*` of condensed module
-objects, up to the tensor comparisons `AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationTensor`
+objects, up to the tensor comparisons
+`AlgebraicGeometry.ProEtaleWeilSheaf.condensedRealizationTensor`
 and the pullback comparison
 `AlgebraicGeometry.ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso`: a reformulation of
 `AlgebraicGeometry.ProEtaleWeilSheaf.comparisonCompatible_derivedCondensedRealization`. -/
@@ -174,7 +175,8 @@ lemma isIso_of_isIso_geometricFiberBoundedConstructibleFunctor_map {A B : WeilCo
       ((geometricFiberBoundedConstructibleFunctor k₀ l X).map φ)))
   have h' : IsIso ((ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X).map φ.hom) :=
     (NatIso.isIso_map_iff (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X) φ).1 h
-  have : IsIso φ.hom := isIso_of_reflects_iso φ.hom (ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X)
+  have : IsIso φ.hom :=
+    isIso_of_reflects_iso φ.hom (ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X)
   exact (ObjectProperty.isIso_hom_iff φ).1 this
 
 end Reflect
@@ -206,7 +208,8 @@ noncomputable def upperStarForgetIso :
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _) _ ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).symm ≪≫
+      Functor.isoWhiskerLeft _
+        (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).symm ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).symm _ ≪≫
       Functor.associator _ _ _ ≪≫
@@ -216,6 +219,10 @@ noncomputable def upperStarForgetIso :
       (Functor.associator _ _ _).symm)
 
 set_option maxHeartbeats 2000000 in
+-- comparing the restricted and the ambient derived pullbacks is slow
+omit [IsOpenImmersion j] [QuasiCompact j] [IsSeparated j] [LocallyOfFiniteType j] in
+/-- The restriction comparison `AlgebraicGeometry.WeilComplex.upperStarForgetIso` on the ambient
+derived categories. -/
 lemma upperStarForgetIso_hom_app_hom (N : WeilComplex k₀ l X) :
     ((upperStarForgetIso k₀ l j).hom.app N).hom =
       (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l U).hom.app ((upperStar j).obj N) ≫
@@ -230,7 +237,8 @@ lemma upperStarForgetIso_hom_app_hom (N : WeilComplex k₀ l X) :
   erw [Category.id_comp, Category.comp_id]
 
 /-- Forgetting the Weil structure on morphisms, on the ambient derived categories: the derived
-condensed realization, up to `AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorCompιIso`. -/
+condensed realization, up to
+`AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorCompιIso`. -/
 lemma geometricFiberBoundedConstructibleFunctor_map_hom {A B : WeilComplex k₀ l X} (φ : A ⟶ B) :
     ((geometricFiberBoundedConstructibleFunctor k₀ l X).map φ).hom =
       (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).hom.app A ≫
@@ -286,16 +294,18 @@ noncomputable def upperStarTensorComparison :
       nativeConstructibleTensor k₀ l X ⋙ upperStar j where
   app A := ObjectProperty.homMk
     ((ProEtaleWeilSheaf.nativePullTensor k₀ l j).inv.app (A.1.obj, A.2.obj))
-  naturality A B φ := ObjectProperty.hom_ext _
+  naturality _ _ φ := ObjectProperty.hom_ext _
     ((ProEtaleWeilSheaf.nativePullTensor k₀ l j).inv.naturality (Prod.mkHom φ.1.hom φ.2.hom))
 
 set_option maxHeartbeats 8000000 in
 -- the derived categories of condensed module objects are slow to elaborate
 set_option synthInstance.maxHeartbeats 400000 in
 -- the monoidal structure of the derived category of condensed modules is found slowly
+omit [IsOpenImmersion j] [QuasiCompact j] [IsSeparated j] [LocallyOfFiniteType j] in
 /-- Forgetting the Weil structure carries the inverse native pullback–tensor comparison to the
 lax monoidal structure of the restriction `ī^*` of bounded constructible complexes, up to the
-tensor comparisons `AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorTensorIso`
+tensor comparisons
+`AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorTensorIso`
 and `AlgebraicGeometry.WeilComplex.upperStarForgetIso`. -/
 theorem map_upperStarTensorComparison_app_comp (a b : WeilComplex k₀ l X) :
     (geometricFiberBoundedConstructibleFunctor k₀ l U).map
@@ -311,7 +321,8 @@ theorem map_upperStarTensorComparison_app_comp (a b : WeilComplex k₀ l X) :
   apply ObjectProperty.hom_ext
   simp only [ObjectProperty.FullSubcategory.comp_hom]
   rw [geometricFiberBoundedConstructibleFunctor_map_hom, upperStarForgetIso_hom_app_hom,
-    boundedConstructibleUpperStar_map_hom, geometricFiberBoundedConstructibleFunctorTensorIso_hom_app_hom,
+    boundedConstructibleUpperStar_map_hom,
+    geometricFiberBoundedConstructibleFunctorTensorIso_hom_app_hom,
     geometricFiberBoundedConstructibleFunctorTensorIso_hom_app_hom]
   simp only [ObjectProperty.FullSubcategory.tensorHom_hom, upperStarForgetIso_hom_app_hom,
     μ_boundedConstructibleUpperStar_hom]
@@ -355,7 +366,8 @@ the extension by zero, and so does the condensed model
 noncomputable def extensionByZeroForgetObjIso (M : WeilComplex k₀ l U) :
     (geometricFiberBoundedConstructibleFunctor k₀ l X).obj ((extensionByZero j).obj M) ≅
       (CondensedRing.boundedConstructibleOpenImmersionLowerShriek _ l
-        (geometricFiberHom (k₀ := k₀) j)).obj ((geometricFiberBoundedConstructibleFunctor k₀ l U).obj M) :=
+        (geometricFiberHom (k₀ := k₀) j)).obj
+          ((geometricFiberBoundedConstructibleFunctor k₀ l U).obj M) :=
   ObjectProperty.isoMk _
     ((adicSheafDerivedEquivCondensedMod l _).functor.mapIso
       ((Functor.mapDerivedCategoryCompIsoOfIso (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso
@@ -486,7 +498,8 @@ theorem exists_extensionByZero_forget_iso_projection :
   have : IsIso ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _
       (upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom)).natTrans :=
     isIso_extensionByZeroForgetHom (k₀ := k₀) (l := l) (nativeProjectionCompactification k₀ f).i
-  have hp (M : WeilComplex k₀ l X) (N : WeilComplex k₀ l (nativeProjectionCompactification k₀ f).Z) :
+  have hp (M : WeilComplex k₀ l X)
+      (N : WeilComplex k₀ l (nativeProjectionCompactification k₀ f).Z) :
       IsIso (adj.bifunctorProjectionComparison
         (upperStarTensorComparison k₀ l (nativeProjectionCompactification k₀ f).i) M N) := by
     have := adj.isIso_map_bifunctorProjectionComparison
@@ -507,10 +520,13 @@ theorem exists_extensionByZero_forget_iso_projection :
       (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l
         (nativeProjectionCompactification k₀ f).Z) hμ _ rfl M N⟩
   have h : mateEquiv adj adj' (TwoSquare.mk _ _ _ _
-      (asIso (extensionByZeroForgetHom k₀ l (nativeProjectionCompactification k₀ f).i).natTrans).hom) =
-      TwoSquare.mk _ _ _ _ (upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom :=
+      (asIso (extensionByZeroForgetHom k₀ l
+        (nativeProjectionCompactification k₀ f).i).natTrans).hom) =
+      TwoSquare.mk _ _ _ _
+        (upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom :=
     (mateEquiv adj adj').apply_symm_apply _
   rw [h]
-  exact inferInstanceAs (IsIso ((upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom.app L))
+  exact inferInstanceAs
+    (IsIso ((upperStarForgetIso k₀ l (nativeProjectionCompactification k₀ f).i).hom.app L))
 
 end AlgebraicGeometry.WeilComplex
