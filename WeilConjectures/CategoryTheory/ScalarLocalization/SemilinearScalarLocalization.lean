@@ -187,7 +187,7 @@ theorem extension_spec (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F) :
     intro K L a f
     change extensionHom t b φ h F hF _ _ (a • f) =
       coefficientMap t b φ h a • extensionHom t b φ h F hF _ _ f
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a' f =>
       rw [TensorProduct.smul_tmul', smul_eq_mul, extensionHom_tmul, map_mul,
         extensionHom_tmul, TensorProduct.smul_tmul', smul_eq_mul]
@@ -253,7 +253,7 @@ theorem extension_unique (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F)
     have hi' := hom_smul_heq (hobj K.obj) (hobj L.obj) hi (coefficientMap t b φ h a)
     change HEq _ (coefficientMap t b φ h a • (1 ⊗ₜ[S] F.map f)) at hi'
     simpa only [TensorProduct.smul_tmul', smul_eq_mul, mul_one] using hi'
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul a f => exact hm a f
   | add f g hf hg =>
     rw [J.map_add, (extension t b φ h F hF).map_add]
@@ -275,7 +275,7 @@ theorem extensionNatTrans_naturality (η : F ⟶ G)
       (extensionHom t b φ h F hF _ _ f) =
     composition S D b _ _ _ (extensionHom t b φ h G hG _ _ f)
       (1 ⊗ₜ[S] η.app K.obj)
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul a f => simp [composition_tmul, η.naturality f]
   | add f g hf hg => simp [map_add, hf, hg]
 
@@ -343,7 +343,7 @@ theorem extension_comp (F : C ⥤ D) (J : D ⥤ E) [F.Additive] [J.Additive]
     (semilinear_composition t b φ h c ψ hψ F J hF hJ).1
     (F ⋙ J) (semilinear_composition t b φ h c ψ hψ F J hF hJ).2 K.obj L.obj f =
     extensionHom b c ψ hψ J hJ _ _ (extensionHom t b φ h F hF _ _ f)
-  induction f with
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
     rw [extensionHom_tmul, extensionHom_tmul, extensionHom_tmul, hc]
     rfl
@@ -385,7 +385,7 @@ theorem extension_id_and_linear :
     simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
     change extensionHom t t (RingHom.id R) _ (𝟭 C)
       (isSemilinear_of_linear (𝟭 C)) K.obj L.obj f = f
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a f => rw [extensionHom_tmul, hc]; rfl
     | add f g hf hg => simp only [map_add, hf, hg]
   · intro J _ _
@@ -395,7 +395,7 @@ theorem extension_id_and_linear :
     simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
     change extensionHom t t (RingHom.id R) _ J
       (isSemilinear_of_linear J) K.obj L.obj f = mapHom R C t J _ _ f
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a f => simp [hc, mapHom]
     | add f g hf hg => simp only [map_add, hf, hg]
 
@@ -446,9 +446,9 @@ private noncomputable def semilinearRationalComparison
     change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
     simp
   map_comp {X Y Z} f g := by
-    induction f with
+    induction f using TensorProduct.inductionOn with
     | tmul a f =>
-      induction g with
+      induction g using TensorProduct.inductionOn with
       | tmul b g =>
         change Rationalization.tensorHomEquiv _ _ _ _
           (composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _
