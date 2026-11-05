@@ -233,7 +233,9 @@ theorem exists_leftDerived_adjunction
     have hα : ε.app X = L.map (i.inv.app X) ≫ α.app (q.obj X) ≫
         (DerivedCategory.quotientCompQhIso B).hom.app
           ((E.mapHomologicalComplex (.up ℤ)).obj X) := by
-      simp [ε, β, j, q, Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom]
+      dsimp [ε, β, j, q]
+      simp only [Functor.mapHomotopyCategoryFactors_hom_app, Functor.map_id,
+        Category.id_comp, Category.comp_id]
     have hfac' : R.mapDerivedCategoryFactorsh.inv.app
         ((HomotopyCategory.quotient B (.up ℤ)).obj K) ≫
           R.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso B).hom.app K) =
