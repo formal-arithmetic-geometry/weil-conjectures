@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImage
