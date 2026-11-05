@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import WeilConjectures.AlgebraicGeometry.CartesianChartLiftNaturality
-import all WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 
@@ -24,12 +23,6 @@ universe u
 open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
-
-attribute [local irreducible] restrictedOverCohomologyMap
-  cartesianDerivedImageMap cartesianChartCohomologyLift cartesianChartCohomologyIso
-  upperStar upperStarCompDerivedPlus
-
-set_option backward.isDefEq.respectTransparency true
 
 private theorem cartesian_map_eq_local {X S T T' : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (g' : T' ⟶ S) (a : T' ⟶ T) (w : g' = a ≫ g)
@@ -177,6 +170,12 @@ private theorem rawTransitionLocal_comp {X S : Scheme.{u}} {I : Type u}
   refine h.trans ?_
   apply pulled_cartesian_map_congr_local
   exact (congrArg (fun x ↦ x.left) (D.map_comp b a)).symm
+
+attribute [local irreducible] restrictedOverCohomologyMap
+  cartesianDerivedImageMap cartesianChartCohomologyLift cartesianChartCohomologyIso
+  upperStar upperStarCompDerivedPlus
+
+set_option backward.isDefEq.respectTransparency true
 
 /-- The finite-stage chart identity propagates to every arrow above the chosen stage.
 
