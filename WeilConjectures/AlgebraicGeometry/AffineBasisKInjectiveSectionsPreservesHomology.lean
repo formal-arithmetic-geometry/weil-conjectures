@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 import WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationCycleFormula
 import WeilConjectures.CategoryTheory.LeftExactUpperTruncationComparison
