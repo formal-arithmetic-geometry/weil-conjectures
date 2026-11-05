@@ -688,8 +688,6 @@ private theorem isoTensor_pure (M N : Modules J B) (U : Cᵒᵖ)
           (show ((restriction J B).obj N).obj.obj U from y) := by
   rfl
 
-attribute [local semireducible] ringPure fixedPure restrictionPresheafIso
-
 set_option backward.isDefEq.respectTransparency true in
 private theorem restrictionTensor_ext (M N H : Modules J B)
     (f g : (restriction J B).obj (M ⊗ N) ⟶ (restriction J B).obj H)
@@ -715,6 +713,7 @@ Source: Stacks 015F and 05RT (blueprint: lem-sfb-constant-scalar-restriction-ten
 def onDerived : DerivedCategory (Modules J B) ⥤ DerivedCategory (Fixed J B) :=
   (restriction J B).mapDerivedCategory
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The normalized coherent comparison on ordinary unbounded K-flat derived tensors.
 The monoidal structures here are the existing K-flat derived localization structures.
 Source: Stacks 06YS, 0G7D, 06YT and 06YU
