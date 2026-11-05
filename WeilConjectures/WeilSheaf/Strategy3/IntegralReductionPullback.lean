@@ -44,11 +44,11 @@ lemma upperStarIntegralTateTwistOneIso_hom_comp_reduction :
         (Mod.extendScalars (integersModPowReduction ℓ E n X')).map
           (upperStarIntegralTateTwistOneIso ℓ E g f).hom ≫
         (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n (g ≫ f)).hom =
-      (Strategy3.upperStar (coeffRing (PadicAlgCl.integersModPow ℓ E n)) g).map
+      (Strategy3.upperStar (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) g).map
           (extendScalarsIntegralTateTwistOneIntegersModPowIso ℓ E n f).hom ≫
-        (freeFunctorCompUpperStarIso (coeffRing (PadicAlgCl.integersModPow ℓ E n)) g).hom.app
+        (freeFunctorCompUpperStarIso (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) g).hom.app
           (rootsOfUnitySheaf X (ℓ ^ n)) ≫
-        (Mod.freeFunctor (condensedRingObj (coeffRing (PadicAlgCl.integersModPow ℓ E n)) X')).map
+        (Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) X')).map
           (purityTateRootPullbackIso ℓ g f n).hom := by
   have h := upperStarExtendScalarsLimitFreeTowerIso_hom_comp_doubleProjection
     (Profinite.continuousMapRingObj ℤ_[ℓ]) g

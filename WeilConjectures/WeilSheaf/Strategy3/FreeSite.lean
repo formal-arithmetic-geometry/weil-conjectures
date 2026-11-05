@@ -46,7 +46,7 @@ lemma purity_comparisonUpperStarFreeIso_factor :
   unfold comparisonUpperStarFreeIso
   rw [CategoryTheory.purity_leftAdjointUniq_ofNatIsoRight]
   have h := purity_conjugate_comp_factor (comparisonAdjunction Ab.{u + 1} X)
-    (Mod.freeForgetAdjunction (condensedRingObj (coeffRing T) X))
+    (Mod.freeForgetAdjunction (condensedRingObj (Profinite.continuousMapRingObj T) X))
     (finiteCoefficientModEquivalence X T).toAdjunction
     (purityFiniteFreeSheafAdjunction T X)
     ((Etale.extendScalarsAdjunction (coeffType.{u} T) X).comp (comparisonAdjunction _ X))

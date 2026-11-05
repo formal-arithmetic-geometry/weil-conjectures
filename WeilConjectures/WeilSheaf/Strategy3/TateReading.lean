@@ -31,7 +31,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 noncomputable def purityFiniteRootTateReadingIso
     (X : Scheme.{u}) (hX : IsUnit (N : Γ(X, ⊤))) :
     (finiteCoefficientModEquivalence X T).functor.obj
-        ((Mod.freeFunctor (condensedRingObj (coeffRing T) X)).obj
+        ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) X)).obj
           (rootsOfUnitySheaf X N)) ≅
       ν^*(X)[ModuleCat.{u + 1} (coeffType.{u} T)].obj
         (Etale.tateSheaf (coeffType.{u} T) X) :=
@@ -47,13 +47,13 @@ lemma purityFiniteRootTateReadingIso_pullback
     (hY : IsUnit (N : Γ(Y, ⊤))) (hX : IsUnit (N : Γ(X, ⊤))) :
     (finiteCoefficientModEquivalence X T).functor.map
           ((Strategy3.freeFunctorCompUpperStarIso
-            (coeffRing T) g).hom.app (rootsOfUnitySheaf Y N)) ≫
+            (Profinite.continuousMapRingObj T) g).hom.app (rootsOfUnitySheaf Y N)) ≫
         (finiteCoefficientModEquivalence X T).functor.map
-          ((Mod.freeFunctor (condensedRingObj (coeffRing T) X)).map
+          ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) X)).map
             (upperStarRootsOfUnitySheafHom g N)) ≫
         (purityFiniteRootTateReadingIso T N hN hchar X hX).hom =
       (upperStarFiniteCoefficientModEquivalenceIso g T).hom.app
-          ((Mod.freeFunctor (condensedRingObj (coeffRing T) Y)).obj
+          ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) Y)).obj
             (rootsOfUnitySheaf Y N)) ≫
         (g)^*[ModuleCat.{u + 1} (coeffType.{u} T)].map
           (purityFiniteRootTateReadingIso T N hN hchar Y hY).hom ≫

@@ -86,3 +86,12 @@ small boundary/category checks from rebuilding all Cartier/finite-duality prereq
 ONLY own boundary-check process group3768184 on verified pool43.166.79.118 (log203152) because
 its obsolete import graph was still rebuilding baseline dependencies. Next small check uses the
 reduced graph. Construction/proof bodies are unchanged by this import correction.
+
+20:46 CST: Small modules now independent (4305 rather than22k jobs). CoefficientCategory GREEN3.2s
+in204145. Outer-boundary TYPE-ONLY control fails kernel65.7s; sourceFunctor_eq fails66.5s, whereas
+targetFunctor_eq checks241ms. Thus comparing the new/old condensed-ring source paths is itself
+the costly conversion, before any equality proof. Testing a narrower representation fix: remove
+coeffRing and its duplicate MonObj/IsCommMonObj instances, use raw continuousMapRingObj uniformly
+in the entire duplicated chain. Keep explicit finiteReduction/compositeReduction codomains, new
+pullback/adjunction/composition/reading definitions, own coefficient category, and coeffType.
+No old finished reading proof is substituted. Previous alias variant is frozen in git/logs.

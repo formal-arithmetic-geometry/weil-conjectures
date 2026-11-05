@@ -36,7 +36,7 @@ variable [NeZero (ℓ : k)]
 
 noncomputable def extendScalarsIntegralTateTwistOneIntegersModPowIso (f : X ⟶ Spec (.of k)) :
     (Mod.extendScalars (integersModPowReduction ℓ E n X)).obj (integralTateTwistOne X ℓ E) ≅
-      (Mod.freeFunctor (condensedRingObj (coeffRing (PadicAlgCl.integersModPow ℓ E n)) X)).obj
+      (Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl.integersModPow ℓ E n)) X)).obj
         (rootsOfUnitySheaf X (ℓ ^ n)) :=
   (Mod.extendScalarsCompIsoOfEq (coefficientMap_comp_eq _ _ _ rfl X)).app (tateModule X ℓ) ≪≫
     extendScalarsTateModuleIso f ℓ (compositeReduction ℓ E n) n

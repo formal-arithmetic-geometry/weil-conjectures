@@ -73,7 +73,8 @@ lemma purityCanonicalTateOneTrivialization_weil :
       exact_mod_proofs ha)
     (by
       have hb := purityScalarUnitCompare_native_comm ℓ a
-      dsimp +instances only [Functor.comp_obj, Functor.comp_map] at hb ⊢
+      dsimp +instances only [purityScalarSourceUnit, purityScalarFrobeniusPull,
+        Functor.comp_obj, Functor.comp_map] at hb ⊢
       exact_mod_proofs hb)
     (purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
       (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
@@ -82,7 +83,7 @@ lemma purityCanonicalTateOneTrivialization_weil :
         (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso))
     (purityScalarCanonicalTrivialization ℓ a hζ hζ')
     (purityScalarCanonicalTrivialization_native_eq ℓ a hζ hζ') (Nat.card k : ℤ)
-    (purity_rationalRootTrivialization_weil a hζ hζ')
+    (by exact_mod_proofs (purity_rationalRootTrivialization_weil a hζ hζ'))
   have h' := purityScalarCanonicalEquation ℓ a hζ hζ' h
   dsimp only [purityCanonicalTateOneTrivialization]
   exact_mod_proofs h'

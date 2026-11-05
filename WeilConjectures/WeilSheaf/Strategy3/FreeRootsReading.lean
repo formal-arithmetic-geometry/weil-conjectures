@@ -54,13 +54,13 @@ geometric datum to the canonical étale root datum. -/
 lemma purity_finiteCoefficientModEquivalenceFreeRootsOfUnityIso_pullback :
     (finiteCoefficientModEquivalence X T).functor.map
           ((Strategy3.freeFunctorCompUpperStarIso
-            (coeffRing T) g).hom.app (rootsOfUnitySheaf Y N)) ≫
+            (Profinite.continuousMapRingObj T) g).hom.app (rootsOfUnitySheaf Y N)) ≫
         (finiteCoefficientModEquivalence X T).functor.map
-          ((Mod.freeFunctor (condensedRingObj (coeffRing T) X)).map
+          ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) X)).map
             (upperStarRootsOfUnitySheafHom g N)) ≫
         (finiteCoefficientModEquivalenceFreeRootsOfUnityIso X N T hN hX).hom =
       (upperStarFiniteCoefficientModEquivalenceIso g T).hom.app
-          ((Mod.freeFunctor (condensedRingObj (coeffRing T) Y)).obj
+          ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) Y)).obj
             (rootsOfUnitySheaf Y N)) ≫
         (g)^*[ModuleCat.{u + 1} (coeffType.{u} T)].map
           (finiteCoefficientModEquivalenceFreeRootsOfUnityIso Y N T hN hY).hom ≫
@@ -73,12 +73,12 @@ lemma purity_finiteCoefficientModEquivalenceFreeRootsOfUnityIso_pullback :
               (upperStarRootsOfUnitySheafToRootsOfUnitySheaf N g)) := by
   have hroot := purity_comparisonUpperStarRootsOfUnityIso_pullback_inv T N hN hT g hY hX
   have hfree := (Strategy3.freeFunctorCompUpperStarIso
-    (coeffRing T) g).hom.naturality
+    (Profinite.continuousMapRingObj T) g).hom.naturality
     (comparisonUpperStarRootsOfUnityIso Y N hN hY).inv
   have hread := (comparisonUpperStarFreeIso T X).hom.naturality
     (upperStarRootsOfUnitySheafToRootsOfUnitySheaf N g)
   have hcoeff := (upperStarFiniteCoefficientModEquivalenceIso g T).hom.naturality
-    ((Mod.freeFunctor (condensedRingObj (coeffRing T) Y)).map
+    ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) Y)).map
       (comparisonUpperStarRootsOfUnityIso Y N hN hY).inv)
   dsimp only [Functor.comp_map, Functor.comp_obj] at hfree hread hcoeff
   simp only [finiteCoefficientModEquivalenceFreeRootsOfUnityIso, Iso.trans_hom,

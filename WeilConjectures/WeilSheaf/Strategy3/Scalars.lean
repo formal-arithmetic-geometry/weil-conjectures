@@ -63,7 +63,7 @@ lemma constRingSheafSection_comp_constRingSheafToCondensedRingObj (t : T) :
 corresponding to `M` is the action on `M` of the constant global section `t` of `Λ_X`. -/
 lemma finiteCoefficientModEquivalence_smul
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (coeffRing T) X))
+      (condensedRingObj (Profinite.continuousMapRingObj T) X))
     (U : X.ProEtᵒᵖ) (t : T) (y : ((finiteCoefficientModEquivalence X T).functor.obj M).obj.obj U) :
     (ULift.up t : coeffType.{u} T) • y =
       (Mod.globalSmul (ε (upperStarFromPoint X) ≫

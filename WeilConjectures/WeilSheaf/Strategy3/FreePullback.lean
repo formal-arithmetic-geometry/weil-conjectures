@@ -43,7 +43,7 @@ noncomputable def purityFiniteFreeSheafAdjunction (X : Scheme.{u}) :
 
 /-- The finite coefficient equivalence carries free module objects to free sheaves. -/
 noncomputable def purityFiniteCoefficientFreeIso (X : Scheme.{u}) :
-    Mod.freeFunctor (condensedRingObj (coeffRing T) X) ⋙
+    Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) X) ⋙
         (finiteCoefficientModEquivalence X T).functor ≅ purityFiniteFreeSheaf T X :=
   (conjugateIsoEquiv (purityFiniteFreeSheafAdjunction T X)
     ((Mod.freeForgetAdjunction _).comp (finiteCoefficientModEquivalence X T).toAdjunction)).symm
@@ -70,15 +70,15 @@ lemma purity_finiteCoefficientInverseForget_inv_app (X : Scheme.{u})
 
 lemma purity_finiteCoefficient_forget_map (X : Scheme.{u})
     {M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (coeffRing T) X)} (a : M ⟶ N) :
-    (Mod.forget (condensedRingObj (coeffRing T) X)).map a =
+      (condensedRingObj (Profinite.continuousMapRingObj T) X)} (a : M ⟶ N) :
+    (Mod.forget (condensedRingObj (Profinite.continuousMapRingObj T) X)).map a =
       (sheafCompose (ProEt.topology X)
         (forget₂ (ModuleCat.{u + 1} (coeffType.{u} T)) Ab.{u + 1})).map
           ((finiteCoefficientModEquivalence X T).functor.map a) := rfl
 
 lemma purity_lowerStarFiniteCoefficient_forget_inv {X Y : Scheme.{u}} (g : X ⟶ Y)
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (coeffRing T) X)) :
+      (condensedRingObj (Profinite.continuousMapRingObj T) X)) :
     (sheafCompose (ProEt.topology Y)
       (forget₂ (ModuleCat.{u + 1} (coeffType.{u} T)) Ab.{u + 1})).map
         ((lowerStarFiniteCoefficientModEquivalenceIso g T).inv.app M) = 𝟙 _ := rfl
@@ -90,7 +90,7 @@ lemma purity_finiteCoefficient_free_right_square {X Y : Scheme.{u}} (g : X ⟶ Y
         ((finiteCoefficientModEquivalenceInverseCompForgetIso T X).inv.app N) =
       (finiteCoefficientModEquivalenceInverseCompForgetIso T Y).inv.app
           ((g)_*[ModuleCat.{u + 1} (coeffType.{u} T)].obj N) ≫
-        (Mod.forget (condensedRingObj (coeffRing T) Y)).map
+        (Mod.forget (condensedRingObj (Profinite.continuousMapRingObj T) Y)).map
           ((Iso.inverseCompIso (Iso.isoCompInverse (lowerStarFiniteCoefficientModEquivalenceIso g T)
             ≪≫ Functor.associator _ _ _)).inv.app N) := by
   rw [purity_finiteCoefficientInverseForget_inv_app,
@@ -110,17 +110,17 @@ lemma purity_upperStarFiniteCoefficient_free {X Y : Scheme.{u}} (g : X ⟶ Y)
     (M : Sheaf (ProEt.topology Y) Ab.{u + 1}) :
     (finiteCoefficientModEquivalence X T).functor.map
           ((Strategy3.freeFunctorCompUpperStarIso
-            (coeffRing T) g).hom.app M) ≫
+            (Profinite.continuousMapRingObj T) g).hom.app M) ≫
         (purityFiniteCoefficientFreeIso T X).hom.app ((g)^*[Ab.{u + 1}].obj M) =
       (upperStarFiniteCoefficientModEquivalenceIso g T).hom.app
-          ((Mod.freeFunctor (condensedRingObj (coeffRing T) Y)).obj M) ≫
+          ((Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj T) Y)).obj M) ≫
         (g)^*[ModuleCat.{u + 1} (coeffType.{u} T)].map
           ((purityFiniteCoefficientFreeIso T Y).hom.app M) ≫
         (purityFiniteFreeSheafPullbackIso T g).hom.app M := by
   apply purity_free_pullback_cube
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} g)
     (Mod.freeForgetAdjunction _) (Mod.freeForgetAdjunction _)
-    (Strategy3.upperStarLowerStarAdjunction (coeffRing T) g)
+    (Strategy3.upperStarLowerStarAdjunction (Profinite.continuousMapRingObj T) g)
     (finiteCoefficientModEquivalence Y T).toAdjunction
     (finiteCoefficientModEquivalence X T).toAdjunction
     (purityFiniteFreeSheafAdjunction T Y) (purityFiniteFreeSheafAdjunction T X)

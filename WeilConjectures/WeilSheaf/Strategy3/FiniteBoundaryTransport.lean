@@ -19,7 +19,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 
 /-- Compare just the source functor, before comparing isomorphisms. -/
 lemma finiteComparisonSource_eq :
-    Strategy3.upperStar (coeffRing T) g ⋙ (finiteCoefficientModEquivalence X T).functor =
+    Strategy3.upperStar (Profinite.continuousMapRingObj T) g ⋙ (finiteCoefficientModEquivalence X T).functor =
       CondensedRing.upperStar (Profinite.continuousMapRingObj T) g ⋙
         (ProEtale.finiteCoefficientModEquivalence X T).functor := by rfl
 
