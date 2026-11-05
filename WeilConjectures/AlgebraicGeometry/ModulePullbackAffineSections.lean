@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.LinearAlgebra.TensorProduct.Map
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
 
 /-!
