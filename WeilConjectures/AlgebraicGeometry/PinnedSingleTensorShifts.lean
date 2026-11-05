@@ -172,6 +172,7 @@ lemma mappedHomotopySingleIso_hom_app {A B : Type*} [Category A] [Category B]
     Functor.associator_hom_app, Functor.whiskerLeft_app, Quotient.lift.isLift_hom,
     Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp]
   all_goals erw [Category.id_comp, Category.comp_id]
+  all_goals exact Category.id_comp _
 
 end CategoryTheory.SingleFunctors
 
@@ -191,9 +192,10 @@ def pinnedSingleTensorCounit
     (DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
         ((Scheme.Modules.tensorPullback g').obj G) :=
-  (pinnedPullbackCounit.{u, w} g').app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
-    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+  cast (by rfl) ((pinnedPullbackCounit.{u, w} g').app
+    ((HomotopyCategory.singleFunctor _ n).obj G) ≫
+    DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex
-        (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G))
+        (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
 
 end AlgebraicGeometry

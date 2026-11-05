@@ -70,10 +70,10 @@ def singleDegreeBaseChangeComposite
       (DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
           ((Scheme.Modules.tensorPullback g').obj G) :=
-    ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
-      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+    cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
+      DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
-          (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G))
+          (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
   schemeDerivedBaseChangeMap.{u, w} f f' g g' h
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ≫

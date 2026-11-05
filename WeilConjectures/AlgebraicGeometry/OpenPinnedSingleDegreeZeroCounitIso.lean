@@ -86,6 +86,7 @@ def openPinnedHomotopyTensorRestrictionIso
     letI := schemeOpenRestriction_additive X U
     letI := schemeOpenRestriction_additive X' U'
     exact Functor.mapHomotopyCategoryCompIso (openPinnedTensorRestrictionIso k U U' j hj) (.up ℤ) ≪≫
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).symm
+    (Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback j)) (.up ℤ)).symm
 
 end AlgebraicGeometry
