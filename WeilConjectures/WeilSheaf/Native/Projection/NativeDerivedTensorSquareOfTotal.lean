@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeModels
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromNativeRestriction
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
@@ -69,19 +69,15 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :
     DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
   projection_strict
-    let L := upperStar k₀ l g
     let V := condensedRealization k₀ l Z
     let F := condensedRealization k₀ l Y
     let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    exact projection_derived_square_of_native_models k₀ l L V F R
+    exact projection_derived_square_of_native_restriction k₀ l g V F R
       (condensedRealizationUpperStarIso k₀ l g).symm
       (condensedRealizationTensor k₀ l Y) (condensedRealizationTensor k₀ l Z)
-      (nativePullTensor k₀ l g)
-      (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
-      (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
+      (condensedRealizationTotalTensorIso k₀ l Y)
       (condensedRealizationTotalTensorIso k₀ l Z)
-      (by exact projection_nativePullTensor_normalization k₀ l g)
       (by exact projection_native_realization_model_normalization k₀ l Y)
       (by exact projection_native_realization_model_normalization k₀ l Z)
       (fun A B ↦ (R.mapCochainComplexμIso A B).symm)
