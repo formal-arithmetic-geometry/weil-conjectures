@@ -119,6 +119,8 @@ theorem completed_fibre_compatible_product
           exact hq
     apply IsLocalRing.eq_maximalIdeal
     apply Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A)
+    change ((t.1.comap (Polynomial.C : B →+* Polynomial B)).comap
+      (algebraMap A B)).IsMaximal
     rw [hcomp]
     infer_instance
   let : Algebra (Polynomial A) L :=
