@@ -31,15 +31,16 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 def compactProjectionGeometricPullIso :
     boundedConstructibleUpperStar Λ l c.overG ⋙
       boundedConstructibleUpperStar Λ l c.overI ≅ boundedConstructibleUpperStar Λ l f :=
-  NatIso.ofComponents (fun N ↦ ObjectProperty.isoMk _
-    ((leftDerivedUpperStarOverCompactificationIso (f := f) Λ c).symm.app N.obj))
-    (fun φ ↦ ObjectProperty.hom_ext _
-      ((leftDerivedUpperStarOverCompactificationIso (f := f) Λ c).inv.naturality φ.hom))
+  (eqToIso (congrArg (boundedConstructibleUpperStar Λ l) c.overI_overG.symm) ≪≫
+    boundedConstructibleUpperStarComp Λ l c.overI c.overG).symm
 
 /-- The underlying component is the inverse of the ambient composition comparison. -/
 lemma compactProjectionGeometricPullIso_hom_app (N : Dᵇc(Y.left)⟦Λ⟧) :
-    ((compactProjectionGeometricPullIso Λ l c).hom.app N).hom =
-      (leftDerivedUpperStarOverCompactificationIso (f := f) Λ c).inv.app N.obj := rfl
+    ((compactProjectionGeometricPullIso (f := f) Λ l c).hom.app N).hom =
+      (leftDerivedUpperStarOverCompactificationIso (f := f) Λ c).inv.app N.obj := by
+  rw [leftDerivedUpperStarOverCompactificationIso_eq]
+  exact ι_map_eqToIso_trans_boundedConstructibleUpperStarComp_inv_app Λ l
+    c.overI c.overG c.overI_overG N
 
 /-- The geometric exceptional projection factors through the canonical pullback compositor. -/
 lemma compactProjectionGeometricPullIso_projection_eq
@@ -57,8 +58,8 @@ lemma compactProjectionGeometricPullIso_projection_eq
               c.overI).projectionComparison K
               ((boundedConstructibleUpperStar _ l c.overG).obj B)) ≫
             (boundedConstructibleOpenImmersionLowerShriek _ l c.overI).map
-              (K ◁ (compactProjectionGeometricPullIso _ l c).hom.app B)) :=
+              (K ◁ (compactProjectionGeometricPullIso (f := f) _ l c).hom.app B)) :=
   homMk_exceptionalProjectionMorphismOfCompactification_eq l c K B _
-    (compactProjectionGeometricPullIso_hom_app _ l c B)
+    (compactProjectionGeometricPullIso_hom_app (f := f) _ l c B)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

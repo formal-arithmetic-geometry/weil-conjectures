@@ -55,7 +55,7 @@ def projectionGeometricPullComp :
     CondensedRing.boundedConstructibleUpperStar Λ l (cb).overG ⋙
         CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI ≅
       CondensedRing.boundedConstructibleUpperStar Λ l fb :=
-  CondensedRing.compactProjectionGeometricPullIso Λ l cb
+  CondensedRing.compactProjectionGeometricPullIso (f := fb) Λ l cb
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
