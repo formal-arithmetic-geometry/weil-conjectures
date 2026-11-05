@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
@@ -199,8 +200,6 @@ end Field
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
--- the linear maps into restrictions of scalars need to unfold `ModuleCat.restrictScalars`
-set_option backward.isDefEq.respectTransparency false in
 /-- Let `r` be a prime and `M` a `Λ`-module killed by `r`. If `R^q h_* (M_Y) ≠ 0` for a
 quasi-compact quasi-separated `h`, then `R^q h_* (Λ/rΛ) ≠ 0`. Indeed `M` and `Λ/rΛ` are modules
 over `Λ₁ = Λ/rΛ`, hence vector spaces over `𝔽_r ⊆ Λ₁`, and `Λ₁ ≠ 0`; the vanishing of
@@ -231,7 +230,7 @@ theorem Etale.not_isZero_higherDirectImage_constantModSheaf_of_smul_eq_zero {X Y
   let _ : Module (Λ ⧸ I) M := hMI.module
   let M₁ : ModuleCat.{u + 1} (Λ ⧸ I) := ModuleCat.of (Λ ⧸ I) M
   let eM : M ≅ (ModuleCat.restrictScalars.{u + 1} φ).obj M₁ :=
-    LinearEquiv.toModuleIso
+    LinearEquiv.toModuleIso (X₁ := M) (X₂ := (ModuleCat.restrictScalars.{u + 1} φ).obj M₁)
       { AddEquiv.refl M with
         map_smul' := fun a m ↦ (hMI.mk_smul a m).symm }
   have h₁ : ¬ IsZero ((Etale.higherDirectImageConstantFunctor (Λ ⧸ I) h q).obj M₁) := by
@@ -258,6 +257,8 @@ theorem Etale.not_isZero_higherDirectImage_constantModSheaf_of_smul_eq_zero {X Y
   let e : (ModuleCat.restrictScalars.{u + 1} φ).obj (ModuleCat.of (Λ ⧸ I) (Λ ⧸ I)) ≅
       ModuleCat.of Λ (Λ ⧸ I) :=
     LinearEquiv.toModuleIso
+      (X₁ := (ModuleCat.restrictScalars.{u + 1} φ).obj (ModuleCat.of (Λ ⧸ I) (Λ ⧸ I)))
+      (X₂ := ModuleCat.of Λ (Λ ⧸ I))
       { AddEquiv.refl (Λ ⧸ I) with
         map_smul' := fun a x ↦ (Algebra.smul_def a x).symm }
   have hI' : Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y r) =
