@@ -61,26 +61,7 @@ private noncomputable def presheafTransportAdjunction
     (botModuleLiftFullyFaithful R) (botModuleLiftFullyFaithful S)
     (Iso.refl _) (Iso.refl _)
 
-private noncomputable def sheafificationTransportIso
-    {C D : Type u} [Category.{u} C] [Category.{u} D]
-    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
-    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
-    [F.IsContinuous J K] [G.IsContinuous K J]
-    {S : Sheaf J RingCat.{u}} {R : Sheaf K RingCat.{u}}
-    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat J K).obj R)
-    (ψ : R ⟶ (G.sheafPushforwardContinuous RingCat K J).obj S)
-    (h₁ : Functor.whiskerRight (NatTrans.op adj.counit) R.obj =
-      ψ.hom ≫ G.op.whiskerLeft φ.hom)
-    (h₂ : φ.hom ≫ F.op.whiskerLeft ψ.hom ≫
-      Functor.whiskerRight (NatTrans.op adj.unit) S.obj = 𝟙 S.obj) :
-    PresheafOfModules.sheafification.{u} (𝟙 R.obj) ⋙ SheafOfModules.pushforward φ ≅
-      PresheafOfModules.pushforward φ.hom ⋙
-        PresheafOfModules.sheafification.{u} (𝟙 S.obj) :=
-  Adjunction.leftAdjointUniq
-    ((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 R.obj)).comp
-      (SheafOfModules.pushforwardPushforwardAdj adj φ ψ h₁ h₂))
-    ((presheafTransportAdjunction adj φ.hom ψ.hom h₁ h₂).comp
-      (PresheafOfModules.sheafificationAdjunction.{u} (𝟙 S.obj)))
+attribute [local irreducible] Scheme.Modules.overEquiv
 
 /-- Sheafification commutes with transport along the localized open-site equivalence.
 Source: Stacks Project, Tag 01CD, sheafification step in the localized-site construction.
@@ -123,6 +104,11 @@ theorem exists_localizedOpen_sheafification_iso (X : Scheme.{u}) (U : X.Opens) :
       TopologicalSpace.Opens.sheafRestrictSheafEquivOver,
       TopologicalSpace.Opens.overEquivalence, eqToHom_map, IsOpenMap.functor]
     rfl
-  exact ⟨sheafificationTransportIso e.toAdjunction φ ψ h₁ h₂⟩
+  let adj := presheafTransportAdjunction e.toAdjunction φ.hom ψ.hom h₁ h₂
+  exact ⟨Adjunction.leftAdjointUniq
+    ((PresheafOfModules.sheafificationAdjunction.{u}
+      (𝟙 (R.over U).obj)).comp (Scheme.Modules.overEquiv U).toAdjunction)
+    (adj.comp (PresheafOfModules.sheafificationAdjunction.{u}
+      (𝟙 (moduleRings U.toScheme.toRingedSpace).obj)))⟩
 
 end AlgebraicGeometry
