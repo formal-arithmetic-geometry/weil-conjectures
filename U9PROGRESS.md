@@ -170,16 +170,25 @@
 - Final documentation commit leaves Lean source identical to the green revision.
 
 
-# BZ630 in progress
+# BZ630 complete
 
 - Branch: `u9/BZ630`; starting commit: `b7a97a5ed`.
-- Assigned module passed ucheck-bump: rc=0, built=3, failed=0, 4242 jobs.
-- Validated commit: `afb9e8c2c047f6cb0e4e0070c181f52e25eb696a`.
-- Green log: `/home/ubuntu/u9/bz/BZ630-unit-green-full.log`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.Injective.InjectiveExchangeSourceTransport`
+  passed ucheck-bump: rc=0, built=3, failed=0, 4242 jobs; target rebuilt in 12 seconds.
+- Validated source commit: `afb9e8c2c047f6cb0e4e0070c181f52e25eb696a`.
+- Green log: `/home/ubuntu/u9/bz/BZ630-unit-green-full.log`; poolb:43.157.135.193.
+  Lean v4.35.0-rc3 and exact Mathlib b63f6e8a pin confirmed on that host.
 - The user instructed continuation after the explicit endpoint-transport statement proposal.
   That exact patch is applied. The proof keeps quotientCompQhIso opaque, reduces only the
-  homotopy comparison, and cancels the mapped identity using erw.
-- Next: build the sole direct importer Injective.InjectiveExchangeRepresentative;
-  skip it if its unowned dependency Injective.InjectiveExchangeTargetTransport fails.
-- Notes and pattern counts: `/home/ubuntu/u9/bz/FIXES-BZ630.md`.
+  exposed homotopy comparison, and cancels its mapped identity using erw.
+- Sole direct importer Injective.InjectiveExchangeRepresentative was attempted at
+  `a1f0d2dc924831564872c1058580050ba807ca78`; the assigned module rebuilt green in that batch.
+- The importer is blocked by eight errors in unowned Injective.InjectiveExchangeTargetTransport
+  (BZ631). Skipped it and its dependent Strict.Local.StrictLocalDerivedExchangeLeray under
+  the brief's ownership rule. No downstream modules are claimed green or edited.
+- Downstream log: `/home/ubuntu/u9/bz/BZ630-downstream-full.log` (rc=1, failed=1).
+- Patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ630.md`.
+  Contract audit: `/home/ubuntu/u9/bz/BZ630-contract-audit.txt`.
 - No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ630.DONE`.
+- This final documentation commit leaves Lean source identical to the green revision.
