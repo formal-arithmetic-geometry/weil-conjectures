@@ -180,7 +180,7 @@ theorem ringedSite_completeElement_mul
     IsRingedSiteCompleteElement J R K U (a * f) := by
   let O := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
   let A := SheafOfModules.{u} (O.over U)
-  let : ∀ W : C, HasDerivedCategory.{w} (SheafOfModules.{u}
+  letI : ∀ W : C, HasDerivedCategory.{w} (SheafOfModules.{u}
       ((sheafCompose (J.over W) (forget₂ CommRingCat RingCat)).obj (R.over W))) :=
     fun W ↦ inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over W)))
   let : MonoidalCategory A := SheafOfModules.monoidalCategory (R.over U)
