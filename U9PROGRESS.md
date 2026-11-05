@@ -107,16 +107,25 @@
 - This final commit changes only progress documentation; Lean sources match the green build.
 
 
-# BZ396 in progress
+# BZ396 complete
 
 - Branch: `u9/BZ396`; initial commit: `98654719bdfe7ff3e77ff047b3bce53405d2dc4a`.
-- Assigned module: `WeilConjectures.AlgebraicGeometry.Derived.DerivedExchangeModuleTermwiseSupplement`.
-- Baseline build reproduced 13 errors; proof/import fixes reduced them to 4.
-- The user instructed continuation after the exact four-line statement API proposal in
-  `/home/ubuntu/u9/bz/BZ396-statement-api.patch`; that patch is now applied.
-- The comparison isomorphism uses Mathlib's new orientation; the mathematical maps are preserved.
-- Localization is imported publicly and with `import all` for hidden identity transports.
-- Removed the obsolete local irreducibility attribute on the opaque comparison isomorphism.
-- Fix records, exact errors, occurrence counts, and build logs: `/home/ubuntu/u9/bz/FIXES-BZ396.md`.
-- Next: validate the assigned module with `ucheck-bump`, then check downstream importers.
+- Assigned module `WeilConjectures.AlgebraicGeometry.Derived.DerivedExchangeModuleTermwiseSupplement`
+  passed `ucheck-bump`: rc=0, failed=0, 4097 jobs, source commit `3e56c6d408`.
+- Downstream `WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenAdjunctionNormalization`
+  also rebuilt successfully without source changes; both modules rebuilt at `611ff14508`.
+- The user instructed continuation after the exact four-line API proposal; those substitutions
+  in `square_factors` and `derivedExchangeUnitQ` are applied. All other declaration headers and
+  existing docstrings are unchanged. The compositor now follows Mathlib's reversed orientation.
+- Added the localization imports for hidden identity transports and removed the obsolete
+  local irreducibility attribute on the opaque composition comparison.
+- Skipped `UnboundedProperOpenBaseChange` and the next-layer importer because of unowned
+  failures in `KFlatRingedToposPullback` (BZ436) and `SixFunctors.Finite.BaseChange`.
+  The blocked aggregate run was stopped after recording both successful target rebuilds.
+- Full successful assigned-module log: `/home/ubuntu/u9/bz/BZ396-build3-full.log`.
+- Downstream log: `/home/ubuntu/u9/bz/BZ396-build4-full.log`.
+- Patterns, occurrence counts, exact errors, and limitations: `/home/ubuntu/u9/bz/FIXES-BZ396.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ396-contract-audit.txt`.
 - No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat raises.
+- Completion marker: `/home/ubuntu/u9/state/BZ396.DONE`.
+- This final commit changes only progress documentation; Lean source matches the green build.
