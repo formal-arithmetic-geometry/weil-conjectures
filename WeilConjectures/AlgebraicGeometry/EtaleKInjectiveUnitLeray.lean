@@ -246,11 +246,12 @@ theorem etaleKInjective_unit_leray
       Category.id_comp, Category.comp_id, Category.assoc] using this
   rw [← cancel_epi (G.rightDerivedFunctorObjQIso I).inv, Iso.inv_hom_id_assoc]
   simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_inv, Iso.symm_inv,
-    Iso.app_hom, Iso.app_inv, Functor.mapIso_hom, Functor.mapIso_inv, asIso_hom]
+    Iso.app_hom, Iso.app_inv, Functor.mapIso_inv, asIso_hom]
   rw [← cancel_epi ((DerivedCategory.quotientCompQhIso _).hom.app
     ((G.mapHomologicalComplex (.up ℤ)).obj I))]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
     ← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% hβ, ← H.rightDerivedFunctor.map_comp, ← hfactor]
   simpa only [Functor.map_comp, Category.assoc] using
     congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map
