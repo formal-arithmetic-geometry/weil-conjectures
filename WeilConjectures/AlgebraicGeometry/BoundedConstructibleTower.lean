@@ -102,8 +102,9 @@ private theorem normalizedDerivedAdjunction
     erw [DerivedCategory.Qh.map_id, Category.comp_id] at hp
     have hp' := congrArg (fun f ↦ f ≫ (DerivedCategory.quotientCompQhIso A).hom.app
       ((R.mapHomologicalComplex (.up ℤ)).obj ((L.mapHomologicalComplex (.up ℤ)).obj K))) hp
-    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
-      DerivedCategory.quotientCompQhIso_hom_naturality] at hp'
+    simp only [Category.assoc, Iso.inv_hom_id_app] at hp'
+    erw [Category.comp_id] at hp'
+    erw [DerivedCategory.quotientCompQhIso_hom_naturality] at hp'
     apply (cancel_epi ((DerivedCategory.quotientCompQhIso A).hom.app K)).mp
     simp only [Functor.map_comp, Category.assoc]
     have hunit := d.unit.naturality ((DerivedCategory.quotientCompQhIso A).hom.app K)
