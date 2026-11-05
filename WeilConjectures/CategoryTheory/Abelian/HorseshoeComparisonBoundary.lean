@@ -103,8 +103,8 @@ private theorem comparison_eq_unit
     Iso.symm_hom, asIso_inv, Functor.map_comp, Category.assoc, Functor.comp_map]
   change DerivedCategory.Plus.ι.map
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
-      v.rightDerivedFunctorPlus.map
-        ((DerivedCategory.Plus.quotientCompQhIso A).inv.app (resolutionPlus R)) ≫
+      DerivedCategory.Plus.ι.map (v.rightDerivedFunctorPlus.map
+        ((DerivedCategory.Plus.quotientCompQhIso A).inv.app (resolutionPlus R))) ≫
       DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
       DerivedCategory.Plus.ι.map (eqToHom e) ≫
@@ -215,7 +215,7 @@ private theorem augmentation_boundary
       ((DerivedCategory.Plus.singleFunctor A 0).obj S.X₁)) ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
         ((DerivedCategory.Plus.singleFunctor A 0).obj S.X₁) ≫
-      (((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₃).hom ≫
+      (((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₁).hom ≫
         𝟙 _ ≫ DerivedCategory.Q.map IA.ι' ≫
         (DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' =
     ((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₃).hom ≫
