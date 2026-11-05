@@ -124,7 +124,8 @@ lemma rightDerivedPullback_app_eq_of_adjunction
     ((adj.mapHomotopyCategory (ComplexShape.up ℤ)).unit.app H)
   have h₄ := rightDerivedFunctorUnit_comp_rightDerivedFunctorCompIso'_hom_app R e
     ((L.mapHomotopyCategory (ComplexShape.up ℤ)).obj H)
-  dsimp [γ] at h₂ h₃ h₄ ⊢
+  dsimp only [γ, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.comp_obj,
+    Functor.comp_map] at h₂ h₃ h₄ ⊢
   rw [hη]
   simp only [Functor.map_comp, assoc]
   rw [h₂, ← reassoc_of% h₃, reassoc_of% h₄]
