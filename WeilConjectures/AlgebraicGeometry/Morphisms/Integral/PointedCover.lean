@@ -140,7 +140,7 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
     let τ'' : B₂ →+* Ω := (Spec.preimage t''.1).hom
     obtain ⟨Q, -, hQ, hQc⟩ := Ideal.exists_ideal_over_prime_of_isIntegral (RingHom.ker τ'')
       (⊥ : Ideal B) (by
-        rw [Ideal.comap_bot_of_injective _ Subtype.val_injective]
+        rw [Ideal.under_def, Ideal.comap_bot_of_injective _ Subtype.val_injective]
         exact bot_le)
     have : Q.LiesOver (RingHom.ker τ'') := ⟨hQc.symm⟩
     obtain ⟨τ, -⟩ := PointsOver.exists_ker_eq (φ := τ'') Q
@@ -323,7 +323,7 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
       rw [← cancel_mono (s₀.piece (img t)).ι, Category.assoc, Scheme.Hom.resLE_comp_ι,
         reassoc_of% hq, hθ, SplitNbhd.piecePt_left_ι]
     have ha₀ : (s₀.piecePt (img t)).left ≫ (a₀ (img t)).val.left = (pt (img t)).left :=
-      congrArg CommaMorphism.left (a₀ (img t)).property
+      congrArg CommaMorphism.left (a₀ (img t)).map_val
     have key : q ≫ pullback.lift (μ₁ (img t)) (μ₂ (img t)) (hμ (img t)) =
         Spec.map (CommRingCat.ofHom ((χ j₀.1 ⟨t, hmL t⟩).comp (e₁ j₀).toAlgHom.toRingHom)) ≫
           (pullbackSpecIso B₁ B (Q₁ j₀).Ring).inv := by

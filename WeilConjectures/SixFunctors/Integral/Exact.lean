@@ -76,7 +76,7 @@ lemma Etale.surjective_sheafFiber_lowerStar_map_of_isIntegralHom {Ω : Type u} [
     (Sheaf.isLocallySurjective_iff_epi' (ModuleCat.{u + 1} Λ) φ).2 inferInstance
   have hR := Presheaf.imageSieve_mem X.smallEtaleTopology φ.hom z
   obtain ⟨c', g, ι, P, hdisj, hsup, hP⟩ :=
-    Scheme.Hom.Nbhd.exists_hom_disjoint_cover f (Functor.elementsMk _ V v) _ hR
+    Scheme.Hom.Nbhd.exists_hom_disjoint_cover f ⟨V, v⟩ _ hR
   choose a ha using hP
   -- glue the local lifts `a i` over the disjoint cover `P i` of `U' ×_Y X`
   let F := (sheafCompose X.smallEtaleTopology (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G
