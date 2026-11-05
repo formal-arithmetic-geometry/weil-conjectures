@@ -142,19 +142,22 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ537: assigned module and first downstream layer green
+# BZ538 complete
 
-- Branch: `u9/BZ537`.
-- `PushforwardZeroSingle` and direct importer `PushforwardZeroDescent` passed
-  `ucheck-bump` together: rc=0, failed=0, 4213 jobs.
-- Validated source commit: `0716db1317`; remote log:
-  `/home/ubuntu/u9/logs/BZ537-20261106T034033.log`.
-- Full local log: `/home/ubuntu/u9/bz/BUILD-BZ537-resume2-full.log`.
-- Merged owner BZ581's `216c997cc4f` to clear the InternalHom prerequisite;
-  no BZ537 edits to that dependency.
-- Repairs use direct Q for the single-complex comparison, explicit public Qh/Q
-  comparison isomorphisms in degree-zero homology, and `erw` for the transported
-  naturality proof. All seven declaration signatures and docstrings are unchanged.
-- Next: validate second-layer importer `PushforwardLimit`, then write DONE.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ537.md`.
-- No local Lean/Lake, sorries, forbidden proof shortcuts, or heartbeat increases.
+- Branch: `u9/BZ538`; starting commit: `29f3a8d81`.
+- Assigned module and both downstream layers passed `ucheck-bump` together:
+  rc=0, failed=0, 3530 jobs on `poolb:43.157.184.90`.
+- Validated source commit: `afbae1fef662f1b26bdac9a97c1043aeea503aaa`.
+- Green modules: `WeilConjectures.AlgebraicGeometry.AffineBasisKInjectiveSectionsPreservesHomology`,
+  `WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi`, and
+  `WeilConjectures.AlgebraicGeometry.AffineBasisSectionsDerivedUnit`.
+- The original IsAffineOpen public import fix was already in the starting branch;
+  applied the same public import to the second-layer derived-unit module.
+- The user instructed continuation after the explicit one-line shared dependency repair proposal.
+  InternalHom now uses the compatibility tensorObj_map_tmul lemma, matching map_comp_apply.
+- All declaration types and existing docstrings are unchanged.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ538-final-full.log`.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ538.DONE`.
+- No local Lean/Lake execution, sorries, trust bypasses, profiler probes, or heartbeat changes.
+- This final commit changes progress documentation only; Lean sources match the green build.
