@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.LineSmooth
 public import WeilConjectures.ZetaFunction.BettiSymmetry
 
 /-!
@@ -204,10 +205,6 @@ theorem pointCount_multiplicativeGroup [Finite k] {n : ℕ} (hn : n ≠ 0) :
   rw [Scheme.Hom.pointCount, Nat.card_congr (multiplicativeGroupFieldPointsEquiv k _),
     ← Nat.card_congr unitsEquivNeZero, Nat.card_units,
     FiniteField.nat_card_galoisExtension k n hn]
-
-/-- The affine line `𝔸¹_k` is smooth of relative dimension one over `k`. -/
-instance : SmoothOfRelativeDimension 1 (affineLine k ↘ Spec (.of k)) := by
-  simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k))
 
 /-- The multiplicative group `𝔾_{m,k}` is locally of finite type over `k`. -/
 instance : LocallyOfFiniteType (multiplicativeGroup k ↘ Spec (.of k)) := by

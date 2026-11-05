@@ -13,10 +13,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.RingTheory.FiniteType
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.AlgebraicGeometry.Thickening
+public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
@@ -27,7 +32,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportBaseCh
 import WeilConjectures.AlgebraicGeometry.Good.GoodCurvesPreimageConstructible
 import WeilConjectures.AlgebraicGeometry.Good.GoodCurvesGenericDiagram
 import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleSurjectivePullback
-import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.AlgebraicGeometry.QuasiFinite.QuasiFiniteShriekConstructible
 import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportOpenClosedTriangle
 import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesFiniteModule
@@ -50,7 +55,11 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-private theorem nonempty_constantShriekBaseChangeIso
+/-- Compactly supported cohomology of a finite constant module commutes with arbitrary base
+change of a qcqs base: the inverse image along `g` of the `q`-th cohomology sheaf of the lower
+shriek is isomorphic to the `q`-th cohomology sheaf of the lower shriek of the base change.
+Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+theorem nonempty_constantShriekBaseChangeIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S T : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace T] [QuasiSeparatedSpace T]
@@ -89,7 +98,10 @@ private theorem constructible_of_empty
     Scheme.IsConstructibleSheaf F := by
   exact Scheme.IsConstructibleSheaf.of_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty F)
 
-private theorem constructible_of_closed_generic
+/-- Noetherian induction for constructibility: a sheaf on a Noetherian scheme is constructible
+if its restriction to every nonempty closed subscheme is constructible on some nonempty open.
+Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+theorem constructible_of_closed_nonempty_generic
     {S : Scheme.{u}} [IsNoetherian S] {Λ : Type (u + 1)} [CommRing Λ]
     (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ∀ (Z : Scheme.{u}) (i : Z ⟶ S) [IsClosedImmersion i] [Nonempty Z],
@@ -169,7 +181,10 @@ private theorem dense_open_complement_dimension_zero
     · exact (topologicalKrullDim_subspace_le B Set.univ).trans hdim |>.trans_lt (by decide)
   exact ENat.WithBot.lt_add_one_iff.mp (by simpa using hlt)
 
-private theorem denseOpenCurve_complement_quasiFinite
+/-- The closed complement of a fibrewise dense open of a smooth separated affine relative curve
+over a Noetherian base is quasi-finite over the base.
+Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+theorem denseOpenCurve_complement_quasiFinite
     {X S : Scheme.{u}} [IsNoetherian S]
     (f : X ⟶ S) [IsSeparated f] [IsAffineHom f] [SmoothOfRelativeDimension 1 f]
     (W : X.Opens) (hW : ∀ s : S, Dense (f.fiberι s ⁻¹' (W : Set X))) :
@@ -223,7 +238,11 @@ private noncomputable def constantSinglePullbackIso
     (_root_.DerivedCategory.Plus.singleFunctor _ 0).mapIso
       ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) f).app M)
 
-private theorem constantShriek_openClosed
+/-- Open-closed gluing for compactly supported cohomology of a constant sheaf: if the
+cohomology sheaves for an open `U` and its closed complement are constructible, so are those
+for the whole scheme.
+Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+theorem constantShriek_openClosed
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace S] [QuasiSeparatedSpace S]
@@ -359,7 +378,11 @@ private theorem properSmooth_finiteEtale_constantShriek_constructible
   exact Scheme.IsConstructibleSheaf.of_iso
     ((_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso (ec.app K))
 
-private theorem goodCurvesOpen_constantShriek_constructible
+/-- Given a good-curves diagram over a Noetherian base whose proper smooth models have
+constructible compactly supported cohomology, the compactly supported cohomology of the
+constant sheaf on the dense open `W` is constructible.
+Source: Stacks Project, Tag 0GKX, proof of `lemma-constant-shriek-rel-dim-1`. -/
+theorem goodCurvesOpen_constantShriek_constructible
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X V : Scheme.{u}} [IsNoetherian X] [IsNoetherian V]
     (f : X ⟶ V) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -571,7 +594,7 @@ theorem constructibleCohomology_lowerShriek_constant_of_smooth_relativeDimension
   have : IsAffine X := isAffine_of_isAffineHom h
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian h
   apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
-  apply constructible_of_closed_generic
+  apply constructible_of_closed_nonempty_generic
   intro Z i _ _
   have : IsAffine Z := isAffine_of_isAffineHom i
   have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian i
