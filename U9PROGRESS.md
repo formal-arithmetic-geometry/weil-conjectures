@@ -183,23 +183,22 @@
 - Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
 
-# PZ004 complete
+# BZ697 complete
 
-- Branch: `u9/PZ004`; baseline: `6a2f94596`.
-- All three assigned modules passed `ucheck-bump` together at `e6ef96a92174a542b10314c70b8e808c55543e51`
-  (4749 jobs). Their Lean files are unchanged in the final source tree.
-- Five downstream modules are green: StrictTowerOpenExtension,
-  FiniteConstantCoefficientTransport, FiniteOpenBaseChangeNormalized,
-  TowerSquareUnitSections, ScalarRestrictionOpenSupport.
-- Final downstream build at `ffe256e2b966d4316b52a27eb7ac85a3a4ae4561`: rc=0, failed=0, 5844 jobs.
-- Ported compositor directions, explicit homotopy factorization of the unit map,
-  hidden-Qh proof imports, inverse cancellation, and the balancing identity rewrite.
-  The user's continuation authorized the proposed private-helper API repairs.
-- Coordinate importers were skipped per ownership rule: unowned
-  FiniteFreePresentedScalarCoordinates.lean:111 lacks an HSMul instance.
-  No changes to the blocked coordinate modules remain in the final diff.
-- Logs: `/home/ubuntu/u9/bz/BUILD-PZ004-unit-green-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-PZ004-downstream2-green-full.log`.
-- Handoff: `/home/ubuntu/u9/bz/FIXES-PZ004.md`, `/home/ubuntu/u9/state/PZ004.DONE`.
-- No local Lean/Lake, sorries, trust bypasses, option increases, or docstring changes.
-- This completion commit changes only documentation after successful source validation.
+- Branch: `u9/BZ697`; starting source commit: `6a2f94596`.
+- User continuation authorized the exact two-field compositor API patch proposed earlier.
+  `pullEvaluation_model` and `coefficientPullback_transpose` now use the pinned Mathlib
+  compositor direction; all other declaration text and existing docstrings are unchanged.
+- Leaf validation: `2250be4ddc3d32a1a720e9a716432dca4cbcd57e`, rc=0, failed=0, 4895 jobs.
+- Final downstream validation: `0c023010b6`, rc=0, failed=0, 5132 jobs.
+- Three modules rebuilt green: `SemilinearGeometryDerived`,
+  `RingedCoefficientProjectionData`, and `RingedCoefficientPullbackComparison`, all under
+  `WeilConjectures.AlgebraicGeometry`.
+- Skipped `Geometry.SemilinearGeometryOps` and `Geometric.GeometricOrdinaryRealization`
+  because their unowned PZ007 dependency `CoefficientRingedSequenceSiteSupplement` has
+  four confirmed errors in identical source. The unvalidated downstream edit was reverted.
+- Full logs, source-hash blocker evidence, contract audit and machine rule are recorded in
+  `/home/ubuntu/u9/bz/FIXES-BZ697.md`. Completion marker: `/home/ubuntu/u9/state/BZ697.DONE`.
+- Actual build pins checked: Lean v4.35.0-rc3, Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+- This final commit changes only progress documentation; Lean sources match the green build.
