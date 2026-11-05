@@ -117,8 +117,11 @@ private theorem resolution_baseChange_sections
     ObjectProperty.homMk
       ((NatTrans.mapHomologicalComplex η (.up ℤ)).app I.obj ≫
         (F'.mapHomologicalComplex (.up ℤ)).map φ)
+  have hqI : (DerivedCategory.quotientCompQhIso A).symm.app I.obj = Iso.refl _ := rfl
+  have hqJ : (DerivedCategory.quotientCompQhIso A').symm.app J.obj = Iso.refl _ := rfl
   have ha := Functor.resolution_pullback_augmentation L G φ hφ
   dsimp only at ha
+  erw [hqI, hqJ] at ha
   change L.mapDerivedCategoryPlus.map a.hom ≫
     L.mapDerivedCategoryPlusFactorsh.hom.app KI ≫ DerivedCategory.Plus.Q.map f =
     (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app G ≫ a'.hom at ha
