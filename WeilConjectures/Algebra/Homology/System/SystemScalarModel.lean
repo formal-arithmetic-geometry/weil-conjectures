@@ -232,7 +232,7 @@ theorem nonempty_systemScalarModel {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S
                 apply (Iso.eq_comp_inv ((DerivedCategory.quotientCompQhIso
                   (ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J S))).app
                     ((D.E.mapHomologicalComplex (.up ℤ)).obj P))).1
-                simpa only [Category.assoc] using hεP P) d hd }⟩
+                simpa only [Iso.app_inv, Category.assoc] using hεP P) d hd }⟩
   intro P U x
   have hu := ha P (D.E.obj P) (eqToHom (D.obj_eq P).symm) U x
   dsimp only [systemModelTmul]
