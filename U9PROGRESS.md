@@ -246,12 +246,25 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ862 in progress
+# BZ862 complete
 
 - Branch: u9/BZ862; starting commit db406319f.
-- User continuation authorizes the previously proposed upstream prerequisite restoration.
-- Restored comparisonIntoPullback and the five-file counit prerequisite path from pre-prune commits.
-- Applied known public/implementation Localization imports for Qh definitional conversions.
-- The earlier ucheck-bump request is still queued; its runner takes the latest branch when a tree frees.
-- Next: commit/push restorations, repair remote build diagnostics, then continue downstream and write DONE.
-- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ862.md. No local Lean/Lake or proof shortcuts.
+- Assigned OpenRestrictedCanonicalSquare passed ucheck-bump (15s) at source commit
+  d99e9c990ca8f0d4695a20c6f727aeceb50b0113 on newsrv:/home/ubuntu/u9n/bumpw3.
+- All five restored prerequisite modules are green. Nine prerequisite declarations
+  were restored following the user's continuation after the restoration proposal.
+- Assigned module has only import changes. All restored mathematical formulas and
+  binders are unchanged; three proof-only counit equations are private.
+- Repairs: Localization implementation imports, explicit Q endpoints via a reflexive
+  cast, explicit source-category selection, direct map_comp proof, and redundant-rfl removal.
+- Direct importer OpenRestrictedComparisonCore was built and is blocked at line 81 by
+  the separately pruned comparisonIntoPullback_naturality and its upstream comparison chain.
+  Its next importer inherits that blocker; this path is skipped under the brief's rule.
+- Final combined batch: built=8, failed=1, rc=1 solely for that downstream blocker.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ862-fix2-core-full.log.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ862.md. Contract audit and idempotent rules
+  are saved as BZ862-contract-audit.txt and BZ862-verified-rules.json.
+- Six changed Lean files checked: no placeholders, trust bypasses, profiler probes,
+  or resource-limit additions. No local Lean/Lake execution. No declarations deleted.
+- This completion commit changes only progress documentation; Lean sources match
+  the successful assigned-module build. Completion marker: /home/ubuntu/u9/state/BZ862.DONE.
