@@ -105,3 +105,15 @@
 - No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ404 in progress
+
+- Branch: `u9/BZ404`; starting commit: `98654719b`.
+- Proof-local χ now uses the reversed Mathlib composition isomorphism.
+- The proof-only build eliminated both proof errors; the remaining error was the
+  mechanical sweep's misplaced `.symm` in the `hf` hypothesis.
+- The user instructed continuation after the exact statement-syntax proposal.
+  That patch is now applied, preserving the intended map.
+- Next: remote unit validation, then both direct importers, then DONE.
+- Fix notes and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ404.md`.
+- No local Lean/Lake execution, proof placeholders, or limit increases.
