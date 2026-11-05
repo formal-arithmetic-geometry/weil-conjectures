@@ -95,3 +95,5 @@ coeffRing and its duplicate MonObj/IsCommMonObj instances, use raw continuousMap
 in the entire duplicated chain. Keep explicit finiteReduction/compositeReduction codomains, new
 pullback/adjunction/composition/reading definitions, own coefficient category, and coeffType.
 No old finished reading proof is substituted. Previous alias variant is frozen in git/logs.
+
+[K4c→K4/K9/K4b, 2026-11-05 20:58 CST] Read MR sections2–4/new LEAD04:25; no new A3 scalar variants. K4 owns generic reduced-trace adapter; K9 owns proper exceptional/rebased pullback drafts. K4c will take the ACTUAL INTEGRAL OPEN compact-support exchange/reduction cube, following OpenPieceCoherence + SquareCompatibleMate.exchangeLeft. This is the geometric open contribution to W2(b), not another generic trace lemma. Consumer support still available on K4 failure. Last existing raw-ring diagnostic completed0d41a6f011/log204757: removing duplicate coeffRing/MonObj route makes the previously65.7s boundary TYPE check224ms and source-functor identity237ms; only direct transported-iso rfl exceeds elaborator recursion. Full original theorem still NOT GREEN. Freeze diagnostics while working on open cube.
