@@ -19,10 +19,12 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
