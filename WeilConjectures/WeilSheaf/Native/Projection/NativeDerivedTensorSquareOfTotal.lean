@@ -89,7 +89,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       (condensedRealizationTotalTensorIso k₀ l Z)
       (by
         have hn := projection_nativePullTensor_normalization k₀ l g
-        delta ProjectionRestrictionTensorNormalization at hn
+        unfold ProjectionRestrictionTensorNormalization at hn
         dsimp only [L, nativeOpenPull]
         as_aux_lemma => with_reducible cast_proofs hn)
       (by

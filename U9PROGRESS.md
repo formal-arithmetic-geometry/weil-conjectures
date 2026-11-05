@@ -422,3 +422,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 11:00:57 CST: 104520 rc1 after689s, TransportExact isolates kernel1M failure at FIRST interface hn, line93, before realization/final casts. Next diagnostic uses exact_mod_proofs at strictly reducible transparency to report its first data-instance mismatch; intentional diagnostic stop prevents any long follow-on kernel check. No new mathematical gap or budget raise.
 
 2026-11-05 11:05:58 CST: 110259 diagnostic44s: first hn exact_mod_proofs succeeds at strictly reducible transparency; only intentional stopping run_tac has ambiguous result-type errors. Thus no structural mismatch reported. Remove diagnostic; replace broad predicate dsimp with delta, and first-interface structural HEq transport with incremental cast_proofs inside ordinary as_aux_lemma. All subsequent interfaces retain TransportExact to pinpoint any later issue. Same1M budget.
+
+2026-11-05 11:07:39 CST: 110620 fails32s before casting: delta reports it did not reduce ProjectionRestrictionTensorNormalization at hn. Use ordinary unfold for the named predicate; incremental cast/as_aux proof unchanged.
