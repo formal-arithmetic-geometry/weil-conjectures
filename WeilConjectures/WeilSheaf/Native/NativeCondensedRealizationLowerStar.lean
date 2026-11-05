@@ -164,5 +164,85 @@ lemma mateEquiv_derivedCondensedRealizationUpperStarIso :
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
     (condensedRealization k₀ l Y) (condensedRealization k₀ l Z)
     (condensedRealizationUpperStarIso k₀ l g).symm (condensedRealizationLowerStarIso k₀ l g) rfl
+set_option maxHeartbeats 1000000 in
+/-- **The derived base change map of the condensed realization along a pushforward, through
+the two factors of the condensed realization.** As `N = forget ⋙ Φ`, the derived base change map
+`Rg_* ⋙ D(N_Y) ⟶ D(N_Z) ⋙ Rḡ_*` is the comparison of forgetting the Weil structure with the
+derived pushforwards (`CategoryTheory.Endofunctor.IsoAlgebra.derivedForgetCommIso`) followed by
+the comparison of the condensed model `Φ` with the derived pushforwards, up to the identifications
+`D(forget ⋙ Φ) ≅ D(forget) ⋙ D(Φ)`. -/
+lemma mateEquiv_derivedCondensedRealizationUpperStarIso_app
+    (K : DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) :
+    (mateEquiv (derivedUpperStarLowerStarAdjunction k₀ l g)
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+      (derivedCondensedRealizationUpperStarIso k₀ l g).hom).natTrans.app K =
+      (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
+          (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).hom.app
+          ((lowerStar k₀ l g).rightDerivedFunctor.obj K) ≫
+        (adicSheafEquivCondensedMod l
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.mapDerivedCategory.map
+          ((IsoAlgebra.derivedForgetCommIso.{u + 1, u + 1, u + 2, u + 2}
+            (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _))).hom.app K) ≫
+        (Functor.rightDerivedFunctorCommIso (adicLowerStarCompCondensedModIso l
+          (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))).hom.app
+          ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)).mapDerivedCategory.obj K) ≫
+        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+          (Scheme.Hom.geometricFiberMap g
+            (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor.map
+          ((Functor.mapDerivedCategoryCompIso
+            (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z))
+            (adicSheafEquivCondensedMod l
+              (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor).inv.app K) := by
+  letI := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  letI := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have hd : IsoAlgebra.derivedForgetCommIso.{u + 1, u + 1, u + 2, u + 2}
+      (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _)) =
+      Functor.rightDerivedFunctorCommIso (IsoAlgebra.mapOfNatIsoCompForgetIso
+        (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _)) :
+          lowerStar k₀ l g ⋙ IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y) ≅
+            IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z) ⋙
+              adicLowerStar l (Scheme.Hom.geometricFiberMap g (comp_over g _))) :=
+    rfl
+  have hY : Functor.mapDerivedCategoryNatIso (Iso.refl (condensedRealization k₀ l Y) :
+      IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y) ⋙
+        (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor ≅
+          condensedRealization k₀ l Y) = Iso.refl _ :=
+    Iso.ext Functor.mapDerivedCategoryNatIso_refl
+  have hZ : Functor.mapDerivedCategoryNatIso (Iso.refl (condensedRealization k₀ l Z) :
+      IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z) ⋙
+        (adicSheafEquivCondensedMod l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor ≅
+          condensedRealization k₀ l Z) = Iso.refl _ :=
+    Iso.ext Functor.mapDerivedCategoryNatIso_refl
+  rw [mateEquiv_derivedCondensedRealizationUpperStarIso,
+    Functor.rightDerivedFunctorCommIso_hom_app_comp
+      (adicLowerStarCompCondensedModIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
+      (IsoAlgebra.mapOfNatIsoCompForgetIso
+        (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _)) :
+          lowerStar k₀ l g ⋙ IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y) ≅
+            IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z) ⋙
+              adicLowerStar l (Scheme.Hom.geometricFiberMap g (comp_over g _)))
+      (condensedRealizationLowerStarIso k₀ l g)
+      (Iso.refl (condensedRealization k₀ l Z) :
+        IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z) ⋙
+          (adicSheafEquivCondensedMod l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor ≅
+            condensedRealization k₀ l Z)
+      (Iso.refl (condensedRealization k₀ l Y) :
+        IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y) ⋙
+          (adicSheafEquivCondensedMod l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor ≅
+            condensedRealization k₀ l Y) ?_ K, hY, hZ, hd]
+  · simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, Iso.refl_inv,
+      Iso.refl_hom, Category.id_comp, Category.comp_id]
+    rfl
+  · intro K
+    rw [condensedRealizationLowerStarIso_hom]
+    simp only [TwoSquare.vComp, IsoAlgebra.mapOfNatIsoCompForgetIso, NatTrans.comp_app,
+      Functor.associator_inv_app, Functor.associator_hom_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, Category.id_comp,
+      Category.comp_id]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
