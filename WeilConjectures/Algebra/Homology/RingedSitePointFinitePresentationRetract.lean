@@ -237,7 +237,8 @@ private local instance (ι : Type w) :
   let : HasColimitsOfShape (Discrete ι)
       (PresheafOfModules.{w} (SheafFreeModule.ring R).obj) :=
     PresheafOfModules.hasColimitsOfShape _ _
-  exact SheafOfModules.instHasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+    _ _
 
 private abbrev freePower (ι : Type w) :=
   ∐ fun _ : ι ↦ (SheafFreeModule.free R).obj T
