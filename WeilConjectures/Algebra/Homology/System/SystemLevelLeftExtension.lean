@@ -134,8 +134,7 @@ theorem systemLevelLeftExtensionTheory : Nonempty (SystemLevelLeftExtensionTheor
                     (derivedChangeRingIndependentCoefficients J (B.obj (op m))).obj) :=
                   PresheafOfModules.hasColimitsOfShape _ _
                 exact
-                  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
-                    _ _
+                  instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
               exact systemEvaluation_colimitsOfShape B (Discrete I) n
             derivedEvaluationCoproducts := derivedSystemEvaluation_coproducts
             cohomology := systemDerivedCohomology
