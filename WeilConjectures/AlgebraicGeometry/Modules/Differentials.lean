@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
+public import WeilConjectures.AlgebraicGeometry.Modules.LocalDerivation
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
@@ -93,7 +94,7 @@ For an `A`-algebra `B`, apply these to `φ = CommRingCat.ofHom (algebraMap A B)`
 universe u
 
 open CategoryTheory Limits Opposite TopologicalSpace PresheafOfModules
-  PresheafOfModules.DifferentialsConstruction
+  PresheafOfModulesOfCommRing PresheafOfModulesOfCommRing.DifferentialsConstruction
 
 namespace AlgebraicGeometry.Scheme.Hom
 
@@ -260,16 +261,16 @@ noncomputable def relativeDifferentialsIsoOfDerivation {S₁ S₂ : Scheme.{u}} 
     ext U x
     simp only [relativeDifferentialsHomEquiv_apply]
     erw [Derivation.postcomp_d_apply, Derivation.postcomp_d_apply]
-    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ConcreteCategory.comp_apply,
-      relativeDifferentialsHomEquiv_symm_app_d]
+    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.hom_comp,
+      LinearMap.comp_apply, relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₂.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
   inv_hom_id := by
     apply (f₂.relativeDifferentialsHomEquiv _).injective
     ext U x
     simp only [relativeDifferentialsHomEquiv_apply]
     erw [Derivation.postcomp_d_apply, Derivation.postcomp_d_apply]
-    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ConcreteCategory.comp_apply,
-      relativeDifferentialsHomEquiv_symm_app_d]
+    erw [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.hom_comp,
+      LinearMap.comp_apply, relativeDifferentialsHomEquiv_symm_app_d]
     exact (f₁.relativeDifferentialsHomEquiv_symm_app_d _ _).trans rfl
 
 
@@ -286,11 +287,11 @@ noncomputable def relativeDifferentialsCompIso {V : Scheme.{u}} (g : X ⟶ V) (i
         rw [appIso_hom, Category.assoc, g.naturality, ← Category.assoc, ← comp_app]
         rfl
       rw [← ConcreteCategory.comp_apply, h, ConcreteCategory.comp_apply]
-      erw [D.d_map, D.d_app_app]
+      erw [D.d_map, PresheafOfModules.Derivation'.d_app_app D]
       exact map_zero _)
     (fun M D W a ↦ by
       change D.d (g.app _ (i.app W a)) = 0
-      exact D.d_app_app _ _)
+      exact PresheafOfModules.Derivation'.d_app_app D _ _)
 
 
 section Restrict
@@ -313,7 +314,8 @@ noncomputable def pushforwardDerivation :
           ((j ≫ f).relativeDifferentialsDerivation.d (j.app W₁.unop x))
       rw [← ConcreteCategory.comp_apply, j.naturality, ConcreteCategory.comp_apply]
       exact (j ≫ f).relativeDifferentialsDerivation.d_map _ _)
-    (fun V a ↦ (j ≫ f).relativeDifferentialsDerivation.d_app_app V a)
+    (fun V a ↦ PresheafOfModules.Derivation'.d_app_app
+      (j ≫ f).relativeDifferentialsDerivation V a)
 
 lemma pushforwardDerivation_desc_app_d (W : X.Opens) (s : Γ(X, W)) :
     ((f.relativeDifferentialsHomEquiv _).symm (f.pushforwardDerivation j)).val.app (op W)
@@ -343,7 +345,8 @@ noncomputable def restrictDerivation :
       change f.relativeDifferentialsDerivation.d
         ((j.appIso (j ⁻¹ᵁ (f ⁻¹ᵁ V))).inv (j.app (f ⁻¹ᵁ V) (f.app V a))) = 0
       rw [← ConcreteCategory.comp_apply (j.app _), app_appIso_inv]
-      erw [f.relativeDifferentialsDerivation.d_map, f.relativeDifferentialsDerivation.d_app_app]
+      erw [f.relativeDifferentialsDerivation.d_map,
+        PresheafOfModules.Derivation'.d_app_app f.relativeDifferentialsDerivation]
       exact map_zero _)
 
 /-- The morphism `Ω¹_{X/S}|_U ⟶ Ω¹_{U/S}`. -/
@@ -543,7 +546,7 @@ noncomputable def relativeDifferentialsSpecΓDerivation :
     (fun a ↦ by
       rw [← Scheme.specMap_appTop_ΓSpecIso_inv, ← Scheme.Hom.appLE_top_top _ le_top,
         Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app]
-      exact PresheafOfModules.Derivation'.d_app _ _)
+      exact PresheafOfModulesOfCommRing.Derivation'.d_app _ _)
 
 /-- For a ring map `φ : R ⟶ S`, the `S`-linear map `Ω_{S/R} → Γ(Spec S, Ω¹_{Spec S / Spec R})`
 sending `D b` to `d b`, given by the universal property of Kähler differentials. -/
