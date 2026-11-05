@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.Abelian.DerivedSingleShiftNormalization
 import WeilConjectures.CategoryTheory.Abelian.DerivedBottomInclusion
