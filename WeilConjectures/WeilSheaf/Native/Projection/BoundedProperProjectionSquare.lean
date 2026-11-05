@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperForget
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProjectionIso
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedForgetNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionForgetSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.MonoidalProjectionForgetSquare
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 
 /-! # The proper projection square on Weil complexes -/
@@ -70,9 +71,10 @@ theorem projectionForgetSquare_proper :
     (ProEtaleWeilSheaf.nativeProperProjectionNatTrans k₀ l g)
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (gb).left).uncurriedProjectionMorphismNatTrans
     (ProEtaleWeilSheaf.nativeProperProjection_forgetSquare k₀ l g)
+  apply (projectionForgetSquare_monoidal_iff _ _ _ _ _ _).2
   intro M N
   apply ObjectProperty.hom_ext
-  have hm := h M.obj N.obj
+  have hm := (projectionForgetSquare_uncurried_iff _ _ _ _ _ _).1 h M.obj N.obj
   have hg := CondensedRing.boundedConstructibleProjectionMorphism_hom l gb
     ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
   change ((CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l gb).projectionMorphism

@@ -61,16 +61,15 @@ theorem projectionForgetSquare_open :
       (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l Z)
       (ProEtaleWeilSheaf.nativeOpenProjectionIso k₀ l j).hom
       (B.uncurriedInvProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) := by
+    apply (projectionForgetSquare_uncurried_iff _ _ _ _ _ _).2
     intro M N
-    simpa only [Adjunction.uncurriedInvProjectionComparisonNatTrans, Functor.uncurry_obj_map,
-      curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
-      Category.id_comp, Category.comp_id] using
-      ProEtaleWeilSheaf.map_nativeOpenProjectionIso_hom_app k₀ l j M N
+    exact ProEtaleWeilSheaf.map_nativeOpenProjectionIso_hom_app k₀ l j M N
   have h := projectionForgetSquare_of_iso _ _ _ _
     (projectionRealizationCompIso k₀ l U) (projectionRealizationCompIso k₀ l Z) _ _ h₀
+  apply (projectionForgetSquare_monoidal_iff _ _ _ _ _ _).2
   intro M N
   apply ObjectProperty.hom_ext
-  have hm := h M.obj N.obj
+  have hm := (projectionForgetSquare_uncurried_iff _ _ _ _ _ _).1 h M.obj N.obj
   let b := CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb
   have hg : (inv (b.projectionComparison ((compactProjectionForget k₀ l U).obj M)
       ((compactProjectionForget k₀ l Z).obj N))).hom =
