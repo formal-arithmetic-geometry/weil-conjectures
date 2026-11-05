@@ -87,14 +87,20 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
 - This completion commit changes only progress documentation; Lean source matches the green build.
 
-# BZ307 in progress
+# BZ307 complete
 
 - Branch: `u9/BZ307`; starting commit: `ec1bc636d93cb23a821cc484ab6aef1db014813f`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp`.
-- Baseline remote build failed only at the two obsolete compositor `.symm` uses in the statement.
-- The user instructed continuation after the exact two-expression compatibility proposal;
-  `BZ307-statement-compatibility.patch` is applied, along with the matching proof changes.
-- Assigned module passed `ucheck-bump` at `fa8b9a053e`: rc=0, failed=0, 1924 jobs.
-- Next: check direct importers and write the DONE marker.
-- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
+- Assigned `RightDerivedFunctor.CommIsoComp` and three downstream modules passed together:
+  `HomotopyCategory.MateCounit`, `IsoAlgebraDerivedRightAdjointFree`, and
+  `IsoAlgebraDerivedRightAdjointCounit`.
+- Final `ucheck-bump`: rc=0, failed=0, 2143 jobs, on `poolb:43.166.74.12`.
+- Validated source commit: `fadcb6a99f64bef30efc7db992eb12fb2d852d0e`. This completion commit changes documentation only.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ307-downstream2-full.log`.
+- The user instructed continuation after the exact two-expression statement proposal.
+  Applied the compositor orientation substitutions and matching proof migration;
+  other declarations and all existing docstrings are unchanged.
+- Two direct importers were skipped after failures in dependencies owned by BZ289,
+  BZ290, and BZ291. Their errors are recorded in the fix log.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ307.DONE`.
