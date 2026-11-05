@@ -204,14 +204,18 @@ private theorem comparison_isIso_app {Z W : Scheme.{u}} (q : Z ⟶ W)
         rw [F.mapDerivedCategoryFactorsh_hom_app]
         change F.mapDerivedCategory.map (𝟙 _) ≫ F.mapDerivedCategoryFactors.hom.app K ≫
           𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-        simp
+        erw [F.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id]
+        simp only [Category.id_comp]
+        exact Category.comp_id _
       have hG (K : CochainComplex (proEtaleRingModules W S.target) ℤ) :
           G.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K) =
             G.mapDerivedCategoryFactors.hom.app K := by
         rw [G.mapDerivedCategoryFactorsh_hom_app]
         change G.mapDerivedCategory.map (𝟙 _) ≫ G.mapDerivedCategoryFactors.hom.app K ≫
           𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-        simp
+        erw [G.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id]
+        simp only [Category.id_comp]
+        exact Category.comp_id _
       intro H
       obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
       rw [hF]

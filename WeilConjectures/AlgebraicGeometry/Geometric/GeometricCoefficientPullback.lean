@@ -267,7 +267,7 @@ theorem geometricCoefficientPullbackMate_isIso [PreservesFiniteLimits uInv]
       (TwoSquare.mk _ _ _ _
         (((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.mapDerivedCategoryNatIso (O.restrictionPullback h) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom))).natTrans := by
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom))).natTrans := by
   classical
   let S := A.scalar h
   let T := target.scalar h

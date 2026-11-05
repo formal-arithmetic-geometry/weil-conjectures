@@ -192,6 +192,63 @@ private theorem moduleGComp_id_right {U X : Scheme.{u}} (j : U ⟶ X) :
   simpa only [Category.assoc, eqToIso.hom, eqToHom_trans, eqToHom_refl,
     NatTrans.id_app, Category.id_comp, Category.comp_id] using ordinary_right_unit j B N
 
+private theorem gComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) :
+    (gComp B (𝟙 U) j).hom ≫
+        Functor.whiskerLeft (G B j) (gId B U).hom =
+      (eqToIso (congrArg (G B) (Category.id_comp j))).hom := by
+  apply NatTrans.ext
+  funext N
+  have h := NatTrans.congr_app (congrArg Iso.hom (gCompEq_left_unit j B)) N
+  simp only [gCompEq, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Iso.refl_hom,
+    NatTrans.id_app] at h
+  erw [Category.comp_id] at h
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+  apply (cancel_epi ((eqToIso
+    (congrArg (G B) (Category.id_comp j).symm)).hom.app N)).1
+  simpa only [Category.assoc, eqToIso.hom, eqToHom_trans, eqToHom_refl,
+    Category.id_comp, Category.comp_id, NatTrans.id_app] using h
+
+private theorem gComp_id_right {U X : Scheme.{u}} (j : U ⟶ X) :
+    (gComp B j (𝟙 X)).hom ≫
+        Functor.whiskerRight (gId B X).hom (G B j) =
+      (eqToIso (congrArg (G B) (Category.comp_id j))).hom := by
+  apply NatTrans.ext
+  funext N
+  have h := NatTrans.congr_app (congrArg Iso.hom (gCompEq_right_unit j B)) N
+  simp only [gCompEq, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Iso.refl_hom,
+    NatTrans.id_app] at h
+  erw [Category.comp_id ((G B j).map ((gId B X).hom.app N))] at h
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app]
+  apply (cancel_epi ((eqToIso
+    (congrArg (G B) (Category.comp_id j).symm)).hom.app N)).1
+  simpa only [Category.assoc, eqToIso.hom, eqToHom_trans, eqToHom_refl,
+    Category.id_comp, Category.comp_id, NatTrans.id_app] using h
+
+private theorem squareG_id {U X : Scheme.{u}} (j : U ⟶ X)
+    (h : (𝟙 U) ≫ j = j ≫ (𝟙 X)) (N : Derived B X) :
+    (squareG B (𝟙 U) j j (𝟙 X) h).inv.app N ≫
+        (G B j).map ((gId B X).hom.app N) =
+      (gId B U).hom.app ((G B j).obj N) := by
+  have hl := congr_app (gComp_id_left B j) N
+  have hr := congr_app (gComp_id_right B j) N
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hl hr
+  have ht : (eqToIso (congrArg (G B) h)).hom ≫
+      (eqToIso (congrArg (G B) (Category.comp_id j))).hom =
+        (eqToIso (congrArg (G B) (Category.id_comp j))).hom := by
+    simp only [eqToIso.hom, eqToHom_trans]
+  have htN := congr_app ht N
+  simp only [NatTrans.comp_app] at htN
+  simp only [squareG, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    eqToIso.inv, Category.assoc]
+  change (gComp B (𝟙 U) j).inv.app N ≫
+      (eqToIso (congrArg (G B) h)).hom.app N ≫
+      (gComp B j (𝟙 X)).hom.app N ≫
+      (G B j).map ((gId B X).hom.app N) = _
+  rw [hr, htN, ← hl]
+  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+
 private theorem betaInv_id_aux
     {C D : Type*} [Category* C] [Category* D]
     {L : C ⥤ D} {G₀ : D ⥤ C} (a : L ⊣ G₀)
@@ -227,6 +284,16 @@ private theorem jId_transpose (X : Scheme.{u}) (N : Derived B X) :
         (G B (𝟙 X)).map ((jId B X).hom.app N) = (gId B X).inv.app N := by
   exact leftAdjointIdIso_transpose (jAdj B (𝟙 X)) (gId B X) N
 
+private theorem squareG_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (N : Derived B X) :
+    (squareG B p (𝟙 U) (𝟙 X) p h).inv.app N ≫
+        (gId B U).hom.app ((G B p).obj N) =
+      (G B p).map ((gId B X).hom.app N) := by
+  rw [squareG_flip B (𝟙 U) p p (𝟙 X) h.symm, Iso.symm_inv]
+  apply (cancel_epi ((squareG B (𝟙 U) p p (𝟙 X) h.symm).inv.app N)).1
+  rw [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  exact (squareG_id B p h.symm N).symm
+
 private theorem betaInv_id_open_aux
     {C D : Type*} [Category* C] [Category* D]
     {J₀ G₀ : C ⥤ C} {J₁ G₁ : D ⥤ D} (a₀ : J₀ ⊣ G₀) (a₁ : J₁ ⊣ G₁)
@@ -250,9 +317,28 @@ private theorem betaInv_id_open_aux
   rw [Category.assoc, hs, ← Functor.map_comp, Iso.inv_hom_id_app]
   exact (F.map_id _).trans (Iso.inv_hom_id_app e₁ _).symm
 
+private theorem betaInv_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (N : Derived B X) :
+    (betaInv B p (𝟙 U) (𝟙 X) p h).app N ≫
+        (G B p).map ((jId B X).hom.app N) =
+      (jId B U).hom.app ((G B p).obj N) := by
+  exact betaInv_id_open_aux (jAdj B (𝟙 X)) (jAdj B (𝟙 U)) (G B p)
+    (gId B X) (gId B U) (jId B X) (jId B U)
+    (squareG B p (𝟙 U) (𝟙 X) p h) (jId_transpose B X) (jId_transpose B U)
+    (squareG_id_open B p h) N
+
 private theorem iso_unit_cancel {C : Type*} [Category* C] {X Y Z : C}
     (e : X ≅ Y) (a : X ⟶ Z) (b : Y ⟶ Z) (h : e.inv ≫ a = b) : e.hom ≫ b = a := by
   rw [← h, ← Category.assoc, e.hom_inv_id, Category.id_comp]
+
+private theorem beta_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (hsq : IsPullback p (𝟙 U) (𝟙 X) p)
+    (N : Derived B X) :
+    (beta B p (𝟙 U) (𝟙 X) p h hsq).hom.app N ≫
+        (jId B U).hom.app ((G B p).obj N) =
+      (G B p).map ((jId B X).hom.app N) := by
+  exact iso_unit_cancel ((beta B p (𝟙 U) (𝟙 X) p h hsq).app N) _ _
+    (betaInv_id_open B p h N)
 
 attribute [local semireducible] G R J adj jAdj gComp gId alpha
 set_option backward.isDefEq.respectTransparency true
@@ -269,6 +355,95 @@ def openBetaTower {U' U X' X : Scheme.{u}}
     (Functor.whiskeringRight ℕᵒᵖ (Modules B U) (Modules B X')).mapIso
       (openBetaModule B a j' j g w sq) ≪≫
     (Functor.whiskeringRightObjCompIso _ _).symm
+
+set_option backward.isDefEq.respectTransparency true in
+/-- The derived tower comparison is the exact descent of the specific sheaf comparison,
+and its inverse has the specified open-unit transpose before evaluation.
+Source: Stacks, Tags 015F, 09AE and 04J0
+(blueprint: lem-cbc-tower-open-beta-normalization).
+Proof: extend the sheaf comparison termwise; naturality gives the transition-map and
+chain-map equations. Use lem-weil-pbc-exact-functor-derived-factorization and
+lem-weil-pbc-localization-universal-property (2),(3) to descend the comparison, its
+inverse identities and its transpose equation. The descended units are the specified
+jAdj units, so injectivity of their Hom equivalence identifies the result with beta.
+No faithfulness of derived evaluations is used. -/
+theorem openBetaNormalization {U' U X' X : Scheme.{u}}
+    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
+    (sq : IsPullback a j' j g) :
+    beta B a j' j g w sq =
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
+        Functor.mapDerivedCategoryNatIso (openBetaTower B a j' j g w sq) ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm ∧
+    (∀ M : Derived B U,
+      (jAdj B j').homEquiv _ _ ((beta B a j' j g w sq).inv.app M) =
+        (G B a).map ((jAdj B j).unit.app M) ≫
+          (squareG B a j' j g w).inv.app ((J B j).obj M)) := by
+  have hb : betaInv B a j' j g w =
+      (Functor.mapDerivedCategorySquareIso
+        (F₁ := towerPullback B a) (F₂ := towerJ B j')
+        (G₁ := towerJ B j) (G₂ := towerPullback B g)
+        (towerSquare (modulePullback B a) (moduleJ B j') (moduleJ B j)
+          (modulePullback B g) (openBetaModule B a j' j g w sq).symm)).hom := by
+    let e := @asIso _ _ _ _ (singleBetaInv B a j' j g w)
+      (openBetaModule_isIso B a j' j g w sq)
+    let tw := towerSquare (modulePullback B g) (modulePullback B j')
+      (modulePullback B j) (modulePullback B a) (moduleSquareG B a j' j g w)
+    have hτ : (Functor.mapDerivedCategorySquareIso
+        (F₁ := towerPullback B j) (F₂ := towerPullback B a)
+        (G₁ := towerPullback B g) (G₂ := towerPullback B j') tw.symm).hom =
+        (squareG B a j' j g w).inv := by
+      have he : squareG B a j' j g w = Functor.mapDerivedCategorySquareIso
+          (F₁ := towerPullback B g) (F₂ := towerPullback B j')
+          (G₁ := towerPullback B j) (G₂ := towerPullback B a) tw :=
+        Iso.ext (squareG_lift B a j' j g w)
+      rw [he]
+      simp only [Functor.mapDerivedCategorySquareIso,
+        Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
+        Iso.symm_hom, Iso.symm_inv, Category.assoc]
+    have hm (K : Modules B U) :
+        (moduleJAdj B j').unit.app ((modulePullback B a).obj K) ≫
+            (modulePullback B j').map (e.hom.app K) =
+          (modulePullback B a).map ((moduleJAdj B j).unit.app K) ≫
+            (moduleSquareG B a j' j g w).inv.app ((moduleJ B j).obj K) := by
+      simpa only [e, asIso_hom, singleBetaInv, singleBetaInvApp,
+        Adjunction.homEquiv_unit, Functor.id_obj, Functor.comp_obj] using
+        ((moduleJAdj B j').homEquiv ((modulePullback B a).obj K)
+          ((modulePullback B g).obj ((moduleJ B j).obj K))).apply_symm_apply
+          ((modulePullback B a).map ((moduleJAdj B j).unit.app K) ≫
+            (moduleSquareG B a j' j g w).inv.app ((moduleJ B j).obj K))
+    apply NatTrans.ext
+    funext M
+    apply ((jAdj B j').homEquiv ((G B a).obj M)
+      ((G B g).obj ((J B j).obj M))).injective
+    change (jAdj B j').homEquiv ((G B a).obj M) ((G B g).obj ((J B j).obj M))
+      (betaInvApp B a j' j g w M) = _
+    rw [betaInvApp, Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
+    symm
+    rw [← hτ, ← exactAdj_jAdj B j, ← exactAdj_jAdj B j']
+    dsimp only [tw]
+    rw [← towerSquare_symm]
+    exact exact_mate_tower (C₁ := Modules B U) (D₁ := Modules B X)
+      (C₂ := Modules B U') (D₂ := Modules B X')
+      (f₁ := moduleJ B j) (g₁ := modulePullback B j)
+      (f₂ := moduleJ B j') (g₂ := modulePullback B j')
+      (u := modulePullback B a) (v := modulePullback B g)
+      (moduleJAdj B j) (moduleJAdj B j') (moduleSquareG B a j' j g w).symm e hm M
+  constructor
+  · apply Iso.ext_inv
+    rw [show (beta B a j' j g w sq).inv = betaInv B a j' j g w from rfl, hb]
+    rw [towerSquare_symm]
+    have ht : towerSquare (moduleJ B j) (modulePullback B g) (modulePullback B a)
+        (moduleJ B j') (openBetaModule B a j' j g w sq) =
+          openBetaTower B a j' j g w sq := by
+      unfold towerSquare openBetaTower
+      rfl
+    rw [ht]
+    simp only [Functor.mapDerivedCategorySquareIso,
+      Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
+      Iso.symm_hom, Iso.symm_inv, Category.assoc]
+  · intro M
+    exact ((jAdj B j').homEquiv _ _).apply_symm_apply _
 
 /-- The module open compositor conjugate to the specified inverse-image compositor.
 Source: Stacks, Tags 09AE and 0DV0

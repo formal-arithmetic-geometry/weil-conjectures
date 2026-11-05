@@ -71,10 +71,15 @@ theorem exists_affinePushforwardCohomologyEdge_identity
     Functor.whiskerLeft J (Functor.whiskerRight (tilde.adjunction (R := .of A)).counit P) ≫ ε
   refine ⟨α, ?_⟩
   intro C hK
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
   let : T.PreservesHomology := tilde_preservesHomology A
-  let : (affinePushforwardTilde B).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde B).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : (affinePushforwardTilde B).PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits (affinePushforwardTilde B) :=
     Functor.preservesFiniteLimits_of_preservesHomology _

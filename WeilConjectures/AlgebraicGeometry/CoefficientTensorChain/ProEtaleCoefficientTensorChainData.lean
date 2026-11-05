@@ -94,7 +94,6 @@ import WeilConjectures.Algebra.Homology.ProperBaseChange.TensorTotalComparisonSq
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
-  CategoryTheory.Functor.mapHomologicalComplex
 attribute [local irreducible] SheafOfModules.monoidalCategory
 universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits

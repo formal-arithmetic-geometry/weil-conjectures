@@ -125,7 +125,6 @@ private theorem localization_single_one_isZero
     · exact (K.isZero_of_isStrictlyLE n i hi).eq_of_src _ _
   · apply HomologicalComplex.from_single_hom_ext
     simp
-    rfl
 
 private theorem concentratedIso_hom_f
     {A : Type*} [Category* A] [Preadditive A] [HasZeroObject A]

@@ -64,7 +64,7 @@ variable {A : Type u₁} [Category.{v₁} A] [Abelian A] [HasDerivedCategory.{w�
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
 private theorem comp_fac_inverse (P : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategoryCompIso G R).hom.app (DerivedCategory.Q.obj P) ≫
+    (Functor.mapDerivedCategoryCompIso G R).inv.app (DerivedCategory.Q.obj P) ≫
       R.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
       R.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P) =
     (G ⋙ R).mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map
@@ -82,7 +82,7 @@ private theorem localized_transition_fac (δ : F ⟶ G ⋙ R) (P : CochainComple
       F.mapDerivedCategory (G ⋙ R).mapDerivedCategory
       (Functor.whiskerRight (NatTrans.mapHomologicalComplex δ (.up ℤ))
         DerivedCategory.Q)).app (DerivedCategory.Q.obj P) ≫
-      (Functor.mapDerivedCategoryCompIso G R).hom.app (DerivedCategory.Q.obj P) ≫
+      (Functor.mapDerivedCategoryCompIso G R).inv.app (DerivedCategory.Q.obj P) ≫
       R.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app P) ≫
       R.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P) =
     F.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map

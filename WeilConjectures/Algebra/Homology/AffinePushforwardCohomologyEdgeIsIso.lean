@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
@@ -120,15 +122,19 @@ theorem affinePushforwardCohomologyEdge_isIso
         infer_instance
       exact IsIso.of_isIso_comp_right _
         ((DerivedCategory.Qh ⋙ P.rightDerivedFunctor).map (q.map s))
-    let : (affinePushforwardTilde B).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    let : (affinePushforwardTilde B).Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of B) f g
     let : (affinePushforwardTilde B).PreservesHomology := tilde_preservesHomology B
     let : PreservesFiniteLimits (affinePushforwardTilde B) :=
       Functor.preservesFiniteLimits_of_preservesHomology (affinePushforwardTilde B)
     let : PreservesFiniteColimits (affinePushforwardTilde B) :=
       Functor.preservesFiniteColimits_of_preservesHomology (affinePushforwardTilde B)
-    let : (affinePushforwardTilde A).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    let : (affinePushforwardTilde A).Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of A) f g
     let : (affinePushforwardTilde A ⋙ P).Additive := inferInstance
     let : (affinePushforwardTilde A ⋙ P).PreservesZeroMorphisms :=
       ⟨fun X Y => by simp⟩
