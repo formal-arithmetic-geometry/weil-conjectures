@@ -469,7 +469,7 @@ private theorem tmul_natural {A S : Sheaf J CommRingCat.{w}} (a : A ⟶ S)
         (s ⊗ₜ[A.obj.obj U, (a.hom.app U).hom] x)) at h
   rw [show (changeOfRingsPresheaf (J := J) a M).map i
       (s ⊗ₜ[A.obj.obj U, (a.hom.app U).hom] x) =
-      S.obj.map i s ⊗ₜ[A.obj.obj V, (a.hom.app V).hom] M.val.map i x from
+      S.obj.map i s ⊗ₜ[A.obj.obj V, (a.hom.app V).hom] M.val.restrictₛₗ i x from
     Classical.choose_spec (exists_changeOfRingsMap (J := J) a M i) s x] at h
   unfold scalarExtensionConstraintTmul
   exact h.symm
