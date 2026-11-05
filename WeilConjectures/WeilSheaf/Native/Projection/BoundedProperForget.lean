@@ -34,9 +34,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
 local notation "gb" => geometricFiberHom (k₀ := k₀) g
 local notation "EX" => boundedConstructibleAdicEquivBoundedConstructible l k₀
-  (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
+  (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure (X ↘ Spec (CommRingCat.of k₀))))
 local notation "EY" => boundedConstructibleAdicEquivBoundedConstructible l k₀
-  (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
+  (Over.mk (Scheme.Hom.geometricFiberToAlgebraicClosure (Y ↘ Spec (CommRingCat.of k₀))))
 
 /-- The proper geometric comparison chosen as the derived mate of the pullback comparison. -/
 def projectionBoundedAdicCondensedPushIso :

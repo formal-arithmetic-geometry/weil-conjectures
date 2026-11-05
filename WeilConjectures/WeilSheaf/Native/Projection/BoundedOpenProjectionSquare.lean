@@ -37,7 +37,8 @@ local notation "jb" => geometricFiberHom (k₀ := k₀) j
 local notation "Λ" => Profinite.padicAlgClRingObj l
 
 local instance : IsOpenImmersion (jb).left :=
-  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion) j _ ‹_›
+  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion) j
+    (comp_over j (Spec (CommRingCat.of k₀))) ‹_›
 
 /-- The bounded open forget comparison is a restriction of the composite realization square. -/
 lemma projectionOpenForgetIso_hom_app (M : WeilComplex k₀ l U) :
