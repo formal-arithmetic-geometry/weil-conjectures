@@ -125,6 +125,19 @@ private local instance (I : Type r) :
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
   PresheafOfModules.hasColimitsOfShape _ _
 
+private local instance (I : Type r) :
+    Limits.HasColimitsOfShape (Discrete I) (ringedSiteModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
+private local instance (I : Type) :
+    Limits.HasColimitsOfShape (Discrete I) (ringedSiteModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) := by
+  let : Limits.HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
 /-- A transparent abbreviation of Mathlib's existing total tensor functor, exposing its
 canonical signed shift instances. This is definitionally `SiteTensorComplexFunctor R`.
 Source: Stacks, Tags 06YM and 0FNH
