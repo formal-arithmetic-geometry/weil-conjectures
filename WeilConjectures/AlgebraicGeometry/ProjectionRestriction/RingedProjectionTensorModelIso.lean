@@ -89,6 +89,7 @@ private theorem publishedRepresentative (P Q : CochainComplex (Mod R) ℤ)
   simp only [id_eq, SheafOfModules.KFlatFixedTensor.TensorPresentation.representativeIso,
     Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom,
     Functor.mapIso_hom, Functor.mapIso_inv, Iso.prod_hom, Category.assoc]
+  rfl
 
 set_option maxHeartbeats 800000 in
 -- Compare the two normalized representative interfaces without unfolding their tensor data.
