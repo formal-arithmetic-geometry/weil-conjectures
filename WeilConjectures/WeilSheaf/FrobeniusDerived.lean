@@ -73,7 +73,7 @@ noncomputable def frobeniusIso :
     IsoAlgebra.forgetCompIso F
   let c : (IsoAlgebra.forget F ⋙ F).mapDerivedCategory ≅
       (IsoAlgebra.forget F).mapDerivedCategory ⋙ F.mapDerivedCategory :=
-    Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget F) F
+    (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget F) F).symm
   Functor.isoWhiskerLeft (ObjectProperty.ι _)
     (c.symm ≪≫ Functor.mapDerivedCategoryNatIso e)
 

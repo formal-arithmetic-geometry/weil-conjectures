@@ -42,7 +42,7 @@ private noncomputable def resolutionAugmentationIso
     (DerivedCategory.Plus.singleFunctor A 0).obj X ≅
       DerivedCategory.Plus.Q.obj (resolutionPlus I) :=
   DerivedCategory.Plus.ι.preimageIso
-    ((DerivedCategory.Plus.singleFunctorιIso A 0).inv.app X ≪≫
+    ((DerivedCategory.Plus.singleFunctorιIso A 0).app X).symm ≪≫
       (DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
       asIso (DerivedCategory.Q.map I.ι'))
 
@@ -82,9 +82,9 @@ private theorem comparison_eq_unit
     rfl
   have hu : inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
-      DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient B).map vg) =
+      (DerivedCategory.Plus.Qh (C := B)).map ((HomotopyCategory.Plus.quotient B).map vg) =
     v.rightDerivedFunctorPlus.map
-        (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient A).map g)) ≫
+        (DerivedCategory.Plus.Qh (C := A)).map ((HomotopyCategory.Plus.quotient A).map g) ≫
       inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus I))) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, eq_comm, IsIso.comp_inv_eq]
