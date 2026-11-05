@@ -177,7 +177,7 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
   let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) :=
     Scheme.Modules.tensorPullback (Spec.map (CommRingCat.ofHom φg'))
-  letI : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w}
+  let : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w}
     (Spec.map (CommRingCat.ofHom φg'))
   let c :=
     (DerivedCategory.quotientCompQhIso.{w} _).inv.app
@@ -200,8 +200,7 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
     change affineTildeLocalizationStalkIso A' p (C.homology i) _ d₀ y = _
     exact affineTildeLocalizationStalkIso_apply A' p (C.homology i) _ d₀ y
   rw [hl]
-  simp only [Functor.map_comp, ModuleCat.comp_apply]
-  rfl
+  simp only [c, Functor.map_comp, ModuleCat.comp_apply]
 
 
 /-- The canonical target coordinate commutes with stalk localization.
