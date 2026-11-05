@@ -126,8 +126,6 @@ private theorem isFinitePresentation_of_generators_kernel
       ⟨inferInstanceAs (Finite (r.generators j).I)⟩⟩⟩
   exact D.isFinitePresentation
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 300000 in
 -- The two local-presentation constructions and slice-kernel transport need more elaboration
 -- heartbeats; the complete file still compiles within the unchanged 60-second wall limit.
@@ -191,10 +189,7 @@ theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
       isFinitePresentation_free.{u} _
     have : (e.functor.obj (F.over U)).IsQuasicoherent :=
       isQuasicoherent_overEquiv X U (F.over U)
-    have : (e.functor.obj
-        (SheafOfModules.free (R := X.ringCatSheaf.over U)
-          (ULift.{u} (Fin n)))).IsFinitePresentation :=
-      (SheafOfModules.isFinitePresentation
+    have := (SheafOfModules.isFinitePresentation
         (Scheme.Opens.toScheme (X := X) U).ringCatSheaf).prop_of_iso
         (SheafOfModules.mapFreeIso e.functor (ULift.{u} (Fin n))
           (U.sheafOfModulesEquivOverUnit X.ringCatSheaf).symm) hfree
