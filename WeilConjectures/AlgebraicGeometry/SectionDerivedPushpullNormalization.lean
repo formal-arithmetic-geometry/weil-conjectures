@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedRealization
 import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
@@ -89,9 +87,9 @@ private theorem squareFactors
     NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
     (DerivedCategory.Q.obj P))]
-  simp only [Iso.inv_hom_id_app_assoc]
+  simp only [Iso.hom_inv_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   rfl
 
@@ -118,9 +116,9 @@ private theorem squareFactorsh
     NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factorsh,
     Functor.mapDerivedCategoryNatIso_fach]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
     (DerivedCategory.Qh.obj P))]
-  simp only [Iso.inv_hom_id_app_assoc]
+  simp only [Iso.hom_inv_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factorsh_assoc]
 
 private theorem pullSquareFactors
@@ -686,8 +684,8 @@ private theorem derivedPullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (Functor.mapDerivedCategorySquareIso (pullComparison Λ f))
     (Functor.mapDerivedCategorySquareIso (pullComparison Λ (f ≫ g)))
     (Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-      (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
-        (CondensedRing.upperStar Λ f)).symm)
+      Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+        (CondensedRing.upperStar Λ f))
     (derivedPullbackComposition Λ f g)
     (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g)
     (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f)
