@@ -140,10 +140,6 @@ private theorem locally_closed_generators_continuity
   exact homColimitProperty_of_iso (I := I) (N ⋙ DerivedCategory.Q)
     (DerivedCategory.Q.mapCocone (colimit.cocone N)) eK hp
 
-end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtale
-
 section
 
 open CategoryTheory CategoryTheory.Limits
