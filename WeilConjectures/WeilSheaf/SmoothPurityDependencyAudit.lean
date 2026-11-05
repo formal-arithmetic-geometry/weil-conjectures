@@ -7,6 +7,8 @@ module
 import all WeilConjectures.CategoryTheory.Native.NativeOpenTensorDescentData
 import all WeilConjectures.CategoryTheory.Native.NativeWeilTensorConstraintLifts
 import all WeilConjectures.WeilSheaf.CompactProjectionFormula
+import all WeilConjectures.WeilSheaf.FourierInversion.OtherSections
+import all WeilConjectures.WeilSheaf.SmoothPurityAbsolute
 import all WeilConjectures.WeilSheaf.SmoothPurityThomFromTate
 import all WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
 import all WeilConjectures.WeilSheaf.Native.NativeDerivedWeilTensorConstructible
@@ -62,17 +64,21 @@ import Lean
 /-! # Declaration dependency audit for the absolute-purity Thom route
 
 This command reports the declarations containing a direct use of `sorryAx`
-reachable from the final Thom theorem. It creates no mathematical
+reachable from absolute purity, the final Thom theorem and their users. It creates no mathematical
 declaration and does not participate in its proof.
 -/
 
 open Lean in
 run_elab do
-  let root :=
-    `AlgebraicGeometry.WeilComplex.purity_nonempty_trivialLineThom
+  let roots := #[
+    `AlgebraicGeometry.WeilComplex.purity_nonempty_shriekRightAdjoint_adicConstant_iso,
+    `AlgebraicGeometry.WeilComplex.purity_nonempty_trivialLineThom,
+    `AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso,
+    `AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback]
   let env ← getEnv
-  logInfo m!"Root: {root}; axioms: {← collectAxioms root}"
-  let mut pending := #[root]
+  for root in roots do
+    logInfo m!"Root: {root}; axioms: {← collectAxioms root}"
+  let mut pending := roots
   let mut seen : NameSet := {}
   let mut leaves : Array Name := #[]
   let mut unavailable : Array Name := #[]
@@ -119,7 +125,7 @@ run_elab do
     `AlgebraicGeometry.WeilComplex.exists_natTrans_upperShriek_isIso_forget_of_smooth]
   for name in forbidden do
     if seen.contains name then
-      throwError "The Thom proof uses the relative-purity declaration {name}"
+      throwError "An absolute-purity user uses the relative-purity declaration {name}"
   let allowed := #[
     `AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_swap_localization,
     `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso]

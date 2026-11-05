@@ -68,6 +68,13 @@ The identification of the Tate twist with a tensor product is proved. The other 
   formula is only known to exist, through the proper projection formula
   `AlgebraicGeometry.WeilComplex.nonempty_rightDerivedLowerStar_nativeDerivedTensor_iso`, which is
   itself stated with `sorry`.
+
+The absolute dualizing-complex theorem and the trivial-line Thom theorem use a separate route:
+`WeilConjectures.WeilSheaf.SmoothPurityAbsolute` descends the finite-base dualizing object and
+identifies its Tate datum, and `WeilConjectures.WeilSheaf.SmoothPurityThomFromTate` applies the
+compact projection formula. Their users in `VerdierDual` and `FourierInversion.OtherSections`
+therefore do not invoke the unfinished relative orientation above. The declaration-level check
+in `WeilConjectures.WeilSheaf.SmoothPurityDependencyAudit` verifies this separation.
 -/
 
 @[expose] public section
