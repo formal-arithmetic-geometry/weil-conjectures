@@ -79,7 +79,9 @@ lemma purityCanonicalTateOneTrivialization_weil :
         (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso))
     (purityScalarCanonicalTrivialization ℓ a hζ hζ')
     (purityScalarCanonicalTrivialization_native_eq ℓ a hζ hζ') (Nat.card k : ℤ)
-    (purity_rationalRootTrivialization_weil a hζ hζ')
+    (by
+      have he := purity_rationalRootTrivialization_weil a hζ hζ'
+      exact_mod_proofs he)
   have h' := purityScalarCanonicalEquation ℓ a hζ hζ' h
   dsimp only [purityCanonicalTateOneTrivialization]
   exact_mod_proofs h'
