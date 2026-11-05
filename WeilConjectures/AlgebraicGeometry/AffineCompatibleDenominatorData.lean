@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.AffineIdealGeneratorCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
