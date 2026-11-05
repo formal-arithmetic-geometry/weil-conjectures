@@ -30,6 +30,18 @@ private theorem quasiCoherent_slice_image {X : Scheme.{u}} (U : X.Opens)
     {F G : SheafOfModules.{u} (X.ringCatSheaf.over U)}
     [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) :
     (Abelian.image φ).IsQuasicoherent := by
+  have (V : Over U) :
+      HasSheafify (((Opens.grothendieckTopology X).over U).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have (V : Over U) :
+      (((Opens.grothendieckTopology X).over U).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
+  have (V : U.toScheme.Opens) :
+      HasSheafify ((Opens.grothendieckTopology U.carrier).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have (V : U.toScheme.Opens) :
+      ((Opens.grothendieckTopology U.carrier).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   have := U.instIsDenseSubsiteSubtypeMemOverGrothendieckTopologyOverInverseOverEquivalence
   have (V : U.toScheme.Opens) :
       (Over.post U.overEquivalence.inverse).IsContinuous
