@@ -316,13 +316,53 @@ theorem constantSystem_evaluation_map {M N : Mod.{c, v, max c v r} J R} (f : M �
   obtain rfl := eq_of_heq hxy
   exact HEq.rfl
 
+omit [EssentiallySmall.{max c v r, v, c} C] in
+/-- The coefficient comparison of a constant transition is the identity. -/
+theorem constantSystem_res_eq_id {m n : ℕ} (h : n ≤ m) :
+    (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map
+      (coefficientMap.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+        (constantCoefficientTransitions.{c, v, r} J R) h) = 𝟙 _ :=
+  (congrArg (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map
+    (constantCoefficientMap.{c, v, r} J R h)).trans (CategoryTheory.Functor.map_id _ _)
+
+/-- The target of a constant transition is again `M`. -/
+theorem constantSystem_res_evaluation_obj (M : Mod.{c, v, max c v r} J R) {m n : ℕ}
+    (h : n ≤ m) :
+    (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J
+      (constantCoefficients.{c, v, r} J R) (constantCoefficientTransitions.{c, v, r} J R) h)).obj
+        ((evaluation.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+          (constantCoefficientTransitions.{c, v, r} J R) n).obj
+            ((constantSystem.{c, v, r} J R).obj M)) = M :=
+  (congrArg (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J
+    (constantCoefficients.{c, v, r} J R) (constantCoefficientTransitions.{c, v, r} J R) h)).obj
+      (constantSystem_evaluation_obj.{c, v, r} J R M n)).trans
+    (Functor.congr_obj (sheafOfModules_restrictScalars_eq_id _
+      (constantSystem_res_eq_id.{c, v, r} J R h)) M)
+
+set_option maxHeartbeats 1000000 in
+-- Identifying the sections of the pushforward with those of `M` unfolds the system ring.
+/-- The transitions of a constant system are identities on sections. -/
+theorem constantSystem_transition_app_apply (M : Mod.{c, v, max c v r} J R) {m n : ℕ}
+    (h : n ≤ m) (U : Cᵒᵖ)
+    (x : ((evaluation.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+      (constantCoefficientTransitions.{c, v, r} J R) m).obj
+        ((constantSystem.{c, v, r} J R).obj M)).val.obj U) :
+    ((transition.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+      (constantCoefficientTransitions.{c, v, r} J R) h).app
+        ((constantSystem.{c, v, r} J R).obj M)).val.app U x ≍ x := by
+  refine (heq_of_eq (transition_app_apply.{c, v, max c v r} J _ _ _ h U x)).trans ?_
+  have e : ∀ y : M.val.obj U, M.val.map (𝟙 U) y = y := fun y ↦ by
+    rw [PresheafOfModules.map_id]; rfl
+  exact heq_of_eq (e x)
+
 /-- The constant system satisfies its sectionwise characterization. -/
 theorem constantSystem_isConstantSystemFunctor :
-    IsConstantSystemFunctor.{c, v, r} J R (constantSystem.{c, v, r} J R) := by
-  refine ⟨constantSystem_evaluation_obj.{c, v, r} J R,
-    fun f n ↦ constantSystem_evaluation_map.{c, v, r} J R f n, ?_⟩
-  intro M m n h
-  sorry
+    IsConstantSystemFunctor.{c, v, r} J R (constantSystem.{c, v, r} J R) :=
+  ⟨constantSystem_evaluation_obj.{c, v, r} J R,
+    fun f n ↦ constantSystem_evaluation_map.{c, v, r} J R f n,
+    fun M _ _ h ↦ sheafOfModules_heq_id_of_app (constantSystem_evaluation_obj.{c, v, r} J R M _)
+      (constantSystem_res_evaluation_obj.{c, v, r} J R M h) _
+      (constantSystem_transition_app_apply.{c, v, r} J R M h)⟩
 
 /-- Additivity of the constant-system functor.
 Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
