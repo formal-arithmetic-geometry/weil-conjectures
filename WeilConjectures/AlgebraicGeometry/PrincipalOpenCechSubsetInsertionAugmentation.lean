@@ -148,7 +148,7 @@ theorem principalSubsetInsertion_augmentation
       rw [dite_eq_left h, dite_eq_left h]
       exact principalSubsetInsertOne_singleton_augmentation A r f J n S h
         (hls S h) (hes S h n) s
-    · simpa only [c, dite_eq_right h] using
+    · simpa only [c, dif_neg h] using
         (map_zero (principalSubsetInsertOne A r f J n S).hom).trans (map_zero b.hom).symm
   change (∑ S, principalSubsetInsertOne A r f J n S (c S)) = _
   simp_rw [hc]
