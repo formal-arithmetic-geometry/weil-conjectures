@@ -8,8 +8,8 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.Algebra.Category.Ring.Limits
-public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
-public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
@@ -26,44 +26,44 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry
 
+attribute [-instance] instHasBinaryProductObjOfPreservesLimitDiscreteWalkingPairPair in
 private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :
-    (sheafForget J |>.obj G) ⨯ (sheafForget J |>.obj G) ⟶ (sheafForget J |>.obj G) :=
-  ⟨{ app := fun W ↦ ↾(fun x ↦ @Add.add (G.obj.obj W) inferInstance
-       ((prod.fst : (sheafForget J |>.obj G) ⨯ (sheafForget J |>.obj G) ⟶
-         (sheafForget J |>.obj G)).hom.app W x : G.obj.obj W)
-       ((prod.snd : (sheafForget J |>.obj G) ⨯ (sheafForget J |>.obj G) ⟶
-         (sheafForget J |>.obj G)).hom.app W x : G.obj.obj W))
-     naturality := by
-       intro W W' f
-       ext x
-       have hf := ConcreteCategory.congr_hom ((prod.fst : (sheafForget J |>.obj G) ⨯
-         (sheafForget J |>.obj G) ⟶ (sheafForget J |>.obj G)).hom.naturality f) x
-       have hs := ConcreteCategory.congr_hom ((prod.snd : (sheafForget J |>.obj G) ⨯
-         (sheafForget J |>.obj G) ⟶ (sheafForget J |>.obj G)).hom.naturality f) x
-       dsimp at hf hs ⊢
-       rw [hf, hs]
-       exact (G.obj.map f).hom.map_add _ _ |>.symm }⟩
+    (sheafForget J |>.obj G) ⨯ (sheafForget J |>.obj G) ⟶ (sheafForget J |>.obj G) := by
+  let H : Sheaf J (Type w) := (sheafForget J).obj G
+  change H ⨯ H ⟶ H
+  refine ⟨{
+    app := fun W ↦ ↾(fun x ↦ @Add.add (G.obj.obj W) inferInstance
+      ((prod.fst : H ⨯ H ⟶ H).hom.app W x : G.obj.obj W)
+      ((prod.snd : H ⨯ H ⟶ H).hom.app W x : G.obj.obj W))
+    naturality := ?_ }⟩
+  intro W W' f
+  ext x
+  have hf := types_congr_hom ((prod.fst : H ⨯ H ⟶ H).hom.naturality f) x
+  have hs := types_congr_hom ((prod.snd : H ⨯ H ⟶ H).hom.naturality f) x
+  dsimp at hf hs ⊢
+  rw [hf, hs]
+  exact (G.obj.map f).hom.map_add _ _ |>.symm
+attribute [-instance] instHasBinaryProductObjOfPreservesLimitDiscreteWalkingPairPair in
 private noncomputable def ringMul.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :
-    (sheafForget J |>.obj G) ⨯ (sheafForget J |>.obj G) ⟶ (sheafForget J |>.obj G) :=
-  ⟨{ app := fun W ↦ ↾(fun x ↦ @Mul.mul (G.obj.obj W) inferInstance
-       ((prod.fst : (sheafForget J |>.obj G) ⨯ (sheafForget J |>.obj G) ⟶
-         (sheafForget J |>.obj G)).hom.app W x : G.obj.obj W)
-       ((prod.snd : (sheafForget J |>.obj G) ⨯ (sheafForget J |>.obj G) ⟶
-         (sheafForget J |>.obj G)).hom.app W x : G.obj.obj W))
-     naturality := by
-       intro W W' f
-       ext x
-       have hf := ConcreteCategory.congr_hom ((prod.fst : (sheafForget J |>.obj G) ⨯
-         (sheafForget J |>.obj G) ⟶ (sheafForget J |>.obj G)).hom.naturality f) x
-       have hs := ConcreteCategory.congr_hom ((prod.snd : (sheafForget J |>.obj G) ⨯
-         (sheafForget J |>.obj G) ⟶ (sheafForget J |>.obj G)).hom.naturality f) x
-       dsimp at hf hs ⊢
-       rw [hf, hs]
-       exact (G.obj.map f).hom.map_mul _ _ |>.symm }⟩
+    (sheafForget J |>.obj G) ⨯ (sheafForget J |>.obj G) ⟶ (sheafForget J |>.obj G) := by
+  let H : Sheaf J (Type w) := (sheafForget J).obj G
+  change H ⨯ H ⟶ H
+  refine ⟨{
+    app := fun W ↦ ↾(fun x ↦ @Mul.mul (G.obj.obj W) inferInstance
+      ((prod.fst : H ⨯ H ⟶ H).hom.app W x : G.obj.obj W)
+      ((prod.snd : H ⨯ H ⟶ H).hom.app W x : G.obj.obj W))
+    naturality := ?_ }⟩
+  intro W W' f
+  ext x
+  have hf := types_congr_hom ((prod.fst : H ⨯ H ⟶ H).hom.naturality f) x
+  have hs := types_congr_hom ((prod.snd : H ⨯ H ⟶ H).hom.naturality f) x
+  dsimp at hf hs ⊢
+  rw [hf, hs]
+  exact (G.obj.map f).hom.map_mul _ _ |>.symm
 private noncomputable def ringZero.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) : ⊤_ (Sheaf J (Type w)) ⟶ (sheafForget J |>.obj G) :=
