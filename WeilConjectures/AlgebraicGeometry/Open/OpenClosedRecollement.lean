@@ -104,8 +104,8 @@ theorem exists_functorial_distTriang_openClosed
       ((openImmersionLowerShriek A j).mapDerivedCategory.obj M.obj))
     refine (Functor.isZero_mapDerivedCategory_obj
       (openImmersionLowerShriek A j ⋙ upperStar A i) M.obj (fun n ↦ ?_)).of_iso
-      ((((openImmersionLowerShriek A j).mapDerivedCategoryCompIso).symm
-        (upperStar A i)).symm.app M.obj)
+      (((openImmersionLowerShriek A j).mapDerivedCategoryCompIso
+        (upperStar A i)).app M.obj)
     exact isZero_upperStar_openImmersionLowerShriek_of_disjoint_range A j i
       (disjoint_range_of_range_eq_compl j i hij) _
   have hzero' (N : _root_.DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A)) :
