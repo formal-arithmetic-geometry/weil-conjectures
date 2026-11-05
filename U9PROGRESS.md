@@ -386,3 +386,5 @@ derivedCondensedRealization before casting, including hmZ and htotal interfaces.
 2026-11-05 09:42 CST correction: Predicate helper093942 still fails200k during statement at the tr argument (column14), not at cZ. Restore the explicit `(by with_reducible exact tr)` conversion already used successfully in the main Q application. Generic predicate and pasting helper both GREEN again.
 
 2026-11-05 09:44 CST: Predicate helper094134 ran97s then whnf timeout200k at declaration name (not kernel-tagged), after unused-section warnings. Remove six genuinely unused finite-type/separation parameters and profile this isolated helper at the same200k limit to locate the post-proof conversion.
+
+2026-11-05 09:46 CST: Profile094434 locates failure AFTER successful proof elaboration9.8s, in declaration finalization at cumulative200k (no kernel phase reached; wholecommand16.9s). Name the geometric statement as a regular transparent NativeTotalModelSquare definition, separating formation of its data from theorem closure and keeping the exported theorem type small. Same200k budget.

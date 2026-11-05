@@ -38,10 +38,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Y.Over (Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- Express the native total tensor square using the model maps required for localization. -/
-lemma projection_native_total_model_square
-    (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
-    (htotal : TotalPullTensorSquare k₀ l g P T) :
+/-- The model form of the native total square, with its geometric data named once. -/
+def NativeTotalModelSquare (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) : Prop :=
   let L := upperStar k₀ l g
   let V := condensedRealization k₀ l Z
   let F := condensedRealization k₀ l Y
@@ -61,8 +59,15 @@ lemma projection_native_total_model_square
     (L.mapHomologicalComplex (.up ℤ)) (V.mapHomologicalComplex (.up ℤ))
     (F.mapHomologicalComplex (.up ℤ)) (R.mapHomologicalComplex (.up ℤ))
     (projection_model_complex_square L V F R (condensedRealizationUpperStarIso k₀ l g).symm)
-    P T WZ WU (by with_reducible exact tr) cZ cU (R.mapCochainComplexμIso FP FT).symm := by
+    P T WZ WU (by with_reducible exact tr) cZ cU (R.mapCochainComplexμIso FP FT).symm
+
+/-- Express the native total tensor square using the model maps required for localization. -/
+lemma projection_native_total_model_square
+    (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
+    (htotal : TotalPullTensorSquare k₀ l g P T) :
+    NativeTotalModelSquare k₀ l g P T := by
   projection_strict
+    unfold NativeTotalModelSquare
     dsimp only
     let L := upperStar k₀ l g
     let V := condensedRealization k₀ l Z
