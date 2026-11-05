@@ -145,7 +145,7 @@ lemma upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection (s : Spec (.of 
       rw [Category.assoc, hφ, reassoc_of% hv])
   have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
   have e : (pointSmallEtale s).fiber.map (homToPullback t φ hφ) v =
-      ((Etale.baseChangeNbhd t (s ≫ t) ⟨s, rfl⟩).obj ⟨U, u⟩).2 := by
+      ((Etale.baseChangeNbhd t (s ≫ t) ⟨s, rfl⟩).obj (Functor.elementsMk _ U u)).2 := by
     refine CategoryTheory.Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
     · change (v.left ≫ (homToPullback t φ hφ).left) ≫ _ = _
       simp [u, Scheme.Hom.basePt]
@@ -153,7 +153,7 @@ lemma upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection (s : Spec (.of 
       simp [u, Scheme.Hom.basePt, hv]
   rw [pullSection, GrothendieckTopology.Point.toPresheafFiber_w_apply, e]
   have h1 := ConcreteCategory.congr_hom (Etale.toPresheafFiber_stalkRestrict AddCommGrpCat.{u + 1}
-    t (s ≫ t) ⟨s, rfl⟩ ((t)^*[AddCommGrpCat.{u + 1}].obj G) ⟨U, u⟩)
+    t (s ≫ t) ⟨s, rfl⟩ ((t)^*[AddCommGrpCat.{u + 1}].obj G) (Functor.elementsMk _ U u))
     (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} t).unit.app G).hom.app (op U) g)
   rw [ConcreteCategory.comp_apply] at h1
   erw [← h1]
