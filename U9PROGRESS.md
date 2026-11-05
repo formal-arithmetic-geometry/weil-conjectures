@@ -230,28 +230,27 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ798 in progress
+# BZ824 complete
 
-- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
-- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
-- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
-  unused signed-projection comparison chain and its downstream callers. The earlier
-  referenced-caller blocker therefore no longer applies.
-- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
-  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
-  declaration and no callers. It is listed unused and absent from kept-decls.txt.
-- All surviving declaration text is unchanged from the integrated branch.
-- Next: validate the owned module, then its direct importers and downstream layers.
-- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Assigned module is now GREEN: `ucheck-bump` rc=0, failed=0, 4657 jobs;
-  rebuilt in 9.5 seconds on `poolb:43.166.83.208` at commit
-  `4157f12719d57cd9316afddebd65c58d9ac537bb`.
-- Unit log: `/home/ubuntu/u9/bz/BUILD-BZ798-unit-green.log`.
-- Direct importer batch attempted all three importers. `ConstantPerfectQuotientProjection`
-  and `PerfectProjectionFormula` are blocked by unowned `RingedKoszulSystem.lean:554`
-  (`Invalid field symm`). Cancelled only this verified batch's timeout process;
-  wrapper rc=255, built=29, failed=1. These importers are skipped, not claimed green.
-- Dependency paths: `/home/ubuntu/u9/bz/BZ798-downstream-blockers.txt`.
-- Focused downstream validation of `ProEtaleProjectionMateData` and its sole importer
-  `ProEtaleProjectionMateExact` is queued (exec session 71582); no further Lean edits.
+- Branch: u9/BZ824; starting commit 95c8987257f.
+- The user instructed continuation after the upstream-restoration proposal.
+- Restored four prerequisite modules. The predicate uses the verified PZ003
+  Localization imports and reflexive cast; the transport proof is unchanged,
+  and target automorphism specializes the existing arbitrary-degree theorem to zero.
+- All six submitted modules passed ucheck-bump at 826d8e1a1fb:
+  rc=0, failed=0, 4065 jobs, poolb:43.157.187.72.
+- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
+  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
+  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
+- Restored declaration headers and original assigned/caller sources are unchanged.
+- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
+- Layer-two importer CanonicalModuleBaseChangeAffineChartComparison was submitted
+  through ucheck-bump, then cancelled while queued after confirming that unowned
+  CanonicalModuleBaseChangeOpenComparison lacks its required theorem
+  exists_canonicalModuleBaseChange_open_comparison (deleted by 9580c3ee0).
+  This is a source-confirmed blocker; the layer-two module was not compiled or made green.
+- Fix records, exact historical diagnostics, and replay rules:
+  /home/ubuntu/u9/bz/FIXES-BZ824.md. Audit: BZ824-contract-audit.txt.
+- No local Lean/Lake, proof placeholders, trust shortcuts, or heartbeat increases.
+- Completion marker: /home/ubuntu/u9/state/BZ824.DONE.
+- This completion commit changes only progress documentation after the green source build.
