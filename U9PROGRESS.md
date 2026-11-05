@@ -50,15 +50,19 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ154 in progress
+# BZ154 complete
 
 - Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
-- Three assigned modules passed the first repair build at `31ce5f122`.
+- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
+- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
+- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
 - The user instructed continuation after the exact one-line statement correction in
-  `BZ154-shift-statement-proposal.patch`; that patch is now applied.
+  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
 - The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
-  construction and homotopy-category unit. All other changes are the mandated composition
+  construction and homotopy-category unit. Other changes are the mandated composition
   isomorphism migration and imports for private definitional reductions.
-- Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
+- This completion commit changes only progress documentation; Lean sources match the green build.
