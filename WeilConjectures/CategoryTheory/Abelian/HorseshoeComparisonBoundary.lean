@@ -312,7 +312,7 @@ theorem horseshoe_comparison_boundary
     apply Functor.rightDerived_ext _
       (Functor.IsRightDerivedFunctor.precomposeShiftNatTrans _ v.rightDerivedFunctorPlusUnith n)
       (HomotopyCategory.Plus.quasiIso A)
-    ext K
+    refine NatTrans.ext (funext fun K ↦ ?_)
     have h₁ := by
       letI := v.instCommShiftPlusRightDerivedFunctorPlusInt
       exact NatTrans.shift_app_comm v.rightDerivedFunctorPlusUnith n K
