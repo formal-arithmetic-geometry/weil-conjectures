@@ -67,6 +67,11 @@ variable {C₀ : Type u₀} {C₁ : Type u₁} {C₂ : Type u₂} {C₃ : Type u
   (h : ∀ K, ev.hom.app K ≫ δ.hom.app K =
     Sv.map (β.hom.app K) ≫ α.hom.app (Rw.obj K) ≫ L.map (ew.hom.app K))
 
+section LegacyMapDerivedCategoryCompIso
+local abbrev legacyMapDerivedCategoryCompIso (F G) :=
+  (_root_.CategoryTheory.Functor.mapDerivedCategoryCompIso F G).symm
+local notation "mapDerivedCategoryCompIso" => legacyMapDerivedCategoryCompIso
+
 include h in
 set_option backward.isDefEq.respectTransparency false in
 private theorem derived_path_coherence (K : DerivedCategory C₀) :
@@ -93,28 +98,28 @@ private theorem derived_path_coherence (K : DerivedCategory C₀) :
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
     at hβ hα hew ha₁ ha₂
   have ha₁' :
-      Sv.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw M).inv.app K) ≫
-        (mapDerivedCategoryCompIso M Sv).hom.app (Rw.mapDerivedCategory.obj K) =
-      (mapDerivedCategoryCompIso (Rw ⋙ M) Sv).hom.app K ≫
-        (mapDerivedCategoryCompIso Rw (M ⋙ Sv)).inv.app K := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso (Rw ⋙ M) Sv).inv.app K)).mp
-    simp only [Iso.inv_hom_id_app_assoc]
+      Sv.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw M).hom.app K) ≫
+        (mapDerivedCategoryCompIso M Sv).inv.app (Rw.mapDerivedCategory.obj K) =
+      (mapDerivedCategoryCompIso (Rw ⋙ M) Sv).inv.app K ≫
+        (mapDerivedCategoryCompIso Rw (M ⋙ Sv)).hom.app K := by
+    apply (cancel_epi ((mapDerivedCategoryCompIso (Rw ⋙ M) Sv).hom.app K)).mp
+    simp only [Iso.hom_inv_id_app_assoc]
     rw [← reassoc_of% ha₁]
     simp
   have hβ' :
       Sv.mapDerivedCategory.map ((mapDerivedCategoryNatIso β).hom.app K) ≫
-        (mapDerivedCategoryCompIso (Rw ⋙ M) Sv).hom.app K =
-      (mapDerivedCategoryCompIso Rv Sv).hom.app K ≫
+        (mapDerivedCategoryCompIso (Rw ⋙ M) Sv).inv.app K =
+      (mapDerivedCategoryCompIso Rv Sv).inv.app K ≫
         (mapDerivedCategoryNatIso (isoWhiskerRight β Sv)).hom.app K := by
-    apply (cancel_epi ((mapDerivedCategoryCompIso Rv Sv).inv.app K)).mp
-    simp only [Iso.inv_hom_id_app_assoc]
+    apply (cancel_epi ((mapDerivedCategoryCompIso Rv Sv).hom.app K)).mp
+    simp only [Iso.hom_inv_id_app_assoc]
     rw [← reassoc_of% hβ]
     simp
   have ha₂' :
-      (mapDerivedCategoryCompIso Rw (Sw ⋙ L)).inv.app K ≫
-        (mapDerivedCategoryCompIso Sw L).inv.app (Rw.mapDerivedCategory.obj K) ≫
-        L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).hom.app K) =
-      (mapDerivedCategoryCompIso (Rw ⋙ Sw) L).inv.app K := by
+      (mapDerivedCategoryCompIso Rw (Sw ⋙ L)).hom.app K ≫
+        (mapDerivedCategoryCompIso Sw L).hom.app (Rw.mapDerivedCategory.obj K) ≫
+        L.mapDerivedCategory.map ((mapDerivedCategoryCompIso Rw Sw).inv.app K) =
+      (mapDerivedCategoryCompIso (Rw ⋙ Sw) L).hom.app K := by
     rw [← Category.assoc, ha₂, Category.assoc, ← Functor.map_comp]
     simp
   simp only [mapDerivedCategoryTriangleIso, mapDerivedCategorySquareIso,
@@ -123,6 +128,8 @@ private theorem derived_path_coherence (K : DerivedCategory C₀) :
   symm
   rw [reassoc_of% ha₁', reassoc_of% hβ', ← reassoc_of% hα,
     reassoc_of% ha₂']
+
+end LegacyMapDerivedCategoryCompIso
 
 section Conjugation
 variable {P Q R S : Type*} [Category P] [Category Q] [Category R] [Category S]
