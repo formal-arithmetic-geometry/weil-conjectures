@@ -7,8 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The explicit derived comparison with an injective resolution
