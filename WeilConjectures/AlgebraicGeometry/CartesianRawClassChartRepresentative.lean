@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import WeilConjectures.AlgebraicGeometry.CartesianRawClassChartData
-import WeilConjectures.AlgebraicGeometry.CartesianRawClassChartNaturality
+import all WeilConjectures.AlgebraicGeometry.CartesianRawClassChartNaturality
 import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeNaturality
 
 /-! # Finite-stage chart representatives of raw cartesian classes
@@ -42,7 +42,7 @@ private theorem cartesian_exchange_comp_named {X S T T' T'' : Scheme.{u}}
       cartesianDerivedImageMap f g' g'' b w' P =
         cartesianDerivedImageMap f g g'' d wd P := by
   subst d
-  exact cartesian_map_comp f g g' g'' a b w w' P
+  exact cartesian_map_comp_local f g g' g'' a b w w' P
 
 /-- A raw stage class admits a chart representative after one further base change.
 
