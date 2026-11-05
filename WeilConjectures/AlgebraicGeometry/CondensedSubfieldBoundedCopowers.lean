@@ -108,6 +108,11 @@ private theorem coproductStrictlyGE
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+noncomputable local instance (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
 set_option maxHeartbeats 800000 in
 -- The explicit colimit and truncation transports elaborate in several large module categories.
 set_option backward.isDefEq.respectTransparency false in
@@ -143,7 +148,6 @@ theorem condensedSubfield_bounded_copower_comparison
   let Λ := Profinite.continuousMapRingObj E
   let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
   let B := Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)
-  let : HasZeroMorphisms A := Preadditive.preadditiveHasZeroMorphisms
   have : HasColimitsOfSize.{u + 1, u + 1} A :=
     CategoryTheory.IsGrothendieckAbelian.hasColimits A
   have : HasColimitsOfSize.{u + 1, u + 1} B :=
