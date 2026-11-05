@@ -96,6 +96,14 @@ private theorem isStrictlyGE_finitePartialSums
     (coproductIsCoproduct (fun x : s ↦ E x.1.as))).isZero_pt
       (Functor.isZero _ fun x ↦ (E x.as.1.as).isZero_of_isStrictlyGE N n hn)
 
+private theorem hasColimitsOfShape_cochainComplex
+    {C J : Type*} [Category* C] [Category* J] [HasZeroMorphisms C]
+    [HasColimitsOfShape J C] : HasColimitsOfShape J (CochainComplex C ℤ) := by
+  refine ⟨fun E ↦ ?_⟩
+  have (n : ℤ) : HasColimit (E ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval E⟩⟩⟩
+
 end CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -144,10 +152,14 @@ private theorem continuity_preserves_coproduct
       DerivedCategory.homologyFunctor _ q) := by
   let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
   have : HasColimitsOfSize.{u + 1, u + 1} C := IsGrothendieckAbelian.hasColimits C
-  have : HasColimitsOfShape (Discrete I) C := inferInstance
-  have : HasColimitsOfShape (Discrete I) (CochainComplex C ℤ) := inferInstance
-  have : HasColimitsOfShape (Finset (Discrete I)) C := inferInstance
-  have : HasColimitsOfShape (Finset (Discrete I)) (CochainComplex C ℤ) := inferInstance
+  have : HasColimitsOfShape (Discrete I) C :=
+    HasColimitsOfSize.has_colimits_of_shape _
+  have : HasColimitsOfShape (Discrete I) (CochainComplex C ℤ) :=
+    hasColimitsOfShape_cochainComplex
+  have : HasColimitsOfShape (Finset (Discrete I)) C :=
+    HasColimitsOfSize.has_colimits_of_shape _
+  have : HasColimitsOfShape (Finset (Discrete I)) (CochainComplex C ℤ) :=
+    hasColimitsOfShape_cochainComplex
   let S := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor E)
   have hS (s : Finset (Discrete I)) : (S.obj s).IsStrictlyGE N :=
     isStrictlyGE_finitePartialSums E N hE s
@@ -181,17 +193,16 @@ theorem condensed_boundedBelow_preservesCoproduct
   let F : DerivedCategory C ⥤ DerivedCategory D := R((f)_*⟦Λ⟧)
   have : HasColimitsOfSize.{u + 1, u + 1} C := IsGrothendieckAbelian.hasColimits C
   have : HasColimitsOfSize.{u + 1, u + 1} D := IsGrothendieckAbelian.hasColimits D
-  have : HasCoproducts.{u + 1} C := fun J ↦
-    HasColimitsOfSize.has_colimits_of_shape (Discrete J)
-  have : HasCoproducts.{u + 1} D := fun J ↦
-    HasColimitsOfSize.has_colimits_of_shape (Discrete J)
-  have : HasCoproducts.{u + 1} (DerivedCategory C) := derived_hasCoproducts
-  have : HasCoproducts.{u + 1} (DerivedCategory D) := derived_hasCoproducts
-  have : HasColimitsOfShape (Discrete I) C := inferInstance
-  have : HasColimitsOfShape (Discrete I) D := inferInstance
-  have : HasColimitsOfShape (Discrete I) (CochainComplex C ℤ) := inferInstance
-  have : HasColimitsOfShape (Discrete I) (DerivedCategory C) := inferInstance
-  have : HasColimitsOfShape (Discrete I) (DerivedCategory D) := inferInstance
+  have : HasColimitsOfShape (Discrete I) C :=
+    HasColimitsOfSize.has_colimits_of_shape _
+  have : HasColimitsOfShape (Discrete I) D :=
+    HasColimitsOfSize.has_colimits_of_shape _
+  have : HasColimitsOfShape (Discrete I) (CochainComplex C ℤ) :=
+    hasColimitsOfShape_cochainComplex
+  have : HasColimitsOfShape (Discrete I) (DerivedCategory C) :=
+    DerivedCategory.hasColimitsOfShape_discrete I
+  have : HasColimitsOfShape (Discrete I) (DerivedCategory D) :=
+    DerivedCategory.hasColimitsOfShape_discrete I
   have : HasExactColimitsOfShape (Discrete I) D := inferInstance
   have representatives (i : I) : ∃ E : CochainComplex C ℤ,
       E.IsStrictlyGE N ∧ Nonempty (DerivedCategory.Q.obj E ≅ K i) := by
