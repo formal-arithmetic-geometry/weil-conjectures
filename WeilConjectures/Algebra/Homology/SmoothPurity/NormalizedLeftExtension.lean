@@ -236,12 +236,10 @@ theorem nonempty_normalizedLeftExtension
   · apply adjunction_cochain_transpose E R adj T β ε ?_ d hd
     intro K
     dsimp [β, α, i, j]
-    simp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom,
+    simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom,
       Quotient.lift.isLift_inv, Functor.comp_obj]
-    erw [T.map_id, DerivedCategory.Qh.map_id]
-    erw [Category.id_comp, Category.id_comp, Category.comp_id, Category.comp_id,
-      Category.comp_id, Category.comp_id]
+    erw [DerivedCategory.Qh.map_id]
+    simp only [Category.id_comp, Category.comp_id, Category.assoc,
+      ← T.map_comp_assoc, Iso.hom_inv_id_app, T.map_id]
 
 end SheafOfModules
