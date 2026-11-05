@@ -13,6 +13,7 @@ public import WeilConjectures.SmoothPurity.Defs
 universe u
 
 open CategoryTheory MonoidalCategory
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
