@@ -6,10 +6,16 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.MateCoprojection
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionPasting
+public import WeilConjectures.WeilSheaf.GeometricFiber.LowerShriek
+public import WeilConjectures.WeilSheaf.GeometricFiber.OpenProjection
+public import WeilConjectures.WeilSheaf.GeometricFiber.ProperProjection
 public import WeilConjectures.TraceFormula.PurityTensorMap
 public import WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
 public import WeilConjectures.WeilSheaf.UpperShriek
 public import WeilConjectures.WeilSheaf.UpperShriekGeometric
+
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The co-projection map of the exceptional inverse image of Weil complexes
@@ -69,16 +75,6 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-open scoped CategoryTheory.Obj in
-/-- The underlying bounded constructible complex on the geometric fibre `X̄`, in the condensed
-model, of a Weil complex on `X`, as a functor
-(`AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleObj`). -/
-noncomputable def geometricFiberBoundedConstructibleFunctor :
-    WeilComplex k₀ l X ⥤ BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
-      (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left) :=
-  ObjectProperty.lift _ (forget ⋙ (adicSheafDerivedEquivCondensedMod l _).functor)
-    (fun L ↦ (geometricFiberBoundedConstructibleObj L).property)
-
 /-- The native tensor product of Weil complexes is symmetric. -/
 theorem nonempty_nativeConstructibleTensor_iso_swap :
     Nonempty (nativeConstructibleTensor k₀ l X ≅
@@ -135,6 +131,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec 
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l f]
 
+set_option maxHeartbeats 4000000 in
+-- elaborating the pasted comparisons of the derived functors is slow
 /-- **Forgetting the Weil structure commutes with `Rf₀!`, compatibly with `Rf^!` and the
 projection formulas.** For a separated morphism of finite type `f : X ⟶ Y` of separated
 `k₀`-schemes of finite type, write `For` for the underlying bounded constructible complex on the
@@ -175,8 +173,81 @@ theorem exists_lowerShriek_forget_iso_projection :
           τY.hom.app ((derivedLowerShriek k₀ l f).obj M, T) ≫
             β.inv.app M ▷ (geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T ≫
             CondensedRing.boundedConstructibleExceptionalProjectionMorphism l
-              (geometricFiberHom (k₀ := k₀) f) _ _ :=
-  sorry
+              (geometricFiberHom (k₀ := k₀) f) _ _ := by
+  let c := nativeProjectionCompactification k₀ f
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact c.i := inferInstance
+  have := isLeftAdjoint_derivedLowerStar_of_isProper (k₀ := k₀) (l := l) c.g
+  obtain ⟨βI, hβI, γi, eI, hI⟩ := exists_extensionByZero_forget_iso_projection (k₀ := k₀) (l := l) f
+  obtain ⟨βG, hβG, γg, eG, hG⟩ := exists_derivedLowerStar_forget_iso_projection (k₀ := k₀) (l := l) f
+  -- `Rf₀! = Rg_* ∘ i_!` and `f^* = i^* ∘ g^*`
+  let ℓ : derivedLowerShriek k₀ l f ≅ extensionByZero c.i ⋙ derivedLowerStar c.g :=
+    NatIso.ofComponents (fun K ↦ Iso.refl _) (fun φ ↦ by
+      rw [Iso.refl_hom, Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl)
+  let pc : upperStar c.g ⋙ upperStar c.i ≅ upperStar (k₀ := k₀) (l := l) f :=
+    (upperStarCompIso c.i c.g).symm ≪≫ upperStarCongrIso c.comm.symm
+  -- the geometric `Rf̄_! ≅ ī_! ⋙ Rḡ_*`
+  let θ := geometricFiberLowerShriekIso k₀ l f
+  refine ⟨Functor.isoWhiskerLeft _ θ.symm ≪≫ Functor.forgetCompIsoOfComp ℓ βI βG, fun L ↦ ?_,
+    geometricFiberBoundedConstructibleFunctorTensorIso k₀ l X,
+    geometricFiberBoundedConstructibleFunctorTensorIso k₀ l Y,
+    Functor.forgetPullIsoOfComp pc γi γg (geometricFiberUpperStarCompIso k₀ l f),
+    Functor.projectionIsoOfComp ℓ pc eI eG, fun M T ↦ ?_⟩
+  · have hβ : TwoSquare.mk _ _ _ _
+        (Functor.isoWhiskerLeft (geometricFiberBoundedConstructibleFunctor k₀ l X) θ.symm ≪≫
+          Functor.forgetCompIsoOfComp ℓ βI βG).hom =
+        (TwoSquare.mk _ _ _ _ (Functor.forgetCompIsoOfComp ℓ βI βG).hom).whiskerRight θ.inv := by
+      ext K
+      simp [TwoSquare.whiskerRight]
+    have hm := Functor.isIso_mateEquiv_forgetCompIsoOfComp_app ℓ βI βG
+      (extensionByZeroUpperStarAdjunction c.i) (Adjunction.ofIsLeftAdjoint (derivedLowerStar c.g))
+      (derivedLowerShriekUpperShriekAdjunction f)
+      (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l
+        (geometricFiberHom (k₀ := k₀) c.i))
+      (Adjunction.ofIsLeftAdjoint (CondensedRing.boundedConstructibleLowerStar l
+        (geometricFiberHom (k₀ := k₀) c.g))) hβI (fun L ↦ hβG _ _ L) L
+    rw [hβ, mateEquiv_conjugateEquiv_vcomp _
+      ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l
+        (geometricFiberHom (k₀ := k₀) c.i)).comp
+        (Adjunction.ofIsLeftAdjoint (CondensedRing.boundedConstructibleLowerStar l
+          (geometricFiberHom (k₀ := k₀) c.g))))]
+    dsimp only [TwoSquare.whiskerBottom]
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+    infer_instance
+  · have hA := Functor.map_projectionIsoOfComp_hom_app ℓ pc eI eG
+      (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l X)
+      (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l c.Z)
+      (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l Y) βI βG γi γg
+      (geometricFiberUpperStarCompIso k₀ l f)
+      (fun A B ↦ (CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l
+        (geometricFiberHom (k₀ := k₀) c.g)).projectionMorphism A B)
+      (fun φ B ↦ (CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l
+        (geometricFiberHom (k₀ := k₀) c.g)).projectionMorphism_natural_left φ B)
+      (fun K N ↦ inv ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+        _ l (geometricFiberHom (k₀ := k₀) c.i)).projectionComparison K N))
+      (fun K _ _ h ↦ (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+        _ l (geometricFiberHom (k₀ := k₀) c.i)).inv_projectionComparison_natural_right K h)
+      hG hI M T
+    have hΘ := geometricFiberLowerShriekIso_hom_app_whiskerRight_comp (k₀ := k₀) (l := l) f
+      ((geometricFiberBoundedConstructibleFunctor k₀ l X).obj M)
+      ((geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T)
+    simp only [Iso.trans_inv, Functor.isoWhiskerLeft_inv, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Iso.symm_inv, Category.assoc, comp_whiskerRight] at hA ⊢
+    rw [hΘ, ← θ.hom.naturality]
+    simp only [Functor.comp_map, Functor.comp_obj] at hA ⊢
+    have hA' := (reassoc_of% hA) (θ.hom.app ((geometricFiberBoundedConstructibleFunctor k₀ l X).obj M ⊗
+      (CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) f)).obj
+        ((geometricFiberBoundedConstructibleFunctor k₀ l Y).obj T)))
+    simp only [Functor.map_comp, Category.assoc] at hA' ⊢
+    exact_mod_proofs hA'
 
 set_option maxHeartbeats 1000000 in
 -- elaborating the instantiation of the abstract transport lemma is slow
