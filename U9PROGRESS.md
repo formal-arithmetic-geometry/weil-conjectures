@@ -141,3 +141,15 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ543 in progress
+
+- Branch: `u9/BZ543`; owned module: `CondensedQcqsPushforwardLocalComparison`.
+- Candidate local `HasZeroMorphisms` instance committed as `e12f4eef4`.
+- First ucheck-bump stopped in unowned `Presheaf.InternalHom`, before reaching the target.
+- On resume, found coordinator fix `04f9380d1`: public Mathlib Monoidal imports.
+  Merged integrated tip `8af5cb32483`; no independent edits to unowned modules.
+- Remote validation running; local log: `/home/ubuntu/u9/bz/BUILD-BZ543-resume1.log`.
+- Next: fix any owned errors, validate the leaf, then follow the brief's downstream layers.
+- Fix notes: `/home/ubuntu/u9/bz/FIXES-BZ543.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
