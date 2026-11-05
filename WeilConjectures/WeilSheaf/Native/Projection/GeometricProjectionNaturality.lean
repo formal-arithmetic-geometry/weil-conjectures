@@ -42,4 +42,28 @@ def invProjectionComparisonNatTrans {I : C ⥤ D} {P : D ⥤ C} (adj : I ⊣ P) 
     adj.inv_projectionComparison_natural_right, ← Category.assoc,
     adj.inv_projectionComparison_natural_left, Category.assoc]
 
+/-- The proper projection map with the tensor functor written in uncurried form. -/
+def uncurriedProjectionMorphismNatTrans {F : D ⥤ C} {G : C ⥤ D}
+    (adj : F ⊣ G) [F.OplaxMonoidal] :
+    G.prod (𝟭 D) ⋙ Functor.uncurry.obj (curriedTensor D) ⟶
+      (𝟭 C).prod F ⋙ Functor.uncurry.obj (curriedTensor C) ⋙ G where
+  app MN := adj.projectionMorphism MN.1 MN.2
+  naturality := by
+    intro M N φ
+    have h := (projectionMorphismNatTrans adj).naturality φ
+    simpa only [Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
+      curriedTensor_map_app, curriedTensor_obj_map, tensor_map, tensorHom_def] using h
+
+/-- The inverse open projection map with the tensor functor written in uncurried form. -/
+def uncurriedInvProjectionComparisonNatTrans {I : C ⥤ D} {P : D ⥤ C}
+    (adj : I ⊣ P) [P.LaxMonoidal] (h : ∀ M N, IsIso (adj.projectionComparison M N)) :
+    I.prod (𝟭 D) ⋙ Functor.uncurry.obj (curriedTensor D) ⟶
+      (𝟭 C).prod P ⋙ Functor.uncurry.obj (curriedTensor C) ⋙ I := by
+  letI := h
+  refine { app := fun MN ↦ inv (adj.projectionComparison MN.1 MN.2), naturality := ?_ }
+  intro M N φ
+  have hn := (invProjectionComparisonNatTrans adj h).naturality φ
+  simpa only [Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
+    curriedTensor_map_app, curriedTensor_obj_map, tensor_map, tensorHom_def] using hn
+
 end CategoryTheory.Adjunction

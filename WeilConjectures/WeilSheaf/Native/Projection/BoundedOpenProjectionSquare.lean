@@ -57,9 +57,9 @@ theorem projectionForgetSquare_open :
       (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l U)
       (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l Z)
       (ProEtaleWeilSheaf.nativeOpenProjectionIso k₀ l j).hom
-      (B.invProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) := by
+      (B.uncurriedInvProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) := by
     intro M N
-    simpa only [Adjunction.invProjectionComparisonNatTrans, Functor.uncurry_obj_map,
+    simpa only [Adjunction.uncurriedInvProjectionComparisonNatTrans, Functor.uncurry_obj_map,
       curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
       Category.id_comp, Category.comp_id] using
       ProEtaleWeilSheaf.map_nativeOpenProjectionIso_hom_app k₀ l j M N

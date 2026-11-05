@@ -65,7 +65,7 @@ theorem projectionForgetSquare_proper :
     (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l Y)
     (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y)
     (ProEtaleWeilSheaf.nativeProperProjectionNatTrans k₀ l g)
-    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb.left).projectionMorphismNatTrans
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb.left).uncurriedProjectionMorphismNatTrans
     (ProEtaleWeilSheaf.nativeProperProjection_forgetSquare k₀ l g)
   intro M N
   apply ObjectProperty.hom_ext

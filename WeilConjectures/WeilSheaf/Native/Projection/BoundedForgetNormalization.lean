@@ -48,9 +48,6 @@ lemma compactProjectionForgetUpperStarIso_hom_app
     ((compactProjectionForgetUpperStarIso k₀ l f).hom.app M).hom =
       (projectionPushForgetIso (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso
         k₀ l f).symm (projectionRealizationCompIso k₀ l Y)
-          (projectionRealizationCompIso k₀ l X)).hom.app M.obj := by
-  simp [compactProjectionForgetUpperStarIso, compactProjectionForgetRealizationIso,
-    projectionPushForgetIso, projectionRealizationCompIso,
-    CondensedRing.boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso]
+          (projectionRealizationCompIso k₀ l X)).hom.app M.obj := rfl
 
 end AlgebraicGeometry.WeilComplex

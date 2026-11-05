@@ -55,14 +55,14 @@ theorem nativeProperProjection_forgetSquare :
       (derivedCondensedRealizationUpperStarIso k₀ l g).symm
       (condensedRealizationTensor k₀ l X) (condensedRealizationTensor k₀ l Y)
       (nativeProperProjectionNatTrans k₀ l g)
-      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb).projectionMorphismNatTrans := by
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb).uncurriedProjectionMorphismNatTrans := by
   intro M N
   have h := Adjunction.map_rightAdjointProjectionMap_comp_mateEquiv
     (derivedUpperStarLowerStarAdjunction k₀ l g)
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb)
     (comparisonCompatible_derivedCondensedRealization k₀ l g) M N
   simpa only [nativeProperProjectionNatTrans, Functor.uncurryRightProjection,
-    nativeProperForgetIso, asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
+    nativeProperForgetIso, Adjunction.uncurriedProjectionMorphismNatTrans, asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
     curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
     Category.comp_id, Category.id_comp] using h
 

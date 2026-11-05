@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
 public import WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
+public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionForgetIsoTransport
 
 /-! # Natural geometric comparisons for the compact projection formula -/
 
@@ -54,12 +55,16 @@ def compactProjectionForgetRealizationIso :
 def compactProjectionForgetTensorIso :
     nativeConstructibleTensor k₀ l X ⋙ compactProjectionForget k₀ l X ≅
       (compactProjectionForget k₀ l X).prod (compactProjectionForget k₀ l X) ⋙ tensor _ := by
-  let e := compactProjectionForgetRealizationIso k₀ l X
-  let t := Functor.isoWhiskerLeft ((objectProperty k₀ l X).ι.prod (objectProperty k₀ l X).ι)
-    (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X)
-  apply ((boundedConstructible _).fullyFaithfulι.whiskeringRight _).preimageIso
-  exact Functor.isoWhiskerLeft (nativeConstructibleTensor k₀ l X) e ≪≫ t ≪≫
-    Functor.isoWhiskerRight (NatIso.prod e.symm e.symm) (Functor.uncurry.obj (curriedTensor _))
+  let a := Functor.mapDerivedCategoryCompIso
+    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
+    (adicSheafEquivCondensedMod l _).functor
+  let e := projectionTensorForgetIso (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X) a
+  refine NatIso.ofComponents (fun MN ↦ ObjectProperty.isoMk _ (e.app (MN.1.obj, MN.2.obj))) ?_
+  intro A B φ
+  apply ObjectProperty.hom_ext
+  have h := e.hom.naturality (Prod.mkHom φ.1.hom φ.2.hom)
+  simpa only [Functor.comp_map, Functor.prod_map, Functor.uncurry_obj_map,
+    curriedTensor_map_app, curriedTensor_obj_map, tensorHom_def] using h
 
 variable {X} {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
@@ -73,13 +78,15 @@ def compactProjectionForgetUpperStarIso :
     upperStar f ⋙ compactProjectionForget k₀ l X ≅
       compactProjectionForget k₀ l Y ⋙
         CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) f) := by
-  apply ((boundedConstructible _).fullyFaithfulι.whiskeringRight _).preimageIso
-  exact Functor.isoWhiskerLeft (upperStar f) (compactProjectionForgetRealizationIso k₀ l X) ≪≫
-    Functor.isoWhiskerLeft (objectProperty k₀ l Y).ι
-      (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l f).symm ≪≫
-    Functor.isoWhiskerRight (compactProjectionForgetRealizationIso k₀ l Y).symm _ ≪≫
-    Functor.isoWhiskerLeft (compactProjectionForget k₀ l Y)
-      (CondensedRing.boundedConstructibleUpperStarCompatibility
-        (Profinite.padicAlgClRingObj l) l (geometricFiberHom (k₀ := k₀) f)).symm
+  let aX := Functor.mapDerivedCategoryCompIso
+    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))
+    (adicSheafEquivCondensedMod l _).functor
+  let aY := Functor.mapDerivedCategoryCompIso
+    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
+    (adicSheafEquivCondensedMod l _).functor
+  let e := projectionPushForgetIso
+    (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l f).symm aY aX
+  exact NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _ (e.app M.obj))
+    (fun φ ↦ ObjectProperty.hom_ext _ (e.hom.naturality φ.hom))
 
 end AlgebraicGeometry.WeilComplex
