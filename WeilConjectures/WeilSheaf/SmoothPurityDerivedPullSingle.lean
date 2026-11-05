@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPuritySingleCochainNormalization
+public import WeilConjectures.WeilSheaf.SmoothPuritySingleHomotopySquare
 public import WeilConjectures.WeilSheaf.SmoothPuritySingleModuleComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullMonoidal
@@ -26,9 +27,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
   (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (g : X ⟶ Y)
 
-set_option trace.profiler true in
-set_option trace.profiler.threshold 200 in
-set_option diagnostics true in
 /-- On an object in degree zero, the nonflat derived pullback comparison is the
 ordinary coefficient/pullback comparison through the canonical single maps. -/
 lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
@@ -41,24 +39,20 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_single_comp_comparison
         (purityPullbackSingleComparison Λ' g).app
           ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫
         (DerivedCategory.singleFunctor _ 0).map ((pullIso a g).inv.app M) := by
+  let LF := L(Mod.extendScalars (coefficientMap a Y))
+  let LG := L((g)^*⟦Λ'⟧)
+  let LH := L((g)^*⟦Λ⟧)
+  let LI := L(Mod.extendScalars (coefficientMap a X))
   have hfac (K) := derivedUpperStarExtendScalarsIso_inv_app_Qh_comp_counit a g K
   simp only [pullIsoInvHomotopy, Functor.mapHomotopyCategoryCommIsoHom_app] at hfac
-  have hcochain := Functor.purityCochainComparisonOfHomotopy_square
+  have hsingle := Functor.puritySingleComparisonOfHomotopy_square
     (Mod.extendScalars (coefficientMap a Y)) (g)^*⟦Λ'⟧ (g)^*⟦Λ⟧
-    (Mod.extendScalars (coefficientMap a X))
-    L(Mod.extendScalars (coefficientMap a Y)) L((g)^*⟦Λ'⟧) L((g)^*⟦Λ⟧)
-    L(Mod.extendScalars (coefficientMap a X))
+    (Mod.extendScalars (coefficientMap a X)) LF LG LH LI
     (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit
     ((g)^*⟦Λ'⟧).leftDerivedFunctorCounit ((g)^*⟦Λ⟧).leftDerivedFunctorCounit
     (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorCounit
-    (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv hfac
-  have hsingle := Functor.puritySingleComparisonOfCochain_square
-    (Mod.extendScalars (coefficientMap a Y)) (g)^*⟦Λ'⟧ (g)^*⟦Λ⟧
-    (Mod.extendScalars (coefficientMap a X))
-    L(Mod.extendScalars (coefficientMap a Y)) L((g)^*⟦Λ'⟧) L((g)^*⟦Λ⟧)
-    L(Mod.extendScalars (coefficientMap a X))
-    _ _ _ _ (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv hcochain M
-  simpa only [Functor.puritySingleComparisonOfCochain_leftDerivedCounit,
+    (derivedUpperStarExtendScalarsIso a g).inv (pullIso a g).inv hfac M
+  simpa only [LF, LG, LH, LI, Functor.puritySingleComparisonOfCochain_leftDerivedCounit,
     purityPullbackSingleComparison, purityExtendScalarsSingleComparison] using hsingle
 
 end AlgebraicGeometry.ProEtale.CondensedRing
