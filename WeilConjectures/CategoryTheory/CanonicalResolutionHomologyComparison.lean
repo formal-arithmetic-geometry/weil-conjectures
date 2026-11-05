@@ -69,14 +69,23 @@ theorem resolution_homology_transport
     let φ : R.Hom I (𝟙 X) :=
       ⟨InjectiveResolution.desc (𝟙 X) I R,
         by simp [InjectiveResolution.desc_commutes_zero]⟩
+    have hη (L : CochainComplex.Plus A) [∀ n, Injective (L.obj.X n)] :
+        IsIso (F.rightDerivedFunctorPlusUnit.app L) := by
+      obtain ⟨L, n, hn⟩ := L
+      let L' : CochainComplex (InjectiveObject A) ℤ :=
+        HomologicalComplex.liftObjectProperty _ L inferInstance
+      have hL' : L'.IsStrictlyGE n := by
+        rwa [← CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ (InjectiveObject.ι _)]
+      exact inferInstanceAs (IsIso (F.rightDerivedFunctorPlusUnit.app
+        ((InjectiveObject.ι A).mapCochainComplexPlus.obj ⟨L', n, hL'⟩)))
     let LX : CochainComplex.Plus A := ⟨R.cochainComplex, 0, inferInstance⟩
     let LY : CochainComplex.Plus A := ⟨I.cochainComplex, 0, inferInstance⟩
-    have : IsIso (F.rightDerivedFunctorPlusUnit.app LX) := by
-      simp only [Functor.rightDerivedFunctorPlusUnit_app]
-      infer_instance
-    have : IsIso (F.rightDerivedFunctorPlusUnit.app LY) := by
-      simp only [Functor.rightDerivedFunctorPlusUnit_app]
-      infer_instance
+    have : ∀ n, Injective (LX.obj.X n) := fun n ↦
+      inferInstanceAs (Injective (R.cochainComplex.X n))
+    have : ∀ n, Injective (LY.obj.X n) := fun n ↦
+      inferInstanceAs (Injective (I.cochainComplex.X n))
+    have : IsIso (F.rightDerivedFunctorPlusUnit.app LX) := hη LX
+    have : IsIso (F.rightDerivedFunctorPlusUnit.app LY) := hη LY
     let g : LX ⟶ LY := ObjectProperty.homMk φ.hom'
     have h₁ := F.rightDerivedFunctorPlusUnit.naturality g
     have h₂ : (resolutionAugmentationIso R).hom ≫ DerivedCategory.Plus.Q.map g =
@@ -104,10 +113,8 @@ theorem resolution_homology_transport
       have hI : (resolutionDerivedIso F I).hom =
           F.rightDerivedFunctorPlus.map (resolutionAugmentationIso I).hom ≫
             inv (F.rightDerivedFunctorPlusUnit.app LY) := by
-        simp [resolutionDerivedIso, Functor.rightDerivedFunctorPlusUnit_app,
+        simp [resolutionDerivedIso, Functor.rightDerivedFunctorPlusUnit,
           Functor.quotientCompMapHomotopyCategoryPlusIso, LY, Category.assoc]
-        erw [Functor.map_id]
-        simp [← Functor.map_comp]
       rw [hI]
       change (F.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom ≫
           inv (F.rightDerivedFunctorPlusUnit.app LX)) ≫ DerivedCategory.Plus.Q.map FG = _
