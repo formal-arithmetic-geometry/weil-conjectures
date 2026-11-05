@@ -147,6 +147,28 @@ private lemma tower_grothendieck
   exact { locallySmall := ⟨fun P Q ↦ small_of_injective
     (f := fun f : P ⟶ Q ↦ f.app) (fun f g h ↦ NatTrans.ext h)⟩ }
 
+-- The counit normalization in the exact form of the hypotheses of
+-- `diagonalRlim_pullback_endpoints`, whose cochain complexes carry the fixed-coefficient zero
+-- morphisms. Proving it once, for an arbitrary scheme, keeps that instance comparison out of the
+-- main theorem, where it would be paid for both schemes.
+private theorem counit_normalized (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+    [DiagonalTraceLocalizations l X] (L : DiagonalRlim (DiagonalMod l X))
+    (adj : (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ ℕᵒᵖ ⥤ DiagonalMod l X).mapDerivedCategory ⊣
+      L.R)
+    (h : LimitAdjunctionNormalized (DiagonalMod l X) L adj) :
+    ∀ (I : CochainComplex (ℕᵒᵖ ⥤ DiagonalMod l X) ℤ), I.IsKInjective →
+      (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ ℕᵒᵖ ⥤ DiagonalMod l X).mapDerivedCategory.map
+          (L.η.app I) ≫ adj.counit.app (DerivedCategory.Q.obj I) =
+        (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤
+          ℕᵒᵖ ⥤ DiagonalMod l X).mapDerivedCategoryFactors.hom.app
+          (((lim : (ℕᵒᵖ ⥤ DiagonalMod l X) ⥤ DiagonalMod l X).mapHomologicalComplex (.up ℤ)).obj
+            I) ≫
+        DerivedCategory.Q.map
+          ((Adjunction.mapHomologicalComplex (.up ℤ)
+            (constLimAdj : (Functor.const ℕᵒᵖ : DiagonalMod l X ⥤ ℕᵒᵖ ⥤ DiagonalMod l X) ⊣
+              lim)).counit.app I) :=
+  h.1
+
 /-- Normalization of an exact pullback mate on every ordinary tower cone.
 Source: blueprint coefficient changes (3)
 (blueprint: lem-diagonal-local-chern-pullback-data). -/
@@ -328,7 +350,9 @@ theorem diagonalLocalChern_pullback_data (l : ℕ) [Fact l.Prime]
       let ψ := (X'.residue x).hom.comp (X'.presheaf.germ ⊤ x trivial).hom
       simpa only [map_natCast] using hunit'.map ψ).invertible
   obtain ⟨_, _, _, hcone, _, _, hV, hC, hshift, _⟩ :=
-    diagonalRlim_pullback_endpoints l hX p'.LX p.LX adj' adj hc' hp' hc hp
+    diagonalRlim_pullback_endpoints l hX p'.LX p.LX adj' adj
+      (counit_normalized l X' p'.LX adj' ⟨hc', hp'⟩) hp'
+      (counit_normalized l X p.LX adj ⟨hc, hp⟩) hp
       p.chernX p.restrictionX p.coefficientsX
   obtain ⟨dV, vV, ndV, mV, _⟩ := hV b g p'.restrictionX
   obtain ⟨dC, vC, ndC, mC, _⟩ := hC

@@ -8,7 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionProper
-public import WeilConjectures.AlgebraicGeometry.SixFunctorDatum
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
+public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.Compactification.NagataCompactification

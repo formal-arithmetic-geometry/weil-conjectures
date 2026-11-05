@@ -72,6 +72,12 @@ lemma iterateHom_succ (m : ℕ) : iterateHom g (m + 1) = g ≫ iterateHom g m :=
 lemma iterateHom_one : iterateHom g 1 = g := by
   rw [iterateHom_succ, iterateHom_zero, Category.comp_id]
 
+/-- The iterates of an endomorphism add: `g^(m + n) = g^n ≫ g^m`. -/
+lemma iterateHom_add (m n : ℕ) : iterateHom g (m + n) = iterateHom g n ≫ iterateHom g m := by
+  induction n with
+  | zero => simp
+  | succ n ih => rw [← Nat.add_assoc, iterateHom_succ, ih, iterateHom_succ, Category.assoc]
+
 end Iterate
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
