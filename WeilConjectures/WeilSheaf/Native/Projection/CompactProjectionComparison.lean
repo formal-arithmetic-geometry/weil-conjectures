@@ -130,11 +130,14 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
           (CondensedRing.exceptionalProjectionMorphismOfCompactification Λ cb
             ((compactProjectionForget k₀ l X).obj M).obj
             ((compactProjectionForget k₀ l Y).obj N).obj) := by
-  rw [CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb _ _
-    ((projectionGeometricPullComp k₀ l f).hom.app _) (by
-      exact CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb _)]
+  have hε := CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb
+    ((compactProjectionForget k₀ l Y).obj N)
+  have hp := CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb
+    ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
+    ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)) hε
+  rw [hp]
   -- the pasted square, with all spelling conversions done on abstract functors
-  exact projectionForgetSquare_paste_monoidal
+  have hpaste := projectionForgetSquare_paste_monoidal
     (projectionOpenForgetIso k₀ l (c).i) (projectionProperForgetIso k₀ l (c).g)
     (compactProjectionForgetUpperStarIso k₀ l (c).i)
     (compactProjectionForgetUpperStarIso k₀ l (c).g)
@@ -144,7 +147,10 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
     _ _ _ _ (projectionForgetSquare_open k₀ l (c).i) (projectionForgetSquare_proper k₀ l (c).g)
     (projectionCompactIso k₀ l f).hom (projectionCompactificationForgetIso k₀ l f)
     (projectionCompactPullForgetIso k₀ l f) M N
-    (projectionCompositeIso_hom_app _ _ _ M N) (fun _ ↦ rfl) rfl
+    (projectionCompositeIso_hom_app (nativeBoundedOpenProjectionIso (c).i)
+      (nativeBoundedProperProjectionIso (c).g) (projectionBoundedPullComp k₀ l f) M N)
+    (fun _ ↦ rfl) rfl
+  exact hpaste
 
 /-- The exceptional mate of the normalized compactification comparison is invertible. -/
 theorem isIso_mateEquiv_projectionCompactificationForgetIso
@@ -180,7 +186,9 @@ theorem isIso_mateEquiv_projectionCompactificationForgetIso
         CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
         projectionCompactificationForgetIso,
         Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
-        Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app])] at h
+        Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+      erw [CategoryTheory.Functor.map_id, Category.comp_id]
+      rfl)] at h
   exact h
 
 end AlgebraicGeometry.WeilComplex
