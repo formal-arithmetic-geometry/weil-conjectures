@@ -25884,6 +25884,9 @@ public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryTensorMode
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryTensorModelResolutionRoof
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryTensorModelResolutionTransport
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryTensorRepresentatives
+public import WeilConjectures.WeilSheaf.Native.Pull.NativePullDerivedTensor
+public import WeilConjectures.WeilSheaf.Native.Pull.NativePullKFlat
+public import WeilConjectures.WeilSheaf.Native.Pull.NativePullWeilKFlat
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilChainUncurryForget
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedForgetful
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
