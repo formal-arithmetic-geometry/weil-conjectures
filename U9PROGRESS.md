@@ -142,37 +142,29 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ585 awaiting visibility exception
+
+# BZ585 complete
 
 - Branch: `u9/BZ585`; starting commit: `8af5cb324`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`.
-- Applied public/import-all Localization imports, the permitted proof-unfolding repair.
-- Two public helper signatures still rely on the hidden implementation of `Qh`.
-  The complete exact-module patch already passed BZ430's remote build at `bb1af5fb2f`.
-  It adds `private` to `rightDerivedFunctorUnitQ_eq_rightDerivedFunctorUnit_app`
-  and `mapDerivedCategoryFactorsh_inv_app_quotient_obj`, preserving their statements
-  and proofs. All eight name occurrences are confined to the assigned module.
-- The current proof/import-only rule does not authorize visibility changes.
-  Asked for an explicit exception; private modifiers remain unapplied.
-- Concrete patch: `/home/ubuntu/u9/bz/BZ585-proposed-fix.patch`.
-  Notes and evidence: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
-- Baseline `ucheck-bump` was submitted at `ce4ae5c8a` but stayed queued.
-  Stopped only its verified waiting wrapper before any build started, since
-  the identical five baseline errors are already in BZ430-build-1-full.log.
-- After approval: apply the two private modifiers, run `ucheck-bump` on the owned
-  module, then `WeilConjectures.WeilSheaf.LowerShriekForget`; second-layer importers
-  are `AffineLineBundle` and `SmoothPurityNativeTraceCriterion`.
-- No BZ585 module is claimed green yet; no DONE marker written.
-- No local Lean/Lake, statement edits, proof shortcuts, or limit increases.
-
-# BZ585 resumed
-
-- The user instructed continuation after the concrete two-helper visibility proposal.
-  Applied exactly the two private modifiers; statements and proof bodies are unchanged.
-- Refreshed the remote notes and reread the brief; no new applicable LEAD instructions.
-- Next: validate the assigned module with ucheck-bump, then its direct importer.
-
-- Assigned module GREEN through ucheck-bump at `db7bb14d08`: rc=0, failed=0,
-  2022 jobs; target rebuilt in 4.8s on newsrv bumpw4.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log`.
-- Now building the sole direct importer, `WeilConjectures.WeilSheaf.LowerShriekForget`.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`
+  passed ucheck-bump: rc=0, failed=0, 2022 jobs, target rebuilt in 4.8s.
+- Validated commit: `db7bb14d08c2234513afd1b158e2524d33864d66`; newsrv bumpw4, Lean v4.35.0-rc3
+  and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24 confirmed on the build host.
+- Added the Localization public/import-all imports and made the two internal comparison
+  helpers private, following user continuation after that exact proposal. All statements,
+  proofs, binders, assumptions and existing docstrings are unchanged.
+- Contract audit: `/home/ubuntu/u9/bz/BZ585-contract-audit.txt`.
+  Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
+- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was attempted at
+  `c7cb6c306b`; the assigned module rebuilt successfully in that batch in 6.1s.
+- The importer is blocked by unowned `FreeComparisonMapDerivedCategory` (BZ584)
+  and six other dependencies. Stopped only the verified timeout process for this
+  build after confirming dependency failures. Result: rc=255, failed=7; the downstream
+  batch is not green. No downstream or external dependency sources were changed.
+- Skipped `LowerShriekForget`, `AffineLineBundle`, and `SmoothPurityNativeTraceCriterion`
+  under the brief's external-dependency rule. Only the assigned module is claimed green.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ585-downstream1-full.log`.
+- No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
+- Final documentation commit leaves Lean source identical to the green revision.
