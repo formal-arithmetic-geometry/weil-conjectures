@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.Statement
+public import WeilConjectures.WeilSheaf.SmoothPurityWeilOrientation
 public import WeilConjectures.LeanEval.WeilConjectures
 
 /-! # Axiom audit for the Weil conjectures statement
@@ -17,4 +18,4 @@ the affine-line Thom user in `FourierInversion.OtherSections`) are routed throug
 
 #print axioms AlgebraicGeometry.Scheme.weil_conjectures
 #print axioms LeanEval.AlgebraicGeometry.WeilConjectures.weil_conjectures
-#print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso
+#print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_absolutePurity
