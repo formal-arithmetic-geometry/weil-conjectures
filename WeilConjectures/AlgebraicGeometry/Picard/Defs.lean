@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.Over
