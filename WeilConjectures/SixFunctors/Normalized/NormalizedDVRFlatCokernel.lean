@@ -55,7 +55,7 @@ variable {A : Type a} {B : Type b} {C : Type c}
   (i : H ⋙ R ≅ S)
 
 private theorem exactComp_fac (K : CochainComplex A ℤ) :
-    ((Functor.mapDerivedCategoryCompIso H R).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso H R ≪≫
         Functor.mapDerivedCategoryNatIso i).hom.app (DerivedCategory.Q.obj K) ≫
       S.mapDerivedCategoryFactors.hom.app K =
     R.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app K) ≫
@@ -81,7 +81,7 @@ private theorem exactComp_map (K : CochainComplex A ℤ) (L : CochainComplex B �
     (f : L ⟶ (H.mapHomologicalComplex (.up ℤ)).obj K) :
     R.mapDerivedCategory.map
         (DerivedCategory.Q.map f ≫ H.mapDerivedCategoryFactors.inv.app K) ≫
-      ((Functor.mapDerivedCategoryCompIso H R).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso H R ≪≫
         Functor.mapDerivedCategoryNatIso i).hom.app (DerivedCategory.Q.obj K) ≫
       S.mapDerivedCategoryFactors.hom.app K =
     R.mapDerivedCategoryFactors.hom.app L ≫
@@ -115,7 +115,7 @@ private theorem exact_comp_inv
         S.mapDerivedCategoryFactors.inv.app K =
       R.mapDerivedCategoryFactors.inv.app L ≫ R.mapDerivedCategory.map
         (DerivedCategory.Q.map f ≫ H.mapDerivedCategoryFactors.inv.app K) ≫
-      ((Functor.mapDerivedCategoryCompIso H R).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso H R ≪≫
         Functor.mapDerivedCategoryNatIso i).hom.app (DerivedCategory.Q.obj K) := by
   apply (cancel_epi (R.mapDerivedCategoryFactors.hom.app L)).1
   apply (cancel_mono (S.mapDerivedCategoryFactors.hom.app K)).1
