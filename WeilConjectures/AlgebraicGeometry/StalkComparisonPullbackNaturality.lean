@@ -62,7 +62,10 @@ def comparisonIntoPullback (z : X')
     (comparisonStalkHomologyIso X' z
       (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) i).inv ≫
     (comparisonStalkCohomology X' z i).map
-      (cast (by rfl) (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))
+      (show DerivedCategory.Q.obj
+          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ⟶
+          (derivedPullback g').obj (DerivedCategory.Q.obj P) from
+        cast (by rfl) (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))
 
 set_option maxHeartbeats 1600000 in
 -- Comparing the nested localization factors requires additional elaboration heartbeats.
