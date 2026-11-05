@@ -69,12 +69,10 @@ theorem isDerivedLimitTriangle_map (Φ : C ⥤ D) [Φ.CommShift ℤ] [Φ.IsTrian
     (e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L))
     (Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm ?_ ?_ ?_)
   · simp
-    rfl
   · rw [← cancel_mono e.hom]
     simp only [Iso.symm_hom, Category.assoc, Iso.inv_hom_id, Category.comp_id]
     exact (Iso.inv_hom_id_assoc e _).symm.trans (congrArg (e.inv ≫ ·) ht.symm)
   · simp
-    rfl
 
 end CategoryTheory.Functor
 
