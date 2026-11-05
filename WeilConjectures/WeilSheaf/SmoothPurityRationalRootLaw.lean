@@ -52,44 +52,8 @@ theorem purity_rationalRootTrivialization_weil :
     (by
       have hr := purity_tateModule_rootTrivialization_frobenius a hζ hζ'
       dsimp only [Functor.comp_obj, Functor.comp_map] at hr ⊢
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let ht ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hr) none
-        let mut pending := #[(← Lean.Meta.inferType ht, ← Lean.Elab.Tactic.getMainTarget)]
-        let mut count := 0
-        while !pending.isEmpty && count < 20 do
-          let (a, b) := pending.back!
-          pending := pending.pop
-          if a == b then continue
-          if (← Lean.Meta.isProof a) then continue
-          let aa := a.getAppArgs
-          let bb := b.getAppArgs
-          if a.getAppFn == b.getAppFn && aa.size == bb.size && aa.size > 0 then
-            for i in [:aa.size] do
-              pending := pending.push (aa[i]!, bb[i]!)
-          else
-            count := count + 1
-            Lean.logInfo m!"Root input data difference: {a.getAppFn} versus {b.getAppFn}"
-        Lean.logInfo m!"Root input data differences: {count}"
       exact_mod_proofs hr)
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let ht ← Lean.Elab.Term.elabTerm (Lean.mkIdent `h) none
-    let mut pending := #[(← Lean.Meta.inferType ht, ← Lean.Elab.Tactic.getMainTarget)]
-    let mut count := 0
-    while !pending.isEmpty && count < 20 do
-      let (a, b) := pending.back!
-      pending := pending.pop
-      if a == b then continue
-      if (← Lean.Meta.isProof a) then continue
-      let aa := a.getAppArgs
-      let bb := b.getAppArgs
-      if a.getAppFn == b.getAppFn && aa.size == bb.size && aa.size > 0 then
-        for i in [:aa.size] do
-          pending := pending.push (aa[i]!, bb[i]!)
-      else
-        count := count + 1
-        Lean.logInfo m!"Rational root data difference: {a.getAppFn} versus {b.getAppFn}"
-    Lean.logInfo m!"Rational root data differences: {count}"
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

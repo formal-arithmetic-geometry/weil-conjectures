@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarComparison
+public import WeilConjectures.WeilSheaf.SmoothPurityWhiskerComponent
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The descent Frobenius factor in the abstract factorization notation -/
 
@@ -38,6 +40,13 @@ lemma purity_geometricFiberProjLowerStarFrobeniusIso_app
     (geometricFiberProjLowerStarFrobeniusIso Λ a).app M =
       ((upperStarIsoLowerStarInv Λ a.geometricGaloisFrobenius).app
         ((CondensedRing.upperStar Λ a.geometricFiberProj).obj M)).symm ≪≫
-        (geometricFiberProjUpperStarFrobeniusIso Λ a).app M := rfl
+        (geometricFiberProjUpperStarFrobeniusIso Λ a).app M := by
+  have h := purity_isoWhiskerLeft_symm_trans_app
+    (CondensedRing.upperStar Λ a.geometricFiberProj)
+    (upperStarIsoLowerStarInv Λ a.geometricGaloisFrobenius)
+    (geometricFiberProjUpperStarFrobeniusIso Λ a)
+    (geometricFiberProjLowerStarFrobeniusIso Λ a) rfl M
+  dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

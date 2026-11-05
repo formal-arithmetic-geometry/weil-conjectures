@@ -49,6 +49,6 @@ theorem purityTateTwistOneTrivialization_weil :
   rw [purityTateTwistOneTrivialization_eq]
   have h := purity_rationalRootTrivialization_weil a hζ hζ'
   dsimp only [tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
-  cast_proofs h
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing
