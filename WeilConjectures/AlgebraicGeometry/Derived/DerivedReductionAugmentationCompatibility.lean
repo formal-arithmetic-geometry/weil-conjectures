@@ -35,27 +35,4 @@ attribute [local irreducible] completedAdicChangeData completedReductionCoeffici
 attribute [local irreducible] completedReductionModuleTowerFunctor
   completedReductionTowerComplexCounit reductionComplexCounit coherenceReductionTowerCounit
 
-private theorem unitCounit_onComplex
-    {B D : Type*} [Category B] [Category D] [Abelian B] [Abelian D]
-    [HasDerivedCategory B] [HasDerivedCategory D]
-    (C R : B ⥤ D) [C.Additive] [R.Additive]
-    [PreservesFiniteLimits C] [PreservesFiniteColimits C]
-    (L : DerivedCategory B ⥤ DerivedCategory D)
-    (ε : DerivedCategory.Qh ⋙ L ⟶ R.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
-    (i : C.mapDerivedCategory ⟶ L) (u : C ⟶ R) (P : CochainComplex B ℤ)
-    (h : i.app (DerivedCategory.Q.obj P) ≫
-        ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P) =
-      C.mapDerivedCategoryFactors.hom.app P ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex u (.up ℤ)).app P)) :
-    i.app (DerivedCategory.Q.obj P) ≫ reductionComplexCounit R L ε P =
-      C.mapDerivedCategoryFactors.hom.app P ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex u (.up ℤ)).app P) := by
-  unfold reductionComplexCounit
-  change i.app (DerivedCategory.Q.obj P) ≫
-    (L.map (𝟙 _) ≫ ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P) ≫
-      DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _) = _
-  erw [L.map_id, DerivedCategory.Qh.map_id, Category.id_comp,
-    Category.comp_id, Category.comp_id]
-  exact h
-
 end AlgebraicGeometry.Scheme
