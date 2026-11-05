@@ -108,5 +108,6 @@ private theorem squareFactors
     Functor.mapDerivedCategoryNatIso_fac,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   simp only [Iso.inv_hom_id_app_assoc]
+  rfl
 
 end CategoryTheory
