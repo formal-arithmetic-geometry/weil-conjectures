@@ -102,8 +102,12 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       (Functor.uncurry.obj (nativeTensorTotal k₀ l Z))
       (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
       (condensedRealizationTotalTensorIso k₀ l Z) P T
-      (by with_reducible exact nativeOpenTensorModel k₀ l Y P T hP hT)
-      (by with_reducible exact nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
+      (by
+        dsimp only [Functor.uncurry_obj_obj]
+        with_reducible exact nativeOpenTensorModel k₀ l Y P T hP hT)
+      (by
+        dsimp only [Functor.uncurry_obj_obj]
+        with_reducible exact nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
       (by
         dsimp only [L, V, LP, LT, NativeRestrictionDescentProof.totalFamily,
           Functor.uncurry_obj_obj, Functor.comp_obj, Functor.prod_obj, Iso.app] at hr ⊢
