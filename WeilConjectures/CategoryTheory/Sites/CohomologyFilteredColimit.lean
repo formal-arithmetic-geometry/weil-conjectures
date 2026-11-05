@@ -460,7 +460,11 @@ lemma H_map_isColimit_succ_of_shortExact {D I Q : K ⥤ Sheaf J AddCommGrpCat.{m
     rw [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
       ← Q.map_comp, ← Q.map_comp, ← Sheaf.H.map_comp_apply, ← π.naturality,
       Sheaf.H.map_comp_apply] at ha'
-    exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2 ⟨_, ha'.symm⟩
+    have hz : Sheaf.H.δSucc (hS k') n
+        (Sheaf.H.map (Q.map (a ≫ a')) n w) = 0 := by
+      rw [ha']
+      exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2 ⟨_, rfl⟩
+    exact hz
 
 variable [∀ V : C, HasFiniteProducts (Over V)] {T : C}
 
