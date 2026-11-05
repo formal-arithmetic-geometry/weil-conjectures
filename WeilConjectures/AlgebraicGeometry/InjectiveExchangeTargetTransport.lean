@@ -311,7 +311,7 @@ theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
     (.up ℤ)).app M.obj
   change U.mapDerivedCategoryFactors.inv.app L ≫
     U.mapDerivedCategory.map (𝟙 _) ≫ _ = _
-  rw [Functor.map_id, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
   have hp := exchange_localization_prefix R U P F
     (baseChangeMap AddCommGrpCat.{v + 1} sq) M
   have ht := target_unit_representative_transport P F K M q
