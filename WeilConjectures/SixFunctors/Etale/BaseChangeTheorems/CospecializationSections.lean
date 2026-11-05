@@ -314,7 +314,8 @@ theorem bijective_cospecializationMap_of_isIso_globalSectionsUpperStarMap {Y : S
     refine (pointSmallEtale s).presheafFiber_hom_ext (P := G.obj) fun X x ↦ ?_
     let leg := (strictLocalizationConeAll s).π.app (Functor.elementsMk _ X x)
     have hleg : leg ≫ X.hom = N.hom ≫ g :=
-      (strictLocalizationConeAll_π_app_hom s (Functor.elementsMk _ X x)).trans (Category.id_comp g).symm
+      (strictLocalizationConeAll_π_app_hom s (Functor.elementsMk _ X x)).trans
+        (Category.id_comp g).symm
     have hA : ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app G).hom.app
         (op X) ≫ G'.obj.map (Etale.homToPullback g leg hleg).op ≫ a =
           (pointSmallEtale s).toPresheafFiber X x G.obj := by
