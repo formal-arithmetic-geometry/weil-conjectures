@@ -980,17 +980,21 @@ private theorem derived_projection_exists
     have hqA : (DerivedCategory.quotientCompQhIso A).hom.app I = 𝟙 _ := by
       simp [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
         Quotient.lift.isLift_hom]
+      rfl
     have hqAi : (DerivedCategory.quotientCompQhIso A).inv.app I = 𝟙 _ := by
       simp [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
         Quotient.lift.isLift_inv]
+      rfl
     have hqB (K : CochainComplex B ℤ) :
         (DerivedCategory.quotientCompQhIso B).hom.app K = 𝟙 _ := by
       simp [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
         Quotient.lift.isLift_hom]
+      rfl
     have hqBi (K : CochainComplex B ℤ) :
         (DerivedCategory.quotientCompQhIso B).inv.app K = 𝟙 _ := by
       simp [DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
         Quotient.lift.isLift_inv]
+      rfl
     have hf : G.mapDerivedCategoryFactorsh.hom.app
         ((HomotopyCategory.quotient A (.up ℤ)).obj I) =
           G.mapDerivedCategoryFactors.hom.app I := by
