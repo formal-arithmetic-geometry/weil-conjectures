@@ -67,6 +67,8 @@ theorem affineBaseChangeTildeCohomologyIso_globalSections_factorization
     let E : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
         SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace) :=
       Scheme.Modules.tensorPullback (Spec.map (CommRingCat.ofHom φg'))
+    letI : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w}
+      (Spec.map (CommRingCat.ofHom φg'))
     let c :=
       (DerivedCategory.quotientCompQhIso.{w} _).inv.app
         ((E.mapHomologicalComplex (.up ℤ)).obj P) ≫
