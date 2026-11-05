@@ -71,69 +71,6 @@ abbrev pushTargetComplex (I : CochainComplex (proEtaleRingModules X S) ℤ)
   ((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj
     (targetComplex f R S c I F)
 
-/-- The right-derived comparison eta_H, without an injectivity restriction on H.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
-def derivedComparison (H : CochainComplex (proEtaleRingModules X S) ℤ) :
-    DerivedCategory.Q.obj
-        (((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj H) ⟶
-      (proEtaleRingDerivedDirectImage f R S c).obj (DerivedCategory.Q.obj H) :=
-  (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj H)
-
-/-- Flat-term K-flat coefficient models, the K-injective target total, and the
-invertible right-derived comparisons.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization).
-Proof: each F^r is a retract of a finite sum of copies of R via the supplied splitting,
-so tensor with it is exact. Boundedness and the bounded-above flat K-flat criterion
-make F K-flat. Exact pullback preserves the splitting, the bounds, and the flat
-K-flat representative class. The split-perfect tensor K-injective lemma then makes
-J K-injective, without boundedness of I. The K-injective total-derived comparison
-lemma makes eta_I and eta_J invertible. -/
-theorem model_properties
-    (I : CochainComplex (proEtaleRingModules X S) ℤ) (hI : I.IsKInjective)
-    (F : CochainComplex (proEtaleRingModules Y R) ℤ)
-    (package : SheafOfModules.StrictPerfectCoefficientPackageOnSite
-      ((sheafCompose (ProEt.topology Y)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) F)
-    (bounded : ∃ l h : ℤ, ∀ r : ℤ, r < l ∨ h < r → IsZero (F.X r)) :
-    proEtaleFlatRepresentatives Y R F ∧
-      proEtaleFlatRepresentatives X S (pulledCoefficient f R S c F) ∧
-      (targetComplex f R S c I F).IsKInjective ∧
-      IsIso (derivedComparison f R S c I) ∧
-      IsIso (derivedComparison f R S c (targetComplex f R S c I F)) := by
-  let := SheafOfModules.monoidalCategory R
-  let := SheafOfModules.monoidalCategory S
-  let L := proEtaleRingModulePullback f R S c
-  let j := Classical.choose (proEtaleProjectionUnit_existsUnique f R S c).exists
-  let e (n : ℕ) := PreservesProduct.iso L (fun _ : Fin n ↦ 𝟙_ (proEtaleRingModules Y R)) ≪≫
-    Pi.mapIso (fun _ : Fin n ↦ j)
-  let package' : SheafOfModules.StrictPerfectCoefficientPackageOnSite
-      ((sheafCompose (ProEt.topology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)
-      (pulledCoefficient f R S c F) :=
-    { N := package.N
-      i := fun r ↦ L.map (package.i r) ≫ (e (package.N r)).hom
-      p := fun r ↦ (e (package.N r)).inv ≫ L.map (package.p r)
-      splitting := fun r ↦ by
-        simp only [Category.assoc, Iso.hom_inv_id_assoc, ← L.map_comp,
-          package.splitting, L.map_id]
-        rfl }
-  have bounded' : ∃ l h : ℤ, ∀ r : ℤ,
-      r < l ∨ h < r → IsZero ((pulledCoefficient f R S c F).X r) := by
-    obtain ⟨l, h, hb⟩ := bounded
-    exact ⟨l, h, fun r hr ↦ L.map_isZero (hb r hr)⟩
-  have hJ : (targetComplex f R S c I F).IsKInjective :=
-    tensorAdjunctionTotal_target_isKInjective L j I hI F bounded
-      package.N package.i package.p package.splitting
-  let := hI
-  let := hJ
-  exact ⟨proEtaleStrictPerfect_flat R F package bounded,
-    proEtaleStrictPerfect_flat S _ package' bounded', hJ,
-    proEtaleRingDerivedDirectImage_kInjective f R S c I,
-    proEtaleRingDerivedDirectImage_kInjective f R S c _⟩
-
 variable (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)
   (K : DerivedCategory (proEtaleRingModules X S))
   (P : DerivedCategory (proEtaleRingModules Y R))
@@ -145,39 +82,6 @@ variable (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)
     ((sheafCompose (ProEt.topology Y)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) F)
   (bounded : ∃ l h : ℤ, ∀ r : ℤ, r < l ∨ h < r → IsZero (F.X r))
-
-/-- The specified S = m_Y ((eta_I^{-1} Rf_* alpha) tensor beta^{-1}).
-Its mixed tensor factor is normalized on every flat K-flat resolution, including
-when the complex f_* I itself is not K-flat.
-Source: blueprint, perfect projection formula, paragraphs 2 and 3
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
-def sourceModel :
-    a.tensor.obj ((proEtaleRingDerivedDirectImage f R S c).obj K, P) ≅
-      DerivedCategory.Q.obj (sourceComplex f R S c I F) :=
-  a.tensor.mapIso (Iso.prod
-    ((proEtaleRingDerivedDirectImage f R S c).mapIso alpha ≪≫
-      (@asIso _ _ _ _ (derivedComparison f R S c I)
-        (model_properties f R S c I hI F package bounded).2.2.2.1).symm) beta.symm) ≪≫
-    proEtaleMixedTensor R a
-      (((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj I)
-      F (model_properties f R S c I hI F package bounded).1
-
-/-- The specified T, using exact pullback of beta^{-1}, then ell_F, mixed tensor on X,
-and eta_J^{-1}. This is an isomorphism in the derived category.
-Source: blueprint, perfect projection formula, paragraphs 2 and 3
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
-def targetModel :
-    (proEtaleRingDerivedDirectImage f R S c).obj
-        (b.tensor.obj (K, (proEtaleRingDerivedPullback f R S c).obj P)) ≅
-      DerivedCategory.Q.obj (pushTargetComplex f R S c I F) :=
-  (proEtaleRingDerivedDirectImage f R S c).mapIso
-    (b.tensor.mapIso (Iso.prod alpha
-      ((proEtaleRingDerivedPullback f R S c).mapIso beta.symm ≪≫
-        (proEtaleRingDerivedPullbackFactors f R S c).app F)) ≪≫
-      proEtaleMixedTensor S b I (pulledCoefficient f R S c F)
-        (model_properties f R S c I hI F package bounded).2.1) ≪≫
-    (@asIso _ _ _ _ (derivedComparison f R S c (targetComplex f R S c I F))
-      (model_properties f R S c I hI F package bounded).2.2.2.2).symm
 
 /-- The ordinary signed total counit mate t, using the published total construction.
 Source: blueprint, perfect projection formula, paragraph 2
@@ -205,17 +109,6 @@ def totalInverse : pushTargetComplex f R S c I F ⟶ sourceComplex f R S c I F :
     (proEtaleRingModuleAdjunction f R S c) (proEtaleOrdinaryTensorPullback f R S c)
     (fun {_ _ _ _} v z ↦ proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z)
     j hj I F bounded package.N package.i package.p package.splitting
-
-/-- The inverse S^{-1} Q_Y(s) T, for the supplied representatives and splitting package.
-Source: blueprint, perfect projection formula, paragraph 3
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
-def inverse :
-    (proEtaleRingDerivedDirectImage f R S c).obj
-        (b.tensor.obj (K, (proEtaleRingDerivedPullback f R S c).obj P)) ⟶
-      a.tensor.obj ((proEtaleRingDerivedDirectImage f R S c).obj K, P) :=
-  (targetModel f R S c b K P I hI alpha F beta package bounded).hom ≫
-    DerivedCategory.Q.map (totalInverse f R S c I F package bounded) ≫
-      (sourceModel f R S c a K P I hI alpha F beta package bounded).inv
 
 private theorem transport_projection
     {C : Type*} [Category C] {D : Type*} [Category D]
@@ -250,133 +143,5 @@ private theorem transport_projection
     _ = _ := by
       have hh := congrArg (fun v ↦ T.map (Prod.mkHom (V.map k.hom) q.inv) ≫ v) hs
       simpa only [← Category.assoc, ← T.map_comp, prod_comp, Category.comp_id] using hh
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- On every chosen K-injective and bounded strict-perfect representative, the canonical
-counit mate is T^{-1} Q_Y(t) S, and S^{-1} Q_Y(s) T is its two-sided inverse.
-No boundedness of K or I, and no chain-map condition on the splittings, is imposed.
-Source: blueprint, perfect projection formula, paragraphs 2 and 3; Stacks Tag 0B56
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization).
-Proof: model_properties gives the flat K-flat models and the K-injective total.
-The fixed-tensor localization normalization gives precisely the mixed comparisons
-in sourceModel and targetModel. Naturality of the ordinary counit mate identifies
-its finite-free components with finite sums of the unit case. Its retract inverse
-is (1 tensor p) q f_*(1 tensor f^* i); the splitting identity proves both component
-inverse laws. Naturality then makes these inverses commute with both differentials,
-with the same (-1)^a on the coefficient differential. Boundedness of F makes every
-relevant diagonal finite, so direct image preserves its biproduct and gives chain
-inverse laws. The mixed projection mate lemma identifies the localized forward
-map with the canonical derived mate at Q_X I and Q_Y F. Cancel eta_I and eta_J.
-Naturality of the canonical mate in both inputs conjugates that equality by alpha
-and beta^{-1}, giving exactly S and T. Localize the two chain inverse laws and
-cancel S and T to obtain the two displayed identity equations. Uniqueness of an
-inverse gives independence of every choice; nothing used boundedness of K. -/
-theorem normalization :
-    derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c)
-      (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c)
-      a.tensor b.tensor (proEtaleCanonicalTensorComparison f R S c a b) K P =
-      (sourceModel f R S c a K P I hI alpha F beta package bounded).hom ≫
-        DerivedCategory.Q.map (totalMate f R S c I F) ≫
-          (targetModel f R S c b K P I hI alpha F beta package bounded).inv ∧
-    derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c)
-      (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c)
-      a.tensor b.tensor (proEtaleCanonicalTensorComparison f R S c a b) K P ≫
-      inverse f R S c a b K P I hI alpha F beta package bounded =
-        𝟙 (a.tensor.obj ((proEtaleRingDerivedDirectImage f R S c).obj K, P)) ∧
-    inverse f R S c a b K P I hI alpha F beta package bounded ≫
-      derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c)
-      (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c)
-      a.tensor b.tensor (proEtaleCanonicalTensorComparison f R S c a b) K P =
-        𝟙 ((proEtaleRingDerivedDirectImage f R S c).obj
-          (b.tensor.obj (K, (proEtaleRingDerivedPullback f R S c).obj P))) := by
-  have hf := model_properties f R S c I hI F package bounded
-  let L := proEtaleRingDerivedPullback f R S c
-  let V := proEtaleRingDerivedDirectImage f R S c
-  let adj := proEtaleRingDerivedAdjunction f R S c
-  let mu := proEtaleCanonicalTensorComparison f R S c a b
-  let pi := derivedProjectionFormulaMate L V adj a.tensor b.tensor mu
-  let si := @asIso _ _ _ _ (derivedComparison f R S c I) hf.2.2.2.1
-  let ti := V.mapIso
-    (b.tensor.mapIso (Iso.prod (Iso.refl (DerivedCategory.Q.obj I))
-      ((proEtaleRingDerivedPullbackFactors f R S c).app F)) ≪≫
-        proEtaleMixedTensor S b I (pulledCoefficient f R S c F) hf.2.1) ≪≫
-    (@asIso _ _ _ _ (derivedComparison f R S c (targetComplex f R S c I F))
-      hf.2.2.2.2).symm
-  have h := proEtaleMixedProjectionMate f R S c a b I hI F hf.1
-  have hnorm : a.tensor.map (Prod.mkHom si.hom (𝟙 (DerivedCategory.Q.obj F))) ≫
-      pi (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F) ≫ ti.hom =
-      (proEtaleMixedTensor R a _ F hf.1).hom ≫
-        DerivedCategory.Q.map (totalMate f R S c I F) := by
-    change a.tensor.map (Prod.mkHom (derivedComparison f R S c I) (𝟙 _)) ≫
-      pi (DerivedCategory.Q.obj I) (DerivedCategory.Q.obj F) ≫
-      V.map (b.tensor.map (Prod.mkHom (𝟙 _)
-          ((proEtaleRingDerivedPullbackFactors f R S c).hom.app F)) ≫
-        (proEtaleMixedTensor S b I (pulledCoefficient f R S c F) hf.2.1).hom) =
-      (proEtaleMixedTensor R a _ F hf.1).hom ≫
-        DerivedCategory.Q.map (totalMate f R S c I F) ≫
-          derivedComparison f R S c (targetComplex f R S c I F) at h
-    have hh := congrArg (fun z ↦ z ≫
-      (@asIso _ _ _ _ (derivedComparison f R S c (targetComplex f R S c I F))
-        hf.2.2.2.2).inv) h
-    simpa only [ti, si, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv,
-      Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, Iso.app_hom,
-      Category.assoc, IsIso.hom_inv_id, Category.comp_id] using hh
-  have ht := transport_projection L V a.tensor b.tensor pi
-    (fun {_ _} q Q ↦ derivedProjectionFormulaMate_naturality
-      L V adj a.tensor b.tensor mu _ _ Q q)
-    (fun E {_ _} q ↦ by
-      exact (((adj.rightAdjointProjectionMap
-        (T_C := Functor.curry.obj b.tensor) (T_D := Functor.curry.obj a.tensor)
-        (Functor.curry.map mu.hom ≫
-          (Functor.curryObjProdComp L L b.tensor).hom)).app E).naturality q))
-    alpha beta si ti.hom (proEtaleMixedTensor R a _ F hf.1).hom
-    (DerivedCategory.Q.map (totalMate f R S c I F)) hnorm
-  have hsource : (sourceModel f R S c a K P I hI alpha F beta package bounded).hom =
-      a.tensor.map (Prod.mkHom (V.map alpha.hom ≫ si.inv) beta.inv) ≫
-        (proEtaleMixedTensor R a _ F hf.1).hom := rfl
-  have htarget : (targetModel f R S c b K P I hI alpha F beta package bounded).hom =
-      V.map (b.tensor.map (Prod.mkHom alpha.hom (L.map beta.inv))) ≫ ti.hom := by
-    simp only [targetModel, ti, Iso.trans_hom, Iso.symm_hom,
-      Functor.mapIso_hom, Iso.prod_hom, Iso.app_hom, Iso.refl_hom, asIso_inv,
-      Functor.map_comp, Category.assoc]
-    conv_rhs => rw [← V.map_comp_assoc, ← b.tensor.map_comp]
-    simp only [prod_comp, Category.comp_id]
-    rfl
-  have forward : pi K P =
-      (sourceModel f R S c a K P I hI alpha F beta package bounded).hom ≫
-        DerivedCategory.Q.map (totalMate f R S c I F) ≫
-          (targetModel f R S c b K P I hI alpha F beta package bounded).inv := by
-    apply (cancel_mono
-      (targetModel f R S c b K P I hI alpha F beta package bounded).hom).mp
-    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-    rw [htarget, hsource]
-    simpa only [Category.assoc] using ht
-  let := SheafOfModules.monoidalCategory R
-  let := SheafOfModules.monoidalCategory S
-  let j := Classical.choose (proEtaleProjectionUnit_existsUnique f R S c).exists
-  have hj := Classical.choose_spec (proEtaleProjectionUnit_existsUnique f R S c).exists
-  have htotal : IsIso (totalMate f R S c I F) :=
-    tensorAdjunctionTotal_isIso
-      (proEtaleRingModulePullback f R S c) (proEtaleRingModuleDirectImage f R S c)
-      (proEtaleRingModuleAdjunction f R S c) (proEtaleOrdinaryTensorPullback f R S c)
-      (fun {_ _ _ _} v z ↦ proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z)
-      j hj I F bounded package.N package.i package.p package.splitting
-  have hinv : totalInverse f R S c I F package bounded =
-      inv (totalMate f R S c I F) := rfl
-  dsimp only [pi, L, V, adj, mu] at forward
-  refine ⟨forward, ?_, ?_⟩
-  · rw [forward]
-    dsimp only [inverse]
-    rw [hinv]
-    simp only [Category.assoc, Iso.inv_hom_id_assoc]
-    rw [← DerivedCategory.Q.map_comp_assoc, IsIso.hom_inv_id,
-      DerivedCategory.Q.map_id, Category.id_comp, Iso.hom_inv_id]
-  · rw [forward]
-    dsimp only [inverse]
-    rw [hinv]
-    simp only [Category.assoc, Iso.inv_hom_id_assoc]
-    rw [← DerivedCategory.Q.map_comp_assoc, IsIso.inv_hom_id,
-      DerivedCategory.Q.map_id, Category.id_comp, Iso.hom_inv_id]
 
 end AlgebraicGeometry.Scheme.SignedProjectionResolution
