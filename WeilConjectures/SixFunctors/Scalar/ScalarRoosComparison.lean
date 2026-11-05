@@ -349,10 +349,10 @@ private theorem scalarRoosCoordinates (F : A ⥤ B) [F.Additive]
         F.map ((Pi.π (fun n : ℕ ↦ C.obj (op n)) n).f (i - 1)) at hp
     change F.map ((mappingCocone.snd (scalarRoosBoundary C)).v
         i (i - 1) (by omega) ≫ (Pi.π (fun n : ℕ ↦ C.obj (op n)) n).f (i - 1)) =
-      (F.map ((mappingCocone.snd (scalarRoosBoundary C)).v
-        i (i - 1) (by omega)) ≫ pc.f (i - 1)) ≫
+      F.map ((mappingCocone.snd (scalarRoosBoundary C)).v
+        i (i - 1) (by omega)) ≫ pc.f (i - 1) ≫
           (Pi.π (fun n : ℕ ↦ G.obj (C.obj (op n))) n).f (i - 1)
-    rw [Category.assoc, hp, ← F.map_comp]
+    rw [hp, ← F.map_comp]
   exact ⟨hf, hs⟩
 
 /-- Naturality of the diagonal Roos comparison on arbitrary strict towers.
