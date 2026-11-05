@@ -6,9 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
-public import WeilConjectures.WeilSheaf.SmoothPurityFullyFaithfulBaseChange
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedComplement
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
 
 /-! # Compact-support base change between different fields
 

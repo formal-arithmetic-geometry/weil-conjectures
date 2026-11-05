@@ -48,7 +48,7 @@ lemma purityAmbientOpenBaseChange_eq (sq : IsPullback g' f' f g)
     (purityAmbientPullbackSquareComparison_coordinates Λ sq.toCommSq)
   rw [← purityOpenImmersionLowerShriekMapDerivedCategoryBaseChangeIso_inv Λ sq] at hc
   rw [purityAmbientPullbackSquareComparison_eq_sqIso] at hc
-  simpa only [Adjunction.exchangeLeft_eq_mateEquiv_symm,
+  simpa only [Adjunction.purity_exchangeLeft_eq_inverseMate,
     purityAmbientExchangeFormalism, ExchangeFormalism.baseChange] using hc
 
 end AlgebraicGeometry.ProEtale.CondensedRing

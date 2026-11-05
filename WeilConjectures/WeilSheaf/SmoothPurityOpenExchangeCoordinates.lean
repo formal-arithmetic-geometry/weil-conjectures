@@ -19,7 +19,8 @@ variable {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B
   {J : A ⥤ B} {P P₀ : B ⥤ A} {J' : A' ⥤ B'} {P' P₀' : B' ⥤ A'}
   {G G₀ : A ⥤ A'} {H H₀ : B ⥤ B'}
 
-private lemma purity_exchangeLeft_eq_inverseMate (a : J ⊣ P) (a' : J' ⊣ P')
+/-- The left exchange is the inverse mate of its pullback square. -/
+lemma purity_exchangeLeft_eq_inverseMate (a : J ⊣ P) (a' : J' ⊣ P')
     (θ : P ⋙ G ≅ H ⋙ P') :
     exchangeLeft a a' θ = ((mateEquiv a a').symm θ.hom).natTrans := by
   ext K
