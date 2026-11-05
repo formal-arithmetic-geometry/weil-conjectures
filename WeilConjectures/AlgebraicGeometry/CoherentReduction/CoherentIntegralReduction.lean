@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.ConstantCoefficientSy
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.SectionActionInternal
 public import WeilConjectures.CategoryTheory.ConstantRingModuleSheaves
+public import WeilConjectures.CategoryTheory.Sites.ConstantRingSheafMonObj
 public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 public import WeilConjectures.AlgebraicGeometry.FiniteProperQuotient.FiniteProperExceptionalQuotient
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
@@ -35,7 +36,8 @@ set_option relaxedAutoImplicit false
 set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-universe u w
+
+universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open WeilConjectures.SemilinearSections
 open scoped CategoryTheory.Obj
@@ -202,23 +204,123 @@ instance coefficientForgetPreserves (X : Scheme.{u}) :
         forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
   GrothendieckTopology.instPreservesSheafification _ _
 
-/-- The presheaf map sending a scalar to its constant continuous function; its
-sheafification is `pointConstants`. -/
-noncomputable def constantFunctions (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
+section ConstantSectionsHelpers
+
+open MonoidalCategory MonObj
+
+/-! ### The constant-section homomorphism -/
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The constant-section map from the point to the scheme is a morphism of ring objects.
+Source: Stacks 00YV; monoidality of inverse image from the point
+(auxiliary; not a blueprint node). -/
+theorem schemeConstants_isMonHom (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
+    [TopologicalSpace T] [IsTopologicalRing T] :
+    @IsMonHom _ _ _ _ _ ((constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).monObjObj
+      (AddCommGrpCat.of T)) _ (schemeConstants X T) := by
+  let : (coherentTopology Profinite.{u}).PreservesSheafification
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
+    GrothendieckTopology.instPreservesSheafification _ _
+  have h₁ := isMonHom_constantCommuteCompose_inv_app (coherentTopology Profinite.{u}) T
+  have h₂ := Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u})
+    ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (pointConstants T))
+  have hi := Functor.isMonHom_compAlgHom
+    (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    (upperStarFromPoint X) (constantSchemeIso X).inv (AddCommGrpCat.of T)
+  exact IsMonHom.comp_of_monObj _ _ _ _ _
+    (IsMonHom.inv_of_hom _ _ ((constantSchemeIso X).app (AddCommGrpCat.of T)).symm hi)
+    (Functor.isMonHom_map_of_monObj (upperStarFromPoint X) _ _ _
+      (IsMonHom.comp_of_monObj _ _ _ _ _ h₁ h₂))
+
+/-- Constant sections on the scheme, as a morphism of abelian presheaves from the constant
+presheaf.
+Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+def schemeConstantsPresheaf (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
+    [TopologicalSpace T] [IsTopologicalRing T] :
+    (Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of T) ⟶ (internalRing X T).obj :=
+  toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of T)) ≫
+    (schemeConstants X T).hom
+
+/-- The presheaf of constant sections is a morphism of ring objects of abelian presheaves.
+Source: Stacks 00YV and 03CY (auxiliary; not a blueprint node). -/
+theorem schemeConstantsPresheaf_isMonHom (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
+    [TopologicalSpace T] [IsTopologicalRing T] :
+    @IsMonHom _ _ _ _ _ ((Functor.const X.ProEtᵒᵖ).monObjObj (AddCommGrpCat.of T))
+      ((sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}).monObjObj (internalRing X T))
+      (schemeConstantsPresheaf X T) := by
+  have hc := IsMonHom.of_eq (schemeConstants X T)
+    (Functor.monObjObj_comp (Functor.const X.ProEtᵒᵖ)
+      (presheafToSheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (AddCommGrpCat.of T)) rfl
+    (hf := schemeConstants_isMonHom X T)
+  exact IsMonHom.comp_of_monObj _ _ _ _ _
+    ((sheafificationAdjunction (Scheme.ProEt.topology X) Ab.{u + 1}).isMonHom_unitAlgHom
+      ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of T)))
+    (Functor.isMonHom_map_of_monObj (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      _ _ _ hc)
+
+/-- The constant-section homomorphism of commutative ring sheaves: the sheafification adjunct
+of the constant sections on the scheme.
+Source: Stacks 00YV and 03CY (auxiliary; not a blueprint node). -/
+def constantSectionsRingMap (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
+    [TopologicalSpace T] [IsTopologicalRing T] :
+    realizationRing.{u + 1, u} (Scheme.ProEt.topology X) T ⟶ sectionRing X T :=
+  ((sheafificationAdjunction (Scheme.ProEt.topology X) CommRingCat.{u + 1}).homEquiv _
+    (sectionRing X T)).symm
+    (InternalAbelianSheafModule.constantToSectionRings (Scheme.ProEt.topology X) T
+      (internalRing X T) (schemeConstantsPresheaf X T) (schemeConstantsPresheaf_isMonHom X T))
+
+/-- The constant-section homomorphism sends the constant section of a scalar to its constant
+section in the internal ring.
+Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+theorem constantSectionsRingMap_toSheafify (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
+    [TopologicalSpace T] [IsTopologicalRing T] (U : X.ProEtᵒᵖ) (a : T) :
+    (constantSectionsRingMap X T).hom.app U
+      ((toSheafify (Scheme.ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of T))).app U a) =
+      (schemeConstantsPresheaf X T).app U a :=
+  ConcreteCategory.congr_hom (congr_app (((sheafificationAdjunction (Scheme.ProEt.topology X)
+    CommRingCat.{u + 1}).homEquiv _ (sectionRing X T)).apply_symm_apply
+      (InternalAbelianSheafModule.constantToSectionRings (Scheme.ProEt.topology X) T
+        (internalRing X T) (schemeConstantsPresheaf X T)
+        (schemeConstantsPresheaf_isMonHom X T))) U) a
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The additive map underlying the constant-section homomorphism is the constant-section map,
+after the constant-sheaf comparison.
+Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+theorem constantSectionsRingMap_forget (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
+    [TopologicalSpace T] [IsTopologicalRing T] :
+    ((constantCommuteCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
+        forget₂ RingCat.{u + 1} Ab.{u + 1})).app (CommRingCat.of T)).inv ≫
+      (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
+        forget₂ RingCat.{u + 1} Ab.{u + 1})).map (constantSectionsRingMap X T) =
+      schemeConstants X T := by
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _ (internalRing X T).property
+  rw [ObjectProperty.FullSubcategory.comp_hom, ← Category.assoc,
+    toSheafify_comp_constantCommuteCompose_inv_app_hom]
+  ext U a
+  exact constantSectionsRingMap_toSheafify X T U a
+
+/-! ### Finite discrete coefficients -/
+
+/-- Constant functions from the constant presheaf to continuous functions, before
+sheafification; `pointConstants` is its sheafification.
+Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node). -/
+def pointConstantsPresheaf (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] :
     (Functor.const Profinite.{u}ᵒᵖ).obj (CommRingCat.of T) ⟶ continuousPresheaf T where
   app U := CommRingCat.ofHom (ContinuousMap.C (α := U.unop))
   naturality _ _ _ := rfl
 
-theorem pointConstants_eq (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
-    [IsTopologicalRing T] :
-    pointConstants T = (presheafToSheaf _ CommRingCat.{u + 1}).map (constantFunctions T) :=
-  rfl
-
-/-- Continuous functions into a finite discrete ring are locally constant. -/
-instance constantFunctions_locallySurjective (T : Type (u + 1)) [CommRing T] [Finite T]
+/-- Continuous functions from a profinite set to a finite discrete ring are locally constant:
+the constant-function map is locally surjective.
+Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node). -/
+instance pointConstantsPresheaf_isLocallySurjective (T : Type (u + 1)) [CommRing T] [Finite T]
     [TopologicalSpace T] [DiscreteTopology T] :
-    Presheaf.IsLocallySurjective (coherentTopology Profinite.{u}) (constantFunctions T) where
+    Presheaf.IsLocallySurjective (coherentTopology Profinite.{u})
+      (pointConstantsPresheaf T) where
   imageSieve_mem {S} s := by
     let f : C(S, T) := s
     have hclosed (a : T) : IsClosed {x : S | f x = a} :=
@@ -235,18 +337,17 @@ instance constantFunctions_locallySurjective (T : Type (u + 1)) [CommRing T] [Fi
       Profinite.effectiveEpiFamily_of_jointly_surjective U incl
         (fun x ↦ ⟨e.symm (f x), ⟨x, (e.apply_symm_apply (f x)).symm⟩, rfl⟩)
     refine coherentTopology.mem_sieves_of_hasEffectiveEpiFamily _
-      ⟨Fin (Fintype.card T), inferInstance, U, incl, hι, ?_⟩
-    intro i
-    refine ⟨e i, ?_⟩
-    apply ContinuousMap.ext
-    intro x
+      ⟨Fin (Fintype.card T), inferInstance, U, incl, hι, fun i ↦ ⟨e i, ?_⟩⟩
+    refine ContinuousMap.ext fun x ↦ ?_
     exact x.property.symm
 
-/-- Equality of constant functions is detected locally (using the empty cover of the
-empty profinite set). -/
-instance constantFunctions_locallyInjective (T : Type (u + 1)) [CommRing T]
+/-- Equality of constant functions is locally detected: the constant-function map is locally
+injective, using the empty cover of the empty profinite set.
+Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node). -/
+instance pointConstantsPresheaf_isLocallyInjective (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :
-    Presheaf.IsLocallyInjective (coherentTopology Profinite.{u}) (constantFunctions T) where
+    Presheaf.IsLocallyInjective (coherentTopology Profinite.{u})
+      (pointConstantsPresheaf T) where
   equalizerSieve_mem {S} a b h := by
     by_cases hab : a = b
     · subst b
@@ -260,264 +361,31 @@ instance constantFunctions_locallyInjective (T : Type (u + 1)) [CommRing T]
       exact coherentTopology.mem_sieves_of_hasEffectiveEpiFamily _
         ⟨PEmpty, inferInstance, U, incl, hι, fun i ↦ i.elim⟩
 
-/-- For finite discrete coefficients, constant functions sheafify to all continuous
-functions. -/
+/-- For a finite discrete ring, constant functions give an isomorphism from the constant
+condensed ring to the continuous condensed ring.
+Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node). -/
 instance pointConstants_isIso (T : Type (u + 1)) [CommRing T] [Finite T]
-    [TopologicalSpace T] [DiscreteTopology T] : IsIso (pointConstants T) := by
-  rw [pointConstants_eq, ← GrothendieckTopology.W_iff]
-  exact GrothendieckTopology.W_of_isLocallyBijective _ _
+    [TopologicalSpace T] [DiscreteTopology T] : IsIso (pointConstants T) :=
+  ((coherentTopology Profinite.{u}).W_iff (pointConstantsPresheaf T)).mp
+    ((coherentTopology Profinite.{u}).W_of_isLocallyBijective (pointConstantsPresheaf T))
 
-/-- Precomposing the inverse constant-sheaf comparison with the sheafification unit gives
-the whiskered sheafification unit. -/
-theorem toSheafify_comp_constantCommuteCompose_inv_app_hom {C : Type*} [Category* C]
-    (J : GrothendieckTopology C) {D B : Type*} [Category* D] [Category* B] (U : D ⥤ B)
-    [HasWeakSheafify J D] [HasWeakSheafify J B] [J.PreservesSheafification U]
-    [J.HasSheafCompose U] (R : D) :
-    toSheafify J ((Functor.const Cᵒᵖ).obj (U.obj R)) ≫
-        ((constantCommuteCompose J U).app R).inv.hom =
-      (Functor.constComp Cᵒᵖ R U).inv ≫
-        Functor.whiskerRight (toSheafify J ((Functor.const Cᵒᵖ).obj R)) U := by
-  refine (Iso.comp_inv_eq ((sheafToPresheaf J B).mapIso ((constantCommuteCompose J U).app R))).2
-    ?_
-  rw [Functor.mapIso_hom, sheafToPresheaf_map, Iso.app_hom, constantCommuteCompose_hom_app_hom,
-    Category.assoc, sheafComposeIso_inv_fac_assoc, ← toSheafify_naturality, Iso.inv_hom_id_assoc]
-
-/-- The underlying additive map of `pointConstants`, with constant abelian source. -/
-noncomputable def pointAbelianConstants (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
-    [IsTopologicalRing T] :
-    (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj (AddCommGrpCat.of T) ⟶
-      abelianPoint T := by
-  letI : HasSheafify (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} :=
-    SheafOfModules.hasSheafify_coefficientUniverse
-  letI : (coherentTopology Profinite.{u}).PreservesSheafification
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-        forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
-    GrothendieckTopology.instPreservesSheafification _ _
-  exact ((constantCommuteCompose (coherentTopology Profinite.{u})
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-          forget₂ RingCat.{u + 1} Ab.{u + 1})).app (CommRingCat.of T)).inv ≫
-        (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-          ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-            (pointConstants T))
-
-theorem schemeConstants_eq (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
-    [TopologicalSpace T] [IsTopologicalRing T] :
-    schemeConstants X T = (constantSchemeIso X).hom.app (AddCommGrpCat.of T) ≫
-      (upperStarFromPoint X).map (pointAbelianConstants T) :=
-  rfl
-
-/-- `pointAbelianConstants` is the sheafified constant-function map, followed by the
-counit identification of the underlying abelian sheaf of `continuousPoint`. -/
-theorem pointAbelianConstants_eq (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
-    [IsTopologicalRing T] :
-    pointAbelianConstants T =
-      (presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map
-        (Functor.whiskerRight (Functor.whiskerRight
-          (constantFunctions T ≫ toSheafify _ (continuousPresheaf T))
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
-          (forget₂ RingCat.{u + 1} Ab.{u + 1})) ≫
-        (Sheaf.sheafifyRingPresheafIso (coherentTopology Profinite.{u})
-          ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-            (continuousPoint T))).hom := by
-  apply Sheaf.hom_ext
-  apply sheafify_hom_ext _ _ _ (abelianPoint T).property
-  have h : toSheafify _ _ ≫ (pointConstants T).hom =
-      constantFunctions T ≫ toSheafify _ (continuousPresheaf T) :=
-    (toSheafify_naturality _ _).symm
-  rw [ObjectProperty.FullSubcategory.comp_hom, ← toSheafify_naturality_assoc,
-    Sheaf.sheafifyRingPresheafIso, asIso_hom, sheafificationAdjunction_counit_app_val,
-    toSheafify_sheafifyLift, pointAbelianConstants, ObjectProperty.FullSubcategory.comp_hom,
-    ← Category.assoc]
-  let : HasSheafify (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} :=
-    SheafOfModules.hasSheafify_coefficientUniverse
+/-- For a finite discrete ring, the constant-section map on the scheme is an isomorphism.
+Source: Bhatt--Scholze, finite coefficient comparison (auxiliary; not a blueprint node). -/
+instance schemeConstants_isIso (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T] [Finite T]
+    [TopologicalSpace T] [DiscreteTopology T] : IsIso (schemeConstants X T) := by
   let : (coherentTopology Profinite.{u}).PreservesSheafification
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-        forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
     GrothendieckTopology.instPreservesSheafification _ _
-  have he := toSheafify_comp_constantCommuteCompose_inv_app_hom (coherentTopology Profinite.{u})
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1})
-    (CommRingCat.of T)
-  refine (congrArg (· ≫ ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-    ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-      (pointConstants T))).hom) he).trans ?_
-  ext U a
-  exact ConcreteCategory.congr_hom (congr_app h U) a
+  have h : IsIso ((sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+        ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (pointConstants T))) := inferInstance
+  have := IsIso.comp_isIso' (inferInstance : IsIso ((constantCommuteCompose
+    (coherentTopology Profinite.{u}) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
+      forget₂ RingCat.{u + 1} Ab.{u + 1})).app (CommRingCat.of T)).inv) h
+  exact IsIso.comp_isIso' inferInstance (Functor.map_isIso (upperStarFromPoint X) _)
 
-/-- The ring object structure on a constant abelian sheaf with ring values, transported by
-the lax monoidal constant-sheaf functor, is the sheafification of the constant presheaf of
-rings. -/
-theorem constantSheaf_monObjObj_eq {C : Type*} [Category* C] (J : GrothendieckTopology C)
-    [HasWeakSheafify J Ab.{w}] [(J.W (A := Ab.{w})).IsMonoidal] (B : Type w) [CommRing B] :
-    (constantSheaf J Ab.{w}).monObjObj (AddCommGrpCat.of B) =
-      Sheaf.monObj_presheafToSheaf_obj J
-        ((Functor.const Cᵒᵖ).obj (RingCat.of B) ⋙ forget₂ RingCat Ab) := by
-  refine (Functor.monObjObj_comp (Functor.const Cᵒᵖ) (presheafToSheaf J Ab.{w})
-    (AddCommGrpCat.of B)).trans ?_
-  have h : (Functor.const Cᵒᵖ).monObjObj (AddCommGrpCat.of B) =
-      Functor.monObjCompForget₂ ((Functor.const Cᵒᵖ).obj (RingCat.of B)) := by
-    apply MonObj.ext
-    ext U
-    rfl
-  exact congrArg (fun m ↦ @Functor.monObjObj _ _ _ _ _ _ (presheafToSheaf J Ab.{w}) _ _ m) h
-
-/-- The constant-function map on the point is multiplicative. -/
-instance pointAbelianConstants_isMonHom (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
-    [IsTopologicalRing T] : IsMonHom (pointAbelianConstants T) := by
-  rw [pointAbelianConstants_eq]
-  exact IsMonHom.of_eq _ (constantSheaf_monObjObj_eq _ T).symm rfl
-
-/-- The inverse of a monoid-object isomorphism is a monoid-object morphism, with all
-monoid structures explicit. -/
-theorem isMonHom_iso_inv_explicit {C : Type*} [Category* C] [MonoidalCategory C]
-    {M N : C} (mM : MonObj M) (mN : MonObj N) (e : M ≅ N)
-    (h : @IsMonHom _ _ _ M N mM mN e.hom) :
-    @IsMonHom _ _ _ N M mN mM e.inv := by
-  let := mM
-  let := mN
-  let := h
-  infer_instance
-
-/-- A composite of monoid-object morphisms, with all monoid structures explicit. -/
-theorem isMonHom_comp_explicit {C : Type*} [Category* C] [MonoidalCategory C]
-    {M N O : C} (mM : MonObj M) (mN : MonObj N) (mO : MonObj O)
-    (f : M ⟶ N) (g : N ⟶ O)
-    (hf : @IsMonHom _ _ _ M N mM mN f)
-    (hg : @IsMonHom _ _ _ N O mN mO g) :
-    @IsMonHom _ _ _ M O mM mO (f ≫ g) := by
-  let := mM
-  let := mN
-  let := mO
-  let := hf
-  let := hg
-  infer_instance
-
-/-- The constant-section map on the scheme is multiplicative. -/
-instance schemeConstants_isMonHom (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
-    [TopologicalSpace T] [IsTopologicalRing T] : IsMonHom (schemeConstants X T) := by
-  have hi := Functor.isMonHom_compAlgHom (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    (upperStarFromPoint X) (constantSchemeIso X).inv (AddCommGrpCat.of T)
-  let mP := (upperStarFromPoint X).monObjObj
-    ((constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj (AddCommGrpCat.of T))
-  let mQ := (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).monObjObj (AddCommGrpCat.of T)
-  have hh := isMonHom_iso_inv_explicit mP mQ
-    ((constantSchemeIso X).app (AddCommGrpCat.of T)).symm hi
-  have hmap : @IsMonHom _ _ _ _ _ mP _ ((upperStarFromPoint X).map (pointAbelianConstants T)) :=
-    inferInstance
-  rw [schemeConstants_eq]
-  exact isMonHom_comp_explicit mQ mP _ _ _ hh hmap
-
-/-- The constant-section map, as a map of abelian presheaves out of the constant presheaf. -/
-noncomputable abbrev schemeConstantsPresheaf (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
-    [TopologicalSpace T] [IsTopologicalRing T] :
-    (Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of T) ⟶ (internalRing X T).obj :=
-  toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of T)) ≫
-    (schemeConstants X T).hom
-
-/-- A lax monoidal functor maps monoid-object morphisms to monoid-object morphisms, with all
-monoid structures explicit. -/
-theorem isMonHom_map_explicit {C D : Type*} [Category* C] [Category* D]
-    [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.LaxMonoidal]
-    {M N : C} (mM : MonObj M) (mN : MonObj N) (f : M ⟶ N)
-    (hf : @IsMonHom _ _ _ M N mM mN f) :
-    @IsMonHom _ _ _ _ _ (F.monObjObj M) (F.monObjObj N) (F.map f) := by
-  let := mM
-  let := mN
-  let := hf
-  infer_instance
-
-/-- The presheaf constant-section map is multiplicative. -/
-theorem schemeConstantsPresheaf_isMonHom (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
-    [TopologicalSpace T] [IsTopologicalRing T] :
-    @IsMonHom _ _ _ _ _ ((Functor.const X.ProEtᵒᵖ).monObjObj (AddCommGrpCat.of T))
-      ((sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}).monObjObj (internalRing X T))
-      (schemeConstantsPresheaf X T) := by
-  let J := Scheme.ProEt.topology X
-  let P := (Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of T)
-  let mS := (presheafToSheaf J Ab.{u + 1}).monObjObj P
-  have hm : (constantSheaf J Ab.{u + 1}).monObjObj (AddCommGrpCat.of T) = mS :=
-    Functor.monObjObj_comp _ _ _
-  have hc := IsMonHom.of_eq (schemeConstants X T) hm rfl
-  have hu := (sheafificationAdjunction J Ab.{u + 1}).isMonHom_unitAlgHom P
-  have hf := isMonHom_map_explicit (sheafToPresheaf J Ab.{u + 1}) mS _ (schemeConstants X T) hc
-  exact isMonHom_comp_explicit _ _ _ _ _ hu hf
-
-open CategoryTheory.MonObj in
-open scoped TensorProduct in
-/-- A multiplicative map from a constant presheaf of rings into the sections of a commutative
-internal ring sheaf, as a map into the reconstructed section-ring sheaf. -/
-noncomputable def constantSectionRingMapOfMonHom
-    {C : Type*} [Category* C] (J : GrothendieckTopology C)
-    [UnivLE.{_, u + 1}] [HasSheafify J Ab.{u + 1}]
-    [(J.W (A := Ab.{u + 1})).IsMonoidal]
-    (B : Type (u + 1)) [CommRing B]
-    (R : Sheaf J Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (φ : (Functor.const Cᵒᵖ).obj (AddCommGrpCat.of B) ⟶ R.obj)
-    (hφ : @IsMonHom _ _ _ _ _
-      ((Functor.const Cᵒᵖ).monObjObj (AddCommGrpCat.of B))
-      ((sheafToPresheaf J Ab.{u + 1}).monObjObj R) φ) :
-    (Functor.const Cᵒᵖ).obj (CommRingCat.of B) ⟶
-      (InternalAbelianSheafModule.sectionRingSheaf J R).obj where
-  app U := by
-    letI := CommRingCat.commRing
-      ((InternalAbelianSheafModule.sectionRingSheaf J R).obj.obj U)
-    refine CommRingCat.ofHom
-      (R := B) (S := (InternalAbelianSheafModule.sectionRingSheaf J R).obj.obj U) ?_
-    refine
-      { toFun := fun a ↦ φ.app U a
-        map_zero' := map_zero _
-        map_add' := map_add _
-        map_one' := ?_
-        map_mul' := ?_ }
-    · have h := @IsMonHom.one_hom _ _ _ _ _
-        ((Functor.const Cᵒᵖ).monObjObj (AddCommGrpCat.of B))
-        ((sheafToPresheaf J Ab.{u + 1}).monObjObj R) φ hφ
-      convert! ConcreteCategory.congr_hom (congr_app h U) (ULift.up 1) using 1
-      simp only [Functor.const_obj_obj, Monoidal.tensorUnit_obj, ObjectProperty.ι_obj,
-        Functor.obj.η_def, Category.assoc, NatTrans.comp_app, Functor.const_map_app,
-        AddCommGrpCat.hom_comp, AddMonoidHom.coe_comp, Function.comp_apply]
-      change (φ.app U) (1 : B) = (φ.app U) ((η[AddCommGrpCat.of B]).hom (ULift.up 1))
-      rw [AddCommGrpCat.ringMonObj_one_apply]
-      simp
-    · intro a b
-      have h := @IsMonHom.mul_hom _ _ _ _ _
-        ((Functor.const Cᵒᵖ).monObjObj (AddCommGrpCat.of B))
-        ((sheafToPresheaf J Ab.{u + 1}).monObjObj R) φ hφ
-      have he := ConcreteCategory.congr_hom (congr_app h U) (a ⊗ₜ[ℤ] b)
-      convert! he using 1
-  naturality U V f := by
-    ext a
-    exact ConcreteCategory.congr_hom (φ.naturality f) a
-
-/-- The constant-section homomorphism of ring sheaves, obtained by sheafifying the
-multiplicative constant-section map. -/
-noncomputable def constantSectionsMap (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
-    [TopologicalSpace T] [IsTopologicalRing T] :
-    realizationRing.{u + 1, u} (Scheme.ProEt.topology X) T ⟶ sectionRing X T :=
-  ((sheafificationAdjunction (Scheme.ProEt.topology X) CommRingCat.{u + 1}).homEquiv _
-    (sectionRing X T)).symm
-    (constantSectionRingMapOfMonHom (Scheme.ProEt.topology X) T (internalRing X T)
-      (schemeConstantsPresheaf X T) (schemeConstantsPresheaf_isMonHom X T))
-
-/-- The underlying additive map of `constantSectionsMap` is the constant-section map. -/
-theorem sheafCompose_map_constantSectionsMap (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
-    [TopologicalSpace T] [IsTopologicalRing T] :
-    (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-          forget₂ RingCat.{u + 1} Ab.{u + 1})).map (constantSectionsMap X T) =
-      ((constantCommuteCompose (Scheme.ProEt.topology X)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-            forget₂ RingCat.{u + 1} Ab.{u + 1})).app (CommRingCat.of T)).hom ≫
-        schemeConstants X T := by
-  rw [← Iso.inv_comp_eq]
-  apply Sheaf.hom_ext
-  apply sheafify_hom_ext _ _ _ (internalRing X T).property
-  rw [ObjectProperty.FullSubcategory.comp_hom, ← Category.assoc,
-    toSheafify_comp_constantCommuteCompose_inv_app_hom]
-  have h := ((sheafificationAdjunction (Scheme.ProEt.topology X) CommRingCat.{u + 1}).homEquiv _
-    (sectionRing X T)).apply_symm_apply
-    (constantSectionRingMapOfMonHom (Scheme.ProEt.topology X) T (internalRing X T)
-      (schemeConstantsPresheaf X T) (schemeConstantsPresheaf_isMonHom X T))
-  ext U a
-  exact ConcreteCategory.congr_hom (congr_app h U) a
+end ConstantSectionsHelpers
 
 /-- Constant sections determine the map to the reconstructed continuous coefficient ring.
 Source: the constant-ring/section-action comparison, Stacks 00YV
@@ -542,23 +410,23 @@ theorem constantSections_existsUnique (X : Scheme.{u}) (T : Type (u + 1)) [CommR
           (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
             forget₂ RingCat.{u + 1} Ab.{u + 1})).app (CommRingCat.of T)).hom ≫
           schemeConstants X T) := by
-  refine ⟨constantSectionsMap X T, heq_of_eq (sheafCompose_map_constantSectionsMap X T), ?_⟩
-  intro f hf
-  apply (sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-    forget₂ RingCat.{u + 1} Ab.{u + 1})).map_injective
-  exact (eq_of_heq hf).trans (sheafCompose_map_constantSectionsMap X T).symm
+  refine ⟨constantSectionsRingMap X T, heq_of_eq ?_, fun f hf ↦ ?_⟩
+  · set_option backward.isDefEq.respectTransparency false in
+    rw [← constantSectionsRingMap_forget, Iso.hom_inv_id_assoc]
+  · have h : (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
+        forget₂ RingCat.{u + 1} Ab.{u + 1})).map f =
+        (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
+          forget₂ RingCat.{u + 1} Ab.{u + 1})).map (constantSectionsRingMap X T) := by
+      set_option backward.isDefEq.respectTransparency false in
+      rw [eq_of_heq hf, ← constantSectionsRingMap_forget, Iso.hom_inv_id_assoc]
+    exact (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
+      forget₂ RingCat.{u + 1} Ab.{u + 1})).map_injective h
 
 /-- The uniquely specified constant-section homomorphism.
 Source: Stacks 00YV (blueprint: def-sfb-coherent-integral-reduction). -/
 def constantSections (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [TopologicalSpace T] [IsTopologicalRing T] :=
   (constantSections_existsUnique X T).exists.choose
-
-/-- For finite discrete coefficients, `pointAbelianConstants` is an isomorphism. -/
-instance pointAbelianConstants_isIso (T : Type (u + 1)) [CommRing T] [Finite T]
-    [TopologicalSpace T] [DiscreteTopology T] : IsIso (pointAbelianConstants T) := by
-  rw [pointAbelianConstants]
-  infer_instance
 
 /-- For finite discrete coefficients the constant-section homomorphism is an isomorphism.
 Source: Bhatt--Scholze, finite coefficient comparison
@@ -577,9 +445,9 @@ theorem constantSections_isIso (X : Scheme.{u}) (T : Type (u + 1)) [CommRing T]
     [Finite T] [TopologicalSpace T] [DiscreteTopology T] :
     IsIso (constantSections X T) := by
   rw [← isIso_iff_of_reflects_iso _ (sheafCompose (Scheme.ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1})),
-    constantSections, eq_of_heq (constantSections_existsUnique X T).exists.choose_spec,
-    schemeConstants_eq]
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1}))]
+  set_option backward.isDefEq.respectTransparency false in
+  rw [constantSections, eq_of_heq (constantSections_existsUnique X T).exists.choose_spec]
   infer_instance
 
 /-- The finite constant-coefficient identification, with its original constant-section map.
@@ -776,88 +644,6 @@ theorem coefficientMap_compatible (X : Scheme.{u}) (n : ℕ) :
   unfold coefficientMap transitions
   rw [sectionMap_comp]
   congr 1
-
-/-- Constant continuous functions commute with continuous postcomposition. -/
-theorem pointConstants_comp_continuousPointMap {T S : Type (u + 1)} [CommRing T] [CommRing S]
-    [TopologicalSpace T] [TopologicalSpace S] [IsTopologicalRing T] [IsTopologicalRing S]
-    (f : T →+* S) (hf : Continuous f) :
-    pointConstants T ≫ continuousPointMap f hf =
-      (constantSheaf (coherentTopology Profinite.{u}) CommRingCat.{u + 1}).map
-        (CommRingCat.ofHom f) ≫ pointConstants S := by
-  dsimp only [pointConstants, continuousPointMap, constantSheaf, Functor.comp_map]
-  rw [← Functor.map_comp, ← Functor.map_comp]
-  rfl
-
-/-- The constant-section map into the pulled-back continuous ring is natural in the
-coefficient ring. -/
-theorem schemeConstants_naturality (X : Scheme.{u}) {T S : Type (u + 1)} [CommRing T]
-    [CommRing S] [TopologicalSpace T] [TopologicalSpace S] [IsTopologicalRing T]
-    [IsTopologicalRing S] (f : T →+* S) (hf : Continuous f) :
-    schemeConstants X T ≫ (upperStarFromPoint X).map
-        ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-          ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-            (continuousPointMap f hf))) =
-      (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).map
-        (AddCommGrpCat.ofHom f.toAddMonoidHom) ≫ schemeConstants X S := by
-  let : HasSheafify (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} :=
-    SheafOfModules.hasSheafify_coefficientUniverse
-  let : (coherentTopology Profinite.{u}).PreservesSheafification
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-        forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
-    GrothendieckTopology.instPreservesSheafification _ _
-  dsimp only [schemeConstants]
-  rw [Category.assoc, ← Functor.map_comp, Category.assoc, ← Functor.map_comp,
-    ← Functor.map_comp, pointConstants_comp_continuousPointMap]
-  rw [(constantSchemeIso X).hom.naturality_assoc, Functor.comp_map, ← Functor.map_comp]
-  refine congrArg (_ ≫ ·) (congrArg (upperStarFromPoint X).map ?_)
-  rw [Functor.map_comp, Functor.map_comp, ← Category.assoc, ← Category.assoc]
-  refine congrArg (· ≫ _) ?_
-  exact ((constantCommuteCompose (coherentTopology Profinite.{u})
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-      forget₂ RingCat.{u + 1} Ab.{u + 1})).inv.naturality (CommRingCat.ofHom f)).symm
-
-/-- The section ring of a continuous coefficient ring has the pulled-back continuous ring as
-underlying abelian sheaf, and section maps are the pulled-back continuous postcompositions. -/
-theorem sheafCompose_map_sectionMap (X : Scheme.{u}) {T S : Type (u + 1)} [CommRing T]
-    [CommRing S] [TopologicalSpace T] [TopologicalSpace S] [IsTopologicalRing T]
-    [IsTopologicalRing S] (f : T →+* S) (hf : Continuous f) :
-    (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-          forget₂ RingCat.{u + 1} Ab.{u + 1})).map (sectionMap X f hf) =
-      (upperStarFromPoint X).map
-        ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-          ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-            (continuousPointMap f hf))) := rfl
-
-/-- The constant-section homomorphisms commute with the section maps of a continuous
-coefficient homomorphism. -/
-theorem constantSections_comp_sectionMap (X : Scheme.{u}) {T S : Type (u + 1)} [CommRing T]
-    [CommRing S] [TopologicalSpace T] [TopologicalSpace S] [IsTopologicalRing T]
-    [IsTopologicalRing S] (f : T →+* S) (hf : Continuous f) :
-    constantSections X T ≫ sectionMap X f hf =
-      (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
-        (CommRingCat.ofHom f) ≫ constantSections X S := by
-  apply (sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-    forget₂ RingCat.{u + 1} Ab.{u + 1})).map_injective
-  have hT : (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-      forget₂ RingCat.{u + 1} Ab.{u + 1})).map (constantSections X T) =
-      ((constantCommuteCompose (Scheme.ProEt.topology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-          forget₂ RingCat.{u + 1} Ab.{u + 1})).app (CommRingCat.of T)).hom ≫
-        schemeConstants X T :=
-    eq_of_heq (constantSections_existsUnique X T).exists.choose_spec
-  have hS : (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-      forget₂ RingCat.{u + 1} Ab.{u + 1})).map (constantSections X S) =
-      ((constantCommuteCompose (Scheme.ProEt.topology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-          forget₂ RingCat.{u + 1} Ab.{u + 1})).app (CommRingCat.of S)).hom ≫
-        schemeConstants X S :=
-    eq_of_heq (constantSections_existsUnique X S).exists.choose_spec
-  rw [Functor.map_comp, Functor.map_comp, hT, hS, sheafCompose_map_sectionMap, Category.assoc,
-    schemeConstants_naturality, ← Category.assoc, ← Category.assoc]
-  refine congrArg (· ≫ _) ?_
-  exact ((constantCommuteCompose (Scheme.ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
-      forget₂ RingCat.{u + 1} Ab.{u + 1})).hom.naturality (CommRingCat.ofHom f)).symm
 
 /-- The normalized simultaneous derived extension of the constant integral system.
 Source: Zheng, Construction 4.1; the existing normalized semilinear calculus

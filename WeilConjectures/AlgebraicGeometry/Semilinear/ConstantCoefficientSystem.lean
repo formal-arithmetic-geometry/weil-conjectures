@@ -137,7 +137,7 @@ theorem evaluation_ring_app (n : ℕ) (U : Cᵒᵖ) :
   rfl
 
 set_option maxHeartbeats 800000 in
--- the sections of the module systems unfold the scalar-restriction presentations
+-- The membership checks of the restriction maps unfold the evaluation functors.
 /-- A system is determined by its evaluations together with its transitions. -/
 theorem system_ext {X Y : Systems.{c, v, r} J B τ}
     (he : ∀ n, (evaluation.{c, v, r} J B τ n).obj X = (evaluation.{c, v, r} J B τ n).obj Y)
@@ -176,6 +176,21 @@ theorem system_hom_heq {X X' Y Y' : Systems.{c, v, r} J B τ} (hX : X = X') (hY 
   rintro ⟨⟨n, U⟩⟩
   ext x
   exact congrArg (fun φ ↦ φ.val.app (op U) x) (eq_of_heq (h n))
+
+/-- Restriction of scalars along a ring endomorphism equal to the identity is the identity
+on objects. -/
+theorem res_obj_eq_self {A : Sheaf J CommRingCat.{r}} (φ : A ⟶ A) (hφ : φ = 𝟙 A)
+    (X : Mod.{c, v, r} J A) : (res.{c, v, r} φ).obj X = X := by
+  subst hφ
+  rfl
+
+/-- The sections of the transition are the horizontal restriction maps, stated as a
+heterogeneous equality whose right-hand side lives in the sections of the system itself. -/
+theorem transition_app_heq (X : Systems.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ)
+    (x : ((evaluation.{c, v, r} J B τ m).obj X).val.obj U) :
+    @HEq _ (((transition.{c, v, r} J B τ h).app X).val.app U x) (X.val.obj (op (n, U.unop)))
+      (X.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x) :=
+  heq_of_eq (transition_app_apply.{c, v, r} J B τ X h U x)
 
 end Systems
 
@@ -289,16 +304,16 @@ def constantSystemRingMap :
 /-- The constant system: the module `M` at every level, with identity horizontal maps.
 It is the pushforward along the projection `ℕ × C ⥤ C` of the sequence site.
 Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
-def constantSystem : Mod.{c, v, max c v r} J R ⥤
+def constantSystemPushforward : Mod.{c, v, max c v r} J R ⥤
       Systems.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
     (constantCoefficientTransitions.{c, v, r} J R) :=
   SheafOfModules.pushforward (constantSystemRingMap.{c, v, r} J R)
 
 /-- Every evaluation of the constant system of `M` is `M`. -/
-theorem constantSystem_evaluation_obj (M : Mod.{c, v, max c v r} J R) (n : ℕ) :
+theorem constantSystemPushforward_evaluation_obj (M : Mod.{c, v, max c v r} J R) (n : ℕ) :
     (evaluation.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
       (constantCoefficientTransitions.{c, v, r} J R) n).obj
-        ((constantSystem.{c, v, r} J R).obj M) = M := by
+        ((constantSystemPushforward.{c, v, r} J R).obj M) = M := by
   refine sheafOfModules_ext (presheafOfModules_ext (funext fun U ↦
     moduleCat_restrictScalars_obj_eq_self _ (evaluation_ring_app.{c, v, max c v r} J
       (constantCoefficients.{c, v, r} J R) (constantCoefficientTransitions.{c, v, r} J R) n U)
@@ -307,42 +322,67 @@ theorem constantSystem_evaluation_obj (M : Mod.{c, v, max c v r} J R) (n : ℕ) 
   exact HEq.rfl
 
 /-- Every evaluation of the constant system of a morphism `f` is `f`. -/
-theorem constantSystem_evaluation_map {M N : Mod.{c, v, max c v r} J R} (f : M ⟶ N) (n : ℕ) :
+theorem constantSystemPushforward_evaluation_map {M N : Mod.{c, v, max c v r} J R} (f : M ⟶ N)
+    (n : ℕ) :
     (evaluation.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
-      (constantCoefficientTransitions.{c, v, r} J R) n).map ((constantSystem.{c, v, r} J R).map f)
+      (constantCoefficientTransitions.{c, v, r} J R) n).map
+        ((constantSystemPushforward.{c, v, r} J R).map f)
         ≍ f := by
-  refine sheafOfModules_hom_heq (constantSystem_evaluation_obj.{c, v, r} J R M n)
-    (constantSystem_evaluation_obj.{c, v, r} J R N n) _ _ fun U x y hxy ↦ ?_
+  refine sheafOfModules_hom_heq (constantSystemPushforward_evaluation_obj.{c, v, r} J R M n)
+    (constantSystemPushforward_evaluation_obj.{c, v, r} J R N n) _ _ fun U x y hxy ↦ ?_
   obtain rfl := eq_of_heq hxy
   exact HEq.rfl
 
-set_option maxHeartbeats 1600000 in
--- the horizontal sections unfold the pushforward along the projection
+/-- Restricting an evaluation of the constant system along a (trivial) coefficient map
+gives back the original module. -/
+theorem constantSystemPushforward_res_evaluation_obj (M : Mod.{c, v, max c v r} J R)
+    {m n : ℕ} (h : n ≤ m) :
+    (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J
+      (constantCoefficients.{c, v, r} J R) (constantCoefficientTransitions.{c, v, r} J R) h)).obj
+      ((evaluation.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+        (constantCoefficientTransitions.{c, v, r} J R) n).obj
+          ((constantSystemPushforward.{c, v, r} J R).obj M)) = M :=
+  (res_obj_eq_self J _ (constantCoefficientMap.{c, v, r} J R h) _).trans
+    (constantSystemPushforward_evaluation_obj.{c, v, r} J R M n)
+
+/-- The horizontal restriction maps of the constant system are the identity on sections. -/
+theorem constantSystemPushforward_val_map_heq (M : Mod.{c, v, max c v r} J R) {m n : ℕ}
+    (h : n ≤ m) (V : C)
+    (y : ((constantSystemPushforward.{c, v, r} J R).obj M).val.obj (op (m, V))) :
+    @HEq (((constantSystemPushforward.{c, v, r} J R).obj M).val.obj (op (n, V)))
+      (((constantSystemPushforward.{c, v, r} J R).obj M).val.map
+        (Prod.mkHom (homOfLE h) (𝟙 V)).op y)
+      (((constantSystemPushforward.{c, v, r} J R).obj M).val.obj (op (m, V))) y :=
+  @heq_of_eq (M.val.obj (op V)) _ _ (congrArg (fun g ↦ g.hom y) (M.val.map_id (op V)))
+
+/-- The transitions of the constant system are the identity on sections. -/
+theorem constantSystemPushforward_transition_app_apply (M : Mod.{c, v, max c v r} J R)
+    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ)
+    (x : ((evaluation.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+      (constantCoefficientTransitions.{c, v, r} J R) m).obj
+        ((constantSystemPushforward.{c, v, r} J R).obj M)).val.obj U) :
+    ((transition.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+      (constantCoefficientTransitions.{c, v, r} J R) h).app
+        ((constantSystemPushforward.{c, v, r} J R).obj M)).val.app U x ≍ x :=
+  (transition_app_heq.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+    (constantCoefficientTransitions.{c, v, r} J R)
+    ((constantSystemPushforward.{c, v, r} J R).obj M) h U x).trans
+    (constantSystemPushforward_val_map_heq.{c, v, r} J R M h U.unop x)
+
 /-- The constant system satisfies its sectionwise characterization. -/
-theorem constantSystem_isConstantSystemFunctor :
-    IsConstantSystemFunctor.{c, v, r} J R (constantSystem.{c, v, r} J R) := by
-  refine ⟨constantSystem_evaluation_obj.{c, v, r} J R,
-    fun f n ↦ constantSystem_evaluation_map.{c, v, r} J R f n, ?_⟩
-  intro M m n h
-  have hres : res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J
-      (constantCoefficients.{c, v, r} J R) (constantCoefficientTransitions.{c, v, r} J R) h) =
-      𝟭 _ :=
-    sheafOfModules_restrictScalars_eq_id _ ((congrArg
-      (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map
-        (constantCoefficientMap.{c, v, r} J R h)).trans (CategoryTheory.Functor.map_id _ R))
-  refine sheafOfModules_heq_id_of_app (constantSystem_evaluation_obj.{c, v, r} J R M m) ?_ _
-    fun U x ↦ ?_
-  · change (res.{c, v, max c v r} _).obj _ = M
-    rw [hres, constantSystem_evaluation_obj.{c, v, r} J R M n]
-    rfl
-  · refine (heq_of_eq (transition_app_apply.{c, v, max c v r} J _ _ _ h U x)).trans
-      (heq_of_eq ?_)
-    exact (M.val.congr_map_apply (show (CategoryTheory.Prod.snd ℕ C).op.map
-      (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op = 𝟙 U from rfl) x).trans (by simp)
+theorem constantSystemPushforward_isConstantSystemFunctor :
+    IsConstantSystemFunctor.{c, v, r} J R (constantSystemPushforward.{c, v, r} J R) :=
+  ⟨constantSystemPushforward_evaluation_obj.{c, v, r} J R,
+    fun f n ↦ constantSystemPushforward_evaluation_map.{c, v, r} J R f n,
+    fun M _ _ h ↦ sheafOfModules_heq_id_of_app
+      (constantSystemPushforward_evaluation_obj.{c, v, r} J R M _)
+      (constantSystemPushforward_res_evaluation_obj.{c, v, r} J R M h) _
+      (constantSystemPushforward_transition_app_apply.{c, v, r} J R M h)⟩
 
 /-- Additivity of the constant-system functor.
 Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
-instance constantSystem_additive : (constantSystem.{c, v, r} J R).Additive where
+instance constantSystemPushforward_additive :
+    (constantSystemPushforward.{c, v, r} J R).Additive where
   map_add := by
     intros
     ext U x
@@ -350,12 +390,13 @@ instance constantSystem_additive : (constantSystem.{c, v, r} J R).Additive where
 
 /-- Left exactness of the constant-system functor: kernels are computed sectionwise.
 Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
-instance constantSystem_limits : PreservesFiniteLimits (constantSystem.{c, v, r} J R) := by
+instance constantSystemPushforward_limits :
+    PreservesFiniteLimits (constantSystemPushforward.{c, v, r} J R) := by
   let T := SheafOfModules.forget.{max c v r} (ring.{c, v, max c v r}
       (coefficientSequenceTopology J)
       (systemRing.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
         (constantCoefficientTransitions.{c, v, r} J R))) ⋙ PresheafOfModules.toPresheaf _
-  have : PreservesFiniteLimits (constantSystem.{c, v, r} J R ⋙ T) :=
+  have : PreservesFiniteLimits (constantSystemPushforward.{c, v, r} J R ⋙ T) :=
     inferInstanceAs (PreservesFiniteLimits
       ((SheafOfModules.forget.{max c v r} (ring.{c, v, max c v r} J R) ⋙
         PresheafOfModules.toPresheaf _) ⋙
@@ -365,7 +406,8 @@ instance constantSystem_limits : PreservesFiniteLimits (constantSystem.{c, v, r}
 /-- Right exactness of the constant-system functor: pushforward along the continuous and
 cocontinuous projection is a left adjoint on abelian sheaves.
 Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
-instance constantSystem_colimits : PreservesFiniteColimits (constantSystem.{c, v, r} J R) := by
+instance constantSystemPushforward_colimits :
+    PreservesFiniteColimits (constantSystemPushforward.{c, v, r} J R) := by
   have (F : (ℕ × C)ᵒᵖ ⥤ AddCommGrpCat.{max c v r}) :
       (CategoryTheory.Prod.snd ℕ C).op.HasPointwiseRightKanExtension F := fun X ↦ by
     have : HasLimitsOfShape (StructuredArrow X (CategoryTheory.Prod.snd ℕ C).op)
@@ -381,7 +423,7 @@ instance constantSystem_colimits : PreservesFiniteColimits (constantSystem.{c, v
       (coefficientSequenceTopology J)
       (systemRing.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
         (constantCoefficientTransitions.{c, v, r} J R)))
-  have : PreservesFiniteColimits (constantSystem.{c, v, r} J R ⋙ T) :=
+  have : PreservesFiniteColimits (constantSystemPushforward.{c, v, r} J R ⋙ T) :=
     inferInstanceAs (PreservesFiniteColimits
       (SheafOfModules.toSheaf.{max c v r} (ring.{c, v, max c v r} J R) ⋙ H))
   have : ReflectsFiniteColimits T :=
@@ -414,17 +456,45 @@ theorem constantSystem_existsUnique :
   have huniq (F : Mod.{c, v, max c v r} J R ⥤
       Systems.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
       (constantCoefficientTransitions.{c, v, r} J R))
-      (hF : IsConstantSystemFunctor.{c, v, r} J R F) : F = constantSystem.{c, v, r} J R := by
-    have hC := constantSystem_isConstantSystemFunctor.{c, v, r} J R
-    have hobj (M : Mod.{c, v, max c v r} J R) : F.obj M = (constantSystem.{c, v, r} J R).obj M :=
+      (hF : IsConstantSystemFunctor.{c, v, r} J R F) :
+      F = constantSystemPushforward.{c, v, r} J R := by
+    have hC := constantSystemPushforward_isConstantSystemFunctor.{c, v, r} J R
+    have hobj (M : Mod.{c, v, max c v r} J R) :
+        F.obj M = (constantSystemPushforward.{c, v, r} J R).obj M :=
       system_ext.{c, v, max c v r} J _ _ (fun n ↦ (hF.1 M n).trans (hC.1 M n).symm)
         fun h ↦ (hF.2.2 M h).trans (hC.2.2 M h).symm
     exact Functor.hext hobj fun M N f ↦ system_hom_heq.{c, v, max c v r} J _ _ (hobj M)
       (hobj N) _ _ fun n ↦ (hF.2.1 f n).trans (hC.2.1 f n).symm
-  refine ⟨⟨constantSystem.{c, v, r} J R, constantSystem_isConstantSystemFunctor.{c, v, r} J R,
+  refine ⟨⟨constantSystemPushforward.{c, v, r} J R,
+    constantSystemPushforward_isConstantSystemFunctor.{c, v, r} J R,
     huniq⟩, fun F hF ↦ ?_⟩
   obtain rfl := huniq F hF
   exact ⟨inferInstance, inferInstance, inferInstance⟩
+
+/-- The genuine diagonal functor, selected from its unique sectionwise characterization.
+Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+def constantSystem : Mod.{c, v, max c v r} J R ⥤
+      Systems.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
+    (constantCoefficientTransitions.{c, v, r} J R) :=
+  (constantSystem_existsUnique.{c, v, r} J R).1.exists.choose
+
+/-- Additivity of the genuine constant-system functor.
+Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+instance constantSystem_additive : (constantSystem.{c, v, r} J R).Additive :=
+  ((constantSystem_existsUnique.{c, v, r} J R).2 _
+    (constantSystem_existsUnique.{c, v, r} J R).1.exists.choose_spec).1
+
+/-- Left exactness of the genuine constant-system functor.
+Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+instance constantSystem_limits : PreservesFiniteLimits (constantSystem.{c, v, r} J R) :=
+  ((constantSystem_existsUnique.{c, v, r} J R).2 _
+    (constantSystem_existsUnique.{c, v, r} J R).1.exists.choose_spec).2.1
+
+/-- Right exactness of the genuine constant-system functor.
+Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+instance constantSystem_colimits : PreservesFiniteColimits (constantSystem.{c, v, r} J R) :=
+  ((constantSystem_existsUnique.{c, v, r} J R).2 _
+    (constantSystem_existsUnique.{c, v, r} J R).1.exists.choose_spec).2.2
 
 /-- Termwise localization of the exact diagonal, before any coefficient extension.
 Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/

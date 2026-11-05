@@ -61,15 +61,6 @@ def quotient {m n : ℕ} (h : n ≤ m) : Ring l E m →+* Ring l E n :=
   Ideal.Quotient.factor
     (Ideal.span_singleton_le_span_singleton.mpr (pow_dvd_pow _ (Nat.add_le_add_right h 1)))
 
-/-- Successive finite quotient maps compose to the direct quotient map. -/
-theorem quotient_comp_quotient {k m n : ℕ} (h : n ≤ m) (h' : m ≤ k) :
-    (quotient l E h).comp (quotient l E h') = quotient l E (h.trans h') :=
-  RingHom.ext fun x ↦ Quotient.inductionOn x fun _ ↦ rfl
-
-/-- The finite quotient map at equal indices is the identity. -/
-theorem quotient_refl (n : ℕ) : quotient l E (le_refl n) = RingHom.id _ :=
-  RingHom.ext fun x ↦ Quotient.inductionOn x fun _ ↦ rfl
-
 /-- Derived quotient tensor on the ambient ordinary etale category.
 Source: blueprint reduction sentence; Stacks 06YY
 (blueprint: lem-sfb-finite-proper-exceptional-quotient). -/
