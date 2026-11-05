@@ -17,7 +17,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentative
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 import WeilConjectures.WeilSheaf.Native.Projection.StrictProof
-import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.Tactic.TransportExact
 
 /-! # Localization of the native pullback tensor square -/
 
@@ -90,15 +90,15 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         have hn := projection_nativePullTensor_normalization k₀ l g
         dsimp only [ProjectionRestrictionTensorNormalization] at hn
         dsimp only [L, nativeOpenPull]
-        with_reducible_and_instances exact hn)
+        with_reducible_and_instances transport_exact hn)
       (by
         have hF := projection_native_realization_model_normalization k₀ l Y
         dsimp only [F, derivedCondensedRealization]
-        with_reducible_and_instances exact hF)
+        with_reducible_and_instances transport_exact hF)
       (by
         have hV := projection_native_realization_model_normalization k₀ l Z
         dsimp only [V, derivedCondensedRealization]
-        with_reducible_and_instances exact hV)
+        with_reducible_and_instances transport_exact hV)
       (fun A B ↦ (R.mapCochainComplexμIso A B).symm)
       (fun A B ↦ (R.mapDerivedCategoryTensorComparison.app A).app B)
       (by exact R.projection_ordinary_model_normalization)
@@ -107,9 +107,9 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
         have ht := htotal P T
         dsimp only [TotalPullTensorSquare, condensedRealizationPullComplexIso, Iso.symm] at ht
         dsimp only [projection_model_complex_square, L, V, F, R, Iso.symm]
-        with_reducible_and_instances exact ht)
+        with_reducible_and_instances transport_exact ht)
     dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization] at h ⊢
-    with_reducible_and_instances exact h
+    with_reducible_and_instances transport_exact h
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat
