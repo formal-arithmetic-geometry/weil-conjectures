@@ -25553,6 +25553,7 @@ public import WeilConjectures.WeilSheaf.SixFunctors.UnderlyingStandardHomReprese
 public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibility
 public import WeilConjectures.WeilSheaf.SmoothLisseOpen
 public import WeilConjectures.WeilSheaf.SmoothPurity
+public import WeilConjectures.WeilSheaf.SmoothUnitBaseChangeEtale
 public import WeilConjectures.WeilSheaf.SplitTorsor
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkAtPurity
