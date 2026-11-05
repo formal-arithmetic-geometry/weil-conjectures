@@ -61,6 +61,6 @@ noncomputable def ringExtensionPure {A B : Type u} [CommRing A] [CommRing B]
   (eqToHom (h M).symm).val.app U
     ((toSheafify ⊥
       (SheafOfModules.changeOfRingsPresheaf (ringSiteMap φ) M).presheaf).app U
-        (b ⊗ₜ[A, φ] x))
+        (@TensorProduct.tmul A B (M.val.obj U) _ _ _ (Module.compHom B φ) _ b x))
 
 end CategoryTheory
