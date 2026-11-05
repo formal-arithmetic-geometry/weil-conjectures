@@ -85,16 +85,16 @@ theorem traceDerivedSquare_comp (e₁₂ : P₂ ⋙ rY₁₂ ≅ rX₁₂ ⋙ P�
         rY₁₂.mapDerivedCategory.map (b₂₃.hom.app K) ≫
         b₁₂.hom.app (rX₂₃.mapDerivedCategory.obj K) ≫
         P₁.rightDerivedFunctor.map
-          (((mapDerivedCategoryCompIso rX₂₃ rX₁₂).symm ≪≫
+          (((mapDerivedCategoryCompIso rX₂₃ rX₁₂) ≪≫
             mapDerivedCategoryNatIso cX).hom.app K) := by
   let τ : P₃.rightDerivedFunctor ⋙ rY₁₃.mapDerivedCategory ⟶
       rX₁₃.mapDerivedCategory ⋙ P₁.rightDerivedFunctor :=
     whiskerLeft P₃.rightDerivedFunctor
-        ((mapDerivedCategoryCompIso rY₂₃ rY₁₂).symm ≪≫ mapDerivedCategoryNatIso cY).inv ≫
+        ((mapDerivedCategoryCompIso rY₂₃ rY₁₂) ≪≫ mapDerivedCategoryNatIso cY).inv ≫
       (associator _ _ _).inv ≫ whiskerRight b₂₃.hom _ ≫
       (associator _ _ _).hom ≫ whiskerLeft _ b₁₂.hom ≫
       (associator _ _ _).inv ≫
-      whiskerRight ((mapDerivedCategoryCompIso rX₂₃ rX₁₂).symm ≪≫ mapDerivedCategoryNatIso cX).hom _
+      whiskerRight ((mapDerivedCategoryCompIso rX₂₃ rX₁₂) ≪≫ mapDerivedCategoryNatIso cX).hom _
   suffices H : b₁₃.hom = τ by
     simpa [τ] using NatTrans.congr_app H K
   refine rightDerived_ext _ (rightDerivedFunctorCompMapDerivedCategoryUnit P₃ rY₁₃)
@@ -108,7 +108,7 @@ theorem traceDerivedSquare_comp (e₁₂ : P₂ ⋙ rY₁₂ ≅ rX₁₂ ⋙ P�
     DerivedCategory.Qh.map_id, DerivedCategory.Qh.map_id, Category.id_comp, Category.id_comp,
     Category.assoc]
   erw [(mapDerivedCategoryNatIso cY).inv.naturality_assoc,
-    (mapDerivedCategoryCompIso rY₂₃ rY₁₂).hom.naturality_assoc]
+    (mapDerivedCategoryCompIso rY₂₃ rY₁₂).inv.naturality_assoc]
   rw [mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryNatIso_inv_app_assoc]
   erw [mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_hom_app_assoc]
   rw [mapHomotopyCategoryCompIso_refl_inv_app, DerivedCategory.Qh.map_id, Category.id_comp,
