@@ -80,16 +80,6 @@ def quotientAdjunctionAux
       (Functor.mapDerivedCategoryCompIso q.eW.F.asEquivalence.inverse
         (ScalarCompatibility.compositeRestriction q.route.first q.route.second)).symm
 
-/-- The shift compatibility class of `quotientAdjunctionAux`, named so that the exported
-signature of `quotientAdjunction_commShift` stays small (reducible: instance search sees
-the class). -/
-abbrev quotientAdjunction_commShift_stmt
-    {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
-    {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
-    {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
-    (q : UniformizerSquareData l Y E π n A hA) : Prop :=
-    (quotientAdjunctionAux q).CommShift ℤ
-
 /-- The explicit route adjunction respects the prescribed shifts.
 Source: diagonal tower coefficient changes (1)
 (blueprint: lem-diagonal-quotient-endpoint-normalization).
@@ -99,8 +89,8 @@ theorem quotientAdjunction_commShift
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
     {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
     (q : UniformizerSquareData l Y E π n A hA) :
-    quotientAdjunction_commShift_stmt q := by
-  unfold quotientAdjunction_commShift_stmt quotientAdjunctionAux
+    (quotientAdjunctionAux q).CommShift ℤ := by
+  unfold quotientAdjunctionAux
   exact scalarRealizedAdjunction_commShift q.route.first q.route.second q.eW
 
 /-- The realized degree-zero endpoint of this coefficient route.

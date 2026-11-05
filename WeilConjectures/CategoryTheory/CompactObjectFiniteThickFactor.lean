@@ -67,7 +67,8 @@ theorem compact_mem_finite_thick_of_generators
     rfl
   obtain ⟨S, Q, α, β, hQ, hαβ⟩ := compact_factorThrough_thickClosure
     E hcompact X t hstart hsteps K hK n a
-  refine ⟨S, Q, hQ, ⟨⟨α, β ≫ Sigma.ι (fun k : ULift.{w} ℕ ↦ X k.down) ⟨n⟩ ≫ q, ?_⟩⟩⟩
+  refine ⟨S, Q, hQ, ⟨⟨α, β ≫ Sigma.ι (fun k : ULift.{w} ℕ ↦ X k.down) ⟨n⟩ ≫ q,
+    ?_⟩⟩⟩
   rw [← Category.assoc α β, hαβ]
   exact hf
 
