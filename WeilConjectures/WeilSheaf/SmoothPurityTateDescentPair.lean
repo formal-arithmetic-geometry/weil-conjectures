@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTateInterfacePair
+public import WeilConjectures.WeilSheaf.FrobeniusTwist
 
 /-! # The Tate datum from finite-base descent is the canonical root datum -/
 
