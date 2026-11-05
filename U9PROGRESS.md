@@ -222,24 +222,22 @@
 - Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
 - Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
 
+# BZ802 complete
 
-# BZ800 complete
-
-- Branch: `u9/BZ800`; starting commit: `fcbed6be3`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorAssociativity`
-  passed final `ucheck-bump`: rc=0, failed=0, on `poolb:43.166.83.208`.
-- Validated source commit: `e43c749e0c30ed6bc759ed611d193410c704fc58`.
-- Added the Localization public/implementation imports and the two reflexive casts
-  authorized by user continuation after `BZ800-statement-cast-proposal.patch`.
-  All original morphisms, binders, assumptions, proof bodies, docstrings, and limits remain unchanged.
-- Direct importer `DerivedPullbackMonoidalDescent` was attempted but blocked by
-  unowned `DerivedPullbackTensorUnitKFlat.lean:359:12: Type mismatch`.
-  Per the brief's skip rule, its unvalidated patch was saved outside the repo and its source restored.
-  No further downstream layer is reachable through this sole direct importer.
-- Final full log: `/home/ubuntu/u9/bz/BZ800-final-green-full.log`.
-- Downstream log: `/home/ubuntu/u9/bz/BZ800-leaf-and-downstream-full.log`.
-- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ800.md`; contract audit:
-  `/home/ubuntu/u9/bz/BZ800-contract-audit.txt` (three idempotent rules reproduce the full source diff).
-- No local Lean/Lake, sorries, axioms, proof escapes, profiler probes, or heartbeat changes.
-- Completion marker: `/home/ubuntu/u9/state/BZ800.DONE`.
-- This completion commit changes only progress documentation; Lean source matches the green build.
+- Branch: `u9/BZ802`; starting commit: `fcbed6be3`.
+- Assigned AffineKoszulSectionRoof and its three restored prerequisites passed
+  `ucheck-bump` together: rc=0, built=4, failed=0, 5712 jobs.
+- Validated source commit: `42b631194575d0152e16c8d2cf707b1d7fa51e21`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ802-final-full.log`.
+- The user instructed continuation after the explicit prerequisite-restoration proposal.
+  Restored the original declarations in AffinePerfectOpenRepresentCohomologyColimit,
+  AffinePerfectOpenRepresentCohomology, and AffineKoszulSectionColimit.
+- Fixed the compositor isIso implication from `.2` to `.1`; all statements are preserved.
+- Both original scoped 1000000-heartbeat budgets are retained after remote builds
+  measured deterministic failures at the default 200000 limit. No pre-deletion bound is raised.
+- Direct importer AffinePerfectTensorRoof was attempted and skipped because unowned
+  DerivedPullbackTensorAssociativity and DerivedPullbackTensorUnitKFlat fail with type mismatches.
+- Fix records, exact errors, tested machine rules, and whole-tree counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ802.md`. Completion marker: `/home/ubuntu/u9/state/BZ802.DONE`.
+- No local Lean/Lake, declaration deletions, changed statements, or proof escapes.
+- This final commit changes only progress documentation; Lean source matches the green build.
