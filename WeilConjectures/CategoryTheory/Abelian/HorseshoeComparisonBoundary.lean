@@ -122,7 +122,6 @@ private theorem comparison_eq_unit
   simp only [Functor.map_comp] at hu''
   erw [reassoc_of% hu'']
   rw [← DerivedCategory.Plus.ι.map_comp_assoc, ← v.rightDerivedFunctorPlus.map_comp, ha]
-  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -226,7 +225,7 @@ private theorem augmentation_boundary
     DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
     DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
     Category.id_comp]
-  erw [reassoc_of% hn]
+  simpa [DerivedCategory.singleFunctorIsoCompQ, Functor.commShiftIso_comp_hom_app] using hn
 
 /-- The explicit comparisons respect the connecting arrow of the derived
 horseshoe triangle.
