@@ -118,6 +118,6 @@ theorem exists_finite_away_maximal_localization
   have hJmax : J.IsMaximal :=
     IsLocalization.isMaximal_of_isMaximal_under (Submonoid.powers s) S0 J
   have : (q.comap (algebraMap T B)).IsPrime := Ideal.comap_isPrime _ q
-  exact ⟨Ideal.isMaximal_of_isIntegral_of_isMaximal_under g hfin.to_isIntegral
+  exact ⟨Ideal.isMaximal_of_isIntegral_of_isMaximal_comap g hfin.to_isIntegral
     (q.comap (algebraMap T B)) hJmax, hmem⟩
 
