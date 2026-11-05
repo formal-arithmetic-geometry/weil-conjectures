@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
@@ -150,4 +153,47 @@ by
   exact e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄ ≪≫ e₅
 
 
+/-- The homotopy family comparison uses the actual termwise single map.
+(blueprint: lem-pc-pinned-single-tensor-shifts)
+-/
+lemma mappedHomotopySingleIso_hom_app {A B : Type*} [Category A] [Category B]
+    [Preadditive A] [Preadditive B] [Limits.HasZeroObject A] [Limits.HasZeroObject B]
+    (T : A ⥤ B) [T.Additive] (n : ℤ) (X : A) :
+    ((mappedHomotopySingleIso T).hom.hom n).app X =
+      (HomotopyCategory.quotient B (ComplexShape.up ℤ)).map
+        ((HomologicalComplex.singleMapHomologicalComplex T (ComplexShape.up ℤ) n).hom.app X)
+        := by
+  simp only [postcomp_functor, Functor.comp_obj, Functor.mapHomotopyCategory_obj,
+    mappedHomotopySingleIso, postcompPostcompIso, postcompIsoOfIso,
+    Functor.mapHomotopyCategoryFactors, mappedCochainSingleIso, precompPostcompIso,
+    Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, comp_hom, isoMk_hom_hom,
+    Functor.isoWhiskerLeft_hom, isoMk_inv_hom, postcompFunctor_map_hom,
+    NatTrans.comp_app, HomotopyCategory.quotient_obj_singleFunctors_obj,
+    Functor.associator_hom_app, Functor.whiskerLeft_app, Quotient.lift.isLift_hom,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp]
+  all_goals erw [Category.id_comp, Category.comp_id]
+
 end CategoryTheory.SingleFunctors
+
+namespace AlgebraicGeometry
+set_option backward.isDefEq.respectTransparency.types false
+
+/-- The selected counit followed by the actual termwise mapped-single comparison.
+Source: Stacks Project, Tag 08HY; Mathlib mapped-single comparison.
+(blueprint: lem-pc-pinned-single-tensor-shifts). -/
+def pinnedSingleTensorCounit
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
+    {X X' : Scheme.{u}} (g' : X' ⟶ X) (n : ℤ) (G : X.Modules) :
+    (derivedPullback.{u, w} g').obj ((DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ⟶
+    (DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
+        ((Scheme.Modules.tensorPullback g').obj G) :=
+  (pinnedPullbackCounit.{u, w} g').app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex
+        (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G))
+
+end AlgebraicGeometry
