@@ -42,8 +42,10 @@ lemma purity_isWeilEquivariant_shriekReduction
   apply (cancel_epi (b.hom.app (L.obj M))).1
   simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
   simp only [Category.assoc]
-  rw [← reassoc_of% hc, ← L'.map_comp_assoc, Iso.hom_inv_id_app,
-    L'.map_id, Category.id_comp, ← hn]
+  rw [← reassoc_of% hc, ← L'.map_comp_assoc, Iso.hom_inv_id_app]
+  dsimp only [Functor.comp_obj] at hn ⊢
+  simp only [Functor.map_id, Category.id_comp]
+  rw [← hn]
 
 /-- An equivariant trace remains equivariant after coefficient reduction and the
 compact-support comparison. -/
@@ -59,9 +61,10 @@ lemma purity_isWeilEquivariant_reducedTrace
       (Adjunction.leftWeilDatum e' (transportWeilDatum T a φ))
       (transportWeilDatum U b (Adjunction.leftWeilDatum e φ)) (γ.inv.app M) := by
     unfold IsWeilEquivariant at hγ ⊢
-    rw [← cancel_mono (γ.hom.app M), Category.assoc, Category.assoc,
-      Iso.inv_hom_id_app, Category.comp_id, ← hγ, ← Category.assoc,
-      ← H'.map_comp, Iso.inv_hom_id_app, H'.map_id, Category.id_comp]
+    apply (cancel_mono (γ.hom.app M)).1
+    simpa only [Functor.comp_obj, Category.assoc, ← Functor.map_comp_assoc,
+      Iso.inv_hom_id_app, Functor.map_id, Category.id_comp, Category.comp_id] using
+      congrArg (fun z ↦ H'.map (γ.inv.app M) ≫ z) hγ.symm
   exact hγinv.comp (ht.map U b)
 
 end CategoryTheory
