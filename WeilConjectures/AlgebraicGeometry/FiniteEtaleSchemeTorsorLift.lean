@@ -406,8 +406,8 @@ private theorem exists_surjective_sheafFiber (R : Sheaf.Torsor (Etale.continuous
     Φ.toPresheafFiber V₀ v₀ R.sheaf.obj (R.vadd (op V₀) (ContinuousMap.const _ m) x₀)
   refine ⟨φ, fun p ↦ ?_⟩
   obtain ⟨V, v, z, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := R.sheaf.obj) p
-  let E₁ : Φ.fiber.Elements := ⟨V, v⟩
-  let E₂ : Φ.fiber.Elements := ⟨V₀, v₀⟩
+  let E₁ : Φ.fiber.Elements := Φ.fiber.elementsMk V v
+  let E₂ : Φ.fiber.Elements := Φ.fiber.elementsMk V₀ v₀
   let Wel := IsCofiltered.min E₁ E₂
   let f₁ := IsCofiltered.minToLeft E₁ E₂
   let f₂ := IsCofiltered.minToRight E₁ E₂
@@ -704,6 +704,8 @@ private theorem finiteEtale_torsor_conditions_reflect
       (by simp [haπ])) (by apply Sigma.hom_ext; intro m; simp [T, D, haπ])
   have hc : IsColimit (Cofan.mk D u) := finiteEtale_cofan_isColimit π M
   have ht : IsLimit (BinaryFan.mk p₁ p₂) := finiteEtale_binaryFan_isLimit π
+  have : PreservesColimitsOfSize.{u + 1, u + 1} F :=
+    Adjunction.isEquivalence_preservesColimits F
   have hcF : IsColimit (Cofan.mk (F.obj D) fun m ↦ F.map (u m)) :=
     isColimitCofanMkObjOfIsColimit F (fun _ : M ↦ X) u hc
   have htF : IsLimit (BinaryFan.mk (F.map p₁) (F.map p₂)) :=
