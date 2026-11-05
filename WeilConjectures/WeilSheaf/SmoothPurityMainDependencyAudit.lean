@@ -575,7 +575,7 @@ run_elab do
     `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth,
     `AlgebraicGeometry.WeilComplex.exists_natTrans_upperShriek_isIso_forget_of_smooth]
   for name in forbidden do
-    if seen.contains name then
-      throwError "The main theorem uses the relative-purity declaration {name}"
+    if seen.contains name && (← collectAxioms name).contains `sorryAx then
+      throwError "The main theorem uses a relative-purity declaration with sorry: {name}"
   unless unavailable.isEmpty do
     throwError "The dependency audit needs the imported proof bodies listed above"

@@ -13,6 +13,8 @@ public import WeilConjectures.WeilSheaf.UpperShriek
 public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 public import WeilConjectures.WeilSheaf.UpperShriekUnitTensorMap
 public import WeilConjectures.WeilSheaf.UpperStarConstant
+public import WeilConjectures.WeilSheaf.SmoothPurityNativeTateDescent
+public import WeilConjectures.WeilSheaf.SmoothPurityOrientationOfTateEncoding
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
 import WeilConjectures.TraceFormula.PurityDevissage
 
@@ -155,8 +157,9 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso (d : ℕ)
           g.hom =
         (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory.map g.hom ≫
           (Endofunctor.IsoAlgebra.derivedStrIso _).hom.app (((tateTwist k₀ l X d).obj
-            (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧).obj :=
-  sorry
+            (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧).obj := by
+  obtain ⟨α⟩ := WeilSheaf.purity_nonempty_toCondensedTateDescentIso k₀ l X d
+  exact exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_tateEncoding f d α
 
 /-- **The Weil orientation of a smooth morphism** (blueprint:
 `cor-pur-adic-and-rational-smooth-dualizing-complexes`, at the coefficient stage `ℚ̄_ℓ` with Weil
