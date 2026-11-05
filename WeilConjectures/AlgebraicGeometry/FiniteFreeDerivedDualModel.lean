@@ -27,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace AlgebraicGeometry.Scheme
 
-local instance (X : RingedSpace.{u}) (U : Opens X)
+noncomputable local instance (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X)
     [hU : HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))] :
     Category.{w} (@DerivedCategory (SheafOfModules.{u}
       ((sheafCompose ((Opens.grothendieckTopology X).over U)
