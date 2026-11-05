@@ -103,11 +103,11 @@ private theorem comparison_eq_unit
     Iso.symm_hom, asIso_inv, Functor.map_comp, Category.assoc, Functor.comp_map]
   change DerivedCategory.Plus.ι.map
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
-      DerivedCategory.Plus.ι.map (v.rightDerivedFunctorPlus.map
-        ((DerivedCategory.Plus.quotientCompQhIso A).inv.app (resolutionPlus R))) ≫
+      (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).map
+        ((DerivedCategory.Plus.quotientCompQhIso A).inv.app (resolutionPlus R)) ≫
+      DerivedCategory.Plus.ι.map (eqToHom e) ≫
       DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
-      DerivedCategory.Plus.ι.map (eqToHom e) ≫
       (DerivedCategory.Plus.QhCompιIsoιCompQh B).hom.app
         (v.mapHomotopyCategoryPlus.obj
           ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
@@ -339,6 +339,7 @@ theorem horseshoe_comparison_boundary
     Category.assoc]
   rw [← Functor.commShiftIso_hom_naturality_assoc,
     ← Functor.map_comp_assoc, haug, Functor.map_comp, Category.assoc]
+  simp only [Functor.comp_map]
   erw [reassoc_of% hunit, he]
   rfl
 
