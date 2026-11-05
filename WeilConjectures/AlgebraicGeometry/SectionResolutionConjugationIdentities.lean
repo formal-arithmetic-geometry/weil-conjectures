@@ -777,10 +777,11 @@ theorem section_resolution_conjugation_identities {X Y : Scheme.{u}} (f : X ⟶ 
     have h := (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.naturality
       ((HomotopyCategory.quotient _ (.up ℤ)).map a)
     with_unfolding_all
-      simpa only [eta, internalDerivedPullFunctor, internalLocalizationFunctor,
+      simp only [eta, internalDerivedPullFunctor, internalLocalizationFunctor,
         comparisonSource, totalInternalPull, retainedCochainFunctor, retainedCochainObject,
         retainedCochainMap, cast_eq, Functor.comp_map,
-        Functor.mapHomotopyCategory_map, qh_map_quotient] using h
+        Functor.mapHomotopyCategory_map, qh_map_quotient] at h ⊢
+      exact h
   have aInternal_naturality
       {A A' B B' : CochainComplex (internalModules Λ Y) ℤ} (a : A ⟶ A') (b : B ⟶ B') :
       (internalDerivedPullFunctor Λ f).map ((internalLocalizationFunctor Λ Y).map a ⊗ₘ
