@@ -60,7 +60,9 @@ theorem projectionForgetSquare_paste_monoidal
   have h := projectionForgetSquare_paste δI δG κP κQ tC tD tE e e' pI pG pI' pG' hI hG M N
   rw [hpF, hκF]
   simp only [hδF]
-  simp only [tensor_map, id_tensorHom, tensorHom_id, Functor.comp_map] at h ⊢
+  simp only [tensor_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj, Functor.prod_obj]
+    at h ⊢
+  simp only [← id_tensorHom, ← tensorHom_id]
   exact h
 
 end CategoryTheory

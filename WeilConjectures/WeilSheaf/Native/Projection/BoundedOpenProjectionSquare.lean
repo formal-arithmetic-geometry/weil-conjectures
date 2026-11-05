@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedOpenForget
-public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionForgetSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProjectionIso
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedForgetNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.GeometricProjectionNaturality
@@ -61,8 +60,10 @@ theorem projectionForgetSquare_open :
       (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l U)
       (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l Z)
       (ProEtaleWeilSheaf.nativeOpenProjectionIso k₀ l j).hom
-      (B.uncurriedInvProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) :=
-    ProEtaleWeilSheaf.nativeOpenProjection_forgetSquare k₀ l j
+      (B.uncurriedInvProjectionComparisonNatTrans (fun _ _ ↦ inferInstance)) := by
+    apply (projectionForgetSquare_uncurried_iff _ _ _ _ _ _).2
+    intro M N
+    exact ProEtaleWeilSheaf.map_nativeOpenProjectionIso_hom_app k₀ l j M N
   have h := projectionForgetSquare_of_iso _ _ _ _
     (projectionRealizationCompIso k₀ l U) (projectionRealizationCompIso k₀ l Z) _ _ h₀
   apply (projectionForgetSquare_monoidal_iff _ _ _ _ _ _).2
