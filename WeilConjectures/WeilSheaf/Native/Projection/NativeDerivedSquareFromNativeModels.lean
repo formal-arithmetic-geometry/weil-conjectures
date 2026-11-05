@@ -41,12 +41,12 @@ variable
       (Mod (Sheaf (Scheme.ProEt.topology
           (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))) Ab)
         (condensedRingObj (Profinite.padicAlgClRingObj l)
-          (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀)))))
+          (Scheme.Hom.geometricFiber (Z ↘ Spec (CommRingCat.of k₀))))))
   (F : (ProEtaleWeilSheaf k₀ l Y) ⥤
       (Mod (Sheaf (Scheme.ProEt.topology
           (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab)
         (condensedRingObj (Profinite.padicAlgClRingObj l)
-          (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))))
+          (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀))))))
   (R :
       (Mod (Sheaf (Scheme.ProEt.topology
           (Scheme.Hom.geometricFiber (Y ↘ Spec (CommRingCat.of k₀)))) Ab)
