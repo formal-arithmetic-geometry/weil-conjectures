@@ -218,23 +218,30 @@
 - This final documentation update leaves Lean sources identical to the successful unit build.
 
 
-# BZ721 in progress
+# BZ721 complete
 
 - Branch: `u9/BZ721`; starting source commit: `a5261dcee`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization`
-  passed `ucheck-bump`: rc=0, failed=0, 4689 jobs; target rebuilt in 42 seconds.
-- Validated source: `ef6cc704368fff17895dd6f3be02732a5d3b0ba0`.
-- Tree: `poolb:43.157.187.72`; exact Lean v4.35.0-rc3 and Mathlib b63f6e8a pins verified.
-- User instructed continuation after the exact public endpoint-transport proposal.
-  That patch is applied. Two generic private cancellation lemmas and targeted `conv`
-  rewrites prove the transported equalities without raising heartbeat limits.
-- Existing private declarations, binders, assumptions, other conjuncts, and docstrings
-  are unchanged; no declarations qualified for deletion under the prune lists.
-- Full unit log: `/home/ubuntu/u9/bz/BUILD-BZ721-unit-full.log`.
-- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ721.md`; audit: `/home/ubuntu/u9/bz/BZ721-contract-audit.txt`.
-- Four direct importers submitted at `6a187f55d4ff9f16bb2421bb8a75ad3aa0ac1c37`:
-  `SectionResolvingOplaxConstraintData`, `SectionResolutionConjugationIdentities`,
-  `SectionPullComputationOfRealization`, and `SectionDerivedRepresentativeSquare`.
-- Next: inspect downstream results, fix owned importer failures or skip unowned blockers,
-  then commit final documentation and write `/home/ubuntu/u9/state/BZ721.DONE`.
-- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat increases, or profiler probes.
+- Assigned module and two direct importers passed `ucheck-bump` together:
+  rc=0, failed=0, 4703 jobs, on `poolb:43.135.211.170`.
+- Validated source commit: `a96073034e619874ed142a126bd89e48f43b4d84`.
+- Green modules: `SectionDerivedPushpullNormalization` (44s),
+  `SectionResolvingOplaxConstraintData` (20s), and `SectionResolutionConjugationIdentities` (41s).
+- Exact Lean v4.35.0-rc3 and Mathlib b63f6e8a pins verified on the final build host.
+- User continuation followed the exact public endpoint-transport proposal; that patch
+  is applied. Generic cancellation lemmas and targeted rewrites prove the equalities.
+- Downstream fixes add localization imports, reflexivity casts in exposed data bodies,
+  and proof normalization. Declaration headers, assumptions, docstrings, and options
+  in the importers are unchanged. No kept declaration was deleted.
+- Lean 4.35 `simpa ... using` forces reducible transparency at its final comparison;
+  separate `simp` and `exact` retain the required unfolding context.
+- Skipped `SectionPullComputationOfRealization`: unowned
+  `InternalScalarPullbackNormalizationData` fails at lines 111/114.
+- Skipped `SectionDerivedRepresentativeSquare`: unowned `SectionCochainMonoidalData`
+  and `InternalOplaxResolvingComponents` fail at lines 33 and 360.
+- All four direct importers were attempted. The optional second layer was inventoried
+  and deferred after the focused importer build waited 28 minutes for shared capacity.
+- Final log: `/home/ubuntu/u9/bz/BUILD-BZ721-final-full.log`.
+- Patterns: `/home/ubuntu/u9/bz/FIXES-BZ721.md`; source and replay audits are saved alongside it.
+- Completion marker: `/home/ubuntu/u9/state/BZ721.DONE`.
+- No local Lean/Lake, sorries, trust bypasses, heartbeat increases, or profiler probes.
+- This final documentation commit leaves Lean sources identical to the green build.
