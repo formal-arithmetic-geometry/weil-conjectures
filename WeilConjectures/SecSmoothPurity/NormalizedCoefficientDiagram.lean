@@ -61,7 +61,8 @@ noncomputable def total {R : Sheaf J CommRingCat.{w}} (P Q : Complex R) : Comple
     let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
         ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
       PresheafOfModules.hasColimitsOfShape _ _
-    exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
   let : HasFiniteCoproducts (Modules R) :=
     hasFiniteCoproducts_of_hasCoproducts (C := Modules R)
   exact P ⊗ Q
@@ -78,7 +79,8 @@ abbrev totalMap {R : Sheaf J CommRingCat.{w}} {P Q P' Q' : Complex R}
     let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
         ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
       PresheafOfModules.hasColimitsOfShape _ _
-    exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
   let : HasFiniteCoproducts (Modules R) :=
     hasFiniteCoproducts_of_hasCoproducts (C := Modules R)
   exact f ⊗ₘ g
