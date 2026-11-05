@@ -1,20 +1,20 @@
-# BZ261 complete
+# BZ264 in progress
 
-- Branch: `u9/BZ261`; starting commit: `c781553bf`.
-- Assigned module `WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat`
-  passes `ucheck-bump`: rc=0, built=1, failed=0, 3616 jobs.
-- Validated source commit: `1a08e6d7b88fb29b066cfa086f8018c3e013051e`.
-- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ261-fixed-full.log`.
-- The user instructed continuation after the exact one-line statement compatibility proposal.
-  Added `.symm` to the compositor at line 66; the original mathematical map and proof remain.
-- Checked three direct importers; all are blocked by other owners' dependencies
-  (BZ201, BZ206, BZ243, BZ258, BZ262), so skipped them as the brief directs.
-- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ261-downstream1-full.log`.
-  The assigned module rebuilt successfully again at commit `539013bcc2`.
-- Fix patterns, counts, and blocker details: `/home/ubuntu/u9/bz/FIXES-BZ261.md`.
-- No proof placeholders, trust bypasses, local Lean/Lake execution, or limit increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ261.DONE`.
-- This completion commit changes progress documentation only after source validation.
+- Branch: `u9/BZ264`; starting commit: `c781553bf`.
+- Reread the brief and inherited progress notes after the user requested continuation.
+- The user instructed continuation after the exact three-site API proposal;
+  `BZ264-statement-api-proposal.patch` is applied to the assigned module and its
+  sole direct importer, `RightDerivedUnitSingleDegree`.
+- The canonical single comparison uses direct Q; both unit statements use the
+  cochain unit. The importer proof now uses cochain-unit naturality.
+- The original canonical-single proof is unchanged. All binders, assumptions,
+  and existing docstrings are unchanged.
+- The assigned module and direct importer passed together at `63a5e3555`: rc=0,
+  built=8, failed=0. Log: `/home/ubuntu/u9/logs/BZ264-20261106T013140.log`.
+- Continuing into `HypercohomologyLeftEdgeSingleAux` and `HypercohomologyLeftEdgeSingle`.
+  The auxiliary proof uses direct-Q boundedness instances (known BZ130 pattern).
+- Patterns and full build logs: `/home/ubuntu/u9/bz/FIXES-BZ264.md`.
+- No local Lean/Lake, forbidden proof shortcuts, or heartbeat changes.
 
 # BZ150 complete
 
