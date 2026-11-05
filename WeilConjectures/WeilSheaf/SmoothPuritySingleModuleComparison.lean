@@ -37,7 +37,8 @@ noncomputable def purityExtendScalarsSingleComparison (a : Λ ⟶ Λ') [IsMonHom
     (X : Scheme.{u}) := (Mod.extendScalars (coefficientMap a X)).puritySingleComparison
 
 /-- The degree-zero comparison for geometric pullback. -/
-noncomputable def purityPullbackSingleComparison (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+noncomputable def purityPullbackSingleComparison
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (g : X ⟶ Y) := ((g)^*⟦Λ⟧).puritySingleComparison
 
