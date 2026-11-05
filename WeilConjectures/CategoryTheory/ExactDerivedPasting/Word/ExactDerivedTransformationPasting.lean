@@ -172,11 +172,12 @@ private lemma wordFactors_comp {i j k : I} (P : Word C i j) (R : Word C j k)
         (wordFactors C R).hom.app
           ((P.ordinary.obj.mapHomologicalComplex (.up ℤ)).obj K) := by
   dsimp only [wordFactors, Word.comparison, Word.ordinary, Word.derived,
-    Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
+    Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app]
   simp only [Category.assoc]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors P.ordinary.obj R.ordinary.obj K]
+  erw [Iso.hom_inv_id_app_assoc]
   rw [← NatTrans.naturality_assoc, ← NatTrans.naturality_assoc]
   simp only [Functor.map_comp, Category.assoc]
   rfl

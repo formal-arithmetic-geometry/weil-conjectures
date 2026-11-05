@@ -95,7 +95,6 @@ lemma conjugateEquiv_mapHomotopyCategoryCompIso_app_quotient (e : G_fg ≅ G_g �
         (adj_f.mapHomologicalComplex c).counit.app K) := by
     ext n
     simp [conjugateEquiv_apply_app, Adjunction.mapHomologicalComplex]
-    rfl
   rw [hR, conjugateEquiv_apply_app, comp_counit_app]
   simp only [Functor.comp_obj]
   rw [h₁, h₂, h₃, h₄]
