@@ -20,6 +20,8 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
+open Scheme
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' : Scheme.{u}} (g : X' ⟶ X)
   {F : ℕ → Sheaf (ProEt.topology X) Ab.{u + 1}} (t : ∀ n, F (n + 1) ⟶ F n)
