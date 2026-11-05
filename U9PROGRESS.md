@@ -105,3 +105,16 @@
 - No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ408 in progress
+
+- Branch: `u9/BZ408`; starting commit: `98654719bdfe7ff3e77ff047b3bce53405d2dc4a`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation`.
+- Baseline remote build confirmed one application type mismatch at line 309.
+- The user instructed continuation after the exact one-line statement correction
+  proposal; that patch is now applied. It uses the forward composition comparison
+  followed by the induced isomorphism, with `.hom` selecting the required direction.
+- All other statement text, proof bodies, and existing docstrings remain unchanged.
+- Next: validate the assigned module, then both downstream layers via `ucheck-bump`.
+- Pattern, whole-tree counts, and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ408.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
