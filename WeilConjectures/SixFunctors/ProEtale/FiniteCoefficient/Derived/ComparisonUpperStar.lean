@@ -49,7 +49,7 @@ noncomputable def derivedComparisonUpperStarUpperStarIso :
     D(ν^*(Y)[A]) ⋙ L(ProEtale.upperStar A g) ≅
       L(Etale.upperStar A g) ⋙ D(ν^*(Z)[A]) :=
   Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory A g) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A g) ≪≫
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.isoWhiskerRight (Etale.leftDerivedUpperStarIsoMapDerivedCategory A g).symm _
