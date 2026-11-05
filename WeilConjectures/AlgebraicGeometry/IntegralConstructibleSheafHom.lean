@@ -24,6 +24,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
   [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
 
+set_option maxHeartbeats 800000 in
 /-- Shifted Hom from a constructible integral sheaf commutes with uniformly bounded-below
 sequential colimits. The lifted indexing category is equivalent to the ordinary natural numbers.
 Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3),
@@ -45,7 +46,6 @@ constructible sheaf as a finite distinguished extension of these pieces. Induct
 on that tower using distinguished extension closure of homColimitProperty. The
 good-truncation comparison returns the result for the supplied cocone c. Empty
 schemes and zero ranks are covered by the same categorical argument. -/
-set_option maxHeartbeats 800000 in
 theorem integralConstructible_sheaf_hom_colimit (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
