@@ -78,7 +78,8 @@ theorem coefficient_shortExact_of_flat
       e.inv ≫ (tensorRight M).map
         ((scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R))) := by
     ext U x
-    change (regularTensorIso M).inv.val.app U (t.val U • x) =
+    let a : R.obj.obj U := t.val U
+    change (regularTensorIso M).inv.val.app U (a • x) =
       (((scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R))) ▷ M).val.app U
         ((regularTensorIso M).inv.val.app U x)
     let μ := (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R))
@@ -86,18 +87,17 @@ theorem coefficient_shortExact_of_flat
       (L := unit (derivedChangeRingIndependentCoefficients J R))
       (L' := unit (derivedChangeRingIndependentCoefficients J R)) μ M U
       (1 : R.obj.obj U) x
-    have hb : (1 : R.obj.obj U) ⊗ₜ[R.obj.obj U] (t.val U • x) =
-        ((show R.obj.obj U from t.val U) • (1 : R.obj.obj U)) ⊗ₜ[R.obj.obj U] x :=
-      TensorProduct.tmul_smul (R := R.obj.obj U)
-        (show R.obj.obj U from t.val U) (1 : R.obj.obj U) x
+    have hb : (1 : R.obj.obj U) ⊗ₜ[R.obj.obj U] (a • x) =
+        (a • (1 : R.obj.obj U)) ⊗ₜ[R.obj.obj U] x :=
+      TensorProduct.tmul_smul (R := R.obj.obj U) a (1 : R.obj.obj U) x
     calc
       _ = (tensorPresheafUnit (R := R)
           (unit (derivedChangeRingIndependentCoefficients J R)) M).app U
-          ((1 : R.obj.obj U) ⊗ₜ[R.obj.obj U] (t.val U • x)) :=
-        regularTensorIso_inv_apply (R := R) M U (t.val U • x)
+          ((1 : R.obj.obj U) ⊗ₜ[R.obj.obj U] (a • x)) :=
+        regularTensorIso_inv_apply (R := R) M U (a • x)
       _ = (tensorPresheafUnit (R := R)
           (unit (derivedChangeRingIndependentCoefficients J R)) M).app U
-          (((show R.obj.obj U from t.val U) • (1 : R.obj.obj U)) ⊗ₜ[R.obj.obj U] x) :=
+          ((a • (1 : R.obj.obj U)) ⊗ₜ[R.obj.obj U] x) :=
         congrArg (fun z ↦ (tensorPresheafUnit (R := R)
           (unit (derivedChangeRingIndependentCoefficients J R)) M).app U z) hb
       _ = ((μ ▷ M).val.app U)
