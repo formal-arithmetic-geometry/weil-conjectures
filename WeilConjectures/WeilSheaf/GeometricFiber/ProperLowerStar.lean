@@ -220,7 +220,35 @@ theorem isIso_mateEquiv_geometricFiberBoundedConstructibleFunctorLowerStarIso
     erw [ProEtaleWeilSheaf.mapDerivedCategoryCompIso_inv_app_mateEquiv_derivedCondensedRealizationUpperStarIso_app
       k₀ l g M.obj]
     rfl
-  · sorry
-  · sorry
+  · intro L'
+    obtain ⟨eH, heH⟩ := IsoAlgebra.exists_forget_map_counit_eq
+      (adicLowerStarGeometricFiberMapCompFrobeniusIso l g (comp_over g _))
+      (DerivedCategory.boundedConstructibleAdic l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      (DerivedCategory.boundedConstructibleAdic l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      (fun _ hK ↦ hK.1) (fun K n hK ↦ ObjectProperty.le_shift _ n K hK)
+      WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff
+      (fun K hK ↦
+        (WeilSheaf.boundedConstructibleAdic_frobeniusPullback_mapDerivedCategory_obj_iff K).2 hK)
+      hR adjA (ProEtale.preservesColimit_discrete_rightDerivedFunctor_adicLowerStar _)
+      (objectProperty k₀ l Z) (objectProperty k₀ l Y)
+      (objectProperty_iff (X := Z)) (objectProperty_iff (X := Y))
+      (objectProperty_rightDerivedLowerStar g) adj L'
+    refine ⟨ObjectProperty.isoMk _ eH, ObjectProperty.hom_ext _ ?_⟩
+    erw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom]
+    exact heH
+  · intro Y'
+    have hu (M) : IsIso (EY.toAdjunction.unit.app M) := by
+      rw [Equivalence.toAdjunction_unit]
+      infer_instance
+    have hu' (M) : IsIso (EZ.toAdjunction.unit.app M) := by
+      rw [Equivalence.toAdjunction_unit]
+      infer_instance
+    have hc (M) : IsIso (EZ.toAdjunction.counit.app M) := by
+      rw [Equivalence.toAdjunction_counit]
+      infer_instance
+    have h := Adjunction.isIso_mateEquiv_app_of_isIso adjA adj' ρ.symm EZ.toAdjunction
+      EY.toAdjunction Y'
+    rw [Iso.symm_hom] at h
+    exact h
 
 end AlgebraicGeometry.WeilComplex
