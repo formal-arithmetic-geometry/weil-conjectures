@@ -129,7 +129,7 @@ theorem open_restriction_perfect_local_models (X : Scheme.{u}) (U : X.Opens)
   let squareD : (L.mapDerivedCategory ⋙ rW.mapDerivedCategory) ⋙ H.mapDerivedCategory ≅
       rA.mapDerivedCategory :=
     (Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso L rW) _) ≪≫
-      (Functor.mapDerivedCategoryCompIso (L ⋙ rW) H).symm ≪≫
+      Functor.mapDerivedCategoryCompIso (L ⋙ rW) H ≪≫
       Functor.mapDerivedCategoryNatIso square
   exact ⟨(squareD.app E).symm ≪≫ H.mapDerivedCategory.mapIso iK ≪≫
     H.mapDerivedCategoryFactors.app K⟩
