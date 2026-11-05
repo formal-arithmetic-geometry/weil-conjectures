@@ -66,10 +66,7 @@ private theorem finiteType_of_top (X : Scheme.{u}) (M : X.Modules)
           (e.fullyFaithfulFunctor.preimageIso
             (by exact e.counitIso.app ((M.over (⊤ : X.Opens)).over (D.X i.2)))).hom }
   have : q.IsFiniteType :=
-    { isFiniteType := fun i ↦ by
-        have := hD.isFiniteType i.2
-        dsimp [q]
-        infer_instance }
+    { isFiniteType := fun i ↦ ⟨(hD.isFiniteType i.2).finite⟩ }
   exact { exists_localGeneratorsData := ⟨q, inferInstance⟩ }
 
 /-- A global quasi-coherent module which is finite type on a quasi-compact open
