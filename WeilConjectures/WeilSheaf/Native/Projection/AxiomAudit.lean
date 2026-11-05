@@ -17,6 +17,9 @@ import all WeilConjectures.WeilSheaf.Native.Projection.AdicSheafTensorSquare
 import all WeilConjectures.WeilSheaf.Native.Projection.SheafTensorUnit
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeTotalTensorCore
 import all WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCompatibility
+import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModelFamilies
+import all WeilConjectures.WeilSheaf.Native.Projection.DerivedModelNormalizations
+import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromTotalFunctors
 import all WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
 import all WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModels
@@ -24,7 +27,6 @@ import all WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 import all WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
 import all WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
-import all WeilConjectures.WeilSheaf.Native.Projection.NativeRealizedPullNormalization
 import Lean.Util.CollectAxioms
 
 /-! # Dependency audit for the native proper projection formula

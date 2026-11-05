@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromTotalFunctors
+public import WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModelFamilies
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareOfRepresentatives
 public import WeilConjectures.WeilSheaf.Native.Projection.TotalSquareToModel
-public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
-public import WeilConjectures.WeilSheaf.Native.Projection.NativeRealizedPullNormalization
+public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
@@ -75,79 +75,39 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     let F := condensedRealization k₀ l Y
     let R := CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
       (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    let LP := (L.mapHomologicalComplex (.up ℤ)).obj P
-    let LT := (L.mapHomologicalComplex (.up ℤ)).obj T
-    let FP := (F.mapHomologicalComplex (.up ℤ)).obj P
-    let FT := (F.mapHomologicalComplex (.up ℤ)).obj T
-    have hLP : NativeIsKFlat k₀ l Z LP := by
-      dsimp only [LP, L]
-      exact_mod_proofs nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g P hP
-    have hLT : NativeIsKFlat k₀ l Z LT := by
-      dsimp only [LT, L]
-      exact_mod_proofs nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g T hT
-    have hr := projection_realized_nativePullTensor_normalization k₀ l L V
-      (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
-      (nativePullTotalTensor k₀ l g) (nativePullTensor k₀ l g)
-      (by
-        dsimp only [L]
-        exact_mod_proofs projection_nativePullTensor_normalization k₀ l g)
-      P T hP hT hLP hLT
-    have hmU := projection_condensed_model_normalization k₀ l Z LP LT hLP hLT
-    have h := projection_derived_square_of_total_functors L V F R
+    have h := projection_derived_square_of_model_families L V F R
       (condensedRealizationUpperStarIso k₀ l g).symm
       (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
       (condensedRealizationTensor k₀ l Y) (condensedRealizationTensor k₀ l Z)
       (nativePullTensor k₀ l g)
-      (Functor.uncurry.obj (nativeTensorTotal k₀ l Y))
-      (Functor.uncurry.obj (nativeTensorTotal k₀ l Z))
+      (nativeTensorTotal k₀ l Y) (nativeTensorTotal k₀ l Z)
+      (NativeIsKFlat k₀ l Y) (NativeIsKFlat k₀ l Z)
+      (nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g)
+      (nativeOpenTensorModel k₀ l Y) (nativeOpenTensorModel k₀ l Z)
       (nativePullTotalTensor k₀ l g) (condensedRealizationTotalTensorIso k₀ l Y)
-      (condensedRealizationTotalTensorIso k₀ l Z) P T
+      (condensedRealizationTotalTensorIso k₀ l Z)
       (by
-        dsimp only [Functor.uncurry_obj_obj]
-        with_reducible exact nativeOpenTensorModel k₀ l Y P T hP hT)
+        have hn := projection_nativePullTensor_normalization k₀ l g
+        dsimp only [ProjectionRestrictionTensorNormalization] at hn
+        dsimp only [L, nativeOpenPull]
+        with_reducible_and_instances exact_mod_proofs hn)
       (by
-        dsimp only [Functor.uncurry_obj_obj]
-        with_reducible exact nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
+        have hF := projection_native_realization_model_normalization k₀ l Y
+        dsimp only [F, derivedCondensedRealization]
+        with_reducible_and_instances exact_mod_proofs hF)
       (by
-        dsimp only [id, L, V, LP, LT, NativeRestrictionDescentProof.totalFamily,
-          Functor.uncurry_obj_obj, Functor.comp_obj, Functor.prod_obj, Iso.app] at hr ⊢
-        with_reducible_and_instances exact_mod_proofs hr)
-      (by
-        dsimp only [id, V, LP, LT, L, derivedCondensedRealization,
-          Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
-          curriedTensor_obj_obj, MonoidalCategory.tensor_obj, Iso.app] at hmU ⊢
-        dsimp only [Mod.monoidalCategoryCochainComplex, HomologicalComplex.monoidalCategory,
-          Monoidal.induced, HomologicalComplex.monoidalCategoryStruct,
-          HomologicalComplex.tensorObj, Functor.map₂CochainComplex,
-          Functor.map₂HomologicalComplex] at hmU ⊢
-        with_reducible_and_instances cast_proofs hmU)
+        have hV := projection_native_realization_model_normalization k₀ l Z
+        dsimp only [V, derivedCondensedRealization]
+        with_reducible_and_instances exact_mod_proofs hV)
       (fun A B ↦ (R.mapCochainComplexμIso A B).symm)
+      (fun A B ↦ (R.mapDerivedCategoryTensorComparison.app A).app B)
+      (by exact R.projection_ordinary_model_normalization)
+      P T hP hT
       (by
         have ht := htotal P T
         dsimp only [TotalPullTensorSquare, condensedRealizationPullComplexIso, Iso.symm] at ht
         dsimp only [projection_model_complex_square, L, V, F, R, Iso.symm]
         with_reducible_and_instances exact_mod_proofs ht)
-      (by
-        have hh := projection_condensed_model_normalization k₀ l Y P T hP hT
-        dsimp only [id, F, FP, FT]
-        simp only [Iso.app_hom] at hh ⊢
-        dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
-          curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hh ⊢
-        dsimp only [Mod.monoidalCategoryCochainComplex, HomologicalComplex.monoidalCategory,
-          Monoidal.induced, HomologicalComplex.monoidalCategoryStruct,
-          HomologicalComplex.tensorObj, Functor.map₂CochainComplex,
-          Functor.map₂HomologicalComplex] at hh ⊢
-        with_reducible_and_instances cast_proofs hh)
-      (fun A B ↦ (R.mapDerivedCategoryTensorComparison.app A).app B)
-      (by
-        have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
-          (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
-          (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
-          (F.mapDerivedCategoryFactors.hom.app P) (F.mapDerivedCategoryFactors.hom.app T)
-        dsimp only [Iso.symm, FP, FT, Functor.postcompose₂, Functor.comp_obj,
-          Functor.whiskeringRight_obj_obj, Functor.whiskeringLeft₂_obj_obj_obj_obj_obj,
-          Functor.comp_map, curriedTensor_obj_obj, curriedTensor_obj_map] at ho ⊢
-        with_reducible_and_instances exact_mod_proofs ho)
     dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization] at h ⊢
     exact_mod_proofs h
 
