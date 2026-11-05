@@ -223,7 +223,7 @@ lemma conjugate_counit_aux (c : L₂ ≅ L₁) (eL : L₁ ≅ L₀) (eR : R₁ �
   change _ ≫ Adjunction.id.counit.app K = _ at h₂
   simp only [Adjunction.id] at h₂
   rw [← h₁, ← he, ← L₁.map_comp_assoc]
-  erw [reassoc_of% h₃, Iso.hom_inv_id_app_assoc, ← reassoc_of% h₄]
+  erw [← reassoc_of% h₃, Iso.inv_hom_id_app_assoc, ← reassoc_of% h₄]
   rw [← h₂, NatTrans.id_app, Category.comp_id]
   rfl
 
