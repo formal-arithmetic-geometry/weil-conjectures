@@ -141,3 +141,17 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ538 in progress
+
+- Branch: `u9/BZ538`; assigned module: `AffineBasisKInjectiveSectionsPreservesHomology`.
+- Its original IsAffineOpen visibility fix was already in the starting branch.
+- Added the same public AffineScheme import to second-layer `AffineBasisSectionsDerivedUnit`.
+- Two remote build attempts stopped in shared dependencies before reaching our targets.
+- Merged coordinator updates at `8af5cb324`; Monoidal now builds, but InternalHom remained blocked.
+- The user instructed continuation after the explicit one-line InternalHom repair proposal.
+  Applied the compatibility tensorObj_map_tmul lemma so the following map_comp_apply rewrite matches.
+- Next: ucheck-bump assigned module, AffineBasisSectionsResolutionHomologyEpi, and
+  AffineBasisSectionsDerivedUnit; then write DONE with every green module and PATTERN/ERROR pairs.
+- Detailed patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
+- No local Lean/Lake, proof placeholders, statement changes, trust bypasses, or heartbeat increases.
