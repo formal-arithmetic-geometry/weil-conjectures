@@ -29,7 +29,7 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-local instance {X : Scheme.{u}} (M : X.Modules) {U V : X.Opens} (j : U ⟶ V) :
+noncomputable local instance {X : Scheme.{u}} (M : X.Modules) {U V : X.Opens} (j : U ⟶ V) :
     SMul Γ(X, U)
       ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map j.op).hom).obj
         (M.val.obj (.op U))) :=
