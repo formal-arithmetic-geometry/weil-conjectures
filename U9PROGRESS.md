@@ -345,3 +345,6 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 08:24 +0800 — small generic rewrite boundary
 - K4-20261105T082207.log rc=1 (11s for ScalarWeilLaw): stable generic/rational helpers GREEN, copied C4 root modules replayed successfully. Kernel timeout is gone. Two elaboration failures remain: conversion of the inverse-square hypothesis into the categorical helper, and rewrite matching through the transparent purityPullbackUnit wrapper.
 - Returned the structure proof to the direct inverse cancellation, omitting only the offending dependent Functor.comp_obj rewrite; gave the unit equation an explicit original-unit type before rewriting. New final encoding still pending.
+
+## 2026-11-05 08:24 +0800 — two associativity conversions
+- K4-20261105T082324.log reaches only two rewrite mismatches (2.2s, no timeout): the identity on a functor-composition object needs an explicit reducible rewrite, and the expanded two-unit composite needs its right-associated structure equation. Repaired with erw for the identity and an explicitly normalized local equation for N.

@@ -67,8 +67,9 @@ lemma purityFrobeniusProjUnit_structure
     Λ a.geometricFiberProj a.geometricGaloisFrobenius_hom_comp_geometricFiberProj M
   simp only [CondensedRing.upperStarForgetIso_hom_app, Mod.forget_map] at h
   rw [← cancel_mono ((CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).inv.app M).hom,
-    Category.assoc, Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app, Mod.id_hom',
-    Category.comp_id, Category.assoc, CondensedRing.geometricFiberProjUpperStarFrobeniusIso, h]
+    Category.assoc, Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id_app, Mod.id_hom']
+  erw [Category.comp_id]
+  rw [CondensedRing.geometricFiberProjUpperStarFrobeniusIso, h]
   exact (Iso.hom_inv_id_app_assoc (purityAbelianFrobeniusFactorIso a) M.X _).symm
 
 attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
@@ -95,6 +96,9 @@ theorem purityExtendPullbackIso_weil
         (purityExtendWeakPullbackIso Λ a.geometricFiberProj M N e).hom.hom =
       e.hom.hom ≫ CondensedRing.upperStarUnitHom Λ a.geometricFiberProj N := by
     exact purityExtendWeakPullbackIso_unit Λ a.geometricFiberProj M N e
+  have hstructureN := purityFrobeniusProjUnit_structure Λ a N
+  dsimp only [purityFrobeniusProjUnit] at hstructureN
+  rw [Category.assoc] at hstructureN
   refine Mod.hom_ext _ _ ?_
   rw [← cancel_epi (purityFrobeniusProjUnit Λ a M), Mod.zsmul_hom,
     Preadditive.comp_zsmul, Mod.comp_hom', Mod.comp_hom',
@@ -102,7 +106,8 @@ theorem purityExtendPullbackIso_weil
     hunit, purityFrobeniusProjUnit, Category.assoc,
     CondensedRing.upperStarUnitHom_map_hom_assoc, ← Functor.map_comp_assoc,
     hunit, Functor.map_comp_assoc,
-    purityFrobeniusProjUnit_structure, ← Category.assoc, he,
+    hstructureN,
+    ← Category.assoc ((a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map e.hom.hom), he,
     Preadditive.zsmul_comp, Category.assoc]
 
 end AlgebraicGeometry.ProEtale
