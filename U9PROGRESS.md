@@ -142,20 +142,19 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ537 in progress
+# BZ537: assigned module and first downstream layer green
 
-- Branch: `u9/BZ537`; assigned module:
-  `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.PushforwardZeroSingle`.
-- The two quotient/Qh API repairs are applied; all seven declaration signatures and
-  existing docstrings are unchanged. Their remote validation is pending.
-- First remote check hit missing imports in unowned dependencies. Merged the
-  coordinator's `bump/v4.35` at `8af5cb32483`, which supplies those imports.
-- Second check (`128f9db601`, log `BZ537-20261106T031801.log`) is blocked in
-  BZ581-owned `Presheaf.InternalHom:375` before the assigned target is reached.
-- On user-requested continuation, reread the brief, progress file, and fix notes.
-  BZ581 has now started; wait for its dependency repair and merge it, then retry.
-- Once green, build direct importer `PushforwardZeroDescent`, then its importer
-  `PushforwardLimit`, following the brief's downstream ownership rule.
-- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ537.md`.
-- No local Lean/Lake, proof placeholders, forbidden shortcuts, or heartbeat raises.
-- Do not write DONE until the assigned target passes `ucheck-bump`.
+- Branch: `u9/BZ537`.
+- `PushforwardZeroSingle` and direct importer `PushforwardZeroDescent` passed
+  `ucheck-bump` together: rc=0, failed=0, 4213 jobs.
+- Validated source commit: `0716db1317`; remote log:
+  `/home/ubuntu/u9/logs/BZ537-20261106T034033.log`.
+- Full local log: `/home/ubuntu/u9/bz/BUILD-BZ537-resume2-full.log`.
+- Merged owner BZ581's `216c997cc4f` to clear the InternalHom prerequisite;
+  no BZ537 edits to that dependency.
+- Repairs use direct Q for the single-complex comparison, explicit public Qh/Q
+  comparison isomorphisms in degree-zero homology, and `erw` for the transported
+  naturality proof. All seven declaration signatures and docstrings are unchanged.
+- Next: validate second-layer importer `PushforwardLimit`, then write DONE.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ537.md`.
+- No local Lean/Lake, sorries, forbidden proof shortcuts, or heartbeat increases.
