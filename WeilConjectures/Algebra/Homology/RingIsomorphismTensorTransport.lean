@@ -270,6 +270,16 @@ private local instance scalarRingSheafCoproducts (A : Sheaf J RingCat.{r})
     PresheafOfModules.hasColimitsOfShape _ _
   exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
+private local instance scalarRingSheafSmallCoproducts (A : Sheaf J RingCat.{r})
+    (I : Type) : HasColimitsOfShape (Discrete I) (SheafOfModules.{r} A) := by
+  have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A.obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
+private local instance scalarRingSheafFiniteCoproducts (A : Sheaf J RingCat.{r}) :
+    HasFiniteCoproducts (SheafOfModules.{r} A) :=
+  ⟨fun n ↦ scalarRingSheafSmallCoproducts A (Fin n)⟩
+
 private local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r}) :
     HasCoproducts.{0} (scalarModules J A) := by
   intro I
@@ -287,6 +297,20 @@ private local instance scalarGradedHasTensor (A : Sheaf J CommRingCat.{r}) :
   intro X Y n
   exact (scalarSheafCoproducts A _).has_colimit _
 
+private local instance scalarComplexHasTensor (A : Sheaf J CommRingCat.{r})
+    (P Q : CochainComplex (scalarModules J A) ℤ) : HomologicalComplex.HasTensor P Q := by
+  intro n
+  exact (scalarSheafCoproducts A _).has_colimit _
+
+private local instance scalarTensorLeftColimits (A : Sheaf J CommRingCat.{r})
+    (M : scalarModules J A) : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
+  have := tensorLeft_preservesColimits_independentCoefficients A M
+  exact preservesColimitsOfSize_shrink (tensorLeft M)
+
+private local instance scalarTensorRightColimits (A : Sheaf J CommRingCat.{r})
+    (M : scalarModules J A) : PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
+  preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+
 /-- The existing monoidal structure on module cochain complexes, cached for elaboration.
 Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
@@ -297,6 +321,7 @@ noncomputable instance (priority := 2000) ringIsoCochainMonoidal
       (PresheafOfModules.{r}
         ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A).obj) :=
     fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  let : HasFiniteCoproducts (scalarModules J A) := scalarSheafFiniteCoproducts A
   exact HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
 
 /-- The underlying structure of the existing total tensor, cached for elaboration.
@@ -309,6 +334,7 @@ noncomputable instance (priority := 2000) ringIsoCochainMonoidalStruct
       (PresheafOfModules.{r}
         ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A).obj) :=
     fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  let : HasFiniteCoproducts (scalarModules J A) := scalarSheafFiniteCoproducts A
   exact HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
 
 /-- Localization of termwise restriction, allowing independent localization universes.
