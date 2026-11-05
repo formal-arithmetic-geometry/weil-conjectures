@@ -88,15 +88,11 @@ private theorem localizationModelMap_left (i : ℤ)
     apply HomologicalComplex.Hom.ext
     funext j
     apply ModuleCat.hom_ext
-    let : Module A (((restrict R A).obj Q).X j) :=
-      inferInstanceAs (Module A (Q.X j))
-    let : Module Aq (((restrict R Aq).obj ((extend A Aq).obj Q)).X j) :=
-      inferInstanceAs (Module Aq (((extend A Aq).obj Q).X j))
     ext y
     change uQ.f j (a • (y : Q.X j)) =
       algebraMap A Aq a • (uQ.f j y : ((extend A Aq).obj Q).X j)
     rw [huQ, huQ]
-    let : Algebra A Aq := (algebraMap A Aq).toAlgebra
+    let : Module A Aq := Module.compHom Aq (algebraMap A Aq)
     rw [← TensorProduct.smul_tmul, TensorProduct.smul_tmul']
     rfl
   have hd : L.derived.map (V.map α) ≫ L.derived.map v ≫ ζ.hom.app _ =
