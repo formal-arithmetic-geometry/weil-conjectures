@@ -327,3 +327,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 08:12 +0800 — upstream documents the workaround
 - The previous 08:15 timestamp was estimated incorrectly; the actual clock was 08:10 when that check ran. K4-20261105T080943.log confirms the direct integral commutativity proof passes but the unit still times out (42s). Removed the failed unit/temporary instance; retained only the validated functor comparison.
 - Crucial existing implementation note: TateTwist/TateModuleUpperStar.lean:40–47 documents exactly this kernel timeout and solves it by specializing the integral ring ONLY after changing coefficients to ℚ̄_l. Prepared the analogous generic coefficient-change/root-trivialization construction, with a concrete result mentioning only rational pullback modules. This differs from the failed specializations with integral result types.
+
+## 2026-11-05 08:12 +0800 — rational trivialization GREEN
+- SmoothPurityRationalTrivialization is GREEN, rc=0, log /home/ubuntu/u9/logs/K4-20261105T081138.log. The first check only needed the explicit local Mod.extendScalarsMonoidal instance. Concrete purityRationalTateTrivialization specializes Λ=ℤ_l AFTER extending coefficients; both source and target are Qbar pullbacks, and no kernel timeout occurs.
+- This confirms the workaround documented in upstream TateModuleUpperStar. Next: carry the Frobenius relation generically through coefficient extension and specialize its Qbar-only conclusion. No actual Weil encoding/DONE yet.
