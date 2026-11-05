@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSe
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Image of an ideal power after closed pushforward
 

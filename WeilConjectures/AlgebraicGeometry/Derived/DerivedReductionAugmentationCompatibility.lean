@@ -49,7 +49,7 @@ private theorem exactSquare_fac
     (e : CX ⋙ G ≅ F ⋙ CY) (P : CochainComplex B ℤ) :
     ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso F CY).hom.app (DerivedCategory.Q.obj P) ≫
+          (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
         CY.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
         CY.mapDerivedCategoryFactors.hom.app
           ((F.mapHomologicalComplex (.up ℤ)).obj P) =
@@ -127,7 +127,7 @@ theorem derivedReduction_augmentationOfCounits
       G.mapDerivedCategory.map (iX.app K) ≫ τ.hom.app K =
         ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
           Functor.mapDerivedCategoryNatIso c ≪≫
-            Functor.mapDerivedCategoryCompIso F CY).hom.app K ≫
+            (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app K ≫
           iY.app (F.mapDerivedCategory.obj K) := by
   have heq :
     Functor.whiskerRight iX G.mapDerivedCategory ≫ τ.hom =

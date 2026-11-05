@@ -772,7 +772,7 @@ noncomputable def coefficientSequenceDerivedTransition {m n : ℕ} (h : n ≤ m)
     (Functor.whiskerRight
       (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h)
         (ComplexShape.up ℤ)) DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
+    ((Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)).symm
       (normalizedDVRModuleRes l E W h)).hom
 
 /-- Normalization of an actual derived semilinear system, using the dependency's
@@ -1139,11 +1139,11 @@ noncomputable def coefficientRestrictedEvaluationIso (n : ℕ) :
   letI := HasDerivedCategory.standard (coefficientSequenceModules l E W)
   letI := (scalarReductionRestriction_exact l E W n).1
   letI := (scalarReductionRestriction_exact l E W n).2
-  (Functor.mapDerivedCategoryCompIso (coefficientSequenceRestriction l E W)
+  ((Functor.mapDerivedCategoryCompIso (coefficientSequenceRestriction l E W)).symm
     ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n))).symm ≪≫
     Functor.mapDerivedCategoryNatIso
       (eqToIso (coefficientSequenceRestriction_evaluation l E W n)) ≪≫
-    Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
+    (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)).symm
       (scalarReductionRestriction l E W n)
 
 /-- The actual projection L N to the restricted nth coefficient component.

@@ -645,13 +645,13 @@ private instance flattenElementsFull
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {A B : Sheaf J (Type u)} (b : B ⟶ A) : (flattenElements b).Full where
   map_surjective {X Y} f := by
-    have hA : A.obj.map f.unop.val Y.unop.1.unop.unop.2 =
+    have hA : A.obj.map f.unop.hom Y.unop.1.unop.unop.2 =
         X.unop.1.unop.unop.2 := by
       rw [← Y.unop.2.property]
-      change A.obj.map f.unop.val (b.hom.app _ Y.unop.2.val) = _
+      change A.obj.map f.unop.hom (b.hom.app _ Y.unop.2.val) = _
       rw [← NatTrans.naturality_apply]
-      change b.hom.app _ (B.obj.map f.unop.val Y.unop.2.val) = _
-      have hf : B.obj.map f.unop.val Y.unop.2.val = X.unop.2.val := f.unop.property
+      change b.hom.app _ (B.obj.map f.unop.hom Y.unop.2.val) = _
+      have hf : B.obj.map f.unop.hom Y.unop.2.val = X.unop.2.val := f.unop.map_val
       rw [hf]
       exact X.unop.2.property
     let g : X.unop.1.unop ⟶ Y.unop.1.unop :=
@@ -809,7 +809,7 @@ private instance representableElementsFaithful
     (representableElements J U).Faithful where
   map_injective {X Y} f g h := by
     ext
-    exact congrArg (fun k ↦ k.unop.val.unop) h
+    exact congrArg (fun k ↦ k.unop.hom.unop) h
 
 private theorem representableElements_cover_iff
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C)
@@ -844,16 +844,16 @@ private instance representableElementsLocallyFull
   functorPushforward_imageSieve_mem {X Y} f := by
     rw [representableElements_cover_iff, J.mem_over_iff]
     let η := toSheafify J (yoneda.obj U)
-    have he : η.app (op X.left) (f.unop.val.unop ≫ Y.hom) = η.app (op X.left) X.hom := by
-      change η.app _ ((yoneda.obj U).map f.unop.val Y.hom) = _
+    have he : η.app (op X.left) (f.unop.hom.unop ≫ Y.hom) = η.app (op X.left) X.hom := by
+      change η.app _ ((yoneda.obj U).map f.unop.hom Y.hom) = _
       rw [NatTrans.naturality_apply]
       exact f.unop.property
     apply J.superset_covering _ (Presheaf.equalizerSieve_mem J η _ _ he)
     intro V k hk
-    change k ≫ (f.unop.val.unop ≫ Y.hom) = k ≫ X.hom at hk
+    change k ≫ (f.unop.hom.unop ≫ Y.hom) = k ≫ X.hom at hk
     rw [Sieve.overEquiv_iff]
-    let l : Over.mk (k ≫ X.hom) ⟶ Y := Over.homMk (k ≫ f.unop.val.unop)
-      (by change (k ≫ f.unop.val.unop) ≫ Y.hom = k ≫ X.hom
+    let l : Over.mk (k ≫ X.hom) ⟶ Y := Over.homMk (k ≫ f.unop.hom.unop)
+      (by change (k ≫ f.unop.hom.unop) ≫ Y.hom = k ≫ X.hom
           simpa only [Category.assoc] using hk)
     refine ⟨l, ?_⟩
     apply Quiver.Hom.unop_inj

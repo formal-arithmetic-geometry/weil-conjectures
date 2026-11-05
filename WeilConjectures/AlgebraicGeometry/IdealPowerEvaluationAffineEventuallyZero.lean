@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts
 import all WeilConjectures.AlgebraicGeometry.AffineSectionCoverTwistGeneration
 import all WeilConjectures.AlgebraicGeometry.CoherentAffineMapSupportRadical
 import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine local vanishing of ideal-power evaluation
 

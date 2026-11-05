@@ -67,8 +67,8 @@ def derivedSquare {A B C D : Type t} [Category.{h} A] [Category.{h} B]
     [PreservesFiniteLimits K] [PreservesFiniteColimits K] (e : F ⋙ G ≅ H ⋙ K) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory ⋙ K.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
-    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso H K
+  (Functor.mapDerivedCategoryCompIso F G) ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso H K).symm
 
 /-- All termwise and localized forms of the two equations for the same square.
 The tower index 0 denotes the original index 1.

@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechExchangeResolution
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The alternating Čech calculation for the pinned derived mate
 

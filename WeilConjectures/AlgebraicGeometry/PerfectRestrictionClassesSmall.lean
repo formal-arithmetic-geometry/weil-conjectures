@@ -177,7 +177,7 @@ theorem perfectRestriction_classes_small (X : Scheme.{u}) (W : X.Opens)
         IsPerfect A.toScheme (d.functor.obj Z.obj) := by
     obtain ⟨E, hE, ⟨i⟩⟩ := Z.property
     let c : (R ⋙ e.functor).mapDerivedCategory.obj E.obj ≅ d.functor.obj Z.obj :=
-      (Functor.mapDerivedCategoryCompIso R e.functor).app E.obj ≪≫ d.functor.mapIso i
+      (Functor.mapDerivedCategoryCompIso R e.functor).symm.app E.obj ≪≫ d.functor.mapIso i
     have hqc : schemeDerivedQCohProperty A.toScheme
         ((R ⋙ e.functor).mapDerivedCategory.obj E.obj) :=
       (schemeDerivedQCoh_openRestriction_iff Y A E.obj).2 (fun n ↦ by

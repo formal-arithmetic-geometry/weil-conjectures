@@ -687,7 +687,7 @@ private theorem derivedPullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (Functor.mapDerivedCategorySquareIso (pullComparison Λ f))
     (Functor.mapDerivedCategorySquareIso (pullComparison Λ (f ≫ g)))
     (Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-      Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+      (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)).symm
         (CondensedRing.upperStar Λ f))
     (derivedPullbackComposition Λ f g)
     (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g)

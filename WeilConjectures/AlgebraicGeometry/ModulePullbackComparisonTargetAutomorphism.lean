@@ -180,7 +180,7 @@ private theorem modulePullback_single_isLE
     flatComplexDerivedPullback a P ⟨0, hbound⟩ hflat
   have : F.Additive := hAdd
   have : P.IsStrictlyLE 0 := (CochainComplex.isStrictlyLE_iff P 0).2 hbound
-  let e' := e ≪≫ (derivedPullback a).mapIso (asIso (DerivedCategory.Q.map s))
+  let e' := e ≪≫ (derivedPullback a).mapIso ((DerivedCategory.quotientCompQhIso A).app P ≪≫ asIso (DerivedCategory.Q.map s))
   have : CochainComplex.IsStrictlyLE
       ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) 0 :=
     inferInstance
