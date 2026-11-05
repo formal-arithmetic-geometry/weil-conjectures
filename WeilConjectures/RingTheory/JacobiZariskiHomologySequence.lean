@@ -69,7 +69,7 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
     constructor
     · intro hx
       obtain ⟨y, hy⟩ := (hdp x.down).mp (congrArg ULift.down hx)
-      exact ⟨⟨y⟩, ULift.ext _ _ hy⟩
+      exact ⟨⟨y⟩, congrArg ULift.up hy⟩
     · rintro ⟨y, hy⟩
       apply ULift.ext
       exact (hdp x.down).mpr ⟨y.down, congrArg ULift.down hy⟩
@@ -216,7 +216,7 @@ theorem jacobiZariski_homology_sequence
       (∀ (g : Q.ker) (h : H1Cotangent B C),
         Q.h1Cotangentι h = Extension.Cotangent.mk g →
         δ h = ∑ α ∈ g.val.support,
-          (α.prod (fun c n ↦ c ^ n)) ⊗ₜ[B] D A B (MvPolynomial.coeff α g.val)) ∧
+          (α.prod (fun c n ↦ c ^ n)) ⊗ₜ[B] D A B (AddMonoidAlgebra.coeff g.val α)) ∧
       Function.Exact u v ∧ Function.Exact v δ ∧ Function.Exact δ w ∧
       Function.Exact w z ∧ Function.Surjective z ∧
       ((IsZero (((Tor' (ModuleCat (ULift.{max u v w} B)) 1).obj
