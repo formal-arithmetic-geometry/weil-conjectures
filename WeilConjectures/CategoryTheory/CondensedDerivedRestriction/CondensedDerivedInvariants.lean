@@ -6,6 +6,13 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.CondensedBar.CondensedEquivariantBarData
+public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarAction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PullbackComparisonOfAcyclic
+public import WeilConjectures.CategoryTheory.InternalActionSite.Condensed.ProfiniteActionScalarAcyclic
+public import WeilConjectures.CategoryTheory.InternalActionSite.Condensed.ProfiniteActionAbelian
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZeroUnit
+public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarInvariants
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionInvariants
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
@@ -42,7 +49,7 @@ Proof: use the action-site presentation and the internal/sectionwise module equi
 Kernels and sheafified cokernels carry the induced action; normality and finite products
 are computed on underlying internal modules. -/
 theorem actionAbelianData : Nonempty (ActionAbelian A G) := by
-  sorry
+  exact ActionSite.actionAbelian_nonempty A G
 
 /-- Abelian-category structure on the existing action category; its data fields are
 propositions, so this selects no unspecified mathematical object.
@@ -54,7 +61,7 @@ Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: the action-site module equivalence preserves all limits and colimits; apply the
 Grothendieck abelian theorem for modules on a small ringed site. -/
 @[instance] theorem actionGrothendieck : IsGrothendieckAbelian.{u + 1} (Equivariant A G) := by
-  sorry
+  exact ActionSite.isGrothendieckAbelian A G
 
 /-- Forgetting the action creates kernels and cokernels and detects exactness.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
@@ -65,7 +72,7 @@ theorem forgetExact :
     PreservesFiniteColimits (CondensedBar.forgetAction (A := A) (G := G)) ∧
     (∀ S : ShortComplex (Equivariant A G),
       S.Exact ↔ (S.map (CondensedBar.forgetAction (A := A) (G := G))).Exact) := by
-  sorry
+  exact ActionSite.forgetAction_exact A G
 
 private theorem forgetReflects (A : CondensedBar.Ring.{u}) (G : Type u) [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] :
@@ -96,8 +103,8 @@ isomorphism commuting with its inclusion.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: fully fixed sections form submodules stable under restriction and gluing. Restrict
 codomains of maps from trivial actions; composition with the inclusion is the inverse. -/
-theorem invariantsExist : Nonempty (Invariants A G) := by
-  sorry
+theorem invariantsExist : Nonempty (Invariants A G) :=
+  Profinite.CondensedAction.nonempty_invariants
 
 /-- Trivial action is additive and exact on the underlying modules.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
@@ -266,7 +273,8 @@ theorem degreeZero : ∃ e :
             (.up ℤ) 0).hom.app N)) ≫
         (DerivedCategory.singleFunctorCompHomologyFunctorIso (Modules A) 0).hom.app
           ((invariants A G).functor.obj N) := by
-  sorry
+  have := (invariants A G).adjunction.isRightAdjoint
+  exact Functor.exists_homologyZero_iso_rightDerivedFunctorUnitQ _
 
 /-- The degree-zero identification fixed by the computation unit. That equation
 uniquely determines this isomorphism, since the two comparison maps in degree zero
@@ -283,8 +291,8 @@ variable {A' : CondensedBar.Ring.{u}}
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: use the same underlying abelian sheaf and action, and restrict its scalar action
 along the given ring map. The displayed underlying comparison is identity on sections. -/
-theorem scalarActionExist (a : A ⟶ A') : Nonempty (ScalarAction a G) := by
-  sorry
+theorem scalarActionExist (a : A ⟶ A') : Nonempty (ScalarAction a G) :=
+  nonempty_scalarAction a G
 
 /-- Scalar restriction on actions, fixed by its underlying module and section action.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
@@ -345,7 +353,7 @@ theorem scalarInvariantsExist (a : A ⟶ A') :
       ∀ N, (invariants A G).inclusion.app ((scalarAction a).functor.obj N) ≫
           (scalarAction a).underlying.hom.app N =
         e.hom.app N ≫ (Mod.comap a.hom.hom).map ((invariants A' G).inclusion.app N) := by
-  sorry
+  exact existsUnique_scalarInvariantsIso _ _ _
 
 /-- The unique scalar/invariants comparison fixed by the invariant inclusions.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
@@ -374,7 +382,8 @@ theorem scalarComparisonExist (a : A ⟶ A') :
           (Mod.comap a.hom.hom).mapDerivedCategoryFactors.inv.app
             (((invariants A' G).functor.mapHomologicalComplex (.up ℤ)).obj K) ≫
           (scalarBase a).map ((invariants A' G).functor.rightDerivedFunctorUnitQ K) := by
-  sorry
+  exact Functor.existsUnique_rightDerivedFunctor_comparison_of_acyclic _ _ _ _ _
+    fun I _ J _ j _ ↦ scalarAction_quasiIso_invariants_map (scalarAction a) (invariants A G) I J j
 
 /-- The unique derived coefficient isomorphism normalized by the computation units.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/

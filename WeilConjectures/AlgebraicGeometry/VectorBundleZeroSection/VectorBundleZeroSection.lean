@@ -404,6 +404,34 @@ theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modu
   have heq := affineChart_equations S d F U
   exact ⟨hi, heq.1, heq.2⟩
 
+/-- On an inclusion of affine opens, the chart change is the spectrum of the
+symmetric-algebra restriction, so these are exactly the affine pieces glued in the node.
+Source: Stacks Tag 01LX (blueprint: def-asd-vector-bundle-zero-section).
+Proof: naturality of the counit algebra isomorphism and of the sheafification unit
+identifies the maps on section rings with SymmetricAlgebraSheaf.restriction. Apply
+naturality of toSpecΓ and contravariant functoriality of Spec. -/
+theorem affineChart_naturality (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] (U V : S.affineOpens) (h : U.1 ≤ V.1) :
+    Scheme.Hom.resLE (𝟙 (scheme S d F)) ((π S d F) ⁻¹ᵁ V.1) ((π S d F) ⁻¹ᵁ U.1)
+        ((π S d F).preimage_mono h) ≫ affineChart S d F V =
+      affineChart S d F U ≫
+        Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.restriction F (homOfLE h).op)) := by
+  simp only [Scheme.Hom.resLE_id, affineChart, Category.assoc]
+  rw [← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_assoc]
+  simp only [← Spec.map_comp]
+  congr 1
+  congr 1
+  apply CommRingCat.hom_ext
+  apply RingHom.ext
+  intro a
+  have hA := (algebraIso S d F).hom.right.hom.naturality (homOfLE h).op
+  have hθ := (toSheafify (Opens.grothendieckTopology S)
+    (SymmetricAlgebraSheaf.presheaf F)).naturality (homOfLE h).op
+  exact (CategoryTheory.congr_fun hA
+    (SymmetricAlgebraSheaf.sectionMap F (op V.1) a)).symm.trans
+      (congrArg ((algebraIso S d F).hom.right.hom.app (op U.1))
+        (CategoryTheory.congr_fun hθ a).symm)
+
 /-- A Zariski trivialization is a frame of the given module, not an arbitrary isomorphism
 of schemes. Source: blueprint order 1968 (blueprint: def-asd-vector-bundle-zero-section). -/
 def Trivialization (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (V : S.Opens) :=
