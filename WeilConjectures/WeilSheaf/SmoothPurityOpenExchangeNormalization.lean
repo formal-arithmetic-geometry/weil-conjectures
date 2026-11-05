@@ -96,7 +96,8 @@ theorem purity_lowerShriekBaseChange_comp_open (hP : P.IsIsoRefinementPushforwar
   rw [reassoc_of% hc]
   ext K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.rightUnitor_hom_app, Category.comp_id, Functor.map_comp, Category.assoc]
+    Functor.rightUnitor_hom_app, NatTrans.id_app, Category.id_comp, Category.comp_id,
+    Functor.map_comp, Category.assoc]
   rw [purity_trivialOpenExchange_app]
 
 end AlgebraicGeometry.ProEtale.CondensedRing.BoundedConstructiblePushforwardData

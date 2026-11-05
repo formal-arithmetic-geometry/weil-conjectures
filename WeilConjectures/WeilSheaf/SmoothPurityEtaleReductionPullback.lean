@@ -7,6 +7,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingUpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperStarReading
+public import WeilConjectures.WeilSheaf.SmoothPurityPullbackCubeComposition
 
 /-!
 # Pullback-square coherence for integral reduction read on the étale site
@@ -70,11 +71,8 @@ theorem purity_etaleReductionUpperStarIso_cube (sq : CommSq g' f' f g)
   simp only [etaleReductionUpperStarIso_eq, Iso.trans_inv, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.map_comp, Category.assoc]
-  change _ = _
-  rw [reassoc_of% nf]
-  rw [← (finiteEtaleReading ℓ E n X').map_comp_assoc,
-    ← (finiteEtaleReading ℓ E n X').map_comp_assoc, hred]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hread, reassoc_of% ng]
+  rw [reassoc_of% nf, reassoc_of% ng]
+  exact Functor.purity_compose_pullback_cubes (finiteEtaleReading ℓ E n X')
+    _ _ _ _ _ _ _ _ _ _ _ hred hread
 
 end AlgebraicGeometry.ProEtale.CondensedRing

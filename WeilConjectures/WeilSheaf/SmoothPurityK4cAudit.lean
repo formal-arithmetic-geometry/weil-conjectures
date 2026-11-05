@@ -1,0 +1,13 @@
+module
+
+public import WeilConjectures.WeilSheaf.Strategy3.Audit
+public import WeilConjectures.WeilSheaf.SmoothPurityK4CanonicalAudit
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarDescentConjugation
+public import WeilConjectures.WeilSheaf.SmoothPurityIntegralOpenExchange
+public import WeilConjectures.WeilSheaf.SmoothPurityOpenReductionExchange
+
+/-! Complete audit of the retained K4c construction and its open-exchange support. -/
+
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purity_isMateSquare_openEtaleReduction
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purity_squareCompatible_openEtaleReductionExchange
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purity_integralOpenExchange_eq_inv_baseChange

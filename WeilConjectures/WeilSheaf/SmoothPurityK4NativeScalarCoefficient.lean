@@ -13,7 +13,7 @@ import WeilConjectures.Tactic.ExactModProofs
 /-! # Changing coefficients in a scalar Frobenius relation -/
 
 set_option profiler true
-set_option profiler.threshold 1
+set_option profiler.threshold 0
 
 @[expose] public section
 
