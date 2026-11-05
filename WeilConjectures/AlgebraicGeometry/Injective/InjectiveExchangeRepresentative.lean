@@ -110,7 +110,7 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
     ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩
   let H := (HomotopyCategory.Plus.quotient _).obj M
   let q' : K ≅ DerivedCategory.Plus.Qh.obj H :=
-    DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Q.obj M)
+    DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Qh.obj H)
       (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
   let sq := (IsPullback.of_hasPullback f
     (Scheme.strictHenselizationStructuralMap s)).toCommSq
@@ -155,13 +155,15 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
   have hs := smallModel_injectiveExchange_source_transport f K J q
   have hs' :
       U.mapDerivedCategory.map (smallModel_sourceInjectiveDirectImageIso f K J q).inv =
+        U.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).inv.app
+          ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) ≫
         DerivedCategory.Plus.ι.map (U.mapDerivedCategoryPlus.map
-          (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) :=
-    congrArg U.mapDerivedCategory.map hs
-  have result := assemble_exchange DerivedCategory.Plus.ι
-    (U.mapDerivedCategoryFactors.inv.app
-      ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ hs' hb
-    (smallModel_injectiveExchange_target_transport f s K J q)
-  exact result
+          (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) := by
+    simpa only [Functor.map_comp] using congrArg U.mapDerivedCategory.map hs
+  dsimp only
+  rw [hs']
+  simp only [Category.assoc, ← DerivedCategory.Plus.ι.map_comp]
+  rw [hb]
+  exact smallModel_injectiveExchange_target_transport f s K J q
 
 end AlgebraicGeometry.Etale
