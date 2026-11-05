@@ -47,9 +47,9 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-universe u
+universe u v
 
-private local instance (R : Type u) [Ring R] (J : Type u) :
+local instance (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
     HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
 
