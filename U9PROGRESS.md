@@ -105,3 +105,16 @@
 - No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ407 in progress
+
+- Branch: `u9/BZ407`; starting commit: `98654719b`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryStrictSquare`.
+- The user instructed continuation after the exact three-hypothesis API correction proposal.
+  Applied those corrections to preserve the maps under Mathlib's reversed composition isomorphism.
+- Matching proof changes use the new orientation and `Iso.eq_inv_comp` cancellation.
+- Baseline reproduced the three reported errors; repaired validation is next.
+- Fix patterns and full baseline log: `/home/ubuntu/u9/bz/FIXES-BZ407.md` and
+  `/home/ubuntu/u9/bz/BUILD-BZ407-baseline.log`.
+- After the assigned module is green, check its four direct importers and one more layer.
+- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
