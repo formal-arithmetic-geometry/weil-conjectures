@@ -26,6 +26,26 @@ open scoped CategoryTheory.Obj
 
 variable {X : Scheme.{u}} {ℓ : ℕ} [Fact ℓ.Prime] {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)]
 
+/-- A reduction-step equation gives the transition equation used by reconstruction. -/
+lemma derivedReductionStep_compatible
+    {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))} (n : ℕ)
+    (s : (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1 + 1))).leftDerivedFunctor.obj K ⟶
+      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1 + 1))).leftDerivedFunctor.obj L)
+    (t : (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ⟶
+      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L)
+    (h : derivedReductionStep (n + 1) s = t) :
+    (Mod.comap (integersModPowReduction X ℓ E (n + 1 + 1))).mapDerivedCategory.map s ≫
+        reductionTransition E (n + 1) L =
+      reductionTransition E (n + 1) K ≫
+        (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.map t := by
+  subst t
+  exact Mod.map_comp_derivedReductionTransition_app
+    (integersModPowReduction X ℓ E (n + 1 + 1))
+    (integersModPowTransition X ℓ E (n + 1))
+    (integersModPowReduction X ℓ E (n + 1))
+    (integersModPowReduction_comp_integersModPowTransition X ℓ E (n + 1)) s
+
 /-- A property stable under reduction can be imposed on every reduction of the lift. -/
 theorem exists_forall_isIso_property_derivedReduction_map
     {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -58,34 +78,10 @@ theorem exists_forall_isIso_property_derivedReduction_map
   obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq hL (fun n ↦ (t n).hom) fun n ↦ by
     have he : derivedReductionStep (n + 1) (t (n + 1)).hom = (t n).hom :=
       congrArg Iso.hom (ht n)
-    exact (Mod.map_comp_derivedReductionTransition_app
-      (integersModPowReduction X ℓ E (n + 1 + 1))
-      (integersModPowTransition X ℓ E (n + 1))
-      (integersModPowReduction X ℓ E (n + 1))
-      (integersModPowReduction_comp_integersModPowTransition X ℓ E (n + 1))
-      (t (n + 1)).hom).trans
-        (congrArg (fun s ↦ reductionTransition E (n + 1) K ≫
-          (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.map s) he)
+    exact derivedReductionStep_compatible n _ _ he
   refine ⟨f, fun n ↦ ?_⟩
   rw [hf n]
   exact ⟨inferInstance, htP n⟩
 
-/-- Equality of reductions detects equality when the Milnor obstruction vanishes. -/
-theorem eq_of_derivedReduction_map_eq
-    {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
-    (hL : derivedCompleteIntegers ℓ E X L)
-    [∀ n : ℕ, Finite (K⟦(1 : ℤ)⟧ ⟶
-      (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L))]
-    {f g : K ⟶ L}
-    (h : ∀ n : ℕ,
-      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map f =
-        (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map g) :
-    f = g := by
-  apply eq_of_comp_unit_eq hL
-  intro n
-  rw [(derivedReduction_map_eq_iff (n + 1) f _).1 (h n),
-    (derivedReduction_map_eq_iff (n + 1) g _).1 rfl]
 
 end AlgebraicGeometry.ProEtale

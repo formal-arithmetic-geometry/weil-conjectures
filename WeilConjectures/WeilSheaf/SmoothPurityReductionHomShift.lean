@@ -33,8 +33,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 after adjunction and étale reading they are negative extensions between Tate lines. -/
 theorem finite_shift_hom_integralOrientation_reduction (n : ℕ) :
     Finite
-      ((((shiftFunctor _ (2 * d : ℤ)).obj
-          (integralTateTwistBoundedConstructible ℓ E X.hom d)).obj)⟦(1 : ℤ)⟧ ⟶
+      ((shiftFunctor _ (1 : ℤ)).obj
+          ((shiftFunctor _ (2 * d : ℤ)).obj
+            (integralTateTwistBoundedConstructible ℓ E X.hom d)).obj ⟶
         (Mod.comap (integersModPowReduction X.left ℓ E n)).mapDerivedCategory.obj
           ((Mod.extendScalars (integersModPowReduction X.left ℓ E n)).leftDerivedFunctor.obj
             ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E f).obj (𝟙_ _)).obj)) := by

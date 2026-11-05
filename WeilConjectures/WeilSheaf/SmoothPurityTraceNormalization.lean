@@ -45,10 +45,11 @@ lemma purity_orientation_map_eq_iff_trace_eq
     (S : A ⥤ A') (T : B ⥤ B') (α : L ⋙ T ≅ S ⋙ L')
     (β : R ⋙ S ≅ T ⋙ R')
     (hβ : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α.inv)).natTrans = β.hom)
-    {K : A} {U : B} (φ : K ⟶ R.obj U) (θ : S.obj K ⟶ S.obj (R.obj U)) :
-    S.map φ = θ ↔ T.map ((adj.homEquiv _ _).symm φ) =
+    {K : A} {U : B} (φ : K ⟶ R.obj U)
+    (θ θ₀ : S.obj K ⟶ S.obj (R.obj U)) (hθ : θ = θ₀) :
+    S.map φ = θ₀ ↔ T.map ((adj.homEquiv _ _).symm φ) =
       α.hom.app K ≫ (adj'.homEquiv _ _).symm (θ ≫ β.hom.app U) := by
-  rw [← cancel_mono (β.hom.app U)]
+  rw [← hθ, ← cancel_mono (β.hom.app U)]
   have h := purity_orientation_eq_iff_trace_eq adj adj' S T α φ (θ ≫ β.hom.app U)
   rw [hβ] at h
   exact h
@@ -100,17 +101,13 @@ theorem isIntegralSmoothOrientation_iff_trace
   unfold IsIntegralSmoothOrientation
   apply forall_congr'
   intro n
-  have hr := canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1)
-  refine Iff.trans (show _ ↔ (etaleReduction ℓ E.1 (n + 1) X).map φ =
-      (finiteEtaleReading ℓ E.1 (n + 1) X).map
-        (canonicalFiniteIntegralOrientationIso ℓ E f d (n + 1)).hom from
-    ⟨fun h ↦ h.trans hr.symm, fun h ↦ h.trans hr⟩) ?_
   exact purity_orientation_map_eq_iff_trace_eq
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
     (Etale.rightDerivedUpperShriekAdjunction _ f.left)
     (etaleReduction ℓ E.1 (n + 1) X) (etaleReduction ℓ E.1 (n + 1) Y)
     (etaleReductionLowerShriekIsoOfCompactification ℓ E.1 (n + 1)
       (compactificationOverField f))
-    (etaleReductionUpperShriekIso ℓ E.1 (n + 1) f) rfl φ _
+    (etaleReductionUpperShriekIso ℓ E.1 (n + 1) f) rfl φ _ _
+    (canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

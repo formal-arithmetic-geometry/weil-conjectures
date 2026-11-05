@@ -61,14 +61,16 @@ def CanonicalIntegralOrientationCompatible : Prop :=
 theorem exists_isIntegralSmoothOrientation_of_compatible
     (h : CanonicalIntegralOrientationCompatible ℓ E f d) :
     ∃ φ, IsIntegralSmoothOrientation ℓ E f d φ := by
-  have : IsNoetherian X.left := isNoetherian_of_locallyOfFiniteType X.hom
   let K := (shiftFunctor _ (2 * d : ℤ)).obj
     (integralTateTwistBoundedConstructible ℓ E.1 X.hom d)
   let W := (PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f).obj (𝟙_ _)
+  have hW : derivedCompleteIntegers ℓ E.1 X.left W.obj := by
+    have : IsNoetherian X.left := isNoetherian_of_locallyOfFiniteType X.hom
+    exact derivedCompleteIntegers_of_boundedConstructible W.property
   let ι := (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1)
     X.left)).ι
   obtain ⟨φ, hφ⟩ := exists_derivedReduction_map_eq
-    (K := K.obj) (derivedCompleteIntegers_of_boundedConstructible W.property)
+    (K := K.obj) hW
     (fun n ↦ (canonicalAmbientIntegralOrientationIso ℓ E f d (n + 1)).hom) h
   let g : K ⟶ W := (ObjectProperty.fullyFaithfulι _).preimage φ
   have hg : ι.map g = φ := (ObjectProperty.fullyFaithfulι _).map_preimage _

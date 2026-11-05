@@ -402,3 +402,7 @@ GREEN at ef09cfe05c in K4-20261105T090443.log: SmoothPurityCanonicalFinite (27s:
 ## 2026-11-05T09:08:32.872699+08:00 — direct equalities replace concrete rewrites
 - Full K4-20261105T090443.log rc=1: CanonicalLift failed at rw[hg,hphi] (122s), while its ambient iso and generic comparison application passed. Replaced both concrete rewrites by congrArg/trans. Trace and constrained lift repaired similarly.
 - Added pending SmoothPurityReductionHomShift: finite shifted Hom required by the Milnor uniqueness theorem, using negative Ext of finite Tate lines. This supplies the missing hypothesis identified earlier; no blanket claim that reductions are jointly faithful.
+
+## 2026-11-05T09:14:21.801871+08:00 — next small validation batch
+- K4-20261105T090834.log rc=1: constrained lift (17s) needed a separately checked reduction-step compatibility lemma; trace normalization (138s) hit recursion depth at concrete equality transitivity, now moved into the generic trace criterion; shifted Hom had a parser error, fixed with explicit shiftFunctor. CanonicalLift (258s) reached final normalization but hit recursion depth comparing instances. Scoped the stronger IsNoetherian instance to the completeness proof to avoid changing every subsequent NoetherianSpace instance.
+- Added CanonicalUnique (integral/rational normalized orientation uniqueness) and FiniteEquivariance (relative finite Frobenius square, with explicit old finite-base-change sorry dependency). Split equality detection into ReductionFaithful to keep uniqueness independent of constrained choice.
