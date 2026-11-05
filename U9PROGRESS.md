@@ -152,3 +152,22 @@
   and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
 - Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
 - No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+
+# BZ595 complete
+
+- Branch: `u9/BZ595`; starting commit: `cfcb63ad77e`.
+- Assigned `SixFunctors.ProEtale.DerivedCompletion` is green via `ucheck-bump`.
+- Reused BZ545's local `HasLimit F` cache (6ba502aac, cherry-picked as ef27bba33).
+  This eliminates the product timeout and cascading errors without heartbeat changes.
+- Four direct importers passed together: PrincipalTensorScalarExtension,
+  InternalPrincipalConeLevelAugmentation, InternalQuotientPrincipalConeComparison,
+  and PrincipalConeTensorNormalization (4723 jobs, rc=0).
+- Layer 2 also built PrincipalReductionDerivedNormalization and
+  PrincipalReductionConeCalculus successfully. Three selected targets were skipped
+  because of unowned failures in DerivedCompletionSupplement and RingedTopoiDerivedPullback.
+  The remaining batch was stopped after those dependency blocks were established.
+- Full evidence and the PATTERN/ERROR record: `/home/ubuntu/u9/bz/FIXES-BZ595.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ595.DONE`.
+- No existing statement/docstring changes, local Lean/Lake, proof escapes, or limit increases.
+- This final commit changes progress documentation only; Lean sources match the green builds.
