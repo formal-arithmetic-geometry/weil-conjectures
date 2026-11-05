@@ -58,7 +58,7 @@ theorem products_exact (X : Scheme.{t})
   refine ⟨?_⟩
   suffices h : ∀ S : ShortComplex (Discrete I ⥤ C), S.Exact → (S.map L).Exact by
     have hL : Limits.PreservesFiniteLimits L ∧ Limits.PreservesFiniteColimits L :=
-      ((Functor.exact_tfae L).out 1 3).mp h
+      ((Functor.exact_tfae L).out 2 4).mp h
     exact hL.2
   intro S hS
   apply ((sections_conservative X R).1 _ _ _ _ _ _).mpr
