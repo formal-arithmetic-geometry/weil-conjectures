@@ -40,6 +40,16 @@ open CategoryTheory CategoryTheory.Limits Opposite IsLocalRing
 
 namespace AlgebraicGeometry
 
+private theorem completion_congr_eval {A M N : Type*} [CommRing A]
+    [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]
+    (I : Ideal A) (a : M ≃ₗ[A] N) (n : ℕ) (x : AdicCompletion I M) (z : M)
+    (hx : AdicCompletion.eval I M n x = Submodule.Quotient.mk z) :
+    AdicCompletion.eval I N n (AdicCompletion.congr I a x) =
+      Submodule.Quotient.mk (a z) := by
+  change a.toLinearMap.reduceModIdeal (I ^ n) (AdicCompletion.eval I M n x) = _
+  rw [hx]
+  rfl
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
@@ -181,10 +191,7 @@ theorem formal_functions_stalk {X Y : Scheme.{uS}} (f : X ⟶ Y) [IsProper f]
       (e.hom (c.hom x)) = q n (AdicCompletion.eval I (C.obj F') (n + 1) (c.hom x)) at hh
     have hc : AdicCompletion.eval I (C.obj F') (n + 1) (c.hom x) =
         Submodule.Quotient.mk (a z) := by
-      change a.toLinearMap.reduceModIdeal (I ^ (n + 1))
-        (AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) x) = _
-      rw [hx]
-      rfl
+      exact completion_congr_eval I a (n + 1) x z hx
     have hqn := LinearMap.congr_fun (hq n) (a z)
     change q n (Submodule.Quotient.mk (a z)) =
       (C.map (formalModuleQuotientπ J (n + 1) F')) (a z) at hqn
