@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityFiniteReadingWeil
 public import WeilConjectures.WeilSheaf.SmoothPurityReductionWeilStep
 public import WeilConjectures.WeilSheaf.SmoothPurityWeilIsoTransport
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
 
 /-! # Étale reading of the Weil data on the integral reductions -/
 
