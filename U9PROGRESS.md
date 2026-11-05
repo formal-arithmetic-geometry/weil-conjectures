@@ -193,14 +193,26 @@
 - This completion commit changes only documentation; Lean source matches the green revision.
 
 
-# BZ673 in progress
+# BZ673 complete
 
 - Branch: `u9/BZ673`; starting commit: `940f09365`.
-- User instructed continuation after the exact one-token theorem-statement proposal.
-  Applied `.hom` -> `.inv` in `whiskerLeft_Q_leftDerivedFunctorSquareIso_hom`,
-  preserving its map direction under Mathlib's reversed compositor.
-- The earlier proof repair uses `Iso.hom_inv_id_app_assoc`; remote validation
-  confirmed that proof error is resolved.
-- Next: validate the assigned module with `ucheck-bump`, then check its direct importer.
-- Records: `/home/ubuntu/u9/bz/FIXES-BZ673.md`.
-- No local Lean/Lake execution, sorries, proof escapes, or heartbeat increases.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMateIsIso`
+  passed `ucheck-bump`: rc=0, failed=0, 2958 jobs; target rebuilt in 4.0s.
+- Validated source commit: `47f7ab3301a2a2c7599d3457bd0ada2a289a7649`; tree `poolb:43.166.72.219`.
+- User instructed continuation after the exact one-token statement proposal. Applied
+  `.hom` -> `.inv` in `whiskerLeft_Q_leftDerivedFunctorSquareIso_hom` to preserve
+  the map direction under Mathlib's reversed compositor; its cancellation proof now
+  uses `Iso.hom_inv_id_app_assoc`. All other statements and docstrings are unchanged.
+- Unit log: `/home/ubuntu/u9/bz/BZ673-build-3-full.log`.
+- Sole direct importer `WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar`
+  was attempted at `cef460ea9b1ea1dc2d1f2fee35463c7f8390ed66`. The assigned module rebuilt successfully in 5.4s.
+- The importer is blocked by unowned BZ675 module `IdealPowerTorsionFreeSectionCarrier`
+  at line 58 (failed to synthesize instance). Stopped only the verified downstream
+  timeout process after this error; rc=255, failed=1. No downstream source edits.
+- Skipped that importer and its next layer under the brief's external-dependency rule.
+  Only the assigned module is claimed green.
+- Downstream log: `/home/ubuntu/u9/bz/BZ673-downstream-1-full.log`.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ673.md`; audit: `/home/ubuntu/u9/bz/BZ673-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, trust bypasses, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ673.DONE`.
+- This final documentation update leaves Lean sources identical to the successful unit build.
