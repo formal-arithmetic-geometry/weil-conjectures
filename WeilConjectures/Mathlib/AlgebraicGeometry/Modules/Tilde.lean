@@ -164,7 +164,6 @@ lemma exists_pow_smul_eq_zero_of_isAffineOpen {W : X.Opens} (hW : IsAffineOpen W
     dsimp only [t']
     rw [restrictAppIso_inv_map_apply, ← Functor.map_comp_apply]
     convert this using 4
-    exact congrArg _ (Subsingleton.elim _ _)
   have := isLocalizing_restrict_fromSpec M hW f
   have hz := (IsLocalizedModule.eq_zero_iff (.powers f)
     ((modulesSpecToSheaf.obj (M.restrict hW.fromSpec)).obj.map
