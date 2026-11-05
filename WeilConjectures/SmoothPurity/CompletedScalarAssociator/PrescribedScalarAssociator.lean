@@ -374,6 +374,7 @@ theorem presentation_associator_exists
   intro P
   change ((p a).derived ⋙ (p b).derived).map (𝟙 _) ≫ _ ≫ _ ≫ 𝟙 _ ≫ _ =
     _ ≫ (p c).derived.map (𝟙 _) ≫ _ ≫ 𝟙 _
-  simpa only [Functor.map_id, Category.id_comp, Category.comp_id] using v.representative P
+  simpa only [Functor.comp_map, Functor.map_id, Category.id_comp, Category.comp_id] using
+    v.representative P
 
 end WeilConjectures.CompletedScalarAssociator
