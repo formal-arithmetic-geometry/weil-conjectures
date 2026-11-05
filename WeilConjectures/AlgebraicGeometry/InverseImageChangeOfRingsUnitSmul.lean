@@ -31,6 +31,8 @@ local instance {X : TopCat.{u}} (A : X.Sheaf CommRingCat.{u})
     Module (A.obj.obj V) (P.obj V) :=
   (P.obj V).isModule
 
+attribute [local instance] TopCat.Sheaf.inverseImageModuleInstances
+
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
