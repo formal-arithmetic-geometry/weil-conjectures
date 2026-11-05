@@ -62,3 +62,17 @@
 - Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ190 in progress
+
+- Branch: `u9/BZ190`.
+- Private helper statements and proofs pass `ucheck-bump`; the previous final check
+  had only the public theorem's Q/Qh endpoint mismatch.
+- The user instructed continuation after the exact statement repair proposal.
+  Applied `BZ190-statement-api-proposal.patch`: use the canonical cochain derived
+  unit `G.rightDerivedFunctorPlusUnit.app L` at the theorem's Q endpoints.
+- The private proofs use the Localization implementation import and explicitly
+  cancel new quotient-comparison identity factors.
+- Next: validate and repair the public proof through `ucheck-bump`, then write DONE.
+- Fix patterns/logs: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
+- No local Lean/Lake, forbidden proof escapes, or heartbeat increases.

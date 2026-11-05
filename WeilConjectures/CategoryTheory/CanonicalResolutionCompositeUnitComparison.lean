@@ -243,6 +243,9 @@ theorem resolution_composite_unit_transport
     (DerivedCategory.Plus.homologyFunctorObjQIso _ n).hom]
   erw [← hn]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rfl
+  congr 3
+  rw [Functor.rightDerivedFunctorPlusUnit_app]
+  change _ = (𝟙 _) ≫ _ ≫ G.rightDerivedFunctorPlus.map (𝟙 _)
+  erw [Functor.map_id, Category.comp_id, Category.id_comp]
 
 end CategoryTheory
