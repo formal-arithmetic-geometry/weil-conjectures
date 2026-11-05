@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityCondensedTraceCriterion
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedAdjunction
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointFree
 public import WeilConjectures.CategoryTheory.Adjunction.FreeComparisonComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFreeComparison

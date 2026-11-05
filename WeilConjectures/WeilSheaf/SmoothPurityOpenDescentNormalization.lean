@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityExactDescentNormalization
 public import WeilConjectures.WeilSheaf.SmoothPurityProperTraceCoordinates
 public import WeilConjectures.WeilSheaf.SmoothPurityShriekFreeComparison
+public import WeilConjectures.WeilSheaf.SmoothPurityAmbientOpenExchange
 
 /-! # The geometric comparison underlying descended extension by zero -/
 
@@ -63,27 +64,9 @@ lemma openTraceInverseMate_eq :
       (TwoSquare.mk _ _ _ _ (geometricFiberUpperStarComparison Λ j h).hom)).natTrans =
       (openImmersionLowerShriekUpperStarBaseChangeIso Λ
         (Scheme.Hom.isPullback_geometricFiberMap j h)).inv := by
-  let α := ((mateEquiv (openImmersionLowerShriekUpperStarAdjunction Λ j)
-    (openImmersionLowerShriekUpperStarAdjunction Λ (Scheme.Hom.geometricFiberMap j h))).symm
-    (TwoSquare.mk _ _ _ _ (geometricFiberUpperStarComparison Λ j h).hom))
-  let a := (openImmersionLowerShriekUpperStarAdjunction Λ j).comp
-    (upperStarLowerStarAdjunction Λ t.geometricFiberProj)
-  let b := (upperStarLowerStarAdjunction Λ s.geometricFiberProj).comp
-    (openImmersionLowerShriekUpperStarAdjunction Λ (Scheme.Hom.geometricFiberMap j h))
-  have hα : conjugateEquiv a b α.natTrans =
-      (lowerStarBaseChangeIso Λ (Scheme.Hom.isPullback_geometricFiberMap j h)).hom := by
-    rw [← iterated_mateEquiv_conjugateEquiv
-      (openImmersionLowerShriekUpperStarAdjunction Λ j)
-      (openImmersionLowerShriekUpperStarAdjunction Λ (Scheme.Hom.geometricFiberMap j h))
-      (upperStarLowerStarAdjunction Λ s.geometricFiberProj)
-      (upperStarLowerStarAdjunction Λ t.geometricFiberProj),
-      Equiv.apply_symm_apply, geometricFiberUpperStarComparison, Iso.symm_hom,
-      upperStarSquareComparison_flip_inv, ← Adjunction.exchangeRight_eq_mateEquiv,
-      ← lowerStarBaseChange_eq]
-    rfl
-  have hβ := congrArg Iso.hom ((conjugateIsoEquiv a b).apply_symm_apply
-    (lowerStarBaseChangeIso Λ (Scheme.Hom.isPullback_geometricFiberMap j h)))
-  exact (conjugateEquiv a b).injective (hα.trans hβ.symm)
+  rw [purityOpenImmersionLowerShriekUpperStarBaseChangeIso_inv,
+    geometricFiberUpperStarComparison, Iso.symm_hom, upperStarSquareComparison_flip_inv]
+  rfl
 
 /-- Forgetting the sheaf-level descended open comparison gives the ordinary one. -/
 lemma geometricFiberWeilExtensionByZeroBaseChange_app_forget
