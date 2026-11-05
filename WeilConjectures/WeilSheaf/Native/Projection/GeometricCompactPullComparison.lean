@@ -36,6 +36,7 @@ def compactProjectionGeometricPullIso :
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
+set_option pp.all true in
 /-- The geometric exceptional projection factors through the canonical pullback compositor. -/
 lemma compactProjectionGeometricPullIso_projection_eq
     (ε : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj l) l c.overG ⋙
