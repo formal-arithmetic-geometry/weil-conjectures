@@ -78,8 +78,6 @@ private theorem tensorStalkIso_naturality (z : X')
 -- Keep the original named proof binders, even though they do not occur in the conclusion.
 set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
--- The sheaf tensor and total-complex instances require larger search terms and budget.
 /-- A natural comparison with the specified K-flat representative equation, without an
 invertibility assertion.
 
