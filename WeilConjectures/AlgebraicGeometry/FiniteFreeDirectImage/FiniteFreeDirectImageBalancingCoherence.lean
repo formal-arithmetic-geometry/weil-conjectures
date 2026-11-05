@@ -514,7 +514,7 @@ private def exactComposition
     [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
     [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H]
     (e : F ⋙ G ≅ H) : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ H.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso e
+  (Functor.mapDerivedCategoryCompIso F G) ≪≫ Functor.mapDerivedCategoryNatIso e
 
 private theorem exactComposition_fac
     {A B C : Type*} [Category A] [Category B] [Category C]

@@ -18,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationExtension
 import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationIrreducibleSupport
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # A filtration with unresolved factors of smaller support
 

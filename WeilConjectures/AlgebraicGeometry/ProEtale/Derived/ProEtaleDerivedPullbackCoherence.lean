@@ -279,7 +279,7 @@ private theorem derivedFormula_components
     H.mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map (b.hom.app K) =
       (Functor.mapDerivedCategoryNatIso a ≪≫
-        Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj K) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app
           ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) := by
@@ -306,7 +306,7 @@ private theorem pullbackData_comparison
       proEtaleRingDerivedPullback k RV RW ck ⋙ proEtaleRingDerivedPullback h RW RZ ch)
     (D : PullbackData h k RV RW RZ ck ch c hc comparison) :
     comparison = Functor.mapDerivedCategoryNatIso D.a ≪≫
-      Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
+      (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)).symm
         (proEtaleRingModulePullback h RW RZ ch) := by
   apply UniqueData.unique_of_formula (proEtaleCanonicalPullbackComposition_existsUnique
     h k RV RW RZ ck ch c hc.symm) D
@@ -321,7 +321,7 @@ private theorem constantComparison_eq
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (A : Type u) [CommRing A] :
     (proEtaleConstantRingPullbackComposition h k A).symm =
       Functor.mapDerivedCategoryNatIso (ordinaryComp h k A) ≪≫
-        Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A k)
+        (Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A k)).symm
           (proEtaleConstantRingPullback A h) := by
   unfold ordinaryComp
   exact pullbackData_comparison h k _ _ _ _ _ _ _ _ (constantData h k A)
@@ -520,7 +520,7 @@ private theorem descend_coherence
         (Functor.mapDerivedCategoryNatIso a1).hom ≫
         (Functor.mapDerivedCategoryCompIso F F13).hom ≫
         Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryNatIso a13).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).hom := by
+        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).inv := by
   have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
   simp only [Functor.mapDerivedCategoryNatIso_trans] at hd
   have hR := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a02 H
@@ -644,7 +644,7 @@ theorem proEtaleConstantRingPullbackComposition_ordinary
               (Opposite.op ((proEtaleBaseChange f).obj U)))
             ((((proEtaleConstantRingAdjunction A f).unit.app M).val.app (Opposite.op U)) z))) ∧
       Functor.mapDerivedCategoryNatIso a ≪≫
-          Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A f)
+          (Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A f)).symm
             (proEtaleConstantRingPullback A h) =
         (proEtaleConstantRingPullbackComposition h f A).symm := by
   exact ⟨ordinaryComp h f A, ordinaryComp_unit_section h f A,

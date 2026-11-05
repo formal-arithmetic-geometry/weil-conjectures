@@ -22,6 +22,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # A common submodule with generically vanishing cokernels
 

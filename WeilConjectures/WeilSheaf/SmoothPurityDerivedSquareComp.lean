@@ -80,7 +80,7 @@ theorem traceDerivedSquare_comp (e₁₂ : P₂ ⋙ rY₁₂ ≅ rX₁₂ ⋙ P�
       e₁₂.hom.app (rX₂₃.obj K) ≫ P₁.map (cX.hom.app K))
     (K : DerivedCategory C₃) :
     b₁₃.hom.app K =
-      ((mapDerivedCategoryCompIso rY₂₃ rY₁₂).symm ≪≫ mapDerivedCategoryNatIso cY).inv.app
+      ((mapDerivedCategoryCompIso rY₂₃ rY₁₂) ≪≫ mapDerivedCategoryNatIso cY).inv.app
           (P₃.rightDerivedFunctor.obj K) ≫
         rY₁₂.mapDerivedCategory.map (b₂₃.hom.app K) ≫
         b₁₂.hom.app (rX₂₃.mapDerivedCategory.obj K) ≫

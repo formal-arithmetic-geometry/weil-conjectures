@@ -162,7 +162,7 @@ include h in
 Source: Stacks Tag 03DA (blueprint: def-weil-pbc-bounded-constructible-tower). -/
 def pbcDerivedRestrictComp : pbcDerivedRestrict ψ ⋙ pbcDerivedRestrict φ ≅
     pbcDerivedRestrict χ :=
-  (Functor.mapDerivedCategoryCompIso (pbcRestrict ψ) (pbcRestrict φ)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (pbcRestrict ψ) (pbcRestrict φ)) ≪≫
     Functor.mapDerivedCategoryNatIso (pbcRestrictComp φ ψ χ h)
 
 /-- The reduction transition is the adjunct of the direct scalar-extension unit.

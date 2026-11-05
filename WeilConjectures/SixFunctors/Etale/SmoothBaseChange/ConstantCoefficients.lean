@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-!
 # Higher direct images of constant sheaves and their coefficients

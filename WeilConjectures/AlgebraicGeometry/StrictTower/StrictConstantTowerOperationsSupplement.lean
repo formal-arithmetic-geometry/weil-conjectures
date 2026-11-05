@@ -479,7 +479,7 @@ Source: Stacks, Tag 0D6D (blueprint: def-cbc-strict-constant-tower-operations). 
 noncomputable def gComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     G B (f ≫ g) ≅ G B g ⋙ G B f :=
   Functor.mapDerivedCategoryNatIso (towerGComp B f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)
+    (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)).symm
 
 /-- The direct-image compositor is the conjugate for the composition adjunction.
 Source: Stacks, Tags 0D6D and 07A7
@@ -608,9 +608,9 @@ Source: blueprint evaluation normalization
 (blueprint: def-cbc-strict-constant-tower-operations). -/
 noncomputable def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     G B f ⋙ ev B X n ≅ ev B Y n ⋙ (modulePullback B f).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
   Functor.mapDerivedCategoryNatIso (eqToIso (evaluationPullback B f n)) ≪≫
-  Functor.mapDerivedCategoryCompIso _ _
+  (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The direct-image evaluation map is its specified adjunction mate.
 Source: Stacks, Tags 07A7 and 0DVC

@@ -128,7 +128,7 @@ theorem affine_perfect_open_represent_cohomology_colimit
   have hiso (e : ℕ) : IsIso ((F ⋙ G).mapDerivedCategory.map
       (koszulOpenUnit A r f e)) := by
     have := hi e
-    apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F G) _).2
+    apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F G) _).1
     change IsIso (G.mapDerivedCategory.map
       (F.mapDerivedCategory.map (koszulOpenUnit A r f e)))
     infer_instance

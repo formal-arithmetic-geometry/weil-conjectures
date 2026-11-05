@@ -108,10 +108,10 @@ def sectionScalarRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
       (ModuleRingedComparison.derivedEquivalence Λ' T).functor ⋙
         SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}
           (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T)) :=
-  (Functor.mapDerivedCategoryCompIso (V₀ a T)
+  ((Functor.mapDerivedCategoryCompIso (V₀ a T)).symm
     (ModuleRingedComparison.equivalence Λ T).functor).symm ≪≫
   Functor.mapDerivedCategoryNatIso s.restriction ≪≫
-  Functor.mapDerivedCategoryCompIso (ModuleRingedComparison.equivalence Λ' T).functor
+  (Functor.mapDerivedCategoryCompIso (ModuleRingedComparison.equivalence Λ' T).functor).symm
     (SheafOfModules.scalarRestriction.{u + 1, u, u + 1}
       (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T)))
 
