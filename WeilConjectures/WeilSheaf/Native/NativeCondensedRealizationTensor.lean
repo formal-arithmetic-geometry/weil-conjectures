@@ -19,8 +19,8 @@ import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilUnderivedTensor
 /-!
 # The condensed realization and the native tensor product
 
-* `AlgebraicGeometry.ProEtaleWeilSheaf.condensedOrdinaryTensorBifunctorFlipIso`: the ordinary relative
-  tensor of `ℓ`-adic sheaves (a coequalizer) agrees with the monoidal tensor product.
+* `AlgebraicGeometry.ProEtaleWeilSheaf.condensedOrdinaryTensorBifunctorFlipIso`:
+  the ordinary relative tensor of `ℓ`-adic sheaves (a coequalizer) agrees with the monoidal tensor.
 * `AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_condensedTensorIso`: the condensed model
   `AdicSheaf ℓ ≌ Mod_{Λ}` carries the ordinary relative tensor to the tensor of module objects.
 * `AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_condensedRealizationTensorIso`: the condensed
