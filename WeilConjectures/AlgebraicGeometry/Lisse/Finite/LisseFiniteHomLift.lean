@@ -438,12 +438,14 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
     inferInstance
   let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
     (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he)
-  have hc : IsColimit c := isColimitOfPreserves _
-    (Classical.choice (nonempty_isColimit_coefficientComplexCocone X ℓ
-      (E := E) (F := E) C H he he))
+  have hc0 : IsColimit (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he) :=
+    Classical.choice (nonempty_isColimit_coefficientComplexCocone X ℓ
+      (E := E) (F := E) C H he he)
+  have hc : IsColimit c := isColimitOfPreserves _ hc0
   let a := (Mod.extendRestrictAdjunction
     (padicSubfieldRingObjToPadicAlgCl X ℓ E)).homEquiv _ _ ψ
-  obtain ⟨i, b, hb⟩ := hM.isLocallyFree.exists_comp_eq_of_isColimit c hc a
+  have hfactor := hM.isLocallyFree.exists_comp_eq_of_isColimit c hc a
+  obtain ⟨i, b, hb⟩ := hfactor
   refine ⟨H.obj i, he i,
     ((Mod.extendRestrictAdjunction (padicSubfieldRingObjMap X ℓ (he i))).homEquiv _ _).symm b,
     ?_⟩
