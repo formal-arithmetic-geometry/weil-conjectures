@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeFinal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientation
 public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
@@ -227,7 +228,11 @@ theorem exists_iso_dualizingComplex_isWeilMorphism :
     inferInstanceAs (SmoothOfRelativeDimension d (Limits.pullback.snd _ _))
   have : IsSeparated a := inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
   have : QuasiCompact a := inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
-  have hbc := dualizingComplexTwistShiftIso_baseChange Λ d sq (𝟙 _) (𝟙 _)
+  have : Smooth a := SmoothOfRelativeDimension.smooth d a
+  have : LocallyOfFiniteType a := inferInstance
+  have : IsNoetherian f.geometricFiber := isNoetherian_of_locallyOfFiniteType a
+  have hbc :=
+    dualizingComplexTwistShiftIso_baseChange_of_isIso_of_isNoetherian Λ sq d (𝟙 _) (𝟙 _)
   set θ := dualizingComplexTwistShiftIso Λ a d (𝟙 (Spec (.of (AlgebraicClosure k₀))))
   -- the exceptional datum corresponds to the Tate datum under `θ`
   have hθ : (L((g)^*[ModuleCat.{u + 1} Λ])).map θ.inv ≫
