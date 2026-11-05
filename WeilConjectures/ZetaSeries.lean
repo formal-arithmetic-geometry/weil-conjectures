@@ -200,7 +200,7 @@ theorem Hom.X_mul_derivative_zetaSeries :
     PowerSeries.X * PowerSeries.derivative ℚ f.zetaSeries =
       PowerSeries.mk (fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n) *
         f.zetaSeries := by
-  have hXF : PowerSeries.X * PowerSeries.derivative ℚ
+  have hXF : PowerSeries.X * PowerSeries.derivative (R := ℚ)
       (PowerSeries.mk fun n ↦ if n = 0 then 0 else (f.pointCount n : ℚ) / n) =
       PowerSeries.mk fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n := by
     ext n
