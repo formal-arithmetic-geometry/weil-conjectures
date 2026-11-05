@@ -44,7 +44,7 @@ variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V] [Finite
 `P = σ (det (1 - T A))` satisfies `T P' = - (∑_{n ≥ 1} σ (tr Aⁿ) Tⁿ) P`. -/
 theorem X_mul_derivative_map_charpolyRev {L : Type*} [Field L] (σ : K →+* L)
     (A : Module.End K V) :
-    X * derivative L ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) =
+    X * derivative (R := L) ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) =
       (-PowerSeries.mk fun n ↦ if n = 0 then 0 else σ (LinearMap.trace K V (A ^ n))) *
         ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) := by
   have h := congrArg (PowerSeries.map σ) (X_mul_derivative_charpolyRev A)
