@@ -130,3 +130,8 @@
 - Shared-cache batch C6-20261105T104350.log reached the final new C6 module.
   Its own AffineLineTraceReduction failed, but common upstream imports are ready.
   Starting K6's final verification now, including the strengthened audit.
+- Final batch at be70bab54d was scheduled on newsrv t1, whose cache is separate
+  and older; it began rebuilding the same dependency chain. All warm Weil-side
+  trees are currently busy. Queueing the same checks while that slot is occupied
+  so the next warm slot can reuse C6's completed shared artifacts; stop the cold
+  duplicate once the warm run is confirmed. No proof error has appeared on K6.
