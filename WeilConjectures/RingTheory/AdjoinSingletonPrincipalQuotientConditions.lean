@@ -156,10 +156,7 @@ theorem adjoin_singleton_atPrime_principal_quotient_conditions
     norm_num at this
   · intro p hp
     let : p.IsPrime := hp.isPrime
-    have hle : Ideal.span {algebraMap (Algebra.adjoin R ({x} : Set K))
-        (Localization.AtPrime m) ⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩} ≤ p := by
-      simpa only [Submodule.annihilator_top, Ideal.annihilator_quotient] using hp.annihilator_le
-    have hxp := hle (Ideal.subset_span (Set.mem_singleton _))
+    have hxp : t ∈ p := hle p hp (Ideal.subset_span (Set.mem_singleton t))
     let : IsLocalRing (Localization.AtPrime m ⧸ p) :=
       IsLocalRing.of_surjective' _ Ideal.Quotient.mk_surjective
     refine ⟨inferInstance, ?_⟩
