@@ -7,6 +7,7 @@ module
 import all WeilConjectures.CategoryTheory.Native.NativeOpenTensorDescentData
 import all WeilConjectures.CategoryTheory.Native.NativeWeilTensorConstraintLifts
 import all WeilConjectures.WeilSheaf.CompactProjectionFormula
+import all WeilConjectures.WeilSheaf.SmoothPurityThomFromTate
 import all WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
 import all WeilConjectures.WeilSheaf.Native.NativeDerivedWeilTensorConstructible
 import all WeilConjectures.WeilSheaf.Native.NativeForgetNormalizedBinaryModels
@@ -61,14 +62,14 @@ import Lean
 /-! # Declaration dependency audit for the absolute-purity Thom route
 
 This command reports the declarations containing a direct use of `sorryAx`
-reachable from the final conditional Thom theorem. It creates no mathematical
+reachable from the final Thom theorem. It creates no mathematical
 declaration and does not participate in its proof.
 -/
 
 open Lean in
 run_elab do
   let root :=
-    `AlgebraicGeometry.WeilComplex.nonempty_trivialLineThom_of_tate_encoding
+    `AlgebraicGeometry.WeilComplex.purity_nonempty_trivialLineThom
   let env ← getEnv
   logInfo m!"Root: {root}; axioms: {← collectAxioms root}"
   let mut pending := #[root]
@@ -112,6 +113,7 @@ run_elab do
   for name in inspected.toArray.qsort Name.lt do
     logInfo m!"Proof import all: {name}"
   let forbidden := #[
+    `AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso,
     `AlgebraicGeometry.WeilComplex.nonempty_upperShriek_iso_of_smoothOfRelativeDimension,
     `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_adjunction_of_smooth,
     `AlgebraicGeometry.WeilComplex.exists_natTrans_upperShriek_isIso_forget_of_smooth]
