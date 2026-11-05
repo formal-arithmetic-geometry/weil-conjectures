@@ -54,14 +54,15 @@ As in the blueprint (`def-pur-smooth-purity-map`), `γ_f` is the composite
 
 ## Unfinished
 
-The three inputs of `γ_f` listed above are stated with `sorry`:
+The three inputs of `γ_f` listed above depend on `sorry`:
 - the Weil orientation needs the Frobenius equivariance of the smooth purity isomorphism
   `Rf̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` (`thm-pur-weil-equivariance-of-purity-and-trace`). The condensed
   orientation `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation` is not canonical, and
   `AlgebraicGeometry.Etale.exists_iso_dualizingComplex_isWeilMorphism` is for finite coefficients
   over `Spec k₀`;
-- the co-projection map needs the compatibility of forgetting the Weil structure with the native
-  tensor product, the projection formula and the counit of `Rf₀! ⊣ Rf^!`;
+- the co-projection map is reduced to a natural comparison of forgetting the Weil structure with
+  `Rf₀!`, compatible with `Rf^!` and with the projection formulas
+  (`AlgebraicGeometry.WeilComplex.exists_lowerShriek_forget_iso_projection`);
 - the identification of the Tate twist needs a comparison of
   `AlgebraicGeometry.WeilComplex.tensorLisse` with the native tensor product.
 -/
