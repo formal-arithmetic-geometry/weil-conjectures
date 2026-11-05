@@ -43,7 +43,7 @@ noncomputable def mapDerivedCategoryComapCompIso (h : φ ≫ ψ = χ) :
     (comap ψ : Mod C T ⥤ Mod C S).mapDerivedCategory ⋙
         (comap φ : Mod C S ⥤ Mod C R).mapDerivedCategory ≅
       (comap χ : Mod C T ⥤ Mod C R).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (comap ψ) (comap φ)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (comap ψ) (comap φ) ≪≫
     Functor.mapDerivedCategoryNatIso ((comapComp φ ψ).symm ≪≫ comapCongr h)
 
 /-- **Transitivity of the derived extension of scalars**: for `φ ≫ ψ = χ`,
