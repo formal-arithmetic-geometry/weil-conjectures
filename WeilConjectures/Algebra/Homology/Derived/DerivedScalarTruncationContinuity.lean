@@ -180,6 +180,9 @@ theorem derivedScalar_lower_bound_of_truncations
     (F.obj (DerivedCategory.Q.obj G)).IsGE a := by
   let A := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)
   let B := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J S)
+  have (I : Type r) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := symmetricCategory R
