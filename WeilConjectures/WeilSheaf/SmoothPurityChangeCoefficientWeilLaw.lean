@@ -120,7 +120,8 @@ theorem purityChangeCoefficientTrivialization_weil
     (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm
     (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁) rfl c
     (purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he)
-  exact h
+  dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact_mod_proofs h
 
 end ScalarRelation
 
