@@ -275,14 +275,14 @@ Source: Stacks 012Z; lem-pe-internal-section-tensor-comparison
 (auxiliary; not a blueprint node). -/
 instance internalTotalExists (P Q : CochainComplex (Internal Λ X) ℤ) :
     P.HasMapBifunctor Q (curriedTensor (Internal Λ X)) := by
-  apply comparison_internalTotalExists (Scheme.ProEt.topology X) (condensedRingObj Λ X) P Q
-  exact isCommMonObj_condensedRingObj Λ X
+  exact @comparison_internalTotalExists _ _ (Scheme.ProEt.topology X) _ _ _
+    (condensedRingObj Λ X) _ (isCommMonObj_condensedRingObj Λ X) P Q
 
 /-- The native total tensor on internal complexes.
 Source: Stacks 06YL (auxiliary; not a blueprint node). -/
 instance internalComplexMonoidal : MonoidalCategory (CochainComplex (Internal Λ X) ℤ) := by
-  apply CategoryTheory.Mod.monoidalCategoryCochainComplex
-  exact isCommMonObj_condensedRingObj Λ X
+  exact @CategoryTheory.Mod.monoidalCategoryCochainComplex _ _ _ _ _ _ _
+    (condensedRingObj Λ X) _ (isCommMonObj_condensedRingObj Λ X) _ _
 
 /-- The native total tensor, with its instance fixed explicitly.
 Source: Stacks 06YL (auxiliary; not a blueprint node). -/
