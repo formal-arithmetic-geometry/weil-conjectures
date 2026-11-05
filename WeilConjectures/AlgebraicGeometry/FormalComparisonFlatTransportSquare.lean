@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import WeilConjectures.AlgebraicGeometry.FormalFlatQuotientMateData
