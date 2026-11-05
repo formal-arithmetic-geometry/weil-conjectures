@@ -144,7 +144,8 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
   have : IsIso c₁ := by dsimp only [c₁]; infer_instance
   have fac : whiskerLeft Qh τ ≫ c₁ = c₂ ≫ δ₀ := by
     ext M
-    simpa only [c₁, c₂, δ₀, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+    simpa only [c₁, c₂, δ₀, G, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+      Functor.comp_obj, curriedTensor_obj_obj, curriedTensor_obj_map, curriedTensor_map_app,
       associator_hom_app, associator_inv_app, Category.id_comp, Category.comp_id,
       Category.assoc] using hτ M
   have := commShift_tensorLeftCounit X hX
@@ -152,7 +153,9 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
   have : NatTrans.CommShift c₁ ℤ := by dsimp only [c₁]; infer_instance
   have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
   have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_app F X
-  have : NatTrans.CommShift δ₀ ℤ := NatTrans.CommShift.whiskerRight _ Qh ℤ
+  have : NatTrans.CommShift δ₀ ℤ :=
+    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor _).obj X ⋙ G)
+      (F₂ := G ⋙ (curriedTensor _).obj (G.obj X)) _ Qh ℤ
   have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
   have : NatTrans.CommShift (whiskerLeft Qh τ) ℤ := by
     rw [(IsIso.eq_comp_inv c₁).2 fac]
@@ -198,7 +201,9 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
   have : IsIso c₁ := by dsimp only [c₁]; infer_instance
   have fac : whiskerLeft Qh τ ≫ c₁ = c₂ ≫ δ₀ := by
     ext M
-    simpa only [c₁, c₂, δ₀, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+    simpa only [c₁, c₂, δ₀, G, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+      Functor.comp_obj, Functor.flip_obj_obj, Functor.flip_obj_map, Functor.flip_map_app,
+      NatTrans.flipApp, curriedTensor_obj_obj, curriedTensor_obj_map, curriedTensor_map_app,
       associator_hom_app, associator_inv_app, Category.id_comp, Category.comp_id,
       Category.assoc] using hτ M
   have := commShift_tensorRightCounit X hX
@@ -206,7 +211,9 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
   have : NatTrans.CommShift c₁ ℤ := by dsimp only [c₁]; infer_instance
   have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
   have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_flipApp F X
-  have : NatTrans.CommShift δ₀ ℤ := NatTrans.CommShift.whiskerRight _ Qh ℤ
+  have : NatTrans.CommShift δ₀ ℤ :=
+    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor _).flip.obj X ⋙ G)
+      (F₂ := G ⋙ (curriedTensor _).flip.obj (G.obj X)) _ Qh ℤ
   have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
   have : NatTrans.CommShift (whiskerLeft Qh τ) ℤ := by
     rw [(IsIso.eq_comp_inv c₁).2 fac]
