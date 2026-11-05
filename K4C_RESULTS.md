@@ -90,7 +90,11 @@ through exactly `compactificationOverField`.
 The combined verification is `SmoothPurityK4cCompletionAudit`, including the independent
 Strategy3 audit, adopted finite and scalar kernel repairs, and the adopted point theorem.
 Its current log is `/home/ubuntu/u9/logs/K4c-20261106T002935.log`, source `4608c068e9`.
-Final status and measurements will be recorded after completion; no green claim yet.
+LEAD 00:40 canceled this run and reassigned its sole build tree to C9b. The invocation
+returned `rc=255`, with 73 built modules and zero reported compiler failures. The canonical
+scalar theorem and its three-root audit passed again before cancellation; the complete
+combined audit and adopted point theorem were not reached. This run is not green, and no
+DONE file is written.
 
 All 107 retained changed Lean modules occur in this audit's import closure and are listed
 in `K4C_FILES.txt`. Superseded chart/étale/open-mate experiments and their reusable checked
