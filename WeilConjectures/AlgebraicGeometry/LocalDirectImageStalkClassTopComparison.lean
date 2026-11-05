@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkClassMap
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Independence of the top section class
 

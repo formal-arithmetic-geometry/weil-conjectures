@@ -14,6 +14,7 @@ import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.AlgebraicGeometry.HigherDirectImagePresheaf
 import WeilConjectures.Topology.RestrictInjectiveResolution
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Vanishing of higher direct image on an affine neighbourhood basis
 

@@ -69,7 +69,7 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
     let e := upperStarComp AddCommGrpCat.{v + 1} a g h hh
     L.mapDerivedCategory.map (G.mapDerivedCategoryFactors.inv.app J) ≫
       (Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso G L).inv.app (DerivedCategory.Q.obj J) =
+        (Functor.mapDerivedCategoryCompIso G L).symm).inv.app (DerivedCategory.Q.obj J) =
       L.mapDerivedCategoryFactors.hom.app C ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).inv.app J) ≫
           H.mapDerivedCategoryFactors.inv.app J := by
@@ -184,7 +184,7 @@ theorem sectionsComparison_triangle_naturality {X Y T : Scheme.{v}}
     (cohomology AddCommGrpCat.{v + 1} X n).map
       ((Functor.mapDerivedCategoryNatIso
         (upperStarComp AddCommGrpCat.{v + 1} a g h hh) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso).symm
             (upperStar AddCommGrpCat.{v + 1} g)
             (upperStar AddCommGrpCat.{v + 1} a)).inv.app K) =
     chainRestriction ≫ comparison X h := by

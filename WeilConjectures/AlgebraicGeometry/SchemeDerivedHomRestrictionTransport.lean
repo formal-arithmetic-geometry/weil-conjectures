@@ -89,7 +89,7 @@ private lemma comp_inv_Q
     (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) =
+    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
@@ -149,7 +149,7 @@ private lemma pasting
     let d := (mapDerivedCategoryCompIso A T).symm ≪≫ mapDerivedCategoryNatIso γ
     (mapDerivedCategoryCompIso (A ⋙ e) S).inv ≫
       (mapDerivedCategoryNatIso α).hom ≫ (mapDerivedCategoryCompIso B v).hom =
-    whiskerRight (mapDerivedCategoryCompIso A e).hom S.mapDerivedCategory ≫
+    whiskerRight (mapDerivedCategoryCompIso A e).inv S.mapDerivedCategory ≫
       whiskerLeft A.mapDerivedCategory k.hom ≫ whiskerRight d.hom v.mapDerivedCategory := by
   dsimp only
   refine Localization.natTrans_ext DerivedCategory.Q

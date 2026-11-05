@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine-basis lower truncation tower inputs
 Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/

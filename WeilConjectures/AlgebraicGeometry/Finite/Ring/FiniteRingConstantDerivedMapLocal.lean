@@ -199,7 +199,7 @@ private theorem local_free_point
     simpa only [Functor.comp_map, Category.assoc] using hh
   let e := Functor.mapDerivedCategoryNatIso
     (upperStarComp (ModuleCat.{u + 1} B) V.hom (𝒰.f i) (V.hom ≫ 𝒰.f i) rfl) ≪≫
-      Functor.mapDerivedCategoryCompIso R L
+      (Functor.mapDerivedCategoryCompIso R L).symm
   refine ⟨V.left, V.hom ≫ 𝒰.f i, inferInstance, z, b, ?_, map_eq_of_iso e heq⟩
   have hw : g.left = V.hom := by
     have hw := g.w
@@ -297,7 +297,7 @@ private theorem restrict_map
       (upperStar (ModuleCat.{u + 1} B) W.hom).mapDerivedCategory.map a := by
   let r := Functor.mapDerivedCategoryNatIso
     (upperStarComp (ModuleCat.{u + 1} B) f.left V.hom W.hom f.w.symm) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   have hn := r.hom.naturality a
   change _ ≫ _ = _ ≫ _ at hn
   change (r.app K).hom ≫ _ ≫ (r.app L).inv = _

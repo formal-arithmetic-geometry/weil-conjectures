@@ -129,7 +129,7 @@ theorem exists_scheme_iso_derived_restriction_square {X Y : Scheme.{u}} (s : X �
   let d := eO.mapDerivedCategory
   refine ⟨d, ⟨?_⟩⟩
   exact isoWhiskerRight beta LY.mapDerivedCategory ≪≫
-    (Functor.mapDerivedCategoryCompIso e₀.functor LY).symm ≪≫
-    Functor.mapDerivedCategoryNatIso h1 ≪≫ Functor.mapDerivedCategoryCompIso LX eO.functor
+    (Functor.mapDerivedCategoryCompIso e₀.functor LY) ≪≫
+    Functor.mapDerivedCategoryNatIso h1 ≪≫ (Functor.mapDerivedCategoryCompIso LX eO.functor).symm
 
 end AlgebraicGeometry.Scheme

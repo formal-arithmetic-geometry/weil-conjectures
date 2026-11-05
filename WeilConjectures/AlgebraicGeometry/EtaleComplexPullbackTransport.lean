@@ -130,7 +130,7 @@ private theorem composition_factors {X Y T : Scheme.{u}}
     (C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp AddCommGrpCat.{u + 1} f g h hh) ≪≫
-      Functor.mapDerivedCategoryCompIso
+      (Functor.mapDerivedCategoryCompIso).symm
         (upperStar AddCommGrpCat.{u + 1} g)
         (upperStar AddCommGrpCat.{u + 1} f)).inv.app (DerivedCategory.Q.obj C) ≫
         (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryFactors.hom.app C =

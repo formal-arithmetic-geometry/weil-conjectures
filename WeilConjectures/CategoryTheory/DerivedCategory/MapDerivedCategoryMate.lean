@@ -712,7 +712,7 @@ variable (G : D ⥤ E) (H : E ⥤ E') [G.Additive] [H.Additive]
 lemma mapDerivedCategoryCompIso_assoc :
     (mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
         Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryCompIso G H).hom =
-      (mapDerivedCategoryCompIso (F ⋙ G) H).inv ≫
+      (mapDerivedCategoryCompIso (F ⋙ G) H).hom ≫
         Functor.whiskerRight (mapDerivedCategoryCompIso F G).hom H.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
@@ -756,7 +756,7 @@ lemma mapDerivedCategoryNatIso_isoWhiskerRight {F F' : C ⥤ D} [F.Additive] [F'
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F'] (e : F ≅ F') (G : D ⥤ E)
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
-    (mapDerivedCategoryNatIso (isoWhiskerRight e G)).hom ≫ (mapDerivedCategoryCompIso F' G).hom =
+    (mapDerivedCategoryNatIso (isoWhiskerRight e G)).hom ≫ (mapDerivedCategoryCompIso F' G).inv =
       (mapDerivedCategoryCompIso F G).inv ≫
         Functor.whiskerRight (mapDerivedCategoryNatIso e).hom G.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
@@ -775,7 +775,7 @@ lemma mapDerivedCategoryNatIso_isoWhiskerLeft (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] {G G' : D ⥤ E} [G.Additive]
     [G'.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] (e : G ≅ G') :
-    (mapDerivedCategoryNatIso (isoWhiskerLeft F e)).hom ≫ (mapDerivedCategoryCompIso F G').hom =
+    (mapDerivedCategoryNatIso (isoWhiskerLeft F e)).hom ≫ (mapDerivedCategoryCompIso F G').inv =
       (mapDerivedCategoryCompIso F G).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryNatIso e).hom := by
   refine Localization.natTrans_ext DerivedCategory.Q

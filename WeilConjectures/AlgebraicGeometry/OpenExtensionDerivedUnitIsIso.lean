@@ -79,7 +79,7 @@ theorem openExtension_derived_unit_isIso (X : Scheme.{u})
   let b : G.mapDerivedCategory ⊣ F.mapDerivedCategory :=
     Classical.choice (derived_open_shriek_adjunction X.toRingedSpace U)
   let e : G.mapDerivedCategory ⋙ F.mapDerivedCategory ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso G F) ≪≫
       Functor.mapDerivedCategoryNatIso (asIso a.unit).symm ≪≫
         Functor.mapDerivedCategoryIdIso _
   have hG := b.fullyFaithfulLOfCompIsoId e

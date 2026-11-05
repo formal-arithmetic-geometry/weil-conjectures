@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The quotient action on a square-zero ideal
 

@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Module.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine criteria for finite type and finite presentation of modules
 
