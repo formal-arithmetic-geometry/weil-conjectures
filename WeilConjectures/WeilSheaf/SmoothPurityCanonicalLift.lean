@@ -44,6 +44,16 @@ theorem isIso_of_isIntegralSmoothOrientation
   rw [hφ 0]
   infer_instance
 
+/-- A rational orientation with the specified integral normalization is invertible. -/
+theorem isIso_of_isCanonicalSmoothOrientation
+    (φ : boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
+      (boundedConstructibleUpperShriek ℓ f).obj
+        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
+    (hφ : IsCanonicalSmoothOrientation ℓ f d φ) : IsIso φ := by
+  obtain ⟨φ₀, hφ₀, rfl⟩ := hφ
+  have := isIso_of_isIntegralSmoothOrientation ℓ ⟨⊥, inferInstance⟩ f d φ₀ hφ₀
+  infer_instance
+
 /-- The canonical finite orientation, transported back from the fully faithful étale reading. -/
 noncomputable def canonicalFiniteIntegralOrientationIso (n : ℕ) :
     (boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj
@@ -69,11 +79,18 @@ lemma canonicalFiniteIntegralOrientationIso_map_hom (n : ℕ) :
   exact (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 n X)).map_preimage _
 
 /-- The same prescribed orientation in the ambient derived category of the reduction. -/
-noncomputable def canonicalAmbientIntegralOrientationIso (n : ℕ) :=
+noncomputable def canonicalAmbientIntegralOrientationIso (n : ℕ) :
+    (Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)).leftDerivedFunctor.obj
+        ((shiftFunctor _ (2 * d : ℤ)).obj
+          (integralTateTwistBoundedConstructible ℓ E.1 X.hom d)).obj ≅
+      (Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)).leftDerivedFunctor.obj
+        ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f).obj (𝟙_ _)).obj :=
   ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1 n).app
       ((shiftFunctor _ (2 * d : ℤ)).obj
         (integralTateTwistBoundedConstructible ℓ E.1 X.hom d))).symm ≪≫
-    (boundedConstructible _).ι.mapIso (canonicalFiniteIntegralOrientationIso ℓ E f d n) ≪≫
+    (boundedConstructible (condensedRingObj
+      (Profinite.integersModPowRingObj ℓ E.1 n) X.left)).ι.mapIso
+        (canonicalFiniteIntegralOrientationIso ℓ E f d n) ≪≫
       (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1 n).app
         ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f).obj (𝟙_ _))
 
@@ -110,7 +127,8 @@ theorem exists_isIntegralSmoothOrientation_of_compatible
       (canonicalFiniteIntegralOrientationIso ℓ E f d (n + 1)).hom := by
     apply (ObjectProperty.fullyFaithfulι _).map_injective
     apply (cancel_mono
-      (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1 (n + 1)).hom.app W).mp
+      ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1
+        (n + 1)).hom.app W)).mp
     rw [(boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1
       (n + 1)).hom.naturality g]
     change _ = _

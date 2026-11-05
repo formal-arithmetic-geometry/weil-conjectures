@@ -371,3 +371,11 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 - PR2110 merged at9cd901d78. SmoothPurity sanity target passed in K4-20261105T084253.log; that batch rc=1 only at the older ScalarWeilLaw (same comparison timeout, plus a unit rewrite). Do not treat that transport draft as green.
 - New SmoothPurityCanonicalLift reconstructs the prescribed finite orientation from its canonical reduction-transition equation, then applies derived Nakayama to prove invertibility and rational canonical existence. This is conditional until the transition equation is proved.
 - Source audit: the named orientation_existsUnique in RationalSmoothPurityCanonical is a sorry inside an archived comment; its active Native section uses normalizedFamily, a different object route. Upstream coefficient-reduction orientation theorem still asks for hframe, hε, hL and a Tate-shift comparison datum. Existence cannot be obtained from that theorem without supplying them.
+
+## 2026-11-05T08:48:34.795576+08:00 — archive superseded transport drafts
+- Removed the six unvalidated scalar-Weil/Tate encoding drafts from the working branch after handing that task to C1. They remain recoverable at59564f4f66, with performance measurements in this log. Retained GREEN scalar square, rational trivialization, and all six GREEN C4 roots modules.
+- Drafted SmoothPurityTraceNormalization: the prescribed finite orientation equation is equivalent to its finite counit-trace normalization using the actual mate-defined exceptional comparison. CanonicalLift first build remains running.
+
+## 2026-11-05T08:50:33.531825+08:00 — first canonical lift check
+- K4-20261105T084515.log rc=1 (259s): finite orientation preimage and the mod-ell isomorphism criterion produce no errors. Inferred ambient-iso result exceeded recursion depth; a missing parenthesis in cancel_mono caused two application errors and a downstream whnf timeout. Added the precise ambient result type and explicit reduction inclusion, and fixed the parenthesis. No resource-budget raises.
+- Next check includes the trace-normalization file and the rational normalized-orientation isomorphism criterion.

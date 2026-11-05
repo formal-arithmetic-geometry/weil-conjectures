@@ -79,3 +79,42 @@ yet validated. No failing integral unit or factorization remains in the stable h
 All compilation has used `ucheck`. The remaining work is to finish the actual Tate encoding,
 apply the two prepared user-proof replacements, verify their modules and the final audit,
 and document the general relative statement as unused by the main proof.
+
+## PR2110 re-plan: canonical orientation (2026-11-05)
+
+The new target is `WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`.
+K4 accepted integral reconstruction/trace normalization; C4 handles normalization uniqueness and
+Frobenius stability, C1 the actual Weil exceptional datum, Houyi finite/adic comparison.
+
+The named `orientation_existsUnique` at line219 of the interface repository's
+`RationalSmoothPurityCanonical.lean` is a literal sorry in an archived comment. Its `orientation`
+and `orientation_eq_adic` therefore do not furnish an active proof. The active Native section uses
+a normalized family on different objects. `canonicalSmoothPurityIso` from
+`SmoothOrientationCoefficientFamily` is an `asIso` of a finite-coefficient map; it supplies no
+integral reduction compatibility by itself.
+
+Concrete upstream inputs found:
+- `OrientationCanonical.etaleReductionSmoothOrientationIso`: prescribed finite orientations.
+- `LiftMorphisms.exists_derivedReduction_map_eq`: existence from actual transition compatibility.
+- `EtaleReductionConservative.isIso_of_isIso_etaleReduction_map`: invertibility from reduction1.
+- `ReductionTateTwistIntegersModPow.integersModPowReductionTateShiftData`: actual finite Tate datum.
+- `ReductionKummerClass.derivedExtendScalars_map_kummerδ`: coefficient compatibility of boundaries.
+- `ReductionMonoidal`: tensor comparisons, naturality, unit and braiding equations.
+
+Still required for the canonical transition equation:
+1. Instantiate the finite diagonal-orientation coefficient theorem. Its `hframe`, `hε`, `hL`
+   hypotheses are not theorems supplied by that declaration. The generic monoidal-supported
+   coefficient interface reduces them further, but no actual constructor for coefficient reduction
+   was found. Its exceptional tensor compatibility and Kummer/cup/localization compatibilities
+   remain to be assembled.
+2. Relate that finite coefficient comparison to the actual `finiteEtaleReading` and
+   `etaleReductionUpperShriekIso` comparisons at two successive integral reductions. No theorem
+   mentioning their transition compatibility was found in the source search.
+3. The uniqueness theorem for arbitrary derived-complete targets requires finite shifted Hom.
+   For this shifted Tate-line source it should follow from negative-Ext vanishing, not from a
+   blanket claim that derived completeness makes reductions faithful.
+
+New helpers under validation: `SmoothPurityCanonicalLift` isolates the exact transition equation
+and reconstructs an invertible canonical rational orientation from it;
+`SmoothPurityTraceNormalization` identifies the prescribed finite orientation equation with its
+counit-trace normalization. These are conditional infrastructure, not a closed target.
