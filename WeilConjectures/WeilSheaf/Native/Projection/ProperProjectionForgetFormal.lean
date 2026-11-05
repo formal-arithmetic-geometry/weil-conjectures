@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPasting
 public import WeilConjectures.WeilSheaf.Native.Projection.GeometricProjectionNaturality
+public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 
 /-! # The proper projection square in abstract tensor coordinates -/
 

@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoheren
 public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionForgetFormal
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.GeometricOpenProjectionTranspose
+public import WeilConjectures.WeilSheaf.Native.Projection.MonoidalProjectionForgetSquare
 
 /-! # The canonical open projection formula under condensed realization -/
 
@@ -116,8 +117,8 @@ lemma map_nativeOpenProjectionIso_hom_app
       ((derivedCondensedRealization k₀ l U).obj M)
       ((derivedCondensedRealization k₀ l Z).obj N))).symm hu hr
     (nativeOpenProjectionIso_inverse_unit k₀ l j M N) hg'
-  simpa only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-    id_whiskerRight, whiskerLeft_id, Category.id_comp, Category.comp_id,
-    Iso.symm_hom, Iso.symm_inv, asIso_hom, asIso_inv] using h
+  exact projectionForgetSquare_uncurried_app
+    (nativeOpenForgetIso k₀ l j) (derivedCondensedRealizationUpperStarIso k₀ l j).symm
+    (condensedRealizationTensor k₀ l U) (condensedRealizationTensor k₀ l Z) M N _ _ h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
