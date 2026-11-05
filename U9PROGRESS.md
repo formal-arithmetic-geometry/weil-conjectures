@@ -142,17 +142,13 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ554 in progress
+# BZ557 in progress
 
-- Branch: `u9/BZ554`; starting commit: `8af5cb324`.
-- The user instructed continuation after the exact identity-cast statement proposal.
-  That patch is now applied to the single `epsilon.app` expression in the public
-  `ringedTopoiDerivedPullback` alpha formula. All other declaration statements and
-  all existing docstrings are unchanged.
-- Added the known split public-import/import-all localization imports for `Qh` reduction.
-- Baseline remote build was blocked by unowned `Presheaf.InternalHom` (BZ581), before
-  reaching the assigned module. No edits made to that dependency.
-- Next: validate remotely once the owner repair is available, continue downstream,
-  then write DONE only after a green build.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ554.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
