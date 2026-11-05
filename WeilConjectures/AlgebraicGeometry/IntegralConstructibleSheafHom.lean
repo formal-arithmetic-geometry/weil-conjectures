@@ -21,10 +21,27 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+noncomputable local instance integralConstructibleHasZeroMorphisms
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
+local instance integralConstructibleHasColimit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) {I : Type (u + 1)} [SmallCategory I]
+    (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ) : HasColimit N := by
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  have : HasColimitsOfShape I C := inferInstance
+  have (n : ℤ) : HasColimit (N ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
   [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
 
-set_option maxHeartbeats 800000 in
 /-- Shifted Hom from a constructible integral sheaf commutes with uniformly bounded-below
 sequential colimits. The lifted indexing category is equivalent to the ordinary natural numbers.
 Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3),
@@ -91,6 +108,7 @@ theorem integralConstructible_sheaf_hom_colimit (X : Scheme.{u})
         colimMap e.hom ≫ colimit.desc _ (G.mapCocone (colimit.cocone L)) := by
       apply colimit.hom_ext
       intro s
+      dsimp only [G]
       simp only [colimit.ι_desc_assoc, ι_colimMap_assoc, colimit.ι_desc]
       exact hleg s
     have : IsIso (colimit.desc _ (F.mapCocone c') ≫ v.hom) := by
