@@ -113,7 +113,7 @@ private lemma polynomial_step_iff {R : Type u} [CommRing R]
     have he := (hm _).mp hp (Finsupp.single i 1 + E)
     rw [mul_assoc, MvPolynomial.coeff_C_mul, MvPolynomial.coeff_X_mul,
       prefix_support_shift f i E] at he
-    exact h E (MvPolynomial.coeff E p) he
+    exact h E (AddMonoidAlgebra.coeff p E) he
 
 private lemma weak_polynomial_iff {R : Type u} [CommRing R]
     (r : ℕ) (f : Fin r → R) :
