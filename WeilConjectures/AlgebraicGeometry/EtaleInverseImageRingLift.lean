@@ -26,6 +26,16 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+local instance commRingPresheafProducts.{uC, vC, w}
+    {C : Type uC} [Category.{vC} C] (I : Type w) :
+    HasLimitsOfShape (Discrete I) (Cᵒᵖ ⥤ CommRingCat.{w}) :=
+  functorCategoryHasLimitsOfShape
+
+local instance commRingSheafProducts.{uC, vC, w}
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) (I : Type w) :
+    HasLimitsOfShape (Discrete I) (Sheaf J CommRingCat.{w}) :=
+  hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape (sheafToPresheaf J _)
+
 private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :

@@ -10,6 +10,7 @@ public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.QuasiIso
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 import WeilConjectures.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 import WeilConjectures.AlgebraicGeometry.AffineSheafResolutionOfRingModel
