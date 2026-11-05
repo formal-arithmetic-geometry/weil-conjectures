@@ -196,7 +196,9 @@ lemma commShift_rightDerivedFunctorCompIso'_hom {H : C ⥤ E} [H.Additive]
     have h₂' : IsIso (G.rightDerivedFunctorUnit.app
         ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
           ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))) := h₂
-    dsimp [rightDerivedFunctorCompUnit]
+    dsimp only [rightDerivedFunctorCompUnit, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.comp_obj]
     infer_instance
   have e₁ : rightDerivedFunctorCompUnit F G ≫
       Functor.whiskerLeft DerivedCategory.Qh (rightDerivedFunctorCompIso' F G e).hom =
