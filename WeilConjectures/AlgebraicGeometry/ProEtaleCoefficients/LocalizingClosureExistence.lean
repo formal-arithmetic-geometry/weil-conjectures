@@ -228,7 +228,13 @@ theorem localizingClosure_exists
     fun P hP hS K hK ↦ hK P hP hS
   refine ⟨inferInstance, ?_, ?_, hloc, hcontains, hminimal, ?_, ?_⟩
   · intro I K
-    refine ⟨HomologicalComplex.coconeOfHasColimitEval (Discrete.functor K), ?_, ?_⟩
+    let : HasColimitsOfShape (Discrete I) A := inferInstance
+    let (n : ℤ) : HasColimit
+        (Discrete.functor K ⋙ HomologicalComplex.eval A (ComplexShape.up ℤ) n) := inferInstance
+    let c : Cofan K :=
+      HomologicalComplex.coconeOfHasColimitEval (C := A) (c := ComplexShape.up ℤ)
+        (Discrete.functor K)
+    refine ⟨c, ?_, ?_⟩
     · exact fun n ↦ ⟨colimit.isColimit _⟩
     · exact DerivedCategory.isColimit_mapCocone_grothendieckSum A I K
   · exact triangleCoproducts
