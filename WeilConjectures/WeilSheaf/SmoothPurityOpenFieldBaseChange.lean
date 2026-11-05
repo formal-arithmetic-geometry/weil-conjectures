@@ -92,8 +92,9 @@ theorem isIso_smoothUnitBaseChange_of_isOpenImmersion
     IsIso (smoothUnitBaseChange ℓ f f' bc e) := by
   have := isIso_smoothExceptionalMate_of_isOpenImmersion ℓ f f' sq bc (𝟙_ _)
   change IsIso ((mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (boundedConstructibleUpperShriekAdjunction ℓ f') bc.inv).app (𝟙_ _) ≫
+    (boundedConstructibleUpperShriekAdjunction ℓ f') (inv bc.hom)).app (𝟙_ _) ≫
       (boundedConstructibleUpperShriek ℓ f').map e)
+  rw [IsIso.Iso.inv_hom]
   infer_instance
 
 end AlgebraicGeometry.ProEtale.CondensedRing

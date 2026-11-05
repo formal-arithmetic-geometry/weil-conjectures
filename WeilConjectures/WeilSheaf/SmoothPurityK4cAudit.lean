@@ -5,6 +5,9 @@ public import WeilConjectures.WeilSheaf.SmoothPurityK4CanonicalAudit
 public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeAudit
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarDescentConjugation
 public import WeilConjectures.WeilSheaf.SmoothPurityIntegralOpenReductionExchange
+public import WeilConjectures.WeilSheaf.SmoothPurityGeometricFiberExchange
+public import WeilConjectures.WeilSheaf.SmoothPurityOpenFieldExchange
+public import WeilConjectures.WeilSheaf.SmoothPurityFieldProperMate
 
 /-! Complete audit of the retained K4c construction and its open-exchange support. -/
 
@@ -12,3 +15,8 @@ public import WeilConjectures.WeilSheaf.SmoothPurityIntegralOpenReductionExchang
 #print axioms AlgebraicGeometry.ProEtale.CondensedRing.purity_squareCompatible_openEtaleReductionExchange
 #print axioms AlgebraicGeometry.ProEtale.CondensedRing.purity_integralOpenExchange_eq_inv_baseChange
 #print axioms AlgebraicGeometry.ProEtale.CondensedRing.purity_squareCompatible_integralOpenEtaleReductionExchange
+
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purityGeometricFiberLowerShriekExchange
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_purityGeometricFiberLowerShriekExchange_mate_of_isOpenImmersion
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothUnitBaseChange_purityGeometricFiberExchange_of_isOpenImmersion
+#print axioms AlgebraicGeometry.ProEtale.CondensedRing.purity_properLowerShriekBaseChange_mate_app
