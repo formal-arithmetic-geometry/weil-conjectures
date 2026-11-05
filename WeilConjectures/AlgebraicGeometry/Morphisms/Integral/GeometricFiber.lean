@@ -80,8 +80,7 @@ theorem exists_hom_preimage_eq_bot_of_isIntegralHom (c : Nbhd y)
     (C : Set (pullback c.1.hom f : Scheme.{u}))
     (hC : IsClosed C) (h : ∀ t : GeometricFiber f y, basePt f c t default ∉ C) :
     ∃ (c' : Nbhd y) (g : c' ⟶ c), (f.Etale.map g.val).left.base ⁻¹' C = ∅ := by
-  let U := c.1
-  let u := c.2
+  obtain @⟨U, u⟩ := c
   set Z : Set U.left := (pullback.fst U.hom f).base '' C with hZ
   have hZc : IsClosed Z := (pullback.fst U.hom f).isClosedMap C hC
   have hu : u.left (default : Spec (.of Ω)) ∉ Z := by
@@ -102,7 +101,8 @@ theorem exists_hom_preimage_eq_bot_of_isIntegralHom (c : Nbhd y)
   set u' := IsOpenImmersion.lift U'.ι u.left hrange with hu'
   have hu'ι : u' ≫ U'.ι = u.left := IsOpenImmersion.lift_fac _ _ _
   let θ : Scheme.Etale.mk (U'.ι ≫ U.hom) ⟶ U := MorphismProperty.Over.homMk U'.ι rfl
-  refine ⟨⟨Scheme.Etale.mk (U'.ι ≫ U.hom), CategoryTheory.Over.homMk u' ?_⟩,
+  refine ⟨Functor.elementsMk _ (Scheme.Etale.mk (U'.ι ≫ U.hom))
+    (CategoryTheory.Over.homMk u' ?_),
     Functor.Elements.homMk θ ?_, ?_⟩
   · change u' ≫ U'.ι ≫ U.hom = y
     rw [← Category.assoc, hu'ι]
