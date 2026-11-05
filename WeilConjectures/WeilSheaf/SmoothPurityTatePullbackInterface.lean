@@ -9,12 +9,11 @@ import WeilConjectures.Tactic.ExactModProofs
 
 /-! # A module interface for geometric Tate pullback
 
-The definitions in this file deliberately keep their bodies private to the module.
-The equations and compatibility lemmas expose the operations needed for transport,
-without asking a consumer to compare the construction of condensed pullback.
+Named whole-functor and whole-isomorphism equations organize the Tate pullback
+comparison. The definitions remain transparent across module boundaries.
 -/
 
-public section
+@[expose] public section
 
 universe u
 
@@ -26,7 +25,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable {k : Type u} [Field k] [Finite k] (ℓ : ℕ) [Fact ℓ.Prime]
   {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
 
-/-- Geometric Frobenius pullback, with its construction hidden from importers. -/
+/-- The named geometric Frobenius pullback used in the comparison equations. -/
 noncomputable def purityTateFrobeniusPull :
     CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology a.geometricFiber) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) a.geometricFiber) ⥤
