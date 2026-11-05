@@ -440,13 +440,15 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
   letI : HasColimitsOfShape I
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
     inferInstance
-  let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
-    (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he)
-  letI : ∀ n : ℤ, HasColimit (coefficientComplexDiagram X ℓ C H he he) :=
-    fun _ ↦ inferInstance
   have hc0 : IsColimit (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he) :=
     Classical.choice (nonempty_isColimit_coefficientComplexCocone X ℓ
       (E := E) (F := E) C H he he)
+  letI : HasColimit (coefficientComplexDiagram X ℓ C H he he) :=
+    ⟨⟨coefficientComplexCocone X ℓ (E := E) (F := E) C H he he, hc0⟩⟩
+  letI : ∀ n : ℤ, HasColimit (coefficientComplexDiagram X ℓ C H he he) :=
+    fun _ ↦ inferInstance
+  let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
+    (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he)
   have hc : IsColimit c :=
     isColimitOfPreserves (HomologicalComplex.eval _ (.up ℤ) 0) hc0
   let a := (Mod.extendRestrictAdjunction
