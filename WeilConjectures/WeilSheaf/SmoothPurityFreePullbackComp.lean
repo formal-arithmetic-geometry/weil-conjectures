@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityFreePullbackComposition
 public import WeilConjectures.TateTwist.TateModuleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The canonical free-module pullback comparison respects composition -/
 
@@ -49,7 +50,9 @@ lemma purity_freeFunctorCompUpperStarIso_comp
   intro N
   rw [ProEtale.conjugateIsoEquiv_upperStarComp, conjugateIsoEquiv_upperStarComp]
   simp only [freeFunctorCompUpperStarIso, Equiv.apply_symm_apply, Iso.refl_hom,
-    NatTrans.id_app, Category.comp_id, CategoryTheory.Functor.map_id, Category.id_comp]
-  exact (lowerStarComp_hom_app_hom Λ f g N).symm
+    NatTrans.id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+  have h := (lowerStarComp_hom_app_hom Λ f g N).symm
+  dsimp only [Mod.forget, Functor.comp_obj] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -71,13 +71,16 @@ theorem purityExtendPullbackIso_factor
     e.hom.hom (purityExtendPullbackIso Λ p M N e).hom c
   · have h := CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
     simp only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] at h ⊢
+    dsimp only [Functor.comp_obj, Functor.comp_map, Mod.forget] at h ⊢
     exact_mod_proofs h
   · have h := CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs N
     simp only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] at h ⊢
+    dsimp only [Functor.comp_obj, Functor.comp_map, Mod.forget] at h ⊢
     exact_mod_proofs h
   · have h := purityExtendPullbackIso_unit Λ p M N e
     simp only [Iso.app_hom, CondensedRing.upperStarForgetIso_hom_app,
       Mod.forget, purityPullbackUnit] at h ⊢
+    dsimp only [Functor.comp_obj, Functor.comp_map, Mod.forget] at h ⊢
     exact_mod_proofs h
   · exact he
 
