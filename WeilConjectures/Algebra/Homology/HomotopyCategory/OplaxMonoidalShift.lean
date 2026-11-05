@@ -81,8 +81,7 @@ instance commShift_mapHomotopyCategoryδNatTrans_app (K : HomotopyCategory C (.u
   have : NatTrans.CommShift e₁.hom ℤ := by dsimp [e₁]; infer_instance
   have : NatTrans.CommShift e₂.hom ℤ := by
     dsimp only [e₂, Iso.trans_hom, Iso.symm_hom, isoWhiskerRight_hom, isoWhiskerLeft_hom]
-    set_option trace.Meta.synthInstance true in
-      infer_instance
+    infer_instance
   let δ' : (curriedTensor C).map₂CochainComplex.obj K₀ ⋙ G.mapHomologicalComplex (.up ℤ) ⟶
       G.mapHomologicalComplex (.up ℤ) ⋙ (curriedTensor D).map₂CochainComplex.obj
         ((G.mapHomologicalComplex (.up ℤ)).obj K₀) :=

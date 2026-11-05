@@ -314,7 +314,8 @@ private theorem oppositeCoconeBoundary_f {X Y : CochainComplex C ℤ}
     unop_id, HomologicalComplex.id_f]
   simp only [Category.assoc, Category.id_comp, mappingCocone, XIsoOfEq_shift,
     HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
-    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
+    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id,
+    Functor.opId, Iso.refl_inv, NatTrans.id_app, unop_id, HomologicalComplex.id_f]
 
 private theorem coneTriangle_boundary_f {K L : CochainComplex A ℤ}
     (f : K ⟶ L) (p : ℤ) :
@@ -474,7 +475,7 @@ private theorem homotopyCone_distinguished {K L : CochainComplex A ℤ} (f : K �
       (bifunctorHomHomotopyFunctor H I)).symm.app _ ≪≫
     (Functor.mapTriangleIso (quotientComparison H I)).app _ ≪≫
     (Functor.mapTriangleIso (Functor.isoWhiskerLeft (ordinaryFunctor H I)
-      (NatIso.op (DerivedCategory.quotientCompQhIso C)))).app _ ≪≫
+      (NatIso.op (DerivedCategory.quotientCompQhIso C)))).symm.app _ ≪≫
     (Functor.mapTriangleCompIso (ordinaryFunctor H I) DerivedCategory.Q.op).app _ ≪≫
     DerivedCategory.Q.op.mapTriangle.mapIso e.symm
   exact CategoryTheory.Pretriangulated.isomorphic_distinguished _
