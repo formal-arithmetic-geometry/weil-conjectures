@@ -210,19 +210,11 @@ private theorem smallEtale_cover_of_surjective (S : Scheme.{u})
     {I : Type u} (V : I → S.Etale) (U : S.Etale) (f : ∀ i, V i ⟶ U)
     (h : ∀ x : U.left, ∃ i y, (f i).left y = x) :
     Presieve.ofArrows V f ∈ S.smallEtalePretopology U := by
-  classical
-  let 𝒰 : U.left.Cover (Scheme.precoverage @AlgebraicGeometry.Etale) :=
-    Cover.mkOfCovers I (fun i => (V i).left) (fun i => (f i).left) h
-      (fun i => by infer_instance)
-  let (i : I) : (𝒰.X i).Over S := ⟨(V i).hom⟩
-  let hOver : 𝒰.Over S :=
-    { over i := inferInstance
-      isOver_map i := ⟨(f i).w⟩ }
-  change ∃ (𝒱 : Cover.{u} (Scheme.precoverage @AlgebraicGeometry.Etale) U.left)
-    (_ : 𝒱.Over S) (hp : ∀ i, AlgebraicGeometry.Etale (𝒱.X i ↘ S)),
-    Presieve.ofArrows V f = 𝒱.toPresieveOverProp hp
-  refine ⟨𝒰, hOver, fun i => (V i).prop, ?_⟩
-  rfl
+  change ((Presieve.ofArrows V f).map (MorphismProperty.Over.forget
+    (@AlgebraicGeometry.Etale) ⊤ S)).map (Over.forget S) ∈
+      Scheme.precoverage (@AlgebraicGeometry.Etale) U.left
+  rw [Presieve.map_ofArrows, Presieve.map_ofArrows, Scheme.ofArrows_mem_precoverage_iff]
+  exact ⟨h, fun i ↦ by infer_instance⟩
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

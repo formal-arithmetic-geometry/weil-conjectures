@@ -94,36 +94,36 @@ private lemma bounded_ancestor (S : SSet.{u}) (m : ℕ)
     (hdegenerate : ∀ n : ℕ, m < n → ∀ s : S.obj (op ⦋n⦌),
       s ∈ S.degenerate n) (z : S.Elements) :
     ∃ y : S.Elements, y.obj.unop.len ≤ m ∧ Nonempty (y ⟶ z) := by
-  rcases z with ⟨⟨⟨k⟩⟩, s⟩
+  rcases z with @⟨⟨⟨k⟩⟩, s⟩
   obtain ⟨n, f, _, x, hx⟩ := S.exists_nonDegenerate s
   have hn : n ≤ m := by
     by_contra h
     exact x.property (hdegenerate n (by omega) x.val)
-  exact ⟨⟨op ⦋n⦌, x.val⟩, hn, ⟨⟨f.op, hx.symm⟩⟩⟩
+  exact ⟨S.elementsMk (op ⦋n⦌) x.val, hn, ⟨⟨f.op, hx.symm⟩⟩⟩
 
 private lemma common_ancestor (S : SSet.{u}) (m : ℕ)
     (x x' z : S.Elements) (hx : x.obj.unop.len ≤ m)
     (hx' : x'.obj.unop.len ≤ m) (f : x ⟶ z) (g : x' ⟶ z) :
     ∃ (a : S.Elements) (_ : a.obj.unop.len ≤ 2 * m) (t : a ⟶ z)
       (p : x ⟶ a) (q : x' ⟶ a), p ≫ t = f ∧ q ≫ t = g := by
-  rcases x with ⟨⟨⟨n⟩⟩, x⟩
-  rcases x' with ⟨⟨⟨n'⟩⟩, x'⟩
-  rcases z with ⟨⟨⟨k⟩⟩, z⟩
+  rcases x with @⟨⟨⟨n⟩⟩, x⟩
+  rcases x' with @⟨⟨⟨n'⟩⟩, x'⟩
+  rcases z with @⟨⟨⟨k⟩⟩, z⟩
   obtain ⟨l, hl, t, p, q, hp, hq, hpq⟩ :=
-    common_factor S m hx hx' x x' f.val.unop g.val.unop
-      (f.property.trans g.property.symm)
-  let a : S.Elements := ⟨op ⦋l⦌, S.map p.op x⟩
-  have ht : S.map t.op a.snd = z := by
+    common_factor S m hx hx' x x' f.hom.unop g.hom.unop
+      (f.map_val.trans g.map_val.symm)
+  let a : S.Elements := S.elementsMk (op ⦋l⦌) (S.map p.op x)
+  have ht : S.map t.op a.val = z := by
     change S.map t.op (S.map p.op x) = z
     rw [← Functor.map_comp_apply, ← op_comp, ← hp]
-    exact f.property
+    exact f.map_val
   refine ⟨a, hl, ⟨t.op, ht⟩, ⟨p.op, rfl⟩, ⟨q.op, hpq.symm⟩, ?_, ?_⟩
-  · apply Subtype.ext
-    change p.op ≫ t.op = f.val
+  · apply Functor.Elements.hom_ext
+    change p.op ≫ t.op = f.hom
     rw [← op_comp, ← hp]
     rfl
-  · apply Subtype.ext
-    change q.op ≫ t.op = g.val
+  · apply Functor.Elements.hom_ext
+    change q.op ≫ t.op = g.hom
     rw [← op_comp, ← hq]
     rfl
 
@@ -205,15 +205,15 @@ theorem simplicialIndex_finite_initial (S : SSet.{u}) [S.Finite]
   let P : ObjectProperty S.Elements := fun x ↦ x.obj.unop.len ≤ 2 * m₀
   have hobjects : Finite P.FullSubcategory := by
     let F : (Σ n : Fin (2 * m₀ + 1), S.obj (op ⦋n.val⦌)) → P.FullSubcategory :=
-      fun ⟨n, s⟩ ↦ ⟨⟨op ⦋n.val⦌, s⟩, by change n.val ≤ 2 * m₀; omega⟩
+      fun ⟨n, s⟩ ↦ ⟨S.elementsMk (op ⦋n.val⦌) s, by change n.val ≤ 2 * m₀; omega⟩
     apply Finite.of_surjective F
-    rintro ⟨⟨⟨⟨n⟩⟩, s⟩, hn⟩
+    rintro ⟨@⟨⟨⟨n⟩⟩, s⟩, hn⟩
     exact ⟨⟨⟨n, by change n ≤ 2 * m₀ at hn; omega⟩, s⟩, rfl⟩
   have hhoms (y y' : P.FullSubcategory) : Finite (y ⟶ y') := by
     apply Finite.of_injective (fun f : y ⟶ y' ↦ f.hom.hom.unop)
     intro f g h
     apply ObjectProperty.hom_ext
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     exact Quiver.Hom.unop_inj h
   have hreach (z : S.Elements) : ∃ y : P.FullSubcategory, Nonempty (y.obj ⟶ z) := by
     obtain ⟨y, hy, f⟩ := bounded_ancestor S m₀ hdegenerate z
