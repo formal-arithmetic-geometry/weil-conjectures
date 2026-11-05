@@ -80,7 +80,8 @@ noncomputable def boundedBelowInjectiveComparison
     (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).obj
         (DerivedCategory.Plus.Q.obj K) ⟶
       DerivedCategory.Q.obj ((v.mapHomologicalComplex (.up ℤ)).obj K.obj) := by
-  have := isIso_cochain_unit v K
+  have : IsIso (v.rightDerivedFunctorPlusUnit.app K) := by
+    exact isIso_cochain_unit v K
   exact DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnit.app K))
 
 /-- Lift the canonical SES boundary through the full inclusion of the bounded
