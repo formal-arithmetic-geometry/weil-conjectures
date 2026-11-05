@@ -185,9 +185,9 @@ def DerivedCoordinateCompatibility
                   (Iso.refl (F ⋙ T')) (.up ℤ)).inv.app K)) ∧
       ∀ K : DerivedCategory A,
         F.mapDerivedCategory.map (Φ.hom.app K) ≫ σD.hom.app K =
-          ((Functor.mapDerivedCategoryCompIso U F) ≪≫
+          ((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
             Functor.mapDerivedCategoryNatIso ρ ≪≫
-            (Functor.mapDerivedCategoryCompIso G U').symm).hom.app
+            Functor.mapDerivedCategoryCompIso G U').hom.app
               (E.obj K) ≫
             U'.mapDerivedCategory.map (β.hom.app K) ≫
             Φ'.hom.app (F.mapDerivedCategory.obj K)
@@ -908,9 +908,9 @@ private theorem derivedCoordinateSquare
     (K : DerivedCategory A) :
     F.mapDerivedCategory.map (Φ.hom.app K) ≫
         (powerComparison F.mapDerivedCategory d).hom.app K =
-      ((Functor.mapDerivedCategoryCompIso U F) ≪≫
+      ((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
         Functor.mapDerivedCategoryNatIso ρ ≪≫
-        (Functor.mapDerivedCategoryCompIso G U').symm).hom.app (E.obj K) ≫
+        Functor.mapDerivedCategoryCompIso G U').hom.app (E.obj K) ≫
         U'.mapDerivedCategory.map
           ((scalarComparisonDescent T F G T' E ε E' ε' χ).hom.app K) ≫
         Φ'.hom.app (F.mapDerivedCategory.obj K) := by
