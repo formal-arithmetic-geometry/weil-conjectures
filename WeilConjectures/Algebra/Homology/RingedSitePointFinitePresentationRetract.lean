@@ -232,6 +232,10 @@ private theorem matrix_parameter {ι κ : Type w} [Finite ι] [Finite κ]
   rw [hv']
   exact Iso.inv_hom_id_apply _ _
 
+private local instance (ι : Type w) :
+    HasColimitsOfShape (Discrete ι) (SheafOfModules.{w} (SheafFreeModule.ring R)) :=
+  inferInstance
+
 private abbrev freePower (ι : Type w) :=
   ∐ fun _ : ι ↦ (SheafFreeModule.free R).obj T
 
