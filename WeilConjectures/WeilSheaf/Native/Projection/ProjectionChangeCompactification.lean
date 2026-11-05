@@ -35,8 +35,8 @@ lemma projectionForgetSquare_changeGeometricPush
   apply (cancel_mono (η.hom.app B)).1
   simp only [comp_whiskerRight, Category.assoc]
   rw [η.hom.naturality t, ← hη]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  rw [reassoc_of% hc, Category.id_comp]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [reassoc_of% hc]
   exact h
 
 end CategoryTheory
