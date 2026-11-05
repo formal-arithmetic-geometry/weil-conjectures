@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Bounded coherent cohomology of perfect complexes
 

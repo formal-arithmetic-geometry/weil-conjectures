@@ -8,6 +8,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Exact
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-!
 # Kernel and image identities for an exact-couple differential

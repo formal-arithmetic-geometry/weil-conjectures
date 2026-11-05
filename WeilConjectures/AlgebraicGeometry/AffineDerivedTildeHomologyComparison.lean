@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Preadditive.LeftExact
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Cohomology of the derived affine associated-sheaf functor
 

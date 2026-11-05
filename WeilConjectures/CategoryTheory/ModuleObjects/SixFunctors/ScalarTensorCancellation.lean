@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Tensor cancellation for extension of scalars of internal modules
 

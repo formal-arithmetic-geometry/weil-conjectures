@@ -17,6 +17,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Monoidal.Functor
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-!
 # Exact symmetric monoidal equivalences and signed total K-flatness

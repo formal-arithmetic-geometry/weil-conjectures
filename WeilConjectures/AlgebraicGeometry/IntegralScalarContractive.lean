@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientDat
 
 import all WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 import all WeilConjectures.AlgebraicGeometry.PointLanAffineEvaluation
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Scalar units in the integral coefficient sheaf
 

@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import WeilConjectures.RingTheory.FibreLocalRingNaturalIso
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Comparison of a fixed polynomial presentation with its closed fibre
 

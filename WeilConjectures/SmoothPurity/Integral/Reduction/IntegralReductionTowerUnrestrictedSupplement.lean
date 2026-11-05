@@ -55,6 +55,7 @@ public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Integral reduction towers without a finite-field datum
 

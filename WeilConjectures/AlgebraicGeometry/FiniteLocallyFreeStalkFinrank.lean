@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Stalk finrank of a finite locally free module
 

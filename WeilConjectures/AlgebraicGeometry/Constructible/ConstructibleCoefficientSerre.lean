@@ -98,6 +98,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Exact closure of constructible sheaves in the site coefficient universe
 Source: Stacks Tags 09B5 and 093U, with finite global partitions.

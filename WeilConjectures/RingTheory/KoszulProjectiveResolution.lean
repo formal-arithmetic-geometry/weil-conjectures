@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Category.ModuleCat.Projective
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # The Koszul resolution of a quotient
 

@@ -17,6 +17,7 @@ import all WeilConjectures.Algebra.Homology.OrdinaryFlatCoefficientComparison
 import all WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Ordinary common-quotient scalar extensions
 

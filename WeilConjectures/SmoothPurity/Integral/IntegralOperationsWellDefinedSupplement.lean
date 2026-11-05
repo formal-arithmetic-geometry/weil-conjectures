@@ -186,6 +186,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import all WeilConjectures.SecSmoothPurity.StrictCoefficient.ScalarCalculation.NormalizedScalarTensorTransitionsSupplement
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.AlgebraicGeometry.IntegralOperationsWellDefined
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Well-definedness of integral pullback and completed tensor product
 

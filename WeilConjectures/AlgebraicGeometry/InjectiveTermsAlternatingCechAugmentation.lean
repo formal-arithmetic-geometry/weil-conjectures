@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 import WeilConjectures.AlgebraicGeometry.InjectiveAlternatingCechRowAugmentation
 import WeilConjectures.Algebra.Homology.FiniteStripAugmentation
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Finite-cover augmentation for complexes with injective terms
 

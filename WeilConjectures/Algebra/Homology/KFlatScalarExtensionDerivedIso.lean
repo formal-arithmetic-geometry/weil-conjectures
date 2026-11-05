@@ -17,6 +17,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Homology.Additive
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Scalar extension homology is invariant among K-flat derived models
 

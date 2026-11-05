@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStruct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.Algebra.Category.ModuleCat.Sheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-!
 # Inverse image of modules on small étale sites

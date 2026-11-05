@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.GaloisCoverTraceMonoidal
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-!
 # Restriction along a morphism of weakly étale covers

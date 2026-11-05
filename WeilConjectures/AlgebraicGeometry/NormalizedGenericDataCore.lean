@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConsta
 import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 @[expose] public section
 universe u

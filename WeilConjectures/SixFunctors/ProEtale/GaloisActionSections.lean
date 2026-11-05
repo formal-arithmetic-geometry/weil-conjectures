@@ -18,6 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerSta
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GaloisCoverTrace
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceLowerStar
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-!
 # The Galois action of a covering on sections

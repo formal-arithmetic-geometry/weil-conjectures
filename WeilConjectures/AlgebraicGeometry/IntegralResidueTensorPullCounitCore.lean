@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPullPresentation
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! The normalized middle composite for the residue tensor-pull counit.
 

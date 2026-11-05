@@ -12,6 +12,7 @@ import WeilConjectures.RingTheory.SyntomicPolynomialFibreComparison
 import WeilConjectures.RingTheory.LocalizedIdealConormalGeneratorBound
 import WeilConjectures.RingTheory.LciConormalFreeRankCodimension
 import Mathlib.RingTheory.Polynomial.Basic
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-!
 # Fibre generators in a fixed polynomial presentation

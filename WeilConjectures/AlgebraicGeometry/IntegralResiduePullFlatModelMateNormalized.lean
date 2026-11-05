@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueComparisonInterface
 import WeilConjectures.AlgebraicGeometry.IntegralResiduePullOrdinaryUnit
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! The counit-normalized mate calculation for the integral residue pull square.
 

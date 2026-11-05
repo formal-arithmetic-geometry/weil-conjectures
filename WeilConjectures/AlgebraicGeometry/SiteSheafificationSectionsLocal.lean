@@ -9,6 +9,7 @@ module
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Mathlib.CategoryTheory.Sites.LocallySurjective
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 @[expose] public section
 

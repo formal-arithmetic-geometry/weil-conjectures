@@ -16,6 +16,7 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Mathlib.CategoryTheory.Abelian.Injective.Extend
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 @[expose] public section
 universe u

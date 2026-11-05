@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 import all WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
+set_option linter.privateModule false  -- prune: only private declarations remain
 /-! # The ordinary scalar pullback square on homotopy categories -/
 
 @[expose] public section

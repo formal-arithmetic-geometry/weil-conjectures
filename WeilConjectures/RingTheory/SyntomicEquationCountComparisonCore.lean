@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 @[expose] public section
 universe u v

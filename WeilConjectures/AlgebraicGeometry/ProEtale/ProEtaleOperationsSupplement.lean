@@ -79,6 +79,7 @@ import WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-!
 # Ordinary derived operations with identified pro-etale coefficients

@@ -21,6 +21,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Čech totalization of a quasi-coherent resolution
 

@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import Mathlib.CategoryTheory.Monoidal.Mod
 
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Internal modules in abelian groups and ordinary modules
 

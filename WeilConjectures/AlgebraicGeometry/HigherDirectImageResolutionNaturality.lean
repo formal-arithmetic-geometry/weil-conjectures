@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Naturality of the concrete higher-direct-image resolution section map
 

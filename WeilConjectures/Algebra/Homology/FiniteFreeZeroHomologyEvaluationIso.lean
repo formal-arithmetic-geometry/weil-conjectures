@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 @[expose] public section
 set_option autoImplicit false

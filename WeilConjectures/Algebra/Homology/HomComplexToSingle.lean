@@ -9,6 +9,7 @@ module
 public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Signed dual and Hom into a single sheaf
 

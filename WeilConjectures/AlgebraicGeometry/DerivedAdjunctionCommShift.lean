@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 public import Mathlib.CategoryTheory.Shift.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-!
 # Shift compatibility of the bounded below derived étale adjunction

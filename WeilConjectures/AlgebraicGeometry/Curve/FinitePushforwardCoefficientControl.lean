@@ -16,6 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Finite.Stalk
+set_option linter.privateModule false  -- prune: only private declarations remain
 
 /-! # Coefficient hypotheses for finite direct images
 

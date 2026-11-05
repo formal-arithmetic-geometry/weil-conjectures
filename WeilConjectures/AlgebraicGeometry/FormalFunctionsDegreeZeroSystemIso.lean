@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.FormalFibreCohomology
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
+set_option linter.privateModule false  -- prune: only private declarations remain
 /-! # Degree-zero comparison of the formal fibre systems
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OD
