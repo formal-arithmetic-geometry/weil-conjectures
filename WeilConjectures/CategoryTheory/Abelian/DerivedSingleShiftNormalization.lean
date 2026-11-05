@@ -63,43 +63,51 @@ private theorem single_quotient_inverse_shift_int (X : C) (n : ℤ) :
       (DerivedCategory.Plus.Qh.commShiftIso (-n)).hom.app K₀ ≫
       ((e 0).inv)⟦-n⟧' := by
   intro e K₀ h
-  have he (i : ℤ) : (e i).inv = 𝟙 ((DerivedCategory.Plus.singleFunctor C i).obj X) := by
-    apply DerivedCategory.Plus.ι.map_injective
-    simp only [e, Functor.preimageIso_inv, Functor.map_preimage, Iso.trans_inv]
-    change (𝟙 _) ≫ (𝟙 _) = 𝟙 _
-    exact Category.id_comp _
-  rw [he, he]
-  erw [Category.id_comp, Functor.map_id, Category.comp_id]
   apply DerivedCategory.Plus.ι.map_injective
-  rw [Functor.map_comp]
+  simp only [Functor.map_comp, e, Functor.preimageIso_inv, Functor.map_preimage,
+    Iso.trans_inv, Iso.symm_inv, NatIso.app_inv, DerivedCategory.singleFunctorIsoCompQ,
+    Iso.refl_inv, NatTrans.id_app, Category.comp_id]
   simp only [DerivedCategory.Plus.singleFunctors, map_lift_single_shift_inv,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
   erw [Category.id_comp, Functor.map_id, Category.id_comp]
-  simp only [DerivedCategory.singleFunctors, SingleFunctors.postcomp_shiftIso_inv_app,
-    Category.assoc]
-  change DerivedCategory.Qh.map
-      (((HomotopyCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app X) ≫
-    (DerivedCategory.Qh.commShiftIso (-n)).hom.app K₀.obj ≫
-    (DerivedCategory.Plus.ι.commShiftIso (-n)).inv.app
-      ((DerivedCategory.Plus.singleFunctor C 0).obj X) =
-    DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι C).map h) ≫
-    DerivedCategory.Plus.ι.map
-      ((DerivedCategory.Plus.Qh.commShiftIso (-n)).hom.app K₀)
+  apply (cancel_mono ((DerivedCategory.Plus.ι.commShiftIso (-n)).hom.app
+    ((DerivedCategory.Plus.singleFunctor C 0).obj X))).1
+  simp only [Category.assoc]
+  erw [Iso.inv_hom_id_app, Category.comp_id,
+    DerivedCategory.Plus.ι.commShiftIso_hom_naturality]
+  rw [Functor.map_preimage]
   have hq := Functor.CommShift.OfComp.map_iso_hom_app
     (DerivedCategory.TStructure.t.plus.liftCompιIso
       (HomotopyCategory.Plus.ι C ⋙ DerivedCategory.Qh)
       (fun K ↦ (DerivedCategory.Plus.Qh.obj K).property)) (-n) K₀
   simp only [ObjectProperty.liftCompιIso, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
     Functor.commShiftIso_comp_hom_app, Category.id_comp] at hq
-  erw [hq]
+  erw [hq, Functor.map_id, Category.id_comp]
+  simp only [Category.assoc]
+  erw [Iso.inv_hom_id_app_assoc]
   dsimp only [h]
   simp only [HomotopyCategory.Plus.singleFunctors, map_lift_single_shift_inv,
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
-  erw [Category.id_comp, Functor.map_id, Category.id_comp, Functor.map_id, Category.id_comp]
-  simp only [Functor.map_comp, Category.assoc]
-  simp only [← Functor.map_comp_assoc]
+  erw [Category.id_comp, Functor.map_id, Category.id_comp]
+  simp only [Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc]
   erw [Iso.inv_hom_id_app, Category.comp_id]
-  rfl
+  have hs := congr_app ((DerivedCategory.singleFunctorsPostcompQhIso C).inv.comm
+    (-n) n 0 (by simp)) X
+  simp only [DerivedCategory.singleFunctorsPostcompQhIso, Iso.trans_inv,
+    SingleFunctors.comp_hom, SingleFunctors.postcompPostcompIso_hom_hom,
+    SingleFunctors.postcompIsoOfIso_inv_hom, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.whiskerLeft_app, Iso.symm_inv,
+    Category.id_comp, Functor.whiskerRight_app] at hs
+  apply (cancel_epi
+    ((((HomotopyCategory.singleFunctors C).postcomp DerivedCategory.Qh).shiftIso
+      (-n) n 0 (by simp)).hom.app X)).1
+  apply (cancel_mono
+    (((DerivedCategory.singleFunctors C).shiftIso (-n) n 0 (by simp)).hom.app X)).1
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  rw [hs]
+  simp only [SingleFunctors.postcomp_shiftIso_hom_app, Category.assoc,
+    ← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+    Iso.inv_hom_id_app_assoc]
 
 
 omit [EnoughInjectives C]
