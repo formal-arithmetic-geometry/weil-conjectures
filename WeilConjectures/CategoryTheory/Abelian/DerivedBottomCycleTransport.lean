@@ -114,7 +114,10 @@ theorem rightDerivedBottom_cycle_transport (n : ℤ) (K : CochainComplex C ℤ) 
           ((DerivedCategory.homologyFunctorFactors D n).app
             ((S.mapHomologicalComplex (.up ℤ)).obj K)).inv ≫
           (DerivedCategory.homologyFunctor D n).map
-            (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫
+            ((DerivedCategory.quotientCompQhIso D).inv.app
+                ((S.mapHomologicalComplex (.up ℤ)).obj K) ≫
+              S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K) ≫
+              S.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso C).hom.app K)) ≫
           (DerivedCategory.homologyFunctor D n).map
             (S.rightDerivedFunctor.map
               ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj K))) ≫

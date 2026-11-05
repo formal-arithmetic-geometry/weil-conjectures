@@ -86,3 +86,16 @@
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
 - This completion commit changes only progress documentation; Lean source matches the green build.
+
+# BZ311 in progress
+
+- Branch: `u9/BZ311`; starting commit: `ec1bc636d`.
+- Assigned: `WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport`.
+- Baseline and import-only remote builds fail in the public statement because Qh is no_expose.
+- The user instructed continuation after the exact three-statement compatibility proposal.
+  Its canonical quotientCompQhIso endpoint transports are applied to the assigned theorem
+  and its first two importer layers, DerivedBottomUnitNormalizationFormula and
+  DerivedBottomUnitNormalization. Assumptions and binders are unchanged.
+- Next: validate all three through `ucheck-bump` and repair any proof failures.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ311.md`.
+- No local Lean/Lake execution, forbidden proof shortcuts, or heartbeat increases.
