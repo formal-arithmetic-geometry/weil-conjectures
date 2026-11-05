@@ -37,12 +37,9 @@ the degree of divisors, and shows that principal divisors have degree zero.
 - `AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic`: `Cl(C) ≅ Pic(C)` for a
   smooth integral curve (blueprint `lem-sc-divisor-class-curve`).
 - `AlgebraicGeometry.Scheme.picDegreeHom_toPic`: `deg 𝒪_C(D) = deg D`.
-- `AlgebraicGeometry.Scheme.degree_div_eq_zero`: principal divisors have degree zero.
 - `AlgebraicGeometry.Scheme.surjective_picDegreeHom`: the degree is surjective.
 - `AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom`:
   `Pic(C) ≅ ℤ × Pic⁰(C)` (blueprint `lem-sc-pic-proper-decomposition`).
-- `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_and_surjective_picDegreeHom`: the blueprint
-  subsection `det-def-pic`, its facts (P1) and (P2).
 
 ## Implementation notes
 
@@ -479,55 +476,6 @@ lemma isClosed_of_ord_ne_zero {f : C.functionField} {x : C} (hx : C.ord f x ≠ 
   have hy1 : Order.coheight y = 1 := by exact_mod_cast hy1
   rw [hx1, hy1] at h
   exact absurd h (by decide)
-
-variable (k) in
-include k in
-/-- **Principal divisors have degree zero** on a smooth proper integral curve over an
-algebraically closed field: `deg div(f) = ∑_P v_P(f) = 0`
-(`AlgebraicGeometry.Scheme.finsum_ord_eq_zero`).
-
-(blueprint: `def-sc-pic0`) -/
-theorem degree_div_eq_zero (f : Additive C.functionFieldˣ) : Divisor.degree C (C.div f) = 0 := by
-  have := QuasiCompact.compactSpace_of_compactSpace (C ↘ Spec (.of k))
-  rw [← finsum_ord_eq_zero k C f.toMul.ne_zero, Divisor.degree_apply, Finsupp.sum,
-    ← finsum_eq_sum_of_support_subset _ (s := (C.div f).support) (by simp)]
-  simp only [div_apply]
-  rw [finsum_set_coe_eq_finsum_mem (f := fun x ↦ C.ord (f.toMul : C.functionField) x),
-    finsum_mem_def]
-  rw [(Set.indicator_eq_self (s := closedPoints C)).2 fun y hy ↦ isClosed_of_ord_ne_zero k hy]
-
-/-- Blueprint `det-def-pic`: Picard group, degree, `Pic⁰`
-
-Let `C` be a smooth proper integral (equivalently, connected) curve over an algebraically closed
-field `k`. Its Picard group `Pic(C)` is the group of invertible `𝒪_C`-modules up to isomorphism,
-with the degree homomorphism `deg : Pic(C) → ℤ` (`AlgebraicGeometry.Scheme.picDegreeHom`) and
-`Pic⁰(C) = ker deg`. The two facts asserted in the definition hold.
-
-- **(P1)** `Pic(C)` is in bijection with `H¹(C_Zar, 𝒪_Cˣ)` and with `H¹(C_ét, 𝔾ₘ)` (Hilbert 90,
-  `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_unitsSheaf`), and it is the divisor class
-  group `Div(C) / Princ(C)` via `D ↦ [𝒪_C(D)]`
-  (`AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic`).
-- **(P2)** The degree `deg (∑_P n_P [P]) = ∑_P n_P` kills principal divisors
-  (`AlgebraicGeometry.Scheme.degree_div_eq_zero`), so it descends to `Pic(C)`, where it is
-  `deg` (`AlgebraicGeometry.Scheme.picDegreeHom_toPic`); it is surjective since `C` has a
-  closed point (`AlgebraicGeometry.Scheme.surjective_picDegreeHom`).
-
-Only the existence of the bijections in (P1) is recorded, not that they are the canonical maps
-`ℒ ↦ [Isom(𝒪, ℒ)]`, nor that they are group isomorphisms. -/
-theorem nonempty_equiv_H_one_and_surjective_picDegreeHom :
-    (Nonempty (C.Pic ≃ Sheaf.H C.unitsSheaf 1) ∧
-        Nonempty (Sheaf.H C.unitsSheaf 1 ≃ C.CohomologicalPicardGroup) ∧
-        ∃ e : C.DivisorClassGroup ≃+ Additive C.Pic,
-          ∀ D : C.Divisor, e (QuotientAddGroup.mk D) = Divisor.toPic k C D) ∧
-      (∀ f, Divisor.degree C (C.div f) = 0) ∧
-      (∀ D, picDegreeHom k C (Divisor.toPic k C D).toMul = .ofAdd (Divisor.degree C D)) ∧
-      Function.Surjective (picDegreeHom k C) := by
-  have : IsCurve (C ↘ Spec (.of k)) :=
-    { krullDim_le_one := topologicalKrullDim_le_of_smoothOfRelativeDimension (C ↘ Spec (.of k)) 1 }
-  have : Nonempty C := ⟨genericPoint C⟩
-  exact ⟨⟨(nonempty_equiv_H_one_unitsSheaf C).1, (nonempty_equiv_H_one_unitsSheaf C).2,
-    exists_divisorClassGroup_addEquiv_pic⟩, degree_div_eq_zero k, picDegreeHom_toPic,
-    surjective_picDegreeHom⟩
 
 end AlgClosed
 
