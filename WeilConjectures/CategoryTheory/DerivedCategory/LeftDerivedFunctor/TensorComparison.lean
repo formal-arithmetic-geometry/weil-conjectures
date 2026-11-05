@@ -154,7 +154,6 @@ lemma mapBifunctorComparison_naturality_of_tensorComparison {F F' : C ⥤ D} [F.
   simp only [mapBifunctorComparisonApp]
   erw [reassoc_of% (hτ (K.X i₁) (L.X i₂))]
   simp [tensorHom_def]
-  rfl
 
 omit [MonoidalClosed C] [BraidedCategory C] [MonoidalClosed D] [BraidedCategory D]
   [MonoidalClosed E] [BraidedCategory E] in
@@ -174,7 +173,6 @@ lemma mapBifunctorComparison_comp_tensorComparison (F : C ⥤ D) (G : D ⥤ E) [
   erw [Functor.comp_map, ← G.map_comp_assoc, map_ιMapBifunctor_mapBifunctorComparisonX,
     G.map_comp_assoc, map_ιMapBifunctor_mapBifunctorComparisonX]
   simp
-  rfl
 
 end ComplexLevel
 
