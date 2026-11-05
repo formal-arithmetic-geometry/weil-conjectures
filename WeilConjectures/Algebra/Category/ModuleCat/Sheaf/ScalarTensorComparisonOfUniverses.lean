@@ -49,10 +49,17 @@ private noncomputable def rawScalarTensorIso :
     induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp only [map_add, hz, hw]
     | tmul n x =>
-      change N.val.map i n ⊗ₜ[S.obj.obj V]
-        ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (c.hom.app V).hom] M.val.map i x) =
-        N.val.map i n ⊗ₜ[S.obj.obj V] changeOfRingsMapOfUniverses c M i
-          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x)
+      let : Module (R.obj.obj V) (S.obj.obj V) :=
+        Module.compHom (S.obj.obj V) (c.hom.app V).hom
+      change TensorProduct.tmul (S.obj.obj V) (M := N.val.obj V)
+        (N := (ModuleCat.extendScalars (c.hom.app V).hom).obj (M.val.obj V))
+        (N.val.map i n)
+        (TensorProduct.tmul (R.obj.obj V) (M := S.obj.obj V) (N := M.val.obj V)
+          1 (M.val.map i x)) =
+        TensorProduct.tmul (S.obj.obj V) (M := N.val.obj V)
+          (N := (ModuleCat.extendScalars (c.hom.app V).hom).obj (M.val.obj V))
+          (N.val.map i n) (changeOfRingsMapOfUniverses c M i
+            ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))
       rw [changeOfRingsMap_tmulOfUniverses, map_one])
 
 private noncomputable def tensorSwapIso {A : Cᵒᵖ ⥤ CommRingCat.{r}}
