@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 
 import WeilConjectures.AlgebraicGeometry.ModuleSubmoduleBinaryGluingProperties
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Mathlib.Util.CountHeartbeats
 
 /-! # Gluing a finite presentation and its map across two opens
 
@@ -29,6 +30,7 @@ open CategoryTheory.Limits SheafOfModules
 
 -- Transport across the iterated slice identifies restriction by overMap with over.
 -- Apply the existing finite-presentation locality theorem to the two-open cover.
+#count_heartbeats in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 private theorem finitePresentation_binary_local

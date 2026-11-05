@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.ModuleSubmoduleBinaryGluingProperties
 import WeilConjectures.AlgebraicGeometry.ModuleBinaryLocalProperties
+import Mathlib.Util.CountHeartbeats
 
 /-! # Gluing a submodule with the ambient module on two opens
 
@@ -57,6 +58,7 @@ private theorem finiteType_of_iso
 
 
 
+#count_heartbeats in
 /-- Glue a finite-type submodule on V to the whole module on W when its inclusion
 is an isomorphism on the overlap. No compactness or affineness is required.
 
