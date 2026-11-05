@@ -73,6 +73,7 @@ private lemma resolutionDerivedIso_comp
       ((F ⋙ G).mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
   erw [hA, hB, hC]
   simp [Category.assoc, H, L]
+  erw [Functor.map_id, Category.comp_id, Category.id_comp]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
