@@ -68,18 +68,26 @@ theorem projectionCompact_forget_square (M : WeilComplex k₀ l X) (N : WeilComp
         (projectionCompactForgetIso k₀ l f).inv.app M ▷
           (compactProjectionForget k₀ l Y).obj N ≫
         CondensedRing.boundedConstructibleExceptionalProjectionMorphism l fb _ _ := by
-  let η := CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l _ cb
+  let η : CondensedRing.boundedConstructibleLowerShriek l fb ≅
+      CondensedRing.boundedConstructibleLowerShriekOfCompactification l cb :=
+    CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l _ cb
   let t := (compactProjectionForgetTensorIso k₀ l X).hom.app (M, (upperStar f).obj N) ≫
     (compactProjectionForget k₀ l X).obj M ◁ (projectionCompactPullForgetIso k₀ l f).hom.app N
   have hη := CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
-    l _ cb ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
+    l (CondensedRing.compactificationOverField fb) cb
+      ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
+  have hc : η.inv.app ((compactProjectionForget k₀ l X).obj M) ▷
+        (compactProjectionForget k₀ l Y).obj N ≫
+      η.hom.app ((compactProjectionForget k₀ l X).obj M) ▷
+        (compactProjectionForget k₀ l Y).obj N = 𝟙 _ := by
+    rw [← comp_whiskerRight, Iso.inv_hom_id_app, id_whiskerRight]
   apply (cancel_mono (η.hom.app _)).1
   simp only [projectionCompactForgetIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, comp_whiskerRight, Category.assoc]
   rw [η.hom.naturality t]
   rw [← hη]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp,
-    ← comp_whiskerRight, id_whiskerRight, Category.comp_id]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  rw [reassoc_of% hc, Category.id_comp]
   exact projectionCompactification_forget_square k₀ l f M N
 
 end AlgebraicGeometry.WeilComplex
