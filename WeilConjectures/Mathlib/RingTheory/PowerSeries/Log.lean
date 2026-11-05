@@ -25,13 +25,13 @@ namespace PowerSeries
 variable {A : Type*} [CommRing A] [Algebra ℚ A]
 
 /-- The derivative of `log (1 + X)` is the inverse of `1 + X`. -/
-theorem one_add_X_mul_derivative_log : (1 + X) * d⁄dX A (log A) = 1 := by
+theorem one_add_X_mul_derivative_log : (1 + X) * d⁄dX (log A) = 1 := by
   simpa only [mul_comm] using (derivative_log_mul_one_add_X (A := A))
 
 /-- The formal logarithm `logOf f` of a series `f` with constant coefficient `1` is a
 logarithmic primitive of `f`: `f * (logOf f)' = f'`. -/
 theorem mul_derivative_logOf {f : A⟦X⟧} (hf : constantCoeff f = 1) :
-    f * d⁄dX A (logOf f) = d⁄dX A f := by
+    f * d⁄dX (logOf f) = d⁄dX f := by
   have hsub : HasSubst (f - 1) :=
     HasSubst.of_constantCoeff_zero' (by rw [map_sub, hf, map_one, sub_self])
   have h := congrArg (subst (f - 1)) (one_add_X_mul_derivative_log (A := A))
