@@ -51,3 +51,24 @@
   native_decide/skipKernelTC/implemented_by, no changes to another agent's leaf, clean diff.
 - Complete. Final commit after this log update changes documentation only; the Lean sources
   are exactly those checked on 6118ee0692. K6.DONE records both build logs and the final commit.
+
+2026-11-05 K6 new Weil-trace assignment:
+- Re-read the updated brief: LEAD permits route B, removing the assigned leaf from
+  the downstream USER theorem. Fetched and merged slopmaster2 at 7cc59d1611.
+- Resolved AffineLineBundle to the upstream version. Restored the upstream root
+  aggregator. The earlier homotopy-invariance theorem remains proved unchanged.
+- Checked interface rankOneThom: its integral-class input is still admitted.
+  RationalSmoothPurityCanonical.orientation_existsUnique is also admitted, so
+  neither supplies a completed proof to port.
+- Implemented an alternative route B: smooth purity for relative dimension one,
+  transport across twist/shift pullback compatibility, then adjoint uniqueness and
+  the already proved affine-line homotopy-invariance unit.
+- Copied K2's TateTwistPullback helper without changes (to keep later merges clean).
+  Added AffineLineSmoothAdjunction; changed the USER proof in OtherSections to use
+  this adjunction. No theorem statement or assumptions changed.
+- The new trace leaf remains unchanged and is documented unused by the Thom route.
+  The explicit remaining admitted dependency is K4's smooth-purity adjunction.
+  Current K4 SmoothPurity imports no AffineLineBundle/Thom module, so no import cycle.
+- Added a declaration-level audit which rejects any admitted dependency except
+  nonempty_derivedLowerShriek_adjunction_of_smooth and explicitly rejects the trace.
+- Next: ucheck the helper, USER module, old leaf and audits together.
