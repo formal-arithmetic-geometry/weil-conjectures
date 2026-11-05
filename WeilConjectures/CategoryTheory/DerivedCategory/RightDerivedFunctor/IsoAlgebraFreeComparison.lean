@@ -73,7 +73,7 @@ lemma mapDerivedCategoryFactorsh_inv_app_quotient_obj (K : CochainComplex A ℤ)
     P.mapDerivedCategoryFactorsh.inv.app
         ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj K) =
       P.mapDerivedCategoryFactors.inv.app K := by
-  refine Iso.inv_ext (f := (P.mapDerivedCategoryFactorsh).app
+  refine Iso.inv_ext (f := P.mapDerivedCategoryFactorsh.app
     ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj K)) ?_
   rw [Iso.app_hom, mapDerivedCategoryFactorsh_hom_app]
   simp only [comp_obj, DerivedCategory.quotientCompQhIso,
