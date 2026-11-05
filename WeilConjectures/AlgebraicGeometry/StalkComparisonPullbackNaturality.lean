@@ -63,6 +63,10 @@ def comparisonIntoPullback (z : X')
     (comparisonStalkHomologyIso X' z
       (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) i).inv ≫
     (comparisonStalkCohomology X' z i).map
-      (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
+      (cast (by rfl)
+        (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
+        DerivedCategory.Q.obj
+            (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ⟶
+          (derivedPullback g').obj (DerivedCategory.Q.obj P))
 
 end AlgebraicGeometry.SingleComplexBaseChange
