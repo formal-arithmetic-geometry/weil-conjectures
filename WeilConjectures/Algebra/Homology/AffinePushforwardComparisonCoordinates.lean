@@ -87,7 +87,7 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
     ((DerivedCategory.homologyFunctorFactors _ i).app
       ((F.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫
     H.map (DerivedCategory.Q.map a) ≫
-    cast (by rfl) (H.map (β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D)))
+    H.map (β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D))
 
 /-- Cohomology coordinates from the tilde unit and exact homology comparisons.
 Source: Stacks Project, Tags 01I9 and 06Z0.
