@@ -142,16 +142,22 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ538 in progress
+# BZ538 complete
 
-- Branch: `u9/BZ538`; assigned module: `AffineBasisKInjectiveSectionsPreservesHomology`.
-- Its original IsAffineOpen visibility fix was already in the starting branch.
-- Added the same public AffineScheme import to second-layer `AffineBasisSectionsDerivedUnit`.
-- Two remote build attempts stopped in shared dependencies before reaching our targets.
-- Merged coordinator updates at `8af5cb324`; Monoidal now builds, but InternalHom remained blocked.
-- The user instructed continuation after the explicit one-line InternalHom repair proposal.
-  Applied the compatibility tensorObj_map_tmul lemma so the following map_comp_apply rewrite matches.
-- Next: ucheck-bump assigned module, AffineBasisSectionsResolutionHomologyEpi, and
-  AffineBasisSectionsDerivedUnit; then write DONE with every green module and PATTERN/ERROR pairs.
-- Detailed patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
-- No local Lean/Lake, proof placeholders, statement changes, trust bypasses, or heartbeat increases.
+- Branch: `u9/BZ538`; starting commit: `29f3a8d81`.
+- Assigned module and both downstream layers passed `ucheck-bump` together:
+  rc=0, failed=0, 3530 jobs on `poolb:43.157.184.90`.
+- Validated source commit: `afbae1fef662f1b26bdac9a97c1043aeea503aaa`.
+- Green modules: `WeilConjectures.AlgebraicGeometry.AffineBasisKInjectiveSectionsPreservesHomology`,
+  `WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi`, and
+  `WeilConjectures.AlgebraicGeometry.AffineBasisSectionsDerivedUnit`.
+- The original IsAffineOpen public import fix was already in the starting branch;
+  applied the same public import to the second-layer derived-unit module.
+- The user instructed continuation after the explicit one-line shared dependency repair proposal.
+  InternalHom now uses the compatibility tensorObj_map_tmul lemma, matching map_comp_apply.
+- All declaration types and existing docstrings are unchanged.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ538-final-full.log`.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ538.DONE`.
+- No local Lean/Lake execution, sorries, trust bypasses, profiler probes, or heartbeat changes.
+- This final commit changes progress documentation only; Lean sources match the green build.
