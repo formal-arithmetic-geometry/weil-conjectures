@@ -131,6 +131,92 @@ theorem compactProjectionOpen_forget_of_unit
   exact hi''.symm
 
 
+theorem compactProjectionOpen_forget_of_unit_at
+    {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
+    [Category.{b} A'] [Category.{b} B']
+    {E : A ⥤ B} {R : B ⥤ A} {E' : A' ⥤ B'} {R' : B' ⥤ A'}
+    (adj : E ⊣ R) (adj' : E' ⊣ R') (FA : A ⥤ A') (FB : B ⥤ B')
+    {TA : A × A ⥤ A} {TB : B × B ⥤ B}
+    {TA' : A' × A' ⥤ A'} {TB' : B' × B' ⥤ B'}
+    (eE : E ⋙ FB ≅ FA ⋙ E') (eR : R ⋙ FA ≅ FB ⋙ R')
+    (tA : TA ⋙ FA ≅ FA.prod FA ⋙ TA')
+    (tB : TB ⋙ FB ≅ FB.prod FB ⋙ TB')
+    (rho : TB ⋙ R ≅ R.prod R ⋙ TA)
+    (rho' : TB' ⋙ R' ≅ R'.prod R' ⋙ TA')
+    (M : A) (N : B)
+    (gamma : TB.obj (E.obj M, N) ≅ E.obj (TA.obj (M, R.obj N)))
+    (gamma' : TB'.obj (E'.obj (FA.obj M), FB.obj N) ≅
+      E'.obj (TA'.obj (FA.obj M, R'.obj (FB.obj N))))
+    (hu : compactProjectionOpen_unitSquare adj adj' FA FB eE eR)
+    (hr : ∀ M N,
+      FA.map (rho.hom.app (M, N)) ≫ tA.hom.app (R.obj M, R.obj N) ≫
+        TA'.map (Prod.mkHom (eR.hom.app M) (eR.hom.app N)) =
+      eR.hom.app (TB.obj (M, N)) ≫ R'.map (tB.hom.app (M, N)) ≫
+        rho'.hom.app (FB.obj M, FB.obj N))
+    (hg : adj.homEquiv _ _ gamma.inv =
+      TA.map (Prod.mkHom (adj.unit.app M) (𝟙 _)) ≫ rho.inv.app (E.obj M, N))
+    (hg' : adj'.homEquiv _ _ gamma'.inv =
+      TA'.map (Prod.mkHom (adj'.unit.app (FA.obj M)) (𝟙 _)) ≫
+        rho'.inv.app (E'.obj (FA.obj M), FB.obj N)) :
+    FB.map gamma.hom ≫ eE.hom.app (TA.obj (M, R.obj N)) ≫
+        E'.map (tA.hom.app (M, R.obj N) ≫ TA'.map (Prod.mkHom (𝟙 _) (eR.hom.app N))) =
+      tB.hom.app (E.obj M, N) ≫ TB'.map (Prod.mkHom (eE.hom.app M) (𝟙 _)) ≫
+        gamma'.hom := by
+  have hrinv (M N : B) :
+      FA.map (rho.inv.app (M, N)) ≫ eR.hom.app (TB.obj (M, N)) ≫
+        R'.map (tB.hom.app (M, N)) =
+      tA.hom.app (R.obj M, R.obj N) ≫
+        TA'.map (Prod.mkHom (eR.hom.app M) (eR.hom.app N)) ≫
+          rho'.inv.app (FB.obj M, FB.obj N) := by
+    apply (cancel_mono (rho'.hom.app (FB.obj M, FB.obj N))).1
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    rw [← hr M N]
+    simp only [← FA.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+    simp only [Functor.comp_obj, Functor.prod_obj, Category.comp_id]
+  let X := TA.obj (M, R.obj N)
+  let q := tA.hom.app (M, R.obj N) ≫ TA'.map (Prod.mkHom (𝟙 _) (eR.hom.app N))
+  let p := tB.hom.app (E.obj M, N) ≫ TB'.map (Prod.mkHom (eE.hom.app M) (𝟙 _))
+  have hn : FA.map (TA.map (Prod.mkHom (adj.unit.app M) (𝟙 (R.obj N)))) ≫
+      tA.hom.app (R.obj (E.obj M), R.obj N) =
+      tA.hom.app (M, R.obj N) ≫
+        TA'.map (Prod.mkHom (FA.map (adj.unit.app M)) (𝟙 _)) := by
+    simpa using tA.hom.naturality (Prod.mkHom (adj.unit.app M) (𝟙 (R.obj N)))
+  have hrn : rho'.inv.app (FB.obj (E.obj M), FB.obj N) ≫
+      R'.map (TB'.map (Prod.mkHom (eE.hom.app M) (𝟙 (FB.obj N)))) =
+      TA'.map (Prod.mkHom (R'.map (eE.hom.app M)) (𝟙 _)) ≫
+        rho'.inv.app (E'.obj (FA.obj M), FB.obj N) := by
+    simpa using (rho'.inv.naturality
+      (Prod.mkHom (eE.hom.app M) (𝟙 (FB.obj N)))).symm
+  have hi : eE.inv.app X ≫ FB.map (gamma.inv) ≫ p =
+      E'.map q ≫ gamma'.inv := by
+    apply (adj'.homEquiv _ _).injective
+    rw [← Category.assoc (eE.inv.app X), adj'.homEquiv_naturality_right,
+      compactProjectionOpen_forget_homEquiv adj adj' FA FB eE eR hu]
+    dsimp only [X, Functor.comp_obj, Functor.prod_obj, Functor.id_obj]
+    rw [hg, adj'.homEquiv_naturality_left, hg']
+    dsimp only [p, q]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% hrinv (E.obj M) N, hrn, reassoc_of% hn]
+    simp only [← TA'.map_comp_assoc]
+    congr 2
+    apply congrArg TA'.map
+    ext <;> simp [hu M]
+  have hi' : FB.map (gamma.inv) ≫ p =
+      eE.hom.app X ≫ E'.map q ≫ gamma'.inv := by
+    calc
+      _ = eE.hom.app X ≫ (eE.inv.app X ≫ FB.map (gamma.inv) ≫ p) := by
+        simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+      _ = _ := by rw [hi]
+  simp only [Functor.map_comp, Category.assoc]
+  apply (cancel_epi (FB.map (gamma.inv))).1
+  simp only [← FB.map_comp_assoc, Iso.inv_hom_id, Functor.map_id, Category.id_comp]
+  have hi'' := congrArg
+    (fun z ↦ z ≫ gamma'.hom) hi'
+  simp only [p, q, X, Functor.map_comp, Category.assoc, Iso.inv_hom_id,
+    Functor.comp_obj, Functor.prod_obj, Functor.id_obj, Category.comp_id] at hi''
+  exact hi''.symm
+
+
 section InverseMate
 
 variable {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
@@ -165,7 +251,8 @@ theorem compactProjectionOpen_unitSquare_of_inverseMate
   have h := unit_mateEquiv_symm adj adj' (TwoSquare.mk _ _ _ _ eR.hom) M
   rw [← Category.assoc, h, Category.assoc, ← R'.map_comp]
   change adj'.unit.app (FA.obj M) ≫ R'.map (e.hom.app M ≫ e.inv.app M) = _
-  simp only [Iso.hom_inv_id_app, Functor.map_id, Category.comp_id]
+  simp only [Iso.hom_inv_id_app, Functor.comp_obj]
+  rw [R'.map_id, Category.comp_id]
 
 end InverseMate
 

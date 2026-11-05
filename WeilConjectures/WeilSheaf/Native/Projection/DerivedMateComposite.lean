@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.DerivedForgetMateNormalization
 public import WeilConjectures.CategoryTheory.Adjunction.MatesHCompIsIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
 /-! # Normalization of the derived mate of a composite realization -/
 
