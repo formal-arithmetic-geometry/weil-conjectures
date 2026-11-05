@@ -182,3 +182,17 @@
   dependencies. The broad failing batch was stopped after those blockers were confirmed.
 - Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+# BZ697 in progress
+
+- Branch: `u9/BZ697`; starting source commit: `6a2f94596`.
+- The user instructed continuation after the exact four-direction compositor patch proposal.
+  Applied that patch to `pullEvaluation_model` and `coefficientPullback_transpose`,
+  preserving the intended equations under Mathlib's reversed compositor API.
+- Pinned Mathlib source inspected at `b63f6e8a`; whole-tree inventory has 30 matching
+  anonymous-compositor chains across 24 files.
+- Baseline remote build: `/home/ubuntu/u9/logs/BZ697-20261106T054144.log`.
+- Next: validate the repaired module through `ucheck-bump`, then its direct importers.
+- Fix records and patch: `/home/ubuntu/u9/bz/FIXES-BZ697.md` and
+  `/home/ubuntu/u9/bz/BZ697-compositor-proposal.patch`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
