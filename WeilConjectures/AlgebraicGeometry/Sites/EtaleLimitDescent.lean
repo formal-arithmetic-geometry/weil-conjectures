@@ -81,7 +81,7 @@ lemma exists_map_map_eq_zero {σ : Type*} {j : J} (p : MvPolynomial σ (F.obj j)
     obtain ⟨m, -, rfl⟩ := MvPolynomial.mem_coeffs_iff.1 hx
     have := congrArg (fun q : MvPolynomial σ c.pt ↦ q.coeff m) hp
     exact (MvPolynomial.coeff_map (c.ι.app j).hom p m).symm.trans
-      (this.trans (Finsupp.zero_apply m)))
+      (this.trans Finsupp.zero_apply))
   refine ⟨k, α, MvPolynomial.ext _ _ fun m ↦ ?_⟩
   rw [MvPolynomial.coeff_map, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply]
   by_cases hm : p.coeff m = 0
