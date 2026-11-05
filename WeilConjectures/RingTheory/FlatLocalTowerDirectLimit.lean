@@ -46,8 +46,22 @@ private theorem flat_directLimit
     (colimit.isColimit F)
   have : Module.Flat R (Module.DirectLimit A g) :=
     Module.Flat.of_linearEquiv (e.toLinearEquiv)
+  let e' : DirectLimit A f ≃ₗ[R] DirectLimit A g :=
+    { Equiv.refl _ with
+      map_add' := by
+        intro x y
+        induction x, y using DirectLimit.induction₂ with
+        | _ i x y =>
+          exact (DirectLimit.add_def (f := f) i x y).trans
+            (DirectLimit.add_def (f := g) i x y).symm
+      map_smul' := by
+        intro r x
+        induction x using DirectLimit.induction with
+        | _ i x =>
+          exact (map_smul (DirectLimit.Algebra.of A f i).toLinearMap r x).symm.trans
+            (map_smul (DirectLimit.Module.of R I A g i) r x) }
   rw [RingHom.flat_algebraMap_iff]
-  exact Module.Flat.of_linearEquiv (Module.DirectLimit.linearEquiv A g).symm
+  exact Module.Flat.of_linearEquiv (e'.trans (Module.DirectLimit.linearEquiv A g).symm)
 
 namespace IsLocalRing
 
