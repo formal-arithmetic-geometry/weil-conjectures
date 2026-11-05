@@ -21,7 +21,9 @@ lemma Fin.range_append {α : Type*} {m n : ℕ} (a : Fin m → α) (b : Fin n �
   ext x
   constructor
   · rintro ⟨k, rfl⟩
-    induction k using Fin.addCases <;> simp
+    induction k using Fin.addCases with
+    | left k => exact Or.inl ⟨k, (Fin.append_left a b k).symm⟩
+    | right k => exact Or.inr ⟨k, (Fin.append_right a b k).symm⟩
   · rintro (⟨k, rfl⟩ | ⟨k, rfl⟩)
     · exact ⟨Fin.castAdd n k, by simp⟩
     · exact ⟨Fin.natAdd m k, by simp⟩
