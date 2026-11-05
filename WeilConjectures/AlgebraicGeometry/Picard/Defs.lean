@@ -87,6 +87,10 @@ open Scheme
 
 variable {X S : Scheme.{u}}
 
+local instance (Y : Scheme.{u}) :
+    SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit Y.ringCatSheaf) :=
+  SheafOfModules.instIsInvertibleUnit.{u, u, u}
+
 /-- The base change to `T` of a section `σ` of `f : X ⟶ S`, as a section
 `σ_T : T ⟶ X ×[S] T` of the projection `X_T ⟶ T`. -/
 noncomputable abbrev sectionBaseChange (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) (T : Over S) :
