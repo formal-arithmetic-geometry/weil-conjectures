@@ -49,8 +49,8 @@ theorem map_mk_trace_pow (f : Module.End K V) (φ : K →+* L) :
       map_one]
   have h := congrArg (PowerSeries.map φ) (X_mul_derivative_charpolyRev f)
   rw [map_mul, map_mul, map_X, map_derivative, map_neg, ← Polynomial.polynomial_map_coe] at h
-  change X * derivative L P = _ * P at h
-  change _ = -(X * derivative L P) * P⁻¹
+  change X * derivative (R := L) P = _ * P at h
+  change _ = -(X * derivative (R := L) P) * P⁻¹
   have hPP : P * P⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hP]; exact one_ne_zero)
   rw [h]
   linear_combination (-PowerSeries.map φ (PowerSeries.mk fun n ↦
@@ -63,7 +63,8 @@ theorem map_trace_pow_eq_of_map_charpolyRev_eq {W : Type*} [AddCommGroup W] [Mod
     (h : g.charpolyRev.map φ = f.charpolyRev.map ψ) {n : ℕ} (hn : n ≠ 0) :
     φ (LinearMap.trace K W (g ^ n)) = ψ (LinearMap.trace K V (f ^ n)) := by
   have h' := congrArg (coeff n) ((map_mk_trace_pow g φ).trans
-    ((congrArg (fun P : Polynomial L ↦ -(X * derivative L (P : L⟦X⟧)) * (P : L⟦X⟧)⁻¹) h).trans
+    ((congrArg (fun P : Polynomial L ↦ -(X * derivative (R := L) (P : L⟦X⟧)) *
+      (P : L⟦X⟧)⁻¹) h).trans
       (map_mk_trace_pow f ψ).symm))
   simpa [hn] using h'
 
