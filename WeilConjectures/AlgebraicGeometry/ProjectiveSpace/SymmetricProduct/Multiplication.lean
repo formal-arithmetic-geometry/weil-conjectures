@@ -82,7 +82,7 @@ lemma coeff_vecPoly (b : ULift.{u} (Fin (k + 1)) → R) (j : ULift.{u} (Fin (k +
   · intro j' _ hj'
     rw [coeff_C_mul_X_pow, if_neg]
     intro h
-    exact hj' (ULift.ext _ _ (Fin.ext h.symm))
+    exact hj' (ULift.ext (Fin.ext h.symm))
   · simp
 
 /-- A polynomial of degree at most `k` is `∑ⱼ bⱼ tʲ` for its vector of coefficients. -/

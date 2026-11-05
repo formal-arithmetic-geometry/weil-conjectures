@@ -133,9 +133,9 @@ lemma ProEtale.mateEquiv_localizationRestrictionBaseChangeMap (sq : CommSq g' j'
     Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.whiskerRight_app, Functor.comp_map, Functor.leftUnitor_hom_app, comp_id, id_comp,
     ObjectProperty.FullSubcategory.comp_hom, Adjunction.whiskerLeft_unit_app_app,
-    Functor.op_obj, Adjunction.op_unit, NatTrans.op_app,
+    Functor.op_obj, Adjunction.op_unit_app, NatTrans.op_app,
     MorphismProperty.Over.mapPullbackAdj_counit_app, ProEtale.lowerStar_map_hom_app,
-    Adjunction.whiskerLeft_counit_app_app, Adjunction.op_counit,
+    Adjunction.whiskerLeft_counit_app_app, Adjunction.op_counit_app,
     MorphismProperty.Over.mapPullbackAdj_unit_app, MorphismProperty.Over.pullback_obj_hom,
     ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom]
   rw [lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
