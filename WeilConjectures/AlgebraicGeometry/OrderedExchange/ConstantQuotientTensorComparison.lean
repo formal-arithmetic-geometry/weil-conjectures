@@ -13,6 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarMate
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import WeilConjectures.Algebra.Homology.CochainTensorModelRigidity
 import WeilConjectures.CategoryTheory.RingedSiteModules
+import WeilConjectures.Tactic.TransportExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
@@ -423,7 +424,7 @@ private def evalCounit (T : Scheme.{t}) (n : ℕ) :
     dsimp only [Functor.comp_map] at h h' ⊢
     erw [← Functor.map_comp_assoc, h, Functor.map_comp, Category.assoc, h']
     simp only [Category.assoc]
-    rfl
+    transport_rfl
 
 private theorem evalCounit_isIso (T : Scheme.{t}) (n : ℕ)
     (P : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ)
@@ -482,6 +483,30 @@ attribute [local implicit_reducible] AlgebraicGeometry.ProEtale.StrictTower.G
   AlgebraicGeometry.ProEtale.StrictTower.constantRingIso exchangeConstantIso
   proEtaleConstantComparison
 
+/- The normalization of `reductionPullIso` on one flat representative, in the form used below.
+Its instance arguments differ from those of `ReductionPullNormalized`, so this conversion is
+checked once here. -/
+private theorem reductionPullIso_counit_app
+    (P : CochainComplex (reductionModules V (exchangeConstantRing V A)) ℤ)
+    (hP : proEtaleFlatRepresentatives V (exchangeConstantRing V A) P) :
+    (reductionPullIso d f).hom.app (DerivedCategory.Q.obj P) ≫
+      (reduction d U).map
+        ((proEtaleRingDerivedPullbackFactors f (exchangeConstantRing V A)
+          (exchangeConstantRing U A) (exchangeConstantIso f A)).hom.app P) ≫
+      reductionComplexCounit d U
+        (((proEtaleRingModulePullback f (exchangeConstantRing V A) (exchangeConstantRing U A)
+          (exchangeConstantIso f A)).mapHomologicalComplex (.up ℤ)).obj P) =
+    (exchangeTowerModulePull f (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso f A)).mapDerivedCategory.map
+        ((reductionData d V).complexCounit P) ≫
+      (exchangeTowerModulePull f (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso f A)).mapDerivedCategoryFactors.hom.app
+          (((reductionModule d V).mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (ordinaryReductionPullIso d f) (.up ℤ)).hom.app P) :=
+  (reductionPullIso_existsUnique d f).choose_spec.1 P
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP.1)
+
 private theorem evaluatedPullIso_counit (n : ℕ)
     (P : CochainComplex (reductionModules V (exchangeConstantRing V A)) ℤ)
     (hP : proEtaleFlatRepresentatives V (exchangeConstantRing V A) P) :
@@ -498,13 +523,7 @@ private theorem evaluatedPullIso_counit (n : ℕ)
           (((level d V n).mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map
         ((NatIso.mapHomologicalComplex (levelPullIso d f n) (.up ℤ)).hom.app P) := by
-  have hn := (reductionPullIso_existsUnique d f).choose_spec.1 P
-    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP.1)
-  change (reductionPullIso d f).hom.app (DerivedCategory.Q.obj P) ≫
-      (reduction d U).map
-        ((proEtaleRingDerivedPullbackFactors f (exchangeConstantRing V A)
-          (exchangeConstantRing U A) (exchangeConstantIso f A)).hom.app P) ≫
-      reductionComplexCounit d U _ = _ at hn
+  have hn := reductionPullIso_counit_app d f P hP
   rw [← Category.assoc] at hn
   let E := eval (A := A) U n
   let K := ((reductionModule d V).mapHomologicalComplex (.up ℤ)).obj P
