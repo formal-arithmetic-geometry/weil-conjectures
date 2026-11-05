@@ -560,7 +560,8 @@ theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     simp only [NatTrans.comp_app] at h
     rw [← DerivedCategory.Qh.map_comp] at h
     simp only [Category.assoc] at hi h
-    rw [hi, DerivedCategory.Qh.map_id] at h
+    rw [hi] at h
+    erw [CategoryTheory.Functor.map_id] at h
     repeat erw [Category.comp_id] at h
     exact h.symm
   have hm : (mateEquiv (sW.adjunction a.target) (sZ.adjunction a.source) θ).natTrans =
