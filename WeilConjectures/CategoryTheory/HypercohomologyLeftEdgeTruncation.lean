@@ -76,7 +76,7 @@ theorem hypercohomologyLeftEdge_truncation (K : DerivedCategory.Plus B) (n : ℕ
     simp only [Functor.map_id, NatTrans.hcomp_app, NatTrans.id_app,
       Category.comp_id]
     dsimp
-    simp only [Category.id_comp]
+    simp only [Category.id_comp, Functor.map_id, Category.comp_id]
     change H.map (RG.map ((t.truncGEπ n).app K)) ≫
       CategoryTheory.inv (H.map (RG.map j)) = _
     rw [← Functor.map_inv, ← Functor.map_inv, ← Functor.map_comp, ← Functor.map_comp, hp]
