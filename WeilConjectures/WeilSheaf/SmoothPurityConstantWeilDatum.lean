@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityUnitDatumTransport
+public import WeilConjectures.WeilSheaf.SmoothPurityUnitConstraint
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
 public import WeilConjectures.WeilSheaf.ConstantTwistCondensed
 
@@ -39,8 +40,7 @@ lemma purity_adicLowerStarUnit_condensed {X : Scheme.{u}} (e : X ≅ X) :
         (adicSheafEquivCondensedModTensorUnitIso l X).hom =
       (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj l) e).inv.app
           (𝟙_ _) ≫
-        (Functor.Monoidal.εIso
-          (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)).inv :=
+        tateUnitDatum l e.hom :=
   purity_unitDatum_transport_of_square (adicSheafEquivCondensedMod l X).functor
     (e.hom)^*ᵃ[l] (e.inv)_*ᵃ[l]
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)
@@ -51,11 +51,10 @@ lemma purity_adicLowerStarUnit_condensed {X : Scheme.{u}} (e : X ≅ X) :
     (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj l) e)
     (adicSheafEquivCondensedModTensorUnitIso l X)
     (adicUpperStarUnitIso l e.hom).hom (adicLowerStarUnitIso l e.symm).hom
-    (Functor.Monoidal.εIso
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) e.hom)).inv
+    (tateUnitDatum l e.hom)
     (adicUpperStarCompCondensedModIso_inv_of_iso l e)
     (adicUpperStarIsoLowerStarInv_hom_comp_unit (l := l) e)
-    (upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (l := l) e.hom)
+    (purity_upperStarUnit_tateUnitDatum l e.hom)
 
 end AlgebraicGeometry.ProEtale
 
@@ -72,8 +71,7 @@ lemma purity_adicConstantCondensedStr_hom :
     (adicConstantCondensedStr k₀ l X).hom =
       (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app (𝟙_ _) ≫
-        (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)).inv := by
+        tateUnitDatum l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom := by
   rw [adicConstantCondensedStr_hom, toCondensed_obj_obj_str, adicConstant_obj_str]
   simp only [condensedFrobeniusComparison, Iso.symm_hom,
     purity_adicUnitIso_eq_tensorUnitIso, Category.assoc]

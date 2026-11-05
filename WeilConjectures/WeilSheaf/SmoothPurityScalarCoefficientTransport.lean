@@ -69,4 +69,16 @@ lemma purity_scalarDatum_postcompose
   simpa only [Preadditive.zsmul_comp, Category.assoc] using
     congrArg (fun w ↦ w ≫ P.map v) he
 
+/-- The isomorphism version retains both the datum's component and the named
+composite isomorphism in its conclusion. -/
+lemma purity_scalarDatum_postcomposeIso
+    {C₀ C : Type*} [Category C₀] [Category C] [Preadditive C]
+    (P : C₀ ⥤ C) (Q : C ⥤ C) (b : P ⋙ Q ≅ P)
+    {K M N : C₀} (e : P.obj K ≅ P.obj M) (v : M ≅ N) (t : P.obj K ≅ P.obj N)
+    (ht : t = e ≪≫ P.mapIso v) (c : ℤ)
+    (he : c • (b.hom.app K ≫ e.hom) = Q.map e.hom ≫ b.hom.app M) :
+    c • (b.hom.app K ≫ t.hom) = Q.map t.hom ≫ b.hom.app N := by
+  subst t
+  exact purity_scalarDatum_postcompose P Q b (b.hom.app K) e.hom v.hom c he
+
 end CategoryTheory

@@ -13,10 +13,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 @[expose] public section
 
-set_option Elab.async false
-set_option trace.profiler true
-set_option trace.profiler.threshold 1000
-
 universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
@@ -117,14 +113,13 @@ theorem purityChangeCoefficientTrivialization_weil
           (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom ≫
         (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app (𝟙_ _) := by
   let := Mod.extendScalarsMonoidal (coefficientMap a X)
-  let ε := (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).inv
-  have h := purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he
-  exact purity_scalarDatum_postcompose (f.geometricFiberProj)^*⟦Λ'⟧
+  exact purity_scalarDatum_postcomposeIso (f.geometricFiberProj)^*⟦Λ'⟧
     (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧
     (geometricFiberProjUpperStarFrobeniusIso Λ' f)
-    ((geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app
-      ((Mod.extendScalars (coefficientMap a X)).obj M))
-    (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁).hom ε c h
+    (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁)
+    (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm
+    (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁) rfl c
+    (purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he)
 
 end ScalarRelation
 

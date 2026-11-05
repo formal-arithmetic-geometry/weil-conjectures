@@ -32,7 +32,6 @@ theorem purity_nonempty_tateTwistLowerPair_iso_toCondensed_constantTwist (d : �
           (ProEtaleWeilSheaf.adicConstant k₀ ℓ X))) := by
   obtain ⟨e₁⟩ := purity_nonempty_tateTwistOnePair_iso_unitScalar k₀ ℓ X
   apply nonempty_tateTwistLowerPair_iso_toCondensed_constantTwist k₀ ℓ X e₁ _ d
-  simpa only [tateUnitDatum, Functor.Monoidal.εIso_inv] using
-    purity_adicConstantCondensedStr_hom k₀ ℓ X
+  exact purity_adicConstantCondensedStr_hom k₀ ℓ X
 
 end AlgebraicGeometry.WeilSheaf
