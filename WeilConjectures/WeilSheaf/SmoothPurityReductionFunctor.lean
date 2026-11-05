@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.
 universe u
 
 open CategoryTheory
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 

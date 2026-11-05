@@ -427,3 +427,7 @@ GREEN at ef09cfe05c in K4-20261105T090443.log: SmoothPurityCanonicalFinite (27s:
 ## 2026-11-05T09:29:34.799147+08:00 — trace normalization GREEN
 - K4-20261105T092806.log at295510e9bd validates SmoothPurityTraceNormalization (21s). Shared exact theorem with C4. ReductionFunctor only has a name-resolution typo (condensedRingObj lives in ProEtale, not CondensedRing), now corrected. Unique still times out; restoring scoped profiling after the inferred-finiteness change.
 - BLOCKED: unconditional canonical existence still requires coefficient-transition compatibility absent from the available upstream theorems. map_dualizingComplexTwistShiftIso_reduction asks for hframe, hepsilon and hL; no constructor for these actual comparisons has been found. Best workaround continues: choose compatible finite equivariant isomorphisms by finite-choice, using Houyi's finite-to-adic comparison and C1's Weil exceptional datum. The semilinear Frobenius requires ambient pullback APIs rather than Over(kbar) shortcuts.
+
+## 2026-11-05 09:33 +0800 — uniqueness conversion pinpointed
+- K4-20261105T092936.log rc=1 on the new remote pool. Unique now reaches the LAST comparison application;13.58s spent propagating its expected type into `congrArg ι.map`, again comparing the composite reduction with its inclusion factor. Bound that equality before passing it to the generic comparison theorem.
+- ReductionFunctor needs the CategoryTheory.Obj scope for the transported MonObj instance (the other files already open it). Added the scope. No budget changes.

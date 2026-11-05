@@ -35,8 +35,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (E : PadicAlgCl.FiniteIntermediateField ℓ) (f : X ⟶ Y) (d : ℕ)
   [SmoothOfRelativeDimension d f.left]
 
-set_option trace.profiler true in
-set_option trace.profiler.threshold 1000 in
 /-- The finite normalization determines the integral orientation uniquely. -/
 theorem eq_of_isIntegralSmoothOrientation
     {φ ψ : (shiftFunctor (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) (2 * d : ℤ)).obj
@@ -57,10 +55,10 @@ theorem eq_of_isIntegralSmoothOrientation
   intro n
   have hred := (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 (n + 1) X)).map_injective
     ((hφ n).trans (hψ n).symm)
+  have hι := congrArg (boundedConstructible (condensedRingObj
+    (Profinite.integersModPowRingObj ℓ E.1 (n + 1)) X.left)).ι.map hred
   exact map_eq_of_comparison
-    (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1 (n + 1)) φ ψ
-    (congrArg (boundedConstructible (condensedRingObj
-      (Profinite.integersModPowRingObj ℓ E.1 (n + 1)) X.left)).ι.map hred)
+    (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E.1 (n + 1)) φ ψ hι
 
 /-- The specified integral normalization determines the rational orientation uniquely. -/
 theorem eq_of_isCanonicalSmoothOrientation
