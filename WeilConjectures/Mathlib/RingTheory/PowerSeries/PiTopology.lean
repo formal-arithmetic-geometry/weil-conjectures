@@ -214,9 +214,9 @@ coefficient is that of the finite sum over `S n`. -/
 theorem X_mul_derivative_tprod_of_X_pow_dvd_sub_one {J : Type*} {f a : J → R⟦X⟧}
     (S : ℕ → Finset J) (hS : ∀ n, ∀ j ∉ S n, X ^ (n + 1) ∣ f j - 1)
     (ha : ∀ n, ∀ j ∉ S n, X ^ (n + 1) ∣ a j)
-    (hf : ∀ j, X * derivative R (f j) = a j * f j) {A : R⟦X⟧}
+    (hf : ∀ j, X * derivative (R := R) (f j) = a j * f j) {A : R⟦X⟧}
     (hA : ∀ n, coeff n A = ∑ j ∈ S n, coeff n (a j)) :
-    X * derivative R (∏' j, f j) = A * ∏' j, f j := by
+    X * derivative (R := R) (∏' j, f j) = A * ∏' j, f j := by
   classical
   ext n
   have hP (k : ℕ) (hk : k ≤ n) : coeff k (∏' j, f j) = coeff k (∏ j ∈ S n, f j) :=
