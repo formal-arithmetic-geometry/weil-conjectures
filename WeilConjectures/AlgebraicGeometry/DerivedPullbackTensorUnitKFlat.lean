@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Unit laws on K-flat representatives
 
@@ -356,7 +357,7 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
                 (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
               DerivedCategory.Q.map (φ P N).hom =
-            (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
+            cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫
               Functor.LaxMonoidal.μ DerivedCategory.Q
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)

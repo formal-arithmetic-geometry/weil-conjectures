@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import all WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.CompatibleQuotientFormalComparisons
 import WeilConjectures.Topology.GlueSheavesOfModules
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 

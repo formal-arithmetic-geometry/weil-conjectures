@@ -14,6 +14,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 import WeilConjectures.AlgebraicGeometry.CompletedAffinePullbackObjects
 import WeilConjectures.AlgebraicGeometry.FormalComparisonFlatTransportSquare
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Transport of comparison data before taking sections
 

@@ -23,4 +23,16 @@ noncomputable section
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
+private theorem pullback_eqToHom_commShift
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (s : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (derivedPullback.{u, w} f).CommShift ℤ)
+    {X Y : Scheme.{u}} {k l : X ⟶ Y} (h : k = l) :
+    letI := s k
+    letI := s l
+    NatTrans.CommShift (eqToHom (congrArg (fun f ↦ derivedPullback.{u, w} f) h)) ℤ := by
+  subst l
+  simp only [eqToHom_refl]
+  infer_instance
+
 end AlgebraicGeometry

@@ -271,21 +271,83 @@ private local instance scalarSheafSmallCoproducts (A : Sheaf J CommRingCat.{r})
     PresheafOfModules.hasColimitsOfShape _ _
   exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
+private local instance scalarSheafFiniteCoproducts (A : Sheaf J CommRingCat.{r}) :
+    HasFiniteCoproducts (scalarModules J A) :=
+  ⟨fun n ↦ scalarSheafSmallCoproducts A (Fin n)⟩
+
+private local instance scalarGradedHasTensor (A : Sheaf J CommRingCat.{r}) :
+    ∀ X Y : GradedObject ℤ (scalarModules J A), GradedObject.HasTensor X Y := by
+  intro X Y n
+  exact (scalarSheafSmallCoproducts A _).has_colimit _
+
+private local instance scalarTensorLeftColimits (A : Sheaf J CommRingCat.{r})
+    (M : scalarModules J A) : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
+  have := tensorLeft_preservesColimits_independentCoefficients A M
+  exact preservesColimitsOfSize_shrink (tensorLeft M)
+
+private local instance scalarTensorRightColimits (A : Sheaf J CommRingCat.{r})
+    (M : scalarModules J A) : PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
+  preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+
+private local instance scalarGradedGoodTensorLeft (A : Sheaf J CommRingCat.{r}) :
+    ∀ X Y Z : GradedObject ℤ (scalarModules J A),
+      GradedObject.HasGoodTensor₁₂Tensor X Y Z := by
+  have : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  infer_instance
+
+private local instance scalarGradedGoodTensorRight (A : Sheaf J CommRingCat.{r}) :
+    ∀ X Y Z : GradedObject ℤ (scalarModules J A),
+      GradedObject.HasGoodTensorTensor₂₃ X Y Z := by
+  have : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  infer_instance
+
+private local instance scalarGradedTensorFour (A : Sheaf J CommRingCat.{r}) :
+    ∀ X Y Z W : GradedObject ℤ (scalarModules J A),
+      GradedObject.HasTensor₄ObjExt X Y Z W := by
+  have : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  infer_instance
+
 /-- The existing monoidal structure on module cochain complexes, cached for elaboration.
 Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidal
     (A : Sheaf J CommRingCat.{r}) :
-    MonoidalCategory (CochainComplex (scalarModules J A) ℤ) :=
-  HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
+    MonoidalCategory (CochainComplex (scalarModules J A) ℤ) := by
+  have : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  have : MonoidalPreadditive (scalarModules J A) := cochainModulesPreadditive A
+  have := scalarGradedHasTensor A
+  have := scalarGradedGoodTensorLeft A
+  have := scalarGradedGoodTensorRight A
+  have := scalarGradedTensorFour A
+  have := scalarTensorLeftColimits A
+  have := scalarTensorRightColimits A
+  exact HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
 
 /-- The underlying structure of the existing total tensor, cached for elaboration.
 Source: Stacks 03EK and 06YT
 (auxiliary; not a blueprint node). -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidalStruct
     (A : Sheaf J CommRingCat.{r}) :
-    MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) :=
-  HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
+    MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) := by
+  have : ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  have : MonoidalPreadditive (scalarModules J A) := cochainModulesPreadditive A
+  have := scalarGradedHasTensor A
+  have := scalarGradedGoodTensorLeft A
+  have := scalarGradedGoodTensorRight A
+  have := scalarGradedTensorFour A
+  have := scalarTensorLeftColimits A
+  have := scalarTensorRightColimits A
+  exact HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
 
 /-- Localization of termwise restriction, allowing independent localization universes.
 Source: Stacks 04VG and 06YP

@@ -16,6 +16,7 @@ import WeilConjectures.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Extension of a supported perfect object from an affine open
 

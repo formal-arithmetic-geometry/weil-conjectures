@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.FormalComparisonCompletedAffineData
 import WeilConjectures.AlgebraicGeometry.FormalSystemCompletedAffineSections
 import Mathlib.CategoryTheory.Limits.Preserves.Limits
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Flat transport of the comparison to the completed affine base
 

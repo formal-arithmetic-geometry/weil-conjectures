@@ -308,13 +308,13 @@ private theorem descend_coherence
         (Functor.mapDerivedCategoryCompIso F02 H).hom ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryNatIso a02).hom
           H.mapDerivedCategory ≫
-        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).hom
+        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).inv
           H.mapDerivedCategory =
       (Functor.mapDerivedCategoryNatIso e).hom ≫
         (Functor.mapDerivedCategoryNatIso a1).hom ≫
-        (Functor.mapDerivedCategoryCompIso F F13).hom ≫
+        (Functor.mapDerivedCategoryCompIso F F13).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryNatIso a13).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).hom := by
+        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).inv := by
   have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
   simp only [Functor.mapDerivedCategoryNatIso_trans] at hd
   have hR := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a02 H
@@ -612,7 +612,7 @@ private theorem descend_left_unit
       Functor.rightUnitor F = Iso.refl F) :
     (Functor.mapDerivedCategoryNatIso q).hom ≫
         (Functor.mapDerivedCategoryNatIso k).hom ≫
-        (Functor.mapDerivedCategoryCompIso F I).hom ≫
+        (Functor.mapDerivedCategoryCompIso F I).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory
           ((Functor.mapDerivedCategoryNatIso e).hom ≫
             (Functor.mapDerivedCategoryIdIso D).hom) = 𝟙 _ := by
@@ -794,7 +794,7 @@ private theorem descend_right_unit
       Functor.leftUnitor F = Iso.refl F) :
     (Functor.mapDerivedCategoryNatIso q).hom ≫
         (Functor.mapDerivedCategoryNatIso k).hom ≫
-        (Functor.mapDerivedCategoryCompIso I F).hom ≫
+        (Functor.mapDerivedCategoryCompIso I F).inv ≫
         Functor.whiskerRight ((Functor.mapDerivedCategoryNatIso e).hom ≫
           (Functor.mapDerivedCategoryIdIso C).hom) F.mapDerivedCategory = 𝟙 _ := by
   have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho

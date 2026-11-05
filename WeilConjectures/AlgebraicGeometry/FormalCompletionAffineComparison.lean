@@ -19,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Abelian.Subcategory
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine comparison of the completed arrows
 

@@ -64,6 +64,44 @@ private theorem factorsh_quotient
   erw [CategoryTheory.Functor.map_id, DerivedCategory.Qh.map_id]
   erw [Category.comp_id, Category.comp_id, Category.id_comp]
 
+private theorem counit_quotient_transport
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (F : A ⥤ B) [F.Additive] (LF : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex A ℤ) :
+    LF.map ((DerivedCategory.quotientCompQhIso A).inv.app P) ≫
+        ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+        (DerivedCategory.quotientCompQhIso B).hom.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj P) =
+      ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) := by
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+    Quotient.lift.isLift_hom]
+  erw [LF.map_id, DerivedCategory.Qh.map_id]
+  erw [Category.comp_id, Category.comp_id, Category.id_comp]
+
+private theorem unit_quotient_transport
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (F : A ⥤ B) [F.Additive] (RF : DerivedCategory A ⥤ DerivedCategory B)
+    (η : F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
+    (P : CochainComplex A ℤ) :
+    (DerivedCategory.quotientCompQhIso B).inv.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).inv.app P) ≫
+        η.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) ≫
+        RF.map ((DerivedCategory.quotientCompQhIso A).hom.app P) =
+      η.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) := by
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+    Quotient.lift.isLift_hom]
+  erw [DerivedCategory.Qh.map_id, RF.map_id]
+  erw [Category.id_comp, Category.id_comp, Category.comp_id]
+
 private theorem squareFactors
     {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -871,12 +909,7 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (HomologicalComplex.quasiIso_map_iff_of_preservesHomology i (equivalence Λ T).functor)
       (hK T I)
   · intro P
-    simp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-      Quotient.lift.isLift_hom]
-    erw [(CondensedRing.upperStar Λ f).leftDerivedFunctor.map_id, DerivedCategory.Qh.map_id]
-    repeat first | erw [Category.id_comp] | erw [Category.comp_id]
+    rw [counit_quotient_transport]
     exact pullSquareFactors (CondensedRing.upperStar Λ f) (equivalence Λ X).functor
       (equivalence Λ Y).functor (pullback Λ f)
       (CondensedRing.upperStar Λ f).leftDerivedFunctor
@@ -885,14 +918,7 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (CondensedRing.upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory_hom_fac
       (pullComparison Λ f) P
   · intro P
-    simp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-      Quotient.lift.isLift_hom]
-    erw [DerivedCategory.Qh.map_id, DerivedCategory.Qh.map_id,
-      (CondensedRing.lowerStar Λ f).rightDerivedFunctor.map_id,
-      (pushforward Λ f).rightDerivedFunctor.map_id]
-    repeat first | erw [Category.id_comp] | erw [Category.comp_id]
+    rw [unit_quotient_transport, unit_quotient_transport]
     exact rightSquareFactors (CondensedRing.lowerStar Λ f) (equivalence Λ Y).functor
       (equivalence Λ X).functor (pushforward Λ f) (pushComparison Λ f) P
   · intro M N q

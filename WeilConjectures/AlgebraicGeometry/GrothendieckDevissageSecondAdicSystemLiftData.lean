@@ -7,11 +7,13 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Mathlib.CategoryTheory.Functor.OfSequence
 import WeilConjectures.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
 import WeilConjectures.AlgebraicGeometry.FormalSecondIdealQuotientAdic
 import WeilConjectures.AlgebraicGeometry.FormalSecondIdealQuotientSupported
 import WeilConjectures.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 @[expose] public section
 
