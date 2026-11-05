@@ -7,10 +7,14 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 public import WeilConjectures.CategoryTheory.Functor.CurryComparison
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquare
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedCoherenceOfSquare
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The condensed realization is compatible with the pullback–tensor comparisons
@@ -30,7 +34,7 @@ this is `CategoryTheory.Adjunction.ComparisonCompatible`, the hypothesis of
 
 universe u
 
-open CategoryTheory
+open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
@@ -71,7 +75,8 @@ theorem comparisonCompatible_derivedCondensedRealization :
       (nativeCurriedPullTensor k₀ l g)
       (ProEtale.CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-      (condensedRealizationCurriedTensor k₀ l Z) (condensedRealizationCurriedTensor k₀ l Y) :=
-  sorry
+      (condensedRealizationCurriedTensor k₀ l Z) (condensedRealizationCurriedTensor k₀ l Y) := by
+  exact_mod_proofs projectionComparisonCompatible_of_square k₀ l g
+    (condensedRealizationTensor_pull_square k₀ l g)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
