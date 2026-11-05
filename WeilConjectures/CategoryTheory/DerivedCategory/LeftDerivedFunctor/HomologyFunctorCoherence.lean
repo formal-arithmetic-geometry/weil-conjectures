@@ -53,8 +53,8 @@ lemma mapDerivedCategoryFactors_inv_app_comp_mapDerivedCategoryCompIso_hom_app
           ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app L) ≫
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app L) := by
-  have h := congrArg Iso.inv (Iso.ext ((mapDerivedCategoryCompIso_fac F).symm G L) :
-    (mapDerivedCategoryCompIso F G).app (DerivedCategory.Q.obj L) ≪≫
+  have h := congrArg Iso.inv (Iso.ext (mapDerivedCategoryCompIso_fac F G L) :
+    (mapDerivedCategoryCompIso F G).symm.app (DerivedCategory.Q.obj L) ≪≫
       G.mapDerivedCategory.mapIso (F.mapDerivedCategoryFactors.app L) ≪≫
       G.mapDerivedCategoryFactors.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≪≫
       DerivedCategory.Q.mapIso
