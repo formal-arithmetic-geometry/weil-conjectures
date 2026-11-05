@@ -14098,6 +14098,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedAdjunctio
 public import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedForgetMate
 public import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedIdentityInverseRepresentative
 public import WeilConjectures.CategoryTheory.Adjunction.DualityConjugate
+public import WeilConjectures.CategoryTheory.Adjunction.ExceptionalBaseChangePasteHoriz
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeCube
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
@@ -14126,6 +14127,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.LocalizedAdjunctionFormu
 public import WeilConjectures.CategoryTheory.Adjunction.MateBiproduct
 public import WeilConjectures.CategoryTheory.Adjunction.MateComp
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompCoherence
+public import WeilConjectures.CategoryTheory.Adjunction.MateCompConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.MateComparisonTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
@@ -17070,6 +17072,9 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DeformationIso
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeFinal
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeIso
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalCompIsoBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficients
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsFrame
@@ -17077,6 +17082,9 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationC
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionSupports
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationTransport
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPasteHoriz
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPasteVert
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DivisorComplementDirectImage
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DivisorComplementDirectImageGerm
@@ -17088,6 +17096,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependenceFie
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusDatum
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.IdentitySquareBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
@@ -17136,8 +17145,11 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionRedu
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariant
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTransport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTwist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionPurityTransport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionThomFrames
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionTwistShiftTransport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportReflection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapBaseChange
@@ -17153,6 +17165,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassField
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFrames
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFramesFundamentalClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFundamentalClassBaseChange
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFundamentalClassTransport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
