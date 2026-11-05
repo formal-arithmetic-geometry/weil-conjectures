@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
 import WeilConjectures.AlgebraicGeometry.CartesianRawClassChartData
 import WeilConjectures.AlgebraicGeometry.CartesianRawClassChartNaturality
 import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeNaturality
-import all WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
 
 /-! # Finite-stage chart representatives of raw cartesian classes
 
