@@ -179,7 +179,7 @@ lemma purityScalarRootTrivialization_weil :
     (purityScalarRootTrivialization ℓ a hζ hζ')
     (purityScalarSourceIso_eq ℓ a) (purityScalarSourceUnitIso_eq ℓ a)
     (purityScalarRootTrivialization_eq ℓ a hζ hζ')
-  dsimp only [purityScalarSourceDatum, purityScalarSourceUnitDatum,
+  dsimp +instances only [purityScalarSourceDatum, purityScalarSourceUnitDatum,
     purityScalarFrobeniusPull, purityScalarSourceObject, purityScalarSourceUnit,
     Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h

@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarIsoTransport
-import WeilConjectures.Tactic.ProofMismatchTrace
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Whole-isomorphism transport in the original rational coefficient vocabulary -/
 
@@ -58,8 +58,7 @@ theorem purity_rationalRootTrivialization_weil_of_iso_eq
     (a.geometricGaloisFrobenius.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧
     _ s _ t _ e hs ht he (Nat.card k : ℤ)
   have h := purity_rationalRootTrivialization_weil a hζ hζ'
-  dsimp only [Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
-  trace_proof_mismatch h
+  dsimp +instances only [Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing
