@@ -49,7 +49,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDelt
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
 public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
-public import WeilConjectures.SixFunctors.Integral.Exact
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
