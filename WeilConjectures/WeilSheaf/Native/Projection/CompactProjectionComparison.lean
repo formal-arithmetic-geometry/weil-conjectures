@@ -9,7 +9,6 @@ public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperProjectio
 public import WeilConjectures.WeilSheaf.Native.Projection.MateAdjunctionChoice
 public import WeilConjectures.WeilSheaf.Native.Projection.TwoSquareComposite
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPastingMonoidal
-public import WeilConjectures.WeilSheaf.Native.Projection.TwoSquareComposite
 
 /-! # The normalized compact-support projection and forget comparisons -/
 
