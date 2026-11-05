@@ -44,16 +44,15 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k
 
 
 variable [IsOpenImmersion f.left] [IsOpenImmersion f'.left]
-  [WeaklyEtale πY] (sq : IsPullback πX f'.left f.left πY)
+  (sq : IsPullback πX f'.left f.left πY)
 
 /-- The ambient extension-by-zero exchange, with left-derived pullbacks. -/
 noncomputable def purityOpenFieldAmbientExchange :
     D((f.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
         L((πY)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
       L((πX)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
-        D((f'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧) := by
-  have : WeaklyEtale πX := MorphismProperty.of_isPullback sq.flip ‹WeaklyEtale πY›
-  exact Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory _ πY) ≪≫
+        D((f'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory _ πY) ≪≫
     openImmersionLowerShriekMapDerivedCategoryBaseChangeIso _ sq.flip ≪≫
     Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory _ πX).symm _
 

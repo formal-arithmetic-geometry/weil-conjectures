@@ -25,7 +25,35 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   {X Y X' Y' : Scheme.{u}} {j : X ⟶ Y} {j' : X' ⟶ Y'}
   {πX : X' ⟶ X} {πY : Y' ⟶ Y}
-  [IsOpenImmersion j] [IsOpenImmersion j'] [WeaklyEtale πY] [WeaklyEtale πX]
+  [IsOpenImmersion j] [IsOpenImmersion j']
+
+/-- The levelwise open exchange is the left mate for arbitrary transverse pullback. -/
+lemma purityOpenDerivedExchange_inv (sq : IsPullback πX j' j πY) :
+    (openImmersionLowerShriekMapDerivedCategoryBaseChangeIso Λ sq.flip).inv =
+      Adjunction.exchangeLeft
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j)
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j')
+        (Functor.mapDerivedCategorySquareIso
+          (upperStarSquareComparison Λ sq.toCommSq.flip)) := by
+  have he := purityOpenImmersionLowerShriekUpperStarBaseChangeIso_inv Λ sq.flip
+  have : IsIso (Adjunction.exchangeLeft
+      (openImmersionLowerShriekUpperStarAdjunction Λ j)
+      (openImmersionLowerShriekUpperStarAdjunction Λ j')
+      (upperStarSquareComparison Λ sq.toCommSq.flip)) := by
+    rw [← he]
+    infer_instance
+  have he' : asIso (Adjunction.exchangeLeft
+      (openImmersionLowerShriekUpperStarAdjunction Λ j)
+      (openImmersionLowerShriekUpperStarAdjunction Λ j')
+      (upperStarSquareComparison Λ sq.toCommSq.flip)) =
+      (openImmersionLowerShriekUpperStarBaseChangeIso Λ sq.flip).symm := by
+    apply Iso.ext
+    exact he.symm
+  rw [derivedOpenImmersionLowerShriekUpperStarAdjunction,
+    derivedOpenImmersionLowerShriekUpperStarAdjunction,
+    Adjunction.exchangeLeft_mapDerivedCategoryAdjunction, he',
+    Functor.mapDerivedCategorySquareIso_symm]
+  rfl
 
 /-- The canonical left exchange is the specified derived extension-by-zero comparison,
 with the transverse pullbacks changed from levelwise to total-derived coordinates. -/
@@ -49,7 +77,7 @@ lemma purityOpenAmbientExchange_eq (sq : IsPullback πX j' j πY) :
     (pullbackSquareComparison Λ sq.toCommSq.flip)
     (Functor.mapDerivedCategorySquareIso (upperStarSquareComparison Λ sq.toCommSq.flip))
     (purityAmbientPullbackSquareComparison_coordinates Λ sq.toCommSq.flip)
-  rw [← purityOpenImmersionLowerShriekMapDerivedCategoryBaseChangeIso_inv Λ sq.flip] at he
+  rw [← purityOpenDerivedExchange_inv Λ sq] at he
   exact he
 
 end AlgebraicGeometry.ProEtale.CondensedRing

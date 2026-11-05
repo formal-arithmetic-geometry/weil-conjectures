@@ -62,7 +62,7 @@ lemma purity_boundedOpenAdjunction_eq :
       (Profinite.padicAlgClRingObj ℓ) ℓ f)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f)
 
-variable [WeaklyEtale πY] (sq : IsPullback πX f'.left f.left πY)
+variable (sq : IsPullback πX f'.left f.left πY)
 
 /-- The inverse restricted extension-by-zero comparison is the restricted left exchange. -/
 lemma purityOpenFieldExtensionExchange_inv :
@@ -73,7 +73,6 @@ lemma purityOpenFieldExtensionExchange_inv :
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
           (Profinite.padicAlgClRingObj ℓ) ℓ f')
         (upperStarOfMapSquareIso ℓ f f' sq.w) := by
-  have : WeaklyEtale πX := MorphismProperty.of_isPullback sq.flip ‹WeaklyEtale πY›
   ext K
   apply ObjectProperty.hom_ext
   rw [purityOpenFieldExtensionExchange_inv_app_hom]

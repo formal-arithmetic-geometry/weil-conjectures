@@ -83,6 +83,9 @@ axioms listed above; the combined invocation completed successfully.
 LEAD 00:20/01:25 superseded the W2 and étale assignments with step A of the point route:
 restrict the specified derived open-extension base-change isomorphism to bounded constructible
 complexes, then identify its mate under the specified open adjunction with the pullback square.
-The exact and levelwise-derived normalization helpers are green; the total-derived and bounded
-restriction steps are being checked in `K4c-20261106T001014.log`, snapshot `e11b448cfe`.
-No completion of step A is claimed before this focused check and its axiom audit pass.
+The exact and levelwise-derived normalization helpers are green. The generic full-subcategory
+restriction helper also passed in 1.5 s in `K4c-20261106T001014.log`, snapshot `e11b448cfe`.
+LEAD 01:35 then adopted Houyi PR #2144 and explicitly stopped this competing step-A work.
+The sole superseded build was canceled after verifying its exact source and process group;
+the concrete total-derived and bounded mate proofs and their audit remain unverified.
+No completion of the local step A or overall green build is claimed.
