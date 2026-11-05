@@ -159,7 +159,8 @@ lemma derivedExtendScalarsCompIso_hom_app_comp_counit
       (HomotopyCategory.quotient (Mod C T) (ComplexShape.up ℤ)).map
         ((Functor.mapHomologicalComplexCompIso (extendScalarsComp φ ψ).symm
           (ComplexShape.up ℤ)).hom.app P) := rfl
-  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id, hcI,
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app]
+  erw [Category.id_comp, hcI,
     NatTrans.mapHomotopyCategory_app, Functor.mapHomotopyCategory_map,
     ← Functor.map_comp]
   erw [Functor.mapHomotopyCategory_map]
