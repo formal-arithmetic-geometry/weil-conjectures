@@ -48,7 +48,7 @@ private lemma coeff_mem_prefix_iff {R : Type u} [CommRing R]
     (p : MvPolynomial (Fin r) R) :
     p ∈ Ideal.ofList ((List.ofFn (fun j ↦ MvPolynomial.C (f j) * MvPolynomial.X j)).take i) ↔
       ∀ E : Fin r →₀ ℕ,
-        MvPolynomial.coeff E p ∈ Ideal.span (f '' {j : Fin r | j.val < i ∧ E j ≠ 0}) := by
+        AddMonoidAlgebra.coeff p E ∈ Ideal.span (f '' {j : Fin r | j.val < i ∧ E j ≠ 0}) := by
   rw [ofList_take_ofFn _ _ hi]
   have h := (MvPolynomial.ideal_coefficients_monomial r i hr hi
     (fun j ↦ f (Fin.castLE hi j)) p).1

@@ -99,8 +99,8 @@ theorem iInter_frobenius_subfields_mvPolynomial_mvPowerSeries
     (AJ : Finset I → Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))
     (hAJ : ∀ J f, f ∈ AJ J ↔
       ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),
-        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ kJ J ∧
-        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
+        MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ∈ kJ J ∧
+        (MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 →
           (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j)))
     (KJ : Finset I → Subfield K)
     (hKJ : ∀ J z, z ∈ KJ J ↔
