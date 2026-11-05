@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ModuleGeneratingSectionsCompactSelection
 public import Mathlib.AlgebraicGeometry.AffineScheme
@@ -82,6 +83,6 @@ theorem exists_finiteType_affine_generators
   have : Epi (T.map f) := hS
   refine ⟨Fintype.card S, g ≫ f, ?_⟩
   rw [T.map_comp]
-  infer_instance
+  exact epi_comp' (IsIso.epi_of_iso (T.map g)) hS
 
 end AlgebraicGeometry.Scheme.Modules
