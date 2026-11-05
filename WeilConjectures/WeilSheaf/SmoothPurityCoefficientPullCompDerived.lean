@@ -42,7 +42,7 @@ lemma purity_restriction_square_comp_transport
   simp only [Functor.map_comp, Category.assoc]
   rw [← A'.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
     Category.id_comp]
-  rw [← e₀.hom.naturality_assoc, reassoc_of% (h K)]
+  rw [e₀.hom.naturality_assoc, reassoc_of% (h K)]
   exact congrArg (e₀.hom.app (C.obj K) ≫ c.hom.app K ≫ ·)
     (κ'.inv.naturality (e₂.inv.app K)).symm
 
