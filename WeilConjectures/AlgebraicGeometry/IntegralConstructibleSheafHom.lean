@@ -45,6 +45,7 @@ constructible sheaf as a finite distinguished extension of these pieces. Induct
 on that tower using distinguished extension closure of homColimitProperty. The
 good-truncation comparison returns the result for the supplied cocone c. Empty
 schemes and zero ranks are covered by the same categorical argument. -/
+set_option maxHeartbeats 800000 in
 theorem integralConstructible_sheaf_hom_colimit (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
