@@ -15,6 +15,7 @@ public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
@@ -55,27 +56,6 @@ universe u v
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open SheafOfModules.OpenTensorNormalization
-
-namespace SheafOfModules.OpenTensorNormalization
-
-/-- The published finite projection arrow in the direction of the node's gamma.
-This is its actual inverse projection map, with explicit endpoints to keep
-elaboration independent of the surrounding realization square.
-Source: Stacks 0GL1 and the recorded finite open projection formula
-(blueprint: lem-sf-open-tensor-normalization). -/
-def finiteGamma (A : Type (u + 1)) [CommRing A] [Finite A]
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (M : FiniteD A U) (N : FiniteD A X) :
-    (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
-      ((finiteShriek A j).obj M)).obj N) ⟶
-    (finiteShriek A j).obj
-      (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) U).obj M).obj
-        ((ProEtale.upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj N)) :=
-  letI : IsNoetherianRing A := isNoetherian_of_finite A A
-  ((ProEtale.derivedOpenImmersionLowerShriekProjectionIso
-    (ModuleCat.{u + 1} A) j).inv.app M).app N
-
-end SheafOfModules.OpenTensorNormalization
 
 namespace WeilConjectures.FiniteOpenProduct
 
