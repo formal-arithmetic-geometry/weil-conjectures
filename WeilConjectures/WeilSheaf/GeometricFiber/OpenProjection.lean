@@ -324,6 +324,67 @@ theorem map_upperStarTensorComparison_app_comp (a b : WeilComplex k₀ l X) :
     tensorHom_comp_tensorHom_assoc]
   exact H
 
+variable (k₀ l) in
+/-- Forgetting the Weil structure of the extension by zero of a Weil complex `M` gives the
+extension by zero of the underlying complex of `M`: forgetting the Weil structure commutes with
+the extension by zero, and so does the condensed model
+(`AlgebraicGeometry.ProEtale.adicOpenImmersionLowerShriekMapDerivedCategoryCompIso`). -/
+noncomputable def extensionByZeroForgetObjIso (M : WeilComplex k₀ l U) :
+    (geometricFiberBoundedConstructibleFunctor k₀ l X).obj ((extensionByZero j).obj M) ≅
+      (CondensedRing.boundedConstructibleOpenImmersionLowerShriek _ l
+        (geometricFiberHom (k₀ := k₀) j)).obj ((geometricFiberBoundedConstructibleFunctor k₀ l U).obj M) :=
+  ObjectProperty.isoMk _
+    ((adicSheafDerivedEquivCondensedMod l _).functor.mapIso
+      ((Functor.mapDerivedCategoryCompIsoOfIso (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso
+        (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l j
+          (comp_over j _)))).app M.obj) ≪≫
+     (adicOpenImmersionLowerShriekMapDerivedCategoryCompIso l _
+        (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))).app _)
+
+variable (k₀ l) in
+/-- The comparison `ī_! ∘ For ⟶ For ∘ j_!` of the extensions by zero: the mate of the inverse of
+`AlgebraicGeometry.WeilComplex.upperStarForgetIso` under `j_! ⊣ j^*` and `ī_! ⊣ ī^*`. -/
+noncomputable def extensionByZeroForgetHom :
+    TwoSquare (geometricFiberBoundedConstructibleFunctor k₀ l U) (extensionByZero j)
+      (CondensedRing.boundedConstructibleOpenImmersionLowerShriek _ l
+        (geometricFiberHom (k₀ := k₀) j))
+      (geometricFiberBoundedConstructibleFunctor k₀ l X) :=
+  (mateEquiv (extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j)
+    (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l
+      (geometricFiberHom (k₀ := k₀) j))).symm
+    (TwoSquare.mk _ _ _ _ (upperStarForgetIso k₀ l j).hom)
+
+set_option maxHeartbeats 2000000 in
+-- the derived categories of condensed module objects are slow to elaborate
+/-- The comparison `ī_! ∘ For ⟶ For ∘ j_!` is an isomorphism: it is the transpose of an
+isomorphism, followed by the counit of `ī_! ⊣ ī^*` at `For (j_! M) ≅ ī_! (For M)`, invertible since
+`ī_!` is fully faithful. -/
+instance isIso_extensionByZeroForgetHom : IsIso (extensionByZeroForgetHom k₀ l j).natTrans := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  have h := unit_mateEquiv_symm (extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j)
+    (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l
+      (geometricFiberHom (k₀ := k₀) j)) (TwoSquare.mk _ _ _ _ (upperStarForgetIso k₀ l j).hom) M
+  have h' : (extensionByZeroForgetHom k₀ l j).natTrans.app M =
+      ((CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l
+        (geometricFiberHom (k₀ := k₀) j)).homEquiv _ _).symm
+        ((geometricFiberBoundedConstructibleFunctor k₀ l U).map
+          ((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j).unit.app M) ≫
+          (upperStarForgetIso k₀ l j).hom.app ((extensionByZero j).obj M)) :=
+    (Equiv.eq_symm_apply _).2 ((Adjunction.homEquiv_unit _ _ _ _).trans h.symm)
+  have := (CondensedRing.fullyFaithfulBoundedConstructibleOpenImmersionLowerShriek
+    (Profinite.padicAlgClRingObj l) l
+    (geometricFiberHom (k₀ := k₀) j)).full
+  have := (CondensedRing.fullyFaithfulBoundedConstructibleOpenImmersionLowerShriek
+    (Profinite.padicAlgClRingObj l) l
+    (geometricFiberHom (k₀ := k₀) j)).faithful
+  have := (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ l
+    (geometricFiberHom (k₀ := k₀) j)).isIso_counit_app_of_iso (extensionByZeroForgetObjIso k₀ l j M)
+  have : IsIso (geometricFiberBoundedConstructibleFunctor k₀ l U |>.map
+    ((extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j).unit.app M)) := inferInstance
+  rw [h', Adjunction.homEquiv_counit]
+  infer_instance
+
 end OpenImmersion
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
