@@ -244,15 +244,14 @@
 - Next: validate the owned module, then its direct importers and downstream layers.
 - Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
-# BZ850 in progress
-
-- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
-- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
-- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
-  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
-  original statements and docstrings. Their surviving users prohibit pruning them.
-- Added Localization imports and explicit simplification of its hidden comparison components.
-- The assigned CoefficientConstantTowerRoos source is unchanged.
-- Next: remote ucheck-bump on the assigned module, then both direct importers.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned module is now GREEN: `ucheck-bump` rc=0, failed=0, 4657 jobs;
+  rebuilt in 9.5 seconds on `poolb:43.166.83.208` at commit
+  `4157f12719d57cd9316afddebd65c58d9ac537bb`.
+- Unit log: `/home/ubuntu/u9/bz/BUILD-BZ798-unit-green.log`.
+- Direct importer batch attempted all three importers. `ConstantPerfectQuotientProjection`
+  and `PerfectProjectionFormula` are blocked by unowned `RingedKoszulSystem.lean:554`
+  (`Invalid field symm`). Cancelled only this verified batch's timeout process;
+  wrapper rc=255, built=29, failed=1. These importers are skipped, not claimed green.
+- Dependency paths: `/home/ubuntu/u9/bz/BZ798-downstream-blockers.txt`.
+- Focused downstream validation of `ProEtaleProjectionMateData` and its sole importer
+  `ProEtaleProjectionMateExact` is queued (exec session 71582); no further Lean edits.
