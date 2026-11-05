@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.CompactProjectionFormula
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
+public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 
 /-!
 # The Verdier exchange for Weil complexes

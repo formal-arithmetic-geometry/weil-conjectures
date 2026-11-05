@@ -5,6 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealization
+public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
+import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationTensor
+import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
+
 public import WeilConjectures.WeilSheaf.Native.NativeForgetTotalTensor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
@@ -104,5 +109,32 @@ theorem nativeIsKFlat_upperStar (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k�
       ((NatIso.mapHomologicalComplex (ProEtale.adicUpperStarCompCondensedModIso l gf)
         (.up ℤ)).app K).symm h₂
   exact ProEtale.kFlat_of_adicSheafEquivCondensedMod_mapHomologicalComplex_obj l h₃
+
+/-- Pullback of pro-étale Weil sheaves along any morphism `g : Z ⟶ Y` of `k₀`-schemes preserves
+native K-flat complexes (Stacks 06YW). -/
+theorem nativeIsKFlat_upperStar_obj {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))] (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
+    (P : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (hP : NativeIsKFlat k₀ l Y P) :
+    NativeIsKFlat k₀ l Z (((upperStar k₀ l g).mapHomologicalComplex (.up ℤ)).obj P) :=
+  nativeIsKFlat_mapHomologicalComplex_obj_of_iso k₀ l (upperStar k₀ l g) _
+    ((Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso
+        (ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso l g _)) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (ProEtale.adicUpperStarCompCondensedModIso l
+        (Scheme.Hom.geometricFiberMap g (comp_over g _))) ≪≫
+      (Functor.associator _ _ _).symm) P
+    (ProEtale.CondensedRing.kFlat_upperStar_mapHomologicalComplex_obj
+      (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiberMap g (comp_over g _))
+      (kFlat_condensedRealization_mapHomologicalComplex k₀ l Y P hP))
+
+/-- The condensed realization of a native K-flat complex of pro-étale Weil sheaves is K-flat. -/
+theorem kFlat_condensedRealization (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
+    (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (hP : NativeIsKFlat k₀ l X P) :
+    (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat ((HomotopyCategory.quotient _ (.up ℤ)).obj
+      (((condensedRealization k₀ l X).mapHomologicalComplex (.up ℤ)).obj P)) :=
+  (HomotopyCategory.kFlat_quotient_obj_iff _).2
+    (kFlat_condensedRealization_mapHomologicalComplex k₀ l X P hP)
+
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
