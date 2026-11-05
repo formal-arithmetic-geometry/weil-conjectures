@@ -219,6 +219,7 @@ private theorem derivedMap_zero_of_boundary [M.obj.IsKInjective]
       ((DerivedCategory.Plus.singleFunctor _ 0).map φ ≫ β) =
         DerivedCategory.Q.map f' := by
     simp only [f', Functor.map_comp, hf]
+    rfl
   exact DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
     (homotopyOfSingle M f' b hb)
 
