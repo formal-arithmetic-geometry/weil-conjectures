@@ -50,33 +50,36 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ154 in progress
+# BZ154 complete
 
 - Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
-- Three assigned modules passed the first repair build at `31ce5f122`.
+- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
+- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
+- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
 - The user instructed continuation after the exact one-line statement correction in
-  `BZ154-shift-statement-proposal.patch`; that patch is now applied.
+  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
 - The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
-  construction and homotopy-category unit. All other changes are the mandated composition
+  construction and homotopy-category unit. Other changes are the mandated composition
   isomorphism migration and imports for private definitional reductions.
-- Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
+- This completion commit changes only progress documentation; Lean sources match the green build.
 
-# BZ190 complete
 
-- Branch: `u9/BZ190`.
-- Assigned module: `WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison`.
-- The module passed `ucheck-bump`: rc=0, failed=0, 2090 jobs.
-- Tested source commit: `a20255451c8530a95240e9634ea6bab8a027d11d`.
-- Final log: `/home/ubuntu/u9/bz/BUILD-BZ190-final-full.log`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw7`; both requested pins verified.
-- The user instructed continuation after the exact canonical unit proposal.
-  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the public statement.
-  The proof expands the unit and cancels its canonical comparison identities.
-  All other declaration statements and existing docstrings are unchanged.
-- Private helpers use implementation imports and explicit comparison cancellation.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
-- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
-- This final commit changes only progress documentation after the successful build.
+# BZ228 complete
+
+- Branch: `u9/BZ228`; starting commit: `c0384594d`.
+- Assigned module: `WeilConjectures.CategoryTheory.Abelian.DerivedCyclesUnitNaturality`.
+- Passed `ucheck-bump`: rc=0, failed=0, 1930 jobs; target rebuilt in 3.5 seconds.
+- Validated source commit: `58356b8d4fcc893861064280b373d19a3f95f96d`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ228-final-full.log`.
+- The user instructed continuation after the explicit canonical-transport proposal;
+  that exact statement patch is applied and validated. All other statement terms
+  and existing docstrings remain unchanged.
+- Added localization imports and simplified identity comparison factors in the proof.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ228.md`.
+- No local Lean/Lake execution, sorries, trust escapes, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ228.DONE`.
+- This completion commit changes only progress documentation after the green build.
