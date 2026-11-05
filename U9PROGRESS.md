@@ -84,14 +84,25 @@
 - No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
 
-# BZ266 in progress
+# BZ266 complete
 
 - Branch: `u9/BZ266`; starting commit: `c781553bf`.
-- Re-read the brief and progress notes on continuation.
-- The user instructed continuation after the explicit compositor compatibility proposal.
-  Applied `.inv` → `.hom` in `comparison_comp`, removed `.symm` in `unit_comp`'s `heD`,
-  and adjusted the proof cancellation; the original mathematical maps are preserved.
-- Replaced the obsolete identity computation with Mathlib's exact single-object lemma.
-- Proof-only remote build checked the identity repair; next build checks the compositor patch.
-- Patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ266.md`.
-- Only remote `ucheck-bump` builds; no proof placeholders, trust bypasses, or limit raises.
+- Assigned module and two downstream modules passed `ucheck-bump` together:
+  `ExactDegreeZeroSupplement`, `ExactDegreeZeroAdjoint`, `NormalizedTensorAdjunctionInsertion`.
+- Validated source commit: `2403113eebe24e55b6bf2e95ee3b63fadb521a2a`.
+  This completion commit changes only progress documentation.
+- Result: rc=0, failed=0, 3580 jobs; newsrv `/home/ubuntu/u9n/bumpw7`.
+- Toolchain and Mathlib revision verified on the build host:
+  Lean v4.35.0-rc3 / b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
+- Full log: `/home/ubuntu/u9/bz/BZ266-build-6-full.log`.
+- The user instructed continuation after the explicit orientation-only compatibility proposal.
+  Compositor references now preserve their original mathematical maps under Mathlib's
+  reversed isomorphism; all other declaration statements and docstrings are unchanged.
+- Reused Mathlib's identity-on-single-object lemma and selected degreewise complex
+  extensionality explicitly in the downstream tensor proof.
+- Skipped `OrdinarySupportedKummerScalarSupplement` because its outside-unit dependency
+  `SixFunctors.Etale.SmoothBaseChange.Defs` fails with a duplicate `CategoryTheory.Sheaf.H.δ` import.
+- Patterns, whole-tree counts, exact errors, and scope audit:
+  `/home/ubuntu/u9/bz/FIXES-BZ266.md`, `/home/ubuntu/u9/bz/BZ266-source-audit.json`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit raises.
+- Completion marker: `/home/ubuntu/u9/state/BZ266.DONE`.
