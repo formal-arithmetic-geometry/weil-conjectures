@@ -14827,6 +14827,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidue
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidueIdeal
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTest
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTriangulated
+public import WeilConjectures.CategoryTheory.DerivedCategory.TraceCounterexamples
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceLaws
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceScalarExtension
 public import WeilConjectures.CategoryTheory.DerivedCategory.UnboundedCohomologyObstruction.DerivedUnboundedCohomologyObstruction
@@ -21005,6 +21006,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DualReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHomMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FailureNormalBase
@@ -25186,6 +25188,7 @@ public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.DualizingSmooth
 public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
+public import WeilConjectures.TraceFormula.ExceptionalKunnethIsIso
 public import WeilConjectures.TraceFormula.ExceptionalKunnethRestriction
 public import WeilConjectures.TraceFormula.ExternalProductCoefficients
 public import WeilConjectures.TraceFormula.ExternalProductExtendScalars
@@ -25226,6 +25229,9 @@ public import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelC
 public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageFactors
 public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageUnit
 public import WeilConjectures.TraceFormula.IntegralPointThickening
+public import WeilConjectures.TraceFormula.InvariantClosedPiece
+public import WeilConjectures.TraceFormula.InvariantOpenPiece
+public import WeilConjectures.TraceFormula.InvariantPieceAdditivity
 public import WeilConjectures.TraceFormula.InverseSystemSitePoint
 public import WeilConjectures.TraceFormula.InverseSystemSitePoint2
 public import WeilConjectures.TraceFormula.Isomorphism.IsomorphismDerivedPullbackComparisonNormalization
