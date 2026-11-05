@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 @[expose] public section
 
