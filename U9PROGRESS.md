@@ -62,3 +62,20 @@
 - Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
 - Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ189 complete
+
+- Branch: `u9/BZ189`, starting commit `c6f0e1da9`.
+- Assigned module: `WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnitShift`.
+- `ucheck-bump` passed: rc=0, failed=0, 1925 jobs; target rebuilt in 1.9 seconds.
+- Validated source commit: `ad00a1745c51c41706839a8b38b06a57f64a70d1`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ189-final-full.log`.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ189.md`.
+- The user instructed continuation after the exact two-term statement proposal.
+  The single comparison now targets Q directly and uses the cochain-level unit;
+  the proof relates both to the existing homotopy-level shift and cycles comparisons.
+- Binders, mathematical assertion, and existing docstring are preserved.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This final progress commit changes no Lean source after the successful build.
+- Completion marker: `/home/ubuntu/u9/state/BZ189.DONE`.
