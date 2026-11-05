@@ -59,10 +59,10 @@ lemma purity_comparisonUpperStarFreeIso_factor :
       (Mod.freeForgetAdjunction (condensedRingObj (Profinite.continuousMapRingObj T) X))).comp
         (finiteCoefficientModEquivalence X T).toAdjunction)).injective
   rw [Equiv.apply_symm_apply]
-  rw [conjugateIsoEquiv_trans _
-      ((comparisonAdjunction Ab.{u + 1} X).comp (purityFiniteFreeSheafAdjunction T X)),
-    conjugateIsoEquiv_trans _ ((comparisonAdjunction Ab.{u + 1} X).comp
+  rw [conjugateIsoEquiv_trans _ ((comparisonAdjunction Ab.{u + 1} X).comp
       ((Mod.freeForgetAdjunction _).comp (finiteCoefficientModEquivalence X T).toAdjunction)),
+    conjugateIsoEquiv_trans _
+      ((comparisonAdjunction Ab.{u + 1} X).comp (purityFiniteFreeSheafAdjunction T X)),
     conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_associator]
   simp only [purityComparisonFreeSheafIso, purityFiniteCoefficientFreeIso,
     Equiv.apply_symm_apply]
