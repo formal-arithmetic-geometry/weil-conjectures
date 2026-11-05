@@ -1,17 +1,3 @@
-# BZ819 in progress
-
-- Branch: `u9/BZ819`; starting commit: `b3093d8fb32f9515a8a68790234b27f5de49f457`.
-- Reread the brief and progress notes on continuation; no new LEAD lines.
-- The user instructed continuation after the concrete prerequisite-restoration proposal.
-  Restored four declarations in `ScalarInternalHomAdjunction` and
-  `RingedFiniteFreeHomBaseChangeData`, preserving their original statements and docstrings.
-- The original root error was a missing `ringedFiniteFreeHomBaseChange_complex` caused
-  by deletion commits `2ecab1add` and `e0251c19d`; its callers require it to remain.
-- Added Localization imports for the private scalar-adjunction proof's Qh reductions.
-- Next: validate the restored dependencies and assigned leaf with `ucheck-bump`, repair
-  any remaining proof errors, then check downstream importers and write DONE.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -231,34 +217,36 @@
 - Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Assigned normalization module is GREEN at `814682ae46`: `ucheck-bump` rc=0,
+  failed=0, 3927 jobs, target rebuilt in 48 seconds.
+- Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
+- Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
 
-# BZ780 leaf and first two downstream layers green
 
-- Branch: `u9/BZ780`; starting commit: `8027d88a3`.
-- `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit` passed `ucheck-bump`
-  at `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`, 3930 jobs, poolb:43.166.82.34.
-- `DerivedPullbackMonoidalDescent` passed at `453fb49d85`: rc=0, failed=0.
-  Its associativity dependency also built successfully in this checkout.
-- The user instructed continuation after the concrete two-identity-cast proposal.
-  The retained casts preserve the original morphisms and mathematical assumptions.
-- Added public and implementation Localization imports, normalized identity casts
-  with `cast_eq`, and used `erw` through the local functor aliases.
-- Applied the same cast/import pattern inside the proposition-construction body of
-  `IsDerivedPullbackMonoidalModel`; its signature and theorem statements are unchanged.
-- Six machine rules exactly replay the two changed Lean files and are idempotent.
-- Four direct importers are blocked by unowned `SingleComplexBaseChangeStalkCondition`:
-  CanonicalPullbackTensorComparison, CanonicalPullbackTensorMonoidalRealization,
-  PerfectRHomTensorComparison, PerfectTensorHomDuality. Full diagnostics are saved.
-- Active repair batch: exec 32751, Weil bbuild PID 2557462, summary log
-  `BUILD-BZ780-downstream3-fix1.log`; targets Model, AcrossUniversesMonoidalAdjunction,
-  DerivedRestrictionTensorNaturality, OpenRestrictionDerivedMonoidal.
-- Active next-layer batch: exec 92062, Weil bbuild PID 2651696, summary log
-  `BUILD-BZ780-downstream4.log`; targets SchemeIsoDerivedFunctorComparisons,
-  DerivedRestrictionTensorHomCoherence, OpenRestrictionClosedMonoidal.
-- Both requests are queued; do not submit duplicates. All current tree slots are occupied.
-- Prune lists mark the potentially failing open-restriction theorem unused. Delete it
-  if its obsolete compositor direction fails; all its caller's declarations are unused too.
-- Next: finish downstream validation and fixes, then write `BZ780.DONE`.
-- Fix records, exact errors, counts, replay rules, and log names:
-  `/home/ubuntu/u9/bz/FIXES-BZ780.md`. Audit: `BZ780-contract-audit.txt`.
-- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes, or heartbeat increases.
+# BZ800 in progress
+
+- Branch: `u9/BZ800`; starting commit: `fcbed6be3`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- Import-only remote build at `47f88332d4` resolved the private helper error,
+  leaving the public hypothesis's Qh/Q mismatch.
+- The user instructed continuation after the exact two-cast proposal and downstream request.
+  Applied `BZ800-statement-cast-proposal.patch` and the same identity casts to
+  direct importer `DerivedPullbackMonoidalDescent`, preserving the existing morphisms.
+- Leaf rebuilt successfully at `46f8f154b4`; the direct importer was blocked by
+  unowned `DerivedPullbackTensorUnitKFlat.lean:359:12: Type mismatch`.
+- Following the brief's skip rule, saved the unvalidated importer patch outside the repo
+  and restored its source. Next: leaf-only rc=0 validation, final audit, and DONE.
+- Fix patterns and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ800.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ845 in progress
+
+- Branch: `u9/BZ845`; baseline: `c3b522379`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- Proof/import repairs removed the five original proof-local diagnostics remotely.
+- The user instructed continuation after the exact one-line reflexive-cast proposal.
+  Applied `BZ845-statement-cast-proposal.patch` to the public normalization field.
+- Next: `ucheck-bump` on the leaf and three direct importers, then further unblocked layers.
+- Fix patterns and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ845.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
