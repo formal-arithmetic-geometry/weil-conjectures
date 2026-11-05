@@ -45,7 +45,10 @@ lemma purity_comparisonUpperStarFreeIso_pullback
   rw [purity_comparisonUpperStarFreeIso_hom_app,
     purity_comparisonUpperStarFreeIso_hom_app]
   simp only [Functor.map_comp, Category.assoc]
-  rw [(purityFiniteCoefficientFreeIso T X).hom.naturality_assoc]
+  have hn := (purityFiniteCoefficientFreeIso T X).hom.naturality
+    ((comparisonUpperStarUpperStarIso Ab.{u + 1} g).hom.app M)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn
+  rw [reassoc_of% hn]
   rw [reassoc_of% (purity_upperStarFiniteCoefficient_free T g (ν^*(Y)[Ab.{u + 1}].obj M))]
   have h := purity_comparisonFreeSheaf_pullback_forward T g M
   simp only [purityComparisonFreePullbackIso, Iso.trans_hom, NatTrans.comp_app,

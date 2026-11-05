@@ -68,8 +68,10 @@ theorem purityExtendPullbackIso_factor
     ((purityModuleFactorIso Λ p s hs).hom.app M)
     ((purityModuleFactorIso Λ p s hs).hom.app N)
     e.hom.hom (purityExtendPullbackIso Λ p M N e).hom c
-  · exact CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
-  · exact CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs N
+  · simpa only [Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] using
+      CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
+  · simpa only [Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] using
+      CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs N
   · exact purityExtendPullbackIso_unit Λ p M N e
   · exact he
 

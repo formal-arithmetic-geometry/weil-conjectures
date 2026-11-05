@@ -76,6 +76,7 @@ lemma purityComparisonFreePullbackIso_conjugate :
   simp
   rfl
 
+omit [TopologicalSpace T] [IsTopologicalRing T] [DiscreteTopology T] [Finite T] in
 /-- The site comparison respects the free-sheaf geometric datum. -/
 lemma purity_comparisonFreeSheaf_pullback
     (M : Sheaf Y.smallEtaleTopology Ab.{u + 1}) :
@@ -111,6 +112,7 @@ lemma purity_comparisonFreeSheaf_pullback
     NatIso.ofComponents_hom_app, Category.id_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
+omit [TopologicalSpace T] [IsTopologicalRing T] [DiscreteTopology T] [Finite T] in
 /-- Forward form of the free-sheaf site comparison square. -/
 lemma purity_comparisonFreeSheaf_pullback_forward
     (M : Sheaf Y.smallEtaleTopology Ab.{u + 1}) :
