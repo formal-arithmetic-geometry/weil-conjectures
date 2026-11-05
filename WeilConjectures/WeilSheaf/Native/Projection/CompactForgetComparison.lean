@@ -8,7 +8,8 @@ public import WeilConjectures.WeilSheaf.UpperShriekGeometric
 public import WeilConjectures.WeilSheaf.LowerShriekForget
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
-public import WeilConjectures.WeilSheaf.Native.Projection.CompactProjectionIso
+public import WeilConjectures.WeilSheaf.ProperProjectionFormula
+public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionIso
 
 /-! # Natural geometric comparisons for the compact projection formula -/
 
@@ -82,35 +83,5 @@ def compactProjectionForgetUpperStarIso :
     Functor.isoWhiskerLeft (compactProjectionForget k₀ l Y)
       (CondensedRing.boundedConstructibleUpperStarCompatibility
         (Profinite.padicAlgClRingObj l) l (geometricFiberHom (k₀ := k₀) f)).symm
-
-/-- Forgetting compact support, for the geometric compactification induced by the Weil one. -/
-def compactProjectionForgetLowerShriekOfCompactificationIso :
-    derivedLowerShriek k₀ l f ⋙ compactProjectionForget k₀ l Y ≅
-      compactProjectionForget k₀ l X ⋙
-        CondensedRing.boundedConstructibleLowerShriekOfCompactification l
-          (geometricFiberHomCompactification (k₀ := k₀) f) := by
-  let c := lowerShriekCompactification k₀ f
-  let cb := geometricFiberHomCompactification (k₀ := k₀) f
-  let U := (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory
-  let E := (adicSheafDerivedEquivCondensedMod l
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor
-  let a := ProEtaleWeilSheaf.rightDerivedLowerShriekCompForgetIso k₀ l f c
-  let b := adicRightDerivedLowerShriekOfCompactificationCompIso l _ cb
-  apply ((boundedConstructible _).fullyFaithfulι.whiskeringRight _).preimageIso
-  exact Functor.isoWhiskerLeft (objectProperty k₀ l X).ι
-      (Functor.isoWhiskerRight a E ≪≫ Functor.isoWhiskerLeft U b) ≪≫
-    Functor.isoWhiskerLeft (compactProjectionForget k₀ l X)
-      (CondensedRing.boundedConstructibleLowerShriekOfCompactificationCompatibility l cb).symm
-
-/-- The natural comparison of the Weil compact direct image with the geometric compact direct
-image, including the change to the geometric category's chosen compactification. -/
-def compactProjectionForgetLowerShriekIso :
-    compactProjectionForget k₀ l X ⋙
-        CondensedRing.boundedConstructibleLowerShriek l (geometricFiberHom (k₀ := k₀) f) ≅
-      derivedLowerShriek k₀ l f ⋙ compactProjectionForget k₀ l Y :=
-  Functor.isoWhiskerLeft (compactProjectionForget k₀ l X)
-      (CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l _
-        (geometricFiberHomCompactification (k₀ := k₀) f)) ≪≫
-    (compactProjectionForgetLowerShriekOfCompactificationIso k₀ l f).symm
 
 end AlgebraicGeometry.WeilComplex
