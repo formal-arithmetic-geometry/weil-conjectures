@@ -126,7 +126,6 @@ theorem exists_formalFiber_extension
       E (Algebra.TensorProduct.includeLeftRingHom (b : M)) =
         Algebra.TensorProduct.includeLeftRingHom (D b : M) := by
   classical
-  let : CommRing B := inferInstance
   let K := (⊥ : Ideal A).ResidueField
   let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
     (Localization.AtPrime q)
@@ -150,11 +149,9 @@ theorem exists_formalFiber_extension
   let : DistribMulAction B H := (inferInstance : Module B H).toDistribMulAction
   let : Algebra B (C ⊗[A] B) := Algebra.TensorProduct.rightAlgebra
   obtain ⟨_, e, _, _, _, _⟩ := AdicCompletion.completion_finite_extension A B q
-  let h : (∀ t : Q, AdicCompletion
-      (IsLocalRing.maximalIdeal (Localization.AtPrime t.1)) (Localization.AtPrime t.1))
-      ≃ₐ[B] H := AlgEquiv.ofRingEquiv (f := RingEquiv.piUnique _) (by intro x; rfl)
   let e0 : (B ⊗[A] C) ≃ₐ[B] H :=
-    (Algebra.TensorProduct.commRight A B C).trans (e.trans h)
+    (Algebra.TensorProduct.commRight A B C).trans
+      (e.trans (AlgEquiv.ofRingEquiv (f := RingEquiv.piUnique _) (by intro x; rfl)))
   let eR : R ≃ₐ[M] (M ⊗[B] H) :=
     (Algebra.TensorProduct.cancelBaseChange A K M M C).trans
       ((Algebra.TensorProduct.cancelBaseChange A B M M C).symm.trans
