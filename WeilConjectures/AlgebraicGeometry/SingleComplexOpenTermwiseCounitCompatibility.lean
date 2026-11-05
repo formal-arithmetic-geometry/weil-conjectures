@@ -180,7 +180,8 @@ private theorem termwise_open_pinned_tensor_counit_transport
     eqToHom (congrArg (fun f ↦ (derivedPullback f).obj (DerivedCategory.Qh.obj P)) hj) ≫
       (pinnedPullbackCounit.{u, w} (U'.ι ≫ k)).app P ≫
       DerivedCategory.Qh.map ((openPinnedHomotopyTargetCompositionIso k U').hom.app P) ≫
-      DerivedCategory.Qh.map ((termwise_openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P) =
+      DerivedCategory.Qh.map
+        ((termwise_openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P) =
     (pinnedPullbackCounit.{u, w} (j ≫ U.ι)).app P ≫
       DerivedCategory.Qh.map ((openPinnedHomotopySourceCompositionIso U j).hom.app P) := by
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
@@ -207,7 +208,8 @@ private theorem termwise_open_pinned_counit_homotopy_restriction
         ((pinnedPullbackCounit.{u, w} k).app P) ≫
       (schemeOpenRestriction X' U').mapDerivedCategoryFactorsh.hom.app
         ((Scheme.Modules.tensorPullback k).mapHomotopyCategory (.up ℤ) |>.obj P) ≫
-      DerivedCategory.Qh.map ((termwise_openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P) =
+      DerivedCategory.Qh.map
+        ((termwise_openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P) =
     (derivedPullback j).map ((schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app P) ≫
       (pinnedPullbackCounit.{u, w} j).app
         ((schemeOpenRestriction X U).mapHomotopyCategory (.up ℤ) |>.obj P)  := by
