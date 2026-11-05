@@ -149,7 +149,7 @@ lemma Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (h₁₂ : T ⟶ 
       (P := @Etale) (Q := ⊤) h₂).obj V).hom h₁ = t.1 :=
     basePt_snd h₁ c' ⟨t.1, rfl⟩
   rw [hmap, CategoryTheory.Over.comp_left, hl]
-  simp only [Etale.baseChangeNbhd_obj_snd_left]
+  simp only [Etale.baseChangeNbhd_obj_val_left]
   apply pullback.hom_ext
   · apply pullback.hom_ext
     · rw [Category.assoc, Category.assoc, hψ₁, basePt_fst, hb₁, basePt_fst]
