@@ -172,8 +172,6 @@ theorem chainIso_natural (P P' L L' M M' : K)
   let := SheafOfModules.monoidalCategory R
   apply HomologicalComplex.hom_ext
   intro n
-  dsimp [chainIso]
-  simp only [HomologicalComplex.Hom.isoOfComponents_hom_f]
   exact (homTensorDegreewiseMap_natural R P P' L L' M M' f g h n).trans
     (Category.assoc _ _ _).symm
 
