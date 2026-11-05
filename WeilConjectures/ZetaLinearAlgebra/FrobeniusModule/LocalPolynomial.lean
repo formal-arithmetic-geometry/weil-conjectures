@@ -41,7 +41,7 @@ variable {K L V : Type*} [Field K] [Field L] [AddCommGroup V] [Module K V]
 powers of `f` is `-X P'/P` for the image `P` of `det (1 - X f)`. -/
 theorem map_mk_trace_pow (f : Module.End K V) (φ : K →+* L) :
     PowerSeries.map φ (PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (f ^ n)) =
-      -(X * derivative L ((f.charpolyRev.map φ : Polynomial L) : L⟦X⟧)) *
+      -(X * derivative (R := L) ((f.charpolyRev.map φ : Polynomial L) : L⟦X⟧)) *
         ((f.charpolyRev.map φ : Polynomial L) : L⟦X⟧)⁻¹ := by
   set P : L⟦X⟧ := ((f.charpolyRev.map φ : Polynomial L) : L⟦X⟧)
   have hP : constantCoeff P = 1 := by
