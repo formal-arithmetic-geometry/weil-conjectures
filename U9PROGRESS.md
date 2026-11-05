@@ -221,3 +221,22 @@
   failed=0, 3927 jobs, target rebuilt in 48 seconds.
 - Remote log: `/home/ubuntu/u9/logs/BZ740-20261106T061103.log`.
 - Checking downstream `DerivedPullbackTensorUnitKFlat` and `DerivedPullbackTensorUnit`.
+
+# BZ802 in progress
+
+- Branch: `u9/BZ802`; starting commit: `fcbed6be3`.
+- Reread the brief and progress notes on continuation; no new LEAD lines.
+- The user instructed continuation after the explicit three-prerequisite restoration proposal.
+- Restored the original declarations in AffinePerfectOpenRepresentCohomologyColimit,
+  AffinePerfectOpenRepresentCohomology, and AffineKoszulSectionColimit.
+- Fixed the compositor isIso implication from `.2` to `.1`; omitted old heartbeat overrides.
+- Remote validation includes those three modules, assigned AffineKoszulSectionRoof,
+  and direct importer AffinePerfectTensorRoof. Continue downstream after green.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ802.md`.
+- No local Lean/Lake, changed statements, deleted callers, or proof escapes.
+
+- First remote build measured a 200000-heartbeat isDefEq timeout in the restored
+  cohomology-colimit proof at hv₂. Restored only that theorem's original 1000000 budget.
+- Direct importer AffinePerfectTensorRoof is blocked by unowned
+  DerivedPullbackTensorAssociativity.lean:323:12 (Type mismatch), also at 459:12.
+- Next build covers the four assigned/restored modules without the blocked importer.
