@@ -275,7 +275,6 @@ private theorem unitLerayChain
     ((G.mapHomologicalComplex (.up ℤ)).obj I))]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
     ← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
-  erw [Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% hβ, ← H.rightDerivedFunctor.map_comp, ← hfactor]
   simpa only [Functor.map_comp, Category.assoc] using
     congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map
