@@ -285,7 +285,6 @@ lemma mapHomologicalComplexδNatTrans_comp (F : C ⥤ D) (G : D ⥤ E) [F.Additi
   erw [Functor.comp_map, ← G.map_comp_assoc, map_ιMapBifunctor_mapBifunctorComparisonX,
     G.map_comp_assoc, map_ιMapBifunctor_mapBifunctorComparisonX]
   simp
-  rfl
 
 omit [HasFunctorialFlatResolution C] [HasFunctorialFlatResolution D] in
 open HomologicalComplex in
@@ -313,7 +312,6 @@ lemma mapHomologicalComplexδNatTrans_naturality {F F' : C ⥤ D} [F.Additive] [
   simp only [mapBifunctorComparisonApp, OplaxMonoidal.δNatTrans_app_app]
   erw [← reassoc_of% hτ]
   simp [tensorHom_def]
-  rfl
 
 end ComplexLevel
 
