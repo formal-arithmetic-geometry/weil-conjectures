@@ -89,7 +89,7 @@ lemma nonempty_isLimit_mapCone_padicIntSheafCone (U : X.ProEtᵒᵖ) :
         ((sheafToPresheaf _ _).mapCone (padicIntSheafCone X l))))) := by
   refine (Types.isLimit_iff _).2 fun s hs ↦ ?_
   let a := compatibleLocallyConstantOfSection X l U (s := s) hs
-  refine ⟨ULift.up (PadicInt.compatibleLocallyConstantToContinuousMap a), fun j ↦ ULift.ext _ _
+  refine ⟨ULift.up (PadicInt.compatibleLocallyConstantToContinuousMap a), fun j ↦ ULift.ext
     (ContinuousMap.ext fun t ↦
       (PadicInt.toZModPow_ringEquivCompatibleFamilies_symm _ _).trans (by rfl)), fun y hy ↦ ?_⟩
   refine ULift.ext (ContinuousMap.ext fun t ↦ PadicInt.ext_of_toZModPow.1 fun n ↦ ?_)
