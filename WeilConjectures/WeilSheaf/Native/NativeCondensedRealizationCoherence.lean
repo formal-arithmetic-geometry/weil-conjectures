@@ -80,9 +80,9 @@ on `Y`, the comonoidal structure of the pullback `ḡ^*` of condensed `ℚ̲̄_�
 pullback comparison `condensedRealizationUpperStarIso : N_Y ⋙ ḡ^* ≅ g^* ⋙ N_Z`.
 
 Forgetting the Weil structures, this is a statement about `ℓ`-adic sheaves on the geometric
-fibres: the pullback compatibility `ḡ^* ⋙ E_Z ≅ E_Y ⋙ ḡ^*` of the condensed model
-`E = adicSheafEquivCondensedMod` (`AlgebraicGeometry.ProEtale.adicUpperStarCompCondensedModIso`,
-the conjugate of the pushforward compatibility) is a monoidal natural isomorphism, for the
+fibres: the pullback compatibility `E_Y ⋙ ḡ^* ≅ ḡ^* ⋙ E_Z` of the condensed model
+`E = adicSheafEquivCondensedMod` (`AlgebraicGeometry.ProEtale.condensedModUpperStarIso`, from
+which `condensedRealizationUpperStarIso` is built) is a monoidal natural isomorphism, for the
 pullback–tensor comparison `AlgebraicGeometry.ProEtale.adicUpperStarTensorLeftIso` of `ℓ`-adic
 sheaves, the monoidal comparison `AlgebraicGeometry.ProEtale.adicSheafEquivCondensedModTensorIso`
 of `E` and the strong monoidal structure of the pullback of condensed module objects. It is the
