@@ -37,6 +37,6 @@ noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
   apply Classical.choice
   dsimp only [tateTwistLowerPair, geometricFiberFrobeniusIso,
     frobeniusUpperStarIsoLowerStarInv]
-  exact_mod_proofs Nonempty.intro (purity_geometricTatePairIso ℓ (X ↘ Spec (.of k₀)) d)
+  cast_proofs Nonempty.intro (purity_geometricTatePairIso ℓ (X ↘ Spec (.of k₀)) d)
 
 end AlgebraicGeometry.WeilSheaf
