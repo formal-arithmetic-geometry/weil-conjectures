@@ -256,3 +256,15 @@
 - The assigned CoefficientConstantTowerRoos source is unchanged.
 - Next: remote ucheck-bump on the assigned module, then both direct importers.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ850 complete
+
+- Assigned leaf `WeilConjectures.SmoothPurity.Coefficient.CoefficientConstantTowerRoos`
+  is green through `ucheck-bump`: rc=0, failed=0, 5024 jobs.
+- Restored the three projection declarations deleted upstream but still referenced by
+  surviving callers; normalized hidden quotient comparison components with Localization imports.
+- Direct importer `CoefficientSequenceRoosModel` is owned by PZ027 and remains red at its
+  first compositor error. `PurNormalizedReconstructionAdjunctionCalculus` is blocked by it;
+  no outside source was edited.
+- Completion marker: `/home/ubuntu/u9/state/BZ850.DONE`.
+- Full evidence and machine rules: `/home/ubuntu/u9/bz/FIXES-BZ850.md`.
