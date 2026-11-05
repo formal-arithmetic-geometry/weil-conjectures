@@ -317,11 +317,11 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
             ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
               (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
             DerivedCategory.Q.map (φ P N).hom =
-          cast (by rfl) ((ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
+          cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
             ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
             Functor.LaxMonoidal.μ DerivedCategory.Q
               ((F.mapHomologicalComplex (.up ℤ)).obj P)
-              ((F.mapHomologicalComplex (.up ℤ)).obj N))) ∧
+              ((F.mapHomologicalComplex (.up ℤ)).obj N)) ∧
       (∀ (P P' N N' : CochainComplex
           (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
         (hP : CochainComplex.IsKFlatTensor (R := X.sheaf) P)
