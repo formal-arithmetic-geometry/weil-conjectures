@@ -126,9 +126,8 @@ private theorem unpointed_morphism_lift {A B : Type u} [CommRing A] [CommRing B]
   have hp2 : CategoryTheory.IsPushout (CommRingCat.ofHom (algebraMap A W))
       (CommRingCat.ofHom π) w (CommRingCat.ofHom (algebraMap B T)) := by
     convert hp0.paste_horiz hp using 1
-    · rfl
-    · ext b
-      exact (f.hom.commutes b).symm
+    ext b
+    exact (f.hom.commutes b).symm
   let d : (Under.pushout (CommRingCat.ofHom π)).obj
       ((commAlgCatEquivUnder (CommRingCat.of A)).functor.obj W') ≅
         (commAlgCatEquivUnder (CommRingCat.of B)).functor.obj T :=

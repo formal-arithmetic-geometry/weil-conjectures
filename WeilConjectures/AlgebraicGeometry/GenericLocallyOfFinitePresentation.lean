@@ -94,8 +94,6 @@ private theorem exists_nonzero_finitePresentation_restrict_basicOpen {X S : Sche
     apply (HasRingHomProperty.iff_of_isAffine (P := @LocallyOfFinitePresentation)).mpr
     rw [Scheme.Hom.comp_appTop, CommRingCat.hom_comp]
     convert hflat Γ(V, ⊤) using 1
-    ext b
-    rfl
   apply MorphismProperty.of_postcomp @LocallyOfFinitePresentation (W' := @IsOpenImmersion)
     (f ∣_ S.basicOpen a) (S.basicOpen a).ι inferInstance
   rw [morphismRestrict_ι]
