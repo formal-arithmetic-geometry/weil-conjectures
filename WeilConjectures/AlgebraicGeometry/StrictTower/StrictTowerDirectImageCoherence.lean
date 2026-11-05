@@ -379,7 +379,7 @@ private theorem gComp_coherence {X Y Z W : Scheme.{u}}
   change (Functor.mapDerivedCategoryNatIso e).hom.app M = _ at he
   rw [he] at hm
   simpa only [gComp, G, F₁, F₂, F₃, F₀₂, F₁₃, a₀₂, a₁₃, a₀, a₁, e,
-    Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] using hm
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] using hm
 
 private lemma conjugate_triangle_assoc
     {C₀ C₁ C₂ C₃ : Type*}
@@ -649,7 +649,7 @@ private theorem gCompEq_left_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Iso.refl_hom, NatTrans.id_app]
   erw [Category.comp_id]
   simpa only [gCompEq, gComp, gId, towerGId, moduleGId, moduleAdj, G,
-    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     Functor.rightUnitor_hom_app, NatTrans.comp_app, Iso.refl_hom, NatTrans.id_app,
     Functor.map_comp, Category.assoc, Category.comp_id] using hm
 
@@ -830,7 +830,7 @@ private theorem gCompEq_right_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Iso.refl_hom, NatTrans.id_app]
   erw [Category.comp_id]
   simpa only [gCompEq, gComp, gId, towerGId, moduleGId, moduleAdj, G,
-    Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     NatTrans.comp_app, Functor.map_comp, Category.assoc, NatTrans.id_app,
     Functor.comp_obj, Functor.id_obj] using hm
 
