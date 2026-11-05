@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceComparison
 public import Mathlib.Algebra.Homology.Localization
-import all Mathlib.Algebra.Homology.Localization
 
 /-! # Source transport on an injective representative
 
@@ -64,9 +63,7 @@ theorem smallModel_injectiveExchange_source_transport {X S : Scheme.{v}} (f : X 
   simp only [smallModel_sourceInjectiveDirectImageIso, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_inv, asIso_hom]
   simp only [Functor.map_comp, Functor.mapHomotopyCategoryFactors,
-    DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
     Quotient.lift.isLift, NatIso.ofComponents.app, Iso.refl_inv]
-  erw [CategoryTheory.Functor.map_id]
-  simp only [Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] <;> rfl
 
 end AlgebraicGeometry.Etale

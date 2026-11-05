@@ -142,34 +142,44 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ557 in progress
 
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+# BZ585 complete
 
-# BZ591 complete
+- Branch: `u9/BZ585`; starting commit: `8af5cb324`.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFreeComparison`
+  passed ucheck-bump: rc=0, failed=0, 2022 jobs, target rebuilt in 4.8s.
+- Validated commit: `db7bb14d08c2234513afd1b158e2524d33864d66`; newsrv bumpw4, Lean v4.35.0-rc3
+  and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24 confirmed on the build host.
+- Added the Localization public/import-all imports and made the two internal comparison
+  helpers private, following user continuation after that exact proposal. All statements,
+  proofs, binders, assumptions and existing docstrings are unchanged.
+- Contract audit: `/home/ubuntu/u9/bz/BZ585-contract-audit.txt`.
+  Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ585.md`.
+- Direct importer `WeilConjectures.WeilSheaf.LowerShriekForget` was attempted at
+  `c7cb6c306b`; the assigned module rebuilt successfully in that batch in 6.1s.
+- The importer is blocked by unowned `FreeComparisonMapDerivedCategory` (BZ584)
+  and six other dependencies. Stopped only the verified timeout process for this
+  build after confirming dependency failures. Result: rc=255, failed=7; the downstream
+  batch is not green. No downstream or external dependency sources were changed.
+- Skipped `LowerShriekForget`, `AffineLineBundle`, and `SmoothPurityNativeTraceCriterion`
+  under the brief's external-dependency rule. Only the assigned module is claimed green.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ585-unit-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ585-downstream1-full.log`.
+- No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
+- Final documentation commit leaves Lean source identical to the green revision.
 
-- Branch: `u9/BZ591`; starting commit: `cfcb63ad77e4fcb54dba96c8cadcf5a61bf62295`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.InjectiveExchangeTargetTransport`
-  passed ucheck-bump: rc=0, failed=0, 4238 jobs, target rebuilt in 48 seconds.
-- Validated source commit: `1b205aa47b4f9a3898adb9d6ac6a5fcd19ca7200`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ591-unit3-full.log`.
-- The user instructed continuation after the exact public-statement proposal:
-  correct the preimageIso target to Plus.Qh and insert the canonical mapped Q-to-Qh comparison.
-  Imports restore private Q/Qh reduction; the proof normalizes the comparison using
-  the qualified CategoryTheory.Functor.map_id lemma with erw.
-- All other statements and existing docstrings remain unchanged.
-- Direct importer InjectiveExchangeRepresentative was tested and skipped because
-  BZ590-owned InjectiveExchangeSourceTransport fails in this branch. The assigned
-  module rebuilt green again in that check at `9871df5511606e8a59d6e780c66c01c21a5b2f54`.
-  No second layer was attempted past this unowned dependency.
-- Fix patterns, occurrence counts, and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ591.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ591.DONE`.
-- This completion commit changes only progress documentation; Lean source matches the green build.
+
+# BZ630 in progress
+
+- Branch: `u9/BZ630`; starting commit: `b7a97a5ed`.
+- Read the brief again on continuation; there are no appended LEAD overrides.
+- The user instructed continuation after the explicit endpoint-transport statement proposal.
+  That exact patch is applied; the proof reduces the new transport to an identity.
+- The proof keeps quotientCompQhIso opaque and reduces only the exposed homotopy comparison;
+  the final source uses a public Localization import and no import-all directive.
+- Original ucheck-bump is queued; it will build the newly pushed branch once a tree is free.
+- Next: validate the assigned module, then attempt its direct importer and follow the
+  external-dependency skip rule if BZ631's target-transport module fails.
+- Notes and pattern counts: `/home/ubuntu/u9/bz/FIXES-BZ630.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, heartbeat raises, or profiler probes.
