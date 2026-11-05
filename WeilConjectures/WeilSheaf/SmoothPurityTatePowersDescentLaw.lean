@@ -15,6 +15,7 @@ import WeilConjectures.Tactic.ExactModProofs
 universe u
 
 open CategoryTheory MonoidalCategory
+open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -40,6 +41,6 @@ lemma purity_upperStarTateTwistNatIso_geometricFiber
     (a.geometricFiberProj ≫ a) a.geometricFiberToAlgebraicClosure d,
     ← purity_geometricFiberProjUpperStarFrobeniusIso_eq (Profinite.padicAlgClRingObj ℓ) a] at h
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
-  cast_proofs h
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale

@@ -13,6 +13,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityScalarComparison
 universe u
 
 open CategoryTheory MonoidalCategory
+open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -32,7 +33,8 @@ lemma purity_geometricFiberProjLowerStarFrobeniusIso_app
     [MonObj Λ] [IsCommMonObj Λ]
     {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of k))
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) :
     (geometricFiberProjLowerStarFrobeniusIso Λ a).app M =
       ((upperStarIsoLowerStarInv Λ a.geometricGaloisFrobenius).app
         ((CondensedRing.upperStar Λ a.geometricFiberProj).obj M)).symm ≪≫

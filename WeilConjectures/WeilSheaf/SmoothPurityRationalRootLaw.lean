@@ -70,7 +70,7 @@ theorem purity_rationalRootTrivialization_weil :
             count := count + 1
             Lean.logInfo m!"Root input data difference: {a.getAppFn} versus {b.getAppFn}"
         Lean.logInfo m!"Root input data differences: {count}"
-      cast_proofs hr)
+      exact_mod_proofs hr)
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
   run_tac Lean.Elab.Tactic.withMainContext do
     let ht ← Lean.Elab.Term.elabTerm (Lean.mkIdent `h) none
@@ -90,6 +90,6 @@ theorem purity_rationalRootTrivialization_weil :
         count := count + 1
         Lean.logInfo m!"Rational root data difference: {a.getAppFn} versus {b.getAppFn}"
     Lean.logInfo m!"Rational root data differences: {count}"
-  cast_proofs h
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

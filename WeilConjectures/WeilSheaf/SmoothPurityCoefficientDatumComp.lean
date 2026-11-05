@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTateCoefficientComposition
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCoherence
+public import WeilConjectures.WeilSheaf.SmoothPurityOrdinaryPullIsoComp
 
 /-! # Coefficient extension preserves the pullback cocycle -/
 
@@ -43,7 +43,7 @@ lemma purityCoefficientPullbackIso_geometric_comp
   apply (cancel_epi ((pullIso a (f ≫ g)).hom.app M)).mp
   simp only [purityCoefficientPullbackIso, Iso.trans_hom, Iso.symm_hom, Iso.app_inv,
     Functor.mapIso_hom, Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
-  rw [← Category.assoc, pullIso_hom_app_comp]
+  rw [← Category.assoc, purity_pullIso_hom_app_comp]
   simp only [Category.assoc]
   rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]

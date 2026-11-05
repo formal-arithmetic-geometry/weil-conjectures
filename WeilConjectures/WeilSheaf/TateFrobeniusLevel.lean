@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityRootsNaturality
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
-public import WeilConjectures.WeilSheaf.FrobeniusTwist
+public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
 
 /-!
 # The geometric Frobenius on the trivialized sheaves of roots of unity
@@ -30,7 +30,7 @@ Frobenius `g = 𝟙 × σ` (`AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobeni
 roots of unity along `g` on the trivialized sheaf `μ_{ℓⁿ} ≅ ℤ/ℓⁿ`: it is multiplication by
 `c = χ_ℓ(γ) mod ℓⁿ`, the reduction of the `ℓ`-adic cyclotomic character of the geometric
 Frobenius, which is `q⁻¹`
-(`AlgebraicGeometry.WeilSheaf.modularCyclotomicCharacter_geometricFrobenius_mul`); this is
+(`AlgebraicGeometry.WeilSheaf.purity_modularCyclotomicCharacter_geometricFrobenius_mul`); this is
 `AlgebraicGeometry.ProEtale.upperStar_map_unitToRootsOfUnitySheaf_geometricGaloisFrobenius`.
 This is the finite-level input of the identification of the Tate twist `ℚ̄_ℓ(1)` of roots of
 unity, pulled back to the geometric fibre with its canonical Weil structure, with the constant
@@ -103,9 +103,9 @@ variable (k : Type u) [Field k] [Finite k] (ℓ : ℕ) [Fact ℓ.Prime] [Fact (r
 /-- The value `c ∈ (ℤ/ℓⁿ)ˣ` of the modular cyclotomic character of the geometric Frobenius
 `γ = (x ↦ x ^ q)⁻¹` of `k̄`: `γ(ζ) = ζ ^ c` for every `ℓⁿ`-th root of unity `ζ` of `k̄`. It
 satisfies `c q = 1`
-(`AlgebraicGeometry.WeilSheaf.modularCyclotomicCharacter_geometricFrobenius_mul`). -/
+(`AlgebraicGeometry.WeilSheaf.purity_modularCyclotomicCharacter_geometricFrobenius_mul`). -/
 noncomputable def geometricFrobeniusModularCharacter (n : ℕ) : (ZMod (ℓ ^ n))ˣ :=
-  haveI := WeilSheaf.neZero_natCast_algebraicClosure k ℓ
+  haveI := WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
   letI := Fintype.ofFinite k
   modularCyclotomicCharacter (AlgebraicClosure k)
     (HasEnoughRootsOfUnity.natCard_rootsOfUnity (AlgebraicClosure k) (ℓ ^ n))
@@ -116,7 +116,7 @@ lemma geometricFrobeniusModularCharacter_mul_natCard (n : ℕ) :
     ((geometricFrobeniusModularCharacter k ℓ n : (ZMod (ℓ ^ n))ˣ) : ZMod (ℓ ^ n)) *
       (Nat.card k : ZMod (ℓ ^ n)) = 1 := by
   let := Fintype.ofFinite k
-  exact WeilSheaf.modularCyclotomicCharacter_geometricFrobenius_mul k ℓ n
+  exact WeilSheaf.purity_modularCyclotomicCharacter_geometricFrobenius_mul k ℓ n
 
 /-- The geometric Frobenius raises an `ℓⁿ`-th root of unity `ζ` of `k̄` to the power `c`. -/
 lemma geometricFrobeniusAlgEquivOfAlgebraic_apply_of_pow_eq_one (n : ℕ)
@@ -124,7 +124,7 @@ lemma geometricFrobeniusAlgEquivOfAlgebraic_apply_of_pow_eq_one (n : ℕ)
     letI := Fintype.ofFinite k
     FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ζ =
       ζ ^ ((geometricFrobeniusModularCharacter k ℓ n : (ZMod (ℓ ^ n))ˣ) : ZMod (ℓ ^ n)).val := by
-  have := WeilSheaf.neZero_natCast_algebraicClosure k ℓ
+  have := WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
   let := Fintype.ofFinite k
   have h := modularCyclotomicCharacter.spec (AlgebraicClosure k)
     (HasEnoughRootsOfUnity.natCard_rootsOfUnity (AlgebraicClosure k) (ℓ ^ n))

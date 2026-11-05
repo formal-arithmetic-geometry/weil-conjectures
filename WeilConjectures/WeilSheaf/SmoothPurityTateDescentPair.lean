@@ -52,7 +52,7 @@ noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
     rfl (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricFiberProj
       (X ↘ Spec (.of k₀)) d) (by
         dsimp only [Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
-        cast_proofs h)
+        exact_mod_proofs h)
   exact e
 
 end AlgebraicGeometry.WeilSheaf

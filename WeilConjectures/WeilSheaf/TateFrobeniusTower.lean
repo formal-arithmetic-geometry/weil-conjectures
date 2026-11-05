@@ -219,7 +219,7 @@ lemma geometricFrobeniusModularCharacter_succ_cast (n : ℕ) :
     (((geometricFrobeniusModularCharacter k ℓ (n + 1) : (ZMod (ℓ ^ (n + 1)))ˣ) :
         ZMod (ℓ ^ (n + 1))).cast : ZMod (ℓ ^ n)) =
       ((geometricFrobeniusModularCharacter k ℓ n : (ZMod (ℓ ^ n))ˣ) : ZMod (ℓ ^ n)) := by
-  have := WeilSheaf.neZero_natCast_algebraicClosure k ℓ
+  have := WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
   let := Fintype.ofFinite k
   unfold geometricFrobeniusModularCharacter
   rw [← cyclotomicCharacter.toZModPow, ← cyclotomicCharacter.toZModPow]

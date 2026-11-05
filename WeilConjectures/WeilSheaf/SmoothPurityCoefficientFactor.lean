@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarComparison
 public import WeilConjectures.WeilSheaf.SmoothPurityInverseSquare
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCoherence
+public import WeilConjectures.WeilSheaf.SmoothPurityOrdinaryPullIsoComp
 
 /-! # Coefficient extension and a pullback factorization -/
 
@@ -54,7 +54,7 @@ lemma purity_extendScalars_map_factor_hom_comp_pullIso
     (upperStarComp Λ s p) (upperStarComp Λ' s p)
     (upperStarCongr Λ hs) (upperStarCongr Λ' hs)
     (purityModuleFactorIso Λ p s hs) (purityModuleFactorIso Λ' p s hs) rfl rfl M
-    (pullIso_hom_app_comp a s p M)
+    (purity_pullIso_hom_app_comp a s p M)
     (purity_pullIso_hom_app_comp_upperStarCongr_hom_app a hs M)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
