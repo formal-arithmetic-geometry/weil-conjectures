@@ -66,22 +66,21 @@ theorem exists_forall_isIso_property_derivedReduction_map
       IsIso ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map f) ∧
         P n ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map f) := by
   let T := fun n : ℕ ↦
-    (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ≅
+    (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ⟶
       (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L
-  let r (n : ℕ) : T (n + 1) → T n := fun s ↦
-    @asIso _ _ _ _ (derivedReductionStep (n + 1) s.hom) (isIso_derivedReductionStep (n + 1) s.hom)
-  have htfin (n : ℕ) : Finite (T n) := by
-    have := hfin n
-    exact Finite.of_injective (fun e : T n ↦ e.hom) fun e e' h ↦ Iso.ext h
-  obtain ⟨t, htP, ht⟩ := exists_compatible_choices_with_property r (fun n e ↦ P n e.hom)
-    htfin hne (fun n e he ↦ hP n e.hom he)
-  obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq hL (fun n ↦ (t n).hom) fun n ↦ by
-    have he : derivedReductionStep (n + 1) (t (n + 1)).hom = (t n).hom :=
-      congrArg Iso.hom (ht n)
-    exact derivedReductionStep_compatible n _ _ he
+  let r (n : ℕ) (s : T (n + 1)) : T n := derivedReductionStep (n + 1) s
+  let Q (n : ℕ) (s : T n) : Prop := IsIso s ∧ P n s
+  have hne' (n : ℕ) : ∃ s, Q n s := by
+    obtain ⟨e, he⟩ := hne n
+    exact ⟨e.hom, inferInstance, he⟩
+  have hQ (n : ℕ) (s : T (n + 1)) (hs : Q (n + 1) s) : Q n (r n s) := by
+    have := hs.1
+    exact ⟨isIso_derivedReductionStep (n + 1) s, hP n s hs.2⟩
+  obtain ⟨t, htP, ht⟩ := exists_compatible_choices_with_property r Q hfin hne' hQ
+  obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq hL t fun n ↦
+    derivedReductionStep_compatible n _ _ (ht n)
   refine ⟨f, fun n ↦ ?_⟩
   rw [hf n]
-  exact ⟨inferInstance, htP n⟩
-
+  exact htP n
 
 end AlgebraicGeometry.ProEtale

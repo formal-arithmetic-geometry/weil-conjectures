@@ -26,7 +26,7 @@ private lemma map_inv_comm_of_hom_comm
     F.map e.inv ≫ v = τ ≫ e.inv := by
   apply (cancel_mono e.hom).mp
   rw [Category.assoc, h, ← Functor.map_comp_assoc, Iso.inv_hom_id,
-    Functor.map_id, Category.id_comp, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 namespace AlgebraicGeometry.Etale
 
@@ -52,7 +52,8 @@ theorem isWeilMorphism_dualizingComplexTwistShiftIso_inv
     (dualizingComplexTwistShiftIso Λ f d aY)
     (upperShriekMateWeilDatum (Λ := Λ) sq (leftDerivedUpperStarUnitIso _ gY).hom)
     _ (by
-      simpa only [upperShriekMateWeilDatum, Category.assoc] using
+      simpa only [upperShriekMateWeilDatum, constantComplex, dualizingComplex,
+        Functor.comp_obj, Category.assoc] using
         dualizingComplexTwistShiftIso_baseChange Λ d sq aY aY)
 
 end AlgebraicGeometry.Etale

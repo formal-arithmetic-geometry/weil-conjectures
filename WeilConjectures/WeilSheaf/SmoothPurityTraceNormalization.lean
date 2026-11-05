@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityCanonicalFinite
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMate
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Finite trace normalization of the integral orientation -/
 
@@ -101,13 +102,17 @@ theorem isIntegralSmoothOrientation_iff_trace
   unfold IsIntegralSmoothOrientation
   apply forall_congr'
   intro n
-  exact purity_orientation_map_eq_iff_trace_eq
+  have h := purity_orientation_map_eq_iff_trace_eq
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
     (Etale.rightDerivedUpperShriekAdjunction _ f.left)
     (etaleReduction ℓ E.1 (n + 1) X) (etaleReduction ℓ E.1 (n + 1) Y)
     (etaleReductionLowerShriekIsoOfCompactification ℓ E.1 (n + 1)
       (compactificationOverField f))
-    (etaleReductionUpperShriekIso ℓ E.1 (n + 1) f) rfl φ _ _
-    (canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1))
+    (etaleReductionUpperShriekIso ℓ E.1 (n + 1) f) rfl φ
+    ((finiteEtaleReading ℓ E.1 (n + 1) X).map
+      (canonicalFiniteIntegralOrientationIso ℓ E f d (n + 1)).hom)
+    _ (canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1))
+  dsimp only [etaleReduction, Functor.comp_map, canonicalFiniteIntegralOrientationTrace] at h ⊢
+  exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityCanonicalFinite
+public import WeilConjectures.WeilSheaf.SmoothPurityCanonicalCriterion
 public import WeilConjectures.WeilSheaf.SmoothPurityReductionComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LiftMorphisms
 
@@ -74,7 +74,7 @@ theorem exists_isIntegralSmoothOrientation_of_compatible
     (fun n ↦ (canonicalAmbientIntegralOrientationIso ℓ E f d (n + 1)).hom) h
   let g : K ⟶ W := (ObjectProperty.fullyFaithfulι _).preimage φ
   have hg : ι.map g = φ := (ObjectProperty.fullyFaithfulι _).map_preimage _
-  refine ⟨g, fun n ↦ ?_⟩
+  refine ⟨g, isIntegralSmoothOrientation_of_reduction_map_eq ℓ E f d g (fun n ↦ ?_)⟩
   have hr : (boundedConstructibleIntegersModPowReduction X.left ℓ E.1 (n + 1)).map g =
       (canonicalFiniteIntegralOrientationIso ℓ E f d (n + 1)).hom := by
     apply purity_reduction_map_eq_of_comparison ι _ _ _
@@ -83,8 +83,7 @@ theorem exists_isIntegralSmoothOrientation_of_compatible
     exact (congrArg
       (Mod.extendScalars (integersModPowReduction X.left ℓ E.1 (n + 1))).leftDerivedFunctor.map
       hg).trans (hφ n)
-  exact (congrArg (finiteEtaleReading ℓ E.1 (n + 1) X).map hr).trans
-    (canonicalFiniteIntegralOrientationIso_map_hom ℓ E f d (n + 1))
+  exact hr
 
 /-- The integral reconstruction supplies an invertible canonical rational orientation. -/
 theorem exists_isIso_isCanonicalSmoothOrientation_of_compatible

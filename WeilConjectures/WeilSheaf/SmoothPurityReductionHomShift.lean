@@ -50,7 +50,7 @@ theorem finite_shift_hom_integralOrientation_reduction (n : ℕ) :
   let ιn := (boundedConstructible (condensedRingObj
     (Profinite.integersModPowRingObj ℓ E n) X.left)).ι
   let Lred := (Mod.extendScalars (integersModPowReduction X.left ℓ E n)).leftDerivedFunctor
-  let eS : ρ.obj (red.obj S) ≅ (ρ.obj (red.obj T))⟦(2 * d : ℤ)⟧ :=
+  let eS : ρ.obj (red.obj S) ≅ (ρ.obj (red.obj T)) ⟦(2 * d : ℤ)⟧ :=
     ρ.mapIso (boundedConstructibleIntegersModPowReductionShiftIso ℓ E n X.left T _) ≪≫
       (ρ.commShiftIso (2 * d : ℤ)).app _
   obtain ⟨eW⟩ := nonempty_shift_etaleReduction_integralTateTwist_iso_upperShriek
@@ -71,14 +71,14 @@ theorem finite_shift_hom_integralOrientation_reduction (n : ℕ) :
     DerivedCategory.TStructure.t.isGE_of_iso eW _
   have := DerivedCategory.TStructure.t.isLE_shift (ρ.obj (red.obj S))
     (-(2 * d : ℤ)) 1 (-(2 * d : ℤ) - 1) (by omega)
-  have : Subsingleton ((ρ.obj (red.obj S))⟦(1 : ℤ)⟧ ⟶ ρ.obj (red.obj W)) :=
+  have : Subsingleton ((ρ.obj (red.obj S)) ⟦(1 : ℤ)⟧ ⟶ ρ.obj (red.obj W)) :=
     ⟨fun a b ↦ (DerivedCategory.TStructure.t.zero a
       (-(2 * d : ℤ) - 1) (-(2 * d : ℤ)) (by omega)).trans
       (DerivedCategory.TStructure.t.zero b
         (-(2 * d : ℤ) - 1) (-(2 * d : ℤ)) (by omega)).symm⟩
-  have h₁ : Finite ((ρ.obj (red.obj S))⟦(1 : ℤ)⟧ ⟶ ρ.obj (red.obj W)) := inferInstance
+  have h₁ : Finite ((ρ.obj (red.obj S)) ⟦(1 : ℤ)⟧ ⟶ ρ.obj (red.obj W)) := inferInstance
   have h₂ := finite_shift_hom_of_finiteEtaleReading (1 : ℤ) h₁
-  let A : Lred.obj (S.obj⟦(1 : ℤ)⟧) ≅ ιn.obj ((red.obj S)⟦(1 : ℤ)⟧) :=
+  let A : Lred.obj (S.obj⟦(1 : ℤ)⟧) ≅ ιn.obj ((red.obj S) ⟦(1 : ℤ)⟧) :=
     (Lred.commShiftIso (1 : ℤ)).app S.obj ≪≫
       (shiftFunctor _ (1 : ℤ)).mapIso
         ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app S).symm ≪≫
