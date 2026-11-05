@@ -10,7 +10,8 @@ public import WeilConjectures.WeilSheaf.SixFunctors.WeilGeometricHomConstructibi
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyFiniteCoefficientRingRealization
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
-public import WeilConjectures.SixFunctors.ProEtale.Adic.BoundedConstructibleCondensedComparison
+import WeilConjectures.AlgebraicGeometry.CondensedQbarCoefficientConstruction
+import WeilConjectures.SixFunctors.ProEtale.Adic.BoundedConstructibleCondensedComparison
 
 /-!
 # Constructibility and the proper projection formula for the condensed realization
@@ -23,10 +24,6 @@ Consequently, for a proper morphism `g : Z ⟶ Y` over `k₀`, the projection ma
 isomorphism on condensed realizations of Weil complexes
 (`AlgebraicGeometry.ProEtaleWeilSheaf.isIso_projectionMap_derivedCondensedRealization`), by the
 proper projection formula over `k̄`.
-
-This uses that the normalized coefficient isomorphism `nativeModuleCoefficientIso` is the
-coefficient isomorphism `condensedRingObjIsoForgetAb` underlying `adicSheafEquivCondensedMod`
-(`AlgebraicGeometry.ProEtale.nativeModuleCoefficientIso_eq_condensedRingObjIsoForgetAb`).
 -/
 
 @[expose] public section
