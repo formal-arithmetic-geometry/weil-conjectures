@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
 public import WeilConjectures.AlgebraicGeometry.OpenDerivedStalkIso
 import WeilConjectures.AlgebraicGeometry.OpenRestrictedOrdinaryComparisonSquare
