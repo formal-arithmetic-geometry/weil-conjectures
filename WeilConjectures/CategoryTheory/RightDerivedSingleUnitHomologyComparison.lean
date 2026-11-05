@@ -116,7 +116,7 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
       DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S := by
     simp only [rightDerivedPlusSingleUnit, hsource, htarget]
     simp [rightDerivedFunctorPlusUnit, quotientCompMapHomotopyCategoryPlusIso, Category.assoc] <;>
-      (erw [Functor.map_id]; simp)
+      (erw [Functor.map_id]; simp; rfl)
   have : ∀ n, Injective (L.obj.X n) := fun n ↦
     inferInstanceAs (Injective (R.cochainComplex.X n))
   have : IsIso (G.rightDerivedFunctorPlusUnit.app L) := by
