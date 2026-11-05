@@ -131,7 +131,7 @@ categories, `g^* ν_X^* ≅ ν_Y^* g^*`, induced by
 noncomputable def mapDerivedCategoryComparisonUpperStarCompUpperStarIso {Y X : Scheme.{u}}
     (g : Y ⟶ X) :
     D(ν^*(X)[A]) ⋙ D((g)^*[A]) ≅ D(Etale.upperStar A g) ⋙ D(ν^*(Y)[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (comparisonUpperStarCompUpperStarIso A g) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
@@ -142,7 +142,7 @@ noncomputable def mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarI
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     D(Etale.openImmersionLowerShriek A j) ⋙ D(ν^*(X)[A]) ≅
       D(ν^*(U)[A]) ⋙ D(ProEtale.openImmersionLowerShriek A j) :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekComparisonUpperStarIso A j) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
