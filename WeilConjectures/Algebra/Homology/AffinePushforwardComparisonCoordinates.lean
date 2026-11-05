@@ -89,6 +89,7 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
     H.map (DerivedCategory.Q.map a) ≫
     H.map ((DerivedCategory.quotientCompQhIso _).inv.app
       ((P.mapHomologicalComplex (.up ℤ)).obj D) ≫
+      DerivedCategory.Qh.map ((P.mapHomotopyCategoryFactors (.up ℤ)).inv.app D) ≫
       β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D) ≫
       P.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D))
 
