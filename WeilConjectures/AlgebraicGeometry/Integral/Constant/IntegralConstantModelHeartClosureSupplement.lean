@@ -366,10 +366,7 @@ private theorem integralCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime]
       map_mul' := fun x y ↦ Subtype.ext (e.map_mul x y)
       map_add' := fun x y ↦ Subtype.ext (e.map_add x y) }
   have hei : Isometry ei := by
-    apply AddMonoidHomClass.isometry_of_norm
-      (E := A) (F := PadicAlgCl.integers ℓ E.val) ei
-    intro x
-    exact he x
+    exact AddMonoidHomClass.isometry_of_norm ei.toAddMonoidHom (fun x ↦ he x)
   have heis : Isometry ei.symm := by
     intro x y
     simpa only [ei.apply_symm_apply] using (hei (ei.symm x) (ei.symm y)).symm
