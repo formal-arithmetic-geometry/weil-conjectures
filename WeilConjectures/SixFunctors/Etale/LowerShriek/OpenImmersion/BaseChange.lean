@@ -317,8 +317,8 @@ lemma Etale.upperStarBaseChange_eq :
       Etale.openImmersionRestrictionBaseChange, Etale.lowerStarComp,
       Etale.localizationRestrictionLowerStarAdjunction]
     simp only [Functor.comp_obj, Functor.id_obj, Adjunction.sheafPushforwardContinuous,
-      Adjunction.whiskerLeft, Functor.whiskeringLeft_obj_obj, Adjunction.op_unit,
-      Adjunction.op_counit, Functor.sheafPushforwardContinuousNatTrans, ObjectProperty.ι_obj,
+      Adjunction.whiskerLeft, Functor.whiskeringLeft_obj_obj, Adjunction.op_unit_app,
+      Adjunction.op_counit_app, Functor.sheafPushforwardContinuousNatTrans, ObjectProperty.ι_obj,
       NatTrans.comp_app, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Functor.whiskerRight_app,
       Functor.comp_map, Functor.id_map, Functor.leftUnitor_hom_app, comp_id, id_comp,
