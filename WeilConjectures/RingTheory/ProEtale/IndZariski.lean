@@ -1269,7 +1269,6 @@ theorem PieceAt.isStandardOpenImmersion {j₀ : J} {A₀ : CommRingCat.{u}}
       exact pushSquare j₀ f₀ k
     intro w
     induction w using hpush.out.inductionOn with
-    | zero => exact ⟨0, 0, by simp⟩
     | tmul a => exact hGoodA a
     | smul b z hz =>
         rw [Algebra.smul_def, map_mul]

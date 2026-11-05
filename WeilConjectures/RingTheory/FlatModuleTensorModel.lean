@@ -109,7 +109,8 @@ theorem exists_flat_module_tensor_model
     rw [Algebra.TensorProduct.tmul_mul_tmul, one_mul, mul_one]
   have heLeft : ∀ x : X, e₀ (x ⊗ₜ[A] (1 : B)) = g x := by
     intro x
-    induction x with
+    induction x using TensorProduct.induction_on with
+    | zero => simp
     | add x y hx hy => simp [TensorProduct.add_tmul, hx, hy]
     | tmul c a =>
       rw [he₀, mul_one]

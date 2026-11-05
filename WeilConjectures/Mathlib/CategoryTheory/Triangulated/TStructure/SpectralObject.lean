@@ -375,13 +375,15 @@ noncomputable def mapTriangulatedSpectralObjectObjIso (X : C) :
       (fun {D D'} φ ↦ by
         have := F.eTruncGELTIsoApp_hom_naturality t₁ t₂ (φ.app 0) (φ.app 1) X
         rw [← F.map_comp_assoc] at this
-        simpa only [Triangulated.SpectralObject.mapTriangulatedFunctor_ω₁,
-          TStructure.spectralObject_ω₁, Functor.comp_map, evaluation_obj_map, TStructure.ω₁_map,
-          NatTrans.hcomp_app] using this))
+        change F.map ((t₁.ω₁.map φ).app X) ≫ _ = _ ≫ (t₂.ω₁.map φ).app (F.obj X)
+        rw [TStructure.ω₁_map, TStructure.ω₁_map, NatTrans.hcomp_app, NatTrans.hcomp_app]
+        exact this))
     (fun {i j k} f g ↦ by
       have := F.eTruncGELTIsoApp_δ t₁ t₂ i j k X
-      rw [Triangulated.SpectralObject.mapTriangulatedFunctor_δ, TStructure.spectralObject_δ,
-        TStructure.spectralObject_δ, TStructure.ω₁δ_app, TStructure.ω₁δ_app, Category.assoc]
+      change (F.map ((t₁.ω₁δ i j k (leOfHom f) (leOfHom g)).app X) ≫
+          (F.commShiftIso (1 : ℤ)).hom.app _) ≫ ((F.eTruncGELTIsoApp t₁ t₂ i j X).hom)⟦(1 : ℤ)⟧' =
+        (F.eTruncGELTIsoApp t₁ t₂ j k X).hom ≫ (t₂.ω₁δ i j k (leOfHom f) (leOfHom g)).app (F.obj X)
+      rw [TStructure.ω₁δ_app, TStructure.ω₁δ_app, Category.assoc]
       exact this)
 
 @[simp]
@@ -397,7 +399,12 @@ noncomputable def mapTriangulatedSpectralObjectIso :
       F ⋙ t₂.spectralObjectFunctor :=
   NatIso.ofComponents (F.mapTriangulatedSpectralObjectObjIso t₁ t₂) (fun {X Y} f ↦ by
     ext D
-    exact F.eTruncGELTIsoApp_hom_naturality_obj t₁ t₂ (D.obj 0) (D.obj 1) f)
+    have := F.eTruncGELTIsoApp_hom_naturality_obj t₁ t₂ (D.obj 0) (D.obj 1) f
+    change F.map ((t₁.eTruncGE.obj (D.obj 0)).map ((t₁.eTruncLT.obj (D.obj 1)).map f)) ≫
+        (F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) Y).hom =
+      (F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) X).hom ≫
+        (t₂.eTruncGE.obj (D.obj 0)).map ((t₂.eTruncLT.obj (D.obj 1)).map (F.map f))
+    exact this)
 
 @[simp]
 lemma mapTriangulatedSpectralObjectIso_hom_app_hom_app (X : C) (D : ComposableArrows EInt 1) :

@@ -131,6 +131,7 @@ lemma pushouts_ofLE_le_largerSubobject [Fact κ.IsRegular] (hκ : Cardinal.aleph
   by_cases hD : ∃ (D' : Subobject B) (h : D < D'), QuasiIso D'.arrow ∧
       (generatingMonoQuasiIsos G κ).pushouts (Subobject.ofLE D D' h.le)
   · refine (MorphismProperty.arrow_mk_iso_iff _ ?_).1 hD.choose_spec.choose_spec.2
+    have : Nonempty (Subobject B) := ⟨⊤⟩
     exact Arrow.isoMk (Iso.refl _)
       (Subobject.isoOfEq _ _ (by simp [largerSubobject, dif_pos hD]))
   · have hDtop : D = ⊤ := by
@@ -154,6 +155,7 @@ lemma top_mem_range (D₀ : Subobject B) {J : Type w} [LinearOrder J] [OrderBot 
 /-- The transfinite iteration of the enlargement reaches `⊤` for a suitable ordinal. -/
 lemma exists_ordinal (D₀ : Subobject B) :
     ∃ (o : Ordinal.{w}) (j : o.ToType), transfiniteIterate (largerSubobject G κ) j D₀ = ⊤ := by
+  have : Nonempty (Subobject B) := ⟨⊤⟩
   let c := Order.succ (Cardinal.mk (Shrink.{w} (Subobject B)))
   have : Nonempty c.ord.ToType := by simp [c]
   have := WellFoundedLT.toOrderBot c.ord.ToType
