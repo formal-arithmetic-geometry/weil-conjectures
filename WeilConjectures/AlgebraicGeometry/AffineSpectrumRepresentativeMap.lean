@@ -71,25 +71,4 @@ private theorem remove_comparison_identities
     f ≫ F.map (𝟙 P) ≫ g ≫ 𝟙 B = f ≫ g := by
   simp
 
-private theorem counit_naturality_complex
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    {Y Z : Scheme.{u}} (k : Y ⟶ Z)
-    {P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ}
-    (f : P ⟶ N) :
-    (derivedPullback k).map (DerivedCategory.Q.map f) ≫
-      (counit k).app ((HomotopyCategory.quotient _ (.up ℤ)).obj N) =
-    (counit k).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map
-        (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).map f) := by
-  let : HasDerivedCategory.{w} Y.Modules := inferInstanceAs
-    (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-  have h := (counit k).naturality ((HomotopyCategory.quotient _ (.up ℤ)).map f)
-  change (derivedPullback k).map (DerivedCategory.Q.map f) ≫ _ = _ ≫
-    DerivedCategory.Qh.map
-      (((Scheme.Modules.tensorPullback k).mapHomotopyCategory (.up ℤ)).map
-        ((HomotopyCategory.quotient _ (.up ℤ)).map f)) at h
-  rw [Functor.mapHomotopyCategory_map] at h
-  exact h
-
 end AlgebraicGeometry.SingleComplexBaseChange
