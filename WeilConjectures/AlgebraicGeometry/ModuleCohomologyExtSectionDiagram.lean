@@ -111,6 +111,9 @@ private theorem section_lift_homology_eq
     (I := K.extend e)
     ⟨0, fun n hn ↦ CochainComplex.isZero_of_isStrictlyGE _ 0 n hn⟩
     (E.map J.ι) (E.map β) (E.map γ) he
+  have : (moduleSections Y).Additive := by
+    dsimp only [moduleSections, RingedSpace.globalSectionsFunctor, SheafOfModules.evaluation]
+    infer_instance
   exact ((moduleSections Y).mapHomotopy hh.ofExtend).homologyMap_eq p
 
 /-- The section-diagram equality is stable after inserting the identity on its codomain.
