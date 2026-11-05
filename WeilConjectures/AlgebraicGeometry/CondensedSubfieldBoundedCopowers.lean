@@ -157,7 +157,8 @@ theorem condensedSubfield_bounded_copower_comparison
   have : HasColimitsOfShape (Finset (Discrete I)) A :=
     HasColimitsOfShape.of_small.{u + 1, u + 1} A (Finset (Discrete I))
   have : HasFiniteColimits A := hasFiniteColimits_of_hasColimitsOfSize.{u + 1, u + 1} A
-  have (J : Type (u + 1)) : HasColimitsOfShape (Discrete J) (CochainComplex A ℤ) := by
+  have hcomplex (J : Type (u + 1)) :
+      HasColimitsOfShape (Discrete J) (CochainComplex A ℤ) := by
     have : HasColimitsOfShape (Discrete J) A :=
       HasColimitsOfShape.of_small.{u + 1, u + 1} A (Discrete J)
     refine ⟨fun F ↦ ?_⟩
@@ -168,6 +169,9 @@ theorem condensedSubfield_bounded_copower_comparison
   have : HasColimitsOfShape (Finset (Discrete I)) B :=
     HasColimitsOfShape.of_small.{u + 1, u + 1} B (Finset (Discrete I))
   obtain ⟨K, hK, ⟨e⟩⟩ := M.exists_iso_Q_obj_of_isGE N
+  have hKcop : HasColimit (Discrete.functor (fun _ : I ↦ K)) := by
+    exact (hcomplex I).has_colimit _
+  letI : HasCoproduct (fun _ : I ↦ K) := hKcop
   let D := liftToFinsetObj (Discrete.functor (fun _ : I ↦ K))
   have hD (S : Finset (Discrete I)) : (D.obj S).IsStrictlyGE N :=
     coproductStrictlyGE (fun _ : S ↦ K) N
