@@ -34,14 +34,6 @@ def compactProjectionGeometricPullIso :
   (eqToIso (congrArg (boundedConstructibleUpperStar Λ l) c.overI_overG.symm) ≪≫
     boundedConstructibleUpperStarComp Λ l c.overI c.overG).symm
 
-/-- The underlying component is the inverse of the ambient composition comparison. -/
-lemma compactProjectionGeometricPullIso_hom_app (N : Dᵇc(Y.left)⟦Λ⟧) :
-    ((compactProjectionGeometricPullIso (f := f) Λ l c).hom.app N).hom =
-      (leftDerivedUpperStarOverCompactificationIso (f := f) Λ c).inv.app N.obj := by
-  rw [leftDerivedUpperStarOverCompactificationIso_eq]
-  exact ι_map_eqToIso_trans_boundedConstructibleUpperStarComp_inv_app Λ l
-    c.overI c.overG c.overI_overG N
-
 /-- The geometric exceptional projection factors through the canonical pullback compositor. -/
 lemma compactProjectionGeometricPullIso_projection_eq
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧)
@@ -60,6 +52,6 @@ lemma compactProjectionGeometricPullIso_projection_eq
             (boundedConstructibleOpenImmersionLowerShriek _ l c.overI).map
               (K ◁ (compactProjectionGeometricPullIso (f := f) _ l c).hom.app B)) :=
   homMk_exceptionalProjectionMorphismOfCompactification_eq l c K B _
-    (compactProjectionGeometricPullIso_hom_app (f := f) _ l c B)
+    (ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := f) l c B)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
