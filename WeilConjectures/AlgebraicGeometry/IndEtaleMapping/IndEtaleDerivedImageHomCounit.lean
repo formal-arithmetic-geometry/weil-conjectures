@@ -33,6 +33,33 @@ namespace AlgebraicGeometry.Etale.IndEtaleMapping
 variable (A : Type (u + 1)) [CommRing A]
 variable {X : Scheme.{u}} (K M : DerivedCategoryModule A X)
 
+universe v₁ v₂ w₁ w₂ in
+/-- Conjugation of isomorphisms, evaluated at an object, agrees with conjugation of the
+underlying morphisms for heterogeneously equal data. All arguments are compared one by one, so
+that the kernel never unfolds the adjunctions to compare two presentations of them. -/
+private theorem conjugateIsoEquiv_app_hom_heq
+    {C C' : Type w₁} {D D' : Type w₂} [iC : Category.{v₁} C] [iC' : Category.{v₁} C']
+    [iD : Category.{v₂} D] [iD' : Category.{v₂} D']
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C} {L₁' L₂' : C' ⥤ D'} {R₁' R₂' : D' ⥤ C'}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₁' : L₁' ⊣ R₁') (adj₂' : L₂' ⊣ R₂')
+    (τ : L₂ ≅ L₁) (τ' : L₂' ≅ L₁') (d : D) (d' : D')
+    (hC : C = C') (hD : D = D') (hiC : HEq iC iC') (hiD : HEq iD iD')
+    (hL₁ : HEq L₁ L₁') (hL₂ : HEq L₂ L₂') (hR₁ : HEq R₁ R₁') (hR₂ : HEq R₂ R₂')
+    (h₁ : HEq adj₁ adj₁') (h₂ : HEq adj₂ adj₂') (hτ : HEq τ τ') (hd : HEq d d') :
+    HEq ((conjugateIsoEquiv adj₁ adj₂ τ).app d).hom
+      ((conjugateEquiv adj₁' adj₂' τ'.hom).app d') := by
+  subst hC hD
+  cases hiC
+  cases hiD
+  cases hL₁
+  cases hL₂
+  cases hR₁
+  cases hR₂
+  cases h₁
+  cases h₂
+  cases hτ
+  cases hd
+  rfl
 
 /-- The comparison is the mate of the specified left-adjoint comparison.
 This records its counit normalization without any continuity hypothesis.
@@ -51,11 +78,18 @@ theorem imageHomIso_counit (T : Over X) :
       ((ExternalRHom.globalAdjunction A K).comp
         (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) T.hom)).counit.app
           ((ExternalRHom.pull A T.hom).obj M) := by
-  exact conjugateEquiv_counit
+  rw [imageHomIso, eq_of_heq (conjugateIsoEquiv_app_hom_heq _ _
     ((ExternalRHom.globalAdjunction A K).comp
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) T.hom))
     (ExternalRHom.globalAdjunction A ((ExternalRHom.pull A T.hom).obj K))
-    (imageTensorIso A K T).hom ((ExternalRHom.pull A T.hom).obj M)
+    _ (imageTensorIso A K T) _ ((ExternalRHom.pull A T.hom).obj M)
+    ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_)]
+  · exact conjugateEquiv_counit
+      ((ExternalRHom.globalAdjunction A K).comp
+        (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) T.hom))
+      (ExternalRHom.globalAdjunction A ((ExternalRHom.pull A T.hom).obj K))
+      (imageTensorIso A K T).hom ((ExternalRHom.pull A T.hom).obj M)
+  all_goals rfl
 
 /-- The pulled-back evaluation of a braided transpose, after one braiding, is the evaluation
 pushed through the tensor constraint of a braided lax monoidal functor. -/
@@ -116,7 +150,6 @@ theorem imageRestriction_counit (T : Over X) :
     Functor.Monoidal.μIso_hom, Functor.comp_obj, Iso.symm_hom,
     ExternalRHom.pullTensorIso, Q, tensorLeft, curriedTensor, Category.assoc] using h
 
-
 private theorem hom_counit_naturality
     {C B : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
     [MonoidalClosed C] [Category* B] {c : B ⥤ C} {s : C ⥤ B} (a : c ⊣ s)
@@ -136,6 +169,25 @@ private theorem hom_counit_naturality
   rw [← BraidedCategory.braiding_naturality_left_assoc] at h
   simpa only [Iso.hom_inv_id_assoc, Functor.comp_map, tensorLeft, curriedTensor] using h
 
+/-- `hom_counit_naturality`, with the global Hom functor `G` and its adjunctions `aG` as
+variables. Applied to `ExternalRHom.globalHom`, the statement then matches syntactically, and
+the kernel only compares `G` and `aG` with their definitions, without unfolding the derived
+global sections. -/
+private theorem hom_counit_naturality_of_eq
+    {C B : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalClosed C] [Category* B] {c : B ⥤ C} {s : C ⥤ B} (a : c ⊣ s)
+    {G : Cᵒᵖ ⥤ C ⥤ B}
+    (hG : G = MonoidalClosed.internalHom ⋙ (Functor.whiskeringRight _ _ _).obj s)
+    (aG : ∀ E : C, c ⋙ tensorLeft E ⊣ G.obj (op E))
+    (haG : ∀ E : C, HEq (aG E) (a.comp (MonoidalClosed.internalHomAdjunction₂.adj E)))
+    {E E' N N' : C} (f : E' ⟶ E) (g : N ⟶ N') :
+    (c ⋙ tensorLeft E').map ((G.map f.op).app N ≫ (G.obj (op E')).map g) ≫
+      (aG E').counit.app N' =
+      (f ▷ c.obj ((G.obj (op E)).obj N)) ≫ (aG E).counit.app N ≫ g := by
+  subst hG
+  rw [eq_of_heq (haG E'), eq_of_heq (haG E)]
+  exact hom_counit_naturality a f g
+
 /-- Both coefficient variances of global Hom respect its left-tensor counit.
 Source: Stacks 08JA (blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
 
@@ -153,7 +205,8 @@ theorem imageGlobalHom_counit_naturality
         (((ExternalRHom.globalHom A X).obj (op E)).obj N)) ≫
         (ExternalRHom.globalAdjunction A E).counit.app N ≫ g := by
   let := ExternalRHom.derivedBraiding A X
-  exact hom_counit_naturality (ExternalRHom.constantSectionsAdjunction A X) f g
+  exact hom_counit_naturality_of_eq (ExternalRHom.constantSectionsAdjunction A X) rfl
+    (ExternalRHom.globalAdjunction A) (fun _ ↦ HEq.rfl) f g
 
 section Composition
 
@@ -193,7 +246,6 @@ private theorem leftDerivedComp_assoc
   rw [← H.leftDerivedFunctorIsoMapDerivedCategory.inv.naturality]
   rw [← reassoc_of% h]
   rfl
-
 
 /-- The canonical derived constant comparison respects inverse-image composition.
 Source: Stacks 0G7E; Bhatt--Scholze 6.3.16, adjunction
