@@ -70,6 +70,12 @@ theorem resolution_homology_transport
         by simp [InjectiveResolution.desc_commutes_zero]⟩
     let LX : CochainComplex.Plus A := ⟨R.cochainComplex, 0, inferInstance⟩
     let LY : CochainComplex.Plus A := ⟨I.cochainComplex, 0, inferInstance⟩
+    have : IsIso (F.rightDerivedFunctorPlusUnit.app LX) := by
+      simp only [Functor.rightDerivedFunctorPlusUnit_app]
+      infer_instance
+    have : IsIso (F.rightDerivedFunctorPlusUnit.app LY) := by
+      simp only [Functor.rightDerivedFunctorPlusUnit_app]
+      infer_instance
     let g : LX ⟶ LY := ObjectProperty.homMk φ.hom'
     have h₁ := F.rightDerivedFunctorPlusUnit.naturality g
     have h₂ : (resolutionAugmentationIso R).hom ≫ DerivedCategory.Plus.Q.map g =

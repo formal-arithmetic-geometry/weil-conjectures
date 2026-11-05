@@ -683,10 +683,10 @@ theorem exists_isKFlatResolutionIndependentCoefficients
   classical
   let A := SheafOfModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
-  have : HasColimitsOfSize.{r, r} (PresheafOfModules.{r}
+  have (K : Type r) : HasColimitsOfShape (Discrete K) (PresheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
-    ⟨fun K _ ↦ PresheafOfModules.hasColimitsOfShape _ K⟩
-  have : HasColimitsOfSize.{r, r} A := inferInstance
+    PresheafOfModules.hasColimitsOfShape _ _
+  have (K : Type r) : HasColimitsOfShape (Discrete K) A := inferInstance
   let := SheafOfModules.isMonoidal_W_independentCoefficients R
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.symmetricCategory R
