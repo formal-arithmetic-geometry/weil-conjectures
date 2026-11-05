@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
@@ -65,7 +66,7 @@ theorem affineDerivedSections_truncated_bottom (A : Type u) [CommRing A]
   let S := RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙
     ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom
   have : Limits.PreservesFiniteLimits S := by
-    dsimp only [S, RingedSpace.globalSectionsFunctor]
+    dsimp [S, RingedSpace.globalSectionsFunctor]
     infer_instance
   let t := DerivedCategory.TStructure.t (C := C)
   let tp := DerivedCategory.Plus.TStructure.t (C := C)
