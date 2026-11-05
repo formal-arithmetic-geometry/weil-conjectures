@@ -50,8 +50,15 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 monoidal. -/
 instance Etale.isMonoidal_lowerStarComp_hom' (h₁₂ : T ⟶ R) (hh : h₁₂ = h₁ ≫ h₂) :
     NatTrans.IsMonoidal (Etale.lowerStarComp A h₁ h₂ h₁₂ hh).hom := by
-  unfold Etale.lowerStarComp
-  infer_instance
+  have : (MorphismProperty.Over.pullback @Etale ⊤ h₁).IsContinuous
+      S.smallEtaleTopology T.smallEtaleTopology := Etale.isContinuous_overPullback h₁
+  have : (MorphismProperty.Over.pullback @Etale ⊤ h₂).IsContinuous
+      R.smallEtaleTopology S.smallEtaleTopology := Etale.isContinuous_overPullback h₂
+  have : (MorphismProperty.Over.pullback @Etale ⊤ h₁₂).IsContinuous
+      R.smallEtaleTopology T.smallEtaleTopology := Etale.isContinuous_overPullback h₁₂
+  exact Functor.isMonoidal_sheafPushforwardContinuousComp'_hom
+    (A := A) (J := R.smallEtaleTopology) (K := S.smallEtaleTopology)
+    (L := T.smallEtaleTopology) (MorphismProperty.Over.pullbackComp h₁ h₂ h₁₂ hh).symm
 
 /-- The inverse of the composition isomorphism of pushforwards of étale sheaves is monoidal. -/
 instance Etale.isMonoidal_lowerStarComp_inv' (h₁₂ : T ⟶ R) (hh : h₁₂ = h₁ ≫ h₂) :
