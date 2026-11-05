@@ -128,7 +128,7 @@ lemma projection_derived_square_of_total_models
     (Functor.uncurry.obj (curriedTensor _)) tu (Functor.projection_uncurryTensorIso _) rho
     P T WZ WU modelZ modelU tr hr cZ cU
     (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
-      MonoidalCategory.tensor_map] using hmU) ord
+      MonoidalCategory.tensor_map, Functor.uncurry_obj_obj, curriedTensor_obj_obj] using hmU) ord
     (by simpa only [MonoidalCategory.tensor_map, projection_model_complex_square,
       complex_square] using hchain) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
