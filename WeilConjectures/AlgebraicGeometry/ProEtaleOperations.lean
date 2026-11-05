@@ -198,10 +198,13 @@ private theorem proEtaleRingModuleDirectImage_isAdditive :
 
 section
 
-local instance {A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+noncomputable local instance {A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (M : proEtaleRingModules X A) {U V : X.ProEtᵒᵖ} (i : U ⟶ V) :
     Module (A.obj.obj V)
-      ((ModuleCat.restrictScalars (A.obj.map i).hom).obj (M.val.obj V)) :=
+      ((ModuleCat.restrictScalars
+        (((sheafCompose (ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A).obj.map i).hom).obj
+        (M.val.obj V)) :=
   inferInstanceAs (Module (A.obj.obj V) (M.val.obj V))
 
 open scoped ChangeOfRings in
