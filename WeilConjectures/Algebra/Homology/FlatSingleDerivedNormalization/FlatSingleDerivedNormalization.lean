@@ -56,6 +56,8 @@ namespace SheafOfModules.FlatSingleDerivedNormalization
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
+attribute [local instance 2000] KFlatFixedTensor.tensorHasMapBifunctor
+
 /-- The existing single-summand totalization isomorphism, with no flatness needed.
 Its component is the projection onto bidegree (i,0), using the identity of L.
 Source: Stacks 06YU and the direct-sum totalization convention 012Z
@@ -389,6 +391,5 @@ theorem flat_single_derived_normalization (L : KFlatFixedTensor.Modules R)
           Functor.flip_obj_map, curriedTensor_map_app, Functor.mapIso_hom, Category.id_comp,
           cancelIso, Category.comp_id, DerivedCategory.homologyFunctorFactors_hom_naturality_assoc,
           Functor.mapIso_trans, H, b, F, h]
-        erw [Category.id_comp]
 
 end SheafOfModules.FlatSingleDerivedNormalization
