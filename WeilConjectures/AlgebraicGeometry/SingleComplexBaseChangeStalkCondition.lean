@@ -12,6 +12,8 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtension
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
