@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import Mathlib.CategoryTheory.Adjunction.Limits
