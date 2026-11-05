@@ -107,7 +107,7 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_
     [IsSeparated i] [LocallyOfFiniteType i] [QuasiCompact i]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar π ⋙
@@ -172,7 +172,7 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_
   have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over i (Spec (CommRingCat.of k₀))]
     infer_instance
-  have : IsSeparated (Z ↘ Spec (CommRingCat.of k₀)) := by
+  have : QuasiSeparated (Z ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over i (Spec (CommRingCat.of k₀))]
     infer_instance
   let πZ := pullback.snd π i

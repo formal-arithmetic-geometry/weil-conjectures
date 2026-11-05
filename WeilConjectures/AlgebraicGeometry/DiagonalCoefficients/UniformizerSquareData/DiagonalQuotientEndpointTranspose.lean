@@ -51,6 +51,18 @@ private theorem insertion_comp
 namespace UniformizerSquareData
 
 attribute [local irreducible] Adjunction.homEquiv instCategoryDerivedCategory in
+/-- The statement of `quotientEndpointZero_transpose` (named so that the exported signature of the
+theorem stays small; definitionally the equation below). -/
+def quotientEndpointZero_transpose_stmt
+    {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
+    {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
+    {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
+    (q : UniformizerSquareData l Y E π n A hA) : Prop :=
+    (quotientAdjunctionAux q).homEquiv _ _ (quotientEndpointZero q) =
+      (DerivedCategory.singleFunctor _ 0).map q.quotientRootInsertion ≫
+        (q.quotientRight.mapDerivedCategorySingleFunctor 0).inv.app _
+
+attribute [local irreducible] Adjunction.homEquiv instCategoryDerivedCategory in
 /-- The degree-zero endpoint transposes to its ordinary root insertion.
 Source: diagonal tower coefficient changes (1)
 (blueprint: lem-diagonal-quotient-endpoint-transpose).
@@ -60,9 +72,8 @@ theorem quotientEndpointZero_transpose
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
     {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
     (q : UniformizerSquareData l Y E π n A hA) :
-    (quotientAdjunctionAux q).homEquiv _ _ (quotientEndpointZero q) =
-      (DerivedCategory.singleFunctor _ 0).map q.quotientRootInsertion ≫
-        (q.quotientRight.mapDerivedCategorySingleFunctor 0).inv.app _ := by
+    quotientEndpointZero_transpose_stmt q := by
+  unfold quotientEndpointZero_transpose_stmt
   let R₁ := Mod.comap (D := Sheaf (Scheme.ProEt.topology (diagonalSurface Y)) Ab.{u + 1})
     (coefficientMap (integralMap l E) (diagonalSurface Y))
   let R₂ := Mod.comap (D := Sheaf (Scheme.ProEt.topology (diagonalSurface Y)) Ab.{u + 1})
