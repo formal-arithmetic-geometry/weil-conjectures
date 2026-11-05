@@ -150,6 +150,13 @@
   from a different API than the subsequent compatibility `map_comp_apply` rewrite.
 - After the user requested continuation until green, applied the one-line prerequisite
   proof repair in separate commit `f28760733`, using the existing compatibility tensor lemma.
-- Running `ucheck-bump` for the assigned module, then its four direct importers.
+- The first retry built `Presheaf.InternalHom` successfully, then found the identical
+  issue in `KFlat`. Commit `cba570747` applies the same repair to `KFlat` and its copied
+  proof in `KFlatResolutionIndependentCoefficients`; these are all three matches in
+  the assigned module's import closure. All changes are one-line proof repairs.
+- The next `ucheck-bump` for the assigned module is queued for a shared tree. After
+  it passes, build the four direct importers listed in `BZ558-direct-importers.txt`.
+- First retry full log: `/home/ubuntu/u9/bz/BUILD-BZ558-resumed-unit-full.log`.
+- Pending retry output: `/home/ubuntu/u9/bz/BUILD-BZ558-resumed-unit2.log`.
 - Fix pattern, whole-tree count, and logs: `/home/ubuntu/u9/bz/FIXES-BZ558.md`.
 - No local Lean/Lake, proof placeholders, statement changes, or heartbeat increases.
