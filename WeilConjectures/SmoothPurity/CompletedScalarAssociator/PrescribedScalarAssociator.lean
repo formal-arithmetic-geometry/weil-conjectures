@@ -375,7 +375,7 @@ theorem presentation_associator_exists
   change ((p a).derived ⋙ (p b).derived).map (𝟙 _) ≫ _ ≫ _ ≫ 𝟙 _ ≫ _ =
     _ ≫ (p c).derived.map (𝟙 _) ≫ _ ≫ 𝟙 _
   erw [((p a).derived ⋙ (p b).derived).map_id, (p c).derived.map_id,
-    Category.id_comp, Category.id_comp, Category.comp_id]
+    Category.id_comp, Category.id_comp, Category.id_comp, Category.comp_id]
   exact v.representative P
 
 end WeilConjectures.CompletedScalarAssociator
