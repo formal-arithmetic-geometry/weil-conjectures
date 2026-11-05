@@ -59,7 +59,6 @@ the derived direct-image mate. All categories are ordinary unbounded derived cat
 
 ## Main statement
 
-* `coefficientScalarTensorRealization`: the realization and the specified tensor equation.
 -/
 
 @[expose] public noncomputable section
@@ -250,51 +249,5 @@ private theorem scalarPull_monoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
 variable [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
-
-/-- Scalar adjunction and tensor realization, and the tensor equation for the canonical
-coefficient ringed-square pullback comparison, on all unbounded objects.
-Source: Stacks 07A4, 07A6 and 0D6D; blueprint rational proper base change, proof (3)
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization).
-
-Proof: the canonical scalar oplax structure is normalized on balanced generators, so
-its adjoint restriction lax structure is the prescribed one. Check the ordinary
-restriction/direct-image comparison on generalized pure tensors, then apply monoidal
-conjugation to the scalar and geometric adjunctions. This proves ordinary monoidality
-of the actual pullIso comparison. The separate coefficientScalarSectionRealization
-lemma supplies the normalized section clauses at X and Y; the separate
-coefficientScalarDerivedTensorSquare lemma lifts this proved ordinary monoidality to
-the displayed derived tensor equation. Combine the three clauses. Nothing uses
-boundedness, constructibility or properness. -/
-theorem coefficientScalarTensorRealization
-    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    {X Y : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    (f : X ⟶ Y) :
-    CoefficientScalarSectionRealization a X.left ∧
-    CoefficientScalarSectionRealization a Y.left ∧
-    ∀ A B : DerivedCategory (ModuleRingedComparison.internalModules R Y.left),
-      (moduleObjectDerivedPullback S f.left).map
-          (((internalScalarTensorComparison a Y.left).app A).app B) ≫
-        coefficientGeometricTensorComparison S f.left
-          ((internalScalarExtension a Y.left).obj A)
-          ((internalScalarExtension a Y.left).obj B) ≫
-        ((derivedTensor S X.left).map ((coefficientScalarPathIso a f.left).hom.app A)).app
-          ((moduleObjectDerivedPullback S f.left).obj
-            ((internalScalarExtension a Y.left).obj B)) ≫
-        ((derivedTensor S X.left).obj
-          ((internalScalarExtension a X.left).obj
-            ((moduleObjectDerivedPullback R f.left).obj A))).map
-              ((coefficientScalarPathIso a f.left).hom.app B) =
-      (coefficientScalarPathIso a f.left).hom.app (((derivedTensor R Y.left).obj A).obj B) ≫
-        (internalScalarExtension a X.left).map
-          (coefficientGeometricTensorComparison R f.left A B) ≫
-        ((internalScalarTensorComparison a X.left).app
-          ((moduleObjectDerivedPullback R f.left).obj A)).app
-            ((moduleObjectDerivedPullback R f.left).obj B) := by
-  refine ⟨coefficientScalarSectionRealization a X.left,
-    coefficientScalarSectionRealization a Y.left, ?_⟩
-  exact coefficientScalarDerivedTensorSquare a f.left (scalarPull_monoidal a f.left)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
