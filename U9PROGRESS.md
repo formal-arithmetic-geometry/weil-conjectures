@@ -283,3 +283,14 @@
 - Assigned theorem remains intact: it has live callers and cannot be pruned.
 - Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
 - No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
+
+# BZ889 in progress
+
+- Reread the brief and progress notes on continuation; no new LEAD lines were present.
+- The user instructed continuation after the exact one-line reflexive-cast proposal.
+- Applied that cast to RingedPullbackResolutionComparisons.normalization; all other
+  statement text, proof bodies and docstrings are unchanged.
+- Recorded the exact compiler error, contextual regex rule and whole-tree counts
+  in /home/ubuntu/u9/bz/FIXES-BZ889.md.
+- Next: ucheck-bump on the assigned module, then direct importers and downstream layers.
+- No local Lean/Lake, proof placeholders, trust bypasses or heartbeat changes.
