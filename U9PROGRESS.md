@@ -245,3 +245,16 @@
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+# BZ857 in progress
+
+- Branch: `u9/BZ857`; initial baseline `2ab2b07a3`.
+- User instructed continuation after the explicit four-upstream-module restoration proposal.
+- Merged integrated bump commit `db406319f` before restoring the required proof chain.
+- Restoring projection-unit normalization, mixed projection mate, signed normalization,
+  and mate data. Assigned theorem statement remains unchanged.
+- Applying known scalar carrier and canonical Q/Qh comparison repairs.
+- Baseline ucheck-bump remains queued; it will build the pushed branch when a tree is free.
+- Next: validate the leaf and attempt its two direct importers, then downstream layers.
+- Notes: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
