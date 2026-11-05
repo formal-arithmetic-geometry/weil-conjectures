@@ -943,6 +943,7 @@ lemma mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso (n a a' : ℤ) (
       Functor.whiskerRight_app, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
       Functor.whiskerLeft_app]
     erw [Category.id_comp]
+    rfl
   have hsD : ((DerivedCategory.Plus.homologyFunctor D 0).shiftIso n a a' h).hom.app
       (F.mapDerivedCategoryPlus.obj X) =
       (DerivedCategory.homologyFunctor D a).map
@@ -954,6 +955,7 @@ lemma mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso (n a a' : ℤ) (
       Functor.whiskerRight_app, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
       Functor.whiskerLeft_app]
     erw [Category.id_comp]
+    rfl
   have he (m : ℤ) (Y : DerivedCategory.Plus C) :
       (F.mapDerivedCategoryPlusHomologyFunctorIso m).hom.app Y =
         (F.mapDerivedCategoryHomologyFunctorIso m).hom.app (DerivedCategory.Plus.ι.obj Y) := by
@@ -1200,7 +1202,8 @@ lemma mapDerivedCategoryIdIso_factorsh :
   rw [← cancel_mono ((DerivedCategory.quotientCompQhIso C).hom.app K)]
   simpa [mapDerivedCategoryFactorsh_hom_app, mapHomotopyCategoryFactors,
     Quotient.lift.isLift_inv, mapDerivedCategoryIdIso_hom_app,
-    mapHomotopyCategoryIdIso, mapHomologicalComplexIdIso] using
+    mapHomotopyCategoryIdIso_hom_app, DerivedCategory.quotientCompQhIso_hom_naturality,
+    Category.assoc] using
     ((mapDerivedCategoryIdIso C).hom.naturality
       ((DerivedCategory.quotientCompQhIso C).hom.app K)).symm
 
