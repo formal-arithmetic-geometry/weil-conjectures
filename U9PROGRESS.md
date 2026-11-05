@@ -193,15 +193,18 @@
 - This completion commit changes only documentation; Lean source matches the green revision.
 
 
-# BZ671 in progress
+# BZ671 leaf and first layer green
 
 - Branch: `u9/BZ671`; starting commit: `940f09365`.
 - Baseline and import-only builds fail in the public representative tensor equation:
   Mathlib marks `HomologicalComplexUpToQuasiIso.Qh` as `no_expose`.
 - The user instructed continuation after the exact two-line identity-cast proposal.
-  Applied `cast (by rfl)` around the right-hand morphism, preserving its mathematical
+  Applied `cast (by rfl)` at both counit endpoints, preserving the mathematical
   content; all other declaration statements and existing docstrings are unchanged.
 - Added Localization public/import-all imports for private proof reduction.
-- Next: validate the owned leaf through `ucheck-bump`, then direct importers.
+- Leaf and direct importer `DerivedPullbackTensorComparisonDescent` both built at
+  `d14b1a4d7f`: rc=0, failed=0, 3919 jobs; full log
+  `/home/ubuntu/u9/bz/BZ671-unit-downstream1-green-full.log`.
+- Continuing with four direct importers of the newly green descent module.
 - Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ671.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
