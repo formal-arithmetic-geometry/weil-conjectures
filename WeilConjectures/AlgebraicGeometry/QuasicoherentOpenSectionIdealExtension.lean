@@ -33,6 +33,12 @@ noncomputable local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h
         (F.val.obj (op V))) (F.val.obj (op V)) where
   hSMul := @SMul.smul Γ(X, V) Γ(F, V) inferInstance
 
+noncomputable local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h : V ≤ W) :
+    HSMul Γ(SheafOfModules.unit X.ringCatSheaf, V)
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
+        (F.val.obj (op V))) (F.val.obj (op V)) where
+  hSMul := @SMul.smul Γ(X, V) Γ(F, V) inferInstance
+
 private theorem power_factor {X : Scheme.{u}} {P : X.Modules}
     (ι : P ⟶ SheafOfModules.unit X.ringCatSheaf) {n m : ℕ} (h : n ≤ m) :
     ∃ r : (idealSheafPower ι m).1 ⟶ (idealSheafPower ι n).1,
