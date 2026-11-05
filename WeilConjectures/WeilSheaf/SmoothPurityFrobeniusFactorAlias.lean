@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityScalarComparison
 public import WeilConjectures.WeilSheaf.SmoothPurityWhiskerComponent
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The descent Frobenius factor in the abstract factorization notation -/
 

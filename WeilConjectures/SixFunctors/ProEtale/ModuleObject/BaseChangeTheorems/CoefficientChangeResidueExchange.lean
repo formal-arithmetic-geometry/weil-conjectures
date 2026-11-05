@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidue
 public import Mathlib.Init
 public import Lean.Elab.Tactic.ElabTerm
+public import WeilConjectures.Tactic.TransportModProofs
 
 /-!
 # The derived reduction of the exchange morphism of `D(𝒪_E)`

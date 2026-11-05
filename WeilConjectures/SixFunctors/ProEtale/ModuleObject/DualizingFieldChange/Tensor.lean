@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldCh
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLaxMonoidal
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

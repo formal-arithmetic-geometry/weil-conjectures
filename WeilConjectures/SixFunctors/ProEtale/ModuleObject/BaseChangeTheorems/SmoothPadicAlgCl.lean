@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChange
 public import Mathlib.Init
 public import Lean.Elab.Tactic.ElabTerm
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The base change map on the ambient derived categories and the coefficient change `𝒪_E ⟶ ℚ̄_ℓ`

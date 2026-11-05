@@ -29,6 +29,7 @@ public import Mathlib.Algebra.Module.Presentation.Finite
 public import Mathlib.Algebra.Module.Presentation.Tensor
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # Inputs from other subsections for the projection formula on `Loc(Dbc)`

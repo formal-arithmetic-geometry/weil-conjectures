@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeSheafTensorCore
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Specialization of the native sheaf tensor square -/
 

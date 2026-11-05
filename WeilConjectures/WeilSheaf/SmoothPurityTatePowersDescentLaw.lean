@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityTatePowersFactor
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The Tate power comparison respects the geometric descent datum -/
 

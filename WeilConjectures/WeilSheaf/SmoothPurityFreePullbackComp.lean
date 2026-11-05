@@ -9,6 +9,7 @@ public import WeilConjectures.TateTwist.TateModuleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The canonical free-module pullback comparison respects composition -/
 

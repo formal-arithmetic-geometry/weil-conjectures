@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
 public import WeilConjectures.WeilSheaf.ConstantTwistCondensed
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The constant Weil datum is the canonical pullback-unit datum -/
 

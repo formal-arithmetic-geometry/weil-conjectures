@@ -11,6 +11,8 @@ public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentative
 import Mathlib.Init
 import Lean.Elab.Tactic.BuiltinTactic
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.WeilSheaf.Native.Projection.StrictProof
 
 /-! # Extending the native tensor square from K-flat representatives -/
 

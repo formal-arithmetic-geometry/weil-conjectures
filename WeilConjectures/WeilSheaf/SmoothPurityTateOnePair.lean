@@ -10,6 +10,7 @@ public import WeilConjectures.TateTwist.TateTwistPowerDatum
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The canonical one-twist pair has cyclotomic Frobenius -/
 

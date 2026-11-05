@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldCh
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Tensor
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

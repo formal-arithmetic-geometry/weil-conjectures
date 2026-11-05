@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperSt
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationSheafTensor
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The native sheaf tensor square under condensed realization -/
 

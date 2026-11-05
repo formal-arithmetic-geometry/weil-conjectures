@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfiel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
 public import Mathlib.Init
 public import Lean.Elab.Tactic.ElabTerm
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

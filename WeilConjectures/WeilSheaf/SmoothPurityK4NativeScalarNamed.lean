@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarRoot
 public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarEquation
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The scalar law immediately after rational coefficient change -/
 

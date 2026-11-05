@@ -11,6 +11,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBas
 public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

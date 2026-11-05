@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.UpperStarConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarUnit
 public import Mathlib.Init
 public import Lean.Elab.Tactic.ElabTerm
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The constant Weil sheaf as finite-base descent

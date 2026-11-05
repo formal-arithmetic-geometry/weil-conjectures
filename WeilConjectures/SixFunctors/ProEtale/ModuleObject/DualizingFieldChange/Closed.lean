@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

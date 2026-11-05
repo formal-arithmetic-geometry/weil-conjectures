@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClDe
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import Mathlib.Init
 public import Lean.Elab.Tactic.ElabTerm
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The base-change morphism and the coefficient change `E ⟶ ℚ̄_ℓ`

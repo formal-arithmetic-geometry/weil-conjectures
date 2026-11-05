@@ -10720,6 +10720,10 @@ public import WeilConjectures.SmoothPurity.UpperShriekSmoothBaseChange
 public import WeilConjectures.SmoothPurity.UpperShriekUnitDualizable
 public import WeilConjectures.SmoothPurity.UpperShriekUnitOpenImmersionComp
 public import WeilConjectures.Statement
+public import WeilConjectures.Tactic.ExactByKernel
+public import WeilConjectures.Tactic.ExactModProofIrrel
+public import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.Tactic.TransportModProofs
 public import WeilConjectures.TateTwist.ComparisonSingle
 public import WeilConjectures.TateTwist.EtaleTateSheafPow
 public import WeilConjectures.TateTwist.FiniteRootsOfUnity
@@ -11086,6 +11090,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingClosedImmersion
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingClosedImmersionLaw
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
+public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
@@ -11415,6 +11420,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormaliz
 public import WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionIso
 public import WeilConjectures.WeilSheaf.Native.Projection.SheafSquareTransport
 public import WeilConjectures.WeilSheaf.Native.Projection.SheafTensorUnit
+public import WeilConjectures.WeilSheaf.Native.Projection.StrictProof
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCompatibility
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCongr

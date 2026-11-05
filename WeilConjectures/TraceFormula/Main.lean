@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.FixedPoint
 public import Mathlib.Init
 public import Lean.Elab.Tactic.ElabTerm
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

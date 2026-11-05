@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityCoefficientFactor
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarCoefficientTransport
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Changing coefficients in a scalar Frobenius relation -/
 

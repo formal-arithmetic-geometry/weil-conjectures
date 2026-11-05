@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Normalization of the native pullback tensor comparison -/
 

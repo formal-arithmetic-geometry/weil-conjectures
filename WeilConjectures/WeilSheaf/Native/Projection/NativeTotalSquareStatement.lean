@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoheren
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The totalized native pullback tensor square -/
 

@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalizati
 public import WeilConjectures.WeilSheaf.Native.Projection.DerivedModelNormalizations
 import Mathlib.Init
 import Lean.Elab.Tactic.ElabTerm
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Native realization preserves the family of tensor models -/
 

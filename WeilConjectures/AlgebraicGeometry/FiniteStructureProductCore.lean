@@ -384,10 +384,4 @@ theorem finite_structure_product_exists_core
       G (G ⊗ G) hG hGG hproper hpGG v hvd
   exact ⟨mu, hformula mu hmu⟩
 
--- The preserved legacy endomorphism family is irrelevant to multiplication existence.
-set_option linter.unusedVariables false in
-/- A compatible finite-level family algebraizes to a product map whose sections multiply.
-This is the algebraization and evaluation part of Tags 09ZT and 088F.
-(blueprint: lem-weil-pbc-finite-structure-section-identity). -/
-
 end AlgebraicGeometry

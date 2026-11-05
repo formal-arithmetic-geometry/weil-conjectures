@@ -45,6 +45,7 @@ public import Mathlib.RingTheory.PowerSeries.Ideal
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

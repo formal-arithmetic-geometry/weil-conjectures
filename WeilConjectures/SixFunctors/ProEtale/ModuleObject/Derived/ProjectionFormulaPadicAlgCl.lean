@@ -15,6 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDeri
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 public import Mathlib.Init
 public import Lean.Elab.Tactic.ElabTerm
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The `ℚ̄_ℓ` projection formula from the integral one

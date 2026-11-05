@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperStarReading
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLowerStarExchange
+public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 
 /-!
 # The reduction modulo `ℓ` is compatible with proper base change
