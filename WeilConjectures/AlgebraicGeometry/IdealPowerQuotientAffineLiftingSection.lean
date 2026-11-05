@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.IdealPowerAffineDenominatorMap
 import WeilConjectures.AlgebraicGeometry.AffineSectionLinearMapExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
