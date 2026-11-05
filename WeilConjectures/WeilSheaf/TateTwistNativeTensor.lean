@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.WeilSheaf.Native.NativeCompactProjectionFormula
 public import WeilConjectures.WeilSheaf.Native.NativeHomSingle
-public import WeilConjectures.WeilSheaf.TateTwistConstantTwist
+public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
+public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 
 /-!
 # Tate twists as tensor products of Weil complexes
@@ -46,6 +47,16 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
+/-- The Tate sheaf `ℚ̄_ℓ(m)`, as the Tate twist of the Weil complex `ℚ̄_ℓ`, is the constant twist
+`ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` placed in degree `0`. -/
+noncomputable def tateTwistObjAdicConstantIso (m : ℤ) :
+    ((tateTwist k₀ l X m).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X))).obj ≅
+      (DerivedCategory.singleFunctor _ 0).obj
+        ((constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ m)).obj (adicConstant k₀ l X)) :=
+  (tateTwistCompιIso (k₀ := k₀) (l := l) (X := X) m).app _ ≪≫
+    ((constantTwist k₀ l X (WeilSheaf.cyclotomicUnit k₀ l ^ m)).mapDerivedCategorySingleFunctor
+      0).app (adicConstant k₀ l X)
+
 /-- The shifted Tate sheaf `ℚ̄_ℓ(m)[n]` is the constant twist `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` placed in
 degree `-n`. -/
 noncomputable def tateTwistShiftObjIso (m n : ℤ) :
@@ -77,7 +88,8 @@ noncomputable def nativeWeilHomTateTwistShiftIso (m n : ℤ) :
           erw [Category.id_comp, Category.comp_id])) _ ≪≫
     nativeWeilHomSingleIso _ (-n) ≪≫
     Functor.isoWhiskerRight (Functor.rightDerivedFunctorNatIso
-        (ihomFunctorConstantTwistAdicConstantIso k₀ l X _) ≪≫
+        (ihomFunctorConstantTwistLeftIso _ _ ≪≫
+          Functor.isoWhiskerRight (ihomFunctorAdicConstantIso k₀ l X) _ ≪≫ Functor.leftUnitor _) ≪≫
       Functor.rightDerivedFunctorIsoMapDerivedCategory _) _
 
 /-- The derived constant twist by `χ_ℓ(σ)ᵐ` followed by the shift `[n]` is left adjoint to the
@@ -138,7 +150,7 @@ theorem nonempty_nativeConstructibleTensor_iso_tateTwist_comp_shift (m n : ℤ) 
         ((𝟭 (WeilComplex k₀ l X)).prod' ((Functor.const (WeilComplex k₀ l X)).obj B) ⋙
           nativeConstructibleTensor k₀ l X) ⋙ ι ≅ ι ⋙ MonoidalCategory.tensorRight B.obj) ≪≫
       Functor.isoWhiskerLeft ι u ≪≫
-      Functor.isoWhiskerRight (tateTwistCompιIso k₀ l X m).symm _ ≪≫
+      Functor.isoWhiskerRight (tateTwistCompιIso (k₀ := k₀) (l := l) (X := X) m).symm _ ≪≫
       Functor.isoWhiskerLeft (tateTwist k₀ l X m) (ι.commShiftIso n).symm
   exact ⟨((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso e⟩
 
