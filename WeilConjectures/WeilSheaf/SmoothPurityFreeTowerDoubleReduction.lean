@@ -65,6 +65,8 @@ lemma upperStarExtendScalarsLimitFreeTowerIso_hom_comp_doubleProjection (n : ℕ
   have h' := congrArg (· ≫ purityFreeTowerProjection Λ t' c n) h
   simp only [Category.assoc] at h'
   rw [hp] at h'
-  simpa only [Functor.map_comp, Category.assoc] using h'
+  simpa only [purityCoefficientPullbackIso, upperStarExtendScalarsLimitFreeTowerIso, τ,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Functor.mapIso_hom,
+    Functor.map_comp, Category.assoc] using h'
 
 end AlgebraicGeometry.ProEtale
