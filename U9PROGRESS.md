@@ -106,12 +106,23 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ367 in progress
+# BZ367 complete
 
-- Branch: `u9/BZ367`; assigned module: `WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization`.
-- The import-only build failed on two public signatures because Mathlib marks `Qh` no_expose.
+- Branch: `u9/BZ367`; starting commit: `98654719b`.
+- Assigned module `WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization`
+  passed `ucheck-bump`: rc=0, failed=0, 2225 jobs, at `a75d107ae0`.
+- Direct importer `WeilConjectures.WeilSheaf.Native.Projection.DerivedModelNormalizations`
+  also built successfully at `7c097cb5fe`; the assigned module rebuilt successfully there.
 - The user instructed continuation after the exact two-line visibility proposal.
-  The two internal helpers are now private; proposition texts and all proof bodies are unchanged.
-- Whole-tree search found no callers of either helper outside the assigned file.
-- Next: validate with `ucheck-bump`, then check the two downstream layers and write DONE.
-- Notes: `/home/ubuntu/u9/bz/FIXES-BZ367.md`. No local Lean/Lake execution.
+  Both internal helpers are private, with the required Localization imports.
+  All proposition texts and proof bodies are unchanged; neither helper has external callers.
+- Three other direct importers and all five second-layer candidates are skipped because
+  they transitively import failing unowned `ProfinitePointPullback` (BZ395).
+  The downstream batch additionally found failures owned by BZ436, BZ390, and BZ389.
+  Its remaining dependency work was stopped after all target outcomes were known;
+  its wrapper rc=0 after stopping must not be mistaken for an all-green batch.
+- Build logs, exact errors, patterns, and counts: `/home/ubuntu/u9/bz/FIXES-BZ367.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ367-contract-audit.txt`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.
+- This completion commit changes only progress documentation; Lean sources match the green build.
+- Completion marker: `/home/ubuntu/u9/state/BZ367.DONE`.
