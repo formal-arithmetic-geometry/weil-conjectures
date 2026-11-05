@@ -80,7 +80,6 @@ private theorem compositionComparison
         by_cases hi : i = 0
         · subst i
           simp [HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.single]
-          rfl
         · simp [HomologicalComplex.singleMapHomologicalComplex, hi]
       simp only [Functor.comp_map]
       rw [← DerivedCategory.Q.map_comp, hm, DerivedCategory.Q.map_comp]
@@ -102,12 +101,14 @@ private theorem compositionComparison
     ext
     simp only [Ext.comp_hom, Ext.mk₀_hom, Ext.mapExactFunctor_hom]
     have : NatTrans.CommShift
-        (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom ℤ := by
+        (Functor.mapDerivedCategoryNatIso e ≪≫
+          (Functor.mapDerivedCategoryCompIso F G).symm).hom ℤ := by
       dsimp only [Iso.trans_hom]
       infer_instance
     have hi (A : C) :
         (H.mapDerivedCategorySingleFunctor 0).inv.app A ≫
-          (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
+          (Functor.mapDerivedCategoryNatIso e ≪≫
+            (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) =
         (DerivedCategory.singleFunctor E 0).map (e.hom.app A) ≫
           (G.mapDerivedCategorySingleFunctor 0).inv.app (F.obj A) ≫
