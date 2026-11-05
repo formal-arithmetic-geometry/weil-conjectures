@@ -142,27 +142,43 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ558 complete
+# BZ566 in progress
 
-- Branch: `u9/BZ558`; assigned module: `WeilConjectures.Algebra.Homology.SmoothPurity.NormalizedLeftExtension`.
-- The assigned module already contains BZ471's earlier proof repair.
-- Baseline was blocked by `Presheaf.InternalHom:375`: the new tensor lemma produced maps
-  from a different API than the subsequent compatibility `map_comp_apply` rewrite.
-- After the user requested continuation until green, applied the one-line prerequisite
-  proof repair in separate commit `f28760733`, using the existing compatibility tensor lemma.
-- The first retry built `Presheaf.InternalHom` successfully, then found the identical
-  issue in `KFlat`. Commit `cba570747` applies the same repair to `KFlat` and its copied
-  proof in `KFlatResolutionIndependentCoefficients`; these are all three matches in
-  the assigned module's import closure. All changes are one-line proof repairs.
-- The assigned module is GREEN at `b5a620ed5b15b3b59c0b6e493ffe04971ffecaab`:
-  `ucheck-bump` returned rc=0, failed=0, 3151 jobs on newsrv bumpw3. Both pins verified.
-- All four direct importers were attempted and skipped because the separately owned
-  `Sheaf.HomTensorPair:44` fails on the same namespace mismatch. Dependency closures
-  confirm it blocks every target; no downstream module is claimed green. The blocked
-  batch was stopped through its verified timeout supervisor to release the tree.
-- First retry full log: `/home/ubuntu/u9/bz/BUILD-BZ558-resumed-unit-full.log`.
-- Green build log: `/home/ubuntu/u9/bz/BUILD-BZ558-resumed-unit2-full.log`.
-- Downstream log: `/home/ubuntu/u9/bz/BUILD-BZ558-downstream1-full.log`.
-- Completion marker: `/home/ubuntu/u9/state/BZ558.DONE`.
-- Fix pattern, whole-tree count, and logs: `/home/ubuntu/u9/bz/FIXES-BZ558.md`.
-- No local Lean/Lake, proof placeholders, statement changes, or heartbeat increases.
+- Branch: `u9/BZ566`; starting commit: `8af5cb3248`.
+- The user instructed continuation after the explicit two-private-helper API proposal.
+  The compositor orientation edits and matching inverse cancellation are now applied.
+- Baseline `ucheck-bump` stopped before the target in `Presheaf.InternalHom`, assigned to BZ581.
+- Assigned module and both direct importers passed together at `e4462d9530`:
+  rc=0, failed=0, 4924 jobs, on `poolb:43.157.148.197`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ566-repair3-importers-full.log`.
+- Merged coordinator `cfcb63ad7` to incorporate the shared dependency repairs.
+- Second-layer IntegralResiduePullFlatModelComparison built successfully (8.2s).
+- Skipped CategoryTheory.Integral.IntegralResidueTensorPresentation: its unowned
+  IntegralResidueRestrictPullComp dependency fails at lines 24 and 99.
+- Next: final ucheck-bump of the four successful modules, then DONE.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ549 in progress
+
+- Branch: `u9/BZ549`; owned module: `GlobalSectionsDirectImageKInjectiveAcyclic`.
+- Owned import fix pushed at `d5e8c22c2`: publicly import `ChangeOfRingsExact`.
+- The user instructed continuation after the explicit one-line dependency proposal.
+  Applied the compatibility tensor-map lemma in `Presheaf.InternalHom`.
+- Re-read the brief and refreshed coordinator notes; latest integrated branch is `8af5cb324`.
+- Next: remote validation, first importer `DerivedGlobalSectionsAffinizationComparison`,
+  then second layer `DerivedGlobalSectionsPreservesCoproducts`.
+- Fixes and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ557 in progress
+
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
