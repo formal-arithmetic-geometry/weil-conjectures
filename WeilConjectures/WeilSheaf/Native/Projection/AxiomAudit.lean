@@ -40,6 +40,35 @@ import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTen
 import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationProjection
 import all WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
 import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapLocalization
+import all WeilConjectures.CategoryTheory.K.KFlatBifunctorTensorHom
+import all WeilConjectures.CategoryTheory.Native.NativeOpenTensorDescentData
+import all WeilConjectures.CategoryTheory.Native.NativeWeilTensorConstraintLifts
+import all WeilConjectures.CategoryTheory.Normalized.NormalizedKFlatTensorModels
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationSheafTensor
+import all WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationTensorModels
+import all WeilConjectures.WeilSheaf.Native.NativeNormalizedTensorModels
+import all WeilConjectures.WeilSheaf.Native.NativeTensorAcyclicTestComparison
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenSheafProjectionTensor
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorCanonicalData
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorComparisonData
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorFullKFlatLocalization
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorNormalizedRestrictionDescent
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorOperations
+import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorSheafComparisons
+import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedForgetful
+import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilRingedTensorModel
+import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilUnitMateIsIso
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorAdjoints
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorCoherence
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorGeometry
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorLift
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedDerivedSquare
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedDerivedSquareNative
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedDerivedSquareNativeCoherence
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedTransport
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedUnitSymmetryRepresentatives
+import all WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorTransport
+import all WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 import Lean
 
 /-! # Dependency audit for the native proper projection formula
