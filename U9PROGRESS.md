@@ -50,52 +50,66 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ154 in progress
+# BZ154 complete
 
 - Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
-- Three assigned modules passed the first repair build at `31ce5f122`.
+- All four assigned modules passed together through `ucheck-bump`: rc=0, failed=0, 3457 jobs.
+- Validated source commit: `d26e23a372af96d353232cce73966fa427f1419d`.
+- Each assigned module rebuilt successfully on `newsrv:/home/ubuntu/u9n/bumpw2`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ154-final-full.log`.
 - The user instructed continuation after the exact one-line statement correction in
-  `BZ154-shift-statement-proposal.patch`; that patch is now applied.
+  `BZ154-shift-statement-proposal.patch`; that patch is applied and validated.
 - The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
-  construction and homotopy-category unit. All other changes are the mandated composition
+  construction and homotopy-category unit. Other changes are the mandated composition
   isomorphism migration and imports for private definitional reductions.
-- Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
-- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ154.DONE`.
+- This completion commit changes only progress documentation; Lean sources match the green build.
+
+# BZ229 complete
+
+- Branch: `u9/BZ229`; starting commit: `c0384594d`.
+- Assigned module: `WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointLift`.
+- The module passed `ucheck-bump`: rc=0, failed=0, 2110 jobs; target rebuilt in 10 seconds.
+- Validated source commit: `0673016c02360dade89345e38fc576c7609cf662`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw1`.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ229-final-full.log`.
+- The user instructed continuation after the explicit one-token statement correction proposal.
+  Applied `.hom` -> `.inv` in the composition-factor helper to preserve its original map
+  after adopting Mathlib's reversed composition isomorphism. Other statement types and
+  all existing docstrings are unchanged.
+- Definition bodies and inverse cancellation now use the new composition orientation.
+  Two trailing `rfl` tactics after `simp` were removed. The final `rfl` after `erw` is needed
+  in this module and is retained.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ229.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
+- This completion commit changes only progress documentation; Lean source matches the green build.
+
+# BZ307 in progress
+
+- Branch: `u9/BZ307`; starting commit: `ec1bc636d93cb23a821cc484ab6aef1db014813f`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp`.
+- Baseline remote build failed only at the two obsolete compositor `.symm` uses in the statement.
+- The user instructed continuation after the exact two-expression compatibility proposal;
+  `BZ307-statement-compatibility.patch` is applied, along with the matching proof changes.
+- Assigned module passed `ucheck-bump` at `fa8b9a053e`: rc=0, failed=0, 1924 jobs.
+- Next: check direct importers and write the DONE marker.
+- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ190 complete
+# BZ332 complete
 
-- Branch: `u9/BZ190`.
-- Assigned module: `WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison`.
-- The module passed `ucheck-bump`: rc=0, failed=0, 2090 jobs.
-- Tested source commit: `a20255451c8530a95240e9634ea6bab8a027d11d`.
-- Final log: `/home/ubuntu/u9/bz/BUILD-BZ190-final-full.log`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw7`; both requested pins verified.
-- The user instructed continuation after the exact canonical unit proposal.
-  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the public statement.
-  The proof expands the unit and cancels its canonical comparison identities.
-  All other declaration statements and existing docstrings are unchanged.
-- Private helpers use implementation imports and explicit comparison cancellation.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
-- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
-- This final commit changes only progress documentation after the successful build.
-
-# BZ298 complete
-
-- Branch: `u9/BZ298`; starting commit: `18e44f2d5`.
-- Assigned module passed `ucheck-bump`: rc=0, failed=0, 2091 jobs at `ee70c90142ac8a8821df34b90a826136c0ab8a8b`.
-- Direct importer `GrothendieckHypercohomologyEdge` also built successfully.
-- Final check of both modules passed: rc=0, built=2, failed=0 on `newsrv:/home/ubuntu/u9n/bumpw7`.
-- Tested source commit: `3e33f5ff0f020a734f371440e09bcf5fc72dc2b3`.
-- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ298-final-full.log`.
-- The user instructed continuation after the exact one-line statement compatibility proposal.
-  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the assigned theorem.
-- The downstream repair uses the cochain `Q` IsGE instance directly. All other statements,
-  binders, assumptions, imports and existing docstrings are unchanged.
-- Second-layer importer `GrothendieckCocycleComparison` is skipped: its separate dependency
-  `RightDerivedCanonicalSingleUnit` fails at lines 47 and 51; it is owned by another helper.
-- Fix patterns, counts, exact errors and validation evidence: `/home/ubuntu/u9/bz/FIXES-BZ298.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ298.DONE`.
-- This final commit changes only progress documentation after the successful build.
+- Branch: `u9/BZ332`; starting commit: `04c3957dc56263143b9eaebd3d534360487f939e`.
+- Assigned module: `WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality`.
+- Ported three proof uses of the reversed derived compositor and normalized `Iso.symm_hom`.
+- The proof-only check passed the private localization proof; only the malformed public signature remained.
+- The user instructed continuation after the exact signature correction proposal; applied `BZ332-signature-compatibility.patch`.
+- Assigned module passed `ucheck-bump` at `a83c47ee4f`: rc=0, failed=0, 3845 jobs, target rebuilt in 17 seconds.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ332-unit-full.log`.
+- Checked all three direct importers. `EtaleInjectiveSectionsComparison` needs statement-level compositor migration at lines 181 and 216; both other importers depend on it. The aggregator also has unrelated dependency failures.
+- Stopped the blocked downstream batch after recording the errors; no extra module is claimed green.
+- Completion marker: `/home/ubuntu/u9/state/BZ332.DONE`. Final commit updates documentation only; owned Lean source matches the green build.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ332.md`.
+- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
