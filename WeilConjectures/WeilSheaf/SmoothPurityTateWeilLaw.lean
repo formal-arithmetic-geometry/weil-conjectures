@@ -97,7 +97,8 @@ theorem purityTateTwistOneTrivialization_weil :
           (𝟙_ _) := by
   apply purityChangeCoefficientTrivialization_weil
   simpa only [Iso.trans_hom, Mod.comp_hom', purityMapModUnitIso_hom_hom,
-    Category.comp_id, purityAbelianFrobeniusFactorIso, ProEtale.upperStarComp',
+    Category.comp_id, purityAbelianFrobeniusFactorIso, purityAbelianFactorIso,
+    ProEtale.upperStarComp',
     upperStarFactorIso, upperStarCongr] using
     upperStar_map_upperStarMapModTateModuleIsoUnit_hom_hom_frobenius a hζ hζ'
 

@@ -348,3 +348,7 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 
 ## 2026-11-05 08:24 +0800 — two associativity conversions
 - K4-20261105T082324.log reaches only two rewrite mismatches (2.2s, no timeout): the identity on a functor-composition object needs an explicit reducible rewrite, and the expanded two-unit composite needs its right-associated structure equation. Repaired with erw for the identity and an explicitly normalized local equation for N.
+
+## 2026-11-05 08:28 +0800 — abstract the geometry of the factorization
+- K4-20261105T082423.log rc=1 (124s) shows the expanded geometric formula still times out: whnf at identity cancellation, plus kernel checking the scalar-law proof. The coefficient-general rational isomorphism remains GREEN.
+- Recast the factorization/unit/scalar-law calculation for arbitrary p:U→X, s:U→U and hs:s≫p=p. The finite-field geometric Frobenius version is now a single application of that abstract theorem. This avoids expanding the actual pullback-based geometric Frobenius inside the diagram calculation. Enabled local-file profiling at a 1000ms threshold for attribution; no heartbeat increase.
