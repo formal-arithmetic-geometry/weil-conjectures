@@ -7,10 +7,12 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import all WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImage
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The restriction dictionary for torsion-controlled formal maps
 

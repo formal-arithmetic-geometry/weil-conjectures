@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.AlgebraicGeometry.InjectiveExchangeSourceTransport
 import WeilConjectures.AlgebraicGeometry.InjectiveExchangeTargetTransport
@@ -150,15 +152,20 @@ theorem injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
     simp only [Functor.map_comp, Category.assoc]
     rfl
   have hs := injectiveExchange_source_transport f K J q
+  dsimp only at hs
+  erw [Category.id_comp] at hs
   have hs' :
       U.mapDerivedCategory.map (sourceInjectiveDirectImageIso f K J q).inv =
         DerivedCategory.Plus.ι.map (U.mapDerivedCategoryPlus.map
           (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) :=
     congrArg U.mapDerivedCategory.map hs
+  have ht := injectiveExchange_target_transport f s K J q
+  dsimp only at ht
+  erw [CategoryTheory.Functor.map_id, Category.id_comp] at ht
   have result := assemble_exchange DerivedCategory.Plus.ι
     (U.mapDerivedCategoryFactors.inv.app
       ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ hs' hb
-    (injectiveExchange_target_transport f s K J q)
+    ht
   exact result
 
 end AlgebraicGeometry.Etale

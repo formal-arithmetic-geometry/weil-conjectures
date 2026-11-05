@@ -6,13 +6,17 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.IdealPowerAffineDenominatorMap
 import WeilConjectures.AlgebraicGeometry.AffineSectionLinearMapExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Affine lifting into ideal-power annihilator quotients
 
 Source: Stacks Project, Properties, Lemmas 01PM and 01PQ.

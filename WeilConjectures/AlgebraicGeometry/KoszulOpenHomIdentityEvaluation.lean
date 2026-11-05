@@ -118,7 +118,7 @@ theorem koszulOpenHom_identity_evaluation
     rw [hU] at h
     exact h
   have hiso : IsIso (R.map (koszulOpenUnit A r f e)) := by
-    apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F₀ G₀) _).2
+    apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F₀ G₀) _).1
     change IsIso (G₀.mapDerivedCategory.map
       (F₀.mapDerivedCategory.map (koszulOpenUnit A r f e)))
     infer_instance

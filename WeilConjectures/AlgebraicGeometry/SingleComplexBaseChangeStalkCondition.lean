@@ -12,6 +12,8 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtension
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
@@ -270,7 +272,7 @@ structure Coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory 
   isKFlat : P.IsKFlatTensor
   counit_isIso : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
   t : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P ⟶ N
-  represents : (counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+  represents : cast (by rfl) ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
     (DerivedCategory.Q (C := SheafOfModules.{uSC} (moduleRings X'.toRingedSpace))).map t ≫
       e'.hom = (derivedPullback g').map e.hom ≫ φ
 
@@ -354,7 +356,7 @@ theorem nonempty_coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCa
     (inv ((counit g').app q) ≫ (derivedPullback g').map e.hom ≫ φ ≫ e'.inv)
   refine ⟨⟨P, N, e, e', hP, hc, t, ?_⟩⟩
   rw [ht]
-  simp only [q, Category.assoc, Iso.inv_hom_id, Category.comp_id,
+  simp only [cast_eq, q, Category.assoc, Iso.inv_hom_id, Category.comp_id,
     IsIso.hom_inv_id_assoc]
 
 /-- The canonical map H^i(K_x tensor-derived-over-R B) tensor-over-(A tensor-over-R B) C

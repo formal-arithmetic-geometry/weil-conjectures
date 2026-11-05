@@ -116,8 +116,8 @@ private theorem localRestrictionSquare {X Y : Scheme.{u}} (s : X ≅ Y)
   let d := eO.mapDerivedCategory
   refine ⟨eO, inferInstance, inferInstance, ⟨?_⟩, ⟨?_⟩⟩
   · exact isoWhiskerRight beta LY.mapDerivedCategory ≪≫
-    (Functor.mapDerivedCategoryCompIso e₀.functor LY).symm ≪≫
-      Functor.mapDerivedCategoryNatIso h1 ≪≫ Functor.mapDerivedCategoryCompIso LX eO.functor
+    Functor.mapDerivedCategoryCompIso e₀.functor LY ≪≫
+      Functor.mapDerivedCategoryNatIso h1 ≪≫ (Functor.mapDerivedCategoryCompIso LX eO.functor).symm
   · let cInv : eI.inverse ≅ Modules.restrictFunctor i.hom :=
       Adjunction.leftAdjointUniq eI.symm.toAdjunction (Modules.restrictAdjunction i.hom)
     change EU.functor ⋙ eI.inverse ⋙ EV.inverse ≅

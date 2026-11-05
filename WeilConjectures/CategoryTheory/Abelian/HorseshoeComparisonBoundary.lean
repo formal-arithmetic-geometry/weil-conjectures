@@ -225,7 +225,9 @@ private theorem augmentation_boundary
     DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
     DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
     Category.id_comp]
-  simpa [DerivedCategory.singleFunctorIsoCompQ, Functor.commShiftIso_comp_hom_app] using hn
+  simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.app_hom, Iso.refl_hom, NatTrans.id_app]
+  erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
+  exact hn
 
 /-- The explicit comparisons respect the connecting arrow of the derived
 horseshoe triangle.
@@ -303,6 +305,22 @@ theorem horseshoe_comparison_boundary
   have : ∀ n : ℤ, Injective (H.X₂.obj.X n) := resolutionPlus_injective IB
   have : ∀ n : ℤ, Injective (H.X₃.obj.X n) := resolutionPlus_injective IC
   have hunit := rightDerived_injectiveComplex_boundary v H hH hV
+  have hshift (n : ℤ) :
+      (Functor.commShiftIso v.rightDerivedFunctorPlus
+        (self := v.instCommShiftPlusRightDerivedFunctorPlusInt) n).hom =
+      (v.rightDerivedFunctorPlus.commShiftIso n).hom := by
+    apply Functor.rightDerived_ext _
+      (Functor.IsRightDerivedFunctor.precomposeShiftNatTrans _ v.rightDerivedFunctorPlusUnith n)
+      (HomotopyCategory.Plus.quasiIso A)
+    refine NatTrans.ext (funext fun K ↦ ?_)
+    have h₁ := by
+      letI := v.instCommShiftPlusRightDerivedFunctorPlusInt
+      exact NatTrans.shift_app_comm v.rightDerivedFunctorPlusUnith n K
+    have h₂ := NatTrans.shift_app_comm v.rightDerivedFunctorPlusUnith n K
+    simpa only [NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.IsRightDerivedFunctor.precomposeShiftNatTrans_app,
+      Functor.commShiftIso_comp_hom_app, Category.assoc] using h₁.symm.trans h₂
+  simp only [Functor.commShiftIso_comp_hom_app, hshift] at hunit
   have he := DerivedCategory.triangleOfSESδ_naturality hV hExt e.hom
   dsimp only
   rw [comparison_eq_unit v IA, comparison_eq_unit v IC]
@@ -321,8 +339,8 @@ theorem horseshoe_comparison_boundary
         (boundedBelowInjectiveComparison v H.X₁)⟦(1 : ℤ)⟧' =
       boundedBelowInjectiveComparison v H.X₃ ≫
         DerivedCategory.triangleOfSESδ hV := by
-    simpa only [Functor.comp_map, Functor.commShiftIso_comp_hom_app] using hunit
-  simp only [Functor.comp_map]
+    simpa only [Functor.comp_map, Functor.commShiftIso_comp_hom_app, Category.assoc] using hunit
+  simp only [Functor.comp_map, Functor.commShiftIso_comp_hom_app, Category.assoc]
   erw [reassoc_of% hunit', he]
   rfl
 

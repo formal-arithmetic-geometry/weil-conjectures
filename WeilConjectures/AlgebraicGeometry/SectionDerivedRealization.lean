@@ -858,6 +858,6 @@ Source: Stacks 03D7 and 07A6
 def derivedPullbackComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback Λ (f ≫ g) ≅ derivedPullback Λ g ⋙ derivedPullback Λ f :=
   Functor.mapDerivedCategoryNatIso (pullbackComposition Λ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (pullback Λ g) (pullback Λ f)
+    (Functor.mapDerivedCategoryCompIso (pullback Λ g) (pullback Λ f)).symm
 
 end AlgebraicGeometry.ProEtale.ModuleRingedComparison

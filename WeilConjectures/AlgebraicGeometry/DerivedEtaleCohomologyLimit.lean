@@ -77,9 +77,9 @@ theorem derivedEtaleCohomology_limit
         ((Functor.mapDerivedCategoryNatIso
           (Etale.upperStarComp AddCommGrpCat.{u + 1} (D.map f) (t.app j)
             (t.app i) ((Category.comp_id (t.app i)).symm.trans (t.naturality f).symm)) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{u + 1} (t.app j))
-            (Etale.upperStar AddCommGrpCat.{u + 1} (D.map f))).inv.app K.obj) ≫
+            (Etale.upperStar AddCommGrpCat.{u + 1} (D.map f))).symm).inv.app K.obj) ≫
       (e i).inv)
     (s : Cocone F)
     (eY : s.pt ≅ (Etale.cohomology AddCommGrpCat.{u + 1} c.pt n).obj
@@ -101,9 +101,9 @@ theorem derivedEtaleCohomology_limit
         ((Functor.mapDerivedCategoryNatIso
           (Etale.upperStarComp AddCommGrpCat.{u + 1} (c.π.app i) (t.app i) p
             (hp i).symm) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{u + 1} (t.app i))
-            (Etale.upperStar AddCommGrpCat.{u + 1} (c.π.app i))).inv.app K.obj) ≫
+            (Etale.upperStar AddCommGrpCat.{u + 1} (c.π.app i))).symm).inv.app K.obj) ≫
       eY.inv) : Nonempty (IsColimit s) := by
   obtain ⟨a, ha⟩ := K.property
   have : K.obj.IsGE a := ha

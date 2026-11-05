@@ -429,14 +429,14 @@ private theorem basis (W : Dᵒᵖ) (a : A.obj.obj W) :
     congrArg (fun f ↦ f.hom.app W t) (F.map_id T)
   have ht := congrArg ((I.moduleUnderlying.inv.app (unit (base R))).hom.app W) hid
   have hr := congrArg (fun v : (F.obj T).obj.obj W ↦
-    (I.ringUnderlying.hom.hom.app W v : A.obj.obj W) •
+    (show A.obj.obj W from I.ringUnderlying.hom.hom.app W v) •
       (show (I.modules.obj (unit (base R))).val.obj W from
         (I.moduleUnderlying.inv.app (unit (base R))).hom.app W
           ((F.map (oneMap R)).hom.app W t))) hid
   have hs' := ht.symm.trans (hs.trans hr)
   have he' := congrArg ((I.moduleUnderlying.inv.app (unit (base R))).hom.app W) he
   have hs'' := hs'.trans (congrArg (fun v : (I.modules.obj (unit (base R))).val.obj W ↦
-    (I.ringUnderlying.hom.hom.app W t : A.obj.obj W) • v) he')
+    (show A.obj.obj W from I.ringUnderlying.hom.hom.app W t) • v) he')
   have hc := congrArg (fun k ↦ k.hom.app W a) I.ringUnderlying.inv_hom_id
   change I.ringUnderlying.hom.hom.app W t = a at hc
   exact hs''.trans (congrArg (fun r : A.obj.obj W ↦

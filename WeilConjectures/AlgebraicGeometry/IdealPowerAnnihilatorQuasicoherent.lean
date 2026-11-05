@@ -58,7 +58,6 @@ def idealAnnihilatorPresheaf {X : Scheme.{u}} {P : X.Modules}
     have hh := hs T (h.trans f.unop.le) b
     rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
     convert hh using 1
-    congr 2
 
 /-- (blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent) -/
 theorem idealAnnihilatorPresheaf_isSheaf {X : Scheme.{u}} {P : X.Modules}

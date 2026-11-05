@@ -25,6 +25,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private noncomputable local instance restrictedSectionModule {X : Scheme.{u}}
+    (M : X.Modules) {U V : X.Opens} (i : U ⟶ V) :
+    Module Γ(X, U)
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map i.op).hom).obj
+        (M.val.obj (op U))) :=
+  inferInstanceAs (Module Γ(X, U) (M.val.obj (op U)))
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem component_add {X : Scheme.{u}} {M N : X.Modules}
     (f : M ⟶ N) (U : X.Opens) (a b : M.val.obj (op U)) :

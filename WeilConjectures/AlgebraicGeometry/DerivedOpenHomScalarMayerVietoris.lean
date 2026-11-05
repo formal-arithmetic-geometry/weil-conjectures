@@ -56,7 +56,7 @@ private theorem derived_restriction_precomp
   let B := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i
   let : PreservesFiniteLimits (A ⋙ B) := comp_preservesFiniteLimits A B
   let : PreservesFiniteColimits (A ⋙ B) := comp_preservesFiniteColimits A B
-  let e := (Functor.mapDerivedCategoryCompIso A B).symm ≪≫
+  let e := Functor.mapDerivedCategoryCompIso A B ≪≫
     Functor.mapDerivedCategoryNatIso
       (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
   exact restriction_precomp A.mapDerivedCategory

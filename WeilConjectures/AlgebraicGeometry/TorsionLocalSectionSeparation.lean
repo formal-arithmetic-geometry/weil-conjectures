@@ -7,7 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 

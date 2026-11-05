@@ -7,11 +7,13 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealQuotient
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionIdealPowerImage
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Pushforward of ideal powers along a closed immersion

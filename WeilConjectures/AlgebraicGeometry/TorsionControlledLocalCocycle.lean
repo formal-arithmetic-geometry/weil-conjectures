@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.TorsionControlledOverlapCocycle
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 

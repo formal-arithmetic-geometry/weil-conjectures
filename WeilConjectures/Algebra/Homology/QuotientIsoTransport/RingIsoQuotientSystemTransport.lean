@@ -365,7 +365,7 @@ set_option backward.defeqAttrib.useBackward true
 
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
   HasDerivedCategory.standard derivedSquare systemModelTmul
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   DerivedCategory.Q DerivedCategory.Qh DerivedCategory.quotientCompQhIso
 
 private theorem derivedSquare_eq {R R' S S' : Sheaf J CommRingCat.{w}}

@@ -186,7 +186,7 @@ lemma padicIntScaled_injective {T : Type*} [TopologicalSpace T] (n : ℕ) :
     inv_ne_zero (pow_ne_zero _ (Nat.cast_ne_zero.2 (Fact.out : l.Prime).ne_zero))
   have := congrArg (fun f : C(T, ℚ_[l]) ↦ f t) hgh
   simp only [padicIntScaled_apply] at this
-  exact PadicInt.ext (mul_left_cancel₀ hl this)
+  exact mul_left_cancel₀ hl this
 
 variable {l} in
 /-- The continuous functions `T → ℚ_ℓ` of the form `ℓ⁻ⁿ g` for a continuous `g : T → ℤ_ℓ`. -/
@@ -615,7 +615,7 @@ instance isIso_rationalizationComparison_app_regular :
     refine rationalizationModel_hom_ext l X fun b n ↦ ?_
     rw [rationalizationComparison_app, ι_ι_rationalizationComparisonApp_assoc,
       rationalizationComparisonι_regular_comp]
-    erw [Iso.trans_hom, HasColimit.isoOfNatIso_ι_hom_assoc,
+    erw [Iso.trans_hom, HasColimit.ι_isoOfNatIso_hom_assoc,
       IsColimit.comp_coconePointUniqueUpToIso_hom, Functor.mapIso_hom, Functor.const_map_app,
       IsColimit.comp_coconePointUniqueUpToIso_hom_assoc]
     rfl

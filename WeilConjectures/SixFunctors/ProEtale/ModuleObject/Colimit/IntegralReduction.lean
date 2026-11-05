@@ -111,9 +111,7 @@ lemma shortExact_integersModPowReduction :
     ((Profinite.shortExact_padicIntegersRingObjToIntegersModPow.{u} ℓ E n).map_of_exact
       (upperStarFromPoint X))
   exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
-    (by
-      simp
-      rfl) (by simp)
+    (by simp) (by simp)
 
 /-- **The reduction triangle**: for every `K ∈ D(Mod_{𝒪_{E,X}})` there is a distinguished
 triangle `K --ℓⁿ--> K ⟶ K ⊗ᴸ_{𝒪_E} 𝒪_E ⧸ ℓⁿ ⟶ K[1]` in `D(Mod_{𝒪_{E,X}})`, where the reduction

@@ -64,6 +64,7 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Normalization of the scalar and geometric balancing comparison
 
@@ -237,8 +238,8 @@ private theorem exactSquare_factorsh
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (s : G ⋙ L' ≅ L ⋙ H) (K : HomotopyCategory A (.up ℤ)) :
-    ((Functor.mapDerivedCategoryCompIso G L').symm ≪≫
-        Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso L H).hom.app
+    (Functor.mapDerivedCategoryCompIso G L' ≪≫
+        Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso L H).symm).hom.app
           (DerivedCategory.Qh.obj K) ≫
         H.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app K) ≫
         H.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj K) =
@@ -255,7 +256,7 @@ private theorem exactSquare_factorsh
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).hom.app K))).1
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [h₁, h₃, ← h₂]
-  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   have hc : DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv.app K) ≫
       DerivedCategory.Qh.map
@@ -467,13 +468,13 @@ private theorem derived_restriction_pullback_eq {Z W : Scheme.{u}} {q : Z ⟶ W}
       a.target a.source R.identification S.identification a.comm)] :
     (proEtaleRingRestrictionDerivedPullback q R.target S.target R.source S.source
         a.target a.source R.identification S.identification a.comm).inv =
-      ((Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars a.target)
-          (proEtaleRingModulePullback q R.target R.source R.identification)).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars a.target)
+          (proEtaleRingModulePullback q R.target R.source R.identification) ≪≫
         Functor.mapDerivedCategoryNatIso (asIso
           (proEtaleRingRestrictionPullbackInv q R.target S.target R.source S.source
             a.target a.source R.identification S.identification a.comm)) ≪≫
-        Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback q S.target S.source
-          S.identification) (proEtaleRingRestrictScalars a.source)).hom := by
+        (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback q S.target S.source
+          S.identification) (proEtaleRingRestrictScalars a.source)).symm).hom := by
   dsimp [proEtaleRingRestrictionDerivedPullback]
   rw [Category.assoc]
   rfl
@@ -560,7 +561,8 @@ theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     simp only [NatTrans.comp_app] at h
     rw [← DerivedCategory.Qh.map_comp] at h
     simp only [Category.assoc] at hi h
-    rw [hi, DerivedCategory.Qh.map_id] at h
+    rw [hi] at h
+    erw [CategoryTheory.Functor.map_id] at h
     repeat erw [Category.comp_id] at h
     exact h.symm
   have hm : (mateEquiv (sW.adjunction a.target) (sZ.adjunction a.source) θ).natTrans =
@@ -586,9 +588,9 @@ theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     have he := exactSquare_factorsh LS LR UW UZ e K
     have heq : (proEtaleRingRestrictionDerivedPullback q R.target S.target
         R.source S.source a.target a.source R.identification S.identification a.comm).inv =
-        ((Functor.mapDerivedCategoryCompIso UW LR).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso UW LR ≪≫
           Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso LS UZ).hom := by
+          (Functor.mapDerivedCategoryCompIso LS UZ).symm).hom := by
       exact derived_restriction_pullback_eq a
     rw [← heq] at he
     apply (cancel_epi (LR.mapDerivedCategory.map

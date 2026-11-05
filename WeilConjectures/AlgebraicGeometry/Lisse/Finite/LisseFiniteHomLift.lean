@@ -426,6 +426,9 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
       c.hom.app M ≫
         (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).map φ ≫
           c.inv.app N = ψ := by
+  let : HasZeroMorphisms
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
+    inferInstance
   have _ := hN
   let C := (HomologicalComplex.single _ (.up ℤ) 0).obj N
   let I := AsSmall.{u + 1} (Under E)
@@ -436,11 +439,15 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
   let : HasColimitsOfShape I
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) :=
     inferInstance
+  have hc0 : IsColimit (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he) :=
+    Classical.choice (nonempty_isColimit_coefficientComplexCocone X ℓ
+      (E := E) (F := E) C H he he)
+  let : HasColimit (coefficientComplexDiagram X ℓ C H he he) :=
+    ⟨⟨coefficientComplexCocone X ℓ (E := E) (F := E) C H he he, hc0⟩⟩
   let c := (HomologicalComplex.eval _ (.up ℤ) 0).mapCocone
     (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he)
-  have hc : IsColimit c := isColimitOfPreserves _
-    (Classical.choice (nonempty_isColimit_coefficientComplexCocone X ℓ
-      (E := E) (F := E) C H he he))
+  have hc : IsColimit c :=
+    isColimitOfPreserves (HomologicalComplex.eval _ (.up ℤ) 0) hc0
   let a := (Mod.extendRestrictAdjunction
     (padicSubfieldRingObjToPadicAlgCl X ℓ E)).homEquiv _ _ ψ
   obtain ⟨i, b, hb⟩ := hM.isLocallyFree.exists_comp_eq_of_isColimit c hc a

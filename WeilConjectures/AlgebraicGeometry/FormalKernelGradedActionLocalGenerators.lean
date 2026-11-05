@@ -28,6 +28,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private noncomputable local instance restrictedSectionModule {X : Scheme.{u}}
+    (M : X.Modules) {U V : X.Opens} (i : U ⟶ V) :
+    Module Γ(X, U)
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map i.op).hom).obj
+        (M.val.obj (op U))) :=
+  inferInstanceAs (Module Γ(X, U) (M.val.obj (op U)))
+
 -- Iterate the error term until the annihilating ideal power makes it vanish.
 private theorem span_eq_top_of_nilpotent_error {R N : Type u} [CommRing R]
     [AddCommGroup N] [Module R N] (J : Ideal R) (L : Submodule R N)

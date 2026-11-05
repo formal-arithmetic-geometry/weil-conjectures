@@ -8,8 +8,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FormalAffineSectionLimit
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import all WeilConjectures.AlgebraicGeometry.CoherentMapReductionTorsionKernel
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine sections of the finite-level completion quotients
 

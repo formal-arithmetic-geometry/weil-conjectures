@@ -7,11 +7,13 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.FormalCompletionAffineComparison
 import Mathlib.RingTheory.AdicCompletion.Exactness
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The affine kernel fork of a completed short exact sequence
 

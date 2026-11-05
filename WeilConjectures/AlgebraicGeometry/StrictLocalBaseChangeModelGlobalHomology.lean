@@ -50,7 +50,8 @@ private theorem isIso_isoSquare (B : Type (u + 2)) [Category.{u + 1} B]
     let P := (HomotopyCategory.Plus.quotient _).obj M
     suffices IsIso ((derivedBaseChangeMapPlus B sq).app
         (DerivedCategory.Plus.Qh.obj P)) by
-      rw [← NatTrans.isIso_app_iff_of_iso _ e]
+      rw [← NatTrans.isIso_app_iff_of_iso _
+        ((DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ e)]
       exact this
     have hM : ∀ m, (f')_*[B].rightAcyclic
         ((((g')^*[B]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦ by

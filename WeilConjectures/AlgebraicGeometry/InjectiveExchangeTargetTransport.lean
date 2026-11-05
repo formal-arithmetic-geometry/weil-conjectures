@@ -8,6 +8,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Target localization and derived-unit transport
 
@@ -249,7 +252,7 @@ theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
       ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩
     let H := (HomotopyCategory.Plus.quotient _).obj M
     let q' : K ≅ DerivedCategory.Plus.Qh.obj H :=
-      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Q.obj M)
+      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Qh.obj H)
         (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
     let R := lowerStar AddCommGrpCat.{v + 1} f
     let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictLocalizationToBase s)
@@ -269,6 +272,7 @@ theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
       (baseChangeMap AddCommGrpCat.{v + 1} sq) (.up ℤ)).app M₀
     U.mapDerivedCategoryFactors.inv.app
       ((R.mapHomologicalComplex (.up ℤ)).obj M.obj) ≫
+      U.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).inv.app L) ≫
       DerivedCategory.Plus.ι.map
         (U.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj H) ≫
           DerivedCategory.Plus.Qh.map
@@ -305,6 +309,9 @@ theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
     (Scheme.strictLocalizationToBase s)).toCommSq
   let a := (NatTrans.mapHomologicalComplex (baseChangeMap AddCommGrpCat.{v + 1} sq)
     (.up ℤ)).app M.obj
+  change U.mapDerivedCategoryFactors.inv.app L ≫
+    U.mapDerivedCategory.map (𝟙 _) ≫ _ = _
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
   have hp := exchange_localization_prefix R U P F
     (baseChangeMap AddCommGrpCat.{v + 1} sq) M
   have ht := target_unit_representative_transport P F K M q

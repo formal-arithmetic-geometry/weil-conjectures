@@ -13,6 +13,7 @@ import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesIsoEquivalence
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Natural affine comparison for coherent completion
 

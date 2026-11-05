@@ -15,6 +15,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Realization of a single invertible derived action
 

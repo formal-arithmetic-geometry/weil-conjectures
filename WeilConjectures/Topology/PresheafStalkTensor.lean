@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 
 /-!
 # Tensor products of presheaf module stalks

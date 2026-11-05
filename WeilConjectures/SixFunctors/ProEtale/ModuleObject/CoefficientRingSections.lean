@@ -416,9 +416,9 @@ lemma bijective_of_isLimit_fan {ι : Type u} {F : ι → Ab.{u + 1}} {P : Ab.{u 
     Function.Bijective (fun (x : P) (i : ι) ↦ g i x) := by
   have hT := (Types.isLimit_iff _).1 ⟨isLimitOfPreserves (CategoryTheory.forget Ab.{u + 1}) h⟩
   refine ⟨fun x y hxy ↦ ?_, fun s ↦ ?_⟩
-  · obtain ⟨z, -, hz⟩ := hT (fun j ↦ g j.as x) (by rintro ⟨i⟩ ⟨j⟩ ⟨⟨h⟩⟩; dsimp at h; subst h; simp)
+  · obtain ⟨z, -, hz⟩ := hT (fun j ↦ g j.as x) (by rintro ⟨i⟩ ⟨j⟩ ⟨⟨h⟩⟩; cases h; simp)
     exact (hz x fun _ ↦ rfl).trans (hz y fun j ↦ (congrFun hxy j.as).symm).symm
-  · obtain ⟨z, hz, -⟩ := hT (fun j ↦ s j.as) (by rintro ⟨i⟩ ⟨j⟩ ⟨⟨h⟩⟩; dsimp at h; subst h; simp)
+  · obtain ⟨z, hz, -⟩ := hT (fun j ↦ s j.as) (by rintro ⟨i⟩ ⟨j⟩ ⟨⟨h⟩⟩; cases h; simp)
     exact ⟨z, funext fun i ↦ hz ⟨i⟩⟩
 
 /-- Let `U` be an object of `X_proét` with `U.left ≅ Spec R`, where every faithfully flat

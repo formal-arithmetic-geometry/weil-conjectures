@@ -22,6 +22,17 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace SheafOfModules.SignedLineDerivedBaseChange
 attribute [local irreducible] monoidalCategory
 attribute [local instance 2000] cochainModulesMonoidal
+
+local instance {D : Type u} [Category.{v} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
+    {R : Sheaf K CommRingCat.{w}}
+    (M : SheafOfModules.{w} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R))
+    (V : Dᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver R.obj V.unop).obj
+      (unit ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R)).val).obj
+        (op (Over.mk (𝟙 V.unop)))) (M.val.obj V) :=
+  (M.val.obj V).isModule.toSMul
+
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]

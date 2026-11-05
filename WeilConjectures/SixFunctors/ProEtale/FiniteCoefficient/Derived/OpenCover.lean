@@ -131,9 +131,9 @@ categories, `g^* ν_X^* ≅ ν_Y^* g^*`, induced by
 noncomputable def mapDerivedCategoryComparisonUpperStarCompUpperStarIso {Y X : Scheme.{u}}
     (g : Y ⟶ X) :
     D(ν^*(X)[A]) ⋙ D((g)^*[A]) ≅ D(Etale.upperStar A g) ⋙ D(ν^*(Y)[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (comparisonUpperStarCompUpperStarIso A g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The extension by zero along an open immersion `j : U ⟶ X` commutes with the comparison
 pullback on derived categories, `ν_X^* j_! ≅ j_! ν_U^*`, induced by
@@ -142,9 +142,9 @@ noncomputable def mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarI
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     D(Etale.openImmersionLowerShriek A j) ⋙ D(ν^*(X)[A]) ≅
       D(ν^*(U)[A]) ⋙ D(ProEtale.openImmersionLowerShriek A j) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekComparisonUpperStarIso A j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- If `Rν_* C = 0`, there is no nonzero map from a complex of étale origin `ν^* G` to the
 restriction of `C` to an open `U`: such maps correspond to maps `j_! ν^* G ≅ ν^* j_! G ⟶ C`,

@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -22,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # A common submodule with generically vanishing cokernels
 

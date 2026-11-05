@@ -98,6 +98,13 @@ local instance modulesProducts (X : Scheme.{u}) : HasCountableProducts (Modules 
   inferInstance
 local instance complexProducts (X : Scheme.{u}) :
     HasCountableProducts (CochainComplex (Modules l E X) ℤ) := inferInstance
+local instance modulesNatProducts (X : Scheme.{u}) :
+    HasLimitsOfShape (Discrete ℕ) (Modules l E X) := HasCountableProducts.out ℕ
+local instance complexNatProducts (X : Scheme.{u}) :
+    HasLimitsOfShape (Discrete ℕ) (CochainComplex (Modules l E X) ℤ) := inferInstance
+local instance complexNatLimit (X : Scheme.{u})
+    (F : Discrete ℕ ⥤ CochainComplex (Modules l E X) ℤ) : HasLimit F :=
+  HasLimitsOfShape.has_limit F
 
 /-- The actual quotient morphism pulled back from the point.
 Source: blueprint, reduction cone (blueprint: sk-def-pe-derived-completion). -/
@@ -371,6 +378,8 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.modulesMonoidalPreadditive AdicCompletion.finiteModulesDerived
   AdicCompletion.modulesDerived
   AdicCompletion.modulesProducts AdicCompletion.complexProducts
+  AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
 
 /-- Derived completeness in the unbounded internal-module category of the continuous
 pulled-back integral coefficients. A K-flat representative computes the derived reductions;
@@ -393,6 +402,8 @@ attribute [local irreducible] upperStarFromPoint
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed
   modulesMonoidalPreadditive finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts
+  complexNatLimit
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
@@ -435,8 +446,8 @@ abbrev finiteRestrict (n : ℕ) : FiniteDerived l E X n ⥤ FiniteDerived l E X 
 Source: blueprint, coherent reductions (blueprint: sk-def-pe-derived-completion). -/
 def restrictComp (n : ℕ) :
     finiteRestrict l E X n ⋙ restrict l E X (n + 1) ≅ restrict l E X n :=
-  ((Functor.mapDerivedCategoryCompIso).symm
-    (Mod.comap (transition l E X n)) (Mod.comap (quotient l E X (n + 1)))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso
+    (Mod.comap (transition l E X n)) (Mod.comap (quotient l E X (n + 1))) ≪≫
     Functor.mapDerivedCategoryNatIso
       ((Mod.comapComp (quotient l E X (n + 1)) (transition l E X n)).symm ≪≫
         Mod.comapCongr (quotient_transition l E X n))
@@ -774,6 +785,8 @@ attribute [local irreducible] upperStarFromPoint
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed
   modulesMonoidalPreadditive finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts
+  complexNatLimit
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
@@ -810,9 +823,13 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.modulesMonoidalPreadditive AdicCompletion.finiteModulesDerived
   AdicCompletion.modulesDerived
   AdicCompletion.modulesProducts AdicCompletion.complexProducts
+  AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
 attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
   finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed
   modulesMonoidalPreadditive finiteModulesDerived modulesDerived modulesProducts complexProducts
+  modulesNatProducts complexNatProducts
+  complexNatLimit
 
 
 private theorem genericCoconeIso_inv_fst_f

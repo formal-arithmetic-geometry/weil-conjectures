@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.SmoothPuritySeparatedAdjunction
+
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
@@ -261,7 +263,7 @@ theorem nonempty_verdierDual_upperStar_derivedLowerStar_iso
     Nonempty ((verdierDual k₀ l Z).obj (op ((upperStar i).obj ((derivedLowerStar j).obj G))) ≅
       ((upperStar i).obj ((derivedLowerStar j).obj ((verdierDual k₀ l U).obj (op G))))⟦(-1 : ℤ)⟧)
     := by
-  have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀))
+  have := isLeftAdjoint_derivedLowerShriek_of_separated_base (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀))
   have := hasUpperShriek_of_isCompl (k₀ := k₀) (l := l) j i hij
   obtain ⟨e₂⟩ := nonempty_upperShriek_verdierDual_iso i ((derivedLowerStar j).obj G)
   obtain ⟨e₁⟩ := nonempty_verdierDual_derivedLowerStar_iso j G

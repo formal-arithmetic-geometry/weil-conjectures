@@ -39,6 +39,23 @@ private lemma assemble_exchange {A B : Type*} [Category A] [Category B]
   rw [hs, ← Functor.map_comp, hm]
   exact ht
 
+private lemma assemble_exchange_transport {A B : Type*} [Category A] [Category B]
+    (I : A ⥤ B) {X Y Z : A} {V W : B}
+    (a : V ⟶ W) (u : W ⟶ I.obj X) (b : W ⟶ I.obj Y) (c : X ⟶ Y)
+    (d : Y ⟶ Z) (e : X ⟶ Z) (t : V ⟶ I.obj Z)
+    (hs : b = u ≫ I.map c) (hm : c ≫ d = e) (ht : a ≫ u ≫ I.map e = t) :
+    a ≫ b ≫ I.map d = t := by
+  rw [hs, Category.assoc, ← Functor.map_comp, hm]
+  exact ht
+
+private lemma map_derivedCategory_ι_map
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    {K L : DerivedCategory.Plus C} (g : K ⟶ L) :
+    F.mapDerivedCategory.map (DerivedCategory.Plus.ι.map g) =
+      DerivedCategory.Plus.ι.map (F.mapDerivedCategoryPlus.map g) := rfl
+
 private lemma map_comp_naturality {A B C D : Type*}
     [Category A] [Category B] [Category C] [Category D]
     (R : A ⥤ B) (U : B ⥤ C) (P : A ⥤ D) (F : D ⥤ C)
@@ -49,6 +66,8 @@ private lemma map_comp_naturality {A B C D : Type*}
   simpa only [Functor.map_comp, Category.assoc, Functor.comp_map] using
     congrArg (fun z ↦ U.map u ≫ z) (θ.naturality t)
 
+-- Remote elaboration reached 200000 heartbeats in 21s after extracting generic proof steps.
+set_option maxHeartbeats 400000 in
 /-- Compute the derived mate on the chosen injective representative, before sections.
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, with the
@@ -110,7 +129,7 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
     ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩
   let H := (HomotopyCategory.Plus.quotient _).obj M
   let q' : K ≅ DerivedCategory.Plus.Qh.obj H :=
-    DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Q.obj M)
+    DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Qh.obj H)
       (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
   let sq := (IsPullback.of_hasPullback f
     (Scheme.strictHenselizationStructuralMap s)).toCommSq
@@ -155,12 +174,15 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X �
   have hs := smallModel_injectiveExchange_source_transport f K J q
   have hs' :
       U.mapDerivedCategory.map (smallModel_sourceInjectiveDirectImageIso f K J q).inv =
+        U.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).inv.app
+          ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) ≫
         DerivedCategory.Plus.ι.map (U.mapDerivedCategoryPlus.map
-          (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) :=
-    congrArg U.mapDerivedCategory.map hs
-  have result := assemble_exchange DerivedCategory.Plus.ι
+          (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) := by
+    rw [hs, U.mapDerivedCategory.map_comp, ← DerivedCategory.Plus.ι.map_comp,
+      map_derivedCategory_ι_map]
+  have result := assemble_exchange_transport DerivedCategory.Plus.ι
     (U.mapDerivedCategoryFactors.inv.app
-      ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ hs' hb
+      ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ _ hs' hb
     (smallModel_injectiveExchange_target_transport f s K J q)
   exact result
 

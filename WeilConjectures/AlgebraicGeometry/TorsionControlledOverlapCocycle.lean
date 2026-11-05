@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.TorsionCommonOpenComparisonMap
 import WeilConjectures.AlgebraicGeometry.TorsionLocalSectionSeparation
 import WeilConjectures.AlgebraicGeometry.CoherentMapTorsionCompletionExt
@@ -15,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.TorsionControlledCompletionHomLiftExists
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 

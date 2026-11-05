@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -16,6 +17,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 import WeilConjectures.AlgebraicGeometry.FormalComparisonAlgebraizationQuotientLift
 import WeilConjectures.AlgebraicGeometry.AffineCompleteCoherentSections
 import WeilConjectures.AlgebraicGeometry.ProperCompleteQuotientSectionsJointlyMonic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraization of the comparison over a complete affine base
 

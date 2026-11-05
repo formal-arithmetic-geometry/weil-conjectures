@@ -116,21 +116,143 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ459 complete
+# BZ469 in progress
 
-- Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects` passed
-  `ucheck-bump`: rc=0, failed=0, 2927 jobs, on `poolb:43.157.132.198`.
-- Validated source commit: `841d33dd8504561794c58471ae53351e311c9f1d`.
-- The user instructed continuation after the explicit statement API migration proposal.
-  Two obsolete compositor `.symm` uses were removed to retain the original canonical maps.
-  All proof bodies, binders, hypotheses, docstrings, and options remain unchanged.
-- Direct importer `DerivedOpenGluing` was attempted but skipped because BZ361-owned
-  `SchemeDerivedHomGluing` fails. Its four-line repair is saved at
-  `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`; committed importer source is unchanged.
-- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ459-final-full.log`.
-- Fix patterns and dependency diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ459-contract-audit.txt`.
+- Branch: `u9/BZ469`; starting commit: `99a06bbbb`.
+- The user instructed continuation after the exact two-site API proposal.
+  Applied `.symm` to both composition comparisons in
+  `injectiveSections_strictLocal_comparison`, preserving the original map directions
+  under Mathlib's reversed compositor.
+- Pinned API inspected at b63f6e8a; known quotient patterns do not match this module.
+- Next: remote validation, then up to four direct importers and a second downstream layer.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ469.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+# BZ511 in progress
+
+- Branch: `u9/BZ511`; starting commit: `fa248eeed`.
+- The user instructed continuation after the exact two-private-helper API proposal.
+  The compositor inverse in `derivedCompSingle` and the direct compositor in
+  `derivedTripleNatSingle` are applied. The public theorem statement is unchanged.
+- Proofs now use Mathlib's single-object compositor lemma, hom naturality, and
+  hom/inv cancellation; the redundant `rfl` after `simp only` is removed.
+- Pinned Mathlib source was inspected at b63f6e8a. Patterns, occurrence counts,
+  and integration errors: `/home/ubuntu/u9/bz/FIXES-BZ511.md`.
+- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
+  acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ459.DONE`.
-- This final commit changes only progress documentation after the successful source build.
+
+# BZ557 in progress
+
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ603 in progress
+
+- Branch: `u9/BZ603`; starting commit: `cfcb63ad7`.
+- Baseline remote build: eight errors caused by hidden `HomologicalComplexUpToQuasiIso.Qh`.
+- Public and implementation Localization imports removed seven diagnostics; the private
+  helper statements and proofs compile. The one public representative statement still failed.
+- The user instructed continuation after the canonical Q/Qh endpoint-transport proposal.
+  Applied the comparison hom/inv maps only to that equality, preserving its mathematical
+  maps, binders, assumptions, and other statements. The proof normalizes identity transports.
+- Next: `ucheck-bump` on the assigned module, then `CompletedScalarAssociator` downstream.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ603.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+
+# BZ646 complete
+
+- Green owned module: `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonUpperStarCoherence`.
+- Green direct importer: `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonBaseChangeMate`.
+- Final remote validation: `ucheck-bump` at source commit `e46a90620ceda4662bd450189ee57edb7cc5cad6`,
+  rc=0, failed=0, 5603 jobs; both changed modules rebuilt successfully.
+- Ported composition comparison directions, simplified composition components directly,
+  removed a redundant tactic, and normalized symmetric isomorphism projections.
+- Declaration statements, imports, and docstrings are unchanged; all source edits are in proofs.
+- All seven machine rewrite rules exactly reproduce the final files from baseline `bb4aa5315`.
+- Three direct importers were attempted. Identity coherence requires a statement change and is
+  left untouched. Étale-reading coherence and its next-layer importer are blocked by unowned
+  dependencies. The broad failing batch was stopped after those blockers were confirmed.
+- Handoff records: `/home/ubuntu/u9/bz/FIXES-BZ646.md` and `/home/ubuntu/u9/state/BZ646.DONE`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
+
+
+# BZ683 complete
+
+- Branch: `u9/BZ683`; starting commit: `4bbea9d82`.
+- Assigned module `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition`
+  passed `ucheck-bump`: rc=0, failed=0, 2873 jobs, target rebuilt in 9.4 seconds.
+- Validated source commit: `9ebd05ad943b03304d7e35268cffa36c7118fa18`.
+- The user instructed continuation after the exact one-line dependency-name proposal.
+  Named the local instance in `ChangeOfRingsTransition` as
+  `changeOfRingsTransitionRestrictedModule`; its type and proof remain unchanged.
+  This removes the generated proof-name collision with `TensorProductOfUniverses`.
+- The dependency also rebuilt successfully. Assigned leaf source and all statements are unchanged.
+- Both downstream layers were attempted: `FinitePerfectAdicQuotientStrictRealizationData`
+  and `FinitePerfectAdicQuotientStrictRealizationSquare`. Skipped because six dependencies
+  outside this unit fail; the batch was stopped after collecting those diagnostics.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ683-fix1-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ683-downstream-full.log`.
+- Fix pattern, exact diagnostic, contextual rewrite rule, and whole-tree occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ683.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ683-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ683.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ740 complete
+
+- Branch: `u9/BZ740`; starting commit: `f271bd088`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization`
+  passed `ucheck-bump`: rc=0, failed=0, 3927 jobs; target rebuilt in 48 seconds.
+- Validated source commit: `814682ae46`. The assigned target also rebuilt successfully
+  in the downstream batch at `28be0e52ca`.
+- The user instructed continuation after the exact one-line identity-cast proposal.
+  That patch and two Localization imports are the only Lean changes.
+- All other statement text, proof bodies, docstrings, and heartbeat settings are unchanged.
+  Both recorded rewrite rules exactly reproduce the source from the baseline.
+- Direct importer `DerivedPullbackTensorUnitKFlat` was checked and fails in a kept
+  public theorem's hμ binder (line 359), requiring further statement-level Qh/Q conversions.
+  It and next-layer `DerivedPullbackTensorUnit` are deferred under the kept-statement rule.
+  Neither downstream file was edited.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ740-assigned-green-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ740-downstream1-full.log`.
+- Fix patterns, exact diagnostics, and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ740-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ740.DONE`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- This final commit changes only progress documentation; Lean source matches the green build.
+
+# BZ798 in progress
+
+- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
+- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
+- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
+  unused signed-projection comparison chain and its downstream callers. The earlier
+  referenced-caller blocker therefore no longer applies.
+- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
+  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
+  declaration and no callers. It is listed unused and absent from kept-decls.txt.
+- All surviving declaration text is unchanged from the integrated branch.
+- Next: validate the owned module, then its direct importers and downstream layers.
+- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ850 in progress
+
+- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
+- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
+- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
+  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
+  original statements and docstrings. Their surviving users prohibit pruning them.
+- Added Localization imports and explicit simplification of its hidden comparison components.
+- The assigned CoefficientConstantTowerRoos source is unchanged.
+- Next: remote ucheck-bump on the assigned module, then both direct importers.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.

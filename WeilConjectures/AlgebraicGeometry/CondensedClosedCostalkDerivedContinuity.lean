@@ -245,6 +245,12 @@ private theorem comparison_of_colimitCocone
 attribute [local irreducible] CategoryTheory.Mod.monoidalClosed
   AlgebraicGeometry.ProEtale.upperStarFromPoint
 
+noncomputable local instance
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
 set_option maxHeartbeats 400000 in
 -- Recollement and derived comparison elaboration need additional heartbeats.
 set_option synthInstance.maxHeartbeats 100000 in
@@ -346,7 +352,7 @@ theorem condensed_closed_costalk_derived_continuity
   let F := DerivedCategory.homologyFunctor A 0
   let eQ : CochainComplex.Plus.ι A ⋙ DerivedCategory.Q ≅
       DerivedCategory.Plus.Q ⋙ DerivedCategory.Plus.ι :=
-    Functor.isoWhiskerLeft (CochainComplex.Plus.ι A) (DerivedCategory.quotientCompQhIso A)
+    (DerivedCategory.Plus.QCompιIso A).symm
   have hid (r : ℤ) : IsIso (triangleComparison TT tc F r Triangle.π₂) := by
     let C := HomologicalComplex.homologyFunctor A (.up ℤ) r
     have hb : IsIso (colimit.desc (D ⋙ C) (C.mapCocone d)) := by

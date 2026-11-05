@@ -22,6 +22,12 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+noncomputable local instance
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 800000 in
 -- Exact single-sheaf triangles carry the integral coefficient instance.

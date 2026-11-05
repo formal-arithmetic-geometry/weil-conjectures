@@ -305,34 +305,34 @@ private theorem descend_coherence
     (ho : a0 ≪≫ Functor.isoWhiskerRight a02 H =
       e ≪≫ a1 ≪≫ Functor.isoWhiskerLeft F a13) :
     (Functor.mapDerivedCategoryNatIso a0).hom ≫
-        (Functor.mapDerivedCategoryCompIso F02 H).hom ≫
+        (Functor.mapDerivedCategoryCompIso F02 H).inv ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryNatIso a02).hom
           H.mapDerivedCategory ≫
-        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).hom
+        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).inv
           H.mapDerivedCategory =
       (Functor.mapDerivedCategoryNatIso e).hom ≫
         (Functor.mapDerivedCategoryNatIso a1).hom ≫
-        (Functor.mapDerivedCategoryCompIso F F13).hom ≫
+        (Functor.mapDerivedCategoryCompIso F F13).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryNatIso a13).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).hom := by
+        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).inv := by
   have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
   simp only [Functor.mapDerivedCategoryNatIso_trans] at hd
   have hR := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a02 H
   have hL := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F a13
   have hC := Functor.mapDerivedCategoryCompIso_assoc F G H
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F02 H).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F02 H).inv,
     ← hR, Category.assoc, ← hC]
   have ht := congrArg (fun t ↦ t ≫
-    (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
+    (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
     Functor.whiskerLeft F.mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso G H).hom) hd
+      (Functor.mapDerivedCategoryCompIso G H).inv) hd
   calc
     _ = ((Functor.mapDerivedCategoryNatIso e).hom ≫
           (Functor.mapDerivedCategoryNatIso a1).hom ≫
           (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft F a13)).hom) ≫
-        (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
+        (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory
-          (Functor.mapDerivedCategoryCompIso G H).hom := by
+          (Functor.mapDerivedCategoryCompIso G H).inv := by
             simpa only [Category.assoc] using ht
     _ = _ := by
       simp only [Category.assoc]
@@ -379,7 +379,7 @@ private theorem gComp_coherence {X Y Z W : Scheme.{u}}
   change (Functor.mapDerivedCategoryNatIso e).hom.app M = _ at he
   rw [he] at hm
   simpa only [gComp, G, F₁, F₂, F₃, F₀₂, F₁₃, a₀₂, a₁₃, a₀, a₁, e,
-    Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] using hm
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] using hm
 
 private lemma conjugate_triangle_assoc
     {C₀ C₁ C₂ C₃ : Type*}
@@ -612,7 +612,7 @@ private theorem descend_left_unit
       Functor.rightUnitor F = Iso.refl F) :
     (Functor.mapDerivedCategoryNatIso q).hom ≫
         (Functor.mapDerivedCategoryNatIso k).hom ≫
-        (Functor.mapDerivedCategoryCompIso F I).hom ≫
+        (Functor.mapDerivedCategoryCompIso F I).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory
           ((Functor.mapDerivedCategoryNatIso e).hom ≫
             (Functor.mapDerivedCategoryIdIso D).hom) = 𝟙 _ := by
@@ -623,7 +623,7 @@ private theorem descend_left_unit
     Functor.mapDerivedCategoryNatIso_refl
   rw [hr, Category.comp_id] at hd
   rw [Functor.whiskerLeft_comp]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F I).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F I).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e]
   simp only [Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_comp_id]
@@ -649,7 +649,7 @@ private theorem gCompEq_left_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Iso.refl_hom, NatTrans.id_app]
   erw [Category.comp_id]
   simpa only [gCompEq, gComp, gId, towerGId, moduleGId, moduleAdj, G,
-    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     Functor.rightUnitor_hom_app, NatTrans.comp_app, Iso.refl_hom, NatTrans.id_app,
     Functor.map_comp, Category.assoc, Category.comp_id] using hm
 
@@ -794,7 +794,7 @@ private theorem descend_right_unit
       Functor.leftUnitor F = Iso.refl F) :
     (Functor.mapDerivedCategoryNatIso q).hom ≫
         (Functor.mapDerivedCategoryNatIso k).hom ≫
-        (Functor.mapDerivedCategoryCompIso I F).hom ≫
+        (Functor.mapDerivedCategoryCompIso I F).inv ≫
         Functor.whiskerRight ((Functor.mapDerivedCategoryNatIso e).hom ≫
           (Functor.mapDerivedCategoryIdIso C).hom) F.mapDerivedCategory = 𝟙 _ := by
   have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
@@ -804,7 +804,7 @@ private theorem descend_right_unit
     Functor.mapDerivedCategoryNatIso_refl
   rw [hr, Category.comp_id] at hd
   rw [Functor.whiskerRight_comp]
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso I F).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso I F).inv,
     ← Functor.mapDerivedCategoryNatIso_isoWhiskerRight e F]
   simp only [Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_id_comp]
@@ -830,7 +830,7 @@ private theorem gCompEq_right_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Iso.refl_hom, NatTrans.id_app]
   erw [Category.comp_id]
   simpa only [gCompEq, gComp, gId, towerGId, moduleGId, moduleAdj, G,
-    Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     NatTrans.comp_app, Functor.map_comp, Category.assoc, NatTrans.id_app,
     Functor.comp_obj, Functor.id_obj] using hm
 

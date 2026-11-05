@@ -9,6 +9,8 @@ public import WeilConjectures.Algebra.Homology.OrdinaryLineScalar.OrdinaryLineSc
 import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryTensorComparisonSupplement
 import all WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
 import all WeilConjectures.Algebra.Homology.LineUnbounded.LineUnboundedDerivedTensor
+public import WeilConjectures.Algebra.Homology.FlatSingleDerivedNormalization.FlatSingleDerivedNormalization
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Ordinary signed-line tensor and derived scalar extension
 
@@ -229,28 +231,6 @@ theorem exists_lineData
     (L : Modules.{t, a} X R) [L.IsFiniteLocallyFreeOfRank 1] : Nonempty (LineData L) := by
   classical
   have hr := signed_power_rank L
-  have hs (m : ℤ) : ∃ h : FlatModel.{t, a} (LineUnbounded.single.{t, a} X R (power.{t, a} L m)),
-      ∃ c : 𝒬[R] ⋙ twist.{t, a, w} L m ≅
-        (tensor.{t, a} L m).mapHomologicalComplex (.up ℤ) ⋙ 𝒬[R],
-      (PreservesFiniteLimits (tensor.{t, a} L m) ∧ PreservesFiniteColimits (tensor.{t, a} L m)) ∧
-      ∀ P : CochainComplex (Modules.{t, a} X R) ℤ,
-        LineUnbounded.normalization.{t, a, w} X R (power.{t, a} L m) h.1 h.2 (twist.{t, a, w} L m)
-          rfl P (c.app P) := by
-    have := hr m
-    obtain ⟨_, _, hP, _, hPf, _, hl, hc, _, _, _, _, _, F, G, hF, hG, h⟩ :=
-      LineUnbounded.line_unbounded_derived_tensor.{t, a, w} X R (power.{t, a} L m)
-    have hh : ∃ cP : 𝒬[R] ⋙ F ≅
-        (tensor.{t, a} L m).mapHomologicalComplex (.up ℤ) ⋙ 𝒬[R],
-        ∀ P : CochainComplex (Modules.{t, a} X R) ℤ,
-          LineUnbounded.normalization.{t, a, w} X R (power.{t, a} L m) hP hPf F hF
-            P (cP.app P) := by
-      obtain ⟨sP, sD, _, _, cP, _, _, _, hnP, _⟩ := h
-      exact ⟨cP, hnP⟩
-    clear h hG G
-    obtain ⟨cP, hnP⟩ := hh
-    subst F
-    exact ⟨⟨hP, hPf⟩, cP, ⟨hl, hc⟩, hnP⟩
-  choose h c hc hn using hs
   obtain ⟨I, V, hV, hL⟩ :=
     (isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{max a (t + 1), t, t + 1}
       (M := L) (r := 1)).mp
@@ -265,6 +245,39 @@ theorem exists_lineData
   let ev (m : ℤ) : power.{t, a} L m ⊗ power.{t, a} L (-m) ≅ 𝟙_ (Modules.{t, a} X R) :=
     tensor_site.{t, a} _ _ ≪≫ μ m (-m) ≪≫
       eqToIso ((congrArg (power.{t, a} L) (add_neg_cancel m)).trans (power_zero L))
+  have hs (m : ℤ) : ∃ h : FlatModel.{t, a} (LineUnbounded.single.{t, a} X R (power.{t, a} L m)),
+      ∃ c : 𝒬[R] ⋙ twist.{t, a, w} L m ≅
+        (tensor.{t, a} L m).mapHomologicalComplex (.up ℤ) ⋙ 𝒬[R],
+      (PreservesFiniteLimits (tensor.{t, a} L m) ∧ PreservesFiniteColimits (tensor.{t, a} L m)) ∧
+      ∀ P : CochainComplex (Modules.{t, a} X R) ℤ,
+        LineUnbounded.normalization.{t, a, w} X R (power.{t, a} L m) h.1 h.2 (twist.{t, a, w} L m)
+          rfl P (c.app P) := by
+    have : (tensorRight (power.{t, a} L m)).IsEquivalence :=
+      Functor.IsEquivalence.mk' (tensorRight (power.{t, a} L (-m)))
+        (LineUnbounded.cancellation X R _ _ (ev m)).symm
+        (LineUnbounded.cancellation X R _ _ ((β_ _ _) ≪≫ ev m))
+    have hflat : IsFlatOnSite (J := Scheme.ProEt.topology X) (R := R)
+        (power.{t, a} L m) :=
+      ⟨preservesFiniteLimits_of_natIso (siteSheafTensorRightIso R _).symm,
+        preservesFiniteColimits_of_natIso (siteSheafTensorRightIso R _).symm⟩
+    obtain ⟨hP, hPf, hl, hc, _, _, _, _, _, _, chi, _, hn, _⟩ :=
+      FlatSingleDerivedNormalization.flat_single_derived_normalization.{t + 1, t,
+        max a (t + 1), w} R (power.{t, a} L m) hflat
+    let c : 𝒬[R] ⋙ twist.{t, a, w} L m ≅
+        (tensor.{t, a} L m).mapHomologicalComplex (.up ℤ) ⋙ 𝒬[R] := by
+      unfold twist LineUnbounded.derived
+      exact chi ≪≫ Functor.isoWhiskerRight
+        (FlatSingleDerivedNormalization.collapse R (power.{t, a} L m)) 𝒬[R]
+    refine ⟨⟨hP, hPf⟩, c, ⟨hl, hc⟩, ?_⟩
+    intro P
+    unfold LineUnbounded.normalization
+    intro hK hKf
+    dsimp only [c, NatIso.trans_app]
+    simp only [eqToIso_refl, Iso.refl_trans]
+    with_unfolding_all
+      exact LineUnbounded.whiskered_normalization _ _ chi
+        (FlatSingleDerivedNormalization.collapse R (power.{t, a} L m)) P (hn P hK hKf)
+  choose h c hc hn using hs
   have hev (m : ℤ) (U : X.ProEtᵒᵖ) (E : ∀ n : ℤ, (power.{t, a} L n).val.obj U)
       (hE : SignedLineBasisPowers.{t + 1, t, a} L U E) :
       (ev m).hom.val.app U

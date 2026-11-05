@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
 /-! # The degree-zero unit of a derived adjunction
@@ -69,35 +71,22 @@ private theorem unit_single (M : C) :
         R.rightDerivedPlusSingleUnit (L.obj M) := by
   have h := adj.derivedPlus_unit_app_fac ((HomotopyCategory.Plus.singleFunctor C 0).obj M)
   have hL : (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app M =
-      let S : CochainComplex.Plus C :=
-        ⟨(CochainComplex.singleFunctor C 0).obj M, by
-          rw [CochainComplex.plus_iff]
-          exact ⟨0, inferInstance⟩⟩
-      let s : (DerivedCategory.Plus.singleFunctor C 0).obj M ≅
-          DerivedCategory.Plus.Q.obj S :=
-        DerivedCategory.Plus.ι.preimageIso
-          ((DerivedCategory.Plus.singleFunctorιIso C 0).hom.app M ≫
-            (DerivedCategory.singleFunctorIsoCompQ C 0).hom.app M)
-      s.hom ≫ L.mapDerivedCategoryPlus.map
-          ((DerivedCategory.Plus.quotientCompQhIso C).inv.app S) ≫
-        L.mapDerivedCategoryPlusFactorsh.hom.app
-          ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
+      L.mapDerivedCategoryPlusFactorsh.hom.app
+        ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≫
         (L.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 M).hom := by
     apply DerivedCategory.Plus.ι.map_injective
     simp only [Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app,
       Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app,
       Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso, Functor.preimageIso_hom,
       Functor.map_preimage]
-    simp only [Functor.mapDerivedCategorySingleFunctor, Iso.trans_hom,
-      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.associator_hom_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
-      Iso.symm_hom, NatTrans.comp_app, Functor.mapIso_hom,
-      Category.id_comp]
-    rw [← Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app]
-    simp [DerivedCategory.Plus.quotientCompQhIso,
-      DerivedCategory.Plus.QhCompιIsoιCompQh, Functor.mapDerivedCategoryPlusCompatibility,
-      Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapHomotopyCategoryFactors,
-      Quotient.lift.isLift_inv, Category.assoc]
+    change _ = L.mapDerivedCategoryFactorsh.hom.app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj ((CochainComplex.singleFunctor C 0).obj M)) ≫ _
+    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+    simp [Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ,
+      DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+      Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, Category.assoc]
+    erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp]
   rw [hL, Functor.map_comp, ← Category.assoc]
   erw [h]
   let u : L.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≅
@@ -113,7 +102,8 @@ private theorem unit_single (M : C) :
     change DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι D).map
       ((HomotopyCategory.Plus.ι D).preimage _)) = _
     rw [Functor.map_preimage]
-    rfl
+    change _ = 𝟙 _ ≫ _
+    exact (Category.id_comp _).symm
   rw [← hu, Category.assoc]
   have hn := R.rightDerivedFunctorPlusUnith.naturality u.hom
   dsimp only [Functor.comp_map] at hn
@@ -144,7 +134,9 @@ private theorem unit_single (M : C) :
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-    Functor.preimageIso_hom, Functor.map_preimage]
+    Functor.preimageIso_hom, Functor.map_preimage, Iso.trans_hom, Iso.app_hom,
+    Functor.mapIso_hom]
+  erw [Category.id_comp]
   change DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι C).map
       (adj.mapHomotopyCategoryPlus.unit.app
         ((HomotopyCategory.Plus.singleFunctor C 0).obj M))) ≫
