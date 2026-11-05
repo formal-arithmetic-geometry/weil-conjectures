@@ -97,3 +97,18 @@ lemma compForgetIso_conjugate :
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Functor
+
+variable {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
+  {F : A ⥤ B} {F' : A' ⥤ B'} {T S : A ⥤ A'} {U V : B ⥤ B'}
+
+/-- Changing vertical coordinates and changing back leaves a square unchanged. -/
+lemma isoWhisker_conjugate_cancel (a : U ≅ V) (b : T ≅ S) (e : F ⋙ U ≅ T ⋙ F') :
+    isoWhiskerLeft F a ≪≫
+        (isoWhiskerLeft F a.symm ≪≫ e ≪≫ isoWhiskerRight b F') ≪≫
+        isoWhiskerRight b.symm F' = e := by
+  ext K
+  simp [Category.assoc]
+
+end CategoryTheory.Functor

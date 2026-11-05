@@ -118,4 +118,19 @@ lemma purityFieldCompactificationExchange_eq_paste :
     (purityFieldProperAmbientExchange l f f' c c' hg)
   exact he
 
+/-- The exchange for the chosen lower shrieks is the same paste, transported through
+the two specified compactification-independence isomorphisms. -/
+lemma purityFieldLowerShriekExchange_eq_paste :
+    purityFieldLowerShriekExchange l f f' c c' hi hg =
+      Functor.isoWhiskerRight
+          (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l
+            (compactificationOverField f) c) _ ≪≫
+        Adjunction.compForgetIso
+          (purityFieldOpenRestrictedExchange l f f' c c' hi)
+          (purityFieldProperRestrictedExchange l f f' c c' hg) ≪≫
+        Functor.isoWhiskerLeft _
+          (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l
+            c' (compactificationOverField f')) := by
+  rw [purityFieldLowerShriekExchange, purityFieldCompactificationExchange_eq_paste]
+
 end AlgebraicGeometry.ProEtale.CondensedRing

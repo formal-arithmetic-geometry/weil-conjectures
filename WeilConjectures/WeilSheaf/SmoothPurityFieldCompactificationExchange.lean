@@ -15,9 +15,6 @@ Restrict the ambient weakly étale compactification exchange through the fully f
 bounded constructible inclusions. The resulting square uses the actual chosen compactifications.
 -/
 
-set_option profiler true
-set_option profiler.threshold 0
-
 @[expose] public section
 
 universe u

@@ -38,9 +38,12 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
 lemma purityFieldProperAmbientExchange_hom :
     (purityFieldProperAmbientExchange l f f' c c' hg).hom =
       baseChangeMap (Profinite.padicAlgClRingObj l) hg.toCommSq := by
-  ext K
-  simp [purityFieldProperAmbientExchange, rightDerivedLowerStarBaseChangeIso,
-    Category.assoc, ← CategoryTheory.Functor.map_comp]
+  have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj l) hg
+  have he := Functor.isoWhisker_conjugate_cancel
+    (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πY)
+    (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πZ)
+    (asIso (baseChangeMap (Profinite.padicAlgClRingObj l) hg.toCommSq))
+  exact congrArg Iso.hom he
 
 /-- The restricted proper factor is precisely the proper base change used in the
 exceptional base change theorem. -/
@@ -58,6 +61,12 @@ lemma purityFieldProperRestrictedExchange_hom :
     Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, CategoryTheory.Functor.map_id,
     Category.id_comp, Category.comp_id]
   rw [purityFieldProperAmbientExchange_hom]
-  exact (NearbyCyclesModel.liftExchange_app_hom _ _ _ _ _ K).symm
+  have he := NearbyCyclesModel.liftExchange_app_hom
+    (baseChangeMap (Profinite.padicAlgClRingObj l) hg.toCommSq)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj l c.overG K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj l c'.overG K)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πY K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πZ K.obj K.property) K
+  exact he.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
