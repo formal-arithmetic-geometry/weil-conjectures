@@ -79,7 +79,7 @@ theorem unitBaseChange_comp :
       = (mateEquiv adjh adjh' (inv Exh)).natTrans.app U ≫ Rh'.map ε := rfl
     _ = (mateEquiv adjh adjh' (inv Exh)).natTrans.app U ≫ ρ'.hom.app (Gc.obj U) ≫
           (Rg' ⋙ Rf').map ε ≫ ρ'.inv.app U' := by
-        rw [ρ'.hom.naturality_assoc, Iso.hom_inv_id_app, Category.comp_id]
+        rw [NatIso.naturality_2]
     _ = Ga.map (ρ.hom.app U) ≫ (mateEquiv adjf adjf' (inv Exf)).natTrans.app (Rg.obj U) ≫
           Rf'.map ((mateEquiv adjg adjg' (inv Exg)).natTrans.app U) ≫
           (Rg' ⋙ Rf').map ε ≫ ρ'.inv.app U' := by
@@ -139,7 +139,7 @@ lemma lowerShriek_map_upperShriekComp_padicAlgCl_hom_app_comp_counit
       (boundedConstructibleUpperShriekAdjunction ℓ g).counit.app K =
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).inv.app _ ≫
       (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ g)).counit.app K := by
-  have h := Adjunction.conjugateEquiv_counit (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ g))
+  have h := conjugateEquiv_counit (boundedConstructibleUpperShriekAdjunction ℓ (f ≫ g))
     ((boundedConstructibleUpperShriekAdjunction ℓ f).comp
       (boundedConstructibleUpperShriekAdjunction ℓ g))
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).symm.hom K
