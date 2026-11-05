@@ -142,6 +142,16 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
+# BZ575 in progress
+
+- Re-read the unit brief; no new LEAD scope changes.
+- User instructed continuation after the exact one-line dependency repair proposal.
+- Applied BZ539's compatibility tensor lemma repair in Presheaf/InternalHom.lean.
+- Assigned ChangeOfRings comparison orientation was already fixed upstream.
+- Retrying ucheck-bump; then direct importer EtaleReductionFiniteTor and second-layer EtaleReduction.
+- Fix notes: /home/ubuntu/u9/bz/FIXES-BZ575.md.
+- No local Lean/Lake execution, statement changes, proof escapes, or heartbeat increases.
+
 # BZ557 in progress
 
 - Branch: `u9/BZ557`; starting commit: `8af5cb324`.
