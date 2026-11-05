@@ -23,14 +23,12 @@ open scoped ChangeOfRings TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-local instance {C : Type u} [Category.{u} C] (R : Cᵒᵖ ⥤ CommRingCat.{u})
-    (M : _root_.PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat)) (U : Cᵒᵖ) :
-    Module (R.obj U) (M.obj U) :=
-  (M.obj U).isModule
-
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
+set_option trace.profiler.useHeartbeats true in
 /-- The additive inverse-image unit, followed by extension and sheafification, is
 semilinear for the ring inverse-image unit followed by the extension ring map.
 
