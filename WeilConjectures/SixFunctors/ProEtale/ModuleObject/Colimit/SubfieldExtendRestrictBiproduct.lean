@@ -8,4 +8,3 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBiproductPow
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldFiniteFree
