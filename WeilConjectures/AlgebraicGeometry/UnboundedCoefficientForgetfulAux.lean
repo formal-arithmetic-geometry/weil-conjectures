@@ -126,7 +126,7 @@ private noncomputable def restrictScalarsForgetIso
     CategoryTheory.Sheaf.derivedRestrictScalars T.smallEtaleTopology φ ⋙
         (Etale.moduleAbelianForget R T).mapDerivedCategory ≅
       (Etale.moduleAbelianForget S T).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (show CategoryTheory.Sheaf.restrictScalars T.smallEtaleTopology φ ⋙
           Etale.moduleAbelianForget R T ≅ Etale.moduleAbelianForget S T from Iso.refl _)
