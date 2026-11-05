@@ -1,3 +1,18 @@
+# BZ151 in progress
+
+- Branch: `u9/BZ151`; baseline source commit: `4a7cff55183c155d87df3930f5d55228be9388ef`.
+- The user instructed continuation after the exact four declaration-type API substitutions
+  in `/home/ubuntu/u9/bz/BZ151-statement-api.patch`; that exact patch is now applied.
+- Mathlib owns `mapDerivedCategoryCompIso` with the opposite orientation. Adapt the public
+  conjugacy statement and one private scalar-square lemma to the corresponding inverse.
+- `Plus.Q` now lifts `Q` directly. Remove the obsolete quotient transport from the two
+  private chain-map hypotheses and their local proof constructions.
+- The public Grp.Zero import fixes DerivedSourceComparisonInjective, which already passed
+  remotely with only standard axioms. Redundant rfl and invalid omit fixes are also applied.
+- Next: validate all four modules together through ucheck-bump and resolve any remaining proofs.
+- Fixes, baseline inventories, and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ151.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.

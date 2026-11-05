@@ -209,7 +209,7 @@ private lemma derivedHomToHomology_app_eq {W : Cᵒᵖ}
       DerivedCategory.Plus.Q.obj M)
     (f : (HomologicalComplex.single _ (.up ℤ) 0).obj ((freeSheaf J).obj W.unop) ⟶ M.obj)
     (hf : DerivedCategory.Plus.ι.map β =
-      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj) :
+      DerivedCategory.Q.map f) :
     (derivedHomToHomology (DerivedCategory.Plus.Q.obj M)).app W β =
       DerivedCategory.singleCyclesHom _ ≫ HomologicalComplex.cyclesMap f 0 ≫
         M.obj.homologyπ 0 ≫ homologyComparison M :=
@@ -293,7 +293,7 @@ private theorem derivedMap_zero_of_boundary [M.obj.IsKInjective]
     (β : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶ DerivedCategory.Plus.Q.obj M)
     (f : (HomologicalComplex.single _ (.up ℤ) 0).obj A ⟶ M.obj)
     (hf : DerivedCategory.Plus.ι.map β =
-      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj)
+      DerivedCategory.Q.map f)
     (φ : A' ⟶ A) (b : A' ⟶ M.obj.X (-1))
     (hb : ((HomologicalComplex.single _ (.up ℤ) 0).map φ ≫ f).f 0 =
       (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A').hom ≫ b ≫ M.obj.d (-1) 0) :
