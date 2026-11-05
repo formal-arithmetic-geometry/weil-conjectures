@@ -51,7 +51,8 @@ private def sourceScalar (U : C) (b : B.obj.obj (op U)) :
     intro m
     change M.val.obj (op W.unop.left) at m
     symm
-    change M.val.map g.unop.left.op (B.obj.map W.unop.hom.op b • m) =
+    change (M.val.map g.unop.left.op (B.obj.map W.unop.hom.op b • m) :
+        M.val.obj (op W'.unop.left)) =
       B.obj.map W'.unop.hom.op b •
         (M.val.map g.unop.left.op m : M.val.obj (op W'.unop.left))
     rw [M.val.map_smul]
