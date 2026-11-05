@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 import all WeilConjectures.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiIso
 
