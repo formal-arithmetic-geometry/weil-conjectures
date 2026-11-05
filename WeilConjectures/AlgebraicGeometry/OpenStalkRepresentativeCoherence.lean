@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OpenDerivedAdditiveStalkIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Representative coherence for exact open stalk restriction
 
@@ -60,7 +61,7 @@ private theorem comp_factors_hom
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (K : CochainComplex C ℤ) :
-    (Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+    (Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.hom.app K := by
@@ -139,7 +140,7 @@ private theorem representative_factors
         (Functor.mapDerivedCategoryCompIso R (L₀ ⋙ F₀)).inv.app
           (DerivedCategory.Q.obj N) ≫
         (Functor.mapDerivedCategoryNatIso γ).hom.app (DerivedCategory.Q.obj N) ≫
-        (Functor.mapDerivedCategoryCompIso L F).hom.app (DerivedCategory.Q.obj N) ≫
+        (Functor.mapDerivedCategoryCompIso L F).inv.app (DerivedCategory.Q.obj N) ≫
         F.mapDerivedCategory.map (L.mapDerivedCategoryFactors.hom.app N) ≫
         F.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj N) =
       DerivedCategory.Q.map
@@ -203,7 +204,7 @@ private theorem representative_cohomology
       (DerivedCategory.homologyFunctor E i).map
         ((Functor.mapDerivedCategoryNatIso γ).hom.app (DerivedCategory.Q.obj N)) ≫
       (DerivedCategory.homologyFunctor E i).map
-        ((Functor.mapDerivedCategoryCompIso L F).hom.app (DerivedCategory.Q.obj N)) ≫
+        ((Functor.mapDerivedCategoryCompIso L F).inv.app (DerivedCategory.Q.obj N)) ≫
       (F.mapDerivedCategoryHomologyFunctorIso i).inv.app
         (L.mapDerivedCategory.obj (DerivedCategory.Q.obj N)) ≫
       F.map ((DerivedCategory.homologyFunctor B i).map

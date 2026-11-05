@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Unit laws on K-flat representatives
 

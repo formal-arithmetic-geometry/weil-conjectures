@@ -23,6 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Riemann–Roch, Serre duality and the twist lemma for curves

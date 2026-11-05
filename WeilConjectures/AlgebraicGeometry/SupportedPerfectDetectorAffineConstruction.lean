@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.AffineKoszulGeometricProperties
 import Mathlib.Topology.Compactness.Bases
 import Mathlib.Data.Fintype.EquivFin
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine Koszul construction with its open restriction unit
 Source: Stacks Project, Tags 0A9A and 09IR.
