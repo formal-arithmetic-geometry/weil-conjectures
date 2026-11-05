@@ -64,6 +64,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 open AlgebraicGeometry.ProEtale
 
+local instance (Y : Scheme.{u}) (J : Type u) : HasColimitsOfShape (Discrete J) (Over Y) := by
+  have : HasColimitsOfShape (Discrete J) Scheme.{u} := inferInstance
+  exact ⟨fun F ↦ Over.hasColimit_of_hasColimit_comp_forget F⟩
+
 private theorem testObject_preservesLimit
     {I : Type v} [Category.{w} I] (Y : Scheme.{u}) (D : I ⥤ Profinite.{u}) :
     PreservesLimit D (profiniteToProEtOf Y ⋙ ProEt.forget Y) := by
