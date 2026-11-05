@@ -17,6 +17,7 @@ set_option autoImplicit false
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Finite local systems on one finite constructible partition give continuity.
 Source: blueprint sk-thm-pe-constructible-comparison-classical, Stacks Tag 09AK
 (auxiliary; not a blueprint node).
