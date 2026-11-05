@@ -98,3 +98,14 @@
 - Next: check direct importers and write the DONE marker.
 - Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ332 in progress
+
+- Branch: `u9/BZ332`; starting commit: `04c3957dc56263143b9eaebd3d534360487f939e`.
+- Assigned module: `WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality`.
+- Ported three proof uses of the reversed derived compositor and normalized `Iso.symm_hom`.
+- The proof-only check passed the private localization proof; only the malformed public signature remained.
+- The user instructed continuation after the exact signature correction proposal; applied `BZ332-signature-compatibility.patch`.
+- Next: validate the assigned module, then its direct importers and a further layer if feasible.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ332.md`.
+- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.

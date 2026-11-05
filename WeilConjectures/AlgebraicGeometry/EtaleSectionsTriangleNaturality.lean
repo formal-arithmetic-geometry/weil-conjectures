@@ -184,9 +184,9 @@ theorem sectionsComparison_triangle_naturality {X Y T : Scheme.{v}}
     (cohomology AddCommGrpCat.{v + 1} X n).map
       ((Functor.mapDerivedCategoryNatIso
         (upperStarComp AddCommGrpCat.{v + 1} a g h hh) ≪≫
-          (Functor.mapDerivedCategoryCompIso).symm
+          (Functor.mapDerivedCategoryCompIso
             (upperStar AddCommGrpCat.{v + 1} g)
-            (upperStar AddCommGrpCat.{v + 1} a)).inv.app K) =
+            (upperStar AddCommGrpCat.{v + 1} a)).symm).inv.app K) =
     chainRestriction ≫ comparison X h := by
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
