@@ -140,3 +140,16 @@
 - Next: build four direct importers, fix owned failures, then try a second downstream layer.
 - Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ513.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ513 complete
+
+- Branch `u9/BZ513`, final source commit `60dd22c31`.
+- Assigned leaf plus three direct importers passed `ucheck-bump` together: rc=0,
+  failed=0, 3702 jobs. Green source commit `255dceb1d`; full log
+  `/home/ubuntu/u9/bz/BUILD-BZ513-layer1-green-full.log`.
+- Second-layer importers were attempted and skipped because their dependency closure
+  failed in other owners' modules (`DerivedLocalIsomorphismSourceEvaluation`,
+  `MapExactFunctor`, and `NormalizedLeftExtension`).
+- Completion marker: `/home/ubuntu/u9/state/BZ513.DONE`.
+- Fix patterns and exact error lines: `/home/ubuntu/u9/bz/FIXES-BZ513.md`.
+- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or heartbeat increases.
