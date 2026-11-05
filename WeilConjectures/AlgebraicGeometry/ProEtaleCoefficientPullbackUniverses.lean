@@ -149,12 +149,11 @@ theorem coefficientProEtaleModuleDirectImage_isRightAdjoint {X Y : Scheme.{t}} (
             (ProEt.topology Z)).obj (rings Z)) (𝟙 _) (𝟙 _)
       (by ext : 2; exact (rings Z).obj.map_id _)
       (by ext : 2; exact (rings Z).obj.map_id _)
-  have : HasWeakSheafify (coefficientProEtaleModelTopology.{t, r} X)
-      AddCommGrpCat.{max r (t + 1)} := by
-    infer_instance
+  have : HasSheafify (coefficientProEtaleModelTopology.{t, r} X)
+      AddCommGrpCat.{max r (t + 1)} := hasSheafifyEssentiallySmallSite _ _
   have : (coefficientProEtaleModelTopology.{t, r} X).WEqualsLocallyBijective
       AddCommGrpCat.{max r (t + 1)} := by
-    infer_instance
+    exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
   let smallPush := SheafOfModules.pushforward.{max r (t + 1)}
     (coefficientProEtaleModelRingMap f A)
   have : smallPush.IsRightAdjoint := by
