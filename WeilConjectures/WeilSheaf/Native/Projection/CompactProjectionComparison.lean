@@ -7,8 +7,8 @@ module
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedOpenProjectionSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperProjectionSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.MateAdjunctionChoice
-public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPastingMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
+public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPastingMonoidal
 
 /-! # The normalized compact-support projection and forget comparisons -/
 
@@ -103,22 +103,18 @@ theorem projectionCompactification_forget_square (M : WeilComplex k₀ l X)
   rw [CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq l cb _ _
     ((projectionGeometricPullComp k₀ l f).hom.app _) (by
       exact CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb _)]
-  have h := projectionForgetSquare_paste_monoidal
+  -- the pasted square, with all spelling conversions done on abstract functors
+  exact projectionForgetSquare_paste_monoidal
     (projectionOpenForgetIso k₀ l (c).i) (projectionProperForgetIso k₀ l (c).g)
     (compactProjectionForgetUpperStarIso k₀ l (c).i)
     (compactProjectionForgetUpperStarIso k₀ l (c).g)
     (compactProjectionForgetTensorIso k₀ l X) (compactProjectionForgetTensorIso k₀ l (c).Z)
     (compactProjectionForgetTensorIso k₀ l Y)
     (projectionBoundedPullComp k₀ l f) (projectionGeometricPullComp k₀ l f)
-    _ _ _ _ (projectionForgetSquare_open k₀ l (c).i) (projectionForgetSquare_proper k₀ l (c).g) M N
-  simpa only [projectionCompactIso, projectionCompositeIso_hom_app,
-    projectionCompactificationForgetIso, projectionCompactPullForgetIso,
-    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Adjunction.projectionMorphismNatTrans, Adjunction.invProjectionComparisonNatTrans,
-    Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-    id_whiskerRight, whiskerLeft_id, Category.id_comp, Category.comp_id,
-    Category.assoc] using h
+    _ _ _ _ (projectionForgetSquare_open k₀ l (c).i) (projectionForgetSquare_proper k₀ l (c).g)
+    (projectionCompactIso k₀ l f).hom (projectionCompactificationForgetIso k₀ l f)
+    (projectionCompactPullForgetIso k₀ l f) M N
+    (projectionCompositeIso_hom_app _ _ _ M N) (fun _ ↦ rfl) rfl
 
 /-- The exceptional mate of the normalized compactification comparison is invertible. -/
 theorem isIso_mateEquiv_projectionCompactificationForgetIso
