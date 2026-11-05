@@ -31,8 +31,8 @@ Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence). -/
 def systemDerivedSubsequenceEvaluation (r : ℕ ↪o ℕ) (n : ℕ) :
     derivedSystemSubsequence B r ⋙ derivedSystemEvaluation (selectedSystemRings B r) n ≅
       derivedSystemEvaluation B (r n) :=
-  (Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
-    (systemEvaluation (selectedSystemRings B r) n)).symm
+  Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
+    (systemEvaluation (selectedSystemRings B r) n)
 
 /-- The selected-evaluation comparison has the canonical cochain representative formula.
 Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence).
@@ -48,9 +48,9 @@ theorem systemDerivedSubsequenceEvaluation_rep (r : ℕ ↪o ℕ) (n : ℕ)
       (((systemSubsequence B r).mapHomologicalComplex (.up ℤ)).obj K) := by
   let e := Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
     (systemEvaluation (selectedSystemRings B r) n)
-  apply (cancel_epi (e.hom.app (DerivedCategory.Q.obj K))).1
-  change e.hom.app _ ≫ (e.inv.app _ ≫ _) = _
-  erw [Iso.hom_inv_id_app_assoc]
+  apply (cancel_epi (e.inv.app (DerivedCategory.Q.obj K))).1
+  change e.inv.app _ ≫ (e.hom.app _ ≫ _) = _
+  erw [Iso.inv_hom_id_app_assoc]
   exact (Functor.mapDerivedCategoryCompIso_hom_app_factors
     (systemSubsequence B r) (systemEvaluation (selectedSystemRings B r) n) K).symm
 
@@ -59,8 +59,8 @@ Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence). -/
 def systemDerivedSubsequenceComposition (r s : ℕ ↪o ℕ) :
     derivedSystemSubsequence B r ⋙ derivedSystemSubsequence (selectedSystemRings B r) s ≅
       derivedSystemSubsequence B (s.trans r) :=
-  (Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
-    (systemSubsequence (selectedSystemRings B r) s)).symm
+  Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
+    (systemSubsequence (selectedSystemRings B r) s)
 
 /-- The subsequence compositor has the canonical cochain representative formula.
 Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence).
@@ -77,9 +77,9 @@ theorem systemDerivedSubsequenceComposition_rep (r s : ℕ ↪o ℕ)
       (((systemSubsequence B r).mapHomologicalComplex (.up ℤ)).obj K) := by
   let e := Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
     (systemSubsequence (selectedSystemRings B r) s)
-  apply (cancel_epi (e.hom.app (DerivedCategory.Q.obj K))).1
-  change e.hom.app _ ≫ (e.inv.app _ ≫ _) = _
-  erw [Iso.hom_inv_id_app_assoc]
+  apply (cancel_epi (e.inv.app (DerivedCategory.Q.obj K))).1
+  change e.inv.app _ ≫ (e.hom.app _ ≫ _) = _
+  erw [Iso.inv_hom_id_app_assoc]
   exact (Functor.mapDerivedCategoryCompIso_hom_app_factors
     (systemSubsequence B r) (systemSubsequence (selectedSystemRings B r) s) K).symm
 
