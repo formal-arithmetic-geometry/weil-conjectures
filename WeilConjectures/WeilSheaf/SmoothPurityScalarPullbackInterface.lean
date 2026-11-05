@@ -44,35 +44,39 @@ noncomputable def purityScalarBasePull :=
 noncomputable def purityScalarFrobeniusPull :=
   CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom
 
-/-- The coefficient-changed root module. -/
-noncomputable def purityScalarRootObject :=
-  (Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
-    (tateModule X ℓ)
+/-- The pulled-back Tate object, named separately from its pullback functor. -/
+noncomputable def purityScalarSourceObject :=
+  (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj).obj
+    (tateTwistOne X ℓ)
+
+/-- The pulled-back unit object. -/
+noncomputable def purityScalarSourceUnit :=
+  (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj).obj (𝟙_ _)
 
 /-- The Tate pullback comparison in the original coefficient spelling. -/
 noncomputable def purityScalarTateCompare :
-    (purityScalarBasePull ℓ a).obj (purityScalarRootObject (X := X) ℓ) ≅
+    purityScalarSourceObject ℓ a ≅
       tateTwistOne a.geometricFiber ℓ :=
   upperStarTateTwistOneIso ℓ a.geometricFiberProj a
 
 /-- The unit pullback comparison. -/
 noncomputable def purityScalarUnitCompare :
-    (purityScalarBasePull ℓ a).obj (𝟙_ _) ≅ 𝟙_ _ :=
+    purityScalarSourceUnit ℓ a ≅ 𝟙_ _ :=
   (Functor.Monoidal.εIso
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj)).symm
 
 /-- The descent datum on the root module. -/
 noncomputable def purityScalarSourceDatum :
     (purityScalarFrobeniusPull ℓ a).obj
-        ((purityScalarBasePull ℓ a).obj (purityScalarRootObject (X := X) ℓ)) ⟶
-      (purityScalarBasePull ℓ a).obj (purityScalarRootObject (X := X) ℓ) :=
+        (purityScalarSourceObject ℓ a) ⟶
+      purityScalarSourceObject ℓ a :=
   (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app
-    (purityScalarRootObject (X := X) ℓ)
+    (tateTwistOne X ℓ)
 
 /-- The descent datum on the pulled-back unit. -/
 noncomputable def purityScalarSourceUnitDatum :
-    (purityScalarFrobeniusPull ℓ a).obj ((purityScalarBasePull ℓ a).obj (𝟙_ _)) ⟶
-      (purityScalarBasePull ℓ a).obj (𝟙_ _) :=
+    (purityScalarFrobeniusPull ℓ a).obj (purityScalarSourceUnit ℓ a) ⟶
+      purityScalarSourceUnit ℓ a :=
   (geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).hom.app (𝟙_ _)
 
 /-- The canonical Tate datum on the geometric fibre. -/
@@ -99,10 +103,7 @@ lemma purityScalarTateCompare_comm :
   rw [purity_upperStarTateTwistOneIso_independent_base ℓ a.geometricGaloisFrobenius.hom
     (a.geometricFiberProj ≫ a) a.geometricFiberToAlgebraicClosure,
     ← purity_geometricFiberProjUpperStarFrobeniusIso_eq (Profinite.padicAlgClRingObj ℓ) a] at h
-  dsimp only [purityScalarFrobeniusPull, purityScalarBasePull, purityScalarTateCompare,
-    purityScalarTargetDatum, purityScalarSourceDatum, purityScalarRootObject,
-    tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+  exact h
 
 lemma purityScalarUnitCompare_comm :
     (purityScalarFrobeniusPull ℓ a).map (purityScalarUnitCompare ℓ a).hom ≫
@@ -113,18 +114,15 @@ lemma purityScalarUnitCompare_comm :
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
   rw [← purity_geometricFiberProjUpperStarFrobeniusIso_eq
     (Profinite.padicAlgClRingObj ℓ) a] at h
-  dsimp only [purityScalarFrobeniusPull, purityScalarBasePull, purityScalarUnitCompare,
-    purityScalarTargetUnitDatum, purityScalarSourceUnitDatum, Iso.symm_hom,
-    Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+  exact h
 
 variable {ζ : ℕ → AlgebraicClosure k} (hζ : ∀ n, IsPrimitiveRoot (ζ n) (ℓ ^ n))
   (hζ' : ∀ n, ζ (n + 1) ^ ℓ = ζ n)
 
 /-- The root trivialization before transporting to the canonical Tate line. -/
 noncomputable def purityScalarRootTrivialization :
-    (purityScalarBasePull ℓ a).obj (purityScalarRootObject (X := X) ℓ) ≅
-      (purityScalarBasePull ℓ a).obj (𝟙_ _) :=
+    purityScalarSourceObject ℓ a ≅
+      purityScalarSourceUnit ℓ a :=
   purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[ℓ])
     (Profinite.padicIntRingObjToPadicAlgCl ℓ) a.geometricFiberProj (tateModule X ℓ)
     (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
@@ -137,10 +135,10 @@ lemma purityScalarRootTrivialization_weil :
       (purityScalarFrobeniusPull ℓ a).map (purityScalarRootTrivialization ℓ a hζ hζ').hom ≫
         purityScalarSourceUnitDatum ℓ a := by
   have h := purity_rationalRootTrivialization_weil a hζ hζ'
-  dsimp only [purityScalarSourceDatum, purityScalarRootTrivialization,
-    purityScalarFrobeniusPull, purityScalarSourceUnitDatum, purityScalarBasePull,
-    purityScalarRootObject, Functor.comp_obj, Functor.comp_map] at h ⊢
-  exact_mod_proofs h
+  unfold purityScalarSourceDatum purityScalarRootTrivialization
+    purityScalarFrobeniusPull purityScalarSourceUnitDatum
+  dsimp only [tateTwistOne, Functor.comp_obj, Functor.comp_map] at h ⊢
+  exact h
 
 /-- The canonical geometric trivialization in the scalar interface. -/
 noncomputable def purityScalarCanonicalTrivialization :
@@ -156,13 +154,13 @@ lemma purityScalarCanonicalTrivialization_eq :
         purityScalarUnitCompare ℓ a := (rfl)
 
 /-- Export the scalar equation in the original Frobenius convention. -/
-lemma purityScalarCanonicalEquation_eq :
-    ((Nat.card k : ℤ) •
+lemma purityScalarCanonicalEquation
+    (h : (Nat.card k : ℤ) •
         (purityScalarTargetDatum ℓ a ≫ (purityScalarCanonicalTrivialization ℓ a hζ hζ').hom) =
       (purityScalarFrobeniusPull ℓ a).map
           (purityScalarCanonicalTrivialization ℓ a hζ hζ').hom ≫
-        purityScalarTargetUnitDatum ℓ a) =
-    ((Nat.card k : ℤ) •
+        purityScalarTargetUnitDatum ℓ a) :
+    (Nat.card k : ℤ) •
         ((upperStarTateTwistOneIso ℓ a.geometricGaloisFrobenius.hom
           a.geometricFiberToAlgebraicClosure).hom ≫
           (purityScalarCanonicalTrivialization ℓ a hζ hζ').hom) =
@@ -171,6 +169,7 @@ lemma purityScalarCanonicalEquation_eq :
           (purityScalarCanonicalTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
           (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
-            a.geometricGaloisFrobenius.hom)).inv) := (rfl)
+            a.geometricGaloisFrobenius.hom)).inv := by
+  exact h
 
 end AlgebraicGeometry.ProEtale

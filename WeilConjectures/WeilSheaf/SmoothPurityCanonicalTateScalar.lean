@@ -60,7 +60,7 @@ lemma purityCanonicalTateOneTrivialization_weil :
     (purityScalarCanonicalTrivialization ℓ a hζ hζ')
     (purityScalarCanonicalTrivialization_eq ℓ a hζ hζ') (Nat.card k : ℤ)
     (purityScalarRootTrivialization_weil ℓ a hζ hζ')
-  have h' := (purityScalarCanonicalEquation_eq ℓ a hζ hζ').mp h
+  have h' := purityScalarCanonicalEquation ℓ a hζ hζ' h
   dsimp only [purityCanonicalTateOneTrivialization]
   exact_mod_proofs h'
 
