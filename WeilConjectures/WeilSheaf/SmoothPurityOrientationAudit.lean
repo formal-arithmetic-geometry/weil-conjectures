@@ -16,6 +16,8 @@ import WeilConjectures.WeilSheaf.UpperShriekWeilDatum
 import WeilConjectures.WeilSheaf.SmoothPurityEtaleEquivariantLift
 import WeilConjectures.WeilSheaf.SmoothPurityTateTowerProjection
 
+import WeilConjectures.WeilSheaf.UpperShriekWeilDatumAssembly
+
 /-! # Dependency audit of the orientation reconstruction helpers
 
 The assigned Weil leaf is not asserted to be closed by this audit.
@@ -35,3 +37,5 @@ open AlgebraicGeometry.ProEtale.CondensedRing AlgebraicGeometry.Etale
 #print axioms exists_equivariant_integralOrientation_iso_of_etale_reductions
 #print axioms purityFiniteEtaleReadingUpperStarIso
 #print axioms AlgebraicGeometry.ProEtale.upperStarExtendScalarsLimitFreeTowerIso_hom_comp_map_π
+
+#print axioms AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_trace
