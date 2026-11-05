@@ -127,6 +127,7 @@ private theorem isFinitePresentation_of_generators_kernel
   exact D.isFinitePresentation
 
 set_option maxHeartbeats 300000 in
+-- Retain the existing budget for the local-presentation construction (162000 measured heartbeats).
 private theorem isQuasicoherent_and_isFiniteType_of_isCoherent
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
     (h : RingedSpace.IsCoherent X.toRingedSpace F) :
@@ -154,6 +155,7 @@ private theorem isQuasicoherent_and_isFiniteType_of_isCoherent
   exact ⟨inferInstance, h.1⟩
 
 set_option maxHeartbeats 300000 in
+-- Check the slice-kernel transport separately from the forward local-presentation construction.
 private theorem isCoherent_of_isQuasicoherent_and_isFiniteType
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
     (hq : F.IsQuasicoherent) (ht : F.IsFiniteType) :
