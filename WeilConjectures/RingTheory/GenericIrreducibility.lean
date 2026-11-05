@@ -819,6 +819,7 @@ theorem exists_ne_zero_forall_irreducibleSpace_of_hypersurface {A C : Type*} [Co
   -- apply the core theorem to `C'' = Φ(A' ⊗ C) ⊆ F`
   have : Algebra.FiniteType A' Φ.range :=
     Algebra.FiniteType.of_surjective Φ.rangeRestrict Φ.rangeRestrict_surjective
+  have : IsScalarTower A' Φ.range F := .of_algebraMap_eq fun _ ↦ rfl
   have hAC : Function.Injective (algebraMap A' Φ.range) := by
     intro a b hab
     apply hA'F
