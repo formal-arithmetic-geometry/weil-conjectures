@@ -188,10 +188,12 @@
 - Branch: `u9/PZ004`; starting commit: `6a2f94596`.
 - The user instructed continuation after the explicit four-private-helper API patch proposal.
   That patch is now applied, preserving the square comparisons under Mathlib's reversed compositor.
-- Added public and implementation Localization imports for hidden Qh reductions in two modules.
+- Added public and implementation Localization imports for the strict-tower hidden Qh proof reduction.
+- The internal unit map now uses the canonical homotopy factorization; its proof unfolds to rfl.
 - Updated compositor definition bodies, inverse cancellation, and the balancing map_id rewrite.
-- The three-module `ucheck-bump` invocation is queued; it reads the branch when a tree is acquired.
+- All three assigned modules passed `ucheck-bump` at source commit `e6ef96a921` (4749 jobs).
+- Full unit log: `/home/ubuntu/u9/bz/BUILD-PZ004-unit-green-full.log`.
 - Exact prior errors: `/home/ubuntu/u9/bz/BUILD-PZ004-prior-errors.log`.
 - Fix records and whole-tree inventories: `/home/ubuntu/u9/bz/FIXES-PZ004.md`.
-- Next: validate all three modules, resolve remaining owned errors, continue downstream, write DONE.
+- Next: validate four direct importers, resolve owned downstream errors, then write DONE.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
