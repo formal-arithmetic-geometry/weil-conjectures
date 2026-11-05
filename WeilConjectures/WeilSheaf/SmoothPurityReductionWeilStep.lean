@@ -106,10 +106,7 @@ theorem isWeilEquivariant_derivedReductionStep (g : X ⟶ X) (n : ℕ)
     (Profinite.integersModPowRingObjTransition ℓ E n)
     (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) g
     (Profinite.padicIntegersRingObjToIntegersModPow_comp_integersModPowRingObjTransition ℓ E n)
-  exact purity_isWeilEquivariant_reduction
-    (purityIntegralReduction X ℓ E (n + 1))
-    (Mod.extendScalars (integersModPowTransition X ℓ E n)).leftDerivedFunctor
-    (purityIntegralReduction X ℓ E n)
-    α β γ μ hcomp φK φL s hs
+  have h := purity_isWeilEquivariant_reduction _ _ _ α β γ μ hcomp φK φL s hs
+  exact h
 
 end AlgebraicGeometry.ProEtale
