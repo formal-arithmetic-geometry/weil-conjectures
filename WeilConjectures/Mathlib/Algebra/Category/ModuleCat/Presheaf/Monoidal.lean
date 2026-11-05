@@ -79,7 +79,7 @@ noncomputable def freeYonedaProdIso :
       dsimp
       erw [ConcreteCategory.comp_apply, ModuleCat.free_map_apply, ModuleCat.free_map_apply]
       erw [ModuleCat.FreeMonoidal.μIso_inv_freeMk, ModuleCat.FreeMonoidal.μIso_inv_freeMk]
-      erw [PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul]
+      erw [Monoidal.tensorObj_map_tmul]
       dsimp
       erw [ModuleCat.freeDesc_apply, ModuleCat.freeDesc_apply]
       simp)
