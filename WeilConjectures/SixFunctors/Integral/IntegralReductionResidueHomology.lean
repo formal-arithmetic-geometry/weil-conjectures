@@ -155,7 +155,6 @@ set_option quotPrecheck false in
 local notation "Res" φ:arg => SheafOfModules.restrictScalars.{max a b}
   ((sheafCompose J (forget₂ CommRingCat.{max a b} RingCat.{max a b})).map φ)
 
-omit [HasSheafify J AddCommGrpCat.{max a b}] in
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensorComparison (φ : R ⟶ S) :
     letI := SheafOfModules.monoidalCategory R
@@ -288,7 +287,6 @@ private theorem presentationModelIso (φ : R ⟶ S)
       ((F.mapHomologicalComplex (.up ℤ)).obj P) ≪≫
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex t.symm (.up ℤ)).app P)⟩
 
-omit [HasSheafify J AddCommGrpCat.{max a b}] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ordinaryRestrictionTensorIso (φ : R ⟶ S)
