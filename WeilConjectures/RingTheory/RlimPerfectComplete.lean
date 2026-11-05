@@ -421,8 +421,8 @@ theorem rlim_perfect_complete {A : Type u} [CommRing A] (I : Ideal A)
         (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso
       (ModuleCat.restrictScalarsComp' (q (n + 1)) (φ n) (q n) (hq n)) ≪≫
-        (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars (φ n))).symm
-          (ModuleCat.restrictScalars (q (n + 1)))
+        (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars (φ n))
+          (ModuleCat.restrictScalars (q (n + 1)))).symm
   have hχ := fun n ↦ restrictScalarsComp_derived_factors
     (q (n + 1)) (φ n) (q n) (hq n)
   have htri : IsDerivedLimitTriangle
