@@ -172,3 +172,11 @@
   applied the same correction in KFlatResolutionIndependentCoefficients:132.
 - Corrected the dependency scan to include import all and trailing import comments.
   All three changes are the same one-line proof-body replacement.
+
+- Assigned module and all four selected direct importers passed together at
+  `5b2cf87cce` (rc=0, failed=0, 4423 jobs).
+- All three compatibility-lemma dependency corrections are validated.
+- Green log: `/home/ubuntu/u9/logs/BZ539-20261106T041952.log`;
+  local full copy: `/home/ubuntu/u9/bz/BUILD-BZ539-layer1-full.log`.
+- Checking second-layer importers ChangeOfCoefficientsPullCounit and
+  DerivedPullIsoCoherenceLowerStar next; skip failures in unowned dependencies.
