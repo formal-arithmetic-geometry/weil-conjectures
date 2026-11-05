@@ -58,11 +58,15 @@ lemma preimageIso_liftSquareWithComparisons_comp :
   have hn := cG'.inv.naturality
     ((preimageIso_liftSquareWithComparisons cF cF' hA hB eF).hom.app K)
   dsimp only [Functor.comp_map, ObjectProperty.ι_map] at hn
-  rw [← hn, preimageIso_liftSquareWithComparisons_hom_app_hom]
-  simp only [Functor.map_comp, Category.assoc]
+  have hh := congrArg
+    (fun t ↦ TC.map (cG.hom.app (FR.obj K)) ≫ eG.hom.app (FR.obj K).obj ≫ t) hn
+  simp only [preimageIso_liftSquareWithComparisons_hom_app_hom,
+    Functor.map_comp, Category.assoc] at hh
   have he := eG.hom.naturality (cF.hom.app K)
-  dsimp only [Functor.comp_map, Functor.comp_obj, ObjectProperty.ι_obj] at he
-  rw [reassoc_of% he]
+  dsimp +instances only [Functor.comp_map, Functor.comp_obj,
+    ObjectProperty.ι_obj] at he hh ⊢
+  rw [← reassoc_of% he] at hh
+  exact hh
 
 
 end CategoryTheory.ObjectProperty
