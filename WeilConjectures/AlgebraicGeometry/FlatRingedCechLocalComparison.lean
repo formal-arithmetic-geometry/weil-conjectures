@@ -52,6 +52,11 @@ private noncomputable def rawScalarIso
   induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul m b =>
+    let : Module (R.obj.obj Y)
+        ((ModuleCat.restrictScalars
+          (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map g).hom).obj
+            (M.val.obj Y)) :=
+      inferInstanceAs (Module (R.obj.obj Y) (M.val.obj Y))
     change B.obj.map g b ⊗ₜ[R.obj.obj Y, (φ.hom.app Y).hom] M.val.map g m =
       SheafOfModules.changeOfRingsMap φ M g
         (b ⊗ₜ[R.obj.obj X, (φ.hom.app X).hom] m)
