@@ -37,8 +37,8 @@ noncomputable def rightDerivedSingleUnit (F : C ⥤ D) [F.Additive] (M : C) :
     (DerivedCategory.singleFunctor D 0).obj (F.obj M) ⟶
       F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M) :=
   DerivedCategory.Q.map ((F.mapCochainComplexSingleFunctor 0).inv.app M) ≫
-    F.rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient C (.up ℤ)).obj ((CochainComplex.singleFunctor C 0).obj M))
+    cast (by rfl) (F.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj ((CochainComplex.singleFunctor C 0).obj M)))
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -119,6 +119,10 @@ private theorem unit_zero_comparison {C D : Type*}
     dsimp only [DerivedCategory.Plus.homologyFunctor,
       CategoryTheory.Functor.comp_map]
     rw [CategoryTheory.Functor.map_preimage]
+    have hq (K : CochainComplex D ℤ) :
+        (DerivedCategory.quotientCompQhIso D).inv.app K = 𝟙 _ := by
+      rfl
+    simp only [hq, Category.comp_id]
     change _ = (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (F.obj M)).inv ≫
       (DerivedCategory.homologyFunctorFactors D 0).inv.app _ ≫
       (DerivedCategory.homologyFunctor D 0).map (DerivedCategory.Q.map t.inv)
