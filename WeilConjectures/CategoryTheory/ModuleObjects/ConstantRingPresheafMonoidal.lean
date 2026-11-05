@@ -136,8 +136,9 @@ lemma moduleTensorπ_balanced :
         (toMod T N₂).X ≫ moduleTensorπ N₁ N₂ =
       ((α_ (toMod T N₁).X (constRingObj T) (toMod T N₂).X).hom ≫
         (toMod T N₁).X ◁ γ[constRingObj (C := C) T, (toMod T N₂).X]) ≫ moduleTensorπ N₁ N₂ :=
-  NatTrans.ext (funext fun _ ↦ AddCommGrpCat.hom_ext_toIntLinearMap
-    (TensorProduct.ext_threefold fun a (t : T) b ↦ TensorProduct.smul_tmul t a b))
+  NatTrans.ext (funext fun U ↦ AddCommGrpCat.hom_ext_toIntLinearMap
+    (TensorProduct.ext_threefold fun (a : N₁.obj U) (t : T) (b : N₂.obj U) ↦
+      TensorProduct.smul_tmul t a b))
 
 /-- The comparison from the relative tensor product of the module objects associated with `N₁` and
 `N₂` to the objectwise tensor product over `T`, induced by `moduleTensorπ`. -/
