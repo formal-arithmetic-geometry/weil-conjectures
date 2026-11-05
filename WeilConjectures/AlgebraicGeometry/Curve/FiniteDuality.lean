@@ -148,10 +148,12 @@ theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine 
         (PresheafOfModules.homObjUnitInvApp _ ω)).app (op (Over.mk (𝟙 (O a)))) b =
         φ a (b • ω) := by
     refine (hτ _).trans (congrArg (φ a) ?_)
-    change ((PresheafOfModules.homObjUnitInvApp _ ω).app
-      (op (Over.mk (𝟙 (f ⁻¹ᵁ O a))))).hom b = _
+    change ((PresheafOfModules.homObjUnitInvApp
+      (X ↘ Spec (.of k)).relativeDifferentials.val ω).app
+        (op (Over.mk (𝟙 (f ⁻¹ᵁ O a))))).hom b = _
     rw [PresheafOfModules.homObjUnitInvApp_app_apply]
-    exact congrArg (fun m ↦ b • m) (PresheafOfModules.map_id_apply' _ ω)
+    exact congrArg (fun m ↦ b • m)
+      (PresheafOfModules.map_id_apply' (X ↘ Spec (.of k)).relativeDifferentials.val ω)
   constructor
   · rw [injective_iff_map_eq_zero]
     intro ψ hψ
