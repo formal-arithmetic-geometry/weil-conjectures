@@ -356,3 +356,8 @@ BLOCKED: I have not constructed the general Weil purity morphism. The missing co
 ## 2026-11-05 08:34 +0800 — comparison type boundary
 - K4-20261105T082916.log rc=1 (142s) shows geometry abstraction alone did not fix the conversion. Profile: 9.92s whnf at the inverse-square hypothesis application, 128s kernel in the scalar law; the finite-field wrapper also hits whnf.
 - Added an explicit composite-functor result type to purityFactorUnit so its target exactly matches the natural-isomorphism component. Factored forgetting a module iso through a generic transparent helper, inferring its monoidal data from the given module iso. Profiling remains scoped to this file; no heartbeat increases.
+
+## 2026-11-05 08:38 +0800 — use the library instance convention
+- K4-20261105T083403.log rc=1 (115s): explicit composite object types and the generic underlying-iso wrapper did not resolve the boundary. The same inverse-square hypothesis conversion takes9.43s and the scalar proof times out in kernel (103s).
+- Removed our weakly-etale instance-priority override from the new transport files and generalized their core helpers to arbitrary morphisms, using the original GREEN purityExtendPullbackIso. The weakly-etale assumption remains only where the roots theorem needs it. This aligns the core comparison with the upstream generic pullback/forget theorem instead of forcing an alternate instance path.
+- Factored the scalar diagram into SmoothPurityScalarSquare, a purely preadditive-category lemma; the sheaf proof now supplies the two structure equations, the unit equation, and one naturality square. No heartbeat increase; final encoding still unvalidated.

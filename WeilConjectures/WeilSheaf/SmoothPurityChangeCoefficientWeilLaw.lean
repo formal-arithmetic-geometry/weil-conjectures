@@ -90,7 +90,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ ⟶ Λ') [IsMonHom a]
   {k : Type u} [Field k] [Finite k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
 
-attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
 
 variable (M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
   (e : ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj M ≅
@@ -111,7 +110,7 @@ theorem purityChangeCoefficientPullbackIso_weil
           ((Mod.extendScalars (coefficientMap a X)).obj N) := by
   have hW := purityExtendPullbackIso_weil Λ f M N e c he
   have hnat := (pullIso a f.geometricGaloisFrobenius.hom).inv.naturality
-    (purityExtendWeakPullbackIso Λ f.geometricFiberProj M N e).hom
+    (purityExtendPullbackIso Λ f.geometricFiberProj M N e).hom
   simp only [Functor.comp_map] at hnat
   simp only [purityChangeCoefficientPullbackIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
     Functor.mapIso_hom, Functor.map_comp, Category.assoc]

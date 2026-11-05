@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityRationalTrivialization
+public import WeilConjectures.WeilSheaf.SmoothPurityScalarSquare
 public import WeilConjectures.WeilSheaf.CondensedTwistedConstant
 
 /-! # Transport of a scalar Frobenius law with abstract coefficients -/
@@ -40,11 +41,10 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
-  {X U : Scheme.{u}} (p : U ⟶ X) [WeaklyEtale p] (s : U ⟶ U) (hs : s ≫ p = p)
+  {X U : Scheme.{u}} (p : U ⟶ X) (s : U ⟶ U) (hs : s ≫ p = p)
 
 /-- The underlying abelian-sheaf factorization of the geometric Frobenius pullback. -/
 noncomputable def purityAbelianFactorIso :
@@ -86,7 +86,6 @@ lemma purityFactorUnit_structure
     (purity_underlyingModuleIso ((purityModuleFactorIso Λ p s hs).app M))
     (purityFactorUnit Λ p s M) (CondensedRing.upperStarUnitHom Λ p M) h
 
-attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
 
 variable (M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
   (e : ((p)^*[Ab.{u + 1}].mapMod _).obj M ≅
@@ -99,30 +98,38 @@ theorem purityExtendPullbackIso_factor
         (purityAbelianFactorIso p s hs).hom.app N.X =
       c • ((purityAbelianFactorIso p s hs).hom.app M.X ≫ e.hom.hom)) :
     c • ((purityModuleFactorIso Λ p s hs).hom.app M ≫
-        (purityExtendWeakPullbackIso Λ p M N e).hom) =
+        (purityExtendPullbackIso Λ p M N e).hom) =
       (s)^*⟦Λ⟧.map
-          (purityExtendWeakPullbackIso Λ p M N e).hom ≫
+          (purityExtendPullbackIso Λ p M N e).hom ≫
         (purityModuleFactorIso Λ p s hs).hom.app N := by
   have : IsIso (purityFactorUnit Λ p s M) := by
     dsimp only [purityFactorUnit]
     infer_instance
   have hunit : CondensedRing.upperStarUnitHom Λ p M ≫
-        (purityExtendWeakPullbackIso Λ p M N e).hom.hom =
+        (purityExtendPullbackIso Λ p M N e).hom.hom =
       e.hom.hom ≫ CondensedRing.upperStarUnitHom Λ p N := by
-    exact purityExtendWeakPullbackIso_unit Λ p M N e
-  have hstructureN := purityFactorUnit_structure Λ p s hs N
-  dsimp only [purityFactorUnit] at hstructureN
-  rw [Category.assoc] at hstructureN
+    exact purityExtendPullbackIso_unit Λ p M N e
+  have hf : purityFactorUnit Λ p s M ≫
+        ((s)^*⟦Λ⟧.map (purityExtendPullbackIso Λ p M N e).hom).hom =
+      (s)^*[Ab.{u + 1}].map e.hom.hom ≫ purityFactorUnit Λ p s N := by
+    dsimp only [purityFactorUnit]
+    rw [Category.assoc, CondensedRing.upperStarUnitHom_map_hom_assoc,
+      ← Functor.map_comp_assoc, hunit, Functor.map_comp, Category.assoc]
   refine Mod.hom_ext _ _ ?_
-  rw [← cancel_epi (purityFactorUnit Λ p s M), Mod.zsmul_hom,
-    Preadditive.comp_zsmul, Mod.comp_hom', Mod.comp_hom',
-    purityFactorUnit_structure_assoc,
-    hunit, purityFactorUnit, Category.assoc,
-    CondensedRing.upperStarUnitHom_map_hom_assoc, ← Functor.map_comp_assoc,
-    hunit, Functor.map_comp_assoc,
-    hstructureN,
-    ← Category.assoc ((s)^*[Ab.{u + 1}].map e.hom.hom), he,
-    Preadditive.zsmul_comp, Category.assoc]
+  simpa only [Mod.zsmul_hom, Mod.comp_hom'] using
+    purity_scalarSquare
+      (purityFactorUnit Λ p s M) (purityFactorUnit Λ p s N)
+      (CondensedRing.upperStarUnitHom Λ p M) (CondensedRing.upperStarUnitHom Λ p N)
+      ((purityAbelianFactorIso p s hs).hom.app M.X)
+      ((purityAbelianFactorIso p s hs).hom.app N.X)
+      (((purityModuleFactorIso Λ p s hs).hom.app M).hom)
+      (((purityModuleFactorIso Λ p s hs).hom.app N).hom)
+      e.hom.hom (purityExtendPullbackIso Λ p M N e).hom.hom
+      ((s)^*[Ab.{u + 1}].map e.hom.hom)
+      (((s)^*⟦Λ⟧.map (purityExtendPullbackIso Λ p M N e).hom).hom) c
+      (purityFactorUnit_structure Λ p s hs M) (purityFactorUnit_structure Λ p s hs N)
+      hunit hf he
+
 
 section FiniteBase
 
@@ -146,9 +153,9 @@ theorem purityExtendPullbackIso_weil
         (purityAbelianFrobeniusFactorIso a).hom.app N₀.X =
       c₀ • ((purityAbelianFrobeniusFactorIso a).hom.app M₀.X ≫ e₀.hom.hom)) :
     c₀ • ((CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).hom.app M₀ ≫
-        (purityExtendWeakPullbackIso Λ a.geometricFiberProj M₀ N₀ e₀).hom) =
+        (purityExtendPullbackIso Λ a.geometricFiberProj M₀ N₀ e₀).hom) =
       (a.geometricGaloisFrobenius.hom)^*⟦Λ⟧.map
-          (purityExtendWeakPullbackIso Λ a.geometricFiberProj M₀ N₀ e₀).hom ≫
+          (purityExtendPullbackIso Λ a.geometricFiberProj M₀ N₀ e₀).hom ≫
         (CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).hom.app N₀ := by
   exact purityExtendPullbackIso_factor Λ a.geometricFiberProj
     a.geometricGaloisFrobenius.hom a.geometricGaloisFrobenius_hom_comp_geometricFiberProj

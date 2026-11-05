@@ -21,9 +21,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
-  {X U : Scheme.{u}} (g : U ⟶ X) [WeaklyEtale g]
+  {X U : Scheme.{u}} (g : U ⟶ X)
 
-attribute [local instance 20000] ProEtale.laxBraided_upperStar_of_weaklyEtale
 
 /-- Change coefficients after extending an isomorphism of pulled-back modules. -/
 noncomputable def purityChangeCoefficientPullbackIso
@@ -34,7 +33,7 @@ noncomputable def purityChangeCoefficientPullbackIso
       (g)^*⟦Λ'⟧.obj ((Mod.extendScalars (coefficientMap a X)).obj N) :=
   ((CondensedRing.pullIso a g).app M).symm ≪≫
     (Mod.extendScalars (coefficientMap a U)).mapIso
-      (purityExtendWeakPullbackIso Λ g M N e) ≪≫
+      (purityExtendPullbackIso Λ g M N e) ≪≫
     (CondensedRing.pullIso a g).app N
 
 /-- Extend a pulled-back trivialization to the final coefficient ring before specializing it. -/
@@ -49,7 +48,7 @@ noncomputable def purityChangeCoefficientTrivialization
     (g)^*⟦Λ'⟧.mapIso (Functor.Monoidal.εIso
       (Mod.extendScalars (coefficientMap a X))).symm
 
-variable {K : Type u} [Field K] (f : U ⟶ Spec (.of K)) (l : ℕ) [Fact l.Prime]
+variable [WeaklyEtale g] {K : Type u} [Field K] (f : U ⟶ Spec (.of K)) (l : ℕ) [Fact l.Prime]
   {ζ : ℕ → K} (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n))
   (hζ' : ∀ n, ζ (n + 1) ^ l = ζ n)
 
