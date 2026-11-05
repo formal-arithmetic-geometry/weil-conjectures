@@ -44,7 +44,7 @@ variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V] [Finite
 `P = σ (det (1 - T A))` satisfies `T P' = - (∑_{n ≥ 1} σ (tr Aⁿ) Tⁿ) P`. -/
 theorem X_mul_derivative_map_charpolyRev {L : Type*} [Field L] (σ : K →+* L)
     (A : Module.End K V) :
-    X * derivative L ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) =
+    X * derivative (R := L) ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) =
       (-PowerSeries.mk fun n ↦ if n = 0 then 0 else σ (LinearMap.trace K V (A ^ n))) *
         ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) := by
   have h := congrArg (PowerSeries.map σ) (X_mul_derivative_charpolyRev A)
@@ -148,10 +148,10 @@ theorem map_charpolyRev_mul_conj_eq_of_trace (ι : K →+* ℂ) {V₂ : Type*} [
     if n = 0 then 0 else ((starRingEnd ℂ).comp ι) (LinearMap.trace K V (A₁ ^ n))
   set T₂' := PowerSeries.mk fun n ↦
     if n = 0 then 0 else ((starRingEnd ℂ).comp ι) (LinearMap.trace K V₂ (A₂ ^ n))
-  have hQ : X * derivative ℂ (P₁ * P₂') = (-(T₁ + T₂')) * (P₁ * P₂') := by
+  have hQ : X * derivative (R := ℂ) (P₁ * P₂') = (-(T₁ + T₂')) * (P₁ * P₂') := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination P₁ * e₂' + P₂' * e₁
-  have hR : X * derivative ℂ (P₁' * P₂) = (-(T₁' + T₂)) * (P₁' * P₂) := by
+  have hR : X * derivative (R := ℂ) (P₁' * P₂) = (-(T₁' + T₂)) * (P₁' * P₂) := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination P₁' * e₂ + P₂ * e₁'
   have h0 : PowerSeries.constantCoeff (P₁ * P₂') = PowerSeries.constantCoeff (P₁' * P₂) := by
