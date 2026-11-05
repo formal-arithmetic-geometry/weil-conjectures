@@ -13,6 +13,9 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
+-- TODO(bump): drop once this file is stated over `PresheafOfModulesOfCommRing`; it used to get the
+-- `CommRing ((R ⋙ forget₂ _ RingCat).obj X)` instance transitively through `Presheaf.InternalHom`.
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # Coefficient actions for scalar localization
