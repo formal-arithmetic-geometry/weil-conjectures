@@ -23,9 +23,6 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-set_option trace.profiler true
-set_option trace.profiler.threshold 1000
-
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
   [DiscreteTopology T] [Finite T]
 
@@ -97,9 +94,10 @@ lemma purity_finiteCoefficient_free_right_square {X Y : Scheme.{u}} (g : X ⟶ Y
   rw [purity_finiteCoefficientInverseForget_inv_app,
     purity_finiteCoefficientInverseForget_inv_app, purity_finiteCoefficient_forget_map,
     Adjunction.functor_map_inverseCompIso_isoCompInverse_inv_app]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc, Equivalence.counitIso_inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp,
+  simp only [Functor.map_comp]
+  rw [← Functor.map_comp_assoc]
+  erw [Equivalence.counitIso_inv_hom_id_app]
+  rw [CategoryTheory.Functor.map_id, Category.id_comp,
     purity_lowerStarFiniteCoefficient_forget_inv, Category.comp_id]
   rfl
 
