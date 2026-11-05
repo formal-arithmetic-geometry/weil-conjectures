@@ -268,7 +268,7 @@ private theorem liftedPairing_smul_right (U : Cᵒᵖ) (a : R.obj U)
   erw [N.map_smul]
   erw [← hp]
   exact (liftedPairing_fac f hH g (op V) p
-    ((R.map i.op a) • (N.map i.op n : N.obj (op V)))).trans
+    ((R.map i.op a) • N.restrictₛₗ i.op n)).trans
     (by
       rw [TensorProduct.tmul_smul, map_smul]
       exact congrArg (fun t : H.obj (op V) ↦ (R.map i.op a) • t)
