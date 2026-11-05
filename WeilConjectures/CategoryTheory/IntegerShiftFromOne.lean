@@ -89,7 +89,8 @@ lemma commShiftIterated_succ (a : I(1 : ℤ)) (n : ℤ) :
           (CommShift.isoZero F ℤ))) hn'
     rw! [show n + 1 - 1 = n by omega] at h
     simp only [CommShift.isoAdd'_isoZero] at h
-    have hh : commShiftIterated F a n = commShiftPredecessor F a n (commShiftIterated F a (n + 1)) := by
+    have hh : commShiftIterated F a n =
+        commShiftPredecessor F a n (commShiftIterated F a (n + 1)) := by
       exact h
     rw [hh, add_commShiftPredecessor]
 
@@ -99,7 +100,8 @@ lemma commShiftIterated_succ' (a : I(1 : ℤ)) (n k : ℤ) (h : n + 1 = k) :
   exact commShiftIterated_succ F a n
 
 lemma commShiftIterated_add' (a : I(1 : ℤ)) (n m k : ℤ) (h : n + m = k) :
-    commShiftIterated F a k = CommShift.isoAdd' h (commShiftIterated F a n) (commShiftIterated F a m) := by
+    commShiftIterated F a k =
+      CommShift.isoAdd' h (commShiftIterated F a n) (commShiftIterated F a m) := by
   induction m using Int.inductionOn' (b := 0) generalizing k with
   | zero =>
     have hk : k = n := by omega
@@ -139,6 +141,7 @@ case follows by adding a on the right, using associativity and the successor
 identity, then cancelling. The comparison at one is a by the left zero identity.
 This proves both CommShift equations and works also for zero functors and zero
 categories. -/
+@[instance_reducible]
 noncomputable def commShiftOfOne (a : I(1 : ℤ)) : F.CommShift ℤ where
   commShiftIso := commShiftIterated F a
   commShiftIso_zero := commShiftIterated_zero F a

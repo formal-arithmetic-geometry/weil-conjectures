@@ -137,6 +137,7 @@ theorem evaluation_ring_app (n : ℕ) (U : Cᵒᵖ) :
   rfl
 
 set_option maxHeartbeats 800000 in
+-- The componentwise comparison of the two sheaves of modules unfolds the system ring.
 /-- A system is determined by its evaluations together with its transitions. -/
 theorem system_ext {X Y : Systems.{c, v, r} J B τ}
     (he : ∀ n, (evaluation.{c, v, r} J B τ n).obj X = (evaluation.{c, v, r} J B τ n).obj Y)
@@ -235,6 +236,7 @@ instance snd_isContinuous :
     (CategoryTheory.Prod.snd ℕ C).IsContinuous (coefficientSequenceTopology J) J :=
   (sectZeroSndAdjunction (C := C)).isContinuous_of_isCocontinuous J _
 
+omit [EssentiallySmall.{max c v r, v, c} C] in
 /-- All composite constant coefficient transitions are identities. -/
 theorem constantRings_map_homOfLE {m n : ℕ} (h : n ≤ m) :
     (rings.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
@@ -246,6 +248,7 @@ theorem constantRings_map_homOfLE {m n : ℕ} (h : n ≤ m) :
     simp only [rings, Functor.ofOpSequence_map_homOfLE_succ, constantCoefficientTransitions]
     exact Category.id_comp _
 
+omit [EssentiallySmall.{max c v r, v, c} C] in
 /-- All constant coefficient transitions are identities. -/
 theorem constantRings_map {m n : ℕᵒᵖ} (g : m ⟶ n) :
     (rings.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
@@ -253,12 +256,14 @@ theorem constantRings_map {m n : ℕᵒᵖ} (g : m ⟶ n) :
   (congrArg _ (Subsingleton.elim _ _)).trans
     (constantRings_map_homOfLE.{c, v, r} J R (leOfHom g.unop))
 
+omit [EssentiallySmall.{max c v r, v, c} C] in
 /-- The constant coefficient maps are identities. -/
 theorem constantCoefficientMap {m n : ℕ} (h : n ≤ m) :
     coefficientMap.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
       (constantCoefficientTransitions.{c, v, r} J R) h = 𝟙 R :=
   constantRings_map_homOfLE.{c, v, r} J R h
 
+omit [EssentiallySmall.{max c v r, v, c} C] in
 /-- The constant ring system is `R` pulled back along the projection. -/
 theorem constantRingPresheaf_map {X Y : (ℕ × C)ᵒᵖ} (f : X ⟶ Y) :
     (ringPresheaf.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)

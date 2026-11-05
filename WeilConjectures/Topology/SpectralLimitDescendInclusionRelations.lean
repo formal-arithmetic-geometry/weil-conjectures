@@ -181,7 +181,7 @@ theorem spectralLimit_descend_inclusion_relations
     (S : I → Type u) [∀ i : I, TopologicalSpace (S i)] [∀ i : I, SpectralSpace (S i)]
     (f : ∀ (i j : I), i ≤ j → S j → S i)
     (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h))
-    (hfid : ∀ (i : I) (x : S i), f i i le_rfl x = x)
+    (_hfid : ∀ (i : I) (x : S i), f i i le_rfl x = x)
     (hfcomp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : S k),
       f i j hij (f j k hjk x) = f i k (hij.trans hjk) x)
     (X : Type v) [TopologicalSpace X] (p : ∀ i : I, X → S i)
