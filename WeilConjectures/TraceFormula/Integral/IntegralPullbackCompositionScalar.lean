@@ -132,6 +132,7 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   have Np := (integralSystemScalarIso l E L ι Z).hom.naturality
     (((integralPullbackComposition l E).choose h k).hom.app K)
   have CE := (integralPullbackComposition l E).choose_spec.2.2 h k K
+  simp only [integralPullbackSystemComparison_choose] at CE
   have mix := NatTrans.congr_app
     ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k)
       ((integralSystemReduction l E V).obj K)
@@ -140,6 +141,7 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (integralSystemTransition l L) h k).hom.naturality
       ((integralSystemScalarIso l E L ι V).hom.app K)
   have CL := (integralPullbackComposition l L).choose_spec.2.2 h k (SV.obj K)
+  simp only [integralPullbackSystemComparison_choose] at CL
   have eE := congrArg (fun a ↦ a.hom.app ((integralSystemReduction l E V).obj K))
     (finiteSystemDerivedComposition_eq_integralComparison l E h k)
   have eL := congrArg (fun a ↦ a.hom.app ((integralComparisonDerivedSequenceScalar l E L ι V).obj

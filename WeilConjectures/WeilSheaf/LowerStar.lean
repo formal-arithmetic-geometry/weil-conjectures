@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteness
 public import WeilConjectures.WeilSheaf.Category
 
 /-!

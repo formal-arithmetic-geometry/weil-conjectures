@@ -72,6 +72,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
+public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 
 /-!
 # Derived completion for pulled-back continuous integral coefficients
@@ -299,7 +300,10 @@ private theorem modules_countableAB4Star : CountableAB4Star (Modules l E X) :=
   .of_epi_π_app_zero (Mod.epiπAppZeroOfEpi
     Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
 
-private def productMap {P P' : CochainComplex (Modules l E X) ℤ} (a : P ⟶ P') :
+/-- The levelwise product map used by the recorded signed Roos chain map.
+Source: the functorial reduction-tower construction
+(blueprint: sk-def-pe-derived-completion). -/
+def productMap {P P' : CochainComplex (Modules l E X) ℤ} (a : P ⟶ P') :
     product l E X P ⟶ product l E X P' :=
   Limits.Pi.map (fun n ↦ (level l E X n).map a)
 
@@ -334,7 +338,13 @@ private theorem genericRoosMap_comm
       Preadditive.sub_comp, sub_left_inj]
     rw [hs (i + 1 - 1)]
 
-private theorem roosMap_comm {P P' : CochainComplex (Modules l E X) ℤ}
+/-- The recorded coordinatewise product map commutes with the signed Roos differential.
+Source: the functorial reduction-tower construction
+(blueprint: sk-def-pe-derived-completion).
+Proof: productMap commutes with the one-minus-shift operator because the quotient
+tensor transitions are natural. Apply the chain-map equations to the first coordinate
+and this commutation equation to the second; both mixed differential terms agree. -/
+theorem roosMap_comm {P P' : CochainComplex (Modules l E X) ℤ}
     (a : P ⟶ P') (i : ℤ) :
     biprod.map ((productMap l E X a).f i) ((productMap l E X a).f (i - 1)) ≫
         (roos l E X P').d i (i + 1) =
@@ -345,7 +355,10 @@ private theorem roosMap_comm {P P' : CochainComplex (Modules l E X) ℤ}
     using genericRoosMap_comm (oneSubShift l E X P) (oneSubShift l E X P')
     (productMap l E X a) (productMap_oneSubShift l E X a) i
 
-private def roosMap {P P' : CochainComplex (Modules l E X) ℤ} (a : P ⟶ P') :
+/-- The coordinatewise chain map of the recorded signed Roos model.
+Source: functoriality of the derived-completeness construction
+(blueprint: sk-def-pe-derived-completion). -/
+def roosMap {P P' : CochainComplex (Modules l E X) ℤ} (a : P ⟶ P') :
     roos l E X P ⟶ roos l E X P' :=
   CochainComplex.ofHom
     (fun i ↦ biprod.map ((productMap l E X a).f i) ((productMap l E X a).f (i - 1)))

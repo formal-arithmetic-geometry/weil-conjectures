@@ -20,6 +20,9 @@ import Mathlib.CategoryTheory.Sites.Adjunction
 import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
+public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 
 /-! # Local integral torsion and quotient charts -/
 
@@ -881,6 +884,18 @@ private noncomputable def chartSetPullbackIso {X Y : Scheme.{u}} (f : Y ⟶ X)
     infer_instance
   exact (sheafPullbackForgetIso (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y)
     (Scheme.proEtaleBaseChange f) (forget Ab.{u + 1})).app M
+
+private noncomputable def chartConstantPullbackIso {X Y : Scheme.{u}} (f : Y ⟶ X) :
+    constantSheaf (Scheme.ProEt.topology X) (Type (u + 1)) ⋙
+      Scheme.proEtaleSheafInverseImage f (Type (u + 1)) ≅
+    constantSheaf (Scheme.ProEt.topology Y) (Type (u + 1)) := by
+  let G := Scheme.proEtaleBaseChange f
+  let hT := terminalIsTerminal (C := X.ProEt)
+  exact Functor.isoWhiskerLeft _
+      (Functor.sheafPullbackConstruction.sheafPullbackIso G (Type (u + 1))
+        (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y)).symm ≪≫
+    G.constantSheafsheafPullbackIso (Type (u + 1))
+      (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y) hT (hT.isTerminalObj G)
 
 private abbrev ScalarChart {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]

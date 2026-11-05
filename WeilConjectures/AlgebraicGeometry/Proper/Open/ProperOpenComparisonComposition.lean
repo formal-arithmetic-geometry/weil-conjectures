@@ -141,8 +141,9 @@ noncomputable def properOpenDirectImageCompIso (Λ : Type (u + 1)) [CommRing Λ]
     (lowerStar (ModuleCat.{u + 1} Λ) f) (lowerStar (ModuleCat.{u + 1} Λ) g)
     (lowerStarComp (ModuleCat.{u + 1} Λ) f g)
 
-/-- Proper-open comparisons compose, using the canonical derived direct-image identification.
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-sf-operations, order 1842
+/-- Proper-open comparisons compose, using the canonical derived direct-image identification,
+for any commutative coefficient ring `Λ`.
+Source: blueprint (latest), sk-prop-sf-comp-coherence, order 2508
 (blueprint: lem-weil-pbc-proper-open-comparison-composition).
 
 Proof:
@@ -156,18 +157,18 @@ Transpose both candidate comparisons under `j₃! ⊣ j₃^*`. After postcomposi
 with `t_(fg)`, naturality of `t_g` and the three normalization equations reduce
 both transposes to the unit for `j₁! ⊣ j₁^*`. That unit and `θ_(fg)` are invertible,
 so cancellation proves equality of transposes and hence of the original maps. -/
-theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+theorem properOpenComparisonOfCommRing_comp (Λ : Type (u + 1)) [CommRing Λ]
     {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃)
     [IsProper f] [IsProper g]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (j₃ : X ⟶ T₃)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃]
     (hf : j₁ ≫ f = j₂) (hg : j₂ ≫ g = j₃)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    properOpenComparison Λ (f ≫ g) j₁ j₃
+    properOpenComparisonOfCommRing Λ (f ≫ g) j₁ j₃
         ((Category.assoc j₁ f g).symm.trans ((congrArg (· ≫ g) hf).trans hg)) K =
-      properOpenComparison Λ g j₂ j₃ hg K ≫
+      properOpenComparisonOfCommRing Λ g j₂ j₃ hg K ≫
         (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) g).map
-          (properOpenComparison Λ f j₁ j₂ hf K) ≫
+          (properOpenComparisonOfCommRing Λ f j₁ j₂ hf K) ≫
         (properOpenDirectImageCompIso Λ f g).hom.app
           ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K) := by
   let A := ModuleCat.{u + 1} Λ
@@ -223,11 +224,30 @@ theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (lowerStar A g).rightDerivedFunctorPlus (lowerStar A (f ≫ g)).rightDerivedFunctorPlus
     c (restriction adjF U₁ U₂ kf) (restriction adjG U₂ U₃ kg)
     (restriction adjH U₁ U₃ kh) ht K
-    (properOpenIdentification Λ f j₁ j₂ hf K)
-    (properOpenIdentification Λ g j₂ j₃ hg K)
-    (properOpenIdentification Λ (f ≫ g) j₁ j₃ hfg K)
-    (properOpenIdentification_unit Λ f j₁ j₂ hf K)
-    (properOpenIdentification_unit Λ g j₂ j₃ hg K)
-    (properOpenIdentification_unit Λ (f ≫ g) j₁ j₃ hfg K)
+    (properOpenIdentificationOfCommRing Λ f j₁ j₂ hf K)
+    (properOpenIdentificationOfCommRing Λ g j₂ j₃ hg K)
+    (properOpenIdentificationOfCommRing Λ (f ≫ g) j₁ j₃ hfg K)
+    (properOpenIdentificationOfCommRing_unit Λ f j₁ j₂ hf K)
+    (properOpenIdentificationOfCommRing_unit Λ g j₂ j₃ hg K)
+    (properOpenIdentificationOfCommRing_unit Λ (f ≫ g) j₁ j₃ hfg K)
+
+/-- The finite-coefficient case of `properOpenComparisonOfCommRing_comp`, kept for its existing
+users (`properOpenComparison` is `properOpenComparisonOfCommRing` at a finite ring).
+(blueprint: lem-weil-pbc-proper-open-comparison-composition). -/
+theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃)
+    [IsProper f] [IsProper g]
+    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (j₃ : X ⟶ T₃)
+    [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃]
+    (hf : j₁ ≫ f = j₂) (hg : j₂ ≫ g = j₃)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    properOpenComparison Λ (f ≫ g) j₁ j₃
+        ((Category.assoc j₁ f g).symm.trans ((congrArg (· ≫ g) hf).trans hg)) K =
+      properOpenComparison Λ g j₂ j₃ hg K ≫
+        (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) g).map
+          (properOpenComparison Λ f j₁ j₂ hf K) ≫
+        (properOpenDirectImageCompIso Λ f g).hom.app
+          ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K) :=
+  properOpenComparisonOfCommRing_comp Λ f g j₁ j₂ j₃ hf hg K
 
 end AlgebraicGeometry.Etale

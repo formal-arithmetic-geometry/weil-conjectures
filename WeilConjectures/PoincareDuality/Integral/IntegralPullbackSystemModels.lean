@@ -11,6 +11,8 @@ public import WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizatio
 public import WeilConjectures.SmoothPurity.CompletedOperations.NormalizedCompletedOperationModels
 public import WeilConjectures.TraceFormula.Supporting.EffectiveQuotientModelDescent
 import WeilConjectures.PoincareDuality.Integral.IntegralPullbackCounitProjection
+import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientRealizationsUnique
+import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedQuotientPullbackRealizationNormalization
 
 /-! # The pinned system comparison of integral pullback
 
@@ -205,5 +207,46 @@ theorem integralPullbackSystemIso_evaluation {X Y : Scheme.{u}}
   simp only [integralPullbackSystemTransformation, S, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_obj] at h'' ⊢
   exact h''
+
+/-- The pinned pullback realization model is the transported completed-quotient realization.
+Source: Stacks 099N(5), 0941 (blueprint: lem-pod-integral-pullback-system-comparison).
+Proof: both are normalized pullback models for the same calculus and Roos model, and
+normalized realizations are unique. -/
+theorem integralSystemPullbackModel_realization {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (hX : ∀ x : X, IsUnit (l : X.residueField x))
+    (hY : ∀ y : Y, IsUnit (l : Y.residueField y)) :
+    (integralSystemPullbackModel l E f hX hY).realization =
+      CompletedQuotient.completedQuotientPullbackRealization l E f := by
+  have hd := effectiveQuotientModelDescent l E E (AlgHom.id _ _) f hX hY
+    (coefficientDerivedSystemEvaluationCalculus l E Y).choose
+    (coefficientDerivedSystemEvaluationCalculus l E X).choose
+    (coefficientDerivedSystemEvaluationCalculus l E Y).choose
+    (integralSystemRoos l E X hX) (integralSystemRoos l E Y hY)
+  let M : IntegralComparisonPullbackModel l E f
+      (coefficientDerivedSystemEvaluationCalculus l E Y).choose (integralSystemRoos l E X hX) :=
+    ⟨CompletedQuotient.completedQuotientPullbackRealization l E f,
+      CompletedQuotient.completedQuotientPullbackRealization_normalized l E f
+        (integralSystemRoos l E X hX)⟩
+  exact (primitiveQuotientRealizations_unique l E E (AlgHom.id _ _) f
+    (coefficientDerivedSystemEvaluationCalculus l E Y).choose (integralSystemRoos l E X hX)
+    (integralSystemRoos l E Y hY) M hd.2.2.some).1 (integralSystemPullbackModel l E f hX hY)
+
+/-- The whole-system comparison chosen in integralPullbackSystemComparison is the pinned
+comparison integralPullbackSystemIso.
+Source: Stacks 099N(5), 0941 (blueprint: lem-pod-integral-pullback-system-comparison).
+Proof: both components are the reduction of the same realization followed by the coherent
+counit (integralSystemPullbackModel_realization). -/
+theorem integralPullbackSystemComparison_choose {X Y : Scheme.{u}}
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :
+    (integralPullbackSystemComparison l E).choose f = integralPullbackSystemIso l E f := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  rw [(integralPullbackSystemComparison l E).choose_spec.2 f K,
+    integralPullbackSystemIso_hom_app]
+  simp only [integralPullbackSystemTransformation, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, integralSystemPullbackModel_realization]
+  rfl
 
 end WeilConjectures
