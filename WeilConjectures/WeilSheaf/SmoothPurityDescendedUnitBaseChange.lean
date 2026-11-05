@@ -60,7 +60,9 @@ noncomputable def descendedShriekGeometricExchange :
 /-- The actual descended smooth trace is universal in the Weil category if its
 unit base-change component is invertible. This is the non-proper shriek bridge. -/
 theorem geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange
-    (e : (boundedConstructibleUpperStarOfMap l Y.hom.geometricFiberProj).obj (𝟙_ _) ≅ 𝟙_ _)
+    (e : (boundedConstructibleUpperStarOfMap l (X := Y)
+      (Y := Over.mk Y.hom.geometricFiberToAlgebraicClosure)
+      Y.hom.geometricFiberProj).obj (𝟙_ _) ≅ 𝟙_ _)
     [IsIso (smoothUnitBaseChange l f (traceGeometricFiberOverMap f)
       (descendedShriekGeometricExchange l f) e.hom)]
     (d : ℕ) [SmoothOfRelativeDimension d f.left]
