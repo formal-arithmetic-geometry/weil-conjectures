@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.TateFrobeniusPullbackNaturality
+public import WeilConjectures.WeilSheaf.CondensedModelDescent
 
 /-! # Frobenius on the underlying root trivialization -/
 

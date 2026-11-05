@@ -23,7 +23,7 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [BraidedCatego
   {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] [BraidedCategory D]
   [HasCoequalizers D] [∀ X : D, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
   [∀ X : D, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
-  (F : C ⥤ D) [F.Braided] [PreservesColimitsOfShape WalkingParallelPair F]
+  (F : C ⥤ D) [F.Braided]
   {R : C} [MonObj R] [IsCommMonObj R]
 
 /-- Postcomposing a trivialization with the mapped unit does not change its underlying map. -/
