@@ -87,20 +87,21 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
 - This completion commit changes only progress documentation; Lean source matches the green build.
 
-# BZ307 complete
+# BZ311 complete
 
-- Branch: `u9/BZ307`; starting commit: `ec1bc636d93cb23a821cc484ab6aef1db014813f`.
-- Assigned `RightDerivedFunctor.CommIsoComp` and three downstream modules passed together:
-  `HomotopyCategory.MateCounit`, `IsoAlgebraDerivedRightAdjointFree`, and
-  `IsoAlgebraDerivedRightAdjointCounit`.
-- Final `ucheck-bump`: rc=0, failed=0, 2143 jobs, on `poolb:43.166.74.12`.
-- Validated source commit: `fadcb6a99f64bef30efc7db992eb12fb2d852d0e`. This completion commit changes documentation only.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ307-downstream2-full.log`.
-- The user instructed continuation after the exact two-expression statement proposal.
-  Applied the compositor orientation substitutions and matching proof migration;
-  other declarations and all existing docstrings are unchanged.
-- Two direct importers were skipped after failures in dependencies owned by BZ289,
-  BZ290, and BZ291. Their errors are recorded in the fix log.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ307.DONE`.
+- Branch: `u9/BZ311`; starting commit: `ec1bc636d`.
+- Assigned module and both downstream layers passed `ucheck-bump` together:
+  rc=0, failed=0, 1935 jobs, on `poolb:43.166.72.113`.
+- Validated source commit: `d599eea1699030daa1a58ff564ab648fb03d536e`.
+- Green modules: `WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport`,
+  `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula`,
+  and `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization`.
+- The user instructed continuation after the exact three-statement proposal.
+  Those canonical quotientCompQhIso endpoint transports are the only Lean changes;
+  all proof bodies, declaration binders, assumptions, and docstrings are unchanged.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ311-final-full.log`.
+- Fix pattern and whole-tree candidate count: `/home/ubuntu/u9/bz/FIXES-BZ311.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ311-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
