@@ -246,14 +246,15 @@
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
 
-# BZ856 in progress
+# BZ857 in progress
 
-- Branch: `u9/BZ856`; original start: `2ab2b07a3`.
-- Reread the brief and prior notes on continuation; no new LEAD lines were present.
-- User instructed continuation after the explicit five-upstream-module restoration proposal.
-  The six deleted prerequisites are restored from the reviewed draft, retaining later
-  repairs to surviving helpers. They now need remote Lean 4.35 validation and porting.
-- Merged integrated bump branch `db406319f` before restoring the prerequisites.
-- Assigned theorem remains intact: it has live callers and cannot be pruned.
-- Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
-- No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
+- Branch: `u9/BZ857`; initial baseline `2ab2b07a3`.
+- User instructed continuation after the explicit four-upstream-module restoration proposal.
+- Merged integrated bump commit `db406319f` before restoring the required proof chain.
+- Restoring projection-unit normalization, mixed projection mate, signed normalization,
+  and mate data. Assigned theorem statement remains unchanged.
+- Applying known scalar carrier and canonical Q/Qh comparison repairs.
+- Baseline ucheck-bump remains queued; it will build the pushed branch when a tree is free.
+- Next: validate the leaf and attempt its two direct importers, then downstream layers.
+- Notes: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
