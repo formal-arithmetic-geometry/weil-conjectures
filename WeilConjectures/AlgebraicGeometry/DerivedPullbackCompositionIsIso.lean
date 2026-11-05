@@ -115,11 +115,12 @@ theorem isIso_derivedPullbackCompositionLift
       (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
       (tensorPullback_kFlat g P hP)
     have hf' : IsIso ((ε f).app
-        (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (ComplexShape.up ℤ)).obj
-          ((HomotopyCategory.quotient
-            (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ)).obj P))) := by
-      rw [Functor.mapHomotopyCategory_obj]
-      exact hf
+        ((HomotopyCategory.quotient
+          (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)).obj
+          (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+            ((HomotopyCategory.quotient
+              (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace))
+                (ComplexShape.up ℤ)).obj P).as))) := hf
     have fac := (derivedPullback (f ≫ g)).leftDerived_fac_app (ε (f ≫ g))
       (HomotopyCategory.quasiIso
         (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ))
