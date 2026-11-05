@@ -62,17 +62,6 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-namespace ProEtale
-
-/-- The iterates of an endomorphism add: `g^(m + n) = g^n ≫ g^m`. -/
-lemma iterateHom_add {X : Scheme.{u}} (g : X ⟶ X) (m n : ℕ) :
-    iterateHom g (m + n) = iterateHom g n ≫ iterateHom g m := by
-  induction n with
-  | zero => simp
-  | succ n ih => rw [← Nat.add_assoc, iterateHom_succ, ih, iterateHom_succ, Category.assoc]
-
-end ProEtale
-
 open Scheme
 
 open ProEtale (iterateHom iterateHom_succ iterateHom_add)

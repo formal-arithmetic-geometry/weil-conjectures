@@ -12,6 +12,7 @@ public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.ZetaFunction.CohomologicalFamily
+public import WeilConjectures.ZetaFunction.DualityReciprocity
 public import WeilConjectures.ZetaLinearAlgebra.AlternatingEulerProduct
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TracePow
 
@@ -233,33 +234,11 @@ theorem roots_frobeniusCharpolyRev_rev (hdual : ∀ i j : ℤ, i + j = 2 * d →
   refine Multiset.map_congr rfl fun z _ ↦ ?_
   simp [div_eq_mul_inv]
 
-/-- Blueprint `corollary-functional-equation` (functional equation, cohomological form, from
-the duality inputs): let `X₀` be proper over `k₀ = 𝔽_q`, `ℓ ≠ p`, `d ≥ 0`,
-`Hⁱ = Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` with Frobenius `Fᵢ`, `bᵢ = dim Hⁱ`, `χ = ∑ᵢ (-1)ⁱ bᵢ`,
-`D = ∏ᵢ det(Fᵢ)^{(-1)ⁱ}` and `Z(t) = ∏ᵢ det(1 - t Fᵢ)^{(-1)^{i+1}}` (the products over
-`0 ≤ i ≤ 2d`; `Z` is the rational function whose expansion is the zeta series,
-`AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`), and assume the
-two consequences of Poincaré duality used in the blueprint proof:
-
-* (`hdual`) the eigenvalues of `F` on `H^j` are the `qᵈ / α` for the eigenvalues `α` of `F` on
-  `Hⁱ`, `i + j = 2d`, with multiplicity;
-* (`hmid`) for odd `d`, `b_d` is even (the middle pairing is alternating).
-
-Then
-
-* `b_{2d-i} = bᵢ`;
-* `d χ` is even;
-* `D² = q^{dχ}`;
-* `Z(1/(qᵈ t)) = (-1)^χ D t^χ Z(t)` for every `t ≠ 0` in `ℚ̄_ℓ`;
-* writing `d χ = 2 m`, the sign `ε = (-1)^χ D q^{-m}` is `±1` and
-  `Z(1/(qᵈ t)) = ε q^m t^χ Z(t)` for every `t ≠ 0`.
-
-The identities at all `t ≠ 0` of the infinite field `ℚ̄_ℓ` are the identity of rational functions
-of the blueprint (the value of a rational function at a pole being `0` on both sides). For `X₀`
-smooth, proper and geometrically connected of pure dimension `d`, both hypotheses are clauses of
-`AlgebraicGeometry.WeilSheaf.poincareDuality`, which is not yet sorry-free in the library; they
-are therefore kept as hypotheses. -/
-theorem functional_equation_frobeniusCharpolyRev (hdual : ∀ i j : ℤ, i + j = 2 * d →
+/-- The functional equation `AlgebraicGeometry.Scheme.functional_equation_frobeniusCharpolyRev`
+from its two duality inputs: the reciprocity of the Frobenius eigenvalues (`hdual`) and the
+evenness of the middle Betti number for odd `d` (`hmid`). -/
+private theorem functional_equation_frobeniusCharpolyRev_of_reciprocity
+    (hdual : ∀ i j : ℤ, i + j = 2 * d →
       ((WeilSheaf.adicConstant k₀ l X).cohomology j).frobeniusEnd.charpoly.roots =
         ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.charpoly.roots.map
           fun α ↦ (Nat.card k₀ : PadicAlgCl l) ^ d / α)
@@ -393,6 +372,84 @@ theorem functional_equation_frobeniusCharpolyRev (hdual : ∀ i j : ℤ, i + j =
     linear_combination (-((-1) ^ alternatingNatDegreeSum P * (∏ i : Fin (2 * d + 1),
         ((-1) ^ (P i).natDegree * (P i).leadingCoeff) ^ ((-1 : ℤ) ^ (i : ℕ))) *
         t ^ alternatingNatDegreeSum P * alternatingProdEval P t)) * hqm
+
+variable [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+  [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- Blueprint `corollary-functional-equation` (functional equation, cohomological form): let `X₀`
+be smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, `ℓ ≠ p`,
+`Hⁱ = Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` with Frobenius `Fᵢ`, `bᵢ = dim Hⁱ`, `χ = ∑ᵢ (-1)ⁱ bᵢ`,
+`D = ∏ᵢ det(Fᵢ)^{(-1)ⁱ}` and `Z(t) = ∏ᵢ det(1 - t Fᵢ)^{(-1)^{i+1}}` (the products over
+`0 ≤ i ≤ 2d`; `Z` is the rational function whose expansion is the zeta series,
+`AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`). Then
+
+* `b_{2d-i} = bᵢ`;
+* `d χ` is even;
+* `D² = q^{dχ}`;
+* `Z(1/(qᵈ t)) = (-1)^χ D t^χ Z(t)` for every `t ≠ 0` in `ℚ̄_ℓ`;
+* writing `d χ = 2 m`, the sign `ε = (-1)^χ D q^{-m}` is `±1` and
+  `Z(1/(qᵈ t)) = ε q^m t^χ Z(t)` for every `t ≠ 0`.
+
+The identities at all `t ≠ 0` of the infinite field `ℚ̄_ℓ` are the identity of rational functions
+of the blueprint (the value of a rational function at a pole being `0` on both sides). The two
+inputs from Poincaré duality (`AlgebraicGeometry.WeilSheaf.poincareDuality`) are the reciprocity
+of the Frobenius eigenvalues and, for odd `d`, the evenness of the middle Betti number
+(`AlgebraicGeometry.Scheme.even_finrank_cohomology_middle`). -/
+theorem functional_equation_frobeniusCharpolyRev :
+    (∀ i : Fin (2 * d + 1),
+      Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k₀ l X).cohomology (i.rev : ℕ)).carrier =
+        Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier) ∧
+    Even ((d : ℤ) * ∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) *
+      (Module.finrank (PadicAlgCl l)
+        ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) ∧
+    (∏ i : Fin (2 * d + 1), LinearMap.det
+        ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^
+          ((-1 : ℤ) ^ (i : ℕ))) ^ 2 =
+      (Nat.card k₀ : PadicAlgCl l) ^ ((d : ℤ) * ∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) *
+        (Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) ∧
+    (∀ t : PadicAlgCl l, t ≠ 0 →
+      alternatingProdEval (fun i : Fin (2 * d + 1) ↦ frobeniusCharpolyRev k₀ l X (i : ℕ))
+          (((Nat.card k₀ : PadicAlgCl l) ^ d * t)⁻¹) =
+        (-1) ^ (∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) * (Module.finrank (PadicAlgCl l)
+            ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) *
+          (∏ i : Fin (2 * d + 1), LinearMap.det
+            ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^
+              ((-1 : ℤ) ^ (i : ℕ))) *
+          t ^ (∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) * (Module.finrank (PadicAlgCl l)
+            ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) *
+          alternatingProdEval (fun i : Fin (2 * d + 1) ↦ frobeniusCharpolyRev k₀ l X (i : ℕ))
+            t) ∧
+    ∃ m : ℤ, (d : ℤ) * (∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) * (Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) = 2 * m ∧
+      ((-1) ^ (∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) * (Module.finrank (PadicAlgCl l)
+            ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) *
+          (∏ i : Fin (2 * d + 1), LinearMap.det
+            ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^
+              ((-1 : ℤ) ^ (i : ℕ))) * (Nat.card k₀ : PadicAlgCl l) ^ (-m) = 1 ∨
+        (-1) ^ (∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) * (Module.finrank (PadicAlgCl l)
+            ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) *
+          (∏ i : Fin (2 * d + 1), LinearMap.det
+            ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^
+              ((-1 : ℤ) ^ (i : ℕ))) * (Nat.card k₀ : PadicAlgCl l) ^ (-m) = -1) ∧
+      ∀ t : PadicAlgCl l, t ≠ 0 →
+        alternatingProdEval (fun i : Fin (2 * d + 1) ↦ frobeniusCharpolyRev k₀ l X (i : ℕ))
+            (((Nat.card k₀ : PadicAlgCl l) ^ d * t)⁻¹) =
+          ((-1) ^ (∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) * (Module.finrank (PadicAlgCl l)
+              ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) *
+            (∏ i : Fin (2 * d + 1), LinearMap.det
+              ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^
+                ((-1 : ℤ) ^ (i : ℕ))) * (Nat.card k₀ : PadicAlgCl l) ^ (-m)) *
+            (Nat.card k₀ : PadicAlgCl l) ^ m *
+            t ^ (∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) * (Module.finrank (PadicAlgCl l)
+              ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ)) *
+            alternatingProdEval (fun i : Fin (2 * d + 1) ↦ frobeniusCharpolyRev k₀ l X (i : ℕ))
+              t :=
+  functional_equation_frobeniusCharpolyRev_of_reciprocity k₀ l X d
+    (fun i j h ↦ ((WeilSheaf.poincareDuality k₀ l X d).choose_spec.2.2.2.2.2.2.1 i j h).2)
+    (even_finrank_cohomology_middle k₀ X d l)
 
 end Scheme
 
