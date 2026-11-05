@@ -141,3 +141,37 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ539 in progress
+
+- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
+- Re-read the brief and prior notes on user-requested continuation.
+- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
+  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
+- The coordinator subsequently added the public Mathlib monoidal import in
+  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
+- The proposed compatibility-namespace patch remains unapplied while testing
+  the coordinator's repair.
+- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
+  then check up to four direct importers and one further downstream layer.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
+- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
+
+- The public import resolved the missing name, but the resumed build failed in
+  `InternalHom:375` because its proof mixed new and compatibility map APIs.
+- User continuation followed the explicit one-line dependency patch proposal;
+  that exact compatibility-namespace proof repair is now applied.
+- Retrying the assigned module; declarations and heartbeat settings unchanged.
+
+# BZ547 resumed
+
+- Assigned module: `WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison`.
+- Re-read the brief and progress notes on user-requested continuation.
+- Integrated coordinator fixes through `8af5cb324`; the dependency build then
+  failed in `Presheaf.InternalHom:375` due to mixed tensor restriction APIs.
+- Reused BZ539's exact existing dependency repair from `2a96dae096e7`:
+  select `PresheafOfModules.Monoidal.tensorObj_map_tmul` in the proof.
+- Next: validate the assigned target with ucheck-bump, then its two direct importers
+  and up to four second-layer targets. No DONE marker until the assigned build is green.
+- Notes: `/home/ubuntu/u9/bz/FIXES-BZ547.md`.
+- No local Lean/Lake execution, statement edits, proof placeholders, or limit raises.
