@@ -71,6 +71,7 @@ private theorem unit_single (M : C) :
   have hL : (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app M =
       let S : CochainComplex.Plus C :=
         ⟨(CochainComplex.singleFunctor C 0).obj M, by
+          rw [CochainComplex.plus_iff]
           exact ⟨0, inferInstance⟩⟩
       L.mapDerivedCategoryPlus.map
           ((DerivedCategory.Plus.quotientCompQhIso C).inv.app S) ≫
@@ -87,6 +88,7 @@ private theorem unit_single (M : C) :
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
       Iso.symm_hom, NatTrans.comp_app, Functor.mapIso_hom,
       Category.id_comp]
+    rw [← Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app]
     simp [DerivedCategory.Plus.quotientCompQhIso,
       DerivedCategory.Plus.QhCompιIsoιCompQh, Functor.mapDerivedCategoryPlusCompatibility,
       Functor.mapDerivedCategoryFactorsh_hom_app, Functor.mapHomotopyCategoryFactors,
