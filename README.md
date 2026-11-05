@@ -19,3 +19,8 @@ compares the condensed pullback functors structurally (e.g. a canonical form for
 Variant (Nailin, Zulip #1852): WeilSheaf/SmoothPurityFiniteTateOneReadingSyn.lean — every input of the generic lemma gets a non-exposed synonym
 (`def`, no `@[expose]`), each input iso/equation is restated once for the synonyms (12 small declarations), the generic lemma is applied to the
 synonyms only (syntactic), and the original statement follows by unfolding the synonyms. `set_option profiler true` prints the time of each piece.
+Variant 2 (Nailin, Zulip #1864): WeilSheaf/SmoothPurityFiniteTateOneReadingCoeffSyn.lean — only the two COEFFICIENT RINGS get non-exposed synonyms
+(`coeffRingObj` for `Profinite.integersModPowRingObj`, `coeffType` for `integersModPowCoeff`; plain `def`s, one `rfl` equality lemma each, instances by
+`inferInstanceAs`); α (`coeffPullbackIso`), pullIso⁻¹ (`coeffPullInv`), the comparison functor, the reduction map, the reduction/reading isos and the two
+input equations are rebuilt over the synonyms (one declaration each, checked where the synonyms unfold); the instance is re-run (a) over the synonyms in
+the same module, (b) in the original spelling by unfolding (`…_viaCoeffSyn`), (c) in the separate module …CoeffSynInstance.lean where the synonyms are opaque.
