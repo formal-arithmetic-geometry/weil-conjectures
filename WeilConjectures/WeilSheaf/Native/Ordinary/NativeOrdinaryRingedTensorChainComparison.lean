@@ -8,6 +8,8 @@ module
 public import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryRingedTensorUnderivedData
 public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedAssociatorChainData
 
+import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRingedTensorCoherenceData
+
 /-! # Normalization of the ordinary comparison on tensor complexes -/
 
 @[expose] public noncomputable section
@@ -64,6 +66,6 @@ theorem native_ordinary_ringed_tensor_chain_comparison
           (HomologicalComplex.ιTensorObj Q P q p n hqp).hom))
     (d : NativeOrdinaryRingedTensorUnderivedData b) :
     Nonempty (NativeOrdinaryRingedTensorChainComparison b κ d) := by
-  exact b.ordinary_coherence κ hκ d
+  exact b.ordinary_coherence.2 κ hκ d
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
