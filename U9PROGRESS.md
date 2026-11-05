@@ -273,3 +273,10 @@
 - Next: ucheck-bump on the assigned module and both direct importers, then downstream.
 - Fix patterns and whole-tree inventories: /home/ubuntu/u9/bz/FIXES-BZ885.md.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+- Assigned module and both direct importers passed ucheck-bump at
+  5cca20eeb783db7ec41171a7a488693bd489e3aa: rc=0, failed=0, 5034 jobs.
+- All three rebuilt successfully on poolb:43.166.83.208 (20s, 16s, 10s).
+- Full log: /home/ubuntu/u9/bz/BZ885-build-1-full.log.
+- Continuing through GeometricOperationsBaseExistence, GeometricOperationsExistence,
+  SemilinearOperationsExistence, and SemilinearDerivedSections.
