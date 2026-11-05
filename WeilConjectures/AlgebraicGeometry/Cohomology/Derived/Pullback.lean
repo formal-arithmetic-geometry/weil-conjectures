@@ -78,6 +78,7 @@ lemma tensorSkyscraperStalkToPullbackStalk_naturality {M M' : S.Modules} (φ : M
     stalkTensorEquiv_naturality, ← pullbackStalkMap_naturality]
   congr 1
   induction stalkTensorEquiv M (skyscraperStalk g t) (g t) z using TensorProduct.inductionOn with
+  | zero => simp only [map_zero]
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a b => simp
 
