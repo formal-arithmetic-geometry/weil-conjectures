@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImage
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FormalCompletionPushforwardLift
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Construction of the formal push-pull comparison
 

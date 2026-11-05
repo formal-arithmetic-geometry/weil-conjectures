@@ -120,6 +120,7 @@ import WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceTensorConstraints
 import WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceScalarUnit
 import WeilConjectures.CategoryTheory.Ringed.RingedSignedBidualLocalization
 import WeilConjectures.CategoryTheory.Ringed.RingedOrdinaryEvaluationLocalization
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Canonical coefficient-duality maps on a ringed site
 
 Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A97 and 0A98

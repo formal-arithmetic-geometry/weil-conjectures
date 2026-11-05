@@ -173,7 +173,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 private theorem fourModels_factors
     (P : CochainComplex (Mod.{c, v, max c v r} J₀ R₀) ℤ) :
     ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
-      Functor.mapDerivedCategoryNatIso θ ≪≫ Functor.mapDerivedCategoryCompIso H I).hom.app
+      Functor.mapDerivedCategoryNatIso θ ≪≫ (Functor.mapDerivedCategoryCompIso H I).symm).hom.app
         (DerivedCategory.Q.obj P) ≫ (twoFactors.{c, v, r} J₀ J₂ J₃ R₀ R₂ R₃ H I P).hom =
     (twoFactors.{c, v, r} J₀ J₁ J₃ R₀ R₁ R₃ F G P).hom ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app P) := by

@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.TorsionControlledLocalCocycle
 import WeilConjectures.AlgebraicGeometry.TorsionControlledDescendedSourceComparisons
 import WeilConjectures.Topology.GlueSheavesOfModules
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Algebraic descent with local formal comparisons
 
