@@ -6,7 +6,9 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTatePowersFactor
 public import WeilConjectures.WeilSheaf.SmoothPurityPairTransport
+public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.TateTwistCondensedBridge
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The Tate datum from finite-base descent is the canonical root datum -/
 
@@ -43,7 +45,9 @@ noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
     (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
     ((X ↘ Spec (.of k₀)).geometricFiberProj ≫ (X ↘ Spec (.of k₀)))
     (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure d] at h
-  exact purity_pairIso_transport (frobeniusUpperStarIsoLowerStarInv k₀ ℓ X)
+  rw [← purity_geometricFiberProjUpperStarFrobeniusIso_eq
+    (Profinite.padicAlgClRingObj ℓ) (X ↘ Spec (.of k₀))] at h
+  let e := purity_pairIso_transport (frobeniusUpperStarIsoLowerStarInv k₀ ℓ X)
     ((geometricFiberProjUpperStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ)
       (X ↘ Spec (.of k₀))).app (tateTwistNat X ℓ d))
     (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
@@ -54,6 +58,9 @@ noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
       upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
         (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure d)
     rfl rfl (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricFiberProj
-      (X ↘ Spec (.of k₀)) d) h
+      (X ↘ Spec (.of k₀)) d) (by
+        dsimp only [Iso.app_hom, Functor.comp_obj, Functor.comp_map] at h ⊢
+        cast_proofs h)
+  exact e
 
 end AlgebraicGeometry.WeilSheaf

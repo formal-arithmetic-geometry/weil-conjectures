@@ -53,7 +53,7 @@ theorem purity_rationalRootTrivialization_weil :
       have hr := purity_tateModule_rootTrivialization_frobenius a hζ hζ'
       dsimp only [Functor.comp_obj, Functor.comp_map] at hr ⊢
       run_tac
-        let ht ← Lean.Elab.Term.elabTerm (← `(hr)) none
+        let ht ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hr) none
         let mut pending := #[(← Lean.Meta.inferType ht, ← Lean.Elab.Tactic.getMainTarget)]
         let mut count := 0
         while !pending.isEmpty && count < 20 do
@@ -73,7 +73,7 @@ theorem purity_rationalRootTrivialization_weil :
       cast_proofs hr)
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
   run_tac
-    let ht ← Lean.Elab.Term.elabTerm (← `(h)) none
+    let ht ← Lean.Elab.Term.elabTerm (Lean.mkIdent `h) none
     let mut pending := #[(← Lean.Meta.inferType ht, ← Lean.Elab.Tactic.getMainTarget)]
     let mut count := 0
     while !pending.isEmpty && count < 20 do
