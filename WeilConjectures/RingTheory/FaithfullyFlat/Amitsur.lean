@@ -254,7 +254,6 @@ lemma amitsurCosimplicialObject_δ_hom {n : ℕ} (i : Fin (n + 2)) :
     ((amitsurCosimplicialObject A B M).δ i).hom =
       (amitsurMap A B i.succAbove).toLinearMap.lTensor M := by
   simp [CosimplicialObject.δ, amitsurCosimplicialObject, SimplexCategory.δ]
-  rfl
 
 /-- The algebra homomorphism `B^{⊗ (n + 2)} → B ⊗[A] B^{⊗ (n + 1)}` sending
 `b₀ ⊗ b₁ ⊗ ⋯ ⊗ bₙ₊₁` to `b₀ ⊗ (b₁ ⊗ ⋯ ⊗ bₙ₊₁)`. -/
