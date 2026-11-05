@@ -116,7 +116,7 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ416 in progress
+# BZ416 complete
 
 - Branch: `u9/BZ416`; starting commit: `99a06bbbb`.
 - Assigned module `WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedCompCoherence`
@@ -133,3 +133,5 @@
 - Full downstream log: `/home/ubuntu/u9/bz/BUILD-BZ416-downstream1.log`.
 - Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ416.md`.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ416.DONE`.
+- This final documentation commit leaves the validated Lean source unchanged.
