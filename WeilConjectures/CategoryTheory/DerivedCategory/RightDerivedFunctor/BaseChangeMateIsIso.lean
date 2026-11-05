@@ -208,7 +208,7 @@ lemma mapDerivedCategorySquareIso_hom_app_Q_obj (α : N_D ⋙ F' ≅ F ⋙ N_C)
   erw [hi', CategoryTheory.Functor.map_id, Category.comp_id] at hc'
   erw [hc, mapDerivedCategoryNatIso_fac]
   erw [← hc']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 variable [MonoidalCategory D'] [MonoidalPreadditive D'] [HasCountableCoproducts D']
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D'), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
