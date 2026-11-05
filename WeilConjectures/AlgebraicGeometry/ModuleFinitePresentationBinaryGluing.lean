@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 
 import WeilConjectures.AlgebraicGeometry.ModuleSubmoduleBinaryGluingProperties
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Util.CountHeartbeats
 
 /-! # Gluing a finite presentation and its map across two opens
 
@@ -30,7 +29,8 @@ open CategoryTheory.Limits SheafOfModules
 
 -- Transport across the iterated slice identifies restriction by overMap with over.
 -- Apply the existing finite-presentation locality theorem to the two-open cover.
-#count_heartbeats in
+-- Measured 209607 heartbeats with Lean v4.35.0-rc3 and Mathlib b63f6e8a.
+set_option maxHeartbeats 400000 in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 private theorem finitePresentation_binary_local
