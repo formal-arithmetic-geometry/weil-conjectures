@@ -167,8 +167,8 @@ private theorem homRestrictionIso_augmentation
   rw [← Category.assoc, he]
   simp only [Category.assoc, ← H'.map_comp]
   congr 2
-  ext
-  · change k.inv ≫ R.map a = a' ≫ o.inv
+  apply Prod.hom_ext
+  · change (k.inv ≫ R.map a).op = (a' ≫ o.inv).op
     congr 1
     apply (cancel_mono o.hom).mp
     simp [Category.assoc, ha]
