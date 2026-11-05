@@ -193,27 +193,39 @@
 - This completion commit changes only documentation; Lean source matches the green revision.
 
 
-# BZ671 complete
+# BZ673 complete
 
-- Branch: `u9/BZ671`; starting commit: `940f09365b032f2a461ef753114651a9cff61f84`.
-- Assigned leaf `WeilConjectures.AlgebraicGeometry.DerivedPullbackKFlatTensorModel`
-  and its only direct importer `WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent`
-  passed `ucheck-bump` together: rc=0, failed=0, 3919 jobs.
-- Validated source commit: `d14b1a4d7f`; target times 43s and 31s.
-  The final Lean sources are identical to that green revision.
-- Build host pins independently verified: Lean v4.35.0-rc3 and Mathlib
-  b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
-- The user instructed continuation after the identity-cast proposal. Both public
-  representative equations now use reflexive identity casts on the counit at the
-  tensor complex and the tensor of individual counits. All morphisms are unchanged.
-- Added Localization public/import-all imports. All proof bodies, binders,
-  assumptions, docstrings, and heartbeat settings are unchanged; no proof placeholders.
-- Full green log: `/home/ubuntu/u9/bz/BZ671-unit-downstream1-green-full.log`.
-- Fixes and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ671.md`.
-  Audit: `/home/ubuntu/u9/bz/BZ671-contract-audit.txt`.
-- Optional second-layer check was queued for over 16 minutes without acquiring a
-  build tree. Confirmed all 16 bump trees occupied and 53 active build requests.
-  Cancelled only the verified queued BZ671 scheduler, whose sole child was `sleep 20`.
-  Removed all three unvalidated second-layer edits; no second-layer module claimed green.
-- No local Lean/Lake execution, trust bypasses, heartbeat increases, or profiler probes.
-- Completion marker: `/home/ubuntu/u9/state/BZ671.DONE`.
+- Branch: `u9/BZ673`; starting commit: `940f09365`.
+- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMateIsIso`
+  passed `ucheck-bump`: rc=0, failed=0, 2958 jobs; target rebuilt in 4.0s.
+- Validated source commit: `47f7ab3301a2a2c7599d3457bd0ada2a289a7649`; tree `poolb:43.166.72.219`.
+- User instructed continuation after the exact one-token statement proposal. Applied
+  `.hom` -> `.inv` in `whiskerLeft_Q_leftDerivedFunctorSquareIso_hom` to preserve
+  the map direction under Mathlib's reversed compositor; its cancellation proof now
+  uses `Iso.hom_inv_id_app_assoc`. All other statements and docstrings are unchanged.
+- Unit log: `/home/ubuntu/u9/bz/BZ673-build-3-full.log`.
+- Sole direct importer `WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar`
+  was attempted at `cef460ea9b1ea1dc2d1f2fee35463c7f8390ed66`. The assigned module rebuilt successfully in 5.4s.
+- The importer is blocked by unowned BZ675 module `IdealPowerTorsionFreeSectionCarrier`
+  at line 58 (failed to synthesize instance). Stopped only the verified downstream
+  timeout process after this error; rc=255, failed=1. No downstream source edits.
+- Skipped that importer and its next layer under the brief's external-dependency rule.
+  Only the assigned module is claimed green.
+- Downstream log: `/home/ubuntu/u9/bz/BZ673-downstream-1-full.log`.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ673.md`; audit: `/home/ubuntu/u9/bz/BZ673-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, trust bypasses, heartbeat increases, or profiler probes.
+- Completion marker: `/home/ubuntu/u9/state/BZ673.DONE`.
+- This final documentation update leaves Lean sources identical to the successful unit build.
+
+
+# BZ713 in progress
+
+- Branch: `u9/BZ713`; starting commit: `a5261dcee`.
+- Assigned: `WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition`.
+- The user instructed continuation after the exact one-line identity-cast proposal.
+  Applied `cast (by rfl)` to the counit in `Coordinates.represents`, preserving its map.
+- Localization imports restore hidden Qh reduction in proofs. Every other statement
+  and all existing docstrings remain unchanged. Kept declarations were audited.
+- Verification build submitted through `ucheck-bump`; next: downstream validation.
+- Notes, exact errors, machine rules and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ713.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
