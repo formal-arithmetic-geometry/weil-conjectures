@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import WeilConjectures.WeilSheaf.SmoothPurityTraceUnit
+
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeShriekTraceCriterion
 public import WeilConjectures.WeilSheaf.SmoothPurityDescendedUnitBaseChange
 
@@ -49,12 +51,6 @@ local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :
 local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
-local instance : (boundedConstructible (condensedRingObj
-    (Profinite.padicAlgClRingObj l) Y)).IsMonoidal :=
-  CondensedRing.isMonoidal_boundedConstructible l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
-noncomputable local instance : MonoidalCategory (BoundedConstructible
-    (condensedRingObj (Profinite.padicAlgClRingObj l) Y)) :=
-  ObjectProperty.fullMonoidalSubcategory _
 
 variable (d : ℕ) (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
   (eT : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj ≅
@@ -72,22 +68,22 @@ local instance : Fact (ringChar (AlgebraicClosure k₀)).Prime :=
 local instance : Fact (ringChar (AlgebraicClosure k₀) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k₀) (l := l)⟩
 local instance : LocallyOfFiniteType
-    (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
 local instance : QuasiCompact
-    (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
 local instance : IsSeparated
-    (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 local instance : LocallyOfFiniteType
-    (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
 local instance : QuasiCompact
-    (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
 local instance : IsSeparated
-    (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 
 /-- Unit base change, together with the native Tate and unit coordinates, gives
@@ -97,8 +93,11 @@ theorem nonempty_shriekRightAdjoint_obj_iso_of_unitBaseChange
     {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X} (adj : derivedLowerShriek k₀ l f ⊣ J)
     (e : (CondensedRing.boundedConstructibleUpperStarOfMap l
       (X := Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
-      (Y := Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).obj (𝟙_ _) ≅ 𝟙_ _)
+      (Y := Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure))
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).obj
+        (CondensedRing.smoothTraceUnit l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))) ≅
+      CondensedRing.smoothTraceUnit l
+        (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)))
     [IsIso (CondensedRing.smoothUnitBaseChange l
       (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
         (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _))

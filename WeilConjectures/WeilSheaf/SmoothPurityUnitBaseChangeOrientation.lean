@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import WeilConjectures.WeilSheaf.SmoothPurityTraceUnit
+
 public import WeilConjectures.WeilSheaf.SmoothPurityNativeUnitOrientation
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentSingle
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
@@ -55,30 +57,24 @@ local instance : Fact (ringChar (AlgebraicClosure k₀)).Prime :=
 local instance : Fact (ringChar (AlgebraicClosure k₀) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k₀) (l := l)⟩
 local instance : LocallyOfFiniteType
-    (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
 local instance : QuasiCompact
-    (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
 local instance : IsSeparated
-    (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 local instance : LocallyOfFiniteType
-    (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
 local instance : QuasiCompact
-    (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
 local instance : IsSeparated
-    (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
+    (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 
-local instance : (boundedConstructible (condensedRingObj
-    (Profinite.padicAlgClRingObj l) Y)).IsMonoidal :=
-  CondensedRing.isMonoidal_boundedConstructible l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
-noncomputable local instance : MonoidalCategory (BoundedConstructible
-    (condensedRingObj (Profinite.padicAlgClRingObj l) Y)) :=
-  ObjectProperty.fullMonoidalSubcategory _
 
 variable (d : ℕ) [SmoothOfRelativeDimension d f]
   (α : (ProEtaleWeilSheaf.toCondensed k₀ l X).obj
@@ -87,8 +83,11 @@ variable (d : ℕ) [SmoothOfRelativeDimension d f]
       (X ↘ Spec (CommRingCat.of k₀))).obj (ProEtale.tateTwist X l d))
     (e : (CondensedRing.boundedConstructibleUpperStarOfMap l
       (X := Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
-      (Y := Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).obj (𝟙_ _) ≅ 𝟙_ _)
+      (Y := Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure))
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).obj
+        (CondensedRing.smoothTraceUnit l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))) ≅
+      CondensedRing.smoothTraceUnit l
+        (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)))
     [IsIso (CondensedRing.smoothUnitBaseChange l
       (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
         (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _))
@@ -110,7 +109,8 @@ theorem nonempty_shriekRightAdjoint_adicConstant_iso_of_unitBaseChange
     ((finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj
       (CondensedRing.boundedConstructibleTateTwist l
         (Over.mk (X ↘ Spec (CommRingCat.of k₀))) d (2 * d)))
-    ((finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := Y)).obj (𝟙_ _))
+    ((finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := Y)).obj
+      (CondensedRing.smoothTraceUnit l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))))
     ((finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := X)).app _)
     ((finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := Y)).app _) adj e
   exact ⟨J.mapIso (finiteBaseNativeDescentUnitIso (k₀ := k₀) (l := l) (X := Y)).symm ≪≫
