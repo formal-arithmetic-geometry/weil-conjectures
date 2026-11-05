@@ -465,24 +465,6 @@ private theorem projector_map_fac (K : CochainComplex A ℤ) :
       rw [projector_lift_fac, ← hi]
       exact Iso.inv_hom_id_app_assoc _ _ _
 
-private theorem projector_map_descent : ClopenProjectorDescent
-    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      projector_map F H p ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
-  have h : (Functor.mapDerivedCategoryIdIso A).hom ≫ projector_map F H p ≫
-      (Functor.mapDerivedCategoryCompIso F H).inv = projector_lift F H p := by
-    rw [projector_map]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
-  rw [h]
-  exact projector_lift_fac F H p
-
-private theorem projector_map_descent_eq
-    (e : 𝟭 (DerivedCategory A) ⟶ F.mapDerivedCategory ⋙ H.mapDerivedCategory)
-    (he : projector_map F H p = e) : ClopenProjectorDescent
-    (𝟭 A) (F ⋙ H) p ((Functor.mapDerivedCategoryIdIso A).hom ≫
-      e ≫ (Functor.mapDerivedCategoryCompIso F H).inv) := by
-  rw [← he]
-  exact projector_map_descent F H p
-
 end ProjectorLocalization
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
@@ -497,18 +479,6 @@ private theorem projector_unique
   apply (b.homEquiv M (G.obj M)).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp]
   rw [h]
-
-private theorem projector_complement_zero
-    {A D E : Type*} [Category A] [Category D] [Category E]
-    [Abelian A] [Abelian D] [Abelian E]
-    [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E]
-    (H : D ⥤ A) (F : A ⥤ E) [H.Additive] [F.Additive]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (h : ∀ N, IsZero ((H ⋙ F).obj N)) (M : DerivedCategory D) :
-    IsZero (F.mapDerivedCategory.obj (H.mapDerivedCategory.obj M)) := by
-  have hz := (H ⋙ F).isZero_mapDerivedCategory_obj M (fun _ ↦ h _)
-  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso H F).symm.app M).symm
 
 private theorem intrinsic_projector_restriction {U X : Scheme.{u}}
     (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s] (M : Derived B X) :
