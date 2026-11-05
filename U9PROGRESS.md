@@ -142,22 +142,33 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ538 complete
+# BZ539 in progress
 
-- Branch: `u9/BZ538`; starting commit: `29f3a8d81`.
-- Assigned module and both downstream layers passed `ucheck-bump` together:
-  rc=0, failed=0, 3530 jobs on `poolb:43.157.184.90`.
-- Validated source commit: `afbae1fef662f1b26bdac9a97c1043aeea503aaa`.
-- Green modules: `WeilConjectures.AlgebraicGeometry.AffineBasisKInjectiveSectionsPreservesHomology`,
-  `WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi`, and
-  `WeilConjectures.AlgebraicGeometry.AffineBasisSectionsDerivedUnit`.
-- The original IsAffineOpen public import fix was already in the starting branch;
-  applied the same public import to the second-layer derived-unit module.
-- The user instructed continuation after the explicit one-line shared dependency repair proposal.
-  InternalHom now uses the compatibility tensorObj_map_tmul lemma, matching map_comp_apply.
-- All declaration types and existing docstrings are unchanged.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ538-final-full.log`.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ538.DONE`.
-- No local Lean/Lake execution, sorries, trust bypasses, profiler probes, or heartbeat changes.
-- This final commit changes progress documentation only; Lean sources match the green build.
+- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
+- Re-read the brief and prior notes on user-requested continuation.
+- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
+  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
+- The coordinator subsequently added the public Mathlib monoidal import in
+  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
+- The proposed compatibility-namespace patch remains unapplied while testing
+  the coordinator's repair.
+- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
+  then check up to four direct importers and one further downstream layer.
+- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
+- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
+
+- The public import resolved the missing name, but the resumed build failed in
+  `InternalHom:375` because its proof mixed new and compatibility map APIs.
+- User continuation followed the explicit one-line dependency patch proposal;
+  that exact compatibility-namespace proof repair is now applied.
+- Retrying the assigned module; declarations and heartbeat settings unchanged.
+
+- Compatibility build validated Presheaf.InternalHom and exposed the identical
+  copied-proof failure in Algebra.Homology.KFlat:82. Applied the same one-line
+  namespace correction there; no old-name occurrences remain in the target closure.
+- Retrying the target after these two minimal dependency proof corrections.
+
+- KFlat now passes. Its resolution module exposed the same copied-proof mismatch;
+  applied the same correction in KFlatResolutionIndependentCoefficients:132.
+- Corrected the dependency scan to include import all and trailing import comments.
+  All three changes are the same one-line proof-body replacement.
