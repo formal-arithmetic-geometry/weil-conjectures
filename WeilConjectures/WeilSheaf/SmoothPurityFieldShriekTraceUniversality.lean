@@ -53,11 +53,12 @@ theorem baseChangedSmoothTrace_ambient_universal
             (smoothTrace l f d).hom)) := by
   have ht := baseChangedSmoothTrace_compactification_universal l f f' c' hi hg e d K
   rw [purityFieldCompactificationTrace_coordinates] at ht
-  exact Functor.traceUniversalAt_of_coordinates
+  refine Functor.traceUniversalAt_of_coordinates
     (rightDerivedLowerShriekOfCompactification (Profinite.padicAlgClRingObj l) c')
     ((purityFieldPullbackCompatibility l (πY := πX)).app
       (boundedConstructibleTateTwist l X d (2 * d)))
-    ((purityFieldPullbackCompatibility l (πY := πY)).app (𝟙_ _)) _ ht
+    ((purityFieldPullbackCompatibility l (πY := πY)).app (𝟙_ _)) _ ?_
+  simpa only [Iso.app_hom, Iso.app_inv, Category.assoc] using ht
 
 /-- Pass from left-derived to levelwise pullback coordinates, as used by the
 specified geometric descent comparison. -/
@@ -86,7 +87,8 @@ theorem baseChangedSmoothTrace_levelwise_universal
     NatTrans.comp_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
     Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
     Iso.app_hom, Iso.symm_hom, Iso.app_inv, Category.assoc,
-    ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at ht
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp] at ht
   rw [(leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πY).hom.naturality,
     Iso.inv_hom_id_app_assoc] at ht
   exact ht
