@@ -114,7 +114,7 @@ private theorem comparison_eq_unit
   have hη' := v.rightDerivedFunctorPlusUnit.naturality g
   have hu' : inv (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R)) ≫
         DerivedCategory.Plus.Q.map vg =
-      v.rightDerivedFunctorPlus.map g ≫
+      v.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
         inv (v.rightDerivedFunctorPlusUnit.app (resolutionPlus I)) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, eq_comm, IsIso.comp_inv_eq]
     exact hη'.symm
@@ -211,8 +211,7 @@ private theorem augmentation_boundary
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
         ((DerivedCategory.Plus.singleFunctor A 0).obj S.X₁) ≫
       (shiftFunctor (DerivedCategory A) 1).map
-        ((DerivedCategory.Plus.singleFunctorιIso A 0).hom.app S.X₁ ≫
-          (DerivedCategory.singleFunctorIsoCompQ A 0).hom.app S.X₁ ≫
+        (((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₁).hom ≫
           DerivedCategory.Q.map IA.ι') =
     ((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₃).hom ≫
       DerivedCategory.Q.map IC.ι' ≫ DerivedCategory.triangleOfSESδ hH ≫
@@ -315,8 +314,11 @@ theorem horseshoe_comparison_boundary
   have hunit' :
       DerivedCategory.Plus.ι.map (v.rightDerivedFunctorPlus.map
           (boundedBelowSESBoundary H hH)) ≫
-        (Functor.commShiftIso (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
-          (1 : ℤ)).hom.app (DerivedCategory.Plus.Q.obj H.X₁) ≫
+        DerivedCategory.Plus.ι.map
+          ((v.rightDerivedFunctorPlus.commShiftIso (1 : ℤ)).hom.app
+            (DerivedCategory.Plus.Q.obj H.X₁)) ≫
+        (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
+          (v.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj H.X₁)) ≫
         (boundedBelowInjectiveComparison v H.X₁)⟦(1 : ℤ)⟧' =
       boundedBelowInjectiveComparison v H.X₃ ≫
         DerivedCategory.triangleOfSESδ hV := by
