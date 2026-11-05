@@ -30,6 +30,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+local instance (Y : Scheme.{u}) (V : Y.Opens) :
+    (SheafOfModules.evaluation.{u} Y.ringCatSheaf (op V)).Additive :=
+  inferInstanceAs ((SheafOfModules.forget Y.ringCatSheaf ⋙
+    PresheafOfModules.evaluation Y.ringCatSheaf.obj (op V)).Additive)
+
 /-- Global sections of a quasi-isomorphism from the direct image of a nonnegative complex
 of injective modules to a nonnegative complex of injective modules is a quasi-isomorphism,
 both over `O_Y(Y)` (Mathlib's `SheafOfModules.evaluation` at `⊤`, as in
