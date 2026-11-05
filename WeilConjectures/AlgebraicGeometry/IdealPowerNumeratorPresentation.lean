@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.RingTheory.Ideal.Span
 import WeilConjectures.AlgebraicGeometry.GeneralIdealPowerAffineSections
 import Mathlib.RingTheory.Ideal.Operations
