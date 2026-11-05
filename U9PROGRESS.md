@@ -245,3 +245,18 @@
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+
+# BZ859 in progress
+
+- Branch: u9/BZ859; initial commit db406319f.
+- The user instructed continuation after the concrete upstream-restoration proposal.
+- Applied BZ859-proposed-restoration.patch: restores tilde_preservesHomology,
+  affinePushforwardCohomologyMapOfComparison, and affinePushforwardRepresentativeCohomologyIso
+  with their original signatures/docs; ports generated additive-instance references.
+- Assigned factorization uses Localization implementation imports and a reflexive cast
+  for the original homology map, following the supplied BZ457 pattern.
+- Remote ucheck-bump is queued and reads the pushed branch upon acquiring a build tree.
+- Next: validate the assigned module; build its sole direct importer
+  AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
+- Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
