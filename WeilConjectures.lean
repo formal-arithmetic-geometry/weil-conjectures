@@ -14130,6 +14130,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompCoherence
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.MateComparisonTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
+public import WeilConjectures.CategoryTheory.Adjunction.MateCoprojection
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
