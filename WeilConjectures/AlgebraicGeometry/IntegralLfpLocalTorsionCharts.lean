@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
-public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 
 /-! # Local integral torsion and quotient charts -/
 

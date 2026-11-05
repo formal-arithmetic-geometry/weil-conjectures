@@ -13,9 +13,11 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGeneration
-import WeilConjectures.CategoryTheory.BrownRepresentabilityHomLocallySmall
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import WeilConjectures.CategoryTheory.CompactlyGenerated
+import Mathlib.Topology.QuasiSeparated
+import Mathlib.CategoryTheory.Triangulated.Functor
+import Mathlib.CategoryTheory.EssentiallySmall
+import Mathlib.CategoryTheory.Yoneda
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.CategoryTheory.Adjunction.PartialAdjoint

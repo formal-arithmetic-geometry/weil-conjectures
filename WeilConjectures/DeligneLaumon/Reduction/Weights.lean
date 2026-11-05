@@ -7,7 +7,8 @@ module
 
 public import Mathlib.Analysis.SpecialFunctions.Log.Base
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
-public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.HomologySequence

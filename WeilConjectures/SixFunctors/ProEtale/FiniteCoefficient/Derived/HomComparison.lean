@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
@@ -20,18 +19,32 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Duality
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
-public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.HomDevissage
+public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBidualityInduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonClosedSupport
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonDualizable
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomAdjunction
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomTriangulated
+public import WeilConjectures.CategoryTheory.Triangulated.Recollement
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.SixFunctors.ClosedImmersionStages
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
+public import WeilConjectures.NumberTheory.Padics.Extension
+public import Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import Mathlib.Algebra.Module.BigOperators
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarEtaleOrigin
 
 /-!

@@ -18,7 +18,6 @@ public import WeilConjectures.TraceFormula.BaseChange.WeilObject
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.HomologyWeilLowerStar
-public import WeilConjectures.TraceFormula.RelativeFrobenius
 public import WeilConjectures.TraceFormula.RelativeFrobeniusProper
 
 /-!

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DecompositionGroup
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisAction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.Galois
 

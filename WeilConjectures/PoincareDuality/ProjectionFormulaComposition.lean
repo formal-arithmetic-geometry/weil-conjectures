@@ -9,7 +9,8 @@ public import WeilConjectures.CategoryTheory.ExchangeFormalism.ProjectionComposi
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionTriangle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
-public import WeilConjectures.Tactic.ExactByKernel
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 

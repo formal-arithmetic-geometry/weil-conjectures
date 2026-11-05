@@ -15,7 +15,16 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
-public import WeilConjectures.FourierTransform.ArtinSchreier
+public import Mathlib.Algebra.Group.AddChar
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.NumberTheory.LegendreSymbol.AddCharacter
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
+public import WeilConjectures.CategoryTheory.Sites.Point.Linear
+public import WeilConjectures.ConstructibleSheaf.Monoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 

@@ -10,10 +10,18 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShi
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
-public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import WeilConjectures.SixFunctors.Etale.Derived.Point
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Pairing
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!

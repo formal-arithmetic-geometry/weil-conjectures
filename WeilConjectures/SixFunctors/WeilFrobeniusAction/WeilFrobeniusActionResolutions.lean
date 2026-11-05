@@ -6,7 +6,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionRingedSite
-public import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
@@ -17,7 +20,6 @@ public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -33,7 +35,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUn
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousLocallyFreePullbackSupplement
+public import Mathlib.Topology.ContinuousMap.Compact
+public import Mathlib.CategoryTheory.Abelian.ShortExact
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.CategoryTheory.Category.ULift
@@ -44,7 +47,6 @@ import Mathlib.CategoryTheory.Sites.CoverLifting
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -74,7 +76,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
-import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 import Mathlib.Algebra.Category.ModuleCat.Sheaf
@@ -98,7 +99,6 @@ import Mathlib.CategoryTheory.Sites.Limits
 import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
 import WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
 import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
-import WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
 import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Mathlib.Algebra.Homology.HomologicalComplex

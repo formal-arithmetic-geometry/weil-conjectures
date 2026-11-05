@@ -5,7 +5,41 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.RingTheory.Flat.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
+public import WeilConjectures.Mathlib.RingTheory.Flat.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+public import Mathlib.Algebra.Homology.Embedding.HomEquiv
+public import Mathlib.Algebra.Homology.Embedding.IsSupported
+public import Mathlib.Algebra.Homology.Embedding.Restriction
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.RingTheory.Localization.Free
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.Mathlib.RingTheory.Flat.Stability
+public import WeilConjectures.AlgebraicGeometry.Modules.DescentEffective
+public import Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
+public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
+public import Mathlib.Algebra.Module.Presentation.Finite
+public import Mathlib.Algebra.Module.Presentation.Tensor
+public import WeilConjectures.Compactification.FinitePresentation
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexExact
 
 /-!

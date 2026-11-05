@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.Contraction
 public import Mathlib.LinearAlgebra.Trace
-public import WeilConjectures.Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.LinearAlgebra.Basis.Prod
 
 /-!
 # Additivity and multiplicativity of the trace

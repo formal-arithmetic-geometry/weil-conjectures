@@ -5,7 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTatePowersDescentLaw
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # A module interface for geometric Tate pullback
 

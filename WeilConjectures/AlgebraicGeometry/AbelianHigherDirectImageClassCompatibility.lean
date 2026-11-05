@@ -8,8 +8,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Adjunctions
 
-public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageMap
-import WeilConjectures.AlgebraicGeometry.AbelianPullbackSingleComposition
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
 
 /-! # Pullback compatibility of the canonical derived-Hom class map

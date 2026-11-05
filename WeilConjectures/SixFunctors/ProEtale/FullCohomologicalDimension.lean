@@ -6,11 +6,20 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
-public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
+public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
-public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimensionAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-!
 # The cohomological-dimension bound on the étale-origin class

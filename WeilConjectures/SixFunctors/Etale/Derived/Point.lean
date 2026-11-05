@@ -17,7 +17,11 @@ public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
+public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 
 /-!
 # The point category

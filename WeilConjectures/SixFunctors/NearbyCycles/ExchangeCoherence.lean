@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
-public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
+public import WeilConjectures.SixFunctors.NearbyCycles.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 
 /-!

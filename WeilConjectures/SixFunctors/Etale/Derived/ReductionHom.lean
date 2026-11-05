@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ReductionExtendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom

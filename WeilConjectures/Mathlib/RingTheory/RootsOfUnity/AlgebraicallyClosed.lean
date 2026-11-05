@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Primitive roots of unity in a separably closed field

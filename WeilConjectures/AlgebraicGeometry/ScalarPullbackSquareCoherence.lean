@@ -32,7 +32,6 @@ public import WeilConjectures.AlgebraicGeometry.ConstantCompletionKoszulReflecto
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorStrictLimit
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
-public import WeilConjectures.AlgebraicGeometry.FourCorners
 public import WeilConjectures.AlgebraicGeometry.InternalDerivedScalarComparisons
 public import WeilConjectures.AlgebraicGeometry.NoetherianStratumDetection
 public import WeilConjectures.AlgebraicGeometry.PbcActualScalarPullback
@@ -106,8 +105,10 @@ public import WeilConjectures.SecSmoothPurity.CochainPullbackTensorCoherence
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 

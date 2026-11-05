@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
-public import WeilConjectures.Tactic.ExactModProofs
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 # The `ℚ̄_ℓ` projection formula from the integral one

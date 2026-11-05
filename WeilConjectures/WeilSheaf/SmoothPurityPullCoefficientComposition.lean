@@ -4,8 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityFreePullbackCube
-public import WeilConjectures.WeilSheaf.SmoothPurityScalarCompositionNormalization
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendChangeTransfer
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsComp
 
 /-! # Geometric pullback and ordinary coefficient composition -/

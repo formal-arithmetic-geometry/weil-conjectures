@@ -10,7 +10,6 @@ import all WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraint
 import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits

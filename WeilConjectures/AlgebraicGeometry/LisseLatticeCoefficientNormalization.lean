@@ -10,7 +10,22 @@ public import WeilConjectures.AlgebraicGeometry.LatticeSheafLocallyConstant
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.CategoryTheory.Sites.Over
-public import WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeCoefficientsSupplement
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 
 /-!
 # Normalization of continuous lisse coefficients

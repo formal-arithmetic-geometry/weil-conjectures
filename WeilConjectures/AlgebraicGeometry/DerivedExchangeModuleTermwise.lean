@@ -5,8 +5,10 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate

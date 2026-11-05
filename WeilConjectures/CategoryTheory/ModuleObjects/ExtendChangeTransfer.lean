@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.HomEquivCompIso
+public import Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClColimit
 

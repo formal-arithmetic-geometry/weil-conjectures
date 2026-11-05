@@ -9,10 +9,16 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.D
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicClosedSupport
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
+public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteCoefficientDirectImage
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+public import Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.AlgebraicGeometry.CondensedClosedSupportAdjunction
 
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs

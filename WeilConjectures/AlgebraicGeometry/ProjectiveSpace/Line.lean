@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
-public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
+public import Mathlib.FieldTheory.Finite.Polynomial
 
 /-!
 # The affine and projective lines

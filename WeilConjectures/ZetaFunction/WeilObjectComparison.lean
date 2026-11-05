@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
 public import WeilConjectures.TraceFormula.Statement
-public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
+public import Mathlib.Order.Directed
+public import Mathlib.Topology.MetricSpace.Ultra.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparison
 

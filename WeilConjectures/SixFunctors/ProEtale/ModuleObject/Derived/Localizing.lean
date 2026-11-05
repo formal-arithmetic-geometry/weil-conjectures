@@ -10,7 +10,8 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-public import WeilConjectures.CategoryTheory.Triangulated.LocalizingDetermination
+public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
 

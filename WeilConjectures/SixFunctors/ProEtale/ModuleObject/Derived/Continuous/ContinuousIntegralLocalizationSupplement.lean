@@ -41,7 +41,13 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
 public import Mathlib.Topology.Category.Profinite.EffectiveEpi
 public import Mathlib.Condensed.TopComparison
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 public import Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.AlgebraicGeometry.ProEtalePointComponentsMaps
 public import WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
@@ -152,7 +158,6 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.CondensedFieldRankDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.Topology.LocallyConstant.Basic
@@ -328,7 +333,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedConstructiblePiece
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeDerivedHom
-public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
@@ -340,9 +344,12 @@ public import WeilConjectures.CategoryTheory.DerivedCoyonedaEvaluation
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-public import WeilConjectures.CategoryTheory.ProperBaseChange.LocallyFreeDerivedHomSupplement
+public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Algebra.Homology.LocallyFreeDerivedHom
 public import WeilConjectures.AlgebraicGeometry.CondensedInternalHomSections
-public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeTensorExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
@@ -361,7 +368,6 @@ public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.AlgebraicGeometry.IntegralLfpFiniteQuotientCharts
 public import WeilConjectures.AlgebraicGeometry.IntegralLfpLocalTorsionCharts
-public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 public import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 public import Mathlib.CategoryTheory.Sites.Pullback

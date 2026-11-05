@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaBounded
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
 

@@ -7,7 +7,6 @@ module
 
 public import Mathlib.CategoryTheory.Functor.TwoSquare
 public import WeilConjectures.SmoothPurity.UpperShriekBaseChangeReduction
-public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerShriekBaseChangeProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingBaseChange

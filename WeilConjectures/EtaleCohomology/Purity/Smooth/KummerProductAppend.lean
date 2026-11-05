@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.LeftUnitorShift
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
-public import WeilConjectures.Mathlib.Data.Fin.Tuple.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import Mathlib.Data.Fin.Tuple.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsAssoc
 

@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 

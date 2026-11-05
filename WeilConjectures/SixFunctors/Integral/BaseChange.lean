@@ -7,7 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Finite.BaseChange
-public import WeilConjectures.SixFunctors.Integral.StalkOpen
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
+public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
+public import WeilConjectures.SixFunctors.Integral.Exact
 
 import WeilConjectures.AlgebraicGeometry.IntegralGeometricPointExchange
 import WeilConjectures.SixFunctors.BaseChange.Pasting

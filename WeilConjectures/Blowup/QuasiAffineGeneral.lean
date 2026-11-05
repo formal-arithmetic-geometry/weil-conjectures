@@ -5,7 +5,11 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.EliminationOfIndeterminacy
+public import Mathlib.RingTheory.MvPolynomial.Localization
+public import WeilConjectures.Blowup.EliminationOfIndeterminacy.AffineSpace
+public import WeilConjectures.Blowup.EliminationOfIndeterminacy.Lift
+public import WeilConjectures.Blowup.EliminationOfIndeterminacy.QuasiAffine
+public import WeilConjectures.Blowup.EliminationOfIndeterminacy.QuasiAffineHom
 public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.Mathlib.Topology.Constructions
 

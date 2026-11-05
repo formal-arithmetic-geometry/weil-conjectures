@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
-public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackComparisons
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Kummer

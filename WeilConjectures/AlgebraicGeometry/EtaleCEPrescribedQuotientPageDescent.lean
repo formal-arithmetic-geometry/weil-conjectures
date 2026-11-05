@@ -14,7 +14,8 @@ import WeilConjectures.AlgebraicGeometry.ExtPullbackResolutionSections
 import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
 import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
 import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
-import WeilConjectures.CategoryTheory.HypercohomologyFirstPage
+import WeilConjectures.CategoryTheory.FilteredComplexSpectralSequence
+import WeilConjectures.CategoryTheory.KInjectiveBridge
 
 /-! # Quotient-page descent on prescribed CE resolutions
 

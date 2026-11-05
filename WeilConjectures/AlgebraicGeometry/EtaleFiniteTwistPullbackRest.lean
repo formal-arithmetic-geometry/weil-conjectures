@@ -5,11 +5,10 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.Algebra.Homology.KFlatResolution
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
 public import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 @[expose] public section

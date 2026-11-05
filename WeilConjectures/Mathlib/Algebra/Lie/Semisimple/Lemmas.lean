@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Lie.Semisimple.Lemmas
-public import WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion
+public import Mathlib.Algebra.Lie.CartanCriterion
+public import Mathlib.Algebra.Lie.Engel
+public import Mathlib.Algebra.Lie.Solvable
 public import WeilConjectures.Mathlib.Algebra.Lie.LieTheorem
 public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Defs
 

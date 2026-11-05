@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.Topology.GlueSheavesOfModules
 import WeilConjectures.AlgebraicGeometry.IdealPowerEvaluationEventuallyZero
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
+import Mathlib.Topology.Sets.OpenCover
 
 /-! # Lifting sections into ideal-power annihilator quotients
 

@@ -7,11 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.BoundaryNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverInertia
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusDecomposition
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisAction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroupDense
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
-public import WeilConjectures.Mathlib.RingTheory.Ideal.Pointwise
+public import Mathlib.RingTheory.Ideal.Pointwise
 
 /-!
 # Decomposition and inertia groups at the boundary points of an open subcurve

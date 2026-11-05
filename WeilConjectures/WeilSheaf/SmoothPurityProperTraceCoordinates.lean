@@ -5,7 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityProperRelativeTrace
-public import WeilConjectures.Tactic.ExactModProofs
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 # Proper trace in the levelwise pullback coordinates

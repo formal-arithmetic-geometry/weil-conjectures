@@ -14,7 +14,8 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperSt
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedTensorSquare
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedCoherenceOfSquare
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-!
 # The condensed realization is compatible with the pullback–tensor comparisons

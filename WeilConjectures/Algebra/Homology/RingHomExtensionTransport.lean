@@ -9,7 +9,6 @@ public import Mathlib.RingTheory.Flat.CategoryTheory
 public import Mathlib.RingTheory.TensorProduct.IsBaseChangeHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 public import WeilConjectures.Algebra.Homology.BoundedAboveFlatSheafKFlat
-public import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRings
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Algebra.Homology.KFlatResolution

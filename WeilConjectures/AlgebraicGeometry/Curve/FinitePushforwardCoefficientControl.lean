@@ -6,14 +6,14 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.CurveCoefficientPair
+public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+public import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardConstructibleDescent
-import WeilConjectures.AlgebraicGeometry.ConstructibleIntegralCoefficients
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Finite.Stalk
 

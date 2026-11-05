@@ -5,10 +5,10 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+public import Mathlib.CategoryTheory.Triangulated.Functor
+public import Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.CategoryTheory.KInjectiveExactSquare.KInjectiveExactSquareComparison
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Derived forgetting of fixed pairs

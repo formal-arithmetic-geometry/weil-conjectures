@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Descent
 public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
-public import WeilConjectures.Algebra.Homology.ExtWithAction
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility

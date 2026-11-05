@@ -8,8 +8,9 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareSta
 public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
-import WeilConjectures.WeilSheaf.Native.Projection.StrictProof
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.BuiltinTactic
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # Extending the native tensor square from K-flat representatives -/
 

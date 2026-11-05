@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.Modules.FpqcSections
-public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Basic
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentData
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentDataModules
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack

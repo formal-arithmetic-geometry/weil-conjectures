@@ -9,7 +9,8 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeSheafSquareState
 public import WeilConjectures.WeilSheaf.Native.Projection.SheafSquareTransport
 public import WeilConjectures.WeilSheaf.Native.NativePullTensor
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationUpperStar
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The native sheaf tensor square under condensed realization -/
 

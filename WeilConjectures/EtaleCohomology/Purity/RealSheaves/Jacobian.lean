@@ -6,12 +6,14 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
-public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GaloisGroupLaw
-public import WeilConjectures.AlgebraicGeometry.AbelianVariety.RationalTateModule
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GeometricPoints
+public import Mathlib.Algebra.Group.Equiv.Defs
+public import Mathlib.Algebra.Group.TypeTags.Basic
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Data.Set.Finite.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
-public import WeilConjectures.AlgebraicGeometry.Picard.GaloisTwist
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.GroupTheory.TateModule

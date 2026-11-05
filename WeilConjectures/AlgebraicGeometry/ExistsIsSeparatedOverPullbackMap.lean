@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion

@@ -17,7 +17,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Prod
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyIso
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 @[expose] public section
 

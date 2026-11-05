@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-public import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk

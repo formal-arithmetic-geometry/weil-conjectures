@@ -9,7 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickeningExists
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import WeilConjectures.AlgebraicGeometry.KernelTensorPullbackIsoExists
 
 /-!
 # Conormal sheaf of a formally unramified morphism

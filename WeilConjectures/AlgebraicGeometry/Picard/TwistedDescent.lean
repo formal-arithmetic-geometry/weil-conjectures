@@ -5,7 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
+public import WeilConjectures.AlgebraicGeometry.Descent
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Basic
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentData
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentDataModules
 
 /-!
 # Twisting descent data of modules by cocycles of global functions

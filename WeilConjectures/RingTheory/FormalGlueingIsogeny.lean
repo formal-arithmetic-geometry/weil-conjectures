@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.TorsionModuleFlatBaseChangeIso
 import Mathlib.RingTheory.Flat.Equalizer
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import WeilConjectures.RingTheory.FormalGlueingMapToAlgebraization
-import WeilConjectures.RingTheory.FormalGlueingMapFromAlgebraization
 
 /-!
 # Formal glueing of maps with ideal-power torsion kernel and cokernel

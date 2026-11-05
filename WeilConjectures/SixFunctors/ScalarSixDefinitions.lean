@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionCoherence
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
-public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 

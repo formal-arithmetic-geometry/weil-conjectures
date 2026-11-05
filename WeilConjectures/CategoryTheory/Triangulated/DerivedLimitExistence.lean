@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTower
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-!
 # Existence and computation of derived limits

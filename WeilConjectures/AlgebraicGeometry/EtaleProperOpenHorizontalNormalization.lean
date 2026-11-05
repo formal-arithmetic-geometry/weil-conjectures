@@ -15,7 +15,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorAcyclic
 public import WeilConjectures.Algebra.Homology.KFlatResolution
 public import WeilConjectures.Algebra.Homology.KFlatTensorConeTwoOutOfThree
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective

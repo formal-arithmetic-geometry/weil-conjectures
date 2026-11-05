@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
-public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClass
+public import WeilConjectures.TraceFormula.LocalTerm
+public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
+public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 
 /-!

@@ -8,8 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleConstruction
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!

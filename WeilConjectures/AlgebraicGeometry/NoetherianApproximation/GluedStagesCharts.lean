@@ -5,8 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.GluingStages
-public import WeilConjectures.AlgebraicGeometry.OpensGlueData
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Chart maps of subrings of section rings

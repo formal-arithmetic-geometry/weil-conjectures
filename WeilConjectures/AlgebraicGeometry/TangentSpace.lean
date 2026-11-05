@@ -10,8 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import WeilConjectures.AlgebraicGeometry.SmoothRelativeDifferentialsFiniteLocallyFree
-import WeilConjectures.AlgebraicGeometry.PullbackDualFiniteLocallyFree
+import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 
 /-!
 # Cotangent and tangent sheaves of a morphism of schemes

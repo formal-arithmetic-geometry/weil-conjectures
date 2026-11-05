@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
-public import WeilConjectures.TraceFormula.Specialization.TraitModelGenericSpec
+public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 
 /-!
 

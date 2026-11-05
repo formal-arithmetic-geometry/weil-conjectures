@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
-public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 
 /-!
 # The derived Poincaré pairing of a Tate orientation

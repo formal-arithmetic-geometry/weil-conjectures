@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
-public import WeilConjectures.WeilSheaf.HomotopyInvariance
+public import WeilConjectures.WeilSheaf.HomotopyInvariance.Lisse
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.VerdierDual

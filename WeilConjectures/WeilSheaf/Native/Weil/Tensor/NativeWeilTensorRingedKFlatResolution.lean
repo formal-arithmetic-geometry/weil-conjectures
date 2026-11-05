@@ -11,7 +11,6 @@ import all WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficien
 import all WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import all WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import all WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits

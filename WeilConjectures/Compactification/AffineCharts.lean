@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
-public import WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
+public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedChart
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 

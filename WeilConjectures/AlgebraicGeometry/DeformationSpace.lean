@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.RingTheory.PolynomialAlgebra
-public import WeilConjectures.Mathlib.RingTheory.Polynomial.Quotient
+public import Mathlib.RingTheory.Polynomial.Quotient
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions

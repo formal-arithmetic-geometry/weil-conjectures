@@ -5,8 +5,14 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralIdempotentComplete
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+public import WeilConjectures.NumberTheory.Padics.Extension
+public import Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import WeilConjectures.CategoryTheory.Triangulated.IdempotentCompleteOfCoproducts
+public import Mathlib.CategoryTheory.Idempotents.Karoubi
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
 

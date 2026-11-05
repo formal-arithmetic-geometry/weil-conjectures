@@ -7,21 +7,20 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom
-public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
+public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBidualityInduction
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualizableLocal
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnitPerfect
-public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableTransfer
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
+public import WeilConjectures.CategoryTheory.Sites.MonoidalUnitSections
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WContractibleDisjointCover
 
 /-!
 

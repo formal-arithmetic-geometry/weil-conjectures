@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 
 /-!
 # The twisting sheaves `𝒪(m)` on projective space

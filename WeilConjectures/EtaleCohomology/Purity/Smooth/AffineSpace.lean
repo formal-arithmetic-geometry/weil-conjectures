@@ -10,7 +10,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 
 /-!
 # `𝔸¹ ⇒ 𝔸ⁿ`: the model purity

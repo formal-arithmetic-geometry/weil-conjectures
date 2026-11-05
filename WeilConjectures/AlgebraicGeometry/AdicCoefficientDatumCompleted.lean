@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.FullSubcategory
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 public import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction

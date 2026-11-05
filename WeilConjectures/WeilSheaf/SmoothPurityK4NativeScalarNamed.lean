@@ -7,7 +7,8 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarPullbackInterface
 public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarRoot
 public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarEquation
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The scalar law immediately after rational coefficient change -/
 

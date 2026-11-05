@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison

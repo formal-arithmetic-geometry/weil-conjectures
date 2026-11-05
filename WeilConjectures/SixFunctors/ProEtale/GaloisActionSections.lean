@@ -5,7 +5,19 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GaloisActionCounit
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.PrimitiveElement
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.SixFunctors.ProEtale.GaloisCoverTrace
+public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GaloisCoverTrace
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceLowerStar
 
 /-!
 # The Galois action of a covering on sections

@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Equivalence
+public import Mathlib.CategoryTheory.Opposites
 
 /-!
 # Duality into an invertible object

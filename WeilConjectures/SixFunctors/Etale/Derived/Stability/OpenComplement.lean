@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 
 /-!

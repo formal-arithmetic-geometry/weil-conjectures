@@ -15,7 +15,10 @@ public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.LowerStarPairing
 public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
-public import WeilConjectures.WeilSheaf.ProperCohomology
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
+public import WeilConjectures.WeilSheaf.LowerStarComp
+public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.StalkPairing
 
 /-!

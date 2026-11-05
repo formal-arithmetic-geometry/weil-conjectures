@@ -14,7 +14,8 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteCoefficientTriangulated
+public import Mathlib.Topology.ContinuousMap.Compact
+public import Mathlib.CategoryTheory.Abelian.ShortExact
 
 /-! # Triangulated closure for the ell-adic finiteness coefficients
 

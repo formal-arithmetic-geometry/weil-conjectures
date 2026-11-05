@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStalkFormula
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
 public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk

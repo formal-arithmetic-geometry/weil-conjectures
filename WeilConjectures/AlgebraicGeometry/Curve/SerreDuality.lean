@@ -22,7 +22,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
-public import WeilConjectures.Mathlib.RingTheory.RamificationInertia.Basic
 import Mathlib.Order.CompletePartialOrder
 
 /-!

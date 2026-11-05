@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Rank
-public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.Algebra.Module.Submodule.Defs
 
 /-!
 # The rank of a matrix through its minors

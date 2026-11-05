@@ -10,7 +10,8 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitI
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Basic
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLaxMonoidal
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-!
 

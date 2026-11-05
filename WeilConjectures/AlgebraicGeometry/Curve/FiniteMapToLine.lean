@@ -16,9 +16,11 @@ public import Mathlib.RingTheory.RingHom.StandardSmooth
 public import Mathlib.RingTheory.Unramified.Locus
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import WeilConjectures.AlgebraicGeometry.Regular
-public import WeilConjectures.Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Localization.Defs
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
-public import WeilConjectures.Mathlib.RingTheory.Unramified.Field
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-!
 # A finite generically étale map from an affine curve to the affine line

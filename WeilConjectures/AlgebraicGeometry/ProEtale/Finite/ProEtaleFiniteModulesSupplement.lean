@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -13,11 +12,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

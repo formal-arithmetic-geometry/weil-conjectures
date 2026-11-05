@@ -6,8 +6,15 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
-import WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.AffineMorphismCohomologyEdge
+public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-! # Splitting off the first coefficient block
 

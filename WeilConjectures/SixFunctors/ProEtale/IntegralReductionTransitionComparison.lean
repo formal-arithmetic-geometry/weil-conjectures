@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 public import WeilConjectures.SixFunctors.ProEtale.IntegralPresentationEncoding
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
-import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
+import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import WeilConjectures.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients
 import WeilConjectures.Algebra.Homology.PrincipalConeTower
@@ -26,7 +26,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existence
-import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Exists
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 
 set_option linter.privateModule false

@@ -9,7 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeSections
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
 # Global sections of an invertible module after a field extension

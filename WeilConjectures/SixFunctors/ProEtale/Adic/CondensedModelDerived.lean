@@ -7,7 +7,10 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
-public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedGlobalSectionsTransport
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 

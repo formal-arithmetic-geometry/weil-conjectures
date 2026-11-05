@@ -6,10 +6,21 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-public import WeilConjectures.AlgebraicGeometry.AbelianVariety.KummerCover
-public import WeilConjectures.CategoryTheory.Sites.EquivariantEvaluation
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
+public import WeilConjectures.AlgebraicGeometry.Regular
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.RepresentationTheory.Rep.Basic
+public import Mathlib.GroupTheory.GroupAction.Quotient
 public import WeilConjectures.FieldTheory.KummerFreeSubgroup
-public import WeilConjectures.SixFunctors.ProEtale.KummerCover
+public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!

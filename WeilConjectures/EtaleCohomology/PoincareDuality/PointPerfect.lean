@@ -8,8 +8,14 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
-public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+public import WeilConjectures.NumberTheory.Padics.Extension
+public import Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect
@@ -17,7 +23,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
-public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 

@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationFunctor
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationTensor
+public import WeilConjectures.WeilSheaf.DerivedHom
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 public import WeilConjectures.WeilSheaf.LisseFiltration

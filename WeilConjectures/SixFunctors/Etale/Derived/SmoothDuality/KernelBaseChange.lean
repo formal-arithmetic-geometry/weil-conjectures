@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CommSq
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAdjunction
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-!
 # Proper base change in the form of the kernel adjunction

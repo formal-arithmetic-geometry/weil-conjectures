@@ -9,7 +9,11 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 

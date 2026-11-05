@@ -8,7 +8,11 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
-public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.Category
+public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Constant
+public import WeilConjectures.WeilSheaf.Dual
+public import WeilConjectures.WeilSheaf.Fourier
 
 /-!
 # Lisse Weil sheaves on a dense open of the affine line

@@ -8,7 +8,8 @@ public import WeilConjectures.WeilSheaf.SmoothPurityNativeDescent
 public import WeilConjectures.WeilSheaf.CondensedModelGeometricFiberPullback
 public import WeilConjectures.WeilSheaf.UpperStarConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarUnit
-public import WeilConjectures.Tactic.ExactModProofs
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 # The constant Weil sheaf as finite-base descent

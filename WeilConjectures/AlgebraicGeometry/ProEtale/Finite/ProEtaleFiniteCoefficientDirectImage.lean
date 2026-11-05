@@ -5,7 +5,10 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+public import WeilConjectures.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
 import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.RingedSiteModules

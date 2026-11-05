@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfFiniteAmplitude
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitRange
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CoproductTriangle
 

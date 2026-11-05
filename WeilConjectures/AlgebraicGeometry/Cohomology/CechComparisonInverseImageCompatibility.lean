@@ -9,7 +9,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonSystem
 import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageUnit
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import WeilConjectures.CategoryTheory.InjectiveCechAugmentationQuasiIso
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-! # Compatibility of normalized comparisons with inverse image
 

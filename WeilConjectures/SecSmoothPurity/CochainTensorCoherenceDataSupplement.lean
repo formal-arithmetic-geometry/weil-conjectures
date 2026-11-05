@@ -5,11 +5,9 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorComparisonOfUniverses
+public import Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -36,9 +34,7 @@ import all Mathlib.Algebra.Category.Grp.Limits
 import all Mathlib.CategoryTheory.Sites.Whiskering
 import all Mathlib.CategoryTheory.Sites.Equivalence
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import all WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 import all WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -60,14 +56,12 @@ import all Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
 import all Mathlib.CategoryTheory.Adjunction.Basic
 import all WeilConjectures.CategoryTheory.GeometricModuleConstruction
 import all WeilConjectures.CategoryTheory.RingedToposRingData
-import all WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import all Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import all Mathlib.CategoryTheory.Monoidal.CommGrp_
 import all WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 import all WeilConjectures.CategoryTheory.GeometricModuleTransport
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainModuleAdjunction
-import WeilConjectures.Algebra.Homology.CochainCompositeConstruction.CochainCompositeAlgebraic
 import WeilConjectures.SecSmoothPurity.CochainCompositeHom
 import Mathlib.CategoryTheory.Preadditive.LeftExact
 public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData

@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionOpenTransferExt
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
 import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

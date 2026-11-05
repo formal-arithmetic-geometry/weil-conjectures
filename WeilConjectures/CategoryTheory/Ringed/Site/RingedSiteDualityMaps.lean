@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoeffic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -87,15 +86,12 @@ public import Mathlib.Algebra.Homology.Functor
 public import WeilConjectures.Algebra.Homology.HomComplexComponents
 public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 public import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
-public import WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteOrdinaryHomComparison
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -110,14 +106,14 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
-import WeilConjectures.SixFunctors.Supporting.RingedSiteHomComponentProjection
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
-import all WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorConstraintCompletion
-import WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceEvaluationTranspose
-import WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceTensorConstraints
-import WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceScalarUnit
-import WeilConjectures.CategoryTheory.Ringed.RingedSignedBidualLocalization
-import WeilConjectures.CategoryTheory.Ringed.RingedOrdinaryEvaluationLocalization
+import WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSupplement
+import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
+import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
+import WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceEvaluationModels
+import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 /-! # Canonical coefficient-duality maps on a ringed site
 
 Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A97 and 0A98

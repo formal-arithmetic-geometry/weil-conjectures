@@ -5,7 +5,9 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+public import Mathlib.Algebra.Homology.Additive
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Currying for the sectionwise tensor on a general site

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
-public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicInt
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafRing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FreeWeilCoefficients
 
 /-!

@@ -6,8 +6,9 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Compactification.Comp
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Associativity
+public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekLowerStarExchange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp

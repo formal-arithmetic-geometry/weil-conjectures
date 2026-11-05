@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
 import WeilConjectures.CategoryTheory.RingedForgetTwoInjective.RingedForgetTwoInjectiveHom
 import WeilConjectures.WeilSheaf.Native.NativeCoefficientTensorComparison
-import WeilConjectures.WeilSheaf.Native.NativeGeometricHomComparison
 import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryClosedTensorModels
 import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilRowHomComparison
 

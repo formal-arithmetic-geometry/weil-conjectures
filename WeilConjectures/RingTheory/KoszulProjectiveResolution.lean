@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.RingTheory.KoszulRegularSequence
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.LinearAlgebra.ExteriorPower.Basis

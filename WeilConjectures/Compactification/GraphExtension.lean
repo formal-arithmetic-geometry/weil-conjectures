@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.EliminationOfIndeterminacy
-public import WeilConjectures.Compactification.ImageTransport
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 

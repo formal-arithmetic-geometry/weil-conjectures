@@ -17,9 +17,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
@@ -61,7 +59,13 @@ import Mathlib.Topology.Category.Profinite.EffectiveEpi
 import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 import Mathlib.Condensed.TopComparison
 import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 import Mathlib.Topology.NoetherianSpace
 import WeilConjectures.AlgebraicGeometry.ProEtalePointComponentsMaps
 import WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor

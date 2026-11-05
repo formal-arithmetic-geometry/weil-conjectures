@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
 public import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
 public import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange
 public import WeilConjectures.AlgebraicGeometry.ProperSupportSheafComposition
-public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphismComparison
+public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 public import WeilConjectures.Compactification.Refinement
@@ -23,14 +23,12 @@ import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import WeilConjectures.Algebra.Homology.HomComplexComponents
 import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
 import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.OpenExtensionProperSupportRange
@@ -60,10 +58,18 @@ import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
 import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
-import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobeniusAdjunction
+import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+import Mathlib.RingTheory.AdicCompletion.Basic
+import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+import WeilConjectures.NumberTheory.Padics.Extension
+import Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
 /-! # Coherence of normalized etale sum right adjoints

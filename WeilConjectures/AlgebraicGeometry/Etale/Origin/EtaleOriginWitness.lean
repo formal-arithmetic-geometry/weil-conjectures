@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf

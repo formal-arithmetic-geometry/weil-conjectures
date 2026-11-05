@@ -6,10 +6,24 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-public import WeilConjectures.CategoryTheory.Sites.CechComplexFunctor
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.AlgebraicGeometry.Modules.StalkExact
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.RingTheory.Flat.Tensor
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import WeilConjectures.Mathlib.RingTheory.Flat.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
 
 /-!
 # The Čech resolution of a sheaf of modules

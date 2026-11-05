@@ -6,7 +6,18 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import WeilConjectures.SixFunctors.Etale.Derived.Point
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
 # The mixed-support cup product and exchange maps

@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.WeilIdentityStructure
 public import WeilConjectures.TraceFormula.WeilIdentityStalk
 
 /-!

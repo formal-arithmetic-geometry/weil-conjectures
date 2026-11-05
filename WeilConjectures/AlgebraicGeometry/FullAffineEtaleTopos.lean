@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
-public import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
+public import Mathlib.CategoryTheory.Sites.CoverLifting
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen

@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure

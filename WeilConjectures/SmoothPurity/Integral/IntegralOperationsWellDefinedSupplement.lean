@@ -6,11 +6,19 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
-public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -23,8 +31,14 @@ public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerUnrestrictedSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
-public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingInverseImage
-public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Over
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
@@ -36,7 +50,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 public import WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 public import WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleWeaklyContractibleEvaluationColimitsSupplement
+public import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
 public import Mathlib.CategoryTheory.Sites.CompatibleSheafification
 public import Mathlib.CategoryTheory.Limits.Types.Products
 public import Mathlib.CategoryTheory.Sites.EpiMono
@@ -59,7 +73,6 @@ import all WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoeff
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import all WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import all WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -91,7 +104,8 @@ import all Mathlib.RingTheory.Flat.CategoryTheory
 import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.AlgebraicGeometry.IntegralReductionTransitionSemilinear
 import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
-import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
+import WeilConjectures.AlgebraicGeometry.ProEtaleConstantModuleEncoding
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import all WeilConjectures.CategoryTheory.InjectiveTowerRoos.InjectiveTowerRoosShifts
 import WeilConjectures.CategoryTheory.Derived.DerivedInjectiveResolutionNaturality
 import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
@@ -108,7 +122,6 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleWeaklyContractibleEvaluationColimitsSupplement
 import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
@@ -144,16 +157,14 @@ import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.RingTheory.ProEtale.WContractible
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import WeilConjectures.RingTheory.ProperBaseChange.IndPrincipalZariski
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Limits.Preserves.Limits
-import WeilConjectures.AlgebraicGeometry.ProEtale.Coefficient.ProEtaleCoefficientPullbackExact
 import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
-import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
+import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorCancellationIndependentCoefficients
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits

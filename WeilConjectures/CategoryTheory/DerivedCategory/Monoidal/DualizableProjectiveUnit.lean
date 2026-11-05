@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.Double
-public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
+public import WeilConjectures.Algebra.Homology.ModuleCat.Subcomplex
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableCriterion

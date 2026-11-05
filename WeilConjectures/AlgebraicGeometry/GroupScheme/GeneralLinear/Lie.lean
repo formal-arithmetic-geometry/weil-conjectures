@@ -9,7 +9,12 @@ public import Mathlib.Algebra.Lie.Matrix
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
+public import Mathlib.Algebra.Lie.Subalgebra
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Differential
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction

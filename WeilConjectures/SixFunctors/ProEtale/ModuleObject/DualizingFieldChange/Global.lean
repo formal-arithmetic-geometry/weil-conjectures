@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Finite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Tensor
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-!
 

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacement
 import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero
 import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import WeilConjectures.CategoryTheory.InjectiveCechAugmentationQuasiIso
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-! # Čech comparison and the inverse-image unit
 

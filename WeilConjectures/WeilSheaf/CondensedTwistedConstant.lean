@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.CondensedLisseRepresentation
+public import Mathlib.CategoryTheory.Monad.Comonadicity
+public import Mathlib.FieldTheory.Finite.GaloisField
+public import WeilConjectures.WeilSheaf.CondensedModelDescent
 
 /-!
 # Galois descent at the finite levels and twisted constant sheaves

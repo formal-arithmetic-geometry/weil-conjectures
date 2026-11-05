@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.CategoryTheory.ExactCouple
+public import Mathlib.CategoryTheory.Abelian.Exact
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-!

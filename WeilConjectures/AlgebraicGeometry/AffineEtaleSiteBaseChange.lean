@@ -9,9 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionUnit
-import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Base change on the full affine étale sites

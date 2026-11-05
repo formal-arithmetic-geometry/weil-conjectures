@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.TraceSeries
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceSeries
 public import WeilConjectures.ZetaFunction.TraceFormula
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 

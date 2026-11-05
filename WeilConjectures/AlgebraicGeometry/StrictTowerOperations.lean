@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.FourCorners
+public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
+public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-! # Canonical operations on strict module towers
 

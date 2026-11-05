@@ -14,7 +14,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme

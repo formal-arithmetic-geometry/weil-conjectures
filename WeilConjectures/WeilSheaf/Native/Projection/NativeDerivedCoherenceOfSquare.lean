@@ -13,7 +13,8 @@ public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquareCongr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # Comparison compatibility from the derived tensor square -/
 

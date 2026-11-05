@@ -9,7 +9,7 @@ module
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFinitePresentation
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparisonExtension
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 

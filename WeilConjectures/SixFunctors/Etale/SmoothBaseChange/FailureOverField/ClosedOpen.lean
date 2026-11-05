@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Supported

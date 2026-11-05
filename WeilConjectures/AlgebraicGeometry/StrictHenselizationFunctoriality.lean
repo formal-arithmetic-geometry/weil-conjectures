@@ -14,8 +14,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointedMap
-import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-! # Strict henselization functoriality
 

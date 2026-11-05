@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedChart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBidualityInduction
-public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!

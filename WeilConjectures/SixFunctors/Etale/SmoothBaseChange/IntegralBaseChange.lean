@@ -7,8 +7,9 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Integral.BaseChange
 

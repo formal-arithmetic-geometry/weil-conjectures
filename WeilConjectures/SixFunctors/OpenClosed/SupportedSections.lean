@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek
 public import WeilConjectures.SixFunctors.OpenClosed.Supported
-public import WeilConjectures.SixFunctors.OpenClosed.Supports
+public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import WeilConjectures.SixFunctors.OpenClosed.Exact
+public import WeilConjectures.Algebra.Homology.KInjectiveResolution
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 

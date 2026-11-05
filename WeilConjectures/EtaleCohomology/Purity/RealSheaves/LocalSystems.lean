@@ -21,7 +21,8 @@ public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.OfForget
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
-public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
+public import Mathlib.RepresentationTheory.Continuous.Basic
+public import Mathlib.RepresentationTheory.Rep.Basic
 public import WeilConjectures.NumberTheory.Padics.Extension
 public import WeilConjectures.RepresentationTheory.IntegralModel
 

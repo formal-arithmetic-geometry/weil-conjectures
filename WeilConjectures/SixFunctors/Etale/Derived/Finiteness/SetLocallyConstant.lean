@@ -7,8 +7,15 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantSections
-public import WeilConjectures.CategoryTheory.Sites.ConstantSheafCompose
+public import Mathlib.Algebra.BigOperators.Intervals
+public import Mathlib.CategoryTheory.CofilteredSystem
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitMilnor
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
+public import Mathlib.CategoryTheory.Subobject.ArtinianObject
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!

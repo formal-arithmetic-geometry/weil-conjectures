@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.Basic
-public import WeilConjectures.TraceFormula.Specialization.TraitModel
+public import WeilConjectures.TraceFormula.Specialization.Trait
 
 /-!
 

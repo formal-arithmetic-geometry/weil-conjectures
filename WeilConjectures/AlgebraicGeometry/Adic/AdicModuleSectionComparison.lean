@@ -11,7 +11,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicSectionModuleEquivalence
-public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous

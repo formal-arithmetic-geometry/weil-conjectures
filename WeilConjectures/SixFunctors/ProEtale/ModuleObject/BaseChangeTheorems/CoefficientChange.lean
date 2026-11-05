@@ -12,7 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangePadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
-public import WeilConjectures.Tactic.ExactModProofs
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 

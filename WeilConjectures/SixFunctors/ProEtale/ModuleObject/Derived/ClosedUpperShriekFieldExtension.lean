@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Basic
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-!
 # Closed exceptional inverse images commute with base change along field extensions

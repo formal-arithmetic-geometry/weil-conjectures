@@ -9,7 +9,10 @@ public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.Algebra.Category.Grp.EpiMono
 public import Mathlib.Algebra.Category.Grp.Preadditive
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
-public import WeilConjectures.CategoryTheory.Preadditive.TraceSplitting
+public import Mathlib.CategoryTheory.Preadditive.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Data.Fintype.Card
 
 /-!
 # The trace of a Galois covering of a site

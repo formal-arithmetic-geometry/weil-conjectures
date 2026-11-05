@@ -8,7 +8,8 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.TraceFormula.LocalTerm
-public import WeilConjectures.TraceFormula.Specialization.OpenImmersionLowerShriekComp
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 # Purity of open immersions and composition

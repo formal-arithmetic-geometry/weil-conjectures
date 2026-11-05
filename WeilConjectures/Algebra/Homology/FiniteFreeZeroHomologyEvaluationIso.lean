@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import WeilConjectures.Algebra.Homology.FiniteFreeZeroHomologyProduct
 
 @[expose] public section
 set_option autoImplicit false

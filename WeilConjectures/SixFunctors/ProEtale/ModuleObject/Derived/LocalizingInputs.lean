@@ -7,15 +7,28 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingBaseChange
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperNoetherianBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicIntegers
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperPadicSubfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbientIntegral
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingEllAdic
-import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
+public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
+public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty
+public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.Algebra.Homology.Embedding.Restriction
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
+public import Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
+public import Mathlib.Algebra.Module.Presentation.Finite
+public import Mathlib.Algebra.Module.Presentation.Tensor
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-!
 # Inputs from other subsections for the projection formula on `Loc(Dbc)`

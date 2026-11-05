@@ -7,7 +7,8 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs

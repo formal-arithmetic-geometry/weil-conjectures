@@ -8,7 +8,9 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Whiskering
-import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
+import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+import Mathlib.CategoryTheory.Localization.Prod
+import WeilConjectures.AlgebraicGeometry.ResolvingRepresentativeWhiskering
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # Derived bifunctor restriction to resolving pairs

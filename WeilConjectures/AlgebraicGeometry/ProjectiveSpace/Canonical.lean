@@ -5,12 +5,19 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
-public import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartPolynomial
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistGenerator
-public import WeilConjectures.LinearAlgebra.ExteriorPower.ChartTransition
-public import WeilConjectures.RingTheory.Kaehler.LocalizationPolynomial
+public import Mathlib.LinearAlgebra.Determinant
+public import Mathlib.LinearAlgebra.ExteriorPower.Basic
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import WeilConjectures.AlgebraicGeometry.Modules.DifferentialsSections
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
+public import Mathlib.GroupTheory.Perm.Fin
+public import Mathlib.RingTheory.Etale.Kaehler
+public import Mathlib.RingTheory.Kaehler.Polynomial
 
 /-!
 # The canonical sheaf of projective space

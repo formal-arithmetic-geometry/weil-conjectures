@@ -16,7 +16,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekBaseChan
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Associativity
+public import WeilConjectures.Compactification.RefinementOfIsPullback
+public import WeilConjectures.Compactification.TriangleOfIsPullback
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjectionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper

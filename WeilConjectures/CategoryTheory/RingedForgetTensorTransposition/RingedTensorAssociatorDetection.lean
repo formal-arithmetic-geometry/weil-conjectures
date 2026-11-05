@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits

@@ -9,8 +9,9 @@ public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Statement
-public import WeilConjectures.ZetaFunction.BettiSymmetry
-public import WeilConjectures.ZetaFunction.CurveZeta
+public import Mathlib.Algebra.Polynomial.RingDivision
+public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
+public import Mathlib.Analysis.Complex.Norm
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
 /-!

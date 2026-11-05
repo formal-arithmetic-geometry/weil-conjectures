@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
-public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 
 /-!
 

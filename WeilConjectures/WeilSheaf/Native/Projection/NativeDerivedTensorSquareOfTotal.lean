@@ -16,7 +16,8 @@ public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
-import WeilConjectures.WeilSheaf.Native.Projection.StrictProof
+import Mathlib.Init
+import Lean.Elab.Tactic.BuiltinTactic
 
 /-! # Localization of the native pullback tensor square -/
 

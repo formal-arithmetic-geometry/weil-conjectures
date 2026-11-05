@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
 public import WeilConjectures.AlgebraicGeometry.Sites.GmTorsorDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 
 /-!
 # The Picard group as first étale cohomology of `𝔾ₘ`

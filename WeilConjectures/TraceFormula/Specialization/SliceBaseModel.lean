@@ -6,7 +6,47 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
+public import WeilConjectures.CategoryTheory.Adjunction.MatePasting
+public import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RegularEndDerived
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
+public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
+public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty
+public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.Algebra.Homology.Embedding.Restriction
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
+public import Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
+public import Mathlib.Algebra.Module.Presentation.Finite
+public import Mathlib.Algebra.Module.Presentation.Tensor
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
+public import WeilConjectures.CategoryTheory.DerivedCategory.ProductsMapDerivedCategory
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapModLimits
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedPullbackLimitsAb
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsProperties
+public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
+public import Mathlib.Analysis.Normed.Group.FunctionSeries
+public import Mathlib.Analysis.SpecificLimits.Normed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperStarMapModLimits
+public import WeilConjectures.TraceFormula.OpenCover
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarEtaleOrigin
+public import Mathlib.RingTheory.PowerSeries.Ideal
+public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
+public import WeilConjectures.TraceFormula.Specialization.Trait
+public import WeilConjectures.AlgebraicGeometry.ClosedPointsFiberProduct
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
+public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented
+public import WeilConjectures.TraceFormula.PointTrace
+public import WeilConjectures.TraceFormula.PointComplement
+public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 
 /-!

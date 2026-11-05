@@ -9,7 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftRetraction
 public import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Sections over henselian lifts of weakly contractible objects

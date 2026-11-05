@@ -6,9 +6,11 @@ Authors: Christian Merten
 module
 
 public import Mathlib.RepresentationTheory.Invariants
-public import WeilConjectures.AlgebraicGeometry.CurveRegularCover
-public import WeilConjectures.ConstructibleSheaf.LowerStarOpenStalkFinite
-public import WeilConjectures.ConstructibleSheaf.OnePoint
+public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
+public import WeilConjectures.SixFunctors.Finite.Stalk
+public import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtensionIso
+public import Mathlib.Algebra.Category.ModuleCat.Products
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace

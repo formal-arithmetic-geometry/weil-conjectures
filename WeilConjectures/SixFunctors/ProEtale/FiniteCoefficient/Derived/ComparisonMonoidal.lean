@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # The comparison pullback and the derived internal hom

@@ -6,13 +6,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorTranspositionData
-public import WeilConjectures.SixFunctors.Coefficient.CoefficientCochainTensorCurry
 import all WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
 import all WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
 import all WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 import all WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import all WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -45,7 +43,6 @@ import all Mathlib.Algebra.Category.Ring.Limits
 import all Mathlib.Algebra.Category.Grp.Limits
 import all Mathlib.CategoryTheory.Sites.Whiskering
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import all WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 import all WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
@@ -59,7 +56,6 @@ import all Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
 import all Mathlib.CategoryTheory.Adjunction.Basic
 import all WeilConjectures.CategoryTheory.GeometricModuleConstruction
 import all WeilConjectures.CategoryTheory.RingedToposRingData
-import all WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import all Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import all Mathlib.CategoryTheory.Monoidal.CommGrp_
 import all WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod

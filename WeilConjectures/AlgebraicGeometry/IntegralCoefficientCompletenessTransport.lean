@@ -36,7 +36,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionTensorCompariso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
 import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
-import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
+import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 import WeilConjectures.Algebra.Homology.FlatScalarRestrictionKFlat
 import WeilConjectures.Algebra.Homology.KFlatFixedTensorTriangulated
 import WeilConjectures.Algebra.Homology.KFlatResolution
@@ -71,7 +71,6 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 import WeilConjectures.CategoryTheory.ScalarLocalizationRegularColimit
 import WeilConjectures.CategoryTheory.StrictRoosDerivation
 import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existence
-import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Exists
 import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
 import Mathlib.Data.Nat.Prime.Infinite
 

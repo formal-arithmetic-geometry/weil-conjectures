@@ -10,7 +10,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedUp
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingClosedImmersionLaw
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-!
 

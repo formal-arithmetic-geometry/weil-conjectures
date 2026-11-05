@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement

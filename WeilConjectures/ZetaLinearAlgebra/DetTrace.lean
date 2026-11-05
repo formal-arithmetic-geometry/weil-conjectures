@@ -11,7 +11,7 @@ public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Splits
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
+public import Mathlib.RingTheory.PowerSeries.Log
 
 /-!
 # The determinant-trace identity

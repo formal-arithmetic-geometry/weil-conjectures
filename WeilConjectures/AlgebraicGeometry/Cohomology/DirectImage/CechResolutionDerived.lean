@@ -6,8 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionBase
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AcyclicResolution
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-!

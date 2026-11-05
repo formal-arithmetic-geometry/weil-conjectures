@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverDatum
-public import WeilConjectures.ConstructibleSheaf.SylowGaloisCoverTrivializing
+public import Mathlib.GroupTheory.PGroup
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleNormalizationRamification
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverPullback
 public import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions

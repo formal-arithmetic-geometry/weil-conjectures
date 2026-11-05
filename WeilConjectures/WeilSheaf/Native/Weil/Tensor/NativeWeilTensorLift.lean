@@ -6,7 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
-public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorTransposition
+public import WeilConjectures.CategoryTheory.RingedForgetTwoInjective.RingedForgetTwoInjectiveHom
+public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorTranspositionData
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorAdjoints
 import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorCoherence

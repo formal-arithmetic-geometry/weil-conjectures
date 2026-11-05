@@ -74,7 +74,6 @@ public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 public import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.Algebra.Homology.Single
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.Monoidal.Category
 
@@ -89,7 +88,6 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSuppleme
 import WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -122,7 +120,6 @@ import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Category.Grp.Limits
 import Mathlib.CategoryTheory.Sites.Whiskering
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
@@ -136,7 +133,6 @@ import Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
 import Mathlib.CategoryTheory.Adjunction.Basic
 import WeilConjectures.CategoryTheory.GeometricModuleConstruction
 import WeilConjectures.CategoryTheory.RingedToposRingData
-import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Mathlib.CategoryTheory.Monoidal.CommGrp_
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod

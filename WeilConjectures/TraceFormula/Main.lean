@@ -8,7 +8,8 @@ module
 public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.FixedPoint
-public import WeilConjectures.Tactic.ExactModProofs
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 

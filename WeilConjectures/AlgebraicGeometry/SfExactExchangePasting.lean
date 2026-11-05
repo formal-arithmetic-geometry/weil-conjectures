@@ -7,7 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
+import WeilConjectures.Compactification.RefinementOfIsPullback
+import WeilConjectures.Compactification.TriangleOfIsPullback
+import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
 
 /-! # Elementary pasting for the exact derived exchange maps
 

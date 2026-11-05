@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import WeilConjectures.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore
 import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
-import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 
 /-! # Comparing module replacements with the abelian counit lift
 

@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.GroupTheory.TateModule
-public import WeilConjectures.NumberTheory.TateModule
+public import Mathlib.Algebra.Group.Equiv.Defs
+public import Mathlib.Algebra.Group.TypeTags.Basic
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Data.Set.Finite.Basic
 
 /-!
 # The `ℓ`-adic Tate module of an abelian variety

@@ -12,7 +12,7 @@ public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
-public import WeilConjectures.TraceFormula.CompactPullbackShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekShift
 
 /-!
 

@@ -9,7 +9,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Descent
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.RingTheory.Flat.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.PointFiber
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedGlobalSections
+public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomOriginalCounitNormalization
+public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 
 /-!
 # Extension of scalars along a flat ring morphism on derived categories

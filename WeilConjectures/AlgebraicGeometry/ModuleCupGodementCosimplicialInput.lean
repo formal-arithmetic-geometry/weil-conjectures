@@ -6,8 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleCupResolutionData
-import WeilConjectures.AlgebraicGeometry.ModuleCupGodementModelPairing
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.AlgebraicGeometry.ModuleCupGodementModelQuasiIso
 import WeilConjectures.AlgebraicGeometry.ModuleCupGodementObjectFlasque
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex

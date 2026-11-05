@@ -8,7 +8,8 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClDerivedIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-public import WeilConjectures.Tactic.ExactModProofs
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 # The base-change morphism and the coefficient change `E ⟶ ℚ̄_ℓ`

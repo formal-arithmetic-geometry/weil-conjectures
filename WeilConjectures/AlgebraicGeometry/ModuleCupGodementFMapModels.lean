@@ -7,8 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ModuleCupGodementCodegeneracies
 public import WeilConjectures.AlgebraicGeometry.ModuleCupGodementCosimplicialInput
 import Mathlib.AlgebraicTopology.SimplexCategory.MorphismProperty
-import all WeilConjectures.AlgebraicGeometry.ModuleCupGodementBetaExists
-import WeilConjectures.AlgebraicGeometry.ModuleCupGodementIteratePairingsCanonicalCollapse
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.AlgebraicGeometry.ModuleCupGodementPairingsFromBeta
 
 set_option linter.privateModule false

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.FiniteSupportDiagonal
+public import WeilConjectures.TraceFormula.PointComplement
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.TraceFormula.OpenClosedTriangle

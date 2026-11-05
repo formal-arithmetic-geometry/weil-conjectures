@@ -6,7 +6,13 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Compactification.RefinementUniqueness
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
+public import WeilConjectures.Compactification.CommonRefinement
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.Compactification.RefinementPullback
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
 

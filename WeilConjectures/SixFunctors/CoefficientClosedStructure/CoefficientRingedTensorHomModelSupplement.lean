@@ -75,7 +75,6 @@ public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoeffic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
@@ -90,7 +89,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits

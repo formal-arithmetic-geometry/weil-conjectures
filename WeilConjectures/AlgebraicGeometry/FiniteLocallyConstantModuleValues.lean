@@ -12,8 +12,6 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.RingTheory.Finiteness.Cardinality
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.AlgebraicGeometry.FiniteTypeEtaleModuleStalk
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

@@ -5,10 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Module.PadicTorsionLinear
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CupProduct
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHPullback
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
+public import WeilConjectures.Algebra.Module.AdicDualityTransport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicFrobenius
 
 /-!

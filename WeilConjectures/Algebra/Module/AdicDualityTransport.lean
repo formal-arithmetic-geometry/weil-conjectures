@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Module.AdicPairingLimit
+public import Mathlib.LinearAlgebra.Matrix.SesquilinearForm
+public import Mathlib.NumberTheory.Padics.ProperSpace
+public import WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicCohomology
 public import WeilConjectures.Algebra.Module.RationalPerfectPairing
 
 /-!

@@ -12,14 +12,15 @@ public import Mathlib.Data.Real.Basic
 public import Mathlib.GroupTheory.Archimedean
 public import Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
-public import WeilConjectures.Mathlib.Data.Multiset.MapFold
+public import Mathlib.Data.Multiset.MapFold
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.ExteriorPower
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
-public import WeilConjectures.RepresentationTheory.ExteriorPower
+public import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
+public import WeilConjectures.RepresentationTheory.Filtration
 
 /-!
 # Determinant weights of a degree datum

@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
@@ -22,9 +21,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafi
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdjunctionSupplement
-public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingInverseImage
-public import WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseImageSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
@@ -42,7 +38,6 @@ public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.BifunctorShift
@@ -131,9 +126,12 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Ring
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
-public import WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInverseImageTensorComparisonSupplement
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageTensorComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtaleTensorCompositionUnit
-public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteCoefficientDirectImage
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import WeilConjectures.AlgebraicGeometry.ProEtaleConstantModuleEncoding
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso

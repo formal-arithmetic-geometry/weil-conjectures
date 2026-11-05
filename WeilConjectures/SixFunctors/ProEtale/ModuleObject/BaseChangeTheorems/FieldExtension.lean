@@ -8,7 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldExtension.DirectImageBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicIntegers
-public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 
 /-!
 # Pro-étale direct images commute with base change along field extensions

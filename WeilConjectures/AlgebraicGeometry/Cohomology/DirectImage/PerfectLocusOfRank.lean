@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageDerivedModel
-import WeilConjectures.AlgebraicGeometry.DerivedPullbackSingleCohomology
+import WeilConjectures.AlgebraicGeometry.DerivedPullback
 
 /-!
 # Local freeness of the higher direct images on the perfect locus

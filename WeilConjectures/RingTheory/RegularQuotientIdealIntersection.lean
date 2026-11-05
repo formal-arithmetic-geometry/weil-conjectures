@@ -8,8 +8,6 @@ module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
 import WeilConjectures.AlgebraicGeometry.KoszulComplex
-import WeilConjectures.RingTheory.KoszulRegularSequence
-import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.RingTheory.RegularQuotientIdealIntersectionAux
 
 /-!

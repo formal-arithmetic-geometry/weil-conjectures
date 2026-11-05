@@ -6,7 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitPairing
-public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
+public import Mathlib.Data.Fin.Tuple.Basic
+public import Mathlib.RingTheory.OrzechProperty
+public import Mathlib.RingTheory.Kaehler.JacobiZariski
 
 /-!
 # Nondegeneracy of the trace–cup pairing at a finite level

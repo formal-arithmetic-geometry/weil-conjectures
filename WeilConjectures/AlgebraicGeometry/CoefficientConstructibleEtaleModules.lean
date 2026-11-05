@@ -5,9 +5,8 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.CategoryTheory.ConstantCoefficientScalarExtension
 
 /-! # Constructible etale modules in the coefficient universe

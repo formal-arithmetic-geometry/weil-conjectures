@@ -8,8 +8,6 @@ module
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.QuasiCompact
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionThomFrames
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure

@@ -12,10 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve.FiniteCoverLowerShriekCoef
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
-import
-  WeilConjectures.AlgebraicGeometry.Curve.FiniteCoverLowerShriekCoefficientCompatibilityExtension
-import WeilConjectures.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
-import WeilConjectures.AlgebraicGeometry.Curve.RetractAssertions
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.Algebra.Ring.ULift
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
 
 @[expose] public section

@@ -8,7 +8,8 @@ public import WeilConjectures.WeilSheaf.SmoothPurityCanonicalTateScalar
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicScalar
 public import WeilConjectures.TateTwist.TateTwistPowerDatum
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The canonical one-twist pair has cyclotomic Frobenius -/
 

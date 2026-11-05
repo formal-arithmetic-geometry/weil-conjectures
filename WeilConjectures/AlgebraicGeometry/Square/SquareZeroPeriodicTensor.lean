@@ -5,10 +5,42 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.SixFunctors.IntrinsicDerivedTensorOfUniverses
+public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import WeilConjectures.Algebra.Homology.DerivedTensor
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import Mathlib.FieldTheory.Finite.GaloisField
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+public import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Over
+public import Mathlib.Topology.JacobsonSpace
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import WeilConjectures.AlgebraicGeometry.FiniteFieldFiber
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.AlgebraicGeometry.CompletedIntegralCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -29,9 +61,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedC
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -52,7 +82,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 import WeilConjectures.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients
-import WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTowersSupplement
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients

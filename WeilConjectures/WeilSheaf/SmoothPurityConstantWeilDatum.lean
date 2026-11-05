@@ -8,7 +8,8 @@ public import WeilConjectures.WeilSheaf.SmoothPurityUnitDatumTransport
 public import WeilConjectures.WeilSheaf.SmoothPurityUnitConstraint
 public import WeilConjectures.WeilSheaf.SmoothPurityDescentUnit
 public import WeilConjectures.WeilSheaf.ConstantTwistCondensed
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The constant Weil datum is the canonical pullback-unit datum -/
 

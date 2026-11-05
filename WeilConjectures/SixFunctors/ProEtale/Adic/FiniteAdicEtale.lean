@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientEtaleComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicCohomology
 public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExt
 

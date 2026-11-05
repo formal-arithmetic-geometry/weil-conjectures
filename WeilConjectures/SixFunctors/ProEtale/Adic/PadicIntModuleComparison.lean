@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleOfTorsion
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralCoefficientLimit
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
-public import WeilConjectures.CategoryTheory.Abelian.AdicTowerStructure
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Linear.Basic
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 

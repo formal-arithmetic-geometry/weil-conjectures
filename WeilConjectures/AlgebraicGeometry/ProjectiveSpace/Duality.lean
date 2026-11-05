@@ -8,7 +8,9 @@ module
 public import Mathlib.Algebra.Homology.ExactSequence
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Resolution
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatResolution
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext

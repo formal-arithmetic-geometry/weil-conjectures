@@ -7,12 +7,31 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+public import Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
+public import Mathlib.Algebra.Module.BigOperators
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
 /-!

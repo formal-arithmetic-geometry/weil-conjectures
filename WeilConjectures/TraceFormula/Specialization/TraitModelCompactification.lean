@@ -7,7 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import Mathlib.RingTheory.LaurentSeries
-public import WeilConjectures.Compactification.ExtensionOverOpen
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 

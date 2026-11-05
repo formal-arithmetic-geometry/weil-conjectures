@@ -9,9 +9,12 @@ public import Mathlib.FieldTheory.Galois.Infinite
 public import Mathlib.FieldTheory.Galois.Profinite
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-public import WeilConjectures.Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.RingTheory.Algebraic.Cardinality
+public import Mathlib.Topology.Algebra.Module.Cardinality
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
-public import WeilConjectures.Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.RingTheory.Polynomial.Basic
 
 /-!
 # Free abelian subgroups of Galois groups detected by Kummer characters

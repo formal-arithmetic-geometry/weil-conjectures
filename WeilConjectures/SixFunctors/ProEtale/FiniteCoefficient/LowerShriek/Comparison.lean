@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
+public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 
 /-!

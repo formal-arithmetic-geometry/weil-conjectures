@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperNoetherian
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
 
 /-!
 # Proper direct images with finite coefficients on the pro-étale site

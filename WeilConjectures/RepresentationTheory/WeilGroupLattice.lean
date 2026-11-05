@@ -10,7 +10,22 @@ public import Mathlib.LinearAlgebra.FreeModule.PID
 public import Mathlib.NumberTheory.Padics.Complex
 public import Mathlib.Topology.Baire.Lemmas
 public import Mathlib.Topology.Baire.LocallyCompactRegular
-public import WeilConjectures.RepresentationTheory.WeilGroupBoundedExtension
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Finiteness.Cardinality
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Completion
+public import Mathlib.Topology.LocallyConstant.Basic
+public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
+public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import WeilConjectures.Algebra.Homology.MinimalComplex
+public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
+public import Mathlib.LinearAlgebra.Trace
+public import Mathlib.Algebra.Ring.NegOnePow
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 
 /-!
 # Stable lattices for bounded `ℚ̄_ℓ`-representations

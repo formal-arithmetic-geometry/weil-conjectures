@@ -10,7 +10,8 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNorma
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # Localization with the canonical geometric pullback comparison -/
 

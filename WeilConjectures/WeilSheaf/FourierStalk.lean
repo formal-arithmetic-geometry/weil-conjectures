@@ -9,7 +9,7 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
 public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.FourierInversion.UpperStar
-public import WeilConjectures.WeilSheaf.FourierTateTwist
+public import WeilConjectures.WeilSheaf.FourierTateTwist.Transform
 public import WeilConjectures.WeilSheaf.FourierTraceAux
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.LowerShriekOperations

@@ -5,7 +5,10 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
+public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.CategoryTheory.Sites.Limits
+public import WeilConjectures.CategoryTheory.RingedToposMorphism
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.CategoryTheory.Sites.CoverLifting
 import Mathlib.CategoryTheory.Sites.Pullback

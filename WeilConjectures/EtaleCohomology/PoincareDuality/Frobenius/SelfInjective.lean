@@ -6,7 +6,13 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomToInjective
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Perfectness
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CompositionPairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+public import WeilConjectures.ZetaLinearAlgebra.Pairing
+public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 
 /-!
 # Degreewise Poincaré duality over a self-injective coefficient ring

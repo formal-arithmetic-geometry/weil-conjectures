@@ -13,11 +13,11 @@ public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.UpperShriek
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
-import WeilConjectures.WeilSheaf.SmoothPurity
 import WeilConjectures.WeilSheaf.SmoothPurityAbsolute
 import WeilConjectures.WeilSheaf.VerdierExchange
 import WeilConjectures.WeilSheaf.VerdierBiduality
-import WeilConjectures.WeilSheaf.VerdierDualUpperShriek
+import WeilConjectures.CategoryTheory.Adjunction.DualityConjugate
+import WeilConjectures.WeilSheaf.VerdierExchangeNatural
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes

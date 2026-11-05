@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-public import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 import WeilConjectures.AlgebraicGeometry.AbelianReplacementSectionHomotopies
 
 /-! # The standard-source abelian Ext section calculation

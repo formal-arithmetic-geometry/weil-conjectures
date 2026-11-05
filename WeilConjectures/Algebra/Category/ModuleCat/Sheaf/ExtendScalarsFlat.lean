@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalars
+public import Mathlib.CategoryTheory.Sites.Adjunction
+public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # Extension of scalars of sheaves of modules preserves flatness

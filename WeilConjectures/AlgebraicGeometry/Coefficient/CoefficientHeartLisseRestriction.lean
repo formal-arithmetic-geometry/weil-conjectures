@@ -70,7 +70,13 @@ import all Mathlib.Topology.Category.Profinite.EffectiveEpi
 import all WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 import all Mathlib.Condensed.TopComparison
 import all WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-import all WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 import all Mathlib.Topology.NoetherianSpace
 import all WeilConjectures.AlgebraicGeometry.ProEtalePointComponentsMaps
 import all WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
@@ -93,7 +99,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import all WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import all Mathlib.Analysis.Normed.Module.FiniteDimension
 import all Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
-import all WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 import all WeilConjectures.AlgebraicGeometry.CondensedFieldPresentationCorank
 import all WeilConjectures.AlgebraicGeometry.CondensedFieldPresentationMatrix
 import all Mathlib.LinearAlgebra.Matrix.Rank

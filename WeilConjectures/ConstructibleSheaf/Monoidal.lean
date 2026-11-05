@@ -13,9 +13,6 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
-import WeilConjectures.ConstructibleSheaf.MonoidalParts
-import WeilConjectures.ConstructibleSheaf.DualLocallyConstant
-import WeilConjectures.ConstructibleSheaf.DualStalk
 
 /-!
 # Tensor products and duals of constructible sheaves

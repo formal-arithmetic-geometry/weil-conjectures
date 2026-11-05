@@ -9,7 +9,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
-public import WeilConjectures.AlgebraicGeometry.Curve.QuasiProjective
+public import Mathlib.RingTheory.FractionalIdeal.Operations
+public import Mathlib.Algebra.Polynomial.Reverse
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Regular

@@ -8,9 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
 public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
-public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
-public import WeilConjectures.TraceFormula.OpenPieceFrobenius
-import WeilConjectures.TraceFormula.CompactPullbackShift
+public import WeilConjectures.TraceFormula.LocalizationFrobenius
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekShift
 import WeilConjectures.CategoryTheory.Monoidal.Rigid.BraidedTrace
 
 /-!

@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
-public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 

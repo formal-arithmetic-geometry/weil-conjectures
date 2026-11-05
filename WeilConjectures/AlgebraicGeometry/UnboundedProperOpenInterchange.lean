@@ -13,7 +13,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorAcyclic
 public import WeilConjectures.Algebra.Homology.KFlatResolution
 public import WeilConjectures.Algebra.Homology.KFlatTensorConeTwoOutOfThree
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.AlgebraicGeometry.ProperSupportSheafComposition
@@ -31,7 +31,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 import WeilConjectures.AlgebraicGeometry.DerivedExchangeModuleTermwise
-import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.AlgebraicGeometry.OpenExtendedInjectiveProperAcyclic
 import WeilConjectures.AlgebraicGeometry.UnboundedProperOpenPasting
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate

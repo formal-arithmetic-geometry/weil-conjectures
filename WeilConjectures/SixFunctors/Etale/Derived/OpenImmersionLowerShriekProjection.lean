@@ -6,7 +6,11 @@ Authors: Christian Merten, Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!

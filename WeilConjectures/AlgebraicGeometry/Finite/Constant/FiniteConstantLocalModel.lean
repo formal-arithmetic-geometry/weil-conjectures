@@ -37,7 +37,13 @@ import all Mathlib.Topology.Category.Profinite.EffectiveEpi
 import all WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 import all Mathlib.Condensed.TopComparison
 import all WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-import all WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 import all Mathlib.Topology.NoetherianSpace
 import all WeilConjectures.AlgebraicGeometry.ProEtalePointComponentsMaps
 import all WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor

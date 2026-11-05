@@ -7,7 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction

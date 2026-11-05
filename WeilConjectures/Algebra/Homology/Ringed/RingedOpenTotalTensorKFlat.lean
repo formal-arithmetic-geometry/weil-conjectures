@@ -9,8 +9,13 @@ public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
-public import WeilConjectures.Algebra.Homology.SmoothPurity.LocalizedModuleExactIndependent
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.CategoryTheory.Triangulated.Functor
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import WeilConjectures.AlgebraicGeometry.ProjectionFormulaArrows
 public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 public import WeilConjectures.CategoryTheory.RingedSliceExtensionTensor
@@ -33,7 +38,6 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor

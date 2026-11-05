@@ -10,7 +10,8 @@ public import WeilConjectures.PointCountFiber
 public import WeilConjectures.WeilSheaf.FourierTrace
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
-public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceBound
+public import Mathlib.Data.Multiset.Fintype
+public import Mathlib.Topology.MetricSpace.Sequences
 
 /-!
 # The weights of the transform of the boundary sheaf

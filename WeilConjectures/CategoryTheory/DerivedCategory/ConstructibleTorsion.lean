@@ -7,7 +7,10 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.ConstructibleSheaf.RestrictScalars
+public import Mathlib.CategoryTheory.Abelian.ShortExact
+public import WeilConjectures.ConstructibleSheaf.OfForget
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
+public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 
 /-!
 # Extensions of bounded constructible complexes killed by an ideal of finite index

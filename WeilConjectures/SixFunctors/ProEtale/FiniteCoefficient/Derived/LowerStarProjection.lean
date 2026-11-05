@@ -7,7 +7,11 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 
 /-!
 # The projection map for the derived pushforward

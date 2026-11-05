@@ -13,7 +13,8 @@ public import WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 public import WeilConjectures.Algebra.Homology.KInjectiveProductsTermwise
 public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
 public import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
-public import WeilConjectures.Algebra.Homology.RhomGlobalSections
+public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
 public import WeilConjectures.Algebra.Homology.RingedTensorComplexConstraints
 public import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
@@ -28,7 +29,8 @@ public import WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
-public import WeilConjectures.RingTheory.WContractibleGeometricCriterion
+public import WeilConjectures.RingTheory.ProEtale.WLocal
+public import Mathlib.Topology.ExtremallyDisconnected
 
 /-! # The coefficient ringed sequence site and canonical functors
 

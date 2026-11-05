@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.SixFunctors.OpenClosed.Exact

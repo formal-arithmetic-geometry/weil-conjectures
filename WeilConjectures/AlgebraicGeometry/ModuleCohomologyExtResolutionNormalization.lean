@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturalityExtension
-import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula
 

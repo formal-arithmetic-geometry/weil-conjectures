@@ -5,10 +5,33 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.System.SystemScalarModel
+public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+public import Mathlib.CategoryTheory.Limits.Final
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Unique
-public import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
-import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionComposition
 
 /-! # Coherent ordinary scalar extension
 

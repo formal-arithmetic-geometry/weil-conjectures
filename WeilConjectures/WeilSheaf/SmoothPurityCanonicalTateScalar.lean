@@ -6,7 +6,8 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarNamed
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The scalar Frobenius law for the canonical geometric Tate line -/
 

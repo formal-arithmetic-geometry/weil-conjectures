@@ -13,9 +13,14 @@ public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 import WeilConjectures.RingTheory.BaseChangeIdealKernelGenerators
 import WeilConjectures.RingTheory.LocalizationIdealKernelGenerators
-import WeilConjectures.Algebra.TorOneSurjectiveChangeRings
-import WeilConjectures.RingTheory.TorIdealKernelNaturality
-import WeilConjectures.RingTheory.TorOneSurjectiveFlatMiddle
+import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Mathlib.LinearAlgebra.FreeModule.Basic
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Mathlib.CategoryTheory.Monoidal.Tor
+import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-!
 # Generators of the ideal-tensor kernel after localized base change

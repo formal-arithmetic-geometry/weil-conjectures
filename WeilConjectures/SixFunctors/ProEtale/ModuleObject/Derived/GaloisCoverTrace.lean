@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionTrace
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTrans
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisCoverTrace
+public import WeilConjectures.SixFunctors.ProEtale.GaloisCoverTraceMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Finite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
 

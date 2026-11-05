@@ -57,10 +57,9 @@ import Mathlib.CategoryTheory.Sites.Point.Over
 import Mathlib.CategoryTheory.Functor.TypeValuedFlat
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import WeilConjectures.AlgebraicGeometry.ProEtaleLisseOrigin
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.ProEtaleFixedModuleLocalConstancy
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
+import WeilConjectures.AlgebraicGeometry.ProEtaleConstantModuleEncoding
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModels
@@ -113,8 +112,6 @@ import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Mathlib.Algebra.Module.FinitePresentation
-import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantSheafStalk
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
 import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 /-!

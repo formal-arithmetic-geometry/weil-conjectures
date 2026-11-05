@@ -8,11 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineGluing
+public import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
+public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsComposition
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative

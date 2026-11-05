@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
-public import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+public import Mathlib.CategoryTheory.Sites.IsSheafFor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.EtaleCohomology.TateTwist.Sheaf

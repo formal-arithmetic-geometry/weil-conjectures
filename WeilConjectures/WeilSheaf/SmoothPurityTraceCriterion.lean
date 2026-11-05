@@ -4,8 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityFreeResolution
-public import WeilConjectures.WeilSheaf.SmoothPurityFreeComparison
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointBijective
 
 /-!
 # Testing a trace on free objects

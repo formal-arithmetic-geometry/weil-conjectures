@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import Mathlib.Topology.Instances.ZMod
-public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.CategoryTheory.SixFunctors.LocalizingClosure
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 public import Mathlib.CategoryTheory.Triangulated.Subcategory

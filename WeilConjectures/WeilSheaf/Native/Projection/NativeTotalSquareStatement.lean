@@ -8,7 +8,8 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeSheafSquareState
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationTotalTensor
 public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoherence
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The totalized native pullback tensor square -/
 

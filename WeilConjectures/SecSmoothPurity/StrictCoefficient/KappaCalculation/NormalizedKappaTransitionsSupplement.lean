@@ -8,7 +8,10 @@ module
 public import WeilConjectures.SecSmoothPurity.StrictCoefficient.NormalizedCoefficientDiagramSupplement
 import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 import Mathlib.CategoryTheory.Adjunction.Limits
-import WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+import Mathlib.CategoryTheory.Adjunction.Basic
+import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # Normalized coefficient transition formulas
 

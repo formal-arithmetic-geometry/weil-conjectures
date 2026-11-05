@@ -10,7 +10,7 @@ public import WeilConjectures.ZetaSeries
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 
 /-!
 # Transcendence-degree strata and support on the small etale site

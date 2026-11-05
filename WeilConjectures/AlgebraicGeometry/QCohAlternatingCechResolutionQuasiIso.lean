@@ -11,10 +11,16 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
 import Mathlib.Algebra.Category.ModuleCat.Products
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+import WeilConjectures.AlgebraicGeometry.DerivedCategory
+import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Mathlib.CategoryTheory.Triangulated.Functor
 import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparison
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Čech totalization of a quasi-coherent resolution
 

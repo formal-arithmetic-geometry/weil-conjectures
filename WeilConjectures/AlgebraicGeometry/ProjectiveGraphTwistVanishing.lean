@@ -7,7 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Noetherian

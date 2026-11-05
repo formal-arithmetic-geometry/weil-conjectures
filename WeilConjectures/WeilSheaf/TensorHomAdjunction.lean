@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Fourier
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import WeilConjectures.WeilSheaf.StalkTensor

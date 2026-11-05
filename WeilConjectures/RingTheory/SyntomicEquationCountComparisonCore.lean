@@ -9,7 +9,6 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.RingTheory.CompleteIntersectionOverField
-import WeilConjectures.RingTheory.SyntomicPresentationLocalKernel
 
 @[expose] public section
 universe u v

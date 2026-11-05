@@ -10,7 +10,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!

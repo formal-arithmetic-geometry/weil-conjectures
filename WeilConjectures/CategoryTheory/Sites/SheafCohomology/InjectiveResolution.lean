@@ -7,7 +7,12 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.Algebra.Homology.HomologyPiAb
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory
 
 /-!
 # Computing the cohomology presheaves with an injective resolution

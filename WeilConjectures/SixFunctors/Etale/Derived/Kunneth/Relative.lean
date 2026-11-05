@@ -13,13 +13,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasP
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
 
 /-!

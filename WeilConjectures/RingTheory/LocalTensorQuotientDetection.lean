@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.RingTheory.LocalTensorQuotientPowerBound
 import WeilConjectures.RingTheory.LocalTensorQuotientBaseIdealDetection
-import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Finite quotient detection by prime localizations

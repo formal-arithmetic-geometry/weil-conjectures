@@ -11,8 +11,6 @@ import WeilConjectures.WeilSheaf.Native.NativeFrobeniusCoherentRingedModel
 import WeilConjectures.CategoryTheory.TwistedActionRingedSite.SheafHomIdentityUnit
 import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilRingedPresentation
 import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
-import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 import Mathlib.Algebra.Category.ModuleCat.Sheaf
@@ -38,7 +36,6 @@ import Mathlib.CategoryTheory.Sites.Limits
 import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
 import WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
 import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
-import WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
 import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients

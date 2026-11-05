@@ -16,7 +16,6 @@ import all Mathlib.Algebra.Category.Ring.Limits
 import all WeilConjectures.CategoryTheory.RingedSiteModules
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all WeilConjectures.CategoryTheory.RingedToposRingData
-import all WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import all WeilConjectures.CategoryTheory.AdjunctionRingOperations
 import all Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
 import all Mathlib.CategoryTheory.Adjunction.Basic

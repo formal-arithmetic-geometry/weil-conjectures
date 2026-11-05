@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Basic
-public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservative
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
+public import WeilConjectures.TraceFormula.Specialization.FiniteSupportInduction
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityExchange
 
 /-!
 

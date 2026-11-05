@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 public import WeilConjectures.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.AffineBasisSectionsDerivedUnit
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 

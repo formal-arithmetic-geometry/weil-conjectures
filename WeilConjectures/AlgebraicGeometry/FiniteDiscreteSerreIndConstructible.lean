@@ -6,7 +6,8 @@ Authors: Bin Wu
 module
 public import Mathlib.Order.CompletePartialOrder
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
-public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.WeakSerreCoproductClosure
+public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSheafColimit
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodingConstructibility

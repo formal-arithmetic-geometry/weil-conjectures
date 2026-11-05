@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.Compactification.CommonRefinement
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
+public import WeilConjectures.Compactification.RefinementPullback
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek

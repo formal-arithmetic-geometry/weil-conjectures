@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.FlatModulePullbackExact
-public import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.AlgebraicGeometry.Pullbacks
 

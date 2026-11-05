@@ -6,7 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.Native.NativeOpenTensorPresentation
-public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdjunctionSupplement
+public import Mathlib.CategoryTheory.Localization.Adjunction
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 
 /-! # Localization of the open tensor unit equation
 

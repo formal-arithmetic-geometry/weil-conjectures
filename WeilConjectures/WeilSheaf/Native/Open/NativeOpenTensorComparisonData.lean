@@ -11,7 +11,7 @@ public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedForgetful
 public import WeilConjectures.CategoryTheory.Native.NativeOpenTensorPresentation
 public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorOperations
-public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdjunctionSupplement
+public import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 
 /-! # Native open comparison data

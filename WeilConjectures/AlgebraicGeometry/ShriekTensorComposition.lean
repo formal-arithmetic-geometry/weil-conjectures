@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 public import WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetry
-public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection

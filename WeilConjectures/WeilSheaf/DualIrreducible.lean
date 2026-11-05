@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.FiniteLength

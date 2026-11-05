@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoeffic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -90,8 +89,9 @@ public import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupplement
-public import WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRestrictionSupplement
+public import WeilConjectures.CategoryTheory.RingedDerivedRestriction
+public import WeilConjectures.CategoryTheory.RingedDerivedRestrictionGeneral
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 
 /-! # Slice restriction of evaluation, transpose and Koszul symmetry
 

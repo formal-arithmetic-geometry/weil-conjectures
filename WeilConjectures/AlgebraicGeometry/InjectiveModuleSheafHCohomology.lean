@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.AlgebraicGeometry.FreeCechComplexExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+import Mathlib.CategoryTheory.Limits.FormalCoproducts.Cech
+import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 

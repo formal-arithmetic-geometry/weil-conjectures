@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
 public import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.Mathlib.Data.Nat.Factorization.Induction
 
 /-!
 # Derived smooth base change

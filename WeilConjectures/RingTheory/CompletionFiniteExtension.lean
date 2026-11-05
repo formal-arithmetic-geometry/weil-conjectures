@@ -11,10 +11,11 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
-import WeilConjectures.RingTheory.FiniteAfterCompletion
+import Mathlib.RingTheory.LocalRing.Basic
+import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 import WeilConjectures.RingTheory.CompletionFiniteExtensionDecomposition
 import WeilConjectures.RingTheory.CompletionFiniteExtensionTensor
-import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Completion of a finite algebra over a prime

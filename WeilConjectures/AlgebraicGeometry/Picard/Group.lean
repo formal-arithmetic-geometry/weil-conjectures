@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Basic
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
-public import WeilConjectures.Mathlib.Algebra.Group.Subgroup.Ker
+public import Mathlib.Algebra.Group.Subgroup.Ker
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
 
 /-!

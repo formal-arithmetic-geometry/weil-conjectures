@@ -6,7 +6,12 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
-public import WeilConjectures.CategoryTheory.DerivedCategory.CompactOfBoundedExt
+public import Mathlib.CategoryTheory.Limits.Constructions.Filtered
+public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfFiniteAmplitude
+public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitRange
+public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Telescope
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible

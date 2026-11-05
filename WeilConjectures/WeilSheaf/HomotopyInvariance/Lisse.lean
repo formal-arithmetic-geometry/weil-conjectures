@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.UnitForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AffineLineLisse

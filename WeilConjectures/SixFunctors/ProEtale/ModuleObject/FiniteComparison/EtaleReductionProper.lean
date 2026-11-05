@@ -10,7 +10,8 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionIntegral
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriekMate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperShriek
 
 /-!
 # Reduction modulo `ℓⁿ`, `Rf_!` and `Rf^!`: stability under composition

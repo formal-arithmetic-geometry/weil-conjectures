@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 public import WeilConjectures.ConstructibleSheaf.FreeLifting
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
-public import WeilConjectures.ConstructibleSheaf.Presentation
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 /-!

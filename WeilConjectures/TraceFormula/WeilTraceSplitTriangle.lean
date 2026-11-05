@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraZero
-public import WeilConjectures.CategoryTheory.Endofunctor.Shift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated

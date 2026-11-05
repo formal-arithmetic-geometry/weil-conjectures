@@ -14,7 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyContractibleEvalua
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.RingTheory.WContractibleGeometricCriterion
+public import WeilConjectures.RingTheory.ProEtale.WLocal
+public import Mathlib.Topology.ExtremallyDisconnected
 
 /-!
 # Constant integral scalars with independent site and coefficient universes

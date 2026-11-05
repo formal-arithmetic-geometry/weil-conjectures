@@ -5,17 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionDenominators
-public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionTorsion
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MayerVietoris
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.VanishingOnOpen
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Leray
+public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
-public import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-!

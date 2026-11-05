@@ -5,7 +5,24 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverMilnor
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstant
+public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
+public import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
+public import Mathlib.Algebra.BigOperators.Intervals
+public import Mathlib.CategoryTheory.CofilteredSystem
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitMilnor
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
+public import Mathlib.CategoryTheory.Subobject.ArtinianObject
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
+public import WeilConjectures.CategoryTheory.DerivedCategory.ProductsMapDerivedCategory
 
 /-!
 # The Milnor sequence on the universal cover, for abelian sheaves

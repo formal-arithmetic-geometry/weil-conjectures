@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftData
-import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftCompatibility
 
 /-! # Compatible algebraization before the torsion estimate
 

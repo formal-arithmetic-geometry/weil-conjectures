@@ -9,7 +9,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 

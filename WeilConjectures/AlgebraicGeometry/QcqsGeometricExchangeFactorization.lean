@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
 import WeilConjectures.AlgebraicGeometry.EtaleUnitSectionRestriction
 import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison

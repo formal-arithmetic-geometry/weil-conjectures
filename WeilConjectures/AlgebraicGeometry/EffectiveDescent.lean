@@ -15,10 +15,10 @@ public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineLocal
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Gluing
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCoverImmersion
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 
 /-!
 # Effective descent for schemes

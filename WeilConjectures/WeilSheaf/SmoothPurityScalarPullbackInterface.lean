@@ -5,11 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFactor
-public import WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
+public import WeilConjectures.WeilSheaf.SmoothPurityRootFrobeniusUnitLaw
+public import WeilConjectures.WeilSheaf.SmoothPurityChangeCoefficientWeilLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
-public import WeilConjectures.WeilSheaf.SmoothPurityScalarIsoTransport
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # A module interface for the scalar Tate comparison
 

@@ -5,7 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 public import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 public import Mathlib.Algebra.Homology.Linear

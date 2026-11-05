@@ -9,7 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
-import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeSquareRestrictionCommutes
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-!

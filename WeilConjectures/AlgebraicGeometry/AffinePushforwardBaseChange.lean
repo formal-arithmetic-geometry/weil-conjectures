@@ -20,8 +20,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapPasting
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
-import WeilConjectures.AlgebraicGeometry.AffineBaseChangeTensorComparisons
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Affine pushforward and arbitrary base change

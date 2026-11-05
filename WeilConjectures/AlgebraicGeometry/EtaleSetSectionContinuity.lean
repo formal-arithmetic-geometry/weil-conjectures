@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
-public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionLift

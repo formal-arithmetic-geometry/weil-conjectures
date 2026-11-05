@@ -40,10 +40,10 @@ import WeilConjectures.CategoryTheory.RingedSliceExtensionTensorHomData
 import WeilConjectures.CategoryTheory.SiteAlgebraicCompositionUnit
 import WeilConjectures.CategoryTheory.Sites.GeometricInverseImageExact
 import WeilConjectures.CategoryTheory.UnitPowerCompleteness
-import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+import Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
-import WeilConjectures.NumberTheory.Padics.IntegersFinite
+import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 import WeilConjectures.Topology.ProfiniteCondensedRing
 
 set_option linter.privateModule false

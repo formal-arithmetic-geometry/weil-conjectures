@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Subcategory
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.AssociatorShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnitor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-!

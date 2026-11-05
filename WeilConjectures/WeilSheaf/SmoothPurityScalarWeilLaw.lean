@@ -6,7 +6,8 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarComparison
 public import WeilConjectures.WeilSheaf.SmoothPurityScalarFactorSquare
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # Transport of a scalar Frobenius law with abstract coefficients -/
 

@@ -6,7 +6,8 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

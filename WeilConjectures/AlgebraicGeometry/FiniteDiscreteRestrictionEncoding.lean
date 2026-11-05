@@ -10,7 +10,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
-import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCoefficientSections
 /-! # Restriction compatibility of the fixed coefficient encoding -/
 
 @[expose] public section

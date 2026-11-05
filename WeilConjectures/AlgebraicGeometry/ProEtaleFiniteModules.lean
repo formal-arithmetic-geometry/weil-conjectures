@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.CategoryTheory.RingedSiteModules

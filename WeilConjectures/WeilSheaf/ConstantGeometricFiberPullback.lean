@@ -10,7 +10,12 @@ public import WeilConjectures.WeilSheaf.ConstantFieldPullback
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.WeilSheaf.TateTwist
-import WeilConjectures.WeilSheaf.FieldCoefficientTateTwist
+import Mathlib.Topology.MetricSpace.Ultra.Basic
+import WeilConjectures.CategoryTheory.FilteredTwoColimit
+import Mathlib.LinearAlgebra.TensorProduct.Basis
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
+import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
+import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
 # The constant Weil sheaf and its constant twists as pulled-back Weil sheaves

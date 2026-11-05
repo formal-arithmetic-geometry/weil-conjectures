@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.ConstructibleSheaf.Monoidal
-import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 
 /-!
 # Cohomology of the closed boundary of a dense open curve

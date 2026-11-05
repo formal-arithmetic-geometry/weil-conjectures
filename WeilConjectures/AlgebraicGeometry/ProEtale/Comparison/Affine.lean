@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Limits.Preserves.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Finite
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Sites.Sheafification
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine

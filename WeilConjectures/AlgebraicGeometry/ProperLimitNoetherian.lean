@@ -9,7 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Limits
-public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import WeilConjectures.AlgebraicGeometry.EventuallyProper
 import WeilConjectures.AlgebraicGeometry.ProperFinitePresentationClosedLimit
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

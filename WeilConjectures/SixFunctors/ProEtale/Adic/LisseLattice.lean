@@ -6,7 +6,16 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeSections
+public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.Topology.Algebra.Module.ModuleTopology
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialDescent
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
 
 /-!
 # Lisse sheaves from lattices on a cover

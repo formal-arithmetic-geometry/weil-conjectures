@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerivedBaseChange
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerivedBaseChangeOfCommSq
 
 /-!
 # The integral base-change morphism and the derived reduction

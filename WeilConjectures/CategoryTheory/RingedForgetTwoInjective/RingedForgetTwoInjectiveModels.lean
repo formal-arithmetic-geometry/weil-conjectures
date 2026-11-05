@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeS
 public import WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -44,7 +43,6 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
@@ -58,7 +56,6 @@ public import Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.CategoryTheory.GeometricModuleConstruction
 public import WeilConjectures.CategoryTheory.RingedToposRingData
-public import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
@@ -126,8 +123,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.WeilSheaf.DerivedHom
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionRingedSite
-public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
-public import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra

@@ -6,7 +6,8 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityRationalTrivialization
 public import WeilConjectures.WeilSheaf.SmoothPurityPullbackForgetFactor
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # Component comparisons used in scalar Frobenius transport -/
 

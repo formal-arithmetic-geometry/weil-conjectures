@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAdjunction
+public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
 /-!

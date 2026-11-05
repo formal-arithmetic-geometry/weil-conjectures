@@ -8,7 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceOverField
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.GroupTheory.CosetCover
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
+public import Mathlib.RingTheory.GradedAlgebra.Radical
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Mathlib.RingTheory.Finiteness.Subalgebra
+public import Mathlib.Algebra.Polynomial.Coeff
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!

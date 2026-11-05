@@ -7,7 +7,15 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCupProduct
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
-public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import WeilConjectures.SixFunctors.Etale.Derived.Point
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
 # Coherence of the mixed-support cup product

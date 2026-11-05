@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
-public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocusDual
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow

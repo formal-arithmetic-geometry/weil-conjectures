@@ -7,15 +7,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
-public import WeilConjectures.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-import WeilConjectures.AlgebraicGeometry.DQCoheratorDerivedGlobalSections
-import WeilConjectures.AlgebraicGeometry.QCqsSheafRHomAdjunction
+public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 import WeilConjectures.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.DQCoheratorAdjunction
-import WeilConjectures.AlgebraicGeometry.InternalHomMateCounitTransport
 
 /-!
 Canonical adjunction and tensor data are pinned by their characterising equations.

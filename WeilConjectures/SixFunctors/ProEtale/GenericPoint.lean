@@ -10,7 +10,10 @@ public import Mathlib.FieldTheory.SeparableClosure
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
 public import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
-public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
+public import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
+public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
 
 /-!
 # The geometric generic point in the pro-étale site

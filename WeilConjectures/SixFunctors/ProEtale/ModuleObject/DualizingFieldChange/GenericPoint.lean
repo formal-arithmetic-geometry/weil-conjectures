@@ -5,12 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.SmoothProjection
+public import WeilConjectures.TraceFormula.PurityDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Proper
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangePaste
 public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBase
 public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-!
 

@@ -10,7 +10,7 @@ public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import WeilConjectures.WeilSheaf.Native.NativeNormalizedTensorModels
 public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedForgetful
-public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdjunctionSupplement
+public import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 
 /-! # Native exact open operations and tensor models

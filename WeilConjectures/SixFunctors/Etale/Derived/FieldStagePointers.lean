@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Retract
-public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
+public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
+public import Mathlib.CategoryTheory.Triangulated.TStructure.AbelianSubcategory
+public import Mathlib.CategoryTheory.Limits.Constructions.FiniteProductsOfBinaryProducts
+public import Mathlib.CategoryTheory.Preadditive.Basic
+public import Mathlib.Tactic.NoncommRing
+public import Mathlib.CategoryTheory.Idempotents.Karoubi
 
 /-!
 # Properties of the field coefficient stages

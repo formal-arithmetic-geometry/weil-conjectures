@@ -10,12 +10,11 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensor
+public import WeilConjectures.Algebra.Homology.DerivedTensor
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsComplex
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlat
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -35,9 +34,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexG
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Noetherian.Defs
-import WeilConjectures.Algebra.Homology.ProperBaseChange.KFlatResolutionGeneral
 import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorCancellation
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 public import WeilConjectures.AlgebraicGeometry.CompleteCoefficientDatum

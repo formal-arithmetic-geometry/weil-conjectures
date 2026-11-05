@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import WeilConjectures.Algebra.Homology.LocalizedHomComplexHomotopy
+import Mathlib.Algebra.Homology.HomotopyCategory
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 

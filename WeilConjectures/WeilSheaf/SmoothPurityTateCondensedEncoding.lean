@@ -8,7 +8,8 @@ public import WeilConjectures.WeilSheaf.SmoothPurityTateOnePair
 public import WeilConjectures.WeilSheaf.SmoothPurityConstantWeilDatum
 public import WeilConjectures.WeilSheaf.SmoothPurityTatePullbackInterface
 public import WeilConjectures.WeilSheaf.TateTwistCondensedBridge
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The canonical geometric Tate datum in the condensed Weil model -/
 

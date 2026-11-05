@@ -34,9 +34,7 @@ public import Mathlib.CategoryTheory.Adjunction.Limits
 public import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -66,7 +64,9 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import WeilConjectures.CategoryTheory.SixFunctors.LocalizingClosure
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import WeilConjectures.Algebra.Homology.DerivedTensor
+public import WeilConjectures.AlgebraicGeometry.ProEtaleTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
 public import WeilConjectures.CategoryTheory.ConstantRingModuleSheaves
 public import WeilConjectures.CategoryTheory.RingedSiteModules
@@ -74,7 +74,6 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-public import WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor
 public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
@@ -83,7 +82,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ten
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Mathlib.CategoryTheory.Monoidal.Mod
-public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 

@@ -12,7 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
-public import WeilConjectures.Tactic.ExactModProofIrrel
+public import Mathlib.Init
+public import Lean.Elab.Tactic.ElabTerm
 
 /-!
 

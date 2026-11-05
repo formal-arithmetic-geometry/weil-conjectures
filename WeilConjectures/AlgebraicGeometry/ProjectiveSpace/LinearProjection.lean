@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-public import WeilConjectures.RingTheory.GradedAlgebra.Standard
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
+public import Mathlib.RingTheory.GradedAlgebra.Radical
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Mathlib.RingTheory.Finiteness.Subalgebra
 
 /-!
 # Linear projections of `Proj` to projective space

@@ -14,18 +14,27 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
-import WeilConjectures.AlgebraicGeometry.Curve.BrauerReductionInjection
-import WeilConjectures.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection
 import WeilConjectures.AlgebraicGeometry.ReducedCurveNormalization
 import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherent
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex
+import WeilConjectures.Algebra.Homology.TotalComplexRowResolution
+import Mathlib.CategoryTheory.Sites.Whiskering
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveResolution
+import Mathlib.Algebra.Category.Grp.EnoughInjectives
+import Mathlib.CategoryTheory.Adjunction.Evaluation
+import Mathlib.CategoryTheory.EssentiallySmall
+import Mathlib.Algebra.Group.Shrink
 import WeilConjectures.SixFunctors.Finite.Exact
 
 /-!

@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityFieldTrace
 public import WeilConjectures.WeilSheaf.SmoothPurityTraceDescent
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.SmoothProjection
+public import WeilConjectures.TraceFormula.PurityDevissage
 
 /-!
 # Base change of the trace for a smooth proper map

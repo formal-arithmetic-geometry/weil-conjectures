@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.FrobeniusDerived
+public import WeilConjectures.WeilSheaf.Category
 
 /-!
 # From Weil complexes to strict Weil complexes

@@ -7,7 +7,11 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
-public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
+public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import Mathlib.CategoryTheory.ObjectProperty.Kernels
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 public import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleBound
 public import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility

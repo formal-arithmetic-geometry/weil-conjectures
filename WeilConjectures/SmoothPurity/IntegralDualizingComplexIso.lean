@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteEndomorphisms
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized

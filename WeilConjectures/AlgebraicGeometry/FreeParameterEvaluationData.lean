@@ -19,7 +19,6 @@ public import WeilConjectures.Algebra.Homology.KFlatResolution
 public import WeilConjectures.Algebra.Homology.KFlatTelescopeClosure
 public import WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
-public import WeilConjectures.Algebra.Homology.RingedSiteZerothHypercohomology
 public import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 public import WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
 public import WeilConjectures.Algebra.Homology.TelescopeColimit
@@ -68,8 +67,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.SecSmoothPurity.CochainInverseComparison
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
 /-! # Evaluation coherence for free profinite parameters

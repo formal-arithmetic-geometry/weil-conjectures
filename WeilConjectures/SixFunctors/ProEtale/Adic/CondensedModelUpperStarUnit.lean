@@ -7,7 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelScalars
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
 
 /-!
 # Pullbacks of the unit in the two models of ℓ-adic sheaves

@@ -16,7 +16,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSe
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 
 /-!
 # The Grothendieck spectral sequence

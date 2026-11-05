@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapIsoUnit
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 
 /-!
 # Base change reflects the invertibility of tensor maps

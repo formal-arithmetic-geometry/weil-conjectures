@@ -35,7 +35,13 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
 public import Mathlib.Topology.Category.Profinite.EffectiveEpi
 public import Mathlib.Condensed.TopComparison
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 public import Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.AlgebraicGeometry.ProEtalePointComponentsMaps
 public import WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
@@ -98,7 +104,6 @@ import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
 import Mathlib.Topology.Category.Profinite.EffectiveEpi
 import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 import Mathlib.Condensed.TopComparison
-import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 import Mathlib.Topology.NoetherianSpace
 import WeilConjectures.AlgebraicGeometry.ProEtaleSheafificationWcontractibleSections
 import WeilConjectures.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation

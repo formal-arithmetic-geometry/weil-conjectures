@@ -8,8 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
 import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
-import WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroExact
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.Topology.Sheaves.Abelian
+import Mathlib.Topology.Sheaves.SheafCondition.Sites
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 /-! # Ext transport from an open subscheme to its ambient scheme
 
 Source: Stacks Project, Tags 00A7, 01AK, 04J0, and Section 01F7.

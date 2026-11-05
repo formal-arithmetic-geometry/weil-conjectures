@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.NativeEncoding.NativeAdicEncodingCore
-import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunctionComparisonSupplement
+import WeilConjectures.CategoryTheory.EquivalenceAdjunctionComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 
 /-! # Coherence of the normalized ordinary native encoding

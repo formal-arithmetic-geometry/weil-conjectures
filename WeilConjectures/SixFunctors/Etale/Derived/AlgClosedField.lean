@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
-public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveUnit
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 
 /-!

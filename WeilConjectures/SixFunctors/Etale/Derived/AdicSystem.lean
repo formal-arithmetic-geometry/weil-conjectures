@@ -5,13 +5,25 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTowerQuotient
+public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+public import WeilConjectures.Algebra.Homology.MinimalComplex
+public import Mathlib.LinearAlgebra.Trace
+public import Mathlib.Algebra.Ring.NegOnePow
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Trace
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit
 public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AdicRealization
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitRange
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+public import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleProducts
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.NumberTheory.Padics.Extension

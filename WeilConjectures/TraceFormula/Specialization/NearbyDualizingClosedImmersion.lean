@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
+public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
+public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
 
 /-!

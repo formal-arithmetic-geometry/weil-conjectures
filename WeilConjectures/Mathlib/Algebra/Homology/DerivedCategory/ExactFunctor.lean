@@ -13,11 +13,12 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyS
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
-public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
+public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
+public import Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
 
 /-!
 # Functoriality of `mapDerivedCategory`

@@ -15,7 +15,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braide
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Duality
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 
 /-!

@@ -6,7 +6,8 @@ module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The native condensed tensor model in localization notation -/
 

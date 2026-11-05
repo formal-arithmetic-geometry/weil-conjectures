@@ -8,7 +8,8 @@ module
 public import Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import Mathlib.RepresentationTheory.Irreducible
 public import Mathlib.NumberTheory.Padics.Complex
-public import WeilConjectures.RepresentationTheory.CompositionSeries
+public import Mathlib.Order.JordanHolder
+public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 
 /-!
 # Twisting irreducible representations of a Weil group to bounded ones

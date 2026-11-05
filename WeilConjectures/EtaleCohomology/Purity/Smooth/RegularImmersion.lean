@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
 public import WeilConjectures.SixFunctors.Integral.Exact
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFrame
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekOpenRestriction
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
 

@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Homology.SingleHomology
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 import Mathlib.Algebra.Homology.ConcreteCategory
 import Mathlib.CategoryTheory.Adjunction.Additive
-import all WeilConjectures.AlgebraicGeometry.DualTensorHomComparison
+import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Free
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
@@ -23,7 +23,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
-public import WeilConjectures.Algebra.Homology.RingedSiteZerothHypercohomology
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian

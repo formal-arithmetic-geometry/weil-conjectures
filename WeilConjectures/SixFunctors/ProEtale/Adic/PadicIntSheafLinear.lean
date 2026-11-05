@@ -7,7 +7,10 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
-public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntAbSheafPowLocal
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeLocal
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowCokernel
+public import Mathlib.Data.ZMod.Units
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProEtOpenCover
 
 /-!

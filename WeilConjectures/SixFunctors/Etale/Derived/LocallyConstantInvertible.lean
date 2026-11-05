@@ -9,7 +9,6 @@ public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk

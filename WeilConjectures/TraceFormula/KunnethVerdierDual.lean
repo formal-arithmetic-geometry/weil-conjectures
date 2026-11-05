@@ -9,7 +9,8 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
 public import WeilConjectures.CategoryTheory.Triangulated.IsoLocusContravariant
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.TraceFormula.KunnethVerdierShift
+public import WeilConjectures.TraceFormula.KunnethVerdier
+public import WeilConjectures.PoincareDuality.ProjectionFormulaShiftBoundedConstructible
 
 /-!
 # The Künneth–Verdier map in the dualized variable

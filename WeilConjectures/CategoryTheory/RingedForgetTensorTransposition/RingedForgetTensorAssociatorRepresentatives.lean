@@ -6,7 +6,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorTranspositionData
-import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
+import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Mathlib.CategoryTheory.Localization.Construction
+import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel
 import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorAssociatorModelSquare
 
 /-! # Representative constraints for exact ringed tensor comparison

@@ -9,10 +9,12 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryPurity
+public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
+public import WeilConjectures.PointCountBound
+public import Mathlib.LinearAlgebra.Matrix.FiniteDimensional
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.LinearAlgebra.Determinant
 import Mathlib.LinearAlgebra.DirectSum.Basis

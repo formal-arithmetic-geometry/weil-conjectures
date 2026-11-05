@@ -13,7 +13,9 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantPushout
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.Topology.Category.Profinite.Limits
+public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantHom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 

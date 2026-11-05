@@ -5,8 +5,15 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineLineConstructible
-public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.RingTheory.KrullDimension.Polynomial
+public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+public import Mathlib.Topology.Constructible
+public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.Topology.Sober
+public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 
 /-!

@@ -6,7 +6,8 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection
 

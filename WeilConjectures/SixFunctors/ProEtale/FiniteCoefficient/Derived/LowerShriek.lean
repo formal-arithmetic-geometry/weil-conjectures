@@ -14,7 +14,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-!
 

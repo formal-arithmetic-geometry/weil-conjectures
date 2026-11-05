@@ -9,7 +9,8 @@ public import Mathlib.CategoryTheory.Localization.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import Mathlib.CategoryTheory.Linear.LinearFunctor
+public import Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-!

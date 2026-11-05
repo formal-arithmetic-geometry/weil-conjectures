@@ -8,7 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdicFiniteIntermediateFieldIso
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProperFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CoefficientIsoTransport
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarEllAdicReduction
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegral
 
 /-!

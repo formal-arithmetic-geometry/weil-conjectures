@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
-public import WeilConjectures.RepresentationTheory.Constituents
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.Order.JordanHolder
+public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 
 /-!
 # Graded pieces of finite filtrations of representations

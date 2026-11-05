@@ -9,8 +9,15 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIsomorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
-public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
-public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalarsFlat
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
+public import Mathlib.Algebra.Category.ModuleCat.Descent
+public import Mathlib.LinearAlgebra.Contraction
+public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
+public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 
 /-!
 # Extension of scalars and the projection map of `Rg_*` on the pro-étale site

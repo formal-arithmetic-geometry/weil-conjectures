@@ -7,7 +7,26 @@ module
 
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import WeilConjectures.CategoryTheory.Site.SiteDerivedTensorRestriction
+public import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+public import Mathlib.CategoryTheory.Localization.Construction
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Functor.Currying
+public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.AlgebraicGeometry.SiteDerivedTensorRestriction
 public import WeilConjectures.CategoryTheory.StrictRoosModel
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import Mathlib.CategoryTheory.Whiskering
@@ -20,7 +39,6 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
@@ -39,7 +57,7 @@ public import Mathlib.CategoryTheory.Pi.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.CategoryTheory.StrictRoosComparison
-public import WeilConjectures.CategoryTheory.Ringed.RingedStrictTowerHomotopyLimitOfUniverses
+public import Mathlib.Algebra.BigOperators.Ring.Finset
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import WeilConjectures.CategoryTheory.StrictRoosDerivation
@@ -79,7 +97,6 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Homology.HomologicalComplex
 import all Mathlib.Algebra.Homology.DerivedCategory.Basic
 import all WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
@@ -121,13 +138,12 @@ import all Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import all Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import all WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import all WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 import all WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
-import all WeilConjectures.Algebra.Homology.KFlatFixedTensor.KFlatFixedTensorTriangulatedSupplement
+import WeilConjectures.Mathlib.CategoryTheory.Shift.Localization
+import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShiftTwo
 import all WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import all WeilConjectures.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients
-import all WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTowersSupplement
 import all WeilConjectures.CategoryTheory.StrictRoosDerivation
 import all WeilConjectures.CategoryTheory.StrictRoosModel
 import all Mathlib.CategoryTheory.Functor.Derived.RightDerived
@@ -164,7 +180,6 @@ import all Mathlib.CategoryTheory.Adjunction.Evaluation
 import all Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 import all Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import all WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import all WeilConjectures.CategoryTheory.Ringed.RingedStrictTowerHomotopyLimitOfUniverses
 import all Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import all WeilConjectures.Algebra.Homology.KInjectiveProductsTermwise
 import all Mathlib.Algebra.Homology.DerivedCategory.KInjective

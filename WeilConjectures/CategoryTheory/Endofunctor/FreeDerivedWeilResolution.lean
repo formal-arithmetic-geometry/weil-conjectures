@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
-public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdjunctionSupplement
+public import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import WeilConjectures.CategoryTheory.Exact.ExactFunctorCoproducts
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor

@@ -6,15 +6,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
-public import WeilConjectures.Algebra.Homology.CochainUniverseTransport.CochainCoefficientUniverseTransport
+public import Mathlib.Algebra.Module.ULift
+public import Mathlib.Algebra.Ring.ULift
+public import Mathlib.CategoryTheory.Sites.SheafOfTypes
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
-import WeilConjectures.SecSmoothPurity.CochainComparisonMonoidalEquationsSupplement
-import WeilConjectures.SecSmoothPurity.ModuleTensorCompositionEquation
-import WeilConjectures.SecSmoothPurity.ModuleTensorCoefficientEquations
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 

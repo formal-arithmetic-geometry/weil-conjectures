@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.ChowFiniteType
 import WeilConjectures.AlgebraicGeometry.ClosedChowStage

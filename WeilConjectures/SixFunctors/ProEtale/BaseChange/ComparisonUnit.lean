@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnitComplex
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonCounit
 
 /-!

@@ -8,7 +8,14 @@ module
 
 public import WeilConjectures.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
+public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
+public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided

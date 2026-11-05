@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
 # Composition of the tensor maps of `Rf^!`

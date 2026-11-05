@@ -7,10 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
-public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom
 
 /-!

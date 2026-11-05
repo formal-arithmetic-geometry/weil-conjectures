@@ -10,7 +10,13 @@ public import Mathlib.Algebra.Homology.ShortComplex.Linear
 public import Mathlib.LinearAlgebra.FreeModule.PID
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
-public import WeilConjectures.CategoryTheory.DerivedCategory.UniversalCoefficient
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!

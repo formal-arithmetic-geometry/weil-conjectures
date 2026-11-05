@@ -11,8 +11,45 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
 import WeilConjectures.AlgebraicGeometry.OrdinarySupportedChernNormalization
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
-public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
-public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerSystemSupplement
+public import Mathlib.Algebra.Module.ZMod
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+public import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+public import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+public import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+public import Mathlib.CategoryTheory.Functor.EpiMono
+public import Mathlib.CategoryTheory.Limits.Types.Equalizers
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+public import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+public import WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+public import Mathlib.CategoryTheory.Limits.Preserves.Limits
+public import WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+public import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import Mathlib.CategoryTheory.Localization.Construction
+public import Mathlib.CategoryTheory.Functor.Currying
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+public import Mathlib.Topology.Defs.Filter
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
 
 /-! # The Chern-component formula for the supported diagonal boundary

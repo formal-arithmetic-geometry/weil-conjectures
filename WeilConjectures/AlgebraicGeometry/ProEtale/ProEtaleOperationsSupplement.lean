@@ -32,7 +32,6 @@ public import Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits

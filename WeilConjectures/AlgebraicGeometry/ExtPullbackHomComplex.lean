@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import WeilConjectures.CategoryTheory.ExtExactFunctorCocycle
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Pullback on the Hom complexes of constant sheaves
 

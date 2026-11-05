@@ -14,7 +14,7 @@ public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 import Mathlib.CategoryTheory.Abelian.ShortExact
 import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
-import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedLowerStar
+import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
 import WeilConjectures.WeilSheaf.Localization
 import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraLeftAdjunction
 

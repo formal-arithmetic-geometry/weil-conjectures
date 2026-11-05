@@ -14,7 +14,12 @@ public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteEtaleAlgClosed
+public import Mathlib.AlgebraicGeometry.Artinian
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleCounit
+public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper
 
 /-!
 # The Leray isomorphism over a finite étale `k₀`-scheme

@@ -8,7 +8,11 @@ module
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.Blowup.BlowupUniversal
-public import WeilConjectures.Blowup.FiniteDegree
+public import WeilConjectures.Blowup.FiniteDegree.Algebra
+public import WeilConjectures.Blowup.FiniteDegree.ChartIdeal
+public import WeilConjectures.Blowup.FiniteDegree.Generation
+public import WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
+public import WeilConjectures.Blowup.FiniteDegree.Main
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic

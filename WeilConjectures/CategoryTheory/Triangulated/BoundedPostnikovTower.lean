@@ -5,7 +5,15 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
+public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
+public import Mathlib.CategoryTheory.Triangulated.TStructure.AbelianSubcategory
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
+public import Mathlib.CategoryTheory.Idempotents.Basic
+public import Mathlib.CategoryTheory.Limits.Constructions.FiniteProductsOfBinaryProducts
+public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
+public import Mathlib.CategoryTheory.Abelian.Refinements
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Finite ordered Postnikov towers

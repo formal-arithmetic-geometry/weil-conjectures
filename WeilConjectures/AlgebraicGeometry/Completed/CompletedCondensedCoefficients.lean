@@ -56,7 +56,6 @@ import Mathlib.CategoryTheory.EssentiallySmall
 import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.CategoryTheory.Grothendieck.GrothendieckTopos
 import WeilConjectures.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Mathlib.CategoryTheory.Sites.Pullback
 import Mathlib.Algebra.Category.Grp.AB
@@ -73,7 +72,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
 import Mathlib.Topology.Algebra.Ring.Compact
-import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
@@ -82,10 +80,8 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientData
 import all Mathlib.Topology.Category.Profinite.AsLimit
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import all WeilConjectures.AlgebraicGeometry.ProEtalePointPullback
-import all WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapCondensedRingSupplement
 import all WeilConjectures.NumberTheory.Padics.IntegersProfiniteTower
 import all WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
-import all WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 import all Mathlib.RingTheory.Ideal.Quotient.Index
 import all Mathlib.Algebra.Ring.Subring.Basic
 import all Mathlib.Algebra.Ring.Pi
@@ -109,7 +105,6 @@ import all WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
 import all WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
 import all WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import all WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
-import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
 import all WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
 import all WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 import all Mathlib.AlgebraicGeometry.Sites.Proetale

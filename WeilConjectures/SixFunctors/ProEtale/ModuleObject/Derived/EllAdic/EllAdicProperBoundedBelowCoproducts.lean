@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
-import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
+import WeilConjectures.AlgebraicGeometry.CondensedQcqsPushforwardContinuity
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 import WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts

@@ -10,7 +10,9 @@ public import Mathlib.LinearAlgebra.TensorProduct.Pi
 public import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
-public import WeilConjectures.Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.RingTheory.Algebraic.Cardinality
+public import Mathlib.Topology.Algebra.Module.Cardinality
 
 /-!
 # Integral and rational Tate modules

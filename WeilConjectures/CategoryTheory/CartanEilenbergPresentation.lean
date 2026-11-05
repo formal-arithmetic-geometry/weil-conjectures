@@ -6,7 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.CategoryTheory.CartanEilenbergExists
+public import Mathlib.Algebra.Homology.HomologicalBicomplex
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.CategoryTheory.DoubleComplexTotal
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic

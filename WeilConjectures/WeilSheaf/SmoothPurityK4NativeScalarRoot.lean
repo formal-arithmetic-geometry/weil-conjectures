@@ -6,7 +6,8 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityRootFrobeniusUnitLaw
 public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeScalarCoefficient
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The scalar law immediately after rational coefficient change -/
 

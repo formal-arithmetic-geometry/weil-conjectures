@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestriction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionClosedLowerStar
-public import WeilConjectures.SmoothPurity.UpperShriekOpenVanishing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionOpenImmersion
 public import WeilConjectures.TraceFormula.OpenClosedTriangle
 public import WeilConjectures.TraceFormula.ClosedPieceTriangle
 public import WeilConjectures.TraceFormula.PurityBaseChangeRestriction

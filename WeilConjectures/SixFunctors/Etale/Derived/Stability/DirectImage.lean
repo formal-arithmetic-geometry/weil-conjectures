@@ -5,14 +5,17 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImageTorAmplitudeNoetherian
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
+public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty
+public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
+public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import Mathlib.RingTheory.HopkinsLevitzki
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
-import WeilConjectures.AlgebraicGeometry.Torsion.TorsionObjectConstantProjection
-import WeilConjectures.AlgebraicGeometry.Torsion.TorsionAbelianDirectImageVanishing
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
-import WeilConjectures.CategoryTheory.DerivedCategory.Bounded.BoundedHeartAmplitude
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedTensorStalk
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.FieldTheory.IsAlgClosed.Basic
 

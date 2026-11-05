@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCupProduct
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapEquivalence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 

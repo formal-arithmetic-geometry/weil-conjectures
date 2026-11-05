@@ -11,7 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
-public import WeilConjectures.Algebra.Category.ModuleCat.FinitePresentationColimit
+public import Mathlib.Algebra.Module.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf

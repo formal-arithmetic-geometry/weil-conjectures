@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SepClosedPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula

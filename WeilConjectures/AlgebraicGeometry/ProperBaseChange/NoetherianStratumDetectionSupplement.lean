@@ -5,8 +5,18 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingInverseImage
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction

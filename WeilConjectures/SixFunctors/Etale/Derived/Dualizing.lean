@@ -5,12 +5,14 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
-public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
 
 /-!
 

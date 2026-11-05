@@ -11,7 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
-public import WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
 import WeilConjectures.AlgebraicGeometry.ConstructibleLimitDescentGeneral
 import Mathlib.CategoryTheory.Presentable.Directed

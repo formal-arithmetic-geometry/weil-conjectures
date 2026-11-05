@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExactAcyclic
 public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
 public import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp

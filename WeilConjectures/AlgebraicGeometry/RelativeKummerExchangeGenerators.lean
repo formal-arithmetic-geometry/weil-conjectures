@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp

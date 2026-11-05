@@ -10,9 +10,8 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import WeilConjectures.AlgebraicGeometry.EtaleMayerVietoris
-import WeilConjectures.AlgebraicGeometry.ZariskiCohomologyLocallyZero
-import WeilConjectures.AlgebraicGeometry.StrictHenselianZariskiEtaleComparison
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.GabberCriterionDegree

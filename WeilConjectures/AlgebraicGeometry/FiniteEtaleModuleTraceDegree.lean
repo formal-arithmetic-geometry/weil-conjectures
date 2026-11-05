@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceExists
+import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.DirectImageSplitCoverProduct
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

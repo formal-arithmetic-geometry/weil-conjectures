@@ -9,7 +9,6 @@ public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCo
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
-public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -40,8 +39,20 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 public import Mathlib.RingTheory.Flat.CategoryTheory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
-public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictionAdjunctionSupplement
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Over
+public import Mathlib.Topology.JacobsonSpace
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
 

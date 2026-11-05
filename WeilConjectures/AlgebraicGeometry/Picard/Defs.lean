@@ -11,7 +11,10 @@ public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Subfunctor.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
+public import WeilConjectures.AlgebraicGeometry.Descent
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Basic
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentData
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentDataModules
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 

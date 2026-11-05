@@ -7,7 +7,8 @@ module
 public import WeilConjectures.WeilSheaf.SmoothPurityFreePullbackComposition
 public import WeilConjectures.TateTwist.TateModuleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
-import WeilConjectures.Tactic.ExactModProofs
+import Mathlib.Init
+import Lean.Elab.Tactic.ElabTerm
 
 /-! # The canonical free-module pullback comparison respects composition -/
 
