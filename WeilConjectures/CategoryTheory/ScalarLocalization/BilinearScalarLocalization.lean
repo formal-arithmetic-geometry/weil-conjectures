@@ -60,6 +60,10 @@ private theorem tensorLocalizedAction_comp (M M' M'' N N' N'' : ScalarLocalizati
   change tensorLocalizedAction A p B β M M'' N N''
     (ScalarLocalization.composition A D p _ _ _ a' a)
     (ScalarLocalization.composition A D p _ _ _ b' b) = _
+  change Localization.Away p ⊗[A] (M.obj ⟶ M'.obj) at a
+  change Localization.Away p ⊗[A] (M'.obj ⟶ M''.obj) at a'
+  change Localization.Away p ⊗[A] (N.obj ⟶ N'.obj) at b
+  change Localization.Away p ⊗[A] (N'.obj ⟶ N''.obj) at b'
   induction a using TensorProduct.inductionOn with
   | add a c ha hc => simp only [map_add, LinearMap.add_apply, ha, hc]
   | tmul x a =>
@@ -133,6 +137,8 @@ theorem bilinearFunctor_existsUnique :
     rw [hγ]
     change γ f.1 f.2 = _ ≫ tensorLocalizedAction A p B β MN.1 PQ.1 MN.2 PQ.2 f.1 f.2 ≫ _
     generalize f.1 = a, f.2 = b
+    change Localization.Away p ⊗[A] (MN.1.obj ⟶ PQ.1.obj) at a
+    change Localization.Away p ⊗[A] (MN.2.obj ⟶ PQ.2.obj) at b
     induction a using TensorProduct.inductionOn with
     | tmul c a =>
       induction b with
