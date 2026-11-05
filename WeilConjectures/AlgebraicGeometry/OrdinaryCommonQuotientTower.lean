@@ -71,11 +71,11 @@ noncomputable def commonQuotientPresheafUnit
   naturality {U V} f := by
     apply ModuleCat.hom_ext
     ext x
-    change (1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.map f x =
+    change (1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.restrictₛₗ f x =
       changeOfRingsMap q M f ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x)
     rw [show changeOfRingsMap q M f
         ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x) =
-        S.obj.map f 1 ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.map f x from
+        S.obj.map f 1 ⊗ₜ[R.obj.obj V, (q.hom.app V).hom] M.val.restrictₛₗ f x from
       Classical.choose_spec (exists_changeOfRingsMap q M f) 1 x, map_one]
 
 /-- The actual sheaf quotient unit constructed from the sheafification adjunction.
