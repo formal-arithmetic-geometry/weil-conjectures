@@ -86,7 +86,7 @@ private theorem unit_single (M : C) :
       DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
       Functor.mapHomotopyCategoryFactors,
       Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, Category.assoc]
-    erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
+    erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp]
   rw [hL, Functor.map_comp, ← Category.assoc]
   erw [h]
   let u : L.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.singleFunctor C 0).obj M) ≅
