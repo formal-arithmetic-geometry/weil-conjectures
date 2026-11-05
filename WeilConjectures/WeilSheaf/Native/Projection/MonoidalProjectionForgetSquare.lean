@@ -36,8 +36,7 @@ lemma projectionForgetSquare_uncurried_app
     ND.map p ≫ δ.hom.app (TC.obj (M, P.obj N)) ≫
         I'.map (tC.hom.app (M, P.obj N) ≫ NC.obj M ◁ κ.hom.app N) =
       tD.hom.app (I.obj M, N) ≫ δ.hom.app M ▷ ND.obj N ≫ p' := by
-  simpa only [Functor.uncurry_obj_map, Functor.prod_obj, Functor.comp_obj,
-    curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
-    Category.id_comp, Category.comp_id] using h
+  dsimp at h ⊢
+  simpa only [id_whiskerRight, whiskerLeft_id, Category.id_comp, Category.comp_id] using h
 
 end CategoryTheory
