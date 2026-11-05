@@ -1,37 +1,3 @@
-# BZ264 in progress
-
-- Branch: `u9/BZ264`; starting commit: `c781553bf`.
-- Reread the brief and inherited progress notes after the user requested continuation.
-- The user instructed continuation after the exact three-site API proposal;
-  `BZ264-statement-api-proposal.patch` is applied to the assigned module and its
-  sole direct importer, `RightDerivedUnitSingleDegree`.
-- The canonical single comparison uses direct Q; both unit statements use the
-  cochain unit. The importer proof now uses cochain-unit naturality.
-- The original canonical-single proof is unchanged. All binders, assumptions,
-  and existing docstrings are unchanged.
-- The assigned module and direct importer passed together at `63a5e3555`: rc=0,
-  built=8, failed=0. Log: `/home/ubuntu/u9/logs/BZ264-20261106T013140.log`.
-- Continuing into `HypercohomologyLeftEdgeSingleAux` and `HypercohomologyLeftEdgeSingle`.
-  The auxiliary proof uses direct-Q boundedness instances (known BZ130 pattern).
-- Patterns and full build logs: `/home/ubuntu/u9/bz/FIXES-BZ264.md`.
-- No local Lean/Lake, forbidden proof shortcuts, or heartbeat changes.
-
-# BZ150 complete
-
-- Branch: `u9/BZ150`; starting commit: `80aeb4bf4`.
-- All four assigned modules passed together with `ucheck-bump`: rc=0, failed=0, 3644 jobs.
-- Validated source commit: `fb9bd7b27d169a5e395ed809947ee52e6fd0b46e`.
-- Build tree: `newsrv:/home/ubuntu/u9n/bumpw5`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ150-final-full.log`.
-- The user instructed continuation after the exact one-line statement migration proposal.
-  `rightDerivedPullback_comp` now uses `(mapDerivedCategoryCompIso P P').symm` because
-  Mathlib owns the old name with the opposite orientation; the intended map is preserved.
-- All remaining declaration statements and existing docstrings are unchanged.
-- Completion marker: `/home/ubuntu/u9/state/BZ150.DONE`.
-- This completion update changes only progress documentation after the successful source build.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ150.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -84,32 +50,46 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ130.DONE`.
 
-# BZ159 complete
+# BZ154 in progress
 
-- Unit: BZ159; branch: `u9/BZ159`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, failed=0, 4255 jobs.
-- Validated source commit: `f69c33ffa45cfbe76eeabefd69b81cd9b1b10343`.
-  This completion update changes only progress documentation.
-- Build host: `newsrv:/home/ubuntu/u9n/bumpw6`.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ159-final-full.log`.
-- Modules: DerivedSingleShiftNormalization, NativeDerivedBaseChange, Inertia,
-  CyclicDerivedActionRealization.
-- The user instructed continuation after the explicit equivalent statement API proposal;
-  the two cyclic-action statement references now use the forward composition isomorphism.
-  All other existing statement text and docstrings remain unchanged.
-- Fix patterns and whole-tree baseline occurrence counts:
-  `/home/ubuntu/u9/bz/FIXES-BZ159.md`.
-- No proof placeholders, trust bypasses, local Lean/Lake execution, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ159.DONE`.
+- Branch: `u9/BZ154`, starting commit `80aeb4bf4`.
+- Three assigned modules passed the first repair build at `31ce5f122`.
+- The user instructed continuation after the exact one-line statement correction in
+  `BZ154-shift-statement-proposal.patch`; that patch is now applied.
+- The shift comparison's target is quotient followed by `Plus.Qh`, matching its existing
+  construction and homotopy-category unit. All other changes are the mandated composition
+  isomorphism migration and imports for private definitional reductions.
+- Next: validate all four modules together with `ucheck-bump`, then write the DONE marker.
+- Fix patterns: `/home/ubuntu/u9/bz/FIXES-BZ154.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ266 in progress
+# BZ190 complete
 
-- Branch: `u9/BZ266`; starting commit: `c781553bf`.
-- Re-read the brief and progress notes on continuation.
-- The user instructed continuation after the explicit compositor compatibility proposal.
-  Applied `.inv` → `.hom` in `comparison_comp`, removed `.symm` in `unit_comp`'s `heD`,
-  and adjusted the proof cancellation; the original mathematical maps are preserved.
-- Replaced the obsolete identity computation with Mathlib's exact single-object lemma.
-- Proof-only remote build checked the identity repair; next build checks the compositor patch.
-- Patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ266.md`.
-- Only remote `ucheck-bump` builds; no proof placeholders, trust bypasses, or limit raises.
+- Branch: `u9/BZ190`.
+- Assigned module: `WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison`.
+- The module passed `ucheck-bump`: rc=0, failed=0, 2090 jobs.
+- Tested source commit: `a20255451c8530a95240e9634ea6bab8a027d11d`.
+- Final log: `/home/ubuntu/u9/bz/BUILD-BZ190-final-full.log`.
+- Build tree: `newsrv:/home/ubuntu/u9n/bumpw7`; both requested pins verified.
+- The user instructed continuation after the exact canonical unit proposal.
+  Applied `Unith.app (quotient.obj L)` → `Unit.app L` in the public statement.
+  The proof expands the unit and cancels its canonical comparison identities.
+  All other declaration statements and existing docstrings are unchanged.
+- Private helpers use implementation imports and explicit comparison cancellation.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ190.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
+- No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
+- This final commit changes only progress documentation after the successful build.
+
+# BZ275 in progress
+
+- Branch: `u9/BZ275`, starting commit `18e44f2d5`.
+- Assigned target: `WeilConjectures.CategoryTheory.DerivedSectionScalarTransport`.
+- The user instructed continuation after the exact three-statement API proposal; applied
+  `/home/ubuntu/u9/bz/BZ275-statement-api.patch` to preserve the comparison under Mathlib's
+  reversed `mapDerivedCategoryCompIso` orientation.
+- Proofs use the corresponding inverse factors and cancellation. Localization API and
+  implementation imports fix the private `Qh` definitional reductions.
+- Next: remote validation, direct importers, then DONE with all green modules.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ275.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
