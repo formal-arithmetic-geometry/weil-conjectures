@@ -216,3 +216,22 @@
 - No local Lean/Lake execution, sorries, trust bypasses, heartbeat increases, or profiler probes.
 - Completion marker: `/home/ubuntu/u9/state/BZ673.DONE`.
 - This final documentation update leaves Lean sources identical to the successful unit build.
+
+
+# BZ721 in progress
+
+- Branch: `u9/BZ721`; starting source commit: `a5261dcee`.
+- Read `/home/ubuntu/u9/briefs/BZ721.md` again on continuation; no new LEAD lines.
+- User instructed continuation after the exact public endpoint-transport patch proposal.
+  Applied that patch to the two representative equalities in
+  `SectionDerivedPushpullNormalization`; binders, assumptions, other conjuncts,
+  existing docstrings, and all private helper statements are unchanged.
+- Remote build `BZ721-20261106T060347.log` confirms both statement errors are fixed.
+  Its two remaining errors were proof mismatches from the inserted identities;
+  explicit comparison reduction and identity cancellation are submitted for validation.
+- Prior known localization imports and compositor proof fixes were already inherited.
+- No source declarations are eligible for deletion under the kept/unused lists.
+- Direct importers inventoried in `/home/ubuntu/u9/bz/BZ721-downstream-plan.json`.
+  Next: validate assigned module, then up to four smallest direct importer closures.
+- Fixes and exact-context rules: `/home/ubuntu/u9/bz/FIXES-BZ721.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
