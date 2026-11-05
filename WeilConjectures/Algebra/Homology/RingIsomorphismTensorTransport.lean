@@ -260,27 +260,27 @@ private local instance scalarPresheafCoproducts (A : Sheaf J CommRingCat.{r})
       (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
   PresheafOfModules.hasColimitsOfShape _ _
 
-private local instance scalarRingPresheafCoproducts (A : Cᵒᵖ ⥤ RingCat.{r})
+public local instance scalarRingPresheafCoproducts (A : Cᵒᵖ ⥤ RingCat.{r})
     (I : Type r) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A) :=
   PresheafOfModules.hasColimitsOfShape _ _
 
-private local instance scalarRingSheafCoproducts (A : Sheaf J RingCat.{r})
+public local instance scalarRingSheafCoproducts (A : Sheaf J RingCat.{r})
     (I : Type r) : HasColimitsOfShape (Discrete I) (SheafOfModules.{r} A) := by
   have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A.obj) :=
     PresheafOfModules.hasColimitsOfShape _ _
   exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
-private local instance scalarRingSheafSmallCoproducts (A : Sheaf J RingCat.{r})
+public local instance scalarRingSheafSmallCoproducts (A : Sheaf J RingCat.{r})
     (I : Type) : HasColimitsOfShape (Discrete I) (SheafOfModules.{r} A) := by
   have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A.obj) :=
     PresheafOfModules.hasColimitsOfShape _ _
   exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
-private local instance scalarRingSheafFiniteCoproducts (A : Sheaf J RingCat.{r}) :
+public local instance scalarRingSheafFiniteCoproducts (A : Sheaf J RingCat.{r}) :
     HasFiniteCoproducts (SheafOfModules.{r} A) :=
   ⟨fun n ↦ scalarRingSheafSmallCoproducts A (Fin n)⟩
 
-private local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r}) :
+public local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r}) :
     HasCoproducts.{0} (scalarModules J A) := by
   intro I
   have : HasColimitsOfShape (Discrete I)
@@ -288,26 +288,26 @@ private local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r}) :
     PresheafOfModules.hasColimitsOfShape _ _
   exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
-private local instance scalarSheafFiniteCoproducts (A : Sheaf J CommRingCat.{r}) :
+public local instance scalarSheafFiniteCoproducts (A : Sheaf J CommRingCat.{r}) :
     HasFiniteCoproducts (scalarModules J A) :=
   hasFiniteCoproducts_of_hasCoproducts (C := scalarModules J A)
 
-private local instance scalarGradedHasTensor (A : Sheaf J CommRingCat.{r}) :
+public local instance scalarGradedHasTensor (A : Sheaf J CommRingCat.{r}) :
     ∀ X Y : GradedObject ℤ (scalarModules J A), GradedObject.HasTensor X Y := by
   intro X Y n
   exact (scalarSheafCoproducts A _).has_colimit _
 
-private local instance scalarComplexHasTensor (A : Sheaf J CommRingCat.{r})
+public local instance scalarComplexHasTensor (A : Sheaf J CommRingCat.{r})
     (P Q : CochainComplex (scalarModules J A) ℤ) : HomologicalComplex.HasTensor P Q := by
   intro n
   exact (scalarSheafCoproducts A _).has_colimit _
 
-private local instance scalarTensorLeftColimits (A : Sheaf J CommRingCat.{r})
+public local instance scalarTensorLeftColimits (A : Sheaf J CommRingCat.{r})
     (M : scalarModules J A) : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
   have := tensorLeft_preservesColimits_independentCoefficients A M
   exact preservesColimitsOfSize_shrink (tensorLeft M)
 
-private local instance scalarTensorRightColimits (A : Sheaf J CommRingCat.{r})
+public local instance scalarTensorRightColimits (A : Sheaf J CommRingCat.{r})
     (M : scalarModules J A) : PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
   preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
 
