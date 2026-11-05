@@ -99,7 +99,7 @@ open KappaCalculation
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 @[no_expose] private noncomputable instance tensorCoproducts (R : Sheaf J CommRingCat.{w}) :
-HasCoproducts.{0} (Modules R) := by
+    HasCoproducts.{0} (Modules R) := by
   intro I
   let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
