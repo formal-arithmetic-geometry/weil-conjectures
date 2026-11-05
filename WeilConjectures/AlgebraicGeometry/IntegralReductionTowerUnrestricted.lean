@@ -87,7 +87,8 @@ private theorem restriction_tmul {A B : Sheaf J CommRingCat.{r}} (c : A ⟶ B)
     (N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     {U V : Cᵒᵖ} (i : U ⟶ V) (s : B.obj.obj U) (x : N.val.obj U) :
     (changeOfRingsPresheaf c N).map i (s ⊗ₜ[A.obj.obj U,(c.hom.app U).hom] x) =
-      B.obj.map i s ⊗ₜ[A.obj.obj V,(c.hom.app V).hom] N.val.map i x :=
+      @TensorProduct.tmul (A.obj.obj V) (B.obj.obj V) (N.val.obj V) _ _ _
+        (Module.compHom _ (c.hom.app V).hom) _ (B.obj.map i s) (N.val.map i x) :=
   Classical.choose_spec (exists_changeOfRingsMap c N i) s x
 
 private noncomputable def presheafMap :
