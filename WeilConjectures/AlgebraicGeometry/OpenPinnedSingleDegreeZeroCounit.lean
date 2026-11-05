@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 public import WeilConjectures.AlgebraicGeometry.PinnedSingleBaseChangeShift
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors

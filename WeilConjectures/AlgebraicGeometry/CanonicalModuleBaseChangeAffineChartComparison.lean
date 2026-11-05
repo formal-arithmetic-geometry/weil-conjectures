@@ -9,7 +9,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
-import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison
+import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
+import WeilConjectures.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility
 import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison
 
 /-! # The canonical module base-change arrow in affine charts
@@ -100,13 +101,10 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
       := by
   intro U fA gA H E E0 R T
-  have ho :=
-    @exists_canonicalModuleBaseChange_open_comparison.{u, w}
-      inferInstance inferInstance X S X' S' f g g' f' sq G c hc V.1 W.1 hWV
-  rcases ho with ⟨cV, h⟩
-  rcases h with ⟨hcV, h⟩
-  rcases h with ⟨aV, h⟩
-  rcases h with ⟨bV, hV⟩
+  obtain ⟨cV, hcV⟩ := exists_isDerivedModulePullbackComparison
+    (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)) H
+  obtain ⟨aV, bV, hV⟩ := restricted_base_change_compatibility_single_degree
+    f g g' f' sq G 0 c hc V.1 W.1 hWV cV hcV
   have hi := exists_canonicalModuleBaseChange_iso_comparison.{u, w}
     (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
     (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV))
