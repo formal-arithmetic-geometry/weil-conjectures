@@ -273,7 +273,7 @@ private theorem pair_ext {C : Type u} [SmallCategory C]
 
 private theorem element_eqToHom_val {D : Type u} [SmallCategory D]
     (F : D ⥤ Type u) {x y : F.Elements} (h : x = y) :
-    (eqToHom h : x ⟶ y).val = eqToHom (congrArg Sigma.fst h) := by
+    (eqToHom h : x ⟶ y).hom = eqToHom (congrArg Functor.Elements.obj h) := by
   cases h
   rfl
 
