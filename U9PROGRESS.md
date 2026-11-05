@@ -230,32 +230,41 @@
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 - This final commit changes only progress documentation; Lean source matches the green build.
 
-# BZ824 in progress
+# BZ798 in progress
 
-- Branch: u9/BZ824; starting commit 95c8987257f.
-- The user instructed continuation after the upstream-restoration proposal.
-- Restored four prerequisite modules. The comparison predicate uses verified PZ003
-  Localization imports and a reflexive cast; the transport proof is unchanged,
-  and target automorphism specializes the existing arbitrary-degree theorem to zero.
-- All six submitted modules passed ucheck-bump at 826d8e1a1fb: rc=0, failed=0, 4065 jobs.
-- Green: DerivedModuleBaseChangeMap, DerivedModulePullbackComparison,
-  ModulePullbackComparisonIsoTransport, ModulePullbackComparisonTargetAutomorphism,
-  CanonicalModuleBaseChangeIsoComparisonCompat, CanonicalModuleBaseChangeIsoComparison.
-- All restored declaration headers and original assigned/caller sources are unchanged.
-- Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
-- Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
-- Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
-
-# BZ857 in progress
-
-- Branch: `u9/BZ857`; initial baseline `2ab2b07a3`.
-- User instructed continuation after the explicit four-upstream-module restoration proposal.
-- Merged integrated bump commit `db406319f` before restoring the required proof chain.
-- Restoring projection-unit normalization, mixed projection mate, signed normalization,
-  and mate data. Assigned theorem statement remains unchanged.
-- Applying known scalar carrier and canonical Q/Qh comparison repairs.
-- First remote build at `9833fc9a1e` reached the restored unit proof; its remaining
-  input-scalar carrier error is now annotated. The Qh/Q repairs await downstream compilation.
-- Next: validate the leaf and attempt its two direct importers, then downstream layers.
-- Notes: `/home/ubuntu/u9/bz/FIXES-BZ857.md`.
+- Branch: `u9/BZ798`; original baseline: `6a4b38f19`.
+- Resumed after rereading `/home/ubuntu/u9/briefs/BZ798.md` and the progress notes.
+- Merged the current integrated bump branch at `d9a3ea12c`. It already removes the
+  unused signed-projection comparison chain and its downstream callers. The earlier
+  referenced-caller blocker therefore no longer applies.
+- Deleted only the remaining unused `SignedProjectionResolution.totalInverse`;
+  whole-tree `git grep -w totalInverse -- WeilConjectures Comparator` found its sole
+  declaration and no callers. It is listed unused and absent from kept-decls.txt.
+- All surviving declaration text is unchanged from the integrated branch.
+- Next: validate the owned module, then its direct importers and downstream layers.
+- Previous diagnostic history is archived in FIXES-BZ798-preintegration.md.
 - No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ850 in progress
+
+- Branch: `u9/BZ850`; baseline: `2ab2b07a3`.
+- The user instructed continuation after the explicit three-declaration upstream restoration proposal.
+- Restored `derived_projection_exists`, `coefficientConstantTowerProjection_exists`, and
+  `coefficientConstantTowerProjection` in CoefficientRingedSequenceSiteSupplement with their
+  original statements and docstrings. Their surviving users prohibit pruning them.
+- Added Localization imports and explicit simplification of its hidden comparison components.
+- The assigned CoefficientConstantTowerRoos source is unchanged.
+- Next: remote ucheck-bump on the assigned module, then both direct importers.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ864 in progress
+
+- Branch: `u9/BZ864`; baseline `e167a50a4`.
+- The original missing open-comparison helper was pruned while its affine-chart caller remains.
+- First proof replacement exposed two upstream failures; user instructed continuation to green.
+- Restoring the referenced degree-zero open comparison chain with original signatures.
+- The assigned theorem now uses the degree-zero pinned square and target automorphisms.
+- No existing theorem statement changes, proof placeholders, or heartbeat increases.
+- All compilation is remote through `ucheck-bump`; builds 3 and 4 are queued.
+- Fix records and restoration inventories: `/home/ubuntu/u9/bz/FIXES-BZ864.md`.
+- Next: repair errors reported by those builds, validate the leaf, then continue downstream.

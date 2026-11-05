@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
-import WeilConjectures.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility
+import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare
+import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit
+import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
 import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The canonical module base-change arrow in affine charts
 
@@ -37,6 +40,27 @@ private theorem comparison_comp
     x ≫ (b ≪≫ b').hom = (a ≪≫ a').hom ≫ z := by
   simp only [Iso.trans_hom, Category.assoc]
   rw [← Category.assoc, h, Category.assoc, h', ← Category.assoc]
+
+private theorem comparison_conjugate {C : Type*} [Category C]
+    {L L0 N N0 : C} (m : L ⟶ N) (n : L0 ⟶ N0)
+    (a : L ≅ L0) (b : N ≅ N0) (A : N ≅ N) (B : N0 ≅ N0)
+    (h : m ≫ b.hom = a.hom ≫ n) :
+    (m ≫ A.hom) ≫ (A.symm ≪≫ b ≪≫ B).hom = a.hom ≫ (n ≫ B.hom) := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc]
+  rw [← Category.assoc, h, Category.assoc]
+
+private theorem pinned_comparison_isComparison
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X Y : Scheme.{u}} (k : X ⟶ Y) [(Scheme.Modules.tensorPullback k).Additive]
+    (M : Y.Modules) :
+    IsDerivedModulePullbackComparison k M (openPinnedSingleDegreeZeroCounit k M) := by
+  classical
+  let ε := (Classical.choose
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
+  refine ⟨ε, ?_, rfl⟩
+  exact Classical.choose (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
 
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
 that it is invertible. Both the restricted scheme and its module are explicit.
@@ -100,11 +124,40 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
             (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
       := by
+  classical
   intro U fA gA H E E0 R T
   obtain ⟨cV, hcV⟩ := exists_isDerivedModulePullbackComparison
     (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)) H
-  obtain ⟨aV, bV, hV⟩ := restricted_base_change_compatibility_single_degree
-    f g g' f' sq G 0 c hc V.1 W.1 hWV cV hcV
+  let p := pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
+  let q := pullback.snd (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
+  let c₁ := openPinnedSingleDegreeZeroCounit g' G
+  let c₂ := openPinnedSingleDegreeZeroCounit p H
+  obtain ⟨α, hα⟩ := modulePullbackComparison_target_automorphism
+    g' G c₁ c (pinned_comparison_isComparison g' G) hc
+  obtain ⟨γ, hγ⟩ := modulePullbackComparison_target_automorphism
+    p H c₂ cV (pinned_comparison_isComparison p H) hcV
+  obtain ⟨aP, bP, hP⟩ :=
+    open_pinned_single_degree_zero_square.{u, w} f g g' f' sq V.1 W.1 hWV
+  let A := R.mapIso ((schemeDerivedDirectImage f').mapIso
+    ((DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).mapIso α))
+  let B := (schemeDerivedDirectImage q).mapIso
+    ((DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings (pullback (f ∣_ V.1)
+        (g.resLE V.1 W.1 hWV)).toRingedSpace)) 0).mapIso γ)
+  let aV := aP.app G
+  let bV := A.symm ≪≫ bP.app G ≪≫ B
+  have h := comparison_conjugate _ _ (aP.app G) (bP.app G) A B (hP G)
+  change (R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
+    (schemeDerivedDirectImage f').map c₁) ≫ A.hom) ≫ bV.hom =
+    aV.hom ≫ ((schemeDerivedBaseChangeMap (f ∣_ V.1) q (g.resLE V.1 W.1 hWV) p
+      pullback.condition E0 ≫ (schemeDerivedDirectImage q).map c₂) ≫ B.hom) at h
+  have hV : R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
+      (schemeDerivedDirectImage f').map c) ≫ bV.hom =
+      aV.hom ≫ (schemeDerivedBaseChangeMap (f ∣_ V.1) q (g.resLE V.1 W.1 hWV) p
+        pullback.condition E0 ≫ (schemeDerivedDirectImage q).map cV) := by
+    simpa only [hα, hγ, A, B, Functor.map_comp, Functor.mapIso_hom,
+      Category.assoc] using h
   have hi := exists_canonicalModuleBaseChange_iso_comparison.{u, w}
     (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
     (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV))
