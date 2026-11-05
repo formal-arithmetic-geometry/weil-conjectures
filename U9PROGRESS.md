@@ -1,23 +1,25 @@
-# BZ345 complete
+# BZ361 complete
 
-- Branch: `u9/BZ345`; starting commit: `04c3957dc56263143b9eaebd3d534360487f939e`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement`
-  passed `ucheck-bump`: rc=0, failed=0, 3017 jobs, validated at `ec63878fb4`.
-- The compositor fix was already present in the starting tree; no Lean source changes
-  are delivered by this unit.
-- Direct importer `WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh` also rebuilt
-  successfully (2.7s) in the downstream check at `4fb37223f6`.
-- The other three direct importers were skipped because of external dependency errors.
-  All 20 direct importers of PerfectImpliesQCoh also have known external blockers.
-- Downstream batches were stopped after the external blockers were identified; their
-  wrapper exit codes are not treated as proof that the entire batch succeeded.
-- Fix record: `/home/ubuntu/u9/bz/FIXES-BZ345.md`.
-- Evidence: `/home/ubuntu/u9/bz/BUILD-BZ345-baseline-full.log`,
-  `/home/ubuntu/u9/bz/BUILD-BZ345-downstream1-full.log`,
-  `/home/ubuntu/u9/bz/BUILD-BZ345-downstream2-full.log`, and
-  `/home/ubuntu/u9/bz/BZ345-layer2-blockers.tsv`.
-- No local Lean/Lake, statement changes, forbidden proof shortcuts, or heartbeat raises.
-- Completion marker: `/home/ubuntu/u9/state/BZ345.DONE`.
+- Branch: `u9/BZ361`; starting commit: `98654719bd`.
+- Green modules: `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport`,
+  `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomGluing`, and
+  `WeilConjectures.AlgebraicGeometry.OpenUnionHomGluing`.
+- Final `ucheck-bump OpenUnionHomGluing` rebuilt all three successfully:
+  rc=0, failed=0, 2934 jobs, on `poolb:43.166.72.113`.
+- Validated source commit: `b70a9873a373ab8573533b63a6971fc4eab717bc`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ361-open-union-full.log`.
+- The user instructed continuation after the explicit statement API migration proposal.
+  Applied the comparison-orientation substitutions, preserving all binders, hypotheses,
+  and intended morphisms under Mathlib's reversed `mapDerivedCategoryCompIso`.
+- Proofs use the inverse cancellation, explicit unfolding of local comparison aliases,
+  and removal of one redundant `rfl`. Existing docstrings and limit settings are unchanged.
+- The other second-layer importer `DerivedOpenGluing` was attempted and skipped per
+  the brief: its BZ459-owned dependency `DerivedOpenGluingObjects` fails at lines 159/197.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ361.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ361-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ361.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
 
 # BZ133 complete
 
@@ -108,31 +110,21 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
 - This completion commit changes only progress documentation; Lean source matches the green build.
 
-# BZ307 in progress
+# BZ311 complete
 
-- Branch: `u9/BZ307`; starting commit: `ec1bc636d93cb23a821cc484ab6aef1db014813f`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp`.
-- Baseline remote build failed only at the two obsolete compositor `.symm` uses in the statement.
-- The user instructed continuation after the exact two-expression compatibility proposal;
-  `BZ307-statement-compatibility.patch` is applied, along with the matching proof changes.
-- Assigned module passed `ucheck-bump` at `fa8b9a053e`: rc=0, failed=0, 1924 jobs.
-- Next: check direct importers and write the DONE marker.
-- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
-
-# BZ350 complete
-
-- Branch: `u9/BZ350`; starting commit: `04c3957dc`.
-- Assigned `DerivedOpenLocalization` passed unchanged; its known fix was already integrated.
-- Four direct importers passed together at `3364bac7e7`: rc=0, failed=0, 2940 jobs.
-- Green importers: `OpenDerivedLocalizationData`, `OpenDerivedLocalizationAdjunction`,
-  `OpenDerivedRestrictionComparison`, `OpenUnionRestrictionComparisonData`.
-- Two proof bodies corrected the Mathlib compositor orientation; the restriction comparison
-  has a local 400000 budget justified by a measured 218490 heartbeats.
-- Statements/docstrings unchanged; temporary diagnostic probes removed.
-- Optional second-layer batch could not acquire a shared tree and was canceled before building.
-- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ350.md`.
-- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ350-layer1-final-full.log`.
-- No local Lean/Lake, forbidden proof shortcuts, or profiler options.
-- DONE: `/home/ubuntu/u9/state/BZ350.DONE`.
+- Branch: `u9/BZ311`; starting commit: `ec1bc636d`.
+- Assigned module and both downstream layers passed `ucheck-bump` together:
+  rc=0, failed=0, 1935 jobs, on `poolb:43.166.72.113`.
+- Validated source commit: `d599eea1699030daa1a58ff564ab648fb03d536e`.
+- Green modules: `WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport`,
+  `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula`,
+  and `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization`.
+- The user instructed continuation after the exact three-statement proposal.
+  Those canonical quotientCompQhIso endpoint transports are the only Lean changes;
+  all proof bodies, declaration binders, assumptions, and docstrings are unchanged.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ311-final-full.log`.
+- Fix pattern and whole-tree candidate count: `/home/ubuntu/u9/bz/FIXES-BZ311.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ311-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
