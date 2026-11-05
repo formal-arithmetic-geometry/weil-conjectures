@@ -36,20 +36,24 @@ theorem isIso_smoothUnitBaseChange_descendedShriekGeometricExchange_point
     IsIso (smoothUnitBaseChange l f (traceGeometricFiberOverMap f)
       (descendedShriekGeometricExchange l f) e) := by
   have := isIso_upperShriekBaseChangeOfMap_app_unit_point l (L := AlgebraicClosure k)
-    (Z := (compactificationOverField f).overObj)
-    (Z' := ((compactificationOverField f).geometricFiber (Over.w f)).overObj)
+    (Z := (compactificationOverField f).overObj (f := f))
+    (Z' := ((compactificationOverField f).geometricFiber (Over.w f)).overObj
+      (f := traceGeometricFiberOverMap f))
     (P' := geometricFiberOver (point k))
-    (f := (compactificationOverField f).overG)
-    (f' := ((compactificationOverField f).geometricFiber (Over.w f)).overG)
+    (f := (compactificationOverField f).overG (f := f))
+    (f' := ((compactificationOverField f).geometricFiber (Over.w f)).overG
+      (f := traceGeometricFiberOverMap f))
     isPullback_geometricFiberProj_point
-    (Scheme.Hom.isPullback_geometricFiberMap (compactificationOverField f).g rfl).flip
+    (Scheme.Hom.isPullback_geometricFiberMap (g := (point k).hom)
+      (compactificationOverField f).g rfl).flip
   dsimp only [descendedShriekGeometricExchange]
   exact isIso_smoothUnitBaseChange_fieldCompactification_of_proper l f
     (traceGeometricFiberOverMap f)
     (compactificationOverField f) ((compactificationOverField f).geometricFiber (Over.w f))
     (Scheme.Hom.isPullback_geometricFiberMap (compactificationOverField f).i
       ((compactificationOverField f).i_comp_g_comp (Over.w f)))
-    (Scheme.Hom.isPullback_geometricFiberMap (compactificationOverField f).g rfl).flip e
+    (Scheme.Hom.isPullback_geometricFiberMap (g := (point k).hom)
+      (compactificationOverField f).g rfl).flip e
 
 /-- The descended smooth trace is universal over the point for the specified
 geometric compactification, without an additional base-change hypothesis. -/
