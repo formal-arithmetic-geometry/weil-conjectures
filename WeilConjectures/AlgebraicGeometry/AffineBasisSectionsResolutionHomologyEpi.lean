@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 import WeilConjectures.AlgebraicGeometry.AffineBasisAcyclicSectionsPreservesHomology
 import WeilConjectures.AlgebraicGeometry.AffineBasisKInjectiveSectionsPreservesHomology
