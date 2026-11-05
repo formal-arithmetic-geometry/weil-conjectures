@@ -110,6 +110,7 @@ theorem isIso_mapDerivedCategory_map_derivedAdjunction_unit_app (M : C)
         g.rightDerivedSingleUnit (f.obj M) := by
     rw [Functor.rightDerivedSingleUnit]
     erw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+    rfl
   have h₄ := Adjunction.mapHomotopyCategory_unit_app_quotient (c := .up ℤ) adj
     ((CochainComplex.singleFunctor C 0).obj M)
   have key : adj.derivedAdjunction.unit.app ((DerivedCategory.singleFunctor C 0).obj M) ≫
