@@ -218,14 +218,25 @@
 - This final documentation update leaves Lean sources identical to the successful unit build.
 
 
-# BZ713 in progress
+# BZ713 complete
 
 - Branch: `u9/BZ713`; starting commit: `a5261dcee`.
-- Assigned: `WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition`.
-- The user instructed continuation after the exact one-line identity-cast proposal.
-  Applied `cast (by rfl)` to the counit in `Coordinates.represents`, preserving its map.
-- Localization imports restore hidden Qh reduction in proofs. Every other statement
-  and all existing docstrings remain unchanged. Kept declarations were audited.
-- Verification build submitted through `ucheck-bump`; next: downstream validation.
-- Notes, exact errors, machine rules and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ713.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat changes.
+- Assigned leaf `WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition`
+  passed `ucheck-bump`: rc=0, failed=0, 3970 jobs at `0be3f32f55`.
+- User continuation authorized the exact identity cast in `Coordinates.represents`.
+  Added Localization imports and `cast_eq` in the final proof simplification.
+  All other statement text, docstrings and heartbeat settings are unchanged.
+- Two downstream layers completed: seven requested importer targets green, plus
+  `StalkComparisonSourceTransport` and `IsoPullbackStalkCohomology` rebuilt successfully.
+- Final second-layer build: rc=0, failed=0, 3982 jobs at `2a79c76f24`,
+  on `poolb:43.166.85.105`; assigned leaf rebuilt successfully in 40 seconds.
+- Skipped `CanonicalPullbackTensorComparison` because its unowned BZ671 dependency
+  `DerivedPullbackKFlatTensorModel` fails at line 317. Neither module was changed.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ713-green-full.log`,
+  `BUILD-BZ713-downstream1-full.log`, and `BUILD-BZ713-downstream2-full.log`.
+- Fix patterns, exact errors and machine rules: `/home/ubuntu/u9/bz/FIXES-BZ713.md`.
+  Rule replay is exact and idempotent; audit: `BZ713-rule-audit.txt`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ713-contract-audit.txt`.
+  No local Lean/Lake, sorries, trust bypasses, profiler probes, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ713.DONE`.
+- This final documentation update leaves Lean source identical to the green build.
