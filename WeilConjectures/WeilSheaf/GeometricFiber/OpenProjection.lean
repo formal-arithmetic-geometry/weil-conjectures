@@ -134,6 +134,28 @@ lemma _root_.CategoryTheory.ObjectProperty.ι_map_whiskeringRight_preimageIso_ho
     P.ι.map (((P.fullyFaithfulι.whiskeringRight C).preimageIso e).hom.app c) = e.hom.app c :=
   P.fullyFaithfulι.map_preimage _
 
+/-- The components of a natural isomorphism of functors to a full subcategory, obtained as the
+preimage of a natural isomorphism after composition with the inclusion. -/
+lemma _root_.CategoryTheory.ObjectProperty.whiskeringRight_preimageIso_hom_app_hom
+    {C D : Type*} [Category* C] [Category* D] {P : ObjectProperty D}
+    {F G : C ⥤ P.FullSubcategory} (e : F ⋙ P.ι ≅ G ⋙ P.ι) (c : C) :
+    (((P.fullyFaithfulι.whiskeringRight C).preimageIso e).hom.app c).hom = e.hom.app c :=
+  P.fullyFaithfulι.map_preimage _
+
+/-- The tensor product of morphisms in a full monoidal subcategory is computed in the ambient
+category. -/
+lemma _root_.CategoryTheory.ObjectProperty.FullSubcategory.tensorHom_hom {C : Type*} [Category* C]
+    [MonoidalCategory C] {P : ObjectProperty C} [P.IsMonoidal] {A B A' B' : P.FullSubcategory}
+    (f : A ⟶ B) (g : A' ⟶ B') : (f ⊗ₘ g).hom = f.hom ⊗ₘ g.hom :=
+  rfl
+
+/-- The image under a functor of the inverse and the hom of a natural isomorphism cancel. -/
+@[reassoc]
+lemma _root_.CategoryTheory.Functor.map_inv_app_comp_map_hom_app {C D E : Type*} [Category* C]
+    [Category* D] [Category* E] {F G : C ⥤ D} (e : F ≅ G) (H : D ⥤ E) (c : C) :
+    H.map (e.inv.app c) ≫ H.map (e.hom.app c) = 𝟙 _ := by
+  rw [← H.map_comp, Iso.inv_hom_id_app, H.map_id]
+
 section OpenImmersion
 
 variable {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
@@ -171,21 +193,136 @@ noncomputable def upperStarForgetIso :
       (Functor.associator _ _ _).symm)
 
 set_option maxHeartbeats 2000000 in
-lemma ι_map_upperStarForgetIso_hom_app (N : WeilComplex k₀ l X) :
-    (ObjectProperty.ι _).map ((upperStarForgetIso k₀ l j).hom.app N) =
+lemma upperStarForgetIso_hom_app_hom (N : WeilComplex k₀ l X) :
+    ((upperStarForgetIso k₀ l j).hom.app N).hom =
       (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l U).hom.app ((upperStar j).obj N) ≫
         (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).inv.app N.obj ≫
         (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
           (Scheme.Hom.geometricFiberMap j
             (comp_over j (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
           ((geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).inv.app N) := by
-  refine (ObjectProperty.ι_map_whiskeringRight_preimageIso_hom_app _ N).trans ?_
+  refine (ObjectProperty.whiskeringRight_preimageIso_hom_app_hom _ N).trans ?_
   simp [CondensedRing.boundedConstructibleUpperStarCompatibility,
     ObjectProperty.liftFullSubcategoryCompιIso]
   erw [Category.id_comp, Category.comp_id]
 
-example : (geometricFiberHom (k₀ := k₀) j).left =
-    Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))) := rfl
+/-- Forgetting the Weil structure on morphisms, on the ambient derived categories: the derived
+condensed realization, up to `AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorCompιIso`. -/
+lemma geometricFiberBoundedConstructibleFunctor_map_hom {A B : WeilComplex k₀ l X} (φ : A ⟶ B) :
+    ((geometricFiberBoundedConstructibleFunctor k₀ l X).map φ).hom =
+      (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).hom.app A ≫
+        (ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X).map φ.hom ≫
+        (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).inv.app B :=
+  (NatIso.naturality_2 (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X) φ).symm
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+set_option backward.isDefEq.respectTransparency false in
+-- `Mod.monoidalClosed` needs `IsCommMonObj (condensedRingObj _ _)` up to instance unfolding
+/-- The tensor comparison of forgetting the Weil structure, on the ambient derived categories. -/
+lemma geometricFiberBoundedConstructibleFunctorTensorIso_hom_app_hom (A B : WeilComplex k₀ l X) :
+    ((geometricFiberBoundedConstructibleFunctorTensorIso k₀ l X).hom.app (A, B)).hom =
+      (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).hom.app
+          ((nativeConstructibleTensor k₀ l X).obj (A, B)) ≫
+        (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X).hom.app (A.obj, B.obj) ≫
+        ((geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).inv.app A ⊗ₘ
+          (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).inv.app B) := by
+  refine (ObjectProperty.whiskeringRight_preimageIso_hom_app_hom _ (A, B)).trans ?_
+  simp [boundedConstructibleιTensorIso, MonoidalCategory.tensorHom_def]
+
+open scoped CategoryTheory.Obj in
+omit [IsOpenImmersion j] [QuasiCompact j] [IsSeparated j] [LocallyOfFiniteType j] in
+lemma boundedConstructibleUpperStar_map_hom {A B : BoundedConstructible (condensedRingObj
+    (Profinite.padicAlgClRingObj l)
+      (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left)} (φ : A ⟶ B) :
+    ((CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) j)).map φ).hom =
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap j
+          (comp_over j (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map φ.hom :=
+  rfl
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+open scoped CategoryTheory.Obj in
+omit [IsOpenImmersion j] [QuasiCompact j] [IsSeparated j] [LocallyOfFiniteType j] in
+lemma μ_boundedConstructibleUpperStar_hom (A B : BoundedConstructible (condensedRingObj
+    (Profinite.padicAlgClRingObj l)
+      (Over.mk (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left)) :
+    (Functor.LaxMonoidal.μ
+      (CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) j)) A B).hom =
+      Functor.LaxMonoidal.μ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap j
+          (comp_over j (Spec (CommRingCat.of k₀))))).leftDerivedFunctor A.obj B.obj :=
+  rfl
+
+variable (k₀ l) in
+/-- The inverse `j^* A ⊗ j^* B ⟶ j^*(A ⊗ B)` of the native pullback–tensor comparison
+(`AlgebraicGeometry.ProEtaleWeilSheaf.nativePullTensor`) on Weil complexes. -/
+noncomputable def upperStarTensorComparison :
+    (upperStar j).prod (upperStar j) ⋙ nativeConstructibleTensor k₀ l U ⟶
+      nativeConstructibleTensor k₀ l X ⋙ upperStar j where
+  app A := ObjectProperty.homMk
+    ((ProEtaleWeilSheaf.nativePullTensor k₀ l j).inv.app (A.1.obj, A.2.obj))
+  naturality A B φ := ObjectProperty.hom_ext _
+    ((ProEtaleWeilSheaf.nativePullTensor k₀ l j).inv.naturality (Prod.mkHom φ.1.hom φ.2.hom))
+
+set_option maxHeartbeats 8000000 in
+-- the derived categories of condensed module objects are slow to elaborate
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+/-- Forgetting the Weil structure carries the inverse native pullback–tensor comparison to the
+lax monoidal structure of the restriction `ī^*` of bounded constructible complexes, up to the
+tensor comparisons `AlgebraicGeometry.WeilComplex.geometricFiberBoundedConstructibleFunctorTensorIso`
+and `AlgebraicGeometry.WeilComplex.upperStarForgetIso`. -/
+theorem map_upperStarTensorComparison_app_comp (a b : WeilComplex k₀ l X) :
+    (geometricFiberBoundedConstructibleFunctor k₀ l U).map
+        ((upperStarTensorComparison k₀ l j).app (a, b)) ≫
+      (upperStarForgetIso k₀ l j).hom.app ((nativeConstructibleTensor k₀ l X).obj (a, b)) ≫
+      (CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) j)).map
+        ((geometricFiberBoundedConstructibleFunctorTensorIso k₀ l X).hom.app (a, b)) =
+    (geometricFiberBoundedConstructibleFunctorTensorIso k₀ l U).hom.app
+        ((upperStar j).obj a, (upperStar j).obj b) ≫
+      ((upperStarForgetIso k₀ l j).hom.app a ⊗ₘ (upperStarForgetIso k₀ l j).hom.app b) ≫
+      Functor.LaxMonoidal.μ
+        (CondensedRing.boundedConstructibleUpperStar _ l (geometricFiberHom (k₀ := k₀) j)) _ _ := by
+  apply ObjectProperty.hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom]
+  rw [geometricFiberBoundedConstructibleFunctor_map_hom, upperStarForgetIso_hom_app_hom,
+    boundedConstructibleUpperStar_map_hom, geometricFiberBoundedConstructibleFunctorTensorIso_hom_app_hom,
+    geometricFiberBoundedConstructibleFunctorTensorIso_hom_app_hom]
+  simp only [ObjectProperty.FullSubcategory.tensorHom_hom, upperStarForgetIso_hom_app_hom,
+    μ_boundedConstructibleUpperStar_hom]
+  have H0 : (ProEtaleWeilSheaf.derivedCondensedRealization k₀ l U).map
+        ((upperStarTensorComparison k₀ l j).app (a, b)).hom ≫
+      (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).inv.app
+        ((nativeConstructibleTensor k₀ l X).obj (a, b)).obj ≫
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap j
+          (comp_over j (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
+        ((ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X).hom.app (a.obj, b.obj)) =
+      (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l U).hom.app
+        (((upperStar j).obj a).obj, ((upperStar j).obj b).obj) ≫
+      ((ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).inv.app a.obj ⊗ₘ
+        (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l j).inv.app b.obj) ≫
+      Functor.LaxMonoidal.μ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap j
+          (comp_over j (Spec (CommRingCat.of k₀))))).leftDerivedFunctor
+        ((ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X).obj a.obj)
+        ((ProEtaleWeilSheaf.derivedCondensedRealization k₀ l X).obj b.obj) :=
+    ProEtaleWeilSheaf.map_nativePullTensor_inv_app_comp k₀ l j a.obj b.obj
+  have H := (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l U).hom.app
+      ((nativeConstructibleTensor k₀ l U).obj ((upperStar j).obj a, (upperStar j).obj b)) ≫=
+    (H0 =≫
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
+        (Scheme.Hom.geometricFiberMap j
+          (comp_over j (Spec (CommRingCat.of k₀))))).leftDerivedFunctor.map
+        ((geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).inv.app a ⊗ₘ
+          (geometricFiberBoundedConstructibleFunctorCompιIso k₀ l X).inv.app b))
+  simp only [← Functor.LaxMonoidal.μ_natural, tensorHom_comp_tensorHom_assoc, Category.assoc] at H
+  simp only [Category.assoc, Functor.map_comp, Functor.comp_obj, Functor.prod_obj,
+    Iso.inv_hom_id_app_assoc, Functor.map_inv_app_comp_map_hom_app_assoc,
+    tensorHom_comp_tensorHom_assoc]
+  exact H
 
 end OpenImmersion
 
