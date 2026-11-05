@@ -169,25 +169,40 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
+# BZ605 in progress
 
-# BZ631 complete
+- Branch: `u9/BZ605`; baseline: `0d3c0ae938`.
+- Assigned module: `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf`.
+- The user instructed continuation after the exact `BZ605-public-api-proposal.patch`.
+  That patch is applied: the public chain-map hypothesis and homology comparison now
+  use direct `Q`, removing the obsolete identity quotient transport. All other
+  declaration headers remain unchanged.
+- Localization imports and proof-local identity normalization preserve both private
+  helper hypotheses. No local Lean/Lake, proof escapes, heartbeat changes, or profiler probes.
+- Next: remote validation of the unit and four direct importers, then one more downstream layer.
+- Fixes and build logs: `/home/ubuntu/u9/bz/FIXES-BZ605.md`.
 
-- Branch: `u9/BZ631`; starting commit: `b7a97a5ed`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.Injective.InjectiveExchangeTargetTransport`
-  passed `ucheck-bump`: 4243 jobs, target freshly rebuilt in 47 seconds.
-- Validated source commit: `a0b448506d61187b0aa3f3811cf84153b5f977c9`.
-- Build tree: `poolb:43.166.82.34`; exact Lean v4.35.0-rc3 and Mathlib b63f6e8a pins verified.
-- The user instructed continuation after the exact two-statement proposal. Applied
-  the `Plus.Qh.obj H` endpoint and canonical quotient comparison, with the latter
-  reduced to identity in the proof. All other statement text and docstrings are unchanged.
-- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ631-unit-full.log`.
-- Direct importer `Injective.InjectiveExchangeRepresentative` was submitted, then
-  skipped under the unowned-dependency rule: BZ630's `InjectiveExchangeSourceTransport`
-  is byte-for-byte identical to the source with three recorded Lean errors at
-  `3c12182227`. Cancelled only the verified queued downstream request before it acquired
-  a tree. The importer and its next layer are not claimed green; no downstream edits.
-- Fix patterns, occurrence counts, and blocker evidence: `/home/ubuntu/u9/bz/FIXES-BZ631.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ631-contract-audit.txt`.
-- No local Lean/Lake execution, sorries, proof escapes, heartbeat increases, or profiler probes.
-- Completion marker: `/home/ubuntu/u9/state/BZ631.DONE`.
-- This completion commit changes only documentation; Lean source matches the green revision.
+- BZ605 unit and all four selected direct importers are green together:
+  `ucheck-bump` returned rc=0, built=27, failed=0 at `d3dc5d8650`.
+- Remote log: `/home/ubuntu/u9/logs/BZ605-20261106T045422.log`;
+  tree: `poolb:43.157.189.27`. No downstream edits were required.
+- Next: one second-layer batch (four raw triangle pullback importers), then DONE.
+
+# BZ605 complete
+
+- Unit and both downstream layers are green: 9 selected modules passed `ucheck-bump`.
+- Unit plus layer 1: rc=0, built=27, failed=0, 4364 jobs at `d3dc5d8650`.
+- Layer 2: rc=0, built=21, failed=0, 4369 jobs at `7c34f43bef`.
+  The assigned module rebuilt successfully again on this second tree in 217 seconds.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ605-unit-layer1-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ605-layer2-full.log`.
+- Final Lean change is limited to `CohomPresheaf.lean`: direct-Q homology and chain-map
+  comparisons, localization imports, and proof-local identity normalization.
+- The user authorized the exact one-hypothesis/definition-body API proposal by
+  instructing continuation. All other 58 declaration headers and all docstrings
+  are unchanged. No downstream source edits were needed.
+- No local Lean/Lake, sorries, forbidden proof shortcuts, heartbeat increases, or profiler probes.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ605.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ605-contract-audit.txt`.
+- Completion marker: `/home/ubuntu/u9/state/BZ605.DONE`.
+- This final documentation commit leaves Lean sources identical to the validated revision.
