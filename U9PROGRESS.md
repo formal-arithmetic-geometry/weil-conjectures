@@ -31,3 +31,14 @@ once finiteReduction/compositeReduction explicitly target coeffRing. Previous ve
 60.9s timeout. Scalars ordinary rewrite fix prepared; new const section appeared folded in an
 internal change command, so keep that proof's raw section expression while its exported statement
 uses the typed new section. Next target includes original-statement boundary and axiom print.
+
+20:06 CST: Read refreshed brief and K4-plan-2; now Experiment3 dedicated coefficient category,
+minimal interface and one outer interpretation. Snapshot affd8ca0f/log195648 proves the COMPLETE
+native finite integral Tate reading square: final kernel707ms, logged elaboration184ms, module8.3s.
+Native finite reading kernel63.6ms; actual integral reduction kernel1.19s. All normal/exposed.
+The separate FiniteBoundary only fails at upperStarFiniteCoefficientModEquivalenceIso_eq (rfl):
+kernel62.2s; other boundaries finiteEquiv293ms, freeRootsIso368ms, readingIso414ms GREEN.
+No original final statement has passed. K4C_BENCHMARK.tsv records individual profiler messages
+for all current helper declarations (raw elaboration messages do not include tactics/TC synthesis).
+Next: keep native proof, inspect minimal dedicated category interface and a single interpretation;
+replace the expensive defeq comparison with small propositional adjunction/functor identities.

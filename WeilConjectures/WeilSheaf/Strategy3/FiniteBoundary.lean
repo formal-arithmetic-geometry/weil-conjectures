@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Strategy3.TateReading
+public import WeilConjectures.WeilSheaf.Strategy3.PullbackBoundary
 
 /-! # Separately checked boundary identifications for the duplicate finite reading -/
 
@@ -28,10 +29,18 @@ lemma finiteCoefficientModEquivalence_eq (X : Scheme.{u}) :
     finiteCoefficientModEquivalence X T = ProEtale.finiteCoefficientModEquivalence X T := by
   rfl
 
+lemma lowerStarFiniteCoefficientModEquivalenceIso_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    lowerStarFiniteCoefficientModEquivalenceIso g T =
+      ProEtale.lowerStarFiniteCoefficientModEquivalenceIso g T := by
+  rfl
+
 lemma upperStarFiniteCoefficientModEquivalenceIso_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
     upperStarFiniteCoefficientModEquivalenceIso g T =
       ProEtale.upperStarFiniteCoefficientModEquivalenceIso g T := by
-  rfl
+  unfold upperStarFiniteCoefficientModEquivalenceIso
+    ProEtale.upperStarFiniteCoefficientModEquivalenceIso
+  simp only [upperStarLowerStarAdjunction_eq, finiteCoefficientModEquivalence_eq,
+    lowerStarFiniteCoefficientModEquivalenceIso_eq]
 
 lemma finiteCoefficientModEquivalenceFreeRootsOfUnityIso_eq
     (X : Scheme.{u}) (N : ℕ) (hN : 0 < N) (hX : IsUnit (N : Γ(X, ⊤))) :

@@ -51,7 +51,7 @@ theorem purity_finiteCoefficientIntegralTateOneReading_pullback_original
     Strategy3.pullIso_eq, Strategy3.upperStarIntegralTateTwistOneIso_eq,
     Strategy3.finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso_eq,
     Strategy3.upperStarFiniteCoefficientModEquivalenceIso_eq] at h
-  dsimp only [Strategy3.coeffType, Strategy3.coeffRing, Strategy3.finiteReduction,
+  dsimp +instances only [Strategy3.coeffType, Strategy3.coeffRing, Strategy3.finiteReduction,
     Strategy3.integersModPowReduction, Strategy3.coefficientMap,
     integersModPowCoeff, Profinite.integersModPowRingObj,
     integersModPowReduction, Profinite.padicIntegersRingObjToIntegersModPow,
