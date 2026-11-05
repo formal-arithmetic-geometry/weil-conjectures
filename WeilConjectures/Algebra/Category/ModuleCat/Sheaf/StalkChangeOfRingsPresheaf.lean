@@ -28,6 +28,16 @@ set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 
+local instance {X : TopCat.{u}}
+    {R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}}
+    (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X)
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+    {U V : (Opens X)ᵒᵖ} (f : U ⟶ V) :
+    Module (R.obj.obj V)
+      ((ModuleCat.restrictScalars (((sheafCompose (Opens.grothendieckTopology X)
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj.map f).hom).obj (F.val.obj V)) :=
+  inferInstanceAs (Module (R.obj.obj V) (F.val.obj V))
+
 private theorem changeOfRingsMap_tmul' {X : TopCat.{u}}
     {R₁ R₂ : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}}
     (α : R₁ ⟶ R₂)
@@ -197,7 +207,7 @@ private theorem stalkChangeOfRingsMap_injective (X : TopCat.{u})
       Q (germ P.presheaf U x hx t) = q U hx t := by
     exact ConcreteCategory.congr_hom (CategoryTheory.Limits.colimit.ι_desc c (op ⟨U, hx⟩)) t
   have hleft (t : Z) : Q (ψ t) = t := by
-    induction t with
+    induction t using TensorProduct.inductionOn with
     | tmul a s =>
       obtain ⟨U, hxU, a, rfl⟩ := exists_germ_eq (C := CommRingCat.{u}) R₂.obj a
       obtain ⟨V, hxV, s, rfl⟩ := exists_germ_eq F.val.presheaf s

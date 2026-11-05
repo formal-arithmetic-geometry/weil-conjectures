@@ -8,8 +8,8 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.CategoryTheory.Sites.CartesianMonoidal
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
