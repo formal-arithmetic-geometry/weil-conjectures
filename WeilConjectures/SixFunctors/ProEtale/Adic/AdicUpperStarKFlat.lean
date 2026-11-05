@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
 public import WeilConjectures.AlgebraicGeometry.Native.NativeModuleConstructibilityComparison
 public import WeilConjectures.CategoryTheory.ModuleObjects.SixFunctors.ScalarExtensionMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequalizer
+public import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorRightIsoNaturality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.Algebra.Homology.CountableTensorStructures
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
@@ -64,35 +65,6 @@ theorem kFlat_iff_acyclic_tensorRight (P : CochainComplex M ℤ) :
   exact Equivalence.acyclic_tensor_swap P
 
 end CategoryTheory.Functor
-
-namespace CategoryTheory.Mod
-
-variable {C : Type w} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
-  [MonoidalCategory C] [SymmetricCategory C] [MonoidalClosed C]
-  {R : C} [MonObj R] [IsCommMonObj R]
-
-/-- The comparison of the coequalizer tensor with the monoidal tensor fixes the quotient maps. -/
-lemma tensorπ_relativeTensorRightIso_hom (M N : Mod C R) :
-    tensorπ M N ≫ ((relativeTensorRightIso N).hom.app M).hom = tensorObjπ M N := by
-  have h := congrArg Mod.Hom.hom
-    (show colimit.ι ((tensorLeftDiagram R N).flip.obj M) WalkingParallelPair.one ≫
-        (relativeTensorRightIso N).hom.app M = relativeTensorπ M N by
-      simp [relativeTensorRightIso, relativeTensorCofork])
-  exact h
-
-/-- The comparison of the coequalizer tensor with the monoidal tensor is natural in the
-second variable. -/
-lemma tensorLeftMap_relativeTensorRightIso_hom {N N' : Mod C R} (g : N ⟶ N') :
-    tensorLeftMap g ≫ (relativeTensorRightIso N').hom =
-      (relativeTensorRightIso N).hom ≫ (tensoringRight _).map g := by
-  ext M : 2
-  apply tensorLeft_obj_hom_ext
-  simp only [NatTrans.comp_app, Mod.comp_hom']
-  rw [tensorπ_tensorLeftMap_assoc, tensorπ_relativeTensorRightIso_hom, ← Category.assoc,
-    tensorπ_relativeTensorRightIso_hom]
-  exact (tensorObjπ_whiskerLeft g).symm
-
-end CategoryTheory.Mod
 
 namespace AlgebraicGeometry.ProEtale
 
