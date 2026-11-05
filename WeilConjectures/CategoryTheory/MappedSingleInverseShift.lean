@@ -122,8 +122,8 @@ theorem mapped_single_inverse_shift (G : B ⥤ C) [G.Additive] (X : B) (n : ℕ)
   erw [hs]
   erw [← DerivedCategory.quotientCompQhIso_hom_naturality]
   simp only [Functor.map_comp, ← Category.assoc]
-  apply (cancel_mono ((DerivedCategory.quotientCompQhIso C).hom.app
-    ((CochainComplex.singleFunctor C 0).obj (G.obj X)))⟦-(n : ℤ)⟧').2
+  apply (cancel_mono (((DerivedCategory.quotientCompQhIso C).hom.app
+    ((CochainComplex.singleFunctor C 0).obj (G.obj X)))⟦-(n : ℤ)⟧')).2
   simp only [Category.assoc]
   change DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) n).app X).hom) ≫
