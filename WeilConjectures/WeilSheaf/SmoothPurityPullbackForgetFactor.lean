@@ -53,7 +53,7 @@ lemma purity_upperStarForgetIso_factor_hom
       (upperStarForgetIso Λ s).hom.app ((p)^*⟦Λ⟧.obj M))
     ((upperStarForgetIso Λ p).hom.app M)
     (by
-      simp only [Functor.mapIso_inv, Iso.app_inv, Category.assoc, Functor.comp_obj] at h ⊢
+      simp only [Functor.mapIso_inv, Iso.app_inv, Functor.comp_obj] at h ⊢
       dsimp only [Mod.forget] at h ⊢
       exact h)
   exact h'

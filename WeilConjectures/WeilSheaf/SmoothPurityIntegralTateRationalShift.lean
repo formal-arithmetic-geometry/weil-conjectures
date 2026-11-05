@@ -64,6 +64,8 @@ lemma upperStarShiftIntegralTateTwistDerivedIso_hom_comp_rationalization
   simp only [upperStarShiftIntegralTateTwistDerivedIso_hom_eq,
     purityExtendScalarsShiftIntegralTateIso, upperStarShiftTateTwistDerivedIso,
     Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom] at h ⊢
+  dsimp only [purityDerivedCoefficientExtension, purityDerivedPullback,
+    purityDerivedCoefficientExtension_commShift, purityDerivedPullback_commShift] at h
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtale
