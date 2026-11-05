@@ -397,22 +397,6 @@ def ClopenProjectorDescent
 attribute [local instance] clopenTowerAbelian
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-private theorem projector_factorsh
-    {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
-    [HasDerivedCategory A] [HasDerivedCategory D]
-    (F : A ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (K : CochainComplex A ℤ) :
-    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient A (.up ℤ)).obj K) =
-      F.mapDerivedCategoryFactors.hom.app K := by
-  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-  dsimp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift, NatIso.ofComponents_hom_app,
-    NatIso.ofComponents_inv_app, Iso.refl_hom, Iso.refl_inv, Functor.comp_obj]
-  erw [F.mapDerivedCategory.map_id, Category.id_comp, DerivedCategory.Qh.map_id,
-    Category.comp_id, Category.comp_id]
-
 section ProjectorLocalization
 
 variable {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
