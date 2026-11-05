@@ -17813,6 +17813,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Final
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction

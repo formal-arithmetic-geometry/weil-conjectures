@@ -5,3 +5,4 @@
 - Initial check: resolved-merge modules plus target and VerdierDual; compile exclusively with ucheck.
 - Added isolated helper drafts: CompactForgetComparison (natural tensor, pullback, and compact-support comparisons), UniversalArrowMate (mate invertibility from a compatible universal counit), ExceptionalForgetCounit (existing free-object lifting construction with its actual forget equation retained), and ExceptionalForgetMate (canonical mate on the bounded full subcategories). No new admitted proofs. These are awaiting remote validation.
 - Initial merge check acquired pool:43.157.184.90; log /home/ubuntu/u9/logs/K8-20261105T184709.log.
+- Static merge review caught the pr/2126 import move dropping b1's additional fully-faithful Yoneda lemma. Restored the retained FullyFaithful module import in VerdierExchange and in the root import manifest; the active initial build predates this repair, so its VerdierExchange result may require a recheck.

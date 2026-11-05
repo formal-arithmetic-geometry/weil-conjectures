@@ -31,7 +31,8 @@ variable {C : Type*} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
 
 /-- The construction of the exceptional Weil lift, retaining the equation identifying its
 underlying counit with the geometric counit. -/
-theorem exists_bijective_rightDerivedFunctor_map_comp_free_with_forget (PC : ObjectProperty (DerivedCategory C))
+theorem exists_bijective_rightDerivedFunctor_map_comp_free_with_forget
+    (PC : ObjectProperty (DerivedCategory C))
     (PD : ObjectProperty (DerivedCategory D)) [PC.IsClosedUnderIsomorphisms]
     (hPC : ∀ K, PC K → DerivedCategory.TStructure.t.bounded K)
     (hR : ∀ K, PC K → PD (L.rightDerivedFunctor.obj K))

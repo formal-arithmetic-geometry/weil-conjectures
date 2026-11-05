@@ -5,11 +5,10 @@ Authors: Claude
 -/
 module
 
-
-
 public import WeilConjectures.WeilSheaf.CompactProjectionFormula
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-!
 # The Verdier exchange for Weil complexes
