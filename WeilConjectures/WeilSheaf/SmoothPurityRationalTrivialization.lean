@@ -36,6 +36,12 @@ noncomputable def purityChangeCoefficientPullbackIso
       (purityExtendPullbackIso Λ g M N e) ≪≫
     (CondensedRing.pullIso a g).app N
 
+/-- The unit comparison for extension of coefficients, with its monoidal instance fixed. -/
+noncomputable def purityCoefficientUnitIso (X : Scheme.{u}) :
+    (Mod.extendScalars (coefficientMap a X)).obj (𝟙_ _) ≅ 𝟙_ _ :=
+  letI := Mod.extendScalarsMonoidal (coefficientMap a X)
+  (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm
+
 /-- Extend a pulled-back trivialization to the final coefficient ring before specializing it. -/
 noncomputable def purityChangeCoefficientTrivialization
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
@@ -43,10 +49,8 @@ noncomputable def purityChangeCoefficientTrivialization
       ((g)^*[Ab.{u + 1}].mapMod _).obj (𝟙_ _)) :
     (g)^*⟦Λ'⟧.obj ((Mod.extendScalars (coefficientMap a X)).obj M) ≅
       (g)^*⟦Λ'⟧.obj (𝟙_ _) :=
-  letI := Mod.extendScalarsMonoidal (coefficientMap a X)
   purityChangeCoefficientPullbackIso Λ a g M (𝟙_ _) e ≪≫
-    (g)^*⟦Λ'⟧.mapIso (Functor.Monoidal.εIso
-      (Mod.extendScalars (coefficientMap a X))).symm
+    (g)^*⟦Λ'⟧.mapIso (purityCoefficientUnitIso Λ a X)
 
 variable [WeaklyEtale g] {K : Type u} [Field K] (f : U ⟶ Spec (.of K)) (l : ℕ) [Fact l.Prime]
   {ζ : ℕ → K} (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n))

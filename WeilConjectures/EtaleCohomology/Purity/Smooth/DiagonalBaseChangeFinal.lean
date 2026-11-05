@@ -60,8 +60,8 @@ theorem dualizingComplexTwistShiftIso_baseChange_of_isIso_of_isNoetherian :
       (L((g')^*[ModuleCat.{u + 1} Λ])).map (dualizingComplexTwistShiftIso Λ f d aY).hom ≫
         (leftDerivedUpperStarTwistShiftIso Λ g' d (constantComplex Λ X)).hom ≫
           (twistShift Λ X' d).map (leftDerivedUpperStarUnitIso _ g').hom := by
-  have : Smooth f := SmoothOfRelativeDimension.smooth
-  have : Smooth f' := SmoothOfRelativeDimension.smooth
+  have : Smooth f := SmoothOfRelativeDimension.smooth d f
+  have : Smooth f' := SmoothOfRelativeDimension.smooth d f'
   have : LocallyOfFiniteType f := inferInstance
   have : LocallyOfFiniteType f' := inferInstance
   have : IsNoetherian (pullback f f) := isNoetherian_of_locallyOfFiniteType (pullback.fst f f)
@@ -71,8 +71,8 @@ theorem dualizingComplexTwistShiftIso_baseChange_of_isIso_of_isNoetherian :
   have : HasInvertibleExponent Λ (pullback f' f') :=
     HasInvertibleExponent.of_hom (pullback.fst f' f')
   exact dualizingComplexTwistShiftIso_baseChange_of_isIso_of_laws Λ sq d aY aY'
-    (IsoSquare.exchangeCompCompatible_diagonal sq Λ)
+    (IsoSquare.exchangeCompCompatible_diagonal Λ sq)
     (fun K ↦ rightDerivedUpperShriekBaseChangeMap_id_app_comp Λ g' (IsoSquare.isPullback_id g') K)
-    (IsoSquare.dualizingComplexFstIso_hom_eq sq Λ d)
+    (IsoSquare.dualizingComplexFstIso_hom_eq Λ sq d)
 
 end AlgebraicGeometry.Etale

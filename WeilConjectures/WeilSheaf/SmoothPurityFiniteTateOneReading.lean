@@ -67,7 +67,9 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
     (ringChar_integersModPowCoeff ℓ E n) hzero g
     (isUnit_natCast_pow_of_neZero ℓ n f) (isUnit_natCast_pow_of_neZero ℓ n (g ≫ f))
   have hr := upperStarIntegralTateTwistOneIso_hom_comp_reduction ℓ E g f n
-  have h := purity_reading_composition_component
+  simp only [purityTateRootPullbackIso,
+    upperStarRootsOfUnitySheafIsoOfInvertible_hom] at hr
+  have h := purity_reading_composition_named
     (CondensedRing.upperStar (Profinite.integersModPowRingObj ℓ E n) g)
     (finiteCoefficientModEquivalence Y (PadicAlgCl.integersModPow ℓ E n)).functor
     (finiteCoefficientModEquivalence X (PadicAlgCl.integersModPow ℓ E n)).functor
@@ -98,9 +100,11 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
       (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
         (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
       ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
-        (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g)) hr hf
-  rw [purity_finiteCoefficientIntegralTateOneReading_eq,
-    purity_finiteCoefficientIntegralTateOneReading_eq]
+        (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g))
+    (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n (g ≫ f))
+    (finiteCoefficientModEquivalenceExtendScalarsIntegralTateTwistOneIso ℓ E n f)
+    (purity_finiteCoefficientIntegralTateOneReading_eq ℓ E n (g ≫ f))
+    (purity_finiteCoefficientIntegralTateOneReading_eq ℓ E n f) hr hf
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
   cast_proofs h
 

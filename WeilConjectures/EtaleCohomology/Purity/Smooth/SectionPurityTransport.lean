@@ -18,9 +18,9 @@ an étale morphism `e : X' ⟶ X` (for instance an isomorphism), `g : Z' ⟶ Z`.
 the pullback `Lg^* cl_i` followed by the exceptional base change
 `Lg^* Ri^! ⟶ Ri'^! Le^*` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`), through
 `Λ_{Z'} ≅ Lg^* Λ_Z` and `Le^*(Λ_X(c)[2c]) ≅ Λ_{X'}(c)[2c]`
-(`AlgebraicGeometry.Etale.thomFundamentalClassMap_baseChange`): the fundamental class restricts
+(`AlgebraicGeometry.Etale.thomFundamentalClassMap_baseChange_of_etale`): the fundamental class restricts
 to the fundamental class
-(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass`) and the adjoint of a
+(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`) and the adjoint of a
 restricted class with supports is the base change of its adjoint
 (`AlgebraicGeometry.Etale.supportedClassMap_restrictSupportedClass`).
 
@@ -60,7 +60,7 @@ of `i : Z ⟶ X` along an étale `e : X' ⟶ X`, the pullback `Lg^* cl_i` of the
 followed by the exceptional base change `Lg^* Ri^! ⟶ Ri'^! Le^*` at `Λ_X(c)[2c]` and
 `Ri'^!(Le^*(Λ_X(c)[2c]) ≅ Λ_{X'}(c)[2c])`, is `Λ_{Z'} ≅ Lg^* Λ_Z` followed by the purity map of
 `i'`. -/
-theorem thomFundamentalClassMap_baseChange
+theorem thomFundamentalClassMap_baseChange_of_etale
     (hT : HasThomFrames Λ c i) (hR : HasRegularZariskiFrames c i)
     (hT' : HasThomFrames Λ c i') (hR' : HasRegularZariskiFrames c i')
     {k k' : Type u} [Field k] [Field k'] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
@@ -104,7 +104,7 @@ theorem rightDerivedUpperShriekTateObjectIsoOfSection_baseChange :
         (rightDerivedUpperShriekTateObjectIsoOfSection Λ c g' s' hs' aB').hom := by
   have := SmoothOfRelativeDimension.smooth c g
   have := SmoothOfRelativeDimension.smooth c g'
-  have h := thomFundamentalClassMap_baseChange Λ eV hsq (hasThomFrames_of_section Λ c g s hs aB)
+  have h := thomFundamentalClassMap_baseChange_of_etale Λ eV hsq (hasThomFrames_of_section Λ c g s hs aB)
     (hasRegularZariskiFrames_of_section c g s hs) (hasThomFrames_of_section Λ c g' s' hs' aB')
     (hasRegularZariskiFrames_of_section c g' s' hs') (g ≫ aB) (g' ≫ aB')
   have := isIso_thomFundamentalClassMap Λ (hasThomFrames_of_section Λ c g s hs aB)

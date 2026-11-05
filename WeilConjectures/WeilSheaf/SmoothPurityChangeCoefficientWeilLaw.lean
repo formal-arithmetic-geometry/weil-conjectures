@@ -104,10 +104,8 @@ lemma purityChangeCoefficientTrivialization_eq
     (e₁ : ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj M ≅
       ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj (𝟙_ _)) :
     purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁ =
-      letI := Mod.extendScalarsMonoidal (coefficientMap a X)
       purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁ ≪≫
-        (f.geometricFiberProj)^*⟦Λ'⟧.mapIso
-          (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm := rfl
+        (f.geometricFiberProj)^*⟦Λ'⟧.mapIso (purityCoefficientUnitIso Λ a X) := rfl
 
 /-- The normalized trivialization obeys the same scalar Frobenius law. -/
 theorem purityChangeCoefficientTrivialization_weil
@@ -122,35 +120,15 @@ theorem purityChangeCoefficientTrivialization_weil
       (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map
           (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom ≫
         (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app (𝟙_ _) := by
-  let := Mod.extendScalarsMonoidal (coefficientMap a X)
-  rw [purityChangeCoefficientTrivialization_eq]
   have h := purity_scalarDatum_postcomposeIso (f.geometricFiberProj)^*⟦Λ'⟧
     (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧
     (geometricFiberProjUpperStarFrobeniusIso Λ' f)
     (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁)
-    (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm
-    (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁ ≪≫
-      (f.geometricFiberProj)^*⟦Λ'⟧.mapIso
-        (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).symm) rfl c
+    (purityCoefficientUnitIso Λ a X)
+    (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁)
+    (purityChangeCoefficientTrivialization_eq a f M e₁) c
     (purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he)
   dsimp only [Functor.comp_obj, Functor.comp_map] at h ⊢
-  run_tac
-    let h ← Lean.Elab.Tactic.elabTerm (← `(h)) none
-    let H ← Lean.Meta.inferType h
-    let G ← Lean.Elab.Tactic.getMainTarget
-    let rec diffs (fuel : Nat) (a b : Lean.Expr) : Lean.MetaM Unit := do
-      if a == b then return
-      if ← Lean.Meta.isProof a then return
-      match fuel with
-      | 0 => Lean.logInfo m!"DIFF {a}\nVERSUS {b}"
-      | n + 1 =>
-        let xs := a.getAppArgs
-        let ys := b.getAppArgs
-        if a.getAppFn == b.getAppFn && xs.size == ys.size && xs.size > 0 then
-          for i in [:xs.size] do
-            diffs n xs[i]! ys[i]!
-        else Lean.logInfo m!"DIFF {a}\nVERSUS {b}"
-    diffs 64 H G
   cast_proofs h
 
 end ScalarRelation

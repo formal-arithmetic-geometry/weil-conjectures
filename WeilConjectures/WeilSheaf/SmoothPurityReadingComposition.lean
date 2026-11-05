@@ -53,4 +53,27 @@ lemma purity_reading_composition_component
       α.hom.app (E.obj M) ≫ Q.map (F₀.mapIso rY ≪≫ bY).hom ≫ w :=
   purity_reading_composition P F₀ F Q α (u.app M) v rX rY q₁ q₂ bX bY w hred hread
 
+/-- Keep the named reading isomorphisms in the conclusion, so applications need
+only compare isomorphisms before taking their components. -/
+lemma purity_reading_composition_named
+    {B₀ C₀ C D₀ D : Type*} [Category B₀] [Category C₀] [Category C]
+    [Category D₀] [Category D]
+    (P : C₀ ⥤ C) (F₀ : C₀ ⥤ D₀) (F : C ⥤ D) (Q : D₀ ⥤ D)
+    (α : P ⋙ F ≅ F₀ ⋙ Q) (E : B₀ ⥤ C₀) (J : B₀ ⥤ C)
+    (u : E ⋙ P ⟶ J) (M : B₀)
+    {B : C₀} {W R S : C} {T₀ : D₀} {T : D}
+    (v : J.obj M ⟶ W) (rX : W ≅ S) (rY : E.obj M ≅ B)
+    (q₁ : P.obj B ⟶ R) (q₂ : R ⟶ S)
+    (bX : F.obj S ≅ T) (bY : F₀.obj B ≅ T₀) (w : Q.obj T₀ ⟶ T)
+    (tX : F.obj W ≅ T) (tY : F₀.obj (E.obj M) ≅ T₀)
+    (htX : tX = F.mapIso rX ≪≫ bX) (htY : tY = F₀.mapIso rY ≪≫ bY)
+    (hred : u.app M ≫ v ≫ rX.hom = P.map rY.hom ≫ q₁ ≫ q₂)
+    (hread : F.map q₁ ≫ F.map q₂ ≫ bX.hom =
+      α.hom.app B ≫ Q.map bY.hom ≫ w) :
+    F.map (u.app M) ≫ F.map v ≫ tX.hom =
+      α.hom.app (E.obj M) ≫ Q.map tY.hom ≫ w := by
+  subst tX tY
+  exact purity_reading_composition_component P F₀ F Q α E J u M v rX rY
+    q₁ q₂ bX bY w hred hread
+
 end CategoryTheory

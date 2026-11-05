@@ -14,7 +14,7 @@ Let `i : Z ⟶ X` be a closed immersion with Thom frames and `i' : Z' ⟶ X'` it
 an étale morphism `e : X' ⟶ X` (for instance an isomorphism). The restriction of supports of the
 fundamental class `[Z ⊂ X]` (`AlgebraicGeometry.Etale.thomFundamentalClass`) along `e` is the
 fundamental class `[Z' ⊂ X']`
-(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass`): a frame `(U, e', f)` of
+(`AlgebraicGeometry.Etale.restrictSupportedClass_thomFundamentalClass_of_etale`): a frame `(U, e', f)` of
 `i'` is a frame `(U, e' ≫ e, f)` of `i` (`AlgebraicGeometry.Scheme.Hom.EtaleFrame.ofIsPullback`),
 with the same frame class, and restriction of supports along the composite `e' ≫ e` is the
 composite of the restrictions, so the restricted fundamental class has the frame classes as frame
@@ -56,7 +56,7 @@ lemma frameRestriction_restrictSupportedClass (F : i'.EtaleFrame c)
 
 /-- **The fundamental class is compatible with étale base change**: the restriction of supports
 along `e` of the fundamental class of `i` is the fundamental class of its base change `i'`. -/
-theorem restrictSupportedClass_thomFundamentalClass [HasKummerClass.IsNormalized Λ]
+theorem restrictSupportedClass_thomFundamentalClass_of_etale [HasKummerClass.IsNormalized Λ]
     (hT : HasThomFrames Λ c i) (hR : HasRegularZariskiFrames c i)
     (hT' : HasThomFrames Λ c i') (hR' : HasRegularZariskiFrames c i')
     {k k' : Type u} [Field k] [Field k'] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
@@ -83,7 +83,7 @@ theorem thomFundamentalClassMap_eq_supportedClassMap_restrictSupportedClass
       supportedClassMap Λ i' (restrictSupportedClass Λ e i i' g hg
         (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e c)
         (thomFundamentalClass Λ hT hR aX)) := by
-  rw [restrictSupportedClass_thomFundamentalClass Λ e hg hT hR hT' hR' aX aX']
+  rw [restrictSupportedClass_thomFundamentalClass_of_etale Λ e hg hT hR hT' hR' aX aX']
   rfl
 
 end AlgebraicGeometry.Etale
