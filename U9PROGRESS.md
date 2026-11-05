@@ -106,30 +106,27 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ408 complete
+# BZ384 in progress
 
-- Branch: `u9/BZ408`; starting commit: `98654719bdfe7ff3e77ff047b3bce53405d2dc4a`.
-- Assigned module `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation`
-  passed `ucheck-bump`: rc=0, failed=0, 2138 jobs, source commit
-  `81a4c2b5d2bc052a74104df30cd813cf4988dcd6`.
-- Direct importer `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentationPaste`
-  also compiled successfully at `4d5d301df854976e319630b9f8ca84a742167850`, without edits.
-- The other direct importer, `LisseTowerConstantComplexPresentation`, is blocked by
-  unowned `ProEtaleOperationsCanonicalAdjunctionSupplement.lean:43:6` (instance synthesis)
-  and line 55 (unsolved goals), plus `KFlatRingedToposPullback` (instance failures
-  and timeout). Both second-layer importers depend on the blocked path.
-  These modules are skipped under the brief's ownership rule. The remaining
-  jobs of the failed downstream build were terminated to release the shared tree
-  after recording both unowned failures (harness rc=255, failed=2).
-- The user instructed continuation after the exact one-line statement correction
-  proposal; that patch is applied and validated. The comparison uses Mathlib's
-  forward compositor followed by the induced isomorphism, with `.hom`.
-- All other statement text, proof bodies, and existing docstrings are unchanged.
-- Build logs: `/home/ubuntu/u9/bz/BUILD-BZ408-unit-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ408-downstream1-full.log`.
-- Fix pattern, whole-tree counts, and blocker details: `/home/ubuntu/u9/bz/FIXES-BZ408.md`.
-- Contract audit: `/home/ubuntu/u9/bz/BZ408-contract-audit.txt`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat changes.
-- Completion marker: `/home/ubuntu/u9/state/BZ408.DONE`.
-- This completion update changes only progress documentation; Lean source matches
-  the successful assigned-module build.
+- Branch: `u9/BZ384`; starting commit: `98654719b`.
+- Baseline remote build confirmed five errors in compositor directions in declaration types.
+- The user instructed continuation after the explicit nine-direction patch proposal.
+  That patch is now applied, preserving the original equations under Mathlib's reversed compositor.
+- Next: remote validation of the assigned module, then its three direct importers.
+- Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ459 in progress
+
+- Branch: `u9/BZ459`; starting commit: `99a06bbbb46`.
+- The user instructed continuation after the explicit six-line statement API migration proposal.
+- `DerivedOpenGluingObjects` rebuilt successfully at `9cba6ab4da` (28 seconds).
+  Its two obsolete compositor `.symm` uses are removed, preserving the original canonical maps.
+- The combined build could not check direct importer `DerivedOpenGluing` because the
+  BZ361-owned `SchemeDerivedHomGluing` has three type errors. Per the brief, skip this importer.
+  Its four-line repair is deferred at `/home/ubuntu/u9/bz/BZ459-downstream-deferred.patch`;
+  the committed downstream source is restored to the baseline.
+- Next: run the assigned module alone to obtain a clean rc=0, then complete the handoff.
+- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ459.md`.
+- Build log: `/home/ubuntu/u9/bz/BUILD-BZ459-downstream-full.log`.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
