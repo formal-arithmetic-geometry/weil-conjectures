@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
@@ -101,7 +103,6 @@ theorem resolutionDerivedSingleUnit_augmentation
     erw [reassoc_of% hφ]
     dsimp [InjectiveResolution.cochainComplexXIso, HomologicalComplex.mapExtendIso,
       HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso]
-    dsimp only [HomologicalComplex.Hom.isoOfComponents]
     erw [HomologicalComplex.mapExtendX_hom_eq I.cocomplex F
       (ComplexShape.embeddingUpNat.r_f 0)]
     simp [eqToHom_map]
