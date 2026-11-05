@@ -31,6 +31,11 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
+local instance (Y : Scheme.{u}) (J : Type u) :
+    HasColimitsOfShape (Discrete J) (Over Y) := by
+  have : HasColimitsOfShape (Discrete J) Scheme.{u} := inferInstance
+  exact ⟨fun F ↦ Over.hasColimit_of_hasColimit_comp_forget F⟩
+
 private noncomputable def finiteCopiesOverIso (Y : Scheme.{u}) (E : FintypeCat.{u}) :
     (sigmaConst.obj (Over.mk (𝟙 Y))).obj E ≅
       (Scheme.ProEt.forget Y).obj ((Scheme.proEtaleFiniteCopiesFunctor Y).obj E) := by
