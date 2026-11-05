@@ -239,7 +239,7 @@ theorem baseDerivedTensor_ring_counit_square
     ext x
     change s.hom.f j (M.ordinaryIso.hom.f j x) =
       N.ordinaryIso.hom.f j (v.hom.f j x)
-    induction x with
+    induction x using TensorProduct.inductionOn with
     | tmul b x =>
       rw [M.ordinaryIso_tmul, hv, N.ordinaryIso_tmul, hs]
       congr 1
