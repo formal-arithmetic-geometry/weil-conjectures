@@ -217,3 +217,22 @@
 - Next: validate the assigned normalization module through `ucheck-bump`, then its direct importer.
 - Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ740.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
+
+# BZ780 leaf and direct importer green
+
+- Branch: `u9/BZ780`; starting commit: `8027d88a3`.
+- Green source commit: `5aead0ac1d861aa6ef525ef6f15a0e7c483bdc26`.
+- `ucheck-bump` completed successfully (3930 jobs) on `poolb:43.166.82.34`:
+  `DerivedPullbackTensorUnitKFlat` rebuilt in 56 seconds, and its direct importer
+  `DerivedPullbackTensorUnit` rebuilt in 16 seconds.
+- The user instructed continuation after the concrete two-identity-cast proposal.
+  Retained those `cast (by rfl)` wrappers in the public counit hypothesis; they preserve
+  the original morphisms and all mathematical assumptions and conclusions.
+- Added public and implementation Localization imports, normalized identity casts
+  with `cast_eq`, and used `erw` through the local functor aliases.
+- All six declarations are retained; no local Lean/Lake, proof placeholders, trust
+  bypasses, profiler probes, or heartbeat changes.
+- Next: build the next-layer importer `DerivedPullbackMonoidalDescent`; skip it if
+  its unowned sibling dependency `DerivedPullbackTensorAssociativity` (BZ800) fails.
+- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ780-leaf-and-unit-green-full.log`.
+- Five fix patterns and replay rules: `/home/ubuntu/u9/bz/FIXES-BZ780.md`.
