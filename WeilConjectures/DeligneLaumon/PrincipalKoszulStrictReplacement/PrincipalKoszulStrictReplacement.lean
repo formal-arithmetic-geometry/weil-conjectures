@@ -577,7 +577,9 @@ private lemma koszul_flat (n : ℕ) :
 private lemma koszul_bounded (n : ℕ) : (koszul l E W n).IsStrictlyLE 0 := by
   rw [CochainComplex.isStrictlyLE_iff]
   intro i hi
-  apply (CochainComplex.mappingCone.isZero_X_iff _ i).2
+  apply (CochainComplex.mappingCone.isZero_X_iff
+    (principalKoszulScalarComplex (completedIntegralCommRingSheafUnrestricted l E W)
+      (uniformizer l E W) n) i).2
   exact ⟨HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ _ (by omega),
     HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ _ (by omega)⟩
 
