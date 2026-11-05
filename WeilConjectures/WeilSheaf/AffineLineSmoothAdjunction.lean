@@ -58,8 +58,8 @@ theorem nonempty_affineLineAdjunction_of_smoothPurity :
     (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback hπ.flip
       (inferInstance : SmoothOfRelativeDimension 1
         (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
-  obtain ⟨adj⟩ := nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (k₀ := k₀) (l := l)
-    π 1
+  obtain ⟨adj⟩ :=
+    nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (k₀ := k₀) (l := l) π 1
   exact ⟨adj.ofNatIsoRight (tateTwistShiftCompUpperStarIso (k₀ := k₀) (l := l) π 1 2).symm⟩
 
 end AlgebraicGeometry.WeilComplex

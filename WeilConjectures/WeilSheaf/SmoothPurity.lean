@@ -350,7 +350,8 @@ theorem nonempty_rightAdjoint_obj_adicConstant_iso_of_smooth (d : ℕ)
     Nonempty (G.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
       ((tateTwist k₀ l X d).obj
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) := by
-  obtain ⟨adj'⟩ := nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (k₀ := k₀) (l := l) f d
+  obtain ⟨adj'⟩ :=
+    nonempty_derivedLowerShriek_adjunction_of_smooth_of_isSeparated (k₀ := k₀) (l := l) f d
   let e : (upperStar f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
       WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X) :=
     (ObjectProperty.isoMk _ (((ProEtaleWeilSheaf.upperStar k₀ l f).mapDerivedCategorySingleFunctor
