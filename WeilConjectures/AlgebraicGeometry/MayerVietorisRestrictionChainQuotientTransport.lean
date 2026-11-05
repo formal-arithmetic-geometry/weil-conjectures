@@ -107,5 +107,6 @@ theorem schemeMV_restriction_chain_quotient_transport
   erw [hxi]
   simp only [Functor.map_comp, Category.assoc]
   erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  rfl
 
 end AlgebraicGeometry
