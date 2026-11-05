@@ -208,4 +208,50 @@ theorem isIso_smoothUnitBaseChange_chart_of_projectiveSpace (n : ℕ)
 
 end Chart
 
+section Congr
+
+variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
+  [Fact (ringChar k₁).Prime] [Fact (ringChar k₁ ≠ l)]
+  [Fact (ringChar k₂).Prime] [Fact (ringChar k₂ ≠ l)]
+  {X Y : Over (Spec (.of k₁))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {X' Y' : Over (Spec (.of k₂))}
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f₁ f₂ : X ⟶ Y} (h : f₁ = f₂) {f₁' f₂' : X' ⟶ Y'} (h' : f₁' = f₂')
+  {πX : X'.left ⟶ X.left} {πY : Y'.left ⟶ Y.left}
+  (bc : boundedConstructibleLowerShriek l f₁ ⋙ boundedConstructibleUpperStarOfMap l πY ≅
+    boundedConstructibleUpperStarOfMap l πX ⋙ boundedConstructibleLowerShriek l f₁')
+  (e : (boundedConstructibleUpperStarOfMap l πY).obj (𝟙_ _) ⟶ 𝟙_ _)
+
+/-- A compact-support base change isomorphism transported along equalities of morphisms
+`f₁ = f₂`, `f₁' = f₂'` (in practice `jᵢ ≫ f = gᵢ ≫ jA ≫ p ≫ jV` on a chart). -/
+def transportLowerShriekBaseChange :
+    boundedConstructibleLowerShriek l f₂ ⋙ boundedConstructibleUpperStarOfMap l πY ≅
+      boundedConstructibleUpperStarOfMap l πX ⋙ boundedConstructibleLowerShriek l f₂' :=
+  Functor.isoWhiskerRight (eqToIso (by rw [h])) _ ≪≫ bc ≪≫
+    Functor.isoWhiskerLeft _ (eqToIso (by rw [h']))
+
+/-- The exceptional base change map at the unit is compatible with the transport along
+equalities of morphisms. -/
+theorem smoothUnitBaseChange_transport :
+    smoothUnitBaseChange l f₂ f₂' (transportLowerShriekBaseChange l h h' bc) e =
+      eqToHom (by rw [h]) ≫ smoothUnitBaseChange l f₁ f₁' bc e ≫ eqToHom (by rw [h']) := by
+  subst h h'
+  have hbc : transportLowerShriekBaseChange l rfl rfl bc = bc := by
+    ext K
+    simp [transportLowerShriekBaseChange]
+  rw [hbc]
+  simp
+
+/-- Invertibility of the exceptional base change map at the unit is invariant under the
+transport along equalities of morphisms. -/
+theorem isIso_smoothUnitBaseChange_transport_iff :
+    IsIso (smoothUnitBaseChange l f₂ f₂' (transportLowerShriekBaseChange l h h' bc) e) ↔
+      IsIso (smoothUnitBaseChange l f₁ f₁' bc e) := by
+  rw [smoothUnitBaseChange_transport, isIso_comp_left_iff, isIso_comp_right_iff]
+
+end Congr
+
 end AlgebraicGeometry.ProEtale.CondensedRing
