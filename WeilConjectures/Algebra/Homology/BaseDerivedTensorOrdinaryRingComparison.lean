@@ -103,7 +103,7 @@ private theorem exists_extensionIso
       map_smul' := by
         intro d z
         change v (d • z) = eD d • v z
-        induction z with
+        induction z using TensorProduct.inductionOn with
         | tmul d' p =>
           change v ((d * (show D₀ from d')) ⊗ₜ[S₀, f₀] p) =
             eD d • v (d' ⊗ₜ[S₀, f₀] p)
