@@ -43,6 +43,27 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 namespace UniformizerSquareData
 
+section
+
+variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
+  {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
+  {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
+  (q : UniformizerSquareData l Y E π n A hA)
+
+/-- Additivity of the collected right functor, shared by name so that statements about its
+derived functor stay small. -/
+instance quotientRight_additive : q.quotientRight.Additive := inferInstance
+
+/-- Left exactness of the collected right functor, shared by name. -/
+instance quotientRight_preservesFiniteLimits : PreservesFiniteLimits q.quotientRight :=
+  inferInstance
+
+/-- Right exactness of the collected right functor, shared by name. -/
+instance quotientRight_preservesFiniteColimits : PreservesFiniteColimits q.quotientRight :=
+  inferInstance
+
+end
+
 /-- The explicit collected-right adjunction for this coefficient route.
 Source: diagonal tower coefficient changes (1)
 (blueprint: lem-diagonal-quotient-endpoint-normalization).
@@ -51,7 +72,9 @@ def quotientAdjunctionAux
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
     {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
-    (q : UniformizerSquareData l Y E π n A hA) :=
+    (q : UniformizerSquareData l Y E π n A hA) :
+    ScalarCompatibility.compositeFunctor q.route.first q.route.second ⋙
+        q.eW.F.mapDerivedCategory ⊣ q.quotientRight.mapDerivedCategory :=
   ((ScalarCompatibility.compositeAdjunction q.route.first q.route.second).comp
     (finiteAdjunction q.eW)).ofNatIsoRight
       (Functor.mapDerivedCategoryCompIso q.eW.F.asEquivalence.inverse
