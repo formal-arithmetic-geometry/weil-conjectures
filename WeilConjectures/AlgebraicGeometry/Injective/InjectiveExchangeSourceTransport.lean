@@ -65,6 +65,6 @@ theorem smallModel_injectiveExchange_source_transport {X S : Scheme.{v}} (f : X 
   simp only [Functor.map_comp, Functor.mapHomotopyCategoryFactors,
     Quotient.lift.isLift, NatIso.ofComponents.app, Iso.refl_inv]
   erw [CategoryTheory.Functor.map_id]
-  simp only [Category.id_comp]
+  simp only [Category.id_comp, Category.comp_id]
 
 end AlgebraicGeometry.Etale
