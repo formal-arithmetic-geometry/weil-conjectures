@@ -203,7 +203,8 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
     ext M
     simpa only [c₁, c₂, δ₀, G, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
       Functor.comp_obj, Functor.flip_obj_obj, Functor.flip_obj_map, Functor.flip_map_app,
-      NatTrans.flipApp, curriedTensor_obj_obj, curriedTensor_obj_map, curriedTensor_map_app,
+      NatTrans.flipApp, flipFunctor_map_app_app, curriedTensor_obj_obj, curriedTensor_obj_map,
+      curriedTensor_map_app,
       associator_hom_app, associator_inv_app, Category.id_comp, Category.comp_id,
       Category.assoc] using hτ M
   have := commShift_tensorRightCounit X hX
