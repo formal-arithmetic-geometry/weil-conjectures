@@ -260,10 +260,15 @@ private local instance scalarPresheafCoproducts (A : Sheaf J CommRingCat.{r})
       (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
   PresheafOfModules.hasColimitsOfShape _ _
 
-private local instance scalarPresheafCoproductsFamily (A : Sheaf J CommRingCat.{r}) :
-    ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
-      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
-  fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+private local instance scalarRingPresheafCoproducts (A : Cᵒᵖ ⥤ RingCat.{r})
+    (I : Type r) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
+private local instance scalarRingSheafCoproducts (A : Sheaf J RingCat.{r})
+    (I : Type r) : HasColimitsOfShape (Discrete I) (SheafOfModules.{r} A) := by
+  have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r} A.obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 private local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r}) :
     HasCoproducts.{0} (scalarModules J A) := by
@@ -595,10 +600,10 @@ private theorem scalarExtension_tensor_pure (a : R ⟶ S) (M N : scalarModules J
   let f := extensionPullback a
   let k := extensionComparison a
   let ev := sheafToPresheaf J (Type r) ⋙ (CategoryTheory.evaluation Cᵒᵖ (Type r)).obj U
-  have : ∀ (I₁ I₂ : Type), HasLimitsOfShape (Discrete I₂) (Cᵒᵖ ⥤ Type r) :=
-    fun _ _ ↦ functorCategoryHasLimitsOfShape
-  have : ∀ (I₁ I₂ : Type), HasLimitsOfShape (Discrete I₂) (Sheaf J (Type r)) :=
-    fun _ _ ↦ hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape
+  have (I : Type) : HasLimitsOfShape (Discrete I) (Cᵒᵖ ⥤ Type r) :=
+    functorCategoryHasLimitsOfShape
+  have (I : Type) : HasLimitsOfShape (Discrete I) (Sheaf J (Type r)) :=
+    hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape
       (sheafToPresheaf J (Type r))
   obtain ⟨t, hx, hy⟩ := SheafOfModules.CochainTensorComparison.productElements ev
     ((underlying R).obj M) ((underlying R).obj N) x y
