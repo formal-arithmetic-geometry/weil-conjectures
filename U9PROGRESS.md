@@ -1,19 +1,21 @@
-# BZ105 complete
+# BZ118 in progress
 
-- Unit: BZ105, branch `u9/BZ105`.
-- All four assigned modules passed `ucheck-bump` together (rc=0, zero failed targets).
-- Checked source commit: `06ae1b2e6ddda9ff734f77583683cb1a1deaf5bc`; this final update changes only progress documentation.
-- Target: Lean v4.35.0-rc3 and Mathlib b63f6e8a68d220e3b3bc4f3792bb53650d375f24.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ105-final-full.log`.
-- Fix patterns and whole-tree occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ105.md`.
-- Fixed the sheaf-module universe, tensor factor type annotations, and two base-ring placeholders.
-- The user instructed continuation after the explicit equivalent binder-repair proposal.
-  The A/R scalar-tower hypotheses are definitionally identical to the original IsLiesOverAlgebra hypotheses.
-- No local Lean/Lake execution, proof placeholders, trust escapes, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ105.DONE`.
+- Branch: `u9/BZ118`.
+- Three assigned modules passed the first repair build (commit `ccbe951d0655`).
+- `TraceShiftUnit` needed canonical endpoint transport in its public statement because Mathlib marks `Qh` `no_expose`.
+- The user instructed continuation after the explicit statement-adjustment proposal; that exact patch is now applied.
+- Next: validate all four modules with `ucheck-bump`, then write `/home/ubuntu/u9/state/BZ118.DONE`.
+- Fix patterns and build logs: `/home/ubuntu/u9/bz/FIXES-BZ118.md`.
+- No local Lean/Lake execution; no forbidden proof escapes or heartbeat increases.
 
-Owned modules:
-- WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
-- WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
-- WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-- WeilConjectures.RingTheory.ProEtale.IndEtale
+# BZ72 complete
+
+- Unit: BZ72, branch `u9/BZ72`.
+- All four assigned modules passed `ucheck-bump` together: rc=0, 3821 jobs.
+- Checked source commit: `1ff41157e8e837eefed5af2db7bae1d35eab175d`; this final update changes only progress documentation.
+- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ72-final3-full.log`.
+- Fix patterns and the coordinate statement's canonical endpoint transports: `/home/ubuntu/u9/bz/FIXES-BZ72.md`.
+- The user instructed continuation after the explicit statement-adjustment proposal. All other declaration statements and existing docstrings are unchanged.
+- No local Lean/Lake execution, no sorries or trust escapes, no heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
+- Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
