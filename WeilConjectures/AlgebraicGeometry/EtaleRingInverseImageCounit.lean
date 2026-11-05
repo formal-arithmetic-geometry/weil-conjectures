@@ -26,10 +26,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry
 
-private local instance typeSheafHasBinaryProducts.{uC, vC, w}
-    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) :
-    HasBinaryProducts (Sheaf J (Type w)) := inferInstance
-
+set_option trace.Meta.synthInstance true in
+set_option synthInstance.maxHeartbeats 1000 in
 private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :
