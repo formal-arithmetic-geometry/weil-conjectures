@@ -81,25 +81,24 @@
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
 
-# BZ275 complete
+# BZ279 complete
 
-- Branch: `u9/BZ275`; starting commit: `18e44f2d5`.
-- Assigned module and both direct importers built successfully with `ucheck-bump`:
-  - `WeilConjectures.CategoryTheory.DerivedSectionScalarTransport`.
-  - `WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction`.
-  - `WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement`.
-- Validated source commit: `205625f5e362df5b09f0ffaa641f9878c3a32da7`; rc=0, failed=0, 3876 jobs.
-- Full green log: `/home/ubuntu/u9/bz/BUILD-BZ275-importers-green-full.log`.
-- The user instructed continuation after the exact compositor-statement proposal.
-  Applied that API orientation change and the identical downstream comparison migration.
-- Localization imports restore private Qh reductions. Local SMul instances expose the
-  existing section-ring action through definitionally equal carriers. All other statement
-  text and existing docstrings are unchanged.
-- Four next-layer importers were attempted and skipped because every one depends on
-  `RingedToposAdaptedFlatResolution` (BZ290) and `RingedToposAcyclicKFlatPullback` (BZ291),
-  both of which failed. Stopped only this optional build after confirming the shared blockers.
-- Skipped-module log: `/home/ubuntu/u9/bz/BUILD-BZ275-next-layer-blocked-full.log`.
-- Fix patterns, exact errors, occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ275.md`.
-- Completion marker: `/home/ubuntu/u9/state/BZ275.DONE`.
-- No local Lean/Lake, sorries, admissions, added axioms, trust bypasses, heartbeat increases,
-  or profiler probes. Final commit changes progress documentation only.
+- Branch: `u9/BZ279`; starting commit: `18e44f2d5127c179f285ccf7d988c2bf3963106e`.
+- Assigned module: `WeilConjectures.AlgebraicGeometry.Curve.MateProjectionData`.
+- The assigned module passed `ucheck-bump`: rc=0, failed=0, 4218 jobs.
+- Tested source commit: `0f6ab9a67eeba73ca365a57b0b34e20a127fed10`.
+  It rebuilt successfully again at `20620dba643c636d3204f34416f596e346082dc3`.
+- The user instructed continuation after the exact two-site structure-field compatibility
+  proposal. Applied that patch: `.symm` follows both functor arguments in `transition`,
+  and the reversed Mathlib compositor is inverted in `restriction`.
+  These are the only Lean source edits; hypotheses and intended maps are preserved.
+- Full green log: `/home/ubuntu/u9/bz/BZ279-build-repair-full.log`.
+- Built four direct importers as required. All seven direct importers depend on the
+  outside-unit failure in `EtaleSectionsRestrictionSquare.lean:111`. The downstream
+  build also failed in `StrictLocalMateProjectionData.lean:121`. Skipped the blocked
+  importers and second layer under the brief's explicit skip rule. No extra modules
+  are claimed green. Full log: `/home/ubuntu/u9/bz/BZ279-build-downstream-full.log`.
+- Fix patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ279.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ279.DONE`.
+- No local Lean/Lake execution, proof escapes, profiler probes, or heartbeat increases.
+- This final commit updates progress documentation only after the successful source build.
