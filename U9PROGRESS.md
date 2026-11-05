@@ -260,3 +260,14 @@
 - Next: validate the assigned module; build its sole direct importer
   AffinePushforwardCohomologyEdgeIdentity, then continue downstream up to the brief's limit.
 - Fix log: /home/ubuntu/u9/bz/FIXES-BZ859.md. No local Lean/Lake, proof escapes, or limit raises.
+
+# BZ883 in progress
+
+- Branch: u9/BZ883; initial commit bf8c8b11135566efd44c8f83beb127b346f97afc.
+- Re-read the brief and progress notes on continuation; no new LEAD lines.
+- The user instructed continuation after the exact two-cast statement proposal.
+  Applied BZ883-statement-conversion-proposal.patch to the two regular-unit arguments.
+- Localization implementation imports already cleared the private internalLocalizationUnit error.
+- Next: remote ucheck-bump on SectionLocalizationUnitConstraints and its direct importer,
+  SectionResolvingOplaxUnitModels, then continue downstream under the brief's rules.
+- Fix records: /home/ubuntu/u9/bz/FIXES-BZ883.md. No local Lean/Lake or proof shortcuts.
