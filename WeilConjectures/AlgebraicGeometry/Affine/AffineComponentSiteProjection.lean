@@ -1040,7 +1040,7 @@ private theorem component_finite_products (X : Scheme.{u}) [IsAffine X]
       (b : ∀ i S, (U i ⟶ L.obj S) ≃ (T i ⟶ S)) (S : Over (componentProfinite X))
       (f : c.pt ⟶ L.obj S) (i : I) :
       Sigma.ι T i ≫ coproductMapEquiv L U c hc T b S f = b i S (c.inj i ≫ f) := by
-    exact Sigma.ι_desc _ _
+    exact Sigma.ι_comp_desc _ _
   have coproductMapEquiv_natural
       (L : Over (componentProfinite X) ⥤ X.ProEt)
       {I : Type u} (U : I → X.ProEt) (c : Cofan U) (hc : IsColimit c)
@@ -1053,7 +1053,7 @@ private theorem component_finite_products (X : Scheme.{u}) [IsAffine X]
         coproductMapEquiv L U c hc T b S f ≫ g := by
     apply Sigma.hom_ext
     intro i
-    simp only [coproductMapEquiv, Equiv.coe_fn_mk, Sigma.ι_desc, Sigma.ι_desc_assoc]
+    simp only [coproductMapEquiv, Equiv.coe_fn_mk, Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc]
     rw [← Category.assoc, hb]
   -- Construct the coproduct in the slice using descent on the scheme coproduct.
   let f : (∐ fun i ↦ (U i).left) ⟶ X := Sigma.desc (fun i ↦ (U i).hom)
@@ -1073,7 +1073,7 @@ private theorem component_finite_products (X : Scheme.{u}) [IsAffine X]
       simp [f, ← Category.assoc]
     · intro t i
       apply MorphismProperty.Over.Hom.ext
-      exact Sigma.ι_desc _ _
+      exact Sigma.ι_comp_desc _ _
     · intro t m hm
       apply MorphismProperty.Over.Hom.ext
       apply Sigma.hom_ext

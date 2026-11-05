@@ -66,8 +66,7 @@ theorem exists_inverseImage_stalk_scalar_transport_beta
     { __ := q.toAddEquiv
       map_smul' := by
         intro b z
-        induction z using TensorProduct.induction_on with
-        | zero => simp
+        induction z using TensorProduct.inductionOn with
         | tmul b' m =>
           change B at b'
           change q ((b * b') ⊗ₜ[R] m) = b • q (b' ⊗ₜ[R] m)

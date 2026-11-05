@@ -77,7 +77,7 @@ private noncomputable def formalEvalOpCompIso
     Category.assoc]
   rw [piComparison_comp_π G (fun i => P.obj (op (Z.unop.obj i))) i]
   rw [← Category.assoc, ← G.map_comp]
-  simp only [Pi.lift_π, Functor.map_comp, Category.assoc, piComparison_comp_π_assoc]
+  simp only [Pi.lift_comp_π, Functor.map_comp, Category.assoc, piComparison_comp_π_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The scalar comparisons form an isomorphism of opposite-opens functors. -/
@@ -252,7 +252,7 @@ private theorem linearCechComparison
     rw [cechModuleSheafDegreeIso, intersectionProductComparison_hom_π F
       (fun y : Fin 1 → ι => ∏ᶜ fun l => U (y l)) y, ← Category.assoc,
       ← Functor.map_comp]
-    have hπ := Pi.lift_π
+    have hπ := Pi.lift_comp_π
       (fun y : Fin 1 → ι => cechIntersectionRestriction F (∏ᶜ fun l => U (y l))) y
     refine (congrArg (fun f => ((cechForgetModuleSheaf X).map f ≫
       (cechIntersectionPresheafIso F (∏ᶜ fun l => U (y l))).hom).app (op V)) hπ).trans ?_

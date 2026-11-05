@@ -466,7 +466,7 @@ theorem exists_sigma_twist_zero_bijective_H_zero (F : (ProjectiveLine (Spec (.of
   let φ : (∐ fun _ : J ↦ 𝒪(0)) ⟶ F :=
     Sigma.desc fun j ↦ homOfSection F (H.zeroLinearEquiv F (b j))
   have hj (j : J) : H.map φ 0 (H.map (Sigma.ι (fun _ : J ↦ 𝒪(0)) j) 0 unitHZero) = b j := by
-    rw [← H.map_comp_apply, Sigma.ι_desc, H_map_homOfSection_unitHZero,
+    rw [← H.map_comp_apply, Sigma.ι_comp_desc, H_map_homOfSection_unitHZero,
       LinearEquiv.symm_apply_apply]
   have hs : Function.Surjective (H.map φ 0) := by
     suffices h : LinearMap.range (H.mapLinearMap k φ 0) = ⊤ from LinearMap.range_eq_top.1 h

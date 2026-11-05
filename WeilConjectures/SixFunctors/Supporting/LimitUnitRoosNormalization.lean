@@ -113,7 +113,7 @@ private theorem roosUnit_natural (W : Scheme.{u})
     intro n
     dsimp only [pullbackTensorRoosAugmentation]
     simp only [Category.assoc, Limits.Pi.map_π]
-    erw [Limits.Pi.lift_π, Limits.Pi.lift_π_assoc]
+    erw [Limits.Pi.lift_comp_π, Limits.Pi.lift_comp_π_assoc]
     exact (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).naturality f
   · intro i
     erw [HomologicalComplex.comp_f, Category.assoc]

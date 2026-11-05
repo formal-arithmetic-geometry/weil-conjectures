@@ -196,7 +196,7 @@ private noncomputable def stalkComparison {C : Type u} [Category.{u} C]
   have : T.Final := inferInstance
   exact Functor.isoWhiskerLeft (sheafToPresheaf J (Type (max u w)))
     (Functor.isoWhiskerLeft
-      ((Functor.whiskeringLeft _ _ _).obj (CategoryOfElements.π (inverseSystemHomFunctor U)).op)
+      ((Functor.whiskeringLeft _ _ _).obj (Functor.Elements.π (inverseSystemHomFunctor U)).op)
       (Functor.Final.colimIso T)).symm
 
 /-- Inverse-system criterion for a point of a small site.

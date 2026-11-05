@@ -58,7 +58,7 @@ private theorem map_roos {C D : Type*} [Category C] [Category D]
   apply Pi.hom_ext
   intro n
   simp only [Category.assoc, piComparison_comp_π, towerTransitionEndomorphism,
-    towerProductShift, Preadditive.sub_comp, Category.id_comp, Pi.lift_π,
+    towerProductShift, Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π,
     Preadditive.comp_sub, ← F.map_comp, F.map_sub]
   congr 1
   rw [← Category.assoc, piComparison_comp_π]

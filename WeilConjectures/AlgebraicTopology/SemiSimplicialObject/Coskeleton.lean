@@ -108,7 +108,7 @@ lemma map_matching_existsUnique (n : ℕ) {W : D} (x : Fin (n + 2) → (W ⟶ G.
       refine Fan.IsLimit.hom_ext hQ _ _ fun p ↦ ?_
       change (k ≫ G.map (U.matchingLeft m)) ≫ G.map (Pi.π _ p) =
         (k ≫ G.map (U.matchingRight m)) ≫ G.map (Pi.π _ p)
-      simp only [Category.assoc, ← G.map_comp, matchingLeft, matchingRight, Pi.lift_π]
+      simp only [Category.assoc, ← G.map_comp, matchingLeft, matchingRight, Pi.lift_comp_π]
       rw [G.map_comp, G.map_comp, reassoc_of% hk, reassoc_of% hk]
       exact hx p.1.1 p.1.2 p.2
     obtain ⟨l, hl⟩ := Fork.IsLimit.lift' hE k hkk
@@ -243,7 +243,7 @@ noncomputable def extendAux : (n : ℕ) →
         ∀ h : n + 1 ≤ N, g.2 = f (n + 1) h}
   | 0 => ⟨(f 0 (Nat.zero_le _), extendStep N hW f 0 (f 0 (Nat.zero_le _)) trivial),
       extendStep_δ N hW f hf 0 (f 0 (Nat.zero_le _)) trivial (fun _ ↦ rfl), fun _ ↦ rfl,
-      fun h ↦ by rw [extendStep, dif_pos h]⟩
+      fun h ↦ by rw [extendStep, dite_eq_left h]⟩
   | n + 1 =>
     let a := extendAux n
     have hg : W.Compatible fun i ↦ U.δ (n + 1) i ≫ a.1.2 := by
@@ -251,7 +251,7 @@ noncomputable def extendAux : (n : ℕ) →
       rw [Category.assoc, Category.assoc, a.2.1, a.2.1, U.δ_comp_δ_assoc n hij]
     ⟨(a.1.2, extendStep N hW f (n + 1) a.1.2 hg),
       extendStep_δ N hW f hf (n + 1) _ hg a.2.2.2, a.2.2.2,
-      fun h ↦ by rw [extendStep, dif_pos h]⟩
+      fun h ↦ by rw [extendStep, dite_eq_left h]⟩
 
 /-- A morphism `U ⟶ W` into a semi-simplicial object with lifts above degree `N`, extending
 components in degrees `≤ N` which commute with the face maps. -/
@@ -368,14 +368,14 @@ variable (T : Truncated C N)
 lemma window_of_lt {n : ℕ} (h : n < N) :
     T.window n = ⟨T.obj n h.le, T.obj (n + 1) h, T.δ n h⟩ := by
   cases n with
-  | zero => rw [window, dif_pos h]
-  | succ n => rw [window, dif_pos h]
+  | zero => rw [window, dite_eq_left h]
+  | succ n => rw [window, dite_eq_left h]
 
 lemma window_succ_of_le {n : ℕ} (h : N ≤ n + 1) : T.window (n + 1) = (T.window n).next := by
-  rw [window, dif_neg (by omega)]
+  rw [window, dite_eq_right (by omega)]
 
 lemma window_zero_of_eq (h : N = 0) : T.window 0 = Window.zero (T.obj 0 (Nat.zero_le _)) := by
-  rw [window, dif_neg (by omega)]
+  rw [window, dite_eq_right (by omega)]
 
 lemma window_lower_succ (n : ℕ) : (T.window (n + 1)).lower = (T.window n).upper := by
   by_cases h : n + 1 < N

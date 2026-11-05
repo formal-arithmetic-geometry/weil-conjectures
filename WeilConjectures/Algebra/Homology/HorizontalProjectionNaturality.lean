@@ -56,7 +56,7 @@ private theorem extendedProjection_naturality
     have hp : ((m.toNat - p : ℕ) : ℤ) = m - (p : ℤ) := by omega
     rw [HomologicalComplex.extendMap_f _ _ (Int.toNat_of_nonneg hn),
       HomologicalComplex.extendMap_f _ _ hp]
-    simp only [horizontalExtendedProjection, dif_pos hm, Category.assoc,
+    simp only [horizontalExtendedProjection, dite_eq_left hm, Category.assoc,
       Iso.inv_hom_id_assoc]
     erw [totalProjection_naturality_assoc]
   · simp [horizontalExtendedProjection, hm]

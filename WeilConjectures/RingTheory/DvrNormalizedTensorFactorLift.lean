@@ -131,7 +131,7 @@ theorem dvr_normalized_tensor_factor_lift
       ((Algebra.TensorProduct.includeRight : A₁ →ₐ[A] C).commutes a).symm
   have hgamma : Function.Injective gamma := by
     apply (RingHom.injective_iff_ker_eq_bot gamma).mpr
-    apply Ideal.eq_bot_of_comap_eq_bot (R := A)
+    apply Ideal.eq_bot_of_under_eq_bot (R := A)
     rw [RingHom.comap_ker]
     change RingHom.ker ((algebraMap A₁ G).comp (algebraMap A A₁)) = ⊥
     rw [← IsScalarTower.algebraMap_eq A A₁ G]
@@ -147,12 +147,10 @@ theorem dvr_normalized_tensor_factor_lift
   have hphi : Function.Surjective phi := by
     intro x
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
-    induction x using TensorProduct.induction_on with
-    | zero => exact ⟨0, map_zero phi⟩
+    induction x using TensorProduct.inductionOn with
     | tmul f a =>
       obtain ⟨z, rfl⟩ := Ideal.Quotient.mk_surjective f
-      induction z using TensorProduct.induction_on with
-      | zero => exact ⟨0, by simp [phi]⟩
+      induction z with
       | tmul e b =>
         refine ⟨e ⊗ₜ[B] (algebraMap A A₁ b * a), ?_⟩
         simp only [phi, Algebra.TensorProduct.lift_tmul, IsScalarTower.toAlgHom_apply,

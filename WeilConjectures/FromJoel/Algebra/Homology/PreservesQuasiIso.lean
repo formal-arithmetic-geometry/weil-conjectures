@@ -149,7 +149,7 @@ lemma preservesQuasiIso_mapHomologicalComplex_iff {C D : Type*} [Category C]
     simp only [mem_quasiIso_iff, MorphismProperty.inverseImage_iff] at hf ⊢
     infer_instance
   mp h := by
-    apply (F.exact_tfae.out 0 2).1
+    apply (F.exact_tfae.out 1 3).1
     intro S hS
     rw [← ShortComplex.quasiIso_doubleFunctor_map_arrowHomToG_iff_exact _ hi₀₁ hi₀₁'] at hS ⊢
     let e : Arrow.mk (F.map (0 : S.X₁ ⟶ 0)) ≅ Arrow.mk (0 : F.obj S.X₁ ⟶ 0) :=

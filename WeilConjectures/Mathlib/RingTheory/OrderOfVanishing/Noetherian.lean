@@ -59,7 +59,7 @@ variable [IsNoetherianRing R] [KrullDimLE 1 R] [IsDomain R] [IsFractionRing R L]
 
 lemma ordOf_eq (z : L) :
     ordOf R L z = log (ordFrac R (algEquiv (nonZeroDivisors R) L (FractionRing R) z)) := by
-  rw [ordOf, dif_pos ⟨⟨‹_›, ‹_›, ‹_›⟩, ‹_›⟩]
+  rw [ordOf, dite_eq_left ⟨⟨‹_›, ‹_›, ‹_›⟩, ‹_›⟩]
 
 lemma ordFrac_algEquiv_ne_zero (z : Lˣ) :
     ordFrac R (algEquiv (nonZeroDivisors R) L (FractionRing R) z) ≠ 0 := by
@@ -124,7 +124,7 @@ lemma exists_units_eq_mul_zpow {ϖ : R} (hϖ : Irreducible ϖ) (z : Lˣ) :
         ↑(Units.map (e : L →* FractionRing R) (hϖu.unit ^ n)) := rfl
     rw [this, map_zpow, Units.val_zpow_eq_zpow_val, Units.coe_map]
     simp
-  rw [hu, Units.val_mul, map_mul, hpow, Units.coe_map, MonoidHom.coe_coe, AlgEquiv.commutes,
+  rw [hu, Units.val_mul, map_mul, hpow, Units.coe_map, MonoidHom.coe_ofClass, AlgEquiv.commutes,
     Units.smul_def, Algebra.smul_def]
 
 /-- **Units of order zero.** In a fraction ring of a discrete valuation ring, a unit of order
@@ -134,7 +134,7 @@ lemma exists_eq_algebraMap_of_ordOf_eq_zero (z : Lˣ) (h : ordOf R L z = 0) :
   obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible R
   obtain ⟨u, n, ϖL, hϖL, rfl⟩ := exists_units_eq_mul_zpow (L := L) hϖ z
   have hϖ' : ordOf R L ϖL = 1 := by rw [hϖL, ordOf_algebraMap_of_irreducible hϖ]
-  rw [Units.val_mul, ordOf_mul, ordOf_zpow, hϖ', Units.coe_map, MonoidHom.coe_coe,
+  rw [Units.val_mul, ordOf_mul, ordOf_zpow, hϖ', Units.coe_map, MonoidHom.coe_ofClass,
     ordOf_algebraMap_of_isUnit u.isUnit, zero_add, mul_one] at h
   subst h
   exact ⟨u, by simp⟩
@@ -143,7 +143,7 @@ lemma ordOf_units_eq {ϖ : R} (hϖ : Irreducible ϖ) (u : Rˣ) (n : ℤ) (ϖL : 
     (hϖL : (ϖL : L) = algebraMap R L ϖ) :
     ordOf R L ↑(Units.map (algebraMap R L : R →* L) u * ϖL ^ n) = n := by
   have hϖ' : ordOf R L ϖL = 1 := by rw [hϖL, ordOf_algebraMap_of_irreducible hϖ]
-  rw [Units.val_mul, ordOf_mul, ordOf_zpow, hϖ', Units.coe_map, MonoidHom.coe_coe,
+  rw [Units.val_mul, ordOf_mul, ordOf_zpow, hϖ', Units.coe_map, MonoidHom.coe_ofClass,
     ordOf_algebraMap_of_isUnit u.isUnit, zero_add, mul_one]
 
 variable {R' L' : Type*} [CommRing R'] [CommRing L'] [Algebra R' L'] [IsDomain R']

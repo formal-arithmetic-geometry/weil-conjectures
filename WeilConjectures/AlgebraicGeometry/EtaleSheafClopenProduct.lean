@@ -153,7 +153,7 @@ private theorem clopen_reconstruction_unit {I : Type v} [Finite I] {X : Scheme.{
         apply Pi.hom_ext
         intro i
         dsimp [R, S]
-        simp only [Category.assoc, Pi.lift_π, Pi.map_π, Pi.lift_π_assoc]
+        simp only [Category.assoc, Pi.lift_comp_π, Pi.map_π, Pi.lift_comp_π_assoc]
         exact (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
           (ι i)).unit.naturality f }
   have hη (F) : IsIso (η.app F) := by
@@ -175,7 +175,7 @@ private theorem clopen_reconstruction_unit {I : Type v} [Finite I] {X : Scheme.{
     rw [← isIso_comp_right_iff _ (U.map (Pi.π Gi i)), ← U.map_comp]
     have he : η.app F ≫ Pi.π Gi i =
         (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (ι i)).unit.app F := by
-      exact Pi.lift_π _ _
+      exact Pi.lift_comp_π _ _
     rw [he]
     infer_instance
   have : ∀ F, IsIso (η.app F) := hη

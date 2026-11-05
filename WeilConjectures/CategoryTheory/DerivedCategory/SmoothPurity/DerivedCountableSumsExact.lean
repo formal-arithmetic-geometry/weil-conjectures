@@ -91,7 +91,7 @@ private theorem localizationPreservesCoproducts
       rw [← Category.assoc, ← L.map_comp, ← he, L.map_comp]
       simp only [Category.assoc, IsIso.hom_inv_id_assoc]
       rw [← L.map_comp_assoc]
-      simp only [g, Sigma.ι_desc]
+      simp only [g, Sigma.ι_comp_desc]
       have h := congrArg (fun a ↦ L.map (φ j).s ≫ a ≫ e.hom) (hφ j)
       simpa [MorphismProperty.RightFraction.map, Category.assoc] using h.symm
     choose desc fac using hex

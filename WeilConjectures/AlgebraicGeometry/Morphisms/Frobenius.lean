@@ -76,7 +76,7 @@ lemma isUniversalHomeomorphism_specMap_of_pow (ψ : CommRingCat.of k ⟶ R)
   have : IsIntegralHom (Spec.map φ) := isIntegralHom_specMap_of_pow hq hφ
   have : Surjective (Spec.map φ) := ⟨fun x ↦ ⟨x, specMap_base_apply_of_pow hq hφ x⟩⟩
   have : UniversallyInjective (Spec.map φ) := by
-    have h := (tfae_universallyInjective (Spec.map φ)).out 0 1
+    have h := (tfae_universallyInjective (Spec.map φ)).out 1 2
     rw [h]
     intro K _ g₁ g₂ hg
     rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢

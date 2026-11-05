@@ -150,7 +150,7 @@ theorem derivedCategory_tower_roos_triangle
     intro n
     simp only [Category.assoc, heP]
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
-      Preadditive.sub_comp, Category.id_comp, Pi.lift_π, heP,
+      Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π, heP,
       reassoc_of% heP]
     exact congrArg (fun f ↦ f.f p) (ht n)
   have hKernel (p : ℤ) : iota.f p ≫ t.f p = 0 :=

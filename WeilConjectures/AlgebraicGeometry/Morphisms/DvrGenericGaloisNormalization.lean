@@ -159,7 +159,7 @@ theorem dvr_generic_galois_normalization
   have hdesc : Sigma.desc f' = sigmaSpec R ≫
       Spec.map (CommRingCat.ofHom (algebraMap K (∀ i : ULift.{u} (Fin r), E i.down))) := by
     ext i
-    rw [Sigma.ι_desc, ← Category.assoc, ι_sigmaSpec, ← Spec.map_comp]
+    rw [Sigma.ι_comp_desc, ← Category.assoc, ι_sigmaSpec, ← Spec.map_comp]
     rfl
   let : IsFinite (Spec.map (CommRingCat.ofHom
       (algebraMap K (∀ i : ULift.{u} (Fin r), E i.down)))) := by
@@ -171,7 +171,7 @@ theorem dvr_generic_galois_normalization
   have her : er.hom ≫ Sigma.desc f = Sigma.desc f' := by
     apply Sigma.hom_ext
     intro i
-    rw [← Category.assoc, Sigma.ι_reindex_hom, Sigma.ι_desc, Sigma.ι_desc]
+    rw [← Category.assoc, Sigma.ι_reindex_hom, Sigma.ι_comp_desc, Sigma.ι_comp_desc]
     rfl
   have : IsFinite (Sigma.desc f) := by
     have h : Sigma.desc f = er.inv ≫ Sigma.desc f' := (er.eq_inv_comp).mpr her

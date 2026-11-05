@@ -125,7 +125,7 @@ private theorem evaluationLeft_exact
           Sigma.ι (fun _ : n ⟶ m ↦ X) i ≫
             𝟙 (∐ fun _ : n ⟶ m ↦ X) ≫
               colimMap ((Functor.const (Discrete (n ⟶ m))).map f)
-        simp only [Category.comp_id, Category.id_comp, Sigma.ι_desc]
+        simp only [Category.comp_id, Category.id_comp, Sigma.ι_comp_desc]
         exact (ι_colimMap ((Functor.const (Discrete (n ⟶ m))).map f) (Discrete.mk i)).symm)
     exact preservesFiniteLimits_of_natIso e.symm
   exact ⟨fun J _ _ ↦

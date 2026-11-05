@@ -34,7 +34,7 @@ Proof: the formal-coproduct Čech face has index map precomposition with
 `j.succAbove` and component the product map omitting the j-th projection.
 The extended presheaf sends this face to a product lift of projection followed
 by restriction. Composing with the singleton-tuple projection selects that
-component by `Pi.lift_π`. The selected source tuple is again the constant zero
+component by `Pi.lift_comp_π`. The selected source tuple is again the constant zero
 tuple. The underlying presheaf is precisely the ULift of tensor sections, so
 its map is ULift of the section restriction along the displayed product map.
 Set s = f(m tensor tprod(b)); its normalization is supplied by hf.

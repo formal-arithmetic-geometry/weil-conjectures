@@ -78,7 +78,7 @@ lemma mono_pi_lift_unit_upperStarLowerStarAdjunction {X : Scheme.{u}} {κ : Type
   let ι := kernel.ι (Pi.lift fun k ↦ (upperStarLowerStarAdjunction Λ (g k)).unit.app M)
   have hι : (g k)^*⟦Λ⟧.map ι = 0 := by
     have h0 : ι ≫ (upperStarLowerStarAdjunction Λ (g k)).unit.app M = 0 := by
-      rw [← Pi.lift_π (fun k ↦ (upperStarLowerStarAdjunction Λ (g k)).unit.app M) k,
+      rw [← Pi.lift_comp_π (fun k ↦ (upperStarLowerStarAdjunction Λ (g k)).unit.app M) k,
         ← Category.assoc, kernel.condition, zero_comp]
     calc (g k)^*⟦Λ⟧.map ι = (g k)^*⟦Λ⟧.map ι ≫ (g k)^*⟦Λ⟧.map
           ((upperStarLowerStarAdjunction Λ (g k)).unit.app M) ≫

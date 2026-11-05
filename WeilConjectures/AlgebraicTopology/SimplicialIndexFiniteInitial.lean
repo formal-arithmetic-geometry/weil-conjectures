@@ -93,7 +93,7 @@ private lemma common_factor (S : SSet.{u}) (m : ℕ) {k n n' : ℕ}
 private lemma bounded_ancestor (S : SSet.{u}) (m : ℕ)
     (hdegenerate : ∀ n : ℕ, m < n → ∀ s : S.obj (op ⦋n⦌),
       s ∈ S.degenerate n) (z : S.Elements) :
-    ∃ y : S.Elements, y.fst.unop.len ≤ m ∧ Nonempty (y ⟶ z) := by
+    ∃ y : S.Elements, y.obj.unop.len ≤ m ∧ Nonempty (y ⟶ z) := by
   rcases z with ⟨⟨⟨k⟩⟩, s⟩
   obtain ⟨n, f, _, x, hx⟩ := S.exists_nonDegenerate s
   have hn : n ≤ m := by
@@ -102,9 +102,9 @@ private lemma bounded_ancestor (S : SSet.{u}) (m : ℕ)
   exact ⟨⟨op ⦋n⦌, x.val⟩, hn, ⟨⟨f.op, hx.symm⟩⟩⟩
 
 private lemma common_ancestor (S : SSet.{u}) (m : ℕ)
-    (x x' z : S.Elements) (hx : x.fst.unop.len ≤ m)
-    (hx' : x'.fst.unop.len ≤ m) (f : x ⟶ z) (g : x' ⟶ z) :
-    ∃ (a : S.Elements) (_ : a.fst.unop.len ≤ 2 * m) (t : a ⟶ z)
+    (x x' z : S.Elements) (hx : x.obj.unop.len ≤ m)
+    (hx' : x'.obj.unop.len ≤ m) (f : x ⟶ z) (g : x' ⟶ z) :
+    ∃ (a : S.Elements) (_ : a.obj.unop.len ≤ 2 * m) (t : a ⟶ z)
       (p : x ⟶ a) (q : x' ⟶ a), p ≫ t = f ∧ q ≫ t = g := by
   rcases x with ⟨⟨⟨n⟩⟩, x⟩
   rcases x' with ⟨⟨⟨n'⟩⟩, x'⟩
@@ -131,10 +131,10 @@ private lemma four_step (S : SSet.{u}) (m : ℕ)
     (hdegenerate : ∀ n : ℕ, m < n → ∀ s : S.obj (op ⦋n⦌),
       s ∈ S.degenerate n) (z : S.Elements)
     (y y' : ObjectProperty.FullSubcategory
-      (fun x : S.Elements ↦ x.fst.unop.len ≤ 2 * m))
+      (fun x : S.Elements ↦ x.obj.unop.len ≤ 2 * m))
     (α : y.obj ⟶ z) (α' : y'.obj ⟶ z) :
     ∃ (u a u' : ObjectProperty.FullSubcategory
-      (fun x : S.Elements ↦ x.fst.unop.len ≤ 2 * m))
+      (fun x : S.Elements ↦ x.obj.unop.len ≤ 2 * m))
       (β : u.obj ⟶ y.obj) (p : u.obj ⟶ a.obj) (q : u'.obj ⟶ a.obj)
       (β' : u'.obj ⟶ y'.obj) (t : a.obj ⟶ z),
       p ≫ t = β ≫ α ∧ q ≫ t = β' ≫ α' := by
@@ -174,16 +174,16 @@ theorem simplicialIndex_finite_initial (S : SSet.{u}) [S.Finite]
     (m₀ : ℕ) (hdegenerate : ∀ n : ℕ, m₀ < n → ∀ s : S.obj (op ⦋n⦌),
       s ∈ S.degenerate n) :
     Finite (ObjectProperty.FullSubcategory
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)) ∧
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀)) ∧
     (∀ y y' : (ObjectProperty.FullSubcategory
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)), Finite (y ⟶ y')) ∧
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀)), Finite (y ⟶ y')) ∧
     (∀ z : S.Elements, ∃ y : (ObjectProperty.FullSubcategory
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)), Nonempty (y.obj ⟶ z)) ∧
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀)), Nonempty (y.obj ⟶ z)) ∧
     (∀ (z : S.Elements) (y y' : (ObjectProperty.FullSubcategory
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)))
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀)))
       (α : y.obj ⟶ z) (α' : y'.obj ⟶ z),
       ∃ (r : ℕ) (ys : ℕ → (ObjectProperty.FullSubcategory
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀))) (a : ∀ i : ℕ, (ys i).obj ⟶ z),
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀))) (a : ∀ i : ℕ, (ys i).obj ⟶ z),
         ys 0 = y ∧ ys (2 * r) = y' ∧ HEq (a 0) α ∧ HEq (a (2 * r)) α' ∧
         ∀ i : ℕ, i < r →
           ∃ (f : (ys (2 * i + 1)).obj ⟶ (ys (2 * i)).obj)
@@ -191,18 +191,18 @@ theorem simplicialIndex_finite_initial (S : SSet.{u}) [S.Finite]
             f ≫ a (2 * i) = a (2 * i + 1) ∧
             g ≫ a (2 * i + 2) = a (2 * i + 1)) ∧
     (ObjectProperty.ι
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)).Initial ∧
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀)).Initial ∧
     (∀ (C : Type v) [Category.{w} C] (D : S.Elements ⥤ C),
       HasLimit D ↔ HasLimit ((ObjectProperty.ι
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)) ⋙ D)) ∧
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀)) ⋙ D)) ∧
     (∀ (C : Type v) [Category.{w} C] (D : S.Elements ⥤ C)
       [HasLimit D] [HasLimit ((ObjectProperty.ι
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)) ⋙ D)],
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀)) ⋙ D)],
       IsIso (limit.pre D (ObjectProperty.ι
-      (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)))) := by
+      (fun x : S.Elements => x.obj.unop.len ≤ 2 * m₀)))) := by
   classical
   obtain ⟨_⟩ := hnonempty 0
-  let P : ObjectProperty S.Elements := fun x ↦ x.fst.unop.len ≤ 2 * m₀
+  let P : ObjectProperty S.Elements := fun x ↦ x.obj.unop.len ≤ 2 * m₀
   have hobjects : Finite P.FullSubcategory := by
     let F : (Σ n : Fin (2 * m₀ + 1), S.obj (op ⦋n.val⦌)) → P.FullSubcategory :=
       fun ⟨n, s⟩ ↦ ⟨⟨op ⦋n.val⦌, s⟩, by change n.val ≤ 2 * m₀; omega⟩
@@ -210,14 +210,14 @@ theorem simplicialIndex_finite_initial (S : SSet.{u}) [S.Finite]
     rintro ⟨⟨⟨⟨n⟩⟩, s⟩, hn⟩
     exact ⟨⟨⟨n, by change n ≤ 2 * m₀ at hn; omega⟩, s⟩, rfl⟩
   have hhoms (y y' : P.FullSubcategory) : Finite (y ⟶ y') := by
-    apply Finite.of_injective (fun f : y ⟶ y' ↦ f.hom.val.unop)
+    apply Finite.of_injective (fun f : y ⟶ y' ↦ f.hom.hom.unop)
     intro f g h
     apply ObjectProperty.hom_ext
     apply Subtype.ext
     exact Quiver.Hom.unop_inj h
   have hreach (z : S.Elements) : ∃ y : P.FullSubcategory, Nonempty (y.obj ⟶ z) := by
     obtain ⟨y, hy, f⟩ := bounded_ancestor S m₀ hdegenerate z
-    exact ⟨⟨y, by change y.fst.unop.len ≤ 2 * m₀; omega⟩, f⟩
+    exact ⟨⟨y, by change y.obj.unop.len ≤ 2 * m₀; omega⟩, f⟩
   have hzig (z : S.Elements) (y y' : P.FullSubcategory)
       (α : y.obj ⟶ z) (α' : y'.obj ⟶ z) :
       ∃ (r : ℕ) (ys : ℕ → P.FullSubcategory) (a : ∀ i, (ys i).obj ⟶ z),

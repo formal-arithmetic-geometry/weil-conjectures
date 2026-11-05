@@ -98,8 +98,8 @@ private lemma transfer_alpha {X : Scheme.{u}} {ι : Type u}
     (CategoryTheory.Limits.Pi.map (fun y : Fin 1 → ι ↦ (φ.f n).hom.app
       (op ((additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l)))))) ≫
       Pi.π _ y = _
-  rw [Pi.map_π, ← Category.assoc, Pi.lift_π, Category.assoc]
-  erw [Pi.lift_π]
+  rw [Pi.map_π, ← Category.assoc, Pi.lift_comp_π, Category.assoc]
+  erw [Pi.lift_comp_π]
   exact (φ.f n).hom.naturality _
 
 private lemma transfer_beta {X : Scheme.{u}} {ι : Type u}
@@ -125,8 +125,8 @@ private lemma transfer_beta {X : Scheme.{u}} {ι : Type u}
   rw [← ConcreteCategory.comp_apply]
   erw [Pi.map_π]
   rw [ConcreteCategory.comp_apply]
-  erw [← ConcreteCategory.comp_apply (Pi.lift _) (Pi.π _ _), Pi.lift_π]
-  erw [← ConcreteCategory.comp_apply (Pi.lift _) (Pi.π _ _), Pi.lift_π]
+  erw [← ConcreteCategory.comp_apply (Pi.lift _) (Pi.π _ _), Pi.lift_comp_π]
+  erw [← ConcreteCategory.comp_apply (Pi.lift _) (Pi.π _ _), Pi.lift_comp_π]
   have h := congrArg (fun f ↦ f.hom.app
     (op ((additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y.as l))))) hφ
   exact ConcreteCategory.congr_hom h _

@@ -99,7 +99,7 @@ lemma exists_disjoint_opens_of_comp_sigmaDesc_eq_id {X : Scheme.{u}} {κ : Type 
     exact (disjoint_opensRange_sigmaι V i j hij).le_bot ⟨hi, hj⟩
   · obtain ⟨j, y, hy⟩ := (sigmaOpenCover V).exists_eq (s x)
     exact ⟨j, ⟨y, hy⟩⟩
-  · rw [← Sigma.ι_desc v j, ← Category.assoc, IsOpenImmersion.lift_fac, Category.assoc, hs,
+  · rw [← Sigma.ι_comp_desc v j, ← Category.assoc, IsOpenImmersion.lift_fac, Category.assoc, hs,
       Category.comp_id]
 
 namespace Scheme.ProEt

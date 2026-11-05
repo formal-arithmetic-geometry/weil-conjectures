@@ -112,7 +112,7 @@ private theorem alternatingCechSheafPresheafD_π {r : ℕ} (U : Fin r → X.Open
       ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
         (Pi.π _ ((Fin.succAboveOrderEmb j).trans t) ≫
           cechCapModuleMap G (alternatingCechIntersection_face_le U p t j)) := by
-  simp only [alternatingCechSheafPresheafD, Pi.lift_π]
+  simp only [alternatingCechSheafPresheafD, Pi.lift_comp_π]
 
 /-- Signed face restrictions square to zero by pairing the two deletion orders.
 Source: Stacks 01FM (blueprint: def-pc-s3-alternating-cech-sheaf-construction). -/
@@ -234,7 +234,7 @@ theorem alternatingCechSheafPresheafZero_comp {r : ℕ} (U : Fin r → X.Opens)
   intro t
   rw [Category.assoc, alternatingCechSheafPresheafD_π]
   simp only [Preadditive.comp_sum, Preadditive.comp_zsmul, ← Category.assoc,
-    alternatingCechSheafPresheafZero, Pi.lift_π, cechCapModuleUnit_comp, Limits.zero_comp]
+    alternatingCechSheafPresheafZero, Pi.lift_comp_π, cechCapModuleUnit_comp, Limits.zero_comp]
   simp [Fin.sum_univ_two]
 
 /-- Degreewise module sheafification of the explicit presheaf complex.

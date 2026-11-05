@@ -97,8 +97,8 @@ theorem exists_primary_filtration_of_isPGroup
         by_cases hin : i < n
         · have hi0 : i ≤ n := by omega
           have hi1 : i + 1 ≤ n := by omega
-          simpa only [F', if_pos hi0, if_pos hi1] using
-            hstep i hin x (by simpa only [F', if_pos hi1] using hx)
+          simpa only [F', ite_eq_left hi0, ite_eq_left hi1] using
+            hstep i hin x (by simpa only [F', ite_eq_left hi1] using hx)
         · have hieq : i = n := by omega
           subst i
           have hx' : x ∈ W' := by simpa [F'] using hx

@@ -485,8 +485,8 @@ private theorem inclusion_sign : ExactProductsRoos.comparison ≫ signIso.hom =
       ((ordinaryIso.hom.app X).f (p + 1) ≫
         (Pi.lift (fun n : ℕ ↦ limit.π X.asFunctor (op n))).f (p + 1)) ≫
           (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f (p + 1)
-    rw [← HomologicalComplex.comp_f, Pi.lift_π]
-    rw [Category.assoc, ← HomologicalComplex.comp_f, Pi.lift_π,
+    rw [← HomologicalComplex.comp_f, Pi.lift_comp_π]
+    rw [Category.assoc, ← HomologicalComplex.comp_f, Pi.lift_comp_π,
       ← HomologicalComplex.comp_f, ordinaryIso_components]
     rfl
 

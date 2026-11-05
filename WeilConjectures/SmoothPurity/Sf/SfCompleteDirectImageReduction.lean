@@ -109,9 +109,9 @@ private theorem map_roos
     intro n
     simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-      Pi.lift_π, Functor.map_sub]
+      Pi.lift_comp_π, Functor.map_sub]
     rw [← Category.assoc, he, ← Functor.map_comp]
-    rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+    rw [← Functor.map_comp, Pi.lift_comp_π, Category.id_comp, Functor.map_comp]
   have hp : F.map p ≫ e.hom = Pi.lift (fun n ↦ F.map (p ≫ Pi.π T n)) := by
     apply Pi.hom_ext
     intro n
@@ -1352,7 +1352,7 @@ private theorem finish_from_projection_formula
     · intro n
       simp only [p, Iso.refl_hom, Category.id_comp]
     · refine ⟨inferInstance, ε, ?_⟩
-      simpa only [Pi.lift_π] using hε
+      simpa only [Pi.lift_comp_π] using hε
   obtain ⟨hp, ε', hε'⟩ := hR
   have hR' : ∃ ε, IsDerivedLimitTriangle (sfDirectImageTransition l E f K)
       (F.obj K) (Pi.lift p) ε := by
@@ -1377,7 +1377,7 @@ private theorem finish_from_projection_formula
     rw [Equiv.apply_symm_apply, adj.homEquiv_naturality_left]
     erw [hbunit]
     have hn := congrArg (fun z ↦ z ≫ Pi.π (sfDirectImageTerm l E f K) n) he
-    simpa only [Category.assoc, Pi.lift_π] using hn.symm
+    simpa only [Category.assoc, Pi.lift_comp_π] using hn.symm
   rw [h]
   infer_instance
 

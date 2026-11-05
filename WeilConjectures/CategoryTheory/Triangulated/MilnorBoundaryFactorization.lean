@@ -41,8 +41,8 @@ private theorem comparison_transition
   intro n
   simp only [towerTransitionEndomorphism, towerProductShift, Functor.map_sub,
     Functor.map_id, Preadditive.sub_comp, Preadditive.comp_sub, Category.assoc,
-    piComparison_comp_π, Limits.Pi.lift_π, Category.id_comp]
-  rw [← F.map_comp, Limits.Pi.lift_π]
+    piComparison_comp_π, Limits.Pi.lift_comp_π, Category.id_comp]
+  rw [← F.map_comp, Limits.Pi.lift_comp_π]
   rw [← Category.assoc, piComparison_comp_π, ← F.map_comp]
 
 @[reassoc]

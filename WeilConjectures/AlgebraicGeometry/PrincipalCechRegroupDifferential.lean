@@ -143,7 +143,7 @@ private theorem principalCechRowToTerms_differential
       by_cases h : (J.val.card : ℤ) = (p + 1) + 1
       · simp only [principalCechRowToTerms_apply, dif_pos h]
         have hc := congrArg (fun k ↦ k.f q)
-          (Limits.Pi.lift_π (fun S : principalCechRowIndex r (p + 1) ↦
+          (Limits.Pi.lift_comp_π (fun S : principalCechRowIndex r (p + 1) ↦
             ∑ j : S.val.val,
               if hn : (S.val.val.erase j.val).Nonempty then
                 ((-1 : ℤ) ^ (S.val.val.filter (fun k ↦ k < j.val)).card) •

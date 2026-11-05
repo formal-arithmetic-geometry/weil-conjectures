@@ -161,7 +161,7 @@ theorem truncated_directImage_secondPage_coproduct_epi
         Sigma.desc (fun i ↦ R.map (j i)) ≫ e'.inv.app N := by
     apply Sigma.hom_ext
     intro i
-    simp only [Sigma.ι_desc, Sigma.ι_map_assoc, Sigma.ι_desc_assoc]
+    simp only [Sigma.ι_comp_desc, Sigma.ι_map_assoc, Sigma.ι_comp_desc_assoc]
     rw [← e'.hom.naturality_assoc]
     simp
   change Epi (Sigma.desc (fun i ↦ F.map (j i)))

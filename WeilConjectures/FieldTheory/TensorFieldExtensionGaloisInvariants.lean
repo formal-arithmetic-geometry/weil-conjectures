@@ -68,7 +68,6 @@ theorem injective_and_range_eq_invariants
       E (LinearMap.lTensor A (τ : M ≃ₐ[k] M).toLinearEquiv.toLinearMap z) i =
         (τ : M ≃ₐ[k] M) (E z i) := by
     induction z with
-    | zero => simp
     | tmul a y => simp [coord_tmul]
     | add x y hx hy => simp [hx, hy]
   constructor

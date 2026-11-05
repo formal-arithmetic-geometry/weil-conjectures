@@ -158,7 +158,7 @@ def single (x : P) : K →ₗ[k] 𝔸 :=
     refine (Set.finite_singleton x).subset fun y hy ↦ ?_
     by_contra h
     simp only [Set.mem_ofPred_eq, LinearMap.coe_single, Pi.single_apply,
-      if_neg (show y ≠ x from h)] at hy
+      ite_eq_right (show y ≠ x from h)] at hy
     exact hy (O y).zero_mem
 
 @[simp] lemma coe_single (x : P) (c : K) : (single O hfin x c : P → K) = Pi.single x c := rfl
@@ -176,9 +176,9 @@ noncomputable def piLift (S : Finset P) (h : K) (hh : ∀ x ∉ S, h ∈ O x) : 
   piEnd O hfin (fun x ↦ if x ∈ S then projO O x * act k h else act k h * projO O x) <| by
     intro x y
     by_cases hx : x ∈ S
-    · rw [if_pos hx]
+    · rw [ite_eq_left hx]
       exact projO_mem O x _
-    · rw [if_neg hx, mul_apply, act_apply, smul_eq_mul]
+    · rw [ite_eq_right hx, mul_apply, act_apply, smul_eq_mul]
       exact (O x).mul_mem (hh x hx) (projO_mem O x _)
 
 lemma piLift_apply (S : Finset P) (h : K) (hh : ∀ x ∉ S, h ∈ O x) (v : 𝔸) (x : P) :

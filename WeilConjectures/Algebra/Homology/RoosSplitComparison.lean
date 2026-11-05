@@ -41,8 +41,8 @@ private theorem transition_isSplitEpi
   intro n
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
     Category.comp_id, Preadditive.sub_comp, Category.assoc,
-    Limits.Pi.lift_π, Category.id_comp]
-  rw [Limits.Pi.lift_π_assoc, ha]
+    Limits.Pi.lift_comp_π, Category.id_comp]
+  rw [Limits.Pi.lift_comp_π_assoc, ha]
   simp
 
 private noncomputable abbrev towerProductComplex

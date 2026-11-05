@@ -38,7 +38,7 @@ private theorem map_product_lift
     G.map (Pi.lift p) ≫ e.hom = Pi.lift (fun n => G.map (p n)) := by
   apply Pi.hom_ext
   intro n
-  rw [Category.assoc, he, ← Functor.map_comp, Pi.lift_π, Pi.lift_π]
+  rw [Category.assoc, he, ← Functor.map_comp, Pi.lift_comp_π, Pi.lift_comp_π]
 
 private theorem transport_roos_triangle
     {C : Type wC} [Category.{wA} C] [HasZeroObject C] [HasShift C ℤ]
@@ -60,7 +60,7 @@ private theorem transport_roos_triangle
     intro n
     simp only [Category.assoc, b, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id, Category.id_comp,
-      Pi.lift_π, Pi.mapIso_hom_π, Pi.mapIso_hom_π_assoc, Pi.lift_π_assoc]
+      Pi.lift_comp_π, Pi.mapIso_hom_π, Pi.mapIso_hom_π_assoc, Pi.lift_comp_π_assoc]
     simp only [← Category.assoc]
     rw [Category.assoc (Pi.π _ (n + 1)), hf]
     simp only [Category.assoc]
@@ -72,7 +72,7 @@ private theorem transport_roos_triangle
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, b, Pi.mapIso_hom_π, Pi.lift_π_assoc, Pi.lift_π]
+    simp only [Category.assoc, b, Pi.mapIso_hom_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     rw [hp, Iso.inv_hom_id_assoc]
   · change towerTransitionEndomorphism g ≫ b.inv = b.inv ≫ towerTransitionEndomorphism f
     apply (cancel_mono b.hom).1

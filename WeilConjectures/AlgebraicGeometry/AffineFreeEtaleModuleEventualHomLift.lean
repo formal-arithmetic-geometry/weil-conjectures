@@ -188,7 +188,7 @@ theorem exists_affine_free_etaleModule_eventual_hom_lift
       (adjt.homEquiv _ _ a ≫ rho j h) =
     Sigma.ι (fun k ↦ Q (W k)) k ≫ adj.homEquiv _ _ f
   rw [ha]
-  simp only [Sigma.ι_desc_assoc]
+  simp only [Sigma.ι_comp_desc_assoc]
   rw [← adj.homEquiv_naturality_left]
   apply (shriekEvalEquiv (W k) _).injective
   rw [shriekEvalEquiv_comp]

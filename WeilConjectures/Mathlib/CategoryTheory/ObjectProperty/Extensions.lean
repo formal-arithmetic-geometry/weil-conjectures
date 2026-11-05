@@ -158,8 +158,8 @@ theorem filtrationClosure_iff [P.IsClosedUnderIsomorphisms] {X : C} :
     | @of_mono X Y i _ hX hi ih =>
       obtain ⟨n, G, φ, h0, ⟨e⟩, hm, hP⟩ := ih
       let G' : Fin (n + 2) → C := fun j ↦ if h : (j : ℕ) < n + 1 then G ⟨j, h⟩ else Y
-      have hG' (j : ℕ) (h : j < n + 1) : G' ⟨j, by omega⟩ = G ⟨j, h⟩ := dif_pos h
-      have hG'last : G' (Fin.last (n + 1)) = Y := dif_neg (by simp)
+      have hG' (j : ℕ) (h : j < n + 1) : G' ⟨j, by omega⟩ = G ⟨j, h⟩ := dite_eq_left h
+      have hG'last : G' (Fin.last (n + 1)) = Y := dite_eq_right (by simp)
       let φ' : ∀ j : Fin (n + 1), G' j.castSucc ⟶ G' j.succ := fun j ↦
         if h : (j : ℕ) < n then
           eqToHom (hG' j (by omega)) ≫ φ ⟨j, h⟩ ≫ eqToHom (hG' (j + 1) (by omega)).symm

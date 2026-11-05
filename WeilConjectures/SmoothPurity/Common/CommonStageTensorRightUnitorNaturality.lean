@@ -142,10 +142,7 @@ private theorem rational_naturality {M N : sfRationalConstructibleCategory l E X
   have hN := chosen_spec (pullbackTensorRationalRightUnitor_existsUnique l E X N)
     (pullbackTensorRationalRightUnitor l E X N) rfl
   change T.map (Prod.mkHom f (𝟙 U)) ≫ _ = _
-  induction f using TensorProduct.induction_on with
-  | zero =>
-    rw [hb]
-    simp
+  induction f with
   | tmul c f =>
     have hm : HEq (T.map (Prod.mkHom
         (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] f) (𝟙 U)))

@@ -76,15 +76,12 @@ lemma baseChangeTensorEquiv_lTensor {K' : Type*} [AddCommGroup K'] [Module R₀ 
     baseChangeTensorEquiv M₀ K (f.lTensor _ y) =
       (f.restrictScalars R₀).lTensor M₀ (baseChangeTensorEquiv M₀ K' y) := by
   induction y with
-  | zero => simp
   | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
   | tmul x k =>
     induction x with
-    | zero => simp
     | add x y hx hy => simp only [add_tmul, map_add, hx, hy]
     | tmul b m =>
       induction b with
-      | zero => simp
       | add x y hx hy => simp only [add_tmul, map_add, hx, hy]
       | tmul r s => simp
 
@@ -92,15 +89,12 @@ lemma baseChangeTensorEquiv_smul (r : R₁) (s : S₀) (y : ((R₁ ⊗[R₀] S�
     baseChangeTensorEquiv M₀ K ((r ⊗ₜ[R₀] s : R₁ ⊗[R₀] S₀) • y) =
       s • (DistribSMul.toLinearMap R₀ K r).lTensor M₀ (baseChangeTensorEquiv M₀ K y) := by
   induction y with
-  | zero => simp
   | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, map_add, smul_add]
   | tmul x k =>
     induction x with
-    | zero => simp
     | add x y hx hy => simp only [add_tmul, smul_add, map_add, hx, hy]
     | tmul b m =>
       induction b with
-      | zero => simp
       | add x y hx hy => simp only [add_tmul, smul_add, map_add, hx, hy]
       | tmul r' s' =>
         rw [smul_tmul', smul_tmul', smul_eq_mul, Algebra.TensorProduct.tmul_mul_tmul,
@@ -224,7 +218,6 @@ theorem flat_localizedModule_baseChange_of_forall [IsNoetherianRing R₀] [IsNoe
       AlgebraTensorModule.lTensor S₀ M₀ p₀.subtype
     have hnat1 (x : M₀ ⊗[R₀] p₀) : μ₀ (g' x) = ℓ (μ' x) := by
       induction x with
-      | zero => simp
       | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
       | tmul m a =>
         simp only [μ₀, μ', g', ℓ, LinearMap.comp_apply, AlgebraTensorModule.rTensor_tmul,
@@ -234,7 +227,6 @@ theorem flat_localizedModule_baseChange_of_forall [IsNoetherianRing R₀] [IsNoe
     have hnat2 (x : M₀ ⊗[R₀] p₀) : AlgebraTensorModule.lTensor S₀ M₀' σ (g' x) =
         gL (AlgebraTensorModule.lTensor S₀ M₀ σ x) := by
       induction x with
-      | zero => simp
       | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
       | tmul s a => rfl
     obtain ⟨⟨k', s⟩, hs⟩ := IsLocalizedModule.surj q₀.primeCompl g' k
@@ -320,7 +312,6 @@ theorem exists_finset_lTensor_eq_zero_of_injective [IsNoetherianRing R₀] (p : 
         ((J.subtype.restrictScalars R₀).lTensor M₀) ∘ (TensorProduct.comm R₀ J M₀) := by
       funext x
       induction x with
-      | zero => simp
       | add x y hx hy => simp only [map_add, hx, hy, Function.comp_apply]
       | tmul j m => rfl
     rw [this]
@@ -331,7 +322,6 @@ theorem exists_finset_lTensor_eq_zero_of_injective [IsNoetherianRing R₀] (p : 
         (1 : A) ⊗ₜ TensorProduct.rid R₀ M₀ (p.subtype.lTensor M₀ x) := by
     intro x
     induction x with
-    | zero => simp
     | add x y hx hy => rw [map_add, map_add, map_add, hx, hy, map_add, map_add, tmul_add]
     | tmul s a =>
       simp [τ, Algebra.algebraMap_eq_smul_one, smul_tmul]
@@ -511,7 +501,6 @@ theorem flat_localizedModule_baseChange_map {R R' : Type u} [CommRing R] [CommRi
   have key : ∀ t : R ⊗[R₀] S₀, e' (φ t • y) = e (t • z) := by
     intro t
     induction t with
-    | zero => simp
     | add a b ha hb => rw [map_add, add_smul, map_add, ha, hb, add_smul, map_add]
     | tmul r s =>
       rw [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, baseChangeTensorEquiv_smul,
@@ -571,7 +560,6 @@ lemma map_val_map_inclusion {A : Type u} [CommRing A] [Algebra R₀ A] {R R' : S
       (Algebra.TensorProduct.map (Subalgebra.inclusion h) (AlgHom.id R₀ S₀) x) =
       Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀) x := by
   induction x with
-  | zero => simp
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 
@@ -581,7 +569,6 @@ lemma map_inclusion_map_inclusion {A : Type u} [CommRing A] [Algebra R₀ A]
       (Algebra.TensorProduct.map (Subalgebra.inclusion h) (AlgHom.id R₀ S₀) x) =
       Algebra.TensorProduct.map (Subalgebra.inclusion (h.trans h')) (AlgHom.id R₀ S₀) x := by
   induction x with
-  | zero => simp
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 
@@ -590,7 +577,6 @@ lemma map_eq_rTensor {A : Type u} [CommRing A] [Algebra R₀ A] {R R' : Subalgeb
     Algebra.TensorProduct.map (Subalgebra.inclusion h) (AlgHom.id R₀ S₀) x =
       LinearMap.rTensor S₀ (Subalgebra.inclusion h).toLinearMap x := by
   induction x with
-  | zero => simp
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 
@@ -599,7 +585,6 @@ lemma map_val_eq_rTensor {A : Type u} [CommRing A] [Algebra R₀ A] {R : Subalge
     Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀) x =
       LinearMap.rTensor S₀ R.val.toLinearMap x := by
   induction x with
-  | zero => simp
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 

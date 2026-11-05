@@ -100,7 +100,7 @@ theorem productHomologyIso_transition [HasExactLimitsOfShape (Discrete ℕ) A]
         Pi.π (fun n : ℕ ↦ H.obj (K.obj (op n))) n
   rw [Category.assoc, piComparison_comp_π, ← H.map_comp]
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-    Category.id_comp, Pi.lift_π, H.map_sub, H.map_comp,
+    Category.id_comp, Pi.lift_comp_π, H.map_sub, H.map_comp,
     Category.assoc, Preadditive.comp_sub, piComparison_comp_π]
   rw [← Category.assoc, piComparison_comp_π]
   rfl

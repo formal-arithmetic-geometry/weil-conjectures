@@ -151,7 +151,6 @@ private lemma descendedMap_comp_map_val (x : A' ⊗[A] D.descended) :
     TensorProduct.mulMap A A' E (Algebra.TensorProduct.map (AlgHom.id A' A') D.descended.val x) =
       D.descendedMap x := by
   induction x with
-  | zero => simp
   | tmul a' d => simp
   | add x y hx hy => simp [hx, hy]
 
@@ -173,7 +172,6 @@ private lemma δ'_descendedMap (x : A' ⊗[A] D.descended) : D.δ' (D.descendedM
   apply D.map_val_injective
   rw [coe_δ']
   induction x with
-  | zero => simp
   | tmul a' d =>
     rw [descendedMap_tmul, D.δ_smul, D.δ_of_mem_descended d.2]
     simp [TensorProduct.smul_tmul']

@@ -257,8 +257,7 @@ theorem qc_open_flat_section_diagram {R T : CommRingCat.{u}} (r : R ⟶ T)
     apply CommAlgCat.hom_ext
     apply AlgHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
     | tmul a t =>
       change (e G).hom

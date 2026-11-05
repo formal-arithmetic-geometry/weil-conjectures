@@ -140,7 +140,7 @@ private theorem moduleProduct_from_abelian
       PreservesProduct.iso_hom, piComparison_comp_π_assoc, qA]
     rw [← Category.assoc, ← V.map_comp]
     dsimp only [qM, qA]
-    erw [Pi.lift_π, Pi.lift_π]
+    erw [Pi.lift_comp_π, Pi.lift_comp_π]
     simpa only [V, Mod.forget, Functor.comp_obj, Iso.app_hom, Iso.trans_hom] using
       moduleSheetMap_forget Λ p (t j) g (w j) N
   have : IsIso qA := hq

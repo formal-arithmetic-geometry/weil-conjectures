@@ -476,13 +476,11 @@ private theorem rawPairing_restrict
       ((changeOfRingsPresheaf.{vC, uC, u} c N).map i y) =
     (changeOfRings.{vC, uC, u} c ((monoidalCategory A).tensorObj M N)).val.map i
       (rawPairing c M N W x y) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply]
+  induction x with
   | add x x' hx hx' => simp only [map_add, LinearMap.add_apply, hx, hx']
   | tmul s m =>
     change B.obj.obj W at s
-    induction y using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction y with
     | add y y' hy hy' => simp only [map_add, hy, hy']
     | tmul t n =>
       change B.obj.obj W at t
@@ -527,8 +525,7 @@ private theorem tensor_bilinear_exists {C : Type uC} [Category.{vC} C] [Essentia
         ext t
         change TensorProduct.lift (β V) ((F.val ⊗ G.val).map f t) =
           H.val.map f (TensorProduct.lift (β U) t)
-        induction t using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction t with
         | tmul x y =>
           change β V (F.val.map f x) (G.val.map f y) = H.val.map f (β U x y)
           exact hβ f x y
@@ -725,8 +722,7 @@ private theorem exists_backward
       naturality := by
         intro W V i
         ext x
-        induction x using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction x with
         | add x y hx hy => simp only [map_add, hx, hy]
         | tmul x y => exact rawPairing_restrict c M N i x y }
   obtain ⟨f, hf⟩ := presheafTensorDescent (B := B) E F H β

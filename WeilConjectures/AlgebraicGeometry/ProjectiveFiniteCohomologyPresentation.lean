@@ -185,7 +185,7 @@ private theorem exists_epi_sigma_twist_affine
       ⟨i, ⟨a⟩⟩).app _ (w ⟨i, ⟨a⟩⟩), ?_⟩
     simp only [map_sum, Hom.app_smul]
     refine Finset.sum_congr rfl fun a _ ↦ ?_
-    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, Sigma.ι_desc, hw]
+    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, Sigma.ι_comp_desc, hw]
   · have := isQuasicoherent_sigma
       (fun a ↦ ProjectiveSpace.twist n T (-(m a : ℤ)))
     exact isQuasicoherent_kernel _

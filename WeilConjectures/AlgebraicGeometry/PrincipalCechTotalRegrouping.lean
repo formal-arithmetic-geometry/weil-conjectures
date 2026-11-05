@@ -106,7 +106,7 @@ private theorem rowRetract_π (p q n : ℤ) (h : p + q = n)
     (HomologicalComplex.eval (ModuleCat.{u} A) (ComplexShape.up ℤ) q).map
       (Limits.Pi.π _ S) = _
   rw [inv_piComparison_comp_map_π]
-  exact Limits.Pi.lift_π _ S
+  exact Limits.Pi.lift_comp_π _ S
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem row_hom_ext (p q : ℤ) {M : ModuleCat.{u} A}

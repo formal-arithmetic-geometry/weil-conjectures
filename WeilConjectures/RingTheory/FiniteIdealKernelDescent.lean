@@ -185,7 +185,6 @@ theorem exists_stage_finite_ideal_kernel_vanishes
   have hcomp : ∀ x, δ (θ e x) = Θ x := by
     intro x
     induction x with
-    | zero => simp
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul a x =>
       rw [ht, hδ, hΘ]

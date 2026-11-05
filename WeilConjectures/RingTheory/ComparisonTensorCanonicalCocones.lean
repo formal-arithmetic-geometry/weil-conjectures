@@ -164,7 +164,6 @@ theorem exists_comparison_tensor_canonical_cocones
       rw [hk, hb, hj]
       clear hk hj hb
       induction z with
-      | zero => simp
       | tmul a b =>
           simp only [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, AlgHom.coe_mk]
           congr 1
@@ -195,7 +194,6 @@ theorem exists_comparison_tensor_canonical_cocones
     rw [hz]
     generalize c j z = t
     induction t with
-    | zero => simp
     | tmul a b =>
         simp only [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, AlgHom.coe_mk]
         congr 1

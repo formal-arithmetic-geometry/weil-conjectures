@@ -98,7 +98,7 @@ lemma exists_finset_surjective_sheafFiber_map [Epi (Sigma.desc φ)] {Ω : Type u
   let c := sigmaComparison Φ G
   have hc : c ≫ Φ.map (Sigma.desc φ) = Sigma.desc fun i ↦ Φ.map (φ i) := by
     ext i
-    rw [ι_comp_sigmaComparison_assoc, ← Φ.map_comp, Sigma.ι_desc, Sigma.ι_desc]
+    rw [ι_comp_sigmaComparison_assoc, ← Φ.map_comp, Sigma.ι_comp_desc, Sigma.ι_comp_desc]
   have key (m : Φ.obj F) : ∃ S : Finset ι,
       m ∈ ⨆ i ∈ S, LinearMap.range (Φ.map (φ i)).hom := by
     obtain ⟨y, rfl⟩ := hsurj m
@@ -106,7 +106,7 @@ lemma exists_finset_surjective_sheafFiber_map [Epi (Sigma.desc φ)] {Ω : Type u
       (fun i ↦ Φ.obj (G i))
       (Sigma.desc fun i ↦ Φ.map (φ i)) (inv c y)
     refine ⟨S, ?_⟩
-    simp only [Sigma.ι_desc] at hS
+    simp only [Sigma.ι_comp_desc] at hS
     have hy : (Sigma.desc fun i ↦ Φ.map (φ i)) (inv c y) = Φ.map (Sigma.desc φ) y := by
       rw [← hc, ConcreteCategory.comp_apply, IsIso.inv_hom_id_apply]
     rw [← hy]
@@ -121,7 +121,7 @@ lemma exists_finset_surjective_sheafFiber_map [Epi (Sigma.desc φ)] {Ω : Type u
   have hi' : i ∈ g.biUnion S := Finset.mem_biUnion.mpr ⟨m, hm, hi⟩
   refine ⟨(Φ.map (Sigma.ι (fun j : g.biUnion S ↦ G j.1) (⟨i, hi'⟩ : g.biUnion S)) :
     Φ.obj (G i) ⟶ _) z, ?_⟩
-  rw [← ConcreteCategory.comp_apply, ← Φ.map_comp, Sigma.ι_desc]
+  rw [← ConcreteCategory.comp_apply, ← Φ.map_comp, Sigma.ι_comp_desc]
 
 
 /-- **Stacks 095M.** If a constructible sheaf `F` on a quasi-compact quasi-separated scheme is a

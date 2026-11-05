@@ -193,8 +193,7 @@ private theorem section_induction {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoh
   obtain ⟨e, he⟩ := exists_sectionTensorEquiv F hU hW hUW
   intro x
   obtain ⟨t, rfl⟩ := e.surjective x
-  induction t using TensorProduct.induction_on with
-  | zero => simpa only [map_zero] using hzero
+  induction t with
   | tmul r a => rw [he]; exact hgen r a
   | add t t' ht ht' => rw [_root_.map_add]; exact hadd _ _ ht ht'
 

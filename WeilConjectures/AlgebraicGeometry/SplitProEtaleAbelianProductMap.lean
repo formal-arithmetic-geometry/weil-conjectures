@@ -416,7 +416,7 @@ theorem splitProEtaleAbelianProductMap_isIso
     intro j
     simp only [d, Category.assoc, Pi.mapIso_hom_π]
     dsimp only [q, q']
-    erw [Pi.lift_π_assoc, Pi.lift_π]
+    erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     simpa only [Iso.app_hom, Category.assoc] using
       canonicalSheet_is_restriction_of_comm p g (t j) (w j) N
   have : IsIso (q ≫ d.hom) := hq.symm ▸ inferInstance

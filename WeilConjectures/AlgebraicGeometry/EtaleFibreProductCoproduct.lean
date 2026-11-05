@@ -123,7 +123,7 @@ private theorem powerCofan_isColimit {C : Type*} [Category C] [HasFiniteLimits C
           cofan_mk_inj, Iso.refl_hom, splitProduct, BinaryFan.mk_snd, Category.id_comp,
           Category.assoc, limit.lift_π, Fan.mk_pt, Fan.mk_π_app, d, E]
         dsimp [Fin.cons]
-        rw [Pi.lift_π_assoc]
+        rw [Pi.lift_comp_π_assoc]
     exact ⟨(Cofan.isColimitEquivOfEquiv E.symm (powerCofan A c (n + 1))).symm hd.some⟩
 
 /-- Source: Stacks Project, Schemes, Tags 01JB and 01JC and Section 26.17
@@ -149,7 +149,7 @@ theorem etale_fibre_product_coproduct (X : Scheme.{u}) (I : Type v) [Finite I]
     let P := fun (p : ℕ) (J : Fin (p + 1) → I) => ∏ᶜ fun r => A (J r)
     let Q := fun p : ℕ => ∏ᶜ fun _ : Fin (p + 1) => V
     let c : ∀ i : I, A i ⟶ V := fun i =>
-      Over.homMk (Sigma.ι U i) (Sigma.ι_desc u i)
+      Over.homMk (Sigma.ι U i) (Sigma.ι_comp_desc u i)
     ∃ e : ∀ p : ℕ, (∐ P p) ≅ Q p,
       (∀ (p : ℕ) (J : Fin (p + 1) → I) (r : Fin (p + 1)),
         Sigma.ι (P p) J ≫ (e p).hom ≫ Pi.π (fun _ : Fin (p + 1) => V) r =
@@ -166,7 +166,7 @@ theorem etale_fibre_product_coproduct (X : Scheme.{u}) (I : Type v) [Finite I]
   let A : I → Over X := fun i ↦ Over.mk (u i)
   let V : Over X := Over.mk (Sigma.desc u)
   let c : ∀ i : I, A i ⟶ V := fun i ↦
-    Over.homMk (Sigma.ι U i) (Sigma.ι_desc u i)
+    Over.homMk (Sigma.ι U i) (Sigma.ι_comp_desc u i)
   let : FinitaryExtensive (Over X) :=
     finitaryExtensive_of_preserves_and_reflects_isomorphism (Over.forget X)
   have hc : IsColimit (Cofan.mk V c) := by
@@ -185,8 +185,8 @@ theorem etale_fibre_product_coproduct (X : Scheme.{u}) (I : Type v) [Finite I]
   intro p J r
   apply Pi.hom_ext
   intro s
-  simp only [Category.assoc, Pi.lift_π]
+  simp only [Category.assoc, Pi.lift_comp_π]
   rw [he (p + 1) J (r.succAbove s), he p (fun t ↦ J (r.succAbove t)) s]
-  simp only [A, Pi.lift_π_assoc]
+  simp only [A, Pi.lift_comp_π_assoc]
 
 end AlgebraicGeometry

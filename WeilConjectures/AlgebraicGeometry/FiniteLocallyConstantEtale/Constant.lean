@@ -176,7 +176,7 @@ lemma comp_sigmaIdx_apply {W : Scheme.{u}} (a : W ⟶ ∐ fun _ : S' ↦ X) (w :
     exact ⟨y, hy⟩
   have h := IsOpenImmersion.lift_fac (Sigma.ι (fun _ : S' ↦ X) σ) (O.ι ≫ a) hrange
   have hl := congrArg (· ≫ Sigma.desc (fun _ : S' ↦ 𝟙 X)) h
-  simp only [Category.assoc, Sigma.ι_desc, Category.comp_id, ha] at hl
+  simp only [Category.assoc, Sigma.ι_comp_desc, Category.comp_id, ha] at hl
   rw [← h, hl, Category.assoc]
 
 variable {A : Type w} [TopologicalSpace A] [DiscreteTopology A] (e : A ≃ S')

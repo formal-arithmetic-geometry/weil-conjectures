@@ -257,10 +257,10 @@ lemma Etale.stalkIsoColimitSections_hom_comp_piLift_stalkRestrict :
   intro s
   apply Pi.hom_ext
   intro t
-  simp only [Category.assoc, Pi.lift_π, Limits.Pi.map_π, PreservesProduct.iso_hom]
+  simp only [Category.assoc, Pi.lift_comp_π, Limits.Pi.map_π, PreservesProduct.iso_hom]
   erw [Etale.stalkIsoColimitSections, Functor.Final.ι_colimitIso_hom_assoc,
     Etale.toPresheafFiber_stalkRestrict, piComparison_comp_π_assoc, colim_map, ι_colimMap_assoc,
-    ι_colimMap_assoc, sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_π, Etale.pieceIsoStalk,
+    ι_colimMap_assoc, sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_comp_π, Etale.pieceIsoStalk,
     Functor.Final.ι_colimitIso_hom]
   exact (colimit.w ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
     (CategoryOfElements.homMk ⟨s.unop.pieceObj t, s.unop.piecePt t⟩
@@ -306,8 +306,8 @@ def Etale.lowerStarSheafFiberIsoPi :
       intro t
       simp only [Functor.comp_map, Iso.trans_hom, Etale.stalkIsoPi_hom, Iso.symm_hom,
         Category.assoc, piObjIso_hom_comp_π]
-      rw [NatTrans.naturality, piObjIso_inv_comp_π_assoc, piObjIso_inv_comp_π, Pi.lift_π,
-        Pi.lift_π_assoc, Etale.stalkRestrict_naturality])
+      rw [NatTrans.naturality, piObjIso_inv_comp_π_assoc, piObjIso_inv_comp_π, Pi.lift_comp_π,
+        Pi.lift_comp_π_assoc, Etale.stalkRestrict_naturality])
 
 end StalkFormula
 

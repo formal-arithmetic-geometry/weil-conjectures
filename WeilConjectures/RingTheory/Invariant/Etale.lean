@@ -85,7 +85,7 @@ lemma exists_smul_eq_notMem_mem_minimalPrimes (q : Ideal A) (hq : q ∈ minimalP
     obtain ⟨hne, hq'⟩ := Finset.mem_erase.1 hq'S
     rw [Set.Finite.mem_toFinset] at hq'
     exact hne (le_antisymm hle (hq.2 hq'.1 hle))
-  obtain ⟨t₀, ht₀S, ht₀q⟩ := SetLike.not_le_iff_exists.1 hS
+  obtain ⟨t₀, ht₀S, ht₀q⟩ := IsConcreteLE.not_le_iff_exists.1 hS
   have ht₀ : ∀ q' ∈ minimalPrimes A, q' ≠ q → t₀ ∈ q' := fun q' hq' hne ↦
     (Finset.inf_le (f := _root_.id) (Finset.mem_erase.2 ⟨hne, (Set.Finite.mem_toFinset _).2 hq'⟩) :
       S.inf _root_.id ≤ q') ht₀S
@@ -237,7 +237,7 @@ theorem isSeparable_of_mem_minimalPrimes [IsReduced A] (hfin : (minimalPrimes A)
   refine Algebra.IsSeparable.of_equiv_equiv e.symm (RingEquiv.refl L) ?_
   ext x
   have : algebraMap K L (e.symm x) = x := congrArg Subtype.val (e.apply_symm_apply x)
-  simp only [RingHom.coe_comp, RingHom.coe_coe, Function.comp_apply, RingEquiv.coe_ringHom_refl,
+  simp only [RingHom.coe_comp, RingHom.coe_coe, Function.comp_apply, RingEquiv.toRingHom_refl,
     RingHom.id_apply]
   exact this
 

@@ -74,7 +74,7 @@ theorem moduleCechLiftSquares {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
       _ ≫ _ ≫ (Pi.lift fun z : Fin 1 → ι =>
         (J.cocomplex.X n).presheafModuleCat.map
           (homOfLE (le_top (a := ∏ᶜ fun l => U (z l)))).op) ≫ Pi.π _ y
-    simp only [Pi.lift_π_assoc, Pi.lift_π]
+    simp only [Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     ext x
     exact PresheafOfModules.naturality_apply (ψ.f n).val
       (homOfLE (le_top (a := ∏ᶜ fun l => U (y l)))).op x

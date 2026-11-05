@@ -180,8 +180,7 @@ private theorem tensor_coefficient_presentation
       obtain ⟨x, hx⟩ := ih (c • t)
       exact ⟨x, by rw [hx, TensorProduct.smul_tmul, TensorProduct.tmul_smul]⟩
   intro w
-  induction w using TensorProduct.induction_on with
-  | zero => exact ⟨0, map_zero q⟩
+  induction w with
   | tmul t d => exact ht d t
   | add x y hx hy =>
     obtain ⟨z, rfl⟩ := hx

@@ -105,7 +105,7 @@ theorem strictRoosBlock_comm (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (e : ℕ
   intro n
   simp only [selection, block, strictRoosEndomorphism, towerTransitionEndomorphism,
     towerProductShift, Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-    Category.id_comp, Category.assoc, Pi.lift_π, Pi.lift_π_assoc,
+    Category.id_comp, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc,
     Preadditive.comp_sum]
   change Pi.π (fun i : ℕ ↦ X.asFunctor.obj (op i)) (e * (n + 1) - 1) -
     Pi.π (fun i : ℕ ↦ X.asFunctor.obj (op i)) (e * (n + 1 + 1) - 1) ≫
@@ -169,8 +169,8 @@ private theorem roosComparison_transition (F : A ⥤ B) [F.Additive]
   intro n
   simp only [towerTransitionEndomorphism, towerProductShift, Functor.map_sub,
     Functor.map_id, Preadditive.sub_comp, Preadditive.comp_sub, Category.assoc,
-    piComparison_comp_π, Pi.lift_π, Category.id_comp]
-  rw [← G.map_comp, Pi.lift_π]
+    piComparison_comp_π, Pi.lift_comp_π, Category.id_comp]
+  rw [← G.map_comp, Pi.lift_comp_π]
   rw [← Category.assoc, piComparison_comp_π, ← G.map_comp]
 private noncomputable def roosTheta (F : A ⥤ B) [F.Additive]
     (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [IsIso (roosComparison F X)] :

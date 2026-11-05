@@ -63,11 +63,9 @@ lemma tensorCancelEquiv_tmul (r : R₁) (s : S₀) (n : N) :
 lemma tensorCancelEquiv_smul (s : S₀) (y : (R₁ ⊗[R₀] S₀) ⊗[R₁] N) :
     tensorCancelEquiv N ((1 ⊗ₜ[R₀] s : R₁ ⊗[R₀] S₀) • y) = s • tensorCancelEquiv N y := by
   induction y with
-  | zero => simp
   | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, smul_add]
   | tmul x n =>
     induction x with
-    | zero => simp
     | add x y hx hy => simp only [add_tmul, smul_add, map_add, hx, hy]
     | tmul r s' =>
       rw [smul_tmul', smul_eq_mul, Algebra.TensorProduct.tmul_mul_tmul, one_mul,
@@ -78,11 +76,9 @@ lemma tensorCancelEquiv_lTensor {N' : Type*} [AddCommGroup N'] [Module R₀ N'] 
     tensorCancelEquiv N (f.lTensor _ y) =
       (f.restrictScalars R₀).lTensor S₀ (tensorCancelEquiv N' y) := by
   induction y with
-  | zero => simp
   | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
   | tmul x n =>
     induction x with
-    | zero => simp
     | add x y hx hy => simp only [add_tmul, map_add, hx, hy]
     | tmul r s => simp
 
@@ -90,11 +86,9 @@ lemma tensorCancelEquiv_tmul_smul (r : R₁) (s : S₀) (y : (R₁ ⊗[R₀] S�
     tensorCancelEquiv N ((r ⊗ₜ[R₀] s : R₁ ⊗[R₀] S₀) • y) =
       s • (DistribSMul.toLinearMap R₀ N r).lTensor S₀ (tensorCancelEquiv N y) := by
   induction y with
-  | zero => simp
   | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, map_add, smul_add]
   | tmul x n =>
     induction x with
-    | zero => simp
     | add x y hx hy => simp only [add_tmul, smul_add, map_add, hx, hy]
     | tmul r' s' =>
       rw [smul_tmul', smul_eq_mul, Algebra.TensorProduct.tmul_mul_tmul,
@@ -120,7 +114,6 @@ lemma baseChangeTensorEquiv_smul (N : Type*) [AddCommGroup N] [Module R₀ N]
   apply (tensorCancelEquiv (R₁ := A) (S₀ := S₀) N).injective
   simp only [baseChangeTensorEquiv, LinearEquiv.trans_apply, LinearEquiv.apply_symm_apply]
   induction s with
-  | zero => simp
   | add x y hx hy => rw [add_smul, map_add, hx, hy, map_add, add_smul, map_add]
   | tmul r s =>
     rw [tensorCancelEquiv_tmul_smul, Algebra.TensorProduct.map_tmul, tensorCancelEquiv_tmul_smul,
@@ -188,11 +181,9 @@ theorem exists_finset_lTensor_eq_zero [IsNoetherianRing R₀] [Flat A (A ⊗[R�
           AlgebraTensorModule.cancelBaseChange R₀ A A A S₀ (J.subtype.rTensor _ x) := by
       intro x
       induction x with
-      | zero => simp
       | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
       | tmul j y =>
         induction y with
-        | zero => simp
         | add y z hy hz => simp only [tmul_add, map_add, hy, hz]
         | tmul a s => simp
     intro x y hxy
@@ -205,7 +196,6 @@ theorem exists_finset_lTensor_eq_zero [IsNoetherianRing R₀] [Flat A (A ⊗[R�
         (1 : A) ⊗ₜ TensorProduct.rid R₀ S₀ (p.subtype.lTensor S₀ x) := by
     intro x
     induction x with
-    | zero => simp
     | add x y hx hy => rw [map_add, map_add, map_add, hx, hy, map_add, map_add, tmul_add]
     | tmul s a =>
       simp [τ, Algebra.algebraMap_eq_smul_one, smul_tmul]
@@ -327,14 +317,12 @@ theorem flat_localization_tensor_of_forall [IsNoetherianRing R₀] [IsNoetherian
       AlgebraTensorModule.lTensor S₀ S₀ p₀.subtype
     have hnat1 (x : S₀ ⊗[R₀] p₀) : μ₀ (g' x) = ℓ (μ' x) := by
       induction x with
-      | zero => simp
       | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
       | tmul s a =>
         simp [μ₀, μ', g', ℓ, Algebra.smul_def, IsScalarTower.algebraMap_apply R₀ S₀ M₀]
     have hnat2 (x : S₀ ⊗[R₀] p₀) : AlgebraTensorModule.lTensor S₀ M₀ σ (g' x) =
         gL (AlgebraTensorModule.lTensor S₀ S₀ σ x) := by
       induction x with
-      | zero => simp
       | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
       | tmul s a => rfl
     obtain ⟨⟨k', s⟩, hs⟩ := IsLocalizedModule.surj q₀.primeCompl g' k
@@ -602,7 +590,6 @@ lemma _root_.Algebra.TensorProduct.smul_eq_tmul_one_mul {R B K : Type*} [CommRin
     [CommRing K] [Algebra R B] [Algebra R K] (b : B) (x : B ⊗[R] K) :
     b • x = (b ⊗ₜ[R] (1 : K)) * x := by
   induction x with
-  | zero => simp
   | add x y hx hy => rw [smul_add, hx, hy, mul_add]
   | tmul c k => rw [smul_tmul', Algebra.TensorProduct.tmul_mul_tmul, one_mul, smul_eq_mul]
 
@@ -905,7 +892,6 @@ lemma _root_.Module.exists_notMem_forall_smul_eq_zero_of_tensor {B E Q : Type*} 
   have hsub : Subsingleton (κP ⊗[E] (E ⊗[B] Q)) := by
     refine subsingleton_of_forall_eq 0 fun x ↦ ?_
     induction x with
-    | zero => rfl
     | add x y hx hy => rw [hx, hy, add_zero]
     | tmul c y =>
       obtain ⟨u, hu, huy⟩ := h y
@@ -1078,11 +1064,9 @@ theorem Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber {A B C K : Typ
           (AlgebraTensorModule.cancelBaseChange A B B I K x) := by
       intro x
       induction x with
-      | zero => simp
       | add x y hx hy => rw [map_add, map_add, hx, hy, map_add, map_add]
       | tmul i e =>
-        induction e using TensorProduct.induction_on with
-        | zero => simp
+        induction e using TensorProduct.inductionOn with
         | add e e' he he' => simp only [tmul_add, map_add, he, he']
         | tmul b k =>
           rw [LinearMap.rTensor_tmul, AlgebraTensorModule.cancelBaseChange_tmul,
@@ -1126,8 +1110,7 @@ theorem Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber {A B C K : Typ
     exact h4
   have hQ : ∀ y : E ⊗[B] (I ⧸ F), ∃ u ∉ P, u • y = 0 := by
     intro y
-    induction y using TensorProduct.induction_on with
-    | zero => exact ⟨1, fun h ↦ hP.ne_top ((Ideal.eq_top_iff_one _).mpr h), smul_zero _⟩
+    induction y with
     | tmul e z =>
       obtain ⟨i, rfl⟩ := Submodule.mkQ_surjective F z
       obtain ⟨u, hu, h⟩ := hkey i

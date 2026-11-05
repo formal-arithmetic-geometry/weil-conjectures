@@ -82,8 +82,7 @@ theorem exists_affine_finiteType_pullback_zero_test
     obtain ⟨t, rfl⟩ := (hc F hF_qc).2 y
     rw [hn F G hF_qc hG_qc δ t]
     change c G hG_qc (TensorProduct.map (δ.val.app (op V)).hom LinearMap.id t) = 0
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t with
     | tmul x b =>
       rw [TensorProduct.map_tmul, LinearMap.id_apply, hpure]
       have hx : (adj.unit.app G).val.app (op V) (δ.app V x) = 0 := he x

@@ -44,7 +44,7 @@ theorem X_pow_dvd_expand_sub_C_constantCoeff {R : Type*} [CommRing R] (p : ℕ) 
   rw [map_sub, coeff_expand, coeff_C]
   rcases eq_or_ne m 0 with rfl | h0
   · simp
-  · rw [if_neg fun h ↦ (Nat.le_of_dvd (Nat.pos_of_ne_zero h0) h).not_gt hm, if_neg h0,
+  · rw [ite_eq_right fun h ↦ (Nat.le_of_dvd (Nat.pos_of_ne_zero h0) h).not_gt hm, ite_eq_right h0,
       sub_zero]
 
 variable {R : Type*} [CommRing R]
@@ -82,15 +82,15 @@ lemma eq_sum_X_pow_mul_expand (f : PowerSeries R) :
       X ^ r * expand m hm (mk fun n ↦ coeff (m * n + r) f) := by
   ext N
   rw [map_sum, Finset.sum_eq_single (N % m)]
-  · rw [coeff_X_pow_mul', if_pos (Nat.mod_le N m), coeff_expand]
+  · rw [coeff_X_pow_mul', ite_eq_left (Nat.mod_le N m), coeff_expand]
     have hd : m ∣ N - N % m := Nat.dvd_sub_mod N
-    rw [if_pos hd, coeff_mk]
+    rw [ite_eq_left hd, coeff_mk]
     congr 1
     rw [Nat.mul_div_cancel' hd, Nat.sub_add_cancel (Nat.mod_le N m)]
   · intro r hr hrN
     rw [coeff_X_pow_mul']
     split_ifs with hrle
-    · rw [coeff_expand, if_neg]
+    · rw [coeff_expand, ite_eq_right]
       intro hd
       apply hrN
       have h2 : N % m = r % m := ((Nat.modEq_iff_dvd' hrle).2 hd).symm

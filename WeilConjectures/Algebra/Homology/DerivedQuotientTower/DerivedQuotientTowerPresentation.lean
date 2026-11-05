@@ -173,8 +173,7 @@ private theorem reduction_ext {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
   apply (PresheafOfModules.homEquivOfIsLocallyBijective
     (preUnit q M) N.isSheaf).injective
   ext U x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x with
   | tmul s m => exact h U s m
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 

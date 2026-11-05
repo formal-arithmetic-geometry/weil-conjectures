@@ -269,7 +269,6 @@ lemma irreducibleSpace_tensor_quotient {A A' C L : Type*} [CommRing A] [CommRing
       ι'.toRingHom := by
     refine RingHom.ext fun x ↦ ?_
     induction x with
-    | zero => simp
     | tmul a c => simp [e, ι', Algebra.algebraMap_eq_smul_one]
     | add x y hx hy => rw [map_add, map_add, hx, hy]
   have hmap : I.map ι' = (RingHom.ker φ.toRingHom).map

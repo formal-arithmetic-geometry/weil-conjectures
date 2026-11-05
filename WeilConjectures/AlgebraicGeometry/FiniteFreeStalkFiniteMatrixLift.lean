@@ -74,7 +74,7 @@ private lemma freeMatrix_matrixHom {X : Scheme.{u}} {I J : Type u} [Fintype J]
   change Hom.app (SheafOfModules.ιFree i ≫ matrixHom A ≫ freeπ j) ⊤ (1 : Γ(X, ⊤)) = _
   have h : SheafOfModules.ιFree i ≫ matrixHom A ≫ freeπ j = scalarHom (A j i) := by
     have hi : SheafOfModules.ιFree i ≫ matrixHom A =
-        ∑ k : J, scalarHom (A k i) ≫ SheafOfModules.ιFree k := Sigma.ι_desc _ i
+        ∑ k : J, scalarHom (A k i) ≫ SheafOfModules.ιFree k := Sigma.ι_comp_desc _ i
     rw [← Category.assoc, hi, Preadditive.sum_comp]
     simp only [Category.assoc, ιFree_freeπ]
     rw [Finset.sum_eq_single j]

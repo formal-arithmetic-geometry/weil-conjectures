@@ -81,7 +81,7 @@ theorem signedCechExtension_increasing (p : ℕ)
     signedCechExtension X U F S p s t.1 = s t := by
   classical
   change signedCechExtensionValue X U F S p s t.1 = s t
-  simp only [signedCechExtensionValue, dif_pos t.2.injective]
+  simp only [signedCechExtensionValue, dite_eq_left t.2.injective]
   have hs : Tuple.sort t.1 = Equiv.refl _ :=
     Tuple.sort_eq_refl_iff_monotone.mpr t.2.monotone
   have h (σ : Equiv.Perm (Fin (p + 1)))
@@ -113,7 +113,7 @@ private theorem signedCechExtension_permutation (p : ℕ)
       intro i
       apply ht
       exact congrFun (Tuple.comp_perm_comp_sort_eq_comp_sort (f := t) (σ := σ)) i
-    simp only [signedCechExtensionValue, dif_pos ht, dif_pos htσ]
+    simp only [signedCechExtensionValue, dite_eq_left ht, dite_eq_left htσ]
     have h (a b : Equiv.Perm (Fin (p + 1)))
         (ha : StrictMono (t ∘ a)) (hb : StrictMono ((t ∘ σ) ∘ b))
         (hab : σ * b = a) :
@@ -175,9 +175,9 @@ theorem signedCechExtension_differential (p : ℕ)
     signedCechExtensionValue X U F S (p + 1)
       (fun a ↦ S.differentialValue F p (signedCechExtension X U F S p s) a.1) t
   by_cases ht : Function.Injective t
-  · simp only [signedCechExtensionValue, dif_pos ht]
+  · simp only [signedCechExtensionValue, dite_eq_left ht]
     exact cechDifferential_permutation X U F S p _ hc t (Tuple.sort t)
-  · simp only [signedCechExtensionValue, dif_neg ht]
+  · simp only [signedCechExtensionValue, dite_eq_right ht]
     apply cechDifferential_repeated X U F S p _ hc _ t ht
     intro a ha
     change signedCechExtensionValue X U F S p s a = 0

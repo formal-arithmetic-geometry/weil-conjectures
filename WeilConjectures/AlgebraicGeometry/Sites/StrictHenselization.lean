@@ -86,7 +86,7 @@ noncomputable def base : PointedEtaleNeighborhood s :=
 
 /-- The structure morphism of a pointed étale neighbourhood, as a morphism to `base s`. -/
 noncomputable def toBase (x : PointedEtaleNeighborhood s) : x ⟶ base s :=
-  CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk x.1.hom (Category.comp_id _)) (by
+  Functor.Elements.homMk _ _ (MorphismProperty.Over.homMk x.1.hom (Category.comp_id _)) (by
     obtain ⟨X, x⟩ := x
     exact CategoryTheory.Over.OverMorphism.ext (CategoryTheory.Over.w x))
 
@@ -166,7 +166,7 @@ end AffinePointedEtaleNeighborhood
 
 /-- The underlying scheme of a pointed étale neighbourhood. -/
 noncomputable def neighborhoodDiagram : PointedEtaleNeighborhood s ⥤ Scheme.{u} :=
-  CategoryOfElements.π _ ⋙ Etale.forget S ⋙ CategoryTheory.Over.forget S
+  Functor.Elements.π _ ⋙ Etale.forget S ⋙ CategoryTheory.Over.forget S
 
 /-- The underlying scheme of an affine pointed étale neighbourhood. -/
 noncomputable def affineNeighborhoodDiagram : AffinePointedEtaleNeighborhood s ⥤ Scheme.{u} :=
@@ -252,7 +252,7 @@ lemma strictLocalizationCone_π_app_hom (x : AffinePointedEtaleNeighborhood s) :
 /-- The diagram of affine pointed étale neighbourhoods of `s`, as schemes over `S`. -/
 noncomputable def affineNeighborhoodDiagramOver :
     AffinePointedEtaleNeighborhood s ⥤ CategoryTheory.Over S :=
-  AffinePointedEtaleNeighborhood.ι s ⋙ CategoryOfElements.π _ ⋙ Etale.forget S
+  AffinePointedEtaleNeighborhood.ι s ⋙ Functor.Elements.π _ ⋙ Etale.forget S
 
 /-- The strict localization `S_(s)` as a cone over the affine pointed étale neighbourhoods of
 `s` in the category of schemes over `S`. -/

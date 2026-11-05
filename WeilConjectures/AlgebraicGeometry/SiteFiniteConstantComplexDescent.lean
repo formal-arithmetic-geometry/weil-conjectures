@@ -252,7 +252,7 @@ theorem exists_local_constant_complex_of_constant_terms
           R.map (P.d q (q + 1)) ≫ R.map (e (q + 1)).hom ≫ R.map (e (q + 1)).inv =
           (constantOverMapIso J B f (M q)).hom ≫ R.map (e q).inv ≫
             R.map (P.d q (q + 1))
-        rw [Iso.map_hom_inv_id, Category.comp_id]
+        rw [Iso.hom_inv_id_map, Category.comp_id]
       · refine ⟨0, ?_⟩
         exact (F.map_isZero (hzero q (by simpa only [Finset.mem_Icc, not_and_or,
           not_le] using hq))).eq_of_src _ _

@@ -123,8 +123,8 @@ theorem of_comp (g : X ⟶ Y) (f : Y ⟶ Z) [IsUniversalHomeomorphism (g ≫ f)]
     obtain ⟨x, hx⟩ := (g ≫ f).surjective (f y)
     exact ⟨x, f.injective (by rwa [← Scheme.Hom.comp_apply])⟩
   have : UniversallyInjective g := by
-    have hgf := (tfae_universallyInjective (g ≫ f)).out 0 1
-    have hg := (tfae_universallyInjective g).out 0 1
+    have hgf := (tfae_universallyInjective (g ≫ f)).out 1 2
+    have hg := (tfae_universallyInjective g).out 1 2
     rw [hg]
     intro K _ g₁ g₂ h
     exact hgf.mp inferInstance K (by simpa using congr($h ≫ f))

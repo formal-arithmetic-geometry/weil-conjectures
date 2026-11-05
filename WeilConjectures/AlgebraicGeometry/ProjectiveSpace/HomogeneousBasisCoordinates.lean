@@ -65,10 +65,10 @@ theorem homogeneous_basis_coordinates (k : Type u) [Field k]
       (b i) (homogeneousComponent_mem n _) (hb i)
     change (DirectSum.decompose 𝓜 _ z : M) = _
     by_cases hz : (n : ℤ) - d i = z
-    · rw [if_pos hz]
+    · rw [ite_eq_left hz]
       apply DirectSum.decompose_of_mem_same
       simpa only [← sub_eq_add_neg, hz] using ht
-    · rw [if_neg hz]
+    · rw [ite_eq_right hz]
       exact DirectSum.decompose_of_mem_ne 𝓜 ht (by simpa [sub_eq_add_neg] using hz)
   have hsum (z : ℤ) : P z y = ∑ i : Fin r,
       ∑ n ∈ Finset.range ((b.equivFun y i).totalDegree + 1),
@@ -107,7 +107,7 @@ theorem homogeneous_basis_coordinates (k : Type u) [Field k]
     apply Finset.sum_eq_zero
     intro t _
     by_cases ht : (t : ℤ) - d a = j
-    · rw [if_pos ht, homogeneousComponent_of_mem (homogeneousComponent_mem t _)]
+    · rw [ite_eq_left ht, homogeneousComponent_of_mem (homogeneousComponent_mem t _)]
       have hnt : n ≠ t := by omega
       simp [hnt]
     · simp [ht]

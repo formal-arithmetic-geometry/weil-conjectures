@@ -216,7 +216,7 @@ private theorem presheafTermsSectionsIso_comm {X : Scheme.{u}} {r : ℕ}
   simp only [Preadditive.comp_sum, Preadditive.comp_zsmul, ← Category.assoc,
     presheafTermsSectionsIso_π]
   simp only [Category.assoc, capSectionsIso_naturality]
-  rw [← E.map_comp_assoc, alternatingCechSheafPresheafD, Pi.lift_π]
+  rw [← E.map_comp_assoc, alternatingCechSheafPresheafD, Pi.lift_comp_π]
   simp only [Functor.map_sum, Functor.map_zsmul, Preadditive.sum_comp,
     Preadditive.zsmul_comp, Functor.map_comp, Category.assoc]
   rfl

@@ -17,6 +17,7 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Exact evaluation at weakly contractible objects

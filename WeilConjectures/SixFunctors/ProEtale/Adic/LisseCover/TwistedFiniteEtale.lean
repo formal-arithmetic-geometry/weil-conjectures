@@ -418,7 +418,7 @@ theorem Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale {Ω : Type u} [Fiel
   have hφσ {L : Type u} [Field L] [IsSepClosed L] (s : Spec (.of L) ⟶ U.cover y) (i : Fin N) :
       ((fiber s).map φ ((fiber s).map (Sigma.ι _ i) (star s))).left =
         pullback.lift (s ≫ (e.symm i).1) s (by simp [(e.symm i).2, π]) := by
-    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, Sigma.ι_desc, fiber_map_left]
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, Sigma.ι_comp_desc, fiber_map_left]
     apply pullback.hom_ext
     · simp [hσleft, star]
     · simp only [Category.assoc, pullback.lift_snd, fiberMk_left, star, hσleft]

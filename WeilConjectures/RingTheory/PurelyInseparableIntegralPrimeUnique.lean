@@ -66,7 +66,7 @@ theorem purelyInseparable_integral_prime_unique
       rw [hc, ← map_pow]
       exact (IsIntegral.of_finite A (b ^ e ^ n)).map (IsScalarTower.toAlgHom A B L)
     have hintK : IsIntegral A c :=
-      (isIntegral_algebraMap_iff (algebraMap K L).injective).mp hintL
+      (isIntegral_algebraMap_iff).mp hintL
     obtain ⟨a, ha⟩ := IsIntegrallyClosed.isIntegral_iff.mp hintK
     refine ⟨e ^ n, expChar_pow_pos K e n, a, ?_⟩
     apply IsFractionRing.injective B L

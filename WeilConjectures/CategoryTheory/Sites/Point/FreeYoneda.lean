@@ -67,7 +67,7 @@ lemma presheafFiberFreeYonedaDesc_w (X : C) ⦃U U' : C⦄ (g : U ⟶ U') (u : �
         ModuleCat.ofHom (Finsupp.lsingle (R := R) (Φ.fiber.map f (Φ.fiber.map g u))) := by
   refine Sigma.hom_ext _ _ fun f ↦ ?_
   simp only [Presheaf.freeYoneda_map]
-  rw [Sigma.ι_comp_map'_assoc, Category.id_comp, Sigma.ι_desc, Sigma.ι_desc]
+  rw [Sigma.ι_comp_map'_assoc, Category.id_comp, Sigma.ι_comp_desc, Sigma.ι_comp_desc]
   simp
 
 /-- The map from the fibre of the free presheaf `R[X]` to the free module on `Φ.fiber.obj X`,
@@ -89,7 +89,7 @@ lemma ι_toPresheafFiber_presheafFiberFreeYonedaDesc (X U : C) (u : Φ.fiber.obj
         Φ.presheafFiberFreeYonedaDesc R X =
       (ModuleCat.ofHom (Finsupp.lsingle (Φ.fiber.map f u)) :
         ModuleCat.of R R ⟶ ModuleCat.of R (Φ.fiber.obj X →₀ R)) := by
-  simp only [presheafFiberFreeYonedaDesc, toPresheafFiber_presheafFiberDesc, Sigma.ι_desc]
+  simp only [presheafFiberFreeYonedaDesc, toPresheafFiber_presheafFiberDesc, Sigma.ι_comp_desc]
 
 /-- The map from the free module on `Φ.fiber.obj X` to the fibre of the free presheaf `R[X]`,
 sending `x` to the germ at `(X, x)` of the generator. -/

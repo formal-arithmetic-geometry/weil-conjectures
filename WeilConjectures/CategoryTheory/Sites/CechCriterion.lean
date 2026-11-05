@@ -83,7 +83,7 @@ lemma map_cechCochain_face_eq {k : ℕ} (c : ((cechComplex U).obj P).X k) {Z : C
   congr 1
   refine Pi.hom_ext _ _ fun l ↦ ?_
   rw [Category.assoc, Category.assoc, eqToHom_cechNerveObj_π U h, ← hG]
-  erw [Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π_assoc]
 
 /-- A Čech `0`-cocycle is compatible: its members agree on the overlaps. -/
 lemma map_eq_of_cechComplex_d_zero (c : ((cechComplex U).obj P).X 0)

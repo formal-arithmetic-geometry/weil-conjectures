@@ -62,7 +62,7 @@ private theorem first_order_expansion {R : Type u} [CommRing R]
         · simp [h, pderiv_X_of_ne (Ne.symm h)]
       simp only [map_mul, constantCoeff_X, mul_zero, map_zero, zero_add, hd]
       simp only [apply_ite C, map_zero, ite_mul, zero_mul, Finset.sum_ite_eq',
-        Finset.mem_univ, if_true]
+        Finset.mem_univ, ite_true]
       dsimp [l] at *
       linear_combination hq * X i
     · rw [pow_two]
@@ -209,7 +209,7 @@ theorem exists_desingularization_substitution
           simp only [map_sum, Finset.sum_mul]
     rw [hsum]
     simp only [hinv, apply_ite C, map_zero, ite_mul, zero_mul,
-      Finset.sum_ite_eq, Finset.mem_univ, if_true, map_mul, map_sub, map_one, map_pow]
+      Finset.sum_ite_eq, Finset.mem_univ, ite_true, map_mul, map_sub, map_one, map_pow]
     ring
   let e : Fin c → T := fun j ↦ b (Fin.castLE hcm j) - C π ^ 2 * C t * V j
   let g : Fin c → T := fun j ↦

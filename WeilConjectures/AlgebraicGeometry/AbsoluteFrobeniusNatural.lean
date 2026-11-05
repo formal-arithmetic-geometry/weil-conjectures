@@ -159,7 +159,7 @@ theorem isOfCharacteristic_tfae (X : Scheme.{u}) (p : ℕ) :
     (CommRingCat.ofHom (RingHom.comp (ZMod.castHom (ringChar.dvd h) Γ(X, ⊤))
       ULift.ringEquiv.toRingHom)).op⟩
   tfae_have 4 → 1 := fun ⟨g⟩ ↦ by
-    have h : (p : ULift.{u} (ZMod p)) = 0 := ULift.ext _ _ (by simp)
+    have h : (p : ULift.{u} (ZMod p)) = 0 := ULift.ext (by simp)
     rw [IsOfCharacteristic, ← map_natCast
       ((ΓSpec.adjunction.homEquiv X _).symm g).unop.hom, h, map_zero]
   tfae_finish

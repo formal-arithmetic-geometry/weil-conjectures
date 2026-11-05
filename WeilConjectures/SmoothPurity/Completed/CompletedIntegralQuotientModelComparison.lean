@@ -139,8 +139,7 @@ private noncomputable def restrictedTensorPresheafIso (φ : R ⟶ S)
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s m =>
       change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom] M.val.map f m =
@@ -616,7 +615,7 @@ private theorem quotientProduct_π_degree
     (PrincipalQuotientCompletion.quotientProduct R t₀ P).f i ≫
       (Pi.π (fun m ↦ ((PrincipalQuotientCompletion.quotientTower R t₀).obj P).asFunctor.obj
         (op m)) n).f i = (PrincipalQuotientCompletion.quotientMap R t₀ P n).f i :=
-  congrArg (fun f ↦ f.f i) (Pi.lift_π (PrincipalQuotientCompletion.quotientMap R t₀ P) n)
+  congrArg (fun f ↦ f.f i) (Pi.lift_comp_π (PrincipalQuotientCompletion.quotientMap R t₀ P) n)
 
 private theorem extension_ext (φ : R ⟶ S)
     (M : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))

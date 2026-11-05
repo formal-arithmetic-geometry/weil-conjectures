@@ -9,6 +9,8 @@ public import Mathlib.Algebra.MvPolynomial.Equiv
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.CommRing
 
 /-!
 # Regular sequences are quasi-regular

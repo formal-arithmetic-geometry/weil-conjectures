@@ -83,8 +83,7 @@ theorem exists_unit_retraction (m : ℕ) (N₀ : ModuleCat.{u + 1} A)
   let T := TensorProduct.lift L'
   let E := (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} f).obj N₀
   have key (s : A ⧸ I ^ m) (t : E) : T (s • t) = L s (T t) := by
-    induction t using TensorProduct.induction_on with
-    | zero => rw [smul_zero, map_zero, map_zero]
+    induction t with
     | tmul s' x =>
       rw [TensorProduct.smul_tmul']
       simp only [T, TensorProduct.lift.tmul]
@@ -219,8 +218,7 @@ variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (f : R →+* S)
 theorem exists_extendRestrictScalarsAdj_unit_app_eq (hf : Function.Surjective f)
     {N : ModuleCat.{u + 1} R} (t : (extendScalars.{u + 1, u + 1, u + 1} f).obj N) :
     ∃ m : N, (extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} f).unit.app N m = t := by
-  induction t using TensorProduct.induction_on with
-  | zero => exact ⟨0, map_zero _⟩
+  induction t with
   | tmul s m =>
     obtain ⟨a, ha⟩ := hf (show S from s)
     refine ⟨a • m, ?_⟩

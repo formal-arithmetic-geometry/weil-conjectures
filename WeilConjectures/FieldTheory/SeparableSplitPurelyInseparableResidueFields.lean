@@ -110,7 +110,6 @@ theorem exists_separable_split_purelyInseparable_prime_quotients
   obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
   have hmem : Ideal.Quotient.mk p a ∈ Subalgebra.perfectClosure L E q := by
     induction a with
-    | zero => exact (Subalgebra.perfectClosure L E q).zero_mem
     | add a b ha hb =>
       rw [map_add]
       exact (Subalgebra.perfectClosure L E q).add_mem ha hb

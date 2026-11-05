@@ -39,7 +39,7 @@ theorem exists_lift_level {P Q : Complex R} (F : DecreasingFiltration P)
         Subobject.ofLE _ _ (G.antitone (show s - p ≤ q by omega))) ≫
       Sigma.ι (fun p : ℤ ↦ (F.F p : Complex R) ⊗ (G.F (s - p) : Complex R)) p ≫
       factorThruImageSubobject _, ?_⟩
-  simp only [level, Category.assoc, imageSubobject_arrow_comp, Sigma.ι_desc]
+  simp only [level, Category.assoc, imageSubobject_arrow_comp, Sigma.ι_comp_desc]
   rw [← id_tensorHom, tensorHom_comp_tensorHom, Category.id_comp, Subobject.ofLE_arrow]
 
 /-- The quotient projections of the convolution summands induce a unique map to the
@@ -74,14 +74,14 @@ theorem canonical_comparison_unique
   refine ⟨Sigma.desc (f := fun p ↦ F.gradedPiece p ⊗ G.gradedPiece (r - p))
       (P := H.gradedPiece r) ψ, fun p ↦ ⟨t p, ht p, ?_⟩,
     fun α hα ↦ Sigma.hom_ext _ _ fun p ↦ ?_⟩
-  · erw [Sigma.ι_desc]
+  · erw [Sigma.ι_comp_desc]
     exact hψ p
   · obtain ⟨t', ht', h'⟩ := hα p
     obtain rfl : t' = t p := by rw [← cancel_mono (H.F r).arrow, ht', ht p]
     have : Epi (F.complexQuotientπ p (p + 1) (by omega) ⊗ₘ
         G.complexQuotientπ (r - p) (r - p + 1) (by omega)) :=
       epi_tensorHom (cokernel.π _) (cokernel.π _)
-    erw [Sigma.ι_desc]
+    erw [Sigma.ι_comp_desc]
     exact this.left_cancellation _ _ (h'.trans (hψ p).symm)
 
 end SheafOfModules.FilteredConvolutionCore

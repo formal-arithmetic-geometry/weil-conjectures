@@ -758,7 +758,7 @@ private theorem strictFirst_boundary : strictFirst l E Y L ι ≫ boundary l E Y
   intro n
   simp only [strictFirst, boundary, towerTransitionEndomorphism, Preadditive.comp_sub,
     Category.comp_id, Preadditive.sub_comp, towerProductShift,
-    Category.assoc, Pi.lift_π, Pi.lift_π_assoc, Limits.zero_comp]
+    Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc, Limits.zero_comp]
   exact sub_eq_zero.mpr (strictCoordinate_compatible l E Y L ι n).symm
 
 private def strictUnit : regularComplex l L Y ⟶
@@ -773,7 +773,7 @@ private theorem strictUnit_coordinates :
       (strictCoordinate l E Y L ι n).f 0 := by
     change ((strictUnit l E Y L ι ≫
       CochainComplex.mappingCocone.fst (boundary l E Y L ι)) ≫ Pi.π _ n).f 0 = _
-    rw [strictUnit, CochainComplex.mappingCocone.lift_fst, strictFirst, Pi.lift_π]
+    rw [strictUnit, CochainComplex.mappingCocone.lift_fst, strictFirst, Pi.lift_comp_π]
   exact (congrArg (fun f ↦ f.val.app (op V) (regularSection l L Y V s)) h).trans
     (strictCoordinate_apply l E Y L ι n V s)
 

@@ -74,13 +74,13 @@ theorem exists_etaleTensorSectionsSheaf_ulift_cech_amitsur_iso
   let c : ∀ i : I, V i ⟶ W := fun i ↦
     MorphismProperty.Over.homMk (Sigma.ι (fun i ↦ (V i).left) i) (by
       change Sigma.ι (fun i ↦ (V i).left) i ≫ (Sigma.desc v ≫ U.hom) = (V i).hom
-      rw [← Category.assoc, Sigma.ι_desc]
+      rw [← Category.assoc, Sigma.ι_comp_desc]
       exact MorphismProperty.Over.w (f i))
   have hc : IsColimit (Cofan.mk W.left (fun i ↦ (c i).left)) :=
     coproductIsCoproduct _
   have hw (i : I) : c i ≫ g = f i := by
     apply MorphismProperty.Over.Hom.ext
-    exact Sigma.ι_desc v i
+    exact Sigma.ι_comp_desc v i
   have hs : Surjective (Sigma.desc v) := by
     apply Surjective.sigmaDesc_of_union_range_eq_univ
     exact (ofArrows_mem_smallEtaleTopology_iff f).mp hf.2.2.2

@@ -91,11 +91,11 @@ lemma linearCoordInvCoord_self : linearCoordInvCoord hc i =
       (𝔸(PUnit.{u + 1}; 𝔸({j // j ≠ i}; T)) ↘ 𝔸({j // j ≠ i}; T)).appTop (coord T j) *
       (𝔸(PUnit.{u + 1}; 𝔸({j // j ≠ i}; T)) ↘ 𝔸({j // j ≠ i}; T) ≫
         𝔸({j // j ≠ i}; T) ↘ T).appTop (c j)) :=
-  dif_pos rfl
+  dite_eq_left rfl
 
 lemma linearCoordInvCoord_of_ne (j : {j // j ≠ i}) : linearCoordInvCoord hc j.1 =
     (𝔸(PUnit.{u + 1}; 𝔸({j // j ≠ i}; T)) ↘ 𝔸({j // j ≠ i}; T)).appTop (coord T j) :=
-  dif_neg j.2
+  dite_eq_right j.2
 
 /-- The inverse of `AlgebraicGeometry.AffineSpace.linearCoordHom`, when `cᵢ` is a unit:
 `xᵢ = cᵢ⁻¹ (y - ∑_{j ≠ i} cⱼ xⱼ)`. -/

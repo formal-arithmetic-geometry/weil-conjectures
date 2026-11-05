@@ -126,7 +126,7 @@ lemma isZero_of_isIso_zsmul_id {n : ℤ} {K : C} [HasProduct (fun _ : ℕ ↦ K)
       0 ≫ (𝟙 _ - n • adicTowerShift K) := by
     ext i
     simp only [assoc, sub_comp, id_comp, zsmul_comp, adicTowerShift_π, comp_sub, comp_zsmul,
-      zero_comp, Pi.lift_π, smul_zero, sub_zero]
+      zero_comp, Pi.lift_comp_π, smul_zero, sub_zero]
     rw [pow_succ', End.mul_def, ← comp_zsmul, hu, comp_id, sub_self]
   rw [cancel_mono] at hι
   rw [IsZero.iff_id_eq_zero]

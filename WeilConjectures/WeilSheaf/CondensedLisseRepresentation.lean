@@ -233,7 +233,7 @@ omit [Monoid Γ] in
 @[reassoc (attr := simp)]
 lemma galoisComparison_π (N : D) (σ : Γ) :
     adj.galoisComparison S κ N ≫ Pi.π _ σ = adj.galoisComponent S κ σ N :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 omit [Monoid Γ] in
 /-- If the `galoisComparison` of `N` is an isomorphism and `S σ` preserves products, morphisms to
@@ -263,7 +263,7 @@ lemma galoisCoalgebraStr_galoisComponent (N : D) [IsIso (adj.galoisComparison S 
     (ψ : ∀ σ, N ⟶ (S σ).obj N) (σ : Γ) :
     adj.galoisCoalgebraStr S κ N ψ ≫ adj.galoisComponent S κ σ N = ψ σ := by
   rw [galoisCoalgebraStr, ← galoisComparison_π, Category.assoc, IsIso.inv_hom_id_assoc,
-    Pi.lift_π]
+    Pi.lift_comp_π]
 
 /-- **Galois descent data are coalgebras**: when the `galoisComparison`s of `N` and of `L R N` are
 isomorphisms (for instance for a Galois covering, where `q^* q_* ≅ ∏_σ σ^*`), a Galois descent

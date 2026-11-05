@@ -170,7 +170,7 @@ theorem principalCechHorizontal_square
   classical
   apply Limits.Pi.hom_ext
   intro S
-  simp only [principalCechHorizontal, Category.assoc, Limits.Pi.lift_π,
+  simp only [principalCechHorizontal, Category.assoc, Limits.Pi.lift_comp_π,
     Preadditive.comp_sum]
   simp only [Limits.zero_comp]
   have hh : (∑ a ∈ S.val.val, ∑ b ∈ S.val.val.erase a,
@@ -184,7 +184,7 @@ theorem principalCechHorizontal_square
   apply Finset.sum_congr rfl
   intro a _
   split_ifs with hn
-  · simp only [Preadditive.comp_zsmul, Limits.Pi.lift_π_assoc,
+  · simp only [Preadditive.comp_zsmul, Limits.Pi.lift_comp_π_assoc,
       Preadditive.sum_comp, Finset.smul_sum]
     rw [← Finset.sum_coe_sort (S.val.val.erase a.val)]
     apply Finset.sum_congr rfl

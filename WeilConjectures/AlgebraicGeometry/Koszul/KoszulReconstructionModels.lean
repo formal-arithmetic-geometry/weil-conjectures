@@ -965,8 +965,8 @@ theorem reconstructionKoszulUnit_naturality (r : ℕ) (a : Fin r → A)
     apply Limits.Pi.hom_ext
     intro m
     simp only [Category.assoc, completedAdicKoszulProductUnit,
-      reconstructionKoszulProductMap, Limits.Pi.map_π, Limits.Pi.lift_π,
-      Limits.Pi.lift_π_assoc]
+      reconstructionKoszulProductMap, Limits.Pi.map_π, Limits.Pi.lift_comp_π,
+      Limits.Pi.lift_comp_π_assoc]
     ext p : 1
     dsimp only [HomologicalComplex.comp_f, completedAdicKoszulTensorUnit]
     dsimp only [completedAdicKoszulTensorUnitF]

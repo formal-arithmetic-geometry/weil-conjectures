@@ -163,7 +163,7 @@ theorem exists_dense_open_component_coproduct
   let a (i : Fin n) : (ι i ⁻¹ᵁ U).toScheme ⟶
       (Limits.Sigma.desc ι ⁻¹ᵁ U).toScheme :=
     (Limits.Sigma.ι C i).resLE _ _ (by
-      rw [← Scheme.Hom.comp_preimage, Limits.Sigma.ι_desc])
+      rw [← Scheme.Hom.comp_preimage, Limits.Sigma.ι_comp_desc])
   have ha : IsIso (Limits.Sigma.desc a) := by
     have hau := FinitaryPreExtensive.isUniversal_finiteCoproducts
       (Limits.coproductIsCoproduct C)

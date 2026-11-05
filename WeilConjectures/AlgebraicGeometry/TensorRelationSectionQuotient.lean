@@ -81,12 +81,10 @@ private theorem sectionQuotientAux
   have hfd (x : F) : f (d x) = 0 := by
     obtain ⟨z, rfl⟩ := hr x
     induction z with
-    | zero => simp
     | add x y hx hy => simp [hx, hy]
     | tmul b v =>
       obtain ⟨z, rfl⟩ := hs.2 v
       induction z with
-      | zero => simp
       | add x y hx hy => simp [TensorProduct.tmul_add, hx, hy]
       | tmul m n => rw [hd, map_sub, hf, hf, TensorProduct.smul_tmul, sub_self]
   have hker : q.toAddMonoidHom.ker ≤ f.ker := by
@@ -100,7 +98,6 @@ private theorem sectionQuotientAux
     AddMonoidHom.liftOfRightInverse_comp_apply _ _ _ _ x
   have hleft (x : TensorProduct A M N) : v (g x) = x := by
     induction x with
-    | zero => simp
     | add x y hx hy => simp [hx, hy]
     | tmul m n => rw [hg, hv, hf]
   have hright (y : Q) : g (v y) = y := by
@@ -108,7 +105,6 @@ private theorem sectionQuotientAux
     rw [hv]
     obtain ⟨z, rfl⟩ := hs.2 x
     induction z with
-    | zero => simp
     | add x y hx hy => simp [hx, hy]
     | tmul m n => rw [hf, hg]
   exact ⟨{ g with invFun := v, left_inv := hleft, right_inv := hright }, hg⟩

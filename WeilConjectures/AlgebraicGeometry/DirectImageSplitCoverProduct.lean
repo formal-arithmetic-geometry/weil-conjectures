@@ -131,6 +131,6 @@ theorem directImage_splitCover_product
   refine ⟨asIso (Pi.lift q), ?_⟩
   intro j W
   change ((Pi.lift q ≫ Pi.π R j).hom.app (op W)) = _
-  rw [Pi.lift_π]
+  rw [Pi.lift_comp_π]
 
 end AlgebraicGeometry

@@ -84,20 +84,16 @@ private theorem homLocalizedAction_comp
   change homLocalizedAction A p q B q' hq' β P T
       (ScalarLocalization.composition A D p _ _ _ a a')
       (ScalarLocalization.composition A D p _ _ _ b' b) = _
-  induction a using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply]
+  induction a using TensorProduct.inductionOn with
   | add a c ha hc => simp only [map_add, LinearMap.add_apply, ha, hc]
   | tmul x a =>
-    induction a' using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply]
+    induction a' with
     | add a' c ha hc => simp only [map_add, LinearMap.add_apply, ha, hc]
     | tmul x' a' =>
-      induction b using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction b with
       | add b c hb hc => simp only [map_add, hb, hc]
       | tmul y b =>
-        induction b' using TensorProduct.induction_on with
-        | zero => simp only [map_zero, LinearMap.zero_apply]
+        induction b' with
         | add b' c hb hc => simp only [map_add, LinearMap.add_apply, hb, hc]
         | tmul y' b' =>
           simp only [ScalarLocalization.composition_tmul,
@@ -173,15 +169,9 @@ theorem restrictedHom_existsUnique :
     change γ f.hom.1.unop f.hom.2 = _ ≫
       homLocalizedAction A p q B q' hq' β P Q f.hom.1.unop f.hom.2 ≫ _
     generalize f.hom.1.unop = a, f.hom.2 = b
-    induction a using TensorProduct.induction_on with
-    | zero =>
-      simp only [map_zero, LinearMap.zero_apply]
-      erw [Limits.zero_comp, Limits.comp_zero]
+    induction a using TensorProduct.inductionOn with
     | tmul c a =>
-      induction b using TensorProduct.induction_on with
-      | zero =>
-        simp only [map_zero]
-        erw [Limits.zero_comp, Limits.comp_zero]
+      induction b with
       | tmul d b =>
         apply (conj_eqToHom_iff_heq _ _ (hG.1 P) (hG.1 Q)).2
         exact (pγ a b c d).trans

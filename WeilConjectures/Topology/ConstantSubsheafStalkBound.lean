@@ -14,6 +14,7 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 import Mathlib.Topology.LocallyConstant.Basic
 import Mathlib.GroupTheory.Archimedean
 import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
+public import Mathlib.CategoryTheory.Limits.IsConnected
 
 /-! # A uniform bound for the integer stalk subgroups
 

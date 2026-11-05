@@ -62,13 +62,9 @@ lemma restrictScalarsTensorExtendScalarsIso_hom_naturality {M M' : ModuleCat.{u}
         (restrictScalarsTensorExtendScalarsIso φ M' N').hom =
       (restrictScalarsTensorExtendScalarsIso φ M N).hom ≫ ((restrictScalars φ).map f ⊗ₘ g) := by
   refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
-  induction x using TensorProduct.induction_on with
-  | zero => exact (map_zero _).trans (map_zero _).symm
+  induction x using TensorProduct.inductionOn with
   | tmul m t =>
-    induction t using TensorProduct.induction_on with
-    | zero =>
-      erw [TensorProduct.tmul_zero]
-      exact (map_zero _).trans (map_zero _).symm
+    induction t using TensorProduct.inductionOn with
     | tmul s n =>
       exact congrArg (fun y ↦ TensorProduct.tmul R (M := (restrictScalars φ).obj M') y (g n))
         (f.hom.map_smul s m).symm

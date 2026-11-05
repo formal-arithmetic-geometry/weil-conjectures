@@ -621,7 +621,7 @@ theorem inverseImageReductionProduct_lift_condition
     apply Pi.hom_ext
     intro n
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
-      Preadditive.sub_comp, Category.comp_id, Category.assoc, Pi.lift_π, Pi.lift_π_assoc,
+      Preadditive.sub_comp, Category.comp_id, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc,
       zero_comp, inverseImageReductionProduct]
     have hs : integralOperationsTowerStep
         ((integralOperationsPullbackTowerFunctor l E g).obj P) n =

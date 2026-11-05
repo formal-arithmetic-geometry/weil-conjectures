@@ -235,7 +235,7 @@ private theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
         congr_arg (fun χ : T ⟶ E₂ ↦ V.ι ≫ χ.left) hxx
       simp only [← Category.assoc] at hxD
       rw [e₁, e₂] at hxD
-      simp only [Category.assoc, Sigma.ι_desc] at hxD
+      simp only [Category.assoc, Sigma.ι_comp_desc] at hxD
       have hsnd := congr_arg (· ≫ pullback.snd π π) hxD
       have hfst := congr_arg (· ≫ pullback.fst π π) hxD
       simp only [Category.assoc, pullback.lift_snd, pullback.lift_fst, Category.comp_id]
@@ -245,7 +245,7 @@ private theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
       · obtain ⟨v⟩ := not_isEmpty_iff.1 hV
         have hκ : (T.left.homOfLE h₁ ≫ k) ≫ π = V.ι ≫ T.hom := by
           have := congr_arg (· ≫ Sigma.desc fun _ : M ↦ π) e₁
-          simp only [Category.assoc, Sigma.ι_desc] at this
+          simp only [Category.assoc, Sigma.ι_comp_desc] at this
           rw [Category.assoc, ← this]
           exact congr_arg _ (MorphismProperty.Over.w x)
         let W : Y.Etale := Etale.mk (V.ι ≫ T.hom)
@@ -278,7 +278,7 @@ private theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
       · change T.left.glueOfContinuousMap f _ ≫ Sigma.desc (fun _ : M ↦ π) = T.hom
         rw [Scheme.glueOfContinuousMap_comp]
         refine Scheme.glueOfContinuousMap_eq fun m ↦ ?_
-        rw [Category.assoc, Sigma.ι_desc]
+        rw [Category.assoc, Sigma.ι_comp_desc]
         exact congr_arg _ (MorphismProperty.Over.w ψe)
       · change T.left.glueOfContinuousMap f _ ≫ reprSigmaDesc R π e = g.left
         refine pullback.hom_ext ?_ ?_
@@ -291,7 +291,7 @@ private theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
         · rw [Category.assoc, Scheme.glueOfContinuousMap_comp]
           change _ = ψe.left
           refine Scheme.glueOfContinuousMap_eq fun m ↦ ?_
-          simp only [reprSigmaDesc, Category.assoc, Sigma.ι_desc_assoc, pullback.lift_snd]
+          simp only [reprSigmaDesc, Category.assoc, Sigma.ι_comp_desc_assoc, pullback.lift_snd]
           erw [Category.comp_id]
   exact (Etale.forget Y ⋙ Over.forget Y).map_isIso D
 
@@ -565,11 +565,11 @@ private noncomputable def finiteEtale_cofan_isColimit
     change Sigma.desc _ ≫ s.pt.hom = Sigma.desc _
     apply Sigma.hom_ext
     intro m
-    simp only [Sigma.ι_desc_assoc, Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
     exact MorphismProperty.Over.w (s.inj m)
   · intro s m
     apply MorphismProperty.Over.Hom.ext
-    exact Sigma.ι_desc _ _
+    exact Sigma.ι_comp_desc _ _
   · intro s f hf
     apply MorphismProperty.Over.Hom.ext
     apply Sigma.hom_ext
@@ -577,7 +577,7 @@ private noncomputable def finiteEtale_cofan_isColimit
     have h := congr_arg (fun g ↦ g.left) (hf m)
     change Sigma.ι (fun _ : M ↦ P) m ≫ f.left =
       Sigma.ι (fun _ : M ↦ P) m ≫ Sigma.desc (fun m ↦ (s.inj m).left)
-    rw [Sigma.ι_desc]
+    rw [Sigma.ι_comp_desc]
     exact h
 
 private noncomputable def finiteEtale_binaryFan_isLimit
@@ -635,7 +635,7 @@ private theorem isIso_sigmaDesc_of_equivariant_iso
     · simp [d, c, d₀, hact, Category.assoc]
     · dsimp only [d, c, d₀]
       simp only [Category.assoc, pullback.lift_snd,
-        Sigma.ι_mapIso_hom_assoc, Sigma.ι_desc_assoc, pullback.lift_snd_assoc,
+        Sigma.ι_mapIso_hom_assoc, Sigma.ι_comp_desc_assoc, pullback.lift_snd_assoc,
         Category.id_comp, Category.comp_id]
   exact IsIso.of_isIso_fac_right h
 
@@ -719,7 +719,7 @@ private theorem finiteEtale_torsor_conditions_reflect
       ⟨inferInstance, inferInstance⟩
   let ub (m : M) : F.obj X ⟶ Db :=
     MorphismProperty.Over.homMk (Sigma.ι (fun _ : M ↦ pullback π i) m)
-      (by exact Sigma.ι_desc (fun _ : M ↦ πb) m)
+      (by exact Sigma.ι_comp_desc (fun _ : M ↦ πb) m)
   let pb₁ : Tb ⟶ F.obj X := MorphismProperty.Over.homMk (pullback.fst πb πb) rfl
   let pb₂ : Tb ⟶ F.obj X := MorphismProperty.Over.homMk (pullback.snd πb πb)
     pullback.condition.symm

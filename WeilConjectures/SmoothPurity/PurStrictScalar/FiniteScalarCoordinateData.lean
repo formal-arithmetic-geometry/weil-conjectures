@@ -167,8 +167,7 @@ private theorem coordinatesForFunctor (a : R ⟶ S) (d : ℕ)
   apply (cancel_epi v).mp
   apply SheafOfModules.scalarExtension_hom_ext_of_basis a d e M M
   ext V z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z with
   | add z w hz hw => simp only [map_add, hz, hw]
   | tmul s x =>
     have hh := (hγ M V s x j).trans (hβ M V s x j).symm

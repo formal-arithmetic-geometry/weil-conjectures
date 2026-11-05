@@ -236,7 +236,7 @@ theorem postnikovComparison_condition (K : CochainComplex A ℤ) :
     intro n
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
       Preadditive.sub_comp, Category.comp_id, Category.assoc,
-      Pi.lift_π, Pi.lift_π_assoc, zero_comp]
+      Pi.lift_comp_π, Pi.lift_comp_π_assoc, zero_comp]
     rw [postnikovStep_quotient, sub_self]
   simp [hzero]
 
@@ -282,7 +282,7 @@ private lemma eventually_constant_kernel {M : ℕ → A}
       exact (sub_eq_zero.mp h').symm
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, Pi.lift_π]
+    simp only [Category.assoc, Pi.lift_comp_π]
     by_cases hn : N ≤ n
     · induction n, hn using Nat.le_induction with
       | base => simp

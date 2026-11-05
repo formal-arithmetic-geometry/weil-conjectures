@@ -115,8 +115,7 @@ theorem Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero (B : Type*) 
     (fun a ha ↦ eq_zero_of_forall_algHom_apply_eq_zero k A ha) fun φ ↦ ?_
   have key (ψ : B →ₐ[k] k) (t : A ⊗[k] B) :
       ψ (TensorProduct.lid k B (φ.toLinearMap.rTensor B t)) = lift φ ψ (fun _ _ ↦ .all _ _) t := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t with
     | tmul a b => simp
     | add x y hx hy => simp [hx, hy]
   simpa using eq_zero_of_forall_algHom_apply_eq_zero k B fun ψ ↦ (key ψ t).trans (h φ ψ)
@@ -178,7 +177,7 @@ theorem MvPolynomial.exists_ne_zero_forall_eval_eq_zero {k σ ι : Type*} [Field
       fun q ⟨hq, hIq⟩ _ ↦ ?_⟩
     rw [← hrad]
     exact (Ideal.IsPrime.radical_le_iff hq).mpr hIq
-  have hheight := Ideal.height_le_card_of_mem_minimalPrimes_span (Set.finite_range f) hmin
+  have hheight := Ideal.height_le_ncard_of_mem_minimalPrimes_span (Set.finite_range f) hmin
   -- hence so does every maximal ideal, contradicting `dim k[σ] = Nat.card σ`
   have hdim : ringKrullDim (MvPolynomial σ k) ≤ (Nat.card ι : ℕ∞) := by
     refine (ringKrullDim_le_iff_isMaximal_height_le _).mpr fun m hm ↦ ?_

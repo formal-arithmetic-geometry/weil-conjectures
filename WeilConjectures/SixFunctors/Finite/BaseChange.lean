@@ -284,7 +284,7 @@ lemma Etale.isIso_sheafFiber_map_baseChangeMap_app {Ω : Type u} [Field Ω] [IsA
       P = (Etale.upperStarCompSheafFiberIso A g y').hom.app ((f)_*[A].obj F) ≫ Q := by
     apply Pi.hom_ext
     rintro ⟨s, rfl⟩
-    simp only [P, Q, Category.assoc, Pi.lift_π]
+    simp only [P, Q, Category.assoc, Pi.lift_comp_π]
     exact Etale.sheafFiber_map_baseChangeMap_app_stalkRestrict A sq.toCommSq s F
   -- both product decompositions are isomorphisms
   have hP : IsIso P := by
@@ -302,8 +302,8 @@ lemma Etale.isIso_sheafFiber_map_baseChangeMap_app {Ω : Type u} [Field Ω] [IsA
           (fun t : GeometricFiber f (y' ≫ g) ↦ (pointSmallEtale t.1).sheafFiber.obj F)).inv := by
       apply Pi.hom_ext
       intro t'
-      simp only [Q, Pi.lift_π, Category.assoc]
-      erw [Pi.reindex_inv_π, Pi.lift_π]
+      simp only [Q, Pi.lift_comp_π, Category.assoc]
+      erw [Pi.reindex_inv_π, Pi.lift_comp_π]
     rw [this]
     infer_instance
   have : (pointSmallEtale y').sheafFiber.map ((Etale.baseChangeMap A sq.toCommSq).app F) =

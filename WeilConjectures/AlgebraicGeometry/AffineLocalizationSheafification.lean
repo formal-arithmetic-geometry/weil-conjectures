@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Module.LocalizedModule.Away
 import WeilConjectures.AlgebraicGeometry.AffineLocalizingPresheafSheafification
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine values of a presheaf satisfying principal localization
 

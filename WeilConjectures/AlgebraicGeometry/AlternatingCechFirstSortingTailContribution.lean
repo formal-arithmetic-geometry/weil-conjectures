@@ -49,7 +49,7 @@ private theorem tail_position_iff {p : ℕ} (σ τ : Equiv.Perm (Fin (p + 2)))
     subst r
     constructor
     · simp only [cechJunction, Fin.val_succ]
-      rw [dif_neg (by omega)]
+      rw [dite_eq_right (by omega)]
       convert τ.apply_symm_apply (σ a) using 2
       apply Fin.ext
       simp

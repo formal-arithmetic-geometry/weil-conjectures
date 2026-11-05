@@ -76,7 +76,7 @@ private theorem surjective_normalization (X : Scheme.{u}) :
     (X.reducedNormalizationComponent Z).normalization) Z) z, ?_⟩
   change (Sigma.desc _ : X.reducedNormalization ⟶ X) ((Sigma.ι (fun Z : irreducibleComponents X ↦
     (X.reducedNormalizationComponent Z).normalization) Z) z) = x
-  rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, Scheme.Hom.comp_apply]
+  rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]
   exact (congrArg I.subschemeι hz).trans hy
 /-- The stalks of the componentwise normalization are integrally closed domains.
 Source: Stacks Project, Tag 035Q
@@ -302,7 +302,7 @@ theorem dense_preimage_normalization {k : Type u} [Field k]
   rintro _ ⟨v, hv, rfl⟩
   change X.fromReducedNormalization ((Sigma.ι C Z) v) ∈ U
   have he : (Sigma.ι C Z) ≫ X.fromReducedNormalization = n ≫ i := by
-    exact Sigma.ι_desc _ Z
+    exact Sigma.ι_comp_desc _ Z
   have he' := congrArg (fun f : C Z ⟶ X ↦ f v) he
   exact he'.symm ▸ hv
 
@@ -583,7 +583,7 @@ private theorem local_lift_normalization (X : Scheme.{u}) [IsNoetherian X]
   have hι : Sigma.ι (fun T : irreducibleComponents X ↦
       (X.reducedNormalizationComponent T).normalization) Z ≫
       X.fromReducedNormalization = (X.reducedNormalizationComponent Z).fromNormalization ≫ i := by
-    exact Sigma.ι_desc _ Z
+    exact Sigma.ι_comp_desc _ Z
   rw [Category.assoc, hι, ← Category.assoc, ha]
   simp [l, Category.assoc, hj]
 
@@ -617,7 +617,7 @@ private theorem local_iso_of_lift (X : Scheme.{u}) [IsNoetherian X]
     change (ι T) y = (ν ⁻¹ᵁ U).ι z at hy
     have hmem : ν ((ι T) y) ∈ T.1 := by
       change (Sigma.desc _ : X.reducedNormalization ⟶ X) ((Sigma.ι C T) y) ∈ T.1
-      rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, Scheme.Hom.comp_apply]
+      rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]
       exact ((X.reducedNormalizationComponent T).fromNormalization y).2
     have hz : ν ((ν ⁻¹ᵁ U).ι z) ∈ U := z.2
     have hT : T = Z := hunique T ⟨ν ((ν ⁻¹ᵁ U).ι z), hy ▸ hmem, hz.2⟩

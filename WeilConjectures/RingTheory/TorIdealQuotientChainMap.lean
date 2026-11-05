@@ -102,8 +102,7 @@ theorem exists_quotient_tensor_comparison
         intro i j hij
         apply AddCommGrpCat.hom_ext
         ext x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul p r =>
           change (G.complex.d i j (φ i p)) ⊗ₜ[A] q r =
             (φ j (P.complex.d i j p)) ⊗ₜ[A] q r

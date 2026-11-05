@@ -38,7 +38,7 @@ lemma tensorπ_relativeTensorRightIso_hom (M N : Mod C R) :
     tensorπ M N ≫ ((relativeTensorRightIso N).hom.app M).hom = tensorObjπ M N := by
   have h : colimit.ι ((tensorLeftDiagram R N).flip.obj M) WalkingParallelPair.one ≫
       (relativeTensorRightIso N).hom.app M = relativeTensorπ M N := by
-    simp [relativeTensorRightIso, HasColimit.isoOfNatIso_ι_hom_assoc, relativeTensorCofork]
+    simp [relativeTensorRightIso, HasColimit.ι_isoOfNatIso_hom_assoc, relativeTensorCofork]
   exact congrArg Mod.Hom.hom h
 
 omit [MonoidalPreadditive C] in

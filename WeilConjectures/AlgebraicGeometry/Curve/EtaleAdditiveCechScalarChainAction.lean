@@ -63,8 +63,8 @@ theorem additiveCech_alpha_natural
   change (Pi.lift _ ≫ Limits.Pi.map (fun y : Fin 1 → ι ↦
       ((InjectiveResolution.desc f I I).f n).hom.app
         (op ((additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l)))))) ≫ _ = _
-  erw [Category.assoc, Limits.Pi.map_π, ← Category.assoc, Pi.lift_π,
-    Category.assoc, Pi.lift_π]
+  erw [Category.assoc, Limits.Pi.map_π, ← Category.assoc, Pi.lift_comp_π,
+    Category.assoc, Pi.lift_comp_π]
   exact ((InjectiveResolution.desc f I I).f n).hom.naturality _
 
 /-- The coefficient augmentation commutes with multiplication.

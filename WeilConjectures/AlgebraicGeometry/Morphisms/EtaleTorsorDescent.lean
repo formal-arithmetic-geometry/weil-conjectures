@@ -251,7 +251,7 @@ theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
         congr_arg (fun χ : T ⟶ E₂ ↦ V.ι ≫ χ.left) hxx
       simp only [← Category.assoc] at hxD
       rw [e₁, e₂] at hxD
-      simp only [Category.assoc, Sigma.ι_desc] at hxD
+      simp only [Category.assoc, Sigma.ι_comp_desc] at hxD
       have hsnd := congr_arg (· ≫ pullback.snd π π) hxD
       have hfst := congr_arg (· ≫ pullback.fst π π) hxD
       simp only [Category.assoc, pullback.lift_snd, pullback.lift_fst, Category.comp_id]
@@ -261,7 +261,7 @@ theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
       · obtain ⟨v⟩ := not_isEmpty_iff.1 hV
         have hκ : (T.left.homOfLE h₁ ≫ k) ≫ π = V.ι ≫ T.hom := by
           have := congr_arg (· ≫ Sigma.desc fun _ : M ↦ π) e₁
-          simp only [Category.assoc, Sigma.ι_desc] at this
+          simp only [Category.assoc, Sigma.ι_comp_desc] at this
           rw [Category.assoc, ← this]
           exact congr_arg _ (MorphismProperty.Over.w x)
         let W : Y.Etale := Etale.mk (V.ι ≫ T.hom)
@@ -294,7 +294,7 @@ theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
       · change T.left.glueOfContinuousMap f _ ≫ Sigma.desc (fun _ : M ↦ π) = T.hom
         rw [Scheme.glueOfContinuousMap_comp]
         refine Scheme.glueOfContinuousMap_eq fun m ↦ ?_
-        rw [Category.assoc, Sigma.ι_desc]
+        rw [Category.assoc, Sigma.ι_comp_desc]
         exact congr_arg _ (MorphismProperty.Over.w ψe)
       · change T.left.glueOfContinuousMap f _ ≫ reprSigmaDesc R π e = g.left
         refine pullback.hom_ext ?_ ?_
@@ -307,7 +307,7 @@ theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
         · rw [Category.assoc, Scheme.glueOfContinuousMap_comp]
           change _ = ψe.left
           refine Scheme.glueOfContinuousMap_eq fun m ↦ ?_
-          simp only [reprSigmaDesc, Category.assoc, Sigma.ι_desc_assoc, pullback.lift_snd]
+          simp only [reprSigmaDesc, Category.assoc, Sigma.ι_comp_desc_assoc, pullback.lift_snd]
           erw [Category.comp_id]
   exact (Etale.forget Y ⋙ Over.forget Y).map_isIso D
 

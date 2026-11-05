@@ -56,7 +56,7 @@ private theorem generatorStep_exists
   have ha : a ≫ p.2 = 0 := by
     apply Sigma.hom_ext
     intro j
-    simp only [a, Sigma.ι_desc_assoc, comp_zero]
+    simp only [a, Sigma.ι_comp_desc_assoc, comp_zero]
     exact j.2.2.2
   obtain ⟨X', t, b, hd⟩ := distinguished_cocone_triangle a
   obtain ⟨f', hf'⟩ := Triangle.yoneda_exact₂ _ hd p.2 ha
@@ -65,7 +65,7 @@ private theorem generatorStep_exists
   intro i m g hg
   have hat : a ≫ t = 0 := comp_distTriang_mor_zero₁₂ _ hd
   have h := congrArg (fun k => Sigma.ι F ⟨i, m, ⟨g, hg⟩⟩ ≫ k) hat
-  simpa only [a, Sigma.ι_desc_assoc, comp_zero] using h
+  simpa only [a, Sigma.ι_comp_desc_assoc, comp_zero] using h
 
 /-- Every object is the sequential homotopy colimit of a sequence built from coproducts
 of shifts of compact generators (Stacks, Tag 09SN)
@@ -119,7 +119,7 @@ theorem compactGenerators_buildObjects
     (step (p n)).comm
   have hstart (i : I) (m : ℤ) (g : (E i)⟦m⟧ ⟶ Y) :
       ∃ a : (E i)⟦m⟧ ⟶ X 0, a ≫ (p 0).2 = g := by
-    exact ⟨Sigma.ι F ⟨i, m, g⟩, Sigma.ι_desc _ _⟩
+    exact ⟨Sigma.ι F ⟨i, m, g⟩, Sigma.ι_comp_desc _ _⟩
   have hkill (n : ℕ) (i : I) (m : ℤ) (g : (E i)⟦m⟧ ⟶ X n)
       (hg : g ≫ (p n).2 = 0) : g ≫ t n = 0 :=
     (step (p n)).kill i m g hg
@@ -136,13 +136,13 @@ theorem compactGenerators_buildObjects
     apply Sigma.hom_ext
     intro n
     simp only [Preadditive.comp_sub, Preadditive.sub_comp, Category.id_comp,
-      comp_zero, s, f, Sigma.ι_desc_assoc, Sigma.ι_desc, Category.assoc]
+      comp_zero, s, f, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc, Category.assoc]
     exact sub_eq_zero.mpr (hcomm n.down).symm
   obtain ⟨c, hc⟩ := Triangle.yoneda_exact₂ _ hd f hf
   change f = q ≫ c at hc
   have hstage (n : ℕ) : Sigma.ι A ⟨n⟩ ≫ q ≫ c = (p n).2 := by
     rw [← hc]
-    exact Sigma.ι_desc _ _
+    exact Sigma.ι_comp_desc _ _
   have : IsIso c := compactGenerator_telescope_isIso E hcompact hgenerate
     Y X t (fun n => (p n).2) hstart hkill H q r hd c hstage
   refine ⟨q ≫ c, inv c ≫ r, ?_⟩

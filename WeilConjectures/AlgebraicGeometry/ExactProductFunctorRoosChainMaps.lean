@@ -230,7 +230,7 @@ private theorem productComparison_transition {A B : Type*} [Category* A] [Catego
   apply Pi.hom_ext
   intro n
   simp only [Category.assoc, towerTransitionEndomorphism, towerProductShift,
-    Preadditive.sub_comp, Pi.lift_π, Preadditive.comp_sub, Category.comp_id]
+    Preadditive.sub_comp, Pi.lift_comp_π, Preadditive.comp_sub, Category.comp_id]
   simp only [Preadditive.sub_comp, Functor.map_sub]
   simp [← Functor.map_comp]
 

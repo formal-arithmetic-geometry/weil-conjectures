@@ -55,13 +55,13 @@ private theorem epi_desc_iff {E : Type*} [Category E] {I : Type*}
     apply (cancel_epi (Sigma.desc f)).mp
     apply Sigma.hom_ext
     intro i
-    simpa only [Sigma.ι_desc_assoc] using hab i
+    simpa only [Sigma.ι_comp_desc_assoc] using hab i
   · intro h
     constructor
     intro Z a b hab
     apply h Z a b
     intro i
-    simpa only [Sigma.ι_desc_assoc] using
+    simpa only [Sigma.ι_comp_desc_assoc] using
       congrArg (fun k ↦ Sigma.ι X i ≫ k) hab
 
 private theorem family_local_iff
@@ -101,7 +101,7 @@ private theorem family_local_iff
       apply epi_of_epi_fac (f := Sigma.desc l) (h := Sigma.desc f)
       apply Sigma.hom_ext
       intro i
-      simpa only [Sigma.ι_desc_assoc, Sigma.ι_desc] using fac i
+      simpa only [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc] using fac i
     have : Mono m := (sheafToPresheaf J _).mono_of_mono_map
       (inferInstanceAs (Mono (G.sheafify J).ι))
     have : IsIso m := isIso_of_mono_of_epi m
@@ -120,7 +120,7 @@ private theorem family_local_iff
     intro V a ha
     obtain ⟨i, x, hx⟩ := hlocal V a ha
     refine ⟨(Sigma.ι X i).hom.app (op V) x, ?_⟩
-    have hi := congrArg (fun k : X i ⟶ Y ↦ k.hom.app (op V) x) (Sigma.ι_desc f i)
+    have hi := congrArg (fun k : X i ⟶ Y ↦ k.hom.app (op V) x) (Sigma.ι_comp_desc f i)
     exact hi.trans hx
 
 private theorem pullback_section

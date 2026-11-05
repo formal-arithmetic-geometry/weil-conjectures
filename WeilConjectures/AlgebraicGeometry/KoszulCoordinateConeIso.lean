@@ -99,8 +99,7 @@ private theorem rid_naturality (A : Type u) [CommRing A]
     {M N : Type u} [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]
     (l : M →ₗ[A] N) (x : TensorProduct A M A) :
     TensorProduct.rid A N (l.rTensor A x) = l (TensorProduct.rid A M x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x with
   | tmul x a => simp
   | add x y hx hy => simp only [map_add, hx, hy]
 

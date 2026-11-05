@@ -392,8 +392,7 @@ theorem constantModule_section_properties
       (((constantSheaf J (ModuleCat.{u} R)).obj
         (ModuleCat.of R (M ⊗[R] Q))).obj.map h.op)
         (tensorComparison R (sectionFunctor J R U) M Q z)
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z with
     | tmul s q =>
       simp only [TensorProduct.map_tmul, LinearMap.id_apply, tensorComparison_tmul]
       exact (NatTrans.naturality_apply

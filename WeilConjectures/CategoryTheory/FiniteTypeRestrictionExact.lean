@@ -55,6 +55,6 @@ theorem overFunctor_exact {C : Type u} [SmallCategory C]
     exact ShortComplex.shortExact_of_iso (S.mapNatIso e.symm)
       ((hS.map_of_exact (SheafOfModules.toSheaf.{u} R)).map_of_exact
         (J.overPullback AddCommGrpCat.{u} U))
-  exact (Functor.exact_tfae F).out 0 3 |>.mp h
+  exact (Functor.exact_tfae F).out 1 4 |>.mp h
 
 end SheafOfModules

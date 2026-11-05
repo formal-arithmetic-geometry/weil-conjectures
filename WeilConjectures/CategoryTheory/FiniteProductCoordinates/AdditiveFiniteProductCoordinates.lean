@@ -95,10 +95,10 @@ private def coordinateBicone {J : Type*} (D : J → Type*)
       simp [coordinateProjection, coordinateInclusion, coordinateInsertion,
         coordinateTransport, NatTrans.pi', Functor.pi', Pi.eval]
     · have hz : IsZero ((coordinateInsertion D i).obj (M i) l) := by
-        simpa only [coordinateInsertion, Functor.pi'_obj, dif_neg hl, Functor.const_obj_obj]
+        simpa only [coordinateInsertion, Functor.pi'_obj, dite_eq_right hl, Functor.const_obj_obj]
           using (HasZeroObject.zero (C := D l)).choose_spec
       exact hz.eq_of_src _ _
-  · simp only [dif_neg h]
+  · simp only [dite_eq_right h]
     apply NatTrans.ext
     funext M l
     by_cases hi : i = l

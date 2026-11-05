@@ -121,7 +121,6 @@ lemma lTensor_injective_iff_of_isLocalizedModule (T : Submonoid S) {L : Type*} [
   let fL := AlgebraTensorModule.lTensor S L f
   have hsq (y : M ⊗[R] N') : fL (g' y) = g (fM y) := by
     induction y with
-    | zero => simp
     | add y z hy hz => rw [map_add, map_add, map_add, map_add, hy, hz]
     | tmul m n => rfl
   constructor
@@ -252,7 +251,6 @@ theorem exists_notMem_pow_smul_eq_zero [IsNoetherianRing R] (p : Ideal R) [p.IsP
   let e := equivOfCompatibleSMul R (R ⧸ p) R M N
   have hcomm (z : M ⊗[R ⧸ p] N') : e (f'.lTensor M z) = f.lTensor M (e' z) := by
     induction z with
-    | zero => simp
     | add z w hz hw => rw [map_add, map_add, map_add, map_add, hz, hw]
     | tmul m n => rfl
   obtain ⟨_, ⟨k, rfl⟩, ht⟩ := hinj (e'.symm y) (by
@@ -261,7 +259,6 @@ theorem exists_notMem_pow_smul_eq_zero [IsNoetherianRing R] (p : Ideal R) [p.IsP
   refine ⟨k, ?_⟩
   have hsmul (z : M ⊗[R ⧸ p] N') : a ^ k • z = (Ideal.Quotient.mk p a) ^ k • z := by
     induction z with
-    | zero => simp
     | add z w hz hw => rw [smul_add, smul_add, hz, hw]
     | tmul m n =>
       rw [TensorProduct.smul_tmul', TensorProduct.smul_tmul', ← map_pow]
@@ -495,7 +492,6 @@ theorem _root_.Algebra.exists_notMem_flat_localizedModule_quotient [IsNoetherian
             | smul r hr y _ => rw [smul_comm]; exact Submodule.smul_mem_smul hr trivial
             | add y _ z _ hy hz => rw [smul_add]; exact Submodule.add_mem _ hy hz) (e x) := by
       induction x with
-      | zero => simp
       | add x y hx hy => rw [map_add, map_add, map_add, hx, hy, map_add]
       | tmul y r =>
         obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective r
@@ -671,7 +667,6 @@ theorem _root_.Algebra.exists_notMem_forall_pow_smul_eq_zero [IsNoetherianRing R
     IsLocalizedModule.rTensor (A := S) _ (Algebra.linearMap S X)
   have hnat (z : S ⊗[R] N) : φ.rTensor N (ℓ z) = ℓ (f • z) := by
     induction z with
-    | zero => simp
     | add z w hz hw => rw [map_add, map_add, hz, hw, smul_add, map_add]
     | tmul a n => simp [φ, ℓ, s, smul_tmul']
   have h0 : ℓ y = 0 := hinj (by rw [hnat, hy, map_zero, map_zero])

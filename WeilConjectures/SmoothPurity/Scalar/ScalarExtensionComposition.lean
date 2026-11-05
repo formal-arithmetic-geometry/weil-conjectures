@@ -1070,8 +1070,7 @@ private theorem localizedIso
       F.map f ≫ (c K').hom = (c K).hom ≫ G.map f := by
     obtain ⟨K⟩ := K
     obtain ⟨K'⟩ := K'
-    induction f using TensorProduct.induction_on with
-    | zero => simp
+    induction f with
     | add f g hf hg =>
       rw [F.map_add, G.map_add, Preadditive.add_comp, Preadditive.comp_add, hf, hg]
     | tmul a f =>

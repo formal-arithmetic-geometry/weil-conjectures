@@ -175,8 +175,7 @@ theorem dvr_abhyankar_normalized_factor_ramificationIdx_eq_one
     intro z hz
     clear hz
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective z
-    induction x using TensorProduct.induction_on with
-    | zero => exact (Algebra.adjoin A (Set.range iE)).zero_mem
+    induction x with
     | tmul e a =>
       have he : iE e ∈ Algebra.adjoin A (Set.range iE) :=
         Algebra.subset_adjoin ⟨e, rfl⟩

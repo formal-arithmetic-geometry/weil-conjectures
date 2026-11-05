@@ -93,8 +93,7 @@ private theorem pod_rational_composition_naturality
         ((constructibleIntegralPullback l E f).obj M.obj)⟩ := by
     rw [obj, obj]
   have hc (M) := (pullbackTensorRationalComposition_existsUnique l E f h M).exists.choose_spec
-  induction a using TensorProduct.induction_on with
-  | zero => simp
+  induction a with
   | tmul c a =>
     have hm := (pod_map_heq (rationalDerivedPullback l E h) (obj f K) (obj f L)
       (hom f K.obj L.obj a c)).trans

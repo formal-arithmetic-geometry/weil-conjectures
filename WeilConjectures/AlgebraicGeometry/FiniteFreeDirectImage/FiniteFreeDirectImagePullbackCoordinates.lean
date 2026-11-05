@@ -126,8 +126,8 @@ private theorem powerInjection_naturality {X Y : A} (f : X ⟶ Y) (i : Fin d) :
       (biproduct.isoProduct (fun _ : Fin d ↦ X)).hom ≫ Pi.π _ j ≫ f =
     f ≫ biproduct.ι (fun _ : Fin d ↦ Y) i ≫
       (biproduct.isoProduct (fun _ : Fin d ↦ Y)).hom ≫ Pi.π _ j
-  simp only [biproduct.isoProduct_hom, Pi.lift_π]
-  erw [Pi.lift_π_assoc]
+  simp only [biproduct.isoProduct_hom, Pi.lift_comp_π]
+  erw [Pi.lift_comp_π_assoc]
   by_cases h : i = j <;> simp [h]
 
 private theorem coordinateInjection_naturality (V : A ⥤ A)
@@ -154,8 +154,8 @@ private theorem powerInjection_map (F : A ⥤ B) [F.Additive]
     (biproduct.ι (fun _ : Fin d ↦ F.obj X) i ≫
       (biproduct.isoProduct (fun _ : Fin d ↦ F.obj X)).hom) ≫ Pi.π _ j
   rw [Category.assoc, SheafOfModules.RingedTensor.powerComparison_π,
-    ← F.map_comp, Category.assoc, biproduct.isoProduct_hom, Pi.lift_π,
-    biproduct.isoProduct_hom, Category.assoc, Pi.lift_π]
+    ← F.map_comp, Category.assoc, biproduct.isoProduct_hom, Pi.lift_comp_π,
+    biproduct.isoProduct_hom, Category.assoc, Pi.lift_comp_π]
   by_cases h : i = j <;> simp [h]
 
 private theorem coordinateInjection_square (F : A ⥤ B) [F.Additive]

@@ -313,7 +313,7 @@ private theorem quotient_roos_comparison
     apply Pi.hom_ext
     intro n
     dsimp only [PrincipalQuotientCompletion.quotientProduct, roosPmap]
-    erw [Category.assoc, Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+    erw [Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     exact he n
   ext i : 1
   obtain ⟨p, rfl⟩ : ∃ p : ℤ, i = p + 1 := ⟨i - 1, by omega⟩

@@ -142,7 +142,7 @@ private lemma curryCochain_v_π {n : ℤ} (z : Cochain (total T P K) Y n)
     (curryCochain adj z).v q q' hqq' ≫ bifunctorHomπ H P Y q' p s hps =
       (p * n).negOnePow • curry adj (ιMapBifunctor P K T (.up ℤ) p q r hr ≫ z.v r s hrs) := by
   subst hr
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 @[reassoc]
 private lemma ι_uncurryCochain_v {n : ℤ} (w : Cochain K (bifunctorHomObj H P Y) n) (r s : ℤ)

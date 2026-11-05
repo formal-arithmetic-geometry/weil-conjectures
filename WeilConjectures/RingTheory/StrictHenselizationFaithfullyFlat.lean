@@ -117,7 +117,7 @@ theorem strictHenselization_faithfullyFlat
   have := hfiltered
   have := hlocal
   have : IsLocalHom ρ₀.hom := by
-    apply ((IsLocalRing.local_hom_TFAE ρ₀.hom).out 4 0).mp
+    apply ((IsLocalRing.local_hom_TFAE ρ₀.hom).out 5 1).mp
     rw [hm₀, hcontract, hp]
   let e := hc.coconePointUniqueUpToIso hc₀
   have he : ρ ≫ e.hom = ρ₀ := by

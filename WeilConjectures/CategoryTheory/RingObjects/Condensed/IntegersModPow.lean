@@ -128,7 +128,7 @@ lemma zsmul_id_comp_padicIntegersRingObjToIntegersModPow :
       padicIntegersRingObjToIntegersModPow ℓ E n = 0 := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   ext S a
-  refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
   have h1 := zsmul_id_padicIntegersRingObj_hom_app_apply ℓ E ((ℓ : ℤ) ^ n) S a
   have h2 := padicIntegersRingObjToIntegersModPow_hom_app_apply ℓ E n S
   have h3 : (((ℓ : ℤ) ^ n • 𝟙 (padicIntegersRingObj.{u} ℓ E)) ≫
@@ -171,7 +171,7 @@ lemma shortExact_padicIntegersRingObjToIntegersModPow :
       have hbc : Continuous b := by
         refine (PadicAlgCl.isEmbedding_natCast_pow_mul ℓ E n).continuous_iff.2 ?_
         simpa only [Function.comp_def, hb] using a.down.continuous
-      exact ⟨ULift.up ⟨b, hbc⟩, ULift.ext _ _ ((hf S _).trans (ContinuousMap.ext fun s ↦ by
+      exact ⟨ULift.up ⟨b, hbc⟩, ULift.ext ((hf S _).trans (ContinuousMap.ext fun s ↦ by
         simpa using hb s))⟩
     rw [ShortComplex.exact_iff_isZero_homology] at h
     exact h.of_iso ((T.map (sheafToPresheaf _ _)).mapHomologyIso ((evaluation _ _).obj S)).symm
@@ -179,14 +179,14 @@ lemma shortExact_padicIntegersRingObjToIntegersModPow :
     rw [AddCommGrpCat.mono_iff_injective]
     intro a b hab
     have h := (hf S a).symm.trans ((congrArg ULift.down hab).trans (hf S b))
-    exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ mul_left_cancel₀ hl (by
+    exact ULift.ext (ContinuousMap.ext fun s ↦ mul_left_cancel₀ hl (by
       simpa using congrArg (fun z : C(S.unop, PadicAlgCl.integers ℓ E) ↦ z s) h))
   have hepi (S : Profinite.{u}ᵒᵖ) : Epi (((sheafToPresheaf _ _).map T.g).app S) := by
     rw [AddCommGrpCat.epi_iff_surjective]
     intro c
     refine ⟨ULift.up ⟨Function.surjInv (PadicAlgCl.integersModPowMk_surjective ℓ E n) ∘ c.down,
       continuous_of_discreteTopology.comp c.down.continuous⟩,
-      ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)⟩
+      ULift.ext (ContinuousMap.ext fun s ↦ ?_)⟩
     exact (hg S _ s).trans (Function.surjInv_eq _ _)
   have : Mono T.f := (sheafToPresheaf _ _).mono_of_mono_map (NatTrans.mono_of_mono_app _)
   have : Epi T.g := (sheafToPresheaf _ _).epi_of_epi_map (NatTrans.epi_of_epi_app _)

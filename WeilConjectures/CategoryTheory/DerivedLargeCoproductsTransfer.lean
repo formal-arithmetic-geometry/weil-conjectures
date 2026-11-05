@@ -89,7 +89,7 @@ theorem derived_large_coproducts_transfer
       refine ⟨H.map (Sigma.desc (fun j ↦ S.map (g j))) ≫ (e.app I).hom, ?_⟩
       funext j
       dsimp [ι]
-      rw [Category.assoc, ← H.map_comp_assoc, Sigma.ι_desc]
+      rw [Category.assoc, ← H.map_comp_assoc, Sigma.ι_comp_desc]
       have hn := e.hom.naturality (g j)
       dsimp at hn
       rw [hn]

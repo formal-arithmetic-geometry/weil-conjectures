@@ -51,7 +51,7 @@ private theorem finite_module_torsion_reflection {k : Type u} [Field k]
           (s ≫ f) ⟨s, rfl⟩ F) := by
         have he : (Etale.stalkIsoPi (ModuleCat.{u + 1} Λ) f (s ≫ f) F).hom ≫
             CategoryTheory.Limits.Pi.π D ⟨s, rfl⟩ = _ :=
-          CategoryTheory.Limits.Pi.lift_π _ _
+          CategoryTheory.Limits.Pi.lift_comp_π _ _
         rw [← he]
         infer_instance
       exact epi_of_epi_fac

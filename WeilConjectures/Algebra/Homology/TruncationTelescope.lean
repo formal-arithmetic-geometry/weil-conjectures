@@ -126,7 +126,7 @@ theorem quasiIso_hocolim_truncLE_and_filtered_colimit
     · rw [← Category.assoc, hg]
       apply Sigma.hom_ext
       intro n
-      simpa only [telescopeToColimit, Sigma.ι_desc_assoc, Sigma.ι_desc] using he n
+      simpa only [telescopeToColimit, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc] using he n
     · rw [HomComplex.Cochain.ofHom_comp]
       rw [← HomComplex.Cochain.comp_assoc_of_second_is_zero_cochain]
       rw [hz, HomComplex.Cochain.zero_comp]

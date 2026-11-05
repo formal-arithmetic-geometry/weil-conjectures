@@ -301,8 +301,7 @@ private lemma tensor_map_smul
     (m : A ⊗[R] M →+ B ⊗[S] N)
     (hm : ∀ a f, m (a ⊗ₜ[R] f) = k a ⊗ₜ[S] F f)
     (a : A) (f : A ⊗[R] M) : m (a • f) = k a • m f := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction f with
   | tmul b f =>
     simp only [TensorProduct.smul_tmul', smul_eq_mul, hm, map_mul]
   | add f g hf hg => simp only [smul_add, map_add, hf, hg]

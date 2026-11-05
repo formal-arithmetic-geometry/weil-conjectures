@@ -60,7 +60,7 @@ lemma preservesLimit_discrete_of_distTriang (H : C ⥤ C) (m : ℤ) (η : 𝟭 C
   have : IsIso (piComparison H K) := by
     have : piComparison H K = ψ.hom₃ := Pi.hom_ext _ _ fun j ↦ by
       simp only [piComparison_comp_π]
-      exact (Pi.lift_π (fun j ↦ H.map (Pi.π K j)) j).symm
+      exact (Pi.lift_comp_π (fun j ↦ H.map (Pi.π K j)) j).symm
     rw [this]
     infer_instance
   exact PreservesProduct.of_iso_comparison H K

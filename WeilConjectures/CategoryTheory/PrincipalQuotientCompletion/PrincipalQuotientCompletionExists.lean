@@ -145,8 +145,8 @@ private theorem strictAugmentation_natural
       roosPmap ((quotientTower R t).map f) := by
     apply Pi.hom_ext
     intro n
-    simp only [quotientProduct, Category.assoc, Pi.lift_π, roosPmap, Pi.map_π,
-      Pi.lift_π_assoc]
+    simp only [quotientProduct, Category.assoc, Pi.lift_comp_π, roosPmap, Pi.map_π,
+      Pi.lift_comp_π_assoc]
     exact quotient_natural R t f n
   ext k : 1
   obtain ⟨p, hp'⟩ := (Equiv.addRight (1 : ℤ)).surjective k

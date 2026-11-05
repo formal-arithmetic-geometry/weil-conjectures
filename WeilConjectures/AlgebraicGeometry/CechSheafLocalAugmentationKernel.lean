@@ -128,7 +128,7 @@ private theorem cech_local_zero_cocycle_reconstruction
     dsimp [Q, T, FormalCoproduct.cosimplicialObjectFunctor, FormalCoproduct.evalOp,
       CosimplicialObject.δ, FormalCoproduct.cech, FormalCoproduct.mapPower,
       FormalCoproduct.power, SimplexCategory.δ]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
     rfl
   rw [hδ, hδ] at h
   have h0 : (⇑(Fin.succAboveOrderEmb (0 : Fin 2)).toOrderHom) =

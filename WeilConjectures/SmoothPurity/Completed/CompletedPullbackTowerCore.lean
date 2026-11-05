@@ -831,8 +831,8 @@ theorem pullbackTensorRoosAugmentation_condition (W : Scheme.{u})
       intro n
       simp only [towerTransitionEndomorphism, Preadditive.comp_sub, Preadditive.sub_comp,
         Category.comp_id,
-        towerProductShift, Category.assoc, Pi.lift_π_assoc, pullbackTensorRoosAugmentation,
-        Pi.lift_π, zero_comp]
+        towerProductShift, Category.assoc, Pi.lift_comp_π_assoc, pullbackTensorRoosAugmentation,
+        Pi.lift_comp_π, zero_comp]
       apply sub_eq_zero.mpr
       apply HomologicalComplex.hom_ext
       intro k

@@ -68,7 +68,7 @@ theorem tate_root_ideal_prime
       rw [hc]
       exact a.property.pow _
     have hiK : IsIntegral R c :=
-      (isIntegral_algebraMap_iff (algebraMap K L).injective).mp hiL
+      (isIntegral_algebraMap_iff).mp hiL
     obtain ⟨r, hr⟩ := IsIntegrallyClosed.algebraMap_eq_of_integral hiK
     refine ⟨r, ?_⟩
     apply Subtype.ext

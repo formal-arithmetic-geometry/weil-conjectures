@@ -96,7 +96,7 @@ private theorem torsor_card_geometricFiber
     obtain ⟨g, l, hl⟩ := exists_comp_sigmaι_eq_of_subsingleton (z ≫ inv D)
     have h : l ≫ pullback.lift (f := t.π) (g := t.π) (t.smul g) (𝟙 t.P)
         (by simp [t.smul_π]) = z := by
-      rw [← Sigma.ι_desc (fun g : G ↦
+      rw [← Sigma.ι_comp_desc (fun g : G ↦
         pullback.lift (f := t.π) (g := t.π) (t.smul g) (𝟙 t.P)
           (by simp [t.smul_π])) g, ← Category.assoc, hl]
       simp [D]

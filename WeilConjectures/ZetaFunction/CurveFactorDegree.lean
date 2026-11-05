@@ -195,9 +195,9 @@ theorem natDegree_eq_two_mul_of_coeff (h : IsWeilFactorization q 1 Z P)
     have e0 := key n (by omega)
     have e1 := key (n + 1) (by omega)
     have e2 := key (n + 2) (by omega)
-    rw [if_neg hndvd0] at e0
-    rw [if_pos hdvd1] at e1
-    rw [if_neg hndvd2] at e2
+    rw [ite_eq_right hndvd0] at e0
+    rw [ite_eq_left hdvd1] at e1
+    rw [ite_eq_right hndvd2] at e2
     have hx0 : x = 0 := by
       have : (q : ℚ) ^ (n + 1) * ((q : ℚ) ^ 2 - 1) * x = 0 := by
         have : (q : ℚ) ^ (n + 2 + 1) = (q : ℚ) ^ (n + 1) * (q : ℚ) ^ 2 := by ring
@@ -217,7 +217,7 @@ theorem natDegree_eq_two_mul_of_coeff (h : IsWeilFactorization q 1 Z P)
   set N := max D N₀ + g with hN
   have e0 := key N (by omega)
   have e1 := key (N + 1) (by omega)
-  simp only [one_dvd, if_true] at e0 e1
+  simp only [one_dvd, ite_true] at e0 e1
   have hpowN : (q : ℚ) ^ (N + 1) = (q : ℚ) ^ (N + 1 - g) * (q : ℚ) ^ g := by
     rw [← pow_add]; congr 1; omega
   have hpowN1 : (q : ℚ) ^ (N + 1 + 1 - g) = (q : ℚ) ^ (N + 1 - g) * q := by

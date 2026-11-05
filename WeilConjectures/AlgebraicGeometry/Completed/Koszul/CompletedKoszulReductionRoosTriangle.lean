@@ -125,11 +125,11 @@ private theorem productTransport_transition
   intro n
   simp only [Category.assoc, productTransport_π, towerTransitionEndomorphism,
     towerProductShift, Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-    Pi.lift_π, Functor.map_sub]
+    Pi.lift_comp_π, Functor.map_sub]
   simp only [reassoc_of% (productTransport_π F a)]
   rw [F.map_id, Category.id_comp]
   congr 1
-  rw [← F.map_comp_assoc, Pi.lift_π, Functor.map_comp, Category.assoc, ha]
+  rw [← F.map_comp_assoc, Pi.lift_comp_π, Functor.map_comp, Category.assoc, ha]
 
 private theorem reflectRoosTriangle
     {C D : Type*} [Category C] [Category D] [HasZeroObject C] [HasZeroObject D]

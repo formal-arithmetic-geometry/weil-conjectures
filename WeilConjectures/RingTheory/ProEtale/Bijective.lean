@@ -94,7 +94,6 @@ lemma bijective_comap_lmul'_of_bijective_of_bijective
       algebraMap (S ⊗[R] S) P.asIdeal.ResidueField (ι₁ (μ x)) := by
     intro x
     induction x with
-    | zero => simp only [map_zero]
     | tmul s t =>
       calc algebraMap (S ⊗[R] S) P.asIdeal.ResidueField (s ⊗ₜ[R] t)
           = algebraMap (S ⊗[R] S) P.asIdeal.ResidueField (ι₁ s) *

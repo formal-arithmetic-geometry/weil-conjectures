@@ -56,7 +56,6 @@ private theorem adjoin_tensor_generators
   intro z _
   change z ∈ D
   induction z with
-  | zero => exact D.zero_mem
   | tmul t c =>
     have ht : TensorProduct.tmul R t (1 : C) ∈ D := by
       have heq :

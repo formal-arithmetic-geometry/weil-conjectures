@@ -297,12 +297,12 @@ theorem connectedSpace_iff_isIdempotentElem (X : Scheme.{u}) [Nonempty X] :
     refine (H e he).imp (fun h ↦ ?_) (fun h ↦ ?_)
     · refine Set.eq_empty_of_forall_notMem fun x hx ↦ ?_
       have := hgerm x
-      rw [h, map_zero, if_pos hx] at this
+      rw [h, map_zero, ite_eq_left hx] at this
       exact zero_ne_one this
     · refine Set.eq_univ_of_forall fun x ↦ ?_
       by_contra hx
       have := hgerm x
-      rw [h, map_one, if_neg hx] at this
+      rw [h, map_one, ite_eq_right hx] at this
       exact one_ne_zero this
 
 end AlgebraicGeometry.Scheme

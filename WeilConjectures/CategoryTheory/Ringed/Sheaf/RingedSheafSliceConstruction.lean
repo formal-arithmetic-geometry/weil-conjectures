@@ -35,7 +35,7 @@ Source: Stacks Project, sites.tex, Tag 0791
 (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction). -/
 def elementProjection {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Sheaf J (Type u)) : A.obj.Elementsᵒᵖ ⥤ C :=
-  (CategoryOfElements.π A.obj).op ⋙ (opOpEquivalence C).functor
+  (Functor.Elements.π A.obj).op ⋙ (opOpEquivalence C).functor
 
 /-- The element-site topology: the finest topology making the projection to the original site
 continuous (Mathlib `Functor.inducedTopology`). The structure below states that it is the
@@ -111,7 +111,7 @@ Source: Stacks Project, sites.tex, Tag 0791
 def elementObjMap {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Sheaf J (Type u)) {U V : Cᵒᵖ} (f : U ⟶ V) (s : A.obj.obj U) :
     elementObj A U s ⟶ elementObj A V (A.obj.map f s) :=
-  (CategoryOfElements.homMk (A.obj.elementsMk U s) (A.obj.elementsMk V (A.obj.map f s)) f
+  (Functor.Elements.homMk (A.obj.elementsMk U s) (A.obj.elementsMk V (A.obj.map f s)) f
     rfl).op.op
 
 open Classical in
@@ -292,7 +292,7 @@ Source: Stacks Project, sites-modules.tex, Tag 04J4; sites.tex, Tag 0791
 def elementMap {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {B A : Sheaf J (Type u)} (b : B ⟶ A) :
     B.obj.Elementsᵒᵖ ⥤ A.obj.Elementsᵒᵖ :=
-  (CategoryOfElements.map b.hom).op
+  (NatTrans.mapElements b.hom).op
 
 /-- Module restriction along the induced map of element sites (relocalization at `B ⟶ A`).
 

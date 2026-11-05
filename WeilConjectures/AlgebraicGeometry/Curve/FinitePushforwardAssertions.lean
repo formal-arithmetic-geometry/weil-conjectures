@@ -56,7 +56,7 @@ private theorem finite_lowerStar_torsion {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFin
       (e.hom ≫ CategoryTheory.Limits.Pi.π M t.as) z
     dsimp only [e]
     rw [Etale.stalkIsoPi_hom]
-    erw [CategoryTheory.Limits.Pi.lift_π]
+    erw [CategoryTheory.Limits.Pi.lift_comp_π]
     exact congrFun hxz t.as
   intro x
   apply hφ.isOfFinAddOrder_iff.mp

@@ -141,7 +141,7 @@ theorem raw_abelian_section_kan_unit_relations
   have hφ (e : n.support) : φ (rel e.1) = 0 := by
     have hs : e.1.1 ∈ objs := (src e).2
     have ht : e.1.2.1 ∈ objs := (dst e).2
-    simp only [φ, rel, map_sub, DFinsupp.sumAddHom_single, m, dif_pos hs, dif_pos ht,
+    simp only [φ, rel, map_sub, DFinsupp.sumAddHom_single, m, dite_eq_left hs, dite_eq_left ht,
       sub_eq_zero]
     have hθ := (θ r b).naturality e.1.2.2.1.left
     have htri := hg e
@@ -171,7 +171,7 @@ theorem raw_abelian_section_kan_unit_relations
   refine ⟨r, b, ?_⟩
   have hbase : o ∈ objs := Finset.mem_insert_self _ _
   change ((θ r b).app (op U)).hom x = ((θ r b).app (op U)).hom x'
-  simp only [φ, map_sub, DFinsupp.sumAddHom_single, m, dif_pos hbase] at hz
+  simp only [φ, map_sub, DFinsupp.sumAddHom_single, m, dite_eq_left hbase] at hz
   change ((A r).map (g base).op).hom (((θ r b).app (op U)).hom x) -
     ((A r).map (g base).op).hom (((θ r b).app (op U)).hom x') = 0 at hz
   have : IsIso (g base) := by rw [hg₀]; infer_instance

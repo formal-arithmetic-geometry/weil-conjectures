@@ -31,7 +31,7 @@ private theorem exists_sequence_of_depth_eq
   have hdef : IsLocalRing.depth (R := R) M = sSup {k : ℕ∞ | ∃ fs : List R,
       RingTheory.Sequence.IsRegular M fs ∧
       (∀ f ∈ fs, f ∈ IsLocalRing.maximalIdeal R) ∧ k = (fs.length : ℕ∞)} := by
-    simp only [IsLocalRing.depth, Ideal.depth, if_neg hm]
+    simp only [IsLocalRing.depth, Ideal.depth, ite_eq_right hm]
   have hempty : RingTheory.Sequence.IsRegular (R := R) M [] := by
     simp [RingTheory.Sequence.isRegular_iff]
   let : Nonempty {k : ℕ∞ | ∃ fs : List R, RingTheory.Sequence.IsRegular M fs ∧

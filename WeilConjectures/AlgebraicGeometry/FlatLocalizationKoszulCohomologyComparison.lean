@@ -55,7 +55,7 @@ private theorem exact_natTrans_nilpotent
       rw [show cokernel.π t ≫ (s j).app (cokernel t) =
           (s j).app M ≫ cokernel.π t from (s j).naturality (cokernel.π t)]
       change (s j).app M ≫ cokernel.π t = 0
-      rw [← Sigma.ι_desc (fun j => (s j).app M) j]
+      rw [← Sigma.ι_comp_desc (fun j => (s j).app M) j]
       change (Sigma.ι (fun _ : Fin r => M) j ≫ t) ≫ cokernel.π t = 0
       simp
     have hN : ∀ l : List (Fin r), l.length = k →
@@ -72,7 +72,7 @@ private theorem exact_natTrans_nilpotent
       intro j
       change Sigma.ι (fun _ : Fin r => M) j ≫ t ≫ (scalarWord s l).app M =
         Sigma.ι (fun _ : Fin r => M) j ≫ 0
-      rw [← Category.assoc, Sigma.ι_desc, comp_zero]
+      rw [← Category.assoc, Sigma.ι_comp_desc, comp_zero]
       exact hk (j :: l) (by simp [hl])
     have := ih (Abelian.image t) hN
     have := base (cokernel t) hQ
@@ -109,7 +109,7 @@ private theorem tensor_unit_on_killed
     apply Sigma.hom_ext
     intro j
     dsimp only [t]
-    simp only [ι_comp_sigmaComparison_assoc, ← Functor.map_comp, Sigma.ι_desc,
+    simp only [ι_comp_sigmaComparison_assoc, ← Functor.map_comp, Sigma.ι_comp_desc,
       comp_zero]
     have h := hM j
     change (ρ_ M).inv ≫ M ◁ s j ≫ (ρ_ M).hom = 0 at h

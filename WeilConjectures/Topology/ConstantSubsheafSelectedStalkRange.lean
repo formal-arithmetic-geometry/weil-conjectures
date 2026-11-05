@@ -188,11 +188,11 @@ theorem constantSubsheaf_selected_stalk_range
   have hsel (i : Fin n) (hi : P i) :
       sf.map (Sigma.ι D i) ≫ h = sf.map (δ i) ≫ (eZ x).hom := by
     dsimp only [h, δ]
-    rw [← sf.map_comp_assoc, ← Category.assoc, hf, if_pos hi]
+    rw [← sf.map_comp_assoc, ← Category.assoc, hf, ite_eq_left hi]
     simp only [Functor.map_comp, Category.assoc]
   have hnsel (i : Fin n) (hi : ¬ P i) : sf.map (Sigma.ι D i) ≫ h = 0 := by
     dsimp only [h]
-    rw [← sf.map_comp_assoc, ← Category.assoc, hf, if_neg hi]
+    rw [← sf.map_comp_assoc, ← Category.assoc, hf, ite_eq_right hi]
     simp
   have hr : h.hom.range = S := by
     apply le_antisymm

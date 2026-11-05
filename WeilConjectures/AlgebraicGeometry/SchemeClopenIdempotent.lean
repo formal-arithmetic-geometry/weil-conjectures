@@ -175,8 +175,8 @@ theorem scheme_clopen_idempotent (X : Scheme.{u}) :
       apply ext
       intro x
       by_cases hx : x ∈ U.1
-      · rw [hf.2.1 x hx, hg, if_pos hx]
-      · rw [hf.2.2 x hx, hg, if_neg hx]
+      · rw [hf.2.1 x hx, hg, ite_eq_left hx]
+      · rw [hf.2.2 x hx, hg, ite_eq_right hx]
   · intro Y g e he
     have hp : IsIdempotentElem (g.appTop e) := he.map g.appTop.hom
     refine ⟨hp, ?_⟩

@@ -181,7 +181,7 @@ theorem goodCurvesPreimage_boundary
       rw [hz]
       simp only [v, Category.assoc, Scheme.Hom.comp_apply]
       change (Sigma.ι Y i ≫ a) _ = _
-      simp only [a, Sigma.ι_desc, Scheme.Hom.comp_apply]
+      simp only [a, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]
       rfl
     · rintro ⟨z, rfl⟩
       obtain ⟨i, y, hy⟩ := (sigmaOpenCover Y).exists_eq (pullback.fst ν W.ι z)
@@ -198,7 +198,7 @@ theorem goodCurvesPreimage_boundary
       rw [← hy]
       simp only [v, Category.assoc, Scheme.Hom.comp_apply]
       change _ = (Sigma.ι Y i ≫ a) _
-      simp only [a, Sigma.ι_desc, Scheme.Hom.comp_apply]
+      simp only [a, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]
       rfl
   let T' : ULift.{u} (Fin n) → Scheme.{u} := fun i ↦ T i.down
   let C' : ULift.{u} (Fin n) → Scheme.{u} := fun i ↦ Ybar i.down
@@ -214,7 +214,7 @@ theorem goodCurvesPreimage_boundary
   have hEc : E.hom ≫ c = Sigma.desc fun i ↦ p' i ≫ t' i := by
     apply Sigma.hom_ext
     intro i
-    rw [← Category.assoc, hE, Sigma.ι_desc, Sigma.ι_desc]
+    rw [← Category.assoc, hE, Sigma.ι_comp_desc, Sigma.ι_comp_desc]
   have hvE (i : ULift.{u} (Fin n)) :
       (v' i ≫ Sigma.ι C' i) ≫ E.hom = v i.down ≫ Sigma.ι Ybar i.down := by
     rw [Category.assoc, hE]

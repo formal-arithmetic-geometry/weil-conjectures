@@ -110,7 +110,7 @@ theorem exists_isKFlatResolution
     apply sub_eq_zero.mpr
     apply Limits.Sigma.hom_ext
     intro n
-    simp only [Category.assoc, Limits.Sigma.ι_desc_assoc, Limits.Sigma.ι_desc]
+    simp only [Category.assoc, Limits.Sigma.ι_comp_desc_assoc, Limits.Sigma.ι_comp_desc]
     exact (hcompat n).symm
   have hdesc : HomComplex.δ (-1) 0 (0 : HomComplex.Cochain (∐ E) G (-1)) =
       HomComplex.Cochain.ofHom (φ ≫ s) := by
@@ -141,7 +141,7 @@ theorem exists_isKFlatResolution
       have h := congrArg (fun g ↦ g.f i)
         (show Limits.Sigma.ι E n ≫ mappingCone.inr φ ≫ f = q n ≫ G.ιTruncLE (n : ℤ) by
           rw [hinr]
-          exact Limits.Sigma.ι_desc _ _)
+          exact Limits.Sigma.ι_comp_desc _ _)
       exact h
     have : Epi (((Limits.Sigma.ι E n).f i ≫ (mappingCone.inr φ).f i) ≫ f.f i) := by
       rw [Category.assoc, hcomp]

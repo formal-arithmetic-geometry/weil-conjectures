@@ -106,18 +106,18 @@ theorem gradedModule_quasicoherent_realization
         apply Sigma.hom_ext
         intro m
         change Sigma.ι G m ≫ Sigma.desc _ = Sigma.ι G m ≫ 0
-        rw [Sigma.ι_desc, show mu m k 0 = 0 from (muAdd m k).map_zero]
+        rw [Sigma.ι_comp_desc, show mu m k 0 = 0 from (muAdd m k).map_zero]
         simp
       map_add' := by
         intro b c
         apply Sigma.hom_ext
         intro m
         change Sigma.ι G m ≫ Sigma.desc _ = Sigma.ι G m ≫ (_ + _)
-        rw [Preadditive.comp_add, Sigma.ι_desc, Sigma.ι_desc, Sigma.ι_desc,
+        rw [Preadditive.comp_add, Sigma.ι_comp_desc, Sigma.ι_comp_desc, Sigma.ι_comp_desc,
           hmu_add, Preadditive.add_comp] }
   have hT (k m : ℕ) (b : graded k) :
       i m ≫ T k b = mu m k b ≫ i (m + k) := by
-    exact Sigma.ι_desc _ m
+    exact Sigma.ι_comp_desc _ m
   have transport {m n n' : ℕ} (hn : n = n')
       {q : G m ⟶ G n} {q' : G m ⟶ G n'} (hq : HEq q q') :
       q ≫ i n = q' ≫ i n' := by

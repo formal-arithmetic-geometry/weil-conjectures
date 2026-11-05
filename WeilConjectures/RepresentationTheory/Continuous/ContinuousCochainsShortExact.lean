@@ -294,7 +294,7 @@ theorem continuousCochains_shortExact
         ext g
         have hy : S.g.hom.hom (c g) = 0 := congrArg (fun f ↦ f g) hc
         change S.f.hom.hom (lift (c g)) = c g
-        simp only [lift, dif_pos hy]
+        simp only [lift, dite_eq_left hy]
         exact Classical.choose_spec (hex _ hy)
     · intro c
       let d : C((Fin n → G), (X 1).obj.V) :=

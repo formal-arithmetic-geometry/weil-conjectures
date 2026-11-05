@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.Algebra.Homology.SingleHomology
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Functorial objectwise injective resolutions -/
 

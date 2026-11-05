@@ -30,4 +30,4 @@ theorem IsDiscreteValuationRing.of_maximalIdeal_eq_span_singleton {R : Type*} [C
     rw [isField_iff_maximalIdeal_eq, h, Ideal.span_singleton_eq_bot]
     exact ht
   have hp : (maximalIdeal R).IsPrincipal := ⟨⟨t, h⟩⟩
-  exact ((IsDiscreteValuationRing.TFAE R hR).out 0 4).mpr hp
+  exact ((IsDiscreteValuationRing.TFAE R hR).out 1 5).mpr hp

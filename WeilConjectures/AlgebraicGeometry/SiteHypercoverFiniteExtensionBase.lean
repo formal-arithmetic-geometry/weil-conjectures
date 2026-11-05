@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
 public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
-import Mathlib.Data.Finite.Sigma
+import Mathlib.Basic.Finite.Sigma
 
 /-! # Definitions for finite split simplicial attachment
 

@@ -135,8 +135,7 @@ theorem TensorProduct.exists_includeLeft_eq_of_isIdempotentElem
   let M := AddSubmonoid.closure {x : R ⊗[A] Ω | ∃ e : R, IsIdempotentElem e ∧ ∃ ω : Ω,
     x = e ⊗ₜ ω}
   have hM (x : R ⊗[A] Ω) : x ∈ M := by
-    induction x using TensorProduct.induction_on with
-    | zero => exact M.zero_mem
+    induction x with
     | add x y hx hy => exact M.add_mem hx hy
     | tmul r ω =>
       induction hR r using Submodule.span_induction generalizing ω with

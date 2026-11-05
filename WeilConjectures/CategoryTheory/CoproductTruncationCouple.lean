@@ -215,7 +215,7 @@ theorem exists_coproduct_truncation_couple
       apply Sigma.hom_ext
       intro i
       dsimp only [T]
-      simp only [Sigma.ι_desc, Sigma.ι_mapIso_inv_assoc, Sigma.ι_desc_assoc]
+      simp only [Sigma.ι_comp_desc, Sigma.ι_mapIso_inv_assoc, Sigma.ι_comp_desc_assoc]
       change _ = (eD (L i) n).inv ≫ (t i).tD 0 n ≫ (eD N n).hom
       rw [htD i n, Iso.inv_hom_id_assoc]
     · intro p r
@@ -223,7 +223,7 @@ theorem exists_coproduct_truncation_couple
       apply Sigma.hom_ext
       intro i
       dsimp only [T]
-      simp only [Sigma.ι_desc, Sigma.ι_mapIso_hom_assoc, Sigma.ι_desc_assoc]
+      simp only [Sigma.ι_comp_desc, Sigma.ι_mapIso_hom_assoc, Sigma.ι_comp_desc_assoc]
       change (t i).tE p r = (eE (L i) p r).hom ≫ _ ≫ (eE N p r).inv
       rw [← Category.assoc, ← htE i p r, Category.assoc, Iso.hom_inv_id,
         Category.comp_id]

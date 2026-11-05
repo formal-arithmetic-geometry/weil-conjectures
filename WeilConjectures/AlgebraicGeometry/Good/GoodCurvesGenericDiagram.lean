@@ -252,7 +252,7 @@ theorem exists_good_curves_generic_diagram
   have hcomm (i : Fin n) : Sigma.ι Y i ≫ ν ≫ pullback.snd _ _ =
       j i ≫ q i ≫ Spec.map (CommRingCat.ofHom (algebraMap K (L i))) := by
     obtain ⟨_, _, _, _, _, _, _, _, _, hcp, hjp, _⟩ := hprops i
-    rw [hν, Sigma.ι_desc_assoc]
+    rw [hν, Sigma.ι_comp_desc_assoc]
     exact hcp.trans hjp.symm
   have hL (i : Fin n) : Module.Finite K (L i) ∧ Algebra.IsSeparable K (L i) :=
     ⟨(hprops i).1, (hprops i).2.1⟩
@@ -268,7 +268,7 @@ theorem exists_good_curves_generic_diagram
       IsThickening (pullback.snd ν W.ι) := by
     refine ⟨?_, hWthick⟩
     intro i
-    simpa only [hν, Sigma.ι_desc] using hWcomp i
+    simpa only [hν, Sigma.ι_comp_desc] using hWcomp i
   obtain ⟨U, hηU, V, g, hgfin, hgsurj, hgrad, T, Y', B', t, j', p', ν', hrest⟩ :=
     exists_spread_marked_curve_diagram f η hη K n L Y B j q ν
       ⟨hνfin, hνsurj⟩ hcomm hL hj hq W hW

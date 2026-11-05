@@ -298,7 +298,7 @@ private theorem stalkChainUnitCandidate_quasiIso {X Y : Scheme.{u}} (g : X ⟶ Y
     (pullbackRegularCone l E g) (stalkPullbackRegularConeIsLimit l E g)
     P (productIsProduct _) (pullbackUnitProduct l E g)
     (constantWeilPullbackRoosEndomorphism l E g)
-    (fun n ↦ Pi.lift_π (pullbackUnitLevel l E g) n)
+    (fun n ↦ Pi.lift_comp_π (pullbackUnitLevel l E g) n)
     (fun n ↦ (towerTransitionEndomorphism_eq_iff _ _).1 rfl n)
   let S := ShortComplex.mk (pullbackUnitProduct l E g)
     (constantWeilPullbackRoosEndomorphism l E g) hz

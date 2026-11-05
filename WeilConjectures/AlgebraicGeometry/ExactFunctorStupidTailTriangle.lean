@@ -42,7 +42,7 @@ private noncomputable def stupidTailι
   have hij' : i + 1 = j := hij
   by_cases hi : r ≤ i
   · have hj : r ≤ j := by omega
-    simp only [dif_pos hi, dif_pos hj]
+    simp only [dite_eq_left hi, dite_eq_left hj]
     dsimp only [HomologicalComplex.stupidTrunc]
     rw [HomologicalComplex.extend_d_eq _ e (he i hi) (he j hj)]
     rw [HomologicalComplex.restriction_d_eq K e (he i hi) (he j hj)]
@@ -59,7 +59,7 @@ private theorem stupidTailι_isIso_f
     IsIso ((stupidTailι K r).f i) := by
   classical
   dsimp only [stupidTailι]
-  simp only [dif_pos hi]
+  simp only [dite_eq_left hi]
   infer_instance
 
 /-- If the image complex is exact through r, its stupid tail fits into the triangle

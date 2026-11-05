@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.ModuleCat.Basic
-public import Mathlib.Logic.UnivLE
+public import Mathlib.Basic.UnivLE
 
 /-! # A universe bound from a nonzero etale module-sheaf section
 

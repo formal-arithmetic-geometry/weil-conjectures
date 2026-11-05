@@ -35,7 +35,6 @@ private theorem h1_baseChange
     apply LinearMap.ext
     intro z
     induction z with
-    | zero => simp
     | add x y hx hy => simp_all only [map_add]
     | tmul a x =>
       simp only [LinearMap.comp_apply, LinearMap.restrictScalars_apply,

@@ -90,7 +90,7 @@ private theorem exists_finite_free_local_monogenic_field_factor
         rw [hphiker, Ideal.map_le_iff_le_comap, hnA]
       exact (hmax.eq_of_le hn.ne_top hle).symm⟩
   have hlocalMap : IsLocalHom (algebraMap A B) :=
-    ((local_hom_TFAE (algebraMap A B)).out 4 0).mp
+    ((local_hom_TFAE (algebraMap A B)).out 5 1).mp
       (eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (maximalIdeal B)))
   refine ⟨B, inferInstance, hlocal, inferInstance, phi, inferInstance, inferInstance,
     hlocalMap, eq_maximalIdeal hmax, hphicomp, ?_⟩

@@ -90,7 +90,7 @@ lemma Scheme.bijective_appTop_sigmaι {ι : Type*} [Finite ι] (X : ι → Schem
       exact (adj.homEquiv _ (op B)).apply_symm_apply _
     refine ⟨ψ Polynomial.X, funext fun i ↦ mor_inj _ _ ?_⟩
     dsimp only
-    rw [← mor_comp, h1, Sigma.ι_desc]
+    rw [← mor_comp, h1, Sigma.ι_comp_desc]
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -296,7 +296,7 @@ lemma bijective_localSection_appTop :
   convert h using 1
   funext x a
   simp only [Function.comp_apply]
-  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Sigma.ι_desc]
+  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Sigma.ι_comp_desc]
 
 end Local
 

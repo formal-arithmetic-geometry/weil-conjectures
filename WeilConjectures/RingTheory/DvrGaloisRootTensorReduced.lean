@@ -70,13 +70,13 @@ theorem dvr_galois_root_tensor_reduced
     · intro k hk
       rw [Polynomial.natDegree_X_pow_sub_C] at hk
       simp only [Polynomial.coeff_sub, Polynomial.coeff_X_pow,
-        if_neg (Nat.ne_of_lt hk), zero_sub]
+        ite_eq_right (Nat.ne_of_lt hk), zero_sub]
       by_cases hk0 : k = 0
       · subst k
         simp [Polynomial.coeff_C]
       · simp [Polynomial.coeff_C, hk0]
     · simp only [Polynomial.coeff_sub, Polynomial.coeff_X_pow,
-        if_neg (Nat.ne_of_gt hnpos).symm, Polynomial.coeff_C_zero, zero_sub,
+        ite_eq_right (Nat.ne_of_gt hnpos).symm, Polynomial.coeff_C_zero, zero_sub,
         Ideal.span_singleton_pow, Ideal.mem_span_singleton, dvd_neg]
       simpa only [pow_one] using
         (pow_dvd_pow_iff hpi.ne_zero hpi.not_isUnit).not.mpr (by omega : ¬ 2 ≤ 1)

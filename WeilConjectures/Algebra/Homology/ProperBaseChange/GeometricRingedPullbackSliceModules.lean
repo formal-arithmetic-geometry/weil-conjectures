@@ -350,8 +350,7 @@ private noncomputable def sliceScalarSection
       map_smul' := by
         intro r z
         change t (r • z) = r • t z
-        induction z using TensorProduct.induction_on with
-        | zero => simp only [smul_zero, map_zero]
+        induction z with
         | add z z' hz hz' => simp only [smul_add, map_add, hz, hz']
         | tmul s m =>
           change t (r • (s ⊗ₜ[R₀.obj.obj V, (c₀.hom.app V).hom] m)) =

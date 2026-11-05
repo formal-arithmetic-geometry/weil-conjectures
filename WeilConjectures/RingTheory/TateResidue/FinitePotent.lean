@@ -145,7 +145,7 @@ theorem tateTrace_eq_trace_restrict {φ : Module.End k V} {U : Submodule k V} (h
     φ.tateTrace = trace k U (φ.restrict hφU) := by
   classical
   have hfp : φ.IsFinitePotent := ⟨n, hU.of_le hn⟩
-  rw [tateTrace, dif_pos hfp]
+  rw [tateTrace, dite_eq_left hfp]
   set N := Nat.find hfp
   have hN : (range (φ ^ N)).FG := Nat.find_spec hfp
   set m := max n N
@@ -203,7 +203,7 @@ theorem tateTrace_smul (c : k) (φ : Module.End k V) :
       refine ⟨(c⁻¹) ^ n • y, ?_⟩
       rw [smul_pow, LinearMap.smul_apply, map_smul, smul_smul, ← mul_pow, mul_inv_cancel₀ hc,
         one_pow, one_smul]
-    rw [tateTrace, dif_neg this, tateTrace, dif_neg hφ, mul_zero]
+    rw [tateTrace, dite_eq_right this, tateTrace, dite_eq_right hφ, mul_zero]
 
 theorem tateTrace_neg (φ : Module.End k V) : (-φ).tateTrace = -φ.tateTrace := by
   rw [← neg_one_smul k φ, tateTrace_smul, neg_one_mul]

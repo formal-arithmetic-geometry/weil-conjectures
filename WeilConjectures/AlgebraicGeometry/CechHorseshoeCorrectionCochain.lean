@@ -51,7 +51,7 @@ private theorem moduleCechZero_naturality {X : Scheme.{u}} {ι : Type u}
     FormalCoproduct.evalOp, AlgebraicTopology.alternatingCofaceMapComplex,
     AlgebraicTopology.AlternatingCofaceMapComplex.map]
   simp only [Category.assoc]
-  erw [Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+  erw [Pi.map_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
   ext x
   simp only [ModuleCat.comp_apply]
   exact PresheafOfModules.naturality_apply f.val _ x
@@ -78,8 +78,8 @@ private theorem moduleCechZero_d {X : Scheme.{u}} {ι : Type u}
   dsimp [moduleCechZero, FormalCoproduct.cosimplicialObjectFunctor,
     FormalCoproduct.evalOp, CosimplicialObject.δ]
   simp only [Category.assoc]
-  erw [Pi.lift_π, Pi.lift_π]
-  erw [Pi.lift_π_assoc, Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π, Pi.lift_comp_π]
+  erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π_assoc]
   congr 1
   erw [← F.presheafModuleCat.map_comp, ← F.presheafModuleCat.map_comp]
   congr 1
@@ -107,7 +107,7 @@ private theorem cechZeroπ {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     TopCat.Presheaf.cechComplexFunctorπ U F.presheafModuleCat 0 y) v) = _
   dsimp only [moduleCechZero, TopCat.Presheaf.cechComplexFunctorπ]
   rw [Category.assoc]
-  have hh := Pi.lift_π (fun w : Fin 1 → ι ↦
+  have hh := Pi.lift_comp_π (fun w : Fin 1 → ι ↦
     F.presheafModuleCat.map (homOfLE (le_top (a := ∏ᶜ fun l ↦ U (w l)))).op) y
   erw [hh]
   rfl

@@ -102,11 +102,11 @@ lemma isPullback_sigmaDesc_of_isGalois (A E : X.FiniteEtale) [IsGalois A] (a : (
       have h₁ := congrArg (· ≫ Limits.pullback.fst _ _) hxy'
       have h₂ := congrArg (· ≫ Limits.pullback.snd _ _) hxy'
       simp only [Category.assoc, φ, Limits.pullback.lift_fst, Limits.pullback.lift_snd,
-        Sigma.ι_desc, Category.comp_id] at h₁ h₂
+        Sigma.ι_comp_desc, Category.comp_id] at h₁ h₂
       subst h₂
       have hxs : x' ≫ A.obj.hom = s := by
         rw [← fiber_left_comp s x, ← hx', Category.assoc]
-        exact congrArg (x' ≫ ·) (Sigma.ι_desc (fun _ : (A ⟶ E) ↦ A.obj.hom) f).symm
+        exact congrArg (x' ≫ ·) (Sigma.ι_comp_desc (fun _ : (A ⟶ E) ↦ A.obj.hom) f).symm
       have hfg : f = g := by
         refine evaluation_injective_of_isConnected (fiber s) A E (pt x' hxs) ?_
         exact fiber_ext s h₁
@@ -126,7 +126,7 @@ lemma isPullback_sigmaDesc_of_isGalois (A E : X.FiniteEtale) [IsGalois A] (a : (
       have hC : ((z.left ≫ Limits.pullback.snd _ _) ≫
           Sigma.ι (fun _ : (A ⟶ E) ↦ A.obj.left) f) ≫ a' = s := by
         rw [Category.assoc]
-        exact (congrArg _ (Sigma.ι_desc _ _)).trans h₂
+        exact (congrArg _ (Sigma.ι_comp_desc _ _)).trans h₂
       refine ⟨Over.homMk (V := (Etale.forget X).obj C.obj) _ hC, fiber_ext s ?_⟩
       change ((z.left ≫ Limits.pullback.snd _ _) ≫
         Sigma.ι (fun _ : (A ⟶ E) ↦ A.obj.left) f) ≫ φ = z.left

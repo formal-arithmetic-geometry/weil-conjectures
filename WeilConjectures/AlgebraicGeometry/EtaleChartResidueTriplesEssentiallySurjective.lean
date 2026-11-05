@@ -75,7 +75,7 @@ theorem etale_chart_residue_triples_essentially_surjective
     let N := P.FullSubcategory
     let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom
     let NU := Q.FullSubcategory
-    let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+    let D := (P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
       Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
     let DU := Q.ι.op ⋙ D
     let T := EtaleResidueTriples A p K χ

@@ -66,7 +66,7 @@ noncomputable def powShift (e : A ⟶ A) : (∏ᶜ fun _ : ℕ ↦ A) ⟶ ∏ᶜ
 @[reassoc (attr := simp)]
 lemma powShift_π (e : A ⟶ A) (n : ℕ) :
     powShift e ≫ Pi.π (fun _ : ℕ ↦ A) n = Pi.π (fun _ : ℕ ↦ A) (n + 1) ≫ e :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 /-- `powShift` is natural with respect to morphisms compatible with the endomorphisms. -/
 @[reassoc]

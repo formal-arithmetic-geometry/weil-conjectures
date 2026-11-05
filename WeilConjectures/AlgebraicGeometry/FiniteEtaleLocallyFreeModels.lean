@@ -276,7 +276,7 @@ private theorem localProductComparison
   refine ⟨ε, ?_⟩
   intro P j
   dsimp only [ε, asIso_hom]
-  simp only [q, Pi.lift_π]
+  simp only [q, Pi.lift_comp_π]
   exact sheetUnit (upperStarLowerStarAdjunction Λ p) (a j) P
 
 private theorem locFree_push_of_comparison

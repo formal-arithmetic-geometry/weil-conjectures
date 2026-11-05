@@ -34,7 +34,7 @@ private theorem map_roos
   intro n
   rw [Category.assoc, piComparison_comp_π, ← E.map_comp]
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-    Category.id_comp, Pi.lift_π, E.map_sub, E.map_comp, Preadditive.comp_sub,
+    Category.id_comp, Pi.lift_comp_π, E.map_sub, E.map_comp, Preadditive.comp_sub,
     Category.assoc, piComparison_comp_π, piComparison_comp_π_assoc]
 
 private theorem model_exact_products (X : Scheme.{u})

@@ -98,19 +98,19 @@ theorem koszul_generator_homotopy
     else 0
   refine ⟨{ hom := h, zero := ?_, comm := ?_ }⟩
   · intro n m hnm
-    exact dif_neg hnm
+    exact dite_eq_right hnm
   · intro n
     cases n with
     | zero =>
       rw [Homotopy.dNext_zero_chainComplex, Homotopy.prevD_chainComplex]
-      simp only [h, dif_pos rfl, eqToHom_refl, Category.comp_id,
+      simp only [h, dite_eq_left rfl, eqToHom_refl, Category.comp_id,
         HomologicalComplex.zero_f_apply, add_zero, zero_add]
       simpa only [K, koszulComplex, HomologicalComplex.smul_f_apply,
         HomologicalComplex.id_f, ChainComplex.of_d] using
         (generatorWedge_zero_identity A r f i).symm
     | succ n =>
       rw [Homotopy.dNext_succ_chainComplex, Homotopy.prevD_chainComplex]
-      simp only [h, dif_pos rfl, eqToHom_refl, Category.comp_id,
+      simp only [h, dite_eq_left rfl, eqToHom_refl, Category.comp_id,
         HomologicalComplex.zero_f_apply, add_zero]
       simpa only [K, koszulComplex, HomologicalComplex.smul_f_apply,
         HomologicalComplex.id_f, ChainComplex.of_d] using

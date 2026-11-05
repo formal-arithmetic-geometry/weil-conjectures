@@ -264,8 +264,7 @@ private def restrictedTensorPresheafIso {R S : Sheaf J CommRingCat.{r}}
         map_add' := fun _ _ ↦ rfl
         map_smul' := by
           intro b z
-          induction z using TensorProduct.induction_on with
-          | zero => simp only [smul_zero]
+          induction z with
           | tmul s x => rfl
           | add z z' hz hz' => simpa only [smul_add] using congrArg₂ (· + ·) hz hz' }
     exact e.toModuleIso
@@ -273,8 +272,7 @@ private def restrictedTensorPresheafIso {R S : Sheaf J CommRingCat.{r}}
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s m =>
       change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom] M.val.map f m =

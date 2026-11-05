@@ -72,7 +72,7 @@ private noncomputable def cechSectionsIso.{v} {C : Type u} [Category.{v} C]
       (i ∘ θ.toOrderHom) ≫ P.map (Presheaf.cechNerveMap A i θ.toOrderHom).left.op) ≫
         Pi.π (fun y : Fin (m.len + 1) → I ↦ P.obj (op (Presheaf.cechNerveObj A y).left))
           z) c = _
-  rw [Pi.lift_π]
+  rw [Pi.lift_comp_π]
 
 /-- A short exact sequence of abelian étale sheaves is surjective on sections over `U`
 if the kernel has vanishing Čech H¹ on a cofinal system of coverings of `U`.

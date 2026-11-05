@@ -431,8 +431,8 @@ private theorem augmentation_naturality {P P' : CochainComplex (Modules R) ℤ}
     have h : unitProduct B ι P ≫ productMap B ι a = a ≫ unitProduct B ι P' := by
       apply Pi.hom_ext
       intro n
-      simp only [unitProduct, productMap, Category.assoc, Pi.map_π, Pi.lift_π_assoc,
-        Pi.lift_π]
+      simp only [unitProduct, productMap, Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc,
+        Pi.lift_comp_π]
       exact ((NatTrans.mapHomologicalComplex
         (tensorUnit (ι.app (op n))) (.up ℤ)).naturality a).symm
     exact congrArg (fun f ↦ f.f i) h

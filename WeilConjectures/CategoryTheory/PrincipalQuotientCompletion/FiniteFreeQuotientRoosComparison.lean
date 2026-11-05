@@ -641,7 +641,7 @@ private theorem arithmeticBlock
     CofinalRoos.block X (arithmeticEmbedding e he) = block e X.asFunctor := by
   apply Pi.hom_ext
   intro n
-  simp only [CofinalRoos.block, block, Pi.lift_π]
+  simp only [CofinalRoos.block, block, Pi.lift_comp_π]
   have hn : 1 ≤ e * (n + 1) := by nlinarith
   have hd : e * (n + 1 + 1) - 1 - (e * (n + 1) - 1) = e := by
     rw [Nat.mul_add, Nat.mul_one]
@@ -650,7 +650,7 @@ private theorem arithmeticBlock
     _) = _
   rw [hd]
   dsimp only [arithmeticEmbedding, OrderEmbedding.ofStrictMono]
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
   rfl
 
 private theorem arithmeticRoos

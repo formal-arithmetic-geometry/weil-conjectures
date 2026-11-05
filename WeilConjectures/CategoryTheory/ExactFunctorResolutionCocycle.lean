@@ -45,7 +45,7 @@ private noncomputable def comparisonExtension
         I.cochainComplex_d _ _ k (k + 1) rfl (by simp)]
       simp only [Functor.map_comp, Category.assoc,
         Iso.inv_hom_id_assoc]
-      simp only [Iso.map_inv_hom_id_assoc]
+      simp only [Iso.inv_hom_id_map_assoc]
       simpa only [Category.assoc, Functor.mapHomologicalComplex_obj_d] using
         congrArg (fun t ↦ L.map (R.cochainComplexXIso k k rfl).hom ≫ t ≫
           (I.cochainComplexXIso ((k + 1 : ℕ) : ℤ) (k + 1) rfl).inv)
@@ -101,7 +101,7 @@ theorem exactFunctor_resolution_cocycle_hom
       CochainComplex.singleFunctors,
       HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
       HomologicalComplex.single_map_f_self, Category.assoc,
-      Functor.comp_obj, Int.cast_ofNat_Int, Iso.map_inv_hom_id_assoc,
+      Functor.comp_obj, Int.cast_ofNat_Int, Iso.inv_hom_id_map_assoc,
       eqToIso_refl, Iso.refl_hom, Iso.refl_inv]
     erw [Category.id_comp, Category.id_comp, reassoc_of% he]
     erw [L.map_id, Category.id_comp, Category.id_comp, Category.id_comp]
@@ -136,7 +136,7 @@ theorem exactFunctor_resolution_cocycle_hom
   have hbc : (L.map b ≫ φ.f (q : ℤ)) ≫
       I.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0 := by
     simp only [b, φ, comparisonExtension_f, Functor.map_comp, Category.assoc,
-      Iso.map_inv_hom_id_assoc]
+      Iso.inv_hom_id_map_assoc]
     rw [I.cochainComplex_d (q : ℤ) ((q : ℤ) + 1) q (q + 1) rfl (by simp)]
     simp only [Iso.inv_hom_id_assoc, reassoc_of% hc, zero_comp]
   have hnum : (L.mapCochainComplexSingleFunctor 0).inv.app P ≫

@@ -88,7 +88,7 @@ private lemma cocone_snd_coordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) 
             biprod.snd := by
       obtain rfl := (ComplexShape.up ℤ).next_eq' hq
       dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-      rw [dif_pos hq]
+      rw [dite_eq_left hq]
     simp [roosχ, CochainComplex.mappingCocone.snd,
       CochainComplex.HomComplex.Cochain.leftShift_v, CochainComplex.mappingCone.snd,
       hs p (p + 1) rfl, show Int.negOnePow 2 = 1 by rfl]

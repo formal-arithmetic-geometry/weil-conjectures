@@ -357,7 +357,7 @@ theorem attachEnd_factor_mono
     apply (cancel_mono (image.ι α)).mp
     simp [Category.assoc, u, hfac]
   rw [h1, Category.assoc, attachEpi_oldEpi K hs V t r u.hom inferInstance ρ hρ]
-  simp only [h2, attachEnd, dif_neg hα]
+  simp only [h2, attachEnd, dite_eq_right hα]
   rfl
 
 /-- The top endomorphism can use an epi followed by any proper old-degree map.
@@ -460,19 +460,19 @@ noncomputable def attachmentMap
   classical
   by_cases hq : q.val < n + 1
   · by_cases hr : r.val < n + 1
-    · exact eqToHom (by simp only [attachmentTerm, dif_pos hr]) ≫
+    · exact eqToHom (by simp only [attachmentTerm, dite_eq_left hr]) ≫
         operator K (q := ⟨q.val, hq⟩) (r := ⟨r.val, hr⟩) α ≫
-          eqToHom (by simp only [attachmentTerm, dif_pos hq])
+          eqToHom (by simp only [attachmentTerm, dite_eq_left hq])
     · have hb := r.isLt
       have he : r = ⟨n + 1, Nat.lt_succ_self _⟩ := Fin.ext (by dsimp; omega)
       subst r
       exact eqToHom (by simp [attachmentTerm]) ≫ attachFace K V p ⟨q.val, hq⟩ α ≫
-        eqToHom (by simp only [attachmentTerm, dif_pos hq])
+        eqToHom (by simp only [attachmentTerm, dite_eq_left hq])
   · have hb := q.isLt
     have he : q = ⟨n + 1, Nat.lt_succ_self _⟩ := Fin.ext (by dsimp; omega)
     subst q
     by_cases hr : r.val < n + 1
-    · exact eqToHom (by simp only [attachmentTerm, dif_pos hr]) ≫
+    · exact eqToHom (by simp only [attachmentTerm, dite_eq_left hr]) ≫
         attachLift K hs V ⟨r.val, hr⟩ α ≫ eqToHom (by simp [attachmentTerm])
     · have hb := r.isLt
       have he : r = ⟨n + 1, Nat.lt_succ_self _⟩ := Fin.ext (by dsimp; omega)
@@ -526,7 +526,7 @@ theorem attachmentMap_id
     attachmentMap K hs V p q q (𝟙 _) = 𝟙 _ := by
   classical
   by_cases hq : q.val < n + 1
-  · simp only [attachmentMap, dif_pos hq]
+  · simp only [attachmentMap, dite_eq_left hq]
     have hmap : operator K (q := ⟨q.val, hq⟩) (r := ⟨q.val, hq⟩) (𝟙 _) = 𝟙 _ := by
       exact K.map_id _
     rw [hmap]

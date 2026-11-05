@@ -138,7 +138,7 @@ theorem IsAlphaSmall.coproduct (α : Cardinal.{v}) [Fact α.IsRegular]
   refine ⟨L, hL, Sigma.desc (fun i ↦ g i ≫ k i), ?_⟩
   apply Sigma.hom_ext
   intro i
-  rw [Sigma.ι_desc_assoc, Category.assoc]
+  rw [Sigma.ι_comp_desc_assoc, Category.assoc]
   have hk : k i ≫ Sigma.desc (fun j : L ↦ Sigma.ι Y j) =
       Sigma.desc (fun j : K i ↦ Sigma.ι Y j) := by
     apply Sigma.hom_ext
@@ -179,7 +179,7 @@ theorem IsAlphaCompact.coproduct (α : Cardinal.{v}) [Fact α.IsRegular]
     have ht : t ≫ Limits.Sigma.map b = e.inv ≫ f := by
       apply Sigma.hom_ext
       intro j
-      rw [Sigma.ι_desc_assoc, Category.assoc]
+      rw [Sigma.ι_comp_desc_assoc, Category.assoc]
       have hq : q j ≫ Limits.Sigma.map b = Limits.Sigma.map (a j) := by
         apply Sigma.hom_ext
         intro k

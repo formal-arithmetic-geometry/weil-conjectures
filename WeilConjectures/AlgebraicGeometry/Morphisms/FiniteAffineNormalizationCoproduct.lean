@@ -141,7 +141,7 @@ theorem finite_affine_normalization_coproduct
     intro i
     apply Hom.normalization.hom_ext (g i) _ _ b
     · simp [a, z, v, j]
-    · simp only [Sigma.ι_desc_assoc, Category.assoc]
+    · simp only [Sigma.ι_comp_desc_assoc, Category.assoc]
       rw [show z ≫ b = f.fromNormalization from f.normalizationDesc_comp v b hv]
       exact (g i).normalizationDesc_comp _ _ _
     · simp [b]

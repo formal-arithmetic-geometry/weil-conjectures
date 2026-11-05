@@ -146,7 +146,7 @@ instance _root_.Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable (K L : T
       ((algebraMap_isIntegral_iff (R := K) (A := L)).mpr inferInstance)
     have h2 : Surjective f := ⟨fun x ↦ ⟨IsLocalRing.closedPoint L, Subsingleton.elim _ _⟩⟩
     have h3 : UniversallyInjective f := by
-      refine ((tfae_universallyInjective f).out 1 0).mp ?_
+      refine ((tfae_universallyInjective f).out 2 1).mp ?_
       intro Ω _ g₁ g₂ hg
       rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢
       simp only [f, ← Spec.map_comp] at hg

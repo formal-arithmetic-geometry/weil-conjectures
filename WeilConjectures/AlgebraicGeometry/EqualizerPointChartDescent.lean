@@ -341,7 +341,7 @@ theorem equalizer_point_chart_descent
     intro z
     obtain ⟨p, a, ha⟩ := hy_surj z
     refine ⟨Sigma.ι (fun _ : P ↦ Spec (.of k)) p a, ?_⟩
-    simpa only [← Scheme.Hom.comp_apply, q, Sigma.ι_desc] using ha
+    simpa only [← Scheme.Hom.comp_apply, q, Sigma.ι_comp_desc] using ha
   have : IsIso q := (isIso_iff_isOpenImmersion_and_surjective q).2 ⟨‹_›, ‹_›⟩
   refine ⟨q, hq, ?_, ‹IsIso q›, ?_, ?_, ?_, ?_⟩
   · intro q' hq'
@@ -353,7 +353,7 @@ theorem equalizer_point_chart_descent
     · intro j
       apply Sigma.hom_ext
       intro p
-      simpa only [Sigma.ι_desc_assoc, q, Sigma.ι_desc, vj, Category.assoc]
+      simpa only [Sigma.ι_comp_desc_assoc, q, Sigma.ι_comp_desc, vj, Category.assoc]
         using (vj_point j p).symm
     · intro T j l a b hab
       apply (cancel_mono i).mp
@@ -368,7 +368,7 @@ theorem equalizer_point_chart_descent
       intro p
       rw [ι_sigmaSpec_assoc]
       change Sigma.ι (fun _ : P ↦ Spec (.of k)) p ≫ Sigma.desc y ≫ i ≫ s = _
-      rw [Sigma.ι_desc_assoc, ← Category.assoc, hy, hxs, ← Spec.map_comp]
+      rw [Sigma.ι_comp_desc_assoc, ← Category.assoc, hy, hxs, ← Spec.map_comp]
       symm
       convert Spec.map_id (.of k) using 2
       ext a
@@ -384,7 +384,7 @@ theorem equalizer_point_chart_descent
       apply Sigma.hom_ext
       intro p
       change Sigma.ι (fun _ : P ↦ Spec (.of k)) p ≫ Sigma.desc y ≫ i ≫ s = _
-      rw [Sigma.ι_desc_assoc, ← Category.assoc, hy, hxs, Sigma.ι_desc]
+      rw [Sigma.ι_comp_desc_assoc, ← Category.assoc, hy, hxs, Sigma.ι_comp_desc]
       exact (Spec.map_id (.of k)).symm
     have : Etale (q ≫ (i ≫ s)) := by
       rw [str]

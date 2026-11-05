@@ -104,7 +104,7 @@ theorem cechFirstSortingJunctionPrefixContribution (X : Scheme.{u}) {I : Type v}
         (((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧
           cechJunction σ τ a r = σ a) ∧ r.val ≤ a.val) ↔ r = a.castSucc := by
       simpa only [h, true_and] using prefix_junction_filter σ τ a r
-    simp only [hfilter, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+    simp only [hfilter, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
     have hh : cechJunction σ τ a ∘ a.castSucc.succAbove = τ :=
       prefix_junction_delete σ τ a h.2
     have hcomp :
@@ -134,15 +134,15 @@ theorem cechFirstSortingJunctionPrefixContribution (X : Scheme.{u}) {I : Type v}
             (Equiv.Perm.sign τ : ℤ) := by ring
         _ = _ := by rw [hsquare, one_mul]
     rw [hcoeff, hh]
-    exact (if_pos h).symm
+    exact (ite_eq_left h).symm
   · have h' : ¬ (cechStableSort t σ ∧
         (∀ k, k.val < a.val → τ k = σ k) ∧
         (∀ i j, a.val ≤ i.val → i < j → τ i < τ j)) := h
-    simp only [h', if_false]
+    simp only [h', ite_false]
     apply Finset.sum_eq_zero
     intro r _
     have hn : ¬ (((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧
         cechJunction σ τ a r = σ a) ∧ r.val ≤ a.val) := fun hr ↦ h hr.1.1
-    simp only [hn, if_false]
+    simp only [hn, ite_false]
 
 end AlgebraicGeometry.Scheme

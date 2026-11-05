@@ -79,7 +79,7 @@ noncomputable def proetaleSplitLabel {X V : Scheme.{u}} (p : V ⟶ X) [WeaklyEta
   Over.homMk (((proetaleSliceToOver p).obj W).hom ≫ Sigma.ι (fun _ : S ↦ V) s)
     ((Category.assoc _ _ _).trans
       ((congrArg (fun k : V ⟶ V ↦ ((proetaleSliceToOver p).obj W).hom ≫ k)
-        (Sigma.ι_desc (fun _ : S ↦ 𝟙 V) s)).trans (Category.comp_id _)))
+        (Sigma.ι_comp_desc (fun _ : S ↦ 𝟙 V) s)).trans (Category.comp_id _)))
 
 /-- The representability and overlap/descent-data part of the split presentation: natural
 bijections `rho` from maps over `V` into the labelled coproduct to the sections of `F`,
@@ -164,7 +164,7 @@ only finitely many components. It is open in that finite subcoproduct, which is 
 the finite affine-coproduct spectrum lemma, and is therefore quasi-affine; the empty open
 is handled by the empty subunion. In Lean, etaleness is
 `IsZariskiLocalAtSource.sigmaDesc (fun _ ↦ inferInstance)`, and surjectivity follows from
-`Sigma.ι_desc` (a labelled component is a section). -/
+`Sigma.ι_comp_desc` (a labelled component is a section). -/
 theorem proetaleConstantSplitDescentGeometry {V : Scheme.{u}} (S : Type w)
     [Small.{u} S] [IsAffine V] :
     IsSeparated (proetaleSplitCodiagonal V S) ∧

@@ -209,7 +209,7 @@ theorem exists_single_affine_wContractible_hypercover
       apply Sigma.hom_ext
       intro i
       simp only [Functor.comp_map, F, R, GeometryRealization.sheafRealization,
-        FormalCoproduct.eval_obj_map, Sigma.ι_desc_assoc,
+        FormalCoproduct.eval_obj_map, Sigma.ι_comp_desc_assoc,
         Function.comp_def, Category.assoc, familyMap]
       rw [hb m]
       rw [← Category.assoc, hb n]

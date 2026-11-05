@@ -321,11 +321,11 @@ noncomputable def matchingLift : ∀ {n : ℕ} {W : C} (x : Fin (n + 2) → (W �
 lemma matchingLift_π {n : ℕ} {W : C} (x : Fin (n + 2) → (W ⟶ U.obj n)) (hx : U.Compatible x)
     (i : Fin (n + 2)) : U.matchingLift x hx ≫ U.matchingπ n i = x i := by
   cases n with
-  | zero => exact Pi.lift_π x i
+  | zero => exact Pi.lift_comp_π x i
   | succ m =>
     change equalizer.lift (Pi.lift x) _ ≫ equalizer.ι (U.matchingLeft m) (U.matchingRight m) ≫
       Pi.π (fun _ : Fin (m + 3) ↦ U.obj (m + 1)) i = x i
-    rw [equalizer.lift_ι_assoc, Pi.lift_π]
+    rw [equalizer.lift_ι_assoc, Pi.lift_comp_π]
 
 lemma matching_hom_ext {n : ℕ} {W : C} {f g : W ⟶ U.matching n}
     (h : ∀ i, f ≫ U.matchingπ n i = g ≫ U.matchingπ n i) : f = g := by

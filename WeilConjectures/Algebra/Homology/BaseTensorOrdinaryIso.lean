@@ -63,8 +63,7 @@ theorem exists_baseTensorOrdinaryIso
   refine ⟨HomologicalComplex.Hom.isoOfComponents f ?_, ?_⟩
   · intro i j hij
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul b q =>
       change B at b
       change Q.X i at q

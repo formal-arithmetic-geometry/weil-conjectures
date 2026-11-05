@@ -162,8 +162,7 @@ private theorem adicTensor_projection {C : Type u} [SmallCategory C]
         ((adicModuleLimitIso J A S U).toLinearEquiv.lTensor F
           (TensorProduct.comm A _ _ x)) =
       TensorProduct.comm A _ _ (adicTensorComparison J A S U F x n) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero, Pi.zero_apply]
+  induction x with
   | tmul b f =>
     change f ⊗ₜ[A] ((limit.π (S ⋙ adicSectionModules J A U) (op n)).hom
       ((adicModuleLimitIso J A S U).hom.hom b)) =
@@ -233,8 +232,7 @@ private theorem adicSectionwiseFlatTensor {C : Type u} [SmallCategory C]
     change ((adicTransition J A S (n + 1) n (Nat.le_succ n) U).toLinearMap.rTensor F)
       (((adicProjection J A S (n + 1) U).toLinearMap.rTensor F) y) =
       ((adicProjection J A S n U).toLinearMap.rTensor F) y
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y with
     | tmul b f =>
       exact congrArg (fun z : adicTerm J A S n U ↦ z ⊗ₜ[A] f)
         (adicProjection_transition J A S (n + 1) n (Nat.le_succ n) U b)
@@ -620,8 +618,7 @@ theorem sectionwise_adic_algebra_limit
       (A ⧸ I ^ (n + 1))).1) hred
   refine ⟨adicSheafFlat J A (limit S) hsection, htensor, ?_, ?_, ?_, ?_⟩
   · intro U F G _ _ _ _ _ _ f x n
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x with
     | tmul b f => rfl
     | add x y hx hy => simp only [map_add, Pi.add_apply, hx, hy]
   · intro F _ _ _ U V g
@@ -629,8 +626,7 @@ theorem sectionwise_adic_algebra_limit
       fun n ↦ (adicRestriction J A (S.obj (op n)) g).toLinearMap,
       (fun b ↦ rfl), (fun n b ↦ rfl), ?_⟩
     intro x n
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x with
     | tmul b f =>
       change adicProjection J A S n V ((adicRestriction J A (limit S) g) b) ⊗ₜ[A] f =
         (adicRestriction J A (S.obj (op n)) g) (adicProjection J A S n U b) ⊗ₜ[A] f

@@ -234,7 +234,6 @@ theorem exists_comparison_tensor_cocones
       erw [hc, hb, hd, hm]
       clear hc hb hd hm
       induction b with
-      | zero => simp
       | tmul a b => simp
       | add b₁ b₂ h₁ h₂ => simp only [map_add, h₁, h₂]
     · apply RingHom.ext

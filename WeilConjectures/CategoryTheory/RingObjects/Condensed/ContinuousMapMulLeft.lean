@@ -64,8 +64,8 @@ noncomputable def continuousMapRingObjMulLeft (t : T) :
     continuousMapRingObj.{u} T ⟶ continuousMapRingObj T :=
   ⟨{ app _ := AddCommGrpCat.ofHom
         { toFun a := ULift.up (ContinuousMap.const _ t * a.down)
-          map_zero' := ULift.ext _ _ (mul_zero _)
-          map_add' a b := ULift.ext _ _ (mul_add _ a.down b.down) }
+          map_zero' := ULift.ext (mul_zero _)
+          map_add' a b := ULift.ext (mul_add _ a.down b.down) }
      naturality _ _ _ := rfl }⟩
 
 lemma continuousMapRingObjMulLeft_app_apply (t : T) (S : Profinite.{u}ᵒᵖ)
@@ -76,7 +76,7 @@ lemma continuousMapRingObjMulLeft_app_apply (t : T) (S : Profinite.{u}ᵒᵖ)
 lemma continuousMapRingObjMulLeft_one :
     continuousMapRingObjMulLeft.{u} T 1 = 𝟙 _ := by
   ext S a
-  exact ULift.ext _ _ (one_mul _)
+  exact ULift.ext (one_mul _)
 
 lemma nsmul_continuousMapRingObjMulLeft (n : ℕ) (t : T) :
     n • continuousMapRingObjMulLeft.{u} T t = continuousMapRingObjMulLeft T (n * t) := by
@@ -85,7 +85,7 @@ lemma nsmul_continuousMapRingObjMulLeft (n : ℕ) (t : T) :
       n • (continuousMapRingObjMulLeft T t).hom.app S :=
     (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙
       (evaluation _ _).obj S).map_nsmul
-  refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
   have hn (v : ULift.{u + 1} C(S.unop, T)) : (n • v).down s = n • v.down s := rfl
   rw [h]
   refine (hn _).trans ?_

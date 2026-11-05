@@ -120,7 +120,7 @@ private theorem moduleCechZero_naturality {X : Scheme.{u}} {ι : Type u}
     FormalCoproduct.evalOp, AlgebraicTopology.alternatingCofaceMapComplex,
     AlgebraicTopology.AlternatingCofaceMapComplex.map]
   simp only [Category.assoc]
-  erw [Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+  erw [Pi.map_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
   ext x
   simp only [ModuleCat.comp_apply]
   exact PresheafOfModules.naturality_apply f.val _ x
@@ -147,8 +147,8 @@ private theorem moduleCechZero_d {X : Scheme.{u}} {ι : Type u}
   dsimp [moduleCechZero, FormalCoproduct.cosimplicialObjectFunctor,
     FormalCoproduct.evalOp, CosimplicialObject.δ]
   simp only [Category.assoc]
-  erw [Pi.lift_π, Pi.lift_π]
-  erw [Pi.lift_π_assoc, Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π, Pi.lift_comp_π]
+  erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π_assoc]
   congr 1
   erw [← F.presheafModuleCat.map_comp, ← F.presheafModuleCat.map_comp]
   congr 1

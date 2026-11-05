@@ -251,7 +251,7 @@ noncomputable def freeπ {J : Type u} [DecidableEq J] (j : J) :
 @[reassoc (attr := simp)]
 lemma ιFree_freeπ {J : Type u} [DecidableEq J] (i j : J) :
     ιFree i ≫ (freeπ j : free (R := X.ringCatSheaf) J ⟶ _) = if i = j then 𝟙 _ else 0 :=
-  Sigma.ι_desc _ _
+  Sigma.ι_comp_desc _ _
 
 lemma free_hom_ext {I : Type u} {M : X.Modules} {f g : free (R := X.ringCatSheaf) I ⟶ M}
     (h : ∀ i, ιFree i ≫ f = ιFree i ≫ g) : f = g :=

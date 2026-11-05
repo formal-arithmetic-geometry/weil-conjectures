@@ -10,9 +10,9 @@ public import Mathlib.CategoryTheory.Limits.Indization.Category
 public import Mathlib.CategoryTheory.Limits.Lattice
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteMultiequalizer
 public import Mathlib.CategoryTheory.Sites.Continuous
-public import Mathlib.Data.Finite.Prod
-public import Mathlib.Data.Finite.Sigma
-public import Mathlib.Data.Finite.Sum
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Basic.Finite.Sigma
+public import Mathlib.Basic.Finite.Sum
 
 /-!
 # Sheafs in the pro category

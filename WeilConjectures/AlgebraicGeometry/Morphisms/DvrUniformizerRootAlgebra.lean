@@ -61,7 +61,7 @@ theorem dvr_uniformizer_root_algebra
         simp [f, Ne.symm hn.ne', Polynomial.coeff_X_pow]
       · simp [f, Polynomial.coeff_X_pow, ne_of_lt hi, Polynomial.coeff_C, hi0]
     · simp only [f, Polynomial.coeff_sub, Polynomial.coeff_X_pow,
-        Ne.symm hn.ne', if_false, Polynomial.coeff_C_zero, zero_sub,
+        Ne.symm hn.ne', ite_false, Polynomial.coeff_C_zero, zero_sub,
         Ideal.neg_mem_iff, Ideal.span_singleton_pow, Ideal.mem_span_singleton]
       rintro ⟨b, hb⟩
       have hb' : 1 = pi * b := mul_left_cancel₀ hpi.ne_zero (by

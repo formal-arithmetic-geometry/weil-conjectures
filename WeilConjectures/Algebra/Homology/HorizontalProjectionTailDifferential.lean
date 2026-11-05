@@ -53,7 +53,7 @@ private theorem totalProjection_tail_differential
         (h, (m - h) + 1) = m + 1 by change h + ((m - h) + 1) = m + 1; omega)]
     simp only [horizontalTotalProjection, ι_totalDesc, ι_totalDesc_assoc]
     have hne : h + 1 ≠ p := by omega
-    simp only [dif_neg hne, comp_zero,
+    simp only [dite_eq_right hne, comp_zero,
       smul_zero, zero_add]
     by_cases he : h = p
     · subst h
@@ -114,11 +114,11 @@ theorem horizontalProjection_tail_differential
       have hn : (m + 1).toNat = m.toNat + 1 := by omega
       have hpi : ((m.toNat - p : ℕ) : ℤ) = i := by omega
       have hpj : (((m + 1).toNat - p : ℕ) : ℤ) = j := by omega
-      rw [coneHorizontalSummand, dif_pos hm,
+      rw [coneHorizontalSummand, dite_eq_left hm,
         HomologicalComplex.extend_d_eq _ _ (Int.toNat_of_nonneg hm)
           (Int.toNat_of_nonneg hm'),
         HomologicalComplex.extend_d_eq _ _ hpi hpj]
-      simp only [horizontalExtendedProjection, dif_pos hp', dif_pos hp'',
+      simp only [horizontalExtendedProjection, dite_eq_left hp', dite_eq_left hp'',
         Category.assoc, Iso.inv_hom_id_assoc]
       erw [extendIso_inv_transport, extendIso_inv_transport_assoc]
       simp only [Iso.inv_hom_id_assoc]

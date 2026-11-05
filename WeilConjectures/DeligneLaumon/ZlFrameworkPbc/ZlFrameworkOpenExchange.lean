@@ -128,9 +128,9 @@ theorem frameworkPullChain_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
     apply Pi.hom_ext
     intro n
     simp only [α, scalarRoosBoundary, towerTransitionEndomorphism, towerProductShift,
-      Preadditive.comp_sub, Category.comp_id, Category.assoc, Pi.lift_π,
+      Preadditive.comp_sub, Category.comp_id, Category.assoc, Pi.lift_comp_π,
       Preadditive.sub_comp, zero_comp]
-    rw [← Category.assoc, Pi.lift_π]
+    rw [← Category.assoc, Pi.lift_comp_π]
     exact sub_eq_zero.mpr (hγ n).symm
   let ξ := CochainComplex.mappingCocone.lift (scalarRoosBoundary C) α 0 (by simp [hα])
   have hξ : FrameworkPullChainSpec l E h P ξ := by
@@ -138,7 +138,7 @@ theorem frameworkPullChain_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
     · intro n i V x
       have hf : ξ ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary C) ≫
           Pi.π (fun n : ℕ ↦ C.obj (op n)) n = γ n := by
-        rw [← Category.assoc, CochainComplex.mappingCocone.lift_fst, Pi.lift_π]
+        rw [← Category.assoc, CochainComplex.mappingCocone.lift_fst, Pi.lift_comp_π]
       exact (congrArg (fun f ↦ (f.f i).val.app (op ((proEtaleBaseChange h).obj V))
         (((proEtaleRingModuleAdjunction h ((completed l E).ring T)
           ((completed l E).ring U) ((completed l E).pull h)).unit.app (P.X i)).val.app

@@ -167,8 +167,7 @@ private theorem baseEndHom_scalar (φ : R →+* S) (M : ModuleCat.{w} R) (r : R)
   let : Algebra R S := φ.toAlgebra
   ext x
   change (LinearMap.baseChange S (algebraMap R (Module.End R M) r)) x = r • x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a m => simp [Module.algebraMap_end_apply, TensorProduct.tmul_smul]
   | add x y hx hy => simp [hx, hy, smul_add]
 

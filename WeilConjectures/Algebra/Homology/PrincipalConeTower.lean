@@ -70,7 +70,7 @@ theorem productUnit_comp : productUnit μ ≫ oneSubShift μ = 0 := by
   intro n
   simp only [oneSubShift, towerTransitionEndomorphism, Preadditive.comp_sub,
     Category.comp_id, Preadditive.sub_comp, towerProductShift, Category.assoc,
-    Pi.lift_π, productUnit, Pi.lift_π_assoc, compatible, sub_self, zero_comp]
+    Pi.lift_comp_π, productUnit, Pi.lift_comp_π_assoc, compatible, sub_self, zero_comp]
 
 /-- The strict Roos completion of the cone tower.
 Source: Stacks 0941 (auxiliary; not a blueprint node). -/

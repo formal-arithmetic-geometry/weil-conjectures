@@ -148,7 +148,7 @@ of length n+2 to t composed with j.succAbove. Its component is Pi.lift of
 the retained product projections. The extension of a presheaf to formal
 coproducts sends this face to Pi.lift of the source projection followed by
 restriction along that component. Composing with the projection at the
-constant-zero tuple and applying Pi.lift_π selects that restriction. The
+constant-zero tuple and applying Pi.lift_comp_π selects that restriction. The
 source tuple is again constant zero. The lifted tensor-section presheaf
 maps the component by ULift of etaleTensorSectionsRestriction, so taking
 down gives the displayed equation. This is a statement about every section,

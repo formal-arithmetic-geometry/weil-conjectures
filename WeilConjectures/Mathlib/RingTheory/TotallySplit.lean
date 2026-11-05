@@ -67,7 +67,6 @@ lemma equalizer_map_pi_eq_fixedPoints [_root_.Finite ι] (σ : ι → A →ₐ[R
         (Algebra.TensorProduct.map (AlgHom.id T T) (AlgHom.pi τ) x) =
         fun i ↦ Algebra.TensorProduct.map (AlgHom.id T T) (τ i) x := by
     induction x with
-    | zero => simp; rfl
     | tmul t a => ext i; simp
     | add x y hx hy => simp only [map_add, hx, hy]; rfl
   ext x
@@ -607,13 +606,11 @@ theorem injective_and_mem_range_of_isPushout {R S A B A' B' : Type*} [CommRing R
   let αS : S ⊗[R] B →ₐ[S] S ⊗[R] A := Algebra.TensorProduct.map (AlgHom.id S S) α
   have hcomm (z : S ⊗[R] B) : α' (eB z) = eA (αS z) := by
     induction z with
-    | zero => simp
     | tmul s y =>
       simp [eA, eB, αS, Algebra.IsPushout.equiv_tmul, h₁, h₂]
     | add z z' hz hz' => simp only [map_add, hz, hz']
   have hσ (i : ι) (z : S ⊗[R] A) : σ' i (eA z) = eA (baseChangeFamily S σ i z) := by
     induction z with
-    | zero => simp
     | tmul s x => simp [eA, Algebra.IsPushout.equiv_tmul, h₁', h₂']
     | add z z' hz hz' => simp only [map_add, hz, hz']
   have hαS : Function.Injective αS :=
@@ -645,7 +642,6 @@ theorem injective_and_mem_range_of_isPushout {R S A B A' B' : Type*} [CommRing R
     rw [← hz']
     clear hz hz'
     induction z with
-    | zero => simp
     | tmul s x => simp [αS, hβ]
     | add z z' hz hz' => simp only [map_add, hz, hz', Subalgebra.coe_add]
 

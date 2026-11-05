@@ -145,13 +145,13 @@ theorem exists_small_finiteSubsum_diagram (X : Scheme.{u}) (I : Type v)
   obtain ⟨b, rfl⟩ := E.surjective j
   have hz : Sigma.ι H b ≫ z.hom = biproduct.ι (fun j : J ↦ F j) (E b) := by
     simp only [z, Iso.trans_hom, Iso.symm_hom,
-      biproduct.isoCoproduct_inv, Sigma.ι_desc_assoc, biproduct.whiskerEquiv_hom,
+      biproduct.isoCoproduct_inv, Sigma.ι_comp_desc_assoc, biproduct.whiskerEquiv_hom,
       biproduct.ι_desc, w, Iso.refl_inv]
     exact Category.id_comp _
   rw [← hz]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   change Sigma.ι H b ≫ (Sigma.desc (fun b : a ↦ Sigma.ι G b.val.as) ≫ q.hom) = _
-  rw [Sigma.ι_desc_assoc]
+  rw [Sigma.ι_comp_desc_assoc]
   exact IsColimit.comp_coconePointUniqueUpToIso_hom
     (colimit.isColimit (Discrete.functor G)) ht (Discrete.mk b.val.as)
 

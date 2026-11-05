@@ -191,7 +191,7 @@ lemma cofanOfIsZero_inj (j : J) :
     (cofanOfIsZero X ι).inj (ι j) = Sigma.ι (X ∘ ι) j := by
   dsimp [cofanOfIsZero]
   have hi : ι j ∈ Set.range ι := ⟨j, rfl⟩
-  rw [dif_pos hi]
+  rw [dite_eq_left hi]
   apply Sigma.eqToHom_comp_ι (X ∘ ι)
   exact (hι hi.choose_spec).symm
 
@@ -261,7 +261,7 @@ noncomputable def cofanOfIsZeroButOne : Cofan X := Cofan.mk (X i)
 @[simp]
 lemma cofanOfIsZeroButOne_ι_self :
     (cofanOfIsZeroButOne X i hX).inj i = 𝟙 _ :=
-  dif_pos rfl
+  dite_eq_left rfl
 
 set_option backward.defeqAttrib.useBackward true in
 noncomputable def isColimitCofanOfIsZeroButOne :

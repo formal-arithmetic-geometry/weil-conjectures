@@ -154,9 +154,9 @@ private theorem productIso_square
     _ ≫ (shiftFunctor (CochainComplex A ℤ) r).map (Pi.π _ n)
   rw [Category.assoc, productIso_π, ← Category.assoc]
   simp only [completedTensorShiftOneSub, towerTransitionEndomorphism, towerProductShift,
-    Preadditive.sub_comp, Category.id_comp, Pi.lift_π, Category.assoc]
+    Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π, Category.assoc]
   rw [← Functor.map_comp]
-  simp only [Preadditive.sub_comp, Category.id_comp, Pi.lift_π, Functor.map_sub,
+  simp only [Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π, Functor.map_sub,
     Functor.map_comp, Preadditive.comp_sub, productIso_π]
   rw [← Category.assoc (completedTensorShiftProductIso C D r α).hom, productIso_π]
   simp only [Category.assoc]

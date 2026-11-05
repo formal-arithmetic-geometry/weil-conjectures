@@ -1043,8 +1043,7 @@ private theorem tensor_completion_comparison
     exact hright.symm
   have hfg : (f : B ⊗[A] R → T) = g := by
     funext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp [g]
+    induction x with
     | tmul b r => exact hmap b r
     | add x y hx hy => simp only [map_add, hx, hy, g]
   exact hfg ▸ hg

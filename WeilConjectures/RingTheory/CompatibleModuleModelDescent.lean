@@ -143,8 +143,7 @@ theorem exists_eventually_compatible_module_equiv
     intro j
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       change F.map (homOfLE (le_refl j.val)) a ⊗ₜ[F.obj i] b = a ⊗ₜ[F.obj i] b
       simp
@@ -154,8 +153,7 @@ theorem exists_eventually_compatible_module_equiv
     intro j l m hjl hlm
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       change F.map (homOfLE hlm) (F.map (homOfLE hjl) a) ⊗ₜ[F.obj i] b =
         F.map (homOfLE (hjl.trans hlm)) a ⊗ₜ[F.obj i] b
@@ -166,8 +164,7 @@ theorem exists_eventually_compatible_module_equiv
     intro j l hjl
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       simp only [f, g, RingHom.comp_apply, AlgHom.toRingHom_eq_coe]
       exact congrArg (fun x : c.pt ↦ x ⊗ₜ[F.obj i] b)

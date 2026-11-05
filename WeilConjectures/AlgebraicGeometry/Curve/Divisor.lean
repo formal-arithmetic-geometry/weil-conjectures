@@ -132,7 +132,7 @@ theorem finite_setOf_ord_ne_zero {f : X.functionField} (hf : f ≠ 0) :
   obtain ⟨t, htS, hxt⟩ : x ∈ ⋃₀ S := hSU ▸ hxW
   refine ⟨t, htS, ?_⟩
   have hgt : IsGenericPoint (g t) t := by
-    simp only [g, dif_pos (hSi t htS)]
+    simp only [g, dite_eq_left (hSi t htS)]
     exact (hSi t htS).isGenericPoint_genericPoint (hSc t htS)
   by_contra hne
   have hgW : g t ∉ W := by

@@ -73,11 +73,9 @@ lemma baseChangeReprAux_tmul (x : k') (y : B) (i : ι) :
 lemma baseChangeReprAux_smul (r : k' ⊗[k] R) (y : k' ⊗[k] B) :
     baseChangeReprAux b (r • y) = r • baseChangeReprAux b y := by
   induction r with
-  | zero => simp
   | add r r' hr hr' => simp only [add_smul, map_add, hr, hr']
   | tmul x r =>
     induction y with
-    | zero => simp
     | add y y' hy hy' => simp only [smul_add, map_add, hy, hy']
     | tmul x' c =>
       ext i
@@ -131,7 +129,6 @@ lemma baseChange_linearMap_ext {M : Type*} [AddCommGroup M] [Module (k' ⊗[k] R
     {f g : (k' ⊗[k] B) →ₗ[k' ⊗[k] R] M} (h : ∀ c : B, f (1 ⊗ₜ c) = g (1 ⊗ₜ c)) : f = g := by
   refine LinearMap.ext fun y ↦ ?_
   induction y with
-  | zero => simp
   | add y y' hy hy' => rw [map_add, map_add, hy, hy']
   | tmul x c =>
     have : x ⊗ₜ[k] c = (x ⊗ₜ[k] (1 : R)) • ((1 : k') ⊗ₜ[k] c) := by
@@ -145,11 +142,9 @@ noncomputable def baseChangeLinearMap (φ : B →ₗ[R] R) :
   map_add' := map_add _
   map_smul' r y := by
     induction r with
-    | zero => simp
     | add r r' hr hr' => simp only [add_smul, map_add, hr, hr', RingHom.id_apply]
     | tmul x r =>
       induction y with
-      | zero => simp
       | add y y' hy hy' => simp only [smul_add, map_add, hy, hy']
       | tmul x' c =>
         rw [baseChangeAlgebra_smul_tmul, LinearMap.baseChange_tmul, LinearMap.baseChange_tmul,
@@ -171,11 +166,9 @@ variable {k R : Type*} [CommRing k] [CommRing R] [Algebra k R] (k' : Type*) [Com
 noncomputable def baseChange : Derivation k' (k' ⊗[k] R) (k' ⊗[k] R) :=
   Derivation.mk' ((D : R →ₗ[k] R).baseChange k') fun a c ↦ by
     induction a with
-    | zero => simp
     | add a a' ha ha' => simp only [add_mul, map_add, ha, ha', add_smul, smul_add]; abel
     | tmul x r =>
       induction c with
-      | zero => simp
       | add c c' hc hc' => simp only [mul_add, map_add, hc, hc', smul_add, add_smul]; abel
       | tmul x' r' =>
         simp only [Algebra.TensorProduct.tmul_mul_tmul, LinearMap.baseChange_tmul,
@@ -285,7 +278,6 @@ theorem bijective_liftKaehlerDifferential_traceDerivation_of_baseChange (l : k' 
       liftKaehlerDifferential_traceDerivation_map, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
   have key (z : k' ⊗[k] Ω[B⁄k]) (c : B) : Λ (Ψ' (E z) (1 ⊗ₜ c)) = Ψ (L z) c := by
     induction z with
-    | zero => simp
     | add z z' hz hz' => simp only [map_add, LinearMap.add_apply, hz, hz']
     | tmul x ω =>
       rw [hE, hΛ, hL, LinearMap.map_smul_of_tower, LinearMap.smul_apply]
@@ -311,7 +303,6 @@ lemma exists_smul_eq_smul_baseChange [Algebra.IsIntegral k k']
       s • ω = b • ω₀ := by
   have : Algebra.IsIntegral B (k' ⊗[k] B) := ⟨fun y ↦ by
     induction y with
-    | zero => exact isIntegral_zero
     | add y y' hy hy' => exact hy.add hy'
     | tmul x b =>
       have hx : IsIntegral B (x ⊗ₜ[k] (1 : B)) :=
@@ -325,7 +316,6 @@ lemma exists_smul_eq_smul_baseChange [Algebra.IsIntegral k k']
   refine ⟨KaehlerDifferential.map k k' B (k' ⊗[k] B) ω₀, algebraMap B _ s, hs, fun ω ↦ ?_⟩
   obtain ⟨z, rfl⟩ := (tensorKaehlerEquivBase k k' B (k' ⊗[k] B)).surjective ω
   induction z with
-  | zero => exact ⟨0, by simp⟩
   | add z z' hz hz' =>
     obtain ⟨b, hb⟩ := hz
     obtain ⟨b', hb'⟩ := hz'
@@ -357,7 +347,6 @@ lemma exists_mem_nonZeroDivisors_smul_eq_zero_baseChange [Module.Flat k k']
     have hmul (z : k' ⊗[k] B) :
         ((LinearMap.mulRight k s).lTensor k') z = z * algebraMap B _ s := by
       induction z with
-      | zero => simp
       | add z z' hz hz' => rw [map_add, hz, hz', add_mul]
       | tmul x b => simp [TensorProduct.right_algebraMap_apply,
           Algebra.TensorProduct.tmul_mul_tmul]
@@ -372,7 +361,6 @@ lemma exists_mem_nonZeroDivisors_smul_eq_zero_baseChange [Module.Flat k k']
     | mem x hx =>
       obtain ⟨y, rfl⟩ := hx
       induction y with
-      | zero => simp
       | add y y' hy hy' => rw [map_add, smul_add, hy, hy', add_zero]
       | tmul x b =>
         have : x ⊗ₜ[k] b = (x ⊗ₜ[k] (1 : R)) • ((1 : k') ⊗ₜ[k] b) := by

@@ -215,7 +215,7 @@ noncomputable def ihomBiproductBicone {n : ℕ} (M : Fin n → Mod C A) (N : Mod
     by_cases h : i = j
     · subst h
       simp [ihomMap_id]
-    · rw [biproduct.ι_π_ne _ (Ne.symm h), dif_neg h]
+    · rw [biproduct.ι_π_ne _ (Ne.symm h), dite_eq_right h]
       exact congrArg (NatTrans.app · N) ((ihomMapAddHom _ _).map_zero)
 
 /-- **`Hom_A(-, N)` takes finite direct sums to direct sums.** -/

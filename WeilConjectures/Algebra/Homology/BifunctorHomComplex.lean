@@ -72,7 +72,7 @@ lemma d_π (K : CochainComplex C ℤ) (Y : CochainComplex D ℤ) (n m p q : ℤ)
           (H.map (K.d p p').op).app _) := by
   subst hq'
   obtain rfl : p' = p + m - n := by lia
-  simp only [d, Pi.lift_π]
+  simp only [d, Pi.lift_comp_π]
 
 variable [∀ X, (H.obj X).Additive] [H.Additive] (K : CochainComplex C ℤ)
   (Y : CochainComplex D ℤ)
@@ -139,7 +139,7 @@ lemma bifunctorHomLift_π {A : E} (n : ℤ)
     (f : ∀ p q (_ : p + n = q), A ⟶ (H.obj (op (K.X p))).obj (Y.X q)) (p q : ℤ)
     (hpq : p + n = q) :
     bifunctorHomLift H K Y n f ≫ bifunctorHomπ H K Y n p q hpq = f p q hpq :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 /-- The components of the differential of the hom complex. -/
 @[reassoc]

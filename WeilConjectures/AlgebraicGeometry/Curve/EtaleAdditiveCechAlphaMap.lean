@@ -55,7 +55,7 @@ private lemma rowRestriction_horizontal {X : Scheme.{u}} {ι : Type u}
           (additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l)) ⟶
             Scheme.Etale.mk (𝟙 X)).op := by
     rw [← Category.assoc]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
     dsimp only [Functor.comp_map, Functor.op_map]
     rw [← Functor.map_comp]
     congr 1
@@ -79,8 +79,8 @@ private lemma rowRestriction_vertical {X : Scheme.{u}} {ι : Type u}
   rw [Category.assoc]
   erw [Pi.map_π]
   rw [← Category.assoc]
-  erw [Pi.lift_π]
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
+  erw [Pi.lift_comp_π]
   exact (I.cocomplex.d n m).hom.naturality _
 
 /-- Restriction into the degree-zero Čech column is a cochain map for any open family.

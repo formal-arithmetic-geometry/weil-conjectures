@@ -102,7 +102,7 @@ lemma id_sub_telescopeShift_f_comp (i : ℤ) :
         DirectSum.telescopeShift _ (monotone_subcomplexFamily_N hN i)) := by
   refine sigmaSubcomplex_hom_ext N fun n ↦ ?_
   rw [← HomologicalComplex.comp_f_assoc, ι_sigmaSubcomplexXIso_hom_assoc,
-    Preadditive.comp_sub, Category.comp_id, telescopeShift, Sigma.ι_desc,
+    Preadditive.comp_sub, Category.comp_id, telescopeShift, Sigma.ι_comp_desc,
     HomologicalComplex.sub_f_apply, Preadditive.sub_comp, HomologicalComplex.comp_f,
     Category.assoc, ι_sigmaSubcomplexXIso_hom, ι_sigmaSubcomplexXIso_hom]
   refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
@@ -115,7 +115,7 @@ lemma sigmaDesc_subcomplexι_f (i : ℤ) :
     (Sigma.desc fun n ↦ subcomplexι (N n)).f i = (sigmaSubcomplexXIso N i).hom ≫
       ModuleCat.ofHom (DirectSum.telescopeSum fun n ↦ (N n).N i) := by
   refine sigmaSubcomplex_hom_ext N fun n ↦ ?_
-  rw [← HomologicalComplex.comp_f, Sigma.ι_desc, ι_sigmaSubcomplexXIso_hom_assoc]
+  rw [← HomologicalComplex.comp_f, Sigma.ι_comp_desc, ι_sigmaSubcomplexXIso_hom_assoc]
   refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
   exact (DirectSum.telescopeSum_lof (N := fun n ↦ (N n).N i) n x).symm
 
@@ -179,13 +179,13 @@ def truncFamily (m : ℕ) : L.SubcomplexFamily where
   map_d_le i := by
     rintro _ ⟨x, hx, rfl⟩
     by_cases h₁ : -(m : ℤ) ≤ i + 1 ∧ i + 1 < m
-    · rw [if_pos h₁]
+    · rw [ite_eq_left h₁]
       exact Submodule.mem_top
-    · rw [if_neg h₁]
+    · rw [ite_eq_right h₁]
       by_cases h₂ : i + 1 = m
-      · rw [if_pos h₂, LinearMap.mem_ker, ← ModuleCat.comp_apply, L.d_comp_d]
+      · rw [ite_eq_left h₂, LinearMap.mem_ker, ← ModuleCat.comp_apply, L.d_comp_d]
         rfl
-      · rw [if_neg h₂]
+      · rw [ite_eq_right h₂]
         split_ifs at hx with h₃ h₄
         · lia
         · rw [LinearMap.mem_ker.1 hx]
@@ -222,13 +222,13 @@ instance isStrictlyGE_subcomplex_truncFamily (m : ℕ) :
     (subcomplex (truncFamily L m)).IsStrictlyGE (-m) :=
   isStrictlyGE_subcomplex fun n hn ↦ by
     dsimp only [truncFamily]
-    rw [if_neg (by lia), if_neg (by lia)]
+    rw [ite_eq_right (by lia), ite_eq_right (by lia)]
 
 instance isStrictlyLE_subcomplex_truncFamily (m : ℕ) :
     (subcomplex (truncFamily L m)).IsStrictlyLE m :=
   isStrictlyLE_subcomplex fun n hn ↦ by
     dsimp only [truncFamily]
-    rw [if_neg (by lia), if_neg (by lia)]
+    rw [ite_eq_right (by lia), ite_eq_right (by lia)]
 
 end Truncation
 
@@ -272,7 +272,7 @@ instance isIso_subcomplexι_stupidTruncGEFamily (a : ℤ) [L.IsStrictlyGE a] :
 
 instance isStrictlyGE_subcomplex_stupidTruncGEFamily (a : ℤ) :
     (subcomplex (stupidTruncGEFamily L a)).IsStrictlyGE a :=
-  isStrictlyGE_subcomplex fun n hn ↦ if_neg (by lia)
+  isStrictlyGE_subcomplex fun n hn ↦ ite_eq_right (by lia)
 
 instance projective_subcomplex_stupidTruncGEFamily_X [∀ i, Projective (L.X i)] (a i : ℤ) :
     Projective ((subcomplex (stupidTruncGEFamily L a)).X i) := by

@@ -191,8 +191,7 @@ theorem changeOfRingsTransition_naturality {N : SheafOfModules.{u} (𝓡 R₁)} 
   rw [PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def,
     PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def]
   ext X x
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul s m =>
     change (changeOfRingsTransition α β γ h N).val.app X

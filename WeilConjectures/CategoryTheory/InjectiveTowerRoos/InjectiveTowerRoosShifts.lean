@@ -680,7 +680,7 @@ private lemma roos_kernel (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
   exact tower_kernel I.asFunctor (limit.cone _) (limit.isLimit _)
     (limit.cone (Discrete.functor (fun n : ℕ ↦ I.asFunctor.obj (op n))))
     (limit.isLimit _) (InjectiveTowerRoos.inclusion I) (roosU I)
-    (fun n ↦ Pi.lift_π _ n)
+    (fun n ↦ Pi.lift_comp_π _ n)
     (fun n ↦ (towerTransitionEndomorphism_eq_iff _ _).mp rfl n)
 
 omit [HasLimitsOfShape ℕᵒᵖ A] in
@@ -715,7 +715,7 @@ private lemma inclusion_shift (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : �
   have hi (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ) (n : ℕ) :
       (InjectiveTowerRoos.inclusion I).f q ≫ π I q n =
         (limit.π I.asFunctor (op n)).f q :=
-    congrArg (fun f ↦ f.f q) (Pi.lift_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
+    congrArg (fun f ↦ f.f q) (Pi.lift_comp_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
   simp only [← Category.assoc, hi]
   have h := limitShift_π I m q n
   erw [Category.id_comp] at h

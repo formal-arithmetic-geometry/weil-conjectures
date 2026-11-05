@@ -72,7 +72,7 @@ variable {R S} [IsDomain R] [IsDomain S] [Module.Finite R S]
 /-- The `R`-linear dual of `S` is a torsion free `S`-module. -/
 lemma isTorsionFree_dual : IsTorsionFree S (S →ₗ[R] R) := by
   refine .of_smul_eq_zero fun s φ h ↦ or_iff_not_imp_left.2 fun hs ↦ ?_
-  have hne := Ideal.comap_ne_bot_of_integral_mem hs (Ideal.mem_span_singleton_self s)
+  have hne := Ideal.under_ne_bot_of_integral_mem hs (Ideal.mem_span_singleton_self s)
     (Algebra.IsIntegral.isIntegral (R := R) s)
   obtain ⟨r, hr, hr0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hne
   obtain ⟨t, ht⟩ := Ideal.mem_span_singleton'.1 (Ideal.mem_comap.1 hr)

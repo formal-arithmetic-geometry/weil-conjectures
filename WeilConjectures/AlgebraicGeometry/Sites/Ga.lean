@@ -210,8 +210,7 @@ lemma bijective_gaBaseChange (W T : Over V) [IsAffine V.left] [IsAffine W.left.l
   let e := h.tensorEquiv rfl rfl
   have he : ∀ t : OverΓ W ⊗[Γ(V.left, ⊤)] OverΓ T, gaBaseChange W T t = e t := by
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t with
     | tmul s b =>
       rw [gaBaseChange_tmul]
       exact (h.tensorEquiv_tmul rfl rfl s b).symm

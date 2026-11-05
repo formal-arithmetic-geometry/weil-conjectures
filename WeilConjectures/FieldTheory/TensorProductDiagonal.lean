@@ -102,14 +102,12 @@ noncomputable def diagonalDiagram : FiniteSubext F E ⥤ CommRingCat.{u} where
       (Algebra.TensorProduct.mapOfCompatibleSMul L'.1 L.1 E E E).toRingHom
   map_id L := by
     refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b => rfl
     | add x y hx hy => simp_all
   map_comp f g := by
     refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b => rfl
     | add x y hx hy => simp_all
 
@@ -120,8 +118,7 @@ noncomputable def diagonalCocone : Cocone (diagonalDiagram F E) where
     { app L := CommRingCat.ofHom (Algebra.TensorProduct.lmul' L.1 (S := E)).toRingHom
       naturality L L' f := by
         refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul a b => rfl
         | add x y hx hy => simp_all }
 
@@ -158,8 +155,7 @@ noncomputable def isColimitDiagonalCocone : IsColimit (diagonalCocone F E) where
     Algebra.TensorProduct.includeLeftRingHom)
   fac s L := by
     refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       have hab : (a ⊗ₜ[L.1] b : E ⊗[L.1] E) = (a ⊗ₜ 1) * (1 ⊗ₜ b) := by
         rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]

@@ -110,7 +110,6 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
   have hd (x : C ⊗[B] N₁) :
       d'.baseChange C' (e₁ x) = e₂ (d.baseChange C x) := by
     induction x with
-    | zero => simp
     | tmul c n => rfl
     | add x y hx hy => simp [hx, hy]
   let eT : (d.baseChange C).ker ≃ₗ[B] (d'.baseChange C').ker :=
@@ -128,7 +127,6 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
     apply Subtype.ext
     change e₁ _ = _
     induction x with
-    | zero => simp
     | tmul c n => rfl
     | add x y hx hy => simpa only [map_add, Submodule.coe_add] using congrArg₂ (· + ·) hx hy
   constructor

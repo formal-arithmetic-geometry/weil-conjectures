@@ -178,7 +178,7 @@ theorem alternatingCechSheafPresheaf_degreeZero_identity
   simp only [Category.assoc, piComparison_comp_π, Preadditive.add_comp]
   have hh : h ≫ K.map (Pi.π Q t) = hj t := by
     dsimp only [h]
-    rw [Category.assoc, inv_piComparison_comp_map_π, Pi.lift_π]
+    rw [Category.assoc, inv_piComparison_comp_map_π, Pi.lift_comp_π]
   rw [hh]
   clear hh
   have hn := (cechCapPresheafUnit (U i)).naturality (Pi.π Q t)
@@ -190,7 +190,7 @@ theorem alternatingCechSheafPresheaf_degreeZero_identity
         capIntoCap G (U i) (alternatingCechIntersection U t)
           (alternatingCechIntersection U (singletonTuple i))
           (by simp [alternatingCechIntersection, singletonTuple]) := by
-    rw [← K.map_comp, alternatingCechSheafPresheafZero, Pi.lift_π]
+    rw [← K.map_comp, alternatingCechSheafPresheafZero, Pi.lift_comp_π]
     dsimp only [p]
     rw [Category.assoc, ← capIntoCap_map_unit, capIntoCap_comp]
   rw [haug]
@@ -209,7 +209,7 @@ theorem alternatingCechSheafPresheaf_degreeZero_identity
         capIntoCap G (U i) (alternatingCechIntersection U t)
           (alternatingCechIntersection U (pairTuple i (t 0) hij))
           (by rw [singletonIntersection, pairIntersection]) from dif_pos hij]
-    simp only [alternatingCechSheafPresheafD, Pi.lift_π_assoc, Category.assoc,
+    simp only [alternatingCechSheafPresheafD, Pi.lift_comp_π_assoc, Category.assoc,
       Preadditive.sum_comp, Preadditive.zsmul_comp]
     rw [Fin.sum_univ_two]
     simp only [Fin.val_zero, Fin.val_one, pow_zero, pow_one, one_smul, neg_smul]
@@ -234,7 +234,7 @@ theorem alternatingCechSheafPresheaf_degreeZero_identity
         dsimp only [hj]
         rw [dif_neg hij, dif_pos hji]
       rw [hhj, Preadditive.comp_neg]
-      simp only [alternatingCechSheafPresheafD, Pi.lift_π_assoc, Category.assoc,
+      simp only [alternatingCechSheafPresheafD, Pi.lift_comp_π_assoc, Category.assoc,
         Preadditive.sum_comp, Preadditive.zsmul_comp]
       rw [Fin.sum_univ_two]
       simp only [Fin.val_zero, Fin.val_one, pow_zero, pow_one, one_smul, neg_smul]

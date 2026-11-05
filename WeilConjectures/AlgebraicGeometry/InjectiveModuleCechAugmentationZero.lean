@@ -147,7 +147,7 @@ theorem injectiveModuleCechAugmentation_quasiIsoAt_zero {X : Scheme.{u}} {ι : T
     rw [TopCat.Presheaf.map_map_apply P _ _ (homOfLE le_top).op] at h
     have hr : (Pi.lift (fun y : Fin 1 → ι ↦ P.map (homOfLE le_top).op)) ≫
         Pi.π (fun y : Fin 1 → ι ↦ P.obj (op (∏ᶜ fun l ↦ U (y l)))) (fun _ ↦ i) =
-        P.map (homOfLE le_top).op := Pi.lift_π _ _
+        P.map (homOfLE le_top).op := Pi.lift_comp_π _ _
     change (Pi.π (fun y : Fin 1 → ι ↦ P.obj (op (∏ᶜ fun l ↦ U (y l)))))
       (fun _ ↦ i) ((Pi.lift (fun y : Fin 1 → ι ↦ P.map (homOfLE le_top).op)) s) = _
     rw [← ConcreteCategory.comp_apply]
@@ -170,7 +170,7 @@ theorem injectiveModuleCechAugmentation_quasiIsoAt_zero {X : Scheme.{u}} {ι : T
         P.map (homOfLE (le_top (a := ∏ᶜ fun _ : Fin 1 ↦ U i))).op t := by
       have hr : r ≫ Pi.π (fun y : Fin 1 → ι ↦
           P.obj (op (∏ᶜ fun l ↦ U (y l)))) (fun _ ↦ i) =
-          P.map (homOfLE le_top).op := Pi.lift_π _ _
+          P.map (homOfLE le_top).op := Pi.lift_comp_π _ _
       exact (ConcreteCategory.congr_hom hr s).symm.trans
         (hi.trans (ConcreteCategory.congr_hom hr t))
     have hq : U i ⟶ ∏ᶜ (fun _ : Fin 1 ↦ U i) := Pi.lift fun _ ↦ 𝟙 _

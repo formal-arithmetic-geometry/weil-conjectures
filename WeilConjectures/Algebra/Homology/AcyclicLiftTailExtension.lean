@@ -98,12 +98,12 @@ theorem exists_extend_acyclicLiftTail
   have hlower : D.IsStrictlyGE (n - 1) := by
     rw [D.isStrictlyGE_iff]
     intro i hi
-    rw [hX i, if_neg (by omega)]
+    rw [hX i, ite_eq_right (by omega)]
     exact (T.complex.isStrictlyGE_iff n).mp T.lower i (by omega)
   have hupper : D.IsStrictlyLE b := by
     rw [D.isStrictlyLE_iff]
     intro i hi
-    rw [hX i, if_neg (by omega)]
+    rw [hX i, ite_eq_right (by omega)]
     exact (T.complex.isStrictlyLE_iff b).mp T.upper i hi
   have hP : ∀ i, P (D.X i) := by
     intro i

@@ -66,7 +66,6 @@ private theorem comparison_scalar_obstruction :
           ((AlgHom.id ℤ ℤ).prod (AlgHom.id ℤ ℤ)) x) = (rid x, rid x) := by
       intro x
       induction x with
-      | zero => change (0 : A × A) = (0, 0); rfl
       | tmul a z => simp [prod, rid, Algebra.TensorProduct.prodRight_tmul]
       | add x y hx hy => simp [hx, hy]
     have heq := congrArg prod hx

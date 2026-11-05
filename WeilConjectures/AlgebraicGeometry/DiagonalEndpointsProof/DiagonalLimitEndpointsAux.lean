@@ -185,7 +185,7 @@ private theorem derivedUnit_isIso
   let i := ExactProductsRoos.inclusion.app I
   let t := ExactProductsRoos.difference.app I
   obtain ⟨hz, ⟨hk⟩⟩ := AlgebraicGeometry.ProEtale.tower_kernel I.asFunctor c hc P
-    (limit.isLimit _) i t (fun n ↦ Pi.lift_π _ n)
+    (limit.isLimit _) i t (fun n ↦ Pi.lift_comp_π _ n)
     (fun n ↦ (towerTransitionEndomorphism_eq_iff _ _).1 rfl n)
   have hte : Epi t := by
     apply HomologicalComplex.epi_of_epi_f

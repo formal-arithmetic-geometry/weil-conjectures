@@ -84,7 +84,7 @@ theorem finiteStripRowInclusion_factors
       apply Subobject.factors_of_factors_right
       apply Subobject.factors_of_le _ (show imageSubobject
         ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) ≤
-          F.complexStep p n by rw [hsteps, if_pos (by omega)]; exact le_sup_left)
+          F.complexStep p n by rw [hsteps, ite_eq_left (by omega)]; exact le_sup_left)
       simpa using imageSubobject_factors_comp_self
         ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) (𝟙 _)
     · exact Subobject.factors_zero
@@ -103,7 +103,7 @@ theorem finiteStripRowInclusion_factors
               (CochainComplex.mappingCone.inr b).f n) else ⊥) hi)
         have heq : n - (n - p) = p := by omega
         rw [heq]
-        simp only [if_pos le_rfl]
+        simp only [ite_eq_left le_rfl]
         exact le_rfl)
       simpa using imageSubobject_factors_comp_self
         (K.ιTotalOrZero (ComplexShape.up ℤ) (n - p) p n ≫

@@ -78,13 +78,13 @@ theorem finite_pushforward_set_stalk_map_bijective_of_finite
     intro s
     apply Pi.hom_ext
     intro t
-    simp only [Category.assoc, Pi.lift_π, Limits.Pi.map_π, PreservesProduct.iso_hom]
+    simp only [Category.assoc, Pi.lift_comp_π, Limits.Pi.map_π, PreservesProduct.iso_hom]
     dsimp only [r, e₀, e₁]
     erw [Functor.Final.ι_colimitIso_hom_assoc,
       colimit.ι_pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
         (Etale.baseChangeNbhd f y t).op (op s.unop.obj),
       piComparison_comp_π_assoc, colim_map, ι_colimMap_assoc, ι_colimMap_assoc,
-      sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_π,
+      sectionsIsoPi_hom, ← NatTrans.comp_app_assoc, Pi.lift_comp_π,
       Functor.Final.ι_colimitIso_hom]
     exact (colimit.w ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ H.obj)
       (CategoryOfElements.homMk ⟨s.unop.pieceObj t, s.unop.piecePt t⟩
@@ -101,7 +101,7 @@ theorem finite_pushforward_set_stalk_map_bijective_of_finite
     funext a t
     have hp : e.hom ≫ (↾fun z ↦ z t) = r t := by
       simp only [e, Iso.trans_hom, Category.assoc,
-        Types.productIso_hom_comp_eval, asIso_hom, Pi.lift_π]
+        Types.productIso_hom_comp_eval, asIso_hom, Pi.lift_comp_π]
     exact ConcreteCategory.congr_hom hp a
   change Function.Bijective (fun a t ↦ r t a)
   rw [← hmap]

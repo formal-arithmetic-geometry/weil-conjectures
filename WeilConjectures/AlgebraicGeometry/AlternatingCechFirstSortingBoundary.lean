@@ -108,7 +108,7 @@ theorem cechFirstSortingBoundary (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     apply Finset.sum_congr rfl
     intro τ _
     by_cases h : cechStableSort t σ ∧ cechPartialSort σ τ a
-    · simp only [h, true_and, if_true]
+    · simp only [h, true_and, ite_true]
       apply Finset.sum_congr rfl
       intro r _
       by_cases hr : cechJunction σ τ a r = σ a <;> simp [hr]

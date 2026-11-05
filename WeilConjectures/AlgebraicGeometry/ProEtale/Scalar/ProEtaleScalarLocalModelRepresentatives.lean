@@ -188,7 +188,7 @@ private theorem mono_product_adjuncts
   intro i
   have h : a ≫ (adj i).homEquiv M (models i) (e i).hom =
       b ≫ (adj i).homEquiv M (models i) (e i).hom := by
-    simpa only [Category.assoc, Pi.lift_π] using
+    simpa only [Category.assoc, Pi.lift_comp_π] using
       congrArg (fun z ↦ z ≫ Pi.π (fun i ↦ (G i).obj (models i)) i) hab
   apply (cancel_mono (e i).hom).1
   apply ((adj i).homEquiv L (models i)).injective

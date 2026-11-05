@@ -34,7 +34,7 @@ private theorem product_lift_isIso_of_postcomp
   have heq : Pi.lift (fun i ↦ p i ≫ (e i).hom) = Pi.lift p ≫ (Pi.mapIso e).hom := by
     apply Pi.hom_ext
     intro i
-    simp only [Category.assoc, Pi.mapIso_hom_π, Pi.lift_π, Pi.lift_π_assoc]
+    simp only [Category.assoc, Pi.mapIso_hom_π, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
   rw [heq]
   infer_instance
 
@@ -58,7 +58,7 @@ private theorem product_lift_isIso_of_reindex
     apply Pi.hom_ext
     intro j
     obtain ⟨i, rfl⟩ := e.surjective j
-    simp only [Category.assoc, Pi.reindex_hom_π, Function.comp_def, Pi.lift_π]
+    simp only [Category.assoc, Pi.reindex_hom_π, Function.comp_def, Pi.lift_comp_π]
   rw [heq]
   infer_instance
 

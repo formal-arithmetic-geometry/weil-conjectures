@@ -190,11 +190,11 @@ private def supportedProductIso.{v, w} {C : Type w} [Category.{v} C]
     rw [Category.assoc, hP.fac Q]
     by_cases hn : n < r + 1
     · simpa only [Q, Fan.mk_π_app, f, dif_pos hn, Category.id_comp, Fan.proj] using
-        Pi.lift_π (fun n : Fin (r + 1) ↦ P.proj n.val) ⟨n, hn⟩
+        Pi.lift_comp_π (fun n : Fin (r + 1) ↦ P.proj n.val) ⟨n, hn⟩
     · exact (hz n (by omega)).eq_of_tgt _ _
   · apply Pi.hom_ext
     intro n
-    rw [Category.assoc, Pi.lift_π]
+    rw [Category.assoc, Pi.lift_comp_π]
     simpa only [Q, Fan.mk_π_app, f, dif_pos n.isLt, Category.id_comp, Fan.proj, Fin.eta] using
       hP.fac Q ⟨n.val⟩
 

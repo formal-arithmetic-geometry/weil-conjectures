@@ -46,8 +46,7 @@ private noncomputable def rawScalarTensorIso :
     intro U V i
     apply AddCommGrpCat.hom_ext
     ext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z with
     | add z w hz hw => simp only [map_add, hz, hw]
     | tmul n x =>
       change N.val.map i n ⊗ₜ[S.obj.obj V]
@@ -144,8 +143,7 @@ private noncomputable def rawTensorComparison :
         (tensorSheafificationUnit (J := J) (changeOfRingsPresheafOfUniverses c M)) N.val)
   naturality {N N'} f := by
     ext U z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z with
     | add z w hz hw => simp only [map_add, hz, hw]
     | tmul n x => rfl
 

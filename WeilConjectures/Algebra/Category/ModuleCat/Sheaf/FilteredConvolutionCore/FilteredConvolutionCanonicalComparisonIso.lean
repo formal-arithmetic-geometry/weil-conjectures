@@ -178,7 +178,7 @@ theorem canonical_comparison_isIso
     ((H.F r).arrow.f n) (testMap F G s a b r n) (mc.f n) ?_ ?_
   · rw [← Category.assoc, ← HomologicalComplex.comp_f, he, ← HomologicalComplex.comp_f]
     refine HomologicalComplex.sigma_X_hom_ext fun p ↦ ?_
-    rw [← Category.assoc, ← HomologicalComplex.comp_f, Sigma.ι_desc,
+    rw [← Category.assoc, ← HomologicalComplex.comp_f, Sigma.ι_comp_desc,
       tensorHom_f_comp_testMap F G s a b hPa hPb hs₁ hs₂, ← HomologicalComplex.comp_f]
     have hmc : Sigma.ι (fun p ↦ F.gradedPiece p ⊗ G.gradedPiece (r - p)) p ≫ mc =
         (F.gradedPiece p ◁ G.gradedPieceToQuotient (r - p)) ≫ Sigma.ι (testTarget F G r) p :=
@@ -194,7 +194,7 @@ theorem canonical_comparison_isIso
       ← HomologicalComplex.comp_f]
     erw [imageSubobject_arrow_comp]
     refine HomologicalComplex.sigma_X_hom_ext fun p ↦ ?_
-    rw [comp_zero, ← Category.assoc, ← HomologicalComplex.comp_f, Sigma.ι_desc]
+    rw [comp_zero, ← Category.assoc, ← HomologicalComplex.comp_f, Sigma.ι_comp_desc]
     exact tensorHom_f_comp_testMap_eq_zero F G s hs₂ a b r n p _ (by omega)
 
 end SheafOfModules.FilteredConvolutionCore

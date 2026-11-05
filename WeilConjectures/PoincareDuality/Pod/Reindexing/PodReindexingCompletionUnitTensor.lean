@@ -128,8 +128,8 @@ private theorem podRoosBoundary_reindex (D : PodCompletionReindex l E g) :
     podReindexProduct l E g C ≫ podRoosBoundary ((podReindexTower l E g).obj C) ≫
       Pi.π _ n
   dsimp only [podReindexProduct]
-  rw [Pi.lift_π, ← F.map_comp, hy, F.map_sub, F.map_comp, hx,
-    Preadditive.comp_sub, Pi.lift_π, Pi.lift_π_assoc]
+  rw [Pi.lift_comp_π, ← F.map_comp, hy, F.map_sub, F.map_comp, hx,
+    Preadditive.comp_sub, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
   rfl
 
 /-- The ambient reduction and completion assertion with independent scheme and coefficient

@@ -326,7 +326,7 @@ theorem exists_topologicalKrullDim_closure_singleton_eq_one
     refine height_eq_coe_iff_minimal_le_height.mpr ⟨by simpa using hz1, fun y hy hyz ↦ ?_⟩
     by_contra hzy
     have hlt : y < z := lt_of_le_of_ne hyz fun h ↦ hzy (h ▸ le_rfl)
-    have := WellFounded.min_le wellFounded_lt (show height y ∈ S from ⟨y, by simpa using hy, rfl⟩)
+    have := WellFoundedLT.min_le wellFounded_lt (show height y ∈ S from ⟨y, by simpa using hy, rfl⟩)
     rw [← hz] at this
     exact (height_strictMono hlt (hfin y)).not_ge this
   rw [topologicalKrullDim_closure_singleton, this]

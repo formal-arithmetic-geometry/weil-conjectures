@@ -2047,7 +2047,7 @@ private theorem roos_derivedLimit
     intro n
     simp only [Category.assoc, he, ← Functor.map_comp, hsπ, Functor.map_sub]
     simp only [sd, towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-      Category.id_comp, Preadditive.comp_sub, Pi.lift_π, he]
+      Category.id_comp, Preadditive.comp_sub, Pi.lift_comp_π, he]
     rw [Functor.map_comp, ← Category.assoc, he]
   let T := DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCocone.triangle s)
   have hT : T ∈ distTriang (DerivedCategory A) :=

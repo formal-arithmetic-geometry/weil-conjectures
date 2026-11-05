@@ -55,8 +55,8 @@ theorem characterProjector_evaluation_isIso
   let r : P ⟶ N := ∑ c : G, (⅟(Fintype.card G : K) * χ (-c)) • ρ c
   have hj (a : G) : j ≫ ρ a = χ a • 𝟙 N := by
     have hπ : inv (Pi.lift ρ) ≫ ρ a = Pi.π (fun _ : G ↦ N) a := by
-      rw [IsIso.inv_comp_eq, Pi.lift_π]
-    simp only [j, Category.assoc, hπ, Pi.lift_π]
+      rw [IsIso.inv_comp_eq, Pi.lift_comp_π]
+    simp only [j, Category.assoc, hπ, Pi.lift_comp_π]
   have hjr : j ≫ r = 𝟙 N := by
     simp only [r, Preadditive.comp_sum, Linear.comp_smul, hj, smul_smul,
       mul_assoc, ← AddChar.map_add_eq_mul, neg_add_cancel, AddChar.map_zero_eq_one,
@@ -66,7 +66,7 @@ theorem characterProjector_evaluation_isIso
     apply (cancel_mono (Pi.lift ρ)).1
     apply Pi.hom_ext
     intro a
-    simp only [Category.assoc, Pi.lift_π, e, Preadditive.sum_comp,
+    simp only [Category.assoc, Pi.lift_comp_π, e, Preadditive.sum_comp,
       Linear.smul_comp, hτ, hj, Linear.comp_smul, Category.comp_id, r,
       smul_smul]
     refine Fintype.sum_equiv (Equiv.addLeft a) _ _ fun c ↦ ?_
@@ -115,8 +115,8 @@ theorem characterProjector_reindexed_evaluation_isIso
     apply Pi.hom_ext
     intro a
     obtain ⟨j, rfl⟩ := ε.surjective a
-    rw [Category.assoc, Pi.reindex_hom_π, Pi.lift_π]
-    exact (Pi.lift_π (fun j ↦ ρ (ε j)) j).symm
+    rw [Category.assoc, Pi.reindex_hom_π, Pi.lift_comp_π]
+    exact (Pi.lift_comp_π (fun j ↦ ρ (ε j)) j).symm
   have : IsIso (Pi.lift ρ) := by rw [he]; infer_instance
   exact characterProjector_evaluation_isIso ρ τ hτ χ
 

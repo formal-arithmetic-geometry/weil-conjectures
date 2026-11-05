@@ -38,7 +38,7 @@ lemma isSplitMono_sigmaDesc_of_injective (X : C) {ι ι' : Type*} (f : ι → ι
     (fun s ↦ if h : ∃ i, f i = s then Sigma.ι (fun (_ : ι) ↦ X) h.choose else 0), ?_⟩⟩
   ext i
   have h : ∃ j, f j = f i := ⟨i, rfl⟩
-  rw [← Category.assoc, Sigma.ι_desc, Sigma.ι_desc, dif_pos h, hf h.choose_spec,
+  rw [← Category.assoc, Sigma.ι_comp_desc, Sigma.ι_comp_desc, dite_eq_left h, hf h.choose_spec,
     Category.comp_id]
 
 /-- If `f : ι → ι'` is injective, then the copower `∐ (fun (_ : ι') ↦ X)` admits an

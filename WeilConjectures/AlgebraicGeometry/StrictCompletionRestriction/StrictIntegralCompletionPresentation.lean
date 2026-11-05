@@ -179,7 +179,7 @@ theorem strictIntegralCompletionPresentation (X : Scheme.{u}) :
     obtain ⟨p, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective q
     change (aug.app M).f (p + 1) ≫ (roosEval (tower.obj M) n).f (p + 1) = _
     rw [roosEval_f, ← Category.assoc, ← Category.assoc, haug, biprod.lift_snd]
-    exact congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_π
+    exact congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_comp_π
       (fun n : ℕ ↦ (data.j n).app M) n)
   have hcone (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
       (tower.obj M).asFunctor.obj (op n) = CochainComplex.mappingCone
@@ -214,7 +214,7 @@ theorem strictIntegralCompletionPresentation (X : Scheme.{u}) :
         intro M n p
         rw [← Category.assoc, ← Category.assoc, ← Category.assoc, haug]
         erw [biprod.lift_snd]
-        erw [← HomologicalComplex.comp_f, Pi.lift_π]
+        erw [← HomologicalComplex.comp_f, Pi.lift_comp_π]
         exact hj n M (p + 1)
       reduction := PrincipalReduction.reductionFunctor l E X
       reduction_descent := fun n ↦ (κR n).symm

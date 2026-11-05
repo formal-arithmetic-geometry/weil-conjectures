@@ -167,8 +167,7 @@ private theorem kernel_all {R S B T : Sheaf J CommRingCat.{r}}
     exact h.trans ((congrArg (T.obj.map f.op) hz).trans (map_zero _))
   clear ht
   change (ModuleCat.extendScalars (c.hom.app (op V)).hom).obj (P.val.obj (op V)) at t
-  induction t using TensorProduct.induction_on with
-  | zero => rw [map_zero, smul_zero]
+  induction t with
   | add a b ha hb => rw [map_add, smul_add, ha, hb, add_zero]
   | tmul s x =>
     change S.obj.map f.op z • pure c P (op V) s x = 0

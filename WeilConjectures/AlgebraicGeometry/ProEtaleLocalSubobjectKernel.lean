@@ -56,7 +56,7 @@ theorem localSubobjectKernel_local_zero (i : U.I₀) :
   have h := congrArg (fun t => t ≫ Pi.π _ i)
     (kernel.condition (localSubobjectQuotientMap X Q U L q))
   simpa only [Category.assoc, localSubobjectKernel, localSubobjectKernelι,
-    localSubobjectQuotientMap, Pi.lift_π, zero_comp] using h
+    localSubobjectQuotientMap, Pi.lift_comp_π, zero_comp] using h
 
 /-- The canonical local comparison, obtained by the kernel property of a
 monomorphism in the abelian category of sheaves. -/
@@ -125,7 +125,7 @@ theorem localSubobjectKernel_lift
   have hm : m ≫ localSubobjectQuotientMap X Q U L q = 0 := by
     apply Pi.hom_ext
     intro i
-    rw [Category.assoc, localSubobjectQuotientMap, Pi.lift_π, zero_comp]
+    rw [Category.assoc, localSubobjectQuotientMap, Pi.lift_comp_π, zero_comp]
     rw [← Adjunction.homEquiv_naturality_left]
     obtain ⟨t, ht⟩ := h i
     rw [← ht, Category.assoc, cokernel.condition, comp_zero]

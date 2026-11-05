@@ -102,7 +102,7 @@ private theorem published_roos_projection (W : Scheme.{u})
         HomologicalComplex.complexOfFunctorsToFunctorToComplex]
       rw [CochainComplex.mappingCocone.lift_fst_assoc]
       dsimp only [pullbackTensorRoosAugmentation]
-      exact Pi.lift_π
+      exact Pi.lift_comp_π
         (fun m ↦ (NatTrans.mapHomologicalComplex (lim.π (op m)) (.up ℤ)).app I) n
     rw [h]
     exact ((coefficientConstantTowerProjection_exists l E W n).choose_spec.1 I).symm

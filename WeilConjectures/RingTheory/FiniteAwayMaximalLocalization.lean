@@ -116,8 +116,8 @@ theorem exists_finite_away_maximal_localization
     simpa only [J, h, Ideal.comap_comap, RingHom.comp_assoc] using hcontract
   have : (J.comap (algebraMap S S0)).IsMaximal := hJ.symm ▸ inferInstance
   have hJmax : J.IsMaximal :=
-    Ideal.IsMaximal.of_isLocalization_of_disjoint (M := Submonoid.powers s)
+    IsLocalization.isMaximal_of_isMaximal_under (M := Submonoid.powers s)
   have : (q.comap (algebraMap T B)).IsPrime := Ideal.comap_isPrime _ q
-  exact ⟨Ideal.isMaximal_of_isIntegral_of_isMaximal_comap' g hfin.to_isIntegral
+  exact ⟨Ideal.isMaximal_of_isIntegral_of_isMaximal_comap g hfin.to_isIntegral
     (q.comap (algebraMap T B)) hJmax, hmem⟩
 

@@ -113,11 +113,11 @@ private theorem component_source_product {X : Scheme.{u}}
       apply Pi.hom_ext
       intro i
       rw [Category.assoc, PreservesProduct.iso_hom, piComparison_comp_π,
-        ← ev.map_comp, Pi.lift_π]
+        ← ev.map_comp, Pi.lift_comp_π]
       change E.obj.map (β i).op =
         (Pi.lift (fun j ↦ E.obj.map (β j).op)) ≫
           Pi.π (fun j ↦ E.obj.obj (op (componentTest (W j) V.unop))) i
-      rw [Pi.lift_π]
+      rw [Pi.lift_comp_π]
     have : IsIso (ev.map φ ≫ (PreservesProduct.iso ev R).hom) := by
       rw [hw]
       exact hiso

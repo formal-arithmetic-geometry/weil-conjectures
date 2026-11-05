@@ -132,7 +132,7 @@ instance isIso_piLift_restrictToPiece : IsIso (Pi.lift (restrictToPiece f y G)) 
         Pi.lift fun t ↦ (restrictToPiece f y G t).app s := by
       apply Pi.hom_ext
       intro t
-      rw [Category.assoc, piObjIso_hom_comp_π, ← NatTrans.comp_app, Pi.lift_π, Pi.lift_π]
+      rw [Category.assoc, piObjIso_hom_comp_π, ← NatTrans.comp_app, Pi.lift_comp_π, Pi.lift_comp_π]
     rw [← Iso.eq_comp_inv] at h
     rw [h]
     have : IsIso (Pi.lift fun t ↦ (restrictToPiece f y G t).app s) :=

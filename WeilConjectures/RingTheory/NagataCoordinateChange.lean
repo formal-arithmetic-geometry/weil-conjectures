@@ -72,7 +72,7 @@ private lemma degreeOf_zero_t' {a : k} (ha : a ≠ 0) : ((T' f) (monomial v a)).
     ∑ i : Fin (n + 1), (r i) * v i := by
   rw [← natDegree_finSuccEquiv, monomial_eq, Finsupp.prod_pow v fun a ↦ X a]
   simp only [Fin.prod_univ_succ, Fin.sum_univ_succ, map_mul, map_prod, map_pow,
-    AlgEquiv.ofAlgHom_apply, MvPolynomial.aeval_C, MvPolynomial.aeval_X, if_pos, Fin.succ_ne_zero,
+    AlgEquiv.ofAlgHom_apply, MvPolynomial.aeval_C, MvPolynomial.aeval_X, ite_eq_left, Fin.succ_ne_zero,
     ite_false, one_smul, map_add, finSuccEquiv_X_zero, finSuccEquiv_X_succ, algebraMap_eq]
   have h (i : Fin n) :
       (Polynomial.C (X (R := k) i) + Polynomial.X ^ r i.succ) ^ v i.succ ≠ 0 :=
@@ -210,13 +210,13 @@ theorem finite_quotient_comp_rename_succ (p : MvPolynomial (Fin (n + 1)) R)
     refine ringHom_ext (fun r ↦ ?_) (fun i ↦ ?_)
     · simp only [RingHom.coe_comp, Function.comp_apply, Ideal.quotientMap_mk,
         AlgHom.toRingHom_eq_coe, RingHom.coe_coe, rename_C, RingEquiv.toRingHom_eq_coe,
-        AlgEquiv.coe_ringEquiv]
+        AlgEquiv.coe_toRingEquiv]
       congr 1
       rw [AlgEquiv.symm_apply_eq]
       simp [finSuccEquiv_apply]
     · simp only [RingHom.coe_comp, Function.comp_apply, Ideal.quotientMap_mk]
       rw [AlgHom.toRingHom_eq_coe, RingHom.coe_coe, rename_X, RingEquiv.toRingHom_eq_coe,
-        RingEquiv.coe_toRingHom, AlgEquiv.coe_ringEquiv, ← finSuccEquiv_X_succ,
+        RingEquiv.coe_toRingHom, AlgEquiv.coe_toRingEquiv, ← finSuccEquiv_X_succ,
         AlgEquiv.symm_apply_apply]
   rw [← heq]
   refine RingHom.Finite.comp (RingHom.Finite.of_surjective _

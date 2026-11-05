@@ -48,7 +48,7 @@ theorem diagonalConeTransitionHomotopy
   refine ⟨{ hom := s, zero := ?_, comm := ?_ }⟩
   · intro i j h
     dsimp only [s]
-    apply dif_neg
+    apply dite_eq_right
     intro hij
     apply h
     change j + 1 = i
@@ -57,8 +57,8 @@ theorem diagonalConeTransitionHomotopy
     rw [dNext_eq s (show (ComplexShape.up ℤ).Rel i (i + 1) from rfl),
       prevD_eq s (show (ComplexShape.up ℤ).Rel (i - 1) i by change i - 1 + 1 = i; omega)]
     dsimp only [s, asFunctor_map_f, asFunctor_obj_d, zero_f]
-    rw [dif_pos (show i + 1 + (-1) = i by omega),
-      dif_pos (show i + (-1) = i - 1 by omega)]
+    rw [dite_eq_left (show i + 1 + (-1) = i by omega),
+      dite_eq_left (show i + (-1) = i - 1 by omega)]
     change ((mappingCone α).X i).map t =
       ((mappingCone α).d i (i + 1)).app m ≫
           (((mappingCone.snd α).v (i + 1) (i + 1) (add_zero _)).app m ≫

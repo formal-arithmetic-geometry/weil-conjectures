@@ -311,8 +311,7 @@ private theorem tensor_ext (R : Sheaf J CommRingCat.{w})
       (((SA (J := J) R).unit.app (M.val ⊗ N.val)).app U t)) =
     g.val.app U ((tensorObjIsoSheafification M N).inv.val.app U
       (((SA (J := J) R).unit.app (M.val ⊗ N.val)).app U t))
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t with
   | tmul x y => exact h U x y
   | add x y hx hy => simp only [map_add, hx, hy]
 
@@ -549,8 +548,7 @@ private noncomputable def extensionPresheafIso {A S : Sheaf J CommRingCat.{w}}
     intro U V i
     apply ModuleCat.hom_ext
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s x =>
       change changeOfRingsMap a M i (s ⊗ₜ[A.obj.obj U, (a.hom.app U).hom] x) =

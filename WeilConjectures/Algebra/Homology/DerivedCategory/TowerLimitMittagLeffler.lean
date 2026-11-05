@@ -285,7 +285,7 @@ lemma epi_one_sub_of_shortExact (hC : EpiπAppZeroOfEpi C) {G' G G'' : ℕᵒᵖ
     exact fun n ↦ (hS n.as).exact
   have hSP := hSF.map_of_exact (lim : (Discrete ℕ ⥤ C) ⥤ C)
   let ht₀ (H : ℕᵒᵖ ⥤ C) (n : ℕ) : piTowerShift H ≫ Pi.π _ n =
-      Pi.π _ (n + 1) ≫ H.map (homOfLE n.le_succ).op := Pi.lift_π _ _
+      Pi.π _ (n + 1) ≫ H.map (homOfLE n.le_succ).op := Pi.lift_comp_π _ _
   have e' : Epi (𝟙 _ - piTowerShift G') :=
     epi_one_sub_of_epiπAppZeroOfEpi hC h' (productIsProduct _) _ (ht₀ G')
   have e'' : Epi (𝟙 _ - piTowerShift G'') :=
@@ -299,13 +299,13 @@ lemma epi_one_sub_of_shortExact (hC : EpiπAppZeroOfEpi C) {G' G G'' : ℕᵒᵖ
         change ((𝟙 _ - piTowerShift G') ≫ Pi.map fun n ↦ ι.app (op n)) ≫ Pi.π _ n =
           ((Pi.map fun n ↦ ι.app (op n)) ≫ (𝟙 _ - piTowerShift G)) ≫ Pi.π _ n
         simp only [assoc, Pi.map_π, Preadditive.sub_comp, Preadditive.comp_sub, id_comp,
-          comp_id, Pi.lift_π_assoc, Pi.lift_π, Pi.map_π_assoc, NatTrans.naturality]
+          comp_id, Pi.lift_comp_π_assoc, Pi.lift_comp_π, Pi.map_π_assoc, NatTrans.naturality]
       comm₂₃ := by
         refine Pi.hom_ext _ _ fun n ↦ ?_
         change ((𝟙 _ - piTowerShift G) ≫ Pi.map fun n ↦ π.app (op n)) ≫ Pi.π _ n =
           ((Pi.map fun n ↦ π.app (op n)) ≫ (𝟙 _ - piTowerShift G'')) ≫ Pi.π _ n
         simp only [assoc, Pi.map_π, Preadditive.sub_comp, Preadditive.comp_sub, id_comp,
-          comp_id, Pi.lift_π_assoc, Pi.lift_π, Pi.map_π_assoc, NatTrans.naturality] }
+          comp_id, Pi.lift_comp_π_assoc, Pi.lift_comp_π, Pi.map_π_assoc, NatTrans.naturality] }
   have : Epi (SF.map lim).g := hSP.epi_g
   have : Epi φ.τ₁ := e'
   have : Epi φ.τ₃ := e''
@@ -341,7 +341,7 @@ noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfMittagLeffler
     IsLimit ((homologyFunctor C i).mapCone c) :=
   have ht (n : ℕ) : piTowerShift (F ⋙ homologyFunctor C (i - 1)) ≫ Pi.π _ n =
       Pi.π _ (n + 1) ≫ (F ⋙ homologyFunctor C (i - 1)).map (homOfLE n.le_succ).op :=
-    Pi.lift_π _ _
+    Pi.lift_comp_π _ _
   have := isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit hc (i - 1) i (by lia)
     (productIsProduct _) _ ht (epi_one_sub_of_shortExact hC ι π hιπ hS h' h''
       (productIsProduct _) _ ht)

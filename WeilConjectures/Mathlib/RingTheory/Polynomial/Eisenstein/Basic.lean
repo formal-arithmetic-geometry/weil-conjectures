@@ -51,12 +51,12 @@ lemma isEisensteinAt_X_pow_add_C_mul_X_pow_sub_C {ϖ : E} (hϖ : Irreducible ϖ)
   · rw [hmon.leadingCoeff]
     exact fun h ↦ (maximalIdeal.isMaximal E).ne_top ((Ideal.eq_top_iff_one _).2 h)
   · rw [hdeg] at hi
-    simp only [coeff_add, coeff_sub, coeff_X_pow, coeff_C_mul_X_pow, coeff_C, if_neg hi.ne]
+    simp only [coeff_add, coeff_sub, coeff_X_pow, coeff_C_mul_X_pow, coeff_C, ite_eq_right hi.ne]
     refine Ideal.add_mem _ (Ideal.zero_mem _) (Ideal.sub_mem _ ?_ ?_) <;>
       split_ifs <;> first | exact hϖm | exact Ideal.zero_mem _
   · have h0 : (0 : ℕ) ≠ n - 1 := by omega
-    simp only [coeff_add, coeff_sub, coeff_X_pow, coeff_C_mul_X_pow, coeff_C, if_neg h0,
-      if_neg (by omega : (0 : ℕ) ≠ n), if_true, zero_add, zero_sub]
+    simp only [coeff_add, coeff_sub, coeff_X_pow, coeff_C_mul_X_pow, coeff_C, ite_eq_right h0,
+      ite_eq_right (by omega : (0 : ℕ) ≠ n), ite_true, zero_add, zero_sub]
     rw [hm, Ideal.span_singleton_pow, Ideal.mem_span_singleton']
     rintro ⟨z, hz⟩
     have : ϖ * (-(z * ϖ)) = ϖ * c := by linear_combination -hz

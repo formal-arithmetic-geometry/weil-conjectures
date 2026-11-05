@@ -613,8 +613,7 @@ private theorem integralScalarReduction_hom_ext (n : ℕ) (M : integralTowerModu
   apply Sheaf.hom_ext
   apply CategoryTheory.sheafify_hom_ext _ _ _ N.isSheaf
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z with
   | tmul s x => exact h U s x
   | add z w hz hw => simpa only [_root_.map_add] using congrArg₂ (· + ·) hz hw
 
@@ -1132,11 +1131,11 @@ private noncomputable def modulePiIsLimit (F : ℕ → A ⥤ B)
            fac := ?_
            uniq := ?_ }
   · intro s n
-    exact Pi.lift_π _ n.as
+    exact Pi.lift_comp_π _ n.as
   · intro s m hm
     apply Pi.hom_ext
     intro n
-    simpa [Pi.lift_π, modulePiFan, modulePiProjection, modulePi] using hm ⟨n⟩
+    simpa [Pi.lift_comp_π, modulePiFan, modulePiProjection, modulePi] using hm ⟨n⟩
 private noncomputable def modulePiIso (F : ℕ → A ⥤ B)
     [∀ n, (F n).Additive] (P : CochainComplex A ℤ) :
     ((modulePi F).mapHomologicalComplex (.up ℤ)).obj P ≅
@@ -1203,14 +1202,14 @@ private theorem modulePiEndo_comparison (F : ℕ → A ⥤ B) [∀ n, (F n).Addi
     NatIso.ofComponents_hom_app, modulePiIso_hom_π]
   simp only [complexPiEndo, towerTransitionEndomorphism, towerProductShift,
     Preadditive.comp_sub, Preadditive.sub_comp,
-    Pi.lift_π, modulePiIso_hom_π_assoc]
+    Pi.lift_comp_π, modulePiIso_hom_π_assoc]
   ext i
   simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
     HomologicalComplex.sub_f_apply]
   rw [HomologicalComplex.id_f, Category.id_comp,
     ← HomologicalComplex.comp_f, modulePiIso_hom_π]
   dsimp only [modulePiEndo, modulePiProjection]
-  simp only [Preadditive.sub_comp, Pi.lift_π]
+  simp only [Preadditive.sub_comp, Pi.lift_comp_π]
   congr 1
   exact Category.id_comp (Pi.π (fun n ↦ (F n).obj (P.X i)) n)
 private local instance termwiseNatTrans_commShift {F G : A ⥤ B} [F.Additive] [G.Additive]

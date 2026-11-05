@@ -75,7 +75,7 @@ private theorem uliftPiHom_apply {I : Type} {M N : Type u}
     ((Pi.π (fun _ : I ↦ AddCommGrpCat.of (ULift.{u + 1} N)) i)
       (uliftPiHom c (ULift.up x))).down = c x := by
   have h := congrArg (fun f ↦ f (ULift.up x))
-    (Pi.lift_π (fun _ : I ↦ AddCommGrpCat.uliftFunctor.map (AddCommGrpCat.ofHom c)) i)
+    (Pi.lift_comp_π (fun _ : I ↦ AddCommGrpCat.uliftFunctor.map (AddCommGrpCat.ofHom c)) i)
   exact congrArg ULift.down h
 
 private theorem semilinearOfSmulHom {A B : Scheme.{u}} (G : A.Modules) (H : B.Modules)

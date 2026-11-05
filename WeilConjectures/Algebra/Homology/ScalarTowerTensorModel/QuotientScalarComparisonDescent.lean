@@ -215,8 +215,7 @@ private noncomputable def sectionMap (U : Cᵒᵖ) :
     { toFun := TensorProduct.map h (LinearMap.id : M.val.obj U →ₗ[R.obj.obj U] M.val.obj U)
       map_add' := map_add _
       map_smul' := fun s z ↦ by
-        induction z using TensorProduct.induction_on with
-        | zero => simp only [smul_zero, map_zero]
+        induction z with
         | tmul t x =>
           change S.obj.obj U at t
           change q.hom.app U (s * t) ⊗ₜ[R.obj.obj U,(g.hom.app U).hom] x =

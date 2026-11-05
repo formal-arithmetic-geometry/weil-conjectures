@@ -402,13 +402,13 @@ private theorem roos_transport
   refine ⟨z, hz, ?_, ?_⟩
   · apply Pi.hom_ext
     intro n
-    rw [Category.assoc, hz, ← Category.assoc, ← F.map_comp, Pi.lift_π, hci,
-      Pi.lift_π]
+    rw [Category.assoc, hz, ← Category.assoc, ← F.map_comp, Pi.lift_comp_π, hci,
+      Pi.lift_comp_π]
   · have hs : F.map (towerProductShift tQ) ≫ z.hom = z.hom ≫ towerProductShift tP := by
       apply Pi.hom_ext
       intro n
-      simp only [Category.assoc, hz, towerProductShift, Pi.lift_π]
-      rw [← Category.assoc, ← F.map_comp, Pi.lift_π, F.map_comp, Category.assoc,
+      simp only [Category.assoc, hz, towerProductShift, Pi.lift_comp_π]
+      rw [← Category.assoc, ← F.map_comp, Pi.lift_comp_π, F.map_comp, Category.assoc,
         hti, ← Category.assoc, ← hz]
       exact Category.assoc _ _ _
     simp only [towerTransitionEndomorphism, F.map_sub, F.map_id,

@@ -171,7 +171,7 @@ theorem exists_etale_popescu_quotient_map
       _ = A.val.toRingHom.comp e := by ext x; rfl
       _ = π.comp ψ := he
   have heLocal : IsLocalHom e := by
-    apply ((IsLocalRing.local_hom_TFAE e).out 2 0).mp
+    apply ((IsLocalRing.local_hom_TFAE e).out 3 1).mp
     change (IsLocalRing.maximalIdeal P).map e ≤ IsLocalRing.maximalIdeal A
     rw [← Localization.AtPrime.map_eq_maximalIdeal, Ideal.map_map]
     apply Ideal.map_le_iff_le_comap.mpr
@@ -209,7 +209,7 @@ theorem exists_etale_popescu_quotient_map
         (IsLocalRing.map_maximalIdeal_of_surjective _ Ideal.Quotient.mk_surjective).symm
       _ = _ := congrArg (Ideal.map π) hJ.symm
   have : IsLocalHom A.val.toRingHom := by
-    apply ((IsLocalRing.local_hom_TFAE A.val.toRingHom).out 4 0).mp
+    apply ((IsLocalRing.local_hom_TFAE A.val.toRingHom).out 5 1).mp
     rw [hBm]
     exact hAm.symm
   have : IsLocalHom (algebraMap A B) := ‹IsLocalHom A.val.toRingHom›

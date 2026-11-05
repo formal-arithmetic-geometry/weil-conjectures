@@ -116,7 +116,7 @@ noncomputable def internalHomObjToHomComplexX (n : ℤ) :
 lemma homComplexToInternalHomObjX_π (n p q : ℤ) (h : p + n = q) :
     homComplexToInternalHomObjX L M n ≫ internalHomπ L M n p q h =
       (p * n).negOnePow • homComplexIhomπ L M n p q h :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 @[reassoc]
 lemma internalHomObjToHomComplexX_π (n p q : ℤ) (h : p + n = q) :

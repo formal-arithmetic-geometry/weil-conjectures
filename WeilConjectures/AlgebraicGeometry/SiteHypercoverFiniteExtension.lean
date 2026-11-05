@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 public import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBase
 import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionConstruction
 import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionSplit
-import Mathlib.Data.Finite.Sum
+import Mathlib.Basic.Finite.Sum
 
 /-! # Finite attachment to a split truncated simplicial family
 

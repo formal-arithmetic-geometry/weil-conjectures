@@ -100,8 +100,8 @@ private theorem exists_flag_succ (hG : IsPGroup p G) (k : ℕ) (hk : k < finrank
     exact add_mem (sub_mem (hstab k le_rfl g ha) ha) (Submodule.smul_mem _ _ (hgx g))
   obtain ⟨F', hle, hgt⟩ : ∃ F' : ℕ → Submodule (ZMod p) V,
       (∀ i ≤ k, F' i = F i) ∧ ∀ i, k < i → F' i = W :=
-    ⟨fun i ↦ if i ≤ k then F i else W, fun i hi ↦ if_pos hi,
-      fun i hi ↦ if_neg (by omega)⟩
+    ⟨fun i ↦ if i ≤ k then F i else W, fun i hi ↦ ite_eq_left hi,
+      fun i hi ↦ ite_eq_right (by omega)⟩
   refine ⟨F', by rw [hle 0 (Nat.zero_le k), h0], ?_, ?_, ?_⟩
   · rw [hgt (k + 1) k.lt_succ_self, Submodule.finrank_sup_span_singleton hx, hk']
   · intro i hi g

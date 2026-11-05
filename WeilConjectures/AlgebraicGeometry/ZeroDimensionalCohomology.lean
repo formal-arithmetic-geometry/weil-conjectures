@@ -295,7 +295,7 @@ theorem Etale.isIso_piLift_toPresheafFiber {X : Scheme.{u}} [Finite X] [Discrete
         (Scheme.Etale.mk (U x).ι) (Scheme.pointSmallEtaleFiberObjOpens (s x) (U x) (hsU x))
           P.obj := by
     ext x
-    simp only [Pi.lift_π, Category.assoc, Pi.map_π, Pi.lift_π_assoc]
+    simp only [Pi.lift_comp_π, Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc]
     change _ = P.obj.map (i x).op ≫ _
     rw [GrothendieckTopology.Point.toPresheafFiber_w]
     congr 1

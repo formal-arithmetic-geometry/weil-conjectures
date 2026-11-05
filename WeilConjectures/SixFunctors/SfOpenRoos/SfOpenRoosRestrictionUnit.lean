@@ -457,9 +457,9 @@ private theorem augmentation_eq
       biprod.lift_fst]
     rw [← Category.assoc (b'.f _), hb',
       biprod.lift_fst_assoc]
-    have h := congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_π gamma n)
+    have h := congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_comp_π gamma n)
     have h' := congrArg (fun f ↦ f.f (p + 1))
-      (Pi.lift_π (fun n ↦ (F.mapHomologicalComplex (.up ℤ)).map (gamma n)) n)
+      (Pi.lift_comp_π (fun n ↦ (F.mapHomologicalComplex (.up ℤ)).map (gamma n)) n)
     simpa only [HomologicalComplex.comp_f] using
       (congrArg F.map h).trans h'.symm
   · apply product_degree_ext

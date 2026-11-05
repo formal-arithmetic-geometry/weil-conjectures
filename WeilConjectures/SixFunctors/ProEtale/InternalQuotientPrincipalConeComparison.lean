@@ -119,7 +119,7 @@ private theorem quotientTowerComparison
     apply Pi.hom_ext
     intro n
     simp only [Category.id_comp, p, Category.assoc, Limits.Pi.map_π,
-      CochainComplex.PrincipalCone.productUnit, Pi.lift_π_assoc, Pi.lift_π]
+      CochainComplex.PrincipalCone.productUnit, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     exact (hu n).symm
   have hb : CochainComplex.PrincipalCone.unit μ ≫ b =
       CochainComplex.mappingCocone.lift g (Pi.lift u) 0 (by

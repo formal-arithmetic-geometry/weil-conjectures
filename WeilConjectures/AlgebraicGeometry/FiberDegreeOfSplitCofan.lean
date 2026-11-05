@@ -75,10 +75,10 @@ theorem Scheme.Hom.fiberDegree_eq_nat_card_of_split_cofan
     rw [sigmaSpec_comp_Spec_map_algebraMap]
     apply Sigma.hom_ext
     intro j
-    rw [Sigma.ι_desc]
+    rw [Sigma.ι_comp_desc]
     change 𝟙 (Spec K) = Sigma.ι (fun _ : J ↦ Spec K) j ≫
       Sigma.desc a ≫ p.fiberToSpecResidueField x
-    rw [Sigma.ι_desc_assoc]
+    rw [Sigma.ι_comp_desc_assoc]
     exact (ha j).symm
   change (p.fiberToSpecResidueField x).finrankΓ = Nat.card J
   rw [Scheme.Hom.finrankΓ_eq_of_iso _ r e (Iso.refl _) (by simpa using he)]

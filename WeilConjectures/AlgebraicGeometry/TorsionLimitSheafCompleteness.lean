@@ -77,7 +77,7 @@ private theorem difference_iso_of_nilpotent {B : Type*} [Category* B]
     | zero => simp
     | succ r ih =>
       rw [pow_succ, End.mul_def, Category.assoc, ih, ← Category.assoc]
-      simp only [s, towerProductShift, Pi.lift_π]
+      simp only [s, towerProductShift, Pi.lift_comp_π]
       rw [Category.assoc, ← End.mul_def, ← pow_succ]
       simp only [Nat.add_assoc]
   obtain ⟨e, he⟩ := ha

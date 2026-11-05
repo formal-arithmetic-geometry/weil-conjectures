@@ -71,7 +71,7 @@ theorem completion_map_bijective
     rw [AdicCompletion.maximalIdeal_eq_map, Ideal.map_map, hcomp,
       ← Ideal.map_map, hmax, ← AdicCompletion.maximalIdeal_eq_map]
   have : IsLocalHom φhat :=
-    ((IsLocalRing.local_hom_TFAE φhat).out 0 2).mpr hmaxhat.le
+    ((IsLocalRing.local_hom_TFAE φhat).out 1 3).mpr hmaxhat.le
   have : Module.Flat R S := hflat
   -- Flat local maps are faithfully flat, hence injective.
   have : Module.FaithfullyFlat R S := Module.FaithfullyFlat.of_flat_of_isLocalHom

@@ -225,7 +225,7 @@ theorem ringKrullDim_eq_of_isStrictHenselization
   rw [e.commRingCatIsoToRingEquiv.ringKrullDim]
   apply le_antisymm
   · have : IsLocalHom ρ₀.hom := by
-      apply ((IsLocalRing.local_hom_TFAE ρ₀.hom).out 4 0).mp
+      apply ((IsLocalRing.local_hom_TFAE ρ₀.hom).out 5 1).mp
       rw [hm₀, hcontract, hp]
     exact RingHom.ringKrullDim_le_of_faithfullyFlat_of_isLocalHom ρ₀.hom
       (AlgebraicGeometry.Scheme.strictHenselization_faithfullyFlat

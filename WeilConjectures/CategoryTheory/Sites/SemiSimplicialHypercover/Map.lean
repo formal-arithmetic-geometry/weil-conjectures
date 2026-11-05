@@ -42,7 +42,7 @@ lemma exists_comp_map_matchingπ_eq (U : SemiSimplicialObject C) {n : ℕ} {T : 
     refine ⟨Pi.lift x ≫ inv (piComparison F fun _ : Fin 2 ↦ U.obj 0), fun i ↦ ?_⟩
     have h0 : inv (piComparison F fun _ : Fin 2 ↦ U.obj 0) ≫ F.map (Pi.π _ i) = Pi.π _ i := by
       rw [IsIso.inv_comp_eq, piComparison_comp_π]
-    exact (Category.assoc _ _ _).trans ((congrArg _ h0).trans (Pi.lift_π x i))
+    exact (Category.assoc _ _ _).trans ((congrArg _ h0).trans (Pi.lift_comp_π x i))
   | succ m =>
     let L := U.matchingLeft m
     let R := U.matchingRight m
@@ -52,13 +52,13 @@ lemma exists_comp_map_matchingπ_eq (U : SemiSimplicialObject C) {n : ℕ} {T : 
       have h0 : inv (piComparison F fun _ : Fin (m + 3) ↦ U.obj (m + 1)) ≫ F.map (Pi.π _ i) =
           Pi.π _ i := by
         rw [IsIso.inv_comp_eq, piComparison_comp_π]
-      exact (Category.assoc _ _ _).trans ((congrArg _ h0).trans (Pi.lift_π x i))
+      exact (Category.assoc _ _ _).trans ((congrArg _ h0).trans (Pi.lift_comp_π x i))
     have hL (p : MatchingIndex m) : F.map L ≫ F.map (Pi.π _ p) =
         F.map (Pi.π _ p.1.2.succ) ≫ F.map (U.δ m p.1.1) := by
-      simp only [← F.map_comp, L, matchingLeft, Pi.lift_π]
+      simp only [← F.map_comp, L, matchingLeft, Pi.lift_comp_π]
     have hR (p : MatchingIndex m) : F.map R ≫ F.map (Pi.π _ p) =
         F.map (Pi.π _ p.1.1.castSucc) ≫ F.map (U.δ m p.1.2) := by
-      simp only [← F.map_comp, R, matchingRight, Pi.lift_π]
+      simp only [← F.map_comp, R, matchingRight, Pi.lift_comp_π]
     have hw : a ≫ F.map L = a ≫ F.map R := by
       rw [← cancel_mono (piComparison F fun _ : MatchingIndex m ↦ U.obj m)]
       refine Pi.hom_ext _ _ fun p ↦ ?_

@@ -430,8 +430,7 @@ private theorem chart_tensor_naturality
     simpa only [TensorProduct.smul_tmul', smul_eq_mul, mul_one, dc] using hh
   constructor
   · intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy =>
       rw [mk_add_one (Submonoid.powers (f j))
         (FormalGlueing.restrict φ (FormalGlueing.extend φ (M i)))]
@@ -441,8 +440,7 @@ private theorem chart_tensor_naturality
       simp only [LinearEquiv.coe_coe]
       rw [bl i j m, dt, map_mul, scalar_restrict, app_restrict]
   · intro y
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | add x y hx hy =>
       rw [mk_add_one (Submonoid.powers (f i))
         (FormalGlueing.restrict φ (FormalGlueing.extend φ (M j)))]

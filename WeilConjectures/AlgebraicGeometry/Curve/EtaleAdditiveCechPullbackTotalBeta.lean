@@ -78,7 +78,7 @@ theorem additiveCech_pullback_total_beta
         (op ((additiveCechOpenInclusion Y).obj (∏ᶜ fun l ↦ V (y l))))))
     intro ⟨y⟩
     erw [← ConcreteCategory.comp_apply, additiveCechPullbackBidegree,
-      CategoryTheory.Limits.Pi.lift_π,
+      CategoryTheory.Limits.Pi.lift_comp_π,
       ConcreteCategory.comp_apply, CategoryTheory.Limits.Pi.lift_π_apply,
       CategoryTheory.Limits.Pi.lift_π_apply]
     let A := (additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l))

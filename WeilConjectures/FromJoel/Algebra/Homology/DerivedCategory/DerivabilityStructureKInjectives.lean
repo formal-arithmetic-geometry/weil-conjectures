@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Construc
 public import Mathlib.CategoryTheory.Localization.OfQuotient
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # The K-injective derivability structure

@@ -129,7 +129,7 @@ theorem derivedModuleDirectSums (R : Type u) [Ring R]
     let d := DerivedCategory.Q.map (Sigma.desc f) ≫ e.inv
     have hd (i : I) : DerivedCategory.Q.map (Sigma.ι K i) ≫ d = a i := by
       dsimp [d]
-      rw [← Category.assoc, ← Functor.map_comp, Sigma.ι_desc, hf]
+      rw [← Category.assoc, ← Functor.map_comp, Sigma.ι_comp_desc, hf]
       simp
     refine ⟨d, hd, ?_⟩
     intro m hm
@@ -140,7 +140,7 @@ theorem derivedModuleDirectSums (R : Type u) [Ring R]
       rw [Functor.map_comp, hg, ← Category.assoc, hm, hf]
     have hhom := coproduct_homotopy K g (Sigma.desc f) (fun i ↦
       (derived_map_homotopy (Sigma.ι K i ≫ g) (Sigma.ι K i ≫ Sigma.desc f)
-        (by simpa only [Sigma.ι_desc] using he i)).some)
+        (by simpa only [Sigma.ι_comp_desc] using he i)).some)
     rw [← hg, DerivedCategory.Q_map_eq_of_homotopy _ hhom.some]
     simp [d]
   refine ⟨Cofan.IsColimit.mk _ (fun t ↦ (hu t.pt t.inj).choose) ?_ ?_⟩

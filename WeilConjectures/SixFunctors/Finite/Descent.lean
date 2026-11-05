@@ -365,7 +365,7 @@ lemma exists_pullSection_eq_map_toEtaleMkId [Surjective r]
     apply Concrete.limit_ext
     rintro ⟨t⟩
     rw [map_zero, ← ConcreteCategory.comp_apply]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
     exact key t
   have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
     preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _

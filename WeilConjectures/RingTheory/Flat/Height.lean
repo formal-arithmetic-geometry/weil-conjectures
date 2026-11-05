@@ -50,7 +50,7 @@ theorem height_comap_includeRight_eq_height_add [IsNoetherianRing R] [IsNoetheri
   have hloc : IsLocalHom (algebraMap Rp Sq) :=
     inferInstanceAs (IsLocalHom (Localization.localRingHom p q (algebraMap R S) _))
   have : (maximalIdeal Sq).LiesOver (maximalIdeal Rp) :=
-    ⟨(((local_hom_TFAE (algebraMap Rp Sq)).out 0 4 rfl rfl).mp hloc).symm⟩
+    ⟨(((local_hom_TFAE (algebraMap Rp Sq)).out 1 5 rfl rfl).mp hloc).symm⟩
   have key := Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown (maximalIdeal Rp)
     (maximalIdeal Sq)
   set I := (maximalIdeal Rp).map (algebraMap Rp Sq)
@@ -59,7 +59,7 @@ theorem height_comap_includeRight_eq_height_add [IsNoetherianRing R] [IsNoetheri
     rw [← Localization.AtPrime.map_eq_maximalIdeal, Ideal.map_map,
       ← IsScalarTower.algebraMap_eq]
   have hIle : I ≤ maximalIdeal Sq := by
-    exact ((local_hom_TFAE (algebraMap Rp Sq)).out 0 2 rfl rfl).mp hloc
+    exact ((local_hom_TFAE (algebraMap Rp Sq)).out 1 3 rfl rfl).mp hloc
   have : Nontrivial (Sq ⧸ I) :=
     Ideal.Quotient.nontrivial_iff.mpr (ne_top_of_le_ne_top (maximalIdeal.isMaximal Sq).ne_top hIle)
   have : IsLocalRing (Sq ⧸ I) := .of_surjective' _ Ideal.Quotient.mk_surjective

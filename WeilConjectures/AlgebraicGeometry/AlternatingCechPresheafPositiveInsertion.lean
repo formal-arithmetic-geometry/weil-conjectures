@@ -212,7 +212,7 @@ private theorem map_π {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
   let : K.IsRightAdjoint :=
     inferInstanceAs (PresheafOfModules.pushforward (cechCapRingMap (U i))).IsRightAdjoint
   dsimp only [map]
-  rw [Category.assoc, inv_piComparison_comp_map_π, Pi.lift_π]
+  rw [Category.assoc, inv_piComparison_comp_map_π, Pi.lift_comp_π]
 
 open Limits Opposite in
 private theorem capIntoCap_map_comp {X : Scheme.{u}} (G : X.Modules)
@@ -251,7 +251,7 @@ private theorem map_d_π {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
   let K := cechCapPresheafFunctor (U i)
   let : K.Additive := ⟨by intro A B f g; ext V s; rfl⟩
   rw [← K.map_comp]
-  simp only [alternatingCechSheafPresheafD, Pi.lift_π, Functor.map_sum,
+  simp only [alternatingCechSheafPresheafD, Pi.lift_comp_π, Functor.map_sum,
     Functor.map_zsmul, Functor.map_comp, Preadditive.comp_sum, Preadditive.comp_zsmul,
     ← Category.assoc, boundaryCoordinate]
   simp only [K, map_π]
@@ -462,7 +462,7 @@ private theorem alternatingCechPresheaf_insertion_omitting_coordinate
     (hcpivot j) (hcface j) (hcap j)
   rw [ht]
   simp only [Preadditive.comp_zsmul, ← Category.assoc,
-    alternatingCechSheafPresheafD, Pi.lift_π, Preadditive.sum_comp,
+    alternatingCechSheafPresheafD, Pi.lift_comp_π, Preadditive.sum_comp,
     Preadditive.zsmul_comp]
   simp only [Category.assoc, capIntoCap_comp]
   rw [Fin.sum_univ_succAbove _ b]

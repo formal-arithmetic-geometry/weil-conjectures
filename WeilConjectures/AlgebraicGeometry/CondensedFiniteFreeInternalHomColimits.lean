@@ -244,12 +244,12 @@ private noncomputable def ihomFreePowerIso (n : ℕ) :
       rcases j with ⟨j⟩
       simp only [Iso.trans_hom, Category.assoc, Functor.comp_map, Functor.const_obj_obj,
         Functor.const_map_app, lim_map,
-        limMap_π, Pi.isoLimit_hom_π, biproduct.isoProduct_hom, Pi.lift_π,
+        limMap_π, Pi.isoLimit_hom_π, biproduct.isoProduct_hom, Pi.lift_comp_π,
         biproduct.mapIso_hom]
       simp only [Mod.ihomBiproductIso, biproduct.uniqueUpToIso, Mod.ihomBiproductBicone]
       simp only [Pi.isoLimit_hom_π_assoc]
       dsimp only [Functor.const] at *
-      erw [biproduct.map_π, biproduct.lift_π_assoc, Pi.lift_π_assoc,
+      erw [biproduct.map_π, biproduct.lift_π_assoc, Pi.lift_comp_π_assoc,
         biproduct.map_π_assoc, biproduct.lift_π_assoc]
       rw [(Mod.ihomMap (biproduct.ι (fun _ : Fin n ↦ Mod.regular A) j)).naturality_assoc]
       exact congrArg ((Mod.ihomMap

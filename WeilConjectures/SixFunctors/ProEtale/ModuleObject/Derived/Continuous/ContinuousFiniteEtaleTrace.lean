@@ -108,7 +108,7 @@ private theorem epi_sum_of_product
     rw [← Category.assoc]
     change (Pi.lift (fun j ↦ if j = j₀ then (e j).hom else 0) ≫ Pi.π B j) ≫
       (e j).inv = _
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     split_ifs <;> simp only [Iso.hom_inv_id, zero_comp]
   have hr : r ≫ (∑ j, q ≫ Pi.π B j ≫ (e j).inv) = 𝟙 A := by
     rw [Preadditive.comp_sum]
@@ -134,7 +134,7 @@ private theorem epi_mod_sum_of_sheets
   have hepi := epi_sum_of_product (fun j ↦ (G j).obj (F.obj P))
     (fun j ↦ (a j).app P) (Pi.lift (fun j ↦
       (a j).hom.app (L.obj (F.obj P)) ≫ (G j).map ε)) j₀
-  simpa only [Pi.lift_π_assoc, Iso.app_inv, Category.assoc] using hepi
+  simpa only [Pi.lift_comp_π_assoc, Iso.app_inv, Category.assoc] using hepi
 
 private theorem sheetSum_epi
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

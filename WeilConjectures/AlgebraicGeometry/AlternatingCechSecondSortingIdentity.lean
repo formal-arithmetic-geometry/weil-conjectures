@@ -84,7 +84,7 @@ theorem cechSecondSortingIdentity (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     intro i j hij he
     exact (ne_of_lt (h hij) he).elim
   by_cases hsort : cechStableSort t σ
-  · rw [if_pos hsort, cechSortedContraction X U F S p s (t ∘ σ) hsort.1]
+  · rw [ite_eq_left hsort, cechSortedContraction X U F S p s (t ∘ σ) hsort.1]
     by_cases hstrict : StrictMono (t ∘ σ)
     · simp [hsort, hstrict]
     · simp [hsort, hstrict]

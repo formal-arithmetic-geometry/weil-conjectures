@@ -182,8 +182,7 @@ theorem card_le_filter_append {j l : ℕ} (u : Fin j → P) (x : Fin l → V) :
 theorem wedgeSection_mem_countSpan {j l : ℕ} (h : j + l = n)
     (t : ⋀[k]^j P ⊗[k] ⋀[k]^l (V ⧸ P)) : wedgeSection n s h t ∈ countSpan P n j := by
   subst h
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t with
   | add x y hx hy => simpa using add_mem hx hy
   | tmul x y =>
     have hx : x ∈ Submodule.span k (Set.range (ιMulti k j)) := by

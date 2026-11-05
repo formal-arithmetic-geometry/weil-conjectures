@@ -61,8 +61,8 @@ theorem isDerivedLimitTriangle_map (Φ : C ⥤ D) [Φ.CommShift ℤ] [Φ.IsTrian
       e.hom ≫ towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) := by
     refine Pi.hom_ext _ _ fun n ↦ ?_
     simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
-      Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id, Pi.lift_π, Functor.map_sub]
-    rw [← Category.assoc, he, ← Functor.map_comp, ← Functor.map_comp, Pi.lift_π,
+      Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id, Pi.lift_comp_π, Functor.map_sub]
+    rw [← Category.assoc, he, ← Functor.map_comp, ← Functor.map_comp, Pi.lift_comp_π,
       Category.id_comp, Functor.map_comp]
   refine isomorphic_distinguished _ (Φ.map_distinguished _ h) (Triangle.mk (Φ.map p ≫ e.hom)
     (towerTransitionEndomorphism fun n ↦ Φ.map (f n))

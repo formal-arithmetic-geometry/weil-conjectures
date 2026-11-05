@@ -41,7 +41,7 @@ private theorem completion_fiber_subsingleton
   classical
   let L := Localization.AtPrime p
   let C := AdicCompletion (IsLocalRing.maximalIdeal L) L
-  obtain ⟨x, hxq, hxp⟩ := SetLike.not_le_iff_exists.mp hqp
+  obtain ⟨x, hxq, hxp⟩ := IsConcreteLE.not_le_iff_exists.mp hqp
   have hu : IsUnit (algebraMap R C x) := by
     rw [IsScalarTower.algebraMap_apply R L C]
     exact (IsLocalization.map_units L (⟨x, hxp⟩ : p.primeCompl)).map (algebraMap L C)

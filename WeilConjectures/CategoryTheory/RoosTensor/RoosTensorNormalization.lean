@@ -107,7 +107,7 @@ private theorem comparison_inclusion (K : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) 
       apply Pi.hom_ext
       intro n
       rw [Category.assoc]
-      erw [Pi.lift_π, Pi.lift_π]
+      erw [Pi.lift_comp_π, Pi.lift_comp_π]
       exact limit.post_π K.asFunctor (complexF F) (op n)
     exact congrArg (fun z ↦ z.f (p + 1)) hl.symm
 

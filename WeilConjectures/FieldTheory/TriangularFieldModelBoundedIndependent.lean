@@ -98,7 +98,7 @@ theorem triangularFieldModel_bounded_independent
       Ideal.Quotient.liftₐ I (MvPolynomial.aeval y)
         (fun q hq ↦ RingHom.mem_ker.mp (hrel hq))
     have hleft : ev.comp psi = AlgHom.id k D := by
-      apply AlgHom.coe_ringHom_injective
+      apply AlgHom.toRingHom_injective
       apply IsLocalization.ringHom_ext (Submonoid.powers h)
       apply RingHom.ext
       intro r

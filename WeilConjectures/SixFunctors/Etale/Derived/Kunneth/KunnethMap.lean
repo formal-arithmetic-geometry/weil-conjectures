@@ -538,7 +538,7 @@ theorem isGloballyGenerated_of_isSepClosed
     ((adj.homEquiv _ _).symm (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s)))
   rw [Equiv.apply_symm_apply] at h
   rw [← ConcreteCategory.comp_apply, Category.assoc, ← Γ.map_comp,
-    globalSectionsEvaluation, Sigma.ι_desc, ← h]
+    globalSectionsEvaluation, Sigma.ι_comp_desc, ← h]
   simp only [ModuleCat.hom_ofHom]
   exact one_smul Λ s
 /-- Over a separably closed field `k`, the derived global sections

@@ -111,7 +111,7 @@ theorem pbc_integral_completion_transport_coordinates
       (((ordinaryIntegralQuotientAugmentation l E h).app P).app (op n)).f i := by
       unfold ordinaryIntegralCompletionChain
       rw [← Category.assoc, CochainComplex.mappingCocone.lift_f_fst_f]
-      have hp := Pi.lift_π (fun m : ℕ ↦
+      have hp := Pi.lift_comp_π (fun m : ℕ ↦
         ((ordinaryIntegralQuotientAugmentation l E h).app P).app (op m)) n
       exact congrArg (fun f ↦ f.f i) hp
     rw [hα]

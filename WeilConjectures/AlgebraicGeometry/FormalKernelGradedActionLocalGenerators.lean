@@ -116,10 +116,7 @@ private theorem affine_restriction_span {X : Scheme.{u}} (G : X.Modules)
   intro z hz
   clear hz
   obtain ⟨q, rfl⟩ := hc.2 z
-  induction q using TensorProduct.induction_on with
-  | zero =>
-    rw [map_zero]
-    exact Submodule.zero_mem _
+  induction q with
   | tmul x b =>
     rw [ht]
     apply Submodule.smul_mem

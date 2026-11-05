@@ -61,8 +61,7 @@ lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
     rfl
   have key (t : ((homObj M (unit _)) ⊗ P).obj (op U)) :
       ∃ φ : (homObj M (unit _)).obj (op U), t = φ ⊗ₜ p₀ := by
-    induction t using TensorProduct.induction_on with
-    | zero => exact ⟨0, by simp⟩
+    induction t with
     | tmul φ p =>
       obtain ⟨a, rfl⟩ := hp₀ p
       exact ⟨a • φ, (TensorProduct.smul_tmul _ _ _).symm⟩
@@ -143,8 +142,7 @@ lemma dualTensorHom_app_bijective_of_free {U : C} {ι : Type*} [Fintype ι] [Dec
   -- Every element of `Hom(M, R) ⊗ P` over `U` is `∑ i, c i ⊗ pᵢ`.
   have key (t : ((homObj M (unit _)) ⊗ P).obj (op U)) :
       ∃ p : ι → P.obj (op U), t = ∑ i, c' i ⊗ₜ p i := by
-    induction t using TensorProduct.induction_on with
-    | zero => exact ⟨0, by simp⟩
+    induction t with
     | tmul φ q =>
       refine ⟨fun i ↦ a φ i • q, ?_⟩
       conv_lhs => rw [hdual φ]

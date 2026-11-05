@@ -262,7 +262,7 @@ private theorem split_covers {T : Scheme.{u}} (W : Scheme.ProEt.Qcqs T)
       Sigma.desc (fun i : I ↦ (a i.down).left ≫ e.hom) := by
     apply Sigma.hom_ext
     intro i
-    simp only [k, Sigma.ι_desc_assoc, Sigma.ι_desc]
+    simp only [k, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
   refine ⟨e.hom ≫ σ ≫ k, ?_⟩
   apply (cancel_mono e.hom).mp
   simp only [Category.assoc, Category.id_comp, hk]

@@ -123,7 +123,7 @@ theorem orderedCech_secondSorting_degreewise_exists {X' : Scheme.{u}}
         orderedCechNaturalCoordinate M W₀ D e p B y (φ.app (op B) s) =
           orderedCechSecondSortingValue M W₀ D e p B y s := by
       change (((c ≫ (e p).inv) ≫ (e p).hom ≫ Pi.π (F p) y).app (op B)) s = _
-      simp only [Category.assoc, Iso.inv_hom_id_assoc, c, Pi.lift_π]
+      simp only [Category.assoc, Iso.inv_hom_id_assoc, c, Pi.lift_comp_π]
       simp only [NatTrans.app_sum, orderedCechSecondSortingValue]
       simp only [ModuleCat.hom_sum, LinearMap.sum_apply]
       apply Finset.sum_congr rfl

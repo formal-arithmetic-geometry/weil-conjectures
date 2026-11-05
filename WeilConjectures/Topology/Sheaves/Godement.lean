@@ -56,7 +56,7 @@ instance isFlasque_godement (S : X → Type u) [∀ x, AddCommGroup (S x)] :
     refine (AddCommGrpCat.epi_iff_surjective _).2 fun t ↦ ?_
     refine ⟨fun x ↦ if h : x.1 ∈ V.unop then t ⟨x.1, h⟩ else 0, funext fun x ↦ ?_⟩
     change (if h : x.1 ∈ V.unop then t ⟨x.1, h⟩ else 0) = t x
-    rw [dif_pos x.2]
+    rw [dite_eq_left x.2]
 
 /-- The morphism of Godement presheaves induced by a family of additive maps. -/
 @[simps]

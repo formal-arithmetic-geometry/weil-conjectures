@@ -191,7 +191,7 @@ theorem isRepresentableOver_of_isAffineOpen {W : T.Opens} (hW : IsAffineOpen W) 
   have : AlgebraicGeometry.Surjective p := ⟨fun y ↦ by
     obtain ⟨k, hk, z, hz, hzy⟩ := Set.mem_iUnion₂.1 (ht y.2)
     refine ⟨Sigma.ι Ok ⟨k, hk⟩ ⟨z, hz⟩, W.ι.isOpenEmbedding.injective ?_⟩
-    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, Sigma.ι_desc_assoc, hlk]
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, Sigma.ι_comp_desc_assoc, hlk]
     exact hzy⟩
   let s : W.toScheme ⟶ T := W.ι ≫ 𝟙 T
   -- over the summands of `X`, the sheaf `E` is represented by trivial finite covers
@@ -207,7 +207,7 @@ theorem isRepresentableOver_of_isAffineOpen {W : T.Opens} (hW : IsAffineOpen W) 
       rw [← cancel_epi ιk.isoOpensRange.hom]
       change ιk.isoOpensRange.hom ≫ ιk.isoOpensRange.inv ≫ (O k.1).ι ≫ 𝒰.f (i k.1) =
         ιk.isoOpensRange.hom ≫ ιk.opensRange.ι ≫ p ≫ W.ι ≫ 𝟙 T
-      rw [Iso.hom_inv_id_assoc, Scheme.Hom.isoOpensRange_hom_ι_assoc, Sigma.ι_desc_assoc,
+      rw [Iso.hom_inv_id_assoc, Scheme.Hom.isoOpensRange_hom_ι_assoc, Sigma.ι_comp_desc_assoc,
         Category.comp_id, hlk]
     exact ⟨_, pullback.snd _ o,
       MorphismProperty.pullback_snd _ _ (IsZariskiLocalAtSource.sigmaDesc fun _ ↦ inferInstance),

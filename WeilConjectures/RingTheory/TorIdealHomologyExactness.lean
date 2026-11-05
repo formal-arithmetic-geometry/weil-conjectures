@@ -84,18 +84,15 @@ theorem tor_ideal_homology_exactness
   have hexI := lTensor_exact I hexd hεsurj
   have hmε (t : I ⊗[R] P.complex.X 0) : ε (m 0 t) = μR (ε.lTensor I t) := by
     induction t with
-    | zero => simp
     | tmul a p => simp only [hm, LinearMap.lTensor_tmul, map_smul, hμR]
     | add x y hx hy => simp_all only [map_add]
   have hmd (t : I ⊗[R] P.complex.X 1) :
       d (m 1 t) = m 0 (d.lTensor I t) := by
     induction t with
-    | zero => simp
     | tmul a p => simp only [hm, LinearMap.lTensor_tmul, map_smul]
     | add x y hx hy => simp_all only [map_add]
   have hmq (n : ℕ) (t : I ⊗[R] P.complex.X n) : m n t ⊗ₜ[R] (1 : R ⧸ I) = 0 := by
     induction t with
-    | zero => simp
     | tmul a p =>
       rw [hm, TensorProduct.smul_tmul]
       have ha : (a : R) • (1 : R ⧸ I) = 0 := by

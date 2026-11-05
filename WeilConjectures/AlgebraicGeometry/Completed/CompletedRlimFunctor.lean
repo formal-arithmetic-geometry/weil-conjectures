@@ -271,7 +271,7 @@ theorem completedRlim_roos (T : Scheme.{t})
     apply Pi.hom_ext
     intro n
     dsimp only [completedRlimRoosProjection, ep]
-    simp only [Category.assoc, Pi.lift_π, Pi.mapIso_hom_π, Pi.lift_π_assoc]
+    simp only [Category.assoc, Pi.lift_comp_π, Pi.mapIso_hom_π, Pi.lift_comp_π_assoc]
     dsimp only [eL, en, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, asIso_hom]
     erw [Category.assoc, (completedRlimProjection T R n).naturality]
     erw [← Category.assoc, completedRlimProjection_unit]

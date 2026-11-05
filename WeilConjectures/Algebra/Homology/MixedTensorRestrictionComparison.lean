@@ -48,12 +48,10 @@ private theorem coefficientIso_naturality₁ {R A : Type u} [CommRing R] [CommRi
   let := Module.compHom N f
   let : IsScalarTower R A N := SMul.comp.isScalarTower f
   ext x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x with
   | add x y hx hy => simp_all
   | tmul n t =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t with
     | add x y hx hy => simp_all [TensorProduct.tmul_add]
     | tmul b e => rfl
 
@@ -68,12 +66,10 @@ private theorem coefficientIso_naturality₂ {R A : Type u} [CommRing R] [CommRi
   let : IsScalarTower R A N := SMul.comp.isScalarTower f
   let : IsScalarTower R A N' := SMul.comp.isScalarTower f
   ext x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x with
   | add x y hx hy => simp_all
   | tmul n t =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t with
     | add x y hx hy => simp_all [TensorProduct.tmul_add]
     | tmul b e => 
       change e ⊗ₜ[R] (b • a n) = e ⊗ₜ[R] a (b • n)

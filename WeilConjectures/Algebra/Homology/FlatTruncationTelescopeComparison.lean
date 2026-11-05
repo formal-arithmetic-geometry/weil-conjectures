@@ -108,7 +108,7 @@ theorem quasiIso_flat_truncation_telescope
     have hqn : t n ≫ q (n + 1) = q n ≫ v n := by
       apply (cancel_mono (G.ιTruncLE ((n + 1 : ℕ) : ℤ))).1
       simpa only [Category.assoc, hv n] using hcompat n
-    simp only [σ, Category.assoc, Sigma.ι_desc_assoc, Sigma.ι_desc,
+    simp only [σ, Category.assoc, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc,
       Sigma.ι_map_assoc, Sigma.ι_map]
     rw [← Category.assoc, hqn, Category.assoc]
   let m := mappingCone.map φ ψ σ σ hcomm
@@ -149,9 +149,9 @@ theorem quasiIso_flat_truncation_telescope
         apply Sigma.hom_ext
         intro n
         rw [Sigma.ι_map_assoc]
-        conv_rhs => rw [Sigma.ι_desc]
+        conv_rhs => rw [Sigma.ι_comp_desc]
         exact congrArg (fun z ↦ q n ≫ z)
-          (Sigma.ι_desc (fun n : ℕ ↦ G.ιTruncLE (n : ℤ)) n)
+          (Sigma.ι_comp_desc (fun n : ℕ ↦ G.ιTruncLE (n : ℤ)) n)
       exact congrArg (fun z ↦ z.f i) (hinr.trans hr.symm)
   rw [heq]
   have : QuasiIso m := hm

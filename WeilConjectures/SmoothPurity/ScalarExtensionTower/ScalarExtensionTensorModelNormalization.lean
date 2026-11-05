@@ -52,7 +52,7 @@ private theorem roosUnit_eq (W : Scheme.{u})
       exact (Category.assoc _ _ _).symm.trans
         ((congrArg (fun f ↦ f ≫ CategoryTheory.Limits.Pi.π
           (fun m ↦ I.asFunctor.obj (Opposite.op m)) n) hf).trans
-            (CategoryTheory.Limits.Pi.lift_π _ n))
+            (CategoryTheory.Limits.Pi.lift_comp_π _ n))
     · intro i j h
       exact CochainComplex.mappingCocone.lift_f_snd_v
         (scalarRoosBoundary I.asFunctor) (pullbackTensorRoosAugmentation l E W I) 0

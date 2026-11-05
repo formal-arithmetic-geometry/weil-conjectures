@@ -125,7 +125,7 @@ lemma exists_fiber_map_vaddHom (x y : (fiber s).obj t.toFiniteEtale) :
     ⟨_, IsOpenImmersion.lift_fac _ _ hrange⟩
   have h1 : l ≫ pullback.lift (f := t.π) (g := t.π) (t.vadd m) (𝟙 t.P)
       (by rw [t.vadd_π, Category.id_comp]) = z := by
-    rw [← Sigma.ι_desc (fun m : M ↦ pullback.lift (f := t.π) (g := t.π) (t.vadd m) (𝟙 t.P)
+    rw [← Sigma.ι_comp_desc (fun m : M ↦ pullback.lift (f := t.π) (g := t.π) (t.vadd m) (𝟙 t.P)
       (by rw [t.vadd_π, Category.id_comp])) m, ← Category.assoc, hl]
     simp [w, D]
   have hfst := congrArg (· ≫ pullback.fst t.π t.π) h1
@@ -148,7 +148,7 @@ lemma eq_of_fiber_map_vaddHom_eq (x : (fiber s).obj t.toFiniteEtale) {m n : M}
       pullback.lift (f := t.π) (g := t.π) (t.vadd m) (𝟙 t.P)
       (by rw [t.vadd_π, Category.id_comp]))]
     apply pullback.hom_ext <;>
-      simp only [Category.assoc, Sigma.ι_desc_assoc, pullback.lift_fst, pullback.lift_snd,
+      simp only [Category.assoc, Sigma.ι_comp_desc_assoc, pullback.lift_fst, pullback.lift_snd,
         Category.comp_id, h']
   have h3 := congrArg (fun f ↦ f (default : Spec (.of Ω))) h2
   simp only [Scheme.Hom.comp_apply] at h3

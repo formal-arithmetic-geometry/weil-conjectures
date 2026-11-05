@@ -77,7 +77,7 @@ theorem proetale_surjective_sections_of_epi_tower
   have hx (n : ℕ) (h : n ≤ m) : x n = G.map (homOfLE h).op a := by
     cases n with
     | zero => rfl
-    | succ n => exact dif_pos h
+    | succ n => exact dite_eq_left h
   have hstep (n : ℕ) : G.map (homOfLE (Nat.le_succ n)).op (x (n + 1)) = x n := by
     by_cases h : n + 1 ≤ m
     · rw [hx (n + 1) h, hx n (Nat.le_trans (Nat.le_succ n) h)]
@@ -86,7 +86,7 @@ theorem proetale_surjective_sections_of_epi_tower
     · change G.map (homOfLE (Nat.le_succ n)).op
         (if h : n + 1 ≤ m then G.map (homOfLE h).op a
           else (hG n (x n)).choose) = x n
-      rw [dif_neg h]
+      rw [dite_eq_right h]
       exact (hG n (x n)).choose_spec
   have hcompat (n k : ℕ) (h : k ≤ n) : G.map (homOfLE h).op (x n) = x k := by
     induction h with

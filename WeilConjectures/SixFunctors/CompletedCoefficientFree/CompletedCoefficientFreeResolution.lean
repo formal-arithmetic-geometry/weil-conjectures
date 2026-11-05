@@ -1133,7 +1133,7 @@ private theorem complexTower_roos
   let shift : B.pt ⟶ B.pt := towerProductShift
     (fun n ↦ T.map (homOfLE n.le_succ).op)
   have hshift (n : ℕ) : shift ≫ B.proj n =
-      B.proj (n + 1) ≫ T.map (homOfLE n.le_succ).op := Pi.lift_π _ _
+      B.proj (n + 1) ≫ T.map (homOfLE n.le_succ).op := Pi.lift_comp_π _ _
   let S := ShortComplex.mk _ _
     (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hB shift hshift c)
   have hk := Fan.IsLimit.isLimitKernelForkOneSub hB shift hshift hc
@@ -1154,7 +1154,7 @@ private theorem complexTower_roos
       apply Pi.hom_ext
       intro n
       simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
-        Preadditive.comp_sub, Preadditive.sub_comp, Category.id_comp, Pi.lift_π,
+        Preadditive.comp_sub, Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π,
         HomologicalComplex.sub_f_apply, HomologicalComplex.id_f]
       have hn := congrArg (fun q ↦ q.f i) (hshift n)
       simpa only [HomologicalComplex.comp_f, Category.assoc, reassoc_of% he, f] using
@@ -1182,7 +1182,7 @@ private theorem complexTower_roos
   have hE (n : ℕ) : E.hom ≫ Pi.π K₀ n = DerivedCategory.Q.map (B.proj n) :=
     hQFan.conePointUniqueUpToIso_hom_comp (productIsProduct K₀) ⟨n⟩
   have hπ (n : ℕ) : p ≫ Pi.π K₀ n =
-      DerivedCategory.Q.map (c.π.app (op n)) := Pi.lift_π _ _
+      DerivedCategory.Q.map (c.π.app (op n)) := Pi.lift_comp_π _ _
   have hi : DerivedCategory.Q.map S.f ≫ E.hom = p := by
     apply Pi.hom_ext
     intro n
@@ -1198,7 +1198,7 @@ private theorem complexTower_roos
     intro n
     simp only [Category.assoc, hE, ← Functor.map_comp, hu, Functor.map_sub]
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-      Category.id_comp, Preadditive.comp_sub, Pi.lift_π, hE, f₀]
+      Category.id_comp, Preadditive.comp_sub, Pi.lift_comp_π, hE, f₀]
     rw [Functor.map_comp, ← Category.assoc, hE]
   let δ := DerivedCategory.triangleOfSESδ hS
   refine ⟨E.inv ≫ δ, ?_⟩

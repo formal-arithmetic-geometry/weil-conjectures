@@ -204,8 +204,7 @@ private theorem pureTensor_ext {R : Sheaf J CommRingCat.{r}}
       ((adj.unit.app (M.val ⊗ N.val)).app V t)) =
     g.val.app V ((tensorObjIsoSheafification M N).inv.val.app V
       ((adj.unit.app (M.val ⊗ N.val)).app V t))
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t with
   | tmul x y => exact h V x y
   | add t t' ht ht' => simp only [map_add, ht, ht']
 
@@ -351,8 +350,7 @@ private def restrictedTensorPresheafIso (φ : R ⟶ S)
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s m =>
       change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom] M.val.map f m =

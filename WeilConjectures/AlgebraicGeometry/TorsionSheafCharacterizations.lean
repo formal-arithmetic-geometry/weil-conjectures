@@ -292,7 +292,7 @@ theorem constant_ratModIntSheaf_sections_not_torsion (T : Scheme.{u}) :
       MorphismProperty.Over.homMk (A := Etale.mk (𝟙 T)) (B := U)
         (Sigma.ι (fun _ : ℕ+ ↦ T) n) (by
         change Sigma.ι (fun _ : ℕ+ ↦ T) n ≫ f = 𝟙 T
-        exact Sigma.ι_desc _ _)
+        exact Sigma.ι_comp_desc _ _)
     have hcov : ⋃ n, Set.range (j n).left = Set.univ := by
       exact (sigmaOpenCover (fun _ : ℕ+ ↦ T)).iUnion_range
     have hbij : Function.Bijective

@@ -181,7 +181,7 @@ private lemma term_next_le (j : ℕ) (k : ℤ) :
           (if 2 * b + 2 ≤ 2 * j + 1 then LinearMap.range (full K b k).hom else ⊥) ⊔
             (if 2 * b + 1 ≤ 2 * j + 1 then LinearMap.range (lower K S e b k).hom
               else ⊥)) a)
-        rw [if_pos (show 2 * a + 2 ≤ 2 * j + 1 by omega)]
+        rw [ite_eq_left (show 2 * a + 2 ≤ 2 * j + 1 by omega)]
         exact le_sup_left
     · exact bot_le
   · split_ifs with ha
@@ -190,7 +190,7 @@ private lemma term_next_le (j : ℕ) (k : ℤ) :
         (if 2 * b + 2 ≤ 2 * j + 1 then LinearMap.range (full K b k).hom else ⊥) ⊔
           (if 2 * b + 1 ≤ 2 * j + 1 then LinearMap.range (lower K S e b k).hom
             else ⊥)) a)
-      rw [if_pos (show 2 * a + 1 ≤ 2 * j + 1 by omega)]
+      rw [ite_eq_left (show 2 * a + 1 ≤ 2 * j + 1 by omega)]
       exact le_sup_right
     · exact bot_le
 

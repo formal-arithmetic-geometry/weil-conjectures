@@ -45,9 +45,9 @@ noncomputable def constToContinuousMap :
 
 instance isMonHom_constToContinuousMap : IsMonHom (constToContinuousMap.{u} T) where
   one_hom := NatTrans.ext (funext fun _ ↦ AddCommGrpCat.hom_ext (AddMonoidHom.ext fun _ ↦
-    ULift.ext _ _ (ContinuousMap.ext fun _ ↦ rfl)))
+    ULift.ext (ContinuousMap.ext fun _ ↦ rfl)))
   mul_hom := NatTrans.ext (funext fun _ ↦ AddCommGrpCat.hom_ext_toIntLinearMap
-    (TensorProduct.ext' fun _ _ ↦ ULift.ext _ _ (ContinuousMap.ext fun _ ↦ rfl)))
+    (TensorProduct.ext' fun _ _ ↦ ULift.ext (ContinuousMap.ext fun _ ↦ rfl)))
 
 /-- The empty profinite set is covered by the empty family. -/
 lemma mem_coherentTopology_of_isEmpty {S : Profinite.{u}} (hS : IsEmpty S) (R : Sieve S) :
@@ -64,7 +64,7 @@ instance isLocallyInjective_constToContinuousMap :
     cases isEmpty_or_nonempty S.unop with
     | inl hS => exact mem_coherentTopology_of_isEmpty hS _
     | inr hS =>
-      obtain rfl : x = y := ULift.ext _ _ (congrArg (fun f ↦ f.down hS.some) h)
+      obtain rfl : x = y := ULift.ext (congrArg (fun f ↦ f.down hS.some) h)
       rw [Presheaf.equalizerSieve_self_eq_top]
       exact (coherentTopology Profinite.{u}).top_mem _
 
@@ -94,7 +94,7 @@ instance isLocallySurjective_constToContinuousMap :
     (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily _).mpr
       ⟨T, inferInstance, fibre T g.down, fibreι T g.down,
         effectiveEpiFamily_of_jointly_surjective _ _ fun b ↦ ⟨g.down b, ⟨b, rfl⟩, rfl⟩,
-        fun t ↦ ⟨ULift.up t, ULift.ext _ _ (ContinuousMap.ext fun x ↦ x.2.symm)⟩⟩
+        fun t ↦ ⟨ULift.up t, ULift.ext (ContinuousMap.ext fun x ↦ x.2.symm)⟩⟩
 
 /-- The constant maps induce a morphism of ring objects from the constant ring sheaf `T` to the
 condensed ring `T̲ = C(-, T)`. -/

@@ -74,7 +74,7 @@ theorem Ideal.exists_forall_dvd_mul_of_mem_minimalPrimes {A : Type*} [CommRing A
   classical
   by_cases hP𝔮 : P ≤ 𝔮
   swap
-  · obtain ⟨a, haP, ha𝔮⟩ := SetLike.not_le_iff_exists.1 hP𝔮
+  · obtain ⟨a, haP, ha𝔮⟩ := IsConcreteLE.not_le_iff_exists.1 hP𝔮
     exact ⟨a, haP, fun h ↦ ha𝔮 (h ▸ zero_mem _), fun b _ ↦ ⟨a, ha𝔮, dvd_mul_right a b⟩⟩
   let L := Localization.AtPrime 𝔮
   have hPprime : P.IsPrime := hP.1.1

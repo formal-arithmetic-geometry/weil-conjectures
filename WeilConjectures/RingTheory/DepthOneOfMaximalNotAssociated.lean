@@ -36,7 +36,7 @@ theorem depth_one_of_finite_localized_module_of_no_maximal_associated
   | inl hM =>
     let := hM
     unfold IsLocalRing.depth Ideal.depth
-    rw [if_pos (Subsingleton.elim _ _)]
+    rw [ite_eq_left (Subsingleton.elim _ _)]
     exact le_top
   | inr hM =>
     let := hM

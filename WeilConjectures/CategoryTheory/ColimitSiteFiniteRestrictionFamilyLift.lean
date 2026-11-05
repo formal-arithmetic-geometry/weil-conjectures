@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Sum
+import Mathlib.Basic.Finite.Sum
 import all WeilConjectures.CategoryTheory.FilteredColimitFiniteIsoLift
 import all WeilConjectures.CategoryTheory.ColimitSiteRawSectionGenerators
 

@@ -125,11 +125,11 @@ theorem depth_quotSMulTop_of_isSMulRegular {R : Type u} [CommRing R]
   have hMdef : depth (R := R) M = sSup {n : ℕ∞ | ∃ rs : List R,
       RingTheory.Sequence.IsRegular M rs ∧ (∀ r ∈ rs, r ∈ maximalIdeal R) ∧
         n = (rs.length : ℕ∞)} := by
-    simp only [depth, Ideal.depth, if_neg hM]
+    simp only [depth, Ideal.depth, ite_eq_right hM]
   have hQdef : depth (R := R) (QuotSMulTop x M) = sSup {n : ℕ∞ | ∃ rs : List R,
       RingTheory.Sequence.IsRegular (QuotSMulTop x M) rs ∧ (∀ r ∈ rs, r ∈ maximalIdeal R) ∧
         n = (rs.length : ℕ∞)} := by
-    simp only [depth, Ideal.depth, if_neg hQ]
+    simp only [depth, Ideal.depth, ite_eq_right hQ]
   have hfinite : depth (R := R) M ≠ ⊤ := by
     intro heq
     have hbound := (depth_le_supportDim (R := R) M).trans

@@ -361,7 +361,7 @@ theorem strictRoosDerivedLimitComparison
     obtain ⟨p, rfl⟩ : ∃ p : ℤ, k = p + 1 := ⟨k - 1, by omega⟩
     simp only [HomologicalComplex.comp_f, haI, ← Category.assoc, hη]
     have hprod := congrArg (fun f ↦ HomologicalComplex.Hom.f f (p + 1))
-      (Pi.lift_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
+      (Pi.lift_comp_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
     simpa only [strictRoosProduct, HomologicalComplex.comp_f, biprod.lift_snd,
       Category.assoc, biprod.lift_snd_assoc] using hprod
   have hρa (n : ℕ) : ρ ≫ aI n = aX n ≫

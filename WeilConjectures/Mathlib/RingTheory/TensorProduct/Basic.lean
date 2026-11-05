@@ -56,7 +56,6 @@ theorem closure_range_tmul_eq_top {ιA ιB : Type*} {a : ιA → A} {b : ιB →
   have key : ∀ z : A ⊗[R] B, z ∈ S := by
     intro z
     induction z with
-    | zero => exact zero_mem _
     | tmul x y =>
         have hxy : x ⊗ₜ[R] y = (x ⊗ₜ[R] (1 : B)) * ((1 : A) ⊗ₜ[R] y) := by
           rw [Algebra.TensorProduct.tmul_mul_tmul]; simp

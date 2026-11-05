@@ -129,7 +129,7 @@ lemma exists_cover_lift {V : X.Etale} [CompactSpace V.left]
   let π : W ⟶ V := MorphismProperty.Over.homMk (Sigma.desc fun a ↦ (g a).left)
     (Sigma.hom_ext _ _ fun a ↦ by simp [W])
   have hιπ (a : Fin n) : ι a ≫ π = g a :=
-    MorphismProperty.Over.Hom.ext (Sigma.ι_desc _ a)
+    MorphismProperty.Over.Hom.ext (Sigma.ι_comp_desc _ a)
   have hιcov : ⋃ a, Set.range (ι a).left = Set.univ := by
     refine Set.eq_univ_of_forall fun x ↦ ?_
     obtain ⟨y, hy⟩ := (sigmaOpenCover fun a ↦ (U a).left).covers x

@@ -38,7 +38,7 @@ private theorem eval_unit (X : Scheme.{u}) (F : X.Modules) (x : X) :
         (moduleCup_godementUnit X F) ≫ moduleCup_godementStalkEval X F x = 𝟙 _ := by
   dsimp only [moduleCup_godementStalkEval]
   rw [← Functor.map_comp_assoc]
-  simp only [moduleCup_godementUnit, Pi.lift_π]
+  simp only [moduleCup_godementUnit, Pi.lift_comp_π]
   ext m
   change (skyscraperStalkEval x (F.presheaf.stalk x))
     ((toSkyscraper (LinearMap.id : F.presheaf.stalk x →ₗ[X.presheaf.stalk x]
@@ -53,7 +53,7 @@ private theorem eval_natural (X : Scheme.{u}) {F G : X.Modules} (f : F ⟶ G) (x
       (RingedSpace.moduleStalkFunctor X.toRingedSpace x).map f := by
   dsimp only [moduleCup_godementStalkEval]
   rw [← Functor.map_comp_assoc]
-  simp only [moduleCup_godementMap, Pi.lift_π, Functor.map_comp, Category.assoc]
+  simp only [moduleCup_godementMap, Pi.lift_comp_π, Functor.map_comp, Category.assoc]
   have he :
       (RingedSpace.moduleStalkFunctor X.toRingedSpace x).map
         (toSkyscraper (f.stalkLinearMap x ∘ₗ skyscraperStalkEval x (F.presheaf.stalk x))) ≫
@@ -298,7 +298,7 @@ private theorem moduleCup_godement_stalk_identity (X : Scheme.{u}) (F : X.Module
         prevD_eq _ (show (ComplexShape.up ℤ).Rel (-1) 0 by rfl)]
       have hneg : moduleCup_godementStalkHom X F A ht x 0 (-1) = 0 := by
         dsimp only [moduleCup_godementStalkHom]
-        rw [dif_pos (by omega), dif_neg (by omega)]
+        rw [dite_eq_left (by omega), dite_eq_right (by omega)]
       have h01 := hom_succ X F A ht x 0
       have hd0 := term_d X F A ht hc x 0
       simp only [Int.natCast_zero] at h01 hd0
@@ -422,7 +422,7 @@ theorem moduleCup_godement_stalk_contraction (X : Scheme.{u}) (F : X.Modules)
       zero := by
         intro i j hij
         dsimp only [moduleCup_godementStalkHom]
-        rw [dif_neg]
+        rw [dite_eq_right]
         simpa only [ComplexShape.up_Rel, eq_comm] using hij
       comm := by
         intro i

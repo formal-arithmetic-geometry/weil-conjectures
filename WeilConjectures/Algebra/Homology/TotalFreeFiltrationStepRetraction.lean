@@ -76,7 +76,7 @@ theorem step_retraction
       (if 2 * j' + 2 ≤ n then LinearMap.range (full K j' k).hom else ⊥) ⊔
       (if 2 * j' + 1 ≤ n then LinearMap.range (lower K S e j' k).hom else ⊥)) j)
     apply Submodule.mem_sup_left
-    simp only [if_pos hj]
+    simp only [ite_eq_left hj]
     exact ⟨x, rfl⟩
   have hlower (j : ℕ) (hj : 2 * j + 1 ≤ n) (x : (S j).X₁.X (k + j)) :
       lower K S e j k x ∈ M := by
@@ -84,7 +84,7 @@ theorem step_retraction
       (if 2 * j' + 2 ≤ n then LinearMap.range (full K j' k).hom else ⊥) ⊔
       (if 2 * j' + 1 ≤ n then LinearMap.range (lower K S e j' k).hom else ⊥)) j)
     apply Submodule.mem_sup_right
-    simp only [if_pos hj]
+    simp only [ite_eq_left hj]
     exact ⟨x, rfl⟩
   have σ : ∀ j : ℕ,
       ((S j).map (HomologicalComplex.eval (ModuleCat.{u} A) (ComplexShape.up ℤ)
@@ -120,12 +120,12 @@ theorem step_retraction
       K.totalDesc f = g j
     rw [HomologicalComplex₂.ι_totalDesc]
     dsimp only [f]
-    rw [dif_pos (neg_nonpos.mpr (Int.natCast_nonneg j))]
+    rw [dite_eq_left (neg_nonpos.mpr (Int.natCast_nonneg j))]
     exact hg j _ (by simp) _ _
   have hfix_full (j : ℕ) (hj : 2 * j + 2 ≤ n) :
       full K j k ≫ r ≫ ι = full K j k := by
     rw [← Category.assoc, hfg]
-    simp only [g, dif_pos hj]
+    simp only [g, dite_eq_left hj]
     rfl
   have hfix_lower (j : ℕ) (hj : 2 * j + 1 ≤ n) :
       lower K S e j k ≫ r ≫ ι = lower K S e j k := by
@@ -134,9 +134,9 @@ theorem step_retraction
     simp only [← Category.assoc]
     rw [Category.assoc _ (full K j k) r, hfg]
     by_cases hj' : 2 * j + 2 ≤ n
-    · simp only [g, dif_pos hj']
+    · simp only [g, dite_eq_left hj']
       rfl
-    · simp only [g, dif_neg hj', dif_pos hj]
+    · simp only [g, dite_eq_right hj', dite_eq_left hj]
       have he : (e j).hom.f (k + j) ≫ (e j).inv.f (k + j) = 𝟙 _ :=
         HomologicalComplex.congr_hom (e j).hom_inv_id (k + j)
       have hs : (S j).f.f (k + j) ≫ (σ j).r = 𝟙 _ := (σ j).f_r

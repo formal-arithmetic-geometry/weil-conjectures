@@ -344,7 +344,7 @@ theorem reducedNormalization_over_normal_reduction
         · simp only [Scheme.Opens.opensRange_ι]
           rw [← Scheme.Hom.comp_preimage]
           change (Sigma.ι G Z.as ≫ Sigma.desc g) ⁻¹ᵁ U = g Z.as ⁻¹ᵁ U
-          rw [Sigma.ι_desc]
+          rw [Sigma.ι_comp_desc]
     exact (Cofan.nonempty_isColimit_iff_isIso_sigmaDesc _).mp hcol
   let e := (asIso (Sigma.desc a)).symm ≪≫ asIso (Sigma.desc b)
   refine ⟨e, ?_⟩
@@ -353,7 +353,7 @@ theorem reducedNormalization_over_normal_reduction
     IsIso.hom_inv_id, Category.id_comp]
   apply Sigma.hom_ext
   intro Z
-  rw [← Category.assoc, Sigma.ι_desc, ← Category.assoc, Sigma.ι_desc]
+  rw [← Category.assoc, Sigma.ι_comp_desc, ← Category.assoc, Sigma.ι_comp_desc]
   change b Z ≫ j = a Z ≫ T.fromReducedNormalization ∣_ U
   apply (cancel_mono U.ι).mp
   simp [b, j, a, Scheme.fromReducedNormalization, G, g, C, c]

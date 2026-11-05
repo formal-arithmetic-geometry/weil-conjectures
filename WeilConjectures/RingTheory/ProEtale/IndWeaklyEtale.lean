@@ -40,7 +40,6 @@ lemma lmul'_map {C D : Type u} [CommRing C] [CommRing D] [Algebra R C]
     Algebra.TensorProduct.lmul' R (Algebra.TensorProduct.map α α y) =
       α (Algebra.TensorProduct.lmul' R y) := by
   induction y with
-  | zero => simp
   | tmul a b => simp [Algebra.TensorProduct.lmul'_apply_tmul]
   | add a b ha hb => simp [ha, hb]
 
@@ -66,7 +65,6 @@ theorem exists_isIdempotentElem_mul_eq_of_mem_kaehlerDifferential_ideal
   have hsurj : ∀ z : S ⊗[R] S, ∃ (i : ι) (y : P.diag.obj i ⊗[R] P.diag.obj i), Φ i y = z := by
     intro z
     induction z with
-    | zero => exact ⟨IsFiltered.nonempty.some, 0, map_zero _⟩
     | tmul a b =>
       obtain ⟨i, a', ha⟩ := Types.jointly_surjective_of_isColimit hc' a
       obtain ⟨j, b', hb⟩ := Types.jointly_surjective_of_isColimit hc' b
@@ -167,7 +165,6 @@ theorem Algebra.WeaklyEtale.localization_base (M : Submonoid A) [Algebra A A']
         (Algebra.TensorProduct.lmul' A (S := B)).toRingHom.comp (e : B ⊗[A'] B →+* B ⊗[A] B) := by
       refine RingHom.ext fun x ↦ ?_
       induction x with
-      | zero => simp
       | tmul a b =>
         simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_comp, RingHom.coe_coe,
           Function.comp_apply, Algebra.TensorProduct.lmul'_apply_tmul]

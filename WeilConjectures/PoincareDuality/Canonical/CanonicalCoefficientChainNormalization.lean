@@ -77,6 +77,6 @@ private theorem coefficientChainUnit_projection {X Y : Scheme.{u}}
       (constantWeilChainUnit_existsUnique l E g).exists.choose_spec
   rw [he]
   simp only [chainUnitCandidate, CochainComplex.mappingCocone.lift_fst_assoc,
-    pullbackUnitProduct, Pi.lift_π]
+    pullbackUnitProduct, Pi.lift_comp_π]
 
 end WeilConjectures

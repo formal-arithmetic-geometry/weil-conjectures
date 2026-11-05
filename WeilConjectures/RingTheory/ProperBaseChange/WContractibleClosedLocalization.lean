@@ -53,7 +53,7 @@ private theorem weaklyEtale_pi {A : Type u} [CommRing A] {ι : Type u}
   have hh : sigmaSpec T ≫ h = Limits.Sigma.desc (fun i ↦ Spec.map (CommRingCat.ofHom (g i))) := by
     apply Limits.Sigma.hom_ext
     intro i
-    simp only [ι_sigmaSpec_assoc, Limits.Sigma.ι_desc]
+    simp only [ι_sigmaSpec_assoc, Limits.Sigma.ι_comp_desc]
     dsimp only [h]
     rw [← Spec.map_comp]
     rfl

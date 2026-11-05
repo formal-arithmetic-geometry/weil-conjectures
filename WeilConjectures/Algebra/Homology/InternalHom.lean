@@ -97,7 +97,7 @@ lemma d_π (P Y : CochainComplex C ℤ) (n m p q : ℤ) (hpq : p + m = q) (q' p'
           (pre (P.d p p')).app _) := by
   subst hq'
   obtain rfl : p' = p + m - n := by lia
-  simp only [d, Pi.lift_π]
+  simp only [d, Pi.lift_comp_π]
 
 variable [MonoidalPreadditive C] (P Y : CochainComplex C ℤ)
 
@@ -215,7 +215,7 @@ lemma curryCochain_v_π {n : ℤ} (z : Cochain (P ⊗ K) Y n) (q q' : ℤ) (hqq'
     (curryCochain z).v q q' hqq' ≫ internalHomπ P Y q' p s hps =
       (p * n).negOnePow • curry (ιTensorObj P K p q r hr ≫ z.v r s hrs) := by
   subst hr
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 /-- The components of `uncurryCochain w`, where `[A, B]` denotes `(ihom A).obj B`: the
 composition

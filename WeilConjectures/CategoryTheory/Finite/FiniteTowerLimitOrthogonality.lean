@@ -59,7 +59,7 @@ private theorem sequenceDifference_projection
     (sequenceDifference A l).app M ≫ Pi.π (fun _ : ℕ ↦ M) n =
       Pi.π (fun _ : ℕ ↦ M) n - l • Pi.π (fun _ : ℕ ↦ M) (n + 1) := by
   dsimp only [sequenceDifference, sequencePower]
-  rw [Preadditive.sub_comp, Category.id_comp, Preadditive.nsmul_comp, Pi.lift_π]
+  rw [Preadditive.sub_comp, Category.id_comp, Preadditive.nsmul_comp, Pi.lift_comp_π]
 
 private theorem sequenceDifference_map
     {A B : Type*} [Category* A] [Category* B] [Preadditive A] [Preadditive B]
@@ -141,7 +141,7 @@ private theorem sequenceDifference_nilpotent
     | zero => simp
     | succ r ih =>
       rw [pow_succ, End.mul_def, Category.assoc, ih]
-      simp only [s, Preadditive.nsmul_comp, Preadditive.comp_nsmul, Pi.lift_π]
+      simp only [s, Preadditive.nsmul_comp, Preadditive.comp_nsmul, Pi.lift_comp_π]
       rw [smul_smul, ← pow_succ]
       simp only [Nat.add_assoc]
   have hnil : IsNilpotent s := by

@@ -90,7 +90,7 @@ private lemma copowerTensorIso_hom {I : Type v} (M : Mod C R) [HasCoproduct (fun
       Sigma.desc (fun i ↦ (λ_ M).inv ≫ ((Sigma.ι _ i ≫ e.hom) ▷ M)) := by
   apply Sigma.hom_ext
   intro i
-  simp only [copowerTensorIso, Iso.trans_hom, Sigma.ι_desc,
+  simp only [copowerTensorIso, Iso.trans_hom, Sigma.ι_comp_desc,
     asIso_hom, Functor.mapIso_hom]
   rw [HasColimit.isoOfNatIso_ι_hom_assoc]
   change (λ_ M).inv ≫ Sigma.ι (fun _ : I ↦ (tensorRight M).obj (regular R)) i ≫
@@ -118,7 +118,7 @@ private lemma isIso_copowerAdjUnitDesc {I : Type v} (M : Mod C R) [HasCoproduct 
     rw [copowerTensorIso_hom]
     apply Sigma.hom_ext
     intro i
-    simp only [Sigma.ι_desc_assoc, Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
     dsimp only [t]
     rw [Category.assoc]
     exact extendUnit_qbar_scalarEndo_tensor φ (Sigma.ι (fun _ : I ↦ regular R) i ≫ e.hom) M

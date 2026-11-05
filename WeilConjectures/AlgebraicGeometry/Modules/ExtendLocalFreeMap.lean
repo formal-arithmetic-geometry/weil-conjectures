@@ -152,7 +152,7 @@ private theorem extend_on_basicOpen {X S : Scheme.{u}} (g : X ⟶ S)
     change (restrictFunctor W.ι).map (ιFree i) ≫ _ =
       (restrictFunctor W.ι).map (ιFree i) ≫ _
     rw [← Functor.map_comp, show ιFree i ≫ φ = homOfGlobalSection N (v' i) from
-      Sigma.ι_desc _ _, ← cancel_epi (restrictUnitIso W.ι).inv]
+      Sigma.ι_comp_desc _ _, ← cancel_epi (restrictUnitIso W.ι).inv]
     apply unit_map_ext
     have hi := congrArg (N.presheaf.map (homOfLE hle').op) (hv' i)
     simp only [map_smul, map_pow, presheaf_map_homOfLE_homOfLE,

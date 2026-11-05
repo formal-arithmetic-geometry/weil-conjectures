@@ -64,7 +64,6 @@ theorem tensorProduct :
   refine Algebra.IsPushout.of_equiv ((Algebra.TensorProduct.cancelBaseChange R₀ A₁ A A B₀).trans
     (Algebra.IsPushout.equiv R₀ A B₀ B)) (RingHom.ext fun x ↦ ?_)
   induction x with
-  | zero => simp
   | tmul a b =>
     simp [RingHom.algebraMap_toAlgebra, Algebra.IsPushout.equiv_tmul,
       Algebra.algebraMap_eq_smul_one]

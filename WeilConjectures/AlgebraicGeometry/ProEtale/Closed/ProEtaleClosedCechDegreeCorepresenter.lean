@@ -253,12 +253,12 @@ theorem exists_closedCech_degreeCorepresenter
         intro f
         apply Sigma.hom_ext
         intro y
-        simp only [Sigma.ι_desc, AddEquiv.symm_apply_apply]
+        simp only [Sigma.ι_comp_desc, AddEquiv.symm_apply_apply]
       right_inv := by
         intro s
         funext y
         dsimp only
-        rw [Sigma.ι_desc, AddEquiv.apply_symm_apply]
+        rw [Sigma.ι_comp_desc, AddEquiv.apply_symm_apply]
       map_add' := by
         intro f g
         funext y

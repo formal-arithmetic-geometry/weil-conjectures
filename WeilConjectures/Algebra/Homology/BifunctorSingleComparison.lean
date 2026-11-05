@@ -134,7 +134,7 @@ lemma mapBifunctorComparisonX_single₂ (n : ℤ) :
     singleMapHomologicalComplex_hom_app_self]
   -- the two `F'.obj` below agree only up to unfolding `Functor.mapHomologicalComplex_obj_X`
   erw [← Functor.map_comp_assoc]
-  rw [Iso.map_inv_hom_id_assoc]
+  rw [Iso.inv_hom_id_map_assoc]
   rfl
 
 /-- On `K₁ ⊗ single(X₂)`, the comparison morphism `G(K₁ ⊗ X₂) ⟶ G₁(K₁) ⊗ G₂(X₂)` is,

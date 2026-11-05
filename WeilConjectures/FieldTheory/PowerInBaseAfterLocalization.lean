@@ -126,7 +126,6 @@ private theorem powers_from_generators
       rw [hm, mul_pow]
   intro x
   induction x with
-  | zero => exact ⟨0, by simp [hk]⟩
   | add x y hx hy =>
     obtain ⟨b, hb⟩ := hx
     obtain ⟨c, hc⟩ := hy

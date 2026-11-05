@@ -95,7 +95,7 @@ theorem representable_pullback_isConstant_of_evaluation_bijective
         have hh := congrArg (fun q ↦ q.left ≫ Limits.pullback.fst P.obj.hom A.obj.hom) hzw
         change (z.left ≫ Sigma.desc σ) ≫ _ = (w.left ≫ Sigma.desc σ) ≫ _ at hh
         rw [← hz', ← hw', hz, hw] at hh
-        simpa only [fiber_map_left, Category.assoc, Sigma.ι_desc_assoc, σ,
+        simpa only [fiber_map_left, Category.assoc, Sigma.ι_comp_desc_assoc, σ,
           Limits.pullback.lift_fst, t] using hh))
       exact fiber_ext t (by rw [← hz', ← hw', hz, hw, hij])
     · intro z

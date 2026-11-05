@@ -141,7 +141,7 @@ private theorem exists_completion_algEquiv_of_bijective_truncations
     exact (RingHom.congr_fun hpoly (t.truncTotal 1)).symm.trans h
   change MvPowerSeries.constantCoeff t = ε c
   rw [← hval]
-  change MvPowerSeries.constantCoeff t = MvPolynomial.coeff 0 (t.truncTotal 1)
+  change MvPowerSeries.constantCoeff t = AddMonoidAlgebra.coeff (t.truncTotal 1) 0
   rw [MvPowerSeries.coeff_truncTotal _ (by simp)]
   exact (MvPowerSeries.coeff_zero_eq_constantCoeff_apply t).symm
 

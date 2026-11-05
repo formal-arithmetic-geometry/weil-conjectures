@@ -202,8 +202,7 @@ private theorem tensorCoordinateApp_tmul (φ : R ⟶ S) (d : ℕ)
   PresheafOfModules.isoMk (tensorCoordinateApp φ d e M) (by
     intro V W f
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => exact map_zero _ |>.trans (map_zero _).symm
+    induction x with
     | add x y hx hy =>
       exact (map_add _ x y).trans ((congrArg₂ (· + ·) hx hy).trans
         (map_add _ x y).symm)
@@ -290,8 +289,7 @@ private theorem tensorCoordinates_naturality (φ : R ⟶ S) (d : ℕ)
         ((tensorPresheafFunctor φ).map f) ≫ (tensorCoordinates φ d e G).hom =
       (tensorCoordinates φ d e F).hom ≫ (Limits.Pi.map (fun _ : Fin d ↦ f)).val := by
   ext V x
-  induction x using TensorProduct.induction_on with
-  | zero => exact map_zero _ |>.trans (map_zero _).symm
+  induction x with
   | add x y hx hy =>
     exact (map_add _ x y).trans ((congrArg₂ (· + ·) hx hy).trans
       (map_add _ x y).symm)

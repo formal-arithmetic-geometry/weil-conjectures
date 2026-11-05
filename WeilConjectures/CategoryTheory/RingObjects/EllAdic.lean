@@ -93,12 +93,12 @@ def finiteIntermediateFieldValued : Subring C(U, PadicAlgCl ℓ) where
     rintro f g ⟨E, hE, hf⟩ ⟨F, hF, hg⟩
     refine ⟨E ⊔ F, by have := hE; have := hF; infer_instance, fun x ↦ ?_⟩
     rw [ContinuousMap.mul_apply]
-    exact mul_mem (SetLike.le_def.mp le_sup_left (hf x)) (SetLike.le_def.mp le_sup_right (hg x))
+    exact mul_mem (IsConcreteLE.le_iff.mp le_sup_left (hf x)) (IsConcreteLE.le_iff.mp le_sup_right (hg x))
   add_mem' := by
     rintro f g ⟨E, hE, hf⟩ ⟨F, hF, hg⟩
     refine ⟨E ⊔ F, by have := hE; have := hF; infer_instance, fun x ↦ ?_⟩
     rw [ContinuousMap.add_apply]
-    exact add_mem (SetLike.le_def.mp le_sup_left (hf x)) (SetLike.le_def.mp le_sup_right (hg x))
+    exact add_mem (IsConcreteLE.le_iff.mp le_sup_left (hf x)) (IsConcreteLE.le_iff.mp le_sup_right (hg x))
   one_mem' := ⟨⊥, inferInstance, fun _ ↦ one_mem ⊥⟩
   zero_mem' := ⟨⊥, inferInstance, fun _ ↦ zero_mem ⊥⟩
   neg_mem' := by

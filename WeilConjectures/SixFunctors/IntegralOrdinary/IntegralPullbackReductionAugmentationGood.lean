@@ -244,7 +244,7 @@ private theorem completion_chain_projection {X Y : Scheme.{u}} (f : X ⟶ Y)
   unfold ordinaryIntegralCompletionChain
   simp only [HomologicalComplex.comp_f]
   rw [← Category.assoc, CochainComplex.mappingCocone.lift_f_fst_f]
-  exact congrArg (fun a ↦ a.f i) (Pi.lift_π (fun m : ℕ ↦
+  exact congrArg (fun a ↦ a.f i) (Pi.lift_comp_π (fun m : ℕ ↦
     ((ordinaryIntegralQuotientAugmentation l E f).app P).app (op m)) n)
 
 -- The ordinary quotient augmentation is the adjunct of a composite of isomorphisms.

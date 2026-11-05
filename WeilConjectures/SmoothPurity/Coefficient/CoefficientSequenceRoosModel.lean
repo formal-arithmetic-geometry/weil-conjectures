@@ -765,8 +765,8 @@ theorem coefficientSequence_roosModel
       Pi.lift (fun n : ℕ ↦ (coefficientConstantTowerProjection l E W n).app T.tower) := by
     apply Pi.hom_ext
     intro n
-    simp only [Pi.lift_π]
-    erw [Pi.lift_π]
+    simp only [Pi.lift_comp_π]
+    erw [Pi.lift_comp_π]
     change (coefficientSequenceProjection l E W n).app N ≫ _ ≫ _ = _
     unfold coefficientSequenceProjection
     dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Iso.refl_inv]

@@ -95,7 +95,7 @@ theorem finite_affine_tensor_base_change
     intro x
     obtain ⟨i, y, hy⟩ := V.exists_eq x
     refine ⟨Sigma.ι T i ((q i).hom y), ?_⟩
-    rw [← Hom.comp_apply, Sigma.ι_desc]
+    rw [← Hom.comp_apply, Sigma.ι_comp_desc]
     change V.f i ((q i).inv ((q i).hom y)) = x
     have hyy : (q i).inv ((q i).hom y) = y := by
       rw [← Hom.comp_apply, (q i).hom_inv_id]
@@ -109,6 +109,6 @@ theorem finite_affine_tensor_base_change
   simp only [Iso.symm_hom, asIso_inv, IsIso.hom_inv_id_assoc]
   apply Sigma.hom_ext
   intro i
-  simpa only [T, Sigma.ι_desc_assoc, Sigma.ι_desc] using (hksnd i).symm
+  simpa only [T, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc] using (hksnd i).symm
 
 end AlgebraicGeometry.Scheme

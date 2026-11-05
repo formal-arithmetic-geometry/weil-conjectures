@@ -364,7 +364,7 @@ private theorem CyclicResolution.comparison (r : CyclicResolution F)
     change s.f n ≫ (forget F).map (S.g.f n) =
       Sigma.ι (Free.obj F (S.X₃.X n).carrier) 0 ≫
         Sigma.desc (Free.hom (S.X₃.X n) (𝟙 _))
-    rw [Sigma.ι_desc]
+    rw [Sigma.ι_comp_desc]
     exact congrArg (fun t ↦ t.f n) hs
 
 private def freeLocalization (K : CochainComplex (IsoAlgebra F) ℤ) :

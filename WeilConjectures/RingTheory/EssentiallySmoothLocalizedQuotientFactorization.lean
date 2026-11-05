@@ -223,8 +223,7 @@ theorem essentiallySmooth_localized_quotient_factorization
   refine ⟨E, inferInstance, inferInstance, hE, fE, gE, ?_⟩
   apply AlgHom.ext
   intro z
-  induction z using _root_.TensorProduct.induction_on with
-  | zero => simp
+  induction z using _root_.TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul a c =>
     obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective c

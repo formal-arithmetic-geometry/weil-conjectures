@@ -55,7 +55,7 @@ private theorem residue_eq (p a e e' : ℕ) (ha : p ∣ a) (he : e < p) (he' : e
     Nat.mod_eq_of_lt he, Nat.mod_eq_of_lt he'] using h
 private theorem monomial_coeff (p : ℕ) (k : Type u) [Field k] (n m : ℕ)
     (c : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))
-    (hc : ∀ a g, MvPowerSeries.coeff a (MvPolynomial.coeff g c) ≠ 0 →
+    (hc : ∀ a g, MvPowerSeries.coeff a (AddMonoidAlgebra.coeff c g) ≠ 0 →
       (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))
     (a e e' : Fin n →₀ ℕ) (g h h' : Fin m →₀ ℕ) (z : k)
     (ha : ∀ i, p ∣ a i) (hg : ∀ j, p ∣ g j)
@@ -63,13 +63,13 @@ private theorem monomial_coeff (p : ℕ) (k : Type u) [Field k] (n m : ℕ)
     (hh : ∀ j, h j < p) (hh' : ∀ j, h' j < p) :
     MvPowerSeries.coeff (a + e) (MvPolynomial.coeff (g + h)
       (c * MvPolynomial.monomial h' (MvPowerSeries.monomial e' z))) =
-    if e' = e ∧ h' = h then MvPowerSeries.coeff a (MvPolynomial.coeff g c) * z
+    if e' = e ∧ h' = h then MvPowerSeries.coeff a (AddMonoidAlgebra.coeff c g) * z
       else 0 := by
   classical
   by_cases heq : e' = e ∧ h' = h
   · rcases heq with ⟨rfl, rfl⟩
     simp [MvPowerSeries.coeff_add_mul_monomial]
-  · rw [if_neg heq, MvPolynomial.coeff_mul_monomial']
+  · rw [ite_eq_right heq, MvPolynomial.coeff_mul_monomial']
     by_cases hgl : h' ≤ g + h
     · rw [if_pos hgl, MvPowerSeries.coeff_mul_monomial]
       by_cases hel : e' ≤ a + e
@@ -133,9 +133,9 @@ private theorem series_monomial_coeff (p : ℕ) (k : Type u) [Field k] (n : ℕ)
   by_cases heq : e' = e
   · subst e'
     simp [MvPowerSeries.coeff_add_mul_monomial]
-  · rw [if_neg heq, MvPowerSeries.coeff_mul_monomial]
+  · rw [ite_eq_right heq, MvPowerSeries.coeff_mul_monomial]
     by_cases hel : e' ≤ a + e
-    · rw [if_pos hel]
+    · rw [ite_eq_left hel]
       by_contra hn
       have hd := hc _ (left_ne_zero_of_mul hn)
       apply heq
@@ -163,7 +163,7 @@ private theorem series_decomposition (p : ℕ) (hp : 0 < p) (k : Type u) [Field 
         (MvPowerSeries.coeff a (D r) ≠ 0 → ∀ i, p ∣ a i) := by
     change (if ∀ i, p ∣ a i then _ else (0 : k)) ∈ K ∧ _
     by_cases h : ∀ i, p ∣ a i
-    · simp only [if_pos h]
+    · simp only [ite_eq_left h]
       exact ⟨Subtype.mem _, fun _ ↦ h⟩
     · simp [MvPowerSeries.coeff_apply, D, h]
   refine ⟨D, hD, ?_⟩
@@ -195,7 +195,7 @@ private theorem series_decomposition (p : ℕ) (hp : 0 < p) (k : Type u) [Field 
   rw [map_sum]
   simp_rw [hf]
   rw [Fintype.sum_prod_type]
-  simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true]
+  simp only [Finset.sum_ite_eq', Finset.mem_univ, ite_true]
   exact (b.sum_repr (MvPowerSeries.coeff (d + E e) φ)).symm
 
 private theorem powerSeriesResidueMonomialSpan
@@ -206,8 +206,8 @@ private theorem powerSeriesResidueMonomialSpan
     (S : Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))
     (hS : ∀ f, f ∈ S ↔
       ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),
-        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ K ∧
-        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
+        MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ∈ K ∧
+        (MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 →
           (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :
     ⊤ ≤ Submodule.span S (Set.range (fun q : Q × (Fin n → Fin p) × (Fin m → Fin p) ↦
       MvPolynomial.C (MvPowerSeries.C (b q.1) *
@@ -244,7 +244,7 @@ private theorem powerSeriesResidueMonomialSpan
         cs • v (r.1, r.2, h) := by
       change _ = c * v (r.1, r.2, h)
       dsimp [c, v]
-      rw [vector_eq p k Q b n m (r.1, r.2, h), MvPolynomial.monomial_mul]
+      rw [vector_eq p k Q b n m (r.1, r.2, h), MvPolynomial.monomial_mul_monomial]
       rw [series_prod]
       have hs : MvPowerSeries.C (b r.1) * MvPowerSeries.monomial
           (Finsupp.equivFunOnFinite.symm (fun i ↦ (r.2 i : ℕ))) 1 =
@@ -260,7 +260,7 @@ private theorem powerSeriesResidueMonomialSpan
   rw [f.as_sum]
   apply Submodule.sum_mem
   intro g _
-  exact hmon g (MvPolynomial.coeff g f)
+  exact hmon g (AddMonoidAlgebra.coeff f g)
 
 
 
@@ -272,8 +272,8 @@ private theorem powerSeriesResidueCoefficientRecovery
     (S : Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))
     (hS : ∀ f, f ∈ S →
       ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),
-        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ K ∧
-        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
+        MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ∈ K ∧
+        (MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 →
           (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :
     ∀ (l : (Q × (Fin n → Fin p) × (Fin m → Fin p)) →₀ S)
       (q : Q × (Fin n → Fin p) × (Fin m → Fin p))
@@ -380,8 +380,8 @@ theorem powerSeriesResidueMonomialBasis
     (S : Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))
     (hS : ∀ f, f ∈ S ↔
       ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),
-        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ K ∧
-        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
+        MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ∈ K ∧
+        (MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 →
           (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :
     ∃ B : Module.Basis (Q × (Fin n → Fin p) × (Fin m → Fin p)) S
       (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)),

@@ -124,7 +124,6 @@ theorem exists_stage_maximal_kernel_vanishes
   have hτscalar (b : B.obj i) (k : N.obj i ⊗[A.obj i] I) :
       τ (b • k) = (B.map f).hom b • τ k := by
     induction k with
-    | zero => simp
     | tmul x a =>
       simp only [TensorProduct.smul_tmul', ht, hscalar]
     | add k l hk hl => simp only [smul_add, map_add, hk, hl]

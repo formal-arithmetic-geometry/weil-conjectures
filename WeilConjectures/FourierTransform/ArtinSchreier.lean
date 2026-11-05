@@ -604,7 +604,7 @@ theorem isIso_sheafFiber_map_image_ι_comp_stalkRestrict (Ψ : AddChar k Λ)
     have h1 : u ≫ (Scheme.pointSmallEtale y).sheafFiber.map ι = 0 := by
       rw [← cancel_mono (Pi.lift ρ), zero_comp]
       refine Pi.hom_ext _ _ fun t ↦ ?_
-      rw [Category.assoc, Pi.lift_π, zero_comp]
+      rw [Category.assoc, Pi.lift_comp_π, zero_comp]
       obtain ⟨a, ha⟩ := exists_eq_comp_artinSchreierTranslation s.1 t.1 (by rw [s.2, t.2])
       obtain ⟨θ, hθ⟩ := exists_sheafFiber_map_artinSchreierTranslationAction_comp_stalkRestrict
         (Λ := Λ) y (-a) t s (by rw [ha, Category.assoc, ← artinSchreierTranslation_add,
@@ -627,9 +627,9 @@ theorem isIso_sheafFiber_map_image_ι_comp_stalkRestrict (Ψ : AddChar k Λ)
         (ModuleCat.{u + 1} Λ))) ⟶ (Scheme.pointSmallEtale y).sheafFiber.obj 𝒫[Λ, k] :=
       Pi.lift (fun t ↦ if h : t = s then eqToHom (by rw [h]) else 0) ≫ inv (Pi.lift ρ)
     have hj (t) : j ≫ ρ t = if h : t = s then eqToHom (by rw [h]) else 0 := by
-      have : inv (Pi.lift ρ) ≫ ρ t = Pi.π _ t := by rw [IsIso.inv_comp_eq, Pi.lift_π]
+      have : inv (Pi.lift ρ) ≫ ρ t = Pi.π _ t := by rw [IsIso.inv_comp_eq, Pi.lift_comp_π]
       simp only [j, Category.assoc]
-      rw [this, Pi.lift_π]
+      rw [this, Pi.lift_comp_π]
     refine ⟨⟨(Fintype.card k : Λ) • (j ≫ (Scheme.pointSmallEtale y).sheafFiber.map r), ?_⟩⟩
     rw [Linear.smul_comp, Category.assoc,
       ← Category.assoc ((Scheme.pointSmallEtale y).sheafFiber.map r),

@@ -119,8 +119,7 @@ private theorem tensorModel_hom_ext (W : AlgebraicGeometry.Scheme.{u})
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z with
   | tmul a x => exact h U a x
   | add z z' hz hz' => simp only [map_add, hz, hz']
 
@@ -447,7 +446,7 @@ private theorem roos_natural_augmentation
   let FC := F.mapHomologicalComplex (.up ℤ)
   let lam : FC.obj P ⟶ ∏ᶜ fun n ↦ (C ⋙ FC).obj (op n) :=
     Pi.lift (fun n ↦ FC.map (α ≫ Pi.π _ n))
-  have hlamn (n : ℕ) : lam ≫ Pi.π _ n = FC.map (α ≫ Pi.π _ n) := Pi.lift_π _ n
+  have hlamn (n : ℕ) : lam ≫ Pi.π _ n = FC.map (α ≫ Pi.π _ n) := Pi.lift_comp_π _ n
   have hα₀ : α ≫ scalarRoosBoundary C = 0 := by
     apply CochainComplex.HomComplex.Cochain.ofHom_injective
     simpa only [CochainComplex.HomComplex.δ_zero, zero_add,
@@ -459,7 +458,7 @@ private theorem roos_natural_augmentation
         integralOperationsTowerStep C n = 0 := by
       simpa only [scalarRoosBoundary, towerTransitionEndomorphism, towerProductShift,
         Preadditive.comp_sub, Preadditive.sub_comp, Category.id_comp, Category.comp_id,
-        Category.assoc, Pi.lift_π, Limits.zero_comp] using h
+        Category.assoc, Pi.lift_comp_π, Limits.zero_comp] using h
     exact sub_eq_zero.mp h'
   have hlamφ : lam ≫ scalarRoosBoundary (C ⋙ FC) = 0 := by
     apply Pi.hom_ext
@@ -523,8 +522,8 @@ private theorem scalarRoosSquare
   intro n
   have h := scalarThetaSquare l E L ι g n P
   have hd := (scalarPullbackTower_existsUnique l E L ι g).exists.choose_spec P n
-  erw [inverseImageReductionProduct, Pi.lift_π, hd,
-    inverseImageReductionProduct, Pi.lift_π]
+  erw [inverseImageReductionProduct, Pi.lift_comp_π, hd,
+    inverseImageReductionProduct, Pi.lift_comp_π]
   exact h
 
 attribute [-instance] integralOperationsAbSheafify

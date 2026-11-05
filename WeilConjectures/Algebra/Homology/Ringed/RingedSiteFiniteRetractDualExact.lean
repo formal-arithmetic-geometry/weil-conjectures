@@ -114,7 +114,7 @@ private lemma finiteSum_iso_natural {E : Type*} [Category* E]
       Sigma.desc (fun k : κ ↦ if k = j then 𝟙 B else 0) ≫ f := by
     apply Sigma.hom_ext
     intro k
-    simp only [Sigma.ι_map_assoc, Sigma.ι_desc, Sigma.ι_desc_assoc]
+    simp only [Sigma.ι_map_assoc, Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc]
     split_ifs <;> simp
   simp only [Category.assoc, hp]
   rw [hm]
@@ -418,7 +418,7 @@ private lemma coordinate_total (n : ℕ) :
   dsimp only [finiteRetractCoordinate, free, ιFree]
   apply Sigma.hom_ext
   intro k
-  simp only [Preadditive.comp_sum, ← Category.assoc, Sigma.ι_desc]
+  simp only [Preadditive.comp_sum, ← Category.assoc, Sigma.ι_comp_desc]
   simp only [ite_comp, Category.id_comp, zero_comp]
   rw [Finset.sum_ite_eq]
   simp

@@ -109,8 +109,7 @@ private theorem tensorModel_hom_ext (W : AlgebraicGeometry.Scheme.{u})
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z with
   | tmul a x => exact h U a x
   | add z z' hz hz' => simp only [map_add, hz, hz']
 

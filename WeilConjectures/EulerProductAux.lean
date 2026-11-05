@@ -185,7 +185,7 @@ private lemma coeff_mul_eq_of_X_pow_dvd_sub_one {F H : ℚ⟦X⟧} {n : ℕ}
   have heq : H * F = X ^ (n + 1) * (c * F) + F := by
     have hHeq : H = X ^ (n + 1) * c + 1 := by linear_combination hc
     rw [hHeq]; ring
-  rw [heq, map_add, coeff_X_pow_mul', if_neg (by omega), zero_add]
+  rw [heq, map_add, coeff_X_pow_mul', ite_eq_right (by omega), zero_add]
 
 /-- Factors of degree greater than `n` do not affect the `n`-th coefficient of a product
 of geometric series. -/

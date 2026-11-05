@@ -316,12 +316,10 @@ private theorem comparison_internalTriple_hom_ext (M N P : IM) {Q : SM}
   rw [← Functor.LaxMonoidal.μ_natural_left_assoc,
     ← Functor.LaxMonoidal.μ_natural_left_assoc]
   ext U t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t with
   | add t t' ht ht' => simp only [map_add, ht, ht']
   | tmul t z =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [TensorProduct.zero_tmul, map_zero]
+    induction t with
     | add x y hx hy => simp only [TensorProduct.add_tmul, map_add, hx, hy]
     | tmul x y => exact h U x y z
 
@@ -334,8 +332,7 @@ private theorem comparison_internalTensor_hom_ext (M N : IM) {P : SM}
   apply (cancel_epi (Mod.tensorObjπ M N)).mp
   apply Sheaf.tensor_hom_ext
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z with
   | tmul x y => exact h U x y
   | add z z' hz hz' => simp only [map_add, hz, hz']
 

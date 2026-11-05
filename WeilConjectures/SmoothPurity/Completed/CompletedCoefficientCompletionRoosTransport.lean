@@ -231,7 +231,7 @@ private theorem pbcNormalizedRoos
         (((pbcExtend (pbcAdicProjection T d n)).mapHomologicalComplex (.up ℤ)).obj C))
     he (hv n) (hb n) hn hunit'
   dsimp only [Functor.id_map, Iso.trans_hom, completedRlimRoosProjection]
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
   exact hcoord
 
 private def testDatum (p : ℕ) (hp : p.Prime) : FiniteFieldDatum.{0} := by
@@ -716,6 +716,6 @@ theorem completedCoefficientCompletionRoosTransport
   refine ⟨p', δ', hδ', ?_⟩
   apply Pi.hom_ext
   intro n
-  simpa only [Category.assoc, Pi.lift_π, H, J, pbcDerivedRestrict] using hu' n
+  simpa only [Category.assoc, Pi.lift_comp_π, H, J, pbcDerivedRestrict] using hu' n
 
 end WeilConjectures

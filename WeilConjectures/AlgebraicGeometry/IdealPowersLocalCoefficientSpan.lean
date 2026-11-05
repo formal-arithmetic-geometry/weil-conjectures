@@ -72,8 +72,7 @@ theorem idealPowersLocalCoefficientSpan_affine {A : Type v} [CommRing A]
         intro s hs
         clear hs
         obtain ⟨q, rfl⟩ := hc.2 s
-        induction q using TensorProduct.induction_on with
-        | zero => exact c.map_zero ▸ Submodule.zero_mem _
+        induction q with
         | tmul x b =>
           rw [ht]
           apply Submodule.smul_mem
@@ -137,8 +136,7 @@ theorem idealPowersLocalCoefficientSpan_affine {A : Type v} [CommRing A]
             ((MonoidalCategory.whiskerRight i F).app W (tmulSection s v)) = _
           rw [whiskerRight_app_tmulSection, leftUnitor_hom_app_tmulSection']
           rfl
-        induction q using TensorProduct.induction_on with
-        | zero => simp only [map_zero]; exact Submodule.zero_mem _
+        induction q with
         | tmul s v =>
           rw [hp]
           exact Submodule.smul_mem_smul ⟨s, rfl⟩ (Submodule.mem_top)

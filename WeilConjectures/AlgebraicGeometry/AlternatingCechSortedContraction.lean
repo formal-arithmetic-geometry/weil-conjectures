@@ -189,9 +189,9 @@ theorem cechSortedContraction (X : Scheme.{u}) {I : Type v} [LinearOrder I]
       s t - (if StrictMono t then s t else 0) := by
   classical
   by_cases hs : StrictMono t
-  · rw [if_pos hs, sub_self]
+  · rw [ite_eq_left hs, sub_self]
     exact sortedContraction_strict X U F S p s t hs
-  · rw [if_neg hs, sub_zero]
+  · rw [ite_eq_right hs, sub_zero]
     obtain ⟨a, ha⟩ := exists_firstRepeat t ht hs
     cases p with
     | zero =>
