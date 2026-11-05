@@ -106,15 +106,23 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ407 in progress
+# BZ407 complete
 
 - Branch: `u9/BZ407`; starting commit: `98654719b`.
 - Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryStrictSquare`.
+- Passed `ucheck-bump`: rc=0, failed=0, 2138 jobs, on `poolb:43.135.211.170`.
+- Validated source commit: `9d25365cc1bf621e7647d57a5a76f5cb42b0456d`.
+- Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ407-assigned-green.log`.
 - The user instructed continuation after the exact three-hypothesis API correction proposal.
-  Applied those corrections to preserve the maps under Mathlib's reversed composition isomorphism.
-- Matching proof changes use the new orientation and `Iso.eq_inv_comp` cancellation.
-- Baseline reproduced the three reported errors; repaired validation is next.
-- Fix patterns and full baseline log: `/home/ubuntu/u9/bz/FIXES-BZ407.md` and
-  `/home/ubuntu/u9/bz/BUILD-BZ407-baseline.log`.
-- After the assigned module is green, check its four direct importers and one more layer.
-- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
+  Applied those corrections and matching proof changes to preserve the maps under Mathlib's
+  reversed composition isomorphism; cancellation now uses `Iso.eq_inv_comp`.
+- Checked all four direct importers and one second-layer importer. All are blocked by
+  outside-unit dependencies, so they were skipped as the brief requires. The adic importers
+  depend on `ProEtaleFinitelyPresentedLocalModelsComparisonSupplement`; the category-theory
+  branch depends on `RightDerivedFunctor.UnitRetraction`. Full diagnostics are in the fix log.
+- Stopped the two blocked downstream batches after confirming their unowned dependency failures;
+  verified their exact build processes exited. No downstream source files were edited.
+- Fix patterns, occurrence counts, and downstream logs: `/home/ubuntu/u9/bz/FIXES-BZ407.md`.
+- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ407.DONE`.
+- This final commit changes only progress documentation; Lean source matches the green build.
