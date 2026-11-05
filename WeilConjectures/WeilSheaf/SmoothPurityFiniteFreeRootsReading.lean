@@ -85,7 +85,7 @@ lemma purity_finiteCoefficientModEquivalenceFreeRootsOfUnityIso_pullback :
     rhs; rw [← Functor.map_comp_assoc, ← Functor.map_comp, hroot]
   simp only [Functor.map_comp, Category.assoc]
   rw [← Functor.map_comp_assoc, ← hfree, Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hread]
+  rw [hread]
   rw [reassoc_of% (purity_comparisonUpperStarFreeIso_pullback T g
     (Y.rootsOfUnitySheaf N))]
   rw [reassoc_of% hcoeff]

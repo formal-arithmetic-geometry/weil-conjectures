@@ -11,6 +11,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCoher
 
 @[expose] public section
 
+set_option Elab.async false
+set_option trace.profiler true
+set_option trace.profiler.threshold 1000
+
 universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj AlgebraicGeometry.ProEtale.CondensedRing
@@ -32,7 +36,8 @@ lemma purity_pullIso_hom_app_comp_upperStarCongr_hom_app {X Y : Scheme.{u}} {f g
       (Mod.extendScalars (coefficientMap a X)).map ((upperStarCongr Λ h).hom.app M) ≫
         (pullIso a g).hom.app M := by
   subst h
-  simp [upperStarCongr]
+  simp only [upperStarCongr_self, Iso.refl_hom, NatTrans.id_app]
+  erw [Functor.map_id, Category.comp_id, Category.id_comp]
 
 variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
@@ -59,8 +64,10 @@ lemma purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_c
     rw [← cancel_mono ((upperStarComp Λ' f.geometricGaloisFrobenius.hom
       f.geometricFiberProj).hom.app ((Mod.extendScalars (coefficientMap a X₀)).obj M))]
     simp only [Category.assoc]
-    rw [Iso.inv_hom_id_app, Category.comp_id, pullIso_hom_app_comp, ← Functor.map_comp_assoc,
-      Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+    rw [Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+    rw [pullIso_hom_app_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [geometricFiberProjUpperStarFrobeniusIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.map_comp, Category.assoc]
   rw [← purity_pullIso_hom_app_comp_upperStarCongr_hom_app a
@@ -112,11 +119,12 @@ theorem purityChangeCoefficientPullbackIso_weil
   have hnat := (pullIso a f.geometricGaloisFrobenius.hom).inv.naturality
     (purityExtendPullbackIso Λ f.geometricFiberProj M N e).hom
   simp only [Functor.comp_map] at hnat
-  simp only [purityChangeCoefficientPullbackIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
+  simp only [purityChangeCoefficientPullbackIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
     Functor.mapIso_hom, Functor.map_comp, Category.assoc]
   rw [purity_geometricFiberProjUpperStarFrobeniusIso_hom_app_extendScalars_obj,
-    purity_geometricFiberProjUpperStarFrobeniusIso_hom_app_extendScalars_obj,
-    Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc
+    purity_geometricFiberProjUpperStarFrobeniusIso_hom_app_extendScalars_obj]
+  simp only [Category.assoc, Preadditive.zsmul_comp]
+  rw [Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc
       ((f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧)
       ((pullIso a f.geometricFiberProj).hom.app N),
     Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp, ← Functor.map_comp_assoc
@@ -137,7 +145,7 @@ theorem purityChangeCoefficientTrivialization_weil
       (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map
           (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom ≫
         (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app (𝟙_ _) := by
-  letI := Mod.extendScalarsMonoidal (coefficientMap a X)
+  let := Mod.extendScalarsMonoidal (coefficientMap a X)
   let ε := (Functor.Monoidal.εIso (Mod.extendScalars (coefficientMap a X))).inv
   have h := purityChangeCoefficientPullbackIso_weil a f M (𝟙_ _) e₁ c he
   have hnat := (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.naturality ε

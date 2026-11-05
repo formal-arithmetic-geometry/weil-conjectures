@@ -42,9 +42,7 @@ lemma purity_upperStarFreeTowerIsoApp_comp (n : ℕ)
   simp only [upperStarFreeTowerIsoApp, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
     Functor.map_comp, Category.assoc]
   rw [reassoc_of% hn]
-  rw [← Category.assoc, ← Category.assoc,
-    purity_freeFunctorCompUpperStarIso_comp Λ f g (F n)]
-  simp only [Category.assoc]
+  rw [reassoc_of% (purity_freeFunctorCompUpperStarIso_comp Λ f g (F n))]
   rw [← Functor.map_comp, ← Functor.map_comp, h]
 
 end AlgebraicGeometry.ProEtale
