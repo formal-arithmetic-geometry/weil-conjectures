@@ -11,6 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # The divisor sequence of a punctured curve

@@ -126,7 +126,7 @@ private theorem local_perfect_of_open_immersion
         Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft L EO.unitIso.symm ≪≫
         Functor.rightUnitor L
     exact ⟨(Functor.mapDerivedCategoryNatIso c).symm.app R ≪≫
-      (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).app R ≪≫
+      (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).symm.app R ≪≫
       A.functor.mapDerivedCategory.mapIso
         ((Functor.mapDerivedCategoryCompIso G H).app R ≪≫
           H.mapDerivedCategory.mapIso e ≪≫ hmodel) ≪≫

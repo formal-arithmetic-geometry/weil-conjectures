@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.IdealPowerNumeratorPresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.LinearAlgebra.Isomorphisms
 import Mathlib.Algebra.GroupWithZero.Action.Units
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine denominator maps before annihilator quotient descent
 

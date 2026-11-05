@@ -112,6 +112,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 import WeilConjectures.CategoryTheory.SixFunctors.CokernelAdjointExchange
 import WeilConjectures.CategoryTheory.Normalized.NormalizedScalarBoundaryNaturality
 public import WeilConjectures.AlgebraicGeometry.DivisibleExtensionDerivedReduction
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Derived reduction of an extension by a divisible sheaf

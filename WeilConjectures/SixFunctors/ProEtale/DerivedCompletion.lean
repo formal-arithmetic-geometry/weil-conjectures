@@ -435,7 +435,7 @@ abbrev finiteRestrict (n : ℕ) : FiniteDerived l E X n ⥤ FiniteDerived l E X 
 Source: blueprint, coherent reductions (blueprint: sk-def-pe-derived-completion). -/
 def restrictComp (n : ℕ) :
     finiteRestrict l E X n ⋙ restrict l E X (n + 1) ≅ restrict l E X n :=
-  (Functor.mapDerivedCategoryCompIso
+  ((Functor.mapDerivedCategoryCompIso).symm
     (Mod.comap (transition l E X n)) (Mod.comap (quotient l E X (n + 1)))).symm ≪≫
     Functor.mapDerivedCategoryNatIso
       ((Mod.comapComp (quotient l E X (n + 1)) (transition l E X n)).symm ≪≫
