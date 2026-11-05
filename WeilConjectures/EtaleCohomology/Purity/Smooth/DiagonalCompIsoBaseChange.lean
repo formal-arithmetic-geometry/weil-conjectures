@@ -52,8 +52,7 @@ omit [IsIso g] in
 lemma isPullback_id (g' : X' ⟶ X) [IsIso g'] : IsPullback g' (𝟙 X') (𝟙 X) g' :=
   IsPullback.of_horiz_isIso ⟨by simp⟩
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
-  [HasKummerClass.IsNormalized Λ] (d : ℕ) [SmoothOfRelativeDimension d f]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (d : ℕ) [SmoothOfRelativeDimension d f]
   [SmoothOfRelativeDimension d f'] [IsSeparated f] [IsSeparated f'] [HasCompactification f]
   [HasCompactification f'] [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X']
   [QuasiSeparatedSpace Y] [QuasiSeparatedSpace Y'] [QuasiCompact f] [QuasiCompact f']
@@ -61,7 +60,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 -- `rfl` compares the tensor unit of `constantComplex` with the one inside the definition, which
 -- needs a deep (but fast: elaboration and type checking well below 0.1 s, measured) recursion.
 set_option maxRecDepth 20000 in
-omit [IsIso g] [IsIso g'] [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] in
+omit [IsIso g] [IsIso g'] in
 /-- The unfolding of
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId`. -/
 lemma compEqId_eq {V B : Scheme.{u}} (p : V ⟶ B) [HasCompactification p] (s : B ⟶ V)
@@ -75,8 +74,8 @@ lemma compEqId_eq {V B : Scheme.{u}} (p : V ⟶ B) [HasCompactification p] (s : 
 
 -- the ascription compares `dualizingComplex` with `R^!` of `constantComplex` (deep, fast)
 set_option maxRecDepth 20000 in
-omit [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ X]
-  [HasInvertibleExponent Λ X'] [QuasiSeparatedSpace Y] [QuasiSeparatedSpace Y'] [QuasiCompact f] in
+omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X'] [QuasiSeparatedSpace Y]
+  [QuasiSeparatedSpace Y'] [QuasiCompact f] in
 /-- The pasting of the exceptional base changes along `Δ ≫ p₁ = 𝟙` at the unit, through the
 conjugates of the composition isomorphisms, given the vertical pasting `H1` of `Ex_!`. -/
 lemma mate_paste_unit
