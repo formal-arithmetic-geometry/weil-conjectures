@@ -97,7 +97,6 @@ theorem mateEquiv_rightDerivedComparisonBaseChange {X Y : Scheme.{u}} (p : X ⟶
     congr 2
     ext K
     simp [mateEquiv_apply, β, derivedComparisonUpperStarUpperStarIso, eP, eE]
-    simp only [← Functor.map_comp, NatIso.naturality_1]
   have h₂ : (rightDerivedLowerStarCompComparisonLowerStarIso A p).hom =
       conjugateEquiv (aνY.comp aP) (aE.comp aνX) β := by
     have he : (lowerStarCompComparisonLowerStarIso p A).hom =
@@ -129,7 +128,7 @@ theorem mateEquiv_rightDerivedComparisonBaseChange {X Y : Scheme.{u}} (p : X ⟶
     rw [rightDerivedLowerStarCompComparisonLowerStarIso, Iso.trans_hom, hc, hr',
       conjugateEquiv_comp]
     congr 1
-    simp only [β, Iso.trans_inv, Iso.trans_hom, Category.assoc]
+    simp only [β, Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, Category.assoc]
     rw [← Functor.mapDerivedCategoryNatIso_symm, Iso.refl_symm,
       Functor.mapDerivedCategoryNatIso_refl,
       Category.id_comp, Functor.mapDerivedCategoryNatIso_symm]
