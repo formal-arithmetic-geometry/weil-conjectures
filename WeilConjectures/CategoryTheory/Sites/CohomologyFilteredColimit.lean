@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
 public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
+import Mathlib.Util.CountHeartbeats
 
 /-!
 # Cohomology on a site commutes with filtered colimits on quasi-compact objects
@@ -421,6 +422,7 @@ lemma H_map_isColimit_succ_of_shortExact {D I Q : K ⥤ Sheaf J AddCommGrpCat.{m
       Sheaf.H.map (c.ι.app k) (n + 1) y = x) ∧
     ∀ (k : K) (y : Sheaf.H (D.obj k) (n + 1)), Sheaf.H.map (c.ι.app k) (n + 1) y = 0 →
       ∃ (k' : K) (a : k ⟶ k'), Sheaf.H.map (D.map a) (n + 1) y = 0 := by
+  run_tac Lean.logInfo m!"BZ08 start: {((← Lean.getRemainingHeartbeats) / 1000)}"
   let S' := ShortComplex.mk f g hfg
   -- the morphisms from the pointwise short exact sequences to the colimit one
   let φ (k : K) : shortComplexApp ι π h k ⟶ S' :=
@@ -453,18 +455,17 @@ lemma H_map_isColimit_succ_of_shortExact {D I Q : K ⥤ Sheaf J AddCommGrpCat.{m
         ← Sheaf.H.map_comp_apply, cQ.w a, cQ.w b, ← hg, Sheaf.H.map_comp_apply]
       exact sub_eq_zero.2 hv.symm
     obtain ⟨k', a', ha'⟩ := injQ m _ hm
+    run_tac Lean.logInfo m!"BZ08 after hm: {((← Lean.getRemainingHeartbeats) / 1000)}"
     refine ⟨k', a ≫ a', ?_⟩
     change Sheaf.H.map (shortComplexAppMap ι π h (a ≫ a')).τ₁ (n + 1) _ = 0
     rw [Sheaf.H.map_δSucc (hS k) (hS k') (shortComplexAppMap ι π h (a ≫ a')) n w]
     change Sheaf.H.δSucc (hS k') n (Sheaf.H.map (Q.map (a ≫ a')) n w) = 0
+    run_tac Lean.logInfo m!"BZ08 before ha: {((← Lean.getRemainingHeartbeats) / 1000)}"
     rw [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
       ← Q.map_comp, ← Q.map_comp, ← Sheaf.H.map_comp_apply, ← π.naturality,
       Sheaf.H.map_comp_apply] at ha'
-    have hz : Sheaf.H.δSucc (hS k') n
-        (Sheaf.H.map (Q.map (a ≫ a')) n w) = 0 := by
-      rw [ha']
-      exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2 ⟨_, rfl⟩
-    exact hz
+    run_tac Lean.logInfo m!"BZ08 after ha: {((← Lean.getRemainingHeartbeats) / 1000)}"
+    exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2 ⟨_, ha'.symm⟩
 
 variable [∀ V : C, HasFiniteProducts (Over V)] {T : C}
 

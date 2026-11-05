@@ -215,7 +215,8 @@ private theorem smallEtale_cover_of_surjective (S : Scheme.{u})
       Scheme.precoverage (@AlgebraicGeometry.Etale) U.left
   rw [Presieve.map_ofArrows, Presieve.map_ofArrows, Scheme.ofArrows_mem_precoverage_iff]
   refine ⟨h, fun i ↦ ?_⟩
-  exact (V i).prop
+  change AlgebraicGeometry.Etale (f i).left
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
