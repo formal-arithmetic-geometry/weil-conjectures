@@ -88,16 +88,27 @@ lemma scalarDatum_conjugate_indexed
   let v' := liftIso P Q M N T U (0, .target) (0, .targetUnit) v
   have h := purity_scalarDatum_conjugate_named F α' β'
     (b.hom.app M) (b.hom.app N) t u
-    (by simpa [F, pullback, step, shift, object, α', liftIso] using ha)
-    (by simpa [F, pullback, step, shift, object, β', liftIso] using hb)
+    (by
+      change (𝟙 (Q.obj (P.obj M)) ≫ Q.map α.hom ≫ 𝟙 (Q.obj T)) ≫ t =
+        b.hom.app M ≫ α.hom
+      simpa only [Category.id_comp, Category.comp_id] using ha)
+    (by
+      change (𝟙 (Q.obj (P.obj N)) ≫ Q.map β.hom ≫ 𝟙 (Q.obj U)) ≫ u =
+        b.hom.app N ≫ β.hom
+      simpa only [Category.id_comp, Category.comp_id] using hb)
     e' v'
     (by
       apply Iso.ext
       change v.hom = α.inv ≫ e.hom ≫ β.hom
       rw [hv]
       rfl)
-    c (by simpa [F, pullback, step, shift, object, e', liftIso] using he)
+    c (by
+      change c • (b.hom.app M ≫ e.hom) =
+        (𝟙 (Q.obj (P.obj M)) ≫ Q.map e.hom ≫ 𝟙 (Q.obj (P.obj N))) ≫ b.hom.app N
+      simpa only [Category.id_comp, Category.comp_id] using he)
   have h' := congrArg ((realize V).map) h
-  simpa [realize, F, pullback, step, shift, object, v', liftIso] using h'
+  change c • (t ≫ v.hom) =
+    (𝟙 (Q.obj T) ≫ Q.map v.hom ≫ 𝟙 (Q.obj U)) ≫ u at h'
+  simpa only [Category.id_comp, Category.comp_id] using h' 
 
 end CategoryTheory.K4Coefficient
