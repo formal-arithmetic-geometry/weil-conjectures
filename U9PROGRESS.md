@@ -92,8 +92,10 @@
 - Full successful log: `/home/ubuntu/u9/bz/BUILD-BZ302-fix-full.log`.
 - Attempted four direct importers: RlimPerfectComplete, IntegralConstantModelRealization,
   IntegralContinuousEncodingConstructible, and ProEtaleTateTwistLevels.
-- They are blocked by unowned dependencies DerivedBaseChange, ConstantFieldFlat,
+- They are blocked by unowned dependencies, including DerivedBaseChange, ConstantFieldFlat,
   and RingedToposAdaptedFlatResolution. Skipped them as the brief directs.
+- Stopped the downstream batch after confirming all four targets were blocked; its
+  complete captured log is `/home/ubuntu/u9/bz/BUILD-BZ302-downstream-full.log`.
 - The unvalidated RlimPerfectComplete changes were reverted; the candidate patch
   is preserved at `/home/ubuntu/u9/bz/BZ302-rlim-proof.patch` for its owner.
 - Final Lean sources match the successful assigned-module build exactly.
