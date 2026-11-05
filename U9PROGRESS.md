@@ -180,3 +180,22 @@
   local full copy: `/home/ubuntu/u9/bz/BUILD-BZ539-layer1-full.log`.
 - Checking second-layer importers ChangeOfCoefficientsPullCounit and
   DerivedPullIsoCoherenceLowerStar next; skip failures in unowned dependencies.
+
+# BZ539 complete
+
+- Branch: `u9/BZ539`; all requested checks passed with no errors.
+- Assigned ChangeOfCoefficients and four direct importers passed together at
+  `5b2cf87cce1ee5a9a9899d85b7088cdfeec32cfd`: rc=0, failed=0, 4423 jobs.
+- Second layer, ChangeOfCoefficientsPullCounit and DerivedPullIsoCoherenceLowerStar,
+  passed at `5dd5f342374d26b47e452feda618987f9d34617e`: rc=0, failed=0, 4106 jobs.
+- Three dependency proofs now use the compatibility tensor restriction lemma:
+  Presheaf.InternalHom, Algebra.Homology.KFlat, and KFlatResolutionIndependentCoefficients.
+- The assigned module and all six downstream targets needed no source edits.
+- All declaration statements, imports, and docstrings are preserved relative to
+  coordinator base `8af5cb324`; no placeholders, trust bypasses, or heartbeat changes.
+- No local Lean/Lake execution. All validation used ucheck-bump.
+- Logs, exact PATTERN/ERROR records, and occurrence counts:
+  `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ539-contract-audit.txt`.
+- This final commit changes only progress documentation; Lean sources match both green builds.
+- Completion marker: `/home/ubuntu/u9/state/BZ539.DONE`.
