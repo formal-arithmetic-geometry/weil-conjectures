@@ -35,7 +35,8 @@ local notation "jb" => geometricFiberHom (k₀ := k₀) j
 local notation "Λ" => Profinite.padicAlgClRingObj l
 
 local instance : IsOpenImmersion (jb).left :=
-  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion) j _ ‹_›
+  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion) j
+    (comp_over j (Spec (CommRingCat.of k₀))) ‹_›
 
 /-- The open forget square in the composite realization model. -/
 def projectionOpenCompositeForgetIso :=
@@ -74,32 +75,43 @@ theorem isIso_mateEquiv_projectionOpenForgetIso :
   let b := CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb
   have hu (K : BoundedConstructible (condensedRingObj Λ
       (U ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :
-      (b.unit.app K).hom = B.unit.app K.obj := by
+      (boundedConstructible _).ι.map (b.unit.app K) = B.unit.app K.obj := by
     change (ObjectProperty.ι _).map ((B.restrictFullyFaithful
       (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-      (Iso.refl _) (Iso.refl _)).unit.app K) = _
+      (CondensedRing.boundedConstructibleOpenImmersionLowerShriekCompatibility Λ l jb).symm
+      (CondensedRing.boundedConstructibleUpperStarCompatibility Λ l jb).symm).unit.app K) = _
     rw [Adjunction.map_restrictFullyFaithful_unit_app]
-    simp
+    simp only [CondensedRing.boundedConstructibleOpenImmersionLowerShriekCompatibility,
+      CondensedRing.boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
+      Iso.refl_symm, Iso.refl_hom, NatTrans.id_app, Functor.map_id, Category.comp_id]
   rw [NatTrans.isIso_iff_isIso_app]
   intro M
-  have hc : (a.counit.app M).hom = A.counit.app M.obj := by
+  have hc : (objectProperty k₀ l Z).ι.map (a.counit.app M) = A.counit.app M.obj := by
     change (ObjectProperty.ι _).map ((A.restrictFullyFaithful
       (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
       (Iso.refl _) (Iso.refl _)).counit.app M) = _
     rw [Adjunction.map_restrictFullyFaithful_counit_app]
-    simp
-  have hm : ((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M).hom =
+    simp only [Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.id_comp]
+  -- the bounded mate is the ambient mate, componentwise
+  have hm : (boundedConstructible _).ι.map
+      ((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M) =
       (mateEquiv A B (projectionOpenCompositeForgetIso k₀ l j).inv).app M.obj := by
     simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
-      Category.comp_id]
-    change (b.unit.app _).hom ≫ _ ≫ _ = _
-    rw [hu, hc]
+      Category.comp_id, Functor.map_comp]
+    rw [hu]
+    change _ ≫ (CondensedRing.upperStar Λ (jb).left).leftDerivedFunctor.map
+        ((projectionOpenCompositeForgetIso k₀ l j).inv.app _) ≫
+      (CondensedRing.upperStar Λ (jb).left).leftDerivedFunctor.map
+        ((ProEtaleWeilSheaf.derivedCondensedRealization k₀ l Z).map
+          ((objectProperty k₀ l Z).ι.map (a.counit.app M))) = _
+    rw [hc]
     rfl
-  apply isIso_of_reflects_iso _ (boundedConstructible _).ι
-  change IsIso (((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M).hom)
-  rw [hm]
-  infer_instance
+  haveI : IsIso ((boundedConstructible _).ι.map
+      ((mateEquiv a b (projectionOpenForgetIso k₀ l j).inv).app M)) := by
+    rw [hm]
+    infer_instance
+  exact isIso_of_reflects_iso _ (boundedConstructible _).ι
 
 end AlgebraicGeometry.WeilComplex
