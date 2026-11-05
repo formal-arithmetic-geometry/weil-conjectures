@@ -20779,6 +20779,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.StalkBockstei
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.StalkBocksteinQuotient
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.ForgetCohomologyVanishing
+public import WeilConjectures.SixFunctors.Etale.Derived.FrobeniusCorrespondenceOperator
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.DirectImage
