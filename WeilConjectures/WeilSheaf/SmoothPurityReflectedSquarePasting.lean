@@ -45,7 +45,7 @@ lemma preimageIso_liftSquareWithComparisons_comp :
   apply PC'.ι.map_injective
   simp only [ObjectProperty.ι_map]
   rw [preimageIso_liftSquareWithComparisons_hom_app_hom]
-  simp only [Adjunction.compForgetIso, Iso.trans_hom, Iso.trans_inv,
+  simp only [Adjunction.compForgetIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
@@ -54,14 +54,15 @@ lemma preimageIso_liftSquareWithComparisons_comp :
     Functor.comp_obj, Functor.comp_map, Category.assoc, FullSubcategory.comp_hom,
     FullSubcategory.id_hom]
   rw [preimageIso_liftSquareWithComparisons_hom_app_hom]
-  rw [← cG'.hom.naturality_assoc]
-  simp only [Functor.comp_map, Functor.comp_obj, Category.assoc,
-    Iso.inv_hom_id_app_assoc]
-  rw [preimageIso_liftSquareWithComparisons_hom_app_hom]
+  have hn := cG'.inv.naturality
+    ((preimageIso_liftSquareWithComparisons cF cF' hA hB eF).hom.app K)
+  dsimp only [Functor.comp_map, ObjectProperty.ι_map] at hn
+  rw [← hn, preimageIso_liftSquareWithComparisons_hom_app_hom]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← eG.hom.naturality_assoc]
-  simp only [Functor.comp_map, Category.assoc,
-    ← G'.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+  have he := eG.hom.naturality (cF.hom.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj, ObjectProperty.ι_obj] at he
+  rw [reassoc_of% he]
+
 
 end CategoryTheory.ObjectProperty
 
@@ -88,6 +89,6 @@ lemma compForgetIso_conjugate :
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Functor.map_comp, Functor.map_id,
     Functor.comp_obj, Functor.comp_map, Category.assoc]
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
 
 end CategoryTheory.Adjunction
