@@ -255,8 +255,8 @@ theorem ringComplexOrderedCech_sections_coordinates (A : CommRingCat.{u}) (I : I
     change principalSections A I _ _ (principalIntersection A I f hf (q + 1) t)
       ((alternatingCechDifferential (ringComplexPrincipalCover A I f)
         (sectionPresheaf A I) q).hom (J q x) t) = _
-    simp only [alternatingCechDifferential, ModuleCat.hom_ofHom, LinearMap.pi_apply,
-      LinearMap.sum_apply, LinearMap.smul_apply, LinearMap.comp_apply]
+    dsimp only [alternatingCechDifferential, ModuleCat.hom_ofHom, LinearMap.pi_apply]
+    simp only [LinearMap.sum_apply, LinearMap.smul_apply, LinearMap.comp_apply]
     rw [map_sum]
     apply Finset.sum_congr rfl
     intro j _
