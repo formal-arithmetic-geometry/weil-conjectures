@@ -70,6 +70,6 @@ theorem singleFunctorObjIsoQh_pullback_counit
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
   simp only [Category.id_comp]
   erw [← DerivedCategory.quotientCompQhIso_inv_naturality]
-  rfl
+  erw [Category.id_comp]
 
 end AlgebraicGeometry.Etale
