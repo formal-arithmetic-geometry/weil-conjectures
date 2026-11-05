@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareFromGeometricFunctor
+public import WeilConjectures.WeilSheaf.Native.Projection.NativeComplexSquareNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelFamilyNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeDerivedSquareStatement
 public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
