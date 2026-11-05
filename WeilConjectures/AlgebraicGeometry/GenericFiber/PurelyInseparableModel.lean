@@ -54,7 +54,7 @@ theorem _root_.Algebra.IsUniversalHomeomorphism.of_pow_mem {A B : Type u} [CommR
       ((algebraMap_isIntegral_iff (R := A) (A := B)).mpr inferInstance)
     have h2 : Surjective f := ⟨Algebra.IsIntegral.comap_surjective A B⟩
     have h3 : UniversallyInjective f := by
-      refine ((tfae_universallyInjective f).out 1 0).mp ?_
+      refine ((tfae_universallyInjective f).out 2 1).mp ?_
       intro Ω _ g₁ g₂ hg
       rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢
       simp only [f, ← Spec.map_comp] at hg
