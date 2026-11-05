@@ -26,7 +26,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry
 
-set_option backward.isDefEq.respectTransparency true in
+private local instance ringPresheafHasProducts.{uC, vC, w}
+    {C : Type uC} [Category.{vC} C] : HasProducts.{w} (Cᵒᵖ ⥤ CommRingCat.{w}) :=
+  fun _ ↦ functorCategoryHasLimitsOfShape
+
 private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :
@@ -46,7 +49,6 @@ private noncomputable def ringAdd.{uC, vC, w} {C : Type uC} [Category.{vC} C]
        dsimp at hf hs ⊢
        rw [hf, hs]
        exact (G.obj.map f).hom.map_add _ _ |>.symm }⟩
-set_option backward.isDefEq.respectTransparency true in
 private noncomputable def ringMul.{uC, vC, w} {C : Type uC} [Category.{vC} C]
     (J : GrothendieckTopology C) [J.HasSheafCompose (forget CommRingCat.{w})]
     (G : Sheaf J CommRingCat.{w}) :
