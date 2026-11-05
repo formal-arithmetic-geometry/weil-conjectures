@@ -142,33 +142,26 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ539 in progress
+# BZ541 in progress
 
-- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
-- Re-read the brief and prior notes on user-requested continuation.
-- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
-  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
-- The coordinator subsequently added the public Mathlib monoidal import in
-  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
-- The proposed compatibility-namespace patch remains unapplied while testing
-  the coordinator's repair.
-- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
-  then check up to four direct importers and one further downstream layer.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
-- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
+- Branch: `u9/BZ541`; starting commit: `29f3a8d8177`.
+- User instructed continuation after the exact three-private-statement proposal;
+  removed `.symm` in the private helper types, preserving the original maps.
+- The composition definition and inverse cancellation also use the new orientation.
+- Public theorem statements and all existing docstrings are unchanged.
+- Reused published shared dependency fix `f2876073336` by cherry-pick `09be0bfa2`;
+  this selects the compatibility tensor restriction lemma in `InternalHom`.
+- Remote `ucheck-bump` is queued; no local Lean/Lake execution.
+- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ541.md`.
+- Next: validate the assigned module, build four direct importers, then DONE.
 
-- The public import resolved the missing name, but the resumed build failed in
-  `InternalHom:375` because its proof mixed new and compatibility map APIs.
-- User continuation followed the explicit one-line dependency patch proposal;
-  that exact compatibility-namespace proof repair is now applied.
-- Retrying the assigned module; declarations and heartbeat settings unchanged.
+# BZ557 in progress
 
-- Compatibility build validated Presheaf.InternalHom and exposed the identical
-  copied-proof failure in Algebra.Homology.KFlat:82. Applied the same one-line
-  namespace correction there; no old-name occurrences remain in the target closure.
-- Retrying the target after these two minimal dependency proof corrections.
-
-- KFlat now passes. Its resolution module exposed the same copied-proof mismatch;
-  applied the same correction in KFlatResolutionIndependentCoefficients:132.
-- Corrected the dependency scan to include import all and trailing import comments.
-  All three changes are the same one-line proof-body replacement.
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
