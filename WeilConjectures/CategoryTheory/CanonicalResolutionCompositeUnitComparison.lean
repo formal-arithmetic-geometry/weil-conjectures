@@ -8,8 +8,10 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
+public import Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.CanonicalResolutionHomologyComparison
 import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Resolution comparisons and the composite derived unit
 
