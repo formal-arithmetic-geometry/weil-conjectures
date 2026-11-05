@@ -211,10 +211,9 @@ theorem resolution_composite_unit_transport
             ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
               ComplexShape.embeddingUpNat, 0, inferInstance⟩) n).inv ≫
         (DerivedCategory.Plus.homologyFunctor C n).map
-          (G.rightDerivedFunctorPlusUnith.app
-            ((HomotopyCategory.Plus.quotient B).obj
-              ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
-                ComplexShape.embeddingUpNat, 0, inferInstance⟩)) := by
+          (G.rightDerivedFunctorPlusUnit.app
+            ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+              ComplexShape.embeddingUpNat, 0, inferInstance⟩) := by
   let mG : G.mapCochainComplexPlus.obj
       ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
         ComplexShape.embeddingUpNat, 0, inferInstance⟩ ≅
