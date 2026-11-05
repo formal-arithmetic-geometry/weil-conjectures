@@ -298,9 +298,10 @@ theorem isSheaf_twistedSectionsPresheaf {S : Type w} (c : ↥(pullback f f) → 
   rw [isSheaf_iff_isSheaf_of_type, Scheme.smallEtaleTopology,
     Scheme.smallGrothendieckTopology_eq_toGrothendieck_smallPretopology _ le_rfl,
     Presieve.isSheaf_pretopology]
-  rintro U _ ⟨𝒰, _, h, rfl⟩
+  rintro U R ⟨hsurj, _⟩
+  obtain ⟨ι, Ui, π, rfl⟩ := R.exists_eq_ofArrows
   refine isSheafFor_ofArrows_twistedSectionsPresheaf f c _ _ fun u ↦ ?_
-  obtain ⟨i, x, hx⟩ := 𝒰.exists_eq u
+  obtain ⟨_, _, ⟨⟨⟨⟨i⟩⟩⟩⟩, x, hx⟩ := hsurj u
   exact ⟨i, x, hx⟩
 
 section Restrict
