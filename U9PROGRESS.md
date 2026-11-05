@@ -1,4 +1,4 @@
-# BZ606 in progress
+# BZ606 complete
 
 - Branch: `u9/BZ606`; starting commit: `b7a97a5ed`.
 - Re-read the brief and progress notes following the user's continuation request.
@@ -8,9 +8,18 @@
 - Baseline `ucheck-bump` confirmed exactly these two errors; all dependencies passed.
 - Assigned module passed `ucheck-bump` at `2aef04c18f`: rc=0, failed=0, 4486 jobs.
   The target rebuilt in 49s on `poolb:43.157.148.197`.
-- Next: attempt the four nearest direct importers.
+- Attempted four direct importers at `4bfde6be49c`. The two strict-local homology
+  targets are blocked by unowned injective-exchange source/target transport modules.
+  `RawDerivedClassAffineDescent` is assigned to BZ650 and already validated there
+  at `533953139b`; `UnboundedDirectImageComparisonMap` is assigned to BZ655.
+  Left those files to their active owners. No downstream target is claimed green here.
+- Stopped only the verified timeout process for the downstream batch after confirming
+  the failures and current ownership; rc=255, built=44, failed=5. Full log:
+  `/home/ubuntu/u9/bz/BUILD-BZ606-downstream1-full.log`.
 - Fix patterns and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ606.md`.
 - No local Lean/Lake execution, proof placeholders, or heartbeat changes.
+- Completion marker: `/home/ubuntu/u9/state/BZ606.DONE`.
+- Final documentation update leaves Lean source identical to the successful unit build.
 
 # BZ133 complete
 
