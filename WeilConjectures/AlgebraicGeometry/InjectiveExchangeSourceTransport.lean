@@ -50,10 +50,12 @@ theorem injectiveExchange_source_transport {X S : Scheme.{v}} (f : X ⟶ S)
       ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩
     let H := (HomotopyCategory.Plus.quotient _).obj M
     let q' : K ≅ DerivedCategory.Plus.Qh.obj H :=
-      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Q.obj M)
+      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Qh.obj H)
         (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
     let R := lowerStar AddCommGrpCat.{v + 1} f
     (sourceInjectiveDirectImageIso f K J q).inv =
+      (DerivedCategory.quotientCompQhIso _).inv.app
+        ((R.mapHomologicalComplex (.up ℤ)).obj M.obj) ≫
       DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlusUnith.app H) ≫
       DerivedCategory.Plus.ι.map (R.rightDerivedFunctorPlus.map q'.inv) := by
   simp only [sourceInjectiveDirectImageIso, Iso.trans_inv, Iso.symm_inv,
