@@ -1,3 +1,16 @@
+# PZ017 resumed
+
+- Branch: `u9/PZ017`.
+- The user instructed continuation after the exact two-cast proposal for
+  `scalarPairWithAdjunction`; that patch is now applied.
+- The two casts use `rfl` and preserve the original counit and adjunction-unit morphisms.
+- `SectionDerivedPushpullNormalization` and `ProperOpenClopenProjector` already passed
+  remote validation; all three assigned modules are being rebuilt together.
+- Thirteen geometry direct importers were checked or traced to other units' failures.
+  The six scalar direct importers remain to be checked after the scalar module passes.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-PZ017.md`.
+- No local Lean/Lake, forbidden proof shortcuts, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
