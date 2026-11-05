@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
+public import WeilConjectures.WeilSheaf.Native.Projection.DerivedSquareFromModels
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeModelNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.NativeTensorTotalInstances
 public import WeilConjectures.WeilSheaf.Native.Projection.NativePullTensorNormalization
@@ -14,7 +14,6 @@ public import WeilConjectures.WeilSheaf.Native.Projection.TensorSquare
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationDerivedTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
-import all WeilConjectures.WeilSheaf.Native.NativeRestrictionForgetTotalModel
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # Localization of the native pullback tensor square -/
@@ -65,8 +64,7 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ)
     (hP : NativeIsKFlat k₀ l Y P) (hT : NativeIsKFlat k₀ l Y T) :
     DerivedPullTensorSquare k₀ l g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T) := by
-  unfold DerivedPullTensorSquare PullTensorSquareWithComparison
-  simp only [Iso.symm_inv]
+  unfold DerivedPullTensorSquare
   let L := upperStar k₀ l g
   let V := condensedRealization k₀ l Z
   let F := condensedRealization k₀ l Y
@@ -82,8 +80,6 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
   let cU := (condensedRealizationTotalTensorIso k₀ l Z).app (LP, LT)
   let tr := NativeRestrictionDescentProof.totalFamily L
     (nativeTensorTotal k₀ l Z) (nativeTensorTotal k₀ l Y) (nativePullTotalTensor k₀ l g) P T
-  let mZ := F.mapDerivedCategory.mapIso (nativeOpenTensorModel k₀ l Y P T hP hT) ≪≫
-    F.mapDerivedCategoryFactors.app WZ ≪≫ DerivedCategory.Q.mapIso cZ
   have hr := V.mapDerivedCategory.congr_map
     (projection_nativePullTensor_normalization k₀ l g P T hP hT)
   simp only [Functor.map_comp] at hr
@@ -94,11 +90,10 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
     dsimp only [LT, L]
     exact_mod_proofs nativeIsKFlat_mapHomologicalComplex_upperStar_obj k₀ l g T hT
   have hmU := projection_condensed_model_normalization k₀ l Z LP LT hLP hLT
-  obtain ⟨mU, hmU', hsquare⟩ := final_total_diagram L V F R
+  have h := projection_derived_square_of_total_models L V F R
     (condensedRealizationUpperStarIso k₀ l g).symm
     (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
-    (Functor.uncurry.obj (curriedTensor _)) (condensedRealizationTensor k₀ l Z)
-    (Functor.projection_uncurryTensorIso _)
+    (condensedRealizationTensor k₀ l Y) (condensedRealizationTensor k₀ l Z)
     (nativePullTensor k₀ l g) P T WZ WU
     (nativeOpenTensorModel k₀ l Y P T hP hT)
     (by with_reducible exact nativeOpenTensorModel k₀ l Z LP LT hLP hLT)
@@ -124,44 +119,33 @@ lemma condensedRealizationTensor_pull_square_Q_of_total
       have ht := htotal P T
       dsimp only [TotalPullTensorSquare, PullTensorSquareWithComparison,
         condensedRealizationPullComplexIso] at ht
-      dsimp only [complex_square, tr, NativeRestrictionDescentProof.totalFamily,
+      dsimp only [projection_model_complex_square, tr, NativeRestrictionDescentProof.totalFamily,
         WZ, WU, cZ, cU, L, V, F, R, LP, LT, FP, FT]
       dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
         curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at ht ⊢
       dsimp only [Iso.app, Iso.symm, MonoidalCategory.tensor_map] at ht ⊢
-      with_reducible_and_instances cast_proofs ht) mZ rfl
-  simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
-    MonoidalCategory.tensor_map, Functor.uncurry_obj_obj, curriedTensor_obj_obj] at hmU'
-  simp only [Functor.uncurry_obj_map, curriedTensor_map_app, curriedTensor_obj_map,
-    ← MonoidalCategory.tensorHom_def] at hsquare
-  have hmZ : mZ.hom = (condensedRealizationTensor k₀ l Y).hom.app
-      (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≫
-    (F.mapDerivedCategoryFactors.hom.app P ⊗ₘ F.mapDerivedCategoryFactors.hom.app T) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q FP FT := by
-    have hh := projection_condensed_model_normalization k₀ l Y P T hP hT
-    dsimp only [mZ, cZ, WZ, F, FP, FT, Iso.trans_hom, Functor.mapIso_hom]
-    simp only [Iso.app_hom] at hh ⊢
-    dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
-      curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hh ⊢
-    dsimp only [Mod.monoidalCategoryCochainComplex, HomologicalComplex.monoidalCategory,
-      Monoidal.induced, HomologicalComplex.monoidalCategoryStruct,
-      HomologicalComplex.tensorObj, Functor.map₂CochainComplex,
-      Functor.map₂HomologicalComplex] at hh ⊢
-    with_reducible_and_instances cast_proofs hh
-  have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
-    (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
-    (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
-    (F.mapDerivedCategoryFactors.hom.app P) (F.mapDerivedCategoryFactors.hom.app T)
-  have hright := R.mapDerivedCategory.projection_map_model_square hmZ hmU' ho
-  have hfinal := projection_cancel_model_square hsquare hright
-  dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization,
-    Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
-    curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hfinal ⊢
-  run_tac do IO.FS.writeFile "/tmp/K5-derived-0825-before-exact" "ready"
-  with_reducible_and_instances exact hfinal
-  run_tac do IO.FS.writeFile "/tmp/K5-derived-0825-proof-elaborated" "ready"
-
-run_cmd do IO.FS.writeFile "/tmp/K5-derived-0825-Q-checked" "ready"
+      with_reducible_and_instances cast_proofs ht)
+    (by
+      have hh := projection_condensed_model_normalization k₀ l Y P T hP hT
+      dsimp only [F, FP, FT, WZ, cZ]
+      simp only [Iso.app_hom] at hh ⊢
+      dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj,
+        curriedTensor_obj_obj, MonoidalCategory.tensor_obj] at hh ⊢
+      dsimp only [Mod.monoidalCategoryCochainComplex, HomologicalComplex.monoidalCategory,
+        Monoidal.induced, HomologicalComplex.monoidalCategoryStruct,
+        HomologicalComplex.tensorObj, Functor.map₂CochainComplex,
+        Functor.map₂HomologicalComplex] at hh ⊢
+      with_reducible_and_instances cast_proofs hh)
+    (fun A B ↦ (R.mapDerivedCategoryTensorComparison.app A).app B)
+    (by
+      have ho := R.projection_mapDerivedCategoryTensorComparison_total_model
+        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
+        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj T)) FP FT
+        (F.mapDerivedCategoryFactors.hom.app P) (F.mapDerivedCategoryFactors.hom.app T)
+      dsimp only [Iso.symm, FP, FT] at ho ⊢
+      with_reducible_and_instances exact_mod_proofs ho)
+  dsimp only [L, V, F, R, nativeOpenPull, derivedCondensedRealization] at h ⊢
+  exact_mod_proofs h
 
 include htotal in
 /-- The native pullback tensor square on arbitrary derived objects, extended from K-flat

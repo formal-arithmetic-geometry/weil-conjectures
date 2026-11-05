@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.WeilSheaf.Native.Projection.ModelSquareCancellation
 public import WeilConjectures.WeilSheaf.Native.Projection.OrdinaryTensorNormalization
 public import WeilConjectures.WeilSheaf.Native.Projection.SheafSquareTransport
@@ -127,8 +128,11 @@ lemma projection_derived_square_of_total_models
   obtain ⟨mU, hmU', hsquare⟩ := final_total_diagram L V F R e DZ DU
     (Functor.uncurry.obj (curriedTensor _)) tu (Functor.projection_uncurryTensorIso _) rho
     P T WZ WU modelZ modelU tr hr cZ cU
-    (by simpa only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
-      MonoidalCategory.tensor_map, Functor.uncurry_obj_obj, curriedTensor_obj_obj] using hmU) ord
+    (by
+      simp only [Functor.projection_uncurryTensorIso_hom_app, MonoidalCategory.tensor_map,
+        Functor.uncurry_obj_obj, curriedTensor_obj_obj]
+      erw [Category.id_comp]
+      exact hmU) ord
     (by simpa only [MonoidalCategory.tensor_map, projection_model_complex_square,
       complex_square] using hchain) mZ rfl
   simp only [Functor.projection_uncurryTensorIso_hom_app, Category.id_comp,
