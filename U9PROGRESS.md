@@ -80,3 +80,15 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ190.DONE`.
 - No local Lean/Lake, proof placeholders, trust escapes, or heartbeat increases.
 - This final commit changes only progress documentation after the successful build.
+
+# BZ298 in progress
+
+- Branch: `u9/BZ298`; starting commit: `18e44f2d5`.
+- The user instructed continuation after the exact one-line statement compatibility proposal.
+- Applied `Unith.app (quotient.obj L)` → `Unit.app L` in
+  `GrothendieckResolutionUnitComparison`, matching `resolution_composite_unit_transport`.
+- The baseline and import-only remote checks both failed before proof checking; ineffective
+  imports were removed. No other statement, binder, or docstring changed.
+- Next: validate the assigned module, then its direct importer and one further layer.
+- Fix patterns and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ298.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
