@@ -109,7 +109,6 @@ lemma purity_comparisonFreeSheaf_pullback
     lowerStarComparisonLowerStarIso, Iso.refl_symm, Iso.refl_hom, NatTrans.id_app,
     NatIso.ofComponents_hom_app, Category.id_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  rfl
 
 /-- Forward form of the free-sheaf site comparison square. -/
 lemma purity_comparisonFreeSheaf_pullback_forward
