@@ -61,8 +61,6 @@ private lemma fan_projection_isIso {D : Type*} [Category* D] [HasZeroMorphisms D
   exact (Iso.mk (s.proj k) v hp hv).isIso_hom
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
--- The dependent product projections need extra elaboration steps.
 /-- Internal Hom from a complex concentrated in one degree preserves quasi-isomorphisms
 if internal Hom from its sole possibly nonzero term preserves short exact sequences.
 
@@ -107,10 +105,8 @@ theorem quasiIso_homComplex_map_of_single_degree_exact_term
   have : F.PreservesHomology := ((Functor.exact_tfae F).out 0 2).mp hF
   classical
   let H := (homComplexFunctor (R := R)).obj (op P)
-  let π := Classical.choose
-    (homComplex_projections_exists.{u, u, u, u} (C := C) (J := J) (R := R))
-  have hπ := Classical.choose_spec
-    (homComplex_projections_exists.{u, u, u, u} (C := C) (J := J) (R := R))
+  obtain ⟨π, hπ⟩ :=
+    homComplex_projections_exists.{u, u, u, u} (C := C) (J := J) (R := R)
   have hi (T : CochainComplex _ ℤ) (n : ℤ) :
       IsIso (π P T n k (k + n) rfl) := by
     let Q := fun p : ℤ ↦ SheafOfModules.homObj (R := R) (P.X p) (T.X (p + n))

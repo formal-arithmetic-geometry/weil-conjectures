@@ -34,7 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Comparing the two telescope formulas unfolds the truncation diagram under a cone type.
 /-- (blueprint: lem-pc-kflat-hocolim-truncations) For a complex `K` of modules over a sheaf of
 commutative rings on a site, the canonical map from the telescope of its good truncations to

@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!
 # Extending constant coefficients to the constant ring sheaf
@@ -36,6 +39,29 @@ variable (Y : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ]
 private abbrev etaleConstantModuleRing : Sheaf Y.smallEtaleTopology RingCat.{u + 1} :=
   (constantSheaf Y.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)
 
+/-- The sheafification unit of the constant ring presheaf.
+(blueprint: lem-sfb-ring-etale-constant-module-equivalence)
+-/
+private def etaleConstantModuleRingUnit :
+    (Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ) ⟶ (etaleConstantModuleRing Y Λ).obj :=
+  toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ))
+
+private instance : Presheaf.IsLocallyInjective Y.smallEtaleTopology
+    (etaleConstantModuleRingUnit Y Λ) :=
+  have : Presheaf.IsLocallyInjective Y.smallEtaleTopology
+      (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ))) := by
+    apply (Presheaf.isLocallyInjective_forget_iff _ _).mp
+    infer_instance
+  this
+
+private instance : Presheaf.IsLocallySurjective Y.smallEtaleTopology
+    (etaleConstantModuleRingUnit Y Λ) :=
+  have : Presheaf.IsLocallySurjective Y.smallEtaleTopology
+      (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ))) := by
+    apply (Presheaf.isLocallySurjective_iff_whisker_forget _ _).mpr
+    infer_instance
+  this
+
 /-- A module-valued presheaf, viewed as modules over the constant ring presheaf.
 (blueprint: lem-sfb-ring-etale-constant-module-equivalence)
 -/
@@ -50,18 +76,36 @@ private def etaleConstantModulePresheaf (J : Sheaf Y.smallEtaleTopology (ModuleC
     (J.obj ⋙ forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
     (fun {_ _} f r m ↦ (J.obj.map f).hom.map_smul r m)
 
+/-- The identity of the underlying abelian presheaf, as a map to the underlying abelian sheaf.
+(blueprint: lem-sfb-ring-etale-constant-module-equivalence)
+-/
+private def etaleConstantModuleUnderlyingHom
+    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (etaleConstantModulePresheaf Y Λ J).presheaf ⟶
+      ((sheafCompose Y.smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J).obj :=
+  𝟙 _
+
+private instance (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Presheaf.IsLocallyInjective Y.smallEtaleTopology (etaleConstantModuleUnderlyingHom Y Λ J) :=
+  Presheaf.isLocallyInjective_of_injective _ _ fun _ _ _ h ↦ h
+
+private instance (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Presheaf.IsLocallySurjective Y.smallEtaleTopology (etaleConstantModuleUnderlyingHom Y Λ J) :=
+  Presheaf.isLocallySurjective_of_surjective _ _ fun _ x ↦ ⟨x, rfl⟩
+
 /-- Extend the scalar action by gluing, keeping the underlying abelian sheaf.
 (blueprint: lem-sfb-ring-etale-constant-module-equivalence)
 -/
 private def etaleConstantModuleRealization
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ) :=
-  PresheafOfModules.sheafify
-    (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ)))
+  PresheafOfModules.sheafify (R := etaleConstantModuleRing Y Λ)
+    (etaleConstantModuleRingUnit Y Λ)
     (M₀ := etaleConstantModulePresheaf Y Λ J)
     (A := (sheafCompose Y.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J)
-    (𝟙 _)
+    (etaleConstantModuleUnderlyingHom Y Λ J)
 
 /-- Extension of the constant scalar action, on objects and morphisms.
 (blueprint: lem-sfb-ring-etale-constant-module-equivalence)
@@ -70,7 +114,9 @@ private def etaleConstantModuleFunctor :
     Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
       SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ) where
   obj J := etaleConstantModuleRealization Y Λ J
-  map {J K} f := PresheafOfModules.sheafifyMap _ _ _
+  map {J K} f := PresheafOfModules.sheafifyMap (etaleConstantModuleRingUnit Y Λ)
+    (etaleConstantModuleUnderlyingHom Y Λ J)
+    (etaleConstantModuleUnderlyingHom Y Λ K)
     (PresheafOfModules.homMk
       (M₁ := etaleConstantModulePresheaf Y Λ J)
       (M₂ := etaleConstantModulePresheaf Y Λ K)
@@ -98,8 +144,7 @@ private def etaleConstantModuleRestriction
     (M : SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ)) :
     Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) where
   obj :=
-    let P := (PresheafOfModules.restrictScalars
-      (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ)))).obj M.val
+    let P := (PresheafOfModules.restrictScalars (etaleConstantModuleRingUnit Y Λ)).obj M.val
     { obj := fun X ↦ P.obj X
       map := fun f ↦ P.map f
       map_id := fun X ↦ by ext x; simp; rfl
@@ -118,8 +163,7 @@ private def etaleConstantModuleRestrictionFunctor :
   obj M := etaleConstantModuleRestriction Y Λ M
   map f := ObjectProperty.homMk
     { app := fun X ↦ (ModuleCat.restrictScalars
-        ((toSheafify Y.smallEtaleTopology
-          ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ))).app X).hom).map (f.val.app X)
+        ((etaleConstantModuleRingUnit Y Λ).app X).hom).map (f.val.app X)
       naturality := fun {_ _} g ↦ by ext x; exact PresheafOfModules.naturality_apply f.val g x }
   map_id M := by ext X x; rfl
   map_comp f g := by ext X x; rfl
@@ -133,11 +177,11 @@ private def etaleConstantModuleUnitIso :
   refine NatIso.ofComponents (fun J ↦ ObjectProperty.isoMk _ ?_) ?_
   · refine NatIso.ofComponents (fun X ↦ ?_) ?_
     · let f := (PresheafOfModules.toSheafify
-        (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ)))
+        (etaleConstantModuleRingUnit Y Λ)
         (M₀ := etaleConstantModulePresheaf Y Λ J)
         (A := (sheafCompose Y.smallEtaleTopology
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J)
-        (𝟙 _)).app X
+        (etaleConstantModuleUnderlyingHom Y Λ J)).app X
       exact LinearEquiv.toModuleIso (LinearEquiv.ofBijective f.hom
         ⟨fun _ _ h ↦ h, fun x ↦ ⟨x, rfl⟩⟩)
     · intro X Z f
@@ -147,6 +191,26 @@ private def etaleConstantModuleUnitIso :
     ext X x
     rfl
 
+/-- The identity of the underlying abelian presheaf of a ringed-site module, viewed as a map out of
+its restriction to constant scalars.
+(blueprint: lem-sfb-ring-etale-constant-module-equivalence)
+-/
+private def etaleConstantModuleCounitUnderlyingHom
+    (M : SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ)) :
+    (etaleConstantModulePresheaf Y Λ (etaleConstantModuleRestriction Y Λ M)).presheaf ⟶
+      (⟨M.val.presheaf, M.isSheaf⟩ : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj :=
+  𝟙 _
+
+private instance (M : SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ)) :
+    Presheaf.IsLocallyInjective Y.smallEtaleTopology
+      (etaleConstantModuleCounitUnderlyingHom Y Λ M) :=
+  Presheaf.isLocallyInjective_of_injective _ _ fun _ _ _ h ↦ h
+
+private instance (M : SheafOfModules.{u + 1} (etaleConstantModuleRing Y Λ)) :
+    Presheaf.IsLocallySurjective Y.smallEtaleTopology
+      (etaleConstantModuleCounitUnderlyingHom Y Λ M) :=
+  Presheaf.isLocallySurjective_of_surjective _ _ fun _ x ↦ ⟨x, rfl⟩
+
 /-- The universal property of scalar extension supplies the counit.
 (blueprint: lem-sfb-ring-etale-constant-module-equivalence)
 -/
@@ -155,10 +219,10 @@ private def etaleConstantModuleCounitHom
     (etaleConstantModuleFunctor Y Λ).obj
       ((etaleConstantModuleRestrictionFunctor Y Λ).obj M) ⟶ M :=
   (PresheafOfModules.sheafifyHomEquiv
-    (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ)))
+    (etaleConstantModuleRingUnit Y Λ)
     (M₀ := etaleConstantModulePresheaf Y Λ (etaleConstantModuleRestriction Y Λ M))
     (A := ⟨M.val.presheaf, M.isSheaf⟩)
-    (𝟙 _)).symm
+    (etaleConstantModuleCounitUnderlyingHom Y Λ M)).symm
       (PresheafOfModules.homMk (𝟙 _) (fun _ _ _ ↦ rfl))
 
 /-- The counit is the identity on underlying abelian presheaves.
@@ -169,12 +233,12 @@ private lemma etaleConstantModuleCounitHom_underlying
     (PresheafOfModules.toPresheaf _).map (etaleConstantModuleCounitHom Y Λ M).val =
       𝟙 M.val.presheaf := by
   have h := PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom
-    (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ)))
+    (etaleConstantModuleRingUnit Y Λ)
     (M₀ := etaleConstantModulePresheaf Y Λ (etaleConstantModuleRestriction Y Λ M))
     (A := ⟨M.val.presheaf, M.isSheaf⟩)
-    (𝟙 _) M.isSheaf (PresheafOfModules.homMk (𝟙 _) (fun _ _ _ ↦ rfl))
-  rw [Category.id_comp] at h
-  exact h
+    (etaleConstantModuleCounitUnderlyingHom Y Λ M) M.isSheaf
+    (PresheafOfModules.homMk (𝟙 _) (fun _ _ _ ↦ rfl))
+  exact (Category.id_comp _).symm.trans h
 
 /-- Extending the restricted scalar action recovers the original ringed-site module.
 (blueprint: lem-sfb-ring-etale-constant-module-equivalence)
@@ -249,15 +313,20 @@ presheaf. Module sheafification leaves the underlying abelian sheaf unchanged. R
 along the sheafification unit gives an inverse. The identity on sections supplies both
 natural isomorphisms; the counit is linear by the module sheafification universal property.
 No step commutes two scalar multiplications, so an arbitrary ring suffices. -/
-theorem constantModuleEquivalence :
-    ∃ (e : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ≌ SheafOfModules.{u + 1}
-        ((constantSheaf Y.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ))),
-      Nonempty (e.functor ⋙ SheafOfModules.toSheaf
+@[no_expose]
+def constantModuleEquivalence :
+    Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ≌ SheafOfModules.{u + 1}
+      ((constantSheaf Y.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)) :=
+  letI := etaleConstantModuleFunctor_isEquivalence Y Λ
+  (etaleConstantModuleFunctor Y Λ).asEquivalence
+
+/-- The equivalence `constantModuleEquivalence` does not change the underlying abelian sheaf.
+(blueprint: lem-sfb-ring-etale-constant-module-equivalence) -/
+@[no_expose]
+def constantModuleEquivalenceToSheafIso :
+    (constantModuleEquivalence Y Λ).functor ⋙ SheafOfModules.toSheaf
         ((constantSheaf Y.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)) ≅
-        sheafCompose Y.smallEtaleTopology
-          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})) := by
-  let := etaleConstantModuleFunctor_isEquivalence Y Λ
-  refine ⟨(etaleConstantModuleFunctor Y Λ).asEquivalence, ⟨?_⟩⟩
-  exact Iso.refl _
+      sheafCompose Y.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+  Iso.refl _
 
 end AlgebraicGeometry.Scheme.FiniteRingCoefficientComparison
