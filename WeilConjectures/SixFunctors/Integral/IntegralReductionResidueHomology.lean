@@ -437,16 +437,16 @@ private theorem residueIdeal_map
     [FiniteDimensional (Padic l) E] (n : ℕ) :
     (Padic.coefficientExtensionIdeal l E 1).map
       (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) =
-    Ideal.span {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
-      (Padic.coefficientExtensionUniformizer l E)} := by
+    Ideal.span {(Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
+      (Padic.coefficientExtensionUniformizer l E))} := by
   simp only [Padic.coefficientExtensionIdeal, pow_one, Ideal.map_span, Set.image_singleton]
 
 private noncomputable def quotientResidueEquiv
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) :
     (Padic.coefficientExtensionRing l E (n + 1) ⧸ Ideal.span
-      {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
-        (Padic.coefficientExtensionUniformizer l E)}) ≃+*
+      {(Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
+        (Padic.coefficientExtensionUniformizer l E))}) ≃+*
       Padic.coefficientExtensionRing l E 1 :=
   (Ideal.quotEquivOfEq (residueIdeal_map l E n).symm).trans
     (DoubleQuot.quotQuotEquivQuotOfLE (show
@@ -579,8 +579,8 @@ private noncomputable def residueSheafEquiv
     [FiniteDimensional (Padic l) E] (X : AlgebraicGeometry.Scheme.{u}) (n : ℕ) :
     (constantSheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj
       (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1) ⧸
-        Ideal.span {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
-          (Padic.coefficientExtensionUniformizer l E)}))) ≅
+        Ideal.span {(Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
+          (Padic.coefficientExtensionUniformizer l E))}))) ≅
       integralCoefficientCommRingSheaf l E X 0 :=
   (constantSheaf _ CommRingCat.{u + 1}).mapIso
     ((ULift.ringEquiv.trans ((quotientResidueEquiv l E n).trans
@@ -591,8 +591,8 @@ private theorem residueSheafEquiv_comp
     [FiniteDimensional (Padic l) E] (X : AlgebraicGeometry.Scheme.{u}) (n : ℕ) :
     (constantSheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
       (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.mk (Ideal.span
-        {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
-          (Padic.coefficientExtensionUniformizer l E)})))) ≫
+        {(Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
+          (Padic.coefficientExtensionUniformizer l E))})))) ≫
       (residueSheafEquiv l E X n).hom = finiteToFirstSheaf l E X n := by
   dsimp [residueSheafEquiv, finiteToFirstSheaf]
   rw [← Functor.map_comp]
@@ -645,8 +645,8 @@ theorem integralReduction_residue_homology_zero_iff
       (scalarReductionTarget.{u, u} l E X n) i).obj
         (derivedTensorRing.{u} X (Padic.coefficientExtensionRing l E (n + 1))
           (Padic.coefficientExtensionRing l E (n + 1) ⧸ Ideal.span
-            {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
-              (Padic.coefficientExtensionUniformizer l E)})
+            {(Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
+              (Padic.coefficientExtensionUniformizer l E))})
           (Ideal.Quotient.mk _) L P f hf hP)) ↔
     IsZero ((DerivedCategory.homologyFunctor
       (scalarReductionTarget.{u, u} l E X 0) i).obj
@@ -680,8 +680,8 @@ theorem integralReduction_residue_homology_zero_iff
     fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj R M
   let q := (constantSheaf J CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.mk (Ideal.span
-      {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
-        (Padic.coefficientExtensionUniformizer l E)}))))
+      {(Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
+        (Padic.coefficientExtensionUniformizer l E))}))))
   -- The quotient-of-quotient equivalence respects the finite projection.
   let β := residueSheafEquiv l E X n
   let eb := IntegralResidueHelpers.regularIso q b β (residueSheafEquiv_comp l E X n)
