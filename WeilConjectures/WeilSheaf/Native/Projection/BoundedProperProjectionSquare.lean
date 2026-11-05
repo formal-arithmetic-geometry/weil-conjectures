@@ -1,0 +1,85 @@
+/-
+Copyright (c) 2026. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProperForget
+public import WeilConjectures.WeilSheaf.Native.Projection.BoundedProjectionIso
+public import WeilConjectures.WeilSheaf.Native.Projection.BoundedForgetNormalization
+public import WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionForgetSquare
+public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
+
+/-! # The proper projection square on Weil complexes -/
+
+@[expose] public noncomputable section
+
+universe u
+
+open CategoryTheory MonoidalCategory Endofunctor
+
+namespace AlgebraicGeometry.WeilComplex
+
+open ProEtale
+
+variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
+  [Fact (ringChar k₀ ≠ l)]
+  {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  (g : X ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))] [IsProper g]
+
+local notation "gb" => geometricFiberHom (k₀ := k₀) g
+local notation "Λ" => Profinite.padicAlgClRingObj l
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The bounded proper forget square has the same components as the canonical realization
+mate transported along the exact-functor compositor. -/
+lemma projectionProperForgetIso_hom_app (M : WeilComplex k₀ l X) :
+    ((projectionProperForgetIso k₀ l g).hom.app M).hom =
+      (projectionPushForgetIso (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
+        (projectionRealizationCompIso k₀ l X)
+        (projectionRealizationCompIso k₀ l Y)).hom.app M.obj := by
+  simp [projectionProperForgetIso, projectionBoundedAdicCondensedPushIso,
+    properProjectionAdicForgetIso, Functor.isoHComp, projectionPushForgetIso,
+    projectionRealizationCompIso, ProEtaleWeilSheaf.nativeProperForgetIso,
+    ProEtaleWeilSheaf.nativeProjectionPushMate_normalization, ← Functor.map_comp]
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+/-- Forgetting the proper projection isomorphism gives the geometric projection morphism. -/
+theorem projectionForgetSquare_proper :
+    ProjectionForgetSquare (projectionProperForgetIso k₀ l g)
+      (compactProjectionForgetUpperStarIso k₀ l g)
+      (compactProjectionForgetTensorIso k₀ l X) (compactProjectionForgetTensorIso k₀ l Y)
+      (nativeBoundedProperProjectionIso (k₀ := k₀) (l := l) g).hom
+      (CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l gb).projectionMorphismNatTrans := by
+  have h := projectionForgetSquare_of_iso
+    (ProEtaleWeilSheaf.nativeProperForgetIso k₀ l g)
+    (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l g).symm
+    (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l X)
+    (ProEtaleWeilSheaf.condensedRealizationTensor k₀ l Y)
+    (projectionRealizationCompIso k₀ l X) (projectionRealizationCompIso k₀ l Y)
+    (ProEtaleWeilSheaf.nativeProperProjectionNatTrans k₀ l g)
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb.left).projectionMorphismNatTrans
+    (ProEtaleWeilSheaf.nativeProperProjection_forgetSquare k₀ l g)
+  intro M N
+  apply ObjectProperty.hom_ext
+  have hm := h M.obj N.obj
+  have hg := CondensedRing.boundedConstructibleProjectionMorphism_hom l gb
+    ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)
+  change ((CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l gb).projectionMorphism
+    ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)).hom = _ at hg
+  change _ ≫ _ ≫ _ = _ ≫ _ ≫
+    ((CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction l gb).projectionMorphism
+      ((compactProjectionForget k₀ l X).obj M) ((compactProjectionForget k₀ l Y).obj N)).hom
+  rw [hg]
+  simp only [nativeBoundedProperProjectionIso_hom_app, projectionProperForgetIso_hom_app,
+    compactProjectionForgetTensorIso_hom_app, compactProjectionForgetUpperStarIso_hom_app]
+  exact hm
+
+end AlgebraicGeometry.WeilComplex
