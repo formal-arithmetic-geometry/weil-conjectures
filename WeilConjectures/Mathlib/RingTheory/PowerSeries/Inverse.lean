@@ -63,7 +63,7 @@ theorem X_pow_dvd_inv_sub_inv {k : Type*} [Field k] {f g : k⟦X⟧} {n : ℕ}
 theorem map_inv {k k' : Type*} [Field k] [Field k'] (f : k →+* k') (φ : k⟦X⟧) :
     map f φ⁻¹ = (map f φ)⁻¹ := by
   have hc : constantCoeff (map f φ) = f (constantCoeff φ) := by
-    rw [← coeff_zero_eq_constantCoeff_apply, coeff_map, coeff_zero_eq_constantCoeff_apply]
+    rfl
   by_cases h : constantCoeff φ = 0
   · rw [inv_eq_zero.2 h, map_zero, eq_comm, inv_eq_zero, hc, h, map_zero]
   · rw [eq_inv_iff_mul_eq_one (by rwa [hc, map_ne_zero]), ← map_mul,
