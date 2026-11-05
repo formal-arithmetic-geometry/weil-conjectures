@@ -31,7 +31,7 @@ noncomputable def upperStarIntegralTateTwistDerivedIso
     L((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).obj
       ((DerivedCategory.singleFunctor _ 0).obj (integralTateTwistNat X ℓ E d)) ≅
       (DerivedCategory.singleFunctor _ 0).obj (integralTateTwistNat X' ℓ E d) :=
-  (leftDerivedUpperStarIsoMapDerivedCategory _ g).app _ ≪≫
+  (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory _ g).app _ ≪≫
     ((CondensedRing.upperStar (Profinite.padicIntegersRingObj ℓ E)
       g).mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (upperStarIntegralTateTwistNatIso ℓ E g f d)

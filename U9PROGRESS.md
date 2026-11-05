@@ -506,3 +506,5 @@ SmoothPurityCoefficientPullShift GREEN11s in K4-20261105T111133.log: actual deri
 
 ## 2026-11-05 11:27 CST — derived pull/single square GREEN
 K4-20261105T112453.log at43eb615a8 validates DerivedPullSingle16s and named homotopy counits29s. Next DerivedDatumSquare fails in its statement at the second flat comparison (line50,20s), before proof elaboration. Added transparent named flat-single/exact-pullback isomorphisms in a small new file and shortened the helper statement; rational Tate wrapper expands them only at the final normalization. No budget changes.
+
+2026-11-05 11:31 CST: K4-20261105T112901.log: FlatModuleComparison GREEN7.3s; DerivedDatumSquare GREEN8.6s. RationalDerived reached31s with only a namespace resolution error (ProEtale vs CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory); qualified it. Added generic coefficient-trivialization zsmul preservation and actual rational semilinear Frobenius scalar to test alongside Tate audit.
