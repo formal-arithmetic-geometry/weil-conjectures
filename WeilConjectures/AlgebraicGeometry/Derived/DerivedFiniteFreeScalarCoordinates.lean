@@ -860,9 +860,9 @@ private theorem scalarComparisonDescent_normalized
         F.mapDerivedCategory.{w, w} ≅
       G.mapDerivedCategory.{w, w} ⋙
         U'.mapDerivedCategory.{w, w} :=
-  (Functor.mapDerivedCategoryCompIso (U) F).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (U) F) ≪≫
     Functor.mapDerivedCategoryNatIso ρ ≪≫
-      Functor.mapDerivedCategoryCompIso G (U')
+      (Functor.mapDerivedCategoryCompIso G (U')).symm
 
 private theorem derivedRestrictionComparison_spec
     [PreservesFiniteLimits (U')]

@@ -119,8 +119,8 @@ lemma Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (h₁₂ : T ⟶ 
   -- the pasting isomorphism carries the point `(v, t)` to the point `((v, t ≫ h₁), t)`
   refine CategoryTheory.Over.OverMorphism.ext ?_
   have hmap : (pointSmallEtale t.1).fiber.map ψ
-      ((Etale.baseChangeNbhd (h₁ ≫ h₂) y t).obj (Functor.elementsMk _ V v)).snd =
-      ((Etale.baseChangeNbhd (h₁ ≫ h₂) y t).obj (Functor.elementsMk _ V v)).snd ≫
+      ((Etale.baseChangeNbhd (h₁ ≫ h₂) y t).obj (Functor.elementsMk _ V v)).val =
+      ((Etale.baseChangeNbhd (h₁ ≫ h₂) y t).obj (Functor.elementsMk _ V v)).val ≫
         (Etale.forget T).map ψ := rfl
   have hl : ((Etale.forget T).map ψ).left = ψ.left := rfl
   have hψ₁ : ψ.left ≫ pullback.fst ((MorphismProperty.Over.pullback (P := @Etale) (Q := ⊤)

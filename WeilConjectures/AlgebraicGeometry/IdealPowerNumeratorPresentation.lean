@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.RingTheory.Ideal.Span
 import WeilConjectures.AlgebraicGeometry.GeneralIdealPowerAffineSections
 import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # A linear presentation of ideal-power numerators
 

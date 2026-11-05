@@ -310,7 +310,7 @@ private noncomputable def rightComp {R S T : Sheaf J CommRingCat.{r}}
     (a : R ⟶ S) (b : S ⟶ T) :
     (restriction b).mapDerivedCategory ⋙ (restriction a).mapDerivedCategory ≅
       (restriction (a ≫ b)).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (restriction b) (restriction a)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (restriction b) (restriction a)) ≪≫
     Functor.mapDerivedCategoryNatIso (resComp a b)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -338,7 +338,7 @@ private theorem exactComp_assoc
     isoWhiskerLeft F₃₂.mapDerivedCategory
         ((Functor.mapDerivedCategoryCompIso F₂₁ F₁₀).symm ≪≫
           Functor.mapDerivedCategoryNatIso e₀₁₂) ≪≫
-      ((Functor.mapDerivedCategoryCompIso F₃₂ F₂₀).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso F₃₂ F₂₀) ≪≫
         Functor.mapDerivedCategoryNatIso e₀₂₃) =
     (Functor.associator _ _ _).symm ≪≫
       isoWhiskerRight ((Functor.mapDerivedCategoryCompIso F₃₂ F₂₁).symm ≪≫

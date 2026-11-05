@@ -586,9 +586,9 @@ def derivedRestrictionIso :
     (ModuleCat.restrictScalars q) (commutativeSiteConstantModuleFunctor J R)
   letI := comp_preservesFiniteColimits
     (ModuleCat.restrictScalars q) (commutativeSiteConstantModuleFunctor J R)
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (restrictionIso J q) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The comparison map is the mate of the realized scalar-extension unit.
 Source: Stacks 0G7E and 07A6

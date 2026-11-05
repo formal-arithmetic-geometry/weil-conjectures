@@ -280,7 +280,7 @@ private def derivedRestrictionComp :
     (Mod.comap ψ : Mod C T ⥤ Mod C S).mapDerivedCategory ⋙
       (Mod.comap φ).mapDerivedCategory ≅
       (Mod.comap χ).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (Mod.comap ψ) (Mod.comap φ)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (Mod.comap ψ) (Mod.comap φ)) ≪≫
     Functor.mapDerivedCategoryNatIso (ordinaryRestrictionComp φ ψ χ h)
 
 private def derivedAssociation :

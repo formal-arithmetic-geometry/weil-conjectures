@@ -17,6 +17,7 @@ import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.CategoryTheory.DerivedLimitEventuallyIso
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Derived sections vanish above a lower tail with basis-acyclic homology
 
