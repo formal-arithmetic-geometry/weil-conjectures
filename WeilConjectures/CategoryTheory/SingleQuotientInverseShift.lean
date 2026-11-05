@@ -111,6 +111,7 @@ theorem single_quotient_inverse_shift (X : B) (n : ℕ) :
       DerivedCategory.Qh.map
         (((HomotopyCategory.Plus.ι B).commShiftIso (-(n : ℤ))).hom.app K₀) ≫ _ = _
     erw [← Functor.map_comp_assoc, hσH]
+    rfl
   have hc := congr_app (E.inv.comm (-(n : ℤ)) n 0 (by simp)) X
   dsimp only [NatTrans.comp_app, Functor.whiskerRight_app] at hc
   have hc' : (E.inv.hom n).app X ≫
