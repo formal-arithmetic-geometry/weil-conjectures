@@ -674,10 +674,10 @@ lemma exists_ne_zero_dvd_C_mul_of_map_dvd {σ A K : Type*} [CommRing A] [IsDomai
     intro c hc
     obtain ⟨m, hm, rfl⟩ := mem_coeffs_iff.mp hc
     rw [coeff_C_mul]
-    by_cases h0 : coeff m R = 0
+    by_cases h0 : R.coeff m = 0
     · rw [h0, mul_zero]
       exact ⟨0, map_zero _⟩
-    · obtain ⟨d, hd⟩ := hbR (coeff m R) (mem_coeffs_iff.mpr ⟨m, mem_support_iff.mpr h0, rfl⟩)
+    · obtain ⟨d, hd⟩ := hbR (R.coeff m) (mem_coeffs_iff.mpr ⟨m, mem_support_iff.mpr h0, rfl⟩)
       exact ⟨d, by rw [hd, Algebra.smul_def]⟩
   refine ⟨b, nonZeroDivisors.coe_ne_zero ⟨b, hb⟩, R', map_injective _
     (IsFractionRing.injective A K) ?_⟩
@@ -822,7 +822,7 @@ theorem exists_ne_zero_forall_irreducibleSpace_of_hypersurface {A C : Type*} [Co
   have hAC : Function.Injective (algebraMap A' Φ.range) := by
     intro a b hab
     apply hA'F
-    rw [IsScalarTower.algebraMap_apply A' Φ.range F a, hab, ← IsScalarTower.algebraMap_apply]
+    exact congrArg (fun z : Φ.range ↦ (z : F)) hab
   have hvK : AlgebraicIndependent K' (v ∘ Fin.succ) :=
     hv.restrictScalars (algebraMap K' L).injective
   have hPL : map (algebraMap A' L) P' = P := hP'
