@@ -92,7 +92,7 @@ theorem of_isAffineHom {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] (h : Y.H
     X.HasAmpleFamily := by
   obtain ⟨L, hL, ι, _, s, hs, hcov⟩ := h
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ Y.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit Y.ringCatSheaf))
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   let t (i : ι) : 𝟙_ X.Modules ⟶ (Modules.pullback f).obj L :=
     (Modules.pullbackObjUnitIso f).inv ≫ (Modules.pullback f).map (s i)
   have ht (i : ι) : (Modules.Hom.zeroLocus (t i)).support.compl =
