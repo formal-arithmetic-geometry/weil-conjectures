@@ -1,3 +1,24 @@
+# BZ356 complete
+
+- Branch: `u9/BZ356`; starting commit: `98654719b`.
+- Assigned module `WeilConjectures.AlgebraicGeometry.PerfectCommonAffineModels`
+  passed `ucheck-bump`: rc=0, failed=0, 2872 jobs, target rebuilt in 10 seconds.
+- Validated source commit: `a08da2560d`; no Lean source changes were needed.
+- The compositor orientation fix was already applied in `e94c0a532` before this unit started.
+- Both direct importers were attempted: `PerfectDerivedTensor` and `PerfectTwoOutOfThree`.
+  They were skipped because five dependencies outside this unit failed, as required by
+  the ownership rule. No direct importer became green, so there was no second-layer build.
+- Downstream blockers: `Modules.StalkTensor`, `LocalizedOpenSheafification`,
+  `AffineQCohDerivedAdjunctionConstruction`, `AffineDerivedSectionsTruncationIso`,
+  and `AffineDerivedSectionsTruncatedBottom`.
+- Logs: `/home/ubuntu/u9/bz/BUILD-BZ356-assigned-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ356-downstream-full.log`.
+- Existing fix pattern, whole-tree count, exact original error, and dependency blocker
+  details: `/home/ubuntu/u9/bz/FIXES-BZ356.md`.
+- No local Lean/Lake execution, statement changes, proof shortcuts, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ356.DONE`.
+- This commit changes progress documentation only; Lean sources match the green build.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
