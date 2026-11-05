@@ -314,8 +314,8 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
         (hN : CochainComplex.IsKFlatTensor (R := X.sheaf) N),
         (e P N hP hN).hom ≫
             (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
-            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
-              (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
+            cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
+              (CochainComplex.mapBifunctor P N (curriedTensor _)))) ≫
             DerivedCategory.Q.map (φ P N).hom =
           cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
             ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
