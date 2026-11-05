@@ -55,6 +55,14 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
 
 variable {R : Sheaf J CommRingCat.{w}} {S : Sheaf K CommRingCat.{w}}
 
+private local instance {A : Sheaf J CommRingCat.{w}} (M : Modules A)
+    {X Y : Cᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.map i).hom).obj
+          (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 set_option backward.isDefEq.respectTransparency false in
 open SheafOfModules in
 private theorem tensorRestriction_tmul
