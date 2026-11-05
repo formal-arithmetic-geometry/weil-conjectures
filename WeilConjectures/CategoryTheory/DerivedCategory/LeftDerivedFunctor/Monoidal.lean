@@ -527,10 +527,10 @@ lemma leftDerivedTensorComparison_comp :
   have nG := G.leftDerivedFunctorCounit.naturality
     (((mapHomotopyCategoryδNatTrans (.up ℤ) F).app X₁).app X₂)
   have ne := (F.leftDerivedFunctorCompIso G).hom.naturality (μ Qh X₁ X₂)
-  dsimp only [Functor.comp_obj, Functor.comp_map] at nG ne
+  dsimp at nG ne
   rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc, cF,
-    Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc, reassoc_of% nG,
-    ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
+    Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc]
+  erw [reassoc_of% nG, ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
     mapHomotopyCategoryδNatTrans_comp, Qh.map_comp]
 
 /-- The componentwise form of `CategoryTheory.Functor.leftDerivedTensorComparison_comp`: the
