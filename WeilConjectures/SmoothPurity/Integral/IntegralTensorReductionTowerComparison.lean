@@ -120,6 +120,9 @@ private def scalarSection
     ((toSheafify J (SheafOfModules.changeOfRingsPresheaf a M).presheaf).app V
       (s ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x))
 
+attribute [local implicit_reducible] SheafOfModules.restrictScalars
+  PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj
+  PresheafOfModules.presheaf ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj' in
 set_option maxHeartbeats 500000 in
 -- Elaborate the simultaneous scalar-extension and total-tensor comparisons.
 private theorem scalarTensorTotal
@@ -166,7 +169,7 @@ private theorem scalarTensorTotal
         (toSheafify J (SheafOfModules.changeOfRingsPresheaf a M).presheaf).app V
           ((1 : S.obj.obj V) ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x) := by
     have hh := hUnit M (SheafOfModules.changeOfRings a M)
-      (𝟙 (SheafOfModules.changeOfRings a M)) V x
+      (𝟙 (SheafOfModules.changeOfRings a M : B)) V x
     simp only [Category.comp_id] at hh
     have he := am.homEquiv_naturality_right (𝟙 (F.obj M)) (eqToHom (hF M))
     simp only [Category.id_comp, am.homEquiv_id] at he
@@ -206,7 +209,7 @@ private theorem scalarTensorTotal
           ((SheafOfModules.changeOfRingsHomOfUniverses a _
             (SheafOfModules.ScalarHomOrdinary.tensorIsoSite R M N).hom).val.app V
             ((eF _).hom.val.app V _)))) = _
-    erw [eF_unit, SheafOfModules.scalarExtension_map_tmul,
+    rw [eF_unit, SheafOfModules.scalarExtension_map_tmul,
       SheafOfModules.ScalarHomOrdinary.tensorIsoSite_pure, core.tensor_tmul,
       SheafOfModules.ScalarHomOrdinary.tensorIsoSite_inv_pure,
       SheafOfModules.ScalarHomOrdinary.pure_map, eF_inv_unit, eF_inv_unit]
@@ -227,7 +230,7 @@ private theorem scalarTensorTotal
       (F.map f ⊗ₘ F.map g).val.app V
         ((e M N).hom.val.app V
           ((am.unit.app _).val.app V (SheafOfModules.ScalarHomOrdinary.pure R M N V x y)))
-    erw [hun, SheafOfModules.ScalarHomOrdinary.pure_map, hgen, hgen,
+    rw [hun, SheafOfModules.ScalarHomOrdinary.pure_map, hgen, hgen,
       SheafOfModules.ScalarHomOrdinary.pure_map, hun, hun]
   let EC := F.mapHomologicalComplex (.up ℤ)
   let tR := coefficientTotalTensor.{r, c, v} J R
