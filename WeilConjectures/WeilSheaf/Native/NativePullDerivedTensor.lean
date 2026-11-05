@@ -22,7 +22,7 @@ full K-flat localizations, exactly as in the open-immersion case
 (`NativeRestrictionDescentProof.restriction_derived_representative`).
 
 The descent needs that `p^*` preserves the native two-sided K-flat predicate; here this
-is an explicit hypothesis of `native_pull_derived_tensor_of_kflat`.
+is an explicit hypothesis of `exists_nativeOpenPull_nativeDerivedTensor_iso_of_nativeIsKFlat`.
 
 Source: Stacks 07A4, 06YN, 012Z (blueprint: fix-prop-projection-formula).
 -/
@@ -190,7 +190,7 @@ def NativePullDerivedNormalization
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
 -- Keep the exact functor abstract while assembling totalization and descent.
-private theorem pullAbstract
+private theorem exists_nativePullTensorSummands_nativePullDerivedNormalization
     (R : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z)
     [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     [PreservesColimitsOfSize.{0, 0} R]
@@ -248,7 +248,7 @@ pullback is a left adjoint, so it preserves coproducts). On native K-flat repres
 which pullback preserves by `hR`, compose the normalized tensor models with `t`; the full
 K-flat localization descends this to `mu`, with the representative square
 `OpenTensorRestrictionNormalization`. -/
-theorem native_pull_derived_tensor_of_kflat
+theorem exists_nativeOpenPull_nativeDerivedTensor_iso_of_nativeIsKFlat
     (hR : ∀ T, NativeIsKFlat k₀ l Y T →
       NativeIsKFlat k₀ l Z (((upperStar k₀ l p).mapHomologicalComplex (.up ℤ)).obj T)) :
     ∃ (r : nativeOpenSheafTensor k₀ l Y ⋙ upperStar k₀ l p ≅
@@ -269,7 +269,8 @@ theorem native_pull_derived_tensor_of_kflat
   have : (upperStar k₀ l p).IsLeftAdjoint :=
     (upperStarLowerStarAdjunction k₀ l p).isLeftAdjoint
   obtain ⟨r, hr⟩ := native_pull_sheaf_tensor k₀ l p
-  obtain ⟨t, mu, ht, hmu⟩ := pullAbstract k₀ l (upperStar k₀ l p) r hR
+  obtain ⟨t, mu, ht, hmu⟩ :=
+    exists_nativePullTensorSummands_nativePullDerivedNormalization k₀ l (upperStar k₀ l p) r hR
   exact ⟨r, t, mu, hr, ht, hmu⟩
 
 end
