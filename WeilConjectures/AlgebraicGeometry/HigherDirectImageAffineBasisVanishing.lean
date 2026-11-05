@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.Algebra.Category.Grp.Zero
