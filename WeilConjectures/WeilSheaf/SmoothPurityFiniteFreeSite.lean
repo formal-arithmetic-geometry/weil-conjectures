@@ -13,10 +13,11 @@ public import WeilConjectures.WeilSheaf.SmoothPurityFiniteFreePullback
 universe u
 
 open CategoryTheory Limits
+open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
 
-private lemma purity_leftAdjointUniq_ofNatIsoRight
+lemma purity_leftAdjointUniq_ofNatIsoRight
     {C D : Type*} [Category C] [Category D]
     {F F' : C ⥤ D} {G G' : D ⥤ C}
     (a : F ⊣ G) (b : F' ⊣ G') (e : G' ≅ G) :
