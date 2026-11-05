@@ -182,15 +182,15 @@ theorem derivedComparisonUpperStarUpperStarIso_compCoherence {X Y Z : Scheme.{u}
   · intro M
     delta Etale.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso Etale.leftDerivedUpperStarIsoMapDerivedCategory
-    with_reducible
-      exact trans_trans_isoWhiskerLeft_hom_app _ _ _
-        (Functor.mapDerivedCategoryCompIso (Etale.upperStar A q) (Etale.upperStar A p)).symm _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
   · intro M
     delta ProEtale.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
-    with_reducible
-      exact trans_trans_isoWhiskerLeft_hom_app _ _ _
-        (Functor.mapDerivedCategoryCompIso (ProEtale.upperStar A q) (ProEtale.upperStar A p)).symm _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
 
 /-- **The base change morphisms for `Rν_*` are compatible with composition**: for `p : X ⟶ Y`
 and `q : Y ⟶ Z`, the base change morphism of `p ≫ q` followed by the composition isomorphism
