@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import
   WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
@@ -390,9 +392,12 @@ lemma Etale.derivedHomToHomology_app_eq {W : X.Etaleᵒᵖ}
       DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj) :
     (Etale.derivedHomToHomology (DerivedCategory.Plus.Q.obj M)).app W β =
       DerivedCategory.singleCyclesHom _ ≫ HomologicalComplex.cyclesMap f 0 ≫
-        M.obj.homologyπ 0 ≫ Etale.homologyComparison M :=
-  DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso_inv_app_comp_homologyFunctor_map
-    β f hf
+        M.obj.homologyπ 0 ≫ Etale.homologyComparison M := by
+  change _ = _ ≫ 𝟙 _ at hf
+  rw [Category.comp_id] at hf
+  simpa only [Etale.homologyComparison, Functor.map_id, Category.comp_id] using
+    DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso_inv_app_comp_homologyFunctor_map
+      β f hf
 
 theorem Etale.isLocallySurjective_derivedHomToHomology [M.obj.IsKInjective] :
     Presheaf.IsLocallySurjective X.smallEtaleTopology
@@ -562,6 +567,8 @@ private theorem Etale.isLocallyInjective_derivedHomToHomology_aux_cover {W : X.E
         DerivedCategory.Q.map f' ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
     rw [Functor.map_comp, hf, Functor.map_comp, Category.assoc]
     rfl
+  change _ = _ ≫ 𝟙 _ at hβ'
+  rw [Category.comp_id] at hβ'
   exact DerivedCategory.Plus.eq_zero_of_homotopy _ f' hβ'
     (homotopyOfSingleCycles M.obj f' b' hf'z)
 
@@ -587,9 +594,13 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
   rw [hsieve]
   let A := (Etale.moduleFreeSheaf Λ X).obj W.unop
   obtain ⟨f, hf⟩ := DerivedCategory.Plus.exists_ι_map_eq M β
+  have hf' : DerivedCategory.Plus.ι.map β =
+      DerivedCategory.Q.map f ≫ (DerivedCategory.quotientCompQhIso _).inv.app M.obj := by
+    change _ = _ ≫ 𝟙 _
+    simpa only [Category.comp_id] using hf
   let z := DerivedCategory.singleCyclesHom A ≫ HomologicalComplex.cyclesMap f 0
   have hz : z ≫ M.obj.homologyπ 0 = (0 : A ⟶ M.obj.homology 0) :=
-    Etale.isLocallyInjective_derivedHomToHomology_aux_hz M β hβ f hf
+    Etale.isLocallyInjective_derivedHomToHomology_aux_hz M β hβ f hf'
   let S := ShortComplex.mk (M.obj.toCycles (-1) 0) (M.obj.homologyπ 0) (by simp)
   have hS : S.Exact :=
     ShortComplex.exact_of_g_is_cokernel S (M.obj.homologyIsCokernel (-1) 0 (by simp))
@@ -612,7 +623,7 @@ theorem Etale.isLocallyInjective_derivedHomToHomology [M.obj.IsKInjective] :
       ← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
       ← ObjectProperty.FullSubcategory.comp_hom, S.toCycles_i]
   simp only [Presheaf.equalizerSieve_apply, map_zero]
-  exact Etale.isLocallyInjective_derivedHomToHomology_aux_cover M g β f hf b' hφz
+  exact Etale.isLocallyInjective_derivedHomToHomology_aux_cover M g β f hf' b' hφz
 
 end Key
 
