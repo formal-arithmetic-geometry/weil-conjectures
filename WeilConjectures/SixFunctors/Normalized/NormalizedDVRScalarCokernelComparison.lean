@@ -338,7 +338,8 @@ private theorem ordinary_transpose_quasiIso
       simp only [d, Equiv.apply_symm_apply]
       rfl
     have hb := hf Z
-    change Function.Bijective (fun b : (DerivedCategory.Q (C := normalizedDVRModules l E X n)).obj K ⟶ Z ↦
+    change Function.Bijective (fun b :
+      (DerivedCategory.Q (C := normalizedDVRModules l E X n)).obj K ⟶ Z ↦
       qf ≫ (normalizedDVRRes l E X h).map b) at hb
     rw [he] at hb
     exact hb.of_comp_left (S.adjunction.homEquiv _ _).injective
