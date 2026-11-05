@@ -63,7 +63,10 @@ theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
       (DerivedCategory.homologyFunctorFactors D n).inv.app
         ((S.mapHomologicalComplex (.up ℤ)).obj K) ≫
       (DerivedCategory.homologyFunctor D n).map
-        (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) ≫
+        ((DerivedCategory.quotientCompQhIso D).inv.app
+            ((S.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K) ≫
+          S.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso C).hom.app K)) ≫
       (DerivedCategory.homologyFunctor D n).map (S.rightDerivedFunctor.map q) ≫
       (DerivedCategory.homologyFunctor D n).map
         (S.rightDerivedFunctorPlusCompatibility.inv.app M) =
