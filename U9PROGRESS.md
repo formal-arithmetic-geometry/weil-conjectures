@@ -142,52 +142,23 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ539 in progress
 
-- Branch: `u9/BZ539`; original start: `29f3a8d8177`.
-- Re-read the brief and prior notes on user-requested continuation.
-- Baseline build stopped in unowned `Presheaf.InternalHom:373` with an unknown
-  `PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul` identifier.
-- The coordinator subsequently added the public Mathlib monoidal import in
-  `04f9380d1`. Merged coordinator head `8af5cb324` to take that fix and retry.
-- The proposed compatibility-namespace patch remains unapplied while testing
-  the coordinator's repair.
-- Next: validate ChangeOfCoefficients via ucheck-bump, repair its proof errors,
-  then check up to four direct importers and one further downstream layer.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ539.md`.
-- No local Lean/Lake, proof placeholders, statement edits, or heartbeat raises.
+# BZ549 complete
 
-- The public import resolved the missing name, but the resumed build failed in
-  `InternalHom:375` because its proof mixed new and compatibility map APIs.
-- User continuation followed the explicit one-line dependency patch proposal;
-  that exact compatibility-namespace proof repair is now applied.
-- Retrying the assigned module; declarations and heartbeat settings unchanged.
-
-# BZ547 complete
-
-- Branch: `u9/BZ547`; assigned module is green and unchanged from the starting branch.
-- Final six-target ucheck-bump: rc=0, built=24, failed=0, 4249 jobs,
-  on `poolb:43.157.132.198`.
-- Validated source commit: `f08f7e292475e9dd6796d87f7d05cfdd81f73dc3`.
-- Full final log: `/home/ubuntu/u9/bz/BUILD-BZ547-final-green-full.log`.
-- Seven modules validated across the two downstream layers:
-  - `WeilConjectures.AlgebraicGeometry.Etale.EtaleInjectiveSectionsComparison`.
-  - `WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceComparison`.
-  - `WeilConjectures.AlgebraicGeometry.Source.SourceDerivedSectionsNaturalityCore`.
-  - `WeilConjectures.AlgebraicGeometry.Source.SourceDerivedSectionsNaturality`.
-  - `WeilConjectures.AlgebraicGeometry.Source.SourceStageSectionsNaturality`.
-  - `WeilConjectures.AlgebraicGeometry.Source.SourceLocalizedCocycleHomology`.
-  - `WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceTransition`.
-- The source-transition module passed in the previous downstream batch and is
-  unaffected by the subsequent cocycle proof repair.
-- Reused BZ539's existing InternalHom compatibility-lemma repair and applied
-  BZ536's known reverse-naturality/cancellation fix to the second-layer cocycle proof.
-- Strict.Local.StrictLocalInjectiveSourceSections was skipped under the brief's
-  ownership rule because its unowned source/target transport and root cocycle
-  dependencies fail. Exact locations and logs are recorded in the fix notes.
-- Patterns, whole-tree counts, validation history, and audit:
-  `/home/ubuntu/u9/bz/FIXES-BZ547.md`.
-- Statements and docstrings unchanged; no local Lean/Lake, proof placeholders,
-  trust bypasses, heartbeat increases, or profiler probes.
-- Completion marker: `/home/ubuntu/u9/state/BZ547.DONE`.
-- This completion commit changes only progress documentation after the green build.
+- Branch: `u9/BZ549`; owned module: `GlobalSectionsDirectImageKInjectiveAcyclic`.
+- Owned module, direct importer `DerivedGlobalSectionsAffinizationComparison`,
+  and repaired dependencies `Presheaf.InternalHom` / `KFlat` passed together:
+  `ucheck-bump` rc=0, failed=0, 3264 jobs at `dbdb89efdb0299d34520e949f0f111887a96ea0f`.
+- Second-layer `DerivedGlobalSectionsPreservesCoproducts` also passed:
+  `ucheck-bump` rc=0, failed=0, 4153 jobs at `03552a1ed2fd031cd3423a169c0707e2d3a875f6`.
+- Both builds used `poolb:43.157.132.198`; Lean sources are identical in those commits.
+- Full logs: `/home/ubuntu/u9/bz/BUILD-BZ549-final-full.log` and
+  `/home/ubuntu/u9/bz/BUILD-BZ549-downstream-final-full.log`.
+- Fixes: public exactness import, compatibility tensor-map lemmas in two required
+  dependencies, and `dsimp only` to retain the importer's local IsIso instance.
+- Every declaration statement and docstring is unchanged. All five checked modules
+  are free of sorries, axioms, admits, and prohibited proof shortcuts.
+- No local Lean/Lake execution, heartbeat increases, or profiler probes.
+- Fix patterns and exact diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
+- Completion marker: `/home/ubuntu/u9/state/BZ549.DONE`.
+- This completion commit changes only progress documentation.
