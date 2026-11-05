@@ -52,7 +52,7 @@ lemma purity_comparisonUpperStarFreeIso_pullback
   rw [reassoc_of% (purity_upperStarFiniteCoefficient_free T g (ν^*(Y)[Ab.{u + 1}].obj M))]
   have h := purity_comparisonFreeSheaf_pullback_forward T g M
   simp only [purityComparisonFreePullbackIso, Iso.trans_hom, NatTrans.comp_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
+    Iso.symm_hom, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     Category.id_comp, Category.comp_id, Category.assoc] at h

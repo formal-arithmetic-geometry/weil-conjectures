@@ -68,11 +68,12 @@ theorem purityExtendPullbackIso_factor
     ((purityModuleFactorIso Λ p s hs).hom.app M)
     ((purityModuleFactorIso Λ p s hs).hom.app N)
     e.hom.hom (purityExtendPullbackIso Λ p M N e).hom c
-  · simpa only [Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] using
+  · simpa only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] using
       CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
-  · simpa only [Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] using
+  · simpa only [Iso.app_hom, Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] using
       CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs N
-  · exact purityExtendPullbackIso_unit Λ p M N e
+  · simpa only [Iso.app_hom, CondensedRing.upperStarForgetIso_hom_app,
+      Mod.forget, purityPullbackUnit] using purityExtendPullbackIso_unit Λ p M N e
   · exact he
 
 
@@ -103,7 +104,9 @@ theorem purityExtendPullbackIso_weil
       (a.geometricGaloisFrobenius.hom)^*⟦Λ⟧.map
           (purityExtendPullbackIso Λ a.geometricFiberProj M₀ N₀ e₀).hom ≫
         (CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).hom.app N₀ := by
-  exact purityExtendPullbackIso_factor Λ a.geometricFiberProj
+  simpa only [CondensedRing.geometricFiberProjUpperStarFrobeniusIso,
+    purityModuleFactorIso, purityAbelianFrobeniusFactorIso] using
+    purityExtendPullbackIso_factor Λ a.geometricFiberProj
     a.geometricGaloisFrobenius.hom a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
     M₀ N₀ e₀ c₀ he
 
