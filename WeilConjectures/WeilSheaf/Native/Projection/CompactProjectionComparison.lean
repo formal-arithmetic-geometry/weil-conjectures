@@ -17,6 +17,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPastingMonoi
 universe u
 
 open CategoryTheory MonoidalCategory
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.WeilComplex
 
@@ -53,8 +54,9 @@ def projectionGeometricPullComp :
     CondensedRing.boundedConstructibleUpperStar Λ l (cb).overG ⋙
         CondensedRing.boundedConstructibleUpperStar Λ l (cb).overI ≅
       CondensedRing.boundedConstructibleUpperStar Λ l fb :=
-  (eqToIso (congrArg (CondensedRing.boundedConstructibleUpperStar Λ l) (cb).overI_overG.symm) ≪≫
-    CondensedRing.boundedConstructibleUpperStarComp Λ l (cb).overI (cb).overG).symm
+  ((boundedConstructible _).fullyFaithfulι.whiskeringRight _).preimageIso
+    (Functor.isoWhiskerLeft (boundedConstructible _).ι
+      (CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).symm)
 
 /-- The geometric pullback compositor has the canonical ambient component. -/
 lemma projectionGeometricPullComp_hom_app
@@ -62,10 +64,7 @@ lemma projectionGeometricPullComp_hom_app
     (ObjectProperty.ι _).map
       ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)) =
       (CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).inv.app
-        ((compactProjectionForget k₀ l Y).obj N).obj := by
-  simpa only [projectionGeometricPullComp, Iso.symm_hom] using
-    CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (f := fb) l cb
-      ((compactProjectionForget k₀ l Y).obj N)
+        ((compactProjectionForget k₀ l Y).obj N).obj := rfl
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
