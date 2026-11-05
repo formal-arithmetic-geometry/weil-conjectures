@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.CanonicalResolutionHomologyComparison
 import WeilConjectures.CategoryTheory.GrothendieckBottomAugmentation
 
@@ -110,7 +112,14 @@ private lemma bottom_resolution_composite_unit_transport
     congr 1
     apply (cancel_epi ((F ⋙ G).rightDerivedFunctorPlusUnith.app H)).1
     erw [← Category.assoc, hc]
+    have hA : (DerivedCategory.Plus.quotientCompQhIso A).inv.app L = 𝟙 _ := rfl
+    have hB : (DerivedCategory.Plus.quotientCompQhIso B).hom.app
+        (F.mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
+    have hC : (DerivedCategory.Plus.quotientCompQhIso C).hom.app
+        ((F ⋙ G).mapCochainComplexPlus.obj L) = 𝟙 _ := rfl
+    erw [hA, hB, hC]
     simp [Category.assoc, H, L]
+    erw [Functor.map_id, Category.comp_id, Category.id_comp]
     rfl
   have mapExtendIso_comp_hom
       {A : Type uA} [Category.{vA} A] [Abelian A]
@@ -314,8 +323,13 @@ private lemma bottom_resolution_map_unit
   simp only [Functor.map_comp] at hhu
   erw [hhu]
   dsimp only [resolutionDerivedIso]
-  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_inv,
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, asIso_inv,
     Functor.map_comp, Category.assoc]
+  have hB : (DerivedCategory.Plus.quotientCompQhIso B).inv.app LJ = 𝟙 _ := rfl
+  have hC : (DerivedCategory.Plus.quotientCompQhIso C).hom.app
+      (G.mapCochainComplexPlus.obj LJ) = 𝟙 _ := rfl
+  erw [hB, hC]
+  simp only [Functor.map_id, Category.comp_id, Category.id_comp]
   have : ∀ i, Injective (LJ.obj.X i) := fun i ↦
     inferInstanceAs (Injective (J.cochainComplex.X i))
   erw [← Functor.map_comp_assoc (DerivedCategory.Plus.homologyFunctor C n)
