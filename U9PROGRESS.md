@@ -116,22 +116,16 @@
 - Fix patterns and baseline log: `/home/ubuntu/u9/bz/FIXES-BZ384.md`.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ416 complete
+# BZ457 in progress
 
-- Branch: `u9/BZ416`; starting commit: `99a06bbbb`.
-- Assigned module `WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedCompCoherence`
-  passed `ucheck-bump`: rc=0, failed=0, 2138 jobs.
-- Validated source commit: `dea172a8ed`.
-- The user instructed continuation after the explicit compositor-orientation statement proposal.
-  The two coherence statements now preserve their original arrows using Mathlib's reversed
-  compositor; proof cancellation directions were updated to match.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ416-unit-green.log`.
-- The three direct importers were attempted together. The batch ended `rc=1` because four
-  external dependencies failed: `GrothendieckEtaleRelativeSectionColimit`,
-  `RingedSitePointUniversalTensor`, `KFlatRingedToposPullback`, and `ProfinitePointPullback`.
-  Each importer is blocked by at least one of these modules, so the brief's skip rule applies.
-- Full downstream log: `/home/ubuntu/u9/bz/BUILD-BZ416-downstream1.log`.
-- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ416.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ416.DONE`.
-- This final documentation commit leaves the validated Lean source unchanged.
+- Branch: `u9/BZ457`; starting commit: `99a06bbbb`.
+- Assigned module: `WeilConjectures.Algebra.Homology.AffineDerivedPushforwardSheafEdge`.
+- Baseline and import-only remote builds identify one public statement mismatch:
+  `HomologicalComplexUpToQuasiIso.Qh` is `@[no_expose]` in pinned Mathlib.
+- The user instructed continuation after the explicit identity-cast proposal.
+  Applied `cast (by rfl)` around the unit morphism, with public and implementation
+  imports of `Mathlib.Algebra.Homology.Localization`.
+- Remote leaf validation is queued via `ucheck-bump`; no local Lean/Lake execution.
+- Next: fix any remaining proof errors, validate both direct importers, then the
+  normalization layer and write `/home/ubuntu/u9/state/BZ457.DONE`.
+- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ457.md`.
