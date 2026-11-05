@@ -132,7 +132,7 @@ theorem dvr_normalized_tensor_factor_lift
   have hgamma : Function.Injective gamma := by
     apply (RingHom.injective_iff_ker_eq_bot gamma).mpr
     apply Ideal.eq_bot_of_under_eq_bot (R := A)
-    rw [RingHom.comap_ker]
+    rw [Ideal.under_def, RingHom.comap_ker]
     change RingHom.ker ((algebraMap A₁ G).comp (algebraMap A A₁)) = ⊥
     rw [← IsScalarTower.algebraMap_eq A A₁ G]
     rw [IsScalarTower.algebraMap_eq A F G]
@@ -249,15 +249,17 @@ theorem dvr_normalized_tensor_factor_lift
       change RingHom.ker i.toRingHom ≤ Q
       rw [(RingHom.injective_iff_ker_eq_bot i.toRingHom).mp hi]
       exact bot_le)
+  rw [Ideal.under_def] at hcomap
   let := hQ₁
   have hclosed₁ : Q₁.comap (algebraMap A₁ S₁) = IsLocalRing.maximalIdeal A₁ := by
     have hclosedA : Q₁.comap (algebraMap A S₁) = IsLocalRing.maximalIdeal A := by
       rw [IsScalarTower.algebraMap_eq A S S₁, ← Ideal.comap_comap, hcomap]
       exact hclosed
     have hmax : (Q₁.comap (algebraMap A₁ S₁)).IsMaximal :=
-      Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := A)
+      Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A)
         (Q₁.comap (algebraMap A₁ S₁)) (by
-          rw [Ideal.comap_comap, ← IsScalarTower.algebraMap_eq A A₁ S₁, hclosedA]
+          rw [Ideal.under_def, Ideal.comap_comap,
+            ← IsScalarTower.algebraMap_eq A A₁ S₁, hclosedA]
           infer_instance)
     exact IsLocalRing.eq_maximalIdeal hmax
   -- A finite integral closure of a DVR is Dedekind; its domain extensions are flat.
