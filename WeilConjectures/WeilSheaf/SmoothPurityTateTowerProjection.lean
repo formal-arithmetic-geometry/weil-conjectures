@@ -16,7 +16,8 @@ compatibility needed when comparing integral Tate data with their finite reducti
 
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits Opposite MonoidalCategory
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -66,7 +67,7 @@ lemma upperStarExtendScalarsLimitFreeTowerIso_hom_comp_map_π (n : ℕ) :
         (Mod.extendScalars (coefficientMap a X')).map (limit.π 𝒯' (op n)) =
       (CondensedRing.upperStar Λ' g).map
           ((Mod.extendScalars (coefficientMap a X)).map (limit.π 𝒯 (op n))) ≫
-        (CondensedRing.pullIso a g).inv.app (𝒯.obj (op n)) ≫
+        (CondensedRing.pullIso a g).inv.app ((𝒯).obj (op n)) ≫
         (Mod.extendScalars (coefficientMap a X')).map
           (upperStarFreeTowerIsoApp Λ g e n).hom := by
   have hn := (CondensedRing.pullIso a g).inv.naturality (limit.π 𝒯 (op n))
