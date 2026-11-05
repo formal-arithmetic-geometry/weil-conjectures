@@ -312,22 +312,26 @@ private theorem ordinary_source_precompose
   rw [← Category.assoc, ← Category.assoc]
   erw [ht']
   rw [ad.homEquiv_naturality_right]
-  have hn := κ.hom.naturality t
-  simp only [Functor.comp_map] at hn
   have hκ : (ad.homEquiv _ _) e.hom ≫ κ.hom.app
       (coefficient (diagonalSurface S) (Arings l E (diagonalSurface S))) =
     (DerivedCategory.singleFunctor (Ab (diagonalSurface S)) 0).map
       (integerGenerator (diagonalSurface S) (Rrings l (diagonalSurface S))
         c.reduction.forget ≫ G.map (scalarGenerator l E (diagonalSurface S))) := h₂
-  simp only [Category.assoc]
-  change (ad.homEquiv _ _) e.hom ≫ G.mapDerivedCategory.map
-      (H.mapDerivedCategory.map
+  have hκN (Y) : κ.hom.app Y = G.mapDerivedCategory.map
+      ((H.mapDerivedCategorySingleFunctor 0).hom.app Y) ≫
+        (G.mapDerivedCategorySingleFunctor 0).hom.app (H.obj Y) := rfl
+  simp only [Category.assoc, Functor.comp_map]
+  rw [← hκN]
+  have hn' : G.mapDerivedCategory.map
+      ((WeilConjectures.SemilinearSections.resD (coefficientSystemMap l E (diagonalSurface S))).map
         ((DerivedCategory.singleFunctor (Systems (diagonalSurface S)
-          (Arings l E (diagonalSurface S))) 0).map t)) ≫ κ.hom.app N = _
-  erw [hn]
+          (Arings l E (diagonalSurface S))) 0).map t)) ≫ κ.hom.app N =
+      κ.hom.app (coefficient (diagonalSurface S) (Arings l E (diagonalSurface S))) ≫
+        (DerivedCategory.singleFunctor (Ab (diagonalSurface S)) 0).map (G.map (H.map t)) :=
+    κ.hom.naturality t
+  rw [hn']
   rw [← Category.assoc, hκ]
-  simp only [Functor.map_comp, Category.assoc]
-  rfl
+  rw [← Functor.map_comp, Category.assoc, ← G.map_comp]
 
 /-- The scalar adjunct of the supported comparison has precisely the canonical
 supported integral quotient at every finite level.
