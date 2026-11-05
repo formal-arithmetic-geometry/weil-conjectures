@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.KFlat
 public import Mathlib.Geometry.RingedSpace.SheafedSpace
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.AlgebraicGeometry.AffineScheme

@@ -55,9 +55,9 @@ private theorem restrictionStalkIso_germ
   let F := e.functor ⋙ Over.forget (Φ.fiber.elementsMk U a)
   exact Functor.Final.ι_colimitIso_hom F.op
     ((Functor.Elements.π Φ.fiber).op ⋙ G.obj)
-    (op ⟨Over.mk (𝟙 U), ⟨a, by
+    (op ((Φ.over a).fiber.elementsMk (Over.mk (𝟙 U)) ⟨a, by
       rw [FunctorToTypes.mem_fromOverSubfunctor_iff]
-      simp⟩⟩)
+      simp⟩))
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem constantUnitGerm_isIso
@@ -155,7 +155,7 @@ theorem exists_constant_iso_of_bijective_section_germs
           Φ₀.toPresheafFiber U a.down G.obj := by
         exact Functor.Final.ι_colimitIso_hom
           (Functor.Elements.uliftEquivalence.{u + 1} Φ₀.fiber).functor.op
-          ((Functor.Elements.π Φ₀.fiber).op ⋙ G.obj) (op ⟨U, a⟩)
+          ((Functor.Elements.π Φ₀.fiber).op ⋙ G.obj) (op (Ψ.fiber.elementsMk U a))
       have hf₀ : Function.Bijective (f ≫ Φ₀.toPresheafFiber U a.down G.obj) :=
         hfLift (S.algClosurePoint x) a.down
       have : IsIso (f ≫ Ψ.toPresheafFiber U a G.obj ≫ e₀.hom) := by
