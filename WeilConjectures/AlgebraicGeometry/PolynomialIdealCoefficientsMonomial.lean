@@ -43,10 +43,10 @@ theorem ideal_coefficients_monomial
     (p : MvPolynomial (Fin r) R) :
     (p ∈ Ideal.span (Set.range fun j : Fin i => C (g j) * X (Fin.castLE hir j)) ↔
         ∀ E : Fin r →₀ ℕ,
-          coeff E p ∈ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0})) ∧
+          AddMonoidAlgebra.coeff p E ∈ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0})) ∧
       ∃ Φ : MvPolynomial (Fin r) R →ₗ[R]
           Π₀ E : Fin r →₀ ℕ, R ⧸ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0}),
-        (∀ q E, Φ q E = Ideal.Quotient.mk _ (coeff E q)) ∧
+        (∀ q E, Φ q E = Ideal.Quotient.mk _ (AddMonoidAlgebra.coeff q E)) ∧
         Function.Surjective Φ ∧
         LinearMap.ker Φ = Submodule.restrictScalars R
           (Ideal.span (Set.range fun j : Fin i => C (g j) * X (Fin.castLE hir j))) ∧
