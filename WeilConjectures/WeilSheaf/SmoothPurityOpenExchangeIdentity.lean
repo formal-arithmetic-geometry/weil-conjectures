@@ -26,8 +26,11 @@ theorem purity_shriekBaseChange_id_app (K : F.obj X) :
         (F.baseChange g' i' i g wi).natTrans.app K =
       (F.pb g).map ((F.pfId Y).hom.app ((F.sh i).obj K)) := by
   rw [shriekBaseChange_app]
-  simp only [Category.assoc, NatTrans.naturality_assoc, Functor.id_map,
-    IsIso.inv_hom_id, Category.comp_id]
+  have hn := (F.pfId Y').hom.naturality
+    (inv ((F.baseChange g' i' i g wi).natTrans.app K))
+  dsimp only [Functor.id_map] at hn
+  simp only [Category.assoc]
+  rw [reassoc_of% hn, IsIso.inv_hom_id, Category.comp_id]
   exact F.pfBaseChange_id_vert_app g wp ((F.sh i).obj K)
 
 end CategoryTheory.ExchangeFormalism
