@@ -9,8 +9,6 @@ public import WeilConjectures.WeilSheaf.SmoothPurityComparisonRestriction
 
 /-! # Free-sheaf site comparison and geometric pullback -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 
@@ -51,6 +49,7 @@ noncomputable def purityComparisonFreePullbackIso :
     Functor.isoWhiskerRight (comparisonUpperStarUpperStarIso Ab.{u + 1} g) _ ≪≫
     Functor.associator _ _ _
 
+set_option linter.unusedSectionVars false in
 lemma purityComparisonFreePullbackIso_conjugate :
     conjugateIsoEquiv
       ((Etale.upperStarLowerStarAdjunction Ab.{u + 1} g).comp
@@ -85,7 +84,8 @@ lemma purity_comparisonFreeSheaf_pullback
     ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           ((Etale.upperStarExtendScalarsIso (integersModPowCoeff.{u} ℓ E n) g).hom.app M) ≫
         (purityComparisonFreeSheafIso ℓ E n X).inv.app ((Etale.upperStar Ab.{u + 1} g).obj M) =
-      (comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).inv.app
+      (comparisonUpperStarUpperStarIso
+        (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).inv.app
           ((Etale.extendScalars (integersModPowCoeff.{u} ℓ E n) Y).obj M) ≫
         (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           ((purityComparisonFreeSheafIso ℓ E n Y).inv.app M) ≫
@@ -119,7 +119,8 @@ lemma purity_comparisonFreeSheaf_pullback_forward
     (M : Sheaf Y.smallEtaleTopology Ab.{u + 1}) :
     (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           ((purityComparisonFreeSheafIso ℓ E n Y).hom.app M) ≫
-        (comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
+        (comparisonUpperStarUpperStarIso
+          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
           ((Etale.extendScalars (integersModPowCoeff.{u} ℓ E n) Y).obj M) ≫
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           ((Etale.upperStarExtendScalarsIso (integersModPowCoeff.{u} ℓ E n) g).hom.app M) =

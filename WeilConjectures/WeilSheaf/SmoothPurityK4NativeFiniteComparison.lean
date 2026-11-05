@@ -12,8 +12,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 
 /-! # Finite coefficient comparison on free modules and pullback -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 
@@ -79,7 +77,8 @@ noncomputable def upperStarFiniteCoefficientModEquivalenceIso :
     ((CondensedRing.upperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E n) f).comp
       (finiteCoefficientModEquivalence ℓ E n X).toAdjunction)
     ((finiteCoefficientModEquivalence ℓ E n Y).toAdjunction.comp
-      (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f))).symm
+      (ProEtale.upperStarLowerStarAdjunction
+        (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f))).symm
     (Iso.inverseCompIso (Iso.isoCompInverse (lowerStarFiniteCoefficientModEquivalenceIso ℓ E n f) ≪≫
       Functor.associator _ _ _))).symm
 

@@ -10,8 +10,6 @@ public import WeilConjectures.WeilSheaf.SmoothPurityComparisonRestriction
 
 /-! # Geometric compatibility of the finite free-root comparison -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 
@@ -78,7 +76,8 @@ lemma purity_finiteCoefficientModEquivalenceFreeRootsOfUnityIso_pullback :
             (rootsOfUnitySheaf Y N)) ≫
         (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           (finiteCoefficientModEquivalenceFreeRootsOfUnityIso ℓ E n N hN Y hY).hom ≫
-        (comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
+        (comparisonUpperStarUpperStarIso
+          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
           ((Etale.extendScalars (integersModPowCoeff.{u} ℓ E n) Y).obj (Y.rootsOfUnitySheaf N)) ≫
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           ((Etale.upperStarExtendScalarsIso (integersModPowCoeff.{u} ℓ E n) g).hom.app

@@ -12,8 +12,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 
 /-! # Finite coefficient comparison on free modules and pullback -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 
@@ -40,7 +38,8 @@ noncomputable def purityFiniteFreeSheaf (X : Scheme.{u}) :
 /-- The free/forget adjunction on the pro-étale site. -/
 noncomputable def purityFiniteFreeSheafAdjunction (X : Scheme.{u}) :
     purityFiniteFreeSheaf ℓ E n X ⊣
-      sheafCompose (ProEt.topology X) (forget₂ (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Ab.{u + 1}) :=
+      sheafCompose (ProEt.topology X)
+        (forget₂ (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Ab.{u + 1}) :=
   Sheaf.adjunction _ (ModuleCat.extendScalarsAddCommGrpAdj (integersModPowCoeff.{u} ℓ E n))
 
 /-- The finite coefficient equivalence carries free module objects to free sheaves. -/
@@ -93,7 +92,8 @@ lemma purity_finiteCoefficient_free_right_square {X Y : Scheme.{u}} (g : X ⟶ Y
       (finiteCoefficientModEquivalenceInverseCompForgetIso ℓ E n Y).inv.app
           ((g)_*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].obj N) ≫
         (Mod.forget (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) Y)).map
-          ((Iso.inverseCompIso (Iso.isoCompInverse (lowerStarFiniteCoefficientModEquivalenceIso ℓ E n g)
+          ((Iso.inverseCompIso
+            (Iso.isoCompInverse (lowerStarFiniteCoefficientModEquivalenceIso ℓ E n g)
             ≪≫ Functor.associator _ _ _)).inv.app N) := by
   rw [purity_finiteCoefficientInverseForget_inv_app,
     purity_finiteCoefficientInverseForget_inv_app, purity_finiteCoefficient_forget_map,

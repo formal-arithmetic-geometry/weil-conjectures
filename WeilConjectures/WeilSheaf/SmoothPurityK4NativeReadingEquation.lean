@@ -9,8 +9,6 @@ import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The finite étale reading of the integral one-twist datum -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 

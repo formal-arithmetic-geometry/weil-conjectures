@@ -10,8 +10,6 @@ public import WeilConjectures.WeilSheaf.SmoothPurityScalarDatumNamed
 
 @[expose] public section
 
-set_option profiler true
-set_option profiler.threshold 1
 
 namespace CategoryTheory
 

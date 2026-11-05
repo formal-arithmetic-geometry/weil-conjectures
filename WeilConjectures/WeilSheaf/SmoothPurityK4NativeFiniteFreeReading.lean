@@ -8,8 +8,6 @@ public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeFiniteFreeSitePullba
 
 /-! # The finite free-module reading comparison respects pullback -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 
@@ -42,7 +40,8 @@ lemma purity_comparisonUpperStarFreeIso_pullback
             (ν^*(Y)[Ab.{u + 1}].obj M)) ≫
         (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           ((comparisonUpperStarFreeIso ℓ E n Y).hom.app M) ≫
-        (comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
+        (comparisonUpperStarUpperStarIso
+          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
           ((Etale.extendScalars (integersModPowCoeff.{u} ℓ E n) Y).obj M) ≫
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           ((Etale.upperStarExtendScalarsIso (integersModPowCoeff.{u} ℓ E n) g).hom.app M) := by

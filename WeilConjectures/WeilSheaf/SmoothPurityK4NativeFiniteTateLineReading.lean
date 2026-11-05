@@ -9,8 +9,6 @@ public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
 
 /-! # Reading the finite Tate line with its canonical geometric datum -/
 
-set_option profiler true
-set_option profiler.threshold 1
 
 @[expose] public section
 
@@ -58,7 +56,8 @@ lemma purityFiniteRootTateReadingIso_pullback
             (rootsOfUnitySheaf Y N)) ≫
         (g)^*[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           (purityFiniteRootTateReadingIso ℓ E n N hN hchar Y hY).hom ≫
-        (comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
+        (comparisonUpperStarUpperStarIso
+          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g).hom.app
           (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g) := by
