@@ -72,7 +72,7 @@ theorem Etale.exists_stalkRestrict_eq_of_finset {Ω : Type u} [Field Ω] [IsAlgC
         a i := by
     obtain ⟨V, v, σ, hσ⟩ := (pointSmallEtale y).toPresheafFiber_jointly_surjective
       (P := ((f)_*[ModuleCat.{u + 1} Λ].obj G).obj) (a i)
-    exact ⟨⟨V, v⟩, σ, hσ⟩
+    exact ⟨Functor.elementsMk _ V v, σ, hσ⟩
   choose cs σs hσs using hrep
   -- a common affine refinement of `c₀` and the `cs i`
   obtain ⟨c₁, hc₁⟩ := IsCofiltered.inf_objs_exists (insert c₀ (Finset.univ.image cs))
