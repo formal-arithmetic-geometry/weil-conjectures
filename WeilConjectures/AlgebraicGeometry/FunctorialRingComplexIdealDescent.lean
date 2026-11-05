@@ -725,6 +725,9 @@ private theorem restrictedAugmentationZero
       restrictedRingZeroProjection O U =
       α.f 0 ≫ ringZeroProjection (O.over U) := by
   dsimp only [ringRestrictionInv, restrictedRingZeroProjection, ringZeroProjection]
+  letI : (SheafOfModules.overFunctor
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).PreservesZeroMorphisms :=
+    overFunctor_preservesZero ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U
   have h := singleRestrictionAugmentationIso
     (E := SheafOfModules.{u}
       (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over U))
