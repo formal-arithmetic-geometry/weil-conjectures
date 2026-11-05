@@ -451,6 +451,10 @@ end CoefficientCone
 
 open CategoryTheory CategoryTheory.Limits Opposite CochainComplex RoosConeCalculus
 namespace RoosCompletion
+attribute [local instance] AlgebraicGeometry.ProEtale.AdicCompletion.modulesNatProducts
+  AlgebraicGeometry.ProEtale.AdicCompletion.complexNatProducts
+  AlgebraicGeometry.ProEtale.AdicCompletion.complexNatLimit
+
 variable {A : Type*} [Category A] [Abelian A] [HasCountableProducts A]
 private def signedX (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ) :
     (roosF.obj N).X q ≅ (roosP N).X q ⊞ (roosP N).X (q - 1) where
