@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityK4CoefficientComposition
+public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeReadingBoundary
 
 /-! # The finite étale reading of the integral one-twist datum -/
 
 set_option profiler true
-set_option profiler.threshold 0
+set_option profiler.threshold 1
 
 @[expose] public section
 
@@ -60,8 +60,7 @@ lemma purity_finiteCoefficientIntegralTateOneReading_pullback
             (Etale.tateSheaf (integersModPowCoeff.{u} ℓ E n) Y) ≫
         ν^*(X)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)].map
           (Etale.upperStarTateSheafToTateSheaf (integersModPowCoeff.{u} ℓ E n) g) := by
-  exact K4CoefficientInterface.originalEquation ℓ E n g f
-    (K4CoefficientInterface.finiteTateReading_pullback ℓ E n g f)
+  exact K4Native.purity_finiteCoefficientIntegralTateOneReading_pullback ℓ E n g f
 
 
 /-- The actual finite-coefficient reading of the integral Tate line preserves its
