@@ -44,7 +44,7 @@ lemma geometricFiberWeilRightDerivedLowerShriekIso_forget
       (rightDerivedLowerShriekOfCompactification Λ (c.geometricFiber h)).map
         ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
           (Endofunctor.IsoAlgebra.forget _)).inv.app K) := by
-  exact Functor.traceCompDescentIso_forget
+  have he := Functor.traceCompDescentIso_forget
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
       (Endofunctor.IsoAlgebra.forget _)).symm
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ (c.g ≫ t))
@@ -62,6 +62,7 @@ lemma geometricFiberWeilRightDerivedLowerShriekIso_forget
     (rightDerivedLowerStarBaseChangeIso Λ (Scheme.Hom.isPullback_geometricFiberMap c.g rfl).flip)
     (geometricFiberWeilExtensionByZeroMapDerivedCategoryIso_forget Λ hi)
     (geometricFiberWeilRightDerivedLowerStarIso_forget Λ hg) K
+  exact_mod_proofs he
 
 variable
   {P : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))}

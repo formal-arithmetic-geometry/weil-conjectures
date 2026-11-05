@@ -59,16 +59,13 @@ theorem baseChangedSmoothTrace_without_unit_universal
       (purityFieldLowerShriekExchange l f f' (compactificationOverField f) c' hi hg) e.hom d K)
   have ht := Functor.bijective_map_comp_iso_trace
     (boundedConstructibleLowerShriekOfCompactification l c') (Iso.refl _) e.symm _ hb
-  simp only [Functor.TraceUniversalAt, baseChangedSmoothTrace,
+  simpa only [Functor.TraceUniversalAt, baseChangedSmoothTrace,
     purityFieldLowerShriekExchange, boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_refl,
     Iso.trans_inv, Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
-    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, Functor.map_id,
+    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, CategoryTheory.Functor.map_id,
     Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc,
-    Iso.hom_inv_id, Category.id_comp, Category.comp_id, a] at ht
-  dsimp +instances only [Functor.comp_obj, Functor.comp_map] at ht ⊢
-  erw [Functor.map_id, Category.id_comp, Functor.map_id, Category.id_comp] at ht
-  exact ht
+    Iso.hom_inv_id, Category.id_comp, Category.comp_id, a] using ht
 
 /-- The chosen compactification trace is universal on the ambient geometric hom
 sets when C9's unit base-change component is invertible. -/

@@ -59,7 +59,7 @@ theorem baseChangedSmoothTrace_ambient_universal
     (baseChangedSmoothTrace_compactification_universal l f f' c' hi hg e d K)
   rw [purityFieldCompactificationTrace_coordinates] at ht
   simpa only [Functor.TraceUniversalAt, Iso.app_hom, Iso.symm_hom, Iso.app_inv,
-    Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id,
+    Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
     Category.id_comp, Iso.inv_hom_id_app_assoc, Category.comp_id] using ht
 
 /-- Pass from left-derived to levelwise pullback coordinates, as used by the
@@ -89,7 +89,7 @@ theorem baseChangedSmoothTrace_levelwise_universal
     NatTrans.comp_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
     Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
     Iso.app_hom, Iso.symm_hom, Iso.app_inv, Category.assoc,
-    ← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp] at ht
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at ht
   rw [← (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj l) πY).hom.naturality,
     Iso.inv_hom_id_app_assoc] at ht
   exact ht
