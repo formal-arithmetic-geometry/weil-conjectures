@@ -69,6 +69,6 @@ lemma projection_realized_nativePullTensor_normalization
           (NativeRestrictionDescentProof.totalFamily L (nativeTensorTotal k₀ l Z)
             (nativeTensorTotal k₀ l Y) t P T).hom) := by
   have h := V.mapDerivedCategory.projection_map_comp3_eq (hn P T hP hT)
-  with_reducible exact_mod_proofs h
+  with_reducible_and_instances cast_proofs h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
