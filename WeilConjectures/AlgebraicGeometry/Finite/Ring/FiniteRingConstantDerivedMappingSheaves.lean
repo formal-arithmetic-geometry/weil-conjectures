@@ -83,7 +83,7 @@ private theorem constant_derived_faithful
   have : F.Additive := Functor.additive_of_preserves_binary_products _
   let e : c.mapDerivedCategory ⋙ F.mapDerivedCategory ≅
       𝟭 (DerivedCategory (ModuleCat.{u + 1} B)) :=
-    (Functor.mapDerivedCategoryCompIso c F) ≪≫
+    Functor.mapDerivedCategoryCompIso c F ≪≫
       Functor.mapDerivedCategoryNatIso
         (((pointSmallEtale (X.algClosurePoint x)).ulift.{u + 1}).constantSheafCompSheafFiberIso
           _ _) ≪≫ Functor.mapDerivedCategoryIdIso _
@@ -98,9 +98,9 @@ private theorem constant_restricted_faithful
   let : (constantSheaf ((𝟭 Scheme).obj V.left).smallEtaleTopology
       (ModuleCat.{u + 1} B)).mapDerivedCategory.Faithful :=
     constant_derived_faithful V.left B
-  let e := (Functor.mapDerivedCategoryCompIso
+  let e := Functor.mapDerivedCategoryCompIso
     (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))
-    (upperStar (ModuleCat.{u + 1} B) V.hom)).symm ≪≫
+    (upperStar (ModuleCat.{u + 1} B) V.hom) ≪≫
       Functor.mapDerivedCategoryNatIso (upperStarConstantSheafIso (ModuleCat.{u + 1} B) V.hom)
   exact Functor.Faithful.of_iso e.symm
 
