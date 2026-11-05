@@ -89,6 +89,7 @@ private theorem localize {R : Type u} {S : Type v} [CommRing R] [CommRing S]
 
 set_option maxHeartbeats 800000 in
 -- Completion and tensor scalar towers require extra elaboration work.
+set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Every absolute derivation of a finite integral model extends to the base-changed
 formal fibre, compatibly with the model's inclusion into its fraction field.
