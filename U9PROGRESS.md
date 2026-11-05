@@ -1,23 +1,17 @@
-# BZ356 complete
+# BZ361 in progress
 
-- Branch: `u9/BZ356`; starting commit: `98654719b`.
-- Assigned module `WeilConjectures.AlgebraicGeometry.PerfectCommonAffineModels`
-  passed `ucheck-bump`: rc=0, failed=0, 2872 jobs, target rebuilt in 10 seconds.
-- Validated source commit: `a08da2560d`; no Lean source changes were needed.
-- The compositor orientation fix was already applied in `e94c0a532` before this unit started.
-- Both direct importers were attempted: `PerfectDerivedTensor` and `PerfectTwoOutOfThree`.
-  They were skipped because five dependencies outside this unit failed, as required by
-  the ownership rule. No direct importer became green, so there was no second-layer build.
-- Downstream blockers: `Modules.StalkTensor`, `LocalizedOpenSheafification`,
-  `AffineQCohDerivedAdjunctionConstruction`, `AffineDerivedSectionsTruncationIso`,
-  and `AffineDerivedSectionsTruncatedBottom`.
-- Logs: `/home/ubuntu/u9/bz/BUILD-BZ356-assigned-full.log` and
-  `/home/ubuntu/u9/bz/BUILD-BZ356-downstream-full.log`.
-- Existing fix pattern, whole-tree count, exact original error, and dependency blocker
-  details: `/home/ubuntu/u9/bz/FIXES-BZ356.md`.
-- No local Lean/Lake execution, statement changes, proof shortcuts, or limit increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ356.DONE`.
-- This commit changes progress documentation only; Lean sources match the green build.
+- Branch: `u9/BZ361`; starting commit: `98654719bd`.
+- Assigned module: `WeilConjectures.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport`.
+- Baseline `ucheck-bump` reproduced all 14 errors.
+- The user instructed continuation after the explicit statement API migration proposal.
+  The comparison-orientation substitutions are applied, preserving all binders, hypotheses,
+  and intended morphisms under Mathlib's reversed `mapDerivedCategoryCompIso`.
+- Proof cancellation uses the inverse comparison and `Iso.inv_hom_id_app`.
+- Current remote build is queued through `ucheck-bump`; no green result yet.
+- Next: complete the assigned module, then build `SchemeDerivedHomGluing` and its two
+  direct importers `DerivedOpenGluing` and `OpenUnionHomGluing` as instructed.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ361.md`.
+- No local Lean/Lake, forbidden proof escapes, heartbeat increases, or DONE marker.
 
 # BZ133 complete
 
@@ -108,29 +102,21 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ229.DONE`.
 - This completion commit changes only progress documentation; Lean source matches the green build.
 
-# BZ307 in progress
+# BZ311 complete
 
-- Branch: `u9/BZ307`; starting commit: `ec1bc636d93cb23a821cc484ab6aef1db014813f`.
-- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp`.
-- Baseline remote build failed only at the two obsolete compositor `.symm` uses in the statement.
-- The user instructed continuation after the exact two-expression compatibility proposal;
-  `BZ307-statement-compatibility.patch` is applied, along with the matching proof changes.
-- Assigned module passed `ucheck-bump` at `fa8b9a053e`: rc=0, failed=0, 1924 jobs.
-- Next: check direct importers and write the DONE marker.
-- Fix patterns, whole-tree counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ307.md`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
-
-# BZ332 complete
-
-- Branch: `u9/BZ332`; starting commit: `04c3957dc56263143b9eaebd3d534360487f939e`.
-- Assigned module: `WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality`.
-- Ported three proof uses of the reversed derived compositor and normalized `Iso.symm_hom`.
-- The proof-only check passed the private localization proof; only the malformed public signature remained.
-- The user instructed continuation after the exact signature correction proposal; applied `BZ332-signature-compatibility.patch`.
-- Assigned module passed `ucheck-bump` at `a83c47ee4f`: rc=0, failed=0, 3845 jobs, target rebuilt in 17 seconds.
-- Full log: `/home/ubuntu/u9/bz/BUILD-BZ332-unit-full.log`.
-- Checked all three direct importers. `EtaleInjectiveSectionsComparison` needs statement-level compositor migration at lines 181 and 216; both other importers depend on it. The aggregator also has unrelated dependency failures.
-- Stopped the blocked downstream batch after recording the errors; no extra module is claimed green.
-- Completion marker: `/home/ubuntu/u9/state/BZ332.DONE`. Final commit updates documentation only; owned Lean source matches the green build.
-- Fix patterns and logs: `/home/ubuntu/u9/bz/FIXES-BZ332.md`.
-- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
+- Branch: `u9/BZ311`; starting commit: `ec1bc636d`.
+- Assigned module and both downstream layers passed `ucheck-bump` together:
+  rc=0, failed=0, 1935 jobs, on `poolb:43.166.72.113`.
+- Validated source commit: `d599eea1699030daa1a58ff564ab648fb03d536e`.
+- Green modules: `WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport`,
+  `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula`,
+  and `WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization`.
+- The user instructed continuation after the exact three-statement proposal.
+  Those canonical quotientCompQhIso endpoint transports are the only Lean changes;
+  all proof bodies, declaration binders, assumptions, and docstrings are unchanged.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ311-final-full.log`.
+- Fix pattern and whole-tree candidate count: `/home/ubuntu/u9/bz/FIXES-BZ311.md`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ311-contract-audit.txt`.
+- No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
+- This final commit changes only progress documentation; Lean sources match the green build.
