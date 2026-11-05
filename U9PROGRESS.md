@@ -106,15 +106,15 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
 
-# BZ404 in progress
+# BZ407 in progress
 
-- Branch: `u9/BZ404`; starting commit: `98654719b`.
-- Proof-local χ now uses the reversed Mathlib composition isomorphism.
-- The proof-only build eliminated both proof errors; the remaining error was the
-  mechanical sweep's misplaced `.symm` in the `hf` hypothesis.
-- The user instructed continuation after the exact statement-syntax proposal.
-  That patch is now applied, preserving the intended map.
-- Assigned module passed `ucheck-bump`: rc=0, failed=0, 3879 jobs at `5fc97c7523`.
-- Next: both direct importers, then DONE.
-- Fix notes and diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ404.md`.
-- No local Lean/Lake execution, proof placeholders, or limit increases.
+- Branch: `u9/BZ407`; starting commit: `98654719b`.
+- Assigned module: `WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryStrictSquare`.
+- The user instructed continuation after the exact three-hypothesis API correction proposal.
+  Applied those corrections to preserve the maps under Mathlib's reversed composition isomorphism.
+- Matching proof changes use the new orientation and `Iso.eq_inv_comp` cancellation.
+- Baseline reproduced the three reported errors; repaired validation is next.
+- Fix patterns and full baseline log: `/home/ubuntu/u9/bz/FIXES-BZ407.md` and
+  `/home/ubuntu/u9/bz/BUILD-BZ407-baseline.log`.
+- After the assigned module is green, check its four direct importers and one more layer.
+- No local Lean/Lake execution, forbidden proof escapes, or heartbeat increases.
