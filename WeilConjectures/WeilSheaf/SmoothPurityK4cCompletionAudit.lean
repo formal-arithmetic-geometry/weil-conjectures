@@ -4,10 +4,8 @@ public import WeilConjectures.WeilSheaf.Strategy3.Audit
 public import WeilConjectures.WeilSheaf.SmoothPurityK4CanonicalAudit
 public import WeilConjectures.WeilSheaf.SmoothPurityK4NativeAudit
 public import WeilConjectures.WeilSheaf.SmoothPurityUnitBaseChangePoint
-public import WeilConjectures.WeilSheaf.SmoothPurityK4cRelativeAudit
-public import WeilConjectures.WeilSheaf.SmoothPurityK4cRelativeOrientationAudit
 
-/-! Audit of the kernel repair and the complete relative Frobenius-compatible orientation. -/
+/-! Audit of the kernel repair and the adopted point base-change proof. -/
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
