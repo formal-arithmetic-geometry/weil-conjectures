@@ -260,18 +260,16 @@ private local instance scalarPresheafCoproducts (A : Sheaf J CommRingCat.{r})
       (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
   PresheafOfModules.hasColimitsOfShape _ _
 
-private local instance scalarPresheafCoproductsFamily (A : Sheaf J CommRingCat.{r}) :
-    ∀ (I₁ I₂ : Type r), HasColimitsOfShape (Discrete I₂)
-      (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
-  fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+private local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r})
+    (K : Type r) : HasColimitsOfShape (Discrete K) (scalarModules J A) :=
+  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
-private local instance scalarSheafCoproducts (A : Sheaf J CommRingCat.{r}) :
-    HasCoproducts.{0} (scalarModules J A) := by
-  intro I
-  have : HasColimitsOfShape (Discrete I)
+private local instance scalarSheafSmallCoproducts (A : Sheaf J CommRingCat.{r})
+    (K : Type) : HasColimitsOfShape (Discrete K) (scalarModules J A) := by
+  have : HasColimitsOfShape (Discrete K)
       (PresheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj) :=
     PresheafOfModules.hasColimitsOfShape _ _
-  exact instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 /-- The existing monoidal structure on module cochain complexes, cached for elaboration.
 Source: Stacks 03EK and 06YT
@@ -595,11 +593,11 @@ private theorem scalarExtension_tensor_pure (a : R ⟶ S) (M N : scalarModules J
   let f := extensionPullback a
   let k := extensionComparison a
   let ev := sheafToPresheaf J (Type r) ⋙ (CategoryTheory.evaluation Cᵒᵖ (Type r)).obj U
-  have : ∀ (I₁ I₂ : Type), HasLimitsOfShape (Discrete I₂) (Cᵒᵖ ⥤ Type r) :=
-    fun _ _ ↦ functorCategoryHasLimitsOfShape
-  have : ∀ (I₁ I₂ : Type), HasLimitsOfShape (Discrete I₂) (Sheaf J (Type r)) :=
-    fun _ _ ↦ hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape
-      (sheafToPresheaf J (Type r))
+  have (K : Type) : HasLimitsOfShape (Discrete K) (Type r) := Types.hasLimitsOfShape
+  have (K : Type) : HasLimitsOfShape (Discrete K) (Cᵒᵖ ⥤ Type r) :=
+    functorCategoryHasLimitsOfShape
+  have (K : Type) : HasLimitsOfShape (Discrete K) (Sheaf J (Type r)) :=
+    hasLimitsOfShape_of_hasLimitsOfShape_createsLimitsOfShape (sheafToPresheaf J (Type r))
   obtain ⟨t, hx, hy⟩ := SheafOfModules.CochainTensorComparison.productElements ev
     ((underlying R).obj M) ((underlying R).obj N) x y
   let px : (underlying R).obj M ⨯ (underlying R).obj N ⟶ (underlying R).obj M := prod.fst
