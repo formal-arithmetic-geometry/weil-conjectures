@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
