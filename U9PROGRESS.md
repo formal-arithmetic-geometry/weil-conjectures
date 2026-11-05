@@ -284,13 +284,26 @@
 - Next: ucheck-bump assigned module, repair prerequisite errors, then downstream targets.
 - No local Lean/Lake execution; no proof placeholders, trust bypasses, or heartbeat raises.
 
-# BZ889 in progress
+# BZ889 complete
 
-- Reread the brief and progress notes on continuation; no new LEAD lines were present.
+- Branch: `u9/BZ889`; starting commit: `d2d60c46e`.
+- Assigned `RingedTopoiDerivedPullbackIndependentSupplement` passed `ucheck-bump`:
+  rc=0, failed=0, 4961 jobs at source commit `6b98a7eeef407af1bf4d3de67c6547de6c8af623`.
+- Direct importers `RingedPullbackCochainPresentation` and
+  `KFlatScalarComparisonNormalization` both rebuilt green at `d341322f8b`.
 - The user instructed continuation after the exact one-line reflexive-cast proposal.
-- Applied that cast to RingedPullbackResolutionComparisons.normalization; all other
-  statement text, proof bodies and docstrings are unchanged.
-- Recorded the exact compiler error, contextual regex rule and whole-tree counts
-  in /home/ubuntu/u9/bz/FIXES-BZ889.md.
-- Next: ucheck-bump on the assigned module, then direct importers and downstream layers.
-- No local Lean/Lake, proof placeholders, trust bypasses or heartbeat changes.
+  That normalization-field cast is the only Lean source change; all other statement
+  text, proof bodies and docstrings are unchanged. No declarations deleted.
+- All three direct importers and both accessible next-layer importers were checked.
+  `FinitePerfectAdicConstantModelsReduction` is blocked by
+  `OpenPinnedSingleDegreeZeroCounitIso`; `DerivedScalarMateData` by
+  `ProEtaleProjectionFormulaArrows`; `IntegralAmbientOperationModels` by
+  `IntegralTensorReductionTowerComparison`. These unowned prerequisites were skipped
+  under the brief's ownership rule; their exact first errors are in the handoff record.
+- Fix pattern, contextual regex and occurrence counts: `/home/ubuntu/u9/bz/FIXES-BZ889.md`.
+- Full build logs: `BUILD-BZ889-assigned-full.log`, `BUILD-BZ889-downstream1-full.log`,
+  and `BUILD-BZ889-downstream-focused-full.log` under `/home/ubuntu/u9/bz/`.
+- Contract audit: `/home/ubuntu/u9/bz/BZ889-contract-audit.txt`.
+- No local Lean/Lake, proof placeholders, trust bypasses, profiler probes or heartbeat changes.
+- Completion marker: `/home/ubuntu/u9/state/BZ889.DONE`.
+- This final commit changes only progress documentation; Lean source matches the green builds.
