@@ -192,12 +192,12 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
   exact congrArg (fun P : Submodule Γ(X, U.1) Γ(M, U.1) ↦ (P : Set Γ(M, U.1))) ha
 
 
-private noncomputable local instance {X : Scheme.{u}} (H : X.Modules)
+local instance {X : Scheme.{u}} (H : X.Modules)
     {V W : X.Opens} (h : V ≤ W) :
     SMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V))
       ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
         (H.val.obj (op V))) :=
-  inferInstanceAs (SMul Γ(X, V) Γ(H, V))
+  inferInstanceAs (SMul (X.sheaf.obj.obj (op V)) (H.val.obj (op V)))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A coherent module has a quasi-coherent submodule containing every local
