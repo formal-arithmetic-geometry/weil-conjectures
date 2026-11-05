@@ -245,3 +245,17 @@
 - Full log: /home/ubuntu/u9/bz/BUILD-BZ824-restored-full.log.
 - Next: build layer-two importer CanonicalModuleBaseChangeAffineChartComparison.
 - Notes: /home/ubuntu/u9/bz/FIXES-BZ824.md. No local Lean/Lake or proof shortcuts.
+
+
+# BZ852 in progress
+
+- Branch: `u9/BZ852`; original baseline: `2ab2b07a323`.
+- Resumed after rereading the brief and progress notes; merged integrated bump `db406319f`.
+- The user instructed continuation after the two-file upstream restoration proposal.
+  Restored the original line-evaluation proof chain and `signed_line_power_flat`,
+  preserving all declaration statements and current imports.
+- Applied known BZ169 fixes: explicit coefficient/module carriers in `chart_basis`,
+  and a local unit-module scalar action for `cancellation_pure`.
+- Next: remote validation of both restored modules and SignedLineDerivedAction,
+  then direct importers and downstream layers as required.
+- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
