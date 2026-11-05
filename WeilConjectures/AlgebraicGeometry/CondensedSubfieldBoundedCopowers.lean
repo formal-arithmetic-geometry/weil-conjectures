@@ -157,6 +157,13 @@ theorem condensedSubfield_bounded_copower_comparison
   have : HasColimitsOfShape (Finset (Discrete I)) A :=
     HasColimitsOfShape.of_small.{u + 1, u + 1} A (Finset (Discrete I))
   have : HasFiniteColimits A := hasFiniteColimits_of_hasColimitsOfSize.{u + 1, u + 1} A
+  have (J : Type (u + 1)) : HasColimitsOfShape (Discrete J) (CochainComplex A ℤ) := by
+    have : HasColimitsOfShape (Discrete J) A :=
+      HasColimitsOfShape.of_small.{u + 1, u + 1} A (Discrete J)
+    refine ⟨fun F ↦ ?_⟩
+    have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval A (.up ℤ) n) :=
+      HasColimitsOfShape.has_colimit _
+    exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
   have : HasColimitsOfShape (Finset (Discrete I)) (CochainComplex A ℤ) := inferInstance
   have : HasColimitsOfShape (Finset (Discrete I)) B :=
     HasColimitsOfShape.of_small.{u + 1, u + 1} B (Finset (Discrete I))
