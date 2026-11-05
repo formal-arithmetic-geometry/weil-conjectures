@@ -445,7 +445,8 @@ theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
   have hc0 : IsColimit (coefficientComplexCocone X ℓ (E := E) (F := E) C H he he) :=
     Classical.choice (nonempty_isColimit_coefficientComplexCocone X ℓ
       (E := E) (F := E) C H he he)
-  have hc : IsColimit c := isColimitOfPreserves _ hc0
+  have hc : IsColimit c :=
+    isColimitOfPreserves (HomologicalComplex.eval _ (.up ℤ) 0) hc0
   let a := (Mod.extendRestrictAdjunction
     (padicSubfieldRingObjToPadicAlgCl X ℓ E)).homEquiv _ _ ψ
   have hfactor := hM.isLocallyFree.exists_comp_eq_of_isColimit c hc a
