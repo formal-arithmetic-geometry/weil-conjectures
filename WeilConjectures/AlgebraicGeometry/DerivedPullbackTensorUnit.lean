@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitKFlat
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
