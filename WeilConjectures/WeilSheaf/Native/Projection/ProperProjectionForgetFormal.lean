@@ -7,6 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionPasting
 public import WeilConjectures.WeilSheaf.Native.Projection.GeometricProjectionNaturality
+public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 
 /-! # The proper projection square in abstract tensor coordinates -/
 
@@ -37,10 +38,12 @@ lemma projectionForgetSquare_of_comparisonCompatible
       adj'.uncurriedProjectionMorphismNatTrans := by
   intro M N
   have hh := map_rightAdjointProjectionMap_comp_mateEquiv adj adj' h M N
-  simpa only [Functor.uncurryRightProjection, uncurriedProjectionMorphismNatTrans,
-    Functor.curryCompIsoOfIso', Functor.comp_obj, Functor.prod_obj, Functor.id_obj,
-    asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map, curriedTensor_map_app,
-    curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id, Category.comp_id,
-    Category.id_comp] using hh
+  have hp : ((adj'.rightAdjointProjectionMap
+      (Functor.OplaxMonoidal.δNatTrans F')).app (NC.obj M)).app (ND.obj N) =
+      adj'.projectionMorphism (NC.obj M) (ND.obj N) := rfl
+  rw [hp] at hh
+  dsimp [Functor.uncurryRightProjection, uncurriedProjectionMorphismNatTrans,
+    Functor.curryCompIsoOfIso', Functor.whiskeringLeft₂, Functor.postcompose₂] at hh ⊢
+  simpa only [id_whiskerRight, whiskerLeft_id, Category.comp_id, Category.id_comp] using hh
 
 end CategoryTheory.Adjunction

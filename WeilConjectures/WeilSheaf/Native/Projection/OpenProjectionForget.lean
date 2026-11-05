@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoheren
 public import WeilConjectures.WeilSheaf.Native.Projection.OpenProjectionForgetFormal
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.GeometricOpenProjectionTranspose
+public import WeilConjectures.WeilSheaf.Native.Projection.MonoidalProjectionForgetSquare
 
 /-! # The canonical open projection formula under condensed realization -/
 

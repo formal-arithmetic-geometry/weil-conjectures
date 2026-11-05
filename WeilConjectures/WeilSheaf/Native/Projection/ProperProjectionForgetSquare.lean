@@ -7,7 +7,7 @@ module
 public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoherence
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionForgetIsoTransport
-public import WeilConjectures.WeilSheaf.Native.Projection.GeometricProjectionNaturality
+public import WeilConjectures.WeilSheaf.Native.Projection.ProperProjectionForgetFormal
 import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The proper projection square before restriction to bounded complexes -/
@@ -57,20 +57,11 @@ theorem nativeProperProjection_forgetSquare :
       (condensedRealizationTensor k₀ l X) (condensedRealizationTensor k₀ l Y)
       (nativeProperProjectionNatTrans k₀ l g)
       (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb).uncurriedProjectionMorphismNatTrans := by
-  intro M N
-  have h := Adjunction.map_rightAdjointProjectionMap_comp_mateEquiv
+  exact Adjunction.projectionForgetSquare_of_comparisonCompatible
     (derivedUpperStarLowerStarAdjunction k₀ l g)
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ gb)
-    (comparisonCompatible_derivedCondensedRealization k₀ l g) M N
-  dsimp +instances only [Functor.comp_obj, Functor.prod_obj, Functor.id_obj] at h ⊢
-  simp only [nativeProperProjectionNatTrans, Functor.uncurryRightProjection,
-    nativeProperForgetIso, Adjunction.uncurriedProjectionMorphismNatTrans,
-    condensedRealizationCurriedTensor, Functor.curryCompIsoOfIso',
-    Functor.comp_obj, Functor.prod_obj, Functor.id_obj,
-    asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
-    curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
-    Category.comp_id, Category.id_comp] at h ⊢
-  simp only [Category.comp_id, Category.id_comp]
-  exact_mod_proofs h
+    (derivedCondensedRealizationUpperStarIso k₀ l g) (nativeCurriedPullTensor k₀ l g)
+    (condensedRealizationTensor k₀ l X) (condensedRealizationTensor k₀ l Y)
+    (by exact_mod_proofs comparisonCompatible_derivedCondensedRealization k₀ l g)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

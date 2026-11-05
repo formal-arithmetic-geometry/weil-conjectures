@@ -44,4 +44,23 @@ lemma derivedBaseChange_eq_rightDerivedFunctorCommIso (adj : L ⊣ R) (adj' : L'
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, DerivedCategory.Qh.map_id,
     Category.id_comp]
 
+/-- The mate formulation of the same normalization. -/
+lemma mateEquiv_derivedSquare_eq_rightDerivedFunctorCommIso
+    [MonoidalCategory D'] [MonoidalPreadditive D'] [HasCountableCoproducts D']
+    [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D'), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ D'), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ D'), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+    [HasColimitsOfShape ℤ D'] [HasExactColimitsOfShape ℤ D']
+    [∀ (X : D'), PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor D').obj X)]
+    [∀ (X : D'), PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor D').flip.obj X)]
+    [HasFunctorialFlatResolution D']
+    (adj : L ⊣ R) (adj' : L' ⊣ R')
+    (α : U ⋙ L' ≅ L ⋙ V) (β : R ⋙ U ≅ V ⋙ R')
+    (hβ : (mateEquiv adj adj' α.hom).natTrans = β.hom) :
+    (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction adj'.derivedAdjunction
+      (Functor.leftDerivedFunctorSquareIso α).hom).natTrans =
+      (Functor.rightDerivedFunctorCommIso β).hom := by
+  rw [mateEquiv_derivedAdjunction_leftDerivedFunctorSquareIso]
+  exact derivedBaseChange_eq_rightDerivedFunctorCommIso adj adj' α β hβ
+
 end CategoryTheory.Adjunction

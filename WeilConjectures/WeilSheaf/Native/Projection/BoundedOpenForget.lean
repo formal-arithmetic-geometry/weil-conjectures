@@ -34,6 +34,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 local notation "jb" => geometricFiberHom (k₀ := k₀) j
 local notation "Λ" => Profinite.padicAlgClRingObj l
 
+local instance : IsOpenImmersion (jb).left :=
+  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion) j _ ‹_›
+
 /-- The open forget square in the composite realization model. -/
 def projectionOpenCompositeForgetIso :=
   projectionPushForgetIso (ProEtaleWeilSheaf.nativeOpenForgetIso k₀ l j)
@@ -58,7 +61,7 @@ theorem isIso_mateEquiv_projectionOpenForgetIso :
       (CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ l jb)
       (projectionOpenForgetIso k₀ l j).inv).natTrans := by
   let A := ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l j
-  let B := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ jb.left
+  let B := CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (jb).left
   have hcan : IsIso (mateEquiv A B (ProEtaleWeilSheaf.nativeOpenForgetIso k₀ l j).inv).natTrans := by
     change IsIso ((mateEquiv A B) ((mateEquiv A B).symm
       (TwoSquare.mk _ _ _ _ (ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso

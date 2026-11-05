@@ -40,12 +40,12 @@ local notation "EY" => boundedConstructibleAdicEquivBoundedConstructible l k₀
 
 /-- The proper geometric comparison chosen as the derived mate of the pullback comparison. -/
 def projectionBoundedAdicCondensedPushIso :
-    properProjectionAdicPush k₀ l g ⋙ EY.functor ≅
-      EX.functor ⋙ CondensedRing.boundedConstructibleLowerStar l gb :=
+    properProjectionAdicPush k₀ l g ⋙ (EY).functor ≅
+      (EX).functor ⋙ CondensedRing.boundedConstructibleLowerStar l gb :=
   NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _
-    ((projectionAdicCondensedDerivedPushIso l gb.left).app M.obj))
+    ((projectionAdicCondensedDerivedPushIso l (gb).left).app M.obj))
     (fun φ ↦ ObjectProperty.hom_ext _
-      ((projectionAdicCondensedDerivedPushIso l gb.left).hom.naturality φ.hom))
+      ((projectionAdicCondensedDerivedPushIso l (gb).left).hom.naturality φ.hom))
 
 /-- The canonical proper forget comparison, expressed through the adic model. -/
 def projectionProperForgetIso :
@@ -64,7 +64,7 @@ theorem isIso_mateEquiv_projectionProperForgetIso
     (adj' : CondensedRing.boundedConstructibleLowerStar l gb ⊣ R') :
     IsIso (mateEquiv adj adj' (projectionProperForgetIso k₀ l g).inv).natTrans := by
   let δ := projectionBoundedAdicCondensedPushIso k₀ l g
-  let aa := (EX.toAdjunction.comp (adj'.comp EY.symm.toAdjunction)).ofNatIsoLeft
+  let aa := ((EX).toAdjunction.comp (adj'.comp (EY).symm.toAdjunction)).ofNatIsoLeft
     δ.isoCompInverse.symm
   have : IsIso (mateEquiv adj aa (properProjectionAdicForgetIso k₀ l g).inv).natTrans :=
     @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun M ↦
@@ -72,7 +72,7 @@ theorem isIso_mateEquiv_projectionProperForgetIso
   have : IsIso (mateEquiv aa adj' δ.inv).natTrans :=
     @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun M ↦
       Adjunction.isIso_mateEquiv_app_of_isIso aa adj' δ.symm
-        EX.toAdjunction EY.toAdjunction M)
+        (EX).toAdjunction (EY).toAdjunction M)
   exact isIso_mateEquiv_isoHComp adj aa adj'
     (properProjectionAdicForgetIso k₀ l g).symm δ.symm
 
