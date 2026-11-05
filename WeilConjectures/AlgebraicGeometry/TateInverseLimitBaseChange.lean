@@ -50,6 +50,20 @@ attribute [-instance] WeilConjectures.integralCoefficientRingSheafify
 attribute [local irreducible] proEtaleRingModulePullback proEtaleModuleInverseImage
   proEtaleRingModuleAdjunction
 
+section
+
+private local instance tateInverseLimitBaseChangeRestrictedModule (T : Scheme.{u})
+    {A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (M : SheafOfModules.{u + 1}
+      ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A))
+    {X Y : T.ProEtᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose (ProEt.topology T)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A).obj.map i).hom).obj
+        (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     (T : Scheme.{u})
     {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S) (M : SheafOfModules.{u + 1}
@@ -60,6 +74,8 @@ private theorem tensorRestriction_tmul
       S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
   Classical.choose_spec (SheafOfModules.exists_changeOfRingsMapMixedUniverses.{u, u + 1, u + 1,
     u + 1} c M i) s m
+
+end
 
 private noncomputable def tensorToRestriction
     (T : Scheme.{u})
