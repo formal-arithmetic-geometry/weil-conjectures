@@ -79,7 +79,7 @@ the base change isomorphism `AlgebraicGeometry.Etale.openImmersionLowerShriekBas
 noncomputable def mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
     (hsq : IsPullback g' j' j g'') :
     D((g')^*[A]) ⋙ D((j')_!open[A]) ≅ D((j)_!open[A]) ⋙ D((g'')^*[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap A hsq)) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
