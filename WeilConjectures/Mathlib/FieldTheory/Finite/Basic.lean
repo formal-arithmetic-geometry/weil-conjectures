@@ -177,7 +177,7 @@ theorem exists_geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_eq {E : Type*} [F
 
 section ArtinSchreier
 
-open Polynomial
+open _root_.Polynomial
 
 variable {k A : Type*} [Field k] [Fintype k] [CommRing A]
 
