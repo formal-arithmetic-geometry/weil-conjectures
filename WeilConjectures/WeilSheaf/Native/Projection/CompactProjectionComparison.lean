@@ -59,11 +59,13 @@ def projectionGeometricPullComp :
 /-- The geometric pullback compositor has the canonical ambient component. -/
 lemma projectionGeometricPullComp_hom_app
     (N : WeilComplex k₀ l Y) :
-    ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)).hom =
+    (ObjectProperty.ι _).map
+      ((projectionGeometricPullComp k₀ l f).hom.app ((compactProjectionForget k₀ l Y).obj N)) =
       (CondensedRing.leftDerivedUpperStarOverCompactificationIso Λ cb).inv.app
         ((compactProjectionForget k₀ l Y).obj N).obj := by
-  exact CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb
-    ((compactProjectionForget k₀ l Y).obj N)
+  simpa only [projectionGeometricPullComp, Iso.symm_hom] using
+    CondensedRing.ι_map_eqToIso_trans_upperStarComp_inv_app_compactification l cb
+      ((compactProjectionForget k₀ l Y).obj N)
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
