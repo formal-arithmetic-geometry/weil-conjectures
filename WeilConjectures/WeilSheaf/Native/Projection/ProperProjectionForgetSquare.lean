@@ -8,6 +8,7 @@ public import WeilConjectures.WeilSheaf.Native.NativeCondensedRealizationCoheren
 public import WeilConjectures.WeilSheaf.Native.Projection.UncurriedComparison
 public import WeilConjectures.WeilSheaf.Native.Projection.ProjectionForgetIsoTransport
 public import WeilConjectures.WeilSheaf.Native.Projection.GeometricProjectionNaturality
+import WeilConjectures.Tactic.ExactModProofs
 
 /-! # The proper projection square before restriction to bounded complexes -/
 
@@ -69,6 +70,7 @@ theorem nativeProperProjection_forgetSquare :
     asIso_hom, Iso.symm_hom, Functor.uncurry_obj_map,
     curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight, whiskerLeft_id,
     Category.comp_id, Category.id_comp] at h ⊢
+  simp only [Category.comp_id, Category.id_comp]
   exact_mod_proofs h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

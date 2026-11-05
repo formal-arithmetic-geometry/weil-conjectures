@@ -15,7 +15,7 @@ public import WeilConjectures.PoincareDuality.ProjectionFormula
 universe u
 
 open CategoryTheory MonoidalCategory
-open scoped CategoryTheory.Functor
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -30,7 +30,7 @@ instance projection_isIso_geometricOpen_unit :
 
 /-- The tensor isomorphism used by pullback has inverse its monoidal multiplication. -/
 lemma projection_leftDerivedUpperStarTensorIso_inv_app
-    (M N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (M N : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     Functor.LaxMonoidal.μ (upperStar Λ j).leftDerivedFunctor M N =
       ((leftDerivedUpperStarTensorIso Λ j).inv.app M).app N := by
@@ -40,9 +40,9 @@ lemma projection_leftDerivedUpperStarTensorIso_inv_app
 
 /-- The geometric projection comparison is the expected unit transpose. -/
 lemma projection_open_homEquiv
-    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+    (M : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj Λ U)))
-    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (N : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).homEquiv _ _
       (openImmersionProjectionComparison Λ j M N) =
