@@ -7,8 +7,8 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing
 public import Mathlib.Topology.Sheaves.Sheaf
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # Change of rings for presheaves of modules
@@ -17,8 +17,6 @@ Source: Stacks Project, Sheaves, Tag 006R (blueprint: lem-pc-presheaf-change-of-
 -/
 
 @[expose] public section
-
-set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 universe u v w
 
@@ -29,14 +27,13 @@ namespace PresheafOfModules
 
 variable (X : TopCat.{u}) (A B : X.Sheaf CommRingCat.{w}) (α : A ⟶ B)
 
-local notation "R" => (A.presheaf ⋙ forget₂ CommRingCat RingCat)
-local notation "S" => (B.presheaf ⋙ forget₂ CommRingCat RingCat)
-local notation "a" => Functor.whiskerRight α.hom (forget₂ CommRingCat RingCat)
+local notation "R" => A.presheaf
+local notation "S" => B.presheaf
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private noncomputable def tensorRestriction (M : PresheafOfModules.{max v w} R)
+private noncomputable def tensorRestriction (M : PresheafOfModulesOfCommRing.{max v w} R)
     {U V : (TopologicalSpace.Opens X)ᵒᵖ} (i : U ⟶ V) :
     (ModuleCat.extendScalars (α.hom.app U).hom).obj (M.obj U) ⟶
       (ModuleCat.restrictScalars (B.presheaf.map i).hom).obj
@@ -72,7 +69,7 @@ private noncomputable def tensorRestriction (M : PresheafOfModules.{max v w} R)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private theorem tensorRestriction_tmul (M : PresheafOfModules.{max v w} R)
+private theorem tensorRestriction_tmul (M : PresheafOfModulesOfCommRing.{max v w} R)
     {U V : (TopologicalSpace.Opens X)ᵒᵖ} (i : U ⟶ V)
     (b : B.presheaf.obj U) (m : M.obj U) :
     tensorRestriction X A B α M i (b ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] m) =
@@ -94,8 +91,8 @@ private theorem tensorRestriction_tmul (M : PresheafOfModules.{max v w} R)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private noncomputable def tensorPresheaf (M : PresheafOfModules.{max v w} R) :
-    PresheafOfModules.{max v w} S where
+private noncomputable def tensorPresheaf (M : PresheafOfModulesOfCommRing.{max v w} R) :
+    PresheafOfModulesOfCommRing.{max v w} S where
   obj U := (ModuleCat.extendScalars (α.hom.app U).hom).obj (M.obj U)
   map i := tensorRestriction X A B α M i
   map_id U := by
@@ -103,7 +100,6 @@ private noncomputable def tensorPresheaf (M : PresheafOfModules.{max v w} R) :
     intro m
     rw [tensorRestriction_tmul]
     simp
-    rfl
   map_comp {U V W} i j := by
     apply ModuleCat.ExtendScalars.hom_ext
     intro m
@@ -111,14 +107,14 @@ private noncomputable def tensorPresheaf (M : PresheafOfModules.{max v w} R) :
     change _ = tensorRestriction X A B α M j _
     erw [tensorRestriction_tmul]
     simp
-    rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private noncomputable def tensorToRestrict
-    (M : PresheafOfModules.{max v w} R) (N : PresheafOfModules.{max v w} S)
-    (f : tensorPresheaf X A B α M ⟶ N) : M ⟶ (restrictScalars a).obj N where
+    (M : PresheafOfModulesOfCommRing.{max v w} R) (N : PresheafOfModulesOfCommRing.{max v w} S)
+    (f : tensorPresheaf X A B α M ⟶ N) :
+    M ⟶ (PresheafOfModulesOfCommRing.restrictScalars α.hom).obj N where
   app U := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars
     (α.hom.app U).hom (f.app U)
   naturality := by
@@ -128,7 +124,7 @@ private noncomputable def tensorToRestrict
       (α.hom.app V).hom] M.map i m) =
       N.map i (f.app U ((1 : B.presheaf.obj U) ⊗ₜ[A.presheaf.obj U,
         (α.hom.app U).hom] m))
-    rw [← naturality_apply f i]
+    refine Eq.trans ?_ (naturality_apply f i _)
     change _ = f.app V (tensorRestriction X A B α M i _)
     rw [tensorRestriction_tmul]
     simp
@@ -137,8 +133,9 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private noncomputable def tensorFromRestrict
-    (M : PresheafOfModules.{max v w} R) (N : PresheafOfModules.{max v w} S)
-    (g : M ⟶ (restrictScalars a).obj N) : tensorPresheaf X A B α M ⟶ N where
+    (M : PresheafOfModulesOfCommRing.{max v w} R) (N : PresheafOfModulesOfCommRing.{max v w} S)
+    (g : M ⟶ (PresheafOfModulesOfCommRing.restrictScalars α.hom).obj N) :
+    tensorPresheaf X A B α M ⟶ N where
   app U := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
     («R» := A.presheaf.obj U) («S» := B.presheaf.obj U) (α.hom.app U).hom (g.app U)
   naturality := by
@@ -173,8 +170,9 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private noncomputable def tensorHomEquiv
-    (M : PresheafOfModules.{max v w} R) (N : PresheafOfModules.{max v w} S) :
-    (tensorPresheaf X A B α M ⟶ N) ≃ (M ⟶ (restrictScalars a).obj N) where
+    (M : PresheafOfModulesOfCommRing.{max v w} R) (N : PresheafOfModulesOfCommRing.{max v w} S) :
+    (tensorPresheaf X A B α M ⟶ N) ≃
+      (M ⟶ (PresheafOfModulesOfCommRing.restrictScalars α.hom).obj N) where
   toFun := tensorToRestrict X A B α M N
   invFun := tensorFromRestrict X A B α M N
   left_inv f := by
@@ -190,8 +188,9 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem tensorHomEquiv_symm_tmul
-    (M : PresheafOfModules.{max v w} R) (N : PresheafOfModules.{max v w} S)
-    (g : M ⟶ (restrictScalars a).obj N) (U : (TopologicalSpace.Opens X)ᵒᵖ)
+    (M : PresheafOfModulesOfCommRing.{max v w} R) (N : PresheafOfModulesOfCommRing.{max v w} S)
+    (g : M ⟶ (PresheafOfModulesOfCommRing.restrictScalars α.hom).obj N)
+    (U : (TopologicalSpace.Opens X)ᵒᵖ)
     (b : B.presheaf.obj U) (m : M.obj U) :
     ((tensorHomEquiv X A B α M N).symm g).app U
       (b ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] m) =
@@ -237,45 +236,51 @@ and thus everywhere [def-weil-module-base-change, def-weil-pbc-module-tensor-pro
 Evaluate on `1 ⊗ m` to get naturality in `M`. Postcomposition with `β : N ⟶ N'`
 gives naturality in `N` by the sectionwise formula [lem-weil-pbc-scalar-extension-hom]. -/
 theorem changeOfRingsAdjunction :
-    ∃ (T : PresheafOfModules.{max v w} R ⥤ PresheafOfModules.{max v w} S)
-      (q : ∀ (M : PresheafOfModules.{max v w} R) (U : (TopologicalSpace.Opens X)ᵒᵖ),
+    ∃ (T : PresheafOfModulesOfCommRing.{max v w} R ⥤ PresheafOfModulesOfCommRing.{max v w} S)
+      (q : ∀ (M : PresheafOfModulesOfCommRing.{max v w} R) (U : (TopologicalSpace.Opens X)ᵒᵖ),
         (ModuleCat.extendScalars (α.hom.app U).hom).obj (M.obj U) ≅ (T.obj M).obj U)
-      (e : ∀ (M : PresheafOfModules.{max v w} R) (N : PresheafOfModules.{max v w} S),
-        (T.obj M ⟶ N) ≃ (M ⟶ (restrictScalars a).obj N)),
-      (∀ (M : PresheafOfModules.{max v w} R)
+      (e : ∀ (M : PresheafOfModulesOfCommRing.{max v w} R)
+        (N : PresheafOfModulesOfCommRing.{max v w} S),
+        (T.obj M ⟶ N) ≃ (M ⟶ (PresheafOfModulesOfCommRing.restrictScalars α.hom).obj N)),
+      (∀ (M : PresheafOfModulesOfCommRing.{max v w} R)
         (U V : (TopologicalSpace.Opens X)ᵒᵖ) (i : U ⟶ V)
         (b : B.presheaf.obj U) (m : M.obj U),
         (T.obj M).map i ((q M U).hom (b ⊗ₜ[A.presheaf.obj U,(α.hom.app U).hom] m)) =
           (q M V).hom ((B.presheaf.map i b) ⊗ₜ[A.presheaf.obj V,(α.hom.app V).hom]
             (M.map i m))) ∧
-      (∀ (M M' : PresheafOfModules.{max v w} R) (f : M ⟶ M')
+      (∀ (M M' : PresheafOfModulesOfCommRing.{max v w} R) (f : M ⟶ M')
         (U : (TopologicalSpace.Opens X)ᵒᵖ) (b : B.presheaf.obj U) (m : M.obj U),
         (T.map f).app U ((q M U).hom (b ⊗ₜ[A.presheaf.obj U,(α.hom.app U).hom] m)) =
           (q M' U).hom (b ⊗ₜ[A.presheaf.obj U,(α.hom.app U).hom] (f.app U m))) ∧
-      (∀ (M : PresheafOfModules.{max v w} R) (N : PresheafOfModules.{max v w} S)
+      (∀ (M : PresheafOfModulesOfCommRing.{max v w} R)
+        (N : PresheafOfModulesOfCommRing.{max v w} S)
         (f : T.obj M ⟶ N) (U : (TopologicalSpace.Opens X)ᵒᵖ) (m : M.obj U),
         (e M N f).app U m =
           f.app U ((q M U).hom ((1 : B.presheaf.obj U) ⊗ₜ[A.presheaf.obj U,
             (α.hom.app U).hom] m))) ∧
-      (∀ (M : PresheafOfModules.{max v w} R) (N : PresheafOfModules.{max v w} S)
-        (g : M ⟶ (restrictScalars a).obj N) (U : (TopologicalSpace.Opens X)ᵒᵖ)
+      (∀ (M : PresheafOfModulesOfCommRing.{max v w} R)
+        (N : PresheafOfModulesOfCommRing.{max v w} S)
+        (g : M ⟶ (PresheafOfModulesOfCommRing.restrictScalars α.hom).obj N)
+        (U : (TopologicalSpace.Opens X)ᵒᵖ)
         (b : B.presheaf.obj U) (m : M.obj U),
         ((e M N).symm g).app U
             ((q M U).hom (b ⊗ₜ[A.presheaf.obj U,(α.hom.app U).hom] m)) =
           b • (show N.obj U from g.app U m)) ∧
-      (∀ (M M' : PresheafOfModules.{max v w} R) (N : PresheafOfModules.{max v w} S)
+      (∀ (M M' : PresheafOfModulesOfCommRing.{max v w} R)
+        (N : PresheafOfModulesOfCommRing.{max v w} S)
         (f : M ⟶ M') (h : T.obj M' ⟶ N),
         e M N (T.map f ≫ h) = f ≫ e M' N h) ∧
-      (∀ (M : PresheafOfModules.{max v w} R) (N N' : PresheafOfModules.{max v w} S)
+      (∀ (M : PresheafOfModulesOfCommRing.{max v w} R)
+        (N N' : PresheafOfModulesOfCommRing.{max v w} S)
         (β : N ⟶ N') (h : T.obj M ⟶ N),
-        e M N' (h ≫ β) = e M N h ≫ (restrictScalars a).map β) := by
+        e M N' (h ≫ β) = e M N h ≫ (PresheafOfModulesOfCommRing.restrictScalars α.hom).map β) := by
   let e := tensorHomEquiv X A B α
   have hn : ∀ M N N' (β : N ⟶ N') (h : tensorPresheaf X A B α M ⟶ N),
-      e M N' (h ≫ β) = e M N h ≫ (restrictScalars a).map β := by
+      e M N' (h ≫ β) = e M N h ≫ (PresheafOfModulesOfCommRing.restrictScalars α.hom).map β := by
     intros
     rfl
   let T := Adjunction.leftAdjointOfEquiv e hn
-  have ht (M M' : PresheafOfModules.{max v w} R) (f : M ⟶ M')
+  have ht (M M' : PresheafOfModulesOfCommRing.{max v w} R) (f : M ⟶ M')
       (U : (TopologicalSpace.Opens X)ᵒᵖ) (b : B.presheaf.obj U) (m : M.obj U) :
       (T.map f).app U (b ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] m) =
         b ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] (f.app U m) := by

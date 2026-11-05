@@ -5,12 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # The internal hom of presheaves of modules
@@ -52,8 +52,6 @@ If `N` is a sheaf, then so is `homObj M N`: this is `PresheafOfModules.isSheaf_h
 
 @[expose] public section
 
-set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
-
 universe v v₁ v₂ u₁ u₂ u
 
 open CategoryTheory Opposite
@@ -63,7 +61,7 @@ namespace PresheafOfModules
 section SectionsSMul
 
 variable {D : Type u₂} [Category.{v₂} D] {S : Dᵒᵖ ⥤ CommRingCat.{u}}
-  (N : PresheafOfModules.{v} (S ⋙ forget₂ _ _))
+  (N : PresheafOfModulesOfCommRing.{v} S)
 
 /-- Multiplication by a compatible family `s` of sections of a presheaf of commutative rings
 `S`, as an endomorphism of a presheaf of modules over `S`. -/
@@ -98,7 +96,7 @@ s • ·      s • ·
 ```
 -/
 @[reassoc]
-lemma sectionsSMul_naturality {N' : PresheafOfModules.{v} (S ⋙ forget₂ _ _)} (g : N ⟶ N')
+lemma sectionsSMul_naturality {N' : PresheafOfModulesOfCommRing.{v} S} (g : N ⟶ N')
     (s : RingCat.sectionsSubring (S ⋙ forget₂ _ RingCat)) :
     g ≫ sectionsSMul N' s = sectionsSMul N s ≫ g := by
   ext X x
@@ -111,11 +109,11 @@ variable {C : Type u₁} [Category.{v₁} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
 variable (R) in
 /-- The restriction of presheaves of modules to `Over U`. -/
 noncomputable def restrictOver (U : C) :
-    PresheafOfModules.{v} (R ⋙ forget₂ _ _) ⥤
-      PresheafOfModules.{v} (((Over.forget U).op ⋙ R) ⋙ forget₂ _ _) :=
-  pushforward₀OfCommRingCat (Over.forget U) R
+    PresheafOfModulesOfCommRing.{v} R ⥤
+      PresheafOfModulesOfCommRing.{v} ((Over.forget U).op ⋙ R) :=
+  PresheafOfModulesOfCommRing.pushforward₀ (Over.forget U) R
 
-variable {U : C} {M N : PresheafOfModules.{v} (R ⋙ forget₂ _ _)}
+variable {U : C} {M N : PresheafOfModulesOfCommRing.{v} R}
 
 @[simp]
 lemma restrictOver_obj_obj (W : (Over U)ᵒᵖ) :
@@ -241,7 +239,7 @@ variable (M N)
 
 /-- The internal hom presheaf of modules `U ↦ Hom_{R|_U}(M|_U, N|_U)`. -/
 @[simps obj]
-noncomputable def homObj : PresheafOfModules.{max u₁ v₁ v} (R ⋙ forget₂ _ _) where
+noncomputable def homObj : PresheafOfModulesOfCommRing.{max u₁ v₁ v} R where
   obj X := ModuleCat.of (R.obj (op X.unop))
     ((restrictOver R X.unop).obj M ⟶ (restrictOver R X.unop).obj N)
   map {X Y} g := ModuleCat.ofHom
@@ -272,7 +270,7 @@ noncomputable def homObjSectionsEquiv : (homObj M N).sections ≃ (M ⟶ N) wher
       naturality {X Y} f := by
         ext x
         have h := naturality_apply (s.1 X) (Over.homMk f.unop : Over.mk f.unop ⟶ Over.mk (𝟙 _)).op x
-        simp only [restrictOver_obj_map_apply] at h
+        simp only at h
         rw [← s.2 f]
         exact (restrictOver_hom_app_congr (s.1 X) (Category.id_comp f.unop) _).trans h }
   invFun φ := sectionsMk (fun X ↦ (restrictOver R X.unop).map φ) (fun _ _ _ ↦ rfl)
@@ -283,7 +281,7 @@ noncomputable def homObjSectionsEquiv : (homObj M N).sections ≃ (M ⟶ N) wher
       (restrictOver_hom_app_congr (s.1 X) (Category.id_comp _) x)
   right_inv _ := rfl
 
-variable {M' N' : PresheafOfModules.{v} (R ⋙ forget₂ _ _)}
+variable {M' N' : PresheafOfModulesOfCommRing.{v} R}
 
 /-- The functoriality of `homObj M N`: contravariant in `M` and covariant in `N`. -/
 noncomputable def homObjMap (f : M' ⟶ M) (g : N ⟶ N') : homObj M N ⟶ homObj M' N' where
@@ -311,7 +309,7 @@ lemma homObjMap_id : homObjMap (𝟙 M) (𝟙 N) = 𝟙 (homObj M N) := by
   exact (Category.id_comp _).trans (Category.comp_id φ)
 
 @[reassoc (attr := simp)]
-lemma homObjMap_comp_homObjMap {M'' N'' : PresheafOfModules.{v} (R ⋙ forget₂ _ _)}
+lemma homObjMap_comp_homObjMap {M'' N'' : PresheafOfModulesOfCommRing.{v} R}
     (f : M' ⟶ M) (f' : M'' ⟶ M') (g : N ⟶ N') (g' : N' ⟶ N'') :
     homObjMap f g ≫ homObjMap f' g' = homObjMap (f' ≫ f) (g ≫ g') := by
   ext X : 1
@@ -321,7 +319,7 @@ lemma homObjMap_comp_homObjMap {M'' N'' : PresheafOfModules.{v} (R ⋙ forget₂
     (restrictOver R X.unop).map g) ≫ (restrictOver R X.unop).map g' =
       (restrictOver R X.unop).map (f' ≫ f) ≫ φ ≫ (restrictOver R X.unop).map (g ≫ g'))
 
-lemma homObjMap_comp {M'' N'' : PresheafOfModules.{v} (R ⋙ forget₂ _ _)} (f : M' ⟶ M)
+lemma homObjMap_comp {M'' N'' : PresheafOfModulesOfCommRing.{v} R} (f : M' ⟶ M)
     (f' : M'' ⟶ M') (g : N ⟶ N') (g' : N' ⟶ N'') :
     homObjMap (f' ≫ f) (g ≫ g') = homObjMap f g ≫ homObjMap f' g' :=
   (homObjMap_comp_homObjMap f f' g g').symm
@@ -331,9 +329,9 @@ variable (R) in
 `M` and covariant in `N`. -/
 @[simps]
 noncomputable def homFunctor :
-    (PresheafOfModules.{v} (R ⋙ forget₂ _ _))ᵒᵖ ⥤
-      PresheafOfModules.{v} (R ⋙ forget₂ _ _) ⥤
-        PresheafOfModules.{max u₁ v₁ v} (R ⋙ forget₂ _ _) where
+    (PresheafOfModulesOfCommRing.{v} R)ᵒᵖ ⥤
+      PresheafOfModulesOfCommRing.{v} R ⥤
+        PresheafOfModulesOfCommRing.{max u₁ v₁ v} R where
   obj M :=
     { obj N := homObj M.unop N
       map g := homObjMap (𝟙 M.unop) g }
@@ -345,13 +343,13 @@ open MonoidalCategory
 
 variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
 
-variable {M P N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+variable {M P N : PresheafOfModulesOfCommRing.{u} R}
 
 variable (M) in
 /-- The morphism `M(X) ⟶ (M ⊗ P)(X)` sending `m` to `m ⊗ p`, for a section `p` of `P` over
 `X`. -/
 noncomputable def tmulRight {X : Cᵒᵖ} (p : P.obj X) : M.obj X ⟶ (M ⊗ P).obj X :=
-  ModuleCat.ofHom ((TensorProduct.mk (R.obj X) (M.obj X) (P.obj X)).flip p)
+  ModuleCat.ofHom (Y := (M ⊗ P).obj X) ((TensorProduct.mk (R.obj X) (M.obj X) (P.obj X)).flip p)
 
 @[simp]
 lemma tmulRight_apply {X : Cᵒᵖ} (p : P.obj X) (m : M.obj X) :
@@ -370,8 +368,8 @@ noncomputable def tensorHomCurryApp (φ : M ⊗ P ⟶ N) {U : C} (p : P.obj (op 
       (naturality_apply φ f.unop.left.op (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p))
     refine (congrArg (fun q : P.obj (op W'.unop.left) ↦
       M.map f.unop.left.op m ⊗ₜ[R.obj (op W'.unop.left)] q) ?_).trans
-        (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
-    rw [← map_comp_apply, ← op_comp, Over.w]
+        (PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
+    rw [← PresheafOfModulesOfCommRing.map_comp_apply, ← op_comp, Over.w]
 
 @[simp]
 lemma tensorHomCurryApp_app_apply (φ : M ⊗ P ⟶ N) {U : C} (p : P.obj (op U))
@@ -403,7 +401,8 @@ lemma tensorHomCurryApp_map (φ : M ⊗ P ⟶ N) {U V : C} (g : V ⟶ U) (p : P.
     tensorHomCurryApp (U := V) φ (P.map g.op p) = restrictOverMap g (tensorHomCurryApp φ p) := by
   ext W : 1
   refine ModuleCat.hom_ext (LinearMap.ext fun (m : M.obj (op W.unop.left)) ↦ ?_)
-  rw [restrictOverMap_app, tensorHomCurryApp_app_apply, ← map_comp_apply]
+  rw [restrictOverMap_app, tensorHomCurryApp_app_apply,
+    ← PresheafOfModulesOfCommRing.map_comp_apply]
   rfl
 
 /-- Auxiliary definition for `homObjEquiv`: the morphism `P ⟶ homObj M N` corresponding to a
@@ -462,16 +461,14 @@ lemma tensorHomUncurry_app_tmul (ψ : P ⟶ homObj M N) (X : Cᵒᵖ) (m : M.obj
 morphisms `P ⟶ homObj M N`. A morphism `φ : M ⊗ P ⟶ N` is sent to the morphism which sends a
 section `p` of `P` over `U` to `m ↦ φ (m ⊗ p|_W)` for `W ⟶ U` and `m` a section of `M` over
 `W`. -/
-noncomputable def homObjEquiv (M P N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)) :
+noncomputable def homObjEquiv (M P N : PresheafOfModulesOfCommRing.{u} R) :
     (M ⊗ P ⟶ N) ≃ (P ⟶ homObj M N) where
   toFun := tensorHomCurry
   invFun := tensorHomUncurry
   left_inv φ := by
     ext X : 1
     refine ModuleCat.MonoidalCategory.tensor_ext fun m p ↦ ?_
-    refine congrArg (fun q : P.obj X ↦ φ.app X (m ⊗ₜ[R.obj X] q)) (?_ : P.map (𝟙 X) p = p)
-    rw [map_id]
-    rfl
+    refine congrArg (fun q : P.obj X ↦ φ.app X (m ⊗ₜ[R.obj X] q)) (P.map_id_apply X p)
   right_inv ψ := by
     ext X : 1
     refine ModuleCat.hom_ext (LinearMap.ext fun (p : P.obj X) ↦ ?_)
@@ -484,7 +481,7 @@ noncomputable def homObjEquiv (M P N : PresheafOfModules.{u} (R ⋙ forget₂ _ 
     exact restrictOver_hom_app_congr (ψ.app X p) (Category.id_comp W.unop.hom) m
 
 /-- The tensor-hom adjunction `homObjEquiv` is natural in the second factor. -/
-lemma homObjEquiv_whiskerLeft_comp {M P P' N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+lemma homObjEquiv_whiskerLeft_comp {M P P' N : PresheafOfModulesOfCommRing.{u} R}
     (f : P ⟶ P') (φ : M ⊗ P' ⟶ N) :
     homObjEquiv M P N (M ◁ f ≫ φ) = f ≫ homObjEquiv M P' N φ := by
   ext X : 1
@@ -492,6 +489,8 @@ lemma homObjEquiv_whiskerLeft_comp {M P P' N : PresheafOfModules.{u} (R ⋙ forg
   refine hom_ext (M₁ := (restrictOver R X.unop).obj M) (M₂ := (restrictOver R X.unop).obj N)
     fun W ↦ ?_
   refine ModuleCat.hom_ext (LinearMap.ext fun (m : M.obj (op W.unop.left)) ↦ ?_)
+  change φ.app (op W.unop.left) (m ⊗ₜ[R.obj (op W.unop.left)] f.app _ (P.map W.unop.hom.op p)) =
+    φ.app (op W.unop.left) (m ⊗ₜ[R.obj (op W.unop.left)] P'.map W.unop.hom.op (f.app X p))
   exact congrArg (fun q : P'.obj (op W.unop.left) ↦
     φ.app (op W.unop.left) (m ⊗ₜ[R.obj (op W.unop.left)] q)) (naturality_apply f W.unop.hom.op p)
 

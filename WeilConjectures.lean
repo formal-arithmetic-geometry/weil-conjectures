@@ -17571,6 +17571,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Change
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
