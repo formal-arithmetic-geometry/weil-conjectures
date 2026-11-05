@@ -172,8 +172,9 @@ theorem isUnit_eval₂_slope' [IsAlgClosed (ResidueField R)] (hq : q.natDegree �
     IsUnit (p.eval₂ (toStrict g x y) (slope' g x y)) := by
   have := finite_strictTransform hq hg hu
   by_contra hnu
-  obtain ⟨N, hN, hpN⟩ := Ideal.exists_le_maximal (Ideal.span {p.eval₂ (toStrict g x y)
-    (slope' g x y)}) (by rwa [Ne, Ideal.span_singleton_eq_top])
+  obtain ⟨N, hN, hpN⟩ := Ideal.exists_le_maximal
+    (Ideal.span {p.eval₂ (toStrict g x y) (slope' g x y)})
+    (by rwa [Ne, Ideal.span_singleton_eq_top])
   rw [Ideal.span_le, Set.singleton_subset_iff] at hpN
   let F := strictTransform g x y ⧸ N
   let : Field F := Ideal.Quotient.field N
