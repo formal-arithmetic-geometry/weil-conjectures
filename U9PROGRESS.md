@@ -1,3 +1,18 @@
+# BZ569 in progress
+
+- Branch: `u9/BZ569`; assigned module: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReduction`.
+- Removed the redundant `rfl` after `simp` in the short-exactness proof.
+- First remote build stopped in the BZ581-owned prerequisite `Presheaf.InternalHom`.
+- The user instructed continuation after the concrete prerequisite-fix proposal.
+  Incorporated the owner's identical repair `216c997cc4f` as `d63827975` with provenance.
+- Reused the KFlat prerequisite repair from BZ558 commit `cba570747cc` as `809822403`;
+  BZ558's build diagnosed the same compatibility error, and KFlat is in our import closure.
+- The retry exposed the identical error in `KFlatResolutionIndependentCoefficients`;
+  reused that hunk from the same published commit as `f21a10b88`.
+- Next: validate the assigned module, then four direct importers and a second layer.
+- Fix patterns, occurrence counts, and logs: `/home/ubuntu/u9/bz/FIXES-BZ569.md`.
+- No local Lean/Lake, statement changes, proof placeholders, or heartbeat increases.
+
 # BZ133 complete
 
 - Branch: `u9/BZ133`.
@@ -141,38 +156,3 @@
 - Existing `ucheck-bump` invocation is queued; it reads the pushed branch after
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-# BZ566 in progress
-
-- Branch: `u9/BZ566`; starting commit: `8af5cb3248`.
-- The user instructed continuation after the explicit two-private-helper API proposal.
-  The compositor orientation edits and matching inverse cancellation are now applied.
-- Baseline `ucheck-bump` stopped before the target in `Presheaf.InternalHom`, assigned to BZ581.
-- Next: resolve the upstream build dependency, remotely validate the assigned module,
-  then build its two direct importers and the next layer.
-- Notes and logs: `/home/ubuntu/u9/bz/FIXES-BZ566.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-
-# BZ549 in progress
-
-- Branch: `u9/BZ549`; owned module: `GlobalSectionsDirectImageKInjectiveAcyclic`.
-- Owned import fix pushed at `d5e8c22c2`: publicly import `ChangeOfRingsExact`.
-- The user instructed continuation after the explicit one-line dependency proposal.
-  Applied the compatibility tensor-map lemma in `Presheaf.InternalHom`.
-- Re-read the brief and refreshed coordinator notes; latest integrated branch is `8af5cb324`.
-- Next: remote validation, first importer `DerivedGlobalSectionsAffinizationComparison`,
-  then second layer `DerivedGlobalSectionsPreservesCoproducts`.
-- Fixes and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ549.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-
-# BZ557 in progress
-
-- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
-- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
-- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
-- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
-- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
-  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
-- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
-- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
