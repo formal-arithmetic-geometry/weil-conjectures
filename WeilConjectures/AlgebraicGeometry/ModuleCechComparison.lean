@@ -51,7 +51,11 @@ universe u
 
 private local instance (R : Type u) [Ring R] :
     HasProducts.{u} (ModuleCat.{u} R) :=
-  ModuleCat.hasLimits
+  fun _ ↦ ModuleCat.hasLimitsOfShape
+
+private local instance (R : Type u) [Ring R] :
+    HasProducts.{0} (ModuleCat.{u} R) :=
+  fun _ ↦ ModuleCat.hasLimitsOfShape
 
 /-- The Čech complex of the presheaf of `Γ(X, ⊤)`-modules underlying an `O_X`-module is
 additive in the module. Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison).
