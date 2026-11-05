@@ -8,7 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Canonical base change for a module in degree zero
 
@@ -55,16 +56,11 @@ def IsDerivedModulePullbackComparison
     (derivedPullback a).IsLeftDerivedFunctor ε
         (HomotopyCategory.quasiIso
           (SheafOfModules.{uMB} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) ∧
-      c = (derivedPullback a).map ((DerivedCategory.singleFunctorIsoCompQh
-          (SheafOfModules.{uMB} (moduleRings Y.toRingedSpace)) 0).hom.app G) ≫
-        ε.app ((HomotopyCategory.singleFunctor
+      c = cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor
             (SheafOfModules.{uMB} (moduleRings Y.toRingedSpace)) 0).obj G) ≫
         DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
           ((HomologicalComplex.singleMapHomologicalComplex
-            (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) 0).hom.app G)) ≫
-        (DerivedCategory.singleFunctorIsoCompQh
-          (SheafOfModules.{uMB} (moduleRings X.toRingedSpace)) 0).inv.app
-            ((Scheme.Modules.tensorPullback a).obj G)
+            (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) 0).hom.app G)))
 
 /-- `φ` is the canonical module base-change map `Lg^*Rf_*(G[0]) ⟶ Rf_{T,*}((g_X^*G)[0])`:
 the derived base-change map of the chosen fibre square followed by the derived direct

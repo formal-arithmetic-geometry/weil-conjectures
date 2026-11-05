@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Transport of a module pullback comparison across a scheme isomorphism
@@ -153,29 +155,23 @@ theorem exists_modulePullbackComparison_iso_transport
       ((Scheme.Modules.tensorPullback a).obj G) :=
     DerivedCategory.Qh.mapIso ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).mapIso
       ((HomologicalComplex.singleMapHomologicalComplex
-        (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) 0).app G)) ≪≫
-      (DerivedCategory.singleFunctorIsoCompQh Y.Modules 0).symm.app
-        ((Scheme.Modules.tensorPullback a).obj G)
+        (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) 0).app G))
   let bp : Fp.obj S ≅ (DerivedCategory.singleFunctor P.Modules 0).obj
       ((Scheme.Modules.tensorPullback p).obj G) :=
     DerivedCategory.Qh.mapIso ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).mapIso
       ((HomologicalComplex.singleMapHomologicalComplex
-        (Scheme.Modules.tensorPullback p) (ComplexShape.up ℤ) 0).app G)) ≪≫
-      (DerivedCategory.singleFunctorIsoCompQh P.Modules 0).symm.app
-        ((Scheme.Modules.tensorPullback p).obj G)
-  let s := (DerivedCategory.singleFunctorIsoCompQh X.Modules 0).hom.app G
-  let d := (derivedPullback p).map s ≫ εp.app S ≫ bp.hom
+        (Scheme.Modules.tensorPullback p) (ComplexShape.up ℤ) 0).app G))
+  let d := εp.app S ≫ bp.hom
   let m := U.mapIso ba.symm ≪≫ t.app S ≪≫ bp
   refine ⟨d, ⟨εp, hεp, rfl⟩, m, ?_⟩
-  change U.map c ≫ m.hom = j.hom.app _ ≫ d
-  change c = (derivedPullback a).map s ≫ ε.app S ≫ ba.hom at hc
+  change U.map c ≫ m.hom = j.hom.app (DerivedCategory.Qh.obj S) ≫ d
+  change c = ε.app S ≫ ba.hom at hc
   rw [hc, Functor.map_comp]
   simp only [m, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc]
   rw [← U.map_comp_assoc ba.hom ba.inv, ba.hom_inv_id, U.map_id, Category.id_comp]
   simp only [Functor.comp_obj, Iso.app_hom, Category.assoc, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app,
     Iso.hom_inv_id_app_assoc, d, εp, α]
-  rw [← Category.assoc, ← j.hom.naturality s]
-  simp only [Functor.comp_map, Category.assoc, Iso.hom_inv_id_app_assoc]
+  exact (Category.id_comp _).symm
 
 end AlgebraicGeometry
