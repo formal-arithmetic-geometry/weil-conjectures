@@ -168,3 +168,17 @@
 - No local Lean/Lake execution, sorries, proof shortcuts, heartbeat increases, or profiler probes.
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
+
+
+# BZ616 in progress
+
+- Branch: `u9/BZ616`; starting commit: `b7a97a5ed`.
+- Reread the brief and existing progress notes on user continuation; no new LEAD lines.
+- The user instructed continuation after the exact one-token statement correction proposal.
+  Applied `.hom` -> `.inv` in private `derivedComposition_fac`, preserving its original
+  map under Mathlib's reversed composition comparison. Other statement types and docstrings
+  are unchanged. Comparison construction and cancellation proof use the new orientation.
+- Existing `ucheck-bump` invocation is queued; it reads the pushed branch after acquiring a tree.
+- Next: validate the assigned module, then check up to four direct importers and another layer.
+- Fix patterns, whole-tree counts, and archived diagnostics: `/home/ubuntu/u9/bz/FIXES-BZ616.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or heartbeat increases.
