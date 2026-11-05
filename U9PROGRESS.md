@@ -142,21 +142,22 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ540 in progress
+# BZ540 complete
 
-- Branch: `u9/BZ540`; owned module:
-  `WeilConjectures.CategoryTheory.Constant.ConstantDerivedNormalizationUniversalSupplement`.
-- Applied known BZ301 sheafification-instance exclusion before `constantSeed`.
-  All declaration statements and existing proofs are unchanged.
-- Imported dependency owners' fixes: BZ581 `216c997cc` for Presheaf.InternalHom,
-  BZ549 `cbe4e4143` for Algebra.Homology.KFlat, plus coordinator baseline `8af5cb324`.
-- Fresh ucheck on 2026-11-06 reached KFlat, where the second owner repair was needed.
-  Build with both repairs is now submitted. Do not mark DONE before assigned module is green.
-- Next: finish assigned validation, then check direct importers
-  `WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizationArrowUniversal` and
-  `WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerScalarRestriction`.
-- Fix log: `/home/ubuntu/u9/bz/FIXES-BZ540.md`.
-- No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
-- Third validation cleared InternalHom and KFlat, then exposed the same tensor compatibility
-  rewrite in KFlatResolutionIndependentCoefficients. Cherry-picked owner repair
-  `fdf535299dfaebeb9014accdc88ae44909a579f7` as `e8639a47d`; next checker is submitted.
+- Branch: `u9/BZ540`; starting commit: `29f3a8d81`.
+- Assigned module `WeilConjectures.CategoryTheory.Constant.ConstantDerivedNormalizationUniversalSupplement`
+  passed `ucheck-bump`: rc=0, built=9, failed=0, 3811 jobs.
+- Validated source commit: `e65cfc0cfe`; tree `poolb:43.157.184.90`.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ540-owned-green.log`.
+- Only authored Lean change: exclude the successor-universe sheafification instance before
+  `constantSeed`. All owned statements, proofs, and docstrings match the starting file.
+- Reused validated dependency repairs from BZ581, BZ549, and BZ558; their tensor compatibility
+  changes are recorded in `/home/ubuntu/u9/bz/FIXES-BZ540.md`.
+- Both direct importers were attempted; skipped because of unowned dependency failures in
+  DerivedMorphismSheafComparison (BZ513), KFlatResolutionGeneral (BZ116), and
+  RingedTopoiDerivedPullback (BZ554), and HomTensorPair (BZ92). No second layer or downstream edits.
+- Owned module also rebuilt green at `2ba35ef7bd` in the downstream batch.
+- Contract audit: `/home/ubuntu/u9/bz/BZ540-contract-audit.txt`.
+- No local Lean/Lake, sorries, admissions, trust bypasses, or heartbeat increases.
+- Completion marker: `/home/ubuntu/u9/state/BZ540.DONE`.
+- This completion commit changes only progress documentation; Lean sources match the green build.
