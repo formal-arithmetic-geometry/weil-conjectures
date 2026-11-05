@@ -105,3 +105,15 @@
 - No local Lean/Lake execution, sorries, forbidden proof shortcuts, or limit increases.
 - Completion marker: `/home/ubuntu/u9/state/BZ311.DONE`.
 - This final commit changes only progress documentation; Lean sources match the green build.
+
+# BZ395 in progress
+
+- Branch: `u9/BZ395`; baseline commit: `9bc0d70a6`.
+- Owned module: `WeilConjectures.AlgebraicGeometry.ProfinitePointPullback`.
+- Baseline remote build found five errors in three statement headers.
+- The user instructed continuation after the exact API-only statement patch proposal.
+  Applied that patch: use the reversed Mathlib compositor and repair two misplaced
+  `.symm` projections, preserving the intended maps.
+- Validating via `ucheck-bump`, then continuing the requested downstream layers.
+- Fix patterns, exact errors, and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ395.md`.
+- No local Lean/Lake execution, proof placeholders, trust bypasses, or limit increases.

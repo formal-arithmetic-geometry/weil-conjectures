@@ -1046,12 +1046,12 @@ private lemma derivedAssociativity
     (h : c₀ ≪≫ isoWhiskerLeft F c₁ = eqToIso w ≪≫ c₂ ≪≫ isoWhiskerRight c₃ H)
     (M : DerivedCategory C) :
     (mapDerivedCategoryNatIso c₀).hom.app M ≫
-        (mapDerivedCategoryCompIso F Q).hom.app M ≫
+        (mapDerivedCategoryCompIso F Q).inv.app M ≫
         ((mapDerivedCategoryNatIso c₁).hom.app (F.mapDerivedCategory.obj M) ≫
-          (mapDerivedCategoryCompIso G H).hom.app (F.mapDerivedCategory.obj M)) =
+          (mapDerivedCategoryCompIso G H).inv.app (F.mapDerivedCategory.obj M)) =
       (eqToHom (show R'.mapDerivedCategory = R.mapDerivedCategory by cases w; rfl)).app M ≫
         (mapDerivedCategoryNatIso c₂).hom.app M ≫
-        (mapDerivedCategoryCompIso P H).hom.app M ≫
+        (mapDerivedCategoryCompIso P H).inv.app M ≫
         H.mapDerivedCategory.map ((mapDerivedCategoryNatIso c₃).hom.app M ≫
           (mapDerivedCategoryCompIso F G).inv.app M) := by
   subst R'
@@ -1151,14 +1151,14 @@ theorem profinite_point_pullback_abelianderived_coherence
           (eqToHom (congrArg (fun k : X' ⟶ Y ↦ (upperStar Ab.{u + 1} k).mapDerivedCategory)
             w)).app M ≫
           (profinitePointAbelianDerivedComp f' g).hom.app M =
-        ((Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} f)).symm (upperStar Ab.{u + 1}
-          b)).inv.app M ≫
+        (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} f) (upperStar Ab.{u + 1}
+          b)).hom.app M ≫
           (Functor.mapDerivedCategoryNatIso
             ((upperStarComp Ab.{u + 1} b f).symm ≪≫
               eqToIso (congrArg (fun k : X' ⟶ Y ↦ (upperStar Ab.{u + 1} k)) w) ≪≫
               (upperStarComp Ab.{u + 1} f' g))).hom.app M ≫
           (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1}
-            f')).hom.app M) := by
+            f')).inv.app M) := by
   refine ⟨?_, ?_, ?_, ?_⟩
   · intro X Y f M
     have h : upperStarComp Ab.{u + 1} (𝟙 X) f ≪≫
@@ -1302,14 +1302,14 @@ theorem profinite_point_pullback_modulederived_coherence
           (eqToHom (congrArg (fun k : X' ⟶ Y ↦ (CondensedRing.upperStar Λ k).mapDerivedCategory)
             w)).app M ≫
           (profinitePointModuleDerivedComp Λ f' g).hom.app M =
-        ((Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ f)).symm (CondensedRing.upperStar
-          Λ b)).inv.app M ≫
+        (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ f) (CondensedRing.upperStar
+          Λ b)).hom.app M ≫
           (Functor.mapDerivedCategoryNatIso
             ((CondensedRing.upperStarComp Λ b f).symm ≪≫
               eqToIso (congrArg (fun k : X' ⟶ Y ↦ (CondensedRing.upperStar Λ k)) w) ≪≫
               (CondensedRing.upperStarComp Λ f' g))).hom.app M ≫
           (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
-            (CondensedRing.upperStar Λ f')).hom.app M) := by
+            (CondensedRing.upperStar Λ f')).inv.app M) := by
   refine ⟨?_, ?_, ?_, ?_⟩
   · intro X Y f M
     have h : CondensedRing.upperStarComp Λ (𝟙 X) f ≪≫
