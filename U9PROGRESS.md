@@ -155,3 +155,14 @@
   AffineBasisSectionsDerivedUnit; then write DONE with every green module and PATTERN/ERROR pairs.
 - Detailed patterns, counts, and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ538.md`.
 - No local Lean/Lake, proof placeholders, statement changes, trust bypasses, or heartbeat increases.
+
+# BZ546 resumed
+
+- Branch: `u9/BZ546`; assigned module: `FiniteComparison.LowerStar`.
+- The owned compositor corrections were already integrated in `d30a09bfb`.
+- The initial two remote builds stopped in the unowned `Presheaf.InternalHom` dependency.
+- Imported the shared repair from BZ538, commit `e346fa32d2a`, using the compatibility
+  tensor formula. Its provenance is retained by `git cherry-pick -x`.
+- Next: validate LowerStar through `ucheck-bump`, then up to four direct importers.
+- Build logs and patterns: `/home/ubuntu/u9/bz/FIXES-BZ546.md`.
+- No local Lean/Lake execution, statement changes, proof placeholders, or heartbeat increases.
