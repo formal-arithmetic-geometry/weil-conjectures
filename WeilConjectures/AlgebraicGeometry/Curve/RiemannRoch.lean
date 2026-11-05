@@ -127,8 +127,7 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
   let m : Γ(M, ⊤) := e y
   have hm : m ≠ 0 := fun h ↦ hy (e.injective (h.trans e.map_zero.symm))
   let σ : M.sections := PresheafOfModules.sectionsMk
-    (fun W ↦ PresheafOfModulesOfCommRing.map (R := X.sheaf) M.val
-      (homOfLE le_top : W.unop ⟶ ⊤).op m)
+    (fun W ↦ M.val.map (homOfLE le_top : W.unop ⟶ ⊤).op m)
     (fun W _ f ↦ (ConcreteCategory.congr_hom (M.val.map_comp
         (homOfLE le_top : W.unop ⟶ ⊤).op f) _).symm)
   refine ⟨M.unitHomEquiv.symm σ, fun h ↦ hm ?_⟩
@@ -136,8 +135,7 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
   rw [h] at h1
   rw [SheafOfModules.unitHomEquiv_apply_coe] at h1
   have h2 : SheafOfModules.Hom.val (0 : 𝟙_ X.Modules ⟶ M) = 0 := rfl
-  replace h1 : PresheafOfModulesOfCommRing.map (R := X.sheaf) M.val
-      (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤).op m = 0 := h1.symm
+  replace h1 : M.val.map (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤).op m = 0 := h1.symm
   rw [show (homOfLE le_top : (⊤ : X.Opens) ⟶ ⊤) = 𝟙 _ from Subsingleton.elim _ _, op_id,
     M.val.map_id] at h1
   exact h1
@@ -993,7 +991,8 @@ theorem finrankH_relativeDifferentials_zero_eq_arithmeticGenus
   obtain ⟨e⟩ := serreDuality (k := k) (X := X) 0 1 rfl
   obtain ⟨d⟩ := Modules.nonempty_dual_unit_iso (X := X)
   let 𝒪 : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory :=
-    ⟨SheafOfModules.unit X.ringCatSheaf, inferInstance⟩
+    ⟨SheafOfModules.unit X.ringCatSheaf,
+      inferInstanceAs (SheafOfModules.IsFiniteLocallyFree (SheafOfModules.unit X.ringCatSheaf))⟩
   have h : Module.finrank k (Module.Dual k (Modules.H (X := X) 𝒪.obj 1)) =
       Modules.finrankH k (𝒪.objᵛ ⊗ (X ↘ Spec (.of k)).relativeDifferentials) 0 :=
     (e.app (op 𝒪)).toLinearEquiv.finrank_eq
@@ -1370,7 +1369,8 @@ theorem degree_relativeDifferentials [GlobalSectionsBijective k X] :
   obtain ⟨e⟩ := serreDuality (k := k) (X := X) 1 0 rfl
   obtain ⟨d⟩ := Modules.nonempty_dual_unit_iso (X := X)
   let 𝒪 : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory :=
-    ⟨SheafOfModules.unit X.ringCatSheaf, inferInstance⟩
+    ⟨SheafOfModules.unit X.ringCatSheaf,
+      inferInstanceAs (SheafOfModules.IsFiniteLocallyFree (SheafOfModules.unit X.ringCatSheaf))⟩
   have h : Module.finrank k (Module.Dual k (Modules.H (X := X) (show X.Modules from 𝒪.obj) 0)) =
       Modules.finrankH k (𝒪.objᵛ ⊗ (X ↘ Spec (.of k)).relativeDifferentials) 1 :=
     (e.app (op 𝒪)).toLinearEquiv.finrank_eq
