@@ -4,9 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.WeilSheaf.SmoothPurityTateGeometricPair
-public import WeilConjectures.WeilSheaf.TateTwistCondensedBridge
-import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.WeilSheaf.SmoothPurityTatePairNames
 
 /-! # The Tate datum from finite-base descent is the canonical root datum -/
 
@@ -33,10 +31,8 @@ attribute [local instance] neZero_natCast_algebraicClosure
 noncomputable def purity_geometricFiberWeilLowerStarTateNatIso (d : ℕ) :
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ)
         (X ↘ Spec (.of k₀))).obj (tateTwistNat X ℓ d) ≅
-      tateTwistLowerPair k₀ ℓ X d := by
-  apply Classical.choice
-  dsimp only [tateTwistLowerPair, geometricFiberFrobeniusIso,
-    frobeniusUpperStarIsoLowerStarInv]
-  cast_proofs Nonempty.intro (purity_geometricTatePairIso ℓ (X ↘ Spec (.of k₀)) d)
+      tateTwistLowerPair k₀ ℓ X d :=
+  purity_geometricTateInterfacePairIso ℓ (X ↘ Spec (.of k₀)) d ≪≫
+    eqToIso (purityTateRootPair_eq_lowerPair k₀ ℓ X d)
 
 end AlgebraicGeometry.WeilSheaf
