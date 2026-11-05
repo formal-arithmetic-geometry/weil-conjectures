@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIsomorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
@@ -37,26 +38,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
-
-namespace CategoryTheory.Functor
-
-variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D] [HasDerivedCategory C]
-  [HasDerivedCategory D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
-  [PreservesFiniteColimits F] [F.ReflectsIsomorphisms]
-
-/-- An exact functor reflecting isomorphisms induces a functor on derived categories reflecting
-isomorphisms: a morphism is an isomorphism iff it is one on all homology objects, and
-`F.mapDerivedCategory` commutes with homology. -/
-instance reflectsIsomorphisms_mapDerivedCategory : F.mapDerivedCategory.ReflectsIsomorphisms where
-  reflects f _ := by
-    rw [DerivedCategory.isIso_iff]
-    intro n
-    have : IsIso (F.map ((DerivedCategory.homologyFunctor C n).map f)) :=
-      (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso n) f).2
-        (by rw [Functor.comp_map]; infer_instance)
-    exact isIso_of_reflects_iso _ F
-
-end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
