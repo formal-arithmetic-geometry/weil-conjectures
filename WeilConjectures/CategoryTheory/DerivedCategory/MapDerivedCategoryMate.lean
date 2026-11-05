@@ -69,8 +69,8 @@ variable {A B B' E : Type*} [Category A] [Category B] [Category B'] [Category E]
 noncomputable abbrev mapDerivedCategorySquareIso (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) :
     F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ≅
       G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso F₁ F₂).symm ≪≫ mapDerivedCategoryNatIso e ≪≫
-    mapDerivedCategoryCompIso G₁ G₂
+  (mapDerivedCategoryCompIso F₁ F₂) ≪≫ mapDerivedCategoryNatIso e ≪≫
+    (mapDerivedCategoryCompIso G₁ G₂).symm
 
 /-- On the image `Qh X` of an object of the homotopy category, the isomorphism
 `D(F₁) ⋙ D(F₂) ≅ D(G₁) ⋙ D(G₂)` induced by `e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂` is the image of the
@@ -125,7 +125,7 @@ variable {A B E : Type*} [Category A] [Category B] [Category E] [Abelian A] [Abe
 /-- The isomorphism `D(F₂) ≅ D(F₁) ⋙ D(G₁)` induced by `e : F₂ ≅ F₁ ⋙ G₁`. -/
 noncomputable abbrev mapDerivedCategoryTriangleIso (e : F₂ ≅ F₁ ⋙ G₁) :
     F₂.mapDerivedCategory ≅ F₁.mapDerivedCategory ⋙ G₁.mapDerivedCategory :=
-  mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryCompIso F₁ G₁
+  mapDerivedCategoryNatIso e ≪≫ (mapDerivedCategoryCompIso F₁ G₁).symm
 
 /-- On the image `Qh X` of an object of the homotopy category, the isomorphism
 `D(F₂) ≅ D(F₁) ⋙ D(G₁)` induced by `e : F₂ ≅ F₁ ⋙ G₁` is the image of the isomorphism induced
@@ -712,7 +712,7 @@ variable (G : D ⥤ E) (H : E ⥤ E') [G.Additive] [H.Additive]
 lemma mapDerivedCategoryCompIso_assoc :
     (mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
         Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryCompIso G H).hom =
-      (mapDerivedCategoryCompIso (F ⋙ G) H).hom ≫
+      (mapDerivedCategoryCompIso (F ⋙ G) H).inv ≫
         Functor.whiskerRight (mapDerivedCategoryCompIso F G).hom H.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
@@ -757,7 +757,7 @@ lemma mapDerivedCategoryNatIso_isoWhiskerRight {F F' : C ⥤ D} [F.Additive] [F'
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F'] (e : F ≅ F') (G : D ⥤ E)
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (mapDerivedCategoryNatIso (isoWhiskerRight e G)).hom ≫ (mapDerivedCategoryCompIso F' G).hom =
-      (mapDerivedCategoryCompIso F G).hom ≫
+      (mapDerivedCategoryCompIso F G).inv ≫
         Functor.whiskerRight (mapDerivedCategoryNatIso e).hom G.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)
@@ -776,7 +776,7 @@ lemma mapDerivedCategoryNatIso_isoWhiskerLeft (F : C ⥤ D) [F.Additive]
     [G'.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] (e : G ≅ G') :
     (mapDerivedCategoryNatIso (isoWhiskerLeft F e)).hom ≫ (mapDerivedCategoryCompIso F G').hom =
-      (mapDerivedCategoryCompIso F G).hom ≫
+      (mapDerivedCategoryCompIso F G).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (mapDerivedCategoryNatIso e).hom := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun K => ?_)

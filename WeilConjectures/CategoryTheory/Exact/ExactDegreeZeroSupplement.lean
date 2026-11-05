@@ -57,7 +57,7 @@ theorem comparison_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
   unfold comparison functor map obj
   change (G.mapDerivedCategorySingleFunctor 0).inv.app (F.obj M) ≫
     G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).inv.app M) ≫
-    (Functor.mapDerivedCategoryCompIso F G).inv.app _ ≫
+    (Functor.mapDerivedCategoryCompIso F G).hom.app _ ≫
     (Functor.mapDerivedCategoryNatIso e).hom.app _ =
     (DerivedCategory.singleFunctor X 0).map (e.hom.app M) ≫
       (H.mapDerivedCategorySingleFunctor 0).inv.app M
