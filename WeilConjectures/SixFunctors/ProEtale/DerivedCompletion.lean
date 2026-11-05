@@ -241,7 +241,6 @@ def levelUnit (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (n : ℕ
     ((rightUnitorNatIso (Modules l E X)).inv ≫
       (tensoringRight (Modules l E X)).map (finiteUnit l E X n)) (.up ℤ)).app P
 
-set_option diagnostics true in
 /-- The termwise product of the strict reduction tower of P.
 Source: blueprint, Roos model (blueprint: sk-def-pe-derived-completion). -/
 abbrev product (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) :=
