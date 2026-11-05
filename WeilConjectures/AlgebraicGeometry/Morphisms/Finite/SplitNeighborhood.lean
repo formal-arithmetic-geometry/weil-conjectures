@@ -201,7 +201,7 @@ theorem exists_hom_preimage_eq_bot (c : Nbhd y) (C : Set (pullback c.1.hom f : S
     refine h ⟨z'.1 ≫ pullback.snd U.hom f, ?_⟩ ?_
     · rw [Category.assoc, ← pullback.condition, ← Category.assoc, z'.2]
       exact CategoryTheory.Over.w u
-    · rw [basePt_eq_of_comp_fst_eq f ⟨U, u⟩ z'.1 z'.2, hz']
+    · rw [basePt_eq_of_comp_fst_eq f (Functor.elementsMk _ U u) z'.1 z'.2, hz']
       exact hzC
   -- the open neighbourhood `U' := U \ Z` of the marked point
   let U' : U.left.Opens := ⟨Zᶜ, hZc.isOpen_compl⟩
@@ -213,7 +213,8 @@ theorem exists_hom_preimage_eq_bot (c : Nbhd y) (C : Set (pullback c.1.hom f : S
   set u' := IsOpenImmersion.lift U'.ι u.left hrange with hu'
   have hu'ι : u' ≫ U'.ι = u.left := IsOpenImmersion.lift_fac _ _ _
   let θ : Scheme.Etale.mk (U'.ι ≫ U.hom) ⟶ U := MorphismProperty.Over.homMk U'.ι rfl
-  refine ⟨⟨Scheme.Etale.mk (U'.ι ≫ U.hom), CategoryTheory.Over.homMk u' ?_⟩,
+  refine ⟨Functor.elementsMk _ (Scheme.Etale.mk (U'.ι ≫ U.hom))
+    (CategoryTheory.Over.homMk u' ?_),
     Functor.Elements.homMk θ ?_, ?_⟩
   · change u' ≫ U'.ι ≫ U.hom = y
     rw [← Category.assoc, hu'ι]
@@ -287,7 +288,7 @@ pointed étale neighbourhoods of the geometric point `t` in `X`. -/
 @[simps]
 def pieceFunctor (t : GeometricFiber f y) : SplitNbhd f y ⥤ (pointSmallEtale t.1).fiber.Elements
     where
-  obj c := ⟨c.pieceObj t, c.piecePt t⟩
+  obj c := Functor.elementsMk _ (c.pieceObj t) (c.piecePt t)
   map {c c'} g := Functor.Elements.homMk (pieceMap g t) (by
     apply CategoryTheory.Over.OverMorphism.ext
     apply (cancel_mono (c'.piece t).ι).mp

@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 /-!
@@ -95,6 +96,9 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     apply DerivedCategory.Plus.ι.map_injective
     simp [mapHomotopyCategoryPlusSingleFunctorQhObjIso,
       DerivedCategory.Plus.quotientCompQhIso, s, S, SC]
+    change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
+    rw [Functor.map_preimage]
+    exact ((DerivedCategory.quotientCompQhIso C).inv.naturality _).symm
   have htarget :
       (DerivedCategory.Plus.ι.preimageIso
         (X := (DerivedCategory.Plus.singleFunctor B 0).obj Y)
@@ -104,21 +108,34 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
       (DerivedCategory.Plus.quotientCompQhIso B).hom.app S := by
     apply DerivedCategory.Plus.ι.map_injective
     simp [DerivedCategory.Plus.quotientCompQhIso, DerivedCategory.singleFunctorIsoCompQ, S]
+    change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
+    rw [Functor.map_preimage, Category.comp_id]
   have hsingleUnit : G.rightDerivedPlusSingleUnit Y =
       DerivedCategory.Plus.Q.map s ≫ G.rightDerivedFunctorPlusUnit.app S := by
     simp only [rightDerivedPlusSingleUnit, hsource, htarget,
       rightDerivedFunctorPlusUnit_app, quotientCompMapHomotopyCategoryPlusIso,
       Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.id_comp, Category.assoc]
+    erw [Functor.map_id]
+    rw [Category.id_comp]
   have : ∀ n, Injective (L.obj.X n) := fun n ↦
     inferInstanceAs (Injective (R.cochainComplex.X n))
   have : IsIso (G.rightDerivedFunctorPlusUnit.app L) := by
-    rw [rightDerivedFunctorPlusUnit_app]
-    infer_instance
+    let L' : CochainComplex (InjectiveObject B) ℤ :=
+      HomologicalComplex.liftObjectProperty _ R.cochainComplex inferInstance
+    have hL' : L'.IsStrictlyGE 0 := by
+      rw [← CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ (InjectiveObject.ι B)]
+      exact inferInstanceAs (R.cochainComplex.IsStrictlyGE 0)
+    exact inferInstanceAs (IsIso (G.rightDerivedFunctorPlusUnit.app
+      ((InjectiveObject.ι B).mapCochainComplexPlus.obj ⟨L', 0, hL'⟩)))
   have hresolution : (G.rightDerivedFunctorPlusObjSingleFunctorIsoQ Y).hom =
       G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
         CategoryTheory.inv (G.rightDerivedFunctorPlusUnit.app L) := by
     simp [rightDerivedFunctorPlusObjSingleFunctorIsoQ,
       DerivedCategory.singleFunctorIsoCompQ, g, R, L]
+    congr 1
+    apply DerivedCategory.Plus.ι.map_injective
+    rw [Functor.map_preimage]
+    exact Category.id_comp _
   have hcancel : G.rightDerivedPlusSingleUnit Y ≫
       (G.rightDerivedFunctorPlusObjSingleFunctorIsoQ Y).hom =
       DerivedCategory.Plus.Q.map a' := by
@@ -172,7 +189,6 @@ theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     simp only [Iso.inv_hom_id_assoc]
     dsimp [InjectiveResolution.cochainComplexXIso, HomologicalComplex.mapExtendIso,
       HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso]
-    dsimp only [HomologicalComplex.Hom.isoOfComponents]
     erw [HomologicalComplex.mapExtendX_hom_eq R.cocomplex G
       (ComplexShape.embeddingUpNat.r_f 0)]
     simp [eqToHom_map]
