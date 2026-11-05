@@ -142,30 +142,30 @@
   acquiring a tree. Next: validate the owned module and continue downstream.
 - No local Lean/Lake, proof placeholders, trust bypasses, or heartbeat increases.
 
-# BZ584 complete
+# BZ557 in progress
 
-- Branch: `u9/BZ584`; starting source commit: `7b0df24fff`.
-- The assigned module `WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory`
-  passed `ucheck-bump`: rc=0, built=1, failed=0, 1890 jobs; rebuilt in 4.1 seconds.
-- Validated source commit: `ac06f213ce0fa83101e06826d358d98662962dcf`.
-  Tree: `poolb:43.166.85.105`; log: `/home/ubuntu/u9/bz/BUILD-BZ584-unit-full.log`.
-- Additional green target: `WeilConjectures.WeilSheaf.SmoothPurityShriekFreeComparison`,
-  rebuilt in 2.1 seconds in the first downstream batch at `078691b129`.
-- Tested five downstream targets across two layers. Four were skipped under the
-  ownership rule because of external dependency failures: `LowerShriekForget`,
-  `SmoothPurityCondensedCarrier`, `SmoothPurityOpenDescentNormalization`, and
-  `SmoothPurityShriekWeilUniversality` (all under `WeilConjectures.WeilSheaf`).
-- Downstream batch results: rc=1, failed=16, then rc=1, failed=21. All errors were in
-  unowned dependencies. No downstream source changes were needed or attempted.
-- The user instructed continuation after the exact two-statement API proposal.
-  The two `.hom`/`.inv` substitutions preserve the original maps under Mathlib's
-  reversed compositor. Both proofs are updated; all other declaration headers,
-  names, binders, and existing docstrings are unchanged.
-- Fix patterns with whole-tree counts and exact errors: `/home/ubuntu/u9/bz/FIXES-BZ584.md`.
-- Full downstream logs: `BUILD-BZ584-downstream-full.log` and `BUILD-BZ584-layer2-full.log`
-  under `/home/ubuntu/u9/bz`; dependency paths: `BZ584-downstream-blockers.txt`.
-- Static contract audit: `/home/ubuntu/u9/bz/BZ584-contract-audit.txt`.
-- No local Lean/Lake execution, sorry, admit, axiom, native_decide, kernel bypass,
-  heartbeat increase, or profiler probes. Both green modules are sorry-free.
-- This completion commit changes only progress documentation; Lean sources match
-  the successful builds. Final branch commit is recorded in `/home/ubuntu/u9/state/BZ584.DONE`.
+- Branch: `u9/BZ557`; starting commit: `8af5cb324`.
+- Added the public AffineScheme import to direct importer AffineBasisSectionsDerivedUnit.
+- Initial remote builds stopped in the shared Presheaf.InternalHom dependency.
+- On continuation, merged BZ558 prerequisite repair `f28760733369366ac823f0084f3c4090afa3a90d`.
+- Next: ucheck-bump on AffineBasisSectionsResolutionHomologyEpi, AffineBasisSectionsDerivedUnit,
+  and AffineOpenSectionsResolutionQuasiIso; fix any owned errors and write DONE when green.
+- Notes and build evidence: `/home/ubuntu/u9/bz/FIXES-BZ557.md`.
+- No local Lean/Lake, statement changes, proof escapes, or heartbeat increases.
+
+# BZ590 awaiting statement-repair authorization
+
+- Branch: `u9/BZ590`; starting commit: `cfcb63ad7`.
+- Added public Localization import and separate `import all` in
+  `InjectiveExchangeSourceTransport`; this fixes the proof's hidden-body error.
+- Remote `ucheck-bump` at `de7bd95a1f` failed with two public-statement type errors;
+  imports cannot make hidden Qh definitions available while checking the public type.
+- Exact unapplied proposal: `/home/ubuntu/u9/bz/BZ590-public-statement-proposal.patch`.
+  It changes the preimage target to `Plus.Qh.obj H` and adds the canonical
+  `quotientCompQhIso` inverse before the RHS. Asked for approval because the user's
+  explicit rule permits only proof/import edits. No statement change is applied.
+- Full log: `/home/ubuntu/u9/bz/BUILD-BZ590-import-full.log`.
+- Fix records: `/home/ubuntu/u9/bz/FIXES-BZ590.md`.
+- Next after approval: apply proposal, check unit, then build direct importer
+  `InjectiveExchangeRepresentative` and continue another layer if its dependencies pass.
+- No DONE marker; no local Lean/Lake, proof shortcuts, or heartbeat increases.
