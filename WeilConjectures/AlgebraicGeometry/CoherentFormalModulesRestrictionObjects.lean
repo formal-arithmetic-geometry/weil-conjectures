@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
