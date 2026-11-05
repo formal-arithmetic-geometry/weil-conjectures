@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStarKFlat
 
 /-!
 # The proper projection formula for `ℓ`-adic sheaves
@@ -88,15 +89,6 @@ noncomputable def condensedModFunctorMonoidal (X : Scheme.{u}) :
 variable {l} {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 instance : (f)^*ᵃ[l].IsLeftAdjoint := (adicUpperStarLowerStarAdjunction l f).isLeftAdjoint
-
-/-- The pullback of `ℓ`-adic sheaves preserves flat objects: through the comparison of the two
-models, it is the pullback of module objects over the condensed coefficient ring. -/
-instance preservesFlat_adicUpperStar : (f)^*ᵃ[l].PreservesFlat := by
-  let := condensedModFunctorMonoidal l X
-  let := condensedModFunctorMonoidal l Y
-  have := (adicSheafEquivCondensedMod l Y).functor.preservesFlat_of_isEquivalence
-  exact Functor.preservesFlat_of_comp_equivalence_iso (adicSheafEquivCondensedMod l X) _ _ _
-    (adicUpperStarCompCondensedModIso l f)
 
 /-- A strong monoidal structure on the pullback `f^*` of `ℓ`-adic sheaves, transported from the
 pullback of module objects over the condensed coefficient ring along the comparison

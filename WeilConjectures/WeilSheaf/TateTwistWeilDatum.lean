@@ -15,9 +15,9 @@ public import WeilConjectures.CategoryTheory.WeilEquivariance
 
 The Tate twist `ℚ̄_ℓ(m) = ℚ̄_ℓ ⊗ ℚ̄_ℓ(m)` of the constant Weil complex is the constant Weil twist
 `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` placed in degree `0`, as a Weil complex
-(`AlgebraicGeometry.WeilComplex.tateTwistObjAdicConstantIso`). Being an isomorphism of Weil
+(`AlgebraicGeometry.WeilComplex.tateTwistObjAdicConstantWeilIso`). Being an isomorphism of Weil
 complexes, it is Frobenius equivariant for the derived structure isomorphisms, and so is its
-shift (`AlgebraicGeometry.WeilComplex.isWeilEquivariant_tateTwistObjAdicConstantIso_shift`).
+shift (`AlgebraicGeometry.WeilComplex.isWeilEquivariant_tateTwistObjAdicConstantWeilIso_shift`).
 Together with `CategoryTheory.Endofunctor.IsoAlgebra.derivedStrIso_hom_app_singleFunctor_obj`
 and `derivedStrIso_hom_app_shift`, this reads the Frobenius structure of `ℚ̄_ℓ(m)[n]` as the shift
 of `χ_ℓ(σ)ᵐ` times the structure of `ℚ̄_ℓ`
@@ -43,7 +43,7 @@ open ProEtaleWeilSheaf
 variable (k₀ l X) in
 /-- **The Tate twist of the constant Weil complex is a constant Weil twist in degree `0`**:
 `ℚ̄_ℓ(m) ≅ (ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ})[0]` as Weil complexes. -/
-noncomputable def tateTwistObjAdicConstantIso (m : ℤ) :
+noncomputable def tateTwistObjAdicConstantWeilIso (m : ℤ) :
     (tateTwist k₀ l X m).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) ≅
       WeilSheaf.toComplex.obj
         ((WeilSheaf.adicConstant k₀ l X).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ m)) :=
@@ -71,11 +71,11 @@ lemma isWeilEquivariant_tateTwistObjAdicConstantIso (m : ℤ) :
         ((tateTwist k₀ l X m).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X))).obj)
       ((IsoAlgebra.derivedStrIso _).hom.app (WeilSheaf.toComplex.obj
         ((WeilSheaf.adicConstant k₀ l X).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ m))).obj)
-      (forget.map (tateTwistObjAdicConstantIso k₀ l X m).hom) :=
+      (forget.map (tateTwistObjAdicConstantWeilIso k₀ l X m).hom) :=
   isWeilEquivariant_forget_map _
 
 /-- The shifted identification `ℚ̄_ℓ(m)[n] ≅ (ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ})[n]` is Frobenius equivariant. -/
-lemma isWeilEquivariant_tateTwistObjAdicConstantIso_shift (m n : ℤ) :
+lemma isWeilEquivariant_tateTwistObjAdicConstantWeilIso_shift (m n : ℤ) :
     IsWeilEquivariant (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory
       ((IsoAlgebra.derivedStrIso _).hom.app
         (((tateTwist k₀ l X m).obj
@@ -83,7 +83,7 @@ lemma isWeilEquivariant_tateTwistObjAdicConstantIso_shift (m n : ℤ) :
       ((IsoAlgebra.derivedStrIso _).hom.app ((WeilSheaf.toComplex.obj
         ((WeilSheaf.adicConstant k₀ l X).constantTwist
           (WeilSheaf.cyclotomicUnit k₀ l ^ m)))⟦n⟧).obj)
-      (forget.map ((tateTwistObjAdicConstantIso k₀ l X m).hom⟦n⟧')) :=
+      (forget.map ((tateTwistObjAdicConstantWeilIso k₀ l X m).hom⟦n⟧')) :=
   isWeilEquivariant_forget_map _
 
 end WeilComplex
