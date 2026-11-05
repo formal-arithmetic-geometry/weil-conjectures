@@ -84,9 +84,5 @@ lemma purity_comparisonUpperStarFreeIso_factor :
     (finiteCoefficientModEquivalenceInverseCompForgetIso T X).symm (Iso.refl _)
   refine Eq.trans ?_ h
   congr 1
-  ext N
-  simp only [Iso.trans_hom, NatTrans.comp_app, Iso.refl_hom, NatTrans.id_app,
-    Functor.associator_hom_app, Category.id_comp, Category.comp_id,
-    NatIso.ofComponents_hom_app]
 
 end AlgebraicGeometry.ProEtale
