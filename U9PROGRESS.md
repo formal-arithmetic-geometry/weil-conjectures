@@ -169,24 +169,30 @@
 - Completion marker: `/home/ubuntu/u9/state/BZ585.DONE`.
 - Final documentation commit leaves Lean source identical to the green revision.
 
+# BZ621 complete
 
-# BZ616 complete
-
-- Branch: `u9/BZ616`; baseline: `b7a97a5ed`.
-- Assigned leaf `TowerDerivedEvaluationNormalization` and five downstream modules
-  across two layers pass `ucheck-bump`; all three build batches completed successfully.
-- Direct importers: `TowerRightDerivedEvaluation`, `UnboundedExactAdjunctionSquare`,
-  and `RingedConstantTowerPushforwardNormalization` (rc=0, failed=0, 2913 jobs).
-- Second layer: `ExactTowerAugmentedCounitEvaluation` and `RightDerivedMateIndependence`
-  (rc=0, failed=0, 2958 jobs; validated source commit `989023db75`).
-- Ported compositor directions and cancellation proofs; added Localization public/import-all
-  imports in two private-proof consumers. Only three Lean files differ from baseline.
-- The user instructed continuation after the exact one-token private-helper statement proposal.
-  Its `.hom` -> `.inv` correction is applied. All other declaration headers and all
-  existing docstrings are unchanged; audit covers 59 headers across the six green modules.
-- Full module names, exact errors, fix patterns, occurrence counts, and all build logs:
-  `/home/ubuntu/u9/bz/FIXES-BZ616.md`. Audit: `/home/ubuntu/u9/bz/BZ616-contract-audit.txt`.
-- No local Lean/Lake execution, proof placeholders, trust bypasses, heartbeat increases,
-  profiler probes, or unowned dependency edits. `git diff --check` passes.
-- Completion marker: `/home/ubuntu/u9/state/BZ616.DONE`.
-- This final commit changes only progress documentation; Lean sources match the green builds.
+- Branch: `u9/BZ621`; starting commit: `b7a97a5ed`.
+- Assigned module `WeilConjectures.CategoryTheory.SixFunctors.ResolvingDerivedAdjunction`
+  passed `ucheck-bump`: rc=0, built=3, failed=0, 2847 jobs, at `5c47fa596b`.
+  Target rebuilt in 3.2 seconds on `poolb:43.157.184.90`.
+- The same module rebuilt successfully again in 3.0 seconds at `310a82d624`
+  during the downstream batch on `poolb:43.166.74.12`.
+- Added the public/import-all Localization imports. The user instructed continuation
+  after the exact one-line identity-cast proposal; `cast (by rfl)` preserves the
+  public formula's original counit. Both proof bodies, all other statement text,
+  and existing docstrings are unchanged. Audit: `BZ621-contract-audit.txt`.
+- The downstream batch finished rc=1, built=53, failed=4. All failures are unowned:
+  CochainTensorCoherenceData (BZ608), RingedTopoiCanonicalTensorComparisonOfUniverses
+  (BZ609), ProEtaleDerivedPullbackComposition (BZ611), and ConstantTowerNormalization.
+- Skipped all four selected importers under the brief's dependency-ownership rule:
+  SequenceProjectionDerivedAdjunction, SequencePushforwardLimitProjections,
+  RingedDerivedAdjointLift, SequenceSiteCompletionProjectionSupplement.
+  No downstream source was changed; no second-layer build was started because
+  the same failed prerequisites block the selected first layer.
+- Full logs: `/home/ubuntu/u9/bz/BZ621-owned-green.log` and
+  `/home/ubuntu/u9/bz/BZ621-downstream1.log`.
+- Patterns, counts, and exact blocker errors: `/home/ubuntu/u9/bz/FIXES-BZ621.md`.
+- The build host confirms Lean v4.35.0-rc3 and Mathlib b63f6e8a.
+- No local Lean/Lake, sorries, forbidden proof shortcuts, heartbeat raises,
+  profiler probes, or unowned source edits. Final documentation changes no Lean source.
+- Completion marker: `/home/ubuntu/u9/state/BZ621.DONE`.
