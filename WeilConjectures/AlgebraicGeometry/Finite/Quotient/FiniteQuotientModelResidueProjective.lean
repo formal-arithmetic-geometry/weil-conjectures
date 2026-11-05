@@ -97,7 +97,7 @@ private theorem residueRestrictIso_further (X : Scheme.{t})
       F.mapDerivedCategory.obj (ringedSiteDerivedRestrictionOfUniverses R V K) ≅
         ringedSiteDerivedRestrictionOfUniverses R U K :=
     F.mapDerivedCategory.mapIso (residueRestrictionComparison X R V K).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso FV F).symm.app K ≪≫
+      (Functor.mapDerivedCategoryCompIso FV F).app K ≪≫
       (Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap R f)).app K ≪≫
       residueRestrictionComparison X R U K
   exact ⟨(c M).symm ≪≫ F.mapDerivedCategory.mapIso e ≪≫ c N⟩

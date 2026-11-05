@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 import WeilConjectures.AlgebraicGeometry.FormalFlatQuotientMateData
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Flat transport squares for formal comparison maps
 

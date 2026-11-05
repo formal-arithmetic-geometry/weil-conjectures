@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineSpecTransport
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine section comparisons for coherent formal modules
 

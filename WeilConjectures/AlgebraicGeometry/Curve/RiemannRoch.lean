@@ -1121,7 +1121,7 @@ lemma Hom.isClosed_singleton_fieldPoints (f : X ⟶ Spec (.of k)) [LocallyOfFini
   have : LocallyOfFiniteType x.1 := by
     have : LocallyOfFiniteType (x.1 ≫ f) := by rw [hx]; infer_instance
     exact locallyOfFiniteType_of_comp x.1 f
-  exact x.1.closePoints_subset_preimage_closedPoints
+  exact x.1.closedPoints_subset_preimage_closedPoints
     (show IsClosed {default} from isClosed_discrete _)
 
 end ClosedPoint

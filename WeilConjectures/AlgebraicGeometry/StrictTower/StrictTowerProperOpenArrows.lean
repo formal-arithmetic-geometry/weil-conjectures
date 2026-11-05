@@ -351,12 +351,12 @@ private theorem evalD_nat (e : F ≅ G) (n : ℕ) :
   exact h₂
 
 private theorem evalD_comp (n : ℕ) :
-    Functor.whiskerRight (Functor.mapDerivedCategoryCompIso (W F) (W K)).hom
+    Functor.whiskerRight (Functor.mapDerivedCategoryCompIso (W F) (W K)).inv
         (E H n).mapDerivedCategory ≫
       Functor.whiskerLeft (W F).mapDerivedCategory (evalD K n).hom ≫
       Functor.whiskerRight (evalD F n).hom K.mapDerivedCategory =
     (evalD (F ⋙ K) n).hom ≫ Functor.whiskerLeft (E C n).mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso F K).inv := by
+      (Functor.mapDerivedCategoryCompIso F K).hom := by
   have h₁ := Functor.mapDerivedCategoryCompIso_assoc (W F) (W K) (E H n)
   simp only [W, Functor.whiskeringRight_obj_comp] at h₁
   have h₂ := Functor.mapDerivedCategoryCompIso_assoc (W F) (E D n) K

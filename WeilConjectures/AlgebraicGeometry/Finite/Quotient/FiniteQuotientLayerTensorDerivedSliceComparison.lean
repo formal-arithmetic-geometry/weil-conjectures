@@ -444,8 +444,8 @@ private theorem layerRes_over (X : Scheme.{t}) (U : X.ProEt)
   have := layerSliceRes_colimits X U f
   let e : layerRes X f ⋙ SheafOfModules.overFunctor _ U ≅
       SheafOfModules.overFunctor _ U ⋙ layerSliceRes X U f := Iso.refl _
-  exact ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso _ _⟩
+  exact ⟨(Functor.mapDerivedCategoryCompIso _ _) ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm⟩
 
 private instance layerConstant_zero (X : Scheme.{t}) (B : Type t) [CommRing B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

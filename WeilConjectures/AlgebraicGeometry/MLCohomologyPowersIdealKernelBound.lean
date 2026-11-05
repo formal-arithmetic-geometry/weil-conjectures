@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealTransitionMaps
 import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealImageBound
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Cohomology reductions: KernelBound
 Source: Stacks Project, Lemma 02OB. -/

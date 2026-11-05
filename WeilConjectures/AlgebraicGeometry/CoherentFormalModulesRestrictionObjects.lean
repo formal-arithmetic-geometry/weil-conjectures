@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Termwise restriction of coherent formal modules
 

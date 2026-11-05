@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorGradedProductProjection
 import WeilConjectures.CategoryTheory.Abelian.ResolvedBoundaryNaturality
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Naturality of homogeneous boundary projections
 
