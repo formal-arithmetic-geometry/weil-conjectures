@@ -169,6 +169,7 @@ lemma powersAwayEval_powersLinearForm (i : ι) :
 lemma powersAwayEval_injective : Function.Injective (powersAwayEval k h) := by
   apply (injective_iff_map_eq_zero (powersAwayEval k h).toRingHom).mpr
   intro z hz
+  change powersAwayEval k h z = 0 at hz
   obtain ⟨n, F, hF, rfl⟩ := Away.mk_surjective _ (powersLinearForm_mem k a i₀) z
   rw [powersAwayEval_mk] at hz
   have hF0 : F = 0 := by
