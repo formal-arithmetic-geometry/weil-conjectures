@@ -85,7 +85,7 @@ alternating determinant, `e ≠ 0`, is the generating series
 `∑_{e ∣ m} e (∑_i (-1)^i tr (F_i^{m / e})) T^m` of the alternating traces. -/
 theorem X_mul_derivative_inv_alternatingCharpolyRevProd (s : Finset ℤ)
     (F : ∀ i, Module.End K (W i)) {e : ℕ} (he : e ≠ 0) :
-    X * derivative K (alternatingCharpolyRevProd s F e)⁻¹ =
+    X * derivative (R := K) (alternatingCharpolyRevProd s F e)⁻¹ =
       (PowerSeries.mk fun m ↦ if m ≠ 0 ∧ e ∣ m then
         (e : K) * ∑ i ∈ s, (i.negOnePow : ℤ) • trace K (W i) (F i ^ (m / e)) else 0) *
         (alternatingCharpolyRevProd s F e)⁻¹ := by

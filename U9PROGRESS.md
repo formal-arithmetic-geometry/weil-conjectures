@@ -1,11 +1,10 @@
-# BZ72 complete
+# BZ103 progress
 
-- Unit: BZ72, branch `u9/BZ72`.
-- All four assigned modules passed `ucheck-bump` together: rc=0, 3821 jobs.
-- Checked source commit: `1ff41157e8e837eefed5af2db7bae1d35eab175d`; this final update changes only progress documentation.
-- Full build log: `/home/ubuntu/u9/bz/BUILD-BZ72-final3-full.log`.
-- Fix patterns and the coordinate statement's canonical endpoint transports: `/home/ubuntu/u9/bz/FIXES-BZ72.md`.
-- The user instructed continuation after the explicit statement-adjustment proposal. All other declaration statements and existing docstrings are unchanged.
-- No local Lean/Lake execution, no sorries or trust escapes, no heartbeat increases.
-- Completion marker: `/home/ubuntu/u9/state/BZ72.DONE`.
-- Outside-unit caller `NativeHomLocalizedConeBoundaryModel.lean:114` still needs its owner's port; details are in the fix log.
+- Branch: `u9/BZ103`; starting commit: `4f9f7e361`.
+- `LowerStarOpenStalk` and `FrobeniusDecomposition` passed remote `ucheck-bump` at `d546defb406537251ea9a99e3e8b7b8e59d8ee01`.
+- Resuming after the user explicitly requested completion following the concrete derivative statement and duplicate dependency proposals.
+- Applied `derivative K` → `derivative (R := K)` in the one remaining statement occurrence, preserving the proposition and binders.
+- Removed the duplicate project `Algebra.IsSeparablyGenerated` definition in `FieldTheory/SeparableExtension.lean` and publicly imported Mathlib's class replacement. This dependency repair is necessary for `BertiniCurve` imports.
+- All four assigned modules will be validated together with `ucheck-bump`; no local Lean/Lake execution.
+- Fix patterns and whole-tree counts: `/home/ubuntu/u9/bz/FIXES-BZ103.md`.
+- No DONE marker until all four assigned modules pass.
