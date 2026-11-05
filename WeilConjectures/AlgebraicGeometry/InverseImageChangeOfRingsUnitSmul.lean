@@ -28,8 +28,8 @@ local instance {C : Type u} [Category.{u} C] (R : Cᵒᵖ ⥤ CommRingCat.{u})
     Module (R.obj U) (M.obj U) :=
   (M.obj U).isModule
 
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- The additive inverse-image unit, followed by extension and sheafification, is
 semilinear for the ring inverse-image unit followed by the extension ring map.
