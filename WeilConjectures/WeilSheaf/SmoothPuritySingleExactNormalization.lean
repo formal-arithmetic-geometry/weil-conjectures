@@ -46,8 +46,10 @@ lemma puritySingleComparison_app_eq_exact (P : C) :
     F.leftDerivedFunctorIsoMapDerivedCategory.hom.naturality_assoc]
   rw [mapDerivedCategoryFactorsh_hom_app]
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  simp only [DerivedCategory.Q_obj_single_obj, map_comp, comp_obj, map_id, Category.id_comp,
-    Iso.inv_hom_id_app_assoc, Category.assoc, NatIso.cancel_natIso_hom_left]
+  simp only [mapDerivedCategorySingleFunctor, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, isoWhiskerRight_hom, isoWhiskerLeft_hom, isoWhiskerLeft_inv,
+    whiskerLeft_app, whiskerRight_app, associator_hom_app, associator_inv_app,
+    Category.assoc, Category.id_comp, Category.comp_id]
   erw [Functor.map_id, Category.id_comp]
   rfl
 
