@@ -216,4 +216,43 @@ lemma ι_map_geometricFiberBoundedConstructibleFunctorLowerStarIso_inv_app
   erw [Category.id_comp]
   simp only [Category.assoc]
 
+/-- The components of the proper projection formula of Weil complexes on the ambient derived
+categories are the canonical projection maps. -/
+lemma ι_map_derivedLowerStarNativeConstructibleTensorIso_hom_app (A : WeilComplex k₀ l Z)
+    (T : WeilComplex k₀ l Y) :
+    (ObjectProperty.ι _).map ((derivedLowerStarNativeConstructibleTensorIso g).hom.app (A, T)) =
+      (((ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l g).rightAdjointProjectionMap
+        (ProEtaleWeilSheaf.nativeCurriedPullTensor k₀ l g)).app A.obj).app T.obj := by
+  simp only [derivedLowerStarNativeConstructibleTensorIso, Functor.FullyFaithful.preimageIso_hom,
+    Functor.FullyFaithful.whiskeringRight_preimage_app, ObjectProperty.ι_map,
+    ObjectProperty.homMk_hom]
+  rfl
+
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+/-- The comonoidal structure of the derived pullback `Lf^*` of condensed `ℚ̄_ℓ`-modules is the
+comparison `Lf^*(a ⊗ b) ⟶ Lf^* a ⊗ Lf^* b`. -/
+lemma δNatTrans_leftDerivedUpperStar {X₀ Y₀ : Scheme.{u}} (f : X₀ ⟶ Y₀) :
+    Functor.OplaxMonoidal.δNatTrans
+        (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f).leftDerivedFunctor =
+      CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l) f := by
+  ext K L
+  rfl
+
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
+set_option synthInstance.maxHeartbeats 400000 in
+-- the monoidal structure of the derived category of condensed modules is found slowly
+/-- The right adjoint projection map of `Lf^* ⊣ Rf_*` for the comparison
+`Lf^*(a ⊗ b) ⟶ Lf^* a ⊗ Lf^* b` is the projection morphism of the monoidal functor `Lf^*`. -/
+lemma rightAdjointProjectionMap_leftDerivedUpperStarTensor_app_app {X₀ Y₀ : Scheme.{u}}
+    (f : X₀ ⟶ Y₀) (A B) :
+    (((CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+        f).rightAdjointProjectionMap
+          (CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l) f)).app A).app
+        B =
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+        f).projectionMorphism A B := by
+  rw [Adjunction.projectionMorphism_eq_rightAdjointProjectionMap, δNatTrans_leftDerivedUpperStar]
+
 end AlgebraicGeometry.WeilComplex
